@@ -1,0 +1,91 @@
+//-----------------------------------------------------------------------------
+/** @file libpentobi_gui/ComputerColorDialog.cpp */
+//-----------------------------------------------------------------------------
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "ComputerColorDialog.h"
+
+using libpentobi_base::game_variant_classic;
+using libpentobi_base::game_variant_classic_2;
+using libpentobi_base::game_variant_duo;
+using libpentobi_base::ColorIterator;
+
+//-----------------------------------------------------------------------------
+
+ComputerColorDialog::ComputerColorDialog(QWidget* parent,
+                                         GameVariant gameVariant,
+                                         ColorMap<bool>& computerColor)
+    : QDialog(parent),
+      m_computerColor(computerColor),
+      m_gameVariant(gameVariant)
+{
+     setWindowTitle("Pentobi - Computer Color");
+     QVBoxLayout* layout = new QVBoxLayout();
+     setLayout(layout);
+     if (m_gameVariant == game_variant_duo)
+     {
+         createCheckBox(layout, Color(0), "Blue");
+         createCheckBox(layout, Color(1), "Green");
+     }
+     else if (m_gameVariant == game_variant_classic)
+     {
+         createCheckBox(layout, Color(0), "Blue");
+         createCheckBox(layout, Color(1), "Yellow");
+         createCheckBox(layout, Color(2), "Red");
+         createCheckBox(layout, Color(3), "Green");
+     }
+     else
+     {
+         createCheckBox(layout, Color(0), "Blue/Red");
+         createCheckBox(layout, Color(1), "Yellow/Green");
+     }
+     QWidget* buttons = new QWidget(this);
+     layout->addWidget(buttons);
+     QHBoxLayout* buttonsLayout = new QHBoxLayout();
+     buttons->setLayout(buttonsLayout);
+     QPushButton* cancelButton = new QPushButton("Cancel");
+     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+     buttonsLayout->addWidget(cancelButton);
+     QPushButton* okButton = new QPushButton("Ok");
+     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+     buttonsLayout->addWidget(okButton);
+     okButton->setDefault(true);
+     okButton->setFocus();
+}
+
+void ComputerColorDialog::accept()
+{
+    if (m_gameVariant == game_variant_duo)
+    {
+        for (ColorIterator i(2); i; ++i)
+            m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
+    }
+    else if (m_gameVariant == game_variant_classic)
+    {
+        for (ColorIterator i(4); i; ++i)
+            m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2);
+        m_computerColor[Color(0)] = m_checkBox[0]->isChecked();
+        m_computerColor[Color(2)] = m_checkBox[0]->isChecked();
+        m_computerColor[Color(1)] = m_checkBox[1]->isChecked();
+        m_computerColor[Color(3)] = m_checkBox[1]->isChecked();
+    }
+    QDialog::accept();
+}
+
+void ComputerColorDialog::createCheckBox(QLayout* layout, Color c,
+                                         const QString& text)
+{
+    QCheckBox* checkBox = new QCheckBox(text);
+    checkBox->setChecked(m_computerColor[c]);
+    layout->addWidget(checkBox);
+    m_checkBox[c.to_int()] = checkBox;
+}
+
+//-----------------------------------------------------------------------------

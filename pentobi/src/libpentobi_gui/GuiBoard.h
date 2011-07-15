@@ -1,0 +1,149 @@
+//-----------------------------------------------------------------------------
+/** @file libpentobi_gui/GuiBoard.h */
+//-----------------------------------------------------------------------------
+
+#ifndef LIBPENTOBI_GUI_GUI_BOARD_H
+#define LIBPENTOBI_GUI_GUI_BOARD_H
+
+#include <QtGui>
+#include "libboardgame_base/CoordPoint.h"
+#include "libpentobi_base/Board.h"
+#include "libpentobi_gui/BoardPainter.h"
+
+using libpentobi_base::Color;
+using libboardgame_base::CoordPoint;
+using libpentobi_base::Board;
+using libpentobi_base::Grid;
+using libpentobi_base::Move;
+using libpentobi_base::Piece;
+using libpentobi_base::Point;
+
+//-----------------------------------------------------------------------------
+
+class GuiBoard
+    : public QWidget
+{
+    Q_OBJECT
+
+public:
+    GuiBoard(QWidget* parent, const Board& bd);
+
+    void setDrawCoordLabels(bool enable);
+
+    const Board& getBoard() const;
+
+    const Grid<QString>& getLabels() const;
+
+    const Piece* getSelectedPiece() const;
+
+    Transform getSelectedPieceTransform() const;
+
+    void setSelectedPieceTransform(Transform transform);
+
+    void showMove(Color c, Move mv);
+
+    bool hasHeightForWidth() const;
+
+    int heightForWidth(int width) const;
+
+    void copyFromBoard(const Board& bd);
+
+    void setLabel(Point p, const QString& text);
+
+public slots:
+    void clearMarkup();
+
+    void clearSelectedPiece();
+
+    void selectPiece(Color color, const Piece& piece);
+
+    void moveSelectedPieceLeft();
+
+    void moveSelectedPieceRight();
+
+    void moveSelectedPieceUp();
+
+    void moveSelectedPieceDown();
+
+    void placeSelectedPiece();
+
+signals:
+    void play(Color color, Move mv);
+
+protected:
+    void leaveEvent(QEvent* event);
+
+    void mouseMoveEvent(QMouseEvent* event);
+
+    void mousePressEvent(QMouseEvent* event);
+
+    void paintEvent(QPaintEvent* event);
+
+private:
+    const Board& m_bd;
+
+    bool m_isInitialized;
+
+    GameVariant m_gameVariant;
+
+    Board::PointStateGrid m_pointState;
+
+    const Piece* m_selectedPiece;
+
+    Color m_selectedPieceColor;
+
+    Transform m_selectedPieceTransform;
+
+    CoordPoint m_selectedPieceOffset;
+
+    MovePoints m_selectedPiecePoints;
+
+    Grid<QString> m_labels;
+
+    BoardPainter m_boardPainter;
+
+    bool m_isMoveShown;
+
+    Color m_currentMoveShownColor;
+
+    MovePoints m_currentMoveShownPoints;
+
+    int m_currentMoveShownAnimationIndex;
+
+    QTimer m_currentMoveShownAnimationTimer;
+
+    void setSelectedPieceOffset(const QMouseEvent& event);
+
+    void setSelectedPieceOffset(const CoordPoint& offset);
+
+    void updatePoint(Point p);
+
+    void updateSelectedPiecePoints();
+
+private slots:
+    void showMoveAnimation();
+};
+
+inline const Board& GuiBoard::getBoard() const
+{
+    return m_bd;
+}
+
+inline const Grid<QString>& GuiBoard::getLabels() const
+{
+    return m_labels;
+}
+
+inline const Piece* GuiBoard::getSelectedPiece() const
+{
+    return m_selectedPiece;
+}
+
+inline Transform GuiBoard::getSelectedPieceTransform() const
+{
+    return m_selectedPieceTransform;
+}
+
+//-----------------------------------------------------------------------------
+
+#endif // LIBPENTOBI_GUI_GUI_BOARD_H

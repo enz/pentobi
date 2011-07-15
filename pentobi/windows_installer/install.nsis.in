@@ -1,0 +1,138 @@
+; Script for creating a Windows installer with NSIS
+; (http://nsis.sourceforge.net)
+
+!define PENTOBI_VERSION "@PENTOBI_VERSION@"
+!define PENTOBI_SRC_DIR "@CMAKE_SOURCE_DIR@"
+!define PENTOBI_GUI_BUILD_DIR "@CMAKE_BINARY_DIR@/src/pentobi"
+!define PENTOBI_DIST_FILE_DIR "@CMAKE_SOURCE_DIR@"
+!define PENTOBI_DIST_FILE_NAME "pentobi-${PENTOBI_VERSION}.tar.gz"
+
+!define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pentobi"
+
+SetCompressor /SOLID lzma
+
+!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\orange-install.ico"
+!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\orange-uninstall.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\orange.bmp"
+!define MUI_COMPONENTSPAGE_NODESC
+!include "MUI.nsh"
+!insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "${PENTOBI_SRC_DIR}\COPYING"
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+!define MUI_FINISHPAGE_RUN "$INSTDIR\Pentobi.exe"
+!insertmacro MUI_PAGE_FINISH
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+
+!insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS 
+
+!define ADD_START_MENU_ENTRY_DEFAULT "Add start menu entry"
+!define CREATE_DESKTOP_SHORTCUT_DEFAULT "Create desktop shortcut"
+!define INSTALL_SOURCE_CODE_DEFAULT "Install source code"
+LangString ADD_START_MENU_ENTRY ${LANG_ENGLISH} \
+  "${ADD_START_MENU_ENTRY_DEFAULT}"
+LangString CREATE_DESKTOP_SHORTCUT ${LANG_ENGLISH} \
+  "${CREATE_DESKTOP_SHORTCUT_DEFAULT}"
+LangString INSTALL_SOURCE_CODE ${LANG_ENGLISH} \
+  "${INSTALL_SOURCE_CODE_DEFAULT}"
+
+Name "Pentobi"
+Caption "Pentobi Installer"
+OutFile "pentobi-install.exe"
+InstallDir "$PROGRAMFILES\Pentobi"
+InstallDirRegKey HKLM "Software\Pentobi" ""
+; Set admin level, needed for shortcut removal on Vista
+; (http://nsis.sourceforge.net/Shortcuts_removal_fails_on_Windows_Vista)
+RequestExecutionLevel admin
+
+Section
+
+IfFileExists "$INSTDIR\Uninstall.exe" 0 +2
+ExecWait '"$INSTDIR\Uninstall.exe" /S _?=$INSTDIR'
+
+SetOutPath "$INSTDIR"
+File /oname=COPYING.txt "${PENTOBI_SRC_DIR}\COPYING"
+File /oname=Pentobi.exe "${PENTOBI_GUI_BUILD_DIR}\pentobi.exe"
+File "${PENTOBI_GUI_BUILD_DIR}\QtCore4.dll"
+File "${PENTOBI_GUI_BUILD_DIR}\QtGui4.dll"
+File "${PENTOBI_GUI_BUILD_DIR}\mingwm10.dll"
+File "${PENTOBI_GUI_BUILD_DIR}\libgcc_s_dw2-1.dll"
+File "${PENTOBI_GUI_BUILD_DIR}\libstdc++-6.dll"
+File "${PENTOBI_SRC_DIR}\src\pentobi\pentobi.ico"
+
+WriteRegStr HKLM "Software\Pentobi" "" $INSTDIR
+
+WriteUninstaller $INSTDIR\Uninstall.exe
+WriteRegStr HKLM "${UNINST_KEY}" "DisplayName" "Pentobi"
+WriteRegStr HKLM "${UNINST_KEY}" "DisplayVersion" "${PENTOBI_VERSION}"
+WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$INSTDIR\pentobi.ico"
+WriteRegStr HKLM "${UNINST_KEY}" "URLInfoAbout" "http://pentobi.sourceforge.net/"
+WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
+ 
+File "${PENTOBI_SRC_DIR}\windows_installer\blksgf.ico"
+
+WriteRegStr HKCR ".blksgf" "" "Pentobi"
+WriteRegStr HKCR ".blksgf" "Content Type" "application/x-blokus-sgf"
+WriteRegStr HKCR "Pentobi" "" "Blokus Game"
+WriteRegStr HKCR "Pentobi\DefaultIcon" "" "$INSTDIR\blksgf.ico"
+WriteRegStr HKCR "Pentobi\shell\open\command" "" \
+  "$\"$INSTDIR\Pentobi.exe$\" $\"%1$\""
+
+WriteRegStr HKCR "MIME\Database\Content Type\application/x-blokus-sgf" \
+  "Extension" ".blksgf"
+
+WriteRegStr HKCR "Applications\Pentobi.exe" "SupportedTypes" ".blksgf"
+WriteRegStr HKCR "Applications\Pentobi\shell\open\command" "" \
+  "$\"$INSTDIR\Pentobi.exe$\" $\"%1$\""
+
+SectionEnd
+
+Section "$(ADD_START_MENU_ENTRY)"
+
+SetShellVarContext all
+CreateDirectory "$SMPROGRAMS\Games"
+CreateShortCut "$SMPROGRAMS\Games\Pentobi.lnk" "$INSTDIR\Pentobi.exe"
+
+SectionEnd
+
+Section "$(CREATE_DESKTOP_SHORTCUT)"
+
+SetShellVarContext all
+CreateShortCut "$DESKTOP\Pentobi.lnk" "$INSTDIR\Pentobi.exe"
+
+SectionEnd
+
+Section "$(INSTALL_SOURCE_CODE)"
+
+File ${PENTOBI_DIST_FILE_DIR}\${PENTOBI_DIST_FILE_NAME}
+
+SectionEnd
+
+Section "Uninstall"
+ 
+Delete "$INSTDIR\Uninstall.exe"
+Delete "$INSTDIR\Pentobi.exe"
+Delete "$INSTDIR\QtCore4.dll"
+Delete "$INSTDIR\QtGui4.dll"
+Delete "$INSTDIR\mingwm10.dll"
+Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+Delete "$INSTDIR\libstdc++-6.dll"
+Delete "$INSTDIR\COPYING.txt"
+Delete "$INSTDIR\pentobi.ico"
+Delete "$INSTDIR\blksgf.ico"
+Delete "$INSTDIR\${PENTOBI_DIST_FILE_NAME}"
+RmDir "$INSTDIR"
+
+SetShellVarContext all
+Delete "$SMPROGRAMS\Games\Pentobi.lnk"
+Delete "$DESKTOP\Pentobi.lnk"
+
+DeleteRegKey HKLM "Software\Pentobi"
+DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pentobi"
+DeleteRegKey HKCR "Pentobi"
+DeleteRegKey HKCR "Applications\Pentobi.exe"
+
+SectionEnd

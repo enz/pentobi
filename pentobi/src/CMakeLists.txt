@@ -1,0 +1,22 @@
+add_subdirectory(libboardgame_sys)
+add_subdirectory(libboardgame_util)
+add_subdirectory(libboardgame_sgf)
+add_subdirectory(libboardgame_base)
+add_subdirectory(libpentobi_base)
+add_subdirectory(libpentobi_mcts)
+
+if (PENTOBI_BUILD_GTP)
+  add_subdirectory(libboardgame_gtp)
+  add_subdirectory(pentobi_gtp)
+endif()
+
+if (PENTOBI_BUILD_TESTS)
+  add_subdirectory(libboardgame_test)
+  add_subdirectory(unittest)
+endif()
+
+if (PENTOBI_BUILD_GUI)
+  add_subdirectory(libpentobi_gui)
+  add_subdirectory(pentobi_thumbnailer)
+  add_subdirectory(pentobi)
+endif()

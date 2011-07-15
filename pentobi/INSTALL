@@ -1,0 +1,41 @@
+This file explains how to compile and install Pentobi from the sources.
+
+
+== Requirements ==
+
+Pentobi requires the Boost libraries (>=1.45) and the Qt libraries (>=4.7).
+The C++ compiler needs to support certain features from the coming C++ standard
+(only features that are already implemented by MSVC 2010 and GCC 4.5 with option
+-std=c++0x). For creating cross-platform makefiles, CMake (>=2.8.3) is required.
+
+
+== Building ==
+
+Pentobi can be compiled with CMake using the shell commands:
+
+  cmake .
+  make
+
+If a compatible version of the Boost libraries is not installed on the system,
+it is possible to specify a custom location of Boost using the cmake options
+-DBOOST_ROOT, -DBOOST_LIBRARYDIR and -DBoost_NO_SYSTEM_PATHS=1. In this case,
+it is advisable to also use -DBoost_USE_STATIC_LIBS=1 if Pentobi should be
+installed system-wide because CMake removes a compile-time custom path for
+finding dynamic libraries at installation time. If you use a newer version of
+Boost that was not known to your version of CMake, you may have to add the
+version to Boost_ADDITIONAL_VERSIONS in CMakeLists.txt before running cmake.
+Type "cmake --help-module FindBoost" for more information.
+
+
+== Installing ==
+
+On Unix, Pentobi can be installed after compilation with the shell command:
+
+  sudo make install
+
+After installation, the system-wide databases should be updated to
+make Pentobi appear in the desktop menu, register it as handler for Blokus
+(*.blksgf) files, and register its Gnome thumbnailer for file previews.
+The databases can be updated with the shell command:
+
+  sudo make post-install

@@ -1,0 +1,26 @@
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/desktop/gnome/thumbnailers/application@x-blokus-sgf/enable</key>
+      <applyto>/desktop/gnome/thumbnailers/application@x-blokus-sgf/enable</applyto>
+      <owner>pentobi</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+	<short>Enable thumbnailing of Blokus SGF games.</short>
+	<long>Boolean options available, true enables thumbnailing and false disables the creation of new thumbnails.</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/desktop/gnome/thumbnailers/application@x-blokus-sgf/command</key>
+      <applyto>/desktop/gnome/thumbnailers/application@x-blokus-sgf/command</applyto>
+      <owner>pentobi</owner>
+      <type>string</type>
+      <default>@CMAKE_INSTALL_PREFIX@/bin/pentobi-thumbnailer --size %s %i %o</default>
+      <locale name="C">
+	<short>Thumbnail command for Blokus SGF games.</short>
+	<long>Valid command plus arguments for Blokus SGF thumbnailer.</long>
+      </locale>
+    </schema>
+  </schemalist>
+</gconfschemafile>

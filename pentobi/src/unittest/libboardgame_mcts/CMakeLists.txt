@@ -1,0 +1,25 @@
+include_directories(
+  ${CMAKE_SOURCE_DIR}/src
+  ${Boost_INCLUDE_DIRS}
+)
+
+link_directories(${Boost_LIBRARY_DIRS})
+
+set(unittest_libboardgame_mcts_STAT_SRCS
+  Main.cpp
+  NodeTest.cpp
+  )
+
+add_executable(unittest_libboardgame_mcts
+  ${unittest_libboardgame_mcts_STAT_SRCS})
+
+target_link_libraries(unittest_libboardgame_mcts
+  boardgame_test
+  boardgame_sgf
+  boardgame_util
+  boardgame_sys
+  ${Boost_LIBRARIES}
+  ${CMAKE_THREAD_LIBS_INIT}
+  )
+
+add_test(libboardgame_mcts unittest_libboardgame_mcts)

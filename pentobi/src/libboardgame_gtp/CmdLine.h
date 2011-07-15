@@ -1,0 +1,120 @@
+//-----------------------------------------------------------------------------
+/** @file CmdLine.h */
+//-----------------------------------------------------------------------------
+
+#ifndef LIBBOARDGAME_GTP_CMDLINE_H
+#define LIBBOARDGAME_GTP_CMDLINE_H
+
+#include <algorithm>
+#include <cstddef>
+#include <sstream>
+#include <string>
+#include <iterator>
+#include <vector>
+#include "CmdLineRange.h"
+#include "Failure.h"
+
+namespace libboardgame_gtp {
+
+using namespace std;
+
+//-----------------------------------------------------------------------------
+
+/** Parsed GTP command line.
+    Only used internally by libboardgame_gtp::Engine. GTP command handlers
+    query arguments of the command line through the instance of class Arguments
+    given as a function argument by class Engine to the command handler. */
+class CmdLine
+{
+public:
+    /** Construct empty command.
+        @warning An empty command cannot be used, before init() was called.
+        This constructor exists only to reuse instances. */
+    CmdLine();
+
+    /** Construct with a command line.
+        @see init() */
+    CmdLine(const string& line);
+
+    ~CmdLine() throw();
+
+    void init(const string& line);
+
+    void init(const CmdLine& c);
+
+    const string& get_line() const;
+
+    /** Get command name. */
+    CmdLineRange get_name() const;
+
+    void write_id(ostream& out) const;
+
+    CmdLineRange get_trimmed_line_after_elem(size_t i) const;
+
+    const vector<CmdLineRange>& get_elements() const;
+
+    const CmdLineRange& get_element(size_t i) const;
+
+    int get_idx_name() const;
+
+private:
+    int m_idx_name;
+
+    /** Full command line. */
+    string m_line;
+
+    vector<CmdLineRange> m_elem;
+
+    void find_elem();
+
+    void parse_id();
+};
+
+inline CmdLine::CmdLine()
+{
+}
+
+inline CmdLine::CmdLine(const string& line)
+{
+    init(line);
+}
+
+inline const vector<CmdLineRange>& CmdLine::get_elements() const
+{
+    return m_elem;
+}
+
+inline const CmdLineRange& CmdLine::get_element(size_t i) const
+{
+    assert(i < m_elem.size());
+    return m_elem[i];
+}
+
+inline int CmdLine::get_idx_name() const
+{
+    return m_idx_name;
+}
+
+inline const string& CmdLine::get_line() const
+{
+    return m_line;
+}
+
+inline CmdLineRange CmdLine::get_name() const
+{
+    return m_elem[m_idx_name];
+}
+
+inline void CmdLine::write_id(ostream& out) const
+{
+    if (m_idx_name == 0)
+        return;
+    const CmdLineRange& e = m_elem[0];
+    copy(e.begin(), e.end(), ostream_iterator<char>(out));
+}
+
+//-----------------------------------------------------------------------------
+
+} // namespace libboardgame_gtp
+
+#endif // LIBBOARDGAME_GTP_CMDLINE_H

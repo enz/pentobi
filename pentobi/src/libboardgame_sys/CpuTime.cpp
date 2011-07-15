@@ -1,0 +1,39 @@
+//-----------------------------------------------------------------------------
+/** @file sys/CpuTime.cpp */
+//-----------------------------------------------------------------------------
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "CpuTime.h"
+
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#if HAVE_SYS_TIMES_H
+#include <sys/times.h>
+#endif
+
+namespace libboardgame_sys {
+
+//-----------------------------------------------------------------------------
+
+double cpu_time()
+{
+#if HAVE_UNISTD_H && HAVE_SYS_TIMES_H
+    static double ticks_per_second = double(sysconf(_SC_CLK_TCK));
+    struct tms buf;
+    if (times(&buf) == clock_t(-1))
+        return -1;
+    clock_t clock_ticks =
+        buf.tms_utime + buf.tms_stime + buf.tms_cutime + buf.tms_cstime;
+    return double(clock_ticks) / ticks_per_second;
+#else
+    return -1;
+#endif
+}
+
+//-----------------------------------------------------------------------------
+
+} // namespace libboardgame_sys

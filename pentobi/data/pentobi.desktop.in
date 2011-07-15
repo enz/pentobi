@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Pentobi
+Comment=Computer program that plays the board game Blokus
+Exec=@CMAKE_INSTALL_PREFIX@/bin/pentobi %f
+Icon=@CMAKE_INSTALL_PREFIX@/share/icons/hicolor/48x48/apps/pentobi.png
+Terminal=false
+Type=Application
+Categories=Application;Game;BoardGame;
+MimeType=application/x-blokus-sgf

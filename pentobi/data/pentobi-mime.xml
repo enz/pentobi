@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+<mime-type type="application/x-blokus-sgf">
+<comment>Blokus game</comment>
+<comment xml:lang="de">Blokus-Partie</comment>
+<magic priority="60">
+<match type="string" offset="0:256" value="GM[Blokus Duo]"/>
+<match type="string" offset="0:256" value="GM[Blokus]"/>
+<match type="string" offset="0:256" value="GM[Blokus Two-Player]"/>
+</magic>
+<sub-class-of type="text/plain"/>
+<glob pattern="*.blksgf"/>
+</mime-type>
+</mime-info>
