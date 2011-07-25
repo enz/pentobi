@@ -13,18 +13,18 @@
 HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     : QMainWindow(parent)
 {
-    setWindowTitle("Pentobi Help");
+    setWindowTitle(tr("Pentobi Help"));
     QTextBrowser* browser = new QTextBrowser(this);
     setCentralWidget(browser);
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     browser->setSource(QUrl(mainPage));
-    QAction* actionBack = new QAction("Back", this);
+    QAction* actionBack = new QAction(tr("Back"), this);
     actionBack->setIcon(QIcon(":/go-previous.png"));
     connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
-    QAction* actionForward = new QAction("Forward", this);
+    QAction* actionForward = new QAction(tr("Forward"), this);
     actionForward->setIcon(QIcon(":/go-next.png"));
     connect(actionForward, SIGNAL(triggered()), browser, SLOT(forward()));
-    QAction* actionHome = new QAction("Home", this);
+    QAction* actionHome = new QAction(tr("Home"), this);
     actionHome->setIcon(QIcon(":/go-home.png"));
     connect(actionHome, SIGNAL(triggered()), browser, SLOT(home()));
     QToolBar* toolBar = new QToolBar(this);

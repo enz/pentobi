@@ -22,38 +22,38 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
       m_computerColor(computerColor),
       m_gameVariant(gameVariant)
 {
-     setWindowTitle("Pentobi - Computer Color");
-     QVBoxLayout* layout = new QVBoxLayout();
-     setLayout(layout);
-     if (m_gameVariant == game_variant_duo)
-     {
-         createCheckBox(layout, Color(0), "Blue");
-         createCheckBox(layout, Color(1), "Green");
-     }
-     else if (m_gameVariant == game_variant_classic)
-     {
-         createCheckBox(layout, Color(0), "Blue");
-         createCheckBox(layout, Color(1), "Yellow");
-         createCheckBox(layout, Color(2), "Red");
-         createCheckBox(layout, Color(3), "Green");
-     }
-     else
-     {
-         createCheckBox(layout, Color(0), "Blue/Red");
-         createCheckBox(layout, Color(1), "Yellow/Green");
-     }
-     QWidget* buttons = new QWidget(this);
-     layout->addWidget(buttons);
-     QHBoxLayout* buttonsLayout = new QHBoxLayout();
-     buttons->setLayout(buttonsLayout);
-     QPushButton* cancelButton = new QPushButton("Cancel");
-     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-     buttonsLayout->addWidget(cancelButton);
-     QPushButton* okButton = new QPushButton("Ok");
-     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-     buttonsLayout->addWidget(okButton);
-     okButton->setDefault(true);
-     okButton->setFocus();
+    setWindowTitle(tr("Pentobi - Computer Color"));
+    QVBoxLayout* layout = new QVBoxLayout();
+    setLayout(layout);
+    if (m_gameVariant == game_variant_duo)
+    {
+        createCheckBox(layout, Color(0), tr("Blue"));
+        createCheckBox(layout, Color(1), tr("Green"));
+    }
+    else if (m_gameVariant == game_variant_classic)
+    {
+        createCheckBox(layout, Color(0), tr("Blue"));
+        createCheckBox(layout, Color(1), tr("Yellow"));
+        createCheckBox(layout, Color(2), tr("Red"));
+        createCheckBox(layout, Color(3), tr("Green"));
+    }
+    else
+    {
+        createCheckBox(layout, Color(0), tr("Blue/Red"));
+        createCheckBox(layout, Color(1), tr("Yellow/Green"));
+    }
+    QWidget* buttons = new QWidget(this);
+    layout->addWidget(buttons);
+    QHBoxLayout* buttonsLayout = new QHBoxLayout();
+    buttons->setLayout(buttonsLayout);
+    QPushButton* cancelButton = new QPushButton(tr("Cancel"));
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    buttonsLayout->addWidget(cancelButton);
+    QPushButton* okButton = new QPushButton(tr("Ok"));
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    buttonsLayout->addWidget(okButton);
+    okButton->setDefault(true);
+    okButton->setFocus();
 }
 
 void ComputerColorDialog::accept()

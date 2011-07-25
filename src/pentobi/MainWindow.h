@@ -377,6 +377,8 @@ private:
 
     void genMove();
 
+    QString getFilter() const;
+
     void gotoNode(const Node& node);
 
     void initGame();

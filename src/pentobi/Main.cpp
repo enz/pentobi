@@ -2,6 +2,10 @@
 /** @file pentobi/Main.cpp */
 //-----------------------------------------------------------------------------
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <boost/program_options.hpp>
 #include <QtGui>
 #include "MainWindow.h"
@@ -16,6 +20,38 @@ using libboardgame_util::set_log_null;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+void loadLibPentobiGuiTranslator(QTranslator& translator)
+{
+    QString locale = QLocale::system().name();
+    QString file = "libpentobi_gui_" + locale;
+    QString appDir = QCoreApplication::applicationDirPath();
+    if (translator.load(file, appDir))
+        return;
+    if (translator.load(file, appDir + "/../libpentobi_gui"))
+        return;
+#ifdef DATADIR
+    translator.load(file, QString(DATADIR) + "/pentobi/translations");
+#endif
+}
+
+void loadPentobiTranslator(QTranslator& translator)
+{
+    QString locale = QLocale::system().name();
+    QString file = "pentobi_" + locale;
+    QString appDir = QCoreApplication::applicationDirPath();
+    if (translator.load(file, appDir))
+        return;
+#ifdef DATADIR
+    translator.load(file, QString(DATADIR) + "/pentobi/translations");
+#endif
+}
+
+ } // namespace
+
+//-----------------------------------------------------------------------------
+
 int main(int argc, char* argv[])
 {
     try
@@ -24,6 +60,18 @@ int main(int argc, char* argv[])
         QCoreApplication::setOrganizationName("Pentobi");
         QCoreApplication::setApplicationName("Pentobi");
         QApplication app(argc, argv);
+        QTranslator qtTranslator;
+        QString qtTranslationPath =
+            QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+        QString locale = QLocale::system().name();
+        qtTranslator.load("qt_" + locale, qtTranslationPath);
+        app.installTranslator(&qtTranslator);
+        QTranslator libPentobiGuiTranslator;
+        loadLibPentobiGuiTranslator(libPentobiGuiTranslator);
+        app.installTranslator(&libPentobiGuiTranslator);
+        QTranslator pentobiTranslator;
+        loadPentobiTranslator(pentobiTranslator);
+        app.installTranslator(&pentobiTranslator);
         vector<string> arguments;
         options_description normal_options("Options");
         normal_options.add_options()

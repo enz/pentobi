@@ -5,7 +5,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
+ 
 #include "MainWindow.h"
 
 #include <algorithm>
@@ -41,8 +41,6 @@ using libpentobi_mcts::Search;
 //-----------------------------------------------------------------------------
 
 namespace {
-
-const QString filter = "Blokus games (*.blksgf);;All files (*.*)";
 
 QString getAutoSaveFile()
 {
@@ -186,11 +184,11 @@ void MainWindow::about()
 #if LIBBOARDGAME_DEBUG
     version.append(" (dbg)");
 #endif
-    QMessageBox::about(this, "About Pentobi",
-             QString("<h2>Pentobi</h2>"
+    QMessageBox::about(this, tr("About Pentobi"),
+          QString(tr("<h2>Pentobi</h2>"
                      "<p>Computer program that plays the board game Blokus.</p>"
                      "<p>Version %1</p>"
-                     "<p>Copyright &copy; 2011 Markus Enzenberger</p>")
+                     "<p>Copyright &copy; 2011 Markus Enzenberger</p>"))
                        .arg(version));
 }
 
@@ -235,7 +233,7 @@ void MainWindow::boardChanged(bool currentNodeChanged)
         bool is_modified = m_game->get_modified();
         setWindowModified(is_modified);
         m_actionSave->setEnabled(is_modified);
-        m_actionSave->setToolTip(QString("Save (%1)").arg(m_file));
+        m_actionSave->setToolTip(QString(tr("Save (%1)")).arg(m_file));
     }
     m_guiBoard->copyFromBoard(bd);
     // If the last move was played by the computer, show move numbers on all
@@ -315,7 +313,7 @@ bool MainWindow::checkSave()
         if (! m_game->get_modified())
             return true;
         QMessageBox::StandardButton button =
-            showQuestion("The file has been modified. Save changes?",
+            showQuestion(tr("The file has been modified. Save changes?"),
                          QMessageBox::Yes | QMessageBox::No
                          | QMessageBox::Cancel);
         if (button == QMessageBox::Cancel)
@@ -333,7 +331,7 @@ bool MainWindow::checkSave()
     if (bd.get_nu_moves() > 0 && ! m_gameFinished)
     {
         QMessageBox::StandardButton button =
-            showQuestion("Abort current game?",
+            showQuestion(tr("Abort current game?"),
                          QMessageBox::Yes | QMessageBox::No);
         if (button == QMessageBox::Yes || button == QMessageBox::Cancel)
             return true;
@@ -369,7 +367,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
     if (! m_file.isEmpty() && m_game->get_modified())
     {
         QMessageBox::StandardButton button =
-            showQuestion("The file has been modified. Save changes?",
+            showQuestion(tr("The file has been modified. Save changes?"),
                          QMessageBox::Save | QMessageBox::Discard
                          | QMessageBox::Cancel);
         if (button == QMessageBox::Cancel)
@@ -400,7 +398,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
         {
             QFile file(autoSaveFile);
             if (file.exists() && ! file.remove())
-                showError(QString("Could not delete %1").arg(autoSaveFile));
+                showError(QString(tr("Could not delete %1")).arg(autoSaveFile));
         }
     }
     QSettings settings;
@@ -473,83 +471,84 @@ void MainWindow::createActions()
     QActionGroup* groupGameVariant = new QActionGroup(this);
     QActionGroup* groupLevel = new QActionGroup(this);
     QActionGroup* groupMoveNumbers = new QActionGroup(this);
-    m_actionAbout = new QAction("&About Pentobi", this);
+    m_actionAbout = new QAction(tr("&About"), this);
     connect(m_actionAbout, SIGNAL(triggered()), this, SLOT(about()));
-    m_actionBackward = new QAction("&Backward", this);
+    m_actionBackward = new QAction(tr("&Backward"), this);
     m_actionBackward->setIcon(QIcon(":/go-previous.png"));
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
-    m_actionBackToMainVariation = new QAction("Back to &Main Variation", this);
+    m_actionBackToMainVariation = new QAction(tr("Back to &Main Variation"),
+                                              this);
     m_actionBackToMainVariation->setShortcut(QString("Ctrl+M"));
     connect(m_actionBackToMainVariation, SIGNAL(triggered()),
             this, SLOT(backToMainVariation()));
-    m_actionBeginning = new QAction("Be&ginning", this);
+    m_actionBeginning = new QAction(tr("Be&ginning"), this);
     m_actionBeginning->setIcon(QIcon(":/go-first.png"));
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
-    m_actionClearSelectedPiece = new QAction("Clear Piece", this);
+    m_actionClearSelectedPiece = new QAction(tr("Clear Piece"), this);
     m_actionClearSelectedPiece->setIcon(QIcon(":/piece-clear.png"));
     m_actionClearSelectedPiece->setShortcut(QString("0"));
     connect(m_actionClearSelectedPiece, SIGNAL(triggered()),
             this, SLOT(clearSelectedPiece()));
-    m_actionComputerColor = new QAction("&Computer Color", this);
+    m_actionComputerColor = new QAction(tr("&Computer Color"), this);
     connect(m_actionComputerColor, SIGNAL(triggered()),
             this, SLOT(computerColor()));
-    m_actionCoordinateLabels = new QAction("&Coordinate Labels", this);
+    m_actionCoordinateLabels = new QAction(tr("&Coordinate Labels"), this);
     m_actionCoordinateLabels->setCheckable(true);
     connect(m_actionCoordinateLabels, SIGNAL(triggered(bool)),
             this, SLOT(coordinateLabels(bool)));
-    m_actionEnd = new QAction("&End", this);
+    m_actionEnd = new QAction(tr("&End"), this);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
     m_actionEnd->setIcon(QIcon(":/go-last.png"));
     connect(m_actionEnd, SIGNAL(triggered()), this, SLOT(end()));
-    m_actionExportAsciiArt = new QAction("&ASCII Art", this);
+    m_actionExportAsciiArt = new QAction(tr("&ASCII Art"), this);
     connect(m_actionExportAsciiArt, SIGNAL(triggered()),
             this, SLOT(exportAsciiArt()));
-    m_actionExportImage = new QAction("&Image", this);
+    m_actionExportImage = new QAction(tr("&Image"), this);
     connect(m_actionExportImage, SIGNAL(triggered()),
             this, SLOT(exportImage()));
-    m_actionFindMove = new QAction("&Find Move", this);
+    m_actionFindMove = new QAction(tr("&Find Move"), this);
     m_actionFindMove->setShortcut(QString("F2"));
     connect(m_actionFindMove, SIGNAL(triggered()), this, SLOT(findMove()));
-    m_actionFlipPieceHorizontally = new QAction("Flip Horizontally", this);
+    m_actionFlipPieceHorizontally = new QAction(tr("Flip Horizontally"), this);
     m_actionFlipPieceHorizontally->setIcon(QIcon(":/piece-flip-horizontal.png"));
     connect(m_actionFlipPieceHorizontally, SIGNAL(triggered()),
             this, SLOT(flipPieceHorizontally()));
-    m_actionFlipPieceVertically = new QAction("Flip Vertically", this);
+    m_actionFlipPieceVertically = new QAction(tr("Flip Vertically"), this);
     m_actionFlipPieceVertically->setIcon(QIcon(":/piece-flip-vertical.png"));
-    m_actionForward = new QAction("&Forward", this);
+    m_actionForward = new QAction(tr("&Forward"), this);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     m_actionForward->setIcon(QIcon(":/go-next.png"));
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
-    m_actionFullscreen = new QAction("&Fullscreen", this);
+    m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
     m_actionFullscreen->setCheckable(true);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
-    m_actionGameVariantClassic = new QAction("&Classic", this);
+    m_actionGameVariantClassic = new QAction(tr("&Classic"), this);
     m_actionGameVariantClassic->setActionGroup(groupGameVariant);
     m_actionGameVariantClassic->setCheckable(true);
     connect(m_actionGameVariantClassic, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantClassic(bool)));
-    m_actionGameVariantClassic2 = new QAction("Classic &Two-Player", this);
+    m_actionGameVariantClassic2 = new QAction(tr("Classic &Two-Player"), this);
     m_actionGameVariantClassic2->setActionGroup(groupGameVariant);
     m_actionGameVariantClassic2->setCheckable(true);
     connect(m_actionGameVariantClassic2, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantClassic2(bool)));
-    m_actionGameVariantDuo = new QAction("&Duo", this);
+    m_actionGameVariantDuo = new QAction(tr("&Duo"), this);
     m_actionGameVariantDuo->setActionGroup(groupGameVariant);
     m_actionGameVariantDuo->setCheckable(true);
     connect(m_actionGameVariantDuo, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantDuo(bool)));
-    m_actionHelp = new QAction("Pentobi &Help", this);
-    m_actionHelp->setShortcut(QString("F1"));
+    m_actionHelp = new QAction(tr("&Contents"), this);
+    m_actionHelp->setShortcut(QKeySequence::HelpContents);
     connect(m_actionHelp, SIGNAL(triggered()), this, SLOT(help()));
-    m_actionInterrupt = new QAction("&Interrupt", this);
+    m_actionInterrupt = new QAction(tr("&Interrupt"), this);
     m_actionInterrupt->setShortcut(QString("Escape"));
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
-    m_actionMakeMainVariation = new QAction("&Make Main Variation", this);
+    m_actionMakeMainVariation = new QAction(tr("&Make Main Variation"), this);
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
             this, SLOT(makeMainVariation()));
     QString levelText[maxLevel] = { "&1", "&2", "&3", "&4", "&5", "&6" };
@@ -557,18 +556,18 @@ void MainWindow::createActions()
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
     connect(m_actionFlipPieceVertically, SIGNAL(triggered()),
             this, SLOT(flipPieceVertically()));
-    m_actionMoveNumbersAll = new QAction("&All", this);
+    m_actionMoveNumbersAll = new QAction(tr("&All"), this);
     m_actionMoveNumbersAll->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersAll->setCheckable(true);
     connect(m_actionMoveNumbersAll, SIGNAL(triggered(bool)),
             this, SLOT(setMoveNumbersAll(bool)));
-    m_actionMoveNumbersLast = new QAction("&Last", this);
+    m_actionMoveNumbersLast = new QAction(tr("&Last"), this);
     m_actionMoveNumbersLast->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersLast->setCheckable(true);
     m_actionMoveNumbersLast->setChecked(true);
     connect(m_actionMoveNumbersLast, SIGNAL(triggered(bool)),
             this, SLOT(setMoveNumbersLast(bool)));
-    m_actionMoveNumbersNone = new QAction("&None", this);
+    m_actionMoveNumbersNone = new QAction(tr("&None"), this);
     m_actionMoveNumbersNone->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersNone->setCheckable(true);
     connect(m_actionMoveNumbersNone, SIGNAL(triggered(bool)),
@@ -581,7 +580,7 @@ void MainWindow::createActions()
     m_actionMoveSelectedPieceUp->setShortcut(QString("Up"));
     m_actionMoveSelectedPieceDown = new QAction("", this);
     m_actionMoveSelectedPieceDown->setShortcut(QString("Down"));
-    m_actionNextPiece = new QAction("Next Piece", this);
+    m_actionNextPiece = new QAction(tr("Next Piece"), this);
     m_actionNextPiece->setIcon(QIcon(":/next-piece.png"));
     m_actionNextPiece->setShortcut(QString("+"));
     connect(m_actionNextPiece, SIGNAL(triggered()), this, SLOT(nextPiece()));
@@ -589,26 +588,26 @@ void MainWindow::createActions()
     m_actionNextTransform->setShortcut(QString("Space"));
     connect(m_actionNextTransform, SIGNAL(triggered()),
             this, SLOT(nextTransform()));
-    m_actionNextVariation = new QAction("&Next Variation", this);
+    m_actionNextVariation = new QAction(tr("&Next Variation"), this);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
     m_actionNextVariation->setIcon(QIcon(":/go-down.png"));
     connect(m_actionNextVariation, SIGNAL(triggered()),
             this, SLOT(nextVariation()));
-    m_actionNewGame = new QAction("&New Game", this);
-    m_actionNewGame->setShortcut(QString("Ctrl+N"));
+    m_actionNewGame = new QAction(tr("&New Game"), this);
+    m_actionNewGame->setShortcut(QKeySequence::New);
     m_actionNewGame->setIcon(QIcon(":/newgame.png"));
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
-    m_actionOpen = new QAction("&Open...", this);
-    m_actionOpen->setShortcut(QString("Ctrl+O"));
+    m_actionOpen = new QAction(tr("&Open..."), this);
+    m_actionOpen->setShortcut(QKeySequence::Open);
     m_actionOpen->setIcon(QIcon(":/document-open.png"));
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     m_actionPlaceSelectedPiece = new QAction("", this);
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
-    m_actionPlay = new QAction("&Play", this);
+    m_actionPlay = new QAction(tr("&Play"), this);
     m_actionPlay->setShortcut(QString("Ctrl+L"));
     m_actionPlay->setIcon(QIcon(":/play.png"));
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
-    m_actionPreviousPiece = new QAction("Previous Piece", this);
+    m_actionPreviousPiece = new QAction(tr("Previous Piece"), this);
     m_actionPreviousPiece->setIcon(QIcon(":/previous-piece.png"));
     m_actionPreviousPiece->setShortcut(QString("-"));
     connect(m_actionPreviousPiece, SIGNAL(triggered()),
@@ -617,7 +616,7 @@ void MainWindow::createActions()
     m_actionPreviousTransform->setShortcut(QString("Shift+Space"));
     connect(m_actionPreviousTransform, SIGNAL(triggered()),
             this, SLOT(previousTransform()));
-    m_actionPreviousVariation = new QAction("&Previous Variation", this);
+    m_actionPreviousVariation = new QAction(tr("&Previous Variation"), this);
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
     m_actionPreviousVariation->setIcon(QIcon(":/go-up.png"));
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
@@ -629,24 +628,24 @@ void MainWindow::createActions()
          connect(m_actionRecentFile[i], SIGNAL(triggered()),
                  this, SLOT(openRecentFile()));
      }
-    m_actionRotatePieceAnticlockwise =
-        new QAction("Rotate Anticlockwise", this);
+    m_actionRotatePieceAnticlockwise = new QAction(tr("Rotate Anticlockwise"),
+                                                   this);
     m_actionRotatePieceAnticlockwise->setIcon(QIcon(":/piece-rotate-left.png"));
     connect(m_actionRotatePieceAnticlockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceAnticlockwise()));
-    m_actionRotatePieceClockwise = new QAction("Rotate Clockwise", this);
+    m_actionRotatePieceClockwise = new QAction(tr("Rotate Clockwise"), this);
     m_actionRotatePieceClockwise->setIcon(QIcon(":/piece-rotate-right.png"));
     connect(m_actionRotatePieceClockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceClockwise()));
-    m_actionQuit = new QAction("&Quit", this);
-    m_actionQuit->setShortcut(QString("Ctrl+Q"));
+    m_actionQuit = new QAction(tr("&Quit"), this);
+    m_actionQuit->setShortcut(QKeySequence::Quit);
     connect(m_actionQuit, SIGNAL(triggered()), this, SLOT(quit()));
-    m_actionSave = new QAction("&Save", this);
-    m_actionSave->setShortcut(QString("Ctrl+S"));
+    m_actionSave = new QAction(tr("&Save"), this);
+    m_actionSave->setShortcut(QKeySequence::Save);
     m_actionSave->setIcon(QIcon(":/document-save.png"));
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
-    m_actionSaveAs = new QAction("Save &As...", this);
-    m_actionSaveAs->setShortcut(QString("Ctrl+Shift+S"));
+    m_actionSaveAs = new QAction(tr("Save &As..."), this);
+    m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), this, SLOT(saveAs()));
     m_actionSelectPiece1 = new QAction(this);
     m_actionSelectPiece1->setShortcut(QString("1"));
@@ -708,11 +707,11 @@ void MainWindow::createActions()
     m_actionSelectPieceZ->setShortcut(QString("Z"));
     connect(m_actionSelectPieceZ, SIGNAL(triggered()),
             this, SLOT(selectPieceZ()));
-    m_actionShowComment = new QAction("&Comment", this);
+    m_actionShowComment = new QAction(tr("&Comment"), this);
     m_actionShowComment->setCheckable(true);
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
             this, SLOT(showComment(bool)));
-    m_actionTruncate = new QAction("&Truncate", this);
+    m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 }
 
@@ -765,28 +764,28 @@ QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
 void MainWindow::createMenu()
 {
 
-    QMenu* menuFile = menuBar()->addMenu("&File");
+    QMenu* menuFile = menuBar()->addMenu(tr("&File"));
     menuFile->addAction(m_actionOpen);
-    m_menuOpenRecent = menuFile->addMenu("&Open Recent");
+    m_menuOpenRecent = menuFile->addMenu(tr("&Open Recent"));
     for (int i = 0; i < maxRecentFiles; ++i)
         m_menuOpenRecent->addAction(m_actionRecentFile[i]);
     menuFile->addAction(m_actionSave);
     menuFile->addAction(m_actionSaveAs);
-    QMenu* menuExport = menuFile->addMenu("&Export");
+    QMenu* menuExport = menuFile->addMenu(tr("&Export"));
     menuExport->addAction(m_actionExportImage);
     menuExport->addAction(m_actionExportAsciiArt);
     menuFile->addAction(m_actionQuit);
 
-    QMenu* menuGame = menuBar()->addMenu("G&ame");
+    QMenu* menuGame = menuBar()->addMenu(tr("G&ame"));
     menuGame->addAction(m_actionNewGame);
-    QMenu* menuGameVariant = menuGame->addMenu("Game &Variant");
+    QMenu* menuGameVariant = menuGame->addMenu(tr("Game &Variant"));
     menuGameVariant->addAction(m_actionGameVariantClassic);
     menuGameVariant->addAction(m_actionGameVariantClassic2);
     menuGameVariant->addAction(m_actionGameVariantDuo);
     menuGame->addAction(m_actionComputerColor);
     menuGame->addAction(m_actionFindMove);
 
-    QMenu* menuGo = menuBar()->addMenu("&Go");
+    QMenu* menuGo = menuBar()->addMenu(tr("&Go"));
     menuGo->addAction(m_actionBeginning);
     menuGo->addAction(m_actionBackward);
     menuGo->addAction(m_actionForward);
@@ -795,28 +794,28 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionPreviousVariation);
     menuGo->addAction(m_actionBackToMainVariation);
 
-    QMenu* menuEdit = menuBar()->addMenu("&Edit");
+    QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionTruncate);
 
-    QMenu* menuView = menuBar()->addMenu("&View");
+    QMenu* menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
     menuView->addAction(m_actionShowComment);
     menuView->addAction(m_actionFullscreen);
-    QMenu* menuMoveNumbers = menuView->addMenu("Move &Numbers");
+    QMenu* menuMoveNumbers = menuView->addMenu(tr("Move &Numbers"));
     menuMoveNumbers->addAction(m_actionMoveNumbersLast);
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
     menuMoveNumbers->addAction(m_actionMoveNumbersNone);
     menuView->addAction(m_actionCoordinateLabels);
 
-    QMenu* menuComputer = menuBar()->addMenu("&Computer");
+    QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
     menuComputer->addAction(m_actionInterrupt);
-    QMenu* menuLevel = menuComputer->addMenu("&Level");
+    QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
 
-    QMenu* menuHelp = menuBar()->addMenu("&Help");
+    QMenu* menuHelp = menuBar()->addMenu(tr("&Help"));
     menuHelp->addAction(m_actionHelp);
     menuHelp->addAction(m_actionAbout);
 }
@@ -936,7 +935,7 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionPreviousVariation);
     addToolBar(m_toolBar);
     m_actionShowToolbar = m_toolBar->toggleViewAction();
-    m_actionShowToolbar->setText("&Toolbar");
+    m_actionShowToolbar->setText(tr("&Toolbar"));
 }
 
 void MainWindow::end()
@@ -947,7 +946,7 @@ void MainWindow::end()
 void MainWindow::exportAsciiArt()
 {
     QString file = QFileDialog::getSaveFileName(this, QString(), QString(),
-                                                "Text files (*.txt)");
+                                                tr("Text files (*.txt)"));
     if (file.isEmpty())
         return;
     ofstream out(file.toStdString().c_str());
@@ -961,7 +960,7 @@ void MainWindow::exportImage()
 {
     int size;
     bool ok;
-    size = QInputDialog::getInt(this, "Pentobi - Export Image",
+    size = QInputDialog::getInt(this, tr("Pentobi - Export Image"),
                                 tr("Image size:"), 320, 0, 2147483647, 40,
                                 &ok);
     if (! ok)
@@ -1076,7 +1075,7 @@ void MainWindow::gameVariantDuo(bool checked)
 void MainWindow::genMove()
 {
     ++m_genMoveId;
-    showStatus("The computer is thinking...");
+    showStatus(tr("The computer is thinking..."));
     QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
     m_actionInterrupt->setEnabled(true);
     clearSelectedPiece();
@@ -1106,24 +1105,29 @@ void MainWindow::genMoveFinished()
     Move mv = result.move;
     if (mv.is_null())
     {
-        showError("Player failed to generate a move");
+        showError(tr("Player failed to generate a move."));
         return;
     }
     const Board& bd = m_game->get_board();
     if (! bd.is_legal(c, mv))
     {
-        showError(QString("Player generated illegal move: %1")
+        showError(QString(tr("Player generated illegal move: %1"))
                   .arg(bd.to_string(mv).c_str()));
         return;
     }
     if (mv.is_pass())
     {
-        showStatus("The computer has no more moves available.");
+        showStatus(tr("The computer has no more moves available."));
         boardChanged(false);
         checkComputerMove();
         return;
     }
     play(c, mv);
+}
+
+QString MainWindow::getFilter() const
+{
+    return tr("Blokus games (*.blksgf);;All files (*.*)");
 }
 
 void MainWindow::gotoNode(const Node& node)
@@ -1135,7 +1139,7 @@ void MainWindow::gotoNode(const Node& node)
     }
     catch (const InvalidPropertyValue& e)
     {
-        showError("Game file node contains invalid property", e.what());
+        showError(tr("Game file node contains invalid property"), e.what());
     }
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
@@ -1190,7 +1194,7 @@ void MainWindow::initGameVariantActions()
 
 void MainWindow::interrupt()
 {
-    showStatus("Cancelling move generation...");
+    showStatus(tr("Cancelling move generation..."));
     set_abort();
 }
 
@@ -1265,7 +1269,7 @@ void MainWindow::open()
         dir = QFileInfo(m_file).dir().path();
     else
         dir = QDir::home().path();
-    open(QFileDialog::getOpenFileName(this, "Open", dir, filter));
+    open(QFileDialog::getOpenFileName(this, tr("Open"), dir, getFilter()));
 }
 
 void MainWindow::open(const QString& file, bool isTemporary)
@@ -1280,7 +1284,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     }
     catch (const TreeReader::ReadError& e)
     {
-        showError("Read error", e.what());
+        showError(tr("Read error"), e.what());
         return;
     }
     if (! isTemporary)
@@ -1299,7 +1303,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     }
     catch (const InvalidPropertyValue& e)
     {
-        showError("File contains invalid SGF properties", e.what());
+        showError(tr("File contains invalid SGF properties"), e.what());
     }
     m_noMovesAvailableShown.fill(false);
     m_computerColor.fill(false);
@@ -1464,11 +1468,11 @@ void MainWindow::save()
     ofstream out(m_file.toStdString().c_str());
     write_tree(out, m_game->get_root(), true, 2);
     if (! out)
-        showError("The file could not be saved.",
-                  QString("%1: %2").arg(m_file).arg(strerror(errno)));
+        showError(tr("The file could not be saved."),
+                  QString(tr("%1: %2")).arg(m_file).arg(strerror(errno)));
     else
     {
-        showStatus(QString("File saved %1").arg(m_file), true);
+        showStatus(QString(tr("File saved %1")).arg(m_file), true);
         m_game->clear_modified();
         boardChanged(false);
     }
@@ -1481,18 +1485,18 @@ void MainWindow::saveAs()
     {
         file = QDir::home().path();
         file.append(QDir::separator());
-        file.append("Unknown.blksgf");
+        file.append(tr("Unknown.blksgf"));
         if (QFileInfo(file).exists())
             for (unsigned int i = 1; ; ++i)
             {
                 file = QDir::home().path();
                 file.append(QDir::separator());
-                file.append(QString("Unknown-%1.blksgf").arg(i));
+                file.append(QString(tr("Unknown-%1.blksgf")).arg(i));
                 if (! QFileInfo(file).exists())
                     break;
             }
     }
-    file = QFileDialog::getSaveFileName(this, "Save", file, filter);
+    file = QFileDialog::getSaveFileName(this, tr("Save"), file, getFilter());
     if (! file.isEmpty())
     {
         setFile(file);
@@ -1683,10 +1687,10 @@ void MainWindow::setFile(const QString& file)
 {
     m_file = file;
     if (m_file.isEmpty())
-        setWindowTitle("Pentobi");
+        setWindowTitle(tr("Pentobi"));
     else
     {
-        setWindowTitle(QString("%1[*] - Pentobi")
+        setWindowTitle(QString(tr("%1[*] - Pentobi"))
                        .arg(QFileInfo(file).fileName()));
         QSettings settings;
         QStringList files = settings.value("recent_files").toStringList();
@@ -1782,30 +1786,30 @@ void MainWindow::showGameOver()
         double game_result;
         int score = bd.get_score(Color(0), game_result);
         if (score == 1)
-            info = "Blue wins with 1 point.";
+            info = tr("Blue wins with 1 point.");
         else if (score > 0)
-            info = QString("Blue wins with %1 points.").arg(score);
+            info = QString(tr("Blue wins with %1 points.")).arg(score);
         else if (score == -1)
-            info = "Green wins with 1 point.";
+            info = tr("Green wins with 1 point.");
         else if (score < 0)
-            info = QString("Green wins with %1 points.").arg(-score);
+            info = QString(tr("Green wins with %1 points.")).arg(-score);
         else
-            info = "The game ends in a draw.";
+            info = tr("The game ends in a draw.");
     }
     else if (variant == game_variant_classic_2)
     {
         double game_result;
         int score = bd.get_score(Color(0), game_result);
         if (score == 1)
-            info = "Blue/Red wins with 1 point.";
+            info = tr("Blue/Red wins with 1 point.");
         else if (score > 0)
-            info = QString("Blue/Red wins with %1 points.").arg(score);
+            info = QString(tr("Blue/Red wins with %1 points.")).arg(score);
         else if (score == 1)
-            info = "Yellow/Green wins with 1 point.";
+            info = tr("Yellow/Green wins with 1 point.");
         else if (score < 0)
-            info = QString("Yellow/Green wins with %1 points.").arg(-score);
+            info = QString(tr("Yellow/Green wins with %1 points.")).arg(-score);
         else
-            info = "The game ends in a draw.";
+            info = tr("The game ends in a draw.");
     }
     else
     {
@@ -1815,37 +1819,38 @@ void MainWindow::showGameOver()
         unsigned int green = bd.get_points_with_bonus(Color(3));
         unsigned int maxPoints = max(blue, max(yellow, max(red, green)));
         if (blue == yellow && yellow == red && red == green)
-            info = "The game ends in a draw between all colors.";
+            info = tr("The game ends in a draw between all colors.");
         else if (blue == maxPoints && blue == yellow && yellow == red)
-            info = "The game ends in a draw between Blue, Yellow and Red.";
+            info = tr("The game ends in a draw between Blue, Yellow and Red.");
         else if (blue == maxPoints && blue == yellow && yellow == green)
-            info = "The game ends in a draw between Blue, Yellow and Green.";
+            info =
+                tr("The game ends in a draw between Blue, Yellow and Green.");
         else if (blue == maxPoints && blue == red && red == green)
-            info = "The game ends in a draw between Blue, Red and Green.";
+            info = tr("The game ends in a draw between Blue, Red and Green.");
         else if (yellow == maxPoints && yellow == red && red == green)
-            info = "The game ends in a draw between Yellow, Red and Green.";
+            info = tr("The game ends in a draw between Yellow, Red and Green.");
         else if (blue == maxPoints && blue == yellow)
-            info = "The game ends in a draw between Blue and Yellow.";
+            info = tr("The game ends in a draw between Blue and Yellow.");
         else if (blue == maxPoints && blue == red)
-            info = "The game ends in a draw between Blue and Red.";
+            info = tr("The game ends in a draw between Blue and Red.");
         else if (blue == maxPoints && blue == green)
-            info = "The game ends in a draw between Blue and Green.";
+            info = tr("The game ends in a draw between Blue and Green.");
         else if (yellow == maxPoints && yellow == red)
-            info = "The game ends in a draw between Yellow and Red.";
+            info = tr("The game ends in a draw between Yellow and Red.");
         else if (yellow == maxPoints && yellow == green)
-            info = "The game ends in a draw between Yellow and Green.";
+            info = tr("The game ends in a draw between Yellow and Green.");
         else if (red == maxPoints && red == green)
-            info = "The game ends in a draw between Red and Green.";
+            info = tr("The game ends in a draw between Red and Green.");
         else if (blue == maxPoints)
-            info = "Blue wins.";
+            info = tr("Blue wins.");
         else if (yellow == maxPoints)
-            info = "Yellow wins.";
+            info = tr("Yellow wins.");
         else if (red == maxPoints)
-            info = "Red wins.";
+            info = tr("Red wins.");
         else
-            info = "Green wins.";
+            info = tr("Green wins.");
     }
-    showInfo("The game is over.", info);
+    showInfo(tr("The game is over."), info);
 }
 
 void MainWindow::showInfo(const QString& text, const QString& infoText)
@@ -1857,7 +1862,7 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
                              const QString& infoText)
 {
     QMessageBox msgBox(this);
-    msgBox.setWindowTitle("Pentobi");
+    msgBox.setWindowTitle(tr("Pentobi"));
     msgBox.setIcon(icon);
     msgBox.setText(text);
     msgBox.setInformativeText(infoText);
@@ -1868,21 +1873,21 @@ void MainWindow::showNoMovesAvailable(Color c)
 {
     GameVariant variant = m_game->get_game_variant();
     if (c == Color(0))
-        showInfo("Blue has no more moves available.");
+        showInfo(tr("Blue has no more moves available."));
     else if ((variant == game_variant_duo && c == Color(1))
              || (variant != game_variant_duo && c == Color(3)))
-        showInfo("Green has no more moves available.");
+        showInfo(tr("Green has no more moves available."));
     else if (c == Color(1))
-        showInfo("Yellow has no more moves available.");
+        showInfo(tr("Yellow has no more moves available."));
     else
-        showInfo("Red has no more moves available.");
+        showInfo(tr("Red has no more moves available."));
 }
 
 QMessageBox::StandardButton MainWindow::showQuestion(const QString& text,
                                            QMessageBox::StandardButtons buttons)
 {
     QMessageBox msgBox(this);
-    msgBox.setWindowTitle("Pentobi");
+    msgBox.setWindowTitle(tr("Pentobi"));
     msgBox.setText(text);
     msgBox.setStandardButtons(buttons);
     return static_cast<QMessageBox::StandardButton>(msgBox.exec());
@@ -1962,7 +1967,7 @@ void MainWindow::updateRecentFiles()
         QString name = info.absoluteFilePath();
         QString text;
         if (i + 1 <= 9)
-            text = QString("&%1: %2").arg(i + 1).arg(name);
+            text = QString(tr("&%1: %2")).arg(i + 1).arg(name);
         else
             text = QString("%1").arg(name);
         m_actionRecentFile[i]->setText(text);

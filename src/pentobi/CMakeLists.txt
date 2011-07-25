@@ -18,9 +18,15 @@ set(pentobi_RCS
   resources.qrc
   )
 
+set(pentobi_TS
+  pentobi_de.ts
+  )
+
 link_directories(${Boost_LIBRARY_DIRS})
 
 qt4_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
+
+qt4_add_translation(pentobi_QM_SRCS ${pentobi_TS})
 
 qt4_wrap_cpp(pentobi_MOC_SRCS ${pentobi_MOC_HDRS})
 
@@ -37,7 +43,9 @@ endif()
 add_executable(pentobi WIN32
   ${pentobi_SRCS}
   ${pentobi_MOC_SRCS}
-  ${pentobi_RC_SRCS})
+  ${pentobi_QM_SRCS}
+  ${pentobi_RC_SRCS}
+  )
 
 target_link_libraries(pentobi
   pentobi_gui
@@ -58,3 +66,4 @@ target_link_libraries(pentobi
 endif()
 
 install(TARGETS pentobi DESTINATION bin)
+install(FILES ${pentobi_QM_SRCS} DESTINATION share/pentobi/translations)
