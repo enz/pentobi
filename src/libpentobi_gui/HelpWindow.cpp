@@ -17,7 +17,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     QTextBrowser* browser = new QTextBrowser(this);
     setCentralWidget(browser);
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    browser->setSource(QUrl(mainPage));
+    browser->setSource(QUrl::fromLocalFile(mainPage));
     QAction* actionBack = new QAction(tr("Back"), this);
     actionBack->setIcon(QIcon(":/go-previous.png"));
     connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
@@ -34,6 +34,19 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     toolBar->addAction(actionHome);
     addToolBar(toolBar);
     resize(480, 600);
+}
+
+QString HelpWindow::findMainPage(QString dir, QString file, QString locale)
+{
+    QString path;
+    path = dir + "/" + locale + "/" + file;
+    if (QFile(path).exists())
+        return path;
+    QStringList list = locale.split("_");
+    path = dir + "/" + list[0] + "/" + file;
+    if (QFile(path).exists())
+        return path;
+    return dir + "/en/" + file;
 }
 
 //-----------------------------------------------------------------------------

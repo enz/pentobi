@@ -1,17 +1,22 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource>
-    <file>manual/classic_rules.html</file>
-    <file>manual/duo_rules.html</file>
-    <file>manual/empty_board_classic.png</file>
-    <file>manual/empty_board_duo.png</file>
-    <file>manual/index.html</file>
-    <file>manual/license.html</file>
-    <file>manual/pieces.png</file>
-    <file>manual/position_classic.png</file>
-    <file>manual/position_duo.png</file>
-    <file>manual/shortcuts.html</file>
-    <file>manual/stylesheet.css</file>
+    <file>manual/en/classic_rules.html</file>
+    <file>manual/en/duo_rules.html</file>
+    <file>manual/en/empty_board_classic.png</file>
+    <file>manual/en/empty_board_duo.png</file>
+    <file>manual/en/index.html</file>
+    <file>manual/en/license.html</file>
+    <file>manual/en/pieces.png</file>
+    <file>manual/en/position_classic.png</file>
+    <file>manual/en/position_duo.png</file>
+    <file>manual/en/shortcuts.html</file>
+    <file>manual/en/stylesheet.css</file>
+    <file>manual/de/classic_rules.html</file>
+    <file>manual/de/duo_rules.html</file>
+    <file>manual/de/index.html</file>
+    <file>manual/de/license.html</file>
+    <file>manual/de/shortcuts.html</file>
     <file>document-open.png</file>
     <file>document-save.png</file>
     <file>go-down.png</file>

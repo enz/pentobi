@@ -1154,7 +1154,9 @@ void MainWindow::help()
         m_help_window->raise();
         return;
     }
-    m_help_window = new HelpWindow(this, "qrc:///manual/index.html");
+    QString path = HelpWindow::findMainPage(":/manual", "index.html",
+                                            QLocale::system().name());
+    m_help_window = new HelpWindow(this, path);
     m_help_window->show();
 }
 
