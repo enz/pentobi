@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Pentobi
 Comment=Computer program that plays the board game Blokus
+Comment[de]=Computerprogramm, das das Brettspiel Blokus spielt
 Exec=@CMAKE_INSTALL_PREFIX@/bin/pentobi %f
 Icon=@CMAKE_INSTALL_PREFIX@/share/icons/hicolor/48x48/apps/pentobi.png
 Terminal=false
