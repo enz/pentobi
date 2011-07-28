@@ -3,9 +3,10 @@
 
 !define PENTOBI_VERSION "@PENTOBI_VERSION@"
 !define PENTOBI_SRC_DIR "@CMAKE_SOURCE_DIR@"
-!define PENTOBI_GUI_BUILD_DIR "@CMAKE_BINARY_DIR@/src/pentobi"
-!define PENTOBI_DIST_FILE_DIR "@CMAKE_SOURCE_DIR@"
+!define PENTOBI_BUILD_DIR "@CMAKE_BINARY_DIR@"
+!define PENTOBI_DIST_FILE_DIR "${PENTOBI_BUILD_DIR}"
 !define PENTOBI_DIST_FILE_NAME "pentobi-${PENTOBI_VERSION}.tar.gz"
+!define QT_TRANSLATIONS_DIR "@QT_TRANSLATIONS_DIR@"
 
 !define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pentobi"
 
@@ -27,6 +28,7 @@ SetCompressor /SOLID lzma
 !insertmacro MUI_UNPAGE_INSTFILES
 
 !insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_RESERVEFILE_INSTALLOPTIONS 
 
 !define ADD_START_MENU_ENTRY_DEFAULT "Add start menu entry"
@@ -38,6 +40,7 @@ LangString CREATE_DESKTOP_SHORTCUT ${LANG_ENGLISH} \
   "${CREATE_DESKTOP_SHORTCUT_DEFAULT}"
 LangString INSTALL_SOURCE_CODE ${LANG_ENGLISH} \
   "${INSTALL_SOURCE_CODE_DEFAULT}"
+!include "${PENTOBI_SRC_DIR}\windows_installer\German.nsh"
 
 Name "Pentobi"
 Caption "Pentobi Installer"
@@ -55,13 +58,17 @@ ExecWait '"$INSTDIR\Uninstall.exe" /S _?=$INSTDIR'
 
 SetOutPath "$INSTDIR"
 File /oname=COPYING.txt "${PENTOBI_SRC_DIR}\COPYING"
-File /oname=Pentobi.exe "${PENTOBI_GUI_BUILD_DIR}\pentobi.exe"
-File "${PENTOBI_GUI_BUILD_DIR}\QtCore4.dll"
-File "${PENTOBI_GUI_BUILD_DIR}\QtGui4.dll"
-File "${PENTOBI_GUI_BUILD_DIR}\mingwm10.dll"
-File "${PENTOBI_GUI_BUILD_DIR}\libgcc_s_dw2-1.dll"
-File "${PENTOBI_GUI_BUILD_DIR}\libstdc++-6.dll"
+File /oname=Pentobi.exe "${PENTOBI_BUILD_DIR}\src\pentobi\pentobi.exe"
+File "${PENTOBI_BUILD_DIR}\src\pentobi\QtCore4.dll"
+File "${PENTOBI_BUILD_DIR}\src\pentobi\QtGui4.dll"
+File "${PENTOBI_BUILD_DIR}\src\pentobi\mingwm10.dll"
+File "${PENTOBI_BUILD_DIR}\src\pentobi\libgcc_s_dw2-1.dll"
+File "${PENTOBI_BUILD_DIR}\src\pentobi\libstdc++-6.dll"
+File "${PENTOBI_BUILD_DIR}\src\pentobi\pentobi_de.qm"
+File "${PENTOBI_BUILD_DIR}\src\libpentobi_gui\libpentobi_gui_de.qm"
 File "${PENTOBI_SRC_DIR}\src\pentobi\pentobi.ico"
+File "${PENTOBI_SRC_DIR}\windows_installer\qt.conf"
+File "${QT_TRANSLATIONS_DIR}\qt_de.qm"
 
 WriteRegStr HKLM "Software\Pentobi" "" $INSTDIR
 
@@ -120,6 +127,10 @@ Delete "$INSTDIR\QtGui4.dll"
 Delete "$INSTDIR\mingwm10.dll"
 Delete "$INSTDIR\libgcc_s_dw2-1.dll"
 Delete "$INSTDIR\libstdc++-6.dll"
+Delete "$INSTDIR\libpentobi_gui_de.qm"
+Delete "$INSTDIR\pentobi_de.qm"
+Delete "$INSTDIR\qt.conf"
+Delete "$INSTDIR\qt_de.qm"
 Delete "$INSTDIR\COPYING.txt"
 Delete "$INSTDIR\pentobi.ico"
 Delete "$INSTDIR\blksgf.ico"
