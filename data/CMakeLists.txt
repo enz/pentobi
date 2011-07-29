@@ -7,6 +7,6 @@ if(UNIX AND NOT APPLE)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.desktop
     DESTINATION share/applications)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.schemas
-    DESTINATION etc/gconf/schemas)
+    DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/gconf/schemas)
   install(FILES pentobi-mime.xml DESTINATION share/mime/packages)
-endif()
+endif(UNIX AND NOT APPLE)

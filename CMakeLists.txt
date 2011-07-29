@@ -6,7 +6,7 @@ option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
 
-if(NOT CMAKE_BUILD_TYPE)
+if(NOT DEFINED CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING
       "Type of build (None Debug Release RelWithDebInfo MinSizeRel)"
       FORCE)
@@ -18,6 +18,21 @@ endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
   add_definitions(-std=c++0x)
+endif()
+
+# Define CMAKE_INSTALL_SYSCONFDIR  and CMAKE_INSTALL_FULL_SYSCONFDIR as in
+# GNUInstallDirs (we don't use GNUInstallDirs yet because it requires CMake
+# 2.8.5 and we require only CMake 2.8 so far.
+if(NOT DEFINED CMAKE_INSTALL_SYSCONFDIR)
+  set(CMAKE_INSTALL_SYSCONFDIR etc CACHE PATH
+    "Unix etc directory (absolute path or relative to CMAKE_INSTALL_PREFIX)"
+    FORCE)
+  if(NOT IS_ABSOLUTE ${CMAKE_INSTALL_SYSCONFDIR})
+    set(CMAKE_INSTALL_FULL_SYSCONFDIR
+      "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_SYSCONFDIR}")
+  else()
+    set(CMAKE_INSTALL_FULL_SYSCONFDIR "${CMAKE_INSTALL_SYSCONFDIR}")
+  endif()
 endif()
 
 if(MSVC)
@@ -68,7 +83,7 @@ add_custom_target(post-install
   COMMAND update-mime-database ${CMAKE_INSTALL_PREFIX}/share/mime
   COMMAND env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
   gconftool-2 --makefile-install-rule
-  ${CMAKE_INSTALL_PREFIX}/etc/gconf/schemas/pentobi.schemas
+  ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas
   )
 
 add_subdirectory(src)
