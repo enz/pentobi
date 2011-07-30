@@ -50,7 +50,7 @@ void loadPentobiTranslator(QTranslator& translator)
     QString appDir = QCoreApplication::applicationDirPath();
     // Search for translation file in the following directories in this order
     // 1. AppDir (Windows installation or CMake build on Unix or with MinGW)
-    // 2. AppDir/../libpentobi_gui (CMake build with MSVC)
+    // 2. AppDir/.. (CMake build with MSVC)
     // 3. DATADIR/pentobi/translations (Unix installation)
     if (translator.load(file, appDir))
         return;
