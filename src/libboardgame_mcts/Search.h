@@ -411,7 +411,7 @@ bool Search<S, M, E, P>::check_abort_expensive() const
         double remaining_time = m_max_time - time;
         if (m_callback)
             m_callback(time, remaining_time);
-        double remaining_simulations = remaining_time * simulations_per_sec;
+        ValueType remaining_simulations = ValueType(remaining_time * simulations_per_sec);
         if (check_move_cannot_change(count, remaining_simulations))
         {
             log("Move cannot change anymore");
