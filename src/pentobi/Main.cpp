@@ -34,10 +34,14 @@ void loadLibPentobiGuiTranslator(QTranslator& translator)
     // 4. DATADIR/pentobi/translations (Unix installation)
     if (translator.load(file, appDir))
         return;
+#ifndef _MSC_VER
     if (translator.load(file, appDir + "/../libpentobi_gui"))
         return;
+#endif
+#ifdef _MSC_VER
     if (translator.load(file, appDir + "/../../libpentobi_gui"))
         return;
+#endif
 #ifdef DATADIR
     translator.load(file, QString(DATADIR) + "/pentobi/translations");
 #endif
@@ -52,10 +56,14 @@ void loadPentobiTranslator(QTranslator& translator)
     // 1. AppDir (Windows installation or CMake build on Unix or with MinGW)
     // 2. AppDir/.. (CMake build with MSVC)
     // 3. DATADIR/pentobi/translations (Unix installation)
+#ifndef _MSC_VER
     if (translator.load(file, appDir))
         return;
+#endif
+#ifdef _MSC_VER
     if (translator.load(file, appDir + "/.."))
         return;
+#endif
 #ifdef DATADIR
     translator.load(file, QString(DATADIR) + "/pentobi/translations");
 #endif
