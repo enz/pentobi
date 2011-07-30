@@ -27,9 +27,16 @@ void loadLibPentobiGuiTranslator(QTranslator& translator)
     QString locale = QLocale::system().name();
     QString file = "libpentobi_gui_" + locale;
     QString appDir = QCoreApplication::applicationDirPath();
+    // Search for translation file in the following directories in this order
+    // 1. AppDir (Windows installation)
+    // 2. AppDir/../libpentobi_gui (CMake build on Unix or with MinGW)
+    // 3. AppDir/../../libpentobi_gui (CMake build with MSVC)
+    // 4. DATADIR/pentobi/translations (Unix installation)
     if (translator.load(file, appDir))
         return;
     if (translator.load(file, appDir + "/../libpentobi_gui"))
+        return;
+    if (translator.load(file, appDir + "/../../libpentobi_gui"))
         return;
 #ifdef DATADIR
     translator.load(file, QString(DATADIR) + "/pentobi/translations");
@@ -41,7 +48,13 @@ void loadPentobiTranslator(QTranslator& translator)
     QString locale = QLocale::system().name();
     QString file = "pentobi_" + locale;
     QString appDir = QCoreApplication::applicationDirPath();
+    // Search for translation file in the following directories in this order
+    // 1. AppDir (Windows installation or CMake build on Unix or with MinGW)
+    // 2. AppDir/../libpentobi_gui (CMake build with MSVC)
+    // 3. DATADIR/pentobi/translations (Unix installation)
     if (translator.load(file, appDir))
+        return;
+    if (translator.load(file, appDir + "/.."))
         return;
 #ifdef DATADIR
     translator.load(file, QString(DATADIR) + "/pentobi/translations");
