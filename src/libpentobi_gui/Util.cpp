@@ -22,7 +22,7 @@ const QColor green(0, 192, 0);
 
 const QColor red(230, 62, 44);
 
-const QColor yellow(245, 215, 37);
+const QColor yellow(235, 205, 35);
 
 const QColor gray(200, 191, 197);
 
@@ -137,7 +137,7 @@ void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
 
 void Util::paintEmptySquare(QPainter& painter, int x, int y, int size)
 {
-    paintSquare(painter, x, y, size, gray, gray.darker(120), gray.lighter(110));
+    paintSquare(painter, x, y, size, gray, gray.darker(130), gray.lighter(115));
 }
 
 void Util::paintEmptySquareStartingPoint(QPainter& painter,
