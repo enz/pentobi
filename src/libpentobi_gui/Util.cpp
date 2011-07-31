@@ -137,7 +137,7 @@ void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
 
 void Util::paintEmptySquare(QPainter& painter, int x, int y, int size)
 {
-    paintSquare(painter, x, y, size, gray, gray.darker(110), gray.lighter(110));
+    paintSquare(painter, x, y, size, gray, gray.darker(120), gray.lighter(110));
 }
 
 void Util::paintEmptySquareStartingPoint(QPainter& painter,
