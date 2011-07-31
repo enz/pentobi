@@ -27,6 +27,10 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     QAction* actionHome = new QAction(tr("Home"), this);
     actionHome->setIcon(QIcon(":/go-home.png"));
     connect(actionHome, SIGNAL(triggered()), browser, SLOT(home()));
+    QAction* actionClose = new QAction("", this);
+    actionClose->setShortcut(QKeySequence::Close);
+    connect(actionClose, SIGNAL(triggered()), this, SLOT(hide()));
+    addAction(actionClose);
     QToolBar* toolBar = new QToolBar(this);
     toolBar->setMovable(false);
     toolBar->addAction(actionBack);
