@@ -52,10 +52,10 @@ void paintSquare(QPainter& painter, int x, int y, int size,
         int border;
         if (size < 5)
             border = 0;
-        else if (size < 12)
+        else if (size < 40)
             border = 1;
         else
-            border = size / 12;
+            border = size / 20;
         const QPoint upLeftPolygon[6] =
             {
                 QPoint(0, 0),
