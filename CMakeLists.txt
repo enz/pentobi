@@ -40,6 +40,12 @@ if(MSVC)
   add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE)
 endif()
 
+if(MINGW AND Boost_USE_STATIC_LIBS)
+  # Boost 1.45 static libs generate link errors with MinGW if
+  # BOOST_THREAD_USE_LIB is not explicetly defined.
+  add_definitions(-DBOOST_THREAD_USE_LIB)
+endif()
+
 include(CheckIncludeFiles)
 check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
