@@ -2,10 +2,6 @@ Current development version
 ===========================
 
 * German translation
-* Support for the CMake variable CMAKE_INSTALL_SYSCONFDIR to allow installation
-  in /usr and /etc. Previously CMAKE_INSTALL_PREFIX/etc was hard-coded. This
-  variable is also defined by the CMake module GNUInstallDirs but Pentobi does
-  not use GNUInstallDirs yet because it would require CMake>=2.8.5.
 
 
 Version 0.1 (15 Jul 2011)
