@@ -12,8 +12,8 @@ namespace search_util {
 
 //-----------------------------------------------------------------------------
 
-template<class S, class M, class E, unsigned int P>
-vector<M> find_principal_variation(const Search<S, M, E, P>& search)
+template<class S, class M, unsigned int P>
+vector<M> find_principal_variation(const Search<S, M, P>& search)
 {
     vector<M> result;
     const Node<M>* node = &search.get_tree().get_root();

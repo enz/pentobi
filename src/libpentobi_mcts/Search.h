@@ -6,19 +6,17 @@
 #define LIBPENTOBI_MCTS_SEARCH_H
 
 #include "State.h"
-#include "libboardgame_mcts/UctBiasTerm.h"
 #include "libboardgame_mcts/Search.h"
 
 namespace libpentobi_mcts {
 
-using libboardgame_mcts::UctBiasTerm;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
 
 //-----------------------------------------------------------------------------
 
 class Search
-    : public libboardgame_mcts::Search<State, Move, UctBiasTerm<Move>, 4>
+    : public libboardgame_mcts::Search<State, Move, 4>
 {
 public:
     Search(const Board& bd);
@@ -52,8 +50,7 @@ public:
     Color get_to_play() const;
 
 private:
-    typedef libboardgame_mcts::Search<State, Move, UctBiasTerm<Move>, 4>
-        ParentClass;
+    typedef libboardgame_mcts::Search<State, Move, 4> ParentClass;
 
     Color m_to_play;
 

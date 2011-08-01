@@ -23,7 +23,7 @@ Search::Search(const Board& bd)
     set_rave(true);
     set_unexplored_value(0.5);
     set_expand_threshold(1);
-    get_exploration_term().set_bias_term_constant(ValueType(0.1));
+    set_bias_term_constant(0.1f);
 }
 
 Search::~Search() throw()

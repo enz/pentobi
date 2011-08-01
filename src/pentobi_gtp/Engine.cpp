@@ -17,7 +17,6 @@ namespace pentobi_gtp {
 using boost::format;
 using libboardgame_gtp::Failure;
 using libboardgame_mcts::ChildIterator;
-using libboardgame_mcts::UctBiasTerm;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::log;
 using libpentobi_base::Board;
@@ -93,11 +92,10 @@ void Engine::cmd_param(const Arguments& args, Response& response)
 {
     Player& p = get_mcts_player();
     Search& s = get_search();
-    UctBiasTerm<Move>& b = s.get_exploration_term();
     if (args.get_size() == 0)
         response
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
-            << "bias_term_constant " << b.get_bias_term_constant() << '\n'
+            << "bias_term_constant " << s.get_bias_term_constant() << '\n'
             << "detect_symmetry " << s.get_detect_symmetry() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
@@ -111,7 +109,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         if (name == "avoid_symmetric_draw")
             s.set_avoid_symmetric_draw(args.get<bool>(1));
         else if (name == "bias_term_constant")
-            b.set_bias_term_constant(args.get<ValueType>(1));
+            s.set_bias_term_constant(args.get<ValueType>(1));
         else if (name == "detect_symmetry")
             s.set_detect_symmetry(args.get<bool>(1));
         else if (name == "expand_threshold")
