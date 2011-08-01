@@ -63,6 +63,8 @@ public slots:
 
     void help();
 
+    void humanPlay(Color c, Move mv);
+
     void interrupt();
 
     void makeMainVariation();
@@ -80,8 +82,6 @@ public slots:
     void open(const QString& file, bool isTemporary = false);
 
     void play();
-
-    void play(Color c, Move mv);
 
     void previousPiece();
 
@@ -386,6 +386,8 @@ private:
     void initGameVariantActions();
 
     void initPieceSelectors();
+
+    void play(Color c, Move mv);
 
     void setGameVariant(GameVariant gameVariant);
 

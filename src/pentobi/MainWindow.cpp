@@ -5,7 +5,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
- 
+
 #include "MainWindow.h"
 
 #include <algorithm>
@@ -90,7 +90,7 @@ MainWindow::MainWindow(const QString& initialFile)
     connect(&m_genMoveWatcher, SIGNAL(finished()),
             this, SLOT(genMoveFinished()));
     connect(m_guiBoard, SIGNAL(play(Color, Move)),
-            this, SLOT(play(Color, Move)));
+            this, SLOT(humanPlay(Color, Move)));
     connect(m_actionMoveSelectedPieceLeft, SIGNAL(triggered()),
             m_guiBoard, SLOT(moveSelectedPieceLeft()));
     connect(m_actionMoveSelectedPieceRight, SIGNAL(triggered()),
@@ -1160,6 +1160,17 @@ void MainWindow::help()
     m_help_window->show();
 }
 
+void MainWindow::humanPlay(Color c, Move mv)
+{
+    cancelGenMove();
+    if (m_computerColor[c])
+        // If the user enters a move previously played by the computer (e.g.
+        // after undoing moves) then it is unlikely that the user wants to keep
+        // the computer color settings.
+        m_computerColor.fill(false);
+    play(c, mv);
+}
+
 void MainWindow::initGame()
 {
     m_game->init();
@@ -1349,7 +1360,6 @@ void MainWindow::play()
 
 void MainWindow::play(Color c, Move mv)
 {
-    cancelGenMove();
     const Board& bd = m_game->get_board();
     m_lastMoveByComputer = m_computerColor[c];
     m_game->play(c, mv, false);
