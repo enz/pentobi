@@ -818,7 +818,7 @@ const Node<M>* Search<S, M, P>::select_child(const Node& node)
                       << " rc=" << i->get_rave_count();
             ValueType value;
             ValueType count = i->get_count();
-            if (i->get_count() > 0)
+            if (count > 0)
             {
                 ValueType child_value = i->get_value();
                 if (log_move_selection)
