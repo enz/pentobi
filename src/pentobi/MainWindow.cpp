@@ -958,13 +958,15 @@ void MainWindow::exportAsciiArt()
 
 void MainWindow::exportImage()
 {
-    int size;
+    QSettings settings;
+    int size = settings.value("export_image_size", 320).toInt();
     bool ok;
     size = QInputDialog::getInt(this, tr("Pentobi - Export Image"),
-                                tr("Image size:"), 320, 0, 2147483647, 40,
+                                tr("Image size:"), size, 0, 2147483647, 40,
                                 &ok);
     if (! ok)
         return;
+    settings.setValue("export_image_size", size);
     bool coordinateLabels = m_actionCoordinateLabels->isChecked();
     BoardPainter boardPainter;
     boardPainter.setDrawCoordLabels(coordinateLabels);
