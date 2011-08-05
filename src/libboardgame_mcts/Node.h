@@ -56,6 +56,8 @@ public:
 
     const Node* get_first_child() const;
 
+    const Node* get_child(unsigned int i) const;
+
     bool has_children() const;
 
     unsigned int get_nu_children() const;
@@ -156,6 +158,14 @@ void Node<M>::copy_data_from(const Node& node)
     m_rave_count = node.m_rave_count;
     m_rave_value = node.m_rave_value;
     m_visit_count = node.m_visit_count;
+}
+
+template<typename M>
+inline const Node<M>* Node<M>::get_child(unsigned int i) const
+{
+    LIBBOARDGAME_ASSERT(m_first_child != 0);
+    LIBBOARDGAME_ASSERT(i < m_nu_children);
+    return m_first_child + i;
 }
 
 template<typename M>
