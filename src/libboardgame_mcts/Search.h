@@ -804,77 +804,55 @@ const Node<M>* Search<S, M, P>::select_child(const Node& node)
         bias_term_constant_part =
             m_bias_term_constant_sq * m_fast_log.get_log(float(count));
     }
-    if (m_rave)
+    ValueType beta = sqrt(m_rave_equivalence
+                          / (3 * node.get_count() + m_rave_equivalence));
+    if (log_move_selection)
+        log() << "beta=" << beta << '\n';
+    for (ChildIterator i(node); i; ++i)
     {
-        ValueType beta = sqrt(m_rave_equivalence
-                              / (3 * node.get_count() + m_rave_equivalence));
         if (log_move_selection)
-            log() << "beta=" << beta << '\n';
-        for (ChildIterator i(node); i; ++i)
+            log() << get_move_string(i->get_move())
+                  << " | c=" << i->get_count()
+                  << " rc=" << i->get_rave_count();
+        ValueType value;
+        ValueType count = i->get_count();
+        if (count > 0)
         {
+            ValueType child_value = i->get_value();
             if (log_move_selection)
-                log() << get_move_string(i->get_move())
-                      << " | c=" << i->get_count()
-                      << " rc=" << i->get_rave_count();
-            ValueType value;
-            ValueType count = i->get_count();
-            if (count > 0)
-            {
-                ValueType child_value = i->get_value();
-                if (log_move_selection)
-                    log() << " v=" << child_value;
-                if (i->get_rave_count() > 0)
-                {
-                    if (log_move_selection)
-                        log() << " r=" << i->get_rave_value();
-                    value =
-                        beta * i->get_rave_value() + (1 - beta) * child_value;
-                }
-                else
-                    value = child_value;
-            }
-            else if (i->get_rave_count() > 0)
+                log() << " v=" << child_value;
+            if (m_rave && i->get_rave_count() > 0)
             {
                 if (log_move_selection)
                     log() << " r=" << i->get_rave_value();
-                value = i->get_rave_value();
+                value =
+                    beta * i->get_rave_value() + (1 - beta) * child_value;
             }
             else
-                value = m_unexplored_value;
-            if (m_bias_term_constant != 0)
-            {
-                ValueType exploration_term =
-                    sqrt(bias_term_constant_part / (count + 1));
-                if (log_move_selection)
-                    log() << " e=" << exploration_term;
-                value += exploration_term;
-            }
-            if (log_move_selection)
-                log() << " | " << value << '\n';
-            if (value > best_value)
-            {
-                best_value = value;
-                best_child = &(*i);
-            }
+                value = child_value;
         }
-    }
-    else
-    {
-        for (ChildIterator i(node); i; ++i)
+        else if (m_rave && i->get_rave_count() > 0)
         {
-            ValueType value;
-            ValueType count = i->get_count();
-            if (count > 0)
-                value = i->get_value();
-            else
-                value = m_unexplored_value;
-            if (m_bias_term_constant != 0)
-                value += sqrt(bias_term_constant_part / (count + 1));
-            if (value > best_value)
-            {
-                best_value = value;
-                best_child = &(*i);
-            }
+            if (log_move_selection)
+                log() << " r=" << i->get_rave_value();
+            value = i->get_rave_value();
+        }
+        else
+            value = m_unexplored_value;
+        if (m_bias_term_constant != 0)
+        {
+            ValueType exploration_term =
+                sqrt(bias_term_constant_part / (count + 1));
+            if (log_move_selection)
+                log() << " e=" << exploration_term;
+            value += exploration_term;
+        }
+        if (log_move_selection)
+            log() << " | " << value << '\n';
+        if (value > best_value)
+        {
+            best_value = value;
+            best_child = &(*i);
         }
     }
     if (log_move_selection)
