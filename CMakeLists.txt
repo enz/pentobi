@@ -6,7 +6,8 @@ option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
 
-if(NOT DEFINED CMAKE_BUILD_TYPE)
+# Use optimized build as default for CMAKE_BUILD_TYPE
+if(NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE Release CACHE STRING
       "Type of build (None Debug Release RelWithDebInfo MinSizeRel)"
       FORCE)
