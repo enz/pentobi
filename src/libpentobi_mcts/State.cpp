@@ -299,8 +299,10 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     BOOST_FOREACH(Move mv, moves)
     {
         const MoveInfo& info = m_bd.get_move_info(mv);
+        // Even game heuristic (0.5) with small piece value bonus to order the
+        // values by piece value
         ValueType value =
-            ValueType(0.5 + 0.1 * m_shared_const.piece_value[info.piece]);
+            ValueType(0.5 + 0.01 * m_shared_const.piece_value[info.piece]);
         ValueType count = 1;
         if (! m_local_moves.empty())
         {
