@@ -18,7 +18,10 @@ using namespace std;
 
 const Node& find_root(const Node& node);
 
-vector<const Node*> get_path_from_root(const Node& node);
+/** Get list of nodes from root to a target node.
+    @param node The target node.
+    @param[out] path The list of nodes. */
+void get_path_from_root(const Node& node, vector<const Node*>& path);
 
 const Node& get_last_node(const Node& node);
 

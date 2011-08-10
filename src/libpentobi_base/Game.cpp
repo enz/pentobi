@@ -15,32 +15,25 @@ namespace libpentobi_base {
 
 using namespace std;
 using libboardgame_sgf::InvalidPropertyValue;
-using libboardgame_sgf::util::get_path_from_root;
 using libboardgame_sgf::util::is_main_variation;
 
 //-----------------------------------------------------------------------------
 
 Game::Game(GameVariant game_variant)
+  : m_updater(m_tree, m_bd)
 {
     init(game_variant);
 }
 
 Game::Game(unique_ptr<Node>& root)
+  : m_updater(m_tree, m_bd)
 {
     init(root);
 }
 
 void Game::goto_node(const Node& node)
 {
-    LIBBOARDGAME_ASSERT(m_tree.contains(node));
-    m_bd.init();
-    vector<const Node*> path = get_path_from_root(node);
-    BOOST_FOREACH(const Node* i, path)
-    {
-        ColorMove mv = m_tree.get_move(*i);
-        if (! mv.is_null())
-            m_bd.play(mv);
-    }
+    m_updater.update(node);
     m_current = &node;
 }
 

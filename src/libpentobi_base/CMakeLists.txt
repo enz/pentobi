@@ -6,6 +6,7 @@ include_directories(
 set(pentobi_base_STAT_SRCS
   Board.cpp
   BoardConst.cpp
+  BoardUpdater.cpp
   BoardUtil.cpp
   Book.cpp
   Color.cpp

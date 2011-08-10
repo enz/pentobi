@@ -78,17 +78,16 @@ const Node& get_last_node(const Node& node)
     return *n;
 }
 
-vector<const Node*> get_path_from_root(const Node& node)
+void get_path_from_root(const Node& node, vector<const Node*>& path)
 {
     const Node* current = &node;
-    vector<const Node*> path(1, current);
+    path.assign(1, current);
     while(current->has_parent())
     {
         current = &current->get_parent();
         path.push_back(current);
     }
     reverse(path.begin(), path.end());
-    return path;
 }
 
 bool is_main_variation(const Node& node)

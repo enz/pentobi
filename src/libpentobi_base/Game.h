@@ -6,6 +6,7 @@
 #define LIBPENTOBI_BASE_GAME_H
 
 #include "Board.h"
+#include "BoardUpdater.h"
 #include "Tree.h"
 
 namespace libpentobi_base {
@@ -117,6 +118,8 @@ private:
     Board m_bd;
 
     Tree m_tree;
+
+    BoardUpdater m_updater;
 };
 
 inline void Game::clear_modified()
