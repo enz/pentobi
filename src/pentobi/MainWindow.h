@@ -153,7 +153,7 @@ private:
     };
 
     /** Possible values for m_level are in 1..maxLevel */
-    static const int maxLevel = 6;
+    static const int maxLevel = 5;
 
     static const int maxRecentFiles = 9;
 
@@ -175,12 +175,22 @@ private:
         Used to ignore finished events from canceled move generations. */
     unsigned int m_genMoveId;
 
+    bool m_useTimeLimit;
+
     /** Current playing level of m_player.
-        Possible values for m_level are in 1..maxLevel.
-        Stored independently of the player and set at the player before each
-        move generation, such that setting a new level does not require to
-        abort a running move generation. */
+        Only use if m_useTimeLimit is false. Possible values for m_level are in
+        1..maxLevel. Only used if m_timeLimit is zero. Stored independently of
+        the player and set at the player before each move generation, such that
+        setting a new level does not require to abort a running move
+        generation. */
     int m_level;
+
+    /** Current time limit for m_player.
+        Only use if m_useTimeLimit is true. This number means the maximum time
+        in seconds per move. Stored independently of the player and set at the
+        player before each move generation, such that setting a new level does
+        not require to abort a running move generation. */
+    int m_timeLimit;
 
     QToolBar* m_toolBar;
 
@@ -326,6 +336,8 @@ private:
 
     QAction* m_actionSelectPieceZ;
 
+    QAction* m_actionTimeLimit;
+
     QAction* m_actionTruncate;
 
     QMenu* m_menuOpenRecent;
@@ -447,6 +459,8 @@ private slots:
     void showStatus(const QString& text, bool temporary = false);
 
     void splitterMoved(int pos, int index);
+
+    void timeLimit(bool checked);
 };
 
 //-----------------------------------------------------------------------------

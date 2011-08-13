@@ -81,25 +81,25 @@ Move Player::genmove(Color c)
             delta = 0.03;
         else if (m_level <= 4)
             delta = 0.02;
-        else if (m_level <= 5)
+        else if (m_level >= 5)
             delta = 0.015;
-        else if (m_level >= 6)
-            delta = 0.01;
         mv = m_book.genmove(m_bd, c, delta, 4 * delta);
         if (! mv.is_null())
             return mv;
     }
-    double max_time = 0;
     WallTime time_source;
-    ValueType max_count;
+    ValueType max_count = 0;
+    double max_time = 0;
     if (m_fixed_simulations > 0)
         max_count = m_fixed_simulations;
+    else if (m_fixed_time > 0)
+        max_time = m_fixed_time;
     else
     {
         if (m_level <= 1)
             max_count = 125;
-        else if (m_level >= 6)
-            max_count = ValueType(125 * pow(2.0, (6 - 1) * 2));
+        else if (m_level >= 5)
+            max_count = ValueType(125 * pow(2.0, (5 - 1) * 2));
         else
             max_count = ValueType(125 * pow(2.0, (m_level - 1) * 2));
         if (use_weight_max_count)
@@ -108,7 +108,10 @@ Move Player::genmove(Color c)
             max_count = ceil(max_count * weight_max_count[player_move]);
         }
     }
-    log() << "MaxCnt " << max_count << '\n';
+    if (max_count != 0)
+        log() << "MaxCnt " << max_count << '\n';
+    else
+        log() << "MaxTime " << max_time << '\n';
     if (! m_search.search(mv, c, max_count, 0, max_time, time_source))
         return Move::null();
     return mv;

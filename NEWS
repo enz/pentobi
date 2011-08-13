@@ -2,6 +2,9 @@ Current development version
 ===========================
 
 * German translation
+* Playing level 6 was removed because it was too slow for normal games in the
+  classic game variants. Instead, a configurable time per move can now be used
+  to enable long thinking times.
 
 
 Version 0.1 (15 Jul 2011)

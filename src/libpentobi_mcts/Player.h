@@ -27,11 +27,18 @@ public:
 
     ValueType get_fixed_simulations() const;
 
+    double get_fixed_time() const;
+
     /** Use a fixed number of simulations in the search.
         If set to a value greater than zero, this value will enforce a
         fixed number of simulations per search independent of the playing
         level. */
     void set_fixed_simulations(ValueType n);
+
+    /** Use a fixed time limit per move.
+        If set to a value greater than zero, this value will set a fixed
+        (maximum) time per search independent of the playing level. */
+    void set_fixed_time(double seconds);
 
     bool get_use_book() const;
 
@@ -56,6 +63,8 @@ protected:
 
     ValueType m_fixed_simulations;
 
+    double m_fixed_time;
+
     Search m_search;
 
     Book m_book;
@@ -64,6 +73,11 @@ protected:
 inline ValueType Player::get_fixed_simulations() const
 {
     return m_fixed_simulations;
+}
+
+inline double Player::get_fixed_time() const
+{
+    return m_fixed_time;
 }
 
 inline int Player::get_level() const
@@ -84,11 +98,20 @@ inline Search& Player::get_search()
 inline void Player::set_fixed_simulations(ValueType n)
 {
     m_fixed_simulations = n;
+    m_fixed_time = 0;
+}
+
+inline void Player::set_fixed_time(double seconds)
+{
+    m_fixed_time = seconds;
+    m_fixed_simulations = 0;
 }
 
 inline void Player::set_level(int level)
 {
     m_level = level;
+    m_fixed_simulations = 0;
+    m_fixed_time = 0;
 }
 
 inline void Player::set_use_book(bool enable)
