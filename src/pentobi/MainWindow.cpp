@@ -1483,7 +1483,12 @@ void MainWindow::save()
     write_tree(out, m_game->get_root(), true, 2);
     if (! out)
         showError(tr("The file could not be saved."),
-                  QString(tr("%1: %2")).arg(m_file).arg(strerror(errno)));
+                  QString(
+                          /*: Error message if file cannot be saved. %1 is
+                            replaced by the file name, %2 by the error message
+                            of the operating system. */
+                          tr("%1: %2")
+                          ).arg(m_file).arg(strerror(errno)));
     else
     {
         showStatus(QString(tr("File saved %1")).arg(m_file), true);
@@ -1980,8 +1985,18 @@ void MainWindow::updateRecentFiles()
         QFileInfo info = QFileInfo(files[i]);
         QString name = info.absoluteFilePath();
         QString text;
-        if (i + 1 <= 9)
-            text = QString(tr("&%1: %2")).arg(i + 1).arg(name);
+#ifdef Q_WS_MAC
+        const bool isMac = true;
+#else
+        const bool isMac = false;
+#endif
+        if (! isMac && i + 1 <= 9)
+            text = QString(
+                           /*: Label in Recent Files menu. The first 10 items
+                             are numbered to provide a mnemonic. %1 is replaced
+                             by the number, %2 by the file name. */
+                           tr("&%1: %2")
+                           ).arg(i + 1).arg(name);
         else
             text = QString("%1").arg(name);
         m_actionRecentFile[i]->setText(text);
