@@ -364,7 +364,7 @@ Search<S, M, P>::Search(const State& state)
       m_tmp_tree(1),
       m_assertion_handler(*this)
 {
-    set_bias_term_constant(0.7);
+    set_bias_term_constant(0.7f);
     set_tree_memory(m_tree_memory);
     for (unsigned int i = 0; i < nu_players; ++i)
         m_first_play[i].fill(numeric_limits<size_t>::max());

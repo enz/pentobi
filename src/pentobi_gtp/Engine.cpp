@@ -151,7 +151,7 @@ Player& Engine::get_mcts_player()
     {
         return dynamic_cast<Player&>(*m_player);
     }
-    catch (const bad_cast& e)
+    catch (const bad_cast&)
     {
         throw Failure("current player is not mcts player");
     }
