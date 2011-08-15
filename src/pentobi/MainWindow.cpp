@@ -829,7 +829,7 @@ void MainWindow::createMenu()
     QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
     menuComputer->addAction(m_actionInterrupt);
-    QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
+    QMenu* menuLevel = menuComputer->addMenu(tr("Playing &Strength"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
     menuLevel->addAction(m_actionTimeLimit);

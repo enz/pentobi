@@ -307,7 +307,7 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="831"/>
-        <source>&amp;Level</source>
+        <source>Playing &amp;Strength</source>
         <translation>Spiels&amp;tärke</translation>
     </message>
     <message>
