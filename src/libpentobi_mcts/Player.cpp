@@ -41,11 +41,20 @@ Player::Player(const Board& bd)
       m_search(bd)
 {
     for (unsigned int i = 0; i < Board::max_player_moves; ++i)
+    {
         // Hand-tuned such that time per move is more evenly spread among all
         // moves than with a fixed number of simulations (because the
         // simulations per second increase rapidly with the move number) but
         // the average time per game is roughly the same
-        weight_max_count[i] = ValueType(0.7 * exp(0.1 * i));
+        weight_max_count_duo[i] = ValueType(0.7 * exp(0.1 * i));
+        weight_max_count_classic[i] = weight_max_count_duo[i];
+        // Less weight for the first 2 moves in classic or classic_2 because
+        // the branching factor is lower there
+        if (i == 0)
+            weight_max_count_classic[i] *= 0.2;
+        else if (i == 1)
+            weight_max_count_classic[i] *= 0.4;
+    }
 }
 
 Player::~Player() throw()
@@ -105,7 +114,12 @@ Move Player::genmove(Color c)
         if (use_weight_max_count)
         {
             unsigned int player_move = m_bd.get_nu_moves() / Color::range;
-            max_count = ceil(max_count * weight_max_count[player_move]);
+            float weight;
+            if (variant == game_variant_duo)
+                weight = weight_max_count_duo[player_move];
+            else
+                weight = weight_max_count_classic[player_move];
+            max_count = ceil(max_count * weight);
         }
     }
     if (max_count != 0)

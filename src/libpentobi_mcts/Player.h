@@ -59,7 +59,9 @@ protected:
 
     int m_level;
 
-    array<float, Board::max_player_moves> weight_max_count;
+    array<float, Board::max_player_moves> weight_max_count_classic;
+
+    array<float, Board::max_player_moves> weight_max_count_duo;
 
     ValueType m_fixed_simulations;
 
