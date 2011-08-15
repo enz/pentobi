@@ -217,6 +217,7 @@ BoardConst::BoardConst(unsigned int sz)
 {
     m_sz = sz;
     m_pieces = create_pieces();
+    init_dist_to_center();
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         create_moves(i);
     if (log_move_creation)
@@ -244,7 +245,9 @@ void BoardConst::create_move(unsigned int piece,
     info.points = points;
     info.center = Point(x + center.x, y + center.y);
     set_adj_and_corner_points(info);
-    set_dist_to_center(info);
+    info.dist_to_center = numeric_limits<unsigned int>::max();
+    BOOST_FOREACH(Point p, info.points)
+        info.dist_to_center = min(m_dist_to_center[p], info.dist_to_center);
     m_move_info.push_back(info);
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
     if (log_move_creation)
@@ -336,6 +339,24 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     return false;
 }
 
+void BoardConst::init_dist_to_center()
+{
+    LIBBOARDGAME_ASSERT(m_sz % 2 == 0);
+    unsigned int center1 = m_sz / 2 - 1;
+    unsigned int center2 = center1 + 1;
+    m_dist_to_center.init(m_sz);
+    for (unsigned int x = 0; x < m_sz; ++x)
+        for (unsigned int y = 0; y < m_sz; ++y)
+        {
+            unsigned int dist_x = (x <= center1 ? center1 - x : x - center2);
+            unsigned int dist_y = (y <= center1 ? center1 - y : y - center2);
+            m_dist_to_center[Point(x, y)] =
+                (unsigned int)(sqrt(dist_x * dist_x + dist_y * dist_y));
+        }
+    if (log_move_creation)
+        log() << "Dist to center:\n" << m_dist_to_center;
+}
+
 void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
@@ -393,23 +414,6 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
                 if (! is_forbidden)
                     info.corner_points.push_back(p_diag);
             })
-}
-
-void BoardConst::set_dist_to_center(MoveInfo& info)
-{
-    LIBBOARDGAME_ASSERT(m_sz % 2 == 0);
-    unsigned int center1 = m_sz / 2 - 1;
-    unsigned int center2 = center1 + 1;
-    info.dist_to_center = numeric_limits<unsigned int>::max();
-    BOOST_FOREACH(Point p, info.points)
-    {
-        unsigned int x = p.get_x();
-        unsigned int y = p.get_y();
-        unsigned int dist_x = (x <= center1 ? center1 - x : x - center2);
-        unsigned int dist_y = (y <= center1 ? center1 - y : y - center2);
-        unsigned int dist = dist_x + dist_y;
-        info.dist_to_center = min(dist, info.dist_to_center);
-    }
 }
 
 //-----------------------------------------------------------------------------

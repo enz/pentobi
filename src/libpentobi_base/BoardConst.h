@@ -69,6 +69,8 @@ private:
 
     array<array<Grid<vector<Move>>, nu_pieces>, 4> m_moves_at_diag;
 
+    Grid<unsigned int> m_dist_to_center;
+
     /** Local variable reused for efficiency. */
     Marker m_marker;
 
@@ -76,6 +78,8 @@ private:
                      CoordPoint center, unsigned int x, unsigned int y);
 
     void create_moves(unsigned int piece);
+
+    void init_dist_to_center();
 
     void init_symmetry_info();
 
