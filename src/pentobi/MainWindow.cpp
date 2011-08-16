@@ -42,6 +42,15 @@ using libpentobi_mcts::Search;
 
 namespace {
 
+QToolButton* createOBoxToolButton(QAction* action)
+{
+    QToolButton* button = new QToolButton();
+    button->setDefaultAction(action);
+    button->setAutoRaise(true);
+    button->setFocusPolicy(Qt::NoFocus);
+    return button;
+}
+
 QString getAutoSaveFile()
 {
     QString s = QDir::home().path();
@@ -50,13 +59,9 @@ QString getAutoSaveFile()
     return s;
 }
 
-QToolButton* createOBoxToolButton(QAction* action)
+void setIcon(QAction* action, const QString& name)
 {
-    QToolButton* button = new QToolButton();
-    button->setDefaultAction(action);
-    button->setAutoRaise(true);
-    button->setFocusPolicy(Qt::NoFocus);
-    return button;
+    action->setIcon(QIcon(QString(":/pentobi/%1.png").arg(name)));
 }
 
 } // namespace
@@ -146,7 +151,7 @@ MainWindow::MainWindow(const QString& initialFile)
     bool showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
     initGameVariantActions();
-    setWindowIcon(QIcon(":/pentobi.png"));
+    setWindowIcon(QIcon(":/pentobi/pentobi.png"));
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
         resize(750, 510);
     showComment(false);
@@ -478,7 +483,7 @@ void MainWindow::createActions()
     m_actionAbout = new QAction(tr("&About"), this);
     connect(m_actionAbout, SIGNAL(triggered()), this, SLOT(about()));
     m_actionBackward = new QAction(tr("&Backward"), this);
-    m_actionBackward->setIcon(QIcon(":/go-previous.png"));
+    setIcon(m_actionBackward, "go-previous");
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
     m_actionBackToMainVariation = new QAction(tr("Back to &Main Variation"),
@@ -487,11 +492,11 @@ void MainWindow::createActions()
     connect(m_actionBackToMainVariation, SIGNAL(triggered()),
             this, SLOT(backToMainVariation()));
     m_actionBeginning = new QAction(tr("Be&ginning"), this);
-    m_actionBeginning->setIcon(QIcon(":/go-first.png"));
+    setIcon(m_actionBeginning, "go-first");
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
     m_actionClearSelectedPiece = new QAction(tr("Clear Piece"), this);
-    m_actionClearSelectedPiece->setIcon(QIcon(":/piece-clear.png"));
+    setIcon(m_actionClearSelectedPiece, "piece-clear");
     m_actionClearSelectedPiece->setShortcut(QString("0"));
     connect(m_actionClearSelectedPiece, SIGNAL(triggered()),
             this, SLOT(clearSelectedPiece()));
@@ -504,7 +509,7 @@ void MainWindow::createActions()
             this, SLOT(coordinateLabels(bool)));
     m_actionEnd = new QAction(tr("&End"), this);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
-    m_actionEnd->setIcon(QIcon(":/go-last.png"));
+    setIcon(m_actionEnd, "go-last");
     connect(m_actionEnd, SIGNAL(triggered()), this, SLOT(end()));
     m_actionExportAsciiArt = new QAction(tr("&ASCII Art"), this);
     connect(m_actionExportAsciiArt, SIGNAL(triggered()),
@@ -516,14 +521,14 @@ void MainWindow::createActions()
     m_actionFindMove->setShortcut(QString("F2"));
     connect(m_actionFindMove, SIGNAL(triggered()), this, SLOT(findMove()));
     m_actionFlipPieceHorizontally = new QAction(tr("Flip Horizontally"), this);
-    m_actionFlipPieceHorizontally->setIcon(QIcon(":/piece-flip-horizontal.png"));
+    setIcon(m_actionFlipPieceHorizontally, "piece-flip-horizontal");
     connect(m_actionFlipPieceHorizontally, SIGNAL(triggered()),
             this, SLOT(flipPieceHorizontally()));
     m_actionFlipPieceVertically = new QAction(tr("Flip Vertically"), this);
-    m_actionFlipPieceVertically->setIcon(QIcon(":/piece-flip-vertical.png"));
+    setIcon(m_actionFlipPieceVertically, "piece-flip-vertical");
     m_actionForward = new QAction(tr("&Forward"), this);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
-    m_actionForward->setIcon(QIcon(":/go-next.png"));
+    setIcon(m_actionForward, "go-next");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
@@ -592,7 +597,7 @@ void MainWindow::createActions()
     m_actionMoveSelectedPieceDown = new QAction("", this);
     m_actionMoveSelectedPieceDown->setShortcut(QString("Down"));
     m_actionNextPiece = new QAction(tr("Next Piece"), this);
-    m_actionNextPiece->setIcon(QIcon(":/next-piece.png"));
+    setIcon(m_actionNextPiece, "next-piece");
     m_actionNextPiece->setShortcut(QString("+"));
     connect(m_actionNextPiece, SIGNAL(triggered()), this, SLOT(nextPiece()));
     m_actionNextTransform = new QAction("", this);
@@ -601,25 +606,25 @@ void MainWindow::createActions()
             this, SLOT(nextTransform()));
     m_actionNextVariation = new QAction(tr("&Next Variation"), this);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
-    m_actionNextVariation->setIcon(QIcon(":/go-down.png"));
+    setIcon(m_actionNextVariation, "go-down");
     connect(m_actionNextVariation, SIGNAL(triggered()),
             this, SLOT(nextVariation()));
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
-    m_actionNewGame->setIcon(QIcon(":/newgame.png"));
+    setIcon(m_actionNewGame, "newgame");
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
     m_actionOpen = new QAction(tr("&Open..."), this);
     m_actionOpen->setShortcut(QKeySequence::Open);
-    m_actionOpen->setIcon(QIcon(":/document-open.png"));
+    setIcon(m_actionOpen, "document-open");
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     m_actionPlaceSelectedPiece = new QAction("", this);
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
     m_actionPlay = new QAction(tr("&Play"), this);
     m_actionPlay->setShortcut(QString("Ctrl+L"));
-    m_actionPlay->setIcon(QIcon(":/play.png"));
+    setIcon(m_actionPlay, "play");
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
     m_actionPreviousPiece = new QAction(tr("Previous Piece"), this);
-    m_actionPreviousPiece->setIcon(QIcon(":/previous-piece.png"));
+    setIcon(m_actionPreviousPiece, "previous-piece");
     m_actionPreviousPiece->setShortcut(QString("-"));
     connect(m_actionPreviousPiece, SIGNAL(triggered()),
             this, SLOT(previousPiece()));
@@ -629,7 +634,7 @@ void MainWindow::createActions()
             this, SLOT(previousTransform()));
     m_actionPreviousVariation = new QAction(tr("&Previous Variation"), this);
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
-    m_actionPreviousVariation->setIcon(QIcon(":/go-up.png"));
+    setIcon(m_actionPreviousVariation, "go-up");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             this, SLOT(previousVariation()));
     for (int i = 0; i < maxRecentFiles; ++i)
@@ -641,11 +646,11 @@ void MainWindow::createActions()
      }
     m_actionRotatePieceAnticlockwise = new QAction(tr("Rotate Anticlockwise"),
                                                    this);
-    m_actionRotatePieceAnticlockwise->setIcon(QIcon(":/piece-rotate-left.png"));
+    setIcon(m_actionRotatePieceAnticlockwise, "piece-rotate-left");
     connect(m_actionRotatePieceAnticlockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceAnticlockwise()));
     m_actionRotatePieceClockwise = new QAction(tr("Rotate Clockwise"), this);
-    m_actionRotatePieceClockwise->setIcon(QIcon(":/piece-rotate-right.png"));
+    setIcon(m_actionRotatePieceClockwise, "piece-rotate-right");
     connect(m_actionRotatePieceClockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceClockwise()));
     m_actionQuit = new QAction(tr("&Quit"), this);
@@ -653,7 +658,7 @@ void MainWindow::createActions()
     connect(m_actionQuit, SIGNAL(triggered()), this, SLOT(quit()));
     m_actionSave = new QAction(tr("&Save"), this);
     m_actionSave->setShortcut(QKeySequence::Save);
-    m_actionSave->setIcon(QIcon(":/document-save.png"));
+    setIcon(m_actionSave, "document-save");
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
     m_actionSaveAs = new QAction(tr("Save &As..."), this);
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
@@ -1178,7 +1183,7 @@ void MainWindow::help()
         m_help_window->raise();
         return;
     }
-    QString path = HelpWindow::findMainPage(":/manual", "index.html",
+    QString path = HelpWindow::findMainPage(":/pentobi/manual", "index.html",
                                             QLocale::system().name());
     m_help_window = new HelpWindow(this, path);
     m_help_window->show();

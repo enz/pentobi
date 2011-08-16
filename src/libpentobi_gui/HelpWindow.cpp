@@ -10,6 +10,17 @@
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+void setIcon(QAction* action, const QString& name)
+{
+    action->setIcon(QIcon(QString(":/libpentobi_gui/%1.png").arg(name)));
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     : QMainWindow(parent)
 {
@@ -19,13 +30,13 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     browser->setSource(QUrl::fromLocalFile(mainPage));
     QAction* actionBack = new QAction(tr("Back"), this);
-    actionBack->setIcon(QIcon(":/go-previous.png"));
+    setIcon(actionBack, "go-previous");
     connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
     QAction* actionForward = new QAction(tr("Forward"), this);
-    actionForward->setIcon(QIcon(":/go-next.png"));
+    setIcon(actionForward, "go-next");
     connect(actionForward, SIGNAL(triggered()), browser, SLOT(forward()));
     QAction* actionHome = new QAction(tr("Home"), this);
-    actionHome->setIcon(QIcon(":/go-home.png"));
+    setIcon(actionHome, "go-home");
     connect(actionHome, SIGNAL(triggered()), browser, SLOT(home()));
     QAction* actionClose = new QAction("", this);
     actionClose->setShortcut(QKeySequence::Close);

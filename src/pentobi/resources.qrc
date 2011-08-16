@@ -1,6 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-  <qresource>
+  <qresource prefix="/pentobi">
     <file>manual/en/classic_rules.html</file>
     <file>manual/en/duo_rules.html</file>
     <file>manual/en/empty_board_classic.png</file>
