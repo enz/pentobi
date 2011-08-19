@@ -142,8 +142,9 @@ Delete "$SMPROGRAMS\Games\Pentobi.lnk"
 Delete "$DESKTOP\Pentobi.lnk"
 
 DeleteRegKey HKLM "Software\Pentobi"
-DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pentobi"
+DeleteRegKey HKLM "${UNINST_KEY}"
 DeleteRegKey HKCR "Pentobi"
 DeleteRegKey HKCR "Applications\Pentobi.exe"
+DeleteRegKey HKCR "Applications\Pentobi"
 
 SectionEnd
