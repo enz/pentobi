@@ -2,9 +2,9 @@ Current development version
 ===========================
 
 * German translation
-* Playing level 6 was removed because it was too slow for normal games in the
-  classic game variants. Instead, a configurable time per move can now be used
-  to enable long thinking times.
+* Removed playing level 6 because it was too slow for normal games
+* Added custom playing level with configurable time per move
+* Display sum score for both player colors in game variant Classic Two-Player
 
 
 Version 0.1 (15 Jul 2011)

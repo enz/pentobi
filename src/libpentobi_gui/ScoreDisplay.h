@@ -37,6 +37,10 @@ private:
 
     QLabel* m_iconGreen;
 
+    QLabel* m_iconBlueRed;
+
+    QLabel* m_iconYellowGreen;
+
     QLabel* m_textBlue;
 
     QLabel* m_textYellow;
@@ -44,6 +48,10 @@ private:
     QLabel* m_textRed;
 
     QLabel* m_textGreen;
+
+    QLabel* m_textBlueRed;
+
+    QLabel* m_textYellowGreen;
 
     QSpacerItem* m_spacer1;
 
@@ -55,11 +63,23 @@ private:
 
     QSpacerItem* m_spacer5;
 
-    QLabel* createIcon(Color c);
+    QSpacerItem* m_spacer6;
+
+    QSpacerItem* m_spacer7;
+
+    QSpacerItem* m_spacer8;
+
+    void addWidgets(GameVariant variant);
+
+    QLabel* createColorIcon(Color c);
+
+    QLabel* createTwoColorIcon(Color c1, Color c2);
 
     void initGameVariant(GameVariant variant);
 
-    void updateScore(QLabel* label, const Board& bd, Color c);
+    void removeAllWidgets();
+
+    void updateScore(QLabel* label, unsigned int points, unsigned int bonus);
 };
 
 //-----------------------------------------------------------------------------
