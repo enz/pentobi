@@ -171,34 +171,43 @@ MainWindow::MainWindow(const QString& initialFile)
             boardChanged(true);
         }
     }
+    QString version = getVersion();
+    if (! version.contains("UNKNOWN"))
+    {
+        QString lastVersion =
+            settings.value("last_version_used", "").toString();
+        if (lastVersion != version)
+        {
+            settings.setValue("last_version_used", version);
+            show();
+            about();
+        }
+    }
 }
 
 void MainWindow::about()
 {
-    QString version;
-#ifdef VERSION
-    version = VERSION;
-#endif
-    if (version.isEmpty())
-        version = "UNKNOWN";
-    // By convention, the version string of unreleased versions contains the
-    // string UNKNOWN (appended to the last released version). In this case, or
-    // if VERSION was undefined, we append the build date.
-    if (version.contains("UNKNOWN"))
-    {
-        version.append(" (");
-        version.append(__DATE__);
-        version.append(")");
-    }
-#if LIBBOARDGAME_DEBUG
-    version.append(" (dbg)");
-#endif
     QMessageBox::about(this, tr("About Pentobi"),
-          QString(tr("<h2>Pentobi</h2>"
-                     "<p>Computer program that plays the board game Blokus.</p>"
-                     "<p>Version %1</p>"
-                     "<p>Copyright &copy; 2011 Markus Enzenberger</p>"))
-                       .arg(version));
+          QString("<style type=\"text/css\">"
+                  ":link { text-decoration: none; }"
+                  "</style>") +
+          QString(tr(
+              "<h2>Pentobi</h2>"
+              "<p>Version %1</p>"
+              "<p>"
+              "Computer program that plays the board game Blokus."
+              "<br>"
+              "&copy; 2011 Markus Enzenberger"
+              "<br>"
+              "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
+              "</p>"
+              "<p>"
+              "You can support the development of this program by making a "
+              "donation at the Pentobi project website:<br>"
+              "<a href=\"http://sf.net/project/project_donations.php?group_id=566594\">http://sf.net/project/project_donations.php?group_id=566594</a>"
+              "</p>"
+                     ))
+                       .arg(getVersion()));
 }
 
 /** Call to Player::genmove() that runs in a different thread. */
@@ -1157,6 +1166,29 @@ void MainWindow::genMoveFinished()
 QString MainWindow::getFilter() const
 {
     return tr("Blokus games (*.blksgf);;All files (*.*)");
+}
+
+QString MainWindow::getVersion() const
+{
+    QString version;
+#ifdef VERSION
+    version = VERSION;
+#endif
+    if (version.isEmpty())
+        version = "UNKNOWN";
+    // By convention, the version string of unreleased versions contains the
+    // string UNKNOWN (appended to the last released version). In this case, or
+    // if VERSION was undefined, we append the build date.
+    if (version.contains("UNKNOWN"))
+    {
+        version.append(" (");
+        version.append(__DATE__);
+        version.append(")");
+    }
+#if LIBBOARDGAME_DEBUG
+    version.append(" (dbg)");
+#endif
+    return version;
 }
 
 void MainWindow::gotoNode(const Node& node)

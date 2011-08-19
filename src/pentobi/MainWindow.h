@@ -391,6 +391,8 @@ private:
 
     QString getFilter() const;
 
+    QString getVersion() const;
+
     void gotoNode(const Node& node);
 
     void initGame();
