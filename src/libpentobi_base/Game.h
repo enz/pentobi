@@ -112,6 +112,9 @@ public:
 
     bool get_modified() const;
 
+    /** Set the AP property at the root node. */
+    void set_application(const string& name, const string& version = "");
+
 private:
     const Node* m_current;
 
@@ -220,6 +223,11 @@ inline void Game::play(Color c, Move mv, bool always_create_new_node)
 inline void Game::remove_move_annotation()
 {
     m_tree.remove_move_annotation(*m_current);
+}
+
+inline void Game::set_application(const string& name, const string& version)
+{
+    m_tree.set_application(name, version);
 }
 
 inline void Game::set_bad_move(double value)

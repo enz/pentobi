@@ -111,6 +111,14 @@ bool Tree::remove_property(const Node& node, const string& id)
     return prop_existed;
 }
 
+void Tree::set_application(const string& name, const string& version)
+{
+    if (version.empty())
+        set_property(get_root(), "AP", name);
+    else
+        set_property(get_root(), "AP", name + ":" + version);
+}
+
 void Tree::set_property(const Node& node, const string& id,
                                const char* value)
 {

@@ -1236,6 +1236,7 @@ void MainWindow::initGame()
 {
     m_game->init();
     m_game->set_charset("UTF-8");
+    m_game->set_application("Pentobi", getVersion().toStdString());
     m_game->clear_modified();
     m_computerColor.fill(false);
     QSettings settings;

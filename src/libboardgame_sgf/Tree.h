@@ -108,6 +108,8 @@ public:
 
     void set_charset(const string& charset);
 
+    void set_application(const string& name, const string& version = "");
+
 private:
     bool m_modified;
 
