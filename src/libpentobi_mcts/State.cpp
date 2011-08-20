@@ -200,11 +200,23 @@ array<ValueType, 4> State::evaluate_terminal()
 
 bool State::gen_and_play_playout_move()
 {
-    if (m_nu_passes == m_bd.get_nu_colors())
+    unsigned int nu_colors = m_bd.get_nu_colors();
+    if (m_nu_passes == nu_colors)
         return false;
     Color to_play = m_bd.get_to_play();
-    if (m_moves[to_play].empty()
-        && m_bd.get_game_variant() == game_variant_duo)
+    GameVariant variant = m_bd.get_game_variant();
+    Color to_play_second_color = to_play;
+    if (variant == game_variant_classic_2)
+        to_play_second_color = to_play.get_next(nu_colors).get_next(nu_colors);
+    m_has_moves[to_play] = ! m_moves[to_play].empty();
+
+    // Don't care about the exact score of a playout if we are still early in
+    // the game and we know that the playout is a loss because the player has
+    // no more moves and the score is already negative.
+    if (! m_has_moves[to_play] && m_nu_moves_initial < 10 * nu_colors
+        && (variant == game_variant_duo
+            || (variant == game_variant_classic_2
+                && ! m_has_moves[to_play_second_color])))
     {
         double game_result;
         if (m_bd.get_score(to_play, game_result) < 0)
@@ -214,6 +226,7 @@ bool State::gen_and_play_playout_move()
             return false;
         }
     }
+
     if (m_check_symmetric_draw)
         if (! m_is_symmetry_broken)
         {
@@ -535,7 +548,10 @@ void State::start_simulation(size_t n)
     m_bd.set_to_play(m_shared_const.to_play);
     m_extended_update = false;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+    {
+        m_has_moves[*i] = true;
         m_is_move_list_initialized[*i] = false;
+    }
     m_nu_passes = 0;
     // TODO: m_nu_passes should be initialized without asuming alternating
     // colors in the board's move history

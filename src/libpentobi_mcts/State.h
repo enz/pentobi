@@ -141,6 +141,8 @@ private:
 
     ColorMap<bool> m_is_move_list_initialized;
 
+    ColorMap<bool> m_has_moves;
+
     /** Moves that are a local response to the last move.
         These moves occupy at least one of the corner points of the last
         piece played. */
