@@ -153,11 +153,11 @@ void ScoreDisplay::addWidgets(GameVariant variant)
         m_layout->addWidget(m_iconBlue);
         m_layout->addWidget(m_textBlue);
         m_layout->addSpacerItem(m_spacer5);
-        m_layout->addWidget(m_iconYellow);
-        m_layout->addWidget(m_textYellow);
-        m_layout->addSpacerItem(m_spacer6);
         m_layout->addWidget(m_iconRed);
         m_layout->addWidget(m_textRed);
+        m_layout->addSpacerItem(m_spacer6);
+        m_layout->addWidget(m_iconYellow);
+        m_layout->addWidget(m_textYellow);
         m_layout->addSpacerItem(m_spacer7);
         m_layout->addWidget(m_iconGreen);
         m_layout->addWidget(m_textGreen);
