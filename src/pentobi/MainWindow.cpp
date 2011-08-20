@@ -204,7 +204,7 @@ void MainWindow::about()
               "<p>"
               "You can support the development of this program by making a "
               "donation at the Pentobi project website:<br>"
-              "<a href=\"http://sf.net/project/project_donations.php?group_id=566594\">http://sf.net/project/project_donations.php?group_id=566594</a>"
+              "<a href=\"http://sf.net/donate/index.php?group_id=566594\">http://sf.net/donate/index.php?group_id=566594</a>"
               "</p>"
                      ))
                        .arg(getVersion()));
