@@ -218,6 +218,8 @@ private:
 
     QAction* m_actionBackToMainVariation;
 
+    QAction* m_actionBadMove;
+
     QAction* m_actionBeginning;
 
     QAction* m_actionClearSelectedPiece;
@@ -225,6 +227,8 @@ private:
     QAction* m_actionComputerColor;
 
     QAction* m_actionCoordinateLabels;
+
+    QAction* m_actionDoubtfulMove;
 
     QAction* m_actionEnd;
 
@@ -248,7 +252,11 @@ private:
 
     QAction* m_actionGameVariantDuo;
 
+    QAction* m_actionGoodMove;
+
     QAction* m_actionHelp;
+
+    QAction* m_actionInterestingMove;
 
     QAction* m_actionInterrupt;
 
@@ -277,6 +285,8 @@ private:
     QAction* m_actionNextVariation;
 
     QAction* m_actionNewGame;
+
+    QAction* m_actionNoMoveAnnotation;
 
     QAction* m_actionOpen;
 
@@ -339,6 +349,12 @@ private:
     QAction* m_actionTimeLimit;
 
     QAction* m_actionTruncate;
+
+    QAction* m_actionVeryGoodMove;
+
+    QAction* m_actionVeryBadMove;
+
+    QMenu* m_menuMoveAnnotation;
 
     QMenu* m_menuOpenRecent;
 
@@ -424,14 +440,20 @@ private:
 
     void updateComment();
 
+    void updateMoveAnnotationActions();
+
     void updateRecentFiles();
 
     void updateFlipActions();
 
 private slots:
+    void badMove(bool checked);
+
     void commentChanged();
 
     void coordinateLabels(bool checked);
+
+    void doubtfulMove(bool checked);
 
     void fullscreen(bool checked);
 
@@ -442,6 +464,12 @@ private slots:
     void gameVariantDuo(bool checked);
 
     void genMoveFinished();
+
+    void goodMove(bool checked);
+
+    void interestingMove(bool checked);
+
+    void noMoveAnnotation(bool checked);
 
     void openRecentFile();
 
@@ -463,6 +491,10 @@ private slots:
     void splitterMoved(int pos, int index);
 
     void timeLimit(bool checked);
+
+    void veryBadMove(bool checked);
+
+    void veryGoodMove(bool checked);
 };
 
 //-----------------------------------------------------------------------------

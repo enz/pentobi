@@ -220,6 +220,14 @@ MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId)
     return result;
 }
 
+void MainWindow::badMove(bool checked)
+{
+    if (! checked)
+        return;
+    m_game->set_bad_move();
+    boardChanged(false);
+}
+
 void MainWindow::backward()
 {
     const Node& node = m_game->get_current();
@@ -281,6 +289,7 @@ void MainWindow::boardChanged(bool currentNodeChanged)
             m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
         }
         updateComment();
+        updateMoveAnnotationActions();
     }
     const Node& current = m_game->get_current();
     bool isMain = is_main_variation(current);
@@ -489,86 +498,133 @@ void MainWindow::createActions()
     QActionGroup* groupGameVariant = new QActionGroup(this);
     QActionGroup* groupLevel = new QActionGroup(this);
     QActionGroup* groupMoveNumbers = new QActionGroup(this);
+    QActionGroup* groupMoveAnnotation = new QActionGroup(this);
+
     m_actionAbout = new QAction(tr("&About"), this);
     connect(m_actionAbout, SIGNAL(triggered()), this, SLOT(about()));
+
     m_actionBackward = new QAction(tr("&Backward"), this);
     setIcon(m_actionBackward, "go-previous");
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
+
     m_actionBackToMainVariation = new QAction(tr("Back to &Main Variation"),
                                               this);
     m_actionBackToMainVariation->setShortcut(QString("Ctrl+M"));
     connect(m_actionBackToMainVariation, SIGNAL(triggered()),
             this, SLOT(backToMainVariation()));
+
+    m_actionBadMove = new QAction(tr("&Bad"), this);
+    m_actionBadMove->setActionGroup(groupMoveAnnotation);
+    m_actionBadMove->setCheckable(true);
+    connect(m_actionBadMove, SIGNAL(triggered(bool)),
+            this, SLOT(badMove(bool)));
+
     m_actionBeginning = new QAction(tr("Be&ginning"), this);
     setIcon(m_actionBeginning, "go-first");
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
+
     m_actionClearSelectedPiece = new QAction(tr("Clear Piece"), this);
     setIcon(m_actionClearSelectedPiece, "piece-clear");
     m_actionClearSelectedPiece->setShortcut(QString("0"));
     connect(m_actionClearSelectedPiece, SIGNAL(triggered()),
             this, SLOT(clearSelectedPiece()));
+
     m_actionComputerColor = new QAction(tr("&Computer Color"), this);
     connect(m_actionComputerColor, SIGNAL(triggered()),
             this, SLOT(computerColor()));
+
     m_actionCoordinateLabels = new QAction(tr("&Coordinate Labels"), this);
     m_actionCoordinateLabels->setCheckable(true);
     connect(m_actionCoordinateLabels, SIGNAL(triggered(bool)),
             this, SLOT(coordinateLabels(bool)));
+
+    m_actionDoubtfulMove = new QAction(tr("&Doubtful"), this);
+    m_actionDoubtfulMove->setActionGroup(groupMoveAnnotation);
+    m_actionDoubtfulMove->setCheckable(true);
+    connect(m_actionDoubtfulMove, SIGNAL(triggered(bool)),
+            this, SLOT(doubtfulMove(bool)));
+
     m_actionEnd = new QAction(tr("&End"), this);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
     setIcon(m_actionEnd, "go-last");
     connect(m_actionEnd, SIGNAL(triggered()), this, SLOT(end()));
+
     m_actionExportAsciiArt = new QAction(tr("&ASCII Art"), this);
     connect(m_actionExportAsciiArt, SIGNAL(triggered()),
             this, SLOT(exportAsciiArt()));
+
     m_actionExportImage = new QAction(tr("&Image"), this);
     connect(m_actionExportImage, SIGNAL(triggered()),
             this, SLOT(exportImage()));
+
     m_actionFindMove = new QAction(tr("&Find Move"), this);
     m_actionFindMove->setShortcut(QString("F2"));
     connect(m_actionFindMove, SIGNAL(triggered()), this, SLOT(findMove()));
+
     m_actionFlipPieceHorizontally = new QAction(tr("Flip Horizontally"), this);
     setIcon(m_actionFlipPieceHorizontally, "piece-flip-horizontal");
     connect(m_actionFlipPieceHorizontally, SIGNAL(triggered()),
             this, SLOT(flipPieceHorizontally()));
+
     m_actionFlipPieceVertically = new QAction(tr("Flip Vertically"), this);
     setIcon(m_actionFlipPieceVertically, "piece-flip-vertical");
+
     m_actionForward = new QAction(tr("&Forward"), this);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     setIcon(m_actionForward, "go-next");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
+
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
     m_actionFullscreen->setCheckable(true);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
+
     m_actionGameVariantClassic = new QAction(tr("&Classic"), this);
     m_actionGameVariantClassic->setActionGroup(groupGameVariant);
     m_actionGameVariantClassic->setCheckable(true);
     connect(m_actionGameVariantClassic, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantClassic(bool)));
+
     m_actionGameVariantClassic2 = new QAction(tr("Classic &Two-Player"), this);
     m_actionGameVariantClassic2->setActionGroup(groupGameVariant);
     m_actionGameVariantClassic2->setCheckable(true);
     connect(m_actionGameVariantClassic2, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantClassic2(bool)));
+
     m_actionGameVariantDuo = new QAction(tr("&Duo"), this);
     m_actionGameVariantDuo->setActionGroup(groupGameVariant);
     m_actionGameVariantDuo->setCheckable(true);
     connect(m_actionGameVariantDuo, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantDuo(bool)));
+
+    m_actionGoodMove = new QAction(tr("&Good"), this);
+    m_actionGoodMove->setActionGroup(groupMoveAnnotation);
+    m_actionGoodMove->setCheckable(true);
+    connect(m_actionGoodMove, SIGNAL(triggered(bool)),
+            this, SLOT(goodMove(bool)));
+
     m_actionHelp = new QAction(tr("&Contents"), this);
     m_actionHelp->setShortcut(QKeySequence::HelpContents);
     connect(m_actionHelp, SIGNAL(triggered()), this, SLOT(help()));
+
+    m_actionInterestingMove = new QAction(tr("&Interesting"), this);
+    m_actionInterestingMove->setActionGroup(groupMoveAnnotation);
+    m_actionInterestingMove->setCheckable(true);
+    connect(m_actionInterestingMove, SIGNAL(triggered(bool)),
+            this, SLOT(interestingMove(bool)));
+
     m_actionInterrupt = new QAction(tr("&Interrupt"), this);
     m_actionInterrupt->setShortcut(QString("Escape"));
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
+
     m_actionMakeMainVariation = new QAction(tr("&Make Main Variation"), this);
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
             this, SLOT(makeMainVariation()));
+
     QString levelText[maxLevel] =
         {
             tr("Level &1"),
@@ -581,71 +637,95 @@ void MainWindow::createActions()
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
     connect(m_actionFlipPieceVertically, SIGNAL(triggered()),
             this, SLOT(flipPieceVertically()));
+
     m_actionMoveNumbersAll = new QAction(tr("&All"), this);
     m_actionMoveNumbersAll->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersAll->setCheckable(true);
     connect(m_actionMoveNumbersAll, SIGNAL(triggered(bool)),
             this, SLOT(setMoveNumbersAll(bool)));
+
     m_actionMoveNumbersLast = new QAction(tr("&Last"), this);
     m_actionMoveNumbersLast->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersLast->setCheckable(true);
     m_actionMoveNumbersLast->setChecked(true);
     connect(m_actionMoveNumbersLast, SIGNAL(triggered(bool)),
             this, SLOT(setMoveNumbersLast(bool)));
-    m_actionMoveNumbersNone = new QAction(tr("&None"), this);
+
+    m_actionMoveNumbersNone = new QAction(tr("&None", "move numbers"), this);
     m_actionMoveNumbersNone->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersNone->setCheckable(true);
     connect(m_actionMoveNumbersNone, SIGNAL(triggered(bool)),
             this, SLOT(setMoveNumbersNone(bool)));
+
     m_actionMoveSelectedPieceLeft = new QAction("", this);
     m_actionMoveSelectedPieceLeft->setShortcut(QString("Left"));
+
     m_actionMoveSelectedPieceRight = new QAction("", this);
     m_actionMoveSelectedPieceRight->setShortcut(QString("Right"));
+
     m_actionMoveSelectedPieceUp = new QAction("", this);
     m_actionMoveSelectedPieceUp->setShortcut(QString("Up"));
+
     m_actionMoveSelectedPieceDown = new QAction("", this);
     m_actionMoveSelectedPieceDown->setShortcut(QString("Down"));
+
     m_actionNextPiece = new QAction(tr("Next Piece"), this);
     setIcon(m_actionNextPiece, "next-piece");
     m_actionNextPiece->setShortcut(QString("+"));
     connect(m_actionNextPiece, SIGNAL(triggered()), this, SLOT(nextPiece()));
+
     m_actionNextTransform = new QAction("", this);
     m_actionNextTransform->setShortcut(QString("Space"));
     connect(m_actionNextTransform, SIGNAL(triggered()),
             this, SLOT(nextTransform()));
+
     m_actionNextVariation = new QAction(tr("&Next Variation"), this);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
     setIcon(m_actionNextVariation, "go-down");
     connect(m_actionNextVariation, SIGNAL(triggered()),
             this, SLOT(nextVariation()));
+
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
     setIcon(m_actionNewGame, "newgame");
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
+
+    m_actionNoMoveAnnotation =
+        new QAction(tr("&None", "move annotation"), this);
+    m_actionNoMoveAnnotation->setActionGroup(groupMoveAnnotation);
+    m_actionNoMoveAnnotation->setCheckable(true);
+    connect(m_actionNoMoveAnnotation, SIGNAL(triggered(bool)),
+            this, SLOT(noMoveAnnotation(bool)));
+
     m_actionOpen = new QAction(tr("&Open..."), this);
     m_actionOpen->setShortcut(QKeySequence::Open);
     setIcon(m_actionOpen, "document-open");
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     m_actionPlaceSelectedPiece = new QAction("", this);
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
+
     m_actionPlay = new QAction(tr("&Play"), this);
     m_actionPlay->setShortcut(QString("Ctrl+L"));
     setIcon(m_actionPlay, "play");
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
+
     m_actionPreviousPiece = new QAction(tr("Previous Piece"), this);
     setIcon(m_actionPreviousPiece, "previous-piece");
     m_actionPreviousPiece->setShortcut(QString("-"));
     connect(m_actionPreviousPiece, SIGNAL(triggered()),
             this, SLOT(previousPiece()));
+
     m_actionPreviousTransform = new QAction("", this);
     m_actionPreviousTransform->setShortcut(QString("Shift+Space"));
     connect(m_actionPreviousTransform, SIGNAL(triggered()),
             this, SLOT(previousTransform()));
+
     m_actionPreviousVariation = new QAction(tr("&Previous Variation"), this);
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
     setIcon(m_actionPreviousVariation, "go-up");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             this, SLOT(previousVariation()));
+
     for (int i = 0; i < maxRecentFiles; ++i)
     {
          m_actionRecentFile[i] = new QAction(this);
@@ -653,89 +733,111 @@ void MainWindow::createActions()
          connect(m_actionRecentFile[i], SIGNAL(triggered()),
                  this, SLOT(openRecentFile()));
      }
+
     m_actionRotatePieceAnticlockwise = new QAction(tr("Rotate Anticlockwise"),
                                                    this);
     setIcon(m_actionRotatePieceAnticlockwise, "piece-rotate-left");
     connect(m_actionRotatePieceAnticlockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceAnticlockwise()));
+
     m_actionRotatePieceClockwise = new QAction(tr("Rotate Clockwise"), this);
     setIcon(m_actionRotatePieceClockwise, "piece-rotate-right");
     connect(m_actionRotatePieceClockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceClockwise()));
+
     m_actionQuit = new QAction(tr("&Quit"), this);
     m_actionQuit->setShortcut(QKeySequence::Quit);
     connect(m_actionQuit, SIGNAL(triggered()), this, SLOT(quit()));
+
     m_actionSave = new QAction(tr("&Save"), this);
     m_actionSave->setShortcut(QKeySequence::Save);
     setIcon(m_actionSave, "document-save");
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
+
     m_actionSaveAs = new QAction(tr("Save &As..."), this);
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), this, SLOT(saveAs()));
+
     m_actionSelectPiece1 = new QAction(this);
     m_actionSelectPiece1->setShortcut(QString("1"));
     connect(m_actionSelectPiece1, SIGNAL(triggered()),
             this, SLOT(selectPiece1()));
+
     m_actionSelectPiece2 = new QAction(this);
     m_actionSelectPiece2->setShortcut(QString("2"));
     connect(m_actionSelectPiece2, SIGNAL(triggered()),
             this, SLOT(selectPiece2()));
+
     m_actionSelectPieceF = new QAction(this);
     m_actionSelectPieceF->setShortcut(QString("F"));
     connect(m_actionSelectPieceF, SIGNAL(triggered()),
             this, SLOT(selectPieceF()));
+
     m_actionSelectPieceI = new QAction(this);
     m_actionSelectPieceI->setShortcut(QString("I"));
     connect(m_actionSelectPieceI, SIGNAL(triggered()),
             this, SLOT(selectPieceI()));
+
     m_actionSelectPieceL = new QAction(this);
     m_actionSelectPieceL->setShortcut(QString("L"));
     connect(m_actionSelectPieceL, SIGNAL(triggered()),
             this, SLOT(selectPieceL()));
+
     m_actionSelectPieceN = new QAction(this);
     m_actionSelectPieceN->setShortcut(QString("N"));
     connect(m_actionSelectPieceN, SIGNAL(triggered()),
             this, SLOT(selectPieceN()));
+
     m_actionSelectPieceO = new QAction(this);
     m_actionSelectPieceO->setShortcut(QString("O"));
     connect(m_actionSelectPieceO, SIGNAL(triggered()),
             this, SLOT(selectPieceO()));
+
     m_actionSelectPieceP = new QAction(this);
     m_actionSelectPieceP->setShortcut(QString("P"));
     connect(m_actionSelectPieceP, SIGNAL(triggered()),
             this, SLOT(selectPieceP()));
+
     m_actionSelectPieceT = new QAction(this);
     m_actionSelectPieceT->setShortcut(QString("T"));
     connect(m_actionSelectPieceT, SIGNAL(triggered()),
             this, SLOT(selectPieceT()));
+
     m_actionSelectPieceU = new QAction(this);
     m_actionSelectPieceU->setShortcut(QString("U"));
     connect(m_actionSelectPieceU, SIGNAL(triggered()),
             this, SLOT(selectPieceU()));
+
     m_actionSelectPieceV = new QAction(this);
     m_actionSelectPieceV->setShortcut(QString("V"));
     connect(m_actionSelectPieceV, SIGNAL(triggered()),
             this, SLOT(selectPieceV()));
+
     m_actionSelectPieceW = new QAction(this);
     m_actionSelectPieceW->setShortcut(QString("W"));
     connect(m_actionSelectPieceW, SIGNAL(triggered()),
             this, SLOT(selectPieceW()));
+
     m_actionSelectPieceX = new QAction(this);
     m_actionSelectPieceX->setShortcut(QString("X"));
     connect(m_actionSelectPieceX, SIGNAL(triggered()),
             this, SLOT(selectPieceX()));
+
     m_actionSelectPieceY = new QAction(this);
     m_actionSelectPieceY->setShortcut(QString("Y"));
     connect(m_actionSelectPieceY, SIGNAL(triggered()),
             this, SLOT(selectPieceY()));
+
     m_actionSelectPieceZ = new QAction(this);
     m_actionSelectPieceZ->setShortcut(QString("Z"));
     connect(m_actionSelectPieceZ, SIGNAL(triggered()),
             this, SLOT(selectPieceZ()));
+
     m_actionShowComment = new QAction(tr("&Comment"), this);
     m_actionShowComment->setCheckable(true);
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
             this, SLOT(showComment(bool)));
+
     m_actionTimeLimit = new QAction(tr("&Time Limit..."), this);
     m_actionTimeLimit->setCheckable(true);
     if (m_useTimeLimit)
@@ -743,8 +845,21 @@ void MainWindow::createActions()
     m_actionTimeLimit->setActionGroup(groupLevel);
     connect(m_actionTimeLimit, SIGNAL(triggered(bool)),
             this, SLOT(timeLimit(bool)));
+
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
+
+    m_actionVeryBadMove = new QAction(tr("V&ery Bad"), this);
+    m_actionVeryBadMove->setActionGroup(groupMoveAnnotation);
+    m_actionVeryBadMove->setCheckable(true);
+    connect(m_actionVeryBadMove, SIGNAL(triggered(bool)),
+            this, SLOT(veryBadMove(bool)));
+
+    m_actionVeryGoodMove = new QAction(tr("&Very Good"), this);
+    m_actionVeryGoodMove->setActionGroup(groupMoveAnnotation);
+    m_actionVeryGoodMove->setCheckable(true);
+    connect(m_actionVeryGoodMove, SIGNAL(triggered(bool)),
+            this, SLOT(veryGoodMove(bool)));
 }
 
 QWidget* MainWindow::createCentralWidget()
@@ -827,6 +942,14 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionBackToMainVariation);
 
     QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
+    m_menuMoveAnnotation = menuEdit->addMenu(tr("Move &Annotation"));
+    m_menuMoveAnnotation->addAction(m_actionGoodMove);
+    m_menuMoveAnnotation->addAction(m_actionVeryGoodMove);
+    m_menuMoveAnnotation->addAction(m_actionBadMove);
+    m_menuMoveAnnotation->addAction(m_actionVeryBadMove);
+    m_menuMoveAnnotation->addAction(m_actionInterestingMove);
+    m_menuMoveAnnotation->addAction(m_actionDoubtfulMove);
+    m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionTruncate);
 
@@ -938,16 +1061,12 @@ QWidget* MainWindow::createRightPanel()
     return widget;
 }
 
-void MainWindow::initPieceSelectors()
+void MainWindow::doubtfulMove(bool checked)
 {
-    const Board& bd = m_game->get_board();
-    for (unsigned int i = 0; i < Color::range; ++i)
-    {
-        bool isVisible = (i < bd.get_nu_colors());
-        m_pieceSelector[Color(i)]->setVisible(isVisible);
-        if (isVisible)
-            m_pieceSelector[Color(i)]->init();
-    }
+    if (! checked)
+        return;
+    m_game->set_doubtful_move();
+    boardChanged(false);
 }
 
 void MainWindow::createToolBar()
@@ -1191,6 +1310,14 @@ QString MainWindow::getVersion() const
     return version;
 }
 
+void MainWindow::goodMove(bool checked)
+{
+    if (! checked)
+        return;
+    m_game->set_good_move();
+    boardChanged(false);
+}
+
 void MainWindow::gotoNode(const Node& node)
 {
     cancelGenMove();
@@ -1267,6 +1394,26 @@ void MainWindow::initGameVariantActions()
         m_actionGameVariantDuo->setChecked(true);
 }
 
+void MainWindow::initPieceSelectors()
+{
+    const Board& bd = m_game->get_board();
+    for (unsigned int i = 0; i < Color::range; ++i)
+    {
+        bool isVisible = (i < bd.get_nu_colors());
+        m_pieceSelector[Color(i)]->setVisible(isVisible);
+        if (isVisible)
+            m_pieceSelector[Color(i)]->init();
+    }
+}
+
+void MainWindow::interestingMove(bool checked)
+{
+    if (! checked)
+        return;
+    m_game->set_interesting_move();
+    boardChanged(false);
+}
+
 void MainWindow::interrupt()
 {
     showStatus(tr("Cancelling move generation..."));
@@ -1333,6 +1480,14 @@ void MainWindow::newGame()
     cancelGenMove();
     initGame();
     boardChanged(true);
+}
+
+void MainWindow::noMoveAnnotation(bool checked)
+{
+    if (! checked)
+        return;
+    m_game->remove_move_annotation();
+    boardChanged(false);
 }
 
 void MainWindow::open()
@@ -2048,6 +2203,49 @@ void MainWindow::updateFlipActions()
     m_actionFlipPieceVertically->setEnabled(can_flip_vertically);
 }
 
+void MainWindow::updateMoveAnnotationActions()
+{
+    if (m_game->get_move().is_null())
+    {
+        m_menuMoveAnnotation->setEnabled(false);
+        return;
+    }
+    m_menuMoveAnnotation->setEnabled(true);
+    double goodMove = m_game->get_good_move();
+    if (goodMove > 1)
+    {
+        m_actionVeryGoodMove->setChecked(true);
+        return;
+    }
+    if (goodMove > 0)
+    {
+        m_actionGoodMove->setChecked(true);
+        return;
+    }
+    double badMove = m_game->get_bad_move();
+    if (badMove > 1)
+    {
+        m_actionVeryBadMove->setChecked(true);
+        return;
+    }
+    if (badMove > 0)
+    {
+        m_actionBadMove->setChecked(true);
+        return;
+    }
+    if (m_game->is_interesting_move())
+    {
+        m_actionInterestingMove->setChecked(true);
+        return;
+    }
+    if (m_game->is_doubtful_move())
+    {
+        m_actionDoubtfulMove->setChecked(true);
+        return;
+    }
+    m_actionNoMoveAnnotation->setChecked(true);
+}
+
 void MainWindow::updateRecentFiles()
 {
     QSettings settings;
@@ -2087,6 +2285,22 @@ void MainWindow::updateRecentFiles()
     }
     for (int j = nuRecentFiles; j < maxRecentFiles; ++j)
         m_actionRecentFile[j]->setVisible(false);
+}
+
+void MainWindow::veryBadMove(bool checked)
+{
+    if (! checked)
+        return;
+    m_game->set_bad_move(2);
+    boardChanged(false);
+}
+
+void MainWindow::veryGoodMove(bool checked)
+{
+    if (! checked)
+        return;
+    m_game->set_good_move(2);
+    boardChanged(false);
 }
 
 void MainWindow::wheelEvent(QWheelEvent* event)

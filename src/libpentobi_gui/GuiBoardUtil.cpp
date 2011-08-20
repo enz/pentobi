@@ -18,7 +18,44 @@ using libboardgame_sgf::Node;
 
 namespace {
 
-void setMoveLabel(GuiBoard& guiBoard, const Game& game,
+void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
+{
+    const Tree& tree = game.get_tree();
+    double goodMove = tree.get_good_move(node);
+    if (goodMove > 1)
+    {
+        label.append("!!");
+        return;
+    }
+    if (goodMove > 0)
+    {
+        label.append("!");
+        return;
+    }
+    double badMove = tree.get_bad_move(node);
+    if (badMove > 1)
+    {
+        label.append("??");
+        return;
+    }
+    if (badMove > 0)
+    {
+        label.append("?");
+        return;
+    }
+    if (tree.is_interesting_move(node))
+    {
+        label.append("!?");
+        return;
+    }
+    if (tree.is_doubtful_move(node))
+    {
+        label.append("?!");
+        return;
+    }
+}
+
+void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
                   unsigned int moveNumber, ColorMove mv)
 {
     if (mv.is_null() || mv.move.is_pass())
@@ -27,6 +64,7 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game,
     Point p = bd.get_move_info(mv.move).center;
     QString label;
     label.setNum(moveNumber);
+    appendMoveAnnotation(label, game, node);
     guiBoard.setLabel(p, label);
 }
 
@@ -68,7 +106,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
                     break;
                 if (! mv.move.is_pass())
                 {
-                    setMoveLabel(guiBoard, game, moveNumber, mv);
+                    setMoveLabel(guiBoard, game, *node, moveNumber, mv);
                     if (markLastMove && ! markAllLastBySameColor)
                         break;
                     --moveNumber;
