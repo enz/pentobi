@@ -48,10 +48,13 @@ Player::Player(const Board& bd)
         // the average time per game is roughly the same
         weight_max_count_duo[i] = ValueType(0.7 * exp(0.1 * i));
         weight_max_count_classic[i] = weight_max_count_duo[i];
-        // Less weight for the first 2 moves in classic or classic_2 because
-        // the branching factor is lower there
+        // Less weight for the first move(s) because the branching factor is
+        // lower there (especially in classic/classic_2)
         if (i == 0)
+        {
             weight_max_count_classic[i] *= 0.2;
+            weight_max_count_duo[i] *= 0.7;
+        }
         else if (i == 1)
             weight_max_count_classic[i] *= 0.4;
     }
@@ -93,8 +96,10 @@ Move Player::genmove(Color c)
             delta = 0.03;
         else if (m_level <= 4)
             delta = 0.02;
-        else if (m_level >= 5)
+        else if (m_level <= 5)
             delta = 0.015;
+        else if (m_level >= 6)
+            delta = 0.01;
         mv = m_book.genmove(m_bd, c, delta, 4 * delta);
         if (! mv.is_null())
             return mv;
@@ -110,8 +115,8 @@ Move Player::genmove(Color c)
     {
         if (m_level <= 1)
             max_count = 125;
-        else if (m_level >= 5)
-            max_count = ValueType(125 * pow(2.0, (5 - 1) * 2));
+        else if (m_level >= 6)
+            max_count = ValueType(125 * pow(2.0, (6 - 1) * 2));
         else
             max_count = ValueType(125 * pow(2.0, (m_level - 1) * 2));
         if (use_weight_max_count)

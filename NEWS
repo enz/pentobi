@@ -2,7 +2,6 @@ Current development version
 ===========================
 
 * German translation
-* Removed playing level 6 because it was too slow for normal games
 * Added custom playing level with configurable time per move
 * Display sum score for both player colors in game variant Classic Two-Player
 * Support for move annotation symbols

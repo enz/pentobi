@@ -627,11 +627,12 @@ void MainWindow::createActions()
 
     QString levelText[maxLevel] =
         {
-            tr("Level &1"),
+            tr("Level &1 (fast)"),
             tr("Level &2"),
             tr("Level &3"),
             tr("Level &4"),
-            tr("Level &5")
+            tr("Level &5"),
+            tr("Level &6 (slow)")
         };
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
@@ -838,13 +839,13 @@ void MainWindow::createActions()
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
             this, SLOT(showComment(bool)));
 
-    m_actionTimeLimit = new QAction(tr("&Time Limit..."), this);
-    m_actionTimeLimit->setCheckable(true);
+    m_actionCustomLevel = new QAction(tr("&Custom..."), this);
+    m_actionCustomLevel->setCheckable(true);
     if (m_useTimeLimit)
-        m_actionTimeLimit->setChecked(true);
-    m_actionTimeLimit->setActionGroup(groupLevel);
-    connect(m_actionTimeLimit, SIGNAL(triggered(bool)),
-            this, SLOT(timeLimit(bool)));
+        m_actionCustomLevel->setChecked(true);
+    m_actionCustomLevel->setActionGroup(groupLevel);
+    connect(m_actionCustomLevel, SIGNAL(triggered(bool)),
+            this, SLOT(customLevel(bool)));
 
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
@@ -969,7 +970,7 @@ void MainWindow::createMenu()
     QMenu* menuLevel = menuComputer->addMenu(tr("Playing &Strength"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
-    menuLevel->addAction(m_actionTimeLimit);
+    menuLevel->addAction(m_actionCustomLevel);
 
     QMenu* menuHelp = menuBar()->addMenu(tr("&Help"));
     menuHelp->addAction(m_actionHelp);
@@ -1088,6 +1089,26 @@ void MainWindow::createToolBar()
     addToolBar(m_toolBar);
     m_actionShowToolbar = m_toolBar->toggleViewAction();
     m_actionShowToolbar->setText(tr("&Toolbar"));
+}
+
+void MainWindow::customLevel(bool checked)
+{
+    if (! checked)
+        return;
+    bool ok;
+    m_timeLimit = QInputDialog::getInt(this, tr("Pentobi"),
+                                       tr("Maximum time per move in seconds:"),
+                                       m_timeLimit, 1, 3600, 1, &ok);
+    if (! ok)
+    {
+        if (! m_useTimeLimit)
+            setLevel(m_level);
+        return;
+    }
+    m_useTimeLimit = true;
+    QSettings settings;
+    settings.setValue("time_limit", m_timeLimit);
+    settings.setValue("use_time_limit", m_useTimeLimit);
 }
 
 void MainWindow::end()
@@ -2140,26 +2161,6 @@ void MainWindow::splitterMoved(int pos, int index)
     LIBBOARDGAME_UNUSED(pos);
     LIBBOARDGAME_UNUSED(index);
     m_actionShowComment->setChecked(m_comment->height() > 0);
-}
-
-void MainWindow::timeLimit(bool checked)
-{
-    if (! checked)
-        return;
-    bool ok;
-    m_timeLimit = QInputDialog::getInt(this, tr("Pentobi - Time Limit"),
-                                       tr("Maximum time per move in seconds:"),
-                                       m_timeLimit, 1, 3600, 1, &ok);
-    if (! ok)
-    {
-        if (! m_useTimeLimit)
-            setLevel(m_level);
-        return;
-    }
-    m_useTimeLimit = true;
-    QSettings settings;
-    settings.setValue("time_limit", m_timeLimit);
-    settings.setValue("use_time_limit", m_useTimeLimit);
 }
 
 void MainWindow::truncate()

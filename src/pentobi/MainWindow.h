@@ -153,7 +153,7 @@ private:
     };
 
     /** Possible values for m_level are in 1..maxLevel */
-    static const int maxLevel = 5;
+    static const int maxLevel = 6;
 
     static const int maxRecentFiles = 9;
 
@@ -227,6 +227,8 @@ private:
     QAction* m_actionComputerColor;
 
     QAction* m_actionCoordinateLabels;
+
+    QAction* m_actionCustomLevel;
 
     QAction* m_actionDoubtfulMove;
 
@@ -346,8 +348,6 @@ private:
 
     QAction* m_actionSelectPieceZ;
 
-    QAction* m_actionTimeLimit;
-
     QAction* m_actionTruncate;
 
     QAction* m_actionVeryGoodMove;
@@ -453,6 +453,8 @@ private slots:
 
     void coordinateLabels(bool checked);
 
+    void customLevel(bool checked);
+
     void doubtfulMove(bool checked);
 
     void fullscreen(bool checked);
@@ -489,8 +491,6 @@ private slots:
     void showStatus(const QString& text, bool temporary = false);
 
     void splitterMoved(int pos, int index);
-
-    void timeLimit(bool checked);
 
     void veryBadMove(bool checked);
 
