@@ -20,6 +20,7 @@ using libboardgame_gtp::Response;
 
 //-----------------------------------------------------------------------------
 
+/** GTP Blokus engine. */
 class Engine
     : public libboardgame_base::Engine
 {
@@ -30,7 +31,6 @@ public:
     void cmd_clear_board();
     void cmd_final_score(Response&);
     void cmd_g(Response&);
-    void cmd_game_variant(const Arguments&);
     void cmd_genmove(const Arguments&, Response&);
     void cmd_loadsgf(const Arguments&);
     void cmd_p(const Arguments&);
@@ -38,6 +38,7 @@ public:
     void cmd_point_integers(Response&);
     void cmd_showboard(Response&);
     void cmd_reg_genmove(const Arguments&, Response&);
+    void cmd_set_game(const Arguments&);
     void cmd_undo();
 
     /** Set the player.

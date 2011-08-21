@@ -179,14 +179,19 @@ if black_cmd == "":
     exit("Missing black player")
 if white_cmd == "":
     exit("Missing white player")
-if game_variant != "classic" and game_variant != "classic_2" and \
-        game_variant != "duo":
+if game_variant == "classic":
+    game_name = "Blokus"
+elif game_variant == "classic_2":
+    game_name = "Blokus Two-Player"
+elif game_variant == "duo":
+    game_name = "Duo"
+else:
     exit("invalid game variant: " + game_variant)
 black = GtpClient(black_cmd, "B")
 white = GtpClient(white_cmd, "W")
 try:
-    black.send("game_variant " + game_variant)
-    white.send("game_variant " + game_variant)
+    black.send("set_game " + game_name)
+    white.send("set_game " + game_name)
 except:
     # If the engine doesn't understand game_variant, we assume it is configured
     # correctly

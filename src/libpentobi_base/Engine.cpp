@@ -8,6 +8,7 @@
 
 #include "Engine.h"
 
+#include <boost/algorithm/string/case_conv.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/format.hpp>
 #include "libboardgame_sgf/TreeReader.h"
@@ -17,6 +18,7 @@
 
 namespace libpentobi_base {
 
+using boost::algorithm::to_lower;
 using boost::filesystem::ifstream;
 using boost::filesystem::path;
 using boost::format;
@@ -43,11 +45,11 @@ Engine::Engine(GameVariant game_variant)
     add("all_legal", &Engine::cmd_all_legal);
     add("clear_board", &Engine::cmd_clear_board);
     add("final_score", &Engine::cmd_final_score);
-    add("game_variant", &Engine::cmd_game_variant);
     add("loadsgf", &Engine::cmd_loadsgf);
     add("point_integers", &Engine::cmd_point_integers);
     add("p", &Engine::cmd_p);
     add("play", &Engine::cmd_play);
+    add("set_game", &Engine::cmd_set_game);
     add("showboard", &Engine::cmd_showboard);
     add("undo", &Engine::cmd_undo);
 }
@@ -98,20 +100,6 @@ void Engine::cmd_final_score(Response& response)
 void Engine::cmd_g(Response& response)
 {
     genmove(get_board().get_to_play(), response);
-}
-
-void Engine::cmd_game_variant(const Arguments& args)
-{
-    string arg = args.get();
-    if (arg == "classic")
-        m_game.init(game_variant_classic);
-    else if (arg == "classic_2")
-        m_game.init(game_variant_classic_2);
-    else if (arg == "duo")
-        m_game.init(game_variant_duo);
-    else
-        throw Failure("invalid argument");
-    board_changed();
 }
 
 void Engine::cmd_genmove(const Arguments& args, Response& response)
@@ -170,6 +158,26 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
     if (move.is_null())
         throw Failure("player failed to generate a move");
     response << get_board().to_string(move);
+}
+
+/** Set the game variant.
+    Arguments: Blokus|Blokus Two-Player|Duo<br>
+    This command is similar to the command that is used by Quarry
+    (http://home.gna.org/quarry/) to set a game at GTP engines that could
+    support multiple games. */
+void Engine::cmd_set_game(const Arguments& args)
+{
+    string arg = args.get_line();
+    to_lower(arg);
+    if (arg == "blokus")
+        m_game.init(game_variant_classic);
+    else if (arg == "blokus two-player")
+        m_game.init(game_variant_classic_2);
+    else if (arg == "duo")
+        m_game.init(game_variant_duo);
+    else
+        throw Failure("invalid argument");
+    board_changed();
 }
 
 void Engine::cmd_showboard(Response& response)
