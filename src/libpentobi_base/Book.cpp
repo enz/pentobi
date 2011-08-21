@@ -23,6 +23,11 @@ using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 
+Book::Book()
+    : m_is_computer_generated(true)
+{
+}
+
 void Book::load(istream& in)
 {
     TreeReader reader;
@@ -37,6 +42,14 @@ void Book::load(istream& in)
     unique_ptr<libboardgame_sgf::Node> root
         = reader.get_tree_transfer_ownership();
     m_tree.init(root);
+    bool has_root_annotated_good_children = false;
+    for (ChildIterator i(m_tree.get_root()); i; ++i)
+        if (m_tree.get_good_move(*i) > 0)
+        {
+            has_root_annotated_good_children = true;
+            break;
+        }
+    m_is_computer_generated = ! has_root_annotated_good_children;
 }
 
 Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
@@ -49,7 +62,10 @@ Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
         if (node == 0)
             return Move::null();
     }
-    node = select_child(m_random, bd, c, m_tree, *node, delta, max_delta);
+    if (m_is_computer_generated)
+        node = select_child(m_random, bd, c, m_tree, *node, delta, max_delta);
+    else
+        node = select_annotated_child(m_random, bd, c, m_tree, *node);
     if (node == 0)
         return Move::null();
     return m_tree.get_move(*node).move;
@@ -72,6 +88,47 @@ void Book::get_value_and_count(const Tree& tree, const Node& node,
     in >> value >> count;
     if (! in)
         throw Exception("Missing value and/or count in book");
+}
+
+const Node* Book::select_annotated_child(RandomGenerator& random,
+                                         const Board& bd, Color c,
+                                         const Tree& tree, const Node& node)
+{
+    unsigned int nu_children = node.get_nu_children();
+    if (nu_children == 0)
+        return 0;
+    vector<const Node*> good_moves;
+    for (unsigned int i = 0; i < nu_children; ++i)
+    {
+        const Node& child = node.get_child(i);
+        ColorMove mv = tree.get_move(child);
+        if (mv.is_null())
+        {
+            log() << "WARNING: Book contains nodes without moves\n";
+            continue;
+        }
+        if (mv.color != c)
+        {
+            log() << "WARNING: Book contains non-alternating move sequences\n";
+            continue;
+        }
+        if (! bd.is_legal(mv.color, mv.move))
+        {
+            log() << "WARNING: Book contains illegal move\n";
+            continue;
+        }
+        if (m_tree.get_good_move(child) > 0)
+        {
+            log() << bd.to_string(mv.move) << " !\n";
+            good_moves.push_back(&child);
+        }
+        else
+            log() << bd.to_string(mv.move) << '\n';
+    }
+    if (good_moves.empty())
+        return 0;
+    log() << "Book moves: " << good_moves.size() << '\n';
+    return good_moves[random.generate_small_int(good_moves.size())];
 }
 
 const Node* Book::select_child(RandomGenerator& random, const Board& bd,

@@ -70,10 +70,7 @@ Move Player::genmove(Color c)
         return Move::pass();
     Move mv;
     GameVariant variant = m_bd.get_game_variant();
-    // Don't use classic_2 book for now, contains bad I5 openings, needs to be
-    // regenerated with the current version of Pentobi
-    // if (m_use_book && variant != game_variant_classic)
-    if (m_use_book && variant == game_variant_duo)
+    if (m_use_book && variant != game_variant_classic)
     {
         if (! m_is_book_loaded
             || m_book.get_tree().get_game_variant() != variant)
