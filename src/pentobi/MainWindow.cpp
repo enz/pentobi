@@ -1078,10 +1078,8 @@ void MainWindow::createToolBar()
     m_toolBar->setMovable(false);
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
-    m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionNewGame);
     m_toolBar->addAction(m_actionPlay);
-    m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward);
     m_toolBar->addAction(m_actionForward);
