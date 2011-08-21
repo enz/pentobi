@@ -12,6 +12,8 @@
 
 #define DATADIR "@CMAKE_INSTALL_PREFIX@/share"
 
+#define ABS_TOP_SRCDIR "@CMAKE_SOURCE_DIR@"
+
 #ifdef _MSC_VER
 // Don't report Visual C++ warning 4355 ('this' : used in base member
 // initializer list) in default warning level 3. Storing a reference to

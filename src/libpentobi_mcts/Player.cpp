@@ -8,11 +8,13 @@
 
 #include "Player.h"
 
+#include <boost/filesystem/fstream.hpp>
 #include "libboardgame_util/WallTime.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
+using boost::filesystem::ifstream;
 using libboardgame_util::log;
 using libboardgame_util::WallTime;
 using libpentobi_base::game_variant_classic;
@@ -25,17 +27,15 @@ namespace {
 
 const bool use_weight_max_count = true;
 
-#include "book_duo.blksgf.h"
-#include "book_classic_2.blksgf.h"
-
 } // namespace
 
 //-----------------------------------------------------------------------------
 
-Player::Player(const Board& bd)
+Player::Player(const Board& bd, const path& application_dir_path)
     : libpentobi_base::Player(bd),
       m_is_book_loaded(false),
       m_use_book(true),
+      m_application_dir_path(application_dir_path),
       m_level(4),
       m_fixed_simulations(0),
       m_search(bd)
@@ -78,31 +78,32 @@ Move Player::genmove(Color c)
         if (! m_is_book_loaded
             || m_book.get_tree().get_game_variant() != variant)
         {
-            const char* data;
+            string filename;
             if (variant == game_variant_duo)
-                data = builtin_book_duo;
+                filename = "book_duo.blksgf";
             else
-                data = builtin_book_classic_2;
-            istringstream in(data);
-            m_book.load(in);
-            m_is_book_loaded = true;
+                filename = "book_classic_2.blksgf";
+            load_book(filename);
         }
-        double delta;
-        if (m_level <= 1)
-            delta = 0.05;
-        else if (m_level <= 2)
-            delta = 0.04;
-        else if (m_level <= 3)
-            delta = 0.03;
-        else if (m_level <= 4)
-            delta = 0.02;
-        else if (m_level <= 5)
-            delta = 0.015;
-        else if (m_level >= 6)
-            delta = 0.01;
-        mv = m_book.genmove(m_bd, c, delta, 4 * delta);
-        if (! mv.is_null())
-            return mv;
+        if (m_is_book_loaded)
+        {
+            double delta;
+            if (m_level <= 1)
+                delta = 0.05;
+            else if (m_level <= 2)
+                delta = 0.04;
+            else if (m_level <= 3)
+                delta = 0.03;
+            else if (m_level <= 4)
+                delta = 0.02;
+            else if (m_level <= 5)
+                delta = 0.015;
+            else if (m_level >= 6)
+                delta = 0.01;
+            mv = m_book.genmove(m_bd, c, delta, 4 * delta);
+            if (! mv.is_null())
+                return mv;
+        }
     }
     WallTime time_source;
     ValueType max_count = 0;
@@ -143,6 +144,39 @@ void Player::load_book(istream& in)
 {
     m_book.load(in);
     m_is_book_loaded = true;
+}
+
+void Player::load_book(const string& filename)
+{
+    // Search the given file at the following locations (in this order):
+    // 1. Directory of the main executable
+    // 2. Subdirectory src/book relative to the source code directory
+    // 3. Data installation directory used on Unix (DATADIR/pentobi)
+    if (try_load_book(m_application_dir_path / filename))
+        return;
+#ifdef ABS_TOP_SRCDIR
+    if (try_load_book(path(ABS_TOP_SRCDIR) / "src/book" / filename))
+        return;
+#endif
+#ifdef DATADIR
+    if (try_load_book(path(DATADIR) / "pentobi" / filename))
+        return;
+#endif
+}
+
+bool Player::try_load_book(const path& filepath)
+{
+    log() << "Trying to load " << filepath << "... ";
+    if (! exists(filepath))
+    {
+        log() << "not found\n";
+        return false;
+    }
+    ifstream in(filepath);
+    m_book.load(in);
+    m_is_book_loaded = true;
+    log() << "ok\n";
+    return true;
 }
 
 //-----------------------------------------------------------------------------

@@ -5,12 +5,14 @@
 #ifndef LIBPENTOBI_MCTS_PLAYER_H
 #define LIBPENTOBI_MCTS_PLAYER_H
 
+#include <boost/filesystem.hpp>
 #include "Search.h"
 #include "libpentobi_base/Book.h"
 #include "libpentobi_base/Player.h"
 
 namespace libpentobi_mcts {
 
+using boost::filesystem::path;
 using libpentobi_base::Book;
 
 //-----------------------------------------------------------------------------
@@ -19,7 +21,11 @@ class Player
     : public libpentobi_base::Player
 {
 public:
-    Player(const Board& bd);
+    /** Constructor.
+        @param bd
+        @param application_dir_path Directory of the main executable (potential
+        location of book files). */
+    Player(const Board& bd, const path& application_dir_path = path());
 
     ~Player() throw();
 
@@ -57,6 +63,8 @@ protected:
 
     bool m_use_book;
 
+    path m_application_dir_path;
+
     int m_level;
 
     array<float, Board::max_player_moves> weight_max_count_classic;
@@ -70,6 +78,10 @@ protected:
     Search m_search;
 
     Book m_book;
+
+    void load_book(const string& filename);
+
+    bool try_load_book(const path& filepath);
 };
 
 inline ValueType Player::get_fixed_simulations() const

@@ -17,6 +17,7 @@
 #include "libpentobi_mcts/BookBuilder.h"
 
 using namespace std;
+using boost::filesystem::path;
 using boost::format;
 using boost::program_options::command_line_parser;
 using boost::program_options::options_description;
@@ -40,8 +41,23 @@ using libpentobi_mcts::prune_book;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+path get_application_dir_path(int argc, char** argv)
+{
+    if (argc == 0 || argv == 0 || argv[0] == 0)
+        return path();
+    path application_path(argv[0]);
+    return application_path.branch_path();
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 int main(int argc, char** argv)
 {
+    path application_dir_path = get_application_dir_path(argc, argv);
     try
     {
         uint32_t seed;
@@ -121,7 +137,8 @@ int main(int argc, char** argv)
             return EXIT_SUCCESS;
         }
         bool use_book = (vm.count("nobook") == 0);
-        pentobi_gtp::Engine engine(game_variant, level, use_book);
+        pentobi_gtp::Engine engine(game_variant, level, use_book,
+                                   application_dir_path);
         if (vm.count("showboard"))
             engine.set_show_board(true);
         if (vm.count("book"))

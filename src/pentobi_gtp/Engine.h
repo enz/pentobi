@@ -11,6 +11,7 @@
 namespace pentobi_gtp {
 
 using namespace std;
+using boost::filesystem::path;
 using libboardgame_gtp::Arguments;
 using libboardgame_gtp::Response;
 using libpentobi_base::GameVariant;
@@ -23,7 +24,8 @@ class Engine
     : public libpentobi_base::Engine
 {
 public:
-    Engine(GameVariant game_variant, int level = 5, bool use_book = true);
+    Engine(GameVariant game_variant, int level = 5, bool use_book = true,
+           const path& application_dir_path = path());
 
     ~Engine() throw();
 
@@ -38,7 +40,7 @@ public:
 private:
     unique_ptr<libpentobi_base::Player> m_player;
 
-    void create_player();
+    void create_player(const path& application_dir_path);
 
     Search& get_search();
 };

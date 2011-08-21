@@ -19,6 +19,7 @@
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
+using boost::filesystem::path;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
@@ -92,7 +93,8 @@ MainWindow::MainWindow(const QString& initialFile)
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
     initGame();
-    m_player.reset(new Player(m_game->get_board()));
+    path appDirPath(QCoreApplication::applicationDirPath().toStdString());
+    m_player.reset(new Player(m_game->get_board(), appDirPath));
     createActions();
     createToolBar();
     setCentralWidget(createCentralWidget());
