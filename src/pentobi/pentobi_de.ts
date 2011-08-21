@@ -10,8 +10,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="194"/>
-        <source>&lt;h2&gt;Pentobi&lt;/h2&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Computer program that plays the board game Blokus.&lt;br&gt;&amp;copy; 2011 Markus Enzenberger&lt;br&gt;&lt;a href=&quot;http://pentobi.sf.net&quot;&gt;http://pentobi.sf.net&lt;/a&gt;&lt;/p&gt;&lt;p&gt;You can support the development of this program by making a donation.&lt;br&gt;&lt;a href=&quot;http://sf.net/projects/pentobi/donate&quot;&gt;http://sf.net/projects/pentobi/donate&lt;/a&gt;&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Pentobi&lt;/h2&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Computerprogramm, das das Brettspiel Blokus spielt.&lt;br&gt;&amp;copy; 2011 Markus Enzenberger&lt;br&gt;&lt;a href=&quot;http://pentobi.sf.net&quot;&gt;http://pentobi.sf.net&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Sie können die Entwicklung dieses Programms durch eine Spende unterstützen.&lt;br&gt;&lt;a href=&quot;http://sf.net/projects/pentobi/donate&quot;&gt;http://sf.net/projects/pentobi/donate&lt;/a&gt;&lt;/p&gt;</translation>
+        <source>&lt;h2&gt;Pentobi&lt;/h2&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Computer program that plays the board game Blokus.&lt;br&gt;&amp;copy; 2011 Markus Enzenberger&lt;br&gt;&lt;a href=&quot;http://pentobi.sf.net&quot;&gt;http://pentobi.sf.net&lt;/a&gt;&lt;/p&gt;&lt;p&gt;You can support the development of this program by making a donation:&lt;br&gt;&lt;a href=&quot;http://sf.net/projects/pentobi/donate&quot;&gt;http://sf.net/projects/pentobi/donate&lt;/a&gt;&lt;/p&gt;</source>
+        <translation>&lt;h2&gt;Pentobi&lt;/h2&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Computerprogramm, das das Brettspiel Blokus spielt.&lt;br&gt;&amp;copy; 2011 Markus Enzenberger&lt;br&gt;&lt;a href=&quot;http://pentobi.sf.net&quot;&gt;http://pentobi.sf.net&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Sie können die Entwicklung dieses Programms durch eine Spende unterstützen:&lt;br&gt;&lt;a href=&quot;http://sf.net/projects/pentobi/donate&quot;&gt;http://sf.net/projects/pentobi/donate&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="262"/>
@@ -161,34 +161,33 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="630"/>
-        <source>Level &amp;1 (fast)</source>
-        <oldsource>Level &amp;1</oldsource>
-        <translation>Stufe &amp;1 (schnell)</translation>
+        <source>&amp;1 (fast)</source>
+        <translation>&amp;1 (schnell)</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="631"/>
-        <source>Level &amp;2</source>
-        <translation>Stufe &amp;2</translation>
+        <source>&amp;2</source>
+        <translation>&amp;2</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="632"/>
-        <source>Level &amp;3</source>
-        <translation>Stufe &amp;3</translation>
+        <source>&amp;3</source>
+        <translation>&amp;3</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="633"/>
-        <source>Level &amp;4</source>
-        <translation>Stufe &amp;4</translation>
+        <source>&amp;4</source>
+        <translation>&amp;4</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="634"/>
-        <source>Level &amp;5</source>
-        <translation>Stufe &amp;5</translation>
+        <source>&amp;5</source>
+        <translation>&amp;5</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="635"/>
-        <source>Level &amp;6 (slow)</source>
-        <translation>Stufe &amp;6 (langsam)</translation>
+        <source>&amp;6 (slow)</source>
+        <translation>&amp;6 (langsam)</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="642"/>
@@ -350,8 +349,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="970"/>
-        <source>Playing &amp;Strength</source>
-        <translation>Spiels&amp;tärke</translation>
+        <source>&amp;Level</source>
+        <translation>S&amp;pielstufe</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="975"/>

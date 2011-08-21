@@ -205,7 +205,7 @@ void MainWindow::about()
               "</p>"
               "<p>"
               "You can support the development of this program by making a "
-              "donation.<br>"
+              "donation:<br>"
               "<a href=\"http://sf.net/projects/pentobi/donate\">http://sf.net/projects/pentobi/donate</a>"
               "</p>"
                      ))
@@ -629,12 +629,12 @@ void MainWindow::createActions()
 
     QString levelText[maxLevel] =
         {
-            tr("Level &1 (fast)"),
-            tr("Level &2"),
-            tr("Level &3"),
-            tr("Level &4"),
-            tr("Level &5"),
-            tr("Level &6 (slow)")
+            tr("&1 (fast)"),
+            tr("&2"),
+            tr("&3"),
+            tr("&4"),
+            tr("&5"),
+            tr("&6 (slow)")
         };
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
@@ -969,7 +969,7 @@ void MainWindow::createMenu()
     QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
     menuComputer->addAction(m_actionInterrupt);
-    QMenu* menuLevel = menuComputer->addMenu(tr("Playing &Strength"));
+    QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
     menuLevel->addAction(m_actionCustomLevel);
