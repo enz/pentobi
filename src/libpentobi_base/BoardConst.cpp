@@ -8,6 +8,7 @@
 
 #include "BoardConst.h"
 
+#include <cmath>
 #include "Grid.h"
 #include "SymmetricPoints.h"
 #include "libboardgame_base/Transform.h"
