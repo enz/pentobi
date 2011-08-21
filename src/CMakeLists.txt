@@ -1,3 +1,4 @@
+add_subdirectory(book)
 add_subdirectory(libboardgame_sys)
 add_subdirectory(libboardgame_util)
 add_subdirectory(libboardgame_sgf)
