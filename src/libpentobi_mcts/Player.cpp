@@ -18,6 +18,7 @@ using boost::filesystem::ifstream;
 using libboardgame_util::log;
 using libboardgame_util::WallTime;
 using libpentobi_base::game_variant_classic;
+using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::GameVariant;
 
@@ -70,7 +71,7 @@ Move Player::genmove(Color c)
         return Move::pass();
     Move mv;
     GameVariant variant = m_bd.get_game_variant();
-    if (m_use_book && variant != game_variant_classic)
+    if (m_use_book)
     {
         if (! m_is_book_loaded
             || m_book.get_tree().get_game_variant() != variant)
@@ -78,8 +79,13 @@ Move Player::genmove(Color c)
             string filename;
             if (variant == game_variant_duo)
                 filename = "book_duo.blksgf";
-            else
+            else if (variant == game_variant_classic_2)
                 filename = "book_classic_2.blksgf";
+            else
+            {
+                LIBBOARDGAME_ASSERT(variant == game_variant_classic);
+                filename = "book_classic.blksgf";
+            }
             load_book(filename);
         }
         if (m_is_book_loaded)
