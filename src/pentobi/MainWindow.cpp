@@ -77,6 +77,7 @@ MainWindow::MainWindow(const QString& initialFile)
 {
     QSettings settings;
     m_useTimeLimit = settings.value("use_time_limit", false).toBool();
+    m_useBook = settings.value("use_book", true).toBool();
     m_level = settings.value("level", 4).toInt();
     if (m_level < 1 || m_level > maxLevel)
         m_level = 4;
@@ -852,6 +853,12 @@ void MainWindow::createActions()
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 
+    m_actionUseBook = new QAction(tr("Use &Opening Book"), this);
+    m_actionUseBook->setCheckable(true);
+    m_actionUseBook->setChecked(m_useBook);
+    connect(m_actionUseBook, SIGNAL(triggered(bool)),
+            this, SLOT(useBook(bool)));
+
     m_actionVeryBadMove = new QAction(tr("V&ery Bad"), this);
     m_actionVeryBadMove->setActionGroup(groupMoveAnnotation);
     m_actionVeryBadMove->setCheckable(true);
@@ -969,6 +976,7 @@ void MainWindow::createMenu()
     QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
     menuComputer->addAction(m_actionInterrupt);
+    menuComputer->addAction(m_actionUseBook);
     QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
@@ -1255,6 +1263,7 @@ void MainWindow::genMove()
     m_actionInterrupt->setEnabled(true);
     clearSelectedPiece();
     clear_abort();
+    m_player->set_use_book(m_useBook);
     if (m_useTimeLimit)
         m_player->set_fixed_time(m_timeLimit);
     else
@@ -2286,6 +2295,13 @@ void MainWindow::updateRecentFiles()
     }
     for (int j = nuRecentFiles; j < maxRecentFiles; ++j)
         m_actionRecentFile[j]->setVisible(false);
+}
+
+void MainWindow::useBook(bool checked)
+{
+    m_useBook = checked;
+    QSettings settings;
+    settings.setValue("use_book", m_useBook);
 }
 
 void MainWindow::veryBadMove(bool checked)
