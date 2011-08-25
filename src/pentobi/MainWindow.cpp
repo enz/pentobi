@@ -156,7 +156,7 @@ MainWindow::MainWindow(const QString& initialFile)
     initGameVariantActions();
     setWindowIcon(QIcon(":/pentobi/pentobi.png"));
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
-        resize(750, 510);
+        resize(980, 600);
     showComment(false);
     m_splitter->restoreState(settings.value("splitter_state").toByteArray());
     m_actionShowComment->setChecked(m_comment->height() > 0);
@@ -877,8 +877,8 @@ QWidget* MainWindow::createCentralWidget()
     QWidget* widget = new QWidget();
     QBoxLayout* layout = new QBoxLayout(QBoxLayout::LeftToRight);
     widget->setLayout(layout);
-    layout->addWidget(createLeftPanel(), 55);
-    layout->addWidget(createRightPanel(), 45);
+    layout->addWidget(createLeftPanel(), 5);
+    layout->addWidget(createRightPanel(), 5);
     // The central widget doesn't do anything with the focus right now, but we
     // allow it to receive the focus such that the user can switch away the
     // focus from the comment field and its blinking cursor.

@@ -19,10 +19,36 @@ using libpentobi_base::game_variant_duo;
 
 namespace {
 
-QSpacerItem* createSpacer()
+const int colorDotSize = 16;
+
+const int twoColorDotWidth = 25;
+
+int getTextWidth(QString text)
 {
-    return new QSpacerItem(8, 0, QSizePolicy::MinimumExpanding,
-                           QSizePolicy::Ignored);
+    QFont font = QApplication::font();
+    QFontMetrics metrics(font);
+    return metrics.boundingRect(text).width();
+}
+
+QString getScoreText(unsigned int points, unsigned int bonus)
+{
+    if (bonus == 0)
+    {
+        QString text;
+        text.setNum(points);
+        return text;
+    }
+    return QString("%1 (+%2)").arg(points).arg(bonus);
+}
+
+int getMaxScoreTextWidth()
+{
+    return getTextWidth(getScoreText(188, 20));
+}
+
+int getMaxScoreTextWidth2()
+{
+    return getTextWidth(getScoreText(88, 20));
 }
 
 } // namespace
@@ -32,277 +58,152 @@ QSpacerItem* createSpacer()
 ScoreDisplay::ScoreDisplay(QWidget* parent)
     : QWidget(parent)
 {
-    m_layout = new QBoxLayout(QBoxLayout::LeftToRight);
-    setLayout(m_layout);
-    m_layout->setSpacing(0);
-    m_iconBlue = createColorIcon(Color(0));
-    m_iconYellow = createColorIcon(Color(1));
-    m_iconRed = createColorIcon(Color(2));
-    m_iconGreen = createColorIcon(Color(3));
-    m_iconBlueRed = createTwoColorIcon(Color(0), Color(2));
-    m_iconYellowGreen = createTwoColorIcon(Color(1), Color(3));
-    m_textBlue = new QLabel("0");
-    m_textYellow = new QLabel("0");
-    m_textGreen = new QLabel("0");
-    m_textRed = new QLabel("0");
-    m_textBlueRed = new QLabel("0");
-    m_textYellowGreen = new QLabel("0");
-    m_spacer1 = createSpacer();
-    m_spacer2 = createSpacer();
-    m_spacer3 = createSpacer();
-    m_spacer4 = createSpacer();
-    m_spacer5 = createSpacer();
-    m_spacer6 = createSpacer();
-    m_spacer7 = createSpacer();
-    m_spacer8 = createSpacer();
     m_gameVariant = game_variant_classic;
-    addWidgets(m_gameVariant);
+    m_points.fill(0);
+    m_bonus.fill(0);
+    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
 }
 
-void ScoreDisplay::addWidgets(GameVariant variant)
+void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 {
-    if (variant == game_variant_classic)
-    {
-        m_layout->addSpacerItem(m_spacer1);
-        m_layout->addWidget(m_iconBlue);
-        m_layout->addWidget(m_textBlue);
-        m_layout->addSpacerItem(m_spacer2);
-        m_layout->addWidget(m_iconYellow);
-        m_layout->addWidget(m_textYellow);
-        m_layout->addSpacerItem(m_spacer3);
-        m_layout->addWidget(m_iconBlueRed);
-        m_layout->addWidget(m_textBlueRed);
-        m_layout->addSpacerItem(m_spacer4);
-        m_layout->addWidget(m_iconRed);
-        m_layout->addWidget(m_textRed);
-        m_layout->addSpacerItem(m_spacer5);
-        m_layout->addWidget(m_iconGreen);
-        m_layout->addWidget(m_textGreen);
-        m_layout->addSpacerItem(m_spacer6);
-        m_layout->addWidget(m_iconYellowGreen);
-        m_layout->addWidget(m_textYellowGreen);
-        m_layout->addSpacerItem(m_spacer7);
-        m_layout->addSpacerItem(m_spacer8);
-        m_iconYellow->setVisible(true);
-        m_textYellow->setVisible(true);
-        m_iconRed->setVisible(true);
-        m_textRed->setVisible(true);
-        m_iconBlueRed->setVisible(false);
-        m_textBlueRed->setVisible(false);
-        m_iconYellowGreen->setVisible(false);
-        m_textYellowGreen->setVisible(false);
-        m_spacer2->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer3->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer4->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-        m_spacer5->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer6->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-        m_spacer7->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-    }
-    else if (variant == game_variant_duo)
-    {
-        m_layout->addSpacerItem(m_spacer1);
-        m_layout->addWidget(m_iconBlue);
-        m_layout->addWidget(m_textBlue);
-        m_layout->addSpacerItem(m_spacer2);
-        m_layout->addWidget(m_iconYellow);
-        m_layout->addWidget(m_textYellow);
-        m_layout->addSpacerItem(m_spacer3);
-        m_layout->addWidget(m_iconBlueRed);
-        m_layout->addWidget(m_textBlueRed);
-        m_layout->addSpacerItem(m_spacer4);
-        m_layout->addWidget(m_iconRed);
-        m_layout->addWidget(m_textRed);
-        m_layout->addSpacerItem(m_spacer5);
-        m_layout->addWidget(m_iconGreen);
-        m_layout->addWidget(m_textGreen);
-        m_layout->addSpacerItem(m_spacer6);
-        m_layout->addWidget(m_iconYellowGreen);
-        m_layout->addWidget(m_textYellowGreen);
-        m_layout->addSpacerItem(m_spacer7);
-        m_layout->addSpacerItem(m_spacer8);
-        m_iconYellow->setVisible(false);
-        m_textYellow->setVisible(false);
-        m_iconRed->setVisible(false);
-        m_textRed->setVisible(false);
-        m_iconBlueRed->setVisible(false);
-        m_textBlueRed->setVisible(false);
-        m_iconYellowGreen->setVisible(false);
-        m_textYellowGreen->setVisible(false);
-        m_spacer2->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-        m_spacer3->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-        m_spacer4->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer5->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-        m_spacer6->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-        m_spacer7->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::Ignored);
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == game_variant_classic_2);
-        m_layout->addSpacerItem(m_spacer1);
-        m_layout->addWidget(m_iconBlueRed);
-        m_layout->addWidget(m_textBlueRed);
-        m_layout->addSpacerItem(m_spacer2);
-        m_layout->addWidget(m_iconYellowGreen);
-        m_layout->addWidget(m_textYellowGreen);
-        m_layout->addSpacerItem(m_spacer3);
-        m_layout->addSpacerItem(m_spacer4);
-        m_layout->addWidget(m_iconBlue);
-        m_layout->addWidget(m_textBlue);
-        m_layout->addSpacerItem(m_spacer5);
-        m_layout->addWidget(m_iconRed);
-        m_layout->addWidget(m_textRed);
-        m_layout->addSpacerItem(m_spacer6);
-        m_layout->addWidget(m_iconYellow);
-        m_layout->addWidget(m_textYellow);
-        m_layout->addSpacerItem(m_spacer7);
-        m_layout->addWidget(m_iconGreen);
-        m_layout->addWidget(m_textGreen);
-        m_layout->addSpacerItem(m_spacer8);
-        m_iconYellow->setVisible(true);
-        m_textYellow->setVisible(true);
-        m_iconRed->setVisible(true);
-        m_textRed->setVisible(true);
-        m_iconBlueRed->setVisible(true);
-        m_textBlueRed->setVisible(true);
-        m_iconYellowGreen->setVisible(true);
-        m_textYellowGreen->setVisible(true);
-        m_spacer2->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer3->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer4->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer5->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer6->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-        m_spacer7->changeSize(8, 0, QSizePolicy::MinimumExpanding,
-                              QSizePolicy::Ignored);
-    }
-    m_layout->invalidate();
-}
-
-QLabel* ScoreDisplay::createColorIcon(Color c)
-{
-    QImage image(16, 16, QImage::Format_ARGB32);
-    image.fill(Qt::transparent);
-    QPainter painter;
-    painter.begin(&image);
-    QColor color = Util::getPaintColor(game_variant_classic, c);
+    QColor color = Util::getPaintColor(m_gameVariant, c);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(color);
     painter.setBrush(color);
-    painter.drawEllipse(4, 4, 8, 8);
-    painter.end();
-    QPixmap pixmap = QPixmap::fromImage(image);
-    QIcon icon(pixmap);
-    QLabel* label = new QLabel();
-    label->setPixmap(pixmap);
-    return label;
+    painter.drawEllipse(x + 4, 4, 8, 8);
+    painter.setPen(QApplication::palette().text().color());
+    painter.drawText(QPoint(x + colorDotSize, 12), getScoreText(c));
 }
 
-QLabel* ScoreDisplay::createTwoColorIcon(Color c1, Color c2)
+void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
 {
-    QImage image(32, 16, QImage::Format_ARGB32);
-    image.fill(Qt::transparent);
-    QPainter painter;
-    painter.begin(&image);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    QColor color1 = Util::getPaintColor(game_variant_classic, c1);
-    painter.setPen(color1);
-    painter.setBrush(color1);
-    painter.drawEllipse(7, 4, 8, 8);
-    QColor color2 = Util::getPaintColor(game_variant_classic, c2);
-    painter.setPen(color2);
-    painter.setBrush(color2);
-    painter.drawEllipse(17, 4, 8, 8);
-    painter.end();
-    QPixmap pixmap = QPixmap::fromImage(image);
-    QIcon icon(pixmap);
-    QLabel* label = new QLabel();
-    label->setPixmap(pixmap);
-    return label;
+    QColor color = Util::getPaintColor(m_gameVariant, c1);
+    painter.setPen(color);
+    painter.setBrush(color);
+    painter.drawEllipse(x + 4, 4, 8, 8);
+    color = Util::getPaintColor(m_gameVariant, c2);
+    painter.setPen(color);
+    painter.setBrush(color);
+    painter.drawEllipse(x + 13, 4, 8, 8);
+    painter.setPen(QApplication::palette().text().color());
+    painter.drawText(QPoint(x + twoColorDotWidth, 12), getScoreText2(c1, c2));
 }
 
-void ScoreDisplay::initGameVariant(GameVariant variant)
+QString ScoreDisplay::getScoreText(Color c)
 {
-    m_gameVariant = variant;
-    removeAllWidgets();
-    addWidgets(variant);
+    return ::getScoreText(m_points[c], m_bonus[c]);
 }
 
-void ScoreDisplay::removeAllWidgets()
+QString ScoreDisplay::getScoreText2(Color c1, Color c2)
 {
-    m_layout->removeWidget(m_iconBlue);
-    m_layout->removeWidget(m_iconYellow);
-    m_layout->removeWidget(m_iconRed);
-    m_layout->removeWidget(m_iconGreen);
-    m_layout->removeWidget(m_iconBlueRed);
-    m_layout->removeWidget(m_iconYellowGreen);
-    m_layout->removeWidget(m_textBlue);
-    m_layout->removeWidget(m_textYellow);
-    m_layout->removeWidget(m_textRed);
-    m_layout->removeWidget(m_textGreen);
-    m_layout->removeWidget(m_textBlueRed);
-    m_layout->removeWidget(m_textYellowGreen);
-    m_layout->removeItem(m_spacer1);
-    m_layout->removeItem(m_spacer2);
-    m_layout->removeItem(m_spacer3);
-    m_layout->removeItem(m_spacer4);
-    m_layout->removeItem(m_spacer5);
-    m_layout->removeItem(m_spacer6);
-    m_layout->removeItem(m_spacer7);
-    m_layout->removeItem(m_spacer8);
+    return ::getScoreText(m_points[c1] + m_points[c2],
+                          m_bonus[c1] + m_bonus[c2]);
+}
+
+int ScoreDisplay::getScoreTextWidth(Color c)
+{
+    return getTextWidth(getScoreText(c));
+}
+
+int ScoreDisplay::getScoreTextWidth2(Color c1, Color c2)
+{
+    return getTextWidth(getScoreText2(c1, c2));
+}
+
+void ScoreDisplay::paintEvent(QPaintEvent* event)
+{
+    QPainter painter(this);
+    if (m_gameVariant == game_variant_duo)
+    {
+        int textWidthBlue = getScoreTextWidth(Color(0));
+        int textWidthGreen = getScoreTextWidth(Color(1));
+        int totalWidth = textWidthBlue + textWidthGreen + 2 * colorDotSize;
+        float pad = float(width() - totalWidth) / 3.f;
+        float x = pad;
+        drawScore(painter, Color(0), x);
+        x+= colorDotSize + textWidthBlue + pad;
+        drawScore(painter, Color(1), x);
+    }
+    else if (m_gameVariant == game_variant_classic)
+    {
+        int textWidthBlue = getScoreTextWidth(Color(0));
+        int textWidthYellow = getScoreTextWidth(Color(1));
+        int textWidthRed = getScoreTextWidth(Color(2));
+        int textWidthGreen = getScoreTextWidth(Color(3));
+        int totalWidth =
+            textWidthBlue + textWidthRed + textWidthYellow + textWidthGreen
+            + 4 * colorDotSize;
+        float pad = float(width() - totalWidth) / 5.f;
+        float x = pad;
+        drawScore(painter, Color(0), x);
+        x+= colorDotSize + textWidthBlue + pad;
+        drawScore(painter, Color(1), x);
+        x+= colorDotSize + textWidthYellow + pad;
+        drawScore(painter, Color(2), x);
+        x+= colorDotSize + textWidthRed + pad;
+        drawScore(painter, Color(3), x);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2);
+        int textWidthBlueRed = getScoreTextWidth2(Color(0), Color(2));
+        int textWidthYellowGreen = getScoreTextWidth2(Color(1), Color(3));
+        int textWidthBlue = getScoreTextWidth(Color(0));
+        int textWidthYellow = getScoreTextWidth(Color(1));
+        int textWidthRed = getScoreTextWidth(Color(2));
+        int textWidthGreen = getScoreTextWidth(Color(3));
+        int totalWidth =
+            textWidthBlueRed + textWidthYellowGreen
+            + textWidthBlue + textWidthRed + textWidthYellow + textWidthGreen
+            + 2 * twoColorDotWidth + 4 * colorDotSize;
+        float pad = float(width() - totalWidth) / 8.f;
+        float x = pad;
+        drawScore2(painter, Color(0), Color(2), x);
+        x+= twoColorDotWidth + textWidthBlueRed + pad;
+        drawScore2(painter, Color(1), Color(3), x);
+        x+= twoColorDotWidth + textWidthYellowGreen + 2 * pad;
+        drawScore(painter, Color(0), x);
+        x+= colorDotSize + textWidthBlue + pad;
+        drawScore(painter, Color(2), x);
+        x+= colorDotSize + textWidthRed + pad;
+        drawScore(painter, Color(1), x);
+        x+= colorDotSize + textWidthYellow + pad;
+        drawScore(painter, Color(3), x);
+    }
+}
+
+QSize ScoreDisplay::sizeHint() const
+{
+    // worst case is classic_2
+    int width =
+        2 * twoColorDotWidth + 4 * colorDotSize
+        + 2 * getMaxScoreTextWidth2() + 4 * getMaxScoreTextWidth();
+    QFont font = QApplication::font();
+    QFontMetrics metrics(font);
+    int height = max(colorDotSize, metrics.height());
+    return QSize(width, height);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)
 {
     GameVariant variant = bd.get_game_variant();
-    if (variant != m_gameVariant)
-        initGameVariant(variant);
-    if (variant == game_variant_classic
-        || variant == game_variant_classic_2)
+    bool hasChanged = (m_gameVariant != variant);
+    m_gameVariant = variant;
+    for (unsigned int i = 0; i < bd.get_nu_colors(); ++i)
     {
-        updateScore(m_textBlue,
-                    bd.get_points(Color(0)), bd.get_bonus(Color(0)));
-        updateScore(m_textYellow,
-                    bd.get_points(Color(1)), bd.get_bonus(Color(1)));
-        updateScore(m_textRed,
-                    bd.get_points(Color(2)), bd.get_bonus(Color(2)));
-        updateScore(m_textGreen,
-                    bd.get_points(Color(3)), bd.get_bonus(Color(3)));
+        Color c(i);
+        unsigned int points = bd.get_points(c);
+        unsigned int bonus = bd.get_bonus(c);
+        if (m_points[c] != points || m_bonus[c] != bonus)
+        {
+            hasChanged = true;
+            m_points[c] = points;
+            m_bonus[c] = bonus;
+        }
     }
-    if (variant == game_variant_classic_2)
-    {
-        updateScore(m_textBlueRed,
-                    bd.get_points(Color(0)) + bd.get_points(Color(2)),
-                    bd.get_bonus(Color(0)) + bd.get_bonus(Color(2)));
-        updateScore(m_textYellowGreen,
-                    bd.get_points(Color(1)) + bd.get_points(Color(3)),
-                    bd.get_bonus(Color(1)) + bd.get_bonus(Color(3)));
-    }
-    if (variant == game_variant_duo)
-    {
-        updateScore(m_textBlue,
-                    bd.get_points(Color(0)), bd.get_bonus(Color(0)));
-        updateScore(m_textGreen,
-                    bd.get_points(Color(1)), bd.get_bonus(Color(1)));
-    }
-}
-
-void ScoreDisplay::updateScore(QLabel* label, unsigned int points,
-                               unsigned int bonus)
-{
-    QString text;
-    if (bonus == 0)
-        text.setNum(points);
-    else
-        text = QString("%1 (+%2)").arg(points).arg(bonus);
-    label->setText(text);
+    if (hasChanged)
+        update();
 }
 
 //-----------------------------------------------------------------------------
