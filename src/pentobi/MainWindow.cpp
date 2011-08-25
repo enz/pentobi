@@ -1524,11 +1524,8 @@ void MainWindow::open()
 {
     if (! checkSave())
         return;
-    QString dir;
-    if (! m_file.isEmpty())
-        dir = QFileInfo(m_file).dir().path();
-    else
-        dir = QDir::home().path();
+    QSettings settings;
+    QString dir = settings.value("last_dir", QDir::home().path()).toString();
     open(QFileDialog::getOpenFileName(this, tr("Open"), dir, getFilter()));
 }
 
@@ -1550,6 +1547,8 @@ void MainWindow::open(const QString& file, bool isTemporary)
     if (! isTemporary)
     {
         setFile(file);
+        QSettings settings;
+        settings.setValue("last_dir", QFileInfo(m_file).dir().path());
         QFile autoSaveFile(getAutoSaveFile());
         if (autoSaveFile.exists())
             autoSaveFile.remove();
