@@ -61,6 +61,8 @@ public slots:
 
     void forward();
 
+    void gotoMove();
+
     void help();
 
     void humanPlay(Color c, Move mv);
@@ -261,6 +263,8 @@ private:
     QAction* m_actionGameVariantDuo;
 
     QAction* m_actionGoodMove;
+
+    QAction* m_actionGotoMove;
 
     QAction* m_actionHelp;
 

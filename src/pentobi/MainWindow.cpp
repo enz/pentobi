@@ -37,6 +37,7 @@ using libpentobi_base::game_variant_duo;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Piece;
+using libpentobi_base::Tree;
 using libpentobi_mcts::Search;
 
 //-----------------------------------------------------------------------------
@@ -58,6 +59,25 @@ QString getAutoSaveFile()
     s.append(QDir::separator());
     s.append("autosave.blksgf");
     return s;
+}
+
+bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
+{
+    const Node* node = current.get_parent_or_null();
+    while (node != 0)
+    {
+        if (! tree.get_move(*node).is_null())
+            return true;
+        node = node->get_parent_or_null();
+    }
+    node = current.get_first_child();
+    while (node != 0)
+    {
+        if (! tree.get_move(*node).is_null())
+            return true;
+        node = node->get_first_child();
+    }
+    return false;
 }
 
 void setIcon(QAction* action, const QString& name)
@@ -294,6 +314,7 @@ void MainWindow::boardChanged(bool currentNodeChanged)
         updateComment();
         updateMoveAnnotationActions();
     }
+    const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
     bool isMain = is_main_variation(current);
     bool noPieceSelected = (m_guiBoard->getSelectedPiece() == 0);
@@ -302,6 +323,7 @@ void MainWindow::boardChanged(bool currentNodeChanged)
     m_actionForward->setEnabled(current.has_children());
     m_actionEnd->setEnabled(current.has_children());
     m_actionFindMove->setEnabled(! isGameOver);
+    m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     m_actionBackToMainVariation->setEnabled(! isMain);
@@ -608,6 +630,10 @@ void MainWindow::createActions()
     m_actionGoodMove->setCheckable(true);
     connect(m_actionGoodMove, SIGNAL(triggered(bool)),
             this, SLOT(goodMove(bool)));
+
+    m_actionGotoMove = new QAction(tr("&Go to Move..."), this);
+    m_actionGotoMove->setShortcut(QString("Ctrl+G"));
+    connect(m_actionGotoMove, SIGNAL(triggered()), this, SLOT(gotoMove()));
 
     m_actionHelp = new QAction(tr("&Contents"), this);
     m_actionHelp->setShortcut(QKeySequence::HelpContents);
@@ -949,6 +975,7 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionEnd);
     menuGo->addAction(m_actionNextVariation);
     menuGo->addAction(m_actionPreviousVariation);
+    menuGo->addAction(m_actionGotoMove);
     menuGo->addAction(m_actionBackToMainVariation);
 
     QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
@@ -1346,6 +1373,40 @@ void MainWindow::goodMove(bool checked)
         return;
     m_game->set_good_move();
     boardChanged(false);
+}
+
+void MainWindow::gotoMove()
+{
+    QSettings settings;
+    vector<const Node*> nodes;
+    const Tree& tree = m_game->get_tree();
+    const Node* node = &m_game->get_current();
+    do
+    {
+        if (! tree.get_move(*node).is_null())
+            nodes.insert(nodes.begin(), node);
+        node = node->get_parent_or_null();
+    }
+    while (node != 0);
+    node = m_game->get_current().get_first_child();
+    while (node != 0)
+    {
+        if (! tree.get_move(*node).is_null())
+            nodes.push_back(node);
+        node = node->get_first_child();
+    }
+    int maxMoves = int(nodes.size());
+    if (maxMoves == 0)
+        return;
+    int defaultValue = m_game->get_board().get_nu_moves();
+    if (defaultValue == 0)
+        defaultValue = maxMoves;
+    bool ok;
+    int i = QInputDialog::getInt(this, tr("Pentobi"), tr("Move number:"),
+                                 defaultValue, 1, nodes.size(), 1, &ok);
+    if (! ok)
+        return;
+    gotoNode(*nodes[i - 1]);
 }
 
 void MainWindow::gotoNode(const Node& node)
