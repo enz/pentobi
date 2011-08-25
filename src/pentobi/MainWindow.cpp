@@ -2197,6 +2197,7 @@ void MainWindow::updateComment()
         m_comment->setPlainText(QString::fromLatin1(comment.c_str()));
     else
         m_comment->setPlainText(QString::fromAscii(comment.c_str()));
+    m_comment->ensureCursorVisible();
     m_comment->clearFocus();
 }
 
