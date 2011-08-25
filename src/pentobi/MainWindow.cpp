@@ -176,7 +176,14 @@ MainWindow::MainWindow(const QString& initialFile)
     initGameVariantActions();
     setWindowIcon(QIcon(":/pentobi/pentobi.png"));
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
-        resize(950, 530);
+    {
+        QRect screenGeometry = QApplication::desktop()->screenGeometry();
+        if (screenGeometry.width() >= 1200 && screenGeometry.height() >= 800)
+            resize(1105, 690);
+        else if (screenGeometry.width() >= 1024
+                 && screenGeometry.height() >= 600)
+            resize(950, 530);
+    }
     showComment(false);
     m_splitter->restoreState(settings.value("splitter_state").toByteArray());
     m_actionShowComment->setChecked(m_comment->height() > 0);
