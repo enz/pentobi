@@ -538,7 +538,7 @@ void MainWindow::createActions()
     connect(m_actionComputerColor, SIGNAL(triggered()),
             this, SLOT(computerColor()));
 
-    m_actionCoordinateLabels = new QAction(tr("&Coordinate Labels"), this);
+    m_actionCoordinateLabels = new QAction(tr("C&oordinate Labels"), this);
     m_actionCoordinateLabels->setCheckable(true);
     connect(m_actionCoordinateLabels, SIGNAL(triggered(bool)),
             this, SLOT(coordinateLabels(bool)));

@@ -71,7 +71,7 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="541"/>
-        <source>&amp;Coordinate Labels</source>
+        <source>C&amp;oordinate Labels</source>
         <translation>K&amp;oordinatenbeschriftung</translation>
     </message>
     <message>
