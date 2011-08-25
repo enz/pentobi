@@ -156,7 +156,7 @@ MainWindow::MainWindow(const QString& initialFile)
     initGameVariantActions();
     setWindowIcon(QIcon(":/pentobi/pentobi.png"));
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
-        resize(980, 600);
+        resize(950, 530);
     showComment(false);
     m_splitter->restoreState(settings.value("splitter_state").toByteArray());
     m_actionShowComment->setChecked(m_comment->height() > 0);
