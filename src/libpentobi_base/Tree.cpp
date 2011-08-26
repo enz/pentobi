@@ -60,6 +60,8 @@ ColorMove Tree::get_move(const Node& node) const
     }
     else
     {
+        // Properties BLUE/YELLOW/RED/GREEN were used by Pentobi 0.1
+        // Newer versions of Pentobi use 1/2/3/4 as suggested by SGF FF[5]
         if (node.has_property("BLUE"))
         {
             id = "BLUE";
@@ -78,6 +80,26 @@ ColorMove Tree::get_move(const Node& node) const
         else if (node.has_property("GREEN"))
         {
             id = "GREEN";
+            c = Color(3);
+        }
+        else if (node.has_property("1"))
+        {
+            id = "1";
+            c = Color(0);
+        }
+        else if (node.has_property("2"))
+        {
+            id = "2";
+            c = Color(1);
+        }
+        else if (node.has_property("3"))
+        {
+            id = "3";
+            c = Color(2);
+        }
+        else if (node.has_property("4"))
+        {
+            id = "4";
             c = Color(3);
         }
     }
@@ -174,13 +196,13 @@ void Tree::set_move(const Node& node, Color c, Move mv)
     else
     {
         if (c == Color(0))
-            id = "BLUE";
+            id = "1";
         else if (c == Color(1))
-            id = "YELLOW";
+            id = "2";
         else if (c == Color(2))
-            id = "RED";
+            id = "3";
         else if (c == Color(3))
-            id = "GREEN";
+            id = "4";
     }
     vector<string> values;
     if (! mv.is_pass())

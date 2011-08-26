@@ -6,6 +6,8 @@ Current development version
 * Display sum score for both player colors in game variant Classic Two-Player
 * Support for move annotation symbols
 * New menu item "Go to Move"
+* File format was slightly changed to use digits as player properties as
+  suggested by SGF FF[5]. The old file format can still be read.
 
 
 Version 0.1 (15 Jul 2011)

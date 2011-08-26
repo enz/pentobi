@@ -1470,7 +1470,6 @@ void MainWindow::initGame()
 {
     m_game->init();
     m_game->set_charset("UTF-8");
-    m_game->set_application("Pentobi", getVersion().toStdString());
     m_game->clear_modified();
     m_computerColor.fill(false);
     QSettings settings;
@@ -1802,6 +1801,11 @@ void MainWindow::save()
         saveAs();
         return;
     }
+#ifdef VERSION
+    m_game->set_application("Pentobi", VERSION);
+#else
+    m_game->set_application("Pentobi");
+#endif
     ofstream out(m_file.toStdString().c_str());
     write_tree(out, m_game->get_root(), true, 2);
     if (! out)
