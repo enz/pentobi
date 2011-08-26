@@ -663,12 +663,12 @@ void MainWindow::createActions()
 
     QString levelText[maxLevel] =
         {
-            tr("&1 (fast)"),
+            tr("&1"),
             tr("&2"),
             tr("&3"),
             tr("&4"),
             tr("&5"),
-            tr("&6 (slow)")
+            tr("&6")
         };
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);

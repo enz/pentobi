@@ -166,8 +166,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="659"/>
-        <source>&amp;1 (fast)</source>
-        <translation>&amp;1 (schnell)</translation>
+        <source>&amp;1</source>
+        <translation>&amp;1</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="660"/>
@@ -191,8 +191,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="664"/>
-        <source>&amp;6 (slow)</source>
-        <translation>&amp;6 (langsam)</translation>
+        <source>&amp;6</source>
+        <translation>&amp;6</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="671"/>
