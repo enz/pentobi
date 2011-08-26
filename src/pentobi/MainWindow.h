@@ -419,6 +419,8 @@ private:
 
     QString getFilter() const;
 
+    QString getLastDir();
+
     QString getVersion() const;
 
     void gotoNode(const Node& node);

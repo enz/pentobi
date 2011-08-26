@@ -1351,6 +1351,15 @@ QString MainWindow::getFilter() const
     return tr("Blokus games (*.blksgf);;All files (*.*)");
 }
 
+QString MainWindow::getLastDir()
+{
+    QSettings settings;
+    QString dir = settings.value("last_dir", "").toString();
+    if (dir.isEmpty() || ! QFileInfo(dir).exists())
+        dir = QDir::home().path();
+    return dir;
+}
+
 QString MainWindow::getVersion() const
 {
     QString version;
@@ -1593,8 +1602,12 @@ void MainWindow::open()
     if (! checkSave())
         return;
     QSettings settings;
-    QString dir = settings.value("last_dir", QDir::home().path()).toString();
-    open(QFileDialog::getOpenFileName(this, tr("Open"), dir, getFilter()));
+    QString file = QFileDialog::getOpenFileName(this, tr("Open"), getLastDir(),
+                                                getFilter());
+    if (file.isEmpty())
+        return;
+    settings.setValue("last_dir", QFileInfo(file).dir().path());
+    open(file);
 }
 
 void MainWindow::open(const QString& file, bool isTemporary)
@@ -1615,8 +1628,6 @@ void MainWindow::open(const QString& file, bool isTemporary)
     if (! isTemporary)
     {
         setFile(file);
-        QSettings settings;
-        settings.setValue("last_dir", QFileInfo(m_file).dir().path());
         QFile autoSaveFile(getAutoSaveFile());
         if (autoSaveFile.exists())
             autoSaveFile.remove();
@@ -1814,13 +1825,13 @@ void MainWindow::saveAs()
     QString file = m_file;
     if (file.isEmpty())
     {
-        file = QDir::home().path();
+        file = getLastDir();
         file.append(QDir::separator());
         file.append(tr("Unknown.blksgf"));
         if (QFileInfo(file).exists())
             for (unsigned int i = 1; ; ++i)
             {
-                file = QDir::home().path();
+                file = getLastDir();;
                 file.append(QDir::separator());
                 file.append(QString(tr("Unknown-%1.blksgf")).arg(i));
                 if (! QFileInfo(file).exists())
@@ -2031,6 +2042,7 @@ void MainWindow::setFile(const QString& file)
             files.removeLast();
         settings.setValue("recent_files", files);
         updateRecentFiles();
+        settings.setValue("last_dir", QFileInfo(file).dir().path());
     }
 }
 
