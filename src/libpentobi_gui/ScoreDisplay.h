@@ -37,6 +37,10 @@ private:
 
     ColorMap<unsigned int> m_bonus;
 
+    QString getPointsText(Color c);
+
+    int getPointsTextWidth(Color c);
+
     QString getScoreText(Color c);
 
     QString getScoreText2(Color c1, Color c2);
@@ -44,6 +48,8 @@ private:
     int getScoreTextWidth(Color c);
 
     int getScoreTextWidth2(Color c1, Color c2);
+
+    void drawPoints(QPainter& painter, Color c, int x);
 
     void drawScore(QPainter& painter, Color c, int x);
 

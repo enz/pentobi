@@ -179,10 +179,10 @@ MainWindow::MainWindow(const QString& initialFile)
     {
         QRect screenGeometry = QApplication::desktop()->screenGeometry();
         if (screenGeometry.width() >= 1200 && screenGeometry.height() >= 800)
-            resize(1105, 690);
+            resize(1080, 690);
         else if (screenGeometry.width() >= 1024
                  && screenGeometry.height() >= 600)
-            resize(950, 530);
+            resize(820, 530);
     }
     showComment(false);
     m_splitter->restoreState(settings.value("splitter_state").toByteArray());
@@ -910,8 +910,8 @@ QWidget* MainWindow::createCentralWidget()
     QWidget* widget = new QWidget();
     QBoxLayout* layout = new QBoxLayout(QBoxLayout::LeftToRight);
     widget->setLayout(layout);
-    layout->addWidget(createLeftPanel(), 5);
-    layout->addWidget(createRightPanel(), 5);
+    layout->addWidget(createLeftPanel(), 55);
+    layout->addWidget(createRightPanel(), 45);
     // The central widget doesn't do anything with the focus right now, but we
     // allow it to receive the focus such that the user can switch away the
     // focus from the comment field and its blinking cursor.
