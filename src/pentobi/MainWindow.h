@@ -390,6 +390,8 @@ private:
 
     bool checkSave();
 
+    bool checkQuit();
+
     void clearFile();
 
     void createActions();

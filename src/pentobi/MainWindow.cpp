@@ -393,6 +393,48 @@ bool MainWindow::checkSave()
     return true;
 }
 
+bool MainWindow::checkQuit()
+{
+    if (! m_file.isEmpty() && m_game->get_modified())
+    {
+        QMessageBox::StandardButton button =
+            showQuestion(tr("The file has been modified. Save changes?"),
+                         QMessageBox::Save | QMessageBox::Discard
+                         | QMessageBox::Cancel);
+        if (button == QMessageBox::Cancel)
+            return false;
+        if (button == QMessageBox::Save)
+        {
+            if (m_file.isEmpty())
+                saveAs();
+            else
+                save();
+        }
+    }
+    cancelGenMove();
+    const Board& bd = m_game->get_board();
+    if (m_file.isEmpty())
+    {
+        QString autoSaveFile = getAutoSaveFile();
+        if (bd.get_nu_moves() > 0 && ! m_gameFinished)
+        {
+            ofstream out(autoSaveFile.toStdString().c_str());
+            write_tree(out, m_game->get_root(), true, 2);
+        }
+        else
+        {
+            QFile file(autoSaveFile);
+            if (file.exists() && ! file.remove())
+                showError(QString(tr("Could not delete %1")).arg(autoSaveFile));
+        }
+    }
+    QSettings settings;
+    settings.setValue("geometry", saveGeometry());
+    settings.setValue("splitter_state", m_splitter->saveState());
+    settings.setValue("toolbar", m_toolBar->isVisible());
+    return true;
+}
+
 void MainWindow::clearFile()
 {
     setFile(QString());
@@ -416,48 +458,10 @@ void MainWindow::clearStatus()
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-
-    if (! m_file.isEmpty() && m_game->get_modified())
-    {
-        QMessageBox::StandardButton button =
-            showQuestion(tr("The file has been modified. Save changes?"),
-                         QMessageBox::Save | QMessageBox::Discard
-                         | QMessageBox::Cancel);
-        if (button == QMessageBox::Cancel)
-        {
-            event->ignore();
-            return;
-        }
-        if (button == QMessageBox::Save)
-        {
-            if (m_file.isEmpty())
-                saveAs();
-            else
-                save();
-        }
+    if (checkQuit())
         event->accept();
-    }
-    cancelGenMove();
-    const Board& bd = m_game->get_board();
-    if (m_file.isEmpty())
-    {
-        QString autoSaveFile = getAutoSaveFile();
-        if (bd.get_nu_moves() > 0 && ! m_gameFinished)
-        {
-            ofstream out(autoSaveFile.toStdString().c_str());
-            write_tree(out, m_game->get_root(), true, 2);
-        }
-        else
-        {
-            QFile file(autoSaveFile);
-            if (file.exists() && ! file.remove())
-                showError(QString(tr("Could not delete %1")).arg(autoSaveFile));
-        }
-    }
-    QSettings settings;
-    settings.setValue("geometry", saveGeometry());
-    settings.setValue("splitter_state", m_splitter->saveState());
-    settings.setValue("toolbar", m_toolBar->isVisible());
+    else
+        event->ignore();
 }
 
 void MainWindow::coordinateLabels(bool checked)
@@ -1762,7 +1766,8 @@ void MainWindow::previousVariation()
 
 void MainWindow::quit()
 {
-    cancelGenMove();
+    if (! checkQuit())
+        return;
     qApp->quit();
 }
 
