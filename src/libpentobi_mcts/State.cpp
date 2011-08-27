@@ -157,11 +157,15 @@ void State::dump(ostream& out) const
 
 array<ValueType, 4> State::evaluate_playout()
 {
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+    if (m_check_symmetric_draw && ! m_is_symmetry_broken
+        && m_bd.get_nu_moves() >= 3)
     {
         // Always evaluate symmetric positions as a draw in the playouts.
         // This will encourage the first player to break the symmetry and
-        /// the second player to preserve it
+        // the second player to preserve it. (Exception: don't do this if
+        // the move number is less than 3 because the earliest time to break
+        // the symmetry is move 3 and otherwise all moves are evaluated as
+        // draw in very short searches.)
         if (log_simulations)
             log() << "Result: 0.5 (symmetry)\n";
         m_score_sum += 0;
@@ -228,8 +232,9 @@ bool State::gen_and_play_playout_move()
     }
 
     if (m_check_symmetric_draw)
-        if (! m_is_symmetry_broken)
+        if (! m_is_symmetry_broken && m_bd.get_nu_moves() >= 3)
         {
+            // See also the comment in evaluate_playout()
             if (log_simulations)
                 log() << "Terminate playout. Symmetry not broken.\n";
             return false;
@@ -333,6 +338,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
                 value += 5 * ValueType(0.1);
             count += 5;
         }
+        // Encourage to explore a move that keeps or breaks symmetry
+        // See also the comment in evaluate_playout()
         if (m_check_symmetric_draw && ! m_is_symmetry_broken)
         {
             if (to_play == Color(1))
