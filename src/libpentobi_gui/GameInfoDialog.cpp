@@ -49,7 +49,6 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
             createPlayerName(tr("Player Yellow/Green:"), Color(1));
     }
     m_date = createLine(tr("Date:"), m_game.get_date());
-    m_date->setInputMask("0000-00-00");
     QDialogButtonBox* buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
