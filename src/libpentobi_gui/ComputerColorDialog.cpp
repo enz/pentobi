@@ -22,7 +22,7 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
       m_computerColor(computerColor),
       m_gameVariant(gameVariant)
 {
-    setWindowTitle(tr("Pentobi - Computer Color"));
+    setWindowTitle(tr("Computer Color"));
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     if (m_gameVariant == game_variant_duo)
@@ -42,18 +42,12 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
         createCheckBox(layout, Color(0), tr("Blue/Red"));
         createCheckBox(layout, Color(1), tr("Yellow/Green"));
     }
-    QWidget* buttons = new QWidget(this);
-    layout->addWidget(buttons);
-    QHBoxLayout* buttonsLayout = new QHBoxLayout();
-    buttons->setLayout(buttonsLayout);
-    QPushButton* cancelButton = new QPushButton(tr("Cancel"));
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    buttonsLayout->addWidget(cancelButton);
-    QPushButton* okButton = new QPushButton(tr("Ok"));
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    buttonsLayout->addWidget(okButton);
-    okButton->setDefault(true);
-    okButton->setFocus();
+    QDialogButtonBox* buttonBox =
+        new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    layout->addWidget(buttonBox);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    buttonBox->setFocus();
 }
 
 void ComputerColorDialog::accept()

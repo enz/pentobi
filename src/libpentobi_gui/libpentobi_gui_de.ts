@@ -5,8 +5,8 @@
     <name>ComputerColorDialog</name>
     <message>
         <location filename="ComputerColorDialog.cpp" line="25"/>
-        <source>Pentobi - Computer Color</source>
-        <translation>Pentobi - Computer-Farbe</translation>
+        <source>Computer Color</source>
+        <translation>Computer-Farbe</translation>
     </message>
     <message>
         <location filename="ComputerColorDialog.cpp" line="30"/>
@@ -40,36 +40,76 @@
         <source>Yellow/Green</source>
         <translation>Gelb/Grün</translation>
     </message>
+</context>
+<context>
+    <name>GameInfoDialog</name>
     <message>
-        <location filename="ComputerColorDialog.cpp" line="49"/>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <location filename="GameInfoDialog.cpp" line="24"/>
+        <source>Game Info</source>
+        <translation>Spiel-Info</translation>
     </message>
     <message>
-        <location filename="ComputerColorDialog.cpp" line="52"/>
-        <source>Ok</source>
-        <translation>OK</translation>
+        <location filename="GameInfoDialog.cpp" line="34"/>
+        <location filename="GameInfoDialog.cpp" line="39"/>
+        <source>Player Blue:</source>
+        <translation>Spieler Blau:</translation>
+    </message>
+    <message>
+        <location filename="GameInfoDialog.cpp" line="35"/>
+        <location filename="GameInfoDialog.cpp" line="42"/>
+        <source>Player Green:</source>
+        <translation>Spieler Grün:</translation>
+    </message>
+    <message>
+        <location filename="GameInfoDialog.cpp" line="40"/>
+        <source>Player Yellow:</source>
+        <translation>Spieler Gelb:</translation>
+    </message>
+    <message>
+        <location filename="GameInfoDialog.cpp" line="41"/>
+        <source>Player Red:</source>
+        <translation>Spieler Rot:</translation>
+    </message>
+    <message>
+        <location filename="GameInfoDialog.cpp" line="47"/>
+        <source>Player Blue/Red:</source>
+        <translation>Spieler Blau/Rot:</translation>
+    </message>
+    <message>
+        <location filename="GameInfoDialog.cpp" line="49"/>
+        <source>Player Yellow/Green:</source>
+        <translation>Spieler Gelb/Grün:</translation>
+    </message>
+    <message>
+        <location filename="GameInfoDialog.cpp" line="51"/>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <location filename="GameInfoDialog.cpp" line="53"/>
+        <source>YYYY-MM-DD</source>
+        <translation>JJJJ-MM-TT</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
-        <location filename="HelpWindow.cpp" line="16"/>
+        <location filename="HelpWindow.cpp" line="27"/>
         <source>Pentobi Help</source>
         <translation>Pentobi-Hilfe</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="21"/>
+        <location filename="HelpWindow.cpp" line="32"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="24"/>
+        <location filename="HelpWindow.cpp" line="35"/>
         <source>Forward</source>
         <translation>Vorwärts</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="27"/>
+        <location filename="HelpWindow.cpp" line="38"/>
         <source>Home</source>
         <translation>Startseite</translation>
     </message>

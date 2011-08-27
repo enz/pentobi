@@ -8,6 +8,9 @@
 
 #include "Tree.h"
 
+#include <ctime>
+#include <cstdio>
+#include <cstdlib>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include "libboardgame_sgf/Util.h"
@@ -119,8 +122,7 @@ void Tree::set_application(const string& name, const string& version)
         set_property(get_root(), "AP", name + ":" + version);
 }
 
-void Tree::set_property(const Node& node, const string& id,
-                               const char* value)
+void Tree::set_property(const Node& node, const string& id, const char* value)
 {
     bool was_changed = non_const(node).set_property(id, value);
     if (was_changed)
@@ -145,6 +147,18 @@ void Tree::set_comment(const Node& node, const string& s)
 void Tree::set_comment(const Node& node, const format& f)
 {
     set_comment(node, str(f));
+}
+
+void Tree::set_date_today()
+{
+   time_t t = time(0);
+   struct tm* tmp = localtime(&t);
+   if (tmp == 0)
+       return;
+    char date[128];
+    if (strftime(date, sizeof(date), "%Y-%m-%d", tmp) == 0)
+        return;
+    set_date(date);
 }
 
 void Tree::set_doubtful_move(const Node& node)

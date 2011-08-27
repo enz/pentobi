@@ -110,6 +110,12 @@ public:
 
     void set_application(const string& name, const string& version = "");
 
+    string get_date() const;
+
+    void set_date(const string& date);
+
+    void set_date_today();
+
 private:
     bool m_modified;
 
@@ -126,6 +132,11 @@ inline void Tree::clear_modified()
 inline double Tree::get_bad_move(const Node& node) const
 {
     return node.get_property<double>("BM", 0);
+}
+
+inline string Tree::get_date() const
+{
+    return m_root->get_property("DT", "");
 }
 
 inline double Tree::get_good_move(const Node& node) const
@@ -167,6 +178,11 @@ inline Node& Tree::non_const(const Node& node)
 inline void Tree::set_charset(const string& charset)
 {
     set_property(get_root(), "CA", charset);
+}
+
+inline void Tree::set_date(const string& date)
+{
+    set_property(get_root(), "DT", date);
 }
 
 template<typename T>

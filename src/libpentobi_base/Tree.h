@@ -45,6 +45,10 @@ public:
 
     GameVariant get_game_variant() const;
 
+    string get_player_name(Color c) const;
+
+    void set_player_name(Color c, const string& name);
+
 private:
     GameVariant m_game_variant;
 

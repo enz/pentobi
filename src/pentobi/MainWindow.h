@@ -34,6 +34,8 @@ class MainWindow
 public:
     MainWindow(const QString& initialFile = QString());
 
+    QSize sizeHint() const;
+
 public slots:
     void about();
 
@@ -66,6 +68,8 @@ public slots:
     void help();
 
     void humanPlay(Color c, Move mv);
+
+    void gameInfo();
 
     void interrupt();
 
@@ -255,6 +259,8 @@ private:
     QAction* m_actionForward;
 
     QAction* m_actionFullscreen;
+
+    QAction* m_actionGameInfo;
 
     QAction* m_actionGameVariantClassic;
 

@@ -4,15 +4,15 @@ Current development version
 * German translation
 * Added custom playing level with configurable time per move
 * Display sum score for both player colors in game variant Classic Two-Player
-* Support for move annotation symbols
-* New menu item "Go to Move"
 * File format was slightly changed to use digits as player properties as
   proposed for SGF FF[5] for multi-player games. The old file format can still
   be read.
+* Support for move annotation symbols
+* Store and edit additional game information (e.g. player names)
+* New menu item "Go to Move"
 
 
 Version 0.1 (15 Jul 2011)
 =========================
 
 Initial release.
-

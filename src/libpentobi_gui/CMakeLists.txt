@@ -8,6 +8,7 @@ include_directories(
 set(pentobi_gui_STAT_SRCS
   BoardPainter.cpp
   ComputerColorDialog.cpp
+  GameInfoDialog.cpp
   GuiBoard.cpp
   GuiBoardUtil.cpp
   HelpWindow.cpp
@@ -20,6 +21,7 @@ set(pentobi_gui_STAT_SRCS
 
 set(pentobi_gui_MOC_HDRS
   ComputerColorDialog.h
+  GameInfoDialog.h
   GuiBoard.h
   HelpWindow.h
   OrientationDisplay.h

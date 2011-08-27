@@ -115,6 +115,16 @@ public:
     /** Set the AP property at the root node. */
     void set_application(const string& name, const string& version = "");
 
+    string get_player_name(Color c) const;
+
+    void set_player_name(Color c, const string& name);
+
+    string get_date() const;
+
+    void set_date(const string& date);
+
+    void set_date_today();
+
 private:
     const Node* m_current;
 
@@ -145,6 +155,11 @@ inline string Game::get_comment() const
     return m_tree.get_comment(*m_current);
 }
 
+inline string Game::get_date() const
+{
+    return m_tree.get_date();
+}
+
 inline Color Game::get_effective_to_play() const
 {
     return m_bd.get_effective_to_play();
@@ -173,6 +188,11 @@ inline bool Game::get_modified() const
 inline ColorMove Game::get_move() const
 {
     return m_tree.get_move(*m_current);
+}
+
+inline string Game::get_player_name(Color c) const
+{
+    return m_tree.get_player_name(c);
 }
 
 inline Color Game::get_to_play() const
@@ -245,6 +265,16 @@ inline void Game::set_comment(const string& s)
     m_tree.set_comment(*m_current, s);
 }
 
+inline void Game::set_date(const string& date)
+{
+    m_tree.set_date(date);
+}
+
+inline void Game::set_date_today()
+{
+    m_tree.set_date_today();
+}
+
 inline void Game::set_doubtful_move()
 {
     m_tree.set_doubtful_move(*m_current);
@@ -258,6 +288,11 @@ inline void Game::set_good_move(double value)
 inline void Game::set_interesting_move()
 {
     m_tree.set_interesting_move(*m_current);
+}
+
+inline void Game::set_player_name(Color c, const string& name)
+{
+    m_tree.set_player_name(c, name);
 }
 
 //-----------------------------------------------------------------------------

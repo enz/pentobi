@@ -139,6 +139,38 @@ const Node* Tree::get_node_with_move_number(unsigned int move_number) const
     return 0;
 }
 
+string Tree::get_player_name(Color c) const
+{
+    const Node& root = get_root();
+    switch (m_game_variant)
+    {
+    case game_variant_classic:
+        if (c == Color(0))
+            return root.get_property("P1", "");
+        if (c == Color(1))
+            return root.get_property("P2", "");
+        if (c == Color(2))
+            return root.get_property("P3", "");
+        if (c == Color(3))
+            return root.get_property("P4", "");
+        break;
+    case game_variant_classic_2:
+        if (c == Color(0) || c == Color(2))
+            return root.get_property("PB", "");
+        if (c == Color(1) || c == Color(3))
+            return root.get_property("PW", "");
+        break;
+    case game_variant_duo:
+        if (c == Color(0))
+            return root.get_property("PB", "");
+        if (c == Color(1))
+            return root.get_property("PW", "");
+        break;
+    }
+    LIBBOARDGAME_ASSERT(false);
+    return "";
+}
+
 void Tree::init(GameVariant game_variant)
 {
     libboardgame_sgf::Tree::init();
@@ -213,6 +245,43 @@ void Tree::set_move(const Node& node, Color c, Move mv)
     else
         values.push_back("");
     set_property(node, id, values);
+}
+
+void Tree::set_player_name(Color c, const string& name)
+{
+    const Node& root = get_root();
+    switch (m_game_variant)
+    {
+    case game_variant_classic:
+        if (c == Color(0))
+            set_property(root, "P1", name);
+        else if (c == Color(1))
+            set_property(root, "P2", name);
+        else if (c == Color(2))
+            set_property(root, "P3", name);
+        else if (c == Color(3))
+            set_property(root, "P4", name);
+        else
+            LIBBOARDGAME_ASSERT(false);
+        return;
+    case game_variant_classic_2:
+        if (c == Color(0) || c == Color(2))
+            set_property(root, "PB", name);
+        else if (c == Color(1) || c == Color(3))
+            set_property(root, "PW", name);
+        else
+            LIBBOARDGAME_ASSERT(false);
+        return;
+    case game_variant_duo:
+        if (c == Color(0))
+            set_property(root, "PB", name);
+        else if (c == Color(1))
+            set_property(root, "PW", name);
+        else
+            LIBBOARDGAME_ASSERT(false);
+        return;
+    }
+    LIBBOARDGAME_ASSERT(false);
 }
 
 void Tree::set_result(const Node& node, int score)

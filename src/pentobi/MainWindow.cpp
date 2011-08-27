@@ -14,6 +14,7 @@
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
+#include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
 #include "libpentobi_gui/SameHeightLayout.h"
 #include "libpentobi_gui/Util.h"
@@ -176,14 +177,7 @@ MainWindow::MainWindow(const QString& initialFile)
     initGameVariantActions();
     setWindowIcon(QIcon(":/pentobi/pentobi.png"));
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
-    {
-        QRect screenGeometry = QApplication::desktop()->screenGeometry();
-        if (screenGeometry.width() >= 1200 && screenGeometry.height() >= 800)
-            resize(1080, 690);
-        else if (screenGeometry.width() >= 1024
-                 && screenGeometry.height() >= 600)
-            resize(820, 530);
-    }
+        adjustSize();
     showComment(false);
     m_splitter->restoreState(settings.value("splitter_state").toByteArray());
     m_actionShowComment->setChecked(m_comment->height() > 0);
@@ -481,16 +475,8 @@ void MainWindow::commentChanged()
         m_game->set_comment("");
         return;
     }
-    // We only recognize UTF8 and ISO-8859-1 in the SGF charset property
-    const Node& root = m_game->get_root();
-    QString charset = QString(root.get_property("CA", "iso-8859-1").c_str());
-    charset = charset.toLower();
-    if (charset == "utf-8" || charset == "utf8")
-        m_game->set_comment(comment.toUtf8().data());
-    else if (charset == "iso-8859-1" || charset == "latin1")
-        m_game->set_comment(comment.toLatin1().data());
-    else
-        m_game->set_comment(comment.toAscii().data());
+    string charset = m_game->get_root().get_property("CA", "");
+    m_game->set_comment(Util::convertSgfValueFromQString(comment, charset));
 }
 
 void MainWindow::computerColor()
@@ -613,6 +599,10 @@ void MainWindow::createActions()
     m_actionFullscreen->setCheckable(true);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
+
+    m_actionGameInfo = new QAction(tr("Game &Info"), this);
+    m_actionGameInfo->setShortcut(QString("Ctrl+I"));
+    connect(m_actionGameInfo, SIGNAL(triggered()), this, SLOT(gameInfo()));
 
     m_actionGameVariantClassic = new QAction(tr("&Classic"), this);
     m_actionGameVariantClassic->setActionGroup(groupGameVariant);
@@ -973,6 +963,7 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantClassic2);
     menuGameVariant->addAction(m_actionGameVariantDuo);
     menuGame->addAction(m_actionComputerColor);
+    menuGame->addAction(m_actionGameInfo);
     menuGame->addAction(m_actionFindMove);
 
     QMenu* menuGo = menuBar()->addMenu(tr("&Go"));
@@ -1138,7 +1129,7 @@ void MainWindow::customLevel(bool checked)
     if (! checked)
         return;
     bool ok;
-    m_timeLimit = QInputDialog::getInt(this, tr("Pentobi"),
+    m_timeLimit = QInputDialog::getInt(this, tr("Custom Level"),
                                        tr("Maximum time per move in seconds:"),
                                        m_timeLimit, 1, 3600, 1, &ok);
     if (! ok)
@@ -1176,9 +1167,8 @@ void MainWindow::exportImage()
     QSettings settings;
     int size = settings.value("export_image_size", 320).toInt();
     bool ok;
-    size = QInputDialog::getInt(this, tr("Pentobi - Export Image"),
-                                tr("Image size:"), size, 0, 2147483647, 40,
-                                &ok);
+    size = QInputDialog::getInt(this, tr("Export Image"), tr("Image size:"),
+                                size, 0, 2147483647, 40, &ok);
     if (! ok)
         return;
     settings.setValue("export_image_size", size);
@@ -1269,6 +1259,13 @@ void MainWindow::fullscreen(bool checked)
         showFullScreen();
     else
         showNormal();
+}
+
+void MainWindow::gameInfo()
+{
+    GameInfoDialog dialog(this, *m_game);
+    dialog.exec();
+    boardChanged(false);
 }
 
 void MainWindow::gameVariantClassic(bool checked)
@@ -1418,7 +1415,7 @@ void MainWindow::gotoMove()
     if (defaultValue == 0)
         defaultValue = maxMoves;
     bool ok;
-    int i = QInputDialog::getInt(this, tr("Pentobi"), tr("Move number:"),
+    int i = QInputDialog::getInt(this, tr("Go to Move"), tr("Move number:"),
                                  defaultValue, 1, nodes.size(), 1, &ok);
     if (! ok)
         return;
@@ -1470,6 +1467,7 @@ void MainWindow::initGame()
 {
     m_game->init();
     m_game->set_charset("UTF-8");
+    m_game->set_date_today();
     m_game->clear_modified();
     m_computerColor.fill(false);
     QSettings settings;
@@ -2248,6 +2246,11 @@ void MainWindow::showStatus(const QString& text, bool temporary)
     statusBar()->showMessage(text, timeout);
 }
 
+QSize MainWindow::sizeHint() const
+{
+    return QSize(1080, 690);
+}
+
 void MainWindow::splitterMoved(int pos, int index)
 {
     LIBBOARDGAME_UNUSED(pos);
@@ -2271,16 +2274,8 @@ void MainWindow::updateComment()
         m_comment->clear();
         return;
     }
-    // We only recognize UTF8 and ISO-8859-1 in the SGF charset property
-    const Node& root = m_game->get_root();
-    QString charset = QString(root.get_property("CA", "iso-8859-1").c_str());
-    charset = charset.toLower();
-    if (charset == "utf-8" || charset == "utf8")
-        m_comment->setPlainText(QString::fromUtf8(comment.c_str()));
-    else if (charset == "iso-8859-1" || charset == "latin1")
-        m_comment->setPlainText(QString::fromLatin1(comment.c_str()));
-    else
-        m_comment->setPlainText(QString::fromAscii(comment.c_str()));
+    string charset = m_game->get_root().get_property("CA", "");
+    m_comment->setPlainText(Util::convertSgfValueToQString(comment, charset));
     m_comment->ensureCursorVisible();
     m_comment->clearFocus();
 }

@@ -92,6 +92,32 @@ void paintSquare(QPainter& painter, int x, int y, int size,
 
 //-----------------------------------------------------------------------------
 
+string Util::convertSgfValueFromQString(const QString& value,
+                                        const string& charset)
+{
+    QString charsetToLower = QString(charset.c_str()).trimmed().toLower();
+    if (charsetToLower == "utf-8" || charsetToLower == "utf8")
+        return value.toUtf8().data();
+    else if (charsetToLower == "iso-8859-1" || charsetToLower == "latin1"
+             || charsetToLower.isEmpty())
+        return value.toLatin1().data();
+    else
+        return value.toAscii().data();
+}
+
+QString Util::convertSgfValueToQString(const string& value,
+                                       const string& charset)
+{
+    QString charsetToLower = QString(charset.c_str()).trimmed().toLower();
+    if (charsetToLower == "utf-8" || charsetToLower == "utf8")
+        return QString::fromUtf8(value.c_str());
+    else if (charsetToLower == "iso-8859-1" || charsetToLower == "latin1"
+             || charsetToLower.isEmpty())
+        return QString::fromLatin1(value.c_str());
+    else
+        return QString::fromAscii(value.c_str());
+}
+
 QColor Util::getLabelColor(GameVariant gameVariant, PointState s)
 {
     if (s.is_empty())
