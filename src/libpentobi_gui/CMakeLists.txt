@@ -12,6 +12,7 @@ set(pentobi_gui_STAT_SRCS
   GuiBoard.cpp
   GuiBoardUtil.cpp
   HelpWindow.cpp
+  LineEdit.cpp
   OrientationDisplay.cpp
   PieceSelector.cpp
   SameHeightLayout.cpp
@@ -24,6 +25,7 @@ set(pentobi_gui_MOC_HDRS
   GameInfoDialog.h
   GuiBoard.h
   HelpWindow.h
+  LineEdit.h
   OrientationDisplay.h
   PieceSelector.h
   SameHeightLayout.h

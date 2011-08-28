@@ -7,6 +7,8 @@
 #endif
 
 #include "GameInfoDialog.h"
+
+#include "LineEdit.h"
 #include "libpentobi_gui/Util.h"
 
 using libpentobi_base::game_variant_classic;
@@ -104,7 +106,7 @@ bool GameInfoDialog::acceptLine(QLineEdit* lineEdit, string& value)
 
 QLineEdit* GameInfoDialog::createLine(const QString& label, const string& text)
 {
-    QLineEdit* lineEdit = new QLineEdit();
+    QLineEdit* lineEdit = new LineEdit(0, 30);
     if (! text.empty())
         lineEdit->setText(Util::convertSgfValueToQString(text, m_charset));
     m_formLayout->addRow(label, lineEdit);
@@ -114,16 +116,6 @@ QLineEdit* GameInfoDialog::createLine(const QString& label, const string& text)
 QLineEdit* GameInfoDialog::createPlayerName(const QString& label, Color c)
 {
     return createLine(label, m_game.get_player_name(c));
-}
-
-QSize GameInfoDialog::sizeHint() const
-{
-    // Increase the width of the size hint by a factor of 1.5 because the
-    // size hint of QLineEdit provides only 15-20 characters which is too
-    // short for player names.
-    QSize size = QDialog::sizeHint();
-    size.setWidth(size.width() * 1.5);
-    return size;
 }
 
 //-----------------------------------------------------------------------------

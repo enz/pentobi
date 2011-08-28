@@ -22,8 +22,6 @@ class GameInfoDialog
 public:
     GameInfoDialog(QWidget* parent, Game& game);
 
-    QSize sizeHint() const;
-
 public slots:
     void accept();
 
