@@ -30,9 +30,9 @@ struct MoveInfo
 
     Point center;
 
-    /** Euclidian distance to center rounded to the next smallest integer.
-        Can be used for heuristics on 20x20 boards to prefer moves in the
-        opening that go towards the center in a line as straight as possible. */
+    /** Distance to center heuristic.
+        Only defined on 20x20 boards. Can be used on 20x20 boards to prefer
+        moves in the opening that go towards the center. */
     unsigned int dist_to_center;
 };
 

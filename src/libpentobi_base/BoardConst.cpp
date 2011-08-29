@@ -218,7 +218,8 @@ BoardConst::BoardConst(unsigned int sz)
 {
     m_sz = sz;
     m_pieces = create_pieces();
-    init_dist_to_center();
+    if (m_sz == 20)
+        init_dist_to_center();
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         create_moves(i);
     if (log_move_creation)
@@ -246,9 +247,12 @@ void BoardConst::create_move(unsigned int piece,
     info.points = points;
     info.center = Point(x + center.x, y + center.y);
     set_adj_and_corner_points(info);
-    info.dist_to_center = numeric_limits<unsigned int>::max();
-    BOOST_FOREACH(Point p, info.points)
-        info.dist_to_center = min(m_dist_to_center[p], info.dist_to_center);
+    if (m_sz == 20)
+    {
+        info.dist_to_center = numeric_limits<unsigned int>::max();
+        BOOST_FOREACH(Point p, info.points)
+            info.dist_to_center = min(m_dist_to_center[p], info.dist_to_center);
+    }
     m_move_info.push_back(info);
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
     if (log_move_creation)
@@ -260,8 +264,7 @@ void BoardConst::create_move(unsigned int piece,
             grid[p] = '+';
         BOOST_FOREACH(Point p, info.corner_points)
             grid[p] = '*';
-        log() << "Move " << move.to_int() << ":\n" << grid
-              << "dist_to_center=" << info.dist_to_center << '\n';
+        log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
     BOOST_FOREACH(Point p, points)
     {
