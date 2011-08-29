@@ -33,9 +33,9 @@ void write_x_coord(ostream& out, unsigned int sz)
 
 bool Board::color_output = false;
 
-Board::Board()
+Board::Board(GameVariant game_variant)
 {
-    init(game_variant_duo);
+    init(game_variant);
 }
 
 void Board::copy_from(const Board& bd)

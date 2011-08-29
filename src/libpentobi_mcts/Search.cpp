@@ -17,7 +17,7 @@ using boost::format;
 //-----------------------------------------------------------------------------
 
 Search::Search(const Board& bd)
-    : ParentClass(State(m_shared_const)),
+    : ParentClass(State(bd, m_shared_const)),
       m_shared_const(bd, m_to_play)
 {
     set_rave(true);

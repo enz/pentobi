@@ -70,7 +70,7 @@ class State
 public:
     /** Constructor.
         @param shared_const (@ref libboardgame_doc_storesref) */
-    State(const SharedConst& shared_const);
+    State(const Board& bd, const SharedConst& shared_const);
 
     State(const State& state);
 

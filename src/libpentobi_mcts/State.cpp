@@ -109,13 +109,15 @@ void SharedConst::set_piece_value(const string& name, ValueType value)
 
 //-----------------------------------------------------------------------------
 
-State::State(const SharedConst& shared_const)
-    : m_shared_const(shared_const)
+State::State(const Board& bd, const SharedConst& shared_const)
+  : m_shared_const(shared_const),
+    m_bd(bd.get_game_variant())
 {
 }
 
 State::State(const State& state)
-    : m_shared_const(state.m_shared_const)
+  : m_shared_const(state.m_shared_const),
+    m_bd(state.m_bd.get_game_variant())
 {
 }
 

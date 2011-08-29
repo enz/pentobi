@@ -55,7 +55,7 @@ public:
     static bool is_starting_point(Point p, GameVariant game_variant,
                                   Color& color);
 
-    Board();
+    Board(GameVariant game_variant);
 
     GameVariant get_game_variant() const;
 
