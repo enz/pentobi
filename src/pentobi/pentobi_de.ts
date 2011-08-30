@@ -475,13 +475,13 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1837"/>
-        <source>Unknown.blksgf</source>
-        <translation>Unbekannt.blksgf</translation>
+        <source>Untitled Game.blksgf</source>
+        <translation>Unbenanntes Spiel.blksgf</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1843"/>
-        <source>Unknown-%1.blksgf</source>
-        <translation>Unbekannt-%1.blksgf</translation>
+        <source>Untitled Game %1.blksgf</source>
+        <translation>Unbenanntes Spiel %1.blksgf</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1848"/>

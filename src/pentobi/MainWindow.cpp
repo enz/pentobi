@@ -1853,13 +1853,13 @@ void MainWindow::saveAs()
     {
         file = getLastDir();
         file.append(QDir::separator());
-        file.append(tr("Unknown.blksgf"));
+        file.append(tr("Untitled Game.blksgf"));
         if (QFileInfo(file).exists())
             for (unsigned int i = 1; ; ++i)
             {
                 file = getLastDir();;
                 file.append(QDir::separator());
-                file.append(QString(tr("Unknown-%1.blksgf")).arg(i));
+                file.append(QString(tr("Untitled Game %1.blksgf")).arg(i));
                 if (! QFileInfo(file).exists())
                     break;
             }
