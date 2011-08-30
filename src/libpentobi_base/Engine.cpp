@@ -238,7 +238,7 @@ Color Engine::get_color_arg(const Arguments& args, unsigned int i) const
         if (s == "green" || s == "white" || s == "w")
             return Color(1);
     }
-    throw Failure(format("invalid color argumenr '%1%'") % s);
+    throw Failure(format("invalid color argument '%1%'") % s);
 }
 
 Player& Engine::get_player() const
