@@ -13,6 +13,7 @@
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
+#include "libpentobi_base/PieceValueHeuristic.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
 #include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
@@ -38,6 +39,7 @@ using libpentobi_base::game_variant_duo;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Piece;
+using libpentobi_base::PieceValueHeuristic;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Search;
 
@@ -84,6 +86,17 @@ bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
 void setIcon(QAction* action, const QString& name)
 {
     action->setIcon(QIcon(QString(":/pentobi/%1.png").arg(name)));
+}
+
+/** Comparison for sorting move list in Find Move by piece value heuristic.
+    Find Move is only to find any legal move but we still want to present moves
+    with larger pieces earlier. */
+bool isPieceBetter(const Board& bd, const PieceValueHeuristic& value,
+                   Move mv1, Move mv2)
+{
+    float v1 = value.get(bd.get_move_info(mv1).piece);
+    float v2 = value.get(bd.get_move_info(mv2).piece);
+    return v1 > v2;
 }
 
 } // namespace
@@ -1210,7 +1223,13 @@ void MainWindow::findMove()
     if (bd.is_game_over())
         return;
     if (m_legalMoves.empty())
+    {
         bd.gen_moves(m_toPlay, m_legalMoves);
+        PieceValueHeuristic value(bd);
+        sort(m_legalMoves.begin(), m_legalMoves.end(),
+             bind(&isPieceBetter, bd, value, placeholders::_1,
+                  placeholders::_2));
+    }
     if (m_legalMoves.empty())
     {
         // m_toPlay must have moves if game is not over

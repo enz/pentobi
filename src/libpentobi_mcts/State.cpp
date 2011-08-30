@@ -73,38 +73,9 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       to_play(to_play),
       detect_symmetry(true),
       avoid_symmetric_draw(true),
-      score_modification(ValueType(0.1))
+      score_modification(ValueType(0.1)),
+      piece_value(bd)
 {
-    set_piece_value("X",  ValueType(1.00));
-    set_piece_value("F",  ValueType(0.95));
-    set_piece_value("W",  ValueType(0.95));
-    set_piece_value("N",  ValueType(0.90));
-    set_piece_value("T5", ValueType(0.90));
-    set_piece_value("U",  ValueType(0.90));
-    set_piece_value("Y",  ValueType(0.90));
-    set_piece_value("Z5", ValueType(0.90));
-    set_piece_value("P",  ValueType(0.85));
-    set_piece_value("L5", ValueType(0.80));
-    set_piece_value("V5", ValueType(0.80));
-    set_piece_value("I5", ValueType(0.75));
-    set_piece_value("T4", ValueType(0.70));
-    set_piece_value("Z4", ValueType(0.70));
-    set_piece_value("L4", ValueType(0.65));
-    set_piece_value("O",  ValueType(0.60));
-    set_piece_value("I4", ValueType(0.55));
-    set_piece_value("V3", ValueType(0.50));
-    set_piece_value("I3", ValueType(0.45));
-    set_piece_value("2",  ValueType(0.40));
-    set_piece_value("1",  ValueType(0.35));
-    LIBBOARDGAME_ASSERT(BoardConst::nu_pieces == 21);
-}
-
-void SharedConst::set_piece_value(const string& name, ValueType value)
-{
-    unsigned int i;
-    if (! board.get_piece_index_by_name(name, i))
-        LIBBOARDGAME_ASSERT(false);
-    piece_value[i] = value;
 }
 
 //-----------------------------------------------------------------------------
@@ -322,7 +293,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         // Even game heuristic (0.5) with small piece value bonus to order the
         // values by piece value
         ValueType value =
-            ValueType(0.5 + 0.01 * m_shared_const.piece_value[info.piece]);
+            ValueType(0.5 + 0.01 * m_shared_const.piece_value.get(info.piece));
         ValueType count = 1;
         if (! m_local_moves.empty())
         {

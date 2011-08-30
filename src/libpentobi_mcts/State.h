@@ -13,6 +13,7 @@
 #include "libboardgame_util/Unused.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/MoveMarker.h"
+#include "libpentobi_base/PieceValueHeuristic.h"
 #include "libpentobi_base/PointList.h"
 #include "libpentobi_base/SymmetricPoints.h"
 
@@ -25,6 +26,7 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveMarker;
+using libpentobi_base::PieceValueHeuristic;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
 using libpentobi_base::SymmetricPoints;
@@ -51,16 +53,9 @@ struct SharedConst
     /** Maximum value to modify the win/loss result by the score. */
     ValueType score_modification;
 
-    /** A heuristic value that indicates how preferable a piece is to play
-        early.
-        The values are in [0..1] and the pieces are ordered by large size,
-        large number of corners and low number of edges (in this order of
-        importance). */
-    array<ValueType, BoardConst::nu_pieces> piece_value;
+    PieceValueHeuristic piece_value;
 
     SharedConst(const Board& bd, const Color& to_play);
-
-    void set_piece_value(const string& name, ValueType value);
 };
 
 //-----------------------------------------------------------------------------

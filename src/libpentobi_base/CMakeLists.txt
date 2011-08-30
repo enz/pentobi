@@ -14,6 +14,7 @@ set(pentobi_base_STAT_SRCS
   Game.cpp
   Piece.cpp
   Player.cpp
+  PieceValueHeuristic.cpp
   PointState.cpp
   PointStateExt.cpp
   SymmetricPoints.cpp
