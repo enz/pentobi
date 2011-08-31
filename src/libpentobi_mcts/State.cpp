@@ -575,7 +575,7 @@ void State::update_move_list(Color c)
             {
                 Direction dir = Direction::get_enum_diag(i);
                 Point diag = p.get_neighbor(dir);
-                if (m_bd.is_onboard(diag) && ! m_bd.is_forbidden(c, diag)
+                if (! m_bd.is_forbidden(c, diag)
                     && is_only_move_diag(m_bd, diag, c, last_mv))
                 {
                     unsigned int diag_dir = Direction::get_index_diag_inv(i);

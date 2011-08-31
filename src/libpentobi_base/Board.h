@@ -124,7 +124,9 @@ public:
 
     bool is_legal(Move mv) const;
 
-    /** Check that point is not already occupied or adjacent to own color. */
+    /** Check that point is not already occupied or adjacent to own color.
+        @param c
+        @param p The point. Off-board points are allowed and return true. */
     bool is_forbidden(Color c, Point p) const;
 
     const FullGrid<bool>& is_forbidden(Color c) const;

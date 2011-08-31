@@ -323,6 +323,7 @@ void Board::init(GameVariant game_variant)
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_forbidden[*i].init(m_sz);
+        m_forbidden[*i].fill_all(true);
         m_forbidden[*i].fill_onboard(false);
         m_has_diag[*i].init(m_sz);
         m_has_diag[*i].fill_onboard(false);
