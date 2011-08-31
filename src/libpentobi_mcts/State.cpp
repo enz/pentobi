@@ -27,7 +27,6 @@ using libpentobi_base::Direction;
 using libpentobi_base::FullGrid;
 using libpentobi_base::GameVariant;
 using libpentobi_base::MoveInfo;
-using libpentobi_base::MovePoints;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 using libpentobi_base::PointStateExt;
@@ -452,10 +451,9 @@ void State::init_symmetry_info()
     }
 }
 
-bool State::is_forbidden(Color c, Move mv, int& nu_local) const
+bool State::is_forbidden(Color c, const MovePoints& points, int& nu_local) const
 {
     nu_local = 0;
-    const MovePoints& points = m_bd.get_move_points(mv);
     const FullGrid<bool>& is_forbidden = m_bd.is_forbidden(c);
     for (auto i = points.begin(); i != points.end(); ++i)
     {
@@ -559,8 +557,9 @@ void State::update_move_list(Color c)
     for (auto i = m_moves[c].begin(); i != m_moves[c].end(); ++i)
     {
         int nu_local;
-        if (m_bd.get_move_info(*i).piece != last_piece
-            && ! is_forbidden(c, *i, nu_local))
+        const MoveInfo& info = m_bd.get_move_info(*i);
+        if (info.piece != last_piece
+            && ! is_forbidden(c, info.points, nu_local))
         {
             m_tmp_moves.push_back(*i);
             m_marker.set(*i);
@@ -584,10 +583,13 @@ void State::update_move_list(Color c)
                     {
                         const vector<Move>& moves =
                             m_bd.get_moves_diag(i, diag, diag_dir);
-                        for (auto i = moves.begin(); i != moves.end(); ++i)
+                        auto begin = moves.begin();
+                        auto end = moves.end();
+                        for (auto i = begin; i != end; ++i)
                         {
                             int nu_local;
-                            if (! is_forbidden(c, *i, nu_local)
+                            const MoveInfo& info = m_bd.get_move_info(*i);
+                            if (! is_forbidden(c, info.points, nu_local)
                                 && ! m_marker[*i])
                             {
                                 m_tmp_moves.push_back(*i);

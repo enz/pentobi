@@ -26,6 +26,7 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveMarker;
+using libpentobi_base::MovePoints;
 using libpentobi_base::PieceValueHeuristic;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
@@ -192,7 +193,7 @@ private:
 
     void init_symmetry_info();
 
-    bool is_forbidden(Color c, Move mv, int& nu_local) const;
+    bool is_forbidden(Color c, const MovePoints& points, int& nu_local) const;
 
     void update_move_list(Color c);
 
