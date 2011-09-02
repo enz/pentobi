@@ -143,7 +143,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     else
         m_squareSize = min(width, height) / m_sz;
     m_boardSize = m_squareSize * m_sz;
-    m_font.setPointSize(max(m_squareSize * 35 / 100, 1));
+    m_font.setPointSize(max(m_squareSize * 40 / 100, 1));
     m_boardOffset =
         QPoint((width - m_boardSize) / 2, (height - m_boardSize) / 2);
     painter.save();
