@@ -2107,12 +2107,6 @@ void MainWindow::setMoveNumberText()
         node = node->get_parent_or_null();
     }
     while (node != 0);
-    if (move == 0)
-    {
-        m_moveNumber->setText("");
-        m_moveNumber->setToolTip("");
-        return;
-    }
     unsigned int nuMoves = move;
     node = current.get_first_child();
     while (node != 0)
@@ -2120,6 +2114,12 @@ void MainWindow::setMoveNumberText()
         if (! tree.get_move(*node).is_null())
             ++nuMoves;
         node = node->get_first_child();
+    }
+    if (move == 0 && nuMoves == 0)
+    {
+        m_moveNumber->setText("");
+        m_moveNumber->setToolTip("");
+        return;
     }
     string variation = get_variation_string(current);
     if (variation.empty())
@@ -2132,8 +2132,17 @@ void MainWindow::setMoveNumberText()
         else
         {
             m_moveNumber->setText(QString("%1/%2").arg(move).arg(nuMoves));
-            m_moveNumber->setToolTip(QString(tr("Move number %1 of %2"))
-                                     .arg(move).arg(nuMoves));
+            if (move == 0)
+            {
+                if (nuMoves == 1)
+                    m_moveNumber->setToolTip(QString(tr("1 move")));
+                else
+                    m_moveNumber->setToolTip(QString(tr("%1 moves"))
+                                             .arg(nuMoves));
+            }
+            else
+                m_moveNumber->setToolTip(QString(tr("Move number %1 of %2"))
+                                         .arg(move).arg(nuMoves));
         }
     }
     else
@@ -2159,14 +2168,40 @@ void MainWindow::setMoveNumberText()
                                   .arg(move).arg(nuMoves)
                                   .arg(variation.c_str()));
             if (isMain)
-                m_moveNumber->setToolTip(
+            {
+                if (move == 0)
+                {
+                    if (nuMoves == 1)
+                        m_moveNumber->setToolTip(
+                                       QString(tr("1 move in main variation")));
+                    else
+                        m_moveNumber->setToolTip(
+                                       QString(tr("%1 moves in main variation"))
+                                       .arg(nuMoves));
+                }
+                else
+                    m_moveNumber->setToolTip(
                            QString(tr("Move number %1 of %2 in main variation"))
                            .arg(move).arg(nuMoves));
+            }
             else
-                m_moveNumber->setToolTip(
+            {
+                if (move == 0)
+                {
+                    if (nuMoves == 1)
+                        m_moveNumber->setToolTip(
+                                          QString(tr("1 move (variation %1)"))
+                                          .arg(variation.c_str()));
+                    else
+                        m_moveNumber->setToolTip(
+                                          QString(tr("%1 moves (variation %2)"))
+                                          .arg(nuMoves).arg(variation.c_str()));
+                }
+                else
+                    m_moveNumber->setToolTip(
                               QString(tr("Move number %1 of %2 (variation %3)"))
-                              .arg(move).arg(nuMoves)
-                              .arg(variation.c_str()));
+                              .arg(move).arg(nuMoves).arg(variation.c_str()));
+            }
 
         }
     }
