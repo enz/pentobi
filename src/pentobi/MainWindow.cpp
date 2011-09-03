@@ -2131,9 +2131,9 @@ void MainWindow::setMoveNumberText()
         }
         else
         {
-            m_moveNumber->setText(QString("%1/%2").arg(move).arg(nuMoves));
             if (move == 0)
             {
+                m_moveNumber->setText(QString("(%1)").arg(nuMoves));
                 if (nuMoves == 1)
                     m_moveNumber->setToolTip(QString(tr("1 move")));
                 else
@@ -2141,8 +2141,12 @@ void MainWindow::setMoveNumberText()
                                              .arg(nuMoves));
             }
             else
+            {
+                m_moveNumber->setText(QString("%1 (%2)")
+                                      .arg(move).arg(nuMoves));
                 m_moveNumber->setToolTip(QString(tr("Move number %1 of %2"))
                                          .arg(move).arg(nuMoves));
+            }
         }
     }
     else
@@ -2164,7 +2168,7 @@ void MainWindow::setMoveNumberText()
         }
         else
         {
-            m_moveNumber->setText(QString("%1/%2 [%3]")
+            m_moveNumber->setText(QString("%1 (%2) [%3]")
                                   .arg(move).arg(nuMoves)
                                   .arg(variation.c_str()));
             if (isMain)
