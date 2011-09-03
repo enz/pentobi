@@ -9,7 +9,7 @@ Current development version
   be read.
 * Support for move annotation symbols
 * Store and edit additional game information (e.g. player names)
-* New menu item "Go to Move"
+* New menu items Ten Moves Backward/Forward, Go to Move
 
 
 Version 0.1 (15 Jul 2011)

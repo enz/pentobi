@@ -273,6 +273,18 @@ void MainWindow::backward()
     gotoNode(node.get_parent());
 }
 
+void MainWindow::backward10()
+{
+    const Node* node = &m_game->get_current();
+    for (unsigned int i = 0; i < 10; ++i)
+    {
+        if (! node->has_parent())
+            break;
+        node = &node->get_parent();
+    }
+    gotoNode(*node);
+}
+
 void MainWindow::backToMainVariation()
 {
     gotoNode(back_to_main_variation(m_game->get_current()));
@@ -332,17 +344,21 @@ void MainWindow::boardChanged(bool currentNodeChanged)
     const Node& current = m_game->get_current();
     bool isMain = is_main_variation(current);
     bool noPieceSelected = (m_guiBoard->getSelectedPiece() == 0);
-    m_actionBeginning->setEnabled(current.has_parent());
-    m_actionBackward->setEnabled(current.has_parent());
-    m_actionForward->setEnabled(current.has_children());
-    m_actionEnd->setEnabled(current.has_children());
+    bool hasParent = current.has_parent();
+    bool hasChildren = current.has_children();
+    m_actionBeginning->setEnabled(hasParent);
+    m_actionBackward->setEnabled(hasParent);
+    m_actionBackward10->setEnabled(hasParent);
+    m_actionForward->setEnabled(hasChildren);
+    m_actionForward10->setEnabled(hasChildren);
+    m_actionEnd->setEnabled(hasChildren);
     m_actionFindMove->setEnabled(! isGameOver);
     m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     m_actionBackToMainVariation->setEnabled(! isMain);
     m_actionMakeMainVariation->setEnabled(! isMain);
-    m_actionTruncate->setEnabled(current.has_parent());
+    m_actionTruncate->setEnabled(hasParent);
     m_actionNextPiece->setEnabled(! isGameOver
                                   && (nuPiecesLeft > 1
                                       || (nuPiecesLeft == 1
@@ -543,6 +559,11 @@ void MainWindow::createActions()
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
 
+    m_actionBackward10 = new QAction(tr("&Ten Moves Backward"), this);
+    setIcon(m_actionBackward10, "backward10");
+    m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
+    connect(m_actionBackward10, SIGNAL(triggered()), this, SLOT(backward10()));
+
     m_actionBackToMainVariation = new QAction(tr("Back to &Main Variation"),
                                               this);
     m_actionBackToMainVariation->setShortcut(QString("Ctrl+M"));
@@ -610,6 +631,11 @@ void MainWindow::createActions()
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     setIcon(m_actionForward, "go-next");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
+
+    m_actionForward10 = new QAction(tr("Ten Moves F&orward"), this);
+    m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
+    setIcon(m_actionForward10, "forward10");
+    connect(m_actionForward10, SIGNAL(triggered()), this, SLOT(forward10()));
 
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
@@ -985,8 +1011,10 @@ void MainWindow::createMenu()
 
     QMenu* menuGo = menuBar()->addMenu(tr("&Go"));
     menuGo->addAction(m_actionBeginning);
+    menuGo->addAction(m_actionBackward10);
     menuGo->addAction(m_actionBackward);
     menuGo->addAction(m_actionForward);
+    menuGo->addAction(m_actionForward10);
     menuGo->addAction(m_actionEnd);
     menuGo->addAction(m_actionNextVariation);
     menuGo->addAction(m_actionPreviousVariation);
@@ -1131,8 +1159,10 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionNewGame);
     m_toolBar->addAction(m_actionPlay);
     m_toolBar->addAction(m_actionBeginning);
+    m_toolBar->addAction(m_actionBackward10);
     m_toolBar->addAction(m_actionBackward);
     m_toolBar->addAction(m_actionForward);
+    m_toolBar->addAction(m_actionForward10);
     m_toolBar->addAction(m_actionEnd);
     m_toolBar->addAction(m_actionNextVariation);
     m_toolBar->addAction(m_actionPreviousVariation);
@@ -1273,6 +1303,18 @@ void MainWindow::forward()
     const Node* node = m_game->get_current().get_first_child();
     if (node == 0)
         return;
+    gotoNode(*node);
+}
+
+void MainWindow::forward10()
+{
+    const Node* node = &m_game->get_current();
+    for (unsigned int i = 0; i < 10; ++i)
+    {
+        if (! node->has_children())
+            break;
+        node = node->get_first_child();
+    }
     gotoNode(*node);
 }
 

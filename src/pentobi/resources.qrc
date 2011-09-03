@@ -17,8 +17,10 @@
     <file>manual/de/index.html</file>
     <file>manual/de/license.html</file>
     <file>manual/de/shortcuts.html</file>
+    <file>backward10.png</file>
     <file>document-open.png</file>
     <file>document-save.png</file>
+    <file>forward10.png</file>
     <file>go-down.png</file>
     <file>go-first.png</file>
     <file>go-last.png</file>

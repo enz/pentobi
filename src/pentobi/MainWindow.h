@@ -41,6 +41,8 @@ public slots:
 
     void backward();
 
+    void backward10();
+
     void backToMainVariation();
 
     void beginning();
@@ -62,6 +64,8 @@ public slots:
     void flipPieceVertically();
 
     void forward();
+
+    void forward10();
 
     void gotoMove();
 
@@ -228,6 +232,8 @@ private:
 
     QAction* m_actionBackward;
 
+    QAction* m_actionBackward10;
+
     QAction* m_actionBackToMainVariation;
 
     QAction* m_actionBadMove;
@@ -257,6 +263,8 @@ private:
     QAction* m_actionFlipPieceVertically;
 
     QAction* m_actionForward;
+
+    QAction* m_actionForward10;
 
     QAction* m_actionFullscreen;
 
