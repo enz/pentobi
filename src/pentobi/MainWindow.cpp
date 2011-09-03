@@ -2349,6 +2349,7 @@ QMessageBox::StandardButton MainWindow::showQuestion(const QString& text,
 {
     QMessageBox msgBox(this);
     msgBox.setWindowTitle(tr("Pentobi"));
+    msgBox.setIcon(QMessageBox::Question);
     msgBox.setText(text);
     msgBox.setStandardButtons(buttons);
     return static_cast<QMessageBox::StandardButton>(msgBox.exec());
