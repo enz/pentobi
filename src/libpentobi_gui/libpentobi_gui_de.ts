@@ -95,8 +95,8 @@
     <name>HelpWindow</name>
     <message>
         <location filename="HelpWindow.cpp" line="27"/>
-        <source>Pentobi Help</source>
-        <translation>Pentobi-Hilfe</translation>
+        <source>Pentobi - Help</source>
+        <translation>Pentobi - Hilfe</translation>
     </message>
     <message>
         <location filename="HelpWindow.cpp" line="32"/>

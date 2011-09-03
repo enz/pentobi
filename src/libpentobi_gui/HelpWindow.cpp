@@ -24,7 +24,7 @@ void setIcon(QAction* action, const QString& name)
 HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     : QMainWindow(parent)
 {
-    setWindowTitle(tr("Pentobi Help"));
+    setWindowTitle(tr("Pentobi - Help"));
     QTextBrowser* browser = new QTextBrowser(this);
     setCentralWidget(browser);
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
