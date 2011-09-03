@@ -394,8 +394,6 @@ private:
 
     GenMoveResult asyncGenMove(Color c, int genMoveId);
 
-    void boardChanged(bool currentNodeChanged);
-
     bool checkSave();
 
     bool checkQuit();
@@ -467,6 +465,8 @@ private:
 
     QMessageBox::StandardButton showQuestion(const QString& text,
                                          QMessageBox::StandardButtons buttons);
+
+    void updateWindow(bool currentNodeChanged);
 
     void updateComment();
 

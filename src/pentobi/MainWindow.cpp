@@ -194,7 +194,7 @@ MainWindow::MainWindow(const QString& initialFile)
     showComment(false);
     m_splitter->restoreState(settings.value("splitter_state").toByteArray());
     m_actionShowComment->setChecked(m_comment->height() > 0);
-    boardChanged(true);
+    updateWindow(true);
     clearFile();
     if (! initialFile.isEmpty())
         open(initialFile);
@@ -205,7 +205,7 @@ MainWindow::MainWindow(const QString& initialFile)
         {
             open(autoSaveFile, true);
             m_gameFinished = m_game->get_board().is_game_over();
-            boardChanged(true);
+            updateWindow(true);
         }
     }
     QString version = getVersion();
@@ -262,7 +262,7 @@ void MainWindow::badMove(bool checked)
     if (! checked)
         return;
     m_game->set_bad_move();
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::backward()
@@ -293,77 +293,6 @@ void MainWindow::backToMainVariation()
 void MainWindow::beginning()
 {
     gotoNode(m_game->get_root());
-}
-
-void MainWindow::boardChanged(bool currentNodeChanged)
-{
-    const Board& bd = m_game->get_board();
-    if (m_file.isEmpty())
-    {
-        m_actionSave->setEnabled(bd.get_nu_moves() > 0);
-        m_actionSave->setToolTip(QString());
-    }
-    else
-    {
-        bool is_modified = m_game->get_modified();
-        setWindowModified(is_modified);
-        m_actionSave->setEnabled(is_modified);
-        m_actionSave->setToolTip(QString(tr("Save (%1)")).arg(m_file));
-    }
-    m_guiBoard->copyFromBoard(bd);
-    // If the last move was played by the computer, show move numbers on all
-    // last subsequent moves by the computer because the computer could have
-    // played them quickly if the other colors cannot move anymore.
-    bool markAllLastBySameColor = m_lastMoveByComputer;
-    gui_board_util::setMarkup(*m_guiBoard, *m_game,
-                              m_actionMoveNumbersLast->isChecked(),
-                              m_actionMoveNumbersAll->isChecked(),
-                              markAllLastBySameColor);
-    m_scoreDisplay->updateScore(bd);
-    m_toPlay = m_game->get_effective_to_play();
-    m_legalMoves.clear();
-    m_legalMoveIndex = 0;
-    bool isGameOver = bd.is_game_over();
-    unsigned int nuPiecesLeft = bd.get_pieces_left(m_toPlay).size();
-    if (isGameOver)
-        m_orientationDisplay->clearSelectedColor();
-    else
-        m_orientationDisplay->selectColor(m_toPlay);
-    if (currentNodeChanged)
-    {
-        clearSelectedPiece();
-        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        {
-            m_pieceSelector[*i]->update();
-            m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
-        }
-        updateComment();
-        updateMoveAnnotationActions();
-    }
-    const Tree& tree = m_game->get_tree();
-    const Node& current = m_game->get_current();
-    bool isMain = is_main_variation(current);
-    bool noPieceSelected = (m_guiBoard->getSelectedPiece() == 0);
-    bool hasParent = current.has_parent();
-    bool hasChildren = current.has_children();
-    m_actionBeginning->setEnabled(hasParent);
-    m_actionBackward->setEnabled(hasParent);
-    m_actionBackward10->setEnabled(hasParent);
-    m_actionForward->setEnabled(hasChildren);
-    m_actionForward10->setEnabled(hasChildren);
-    m_actionEnd->setEnabled(hasChildren);
-    m_actionFindMove->setEnabled(! isGameOver);
-    m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
-    m_actionNextVariation->setEnabled(current.get_sibling() != 0);
-    m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
-    m_actionBackToMainVariation->setEnabled(! isMain);
-    m_actionMakeMainVariation->setEnabled(! isMain);
-    m_actionTruncate->setEnabled(hasParent);
-    m_actionNextPiece->setEnabled(! isGameOver
-                                  && (nuPiecesLeft > 1
-                                      || (nuPiecesLeft == 1
-                                          && noPieceSelected)));
-    m_actionPreviousPiece->setEnabled(! isGameOver && nuPiecesLeft > 1);
 }
 
 void MainWindow::cancelGenMove()
@@ -1147,7 +1076,7 @@ void MainWindow::doubtfulMove(bool checked)
     if (! checked)
         return;
     m_game->set_doubtful_move();
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::createToolBar()
@@ -1330,7 +1259,7 @@ void MainWindow::gameInfo()
 {
     GameInfoDialog dialog(this, *m_game);
     dialog.exec();
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::gameVariantClassic(bool checked)
@@ -1401,7 +1330,7 @@ void MainWindow::genMoveFinished()
     if (mv.is_pass())
     {
         showStatus(tr("The computer has no more moves available."));
-        boardChanged(false);
+        updateWindow(false);
         checkComputerMove();
         return;
     }
@@ -1450,7 +1379,7 @@ void MainWindow::goodMove(bool checked)
     if (! checked)
         return;
     m_game->set_good_move();
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::gotoMove()
@@ -1500,7 +1429,7 @@ void MainWindow::gotoNode(const Node& node)
     }
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
-    boardChanged(true);
+    updateWindow(true);
 }
 
 void MainWindow::help()
@@ -1580,7 +1509,7 @@ void MainWindow::interestingMove(bool checked)
     if (! checked)
         return;
     m_game->set_interesting_move();
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::interrupt()
@@ -1592,7 +1521,7 @@ void MainWindow::interrupt()
 void MainWindow::makeMainVariation()
 {
     m_game->make_main_variation();
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::nextPiece()
@@ -1648,7 +1577,7 @@ void MainWindow::newGame()
         return;
     cancelGenMove();
     initGame();
-    boardChanged(true);
+    updateWindow(true);
 }
 
 void MainWindow::noMoveAnnotation(bool checked)
@@ -1656,7 +1585,7 @@ void MainWindow::noMoveAnnotation(bool checked)
     if (! checked)
         return;
     m_game->remove_move_annotation();
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::open()
@@ -1709,7 +1638,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     m_computerColor.fill(false);
     m_lastMoveByComputer = false;
     initGameVariantActions();
-    boardChanged(true);
+    updateWindow(true);
 }
 
 void MainWindow::openRecentFile()
@@ -1754,14 +1683,14 @@ void MainWindow::play(Color c, Move mv)
     m_gameFinished = false;
     if (bd.is_game_over())
     {
-        boardChanged(true);
+        updateWindow(true);
         repaint();
         m_gameFinished = true;
         showGameOver();
     }
     else if (! bd.has_moves(c))
     {
-        boardChanged(true);
+        updateWindow(true);
         repaint();
         if (! computerPlaysAll() && ! m_noMovesAvailableShown[c])
         {
@@ -1772,7 +1701,7 @@ void MainWindow::play(Color c, Move mv)
     }
     else
     {
-        boardChanged(true);
+        updateWindow(true);
         checkComputerMove();
     }
 }
@@ -1884,7 +1813,7 @@ void MainWindow::save()
     {
         showStatus(QString(tr("File saved %1")).arg(m_file), true);
         m_game->clear_modified();
-        boardChanged(false);
+        updateWindow(false);
     }
 }
 
@@ -2139,7 +2068,7 @@ void MainWindow::setMoveNumbersAll(bool checked)
     {
         QSettings settings;
         settings.setValue("move_numbers", "all");
-        boardChanged(false);
+        updateWindow(false);
     }
 }
 
@@ -2149,7 +2078,7 @@ void MainWindow::setMoveNumbersLast(bool checked)
     {
         QSettings settings;
         settings.setValue("move_numbers", "last");
-        boardChanged(false);
+        updateWindow(false);
     }
 }
 
@@ -2159,7 +2088,7 @@ void MainWindow::setMoveNumbersNone(bool checked)
     {
         QSettings settings;
         settings.setValue("move_numbers", "none");
-        boardChanged(false);
+        updateWindow(false);
     }
 }
 
@@ -2329,7 +2258,7 @@ void MainWindow::truncate()
     if (! m_game->get_current().has_parent())
         return;
     m_game->truncate();
-    boardChanged(true);
+    updateWindow(true);
 }
 
 void MainWindow::updateComment()
@@ -2442,6 +2371,77 @@ void MainWindow::updateRecentFiles()
         m_actionRecentFile[j]->setVisible(false);
 }
 
+void MainWindow::updateWindow(bool currentNodeChanged)
+{
+    const Board& bd = m_game->get_board();
+    if (m_file.isEmpty())
+    {
+        m_actionSave->setEnabled(bd.get_nu_moves() > 0);
+        m_actionSave->setToolTip(QString());
+    }
+    else
+    {
+        bool is_modified = m_game->get_modified();
+        setWindowModified(is_modified);
+        m_actionSave->setEnabled(is_modified);
+        m_actionSave->setToolTip(QString(tr("Save (%1)")).arg(m_file));
+    }
+    m_guiBoard->copyFromBoard(bd);
+    // If the last move was played by the computer, show move numbers on all
+    // last subsequent moves by the computer because the computer could have
+    // played them quickly if the other colors cannot move anymore.
+    bool markAllLastBySameColor = m_lastMoveByComputer;
+    gui_board_util::setMarkup(*m_guiBoard, *m_game,
+                              m_actionMoveNumbersLast->isChecked(),
+                              m_actionMoveNumbersAll->isChecked(),
+                              markAllLastBySameColor);
+    m_scoreDisplay->updateScore(bd);
+    m_toPlay = m_game->get_effective_to_play();
+    m_legalMoves.clear();
+    m_legalMoveIndex = 0;
+    bool isGameOver = bd.is_game_over();
+    unsigned int nuPiecesLeft = bd.get_pieces_left(m_toPlay).size();
+    if (isGameOver)
+        m_orientationDisplay->clearSelectedColor();
+    else
+        m_orientationDisplay->selectColor(m_toPlay);
+    if (currentNodeChanged)
+    {
+        clearSelectedPiece();
+        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        {
+            m_pieceSelector[*i]->update();
+            m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
+        }
+        updateComment();
+        updateMoveAnnotationActions();
+    }
+    const Tree& tree = m_game->get_tree();
+    const Node& current = m_game->get_current();
+    bool isMain = is_main_variation(current);
+    bool noPieceSelected = (m_guiBoard->getSelectedPiece() == 0);
+    bool hasParent = current.has_parent();
+    bool hasChildren = current.has_children();
+    m_actionBeginning->setEnabled(hasParent);
+    m_actionBackward->setEnabled(hasParent);
+    m_actionBackward10->setEnabled(hasParent);
+    m_actionForward->setEnabled(hasChildren);
+    m_actionForward10->setEnabled(hasChildren);
+    m_actionEnd->setEnabled(hasChildren);
+    m_actionFindMove->setEnabled(! isGameOver);
+    m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
+    m_actionNextVariation->setEnabled(current.get_sibling() != 0);
+    m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
+    m_actionBackToMainVariation->setEnabled(! isMain);
+    m_actionMakeMainVariation->setEnabled(! isMain);
+    m_actionTruncate->setEnabled(hasParent);
+    m_actionNextPiece->setEnabled(! isGameOver
+                                  && (nuPiecesLeft > 1
+                                      || (nuPiecesLeft == 1
+                                          && noPieceSelected)));
+    m_actionPreviousPiece->setEnabled(! isGameOver && nuPiecesLeft > 1);
+}
+
 void MainWindow::useBook(bool checked)
 {
     m_useBook = checked;
@@ -2454,7 +2454,7 @@ void MainWindow::veryBadMove(bool checked)
     if (! checked)
         return;
     m_game->set_bad_move(2);
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::veryGoodMove(bool checked)
@@ -2462,7 +2462,7 @@ void MainWindow::veryGoodMove(bool checked)
     if (! checked)
         return;
     m_game->set_good_move(2);
-    boardChanged(false);
+    updateWindow(false);
 }
 
 void MainWindow::wheelEvent(QWheelEvent* event)
