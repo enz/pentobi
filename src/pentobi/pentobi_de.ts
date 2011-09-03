@@ -325,7 +325,7 @@
     <message>
         <location filename="MainWindow.cpp" line="923"/>
         <source>&amp;Open Recent</source>
-        <translation>Zu&amp;letzt benutzte Dateien</translation>
+        <translation>&amp;Zuletzt benutzte Dateien</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="928"/>
