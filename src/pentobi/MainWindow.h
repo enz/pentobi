@@ -392,6 +392,8 @@ private:
 
     unsigned int m_legalMoveIndex;
 
+    QLabel* m_moveNumber;
+
     GenMoveResult asyncGenMove(Color c, int genMoveId);
 
     bool checkSave();
@@ -448,6 +450,8 @@ private:
     void play(Color c, Move mv);
 
     void setGameVariant(GameVariant gameVariant);
+
+    void setMoveNumberText();
 
     void setFile(const QString& file);
 

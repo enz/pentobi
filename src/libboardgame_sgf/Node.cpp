@@ -102,6 +102,20 @@ const Node& Node::get_child(unsigned int i) const
     return *child;
 }
 
+unsigned int Node::get_child_index(const Node& child) const
+{
+    const Node* current = m_first_child.get();
+    unsigned int i = 0;
+    while (true)
+    {
+        if (current == &child)
+            return i;
+        current = current->m_sibling.get();
+        LIBBOARDGAME_ASSERT(current != 0);
+        ++i;
+    }
+}
+
 Node* Node::get_last_child() const
 {
     Node* node = m_first_child.get();

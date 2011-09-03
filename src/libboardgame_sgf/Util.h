@@ -25,6 +25,13 @@ void get_path_from_root(const Node& node, vector<const Node*>& path);
 
 const Node& get_last_node(const Node& node);
 
+/** Get a text representation of the variation to a certain node.
+    The string contains the number of the child for each node with more
+    than one child in the path from the root node to this node.
+    The childs are counted starting with 1 and the numbers are separated
+    by colons. */
+string get_variation_string(const Node& node);
+
 bool is_main_variation(const Node& node);
 
 const Node& back_to_main_variation(const Node& node);

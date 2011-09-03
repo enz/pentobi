@@ -26,6 +26,7 @@ using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::get_last_node;
+using libboardgame_sgf::util::get_variation_string;
 using libboardgame_sgf::util::is_main_variation;
 using libboardgame_sgf::util::write_tree;
 using libboardgame_util::clear_abort;
@@ -149,7 +150,8 @@ MainWindow::MainWindow(const QString& initialFile)
             m_guiBoard, SLOT(placeSelectedPiece()));
     createMenu();
     updateRecentFiles();
-    statusBar();
+    m_moveNumber = new QLabel();
+    statusBar()->addPermanentWidget(m_moveNumber);
     addAction(m_actionMoveSelectedPieceLeft);
     addAction(m_actionMoveSelectedPieceRight);
     addAction(m_actionMoveSelectedPieceUp);
@@ -2092,6 +2094,84 @@ void MainWindow::setMoveNumbersNone(bool checked)
     }
 }
 
+void MainWindow::setMoveNumberText()
+{
+    const Tree& tree = m_game->get_tree();
+    const Node& current = m_game->get_current();
+    unsigned int move = 0;
+    const Node* node = &current;
+    do
+    {
+        if (! tree.get_move(*node).is_null())
+            ++move;
+        node = node->get_parent_or_null();
+    }
+    while (node != 0);
+    if (move == 0)
+    {
+        m_moveNumber->setText("");
+        m_moveNumber->setToolTip("");
+        return;
+    }
+    unsigned int nuMoves = move;
+    node = current.get_first_child();
+    while (node != 0)
+    {
+        if (! tree.get_move(*node).is_null())
+            ++nuMoves;
+        node = node->get_first_child();
+    }
+    string variation = get_variation_string(current);
+    if (variation.empty())
+    {
+        if (move == nuMoves)
+        {
+            m_moveNumber->setText(QString("%1").arg(move));
+            m_moveNumber->setToolTip(QString(tr("Move number %1")).arg(move));
+        }
+        else
+        {
+            m_moveNumber->setText(QString("%1/%2").arg(move).arg(nuMoves));
+            m_moveNumber->setToolTip(QString(tr("Move number %1 of %2"))
+                                     .arg(move).arg(nuMoves));
+        }
+    }
+    else
+    {
+        bool isMain = is_main_variation(current);
+        if (move == nuMoves)
+        {
+            m_moveNumber->setText(QString("%1 [%2]")
+                                  .arg(move).arg(variation.c_str()));
+            if (isMain)
+                m_moveNumber->setToolTip(
+                                 QString(tr("Move number %1 in main variation"))
+                                 .arg(move));
+            else
+                m_moveNumber->setToolTip(
+                                    QString(tr("Move number %1 (variation %2)"))
+                                    .arg(move).arg(variation.c_str()));
+
+        }
+        else
+        {
+            m_moveNumber->setText(QString("%1/%2 [%3]")
+                                  .arg(move).arg(nuMoves)
+                                  .arg(variation.c_str()));
+            if (isMain)
+                m_moveNumber->setToolTip(
+                           QString(tr("Move number %1 of %2 in main variation"))
+                           .arg(move).arg(nuMoves));
+            else
+                m_moveNumber->setToolTip(
+                              QString(tr("Move number %1 of %2 (variation %3)"))
+                              .arg(move).arg(nuMoves)
+                              .arg(variation.c_str()));
+
+        }
+    }
+}
+
 void MainWindow::showComment(bool checked)
 {
     int height = m_splitter->height();
@@ -2416,6 +2496,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         updateComment();
         updateMoveAnnotationActions();
     }
+    setMoveNumberText();
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
     bool isMain = is_main_variation(current);

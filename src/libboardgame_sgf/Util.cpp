@@ -90,6 +90,35 @@ void get_path_from_root(const Node& node, vector<const Node*>& path)
     reverse(path.begin(), path.end());
 }
 
+/** Get a text representation of the variation to a certain node.
+    The string contains the number of the child for each node with more
+    than one child in the path from the root node to this node.
+    The childs are counted starting with 1 and the numbers are separated
+    by colons. */
+string get_variation_string(const Node& node)
+{
+    vector<unsigned int> list;
+    const Node* current = &node;
+    while (current != 0)
+    {
+        const Node* parent = current->get_parent_or_null();
+        if (parent != 0 && parent->get_nu_children() > 1)
+        {
+            unsigned int index = parent->get_child_index(*current) + 1;
+            list.insert(list.begin(), index);
+        }
+        current = parent;
+    }
+    ostringstream s;
+    for (unsigned int i = 0; i < list.size(); ++i)
+    {
+        s << list[i];
+        if (i < list.size() - 1)
+            s << '.';
+    }
+    return s.str();
+}
+
 bool is_main_variation(const Node& node)
 {
     const Node* current = &node;

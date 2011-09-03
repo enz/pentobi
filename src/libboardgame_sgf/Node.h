@@ -106,6 +106,8 @@ public:
     /** @pre i < get_nu_children() */
     const Node& get_child(unsigned int i) const;
 
+    unsigned int get_child_index(const Node& child) const;
+
     /** Get single child.
         @pre has_single_child() */
     const Node& get_child() const;
