@@ -37,6 +37,8 @@ public:
     /** Return move or ColorMove::null() if node has no move property. */
     ColorMove get_move(const Node& node) const;
 
+    bool has_move(const Node& node) const;
+
     const Node* find_child_with_move(const Node& node, ColorMove mv) const;
 
     void set_result(const Node& node, int score);
@@ -60,6 +62,11 @@ private:
 inline GameVariant Tree::get_game_variant() const
 {
     return m_game_variant;
+}
+
+inline bool Tree::has_move(const Node& node) const
+{
+    return ! get_move(node).is_null();
 }
 
 inline void Tree::set_move(const Node& node, ColorMove mv)

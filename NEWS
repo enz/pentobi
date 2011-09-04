@@ -9,7 +9,7 @@ Current development version
   by Pentobi 0.1 can still be read.
 * Support for move annotation symbols
 * Store and edit additional game information (e.g. player names)
-* New menu items Ten Moves Backward/Forward, Go to Move
+* New menu items Ten Moves Backward/Forward, Go to Move, Undo Move
 * Indicate current move number, total number of moves and current variation in
   status bar
 

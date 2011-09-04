@@ -850,6 +850,9 @@ void MainWindow::createActions()
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 
+    m_actionUndo = new QAction(tr("&Undo Move"), this);
+    connect(m_actionUndo, SIGNAL(triggered()), this, SLOT(undo()));
+
     m_actionUseBook = new QAction(tr("Use &Opening Book"), this);
     m_actionUseBook->setCheckable(true);
     m_actionUseBook->setChecked(m_useBook);
@@ -938,6 +941,7 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantDuo);
     menuGame->addAction(m_actionComputerColor);
     menuGame->addAction(m_actionGameInfo);
+    menuGame->addAction(m_actionUndo);
     menuGame->addAction(m_actionFindMove);
 
     QMenu* menuGo = menuBar()->addMenu(tr("&Go"));
@@ -2381,6 +2385,14 @@ void MainWindow::truncate()
     updateWindow(true);
 }
 
+void MainWindow::undo()
+{
+    const Node& current = m_game->get_current();
+    if (current.has_children() || ! m_game->get_tree().has_move(current))
+        return;
+    truncate();
+}
+
 void MainWindow::updateComment()
 {
     string comment = m_game->get_comment();
@@ -2543,6 +2555,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool noPieceSelected = (m_guiBoard->getSelectedPiece() == 0);
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
+    bool hasMove = tree.has_move(current);
+    m_actionBackToMainVariation->setEnabled(! isMain);
     m_actionBeginning->setEnabled(hasParent);
     m_actionBackward->setEnabled(hasParent);
     m_actionBackward10->setEnabled(hasParent);
@@ -2551,16 +2565,16 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionEnd->setEnabled(hasChildren);
     m_actionFindMove->setEnabled(! isGameOver);
     m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
-    m_actionNextVariation->setEnabled(current.get_sibling() != 0);
-    m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
-    m_actionBackToMainVariation->setEnabled(! isMain);
     m_actionMakeMainVariation->setEnabled(! isMain);
-    m_actionTruncate->setEnabled(hasParent);
     m_actionNextPiece->setEnabled(! isGameOver
                                   && (nuPiecesLeft > 1
                                       || (nuPiecesLeft == 1
                                           && noPieceSelected)));
+    m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPreviousPiece->setEnabled(! isGameOver && nuPiecesLeft > 1);
+    m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
+    m_actionTruncate->setEnabled(hasParent);
+    m_actionUndo->setEnabled(hasParent || ! hasChildren || hasMove);
 }
 
 void MainWindow::useBook(bool checked)

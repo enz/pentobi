@@ -147,6 +147,8 @@ public slots:
 
     void truncate();
 
+    void undo();
+
 protected:
     void closeEvent(QCloseEvent* event);
 
@@ -373,6 +375,8 @@ private:
     QAction* m_actionSelectPieceZ;
 
     QAction* m_actionTruncate;
+
+    QAction* m_actionUndo;
 
     QAction* m_actionUseBook;
 
