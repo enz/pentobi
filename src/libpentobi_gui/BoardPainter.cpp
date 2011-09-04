@@ -76,6 +76,26 @@ void BoardPainter::drawLabel(QPainter& painter, int x, int y,
                      Qt::AlignCenter, label);
 }
 
+void BoardPainter::drawVariationTriangle(QPainter& painter, int x, int y)
+{
+    int squareX = x * m_squareSize;
+    int squareY = (m_sz - y - 1) * m_squareSize;
+    qreal offset = 0.75 * m_squareSize;
+    qreal triangleHeight = 0.15 * m_squareSize;
+    qreal triangleWidth = 0.866 * triangleHeight;
+    const QPointF polygon[3] =
+        {
+            QPointF(0, 0),
+            QPointF(triangleWidth, triangleHeight / 2),
+            QPointF(0, triangleHeight),
+        };
+    painter.save();
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.translate(squareX + offset, squareY + offset);
+    painter.drawConvexPolygon(polygon, 3);
+    painter.restore();
+}
+
 void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
                                      const FullGrid<PointStateExt>& pointState)
 {
@@ -134,7 +154,8 @@ QRect BoardPainter::getRect(Point p) const
 void BoardPainter::paint(QPainter& painter, unsigned int width,
                          unsigned int height, GameVariant gameVariant,
                          const FullGrid<PointStateExt>& pointState,
-                         const Grid<QString>* labels)
+                         const Grid<QString>* labels,
+                         const Grid<MarkupFlags>* markupFlags)
 {
     m_hasPainted = true;
     m_sz = static_cast<int>(pointState.get_size());
@@ -187,9 +208,21 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                 Util::paintEmptySquare(painter, squareX, squareY, m_squareSize);
         }
     }
-    painter.setFont(m_font);
+    if (markupFlags != 0)
+    {
+        for (Geometry<Point>::Iterator i(m_sz); i; ++i)
+            if ((*markupFlags)[*i].test(markup_variation_triangle))
+            {
+                PointState s = pointState[*i].to_point_state();
+                QColor color = Util::getLabelColor(gameVariant, s);
+                painter.setPen(color);
+                painter.setBrush(color);
+                drawVariationTriangle(painter, i->get_x(), i->get_y());
+            }
+    }
     if (labels != 0)
     {
+        painter.setFont(m_font);
         for (Geometry<Point>::Iterator i(m_sz); i; ++i)
             if (! (*labels)[*i].isEmpty())
             {

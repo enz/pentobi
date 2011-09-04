@@ -10,6 +10,8 @@ Current development version
 * Support for move annotation symbols
 * Store and edit additional game information (e.g. player names)
 * New menu items Ten Moves Backward/Forward, Go to Move, Undo Move
+* Indicate existence of variations to a move by a small triangle below the
+  move number
 * Indicate current move number, total number of moves and current variation in
   status bar
 

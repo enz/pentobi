@@ -42,7 +42,18 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
 void GuiBoard::clearMarkup()
 {
     for (Geometry<Point>::Iterator i(m_labels.get_size()); i; ++i)
+    {
         setLabel(*i, "");
+        m_markupFlags[*i].reset();
+    }
+}
+
+void GuiBoard::clearMarkupFlag(Point p, MarkupFlag flag)
+{
+    if (! m_markupFlags[p].test(flag))
+        return;
+    m_markupFlags[p].reset(flag);
+    updatePoint(p);
 }
 
 void GuiBoard::clearSelectedPiece()
@@ -61,6 +72,7 @@ void GuiBoard::copyFromBoard(const Board& bd)
         m_isInitialized = true;
         m_pointState = bd.get_grid();
         m_labels.init(sz, "");
+        m_markupFlags.init(sz);
         update();
     }
     else
@@ -182,7 +194,7 @@ void GuiBoard::paintEvent(QPaintEvent* event)
             m_boardPainter.clearSelectedPiece();
     }
     m_boardPainter.paint(painter, width(), height(), m_gameVariant,
-                         m_pointState, &m_labels);
+                         m_pointState, &m_labels, &m_markupFlags);
 }
 
 void GuiBoard::placeSelectedPiece()
@@ -241,6 +253,14 @@ void GuiBoard::setLabel(Point p, const QString& text)
         m_labels[p] = text;
         updatePoint(p);
     }
+}
+
+void GuiBoard::setMarkupFlag(Point p, MarkupFlag flag)
+{
+    if (m_markupFlags[p].test(flag))
+        return;
+    m_markupFlags[p].set(flag);
+    updatePoint(p);
 }
 
 void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)

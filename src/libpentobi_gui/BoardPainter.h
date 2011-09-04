@@ -6,6 +6,7 @@
 #define LIBPENTOBI_GUI_BOARD_PAINTER_H
 
 #include <QtGui>
+#include "MarkupFlags.h"
 #include "libpentobi_base/Grid.h"
 #include "libpentobi_base/Board.h"
 
@@ -39,7 +40,8 @@ public:
     void paint(QPainter& painter, unsigned int width, unsigned int height,
                GameVariant gameVariant,
                const FullGrid<PointStateExt>& pointState,
-               const Grid<QString>* labels = 0);
+               const Grid<QString>* labels = 0,
+               const Grid<MarkupFlags>* markupFlags = 0);
 
     /** Get the corresponding board coordinates of a pixel.
         @return The board coordinates or CoordPoint::null() if paint() was
@@ -77,6 +79,8 @@ private:
 
     void drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
                            const FullGrid<PointStateExt>& pointState);
+
+    void drawVariationTriangle(QPainter& painter, int x, int y);
 };
 
 inline void BoardPainter::clearSelectedPiece()

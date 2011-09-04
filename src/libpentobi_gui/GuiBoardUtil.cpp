@@ -13,6 +13,7 @@ namespace gui_board_util {
 using libpentobi_base::ColorMove;
 using libpentobi_base::Tree;
 using libboardgame_sgf::Node;
+using libboardgame_sgf::ChildIterator;
 
 //-----------------------------------------------------------------------------
 
@@ -68,6 +69,15 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
     guiBoard.setLabel(p, label);
 }
 
+void setVariationTriangle(GuiBoard& guiBoard, const Game& game,
+                          const Node& node, Point p)
+{
+    const Node* parent = node.get_parent_or_null();
+    if (parent == 0 || parent->get_nu_children() < 2)
+        return;
+    guiBoard.setMarkupFlag(p, markup_variation_triangle);
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -107,6 +117,8 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
                 if (! mv.move.is_pass())
                 {
                     setMoveLabel(guiBoard, game, *node, moveNumber, mv);
+                    setVariationTriangle(guiBoard, game, *node,
+                                         bd.get_move_info(mv.move).center);
                     if (markLastMove && ! markAllLastBySameColor)
                         break;
                     --moveNumber;
