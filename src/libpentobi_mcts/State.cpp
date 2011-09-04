@@ -346,7 +346,9 @@ void State::init_local_points()
     if (m_bd.get_game_variant() == game_variant_classic_2)
         to_play_second_color = to_play.get_next(nu_colors).get_next(nu_colors);
     unsigned int move_number = m_bd.get_nu_moves();
-    for (unsigned int i = 0; i < m_bd.get_nu_colors() - 1; ++i)
+    // Consider last 3 moves for local points (i.e. last 2 opponent moves in
+    // two-player variants)
+    for (unsigned int i = 0; i < 3; ++i)
     {
         if (move_number == 0)
             return;
