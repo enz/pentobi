@@ -2,17 +2,16 @@ Current development version
 ===========================
 
 * German translation
-* Added custom playing level with configurable time per move
+* New custom playing level with configurable time per move
 * Display sum score for both player colors in game variant Classic Two-Player
-* File format was slightly changed to conform to the proposed version 5 of SGF
-  that requires digits for move properties in multi-player games. Files written
-  by Pentobi 0.1 can still be read.
+* Slightly changed file format to conform to the proposed version 5 of SGF that
+  requires digits for move properties in multi-player games. Files written by
+  Pentobi 0.1 can still be read.
 * Support for move annotation symbols
-* Store and edit additional game information (e.g. player names)
+* Store and edit additional game information (player names, date)
 * New menu items Ten Moves Backward/Forward, Go to Move, Undo Move
-* Underline move numbers if there are variations with alternative moves
-* Indicate current move number, total number of moves and current variation in
-  status bar
+* Underline move numbers if there are alternative variations
+* Show move number, total number of moves and current variation in status bar
 
 
 Version 0.1 (15 Jul 2011)
