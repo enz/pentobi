@@ -1147,7 +1147,7 @@ void MainWindow::exportAsciiArt()
 void MainWindow::exportImage()
 {
     QSettings settings;
-    int size = settings.value("export_image_size", 320).toInt();
+    int size = settings.value("export_image_size", 420).toInt();
     bool ok;
     size = QInputDialog::getInt(this, tr("Export Image"), tr("Image size:"),
                                 size, 0, 2147483647, 40, &ok);
