@@ -340,8 +340,9 @@ bool MainWindow::checkSave()
         }
         return true;
     }
-    const Board& bd = m_game->get_board();
-    if (bd.get_nu_moves() > 0 && ! m_gameFinished)
+    // Don't ask if game should be saved if it was finished because the user
+    // might only want to play and never save games.
+    if (m_game->get_tree().get_root().has_children() && ! m_gameFinished)
     {
         QMessageBox::StandardButton button =
             showQuestion(tr("Abort current game?"),
@@ -1650,8 +1651,11 @@ void MainWindow::open(const QString& file, bool isTemporary)
 void MainWindow::openRecentFile()
 {
      QAction* action = qobject_cast<QAction*>(sender());
-     if (action)
-         open(action->data().toString());
+     if (action == 0)
+         return;
+     if (! checkSave())
+         return;
+     open(action->data().toString());
 }
 
 void MainWindow::play()

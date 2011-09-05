@@ -68,32 +68,16 @@ BoardPainter::BoardPainter()
 }
 
 void BoardPainter::drawLabel(QPainter& painter, int x, int y,
-                             const QString& label)
+                             const QString& label, bool underline)
 {
+    if (underline)
+        painter.setFont(m_fontUnderlined);
+    else
+        painter.setFont(m_font);
     int squareX = x * m_squareSize;
     int squareY = (m_sz - y - 1) * m_squareSize;
     painter.drawText(squareX, squareY, m_squareSize, m_squareSize,
                      Qt::AlignCenter, label);
-}
-
-void BoardPainter::drawVariationTriangle(QPainter& painter, int x, int y)
-{
-    int squareX = x * m_squareSize;
-    int squareY = (m_sz - y - 1) * m_squareSize;
-    qreal offset = 0.75 * m_squareSize;
-    qreal triangleHeight = 0.15 * m_squareSize;
-    qreal triangleWidth = 0.866 * triangleHeight;
-    const QPointF polygon[3] =
-        {
-            QPointF(0, 0),
-            QPointF(triangleWidth, triangleHeight / 2),
-            QPointF(0, triangleHeight),
-        };
-    painter.save();
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.translate(squareX + offset, squareY + offset);
-    painter.drawConvexPolygon(polygon, 3);
-    painter.restore();
 }
 
 void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
@@ -165,6 +149,8 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         m_squareSize = min(width, height) / m_sz;
     m_boardSize = m_squareSize * m_sz;
     m_font.setPointSize(max(m_squareSize * 40 / 100, 1));
+    m_fontUnderlined = m_font;
+    m_fontUnderlined.setUnderline(true);
     m_boardOffset =
         QPoint((width - m_boardSize) / 2, (height - m_boardSize) / 2);
     painter.save();
@@ -176,15 +162,15 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         for (int x = 0; x < m_sz; ++x)
         {
             QString label(QChar('A' + x));
-            drawLabel(painter, x, -1, label);
-            drawLabel(painter, x, m_sz, label);
+            drawLabel(painter, x, -1, label, false);
+            drawLabel(painter, x, m_sz, label, false);
         }
         for (int y = 0; y < m_sz; ++y)
         {
             QString label;
             label.setNum(y + 1);
-            drawLabel(painter, -1, y, label);
-            drawLabel(painter, m_sz, y, label);
+            drawLabel(painter, -1, y, label, false);
+            drawLabel(painter, m_sz, y, label, false);
         }
     }
     for (Geometry<Point>::Iterator i(m_sz); i; ++i)
@@ -208,27 +194,19 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                 Util::paintEmptySquare(painter, squareX, squareY, m_squareSize);
         }
     }
-    if (markupFlags != 0)
-    {
-        for (Geometry<Point>::Iterator i(m_sz); i; ++i)
-            if ((*markupFlags)[*i].test(markup_variation_triangle))
-            {
-                PointState s = pointState[*i].to_point_state();
-                QColor color = Util::getLabelColor(gameVariant, s);
-                painter.setPen(color);
-                painter.setBrush(color);
-                drawVariationTriangle(painter, i->get_x(), i->get_y());
-            }
-    }
     if (labels != 0)
     {
-        painter.setFont(m_font);
         for (Geometry<Point>::Iterator i(m_sz); i; ++i)
             if (! (*labels)[*i].isEmpty())
             {
                 PointState s = pointState[*i].to_point_state();
                 painter.setPen(Util::getLabelColor(gameVariant, s));
-                drawLabel(painter, i->get_x(), i->get_y(), (*labels)[*i]);
+                bool underline = false;
+                if (markupFlags != 0
+                    && (*markupFlags)[*i].test(markup_variation))
+                    underline = true;
+                drawLabel(painter, i->get_x(), i->get_y(), (*labels)[*i],
+                          underline);
             }
     }
     drawSelectedPiece(painter, gameVariant, pointState);

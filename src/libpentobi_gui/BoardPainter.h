@@ -75,12 +75,13 @@ private:
 
     QFont m_font;
 
-    void drawLabel(QPainter& painter, int x, int y, const QString& label);
+    QFont m_fontUnderlined;
+
+    void drawLabel(QPainter& painter, int x, int y, const QString& label,
+                   bool underline);
 
     void drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
                            const FullGrid<PointStateExt>& pointState);
-
-    void drawVariationTriangle(QPainter& painter, int x, int y);
 };
 
 inline void BoardPainter::clearSelectedPiece()

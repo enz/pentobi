@@ -11,7 +11,10 @@
 
 enum MarkupFlag
 {
-    markup_variation_triangle,
+    /** Visual indication that a move has variations.
+        Currently only visible if the point has a (move number) label, in which
+        case the label is underlined. */
+    markup_variation,
 
     _nu_markup_flags
 };
