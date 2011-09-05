@@ -485,7 +485,7 @@ void MainWindow::createActions()
     m_actionAbout = new QAction(tr("&About"), this);
     connect(m_actionAbout, SIGNAL(triggered()), this, SLOT(about()));
 
-    m_actionBackward = new QAction(tr("&Backward"), this);
+    m_actionBackward = new QAction(tr("B&ackward"), this);
     setIcon(m_actionBackward, "go-previous");
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
@@ -507,7 +507,7 @@ void MainWindow::createActions()
     connect(m_actionBadMove, SIGNAL(triggered(bool)),
             this, SLOT(badMove(bool)));
 
-    m_actionBeginning = new QAction(tr("Be&ginning"), this);
+    m_actionBeginning = new QAction(tr("&Beginning"), this);
     setIcon(m_actionBeginning, "go-first");
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
@@ -542,7 +542,7 @@ void MainWindow::createActions()
     connect(m_actionExportAsciiArt, SIGNAL(triggered()),
             this, SLOT(exportAsciiArt()));
 
-    m_actionExportImage = new QAction(tr("&Image"), this);
+    m_actionExportImage = new QAction(tr("I&mage"), this);
     connect(m_actionExportImage, SIGNAL(triggered()),
             this, SLOT(exportImage()));
 
@@ -574,7 +574,7 @@ void MainWindow::createActions()
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
 
-    m_actionGameInfo = new QAction(tr("Game &Info"), this);
+    m_actionGameInfo = new QAction(tr("G&ame Info"), this);
     m_actionGameInfo->setShortcut(QString("Ctrl+I"));
     connect(m_actionGameInfo, SIGNAL(triggered()), this, SLOT(gameInfo()));
 
@@ -610,18 +610,18 @@ void MainWindow::createActions()
     m_actionHelp->setShortcut(QKeySequence::HelpContents);
     connect(m_actionHelp, SIGNAL(triggered()), this, SLOT(help()));
 
-    m_actionInterestingMove = new QAction(tr("&Interesting"), this);
+    m_actionInterestingMove = new QAction(tr("I&nteresting"), this);
     m_actionInterestingMove->setActionGroup(groupMoveAnnotation);
     m_actionInterestingMove->setCheckable(true);
     connect(m_actionInterestingMove, SIGNAL(triggered(bool)),
             this, SLOT(interestingMove(bool)));
 
-    m_actionInterrupt = new QAction(tr("&Interrupt"), this);
+    m_actionInterrupt = new QAction(tr("I&nterrupt"), this);
     m_actionInterrupt->setShortcut(QString("Escape"));
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
 
-    m_actionMakeMainVariation = new QAction(tr("&Make Main Variation"), this);
+    m_actionMakeMainVariation = new QAction(tr("M&ake Main Variation"), this);
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
             this, SLOT(makeMainVariation()));
 
@@ -692,7 +692,7 @@ void MainWindow::createActions()
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
 
     m_actionNoMoveAnnotation =
-        new QAction(tr("&None", "move annotation"), this);
+        new QAction(tr("N&one", "move annotation"), this);
     m_actionNoMoveAnnotation->setActionGroup(groupMoveAnnotation);
     m_actionNoMoveAnnotation->setCheckable(true);
     connect(m_actionNoMoveAnnotation, SIGNAL(triggered(bool)),
@@ -923,7 +923,7 @@ void MainWindow::createMenu()
 
     QMenu* menuFile = menuBar()->addMenu(tr("&File"));
     menuFile->addAction(m_actionOpen);
-    m_menuOpenRecent = menuFile->addMenu(tr("&Open Recent"));
+    m_menuOpenRecent = menuFile->addMenu(tr("Open &Recent"));
     for (int i = 0; i < maxRecentFiles; ++i)
         m_menuOpenRecent->addAction(m_actionRecentFile[i]);
     menuFile->addAction(m_actionSave);
@@ -935,7 +935,7 @@ void MainWindow::createMenu()
 
     QMenu* menuGame = menuBar()->addMenu(tr("G&ame"));
     menuGame->addAction(m_actionNewGame);
-    QMenu* menuGameVariant = menuGame->addMenu(tr("Game &Variant"));
+    QMenu* menuGameVariant = menuGame->addMenu(tr("&Game Variant"));
     menuGameVariant->addAction(m_actionGameVariantClassic);
     menuGameVariant->addAction(m_actionGameVariantClassic2);
     menuGameVariant->addAction(m_actionGameVariantDuo);
@@ -957,7 +957,7 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionBackToMainVariation);
 
     QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
-    m_menuMoveAnnotation = menuEdit->addMenu(tr("Move &Annotation"));
+    m_menuMoveAnnotation = menuEdit->addMenu(tr("&Move Annotation"));
     m_menuMoveAnnotation->addAction(m_actionGoodMove);
     m_menuMoveAnnotation->addAction(m_actionVeryGoodMove);
     m_menuMoveAnnotation->addAction(m_actionBadMove);
@@ -972,7 +972,7 @@ void MainWindow::createMenu()
     menuView->addAction(m_actionShowToolbar);
     menuView->addAction(m_actionShowComment);
     menuView->addAction(m_actionFullscreen);
-    QMenu* menuMoveNumbers = menuView->addMenu(tr("Move &Numbers"));
+    QMenu* menuMoveNumbers = menuView->addMenu(tr("&Move Numbers"));
     menuMoveNumbers->addAction(m_actionMoveNumbersLast);
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
     menuMoveNumbers->addAction(m_actionMoveNumbersNone);

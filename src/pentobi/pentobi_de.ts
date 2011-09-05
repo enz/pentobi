@@ -37,17 +37,17 @@
     <message>
         <location filename="MainWindow.cpp" line="485"/>
         <source>&amp;About</source>
-        <translation>I&amp;nfo</translation>
+        <translation>Inf&amp;o</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="488"/>
-        <source>&amp;Backward</source>
-        <translation>&amp;Zurück</translation>
+        <source>B&amp;ackward</source>
+        <translation>Z&amp;urück</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="493"/>
         <source>&amp;Ten Moves Backward</source>
-        <translation>Zehn Züge zu&amp;rück</translation>
+        <translation>&amp;Zehn Züge zurück</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="498"/>
@@ -57,11 +57,11 @@
     <message>
         <location filename="MainWindow.cpp" line="504"/>
         <source>&amp;Bad</source>
-        <translation>&amp;Schlecht</translation>
+        <translation>Schl&amp;echt</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="510"/>
-        <source>Be&amp;ginning</source>
+        <source>&amp;Beginning</source>
         <translation>&amp;Anfang</translation>
     </message>
     <message>
@@ -87,7 +87,7 @@
     <message>
         <location filename="MainWindow.cpp" line="536"/>
         <source>&amp;End</source>
-        <translation>&amp;Ende</translation>
+        <translation>E&amp;nde</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="541"/>
@@ -96,13 +96,13 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="545"/>
-        <source>&amp;Image</source>
+        <source>I&amp;mage</source>
         <translation>&amp;Grafik</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="549"/>
         <source>&amp;Find Move</source>
-        <translation>Z&amp;ug finden</translation>
+        <translation>Zug fin&amp;den</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="553"/>
@@ -122,7 +122,7 @@
     <message>
         <location filename="MainWindow.cpp" line="566"/>
         <source>Ten Moves F&amp;orward</source>
-        <translation>Zehn Züge vor&amp;wärts</translation>
+        <translation>Z&amp;ehn Züge vorwärts</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="571"/>
@@ -131,8 +131,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="577"/>
-        <source>Game &amp;Info</source>
-        <translation>Spiel-&amp;Info</translation>
+        <source>G&amp;ame Info</source>
+        <translation>Spi&amp;el-Info</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="581"/>
@@ -162,21 +162,21 @@
     <message>
         <location filename="MainWindow.cpp" line="609"/>
         <source>&amp;Contents</source>
-        <translation>&amp;Inhalt</translation>
+        <translation>I&amp;nhalt</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="613"/>
-        <source>&amp;Interesting</source>
-        <translation>&amp;Interessant</translation>
+        <source>I&amp;nteresting</source>
+        <translation>I&amp;nteressant</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="619"/>
-        <source>&amp;Interrupt</source>
+        <source>I&amp;nterrupt</source>
         <translation>&amp;Unterbrechen</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="624"/>
-        <source>&amp;Make Main Variation</source>
+        <source>M&amp;ake Main Variation</source>
         <translation>Zu &amp;Hauptvariante machen</translation>
     </message>
     <message>
@@ -233,7 +233,7 @@
     <message>
         <location filename="MainWindow.cpp" line="683"/>
         <source>&amp;Next Variation</source>
-        <translation>&amp;Nächste Variante</translation>
+        <translation>Nä&amp;chste Variante</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="689"/>
@@ -242,15 +242,14 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="695"/>
-        <source>&amp;None</source>
+        <source>N&amp;one</source>
         <comment>move annotation</comment>
         <translation>&amp;Keine</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="701"/>
         <source>&amp;Open...</source>
-        <translatorcomment>Setting shortcut on first f does not work (Qt 4.7.2, Linux).</translatorcomment>
-        <translation>Öf&amp;fnen...</translation>
+        <translation>Öff&amp;nen...</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="708"/>
@@ -320,7 +319,7 @@
     <message>
         <location filename="MainWindow.cpp" line="868"/>
         <source>&amp;Very Good</source>
-        <translation>S&amp;ehr gut</translation>
+        <translation>&amp;Sehr gut</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="924"/>
@@ -329,7 +328,7 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="926"/>
-        <source>&amp;Open Recent</source>
+        <source>Open &amp;Recent</source>
         <translation>&amp;Zuletzt benutzte Dateien</translation>
     </message>
     <message>
@@ -344,7 +343,7 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="938"/>
-        <source>Game &amp;Variant</source>
+        <source>&amp;Game Variant</source>
         <translation>&amp;Spielvariante</translation>
     </message>
     <message>
@@ -359,7 +358,7 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="960"/>
-        <source>Move &amp;Annotation</source>
+        <source>&amp;Move Annotation</source>
         <translation>&amp;Zugkommentierung</translation>
     </message>
     <message>
@@ -369,7 +368,7 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="975"/>
-        <source>Move &amp;Numbers</source>
+        <source>&amp;Move Numbers</source>
         <translation>&amp;Zugnummern</translation>
     </message>
     <message>
@@ -724,7 +723,7 @@
     <message>
         <location filename="MainWindow.cpp" line="842"/>
         <source>&amp;Custom...</source>
-        <translation>&amp;Individuell...</translation>
+        <translation>I&amp;ndividuell...</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1115"/>
