@@ -58,15 +58,7 @@ void Board::gen_moves(Color c, vector<Move>& moves) const
     {
         for (Iterator i(*this); i; ++i)
             if (has_diag(*i, c) && ! m_forbidden[c][*i])
-                for (unsigned int j = 0; j < 4; ++j)
-                {
-                    Point diag = i->get_neighbor(Direction::get_enum_diag(j));
-                    if (get_point_state_ext(diag) == c)
-                    {
-                        gen_moves(c, *i, j, m_marker, moves);
-                        break;
-                    }
-                }
+                gen_moves(c, *i, get_adj_status_index(*i, c), m_marker, moves);
     }
     m_marker.clear(moves);
 }
@@ -89,12 +81,12 @@ void Board::gen_moves(Color c, Point p, MoveMarker& marker,
     }
 }
 
-void Board::gen_moves(Color c, Point p, unsigned int diag_dir,
+void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
                       MoveMarker& marker, vector<Move>& moves) const
 {
     BOOST_FOREACH(unsigned int i, m_pieces_left[c])
     {
-        BOOST_FOREACH(Move mv, m_board_const->get_moves_diag(i, p, diag_dir))
+        BOOST_FOREACH(Move mv, m_board_const->get_moves(i, p, adj_status_index))
         {
             if (marker[mv])
                 continue;
@@ -105,6 +97,15 @@ void Board::gen_moves(Color c, Point p, unsigned int diag_dir,
             }
         }
     }
+}
+
+unsigned int Board::get_adj_status_index(Point p, Color c) const
+{
+    bool s0 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(0)));
+    bool s1 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(1)));
+    bool s2 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(2)));
+    bool s3 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(3)));
+    return m_board_const->get_adj_status_index(s0, s1, s2, s3);
 }
 
 unsigned int Board::get_bonus(Color c) const

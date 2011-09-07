@@ -572,32 +572,27 @@ void State::update_move_list(Color c)
     // Find new legal moves because of the last piece played by this color
     if (! last_mv.is_null() && ! last_mv.is_pass())
     {
-        BOOST_FOREACH(Point p, m_bd.get_move_points(last_mv))
-            for (unsigned int i = 0; i < 4; ++i)
+        BOOST_FOREACH(Point p, m_bd.get_move_info(last_mv).corner_points)
+            if (! m_bd.is_forbidden(c, p)
+                && is_only_move_diag(m_bd, p, c, last_mv))
             {
-                Direction dir = Direction::get_enum_diag(i);
-                Point diag = p.get_neighbor(dir);
-                if (! m_bd.is_forbidden(c, diag)
-                    && is_only_move_diag(m_bd, diag, c, last_mv))
+                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
                 {
-                    unsigned int diag_dir = Direction::get_index_diag_inv(i);
-                    BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+                    const vector<Move>& moves =
+                        m_bd.get_moves(i, p, adj_status);
+                    auto begin = moves.begin();
+                    auto end = moves.end();
+                    for (auto i = begin; i != end; ++i)
                     {
-                        const vector<Move>& moves =
-                            m_bd.get_moves_diag(i, diag, diag_dir);
-                        auto begin = moves.begin();
-                        auto end = moves.end();
-                        for (auto i = begin; i != end; ++i)
+                        int nu_local;
+                        const MoveInfo& info = m_bd.get_move_info(*i);
+                        if (! is_forbidden(c, info.points, nu_local)
+                            && ! m_marker[*i])
                         {
-                            int nu_local;
-                            const MoveInfo& info = m_bd.get_move_info(*i);
-                            if (! is_forbidden(c, info.points, nu_local)
-                                && ! m_marker[*i])
-                            {
-                                m_tmp_moves.push_back(*i);
-                                m_marker.set(*i);
-                                check_local_move(nu_local, *i);
-                            }
+                            m_tmp_moves.push_back(*i);
+                            m_marker.set(*i);
+                            check_local_move(nu_local, *i);
                         }
                     }
                 }

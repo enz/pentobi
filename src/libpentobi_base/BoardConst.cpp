@@ -220,6 +220,21 @@ BoardConst::BoardConst(unsigned int sz)
     m_pieces = create_pieces();
     if (m_sz == 20)
         init_dist_to_center();
+    for (int s0 = 0; s0 <= 1; ++s0)
+        for (int s1 = 0; s1 <= 1; ++s1)
+            for (int s2 = 0; s2 <= 1; ++s2)
+                for (int s3 = 0; s3 <= 1; ++s3)
+                {
+                    unsigned int index = get_adj_status_index(s0, s1, s2, s3);
+                    if (s0 != 0)
+                        m_adj_status[index].push_back(0);
+                    if (s1 != 0)
+                        m_adj_status[index].push_back(1);
+                    if (s2 != 0)
+                        m_adj_status[index].push_back(2);
+                    if (s3 != 0)
+                        m_adj_status[index].push_back(3);
+                }
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         create_moves(i);
     if (log_move_creation)
@@ -268,21 +283,20 @@ void BoardConst::create_move(unsigned int piece,
     }
     BOOST_FOREACH(Point p, points)
     {
-        m_moves_at[piece][p].push_back(move);
-        for (unsigned int i = 0; i < 4; ++i)
+        m_moves[piece][p].push_back(move);
+        for (unsigned int i = 0; i < 16; ++i)
         {
-            Direction dir = Direction::get_enum_diag(i);
-            if (is_compatible_with_diag(p, dir, points))
-                m_moves_at_diag[i][piece][p].push_back(move);
+            if (is_compatible_with_adj_status(p, i, points))
+                m_moves_constrained[i][piece][p].push_back(move);
         }
     }
 }
 
 void BoardConst::create_moves(unsigned int piece)
 {
-    m_moves_at[piece].init(m_sz);
-    for (unsigned int i = 0; i < 4; ++i)
-        m_moves_at_diag[i][piece].init(m_sz);
+    m_moves[piece].init(m_sz);
+    for (unsigned int i = 0; i < 16; ++i)
+        m_moves_constrained[i][piece].init(m_sz);
     Piece::Points points;
     BOOST_FOREACH(Transform transform, m_pieces[piece].get_transforms())
     {
@@ -332,11 +346,11 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         if (get_piece(i).get_size() == points.size())
         {
-            const vector<Move>& moves = m_moves_at[i][p];
+            const vector<Move>& moves = m_moves[i][p];
             for (unsigned int j = 0; j < moves.size(); ++j)
                 if (m_move_info[moves[j].to_int()].points == sorted_points)
                 {
-                    move = m_moves_at[i][p][j];
+                    move = m_moves[i][p][j];
                     return true;
                 }
         }
@@ -379,15 +393,19 @@ void BoardConst::init_symmetry_info()
     }
 }
 
-bool BoardConst::is_compatible_with_diag(Point p, Direction dir,
-                                         const MovePoints& points)
+bool BoardConst::is_compatible_with_adj_status(Point p,
+                                               unsigned int adj_status_index,
+                                               const MovePoints& points) const
 {
-    Point diag = p.get_neighbor(dir);
-    if (! diag.is_onboard(m_sz))
-        return false;
-    BOOST_FOREACH(Point p2, points)
-        if (p2.is_adj(diag))
-            return false;
+    for (unsigned int i = 0; i < 4; ++i)
+    {
+        if (m_adj_status[adj_status_index].contains(i))
+        {
+            Point p_adj = p.get_neighbor(Direction::get_enum_adj(i));
+            if (points.contains(p_adj))
+                return false;
+        }
+    }
     return true;
 }
 

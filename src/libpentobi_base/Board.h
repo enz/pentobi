@@ -139,8 +139,10 @@ public:
 
     const BoardConst& get_board_const() const;
 
-    const vector<Move>& get_moves_diag(unsigned int piece, Point p,
-                                       unsigned int diag_dir) const;
+    unsigned int get_adj_status_index(Point p, Color c) const;
+
+    const vector<Move>& get_moves(unsigned int piece, Point p,
+                                  unsigned int adj_status_index) const;
 
     /** Get score.
         The score is the number of points for a color minus the number of
@@ -213,7 +215,7 @@ private:
     void gen_moves(Color c, Point p, MoveMarker& marker,
                    vector<Move>& moves) const;
 
-    void gen_moves(Color c, Point p, unsigned int diag_dir,
+    void gen_moves(Color c, Point p, unsigned int adj_status_index,
                    MoveMarker& marker, vector<Move>& moves) const;
 
     bool has_moves(Color c, Point p) const;
@@ -272,10 +274,10 @@ inline const Piece& Board::get_move_piece(Move mv) const
     return get_piece(get_move_info(mv).piece);
 }
 
-inline const vector<Move>& Board::get_moves_diag(unsigned int piece, Point p,
-                                                 unsigned int diag_dir) const
+inline const vector<Move>& Board::get_moves(unsigned int piece, Point p,
+                                            unsigned int adj_status_index) const
 {
-    return m_board_const->get_moves_diag(piece, p, diag_dir);
+    return m_board_const->get_moves(piece, p, adj_status_index);
 }
 
 inline unsigned int Board::get_nu_colors() const
