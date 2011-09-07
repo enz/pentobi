@@ -547,8 +547,7 @@ void State::update_move_list(Color c)
 {
     init_local_points();
     m_tmp_moves.clear();
-    m_local_move_marker.clear(m_local_moves);
-    m_local_moves.clear();
+    clear_local_moves();
     m_max_local = 1;
     Move last_mv = m_last_move[c];
 
