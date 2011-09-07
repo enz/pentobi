@@ -56,13 +56,10 @@ public:
 
     bool find_move(const MovePoints& points, Move& move) const;
 
-    /** Get all moves of a piece at a point. */
-    const vector<Move>& get_moves(unsigned int piece, Point p) const;
-
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
     const vector<Move>& get_moves(unsigned int piece, Point p,
-                                  unsigned int adj_status_index) const;
+                                  unsigned int adj_status_index = 0) const;
 
 private:
     unsigned int m_sz;
@@ -71,9 +68,9 @@ private:
 
     vector<MoveInfo> m_move_info;
 
-    array<Grid<vector<Move>>, nu_pieces> m_moves;
-
-    array<array<Grid<vector<Move>>, nu_pieces>, 16> m_moves_constrained;
+    /** Moves of a piece at a point constrained by the forbidden status of
+        adjacent points. */
+    array<array<Grid<vector<Move>>, nu_pieces>, 16> m_moves;
 
     Grid<unsigned int> m_dist_to_center;
 
@@ -130,16 +127,10 @@ inline const MovePoints& BoardConst::get_move_points(Move mv) const
 }
 
 inline const vector<Move>& BoardConst::get_moves(unsigned int piece,
-                                                 Point p) const
-{
-    return m_moves[piece][p];
-}
-
-inline const vector<Move>& BoardConst::get_moves(unsigned int piece,
                                             Point p,
                                             unsigned int adj_status_index) const
 {
-    return m_moves_constrained[adj_status_index][piece][p];
+    return m_moves[adj_status_index][piece][p];
 }
 
 inline const Piece& BoardConst::get_piece(unsigned int n) const

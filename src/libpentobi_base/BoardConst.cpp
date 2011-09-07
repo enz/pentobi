@@ -282,21 +282,17 @@ void BoardConst::create_move(unsigned int piece,
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
     BOOST_FOREACH(Point p, points)
-    {
-        m_moves[piece][p].push_back(move);
         for (unsigned int i = 0; i < 16; ++i)
         {
             if (is_compatible_with_adj_status(p, i, points))
-                m_moves_constrained[i][piece][p].push_back(move);
+                m_moves[i][piece][p].push_back(move);
         }
-    }
 }
 
 void BoardConst::create_moves(unsigned int piece)
 {
-    m_moves[piece].init(m_sz);
     for (unsigned int i = 0; i < 16; ++i)
-        m_moves_constrained[i][piece].init(m_sz);
+        m_moves[i][piece].init(m_sz);
     Piece::Points points;
     BOOST_FOREACH(Transform transform, m_pieces[piece].get_transforms())
     {
@@ -346,11 +342,11 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         if (get_piece(i).get_size() == points.size())
         {
-            const vector<Move>& moves = m_moves[i][p];
+            const vector<Move>& moves = get_moves(i, p);
             for (unsigned int j = 0; j < moves.size(); ++j)
                 if (m_move_info[moves[j].to_int()].points == sorted_points)
                 {
-                    move = m_moves[i][p][j];
+                    move = moves[j];
                     return true;
                 }
         }
