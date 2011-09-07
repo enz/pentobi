@@ -277,7 +277,7 @@ void BoardConst::create_move(unsigned int piece,
             grid[p] = 'O';
         BOOST_FOREACH(Point p, info.adj_points)
             grid[p] = '+';
-        BOOST_FOREACH(Point p, info.corner_points)
+        BOOST_FOREACH(Point p, info.attach_points)
             grid[p] = '*';
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
@@ -423,18 +423,18 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
             if (p_adj.is_onboard(m_sz) && ! m_marker[p_adj]
                 && ! info.adj_points.contains(p_adj))
                 info.adj_points.push_back(p_adj));
-    info.corner_points.clear();
+    info.attach_points.clear();
     BOOST_FOREACH(Point p, info.points)
         LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
             if (p_diag.is_onboard(m_sz) && ! m_marker[p_diag]
-                && ! info.corner_points.contains(p_diag))
+                && ! info.attach_points.contains(p_diag))
             {
                 bool is_forbidden = false;
                 LIBBOARDGAME_FOREACH_ADJ(p_diag, p_diag_adj,
                     if (m_marker[p_diag_adj])
                         is_forbidden = true; )
                 if (! is_forbidden)
-                    info.corner_points.push_back(p_diag);
+                    info.attach_points.push_back(p_diag);
             })
 }
 

@@ -22,7 +22,7 @@ struct MoveInfo
 
     ArrayList<Point, Piece::max_adj> adj_points;
 
-    ArrayList<Point, Piece::max_corner> corner_points;
+    ArrayList<Point, Piece::max_corner> attach_points;
 
     bool breaks_symmetry;
 

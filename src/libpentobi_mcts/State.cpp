@@ -360,7 +360,7 @@ void State::init_local_points()
         Move mv = move.move;
         if (mv.is_pass())
             continue;
-        BOOST_FOREACH(Point p, m_bd.get_move_info(mv).corner_points)
+        BOOST_FOREACH(Point p, m_bd.get_move_info(mv).attach_points)
             if (! m_bd.is_forbidden(c, p))
             {
                 m_local_points.push_back(p);
@@ -572,7 +572,7 @@ void State::update_move_list(Color c)
     // Find new legal moves because of the last piece played by this color
     if (! last_mv.is_null() && ! last_mv.is_pass())
     {
-        BOOST_FOREACH(Point p, m_bd.get_move_info(last_mv).corner_points)
+        BOOST_FOREACH(Point p, m_bd.get_move_info(last_mv).attach_points)
             if (! m_bd.is_forbidden(c, p)
                 && is_only_move_diag(m_bd, p, c, last_mv))
             {
