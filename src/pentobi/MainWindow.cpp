@@ -111,14 +111,10 @@ MainWindow::MainWindow(const QString& initialFile)
       m_help_window(0)
 {
     QSettings settings;
-    m_useTimeLimit = settings.value("use_time_limit", false).toBool();
     m_useBook = settings.value("use_book", true).toBool();
     m_level = settings.value("level", 4).toInt();
     if (m_level < 1 || m_level > maxLevel)
         m_level = 4;
-    m_timeLimit = settings.value("time_limit", 10).toInt();
-    if (m_timeLimit < 1)
-        m_timeLimit = 10;
     QString variantString = settings.value("game_variant", "").toString();
     GameVariant variant;
     if (variantString == "duo")
@@ -840,14 +836,6 @@ void MainWindow::createActions()
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
             this, SLOT(showComment(bool)));
 
-    m_actionCustomLevel = new QAction(tr("&Custom..."), this);
-    m_actionCustomLevel->setCheckable(true);
-    if (m_useTimeLimit)
-        m_actionCustomLevel->setChecked(true);
-    m_actionCustomLevel->setActionGroup(groupLevel);
-    connect(m_actionCustomLevel, SIGNAL(triggered(bool)),
-            this, SLOT(customLevel(bool)));
-
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 
@@ -911,7 +899,7 @@ QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
     LIBBOARDGAME_ASSERT(level >= 1 && level <= maxLevel);
     QAction* action = new QAction(text, this);
     action->setCheckable(true);
-    if (level == m_level && ! m_useTimeLimit)
+    if (level == m_level)
         action->setChecked(true);
     action->setActionGroup(group);
     action->setData(level);
@@ -986,7 +974,6 @@ void MainWindow::createMenu()
     QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
-    menuLevel->addAction(m_actionCustomLevel);
 
     QMenu* menuHelp = menuBar()->addMenu(tr("&Help"));
     menuHelp->addAction(m_actionHelp);
@@ -1105,26 +1092,6 @@ void MainWindow::createToolBar()
     addToolBar(m_toolBar);
     m_actionShowToolbar = m_toolBar->toggleViewAction();
     m_actionShowToolbar->setText(tr("&Toolbar"));
-}
-
-void MainWindow::customLevel(bool checked)
-{
-    if (! checked)
-        return;
-    bool ok;
-    m_timeLimit = QInputDialog::getInt(this, tr("Custom Level"),
-                                       tr("Maximum time per move in seconds:"),
-                                       m_timeLimit, 1, 3600, 1, &ok);
-    if (! ok)
-    {
-        if (! m_useTimeLimit)
-            setLevel(m_level);
-        return;
-    }
-    m_useTimeLimit = true;
-    QSettings settings;
-    settings.setValue("time_limit", m_timeLimit);
-    settings.setValue("use_time_limit", m_useTimeLimit);
 }
 
 void MainWindow::end()
@@ -1296,10 +1263,7 @@ void MainWindow::genMove()
     clearSelectedPiece();
     clear_abort();
     m_player->set_use_book(m_useBook);
-    if (m_useTimeLimit)
-        m_player->set_fixed_time(m_timeLimit);
-    else
-        m_player->set_level(m_level);
+    m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_toPlay,
                           m_genMoveId);
@@ -2057,12 +2021,10 @@ void MainWindow::setLevel(int level)
 {
     if (level <= 0 || level > maxLevel)
         return;
-    m_useTimeLimit = false;
     m_level = level;
     m_actionLevel[level - 1]->setChecked(true);
     QSettings settings;
     settings.setValue("level", m_level);
-    settings.setValue("use_time_limit", m_useTimeLimit);
 }
 
 void MainWindow::setLevel(bool checked)

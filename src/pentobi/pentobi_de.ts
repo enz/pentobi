@@ -392,11 +392,6 @@
         <translation>&amp;Werkzeugleiste</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1114"/>
-        <source>Custom Level</source>
-        <translation>Individuelle Spielstufe</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="1137"/>
         <source>Text files (*.txt)</source>
         <translation>Textdateien (*.txt)</translation>
