@@ -35,31 +35,32 @@ using libpentobi_base::PointStateExt;
 namespace {
 
 /** Get the board state of the final position of the main variation.
-    Avoids constructing an instance of Game from the tree, which would do the
-    costy initialization of BoardConst, which would slow down the thumbnailer
-    unnecessarily. */
+    Avoids constructing an instance of a Tree or Game, which would do a costly
+    initialization of BoardConst and slow down the thumbnailer unnecessarily. */
 bool getFinalPosition(const Node& root, GameVariant& gameVariant,
                       FullGrid<PointStateExt>& pointState)
 {
     string game = root.get_property("GM", "");
     string s = to_lower_copy(trim_copy(game));
+    unsigned int sz;
     if (s == "blokus duo")
     {
         gameVariant = game_variant_duo;
-        pointState.init(14);
+        sz = 14;
     }
     else if (s == "blokus")
     {
         gameVariant = game_variant_classic;
-        pointState.init(20);
+        sz = 20;
     }
     else if (s == "blokus two-player")
     {
         gameVariant = game_variant_classic_2;
-        pointState.init(20);
+        sz = 20;
     }
     else
         return false;
+    pointState.init(sz);
     pointState.fill_onboard(PointState::empty());
     const Node* node = &root;
     while (node != 0)
@@ -82,7 +83,27 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
         }
         else
         {
-            if (node->has_property("BLUE"))
+            if (node->has_property("1"))
+            {
+                id = "1";
+                c = Color(0);
+            }
+            else if (node->has_property("2"))
+            {
+                id = "2";
+                c = Color(1);
+            }
+            else if (node->has_property("3"))
+            {
+                id = "3";
+                c = Color(2);
+            }
+            else if (node->has_property("4"))
+            {
+                id = "4";
+                c = Color(3);
+            }
+            else if (node->has_property("BLUE"))
             {
                 id = "BLUE";
                 c = Color(0);
@@ -112,7 +133,9 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
                 {
                     if (trim_copy(s).empty())
                         return false;
-                    pointState[Point::from_string(s)] = c;
+                    Point p = Point::from_string(s);
+                    if (p.is_onboard(sz))
+                        pointState[p] = c;
                 }
             }
         }
