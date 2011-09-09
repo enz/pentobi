@@ -74,12 +74,12 @@ bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
             return true;
         node = node->get_parent_or_null();
     }
-    node = current.get_first_child();
+    node = current.get_first_child_or_null();
     while (node != 0)
     {
         if (! tree.get_move(*node).is_null())
             return true;
-        node = node->get_first_child();
+        node = node->get_first_child_or_null();
     }
     return false;
 }
@@ -1203,7 +1203,7 @@ void MainWindow::flipPieceVertically()
 
 void MainWindow::forward()
 {
-    const Node* node = m_game->get_current().get_first_child();
+    const Node* node = m_game->get_current().get_first_child_or_null();
     if (node == 0)
         return;
     gotoNode(*node);
@@ -1214,9 +1214,9 @@ void MainWindow::forward10()
     const Node* node = &m_game->get_current();
     for (unsigned int i = 0; i < 10; ++i)
     {
-        if (! node->has_children())
+        node = node->get_first_child_or_null();
+        if (node == 0)
             break;
-        node = node->get_first_child();
     }
     gotoNode(*node);
 }
@@ -1366,12 +1366,12 @@ void MainWindow::gotoMove()
         node = node->get_parent_or_null();
     }
     while (node != 0);
-    node = m_game->get_current().get_first_child();
+    node = m_game->get_current().get_first_child_or_null();
     while (node != 0)
     {
         if (! tree.get_move(*node).is_null())
             nodes.push_back(node);
-        node = node->get_first_child();
+        node = node->get_first_child_or_null();
     }
     int maxMoves = int(nodes.size());
     if (maxMoves == 0)
@@ -2078,12 +2078,12 @@ void MainWindow::setMoveNumberText()
     }
     while (node != 0);
     unsigned int nuMoves = move;
-    node = current.get_first_child();
+    node = current.get_first_child_or_null();
     while (node != 0)
     {
         if (! tree.get_move(*node).is_null())
             ++nuMoves;
-        node = node->get_first_child();
+        node = node->get_first_child_or_null();
     }
     if (move == 0 && nuMoves == 0)
     {

@@ -74,7 +74,7 @@ const Node& get_last_node(const Node& node)
 {
     const Node* n = &node;
     while (n->has_children())
-        n = n->get_first_child();
+        n = &n->get_first_child();
     return *n;
 }
 
@@ -125,7 +125,7 @@ bool is_main_variation(const Node& node)
     while (current->has_parent())
     {
         const Node& parent = current->get_parent();
-        if (current != parent.get_first_child())
+        if (current != &parent.get_first_child())
             return false;
         current = &parent;
     }

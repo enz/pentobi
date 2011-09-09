@@ -89,9 +89,13 @@ public:
 
     Node* get_sibling();
 
-    Node* get_first_child();
+    Node& get_first_child();
 
-    const Node* get_first_child() const;
+    const Node& get_first_child() const;
+
+    Node* get_first_child_or_null();
+
+    const Node* get_first_child_or_null() const;
 
     const Node* get_sibling() const;
 
@@ -169,12 +173,24 @@ inline const Node* Node::get_parent_or_null() const
     return m_parent;
 }
 
-inline Node* Node::get_first_child()
+inline Node& Node::get_first_child()
+{
+    LIBBOARDGAME_ASSERT(has_children());
+    return *m_first_child.get();
+}
+
+inline const Node& Node::get_first_child() const
+{
+    LIBBOARDGAME_ASSERT(has_children());
+    return *(m_first_child.get());
+}
+
+inline Node* Node::get_first_child_or_null()
 {
     return m_first_child.get();
 }
 
-inline const Node* Node::get_first_child() const
+inline const Node* Node::get_first_child_or_null() const
 {
     return m_first_child.get();
 }
@@ -336,7 +352,7 @@ private:
 
 inline ChildIterator::ChildIterator(const Node& node)
 {
-    m_current = node.get_first_child();
+    m_current = node.get_first_child_or_null();
 }
 
 inline ChildIterator::operator bool() const

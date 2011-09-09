@@ -116,7 +116,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
                 }
             }
         }
-        node = node->get_first_child();
+        node = node->get_first_child_or_null();
     }
     return true;
 }

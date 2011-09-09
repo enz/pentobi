@@ -142,7 +142,7 @@ const Node* Node::get_previous_sibling() const
 {
     if (m_parent == 0)
         return 0;
-    const Node* child = m_parent->get_first_child();
+    const Node* child = &m_parent->get_first_child();
     if (child == this)
         return 0;
     do
