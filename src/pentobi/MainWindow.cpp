@@ -206,18 +206,6 @@ MainWindow::MainWindow(const QString& initialFile)
             updateWindow(true);
         }
     }
-    QString version = getVersion();
-    if (! version.contains("UNKNOWN"))
-    {
-        QString lastVersion =
-            settings.value("last_version_used", "").toString();
-        if (lastVersion != version)
-        {
-            settings.setValue("last_version_used", version);
-            show();
-            about();
-        }
-    }
 }
 
 void MainWindow::about()
