@@ -111,7 +111,6 @@ MainWindow::MainWindow(const QString& initialFile)
       m_help_window(0)
 {
     QSettings settings;
-    m_useBook = settings.value("use_book", true).toBool();
     m_level = settings.value("level", 4).toInt();
     if (m_level < 1 || m_level > maxLevel)
         m_level = 4;
@@ -830,12 +829,6 @@ void MainWindow::createActions()
     m_actionUndo = new QAction(tr("&Undo Move"), this);
     connect(m_actionUndo, SIGNAL(triggered()), this, SLOT(undo()));
 
-    m_actionUseBook = new QAction(tr("Use &Opening Book"), this);
-    m_actionUseBook->setCheckable(true);
-    m_actionUseBook->setChecked(m_useBook);
-    connect(m_actionUseBook, SIGNAL(triggered(bool)),
-            this, SLOT(useBook(bool)));
-
     m_actionVeryBadMove = new QAction(tr("V&ery Bad"), this);
     m_actionVeryBadMove->setActionGroup(groupMoveAnnotation);
     m_actionVeryBadMove->setCheckable(true);
@@ -958,7 +951,6 @@ void MainWindow::createMenu()
     QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
     menuComputer->addAction(m_actionInterrupt);
-    menuComputer->addAction(m_actionUseBook);
     QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
@@ -1250,7 +1242,6 @@ void MainWindow::genMove()
     m_actionInterrupt->setEnabled(true);
     clearSelectedPiece();
     clear_abort();
-    m_player->set_use_book(m_useBook);
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_toPlay,
@@ -2529,13 +2520,6 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     m_actionTruncate->setEnabled(hasParent);
     m_actionUndo->setEnabled(hasParent || ! hasChildren || hasMove);
-}
-
-void MainWindow::useBook(bool checked)
-{
-    m_useBook = checked;
-    QSettings settings;
-    settings.setValue("use_book", m_useBook);
 }
 
 void MainWindow::veryBadMove(bool checked)

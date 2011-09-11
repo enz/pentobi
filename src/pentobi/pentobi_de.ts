@@ -307,11 +307,6 @@
         <translation>&amp;Zug zurücknehmen</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="856"/>
-        <source>Use &amp;Opening Book</source>
-        <translation>&amp;Eröffnungsbuch benutzen</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="862"/>
         <source>V&amp;ery Bad</source>
         <translation>Seh&amp;r schlecht</translation>

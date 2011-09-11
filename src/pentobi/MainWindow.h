@@ -195,12 +195,6 @@ private:
         generation. */
     int m_level;
 
-    /** Make m_player use opening book.
-        Stored independently of the player and set at the player before each
-        move generation, such that setting a new level does not require to
-        abort a running move generation. */
-    bool m_useBook;
-
     QToolBar* m_toolBar;
 
     GuiBoard* m_guiBoard;
@@ -367,8 +361,6 @@ private:
 
     QAction* m_actionUndo;
 
-    QAction* m_actionUseBook;
-
     QAction* m_actionVeryGoodMove;
 
     QAction* m_actionVeryBadMove;
@@ -516,8 +508,6 @@ private slots:
     void showStatus(const QString& text, bool temporary = false);
 
     void splitterMoved(int pos, int index);
-
-    void useBook(bool checked);
 
     void veryBadMove(bool checked);
 
