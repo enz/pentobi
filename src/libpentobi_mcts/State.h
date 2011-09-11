@@ -130,6 +130,10 @@ private:
         position, the other color is not updated immediately after a move. */
     ColorMap<vector<Move>> m_moves;
 
+    vector<int> m_opp_attach_point_sum;
+
+    Grid<int> m_opp_attach_point_val;
+
     /** The last move by each color.
         Used for updating the move lists and only defined if m_extended_update
         is true. */
@@ -143,8 +147,6 @@ private:
         These moves occupy at least one of the corner points of the last
         piece played. */
     vector<Move> m_local_moves;
-
-    MoveMarker m_local_move_marker;
 
     /** Local variable during update.
         Reused for efficiency. */
@@ -182,8 +184,6 @@ private:
     State& operator=(const State&);
 
     void check_local_move(int nu_local, Move mv);
-
-    void clear_local_moves();
 
     void clear_local_points();
 

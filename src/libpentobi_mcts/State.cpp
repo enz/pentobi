@@ -102,16 +102,9 @@ void State::check_local_move(int nu_local, Move mv)
     if (nu_local > m_max_local)
     {
         m_max_local = nu_local;
-        clear_local_moves();
+        m_local_moves.clear();
     }
     m_local_moves.push_back(mv);
-    m_local_move_marker.set(mv);
-}
-
-void State::clear_local_moves()
-{
-    m_local_move_marker.clear(m_local_moves);
-    m_local_moves.clear();
 }
 
 void State::clear_local_points()
@@ -236,7 +229,8 @@ bool State::gen_and_play_playout_move()
 
 void State::gen_children(Tree<Move>::NodeExpander& expander)
 {
-    if (m_nu_passes == m_bd.get_nu_colors())
+    unsigned int nu_colors = m_bd.get_nu_colors();
+    if (m_nu_passes == nu_colors)
         return;
     Color to_play = m_bd.get_to_play();
     init_move_list(to_play);
@@ -254,6 +248,36 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             expander.add_child(mv);
         return;
     }
+
+    Color to_play_2 = to_play;
+    if (m_bd.get_game_variant() == game_variant_classic_2)
+        to_play_2 = to_play.get_next(nu_colors).get_next(nu_colors);
+
+    m_opp_attach_point_sum.resize(moves.size());
+    for (BoardIterator i(m_bd); i; ++i)
+    {
+        m_opp_attach_point_val[*i] = 0;
+        for (unsigned int j = 0; j < m_bd.get_nu_colors(); ++j)
+        {
+            Color c(j);
+            if (c == to_play || c == to_play_2)
+                continue;
+            if (m_bd.has_diag(*i, c) && ! m_bd.is_forbidden(c, *i))
+                m_opp_attach_point_val[*i] = 1;
+        }
+    }
+    int max_opp_attach_point_sum = 0;
+    for (unsigned int i = 0; i < moves.size(); ++i)
+    {
+        const MoveInfo& info = m_bd.get_move_info(moves[i]);
+        int& opp_attach_point_sum = m_opp_attach_point_sum[i];
+        opp_attach_point_sum = 0;
+        BOOST_FOREACH(Point p, info.points)
+            opp_attach_point_sum += m_opp_attach_point_val[p];
+        max_opp_attach_point_sum =
+            max(max_opp_attach_point_sum, opp_attach_point_sum);
+    }
+
     Move symmetric_mv = Move::null();
     bool has_symmetry_breaker = false;
     if (m_check_symmetric_draw && ! m_is_symmetry_broken)
@@ -286,18 +310,22 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             min_dist_to_center = min(dist, min_dist_to_center);
         }
     }
-    BOOST_FOREACH(Move mv, moves)
+    for (unsigned int i = 0; i < moves.size(); ++i)
     {
+        Move mv = moves[i];
         const MoveInfo& info = m_bd.get_move_info(mv);
         // Even game heuristic (0.5) with small piece value bonus to order the
         // values by piece value
         ValueType value =
             ValueType(0.5 + 0.01 * m_shared_const.piece_value.get(info.piece));
         ValueType count = 1;
-        if (! m_local_moves.empty())
+        if (max_opp_attach_point_sum > 0)
         {
-            if (m_local_move_marker[mv])
+            int opp_attach_point_sum = m_opp_attach_point_sum[i];
+            if (opp_attach_point_sum == max_opp_attach_point_sum)
                 value += 3 * ValueType(0.9);
+            else if (opp_attach_point_sum > 0)
+                value += 3 * ValueType(0.7);
             else
                 value += 3 * ValueType(0.5);
             count += 3;
@@ -375,7 +403,7 @@ void State::init_move_list(Color c)
     m_bd.gen_moves(c, moves);
     m_last_move[c] = Move::null();
     init_local_points();
-    clear_local_moves();
+    m_local_moves.clear();
     m_max_local = 1;
     for (auto i = moves.begin(); i != moves.end(); ++i)
     {
@@ -504,6 +532,7 @@ void State::start_search()
     const Board& bd = m_shared_const.board;
     unsigned int sz = bd.get_size();
     m_symmetric_points.init(sz);
+    m_opp_attach_point_val.init(sz);
     m_local_points_marker.init(sz, 0);
     m_nu_moves_initial = bd.get_nu_moves();
     m_score_modification_factor =
@@ -547,7 +576,7 @@ void State::update_move_list(Color c)
 {
     init_local_points();
     m_tmp_moves.clear();
-    clear_local_moves();
+    m_local_moves.clear();
     m_max_local = 1;
     Move last_mv = m_last_move[c];
 
