@@ -8,7 +8,6 @@
 
 #include "BoardConst.h"
 
-#include <cmath>
 #include "Grid.h"
 #include "SymmetricPoints.h"
 #include "libboardgame_base/Transform.h"
@@ -218,8 +217,6 @@ BoardConst::BoardConst(unsigned int sz)
 {
     m_sz = sz;
     m_pieces = create_pieces();
-    if (m_sz == 20)
-        init_dist_to_center();
     for (int s0 = 0; s0 <= 1; ++s0)
         for (int s1 = 0; s1 <= 1; ++s1)
             for (int s2 = 0; s2 <= 1; ++s2)
@@ -262,12 +259,6 @@ void BoardConst::create_move(unsigned int piece,
     info.points = points;
     info.center = Point(x + center.x, y + center.y);
     set_adj_and_corner_points(info);
-    if (m_sz == 20)
-    {
-        info.dist_to_center = numeric_limits<unsigned int>::max();
-        BOOST_FOREACH(Point p, info.points)
-            info.dist_to_center = min(m_dist_to_center[p], info.dist_to_center);
-    }
     m_move_info.push_back(info);
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
     if (log_move_creation)
@@ -351,24 +342,6 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
                 }
         }
     return false;
-}
-
-void BoardConst::init_dist_to_center()
-{
-    LIBBOARDGAME_ASSERT(m_sz % 2 == 0);
-    unsigned int center1 = m_sz / 2 - 1;
-    unsigned int center2 = center1 + 1;
-    m_dist_to_center.init(m_sz);
-    for (unsigned int x = 0; x < m_sz; ++x)
-        for (unsigned int y = 0; y < m_sz; ++y)
-        {
-            unsigned int dist_x = (x <= center1 ? center1 - x : x - center2);
-            unsigned int dist_y = (y <= center1 ? center1 - y : y - center2);
-            m_dist_to_center[Point(x, y)] =
-                (unsigned int)(sqrt(dist_x * dist_x + dist_y * dist_y));
-        }
-    if (log_move_creation)
-        log() << "Dist to center:\n" << m_dist_to_center;
 }
 
 void BoardConst::init_symmetry_info()

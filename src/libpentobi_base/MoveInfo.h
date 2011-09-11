@@ -29,11 +29,6 @@ struct MoveInfo
     Move symmetric_move;
 
     Point center;
-
-    /** Distance to center heuristic.
-        Only defined on 20x20 boards. Can be used on 20x20 boards to prefer
-        moves in the opening that go towards the center. */
-    unsigned int dist_to_center;
 };
 
 //-----------------------------------------------------------------------------

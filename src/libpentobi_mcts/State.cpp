@@ -8,6 +8,7 @@
 
 #include "State.h"
 
+#include <cmath>
 #include "libpentobi_base/BoardUtil.h"
 #include "libboardgame_util/Log.h"
 
@@ -75,6 +76,20 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       score_modification(ValueType(0.1)),
       piece_value(bd)
 {
+    unsigned int sz = 20;
+    LIBBOARDGAME_ASSERT(sz % 2 == 0);
+    unsigned int center1 = sz / 2 - 1;
+    unsigned int center2 = center1 + 1;
+    m_dist_to_center.init(sz);
+    for (unsigned int x = 0; x < sz; ++x)
+        for (unsigned int y = 0; y < sz; ++y)
+        {
+            unsigned int dist_x = (x <= center1 ? center1 - x : x - center2);
+            unsigned int dist_y = (y <= center1 ? center1 - y : y - center2);
+            m_dist_to_center[Point(x, y)] =
+                (unsigned int)(sqrt(dist_x * dist_x + dist_y * dist_y));
+        }
+    //log() << "Dist to center:\n" << m_dist_to_center;
 }
 
 //-----------------------------------------------------------------------------
@@ -105,6 +120,56 @@ void State::check_local_move(int nu_local, Move mv)
         m_local_moves.clear();
     }
     m_local_moves.push_back(mv);
+}
+
+void State::compute_features()
+{
+    unsigned int nu_colors = m_bd.get_nu_colors();
+    Color to_play = m_bd.get_to_play();
+    Color to_play_2 = to_play;
+    if (m_bd.get_game_variant() == game_variant_classic_2)
+        to_play_2 = to_play.get_next(nu_colors).get_next(nu_colors);
+    GameVariant variant = m_bd.get_game_variant();
+    const vector<Move>& moves = m_moves[to_play];
+    Grid<int> opp_attach_point_val(m_bd.get_size());
+    for (BoardIterator i(m_bd); i; ++i)
+    {
+        opp_attach_point_val[*i] = 0;
+        for (unsigned int j = 0; j < m_bd.get_nu_colors(); ++j)
+        {
+            Color c(j);
+            if (c == to_play || c == to_play_2)
+                continue;
+            if (m_bd.has_diag(*i, c) && ! m_bd.is_forbidden(c, *i))
+                opp_attach_point_val[*i] = 1;
+        }
+    }
+    m_features.resize(moves.size());
+    m_max_opp_attach_point_sum = 0;
+    m_min_dist_to_center = numeric_limits<unsigned int>::max();
+    bool compute_dist_to_center =
+        ((variant == game_variant_classic_2 || variant == game_variant_classic)
+         && m_bd.get_pieces_left(to_play).size() > Board::nu_pieces - 4);
+    for (unsigned int i = 0; i < moves.size(); ++i)
+    {
+        const MoveInfo& info = m_bd.get_move_info(moves[i]);
+        MoveFeatures& features = m_features[i];
+        features.opp_attach_point_sum = 0;
+        features.dist_to_center = numeric_limits<unsigned int>::max();
+        BOOST_FOREACH(Point p, info.points)
+            features.opp_attach_point_sum += opp_attach_point_val[p];
+        if (compute_dist_to_center)
+        {
+            BOOST_FOREACH(Point p, info.points)
+                features.dist_to_center =
+                    min(features.dist_to_center,
+                        m_shared_const.m_dist_to_center[p]);
+            m_min_dist_to_center =
+                min(m_min_dist_to_center, features.dist_to_center);
+        }
+        m_max_opp_attach_point_sum =
+            max(m_max_opp_attach_point_sum, features.opp_attach_point_sum);
+    }
 }
 
 void State::clear_local_points()
@@ -248,36 +313,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             expander.add_child(mv);
         return;
     }
-
-    Color to_play_2 = to_play;
-    if (m_bd.get_game_variant() == game_variant_classic_2)
-        to_play_2 = to_play.get_next(nu_colors).get_next(nu_colors);
-
-    m_opp_attach_point_sum.resize(moves.size());
-    for (BoardIterator i(m_bd); i; ++i)
-    {
-        m_opp_attach_point_val[*i] = 0;
-        for (unsigned int j = 0; j < m_bd.get_nu_colors(); ++j)
-        {
-            Color c(j);
-            if (c == to_play || c == to_play_2)
-                continue;
-            if (m_bd.has_diag(*i, c) && ! m_bd.is_forbidden(c, *i))
-                m_opp_attach_point_val[*i] = 1;
-        }
-    }
-    int max_opp_attach_point_sum = 0;
-    for (unsigned int i = 0; i < moves.size(); ++i)
-    {
-        const MoveInfo& info = m_bd.get_move_info(moves[i]);
-        int& opp_attach_point_sum = m_opp_attach_point_sum[i];
-        opp_attach_point_sum = 0;
-        BOOST_FOREACH(Point p, info.points)
-            opp_attach_point_sum += m_opp_attach_point_val[p];
-        max_opp_attach_point_sum =
-            max(max_opp_attach_point_sum, opp_attach_point_sum);
-    }
-
+    compute_features();
     Move symmetric_mv = Move::null();
     bool has_symmetry_breaker = false;
     if (m_check_symmetric_draw && ! m_is_symmetry_broken)
@@ -297,42 +333,29 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
                 }
         }
     }
-    GameVariant variant = m_bd.get_game_variant();
-    unsigned int min_dist_to_center = numeric_limits<unsigned int>::max();
-    if ((variant == game_variant_classic_2 || variant == game_variant_classic)
-        && m_bd.get_pieces_left(to_play).size() > Board::nu_pieces - 4)
-    {
-        // Determine moves that minimize the distance to the center to give a
-        // bonus for reaching for the center in the early game.
-        BOOST_FOREACH(Move mv, moves)
-        {
-            unsigned int dist = m_bd.get_move_info(mv).dist_to_center;
-            min_dist_to_center = min(dist, min_dist_to_center);
-        }
-    }
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         Move mv = moves[i];
+        const MoveFeatures& features = m_features[i];
         const MoveInfo& info = m_bd.get_move_info(mv);
         // Even game heuristic (0.5) with small piece value bonus to order the
         // values by piece value
         ValueType value =
             ValueType(0.5 + 0.01 * m_shared_const.piece_value.get(info.piece));
         ValueType count = 1;
-        if (max_opp_attach_point_sum > 0)
+        if (m_max_opp_attach_point_sum > 0)
         {
-            int opp_attach_point_sum = m_opp_attach_point_sum[i];
-            if (opp_attach_point_sum == max_opp_attach_point_sum)
+            if (features.opp_attach_point_sum == m_max_opp_attach_point_sum)
                 value += 3 * ValueType(0.9);
-            else if (opp_attach_point_sum > 0)
+            else if (features.opp_attach_point_sum > 0)
                 value += 3 * ValueType(0.7);
             else
                 value += 3 * ValueType(0.5);
             count += 3;
         }
-        if (min_dist_to_center != numeric_limits<unsigned int>::max())
+        if (m_min_dist_to_center != numeric_limits<unsigned int>::max())
         {
-            if (info.dist_to_center == min_dist_to_center)
+            if (features.dist_to_center == m_min_dist_to_center)
                 value += 5 * ValueType(0.9);
             else
                 value += 5 * ValueType(0.1);
@@ -532,7 +555,6 @@ void State::start_search()
     const Board& bd = m_shared_const.board;
     unsigned int sz = bd.get_size();
     m_symmetric_points.init(sz);
-    m_opp_attach_point_val.init(sz);
     m_local_points_marker.init(sz, 0);
     m_nu_moves_initial = bd.get_nu_moves();
     m_score_modification_factor =

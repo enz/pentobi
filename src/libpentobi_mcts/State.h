@@ -56,6 +56,9 @@ struct SharedConst
 
     PieceValueHeuristic piece_value;
 
+    /** Distance to center heuristic for 20x20 boards. */
+    Grid<unsigned int> m_dist_to_center;
+
     SharedConst(const Board& bd, const Color& to_play);
 };
 
@@ -107,6 +110,14 @@ public:
     ValueType get_mean_score() const;
 
 private:
+    struct MoveFeatures
+    {
+        /** Only used on 20x20. */
+        unsigned int dist_to_center;
+
+        int opp_attach_point_sum;
+    };
+
     /** Flag set to true at the beginning of the playout or node expansion.
         In the in-tree phase, the state simplay follows the moves that the
         MCTS search plays but does not need to update expensive data like
@@ -123,6 +134,10 @@ private:
 
     int m_max_local;
 
+    int m_max_opp_attach_point_sum;
+
+    unsigned int m_min_dist_to_center;
+
     const SharedConst& m_shared_const;
 
     /** Incrementally updated lists of legal moves for both colors.
@@ -130,9 +145,7 @@ private:
         position, the other color is not updated immediately after a move. */
     ColorMap<vector<Move>> m_moves;
 
-    vector<int> m_opp_attach_point_sum;
-
-    Grid<int> m_opp_attach_point_val;
+    vector<MoveFeatures> m_features;
 
     /** The last move by each color.
         Used for updating the move lists and only defined if m_extended_update
@@ -186,6 +199,8 @@ private:
     void check_local_move(int nu_local, Move mv);
 
     void clear_local_points();
+
+    void compute_features();
 
     void init_local_points();
 

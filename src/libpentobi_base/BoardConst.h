@@ -72,8 +72,6 @@ private:
         adjacent points. */
     array<array<Grid<vector<Move>>, nu_pieces>, 16> m_moves;
 
-    Grid<unsigned int> m_dist_to_center;
-
     /** Local variable reused for efficiency. */
     Marker m_marker;
 
@@ -87,16 +85,12 @@ private:
 
     void create_moves(unsigned int piece);
 
-    void init_dist_to_center();
-
     void init_symmetry_info();
 
     bool is_compatible_with_adj_status(Point p, unsigned int adj_status_index,
                                        const MovePoints& points) const;
 
     void set_adj_and_corner_points(MoveInfo& info);
-
-    void set_dist_to_center(MoveInfo& info);
 };
 
 inline unsigned int BoardConst::get_adj_status_index(bool s0, bool s1, bool s2,
