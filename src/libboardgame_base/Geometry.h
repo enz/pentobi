@@ -60,6 +60,9 @@ public:
     /** Get list of on-board adjacent points (up to four) */
     const NullTermList<Point, 4>& get_adj(Point p) const;
 
+    /** Get list of on-board diagonal points (up to four) */
+    const NullTermList<Point, 4>& get_diag(Point p) const;
+
     /** Get list of on-board adjacent and diagonal points (up to eight) */
     const NullTermList<Point, 8>& get_adj_diag(Point p) const;
 
@@ -91,6 +94,8 @@ private:
     scoped_array<Point> m_all_points;
 
     NullTermList<Point, 4> m_adj[Point::range];
+
+    NullTermList<Point, 4> m_diag[Point::range];
 
     NullTermList<Point, 8> m_adj_diag[Point::range];
 
@@ -163,6 +168,13 @@ Geometry<P>::Geometry(unsigned int sz)
                 adj.finish();
             }
             {
+                typename NullTermList<Point, 4>::Init diag(m_diag[i]);
+                LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
+                    if (p_diag.is_onboard(sz))
+                        diag.push_back(p_diag););
+                diag.finish();
+            }
+            {
                 typename NullTermList<Point, 8>::Init adj_diag(m_adj_diag[i]);
                 LIBBOARDGAME_FOREACH_ADJ_DIAG(p, p_adj_diag,
                     if (p_adj_diag.is_onboard(sz))
@@ -217,6 +229,13 @@ inline const NullTermList<P, 8>& Geometry<P>::get_adj_diag(Point p) const
 {
     LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
     return m_adj_diag[p.to_int()];
+}
+
+template<class P>
+inline const NullTermList<P, 4>& Geometry<P>::get_diag(Point p) const
+{
+    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    return m_diag[p.to_int()];
 }
 
 template<class P>

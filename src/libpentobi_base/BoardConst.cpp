@@ -9,6 +9,7 @@
 #include "BoardConst.h"
 
 #include "AdjIterator.h"
+#include "DiagIterator.h"
 #include "Grid.h"
 #include "SymmetricPoints.h"
 #include "libboardgame_base/Transform.h"
@@ -393,20 +394,20 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
                 info.adj_points.push_back(*i);
     info.attach_points.clear();
     BOOST_FOREACH(Point p, info.points)
-        LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
-            if (p_diag.is_onboard(m_sz) && ! m_marker[p_diag]
-                && ! info.attach_points.contains(p_diag))
+        for (DiagIterator i(m_geometry, p); i; ++i)
+            if ((*i).is_onboard(m_sz) && ! m_marker[*i]
+                && ! info.attach_points.contains(*i))
             {
                 bool is_forbidden = false;
-                for (AdjIterator i(m_geometry, p_diag); i; ++i)
-                    if (m_marker[*i])
+                for (AdjIterator j(m_geometry, *i); j; ++j)
+                    if (m_marker[*j])
                     {
                         is_forbidden = true;
                         break;
                     }
                 if (! is_forbidden)
-                    info.attach_points.push_back(p_diag);
-            })
+                    info.attach_points.push_back(*i);
+            }
 }
 
 //-----------------------------------------------------------------------------
