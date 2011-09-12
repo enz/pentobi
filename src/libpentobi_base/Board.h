@@ -9,6 +9,7 @@
 #include "ColorMove.h"
 #include "FullGrid.h"
 #include "GameVariant.h"
+#include "Geometry.h"
 #include "MoveMarker.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/PointStateExt.h"
@@ -16,7 +17,6 @@
 namespace libpentobi_base {
 
 using libpentobi_base::ColorMap;
-using libboardgame_base::Geometry;
 using libpentobi_base::PointState;
 using libpentobi_base::PointStateExt;
 
@@ -29,7 +29,7 @@ public:
 
     /** Iterator over all points on the board. */
     class Iterator
-        : public Geometry<Point>::Iterator
+        : public GeometryIterator
     {
         friend class Board;
 
@@ -158,6 +158,8 @@ public:
 
     unsigned int get_size() const;
 
+    const Geometry& get_geometry() const;
+
     string to_string(Move mv, bool only_points = false) const;
 
     bool find_move(const MovePoints& points, Move& move) const;
@@ -192,7 +194,7 @@ private:
 
     const BoardConst* m_board_const;
 
-    const Geometry<Point>* m_geometry;
+    const Geometry* m_geometry;
 
     Color m_to_play;
 
@@ -235,7 +237,7 @@ private:
 typedef Board::Iterator BoardIterator;
 
 inline Board::Iterator::Iterator(const Board& bd)
-    : Geometry<Point>::Iterator(*bd.m_geometry)
+    : GeometryIterator(*bd.m_geometry)
 {
 }
 
@@ -252,6 +254,11 @@ inline const BoardConst& Board::get_board_const() const
 inline GameVariant Board::get_game_variant() const
 {
     return m_game_variant;
+}
+
+inline const Geometry& Board::get_geometry() const
+{
+    return *m_geometry;
 }
 
 inline const Board::PointStateGrid& Board::get_grid() const

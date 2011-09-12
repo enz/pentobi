@@ -145,7 +145,7 @@ void State::compute_features()
         }
     }
     m_features.resize(moves.size());
-    m_max_opp_attach_point_sum = 0;
+    m_max_attach_point_sum = 0;
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
     bool compute_dist_to_center =
         ((variant == game_variant_classic_2 || variant == game_variant_classic)
@@ -154,10 +154,13 @@ void State::compute_features()
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
         MoveFeatures& features = m_features[i];
-        features.opp_attach_point_sum = 0;
+        features.attach_point_sum = 0;
         features.dist_to_center = numeric_limits<unsigned int>::max();
         BOOST_FOREACH(Point p, info.points)
-            features.opp_attach_point_sum += opp_attach_point_val[p];
+            features.attach_point_sum += opp_attach_point_val[p];
+        BOOST_FOREACH(Point p, info.attach_points)
+            if (m_bd.is_forbidden(to_play, p))
+                --features.attach_point_sum;
         if (compute_dist_to_center)
         {
             BOOST_FOREACH(Point p, info.points)
@@ -167,8 +170,8 @@ void State::compute_features()
             m_min_dist_to_center =
                 min(m_min_dist_to_center, features.dist_to_center);
         }
-        m_max_opp_attach_point_sum =
-            max(m_max_opp_attach_point_sum, features.opp_attach_point_sum);
+        m_max_attach_point_sum =
+            max(m_max_attach_point_sum, features.attach_point_sum);
     }
 }
 
@@ -343,11 +346,11 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         ValueType value =
             ValueType(0.5 + 0.01 * m_shared_const.piece_value.get(info.piece));
         ValueType count = 1;
-        if (m_max_opp_attach_point_sum > 0)
+        if (m_max_attach_point_sum > 0)
         {
-            if (features.opp_attach_point_sum == m_max_opp_attach_point_sum)
+            if (features.attach_point_sum == m_max_attach_point_sum)
                 value += 3 * ValueType(0.9);
-            else if (features.opp_attach_point_sum > 0)
+            else if (features.attach_point_sum > 0)
                 value += 3 * ValueType(0.7);
             else
                 value += 3 * ValueType(0.5);

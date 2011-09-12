@@ -7,6 +7,7 @@
 
 #include <array>
 #include <algorithm>
+#include "Geometry.h"
 #include "Grid.h"
 #include "Marker.h"
 #include "Move.h"
@@ -63,6 +64,8 @@ public:
 
 private:
     unsigned int m_sz;
+
+    const Geometry& m_geometry;
 
     vector<Piece> m_pieces;
 

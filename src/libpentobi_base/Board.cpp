@@ -12,7 +12,6 @@
 namespace libpentobi_base {
 
 using namespace std;
-using libboardgame_base::Geometry;
 
 //-----------------------------------------------------------------------------
 
@@ -315,7 +314,7 @@ void Board::init(GameVariant game_variant)
         m_nu_colors = 2;
     }
     m_board_const = &BoardConst::get(m_sz);
-    m_geometry = Geometry<Point>::get(m_sz);
+    m_geometry = Geometry::get(m_sz);
     m_point_state.init(m_sz);
     m_point_state.fill_all(PointStateExt::offboard());
     m_point_state.fill_onboard(PointState::empty());

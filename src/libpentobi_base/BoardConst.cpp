@@ -8,6 +8,7 @@
 
 #include "BoardConst.h"
 
+#include "AdjIterator.h"
 #include "Grid.h"
 #include "SymmetricPoints.h"
 #include "libboardgame_base/Transform.h"
@@ -214,8 +215,9 @@ vector<Piece> create_pieces()
 //-----------------------------------------------------------------------------
 
 BoardConst::BoardConst(unsigned int sz)
+    : m_sz(sz),
+      m_geometry(*Geometry::get(sz))
 {
-    m_sz = sz;
     m_pieces = create_pieces();
     for (int s0 = 0; s0 <= 1; ++s0)
         for (int s1 = 0; s1 <= 1; ++s1)
@@ -380,18 +382,15 @@ bool BoardConst::is_compatible_with_adj_status(Point p,
 
 void BoardConst::set_adj_and_corner_points(MoveInfo& info)
 {
-    // TODO: Using LIBBOARDGAME_FOREACH_ADJ macros are intended for speed
-    // optimization and shouldn't be used here. Replace by an adjacent point
-    // iterator that does not unroll the loops, once such an iterator exists.
     m_marker.clear();
     BOOST_FOREACH(Point p, info.points)
         m_marker.set(p);
     info.adj_points.clear();
     BOOST_FOREACH(Point p, info.points)
-        LIBBOARDGAME_FOREACH_ADJ(p, p_adj,
-            if (p_adj.is_onboard(m_sz) && ! m_marker[p_adj]
-                && ! info.adj_points.contains(p_adj))
-                info.adj_points.push_back(p_adj));
+        for (AdjIterator i(m_geometry, p); i; ++i)
+            if ((*i).is_onboard(m_sz) && ! m_marker[*i]
+                && ! info.adj_points.contains(*i))
+                info.adj_points.push_back(*i);
     info.attach_points.clear();
     BOOST_FOREACH(Point p, info.points)
         LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
@@ -399,9 +398,9 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
                 && ! info.attach_points.contains(p_diag))
             {
                 bool is_forbidden = false;
-                LIBBOARDGAME_FOREACH_ADJ(p_diag, p_diag_adj,
-                    if (m_marker[p_diag_adj])
-                        is_forbidden = true; )
+                for (AdjIterator i(m_geometry, p_diag); i; ++i)
+                    if (m_marker[*i])
+                        is_forbidden = true;
                 if (! is_forbidden)
                     info.attach_points.push_back(p_diag);
             })

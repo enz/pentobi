@@ -115,7 +115,7 @@ private:
         /** Only used on 20x20. */
         unsigned int dist_to_center;
 
-        int opp_attach_point_sum;
+        int attach_point_sum;
     };
 
     /** Flag set to true at the beginning of the playout or node expansion.
@@ -134,7 +134,7 @@ private:
 
     int m_max_local;
 
-    int m_max_opp_attach_point_sum;
+    int m_max_attach_point_sum;
 
     unsigned int m_min_dist_to_center;
 
