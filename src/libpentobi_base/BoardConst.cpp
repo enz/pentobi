@@ -400,7 +400,10 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
                 bool is_forbidden = false;
                 for (AdjIterator i(m_geometry, p_diag); i; ++i)
                     if (m_marker[*i])
+                    {
                         is_forbidden = true;
+                        break;
+                    }
                 if (! is_forbidden)
                     info.attach_points.push_back(p_diag);
             })
