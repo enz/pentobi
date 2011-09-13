@@ -383,30 +383,26 @@ bool BoardConst::is_compatible_with_adj_status(Point p,
 
 void BoardConst::set_adj_and_corner_points(MoveInfo& info)
 {
+    auto begin = info.points.begin();
+    auto end = info.points.end();
     m_marker.clear();
-    BOOST_FOREACH(Point p, info.points)
-        m_marker.set(p);
+    for (auto i = begin; i != end; ++i)
+        m_marker.set(*i);
     info.adj_points.clear();
-    BOOST_FOREACH(Point p, info.points)
-        for (AdjIterator i(m_geometry, p); i; ++i)
-            if ((*i).is_onboard(m_sz) && ! m_marker[*i]
-                && ! info.adj_points.contains(*i))
-                info.adj_points.push_back(*i);
-    info.attach_points.clear();
-    BOOST_FOREACH(Point p, info.points)
-        for (DiagIterator i(m_geometry, p); i; ++i)
-            if ((*i).is_onboard(m_sz) && ! m_marker[*i]
-                && ! info.attach_points.contains(*i))
+    for (auto i = begin; i != end; ++i)
+        for (AdjIterator j(m_geometry, *i); j; ++j)
+            if ((*j).is_onboard(m_sz) && ! m_marker[*j])
             {
-                bool is_forbidden = false;
-                for (AdjIterator j(m_geometry, *i); j; ++j)
-                    if (m_marker[*j])
-                    {
-                        is_forbidden = true;
-                        break;
-                    }
-                if (! is_forbidden)
-                    info.attach_points.push_back(*i);
+                m_marker.set(*j);
+                info.adj_points.push_back(*j);
+            }
+    info.attach_points.clear();
+    for (auto i = begin; i != end; ++i)
+        for (DiagIterator j(m_geometry, *i); j; ++j)
+            if ((*j).is_onboard(m_sz) && ! m_marker[*j])
+            {
+                m_marker.set(*j);
+                info.attach_points.push_back(*j);
             }
 }
 
