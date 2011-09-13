@@ -252,15 +252,15 @@ BoardConst::BoardConst(unsigned int sz)
 
 void BoardConst::create_move(unsigned int piece,
                              const Piece::Points& coord_points,
-                             CoordPoint center, unsigned int x, unsigned int y)
+                             CoordPoint center)
 {
     MovePoints points;
-    BOOST_FOREACH(const CoordPoint& p, coord_points)
-        points.push_back(Point(x + p.x, y + p.y));
+    for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
+        points.push_back(Point((*i).x, (*i).y));
     MoveInfo info;
     info.piece = piece;
     info.points = points;
-    info.center = Point(x + center.x, y + center.y);
+    info.center = Point(center.x, center.y);
     set_adj_and_corner_points(info);
     m_move_info.push_back(info);
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
@@ -288,22 +288,34 @@ void BoardConst::create_moves(unsigned int piece)
     for (unsigned int i = 0; i < 16; ++i)
         m_moves[i][piece].init(m_sz);
     Piece::Points points;
-    BOOST_FOREACH(Transform transform, m_pieces[piece].get_transforms())
-    {
-        points = m_pieces[piece].get_points();
-        transform.transform(points.begin(), points.end());
-        sort(points.begin(), points.end());
-        auto center_pos = find(points.begin(), points.end(), CoordPoint(0, 0));
-        LIBBOARDGAME_ASSERT(center_pos != points.end());
-        unsigned int width;
-        unsigned int height;
-        CoordPoint::normalize_offset(points.begin(), points.end(),
-                                     width, height);
-        CoordPoint center = *center_pos;
-        for (unsigned int x = 0; x <= m_sz - width; ++x)
-            for (unsigned int y = 0; y <= m_sz - height; ++y)
-                create_move(piece, points, center, x, y);
-    };
+    for (unsigned int x = 0; x < m_sz; ++x)
+        for (unsigned int y = 0; y < m_sz; ++y)
+            BOOST_FOREACH(Transform transform, m_pieces[piece].get_transforms())
+            {
+                points = m_pieces[piece].get_points();
+                transform.transform(points.begin(), points.end());
+                sort(points.begin(), points.end());
+                auto center =
+                    find(points.begin(), points.end(), CoordPoint(0, 0));
+                LIBBOARDGAME_ASSERT(center != points.end());
+                unsigned int width;
+                unsigned int height;
+                CoordPoint::normalize_offset(points.begin(), points.end(),
+                                             width, height);
+                bool is_onboard = true;
+                BOOST_FOREACH(CoordPoint& p, points)
+                {
+                    p.x += x;
+                    p.y += y;
+                    if (! p.is_onboard(m_sz))
+                    {
+                        is_onboard = false;
+                        break;
+                    }
+                }
+                if (is_onboard)
+                    create_move(piece, points, *center);
+            };
 }
 
 const BoardConst& BoardConst::get(unsigned int size)

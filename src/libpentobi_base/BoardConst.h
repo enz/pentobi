@@ -84,7 +84,7 @@ private:
     array<ArrayList<unsigned int, 4>, 16> m_adj_status;
 
     void create_move(unsigned int piece, const Piece::Points& coord_points,
-                     CoordPoint center, unsigned int x, unsigned int y);
+                     CoordPoint center);
 
     void create_moves(unsigned int piece);
 
