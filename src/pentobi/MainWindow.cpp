@@ -1645,10 +1645,20 @@ void MainWindow::play(Color c, Move mv)
     {
         updateWindow(true);
         repaint();
-        if (! computerPlaysAll() && ! m_noMovesAvailableShown[c])
+        if (! computerPlaysAll())
         {
-            showNoMovesAvailable(c);
-            m_noMovesAvailableShown[c] = true;
+            Color effective_to_play = m_game->get_effective_to_play();
+            while (c != effective_to_play)
+            {
+                if (! m_noMovesAvailableShown[c])
+                {
+                    showNoMovesAvailable(c);
+                    m_noMovesAvailableShown[c] = true;
+                }
+                c = c.get_next(bd.get_nu_colors());
+                if (bd.has_moves(c))
+                    break;
+            }
         }
         checkComputerMove();
     }
