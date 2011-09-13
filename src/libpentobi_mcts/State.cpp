@@ -177,8 +177,8 @@ void State::compute_features()
 
 void State::clear_local_points()
 {
-    BOOST_FOREACH(Point p, m_local_points)
-        m_local_points_marker[p] = 0;
+    for (auto i = m_local_points.begin(); i != m_local_points.end(); ++i)
+        m_local_points_marker[*i] = 0;
     m_local_points.clear();
 }
 
