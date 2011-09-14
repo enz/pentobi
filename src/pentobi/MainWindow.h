@@ -16,9 +16,10 @@
 #include "libpentobi_gui/ScoreDisplay.h"
 
 using namespace std;
-using libpentobi_base::ColorMap;
 using libboardgame_sgf::Node;
+using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
+using libpentobi_base::ColorMap;
 using libpentobi_base::Game;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Move;
@@ -373,7 +374,7 @@ private:
 
     QString m_file;
 
-    vector<Move> m_legalMoves;
+    unique_ptr<ArrayList<Move, Move::range>> m_legalMoves;
 
     unsigned int m_legalMoveIndex;
 

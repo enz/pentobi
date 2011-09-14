@@ -108,7 +108,8 @@ MainWindow::MainWindow(const QString& initialFile)
     : m_isGenMoveRunning(false),
       m_lastMoveByComputer(false),
       m_genMoveId(0),
-      m_help_window(0)
+      m_help_window(0),
+      m_legalMoves(new ArrayList<Move, Move::range>())
 {
     QSettings settings;
     m_level = settings.value("level", 4).toInt();
@@ -1135,23 +1136,23 @@ void MainWindow::findMove()
     const Board& bd = m_game->get_board();
     if (bd.is_game_over())
         return;
-    if (m_legalMoves.empty())
+    if (m_legalMoves->empty())
     {
-        bd.gen_moves(m_toPlay, m_legalMoves);
+        bd.gen_moves(m_toPlay, *m_legalMoves);
         PieceValueHeuristic value(bd);
-        sort(m_legalMoves.begin(), m_legalMoves.end(),
+        sort(m_legalMoves->begin(), m_legalMoves->end(),
              bind(&isPieceBetter, bd, value, placeholders::_1,
                   placeholders::_2));
     }
-    if (m_legalMoves.empty())
+    if (m_legalMoves->empty())
     {
         // m_toPlay must have moves if game is not over
         LIBBOARDGAME_ASSERT(false);
         return;
     }
-    if (m_legalMoveIndex >= m_legalMoves.size())
+    if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
-    Move mv = m_legalMoves[m_legalMoveIndex];
+    Move mv = (*m_legalMoves)[m_legalMoveIndex];
     selectPiece(m_toPlay, bd.get_piece(bd.get_move_info(mv).piece));
     m_guiBoard->showMove(m_toPlay, mv);
     ++m_legalMoveIndex;
@@ -2484,7 +2485,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
                               markAllLastBySameColor);
     m_scoreDisplay->updateScore(bd);
     m_toPlay = m_game->get_effective_to_play();
-    m_legalMoves.clear();
+    m_legalMoves->clear();
     m_legalMoveIndex = 0;
     bool isGameOver = bd.is_game_over();
     unsigned int nuPiecesLeft = bd.get_pieces_left(m_toPlay).size();
