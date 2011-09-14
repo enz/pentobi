@@ -5,13 +5,13 @@
 #ifndef LIBPENTOBI_MCTS_STATE_H
 #define LIBPENTOBI_MCTS_STATE_H
 
-#include "libpentobi_base/ColorMap.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libboardgame_mcts/ValueType.h"
 #include "libboardgame_util/RandomGenerator.h"
 #include "libboardgame_util/Unused.h"
 #include "libpentobi_base/Board.h"
+#include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/PieceValueHeuristic.h"
 #include "libpentobi_base/PointList.h"
@@ -20,6 +20,10 @@
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_mcts::PlayerMove;
+using libboardgame_mcts::ValueType;
+using libboardgame_util::ArrayList;
+using libboardgame_util::RandomGenerator;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMove;
@@ -33,9 +37,6 @@ using libpentobi_base::PointList;
 using libpentobi_base::SymmetricPoints;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
-using libboardgame_mcts::PlayerMove;
-using libboardgame_mcts::ValueType;
-using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 
@@ -140,12 +141,14 @@ private:
 
     const SharedConst& m_shared_const;
 
+    Board m_bd;
+
     /** Incrementally updated lists of legal moves for both colors.
         Only the move list for the color to play van be used in any given
         position, the other color is not updated immediately after a move. */
-    ColorMap<vector<Move>> m_moves;
+    ColorMap<unique_ptr<ArrayList<Move, Move::range>>> m_moves;
 
-    vector<MoveFeatures> m_features;
+    ArrayList<MoveFeatures, Move::range> m_features;
 
     /** The last move by each color.
         Used for updating the move lists and only defined if m_extended_update
@@ -159,11 +162,11 @@ private:
     /** Moves that are a local response to the last move.
         These moves occupy at least one of the corner points of the last
         piece played. */
-    vector<Move> m_local_moves;
+    ArrayList<Move, Move::range> m_local_moves;
 
     /** Local variable during update.
         Reused for efficiency. */
-    vector<Move> m_tmp_moves;
+    unique_ptr<ArrayList<Move, Move::range>> m_tmp_moves;
 
     /** Local variable during update.
         Reused for efficiency. */
@@ -174,8 +177,6 @@ private:
     Grid<int> m_local_points_marker;
 
     SymmetricPoints m_symmetric_points;
-
-    Board m_bd;
 
     RandomGenerator m_random;
 

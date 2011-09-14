@@ -44,7 +44,7 @@ void Board::copy_from(const Board& bd)
         play(bd.get_move(i));
 }
 
-void Board::gen_moves(Color c, vector<Move>& moves) const
+void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 {
     moves.clear();
     bool is_first_move = (m_pieces_left[c].size() == nu_pieces);
@@ -63,7 +63,7 @@ void Board::gen_moves(Color c, vector<Move>& moves) const
 }
 
 void Board::gen_moves(Color c, Point p, MoveMarker& marker,
-                      vector<Move>& moves) const
+                      ArrayList<Move, Move::range>& moves) const
 {
     BOOST_FOREACH(unsigned int i, m_pieces_left[c])
     {
@@ -81,7 +81,8 @@ void Board::gen_moves(Color c, Point p, MoveMarker& marker,
 }
 
 void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
-                      MoveMarker& marker, vector<Move>& moves) const
+                      MoveMarker& marker,
+                      ArrayList<Move, Move::range>& moves) const
 {
     BOOST_FOREACH(unsigned int i, m_pieces_left[c])
     {

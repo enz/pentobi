@@ -96,14 +96,20 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
 
 State::State(const Board& bd, const SharedConst& shared_const)
   : m_shared_const(shared_const),
-    m_bd(bd.get_game_variant())
+    m_bd(bd.get_game_variant()),
+    m_tmp_moves(new ArrayList<Move, Move::range>())
 {
+    for (unsigned int i = 0; i < Color::range; ++i)
+        m_moves[Color(i)].reset(new ArrayList<Move, Move::range>());
 }
 
 State::State(const State& state)
   : m_shared_const(state.m_shared_const),
-    m_bd(state.m_bd.get_game_variant())
+    m_bd(state.m_bd.get_game_variant()),
+    m_tmp_moves(new ArrayList<Move, Move::range>())
 {
+    for (unsigned int i = 0; i < Color::range; ++i)
+        m_moves[Color(i)].reset(new ArrayList<Move, Move::range>());
 }
 
 State::~State() throw()
@@ -127,7 +133,7 @@ void State::compute_features()
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
     GameVariant variant = m_bd.get_game_variant();
-    const vector<Move>& moves = m_moves[to_play];
+    const ArrayList<Move, Move::range>& moves = *m_moves[to_play];
     Grid<int> opp_attach_point_val(m_bd.get_size());
     for (BoardIterator i(m_bd); i; ++i)
     {
@@ -239,7 +245,7 @@ bool State::gen_and_play_playout_move()
         return false;
     Color to_play = m_bd.get_to_play();
     GameVariant variant = m_bd.get_game_variant();
-    m_has_moves[to_play] = ! m_moves[to_play].empty();
+    m_has_moves[to_play] = ! m_moves[to_play]->empty();
 
     // Don't care about the exact score of a playout if we are still early in
     // the game and we know that the playout is a loss because the player has
@@ -266,17 +272,17 @@ bool State::gen_and_play_playout_move()
                 log() << "Terminate playout. Symmetry not broken.\n";
             return false;
         }
-    const vector<Move>* moves;
+    const ArrayList<Move, Move::range>* moves;
     if (pure_random_playout)
-        moves = &m_moves[to_play];
+        moves = m_moves[to_play].get();
     else
     {
         if (log_simulations)
-            log() << "Moves: " << m_moves[to_play].size() << ", local: "
+            log() << "Moves: " << moves->size() << ", local: "
                   << m_local_moves.size() << '\n';
         moves = &m_local_moves;
         if (moves->empty())
-            moves = &m_moves[to_play];
+            moves = m_moves[to_play].get();
     }
     if (moves->empty())
     {
@@ -298,7 +304,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     init_move_list(to_play);
     init_symmetry_info();
     m_extended_update = true;
-    const vector<Move>& moves = m_moves[to_play];
+    const ArrayList<Move, Move::range>& moves = *m_moves[to_play];
     if (moves.empty())
     {
         expander.add_child(Move::pass());
@@ -416,7 +422,7 @@ void State::init_local_points()
 
 void State::init_move_list(Color c)
 {
-    vector<Move>& moves = m_moves[c];
+    ArrayList<Move, Move::range>& moves = *m_moves[c];
     m_bd.gen_moves(c, moves);
     m_last_move[c] = Move::null();
     init_local_points();
@@ -591,7 +597,7 @@ void State::start_simulation(size_t n)
 void State::update_move_list(Color c)
 {
     init_local_points();
-    m_tmp_moves.clear();
+    m_tmp_moves->clear();
     m_local_moves.clear();
     m_max_local = 1;
     Move last_mv = m_last_move[c];
@@ -600,14 +606,14 @@ void State::update_move_list(Color c)
     unsigned int last_piece = numeric_limits<unsigned int>::max();
     if (! last_mv.is_null() && ! last_mv.is_pass())
         last_piece = m_bd.get_move_info(last_mv).piece;
-    for (auto i = m_moves[c].begin(); i != m_moves[c].end(); ++i)
+    for (auto i = m_moves[c]->begin(); i != m_moves[c]->end(); ++i)
     {
         int nu_local;
         const MoveInfo& info = m_bd.get_move_info(*i);
         if (info.piece != last_piece
             && ! is_forbidden(c, info.points, nu_local))
         {
-            m_tmp_moves.push_back(*i);
+            m_tmp_moves->push_back(*i);
             m_marker.set(*i);
             check_local_move(nu_local, *i);
         }
@@ -634,7 +640,7 @@ void State::update_move_list(Color c)
                         if (! is_forbidden(c, info.points, nu_local)
                             && ! m_marker[*i])
                         {
-                            m_tmp_moves.push_back(*i);
+                            m_tmp_moves->push_back(*i);
                             m_marker.set(*i);
                             check_local_move(nu_local, *i);
                         }
@@ -645,7 +651,7 @@ void State::update_move_list(Color c)
 
     swap(m_moves[c], m_tmp_moves);
 
-    m_marker.clear(m_moves[c]);
+    m_marker.clear(*m_moves[c]);
     clear_local_points();
     m_last_move[c] = Move::null();
 }

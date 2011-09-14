@@ -7,8 +7,11 @@
 
 #include <vector>
 #include "Move.h"
+#include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
+
+using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
@@ -20,6 +23,9 @@ public:
     void clear(Move mv);
 
     void clear(const vector<Move>& moves);
+
+    template<unsigned int M>
+    void clear(const ArrayList<Move, M>& moves);
 
     void set(Move mv);
 
@@ -45,6 +51,15 @@ inline void MoveMarker::clear(Move mv)
 }
 
 inline void MoveMarker::clear(const vector<Move>& moves)
+{
+    auto begin = moves.begin();
+    auto end = moves.end();
+    for (auto i = begin; i != end; ++i)
+        clear(*i);
+}
+
+template<unsigned int M>
+inline void MoveMarker::clear(const ArrayList<Move, M>& moves)
 {
     auto begin = moves.begin();
     auto end = moves.end();

@@ -63,9 +63,10 @@ void Engine::board_changed()
 void Engine::cmd_all_legal(const Arguments& args, Response& response)
 {
     const Board& bd = get_board();
-    vector<Move> moves;
-    bd.gen_moves(get_color_arg(args), moves);
-    BOOST_FOREACH(Move mv, moves)
+    unique_ptr<ArrayList<Move, Move::range>>
+        moves(new ArrayList<Move, Move::range>());
+    bd.gen_moves(get_color_arg(args), *moves);
+    BOOST_FOREACH(Move mv, *moves)
         response << bd.to_string(mv) << '\n';
 }
 
