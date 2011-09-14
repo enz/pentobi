@@ -322,6 +322,11 @@ void Board::init(GameVariant game_variant)
     m_played_move.fill(Move::null());
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
+        if (game_variant == game_variant_classic_2)
+            m_second_color[*i] =
+                (*i).get_next(m_nu_colors).get_next(m_nu_colors);
+        else
+            m_second_color[*i] = *i;
         m_forbidden[*i].init(m_sz);
         m_forbidden[*i].fill_all(true);
         m_forbidden[*i].fill_onboard(false);

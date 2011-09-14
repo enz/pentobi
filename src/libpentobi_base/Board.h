@@ -183,6 +183,12 @@ public:
 
     bool is_onboard(Point p) const;
 
+    /** Get the second color in game variants in which a player plays two
+        colors.
+        @return The second color of the player that plays color c, or c if
+        the player plays only one color in the current game variant. */
+    Color get_second_color(Color c) const;
+
     bool is_same_player(Color c1, Color c2) const;
 
 private:
@@ -207,6 +213,9 @@ private:
     Grid<Move> m_played_move;
 
     ColorMap<ArrayList<unsigned int, nu_pieces>> m_pieces_left;
+
+    /** See get_second_color() */
+    ColorMap<Color> m_second_color;
 
     ArrayList<ColorMove, max_game_moves> m_moves;
 
@@ -345,6 +354,11 @@ inline PointStateExt Board::get_point_state_ext(Point p) const
     return m_point_state[p];
 }
 
+inline Color Board::get_second_color(Color c) const
+{
+    return m_second_color[c];
+}
+
 inline unsigned int Board::get_size() const
 {
     return m_sz;
@@ -401,9 +415,7 @@ inline bool Board::is_onboard(Point p) const
 
 inline bool Board::is_same_player(Color c1, Color c2) const
 {
-    return (c1 == c2 ||
-            (m_game_variant == game_variant_classic_2
-             && (c1.to_int() % 2) == (c2.to_int() % 2)));
+    return (c1 == c2 || c1 == m_second_color[c2]);
 }
 
 inline bool Board::is_starting_point(Point p, Color& color) const

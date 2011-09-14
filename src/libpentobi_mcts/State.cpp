@@ -124,11 +124,8 @@ void State::check_local_move(int nu_local, Move mv)
 
 void State::compute_features()
 {
-    unsigned int nu_colors = m_bd.get_nu_colors();
     Color to_play = m_bd.get_to_play();
-    Color to_play_2 = to_play;
-    if (m_bd.get_game_variant() == game_variant_classic_2)
-        to_play_2 = to_play.get_next(nu_colors).get_next(nu_colors);
+    Color second_color = m_bd.get_second_color(to_play);
     GameVariant variant = m_bd.get_game_variant();
     const vector<Move>& moves = m_moves[to_play];
     Grid<int> opp_attach_point_val(m_bd.get_size());
@@ -138,7 +135,7 @@ void State::compute_features()
         for (unsigned int j = 0; j < m_bd.get_nu_colors(); ++j)
         {
             Color c(j);
-            if (c == to_play || c == to_play_2)
+            if (c == to_play || c == second_color)
                 continue;
             if (m_bd.has_diag(*i, c) && ! m_bd.is_forbidden(c, *i))
                 opp_attach_point_val[*i] = 1;
@@ -242,9 +239,6 @@ bool State::gen_and_play_playout_move()
         return false;
     Color to_play = m_bd.get_to_play();
     GameVariant variant = m_bd.get_game_variant();
-    Color to_play_second_color = to_play;
-    if (variant == game_variant_classic_2)
-        to_play_second_color = to_play.get_next(nu_colors).get_next(nu_colors);
     m_has_moves[to_play] = ! m_moves[to_play].empty();
 
     // Don't care about the exact score of a playout if we are still early in
@@ -253,7 +247,7 @@ bool State::gen_and_play_playout_move()
     if (! m_has_moves[to_play] && m_nu_moves_initial < 10 * nu_colors
         && (variant == game_variant_duo
             || (variant == game_variant_classic_2
-                && ! m_has_moves[to_play_second_color])))
+                && ! m_has_moves[m_bd.get_second_color(to_play)])))
     {
         double game_result;
         if (m_bd.get_score(to_play, game_result) < 0)
@@ -395,10 +389,7 @@ void State::init_local_points()
 {
     LIBBOARDGAME_ASSERT(m_local_points.empty());
     Color to_play = m_bd.get_to_play();
-    unsigned int nu_colors = m_bd.get_nu_colors();
-    Color to_play_second_color = to_play;
-    if (m_bd.get_game_variant() == game_variant_classic_2)
-        to_play_second_color = to_play.get_next(nu_colors).get_next(nu_colors);
+    Color second_color = m_bd.get_second_color(to_play);
     unsigned int move_number = m_bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-player variants)
@@ -409,7 +400,7 @@ void State::init_local_points()
         --move_number;
         ColorMove move = m_bd.get_move(move_number);
         Color c = move.color;
-        if (c == to_play || c == to_play_second_color)
+        if (c == to_play || c == second_color)
             continue;
         Move mv = move.move;
         if (mv.is_pass())
