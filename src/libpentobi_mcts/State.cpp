@@ -277,12 +277,12 @@ bool State::gen_and_play_playout_move()
         moves = m_moves[to_play].get();
     else
     {
-        if (log_simulations)
-            log() << "Moves: " << moves->size() << ", local: "
-                  << m_local_moves.size() << '\n';
         moves = &m_local_moves;
         if (moves->empty())
             moves = m_moves[to_play].get();
+        if (log_simulations)
+            log() << "Moves: " << moves->size() << ", local: "
+                  << m_local_moves.size() << '\n';
     }
     if (moves->empty())
     {
