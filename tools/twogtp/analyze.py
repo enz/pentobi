@@ -52,9 +52,9 @@ def print_stat_percent(statistics):
 
 def print_stat_percent_count(statistics):
     if statistics.get_count() > 0:
-        print "%s:\t%i (%.1f%%+-%.1f%%)" \
+        print "%s:\t%.0f (%.1f%%+-%.1f%%)" \
             % (statistics.get_name(),
-               statistics.get_count(),
+               statistics.get_count() * statistics.get_mean(),
                100 * statistics.get_mean(),
                100 * statistics.get_error_mean())
 
