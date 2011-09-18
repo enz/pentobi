@@ -148,7 +148,7 @@ void State::compute_features()
         }
     }
     m_features.resize(moves.size());
-    m_max_attach_point_sum = 0;
+    m_max_heuristic = -numeric_limits<ValueType>::max();
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
     bool compute_dist_to_center =
         ((variant == game_variant_classic_2 || variant == game_variant_classic)
@@ -157,13 +157,20 @@ void State::compute_features()
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
         MoveFeatures& features = m_features[i];
-        features.attach_point_sum = 0;
+        features.heuristic = info.points.size();
         features.dist_to_center = numeric_limits<unsigned int>::max();
         BOOST_FOREACH(Point p, info.points)
-            features.attach_point_sum += opp_attach_point_val[p];
+            features.heuristic += 5 * opp_attach_point_val[p];
         BOOST_FOREACH(Point p, info.attach_points)
-            if (m_bd.is_forbidden(to_play, p))
-                --features.attach_point_sum;
+            if (m_bd.is_forbidden(to_play, p)
+                && m_bd.get_point_state_ext(p) != to_play)
+                features.heuristic -= 5;
+            else
+                features.heuristic += 1;
+        BOOST_FOREACH(Point p, info.adj_points)
+            // Creating new forbidden points is a bad thing
+            if (! m_bd.is_forbidden(to_play, p))
+                features.heuristic -= 0.2;
         if (compute_dist_to_center)
         {
             BOOST_FOREACH(Point p, info.points)
@@ -173,8 +180,7 @@ void State::compute_features()
             m_min_dist_to_center =
                 min(m_min_dist_to_center, features.dist_to_center);
         }
-        m_max_attach_point_sum =
-            max(m_max_attach_point_sum, features.attach_point_sum);
+        m_max_heuristic = max(m_max_heuristic, features.heuristic);
     }
 }
 
@@ -340,22 +346,11 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     {
         Move mv = moves[i];
         const MoveFeatures& features = m_features[i];
-        const MoveInfo& info = m_bd.get_move_info(mv);
-        // Even game heuristic (0.5) with small piece value bonus to order the
-        // values by piece value
-        ValueType value =
-            ValueType(0.5 + 0.01 * m_shared_const.piece_value.get(info.piece));
+        // Make heuristic relative to best move and scale it to [0..1]
+        ValueType heuristic =
+            exp(-0.3 * (m_max_heuristic - features.heuristic));
+        ValueType value = 1 * (0.1 + 0.9 * heuristic);
         ValueType count = 1;
-        if (m_max_attach_point_sum > 0)
-        {
-            if (features.attach_point_sum == m_max_attach_point_sum)
-                value += 3 * ValueType(0.9);
-            else if (features.attach_point_sum > 0)
-                value += 3 * ValueType(0.7);
-            else
-                value += 3 * ValueType(0.5);
-            count += 3;
-        }
         if (m_min_dist_to_center != numeric_limits<unsigned int>::max())
         {
             if (features.dist_to_center == m_min_dist_to_center)

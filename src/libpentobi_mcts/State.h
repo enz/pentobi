@@ -116,7 +116,8 @@ private:
         /** Only used on 20x20. */
         unsigned int dist_to_center;
 
-        int attach_point_sum;
+        /** Heuristic value of the move expressed in score points. */
+        ValueType heuristic;
     };
 
     /** Flag set to true at the beginning of the playout or node expansion.
@@ -135,7 +136,8 @@ private:
 
     int m_max_local;
 
-    int m_max_attach_point_sum;
+    /** Maximum of Features::heuristic for all moves. */
+    ValueType m_max_heuristic;
 
     unsigned int m_min_dist_to_center;
 
