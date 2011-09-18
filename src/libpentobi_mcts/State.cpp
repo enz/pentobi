@@ -152,7 +152,7 @@ void State::compute_features()
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
     bool compute_dist_to_center =
         ((variant == game_variant_classic_2 || variant == game_variant_classic)
-         && m_bd.get_pieces_left(to_play).size() > Board::nu_pieces - 4);
+         && m_bd.get_nu_moves() <= 13);
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
