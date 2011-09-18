@@ -35,6 +35,8 @@ class MainWindow
 public:
     MainWindow(const QString& initialFile = QString(), bool noBook = false);
 
+    bool eventFilter(QObject* watched, QEvent* event);
+
     QSize sizeHint() const;
 
 public slots:

@@ -146,6 +146,7 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     connect(m_actionPlaceSelectedPiece, SIGNAL(triggered()),
             m_guiBoard, SLOT(placeSelectedPiece()));
     createMenu();
+    qApp->installEventFilter(this);
     updateRecentFiles();
     m_moveNumber = new QLabel();
     statusBar()->addPermanentWidget(m_moveNumber);
@@ -1079,6 +1080,15 @@ void MainWindow::createToolBar()
 void MainWindow::end()
 {
     gotoNode(get_last_node(m_game->get_current()));
+}
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    // By default, Qt 4.7 shows status tips in the status bar if the mouse
+    // goes over a menu even if the status tip is empty. This is undesirable
+    // because it deletes the current text in the status line.
+    return (event->type() == QEvent::StatusTip
+            && dynamic_cast<QStatusTipEvent*>(event)->tip().isEmpty());
 }
 
 void MainWindow::exportAsciiArt()
