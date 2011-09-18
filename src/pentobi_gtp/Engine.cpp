@@ -33,11 +33,11 @@ namespace {
 bool is_child_better(const libboardgame_mcts::Node<Move>* n1,
                      const libboardgame_mcts::Node<Move>* n2)
 {
-    ValueType count1 = n1->get_count();
-    ValueType count2 = n2->get_count();
-    if (count1 != count2)
-        return count1 > count2;
-    if (count1 > 0)
+    ValueType visit_count1 = n1->get_visit_count();
+    ValueType visit_count2 = n2->get_visit_count();
+    if (visit_count1 != visit_count2)
+        return visit_count1 > visit_count2;
+    if (n1->get_count() > 0 && n2->get_count() > 0)
         return n1->get_value() > n2->get_value();
     return false;
 }
@@ -73,6 +73,7 @@ void Engine::cmd_move_values(Response& response)
     response << fixed;
     BOOST_FOREACH(const libboardgame_mcts::Node<Move>* node, children)
     {
+        response << setprecision(0) << node->get_visit_count() << ' ';
         ValueType count = node->get_count();
         response << setprecision(0) << count << ' ';
         if (count > 0)
