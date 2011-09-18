@@ -33,7 +33,7 @@ class MainWindow
     Q_OBJECT
 
 public:
-    MainWindow(const QString& initialFile = QString());
+    MainWindow(const QString& initialFile = QString(), bool noBook = false);
 
     QSize sizeHint() const;
 

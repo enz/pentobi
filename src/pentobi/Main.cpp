@@ -96,6 +96,7 @@ int main(int argc, char* argv[])
         vector<string> arguments;
         options_description normal_options("Options");
         normal_options.add_options()
+            ("nobook", "do not use opening book")
             ("verbose", "print logging messages");
         options_description hidden_options;
         hidden_options.add_options()
@@ -111,10 +112,11 @@ int main(int argc, char* argv[])
         boost::program_options::notify(vm);
         if (! vm.count("verbose"))
             set_log_null();
+        bool noBook = (vm.count("nobook") != 0);
         QString initialFile;
         if (arguments.size() > 0)
             initialFile = arguments[0].c_str();
-        MainWindow mainWindow(initialFile);
+        MainWindow mainWindow(initialFile, noBook);
         mainWindow.show();
         return app.exec();
     }

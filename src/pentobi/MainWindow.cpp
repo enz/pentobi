@@ -104,7 +104,7 @@ bool isPieceBetter(const Board& bd, const PieceValueHeuristic& value,
 
 //-----------------------------------------------------------------------------
 
-MainWindow::MainWindow(const QString& initialFile)
+MainWindow::MainWindow(const QString& initialFile, bool noBook)
     : m_isGenMoveRunning(false),
       m_lastMoveByComputer(false),
       m_genMoveId(0),
@@ -127,6 +127,7 @@ MainWindow::MainWindow(const QString& initialFile)
     initGame();
     path appDirPath(QCoreApplication::applicationDirPath().toStdString());
     m_player.reset(new Player(m_game->get_board(), appDirPath));
+    m_player->set_use_book(! noBook);
     createActions();
     createToolBar();
     setCentralWidget(createCentralWidget());
