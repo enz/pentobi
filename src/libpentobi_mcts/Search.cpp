@@ -24,6 +24,7 @@ Search::Search(const Board& bd)
     set_unexplored_value(0.5);
     set_expand_threshold(1);
     set_bias_term_constant(0.1f);
+    set_widening_parameter(8);
 }
 
 Search::~Search() throw()
