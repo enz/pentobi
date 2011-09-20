@@ -225,7 +225,9 @@ BoardConst::BoardConst(unsigned int sz)
             for (int s2 = 0; s2 <= 1; ++s2)
                 for (int s3 = 0; s3 <= 1; ++s3)
                 {
-                    unsigned int index = get_adj_status_index(s0, s1, s2, s3);
+                    unsigned int index =
+                         get_adj_status_index(s0 != 0, s1 != 0,
+                                              s2 != 0, s3 != 0);
                     if (s0 != 0)
                         m_adj_status[index].push_back(0);
                     if (s1 != 0)

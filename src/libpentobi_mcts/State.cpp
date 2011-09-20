@@ -87,7 +87,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
             unsigned int dist_x = (x <= center1 ? center1 - x : x - center2);
             unsigned int dist_y = (y <= center1 ? center1 - y : y - center2);
             m_dist_to_center[Point(x, y)] =
-                (unsigned int)(sqrt(dist_x * dist_x + dist_y * dist_y));
+                (unsigned int)(sqrt(float(dist_x * dist_x + dist_y * dist_y)));
         }
     //log() << "Dist to center:\n" << m_dist_to_center;
 }
@@ -157,7 +157,7 @@ void State::compute_features()
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
         MoveFeatures& features = m_features[i];
-        features.heuristic = info.points.size();
+        features.heuristic = ValueType(info.points.size());
         features.dist_to_center = numeric_limits<unsigned int>::max();
         BOOST_FOREACH(Point p, info.points)
             features.heuristic += 5 * opp_attach_point_val[p];
@@ -170,7 +170,7 @@ void State::compute_features()
         BOOST_FOREACH(Point p, info.adj_points)
             // Creating new forbidden points is a bad thing
             if (! m_bd.is_forbidden(to_play, p))
-                features.heuristic -= 0.2;
+                features.heuristic -= ValueType(0.2);
         if (compute_dist_to_center)
         {
             BOOST_FOREACH(Point p, info.points)
@@ -348,8 +348,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         const MoveFeatures& features = m_features[i];
         // Make heuristic relative to best move and scale it to [0..1]
         ValueType heuristic =
-            exp(-0.3 * (m_max_heuristic - features.heuristic));
-        ValueType value = 1 * (0.1 + 0.9 * heuristic);
+            exp(ValueType(-0.3) * (m_max_heuristic - features.heuristic));
+        ValueType value = 1 * (ValueType(0.1) + ValueType(0.9) * heuristic);
         ValueType count = 1;
         if (m_min_dist_to_center != numeric_limits<unsigned int>::max())
         {

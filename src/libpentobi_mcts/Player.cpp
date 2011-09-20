@@ -53,11 +53,11 @@ Player::Player(const Board& bd, const path& application_dir_path)
         // lower there (especially in classic/classic_2)
         if (i == 0)
         {
-            weight_max_count_classic[i] *= 0.2;
-            weight_max_count_duo[i] *= 0.7;
+            weight_max_count_classic[i] *= ValueType(0.2);
+            weight_max_count_duo[i] *= ValueType(0.7);
         }
         else if (i == 1)
-            weight_max_count_classic[i] *= 0.4;
+            weight_max_count_classic[i] *= ValueType(0.4);
     }
 }
 
