@@ -1085,10 +1085,9 @@ void MainWindow::end()
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
     // By default, Qt 4.7 shows status tips in the status bar if the mouse
-    // goes over a menu even if the status tip is empty. This is undesirable
-    // because it deletes the current text in the status line.
-    return (event->type() == QEvent::StatusTip
-            && dynamic_cast<QStatusTipEvent*>(event)->tip().isEmpty());
+    // goes over a menu. This is undesirable because it deletes the current
+    // text in the status line (e.g. the "The computer is thinking..." status)
+    return (event->type() == QEvent::StatusTip);
 }
 
 void MainWindow::exportAsciiArt()
