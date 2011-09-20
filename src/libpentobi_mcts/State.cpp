@@ -353,11 +353,9 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         ValueType count = 1;
         if (m_min_dist_to_center != numeric_limits<unsigned int>::max())
         {
-            if (features.dist_to_center == m_min_dist_to_center)
-                value += 5 * ValueType(0.9);
-            else
-                value += 5 * ValueType(0.1);
-            count += 5;
+            if (features.dist_to_center != m_min_dist_to_center)
+                // Prune early moves that don't minimize dist to center
+                continue;
         }
         // Encourage to explore a move that keeps or breaks symmetry
         // See also the comment in evaluate_playout()
