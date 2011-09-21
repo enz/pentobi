@@ -342,21 +342,39 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
                 }
         }
     }
+    GameVariant variant = m_bd.get_game_variant();
+    unsigned int nu_moves = m_bd.get_nu_moves();
+    unsigned int min_piece_size = 0;
+    if (variant == game_variant_duo)
+    {
+        if (nu_moves < 4)
+            min_piece_size = 5;
+        else if (nu_moves < 6)
+            min_piece_size = 4;
+    }
+    else if (variant == game_variant_classic || game_variant_classic_2)
+    {
+        if (nu_moves < 12)
+            min_piece_size = 5;
+        else if (nu_moves < 20)
+            min_piece_size = 4;
+    }
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         Move mv = moves[i];
+        const MoveInfo& info = m_bd.get_move_info(mv);
+        if (m_bd.get_piece(info.piece).get_size() < min_piece_size)
+            continue;
         const MoveFeatures& features = m_features[i];
+        if (m_min_dist_to_center != numeric_limits<unsigned int>::max()
+            && features.dist_to_center != m_min_dist_to_center)
+            // Prune early moves that don't minimize dist to center
+            continue;
         // Make heuristic relative to best move and scale it to [0..1]
         ValueType heuristic =
             exp(ValueType(-0.3) * (m_max_heuristic - features.heuristic));
         ValueType value = 1 * (ValueType(0.1) + ValueType(0.9) * heuristic);
         ValueType count = 1;
-        if (m_min_dist_to_center != numeric_limits<unsigned int>::max())
-        {
-            if (features.dist_to_center != m_min_dist_to_center)
-                // Prune early moves that don't minimize dist to center
-                continue;
-        }
         // Encourage to explore a move that keeps or breaks symmetry
         // See also the comment in evaluate_playout()
         if (m_check_symmetric_draw && ! m_is_symmetry_broken)

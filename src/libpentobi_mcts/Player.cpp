@@ -49,15 +49,18 @@ Player::Player(const Board& bd, const path& application_dir_path)
         // the average time per game is roughly the same
         weight_max_count_duo[i] = ValueType(0.7 * exp(0.1 * i));
         weight_max_count_classic[i] = weight_max_count_duo[i];
-        // Less weight for the first move(s) because the branching factor is
-        // lower there (especially in classic/classic_2)
+        // Less weight for the first move(s) because number of legal moves
+        // is lower and the search applies some pruning rules to reduce the
+        // branching factor in early moves
         if (i == 0)
         {
             weight_max_count_classic[i] *= ValueType(0.2);
-            weight_max_count_duo[i] *= ValueType(0.7);
+            weight_max_count_duo[i] *= ValueType(0.6);
         }
         else if (i == 1)
+        {
             weight_max_count_classic[i] *= ValueType(0.2);
+        }
         else if (i == 2)
             weight_max_count_classic[i] *= ValueType(0.3);
     }
