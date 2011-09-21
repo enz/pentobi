@@ -1290,7 +1290,7 @@ void MainWindow::genMoveFinished()
     }
     if (mv.is_pass())
     {
-        showStatus(tr("The computer has no more moves available."));
+        showStatus(tr("The computer has no more moves available."), true);
         updateWindow(false);
         checkComputerMove();
         return;
@@ -1475,7 +1475,6 @@ void MainWindow::interestingMove(bool checked)
 
 void MainWindow::interrupt()
 {
-    showStatus(tr("Cancelling move generation..."));
     set_abort();
 }
 

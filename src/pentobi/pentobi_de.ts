@@ -442,11 +442,6 @@
         <translation>Knoten in Spieldatei enthält ungültige Property</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1523"/>
-        <source>Cancelling move generation...</source>
-        <translation>Abbruch der Zuggenerierung...</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="1602"/>
         <source>Open</source>
         <translation>Öffnen</translation>
