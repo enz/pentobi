@@ -2292,10 +2292,18 @@ void MainWindow::showInfo(const QString& text, const QString& infoText)
 void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
                              const QString& infoText)
 {
+    // Workaround to avoid very small widths if the main text is short, which
+    // causes ugly word wrapping with single-word lines in the informative text.
+    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
+    QString expandedText = text;
+    QFontMetrics metrics(qApp->font("QLabel"));
+    int minWidth = 30 * metrics.averageCharWidth();
+    while (metrics.width(expandedText) < minWidth)
+        expandedText.append(" ");
     QMessageBox msgBox(this);
     msgBox.setWindowTitle(tr("Pentobi"));
     msgBox.setIcon(icon);
-    msgBox.setText(text);
+    msgBox.setText(expandedText);
     msgBox.setInformativeText(infoText);
     msgBox.exec();
 }
