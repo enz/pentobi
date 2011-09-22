@@ -101,10 +101,10 @@ void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
 
 unsigned int Board::get_adj_status_index(Point p, Color c) const
 {
-    bool s0 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(0)));
-    bool s1 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(1)));
-    bool s2 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(2)));
-    bool s3 = is_forbidden(c, p.get_neighbor(Direction::get_enum_adj(3)));
+    bool s0 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(0)), c);
+    bool s1 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(1)), c);
+    bool s2 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(2)), c);
+    bool s3 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(3)), c);
     return m_board_const->get_adj_status_index(s0, s1, s2, s3);
 }
 

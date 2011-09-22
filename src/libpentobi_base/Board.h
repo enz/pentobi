@@ -127,7 +127,7 @@ public:
     /** Check that point is not already occupied or adjacent to own color.
         @param c
         @param p The point. Off-board points are allowed and return true. */
-    bool is_forbidden(Color c, Point p) const;
+    bool is_forbidden(Point p, Color c) const;
 
     const FullGrid<bool>& is_forbidden(Color c) const;
 
@@ -385,7 +385,7 @@ inline void Board::init()
     init(m_game_variant);
 }
 
-inline bool Board::is_forbidden(Color c, Point p) const
+inline bool Board::is_forbidden(Point p, Color c) const
 {
     return m_forbidden[c][p];
 }

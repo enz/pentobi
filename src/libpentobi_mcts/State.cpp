@@ -143,7 +143,7 @@ void State::compute_features()
             Color c(j);
             if (c == to_play || c == second_color)
                 continue;
-            if (m_bd.has_diag(*i, c) && ! m_bd.is_forbidden(c, *i))
+            if (m_bd.has_diag(*i, c) && ! m_bd.is_forbidden(*i, c))
                 opp_attach_point_val[*i] = 1;
         }
     }
@@ -162,14 +162,14 @@ void State::compute_features()
         BOOST_FOREACH(Point p, info.points)
             features.heuristic += 5 * opp_attach_point_val[p];
         BOOST_FOREACH(Point p, info.attach_points)
-            if (m_bd.is_forbidden(to_play, p)
+            if (m_bd.is_forbidden(p, to_play)
                 && m_bd.get_point_state_ext(p) != to_play)
                 features.heuristic -= 5;
             else
                 features.heuristic += 1;
         BOOST_FOREACH(Point p, info.adj_points)
             // Creating new forbidden points is a bad thing
-            if (! m_bd.is_forbidden(to_play, p))
+            if (! m_bd.is_forbidden(p, to_play))
                 features.heuristic -= ValueType(0.2);
         if (compute_dist_to_center)
         {
@@ -423,7 +423,7 @@ void State::init_local_points()
         if (mv.is_pass())
             continue;
         BOOST_FOREACH(Point p, m_bd.get_move_info(mv).attach_points)
-            if (! m_bd.is_forbidden(c, p))
+            if (! m_bd.is_forbidden(p, c))
             {
                 m_local_points.push_back(p);
                 m_local_points_marker[p] = 1;
@@ -634,7 +634,7 @@ void State::update_move_list(Color c)
     if (! last_mv.is_null() && ! last_mv.is_pass())
     {
         BOOST_FOREACH(Point p, m_bd.get_move_info(last_mv).attach_points)
-            if (! m_bd.is_forbidden(c, p)
+            if (! m_bd.is_forbidden(p, c)
                 && is_only_move_diag(m_bd, p, c, last_mv))
             {
                 unsigned int adj_status = m_bd.get_adj_status_index(p, c);
