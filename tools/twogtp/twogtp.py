@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # Python script to play a number of games between two different GTP engines.
-# TODO: save the games in SGF format.
 
 from getopt import getopt
 from os.path import exists
