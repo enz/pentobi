@@ -162,7 +162,7 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
 }
 
 /** Set the game variant.
-    Arguments: Blokus|Blokus Two-Player|Duo<br>
+    Arguments: Blokus|Blokus Two-Player|Blokus Duo<br>
     This command is similar to the command that is used by Quarry
     (http://home.gna.org/quarry/) to set a game at GTP engines that could
     support multiple games. */
@@ -174,7 +174,7 @@ void Engine::cmd_set_game(const Arguments& args)
         m_game.init(game_variant_classic);
     else if (arg == "blokus two-player")
         m_game.init(game_variant_classic_2);
-    else if (arg == "duo")
+    else if (arg == "blokus duo")
         m_game.init(game_variant_duo);
     else
         throw Failure("invalid argument");
