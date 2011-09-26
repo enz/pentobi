@@ -197,26 +197,30 @@ void Tree::init(GameVariant game_variant)
 
 void Tree::init(unique_ptr<Node>& root)
 {
-    libboardgame_sgf::Tree::init(root);
-    string game = get_root().get_property("GM");
+    unsigned int sz;
+    GameVariant game_variant;
+    string game = root->get_property("GM");
     string s = to_lower_copy(trim_copy(game));
     if (s == "blokus")
     {
-        m_sz = 20;
-        m_game_variant = game_variant_classic;
+        sz = 20;
+        game_variant = game_variant_classic;
     }
     else if (s == "blokus two-player")
     {
-        m_sz = 20;
-        m_game_variant = game_variant_classic_2;
+        sz = 20;
+        game_variant = game_variant_classic_2;
     }
     else if (s == "blokus duo")
     {
-        m_sz = 14;
-        m_game_variant = game_variant_duo;
+        sz = 14;
+        game_variant = game_variant_duo;
     }
     else
         throw InvalidPropertyValue("GM", game);
+    libboardgame_sgf::Tree::init(root);
+    m_sz = sz;
+    m_game_variant = game_variant;
     m_board_const = &BoardConst::get(m_sz);
 }
 
