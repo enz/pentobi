@@ -93,23 +93,37 @@ def play_game(game_number, black, white, game_variant):
     color_to_play = 0
     move_number = 0
     nu_passes = 0
-    play_commands = "# Game " + str(game_number) +"\n"
+    sgf = "(;GM[%s]GN[%s]\n" % (game_name, game_number)
+    if exchange_color:
+        sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (black_cmd, white_cmd)
+    else:
+        sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (white_cmd, black_cmd)
     while True:        
         move = strip(to_play.send("genmove " + colors[color_to_play]))
         other.send("play " + colors[color_to_play] + " " + move)
-        play_commands += str(move_number + 1) + " play " \
-            + colors[color_to_play] + " " + move + "\n"
-        if lower(move) == "pass":
+        if lower(move) != "pass":
+            nu_passes = 0            
+            if game_variant == "duo":
+                if color_to_play == 0:
+                    prop_id = "B"
+                else:
+                    prop_id = "W"
+            else:
+                prop_id = str(color_to_play + 1)
+            sgf += ";%s" % (prop_id)
+            for p in split(move):
+                sgf += "[%s]" % (p)
+            sgf += "\n"
+        else:
             nu_passes += 1
             if nu_passes == len(colors):
                 break
-        else:
-            nu_passes = 0
         move_number += 1
         to_play, other = other, to_play
         color_to_play = color_to_play + 1
         if color_to_play == len(colors):
             color_to_play = 0
+    sgf += ")\n"
     if exchange_color:
         black, white = white, black
     cpu_black = float(black.send("cputime")) - cpu_black
@@ -122,9 +136,9 @@ def play_game(game_number, black, white, game_variant):
     if exchange_color:
         score_black = invert_score(score_black)
         score_white = invert_score(score_white)
-    filename = prefix + "-games.gtp"
+    filename = prefix + ".blksgf"
     with open(filename, "a") as f:
-        f.write(play_commands + "\n")
+        f.write(sgf)
     filename = prefix + ".dat"
     if not exists(filename):
         with open(filename, "w") as f:
@@ -184,7 +198,7 @@ if game_variant == "classic":
 elif game_variant == "classic_2":
     game_name = "Blokus Two-Player"
 elif game_variant == "duo":
-    game_name = "Duo"
+    game_name = "Blokus Duo"
 else:
     exit("invalid game variant: " + game_variant)
 black = GtpClient(black_cmd, "B")
