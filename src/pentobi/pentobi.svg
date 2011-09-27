@@ -1566,7 +1566,8 @@
        y1="41.951183"
        x2="21.793533"
        y2="6.7733049"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.97510807,0,0,0.97510818,0.59740575,0.59740625)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1575,9 +1576,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="12.42258"
-     inkscape:cx="27.118351"
-     inkscape:cy="23.999999"
+     inkscape:zoom="13.32832"
+     inkscape:cx="24"
+     inkscape:cy="23.504968"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
@@ -1601,7 +1602,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1982,12 +1983,13 @@
       </g>
     </g>
     <rect
-       style="fill:none;stroke:url(#linearGradient4026);stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:none;stroke:url(#linearGradient4026);stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3317"
-       width="42.047215"
-       height="42.047215"
-       x="2.976393"
-       y="2.9763923"
-       ry="3.0589459" />
+       width="41"
+       height="41"
+       x="3.4997106"
+       y="3.499711"
+       ry="1.4072101"
+       rx="1.426" />
   </g>
 </svg>
