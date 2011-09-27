@@ -73,7 +73,9 @@ needed (e.g. end of point list marker, or the special meaning "no point"). */
 
 //-----------------------------------------------------------------------------
 
-/** Coordinate on board or move.
+/** Coordinate on the board.
+    Depending on the game, a point represents a field or intersection (in Go)
+    on the board.
     @tparam S The maximum board size.
     @tparam T A class with functions to convert points from and to strings
     depending on the string representation of points in the game.
