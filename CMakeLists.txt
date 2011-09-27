@@ -19,6 +19,7 @@ endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
   add_definitions(-std=c++0x)
+  add_definitions(-ffast-math)
 endif()
 
 # Define CMAKE_INSTALL_SYSCONFDIR  and CMAKE_INSTALL_FULL_SYSCONFDIR as in
