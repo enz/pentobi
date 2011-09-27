@@ -11,7 +11,7 @@ Current development version
 * New menu items Ten Moves Backward/Forward, Go to Move, Undo Move
 * Underline move numbers if there are alternative variations
 * Show move number, total number of moves and current variation in status bar
-* Faster play of opening moves
+* Faster play in higher levels, especially of opening moves
 
 
 Version 0.1 (15 Jul 2011)
