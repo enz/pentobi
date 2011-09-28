@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="pentobi.svg"
-   inkscape:export-filename="/home/markus/pentobi/src/pentobi_gui/pentobi.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="/local/scratch/markus/pentobi/pentobi-16.png"
+   inkscape:export-xdpi="30"
+   inkscape:export-ydpi="30">
   <defs
      id="defs2987">
     <linearGradient
@@ -1567,7 +1567,7 @@
        x2="21.793533"
        y2="6.7733049"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.97510807,0,0,0.97510818,0.59740575,0.59740625)" />
+       gradientTransform="matrix(0.99888886,0,0,0.99888907,0.02696218,0.02695989)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1576,9 +1576,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="13.32832"
-     inkscape:cx="24"
-     inkscape:cy="23.504968"
+     inkscape:zoom="12.423179"
+     inkscape:cx="23.999999"
+     inkscape:cy="23.998942"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
@@ -1983,13 +1983,13 @@
       </g>
     </g>
     <rect
-       style="fill:none;stroke:url(#linearGradient4026);stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:none;stroke:url(#linearGradient4026);stroke-width:2.00009608;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3317"
-       width="41"
-       height="41"
-       x="3.4997106"
-       y="3.499711"
-       ry="1.4072101"
-       rx="1.426" />
+       width="41.999901"
+       height="41.999905"
+       x="3.0000482"
+       y="3.0000465"
+       ry="1.4415292"
+       rx="1.4607772" />
   </g>
 </svg>
