@@ -25,10 +25,10 @@ class GtpClient:
             line = self._readline()
         if response[-1] == "\n":
             response = response[:-1]
+        stderr.write(self.color + "<< " + response + "\n")
         if (response[0] == "?"):
             raise Exception(response[2:])
         if (response[0] == "="):
-            stderr.write(self.color + "<< " + response + "\n")
             response = response[2:]
             return response
         exit(self.color + ": invalid response: " + response)
