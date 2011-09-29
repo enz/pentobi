@@ -30,8 +30,8 @@ public:
     /** Maximim number of adjacent points to a piece. */
     static const unsigned int max_adj = 12;
 
-    /** Maximim number of corner points of a piece. */
-    static const unsigned int max_corner = 8;
+    /** Maximim number of attach points of a piece. */
+    static const unsigned int max_attach = 8;
 
     /** Constructor.
         @param name A short unique name for the piece.
