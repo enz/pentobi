@@ -123,11 +123,11 @@ Move Player::genmove(Color c)
     else
     {
         if (m_level <= 1)
-            max_count = 90;
+            max_count = 100;
         else if (m_level >= 6)
-            max_count = ValueType(90 * pow(2.0, (6 - 1) * 2));
+            max_count = ValueType(100 * pow(2.0, (6 - 1) * 2));
         else
-            max_count = ValueType(90 * pow(2.0, (m_level - 1) * 2));
+            max_count = ValueType(100 * pow(2.0, (m_level - 1) * 2));
         if (use_weight_max_count)
         {
             unsigned int player_move = m_bd.get_nu_moves() / Color::range;
