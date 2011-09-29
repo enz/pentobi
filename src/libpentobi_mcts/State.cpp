@@ -10,14 +10,15 @@
 
 #include <cmath>
 #include "libpentobi_base/BoardUtil.h"
+#include "libpentobi_base/Geometry.h"
 #include "libboardgame_util/Log.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
-using libboardgame_base::Geometry;
 using libboardgame_base::Transform;
 using libboardgame_mcts::Tree;
+using libboardgame_util::log;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
@@ -27,11 +28,11 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::Direction;
 using libpentobi_base::FullGrid;
 using libpentobi_base::GameVariant;
+using libpentobi_base::Geometry;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 using libpentobi_base::PointStateExt;
-using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 
@@ -77,10 +78,11 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       piece_value(bd)
 {
     unsigned int sz = 20;
+    const Geometry* geometry = Geometry::get(sz);
     LIBBOARDGAME_ASSERT(sz % 2 == 0);
     unsigned int center1 = sz / 2 - 1;
     unsigned int center2 = center1 + 1;
-    m_dist_to_center.init(sz);
+    m_dist_to_center.init(*geometry);
     for (unsigned int x = 0; x < sz; ++x)
         for (unsigned int y = 0; y < sz; ++y)
         {
@@ -134,7 +136,7 @@ void State::compute_features()
     Color second_color = m_bd.get_second_color(to_play);
     GameVariant variant = m_bd.get_game_variant();
     const ArrayList<Move, Move::range>& moves = *m_moves[to_play];
-    Grid<int> opp_attach_point_val(m_bd.get_size());
+    Grid<int> opp_attach_point_val(m_bd.get_geometry());
     for (BoardIterator i(m_bd); i; ++i)
     {
         opp_attach_point_val[*i] = 0;
@@ -564,9 +566,9 @@ void State::start_playout()
 void State::start_search()
 {
     const Board& bd = m_shared_const.board;
-    unsigned int sz = bd.get_size();
-    m_symmetric_points.init(sz);
-    m_local_points_marker.init(sz, 0);
+    const Geometry& geometry = bd.get_geometry();
+    m_symmetric_points.init(geometry);
+    m_local_points_marker.init(geometry, 0);
     m_nu_moves_initial = bd.get_nu_moves();
     m_score_modification_factor =
         m_shared_const.score_modification / BoardConst::total_piece_points;

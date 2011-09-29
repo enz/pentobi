@@ -31,7 +31,7 @@ bool isLegal(const MovePoints& movePoints, Color c, GameVariant gameVariant,
              const FullGrid<PointStateExt>& pointState)
 {
     bool isFirstPiece = true;
-    unsigned int sz = pointState.get_size();
+    unsigned int sz = pointState.get_geometry().get_size();
     for (Geometry<Point>::Iterator i(sz); i; ++i)
         if (pointState[*i] == c)
         {
@@ -142,7 +142,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                          const Grid<MarkupFlags>* markupFlags)
 {
     m_hasPainted = true;
-    m_sz = static_cast<int>(pointState.get_size());
+    m_sz = static_cast<int>(pointState.get_geometry().get_size());
     if (m_drawCoordLabels)
         m_squareSize = min(width, height) / (m_sz + 2);
     else

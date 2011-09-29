@@ -15,10 +15,10 @@
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
-using libboardgame_base::Geometry;
 using libboardgame_base::Transform;
 using libboardgame_util::log;
 using libpentobi_base::BoardIterator;
+using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
 using libpentobi_base::Piece;
 using libpentobi_base::Point;
@@ -41,7 +41,7 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
 
 void GuiBoard::clearMarkup()
 {
-    for (Geometry<Point>::Iterator i(m_labels.get_size()); i; ++i)
+    for (Geometry::Iterator i(m_labels.get_geometry()); i; ++i)
     {
         setLabel(*i, "");
         m_markupFlags[*i].reset();
@@ -66,13 +66,14 @@ void GuiBoard::clearSelectedPiece()
 void GuiBoard::copyFromBoard(const Board& bd)
 {
     m_gameVariant = bd.get_game_variant();
-    unsigned int sz = m_bd.get_size();
-    if (! m_isInitialized || sz != m_pointState.get_size())
+    if (! m_isInitialized
+        || m_bd.get_size() != m_pointState.get_geometry().get_size())
     {
         m_isInitialized = true;
         m_pointState = bd.get_grid();
-        m_labels.init(sz, "");
-        m_markupFlags.init(sz);
+        const Geometry& geometry = bd.get_geometry();
+        m_labels.init(geometry, "");
+        m_markupFlags.init(geometry);
         update();
     }
     else
@@ -241,7 +242,7 @@ void GuiBoard::setDrawCoordLabels(bool enable)
 
 void GuiBoard::setLabel(Point p, const QString& text)
 {
-    if (! m_isInitialized || ! p.is_onboard(m_labels.get_size()))
+    if (! m_isInitialized || ! p.is_onboard(m_labels.get_geometry().get_size()))
     {
         // Call copyFromBoard(), which initialized the current board size,
         // before calling setLabel()

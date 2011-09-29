@@ -146,8 +146,9 @@ void Engine::cmd_play(const Arguments& args)
 
 void Engine::cmd_point_integers(Response& response)
 {
-    Grid<int> grid(Point::max_size);
-    for (GeometryIterator i(Point::max_size); i; ++i)
+    const Geometry* geometry = Geometry::get(Point::max_size);
+    Grid<int> grid(*geometry);
+    for (GeometryIterator i(*geometry); i; ++i)
         grid[*i] = (*i).to_int();
     response << '\n' << grid;
 }

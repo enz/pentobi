@@ -316,10 +316,10 @@ void Board::init(GameVariant game_variant)
     }
     m_board_const = &BoardConst::get(m_sz);
     m_geometry = Geometry::get(m_sz);
-    m_point_state.init(m_sz);
+    m_point_state.init(*m_geometry);
     m_point_state.fill_all(PointStateExt::offboard());
     m_point_state.fill_onboard(PointState::empty());
-    m_played_move.init(m_sz);
+    m_played_move.init(*m_geometry);
     m_played_move.fill(Move::null());
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
@@ -328,10 +328,10 @@ void Board::init(GameVariant game_variant)
                 (*i).get_next(m_nu_colors).get_next(m_nu_colors);
         else
             m_second_color[*i] = *i;
-        m_forbidden[*i].init(m_sz);
+        m_forbidden[*i].init(*m_geometry);
         m_forbidden[*i].fill_all(true);
         m_forbidden[*i].fill_onboard(false);
-        m_has_diag[*i].init(m_sz);
+        m_has_diag[*i].init(*m_geometry);
         m_has_diag[*i].fill_onboard(false);
         m_pieces_left[*i].clear();
         for (unsigned int j = 0; j < nu_pieces; ++j)

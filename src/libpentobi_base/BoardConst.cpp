@@ -268,7 +268,7 @@ void BoardConst::create_move(unsigned int piece,
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
     if (log_move_creation)
     {
-        Grid<char> grid(m_sz, '.');
+        Grid<char> grid(m_geometry, '.');
         BOOST_FOREACH(Point p, info.points)
             grid[p] = 'O';
         BOOST_FOREACH(Point p, info.adj_points)
@@ -288,7 +288,7 @@ void BoardConst::create_move(unsigned int piece,
 void BoardConst::create_moves(unsigned int piece)
 {
     for (unsigned int i = 0; i < 16; ++i)
-        m_moves[i][piece].init(m_sz);
+        m_moves[i][piece].init(m_geometry);
     Piece::Points points;
     for (unsigned int x = 0; x < m_sz; ++x)
         for (unsigned int y = 0; y < m_sz; ++y)
@@ -364,7 +364,7 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
 void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
-    symmetric_points.init(m_sz);
+    symmetric_points.init(m_geometry);
     BOOST_FOREACH(MoveInfo& info, m_move_info)
     {
         MovePoints sym_points;

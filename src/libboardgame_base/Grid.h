@@ -29,17 +29,17 @@ public:
 
     Grid();
 
-    explicit Grid(unsigned int sz);
+    explicit Grid(const Geometry<P>& geometry);
 
-    Grid(unsigned int sz, const T& val);
+    Grid(const Geometry<P>& geometry, const T& val);
 
     bool operator==(const Grid& grid) const;
 
-    void init(unsigned int sz);
+    void init(const Geometry<P>& geometry);
 
-    void init(unsigned int sz, const T& val);
+    void init(const Geometry<P>& geometry, const T& val);
 
-    unsigned int get_size() const;
+    const Geometry<P>& get_geometry() const;
 
     T& operator[](const Point& p);
 
@@ -51,9 +51,7 @@ public:
     ostream& write(ostream& out) const;
 
 private:
-    static const unsigned int value_uninitialized = Point::max_size + 1;
-
-    unsigned int m_sz;
+    const Geometry<P>* m_geometry;
 
     T m_a[Point::range_onboard_end];
 
@@ -64,20 +62,20 @@ template<class P, typename T>
 inline Grid<P, T>::Grid()
 {
 #if LIBBOARDGAME_DEBUG
-    m_sz = value_uninitialized;
+    m_geometry = 0;
 #endif
 }
 
 template<class P, typename T>
-inline Grid<P, T>::Grid(unsigned int sz)
+inline Grid<P, T>::Grid(const Geometry<P>& geometry)
 {
-    init(sz);
+    init(geometry);
 }
 
 template<class P, typename T>
-inline Grid<P, T>::Grid(unsigned int sz, const T& val)
+inline Grid<P, T>::Grid(const Geometry<P>& geometry, const T& val)
 {
-    init(sz, val);
+    init(geometry, val);
 }
 
 template<class P, typename T>
@@ -85,8 +83,9 @@ bool Grid<P, T>::operator==(const Grid& grid) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(grid.is_initialized());
-    LIBBOARDGAME_ASSERT(m_sz == grid.get_size());
-    for (typename Geometry<P>::Iterator i(m_sz); i; ++i)
+    LIBBOARDGAME_ASSERT(m_geometry->get_size()
+                        == grid.get_geometry().get_size());
+    for (typename Geometry<P>::Iterator i(*m_geometry); i; ++i)
         if (operator[](*i) != grid[*i])
             return false;
     return true;
@@ -96,7 +95,7 @@ template<class P, typename T>
 inline T& Grid<P, T>::operator[](const Point& p)
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    LIBBOARDGAME_ASSERT(p.is_onboard(m_geometry->get_size()));
     return m_a[p.to_int()];
 }
 
@@ -104,7 +103,7 @@ template<class P, typename T>
 inline const T& Grid<P, T>::operator[](const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    LIBBOARDGAME_ASSERT(p.is_onboard(m_geometry->get_size()));
     return m_a[p.to_int()];
 }
 
@@ -112,36 +111,34 @@ template<class P, typename T>
 inline void Grid<P, T>::fill(const T& val)
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    for (typename Geometry<P>::Iterator i(m_sz); i; ++i)
+    for (typename Geometry<P>::Iterator i(*m_geometry); i; ++i)
         operator[](*i) = val;
 }
 
 template<class P, typename T>
-unsigned int Grid<P, T>::get_size() const
+const Geometry<P>& Grid<P, T>::get_geometry() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    return m_sz;
+    return *m_geometry;
 }
 
 template<class P, typename T>
-void Grid<P, T>::init(unsigned int sz)
+void Grid<P, T>::init(const Geometry<P>& geometry)
 {
-    LIBBOARDGAME_ASSERT(sz >= 1);
-    LIBBOARDGAME_ASSERT(sz <= Point::max_size);
-    m_sz = sz;
+    m_geometry = &geometry;
 }
 
 template<class P, typename T>
-inline void Grid<P, T>::init(unsigned int sz, const T& val)
+inline void Grid<P, T>::init(const Geometry<P>& geometry, const T& val)
 {
-    init(sz);
+    init(geometry);
     fill(val);
 }
 
 template<class P, typename T>
 bool Grid<P, T>::is_initialized() const
 {
-    return m_sz < value_uninitialized;
+    return m_geometry != 0;
 }
 
 template<class P, typename T>
@@ -150,18 +147,19 @@ ostream& Grid<P, T>::write(ostream& out) const
     LIBBOARDGAME_ASSERT(is_initialized());
     ostringstream buffer;
     size_t max_len = 0;
-    for (typename Geometry<P>::Iterator i(m_sz); i; ++i)
+    for (typename Geometry<P>::Iterator i(*m_geometry); i; ++i)
     {
         buffer.str("");
         buffer << operator[](*i);
         max_len = max(max_len, buffer.str().length());
     }
-    for (unsigned int y = m_sz - 1; ; --y)
+    unsigned int sz = m_geometry->get_size();
+    for (unsigned int y = sz - 1; ; --y)
     {
-        for (unsigned int x = 0; x < m_sz; ++x)
+        for (unsigned int x = 0; x < sz; ++x)
         {
             out << setw(int(max_len)) << operator[](Point(x, y));
-            if (x < m_sz - 1)
+            if (x < sz - 1)
                 out << ' ';
         }
         out << '\n';

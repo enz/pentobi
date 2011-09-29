@@ -12,16 +12,16 @@
 
 namespace libpentobi_base {
 
-using libboardgame_base::Geometry;
 using libboardgame_base::Transform;
 
 //-----------------------------------------------------------------------------
 
-void SymmetricPoints::init(unsigned int sz)
+void SymmetricPoints::init(const Geometry& geometry)
 {
-    m_symmetric_point.init(sz);
+    m_symmetric_point.init(geometry);
     Transform transform(Transform::rotate_180);
-    for (Geometry<Point>::Iterator i(sz); i; ++i)
+    unsigned int sz = geometry.get_size();
+    for (Geometry::Iterator i(geometry); i; ++i)
         m_symmetric_point[*i] = transform.get_transformed(*i, sz);
 }
 

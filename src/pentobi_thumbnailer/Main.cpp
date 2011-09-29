@@ -26,6 +26,7 @@ using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::GameVariant;
+using libpentobi_base::Geometry;
 using libpentobi_base::FullGrid;
 using libpentobi_base::PointState;
 using libpentobi_base::PointStateExt;
@@ -60,7 +61,8 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     }
     else
         return false;
-    pointState.init(sz);
+    const Geometry* geometry = Geometry::get(sz);
+    pointState.init(*geometry);
     pointState.fill_onboard(PointState::empty());
     const Node* node = &root;
     while (node != 0)

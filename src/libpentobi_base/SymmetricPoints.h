@@ -16,7 +16,7 @@ namespace libpentobi_base {
 class SymmetricPoints
 {
 public:
-    void init(unsigned int sz);
+    void init(const Geometry& geometry);
 
     Point operator[](Point p) const;
 

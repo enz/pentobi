@@ -6,6 +6,7 @@
 #define LIBPENTOBI_BASE_GRID_H
 
 #include "Point.h"
+#include "Geometry.h"
 #include "libboardgame_base/Grid.h"
 
 namespace libpentobi_base {
@@ -21,13 +22,13 @@ public:
     {
     }
 
-    Grid(unsigned int sz)
-        : libboardgame_base::Grid<Point, T>(sz)
+    Grid(const Geometry& geometry)
+        : libboardgame_base::Grid<Point, T>(geometry)
     {
     }
 
-    Grid(unsigned int sz, const T& val)
-        : libboardgame_base::Grid<Point, T>(sz, val)
+    Grid(const Geometry& geometry, const T& val)
+        : libboardgame_base::Grid<Point, T>(geometry, val)
     {
     }
 };
