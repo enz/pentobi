@@ -53,8 +53,14 @@ public:
 
     unsigned int get_size() const;
 
+    /** Is a coordinate a handicap line in Go?
+        Only used for the game of Go on board sizes with well-defined handicap
+        locations. */
     bool is_handicap_line(unsigned int i) const;
 
+    /** Is a point a handicap point in Go?
+        Only used for the game of Go on board sizes with well-defined handicap
+        locations. */
     bool is_handicap_point(Point p) const;
 
     /** Get list of on-board adjacent points (up to four) */
