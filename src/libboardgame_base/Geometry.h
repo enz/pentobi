@@ -33,8 +33,6 @@ public:
     public:
         Iterator(const Geometry& g);
 
-        Iterator(unsigned int sz);
-
         const Point& operator*() const;
 
         const Point* operator->() const;
@@ -120,14 +118,6 @@ inline Geometry<P>::Iterator::Iterator(const Geometry& g)
     : m_p(g.m_all_points_begin),
       m_end(g.m_all_points_end)
 {
-}
-
-template<class P>
-inline Geometry<P>::Iterator::Iterator(unsigned int sz)
-{
-    const Geometry* g = Geometry<P>::get(sz);
-    m_p = g->m_all_points_begin;
-    m_end = g->m_all_points_end;
 }
 
 template<class P>
