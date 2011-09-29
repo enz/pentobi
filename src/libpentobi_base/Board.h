@@ -87,7 +87,9 @@ public:
 
     Move get_played_move(Point p) const;
 
-    bool has_diag(Point p, Color c) const;
+    /** Is a point a potential attachment point for a color.
+        Does not check if the point is forbidden.. */
+    bool is_attach_point(Point p, Color c) const;
 
     void init();
 
@@ -208,7 +210,7 @@ private:
 
     ColorMap<FullGrid<bool>> m_forbidden;
 
-    ColorMap<FullGrid<bool>> m_has_diag;
+    ColorMap<Grid<bool>> m_is_attach_point;
 
     Grid<Move> m_played_move;
 
@@ -375,14 +377,14 @@ inline Color Board::get_to_play() const
     return m_to_play;
 }
 
-inline bool Board::has_diag(Point p, Color c) const
-{
-    return m_has_diag[c][p];
-}
-
 inline void Board::init()
 {
     init(m_game_variant);
+}
+
+inline bool Board::is_attach_point(Point p, Color c) const
+{
+    return m_is_attach_point[c][p];
 }
 
 inline bool Board::is_forbidden(Point p, Color c) const

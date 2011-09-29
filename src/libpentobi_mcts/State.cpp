@@ -146,7 +146,7 @@ void State::compute_features()
             Color c(j);
             if (c == to_play || c == second_color)
                 continue;
-            if (m_bd.has_diag(*i, c) && ! m_bd.is_forbidden(*i, c))
+            if (m_bd.is_attach_point(*i, c) && ! m_bd.is_forbidden(*i, c))
                 opp_attach_point_val[*i] = 1;
         }
     }

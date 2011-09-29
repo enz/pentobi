@@ -57,7 +57,7 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
     else
     {
         for (Iterator i(*this); i; ++i)
-            if (has_diag(*i, c) && ! m_forbidden[c][*i])
+            if (is_attach_point(*i, c) && ! m_forbidden[c][*i])
                 gen_moves(c, *i, get_adj_status_index(*i, c), m_marker, moves);
     }
     m_marker.clear(moves);
@@ -272,7 +272,7 @@ bool Board::has_moves(Color c) const
     bool is_first_move = (m_pieces_left[c].size() == nu_pieces);
     for (Iterator i(*this); i; ++i)
         if (! m_forbidden[c][*i]
-            && (has_diag(*i, c)
+            && (is_attach_point(*i, c)
                 || (is_first_move && *i == get_starting_point(c))))
             if (has_moves(c, *i))
                 return true;
@@ -332,8 +332,7 @@ void Board::init(GameVariant game_variant)
         m_forbidden[*i].init(*m_geometry);
         m_forbidden[*i].fill_all(true);
         m_forbidden[*i].fill_onboard(false);
-        m_has_diag[*i].init(*m_geometry);
-        m_has_diag[*i].fill_onboard(false);
+        m_is_attach_point[*i].init(*m_geometry, false);
         m_pieces_left[*i].clear();
         for (unsigned int j = 0; j < nu_pieces; ++j)
             m_pieces_left[*i].push_back(j);
@@ -355,16 +354,16 @@ bool Board::is_legal(Color c, Move mv) const
     if (mv.is_pass())
         return true;
     const MovePoints& points = get_move_points(mv);
-    bool is_diag_to_piece = false;
+    bool has_attach_point = false;
     BOOST_FOREACH(Point p, points)
     {
         if (m_forbidden[c][p])
             return false;
-        if (has_diag(p, c))
-            is_diag_to_piece = true;
+        if (is_attach_point(p, c))
+            has_attach_point = true;
     }
     bool is_first_move = (m_pieces_left[c].size() == nu_pieces);
-    return (is_diag_to_piece ||
+    return (has_attach_point ||
             (is_first_move && points.contains(get_starting_point(c))));
 }
 
@@ -402,11 +401,12 @@ void Board::play(Color c, Move mv)
             m_played_move[*i] = mv;
             for (ColorIterator j(m_nu_colors); j; ++j)
                 m_forbidden[*j][*i] = true;
-            for (DiagIterator j(*m_geometry, *i); j; ++j)
-                m_has_diag[c][*j] = true;
         }
         for (auto i = info.adj_points.begin(); i != info.adj_points.end(); ++i)
             m_forbidden[c][*i] = true;
+        for (auto i = info.attach_points.begin(); i != info.attach_points.end();
+             ++i)
+            m_is_attach_point[c][*i] = true;
     }
     m_moves.push_back(ColorMove(c, mv));
     m_to_play = c.get_next(m_nu_colors);
