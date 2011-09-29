@@ -18,7 +18,7 @@ using namespace std;
 /** Marker to mark points on board with fast operation to clear all marks.
     This marker is typically used in recursive fills or other loops to
     remember what points have already been visited.
-    @tparam P An instantiation of boardgame::Point */
+    @tparam P An instantiation of libboardgame_base::Point */
 template<class P>
 class Marker
 {

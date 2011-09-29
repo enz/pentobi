@@ -17,7 +17,7 @@ using libboardgame_util::ArrayList;
 //-----------------------------------------------------------------------------
 
 /** Array list that can contain all points on the board.
-    @tparam P An instantiation of boardgame::Point */
+    @tparam P An instantiation of libboardgame_base::Point */
 template<class P>
 class PointList
     : public ArrayList<P, P::max_onboard>

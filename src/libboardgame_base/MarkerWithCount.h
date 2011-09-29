@@ -12,7 +12,7 @@ namespace libboardgame_base {
 //-----------------------------------------------------------------------------
 
 /** A point marker that also keeps track of the number of marked points.
-    @tparam P An instantiation of boardgame::Point */
+    @tparam P An instantiation of libboardgame_base::Point */
 template<class P>
 class MarkerWithCount
     : private Marker<P>
