@@ -51,6 +51,8 @@ public:
 
     static const Geometry* get(unsigned int sz);
 
+    bool is_onboard(Point p) const;
+
     unsigned int get_size() const;
 
     /** Is a coordinate a handicap line in Go?
@@ -88,6 +90,8 @@ private:
     unsigned int m_handicap_line_2;
 
     unsigned int m_handicap_line_3;
+
+    bool m_is_onboard[Point::range];
 
     unsigned int m_dist_to_edge[Point::range];
 
@@ -159,31 +163,38 @@ Geometry<P>::Geometry(unsigned int sz)
       m_all_points(new Point[sz * sz])
 {
     LIBBOARDGAME_ASSERT(sz >= 1 && sz <= Point::max_size);
+    fill(m_is_onboard, m_is_onboard + Point::range, false);
     Point* all_points_end = m_all_points.get();
     for (unsigned int y = 0; y < sz; ++y)
         for (unsigned int x = 0; x < sz; ++x)
         {
             Point p(x, y);
             *(all_points_end++) = p;
+            m_is_onboard[p.to_int()] = true;
+        }
+    for (unsigned int y = 0; y < sz; ++y)
+        for (unsigned int x = 0; x < sz; ++x)
+        {
+            Point p(x, y);
             unsigned int i = p.to_int();
             {
                 typename NullTermList<Point, 4>::Init adj(m_adj[i]);
                 LIBBOARDGAME_FOREACH_ADJ(p, p_adj,
-                    if (p_adj.is_onboard(sz))
+                    if (is_onboard(p_adj))
                         adj.push_back(p_adj););
                 adj.finish();
             }
             {
                 typename NullTermList<Point, 4>::Init diag(m_diag[i]);
                 LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
-                    if (p_diag.is_onboard(sz))
+                    if (is_onboard(p_diag))
                         diag.push_back(p_diag););
                 diag.finish();
             }
             {
                 typename NullTermList<Point, 8>::Init adj_diag(m_adj_diag[i]);
                 LIBBOARDGAME_FOREACH_ADJ_DIAG(p, p_adj_diag,
-                    if (p_adj_diag.is_onboard(sz))
+                    if (is_onboard(p_adj_diag))
                         adj_diag.push_back(p_adj_diag););
                 adj_diag.finish();
             }
@@ -226,35 +237,35 @@ const Geometry<P>* Geometry<P>::get(unsigned int sz)
 template<class P>
 inline const NullTermList<P, 4>& Geometry<P>::get_adj(Point p) const
 {
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_adj[p.to_int()];
 }
 
 template<class P>
 inline const NullTermList<P, 8>& Geometry<P>::get_adj_diag(Point p) const
 {
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_adj_diag[p.to_int()];
 }
 
 template<class P>
 inline const NullTermList<P, 4>& Geometry<P>::get_diag(Point p) const
 {
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_diag[p.to_int()];
 }
 
 template<class P>
 inline unsigned int Geometry<P>::get_dist_to_edge(Point p) const
 {
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_dist_to_edge[p.to_int()];
 }
 
 template<class P>
 inline unsigned int Geometry<P>::get_second_dist_to_edge(Point p) const
 {
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_sz));
+    LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_second_dist_to_edge[p.to_int()];
 }
 
@@ -276,6 +287,12 @@ template<class P>
 inline bool Geometry<P>::is_handicap_point(Point p) const
 {
     return is_handicap_line(p.get_x()) && is_handicap_line(p.get_y());
+}
+
+template<class P>
+inline bool Geometry<P>::is_onboard(Point p) const
+{
+    return m_is_onboard[p.to_int()];
 }
 
 //-----------------------------------------------------------------------------

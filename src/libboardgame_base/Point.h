@@ -213,9 +213,6 @@ public:
         have the board size context. */
     bool is_onboard() const;
 
-    /** Check if point is on board on a given board size. */
-    bool is_onboard(unsigned int sz) const;
-
     bool is_null() const;
 
     Point get_neighbor(Direction dir) const;
@@ -259,7 +256,7 @@ public:
 private:
     struct Precomputed
     {
-        unsigned int min_onboard_size[Point::range];
+        bool is_onboard[Point::range];
 
         unsigned int x[Point::range];
 
@@ -399,25 +396,23 @@ Point<S, T>::Precomputed::Precomputed()
     index_diag_inv.push_back(2);
     index_diag_inv.push_back(1);
     index_diag_inv.push_back(0);
-    unsigned int infinity = max_size + 1;
-    min_onboard_size[0] = infinity;
+    is_onboard[0] = false;
     for (unsigned int i = 1; i < Point::range; ++i)
     {
         Point p(i);
+        is_onboard[i] = true;
         unsigned int raw_y = (i - 1) / (max_size + 2);
         if (raw_y == 0 || raw_y > max_size)
         {
-            min_onboard_size[i] = infinity;
+            is_onboard[i] = false;
             continue;
         }
-        min_onboard_size[i] = raw_y;
         unsigned int raw_x = (i - 1) - raw_y * (max_size + 2);
         if (raw_x == 0 || raw_x > max_size)
         {
-            min_onboard_size[i] = infinity;
+            is_onboard[i] = false;
             continue;
         }
-        min_onboard_size[i] = max(min_onboard_size[i], raw_x);
         x[i] = raw_x - 1;
         y[i] = raw_y - 1;
     }
@@ -602,14 +597,7 @@ template<unsigned int S, class T>
 inline bool Point<S, T>::is_onboard() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    return s_precomputed.min_onboard_size[m_i] <= max_size;
-}
-
-template<unsigned int S, class T>
-inline bool Point<S, T>::is_onboard(unsigned int sz) const
-{
-    LIBBOARDGAME_ASSERT(is_initialized());
-    return s_precomputed.min_onboard_size[m_i] <= sz;
+    return s_precomputed.is_onboard[m_i];
 }
 
 template<unsigned int S, class T>

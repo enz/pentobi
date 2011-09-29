@@ -136,7 +136,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
                     if (trim_copy(s).empty())
                         return false;
                     Point p = Point::from_string(s);
-                    if (p.is_onboard(sz))
+                    if (geometry->is_onboard(p))
                         pointState[p] = c;
                 }
             }

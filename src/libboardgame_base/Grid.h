@@ -95,7 +95,7 @@ template<class P, typename T>
 inline T& Grid<P, T>::operator[](const Point& p)
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_geometry->get_size()));
+    LIBBOARDGAME_ASSERT(m_geometry->is_onboard(p));
     return m_a[p.to_int()];
 }
 
@@ -103,7 +103,7 @@ template<class P, typename T>
 inline const T& Grid<P, T>::operator[](const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    LIBBOARDGAME_ASSERT(p.is_onboard(m_geometry->get_size()));
+    LIBBOARDGAME_ASSERT(m_geometry->is_onboard(p));
     return m_a[p.to_int()];
 }
 

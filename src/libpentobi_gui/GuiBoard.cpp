@@ -242,7 +242,7 @@ void GuiBoard::setDrawCoordLabels(bool enable)
 
 void GuiBoard::setLabel(Point p, const QString& text)
 {
-    if (! m_isInitialized || ! p.is_onboard(m_labels.get_geometry().get_size()))
+    if (! m_isInitialized || ! m_labels.get_geometry().is_onboard(p))
     {
         // Call copyFromBoard(), which initialized the current board size,
         // before calling setLabel()

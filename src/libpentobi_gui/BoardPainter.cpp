@@ -12,10 +12,11 @@
 #include "Util.h"
 
 using namespace std;
-using libboardgame_base::Geometry;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::Color;
 using libpentobi_base::FullGrid;
+using libpentobi_base::Geometry;
+using libpentobi_base::GeometryIterator;
 using libpentobi_base::Move;
 using libpentobi_base::MovePoints;
 using libpentobi_base::Piece;
@@ -31,8 +32,8 @@ bool isLegal(const MovePoints& movePoints, Color c, GameVariant gameVariant,
              const FullGrid<PointStateExt>& pointState)
 {
     bool isFirstPiece = true;
-    unsigned int sz = pointState.get_geometry().get_size();
-    for (Geometry<Point>::Iterator i(sz); i; ++i)
+    const Geometry& geometry = pointState.get_geometry();
+    for (GeometryIterator i(geometry); i; ++i)
         if (pointState[*i] == c)
         {
             isFirstPiece = false;
@@ -42,7 +43,7 @@ bool isLegal(const MovePoints& movePoints, Color c, GameVariant gameVariant,
     bool isConnected = false;
     BOOST_FOREACH(Point p, movePoints)
     {
-        if (! p.is_onboard(sz) || ! pointState[p].is_empty())
+        if (! geometry.is_onboard(p) || ! pointState[p].is_empty())
             return false;
         LIBBOARDGAME_FOREACH_ADJ(p, pAdj,
             if (pointState[pAdj] == c)
@@ -173,7 +174,8 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
             drawLabel(painter, m_sz, y, label, false);
         }
     }
-    for (Geometry<Point>::Iterator i(m_sz); i; ++i)
+    const Geometry& geometry = pointState.get_geometry();
+    for (GeometryIterator i(geometry); i; ++i)
     {
         int x = i->get_x();
         int y = i->get_y();
@@ -196,7 +198,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     }
     if (labels != 0)
     {
-        for (Geometry<Point>::Iterator i(m_sz); i; ++i)
+        for (GeometryIterator i(geometry); i; ++i)
             if (! (*labels)[*i].isEmpty())
             {
                 PointState s = pointState[*i].to_point_state();

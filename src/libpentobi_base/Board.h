@@ -411,7 +411,7 @@ inline bool Board::is_legal(Move mv) const
 
 inline bool Board::is_onboard(Point p) const
 {
-    return p.is_onboard(m_sz);
+    return m_geometry->is_onboard(p);
 }
 
 inline bool Board::is_same_player(Color c1, Color c2) const

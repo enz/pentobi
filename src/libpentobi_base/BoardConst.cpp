@@ -405,7 +405,7 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
     info.adj_points.clear();
     for (auto i = begin; i != end; ++i)
         for (AdjIterator j(m_geometry, *i); j; ++j)
-            if ((*j).is_onboard(m_sz) && ! m_marker[*j])
+            if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
                 info.adj_points.push_back(*j);
@@ -413,7 +413,7 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
     info.attach_points.clear();
     for (auto i = begin; i != end; ++i)
         for (DiagIterator j(m_geometry, *i); j; ++j)
-            if ((*j).is_onboard(m_sz) && ! m_marker[*j])
+            if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
                 info.attach_points.push_back(*j);
