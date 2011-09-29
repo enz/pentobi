@@ -33,6 +33,12 @@ class GtpClient:
             return response
         exit(self.color + ": invalid response: " + response)
 
+    def send_no_err(self, cmd):
+        try:
+            self.send(cmd)
+        except:
+            pass
+
     def _readline(self):
         line = self.process.stdout.readline()
         if self.process.poll() != None:
@@ -202,14 +208,8 @@ else:
     exit("invalid game variant: " + game_variant)
 black = GtpClient(black_cmd, "B")
 white = GtpClient(white_cmd, "W")
-try:
-    black.send("set_game " + game_name)
-    white.send("set_game " + game_name)
-except:
-    # If the engine doesn't understand game_variant, we assume it is configured
-    # correctly
-    pass
-
+black.send_no_err("set_game " + game_name)
+white.send_no_err("set_game " + game_name)
 start = find_start_index()
 for game_number in range(start, number_games):
     play_game(game_number, black, white, game_variant)
