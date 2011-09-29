@@ -7,6 +7,7 @@
 #endif
 
 #include "Board.h"
+#include "DiagIterator.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
@@ -401,8 +402,8 @@ void Board::play(Color c, Move mv)
             m_played_move[*i] = mv;
             for (ColorIterator j(m_nu_colors); j; ++j)
                 m_forbidden[*j][*i] = true;
-            LIBBOARDGAME_FOREACH_DIAG(*i, p_diag,
-                m_has_diag[c][p_diag] = true;)
+            for (DiagIterator j(*m_geometry, *i); j; ++j)
+                m_has_diag[c][*j] = true;
         }
         for (auto i = info.adj_points.begin(); i != info.adj_points.end(); ++i)
             m_forbidden[c][*i] = true;

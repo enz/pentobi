@@ -9,9 +9,10 @@
 #include "State.h"
 
 #include <cmath>
-#include "libpentobi_base/BoardUtil.h"
-#include "libpentobi_base/Geometry.h"
 #include "libboardgame_util/Log.h"
+#include "libpentobi_base/BoardUtil.h"
+#include "libpentobi_base/DiagIterator.h"
+#include "libpentobi_base/Geometry.h"
 
 namespace libpentobi_mcts {
 
@@ -25,6 +26,7 @@ using libpentobi_base::game_variant_duo;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
+using libpentobi_base::DiagIterator;
 using libpentobi_base::Direction;
 using libpentobi_base::FullGrid;
 using libpentobi_base::GameVariant;
@@ -52,16 +54,15 @@ PointState get_symmetric_state(PointState s)
     if (s.is_empty())
         return s;
     Color c = s.to_color();
-    LIBBOARDGAME_ASSERT(c.to_int() < 2); // game_variant_Duo
+    LIBBOARDGAME_ASSERT(c.to_int() < 2); // game_variant_duo
     return PointState(Color(1 - c.to_int()));
 }
 
 bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
 {
-    LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
-        if (bd.get_point_state_ext(p_diag) == c
-            && bd.get_played_move(p_diag) != mv)
-            return false; )
+    for (DiagIterator i(bd, p); i; ++i)
+        if (bd.get_point_state_ext(*i) == c && bd.get_played_move(*i) != mv)
+            return false;
     return true;
 }
 

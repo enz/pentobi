@@ -10,10 +10,14 @@
 
 #include <algorithm>
 #include "Util.h"
+#include "libpentobi_base/AdjIterator.h"
+#include "libpentobi_base/DiagIterator.h"
 
 using namespace std;
+using libpentobi_base::AdjIterator;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::Color;
+using libpentobi_base::DiagIterator;
 using libpentobi_base::FullGrid;
 using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
@@ -45,14 +49,14 @@ bool isLegal(const MovePoints& movePoints, Color c, GameVariant gameVariant,
     {
         if (! geometry.is_onboard(p) || ! pointState[p].is_empty())
             return false;
-        LIBBOARDGAME_FOREACH_ADJ(p, pAdj,
-            if (pointState[pAdj] == c)
-                return false; )
+        for (AdjIterator i(geometry, p); i; ++i)
+            if (pointState[*i] == c)
+                return false;
         if (isFirstPiece && p == startingPoint)
             isConnected = true;
-        LIBBOARDGAME_FOREACH_DIAG(p, pDiag,
-            if (pointState[pDiag] == c)
-                isConnected = true; )
+        for (DiagIterator i(geometry, p); i; ++i)
+            if (pointState[*i] == c)
+                isConnected = true;
     }
     return isConnected;
 }
