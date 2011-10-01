@@ -77,8 +77,10 @@ private:
 
     QFont m_fontUnderlined;
 
+    QFont m_fontSmall;
+
     void drawLabel(QPainter& painter, int x, int y, const QString& label,
-                   bool underline);
+                   bool underline, bool smallFont = false);
 
     void drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
                            const FullGrid<PointStateExt>& pointState);

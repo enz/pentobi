@@ -73,10 +73,13 @@ BoardPainter::BoardPainter()
 }
 
 void BoardPainter::drawLabel(QPainter& painter, int x, int y,
-                             const QString& label, bool underline)
+                             const QString& label, bool underline,
+                             bool smallFont)
 {
     if (underline)
         painter.setFont(m_fontUnderlined);
+    else if (smallFont)
+        painter.setFont(m_fontSmall);
     else
         painter.setFont(m_font);
     int squareX = x * m_squareSize;
@@ -156,6 +159,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     m_font.setPointSize(max(m_squareSize * 40 / 100, 1));
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
+    m_fontSmall.setPointSize(max(m_squareSize * 34 / 100, 1));
     m_boardOffset =
         QPoint((width - m_boardSize) / 2, (height - m_boardSize) / 2);
     painter.save();
@@ -167,15 +171,15 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         for (int x = 0; x < m_sz; ++x)
         {
             QString label(QChar('A' + x));
-            drawLabel(painter, x, -1, label, false);
-            drawLabel(painter, x, m_sz, label, false);
+            drawLabel(painter, x, -1, label, false, true);
+            drawLabel(painter, x, m_sz, label, false, true);
         }
         for (int y = 0; y < m_sz; ++y)
         {
             QString label;
             label.setNum(y + 1);
-            drawLabel(painter, -1, y, label, false);
-            drawLabel(painter, m_sz, y, label, false);
+            drawLabel(painter, -1, y, label, false, true);
+            drawLabel(painter, m_sz, y, label, false, true);
         }
     }
     const Geometry& geometry = pointState.get_geometry();
