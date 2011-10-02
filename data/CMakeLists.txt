@@ -2,8 +2,11 @@ if(UNIX AND NOT APPLE)
   configure_file(pentobi.desktop.in pentobi.desktop @ONLY)
   configure_file(pentobi.schemas.in pentobi.schemas @ONLY)
   install(FILES pentobi.png DESTINATION share/icons/hicolor/48x48/apps)
+  install(FILES pentobi.svg DESTINATION share/icons/hicolor/scalable/apps)
   install(FILES application-x-blokus-sgf.png
     DESTINATION share/icons/hicolor/48x48/mimetypes)
+  install(FILES application-x-blokus-sgf.svg
+    DESTINATION share/icons/hicolor/scalable/mimetypes)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.desktop
     DESTINATION share/applications)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.schemas
