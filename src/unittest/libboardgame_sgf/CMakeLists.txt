@@ -8,6 +8,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 set(unittest_libboardgame_sgf_STAT_SRCS
   Main.cpp
   NodeTest.cpp
+  TreeTest.cpp
   TreeReaderTest.cpp
   UtilTest.cpp
   )

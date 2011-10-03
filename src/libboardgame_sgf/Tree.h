@@ -5,6 +5,7 @@
 #ifndef LIBBOARDGAME_SGF_TREE_H
 #define LIBBOARDGAME_SGF_TREE_H
 
+#include <boost/algorithm/string/trim.hpp>
 #include <boost/format.hpp>
 #include "libboardgame_sgf/Node.h"
 
@@ -12,6 +13,7 @@ namespace libboardgame_sgf {
 
 using namespace std;
 using boost::format;
+using boost::trim_copy;
 using libboardgame_sgf::Node;
 
 //-----------------------------------------------------------------------------
@@ -88,6 +90,25 @@ public:
 
     void append_comment(const Node& node, const format& f);
 
+    /** Store a key/value pair in the comment.
+        Comment properties are properties that are stored as text in the comment
+        property, such that they can be easily viewed and edited with most
+        SGF browsers. Each property is stored as a single line in the comment
+        text of the form key=value. */
+    template<typename T>
+    void set_comment_property(const Node& node, const string& key,
+                              const T& value);
+
+    /** Get a key/value pair stored in the comment.
+        See set_comment_property() */
+    template<typename T>
+    T get_comment_property(const Node& node, const string& key,
+                           const T& default_value);
+
+    /** Check if node has a key/value pair stored in the comment.
+        See set_comment_property() */
+    bool has_comment_property(const Node& node, const string& key);
+
     void remove_move_annotation(const Node& node);
 
     double get_good_move(const Node& node) const;
@@ -121,6 +142,12 @@ private:
 
     unique_ptr<Node> m_root;
 
+    static bool is_comment_property_line(const string& line, const string& key);
+
+    template<typename T>
+    static bool is_comment_property_line(const string& line, const string& key,
+                                         T& value);
+
     Node& non_const(const Node& node);
 };
 
@@ -132,6 +159,20 @@ inline void Tree::clear_modified()
 inline double Tree::get_bad_move(const Node& node) const
 {
     return node.get_property<double>("BM", 0);
+}
+
+template<typename T>
+T Tree::get_comment_property(const Node& node, const string& key,
+                             const T& default_value)
+{
+    string comment = get_comment(node);
+    istringstream in(comment);
+    string line;
+    T value;
+    while (getline(in, line))
+        if (is_comment_property_line(line, key, value))
+            return value;
+    return default_value;
 }
 
 inline string Tree::get_date() const
@@ -152,6 +193,18 @@ inline bool Tree::get_modified() const
 inline const Node& Tree::get_root() const
 {
     return *m_root;
+}
+
+template<typename T>
+bool Tree::is_comment_property_line(const string& line, const string& key,
+                                    T& value)
+{
+    size_t pos = line.find('=');
+    if (pos == string::npos)
+        return false;
+    if (trim_copy(line.substr(0, pos)) != key)
+        return false;
+    return from_string(trim_copy(line.substr(pos + 1)), value);
 }
 
 inline bool Tree::is_doubtful_move(const Node& node) const
@@ -183,6 +236,31 @@ inline void Tree::set_charset(const string& charset)
 inline void Tree::set_date(const string& date)
 {
     set_property(get_root(), "DT", date);
+}
+
+template<typename T>
+void Tree::set_comment_property(const Node& node, const string& key,
+                                const T& value)
+{
+    string old_comment = get_comment(node);
+    string new_comment;
+    istringstream in(old_comment);
+    string line;
+    T old_value;
+    while (getline(in, line))
+    {
+        if (is_comment_property_line(line, key, old_value))
+            break;
+        new_comment.append(line);
+        new_comment.append("\n");
+    }
+    new_comment.append(str(format("%1%=%2%\n") % key % value));
+    while (getline(in, line))
+    {
+        new_comment.append(line);
+        new_comment.append("\n");
+    }
+    set_comment(node, new_comment);
 }
 
 template<typename T>

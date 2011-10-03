@@ -23,6 +23,9 @@ bool from_string(const string& s, T& t)
     return ! in.fail();
 }
 
+template<>
+bool from_string(const string& s, string& t);
+
 string time_to_string(double seconds, bool with_seconds_as_double = false);
 
 template<typename T>

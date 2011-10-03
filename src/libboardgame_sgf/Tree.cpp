@@ -12,13 +12,11 @@
 #include <cstdio>
 #include <cstdlib>
 #include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include "libboardgame_sgf/Util.h"
 
 namespace libboardgame_sgf {
 
 using boost::algorithm::ends_with;
-using boost::trim_copy;
 using libboardgame_sgf::util::find_root;
 using libboardgame_sgf::util::get_go_point_property_value;
 using libboardgame_sgf::util::parse_go_move_property_value;
@@ -75,6 +73,17 @@ unique_ptr<Node> Tree::get_tree_transfer_ownership()
     return move(m_root);
 }
 
+bool Tree::has_comment_property(const Node& node, const string& key)
+{
+    string comment = get_comment(node);
+    istringstream in(comment);
+    string line;
+    while (getline(in, line))
+        if (is_comment_property_line(line, key))
+            return true;
+    return false;
+}
+
 void Tree::init()
 {
     unique_ptr<Node> root(Node::create());
@@ -86,6 +95,14 @@ void Tree::init(unique_ptr<Node>& root)
 {
     m_root = move(root);
     m_modified = false;
+}
+
+bool Tree::is_comment_property_line(const string& line, const string& key)
+{
+    size_t pos = line.find('=');
+    if (pos == string::npos)
+        return false;
+    return (trim_copy(line.substr(0, pos)) == key);
 }
 
 void Tree::make_main_variation(const Node& node)

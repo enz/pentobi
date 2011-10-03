@@ -19,6 +19,13 @@ using boost::io::group;
 
 //-----------------------------------------------------------------------------
 
+template<>
+bool from_string(const string& s, string& t)
+{
+    t = s;
+    return true;
+}
+
 string time_to_string(double seconds, bool with_seconds_as_double)
 {
     int int_seconds = int(seconds + 0.5);
