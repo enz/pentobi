@@ -9,6 +9,7 @@ set(boardgame_sgf_STAT_SRCS
   Node.cpp
   Reader.cpp
   Tree.cpp
+  TreeIterator.cpp
   TreeReader.cpp
   Util.cpp
   Writer.cpp

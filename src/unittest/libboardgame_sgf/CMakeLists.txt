@@ -9,6 +9,7 @@ set(unittest_libboardgame_sgf_STAT_SRCS
   Main.cpp
   NodeTest.cpp
   TreeTest.cpp
+  TreeIteratorTest.cpp
   TreeReaderTest.cpp
   UtilTest.cpp
   )
