@@ -355,7 +355,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         else if (nu_moves < 6)
             min_piece_size = 4;
     }
-    else if (variant == game_variant_classic || game_variant_classic_2)
+    else if (variant == game_variant_classic
+             || variant == game_variant_classic_2)
     {
         if (nu_moves < 12)
             min_piece_size = 5;
