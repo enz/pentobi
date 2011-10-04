@@ -103,11 +103,11 @@ public:
         See set_comment_property() */
     template<typename T>
     T get_comment_property(const Node& node, const string& key,
-                           const T& default_value);
+                           const T& default_value) const;
 
     /** Check if node has a key/value pair stored in the comment.
         See set_comment_property() */
-    bool has_comment_property(const Node& node, const string& key);
+    bool has_comment_property(const Node& node, const string& key) const;
 
     void remove_move_annotation(const Node& node);
 
@@ -163,7 +163,7 @@ inline double Tree::get_bad_move(const Node& node) const
 
 template<typename T>
 T Tree::get_comment_property(const Node& node, const string& key,
-                             const T& default_value)
+                             const T& default_value) const
 {
     string comment = get_comment(node);
     istringstream in(comment);

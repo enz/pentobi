@@ -73,7 +73,7 @@ unique_ptr<Node> Tree::get_tree_transfer_ownership()
     return move(m_root);
 }
 
-bool Tree::has_comment_property(const Node& node, const string& key)
+bool Tree::has_comment_property(const Node& node, const string& key) const
 {
     string comment = get_comment(node);
     istringstream in(comment);
