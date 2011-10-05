@@ -420,7 +420,7 @@ void MainWindow::coordinateLabels(bool checked)
 
 void MainWindow::commentChanged()
 {
-    QString comment = m_comment->toPlainText().trimmed();
+    QString comment = m_comment->toPlainText();
     if (comment.isEmpty())
     {
         m_game->set_comment("");
