@@ -100,6 +100,12 @@ public:
                               const T& value);
 
     /** Get a key/value pair stored in the comment.
+        See set_comment_property()
+        @throws Exception if property not found */
+    template<typename T>
+    T get_comment_property(const Node& node, const string& key) const;
+
+    /** Get a key/value pair stored in the comment or use default value.
         See set_comment_property() */
     template<typename T>
     T get_comment_property(const Node& node, const string& key,
@@ -159,6 +165,19 @@ inline void Tree::clear_modified()
 inline double Tree::get_bad_move(const Node& node) const
 {
     return node.get_property<double>("BM", 0);
+}
+
+template<typename T>
+T Tree::get_comment_property(const Node& node, const string& key) const
+{
+    string comment = get_comment(node);
+    istringstream in(comment);
+    string line;
+    T value;
+    while (getline(in, line))
+        if (is_comment_property_line(line, key, value))
+            return value;
+    throw Exception(format("Comment property '%1%' not found") % key);
 }
 
 template<typename T>
