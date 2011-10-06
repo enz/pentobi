@@ -342,6 +342,8 @@ public:
 
     void operator++();
 
+    void operator--();
+
     const Node& operator*() const;
 
     const Node* operator->() const;
@@ -364,6 +366,13 @@ inline void ChildIterator::operator++()
 {
     LIBBOARDGAME_ASSERT(operator bool());
     m_current = m_current->get_sibling();
+}
+
+inline void ChildIterator::operator--()
+{
+    LIBBOARDGAME_ASSERT(operator bool());
+    m_current = m_current->get_previous_sibling();
+    LIBBOARDGAME_ASSERT(operator bool());
 }
 
 inline const Node& ChildIterator::operator*() const
