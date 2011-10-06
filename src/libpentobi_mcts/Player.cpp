@@ -157,9 +157,12 @@ void Player::load_book(istream& in)
 void Player::load_book(const string& filename)
 {
     // Search the given file at the following locations (in this order):
-    // 1. Directory of the main executable
-    // 2. Subdirectory src/book relative to the source code directory
-    // 3. Data installation directory used on Unix (DATADIR/pentobi)
+    // 1. Current directory
+    // 2. Directory of the main executable
+    // 3. Subdirectory src/book relative to the source code directory
+    // 4. Data installation directory used on Unix (DATADIR/pentobi)
+    if (try_load_book(filename))
+        return;
     if (try_load_book(m_application_dir_path / filename))
         return;
 #ifdef ABS_TOP_SRCDIR
