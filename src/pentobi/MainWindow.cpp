@@ -156,8 +156,10 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     addAction(m_actionMoveSelectedPieceDown);
     addAction(m_actionNextPiece);
     addAction(m_actionNextTransform);
+    addAction(m_actionNextVariation10);
     addAction(m_actionPreviousPiece);
     addAction(m_actionPreviousTransform);
+    addAction(m_actionPreviousVariation10);
     addAction(m_actionPlaceSelectedPiece);
     addAction(m_actionSelectPiece1);
     addAction(m_actionSelectPiece2);
@@ -673,6 +675,11 @@ void MainWindow::createActions()
     connect(m_actionNextVariation, SIGNAL(triggered()),
             this, SLOT(nextVariation()));
 
+    m_actionNextVariation10 = new QAction("", this);
+    m_actionNextVariation10->setShortcut(QString("Ctrl+Shift+Down"));
+    connect(m_actionNextVariation10, SIGNAL(triggered()),
+            this, SLOT(nextVariation10()));
+
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
     setIcon(m_actionNewGame, "newgame");
@@ -713,6 +720,11 @@ void MainWindow::createActions()
     setIcon(m_actionPreviousVariation, "go-up");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             this, SLOT(previousVariation()));
+
+    m_actionPreviousVariation10 = new QAction("", this);
+    m_actionPreviousVariation10->setShortcut(QString("Ctrl+Shift+Up"));
+    connect(m_actionPreviousVariation10, SIGNAL(triggered()),
+            this, SLOT(previousVariation10()));
 
     for (int i = 0; i < maxRecentFiles; ++i)
     {
@@ -1531,6 +1543,18 @@ void MainWindow::nextVariation()
     gotoNode(*node);
 }
 
+void MainWindow::nextVariation10()
+{
+    const Node* node = &m_game->get_current();
+    for (unsigned int i = 0; i < 10; ++i)
+    {
+        if (node->get_sibling() == 0)
+            break;
+        node = node->get_sibling();
+    }
+    gotoNode(*node);
+}
+
 void MainWindow::newGame()
 {
     if (! checkSave())
@@ -1724,6 +1748,18 @@ void MainWindow::previousVariation()
     const Node* node = m_game->get_current().get_previous_sibling();
     if (node == 0)
         return;
+    gotoNode(*node);
+}
+
+void MainWindow::previousVariation10()
+{
+    const Node* node = &m_game->get_current();
+    for (unsigned int i = 0; i < 10; ++i)
+    {
+        if (node->get_previous_sibling() == 0)
+            break;
+        node = node->get_previous_sibling();
+    }
     gotoNode(*node);
 }
 

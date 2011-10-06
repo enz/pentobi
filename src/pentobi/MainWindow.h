@@ -86,6 +86,8 @@ public slots:
 
     void nextVariation();
 
+    void nextVariation10();
+
     void nextPiece();
 
     void nextTransform();
@@ -101,6 +103,8 @@ public slots:
     void previousTransform();
 
     void previousVariation();
+
+    void previousVariation10();
 
     void quit();
 
@@ -298,6 +302,8 @@ private:
 
     QAction* m_actionNextVariation;
 
+    QAction* m_actionNextVariation10;
+
     QAction* m_actionNewGame;
 
     QAction* m_actionNoMoveAnnotation;
@@ -313,6 +319,8 @@ private:
     QAction* m_actionPreviousTransform;
 
     QAction* m_actionPreviousVariation;
+
+    QAction* m_actionPreviousVariation10;
 
     QAction* m_actionQuit;
 
