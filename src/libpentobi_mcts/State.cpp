@@ -74,7 +74,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
     : board(bd),
       to_play(to_play),
       detect_symmetry(true),
-      avoid_symmetric_draw(true),
+      avoid_symmetric_draw(false),
       score_modification(ValueType(0.1)),
       piece_value(bd)
 {
