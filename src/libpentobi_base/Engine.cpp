@@ -160,7 +160,7 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
     Move move = get_player().genmove(get_color_arg(args));
     if (move.is_null())
         throw Failure("player failed to generate a move");
-    response << get_board().to_string(move);
+    response << get_board().to_string(move, true);
 }
 
 /** Set the game variant.
