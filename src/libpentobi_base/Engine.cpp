@@ -127,6 +127,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
         if (node == 0)
             node = &get_last_node(m_game.get_root());
         m_game.goto_node(*node);
+        board_changed();
     }
     catch (const Exception& e)
     {
