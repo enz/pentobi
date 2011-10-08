@@ -1398,7 +1398,7 @@ void MainWindow::gotoNode(const Node& node)
     }
     catch (const InvalidPropertyValue& e)
     {
-        showError(tr("Game file node contains invalid property"), e.what());
+        showInvalidFile(m_file, e);
     }
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
@@ -1591,13 +1591,21 @@ void MainWindow::open(const QString& file, bool isTemporary)
         return;
     cancelGenMove();
     TreeReader reader;
+    ifstream in(file.toStdString());
     try
     {
-        reader.read(file.toStdString());
+        reader.read(in);
     }
     catch (const TreeReader::ReadError& e)
     {
-        showError(tr("Read error"), e.what());
+        QString text =
+            tr("Could not read file '%1'").arg(QFileInfo(file).fileName());
+        if (! in)
+            showError(text, strerror(errno));
+        else
+        {
+            showInvalidFile(file, e);
+        }
         return;
     }
     if (! isTemporary)
@@ -1616,7 +1624,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     }
     catch (const InvalidPropertyValue& e)
     {
-        showError(tr("File contains invalid SGF properties"), e.what());
+        showInvalidFile(file, e);
     }
     m_noMovesAvailableShown.fill(false);
     m_computerColor.fill(false);
@@ -2322,6 +2330,13 @@ void MainWindow::showGameOver()
 void MainWindow::showInfo(const QString& text, const QString& infoText)
 {
     showMessage(QMessageBox::NoIcon, text, infoText);
+}
+
+void MainWindow::showInvalidFile(QString file, const Exception& e)
+{
+    showError(tr("Error in file '%1'").arg(QFileInfo(file).fileName()),
+              tr("The file is not a valid Blokus SGF file."));
+    log() << e.what() << '\n';
 }
 
 void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,

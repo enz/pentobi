@@ -18,6 +18,7 @@
 using namespace std;
 using libboardgame_sgf::Node;
 using libboardgame_util::ArrayList;
+using libboardgame_util::Exception;
 using libpentobi_base::Board;
 using libpentobi_base::ColorMap;
 using libpentobi_base::Game;
@@ -457,6 +458,8 @@ private:
     void showGameOver();
 
     void showInfo(const QString& message, const QString& infoText = QString());
+
+    void showInvalidFile(QString file, const Exception& e);
 
     void showMessage(QMessageBox::Icon icon, const QString& text,
                      const QString& infoText);
