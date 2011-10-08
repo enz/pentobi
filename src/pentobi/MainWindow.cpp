@@ -218,23 +218,21 @@ void MainWindow::about()
           QString("<style type=\"text/css\">"
                   ":link { text-decoration: none; }"
                   "</style>") +
-          QString(tr(
-              "<h2>Pentobi</h2>"
-              "<p>Version %1</p>"
-              "<p>"
-              "Computer program that plays the board game Blokus."
-              "<br>"
-              "&copy; 2011 Markus Enzenberger"
-              "<br>"
-              "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
-              "</p>"
-              "<p>"
-              "You can support the development of this program by making a "
-              "donation:<br>"
-              "<a href=\"http://sf.net/projects/pentobi/donate\">http://sf.net/projects/pentobi/donate</a>"
-              "</p>"
-                     ))
-                       .arg(getVersion()));
+          tr("<h2>Pentobi</h2>"
+             "<p>Version %1</p>"
+             "<p>"
+             "Computer program that plays the board game Blokus."
+             "<br>"
+             "&copy; 2011 Markus Enzenberger"
+             "<br>"
+             "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
+             "</p>"
+             "<p>"
+             "You can support the development of this program by making a "
+             "donation:<br>"
+             "<a href=\"http://sf.net/projects/pentobi/donate\">http://sf.net/projects/pentobi/donate</a>"
+             "</p>"
+             ).arg(getVersion()));
 }
 
 /** Call to Player::genmove() that runs in a different thread. */
@@ -374,7 +372,7 @@ bool MainWindow::checkQuit()
         {
             QFile file(autoSaveFile);
             if (file.exists() && ! file.remove())
-                showError(QString(tr("Could not delete %1")).arg(autoSaveFile));
+                showError(tr("Could not delete %1").arg(autoSaveFile));
         }
     }
     QSettings settings;
@@ -1296,7 +1294,7 @@ void MainWindow::genMoveFinished()
     const Board& bd = m_game->get_board();
     if (! bd.is_legal(c, mv))
     {
-        showError(QString(tr("Player generated illegal move: %1"))
+        showError(tr("Player generated illegal move: %1")
                   .arg(bd.to_string(mv).c_str()));
         return;
     }
@@ -1598,10 +1596,12 @@ void MainWindow::open(const QString& file, bool isTemporary)
     }
     catch (const TreeReader::ReadError& e)
     {
-        QString text =
-            tr("Could not read file '%1'").arg(QFileInfo(file).fileName());
         if (! in)
+        {
+            QString text =
+                tr("Could not read file '%1'").arg(QFileInfo(file).fileName());
             showError(text, strerror(errno));
+        }
         else
         {
             showInvalidFile(file, e);
@@ -1820,15 +1820,13 @@ void MainWindow::save()
     write_tree(out, m_game->get_root(), true, 2);
     if (! out)
         showError(tr("The file could not be saved."),
-                  QString(
-                          /*: Error message if file cannot be saved. %1 is
-                            replaced by the file name, %2 by the error message
-                            of the operating system. */
-                          tr("%1: %2")
-                          ).arg(m_file).arg(strerror(errno)));
+                  /*: Error message if file cannot be saved. %1 is
+                    replaced by the file name, %2 by the error message
+                    of the operating system. */
+                  tr("%1: %2").arg(m_file).arg(strerror(errno)));
     else
     {
-        showStatus(QString(tr("File saved %1")).arg(m_file), true);
+        showStatus(tr("File saved %1").arg(m_file), true);
         m_game->clear_modified();
         updateWindow(false);
     }
@@ -1847,7 +1845,7 @@ void MainWindow::saveAs()
             {
                 file = getLastDir();;
                 file.append(QDir::separator());
-                file.append(QString(tr("Untitled Game %1.blksgf")).arg(i));
+                file.append(tr("Untitled Game %1.blksgf").arg(i));
                 if (! QFileInfo(file).exists())
                     break;
             }
@@ -2046,8 +2044,7 @@ void MainWindow::setFile(const QString& file)
         setWindowTitle(tr("Pentobi"));
     else
     {
-        setWindowTitle(QString(tr("%1[*] - Pentobi"))
-                       .arg(QFileInfo(file).fileName()));
+        setWindowTitle(tr("%1[*] - Pentobi").arg(QFileInfo(file).fileName()));
         QSettings settings;
         QStringList files = settings.value("recent_files").toStringList();
         files.removeAll(file);
@@ -2140,7 +2137,7 @@ void MainWindow::setMoveNumberText()
         if (move == nuMoves)
         {
             m_moveNumber->setText(QString("%1").arg(move));
-            m_moveNumber->setToolTip(QString(tr("Move number %1")).arg(move));
+            m_moveNumber->setToolTip(tr("Move number %1").arg(move));
         }
         else
         {
@@ -2148,16 +2145,15 @@ void MainWindow::setMoveNumberText()
             {
                 m_moveNumber->setText(QString("(%1)").arg(nuMoves));
                 if (nuMoves == 1)
-                    m_moveNumber->setToolTip(QString(tr("1 move")));
+                    m_moveNumber->setToolTip(tr("1 move"));
                 else
-                    m_moveNumber->setToolTip(QString(tr("%1 moves"))
-                                             .arg(nuMoves));
+                    m_moveNumber->setToolTip(tr("%1 moves").arg(nuMoves));
             }
             else
             {
                 m_moveNumber->setText(QString("%1 (%2)")
                                       .arg(move).arg(nuMoves));
-                m_moveNumber->setToolTip(QString(tr("Move number %1 of %2"))
+                m_moveNumber->setToolTip(tr("Move number %1 of %2")
                                          .arg(move).arg(nuMoves));
             }
         }
@@ -2170,13 +2166,11 @@ void MainWindow::setMoveNumberText()
             m_moveNumber->setText(QString("%1 [%2]")
                                   .arg(move).arg(variation.c_str()));
             if (isMain)
-                m_moveNumber->setToolTip(
-                                 QString(tr("Move number %1 in main variation"))
-                                 .arg(move));
+                m_moveNumber->setToolTip(tr("Move number %1 in main variation")
+                                         .arg(move));
             else
-                m_moveNumber->setToolTip(
-                                    QString(tr("Move number %1 (variation %2)"))
-                                    .arg(move).arg(variation.c_str()));
+                m_moveNumber->setToolTip(tr("Move number %1 (variation %2)")
+                                         .arg(move).arg(variation.c_str()));
 
         }
         else
@@ -2190,34 +2184,35 @@ void MainWindow::setMoveNumberText()
                 {
                     if (nuMoves == 1)
                         m_moveNumber->setToolTip(
-                                       QString(tr("1 move in main variation")));
+                                                tr("1 move in main variation"));
                     else
                         m_moveNumber->setToolTip(
-                                       QString(tr("%1 moves in main variation"))
-                                       .arg(nuMoves));
+                                                tr("%1 moves in main variation")
+                                                .arg(nuMoves));
                 }
                 else
                     m_moveNumber->setToolTip(
-                           QString(tr("Move number %1 of %2 in main variation"))
-                           .arg(move).arg(nuMoves));
+                                    tr("Move number %1 of %2 in main variation")
+                                    .arg(move).arg(nuMoves));
             }
             else
             {
                 if (move == 0)
                 {
                     if (nuMoves == 1)
-                        m_moveNumber->setToolTip(
-                                          QString(tr("1 move (variation %1)"))
-                                          .arg(variation.c_str()));
+                        m_moveNumber->setToolTip(tr("1 move (variation %1)")
+                                                 .arg(variation.c_str()));
                     else
-                        m_moveNumber->setToolTip(
-                                          QString(tr("%1 moves (variation %2)"))
-                                          .arg(nuMoves).arg(variation.c_str()));
+                        m_moveNumber->setToolTip(tr("%1 moves (variation %2)")
+                                                 .arg(nuMoves)
+                                                 .arg(variation.c_str()));
                 }
                 else
                     m_moveNumber->setToolTip(
-                              QString(tr("Move number %1 of %2 (variation %3)"))
-                              .arg(move).arg(nuMoves).arg(variation.c_str()));
+                                       tr("Move number %1 of %2 (variation %3)")
+                                       .arg(move)
+                                       .arg(nuMoves)
+                                       .arg(variation.c_str()));
             }
 
         }
@@ -2262,11 +2257,11 @@ void MainWindow::showGameOver()
         if (score == 1)
             info = tr("Blue wins with 1 point.");
         else if (score > 0)
-            info = QString(tr("Blue wins with %1 points.")).arg(score);
+            info = tr("Blue wins with %1 points.").arg(score);
         else if (score == -1)
             info = tr("Green wins with 1 point.");
         else if (score < 0)
-            info = QString(tr("Green wins with %1 points.")).arg(-score);
+            info = tr("Green wins with %1 points.").arg(-score);
         else
             info = tr("The game ends in a draw.");
     }
@@ -2277,11 +2272,11 @@ void MainWindow::showGameOver()
         if (score == 1)
             info = tr("Blue/Red wins with 1 point.");
         else if (score > 0)
-            info = QString(tr("Blue/Red wins with %1 points.")).arg(score);
+            info = tr("Blue/Red wins with %1 points.").arg(score);
         else if (score == 1)
             info = tr("Yellow/Green wins with 1 point.");
         else if (score < 0)
-            info = QString(tr("Yellow/Green wins with %1 points.")).arg(-score);
+            info = tr("Yellow/Green wins with %1 points.").arg(-score);
         else
             info = tr("The game ends in a draw.");
     }
@@ -2511,12 +2506,11 @@ void MainWindow::updateRecentFiles()
         const bool isMac = false;
 #endif
         if (! isMac && i + 1 <= 9)
-            text = QString(
-                           /*: Label in Recent Files menu. The first 10 items
-                             are numbered to provide a mnemonic. %1 is replaced
-                             by the number, %2 by the file name. */
-                           tr("&%1: %2")
-                           ).arg(i + 1).arg(name);
+            text =
+                /*: Label in Recent Files menu. The first 10 items
+                  are numbered to provide a mnemonic. %1 is replaced
+                  by the number, %2 by the file name. */
+                tr("&%1: %2").arg(i + 1).arg(name);
         else
             text = QString("%1").arg(name);
         m_actionRecentFile[i]->setText(text);
@@ -2540,7 +2534,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         bool is_modified = m_game->get_modified();
         setWindowModified(is_modified);
         m_actionSave->setEnabled(is_modified);
-        m_actionSave->setToolTip(QString(tr("Save (%1)")).arg(m_file));
+        m_actionSave->setToolTip(tr("Save (%1)").arg(m_file));
     }
     m_guiBoard->copyFromBoard(bd);
     // If the last move was played by the computer, show move numbers on all
