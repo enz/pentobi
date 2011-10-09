@@ -229,13 +229,13 @@ Color Engine::get_color_arg(const Arguments& args, unsigned int i) const
     GameVariant variant = bd.get_game_variant();
     if (variant == game_variant_classic || variant == game_variant_classic_2)
     {
-        if (s == "blue")
+        if (s == "1" || s == "blue")
             return Color(0);
-        if (s == "yellow")
+        if (s == "2" || s == "yellow")
             return Color(1);
-        if (s == "red")
+        if (s == "3" || s == "red")
             return Color(2);
-        if (s == "green")
+        if (s == "4" || s == "green")
             return Color(3);
     }
     if (variant == game_variant_duo)
