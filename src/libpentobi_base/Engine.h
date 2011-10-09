@@ -27,6 +27,8 @@ class Engine
 public:
     Engine(GameVariant game_variant);
 
+    ~Engine() throw();
+
     void cmd_all_legal(const Arguments&, Response&);
     void cmd_clear_board();
     void cmd_final_score(Response&);

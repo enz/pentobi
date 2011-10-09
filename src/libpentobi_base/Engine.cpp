@@ -54,6 +54,10 @@ Engine::Engine(GameVariant game_variant)
     add("undo", &Engine::cmd_undo);
 }
 
+Engine::~Engine() throw()
+{
+}
+
 void Engine::board_changed()
 {
     if (m_show_board)
