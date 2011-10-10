@@ -21,6 +21,7 @@ using libboardgame_sgf::util::is_main_variation;
 
 Game::Game(GameVariant game_variant)
     : m_bd(game_variant),
+      m_tree(game_variant),
       m_updater(m_tree, m_bd)
 {
     init(game_variant);
@@ -28,6 +29,7 @@ Game::Game(GameVariant game_variant)
 
 Game::Game(unique_ptr<Node>& root)
   : m_bd(m_tree.get_game_variant()),
+    m_tree(m_tree.get_game_variant()),
     m_updater(m_tree, m_bd)
 {
     init(root);

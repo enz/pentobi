@@ -33,7 +33,7 @@ using libboardgame_util::RandomGenerator;
 class Book
 {
 public:
-    Book();
+    Book(GameVariant game_variant);
 
     static double get_value(const Tree& tree, const Node& node);
 

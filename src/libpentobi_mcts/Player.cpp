@@ -32,14 +32,16 @@ const bool use_weight_max_count = true;
 
 //-----------------------------------------------------------------------------
 
-Player::Player(const Board& bd, const path& application_dir_path)
+Player::Player(const Board& bd, GameVariant game_variant,
+               const path& application_dir_path)
     : libpentobi_base::Player(bd),
       m_is_book_loaded(false),
       m_use_book(true),
       m_application_dir_path(application_dir_path),
       m_level(4),
       m_fixed_simulations(0),
-      m_search(bd)
+      m_search(bd),
+      m_book(game_variant)
 {
     for (unsigned int i = 0; i < Board::max_player_moves; ++i)
     {

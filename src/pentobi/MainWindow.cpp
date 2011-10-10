@@ -126,7 +126,7 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     m_game.reset(new Game(variant));
     initGame();
     path appDirPath(QCoreApplication::applicationDirPath().toStdString());
-    m_player.reset(new Player(m_game->get_board(), appDirPath));
+    m_player.reset(new Player(m_game->get_board(), variant, appDirPath));
     m_player->set_use_book(! noBook);
     createActions();
     createToolBar();

@@ -27,9 +27,14 @@ using libboardgame_util::string_util::to_string;
 
 //-----------------------------------------------------------------------------
 
-Tree::Tree()
+Tree::Tree(GameVariant game_variant)
 {
-    init();
+    init(game_variant);
+}
+
+Tree::Tree(unique_ptr<Node>& root)
+{
+    init(root);
 }
 
 const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const

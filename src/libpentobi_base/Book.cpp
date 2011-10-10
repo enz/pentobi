@@ -23,8 +23,9 @@ using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 
-Book::Book()
-    : m_is_computer_generated(true)
+Book::Book(GameVariant game_variant)
+    : m_tree(game_variant),
+      m_is_computer_generated(true)
 {
 }
 

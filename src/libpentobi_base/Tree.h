@@ -24,9 +24,11 @@ class Tree
     : public libboardgame_sgf::Tree
 {
 public:
-    Tree();
+    Tree(GameVariant game_variant);
 
-    void init(GameVariant game_variant = game_variant_duo);
+    Tree(unique_ptr<Node>& root);
+
+    void init(GameVariant game_variant);
 
     void init(unique_ptr<Node>& root);
 

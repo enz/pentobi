@@ -14,6 +14,7 @@ namespace libpentobi_mcts {
 
 using boost::filesystem::path;
 using libpentobi_base::Book;
+using libpentobi_base::GameVariant;
 
 //-----------------------------------------------------------------------------
 
@@ -25,7 +26,8 @@ public:
         @param bd
         @param application_dir_path Directory of the main executable (potential
         location of book files). */
-    Player(const Board& bd, const path& application_dir_path = path());
+    Player(const Board& bd, GameVariant game_variant,
+           const path& application_dir_path = path());
 
     ~Player() throw();
 

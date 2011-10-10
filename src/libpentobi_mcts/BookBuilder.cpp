@@ -262,8 +262,10 @@ void build_book(const path& file, GameVariant game_variant)
         reader.read(file);
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
         game.init(tree);
+        if (game.get_game_variant() != game_variant)
+            throw Exception("File has incompatible game variant");
     }
-    Player player(game.get_board());
+    Player player(game.get_board(), game_variant);
     player.set_use_book(false);
     for (unsigned int i = 0; ; ++i)
     {
@@ -301,8 +303,7 @@ void prune_book(const path& file, unsigned int min_count)
     TreeReader reader;
     reader.read(file);
     unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Tree tree;
-    tree.init(root);
+    Tree tree(root);
     prune(tree, tree.get_root(), min_count, true);
     ofstream out(file);
     write_tree(out, tree.get_root());

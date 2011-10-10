@@ -40,7 +40,8 @@ public:
 private:
     unique_ptr<libpentobi_base::Player> m_player;
 
-    void create_player(const path& application_dir_path);
+    void create_player(GameVariant game_variant,
+                       const path& application_dir_path);
 
     Search& get_search();
 };
