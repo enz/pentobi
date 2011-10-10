@@ -12,6 +12,7 @@ Current development version
 * Underline move numbers if there are alternative variations
 * Show move number, total number of moves and current variation in status bar
 * Faster play in higher levels, especially of opening moves
+* Make thumbnailer for Blokus files work under Gnome 3
 
 
 Version 0.1 (15 Jul 2011)

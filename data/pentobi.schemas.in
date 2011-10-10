@@ -1,3 +1,4 @@
+<!-- GConf schmea file for registering Pentobi's thumbnailer in Gnome 2 -->
 <gconfschemafile>
   <schemalist>
     <schema>
