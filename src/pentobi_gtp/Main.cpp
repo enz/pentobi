@@ -123,7 +123,8 @@ int main(int argc, char** argv)
             game_variant = game_variant_duo;
         else if (game_variant_string == "classic")
             game_variant = game_variant_classic;
-        else if (game_variant_string == "classic_2")
+        else if (game_variant_string == "classic_2"
+                 || game_variant_string == "c2")
             game_variant = game_variant_classic_2;
         else
             throw Exception(format("invalid game variant '%1'")
