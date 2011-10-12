@@ -142,13 +142,17 @@ const Node* Book::select_child(RandomGenerator& random, const Board& bd,
         double value = tree.get_comment_property<double>(*i, "v");
         best_value = min(value, best_value);
     }
-    vector<double> weight(nu_children);
-    double sum_weight = 0;
+    // Chose move with the largest difference to the best move that is still
+    // below a threshold selected using an exponentially decreasing probability
+    // distribution with width delta and cut-off max_delta
     unsigned int n = 0;
-    for (unsigned int i = 0; i < nu_children; ++i)
+    double threshold =
+        min(-delta * std::log(random.generate_float()), max_delta);
+    const Node* result = 0;
+    double result_value = 0;
+    for (ChildIterator i(node); i; ++i)
     {
-        const Node& child = node.get_child(i);
-        ColorMove mv = tree.get_move(child);
+        ColorMove mv = tree.get_move(*i);
         if (mv.is_null())
         {
             log() << "WARNING: Book contains nodes without moves\n";
@@ -164,41 +168,21 @@ const Node* Book::select_child(RandomGenerator& random, const Board& bd,
             log() << "WARNING: Book contains illegal move\n";
             continue;
         }
-        double value = tree.get_comment_property<double>(child, "v");
-        if (value > best_value + max_delta)
-            weight[i] = 0;
-        else
-        {
-            weight[i] = exp(-value / delta);
-            sum_weight += weight[i];
+        double value = tree.get_comment_property<double>(*i, "v");
+        if (value < best_value + max_delta)
             ++n;
-        }
-    }
-    for (unsigned int i = 0; i < nu_children; ++i)
-    {
-        const Node& child = node.get_child(i);
-        ColorMove mv = tree.get_move(child);
-        if (mv.is_null() || mv.color != c)
-            continue;
-        double value = tree.get_comment_property<double>(child, "v");
-        double prob = (sum_weight == 0 ? 0 : 100 * weight[i] / sum_weight);
-        log() << (format("%s %.3f %.1f%%\n")
-                  % bd.to_string(mv.move) % inv_value(value) % prob);
-    }
-    log() << "Book moves: " << n << " (max_delta=" << max_delta << ")\n";
-    double rand = random.generate_float() * sum_weight;
-    unsigned int i = 0;
-    double s = 0;
-    for (i = 0; i < nu_children - 1; ++i)
-        if (weight[i] > 0)
+        if (result == 0 ||
+            (value > result_value && value < best_value + threshold))
         {
-            s += weight[i];
-            if (s > rand)
-                break;
+            result = &(*i);
+            result_value = value;
         }
-    double prob = (sum_weight == 0 ? 0 : 100 * weight[i] / sum_weight);
-    log(format("Prob: %.1f%%") % prob);
-    return &node.get_child(i);
+        log() << (format("%s %.3f\n")
+                  % bd.to_string(mv.move) % inv_value(value));
+    }
+    log(format("Book moves: %i (d=%.3f max_d=%.3f thr=%.3f")
+        %n % delta % max_delta % threshold);
+    return result;
 }
 
 //-----------------------------------------------------------------------------
