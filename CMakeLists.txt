@@ -63,6 +63,10 @@ if(MINGW AND Boost_USE_STATIC_LIBS)
   add_definitions(-DBOOST_THREAD_USE_LIB)
 endif()
 
+# Package Threads is needed because some versions of CMake/FindBoost fail to
+# include -lpthread in Boost_LIBRARIES, which is required by libboost_thread.
+# (e.g. this occurs with CMake 2.8.4/MinGW 3.18). We solve this by adding
+# CMAKE_THREAD_LIBS_INIT to the link libraries.
 find_package(Threads)
 
 if(NOT DEFINED LIBBOARDGAME_MCTS_VALUE_TYPE)
