@@ -22,7 +22,11 @@ using namespace std;
 
 namespace {
 
-map<string, TestFunction> all_tests;
+map<string, TestFunction>& get_all_tests()
+{
+    static map<string, TestFunction> all_tests;
+    return all_tests;
+}
 
 } // namespace
 
@@ -42,6 +46,7 @@ TestFail::TestFail(const char* file, int line, const format& f)
 
 void add_test(const string& name, TestFunction function)
 {
+    auto all_tests = get_all_tests();
     LIBBOARDGAME_ASSERT(all_tests.find(name) == all_tests.end());
     all_tests.insert(make_pair(name, function));
 }
@@ -49,7 +54,8 @@ void add_test(const string& name, TestFunction function)
 bool run_all_tests()
 {
     unsigned int nu_fail = 0;
-    log() << "Running " << all_tests.size() << " tests ...\n";
+    log() << "Running " << get_all_tests().size() << " tests ...\n";
+    auto all_tests = get_all_tests();
     for (auto i = all_tests.begin(); i != all_tests.end(); ++i)
     {
         try
