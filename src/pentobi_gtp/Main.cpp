@@ -36,8 +36,7 @@ using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::Board;
 using libpentobi_base::GameVariant;
-using libpentobi_mcts::build_book;
-using libpentobi_mcts::prune_book;
+using libpentobi_mcts::BookBuilder;
 
 //-----------------------------------------------------------------------------
 
@@ -68,7 +67,7 @@ int main(int argc, char** argv)
         vector<string> input_file;
         options_description normal_options("Options");
         int level = 4;
-        unsigned int prune_book_count;
+        double prune_book_diff;
         normal_options.add_options()
             ("book", value<>(&book_file), "load an external book file")
             ("buildbook", value<>(&build_book_file),
@@ -82,7 +81,7 @@ int main(int argc, char** argv)
             ("seed,r", value<uint32_t>(&seed), "set random seed")
             ("showboard", "automatically write board to stderr after changes")
             ("nobook", "do not use opening book")
-            ("prunebook", value<unsigned int>(&prune_book_count),
+            ("prunebook", value<double>(&prune_book_diff),
              "prune opening book (requires --buildbook)")
             ("quiet,q", "do not print logging messages")
             ("version,v", "print version and exit");
@@ -131,10 +130,11 @@ int main(int argc, char** argv)
                             % game_variant_string);
         if (vm.count("buildbook"))
         {
+            BookBuilder book_builder(game_variant);
             if (vm.count("prunebook"))
-                prune_book(build_book_file, prune_book_count);
+                book_builder.prune(build_book_file, prune_book_diff);
             else
-                build_book(build_book_file, game_variant);
+                book_builder.build(build_book_file);
             return EXIT_SUCCESS;
         }
         bool use_book = (vm.count("nobook") == 0);

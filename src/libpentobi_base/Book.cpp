@@ -29,6 +29,41 @@ Book::Book(GameVariant game_variant)
 {
 }
 
+Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
+{
+    const libboardgame_sgf::Node* node = &m_tree.get_root();
+    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
+    {
+        ColorMove mv = bd.get_move(i);
+        node = m_tree.find_child_with_move(*node, mv);
+        if (node == 0)
+            return Move::null();
+    }
+    if (m_is_computer_generated)
+    {
+        try
+        {
+            node = select_child(m_random, bd, c, m_tree, *node, delta,
+                                max_delta);
+        }
+        catch (const Exception&)
+        {
+            log() << "Position in book but not all children evaluated.\n";
+            return Move::null();
+        }
+    }
+    else
+        node = select_annotated_child(m_random, bd, c, m_tree, *node);
+    if (node == 0)
+        return Move::null();
+    return m_tree.get_move(*node).move;
+}
+
+double Book::inv_value(double value) const
+{
+    return 1- value;
+}
+
 void Book::load(istream& in)
 {
     TreeReader reader;
@@ -51,44 +86,6 @@ void Book::load(istream& in)
             break;
         }
     m_is_computer_generated = ! has_root_annotated_good_children;
-}
-
-Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
-{
-    const libboardgame_sgf::Node* node = &m_tree.get_root();
-    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
-    {
-        ColorMove mv = bd.get_move(i);
-        node = m_tree.find_child_with_move(*node, mv);
-        if (node == 0)
-            return Move::null();
-    }
-    if (m_is_computer_generated)
-        node = select_child(m_random, bd, c, m_tree, *node, delta, max_delta);
-    else
-        node = select_annotated_child(m_random, bd, c, m_tree, *node);
-    if (node == 0)
-        return Move::null();
-    return m_tree.get_move(*node).move;
-}
-
-double Book::get_value(const Tree& tree, const Node& node)
-{
-    istringstream in(tree.get_comment(node));
-    double result;
-    in >> result;
-    if (! in)
-        throw Exception("Missing value in book");
-    return result;
-}
-
-void Book::get_value_and_count(const Tree& tree, const Node& node,
-                               double& value, unsigned int& count)
-{
-    istringstream in(tree.get_comment(node));
-    in >> value >> count;
-    if (! in)
-        throw Exception("Missing value and/or count in book");
 }
 
 const Node* Book::select_annotated_child(RandomGenerator& random,
@@ -139,20 +136,12 @@ const Node* Book::select_child(RandomGenerator& random, const Board& bd,
     unsigned int nu_children = node.get_nu_children();
     if (nu_children == 0)
         return 0;
-    double max_value = -numeric_limits<double>::max();
-    double sum_count = 0;
+    double best_value = numeric_limits<double>::max();
     for (ChildIterator i(node); i; ++i)
     {
-        double value;
-        unsigned int count;
-        get_value_and_count(tree, *i, value, count);
-        sum_count += count;
-        ColorMove mv = tree.get_move(*i);
-        log() << (format("%s %.3f %.0f\n")
-                  % bd.to_string(mv.move) % value % count);
-        max_value = max(value, max_value);
+        double value = tree.get_comment_property<double>(*i, "v");
+        best_value = min(value, best_value);
     }
-    log() << "Sum count " << sum_count << '\n';
     vector<double> weight(nu_children);
     double sum_weight = 0;
     unsigned int n = 0;
@@ -175,17 +164,26 @@ const Node* Book::select_child(RandomGenerator& random, const Board& bd,
             log() << "WARNING: Book contains illegal move\n";
             continue;
         }
-        double value;
-        unsigned int count;
-        get_value_and_count(tree, child, value, count);
-        if (value < max_value - max_delta)
+        double value = tree.get_comment_property<double>(child, "v");
+        if (value > best_value + max_delta)
             weight[i] = 0;
         else
         {
-            weight[i] = exp(value / delta);
+            weight[i] = exp(-value / delta);
             sum_weight += weight[i];
             ++n;
         }
+    }
+    for (unsigned int i = 0; i < nu_children; ++i)
+    {
+        const Node& child = node.get_child(i);
+        ColorMove mv = tree.get_move(child);
+        if (mv.is_null() || mv.color != c)
+            continue;
+        double value = tree.get_comment_property<double>(child, "v");
+        double prob = (sum_weight == 0 ? 0 : 100 * weight[i] / sum_weight);
+        log() << (format("%s %.3f %.1f%%\n")
+                  % bd.to_string(mv.move) % inv_value(value) % prob);
     }
     log() << "Book moves: " << n << " (max_delta=" << max_delta << ")\n";
     double rand = random.generate_float() * sum_weight;
@@ -198,15 +196,9 @@ const Node* Book::select_child(RandomGenerator& random, const Board& bd,
             if (s > rand)
                 break;
         }
-    log(format("Prob: %.1f %%") % (100 * weight[i] / sum_weight));
+    double prob = (sum_weight == 0 ? 0 : 100 * weight[i] / sum_weight);
+    log(format("Prob: %.1f%%") % prob);
     return &node.get_child(i);
-}
-
-void Book::set_value_and_count(Game& game, double value, double count)
-{
-    ostringstream s;
-    s << value << ' ' << count;
-    game.set_comment(s.str());
 }
 
 //-----------------------------------------------------------------------------
