@@ -265,10 +265,9 @@ void Tree::set_comment_property(const Node& node, const string& key,
     string new_comment;
     istringstream in(old_comment);
     string line;
-    T old_value;
     while (getline(in, line))
     {
-        if (is_comment_property_line(line, key, old_value))
+        if (is_comment_property_line(line, key))
             break;
         new_comment.append(line);
         new_comment.append("\n");
