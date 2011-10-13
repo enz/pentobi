@@ -34,6 +34,11 @@ Reader::ReadError::ReadError(const format& f)
 
 //-----------------------------------------------------------------------------
 
+Reader::Reader()
+  : m_read_only_main_variation(false)
+{
+}
+
 Reader::~Reader() throw()
 {
 }
@@ -95,6 +100,7 @@ char Reader::peek()
 void Reader::read(istream& in)
 {
     m_in = &in;
+    m_is_in_main_variation = true;
     consume_whitespace();
     read_tree(true);
 }
@@ -131,7 +137,8 @@ void Reader::read_expected(char expected)
 void Reader::read_node(bool is_root)
 {
     read_expected(';');
-    on_begin_node(is_root);
+    if (! m_read_only_main_variation || m_is_in_main_variation)
+        on_begin_node(is_root);
     while (true)
     {
         consume_whitespace();
@@ -140,36 +147,62 @@ void Reader::read_node(bool is_root)
             break;
         read_property();
     }
-    on_end_node();
+    if (! m_read_only_main_variation || m_is_in_main_variation)
+        on_end_node();
 }
 
 void Reader::read_property()
 {
-    string identifier;
-    while (peek() != '[')
-        identifier += read_char();
-    m_values.clear();
-    while (peek() == '[')
+    if (m_read_only_main_variation && ! m_is_in_main_variation)
     {
-        consume_char('[');
-        string value;
-        bool escape = false;
-        while (peek() != ']' || escape)
+        while (peek() != '[')
+            read_char();
+        while (peek() == '[')
         {
-            char c = read_char();
-            if (c == '\\' && ! escape)
+            consume_char('[');
+            bool escape = false;
+            while (peek() != ']' || escape)
             {
-                escape = true;
-                continue;
+                char c = read_char();
+                if (c == '\\' && ! escape)
+                {
+                    escape = true;
+                    continue;
+                }
+                escape = false;
             }
-            escape = false;
-            value += c;
+            consume_char(']');
+            consume_whitespace();
         }
-        consume_char(']');
-        consume_whitespace();
-        m_values.push_back(value);
     }
-    on_property(identifier, m_values);
+    else
+    {
+        m_identifier.clear();
+        while (peek() != '[')
+            m_identifier += read_char();
+        m_values.clear();
+        while (peek() == '[')
+        {
+            consume_char('[');
+            m_value.clear();
+            bool escape = false;
+            while (peek() != ']' || escape)
+            {
+                char c = read_char();
+                if (c == '\\' && ! escape)
+                {
+                    escape = true;
+                    continue;
+                }
+                escape = false;
+                m_value += c;
+            }
+            consume_char(']');
+            consume_whitespace();
+            m_values.push_back(m_value);
+        }
+        on_property(m_identifier, m_values);
+    }
 }
 
 void Reader::read_tree(bool is_root)
@@ -192,6 +225,7 @@ void Reader::read_tree(bool is_root)
             read_tree(false);
     }
     read_expected(')');
+    m_is_in_main_variation = false;
     on_end_tree(was_root);
 }
 

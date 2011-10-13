@@ -186,6 +186,7 @@ int main(int argc, char* argv[])
     }
 
     TreeReader reader;
+    reader.set_read_only_main_variation(true);
     try
     {
         reader.read(files[0]);

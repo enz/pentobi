@@ -32,6 +32,8 @@ public:
         ReadError(const format& f);
     };
 
+    Reader();
+
     virtual ~Reader() throw();
 
     virtual void on_begin_tree(bool is_root);
@@ -45,6 +47,10 @@ public:
     virtual void on_property(const string& identifier,
                              const vector<string>& values);
 
+    /** Read only the main variation.
+        Reduces CPU time and memory if only the main variation is needed. */
+    void set_read_only_main_variation(bool enable);
+
     /** @throws ReadError */
     void read(istream& in);
 
@@ -52,7 +58,19 @@ public:
     void read(const path& file);
 
 private:
+    bool m_read_only_main_variation;
+
+    bool m_is_in_main_variation;
+
     istream* m_in;
+
+    /** Local variable in read_property().
+        Reused for efficiency. */
+    string m_identifier;
+
+    /** Local variable in read_property().
+        Reused for efficiency. */
+    string m_value;
 
     /** Local variable in read_property().
         Reused for efficiency. */
@@ -74,6 +92,11 @@ private:
 
     void read_tree(bool is_root);
 };
+
+inline void Reader::set_read_only_main_variation(bool enable)
+{
+    m_read_only_main_variation = enable;
+}
 
 //-----------------------------------------------------------------------------
 
