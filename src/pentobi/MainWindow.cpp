@@ -1215,9 +1215,10 @@ void MainWindow::forward10()
     const Node* node = &m_game->get_current();
     for (unsigned int i = 0; i < 10; ++i)
     {
-        node = node->get_first_child_or_null();
-        if (node == 0)
+        const Node* child = node->get_first_child_or_null();
+        if (child == 0)
             break;
+        node = child;
     }
     gotoNode(*node);
 }
