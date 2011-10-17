@@ -1108,7 +1108,7 @@ void MainWindow::exportAsciiArt()
         return;
     ofstream out(file.toStdString().c_str());
     const Board& bd = m_game->get_board();
-    out << bd;
+    bd.write(out, false);
     if (! out)
         showError(strerror(errno));
 }

@@ -107,7 +107,7 @@ public:
 
     void set_to_play(Color c);
 
-    void write(ostream& out) const;
+    void write(ostream& out, bool mark_last_move = true) const;
 
     unsigned int get_nu_moves() const;
 

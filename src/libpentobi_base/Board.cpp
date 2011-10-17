@@ -436,7 +436,7 @@ void Board::undo()
         play(moves[i]);
 }
 
-void Board::write(ostream& out) const
+void Board::write(ostream& out, bool mark_last_move) const
 {
     ColorMap<char> color_char;
     color_char[Color(0)] = 'X';
@@ -470,6 +470,16 @@ void Board::write(ostream& out) const
         color_esc_sequence_text[Color(2)] = "\x1B[1;31m";
         color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
     }
+    ColorMove last_mv = ColorMove::null();
+    unsigned int n = get_nu_moves();
+    while (n > 0)
+    {
+        --n;
+        last_mv = get_move(n);
+        if (! last_mv.move.is_pass())
+            break;
+    }
+    bool last_mv_marked = false;
     write_x_coord(out, m_sz);
     for (unsigned int y = m_sz - 1; ; --y)
     {
@@ -478,14 +488,29 @@ void Board::write(ostream& out) const
         out << (y + 1) << ' ';
         for (unsigned int x = 0; x < m_sz; ++x)
         {
+            Point p(x, y);
+            PointState s = get_point_state(p);
             if (x > 0)
             {
                 if (color_output)
-                    out << "\x1B[47m";
-                out << ' ';
+                    out << "\x1B[1;37;47m";
+                if (mark_last_move && ! last_mv_marked && ! last_mv.is_null()
+                    && get_point_state(Point(x - 1, y)) != last_mv.color
+                    && get_played_move(Point(x, y)) == last_mv.move)
+                {
+                    out << '>';
+                    last_mv_marked = true;
+                }
+                else if (mark_last_move && ! last_mv_marked
+                         && ! last_mv.is_null() && s != last_mv.color
+                         && get_played_move(Point(x - 1, y)) == last_mv.move)
+                {
+                    out << '<';
+                    last_mv_marked = true;
+                }
+                else
+                    out << ' ';
             }
-            Point p(x, y);
-            PointState s = get_point_state(p);
             if (s.is_empty())
             {
                 Color color;
