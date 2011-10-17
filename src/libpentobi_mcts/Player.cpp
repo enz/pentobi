@@ -110,7 +110,7 @@ Move Player::genmove(Color c)
                 delta = 0.015;
             else if (m_level >= 6)
                 delta = 0.01;
-            mv = m_book.genmove(m_bd, c, delta, 4 * delta);
+            mv = m_book.genmove(m_bd, c, delta, 2.5 * delta);
             if (! mv.is_null())
                 return mv;
         }
