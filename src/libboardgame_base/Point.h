@@ -698,8 +698,7 @@ struct hash<libboardgame_base::Point<S, T>>
 
 //-----------------------------------------------------------------------------
 
-namespace libboardgame {
-namespace util {
+namespace libboardgame_util {
 
 template<unsigned int S, class T>
 inline bool is_null(const libboardgame_base::Point<S, T>& p)
@@ -713,8 +712,7 @@ inline void set_null(libboardgame_base::Point<S, T>& p)
     p = libboardgame_base::Point<S, T>::null();
 }
 
-} // namespace util
-} // namespace libboardgame
+} // namespace libboardgame_util
 
 //-----------------------------------------------------------------------------
 
