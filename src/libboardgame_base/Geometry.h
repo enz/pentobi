@@ -55,16 +55,6 @@ public:
 
     unsigned int get_height() const;
 
-    /** Is a coordinate a handicap line in Go?
-        Only used for the game of Go on board sizes with well-defined handicap
-        locations. */
-    bool is_handicap_line(unsigned int i) const;
-
-    /** Is a point a handicap point in Go?
-        Only used for the game of Go on board sizes with well-defined handicap
-        locations. */
-    bool is_handicap_point(Point p) const;
-
     /** Get list of on-board adjacent points (up to four) */
     const NullTermList<Point, 4>& get_adj(Point p) const;
 
@@ -87,12 +77,6 @@ private:
     unsigned int m_width;
 
     unsigned int m_height;
-
-    unsigned int m_handicap_line_1;
-
-    unsigned int m_handicap_line_2;
-
-    unsigned int m_handicap_line_3;
 
     bool m_is_onboard[Point::range];
 
@@ -203,25 +187,6 @@ Geometry<P>::Geometry(unsigned int width, unsigned int height)
         }
     m_all_points_begin = m_all_points.get();
     m_all_points_end = all_points_end;
-    if (width == height && width >= 13)
-    {
-        m_handicap_line_1 = 3;
-        m_handicap_line_3 = width - 4;
-    }
-    else if (width == height && width >= 7)
-    {
-        m_handicap_line_1 = 2;
-        m_handicap_line_3 = width - 3;
-    }
-    else
-    {
-        m_handicap_line_1 = -1;
-        m_handicap_line_3 = -1;
-    }
-    if (width == height && width >= 9 && width % 2 != 0)
-        m_handicap_line_2 = width / 2;
-    else
-        m_handicap_line_2 = -1;
 }
 
 template<class P>
@@ -277,19 +242,6 @@ template<class P>
 inline unsigned int Geometry<P>::get_width() const
 {
     return m_width;
-}
-
-template<class P>
-inline bool Geometry<P>::is_handicap_line(unsigned int i) const
-{
-    return (i == m_handicap_line_1 || i == m_handicap_line_2
-            || i == m_handicap_line_3);
-}
-
-template<class P>
-inline bool Geometry<P>::is_handicap_point(Point p) const
-{
-    return is_handicap_line(p.get_x()) && is_handicap_line(p.get_y());
 }
 
 template<class P>
