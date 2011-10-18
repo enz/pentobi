@@ -62,6 +62,8 @@ public:
     const vector<Move>& get_moves(unsigned int piece, Point p,
                                   unsigned int adj_status_index = 0) const;
 
+    const Geometry& get_geometry() const;
+
 private:
     unsigned int m_sz;
 
@@ -109,6 +111,11 @@ inline unsigned int BoardConst::get_adj_status_index(bool s0, bool s1, bool s2,
     if (s3)
         i |= (1 << 3);
     return i;
+}
+
+inline const Geometry& BoardConst::get_geometry() const
+{
+    return m_geometry;
 }
 
 inline const MoveInfo& BoardConst::get_move_info(Move move) const

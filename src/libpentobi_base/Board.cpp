@@ -316,7 +316,7 @@ void Board::init(GameVariant game_variant)
         m_nu_colors = 2;
     }
     m_board_const = &BoardConst::get(m_sz);
-    m_geometry = Geometry::get(m_sz, m_sz);
+    m_geometry = &m_board_const->get_geometry();
     m_point_state.init(*m_geometry);
     m_point_state.fill_all(PointStateExt::offboard());
     m_point_state.fill_onboard(PointState::empty());
