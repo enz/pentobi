@@ -56,8 +56,6 @@ public:
 private:
     GameVariant m_game_variant;
 
-    unsigned int m_sz;
-
     const BoardConst* m_board_const;
 };
 

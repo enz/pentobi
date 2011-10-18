@@ -181,22 +181,23 @@ void Tree::init(GameVariant game_variant)
     libboardgame_sgf::Tree::init();
     m_game_variant = game_variant;
     const Node& root = get_root();
+    unsigned int sz;
     switch (game_variant)
     {
     case game_variant_classic:
-        m_sz = 20;
+        sz = 20;
         set_property(root, "GM", "Blokus");
         break;
     case game_variant_classic_2:
-        m_sz = 20;
+        sz = 20;
         set_property(root, "GM", "Blokus Two-Player");
         break;
     case game_variant_duo:
-        m_sz = 14;
+        sz = 14;
         set_property(root, "GM", "Blokus Duo");
         break;
     }
-    m_board_const = &BoardConst::get(m_sz);
+    m_board_const = &BoardConst::get(sz);
     clear_modified();
 }
 
@@ -224,9 +225,8 @@ void Tree::init(unique_ptr<Node>& root)
     else
         throw InvalidPropertyValue("GM", game);
     libboardgame_sgf::Tree::init(root);
-    m_sz = sz;
     m_game_variant = game_variant;
-    m_board_const = &BoardConst::get(m_sz);
+    m_board_const = &BoardConst::get(sz);
 }
 
 void Tree::set_move(const Node& node, Color c, Move mv)
