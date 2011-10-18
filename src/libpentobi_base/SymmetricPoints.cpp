@@ -20,9 +20,10 @@ void SymmetricPoints::init(const Geometry& geometry)
 {
     m_symmetric_point.init(geometry);
     Transform transform(Transform::rotate_180);
-    unsigned int sz = geometry.get_size();
+    unsigned int width = geometry.get_width();
+    unsigned int height = geometry.get_height();
     for (Geometry::Iterator i(geometry); i; ++i)
-        m_symmetric_point[*i] = transform.get_transformed(*i, sz);
+        m_symmetric_point[*i] = transform.get_transformed(*i, width, height);
 }
 
 //-----------------------------------------------------------------------------

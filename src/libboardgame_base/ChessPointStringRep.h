@@ -19,9 +19,13 @@ using namespace std;
     I is traditionally not used to avoid confusion with the letter J). */
 struct ChessPointStringRep
 {
-    static const unsigned int max_size = 26;
+    static const unsigned int max_width = 26;
 
-    static bool read(istream& in, unsigned int max_size, unsigned int& x,
+    /** Limited due to current implementation. */
+    static const unsigned int max_height = 29;
+
+    static bool read(istream& in, unsigned int max_width,
+                     unsigned int max_height, unsigned int& x,
                      unsigned int& y);
 
     static void write(ostream& out, unsigned int x, unsigned int y);

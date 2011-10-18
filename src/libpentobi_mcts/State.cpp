@@ -79,7 +79,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       piece_value(bd)
 {
     unsigned int sz = 20;
-    const Geometry* geometry = Geometry::get(sz);
+    const Geometry* geometry = Geometry::get(sz, sz);
     LIBBOARDGAME_ASSERT(sz % 2 == 0);
     unsigned int center1 = sz / 2 - 1;
     unsigned int center2 = center1 + 1;

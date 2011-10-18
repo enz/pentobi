@@ -61,7 +61,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     }
     else
         return false;
-    const Geometry* geometry = Geometry::get(sz);
+    const Geometry* geometry = Geometry::get(sz, sz);
     pointState.init(*geometry);
     pointState.fill_onboard(PointState::empty());
     const Node* node = &root;

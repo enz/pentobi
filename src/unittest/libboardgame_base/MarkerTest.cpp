@@ -16,7 +16,7 @@ using libboardgame_base::GoPointStringRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, GoPointStringRep> Point;
+typedef libboardgame_base::Point<19, 19, GoPointStringRep> Point;
 typedef libboardgame_base::Marker<Point> Marker;
 
 //-----------------------------------------------------------------------------

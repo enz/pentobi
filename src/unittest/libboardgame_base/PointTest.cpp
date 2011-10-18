@@ -16,7 +16,7 @@ using libboardgame_base::GoPointStringRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, GoPointStringRep> Point;
+typedef libboardgame_base::Point<19, 19, GoPointStringRep> Point;
 
 //-----------------------------------------------------------------------------
 
@@ -67,19 +67,20 @@ LIBBOARDGAME_TEST_CASE(boardgame_point_get_up)
 
 LIBBOARDGAME_TEST_CASE(boardgame_point_is_onboard)
 {
-    unsigned int max = Point::max_size - 1;
+    unsigned int max_x = Point::max_width - 1;
+    unsigned int max_y = Point::max_height - 1;
     LIBBOARDGAME_CHECK(Point(0, 0).is_onboard());
     LIBBOARDGAME_CHECK(! Point(0, 0).get_left().is_onboard());
     LIBBOARDGAME_CHECK(! Point(0, 0).get_down().is_onboard());
-    LIBBOARDGAME_CHECK(Point(0, max).is_onboard());
-    LIBBOARDGAME_CHECK(! Point(0, max).get_left().is_onboard());
-    LIBBOARDGAME_CHECK(! Point(0, max).get_up().is_onboard());
-    LIBBOARDGAME_CHECK(Point(max, 0).is_onboard());
-    LIBBOARDGAME_CHECK(! Point(max, 0).get_down().is_onboard());
-    LIBBOARDGAME_CHECK(! Point(max, 0).get_right().is_onboard());
-    LIBBOARDGAME_CHECK(Point(max, max).is_onboard());
-    LIBBOARDGAME_CHECK(! Point(max, max).get_up().is_onboard());
-    LIBBOARDGAME_CHECK(! Point(max, max).get_right().is_onboard());
+    LIBBOARDGAME_CHECK(Point(0, max_y).is_onboard());
+    LIBBOARDGAME_CHECK(! Point(0, max_y).get_left().is_onboard());
+    LIBBOARDGAME_CHECK(! Point(0, max_y).get_up().is_onboard());
+    LIBBOARDGAME_CHECK(Point(max_x, 0).is_onboard());
+    LIBBOARDGAME_CHECK(! Point(max_x, 0).get_down().is_onboard());
+    LIBBOARDGAME_CHECK(! Point(max_x, 0).get_right().is_onboard());
+    LIBBOARDGAME_CHECK(Point(max_x, max_y).is_onboard());
+    LIBBOARDGAME_CHECK(! Point(max_x, max_y).get_up().is_onboard());
+    LIBBOARDGAME_CHECK(! Point(max_x, max_y).get_right().is_onboard());
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_point_stream_output)

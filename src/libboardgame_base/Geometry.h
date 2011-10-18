@@ -47,11 +47,13 @@ public:
         const Point* m_end;
     };
 
-    static const Geometry* get(unsigned int sz);
+    static const Geometry* get(unsigned int width, unsigned int height);
 
     bool is_onboard(Point p) const;
 
-    unsigned int get_size() const;
+    unsigned int get_width() const;
+
+    unsigned int get_height() const;
 
     /** Is a coordinate a handicap line in Go?
         Only used for the game of Go on board sizes with well-defined handicap
@@ -79,9 +81,12 @@ public:
     unsigned int get_second_dist_to_edge(Point p) const;
 
 private:
-    static auto_ptr<Geometry> s_geometry[Point::max_size + 1];
+    static auto_ptr<Geometry>
+                        s_geometry[Point::max_width + 1][Point::max_height + 1];
 
-    unsigned int m_sz;
+    unsigned int m_width;
+
+    unsigned int m_height;
 
     unsigned int m_handicap_line_1;
 
@@ -107,11 +112,12 @@ private:
 
     NullTermList<Point, 8> m_adj_diag[Point::range];
 
-    Geometry(unsigned int sz);
+    Geometry(unsigned int width, unsigned int height);
 };
 
 template<class P>
-auto_ptr<Geometry<P>> Geometry<P>::s_geometry[P::max_size + 1];
+auto_ptr<Geometry<P>>
+                   Geometry<P>::s_geometry[P::max_width + 1][P::max_height + 1];
 
 template<class P>
 inline Geometry<P>::Iterator::Iterator(const Geometry& g)
@@ -148,22 +154,24 @@ inline void Geometry<P>::Iterator::operator++()
 }
 
 template<class P>
-Geometry<P>::Geometry(unsigned int sz)
-    : m_sz(sz),
-      m_all_points(new Point[sz * sz])
+Geometry<P>::Geometry(unsigned int width, unsigned int height)
+    : m_width(width),
+      m_height(height),
+      m_all_points(new Point[width * height])
 {
-    LIBBOARDGAME_ASSERT(sz >= 1 && sz <= Point::max_size);
+    LIBBOARDGAME_ASSERT(width >= 1 && width <= Point::max_width);
+    LIBBOARDGAME_ASSERT(height >= 1 && height <= Point::max_height);
     fill(m_is_onboard, m_is_onboard + Point::range, false);
     Point* all_points_end = m_all_points.get();
-    for (unsigned int y = 0; y < sz; ++y)
-        for (unsigned int x = 0; x < sz; ++x)
+    for (unsigned int y = 0; y < height; ++y)
+        for (unsigned int x = 0; x < width; ++x)
         {
             Point p(x, y);
             *(all_points_end++) = p;
             m_is_onboard[p.to_int()] = true;
         }
-    for (unsigned int y = 0; y < sz; ++y)
-        for (unsigned int x = 0; x < sz; ++x)
+    for (unsigned int y = 0; y < height; ++y)
+        for (unsigned int x = 0; x < width; ++x)
         {
             Point p(x, y);
             unsigned int i = p.to_int();
@@ -188,40 +196,40 @@ Geometry<P>::Geometry(unsigned int sz)
                         adj_diag.push_back(p_adj_diag););
                 adj_diag.finish();
             }
-            unsigned int dist_to_edge_x = min(sz - x - 1, x);
-            unsigned int dist_to_edge_y = min(sz - y - 1, y);
+            unsigned int dist_to_edge_x = min(width - x - 1, x);
+            unsigned int dist_to_edge_y = min(height - y - 1, y);
             m_dist_to_edge[i] = min(dist_to_edge_x, dist_to_edge_y);
             m_second_dist_to_edge[i] = max(dist_to_edge_x, dist_to_edge_y);
         }
     m_all_points_begin = m_all_points.get();
     m_all_points_end = all_points_end;
-    if (sz >= 13)
+    if (width == height && width >= 13)
     {
         m_handicap_line_1 = 3;
-        m_handicap_line_3 = sz - 4;
+        m_handicap_line_3 = width - 4;
     }
-    else if (sz >= 7)
+    else if (width == height && width >= 7)
     {
         m_handicap_line_1 = 2;
-        m_handicap_line_3 = sz - 3;
+        m_handicap_line_3 = width - 3;
     }
     else
     {
         m_handicap_line_1 = -1;
         m_handicap_line_3 = -1;
     }
-    if (sz >= 9 && sz % 2 != 0)
-        m_handicap_line_2 = sz / 2;
+    if (width == height && width >= 9 && width % 2 != 0)
+        m_handicap_line_2 = width / 2;
     else
         m_handicap_line_2 = -1;
 }
 
 template<class P>
-const Geometry<P>* Geometry<P>::get(unsigned int sz)
+const Geometry<P>* Geometry<P>::get(unsigned int width, unsigned int height)
 {
-    if (s_geometry[sz].get() == 0)
-        s_geometry[sz].reset(new Geometry(sz));
-    return s_geometry[sz].get();
+    if (s_geometry[width][height].get() == 0)
+        s_geometry[width][height].reset(new Geometry(width, height));
+    return s_geometry[width][height].get();
 }
 
 template<class P>
@@ -253,6 +261,12 @@ inline unsigned int Geometry<P>::get_dist_to_edge(Point p) const
 }
 
 template<class P>
+inline unsigned int Geometry<P>::get_height() const
+{
+    return m_height;
+}
+
+template<class P>
 inline unsigned int Geometry<P>::get_second_dist_to_edge(Point p) const
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
@@ -260,15 +274,14 @@ inline unsigned int Geometry<P>::get_second_dist_to_edge(Point p) const
 }
 
 template<class P>
-inline unsigned int Geometry<P>::get_size() const
+inline unsigned int Geometry<P>::get_width() const
 {
-    return m_sz;
+    return m_width;
 }
 
 template<class P>
 inline bool Geometry<P>::is_handicap_line(unsigned int i) const
 {
-    LIBBOARDGAME_ASSERT(i < Point::max_size);
     return (i == m_handicap_line_1 || i == m_handicap_line_2
             || i == m_handicap_line_3);
 }

@@ -17,7 +17,7 @@ using libboardgame_base::NullTermList;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, ChessPointStringRep> Point;
+typedef libboardgame_base::Point<19, 19, ChessPointStringRep> Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::PointList<Point> PointList;
 
@@ -25,7 +25,7 @@ typedef libboardgame_base::PointList<Point> PointList;
 
 LIBBOARDGAME_TEST_CASE(boardgame_geometry_get_adj_diag)
 {
-    const Geometry* g = Geometry::get(9);
+    const Geometry* g = Geometry::get(9, 9);
     PointList l;
     for (NullTermList<Point, 8>::Iterator i(g->get_adj_diag(Point("B9")));
          i; ++i)
@@ -40,7 +40,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_geometry_get_adj_diag)
 
 LIBBOARDGAME_TEST_CASE(boardgame_geometry_iterate)
 {
-    const Geometry* g = Geometry::get(3);
+    const Geometry* g = Geometry::get(3, 3);
     Geometry::Iterator i(*g);
     LIBBOARDGAME_CHECK(i);
     LIBBOARDGAME_CHECK_EQUAL(Point(0, 0), *i);
@@ -74,7 +74,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_geometry_iterate)
 
 LIBBOARDGAME_TEST_CASE(boardgame_geometry_dist_to_edge)
 {
-    const Geometry* g = Geometry::get(9);
+    const Geometry* g = Geometry::get(9, 9);
     LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(3, 0)), 0u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(3, 2)), 2u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(6, 8)), 0u);
@@ -83,7 +83,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_geometry_dist_to_edge)
 
 LIBBOARDGAME_TEST_CASE(boardgame_geometry_second_dist_to_edge)
 {
-    const Geometry* g = Geometry::get(9);
+    const Geometry* g = Geometry::get(9, 9);
     LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(3, 0)), 3u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(3, 2)), 3u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(6, 8)), 2u);

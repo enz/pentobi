@@ -19,9 +19,13 @@ using namespace std;
     with the letter J. */
 struct GoPointStringRep
 {
-    static const unsigned int max_size = 25;
+    static const unsigned int max_width = 25;
 
-    static bool read(istream& in, unsigned int max_size, unsigned int& x,
+    /** Limited due to current implementation. */
+    static const unsigned int max_height = 19;
+
+    static bool read(istream& in, unsigned int max_width,
+                     unsigned int max_height, unsigned int& x,
                      unsigned int& y);
 
     static void write(ostream& out, unsigned int x, unsigned int y);

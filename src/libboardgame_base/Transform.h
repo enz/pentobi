@@ -43,9 +43,13 @@ public:
 
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    /** @tparam P An instance of class Point. */
+    /** Transform a point.
+        @tparam P An instance of class Point.
+        @return The transformed point or Point::null() if the transformed point
+        would be outside the current geometry given by height and width. */
     template<class P>
-    P get_transformed(const P& p, unsigned int sz) const;
+    P get_transformed(const P& p, unsigned int width,
+                      unsigned int height) const;
 
     /** @tparam I An iterator of a container with elements of type CoordPoint */
     template<class I>
@@ -81,28 +85,51 @@ inline bool Transform::operator!=(Transform transform) const
 }
 
 template<class P>
-P Transform::get_transformed(const P& p, unsigned int sz) const
+P Transform::get_transformed(const P& p, unsigned int width,
+                             unsigned int height) const
 {
+    unsigned int x;
+    unsigned int y;
     switch (m_type)
     {
     case identity:
-        return p;
+        x = p.get_x();
+        y = p.get_y();
+        break;
     case rotate_90:
-        return P(p.get_y(), sz - p.get_x() - 1);
+        x = p.get_y();
+        y = width - p.get_x() - 1;
+        break;
     case rotate_180:
-        return P(sz - p.get_x() - 1, sz - p.get_y() - 1);
+        x = width - p.get_x() - 1;
+        y = height - p.get_y() - 1;
+        break;
     case rotate_270:
-        return P(sz - p.get_y() - 1, p.get_x());
+        x = height - p.get_y() - 1;
+        y = p.get_x();
+        break;
     case mirror:
-        return P(sz - p.get_x() - 1, p.get_y());
+        x = width - p.get_x() - 1;
+        y = p.get_y();
+        break;
     case rotate_90_mirror:
-        return P(p.get_y(), p.get_x());
+        x = p.get_y();
+        y = p.get_x();
+        break;
     case rotate_180_mirror:
-        return P(p.get_x(), sz - p.get_y() - 1);
+        x = p.get_x();
+        y = height - p.get_y() - 1;
+        break;
     default:
         LIBBOARDGAME_ASSERT(m_type == rotate_270_mirror);
-        return P(sz - p.get_y() - 1, sz - p.get_x() - 1);
+        x = height - p.get_y() - 1;
+        y = width - p.get_x() - 1;
+        break;
     }
+    if (x < width && y < height)
+        return P(x, y);
+    else
+        return P::null();
 }
 
 inline bool Transform::is_identity() const

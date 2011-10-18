@@ -18,8 +18,9 @@ using boost::algorithm::to_lower;
 
 //-----------------------------------------------------------------------------
 
-bool GoPointStringRep::read(istream& in, unsigned int max_size,
-                            unsigned int& x, unsigned int& y)
+bool GoPointStringRep::read(istream& in, unsigned int max_width,
+                            unsigned int max_height, unsigned int& x,
+                            unsigned int& y)
 {
     string s;
     in >> s;
@@ -31,12 +32,12 @@ bool GoPointStringRep::read(istream& in, unsigned int max_size,
         x = s[0] - 'a';
         if (s[0] >= 'j')
             --x;
-        if (x < max_size)
+        if (x < max_width)
         {
             y = s[1] - '1';
             if (len == 3)
                 y = (y + 1) * 10 + (s[2] - '1');
-            if (y < max_size)
+            if (y < max_height)
                 return true;
         }
     }

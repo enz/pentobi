@@ -217,7 +217,7 @@ vector<Piece> create_pieces()
 
 BoardConst::BoardConst(unsigned int sz)
     : m_sz(sz),
-      m_geometry(*Geometry::get(sz))
+      m_geometry(*Geometry::get(sz, sz))
 {
     m_pieces = create_pieces();
     for (int s0 = 0; s0 <= 1; ++s0)
@@ -322,7 +322,7 @@ void BoardConst::create_moves(unsigned int piece)
 
 const BoardConst& BoardConst::get(unsigned int size)
 {
-    static array<unique_ptr<BoardConst>, Point::max_size + 1> the_board_const;
+    static unique_ptr<BoardConst> the_board_const[Point::max_width + 1];
     if (the_board_const[size].get() == 0)
         the_board_const[size].reset(new BoardConst(size));
     return *the_board_const[size];

@@ -33,8 +33,8 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_selectedPiece(0),
       m_isMoveShown(false)
 {
-    setMinimumWidth(14 * (Point::max_size + 2));
-    setMinimumHeight(14 * (Point::max_size + 2));
+    setMinimumWidth(14 * (Point::max_width + 2));
+    setMinimumHeight(14 * (Point::max_height + 2));
     connect(&m_currentMoveShownAnimationTimer, SIGNAL(timeout()),
             this, SLOT(showMoveAnimation()));
 }
@@ -67,7 +67,7 @@ void GuiBoard::copyFromBoard(const Board& bd)
 {
     m_gameVariant = bd.get_game_variant();
     if (! m_isInitialized
-        || m_bd.get_size() != m_pointState.get_geometry().get_size())
+        || m_bd.get_size() != m_pointState.get_geometry().get_width())
     {
         m_isInitialized = true;
         m_pointState = bd.get_grid();

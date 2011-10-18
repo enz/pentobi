@@ -83,8 +83,10 @@ bool Grid<P, T>::operator==(const Grid& grid) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(grid.is_initialized());
-    LIBBOARDGAME_ASSERT(m_geometry->get_size()
-                        == grid.get_geometry().get_size());
+    LIBBOARDGAME_ASSERT(m_geometry->get_width()
+                        == grid.get_geometry().get_width());
+    LIBBOARDGAME_ASSERT(m_geometry->get_height()
+                        == grid.get_geometry().get_height());
     for (typename Geometry<P>::Iterator i(*m_geometry); i; ++i)
         if (operator[](*i) != grid[*i])
             return false;
@@ -153,13 +155,14 @@ ostream& Grid<P, T>::write(ostream& out) const
         buffer << operator[](*i);
         max_len = max(max_len, buffer.str().length());
     }
-    unsigned int sz = m_geometry->get_size();
-    for (unsigned int y = sz - 1; ; --y)
+    unsigned int width = m_geometry->get_width();
+    unsigned int height = m_geometry->get_height();
+    for (unsigned int y = height - 1; ; --y)
     {
-        for (unsigned int x = 0; x < sz; ++x)
+        for (unsigned int x = 0; x < width; ++x)
         {
             out << setw(int(max_len)) << operator[](Point(x, y));
-            if (x < sz - 1)
+            if (x < width - 1)
                 out << ' ';
         }
         out << '\n';

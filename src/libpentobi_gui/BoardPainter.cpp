@@ -150,7 +150,9 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                          const Grid<MarkupFlags>* markupFlags)
 {
     m_hasPainted = true;
-    m_sz = static_cast<int>(pointState.get_geometry().get_size());
+    const Geometry& geometry = pointState.get_geometry();
+    LIBBOARDGAME_ASSERT(geometry.get_width() == geometry.get_height());
+    m_sz = static_cast<int>(geometry.get_width());
     if (m_drawCoordLabels)
         m_squareSize = min(width, height) / (m_sz + 2);
     else
@@ -182,7 +184,6 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
             drawLabel(painter, m_sz, y, label, false, true);
         }
     }
-    const Geometry& geometry = pointState.get_geometry();
     for (GeometryIterator i(geometry); i; ++i)
     {
         int x = i->get_x();

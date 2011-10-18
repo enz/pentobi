@@ -14,7 +14,7 @@ using libboardgame_base::ChessPointStringRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<20, ChessPointStringRep> Point;
+typedef libboardgame_base::Point<20, 20, ChessPointStringRep> Point;
 
 typedef Point::Direction Direction;
 
