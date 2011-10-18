@@ -60,6 +60,9 @@ struct SharedConst
     /** Distance to center heuristic for 20x20 boards. */
     Grid<unsigned int> m_dist_to_center;
 
+    /** Lookup table for symmetric points (only used in Duo). */
+    SymmetricPoints m_symmetric_points;
+
     SharedConst(const Board& bd, const Color& to_play);
 };
 
@@ -177,8 +180,6 @@ private:
     PointList m_local_points;
 
     Grid<int> m_local_points_marker;
-
-    SymmetricPoints m_symmetric_points;
 
     RandomGenerator m_random;
 

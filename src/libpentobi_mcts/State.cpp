@@ -93,6 +93,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
                 (unsigned int)(sqrt(float(dist_x * dist_x + dist_y * dist_y)));
         }
     //log() << "Dist to center:\n" << m_dist_to_center;
+    m_symmetric_points.init(*Geometry::get(14, 14));
 }
 
 //-----------------------------------------------------------------------------
@@ -464,8 +465,9 @@ void State::init_symmetry_info()
         // position is symmetric.
         for (BoardIterator i(m_bd); i; ++i)
         {
+            Point symm_p = m_shared_const.m_symmetric_points[*i];
             PointState s1 = m_bd.get_point_state(*i);
-            PointState s2 = m_bd.get_point_state(m_symmetric_points[*i]);
+            PointState s2 = m_bd.get_point_state(symm_p);
             if (s1 != get_symmetric_state(s2))
             {
                 m_is_symmetry_broken = true;
@@ -499,16 +501,16 @@ void State::init_symmetry_info()
             points = &m_bd.get_move_points(last_mv.move);
         for (BoardIterator i(m_bd); i; ++i)
         {
-            Point sym_p = m_symmetric_points[*i];
+            Point symm_p = m_shared_const.m_symmetric_points[*i];
             PointState s1 = m_bd.get_point_state(*i);
-            PointState s2 = m_bd.get_point_state(sym_p);
+            PointState s2 = m_bd.get_point_state(symm_p);
             if (s1 != get_symmetric_state(s2))
             {
                 if (points != 0)
                 {
                     if ((points->contains(*i)
                          && s1 == Color(0) && s2.is_empty())
-                        || (points->contains(sym_p)
+                        || (points->contains(symm_p)
                             && s1.is_empty() && s2 == Color(0)))
                         continue;
                 }
@@ -569,7 +571,6 @@ void State::start_search()
 {
     const Board& bd = m_shared_const.board;
     const Geometry& geometry = bd.get_geometry();
-    m_symmetric_points.init(geometry);
     m_local_points_marker.init(geometry, 0);
     m_nu_moves_initial = bd.get_nu_moves();
     m_score_modification_factor =
@@ -690,11 +691,14 @@ void State::update_symmetry_info(Move mv)
         // First player to play: Check that all symmetric points of the last
         // move of the second player are occupied by the first player
         for (auto i = points.begin(); i != points.end(); ++i)
-            if (m_bd.get_point_state(m_symmetric_points[*i]) != Color(0))
+        {
+            Point symm_p = m_shared_const.m_symmetric_points[*i];
+            if (m_bd.get_point_state(symm_p) != Color(0))
             {
                 m_is_symmetry_broken = true;
                 return;
             }
+        }
     }
     else
     {
@@ -702,11 +706,14 @@ void State::update_symmetry_info(Move mv)
         // move of the first player are empty (i.e. the second can play there
         // to preserve the symmetry)
         for (auto i = points.begin(); i != points.end(); ++i)
-            if (! m_bd.get_point_state(m_symmetric_points[*i]).is_empty())
+        {
+            Point symm_p = m_shared_const.m_symmetric_points[*i];
+            if (! m_bd.get_point_state(symm_p).is_empty())
             {
                 m_is_symmetry_broken = true;
                 return;
             }
+        }
     }
 }
 
