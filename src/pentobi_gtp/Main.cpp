@@ -126,7 +126,7 @@ int main(int argc, char** argv)
                  || game_variant_string == "c2")
             game_variant = game_variant_classic_2;
         else
-            throw Exception(format("invalid game variant '%1'")
+            throw Exception(format("invalid game variant '%1%'")
                             % game_variant_string);
         if (vm.count("buildbook"))
         {
