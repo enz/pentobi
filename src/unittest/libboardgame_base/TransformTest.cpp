@@ -6,7 +6,7 @@
 #include <config.h>
 #endif
 
-#include "libboardgame_base/GoPointStringRep.h"
+#include "libboardgame_base/SpreadsheetStringRep.h"
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_test/Test.h"
 
@@ -17,7 +17,7 @@ using namespace libboardgame_base;
 
 LIBBOARDGAME_TEST_CASE(boardgame_transform_get_transformed_point)
 {
-    typedef Point<19, 19, GoPointStringRep> Point;
+    typedef Point<19, 19, SpreadsheetStringRep> Point;
     unsigned int sz = 9;
     Point p("B7");
     {

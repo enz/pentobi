@@ -10,6 +10,7 @@ set(unittest_libboardgame_base_STAT_SRCS
   GeometryTest.cpp
   MarkerTest.cpp
   PointTest.cpp
+  SpreadsheetStringRepTest.cpp
   TransformTest.cpp
   )
 

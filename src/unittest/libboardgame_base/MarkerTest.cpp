@@ -6,17 +6,17 @@
 #include <config.h>
 #endif
 
-#include "libboardgame_base/GoPointStringRep.h"
+#include "libboardgame_base/SpreadsheetStringRep.h"
 #include "libboardgame_base/Marker.h"
 #include "libboardgame_base/Point.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using libboardgame_base::GoPointStringRep;
+using libboardgame_base::SpreadsheetStringRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, 19, GoPointStringRep> Point;
+typedef libboardgame_base::Point<19, 19, SpreadsheetStringRep> Point;
 typedef libboardgame_base::Marker<Point> Marker;
 
 //-----------------------------------------------------------------------------

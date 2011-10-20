@@ -6,15 +6,15 @@
 #define LIBPENTOBI_BASE_POINT_H
 
 #include "libboardgame_base/Point.h"
-#include "libboardgame_base/ChessPointStringRep.h"
+#include "libboardgame_base/SpreadsheetStringRep.h"
 
 namespace libpentobi_base {
 
-using libboardgame_base::ChessPointStringRep;
+using libboardgame_base::SpreadsheetStringRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<20, 20, ChessPointStringRep> Point;
+typedef libboardgame_base::Point<20, 20, SpreadsheetStringRep> Point;
 
 typedef Point::Direction Direction;
 

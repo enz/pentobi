@@ -4,10 +4,9 @@ include_directories(
 )
 
 set(boardgame_base_STAT_SRCS
-  ChessPointStringRep.cpp
   CoordPoint.cpp
   Engine.cpp
-  GoPointStringRep.cpp
+  SpreadsheetStringRep.cpp
   Transform.cpp
   )
 

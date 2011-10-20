@@ -6,18 +6,18 @@
 #include <config.h>
 #endif
 
-#include "libboardgame_base/ChessPointStringRep.h"
+#include "libboardgame_base/SpreadsheetStringRep.h"
 #include "libboardgame_base/Geometry.h"
 #include "libboardgame_base/PointList.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using libboardgame_base::ChessPointStringRep;
+using libboardgame_base::SpreadsheetStringRep;
 using libboardgame_base::NullTermList;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, 19, ChessPointStringRep> Point;
+typedef libboardgame_base::Point<19, 19, SpreadsheetStringRep> Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::PointList<Point> PointList;
 

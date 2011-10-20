@@ -447,7 +447,7 @@ template<unsigned int W, unsigned int H, class T>
 inline Point<W, H, T>::Point(unsigned int x, unsigned int y)
 {
     LIBBOARDGAME_ASSERT(is_x_coord(x));
-    LIBBOARDGAME_ASSERT(is_x_coord(y));
+    LIBBOARDGAME_ASSERT(is_y_coord(y));
     m_i = (y + 1) * (max_width + 2) + x + 2;
 }
 
