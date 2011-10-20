@@ -192,7 +192,8 @@ void Tree::init(GameVariant game_variant)
         sz = 20;
         set_property(root, "GM", "Blokus Two-Player");
         break;
-    case game_variant_duo:
+    default:
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
         sz = 14;
         set_property(root, "GM", "Blokus Duo");
         break;
