@@ -12,12 +12,14 @@
 #include "DiagIterator.h"
 #include "Grid.h"
 #include "SymmetricPoints.h"
+#include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_util/Log.h"
 
 namespace libpentobi_base {
 
 using namespace std;
+using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_util::log;
 
@@ -217,7 +219,7 @@ vector<Piece> create_pieces()
 
 BoardConst::BoardConst(unsigned int sz)
     : m_sz(sz),
-      m_geometry(*Geometry::get(sz, sz))
+      m_geometry(*RectGeometry<Point>::get(sz, sz))
 {
     m_pieces = create_pieces();
     for (int s0 = 0; s0 <= 1; ++s0)

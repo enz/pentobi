@@ -10,6 +10,7 @@
 
 #include <cmath>
 #include "libboardgame_util/Log.h"
+#include "libboardgame_base/RectGeometry.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/DiagIterator.h"
 #include "libpentobi_base/Geometry.h"
@@ -17,6 +18,7 @@
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_mcts::Tree;
 using libboardgame_util::log;
@@ -79,7 +81,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       piece_value(bd)
 {
     unsigned int sz = 20;
-    const Geometry* geometry = Geometry::get(sz, sz);
+    const Geometry* geometry = RectGeometry<Point>::get(sz, sz);
     LIBBOARDGAME_ASSERT(sz % 2 == 0);
     unsigned int center1 = sz / 2 - 1;
     unsigned int center2 = center1 + 1;
@@ -93,7 +95,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
                 (unsigned int)(sqrt(float(dist_x * dist_x + dist_y * dist_y)));
         }
     //log() << "Dist to center:\n" << m_dist_to_center;
-    m_symmetric_points.init(*Geometry::get(14, 14));
+    m_symmetric_points.init(*RectGeometry<Point>::get(14, 14));
 }
 
 //-----------------------------------------------------------------------------

@@ -7,9 +7,9 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 set(unittest_libboardgame_base_STAT_SRCS
   Main.cpp
-  GeometryTest.cpp
   MarkerTest.cpp
   PointTest.cpp
+  RectGeometryTest.cpp
   SpreadsheetStringRepTest.cpp
   TransformTest.cpp
   )

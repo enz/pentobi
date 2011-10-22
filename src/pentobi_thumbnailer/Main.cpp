@@ -6,6 +6,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/program_options.hpp>
+#include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libpentobi_gui/BoardPainter.h"
@@ -20,6 +21,7 @@ using boost::program_options::positional_options_description;
 using boost::program_options::store;
 using boost::program_options::value;
 using boost::program_options::variables_map;
+using libboardgame_base::RectGeometry;
 using libboardgame_sgf::Node;
 using libboardgame_sgf::TreeReader;
 using libpentobi_base::game_variant_classic;
@@ -61,7 +63,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     }
     else
         return false;
-    const Geometry* geometry = Geometry::get(sz, sz);
+    const Geometry* geometry = RectGeometry<Point>::get(sz, sz);
     pointState.init(*geometry);
     pointState.fill_onboard(PointState::empty());
     const Node* node = &root;

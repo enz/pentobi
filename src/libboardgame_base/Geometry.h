@@ -5,20 +5,21 @@
 #ifndef LIBBOARDGAME_BASE_GEOMETRY_H
 #define LIBBOARDGAME_BASE_GEOMETRY_H
 
-#include <memory>
-#include <boost/scoped_array.hpp>
 #include "Point.h"
 #include "libboardgame_util/NullTermList.h"
 
 namespace libboardgame_base {
 
 using namespace std;
-using boost::scoped_array;
 using libboardgame_util::NullTermList;
 
 //-----------------------------------------------------------------------------
 
 /** Geometry data of a board with a given size.
+    This class is a base class that uses virtual functions in its constructor
+    that allow to restrict the shape of the board to a subset of the rectangle
+    and/or to define different definitions of adjacent and diagonal neighbors
+    of a point for geometries that are not a regular rectangular grid.
     @tparam P An instantiation of libboardgame_base::Point */
 template<class P>
 class Geometry
@@ -47,7 +48,7 @@ public:
         const Point* m_end;
     };
 
-    static const Geometry* get(unsigned int width, unsigned int height);
+    virtual ~Geometry();
 
     bool is_onboard(Point p) const;
 
@@ -70,10 +71,28 @@ public:
     /** Get second closest distance to first line. */
     unsigned int get_second_dist_to_edge(Point p) const;
 
-private:
-    static auto_ptr<Geometry>
-                        s_geometry[Point::max_width + 1][Point::max_height + 1];
+protected:
+    Geometry();
 
+    /** Initialize.
+        Subclasses must call this function in their constructors. */
+    void init(unsigned int width, unsigned int height);
+
+    /** Initialize on-board points.
+        This function is used in init() and allows the subclass to restrict the
+        on-board points to a subset of the on-board points of a rectangle to
+        support different board shapes. */
+    virtual void init_is_onboard(Point p, bool& is_onboard) const = 0;
+
+    /** Initialize adjacent and diagonal neighbors of an on-board point.
+        This function is used in init() and allows the subclass to define other
+        neighborhood relationships than the one of a regular rectangular grid
+        (e.g. triangles or hexagonal fields). This function is used after
+        the on-board status of all points has been initialized. */
+    virtual void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
+                               NullTermList<Point, 4>& diag) const = 0;
+
+private:
     unsigned int m_width;
 
     unsigned int m_height;
@@ -88,20 +107,14 @@ private:
 
     const Point* m_all_points_end;
 
-    scoped_array<Point> m_all_points;
+    unique_ptr<Point[]> m_all_points;
 
     NullTermList<Point, 4> m_adj[Point::range];
 
     NullTermList<Point, 4> m_diag[Point::range];
 
     NullTermList<Point, 8> m_adj_diag[Point::range];
-
-    Geometry(unsigned int width, unsigned int height);
 };
-
-template<class P>
-auto_ptr<Geometry<P>>
-                   Geometry<P>::s_geometry[P::max_width + 1][P::max_height + 1];
 
 template<class P>
 inline Geometry<P>::Iterator::Iterator(const Geometry& g)
@@ -138,63 +151,52 @@ inline void Geometry<P>::Iterator::operator++()
 }
 
 template<class P>
-Geometry<P>::Geometry(unsigned int width, unsigned int height)
-    : m_width(width),
-      m_height(height),
-      m_all_points(new Point[width * height])
+Geometry<P>::Geometry()
 {
+}
+
+template<class P>
+Geometry<P>::~Geometry()
+{
+}
+
+template<class P>
+void Geometry<P>::init(unsigned int width, unsigned int height)
+{
+    m_width = width;
+    m_height = height;
+    m_all_points.reset(new Point[width * height]);
     LIBBOARDGAME_ASSERT(width >= 1 && width <= Point::max_width);
     LIBBOARDGAME_ASSERT(height >= 1 && height <= Point::max_height);
     fill(m_is_onboard, m_is_onboard + Point::range, false);
+    m_all_points_begin = m_all_points.get();
     Point* all_points_end = m_all_points.get();
     for (unsigned int y = 0; y < height; ++y)
         for (unsigned int x = 0; x < width; ++x)
         {
             Point p(x, y);
-            *(all_points_end++) = p;
-            m_is_onboard[p.to_int()] = true;
+            init_is_onboard(p, m_is_onboard[p.to_int()]);
+            if (is_onboard(p))
+                *(all_points_end++) = p;
         }
-    for (unsigned int y = 0; y < height; ++y)
-        for (unsigned int x = 0; x < width; ++x)
-        {
-            Point p(x, y);
-            unsigned int i = p.to_int();
-            {
-                typename NullTermList<Point, 4>::Init adj(m_adj[i]);
-                LIBBOARDGAME_FOREACH_ADJ(p, p_adj,
-                    if (is_onboard(p_adj))
-                        adj.push_back(p_adj););
-                adj.finish();
-            }
-            {
-                typename NullTermList<Point, 4>::Init diag(m_diag[i]);
-                LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
-                    if (is_onboard(p_diag))
-                        diag.push_back(p_diag););
-                diag.finish();
-            }
-            {
-                typename NullTermList<Point, 8>::Init adj_diag(m_adj_diag[i]);
-                LIBBOARDGAME_FOREACH_ADJ_DIAG(p, p_adj_diag,
-                    if (is_onboard(p_adj_diag))
-                        adj_diag.push_back(p_adj_diag););
-                adj_diag.finish();
-            }
-            unsigned int dist_to_edge_x = min(width - x - 1, x);
-            unsigned int dist_to_edge_y = min(height - y - 1, y);
-            m_dist_to_edge[i] = min(dist_to_edge_x, dist_to_edge_y);
-            m_second_dist_to_edge[i] = max(dist_to_edge_x, dist_to_edge_y);
-        }
-    m_all_points_begin = m_all_points.get();
     m_all_points_end = all_points_end;
-}
-
-template<class P>
-const Geometry<P>* Geometry<P>::get(unsigned int width, unsigned int height)
-{
-    if (s_geometry[width][height].get() == 0)
-        s_geometry[width][height].reset(new Geometry(width, height));
-    return s_geometry[width][height].get();
+    for (Iterator i(*this); i; ++i)
+    {
+        unsigned int j = (*i).to_int();
+        init_adj_diag(*i, m_adj[j], m_diag[j]);
+        typename NullTermList<Point, 8>::Init adj_diag(m_adj_diag[j]);
+        for (typename NullTermList<Point, 4>::Iterator k(m_adj[j]); k; ++k)
+            adj_diag.push_back(*k);
+        for (typename NullTermList<Point, 4>::Iterator k(m_diag[j]); k; ++k)
+            adj_diag.push_back(*k);
+        adj_diag.finish();
+        unsigned int x = (*i).get_x();
+        unsigned int y = (*i).get_y();
+        unsigned int dist_to_edge_x = min(width - x - 1, x);
+        unsigned int dist_to_edge_y = min(height - y - 1, y);
+        m_dist_to_edge[j] = min(dist_to_edge_x, dist_to_edge_y);
+        m_second_dist_to_edge[j] = max(dist_to_edge_x, dist_to_edge_y);
+    }
 }
 
 template<class P>
