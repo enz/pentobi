@@ -6,12 +6,12 @@
 #ifndef LIBBOARDGAME_UTIL_FAST_LOG_H
 #define LIBBOARDGAME_UTIL_FAST_LOG_H
 
+#include <memory>
 #include <boost/cstdint.hpp>
-#include <boost/scoped_array.hpp>
 
 namespace libboardgame_util {
 
-using boost::scoped_array;
+using namespace std;
 
 //-----------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ private:
 
     const int m_mantissa_bits_diff;
 
-    scoped_array<float> m_table;
+    unique_ptr<float[]> m_table;
 
     /** Not implemented. */
     FastLog(const FastLog&);

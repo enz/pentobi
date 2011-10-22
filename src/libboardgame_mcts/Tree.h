@@ -6,7 +6,7 @@
 #define LIBBOARDGAME_MCTS_TREE_H
 
 #include <algorithm>
-#include <boost/scoped_array.hpp>
+#include <memory>
 #include "ChildIterator.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/IntervalChecker.h"
@@ -14,7 +14,6 @@
 namespace libboardgame_mcts {
 
 using namespace std;
-using boost::scoped_array;
 using libboardgame_util::get_abort;
 using libboardgame_util::IntervalChecker;
 
@@ -151,7 +150,7 @@ public:
     bool remove_child(const Node& node, const Move& mv);
 
 private:
-    scoped_array<Node> m_nodes;
+    unique_ptr<Node[]> m_nodes;
 
     Node* m_nodes_next;
 
@@ -417,7 +416,7 @@ void Tree<M>::swap(Tree& tree)
     // Reminder to update this function when the class gets additional members
     struct Dummy
     {
-        scoped_array<Node> m_nodes;
+        unique_ptr<Node[]> m_nodes;
         Node* m_nodes_next;
         Node* m_nodes_end;
     };
