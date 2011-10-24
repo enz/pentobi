@@ -5,10 +5,12 @@
 #ifndef LIBPENTOBI_BASE_PIECE_H
 #define LIBPENTOBI_BASE_PIECE_H
 
+#include <array>
 #include <string>
 #include <vector>
 #include "libboardgame_base/CoordPoint.h"
 #include "libboardgame_base/Transform.h"
+#include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
 

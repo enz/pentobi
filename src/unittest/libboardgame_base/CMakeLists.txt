@@ -9,9 +9,9 @@ set(unittest_libboardgame_base_STAT_SRCS
   Main.cpp
   MarkerTest.cpp
   PointTest.cpp
+  PointTransformTest.cpp
   RectGeometryTest.cpp
   SpreadsheetStringRepTest.cpp
-  TransformTest.cpp
   )
 
 add_executable(unittest_libboardgame_base

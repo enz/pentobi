@@ -8,18 +8,18 @@
 
 #include "SymmetricPoints.h"
 
-#include "libboardgame_base/Transform.h"
+#include "libboardgame_base/PointTransform.h"
 
 namespace libpentobi_base {
 
-using libboardgame_base::Transform;
+using libboardgame_base::PointTransfRot180;
 
 //-----------------------------------------------------------------------------
 
 void SymmetricPoints::init(const Geometry& geometry)
 {
     m_symmetric_point.init(geometry);
-    Transform transform(Transform::rotate_180);
+    PointTransfRot180<Point> transform;
     unsigned int width = geometry.get_width();
     unsigned int height = geometry.get_height();
     for (Geometry::Iterator i(geometry); i; ++i)

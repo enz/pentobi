@@ -6,7 +6,6 @@
 #define LIBBOARDGAME_BASE_TRANSFORM_H
 
 #include <vector>
-#include "Point.h"
 #include "CoordPoint.h"
 
 namespace libboardgame_base {
@@ -43,14 +42,6 @@ public:
 
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    /** Transform a point.
-        @tparam P An instance of class Point.
-        @return The transformed point or Point::null() if the transformed point
-        would be outside the current geometry given by height and width. */
-    template<class P>
-    P get_transformed(const P& p, unsigned int width,
-                      unsigned int height) const;
-
     /** @tparam I An iterator of a container with elements of type CoordPoint */
     template<class I>
     void transform(I begin, I end) const;
@@ -82,54 +73,6 @@ inline bool Transform::operator==(Transform transform) const
 inline bool Transform::operator!=(Transform transform) const
 {
     return ! operator==(transform);
-}
-
-template<class P>
-P Transform::get_transformed(const P& p, unsigned int width,
-                             unsigned int height) const
-{
-    unsigned int x;
-    unsigned int y;
-    switch (m_type)
-    {
-    case identity:
-        x = p.get_x();
-        y = p.get_y();
-        break;
-    case rotate_90:
-        x = p.get_y();
-        y = width - p.get_x() - 1;
-        break;
-    case rotate_180:
-        x = width - p.get_x() - 1;
-        y = height - p.get_y() - 1;
-        break;
-    case rotate_270:
-        x = height - p.get_y() - 1;
-        y = p.get_x();
-        break;
-    case mirror:
-        x = width - p.get_x() - 1;
-        y = p.get_y();
-        break;
-    case rotate_90_mirror:
-        x = p.get_y();
-        y = p.get_x();
-        break;
-    case rotate_180_mirror:
-        x = p.get_x();
-        y = height - p.get_y() - 1;
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(m_type == rotate_270_mirror);
-        x = height - p.get_y() - 1;
-        y = width - p.get_x() - 1;
-        break;
-    }
-    if (x < width && y < height)
-        return P(x, y);
-    else
-        return P::null();
 }
 
 inline bool Transform::is_identity() const

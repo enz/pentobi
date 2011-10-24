@@ -6,6 +6,7 @@
 #define LIBPENTOBI_MCTS_BOOK_BUILDER_H
 
 #include <boost/filesystem.hpp>
+#include "libboardgame_base/PointTransform.h"
 #include "libpentobi_base/GameVariant.h"
 #include "libpentobi_base/BoardUpdater.h"
 #include "libpentobi_mcts/Player.h"
@@ -17,7 +18,7 @@ using libboardgame_sgf::Node;
 using libpentobi_base::Board;
 using libpentobi_base::BoardUpdater;
 using libpentobi_base::GameVariant;
-using libboardgame_base::Transform;
+using libboardgame_base::PointTransform;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Player;
 
@@ -72,7 +73,7 @@ private:
     void add_leaf(const vector<ColorMove>& sequence, ColorMove mv);
 
     void add_leaf(const vector<ColorMove>& sequence, ColorMove mv,
-                  Transform transform);
+                  const PointTransform<Point>& transform);
 
     bool are_children_evaluated(const Node& node) const;
 
@@ -88,12 +89,13 @@ private:
 
     vector<ColorMove> get_sequence(const Node& node);
 
-    ColorMove get_transformed(ColorMove mv, Transform transform) const;
+    ColorMove get_transformed(ColorMove mv,
+                              const PointTransform<Point>& transform) const;
 
     void add_value(const vector<ColorMove>& sequence, double value);
 
     void add_value(const vector<ColorMove>& sequence, double value,
-                   Transform transform);
+                   const PointTransform<Point>& transform);
 
     double inv_value(double value) const;
 

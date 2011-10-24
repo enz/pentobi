@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_base/Transform.cpp */
+/** @file Transform.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -7,7 +7,6 @@
 #endif
 
 #include "Transform.h"
-#include "libboardgame_util/Assert.h"
 
 namespace libboardgame_base {
 

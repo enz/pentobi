@@ -26,6 +26,8 @@ using boost::filesystem::exists;
 using boost::filesystem::ofstream;
 using boost::filesystem::rename;
 using boost::format;
+using libboardgame_base::PointTransfIdent;
+using libboardgame_base::PointTransfRot270Refl;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeIterator;
@@ -68,13 +70,13 @@ BookBuilder::BookBuilder(GameVariant game_variant)
 
 void BookBuilder::add_leaf(const vector<ColorMove>& sequence, ColorMove mv)
 {
-    add_leaf(sequence, mv, Transform(Transform::identity));
+    add_leaf(sequence, mv, PointTransfIdent<Point>());
     if (m_game_variant == game_variant_duo)
-        add_leaf(sequence, mv, Transform(Transform::rotate_270_mirror));
+        add_leaf(sequence, mv, PointTransfRot270Refl<Point>());
 }
 
 void BookBuilder::add_leaf(const vector<ColorMove>& sequence, ColorMove mv,
-                           Transform transform)
+                           const PointTransform<Point>& transform)
 {
     ColorMove transformed_mv = get_transformed(mv, transform);
     vector<ColorMove> transformed_sequence;
@@ -91,13 +93,13 @@ void BookBuilder::add_leaf(const vector<ColorMove>& sequence, ColorMove mv,
 
 void BookBuilder::add_value(const vector<ColorMove>& sequence, double value)
 {
-    add_value(sequence, value, Transform(Transform::identity));
+    add_value(sequence, value, PointTransfIdent<Point>());
     if (m_game_variant == game_variant_duo)
-        add_value(sequence, value, Transform(Transform::rotate_270_mirror));
+        add_value(sequence, value, PointTransfRot270Refl<Point>());
 }
 
 void BookBuilder::add_value(const vector<ColorMove>& sequence, double value,
-                            Transform transform)
+                            const PointTransform<Point>& transform)
 {
     vector<ColorMove> transformed_sequence;
     BOOST_FOREACH(ColorMove mv, sequence)
@@ -279,7 +281,8 @@ vector<ColorMove> BookBuilder::get_sequence(const Node& node)
     return result;
 }
 
-ColorMove BookBuilder::get_transformed(ColorMove mv, Transform transform) const
+ColorMove BookBuilder::get_transformed(ColorMove mv,
+                                   const PointTransform<Point>& transform) const
 {
     if (mv.move.is_pass())
         return mv;
