@@ -15,7 +15,6 @@ set(boardgame_util_STAT_SRCS
   RandomGenerator.cpp
   Statistics.cpp
   StringUtil.cpp
-  TeeStream.cpp
   TimeIntervalChecker.cpp
   Timer.cpp
   TimeSource.cpp
