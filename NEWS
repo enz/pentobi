@@ -1,7 +1,8 @@
 Current development version
 ===========================
 
-*
+* Fixed saving/opening files if file name contained non-ASCII characters and
+  the system used an encoding other than Latin1
 
 Version 0.2 (17 Oct 2011)
 =========================

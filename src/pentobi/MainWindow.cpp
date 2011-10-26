@@ -1590,7 +1590,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         return;
     cancelGenMove();
     TreeReader reader;
-    ifstream in(file.toStdString());
+    ifstream in(file.toLocal8Bit().constData());
     try
     {
         reader.read(in);
@@ -1817,7 +1817,7 @@ void MainWindow::save()
 #else
     m_game->set_application("Pentobi");
 #endif
-    ofstream out(m_file.toStdString().c_str());
+    ofstream out(m_file.toLocal8Bit().constData());
     write_tree(out, m_game->get_root(), true, 2);
     if (! out)
         showError(tr("The file could not be saved."),
