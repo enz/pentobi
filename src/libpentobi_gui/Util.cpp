@@ -24,7 +24,7 @@ const QColor red(230, 62, 44);
 
 const QColor yellow(235, 205, 35);
 
-const QColor gray(179, 171, 177);
+const QColor gray(174, 167, 172);
 
 void paintDot(QPainter& painter, GameVariant gameVariant, Color c, int x,
               int y, int size)
