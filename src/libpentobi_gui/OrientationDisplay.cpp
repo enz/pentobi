@@ -57,7 +57,7 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
             painter.setRenderHint(QPainter::Antialiasing, true);
             painter.setPen(color);
             painter.setBrush(color);
-            painter.drawEllipse(width() / 2 - 4, height() / 2 - 4, 8, 8);
+            painter.drawEllipse(width() / 2 - 6, height() / 2 - 6, 12, 12);
         }
         return;
     }
