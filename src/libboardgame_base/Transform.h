@@ -38,8 +38,6 @@ public:
 
     bool operator!=(Transform transform) const;
 
-    bool is_identity() const;
-
     CoordPoint get_transformed(const CoordPoint& p) const;
 
     /** @tparam I An iterator of a container with elements of type CoordPoint */
@@ -73,11 +71,6 @@ inline bool Transform::operator==(Transform transform) const
 inline bool Transform::operator!=(Transform transform) const
 {
     return ! operator==(transform);
-}
-
-inline bool Transform::is_identity() const
-{
-    return m_type == identity;
 }
 
 inline unsigned int Transform::to_int() const
