@@ -158,8 +158,6 @@ public:
         points. */
     int get_score(Color c, double& game_result) const;
 
-    unsigned int get_size() const;
-
     const Geometry& get_geometry() const;
 
     string to_string(Move mv, bool only_points = false) const;
@@ -195,8 +193,6 @@ public:
 
 private:
     GameVariant m_game_variant;
-
-    unsigned int m_sz;
 
     unsigned int m_nu_colors;
 
@@ -360,11 +356,6 @@ inline PointStateExt Board::get_point_state_ext(Point p) const
 inline Color Board::get_second_color(Color c) const
 {
     return m_second_color[c];
-}
-
-inline unsigned int Board::get_size() const
-{
-    return m_sz;
 }
 
 inline Point Board::get_starting_point(Color c) const

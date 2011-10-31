@@ -66,12 +66,12 @@ void GuiBoard::clearSelectedPiece()
 void GuiBoard::copyFromBoard(const Board& bd)
 {
     m_gameVariant = bd.get_game_variant();
+    const Geometry& geometry = bd.get_geometry();
     if (! m_isInitialized
-        || m_bd.get_size() != m_pointState.get_geometry().get_width())
+        || geometry.get_width() != m_pointState.get_geometry().get_width())
     {
         m_isInitialized = true;
         m_pointState = bd.get_grid();
-        const Geometry& geometry = bd.get_geometry();
         m_labels.init(geometry, "");
         m_markupFlags.init(geometry);
         update();
@@ -123,9 +123,10 @@ void GuiBoard::moveSelectedPieceDown()
 {
     if (m_selectedPiece == 0)
         return;
-    unsigned int sz = m_bd.get_size();
+    unsigned int width = m_bd.get_geometry().get_width();
+    unsigned int height = m_bd.get_geometry().get_height();
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(sz / 2, sz - 1);
+        m_selectedPieceOffset = CoordPoint(width / 2, height - 1);
     else if (m_selectedPieceOffset.y > 0)
         --m_selectedPieceOffset.y;
     setSelectedPieceOffset(m_selectedPieceOffset);
@@ -136,9 +137,10 @@ void GuiBoard::moveSelectedPieceLeft()
 {
     if (m_selectedPiece == 0)
         return;
-    unsigned int sz = m_bd.get_size();
+    unsigned int width = m_bd.get_geometry().get_width();
+    unsigned int height = m_bd.get_geometry().get_height();
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(sz - 1, sz / 2);
+        m_selectedPieceOffset = CoordPoint(width - 1, height / 2);
     else if (m_selectedPieceOffset.x > 0)
         --m_selectedPieceOffset.x;
     setSelectedPieceOffset(m_selectedPieceOffset);
@@ -149,10 +151,11 @@ void GuiBoard::moveSelectedPieceRight()
 {
     if (m_selectedPiece == 0)
         return;
-    int sz = m_bd.get_size();
+    int width = static_cast<int>(m_bd.get_geometry().get_width());
+    int height = static_cast<int>(m_bd.get_geometry().get_height());
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(0, sz / 2);
-    else if (m_selectedPieceOffset.x < sz - 1)
+        m_selectedPieceOffset = CoordPoint(0, height / 2);
+    else if (m_selectedPieceOffset.x < width - 1)
         ++m_selectedPieceOffset.x;
     setSelectedPieceOffset(m_selectedPieceOffset);
     updateSelectedPiecePoints();
@@ -162,10 +165,11 @@ void GuiBoard::moveSelectedPieceUp()
 {
     if (m_selectedPiece == 0)
         return;
-    int sz = m_bd.get_size();
+    int width = static_cast<int>(m_bd.get_geometry().get_width());
+    int height = static_cast<int>(m_bd.get_geometry().get_height());
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(sz / 2, 0);
-    else if (m_selectedPieceOffset.y < sz - 1)
+        m_selectedPieceOffset = CoordPoint(width / 2, 0);
+    else if (m_selectedPieceOffset.y < height - 1)
         ++m_selectedPieceOffset.y;
     setSelectedPieceOffset(m_selectedPieceOffset);
     updateSelectedPiecePoints();
@@ -204,13 +208,14 @@ void GuiBoard::placeSelectedPiece()
         return;
     const Piece::Points& points = m_selectedPiece->get_points();
     MovePoints movePoints;
-    int sz = static_cast<int>(m_bd.get_size());
+    int width = static_cast<int>(m_bd.get_geometry().get_width());
+    int height = static_cast<int>(m_bd.get_geometry().get_height());
     BOOST_FOREACH(CoordPoint p, points)
     {
         p = m_selectedPieceTransform.get_transformed(p);
         int x = p.x + m_selectedPieceOffset.x;
         int y = p.y + m_selectedPieceOffset.y;
-        if (x < 0 || x >= sz || y < 0 || y >= sz)
+        if (x < 0 || x >= width || y < 0 || y >= height)
             return;
         movePoints.push_back(Point(x, y));
     }
@@ -291,15 +296,16 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         if (p.y > maxY)
             maxY = p.y;
     }
-    int sz = static_cast<int>(m_bd.get_size());
+    int width = static_cast<int>(m_bd.get_geometry().get_width());
+    int height = static_cast<int>(m_bd.get_geometry().get_height());
     if (minX < 0)
         m_selectedPieceOffset.x -= minX;
-    if (maxX >=  sz)
-        m_selectedPieceOffset.x -= (maxX - sz + 1);
+    if (maxX >=  width)
+        m_selectedPieceOffset.x -= (maxX - width + 1);
     if (minY < 0)
         m_selectedPieceOffset.y -= minY;
-    if (maxY >=  sz)
-        m_selectedPieceOffset.y -= (maxY - sz + 1);
+    if (maxY >=  height)
+        m_selectedPieceOffset.y -= (maxY - height + 1);
 }
 
 void GuiBoard::setSelectedPieceTransform(Transform transform)
@@ -342,13 +348,14 @@ void GuiBoard::updateSelectedPiecePoints()
     MovePoints points;
     if (m_selectedPiece != 0 && m_selectedPieceOffset != CoordPoint::null())
     {
-        int sz = m_bd.get_size();
+        int width = static_cast<int>(m_bd.get_geometry().get_width());
+        int height = static_cast<int>(m_bd.get_geometry().get_height());
         BOOST_FOREACH(CoordPoint p, m_selectedPiece->get_points())
         {
             p = m_selectedPieceTransform.get_transformed(p);
             int x = p.x + m_selectedPieceOffset.x;
             int y = p.y + m_selectedPieceOffset.y;
-            if (x >= 0 && x < sz && y >= 0 && y < sz)
+            if (x >= 0 && x < width && y >= 0 && y < height)
                 points.push_back(Point(x, y));
         }
     }

@@ -303,19 +303,20 @@ bool Board::has_moves(Color c, Point p) const
 void Board::init(GameVariant game_variant)
 {
     m_game_variant = game_variant;
+    unsigned int sz;
     if  (game_variant == game_variant_classic
          || game_variant == game_variant_classic_2)
     {
-        m_sz = 20;
+        sz = 20;
         m_nu_colors = 4;
     }
     else
     {
         LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        m_sz = 14;
+        sz = 14;
         m_nu_colors = 2;
     }
-    m_board_const = &BoardConst::get(m_sz);
+    m_board_const = &BoardConst::get(sz);
     m_geometry = &m_board_const->get_geometry();
     m_point_state.init(*m_geometry);
     m_point_state.fill_all(PointStateExt::offboard());
@@ -479,14 +480,16 @@ void Board::write(ostream& out, bool mark_last_move) const
         if (! last_mv.move.is_pass())
             break;
     }
+    unsigned int width = m_geometry->get_width();
+    unsigned int height = m_geometry->get_height();
     bool last_mv_marked = false;
-    write_x_coord(out, m_sz);
-    for (unsigned int y = m_sz - 1; ; --y)
+    write_x_coord(out, width);
+    for (unsigned int y = height - 1; ; --y)
     {
         if (y < 9)
             out << ' ';
         out << (y + 1) << ' ';
-        for (unsigned int x = 0; x < m_sz; ++x)
+        for (unsigned int x = 0; x < width; ++x)
         {
             Point p(x, y);
             PointState s = get_point_state(p);
@@ -538,43 +541,43 @@ void Board::write(ostream& out, bool mark_last_move) const
         if (color_output)
             out << "\x1B[0m";
         out << ' ' << (y + 1);
-        if (y == m_sz - 1)
+        if (y == height - 1)
             write_color_info_line1(out, Color(0), color_name[Color(0)],
                                    color_char[Color(0)],
                                    color_esc_sequence_text[Color(0)], y);
-        else if (y == m_sz - 2)
+        else if (y == height - 2)
             write_color_info_line2(out, Color(0), y);
-        else if (y == m_sz - 3)
+        else if (y == height - 3)
             write_color_info_line3(out, Color(0), y);
-        else if (y == m_sz - 5)
+        else if (y == height - 5)
             write_color_info_line1(out, Color(1), color_name[Color(1)],
                                    color_char[Color(1)],
                                    color_esc_sequence_text[Color(1)], y);
-        else if (y == m_sz - 6)
+        else if (y == height - 6)
             write_color_info_line2(out, Color(1), y);
-        else if (y == m_sz - 7)
+        else if (y == height - 7)
             write_color_info_line3(out, Color(1), y);
-        else if (y == m_sz - 9 && m_nu_colors > 2)
+        else if (y == height - 9 && m_nu_colors > 2)
             write_color_info_line1(out, Color(2), color_name[Color(2)],
                                    color_char[Color(2)],
                                    color_esc_sequence_text[Color(2)], y);
-        else if (y == m_sz - 10 && m_nu_colors > 2)
+        else if (y == height - 10 && m_nu_colors > 2)
             write_color_info_line2(out, Color(2), y);
-        else if (y == m_sz - 11 && m_nu_colors > 2)
+        else if (y == height - 11 && m_nu_colors > 2)
             write_color_info_line3(out, Color(2), y);
-        else if (y == m_sz - 13 && m_nu_colors > 3)
+        else if (y == height - 13 && m_nu_colors > 3)
             write_color_info_line1(out, Color(3), color_name[Color(3)],
                                    color_char[Color(3)],
                                    color_esc_sequence_text[Color(3)], y);
-        else if (y == m_sz - 14 && m_nu_colors > 3)
+        else if (y == height - 14 && m_nu_colors > 3)
             write_color_info_line2(out, Color(3), y);
-        else if (y == m_sz - 15 && m_nu_colors > 3)
+        else if (y == height - 15 && m_nu_colors > 3)
             write_color_info_line3(out, Color(3), y);
         out << '\n';
         if (y == 0)
             break;
     }
-    write_x_coord(out, m_sz);
+    write_x_coord(out, width);
 }
 
 void Board::write_color_info_line1(ostream& out, Color c, const char* name,

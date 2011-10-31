@@ -286,10 +286,11 @@ ColorMove BookBuilder::get_transformed(ColorMove mv,
 {
     if (mv.move.is_pass())
         return mv;
+    unsigned int width = m_bd.get_geometry().get_width();
+    unsigned int height = m_bd.get_geometry().get_height();
     MovePoints points;
     BOOST_FOREACH(Point p, m_bd.get_move_points(mv.move))
-        points.push_back(transform.get_transformed(p, m_bd.get_size(),
-                                                   m_bd.get_size()));
+        points.push_back(transform.get_transformed(p, width, height));
     Move transformed_mv;
     m_bd.find_move(points, transformed_mv);
     return ColorMove(mv.color, transformed_mv);
