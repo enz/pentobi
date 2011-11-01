@@ -181,53 +181,56 @@ void Tree::init(GameVariant game_variant)
     libboardgame_sgf::Tree::init();
     m_game_variant = game_variant;
     const Node& root = get_root();
-    unsigned int sz;
     switch (game_variant)
     {
     case game_variant_classic:
-        sz = 20;
         set_property(root, "GM", "Blokus");
         break;
     case game_variant_classic_2:
-        sz = 20;
         set_property(root, "GM", "Blokus Two-Player");
         break;
     default:
         LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        sz = 14;
         set_property(root, "GM", "Blokus Duo");
-        break;
     }
-    m_board_const = &BoardConst::get(sz);
+    init_board_const(game_variant);
     clear_modified();
 }
 
 void Tree::init(unique_ptr<Node>& root)
 {
-    unsigned int sz;
     GameVariant game_variant;
     string game = root->get_property("GM");
     string s = to_lower_copy(trim_copy(game));
     if (s == "blokus")
-    {
-        sz = 20;
         game_variant = game_variant_classic;
-    }
     else if (s == "blokus two-player")
-    {
-        sz = 20;
         game_variant = game_variant_classic_2;
-    }
     else if (s == "blokus duo")
-    {
-        sz = 14;
         game_variant = game_variant_duo;
-    }
     else
         throw InvalidPropertyValue("GM", game);
     libboardgame_sgf::Tree::init(root);
     m_game_variant = game_variant;
-    m_board_const = &BoardConst::get(sz);
+    init_board_const(game_variant);
+}
+
+void Tree::init_board_const(GameVariant game_variant)
+{
+    BoardType board_type;
+    switch (game_variant)
+    {
+    case game_variant_classic:
+        board_type = board_type_classic;
+        break;
+    case game_variant_classic_2:
+        board_type = board_type_classic;
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        board_type = board_type_duo;
+    }
+    m_board_const = &BoardConst::get(board_type);
 }
 
 void Tree::set_move(const Node& node, Color c, Move mv)

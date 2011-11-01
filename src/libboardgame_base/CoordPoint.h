@@ -22,7 +22,8 @@ struct CoordPoint
 
     int y;
 
-    static bool is_onboard(int x, int y, unsigned int sz);
+    static bool is_onboard(int x, int y, unsigned int width,
+                           unsigned int height);
 
     static CoordPoint null();
 
@@ -40,7 +41,7 @@ struct CoordPoint
 
     bool is_null() const;
 
-    bool is_onboard(unsigned int sz) const;
+    bool is_onboard(unsigned int width, unsigned int height) const;
 
     /** Shift a list of points such that the minimum x and y coordinates are
         zero.
@@ -115,15 +116,17 @@ void CoordPoint::find_width_height(T begin, T end,
     height = max_y - min_y + 1;
 }
 
-inline bool CoordPoint::is_onboard(int x, int y, unsigned int sz)
+inline bool CoordPoint::is_onboard(int x, int y, unsigned int width,
+                                   unsigned int height)
 {
-    return (x >= 0 && x < static_cast<int>(sz)
-            && y >= 0 && y < static_cast<int>(sz));
+    return (x >= 0 && x < static_cast<int>(width)
+            && y >= 0 && y < static_cast<int>(height));
 }
 
-inline bool CoordPoint::is_onboard(unsigned int sz) const
+inline bool CoordPoint::is_onboard(unsigned int width,
+                                   unsigned int height) const
 {
-    return is_onboard(x, y, sz);
+    return is_onboard(x, y, width, height);
 }
 
 inline bool CoordPoint::is_null() const

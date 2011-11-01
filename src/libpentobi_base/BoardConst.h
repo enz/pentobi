@@ -24,6 +24,15 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
+enum BoardType
+{
+    board_type_classic,
+
+    board_type_duo
+};
+
+//-----------------------------------------------------------------------------
+
 /** Constant precomputed data that is shared between all instances of Board. */
 class BoardConst
 {
@@ -34,7 +43,7 @@ public:
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
-    static const BoardConst& get(unsigned int size);
+    static const BoardConst& get(BoardType board_type);
 
     /** Index of a given forbidden status of adjacent points for a color.
         @param s0 If the point at Direction::get_enum_adj(0) is forbidden
@@ -43,8 +52,6 @@ public:
         @param s3 If the point at Direction::get_enum_adj(3) is forbidden */
     static unsigned int get_adj_status_index(bool s0, bool s1, bool s2,
                                              bool s3);
-
-    BoardConst(unsigned int sz);
 
     const Piece& get_piece(unsigned int n) const;
 
@@ -65,8 +72,6 @@ public:
     const Geometry& get_geometry() const;
 
 private:
-    unsigned int m_sz;
-
     const Geometry& m_geometry;
 
     vector<Piece> m_pieces;
@@ -84,6 +89,8 @@ private:
         The directions are represented by integers as in
         Direction::get_enum_adj() */
     array<ArrayList<unsigned int, 4>, 16> m_adj_status;
+
+    BoardConst(BoardType board_type);
 
     void create_move(unsigned int piece, const Piece::Points& coord_points,
                      CoordPoint center);

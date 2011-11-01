@@ -303,20 +303,20 @@ bool Board::has_moves(Color c, Point p) const
 void Board::init(GameVariant game_variant)
 {
     m_game_variant = game_variant;
-    unsigned int sz;
+    BoardType board_type;
     if  (game_variant == game_variant_classic
          || game_variant == game_variant_classic_2)
     {
-        sz = 20;
+        board_type = board_type_classic;
         m_nu_colors = 4;
     }
     else
     {
         LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        sz = 14;
+        board_type = board_type_duo;
         m_nu_colors = 2;
     }
-    m_board_const = &BoardConst::get(sz);
+    m_board_const = &BoardConst::get(board_type);
     m_geometry = &m_board_const->get_geometry();
     m_point_state.init(*m_geometry);
     m_point_state.fill_all(PointStateExt::offboard());

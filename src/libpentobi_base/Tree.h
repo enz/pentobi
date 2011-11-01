@@ -57,6 +57,8 @@ private:
     GameVariant m_game_variant;
 
     const BoardConst* m_board_const;
+
+    void init_board_const(GameVariant game_variant);
 };
 
 inline GameVariant Tree::get_game_variant() const

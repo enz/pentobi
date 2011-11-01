@@ -213,13 +213,23 @@ vector<Piece> create_pieces()
     return pieces;
 }
 
+const Geometry& create_geometry(BoardType board_type)
+{
+    if (board_type == board_type_classic)
+        return *RectGeometry<Point>::get(20, 20);
+    else
+    {
+        LIBBOARDGAME_ASSERT(board_type == board_type_duo);
+        return *RectGeometry<Point>::get(14, 14);
+    }
 }
+
+} // namespace
 
 //-----------------------------------------------------------------------------
 
-BoardConst::BoardConst(unsigned int sz)
-    : m_sz(sz),
-      m_geometry(*RectGeometry<Point>::get(sz, sz))
+BoardConst::BoardConst(BoardType board_type)
+    : m_geometry(create_geometry(board_type))
 {
     m_pieces = create_pieces();
     for (int s0 = 0; s0 <= 1; ++s0)
@@ -244,7 +254,8 @@ BoardConst::BoardConst(unsigned int sz)
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << '\n';
     LIBBOARDGAME_ASSERT(m_move_info.size() <= Move::range - 2);
-    LIBBOARDGAME_ASSERT(sz != 20 || m_move_info.size() == Move::range - 2);
+    LIBBOARDGAME_ASSERT(board_type != board_type_classic
+                        || m_move_info.size() == Move::range - 2);
 #if LIBBOARDGAME_DEBUG
     unsigned int sum_points = 0;
     BOOST_FOREACH(const Piece& piece, m_pieces)
@@ -292,42 +303,55 @@ void BoardConst::create_moves(unsigned int piece)
     for (unsigned int i = 0; i < 16; ++i)
         m_moves[i][piece].init(m_geometry);
     Piece::Points points;
-    for (unsigned int x = 0; x < m_sz; ++x)
-        for (unsigned int y = 0; y < m_sz; ++y)
-            BOOST_FOREACH(Transform transform, m_pieces[piece].get_transforms())
+    for (GeometryIterator i(m_geometry); i; ++i)
+    {
+        unsigned int x = (*i).get_x();
+        unsigned int y = (*i).get_y();
+        BOOST_FOREACH(Transform transform, m_pieces[piece].get_transforms())
+        {
+            points = m_pieces[piece].get_points();
+            transform.transform(points.begin(), points.end());
+            sort(points.begin(), points.end());
+            auto center = find(points.begin(), points.end(), CoordPoint(0, 0));
+            LIBBOARDGAME_ASSERT(center != points.end());
+            unsigned int width;
+            unsigned int height;
+            CoordPoint::normalize_offset(points.begin(), points.end(),
+                                         width, height);
+            bool is_onboard = true;
+            BOOST_FOREACH(CoordPoint& p, points)
             {
-                points = m_pieces[piece].get_points();
-                transform.transform(points.begin(), points.end());
-                sort(points.begin(), points.end());
-                auto center =
-                    find(points.begin(), points.end(), CoordPoint(0, 0));
-                LIBBOARDGAME_ASSERT(center != points.end());
-                unsigned int width;
-                unsigned int height;
-                CoordPoint::normalize_offset(points.begin(), points.end(),
-                                             width, height);
-                bool is_onboard = true;
-                BOOST_FOREACH(CoordPoint& p, points)
+                p.x += x;
+                p.y += y;
+                if (! m_geometry.is_onboard(p))
                 {
-                    p.x += x;
-                    p.y += y;
-                    if (! p.is_onboard(m_sz))
-                    {
-                        is_onboard = false;
-                        break;
-                    }
+                    is_onboard = false;
+                    break;
                 }
-                if (is_onboard)
-                    create_move(piece, points, *center);
-            };
+            }
+            if (is_onboard)
+                create_move(piece, points, *center);
+        }
+    }
 }
 
-const BoardConst& BoardConst::get(unsigned int size)
+const BoardConst& BoardConst::get(BoardType board_type)
 {
-    static unique_ptr<BoardConst> the_board_const[Point::max_width + 1];
-    if (the_board_const[size].get() == 0)
-        the_board_const[size].reset(new BoardConst(size));
-    return *the_board_const[size];
+    static unique_ptr<BoardConst> board_const_classic;
+    static unique_ptr<BoardConst> board_const_duo;
+    if (board_type == board_type_classic)
+    {
+        if (board_const_classic.get() == 0)
+            board_const_classic.reset(new BoardConst(board_type_classic));
+        return *board_const_classic;
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(board_type == board_type_duo);
+        if (board_const_duo.get() == 0)
+            board_const_duo.reset(new BoardConst(board_type_duo));
+        return *board_const_duo;
+    }
 }
 
 bool BoardConst::get_piece_index_by_name(const string& name,

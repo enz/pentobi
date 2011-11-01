@@ -5,6 +5,7 @@
 #ifndef LIBBOARDGAME_BASE_GEOMETRY_H
 #define LIBBOARDGAME_BASE_GEOMETRY_H
 
+#include "CoordPoint.h"
 #include "Point.h"
 #include "libboardgame_util/NullTermList.h"
 
@@ -51,6 +52,8 @@ public:
     virtual ~Geometry();
 
     bool is_onboard(Point p) const;
+
+    bool is_onboard(CoordPoint p) const;
 
     unsigned int get_width() const;
 
@@ -161,45 +164,6 @@ Geometry<P>::~Geometry()
 }
 
 template<class P>
-void Geometry<P>::init(unsigned int width, unsigned int height)
-{
-    m_width = width;
-    m_height = height;
-    m_all_points.reset(new Point[width * height]);
-    LIBBOARDGAME_ASSERT(width >= 1 && width <= Point::max_width);
-    LIBBOARDGAME_ASSERT(height >= 1 && height <= Point::max_height);
-    fill(m_is_onboard, m_is_onboard + Point::range, false);
-    m_all_points_begin = m_all_points.get();
-    Point* all_points_end = m_all_points.get();
-    for (unsigned int y = 0; y < height; ++y)
-        for (unsigned int x = 0; x < width; ++x)
-        {
-            Point p(x, y);
-            init_is_onboard(p, m_is_onboard[p.to_int()]);
-            if (is_onboard(p))
-                *(all_points_end++) = p;
-        }
-    m_all_points_end = all_points_end;
-    for (Iterator i(*this); i; ++i)
-    {
-        unsigned int j = (*i).to_int();
-        init_adj_diag(*i, m_adj[j], m_diag[j]);
-        typename NullTermList<Point, 8>::Init adj_diag(m_adj_diag[j]);
-        for (typename NullTermList<Point, 4>::Iterator k(m_adj[j]); k; ++k)
-            adj_diag.push_back(*k);
-        for (typename NullTermList<Point, 4>::Iterator k(m_diag[j]); k; ++k)
-            adj_diag.push_back(*k);
-        adj_diag.finish();
-        unsigned int x = (*i).get_x();
-        unsigned int y = (*i).get_y();
-        unsigned int dist_to_edge_x = min(width - x - 1, x);
-        unsigned int dist_to_edge_y = min(height - y - 1, y);
-        m_dist_to_edge[j] = min(dist_to_edge_x, dist_to_edge_y);
-        m_second_dist_to_edge[j] = max(dist_to_edge_x, dist_to_edge_y);
-    }
-}
-
-template<class P>
 inline const NullTermList<P, 4>& Geometry<P>::get_adj(Point p) const
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
@@ -247,9 +211,54 @@ inline unsigned int Geometry<P>::get_width() const
 }
 
 template<class P>
+void Geometry<P>::init(unsigned int width, unsigned int height)
+{
+    m_width = width;
+    m_height = height;
+    m_all_points.reset(new Point[width * height]);
+    LIBBOARDGAME_ASSERT(width >= 1 && width <= Point::max_width);
+    LIBBOARDGAME_ASSERT(height >= 1 && height <= Point::max_height);
+    fill(m_is_onboard, m_is_onboard + Point::range, false);
+    m_all_points_begin = m_all_points.get();
+    Point* all_points_end = m_all_points.get();
+    for (unsigned int y = 0; y < height; ++y)
+        for (unsigned int x = 0; x < width; ++x)
+        {
+            Point p(x, y);
+            init_is_onboard(p, m_is_onboard[p.to_int()]);
+            if (is_onboard(p))
+                *(all_points_end++) = p;
+        }
+    m_all_points_end = all_points_end;
+    for (Iterator i(*this); i; ++i)
+    {
+        unsigned int j = (*i).to_int();
+        init_adj_diag(*i, m_adj[j], m_diag[j]);
+        typename NullTermList<Point, 8>::Init adj_diag(m_adj_diag[j]);
+        for (typename NullTermList<Point, 4>::Iterator k(m_adj[j]); k; ++k)
+            adj_diag.push_back(*k);
+        for (typename NullTermList<Point, 4>::Iterator k(m_diag[j]); k; ++k)
+            adj_diag.push_back(*k);
+        adj_diag.finish();
+        unsigned int x = (*i).get_x();
+        unsigned int y = (*i).get_y();
+        unsigned int dist_to_edge_x = min(width - x - 1, x);
+        unsigned int dist_to_edge_y = min(height - y - 1, y);
+        m_dist_to_edge[j] = min(dist_to_edge_x, dist_to_edge_y);
+        m_second_dist_to_edge[j] = max(dist_to_edge_x, dist_to_edge_y);
+    }
+}
+
+template<class P>
 inline bool Geometry<P>::is_onboard(Point p) const
 {
     return m_is_onboard[p.to_int()];
+}
+
+template<class P>
+bool Geometry<P>::is_onboard(CoordPoint p) const
+{
+    return p.is_onboard(m_width, m_height) && is_onboard(Point(p.x, p.y));
 }
 
 //-----------------------------------------------------------------------------
