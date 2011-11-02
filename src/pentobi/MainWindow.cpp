@@ -37,6 +37,8 @@ using libboardgame_util::ArrayList;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Piece;
@@ -1500,7 +1502,7 @@ void MainWindow::nextPiece()
     const Board& bd = m_game->get_board();
     if (bd.is_game_over())
         return;
-    const ArrayList<unsigned int, Board::nu_pieces>& piecesLeft =
+    const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
         bd.get_pieces_left(m_toPlay);
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
@@ -1718,7 +1720,7 @@ void MainWindow::previousPiece()
     if (bd.is_game_over())
         return;
     Color c = m_game->get_effective_to_play();
-    const ArrayList<unsigned int, Board::nu_pieces>& piecesLeft =
+    const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
         bd.get_pieces_left(c);
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
@@ -2030,6 +2032,12 @@ void MainWindow::setGameVariant(GameVariant gameVariant)
         break;
     case game_variant_duo:
         settings.setValue("game_variant", "duo");
+        break;
+    case game_variant_trigon:
+        settings.setValue("game_variant", "trigon");
+        break;
+    case game_variant_trigon_2:
+        settings.setValue("game_variant", "trigon_2");
         break;
     }
     clearSelectedPiece();

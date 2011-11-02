@@ -77,8 +77,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       to_play(to_play),
       detect_symmetry(true),
       avoid_symmetric_draw(false),
-      score_modification(ValueType(0.1)),
-      piece_value(bd)
+      score_modification(ValueType(0.1))
 {
     unsigned int sz = 20;
     const Geometry* geometry = RectGeometry<Point>::get(sz, sz);
@@ -576,7 +575,8 @@ void State::start_search()
     m_local_points_marker.init(geometry, 0);
     m_nu_moves_initial = bd.get_nu_moves();
     m_score_modification_factor =
-        m_shared_const.score_modification / BoardConst::total_piece_points;
+        m_shared_const.score_modification
+        / bd.get_board_const().get_total_piece_points();
     m_nu_simulations = 0;
     m_score_sum = 0;
     m_check_symmetric_draw =

@@ -13,7 +13,6 @@
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/MoveMarker.h"
-#include "libpentobi_base/PieceValueHeuristic.h"
 #include "libpentobi_base/PointList.h"
 #include "libpentobi_base/SymmetricPoints.h"
 
@@ -31,7 +30,6 @@ using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::MovePoints;
-using libpentobi_base::PieceValueHeuristic;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
 using libpentobi_base::SymmetricPoints;
@@ -54,8 +52,6 @@ struct SharedConst
 
     /** Maximum value to modify the win/loss result by the score. */
     ValueType score_modification;
-
-    PieceValueHeuristic piece_value;
 
     /** Distance to center heuristic for 20x20 boards. */
     Grid<unsigned int> m_dist_to_center;

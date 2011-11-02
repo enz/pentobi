@@ -77,7 +77,7 @@ void PieceSelector::init()
             trim(name);
             const Piece* piece = 0;
             if (name != ".")
-                for (unsigned int i = 0; i < Board::nu_pieces; ++i)
+                for (unsigned int i = 0; i < m_bd.get_nu_pieces(); ++i)
                 {
                     if (m_bd.get_piece(i).get_name() == name)
                     {

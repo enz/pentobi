@@ -28,7 +28,9 @@ enum BoardType
 {
     board_type_classic,
 
-    board_type_duo
+    board_type_duo,
+
+    board_type_trigon
 };
 
 //-----------------------------------------------------------------------------
@@ -37,9 +39,7 @@ enum BoardType
 class BoardConst
 {
 public:
-    static const unsigned int nu_pieces = 21;
-
-    static const unsigned int total_piece_points = 89;
+    static const unsigned int max_pieces = 22;
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
@@ -52,6 +52,10 @@ public:
         @param s3 If the point at Direction::get_enum_adj(3) is forbidden */
     static unsigned int get_adj_status_index(bool s0, bool s1, bool s2,
                                              bool s3);
+
+    unsigned int get_nu_pieces() const;
+
+    unsigned int get_total_piece_points() const;
 
     const Piece& get_piece(unsigned int n) const;
 
@@ -69,9 +73,17 @@ public:
     const vector<Move>& get_moves(unsigned int piece, Point p,
                                   unsigned int adj_status_index = 0) const;
 
+    BoardType get_board_type() const;
+
     const Geometry& get_geometry() const;
 
 private:
+    unsigned int m_nu_pieces;
+
+    unsigned int m_total_piece_points;
+
+    BoardType m_board_type;
+
     const Geometry& m_geometry;
 
     vector<Piece> m_pieces;
@@ -80,7 +92,7 @@ private:
 
     /** Moves of a piece at a point constrained by the forbidden status of
         adjacent points. */
-    array<array<Grid<vector<Move>>, nu_pieces>, 16> m_moves;
+    array<array<Grid<vector<Move>>, max_pieces>, 16> m_moves;
 
     /** Local variable reused for efficiency. */
     Marker m_marker;
@@ -120,6 +132,11 @@ inline unsigned int BoardConst::get_adj_status_index(bool s0, bool s1, bool s2,
     return i;
 }
 
+inline BoardType BoardConst::get_board_type() const
+{
+    return m_board_type;
+}
+
 inline const Geometry& BoardConst::get_geometry() const
 {
     return m_geometry;
@@ -144,10 +161,20 @@ inline const vector<Move>& BoardConst::get_moves(unsigned int piece,
     return m_moves[adj_status_index][piece][p];
 }
 
+inline unsigned int BoardConst::get_nu_pieces() const
+{
+    return m_nu_pieces;
+}
+
 inline const Piece& BoardConst::get_piece(unsigned int n) const
 {
     LIBBOARDGAME_ASSERT(n < m_pieces.size());
     return m_pieces[n];
+}
+
+inline unsigned int BoardConst::get_total_piece_points() const
+{
+    return m_total_piece_points;
 }
 
 //-----------------------------------------------------------------------------

@@ -18,16 +18,31 @@ using namespace std;
 
 namespace {
 
-void write_x_coord(ostream& out, unsigned int sz)
+void write_x_coord(ostream& out, unsigned int width, unsigned int offset)
 {
-    out << "  ";
+    for (unsigned int i = 0; i < offset; ++i)
+        out << ' ';
     char c = 'A';
-    for (unsigned int x = 0; x < sz; ++x, ++c)
-        out << ' ' << c;
+    for (unsigned int x = 0; x < width; ++x, ++c)
+    {
+        if (x < 26)
+            out << ' ';
+        else
+            out << 'a';
+        if (x == 26)
+            c = 'A';
+        out << c;
+    }
     out << '\n';
 }
 
+void set_color(ostream& out, const char* esc_sequence)
+{
+    if (Board::color_output)
+        out << esc_sequence;
 }
+
+} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -35,6 +50,10 @@ bool Board::color_output = false;
 
 Board::Board(GameVariant game_variant)
 {
+    m_color_char[Color(0)] = 'X';
+    m_color_char[Color(1)] = 'O';
+    m_color_char[Color(2)] = '#';
+    m_color_char[Color(3)] = '@';
     init(game_variant);
 }
 
@@ -48,7 +67,7 @@ void Board::copy_from(const Board& bd)
 void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 {
     moves.clear();
-    bool is_first_move = (m_pieces_left[c].size() == nu_pieces);
+    bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     if (is_first_move)
     {
         if (! m_forbidden[c][get_starting_point(c)])
@@ -147,7 +166,7 @@ Color Board::get_effective_to_play() const
 
 unsigned int Board::get_points(Color c) const
 {
-    return BoardConst::total_piece_points - get_points_left(c);
+    return m_board_const->get_total_piece_points() - get_points_left(c);
 }
 
 unsigned int Board::get_points_with_bonus(Color c) const
@@ -256,20 +275,21 @@ Point Board::get_starting_point(GameVariant game_variant, Color c)
         LIBBOARDGAME_ASSERT(c == Color(3));
         return Point(0, 0);
     }
-    else
+    else if (game_variant == game_variant_duo)
     {
         unsigned int sz = 14;
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
         if (c == Color(0))
             return Point(4, sz - 4 - 1);
         LIBBOARDGAME_ASSERT(c == Color(1));
         return Point(sz - 4 - 1, 4);
     }
+    else
+        return Point::null();
 }
 
 bool Board::has_moves(Color c) const
 {
-    bool is_first_move = (m_pieces_left[c].size() == nu_pieces);
+    bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     for (Iterator i(*this); i; ++i)
         if (! m_forbidden[c][*i]
             && (is_attach_point(*i, c)
@@ -303,18 +323,48 @@ bool Board::has_moves(Color c, Point p) const
 void Board::init(GameVariant game_variant)
 {
     m_game_variant = game_variant;
+    if (m_game_variant == game_variant_duo)
+    {
+        m_color_name[Color(0)] = "Blue";
+        m_color_name[Color(1)] = "Green";
+        m_color_esc_sequence[Color(0)] = "\x1B[1;34;47m";
+        m_color_esc_sequence[Color(1)] = "\x1B[1;32;47m";
+        m_color_esc_sequence_text[Color(0)] = "\x1B[1;34m";
+        m_color_esc_sequence_text[Color(1)] = "\x1B[1;32m";
+    }
+    else
+    {
+        m_color_name[Color(0)] = "Blue";
+        m_color_name[Color(1)] = "Yellow";
+        m_color_name[Color(2)] = "Red";
+        m_color_name[Color(3)] = "Green";
+        m_color_esc_sequence[Color(0)] = "\x1B[1;34;47m";
+        m_color_esc_sequence[Color(1)] = "\x1B[1;33;47m";
+        m_color_esc_sequence[Color(2)] = "\x1B[1;31;47m";
+        m_color_esc_sequence[Color(3)] = "\x1B[1;32;47m";
+        m_color_esc_sequence_text[Color(0)] = "\x1B[1;34m";
+        m_color_esc_sequence_text[Color(1)] = "\x1B[1;33m";
+        m_color_esc_sequence_text[Color(2)] = "\x1B[1;31m";
+        m_color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
+    }
     BoardType board_type;
-    if  (game_variant == game_variant_classic
-         || game_variant == game_variant_classic_2)
+    if (game_variant == game_variant_classic
+        || game_variant == game_variant_classic_2)
     {
         board_type = board_type_classic;
         m_nu_colors = 4;
     }
-    else
+    else if (game_variant == game_variant_duo)
     {
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
         board_type = board_type_duo;
         m_nu_colors = 2;
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_trigon
+                            || game_variant == game_variant_trigon_2);
+        board_type = board_type_trigon;
+        m_nu_colors = 4;
     }
     m_board_const = &BoardConst::get(board_type);
     m_geometry = &m_board_const->get_geometry();
@@ -325,7 +375,8 @@ void Board::init(GameVariant game_variant)
     m_played_move.fill(Move::null());
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
-        if (game_variant == game_variant_classic_2)
+        if (game_variant == game_variant_classic_2
+            || game_variant == game_variant_trigon_2)
             m_second_color[*i] =
                 (*i).get_next(m_nu_colors).get_next(m_nu_colors);
         else
@@ -335,7 +386,7 @@ void Board::init(GameVariant game_variant)
         m_forbidden[*i].fill_onboard(false);
         m_is_attach_point[*i].init(*m_geometry, false);
         m_pieces_left[*i].clear();
-        for (unsigned int j = 0; j < nu_pieces; ++j)
+        for (unsigned int j = 0; j < get_nu_pieces(); ++j)
             m_pieces_left[*i].push_back(j);
     }
     m_to_play = Color(0);
@@ -363,7 +414,7 @@ bool Board::is_legal(Color c, Move mv) const
         if (is_attach_point(p, c))
             has_attach_point = true;
     }
-    bool is_first_move = (m_pieces_left[c].size() == nu_pieces);
+    bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     return (has_attach_point ||
             (is_first_move && points.contains(get_starting_point(c))));
 }
@@ -439,38 +490,6 @@ void Board::undo()
 
 void Board::write(ostream& out, bool mark_last_move) const
 {
-    ColorMap<char> color_char;
-    color_char[Color(0)] = 'X';
-    color_char[Color(1)] = 'O';
-    color_char[Color(2)] = '#';
-    color_char[Color(3)] = '@';
-    ColorMap<const char*> color_esc_sequence;
-    ColorMap<const char*> color_esc_sequence_text;
-    ColorMap<const char*> color_name;
-    if (m_game_variant == game_variant_duo)
-    {
-        color_name[Color(0)] = "Blue";
-        color_name[Color(1)] = "Green";
-        color_esc_sequence[Color(0)] = "\x1B[1;34;47m";
-        color_esc_sequence[Color(1)] = "\x1B[1;32;47m";
-        color_esc_sequence_text[Color(0)] = "\x1B[1;34m";
-        color_esc_sequence_text[Color(1)] = "\x1B[1;32m";
-    }
-    else
-    {
-        color_name[Color(0)] = "Blue";
-        color_name[Color(1)] = "Yellow";
-        color_name[Color(2)] = "Red";
-        color_name[Color(3)] = "Green";
-        color_esc_sequence[Color(0)] = "\x1B[1;34;47m";
-        color_esc_sequence[Color(1)] = "\x1B[1;33;47m";
-        color_esc_sequence[Color(2)] = "\x1B[1;31;47m";
-        color_esc_sequence[Color(3)] = "\x1B[1;32;47m";
-        color_esc_sequence_text[Color(0)] = "\x1B[1;34m";
-        color_esc_sequence_text[Color(1)] = "\x1B[1;33m";
-        color_esc_sequence_text[Color(2)] = "\x1B[1;31m";
-        color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
-    }
     ColorMove last_mv = ColorMove::null();
     unsigned int n = get_nu_moves();
     while (n > 0)
@@ -482,8 +501,10 @@ void Board::write(ostream& out, bool mark_last_move) const
     }
     unsigned int width = m_geometry->get_width();
     unsigned int height = m_geometry->get_height();
+    bool is_info_location_right = (width <= 20);
+    bool is_trigon = (get_board_type() == board_type_trigon);
     bool last_mv_marked = false;
-    write_x_coord(out, width);
+    write_x_coord(out, width, is_trigon ? 3 : 2);
     for (unsigned int y = height - 1; ; --y)
     {
         if (y < 9)
@@ -492,15 +513,17 @@ void Board::write(ostream& out, bool mark_last_move) const
         for (unsigned int x = 0; x < width; ++x)
         {
             Point p(x, y);
-            PointState s = get_point_state(p);
-            if (x > 0)
+            PointStateExt s = get_point_state_ext(p);
+            if ((x > 0
+                 || (is_trigon
+                     && ! get_point_state_ext(Point(x + 1, y)).is_offboard()))
+                && ! s.is_offboard())
             {
-                if (color_output)
-                    out << "\x1B[1;37;47m";
                 if (mark_last_move && ! last_mv_marked && ! last_mv.is_null()
                     && get_point_state(Point(x - 1, y)) != last_mv.color
                     && get_played_move(Point(x, y)) == last_mv.move)
                 {
+                    set_color(out, "\x1B[1;37;47m");
                     out << '>';
                     last_mv_marked = true;
                 }
@@ -508,117 +531,144 @@ void Board::write(ostream& out, bool mark_last_move) const
                          && ! last_mv.is_null() && s != last_mv.color
                          && get_played_move(Point(x - 1, y)) == last_mv.move)
                 {
+                    set_color(out, "\x1B[1;37;47m");
                     out << '<';
                     last_mv_marked = true;
                 }
+                else if (is_trigon)
+                {
+                    set_color(out, "\x1B[1;30;47m");
+                    out << (x % 2 == y % 2 ? '\\' : '/');
+                }
                 else
+                {
+                    set_color(out, "\x1B[1;30;47m");
                     out << ' ';
+                }
             }
-            if (s.is_empty())
+            if (s.is_offboard())
+            {
+                if (is_trigon && x > 0
+                    && ! get_point_state_ext(Point(x - 1, y)).is_offboard())
+                {
+                    set_color(out, "\x1B[1;30;47m");
+                    out << (x % 2 == y % 2 ? '\\' : '/');
+                }
+                else
+                {
+                    set_color(out, "\x1B[0m");
+                    out << "  ";
+                }
+            }
+            else if (s.is_empty())
             {
                 Color color;
                 if (is_starting_point(p, color))
                 {
-                    if (color_output)
-                        out << color_esc_sequence[color];
+                    set_color(out, m_color_esc_sequence[color]);
                     out << '+';
                 }
                 else
                 {
-                    if (color_output)
-                        out << "\x1B[1;30;47m";
-                    out << '.';
+                    set_color(out, "\x1B[1;30;47m");
+                    out << (is_trigon ? ' ' : '.');
                 }
             }
             else
             {
                 Color color = s.to_color();
-                if (color_output)
-                    out << color_esc_sequence[color];
-                out << color_char[color];
+                set_color(out, m_color_esc_sequence[color]);
+                out << m_color_char[color];
             }
         }
-        if (color_output)
-            out << "\x1B[0m";
+        if (is_trigon)
+        {
+            if (! get_point_state_ext(Point(width - 1, y)).is_offboard())
+            {
+                set_color(out, "\x1B[1;30;47m");
+                out << (y % 2 != 0 ? '\\' : '/');
+            }
+            else
+            {
+                set_color(out, "\x1B[0m");
+                out << "  ";
+            }
+        }
+        set_color(out, "\x1B[0m");
         out << ' ' << (y + 1);
-        if (y == height - 1)
-            write_color_info_line1(out, Color(0), color_name[Color(0)],
-                                   color_char[Color(0)],
-                                   color_esc_sequence_text[Color(0)], y);
-        else if (y == height - 2)
-            write_color_info_line2(out, Color(0), y);
-        else if (y == height - 3)
-            write_color_info_line3(out, Color(0), y);
-        else if (y == height - 5)
-            write_color_info_line1(out, Color(1), color_name[Color(1)],
-                                   color_char[Color(1)],
-                                   color_esc_sequence_text[Color(1)], y);
-        else if (y == height - 6)
-            write_color_info_line2(out, Color(1), y);
-        else if (y == height - 7)
-            write_color_info_line3(out, Color(1), y);
-        else if (y == height - 9 && m_nu_colors > 2)
-            write_color_info_line1(out, Color(2), color_name[Color(2)],
-                                   color_char[Color(2)],
-                                   color_esc_sequence_text[Color(2)], y);
-        else if (y == height - 10 && m_nu_colors > 2)
-            write_color_info_line2(out, Color(2), y);
-        else if (y == height - 11 && m_nu_colors > 2)
-            write_color_info_line3(out, Color(2), y);
-        else if (y == height - 13 && m_nu_colors > 3)
-            write_color_info_line1(out, Color(3), color_name[Color(3)],
-                                   color_char[Color(3)],
-                                   color_esc_sequence_text[Color(3)], y);
-        else if (y == height - 14 && m_nu_colors > 3)
-            write_color_info_line2(out, Color(3), y);
-        else if (y == height - 15 && m_nu_colors > 3)
-            write_color_info_line3(out, Color(3), y);
+        if (is_info_location_right)
+        {
+            if (y < 9)
+                out << "   ";
+            else
+                out << "  ";
+            write_info_line(out, height - y - 1);
+        }
         out << '\n';
         if (y == 0)
             break;
     }
-    write_x_coord(out, width);
+    write_x_coord(out, width, is_trigon ? 3 : 2);
+    if (! is_info_location_right)
+        for (ColorIterator i(m_nu_colors); i; ++i)
+        {
+            write_color_info_line1(out, *i);
+            out << ' ';
+            write_color_info_line2(out, *i);
+            out << ' ';
+            write_color_info_line3(out, *i);
+            out << '\n';
+        }
 }
 
-void Board::write_color_info_line1(ostream& out, Color c, const char* name,
-                                   char color_char,
-                                   const char* color_esc_sequence,
-                                   unsigned int y) const
+void Board::write_color_info_line1(ostream& out, Color c) const
 {
-    if (y + 1 < 10)
-        out << "   ";
-    else
-        out << "  ";
-    if (color_output)
-        out << color_esc_sequence;
-    out << name << "(" << color_char << "): " << get_points(c);
+    set_color(out, m_color_esc_sequence_text[c]);
+    out << m_color_name[c] << "(" << m_color_char[c] << "): " << get_points(c);
     unsigned int bonus = get_bonus(c);
     if (bonus > 0)
         out << " (+" << bonus << ')';
     if (get_to_play() == c)
         out << " *";
-    if (color_output)
-        out << "\x1B[0m";
+    set_color(out, "\x1B[0m");
 }
 
-void Board::write_color_info_line2(ostream& out, Color c,
-                                   unsigned int y) const
+void Board::write_color_info_line2(ostream& out, Color c) const
 {
-    if (y + 1 < 10)
-        out << "  ";
-    else
-        out << ' ';
     write_pieces_left(out, c, 0, 10);
 }
 
-void Board::write_color_info_line3(ostream& out, Color c,
-                                   unsigned int y) const
+void Board::write_color_info_line3(ostream& out, Color c) const
 {
-    if (y + 1 < 10)
-        out << "  ";
-    else
-        out << ' ';
-    write_pieces_left(out, c, 10, nu_pieces);
+    write_pieces_left(out, c, 10, get_nu_pieces());
+}
+
+void Board::write_info_line(ostream& out, unsigned int y) const
+{
+    if (y == 0)
+        write_color_info_line1(out, Color(0));
+    else if (y == 1)
+        write_color_info_line2(out, Color(0));
+    else if (y == 2)
+        write_color_info_line3(out, Color(0));
+    else if (y == 4)
+        write_color_info_line1(out, Color(1));
+    else if (y == 5)
+        write_color_info_line2(out, Color(1));
+    else if (y == 6)
+        write_color_info_line3(out, Color(1));
+    else if (y == 8 && m_nu_colors > 2)
+        write_color_info_line1(out, Color(2));
+    else if (y == 9 && m_nu_colors > 2)
+        write_color_info_line2(out, Color(2));
+    else if (y == 10 && m_nu_colors > 2)
+        write_color_info_line3(out, Color(2));
+    else if (y == 12 && m_nu_colors > 3)
+        write_color_info_line1(out, Color(3));
+    else if (y == 13 && m_nu_colors > 3)
+        write_color_info_line2(out, Color(3));
+    else if (y == 14 && m_nu_colors > 3)
+        write_color_info_line3(out, Color(3));
 }
 
 void Board::write_pieces_left(ostream& out, Color c, unsigned int begin,
@@ -626,7 +676,11 @@ void Board::write_pieces_left(ostream& out, Color c, unsigned int begin,
 {
     for (unsigned int i = begin; i < end; ++i)
         if (i < m_pieces_left[c].size())
-            out << ' ' << get_piece(m_pieces_left[c][i]).get_name();
+        {
+            if (i > begin)
+                out << ' ';
+            out << get_piece(m_pieces_left[c][i]).get_name();
+        }
 }
 
 //-----------------------------------------------------------------------------

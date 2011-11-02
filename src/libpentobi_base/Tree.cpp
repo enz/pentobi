@@ -150,6 +150,7 @@ string Tree::get_player_name(Color c) const
     switch (m_game_variant)
     {
     case game_variant_classic:
+    case game_variant_trigon:
         if (c == Color(0))
             return root.get_property("P1", "");
         if (c == Color(1))
@@ -160,6 +161,7 @@ string Tree::get_player_name(Color c) const
             return root.get_property("P4", "");
         break;
     case game_variant_classic_2:
+    case game_variant_trigon_2:
         if (c == Color(0) || c == Color(2))
             return root.get_property("PB", "");
         if (c == Color(1) || c == Color(3))
@@ -189,6 +191,12 @@ void Tree::init(GameVariant game_variant)
     case game_variant_classic_2:
         set_property(root, "GM", "Blokus Two-Player");
         break;
+    case game_variant_trigon:
+        set_property(root, "GM", "Blokus Trigon");
+        break;
+    case game_variant_trigon_2:
+        set_property(root, "GM", "Blokus Trigon Two-Player");
+        break;
     default:
         LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
         set_property(root, "GM", "Blokus Duo");
@@ -206,6 +214,10 @@ void Tree::init(unique_ptr<Node>& root)
         game_variant = game_variant_classic;
     else if (s == "blokus two-player")
         game_variant = game_variant_classic_2;
+    else if (s == "blokus trigon")
+        game_variant = game_variant_trigon;
+    else if (s == "blokus trigon two-player")
+        game_variant = game_variant_trigon_2;
     else if (s == "blokus duo")
         game_variant = game_variant_duo;
     else
@@ -221,10 +233,12 @@ void Tree::init_board_const(GameVariant game_variant)
     switch (game_variant)
     {
     case game_variant_classic:
-        board_type = board_type_classic;
-        break;
     case game_variant_classic_2:
         board_type = board_type_classic;
+        break;
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+        board_type = board_type_trigon;
         break;
     default:
         LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
@@ -266,6 +280,7 @@ void Tree::set_player_name(Color c, const string& name)
     switch (m_game_variant)
     {
     case game_variant_classic:
+    case game_variant_trigon:
         if (c == Color(0))
             set_property(root, "P1", name);
         else if (c == Color(1))
@@ -278,6 +293,7 @@ void Tree::set_player_name(Color c, const string& name)
             LIBBOARDGAME_ASSERT(false);
         return;
     case game_variant_classic_2:
+    case game_variant_trigon_2:
         if (c == Color(0) || c == Color(2))
             set_property(root, "PB", name);
         else if (c == Color(1) || c == Color(3))

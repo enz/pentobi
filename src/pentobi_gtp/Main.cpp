@@ -34,6 +34,8 @@ using libboardgame_util::RandomGenerator;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::Board;
 using libpentobi_base::GameVariant;
 using libpentobi_mcts::BookBuilder;
@@ -75,7 +77,7 @@ int main(int argc, char** argv)
             ("config,c", value<>(&config_file), "set GTP config file")
             ("color", "colorize text output of boards")
             ("game,g", value<>(&game_variant_string),
-             "game variant (classic, classic_2, duo)")
+             "game variant (classic, classic_2, duo, trigon, trigon_2)")
             ("help,h", "print help message and exit")
             ("level,l", value<int>(&level), "set playing strength level")
             ("seed,r", value<uint32_t>(&seed), "set random seed")
@@ -125,6 +127,10 @@ int main(int argc, char** argv)
         else if (game_variant_string == "classic_2"
                  || game_variant_string == "c2")
             game_variant = game_variant_classic_2;
+        else if (game_variant_string == "trigon")
+            game_variant = game_variant_trigon;
+        else if (game_variant_string == "trigon_2")
+            game_variant = game_variant_trigon_2;
         else
             throw Exception(format("invalid game variant '%1%'")
                             % game_variant_string);

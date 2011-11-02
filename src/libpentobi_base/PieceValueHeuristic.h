@@ -27,7 +27,7 @@ public:
     float get(unsigned int piece) const;
 
 private:
-    array<float, BoardConst::nu_pieces> m_value;
+    array<float, BoardConst::max_pieces> m_value;
 
     void set(const Board& bd, const string& name, float value);
 };

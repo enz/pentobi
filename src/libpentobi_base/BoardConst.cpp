@@ -14,6 +14,7 @@
 #include "SymmetricPoints.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/Transform.h"
+#include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_util/Log.h"
 
 namespace libpentobi_base {
@@ -21,6 +22,7 @@ namespace libpentobi_base {
 using namespace std;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
+using libboardgame_base::TrigonGeometry;
 using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
@@ -29,13 +31,18 @@ namespace {
 
 const bool log_move_creation = false;
 
-vector<Piece> create_pieces()
+vector<Piece> create_pieces(BoardType board_type)
 {
+    vector<Piece> pieces;
+    if (board_type == board_type_trigon)
+    {
+        log() << "TODO: define pieces for Trigon\n";
+        return pieces;
+    }
     // Define the 21 standard pieces. The piece names are the standard names as
     // http://c2strategy.wordpress.com/2011/04/10/piece-names/. The default
     // orientation is chosen such that it resembles the letter in the piece name
-    vector<Piece> pieces;
-    pieces.reserve(BoardConst::nu_pieces);
+    pieces.reserve(BoardConst::max_pieces);
     {
         Piece::Points points;
         points.push_back(CoordPoint(-1, 0));
@@ -209,7 +216,6 @@ vector<Piece> create_pieces()
         points.push_back(CoordPoint(0, 0));
         pieces.push_back(Piece("1", points));
     }
-    LIBBOARDGAME_ASSERT(pieces.size() == BoardConst::nu_pieces);
     return pieces;
 }
 
@@ -217,10 +223,12 @@ const Geometry& create_geometry(BoardType board_type)
 {
     if (board_type == board_type_classic)
         return *RectGeometry<Point>::get(20, 20);
+    else if (board_type == board_type_duo)
+        return *RectGeometry<Point>::get(14, 14);
     else
     {
-        LIBBOARDGAME_ASSERT(board_type == board_type_duo);
-        return *RectGeometry<Point>::get(14, 14);
+        LIBBOARDGAME_ASSERT(board_type == board_type_trigon);
+        return *TrigonGeometry<Point>::get(9);
     }
 }
 
@@ -231,7 +239,9 @@ const Geometry& create_geometry(BoardType board_type)
 BoardConst::BoardConst(BoardType board_type)
     : m_geometry(create_geometry(board_type))
 {
-    m_pieces = create_pieces();
+    m_board_type = board_type;
+    m_pieces = create_pieces(board_type);
+    m_nu_pieces = m_pieces.size();
     for (int s0 = 0; s0 <= 1; ++s0)
         for (int s1 = 0; s1 <= 1; ++s1)
             for (int s2 = 0; s2 <= 1; ++s2)
@@ -256,12 +266,16 @@ BoardConst::BoardConst(BoardType board_type)
     LIBBOARDGAME_ASSERT(m_move_info.size() <= Move::range - 2);
     LIBBOARDGAME_ASSERT(board_type != board_type_classic
                         || m_move_info.size() == Move::range - 2);
-#if LIBBOARDGAME_DEBUG
-    unsigned int sum_points = 0;
+    m_total_piece_points = 0;
     BOOST_FOREACH(const Piece& piece, m_pieces)
-        sum_points += piece.get_size();
-    LIBBOARDGAME_ASSERT(sum_points == total_piece_points);
-#endif
+        m_total_piece_points += piece.get_size();
+    if (board_type == board_type_classic || board_type == board_type_duo)
+    {
+        LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
+        LIBBOARDGAME_ASSERT(m_total_piece_points == 89);
+    }
+    else if (board_type == board_type_trigon)
+        log() << "TODO: assert nu pieces and total piece points in Trigon\n";
     init_symmetry_info();
 }
 
@@ -339,25 +353,31 @@ const BoardConst& BoardConst::get(BoardType board_type)
 {
     static unique_ptr<BoardConst> board_const_classic;
     static unique_ptr<BoardConst> board_const_duo;
+    static unique_ptr<BoardConst> board_const_trigon;
     if (board_type == board_type_classic)
     {
         if (board_const_classic.get() == 0)
             board_const_classic.reset(new BoardConst(board_type_classic));
         return *board_const_classic;
     }
-    else
+    else if (board_type == board_type_duo)
     {
-        LIBBOARDGAME_ASSERT(board_type == board_type_duo);
         if (board_const_duo.get() == 0)
             board_const_duo.reset(new BoardConst(board_type_duo));
         return *board_const_duo;
+    }
+    else
+    {
+        if (board_const_trigon.get() == 0)
+            board_const_trigon.reset(new BoardConst(board_type_trigon));
+        return *board_const_trigon;
     }
 }
 
 bool BoardConst::get_piece_index_by_name(const string& name,
                                          unsigned int& index) const
 {
-    for (unsigned int i = 0; i < nu_pieces; ++i)
+    for (unsigned int i = 0; i < m_nu_pieces; ++i)
         if (get_piece(i).get_name() == name)
         {
             index = i;

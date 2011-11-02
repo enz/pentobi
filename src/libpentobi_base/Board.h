@@ -37,13 +37,13 @@ public:
         Iterator(const Board& bd);
     };
 
-    static const unsigned int nu_pieces = BoardConst::nu_pieces;
+    static const unsigned int max_pieces = BoardConst::max_pieces;
 
     /** Maximum number of moves for a player in a game.
         Assumes that a player is only allowed to pass if she has no legal
         moves and allows an extra pass move per player at the end of a game to
         indicate that the game is over. */
-    static const unsigned int max_player_moves = nu_pieces + 1;
+    static const unsigned int max_player_moves = max_pieces + 1;
 
     static const unsigned int max_game_moves = Color::range * max_player_moves;
 
@@ -61,6 +61,8 @@ public:
 
     unsigned int get_nu_colors() const;
 
+    unsigned int get_nu_pieces() const;
+
     /** Get the state of an on-board point. */
     PointState get_point_state(Point p) const;
 
@@ -73,7 +75,7 @@ public:
 
     Color get_effective_to_play() const;
 
-    const ArrayList<unsigned int, nu_pieces>& get_pieces_left(Color c) const;
+    const ArrayList<unsigned int, max_pieces>& get_pieces_left(Color c) const;
 
     bool is_piece_left(Color c, const Piece& piece) const;
 
@@ -140,6 +142,8 @@ public:
     bool is_forbidden(Color c, Move mv) const;
 
     const BoardConst& get_board_const() const;
+
+    BoardType get_board_type() const;
 
     unsigned int get_adj_status_index(Point p, Color c) const;
 
@@ -210,12 +214,20 @@ private:
 
     Grid<Move> m_played_move;
 
-    ColorMap<ArrayList<unsigned int, nu_pieces>> m_pieces_left;
+    ColorMap<ArrayList<unsigned int, max_pieces>> m_pieces_left;
 
     /** See get_second_color() */
     ColorMap<Color> m_second_color;
 
     ArrayList<ColorMove, max_game_moves> m_moves;
+
+    ColorMap<char> m_color_char;
+
+    ColorMap<const char*> m_color_esc_sequence;
+
+    ColorMap<const char*> m_color_esc_sequence_text;
+
+    ColorMap<const char*> m_color_name;
 
     /** Local variable during move generation.
         Reused for efficiency. */
@@ -233,13 +245,13 @@ private:
     void write_pieces_left(ostream& out, Color c, unsigned int begin,
                            unsigned int end) const;
 
-    void write_color_info_line1(ostream& out, Color c, const char* name,
-                                char color_char, const char* color_esc_sequence,
-                                unsigned int y) const;
+    void write_color_info_line1(ostream& out, Color c) const;
 
-    void write_color_info_line2(ostream& out, Color c, unsigned int y) const;
+    void write_color_info_line2(ostream& out, Color c) const;
 
-    void write_color_info_line3(ostream& out, Color c, unsigned int y) const;
+    void write_color_info_line3(ostream& out, Color c) const;
+
+    void write_info_line(ostream& out, unsigned int y) const;
 };
 
 typedef Board::Iterator BoardIterator;
@@ -257,6 +269,11 @@ inline bool Board::find_move(const MovePoints& points, Move& move) const
 inline const BoardConst& Board::get_board_const() const
 {
     return *m_board_const;
+}
+
+inline BoardType Board::get_board_type() const
+{
+    return m_board_const->get_board_type();
 }
 
 inline GameVariant Board::get_game_variant() const
@@ -310,6 +327,11 @@ inline const MovePoints& Board::get_move_points(Move mv) const
     return m_board_const->get_move_points(mv);
 }
 
+inline unsigned int Board::get_nu_pieces() const
+{
+    return m_board_const->get_nu_pieces();
+}
+
 inline const Piece& Board::get_piece(unsigned int n) const
 {
     return m_board_const->get_piece(n);
@@ -331,7 +353,7 @@ inline bool Board::get_piece_index_by_name(const string& name,
     return m_board_const->get_piece_index_by_name(name, index);
 }
 
-inline const ArrayList<unsigned int, Board::nu_pieces>&
+inline const ArrayList<unsigned int, Board::max_pieces>&
                                           Board::get_pieces_left(Color c) const
 {
     return m_pieces_left[c];

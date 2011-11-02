@@ -35,7 +35,7 @@ PieceValueHeuristic::PieceValueHeuristic(const Board& bd)
     set(bd, "I3", 0.45f);
     set(bd, "2",  0.40f);
     set(bd, "1",  0.35f);
-    LIBBOARDGAME_ASSERT(BoardConst::nu_pieces == 21);
+    LIBBOARDGAME_ASSERT(bd.get_nu_pieces() == 21);
 }
 
 void PieceValueHeuristic::set(const Board& bd, const string& name, float value)

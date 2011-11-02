@@ -15,7 +15,11 @@ enum GameVariant
 
     game_variant_classic_2,
 
-    game_variant_duo
+    game_variant_duo,
+
+    game_variant_trigon,
+
+    game_variant_trigon_2
 };
 
 //-----------------------------------------------------------------------------
