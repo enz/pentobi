@@ -459,6 +459,8 @@ void State::init_move_list(Color c)
 
 void State::init_symmetry_info()
 {
+    if (! m_check_symmetric_draw)
+        return;
     m_is_symmetry_broken = false;
     if (m_bd.get_to_play() == Color(0))
     {
@@ -676,7 +678,7 @@ void State::update_move_list(Color c)
 
 void State::update_symmetry_info(Move mv)
 {
-    if (m_is_symmetry_broken)
+    if (! m_check_symmetric_draw || m_is_symmetry_broken)
         return;
     if (mv.is_pass())
     {
