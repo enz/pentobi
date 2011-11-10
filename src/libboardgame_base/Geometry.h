@@ -51,6 +51,17 @@ public:
 
     virtual ~Geometry();
 
+    /** Return the point type if the board has different types of points.
+        For example, in the geometry used in Blokus Trigon, there are two
+        point types (0=downside triangle, 1=upside trinagle); in a regular
+        rectangle, there is only one point type. By convention, 0 is the
+        type of the point at (0,0).
+        @param x The x coordinate (may be negative and/or outside the board).
+        @param y The y coordinate (may be negative and/or outside the board). */
+    virtual unsigned int get_point_type(int x, int y) const = 0;
+
+    unsigned int get_point_type(Point p) const;
+
     bool is_onboard(Point p) const;
 
     bool is_onboard(CoordPoint p) const;
@@ -195,6 +206,12 @@ template<class P>
 inline unsigned int Geometry<P>::get_height() const
 {
     return m_height;
+}
+
+template<class P>
+inline unsigned int Geometry<P>::get_point_type(Point p) const
+{
+    return get_point_type(p.get_x(), p.get_y());
 }
 
 template<class P>

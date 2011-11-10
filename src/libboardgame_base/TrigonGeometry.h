@@ -40,6 +40,8 @@ public:
         @param sz The edge size of the hexagon. */
     static const TrigonGeometry* get(unsigned int sz);
 
+    unsigned int get_point_type(int x, int y) const;
+
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
@@ -74,6 +76,15 @@ const TrigonGeometry<P>* TrigonGeometry<P>::get(unsigned int sz)
 }
 
 template<class P>
+unsigned int TrigonGeometry<P>::get_point_type(int x, int y) const
+{
+    if (x % 2 == 0)
+        return (y % 2 == 0 ? 0 : 1);
+    else
+        return (y % 2 != 0 ? 0 : 1);
+}
+
+template<class P>
 void TrigonGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
 {
     unsigned int dy = min(p.get_y(), Geometry<P>::get_height() - p.get_y() - 1);
@@ -86,22 +97,9 @@ template<class P>
 void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
                                       NullTermList<Point, 4>& diag) const
 {
-    bool is_up;
-    if (p.get_x() % 2 == 0)
-        is_up = (p.get_y() % 2 != 0);
-    else
-        is_up = (p.get_y() % 2 == 0);
     typename NullTermList<Point, 4>::Init init_adj(adj);
-    if (is_up)
-    {
-        if (is_onboard(p.get_down()))
-            init_adj.push_back(p.get_down());
-        if (is_onboard(p.get_left()))
-            init_adj.push_back(p.get_left());
-        if (is_onboard(p.get_right()))
-            init_adj.push_back(p.get_right());
-    }
-    else
+    unsigned int type = Geometry<P>::get_point_type(p);
+    if (type == 0)
     {
         if (is_onboard(p.get_up()))
             init_adj.push_back(p.get_up());
@@ -110,18 +108,18 @@ void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
         if (is_onboard(p.get_right()))
             init_adj.push_back(p.get_right());
     }
+    else
+    {
+        if (is_onboard(p.get_down()))
+            init_adj.push_back(p.get_down());
+        if (is_onboard(p.get_left()))
+            init_adj.push_back(p.get_left());
+        if (is_onboard(p.get_right()))
+            init_adj.push_back(p.get_right());
+    }
     init_adj.finish();
     typename NullTermList<Point, 4>::Init init_diag(diag);
-    if (is_up)
-    {
-        if (is_onboard(p.get_up()))
-            init_diag.push_back(p.get_up());
-        if (is_onboard(p.get_down_left()))
-            init_diag.push_back(p.get_down_left());
-        if (is_onboard(p.get_down_right()))
-            init_diag.push_back(p.get_down_right());
-    }
-    else
+    if (type == 0)
     {
         if (is_onboard(p.get_down()))
             init_diag.push_back(p.get_down());
@@ -129,6 +127,15 @@ void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
             init_diag.push_back(p.get_up_left());
         if (is_onboard(p.get_up_right()))
             init_diag.push_back(p.get_up_right());
+    }
+    else
+    {
+        if (is_onboard(p.get_up()))
+            init_diag.push_back(p.get_up());
+        if (is_onboard(p.get_down_left()))
+            init_diag.push_back(p.get_down_left());
+        if (is_onboard(p.get_down_right()))
+            init_diag.push_back(p.get_down_right());
     }
     init_diag.finish();
 }

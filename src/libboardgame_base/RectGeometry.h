@@ -29,6 +29,8 @@ public:
 
     RectGeometry(unsigned int width, unsigned int height);
 
+    unsigned int get_point_type(int x, int y) const;
+
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
@@ -57,6 +59,14 @@ const RectGeometry<P>* RectGeometry<P>::get(unsigned int width,
     if (s_geometry[width][height].get() == 0)
         s_geometry[width][height].reset(new RectGeometry(width, height));
     return s_geometry[width][height].get();
+}
+
+template<class P>
+unsigned int RectGeometry<P>::get_point_type(int x, int y) const
+{
+    LIBBOARDGAME_UNUSED(x);
+    LIBBOARDGAME_UNUSED(y);
+    return 0;
 }
 
 template<class P>
