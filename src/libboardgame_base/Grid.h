@@ -157,11 +157,16 @@ ostream& Grid<P, T>::write(ostream& out) const
     }
     unsigned int width = m_geometry->get_width();
     unsigned int height = m_geometry->get_height();
+    string empty(max_len, ' ');
     for (unsigned int y = height - 1; ; --y)
     {
         for (unsigned int x = 0; x < width; ++x)
         {
-            out << setw(int(max_len)) << operator[](Point(x, y));
+            Point p(x, y);
+            if (m_geometry->is_onboard(p))
+                out << setw(int(max_len)) << operator[](p);
+            else
+                out << empty;
             if (x < width - 1)
                 out << ' ';
         }
