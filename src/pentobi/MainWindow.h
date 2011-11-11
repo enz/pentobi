@@ -149,7 +149,7 @@ public slots:
 
     void selectPiece(Color c, const Piece& piece);
 
-    void selectPiece(Color c, const Piece& piece, Transform transform);
+    void selectPiece(Color c, const Piece& piece, const Transform* transform);
 
     void setLevel(int level);
 
@@ -430,6 +430,8 @@ private:
 
     void genMove();
 
+    const Board& getBoard() const;
+
     QString getFilter() const;
 
     QString getLastDir();
@@ -527,6 +529,11 @@ private slots:
 
     void veryGoodMove(bool checked);
 };
+
+inline const Board& MainWindow::getBoard() const
+{
+    return m_game->get_board();
+}
 
 //-----------------------------------------------------------------------------
 

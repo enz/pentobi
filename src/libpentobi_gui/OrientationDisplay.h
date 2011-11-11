@@ -31,7 +31,7 @@ public:
 
     void setSelectedPiece(const Piece& piece);
 
-    void setSelectedPieceTransform(Transform transform);
+    void setSelectedPieceTransform(const Transform* transform);
 
 protected:
     void paintEvent(QPaintEvent* event);
@@ -41,7 +41,7 @@ private:
 
     const Piece* m_piece;
 
-    Transform m_transform;
+    const Transform* m_transform;
 
     bool m_isColorSelected;
 

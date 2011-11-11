@@ -5,9 +5,10 @@
 #ifndef LIBPENTOBI_BASE_PIECE_H
 #define LIBPENTOBI_BASE_PIECE_H
 
-#include <array>
+#include <map>
 #include <string>
 #include <vector>
+#include "PieceTransforms.h"
 #include "libboardgame_base/CoordPoint.h"
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_util/ArrayList.h"
@@ -41,7 +42,8 @@ public:
         (0, 0). (0, 0) should be a square in or near the center of the
         coordinates; it is used as the center when moving the piece or for
         drawing a label on the piece. */
-    Piece(const string& name, const Piece::Points& points);
+    Piece(const string& name, const Piece::Points& points,
+          const PieceTransforms& transforms);
 
     const string& get_name() const;
 
@@ -51,43 +53,40 @@ public:
     unsigned int get_size() const;
 
     /** Get a list with unique transformations.
-        The list has the same order as Tranform::all but transformations that
-        are equivalent to a previous transformation (because of a symmetry of
-        the piece) are omitted. */
-    const ArrayList<Transform, 8>& get_transforms() const;
+        The list has the same order as PieceTransforms::get_all() but
+        transformations that are equivalent to a previous transformation
+        (because of a symmetry of the piece) are omitted. */
+    const vector<const Transform*>& get_transforms() const;
 
     /** Get next transform from the list of unique transforms. */
-    Transform get_next_transform(Transform transform) const;
+    const Transform* get_next_transform(const Transform* transform) const;
 
     /** Get previous transform from the list of unique transforms. */
-    Transform get_previous_transform(Transform transform) const;
+    const Transform* get_previous_transform(const Transform* transform) const;
 
     /** Get the transform from the list of unique transforms that is equivalent
         to a given transform. */
-    Transform get_equivalent_transform(Transform transform) const;
+    const Transform* get_equivalent_transform(const Transform* transform) const;
 
     bool can_rotate() const;
 
-    bool can_flip_horizontally(Transform transform) const;
+    bool can_flip_horizontally(const Transform* transform) const;
 
-    bool can_flip_vertically(Transform transform) const;
+    bool can_flip_vertically(const Transform* transform) const;
 
-    bool find_transform(const Points& points, Transform& transform) const;
+    const Transform* find_transform(const Points& points) const;
 
 private:
     string m_name;
 
     Points m_points;
 
-    ArrayList<Transform, 8> m_transforms;
+    vector<const Transform*> m_uniq_transforms;
 
-    array<Transform, 8> m_equivalent_transform;
+    map<const Transform*,const Transform*> m_equivalent_transform;
+
+    const PieceTransforms* m_transforms;
 };
-
-inline Transform Piece::get_equivalent_transform(Transform transform) const
-{
-    return m_equivalent_transform[transform.to_int()];
-}
 
 inline const string& Piece::get_name() const
 {
@@ -104,9 +103,9 @@ inline unsigned int Piece::get_size() const
     return static_cast<unsigned int>(m_points.size());
 }
 
-inline const ArrayList<Transform, 8>& Piece::get_transforms() const
+inline const vector<const Transform*>& Piece::get_transforms() const
 {
-    return m_transforms;
+    return m_uniq_transforms;
 }
 
 //-----------------------------------------------------------------------------

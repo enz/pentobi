@@ -31,6 +31,7 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_bd(bd),
       m_isInitialized(false),
       m_selectedPiece(0),
+      m_selectedPieceTransform(0),
       m_isMoveShown(false)
 {
     setMinimumWidth(14 * (Point::max_width + 2));
@@ -59,6 +60,7 @@ void GuiBoard::clearMarkupFlag(Point p, MarkupFlag flag)
 void GuiBoard::clearSelectedPiece()
 {
     m_selectedPiece = 0;
+    m_selectedPieceTransform = 0;
     updateSelectedPiecePoints();
     setMouseTracking(false);
 }
@@ -212,7 +214,7 @@ void GuiBoard::placeSelectedPiece()
     int height = static_cast<int>(m_bd.get_geometry().get_height());
     BOOST_FOREACH(CoordPoint p, points)
     {
-        p = m_selectedPieceTransform.get_transformed(p);
+        p = m_selectedPieceTransform->get_transformed(p);
         int x = p.x + m_selectedPieceOffset.x;
         int y = p.y + m_selectedPieceOffset.y;
         if (x < 0 || x >= width || y < 0 || y >= height)
@@ -230,7 +232,7 @@ void GuiBoard::selectPiece(Color color, const Piece& piece)
     if (m_selectedPiece == &piece && m_selectedPieceColor == color)
         return;
     m_selectedPieceColor = color;
-    m_selectedPieceTransform = Transform();
+    m_selectedPieceTransform = m_bd.get_transforms().get_default();
     if (m_selectedPiece == 0)
         m_selectedPieceOffset = CoordPoint::null();
     m_selectedPiece = &piece;
@@ -285,7 +287,7 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
     int maxY = numeric_limits<int>::min();
     BOOST_FOREACH(const CoordPoint& piecePoint, m_selectedPiece->get_points())
     {
-        CoordPoint p = m_selectedPieceTransform.get_transformed(piecePoint);
+        CoordPoint p = m_selectedPieceTransform->get_transformed(piecePoint);
         p = p + m_selectedPieceOffset;
         if (p.x < minX)
             minX = p.x;
@@ -308,7 +310,7 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         m_selectedPieceOffset.y -= (maxY - height + 1);
 }
 
-void GuiBoard::setSelectedPieceTransform(Transform transform)
+void GuiBoard::setSelectedPieceTransform(const Transform* transform)
 {
     if (m_selectedPieceTransform == transform)
         return;
@@ -352,7 +354,7 @@ void GuiBoard::updateSelectedPiecePoints()
         int height = static_cast<int>(m_bd.get_geometry().get_height());
         BOOST_FOREACH(CoordPoint p, m_selectedPiece->get_points())
         {
-            p = m_selectedPieceTransform.get_transformed(p);
+            p = m_selectedPieceTransform->get_transformed(p);
             int x = p.x + m_selectedPieceOffset.x;
             int y = p.y + m_selectedPieceOffset.y;
             if (x >= 0 && x < width && y >= 0 && y < height)

@@ -34,7 +34,8 @@ public:
     int heightForWidth(int width) const;
 
 signals:
-    void pieceSelected(Color color, const Piece& piece, Transform transform);
+    void pieceSelected(Color color, const Piece& piece,
+                       const Transform* transform);
 
 protected:
     void mousePressEvent(QMouseEvent* event);
@@ -52,7 +53,7 @@ private:
 
     const Piece* m_piece[nuColumns][nuRows];
 
-    Transform m_transform[nuColumns][nuRows];
+    const Transform* m_transform[nuColumns][nuRows];
 
     void findPiecePoints(const Piece& piece, unsigned int x,
                          unsigned int y, Piece::Points& points) const;

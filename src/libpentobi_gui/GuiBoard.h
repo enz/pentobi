@@ -39,9 +39,9 @@ public:
 
     const Piece* getSelectedPiece() const;
 
-    Transform getSelectedPieceTransform() const;
+    const Transform* getSelectedPieceTransform() const;
 
-    void setSelectedPieceTransform(Transform transform);
+    void setSelectedPieceTransform(const Transform* transform);
 
     void showMove(Color c, Move mv);
 
@@ -99,7 +99,7 @@ private:
 
     Color m_selectedPieceColor;
 
-    Transform m_selectedPieceTransform;
+    const Transform* m_selectedPieceTransform;
 
     CoordPoint m_selectedPieceOffset;
 
@@ -148,7 +148,7 @@ inline const Piece* GuiBoard::getSelectedPiece() const
     return m_selectedPiece;
 }
 
-inline Transform GuiBoard::getSelectedPieceTransform() const
+inline const Transform* GuiBoard::getSelectedPieceTransform() const
 {
     return m_selectedPieceTransform;
 }

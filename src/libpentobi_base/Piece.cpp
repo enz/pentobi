@@ -18,21 +18,22 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-Piece::Piece(const string& name, const Piece::Points& points)
+Piece::Piece(const string& name, const Piece::Points& points,
+             const PieceTransforms& transforms)
     : m_name(name),
-      m_points(points)
+      m_points(points),
+      m_transforms(&transforms)
 {
     LIBBOARDGAME_ASSERT(points.size() <= max_size);
     LIBBOARDGAME_ASSERT(find(points.begin(), points.end(), CoordPoint(0, 0))
                     != points.end());
     vector<Piece::Points> all_transformed_points;
     Piece::Points transformed_points;
-    BOOST_FOREACH(Transform transform, Transform::get_all())
+    BOOST_FOREACH(const Transform* transform, transforms.get_all())
     {
-        unsigned int i = transform.to_int();
         transformed_points = points;
-        transform.transform(transformed_points.begin(),
-                            transformed_points.end());
+        transform->transform(transformed_points.begin(),
+                             transformed_points.end());
         unsigned int width;
         unsigned int height;
         CoordPoint::normalize_offset(transformed_points.begin(),
@@ -42,40 +43,42 @@ Piece::Piece(const string& name, const Piece::Points& points)
         auto end = all_transformed_points.end();
         auto pos = find(begin, end, transformed_points);
         if (pos != end)
-            m_equivalent_transform[i] = Transform::get_all()[pos - begin];
+            m_equivalent_transform[transform]
+                = transforms.get_all()[pos - begin];
         else
         {
-            m_equivalent_transform[i] = transform;
-            m_transforms.push_back(transform);
+            m_equivalent_transform[transform] = transform;
+            m_uniq_transforms.push_back(transform);
         }
         all_transformed_points.push_back(transformed_points);
     };
 }
 
-bool Piece::can_flip_horizontally(Transform transform) const
+bool Piece::can_flip_horizontally(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    Transform flip =
-        get_equivalent_transform(transform.get_mirrored_horizontally());
+    const Transform* flip = get_equivalent_transform(
+                            m_transforms->get_mirrored_horizontally(transform));
     return flip != transform;
 }
 
-bool Piece::can_flip_vertically(Transform transform) const
+bool Piece::can_flip_vertically(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    Transform flip =
-        get_equivalent_transform(transform.get_mirrored_vertically());
+    const Transform* flip = get_equivalent_transform(
+                              m_transforms->get_mirrored_vertically(transform));
     return flip != transform;
 }
 
 bool Piece::can_rotate() const
 {
-    Transform rotate =
-        get_equivalent_transform(Transform(Transform::rotate_90));
-    return rotate != Transform();
+    const Transform* transform = m_uniq_transforms[0];
+    const Transform* rotate = get_equivalent_transform(
+                                m_transforms->get_rotated_clockwise(transform));
+    return rotate != transform;
 }
 
-bool Piece::find_transform(const Points& points, Transform& transform) const
+const Transform* Piece::find_transform(const Points& points) const
 {
     Points normalized_points = points;
     unsigned int width;
@@ -83,26 +86,38 @@ bool Piece::find_transform(const Points& points, Transform& transform) const
     CoordPoint::normalize_offset(normalized_points.begin(),
                                  normalized_points.end(), width, height);
     sort(normalized_points.begin(), normalized_points.end());
-    BOOST_FOREACH(transform, get_transforms())
+    BOOST_FOREACH(const Transform* transform, get_transforms())
     {
         Points normalized_piece_points = get_points();
-        transform.transform(normalized_piece_points.begin(),
-                            normalized_piece_points.end());
+        transform->transform(normalized_piece_points.begin(),
+                             normalized_piece_points.end());
         CoordPoint::normalize_offset(normalized_piece_points.begin(),
                                      normalized_piece_points.end(),
                                      width, height);
         sort(normalized_piece_points.begin(), normalized_piece_points.end());
         if (normalized_piece_points == normalized_points)
-            return true;
+            return transform;
     }
-    return false;
+    return 0;
 }
 
-Transform Piece::get_next_transform(Transform transform) const
+const Transform* Piece::get_equivalent_transform(
+                                               const Transform* transform) const
+{
+    auto pos = m_equivalent_transform.find(transform);
+    if (pos == m_equivalent_transform.end())
+    {
+        LIBBOARDGAME_ASSERT(false);
+        return 0;
+    }
+    return pos->second;
+}
+
+const Transform* Piece::get_next_transform(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    auto begin = m_transforms.begin();
-    auto end = m_transforms.end();
+    auto begin = m_uniq_transforms.begin();
+    auto end = m_uniq_transforms.end();
     auto pos = find(begin, end, transform);
     LIBBOARDGAME_ASSERT(pos != end);
     if (pos + 1 == end)
@@ -111,11 +126,11 @@ Transform Piece::get_next_transform(Transform transform) const
         return *(pos + 1);
 }
 
-Transform Piece::get_previous_transform(Transform transform) const
+const Transform* Piece::get_previous_transform(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    auto begin = m_transforms.begin();
-    auto end = m_transforms.end();
+    auto begin = m_uniq_transforms.begin();
+    auto end = m_uniq_transforms.end();
     auto pos = find(begin, end, transform);
     LIBBOARDGAME_ASSERT(pos != end);
     if (pos == begin)

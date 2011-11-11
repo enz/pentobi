@@ -11,6 +11,7 @@
 #include "AdjIterator.h"
 #include "DiagIterator.h"
 #include "Grid.h"
+#include "PieceTransformsClassic.h"
 #include "SymmetricPoints.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/Transform.h"
@@ -31,7 +32,8 @@ namespace {
 
 const bool log_move_creation = false;
 
-vector<Piece> create_pieces(BoardType board_type)
+vector<Piece> create_pieces(BoardType board_type,
+                            const PieceTransforms& transforms)
 {
     vector<Piece> pieces;
     if (board_type == board_type_trigon)
@@ -50,7 +52,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(Piece("X", points));
+        pieces.push_back(Piece("X", points, transforms));
     }
     {
         Piece::Points points;
@@ -59,7 +61,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(-1, 0));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, -1));
-        pieces.push_back(Piece("F", points));
+        pieces.push_back(Piece("F", points, transforms));
     }
     {
         Piece::Points points;
@@ -68,7 +70,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(Piece("L5", points));
+        pieces.push_back(Piece("L5", points, transforms));
     }
     {
         Piece::Points points;
@@ -77,7 +79,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(Piece("N", points));
+        pieces.push_back(Piece("N", points, transforms));
     }
     {
         Piece::Points points;
@@ -86,7 +88,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(Piece("P", points));
+        pieces.push_back(Piece("P", points, transforms));
     }
     {
         Piece::Points points;
@@ -95,7 +97,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(Piece("T5", points));
+        pieces.push_back(Piece("T5", points, transforms));
     }
     {
         Piece::Points points;
@@ -104,7 +106,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(Piece("U", points));
+        pieces.push_back(Piece("U", points, transforms));
     }
     {
         Piece::Points points;
@@ -113,7 +115,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 2));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("V5", points));
+        pieces.push_back(Piece("V5", points, transforms));
     }
     {
         Piece::Points points;
@@ -122,7 +124,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(Piece("W", points));
+        pieces.push_back(Piece("W", points, transforms));
     }
     {
         Piece::Points points;
@@ -131,7 +133,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(0, -2));
-        pieces.push_back(Piece("Y", points));
+        pieces.push_back(Piece("Y", points, transforms));
     }
     {
         Piece::Points points;
@@ -140,7 +142,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(Piece("Z5", points));
+        pieces.push_back(Piece("Z5", points, transforms));
     }
     {
         Piece::Points points;
@@ -149,7 +151,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(Piece("I5", points));
+        pieces.push_back(Piece("I5", points, transforms));
     }
     {
         Piece::Points points;
@@ -157,7 +159,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(Piece("O", points));
+        pieces.push_back(Piece("O", points, transforms));
     }
     {
         Piece::Points points;
@@ -165,7 +167,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(0, -1));
-        pieces.push_back(Piece("T4", points));
+        pieces.push_back(Piece("T4", points, transforms));
     }
     {
         Piece::Points points;
@@ -173,7 +175,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(Piece("Z4", points));
+        pieces.push_back(Piece("Z4", points, transforms));
     }
     {
         Piece::Points points;
@@ -181,7 +183,7 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(Piece("L4", points));
+        pieces.push_back(Piece("L4", points, transforms));
     }
     {
         Piece::Points points;
@@ -189,32 +191,32 @@ vector<Piece> create_pieces(BoardType board_type)
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(Piece("I4", points));
+        pieces.push_back(Piece("I4", points, transforms));
     }
     {
         Piece::Points points;
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(Piece("V3", points));
+        pieces.push_back(Piece("V3", points, transforms));
     }
     {
         Piece::Points points;
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
-        pieces.push_back(Piece("I3", points));
+        pieces.push_back(Piece("I3", points, transforms));
     }
     {
         Piece::Points points;
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(Piece("2", points));
+        pieces.push_back(Piece("2", points, transforms));
     }
     {
         Piece::Points points;
         points.push_back(CoordPoint(0, 0));
-        pieces.push_back(Piece("1", points));
+        pieces.push_back(Piece("1", points, transforms));
     }
     return pieces;
 }
@@ -240,7 +242,10 @@ BoardConst::BoardConst(BoardType board_type)
     : m_geometry(create_geometry(board_type))
 {
     m_board_type = board_type;
-    m_pieces = create_pieces(board_type);
+    m_transforms.reset(new PieceTransformsClassic());
+    if (board_type == board_type_trigon)
+        log() << "TODO: implement piece transforms for Trigon\n";
+    m_pieces = create_pieces(board_type, *m_transforms);
     m_nu_pieces = m_pieces.size();
     for (int s0 = 0; s0 <= 1; ++s0)
         for (int s1 = 0; s1 <= 1; ++s1)
@@ -321,10 +326,11 @@ void BoardConst::create_moves(unsigned int piece)
     {
         unsigned int x = (*i).get_x();
         unsigned int y = (*i).get_y();
-        BOOST_FOREACH(Transform transform, m_pieces[piece].get_transforms())
+        BOOST_FOREACH(const Transform* transform,
+                      m_pieces[piece].get_transforms())
         {
             points = m_pieces[piece].get_points();
-            transform.transform(points.begin(), points.end());
+            transform->transform(points.begin(), points.end());
             sort(points.begin(), points.end());
             auto center = find(points.begin(), points.end(), CoordPoint(0, 0));
             LIBBOARDGAME_ASSERT(center != points.end());

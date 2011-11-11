@@ -63,6 +63,8 @@ public:
 
     unsigned int get_nu_pieces() const;
 
+    const PieceTransforms& get_transforms() const;
+
     /** Get the state of an on-board point. */
     PointState get_point_state(Point p) const;
 
@@ -388,6 +390,11 @@ inline Point Board::get_starting_point(Color c) const
 inline Color Board::get_to_play() const
 {
     return m_to_play;
+}
+
+inline const PieceTransforms& Board::get_transforms() const
+{
+    return m_board_const->get_transforms();
 }
 
 inline void Board::init()

@@ -21,6 +21,7 @@ OrientationDisplay::OrientationDisplay(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd),
       m_piece(0),
+      m_transform(0),
       m_isColorSelected(false)
 {
     setMinimumWidth(5 * Piece::max_size);
@@ -67,7 +68,7 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
     painter.translate((width() - displaySize) / 2,
                       (height() - displaySize) / 2);
     Piece::Points points = m_piece->get_points();
-    m_transform.transform(points.begin(), points.end());
+    m_transform->transform(points.begin(), points.end());
     unsigned int width, height;
     CoordPoint::normalize_offset(points.begin(), points.end(), width, height);
     painter.save();
@@ -95,14 +96,15 @@ void OrientationDisplay::selectColor(Color c)
 
 void OrientationDisplay::setSelectedPiece(const Piece& piece)
 {
-    if (m_piece == &piece && m_transform == Transform())
+    const Transform* transform = m_bd.get_transforms().get_default();
+    if (m_piece == &piece && m_transform == transform)
         return;
     m_piece = &piece;
-    m_transform = Transform();
+    m_transform = transform;
     update();
 }
 
-void OrientationDisplay::setSelectedPieceTransform(Transform transform)
+void OrientationDisplay::setSelectedPieceTransform(const Transform* transform)
 {
     if (m_transform == transform)
         return;

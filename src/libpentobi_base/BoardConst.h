@@ -14,6 +14,7 @@
 #include "MoveInfo.h"
 #include "Point.h"
 #include "Piece.h"
+#include "PieceTransforms.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libboardgame_util/ArrayList.h"
@@ -62,6 +63,8 @@ public:
     bool get_piece_index_by_name(const string& name,
                                  unsigned int& index) const;
 
+    const PieceTransforms& get_transforms() const;
+
     const MoveInfo& get_move_info(Move move) const;
 
     const MovePoints& get_move_points(Move mv) const;
@@ -87,6 +90,8 @@ private:
     const Geometry& m_geometry;
 
     vector<Piece> m_pieces;
+
+    unique_ptr<PieceTransforms> m_transforms;
 
     vector<MoveInfo> m_move_info;
 
@@ -175,6 +180,11 @@ inline const Piece& BoardConst::get_piece(unsigned int n) const
 inline unsigned int BoardConst::get_total_piece_points() const
 {
     return m_total_piece_points;
+}
+
+inline const PieceTransforms& BoardConst::get_transforms() const
+{
+    return *m_transforms;
 }
 
 //-----------------------------------------------------------------------------

@@ -30,29 +30,13 @@ public:
         rotate_270_mirror
     };
 
-    static const vector<Transform>& get_all();
-
-    Transform(Type type = Transform::identity);
-
-    bool operator==(Transform transform) const;
-
-    bool operator!=(Transform transform) const;
+    Transform(Type type);
 
     CoordPoint get_transformed(const CoordPoint& p) const;
 
     /** @tparam I An iterator of a container with elements of type CoordPoint */
     template<class I>
     void transform(I begin, I end) const;
-
-    Transform get_rotated_anticlockwise() const;
-
-    Transform get_rotated_clockwise() const;
-
-    Transform get_mirrored_vertically() const;
-
-    Transform get_mirrored_horizontally() const;
-
-    unsigned int to_int() const;
 
 private:
     Type m_type;
@@ -61,21 +45,6 @@ private:
 inline Transform::Transform(Type type)
     : m_type(type)
 {
-}
-
-inline bool Transform::operator==(Transform transform) const
-{
-    return m_type == transform.m_type;
-}
-
-inline bool Transform::operator!=(Transform transform) const
-{
-    return ! operator==(transform);
-}
-
-inline unsigned int Transform::to_int() const
-{
-    return static_cast<unsigned int>(m_type);
 }
 
 template<class I>

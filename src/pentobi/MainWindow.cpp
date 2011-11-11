@@ -128,7 +128,7 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     m_game.reset(new Game(variant));
     initGame();
     path appDirPath(QCoreApplication::applicationDirPath().toStdString());
-    m_player.reset(new Player(m_game->get_board(), variant, appDirPath));
+    m_player.reset(new Player(getBoard(), variant, appDirPath));
     m_player->set_use_book(! noBook);
     createActions();
     createToolBar();
@@ -208,7 +208,7 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
         if (QFile(autoSaveFile).exists())
         {
             open(autoSaveFile, true);
-            m_gameFinished = m_game->get_board().is_game_over();
+            m_gameFinished = getBoard().is_game_over();
             updateWindow(true);
         }
     }
@@ -302,7 +302,7 @@ void MainWindow::cancelGenMove()
 
 void MainWindow::checkComputerMove()
 {
-    bool isGameOver = m_game->get_board().is_game_over();
+    bool isGameOver = getBoard().is_game_over();
     if (! isGameOver && m_computerColor[m_toPlay])
         genMove();
 }
@@ -361,7 +361,7 @@ bool MainWindow::checkQuit()
         }
     }
     cancelGenMove();
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     if (m_file.isEmpty())
     {
         QString autoSaveFile = getAutoSaveFile();
@@ -440,7 +440,7 @@ void MainWindow::computerColor()
     if (variant != game_variant_classic)
     {
         bool computerNone = true;
-        for (ColorIterator i(m_game->get_board().get_nu_colors()); i; ++i)
+        for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
             if (m_computerColor[*i])
             {
                 computerNone = false;
@@ -458,7 +458,7 @@ void MainWindow::computerColor()
 
 bool MainWindow::computerPlaysAll() const
 {
-    for (ColorIterator i(m_game->get_board().get_nu_colors()); i; ++i)
+    for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
         if (! m_computerColor[*i])
             return false;
     return true;
@@ -874,7 +874,7 @@ QWidget* MainWindow::createCentralWidget()
 QWidget* MainWindow::createLeftPanel()
 {
     m_splitter = new QSplitter(Qt::Vertical);
-    m_guiBoard = new GuiBoard(0, m_game->get_board());
+    m_guiBoard = new GuiBoard(0, getBoard());
     m_splitter->addWidget(m_guiBoard);
     m_comment = new QPlainTextEdit();
     m_comment->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -1030,7 +1030,7 @@ QWidget* MainWindow::createOrientationSelector()
     layout->addWidget(frame, 1);
     QHBoxLayout* frameLayout = new QHBoxLayout();
     frame->setLayout(frameLayout);
-    m_orientationDisplay = new OrientationDisplay(0, m_game->get_board());
+    m_orientationDisplay = new OrientationDisplay(0, getBoard());
     frameLayout->addWidget(m_orientationDisplay);
     layout->addWidget(createOrientationButtonBoxRight(), 0);
     return widget;
@@ -1050,10 +1050,10 @@ QWidget* MainWindow::createRightPanel()
     pieceSelectorBox->setLayout(pieceSelectorLayout);
     for (ColorIterator i(Color::range); i; ++i)
     {
-        m_pieceSelector[*i] = new PieceSelector(0, m_game->get_board(), *i);
+        m_pieceSelector[*i] = new PieceSelector(0, getBoard(), *i);
         connect(m_pieceSelector[*i],
-                SIGNAL(pieceSelected(Color, const Piece&, Transform)),
-                this, SLOT(selectPiece(Color, const Piece&, Transform)));
+                SIGNAL(pieceSelected(Color, const Piece&, const Transform*)),
+                this, SLOT(selectPiece(Color, const Piece&, const Transform*)));
         pieceSelectorLayout->addWidget(m_pieceSelector[*i]);
     }
     initPieceSelectors();
@@ -1109,7 +1109,7 @@ void MainWindow::exportAsciiArt()
     if (file.isEmpty())
         return;
     ofstream out(file.toStdString().c_str());
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     bd.write(out, false);
     if (! out)
         showError(strerror(errno));
@@ -1135,7 +1135,7 @@ void MainWindow::exportImage()
     painter.begin(&image);
     if (coordinateLabels)
         painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     boardPainter.paint(painter, size, size, bd.get_game_variant(),
                        bd.get_grid(), &m_guiBoard->getLabels());
     painter.end();
@@ -1155,7 +1155,7 @@ void MainWindow::exportImage()
 
 void MainWindow::findMove()
 {
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     if (bd.is_game_over())
         return;
     if (m_legalMoves->empty())
@@ -1185,8 +1185,9 @@ void MainWindow::flipPieceHorizontally()
     const Piece* piece = m_guiBoard->getSelectedPiece();
     if (piece == 0)
         return;
-    Transform transform = m_guiBoard->getSelectedPieceTransform();
-    transform = transform.get_mirrored_horizontally();
+    const Board& bd = getBoard();
+    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    transform = bd.get_transforms().get_mirrored_horizontally(transform);
     transform = piece->get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
@@ -1197,8 +1198,9 @@ void MainWindow::flipPieceVertically()
     const Piece* piece = m_guiBoard->getSelectedPiece();
     if (piece == 0)
         return;
-    Transform transform = m_guiBoard->getSelectedPieceTransform();
-    transform = transform.get_mirrored_vertically();
+    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    const Board& bd = getBoard();
+    transform = bd.get_transforms().get_mirrored_vertically(transform);
     transform = piece->get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
@@ -1294,7 +1296,7 @@ void MainWindow::genMoveFinished()
         showError(tr("Player failed to generate a move."));
         return;
     }
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     if (! bd.is_legal(c, mv))
     {
         showError(tr("Player generated illegal move: %1")
@@ -1379,7 +1381,7 @@ void MainWindow::gotoMove()
     int maxMoves = int(nodes.size());
     if (maxMoves == 0)
         return;
-    int defaultValue = m_game->get_board().get_nu_moves();
+    int defaultValue = getBoard().get_nu_moves();
     if (defaultValue == 0)
         defaultValue = maxMoves;
     bool ok;
@@ -1468,7 +1470,7 @@ void MainWindow::initGameVariantActions()
 
 void MainWindow::initPieceSelectors()
 {
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     for (unsigned int i = 0; i < Color::range; ++i)
     {
         bool isVisible = (i < bd.get_nu_colors());
@@ -1499,7 +1501,7 @@ void MainWindow::makeMainVariation()
 
 void MainWindow::nextPiece()
 {
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     if (bd.is_game_over())
         return;
     const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
@@ -1530,7 +1532,7 @@ void MainWindow::nextTransform()
     const Piece* piece = m_guiBoard->getSelectedPiece();
     if (piece == 0)
         return;
-    Transform transform = m_guiBoard->getSelectedPieceTransform();
+    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = piece->get_next_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
@@ -1674,7 +1676,7 @@ void MainWindow::play()
 
 void MainWindow::play(Color c, Move mv)
 {
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     m_lastMoveByComputer = m_computerColor[c];
     m_game->play(c, mv, false);
     c = m_game->get_to_play();
@@ -1716,7 +1718,7 @@ void MainWindow::play(Color c, Move mv)
 
 void MainWindow::previousPiece()
 {
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     if (bd.is_game_over())
         return;
     Color c = m_game->get_effective_to_play();
@@ -1748,7 +1750,7 @@ void MainWindow::previousTransform()
     const Piece* piece = m_guiBoard->getSelectedPiece();
     if (piece == 0)
         return;
-    Transform transform = m_guiBoard->getSelectedPieceTransform();
+    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = piece->get_previous_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
@@ -1786,8 +1788,9 @@ void MainWindow::rotatePieceAnticlockwise()
     const Piece* piece = m_guiBoard->getSelectedPiece();
     if (piece == 0)
         return;
-    Transform transform = m_guiBoard->getSelectedPieceTransform();
-    transform = transform.get_rotated_anticlockwise();
+    const Board& bd = getBoard();
+    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    transform = bd.get_transforms().get_rotated_anticlockwise(transform);
     transform = piece->get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
@@ -1799,8 +1802,9 @@ void MainWindow::rotatePieceClockwise()
     const Piece* piece = m_guiBoard->getSelectedPiece();
     if (piece == 0)
         return;
-    Transform transform = m_guiBoard->getSelectedPieceTransform();
-    transform = transform.get_rotated_clockwise();
+    const Board& bd = getBoard();
+    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    transform = bd.get_transforms().get_rotated_clockwise(transform);
     transform = piece->get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
@@ -1866,7 +1870,7 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
 {
     vector<const Piece*> pieces;
     Color c = m_game->get_effective_to_play();
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     const Piece* piece;
     if (! bd.get_piece_by_name(name1, piece))
         LIBBOARDGAME_ASSERT(false);
@@ -1919,10 +1923,11 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
 
 void MainWindow::selectPiece(Color c, const Piece& piece)
 {
-    selectPiece(c, piece, Transform());
+    selectPiece(c, piece, getBoard().get_transforms().get_default());
 }
 
-void MainWindow::selectPiece(Color c, const Piece& piece, Transform transform)
+void MainWindow::selectPiece(Color c, const Piece& piece,
+                             const Transform* transform)
 {
     m_guiBoard->selectPiece(c, piece);
     m_guiBoard->setSelectedPieceTransform(transform);
@@ -2257,7 +2262,7 @@ void MainWindow::showError(const QString& text, const QString& infoText)
 void MainWindow::showGameOver()
 {
     GameVariant variant = m_game->get_game_variant();
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     QString info;
     if (variant == game_variant_duo)
     {
@@ -2440,7 +2445,7 @@ void MainWindow::updateFlipActions()
     const Piece* piece = m_guiBoard->getSelectedPiece();
     if (piece == 0)
         return;
-    Transform transform = m_guiBoard->getSelectedPieceTransform();
+    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     bool can_flip_horizontally = piece->can_flip_horizontally(transform);
     m_actionFlipPieceHorizontally->setEnabled(can_flip_horizontally);
     bool can_flip_vertically = piece->can_flip_vertically(transform);
@@ -2532,7 +2537,7 @@ void MainWindow::updateRecentFiles()
 
 void MainWindow::updateWindow(bool currentNodeChanged)
 {
-    const Board& bd = m_game->get_board();
+    const Board& bd = getBoard();
     if (m_file.isEmpty())
     {
         m_actionSave->setEnabled(bd.get_nu_moves() > 0);
