@@ -18,34 +18,14 @@ using namespace std;
 class Transform
 {
 public:
-    enum Type
-    {
-        identity,
-        rotate_90,
-        rotate_180,
-        rotate_270,
-        mirror,
-        rotate_90_mirror,
-        rotate_180_mirror,
-        rotate_270_mirror
-    };
+    virtual ~Transform();
 
-    Transform(Type type);
-
-    CoordPoint get_transformed(const CoordPoint& p) const;
+    virtual CoordPoint get_transformed(const CoordPoint& p) const = 0;
 
     /** @tparam I An iterator of a container with elements of type CoordPoint */
     template<class I>
     void transform(I begin, I end) const;
-
-private:
-    Type m_type;
 };
-
-inline Transform::Transform(Type type)
-    : m_type(type)
-{
-}
 
 template<class I>
 void Transform::transform(I begin, I end) const
@@ -53,6 +33,78 @@ void Transform::transform(I begin, I end) const
     for (I i = begin; i != end; ++i)
         *i = get_transformed(*i);
 }
+
+//-----------------------------------------------------------------------------
+
+class TransfIdentity
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfRot90
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfRot180
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfRot270
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfRefl
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfRot90Refl
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfRot180Refl
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfRot270Refl
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+};
 
 //-----------------------------------------------------------------------------
 

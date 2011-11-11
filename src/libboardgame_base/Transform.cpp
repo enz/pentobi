@@ -7,34 +7,69 @@
 #endif
 
 #include "Transform.h"
-#include "libboardgame_util/Assert.h"
 
 namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
-CoordPoint Transform::get_transformed(const CoordPoint& p) const
+Transform::~Transform()
 {
-    switch (m_type)
-    {
-    case identity:
-        return p;
-    case rotate_90:
-        return CoordPoint(p.y, -p.x);
-    case rotate_180:
-        return CoordPoint(-p.x, -p.y);
-    case rotate_270:
-        return CoordPoint(-p.y, p.x);
-    case mirror:
-        return CoordPoint(-p.x, p.y);
-    case rotate_90_mirror:
-        return CoordPoint(p.y, p.x);
-    case rotate_180_mirror:
-        return CoordPoint(p.x, -p.y);
-    default:
-        LIBBOARDGAME_ASSERT(m_type == rotate_270_mirror);
-        return CoordPoint(-p.y, -p.x);
-    }
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfIdentity::get_transformed(const CoordPoint& p) const
+{
+    return p;
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRot90::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(p.y, -p.x);
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRot180::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(-p.x, -p.y);
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRot270::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(-p.y, p.x);
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRefl::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(-p.x, p.y);
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRot90Refl::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(p.y, p.x);
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRot180Refl::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(p.x, -p.y);
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRot270Refl::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(-p.y, -p.x);
 }
 
 //-----------------------------------------------------------------------------

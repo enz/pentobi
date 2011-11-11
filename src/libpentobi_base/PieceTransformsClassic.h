@@ -9,6 +9,15 @@
 
 namespace libpentobi_base {
 
+using libboardgame_base::TransfIdentity;
+using libboardgame_base::TransfRot90;
+using libboardgame_base::TransfRot180;
+using libboardgame_base::TransfRot270;
+using libboardgame_base::TransfRefl;
+using libboardgame_base::TransfRot90Refl;
+using libboardgame_base::TransfRot180Refl;
+using libboardgame_base::TransfRot270Refl;
+
 //-----------------------------------------------------------------------------
 
 class PieceTransformsClassic
@@ -26,21 +35,21 @@ public:
     const Transform* get_rotated_clockwise(const Transform* transf) const;
 
 private:
-    Transform m_identity;
+    TransfIdentity m_identity;
 
-    Transform m_rot90;
+    TransfRot90 m_rot90;
 
-    Transform m_rot180;
+    TransfRot180 m_rot180;
 
-    Transform m_rot270;
+    TransfRot270 m_rot270;
 
-    Transform m_refl;
+    TransfRefl m_refl;
 
-    Transform m_rot90refl;
+    TransfRot90Refl m_rot90refl;
 
-    Transform m_rot180refl;
+    TransfRot180Refl m_rot180refl;
 
-    Transform m_rot270refl;
+    TransfRot270Refl m_rot270refl;
 };
 
 //-----------------------------------------------------------------------------

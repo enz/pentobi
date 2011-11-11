@@ -15,14 +15,6 @@ namespace libpentobi_base {
 //-----------------------------------------------------------------------------
 
 PieceTransformsClassic::PieceTransformsClassic()
-  : m_identity(Transform::identity),
-    m_rot90(Transform::rotate_90),
-    m_rot180(Transform::rotate_180),
-    m_rot270(Transform::rotate_270),
-    m_refl(Transform::mirror),
-    m_rot90refl(Transform::rotate_90_mirror),
-    m_rot180refl(Transform::rotate_180_mirror),
-    m_rot270refl(Transform::rotate_270_mirror)
 {
     m_all.reserve(8);
     m_all.push_back(&m_identity);
