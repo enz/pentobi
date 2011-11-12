@@ -47,6 +47,8 @@ public:
 
     static const unsigned int max_game_moves = Color::range * max_player_moves;
 
+    static const unsigned int max_starting_points = 6;
+
     /** Use ANSI escape sequences for colored text output in operator>> */
     static bool color_output;
 
@@ -183,9 +185,14 @@ public:
 
     const MoveInfo& get_move_info(Move move) const;
 
-    Point get_starting_point(Color c) const;
+    bool is_colored_starting_point(Point p) const;
 
-    bool is_starting_point(Point p, Color& color) const;
+    bool is_colorless_starting_point(Point p) const;
+
+    Color get_starting_point_color(Point p) const;
+
+    const ArrayList<Point,max_starting_points>&
+                                             get_starting_points(Color c) const;
 
     bool is_onboard(Point p) const;
 
@@ -231,9 +238,21 @@ private:
 
     ColorMap<const char*> m_color_name;
 
+    Grid<bool> m_is_colored_starting_point;
+
+    Grid<bool> m_is_colorless_starting_point;
+
+    Grid<Color> m_starting_point_color;
+
+    ColorMap<ArrayList<Point,max_starting_points>> m_starting_points;
+
     /** Local variable during move generation.
         Reused for efficiency. */
     mutable MoveMarker m_marker;
+
+    void add_colored_starting_point(unsigned int x, unsigned int y, Color c);
+
+    void add_colorless_starting_point(unsigned int x, unsigned int y);
 
     void gen_moves(Color c, Point p, MoveMarker& marker,
                    ArrayList<Move, Move::range>& moves) const;
@@ -243,6 +262,8 @@ private:
                    ArrayList<Move, Move::range>& moves) const;
 
     bool has_moves(Color c, Point p) const;
+
+    void init_starting_points();
 
     void write_pieces_left(ostream& out, Color c, unsigned int begin,
                            unsigned int end) const;
@@ -382,9 +403,16 @@ inline Color Board::get_second_color(Color c) const
     return m_second_color[c];
 }
 
-inline Point Board::get_starting_point(Color c) const
+inline Color Board::get_starting_point_color(Point p) const
 {
-    return get_starting_point(m_game_variant, c);
+    LIBBOARDGAME_ASSERT(m_is_colored_starting_point[p]);
+    return m_starting_point_color[p];
+}
+
+inline const ArrayList<Point,Board::max_starting_points>&
+                                       Board::get_starting_points(Color c) const
+{
+    return m_starting_points[c];
 }
 
 inline Color Board::get_to_play() const
@@ -405,6 +433,16 @@ inline void Board::init()
 inline bool Board::is_attach_point(Point p, Color c) const
 {
     return m_is_attach_point[c][p];
+}
+
+inline bool Board::is_colored_starting_point(Point p) const
+{
+    return m_is_colored_starting_point[p];
+}
+
+inline bool Board::is_colorless_starting_point(Point p) const
+{
+    return m_is_colorless_starting_point[p];
 }
 
 inline bool Board::is_forbidden(Point p, Color c) const
@@ -439,11 +477,6 @@ inline bool Board::is_onboard(Point p) const
 inline bool Board::is_same_player(Color c1, Color c2) const
 {
     return (c1 == c2 || c1 == m_second_color[c2]);
-}
-
-inline bool Board::is_starting_point(Point p, Color& color) const
-{
-    return is_starting_point(p, m_game_variant, color);
 }
 
 inline void Board::play(ColorMove move)

@@ -488,7 +488,6 @@ BoardConst::BoardConst(BoardType board_type)
     : m_geometry(create_geometry(board_type))
 {
     m_board_type = board_type;
-    m_transforms.reset(new PieceTransformsClassic());
     if (board_type == board_type_trigon)
     {
         m_transforms.reset(new PieceTransformsTrigon());

@@ -70,8 +70,9 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
     bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     if (is_first_move)
     {
-        if (! m_forbidden[c][get_starting_point(c)])
-            gen_moves(c, get_starting_point(c), m_marker, moves);
+        BOOST_FOREACH(Point p, m_starting_points[c])
+            if (! m_forbidden[c][p])
+                gen_moves(c, p, m_marker, moves);
     }
     else
     {
@@ -293,7 +294,7 @@ bool Board::has_moves(Color c) const
     for (Iterator i(*this); i; ++i)
         if (! m_forbidden[c][*i]
             && (is_attach_point(*i, c)
-                || (is_first_move && *i == get_starting_point(c))))
+                || (is_first_move && m_starting_points[c].contains(*i))))
             if (has_moves(c, *i))
                 return true;
     return false;
@@ -368,6 +369,7 @@ void Board::init(GameVariant game_variant)
     }
     m_board_const = &BoardConst::get(board_type);
     m_geometry = &m_board_const->get_geometry();
+    init_starting_points();
     m_point_state.init(*m_geometry);
     m_point_state.fill_all(PointStateExt::offboard());
     m_point_state.fill_onboard(PointState::empty());
@@ -393,6 +395,55 @@ void Board::init(GameVariant game_variant)
     m_moves.clear();
 }
 
+void Board::add_colored_starting_point(unsigned int x, unsigned int y, Color c)
+{
+    Point p(x, y);
+    m_is_colored_starting_point[p] = true;
+    m_starting_point_color[p] = c;
+    m_starting_points[c].push_back(p);
+}
+
+void Board::add_colorless_starting_point(unsigned int x, unsigned int y)
+{
+    Point p(x, y);
+    m_is_colorless_starting_point[p] = true;
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        m_starting_points[*i].push_back(p);
+}
+
+void Board::init_starting_points()
+{
+    m_is_colored_starting_point.init(*m_geometry, false);
+    m_is_colorless_starting_point.init(*m_geometry, false);
+    m_starting_point_color.init(*m_geometry);
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        m_starting_points[*i].clear();
+    if (m_game_variant == game_variant_classic
+        || m_game_variant == game_variant_classic_2)
+    {
+        add_colored_starting_point(0, 19, Color(0));
+        add_colored_starting_point(19, 19, Color(1));
+        add_colored_starting_point(19, 0, Color(2));
+        add_colored_starting_point(0, 0, Color(3));
+    }
+    else if (m_game_variant == game_variant_duo)
+    {
+        add_colored_starting_point(4, 9, Color(0));
+        add_colored_starting_point(9, 4, Color(1));
+    }
+    else if (m_game_variant == game_variant_trigon)
+    {
+        add_colorless_starting_point(17, 3);
+        add_colorless_starting_point(17, 14);
+        add_colorless_starting_point(9, 6);
+        add_colorless_starting_point(9, 11);
+        add_colorless_starting_point(25, 6);
+        add_colorless_starting_point(25, 11);
+    }
+    else
+        LIBBOARDGAME_ASSERT(false);
+}
+
 bool Board::is_game_over() const
 {
     for (ColorIterator i(m_nu_colors); i; ++i)
@@ -414,9 +465,15 @@ bool Board::is_legal(Color c, Move mv) const
         if (is_attach_point(p, c))
             has_attach_point = true;
     }
+    if (has_attach_point)
+        return true;
     bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
-    return (has_attach_point ||
-            (is_first_move && points.contains(get_starting_point(c))));
+    if (! is_first_move)
+        return false;
+    BOOST_FOREACH(Point p, m_starting_points[c])
+        if (points.contains(p))
+            return true;
+    return false;
 }
 
 bool Board::is_piece_left(Color c, const Piece& piece) const
@@ -562,10 +619,15 @@ void Board::write(ostream& out, bool mark_last_move) const
             }
             else if (s.is_empty())
             {
-                Color color;
-                if (is_starting_point(p, color))
+                if (m_is_colored_starting_point[p])
                 {
-                    set_color(out, m_color_esc_sequence[color]);
+                    Color c = m_starting_point_color[p];
+                    set_color(out, m_color_esc_sequence[c]);
+                    out << '+';
+                }
+                else if (m_is_colorless_starting_point[p])
+                {
+                    set_color(out, "\x1B[1;30;47m");
                     out << '+';
                 }
                 else
