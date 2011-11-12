@@ -8,6 +8,8 @@
 
 #include "Transform.h"
 
+#include "libboardgame_util/Assert.h"
+
 namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
@@ -23,53 +25,103 @@ CoordPoint TransfIdentity::get_transformed(const CoordPoint& p) const
     return p;
 }
 
+unsigned int TransfIdentity::get_point_type(unsigned int old_point_type) const
+{
+    return old_point_type;
+}
+
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfRot90::get_transformed(const CoordPoint& p) const
+CoordPoint TransfRectRot90::get_transformed(const CoordPoint& p) const
 {
     return CoordPoint(p.y, -p.x);
 }
 
+unsigned int TransfRectRot90::get_point_type(unsigned int old_point_type) const
+{
+    LIBBOARDGAME_ASSERT(old_point_type == 0);
+    return 0;
+}
+
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfRot180::get_transformed(const CoordPoint& p) const
+CoordPoint TransfRectRot180::get_transformed(const CoordPoint& p) const
 {
     return CoordPoint(-p.x, -p.y);
 }
 
+unsigned int TransfRectRot180::get_point_type(unsigned int old_point_type) const
+{
+    LIBBOARDGAME_ASSERT(old_point_type == 0);
+    return 0;
+}
+
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfRot270::get_transformed(const CoordPoint& p) const
+CoordPoint TransfRectRot270::get_transformed(const CoordPoint& p) const
 {
     return CoordPoint(-p.y, p.x);
 }
 
+unsigned int TransfRectRot270::get_point_type(unsigned int old_point_type) const
+{
+    LIBBOARDGAME_ASSERT(old_point_type == 0);
+    return 0;
+}
+
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfRefl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfRectRefl::get_transformed(const CoordPoint& p) const
 {
     return CoordPoint(-p.x, p.y);
 }
 
+unsigned int TransfRectRefl::get_point_type(unsigned int old_point_type) const
+{
+    LIBBOARDGAME_ASSERT(old_point_type == 0);
+    return 0;
+}
+
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfRot90Refl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfRectRot90Refl::get_transformed(const CoordPoint& p) const
 {
     return CoordPoint(p.y, p.x);
 }
 
-//-----------------------------------------------------------------------------
-
-CoordPoint TransfRot180Refl::get_transformed(const CoordPoint& p) const
+unsigned int TransfRectRot90Refl::get_point_type(
+                                              unsigned int old_point_type) const
 {
-    return CoordPoint(p.x, -p.y);
+    LIBBOARDGAME_ASSERT(old_point_type == 0);
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfRot270Refl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfRectRot180Refl::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(p.x, -p.y);
+}
+
+unsigned int TransfRectRot180Refl::get_point_type(
+                                              unsigned int old_point_type) const
+{
+    LIBBOARDGAME_ASSERT(old_point_type == 0);
+    return 0;
+}
+
+//-----------------------------------------------------------------------------
+
+CoordPoint TransfRectRot270Refl::get_transformed(const CoordPoint& p) const
 {
     return CoordPoint(-p.y, -p.x);
+}
+
+unsigned int TransfRectRot270Refl::get_point_type(
+                                              unsigned int old_point_type) const
+{
+    LIBBOARDGAME_ASSERT(old_point_type == 0);
+    return 0;
 }
 
 //-----------------------------------------------------------------------------

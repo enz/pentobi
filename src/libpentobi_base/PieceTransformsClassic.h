@@ -10,13 +10,13 @@
 namespace libpentobi_base {
 
 using libboardgame_base::TransfIdentity;
-using libboardgame_base::TransfRot90;
-using libboardgame_base::TransfRot180;
-using libboardgame_base::TransfRot270;
-using libboardgame_base::TransfRefl;
-using libboardgame_base::TransfRot90Refl;
-using libboardgame_base::TransfRot180Refl;
-using libboardgame_base::TransfRot270Refl;
+using libboardgame_base::TransfRectRot90;
+using libboardgame_base::TransfRectRot180;
+using libboardgame_base::TransfRectRot270;
+using libboardgame_base::TransfRectRefl;
+using libboardgame_base::TransfRectRot90Refl;
+using libboardgame_base::TransfRectRot180Refl;
+using libboardgame_base::TransfRectRot270Refl;
 
 //-----------------------------------------------------------------------------
 
@@ -37,19 +37,19 @@ public:
 private:
     TransfIdentity m_identity;
 
-    TransfRot90 m_rot90;
+    TransfRectRot90 m_rot90;
 
-    TransfRot180 m_rot180;
+    TransfRectRot180 m_rot180;
 
-    TransfRot270 m_rot270;
+    TransfRectRot270 m_rot270;
 
-    TransfRefl m_refl;
+    TransfRectRefl m_refl;
 
-    TransfRot90Refl m_rot90refl;
+    TransfRectRot90Refl m_rot90refl;
 
-    TransfRot180Refl m_rot180refl;
+    TransfRectRot180Refl m_rot180refl;
 
-    TransfRot270Refl m_rot270refl;
+    TransfRectRot270Refl m_rot270refl;
 };
 
 //-----------------------------------------------------------------------------

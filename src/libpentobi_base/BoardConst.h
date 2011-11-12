@@ -110,7 +110,7 @@ private:
     BoardConst(BoardType board_type);
 
     void create_move(unsigned int piece, const Piece::Points& coord_points,
-                     CoordPoint center);
+                     Point center);
 
     void create_moves(unsigned int piece);
 
