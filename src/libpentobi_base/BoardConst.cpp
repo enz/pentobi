@@ -519,7 +519,7 @@ BoardConst::BoardConst(BoardType board_type)
                 }
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         create_moves(i);
-    //if (log_move_creation)
+    if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << '\n';
     if (board_type == board_type_classic)
         LIBBOARDGAME_ASSERT(m_move_info.size() == 30433);
@@ -592,10 +592,6 @@ void BoardConst::create_moves(unsigned int piece)
             auto center_pos =
                 find(points.begin(), points.end(), CoordPoint(0, 0));
             LIBBOARDGAME_ASSERT(center_pos != points.end());
-            unsigned int width;
-            unsigned int height;
-            CoordPoint::normalize_offset(points.begin(), points.end(),
-                                         width, height);
             bool is_onboard = true;
             BOOST_FOREACH(CoordPoint& p, points)
             {
