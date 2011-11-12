@@ -12,6 +12,7 @@
 #include "DiagIterator.h"
 #include "Grid.h"
 #include "PieceTransformsClassic.h"
+#include "PieceTransformsTrigon.h"
 #include "SymmetricPoints.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/Transform.h"
@@ -32,19 +33,14 @@ namespace {
 
 const bool log_move_creation = false;
 
-vector<Piece> create_pieces(BoardType board_type,
-                            const PieceTransforms& transforms)
+vector<Piece> create_pieces_classic(BoardType board_type,
+                                    const PieceTransforms& transforms)
 {
     vector<Piece> pieces;
-    if (board_type == board_type_trigon)
-    {
-        log() << "TODO: define pieces for Trigon\n";
-        return pieces;
-    }
     // Define the 21 standard pieces. The piece names are the standard names as
-    // http://c2strategy.wordpress.com/2011/04/10/piece-names/. The default
+    // in http://c2strategy.wordpress.com/2011/04/10/piece-names/. The default
     // orientation is chosen such that it resembles the letter in the piece name
-    pieces.reserve(BoardConst::max_pieces);
+    pieces.reserve(21);
     {
         Piece::Points points;
         points.push_back(CoordPoint(-1, 0));
@@ -221,6 +217,256 @@ vector<Piece> create_pieces(BoardType board_type,
     return pieces;
 }
 
+vector<Piece> create_pieces_trigon(BoardType board_type,
+                                   const PieceTransforms& transforms)
+{
+    vector<Piece> pieces;
+    // Define the 22 standard Trigon pieces. For hexiamonds, the names are as
+    // in http://mathworld.wolfram.com/Polyiamond.html.
+    // The (0,0) point must be an upside triangle.
+    pieces.reserve(22);
+    {
+        /*  /+\+/+\+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(2, 0));
+        points.push_back(CoordPoint(3, 0));
+        pieces.push_back(Piece("BAR6", points, transforms));
+    }
+    {
+        /*  /+\          */
+        /*  \+/+\+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(2, 0));
+        points.push_back(CoordPoint(3, 0));
+        pieces.push_back(Piece("CROOK", points, transforms));
+    }
+    {
+        /*      /+\      */
+        /*  \+/+\+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(-2, -1));
+        points.push_back(CoordPoint(-1, -1));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(1, -1));
+        points.push_back(CoordPoint(2, -1));
+        pieces.push_back(Piece("CROWN", points, transforms));
+    }
+    {
+        /*    /+\       */
+        /*  /+\+/+\+/+\ */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(2, 0));
+        pieces.push_back(Piece("SPHINX", points, transforms));
+    }
+    {
+        /*        /+\  */
+        /*  /+\+/+\+/  */
+        /*  \+/        */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-2, -1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(1, 1));
+        pieces.push_back(Piece("SNAKE", points, transforms));
+    }
+    {
+        /*    /+\ /+\  */
+        /*  /+\+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(1, 1));
+        pieces.push_back(Piece("YACHT6", points, transforms));
+    }
+    {
+        /*        /+\+/  */
+        /*  /+\+/+\+/    */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(1, 1));
+        points.push_back(CoordPoint(2, 1));
+        pieces.push_back(Piece("CHEVRON", points, transforms));
+    }
+    {
+        /*    /+\      */
+        /*  /+\+/+\+/  */
+        /*  \+/        */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-2, -1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("SIGNPOST", points, transforms));
+    }
+    {
+        /*    /+\    */
+        /*  /+\+/+\  */
+        /*  \+/ \+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, -1));
+        points.push_back(CoordPoint(-1, -2));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(1, -1));
+        points.push_back(CoordPoint(1, -2));
+        pieces.push_back(Piece("LOBSTER6", points, transforms));
+    }
+    {
+        /*    /+\+/+\  */
+        /*  /+\+/ \+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(2, 0));
+        points.push_back(CoordPoint(2, -1));
+        pieces.push_back(Piece("HOOK", points, transforms));
+    }
+    {
+        /*  /+\+/+\  */
+        /*  \+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 1));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("HEXAGON", points, transforms));
+    }
+    {
+        /*  \+/+\+/  */
+        /*  /+\+/+\  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, -1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, -1));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("BUTTEFRFLY", points, transforms));
+    }
+    {
+        /*  /+\+/+\+/+\  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(2, 0));
+        pieces.push_back(Piece("BAR5", points, transforms));
+    }
+    {
+        /*    /+\      */
+        /*  /+\+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("YACHT5", points, transforms));
+    }
+    {
+        /*  /+\        */
+        /*  \+/+\+/+\  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(2, 0));
+        pieces.push_back(Piece("CROOK5", points, transforms));
+    }
+    {
+        /*  /+\+/+\  */
+        /*  \+/ \+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(2, 0));
+        points.push_back(CoordPoint(2, -1));
+        pieces.push_back(Piece("LOBSTER5", points, transforms));
+    }
+    {
+        /*  /+\+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-2, 0));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("BAR4", points, transforms));
+    }
+    {
+        /*  /+\      */
+        /*  \+/+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, 1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("CROOK4", points, transforms));
+    }
+    {
+        /*    /+\    */
+        /*  /+\+/+\  */
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, -1));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, -1));
+        pieces.push_back(Piece("TRIANGLE", points, transforms));
+    }
+    {
+        /*  /+\+/+\  */
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(0, 2));
+        pieces.push_back(Piece("3", points, transforms));
+    }
+    {
+        /*  /+\+/  */
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        pieces.push_back(Piece("2", points, transforms));
+    }
+    {
+        /*  /+\  */
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        pieces.push_back(Piece("1", points, transforms));
+    }
+    return pieces;
+}
+
 const Geometry& create_geometry(BoardType board_type)
 {
     if (board_type == board_type_classic)
@@ -244,8 +490,15 @@ BoardConst::BoardConst(BoardType board_type)
     m_board_type = board_type;
     m_transforms.reset(new PieceTransformsClassic());
     if (board_type == board_type_trigon)
-        log() << "TODO: implement piece transforms for Trigon\n";
-    m_pieces = create_pieces(board_type, *m_transforms);
+    {
+        m_transforms.reset(new PieceTransformsTrigon());
+        m_pieces = create_pieces_trigon(board_type, *m_transforms);
+    }
+    else
+    {
+        m_transforms.reset(new PieceTransformsClassic());
+        m_pieces = create_pieces_classic(board_type, *m_transforms);
+    }
     m_nu_pieces = m_pieces.size();
     for (int s0 = 0; s0 <= 1; ++s0)
         for (int s1 = 0; s1 <= 1; ++s1)

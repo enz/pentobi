@@ -16,6 +16,7 @@ set(pentobi_base_STAT_SRCS
   Player.cpp
   PieceTransforms.cpp
   PieceTransformsClassic.cpp
+  PieceTransformsTrigon.cpp
   PieceValueHeuristic.cpp
   PointState.cpp
   PointStateExt.cpp

@@ -25,15 +25,15 @@ using libboardgame_util::ArrayList;
 class Piece
 {
 public:
-    /** Maximim number of squares of a piece. */
-    static const unsigned int max_size = 5;
+    /** Maximum number of squares of a piece. */
+    static const unsigned int max_size = 6;
 
     typedef ArrayList<CoordPoint, max_size> Points;
 
-    /** Maximim number of adjacent points to a piece. */
+    /** Maximum number of adjacent points to a piece. */
     static const unsigned int max_adj = 12;
 
-    /** Maximim number of attach points of a piece. */
+    /** Maximum number of attach points of a piece. */
     static const unsigned int max_attach = 8;
 
     /** Constructor.
