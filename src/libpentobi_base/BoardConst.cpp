@@ -534,7 +534,10 @@ BoardConst::BoardConst(BoardType board_type)
         LIBBOARDGAME_ASSERT(m_total_piece_points == 89);
     }
     else if (board_type == board_type_trigon)
-        log() << "TODO: assert nu pieces and total piece points in Trigon\n";
+    {
+        LIBBOARDGAME_ASSERT(m_nu_pieces == 22);
+        LIBBOARDGAME_ASSERT(m_total_piece_points == 110);
+    }
     init_symmetry_info();
 }
 
