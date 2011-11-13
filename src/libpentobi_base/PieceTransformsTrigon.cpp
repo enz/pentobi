@@ -21,7 +21,11 @@ PieceTransformsTrigon::PieceTransformsTrigon()
 {
     m_all.reserve(12);
     m_all.push_back(&m_identity);
+    m_all.push_back(&m_rot120);
+    m_all.push_back(&m_rot240);
     m_all.push_back(&m_refl);
+    m_all.push_back(&m_refl_rot120);
+    m_all.push_back(&m_refl_rot240);
     log() << "TODO: define missing transformations for Trigon\n";
 }
 

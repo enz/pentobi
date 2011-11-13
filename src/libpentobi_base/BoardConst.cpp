@@ -588,7 +588,9 @@ void BoardConst::create_moves(unsigned int piece)
         {
             // Pieces are defined such that (0,0) has point type 0. Check if the
             // transformed type is compatible with the location on the board.
-            if (transform->get_point_type(0) != m_geometry.get_point_type(x, y))
+            unsigned int point_type = m_geometry.get_point_type(x, y);
+            LIBBOARDGAME_ASSERT(transform->get_point_type() == 0);
+            if (transform->get_new_point_type() != point_type)
                 continue;
             points = m_pieces[piece].get_points();
             transform->transform(points.begin(), points.end());
