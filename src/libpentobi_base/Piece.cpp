@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file Piece.cpp */
+/** @file libpentobi_base/Piece.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -11,15 +11,17 @@
 #include <algorithm>
 #include <boost/foreach.hpp>
 #include "libboardgame_util/Assert.h"
+#include "libboardgame_base/GeometryUtil.h"
 
 namespace libpentobi_base {
 
 using namespace std;
+using libboardgame_base::geometry_util::normalize_offset;
 
 //-----------------------------------------------------------------------------
 
 Piece::Piece(const string& name, const Piece::Points& points,
-             const PieceTransforms& transforms)
+             const Geometry& geometry, const PieceTransforms& transforms)
     : m_name(name),
       m_points(points),
       m_transforms(&transforms)
@@ -34,10 +36,8 @@ Piece::Piece(const string& name, const Piece::Points& points,
         transformed_points = points;
         transform->transform(transformed_points.begin(),
                              transformed_points.end());
-        unsigned int width;
-        unsigned int height;
-        CoordPoint::normalize_offset(transformed_points.begin(),
-                                     transformed_points.end(), width, height);
+        normalize_offset(geometry, transformed_points.begin(),
+                         transformed_points.end());
         sort(transformed_points.begin(), transformed_points.end());
         auto begin = all_transformed_points.begin();
         auto end = all_transformed_points.end();
@@ -78,22 +78,20 @@ bool Piece::can_rotate() const
     return rotate != transform;
 }
 
-const Transform* Piece::find_transform(const Points& points) const
+const Transform* Piece::find_transform(const Geometry& geometry,
+                                       const Points& points) const
 {
     Points normalized_points = points;
-    unsigned int width;
-    unsigned int height;
-    CoordPoint::normalize_offset(normalized_points.begin(),
-                                 normalized_points.end(), width, height);
+    normalize_offset(geometry, normalized_points.begin(),
+                     normalized_points.end());
     sort(normalized_points.begin(), normalized_points.end());
     BOOST_FOREACH(const Transform* transform, get_transforms())
     {
         Points normalized_piece_points = get_points();
         transform->transform(normalized_piece_points.begin(),
                              normalized_piece_points.end());
-        CoordPoint::normalize_offset(normalized_piece_points.begin(),
-                                     normalized_piece_points.end(),
-                                     width, height);
+        normalize_offset(geometry, normalized_piece_points.begin(),
+                         normalized_piece_points.end());
         sort(normalized_piece_points.begin(), normalized_piece_points.end());
         if (normalized_piece_points == normalized_points)
             return transform;

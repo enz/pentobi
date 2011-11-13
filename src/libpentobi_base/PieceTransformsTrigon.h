@@ -10,6 +10,7 @@
 namespace libpentobi_base {
 
 using libboardgame_base::TransfIdentity;
+using libboardgame_base::TransfTrigonRefl;
 
 //-----------------------------------------------------------------------------
 
@@ -29,6 +30,8 @@ public:
 
 private:
     TransfIdentity m_identity;
+
+    TransfTrigonRefl m_refl;
 };
 
 //-----------------------------------------------------------------------------

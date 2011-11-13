@@ -42,6 +42,10 @@ public:
 
     unsigned int get_point_type(int x, int y) const;
 
+    unsigned int get_period_x() const;
+
+    unsigned int get_period_y() const;
+
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
@@ -73,6 +77,18 @@ const TrigonGeometry<P>* TrigonGeometry<P>::get(unsigned int sz)
     if (s_geometry[sz].get() == 0)
         s_geometry[sz].reset(new TrigonGeometry(sz));
     return s_geometry[sz].get();
+}
+
+template<class P>
+unsigned int TrigonGeometry<P>::get_period_x() const
+{
+    return 2;
+}
+
+template<class P>
+unsigned int TrigonGeometry<P>::get_period_y() const
+{
+    return 2;
 }
 
 template<class P>

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file Piece.h */
+/** @file libpentobi_base/Piece.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_BASE_PIECE_H
@@ -8,6 +8,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include "Geometry.h"
 #include "PieceTransforms.h"
 #include "libboardgame_base/CoordPoint.h"
 #include "libboardgame_base/Transform.h"
@@ -43,7 +44,7 @@ public:
         coordinates; it is used as the center when moving the piece or for
         drawing a label on the piece. */
     Piece(const string& name, const Piece::Points& points,
-          const PieceTransforms& transforms);
+          const Geometry& geometry, const PieceTransforms& transforms);
 
     const string& get_name() const;
 
@@ -74,7 +75,8 @@ public:
 
     bool can_flip_vertically(const Transform* transform) const;
 
-    const Transform* find_transform(const Points& points) const;
+    const Transform* find_transform(const Geometry& geometry,
+                                    const Points& points) const;
 
 private:
     string m_name;

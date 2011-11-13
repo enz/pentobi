@@ -21,12 +21,17 @@ PieceTransformsTrigon::PieceTransformsTrigon()
 {
     m_all.reserve(12);
     m_all.push_back(&m_identity);
+    m_all.push_back(&m_refl);
     log() << "TODO: define missing transformations for Trigon\n";
 }
 
 const Transform* PieceTransformsTrigon::get_mirrored_horizontally(
                                                   const Transform* transf) const
 {
+    if (transf == &m_identity)
+        return &m_refl;
+    if (transf == &m_refl)
+        return &m_identity;
     LIBBOARDGAME_ASSERT(false);
     return 0;
 }

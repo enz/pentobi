@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file CoordPoint.h */
+/** @file libboardgame_base/CoordPoint.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_BASE_COORD_POINT_H
@@ -42,13 +42,6 @@ struct CoordPoint
     bool is_null() const;
 
     bool is_onboard(unsigned int width, unsigned int height) const;
-
-    /** Shift a list of points such that the minimum x and y coordinates are
-        zero.
-        Also finds the width and height of the bounding box. */
-    template<typename T>
-    static void normalize_offset(T begin, T end, unsigned int& width,
-                                 unsigned int& height);
 
     /** Find the width and height of the bounding box. */
     template<typename T>
@@ -132,34 +125,6 @@ inline bool CoordPoint::is_onboard(unsigned int width,
 inline bool CoordPoint::is_null() const
 {
     return x == numeric_limits<int>::max();
-}
-
-template<typename T>
-void CoordPoint::normalize_offset(T begin, T end,
-                                  unsigned int& width, unsigned int& height)
-{
-    int min_x = numeric_limits<int>::max();
-    int min_y = numeric_limits<int>::max();
-    int max_x = numeric_limits<int>::min();
-    int max_y = numeric_limits<int>::min();
-    for (auto i = begin; i != end; ++i)
-    {
-        if (i->x < min_x)
-            min_x = i->x;
-        if (i->x > max_x)
-            max_x = i->x;
-        if (i->y < min_y)
-            min_y = i->y;
-        if (i->y > max_y)
-            max_y = i->y;
-    }
-    width = max_x - min_x + 1;
-    height = max_y - min_y + 1;
-    for (auto i = begin; i != end; ++i)
-    {
-        i->x -= min_x;
-        i->y -= min_y;
-    }
 }
 
 //-----------------------------------------------------------------------------

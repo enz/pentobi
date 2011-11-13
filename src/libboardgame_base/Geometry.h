@@ -60,6 +60,16 @@ public:
         @param y The y coordinate (may be negative and/or outside the board). */
     virtual unsigned int get_point_type(int x, int y) const = 0;
 
+    /** Get repeat interval for point types along the x axis.
+        If the board has different point types, the layout of the point types
+        repeats in this x interval. If the board has only one point type,
+        the function should return 1. */
+    virtual unsigned int get_period_x() const = 0;
+
+    /** Get repeat interval for point types along the y axis.
+        @see get_period_x(). */
+    virtual unsigned int get_period_y() const = 0;
+
     unsigned int get_point_type(Point p) const;
 
     bool is_onboard(Point p) const;

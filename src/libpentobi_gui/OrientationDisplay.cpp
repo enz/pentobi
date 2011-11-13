@@ -8,11 +8,13 @@
 
 #include "OrientationDisplay.h"
 
+#include "libboardgame_base/GeometryUtil.h"
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
+using libboardgame_base::geometry_util::normalize_offset;
 using libpentobi_base::Piece;
 
 //-----------------------------------------------------------------------------
@@ -70,7 +72,8 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
     Piece::Points points = m_piece->get_points();
     m_transform->transform(points.begin(), points.end());
     unsigned int width, height;
-    CoordPoint::normalize_offset(points.begin(), points.end(), width, height);
+    normalize_offset(m_bd.get_geometry(), points.begin(), points.end(), width,
+                     height);
     painter.save();
     painter.translate((displaySize - width * squareSize) / 2,
                       (displaySize - height * squareSize) / 2);

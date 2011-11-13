@@ -95,7 +95,8 @@ void PieceSelector::init()
                 continue;
             Piece::Points points;
             findPiecePoints(*piece, x, y, points);
-            m_transform[x][y] = piece->find_transform(points);
+            m_transform[x][y] =
+                piece->find_transform(m_bd.get_geometry(), points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
         }
 }

@@ -31,6 +31,10 @@ public:
 
     unsigned int get_point_type(int x, int y) const;
 
+    unsigned int get_period_x() const;
+
+    unsigned int get_period_y() const;
+
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
@@ -59,6 +63,18 @@ const RectGeometry<P>* RectGeometry<P>::get(unsigned int width,
     if (s_geometry[width][height].get() == 0)
         s_geometry[width][height].reset(new RectGeometry(width, height));
     return s_geometry[width][height].get();
+}
+
+template<class P>
+unsigned int RectGeometry<P>::get_period_x() const
+{
+    return 1;
+}
+
+template<class P>
+unsigned int RectGeometry<P>::get_period_y() const
+{
+    return 1;
 }
 
 template<class P>

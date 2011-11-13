@@ -133,6 +133,17 @@ public:
 
 //-----------------------------------------------------------------------------
 
+class TransfTrigonRefl
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+
+    unsigned int get_point_type(unsigned int old_point_type) const;
+};
+
+//-----------------------------------------------------------------------------
+
 } // namespace libboardgame_base
 
 #endif // LIBBOARDGAME_BASE_TRANSFORM_H

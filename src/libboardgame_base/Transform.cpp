@@ -126,4 +126,16 @@ unsigned int TransfRectRot270Refl::get_point_type(
 
 //-----------------------------------------------------------------------------
 
+CoordPoint TransfTrigonRefl::get_transformed(const CoordPoint& p) const
+{
+    return CoordPoint(-p.x, p.y);
+}
+
+unsigned int TransfTrigonRefl::get_point_type(unsigned int old_point_type) const
+{
+    return old_point_type;
+}
+
+//-----------------------------------------------------------------------------
+
 } // namespace libboardgame_base
