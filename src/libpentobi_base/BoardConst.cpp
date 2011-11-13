@@ -236,7 +236,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("BAR6", points, geometry, transforms));
+        pieces.push_back(Piece("BR6", points, geometry, transforms));
     }
     {
         /*  /+\          */
@@ -248,7 +248,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("CROOK", points, geometry, transforms));
+        pieces.push_back(Piece("CRK", points, geometry, transforms));
     }
     {
         /*      /+\      */
@@ -260,7 +260,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("CROWN", points, geometry, transforms));
+        pieces.push_back(Piece("CRN", points, geometry, transforms));
     }
     {
         /*    /+\       */
@@ -272,7 +272,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
         points.push_back(CoordPoint(3, 0));
-        pieces.push_back(Piece("SPHINX", points, geometry, transforms));
+        pieces.push_back(Piece("SP", points, geometry, transforms));
     }
     {
         /*        /+\  */
@@ -285,7 +285,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
         points.push_back(CoordPoint(2, 1));
-        pieces.push_back(Piece("SNAKE", points, geometry, transforms));
+        pieces.push_back(Piece("SN", points, geometry, transforms));
     }
     {
         /*    /+\ /+\  */
@@ -297,7 +297,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
         points.push_back(CoordPoint(2, 1));
-        pieces.push_back(Piece("YACHT6", points, geometry, transforms));
+        pieces.push_back(Piece("YA6", points, geometry, transforms));
     }
     {
         /*        /+\+/  */
@@ -309,7 +309,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(2, 0));
         points.push_back(CoordPoint(2, 1));
         points.push_back(CoordPoint(3, 1));
-        pieces.push_back(Piece("CHEVRON", points, geometry, transforms));
+        pieces.push_back(Piece("CHV", points, geometry, transforms));
     }
     {
         /*    /+\      */
@@ -322,7 +322,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("SIGNPOST", points, geometry, transforms));
+        pieces.push_back(Piece("SP", points, geometry, transforms));
     }
     {
         /*    /+\    */
@@ -335,7 +335,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(Piece("LOBSTER6", points, geometry, transforms));
+        pieces.push_back(Piece("LB6", points, geometry, transforms));
     }
     {
         /*    /+\+/+\  */
@@ -347,7 +347,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(Piece("HOOK", points, geometry, transforms));
+        pieces.push_back(Piece("HK", points, geometry, transforms));
     }
     {
         /*  /+\+/+\  */
@@ -359,7 +359,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(Piece("HEX", points, geometry, transforms));
+        pieces.push_back(Piece("HX", points, geometry, transforms));
     }
     {
         /*  \+/+\+/  */
@@ -371,7 +371,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(Piece("BUTTERFLY", points, geometry, transforms));
+        pieces.push_back(Piece("BF", points, geometry, transforms));
     }
     {
         /*  /+\+/+\+/+\  */
@@ -381,7 +381,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
         points.push_back(CoordPoint(3, 0));
-        pieces.push_back(Piece("BAR5", points, geometry, transforms));
+        pieces.push_back(Piece("BR5", points, geometry, transforms));
     }
     {
         /*    /+\      */
@@ -392,7 +392,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("YACHT5", points, geometry, transforms));
+        pieces.push_back(Piece("YA5", points, geometry, transforms));
     }
     {
         /*  /+\        */
@@ -403,7 +403,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(-1, 0));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(Piece("CROOK5", points, geometry, transforms));
+        pieces.push_back(Piece("CK5", points, geometry, transforms));
     }
     {
         /*  /+\+/+\  */
@@ -414,7 +414,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(1, 1));
         points.push_back(CoordPoint(2, 1));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("LOBSTER5", points, geometry, transforms));
+        pieces.push_back(Piece("LB5", points, geometry, transforms));
     }
     {
         /*  /+\+/+\+/  */
@@ -423,7 +423,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("BAR4", points, geometry, transforms));
+        pieces.push_back(Piece("BR4", points, geometry, transforms));
     }
     {
         /*  /+\      */
@@ -433,7 +433,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(Piece("CROOK4", points, geometry, transforms));
+        pieces.push_back(Piece("CRK4", points, geometry, transforms));
     }
     {
         /*    /+\    */
@@ -443,7 +443,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(Piece("TRIANGLE", points, geometry, transforms));
+        pieces.push_back(Piece("TR", points, geometry, transforms));
     }
     {
         /*  /+\+/+\  */
