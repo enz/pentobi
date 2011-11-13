@@ -210,7 +210,8 @@ int Board::get_score(Color c, double& game_result) const
             return points1 - points0;
         }
     }
-    else if (m_game_variant == game_variant_classic)
+    else if (m_game_variant == game_variant_classic
+             || m_game_variant == game_variant_trigon)
     {
         unsigned int points = get_points_with_bonus(c);
         int score = 0;
@@ -233,7 +234,8 @@ int Board::get_score(Color c, double& game_result) const
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_classic_2);
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_classic_2
+                            || m_game_variant == game_variant_trigon_2);
         unsigned int points0 =
             get_points_with_bonus(Color(0)) + get_points_with_bonus(Color(2));
         unsigned int points1 =
@@ -431,7 +433,8 @@ void Board::init_starting_points()
         add_colored_starting_point(4, 9, Color(0));
         add_colored_starting_point(9, 4, Color(1));
     }
-    else if (m_game_variant == game_variant_trigon)
+    else if (m_game_variant == game_variant_trigon
+             || m_game_variant == game_variant_trigon_2)
     {
         add_colorless_starting_point(17, 3);
         add_colorless_starting_point(17, 14);
@@ -577,7 +580,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 && ! s.is_offboard())
             {
                 if (mark_last_move && ! last_mv_marked && ! last_mv.is_null()
-                    && get_point_state(Point(x - 1, y)) != last_mv.color
+                    && get_point_state_ext(p.get_left()) != last_mv.color
                     && get_played_move(Point(x, y)) == last_mv.move)
                 {
                     set_color(out, "\x1B[1;37;47m");
@@ -586,7 +589,8 @@ void Board::write(ostream& out, bool mark_last_move) const
                 }
                 else if (mark_last_move && ! last_mv_marked
                          && ! last_mv.is_null() && s != last_mv.color
-                         && get_played_move(Point(x - 1, y)) == last_mv.move)
+                         && get_point_state_ext(p.get_left()) == last_mv.color
+                         && get_played_move(p.get_left()) == last_mv.move)
                 {
                     set_color(out, "\x1B[1;37;47m");
                     out << '<';
@@ -606,7 +610,7 @@ void Board::write(ostream& out, bool mark_last_move) const
             if (s.is_offboard())
             {
                 if (is_trigon && x > 0
-                    && ! get_point_state_ext(Point(x - 1, y)).is_offboard())
+                    && ! get_point_state_ext(p.get_left()).is_offboard())
                 {
                     set_color(out, "\x1B[1;30;47m");
                     out << (x % 2 == y % 2 ? '\\' : '/');
