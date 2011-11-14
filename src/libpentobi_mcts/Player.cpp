@@ -20,6 +20,8 @@ using libboardgame_util::WallTime;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::GameVariant;
 
 //-----------------------------------------------------------------------------
@@ -88,10 +90,14 @@ Move Player::genmove(Color c)
                 filename = "book_duo.blksgf";
             else if (variant == game_variant_classic_2)
                 filename = "book_classic_2.blksgf";
+            else if (variant == game_variant_classic)
+                filename = "book_classic.blksgf";
+            else if (variant == game_variant_trigon_2)
+                filename = "book_trigon_2.blksgf";
             else
             {
-                LIBBOARDGAME_ASSERT(variant == game_variant_classic);
-                filename = "book_classic.blksgf";
+                LIBBOARDGAME_ASSERT(variant == game_variant_trigon);
+                filename = "book_trigon.blksgf";
             }
             load_book(filename);
         }

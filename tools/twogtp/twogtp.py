@@ -53,7 +53,7 @@ def invert_score(score):
     else:
         return score
 
-def convert_classic_score(score):
+def convert_four_player_score(score):
     """
     Make a two-player score out of the score of the four players in game
     variant classic. Assumes that Black plays Blue and Red, and White plays
@@ -135,9 +135,9 @@ def play_game(game_number, black, white, game_variant):
     cpu_white = float(white.send("cputime")) - cpu_white
     score_black = black.send("final_score")
     score_white = white.send("final_score")
-    if game_variant == "classic":
-        score_black = convert_classic_score(score_black)
-        score_white = convert_classic_score(score_white)
+    if game_variant == "classic" or game_variant == "trigon":
+        score_black = convert_four_player_score(score_black)
+        score_white = convert_four_player_score(score_white)
     if exchange_color:
         score_black = invert_score(score_black)
         score_white = invert_score(score_white)
@@ -202,6 +202,10 @@ if game_variant == "classic":
     game_name = "Blokus"
 elif game_variant == "classic_2":
     game_name = "Blokus Two-Player"
+elif game_variant == "trigon":
+    game_name = "Blokus Trigon"
+elif game_variant == "trigon_2":
+    game_name = "Blokus Trigon Two-Player"
 elif game_variant == "duo":
     game_name = "Blokus Duo"
 else:
