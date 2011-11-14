@@ -152,7 +152,33 @@ public:
 
 //-----------------------------------------------------------------------------
 
+class TransfTrigonRot60
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+
+    unsigned int get_point_type() const;
+
+    unsigned int get_new_point_type() const;
+};
+
+//-----------------------------------------------------------------------------
+
 class TransfTrigonRot120
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+
+    unsigned int get_point_type() const;
+
+    unsigned int get_new_point_type() const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfTrigonRot180
     : public Transform
 {
 public:
@@ -178,7 +204,33 @@ public:
 
 //-----------------------------------------------------------------------------
 
+class TransfTrigonRot300
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+
+    unsigned int get_point_type() const;
+
+    unsigned int get_new_point_type() const;
+};
+
+//-----------------------------------------------------------------------------
+
 class TransfTrigonRefl
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+
+    unsigned int get_point_type() const;
+
+    unsigned int get_new_point_type() const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfTrigonReflRot60
     : public Transform
 {
 public:
@@ -204,7 +256,33 @@ public:
 
 //-----------------------------------------------------------------------------
 
+class TransfTrigonReflRot180
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+
+    unsigned int get_point_type() const;
+
+    unsigned int get_new_point_type() const;
+};
+
+//-----------------------------------------------------------------------------
+
 class TransfTrigonReflRot240
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const;
+
+    unsigned int get_point_type() const;
+
+    unsigned int get_new_point_type() const;
+};
+
+//-----------------------------------------------------------------------------
+
+class TransfTrigonReflRot300
     : public Transform
 {
 public:

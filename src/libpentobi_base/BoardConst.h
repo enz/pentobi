@@ -109,10 +109,10 @@ private:
 
     BoardConst(BoardType board_type);
 
-    void create_move(unsigned int piece, const Piece::Points& coord_points,
-                     Point center);
+    void create_move(unsigned int piece_index,
+                     const Piece::Points& coord_points, Point center);
 
-    void create_moves(unsigned int piece);
+    void create_moves(unsigned int piece_index);
 
     void init_symmetry_info();
 

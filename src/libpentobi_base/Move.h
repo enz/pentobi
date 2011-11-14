@@ -19,9 +19,9 @@ class Move
 {
 public:
     /** Integer range of moves.
-        On a 20x20 board with standard pieces, there are 30433 regular moves,
-        plus a pass and a null move. */
-    static const unsigned int range = 30433 + 1 + 1;
+        The maximum is given by game variant Trigon, which has 37304 regular
+        moves plus a pass and a null move. */
+    static const unsigned int range = 34647 + 1 + 1;
 
     static Move pass();
 
