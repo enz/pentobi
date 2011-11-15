@@ -39,9 +39,28 @@ const Transform* PieceTransformsTrigon::get_mirrored_horizontally(
 {
     if (transf == &m_identity)
         return &m_refl;
+    if (transf == &m_rot60)
+        return &m_refl_rot300;
+    if (transf == &m_rot120)
+        return &m_refl_rot240;
+    if (transf == &m_rot180)
+        return &m_refl_rot180;
+    if (transf == &m_rot240)
+        return &m_refl_rot120;
+    if (transf == &m_rot300)
+        return &m_refl_rot60;
     if (transf == &m_refl)
         return &m_identity;
-    log() << "TODO: PieceTransformsTrigon::get_mirrored_horizontally\n";
+    if (transf == &m_refl_rot60)
+        return &m_rot300;
+    if (transf == &m_refl_rot120)
+        return &m_rot240;
+    if (transf == &m_refl_rot180)
+        return &m_rot180;
+    if (transf == &m_refl_rot240)
+        return &m_rot120;
+    if (transf == &m_refl_rot300)
+        return &m_rot60;
     LIBBOARDGAME_ASSERT(false);
     return 0;
 }
@@ -49,7 +68,30 @@ const Transform* PieceTransformsTrigon::get_mirrored_horizontally(
 const Transform* PieceTransformsTrigon::get_mirrored_vertically(
                                                   const Transform* transf) const
 {
-    log() << "TODO: PieceTransformsTrigon::get_mirrored_vertically\n";
+    if (transf == &m_identity)
+        return &m_refl_rot180;
+    if (transf == &m_rot60)
+        return &m_refl_rot120;
+    if (transf == &m_rot120)
+        return &m_refl_rot60;
+    if (transf == &m_rot180)
+        return &m_refl;
+    if (transf == &m_rot240)
+        return &m_refl_rot300;
+    if (transf == &m_rot300)
+        return &m_refl_rot240;
+    if (transf == &m_refl)
+        return &m_rot180;
+    if (transf == &m_refl_rot60)
+        return &m_rot120;
+    if (transf == &m_refl_rot120)
+        return &m_rot60;
+    if (transf == &m_refl_rot180)
+        return &m_identity;
+    if (transf == &m_refl_rot240)
+        return &m_rot300;
+    if (transf == &m_refl_rot300)
+        return &m_rot240;
     LIBBOARDGAME_ASSERT(false);
     return 0;
 }
@@ -57,7 +99,30 @@ const Transform* PieceTransformsTrigon::get_mirrored_vertically(
 const Transform* PieceTransformsTrigon::get_rotated_anticlockwise(
                                                   const Transform* transf) const
 {
-    log() << "TODO: PieceTransformsTrigon::get_mirrored_anticlockwise\n";
+    if (transf == &m_identity)
+        return &m_rot300;
+    if (transf == &m_rot60)
+        return &m_identity;
+    if (transf == &m_rot120)
+        return &m_rot60;
+    if (transf == &m_rot180)
+        return &m_rot120;
+    if (transf == &m_rot240)
+        return &m_rot180;
+    if (transf == &m_rot300)
+        return &m_rot240;
+    if (transf == &m_refl)
+        return &m_refl_rot300;
+    if (transf == &m_refl_rot60)
+        return &m_refl;
+    if (transf == &m_refl_rot120)
+        return &m_refl_rot60;
+    if (transf == &m_refl_rot180)
+        return &m_refl_rot120;
+    if (transf == &m_refl_rot240)
+        return &m_refl_rot180;
+    if (transf == &m_refl_rot300)
+        return &m_refl_rot240;
     LIBBOARDGAME_ASSERT(false);
     return 0;
 }
@@ -65,7 +130,30 @@ const Transform* PieceTransformsTrigon::get_rotated_anticlockwise(
 const Transform* PieceTransformsTrigon::get_rotated_clockwise(
                                                   const Transform* transf) const
 {
-    log() << "TODO: PieceTransformsTrigon::get_mirrored_clockwise\n";
+    if (transf == &m_identity)
+        return &m_rot60;
+    if (transf == &m_rot60)
+        return &m_rot120;
+    if (transf == &m_rot120)
+        return &m_rot180;
+    if (transf == &m_rot180)
+        return &m_rot240;
+    if (transf == &m_rot240)
+        return &m_rot300;
+    if (transf == &m_rot300)
+        return &m_identity;
+    if (transf == &m_refl)
+        return &m_refl_rot60;
+    if (transf == &m_refl_rot60)
+        return &m_refl_rot120;
+    if (transf == &m_refl_rot120)
+        return &m_refl_rot180;
+    if (transf == &m_refl_rot180)
+        return &m_refl_rot240;
+    if (transf == &m_refl_rot240)
+        return &m_refl_rot300;
+    if (transf == &m_refl_rot300)
+        return &m_refl;
     LIBBOARDGAME_ASSERT(false);
     return 0;
 }

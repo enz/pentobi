@@ -269,6 +269,10 @@ private:
 
     QAction* m_actionGameVariantDuo;
 
+    QAction* m_actionGameVariantTrigon;
+
+    QAction* m_actionGameVariantTrigon2;
+
     QAction* m_actionGoodMove;
 
     QAction* m_actionGotoMove;
@@ -497,6 +501,10 @@ private slots:
     void gameVariantClassic2(bool checked);
 
     void gameVariantDuo(bool checked);
+
+    void gameVariantTrigon(bool checked);
+
+    void gameVariantTrigon2(bool checked);
 
     void genMoveFinished();
 

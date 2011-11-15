@@ -50,6 +50,10 @@ using libpentobi_mcts::Search;
 
 namespace {
 
+/** Enable support for game variants Trigon amd Trigon Two-Player.
+    This is still work in progress. */
+const bool useTrigon = false;
+
 QToolButton* createOBoxToolButton(QAction* action)
 {
     QToolButton* button = new QToolButton();
@@ -123,6 +127,10 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
         variant = game_variant_duo;
     else if (variantString == "classic_2")
         variant = game_variant_classic_2;
+    else if (variantString == "trigon" && useTrigon)
+        variant = game_variant_trigon;
+    else if (variantString == "trigon_2" && useTrigon)
+        variant = game_variant_trigon_2;
     else
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
@@ -437,7 +445,7 @@ void MainWindow::computerColor()
     GameVariant variant = m_game->get_game_variant();
     ComputerColorDialog dialog(this, variant, m_computerColor);
     dialog.exec();
-    if (variant != game_variant_classic)
+    if (variant != game_variant_classic && variant != game_variant_trigon)
     {
         bool computerNone = true;
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
@@ -573,7 +581,7 @@ void MainWindow::createActions()
     connect(m_actionGameVariantClassic, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantClassic(bool)));
 
-    m_actionGameVariantClassic2 = new QAction(tr("Classic &Two-Player"), this);
+    m_actionGameVariantClassic2 = new QAction(tr("Cl&assic Two-Player"), this);
     m_actionGameVariantClassic2->setActionGroup(groupGameVariant);
     m_actionGameVariantClassic2->setCheckable(true);
     connect(m_actionGameVariantClassic2, SIGNAL(triggered(bool)),
@@ -584,6 +592,18 @@ void MainWindow::createActions()
     m_actionGameVariantDuo->setCheckable(true);
     connect(m_actionGameVariantDuo, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantDuo(bool)));
+
+    m_actionGameVariantTrigon = new QAction(tr("&Trigon"), this);
+    m_actionGameVariantTrigon->setActionGroup(groupGameVariant);
+    m_actionGameVariantTrigon->setCheckable(true);
+    connect(m_actionGameVariantTrigon, SIGNAL(triggered(bool)),
+            this, SLOT(gameVariantTrigon(bool)));
+
+    m_actionGameVariantTrigon2 = new QAction(tr("T&rigon Two-Player"), this);
+    m_actionGameVariantTrigon2->setActionGroup(groupGameVariant);
+    m_actionGameVariantTrigon2->setCheckable(true);
+    connect(m_actionGameVariantTrigon2, SIGNAL(triggered(bool)),
+            this, SLOT(gameVariantTrigon2(bool)));
 
     m_actionGoodMove = new QAction(tr("&Good"), this);
     m_actionGoodMove->setActionGroup(groupMoveAnnotation);
@@ -924,6 +944,11 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantClassic);
     menuGameVariant->addAction(m_actionGameVariantClassic2);
     menuGameVariant->addAction(m_actionGameVariantDuo);
+    if (useTrigon)
+    {
+        menuGameVariant->addAction(m_actionGameVariantTrigon);
+        menuGameVariant->addAction(m_actionGameVariantTrigon2);
+    }
     menuGame->addAction(m_actionComputerColor);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addAction(m_actionUndo);
@@ -1260,6 +1285,18 @@ void MainWindow::gameVariantDuo(bool checked)
         setGameVariant(game_variant_duo);
 }
 
+void MainWindow::gameVariantTrigon(bool checked)
+{
+    if (checked)
+        setGameVariant(game_variant_trigon);
+}
+
+void MainWindow::gameVariantTrigon2(bool checked)
+{
+    if (checked)
+        setGameVariant(game_variant_trigon_2);
+}
+
 void MainWindow::genMove()
 {
     ++m_genMoveId;
@@ -1445,7 +1482,8 @@ void MainWindow::initGame()
     {
         if (m_game->get_game_variant() == game_variant_duo)
             m_computerColor[Color(1)] = true;
-        else if (m_game->get_game_variant() == game_variant_classic_2)
+        else if (m_game->get_game_variant() == game_variant_classic_2
+                 || m_game->get_game_variant() == game_variant_trigon_2)
         {
             m_computerColor[Color(1)] = true;
             m_computerColor[Color(3)] = true;
@@ -1459,13 +1497,24 @@ void MainWindow::initGame()
 
 void MainWindow::initGameVariantActions()
 {
-    GameVariant variant = m_game->get_game_variant();
-    if (variant == game_variant_classic)
+    switch (m_game->get_game_variant())
+    {
+    case game_variant_classic:
         m_actionGameVariantClassic->setChecked(true);
-    else if (variant == game_variant_classic_2)
+        break;
+    case game_variant_classic_2:
         m_actionGameVariantClassic2->setChecked(true);
-    else
+        break;
+    case game_variant_trigon:
+        m_actionGameVariantTrigon->setChecked(true);
+        break;
+    case game_variant_trigon_2:
+        m_actionGameVariantTrigon2->setChecked(true);
+        break;
+    case  game_variant_duo:
         m_actionGameVariantDuo->setChecked(true);
+        break;
+    }
 }
 
 void MainWindow::initPieceSelectors()
@@ -1652,7 +1701,7 @@ void MainWindow::play()
 {
     cancelGenMove();
     GameVariant variant = m_game->get_game_variant();
-    if (variant != game_variant_classic)
+    if (variant != game_variant_classic && variant != game_variant_trigon)
     {
         QSettings settings;
         settings.setValue("computer_color_none", false);
@@ -1661,7 +1710,8 @@ void MainWindow::play()
     {
         m_computerColor.fill(false);
         m_computerColor[m_toPlay] = true;
-        if (variant == game_variant_classic_2)
+        if (variant == game_variant_classic_2
+            || variant == game_variant_trigon_2)
         {
             if (m_toPlay == Color(0) || m_toPlay == Color(2))
                 m_computerColor[Color(0)] = m_computerColor[Color(2)] = true;
@@ -2279,7 +2329,8 @@ void MainWindow::showGameOver()
         else
             info = tr("The game ends in a draw.");
     }
-    else if (variant == game_variant_classic_2)
+    else if (variant == game_variant_classic_2
+             || variant == game_variant_trigon_2)
     {
         double game_result;
         int score = bd.get_score(Color(0), game_result);

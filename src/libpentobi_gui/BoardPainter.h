@@ -57,11 +57,17 @@ private:
 
     bool m_drawCoordLabels;
 
-    /** The size (rows/columns) of the last board painted. */
-    int m_sz;
+    /** The width of the last board painted. */
+    int m_width;
 
-    /** The size in pixels of the last board painted. */
-    int m_boardSize;
+    /** The height of the last board painted. */
+    int m_height;
+
+    /** The width in pixels of the last board painted. */
+    int m_boardWidth;
+
+    /** The height in pixels of the last board painted. */
+    int m_boardHeight;
 
     Color m_selectedPieceColor;
 
@@ -69,7 +75,9 @@ private:
 
     QColor m_coordLabelColor;
 
-    int m_squareSize;
+    int m_fieldWidth;
+
+    int m_fieldHeight;
 
     QPoint m_boardOffset;
 

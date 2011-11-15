@@ -15,13 +15,15 @@
 using namespace std;
 using boost::trim;
 using libboardgame_base::CoordPoint;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::BoardConst;
 
 //-----------------------------------------------------------------------------
 
 namespace {
 
-const string pieceLayout =
+const string pieceLayoutClassic =
     " 1 .V3V3 .L4L4L4 .T4 . . .Z4Z4 .L5L5L5L5 .V5V5V5 . . . . N N . . . ."
     " . . .V3 . . .L4 .T4T4 .Z4Z4 . .L5 . . . .V5 . . .T5 . . . N N N .I5"
     " 2 2 . . .I4 . . .T4 . . . . . . . . X . .V5 .T5T5T5 . . . . . . .I5"
@@ -29,6 +31,14 @@ const string pieceLayout =
     " O O .I3 .I4 . P P . W W . . F F . . X . . Y . . . . .Z5 . . . U .I5"
     " O O .I3 .I4 . P P . W . . F F . . . . . Y Y Y Y . .Z5Z5 . . U U .I5";
 
+/** @todo Implement. */
+const string pieceLayoutTrigon =
+    " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+    " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+    " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+    " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+    " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+    " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
 }
 
 //-----------------------------------------------------------------------------
@@ -70,6 +80,11 @@ int PieceSelector::heightForWidth(int width) const
 
 void PieceSelector::init()
 {
+    GameVariant game_variant = m_bd.get_game_variant();
+    const string& pieceLayout =
+        (game_variant == game_variant_trigon
+         || game_variant == game_variant_trigon_2
+         ? pieceLayoutTrigon : pieceLayoutClassic);
     for (unsigned int y = 0; y < nuRows; ++y)
         for (unsigned int x = 0; x < nuColumns; ++x)
         {

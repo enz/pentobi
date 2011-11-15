@@ -14,6 +14,8 @@ using namespace std;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 
 //-----------------------------------------------------------------------------
 
@@ -121,7 +123,8 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
         x+= colorDotSize + textWidthBlue + pad;
         drawScore(painter, Color(1), x);
     }
-    else if (m_gameVariant == game_variant_classic)
+    else if (m_gameVariant == game_variant_classic
+             || m_gameVariant == game_variant_trigon)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthYellow = getScoreTextWidth(Color(1));
@@ -142,7 +145,8 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2);
+        LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2
+                            || m_gameVariant == game_variant_trigon_2);
         int textWidthBlueRed = getScoreTextWidth2(Color(0), Color(2));
         int textWidthYellowGreen = getScoreTextWidth2(Color(1), Color(3));
         int textWidthBlue = getScoreTextWidth(Color(0));

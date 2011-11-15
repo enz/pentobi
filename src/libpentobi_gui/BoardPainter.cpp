@@ -82,9 +82,9 @@ void BoardPainter::drawLabel(QPainter& painter, int x, int y,
         painter.setFont(m_fontSmall);
     else
         painter.setFont(m_font);
-    int squareX = x * m_squareSize;
-    int squareY = (m_sz - y - 1) * m_squareSize;
-    painter.drawText(squareX, squareY, m_squareSize, m_squareSize,
+    int fieldX = x * m_fieldWidth;
+    int fieldY = (m_height - y - 1) * m_fieldHeight;
+    painter.drawText(fieldX, fieldY, m_fieldWidth, m_fieldHeight,
                      Qt::AlignCenter, label);
 }
 
@@ -98,10 +98,10 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
     {
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
         {
-            int squareX = p.get_x() * m_squareSize;
-            int squareY = (m_sz - p.get_y() - 1) * m_squareSize;
+            int fieldX = p.get_x() * m_fieldWidth;
+            int fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
             Util::paintColorSquare(painter, gameVariant, m_selectedPieceColor,
-                                   squareX, squareY, m_squareSize);
+                                   fieldX, fieldY, m_fieldWidth);
         }
     }
     else
@@ -111,9 +111,9 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
         color.setAlpha(160);
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
         {
-            painter.fillRect(p.get_x() * m_squareSize,
-                             (m_sz - p.get_y() - 1) * m_squareSize,
-                             m_squareSize, m_squareSize, color);
+            painter.fillRect(p.get_x() * m_fieldWidth,
+                             (m_height - p.get_y() - 1) * m_fieldHeight,
+                             m_fieldWidth, m_fieldHeight, color);
         }
     }
 }
@@ -122,11 +122,10 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
 {
     if (! m_hasPainted)
         return CoordPoint::null();
-    int sz = static_cast<int>(m_sz);
-    x = (x - m_boardOffset.x()) / m_squareSize;
-    y = (y - m_boardOffset.y()) / m_squareSize;
-    y = m_sz - y - 1;
-    if (x < 0 || x >= sz || y < 0 || y >= sz)
+    x = (x - m_boardOffset.x()) / m_fieldWidth;
+    y = (y - m_boardOffset.y()) / m_fieldHeight;
+    y = m_height - y - 1;
+    if (x < 0 || x >= m_width || y < 0 || y >= m_height)
         return CoordPoint::null();
     else
         return CoordPoint(x, y);
@@ -137,10 +136,10 @@ QRect BoardPainter::getRect(Point p) const
     if (! m_hasPainted)
         return QRect();
     int x = p.get_x();
-    int y = m_sz - p.get_y() - 1;
-    return QRect(m_boardOffset.x() + x * m_squareSize,
-                 m_boardOffset.y() + y * m_squareSize,
-                 m_squareSize, m_squareSize);
+    int y = m_height - p.get_y() - 1;
+    return QRect(m_boardOffset.x() + x * m_fieldWidth,
+                 m_boardOffset.y() + y * m_fieldHeight,
+                 m_fieldWidth, m_fieldHeight);
 }
 
 void BoardPainter::paint(QPainter& painter, unsigned int width,
@@ -151,37 +150,51 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
 {
     m_hasPainted = true;
     const Geometry& geometry = pointState.get_geometry();
-    LIBBOARDGAME_ASSERT(geometry.get_width() == geometry.get_height());
-    m_sz = static_cast<int>(geometry.get_width());
+    m_width = static_cast<int>(geometry.get_width());
+    m_height = static_cast<int>(geometry.get_height());
     if (m_drawCoordLabels)
-        m_squareSize = min(width, height) / (m_sz + 2);
+    {
+        m_fieldWidth = min(width / (m_width + 2), height / (m_height + 2));
+        m_fieldHeight = m_fieldWidth;
+    }
     else
-        m_squareSize = min(width, height) / m_sz;
-    m_boardSize = m_squareSize * m_sz;
-    m_font.setPointSize(max(m_squareSize * 40 / 100, 1));
+    {
+        m_fieldWidth = min(width / m_width, height / m_height);
+        m_fieldHeight = m_fieldWidth;
+    }
+    m_boardWidth = m_fieldWidth * m_width;
+    m_boardHeight = m_fieldHeight * m_height;
+    m_font.setPointSize(max(m_fieldWidth * 40 / 100, 1));
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
-    m_fontSmall.setPointSize(max(m_squareSize * 34 / 100, 1));
+    m_fontSmall.setPointSize(max(m_fieldWidth * 34 / 100, 1));
     m_boardOffset =
-        QPoint((width - m_boardSize) / 2, (height - m_boardSize) / 2);
+        QPoint((width - m_boardWidth) / 2, (height - m_boardHeight) / 2);
     painter.save();
     painter.translate(m_boardOffset);
     if (m_drawCoordLabels)
     {
         painter.setPen(m_coordLabelColor);
         painter.setFont(m_font);
-        for (int x = 0; x < m_sz; ++x)
+        for (int x = 0; x < m_width; ++x)
         {
-            QString label(QChar('A' + x));
+            QString label;
+            if (x < 26)
+                label = QString(QChar('A' + x));
+            else
+            {
+                label = "A";
+                label.append(QChar('A' + (x - 26)));
+            }
             drawLabel(painter, x, -1, label, false, true);
-            drawLabel(painter, x, m_sz, label, false, true);
+            drawLabel(painter, x, m_height, label, false, true);
         }
-        for (int y = 0; y < m_sz; ++y)
+        for (int y = 0; y < m_height; ++y)
         {
             QString label;
             label.setNum(y + 1);
             drawLabel(painter, -1, y, label, false, true);
-            drawLabel(painter, m_sz, y, label, false, true);
+            drawLabel(painter, m_width, y, label, false, true);
         }
     }
     for (GeometryIterator i(geometry); i; ++i)
@@ -189,20 +202,20 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         int x = i->get_x();
         int y = i->get_y();
         PointStateExt s = pointState[*i];
-        int squareX = x * m_squareSize;
-        int squareY = (m_sz - y - 1) * m_squareSize;
+        int fieldX = x * m_fieldWidth;
+        int fieldY = (m_height - y - 1) * m_fieldHeight;
         if (s.is_color())
             Util::paintColorSquare(painter, gameVariant, s.to_color(),
-                                   squareX, squareY, m_squareSize);
+                                   fieldX, fieldY, m_fieldWidth);
         else
         {
             Color color;
             if (Board::is_starting_point(*i, gameVariant, color))
                 Util::paintEmptySquareStartingPoint(painter, gameVariant,
-                                                    color, squareX, squareY,
-                                                    m_squareSize);
+                                                    color, fieldX, fieldY,
+                                                    m_fieldWidth);
             else
-                Util::paintEmptySquare(painter, squareX, squareY, m_squareSize);
+                Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
         }
     }
     if (labels != 0)
