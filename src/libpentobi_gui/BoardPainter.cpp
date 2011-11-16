@@ -14,54 +14,14 @@
 #include "libpentobi_base/DiagIterator.h"
 
 using namespace std;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::AdjIterator;
 using libpentobi_base::BoardIterator;
-using libpentobi_base::Color;
 using libpentobi_base::DiagIterator;
-using libpentobi_base::FullGrid;
-using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::Move;
-using libpentobi_base::MovePoints;
-using libpentobi_base::Piece;
-using libpentobi_base::Point;
 using libpentobi_base::PointState;
-using libpentobi_base::PointStateExt;
-
-//-----------------------------------------------------------------------------
-
-namespace {
-
-bool isLegal(const MovePoints& movePoints, Color c, GameVariant gameVariant,
-             const FullGrid<PointStateExt>& pointState)
-{
-    bool isFirstPiece = true;
-    const Geometry& geometry = pointState.get_geometry();
-    for (GeometryIterator i(geometry); i; ++i)
-        if (pointState[*i] == c)
-        {
-            isFirstPiece = false;
-            break;
-        }
-    Point startingPoint = Board::get_starting_point(gameVariant, c);
-    bool isConnected = false;
-    BOOST_FOREACH(Point p, movePoints)
-    {
-        if (! geometry.is_onboard(p) || ! pointState[p].is_empty())
-            return false;
-        for (AdjIterator i(geometry, p); i; ++i)
-            if (pointState[*i] == c)
-                return false;
-        if (isFirstPiece && p == startingPoint)
-            isConnected = true;
-        for (DiagIterator i(geometry, p); i; ++i)
-            if (pointState[*i] == c)
-                isConnected = true;
-    }
-    return isConnected;
-}
-
-} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -89,19 +49,31 @@ void BoardPainter::drawLabel(QPainter& painter, int x, int y,
 }
 
 void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
+                                     const Geometry& geometry,
                                      const FullGrid<PointStateExt>& pointState)
 {
     if (m_selectedPiecePoints.empty())
         return;
-    if (isLegal(m_selectedPiecePoints, m_selectedPieceColor, gameVariant,
-                pointState))
+    if (m_isSelectedPieceLegal)
     {
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
         {
             int fieldX = p.get_x() * m_fieldWidth;
             int fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
-            Util::paintColorSquare(painter, gameVariant, m_selectedPieceColor,
-                                   fieldX, fieldY, m_fieldWidth);
+            if (gameVariant == game_variant_trigon
+                || gameVariant == game_variant_trigon_2)
+            {
+                bool isUpside = (geometry.get_point_type(p) == 1);
+                Util::paintColorTriangle(painter, gameVariant,
+                                         m_selectedPieceColor, isUpside, fieldX,
+                                         fieldY, m_fieldWidth);
+            }
+            else
+            {
+                Util::paintColorSquare(painter, gameVariant,
+                                       m_selectedPieceColor, fieldX, fieldY,
+                                       m_fieldWidth);
+            }
         }
     }
     else
@@ -197,6 +169,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
             drawLabel(painter, m_width, y, label, false, true);
         }
     }
+    m_startingPoints.init(gameVariant, geometry);
     for (GeometryIterator i(geometry); i; ++i)
     {
         int x = i->get_x();
@@ -204,18 +177,36 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         PointStateExt s = pointState[*i];
         int fieldX = x * m_fieldWidth;
         int fieldY = (m_height - y - 1) * m_fieldHeight;
-        if (s.is_color())
-            Util::paintColorSquare(painter, gameVariant, s.to_color(),
-                                   fieldX, fieldY, m_fieldWidth);
+        if (gameVariant == game_variant_trigon
+            || gameVariant == game_variant_trigon_2)
+        {
+            bool isUpside = (geometry.get_point_type(x, y) == 1);
+            if (s.is_color())
+                Util::paintColorTriangle(painter, gameVariant, s.to_color(),
+                                         isUpside, fieldX, fieldY,
+                                         m_fieldWidth);
+            else
+                Util::paintEmptyTriangle(painter, isUpside, fieldX, fieldY,
+                                         m_fieldWidth);
+        }
         else
         {
-            Color color;
-            if (Board::is_starting_point(*i, gameVariant, color))
-                Util::paintEmptySquareStartingPoint(painter, gameVariant,
-                                                    color, fieldX, fieldY,
-                                                    m_fieldWidth);
+            if (s.is_color())
+                Util::paintColorSquare(painter, gameVariant, s.to_color(),
+                                       fieldX, fieldY, m_fieldWidth);
             else
-                Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
+            {
+                if (m_startingPoints.is_colored_starting_point(*i))
+                {
+                    Color color = m_startingPoints.get_starting_point_color(*i);
+                    Util::paintEmptySquareStartingPoint(painter, gameVariant,
+                                                        color, fieldX, fieldY,
+                                                        m_fieldWidth);
+                }
+                else
+                    Util::paintEmptySquare(painter, fieldX, fieldY,
+                                           m_fieldWidth);
+            }
         }
     }
     if (labels != 0)
@@ -233,14 +224,16 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                           underline);
             }
     }
-    drawSelectedPiece(painter, gameVariant, pointState);
+    drawSelectedPiece(painter, gameVariant, geometry, pointState);
     painter.restore();
 }
 
-void BoardPainter::setSelectedPiece(Color c, const MovePoints& points)
+void BoardPainter::setSelectedPiece(Color c, const MovePoints& points,
+                                    bool isLegal)
 {
     m_selectedPieceColor = c;
     m_selectedPiecePoints = points;
+    m_isSelectedPieceLegal = isLegal;
 }
 
 //-----------------------------------------------------------------------------

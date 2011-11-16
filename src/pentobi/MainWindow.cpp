@@ -51,7 +51,7 @@ using libpentobi_mcts::Search;
 namespace {
 
 /** Enable support for game variants Trigon amd Trigon Two-Player.
-    This is still work in progress. */
+    This is still work in progress and not ready to be enabled in releases. */
 const bool useTrigon = false;
 
 QToolButton* createOBoxToolButton(QAction* action)

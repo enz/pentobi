@@ -668,6 +668,8 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     MovePoints sorted_points = points;
     sort(sorted_points.begin(), sorted_points.end());
     Point p = points[0];
+    if (! m_geometry.is_onboard(p))
+        return false;
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         if (get_piece(i).get_size() == points.size())
         {

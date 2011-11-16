@@ -15,6 +15,9 @@ using namespace std;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
 using libboardgame_base::geometry_util::normalize_offset;
+using libpentobi_base::board_type_trigon;
+using libpentobi_base::BoardType;
+using libpentobi_base::Geometry;
 using libpentobi_base::Piece;
 
 //-----------------------------------------------------------------------------
@@ -26,8 +29,8 @@ OrientationDisplay::OrientationDisplay(QWidget* parent, const Board& bd)
       m_transform(0),
       m_isColorSelected(false)
 {
-    setMinimumWidth(5 * Piece::max_size);
-    setMinimumHeight(5 * Piece::max_size);
+    setMinimumWidth(30);
+    setMinimumHeight(30);
 }
 
 void OrientationDisplay::clearSelectedColor()
@@ -64,25 +67,36 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
         }
         return;
     }
-    int squareSize = min(width() / Piece::max_size, height() / Piece::max_size);
-    int displaySize = squareSize * Piece::max_size;
+    int fieldSize = min(width() / 7, height() / 7);
+    int displaySize = fieldSize * 7;
     painter.save();
     painter.translate((width() - displaySize) / 2,
                       (height() - displaySize) / 2);
     Piece::Points points = m_piece->get_points();
     m_transform->transform(points.begin(), points.end());
+    const Geometry& geometry = m_bd.get_geometry();
     unsigned int width, height;
-    normalize_offset(m_bd.get_geometry(), points.begin(), points.end(), width,
-                     height);
+    normalize_offset(geometry, points.begin(), points.end(), width, height);
     painter.save();
-    painter.translate((displaySize - width * squareSize) / 2,
-                      (displaySize - height * squareSize) / 2);
+    painter.translate((displaySize - width * fieldSize) / 2,
+                      (displaySize - height * fieldSize) / 2);
+    GameVariant game_variant = m_bd.get_game_variant();
+    BoardType board_type = m_bd.get_board_type();
     BOOST_FOREACH(CoordPoint p, points)
     {
-        int x = p.x * squareSize;
-        int y = (height - p.y - 1) * squareSize;
-        Util::paintColorSquare(painter, m_bd.get_game_variant(), m_color, x, y,
-                               squareSize);
+        int x = p.x * fieldSize;
+        int y = (height - p.y - 1) * fieldSize;
+        if (board_type == board_type_trigon)
+        {
+            bool isUpside = (geometry.get_point_type(p) != 0);
+            if (m_transform->get_new_point_type() != 0)
+                isUpside = ! isUpside;
+            Util::paintColorTriangle(painter, game_variant, m_color, isUpside,
+                                     x, y, fieldSize);
+        }
+        else
+            Util::paintColorSquare(painter, game_variant, m_color, x, y,
+                                   fieldSize);
     }
     painter.restore();
     painter.restore();

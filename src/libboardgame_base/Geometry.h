@@ -70,6 +70,8 @@ public:
         @see get_period_x(). */
     virtual unsigned int get_period_y() const = 0;
 
+    unsigned int get_point_type(CoordPoint p) const;
+
     unsigned int get_point_type(Point p) const;
 
     bool is_onboard(Point p) const;
@@ -222,6 +224,12 @@ template<class P>
 inline unsigned int Geometry<P>::get_point_type(Point p) const
 {
     return get_point_type(p.get_x(), p.get_y());
+}
+
+template<class P>
+inline unsigned int Geometry<P>::get_point_type(CoordPoint p) const
+{
+    return get_point_type(p.x, p.y);
 }
 
 template<class P>

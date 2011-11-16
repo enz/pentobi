@@ -121,6 +121,8 @@ private:
 
     QTimer m_currentMoveShownAnimationTimer;
 
+    Move findSelectedPieceMove();
+
     void setSelectedPieceOffset(const QMouseEvent& event);
 
     void setSelectedPieceOffset(const CoordPoint& offset);

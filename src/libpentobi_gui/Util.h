@@ -29,7 +29,13 @@ QColor getLabelColor(GameVariant gameVariant, PointState s);
 void paintColorSquare(QPainter& painter, GameVariant gameVariant, Color c,
                       int x, int y, int size);
 
+void paintColorTriangle(QPainter& painter, GameVariant gameVariant,
+                        Color c, bool isUpside, int x, int y, int size);
+
 void paintEmptySquare(QPainter& painter, int x, int y, int size);
+
+void paintEmptyTriangle(QPainter& painter, bool isUpside, int x, int y,
+                        int size);
 
 void paintEmptySquareStartingPoint(QPainter& painter, GameVariant gameVariant,
                                    Color c, int x, int y, int size);

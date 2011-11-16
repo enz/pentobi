@@ -7,6 +7,7 @@
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/program_options.hpp>
 #include "libboardgame_base/RectGeometry.h"
+#include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libpentobi_gui/BoardPainter.h"
@@ -22,11 +23,14 @@ using boost::program_options::store;
 using boost::program_options::value;
 using boost::program_options::variables_map;
 using libboardgame_base::RectGeometry;
+using libboardgame_base::TrigonGeometry;
 using libboardgame_sgf::Node;
 using libboardgame_sgf::TreeReader;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::FullGrid;
@@ -45,25 +49,34 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
 {
     string game = root.get_property("GM", "");
     string s = to_lower_copy(trim_copy(game));
-    unsigned int sz;
+    const Geometry* geometry;
     if (s == "blokus duo")
     {
         gameVariant = game_variant_duo;
-        sz = 14;
+        geometry = RectGeometry<Point>::get(14, 14);
     }
     else if (s == "blokus")
     {
         gameVariant = game_variant_classic;
-        sz = 20;
+        geometry = RectGeometry<Point>::get(20, 20);
     }
     else if (s == "blokus two-player")
     {
         gameVariant = game_variant_classic_2;
-        sz = 20;
+        geometry = RectGeometry<Point>::get(20, 20);
+    }
+    else if (s == "blokus trigon")
+    {
+        gameVariant = game_variant_trigon;
+        geometry = TrigonGeometry<Point>::get(9);
+    }
+    else if (s == "blokus trigon two-player")
+    {
+        gameVariant = game_variant_trigon_2;
+        geometry = TrigonGeometry<Point>::get(9);
     }
     else
         return false;
-    const Geometry* geometry = RectGeometry<Point>::get(sz, sz);
     pointState.init(*geometry);
     pointState.fill_onboard(PointState::empty());
     const Node* node = &root;
@@ -148,11 +161,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     return true;
 }
 
-} //namespace
-
-//-----------------------------------------------------------------------------
-
-int main(int argc, char* argv[])
+int mainFunction(int argc, char* argv[])
 {
     int size = 128;
     vector<string> files;
@@ -161,8 +170,7 @@ int main(int argc, char* argv[])
         ("size,s", value<int>(&size), "Image size");
     options_description hidden_options;
     hidden_options.add_options()
-        ("files", value<vector<string>>(&files),
-         "input-file output-file");
+        ("files", value<vector<string>>(&files), "input-file output-file");
     options_description all_options;
     all_options.add(normal_options).add(hidden_options);
     positional_options_description positional_options;
@@ -189,21 +197,13 @@ int main(int argc, char* argv[])
 
     TreeReader reader;
     reader.set_read_only_main_variation(true);
-    try
-    {
-        reader.read(files[0]);
-    }
-    catch (const TreeReader::ReadError& e)
-    {
-        cerr << e.what() << '\n';
-        return 1;
-    }
+    reader.read(files[0]);
     GameVariant gameVariant =
         game_variant_classic; // Initialize to avoid compiler warning
     FullGrid<PointStateExt> pointState;
     if (! getFinalPosition(reader.get_tree(), gameVariant, pointState))
     {
-        cerr << "Not a valid Blokus SGF file";
+        cerr << "Not a valid Blokus SGF file\n";
         return 1;
     }
 
@@ -219,6 +219,24 @@ int main(int argc, char* argv[])
     if (! writer.write(image))
     {
         cerr << writer.errorString().toStdString() << '\n';
+        return 1;
+    }
+    return 0;
+}
+
+} //namespace
+
+//-----------------------------------------------------------------------------
+
+int main(int argc, char* argv[])
+{
+    try
+    {
+        return mainFunction(argc, argv);
+    }
+    catch (const exception& e)
+    {
+        cerr << e.what() << '\n';
         return 1;
     }
     return 0;

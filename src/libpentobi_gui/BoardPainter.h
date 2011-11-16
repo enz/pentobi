@@ -16,14 +16,21 @@ using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::FullGrid;
 using libpentobi_base::GameVariant;
+using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::MovePoints;
 using libpentobi_base::Piece;
 using libpentobi_base::Point;
 using libpentobi_base::PointStateExt;
+using libpentobi_base::StartingPoints;
 
 //-----------------------------------------------------------------------------
 
+/** Paints a board.
+    The painter can be used without having to create an instance of class Board,
+    which is undesirable for use cases like the thumbnailer because of the slow
+    creation of the BoardConst class. Instead, the board state is passed to the
+    paint() function as a grid of point states. */
 class BoardPainter
 {
 public:
@@ -35,7 +42,7 @@ public:
 
     void setCoordLabelColor(const QColor& color);
 
-    void setSelectedPiece(Color c, const MovePoints& points);
+    void setSelectedPiece(Color c, const MovePoints& points, bool isLegal);
 
     void paint(QPainter& painter, unsigned int width, unsigned int height,
                GameVariant gameVariant,
@@ -73,6 +80,8 @@ private:
 
     MovePoints m_selectedPiecePoints;
 
+    bool m_isSelectedPieceLegal;
+
     QColor m_coordLabelColor;
 
     int m_fieldWidth;
@@ -87,10 +96,13 @@ private:
 
     QFont m_fontSmall;
 
+    StartingPoints m_startingPoints;
+
     void drawLabel(QPainter& painter, int x, int y, const QString& label,
                    bool underline, bool smallFont = false);
 
     void drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
+                           const Geometry& geometry,
                            const FullGrid<PointStateExt>& pointState);
 };
 

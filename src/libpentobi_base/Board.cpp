@@ -46,6 +46,64 @@ void set_color(ostream& out, const char* esc_sequence)
 
 //-----------------------------------------------------------------------------
 
+void StartingPoints::add_colored_starting_point(unsigned int x, unsigned int y,
+                                                Color c)
+{
+    Point p(x, y);
+    m_is_colored_starting_point[p] = true;
+    m_starting_point_color[p] = c;
+    m_starting_points[c].push_back(p);
+}
+
+void StartingPoints::add_colorless_starting_point(unsigned int x,
+                                                  unsigned int y)
+{
+    Point p(x, y);
+    m_is_colorless_starting_point[p] = true;
+    m_starting_points[Color(0)].push_back(p);
+    m_starting_points[Color(1)].push_back(p);
+    m_starting_points[Color(2)].push_back(p);
+    m_starting_points[Color(3)].push_back(p);
+}
+
+void StartingPoints::init(GameVariant game_variant, const Geometry& geometry)
+{
+    m_is_colored_starting_point.init(geometry, false);
+    m_is_colorless_starting_point.init(geometry, false);
+    m_starting_point_color.init(geometry);
+    m_starting_points[Color(0)].clear();
+    m_starting_points[Color(1)].clear();
+    m_starting_points[Color(2)].clear();
+    m_starting_points[Color(3)].clear();
+    if (game_variant == game_variant_classic
+        || game_variant == game_variant_classic_2)
+    {
+        add_colored_starting_point(0, 19, Color(0));
+        add_colored_starting_point(19, 19, Color(1));
+        add_colored_starting_point(19, 0, Color(2));
+        add_colored_starting_point(0, 0, Color(3));
+    }
+    else if (game_variant == game_variant_duo)
+    {
+        add_colored_starting_point(4, 9, Color(0));
+        add_colored_starting_point(9, 4, Color(1));
+    }
+    else if (game_variant == game_variant_trigon
+             || game_variant == game_variant_trigon_2)
+    {
+        add_colorless_starting_point(17, 3);
+        add_colorless_starting_point(17, 14);
+        add_colorless_starting_point(9, 6);
+        add_colorless_starting_point(9, 11);
+        add_colorless_starting_point(25, 6);
+        add_colorless_starting_point(25, 11);
+    }
+    else
+        LIBBOARDGAME_ASSERT(false);
+}
+
+//-----------------------------------------------------------------------------
+
 bool Board::color_output = false;
 
 Board::Board(GameVariant game_variant)
@@ -70,7 +128,7 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
     bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     if (is_first_move)
     {
-        BOOST_FOREACH(Point p, m_starting_points[c])
+        BOOST_FOREACH(Point p, get_starting_points(c))
             if (! m_forbidden[c][p])
                 gen_moves(c, p, m_marker, moves);
     }
@@ -263,40 +321,13 @@ int Board::get_score(Color c, double& game_result) const
     }
 }
 
-Point Board::get_starting_point(GameVariant game_variant, Color c)
-{
-    if  (game_variant == game_variant_classic
-         || game_variant == game_variant_classic_2)
-    {
-        unsigned int sz = 20;
-        if (c == Color(0))
-            return Point(0, sz - 1);
-        if (c == Color(1))
-            return Point(sz - 1, sz - 1);
-        if (c == Color(2))
-            return Point(sz - 1, 0);
-        LIBBOARDGAME_ASSERT(c == Color(3));
-        return Point(0, 0);
-    }
-    else if (game_variant == game_variant_duo)
-    {
-        unsigned int sz = 14;
-        if (c == Color(0))
-            return Point(4, sz - 4 - 1);
-        LIBBOARDGAME_ASSERT(c == Color(1));
-        return Point(sz - 4 - 1, 4);
-    }
-    else
-        return Point::null();
-}
-
 bool Board::has_moves(Color c) const
 {
     bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     for (Iterator i(*this); i; ++i)
         if (! m_forbidden[c][*i]
             && (is_attach_point(*i, c)
-                || (is_first_move && m_starting_points[c].contains(*i))))
+                || (is_first_move && get_starting_points(c).contains(*i))))
             if (has_moves(c, *i))
                 return true;
     return false;
@@ -371,7 +402,7 @@ void Board::init(GameVariant game_variant)
     }
     m_board_const = &BoardConst::get(board_type);
     m_geometry = &m_board_const->get_geometry();
-    init_starting_points();
+    m_starting_points.init(game_variant, *m_geometry);
     m_point_state.init(*m_geometry);
     m_point_state.fill_all(PointStateExt::offboard());
     m_point_state.fill_onboard(PointState::empty());
@@ -395,56 +426,6 @@ void Board::init(GameVariant game_variant)
     }
     m_to_play = Color(0);
     m_moves.clear();
-}
-
-void Board::add_colored_starting_point(unsigned int x, unsigned int y, Color c)
-{
-    Point p(x, y);
-    m_is_colored_starting_point[p] = true;
-    m_starting_point_color[p] = c;
-    m_starting_points[c].push_back(p);
-}
-
-void Board::add_colorless_starting_point(unsigned int x, unsigned int y)
-{
-    Point p(x, y);
-    m_is_colorless_starting_point[p] = true;
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        m_starting_points[*i].push_back(p);
-}
-
-void Board::init_starting_points()
-{
-    m_is_colored_starting_point.init(*m_geometry, false);
-    m_is_colorless_starting_point.init(*m_geometry, false);
-    m_starting_point_color.init(*m_geometry);
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        m_starting_points[*i].clear();
-    if (m_game_variant == game_variant_classic
-        || m_game_variant == game_variant_classic_2)
-    {
-        add_colored_starting_point(0, 19, Color(0));
-        add_colored_starting_point(19, 19, Color(1));
-        add_colored_starting_point(19, 0, Color(2));
-        add_colored_starting_point(0, 0, Color(3));
-    }
-    else if (m_game_variant == game_variant_duo)
-    {
-        add_colored_starting_point(4, 9, Color(0));
-        add_colored_starting_point(9, 4, Color(1));
-    }
-    else if (m_game_variant == game_variant_trigon
-             || m_game_variant == game_variant_trigon_2)
-    {
-        add_colorless_starting_point(17, 3);
-        add_colorless_starting_point(17, 14);
-        add_colorless_starting_point(9, 6);
-        add_colorless_starting_point(9, 11);
-        add_colorless_starting_point(25, 6);
-        add_colorless_starting_point(25, 11);
-    }
-    else
-        LIBBOARDGAME_ASSERT(false);
 }
 
 bool Board::is_game_over() const
@@ -473,7 +454,7 @@ bool Board::is_legal(Color c, Move mv) const
     bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     if (! is_first_move)
         return false;
-    BOOST_FOREACH(Point p, m_starting_points[c])
+    BOOST_FOREACH(Point p, get_starting_points(c))
         if (points.contains(p))
             return true;
     return false;
@@ -484,18 +465,6 @@ bool Board::is_piece_left(Color c, const Piece& piece) const
     BOOST_FOREACH(unsigned int i, m_pieces_left[c])
         if (&get_piece(i) == &piece)
             return true;
-    return false;
-}
-
-bool Board::is_starting_point(Point p, GameVariant game_variant, Color& color)
-{
-    unsigned int nu_colors = (game_variant == game_variant_duo ? 2 : 4);
-    for (ColorIterator i(nu_colors); i; ++i)
-        if (p == get_starting_point(game_variant, *i))
-        {
-            color = *i;
-            return true;
-        }
     return false;
 }
 
@@ -623,13 +592,13 @@ void Board::write(ostream& out, bool mark_last_move) const
             }
             else if (s.is_empty())
             {
-                if (m_is_colored_starting_point[p])
+                if (is_colored_starting_point(p))
                 {
-                    Color c = m_starting_point_color[p];
+                    Color c = get_starting_point_color(p);
                     set_color(out, m_color_esc_sequence[c]);
                     out << '+';
                 }
-                else if (m_is_colorless_starting_point[p])
+                else if (is_colorless_starting_point(p))
                 {
                     set_color(out, "\x1B[1;30;47m");
                     out << '+';

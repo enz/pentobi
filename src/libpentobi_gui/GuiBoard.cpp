@@ -87,6 +87,30 @@ void GuiBoard::copyFromBoard(const Board& bd)
             }
 }
 
+Move GuiBoard::findSelectedPieceMove()
+{
+    if (m_selectedPiece == 0 || m_selectedPieceOffset.is_null())
+        return Move::null();
+    const Piece::Points& points = m_selectedPiece->get_points();
+    MovePoints movePoints;
+    int width = static_cast<int>(m_bd.get_geometry().get_width());
+    int height = static_cast<int>(m_bd.get_geometry().get_height());
+    BOOST_FOREACH(CoordPoint p, points)
+    {
+        p = m_selectedPieceTransform->get_transformed(p);
+        int x = p.x + m_selectedPieceOffset.x;
+        int y = p.y + m_selectedPieceOffset.y;
+        if (x < 0 || x >= width || y < 0 || y >= height)
+            return Move::null();
+        movePoints.push_back(Point(x, y));
+    }
+    Move mv;
+    if (m_bd.find_move(movePoints, mv)
+        && m_bd.is_legal(m_selectedPieceColor, mv))
+        return mv;
+    return Move::null();
+}
+
 bool GuiBoard::hasHeightForWidth() const
 {
     return true;
@@ -188,15 +212,18 @@ void GuiBoard::paintEvent(QPaintEvent* event)
     {
         if (m_currentMoveShownAnimationIndex % 2 == 0)
             m_boardPainter.setSelectedPiece(m_currentMoveShownColor,
-                                            m_currentMoveShownPoints);
+                                            m_currentMoveShownPoints, true);
         else
             m_boardPainter.clearSelectedPiece();
     }
     else
     {
         if (m_selectedPiece != 0 && ! m_selectedPieceOffset.is_null())
+        {
+            bool isLegal = ! findSelectedPieceMove().is_null();
             m_boardPainter.setSelectedPiece(m_selectedPieceColor,
-                                            m_selectedPiecePoints);
+                                            m_selectedPiecePoints, isLegal);
+        }
         else
             m_boardPainter.clearSelectedPiece();
     }
@@ -206,24 +233,8 @@ void GuiBoard::paintEvent(QPaintEvent* event)
 
 void GuiBoard::placeSelectedPiece()
 {
-    if (m_selectedPiece == 0 || m_selectedPieceOffset.is_null())
-        return;
-    const Piece::Points& points = m_selectedPiece->get_points();
-    MovePoints movePoints;
-    int width = static_cast<int>(m_bd.get_geometry().get_width());
-    int height = static_cast<int>(m_bd.get_geometry().get_height());
-    BOOST_FOREACH(CoordPoint p, points)
-    {
-        p = m_selectedPieceTransform->get_transformed(p);
-        int x = p.x + m_selectedPieceOffset.x;
-        int y = p.y + m_selectedPieceOffset.y;
-        if (x < 0 || x >= width || y < 0 || y >= height)
-            return;
-        movePoints.push_back(Point(x, y));
-    }
-    Move mv;
-    if (m_bd.find_move(movePoints, mv)
-        && m_bd.is_legal(m_selectedPieceColor, mv))
+    Move mv = findSelectedPieceMove();
+    if (! mv.is_null())
         emit play(m_selectedPieceColor, mv);
 }
 
