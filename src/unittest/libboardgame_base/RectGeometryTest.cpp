@@ -28,7 +28,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_get_adj_diag)
 {
     const Geometry* g = RectGeometry::get(9, 9);
     PointList l;
-    for (NullTermList<Point, 8>::Iterator i(g->get_adj_diag(Point("B9")));
+    for (NullTermList<Point, 12>::Iterator i(g->get_adj_diag(Point("B9")));
          i; ++i)
         l.push_back(*i);
     LIBBOARDGAME_CHECK_EQUAL(l.size(), 5u);

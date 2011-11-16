@@ -26,7 +26,7 @@ using libboardgame_util::ArrayList;
 class Piece
 {
 public:
-    /** Maximum number of squares of a piece. */
+    /** Maximum number of fields of a piece. */
     static const unsigned int max_size = 6;
 
     typedef ArrayList<CoordPoint, max_size> Points;
@@ -35,12 +35,12 @@ public:
     static const unsigned int max_adj = 12;
 
     /** Maximum number of attach points of a piece. */
-    static const unsigned int max_attach = 8;
+    static const unsigned int max_attach = 14;
 
     /** Constructor.
         @param name A short unique name for the piece.
-        @param points The coordinates of the squares. Must contain the point
-        (0, 0). (0, 0) should be a square in or near the center of the
+        @param points The coordinates of the fields. Must contain the point
+        (0, 0). (0, 0) should be a field in or near the center of the
         coordinates; it is used as the center when moving the piece or for
         drawing a label on the piece. */
     Piece(const string& name, const Piece::Points& points,
@@ -50,7 +50,7 @@ public:
 
     const Points& get_points() const;
 
-    /** Return the number of squares of the piece. */
+    /** Return the number of fields of the piece. */
     unsigned int get_size() const;
 
     /** Get a list with unique transformations.

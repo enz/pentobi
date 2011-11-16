@@ -15,7 +15,7 @@ using libboardgame_util::NullTermList;
 //-----------------------------------------------------------------------------
 
 class DiagIterator
-    : public NullTermList<Point, 4>::Iterator
+    : public NullTermList<Point, 9>::Iterator
 {
 public:
     DiagIterator(const Geometry& geometry, Point p);
@@ -24,12 +24,12 @@ public:
 };
 
 inline DiagIterator::DiagIterator(const Geometry& geometry, Point p)
-    : NullTermList<Point, 4>::Iterator(geometry.get_diag(p))
+    : NullTermList<Point, 9>::Iterator(geometry.get_diag(p))
 {
 }
 
 inline DiagIterator::DiagIterator(const Board& bd, Point p)
-    : NullTermList<Point, 4>::Iterator(bd.get_geometry().get_diag(p))
+    : NullTermList<Point, 9>::Iterator(bd.get_geometry().get_diag(p))
 {
 }
 

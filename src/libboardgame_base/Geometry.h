@@ -82,14 +82,18 @@ public:
 
     unsigned int get_height() const;
 
-    /** Get list of on-board adjacent points (up to four) */
+    /** Get list of on-board adjacent points. */
     const NullTermList<Point, 4>& get_adj(Point p) const;
 
-    /** Get list of on-board diagonal points (up to four) */
-    const NullTermList<Point, 4>& get_diag(Point p) const;
+    /** Get list of on-board diagonal points.
+        Currently supports up to nine diagonal points as used on boards
+        for Blokus Trigon. */
+    const NullTermList<Point, 9>& get_diag(Point p) const;
 
-    /** Get list of on-board adjacent and diagonal points (up to eight) */
-    const NullTermList<Point, 8>& get_adj_diag(Point p) const;
+    /** Get list of on-board adjacent and diagonal points.
+        Currently supports up to twelve diagonal points as used on boards
+        for Blokus Trigon. */
+    const NullTermList<Point, 12>& get_adj_diag(Point p) const;
 
     /** Get closest distance to first line. */
     unsigned int get_dist_to_edge(Point p) const;
@@ -116,7 +120,7 @@ protected:
         (e.g. triangles or hexagonal fields). This function is used after
         the on-board status of all points has been initialized. */
     virtual void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                               NullTermList<Point, 4>& diag) const = 0;
+                               NullTermList<Point, 9>& diag) const = 0;
 
 private:
     unsigned int m_width;
@@ -137,9 +141,9 @@ private:
 
     NullTermList<Point, 4> m_adj[Point::range];
 
-    NullTermList<Point, 4> m_diag[Point::range];
+    NullTermList<Point, 9> m_diag[Point::range];
 
-    NullTermList<Point, 8> m_adj_diag[Point::range];
+    NullTermList<Point, 12> m_adj_diag[Point::range];
 };
 
 template<class P>
@@ -194,14 +198,14 @@ inline const NullTermList<P, 4>& Geometry<P>::get_adj(Point p) const
 }
 
 template<class P>
-inline const NullTermList<P, 8>& Geometry<P>::get_adj_diag(Point p) const
+inline const NullTermList<P, 12>& Geometry<P>::get_adj_diag(Point p) const
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_adj_diag[p.to_int()];
 }
 
 template<class P>
-inline const NullTermList<P, 4>& Geometry<P>::get_diag(Point p) const
+inline const NullTermList<P, 9>& Geometry<P>::get_diag(Point p) const
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_diag[p.to_int()];
@@ -269,10 +273,10 @@ void Geometry<P>::init(unsigned int width, unsigned int height)
     {
         unsigned int j = (*i).to_int();
         init_adj_diag(*i, m_adj[j], m_diag[j]);
-        typename NullTermList<Point, 8>::Init adj_diag(m_adj_diag[j]);
+        typename NullTermList<Point, 12>::Init adj_diag(m_adj_diag[j]);
         for (typename NullTermList<Point, 4>::Iterator k(m_adj[j]); k; ++k)
             adj_diag.push_back(*k);
-        for (typename NullTermList<Point, 4>::Iterator k(m_diag[j]); k; ++k)
+        for (typename NullTermList<Point, 9>::Iterator k(m_diag[j]); k; ++k)
             adj_diag.push_back(*k);
         adj_diag.finish();
         unsigned int x = (*i).get_x();

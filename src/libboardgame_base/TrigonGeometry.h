@@ -50,7 +50,7 @@ protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
     void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                       NullTermList<Point, 4>& diag) const;
+                       NullTermList<Point, 9>& diag) const;
 
 private:
     static unique_ptr<TrigonGeometry> s_geometry[max_size + 1];
@@ -111,7 +111,7 @@ void TrigonGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
 
 template<class P>
 void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                                      NullTermList<Point, 4>& diag) const
+                                      NullTermList<Point, 9>& diag) const
 {
     typename NullTermList<Point, 4>::Init init_adj(adj);
     unsigned int type = Geometry<P>::get_point_type(p);
@@ -134,24 +134,52 @@ void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
             init_adj.push_back(p.get_right());
     }
     init_adj.finish();
-    typename NullTermList<Point, 4>::Init init_diag(diag);
+    typename NullTermList<Point, 9>::Init init_diag(diag);
     if (type == 0)
     {
+        if (is_onboard(p.get_down_left()))
+            init_diag.push_back(p.get_down_left());
         if (is_onboard(p.get_down()))
             init_diag.push_back(p.get_down());
+        if (is_onboard(p.get_down_right()))
+            init_diag.push_back(p.get_down_right());
         if (is_onboard(p.get_up_left()))
             init_diag.push_back(p.get_up_left());
+        if (is_onboard(p.get_up_left())
+            && is_onboard(p.get_up_left().get_left()))
+            init_diag.push_back(p.get_up_left().get_left());
+        if (is_onboard(p.get_left()) && is_onboard(p.get_left().get_left()))
+            init_diag.push_back(p.get_left().get_left());
         if (is_onboard(p.get_up_right()))
             init_diag.push_back(p.get_up_right());
+        if (is_onboard(p.get_up_right())
+            && is_onboard(p.get_up_right().get_right()))
+            init_diag.push_back(p.get_up_right().get_right());
+        if (is_onboard(p.get_right()) && is_onboard(p.get_right().get_right()))
+            init_diag.push_back(p.get_right().get_right());
     }
     else
     {
+        if (is_onboard(p.get_up_left()))
+            init_diag.push_back(p.get_up_left());
         if (is_onboard(p.get_up()))
             init_diag.push_back(p.get_up());
+        if (is_onboard(p.get_up_right()))
+            init_diag.push_back(p.get_up_right());
         if (is_onboard(p.get_down_left()))
             init_diag.push_back(p.get_down_left());
+        if (is_onboard(p.get_down_left())
+            && is_onboard(p.get_down_left().get_left()))
+            init_diag.push_back(p.get_down_left().get_left());
+        if (is_onboard(p.get_left()) && is_onboard(p.get_left().get_left()))
+            init_diag.push_back(p.get_left().get_left());
         if (is_onboard(p.get_down_right()))
             init_diag.push_back(p.get_down_right());
+        if (is_onboard(p.get_down_right())
+            && is_onboard(p.get_down_right().get_right()))
+            init_diag.push_back(p.get_down_right().get_right());
+        if (is_onboard(p.get_right()) && is_onboard(p.get_right().get_right()))
+            init_diag.push_back(p.get_right().get_right());
     }
     init_diag.finish();
 }

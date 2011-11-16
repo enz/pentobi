@@ -39,7 +39,7 @@ protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
     void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                       NullTermList<Point, 4>& diag) const;
+                       NullTermList<Point, 9>& diag) const;
 
 private:
     static unique_ptr<RectGeometry>
@@ -94,14 +94,14 @@ void RectGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
 
 template<class P>
 void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                                    NullTermList<Point, 4>& diag) const
+                                    NullTermList<Point, 9>& diag) const
 {
     typename NullTermList<Point, 4>::Init init_adj(adj);
     LIBBOARDGAME_FOREACH_ADJ(p, p_adj,
         if (is_onboard(p_adj))
             init_adj.push_back(p_adj););
     init_adj.finish();
-    typename NullTermList<Point, 4>::Init init_diag(diag);
+    typename NullTermList<Point, 9>::Init init_diag(diag);
     LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
         if (is_onboard(p_diag))
             init_diag.push_back(p_diag););
