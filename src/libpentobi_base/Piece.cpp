@@ -46,8 +46,8 @@ void normalize(Piece::Points& points, unsigned int point_type,
     // Given the point type of the piece coordinate (0,0), shift the
     // piece coordinates such that the point types are compatible with the
     // coordinate system of the board
-    unsigned int dx;
-    unsigned int dy;
+    unsigned int dx = 0; // Init to avoid compiler warning
+    unsigned int dy = 0; // Init to avoid compiler warning
     bool found = false;
     for (unsigned int y = 0; ! found && y < geometry.get_period_y(); ++y)
         for (unsigned int x = 0; ! found && x < geometry.get_period_x(); ++x)
