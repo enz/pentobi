@@ -7,6 +7,8 @@
 #endif
 
 #include "Board.h"
+
+#include "AdjDiagIterator.h"
 #include "DiagIterator.h"
 #include "libboardgame_util/Unused.h"
 
@@ -180,11 +182,13 @@ void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
 
 unsigned int Board::get_adj_status_index(Point p, Color c) const
 {
-    bool s0 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(0)), c);
-    bool s1 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(1)), c);
-    bool s2 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(2)), c);
-    bool s3 = is_forbidden(p.get_neighbor(Direction::get_enum_adj(3)), c);
-    return m_board_const->get_adj_status_index(s0, s1, s2, s3);
+    unsigned int result = 0;
+    unsigned int n = 0;
+    for (AdjDiagIterator i(*m_geometry, p);
+         n < BoardConst::adj_status_nu_adj && i; ++i, ++n)
+        if (is_forbidden(*i, c))
+            result |= (1 << n);
+    return result;
 }
 
 unsigned int Board::get_bonus(Color c) const

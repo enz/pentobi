@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file BoardConst.cpp */
+/** @file libpentobi_base/BoardConst.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -9,6 +9,7 @@
 #include "BoardConst.h"
 
 #include "AdjIterator.h"
+#include "AdjDiagIterator.h"
 #include "DiagIterator.h"
 #include "Grid.h"
 #include "PieceTransformsClassic.h"
@@ -501,23 +502,7 @@ BoardConst::BoardConst(BoardType board_type)
         m_pieces = create_pieces_classic(board_type, m_geometry, *m_transforms);
     }
     m_nu_pieces = m_pieces.size();
-    for (int s0 = 0; s0 <= 1; ++s0)
-        for (int s1 = 0; s1 <= 1; ++s1)
-            for (int s2 = 0; s2 <= 1; ++s2)
-                for (int s3 = 0; s3 <= 1; ++s3)
-                {
-                    unsigned int index =
-                         get_adj_status_index(s0 != 0, s1 != 0,
-                                              s2 != 0, s3 != 0);
-                    if (s0 != 0)
-                        m_adj_status[index].push_back(0);
-                    if (s1 != 0)
-                        m_adj_status[index].push_back(1);
-                    if (s2 != 0)
-                        m_adj_status[index].push_back(2);
-                    if (s3 != 0)
-                        m_adj_status[index].push_back(3);
-                }
+    init_adj_status();
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
         create_moves(i);
     if (log_move_creation)
@@ -569,7 +554,7 @@ void BoardConst::create_move(unsigned int piece_index,
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
     BOOST_FOREACH(Point p, points)
-        for (unsigned int i = 0; i < 16; ++i)
+        for (unsigned int i = 0; i < nu_adj_status_index; ++i)
         {
             if (is_compatible_with_adj_status(p, i, points))
                 m_moves[i][piece_index][p].push_back(move);
@@ -581,7 +566,7 @@ void BoardConst::create_moves(unsigned int piece_index)
     const Piece& piece = m_pieces[piece_index];
     if (log_move_creation)
         log() << "Creating moves for piece " << piece.get_name() << "\n";
-    for (unsigned int i = 0; i < 16; ++i)
+    for (unsigned int i = 0; i < nu_adj_status_index; ++i)
         m_moves[i][piece_index].init(m_geometry);
     Piece::Points points;
     for (GeometryIterator i(m_geometry); i; ++i)
@@ -684,6 +669,36 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     return false;
 }
 
+void BoardConst::init_adj_status()
+{
+    m_adj_status.init(m_geometry);
+    array<bool, adj_status_nu_adj> forbidden;
+    for (GeometryIterator i(m_geometry); i; ++i)
+        init_adj_status(*i, forbidden, 0);
+}
+
+void BoardConst::init_adj_status(Point p,
+                                 array<bool, adj_status_nu_adj>& forbidden,
+                                 unsigned int i)
+{
+    if (i == adj_status_nu_adj || i == m_geometry.get_adj_diag(p).size())
+    {
+        unsigned int index = 0;
+        for (unsigned int j = 0; j < i; ++j)
+            if (forbidden[j])
+                index |= (1 << j);
+        unsigned int n = 0;
+        for (AdjDiagIterator j(m_geometry, p); n < i; ++j, ++n)
+            if (forbidden[n])
+                m_adj_status[p][index].push_back(*j);
+        return;
+    }
+    forbidden[i] = false;
+    init_adj_status(p, forbidden, i + 1);
+    forbidden[i] = true;
+    init_adj_status(p, forbidden, i + 1);
+}
+
 void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
@@ -706,15 +721,9 @@ bool BoardConst::is_compatible_with_adj_status(Point p,
                                                unsigned int adj_status_index,
                                                const MovePoints& points) const
 {
-    for (unsigned int i = 0; i < 4; ++i)
-    {
-        if (m_adj_status[adj_status_index].contains(i))
-        {
-            Point p_adj = p.get_neighbor(Direction::get_enum_adj(i));
-            if (points.contains(p_adj))
-                return false;
-        }
-    }
+    BOOST_FOREACH(Point p_adj, m_adj_status[p][adj_status_index])
+        if (points.contains(p_adj))
+            return false;
     return true;
 }
 

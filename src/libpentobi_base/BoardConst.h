@@ -42,17 +42,18 @@ class BoardConst
 public:
     static const unsigned int max_pieces = 22;
 
+    /** The number of neighbors used for computing the adjacent status.
+        The adjacent status is a single number that encodes the forbidden
+        status of the first adj_status_nu_adj neighbors (from the list
+        Geometry::get_adj_diag()). It is used for speeding up the matching of
+        moves at a given point. */
+    static const unsigned int adj_status_nu_adj = 4;
+
+    static const unsigned int nu_adj_status_index = 1 << adj_status_nu_adj;
+
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
     static const BoardConst& get(BoardType board_type);
-
-    /** Index of a given forbidden status of adjacent points for a color.
-        @param s0 If the point at Direction::get_enum_adj(0) is forbidden
-        @param s1 If the point at Direction::get_enum_adj(1) is forbidden
-        @param s2 If the point at Direction::get_enum_adj(2) is forbidden
-        @param s3 If the point at Direction::get_enum_adj(3) is forbidden */
-    static unsigned int get_adj_status_index(bool s0, bool s1, bool s2,
-                                             bool s3);
 
     unsigned int get_nu_pieces() const;
 
@@ -97,15 +98,15 @@ private:
 
     /** Moves of a piece at a point constrained by the forbidden status of
         adjacent points. */
-    array<array<Grid<vector<Move>>, max_pieces>, 16> m_moves;
+    array<array<Grid<vector<Move>>, max_pieces>, nu_adj_status_index> m_moves;
 
     /** Local variable reused for efficiency. */
     Marker m_marker;
 
-    /** Directions of forbidden neighbors for a given adjacent status index.
-        The directions are represented by integers as in
-        Direction::get_enum_adj() */
-    array<ArrayList<unsigned int, 4>, 16> m_adj_status;
+    /** Forbidden neighbors for a given adjacent status index at a given point.
+        Only used during construction. */
+    Grid<array<ArrayList<Point, adj_status_nu_adj>, nu_adj_status_index>>
+                                                                   m_adj_status;
 
     BoardConst(BoardType board_type);
 
@@ -114,6 +115,11 @@ private:
 
     void create_moves(unsigned int piece_index);
 
+    void init_adj_status();
+
+    void init_adj_status(Point p, array<bool, adj_status_nu_adj>& forbidden,
+                         unsigned int i);
+
     void init_symmetry_info();
 
     bool is_compatible_with_adj_status(Point p, unsigned int adj_status_index,
@@ -121,21 +127,6 @@ private:
 
     void set_adj_and_corner_points(MoveInfo& info);
 };
-
-inline unsigned int BoardConst::get_adj_status_index(bool s0, bool s1, bool s2,
-                                                     bool s3)
-{
-    unsigned int i = 0;
-    if (s0)
-        i |= (1 << 0);
-    if (s1)
-        i |= (1 << 1);
-    if (s2)
-        i |= (1 << 2);
-    if (s3)
-        i |= (1 << 3);
-    return i;
-}
 
 inline BoardType BoardConst::get_board_type() const
 {

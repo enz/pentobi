@@ -38,7 +38,7 @@ class Statistics:
 
 def print_stat(statistics):
     if statistics.get_count() > 0:
-        print "%s:\t%.1f+-%.1f" \
+        print "%s:\t%.2f+-%.2f" \
             % (statistics.get_name(),
                statistics.get_mean(),
                statistics.get_error_mean())

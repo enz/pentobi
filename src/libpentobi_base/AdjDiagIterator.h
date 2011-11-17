@@ -1,0 +1,40 @@
+//-----------------------------------------------------------------------------
+/** @file libpentobi_base/AdjDiagIterator.h */
+//-----------------------------------------------------------------------------
+
+#ifndef LIBPENTOBI_BASE_ADJ_DIAG_ITERATOR_H
+#define LIBPENTOBI_BASE_ADJ_DIAG_ITERATOR_H
+
+#include "Board.h"
+#include "libboardgame_util/NullTermList.h"
+
+namespace libpentobi_base {
+
+using libboardgame_util::NullTermList;
+
+//-----------------------------------------------------------------------------
+
+class AdjDiagIterator
+    : public NullTermList<Point, 12>::Iterator
+{
+public:
+    AdjDiagIterator(const Geometry& geometry, Point p);
+
+    AdjDiagIterator(const Board& bd, Point p);
+};
+
+inline AdjDiagIterator::AdjDiagIterator(const Geometry& geometry, Point p)
+    : NullTermList<Point, 12>::Iterator(geometry.get_adj_diag(p))
+{
+}
+
+inline AdjDiagIterator::AdjDiagIterator(const Board& bd, Point p)
+    : NullTermList<Point, 12>::Iterator(bd.get_geometry().get_adj_diag(p))
+{
+}
+
+//-----------------------------------------------------------------------------
+
+} // namespace libpentobi_base
+
+#endif // LIBPENTOBI_BASE_ADJ_DIAG_ITERATOR_H

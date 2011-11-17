@@ -91,6 +91,7 @@ public:
     const NullTermList<Point, 9>& get_diag(Point p) const;
 
     /** Get list of on-board adjacent and diagonal points.
+        The adjacent points are first, diagobal points later in the list.
         Currently supports up to twelve diagonal points as used on boards
         for Blokus Trigon. */
     const NullTermList<Point, 12>& get_adj_diag(Point p) const;
