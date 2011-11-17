@@ -512,7 +512,7 @@ BoardConst::BoardConst(BoardType board_type)
     else if (board_type == board_type_duo)
         LIBBOARDGAME_ASSERT(m_move_info.size() == 13729);
     else if (board_type == board_type_trigon)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == 34647);
+        LIBBOARDGAME_ASSERT(m_move_info.size() == 37334);
     m_total_piece_points = 0;
     BOOST_FOREACH(const Piece& piece, m_pieces)
         m_total_piece_points += piece.get_size();

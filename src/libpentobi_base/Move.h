@@ -19,9 +19,9 @@ class Move
 {
 public:
     /** Integer range of moves.
-        The maximum is given by game variant Trigon, which has 37304 regular
+        The maximum is given by game variant Trigon, which has 37334 regular
         moves plus a pass and a null move. */
-    static const unsigned int range = 34647 + 1 + 1;
+    static const unsigned int range = 37334 + 1 + 1;
 
     static Move pass();
 

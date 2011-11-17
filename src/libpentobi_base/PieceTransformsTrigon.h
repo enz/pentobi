@@ -61,7 +61,7 @@ private:
 
     TransfTrigonReflRot240 m_refl_rot240;
 
-    TransfTrigonReflRot240 m_refl_rot300;
+    TransfTrigonReflRot300 m_refl_rot300;
 };
 
 //-----------------------------------------------------------------------------
