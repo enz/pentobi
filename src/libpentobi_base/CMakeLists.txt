@@ -17,7 +17,6 @@ set(pentobi_base_STAT_SRCS
   PieceTransforms.cpp
   PieceTransformsClassic.cpp
   PieceTransformsTrigon.cpp
-  PieceValueHeuristic.cpp
   PointState.cpp
   PointStateExt.cpp
   SymmetricPoints.cpp

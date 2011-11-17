@@ -13,7 +13,6 @@
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
-#include "libpentobi_base/PieceValueHeuristic.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
 #include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
@@ -41,8 +40,8 @@ using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
+using libpentobi_base::MoveInfo;
 using libpentobi_base::Piece;
-using libpentobi_base::PieceValueHeuristic;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Search;
 
@@ -95,15 +94,20 @@ void setIcon(QAction* action, const QString& name)
     action->setIcon(QIcon(QString(":/pentobi/%1.png").arg(name)));
 }
 
-/** Comparison for sorting move list in Find Move by piece value heuristic.
-    Find Move is only to find any legal move but we still want to present moves
-    with larger pieces earlier. */
-bool isPieceBetter(const Board& bd, const PieceValueHeuristic& value,
-                   Move mv1, Move mv2)
+/** Simple heuristic that prefers moves with more piece points, more attach
+    points and less adjacent points.
+    Used for sorting the list used in Find Move. */
+float getMoveHeuristic(const Board& bd, Move mv)
 {
-    float v1 = value.get(bd.get_move_info(mv1).piece);
-    float v2 = value.get(bd.get_move_info(mv2).piece);
-    return v1 > v2;
+    const MoveInfo& info = bd.get_move_info(mv);
+    return (1000 * info.points.size() + 10 * info.attach_points.size()
+            - info.adj_points.size());
+}
+
+/** Comparison for sorting move list in Find Move. */
+bool isMoveBetter(const Board& bd, Move mv1, Move mv2)
+{
+    return getMoveHeuristic(bd, mv1) > getMoveHeuristic(bd, mv2);
 }
 
 } // namespace
@@ -1186,10 +1190,8 @@ void MainWindow::findMove()
     if (m_legalMoves->empty())
     {
         bd.gen_moves(m_toPlay, *m_legalMoves);
-        PieceValueHeuristic value(bd);
         sort(m_legalMoves->begin(), m_legalMoves->end(),
-             bind(&isPieceBetter, bd, value, placeholders::_1,
-                  placeholders::_2));
+             bind(&isMoveBetter, bd, placeholders::_1, placeholders::_2));
     }
     if (m_legalMoves->empty())
     {
