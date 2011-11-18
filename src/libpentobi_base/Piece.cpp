@@ -18,6 +18,7 @@ namespace libpentobi_base {
 
 using namespace std;
 using libboardgame_base::geometry_util::normalize_offset;
+using libboardgame_base::geometry_util::type_preserve_shift;
 using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
@@ -25,6 +26,21 @@ using libboardgame_util::log;
 namespace {
 
 const bool log_piece_creation = false;
+
+struct NormalizedPoints
+{
+    /** The normlized points of the transformed piece.
+        The points were shifted using GeometryUtil::normalze_offset(). */
+    Piece::Points points;
+
+    /** The point type of (0,0) in the normalized points. */
+    unsigned int point_type;
+
+    bool operator==(const NormalizedPoints& n) const
+    {
+        return points == n.points && point_type == n.point_type;
+    }
+};
 
 /** Check consistency of transformations.
     Checks that the point list (which must be already sorted) has no
@@ -38,39 +54,28 @@ bool check_consistency(const Piece::Points& points)
 }
 
 /** Bring piece points into a normal form that is constant under translation. */
-void normalize(Piece::Points& points, unsigned int point_type,
-               const Geometry& geometry)
+NormalizedPoints normalize(const Piece::Points& points, unsigned int point_type,
+                           const Geometry& geometry)
 {
     if (log_piece_creation)
         log() << "Points " << points << '\n';
-    // Given the point type of the piece coordinate (0,0), shift the
-    // piece coordinates such that the point types are compatible with the
-    // coordinate system of the board
-    unsigned int dx = 0; // Init to avoid compiler warning
-    unsigned int dy = 0; // Init to avoid compiler warning
-    bool found = false;
-    for (unsigned int y = 0; ! found && y < geometry.get_period_y(); ++y)
-        for (unsigned int x = 0; ! found && x < geometry.get_period_x(); ++x)
-            if (geometry.get_point_type(x, y) == point_type)
-            {
-                dx = x;
-                dy = y;
-                found = true;
-            }
-    LIBBOARDGAME_ASSERT(found);
+    NormalizedPoints normalized;
+    normalized.points = points;
+    type_preserve_shift(geometry, normalized.points.begin(),
+                        normalized.points.end(), point_type);
     if (log_piece_creation)
-        log() << "Point type " << point_type << " shift " << dx << ' ' << dy
-              << '\n';
-    BOOST_FOREACH(CoordPoint& p, points)
-    {
-        p.x += dx;
-        p.y += dy;
-    }
-    // Make the coordinates positive and minimal without changing the point
-    // types
-    normalize_offset(geometry, points.begin(), points.end());
+        log() << "Point type " << point_type << ", type preserve shift "
+              << normalized.points << '\n';
+    // Make the coordinates positive and minimal
+    unsigned int width;
+    unsigned int height;
+    CoordPoint offset;
+    normalize_offset(geometry, normalized.points.begin(),
+                     normalized.points.end(), width, height, offset);
+    normalized.point_type = geometry.get_point_type(offset);
     // Sort the coordinates
-    sort(points.begin(), points.end());
+    sort(normalized.points.begin(), normalized.points.end());
+    return normalized;
 }
 
 } // namespace
@@ -86,10 +91,8 @@ Piece::Piece(const string& name, const Piece::Points& points,
     if (log_piece_creation)
         log() << "Creating transformations for piece " << name
               << ' ' << points << '\n';
-    LIBBOARDGAME_ASSERT(points.size() <= max_size);
-    LIBBOARDGAME_ASSERT(find(points.begin(), points.end(), CoordPoint(0, 0))
-                        != points.end());
-    vector<Piece::Points> all_transformed_points;
+    LIBBOARDGAME_ASSERT(points.contains(CoordPoint(0, 0)));
+    vector<NormalizedPoints> all_transformed_points;
     Piece::Points transformed_points;
     BOOST_FOREACH(const Transform* transform, transforms.get_all())
     {
@@ -98,14 +101,16 @@ Piece::Piece(const string& name, const Piece::Points& points,
         transformed_points = points;
         transform->transform(transformed_points.begin(),
                              transformed_points.end());
-        normalize(transformed_points, transform->get_new_point_type(),
-                  geometry);
+        NormalizedPoints normalized = normalize(transformed_points,
+                                                transform->get_new_point_type(),
+                                                geometry);
         if (log_piece_creation)
-            log() << transformed_points << '\n';
-        LIBBOARDGAME_ASSERT(check_consistency(transformed_points));
+            log() << "Normalized " << normalized.points << " point type "
+                  << normalized.point_type << '\n';
+        LIBBOARDGAME_ASSERT(check_consistency(normalized.points));
         auto begin = all_transformed_points.begin();
         auto end = all_transformed_points.end();
-        auto pos = find(begin, end, transformed_points);
+        auto pos = find(begin, end, normalized);
         if (pos != end)
         {
             if (log_piece_creation)
@@ -120,7 +125,7 @@ Piece::Piece(const string& name, const Piece::Points& points,
             m_equivalent_transform[transform] = transform;
             m_uniq_transforms.push_back(transform);
         }
-        all_transformed_points.push_back(transformed_points);
+        all_transformed_points.push_back(normalized);
     };
 }
 
@@ -151,18 +156,14 @@ bool Piece::can_rotate() const
 const Transform* Piece::find_transform(const Geometry& geometry,
                                        const Points& points) const
 {
-    Points normalized_points = points;
-    normalize_offset(geometry, normalized_points.begin(),
-                     normalized_points.end());
-    sort(normalized_points.begin(), normalized_points.end());
+    NormalizedPoints normalized = normalize(points, 0, geometry);
     BOOST_FOREACH(const Transform* transform, get_transforms())
     {
-        Points normalized_piece_points = get_points();
-        transform->transform(normalized_piece_points.begin(),
-                             normalized_piece_points.end());
-        normalize(normalized_piece_points, transform->get_new_point_type(),
-                  geometry);
-        if (normalized_piece_points == normalized_points)
+        Points piece_points = get_points();;
+        transform->transform(piece_points.begin(), piece_points.end());
+        NormalizedPoints normalized_piece =
+            normalize(piece_points, transform->get_new_point_type(), geometry);
+        if (normalized_piece == normalized)
             return transform;
     }
     return 0;

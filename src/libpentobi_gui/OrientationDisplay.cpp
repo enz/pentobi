@@ -15,6 +15,7 @@ using namespace std;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
 using libboardgame_base::geometry_util::normalize_offset;
+using libboardgame_base::geometry_util::type_preserve_shift;
 using libpentobi_base::board_type_trigon;
 using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
@@ -75,8 +76,14 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
     Piece::Points points = m_piece->get_points();
     m_transform->transform(points.begin(), points.end());
     const Geometry& geometry = m_bd.get_geometry();
-    unsigned int width, height;
-    normalize_offset(geometry, points.begin(), points.end(), width, height);
+    type_preserve_shift(geometry, points.begin(), points.end(),
+                        m_transform->get_new_point_type());
+    unsigned int width;
+    unsigned int height;
+    CoordPoint offset;
+    normalize_offset(geometry, points.begin(), points.end(), width, height,
+                     offset);
+    bool invertPointType = (geometry.get_point_type(offset) != 0);
     painter.save();
     painter.translate((displaySize - width * fieldSize) / 2,
                       (displaySize - height * fieldSize) / 2);
@@ -89,7 +96,7 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
         if (board_type == board_type_trigon)
         {
             bool isUpside = (geometry.get_point_type(p) != 0);
-            if (m_transform->get_new_point_type() != 0)
+            if (invertPointType)
                 isUpside = ! isUpside;
             Util::paintColorTriangle(painter, game_variant, m_color, isUpside,
                                      x, y, fieldSize);

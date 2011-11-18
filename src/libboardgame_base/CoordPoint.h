@@ -39,6 +39,12 @@ struct CoordPoint
 
     CoordPoint operator+(const CoordPoint& p) const;
 
+    CoordPoint operator-(const CoordPoint& p) const;
+
+    CoordPoint& operator+=(const CoordPoint& p);
+
+    CoordPoint& operator-=(const CoordPoint& p);
+
     bool is_null() const;
 
     bool is_onboard(unsigned int width, unsigned int height) const;
@@ -79,6 +85,23 @@ inline bool CoordPoint::operator!=(const CoordPoint& p) const
 inline CoordPoint CoordPoint::operator+(const CoordPoint& p) const
 {
     return CoordPoint(x + p.x, y + p.y);
+}
+
+inline CoordPoint& CoordPoint::operator+=(const CoordPoint& p)
+{
+    *this = *this + p;
+    return *this;
+}
+
+inline CoordPoint CoordPoint::operator-(const CoordPoint& p) const
+{
+    return CoordPoint(x - p.x, y - p.y);
+}
+
+inline CoordPoint& CoordPoint::operator-=(const CoordPoint& p)
+{
+    *this = *this - p;
+    return *this;
 }
 
 inline CoordPoint CoordPoint::null()
