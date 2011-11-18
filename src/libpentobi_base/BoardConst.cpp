@@ -495,11 +495,20 @@ BoardConst::BoardConst(BoardType board_type)
     {
         m_transforms.reset(new PieceTransformsTrigon());
         m_pieces = create_pieces_trigon(board_type, m_geometry, *m_transforms);
+        m_move_info.reserve(Move::onboard_moves_trigon);
     }
-    else
+    else if (board_type == board_type_classic)
     {
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_classic(board_type, m_geometry, *m_transforms);
+        m_move_info.reserve(Move::onboard_moves_classic);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(board_type == board_type_duo);
+        m_transforms.reset(new PieceTransformsClassic());
+        m_pieces = create_pieces_classic(board_type, m_geometry, *m_transforms);
+        m_move_info.reserve(Move::onboard_moves_duo);
     }
     m_nu_pieces = m_pieces.size();
     init_adj_status();
@@ -508,11 +517,11 @@ BoardConst::BoardConst(BoardType board_type)
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << '\n';
     if (board_type == board_type_classic)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == 30433);
+        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_classic);
     else if (board_type == board_type_duo)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == 13729);
+        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_duo);
     else if (board_type == board_type_trigon)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == 32131);
+        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon);
     m_total_piece_points = 0;
     BOOST_FOREACH(const Piece& piece, m_pieces)
         m_total_piece_points += piece.get_size();

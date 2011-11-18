@@ -18,10 +18,16 @@ using libboardgame_util::Exception;
 class Move
 {
 public:
+    static const unsigned int onboard_moves_classic = 30433;
+
+    static const unsigned int onboard_moves_trigon = 32131;
+
+    static const unsigned int onboard_moves_duo = 13729;
+
     /** Integer range of moves.
-        The maximum is given by game variant Trigon, which has 32131 regular
-        moves plus a pass and a null move. */
-    static const unsigned int range = 32131 + 1 + 1;
+        The maximum is given by the number of on-board moves in game variant
+        Trigon, plus a pass and a null move. */
+    static const unsigned int range = onboard_moves_trigon + 1 + 1;
 
     static Move pass();
 
