@@ -17,7 +17,9 @@ using libboardgame_base::SpreadsheetStringRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, 19, SpreadsheetStringRep> Point;
+typedef
+    libboardgame_base::Point<19, 19, short unsigned int, SpreadsheetStringRep>
+    Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::RectGeometry<Point> RectGeometry;
 typedef libboardgame_base::PointList<Point> PointList;

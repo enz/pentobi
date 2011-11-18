@@ -17,7 +17,9 @@ using namespace libboardgame_base;
 
 LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
 {
-    typedef Point<19, 19, SpreadsheetStringRep> Point;
+    typedef
+      libboardgame_base::Point<19, 19, short unsigned int, SpreadsheetStringRep>
+      Point;
     unsigned int sz = 9;
     Point p("B7");
     {
