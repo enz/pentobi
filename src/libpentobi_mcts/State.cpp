@@ -25,6 +25,8 @@ using libboardgame_util::log;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
@@ -263,7 +265,8 @@ bool State::gen_and_play_playout_move()
     // no more moves and the score is already negative.
     if (! m_has_moves[to_play] && m_nu_moves_initial < 10 * nu_colors
         && (variant == game_variant_duo
-            || (variant == game_variant_classic_2
+            || ((variant == game_variant_classic_2
+                 || variant == game_variant_trigon_2)
                 && ! m_has_moves[m_bd.get_second_color(to_play)])))
     {
         double game_result;
@@ -362,6 +365,14 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     {
         if (nu_moves < 12)
             min_piece_size = 5;
+        else if (nu_moves < 20)
+            min_piece_size = 4;
+    }
+    else if (variant == game_variant_trigon
+             || variant == game_variant_trigon_2)
+    {
+        if (nu_moves < 8)
+            min_piece_size = 6;
         else if (nu_moves < 20)
             min_piece_size = 4;
     }
