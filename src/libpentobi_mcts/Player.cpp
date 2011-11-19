@@ -50,23 +50,29 @@ Player::Player(const Board& bd, GameVariant game_variant,
         // Hand-tuned such that time per move is more evenly spread among all
         // moves than with a fixed number of simulations (because the
         // simulations per second increase rapidly with the move number) but
-        // the average time per game is roughly the same
+        // the average time per game is roughly the same.
         weight_max_count_duo[i] = ValueType(0.7 * exp(0.1 * i));
         weight_max_count_classic[i] = weight_max_count_duo[i];
+        weight_max_count_trigon[i] = 0.3 * weight_max_count_duo[i];
         // Less weight for the first move(s) because number of legal moves
         // is lower and the search applies some pruning rules to reduce the
         // branching factor in early moves
         if (i == 0)
         {
             weight_max_count_classic[i] *= ValueType(0.2);
+            weight_max_count_trigon[i] *= ValueType(0.3);
             weight_max_count_duo[i] *= ValueType(0.6);
         }
         else if (i == 1)
         {
             weight_max_count_classic[i] *= ValueType(0.2);
+            weight_max_count_trigon[i] *= ValueType(0.5);
         }
         else if (i == 2)
+        {
             weight_max_count_classic[i] *= ValueType(0.3);
+            weight_max_count_trigon[i] *= ValueType(0.7);
+        }
     }
 }
 
@@ -139,11 +145,15 @@ Move Player::genmove(Color c)
         if (use_weight_max_count)
         {
             unsigned int player_move = m_bd.get_nu_moves() / Color::range;
-            float weight;
+            float weight = 1;
             if (variant == game_variant_duo)
                 weight = weight_max_count_duo[player_move];
-            else
+            else if (variant == game_variant_classic
+                     || variant == game_variant_classic_2)
                 weight = weight_max_count_classic[player_move];
+            else if (variant == game_variant_trigon
+                     || variant == game_variant_trigon_2)
+                weight = weight_max_count_trigon[player_move];
             max_count = ceil(max_count * weight);
         }
     }

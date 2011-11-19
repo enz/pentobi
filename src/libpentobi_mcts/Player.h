@@ -71,6 +71,8 @@ protected:
 
     array<float, Board::max_player_moves> weight_max_count_classic;
 
+    array<float, Board::max_player_moves> weight_max_count_trigon;
+
     array<float, Board::max_player_moves> weight_max_count_duo;
 
     ValueType m_fixed_simulations;
