@@ -78,13 +78,16 @@ needed (e.g. end of point list marker, or the special meaning "no point"). */
     on the board.
     @tparam W The maximum board width.
     @tparam H The maximum board height.
+    @tparam I An unsigned integer type to store the point value
     @tparam T A class with functions to convert points from and to strings
     depending on the string representation of points in the game.
     @see @ref libboardgame.boardgame.board_representation */
-template<unsigned int W, unsigned int H, class T>
+template<unsigned int W, unsigned int H, typename I, class T>
 class Point
 {
 public:
+    typedef I IntType;
+
     typedef T StringRep;
 
     static const unsigned int max_width = W;
@@ -94,6 +97,10 @@ public:
     static_assert(W <= StringRep::max_width, "");
 
     static_assert(H <= StringRep::max_height, "");
+
+    static_assert(numeric_limits<I>::is_integer, "");
+
+    static_assert(! numeric_limits<I>::is_signed, "");
 
     friend class Direction;
 
@@ -279,118 +286,122 @@ private:
 
     static const Precomputed s_precomputed;
 
-    static const unsigned int value_uninitialized = Point::range;
+    static const IntType value_uninitialized = Point::range;
 
-    static const unsigned int value_null = 0;
+    static const IntType value_null = 0;
 
-    unsigned int m_i;
+    IntType m_i;
 
     LIBBOARDGAME_FORCE_INLINE bool is_initialized() const;
 };
 
-template<unsigned int W, unsigned int H, class T>
-Point<W, H, T>::Direction::Direction()
+template<unsigned int W, unsigned int H, typename I, class T>
+Point<W,H,I,T>::Direction::Direction()
 {
     m_i = value_uninitialized;
 }
 
-template<unsigned int W, unsigned int H, class T>
-Point<W, H, T>::Direction::Direction(int i)
+template<unsigned int W, unsigned int H, typename I, class T>
+Point<W,H,I,T>::Direction::Direction(int i)
 {
     m_i = i;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction Point<W, H, T>::Direction::down()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction Point<W,H,I,T>::Direction::down()
 {
     return Direction(-static_cast<int>(max_width) - 2);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction Point<W, H, T>::Direction::down_left()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction Point<W,H,I,T>::Direction::down_left()
 {
     return Direction(-static_cast<int>(max_width) - 2 - 1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction
-                                         Point<W, H, T>::Direction::down_right()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction
+                                         Point<W,H,I,T>::Direction::down_right()
 {
     return Direction(-static_cast<int>(max_width) - 2 + 1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-typename Point<W, H, T>::Direction
-                         Point<W, H, T>::Direction::get_enum_adj(unsigned int i)
+template<unsigned int W, unsigned int H, typename I, class T>
+typename Point<W,H,I,T>::Direction
+                         Point<W,H,I,T>::Direction::get_enum_adj(unsigned int i)
 {
     return Point::s_precomputed.enum_adj[i];
 }
 
-template<unsigned int W, unsigned int H, class T>
-typename Point<W, H, T>::Direction
-                        Point<W, H, T>::Direction::get_enum_diag(unsigned int i)
+template<unsigned int W, unsigned int H, typename I, class T>
+typename Point<W,H,I,T>::Direction
+                        Point<W,H,I,T>::Direction::get_enum_diag(unsigned int i)
 {
     return Point::s_precomputed.enum_diag[i];
 }
 
-template<unsigned int W, unsigned int H, class T>
-unsigned int Point<W, H, T>::Direction::get_index_diag_inv(unsigned int i)
+template<unsigned int W, unsigned int H, typename I, class T>
+unsigned int Point<W,H,I,T>::Direction::get_index_diag_inv(unsigned int i)
 {
     return Point::s_precomputed.index_diag_inv[i];
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::Direction::is_initialized() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::Direction::is_initialized() const
 {
     return (m_i < value_uninitialized);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction Point<W, H, T>::Direction::left()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction Point<W,H,I,T>::Direction::left()
 {
     return Direction(-1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction Point<W, H, T>::Direction::right()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction Point<W,H,I,T>::Direction::right()
 {
     return Direction(1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline int Point<W, H, T>::Direction::to_int() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline int Point<W,H,I,T>::Direction::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction Point<W, H, T>::Direction::up()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction Point<W,H,I,T>::Direction::up()
 {
     return Direction(max_width + 2);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction Point<W, H, T>::Direction::up_left()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction Point<W,H,I,T>::Direction::up_left()
 {
     return Direction(max_width + 2 - 1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline typename Point<W, H, T>::Direction Point<W, H, T>::Direction::up_right()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline typename Point<W,H,I,T>::Direction Point<W,H,I,T>::Direction::up_right()
 {
     return Direction(max_width + 2 + 1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-Point<W, H, T>::InvalidString::InvalidString(const string& s)
+template<unsigned int W, unsigned int H, typename I, class T>
+Point<W,H,I,T>::InvalidString::InvalidString(const string& s)
     : Exception(format("Invalid point string '%1%'") % s)
 {
 }
 
-template<unsigned int W, unsigned int H, class T>
-Point<W, H, T>::Precomputed::Precomputed()
+template<unsigned int W, unsigned int H, typename I, class T>
+Point<W,H,I,T>::Precomputed::Precomputed()
 {
+    // Make this a static assertion once GCC and MSVC support using
+    // numeric_limits::max() in compile-time const expressions
+    LIBBOARDGAME_ASSERT(Point::range <= numeric_limits<I>::max());
+
     enum_adj.push_back(Direction::down());
     enum_adj.push_back(Direction::left());
     enum_adj.push_back(Direction::right());
@@ -425,68 +436,68 @@ Point<W, H, T>::Precomputed::Precomputed()
     }
 }
 
-template<unsigned int W, unsigned int H, class T>
-const typename Point<W, H, T>::Precomputed Point<W, H, T>::s_precomputed;
+template<unsigned int W, unsigned int H, typename I, class T>
+const typename Point<W,H,I,T>::Precomputed Point<W,H,I,T>::s_precomputed;
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T>::Point()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T>::Point()
 {
 #if LIBBOARDGAME_DEBUG
     m_i = value_uninitialized;
 #endif
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T>::Point(unsigned int i)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T>::Point(unsigned int i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T>::Point(unsigned int x, unsigned int y)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T>::Point(unsigned int x, unsigned int y)
 {
     LIBBOARDGAME_ASSERT(is_x_coord(x));
     LIBBOARDGAME_ASSERT(is_y_coord(y));
     m_i = (y + 1) * (max_width + 2) + x + 2;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T>::Point(const Point& p)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T>::Point(const Point& p)
 {
     m_i = p.m_i;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T>::Point(const string& s)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T>::Point(const string& s)
 {
     *this = from_string(s);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::operator==(const Point& p) const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::operator==(const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(p.is_initialized());
     return (m_i == p.m_i);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::operator!=(const Point& p) const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::operator!=(const Point& p) const
 {
     return ! operator==(p);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::operator<(const Point& p) const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::operator<(const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(p.is_initialized());
     return (m_i < p.m_i);
 }
 
-template<unsigned int W, unsigned int H, class T>
-Point<W, H, T> Point<W, H, T>::from_string(const string& s)
+template<unsigned int W, unsigned int H, typename I, class T>
+Point<W,H,I,T> Point<W,H,I,T>::from_string(const string& s)
 {
     istringstream in(s);
     Point p;
@@ -501,85 +512,85 @@ Point<W, H, T> Point<W, H, T>::from_string(const string& s)
     return p;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_down() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_down() const
 {
     return get_neighbor(Direction::down());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_down_left() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_down_left() const
 {
     return get_neighbor(Direction::down_left());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_down_right() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_down_right() const
 {
     return get_neighbor(Direction::down_right());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_left() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_left() const
 {
     return get_neighbor(Direction::left());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_neighbor(Direction dir) const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_neighbor(Direction dir) const
 {
     LIBBOARDGAME_ASSERT(is_onboard());
     return Point(m_i + dir.to_int());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_right() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_right() const
 {
     return get_neighbor(Direction::right());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_up() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_up() const
 {
     return get_neighbor(Direction::up());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_up_left() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_up_left() const
 {
     return get_neighbor(Direction::up_left());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::get_up_right() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::get_up_right() const
 {
     return get_neighbor(Direction::up_right());
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline unsigned int Point<W, H, T>::get_x() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline unsigned int Point<W,H,I,T>::get_x() const
 {
     LIBBOARDGAME_ASSERT(is_onboard());
     return s_precomputed.x[m_i];
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline unsigned int Point<W, H, T>::get_y() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline unsigned int Point<W,H,I,T>::get_y() const
 {
     LIBBOARDGAME_ASSERT(is_onboard());
     return s_precomputed.y[m_i];
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::is_adj(Point p) const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::is_adj(Point p) const
 {
     int d = m_i - p.m_i;
     d = abs(d);
     return (d == max_width + 2 || d == 1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::is_adj_diag(Point p) const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::is_adj_diag(Point p) const
 {
     int d = m_i - p.m_i;
     d = abs(d);
@@ -588,46 +599,46 @@ inline bool Point<W, H, T>::is_adj_diag(Point p) const
             || d == 1);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::is_initialized() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::is_initialized() const
 {
     return m_i < value_uninitialized;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::is_onboard() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::is_onboard() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return s_precomputed.is_onboard[m_i];
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::is_null() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::is_null() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i == value_null;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::is_x_coord(unsigned int i)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::is_x_coord(unsigned int i)
 {
     return i < max_width;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline bool Point<W, H, T>::is_y_coord(unsigned int i)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool Point<W,H,I,T>::is_y_coord(unsigned int i)
 {
     return i < max_height;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline Point<W, H, T> Point<W, H, T>::null()
+template<unsigned int W, unsigned int H, typename I, class T>
+inline Point<W,H,I,T> Point<W,H,I,T>::null()
 {
     return Point(value_null);
 }
 
-template<unsigned int W, unsigned int H, class T>
-void Point<W, H, T>::read(istream& in, Point<W, H, T>& p)
+template<unsigned int W, unsigned int H, typename I, class T>
+void Point<W,H,I,T>::read(istream& in, Point<W,H,I,T>& p)
 {
     unsigned int x;
     unsigned int y;
@@ -637,30 +648,30 @@ void Point<W, H, T>::read(istream& in, Point<W, H, T>& p)
         in.setstate(ios::failbit);
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline unsigned int Point<W, H, T>::to_int() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline unsigned int Point<W,H,I,T>::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline unsigned int Point<W, H, T>::to_int_not_null() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline unsigned int Point<W,H,I,T>::to_int_not_null() const
 {
     LIBBOARDGAME_ASSERT(! is_null());
     return m_i;
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline string Point<W, H, T>::to_string() const
+template<unsigned int W, unsigned int H, typename I, class T>
+inline string Point<W,H,I,T>::to_string() const
 {
     ostringstream s;
     write(s);
     return s.str();
 }
 
-template<unsigned int W, unsigned int H, class T>
-void Point<W, H, T>::write(ostream& out) const
+template<unsigned int W, unsigned int H, typename I, class T>
+void Point<W,H,I,T>::write(ostream& out) const
 {
     if (is_onboard())
         StringRep::write(out, get_x(), get_y());
@@ -672,8 +683,8 @@ void Point<W, H, T>::write(ostream& out) const
 
 //-----------------------------------------------------------------------------
 
-template<unsigned int W, unsigned int H, class T>
-inline ostream& operator<<(ostream& out, const Point<W, H, T>& p)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline ostream& operator<<(ostream& out, const Point<W,H,I,T>& p)
 {
     p.write(out);
     return out;
@@ -682,10 +693,10 @@ inline ostream& operator<<(ostream& out, const Point<W, H, T>& p)
 /** Read point from input stream.
     The function guarantees to support the point representation used by
     @ref libboardgame_doc_gtp, so it can be used for parsing GTP arguments. */
-template<unsigned int W, unsigned int H, class T>
-inline istream& operator>>(istream& in, Point<W, H, T>& p)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline istream& operator>>(istream& in, Point<W,H,I,T>& p)
 {
-    Point<W, H, T>::read(in, p);
+    Point<W,H,I,T>::read(in, p);
     return in;
 }
 
@@ -697,11 +708,11 @@ inline istream& operator>>(istream& in, Point<W, H, T>& p)
 
 namespace std {
 
-template<unsigned int W, unsigned int H, class T>
-struct hash<libboardgame_base::Point<W, H, T>>
-    : public unary_function<libboardgame_base::Point<W, H, T>, size_t>
+template<unsigned int W, unsigned int H, typename I, class T>
+struct hash<libboardgame_base::Point<W,H,I,T>>
+    : public unary_function<libboardgame_base::Point<W,H,I,T>, size_t>
 {
-    size_t operator()(const libboardgame_base::Point<W, H, T>& p) const
+    size_t operator()(const libboardgame_base::Point<W,H,I,T>& p) const
     {
         return p.to_int();
     }
@@ -713,16 +724,16 @@ struct hash<libboardgame_base::Point<W, H, T>>
 
 namespace libboardgame_util {
 
-template<unsigned int W, unsigned int H, class T>
-inline bool is_null(const libboardgame_base::Point<W, H, T>& p)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline bool is_null(const libboardgame_base::Point<W,H,I,T>& p)
 {
     return p.is_null();
 }
 
-template<unsigned int W, unsigned int H, class T>
-inline void set_null(libboardgame_base::Point<W, H, T>& p)
+template<unsigned int W, unsigned int H, typename I, class T>
+inline void set_null(libboardgame_base::Point<W,H,I,T>& p)
 {
-    p = libboardgame_base::Point<W, H, T>::null();
+    p = libboardgame_base::Point<W,H,I,T>::null();
 }
 
 } // namespace libboardgame_util

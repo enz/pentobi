@@ -16,7 +16,8 @@ using libboardgame_base::SpreadsheetStringRep;
 
 /** Point (coordinate of on-board field) for Blokus game variants.
     Supports RectGeometry up to size 20 and TrigonGeometry up to edge size 9. */
-typedef libboardgame_base::Point<35, 20, SpreadsheetStringRep> Point;
+typedef libboardgame_base::Point<35,20,unsigned short,SpreadsheetStringRep>
+    Point;
 
 typedef Point::Direction Direction;
 

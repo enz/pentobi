@@ -5,6 +5,7 @@
 #ifndef LIBPENTOBI_BASE_MOVE_H
 #define LIBPENTOBI_BASE_MOVE_H
 
+#include <climits>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Exception.h"
 
@@ -51,13 +52,15 @@ public:
     unsigned int to_int() const;
 
 private:
-    static const unsigned int value_pass = range - 2;
+    static_assert(range <= USHRT_MAX, "");
 
-    static const unsigned int value_null = range - 1;
+    static const unsigned short value_pass = range - 2;
 
-    static const unsigned int value_uninitialized = range;
+    static const unsigned short value_null = range - 1;
 
-    unsigned int m_i;
+    static const unsigned short value_uninitialized = range;
+
+    unsigned short m_i;
 
     bool is_initialized() const;
 };

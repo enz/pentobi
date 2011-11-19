@@ -75,7 +75,7 @@ public:
     void copy_data_from(const Node& node);
 
 private:
-    unsigned int m_nu_children;
+    unsigned short m_nu_children;
 
     Move m_move;
 
@@ -140,7 +140,7 @@ void Node<M>::copy_data_from(const Node& node)
     // Reminder to update this function when the class gets additional members
     struct Dummy
     {
-        int m_nu_children;
+        unsigned short m_nu_children;
         Move m_move;
         ValueType m_count;
         ValueType m_value;

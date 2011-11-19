@@ -16,8 +16,7 @@ using libboardgame_base::SpreadsheetStringRep;
 
 //-----------------------------------------------------------------------------
 
-typedef
-    libboardgame_base::Point<19, 19, short unsigned int, SpreadsheetStringRep>
+typedef libboardgame_base::Point<19,19,unsigned short,SpreadsheetStringRep>
     Point;
 typedef libboardgame_base::Marker<Point> Marker;
 
