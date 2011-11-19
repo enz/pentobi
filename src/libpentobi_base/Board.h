@@ -120,6 +120,8 @@ public:
     /** Get the state of an on-board or off-board point. */
     PointStateExt get_point_state_ext(Point p) const;
 
+    bool is_empty(Point p) const;
+
     const PointStateGrid& get_grid() const;
 
     Color get_to_play() const;
@@ -167,8 +169,12 @@ public:
     ColorMove get_move(unsigned int n) const;
 
     /** Generate all moves for one player.
-        The generated moves do not include the pass move. */
-    void gen_moves(Color c, ArrayList<Move, Move::range>& moves) const;
+        The generated moves do not include the pass move.
+        @param fixed_starting_point If not Point::null(), then only this
+        point will be used as a starting point even if the color has more
+        than one starting point. */
+    void gen_moves(Color c, ArrayList<Move, Move::range>& moves,
+                   Point fixed_starting_point = Point::null()) const;
 
     bool has_moves(Color c) const;
 
@@ -477,6 +483,11 @@ inline bool Board::is_colored_starting_point(Point p) const
 inline bool Board::is_colorless_starting_point(Point p) const
 {
     return m_starting_points.is_colorless_starting_point(p);
+}
+
+inline bool Board::is_empty(Point p) const
+{
+    return get_point_state(p).is_empty();
 }
 
 inline bool Board::is_forbidden(Point p, Color c) const

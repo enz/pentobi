@@ -50,6 +50,36 @@ const bool use_prior_knowledge = true;
 
 const bool pure_random_playout = false;
 
+Point find_best_starting_point(const Board& bd, Color c)
+{
+    // We use the starting point that maximizes the (Manhattan) distance to
+    // all occupied starting points.
+    Point best = Point::null();
+    int max_distance = -1;
+    BOOST_FOREACH(Point p, bd.get_starting_points(c))
+    {
+        if (! bd.is_empty(p))
+            continue;
+        int d = 0;
+        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        {
+            BOOST_FOREACH(Point pp, bd.get_starting_points(*i))
+            {
+                if (! bd.is_empty(pp))
+                    d +=
+                        abs(pp.get_x() - p.get_x())
+                        + abs(pp.get_y() - p.get_y());
+            }
+        }
+        if (d > max_distance)
+        {
+            best = p;
+            max_distance = d;
+        }
+    }
+    return best;
+}
+
 /** Return the symmetric point state for symmetry detection.
     Only used for game_variant_duo. Returns the other color or empty, if the
     given point state is empty. */
@@ -450,8 +480,17 @@ void State::init_local_points()
 
 void State::init_move_list(Color c)
 {
+    // Using only one starting point (if game variant has more than one) not
+    // only reduces the branching factor but is also necessary because
+    // update_move_list() assumes that a move stays legal if the forbidden
+    // status for all of its points does not change.
+    Point fixed_starting_point = Point::null();
+    bool is_first_move =
+        (m_bd.get_pieces_left(c).size() == m_bd.get_nu_pieces());
+    if (is_first_move)
+        fixed_starting_point = find_best_starting_point(m_bd, c);
     ArrayList<Move, Move::range>& moves = *m_moves[c];
-    m_bd.gen_moves(c, moves);
+    m_bd.gen_moves(c, moves, fixed_starting_point);
     m_last_move[c] = Move::null();
     init_local_points();
     m_local_moves.clear();
