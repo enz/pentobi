@@ -68,11 +68,35 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
         }
         return;
     }
-    qreal fieldSize = min(width() / 7.f, height() / 7.f);
-    qreal displaySize = fieldSize * 7;
+    BoardType board_type = m_bd.get_board_type();
+    qreal fieldWidth;
+    qreal fieldHeight;
+    qreal displayWidth;
+    qreal displayHeight;
+    if (board_type == board_type_trigon)
+    {
+        int columns = 7;
+        int rows = 5;
+        qreal ratio = 1.732;
+        fieldWidth = min(qreal(width()) / columns,
+                               qreal(height()) / (ratio * rows));
+        fieldHeight = ratio * fieldWidth;
+        displayWidth = fieldWidth * columns;
+        displayHeight = fieldHeight * rows;
+    }
+    else
+    {
+        int columns = 6;
+        int rows = 6;
+        fieldWidth = min(qreal(width()) / columns,
+                               qreal(height()) / rows);
+        fieldHeight = fieldWidth;
+        displayWidth = fieldWidth * columns;
+        displayHeight = fieldHeight * rows;
+    }
     painter.save();
-    painter.translate(0.5 * (width() - displaySize),
-                      0.5 * (height() - displaySize));
+    painter.translate(0.5 * (width() - displayWidth),
+                      0.5 * (height() - displayHeight));
     Piece::Points points = m_piece->get_points();
     m_transform->transform(points.begin(), points.end());
     const Geometry& geometry = m_bd.get_geometry();
@@ -85,25 +109,24 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
                      offset);
     bool invertPointType = (geometry.get_point_type(offset) != 0);
     painter.save();
-    painter.translate(0.5 * (displaySize - width * fieldSize),
-                      0.5 * (displaySize - height * fieldSize));
+    painter.translate(0.5 * (displayWidth - width * fieldWidth),
+                      0.5 * (displayHeight - height * fieldHeight));
     GameVariant game_variant = m_bd.get_game_variant();
-    BoardType board_type = m_bd.get_board_type();
     BOOST_FOREACH(CoordPoint p, points)
     {
-        qreal x = p.x * fieldSize;
-        qreal y = (height - p.y - 1) * fieldSize;
+        qreal x = p.x * fieldWidth;
+        qreal y = (height - p.y - 1) * fieldHeight;
         if (board_type == board_type_trigon)
         {
             bool isUpside = (geometry.get_point_type(p) != 0);
             if (invertPointType)
                 isUpside = ! isUpside;
             Util::paintColorTriangle(painter, game_variant, m_color, isUpside,
-                                     x, y, fieldSize, fieldSize);
+                                     x, y, fieldWidth, fieldHeight);
         }
         else
             Util::paintColorSquare(painter, game_variant, m_color, x, y,
-                                   fieldSize);
+                                   fieldWidth);
     }
     painter.restore();
     painter.restore();

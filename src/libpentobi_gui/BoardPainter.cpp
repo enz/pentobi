@@ -213,6 +213,10 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                 Util::paintColorTriangle(painter, gameVariant, s.to_color(),
                                          isUpside, fieldX, fieldY,
                                          m_fieldWidth, m_fieldHeight);
+            else if (m_startingPoints.is_colorless_starting_point(*i))
+                Util::paintEmptyTriangleStartingPoint(painter, isUpside, fieldX,
+                                                      fieldY, m_fieldWidth,
+                                                      m_fieldHeight);
             else
                 Util::paintEmptyTriangle(painter, isUpside, fieldX, fieldY,
                                          m_fieldWidth, m_fieldHeight);
@@ -222,19 +226,15 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
             if (s.is_color())
                 Util::paintColorSquare(painter, gameVariant, s.to_color(),
                                        fieldX, fieldY, m_fieldWidth);
-            else
+            else if (m_startingPoints.is_colored_starting_point(*i))
             {
-                if (m_startingPoints.is_colored_starting_point(*i))
-                {
-                    Color color = m_startingPoints.get_starting_point_color(*i);
-                    Util::paintEmptySquareStartingPoint(painter, gameVariant,
-                                                        color, fieldX, fieldY,
-                                                        m_fieldWidth);
-                }
-                else
-                    Util::paintEmptySquare(painter, fieldX, fieldY,
-                                           m_fieldWidth);
+                Color color = m_startingPoints.get_starting_point_color(*i);
+                Util::paintEmptySquareStartingPoint(painter, gameVariant,
+                                                    color, fieldX, fieldY,
+                                                    m_fieldWidth);
             }
+            else
+                Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
         }
     }
     if (labels != 0)

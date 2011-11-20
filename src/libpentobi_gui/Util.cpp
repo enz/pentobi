@@ -26,10 +26,8 @@ const QColor yellow(235, 205, 35);
 
 const QColor gray(174, 167, 172);
 
-void paintDot(QPainter& painter, GameVariant gameVariant, Color c, qreal x,
-              qreal y, qreal size)
+void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal size)
 {
-    QColor color = Util::getPaintColor(gameVariant, c);
     painter.save();
     painter.translate(x, y);
     painter.setPen(color);
@@ -218,12 +216,20 @@ void Util::paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x,
                   gray.darker(130), gray.lighter(115));
 }
 
+void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside,
+                                           qreal x, qreal y, qreal width,
+                                           qreal height)
+{
+    paintEmptyTriangle(painter, isUpside, x, y, width, height);
+    paintDot(painter, gray.darker(130), x, y, width);
+}
+
 void Util::paintEmptySquareStartingPoint(QPainter& painter,
                                          GameVariant gameVariant, Color c,
                                          qreal x, qreal y, qreal size)
 {
     paintEmptySquare(painter, x, y, size);
-    paintDot(painter, gameVariant, c, x, y, size);
+    paintDot(painter, getPaintColor(gameVariant, c), x, y, size);
 }
 
 //-----------------------------------------------------------------------------

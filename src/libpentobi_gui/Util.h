@@ -38,6 +38,9 @@ void paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size);
 void paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
                         qreal width, qreal height);
 
+void paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside, qreal x,
+                                     qreal y, qreal width, qreal height);
+
 void paintEmptySquareStartingPoint(QPainter& painter, GameVariant gameVariant,
                                    Color c, qreal x, qreal y, qreal size);
 
