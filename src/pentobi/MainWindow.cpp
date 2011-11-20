@@ -177,12 +177,16 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     addAction(m_actionPlaceSelectedPiece);
     addAction(m_actionSelectPiece1);
     addAction(m_actionSelectPiece2);
+    addAction(m_actionSelectPieceA);
+    addAction(m_actionSelectPieceC);
     addAction(m_actionSelectPieceF);
+    addAction(m_actionSelectPieceG);
     addAction(m_actionSelectPieceI);
     addAction(m_actionSelectPieceL);
     addAction(m_actionSelectPieceN);
     addAction(m_actionSelectPieceO);
     addAction(m_actionSelectPieceP);
+    addAction(m_actionSelectPieceS);
     addAction(m_actionSelectPieceT);
     addAction(m_actionSelectPieceU);
     addAction(m_actionSelectPieceV);
@@ -792,10 +796,25 @@ void MainWindow::createActions()
     connect(m_actionSelectPiece2, SIGNAL(triggered()),
             this, SLOT(selectPiece2()));
 
+    m_actionSelectPieceA = new QAction(this);
+    m_actionSelectPieceA->setShortcut(QString("A"));
+    connect(m_actionSelectPieceA, SIGNAL(triggered()),
+            this, SLOT(selectPieceA()));
+
+    m_actionSelectPieceC = new QAction(this);
+    m_actionSelectPieceC->setShortcut(QString("C"));
+    connect(m_actionSelectPieceC, SIGNAL(triggered()),
+            this, SLOT(selectPieceC()));
+
     m_actionSelectPieceF = new QAction(this);
     m_actionSelectPieceF->setShortcut(QString("F"));
     connect(m_actionSelectPieceF, SIGNAL(triggered()),
             this, SLOT(selectPieceF()));
+
+    m_actionSelectPieceG = new QAction(this);
+    m_actionSelectPieceG->setShortcut(QString("G"));
+    connect(m_actionSelectPieceG, SIGNAL(triggered()),
+            this, SLOT(selectPieceG()));
 
     m_actionSelectPieceI = new QAction(this);
     m_actionSelectPieceI->setShortcut(QString("I"));
@@ -821,6 +840,11 @@ void MainWindow::createActions()
     m_actionSelectPieceP->setShortcut(QString("P"));
     connect(m_actionSelectPieceP, SIGNAL(triggered()),
             this, SLOT(selectPieceP()));
+
+    m_actionSelectPieceS = new QAction(this);
+    m_actionSelectPieceS->setShortcut(QString("S"));
+    connect(m_actionSelectPieceS, SIGNAL(triggered()),
+            this, SLOT(selectPieceS()));
 
     m_actionSelectPieceT = new QAction(this);
     m_actionSelectPieceT->setShortcut(QString("T"));
@@ -1918,39 +1942,23 @@ void MainWindow::saveAs()
 }
 
 void MainWindow::selectNamedPiece(const char* name1, const char* name2,
-                                  const char* name3)
+                                  const char* name3, const char* name4)
 {
     vector<const Piece*> pieces;
     Color c = m_game->get_effective_to_play();
     const Board& bd = getBoard();
     const Piece* piece;
-    if (! bd.get_piece_by_name(name1, piece))
-        LIBBOARDGAME_ASSERT(false);
-    else
-    {
-        if (bd.is_piece_left(c, *piece))
-            pieces.push_back(piece);
-    }
-    if (name2 != 0)
-    {
-        if (! bd.get_piece_by_name(name2, piece))
-            LIBBOARDGAME_ASSERT(false);
-        else
-        {
-            if (bd.is_piece_left(c, *piece))
-                pieces.push_back(piece);
-        }
-    }
-    if (name3 != 0)
-    {
-        if (! bd.get_piece_by_name(name3, piece))
-            LIBBOARDGAME_ASSERT(false);
-        else
-        {
-            if (bd.is_piece_left(c, *piece))
-                pieces.push_back(piece);
-        }
-    }
+    if (bd.get_piece_by_name(name1, piece) && bd.is_piece_left(c, *piece))
+        pieces.push_back(piece);
+    if (name2 != 0 && bd.get_piece_by_name(name2, piece)
+        && bd.is_piece_left(c, *piece))
+        pieces.push_back(piece);
+    if (name3 != 0 && bd.get_piece_by_name(name3, piece)
+        && bd.is_piece_left(c, *piece))
+        pieces.push_back(piece);
+    if (name4 != 0 && bd.get_piece_by_name(name4, piece)
+        && bd.is_piece_left(c, *piece))
+        pieces.push_back(piece);
     if (pieces.empty())
         return;
     piece = m_guiBoard->getSelectedPiece();
@@ -2003,19 +2011,34 @@ void MainWindow::selectPiece2()
     selectNamedPiece("2");
 }
 
+void MainWindow::selectPieceA()
+{
+    selectNamedPiece("A6", "A4");
+}
+
+void MainWindow::selectPieceC()
+{
+    selectNamedPiece("C5", "C4");
+}
+
 void MainWindow::selectPieceF()
 {
-    selectNamedPiece("F");
+    selectNamedPiece("F6", "F");
+}
+
+void MainWindow::selectPieceG()
+{
+    selectNamedPiece("G6");
 }
 
 void MainWindow::selectPieceI()
 {
-    selectNamedPiece("I5", "I4", "I3");
+    selectNamedPiece("I6", "I5", "I4", "I3");
 }
 
 void MainWindow::selectPieceL()
 {
-    selectNamedPiece("L5", "L4");
+    selectNamedPiece("L6", "L5", "L4");
 }
 
 void MainWindow::selectPieceN()
@@ -2025,12 +2048,17 @@ void MainWindow::selectPieceN()
 
 void MainWindow::selectPieceO()
 {
-    selectNamedPiece("O");
+    selectNamedPiece("O6", "O");
 }
 
 void MainWindow::selectPieceP()
 {
-    selectNamedPiece("P");
+    selectNamedPiece("P6", "P5", "P");
+}
+
+void MainWindow::selectPieceS()
+{
+    selectNamedPiece("S6");
 }
 
 void MainWindow::selectPieceT()
@@ -2045,22 +2073,22 @@ void MainWindow::selectPieceU()
 
 void MainWindow::selectPieceV()
 {
-    selectNamedPiece("V5", "V3");
+    selectNamedPiece("V6", "V5", "V3");
 }
 
 void MainWindow::selectPieceW()
 {
-    selectNamedPiece("W");
+    selectNamedPiece("W6", "W");
 }
 
 void MainWindow::selectPieceX()
 {
-    selectNamedPiece("X");
+    selectNamedPiece("X5", "X");
 }
 
 void MainWindow::selectPieceY()
 {
-    selectNamedPiece("Y");
+    selectNamedPiece("Y6", "Y");
 }
 
 void MainWindow::selectPieceZ()

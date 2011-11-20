@@ -121,7 +121,13 @@ public slots:
 
     void selectPiece2();
 
+    void selectPieceA();
+
+    void selectPieceC();
+
     void selectPieceF();
+
+    void selectPieceG();
 
     void selectPieceI();
 
@@ -132,6 +138,8 @@ public slots:
     void selectPieceO();
 
     void selectPieceP();
+
+    void selectPieceS();
 
     void selectPieceT();
 
@@ -347,7 +355,13 @@ private:
 
     QAction* m_actionSelectPiece2;
 
+    QAction* m_actionSelectPieceA;
+
+    QAction* m_actionSelectPieceC;
+
     QAction* m_actionSelectPieceF;
+
+    QAction* m_actionSelectPieceG;
 
     QAction* m_actionSelectPieceI;
 
@@ -358,6 +372,8 @@ private:
     QAction* m_actionSelectPieceO;
 
     QAction* m_actionSelectPieceP;
+
+    QAction* m_actionSelectPieceS;
 
     QAction* m_actionSelectPieceT;
 
@@ -517,7 +533,7 @@ private slots:
     void openRecentFile();
 
     void selectNamedPiece(const char* name1, const char* name2 = 0,
-                          const char* name3 = 0);
+                          const char* name3 = 0, const char* name4 = 0);
 
     void setLevel(bool checked);
 
