@@ -70,12 +70,6 @@ private:
     /** The height of the last board painted. */
     int m_height;
 
-    /** The width in pixels of the last board painted. */
-    int m_boardWidth;
-
-    /** The height in pixels of the last board painted. */
-    int m_boardHeight;
-
     Color m_selectedPieceColor;
 
     MovePoints m_selectedPiecePoints;
@@ -84,11 +78,11 @@ private:
 
     QColor m_coordLabelColor;
 
-    int m_fieldWidth;
+    qreal m_fieldWidth;
 
-    int m_fieldHeight;
+    qreal m_fieldHeight;
 
-    QPoint m_boardOffset;
+    QPointF m_boardOffset;
 
     QFont m_font;
 

@@ -58,8 +58,8 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
     {
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
         {
-            int fieldX = p.get_x() * m_fieldWidth;
-            int fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
+            qreal fieldX = p.get_x() * m_fieldWidth;
+            qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
             if (gameVariant == game_variant_trigon
                 || gameVariant == game_variant_trigon_2)
             {
@@ -83,9 +83,10 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
         color.setAlpha(160);
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
         {
-            painter.fillRect(p.get_x() * m_fieldWidth,
-                             (m_height - p.get_y() - 1) * m_fieldHeight,
-                             m_fieldWidth, m_fieldHeight, color);
+            painter.fillRect(QRectF(p.get_x() * m_fieldWidth,
+                                    (m_height - p.get_y() - 1) * m_fieldHeight,
+                                    m_fieldWidth, m_fieldHeight),
+                             color);
         }
     }
 }
@@ -109,16 +110,19 @@ QRect BoardPainter::getRect(Point p, GameVariant gameVariant) const
         return QRect();
     int x = p.get_x();
     int y = m_height - p.get_y() - 1;
+    int extraSpace = 2;
     if (gameVariant == game_variant_trigon
         || gameVariant == game_variant_trigon_2)
-        return QRect(m_boardOffset.x() + x * m_fieldWidth
-                     - m_fieldWidth / 2 - 1,
-                     m_boardOffset.y() + y * m_fieldHeight,
-                     2 * m_fieldWidth, m_fieldHeight);
+        return QRect(round(m_boardOffset.x() + x * m_fieldWidth
+                           - 0.5 * m_fieldWidth - extraSpace),
+                     round(m_boardOffset.y() + y * m_fieldHeight - extraSpace),
+                     round(2 * m_fieldWidth + 2 * extraSpace),
+                     round(m_fieldHeight + 2 * extraSpace));
     else
-        return QRect(m_boardOffset.x() + x * m_fieldWidth,
-                     m_boardOffset.y() + y * m_fieldHeight,
-                     m_fieldWidth, m_fieldHeight);
+        return QRect(round(m_boardOffset.x() + x * m_fieldWidth - extraSpace),
+                     round(m_boardOffset.y() + y * m_fieldHeight - extraSpace),
+                     round(m_fieldWidth + 2 * extraSpace),
+                     round(m_fieldHeight + 2 * extraSpace));
 }
 
 void BoardPainter::paint(QPainter& painter, unsigned int width,
@@ -128,33 +132,44 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                          const Grid<MarkupFlags>* markupFlags)
 {
     m_hasPainted = true;
+    painter.setRenderHint(QPainter::Antialiasing, true);
     const Geometry& geometry = pointState.get_geometry();
     m_width = static_cast<int>(geometry.get_width());
     m_height = static_cast<int>(geometry.get_height());
-    float ratio =
-        (gameVariant == game_variant_trigon
-         || gameVariant == game_variant_trigon_2
-         ? 1.732 : 1);
-    if (m_drawCoordLabels)
+    if (gameVariant == game_variant_trigon
+        || gameVariant == game_variant_trigon_2)
     {
-        m_fieldWidth =
-            min(float(width) / (m_width + 2),
-                height / (ratio * (m_height + 2)));
+        qreal ratio = 1.732;
+        if (m_drawCoordLabels)
+            m_fieldWidth =
+                min(qreal(width) / (m_width + 3),
+                    height / (ratio * (m_height + 2)));
+        else
+            m_fieldWidth =
+                min(qreal(width) / (m_width + 1), height / (ratio * m_height));
         m_fieldHeight = ratio * m_fieldWidth;
+        m_boardOffset =
+            QPointF(0.5 * (width - m_fieldWidth * m_width),
+                    0.5 * (height - m_fieldHeight * m_height));
     }
     else
     {
-        m_fieldWidth = min(float(width) / m_width, height / (ratio * m_height));
-        m_fieldHeight = ratio * m_fieldWidth;
+        if (m_drawCoordLabels)
+            m_fieldWidth =
+                min(qreal(width) / (m_width + 2),
+                    qreal(height) / (m_height + 2));
+        else
+            m_fieldWidth =
+                min(qreal(width) / m_width, qreal(height) / m_height);
+        m_fieldHeight = m_fieldWidth;
+        m_boardOffset =
+            QPointF(0.5 * (width - m_fieldWidth * m_width),
+                    0.5 * (height - m_fieldHeight * m_height));
     }
-    m_boardWidth = m_fieldWidth * m_width;
-    m_boardHeight = m_fieldHeight * m_height;
-    m_font.setPointSize(max(m_fieldWidth * 40 / 100, 1));
+    m_font.setPointSizeF(0.4 * m_fieldWidth);
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
-    m_fontSmall.setPointSize(max(m_fieldWidth * 36 / 100, 1));
-    m_boardOffset =
-        QPoint((width - m_boardWidth) / 2, (height - m_boardHeight) / 2);
+    m_fontSmall.setPointSizeF(0.36 * m_fieldWidth);
     painter.save();
     painter.translate(m_boardOffset);
     if (m_drawCoordLabels)
@@ -188,8 +203,8 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         int x = i->get_x();
         int y = i->get_y();
         PointStateExt s = pointState[*i];
-        int fieldX = x * m_fieldWidth;
-        int fieldY = (m_height - y - 1) * m_fieldHeight;
+        qreal fieldX = x * m_fieldWidth;
+        qreal fieldY = (m_height - y - 1) * m_fieldHeight;
         if (gameVariant == game_variant_trigon
             || gameVariant == game_variant_trigon_2)
         {

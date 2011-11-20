@@ -26,99 +26,95 @@ const QColor yellow(235, 205, 35);
 
 const QColor gray(174, 167, 172);
 
-void paintDot(QPainter& painter, GameVariant gameVariant, Color c, int x,
-              int y, int size)
+void paintDot(QPainter& painter, GameVariant gameVariant, Color c, qreal x,
+              qreal y, qreal size)
 {
     QColor color = Util::getPaintColor(gameVariant, c);
-    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
     painter.translate(x, y);
     painter.setPen(color);
     painter.setBrush(color);
-    painter.drawEllipse(QPoint(size / 2, size / 2), size / 8, size / 8);
+    painter.drawEllipse(QPointF(size / 2, size / 2), size / 8, size / 8);
     painter.restore();
-    painter.setRenderHint(QPainter::Antialiasing, false);
 }
 
-void paintSquare(QPainter& painter, int x, int y, int size,
+void paintSquare(QPainter& painter, qreal x, qreal y, qreal size,
                  const QColor& rectColor, const QColor& upLeftColor,
                  const QColor& downRightColor)
 {
     painter.save();
     painter.translate(x, y);
     if (! painter.hasClipping()
-        || painter.clipRegion().contains(QRect(0, 0, size, size)))
+        || painter.clipRegion().contains(QRect(0, 0, ceil(size), ceil(size))))
     {
-        int border;
+        qreal border;
         if (size < 5)
             border = 0;
         else if (size < 40)
             border = 1;
         else
             border = size / 20;
-        const QPoint upLeftPolygon[6] =
+        const QPointF upLeftPolygon[6] =
             {
-                QPoint(0, 0),
-                QPoint(size - 1, 0),
-                QPoint(size - border, border - 1),
-                QPoint(border - 1, border - 1),
-                QPoint(border - 1, size - border),
-                QPoint(0, size - 1)
+                QPointF(0, 0),
+                QPointF(size, 0),
+                QPointF(size - border, border),
+                QPointF(border, border),
+                QPointF(border, size - border),
+                QPointF(0, size)
             };
-        const QPoint downRightPolygon[6] =
+        const QPointF downRightPolygon[6] =
             {
-                QPoint(0, size - 1),
-                QPoint(border - 1, size - border),
-                QPoint(size - border, size - border),
-                QPoint(size - border, border - 1),
-                QPoint(size - 1, 0),
-                QPoint(size - 1, size - 1)
+                QPointF(border, size - border),
+                QPointF(size - border, size - border),
+                QPointF(size - border, border),
+                QPointF(size, 0),
+                QPointF(size, size),
+                QPointF(0, size)
             };
-        painter.fillRect(0, 0, size, size, rectColor);
-        if (border > 0)
-        {
-            painter.setPen(downRightColor);
-            painter.setBrush(downRightColor);
-            painter.drawConvexPolygon(downRightPolygon, 6);
-            painter.setPen(upLeftColor);
-            painter.setBrush(upLeftColor);
-            painter.drawConvexPolygon(upLeftPolygon, 6);
-        }
+        painter.fillRect(QRectF(0, 0, size, size), rectColor);
+        painter.setPen(downRightColor);
+        painter.setBrush(downRightColor);
+        painter.drawConvexPolygon(downRightPolygon, 6);
+        painter.setPen(upLeftColor);
+        painter.setBrush(upLeftColor);
+        painter.drawConvexPolygon(upLeftPolygon, 6);
     }
     painter.restore();
 }
 
-void paintTriangle(QPainter& painter, bool isUpside, int x, int y, int width,
-                   int height, const QColor& color, const QColor& upLeftColor,
-                   const QColor& downRightColor)
+void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
+                   qreal width, qreal height, const QColor& color,
+                   const QColor& upLeftColor, const QColor& downRightColor)
 {
     painter.save();
     painter.translate(x, y);
-    int left = -0.5 * width;
-    int right = static_cast<int>(1.5 * width) - 1;
+    qreal left = -0.5 * width;
+    qreal right = static_cast<int>(1.5 * width) - 1;
     if (! painter.hasClipping()
-        || painter.clipRegion().contains(QRect(left, 0, right, height)))
+        || painter.clipRegion().contains(QRect(floor(left), 0,
+                                               ceil(right), ceil(height))))
     {
         //painter.setRenderHint(QPainter::Antialiasing, true);
         painter.setPen(downRightColor);
         painter.setBrush(color);
         if (isUpside)
         {
-            const QPoint polygon[3] =
+            const QPointF polygon[3] =
                 {
-                    QPoint(left, height - 1),
-                    QPoint(right, height - 1),
-                    QPoint(0.5 * width, 0)
+                    QPointF(left, height),
+                    QPointF(right, height),
+                    QPointF(0.5 * width, 0)
                 };
             painter.drawConvexPolygon(polygon, 3);
         }
         else
         {
-            const QPoint polygon[3] =
+            const QPointF polygon[3] =
                 {
-                    QPoint(left, 0),
-                    QPoint(right, 0),
-                    QPoint(0.5 * width, height - 1)
+                    QPointF(left, 0),
+                    QPointF(right, 0),
+                    QPointF(0.5 * width, height)
                 };
             painter.drawConvexPolygon(polygon, 3);
         }
@@ -191,7 +187,7 @@ QColor Util::getPaintColorEmpty()
 }
 
 void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
-                            Color c, int x, int y, int size)
+                            Color c, qreal x, qreal y, qreal size)
 {
     QColor rectColor = getPaintColor(gameVariant, c);
     QColor upLeftColor = rectColor.lighter();
@@ -200,8 +196,8 @@ void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
 }
 
 void Util::paintColorTriangle(QPainter& painter, GameVariant gameVariant,
-                              Color c, bool isUpside, int x, int y, int width,
-                              int height)
+                              Color c, bool isUpside, qreal x, qreal y,
+                              qreal width, qreal height)
 {
     QColor color = getPaintColor(gameVariant, c);
     QColor upLeftColor = color.lighter();
@@ -210,13 +206,13 @@ void Util::paintColorTriangle(QPainter& painter, GameVariant gameVariant,
                   downRightColor);
 }
 
-void Util::paintEmptySquare(QPainter& painter, int x, int y, int size)
+void Util::paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size)
 {
     paintSquare(painter, x, y, size, gray, gray.darker(130), gray.lighter(115));
 }
 
-void Util::paintEmptyTriangle(QPainter& painter, bool isUpside, int x, int y,
-                              int width, int height)
+void Util::paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x,
+                              qreal y, qreal width, qreal height)
 {
     paintTriangle(painter, isUpside, x, y, width, height, gray,
                   gray.darker(130), gray.lighter(115));
@@ -224,7 +220,7 @@ void Util::paintEmptyTriangle(QPainter& painter, bool isUpside, int x, int y,
 
 void Util::paintEmptySquareStartingPoint(QPainter& painter,
                                          GameVariant gameVariant, Color c,
-                                         int x, int y, int size)
+                                         qreal x, qreal y, qreal size)
 {
     paintEmptySquare(painter, x, y, size);
     paintDot(painter, gameVariant, c, x, y, size);

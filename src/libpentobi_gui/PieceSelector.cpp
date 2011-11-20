@@ -139,12 +139,14 @@ void PieceSelector::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     painter.setClipRegion(event->region());
-    int squareSize = min(width() / nuColumns, height() / nuRows);
-    int selectorWidth = squareSize * nuColumns;
-    int selectorHeight = squareSize * nuRows;
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    qreal squareSize = min(qreal(width()) / nuColumns,
+                           qreal(height()) / nuRows);
+    qreal selectorWidth = squareSize * nuColumns;
+    qreal selectorHeight = squareSize * nuRows;
     painter.save();
-    painter.translate((width() - selectorWidth) / 2,
-                      (height() - selectorHeight) / 2);
+    painter.translate(0.5 * (width() - selectorWidth),
+                      0.5 * (height() - selectorHeight));
     for (unsigned int x = 0; x < nuColumns; ++x)
         for (unsigned int y = 0; y < nuRows; ++y)
         {

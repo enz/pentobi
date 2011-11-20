@@ -27,19 +27,19 @@ QColor getPaintColorEmpty();
 QColor getLabelColor(GameVariant gameVariant, PointState s);
 
 void paintColorSquare(QPainter& painter, GameVariant gameVariant, Color c,
-                      int x, int y, int size);
+                      qreal x, qreal y, qreal size);
 
 void paintColorTriangle(QPainter& painter, GameVariant gameVariant,
-                        Color c, bool isUpside, int x, int y, int width,
-                        int height);
+                        Color c, bool isUpside, qreal x, qreal y, qreal width,
+                        qreal height);
 
-void paintEmptySquare(QPainter& painter, int x, int y, int size);
+void paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size);
 
-void paintEmptyTriangle(QPainter& painter, bool isUpside, int x, int y,
-                        int width, int height);
+void paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
+                        qreal width, qreal height);
 
 void paintEmptySquareStartingPoint(QPainter& painter, GameVariant gameVariant,
-                                   Color c, int x, int y, int size);
+                                   Color c, qreal x, qreal y, qreal size);
 
 /** Convert a property value of a SGF tree unto a QString.
     @param value

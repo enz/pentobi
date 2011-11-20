@@ -55,24 +55,24 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     painter.setClipRegion(event->region());
+    painter.setRenderHint(QPainter::Antialiasing, true);
     if (m_piece == 0)
     {
         if (m_isColorSelected)
         {
             QColor color =
                 Util::getPaintColor(m_bd.get_game_variant(), m_color);
-            painter.setRenderHint(QPainter::Antialiasing, true);
             painter.setPen(color);
             painter.setBrush(color);
             painter.drawEllipse(width() / 2 - 5, height() / 2 - 5, 10, 10);
         }
         return;
     }
-    int fieldSize = min(width() / 7, height() / 7);
-    int displaySize = fieldSize * 7;
+    qreal fieldSize = min(width() / 7.f, height() / 7.f);
+    qreal displaySize = fieldSize * 7;
     painter.save();
-    painter.translate((width() - displaySize) / 2,
-                      (height() - displaySize) / 2);
+    painter.translate(0.5 * (width() - displaySize),
+                      0.5 * (height() - displaySize));
     Piece::Points points = m_piece->get_points();
     m_transform->transform(points.begin(), points.end());
     const Geometry& geometry = m_bd.get_geometry();
@@ -85,14 +85,14 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
                      offset);
     bool invertPointType = (geometry.get_point_type(offset) != 0);
     painter.save();
-    painter.translate((displaySize - width * fieldSize) / 2,
-                      (displaySize - height * fieldSize) / 2);
+    painter.translate(0.5 * (displaySize - width * fieldSize),
+                      0.5 * (displaySize - height * fieldSize));
     GameVariant game_variant = m_bd.get_game_variant();
     BoardType board_type = m_bd.get_board_type();
     BOOST_FOREACH(CoordPoint p, points)
     {
-        int x = p.x * fieldSize;
-        int y = (height - p.y - 1) * fieldSize;
+        qreal x = p.x * fieldSize;
+        qreal y = (height - p.y - 1) * fieldSize;
         if (board_type == board_type_trigon)
         {
             bool isUpside = (geometry.get_point_type(p) != 0);
