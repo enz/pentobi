@@ -88,24 +88,27 @@ void paintSquare(QPainter& painter, int x, int y, int size,
     painter.restore();
 }
 
-void paintTriangle(QPainter& painter, bool isUpside, int x, int y, int size,
-                   const QColor& color, const QColor& upLeftColor,
+void paintTriangle(QPainter& painter, bool isUpside, int x, int y, int width,
+                   int height, const QColor& color, const QColor& upLeftColor,
                    const QColor& downRightColor)
 {
     painter.save();
     painter.translate(x, y);
+    int left = -0.5 * width;
+    int right = static_cast<int>(1.5 * width) - 1;
     if (! painter.hasClipping()
-        || painter.clipRegion().contains(QRect(0, 0, size, size)))
+        || painter.clipRegion().contains(QRect(left, 0, right, height)))
     {
+        //painter.setRenderHint(QPainter::Antialiasing, true);
         painter.setPen(downRightColor);
         painter.setBrush(color);
         if (isUpside)
         {
             const QPoint polygon[3] =
                 {
-                    QPoint(0, size),
-                    QPoint(size, size),
-                    QPoint(size / 2, 0)
+                    QPoint(left, height - 1),
+                    QPoint(right, height - 1),
+                    QPoint(0.5 * width, 0)
                 };
             painter.drawConvexPolygon(polygon, 3);
         }
@@ -113,9 +116,9 @@ void paintTriangle(QPainter& painter, bool isUpside, int x, int y, int size,
         {
             const QPoint polygon[3] =
                 {
-                    QPoint(0, 0),
-                    QPoint(size, 0),
-                    QPoint(size / 2, size)
+                    QPoint(left, 0),
+                    QPoint(right, 0),
+                    QPoint(0.5 * width, height - 1)
                 };
             painter.drawConvexPolygon(polygon, 3);
         }
@@ -197,12 +200,13 @@ void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
 }
 
 void Util::paintColorTriangle(QPainter& painter, GameVariant gameVariant,
-                              Color c, bool isUpside, int x, int y, int size)
+                              Color c, bool isUpside, int x, int y, int width,
+                              int height)
 {
     QColor color = getPaintColor(gameVariant, c);
     QColor upLeftColor = color.lighter();
     QColor downRightColor = color.darker();
-    paintTriangle(painter, isUpside, x, y, size, color, upLeftColor,
+    paintTriangle(painter, isUpside, x, y, width, height, color, upLeftColor,
                   downRightColor);
 }
 
@@ -212,10 +216,10 @@ void Util::paintEmptySquare(QPainter& painter, int x, int y, int size)
 }
 
 void Util::paintEmptyTriangle(QPainter& painter, bool isUpside, int x, int y,
-                              int size)
+                              int width, int height)
 {
-    paintTriangle(painter, isUpside, x, y, size, gray, gray.darker(130),
-                  gray.lighter(115));
+    paintTriangle(painter, isUpside, x, y, width, height, gray,
+                  gray.darker(130), gray.lighter(115));
 }
 
 void Util::paintEmptySquareStartingPoint(QPainter& painter,

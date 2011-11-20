@@ -353,7 +353,7 @@ void GuiBoard::showMoveAnimation()
 
 void GuiBoard::updatePoint(Point p)
 {
-    update(m_boardPainter.getRect(p));
+    update(m_boardPainter.getRect(p, m_gameVariant));
 }
 
 void GuiBoard::updateSelectedPiecePoints()

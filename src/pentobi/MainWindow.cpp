@@ -51,7 +51,7 @@ namespace {
 
 /** Enable support for game variants Trigon amd Trigon Two-Player.
     This is still work in progress and not ready to be enabled in releases. */
-const bool useTrigon = false;
+const bool useTrigon = true;
 
 QToolButton* createOBoxToolButton(QAction* action)
 {

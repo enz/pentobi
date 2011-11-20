@@ -30,12 +30,13 @@ void paintColorSquare(QPainter& painter, GameVariant gameVariant, Color c,
                       int x, int y, int size);
 
 void paintColorTriangle(QPainter& painter, GameVariant gameVariant,
-                        Color c, bool isUpside, int x, int y, int size);
+                        Color c, bool isUpside, int x, int y, int width,
+                        int height);
 
 void paintEmptySquare(QPainter& painter, int x, int y, int size);
 
 void paintEmptyTriangle(QPainter& painter, bool isUpside, int x, int y,
-                        int size);
+                        int width, int height);
 
 void paintEmptySquareStartingPoint(QPainter& painter, GameVariant gameVariant,
                                    Color c, int x, int y, int size);

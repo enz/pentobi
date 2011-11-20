@@ -55,7 +55,7 @@ public:
         not called yet or the pixel is outside the board. */
     CoordPoint getCoordPoint(int x, int y);
 
-    QRect getRect(Point p) const;
+    QRect getRect(Point p, GameVariant gameVariant) const;
 
     bool hasPainted() const;
 

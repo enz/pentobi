@@ -99,7 +99,7 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
             if (invertPointType)
                 isUpside = ! isUpside;
             Util::paintColorTriangle(painter, game_variant, m_color, isUpside,
-                                     x, y, fieldSize);
+                                     x, y, fieldSize, fieldSize);
         }
         else
             Util::paintColorSquare(painter, game_variant, m_color, x, y,

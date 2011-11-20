@@ -66,7 +66,7 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
                 bool isUpside = (geometry.get_point_type(p) == 1);
                 Util::paintColorTriangle(painter, gameVariant,
                                          m_selectedPieceColor, isUpside, fieldX,
-                                         fieldY, m_fieldWidth);
+                                         fieldY, m_fieldWidth, m_fieldHeight);
             }
             else
             {
@@ -103,15 +103,22 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
         return CoordPoint(x, y);
 }
 
-QRect BoardPainter::getRect(Point p) const
+QRect BoardPainter::getRect(Point p, GameVariant gameVariant) const
 {
     if (! m_hasPainted)
         return QRect();
     int x = p.get_x();
     int y = m_height - p.get_y() - 1;
-    return QRect(m_boardOffset.x() + x * m_fieldWidth,
-                 m_boardOffset.y() + y * m_fieldHeight,
-                 m_fieldWidth, m_fieldHeight);
+    if (gameVariant == game_variant_trigon
+        || gameVariant == game_variant_trigon_2)
+        return QRect(m_boardOffset.x() + x * m_fieldWidth
+                     - m_fieldWidth / 2 - 1,
+                     m_boardOffset.y() + y * m_fieldHeight,
+                     2 * m_fieldWidth, m_fieldHeight);
+    else
+        return QRect(m_boardOffset.x() + x * m_fieldWidth,
+                     m_boardOffset.y() + y * m_fieldHeight,
+                     m_fieldWidth, m_fieldHeight);
 }
 
 void BoardPainter::paint(QPainter& painter, unsigned int width,
@@ -124,22 +131,28 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     const Geometry& geometry = pointState.get_geometry();
     m_width = static_cast<int>(geometry.get_width());
     m_height = static_cast<int>(geometry.get_height());
+    float ratio =
+        (gameVariant == game_variant_trigon
+         || gameVariant == game_variant_trigon_2
+         ? 1.732 : 1);
     if (m_drawCoordLabels)
     {
-        m_fieldWidth = min(width / (m_width + 2), height / (m_height + 2));
-        m_fieldHeight = m_fieldWidth;
+        m_fieldWidth =
+            min(float(width) / (m_width + 2),
+                height / (ratio * (m_height + 2)));
+        m_fieldHeight = ratio * m_fieldWidth;
     }
     else
     {
-        m_fieldWidth = min(width / m_width, height / m_height);
-        m_fieldHeight = m_fieldWidth;
+        m_fieldWidth = min(float(width) / m_width, height / (ratio * m_height));
+        m_fieldHeight = ratio * m_fieldWidth;
     }
     m_boardWidth = m_fieldWidth * m_width;
     m_boardHeight = m_fieldHeight * m_height;
     m_font.setPointSize(max(m_fieldWidth * 40 / 100, 1));
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
-    m_fontSmall.setPointSize(max(m_fieldWidth * 34 / 100, 1));
+    m_fontSmall.setPointSize(max(m_fieldWidth * 36 / 100, 1));
     m_boardOffset =
         QPoint((width - m_boardWidth) / 2, (height - m_boardHeight) / 2);
     painter.save();
@@ -184,10 +197,10 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
             if (s.is_color())
                 Util::paintColorTriangle(painter, gameVariant, s.to_color(),
                                          isUpside, fieldX, fieldY,
-                                         m_fieldWidth);
+                                         m_fieldWidth, m_fieldHeight);
             else
                 Util::paintEmptyTriangle(painter, isUpside, fieldX, fieldY,
-                                         m_fieldWidth);
+                                         m_fieldWidth, m_fieldHeight);
         }
         else
         {
