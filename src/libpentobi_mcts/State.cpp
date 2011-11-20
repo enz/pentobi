@@ -67,8 +67,8 @@ Point find_best_starting_point(const Board& bd, Color c)
             {
                 if (! bd.is_empty(pp))
                     d +=
-                        abs(pp.get_x() - p.get_x())
-                        + abs(pp.get_y() - p.get_y());
+                        abs(int(pp.get_x() - p.get_x()))
+                        + abs(int(pp.get_y() - p.get_y()));
             }
         }
         if (d > max_distance)
