@@ -112,6 +112,7 @@ int ScoreDisplay::getScoreTextWidth2(Color c1, Color c2)
 void ScoreDisplay::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
+    painter.setClipRegion(event->region());
     if (m_gameVariant == game_variant_duo)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
