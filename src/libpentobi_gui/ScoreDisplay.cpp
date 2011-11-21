@@ -165,10 +165,10 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
         x+= twoColorDotWidth + textWidthYellowGreen + pad;
         drawScore(painter, Color(0), x);
         x+= colorDotSize + textWidthBlue + pad;
-        drawScore(painter, Color(2), x);
-        x+= colorDotSize + textWidthRed + pad;
         drawScore(painter, Color(1), x);
         x+= colorDotSize + textWidthYellow + pad;
+        drawScore(painter, Color(2), x);
+        x+= colorDotSize + textWidthRed + pad;
         drawScore(painter, Color(3), x);
     }
 }
