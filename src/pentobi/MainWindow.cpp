@@ -2257,23 +2257,26 @@ void MainWindow::setMoveNumberText()
         bool isMain = is_main_variation(current);
         if (move == nuMoves)
         {
-            m_moveNumber->setText(QString("%1 [%2]")
-                                  .arg(move).arg(variation.c_str()));
             if (isMain)
+            {
+                m_moveNumber->setText(QString("%1").arg(move));
                 m_moveNumber->setToolTip(tr("Move number %1 in main variation")
                                          .arg(move));
+            }
             else
+            {
+                m_moveNumber->setText(QString("%1 [%2]")
+                                      .arg(move).arg(variation.c_str()));
                 m_moveNumber->setToolTip(tr("Move number %1 (variation %2)")
                                          .arg(move).arg(variation.c_str()));
-
+            }
         }
         else
         {
-            m_moveNumber->setText(QString("%1 (%2) [%3]")
-                                  .arg(move).arg(nuMoves)
-                                  .arg(variation.c_str()));
             if (isMain)
             {
+                m_moveNumber->setText(QString("%1 (%2)")
+                                      .arg(move).arg(nuMoves));
                 if (move == 0)
                 {
                     if (nuMoves == 1)
@@ -2291,6 +2294,9 @@ void MainWindow::setMoveNumberText()
             }
             else
             {
+                m_moveNumber->setText(QString("%1 (%2) [%3]")
+                                      .arg(move).arg(nuMoves)
+                                      .arg(variation.c_str()));
                 if (move == 0)
                 {
                     if (nuMoves == 1)
