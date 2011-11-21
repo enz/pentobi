@@ -2083,7 +2083,7 @@ void MainWindow::selectPieceW()
 
 void MainWindow::selectPieceX()
 {
-    selectNamedPiece("X5", "X");
+    selectNamedPiece("X6", "X");
 }
 
 void MainWindow::selectPieceY()

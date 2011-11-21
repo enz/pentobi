@@ -86,17 +86,24 @@ private:
 
     QFont m_font;
 
-    QFont m_fontUnderlined;
-
     QFont m_fontSmall;
+
+    QFont m_fontUnderlined;
 
     StartingPoints m_startingPoints;
 
-    void drawLabel(QPainter& painter, int x, int y, const QString& label,
-                   bool underline, bool smallFont = false);
+    void drawCoordinates(QPainter& painter, bool isTrigon);
+
+    void drawLabel(QPainter& painter, qreal x, qreal y, qreal width,
+                   qreal height, const QString& label, bool underline,
+                   bool small);
+
+    void drawLabels(QPainter& painter,
+                    const FullGrid<PointStateExt>& pointState,
+                    GameVariant gameVariant, const Grid<QString>* labels,
+                    const Grid<MarkupFlags>* markupFlags);
 
     void drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
-                           const Geometry& geometry,
                            const FullGrid<PointStateExt>& pointState);
 };
 

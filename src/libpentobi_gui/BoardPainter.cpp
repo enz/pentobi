@@ -32,28 +32,101 @@ BoardPainter::BoardPainter()
 {
 }
 
-void BoardPainter::drawLabel(QPainter& painter, int x, int y,
-                             const QString& label, bool underline,
-                             bool smallFont)
+void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
 {
-    if (underline)
-        painter.setFont(m_fontUnderlined);
-    else if (smallFont)
+    painter.setPen(m_coordLabelColor);
+    for (int x = 0; x < m_width; ++x)
+    {
+        QString label;
+        if (x < 26)
+            label = QString(QChar('A' + x));
+        else
+        {
+            label = "A";
+            label.append(QChar('A' + (x - 26)));
+        }
+        drawLabel(painter, x * m_fieldWidth, m_height * m_fieldHeight,
+                  m_fieldWidth, m_fieldHeight, label, false, true);
+        drawLabel(painter, x * m_fieldWidth, -m_fieldHeight,
+                  m_fieldWidth, m_fieldHeight, label, false, true);
+    }
+    for (int y = 0; y < m_height; ++y)
+    {
+        QString label;
+        label.setNum(y + 1);
+        qreal left;
+        qreal right;
+        if (isTrigon)
+        {
+            left = -1.5 * m_fieldWidth;
+            right = (m_width + 0.5) * m_fieldWidth;
+        }
+        else
+        {
+            left = -m_fieldWidth;
+            right = m_width * m_fieldWidth;
+        }
+        drawLabel(painter, left, (m_height - y - 1) * m_fieldHeight,
+                  m_fieldWidth, m_fieldHeight, label, false, true);
+        drawLabel(painter, right, (m_height - y - 1) * m_fieldHeight,
+                  m_fieldWidth, m_fieldHeight, label, false, true);
+    }
+}
+
+void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
+                             qreal width, qreal height, const QString& label,
+                             bool underline, bool small)
+{
+    if (small)
         painter.setFont(m_fontSmall);
+    else if (underline)
+        painter.setFont(m_fontUnderlined);
     else
         painter.setFont(m_font);
-    int fieldX = x * m_fieldWidth;
-    int fieldY = (m_height - y - 1) * m_fieldHeight;
-    painter.drawText(fieldX, fieldY, m_fieldWidth, m_fieldHeight,
-                     Qt::AlignCenter, label);
+    painter.drawText(x, y, width, height, Qt::AlignCenter, label);
+}
+
+void BoardPainter::drawLabels(QPainter& painter,
+                              const FullGrid<PointStateExt>& pointState,
+                              GameVariant gameVariant,
+                              const Grid<QString>* labels,
+                              const Grid<MarkupFlags>* markupFlags)
+{
+    if (labels == 0)
+        return;
+    const Geometry& geometry = pointState.get_geometry();
+    bool isTrigon = (gameVariant == game_variant_trigon
+                     || gameVariant == game_variant_trigon_2);
+    for (GeometryIterator i(geometry); i; ++i)
+        if (! (*labels)[*i].isEmpty())
+        {
+            PointState s = pointState[*i].to_point_state();
+            painter.setPen(Util::getLabelColor(gameVariant, s));
+            bool underline = false;
+            if (markupFlags != 0 && (*markupFlags)[*i].test(markup_variation))
+                underline = true;
+            qreal x = i->get_x() * m_fieldWidth;
+            qreal y = (m_height - i->get_y() - 1) * m_fieldHeight;
+            qreal width = m_fieldWidth;
+            qreal height = m_fieldHeight;
+            if (isTrigon)
+            {
+                bool isUpside = (geometry.get_point_type(*i) == 1);
+                if (isUpside)
+                    y += 0.333 * height;
+                height = 0.666 * height;
+            }
+            drawLabel(painter, x, y, width, height, (*labels)[*i], underline,
+                      false);
+        }
 }
 
 void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
-                                     const Geometry& geometry,
                                      const FullGrid<PointStateExt>& pointState)
 {
     if (m_selectedPiecePoints.empty())
         return;
+    const Geometry& geometry = pointState.get_geometry();
     if (m_isSelectedPieceLegal)
     {
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
@@ -136,8 +209,9 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     const Geometry& geometry = pointState.get_geometry();
     m_width = static_cast<int>(geometry.get_width());
     m_height = static_cast<int>(geometry.get_height());
-    if (gameVariant == game_variant_trigon
-        || gameVariant == game_variant_trigon_2)
+    bool isTrigon = (gameVariant == game_variant_trigon
+                     || gameVariant == game_variant_trigon_2);
+    if (isTrigon)
     {
         qreal ratio = 1.732;
         if (m_drawCoordLabels)
@@ -166,37 +240,23 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
             QPointF(0.5 * (width - m_fieldWidth * m_width),
                     0.5 * (height - m_fieldHeight * m_height));
     }
-    m_font.setPointSizeF(0.4 * m_fieldWidth);
+    m_fontSmall = m_font;
+    if (isTrigon)
+    {
+        m_font.setPointSizeF(0.55 * m_fieldWidth);
+        m_fontSmall.setPointSizeF(0.4 * m_fieldWidth);
+    }
+    else
+    {
+        m_font.setPointSizeF(0.4 * m_fieldWidth);
+        m_fontSmall.setPointSizeF(0.34 * m_fieldWidth);
+    }
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
-    m_fontSmall.setPointSizeF(0.36 * m_fieldWidth);
     painter.save();
     painter.translate(m_boardOffset);
     if (m_drawCoordLabels)
-    {
-        painter.setPen(m_coordLabelColor);
-        painter.setFont(m_font);
-        for (int x = 0; x < m_width; ++x)
-        {
-            QString label;
-            if (x < 26)
-                label = QString(QChar('A' + x));
-            else
-            {
-                label = "A";
-                label.append(QChar('A' + (x - 26)));
-            }
-            drawLabel(painter, x, -1, label, false, true);
-            drawLabel(painter, x, m_height, label, false, true);
-        }
-        for (int y = 0; y < m_height; ++y)
-        {
-            QString label;
-            label.setNum(y + 1);
-            drawLabel(painter, -1, y, label, false, true);
-            drawLabel(painter, m_width, y, label, false, true);
-        }
-    }
+        drawCoordinates(painter, isTrigon);
     m_startingPoints.init(gameVariant, geometry);
     for (GeometryIterator i(geometry); i; ++i)
     {
@@ -205,8 +265,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         PointStateExt s = pointState[*i];
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = (m_height - y - 1) * m_fieldHeight;
-        if (gameVariant == game_variant_trigon
-            || gameVariant == game_variant_trigon_2)
+        if (isTrigon)
         {
             bool isUpside = (geometry.get_point_type(x, y) == 1);
             if (s.is_color())
@@ -237,22 +296,8 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                 Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
         }
     }
-    if (labels != 0)
-    {
-        for (GeometryIterator i(geometry); i; ++i)
-            if (! (*labels)[*i].isEmpty())
-            {
-                PointState s = pointState[*i].to_point_state();
-                painter.setPen(Util::getLabelColor(gameVariant, s));
-                bool underline = false;
-                if (markupFlags != 0
-                    && (*markupFlags)[*i].test(markup_variation))
-                    underline = true;
-                drawLabel(painter, i->get_x(), i->get_y(), (*labels)[*i],
-                          underline);
-            }
-    }
-    drawSelectedPiece(painter, gameVariant, geometry, pointState);
+    drawLabels(painter, pointState, gameVariant, labels, markupFlags);
+    drawSelectedPiece(painter, gameVariant, pointState);
     painter.restore();
 }
 

@@ -372,7 +372,7 @@ vector<Piece> create_pieces_trigon(BoardType board_type,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(Piece("X5", points, geometry, transforms));
+        pieces.push_back(Piece("X6", points, geometry, transforms));
     }
     {
         /*  /+\+/+\+/+\  */

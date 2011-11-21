@@ -43,17 +43,29 @@ protected:
     void paintEvent(QPaintEvent* event);
 
 private:
-    static const unsigned int nuColumns = 34;
+    static const unsigned int maxColumns = 47;
 
-    static const unsigned int nuRows = 6;
+    static const unsigned int maxRows = 6;
 
     const Board& m_bd;
 
     Color m_color;
 
-    const Piece* m_piece[nuColumns][nuRows];
+    unsigned int m_nuColumns;
 
-    const Transform* m_transform[nuColumns][nuRows];
+    unsigned int m_nuRows;
+
+    const Piece* m_piece[maxColumns][maxRows];
+
+    const Transform* m_transform[maxColumns][maxRows];
+
+    qreal m_fieldWidth;
+
+    qreal m_fieldHeight;
+
+    qreal m_selectorWidth;
+
+    qreal m_selectorHeight;
 
     void findPiecePoints(const Piece& piece, unsigned int x,
                          unsigned int y, Piece::Points& points) const;
