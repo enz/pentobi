@@ -9,6 +9,7 @@
 #include "BoardPainter.h"
 
 #include <algorithm>
+#include <cmath>
 #include "Util.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/AdjIterator.h"
@@ -232,16 +233,16 @@ QRect BoardPainter::getRect(Point p, GameVariant gameVariant) const
     qreal extraHeight = min(0.2 * m_fieldHeight, 1.);
     if (gameVariant == game_variant_trigon
         || gameVariant == game_variant_trigon_2)
-        return QRect(round(m_boardOffset.x() + (x - 0.5) * m_fieldWidth
+        return QRect(floor(m_boardOffset.x() + (x - 0.5) * m_fieldWidth
                            - extraWidth),
-                     round(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
-                     round(2 * m_fieldWidth + 2 * extraWidth),
-                     round(m_fieldHeight + 2 * extraHeight));
+                     floor(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
+                     ceil(2 * m_fieldWidth + 2 * extraWidth),
+                     ceil(m_fieldHeight + 2 * extraHeight));
     else
-        return QRect(round(m_boardOffset.x() + x * m_fieldWidth - extraWidth),
-                     round(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
-                     round(2 * m_fieldWidth + 2 * extraWidth),
-                     round(m_fieldHeight + 2 * extraHeight));
+        return QRect(floor(m_boardOffset.x() + x * m_fieldWidth - extraWidth),
+                     floor(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
+                     ceil(2 * m_fieldWidth + 2 * extraWidth),
+                     ceil(m_fieldHeight + 2 * extraHeight));
 }
 
 void BoardPainter::paint(QPainter& painter, unsigned int width,

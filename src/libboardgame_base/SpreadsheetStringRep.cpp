@@ -8,6 +8,7 @@
 
 #include "SpreadsheetStringRep.h"
 
+#include <cstdio>
 #include <iostream>
 #include "libboardgame_util/Assert.h"
 

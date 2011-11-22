@@ -53,7 +53,7 @@ Player::Player(const Board& bd, GameVariant game_variant,
         // the average time per game is roughly the same.
         weight_max_count_duo[i] = ValueType(0.7 * exp(0.1 * i));
         weight_max_count_classic[i] = weight_max_count_duo[i];
-        weight_max_count_trigon[i] = 0.3 * weight_max_count_duo[i];
+        weight_max_count_trigon[i] = ValueType(0.3) * weight_max_count_duo[i];
         // Less weight for the first move(s) because number of legal moves
         // is lower and the search applies some pruning rules to reduce the
         // branching factor in early moves
