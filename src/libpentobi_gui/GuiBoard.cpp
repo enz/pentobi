@@ -289,9 +289,16 @@ void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
 
 void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
 {
-    m_selectedPieceOffset = offset;
     if (m_selectedPieceOffset.is_null())
+    {
+        m_selectedPieceOffset = offset;
         return;
+    }
+    const Geometry& geometry = m_bd.get_geometry();
+    unsigned int point_type = m_selectedPieceTransform->get_new_point_type();
+    if (geometry.get_point_type(offset) != point_type)
+        return;
+    m_selectedPieceOffset = offset;
     int minX = numeric_limits<int>::max();
     int maxX = numeric_limits<int>::min();
     int minY = numeric_limits<int>::max();
@@ -309,16 +316,32 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         if (p.y > maxY)
             maxY = p.y;
     }
-    int width = static_cast<int>(m_bd.get_geometry().get_width());
-    int height = static_cast<int>(m_bd.get_geometry().get_height());
+    int width = static_cast<int>(geometry.get_width());
+    int height = static_cast<int>(geometry.get_height());
     if (minX < 0)
+    {
         m_selectedPieceOffset.x -= minX;
+        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
+            ++m_selectedPieceOffset.x;
+    }
     if (maxX >=  width)
+    {
         m_selectedPieceOffset.x -= (maxX - width + 1);
+        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
+            --m_selectedPieceOffset.x;
+    }
     if (minY < 0)
+    {
         m_selectedPieceOffset.y -= minY;
+        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
+            ++m_selectedPieceOffset.y;
+    }
     if (maxY >=  height)
+    {
         m_selectedPieceOffset.y -= (maxY - height + 1);
+        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
+            --m_selectedPieceOffset.y;
+    }
 }
 
 void GuiBoard::setSelectedPieceTransform(const Transform* transform)

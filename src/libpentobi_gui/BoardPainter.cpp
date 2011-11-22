@@ -10,10 +10,12 @@
 
 #include <algorithm>
 #include "Util.h"
+#include "libboardgame_util/Log.h"
 #include "libpentobi_base/AdjIterator.h"
 #include "libpentobi_base/DiagIterator.h"
 
 using namespace std;
+using libboardgame_util::log;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::AdjIterator;
@@ -83,7 +85,14 @@ void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
         painter.setFont(m_fontUnderlined);
     else
         painter.setFont(m_font);
-    painter.drawText(x, y, width, height, Qt::AlignCenter, label);
+    QFontMetrics metrics(painter.font());
+    QRect boundingRect = metrics.boundingRect(label);
+    qreal dx = 0.5 * (width - boundingRect.width());
+    qreal dy = 0.5 * (height - boundingRect.height());
+    QRectF rect;
+    rect.setCoords(floor(x + dx), floor(y + dy),
+                   ceil(x + width - dx), ceil(y + height - dy));
+    painter.drawText(rect, label);
 }
 
 void BoardPainter::drawLabels(QPainter& painter,
@@ -127,14 +136,15 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
     if (m_selectedPiecePoints.empty())
         return;
     const Geometry& geometry = pointState.get_geometry();
+    bool isTrigon = (gameVariant == game_variant_trigon
+                     || gameVariant == game_variant_trigon_2);
     if (m_isSelectedPieceLegal)
     {
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
         {
             qreal fieldX = p.get_x() * m_fieldWidth;
             qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
-            if (gameVariant == game_variant_trigon
-                || gameVariant == game_variant_trigon_2)
+            if (isTrigon)
             {
                 bool isUpside = (geometry.get_point_type(p) == 1);
                 Util::paintColorTriangle(painter, gameVariant,
@@ -156,10 +166,43 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
         color.setAlpha(160);
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
         {
-            painter.fillRect(QRectF(p.get_x() * m_fieldWidth,
-                                    (m_height - p.get_y() - 1) * m_fieldHeight,
-                                    m_fieldWidth, m_fieldHeight),
-                             color);
+            painter.save();
+            painter.translate(p.get_x() * m_fieldWidth,
+                              (m_height - p.get_y() - 1) * m_fieldHeight);
+            if (isTrigon)
+            {
+                painter.setPen(Qt::NoPen);
+                painter.setBrush(color);
+                qreal left = -0.5 * m_fieldWidth;
+                qreal right = 1.5 * m_fieldWidth;
+                bool isUpside = (geometry.get_point_type(p) == 1);
+                if (isUpside)
+                {
+                    const QPointF polygon[3] =
+                        {
+                            QPointF(left, m_fieldHeight),
+                            QPointF(right, m_fieldHeight),
+                            QPointF(0.5 * m_fieldWidth, 0)
+                        };
+                    painter.drawConvexPolygon(polygon, 3);
+                }
+                else
+                {
+                    const QPointF polygon[3] =
+                        {
+                            QPointF(left, 0),
+                            QPointF(right, 0),
+                            QPointF(0.5 * m_fieldWidth, m_fieldHeight)
+                        };
+                    painter.drawConvexPolygon(polygon, 3);
+                }
+            }
+            else
+            {
+                painter.fillRect(QRectF(0, 0, m_fieldWidth, m_fieldHeight),
+                                 color);
+            }
+            painter.restore();
         }
     }
 }
@@ -183,19 +226,22 @@ QRect BoardPainter::getRect(Point p, GameVariant gameVariant) const
         return QRect();
     int x = p.get_x();
     int y = m_height - p.get_y() - 1;
-    int extraSpace = 2;
+    // Uses some extra space because overlong labels and antialiasing can
+    // affect neighboring fields
+    qreal extraWidth = min(0.5 * m_fieldWidth, 1.);
+    qreal extraHeight = min(0.2 * m_fieldHeight, 1.);
     if (gameVariant == game_variant_trigon
         || gameVariant == game_variant_trigon_2)
-        return QRect(round(m_boardOffset.x() + x * m_fieldWidth
-                           - 0.5 * m_fieldWidth - extraSpace),
-                     round(m_boardOffset.y() + y * m_fieldHeight - extraSpace),
-                     round(2 * m_fieldWidth + 2 * extraSpace),
-                     round(m_fieldHeight + 2 * extraSpace));
+        return QRect(round(m_boardOffset.x() + (x - 0.5) * m_fieldWidth
+                           - extraWidth),
+                     round(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
+                     round(2 * m_fieldWidth + 2 * extraWidth),
+                     round(m_fieldHeight + 2 * extraHeight));
     else
-        return QRect(round(m_boardOffset.x() + x * m_fieldWidth - extraSpace),
-                     round(m_boardOffset.y() + y * m_fieldHeight - extraSpace),
-                     round(m_fieldWidth + 2 * extraSpace),
-                     round(m_fieldHeight + 2 * extraSpace));
+        return QRect(round(m_boardOffset.x() + x * m_fieldWidth - extraWidth),
+                     round(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
+                     round(2 * m_fieldWidth + 2 * extraWidth),
+                     round(m_fieldHeight + 2 * extraHeight));
 }
 
 void BoardPainter::paint(QPainter& painter, unsigned int width,

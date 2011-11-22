@@ -62,7 +62,7 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
         {
             QColor color =
                 Util::getPaintColor(m_bd.get_game_variant(), m_color);
-            painter.setPen(color);
+            painter.setPen(Qt::NoPen);
             painter.setBrush(color);
             painter.drawEllipse(width() / 2 - 5, height() / 2 - 5, 10, 10);
         }

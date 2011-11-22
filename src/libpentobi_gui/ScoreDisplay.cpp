@@ -66,7 +66,7 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 {
     QColor color = Util::getPaintColor(m_gameVariant, c);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(color);
+    painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     painter.drawEllipse(x + 4, 4, 8, 8);
     painter.setPen(QApplication::palette().text().color());
@@ -77,11 +77,10 @@ void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
 {
     painter.setRenderHint(QPainter::Antialiasing, true);
     QColor color = Util::getPaintColor(m_gameVariant, c1);
-    painter.setPen(color);
+    painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     painter.drawEllipse(x + 4, 4, 8, 8);
     color = Util::getPaintColor(m_gameVariant, c2);
-    painter.setPen(color);
     painter.setBrush(color);
     painter.drawEllipse(x + 13, 4, 8, 8);
     painter.setPen(QApplication::palette().text().color());

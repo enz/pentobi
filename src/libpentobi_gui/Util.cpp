@@ -31,7 +31,7 @@ void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal width,
 {
     painter.save();
     painter.translate(x, y);
-    painter.setPen(color);
+    painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     painter.drawEllipse(QPointF(0.5 * width, 0.5 * height),
                         0.13 * width, 0.13 * height);
@@ -58,7 +58,7 @@ void paintSquare(QPainter& painter, qreal x, qreal y, qreal size,
                 QPointF(size, size),
                 QPointF(0, size)
             };
-        painter.setPen(downRightColor);
+        painter.setPen(Qt::NoPen);
         painter.setBrush(downRightColor);
         painter.drawPolygon(downRightPolygon, 6);
         const QPointF upLeftPolygon[6] =
@@ -70,7 +70,6 @@ void paintSquare(QPainter& painter, qreal x, qreal y, qreal size,
                 QPointF(border, size - border),
                 QPointF(0, size)
             };
-        painter.setPen(upLeftColor);
         painter.setBrush(upLeftColor);
         painter.drawPolygon(upLeftPolygon, 6);
     }
@@ -97,10 +96,10 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
                     QPointF(right, height),
                     QPointF(0.5 * width, 0)
                 };
-            painter.setPen(color);
+            painter.setPen(Qt::NoPen);
             painter.setBrush(color);
             painter.drawConvexPolygon(polygon, 3);
-            qreal border = 0.05 * width;
+            qreal border = 0.08 * width;
             const QPointF downRightPolygon[6] =
                 {
                     QPointF(left, height),
@@ -110,7 +109,6 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
                     QPointF(right - 1.732 * border, height - border),
                     QPointF(left + 1.732 * border, height - border)
                 };
-            painter.setPen(downRightColor);
             painter.setBrush(downRightColor);
             painter.drawPolygon(downRightPolygon, 6);
             const QPointF upLeftPolygon[4] =
@@ -120,7 +118,6 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
                     QPointF(left + 1.732 * border, height - border),
                     QPointF(left, height),
                 };
-            painter.setPen(upLeftColor);
             painter.setBrush(upLeftColor);
             painter.drawPolygon(upLeftPolygon, 4);
         }
@@ -132,7 +129,7 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
                     QPointF(right, 0),
                     QPointF(0.5 * width, height)
                 };
-            painter.setPen(color);
+            painter.setPen(Qt::NoPen);
             painter.setBrush(color);
             painter.drawConvexPolygon(polygon, 3);
             qreal border = 0.05 * width;
@@ -143,7 +140,6 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
                     QPointF(right - 1.732 * border, border),
                     QPointF(right, 0)
                 };
-            painter.setPen(downRightColor);
             painter.setBrush(downRightColor);
             painter.drawPolygon(downRightPolygon, 4);
             const QPointF upLeftPolygon[6] =
@@ -155,7 +151,6 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
                     QPointF(0.5 * width, height),
                     QPointF(left, 0)
                 };
-            painter.setPen(upLeftColor);
             painter.setBrush(upLeftColor);
             painter.drawPolygon(upLeftPolygon, 6);
         }
