@@ -49,10 +49,6 @@ using libpentobi_mcts::Search;
 
 namespace {
 
-/** Enable support for game variants Trigon amd Trigon Two-Player.
-    This is still work in progress and not ready to be enabled in releases. */
-const bool useTrigon = true;
-
 QToolButton* createOBoxToolButton(QAction* action)
 {
     QToolButton* button = new QToolButton();
@@ -131,9 +127,9 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
         variant = game_variant_duo;
     else if (variantString == "classic_2")
         variant = game_variant_classic_2;
-    else if (variantString == "trigon" && useTrigon)
+    else if (variantString == "trigon")
         variant = game_variant_trigon;
-    else if (variantString == "trigon_2" && useTrigon)
+    else if (variantString == "trigon_2")
         variant = game_variant_trigon_2;
     else
         variant = game_variant_classic;
@@ -972,11 +968,8 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantClassic);
     menuGameVariant->addAction(m_actionGameVariantClassic2);
     menuGameVariant->addAction(m_actionGameVariantDuo);
-    if (useTrigon)
-    {
-        menuGameVariant->addAction(m_actionGameVariantTrigon);
-        menuGameVariant->addAction(m_actionGameVariantTrigon2);
-    }
+    menuGameVariant->addAction(m_actionGameVariantTrigon);
+    menuGameVariant->addAction(m_actionGameVariantTrigon2);
     menuGame->addAction(m_actionComputerColor);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addAction(m_actionUndo);

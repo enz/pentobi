@@ -1,6 +1,7 @@
 Current development version
 ===========================
 
+* Support for game variants Trigon and Trigon Two-Player
 * Fixed saving/opening files if file name contained non-ASCII characters and
   the system used an encoding other than Latin1
 * The score numbers now show the total player and color scores instead of
