@@ -85,8 +85,9 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
     qreal left = -0.5 * width;
     qreal right = 1.5 * width;
     if (! painter.hasClipping()
-        || painter.clipRegion().contains(QRect(floor(left), 0,
-                                               ceil(right), ceil(height))))
+        || painter.clipRegion().contains(QRect(floor(left), -1,
+                                               ceil(right) - floor(left),
+                                               ceil(height + 2))))
     {
         if (isUpside)
         {
