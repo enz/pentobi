@@ -136,12 +136,51 @@ Move Player::genmove(Color c)
         max_time = m_fixed_time;
     else
     {
-        if (m_level <= 1)
-            max_count = 100;
-        else if (m_level >= 6)
-            max_count = ValueType(100 * pow(2.0, (6 - 1) * 2));
+        ValueType minimum;
+        ValueType factor_per_level;
+        if (variant == game_variant_classic
+            || variant == game_variant_classic_2)
+        {
+            // This is tuned such that the total thinking time per game at level
+            // 6 (the highest level selectable in the GUI) is not more than 20
+            // min even on somewhat older PC hardware (with the weighting of
+            // early moves as applied below), which seems the maximum waiting
+            // time that humans are willing to tolerate without complaints.
+            // The minumum value should not be much lower than the order of
+            // magnitude of the the branching factor.
+            // The multiplier per level is chosen to be 4 because typically
+            // doubling the number of simulations gives up to 100 Elo strength
+            // improvement in self-play experiments, but self-play
+            // overestimates the strength against other opponents, so with a
+            // factor of 4 we hopefully still get a noticable playing strength
+            // improvement of at least 100 Elo between levels.
+            minimum = 100;
+            factor_per_level = 4;
+        }
+        else if (variant == game_variant_trigon
+                 || variant == game_variant_trigon_2)
+        {
+            // Trigon has a higher branching factor and much slower simulations
+            // so we start with a higher number and don't increase the
+            // simulations as fast to avoid a low number of simulations wrt.
+            // the branching factor and still complete a game at level 6 in
+            // less than 20 min.
+            minimum = 140;
+            factor_per_level = 3.4;
+        }
         else
-            max_count = ValueType(100 * pow(2.0, (m_level - 1) * 2));
+        {
+            LIBBOARDGAME_ASSERT(variant == game_variant_duo);
+            // Duo has faster simulations than Classic, so we could do more
+            // simulations, but we don't want the engine to be much stronger on
+            // the same level as in Classic.
+            minimum = 100;
+            factor_per_level = 4;
+        }
+        if (m_level <= 1)
+            max_count = minimum;
+        else
+            max_count = ValueType(minimum * pow(factor_per_level, m_level - 1));
         if (use_weight_max_count)
         {
             unsigned int player_move = m_bd.get_nu_moves() / Color::range;
