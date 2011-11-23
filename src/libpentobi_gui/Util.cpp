@@ -27,14 +27,13 @@ const QColor yellow(235, 205, 35);
 const QColor gray(174, 167, 172);
 
 void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal width,
-              qreal height)
+              qreal height, qreal size)
 {
     painter.save();
     painter.translate(x, y);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
-    painter.drawEllipse(QPointF(0.5 * width, 0.5 * height),
-                        0.13 * width, 0.13 * height);
+    painter.drawEllipse(QPointF(0.5 * width, 0.5 * height), size, size);
     painter.restore();
 }
 
@@ -263,7 +262,7 @@ void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside,
     if (isUpside)
         y += 0.333 * height;
     height = 0.666 * height;
-    paintDot(painter, gray.darker(130), x, y, width, height);
+    paintDot(painter, gray.darker(130), x, y, width, height, 0.17 * width);
 }
 
 void Util::paintEmptySquareStartingPoint(QPainter& painter,
@@ -271,7 +270,8 @@ void Util::paintEmptySquareStartingPoint(QPainter& painter,
                                          qreal x, qreal y, qreal size)
 {
     paintEmptySquare(painter, x, y, size);
-    paintDot(painter, getPaintColor(gameVariant, c), x, y, size, size);
+    paintDot(painter, getPaintColor(gameVariant, c), x, y, size, size,
+             0.13 * size);
 }
 
 //-----------------------------------------------------------------------------
