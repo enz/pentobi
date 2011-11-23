@@ -52,23 +52,30 @@ const bool pure_random_playout = false;
 
 Point find_best_starting_point(const Board& bd, Color c)
 {
-    // We use the starting point that maximizes the (Manhattan) distance to
-    // all occupied starting points.
+    // We use the starting point that maximizes the distance to occupied
+    // starting points, especially to the ones occupied by the player (their
+    // distance is weighted with a factor of 2)
     Point best = Point::null();
-    int max_distance = -1;
+    float max_distance = -1;
     BOOST_FOREACH(Point p, bd.get_starting_points(c))
     {
         if (! bd.is_empty(p))
             continue;
-        int d = 0;
+        float d = 0;
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         {
             BOOST_FOREACH(Point pp, bd.get_starting_points(*i))
             {
-                if (! bd.is_empty(pp))
-                    d +=
-                        abs(int(pp.get_x() - p.get_x()))
-                        + abs(int(pp.get_y() - p.get_y()));
+                PointState s = bd.get_point_state(pp);
+                if (! s.is_empty())
+                {
+                    float dx = float(pp.get_x()) - p.get_x();
+                    float dy = 1.732 * (float(pp.get_y()) - p.get_y());
+                    float weight = 1;
+                    if (s == c || s == bd.get_second_color(c))
+                        weight = 2;
+                    d += weight * sqrt(dx * dx + dy * dy);
+                }
             }
         }
         if (d > max_distance)
