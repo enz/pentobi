@@ -17,6 +17,7 @@
 using namespace std;
 using libboardgame_base::Transform;
 using libboardgame_util::log;
+using libpentobi_base::board_type_trigon;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
@@ -149,56 +150,106 @@ void GuiBoard::moveSelectedPieceDown()
 {
     if (m_selectedPiece == 0)
         return;
-    unsigned int width = m_bd.get_geometry().get_width();
-    unsigned int height = m_bd.get_geometry().get_height();
+    const Geometry& geometry = m_bd.get_geometry();
+    CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(width / 2, height - 1);
-    else if (m_selectedPieceOffset.y > 0)
-        --m_selectedPieceOffset.y;
-    setSelectedPieceOffset(m_selectedPieceOffset);
-    updateSelectedPiecePoints();
+        newOffset =
+            CoordPoint(geometry.get_width() / 2, geometry.get_height() - 1);
+    else
+    {
+        newOffset = m_selectedPieceOffset;
+        if (m_bd.get_board_type() == board_type_trigon)
+        {
+            if (m_selectedPieceOffset.x % 2 == 0)
+                ++newOffset.x;
+            else
+                --newOffset.x;
+            --newOffset.y;
+        }
+        else
+            --newOffset.y;
+    }
+    if (geometry.is_onboard(newOffset))
+    {
+        setSelectedPieceOffset(newOffset);
+        updateSelectedPiecePoints();
+    }
 }
 
 void GuiBoard::moveSelectedPieceLeft()
 {
     if (m_selectedPiece == 0)
         return;
-    unsigned int width = m_bd.get_geometry().get_width();
-    unsigned int height = m_bd.get_geometry().get_height();
+    const Geometry& geometry = m_bd.get_geometry();
+    CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(width - 1, height / 2);
-    else if (m_selectedPieceOffset.x > 0)
-        --m_selectedPieceOffset.x;
-    setSelectedPieceOffset(m_selectedPieceOffset);
-    updateSelectedPiecePoints();
+        newOffset =
+            CoordPoint(geometry.get_width() - 1, geometry.get_height() / 2);
+    else
+    {
+        newOffset = m_selectedPieceOffset;
+        if (m_bd.get_board_type() == board_type_trigon)
+            newOffset.x -= 2;
+        else
+            --newOffset.x;
+    }
+    if (geometry.is_onboard(newOffset))
+    {
+        setSelectedPieceOffset(newOffset);
+        updateSelectedPiecePoints();
+    }
 }
 
 void GuiBoard::moveSelectedPieceRight()
 {
     if (m_selectedPiece == 0)
         return;
-    int width = static_cast<int>(m_bd.get_geometry().get_width());
-    int height = static_cast<int>(m_bd.get_geometry().get_height());
+    const Geometry& geometry = m_bd.get_geometry();
+    CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(0, height / 2);
-    else if (m_selectedPieceOffset.x < width - 1)
-        ++m_selectedPieceOffset.x;
-    setSelectedPieceOffset(m_selectedPieceOffset);
-    updateSelectedPiecePoints();
+        newOffset = CoordPoint(0, geometry.get_height() / 2);
+    else
+    {
+        newOffset = m_selectedPieceOffset;
+        if (m_bd.get_board_type() == board_type_trigon)
+            newOffset.x += 2;
+        else
+            ++newOffset.x;
+    }
+    if (geometry.is_onboard(newOffset))
+    {
+        setSelectedPieceOffset(newOffset);
+        updateSelectedPiecePoints();
+    }
 }
 
 void GuiBoard::moveSelectedPieceUp()
 {
     if (m_selectedPiece == 0)
         return;
-    int width = static_cast<int>(m_bd.get_geometry().get_width());
-    int height = static_cast<int>(m_bd.get_geometry().get_height());
+    const Geometry& geometry = m_bd.get_geometry();
+    CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
-        m_selectedPieceOffset = CoordPoint(width / 2, 0);
-    else if (m_selectedPieceOffset.y < height - 1)
-        ++m_selectedPieceOffset.y;
-    setSelectedPieceOffset(m_selectedPieceOffset);
-    updateSelectedPiecePoints();
+        newOffset = CoordPoint(geometry.get_width() / 2, 0);
+    else
+    {
+        newOffset = m_selectedPieceOffset;
+        if (m_bd.get_board_type() == board_type_trigon)
+        {
+            if (m_selectedPieceOffset.x % 2 == 0)
+                ++newOffset.x;
+            else
+                --newOffset.x;
+            ++newOffset.y;
+        }
+        else
+            ++newOffset.y;
+    }
+    if (geometry.is_onboard(newOffset))
+    {
+        setSelectedPieceOffset(newOffset);
+        updateSelectedPiecePoints();
+    }
 }
 
 void GuiBoard::paintEvent(QPaintEvent* event)
@@ -287,61 +338,41 @@ void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
     setSelectedPieceOffset(m_boardPainter.getCoordPoint(event.x(), event.y()));
 }
 
-void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
+void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset,
+                                      bool requireOnboard)
 {
-    if (m_selectedPieceOffset.is_null())
+    if (offset.is_null())
     {
         m_selectedPieceOffset = offset;
         return;
     }
     const Geometry& geometry = m_bd.get_geometry();
+    unsigned int old_point_type = geometry.get_point_type(offset);
     unsigned int point_type = m_selectedPieceTransform->get_new_point_type();
-    if (geometry.get_point_type(offset) != point_type)
-        return;
-    m_selectedPieceOffset = offset;
-    int minX = numeric_limits<int>::max();
-    int maxX = numeric_limits<int>::min();
-    int minY = numeric_limits<int>::max();
-    int maxY = numeric_limits<int>::min();
-    BOOST_FOREACH(const CoordPoint& piecePoint, m_selectedPiece->get_points())
+    CoordPoint type_matching_offset = offset;
+    if (old_point_type != point_type)
     {
-        CoordPoint p = m_selectedPieceTransform->get_transformed(piecePoint);
-        p = p + m_selectedPieceOffset;
-        if (p.x < minX)
-            minX = p.x;
-        if (p.x > maxX)
-            maxX = p.x;
-        if (p.y < minY)
-            minY = p.y;
-        if (p.y > maxY)
-            maxY = p.y;
+        if ((point_type == 0
+             && geometry.is_onboard(CoordPoint(offset.x + 1, offset.y)))
+            || (point_type == 1
+                && ! geometry.is_onboard(CoordPoint(offset.x - 1, offset.y))))
+            ++type_matching_offset.x;
+        else
+            --type_matching_offset.x;
     }
-    int width = static_cast<int>(geometry.get_width());
-    int height = static_cast<int>(geometry.get_height());
-    if (minX < 0)
+    if (requireOnboard)
     {
-        m_selectedPieceOffset.x -= minX;
-        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
-            ++m_selectedPieceOffset.x;
+        BOOST_FOREACH(const CoordPoint& piecePoint,
+                      m_selectedPiece->get_points())
+        {
+            CoordPoint p =
+                m_selectedPieceTransform->get_transformed(piecePoint);
+            p = p + type_matching_offset;
+            if (! geometry.is_onboard(p))
+                return;
+        }
     }
-    if (maxX >=  width)
-    {
-        m_selectedPieceOffset.x -= (maxX - width + 1);
-        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
-            --m_selectedPieceOffset.x;
-    }
-    if (minY < 0)
-    {
-        m_selectedPieceOffset.y -= minY;
-        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
-            ++m_selectedPieceOffset.y;
-    }
-    if (maxY >=  height)
-    {
-        m_selectedPieceOffset.y -= (maxY - height + 1);
-        if (geometry.get_point_type(m_selectedPieceOffset) != point_type)
-            --m_selectedPieceOffset.y;
-    }
+    m_selectedPieceOffset = type_matching_offset;
 }
 
 void GuiBoard::setSelectedPieceTransform(const Transform* transform)
@@ -349,7 +380,7 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
     if (m_selectedPieceTransform == transform)
         return;
     m_selectedPieceTransform = transform;
-    setSelectedPieceOffset(m_selectedPieceOffset);
+    setSelectedPieceOffset(m_selectedPieceOffset, false);
     updateSelectedPiecePoints();
 }
 
