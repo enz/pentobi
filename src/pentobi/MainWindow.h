@@ -452,6 +452,8 @@ private:
 
     bool computerPlaysAll() const;
 
+    void deleteAutoSaveFile();
+
     void genMove();
 
     const Board& getBoard() const;

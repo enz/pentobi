@@ -373,21 +373,10 @@ bool MainWindow::checkQuit()
         }
     }
     cancelGenMove();
-    const Board& bd = getBoard();
-    if (m_file.isEmpty())
+    if (m_file.isEmpty() && ! m_gameFinished)
     {
-        QString autoSaveFile = getAutoSaveFile();
-        if (bd.get_nu_moves() > 0 && ! m_gameFinished)
-        {
-            ofstream out(autoSaveFile.toStdString().c_str());
-            write_tree(out, m_game->get_root(), true, 2);
-        }
-        else
-        {
-            QFile file(autoSaveFile);
-            if (file.exists() && ! file.remove())
-                showError(tr("Could not delete %1").arg(autoSaveFile));
-        }
+        ofstream out(getAutoSaveFile().toStdString().c_str());
+        write_tree(out, m_game->get_root(), true, 2);
     }
     QSettings settings;
     settings.setValue("geometry", saveGeometry());
@@ -1141,6 +1130,14 @@ void MainWindow::createToolBar()
     m_actionShowToolbar->setText(tr("&Toolbar"));
 }
 
+void MainWindow::deleteAutoSaveFile()
+{
+    QString autoSaveFile = getAutoSaveFile();
+    QFile file(autoSaveFile);
+    if (file.exists() && ! file.remove())
+        showError(tr("Could not delete %1").arg(autoSaveFile));
+}
+
 void MainWindow::end()
 {
     gotoNode(get_last_node(m_game->get_current()));
@@ -1638,6 +1635,7 @@ void MainWindow::newGame()
         return;
     cancelGenMove();
     initGame();
+    deleteAutoSaveFile();
     updateWindow(true);
 }
 
@@ -1760,8 +1758,9 @@ void MainWindow::play(Color c, Move mv)
     {
         updateWindow(true);
         repaint();
-        m_gameFinished = true;
         showGameOver();
+        m_gameFinished = true;
+        deleteAutoSaveFile();
     }
     else if (! bd.has_moves(c))
     {
