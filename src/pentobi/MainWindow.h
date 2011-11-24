@@ -117,6 +117,8 @@ public slots:
 
     void saveAs();
 
+    void selectNextColor();
+
     void selectPiece1();
 
     void selectPiece2();
@@ -350,6 +352,8 @@ private:
     QAction* m_actionShowComment;
 
     QAction* m_actionShowToolbar;
+
+    QAction* m_actionSelectNextColor;
 
     QAction* m_actionSelectPiece1;
 

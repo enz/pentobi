@@ -782,6 +782,11 @@ void MainWindow::createActions()
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), this, SLOT(saveAs()));
 
+    m_actionSelectNextColor = new QAction(tr("Select Next &Color"), this);
+    m_actionSelectNextColor->setShortcut(QString("Ctrl+C"));
+    connect(m_actionSelectNextColor, SIGNAL(triggered()),
+            this, SLOT(selectNextColor()));
+
     m_actionSelectPiece1 = new QAction(this);
     m_actionSelectPiece1->setShortcut(QString("1"));
     connect(m_actionSelectPiece1, SIGNAL(triggered()),
@@ -998,6 +1003,7 @@ void MainWindow::createMenu()
     m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionTruncate);
+    menuEdit->addAction(m_actionSelectNextColor);
 
     QMenu* menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
@@ -1790,9 +1796,8 @@ void MainWindow::previousPiece()
     const Board& bd = getBoard();
     if (bd.is_game_over())
         return;
-    Color c = m_game->get_effective_to_play();
     const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
-        bd.get_pieces_left(c);
+        bd.get_pieces_left(m_toPlay);
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
@@ -1811,7 +1816,7 @@ void MainWindow::previousPiece()
                 break;
             }
     }
-    selectPiece(c, *piece);
+    selectPiece(m_toPlay, *piece);
 }
 
 void MainWindow::previousTransform()
@@ -1937,20 +1942,22 @@ void MainWindow::saveAs()
 void MainWindow::selectNamedPiece(const char* name1, const char* name2,
                                   const char* name3, const char* name4)
 {
-    vector<const Piece*> pieces;
-    Color c = m_game->get_effective_to_play();
     const Board& bd = getBoard();
+    if (bd.is_game_over())
+        return;
+    vector<const Piece*> pieces;
     const Piece* piece;
-    if (bd.get_piece_by_name(name1, piece) && bd.is_piece_left(c, *piece))
+    if (bd.get_piece_by_name(name1, piece)
+        && bd.is_piece_left(m_toPlay, *piece))
         pieces.push_back(piece);
     if (name2 != 0 && bd.get_piece_by_name(name2, piece)
-        && bd.is_piece_left(c, *piece))
+        && bd.is_piece_left(m_toPlay, *piece))
         pieces.push_back(piece);
     if (name3 != 0 && bd.get_piece_by_name(name3, piece)
-        && bd.is_piece_left(c, *piece))
+        && bd.is_piece_left(m_toPlay, *piece))
         pieces.push_back(piece);
     if (name4 != 0 && bd.get_piece_by_name(name4, piece)
-        && bd.is_piece_left(c, *piece))
+        && bd.is_piece_left(m_toPlay, *piece))
         pieces.push_back(piece);
     if (pieces.empty())
         return;
@@ -1971,7 +1978,17 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
                 piece = *pos;
         }
     }
-    selectPiece(c, *piece);
+    selectPiece(m_toPlay, *piece);
+}
+
+void MainWindow::selectNextColor()
+{
+    const Board& bd = getBoard();
+    if (bd.is_game_over())
+        return;
+    m_toPlay = m_toPlay.get_next(bd.get_nu_colors());
+    m_orientationDisplay->selectColor(m_toPlay);
+    clearSelectedPiece();
 }
 
 void MainWindow::selectPiece(Color c, const Piece& piece)

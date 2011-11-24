@@ -5,7 +5,10 @@ Current development version
 * Fixed saving/opening files if file name contained non-ASCII characters and
   the system used an encoding other than Latin1
 * The score numbers now show the total player and color scores instead of
-  on-board and bonus points separatedly.
+  on-board and bonus points separatedly (feature request #3431039)
+* New menu item "Edit/Select Next Color" that allows to enter moves independent
+  of the color to play on the board (feature request #3441299)
+
 
 Version 0.2 (17 Oct 2011)
 =========================
