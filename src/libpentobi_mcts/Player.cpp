@@ -60,7 +60,7 @@ Player::Player(const Board& bd, GameVariant game_variant,
         if (i == 0)
         {
             weight_max_count_classic[i] *= ValueType(0.2);
-            weight_max_count_trigon[i] *= ValueType(0.3);
+            weight_max_count_trigon[i] *= ValueType(0.2);
             weight_max_count_duo[i] *= ValueType(0.6);
         }
         else if (i == 1)
@@ -71,7 +71,11 @@ Player::Player(const Board& bd, GameVariant game_variant,
         else if (i == 2)
         {
             weight_max_count_classic[i] *= ValueType(0.3);
-            weight_max_count_trigon[i] *= ValueType(0.7);
+            weight_max_count_trigon[i] *= ValueType(0.6);
+        }
+        else if (i == 3)
+        {
+            weight_max_count_trigon[i] *= ValueType(0.8);
         }
     }
 }
@@ -157,7 +161,7 @@ Move Player::genmove(Color c)
                  || variant == game_variant_trigon_2)
         {
             minimum = 200;
-            factor_per_level = 2.8;
+            factor_per_level = 2.9;
         }
         else
         {

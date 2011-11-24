@@ -397,9 +397,11 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     }
     else if (board_type == board_type_trigon)
     {
-        if (nu_moves < 8)
+        if (nu_moves < 16)
             min_piece_size = 6;
         else if (nu_moves < 20)
+            min_piece_size = 5;
+        else if (nu_moves < 28)
             min_piece_size = 4;
     }
     for (unsigned int i = 0; i < moves.size(); ++i)
