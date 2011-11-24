@@ -53,9 +53,6 @@ struct SharedConst
     /** Maximum value to modify the win/loss result by the score. */
     ValueType score_modification;
 
-    /** Distance to center heuristic for 20x20 boards. */
-    Grid<unsigned int> m_dist_to_center;
-
     /** Lookup table for symmetric points (only used in Duo). */
     SymmetricPoints m_symmetric_points;
 
@@ -192,6 +189,9 @@ private:
     bool m_check_symmetric_draw;
 
     bool m_is_symmetry_broken;
+
+    /** Distance to center heuristic for 20x20 boards. */
+    Grid<unsigned int> m_dist_to_center;
 
     /** Not implemented. */
     State& operator=(const State&);

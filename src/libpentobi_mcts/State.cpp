@@ -10,6 +10,7 @@
 
 #include <cmath>
 #include "libboardgame_util/Log.h"
+#include "libboardgame_util/MathUtil.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/DiagIterator.h"
@@ -22,12 +23,16 @@ using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_mcts::Tree;
 using libboardgame_util::log;
+using libpentobi_base::board_type_classic;
+using libpentobi_base::board_type_duo;
+using libpentobi_base::board_type_trigon;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::BoardIterator;
+using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::DiagIterator;
@@ -35,6 +40,7 @@ using libpentobi_base::Direction;
 using libpentobi_base::FullGrid;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
+using libpentobi_base::GeometryIterator;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
@@ -57,6 +63,7 @@ Point find_best_starting_point(const Board& bd, Color c)
     // distance is weighted with a factor of 2)
     Point best = Point::null();
     float max_distance = -1;
+    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732 : 1);
     BOOST_FOREACH(Point p, bd.get_starting_points(c))
     {
         if (! bd.is_empty(p))
@@ -70,7 +77,7 @@ Point find_best_starting_point(const Board& bd, Color c)
                 if (! s.is_empty())
                 {
                     float dx = float(pp.get_x()) - p.get_x();
-                    float dy = 1.732 * (float(pp.get_y()) - p.get_y());
+                    float dy = ratio * (float(pp.get_y()) - p.get_y());
                     float weight = 1;
                     if (s == c || s == bd.get_second_color(c))
                         weight = 2;
@@ -118,21 +125,6 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       avoid_symmetric_draw(false),
       score_modification(ValueType(0.1))
 {
-    unsigned int sz = 20;
-    const Geometry* geometry = RectGeometry<Point>::get(sz, sz);
-    LIBBOARDGAME_ASSERT(sz % 2 == 0);
-    unsigned int center1 = sz / 2 - 1;
-    unsigned int center2 = center1 + 1;
-    m_dist_to_center.init(*geometry);
-    for (unsigned int x = 0; x < sz; ++x)
-        for (unsigned int y = 0; y < sz; ++y)
-        {
-            unsigned int dist_x = (x <= center1 ? center1 - x : x - center2);
-            unsigned int dist_y = (y <= center1 ? center1 - y : y - center2);
-            m_dist_to_center[Point(x, y)] =
-                (unsigned int)(sqrt(float(dist_x * dist_x + dist_y * dist_y)));
-        }
-    //log() << "Dist to center:\n" << m_dist_to_center;
     m_symmetric_points.init(*RectGeometry<Point>::get(14, 14));
 }
 
@@ -176,7 +168,7 @@ void State::compute_features()
 {
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
-    GameVariant variant = m_bd.get_game_variant();
+    BoardType board_type = m_bd.get_board_type();
     const ArrayList<Move, Move::range>& moves = *m_moves[to_play];
     Grid<int> opp_attach_point_val(m_bd.get_geometry());
     for (BoardIterator i(m_bd); i; ++i)
@@ -195,8 +187,8 @@ void State::compute_features()
     m_max_heuristic = -numeric_limits<ValueType>::max();
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
     bool compute_dist_to_center =
-        ((variant == game_variant_classic_2 || variant == game_variant_classic)
-         && m_bd.get_nu_moves() < 13);
+        ((board_type == board_type_classic && m_bd.get_nu_moves() < 13)
+         || (board_type == board_type_trigon && m_bd.get_nu_moves() < 5));
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
@@ -219,8 +211,7 @@ void State::compute_features()
         {
             BOOST_FOREACH(Point p, info.points)
                 features.dist_to_center =
-                    min(features.dist_to_center,
-                        m_shared_const.m_dist_to_center[p]);
+                    min(features.dist_to_center, m_dist_to_center[p]);
             m_min_dist_to_center =
                 min(m_min_dist_to_center, features.dist_to_center);
         }
@@ -387,26 +378,24 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
                 }
         }
     }
-    GameVariant variant = m_bd.get_game_variant();
+    BoardType board_type = m_bd.get_board_type();
     unsigned int nu_moves = m_bd.get_nu_moves();
     unsigned int min_piece_size = 0;
-    if (variant == game_variant_duo)
+    if (board_type == board_type_duo)
     {
         if (nu_moves < 4)
             min_piece_size = 5;
         else if (nu_moves < 6)
             min_piece_size = 4;
     }
-    else if (variant == game_variant_classic
-             || variant == game_variant_classic_2)
+    else if (board_type == board_type_classic)
     {
         if (nu_moves < 12)
             min_piece_size = 5;
         else if (nu_moves < 20)
             min_piece_size = 4;
     }
-    else if (variant == game_variant_trigon
-             || variant == game_variant_trigon_2)
+    else if (board_type == board_type_trigon)
     {
         if (nu_moves < 8)
             min_piece_size = 6;
@@ -643,6 +632,25 @@ void State::start_search()
          && m_shared_const.detect_symmetry
          && ! (m_shared_const.to_play == Color(1)
                && m_shared_const.avoid_symmetric_draw));
+
+    // Init m_dist_to_center
+    m_dist_to_center.init(geometry);
+    float center_x = 0.5 * geometry.get_width() - 0.5;
+    float center_y = 0.5 * geometry.get_height() - 0.5;
+    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732 : 1);
+    for (GeometryIterator i(geometry); i; ++i)
+    {
+        float x = i->get_x();
+        float y = i->get_y();
+        float dx = x - center_x;
+        float dy = ratio * (y - center_y);
+        // Multiply Euklidian distance by 4, so that distances that differ
+        // by max. 0.25 are treated as equal
+        float d =
+            libboardgame_util::math_util::round(4 * sqrt(dx * dx + dy * dy));
+        m_dist_to_center[*i] = static_cast<unsigned int>(d);
+    }
+    //log() << "Dist to center:\n" << m_dist_to_center;
 }
 
 void State::start_simulation(size_t n)
