@@ -53,7 +53,7 @@ Player::Player(const Board& bd, GameVariant game_variant,
         // the average time per game is roughly the same.
         weight_max_count_duo[i] = ValueType(0.7 * exp(0.1 * i));
         weight_max_count_classic[i] = weight_max_count_duo[i];
-        weight_max_count_trigon[i] = ValueType(0.3) * weight_max_count_duo[i];
+        weight_max_count_trigon[i] = weight_max_count_duo[i];
         // Less weight for the first move(s) because number of legal moves
         // is lower and the search applies some pruning rules to reduce the
         // branching factor in early moves
@@ -136,46 +136,34 @@ Move Player::genmove(Color c)
         max_time = m_fixed_time;
     else
     {
+        // The minimum number of simulations and increase factor per level are
+        // chosen such that the number of simulations is at minimum in the same
+        // order of magnitude than the typical branching factor (or a bit less),
+        // and that the total time per game and player at level 6 is less than
+        // 20 min (10 min for Duo) even on somewhat outdated PC hardware. (This
+        // also takes the additional weighting of the number of simulations
+        // depending on the move number into account.)
+        // The increase factor should be no less than 2 to produce a noticable
+        // effect on playing strength between levels.
         ValueType minimum;
         ValueType factor_per_level;
         if (variant == game_variant_classic
             || variant == game_variant_classic_2)
         {
-            // This is tuned such that the total thinking time per game at level
-            // 6 (the highest level selectable in the GUI) is not more than 20
-            // min even on somewhat older PC hardware (with the weighting of
-            // early moves as applied below), which seems the maximum waiting
-            // time that humans are willing to tolerate without complaints.
-            // The minumum value should not be much lower than the order of
-            // magnitude of the the branching factor.
-            // The multiplier per level is chosen to be 4 because typically
-            // doubling the number of simulations gives up to 100 Elo strength
-            // improvement in self-play experiments, but self-play
-            // overestimates the strength against other opponents, so with a
-            // factor of 4 we hopefully still get a noticable playing strength
-            // improvement of at least 100 Elo between levels.
             minimum = 100;
             factor_per_level = 4;
         }
         else if (variant == game_variant_trigon
                  || variant == game_variant_trigon_2)
         {
-            // Trigon has a higher branching factor and much slower simulations
-            // so we start with a higher number and don't increase the
-            // simulations as fast to avoid a low number of simulations wrt.
-            // the branching factor and still complete a game at level 6 in
-            // less than 20 min.
-            minimum = 140;
-            factor_per_level = 3.4;
+            minimum = 200;
+            factor_per_level = 2.8;
         }
         else
         {
             LIBBOARDGAME_ASSERT(variant == game_variant_duo);
-            // Duo has faster simulations than Classic, so we could do more
-            // simulations, but we don't want the engine to be much stronger on
-            // the same level as in Classic.
             minimum = 100;
-            factor_per_level = 4;
+            factor_per_level = 4.7;
         }
         if (m_level <= 1)
             max_count = minimum;
