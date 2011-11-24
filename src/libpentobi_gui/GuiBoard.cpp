@@ -153,8 +153,12 @@ void GuiBoard::moveSelectedPieceDown()
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
+    {
         newOffset =
             CoordPoint(geometry.get_width() / 2, geometry.get_height() - 1);
+        setSelectedPieceOffset(newOffset, false);
+        updateSelectedPiecePoints();
+    }
     else
     {
         newOffset = m_selectedPieceOffset;
@@ -168,11 +172,11 @@ void GuiBoard::moveSelectedPieceDown()
         }
         else
             --newOffset.y;
-    }
-    if (geometry.is_onboard(newOffset))
-    {
-        setSelectedPieceOffset(newOffset);
-        updateSelectedPiecePoints();
+        if (geometry.is_onboard(newOffset))
+        {
+            setSelectedPieceOffset(newOffset);
+            updateSelectedPiecePoints();
+        }
     }
 }
 
@@ -183,8 +187,12 @@ void GuiBoard::moveSelectedPieceLeft()
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
+    {
         newOffset =
             CoordPoint(geometry.get_width() - 1, geometry.get_height() / 2);
+        setSelectedPieceOffset(newOffset, false);
+        updateSelectedPiecePoints();
+    }
     else
     {
         newOffset = m_selectedPieceOffset;
@@ -192,11 +200,11 @@ void GuiBoard::moveSelectedPieceLeft()
             newOffset.x -= 2;
         else
             --newOffset.x;
-    }
-    if (geometry.is_onboard(newOffset))
-    {
-        setSelectedPieceOffset(newOffset);
-        updateSelectedPiecePoints();
+        if (geometry.is_onboard(newOffset))
+        {
+            setSelectedPieceOffset(newOffset);
+            updateSelectedPiecePoints();
+        }
     }
 }
 
@@ -207,7 +215,11 @@ void GuiBoard::moveSelectedPieceRight()
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
+    {
         newOffset = CoordPoint(0, geometry.get_height() / 2);
+        setSelectedPieceOffset(newOffset, false);
+        updateSelectedPiecePoints();
+    }
     else
     {
         newOffset = m_selectedPieceOffset;
@@ -215,11 +227,11 @@ void GuiBoard::moveSelectedPieceRight()
             newOffset.x += 2;
         else
             ++newOffset.x;
-    }
-    if (geometry.is_onboard(newOffset))
-    {
-        setSelectedPieceOffset(newOffset);
-        updateSelectedPiecePoints();
+        if (geometry.is_onboard(newOffset))
+        {
+            setSelectedPieceOffset(newOffset);
+            updateSelectedPiecePoints();
+        }
     }
 }
 
@@ -230,7 +242,11 @@ void GuiBoard::moveSelectedPieceUp()
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
+    {
         newOffset = CoordPoint(geometry.get_width() / 2, 0);
+        setSelectedPieceOffset(newOffset, false);
+        updateSelectedPiecePoints();
+    }
     else
     {
         newOffset = m_selectedPieceOffset;
@@ -244,11 +260,11 @@ void GuiBoard::moveSelectedPieceUp()
         }
         else
             ++newOffset.y;
-    }
-    if (geometry.is_onboard(newOffset))
-    {
-        setSelectedPieceOffset(newOffset);
-        updateSelectedPiecePoints();
+        if (geometry.is_onboard(newOffset))
+        {
+            setSelectedPieceOffset(newOffset);
+            updateSelectedPiecePoints();
+        }
     }
 }
 
