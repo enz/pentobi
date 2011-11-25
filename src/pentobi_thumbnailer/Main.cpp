@@ -10,6 +10,7 @@
 #include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
+#include "libpentobi_base/Tree.h"
 #include "libpentobi_gui/BoardPainter.h"
 
 using namespace std;
@@ -82,78 +83,14 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     const Node* node = &root;
     while (node != 0)
     {
-        Color c = Color(0); // initialize to avoid compiler warning
-        string id;
-        vector<string> values;
-        if (gameVariant == game_variant_duo)
+        Color c;
+        MovePoints points;
+        if (libpentobi_base::Tree::get_move(*node, gameVariant, c, points))
         {
-            if (node->has_property("B"))
+            BOOST_FOREACH(Point p, points)
             {
-                id = "B";
-                c = Color(0);
-            }
-            else if (node->has_property("W"))
-            {
-                id = "W";
-                c = Color(1);
-            }
-        }
-        else
-        {
-            if (node->has_property("1"))
-            {
-                id = "1";
-                c = Color(0);
-            }
-            else if (node->has_property("2"))
-            {
-                id = "2";
-                c = Color(1);
-            }
-            else if (node->has_property("3"))
-            {
-                id = "3";
-                c = Color(2);
-            }
-            else if (node->has_property("4"))
-            {
-                id = "4";
-                c = Color(3);
-            }
-            else if (node->has_property("BLUE"))
-            {
-                id = "BLUE";
-                c = Color(0);
-            }
-            else if (node->has_property("YELLOW"))
-            {
-                id = "YELLOW";
-                c = Color(1);
-            }
-            else if (node->has_property("RED"))
-            {
-                id = "RED";
-                c = Color(2);
-            }
-            else if (node->has_property("GREEN"))
-            {
-                id = "GREEN";
-                c = Color(3);
-            }
-        }
-        if (! id.empty())
-        {
-            values = node->get_multi_property(id);
-            if (! (values.size() == 1 && values[0].empty()))
-            {
-                BOOST_FOREACH(const string& s, values)
-                {
-                    if (trim_copy(s).empty())
-                        return false;
-                    Point p = Point::from_string(s);
-                    if (geometry->is_onboard(p))
-                        pointState[p] = c;
-                }
+                if (geometry->is_onboard(p))
+                    pointState[p] = c;
             }
         }
         node = node->get_first_child_or_null();

@@ -16,6 +16,8 @@
 
 namespace libpentobi_base {
 
+using boost::is_any_of;
+using boost::split;
 using boost::trim_copy;
 using boost::algorithm::to_lower_copy;
 using libboardgame_sgf::ChildIterator;
@@ -45,12 +47,11 @@ const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
     return 0;
 }
 
-ColorMove Tree::get_move(const Node& node) const
+bool Tree::get_move(const Node& node, GameVariant game_variant, Color& c,
+                    MovePoints& points)
 {
-    Color c = Color(0); // Initialize to avoid compiler warning
     string id;
-    vector<string> values;
-    if (m_game_variant == game_variant_duo)
+    if (game_variant == game_variant_duo)
     {
         if (node.has_property("B"))
         {
@@ -109,22 +110,34 @@ ColorMove Tree::get_move(const Node& node) const
         }
     }
     if (id.empty())
-        return ColorMove::null();
+        return false;
+    vector<string> values;
     values = node.get_multi_property(id);
-    if (values.size() == 1 && values[0].empty())
-        return ColorMove(c, Move::pass());
-    MovePoints points;
+    // Note: we still support having the points of a move in a list of point
+    // values instead of a single value as used by Pentobi <= 0.2, but it
+    // is deprecated
+    points.clear();
     BOOST_FOREACH(const string& s, values)
     {
         if (trim_copy(s).empty())
-            throw InvalidPropertyValue("Move contains pass point");
-        points.push_back(Point::from_string(s));
+            continue;
+        vector<string> v;
+        split(v, s, is_any_of(","));
+        BOOST_FOREACH(const string& p_str, v)
+            points.push_back(Point::from_string(p_str));
     }
+    return true;
+}
+
+ColorMove Tree::get_move(const Node& node) const
+{
+    Color c;
+    MovePoints points;
+    if (! get_move(node, m_game_variant, c, points))
+        return ColorMove::null();
     Move mv;
     if (! m_board_const->find_move(points, mv))
-        throw InvalidPropertyValue(id,
-                                   format("Illegal move %1%")
-                                   % to_string(points));
+        throw Exception(format("Illegal move %1%") % to_string(points));
     return ColorMove(c, mv);
 }
 
@@ -263,15 +276,21 @@ void Tree::set_move(const Node& node, Color c, Move mv)
         else if (c == Color(3))
             id = "4";
     }
-    vector<string> values;
     if (! mv.is_pass())
     {
+        ostringstream value;
+        bool is_first = true;
         BOOST_FOREACH(Point p, m_board_const->get_move_points(mv))
-            values.push_back(p.to_string());
+        {
+            if (! is_first)
+                value << ',';
+            value << p;
+            is_first = false;
+        }
+        set_property(node, id, value.str());
     }
     else
-        values.push_back("");
-    set_property(node, id, values);
+        set_property(node, id, "");
 }
 
 void Tree::set_player_name(Color c, const string& name)

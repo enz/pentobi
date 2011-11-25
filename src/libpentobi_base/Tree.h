@@ -39,8 +39,24 @@ public:
 
     void set_move(const Node& node, Color c, Move mv);
 
-    /** Return move or ColorMove::null() if node has no move property. */
+    /** Return move or ColorMove::null() if node has no move property.
+        @throws Exception if the node has a move property with an invalid
+        value. */
     ColorMove get_move(const Node& node) const;
+
+    /** Static version of get_move(const Node&).
+        Provided for use cases in which it is too much overhead to use
+        a libpentobi_base::Tree because of the costly BoardConst construction
+        (e.g. the Pentobi thumbnailer).
+        @param node
+        @param game_variant
+        @param[out] c The move color (only defined if return value is true)
+        @param[out] points The move points (only defined if return value is
+        true)
+        @return true if the node has a move property and the move is not a pass
+        move. */
+    static bool get_move(const Node& node, GameVariant game_variant, Color& c,
+                         MovePoints& points);
 
     bool has_move(const Node& node) const;
 

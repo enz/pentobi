@@ -82,8 +82,8 @@
       first color.
     </p>
     <p>
-      Note that old versions of Pentobi (before version 0.2) used the
-      properties <tt>BLUE</tt>, <tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt>
+      Note: old versions of Pentobi (<= version 0.1) used the properties
+      <tt>BLUE</tt>, <tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt>
       in the four-player game variants, which did not reflect the current state
       of discussion for SGF 5.
       Although current versions of Pentobi can still read games containing the
@@ -124,12 +124,21 @@
 
     <h2>Move properties</h2>
     <p>
-      The value of a move property is a point list with the coordinates
-      of all fields occupied by the played piece on the board.
-      Compressed point lists are not supported.
+      The value of a move property is a string with the coordinates of the
+      played piece on the board separated by commas.
+      No whitespace characters are allowed before, after, or in-between
+      the coordinates.
     </p>
     <p>
-      Example: <tt>B[f9][e10][f10][g10][f11]</tt>
+      Example: <tt>B[f9,e10,f10,g10,f11]</tt>
+    </p>
+    <p>
+      Note: old versions of Pentobi (<= 0.2) used to represent moves by
+      a list of points, which was different to how moves are represented
+      in other games in SGF 4.
+      Although current versions of Pentobi can still read games containing the
+      old move properties, they are deprecated and it is not recommended to use
+      them.
     </p>
   </body>
 </html>
