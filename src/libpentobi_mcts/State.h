@@ -190,7 +190,7 @@ private:
 
     bool m_is_symmetry_broken;
 
-    /** Distance to center heuristic for 20x20 boards. */
+    /** Distance to center heuristic. */
     Grid<unsigned int> m_dist_to_center;
 
     /** Not implemented. */
