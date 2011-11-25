@@ -92,7 +92,7 @@ void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
     qreal dy = 0.5 * (height - boundingRect.height());
     QRectF rect;
     rect.setCoords(floor(x + dx), floor(y + dy),
-                   ceil(x + width - dx), ceil(y + height - dy));
+                   ceil(x + width - dx + 1), ceil(y + height - dy + 1));
     painter.drawText(rect, label);
 }
 
