@@ -93,8 +93,7 @@ public:
 
     /** Fast removal of element.
         Does not preserve the order of elements. The element will be replaced
-        with the last element and the list size decremented.
-        @return @c true if value was removed. */
+        with the last element and the list size decremented. */
     void remove_fast(iterator i);
 
     /** Fast removal of first occurance of value.
