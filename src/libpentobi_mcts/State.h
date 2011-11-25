@@ -144,7 +144,7 @@ private:
     /** Incrementally updated lists of legal moves for both colors.
         Only the move list for the color to play van be used in any given
         position, the other color is not updated immediately after a move. */
-    ColorMap<unique_ptr<ArrayList<Move, Move::range>>> m_moves;
+    ColorMap<ArrayList<Move, Move::range>> m_moves;
 
     ArrayList<MoveFeatures, Move::range> m_features;
 
@@ -161,10 +161,6 @@ private:
         These moves occupy at least one of the corner points of the last
         piece played. */
     ArrayList<Move, Move::range> m_local_moves;
-
-    /** Local variable during update.
-        Reused for efficiency. */
-    unique_ptr<ArrayList<Move, Move::range>> m_tmp_moves;
 
     /** Local variable during update.
         Reused for efficiency. */
