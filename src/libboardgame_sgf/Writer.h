@@ -67,7 +67,7 @@ template<typename T>
 void Writer::write_property(const string& identifier, const vector<T>& values)
 {
     m_out << identifier;
-    BOOST_FOREACH(string i, values)
+    BOOST_FOREACH(const T& i, values)
         m_out << '[' << get_escaped(to_string(i)) << ']';
 }
 
