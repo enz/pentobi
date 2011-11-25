@@ -36,6 +36,8 @@ public:
 
     typedef const T* const_iterator;
 
+    typedef T value_type;
+
     static const unsigned int max_size = M;
 
     ArrayList();
