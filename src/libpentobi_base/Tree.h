@@ -20,6 +20,9 @@ using libboardgame_sgf::Node;
 
 //-----------------------------------------------------------------------------
 
+/** Blokus SGF tree.
+    See also doc/blksgf/Blokus-SGF.html in the Pentobi distribution for
+    a description of the properties used. */
 class Tree
     : public libboardgame_sgf::Tree
 {

@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <title>Blokus SGF Files</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+
+    <h1>Blokus SGF Files</h1>
+    <p>
+      <i>Version 1.0</i>
+    </p>
+    <p>
+      This document describes the file format for
+      <a href="http://en.wikipedia.org/wiki/Blokus">Blokus</a>
+      games as used by the program
+      <a href="http://pentobi.sourceforge.net">Pentobi</a>.
+      The most recent version of this document can be found in the source
+      distribution of Pentobi in the folder pentobi/doc/blksgf.
+    </p>
+
+    <h2>Introduction</h2>
+    <p>
+      The file format is a derivative of the
+      <a href="http://www.red-bean.com/sgf/">Smart Game Format</a> (SGF).
+      The current SGF version 4 does not define standard properties for Blokus.
+      Therefore, a number of game-specific properties and value types
+      had to be defined.
+      The definitions follow the recommendations of SGF 4 and proposals
+      for multi-player games from the discussions about the future SGF 5.
+    </p>
+
+    <h2>File extension and MIME type</h2>
+    <p>
+      The file extension <tt>.blksgf</tt> and the
+      <a href="http://en.wikipedia.org/wiki/Internet_media_type">MIME type</a>
+      <tt>application/x-blokus-sgf</tt> are used for Blokus SGF files.
+    </p>
+
+    <h2>Character set</h2>
+    <p>
+      Although not specific to Blokus, it is recommended to use
+      <a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> as the character
+      set.
+      Pentobi always writes files in UTF-8 and indicates that with the
+      <tt>CA</tt> property in the file.
+      Pentobi can read SGF files encoded in UTF-8 or Latin1.
+    </p>
+
+    <h2>Game property</h2>
+    <p>
+      Since there is no number for Blokus defined in SGF 4, a string
+      instead of a number is used for the <tt>GM</tt> property.
+      Currently, the following strings are used:
+      <ul>
+	<li><tt>Blokus</tt></li>
+	<li><tt>Blokus Two-Player</tt></li>
+	<li><tt>Blokus Duo</tt></li>
+	<li><tt>Blokus Trigon</tt></li>
+	<li><tt>Blokus Trigon Two-Player</tt></li>
+      </ul>
+      The strings are case-sensitive, words are separated by exactly one space
+      and no additional whitespace at the beginning or end of the string is
+      allowed.
+    </p>
+
+    <h2>Color and player properties</h2>
+    <p>
+      In game variants with two players and colors, <tt>B</tt> denotes the
+      first player or color, <tt>W</tt> the second player or color.
+      In game variants with four players and colors, <tt>1</tt>, <tt>2</tt>,
+      <tt>3</tt>, <tt>4</tt> denote the first, second, third, and fourth
+      player or color.
+      In game variants with two players and four colors, <tt>B</tt> denotes the
+      first player, <tt>W</tt> the second player, and <tt>1</tt>, <tt>2</tt>,
+      <tt>3</tt>, <tt>4</tt> denote the first, second, third, and fourth color.
+      This applies to move properties and properties related to a player
+      or a color.
+    </p>
+    <p>
+      Example: in the game variant Blokus Two-Player <tt>PW</tt>
+      is the name of the first player, and <tt>1</tt> is the a move of the
+      first color.
+    </p>
+    <p>
+      Note that old versions of Pentobi (before version 0.2) used the
+      properties <tt>BLUE</tt>, <tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt>
+      in the four-player game variants, which did not reflect the current state
+      of discussion for SGF 5.
+      Although current versions of Pentobi can still read games containing the
+      old properties, they are deprecated and it is not recommended to use them.
+    </p>
+
+    <h2>Coordinate system</h2>
+    <p>
+      Fields on the board (called points in SGF) are identified by a
+      case-insensitive string with a letter for the column, followed by a
+      number for the row.
+      The letters start with 'a', the numbers start with '1'.
+      The lower left corner of the board is a1.
+      The strings are not allowed to contain whitespaces.
+      Note that, unlike the common convention in the game of Go, the letter
+      'j' is also used.
+    </p>
+    <p>
+      If there are more than 26 columns, the columns continue with 'aa', 'ab',
+      ..., 'ba', 'bb', ... More than 26 columns are presently required for the
+      game Trigon and may be required for supporting future game variants on
+      boards larger than 20&times;20.
+    </p>
+
+    <p>
+      For Trigon, hexagonal boards are mapped to rectangular coordinates
+      as in the following example of a hexagon with edge size 3:
+      <pre>
+       6     / \ / \ / \ / \
+       5   / \ / \ / \ / \ / \
+       4 / \ / \ / \ / \ / \ / \
+       3 \ / \ / \ / \ / \ / \ /
+       2   \ / \ / \ / \ / \ /
+       1     \ / \ / \ / \ /
+          a b c d e f g h i j k
+      </pre>
+    </p>
+
+    <h2>Move properties</h2>
+    <p>
+      The value of a move property is a point list with the coordinates
+      of all fields occupied by the played piece on the board.
+      Compressed point lists are not supported.
+    </p>
+    <p>
+      Example: <tt>B[f9][e10][f10][g10][f11]</tt>
+    </p>
+  </body>
+</html>
