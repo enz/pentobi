@@ -82,12 +82,13 @@
       first color.
     </p>
     <p>
-      Note: old versions of Pentobi (<= version 0.1) used the properties
+      <b>Note</b><br/>
+      Old versions of Pentobi (<= version 0.1) used the properties
       <tt>BLUE</tt>, <tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt>
       in the four-player game variants, which did not reflect the current state
       of discussion for SGF 5.
-      Although current versions of Pentobi can still read games containing the
-      old properties, they are deprecated and it is not recommended to use them.
+      Current versions of Pentobi can still read games containing the old
+      properties but they are deprecated and should no longer be used.
     </p>
 
     <h2>Coordinate system</h2>
@@ -96,10 +97,10 @@
       case-insensitive string with a letter for the column, followed by a
       number for the row.
       The letters start with 'a', the numbers start with '1'.
-      The lower left corner of the board is a1.
+      The lower left corner of the board is 'a1'.
       The strings are not allowed to contain whitespaces.
       Note that, unlike the common convention in the game of Go, the letter
-      'j' is also used.
+      'j' is used.
     </p>
     <p>
       If there are more than 26 columns, the columns continue with 'aa', 'ab',
@@ -133,12 +134,11 @@
       Example: <tt>B[f9,e10,f10,g10,f11]</tt>
     </p>
     <p>
-      Note: old versions of Pentobi (<= 0.2) used to represent moves by
-      a list of points, which was different to how moves are represented
-      in other games in SGF 4.
-      Although current versions of Pentobi can still read games containing the
-      old move properties, they are deprecated and it is not recommended to use
-      them.
+      <b>Note</b><br/>
+      Old versions of Pentobi (<= 0.2) used to represent moves by a list of
+      points, which did not follow the convention used by other games in SGF.
+      Current versions of Pentobi can still read games containing the old
+      move property values but they are deprecated and should no longer be used.
     </p>
   </body>
 </html>
