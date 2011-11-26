@@ -16,6 +16,7 @@
 
 namespace libpentobi_base {
 
+using libboardgame_util::NullTermList;
 using libpentobi_base::ColorMap;
 using libpentobi_base::PointState;
 using libpentobi_base::PointStateExt;
@@ -324,6 +325,17 @@ inline Board::Iterator::Iterator(const Board& bd)
 inline bool Board::find_move(const MovePoints& points, Move& move) const
 {
     return m_board_const->find_move(points, move);
+}
+
+inline unsigned int Board::get_adj_status_index(Point p, Color c) const
+{
+    unsigned int result = 0;
+    unsigned int n = 0;
+    for (NullTermList<Point, 12>::Iterator i(m_geometry->get_adj_diag(p));
+         n < BoardConst::adj_status_nu_adj && i; ++i, ++n)
+        if (is_forbidden(*i, c))
+            result |= (1 << n);
+    return result;
 }
 
 inline const BoardConst& Board::get_board_const() const

@@ -8,8 +8,6 @@
 
 #include "Board.h"
 
-#include "AdjDiagIterator.h"
-#include "DiagIterator.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
@@ -178,17 +176,6 @@ void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
             }
         }
     }
-}
-
-unsigned int Board::get_adj_status_index(Point p, Color c) const
-{
-    unsigned int result = 0;
-    unsigned int n = 0;
-    for (AdjDiagIterator i(*m_geometry, p);
-         n < BoardConst::adj_status_nu_adj && i; ++i, ++n)
-        if (is_forbidden(*i, c))
-            result |= (1 << n);
-    return result;
 }
 
 unsigned int Board::get_bonus(Color c) const
