@@ -771,7 +771,7 @@ void MainWindow::createActions()
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), this, SLOT(saveAs()));
 
-    m_actionSelectNextColor = new QAction(tr("Select Next &Color"), this);
+    m_actionSelectNextColor = new QAction(tr("&Select Next Color"), this);
     m_actionSelectNextColor->setShortcut(QString("Ctrl+C"));
     connect(m_actionSelectNextColor, SIGNAL(triggered()),
             this, SLOT(selectNextColor()));
