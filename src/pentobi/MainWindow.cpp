@@ -1573,8 +1573,6 @@ void MainWindow::makeMainVariation()
 void MainWindow::nextPiece()
 {
     const Board& bd = getBoard();
-    if (bd.is_game_over())
-        return;
     const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
         bd.get_pieces_left(m_toPlay);
     unsigned int nuPiecesLeft = piecesLeft.size();
@@ -1793,8 +1791,6 @@ void MainWindow::play(Color c, Move mv)
 void MainWindow::previousPiece()
 {
     const Board& bd = getBoard();
-    if (bd.is_game_over())
-        return;
     const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
         bd.get_pieces_left(m_toPlay);
     unsigned int nuPiecesLeft = piecesLeft.size();
@@ -1942,8 +1938,6 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
                                   const char* name3, const char* name4)
 {
     const Board& bd = getBoard();
-    if (bd.is_game_over())
-        return;
     vector<const Piece*> pieces;
     const Piece* piece;
     if (bd.get_piece_by_name(name1, piece)
@@ -1983,8 +1977,6 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
 void MainWindow::selectNextColor()
 {
     const Board& bd = getBoard();
-    if (bd.is_game_over())
-        return;
     m_toPlay = m_toPlay.get_next(bd.get_nu_colors());
     m_orientationDisplay->selectColor(m_toPlay);
     clearSelectedPiece();
@@ -2660,7 +2652,6 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_legalMoves->clear();
     m_legalMoveIndex = 0;
     bool isGameOver = bd.is_game_over();
-    unsigned int nuPiecesLeft = bd.get_pieces_left(m_toPlay).size();
     if (isGameOver)
         m_orientationDisplay->clearSelectedColor();
     else
@@ -2680,7 +2671,6 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
     bool isMain = is_main_variation(current);
-    bool noPieceSelected = (m_guiBoard->getSelectedPiece() == 0);
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move(current);
@@ -2694,12 +2684,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionFindMove->setEnabled(! isGameOver);
     m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
     m_actionMakeMainVariation->setEnabled(! isMain);
-    m_actionNextPiece->setEnabled(! isGameOver
-                                  && (nuPiecesLeft > 1
-                                      || (nuPiecesLeft == 1
-                                          && noPieceSelected)));
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
-    m_actionPreviousPiece->setEnabled(! isGameOver && nuPiecesLeft > 1);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     m_actionTruncate->setEnabled(hasParent);
     m_actionUndo->setEnabled(hasParent || ! hasChildren || hasMove);
