@@ -141,18 +141,16 @@ ColorMove Tree::get_move(const Node& node) const
     return ColorMove(c, mv);
 }
 
-const Node* Tree::get_node_with_move_number(unsigned int move_number) const
+const Node* Tree::get_node_before_move_number(unsigned int move_number) const
 {
     const Node* node = &get_root();
     unsigned int n = 0;
-    while (true)
+    while (node->has_children())
     {
-        if (! get_move(*node).is_null())
-            if (++n == move_number)
+        const Node& child = node->get_first_child();
+        if (! get_move(child).is_null() && n++ == move_number)
                 return node;
-        if (! node->has_children())
-            break;
-        node = &node->get_child();
+        node = &child;
     }
     return 0;
 }

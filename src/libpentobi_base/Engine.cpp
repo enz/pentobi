@@ -118,7 +118,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
     path file = args.get<path>(0);
     int move_number = -1;
     if (args.get_size() == 2)
-        move_number = args.get_min<int>(1, 1);
+        move_number = args.get_min<int>(1, 1) - 1;
     try
     {
         TreeReader reader;
@@ -127,7 +127,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
         m_game.init(tree);
         const Node* node = 0;
         if (move_number != -1)
-            node = m_game.get_tree().get_node_with_move_number(move_number - 1);
+            node = m_game.get_tree().get_node_before_move_number(move_number);
         if (node == 0)
             node = &get_last_node(m_game.get_root());
         m_game.goto_node(*node);
