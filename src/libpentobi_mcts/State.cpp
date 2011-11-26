@@ -411,7 +411,19 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             continue;
         // Make heuristic relative to best move and scale it to [0..1]
         ValueType heuristic =
-            exp(ValueType(-0.3) * (m_max_heuristic - features.heuristic));
+            ValueType(0.3) * (m_max_heuristic - features.heuristic);
+
+        // Quickly squash to [0..1] roughly as in exp(-x)  (and make sure it
+        // stays greater than 0 and is monotonically decreasing)
+        if (heuristic < 0.5)
+            heuristic = 1. - 0.9 * heuristic;
+        else if (heuristic < 2)
+            heuristic = 0.45 - 0.2 * (heuristic - 0.45);
+        else if (heuristic < 4)
+            heuristic = 0.27 - 0.08 * (heuristic - 0.27);
+        else
+            heuristic = 0.0248 / (heuristic - 3.0);
+
         ValueType value = 1 * (ValueType(0.1) + ValueType(0.9) * heuristic);
         ValueType count = 1;
         // Encourage to explore a move that keeps or breaks symmetry
@@ -617,7 +629,8 @@ void State::play(const Move& mv)
             update_move_list(to_play);
         else
             init_move_list(to_play);
-        update_symmetry_info(mv);
+        if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+            update_symmetry_info(mv);
     }
     if (log_simulations)
         log() << m_bd;
@@ -763,8 +776,6 @@ void State::update_move_list(Color c)
 
 void State::update_symmetry_info(Move mv)
 {
-    if (! m_check_symmetric_draw || m_is_symmetry_broken)
-        return;
     if (mv.is_pass())
     {
         // Don't try to handle pass moves: a pass move either breaks symmetry
