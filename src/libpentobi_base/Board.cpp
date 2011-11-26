@@ -124,17 +124,14 @@ void Board::copy_from(const Board& bd)
         play(bd.get_move(i));
 }
 
-void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves,
-                      Point fixed_starting_point) const
+void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 {
     moves.clear();
     bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
     if (is_first_move)
     {
         BOOST_FOREACH(Point p, get_starting_points(c))
-            if (! m_forbidden[c][p]
-                && (fixed_starting_point.is_null()
-                    || p == fixed_starting_point))
+            if (! m_forbidden[c][p])
                 gen_moves(c, p, m_marker, moves);
     }
     else

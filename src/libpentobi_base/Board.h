@@ -169,12 +169,11 @@ public:
     ColorMove get_move(unsigned int n) const;
 
     /** Generate all moves for one player.
-        The generated moves do not include the pass move.
-        @param fixed_starting_point If not Point::null(), then only this
-        point will be used as a starting point even if the color has more
-        than one starting point. */
-    void gen_moves(Color c, ArrayList<Move, Move::range>& moves,
-                   Point fixed_starting_point = Point::null()) const;
+        The generated moves do not include the pass move. */
+    void gen_moves(Color c, ArrayList<Move, Move::range>& moves) const;
+
+    void gen_moves(Color c, Point p, MoveMarker& marker,
+                   ArrayList<Move, Move::range>& moves) const;
 
     bool has_moves(Color c) const;
 
@@ -296,9 +295,6 @@ private:
     /** Local variable during move generation.
         Reused for efficiency. */
     mutable MoveMarker m_marker;
-
-    void gen_moves(Color c, Point p, MoveMarker& marker,
-                   ArrayList<Move, Move::range>& moves) const;
 
     void gen_moves(Color c, Point p, unsigned int adj_status_index,
                    MoveMarker& marker,

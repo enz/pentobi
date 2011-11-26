@@ -472,29 +472,52 @@ void State::init_local_points()
 
 void State::init_move_list(Color c)
 {
-    // Using only one starting point (if game variant has more than one) not
-    // only reduces the branching factor but is also necessary because
-    // update_move_list() assumes that a move stays legal if the forbidden
-    // status for all of its points does not change.
-    Point fixed_starting_point = Point::null();
-    bool is_first_move =
-        (m_bd.get_pieces_left(c).size() == m_bd.get_nu_pieces());
-    if (is_first_move)
-        fixed_starting_point = find_best_starting_point(m_bd, c);
-    ArrayList<Move, Move::range>& moves = m_moves[c];
-    m_bd.gen_moves(c, moves, fixed_starting_point);
     m_last_move[c] = Move::null();
     init_local_points();
     m_local_moves.clear();
     m_max_local = 1;
-    for (auto i = moves.begin(); i != moves.end(); ++i)
+    ArrayList<Move, Move::range>& moves = m_moves[c];
+    moves.clear();
+    bool is_first_move =
+        (m_bd.get_pieces_left(c).size() == m_bd.get_nu_pieces());
+    if (is_first_move)
     {
-        const MovePoints& points = m_bd.get_move_points(*i);
-        int nu_local = 0;
-        for (auto j = points.begin(); j != points.end(); ++j)
-            nu_local += m_local_points_marker[*j];
-        check_local_move(nu_local, *i);
+        // Using only one starting point (if game variant has more than one) not
+        // only reduces the branching factor but is also necessary because
+        // update_move_list() assumes that a move stays legal if the forbidden
+        // status for all of its points does not change.
+        Point fixed_starting_point = find_best_starting_point(m_bd, c);
+        BOOST_FOREACH(Point p, m_bd.get_starting_points(c))
+            if (! m_bd.is_forbidden(p, c)
+                && (fixed_starting_point.is_null()
+                    || p == fixed_starting_point))
+                m_bd.gen_moves(c, p, m_marker, moves);
     }
+    else
+    {
+        for (BoardIterator i(m_bd); i; ++i)
+            if (m_bd.is_attach_point(*i, c) && ! m_bd.is_forbidden(*i, c))
+            {
+                unsigned int adj_status = m_bd.get_adj_status_index(*i, c);
+                BOOST_FOREACH(unsigned int j, m_bd.get_pieces_left(c))
+                {
+                    BOOST_FOREACH(Move mv, m_bd.get_moves(j, *i, adj_status))
+                    {
+                        if (m_marker[mv])
+                            continue;
+                        int nu_local;
+                        const MoveInfo& info = m_bd.get_move_info(mv);
+                        if (! is_forbidden(c, info.points, nu_local))
+                        {
+                            moves.push_back(mv);
+                            m_marker.set(mv);
+                            check_local_move(nu_local, mv);
+                        }
+                    }
+                }
+            }
+    }
+    m_marker.clear(moves);
     clear_local_points();
     m_is_move_list_initialized[c] = true;
 }

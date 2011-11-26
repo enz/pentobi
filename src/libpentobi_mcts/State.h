@@ -162,7 +162,7 @@ private:
         piece played. */
     ArrayList<Move, Move::range> m_local_moves;
 
-    /** Local variable during update.
+    /** Local variable during initializing and updating of move lists.
         Reused for efficiency. */
     MoveMarker m_marker;
 
