@@ -2024,12 +2024,12 @@ void MainWindow::selectPieceC()
 
 void MainWindow::selectPieceF()
 {
-    selectNamedPiece("F6", "F");
+    selectNamedPiece("F");
 }
 
 void MainWindow::selectPieceG()
 {
-    selectNamedPiece("G6");
+    selectNamedPiece("G");
 }
 
 void MainWindow::selectPieceI()
@@ -2049,7 +2049,7 @@ void MainWindow::selectPieceN()
 
 void MainWindow::selectPieceO()
 {
-    selectNamedPiece("O6", "O");
+    selectNamedPiece("O");
 }
 
 void MainWindow::selectPieceP()
@@ -2059,7 +2059,7 @@ void MainWindow::selectPieceP()
 
 void MainWindow::selectPieceS()
 {
-    selectNamedPiece("S6");
+    selectNamedPiece("S");
 }
 
 void MainWindow::selectPieceT()
@@ -2074,22 +2074,22 @@ void MainWindow::selectPieceU()
 
 void MainWindow::selectPieceV()
 {
-    selectNamedPiece("V6", "V5", "V3");
+    selectNamedPiece("V", "V5", "V3");
 }
 
 void MainWindow::selectPieceW()
 {
-    selectNamedPiece("W6", "W");
+    selectNamedPiece("W");
 }
 
 void MainWindow::selectPieceX()
 {
-    selectNamedPiece("X6", "X");
+    selectNamedPiece("X");
 }
 
 void MainWindow::selectPieceY()
 {
-    selectNamedPiece("Y6", "Y");
+    selectNamedPiece("Y");
 }
 
 void MainWindow::selectPieceZ()
