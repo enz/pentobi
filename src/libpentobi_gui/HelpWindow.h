@@ -29,6 +29,11 @@ public:
     static QString findMainPage(QString dir, QString file, QString locale);
 
     HelpWindow(QWidget* parent, const QString& mainPage);
+
+    QSize sizeHint() const;
+
+protected:
+    void closeEvent(QCloseEvent* event);
 };
 
 //-----------------------------------------------------------------------------

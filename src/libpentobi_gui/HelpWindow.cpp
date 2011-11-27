@@ -48,7 +48,9 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     toolBar->addAction(actionForward);
     toolBar->addAction(actionHome);
     addToolBar(toolBar);
-    resize(480, 600);
+    QSettings settings;
+    if (! restoreGeometry(settings.value("helpwindow_geometry").toByteArray()))
+        adjustSize();
 }
 
 QString HelpWindow::findMainPage(QString dir, QString file, QString locale)
@@ -62,6 +64,18 @@ QString HelpWindow::findMainPage(QString dir, QString file, QString locale)
     if (QFile(path).exists())
         return path;
     return dir + "/en/" + file;
+}
+
+void HelpWindow::closeEvent(QCloseEvent* event)
+{
+    QSettings settings;
+    settings.setValue("helpwindow_geometry", saveGeometry());
+    QMainWindow::closeEvent(event);
+}
+
+QSize HelpWindow::sizeHint() const
+{
+    return QSize(480, 800);
 }
 
 //-----------------------------------------------------------------------------
