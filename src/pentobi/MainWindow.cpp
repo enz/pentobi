@@ -1980,6 +1980,8 @@ void MainWindow::selectNextColor()
     m_toPlay = m_toPlay.get_next(bd.get_nu_colors());
     m_orientationDisplay->selectColor(m_toPlay);
     clearSelectedPiece();
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
 }
 
 void MainWindow::selectPiece(Color c, const Piece& piece)
