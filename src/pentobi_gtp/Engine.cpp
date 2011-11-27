@@ -101,6 +101,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "detect_symmetry " << s.get_detect_symmetry() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
+            << "last_good_reply " << s.get_last_good_reply() << '\n'
             << "level " << p.get_level() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
             << "use_book " << p.get_use_book() << '\n'
@@ -119,6 +120,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_expand_threshold(args.get<ValueType>(1));
         else if (name == "fixed_simulations")
             p.set_fixed_simulations(args.get<ValueType>(1));
+        else if (name == "last_good_reply")
+            s.set_last_good_reply(args.get<bool>(1));
         else if (name == "level")
             p.set_level(args.get<int>(1));
         else if (name == "score_modification")
@@ -145,7 +148,7 @@ void Engine::cmd_gen_playout_move(Response& response)
     state.start_search();
     state.start_simulation(0);
     state.start_playout();
-    if (! state.gen_and_play_playout_move())
+    if (! state.gen_and_play_playout_move(Move::null()))
         throw Failure("terminal playout position");
     const Board& bd = get_board();
     response << bd.to_string(state.get_move(state.get_nu_moves() - 1).move);

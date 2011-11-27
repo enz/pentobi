@@ -9,6 +9,7 @@
 #include "libboardgame_mcts/Tree.h"
 #include "libboardgame_mcts/ValueType.h"
 #include "libboardgame_util/RandomGenerator.h"
+#include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/Unused.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/ColorMap.h"
@@ -23,6 +24,8 @@ using libboardgame_mcts::PlayerMove;
 using libboardgame_mcts::ValueType;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
+using libboardgame_util::Statistics;
+using libboardgame_util::StatisticsBase;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMove;
@@ -85,7 +88,7 @@ public:
 
     /** Generate and play a playout move.
         @return @c false if end of game was reached, and no move was played */
-    bool gen_and_play_playout_move();
+    bool gen_and_play_playout_move(Move last_good_reply);
 
     array<ValueType, 4> evaluate_playout();
 
@@ -102,9 +105,7 @@ public:
 
     void dump(ostream& out) const;
 
-    void write_playout_info(ostream& out) const;
-
-    ValueType get_mean_score() const;
+    void write_info(ostream& out) const;
 
 private:
     struct MoveFeatures
@@ -175,7 +176,9 @@ private:
     /** Precomputed State::m_score_modification / BoardConst::max_score. */
     ValueType m_score_modification_factor;
 
-    ValueType m_score_sum;
+    Statistics m_stat_score;
+
+    StatisticsBase m_stat_last_good_reply;
 
     /** Number of simulations of this state in the current search.
         Currently identical to Search::get_nu_simulations() but could be
@@ -210,11 +213,6 @@ private:
 
     void update_symmetry_info(Move mv);
 };
-
-inline ValueType State::get_mean_score() const
-{
-    return m_score_sum / m_nu_simulations;
-}
 
 inline PlayerMove<Move> State::get_move(unsigned int n) const
 {

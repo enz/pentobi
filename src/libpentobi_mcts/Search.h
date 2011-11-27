@@ -23,6 +23,8 @@ public:
 
     ~Search() throw();
 
+    unsigned int get_nu_players() const;
+
     /** Get player to play at root node of the search. */
     unsigned int get_player() const;
 
@@ -72,6 +74,11 @@ inline const Board& Search::get_board() const
 inline bool Search::get_detect_symmetry() const
 {
     return m_shared_const.detect_symmetry;
+}
+
+inline unsigned int Search::get_nu_players() const
+{
+    return get_board().get_nu_colors();
 }
 
 inline unsigned int Search::get_player() const

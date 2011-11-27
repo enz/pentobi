@@ -10,7 +10,7 @@
 #include <functional>
 #include <boost/format.hpp>
 #include "ChildIterator.h"
-#include "PlayerMove.h"
+#include "ReplyTable.h"
 #include "Tree.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/FastLog.h"
@@ -50,7 +50,7 @@ public:
 
     typedef M Move;
 
-    static const unsigned int nu_players = P;
+    static const unsigned int max_players = P;
 
     typedef libboardgame_mcts::Node<M> Node;
 
@@ -68,6 +68,8 @@ public:
 
     /** Get string representation of a move. */
     virtual string get_move_string(Move mv) const = 0;
+
+    virtual unsigned int get_nu_players() const = 0;
 
     virtual unsigned int get_player() const = 0;
 
@@ -137,6 +139,20 @@ public:
     void set_weight_rave_updates(bool enable);
 
     bool get_weight_rave_updates() const;
+
+    /** Enable Last-Good-Reply heuristic.
+        Uses LGRF-1 to remember good reply moves and passes them to the
+        gen_and_play_playout_move() function of the state, which needs to check
+        if the reply is legal in the current position and decide when and if
+        to use it for the playout move. Can only be use in games, in which the
+        sequence of players does not changed.
+        See Baier, Drake: The Power of Forgetting: Improving the Last-Good-Reply
+        Policy in Monte-Carlo Go. (2010)
+        http://webdisk.lclark.edu/drake/publications/baier-drake-ieee-2010.pdf
+        @see ReplyTable */
+    void set_last_good_reply(bool enable);
+
+    bool get_last_good_reply() const;
 
     /** See get_reuse_param() */
     const Parameters& get_last_reuse_param() const;
@@ -259,6 +275,8 @@ private:
 
     bool m_weight_rave_updates;
 
+    bool m_use_last_good_reply;
+
     /** Player to play at the root node of the search. */
     unsigned int m_player;
 
@@ -293,7 +311,7 @@ private:
     /** Local variable for update_rave_values().
         Stores the first time a move was played for each player.
         Reused for efficiency. */
-    array<array<size_t, Move::range>, nu_players> m_first_play;
+    array<array<size_t, Move::range>, max_players> m_first_play;
 
     FastLog m_fast_log;
 
@@ -312,6 +330,8 @@ private:
 
     function<void(double, double)> m_callback;
 
+    ReplyTable<S,M,P> m_reply_table;
+
     bool check_abort() const;
 
     bool check_abort_expensive() const;
@@ -329,12 +349,14 @@ private:
 
     const Node* select_child(const Node& node);
 
-    void update_rave_values(const array<ValueType, nu_players>& eval);
+    void update_last_good_reply(const array<ValueType, max_players>& eval);
 
-    void update_rave_values(const array<ValueType, nu_players>&, size_t i,
+    void update_rave_values(const array<ValueType, max_players>& eval);
+
+    void update_rave_values(const array<ValueType, max_players>&, size_t i,
                             unsigned int player);
 
-    void update_values(const array<ValueType, nu_players>& eval);
+    void update_values(const array<ValueType, max_players>& eval);
 };
 
 template<class S, class M, unsigned int P>
@@ -367,6 +389,7 @@ Search<S, M, P>::Search(const State& state)
       m_rave(false),
       m_rave_check_same(false),
       m_weight_rave_updates(true),
+      m_use_last_good_reply(false),
       m_unexplored_value(numeric_limits<ValueType>::max()),
       m_prune_count_start(16),
       m_rave_equivalence(1000),
@@ -379,7 +402,7 @@ Search<S, M, P>::Search(const State& state)
 {
     set_bias_term_constant(0.7f);
     set_tree_memory(m_tree_memory);
-    for (unsigned int i = 0; i < nu_players; ++i)
+    for (unsigned int i = 0; i < max_players; ++i)
         m_first_play[i].fill(numeric_limits<size_t>::max());
 }
 
@@ -517,6 +540,12 @@ ValueType Search<S, M, P>::get_expand_threshold() const
 }
 
 template<class S, class M, unsigned int P>
+bool Search<S, M, P>::get_last_good_reply() const
+{
+    return m_use_last_good_reply;
+}
+
+template<class S, class M, unsigned int P>
 const Parameters& Search<S, M, P>::get_last_reuse_param() const
 {
     return m_last_reuse_param;
@@ -640,8 +669,20 @@ void Search<S, M, P>::playout()
 {
     m_state.start_playout();
     while (true)
-        if (! m_state.gen_and_play_playout_move())
+    {
+        Move last_good_reply = Move::null();
+        if (m_use_last_good_reply)
+        {
+            unsigned int nu_moves = m_state.get_nu_moves();
+            if (nu_moves > 0)
+            {
+                PlayerMove last_move = m_state.get_move(nu_moves - 1);
+                last_good_reply = m_reply_table.get_reply(last_move);
+            }
+        }
+        if (! m_state.gen_and_play_playout_move(last_good_reply))
             break;
+    }
 }
 
 template<class S, class M, unsigned int P>
@@ -738,6 +779,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
     m_player = get_player();
     m_stat_len.clear();
     m_stat_in_tree_len.clear();
+    if (m_use_last_good_reply)
+        m_reply_table.init(get_nu_players());
     if (init_tree != 0)
         m_tree.swap(*init_tree);
     else if (clear_tree)
@@ -780,7 +823,7 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
             }
         }
         m_stat_in_tree_len.add(double(m_state.get_nu_moves()));
-        array<ValueType, nu_players> eval;
+        array<ValueType, max_players> eval;
         if (! is_terminal)
         {
             playout();
@@ -792,6 +835,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
         update_values(eval);
         if (m_rave)
             update_rave_values(eval);
+        if (m_use_last_good_reply)
+            update_last_good_reply(eval);
         on_search_iteration(m_nu_simulations, m_simulation);
         ++m_nu_simulations;
     }
@@ -977,6 +1022,12 @@ void Search<S, M, P>::set_expand_threshold(ValueType n)
 }
 
 template<class S, class M, unsigned int P>
+void Search<S, M, P>::set_last_good_reply(bool enable)
+{
+    m_use_last_good_reply = enable;
+}
+
+template<class S, class M, unsigned int P>
 void Search<S, M, P>::set_prune_count_start(ValueType n)
 {
     m_prune_count_start = n;
@@ -1034,8 +1085,38 @@ void Search<S, M, P>::set_widening_parameter(ValueType value)
 }
 
 template<class S, class M, unsigned int P>
+void Search<S, M, P>::update_last_good_reply(
+                                      const array<ValueType, max_players>& eval)
+{
+    unsigned int nu_players = get_nu_players();
+    ValueType max_eval = eval[0];
+    for (unsigned int i = 1; i < nu_players; ++i)
+        max_eval = max(eval[i], max_eval);
+    array<bool,max_players> is_winner;
+    for (unsigned int i = 0; i < nu_players; ++i)
+        // Note: this handles a draw as a win. Without additional information
+        // we cannot make a good decision how to handle draws and some
+        // experiments in Blokus Duo showed (with low confidence) that treating
+        // them as a win for both players is slighly better than treating them
+        // as a loss for both.
+        is_winner[i] = (eval[i] == max_eval);
+    unsigned int nu_moves = m_state.get_nu_moves();
+    // Iterate backwards to store 1st reply if a move was played more than once
+    if (nu_moves > 1)
+        for (unsigned int i = nu_moves - 1; i > 0; --i)
+        {
+            PlayerMove reply = m_state.get_move(i);
+            PlayerMove mv = m_state.get_move(i - 1);
+            if (is_winner[reply.player])
+                m_reply_table.store(mv, reply);
+            else if (m_reply_table.get_reply(mv) == reply.move)
+                m_reply_table.forget(mv, reply);
+        }
+}
+
+template<class S, class M, unsigned int P>
 void Search<S, M, P>::update_rave_values(
-                                       const array<ValueType, nu_players>& eval)
+                                      const array<ValueType, max_players>& eval)
 {
     unsigned int nu_moves = m_state.get_nu_moves();
     if (nu_moves == 0)
@@ -1075,8 +1156,8 @@ void Search<S, M, P>::update_rave_values(
 
 template<class S, class M, unsigned int P>
 void Search<S, M, P>::update_rave_values(
-                             const array<ValueType, nu_players>& eval, size_t i,
-                             unsigned int player)
+                            const array<ValueType, max_players>& eval, size_t i,
+                            unsigned int player)
 {
     LIBBOARDGAME_ASSERT(i < m_simulation.m_nodes.size());
     const Node* node = m_simulation.m_nodes[i];
@@ -1096,7 +1177,7 @@ void Search<S, M, P>::update_rave_values(
                 continue;
             if (m_rave_check_same)
             {
-                for (unsigned int i = 0; i < nu_players; ++i)
+                for (unsigned int i = 0; i < max_players; ++i)
                     if (i != player)
                     {
                         size_t first_other = m_first_play[i][m];
@@ -1115,7 +1196,7 @@ void Search<S, M, P>::update_rave_values(
 }
 
 template<class S, class M, unsigned int P>
-void Search<S, M, P>::update_values(const array<ValueType, nu_players>& eval)
+void Search<S, M, P>::update_values(const array<ValueType, max_players>& eval)
 {
     m_tree.add_value(m_tree.get_root(), eval[m_player]);
     m_tree.inc_visit_count(m_tree.get_root());

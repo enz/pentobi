@@ -25,6 +25,7 @@ Search::Search(const Board& bd)
     set_expand_threshold(1);
     set_bias_term_constant(0.1f);
     set_widening_parameter(0);
+    set_last_good_reply(true);
 }
 
 Search::~Search() throw()
@@ -55,8 +56,8 @@ void Search::write_info(ostream& out) const
     if (! root.has_children())
         return;
     ParentClass::write_info(out);
-    out << (format("Mov: %i, Sco: %.1f\n")
-            % root.get_nu_children() % get_state().get_mean_score());
+    out << (format("Mov: %i, ") % root.get_nu_children());
+    get_state().write_info(out);
 }
 
 //-----------------------------------------------------------------------------

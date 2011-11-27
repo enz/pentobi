@@ -9,6 +9,7 @@
 #include "State.h"
 
 #include <cmath>
+#include <boost/format.hpp>
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/MathUtil.h"
 #include "libboardgame_base/RectGeometry.h"
@@ -19,6 +20,7 @@
 namespace libpentobi_mcts {
 
 using namespace std;
+using boost::format;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_mcts::Tree;
@@ -239,7 +241,7 @@ array<ValueType, 4> State::evaluate_playout()
         // draw in very short searches.)
         if (log_simulations)
             log() << "Result: 0.5 (symmetry)\n";
-        m_score_sum += 0;
+        m_stat_score.add(0);
         array<ValueType, 4> result;
         result[0] = result[1] = 0.5;
         return result;
@@ -264,7 +266,7 @@ array<ValueType, 4> State::evaluate_terminal()
         else
             result = 0.5;
         if (*i == m_shared_const.to_play)
-            m_score_sum += score;
+            m_stat_score.add(score);
         result_array[(*i).to_int()] = result;
         if (log_simulations)
             log() << "Result color " << (*i).to_int() << ": score=" << score
@@ -273,7 +275,7 @@ array<ValueType, 4> State::evaluate_terminal()
     return result_array;
 }
 
-bool State::gen_and_play_playout_move()
+bool State::gen_and_play_playout_move(Move last_good_reply)
 {
     unsigned int nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
@@ -308,25 +310,40 @@ bool State::gen_and_play_playout_move()
                 log() << "Terminate playout. Symmetry not broken.\n";
             return false;
         }
-    const ArrayList<Move, Move::range>* moves;
-    if (pure_random_playout)
-        moves = &m_moves[to_play];
+    Move mv;
+    if (! last_good_reply.is_null() && ! last_good_reply.is_pass()
+        && m_bd.is_legal(last_good_reply)
+        && m_bd.get_pieces_left(to_play).contains(
+                                     m_bd.get_move_info(last_good_reply).piece))
+    {
+        m_stat_last_good_reply.add(1);
+        mv = last_good_reply;
+        if (log_simulations)
+            log() << "Playing last good reply\n";
+    }
     else
     {
-        moves = &m_local_moves;
-        if (moves->empty())
+        m_stat_last_good_reply.add(0);
+        const ArrayList<Move, Move::range>* moves;
+        if (pure_random_playout)
             moves = &m_moves[to_play];
-        if (log_simulations)
-            log() << "Moves: " << moves->size() << ", local: "
-                  << m_local_moves.size() << '\n';
+        else
+        {
+            moves = &m_local_moves;
+            if (moves->empty())
+                moves = &m_moves[to_play];
+            if (log_simulations)
+                log() << "Moves: " << moves->size() << ", local: "
+                      << m_local_moves.size() << '\n';
+        }
+        if (moves->empty())
+        {
+            play(Move::pass());
+            return true;
+        }
+        int i = m_random.generate_small_int(static_cast<int>(moves->size()));
+        mv = (*moves)[i];
     }
-    if (moves->empty())
-    {
-        play(Move::pass());
-        return true;
-    }
-    int i = m_random.generate_small_int(static_cast<int>(moves->size()));
-    Move mv = (*moves)[i];
     play(mv);
     return true;
 }
@@ -658,7 +675,8 @@ void State::start_search()
         m_shared_const.score_modification
         / bd.get_board_const().get_total_piece_points();
     m_nu_simulations = 0;
-    m_score_sum = 0;
+    m_stat_score.clear();
+    m_stat_last_good_reply.clear();
     m_check_symmetric_draw =
         (bd.get_game_variant() == game_variant_duo
          && m_shared_const.detect_symmetry
@@ -815,6 +833,13 @@ void State::update_symmetry_info(Move mv)
             }
         }
     }
+}
+
+void State::write_info(ostream& out) const
+{
+    out << (format("Sco: %.1f, LGR: %.1f\n")
+            % m_stat_score.get_mean()
+            % (100 * m_stat_last_good_reply.get_mean()));
 }
 
 //-----------------------------------------------------------------------------
