@@ -373,7 +373,7 @@ bool MainWindow::checkQuit()
         }
     }
     cancelGenMove();
-    if (m_file.isEmpty() && ! m_gameFinished)
+    if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
     {
         ofstream out(getAutoSaveFile().toStdString().c_str());
         write_tree(out, m_game->get_root(), true, 2);
