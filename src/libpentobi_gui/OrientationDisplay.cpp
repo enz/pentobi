@@ -56,18 +56,6 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.setClipRegion(event->region());
     painter.setRenderHint(QPainter::Antialiasing, true);
-    if (m_piece == 0)
-    {
-        if (m_isColorSelected)
-        {
-            QColor color =
-                Util::getPaintColor(m_bd.get_game_variant(), m_color);
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(color);
-            painter.drawEllipse(width() / 2 - 5, height() / 2 - 5, 10, 10);
-        }
-        return;
-    }
     BoardType board_type = m_bd.get_board_type();
     qreal fieldWidth;
     qreal fieldHeight;
@@ -93,6 +81,22 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
         fieldHeight = fieldWidth;
         displayWidth = fieldWidth * columns;
         displayHeight = fieldHeight * rows;
+    }
+    if (m_piece == 0)
+    {
+        if (m_isColorSelected)
+        {
+            qreal dotSize = 0.04 * height();
+            if (dotSize < 10)
+                dotSize = 0.07 * height();
+            QColor color =
+                Util::getPaintColor(m_bd.get_game_variant(), m_color);
+            painter.setPen(Qt::NoPen);
+            painter.setBrush(color);
+            painter.drawEllipse(QPointF(0.5 * width(), 0.5 * height()),
+                                dotSize, dotSize);
+        }
+        return;
     }
     painter.save();
     painter.translate(0.5 * (width() - displayWidth),

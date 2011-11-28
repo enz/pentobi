@@ -1082,11 +1082,11 @@ QWidget* MainWindow::createRightPanel()
     QWidget* widget = new QWidget();
     QBoxLayout* layout = new QBoxLayout(QBoxLayout::TopToBottom);
     widget->setLayout(layout);
-    layout->addWidget(createOrientationSelector(), 30);
+    layout->addWidget(createOrientationSelector(), 23);
     m_scoreDisplay = new ScoreDisplay();
-    layout->addWidget(m_scoreDisplay, 1);
+    layout->addWidget(m_scoreDisplay, 3);
     QWidget* pieceSelectorBox = new QWidget();
-    layout->addWidget(pieceSelectorBox, 70);
+    layout->addWidget(pieceSelectorBox, 74);
     SameHeightLayout* pieceSelectorLayout = new SameHeightLayout();
     pieceSelectorBox->setLayout(pieceSelectorLayout);
     for (ColorIterator i(Color::range); i; ++i)

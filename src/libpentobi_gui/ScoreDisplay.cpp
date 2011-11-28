@@ -8,48 +8,16 @@
 
 #include "ScoreDisplay.h"
 
+#include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
+using libboardgame_util::log;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
-
-//-----------------------------------------------------------------------------
-
-namespace {
-
-const int colorDotSize = 16;
-
-const int twoColorDotWidth = 25;
-
-int getTextWidth(QString text)
-{
-    QFont font = QApplication::font();
-    QFontMetrics metrics(font);
-    return metrics.boundingRect(text).width();
-}
-
-QString getScoreText(unsigned int points, unsigned int bonus)
-{
-    QString text;
-    text.setNum(points + bonus);
-    return text;
-}
-
-int getMaxScoreTextWidth()
-{
-    return getTextWidth(getScoreText(188, 20));
-}
-
-int getMaxScoreTextWidth2()
-{
-    return getTextWidth(getScoreText(88, 20));
-}
-
-} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -59,43 +27,66 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
     m_gameVariant = game_variant_classic;
     m_points.fill(0);
     m_bonus.fill(0);
-    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+    setMinimumWidth(300);
+    setMinimumHeight(15);
+    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 }
 
 void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 {
     QColor color = Util::getPaintColor(m_gameVariant, c);
-    painter.setRenderHint(QPainter::Antialiasing, true);
+    QString text = getScoreText(c);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
-    painter.drawEllipse(x + 4, 4, 8, 8);
+    int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
+    painter.drawEllipse(x,  y, m_colorDotSize, m_colorDotSize);
     painter.setPen(QApplication::palette().text().color());
-    painter.drawText(QPoint(x + colorDotSize, 12), getScoreText(c));
+    painter.drawText(x + m_colorDotWidth, 0, getTextWidth(text), height(),
+                     Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
 }
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
 {
-    painter.setRenderHint(QPainter::Antialiasing, true);
     QColor color = Util::getPaintColor(m_gameVariant, c1);
+    QString text = getScoreText2(c1, c2);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
-    painter.drawEllipse(x + 4, 4, 8, 8);
+    int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
+    painter.drawEllipse(x, y, m_colorDotSize, m_colorDotSize);
     color = Util::getPaintColor(m_gameVariant, c2);
     painter.setBrush(color);
-    painter.drawEllipse(x + 13, 4, 8, 8);
+    painter.drawEllipse(x + m_colorDotSize, y, m_colorDotSize, m_colorDotSize);
     painter.setPen(QApplication::palette().text().color());
-    painter.drawText(QPoint(x + twoColorDotWidth, 12), getScoreText2(c1, c2));
+    painter.drawText(x + m_twoColorDotWidth, 0, getTextWidth(text), height(),
+                     Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
+}
+
+int ScoreDisplay::getMaxScoreTextWidth() const
+{
+    return getTextWidth(getScoreText(188, 20));
+}
+
+int ScoreDisplay::getMaxScoreTextWidth2() const
+{
+    return getTextWidth(getScoreText(88, 20));
+}
+
+QString ScoreDisplay::getScoreText(unsigned int points,
+                                   unsigned int bonus) const
+{
+    QString text;
+    text.setNum(points + bonus);
+    return text;
 }
 
 QString ScoreDisplay::getScoreText(Color c)
 {
-    return ::getScoreText(m_points[c], m_bonus[c]);
+    return getScoreText(m_points[c], m_bonus[c]);
 }
 
 QString ScoreDisplay::getScoreText2(Color c1, Color c2)
 {
-    return ::getScoreText(m_points[c1] + m_points[c2],
-                          m_bonus[c1] + m_bonus[c2]);
+    return getScoreText(m_points[c1] + m_points[c2], m_bonus[c1] + m_bonus[c2]);
 }
 
 int ScoreDisplay::getScoreTextWidth(Color c)
@@ -108,19 +99,48 @@ int ScoreDisplay::getScoreTextWidth2(Color c1, Color c2)
     return getTextWidth(getScoreText2(c1, c2));
 }
 
+int ScoreDisplay::getTextWidth(QString text) const
+{
+    // Make text width only depend on number of digits to avoid frequent small
+    // changes to the layout
+    QFontMetrics metrics(font());
+    int maxDigitWidth = 0;
+    maxDigitWidth = max(maxDigitWidth, metrics.width('0'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('1'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('2'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('3'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('4'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('5'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('6'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('7'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('8'));
+    maxDigitWidth = max(maxDigitWidth, metrics.width('9'));
+    return max(text.length() * maxDigitWidth,
+                metrics.boundingRect(text).width());
+}
+
 void ScoreDisplay::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     painter.setClipRegion(event->region());
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    int fontSize = 0.7 * height();
+    QFont font;
+    font.setPointSize(fontSize);
+    painter.setFont(font);
+    m_colorDotSize = 0.8 * fontSize;
+    m_colorDotSpace = 0.2 * fontSize;
+    m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
+    m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
     if (m_gameVariant == game_variant_duo)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthGreen = getScoreTextWidth(Color(1));
-        int totalWidth = textWidthBlue + textWidthGreen + 2 * colorDotSize;
-        float pad = float(width() - totalWidth) / 3.f;
-        float x = pad;
+        int totalWidth = textWidthBlue + textWidthGreen + 2 * m_colorDotWidth;
+        qreal pad = qreal(width() - totalWidth) / 3.f;
+        qreal x = pad;
         drawScore(painter, Color(0), x);
-        x+= colorDotSize + textWidthBlue + pad;
+        x+= m_colorDotWidth + textWidthBlue + pad;
         drawScore(painter, Color(1), x);
     }
     else if (m_gameVariant == game_variant_classic
@@ -132,15 +152,15 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
         int textWidthGreen = getScoreTextWidth(Color(3));
         int totalWidth =
             textWidthBlue + textWidthRed + textWidthYellow + textWidthGreen
-            + 4 * colorDotSize;
-        float pad = float(width() - totalWidth) / 5.f;
-        float x = pad;
+            + 4 * m_colorDotWidth;
+        qreal pad = qreal(width() - totalWidth) / 5.f;
+        qreal x = pad;
         drawScore(painter, Color(0), x);
-        x+= colorDotSize + textWidthBlue + pad;
+        x+= m_colorDotWidth + textWidthBlue + pad;
         drawScore(painter, Color(1), x);
-        x+= colorDotSize + textWidthYellow + pad;
+        x+= m_colorDotWidth + textWidthYellow + pad;
         drawScore(painter, Color(2), x);
-        x+= colorDotSize + textWidthRed + pad;
+        x+= m_colorDotWidth + textWidthRed + pad;
         drawScore(painter, Color(3), x);
     }
     else
@@ -156,34 +176,21 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
         int totalWidth =
             textWidthBlueRed + textWidthYellowGreen
             + textWidthBlue + textWidthRed + textWidthYellow + textWidthGreen
-            + 2 * twoColorDotWidth + 4 * colorDotSize;
-        float pad = float(width() - totalWidth) / 7.f;
-        float x = pad;
+            + 2 * m_twoColorDotWidth + 4 * m_colorDotWidth;
+        qreal pad = qreal(width() - totalWidth) / 7.f;
+        qreal x = pad;
         drawScore2(painter, Color(0), Color(2), x);
-        x+= twoColorDotWidth + textWidthBlueRed + pad;
+        x+= m_twoColorDotWidth + textWidthBlueRed + pad;
         drawScore2(painter, Color(1), Color(3), x);
-        x+= twoColorDotWidth + textWidthYellowGreen + pad;
+        x+= m_twoColorDotWidth + textWidthYellowGreen + pad;
         drawScore(painter, Color(0), x);
-        x+= colorDotSize + textWidthBlue + pad;
+        x+= m_colorDotWidth + textWidthBlue + pad;
         drawScore(painter, Color(1), x);
-        x+= colorDotSize + textWidthYellow + pad;
+        x+= m_colorDotWidth + textWidthYellow + pad;
         drawScore(painter, Color(2), x);
-        x+= colorDotSize + textWidthRed + pad;
+        x+= m_colorDotWidth + textWidthRed + pad;
         drawScore(painter, Color(3), x);
     }
-}
-
-QSize ScoreDisplay::sizeHint() const
-{
-    int classic2Width =
-        2 * twoColorDotWidth + 4 * colorDotSize
-        + 2 * getMaxScoreTextWidth2() + 4 * getMaxScoreTextWidth();
-    int classicWidth = 4 * colorDotSize + 4 * getMaxScoreTextWidth();
-    int width = max(classic2Width, classicWidth);
-    QFont font = QApplication::font();
-    QFontMetrics metrics(font);
-    int height = max(colorDotSize, metrics.height());
-    return QSize(width, height);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)

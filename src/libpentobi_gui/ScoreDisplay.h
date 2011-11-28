@@ -23,8 +23,6 @@ class ScoreDisplay
 public:
     ScoreDisplay(QWidget* parent = 0);
 
-    QSize sizeHint() const;
-
     void updateScore(const Board& bd);
 
 protected:
@@ -37,6 +35,14 @@ private:
 
     ColorMap<unsigned int> m_bonus;
 
+    int m_colorDotSize;
+
+    int m_colorDotSpace;
+
+    int m_colorDotWidth;
+
+    int m_twoColorDotWidth;
+
     QString getScoreText(Color c);
 
     QString getScoreText2(Color c1, Color c2);
@@ -48,6 +54,14 @@ private:
     void drawScore(QPainter& painter, Color c, int x);
 
     void drawScore2(QPainter& painter, Color c1, Color c2, int x);
+
+    int getMaxScoreTextWidth() const;
+
+    int getMaxScoreTextWidth2() const;
+
+    QString getScoreText(unsigned int points, unsigned int bonus) const;
+
+    int getTextWidth(QString text) const;
 };
 
 //-----------------------------------------------------------------------------
