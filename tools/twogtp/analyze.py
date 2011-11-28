@@ -38,25 +38,24 @@ class Statistics:
 
 def print_stat(statistics):
     if statistics.get_count() > 0:
-        print "%s:\t%.2f+-%.2f" \
+        print "%s: %.2f+-%.2f" \
             % (statistics.get_name(),
                statistics.get_mean(),
-               statistics.get_error_mean())
+               statistics.get_error_mean()),
 
 def print_stat_percent(statistics):
     if statistics.get_count() > 0:
-        print "%s:\t%.1f%%+-%.1f%%" \
+        print "%s: %.1f%%+-%.1f%%" \
             % (statistics.get_name(),
                100 * statistics.get_mean(),
-               100 * statistics.get_error_mean())
+               100 * statistics.get_error_mean()),
 
 def print_stat_percent_count(statistics):
     if statistics.get_count() > 0:
-        print "%s:\t%.0f (%.1f%%+-%.1f%%)" \
+        print "%s: %.1f%%+-%.1f%%" \
             % (statistics.get_name(),
-               statistics.get_count() * statistics.get_mean(),
                100 * statistics.get_mean(),
-               100 * statistics.get_error_mean())
+               100 * statistics.get_error_mean()),
 
 print_result = False
 opts, args = getopt(argv[1:], "r", [
@@ -70,8 +69,8 @@ games = 0
 win = Statistics("Win")
 loss = Statistics("Loss")
 draw = Statistics("Draw")
-result = Statistics("Result")
-score_stat = Statistics("Score")
+result = Statistics("Res")
+score_stat = Statistics("Sco")
 result_color_black = Statistics("ResB")
 result_color_white = Statistics("ResW")
 alternate_used = False
@@ -129,16 +128,26 @@ if print_result:
            cpu_whiteget_mean(),
            games)
 else:
-    print "Games:\t%i" % games
+    print "Gam: %i" % games,
+    print ",",
     print_stat_percent(result)
     if games > 0:
         if alternate_used:
+            print ",",
             print_stat_percent(result_color_black)
+            print ",",
             print_stat_percent(result_color_white)
+        print
         print_stat_percent_count(win)
+        print ",",
         print_stat_percent_count(loss)
+        print ",",
         print_stat_percent_count(draw)
+        print
         print_stat(cpu_black)
+        print ",",
         print_stat(cpu_white)
+        print ",",
         print_stat(score_stat)
+    print
 
