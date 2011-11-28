@@ -76,6 +76,7 @@ result_color_white = Statistics("ResW")
 alternate_used = False
 cpu_black = Statistics("CpuB")
 cpu_white = Statistics("CpuW")
+len = Statistics("Len")
 for line in stdin.readlines():
     if line.strip().startswith("#"):
         continue
@@ -84,10 +85,10 @@ for line in stdin.readlines():
     game_number = int(columns[0])
     score_black = columns[1]
     score_white = columns[2]
-    length = int(columns[3])
     exchange_color = (columns[4].strip() == "True")
     cpu_black.add(float(columns[5]))
     cpu_white.add(float(columns[6]))
+    len.add(int(columns[3]))
     if exchange_color:
         alternate_used = True
     if score_black.startswith("B+"):
@@ -147,6 +148,8 @@ else:
         print_stat(cpu_black)
         print ",",
         print_stat(cpu_white)
+        print ",",
+        print_stat(len)
         print ",",
         print_stat(score_stat)
     print
