@@ -166,7 +166,7 @@ void State::compute_features()
     Color second_color = m_bd.get_second_color(to_play);
     BoardType board_type = m_bd.get_board_type();
     const ArrayList<Move, Move::range>& moves = m_moves[to_play];
-    Grid<int> opp_attach_point_val(m_bd.get_geometry());
+    Grid<ValueType> opp_attach_point_val(m_bd.get_geometry());
     for (BoardIterator i(m_bd); i; ++i)
     {
         opp_attach_point_val[*i] = 0;
@@ -191,23 +191,24 @@ void State::compute_features()
         MoveFeatures& features = m_features[i];
         features.heuristic = ValueType(info.points.size());
         features.dist_to_center = numeric_limits<unsigned int>::max();
-        BOOST_FOREACH(Point p, info.points)
-            features.heuristic += 5 * opp_attach_point_val[p];
-        BOOST_FOREACH(Point p, info.attach_points)
-            if (m_bd.is_forbidden(p, to_play)
-                && m_bd.get_point_state_ext(p) != to_play)
+        for (auto j = info.points.begin(); j != info.points.end(); ++j)
+            features.heuristic += 5 * opp_attach_point_val[*j];
+        for (auto j = info.attach_points.begin(); j != info.attach_points.end();
+             ++j)
+            if (m_bd.is_forbidden(*j, to_play)
+                && m_bd.get_point_state_ext(*j) != to_play)
                 features.heuristic -= 5;
             else
                 features.heuristic += 1;
-        BOOST_FOREACH(Point p, info.adj_points)
+        for (auto j = info.adj_points.begin(); j != info.adj_points.end(); ++j)
             // Creating new forbidden points is a bad thing
-            if (! m_bd.is_forbidden(p, to_play))
+            if (! m_bd.is_forbidden(*j, to_play))
                 features.heuristic -= ValueType(0.2);
         if (compute_dist_to_center)
         {
-            BOOST_FOREACH(Point p, info.points)
+            for (auto j = info.points.begin(); j != info.points.end(); ++j)
                 features.dist_to_center =
-                    min(features.dist_to_center, m_dist_to_center[p]);
+                    min(features.dist_to_center, m_dist_to_center[*j]);
             m_min_dist_to_center =
                 min(m_min_dist_to_center, features.dist_to_center);
         }
