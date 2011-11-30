@@ -17,7 +17,7 @@ using namespace std;
 /** Same as std::round(), which is not available in MSVC10. */
 inline float round(float val)
 {
-    return floor(val + 0.5);
+    return floor(val + 0.5f);
 }
 
 /** Same as std::round(), which is not available in MSVC10. */

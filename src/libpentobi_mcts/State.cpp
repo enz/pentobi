@@ -65,7 +65,7 @@ Point find_best_starting_point(const Board& bd, Color c)
     // distance is weighted with a factor of 2)
     Point best = Point::null();
     float max_distance = -1;
-    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732 : 1);
+    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732f : 1);
     BOOST_FOREACH(Point p, bd.get_starting_points(c))
     {
         if (bd.is_forbidden(p, c))
@@ -428,21 +428,20 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             // Prune early moves that don't minimize dist to center
             continue;
         // Make heuristic relative to best move and scale it to [0..1]
-        ValueType heuristic =
-            ValueType(0.3) * (m_max_heuristic - features.heuristic);
+        ValueType heuristic = 0.3f * (m_max_heuristic - features.heuristic);
 
         // Quickly squash to [0..1] roughly as in exp(-x)  (and make sure it
         // stays greater than 0 and is monotonically decreasing)
         if (heuristic < 0.5)
-            heuristic = 1. - 0.9 * heuristic;
+            heuristic = 1.f - 0.9f * heuristic;
         else if (heuristic < 2)
-            heuristic = 0.45 - 0.2 * (heuristic - 0.45);
+            heuristic = 0.45f - 0.2f * (heuristic - 0.45f);
         else if (heuristic < 4)
-            heuristic = 0.27 - 0.08 * (heuristic - 0.27);
+            heuristic = 0.27f - 0.08f * (heuristic - 0.27f);
         else
-            heuristic = 0.0248 / (heuristic - 3.0);
+            heuristic = 0.0248f / (heuristic - 3.0f);
 
-        ValueType value = 1 * (ValueType(0.1) + ValueType(0.9) * heuristic);
+        ValueType value = 1 * (0.1f + 0.9f * heuristic);
         ValueType count = 1;
         // Encourage to explore a move that keeps or breaks symmetry
         // See also the comment in evaluate_playout()
@@ -451,17 +450,17 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             if (to_play == Color(1))
             {
                 if (mv == symmetric_mv)
-                    value += 5 * ValueType(1.0);
+                    value += 5 * 1.0f;
                 else
-                    value += 5 * ValueType(0.1);
+                    value += 5 * 0.1f;
                 count += 5;
             }
             else if (has_symmetry_breaker)
             {
                 if (m_bd.get_move_info(mv).breaks_symmetry)
-                    value += 5 * ValueType(1.0);
+                    value += 5 * 1.0f;
                 else
-                    value += 5 * ValueType(0.1);
+                    value += 5 * 0.1f;
                 count += 5;
             }
         }
@@ -725,13 +724,13 @@ void State::start_search()
 
     // Init m_dist_to_center
     m_dist_to_center.init(geometry);
-    float center_x = 0.5 * geometry.get_width() - 0.5;
-    float center_y = 0.5 * geometry.get_height() - 0.5;
-    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732 : 1);
+    float center_x = 0.5f * geometry.get_width() - 0.5f;
+    float center_y = 0.5f * geometry.get_height() - 0.5f;
+    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732f : 1);
     for (GeometryIterator i(geometry); i; ++i)
     {
-        float x = i->get_x();
-        float y = i->get_y();
+        float x = static_cast<float>(i->get_x());
+        float y = static_cast<float>(i->get_y());
         float dx = x - center_x;
         float dy = ratio * (y - center_y);
         // Multiply Euklidian distance by 4, so that distances that differ
