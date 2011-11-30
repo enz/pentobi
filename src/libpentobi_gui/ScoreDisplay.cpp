@@ -124,12 +124,18 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.setClipRegion(event->region());
     painter.setRenderHint(QPainter::Antialiasing, true);
-    int fontSize = 0.7 * height();
     QFont font;
-    font.setPointSize(fontSize);
+    int defaultFontSize = font.pointSize();
+    // Try to use the default font size, which usually renders better,
+    // unless height is significantly larg or small
+    int fontSize = 0.7 * height();
+    if (fontSize > 0.9 * defaultFontSize && fontSize < 1.5 * defaultFontSize)
+        fontSize = defaultFontSize;
+    else
+        font.setPointSize(fontSize);
     painter.setFont(font);
     m_colorDotSize = 0.8 * fontSize;
-    m_colorDotSpace = 0.2 * fontSize;
+    m_colorDotSpace = 0.3 * fontSize;
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
     if (m_gameVariant == game_variant_duo)
