@@ -6,13 +6,13 @@
 #define LIBPENTOBI_BASE_BOARD_H
 
 #include "BoardConst.h"
+#include "ColorMap.h"
 #include "ColorMove.h"
 #include "FullGrid.h"
 #include "GameVariant.h"
 #include "Geometry.h"
 #include "MoveMarker.h"
-#include "libpentobi_base/ColorMap.h"
-#include "libpentobi_base/PointStateExt.h"
+#include "PointStateExt.h"
 
 namespace libpentobi_base {
 

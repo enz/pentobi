@@ -68,7 +68,7 @@ Point find_best_starting_point(const Board& bd, Color c)
     float ratio = (bd.get_board_type() == board_type_trigon ? 1.732 : 1);
     BOOST_FOREACH(Point p, bd.get_starting_points(c))
     {
-        if (! bd.is_empty(p))
+        if (bd.is_forbidden(p, c))
             continue;
         float d = 0;
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
@@ -517,11 +517,8 @@ void State::init_move_list_with_local_list(Color c)
         // update_move_list() assumes that a move stays legal if the forbidden
         // status for all of its points does not change.
         Point fixed_starting_point = find_best_starting_point(m_bd, c);
-        BOOST_FOREACH(Point p, m_bd.get_starting_points(c))
-            if (! m_bd.is_forbidden(p, c)
-                && (fixed_starting_point.is_null()
-                    || p == fixed_starting_point))
-                m_bd.gen_moves(c, p, m_marker, moves);
+        if (! fixed_starting_point.is_null())
+            m_bd.gen_moves(c, fixed_starting_point, m_marker, moves);
     }
     else
     {
@@ -566,11 +563,8 @@ void State::init_move_list_without_local_list(Color c)
         // update_move_list() assumes that a move stays legal if the forbidden
         // status for all of its points does not change.
         Point fixed_starting_point = find_best_starting_point(m_bd, c);
-        BOOST_FOREACH(Point p, m_bd.get_starting_points(c))
-            if (! m_bd.is_forbidden(p, c)
-                && (fixed_starting_point.is_null()
-                    || p == fixed_starting_point))
-                m_bd.gen_moves(c, p, m_marker, moves);
+        if (! fixed_starting_point.is_null())
+            m_bd.gen_moves(c, fixed_starting_point, m_marker, moves);
     }
     else
     {
