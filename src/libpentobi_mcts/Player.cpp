@@ -161,13 +161,13 @@ Move Player::genmove(Color c)
                  || variant == game_variant_trigon_2)
         {
             minimum = 200;
-            factor_per_level = 2.9;
+            factor_per_level = ValueType(2.9);
         }
         else
         {
             LIBBOARDGAME_ASSERT(variant == game_variant_duo);
             minimum = 100;
-            factor_per_level = 4.7;
+            factor_per_level = ValueType(4.7);
         }
         if (m_level <= 1)
             max_count = minimum;
