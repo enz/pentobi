@@ -2490,7 +2490,7 @@ void MainWindow::showStatus(const QString& text, bool temporary)
 
 QSize MainWindow::sizeHint() const
 {
-    return QSize(1080, 690);
+    return QSize(1031, 692);
 }
 
 void MainWindow::splitterMoved(int pos, int index)
