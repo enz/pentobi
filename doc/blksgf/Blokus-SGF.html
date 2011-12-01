@@ -65,11 +65,11 @@
 
     <h2>Color and player properties</h2>
     <p>
-      In game variants with two players and colors, <tt>B</tt> denotes the
+      In game variants with two players and two colors, <tt>B</tt> denotes the
       first player or color, <tt>W</tt> the second player or color.
-      In game variants with four players and colors, <tt>1</tt>, <tt>2</tt>,
-      <tt>3</tt>, <tt>4</tt> denote the first, second, third, and fourth
-      player or color.
+      In game variants with four players and four colors, <tt>1</tt>,
+      <tt>2</tt>, <tt>3</tt>, <tt>4</tt> denote the first, second, third, and
+      fourth player or color.
       In game variants with two players and four colors, <tt>B</tt> denotes the
       first player, <tt>W</tt> the second player, and <tt>1</tt>, <tt>2</tt>,
       <tt>3</tt>, <tt>4</tt> denote the first, second, third, and fourth color.
@@ -94,7 +94,7 @@
     <h2>Coordinate system</h2>
     <p>
       Fields on the board (called points in SGF) are identified by a
-      case-insensitive string with a letter for the column, followed by a
+      case-insensitive string with a letter for the column followed by a
       number for the row.
       The letters start with 'a', the numbers start with '1'.
       The lower left corner of the board is 'a1'.
@@ -105,8 +105,8 @@
     <p>
       If there are more than 26 columns, the columns continue with 'aa', 'ab',
       ..., 'ba', 'bb', ... More than 26 columns are presently required for the
-      game Trigon and may be required for supporting future game variants on
-      boards larger than 20&times;20.
+      game variant Trigon and may be required for supporting future game
+      variants on rectangular boards larger than 20&times;20.
     </p>
 
     <p>
@@ -136,7 +136,8 @@
     <p>
       <b>Note</b><br/>
       Old versions of Pentobi (<= 0.2) used to represent moves by a list of
-      points, which did not follow the convention used by other games in SGF.
+      points, which did not follow the convention used by other games in SGF
+      to use single-value properties for moved.
       Current versions of Pentobi can still read games containing the old
       move property values but they are deprecated and should no longer be used.
     </p>
