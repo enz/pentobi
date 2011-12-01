@@ -221,7 +221,11 @@ public:
 
     const Geometry& get_geometry() const;
 
-    string to_string(Move mv, bool only_points = false) const;
+    /** See BoardConst::to_string() */
+    string to_string(Move mv, bool with_piece_name = true) const;
+
+    /** See BoardConst::from_string() */
+    Move from_string(const string& s) const;
 
     bool find_move(const MovePoints& points, Move& move) const;
 
@@ -325,6 +329,11 @@ inline Board::Iterator::Iterator(const Board& bd)
 inline bool Board::find_move(const MovePoints& points, Move& move) const
 {
     return m_board_const->find_move(points, move);
+}
+
+inline Move Board::from_string(const string& s) const
+{
+    return m_board_const->from_string(s);
 }
 
 inline unsigned int Board::get_adj_status_index(Point p, Color c) const
@@ -545,6 +554,11 @@ inline void Board::play(Move move)
 inline void Board::set_to_play(Color c)
 {
     m_to_play = c;
+}
+
+inline string Board::to_string(Move mv, bool with_piece_name) const
+{
+    return m_board_const->to_string(mv, with_piece_name);
 }
 
 //-----------------------------------------------------------------------------

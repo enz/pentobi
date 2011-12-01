@@ -8,6 +8,9 @@
 
 #include "BoardConst.h"
 
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/case_conv.hpp>
+#include <boost/algorithm/string/trim.hpp>
 #include "AdjIterator.h"
 #include "AdjDiagIterator.h"
 #include "DiagIterator.h"
@@ -23,6 +26,10 @@
 namespace libpentobi_base {
 
 using namespace std;
+using boost::is_any_of;
+using boost::split;
+using boost::trim_copy;
+using boost::algorithm::to_lower_copy;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_base::TrigonGeometry;
@@ -583,6 +590,26 @@ void BoardConst::create_moves(unsigned int piece_index)
     }
 }
 
+Move BoardConst::from_string(const string& s) const
+{
+    string trimmed = to_lower_copy(trim_copy(s));
+    if (trimmed == "pass")
+        return Move::pass();
+    else if (trimmed == "null")
+        return Move::null();
+    vector<string> v;
+    split(v, trimmed, is_any_of(","));
+    if (v.size() > Piece::max_size)
+        throw Exception("illegal move (too many points)");
+    MovePoints points;
+    BOOST_FOREACH(const string& p, v)
+        points.push_back(Point::from_string(p));
+    Move mv;
+    if (! find_move(points, mv))
+        throw Exception("illegal move");
+    return mv;
+}
+
 const BoardConst& BoardConst::get(BoardType board_type)
 {
     static unique_ptr<BoardConst> board_const_classic;
@@ -724,6 +751,28 @@ void BoardConst::set_adj_and_corner_points(MoveInfo& info)
                 m_marker.set(*j);
                 info.attach_points.push_back(*j);
             }
+}
+
+string BoardConst::to_string(Move mv, bool with_piece_name) const
+{
+    if (mv.is_null())
+        return "null";
+    if (mv.is_pass())
+        return "pass";
+    const MoveInfo& info = get_move_info(mv);
+    ostringstream s;
+    if (with_piece_name)
+        s << '[' << get_piece(info.piece).get_name() << "]";
+    bool is_first = true;
+    BOOST_FOREACH(Point p, info.points)
+    {
+        if (! is_first)
+            s << ',';
+        else
+            is_first = false;
+        s << p;
+    }
+    return s.str();
 }
 
 //-----------------------------------------------------------------------------

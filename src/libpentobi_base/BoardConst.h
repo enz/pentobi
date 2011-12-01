@@ -81,6 +81,16 @@ public:
 
     const Geometry& get_geometry() const;
 
+    /** Convert a move to its string representation.
+        The string representation is a comma-separated list of points (without
+        spaces between the commas or points). If with_piece_name is true,
+        it is prepended by the piece name in square brackets (also without any
+        spaces). The representation without the piece name is used by the SGF
+        files and GTP interface used by Pentobi (version >= 0.2). */
+    string to_string(Move mv, bool with_piece_name) const;
+
+    Move from_string(const string& s) const;
+
 private:
     unsigned int m_nu_pieces;
 

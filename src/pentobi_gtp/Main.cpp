@@ -120,10 +120,10 @@ int main(int argc, char** argv)
         if (vm.count("seed"))
             RandomGenerator::set_global_seed(seed);
         GameVariant game_variant;
-        if (game_variant_string == "duo" || game_variant_string == "")
-            game_variant = game_variant_duo;
-        else if (game_variant_string == "classic")
+        if (game_variant_string == "classic" || game_variant_string == "")
             game_variant = game_variant_classic;
+        else if (game_variant_string == "duo")
+            game_variant = game_variant_duo;
         else if (game_variant_string == "classic_2"
                  || game_variant_string == "c2")
             game_variant = game_variant_classic_2;

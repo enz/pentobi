@@ -275,18 +275,7 @@ void Tree::set_move(const Node& node, Color c, Move mv)
             id = "4";
     }
     if (! mv.is_pass())
-    {
-        ostringstream value;
-        bool is_first = true;
-        BOOST_FOREACH(Point p, m_board_const->get_move_points(mv))
-        {
-            if (! is_first)
-                value << ',';
-            value << p;
-            is_first = false;
-        }
-        set_property(node, id, value.str());
-    }
+        set_property(node, id, m_board_const->to_string(mv, false));
     else
         set_property(node, id, "");
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file Arguments.cpp */
+/** @file libboardgame_gtp/Arguments.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -75,7 +75,7 @@ CmdLineRange Arguments::get_remaining_line(size_t i) const
     if (i < get_size())
         return m_line.get_trimmed_line_after_elem(m_line.get_idx_name() + i
                                                   + 1);
-    throw Failure(format("missing argument %1%)") % (i + 1));
+    throw Failure(format("missing argument %1%") % (i + 1));
 }
 
 //-----------------------------------------------------------------------------

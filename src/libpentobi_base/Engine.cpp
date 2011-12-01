@@ -215,7 +215,7 @@ void Engine::genmove(Color c, Response& response)
         throw Failure(format("player generated illegal move: %1%")
                       % bd.to_string(mv));
     m_game.play(c, mv, true);
-    response << bd.to_string(mv, true);
+    response << bd.to_string(mv, false);
     board_changed();
 }
 
@@ -266,22 +266,13 @@ void Engine::play(Color c, const Arguments& args, unsigned int arg_move_begin)
     if (bd.get_nu_moves() >= Board::max_game_moves)
         throw Failure("too many moves");
     Move mv;
-    if (args.get_size() == arg_move_begin + 1
-        && args.get_tolower(arg_move_begin) == "pass")
-        mv = Move::pass();
-    else
+    try
     {
-        MovePoints points;
-        for (unsigned int i = arg_move_begin; i < args.get_size(); ++i)
-        {
-            if (points.size() >= MovePoints::max_size)
-                throw Failure("invalid move (too many points)");
-            points.push_back(args.get<Point>(i));
-        }
-        if (points.empty())
-            throw Failure("invalid move (empty point list)");
-        if (! bd.find_move(points, mv))
-            throw Failure("invalid move");
+        mv = bd.from_string(args.get_remaining_line(arg_move_begin - 1));
+    }
+    catch (const Exception& e)
+    {
+        throw Failure(e.what());
     }
     if (! m_accept_illegal && ! bd.is_legal(c, mv))
         throw Failure("illegal move");

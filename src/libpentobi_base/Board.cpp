@@ -484,20 +484,6 @@ void Board::play(Color c, Move mv)
     m_to_play = c.get_next(m_nu_colors);
 }
 
-string Board::to_string(Move mv, bool only_points) const
-{
-    if (mv.is_null())
-        return "NULL";
-    if (mv.is_pass())
-        return "pass";
-    const MoveInfo& info = get_move_info(mv);
-    ostringstream s;
-    if (! only_points)
-        s << '[' << get_piece(info.piece).get_name() << "] ";
-    s << info.points;
-    return s.str();
-}
-
 void Board::undo()
 {
     LIBBOARDGAME_ASSERT(get_nu_moves() > 0);
