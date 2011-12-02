@@ -22,8 +22,9 @@
       The current SGF version 4 does not define standard properties for Blokus.
       Therefore, a number of game-specific properties and value types
       had to be defined.
-      The definitions follow the recommendations of SGF 4 and proposals
-      for multi-player games from the discussions about the future SGF 5.
+      The definitions follow the recommendations of SGF 4 and the proposals
+      for multi-player games from the discussions about the future SGF version
+      5.
     </p>
 
     <h2>File extension and MIME type</h2>
@@ -46,7 +47,7 @@
     <h2>Game property</h2>
     <p>
       Since there is no number for Blokus defined in SGF 4, a string
-      instead of a number is used for the <tt>GM</tt> property.
+      instead of a number is used as the value for the <tt>GM</tt> property.
       Currently, the following strings are used:
       <ul>
 	<li><tt>Blokus</tt></li>
@@ -74,13 +75,23 @@
       or a color.
     </p>
     <p>
-      Example: in the game variant Blokus Two-Player <tt>PW</tt>
+      Example 1: in the game variant Blokus Two-Player <tt>PW</tt>
       is the name of the first player, and <tt>1</tt> is a move of the
       first color.
     </p>
     <p>
+      Example 2: in the game variant Blokus Two-Player, one could either use
+      the <tt>BL</tt>, <tt>WL</tt> properties to indicate the time left
+      for a player, if the game is played with a time limit for each player,
+      or one could use the <tt>1L</tt>, <tt>2L</tt>, <tt>3L</tt>, <tt>4L</tt>
+      properties to indicate the time left for a color, if the game is played
+      with a time limit for each color. (This is only an example how the
+      properties should be interpreted. Pentobi currently has no support for
+      game clocks).
+    </p>
+    <p>
       <b>Note</b><br/>
-      Old versions of Pentobi (<= version 0.1) used the properties
+      Old versions of Pentobi (before version 0.2) used the properties
       <tt>BLUE</tt>, <tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt>
       in the four-color game variants, which did not reflect the current state
       of discussion for SGF 5.
@@ -132,9 +143,9 @@
     </p>
     <p>
       <b>Note</b><br/>
-      Old versions of Pentobi (<= 0.2) used to represent moves by a list of
-      points, which did not follow the convention used by other games in SGF
-      to use single-value properties for moves.
+      Old versions of Pentobi (before version 0.3) used to represent moves by a
+      list of points, which did not follow the convention used by other games
+      in SGF to use single-value properties for moves.
       Current versions of Pentobi can still read games containing the old
       move property values but they are deprecated and should no longer be used.
     </p>
