@@ -164,14 +164,16 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
     Move move = get_player().genmove(get_color_arg(args));
     if (move.is_null())
         throw Failure("player failed to generate a move");
-    response << get_board().to_string(move, true);
+    response << get_board().to_string(move, false);
 }
 
 /** Set the game variant.
-    Arguments: Blokus|Blokus Two-Player|Blokus Duo<br>
+    Arguments:
+    Blokus|Blokus Two-Player|Blokus Duo|Blokus Trigon|Blokus Trigon Two-Player
+    <br>
     This command is similar to the command that is used by Quarry
-    (http://home.gna.org/quarry/) to set a game at GTP engines that could
-    support multiple games. */
+    (http://home.gna.org/quarry/) to set a game at GTP engines that support
+    multiple games. */
 void Engine::cmd_set_game(const Arguments& args)
 {
     string arg = args.get_line();
