@@ -79,7 +79,8 @@ public:
         (a part of) the tree between searches.
         Usually, one should not try to use a subtree from the last search as an
         init tree for the next search (should the current state be a follow-up
-        state of the last search) if any of those parameters were changed. */
+        state of the last search) if any of those parameters were changed.
+        @see check_followup() */
     virtual Parameters get_reuse_param() const;
 
     /** Check if the position at the root is a follow-up position of the last
@@ -90,7 +91,10 @@ public:
         leading from the last position to the current one, so that the search
         can check if a subtree of the last search can be reused.
         This function will be called exactly once at the beginning of each
-        search. The default implementation returns false. */
+        search. The default implementation returns false.
+        The information is also used for deciding whether to clear other
+        caches from the last search (e.g. Last-Good-Reply heuristic).
+        @see get_reuse_param() */
     virtual bool check_followup(vector<Move>& sequence);
 
     virtual void write_info(ostream& out) const;
@@ -669,6 +673,7 @@ ValueType Search<S, M, P>::get_widening_parameter() const
 template<class S, class M, unsigned int P>
 bool Search<S, M, P>::check_followup(vector<Move>& sequence)
 {
+    LIBBOARDGAME_UNUSED(sequence);
     return false;
 }
 
@@ -849,7 +854,7 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
     m_player = get_player();
     m_stat_len.clear();
     m_stat_in_tree_len.clear();
-    if (m_use_last_good_reply)
+    if (m_use_last_good_reply && ! is_followup)
         m_reply_table.init(get_nu_players());
     if (init_tree != 0)
         m_tree.swap(*init_tree);
