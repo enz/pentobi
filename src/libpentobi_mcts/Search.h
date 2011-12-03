@@ -7,11 +7,13 @@
 
 #include "State.h"
 #include "libboardgame_mcts/Search.h"
+#include "libpentobi_base/GameStateHistory.h"
 
 namespace libpentobi_mcts {
 
 using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
+using libpentobi_base::GameStateHistory;
 
 //-----------------------------------------------------------------------------
 
@@ -44,6 +46,8 @@ public:
 
     void write_info(ostream& out) const;
 
+    bool check_followup(vector<Move>& sequence);
+
     bool search(Move& mv, Color to_play, ValueType max_count,
                 size_t min_simulations, double max_time,
                 TimeSource& time_source);
@@ -57,6 +61,11 @@ private:
     Color m_to_play;
 
     SharedConst m_shared_const;
+
+    /** Local variable reused for efficiency. */
+    GameStateHistory m_state;
+
+    GameStateHistory m_last_state;
 
     const Board& get_board() const;
 };

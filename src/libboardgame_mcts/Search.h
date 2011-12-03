@@ -12,6 +12,7 @@
 #include "ChildIterator.h"
 #include "ReplyTable.h"
 #include "Tree.h"
+#include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/FastLog.h"
 #include "libboardgame_util/IntervalChecker.h"
@@ -27,6 +28,7 @@ namespace libboardgame_mcts {
 
 using namespace std;
 using boost::format;
+using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
 using libboardgame_util::FastLog;
@@ -79,6 +81,17 @@ public:
         init tree for the next search (should the current state be a follow-up
         state of the last search) if any of those parameters were changed. */
     virtual Parameters get_reuse_param() const;
+
+    /** Check if the position at the root is a follow-up position of the last
+        search.
+        In this function, the subclass can store the game state at the root of
+        the search, compare it to the the one of the last search, check if
+        the current state is a follow-up position and return the move sequence
+        leading from the last position to the current one, so that the search
+        can check if a subtree of the last search can be reused.
+        This function will be called exactly once at the beginning of each
+        search. The default implementation returns false. */
+    virtual bool check_followup(vector<Move>& sequence);
 
     virtual void write_info(ostream& out) const;
 
@@ -177,19 +190,21 @@ public:
         @param min_simulations
         @param max_time Maximum search time. Only used if max_count is zero
         @param time_source Time source for time measurement
-        @param init_tree A tree to initialize the search tree with. The caller
-        is reponsible that the state at the root of the init tree is the same
-        as the current game state.
-        @param clear_tree Whether to clear the tree at the start of the
-        search. If this parameter is set to false, then the caller is
-        reponsible that the state at the root of the current tree is the same
-        as the current game state.
         @return @c false, if no move could be generated. This can happen if the
         root node was not expanded, because the position is a terminal
-        position or because the search was immediately aborted. */
+        position or because the search was immediately aborted.
+        @param always_search Always call the search, even if extracting the
+        subtree to reuse was aborted due to max_time or util::get_abort(). If
+        true, this will call a search with the partially extracted subtree,
+        and the search will return immediately (because it also checks max_time
+        and get_abort(). This flag should be true for regular searches, because
+        even a partially extracted subtree can be used for move generation, and
+        false for pondering searches, because here we don't need a search
+        result, but want to keep the full tree for reuse in a future
+        searches. */
     bool search(Move& mv, ValueType max_count, size_t min_simulations,
-                double max_time, TimeSource& time_source, Tree* init_tree = 0,
-                bool clear_tree = true);
+                double max_time, TimeSource& time_source,
+                bool always_search = true);
 
     /** Get the tree for temporary operations.
         The tree is internally used by this class, but can also be used by
@@ -331,6 +346,8 @@ private:
     function<void(double, double)> m_callback;
 
     ReplyTable<S,M,P> m_reply_table;
+
+    vector<Move> m_followup_sequence;
 
     bool check_abort() const;
 
@@ -650,6 +667,12 @@ ValueType Search<S, M, P>::get_widening_parameter() const
 }
 
 template<class S, class M, unsigned int P>
+bool Search<S, M, P>::check_followup(vector<Move>& sequence)
+{
+    return false;
+}
+
+template<class S, class M, unsigned int P>
 void Search<S, M, P>::on_search_iteration(size_t n,
                                           const Simulation& simulation)
 {
@@ -769,9 +792,56 @@ ValueType Search<S, M, P>::prune(TimeSource& time_source, double time,
 template<class S, class M, unsigned int P>
 bool Search<S, M, P>::search(Move& mv, ValueType max_count,
                              size_t min_simulations, double max_time,
-                             TimeSource& time_source, Tree* init_tree,
-                             bool clear_tree)
+                             TimeSource& time_source, bool always_search)
 {
+    bool is_followup = check_followup(m_followup_sequence);
+    Tree* init_tree = 0;
+    bool clear_tree = true;
+    const Tree& tree = get_tree();
+    if (is_followup && get_reuse_param() == get_last_reuse_param())
+    {
+        size_t tree_nodes = tree.get_nu_nodes();
+        if (m_followup_sequence.empty())
+        {
+            if (tree_nodes > 1)
+            {
+                clear_tree = false;
+                log(format("Reusing all %1% nodes (count=%2%)")
+                    % tree_nodes % tree.get_root().get_count());
+            }
+        }
+        else
+        {
+            Timer timer(time_source);
+            Tree& tmp_tree = get_tmp_tree();
+            tmp_tree.clear();
+            const Node* node = find_node(tree, m_followup_sequence);
+            if (node != 0)
+            {
+                TimeIntervalChecker interval_checker(time_source, max_time);
+                bool aborted = ! tree.extract_subtree(tmp_tree, *node, true,
+                                                      &interval_checker);
+                if (aborted && ! always_search)
+                    return false;
+                size_t tmp_tree_nodes = tmp_tree.get_nu_nodes();
+                if (tree_nodes > 1 && tmp_tree_nodes > 1)
+                {
+                    const Node& tmp_tree_root = tmp_tree.get_root();
+                    double time = timer();
+                    double reuse = double(tmp_tree_nodes) / double(tree_nodes);
+                    double percent = 100 * reuse;
+                    log(format("Reusing %i nodes (%.1f%% count=%i time=%f)")
+                        % tmp_tree_nodes % percent % tmp_tree_root.get_count()
+                        % time);
+                    init_tree = &tmp_tree;
+                    max_time -= time;
+                    if (max_time < 0)
+                        max_time = 0;
+                }
+            }
+        }
+    }
+
     m_last_reuse_param = get_reuse_param();
     m_timer.reset(time_source);
     m_time_source = &time_source;

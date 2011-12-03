@@ -32,6 +32,14 @@ Search::~Search() throw()
 {
 }
 
+bool Search::check_followup(vector<Move>& sequence)
+{
+    m_state.init(get_board(), m_to_play);
+    bool is_followup = m_state.is_followup(m_last_state, sequence);
+    m_last_state = m_state;
+    return is_followup;
+}
+
 string Search::get_move_string(Move mv) const
 {
     const Board& bd = get_board();
