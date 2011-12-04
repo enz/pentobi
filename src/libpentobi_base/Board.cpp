@@ -411,6 +411,7 @@ void Board::init(GameVariant game_variant)
         m_forbidden[*i].fill_all(true);
         m_forbidden[*i].fill_onboard(false);
         m_is_attach_point[*i].init(*m_geometry, false);
+        m_attach_points[*i].clear();
         m_pieces_left[*i].clear();
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)
             m_pieces_left[*i].push_back(j);
@@ -478,7 +479,11 @@ void Board::play(Color c, Move mv)
             m_forbidden[c][*i] = true;
         for (auto i = info.attach_points.begin(); i != info.attach_points.end();
              ++i)
-            m_is_attach_point[c][*i] = true;
+            if (! m_is_attach_point[c][*i])
+            {
+                m_is_attach_point[c][*i] = true;
+                m_attach_points[c].push_back(*i);
+            }
     }
     m_moves.push_back(ColorMove(c, mv));
     m_to_play = c.get_next(m_nu_colors);

@@ -12,14 +12,12 @@
 #include "GameVariant.h"
 #include "Geometry.h"
 #include "MoveMarker.h"
+#include "PointList.h"
 #include "PointStateExt.h"
 
 namespace libpentobi_base {
 
 using libboardgame_util::NullTermList;
-using libpentobi_base::ColorMap;
-using libpentobi_base::PointState;
-using libpentobi_base::PointStateExt;
 
 //-----------------------------------------------------------------------------
 
@@ -146,6 +144,10 @@ public:
     /** Is a point a potential attachment point for a color.
         Does not check if the point is forbidden.. */
     bool is_attach_point(Point p, Color c) const;
+
+    /** Get potential attachment points for a color.
+        Does not check if the point is forbidden.. */
+    const PointList&  get_attach_points(Color c) const;
 
     void init();
 
@@ -278,6 +280,8 @@ private:
 
     ColorMap<Grid<bool>> m_is_attach_point;
 
+    ColorMap<PointList> m_attach_points;
+
     Grid<Move> m_played_move;
 
     ColorMap<ArrayList<unsigned int, max_pieces>> m_pieces_left;
@@ -345,6 +349,11 @@ inline unsigned int Board::get_adj_status_index(Point p, Color c) const
         if (is_forbidden(*i, c))
             result |= (1 << n);
     return result;
+}
+
+inline const PointList&  Board::get_attach_points(Color c) const
+{
+    return m_attach_points[c];
 }
 
 inline const BoardConst& Board::get_board_const() const

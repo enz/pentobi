@@ -44,6 +44,7 @@ using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::MoveInfo;
+using libpentobi_base::Piece;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 using libpentobi_base::PointStateExt;
@@ -116,7 +117,49 @@ bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
     return true;
 }
 
+void set_pieces_considered(const Board& bd,
+                           array<bool,Board::max_pieces>& is_piece_considered)
+{
+    BoardType board_type = bd.get_board_type();
+    unsigned int nu_moves = bd.get_nu_moves();
+    unsigned int min_piece_size = 0;
+    if (board_type == board_type_duo)
+    {
+        if (nu_moves < 4)
+            min_piece_size = 5;
+        else if (nu_moves < 6)
+            min_piece_size = 4;
+        else if (nu_moves < 10)
+            min_piece_size = 3;
+    }
+    else if (board_type == board_type_classic)
+    {
+        if (nu_moves < 12)
+            min_piece_size = 5;
+        else if (nu_moves < 20)
+            min_piece_size = 4;
+        else if (nu_moves < 30)
+            min_piece_size = 3;
+    }
+    else if (board_type == board_type_trigon)
+    {
+        if (nu_moves < 16)
+            min_piece_size = 6;
+        else if (nu_moves < 20)
+            min_piece_size = 5;
+        else if (nu_moves < 28)
+            min_piece_size = 4;
+        else if (nu_moves < 36)
+            min_piece_size = 3;
+    }
+    for (unsigned int i = 0; i < bd.get_nu_pieces(); ++i)
+    {
+        const Piece& piece = bd.get_piece(i);
+        is_piece_considered[i] = (piece.get_size() >= min_piece_size);
+    }
 }
+
+} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -390,38 +433,9 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
                 }
         }
     }
-    BoardType board_type = m_bd.get_board_type();
-    unsigned int nu_moves = m_bd.get_nu_moves();
-    unsigned int min_piece_size = 0;
-    if (board_type == board_type_duo)
-    {
-        if (nu_moves < 4)
-            min_piece_size = 5;
-        else if (nu_moves < 6)
-            min_piece_size = 4;
-    }
-    else if (board_type == board_type_classic)
-    {
-        if (nu_moves < 12)
-            min_piece_size = 5;
-        else if (nu_moves < 20)
-            min_piece_size = 4;
-    }
-    else if (board_type == board_type_trigon)
-    {
-        if (nu_moves < 16)
-            min_piece_size = 6;
-        else if (nu_moves < 20)
-            min_piece_size = 5;
-        else if (nu_moves < 28)
-            min_piece_size = 4;
-    }
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         Move mv = moves[i];
-        const MoveInfo& info = m_bd.get_move_info(mv);
-        if (m_bd.get_piece(info.piece).get_size() < min_piece_size)
-            continue;
         const MoveFeatures& features = m_features[i];
         if (m_min_dist_to_center != numeric_limits<unsigned int>::max()
             && features.dist_to_center != m_min_dist_to_center)
@@ -502,6 +516,7 @@ void State::init_local_points()
 void State::init_move_list_with_local_list(Color c)
 {
     m_last_move[c] = Move::null();
+    set_pieces_considered(m_bd, m_is_piece_considered[c]);
     init_local_points();
     m_local_moves.clear();
     m_max_local = 1;
@@ -515,65 +530,14 @@ void State::init_move_list_with_local_list(Color c)
         // only reduces the branching factor but is also necessary because
         // update_move_list() assumes that a move stays legal if the forbidden
         // status for all of its points does not change.
-        Point fixed_starting_point = find_best_starting_point(m_bd, c);
-        if (! fixed_starting_point.is_null())
-            m_bd.gen_moves(c, fixed_starting_point, m_marker, moves);
-    }
-    else
-    {
-        for (BoardIterator i(m_bd); i; ++i)
-            if (m_bd.is_attach_point(*i, c) && ! m_bd.is_forbidden(*i, c))
-            {
-                unsigned int adj_status = m_bd.get_adj_status_index(*i, c);
-                BOOST_FOREACH(unsigned int j, m_bd.get_pieces_left(c))
+        Point p = find_best_starting_point(m_bd, c);
+        if (! p.is_null())
+        {
+            BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+                if (m_is_piece_considered[c][i])
                 {
-                    BOOST_FOREACH(Move mv, m_bd.get_moves(j, *i, adj_status))
-                    {
-                        if (m_marker[mv])
-                            continue;
-                        int nu_local;
-                        const MoveInfo& info = m_bd.get_move_info(mv);
-                        if (! is_forbidden(c, info.points, nu_local))
-                        {
-                            moves.push_back(mv);
-                            m_marker.set(mv);
-                            check_local_move(nu_local, mv);
-                        }
-                    }
-                }
-            }
-    }
-    m_marker.clear(moves);
-    clear_local_points();
-    m_is_move_list_initialized[c] = true;
-}
-
-void State::init_move_list_without_local_list(Color c)
-{
-    m_last_move[c] = Move::null();
-    ArrayList<Move, Move::range>& moves = m_moves[c];
-    moves.clear();
-    bool is_first_move =
-        (m_bd.get_pieces_left(c).size() == m_bd.get_nu_pieces());
-    if (is_first_move)
-    {
-        // Using only one starting point (if game variant has more than one) not
-        // only reduces the branching factor but is also necessary because
-        // update_move_list() assumes that a move stays legal if the forbidden
-        // status for all of its points does not change.
-        Point fixed_starting_point = find_best_starting_point(m_bd, c);
-        if (! fixed_starting_point.is_null())
-            m_bd.gen_moves(c, fixed_starting_point, m_marker, moves);
-    }
-    else
-    {
-        for (BoardIterator i(m_bd); i; ++i)
-            if (m_bd.is_attach_point(*i, c) && ! m_bd.is_forbidden(*i, c))
-            {
-                unsigned int adj_status = m_bd.get_adj_status_index(*i, c);
-                BOOST_FOREACH(unsigned int j, m_bd.get_pieces_left(c))
-                {
-                    BOOST_FOREACH(Move mv, m_bd.get_moves(j, *i, adj_status))
+                    unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                    BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
                     {
                         if (m_marker[mv])
                             continue;
@@ -584,6 +548,92 @@ void State::init_move_list_without_local_list(Color c)
                         }
                     }
                 }
+        }
+    }
+    else
+    {
+        BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
+            if (! m_bd.is_forbidden(p, c))
+            {
+                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+                    if (m_is_piece_considered[c][i])
+                    {
+                        BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
+                        {
+                            if (m_marker[mv])
+                                continue;
+                            int nu_local;
+                            const MoveInfo& info = m_bd.get_move_info(mv);
+                            if (! is_forbidden(c, info.points, nu_local))
+                            {
+                                moves.push_back(mv);
+                                m_marker.set(mv);
+                                check_local_move(nu_local, mv);
+                            }
+                        }
+                    }
+            }
+    }
+    m_marker.clear(moves);
+    clear_local_points();
+    m_is_move_list_initialized[c] = true;
+}
+
+void State::init_move_list_without_local_list(Color c)
+{
+    m_last_move[c] = Move::null();
+    set_pieces_considered(m_bd, m_is_piece_considered[c]);
+    ArrayList<Move, Move::range>& moves = m_moves[c];
+    moves.clear();
+    bool is_first_move =
+        (m_bd.get_pieces_left(c).size() == m_bd.get_nu_pieces());
+    if (is_first_move)
+    {
+        // Using only one starting point (if game variant has more than one) not
+        // only reduces the branching factor but is also necessary because
+        // update_move_list() assumes that a move stays legal if the forbidden
+        // status for all of its points does not change.
+        Point p = find_best_starting_point(m_bd, c);
+        if (! p.is_null())
+        {
+            BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+                if (m_is_piece_considered[c][i])
+                {
+                    unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                    BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
+                    {
+                        if (m_marker[mv])
+                            continue;
+                        if (! m_bd.is_forbidden(c, mv))
+                        {
+                            moves.push_back(mv);
+                            m_marker.set(mv);
+                        }
+                    }
+                }
+        }
+    }
+    else
+    {
+        BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
+            if (! m_bd.is_forbidden(p, c))
+            {
+                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+                    if (m_is_piece_considered[c][i])
+                    {
+                        BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
+                        {
+                            if (m_marker[mv])
+                                continue;
+                            if (! m_bd.is_forbidden(c, mv))
+                            {
+                                moves.push_back(mv);
+                                m_marker.set(mv);
+                            }
+                        }
+                    }
             }
     }
     m_marker.clear(moves);
@@ -806,24 +856,69 @@ void State::update_move_list(Color c)
             {
                 unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                 BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                {
-                    const vector<Move>& move_candidates =
-                        m_bd.get_moves(i, p, adj_status);
-                    auto end = move_candidates.end();
-                    for (auto i = move_candidates.begin(); i != end; ++i)
+                    if (m_is_piece_considered[c][i])
                     {
-                        int nu_local;
-                        const MoveInfo& info = m_bd.get_move_info(*i);
-                        if (! is_forbidden(c, info.points, nu_local)
-                            && ! m_marker[*i])
+                        const vector<Move>& move_candidates =
+                            m_bd.get_moves(i, p, adj_status);
+                        auto end = move_candidates.end();
+                        for (auto i = move_candidates.begin(); i != end; ++i)
                         {
-                            moves.push_back(*i);
-                            m_marker.set(*i);
-                            check_local_move(nu_local, *i);
+                            int nu_local;
+                            const MoveInfo& info = m_bd.get_move_info(*i);
+                            if (! is_forbidden(c, info.points, nu_local)
+                                && ! m_marker[*i])
+                            {
+                                moves.push_back(*i);
+                                m_marker.set(*i);
+                                check_local_move(nu_local, *i);
+                            }
+                        }
+                    }
+            }
+    }
+
+    // Generate moves for pieces that were not considered in the last position
+    array<bool,Board::max_pieces> is_piece_considered;
+    set_pieces_considered(m_bd, is_piece_considered);
+    bool pieces_considered_changed = false;
+    BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+    {
+        LIBBOARDGAME_ASSERT(! (m_is_piece_considered[c][i]
+                               && ! is_piece_considered[i]));
+        if (! m_is_piece_considered[c][i] && is_piece_considered[i])
+        {
+            pieces_considered_changed = true;
+            break;
+        }
+    }
+    if (pieces_considered_changed)
+    {
+        BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
+            if (! m_bd.is_forbidden(p, c))
+            {
+                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+                {
+                    if (! m_is_piece_considered[c][i] && is_piece_considered[i])
+                    {
+                        unsigned int adj_status =
+                            m_bd.get_adj_status_index(p, c);
+                        BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
+                        {
+                            if (m_marker[mv])
+                                continue;
+                            int nu_local;
+                            const MoveInfo& info = m_bd.get_move_info(mv);
+                            if (! is_forbidden(c, info.points, nu_local))
+                            {
+                                moves.push_back(mv);
+                                m_marker.set(mv);
+                                check_local_move(nu_local, mv);
+                            }
                         }
                     }
                 }
             }
+        m_is_piece_considered[c] = is_piece_considered;
     }
 
     m_marker.clear(m_moves[c]);

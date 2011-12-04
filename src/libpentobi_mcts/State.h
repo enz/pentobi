@@ -147,6 +147,8 @@ private:
         position, the other color is not updated immediately after a move. */
     ColorMap<ArrayList<Move, Move::range>> m_moves;
 
+    ColorMap<array<bool,Board::max_pieces>> m_is_piece_considered;
+
     ArrayList<MoveFeatures, Move::range> m_features;
 
     /** The last move by each color.
