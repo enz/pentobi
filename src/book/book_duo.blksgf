@@ -1,5 +1,5 @@
 (
-  ;GM[Blokus Duo]CA[UTF-8]
+  ;GM[Blokus Duo]CA[UTF-8]AP[Pentobi:0.3.UNKNOWN]
   (
     ;B[f9,e10,f10,g10,f11]TE[1]
     ;W[i4,h5,i5,j5,i6]TE[1]
@@ -18,6 +18,12 @@
     (
       ;B[e7,c8,d8,e8,d9]TE[1]
       ;W[h7,h8,i8,h9,h10]TE[1]
+    )
+    (
+      ;B[g6,g7,g8,h8,h9]
+      ;W[j7,j8,j9,k9,j10]TE[1]
+      ;B[h3,f4,g4,h4,f5]TE[1]
+      ;W[h10,h11,i11,g12,h12]TE[1]
     )
   )
   (
