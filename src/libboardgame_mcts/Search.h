@@ -68,12 +68,23 @@ public:
 
     virtual ~Search() throw();
 
+
+    /** @name Pure virtual functions */
+    // @{
+
     /** Get string representation of a move. */
     virtual string get_move_string(Move mv) const = 0;
 
     virtual unsigned int get_nu_players() const = 0;
 
+    /** Get player to play at root node of the search. */
     virtual unsigned int get_player() const = 0;
+
+    // @} // @name
+
+
+    /** @name Virtual functions */
+    // @{
 
     /** Get a copy of the search parameters that determine the reusability of
         (a part of) the tree between searches.
@@ -100,6 +111,12 @@ public:
     virtual void write_info(ostream& out) const;
 
     virtual void write_info_ext(ostream& out) const;
+
+    // @} // @name
+
+
+    /** @name Parameters */
+    // @{
 
     void set_expand_threshold(ValueType n);
 
@@ -186,6 +203,9 @@ public:
 
     size_t get_tree_memory() const;
 
+    // @} // @name
+
+
     /** Run a search.
         @param[out] mv
         @param max_count Number of simulations to run. The search might return
@@ -210,17 +230,7 @@ public:
                 double max_time, TimeSource& time_source,
                 bool always_search = true);
 
-    /** Get the tree for temporary operations.
-        The tree is internally used by this class, but can also be used by
-        external users or subclasses. The tree is not guaranteed to be cleared
-        or to keep its state between calls to search(). */
-    Tree& get_tmp_tree();
-
     const Tree& get_tree() const;
-
-    /** Clear tree of last search.
-        Has the eeffect that no subtree can be reused for the next search. */
-    void clear_tree();
 
     void dump(ostream& out) const;
 
@@ -543,12 +553,6 @@ bool Search<S, M, P>::expand_node(const Node& node, const Node*& best_child)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S, M, P>::clear_tree()
-{
-    m_tree.clear();
-}
-
-template<class S, class M, unsigned int P>
 ValueType Search<S, M, P>::get_bias_term_constant() const
 {
     return m_bias_term_constant;
@@ -637,12 +641,6 @@ template<class S, class M, unsigned int P>
 size_t Search<S, M, P>::get_tree_memory() const
 {
     return m_tree_memory;
-}
-
-template<class S, class M, unsigned int P>
-inline typename Search<S, M, P>::Tree& Search<S, M, P>::get_tmp_tree()
-{
-    return m_tmp_tree;
 }
 
 template<class S, class M, unsigned int P>
@@ -799,46 +797,41 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
                              size_t min_simulations, double max_time,
                              TimeSource& time_source, bool always_search)
 {
-    bool is_followup = check_followup(m_followup_sequence);
-    Tree* init_tree = 0;
     bool clear_tree = true;
-    const Tree& tree = get_tree();
+    bool is_followup = check_followup(m_followup_sequence);
     if (is_followup && get_reuse_param() == get_last_reuse_param())
     {
-        size_t tree_nodes = tree.get_nu_nodes();
+        size_t tree_nodes = m_tree.get_nu_nodes();
         if (m_followup_sequence.empty())
         {
             if (tree_nodes > 1)
-            {
-                clear_tree = false;
                 log(format("Reusing all %1% nodes (count=%2%)")
-                    % tree_nodes % tree.get_root().get_count());
-            }
+                    % tree_nodes % m_tree.get_root().get_count());
         }
         else
         {
             Timer timer(time_source);
-            Tree& tmp_tree = get_tmp_tree();
-            tmp_tree.clear();
-            const Node* node = find_node(tree, m_followup_sequence);
+            m_tmp_tree.clear();
+            const Node* node = find_node(m_tree, m_followup_sequence);
             if (node != 0)
             {
                 TimeIntervalChecker interval_checker(time_source, max_time);
-                bool aborted = ! tree.extract_subtree(tmp_tree, *node, true,
-                                                      &interval_checker);
+                bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
+                                                        &interval_checker);
                 if (aborted && ! always_search)
                     return false;
-                size_t tmp_tree_nodes = tmp_tree.get_nu_nodes();
+                size_t tmp_tree_nodes = m_tmp_tree.get_nu_nodes();
                 if (tree_nodes > 1 && tmp_tree_nodes > 1)
                 {
-                    const Node& tmp_tree_root = tmp_tree.get_root();
+                    const Node& tmp_tree_root = m_tmp_tree.get_root();
                     double time = timer();
                     double reuse = double(tmp_tree_nodes) / double(tree_nodes);
                     double percent = 100 * reuse;
                     log(format("Reusing %i nodes (%.1f%% count=%i time=%f)")
                         % tmp_tree_nodes % percent % tmp_tree_root.get_count()
                         % time);
-                    init_tree = &tmp_tree;
+                    m_tree.swap(m_tmp_tree);
+                    clear_tree = false;
                     max_time -= time;
                     if (max_time < 0)
                         max_time = 0;
@@ -846,6 +839,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
             }
         }
     }
+    if (clear_tree)
+        m_tree.clear();
 
     m_last_reuse_param = get_reuse_param();
     m_timer.reset(time_source);
@@ -856,10 +851,6 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
     m_stat_in_tree_len.clear();
     if (m_use_last_good_reply && ! is_followup)
         m_reply_table.init(get_nu_players());
-    if (init_tree != 0)
-        m_tree.swap(*init_tree);
-    else if (clear_tree)
-        m_tree.clear();
     m_state.start_search();
     m_max_count = max_count;
     m_nu_simulations = 0;

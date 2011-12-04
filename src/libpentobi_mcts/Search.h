@@ -25,10 +25,31 @@ public:
 
     ~Search() throw();
 
+
+    /** @name Pure virtual functions of libboardgame_mcts::Search */
+    // @{
+
+    string get_move_string(Move mv) const;
+
     unsigned int get_nu_players() const;
 
-    /** Get player to play at root node of the search. */
     unsigned int get_player() const;
+
+    // @} // @name
+
+
+    /** @name Overriden virtual functions of libboardgame_mcts::Search */
+    // @{
+
+    bool check_followup(vector<Move>& sequence);
+
+    void write_info(ostream& out) const;
+
+    // @} // @name
+
+
+    /** @name Parameters */
+    // @{
 
     ValueType get_score_modification() const;
 
@@ -42,11 +63,8 @@ public:
 
     void set_avoid_symmetric_draw(bool enable);
 
-    string get_move_string(Move mv) const;
+    // @} // @name
 
-    void write_info(ostream& out) const;
-
-    bool check_followup(vector<Move>& sequence);
 
     bool search(Move& mv, Color to_play, ValueType max_count,
                 size_t min_simulations, double max_time,
