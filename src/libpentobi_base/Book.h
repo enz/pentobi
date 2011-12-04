@@ -9,10 +9,12 @@
 #include "Board.h"
 #include "Game.h"
 #include "Tree.h"
+#include "libboardgame_base/PointTransform.h"
 #include "libboardgame_util/RandomGenerator.h"
 
 namespace libpentobi_base {
 
+using libboardgame_base::PointTransform;
 using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
@@ -64,6 +66,13 @@ private:
     RandomGenerator m_random;
 
     bool m_is_computer_generated;
+
+    Move genmove(const Board& bd, Color c, double delta, double max_delta,
+                 const PointTransform<Point>& transform,
+                 const PointTransform<Point>& inv_transform);
+
+    Move get_transformed(const Board& bd, Move mv,
+                         const PointTransform<Point>& transform) const;
 };
 
 inline const Tree& Book::get_tree() const

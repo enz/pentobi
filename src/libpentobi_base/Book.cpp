@@ -15,6 +15,8 @@
 namespace libpentobi_base {
 
 using namespace std;
+using libboardgame_base::PointTransfIdent;
+using libboardgame_base::PointTransfRot270Refl;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::MissingProperty;
@@ -31,10 +33,26 @@ Book::Book(GameVariant game_variant)
 
 Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
 {
+    Move mv = genmove(bd, c, delta, max_delta,
+                      PointTransfIdent<Point>(), PointTransfIdent<Point>());
+    if (! mv.is_null())
+        return mv;
+    if (bd.get_game_variant() == game_variant_duo)
+        mv = genmove(bd, c, delta, max_delta,
+                     PointTransfRot270Refl<Point>(),
+                     PointTransfRot270Refl<Point>());
+    return mv;
+}
+
+Move Book::genmove(const Board& bd, Color c, double delta, double max_delta,
+                   const PointTransform<Point>& transform,
+                   const PointTransform<Point>& inv_transform)
+{
     const libboardgame_sgf::Node* node = &m_tree.get_root();
     for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
     {
         ColorMove mv = bd.get_move(i);
+        mv.move = get_transformed(bd, mv.move, transform);
         node = m_tree.find_child_with_move(*node, mv);
         if (node == 0)
             return Move::null();
@@ -56,7 +74,22 @@ Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
         node = select_annotated_child(m_random, bd, c, m_tree, *node);
     if (node == 0)
         return Move::null();
-    return m_tree.get_move(*node).move;
+    return get_transformed(bd, m_tree.get_move(*node).move, inv_transform);
+}
+
+Move Book::get_transformed(const Board& bd, Move mv,
+                           const PointTransform<Point>& transform) const
+{
+    if (mv.is_pass())
+        return mv;
+    unsigned int width = bd.get_geometry().get_width();
+    unsigned int height = bd.get_geometry().get_height();
+    MovePoints points;
+    BOOST_FOREACH(Point p, bd.get_move_points(mv))
+        points.push_back(transform.get_transformed(p, width, height));
+    Move transformed_mv;
+    bd.find_move(points, transformed_mv);
+    return transformed_mv;
 }
 
 double Book::inv_value(double value) const
