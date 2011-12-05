@@ -160,6 +160,10 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     updateRecentFiles();
     m_moveNumber = new QLabel();
     statusBar()->addPermanentWidget(m_moveNumber);
+    m_buttonFullscreen = new QToolButton();
+    m_buttonFullscreen->setDefaultAction(m_actionFullscreen);
+    statusBar()->addPermanentWidget(m_buttonFullscreen);
+    statusBar()->removeWidget(m_buttonFullscreen);
     addAction(m_actionMoveSelectedPieceLeft);
     addAction(m_actionMoveSelectedPieceRight);
     addAction(m_actionMoveSelectedPieceUp);
@@ -560,6 +564,8 @@ void MainWindow::createActions()
 
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
+    setIcon(m_actionFullscreen, "view-fullscreen");
+    m_actionFullscreen->setIconVisibleInMenu(false);
     m_actionFullscreen->setCheckable(true);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
@@ -1277,9 +1283,16 @@ void MainWindow::forward10()
 void MainWindow::fullscreen(bool checked)
 {
     if (checked)
+    {
         showFullScreen();
+        statusBar()->addPermanentWidget(m_buttonFullscreen);
+        m_buttonFullscreen->show();
+    }
     else
+    {
         showNormal();
+        statusBar()->removeWidget(m_buttonFullscreen);
+    }
 }
 
 void MainWindow::gameInfo()

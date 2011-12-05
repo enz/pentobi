@@ -405,6 +405,8 @@ private:
 
     QMenu* m_menuOpenRecent;
 
+    QToolButton* m_buttonFullscreen;
+
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
     QString m_file;

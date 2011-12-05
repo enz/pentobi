@@ -42,5 +42,6 @@
     <file>piece-rotate-right.png</file>
     <file>play.png</file>
     <file>previous-piece.png</file>
+    <file>view-fullscreen.png</file>
   </qresource>
 </RCC>
