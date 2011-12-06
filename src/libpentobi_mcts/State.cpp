@@ -209,18 +209,34 @@ void State::compute_features()
     Color second_color = m_bd.get_second_color(to_play);
     BoardType board_type = m_bd.get_board_type();
     const ArrayList<Move, Move::range>& moves = m_moves[to_play];
-    Grid<ValueType> opp_attach_point_val(m_bd.get_geometry());
+    const Geometry& geometry = m_bd.get_geometry();
+    Grid<ValueType> point_value(geometry);
+    Grid<ValueType> attach_point_value(geometry);
+    Grid<ValueType> adj_point_value(geometry);
     for (BoardIterator i(m_bd); i; ++i)
     {
-        opp_attach_point_val[*i] = 0;
+        point_value[*i] = 1;
         for (unsigned int j = 0; j < m_bd.get_nu_colors(); ++j)
         {
             Color c(j);
             if (c == to_play || c == second_color)
                 continue;
             if (m_bd.is_attach_point(*i, c) && ! m_bd.is_forbidden(*i, c))
-                opp_attach_point_val[*i] = 1;
+            {
+                point_value[*i] = 5;
+                break;
+            }
         }
+        if (m_bd.is_forbidden(*i, to_play)
+            && m_bd.get_point_state_ext(*i) != to_play)
+            attach_point_value[*i] = -5;
+        else
+            attach_point_value[*i] = 1;
+        if (! m_bd.is_forbidden(*i, to_play))
+            // Creating new forbidden points is a bad thing
+            adj_point_value[*i] = -0.2f;
+        else
+            adj_point_value[*i] = 0;
     }
     m_features.resize(moves.size());
     m_max_heuristic = -numeric_limits<ValueType>::max();
@@ -232,21 +248,16 @@ void State::compute_features()
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
         MoveFeatures& features = m_features[i];
-        features.heuristic = ValueType(info.points.size());
+        features.heuristic = 0;
         features.dist_to_center = numeric_limits<unsigned int>::max();
         for (auto j = info.points.begin(); j != info.points.end(); ++j)
-            features.heuristic += 5 * opp_attach_point_val[*j];
+            features.heuristic += point_value[*j];
         for (auto j = info.attach_points.begin(); j != info.attach_points.end();
              ++j)
-            if (m_bd.is_forbidden(*j, to_play)
-                && m_bd.get_point_state_ext(*j) != to_play)
-                features.heuristic -= 5;
-            else
-                features.heuristic += 1;
+            features.heuristic += attach_point_value[*j];
         for (auto j = info.adj_points.begin(); j != info.adj_points.end(); ++j)
             // Creating new forbidden points is a bad thing
-            if (! m_bd.is_forbidden(*j, to_play))
-                features.heuristic -= ValueType(0.2);
+            features.heuristic += adj_point_value[*j];
         if (compute_dist_to_center)
         {
             for (auto j = info.points.begin(); j != info.points.end(); ++j)
