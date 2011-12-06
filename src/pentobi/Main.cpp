@@ -81,10 +81,13 @@ int main(int argc, char* argv[])
         QCoreApplication::setOrganizationName("Pentobi");
         QCoreApplication::setApplicationName("Pentobi");
         QApplication app(argc, argv);
-        // On the Windows classic L&F, labels in the status bar have a sunken
-        // border even if the rest of the status bar is borderless. We don't
-        // want that.
+#ifdef Q_WS_WIN
+        // In Windows classic L&F, labels in the status bar have a sunken border
+        // even if the rest of the status bar is borderless (tested in Qt 4.7).
+        // We don't want that. Note: this is only used if Q_WS_WIN; on Linux
+        // Qt 4.7 it causes a warning "Could not parse application stylesheet"
         app.setStyleSheet("QStatusBar::item { border: 0px solid black };");
+#endif
         QTranslator qtTranslator;
         QString qtTranslationPath =
             QLibraryInfo::location(QLibraryInfo::TranslationsPath);
