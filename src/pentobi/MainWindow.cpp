@@ -24,8 +24,10 @@ using boost::filesystem::path;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
+using libboardgame_sgf::util::find_next_comment;
 using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::get_variation_string;
+using libboardgame_sgf::util::has_comment;
 using libboardgame_sgf::util::is_main_variation;
 using libboardgame_sgf::util::write_tree;
 using libboardgame_util::clear_abort;
@@ -330,7 +332,7 @@ bool MainWindow::checkSave()
         if (! m_game->get_modified())
             return true;
         QMessageBox::StandardButton button =
-            showQuestion(tr("The file has been modified. Save changes?"),
+            showQuestion(tr("The file has been modified. Save changes?"), "",
                          QMessageBox::Yes | QMessageBox::No
                          | QMessageBox::Cancel);
         if (button == QMessageBox::Cancel)
@@ -349,7 +351,7 @@ bool MainWindow::checkSave()
     if (m_game->get_tree().get_root().has_children() && ! m_gameFinished)
     {
         QMessageBox::StandardButton button =
-            showQuestion(tr("Abort current game?"),
+            showQuestion(tr("Abort current game?"), "",
                          QMessageBox::Yes | QMessageBox::No);
         if (button == QMessageBox::Yes || button == QMessageBox::Cancel)
             return true;
@@ -363,7 +365,7 @@ bool MainWindow::checkQuit()
     if (! m_file.isEmpty() && m_game->get_modified())
     {
         QMessageBox::StandardButton button =
-            showQuestion(tr("The file has been modified. Save changes?"),
+            showQuestion(tr("The file has been modified. Save changes?"), "",
                          QMessageBox::Save | QMessageBox::Discard
                          | QMessageBox::Cancel);
         if (button == QMessageBox::Cancel)
@@ -543,6 +545,11 @@ void MainWindow::createActions()
     m_actionFindMove = new QAction(tr("&Find Move"), this);
     m_actionFindMove->setShortcut(QString("F2"));
     connect(m_actionFindMove, SIGNAL(triggered()), this, SLOT(findMove()));
+
+    m_actionFindNextComment = new QAction(tr("&Find Next Comment"), this);
+    m_actionFindNextComment->setShortcut(QString("F4"));
+    connect(m_actionFindNextComment, SIGNAL(triggered()),
+            this, SLOT(findNextComment()));
 
     m_actionFlipPieceHorizontally = new QAction(tr("Flip Horizontally"), this);
     setIcon(m_actionFlipPieceHorizontally, "piece-flip-horizontal");
@@ -988,6 +995,7 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionBackToMainVariation);
 
     QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
+    menuEdit->addAction(m_actionFindNextComment);
     m_menuMoveAnnotation = menuEdit->addMenu(tr("&Move Annotation"));
     m_menuMoveAnnotation->addAction(m_actionGoodMove);
     m_menuMoveAnnotation->addAction(m_actionVeryGoodMove);
@@ -1231,6 +1239,35 @@ void MainWindow::findMove()
     selectPiece(m_toPlay, bd.get_piece(bd.get_move_info(mv).piece));
     m_guiBoard->showMove(m_toPlay, mv);
     ++m_legalMoveIndex;
+}
+
+void MainWindow::findNextComment()
+{
+    const Node& root = m_game->get_root();
+    const Node& current = m_game->get_current();
+    const Node* node = find_next_comment(current);
+    if (node == 0 && &current != &root)
+    {
+        if (showQuestion(tr("Continue from start?"),
+                         tr("The end of the tree was reached. "
+                            "Continue the search from the start of the tree?"),
+                         QMessageBox::Yes | QMessageBox::No)
+            == QMessageBox::Yes)
+        {
+            node = &root;
+            if (! has_comment(*node))
+                node = find_next_comment(*node);
+        }
+        else
+            return;
+    }
+    if (node == 0)
+    {
+        showInfo(tr("No comment found"));
+        return;
+    }
+    showComment(true);
+    gotoNode(*node);
 }
 
 void MainWindow::flipPieceHorizontally()
@@ -2485,12 +2522,22 @@ void MainWindow::showNoMovesAvailable(Color c)
 }
 
 QMessageBox::StandardButton MainWindow::showQuestion(const QString& text,
+                                                     const QString& infoText,
                                            QMessageBox::StandardButtons buttons)
 {
+    // Workaround to avoid very small widths if the main text is short, which
+    // causes ugly word wrapping with single-word lines in the informative text.
+    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
+    QString expandedText = text;
+    QFontMetrics metrics(qApp->font("QLabel"));
+    int minWidth = 30 * metrics.averageCharWidth();
+    while (metrics.width(expandedText) < minWidth)
+        expandedText.append(" ");
     QMessageBox msgBox(this);
     msgBox.setWindowTitle(tr("Pentobi"));
     msgBox.setIcon(QMessageBox::Question);
-    msgBox.setText(text);
+    msgBox.setText(expandedText);
+    msgBox.setInformativeText(infoText);
     msgBox.setStandardButtons(buttons);
     return static_cast<QMessageBox::StandardButton>(msgBox.exec());
 }

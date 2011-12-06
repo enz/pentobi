@@ -54,6 +54,18 @@ const Node& back_to_main_variation(const Node& node)
     return *current;
 }
 
+const Node* find_next_comment(const Node& node)
+{
+    const Node* current = get_next_node(node);
+    while (current != 0)
+    {
+        if (has_comment(*current))
+            return current;
+        current = get_next_node(*current);
+    }
+    return 0;
+}
+
 const Node& find_root(const Node& node)
 {
     const Node* current = &node;
@@ -76,6 +88,28 @@ const Node& get_last_node(const Node& node)
     while (n->has_children())
         n = &n->get_first_child();
     return *n;
+}
+
+const Node* get_next_earlier_variation(const Node& node)
+{
+    const Node* child = &node;
+    const Node* current = node.get_parent_or_null();
+    while (current != 0 && child->get_sibling() == 0)
+    {
+        child = current;
+        current = current->get_parent_or_null();
+    }
+    if (current == 0)
+        return 0;
+    return child->get_sibling();
+}
+
+const Node* get_next_node(const Node& node)
+{
+    const Node* child = node.get_first_child_or_null();
+    if (child != 0)
+        return child;
+    return get_next_earlier_variation(node);
 }
 
 void get_path_from_root(const Node& node, vector<const Node*>& path)
@@ -117,6 +151,11 @@ string get_variation_string(const Node& node)
             s << '.';
     }
     return s.str();
+}
+
+bool has_comment(const Node& node)
+{
+    return node.has_property("C");
 }
 
 bool is_main_variation(const Node& node)

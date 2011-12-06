@@ -63,6 +63,8 @@ public slots:
 
     void findMove();
 
+    void findNextComment();
+
     void flipPieceHorizontally();
 
     void flipPieceVertically();
@@ -260,6 +262,8 @@ private:
     QAction* m_actionExportImage;
 
     QAction* m_actionFindMove;
+
+    QAction* m_actionFindNextComment;
 
     QAction* m_actionFlipPieceHorizontally;
 
@@ -497,6 +501,7 @@ private:
     void showNoMovesAvailable(Color c);
 
     QMessageBox::StandardButton showQuestion(const QString& text,
+                                             const QString& infoText,
                                          QMessageBox::StandardButtons buttons);
 
     void updateWindow(bool currentNodeChanged);
