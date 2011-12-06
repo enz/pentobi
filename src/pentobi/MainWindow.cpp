@@ -165,7 +165,6 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     m_buttonFullscreen = new QToolButton();
     m_buttonFullscreen->setDefaultAction(m_actionFullscreen);
     statusBar()->addPermanentWidget(m_buttonFullscreen);
-    statusBar()->removeWidget(m_buttonFullscreen);
     addAction(m_actionMoveSelectedPieceLeft);
     addAction(m_actionMoveSelectedPieceRight);
     addAction(m_actionMoveSelectedPieceUp);
@@ -211,8 +210,14 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     m_toolBar->setVisible(showToolbar);
     initGameVariantActions();
     setWindowIcon(QIcon(":/pentobi/pentobi.png"));
+
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
         adjustSize();
+    if (isFullScreen())
+        m_actionFullscreen->setChecked(true);
+    else
+        statusBar()->removeWidget(m_buttonFullscreen);
+
     showComment(false);
     m_splitter->restoreState(settings.value("splitter_state").toByteArray());
     m_actionShowComment->setChecked(m_comment->height() > 0);
