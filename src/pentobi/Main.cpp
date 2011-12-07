@@ -43,7 +43,7 @@ void loadLibPentobiGuiTranslator(QTranslator& translator)
         return;
 #endif
 #ifdef DATADIR
-    translator.load(file, QString(DATADIR) + "/pentobi/translations");
+    translator.load(file, QString(DATADIR) + "/games/pentobi/translations");
 #endif
 }
 

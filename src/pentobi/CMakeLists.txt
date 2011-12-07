@@ -65,5 +65,8 @@ target_link_libraries(pentobi
   )
 endif()
 
-install(TARGETS pentobi DESTINATION bin)
-install(FILES ${pentobi_QM_SRCS} DESTINATION share/pentobi/translations)
+install(TARGETS pentobi DESTINATION games)
+
+# Install translation files. If you change the destination, you need to
+# update the directory used in Main.cpp:loadLibPentobiGuiTranslator()
+install(FILES ${pentobi_QM_SRCS} DESTINATION share/games/pentobi/translations)

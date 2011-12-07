@@ -2,6 +2,8 @@ Current development version
 ===========================
 
 * New menu item Find Next Comment
+* Changed installation directories according to Filesystem Hierarchy Standard
+  ($PREFIX/bin -> $PREFIX/games, $PREFIX/share -> $PREFIX/share/games)
 
 
 Version 0.3 (2 Dec 2011)

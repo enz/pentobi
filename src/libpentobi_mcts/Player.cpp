@@ -205,11 +205,11 @@ void Player::load_book(istream& in)
 
 void Player::load_book(const string& filename)
 {
-    // Search the given file at the following locations (in this order):
+    // Search the opening book file at the following locations (in this order):
     // 1. Current directory
     // 2. Directory of the main executable
     // 3. Subdirectory src/book relative to the source code directory
-    // 4. Data installation directory used on Unix (DATADIR/pentobi)
+    // 4. Data installation directory used on Unix (DATADIR/games/pentobi)
     if (try_load_book(filename))
         return;
     if (try_load_book(m_application_dir_path / filename))
@@ -219,7 +219,7 @@ void Player::load_book(const string& filename)
         return;
 #endif
 #ifdef DATADIR
-    if (try_load_book(path(DATADIR) / "pentobi" / filename))
+    if (try_load_book(path(DATADIR) / "games/pentobi" / filename))
         return;
 #endif
 }
