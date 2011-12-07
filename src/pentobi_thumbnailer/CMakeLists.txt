@@ -26,6 +26,6 @@ if(UNIX AND NOT APPLE)
     ${Boost_LIBRARIES}
     )
 
-  install(TARGETS pentobi-thumbnailer DESTINATION bin)
+  install(TARGETS pentobi-thumbnailer DESTINATION games)
 
 endif(UNIX AND NOT APPLE)

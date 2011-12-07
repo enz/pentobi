@@ -1,4 +1,4 @@
 [Thumbnailer Entry]
-TryExec=@CMAKE_INSTALL_PREFIX@/bin/pentobi-thumbnailer
-Exec=@CMAKE_INSTALL_PREFIX@/bin/pentobi-thumbnailer --size %s %i %o
+TryExec=@CMAKE_INSTALL_PREFIX@/games/pentobi-thumbnailer
+Exec=@CMAKE_INSTALL_PREFIX@/games/pentobi-thumbnailer --size %s %i %o
 MimeType=application/x-blokus-sgf;
