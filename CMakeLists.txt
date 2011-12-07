@@ -96,10 +96,11 @@ add_custom_target(post-install
   COMMAND update-desktop-database ${CMAKE_INSTALL_PREFIX}/share/applications
   COMMAND update-mime-database ${CMAKE_INSTALL_PREFIX}/share/mime
   COMMAND
-  test -f ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas &&
-  env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-  gconftool-2 --makefile-install-rule
-  ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas
+  if test -f ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\; then
+    env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
+    gconftool-2 --makefile-install-rule
+    ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\;
+  fi
   )
 
 add_subdirectory(src)
