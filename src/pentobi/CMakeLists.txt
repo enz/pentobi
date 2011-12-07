@@ -68,5 +68,5 @@ endif()
 install(TARGETS pentobi DESTINATION games)
 
 # Install translation files. If you change the destination, you need to
-# update the directory used in Main.cpp:loadLibPentobiGuiTranslator()
+# update the directory used in Main.cpp:loadPentobiTranslator()
 install(FILES ${pentobi_QM_SRCS} DESTINATION share/games/pentobi/translations)
