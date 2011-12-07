@@ -3,7 +3,10 @@ Current development version
 
 * New menu item Find Next Comment
 * Changed installation directories according to Filesystem Hierarchy Standard
-  ($PREFIX/bin -> $PREFIX/games, $PREFIX/share -> $PREFIX/share/games)
+  ($PREFIX/bin to $PREFIX/games, $PREFIX/share to $PREFIX/share/games)
+* New CMake option PENTOBI_REGISTER_GNOME2_THUMBNAILER for disabling the
+  installation of files for registering the Pentobi thumbnailer on old
+  versions of Gnome
 
 
 Version 0.3 (2 Dec 2011)

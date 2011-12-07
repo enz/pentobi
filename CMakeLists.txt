@@ -5,6 +5,8 @@ set(PENTOBI_VERSION 0.3.UNKNOWN)
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
+option(PENTOBI_REGISTER_GNOME2_THUMBNAILER
+  "Install files for registering thumbnailer for old versions of Gnome" ON)
 
 # Use optimized build as default for CMAKE_BUILD_TYPE
 if(NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
@@ -50,7 +52,7 @@ check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 set(Boost_DETAILED_FAILURE_MSG 1)
 # Boost versions that were not released when CMake 2.8 came out.
 # You might have to update this list if you use a newer version of Boost.
-set(Boost_ADDITIONAL_VERSIONS "1.45 1.45.0 1.46 1.46.0 1.46.1 1.47 1.47.0")
+set(Boost_ADDITIONAL_VERSIONS "1.45 1.45.0 1.46 1.46.0 1.46.1 1.47 1.47.0 1.48 1.48.0")
 # Note: Some older versions of Boost cause compilation errors if compiled with
 # GCC option -std=c++0x. It might be possible to compile Pentobi with an older
 # version of Boost depending on the version of GCC (e.g. the combination
@@ -93,7 +95,9 @@ add_custom_target(dist
 add_custom_target(post-install
   COMMAND update-desktop-database ${CMAKE_INSTALL_PREFIX}/share/applications
   COMMAND update-mime-database ${CMAKE_INSTALL_PREFIX}/share/mime
-  COMMAND env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
+  COMMAND
+  test -f ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas &&
+  env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
   gconftool-2 --makefile-install-rule
   ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas
   )
