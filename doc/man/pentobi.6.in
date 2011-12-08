@@ -1,0 +1,37 @@
+.TH PENTOBI 6 "2011-12-08" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+
+.SH NAME
+pentobi \- computer program that plays the board game Blokus
+
+.SH SYNOPSIS
+.B pentobi
+.RI [ options ] " [file]"
+.br
+
+.SH DESCRIPTION
+
+.B pentobi
+is the command to invoke the program Pentobi, which is a graphical user
+interface and computer opponent to play the board game Blokus.
+
+The command can take the name of a game file to open at startup as an optional
+argument.
+The game file is expected to be in Blokus SGF format as documented in
+doc/blksgf/Blokus-SGF.html in the Pentobi source package.
+
+.SH OPTIONS
+.TP
+.B \-\-verbose
+Print internal information about the move generation and other debugging
+information to standard error.
+.TP
+.B \-\-nobook
+Play without opening book.
+
+.SH SEE ALSO
+.BR pentobi-thumbnailer (6)
+
+.SH AUTHOR
+Pentobi was written by Markus Enzenberger <enz@users.sourceforge.net>.
+.PP
+This manual page was written by Markus Enzenberger <enz@users.sourceforge.net>.
