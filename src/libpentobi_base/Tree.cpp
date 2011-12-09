@@ -125,14 +125,16 @@ bool Tree::get_move(const Node& node, GameVariant game_variant, Color& c,
         split(v, s, is_any_of(","));
         BOOST_FOREACH(const string& p_str, v)
         {
+            Point p;
             try
             {
-                points.push_back(Point::from_string(p_str));
+                p = Point::from_string(p_str);
             }
             catch (const Point::InvalidString&)
             {
                 throw InvalidPropertyValue(id, p_str);
             }
+            points.push_back(p);
         }
     }
     return true;
@@ -146,7 +148,8 @@ ColorMove Tree::get_move(const Node& node) const
         return ColorMove::null();
     Move mv;
     if (! m_board_const->find_move(points, mv))
-        throw Exception(format("Illegal move %1%") % to_string(points));
+        throw InvalidPropertyValue(str(format("Illegal move %1%")
+                                    % to_string(points)));
     return ColorMove(c, mv);
 }
 
