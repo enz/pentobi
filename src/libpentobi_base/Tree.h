@@ -72,6 +72,8 @@ public:
 
     void set_player_name(Color c, const string& name);
 
+    const BoardConst& get_board_const() const;
+
 private:
     GameVariant m_game_variant;
 
@@ -79,6 +81,11 @@ private:
 
     void init_board_const(GameVariant game_variant);
 };
+
+inline const BoardConst& Tree::get_board_const() const
+{
+    return *m_board_const;
+}
 
 inline GameVariant Tree::get_game_variant() const
 {

@@ -2,6 +2,7 @@ add_subdirectory(libboardgame_util)
 add_subdirectory(libboardgame_sgf)
 add_subdirectory(libboardgame_base)
 add_subdirectory(libboardgame_mcts)
+add_subdirectory(libpentobi_base)
 
 if (PENTOBI_BUILD_GTP)
   add_subdirectory(libboardgame_gtp)
