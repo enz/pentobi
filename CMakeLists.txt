@@ -24,6 +24,12 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   add_definitions(-ffast-math)
 endif()
 
+if(MSVC)
+  add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+  add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE)
+  add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+endif()
+
 # Define CMAKE_INSTALL_SYSCONFDIR  and CMAKE_INSTALL_FULL_SYSCONFDIR as in
 # GNUInstallDirs (we don't use GNUInstallDirs yet because it requires CMake
 # 2.8.5 and we require only CMake 2.8 so far.
@@ -37,12 +43,6 @@ if(NOT IS_ABSOLUTE ${CMAKE_INSTALL_SYSCONFDIR})
     "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_SYSCONFDIR}")
 else()
   set(CMAKE_INSTALL_FULL_SYSCONFDIR "${CMAKE_INSTALL_SYSCONFDIR}")
-endif()
-
-if(MSVC)
-  add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
-  add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE)
-  add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 endif()
 
 include(CheckIncludeFiles)
@@ -73,7 +73,7 @@ endif()
 find_package(Threads)
 
 if(NOT DEFINED LIBBOARDGAME_MCTS_VALUE_TYPE)
-    set(LIBBOARDGAME_MCTS_VALUE_TYPE float)
+  set(LIBBOARDGAME_MCTS_VALUE_TYPE float)
 endif()
 configure_file(config-cmake.h.in config.h)
 add_definitions(-DHAVE_CONFIG_H)
