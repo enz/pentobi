@@ -46,7 +46,8 @@ void GuiBoard::clearMarkup()
     for (Geometry::Iterator i(m_labels.get_geometry()); i; ++i)
     {
         setLabel(*i, "");
-        m_markupFlags[*i].reset();
+        for (unsigned int j = 0; j < _nu_markup_flags; ++j)
+            clearMarkupFlag(*i, static_cast<MarkupFlag>(j));
     }
 }
 
