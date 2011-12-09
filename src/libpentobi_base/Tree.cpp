@@ -124,7 +124,16 @@ bool Tree::get_move(const Node& node, GameVariant game_variant, Color& c,
         vector<string> v;
         split(v, s, is_any_of(","));
         BOOST_FOREACH(const string& p_str, v)
-            points.push_back(Point::from_string(p_str));
+        {
+            try
+            {
+                points.push_back(Point::from_string(p_str));
+            }
+            catch (const Point::InvalidString&)
+            {
+                throw InvalidPropertyValue(id, p_str);
+            }
+        }
     }
     return true;
 }
