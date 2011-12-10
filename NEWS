@@ -2,11 +2,20 @@ Current development version
 ===========================
 
 * New menu item Find Next Comment
-* Changed installation directories according to Filesystem Hierarchy Standard
-  ($PREFIX/bin to $PREFIX/games, $PREFIX/share to $PREFIX/share/games)
-* New CMake option PENTOBI_REGISTER_GNOME2_THUMBNAILER for disabling the
-  installation of files for registering the Pentobi thumbnailer on old
-  versions of Gnome
+* Lowered the required version of the Boost libraries in
+  CMakeLists.txt from 1.45 to 1.40 such that Pentobi can
+  be compiled on Debian 6.0.
+  Note: some versions of Boost cause compilation errors if
+  compiled with certain versions of GCC and option -std=c++0x
+  (e.g. the combinations GCC 4.4/Boost 1.40 in Ubuntu 10.04
+  and GCC 4.4/Boost 1.42 in Debian 6.0 work but the combination
+  GCC 4.5/Boost 1.42 in Ubuntu 11.04 causes errors).
+* Changed installation directories according to Filesystem
+  Hierarchy Standard (/usr/bin to /usr/games, /usr/share to
+  /usr/share/games)
+* New CMake option PENTOBI_REGISTER_GNOME2_THUMBNAILER for
+  disabling the installation of files for registering the Pentobi
+  thumbnailer on Gnome 2
 
 
 Version 0.3 (2 Dec 2011)
