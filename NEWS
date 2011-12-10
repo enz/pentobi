@@ -16,6 +16,7 @@ Current development version
 * New CMake option PENTOBI_REGISTER_GNOME2_THUMBNAILER for
   disabling the installation of files for registering the Pentobi
   thumbnailer on Gnome 2
+* Install man pages for pentobi and pentobi-thumbnailer on Unix systems
 
 
 Version 0.3 (2 Dec 2011)
