@@ -2,6 +2,8 @@ Current development version
 ===========================
 
 * New menu item Find Next Comment
+* Show error message instead of crashing if the SGF file
+  contains invalid move properties
 * Lowered the required version of the Boost libraries in
   CMakeLists.txt from 1.45 to 1.40 such that Pentobi can
   be compiled on Debian 6.0.
