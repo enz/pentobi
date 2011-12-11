@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file Reader.h */
+/** @file libboardgame_sgf/Reader.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_SGF_READER_H
@@ -51,11 +51,19 @@ public:
         Reduces CPU time and memory if only the main variation is needed. */
     void set_read_only_main_variation(bool enable);
 
-    /** @throws ReadError */
-    void read(istream& in);
+    /** Read a game tree from the file.
+        @param in
+        @param check_single_tree Throw an error if non-whitespace characters
+        follow after the tree before the end of the stream. This is mainly
+        useful to ensure that the input is not a SGF file with multiple game
+        trees if the caller does not want to handle this case. If
+        check_single_tree is false, you can call read() multiple times to read
+        all game trees.
+        @throws ReadError */
+    void read(istream& in, bool check_single_tree = true);
 
-    /** @throws ReadError */
-    void read(const path& file);
+    /** See read(istream&,bool) */
+    void read(const path& file, bool check_single_tree = true);
 
 private:
     bool m_read_only_main_variation;

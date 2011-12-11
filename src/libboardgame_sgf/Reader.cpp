@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file Reader.cpp */
+/** @file libboardgame_sgf/Reader.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -97,22 +97,37 @@ char Reader::peek()
     return char(c);
 }
 
-void Reader::read(istream& in)
+void Reader::read(istream& in, bool check_single_tree)
 {
     m_in = &in;
     m_is_in_main_variation = true;
     consume_whitespace();
     read_tree(true);
+    if (check_single_tree)
+    {
+        while (true)
+        {
+            int c = m_in->peek();
+            if (c == EOF)
+                break;
+            else if (c == '(')
+                throw ReadError("Input has multiple game trees");
+            else if (isspace(c))
+                consume_char(c);
+            else
+                throw ReadError("Extra characters after end of tree.");
+        }
+    }
 }
 
-void Reader::read(const path& file)
+void Reader::read(const path& file, bool check_single_tree)
 {
     ifstream in(file);
     if (! in)
         throw ReadError(format("Could not open '%1%'") % file);
     try
     {
-        read(in);
+        read(in, check_single_tree);
     }
     catch (const ReadError& e)
     {
