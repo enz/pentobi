@@ -1,0 +1,257 @@
+<html>
+  <head>
+    <title>Pentobi-Benutzerhandbuch</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p align = "right">
+      <a href="user_interface.html">Zurück</a> |
+      <a href="shortcuts.html">Weiter</a>
+    </p>
+    <h3>Das Fenstermenü erklärt</h3>
+
+    <h4>Datei</h4>
+    <dl>
+      <dt>Öffnen</dt>
+      <dd>
+	Lädt ein gespeichertes Spiel.
+      </dd>
+      <dt>Zuletzt benutzte Dateien</dt>
+      <dd>
+	Lädt ein kürzlich benutztes gespeichertes Spiel.
+      </dd>
+      <dt>Speichern</dt>
+      <dd>
+	Speichert das gegenwärtige Spiel.
+      </dd>
+      <dt>Speichern unter</dt>
+      <dd>
+	Speichert das gegenwärtige Spiel unter einem neuen Dateinamen.
+      </dd>
+      <dt>Exportieren/Grafik</dt>
+      <dd>
+	Speichert die gegenwärtige Brettstellung als eine Grafikdatei.
+	Mehrere Grafikdateiformate werden unterstützt, das Dateiformat wird von
+	der Dateiendung abgeleitet (z.B. „.png“ für das PNG-Format).
+      </dd>
+      <dt>Exportieren/ASCII-Art</dt>
+      <dd>
+	Speichert die gegenwärtige Brettstellung als Textdiagramm.
+	Das Textdiagramm sollte mit einer Schriftart fester Breite
+	betrachtet werden.
+      </dd>
+      <dt>Beenden</dt>
+      <dd>
+	Beendet Pentobi.
+      </dd>
+    </dl>
+
+    <h4>Spiel</h4>
+    <dl>
+      <dt>Neues Spiel</dt>
+      <dd>
+	Beginnt ein neues Spiel.
+      </dd>
+      <dt>Spielvariante</dt>
+      <dd>
+	Wählt eine Spielvariante und beginnt ein neues Spiel dieser
+	Spielvariante.
+      </dd>
+      <dt>Computer-Farbe</dt>
+      <dd>
+	Wählt aus, welche Farben vom Computer gespielt werden.
+      </dd>
+      <dt>Spiel-Info</dt>
+      <dd>
+	Öffnet ein Dialogfenster zum Anzeigen oder Bearbeiten zusätzlicher
+	Informationen über das Spiel, wie die Namen der Spieler oder das Datum,
+	an dem das Spiel gespielt wurde.
+      </dd>
+      <dt>Zug zurücknehmen</dt>
+      <dd>
+	Nimmt den zuletzt gespielten Zug zurück und entfernt ihn aus dem
+	Spielbaum.
+	Das Zurücknehmen eines Zugs ist nur möglich, wenn er der letzte Zug
+	der gegenwärtigen Variante ist (d.h. ein Endknoten im Spielbaum;
+	benutzen Sie Bearbeiten/Abschneiden zum Entfernen innerer Knoten
+	aus dem Spielbaum).
+      </dd>
+      <dt>Zug finden</dt>
+      <dd>
+	Findet einen möglichen legalen Zug für die gegenwärtige Farbe und
+	zeigt ihn für ein paar Sekunden auf dem Spielbrett.
+	Das wiederholte Auswählen dieses Menüpunkts zeigt alle möglichen
+	legalen Züge.
+      </dd>
+    </dl>
+
+    <h4>Gehe zu</h4>
+    <dl>
+      <dt>Anfang</dt>
+      <dd>
+	Geht zum Anfang des Spiels.
+      </dd>
+      <dt>Zehn Züge zurück</dt>
+      <dd>
+	Geht zehn Züge in der gegenwärtigen Variante zurück.
+      </dd>
+      <dt>Zurück</dt>
+      <dd>
+	Geht einen Zug in der gegenwärtigen Variante zurück.
+      </dd>
+      <dt>Vorwärts</dt>
+      <dd>
+	Geht einen Zug in der gegenwärtigen Variante vorwärts.
+	Wenn die gegenwärtige Brettstellung mehrerer nachfolgende Varianten
+	hat (d.h. der gegenwärtige Knoten im Spielbaum mehrere Kindknoten hat),
+	wird die erste Variante benutzt.
+      </dd>
+      <dt>Zehn Züge vorwärts</dt>
+      <dd>
+	Geht zehn Züge in der gegenwärtigen Variante vorwärts.
+	Wie bei „Vorwärts“ wird auch hier jeweils die erste Variante benutzt,
+	wenn die Brettstellung mehrere nachfolgende Varianten hat.
+      </dd>
+      <dt>Ende</dt>
+      <dd>
+	Geht zum Ende der gegenwärtigen Variante.
+	Wie bei „Vorwärts“ wird auch hier jeweils die erste Variante benutzt,
+	wenn die Brettstellung mehrere nachfolgende Varianten hat.
+      </dd>
+      <dt>Nächste Variante</dt>
+      <dd>
+	Geht zur nächsten Variante zum zuletzt gespielten Zug (d.h. zum
+	nächsten Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).
+      </dd>
+      <dt>Vorherige Variante</dt>
+      <dd>
+	Geht zur vorherigen Variante zum zuletzt gespielten Zug (d.h. zum
+	vorherigen Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).
+      </dd>
+      <dt>Gehe zu Zug</dt>
+      <dd>
+	Geht zum Zug mit einer bestimmten Nummer in der gegenwärtigen Variante.
+      </dd>
+      <dt>Zurück zu Hauptvariante</dt>
+      <dd>
+	Kehrt zur letzten Brettstellung zurück, die in der Hauptvariante ist.
+      </dd>
+    </dl>
+
+    <h4>Bearbeiten</h4>
+    <dl>
+      <dt>Nächsten Kommentar finden</dt>
+      <dd>
+	Geht zur nächsten Brettstellung, die einen Kommentar besitzt.
+	Wenn das Kommentarfeld nicht sichtbar ist, wird es sichtbar gemacht.
+	Das wiederholte Auswählen dieses Menüpunkts zeigt nacheinander alle
+	Brettstellungen mit Kommentaren im Spielbaum.
+      </dd>
+      <dt>Zugkommentierung</dt>
+      <dd>
+	Fügt ein wie in der Schachnotation benutztes Kommentierungssymbol
+	(z.B. !!) zum gegenwärtigen Zug hinzu.
+	Kommentierungssymbole werden nach der Zugnummer auf dem Spielbrett
+	angezeigt und sind nur sichtbar, wenn die Anzeige von Zugnummern
+	angeschaltet ist.
+      </dd>
+      <dt>Zu Hauptvariante machen</dt>
+      <dd>
+	Macht die gegenwärtige Variante zur Hauptvariante des Spiels.
+	Dies ordnet die Knoten im Spielbaum so um, dass die gegenwärtige
+	Variante die Hauptvariante wird.
+      </dd>
+      <dt>Abschneiden</dt>
+      <dd>
+	Entfernt den Knoten mit der gegenwärtigen Brettstellung zusammen
+	mit dem auf ihn folgenden Teilbaum aus dem Spielbaum.
+      </dd>
+      <dt>Nächste Farbe selektieren</dt>
+      <dd>
+	Selektiert die nächste Farbe zum Auswählen eines Spielsteins.
+	Dies kann zum Beispiel benutzt werden, um Partien einzugeben, bei denen
+	Züge einer Farbe übersprungen wurden, da die Farbe aufgrund einer
+	Bedenkzeitüberschreitung vom Weiterspielen ausgeschlossen wurde.
+      </dd>
+    </dl>
+
+    <h4>Ansicht</h4>
+    <dl>
+      <dt>Werkzeugleiste</dt>
+      <dd>
+	Zeigt oder verbirgt die Werkzeugleiste.
+      </dd>
+      <dt>Kommentar</dt>
+      <dd>
+	Zeigt oder verbirgt ein Textfeld zum Anzeigen oder Bearbeiten von
+	Kommentaren zur gegenwärtigen Brettstellung.
+      </dd>
+      <dt>Vollbild</dt>
+      <dd>
+	Schaltet das Hauptfenster in den Vollbildmodus oder verlässt den
+	Vollbildmodus.
+	Es ist systemabhängig, ob das Fenstermenü im Vollbildmodus angezeigt
+	wird.
+	Um den Vollbildmodus ohne das Benutzen des Fenstermenüs zu verlassen,
+	benutzen Sie die kleine Schaltfläche rechts der Statusleiste oder
+	drücken Sie die F11-Taste.
+      </dd>
+      <dt>Zugnummern</dt>
+      <dd>
+	Ändert die Anzeigeart der Zugnummern.
+	Die Optionen sind nur die Nummer des letzten Zugs zu zeigen,
+	die Nummern aller Züge oder gar keine Nummern.
+      </dd>
+      <dt>Koordinatenbeschriftung</dt>
+      <dd>
+	Zeigt eine Koordinatenbeschriftung für die Felder auf dem Spielbrett
+	an den Rändern des Spielbretts.
+	Die Konvention zur Beschriftung der Koordinaten ist die selbe wie
+	im von Pentobi benutzten Blokus-SGF-Dateiformat.
+      </dd>
+    </dl>
+
+    <h4>Computer</h4>
+    <dl>
+      <dt>Spielen</dt>
+      <dd>
+	Lässt den Computer einen Zug für die gegenwärtige Farbe spielen.
+	Dies kann zum Ändern der Computer-Farbe benutzt werden oder um nach
+	dem Navigieren im Spielbaum mit dem Spielen fortzufahren.
+	Wenn der Computer die gegenwärtige Farbe nicht bereits spielte,
+	wird er diese Farbe (und nur diese) im weiteren Spielverlauf spielen.
+      </dd>
+      <dt>Unterbrechen</dt>
+      <dd>
+	Unterbricht die gegenwärtige Zuggenerierung.
+	Der Computer spielt dann den besten Zug, den er bisher gefunden hat.
+      </dd>
+      <dt>Spielstufe</dt>
+      <dd>
+	Ändert die Spielstärke des Computers.
+	Höhere Spielstufen sind stärker, können aber die Bedenkzeit des
+	Computers beim Spielen von Zügen auf langsamen Computern sehr
+	verlängern.
+      </dd>
+    </dl>
+
+    <h4>Hilfe</h4>
+    <dl>
+      <dt>Inhalt</dt>
+      <dd>
+	Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch.
+      </dd>
+      <dt>Info</dt>
+      <dd>
+	Zeigt eine Dialogfenster mit Informationen über diese Version von
+	Pentobi.
+      </dd>
+    </dl>
+
+    <p align = "right">
+      <a href="user_interface.html">Zurück</a> |
+      <a href="shortcuts.html">Weiter</a>
+    </p>
+  </body>
+</html>

@@ -2,6 +2,8 @@ Current development version
 ===========================
 
 * New menu item Find Next Comment
+* Added chapters about the main window and menu items to
+  the user manual
 * Show error message instead of crashing if the SGF file
   contains invalid move properties
 * Lowered the required version of the Boost libraries in
@@ -18,7 +20,8 @@ Current development version
 * New CMake option PENTOBI_REGISTER_GNOME2_THUMBNAILER for
   disabling the installation of files for registering the Pentobi
   thumbnailer on Gnome 2
-* Install man pages for pentobi and pentobi-thumbnailer on Unix systems
+* Install man pages for pentobi and pentobi-thumbnailer on Unix
+  systems
 
 
 Version 0.3 (2 Dec 2011)

@@ -7,6 +7,8 @@
     <file>manual/de/license.html</file>
     <file>manual/de/shortcuts.html</file>
     <file>manual/de/trigon_rules.html</file>
+    <file>manual/de/user_interface.html</file>
+    <file>manual/de/window_menu.html</file>
     <file>manual/en/board_classic.png</file>
     <file>manual/en/board_duo.png</file>
     <file>manual/en/board_trigon.png</file>
@@ -22,6 +24,8 @@
     <file>manual/en/shortcuts.html</file>
     <file>manual/en/stylesheet.css</file>
     <file>manual/en/trigon_rules.html</file>
+    <file>manual/en/user_interface.html</file>
+    <file>manual/en/window_menu.html</file>
     <file>backward10.png</file>
     <file>document-open.png</file>
     <file>document-save.png</file>

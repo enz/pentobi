@@ -1,0 +1,243 @@
+<html>
+  <head>
+    <title>Pentobi User Manual</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p align = "right">
+      <a href="user_interface.html">Previous</a> |
+      <a href="shortcuts.html">Next</a>
+    </p>
+    <h3>The Window Menu Explained</h3>
+
+    <h4>File</h4>
+    <dl>
+      <dt>Open</dt>
+      <dd>
+	Load a saved game.
+      </dd>
+      <dt>Open Recent</dt>
+      <dd>
+	Load a recently used saved game.
+      </dd>
+      <dt>Save</dt>
+      <dd>
+	Save the current game.
+      </dd>
+      <dt>Save As</dt>
+      <dd>
+	Save the current game under a new file name.
+      </dd>
+      <dt>Export/Image</dt>
+      <dd>
+	Save the current position as an image file.
+	Several image file formats are supported, the file format
+	is derived from the file name ending (e.g. ".png" for the PNG format).
+      </dd>
+      <dt>Export/ASCII Art</dt>
+      <dd>
+	Save the current position as a text diagram.
+	The text diagram should be viewed using a monospace font.
+      </dd>
+      <dt>Quit</dt>
+      <dd>
+	Quit Pentobi.
+      </dd>
+    </dl>
+
+    <h4>Game</h4>
+    <dl>
+      <dt>New Game</dt>
+      <dd>
+	Start a new game.
+      </dd>
+      <dt>Game Variant</dt>
+      <dd>
+	Select a game variant and start a new game of this game variant.
+      </dd>
+      <dt>Computer Color</dt>
+      <dd>
+	Select which colors are played by the computer.
+      </dd>
+      <dt>Game Info</dt>
+      <dd>
+	Display or edit additional information about the game like the
+	name of the players or the date when the game was played.
+      </dd>
+      <dt>Undo Move</dt>
+      <dd>
+	Undo the last move played and remove it from the game tree.
+	Undoing a move is only possible if it is the last move in the
+	current variation (i.e. a leaf node in the game tree; use Edit/Truncate
+	to remove inner nodes of the game tree).
+      </dd>
+      <dt>Find Move</dt>
+      <dd>
+	Find a legal move for the current color and display it for a few
+	seconds on the board. Selecting this item repeatedly will show all
+	legal moves.
+      </dd>
+    </dl>
+
+    <h4>Go</h4>
+    <dl>
+      <dt>Beginning</dt>
+      <dd>
+	Go to the beginning of the game.
+      </dd>
+      <dt>Ten Moves Backward</dt>
+      <dd>
+	Go ten moves backward in the current variation.
+      </dd>
+      <dt>Backward</dt>
+      <dd>
+	Go one move backward in the current variation.
+      </dd>
+      <dt>Forward</dt>
+      <dd>
+	Go one move forward in the current variation.
+	If the current position has several follow-up variations (i.e. the
+	current node in the game tree has several child nodes), the first
+	variation will be used.
+      </dd>
+      <dt>Ten Moves Forward</dt>
+      <dd>
+	Go ten moves forward in the current variation.
+	Like Forward, this also uses the first variation in positions with
+	several follow-up variations.
+      </dd>
+      <dt>End</dt>
+      <dd>
+	Go to the end of the current variation.
+	Like Forward, this also uses the first variation in positions with
+	several follow-up variations.
+      </dd>
+      <dt>Next Variation</dt>
+      <dd>
+	Go to the next variation to the last move played (i.e. the next sibling
+	node of the current node in the game tree).
+      </dd>
+      <dt>Previous Variation</dt>
+      <dd>
+	Go to the previous variation to the last move played (i.e. the previous
+	sibling node of the current node in the game tree).
+      </dd>
+      <dt>Go to Move</dt>
+      <dd>
+	Go to the move with a given move number in the current variation.
+      </dd>
+      <dt>Back to Main Variation</dt>
+      <dd>
+	Return to the last position that is in the main variation.
+      </dd>
+    </dl>
+
+    <h4>Edit</h4>
+    <dl>
+      <dt>Find Next Comment</dt>
+      <dd>
+	Go to the next position that has a comment.
+	If the comment text field was not visible, it will become visible.
+	Selecting this item repeatedly will show all positions with comments
+	in the game tree.
+      </dd>
+      <dt>Move Annotation</dt>
+      <dd>
+	Add a chess-style move annotation symbol (e.g. !!) to the current move.
+	Annotation symbols are shown after the move numbers on the board and
+	only visible if move numbers are shown.
+      </dd>
+      <dt>Make Main Variation</dt>
+      <dd>
+	Make the current variation the main variation of the game.
+	This reorders the nodes in the game tree such that the current variation
+	becomes the main variation.
+      </dd>
+      <dt>Truncate</dt>
+      <dd>
+	Remove the node with the current position, including any subtree,
+	from the game tree.
+      </dd>
+      <dt>Select Next Color</dt>
+      <dd>
+	Choose the next color for selecting pieces.
+	This can be used for example to enter game records in which moves
+	of a color were skipped because the color run out of time.
+      </dd>
+    </dl>
+
+    <h4>View</h4>
+    <dl>
+      <dt>Toolbar</dt>
+      <dd>
+	Show or hide the toolbar.
+      </dd>
+      <dt>Comment</dt>
+      <dd>
+	Show or hide a text field to display or edit comments on the current
+	position.
+      </dd>
+      <dt>Fullscreen</dt>
+      <dd>
+	Make the main window fullscreen or leave fullscreen mode.
+	It is platform-dependent if the window menu is shown in fullscreen mode.
+	To leave fullscreen mode without using the window menu, use the small
+	button at the right of the status bar or press the F11 key.
+      </dd>
+      <dt>Move Numbers</dt>
+      <dd>
+	Change the way move numbers are displayed on the board.
+	The options are to show only the number of the last move or of all
+	moves or to show no numbers at all.
+      </dd>
+      <dt>Coordinate Labels</dt>
+      <dd>
+	Display coordinate labels for the fields on the board around the
+	board.
+	The convention for labeling coordinates is the same as in the
+	Blokus SGF file format used by Pentobi.
+      </dd>
+    </dl>
+
+    <h4>Computer</h4>
+    <dl>
+      <dt>Play</dt>
+      <dd>
+	Make the computer play a move for the current color.
+	This can be used to change the color the computer plays or to
+	resume playing after navigating in the game tree.
+	If the computer did not already play the current color, it will play
+	this color (and only this color) from now on.
+      </dd>
+      <dt>Interrupt</dt>
+      <dd>
+	Interrupt the current move generation.
+	The computer will play the best move it has found so far.
+      </dd>
+      <dt>Level</dt>
+      <dd>
+	Change the playing strength of the computer.
+	Higher levels are stronger but can make the computer take a long
+	time for playing moves on slow computers.
+      </dd>
+    </dl>
+
+    <h4>Help</h4>
+    <dl>
+      <dt>Contents</dt>
+      <dd>
+	Show a window to browse the Pentobi user manual.
+      </dd>
+      <dt>About</dt>
+      <dd>
+	Show an info dialog with information about this version of Pentobi.
+      </dd>
+    </dl>
+
+    <p align = "right">
+      <a href="user_interface.html">Previous</a> |
+      <a href="shortcuts.html">Next</a>
+    </p>
+  </body>
+</html>
