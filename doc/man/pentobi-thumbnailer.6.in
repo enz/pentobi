@@ -32,6 +32,4 @@ The size of the thumbnail. The default is 128.
 .BR pentobi (6)
 
 .SH AUTHOR
-Pentobi was written by Markus Enzenberger <enz@users.sourceforge.net>.
-.PP
-This manual page was written by Markus Enzenberger <enz@users.sourceforge.net>.
+Markus Enzenberger <enz@users.sourceforge.net>
