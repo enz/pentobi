@@ -11,17 +11,6 @@ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 A copy of the GNU General Public License version 3 is appended below.
 
-Note: some parts of this program were initially based on code from the
-game-independent parts of the Fuego Go program (http://fuego.sourceforge.net),
-which is licensed under the GNU Lesser General Public License version 3 or
-later (LGPLv3+). Pentobi is licensed under the GNU General Public License
-version 3 or later (GPLv3+). To the best of my knowledge, the relevant code was
-originally written by myself, Markus Enzenberger, for Fuego. But to avoid any
-potential licensing problems in case any code from other authors of Fuego was
-used, I hereby exercise my right under section 7 of the GPLv3+ to remove the
-additional permissions of the LGPL, and this work is released under the GPLv3
-or any later version.
-
 Trademark disclaimer: the trademark Blokus and other trademarks referred to
 are property of their respective trademark holders. The trademark holders are
 not affiliated with the author of the program Pentobi.
