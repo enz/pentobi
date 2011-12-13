@@ -10,6 +10,7 @@
 namespace libboardgame_sgf {
 
 using namespace std;
+using boost::format;
 using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
@@ -18,8 +19,18 @@ class InvalidPropertyValue
     : public Exception
 {
 public:
-    InvalidPropertyValue(const string& id, const string& value);
+    template<typename T>
+    InvalidPropertyValue(const string& id, const T& value);
+
+    ~InvalidPropertyValue() throw();
 };
+
+template<typename T>
+InvalidPropertyValue::InvalidPropertyValue(const string& id, const T& value)
+    : Exception(format("Invalid value '%1' for SGF property '%2%'")
+                % value % id)
+{
+}
 
 //-----------------------------------------------------------------------------
 
