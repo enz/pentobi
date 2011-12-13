@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file InvalidPropertyValue.h */
+/** @file libboardgame_sgf/InvalidPropertyValue.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_SGF_INVALID_PROPERTY_VALUE_H
@@ -10,7 +10,6 @@
 namespace libboardgame_sgf {
 
 using namespace std;
-using boost::format;
 using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
@@ -19,11 +18,7 @@ class InvalidPropertyValue
     : public Exception
 {
 public:
-    InvalidPropertyValue(const string& message);
-
-    InvalidPropertyValue(const string& id, const string& message);
-
-    InvalidPropertyValue(const string& id, const format& message);
+    InvalidPropertyValue(const string& id, const string& value);
 };
 
 //-----------------------------------------------------------------------------

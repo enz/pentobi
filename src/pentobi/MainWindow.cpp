@@ -1513,7 +1513,7 @@ void MainWindow::gotoNode(const Node& node)
     {
         m_game->goto_node(node);
     }
-    catch (const InvalidPropertyValue& e)
+    catch (const Exception& e)
     {
         showInvalidFile(m_file, e);
     }

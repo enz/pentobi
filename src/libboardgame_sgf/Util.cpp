@@ -171,44 +171,6 @@ bool is_main_variation(const Node& node)
     return true;
 }
 
-void parse_go_move_property_value(const string& s, int& x, int& y, int sz)
-{
-    LIBBOARDGAME_ASSERT(sz >= 1);
-    LIBBOARDGAME_ASSERT(sz <= 52);
-    if (s.size() == 0 || (sz <= 19 && s == "tt"))
-    {
-        x = -1;
-        y = -1;
-        return;
-    }
-    return parse_go_point_property_value(s, x, y, sz);
-}
-
-void parse_go_point_property_value(const string& s, int& x, int& y, int sz)
-{
-    LIBBOARDGAME_ASSERT(sz >= 1);
-    LIBBOARDGAME_ASSERT(sz <= 52);
-    if (s.size() != 2)
-        throw InvalidPropertyValue(s, "Not a valid point");
-    char x_char = s[0];
-    char y_char = s[1];
-    if (x_char >= 'a' && x_char <= 'z')
-        x = x_char - 'a';
-    else if (x_char >= 'A' && x_char <= 'Z')
-        x = x_char - 'A' + 27;
-    else
-        throw InvalidPropertyValue(s, "Not a valid point");
-    if (y_char >= 'a' && y_char <= 'z')
-        y = sz - (y_char - 'a') - 1;
-    else if (y_char >= 'A' && y_char <= 'Z')
-        y = sz - (y_char - 'A' + 27) - 1;
-    else
-        throw InvalidPropertyValue(s, "Not a valid point");
-    if (x < 0 || y < 0 || x >= sz || y >= sz)
-        throw InvalidPropertyValue(s, format("Point not on board of size %1%")
-                                   % sz);
-}
-
 void write_tree(ostream& out, const Node& root, bool one_node_per_line,
                 unsigned int indent)
 {

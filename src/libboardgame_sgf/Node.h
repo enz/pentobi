@@ -206,7 +206,7 @@ T Node::get_property(const string& id) const
     string value = get_property(id);
     T result;
     if (! from_string(value, result))
-        throw InvalidPropertyValue(value, "Invalid format");
+        throw InvalidPropertyValue(id, value);
     return result;
 }
 

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file InvalidPropertyValue.cpp */
+/** @file libboardgame_sgf/InvalidPropertyValue.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -11,25 +11,14 @@
 namespace libboardgame_sgf {
 
 using namespace std;
+using boost::format;
 
 //-----------------------------------------------------------------------------
 
-InvalidPropertyValue::InvalidPropertyValue(const string& message)
-    : Exception(format("Invalid value for SGF property: %1%") % message)
-{
-}
-
 InvalidPropertyValue::InvalidPropertyValue(const string& id,
-                                           const string& message)
-    : Exception(format("Invalid value for SGF property '%1%': %2%")
-                % id % message)
-{
-}
-
-InvalidPropertyValue::InvalidPropertyValue(const string& id,
-                                           const format& message)
-    : Exception(format("Invalid value for SGF property '%1%': %2%")
-                % id % str(message))
+                                           const string& value)
+    : Exception(format("Invalid value '%1' for SGF property '%2%'")
+                % value % id)
 {
 }
 

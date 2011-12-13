@@ -148,8 +148,7 @@ ColorMove Tree::get_move(const Node& node) const
         return ColorMove::null();
     Move mv;
     if (! m_board_const->find_move(points, mv))
-        throw InvalidPropertyValue(str(format("Illegal move %1%")
-                                    % to_string(points)));
+        throw Exception(str(format("Illegal move %1%") % to_string(points)));
     return ColorMove(c, mv);
 }
 
