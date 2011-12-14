@@ -34,16 +34,19 @@ SetCompressor /SOLID lzma
 !define ADD_START_MENU_ENTRY_DEFAULT "Add start menu entry"
 !define CREATE_DESKTOP_SHORTCUT_DEFAULT "Create desktop shortcut"
 !define INSTALL_SOURCE_CODE_DEFAULT "Install source code"
+!define INSTALLER_TITLE_DEFAULT "Pentobi ${PENTOBI_VERSION} Installer"
 LangString ADD_START_MENU_ENTRY ${LANG_ENGLISH} \
   "${ADD_START_MENU_ENTRY_DEFAULT}"
 LangString CREATE_DESKTOP_SHORTCUT ${LANG_ENGLISH} \
   "${CREATE_DESKTOP_SHORTCUT_DEFAULT}"
 LangString INSTALL_SOURCE_CODE ${LANG_ENGLISH} \
   "${INSTALL_SOURCE_CODE_DEFAULT}"
+LangString INSTALLER_TITLE ${LANG_ENGLISH} \
+  "${INSTALLER_TITLE_DEFAULT}"
 !include "${PENTOBI_SRC_DIR}\windows_installer\German.nsh"
 
 Name "Pentobi"
-Caption "Pentobi Installer"
+Caption "$(INSTALLER_TITLE)"
 OutFile "pentobi-install.exe"
 InstallDir "$PROGRAMFILES\Pentobi"
 InstallDirRegKey HKLM "Software\Pentobi" ""
