@@ -982,9 +982,11 @@ void State::update_symmetry_info(Move mv)
 
 void State::write_info(ostream& out) const
 {
-    out << (format("Sco: %.1f, LGR: %.1f\n")
-            % m_stat_score.get_mean()
-            % (100 * m_stat_last_good_reply.get_mean()));
+    out << "Sco: ";
+    m_stat_score.write(out, true, 1);
+    out << ", LGR: ";
+    m_stat_last_good_reply.write(out, true, 3);
+    out << '\n';
 }
 
 //-----------------------------------------------------------------------------

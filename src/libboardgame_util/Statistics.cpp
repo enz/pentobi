@@ -28,10 +28,16 @@ void StatisticsBase::add(double val)
     m_count = count;
 }
 
-void StatisticsBase::write(ostream& out) const
+void StatisticsBase::write(ostream& out, bool fixed,
+                           unsigned int precision) const
 {
     if (m_count > 0)
-        out << m_mean;
+    {
+        ios_all_saver saver(out);
+        if (fixed)
+            out << std::fixed;
+        out << setprecision(precision) << m_mean;
+    }
     else
         out << '-';
 }
@@ -57,10 +63,16 @@ void Statistics::add(double val)
     }
 }
 
-void Statistics::write(ostream& out) const
+void Statistics::write(ostream& out, bool fixed, unsigned int precision) const
 {
     if (get_count() > 0)
-        out << get_mean() << " dev=" << get_deviation();
+    {
+        ios_all_saver saver(out);
+        if (fixed)
+            out << std::fixed;
+        out << setprecision(precision) << get_mean() << " dev="
+            << get_deviation();
+    }
     else
         out << '-';
 }

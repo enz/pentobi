@@ -30,7 +30,8 @@ public:
 
     double get_mean() const;
 
-    void write(ostream& out) const;
+    void write(ostream& out, bool fixed = false,
+               unsigned int precision = 6) const;
 
 private:
     double m_count;
@@ -79,7 +80,8 @@ public:
 
     double get_variance() const;
 
-    void write(ostream& out) const;
+    void write(ostream& out, bool fixed = false,
+               unsigned int precision = 6) const;
 
 private:
     StatisticsBase m_statistics_base;
