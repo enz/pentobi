@@ -62,7 +62,8 @@ void ComputerColorDialog::accept()
         for (ColorIterator i(2); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
     }
-    else if (m_gameVariant == game_variant_classic)
+    else if (m_gameVariant == game_variant_classic
+             || m_gameVariant == game_variant_trigon)
     {
         for (ColorIterator i(4); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
