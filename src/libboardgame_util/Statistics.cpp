@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file Statistics.cpp */
+/** @file libboardgame_util/Statistics.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -101,13 +101,14 @@ void StatisticsExt::write(ostream& out, bool fixed, unsigned int precision,
 {
     if (get_count() > 0)
     {
+        m_statistics.write(out, fixed, precision);
         ios_all_saver saver(out);
         if (fixed)
             out << std::fixed;
-        out << setprecision(precision);
-        m_statistics.write(out);
         if (integer_values)
             out << setprecision(0);
+        else
+            out << setprecision(precision);
         out << " min=" << m_min << " max=" << m_max;
     }
     else
