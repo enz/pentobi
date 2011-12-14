@@ -87,21 +87,25 @@ if(PENTOBI_BUILD_GUI)
   find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
 endif()
 
+if (UNIX)
 add_custom_target(dist
   COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD
   | gzip --best > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.gz
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+endif()
 
-add_custom_target(post-install
-  COMMAND update-desktop-database ${CMAKE_INSTALL_PREFIX}/share/applications
-  COMMAND update-mime-database ${CMAKE_INSTALL_PREFIX}/share/mime
-  COMMAND
-  if test -f ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\; then
-    env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-    gconftool-2 --makefile-install-rule
-    ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\;
-  fi
+if (UNIX AND NOT APPLE)
+  add_custom_target(post-install
+    COMMAND update-desktop-database ${CMAKE_INSTALL_PREFIX}/share/applications
+    COMMAND update-mime-database ${CMAKE_INSTALL_PREFIX}/share/mime
+    COMMAND
+    if test -f ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\; then
+      env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
+      gconftool-2 --makefile-install-rule
+      ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\;
+    fi
   )
+endif()
 
 add_subdirectory(doc)
 add_subdirectory(src)
