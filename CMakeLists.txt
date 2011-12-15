@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(Pentobi)
-set(PENTOBI_VERSION 0.3.UNKNOWN)
+set(PENTOBI_VERSION 1.0b1)
 
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
