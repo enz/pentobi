@@ -30,8 +30,7 @@ using libpentobi_mcts::ValueType;
 
 namespace {
 
-bool is_child_better(const libboardgame_mcts::Node<Move>* n1,
-                     const libboardgame_mcts::Node<Move>* n2)
+bool is_child_better(const Search::Node* n1, const Search::Node* n2)
 {
     ValueType visit_count1 = n1->get_visit_count();
     ValueType visit_count2 = n2->get_visit_count();
@@ -54,6 +53,7 @@ Engine::Engine(GameVariant game_variant, int level, bool use_book,
     get_mcts_player().set_use_book(use_book);
     get_mcts_player().set_level(level);
     add("gen_playout_move", &Engine::cmd_gen_playout_move);
+    add("get_value", &Engine::cmd_get_value);
     add("param", &Engine::cmd_param);
     add("move_values", &Engine::cmd_move_values);
 }
@@ -62,16 +62,24 @@ Engine::~Engine() throw()
 {
 }
 
+void Engine::cmd_get_value(Response& response)
+{
+    const Search::Node& root = get_search().get_tree().get_root();
+    if (root.get_count() == 0)
+        throw Failure("root node has no count");
+    response << root.get_value();
+}
+
 void Engine::cmd_move_values(Response& response)
 {
     const Search& search = get_search();
     const Board& bd = get_board();
-    vector<const libboardgame_mcts::Node<Move>*> children;
+    vector<const Search::Node*> children;
     for (ChildIterator<Move> i(search.get_tree().get_root()); i; ++i)
         children.push_back(&(*i));
     sort(children.begin(), children.end(), is_child_better);
     response << fixed;
-    BOOST_FOREACH(const libboardgame_mcts::Node<Move>* node, children)
+    BOOST_FOREACH(const Search::Node* node, children)
     {
         response << setprecision(0) << node->get_visit_count() << ' ';
         ValueType count = node->get_count();

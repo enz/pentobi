@@ -33,6 +33,8 @@ public:
 
     void cmd_param(const Arguments& args, Response& response);
 
+    void cmd_get_value(Response& response);
+
     void cmd_move_values(Response& response);
 
     Player& get_mcts_player();
