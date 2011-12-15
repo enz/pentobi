@@ -9,6 +9,7 @@
 #include "MainWindow.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <fstream>
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
@@ -60,12 +61,30 @@ QToolButton* createOBoxToolButton(QAction* action)
     return button;
 }
 
+/** Return auto-save file name as a native path name. */
 QString getAutoSaveFile()
 {
-    QString s = QDir::home().path();
-    s.append(QDir::separator());
-    s.append("autosave.blksgf");
-    return s;
+    QString home = QDir::toNativeSeparators(QDir::home().path());
+    QChar sep = QDir::separator();
+    QString dir;
+#ifdef Q_WS_WIN
+    dir = home + sep + "AppData" + sep + "Roaming";
+    if (! QDir(dir).exists("Pentobi") && ! QDir(dir).mkpath("Pentobi"))
+        dir = home;
+    else
+        dir = dir + sep + "Pentobi";
+#else
+    const char* xdgDataHome = getenv("XDG_DATA_HOME");
+    if (xdgDataHome != 0)
+        dir = xdgDataHome;
+    else
+        dir = home + sep + ".local" + sep + "share";
+    if (! QDir(dir).exists("pentobi") && ! QDir(dir).mkpath("pentobi"))
+        dir = home;
+    else
+        dir = dir + sep + "pentobi";
+#endif
+    return dir + sep + "autosave.blksgf";
 }
 
 bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
