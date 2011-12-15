@@ -149,5 +149,18 @@
       Current versions of Pentobi can still read games containing the old
       move property values but they are deprecated and should no longer be used.
     </p>
+
+    <h2>Setup properties</h2>
+    <p>
+      Setup properties are currently not used but they might be used in the
+      future.
+      Therefore, a program that reads Blokus SGF files should already check
+      nodes for the setup properties <tt>AB</tt>, <tt>AW</tt>, <tt>A1</tt>,
+      <tt>A2</tt>, <tt>A3</tt>, <tt>A4</tt>, <tt>AE</tt> and display an error
+      message if they are found.
+      Setup properties cannot be silently ignored because the program would
+      misinterpret the board state if it reads a file written by a future
+      version of Pentobi that uses setup properties.
+    </p>
   </body>
 </html>

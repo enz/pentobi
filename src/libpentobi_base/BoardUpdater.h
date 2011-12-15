@@ -18,6 +18,8 @@ class BoardUpdater
 public:
     BoardUpdater(const Tree& tree, Board& bd);
 
+    /** Update the board to a node.
+        @throws Exception if tree contains invalid properties. */
     void update(const Node& node);
 
 private:
