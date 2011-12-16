@@ -118,6 +118,11 @@ def play_game(game_number, black, white, game_variant):
             sgf += ";%s" % (prop_id)
             for p in split(move):
                 sgf += "[%s]" % (p)
+            if to_play.evaluate:
+                try:
+                    sgf += "V[%s]" % (to_play.send("get_value"))
+                except:
+                    pass
             sgf += "\n"
         else:
             nu_passes += 1
@@ -172,10 +177,12 @@ alternate = False
 number_games = 1
 game_variant = "duo"
 prefix = "output"
+evaluate = ""
 
 opts, args = getopt(argv[1:], "ab:f:g:w:n:", [
         "alternate",
         "black=",
+        "eval=",
         "file=",
         "game=",
         "white=",
@@ -186,6 +193,8 @@ for opt, val in opts:
         alternate = True
     elif opt in ("-b", "--black"):
         black_cmd = val
+    elif opt in ("--eval"):
+        evaluate = val
     elif opt in ("-f", "--file"):
         prefix = val
     elif opt in ("-g", "--game"):
@@ -212,6 +221,8 @@ else:
     exit("invalid game variant: " + game_variant)
 black = GtpClient(black_cmd, "B")
 white = GtpClient(white_cmd, "W")
+black.evaluate = (evaluate == "black" or evaluate == "both")
+white.evaluate = (evaluate == "black" or evaluate == "both")
 black.send_no_err("set_game " + game_name)
 white.send_no_err("set_game " + game_name)
 start = find_start_index()
