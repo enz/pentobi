@@ -222,7 +222,7 @@ else:
 black = GtpClient(black_cmd, "B")
 white = GtpClient(white_cmd, "W")
 black.evaluate = (evaluate == "black" or evaluate == "both")
-white.evaluate = (evaluate == "black" or evaluate == "both")
+white.evaluate = (evaluate == "white" or evaluate == "both")
 black.send_no_err("set_game " + game_name)
 white.send_no_err("set_game " + game_name)
 start = find_start_index()
