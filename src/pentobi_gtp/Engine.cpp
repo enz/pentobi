@@ -111,6 +111,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "last_good_reply " << s.get_last_good_reply() << '\n'
             << "level " << p.get_level() << '\n'
+            << "rave " << s.get_rave() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
             << "use_book " << p.get_use_book() << '\n'
             << "widening_parameter " << s.get_widening_parameter() << '\n';
@@ -132,6 +133,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_last_good_reply(args.get<bool>(1));
         else if (name == "level")
             p.set_level(args.get<int>(1));
+        else if (name == "rave")
+            s.set_rave(args.get<bool>(1));
         else if (name == "score_modification")
             s.set_score_modification(args.get<ValueType>(1));
         else if (name == "use_book")
