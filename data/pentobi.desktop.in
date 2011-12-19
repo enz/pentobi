@@ -7,5 +7,5 @@ Exec=@CMAKE_INSTALL_PREFIX@/games/pentobi %f
 Icon=pentobi
 Terminal=false
 Type=Application
-Categories=Application;Game;BoardGame;
+Categories=Game;BoardGame;
 MimeType=application/x-blokus-sgf;
