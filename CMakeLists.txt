@@ -52,6 +52,11 @@ check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 set(PENTOBI_BOOST_COMPONENTS system filesystem program_options)
 if (PENTOBI_BUILD_GTP)
   set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} thread)
+  # Package Threads is needed because some versions of CMake/FindBoost fail to
+  # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread.
+  # (e.g. this occurs with CMake 2.8.4/MinGW 3.18). We solve this by adding
+  # CMAKE_THREAD_LIBS_INIT to the link libraries.
+  find_package(Threads)
 endif()
 # Boost versions that were not released when CMake 2.8 came out.
 # You might have to update this list if you use a newer version of Boost.
@@ -67,12 +72,6 @@ if(MINGW AND Boost_USE_STATIC_LIBS)
   # BOOST_THREAD_USE_LIB is not explicetly defined.
   add_definitions(-DBOOST_THREAD_USE_LIB)
 endif()
-
-# Package Threads is needed because some versions of CMake/FindBoost fail to
-# include -lpthread in Boost_LIBRARIES, which is required by libboost_thread.
-# (e.g. this occurs with CMake 2.8.4/MinGW 3.18). We solve this by adding
-# CMAKE_THREAD_LIBS_INIT to the link libraries.
-find_package(Threads)
 
 if(NOT DEFINED LIBBOARDGAME_MCTS_VALUE_TYPE)
   set(LIBBOARDGAME_MCTS_VALUE_TYPE float)
