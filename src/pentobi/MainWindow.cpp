@@ -751,6 +751,7 @@ void MainWindow::createActions()
 
     m_actionPlay = new QAction(tr("&Play"), this);
     m_actionPlay->setShortcut(QString("Ctrl+L"));
+    m_actionPlay->setToolTip(tr("Make the computer play"));
     setIcon(m_actionPlay, "play");
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
 
