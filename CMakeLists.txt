@@ -49,7 +49,6 @@ include(CheckIncludeFiles)
 check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 
-set(Boost_DETAILED_FAILURE_MSG 1)
 # Boost versions that were not released when CMake 2.8 came out.
 # You might have to update this list if you use a newer version of Boost.
 set(Boost_ADDITIONAL_VERSIONS "1.45 1.45.0 1.46 1.46.0 1.46.1 1.47 1.47.0 1.48 1.48.0")
