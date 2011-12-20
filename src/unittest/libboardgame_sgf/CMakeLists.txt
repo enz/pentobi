@@ -21,8 +21,8 @@ target_link_libraries(unittest_libboardgame_sgf
   boardgame_test
   boardgame_util
   boardgame_sgf
-  ${Boost_LIBRARIES}
-  ${CMAKE_THREAD_LIBS_INIT}
+  ${Boost_SYSTEM_LIBRARY}
+  ${Boost_FILESYSTEM_LIBRARY}
   )
 
 add_test(libboardgame_sgf unittest_libboardgame_sgf)

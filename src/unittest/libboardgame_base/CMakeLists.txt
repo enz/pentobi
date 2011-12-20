@@ -23,8 +23,8 @@ target_link_libraries(unittest_libboardgame_base
   boardgame_util
   boardgame_sys
   boardgame_gtp
-  ${Boost_LIBRARIES}
-  ${CMAKE_THREAD_LIBS_INIT}
+  ${Boost_SYSTEM_LIBRARY}
+  ${Boost_FILESYSTEM_LIBRARY}
   )
 
 add_test(libboardgame_base unittest_libboardgame_base)

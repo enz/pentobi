@@ -23,7 +23,9 @@ if(UNIX AND NOT APPLE)
     boardgame_sgf
     boardgame_util
     boardgame_sys
-    ${Boost_LIBRARIES}
+    ${Boost_SYSTEM_LIBRARY}
+    ${Boost_FILESYSTEM_LIBRARY}
+    ${Boost_PROGRAM_OPTIONS_LIBRARY}
     )
 
   install(TARGETS pentobi-thumbnailer DESTINATION games)

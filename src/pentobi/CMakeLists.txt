@@ -56,7 +56,9 @@ target_link_libraries(pentobi
   boardgame_sgf
   boardgame_util
   boardgame_sys
-  ${Boost_LIBRARIES}
+  ${Boost_SYSTEM_LIBRARY}
+  ${Boost_FILESYSTEM_LIBRARY}
+  ${Boost_PROGRAM_OPTIONS_LIBRARY}
   )
 
 if (WIN32)
