@@ -27,7 +27,7 @@ public:
 
 template<typename T>
 InvalidPropertyValue::InvalidPropertyValue(const string& id, const T& value)
-    : Exception(format("Invalid value '%1' for SGF property '%2%'")
+    : Exception(format("Invalid value '%1%' for SGF property '%2%'")
                 % value % id)
 {
 }
