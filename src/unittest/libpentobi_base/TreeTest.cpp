@@ -6,12 +6,15 @@
 #include <config.h>
 #endif
 
+#include "libboardgame_sgf/MissingProperty.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_test/Test.h"
 #include "libpentobi_base/Tree.h"
 
 using namespace std;
 using namespace libpentobi_base;
+using libboardgame_sgf::InvalidPropertyValue;
+using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeReader;
 
 //-----------------------------------------------------------------------------
@@ -83,6 +86,28 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
         LIBBOARDGAME_CHECK(points.contains(Point("d1")));
         LIBBOARDGAME_CHECK(points.contains(Point("d2")));
     }
+}
+
+/** Check that Tree constructor throws InvalidPropertyValue on unknown GM
+    property value. */
+LIBBOARDGAME_TEST_CASE(pentobi_base_tree_invalid_game)
+{
+    istringstream in("(;GM[1])");
+    TreeReader reader;
+    reader.read(in);
+    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
+    LIBBOARDGAME_CHECK_THROW(Tree tree(root), InvalidPropertyValue);
+}
+
+/** Check that Tree constructor throws MissingProperty on missing GM
+    property. */
+LIBBOARDGAME_TEST_CASE(pentobi_base_tree_missing_game_property)
+{
+    istringstream in("(;)");
+    TreeReader reader;
+    reader.read(in);
+    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
+    LIBBOARDGAME_CHECK_THROW(Tree tree(root), MissingProperty);
 }
 
 //-----------------------------------------------------------------------------
