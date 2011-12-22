@@ -4,8 +4,10 @@
 <comment>Blokus game</comment>
 <comment xml:lang="de">Blokus-Partie</comment>
 <magic priority="60">
-<match type="string" offset="0:256" value="GM[Blokus Duo]"/>
 <match type="string" offset="0:256" value="GM[Blokus]"/>
+<match type="string" offset="0:256" value="GM[Blokus Duo]"/>
+<match type="string" offset="0:256" value="GM[Blokus Trigon]"/>
+<match type="string" offset="0:256" value="GM[Blokus Trigon Two-Player]"/>
 <match type="string" offset="0:256" value="GM[Blokus Two-Player]"/>
 </magic>
 <sub-class-of type="text/plain"/>
