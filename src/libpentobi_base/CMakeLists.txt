@@ -10,7 +10,6 @@ set(pentobi_base_STAT_SRCS
   BoardUtil.cpp
   Book.cpp
   Color.cpp
-  Engine.cpp
   Game.cpp
   GameStateHistory.cpp
   Piece.cpp
@@ -23,5 +22,11 @@ set(pentobi_base_STAT_SRCS
   SymmetricPoints.cpp
   Tree.cpp
   )
+
+if (PENTOBI_BUILD_GTP)
+  set(pentobi_base_STAT_SRCS ${pentobi_base_STAT_SRCS}
+    Engine.cpp
+    )
+endif()
 
 add_library(pentobi_base STATIC ${pentobi_base_STAT_SRCS})
