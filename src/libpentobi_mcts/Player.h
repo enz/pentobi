@@ -60,7 +60,7 @@ public:
 
     void load_book(istream& in);
 
-protected:
+private:
     bool m_is_book_loaded;
 
     bool m_use_book;
