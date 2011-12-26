@@ -48,10 +48,12 @@ void write_node(Writer& writer, const Node& node)
 
 const Node& back_to_main_variation(const Node& node)
 {
+    if (is_main_variation(node))
+        return node;
     const Node* current = &node;
     while (! is_main_variation(*current))
         current = &current->get_parent();
-    return *current;
+    return current->get_first_child();
 }
 
 const Node* find_next_comment(const Node& node)

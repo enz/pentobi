@@ -3,6 +3,9 @@ Current development version
 
 * Change directory for autosave file to use AppData (on Windows) or
   XDG_DATA_HOME (on other systems)
+* Changed Back to Main Variation to go to the last move in the main
+  variation that had a variation, not to the last position in the main
+  variation
 
 
 Version 1.0b1 (15 Dec 2011)
