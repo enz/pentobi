@@ -29,8 +29,8 @@ const bool log_piece_creation = false;
 
 struct NormalizedPoints
 {
-    /** The normlized points of the transformed piece.
-        The points were shifted using GeometryUtil::normalze_offset(). */
+    /** The normalized points of the transformed piece.
+        The points were shifted using GeometryUtil::normalize_offset(). */
     Piece::Points points;
 
     /** The point type of (0,0) in the normalized points. */
