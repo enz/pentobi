@@ -4,8 +4,6 @@
 !define PENTOBI_VERSION "@PENTOBI_VERSION@"
 !define PENTOBI_SRC_DIR "@CMAKE_SOURCE_DIR@"
 !define PENTOBI_BUILD_DIR "@CMAKE_BINARY_DIR@"
-!define PENTOBI_DIST_FILE_DIR "${PENTOBI_BUILD_DIR}"
-!define PENTOBI_DIST_FILE_NAME "pentobi-${PENTOBI_VERSION}.tar.gz"
 !define QT_TRANSLATIONS_DIR "@QT_TRANSLATIONS_DIR@"
 
 !define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pentobi"
@@ -33,14 +31,11 @@ SetCompressor /SOLID lzma
 
 !define ADD_START_MENU_ENTRY_DEFAULT "Add start menu entry"
 !define CREATE_DESKTOP_SHORTCUT_DEFAULT "Create desktop shortcut"
-!define INSTALL_SOURCE_CODE_DEFAULT "Install source code"
 !define INSTALLER_TITLE_DEFAULT "Pentobi ${PENTOBI_VERSION} Installer"
 LangString ADD_START_MENU_ENTRY ${LANG_ENGLISH} \
   "${ADD_START_MENU_ENTRY_DEFAULT}"
 LangString CREATE_DESKTOP_SHORTCUT ${LANG_ENGLISH} \
   "${CREATE_DESKTOP_SHORTCUT_DEFAULT}"
-LangString INSTALL_SOURCE_CODE ${LANG_ENGLISH} \
-  "${INSTALL_SOURCE_CODE_DEFAULT}"
 LangString INSTALLER_TITLE ${LANG_ENGLISH} \
   "${INSTALLER_TITLE_DEFAULT}"
 !include "${PENTOBI_SRC_DIR}\windows_installer\German.nsh"
@@ -120,12 +115,6 @@ CreateShortCut "$DESKTOP\Pentobi.lnk" "$INSTDIR\Pentobi.exe"
 
 SectionEnd
 
-Section "$(INSTALL_SOURCE_CODE)"
-
-File ${PENTOBI_DIST_FILE_DIR}\${PENTOBI_DIST_FILE_NAME}
-
-SectionEnd
-
 Section "Uninstall"
  
 Delete "$INSTDIR\Uninstall.exe"
@@ -147,7 +136,6 @@ Delete "$INSTDIR\book_classic_2.blksgf"
 Delete "$INSTDIR\book_duo.blksgf"
 Delete "$INSTDIR\book_trigon.blksgf"
 Delete "$INSTDIR\book_trigon_2.blksgf"
-Delete "$INSTDIR\${PENTOBI_DIST_FILE_NAME}"
 RmDir "$INSTDIR"
 
 SetShellVarContext all

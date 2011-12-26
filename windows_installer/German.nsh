@@ -6,7 +6,5 @@ LangString ADD_START_MENU_ENTRY ${LANG_GERMAN} \
   "Eintrag im Startmenü hinzufügen"
 LangString CREATE_DESKTOP_SHORTCUT ${LANG_GERMAN} \
   "Desktopverknüpfung erstellen"
-LangString INSTALL_SOURCE_CODE ${LANG_GERMAN} \
-  "Quelltext installieren"
 LangString INSTALLER_TITLE ${LANG_GERMAN} \
   "Pentobi ${PENTOBI_VERSION} installieren"
