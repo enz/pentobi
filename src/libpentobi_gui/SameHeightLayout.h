@@ -39,6 +39,8 @@ public:
 
 private:
     QList<QLayoutItem*> m_list;
+
+    int getSpacing() const;
 };
 
 //-----------------------------------------------------------------------------
