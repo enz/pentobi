@@ -18,6 +18,7 @@ using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
@@ -168,6 +169,22 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
         drawScore(painter, Color(2), x);
         x+= m_colorDotWidth + textWidthRed + pad;
         drawScore(painter, Color(3), x);
+    }
+    else if (m_gameVariant == game_variant_trigon_3)
+    {
+        int textWidthBlue = getScoreTextWidth(Color(0));
+        int textWidthYellow = getScoreTextWidth(Color(1));
+        int textWidthRed = getScoreTextWidth(Color(2));
+        int totalWidth =
+            textWidthBlue + textWidthRed + textWidthYellow
+            + 3 * m_colorDotWidth;
+        qreal pad = qreal(width() - totalWidth) / 4.f;
+        qreal x = pad;
+        drawScore(painter, Color(0), x);
+        x+= m_colorDotWidth + textWidthBlue + pad;
+        drawScore(painter, Color(1), x);
+        x+= m_colorDotWidth + textWidthYellow + pad;
+        drawScore(painter, Color(2), x);
     }
     else
     {

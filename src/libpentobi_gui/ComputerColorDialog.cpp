@@ -13,6 +13,7 @@ using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::ColorIterator;
 
 //-----------------------------------------------------------------------------
@@ -39,6 +40,12 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
         createCheckBox(layout, Color(1), tr("Yellow"));
         createCheckBox(layout, Color(2), tr("Red"));
         createCheckBox(layout, Color(3), tr("Green"));
+    }
+    else if (m_gameVariant == game_variant_trigon_3)
+    {
+        createCheckBox(layout, Color(0), tr("Blue"));
+        createCheckBox(layout, Color(1), tr("Yellow"));
+        createCheckBox(layout, Color(2), tr("Red"));
     }
     else
     {
@@ -67,6 +74,12 @@ void ComputerColorDialog::accept()
     {
         for (ColorIterator i(4); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
+    }
+    else if (m_gameVariant == game_variant_trigon_3)
+    {
+        m_computerColor[Color(0)] = m_checkBox[0]->isChecked();
+        m_computerColor[Color(2)] = m_checkBox[0]->isChecked();
+        m_computerColor[Color(1)] = m_checkBox[1]->isChecked();
     }
     else
     {

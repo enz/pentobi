@@ -32,6 +32,7 @@ using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::FullGrid;
@@ -75,6 +76,11 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     {
         gameVariant = game_variant_trigon_2;
         geometry = TrigonGeometry<Point>::get(9);
+    }
+    else if (s == "blokus trigon three-player")
+    {
+        gameVariant = game_variant_trigon_3;
+        geometry = TrigonGeometry<Point>::get(8);
     }
     else
         return false;

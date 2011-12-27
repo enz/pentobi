@@ -1,6 +1,7 @@
 Current development version
 ===========================
 
+* Support for game variant Trigon Three-Player
 * Change directory for autosave file to use AppData (on Windows) or
   XDG_DATA_HOME (on other systems)
 * Changed Back to Main Variation to go to the last move in the main

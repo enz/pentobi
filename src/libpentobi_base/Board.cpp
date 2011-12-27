@@ -98,6 +98,15 @@ void StartingPoints::init(GameVariant game_variant, const Geometry& geometry)
         add_colorless_starting_point(25, 6);
         add_colorless_starting_point(25, 11);
     }
+    else if (game_variant == game_variant_trigon_3)
+    {
+        add_colorless_starting_point(15, 2);
+        add_colorless_starting_point(15, 13);
+        add_colorless_starting_point(7, 5);
+        add_colorless_starting_point(7, 10);
+        add_colorless_starting_point(23, 5);
+        add_colorless_starting_point(23, 10);
+    }
     else
         LIBBOARDGAME_ASSERT(false);
 }
@@ -260,7 +269,8 @@ int Board::get_score(Color c, double& game_result) const
         }
     }
     else if (m_game_variant == game_variant_classic
-             || m_game_variant == game_variant_trigon)
+             || m_game_variant == game_variant_trigon
+             || m_game_variant == game_variant_trigon_3)
     {
         unsigned int points = get_points_with_bonus(c);
         int score = 0;
@@ -272,7 +282,7 @@ int Board::get_score(Color c, double& game_result) const
                 score -= points;
                 max_opponent_points = max(max_opponent_points, points);
             }
-        score = score / 3 + points;
+        score = score / (static_cast<int>(m_nu_colors) - 1) + points;
         if (points > max_opponent_points)
             game_result = 1;
         else if (points < max_opponent_points)
@@ -378,6 +388,11 @@ void Board::init(GameVariant game_variant)
     {
         board_type = board_type_classic;
         m_nu_colors = 4;
+    }
+    else if (game_variant == game_variant_trigon_3)
+    {
+        board_type = board_type_trigon_3;
+        m_nu_colors = 3;
     }
     else if (game_variant == game_variant_duo)
     {
@@ -513,7 +528,9 @@ void Board::write(ostream& out, bool mark_last_move) const
     unsigned int width = m_geometry->get_width();
     unsigned int height = m_geometry->get_height();
     bool is_info_location_right = (width <= 20);
-    bool is_trigon = (get_board_type() == board_type_trigon);
+    BoardType board_type = get_board_type();
+    bool is_trigon = (board_type == board_type_trigon
+                      || board_type == board_type_trigon_3);
     bool last_mv_marked = false;
     write_x_coord(out, width, is_trigon ? 3 : 2);
     for (unsigned int y = height - 1; ; --y)
@@ -550,7 +567,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 else if (is_trigon)
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (x % 2 == y % 2 ? '\\' : '/');
+                    out << (m_geometry->get_point_type(x, y) == 0 ? '\\' : '/');
                 }
                 else
                 {
@@ -564,7 +581,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                     && ! get_point_state_ext(p.get_left()).is_offboard())
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (x % 2 == y % 2 ? '\\' : '/');
+                    out << (m_geometry->get_point_type(x, y) == 0 ? '\\' : '/');
                 }
                 else
                 {
@@ -603,7 +620,8 @@ void Board::write(ostream& out, bool mark_last_move) const
             if (! get_point_state_ext(Point(width - 1, y)).is_offboard())
             {
                 set_color(out, "\x1B[1;30;47m");
-                out << (y % 2 != 0 ? '\\' : '/');
+                out << (m_geometry->get_point_type(width - 1, y) != 0 ?
+                        '\\' : '/');
             }
             else
             {

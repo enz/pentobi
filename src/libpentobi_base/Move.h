@@ -23,6 +23,8 @@ public:
 
     static const unsigned int onboard_moves_trigon = 32131;
 
+    static const unsigned int onboard_moves_trigon_3 = 24859;
+
     static const unsigned int onboard_moves_duo = 13729;
 
     /** Integer range of moves.

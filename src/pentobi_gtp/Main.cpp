@@ -36,6 +36,7 @@ using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::Board;
 using libpentobi_base::GameVariant;
 using libpentobi_mcts::BookBuilder;
@@ -131,6 +132,8 @@ int main(int argc, char** argv)
             game_variant = game_variant_trigon;
         else if (game_variant_string == "trigon_2")
             game_variant = game_variant_trigon_2;
+        else if (game_variant_string == "trigon_3")
+            game_variant = game_variant_trigon_3;
         else
             throw Exception(format("invalid game variant '%1%'")
                             % game_variant_string);

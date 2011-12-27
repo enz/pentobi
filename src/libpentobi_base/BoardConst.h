@@ -31,7 +31,9 @@ enum BoardType
 
     board_type_duo,
 
-    board_type_trigon
+    board_type_trigon,
+
+    board_type_trigon_3
 };
 
 //-----------------------------------------------------------------------------

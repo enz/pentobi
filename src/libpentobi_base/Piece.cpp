@@ -18,7 +18,7 @@ namespace libpentobi_base {
 
 using namespace std;
 using libboardgame_base::geometry_util::normalize_offset;
-using libboardgame_base::geometry_util::type_preserve_shift;
+using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
@@ -61,14 +61,14 @@ NormalizedPoints normalize(const Piece::Points& points, unsigned int point_type,
         log() << "Points " << points << '\n';
     NormalizedPoints normalized;
     normalized.points = points;
-    type_preserve_shift(geometry, normalized.points.begin(),
-                        normalized.points.end(), point_type);
+    type_match_shift(geometry, normalized.points.begin(),
+                     normalized.points.end(), point_type);
     if (log_piece_creation)
-        log() << "Point type " << point_type << ", type preserve shift "
+        log() << "Point type " << point_type << ", type match shift "
               << normalized.points << '\n';
     // Make the coordinates positive and minimal
-    unsigned int width;
-    unsigned int height;
+    unsigned int width; // unused
+    unsigned int height; // unused
     CoordPoint offset;
     normalize_offset(geometry, normalized.points.begin(),
                      normalized.points.end(), width, height, offset);
@@ -156,7 +156,8 @@ bool Piece::can_rotate() const
 const Transform* Piece::find_transform(const Geometry& geometry,
                                        const Points& points) const
 {
-    NormalizedPoints normalized = normalize(points, 0, geometry);
+    NormalizedPoints normalized =
+        normalize(points, geometry.get_point_type(0, 0), geometry);
     BOOST_FOREACH(const Transform* transform, get_transforms())
     {
         Points piece_points = get_points();;

@@ -19,7 +19,9 @@ enum GameVariant
 
     game_variant_trigon,
 
-    game_variant_trigon_2
+    game_variant_trigon_2,
+
+    game_variant_trigon_3
 };
 
 //-----------------------------------------------------------------------------

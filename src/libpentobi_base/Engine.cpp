@@ -188,6 +188,8 @@ void Engine::cmd_set_game(const Arguments& args)
         m_game.init(game_variant_trigon);
     else if (arg == "blokus trigon two-player")
         m_game.init(game_variant_trigon_2);
+    else if (arg == "blokus trigon three-player")
+        m_game.init(game_variant_trigon_3);
     else
         throw Failure("invalid argument");
     board_changed();
@@ -234,7 +236,8 @@ Color Engine::get_color_arg(const Arguments& args, unsigned int i) const
     const Board& bd = get_board();
     GameVariant variant = bd.get_game_variant();
     if (variant == game_variant_classic || variant == game_variant_classic_2
-        || variant == game_variant_trigon || variant == game_variant_trigon_2)
+        || variant == game_variant_trigon || variant == game_variant_trigon_2
+        || variant == game_variant_trigon_3)
     {
         if (s == "1" || s == "blue")
             return Color(0);

@@ -94,10 +94,20 @@ unsigned int TrigonGeometry<P>::get_period_y() const
 template<class P>
 unsigned int TrigonGeometry<P>::get_point_type(int x, int y) const
 {
-    if (x % 2 == 0)
-        return (y % 2 == 0 ? 0 : 1);
+    if (m_sz % 2 == 0)
+    {
+        if (x % 2 != 0)
+            return (y % 2 == 0 ? 0 : 1);
+        else
+            return (y % 2 != 0 ? 0 : 1);
+    }
     else
-        return (y % 2 != 0 ? 0 : 1);
+    {
+        if (x % 2 == 0)
+            return (y % 2 == 0 ? 0 : 1);
+        else
+            return (y % 2 != 0 ? 0 : 1);
+    }
 }
 
 template<class P>

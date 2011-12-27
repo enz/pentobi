@@ -10,16 +10,19 @@
 
 #include <algorithm>
 #include <boost/algorithm/string/trim.hpp>
+#include "libboardgame_base/GeometryUtil.h"
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
 using boost::trim;
 using libboardgame_base::CoordPoint;
+using libboardgame_base::geometry_util::type_match_shift;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::board_type_trigon;
+using libpentobi_base::board_type_trigon_3;
 
 //-----------------------------------------------------------------------------
 
@@ -87,9 +90,9 @@ int PieceSelector::heightForWidth(int width) const
 
 void PieceSelector::init()
 {
-    BoardType board_type = m_bd.get_board_type();
+    BoardType boardType = m_bd.get_board_type();
     const string* pieceLayout;
-    if (board_type == board_type_trigon)
+    if (boardType == board_type_trigon || boardType == board_type_trigon_3)
     {
         pieceLayout = &pieceLayoutTrigon;
         m_nuColumns = 47;
@@ -121,6 +124,7 @@ void PieceSelector::init()
             }
             m_piece[x][y] = piece;
         }
+    const Geometry& geometry = m_bd.get_geometry();
     for (unsigned int y = 0; y < m_nuRows; ++y)
         for (unsigned int x = 0; x < m_nuColumns; ++x)
         {
@@ -129,8 +133,8 @@ void PieceSelector::init()
                 continue;
             Piece::Points points;
             findPiecePoints(*piece, x, y, points);
-            m_transform[x][y] =
-                piece->find_transform(m_bd.get_geometry(), points);
+            type_match_shift(geometry, points.begin(), points.end(), 0);
+            m_transform[x][y] = piece->find_transform(geometry, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
         }
 }
@@ -157,7 +161,9 @@ void PieceSelector::paintEvent(QPaintEvent* event)
     painter.setClipRegion(event->region());
     painter.setRenderHint(QPainter::Antialiasing, true);
     BoardType boardType = m_bd.get_board_type();
-    if (boardType == board_type_trigon)
+    bool isTrigon =
+        (boardType == board_type_trigon || boardType == board_type_trigon_3);
+    if (isTrigon)
     {
         qreal ratio = 1.732;
         m_fieldWidth = min(qreal(width()) / (m_nuColumns + 1),
@@ -183,10 +189,11 @@ void PieceSelector::paintEvent(QPaintEvent* event)
             const Piece* piece = m_piece[x][y];
             if (piece != 0 && m_bd.is_piece_left(m_color, *piece))
             {
-                if (boardType == board_type_trigon)
+                if (isTrigon)
                 {
                     bool isUpside =
-                        (geometry.get_point_type(x, m_nuRows - y - 1) == 1);
+                        (geometry.get_point_type(x, m_nuRows - y - 1)
+                         != geometry.get_point_type(0, 0));
                     Util::paintColorTriangle(painter, gameVariant, m_color,
                                              isUpside, x * m_fieldWidth,
                                              y * m_fieldHeight, m_fieldWidth,

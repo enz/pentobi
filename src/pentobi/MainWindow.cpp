@@ -41,6 +41,7 @@ using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MoveInfo;
@@ -152,6 +153,8 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
         variant = game_variant_trigon;
     else if (variantString == "trigon_2")
         variant = game_variant_trigon_2;
+    else if (variantString == "trigon_3")
+        variant = game_variant_trigon_3;
     else
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
@@ -468,7 +471,8 @@ void MainWindow::computerColor()
     GameVariant variant = m_game->get_game_variant();
     ComputerColorDialog dialog(this, variant, m_computerColor);
     dialog.exec();
-    if (variant != game_variant_classic && variant != game_variant_trigon)
+    if (variant != game_variant_classic && variant != game_variant_trigon
+        && variant != game_variant_trigon_3)
     {
         bool computerNone = true;
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
@@ -634,6 +638,12 @@ void MainWindow::createActions()
     m_actionGameVariantTrigon2->setCheckable(true);
     connect(m_actionGameVariantTrigon2, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantTrigon2(bool)));
+
+    m_actionGameVariantTrigon3 = new QAction(tr("Tri&gon Three-Player"), this);
+    m_actionGameVariantTrigon3->setActionGroup(groupGameVariant);
+    m_actionGameVariantTrigon3->setCheckable(true);
+    connect(m_actionGameVariantTrigon3, SIGNAL(triggered(bool)),
+            this, SLOT(gameVariantTrigon3(bool)));
 
     m_actionGoodMove = new QAction(tr("&Good"), this);
     m_actionGoodMove->setActionGroup(groupMoveAnnotation);
@@ -938,8 +948,8 @@ QWidget* MainWindow::createCentralWidget()
     QWidget* widget = new QWidget();
     QBoxLayout* layout = new QBoxLayout(QBoxLayout::LeftToRight);
     widget->setLayout(layout);
-    layout->addWidget(createLeftPanel(), 60);
-    layout->addWidget(createRightPanel(), 40);
+    layout->addWidget(createLeftPanel(), 55);
+    layout->addWidget(createRightPanel(), 45);
     // The central widget doesn't do anything with the focus right now, but we
     // allow it to receive the focus such that the user can switch away the
     // focus from the comment field and its blinking cursor.
@@ -1002,6 +1012,7 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantDuo);
     menuGameVariant->addAction(m_actionGameVariantTrigon);
     menuGameVariant->addAction(m_actionGameVariantTrigon2);
+    menuGameVariant->addAction(m_actionGameVariantTrigon3);
     menuGame->addAction(m_actionComputerColor);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addAction(m_actionUndo);
@@ -1104,6 +1115,7 @@ QWidget* MainWindow::createOrientationSelector()
     QWidget* widget = new QWidget();
     QHBoxLayout* layout = new QHBoxLayout();
     widget->setLayout(layout);
+    layout->setContentsMargins(QMargins());
     layout->addWidget(createOrientationButtonBoxLeft(), 0);
     QFrame* frame = new QFrame();
     frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -1394,6 +1406,12 @@ void MainWindow::gameVariantTrigon2(bool checked)
         setGameVariant(game_variant_trigon_2);
 }
 
+void MainWindow::gameVariantTrigon3(bool checked)
+{
+    if (checked)
+        setGameVariant(game_variant_trigon_3);
+}
+
 void MainWindow::genMove()
 {
     ++m_genMoveId;
@@ -1608,6 +1626,9 @@ void MainWindow::initGameVariantActions()
     case game_variant_trigon_2:
         m_actionGameVariantTrigon2->setChecked(true);
         break;
+    case game_variant_trigon_3:
+        m_actionGameVariantTrigon3->setChecked(true);
+        break;
     case  game_variant_duo:
         m_actionGameVariantDuo->setChecked(true);
         break;
@@ -1797,7 +1818,8 @@ void MainWindow::play()
 {
     cancelGenMove();
     GameVariant variant = m_game->get_game_variant();
-    if (variant != game_variant_classic && variant != game_variant_trigon)
+    if (variant != game_variant_classic && variant != game_variant_trigon
+         && variant != game_variant_trigon_3)
     {
         QSettings settings;
         settings.setValue("computer_color_none", false);
@@ -2202,6 +2224,9 @@ void MainWindow::setGameVariant(GameVariant gameVariant)
     case game_variant_trigon_2:
         settings.setValue("game_variant", "trigon_2");
         break;
+    case game_variant_trigon_3:
+        settings.setValue("game_variant", "trigon_3");
+        break;
     }
     clearSelectedPiece();
     m_game->init(gameVariant);
@@ -2459,8 +2484,31 @@ void MainWindow::showGameOver()
         else
             info = tr("The game ends in a draw.");
     }
+    else if (variant == game_variant_trigon_3)
+    {
+        unsigned int blue = bd.get_points_with_bonus(Color(0));
+        unsigned int yellow = bd.get_points_with_bonus(Color(1));
+        unsigned int red = bd.get_points_with_bonus(Color(2));
+        unsigned int maxPoints = max(blue, max(yellow, red));
+        if (blue == yellow && yellow == red)
+            info = tr("The game ends in a draw between all colors.");
+        else if (blue == maxPoints && blue == yellow)
+            info = tr("The game ends in a draw between Blue and Yellow.");
+        else if (blue == maxPoints && blue == red)
+            info = tr("The game ends in a draw between Blue and Red.");
+        else if (yellow == maxPoints && yellow == red)
+            info = tr("The game ends in a draw between Yellow and Red.");
+        else if (blue == maxPoints)
+            info = tr("Blue wins.");
+        else if (yellow == maxPoints)
+            info = tr("Yellow wins.");
+        else
+            info = tr("Red wins.");
+    }
     else
     {
+        LIBBOARDGAME_ASSERT(variant == game_variant_classic
+                            || variant == game_variant_trigon);
         unsigned int blue = bd.get_points_with_bonus(Color(0));
         unsigned int yellow = bd.get_points_with_bonus(Color(1));
         unsigned int red = bd.get_points_with_bonus(Color(2));
@@ -2575,7 +2623,7 @@ void MainWindow::showStatus(const QString& text, bool temporary)
 
 QSize MainWindow::sizeHint() const
 {
-    return QSize(1031, 692);
+    return QSize(1020, 634);
 }
 
 void MainWindow::splitterMoved(int pos, int index)

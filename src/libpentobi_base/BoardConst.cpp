@@ -448,10 +448,12 @@ const Geometry& create_geometry(BoardType board_type)
         return *RectGeometry<Point>::get(20, 20);
     else if (board_type == board_type_duo)
         return *RectGeometry<Point>::get(14, 14);
+    else if (board_type == board_type_trigon)
+        return *TrigonGeometry<Point>::get(9);
     else
     {
-        LIBBOARDGAME_ASSERT(board_type == board_type_trigon);
-        return *TrigonGeometry<Point>::get(9);
+        LIBBOARDGAME_ASSERT(board_type == board_type_trigon_3);
+        return *TrigonGeometry<Point>::get(8);
     }
 }
 
@@ -468,6 +470,12 @@ BoardConst::BoardConst(BoardType board_type)
         m_transforms.reset(new PieceTransformsTrigon());
         m_pieces = create_pieces_trigon(board_type, m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_trigon);
+    }
+    else if (board_type == board_type_trigon_3)
+    {
+        m_transforms.reset(new PieceTransformsTrigon());
+        m_pieces = create_pieces_trigon(board_type, m_geometry, *m_transforms);
+        m_move_info.reserve(Move::onboard_moves_trigon_3);
     }
     else if (board_type == board_type_classic)
     {
@@ -494,6 +502,8 @@ BoardConst::BoardConst(BoardType board_type)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_duo);
     else if (board_type == board_type_trigon)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon);
+    else if (board_type == board_type_trigon_3)
+        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon_3);
     m_total_piece_points = 0;
     BOOST_FOREACH(const Piece& piece, m_pieces)
         m_total_piece_points += piece.get_size();
@@ -502,7 +512,8 @@ BoardConst::BoardConst(BoardType board_type)
         LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 89);
     }
-    else if (board_type == board_type_trigon)
+    else if (board_type == board_type_trigon
+             || board_type == board_type_trigon_3)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 22);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 110);
@@ -615,6 +626,7 @@ const BoardConst& BoardConst::get(BoardType board_type)
     static unique_ptr<BoardConst> board_const_classic;
     static unique_ptr<BoardConst> board_const_duo;
     static unique_ptr<BoardConst> board_const_trigon;
+    static unique_ptr<BoardConst> board_const_trigon_3;
     if (board_type == board_type_classic)
     {
         if (board_const_classic.get() == 0)
@@ -627,11 +639,18 @@ const BoardConst& BoardConst::get(BoardType board_type)
             board_const_duo.reset(new BoardConst(board_type_duo));
         return *board_const_duo;
     }
-    else
+    else if (board_type == board_type_trigon)
     {
         if (board_const_trigon.get() == 0)
             board_const_trigon.reset(new BoardConst(board_type_trigon));
         return *board_const_trigon;
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(board_type == board_type_trigon_3);
+        if (board_const_trigon_3.get() == 0)
+            board_const_trigon_3.reset(new BoardConst(board_type_trigon_3));
+        return *board_const_trigon_3;
     }
 }
 

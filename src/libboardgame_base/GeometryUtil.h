@@ -51,25 +51,31 @@ void normalize_offset(const Geometry<P>& geometry, T begin, T end,
         *i -= offset;
 }
 
-/** Shift a list of points that do not have point type 0 for (0,0) such
-    that they match the point types on the board.
-    @tparam T An iterator over a container containing CoordPoint element. */
+/** Shift a list of points that are not compatible with the point types used
+    in the geometry such that they match it.
+    The points are shifted in a minimal positive direction to match the
+    types, x-direction is preferred.
+    @tparam T An iterator over a container containing CoordPoint element.
+    @param geometry The geometry.
+    @param begin The beginning of the list of points.
+    @param end The end of the list of points.
+    @param point_type The point type of (0,0) in the list of points. */
 template<typename P, typename T>
-void type_preserve_shift(const Geometry<P>& geometry, T begin, T end,
+void type_match_shift(const Geometry<P>& geometry, T begin, T end,
                          unsigned int point_type)
 {
-    CoordPoint type_preserve_shift(0, 0); // Init to avoid compiler warning
+    CoordPoint type_match_shift(0, 0); // Init to avoid compiler warning
     bool found = false;
     for (unsigned int y = 0; ! found && y < geometry.get_period_y(); ++y)
         for (unsigned int x = 0; ! found && x < geometry.get_period_x(); ++x)
             if (geometry.get_point_type(x, y) == point_type)
             {
-                type_preserve_shift = CoordPoint(x, y);
+                type_match_shift = CoordPoint(x, y);
                 found = true;
             }
     LIBBOARDGAME_ASSERT(found);
     for (auto i = begin; i != end; ++i)
-        *i += type_preserve_shift;
+        *i += type_match_shift;
 }
 
 //-----------------------------------------------------------------------------

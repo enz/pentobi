@@ -22,6 +22,7 @@ using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::GameVariant;
 
 //-----------------------------------------------------------------------------
@@ -104,6 +105,8 @@ Move Player::genmove(Color c)
                 filename = "book_classic.blksgf";
             else if (variant == game_variant_trigon_2)
                 filename = "book_trigon_2.blksgf";
+            else if (variant == game_variant_trigon_3)
+                filename = "book_trigon_3.blksgf";
             else
             {
                 LIBBOARDGAME_ASSERT(variant == game_variant_trigon);
@@ -158,7 +161,8 @@ Move Player::genmove(Color c)
             factor_per_level = 4;
         }
         else if (variant == game_variant_trigon
-                 || variant == game_variant_trigon_2)
+                 || variant == game_variant_trigon_2
+                 || variant == game_variant_trigon_3)
         {
             minimum = 200;
             factor_per_level = ValueType(2.9);
@@ -183,7 +187,8 @@ Move Player::genmove(Color c)
                      || variant == game_variant_classic_2)
                 weight = weight_max_count_classic[player_move];
             else if (variant == game_variant_trigon
-                     || variant == game_variant_trigon_2)
+                     || variant == game_variant_trigon_2
+                     || variant == game_variant_trigon_3)
                 weight = weight_max_count_trigon[player_move];
             max_count = ceil(max_count * weight);
         }

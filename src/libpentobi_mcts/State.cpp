@@ -28,6 +28,7 @@ using libboardgame_util::log;
 using libpentobi_base::board_type_classic;
 using libpentobi_base::board_type_duo;
 using libpentobi_base::board_type_trigon;
+using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
@@ -66,7 +67,9 @@ Point find_best_starting_point(const Board& bd, Color c)
     // distance is weighted with a factor of 2)
     Point best = Point::null();
     float max_distance = -1;
-    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732f : 1);
+    bool is_trigon = (bd.get_board_type() == board_type_trigon
+                      || bd.get_board_type() == board_type_trigon_3);
+    float ratio = (is_trigon ? 1.732f : 1);
     BOOST_FOREACH(Point p, bd.get_starting_points(c))
     {
         if (bd.is_forbidden(p, c))
@@ -141,7 +144,8 @@ void set_pieces_considered(const Board& bd,
         else if (nu_moves < 30)
             min_piece_size = 3;
     }
-    else if (board_type == board_type_trigon)
+    else if (board_type == board_type_trigon
+             || board_type == board_type_trigon_3)
     {
         if (nu_moves < 16)
             min_piece_size = 6;
@@ -243,7 +247,8 @@ void State::compute_features()
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
     bool compute_dist_to_center =
         ((board_type == board_type_classic && m_bd.get_nu_moves() < 13)
-         || (board_type == board_type_trigon && m_bd.get_nu_moves() < 5));
+         || (board_type == board_type_trigon && m_bd.get_nu_moves() < 5)
+         || (board_type == board_type_trigon_3 && m_bd.get_nu_moves() < 5));
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
@@ -787,7 +792,9 @@ void State::start_search()
     m_dist_to_center.init(geometry);
     float center_x = 0.5f * geometry.get_width() - 0.5f;
     float center_y = 0.5f * geometry.get_height() - 0.5f;
-    float ratio = (bd.get_board_type() == board_type_trigon ? 1.732f : 1);
+    bool is_trigon = (bd.get_board_type() == board_type_trigon
+                      || bd.get_board_type() == board_type_trigon_3);
+    float ratio = (is_trigon ? 1.732f : 1);
     for (GeometryIterator i(geometry); i; ++i)
     {
         float x = static_cast<float>(i->get_x());

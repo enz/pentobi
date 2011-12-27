@@ -19,6 +19,7 @@ using namespace std;
 using libboardgame_util::log;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::AdjIterator;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::DiagIterator;
@@ -106,7 +107,8 @@ void BoardPainter::drawLabels(QPainter& painter,
         return;
     const Geometry& geometry = pointState.get_geometry();
     bool isTrigon = (gameVariant == game_variant_trigon
-                     || gameVariant == game_variant_trigon_2);
+                     || gameVariant == game_variant_trigon_2
+                     || gameVariant == game_variant_trigon_3);
     for (GeometryIterator i(geometry); i; ++i)
         if (! (*labels)[*i].isEmpty())
         {
@@ -138,7 +140,8 @@ void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
         return;
     const Geometry& geometry = pointState.get_geometry();
     bool isTrigon = (gameVariant == game_variant_trigon
-                     || gameVariant == game_variant_trigon_2);
+                     || gameVariant == game_variant_trigon_2
+                     || gameVariant == game_variant_trigon_3);
     if (m_isSelectedPieceLegal)
     {
         BOOST_FOREACH(Point p, m_selectedPiecePoints)
@@ -232,7 +235,8 @@ QRect BoardPainter::getRect(Point p, GameVariant gameVariant) const
     qreal extraWidth = min(0.5 * m_fieldWidth, 1.);
     qreal extraHeight = min(0.2 * m_fieldHeight, 1.);
     if (gameVariant == game_variant_trigon
-        || gameVariant == game_variant_trigon_2)
+        || gameVariant == game_variant_trigon_2
+        || gameVariant == game_variant_trigon_3)
         return QRect(floor(m_boardOffset.x() + (x - 0.5) * m_fieldWidth
                            - extraWidth),
                      floor(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
@@ -257,7 +261,8 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     m_width = static_cast<int>(geometry.get_width());
     m_height = static_cast<int>(geometry.get_height());
     bool isTrigon = (gameVariant == game_variant_trigon
-                     || gameVariant == game_variant_trigon_2);
+                     || gameVariant == game_variant_trigon_2
+                     || gameVariant == game_variant_trigon_3);
     if (isTrigon)
     {
         qreal ratio = 1.732;
