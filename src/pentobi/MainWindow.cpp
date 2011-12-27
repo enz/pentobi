@@ -2241,16 +2241,20 @@ void MainWindow::setFile(const QString& file)
         setWindowTitle(tr("Pentobi"));
     else
     {
-        setWindowTitle(tr("%1[*] - Pentobi").arg(QFileInfo(file).fileName()));
+        QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
+        if (! canonicalFilePath.isEmpty())
+            m_file = canonicalFilePath;
+        QFileInfo info(m_file);
+        setWindowTitle(tr("%1[*] - Pentobi").arg(info.fileName()));
         QSettings settings;
         QStringList files = settings.value("recent_files").toStringList();
-        files.removeAll(file);
-        files.prepend(file);
+        files.removeAll(m_file);
+        files.prepend(m_file);
         while (files.size() > maxRecentFiles)
             files.removeLast();
         settings.setValue("recent_files", files);
         updateRecentFiles();
-        settings.setValue("last_dir", QFileInfo(file).dir().path());
+        settings.setValue("last_dir", info.dir().path());
     }
 }
 
