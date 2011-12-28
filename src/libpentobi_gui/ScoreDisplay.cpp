@@ -123,7 +123,6 @@ int ScoreDisplay::getTextWidth(QString text) const
 void ScoreDisplay::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    painter.setClipRegion(event->region());
     painter.setRenderHint(QPainter::Antialiasing, true);
     QFont font;
     int defaultFontSize = font.pointSize();

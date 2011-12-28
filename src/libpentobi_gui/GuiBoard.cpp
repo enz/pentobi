@@ -32,14 +32,21 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd),
       m_isInitialized(false),
+      m_dirty(true),
       m_selectedPiece(0),
       m_selectedPieceTransform(0),
+      m_boardPixmap(0),
       m_isMoveShown(false)
 {
     setMinimumWidth(14 * (Point::max_width + 2));
     setMinimumHeight(14 * (Point::max_height + 2));
     connect(&m_currentMoveShownAnimationTimer, SIGNAL(timeout()),
             this, SLOT(showMoveAnimation()));
+}
+
+GuiBoard::~GuiBoard()
+{
+    delete m_boardPixmap;
 }
 
 void GuiBoard::clearMarkup()
@@ -57,14 +64,14 @@ void GuiBoard::clearMarkupFlag(Point p, MarkupFlag flag)
     if (! m_markupFlags[p].test(flag))
         return;
     m_markupFlags[p].reset(flag);
-    updatePoint(p);
+    setDirty();
 }
 
 void GuiBoard::clearSelectedPiece()
 {
     m_selectedPiece = 0;
     m_selectedPieceTransform = 0;
-    updateSelectedPiecePoints();
+    setSelectedPiecePoints();
     setMouseTracking(false);
 }
 
@@ -79,15 +86,12 @@ void GuiBoard::copyFromBoard(const Board& bd)
         m_pointState = bd.get_grid();
         m_labels.init(geometry, "");
         m_markupFlags.init(geometry);
-        update();
     }
     else
         for (BoardIterator i(bd); i; ++i)
             if (m_pointState[*i] != bd.get_point_state(*i))
-            {
                 m_pointState[*i] = bd.get_point_state(*i);
-                updatePoint(*i);
-            }
+    setDirty();
 }
 
 Move GuiBoard::findSelectedPieceMove()
@@ -127,7 +131,7 @@ int GuiBoard::heightForWidth(int width) const
 void GuiBoard::leaveEvent(QEvent*)
 {
     m_selectedPieceOffset = CoordPoint::null();
-    updateSelectedPiecePoints();
+    setSelectedPiecePoints();
 }
 
 void GuiBoard::mouseMoveEvent(QMouseEvent* event)
@@ -137,7 +141,7 @@ void GuiBoard::mouseMoveEvent(QMouseEvent* event)
     CoordPoint oldOffset = m_selectedPieceOffset;
     setSelectedPieceOffset(*event);
     if (m_selectedPieceOffset != oldOffset)
-        updateSelectedPiecePoints();
+        setSelectedPiecePoints();
 }
 
 void GuiBoard::mousePressEvent(QMouseEvent* event)
@@ -159,7 +163,7 @@ void GuiBoard::moveSelectedPieceDown()
         newOffset =
             CoordPoint(geometry.get_width() / 2, geometry.get_height() - 1);
         setSelectedPieceOffset(newOffset, false);
-        updateSelectedPiecePoints();
+        setSelectedPiecePoints();
     }
     else
     {
@@ -178,7 +182,7 @@ void GuiBoard::moveSelectedPieceDown()
         if (geometry.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
-            updateSelectedPiecePoints();
+            setSelectedPiecePoints();
         }
     }
 }
@@ -194,7 +198,7 @@ void GuiBoard::moveSelectedPieceLeft()
         newOffset =
             CoordPoint(geometry.get_width() - 1, geometry.get_height() / 2);
         setSelectedPieceOffset(newOffset, false);
-        updateSelectedPiecePoints();
+        setSelectedPiecePoints();
     }
     else
     {
@@ -207,7 +211,7 @@ void GuiBoard::moveSelectedPieceLeft()
         if (geometry.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
-            updateSelectedPiecePoints();
+            setSelectedPiecePoints();
         }
     }
 }
@@ -222,7 +226,7 @@ void GuiBoard::moveSelectedPieceRight()
     {
         newOffset = CoordPoint(0, geometry.get_height() / 2);
         setSelectedPieceOffset(newOffset, false);
-        updateSelectedPiecePoints();
+        setSelectedPiecePoints();
     }
     else
     {
@@ -235,7 +239,7 @@ void GuiBoard::moveSelectedPieceRight()
         if (geometry.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
-            updateSelectedPiecePoints();
+            setSelectedPiecePoints();
         }
     }
 }
@@ -250,7 +254,7 @@ void GuiBoard::moveSelectedPieceUp()
     {
         newOffset = CoordPoint(geometry.get_width() / 2, 0);
         setSelectedPieceOffset(newOffset, false);
-        updateSelectedPiecePoints();
+        setSelectedPiecePoints();
     }
     else
     {
@@ -269,7 +273,7 @@ void GuiBoard::moveSelectedPieceUp()
         if (geometry.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
-            updateSelectedPiecePoints();
+            setSelectedPiecePoints();
         }
     }
 }
@@ -278,30 +282,39 @@ void GuiBoard::paintEvent(QPaintEvent* event)
 {
     if (! m_isInitialized)
         return;
-    m_boardPainter.setCoordLabelColor(palette().color(QPalette::WindowText));
+    if (m_boardPixmap == 0 || m_boardPixmap->size() != size())
+    {
+        delete m_boardPixmap;
+        m_boardPixmap = new QPixmap(size());
+        m_dirty = true;
+    }
+    if (m_dirty)
+    {
+        QColor coordLabelColor = palette().color(QPalette::WindowText);
+        m_boardPainter.setCoordLabelColor(coordLabelColor);
+        m_boardPixmap->fill(this, 0, 0);
+        QPainter painter(m_boardPixmap);
+        m_boardPainter.paint(painter, width(), height(), m_gameVariant,
+                             m_pointState, &m_labels, &m_markupFlags);
+        m_dirty = false;
+    }
     QPainter painter(this);
-    painter.setClipRegion(event->region());
+    painter.drawPixmap(0, 0, *m_boardPixmap);
     if (m_isMoveShown)
     {
         if (m_currentMoveShownAnimationIndex % 2 == 0)
-            m_boardPainter.setSelectedPiece(m_currentMoveShownColor,
-                                            m_currentMoveShownPoints, true);
-        else
-            m_boardPainter.clearSelectedPiece();
+            m_boardPainter.paintSelectedPiece(painter, m_currentMoveShownColor,
+                                              m_currentMoveShownPoints, true);
     }
     else
     {
         if (m_selectedPiece != 0 && ! m_selectedPieceOffset.is_null())
         {
             bool isLegal = ! findSelectedPieceMove().is_null();
-            m_boardPainter.setSelectedPiece(m_selectedPieceColor,
-                                            m_selectedPiecePoints, isLegal);
+            m_boardPainter.paintSelectedPiece(painter, m_selectedPieceColor,
+                                              m_selectedPiecePoints, isLegal);
         }
-        else
-            m_boardPainter.clearSelectedPiece();
     }
-    m_boardPainter.paint(painter, width(), height(), m_gameVariant,
-                         m_pointState, &m_labels, &m_markupFlags);
 }
 
 void GuiBoard::placeSelectedPiece()
@@ -321,14 +334,20 @@ void GuiBoard::selectPiece(Color color, const Piece& piece)
         m_selectedPieceOffset = CoordPoint::null();
     m_selectedPiece = &piece;
     setSelectedPieceOffset(m_selectedPieceOffset);
-    updateSelectedPiecePoints();
+    setSelectedPiecePoints();
     setMouseTracking(true);
+}
+
+void GuiBoard::setDirty()
+{
+    m_dirty = true;
+    update();
 }
 
 void GuiBoard::setDrawCoordLabels(bool enable)
 {
     m_boardPainter.setDrawCoordLabels(enable);
-    update();
+    setDirty();
 }
 
 void GuiBoard::setLabel(Point p, const QString& text)
@@ -343,7 +362,7 @@ void GuiBoard::setLabel(Point p, const QString& text)
     if (m_labels[p] != text)
     {
         m_labels[p] = text;
-        updatePoint(p);
+        setDirty();
     }
 }
 
@@ -352,7 +371,7 @@ void GuiBoard::setMarkupFlag(Point p, MarkupFlag flag)
     if (m_markupFlags[p].test(flag))
         return;
     m_markupFlags[p].set(flag);
-    updatePoint(p);
+    setDirty();
 }
 
 void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
@@ -403,7 +422,7 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
         return;
     m_selectedPieceTransform = transform;
     setSelectedPieceOffset(m_selectedPieceOffset, false);
-    updateSelectedPiecePoints();
+    setSelectedPiecePoints();
 }
 
 void GuiBoard::showMove(Color c, Move mv)
@@ -427,14 +446,9 @@ void GuiBoard::showMoveAnimation()
     update();
 }
 
-void GuiBoard::updatePoint(Point p)
+void GuiBoard::setSelectedPiecePoints()
 {
-    update(m_boardPainter.getRect(p, m_gameVariant));
-}
-
-void GuiBoard::updateSelectedPiecePoints()
-{
-    MovePoints points;
+    m_selectedPiecePoints.clear();
     if (m_selectedPiece != 0 && m_selectedPieceOffset != CoordPoint::null())
     {
         int width = static_cast<int>(m_bd.get_geometry().get_width());
@@ -445,17 +459,10 @@ void GuiBoard::updateSelectedPiecePoints()
             int x = p.x + m_selectedPieceOffset.x;
             int y = p.y + m_selectedPieceOffset.y;
             if (x >= 0 && x < width && y >= 0 && y < height)
-                points.push_back(Point(x, y));
+                m_selectedPiecePoints.push_back(Point(x, y));
         }
     }
-    if (points != m_selectedPiecePoints)
-    {
-        BOOST_FOREACH(Point p, m_selectedPiecePoints)
-            updatePoint(p);
-        m_selectedPiecePoints = points;
-        BOOST_FOREACH(Point p, m_selectedPiecePoints)
-            updatePoint(p);
-    }
+    update();
 }
 
 //-----------------------------------------------------------------------------

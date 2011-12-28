@@ -36,13 +36,9 @@ class BoardPainter
 public:
     BoardPainter();
 
-    void clearSelectedPiece();
-
     void setDrawCoordLabels(bool enable);
 
     void setCoordLabelColor(const QColor& color);
-
-    void setSelectedPiece(Color c, const MovePoints& points, bool isLegal);
 
     void paint(QPainter& painter, unsigned int width, unsigned int height,
                GameVariant gameVariant,
@@ -50,12 +46,18 @@ public:
                const Grid<QString>* labels = 0,
                const Grid<MarkupFlags>* markupFlags = 0);
 
+    /** Paint the selected piece.
+        Paints the selected piece either transparent (if not legal) or opaque
+        (if legal). This function must only be called after a call to paint()
+        because it uses the arguments from the paint() function to determine
+        the board properties. */
+    void paintSelectedPiece(QPainter& painter, Color c,
+                            const MovePoints& points, bool isLegal);
+
     /** Get the corresponding board coordinates of a pixel.
         @return The board coordinates or CoordPoint::null() if paint() was
         not called yet or the pixel is outside the board. */
     CoordPoint getCoordPoint(int x, int y);
-
-    QRect getRect(Point p, GameVariant gameVariant) const;
 
     bool hasPainted() const;
 
@@ -64,17 +66,17 @@ private:
 
     bool m_drawCoordLabels;
 
+    bool m_isTrigon;
+
+    const Geometry* m_geometry;
+
+    GameVariant m_gameVariant;
+
     /** The width of the last board painted. */
     int m_width;
 
     /** The height of the last board painted. */
     int m_height;
-
-    Color m_selectedPieceColor;
-
-    MovePoints m_selectedPiecePoints;
-
-    bool m_isSelectedPieceLegal;
 
     QColor m_coordLabelColor;
 
@@ -102,15 +104,7 @@ private:
                     const FullGrid<PointStateExt>& pointState,
                     GameVariant gameVariant, const Grid<QString>* labels,
                     const Grid<MarkupFlags>* markupFlags);
-
-    void drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
-                           const FullGrid<PointStateExt>& pointState);
 };
-
-inline void BoardPainter::clearSelectedPiece()
-{
-    m_selectedPiecePoints.clear();
-}
 
 inline void BoardPainter::setCoordLabelColor(const QColor& color)
 {

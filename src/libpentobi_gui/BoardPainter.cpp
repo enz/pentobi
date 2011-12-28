@@ -133,84 +133,6 @@ void BoardPainter::drawLabels(QPainter& painter,
         }
 }
 
-void BoardPainter::drawSelectedPiece(QPainter& painter, GameVariant gameVariant,
-                                     const FullGrid<PointStateExt>& pointState)
-{
-    if (m_selectedPiecePoints.empty())
-        return;
-    const Geometry& geometry = pointState.get_geometry();
-    bool isTrigon = (gameVariant == game_variant_trigon
-                     || gameVariant == game_variant_trigon_2
-                     || gameVariant == game_variant_trigon_3);
-    if (m_isSelectedPieceLegal)
-    {
-        BOOST_FOREACH(Point p, m_selectedPiecePoints)
-        {
-            qreal fieldX = p.get_x() * m_fieldWidth;
-            qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
-            if (isTrigon)
-            {
-                bool isUpside = (geometry.get_point_type(p) == 1);
-                Util::paintColorTriangle(painter, gameVariant,
-                                         m_selectedPieceColor, isUpside, fieldX,
-                                         fieldY, m_fieldWidth, m_fieldHeight);
-            }
-            else
-            {
-                Util::paintColorSquare(painter, gameVariant,
-                                       m_selectedPieceColor, fieldX, fieldY,
-                                       m_fieldWidth);
-            }
-        }
-    }
-    else
-    {
-        QColor color = Util::getPaintColor(gameVariant, m_selectedPieceColor);
-        color.setHsv(color.hue(), color.saturation() / 2, color.value());
-        color.setAlpha(160);
-        BOOST_FOREACH(Point p, m_selectedPiecePoints)
-        {
-            painter.save();
-            painter.translate(p.get_x() * m_fieldWidth,
-                              (m_height - p.get_y() - 1) * m_fieldHeight);
-            if (isTrigon)
-            {
-                painter.setPen(Qt::NoPen);
-                painter.setBrush(color);
-                qreal left = -0.5 * m_fieldWidth;
-                qreal right = 1.5 * m_fieldWidth;
-                bool isUpside = (geometry.get_point_type(p) == 1);
-                if (isUpside)
-                {
-                    const QPointF polygon[3] =
-                        {
-                            QPointF(left, m_fieldHeight),
-                            QPointF(right, m_fieldHeight),
-                            QPointF(0.5 * m_fieldWidth, 0)
-                        };
-                    painter.drawConvexPolygon(polygon, 3);
-                }
-                else
-                {
-                    const QPointF polygon[3] =
-                        {
-                            QPointF(left, 0),
-                            QPointF(right, 0),
-                            QPointF(0.5 * m_fieldWidth, m_fieldHeight)
-                        };
-                    painter.drawConvexPolygon(polygon, 3);
-                }
-            }
-            else
-            {
-                painter.fillRect(QRectF(0, 0, m_fieldWidth, m_fieldHeight),
-                                 color);
-            }
-            painter.restore();
-        }
-    }
-}
-
 CoordPoint BoardPainter::getCoordPoint(int x, int y)
 {
     if (! m_hasPainted)
@@ -224,31 +146,6 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
         return CoordPoint(x, y);
 }
 
-QRect BoardPainter::getRect(Point p, GameVariant gameVariant) const
-{
-    if (! m_hasPainted)
-        return QRect();
-    int x = p.get_x();
-    int y = m_height - p.get_y() - 1;
-    // Uses some extra space because overlong labels and antialiasing can
-    // affect neighboring fields
-    qreal extraWidth = min(0.5 * m_fieldWidth, 1.);
-    qreal extraHeight = min(0.2 * m_fieldHeight, 1.);
-    if (gameVariant == game_variant_trigon
-        || gameVariant == game_variant_trigon_2
-        || gameVariant == game_variant_trigon_3)
-        return QRect(floor(m_boardOffset.x() + (x - 0.5) * m_fieldWidth
-                           - extraWidth),
-                     floor(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
-                     ceil(2 * m_fieldWidth + 2 * extraWidth),
-                     ceil(m_fieldHeight + 2 * extraHeight));
-    else
-        return QRect(floor(m_boardOffset.x() + x * m_fieldWidth - extraWidth),
-                     floor(m_boardOffset.y() + y * m_fieldHeight - extraHeight),
-                     ceil(2 * m_fieldWidth + 2 * extraWidth),
-                     ceil(m_fieldHeight + 2 * extraHeight));
-}
-
 void BoardPainter::paint(QPainter& painter, unsigned int width,
                          unsigned int height, GameVariant gameVariant,
                          const FullGrid<PointStateExt>& pointState,
@@ -257,13 +154,14 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
 {
     m_hasPainted = true;
     painter.setRenderHint(QPainter::Antialiasing, true);
-    const Geometry& geometry = pointState.get_geometry();
-    m_width = static_cast<int>(geometry.get_width());
-    m_height = static_cast<int>(geometry.get_height());
-    bool isTrigon = (gameVariant == game_variant_trigon
-                     || gameVariant == game_variant_trigon_2
-                     || gameVariant == game_variant_trigon_3);
-    if (isTrigon)
+    m_gameVariant = gameVariant;
+    m_geometry = &pointState.get_geometry();
+    m_width = static_cast<int>(m_geometry->get_width());
+    m_height = static_cast<int>(m_geometry->get_height());
+    m_isTrigon = (gameVariant == game_variant_trigon
+                  || gameVariant == game_variant_trigon_2
+                  || gameVariant == game_variant_trigon_3);
+    if (m_isTrigon)
     {
         qreal ratio = 1.732;
         if (m_drawCoordLabels)
@@ -293,7 +191,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                     0.5 * (height - m_fieldHeight * m_height));
     }
     m_fontSmall = m_font;
-    if (isTrigon)
+    if (m_isTrigon)
     {
         m_font.setPointSizeF(0.55 * m_fieldWidth);
         m_fontSmall.setPointSizeF(0.4 * m_fieldWidth);
@@ -308,18 +206,18 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     painter.save();
     painter.translate(m_boardOffset);
     if (m_drawCoordLabels)
-        drawCoordinates(painter, isTrigon);
-    m_startingPoints.init(gameVariant, geometry);
-    for (GeometryIterator i(geometry); i; ++i)
+        drawCoordinates(painter, m_isTrigon);
+    m_startingPoints.init(gameVariant, *m_geometry);
+    for (GeometryIterator i(*m_geometry); i; ++i)
     {
         int x = i->get_x();
         int y = i->get_y();
         PointStateExt s = pointState[*i];
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = (m_height - y - 1) * m_fieldHeight;
-        if (isTrigon)
+        if (m_isTrigon)
         {
-            bool isUpside = (geometry.get_point_type(x, y) == 1);
+            bool isUpside = (m_geometry->get_point_type(x, y) == 1);
             if (s.is_color())
                 Util::paintColorTriangle(painter, gameVariant, s.to_color(),
                                          isUpside, fieldX, fieldY,
@@ -349,16 +247,81 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         }
     }
     drawLabels(painter, pointState, gameVariant, labels, markupFlags);
-    drawSelectedPiece(painter, gameVariant, pointState);
     painter.restore();
 }
 
-void BoardPainter::setSelectedPiece(Color c, const MovePoints& points,
-                                    bool isLegal)
+void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
+                                      const MovePoints& points, bool isLegal)
 {
-    m_selectedPieceColor = c;
-    m_selectedPiecePoints = points;
-    m_isSelectedPieceLegal = isLegal;
+    painter.save();
+    painter.translate(m_boardOffset);
+    if (isLegal)
+    {
+        BOOST_FOREACH(Point p, points)
+        {
+            qreal fieldX = p.get_x() * m_fieldWidth;
+            qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
+            if (m_isTrigon)
+            {
+                bool isUpside = (m_geometry->get_point_type(p) == 1);
+                Util::paintColorTriangle(painter, m_gameVariant, c, isUpside,
+                                         fieldX, fieldY, m_fieldWidth,
+                                         m_fieldHeight);
+            }
+            else
+            {
+                Util::paintColorSquare(painter, m_gameVariant, c, fieldX,
+                                       fieldY, m_fieldWidth);
+            }
+        }
+    }
+    else
+    {
+        QColor color = Util::getPaintColor(m_gameVariant, c);
+        color.setHsv(color.hue(), color.saturation() / 2, color.value());
+        color.setAlpha(160);
+        BOOST_FOREACH(Point p, points)
+        {
+            painter.save();
+            painter.translate(p.get_x() * m_fieldWidth,
+                              (m_height - p.get_y() - 1) * m_fieldHeight);
+            if (m_isTrigon)
+            {
+                painter.setPen(Qt::NoPen);
+                painter.setBrush(color);
+                qreal left = -0.5 * m_fieldWidth;
+                qreal right = 1.5 * m_fieldWidth;
+                bool isUpside = (m_geometry->get_point_type(p) == 1);
+                if (isUpside)
+                {
+                    const QPointF polygon[3] =
+                        {
+                            QPointF(left, m_fieldHeight),
+                            QPointF(right, m_fieldHeight),
+                            QPointF(0.5 * m_fieldWidth, 0)
+                        };
+                    painter.drawConvexPolygon(polygon, 3);
+                }
+                else
+                {
+                    const QPointF polygon[3] =
+                        {
+                            QPointF(left, 0),
+                            QPointF(right, 0),
+                            QPointF(0.5 * m_fieldWidth, m_fieldHeight)
+                        };
+                    painter.drawConvexPolygon(polygon, 3);
+                }
+            }
+            else
+            {
+                painter.fillRect(QRectF(0, 0, m_fieldWidth, m_fieldHeight),
+                                 color);
+            }
+            painter.restore();
+        }
+    }
+    painter.restore();
 }
 
 //-----------------------------------------------------------------------------

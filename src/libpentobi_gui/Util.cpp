@@ -43,35 +43,31 @@ void paintSquare(QPainter& painter, qreal x, qreal y, qreal size,
 {
     painter.save();
     painter.translate(x, y);
-    if (! painter.hasClipping()
-        || painter.clipRegion().contains(QRect(0, 0, ceil(size), ceil(size))))
-    {
-        painter.fillRect(QRectF(0, 0, size, size), rectColor);
-        qreal border = 0.05 * size;
-        const QPointF downRightPolygon[6] =
-            {
-                QPointF(border, size - border),
-                QPointF(size - border, size - border),
-                QPointF(size - border, border),
-                QPointF(size, 0),
-                QPointF(size, size),
-                QPointF(0, size)
-            };
-        painter.setPen(Qt::NoPen);
-        painter.setBrush(downRightColor);
-        painter.drawPolygon(downRightPolygon, 6);
-        const QPointF upLeftPolygon[6] =
-            {
-                QPointF(0, 0),
-                QPointF(size, 0),
-                QPointF(size - border, border),
-                QPointF(border, border),
-                QPointF(border, size - border),
-                QPointF(0, size)
-            };
-        painter.setBrush(upLeftColor);
-        painter.drawPolygon(upLeftPolygon, 6);
-    }
+    painter.fillRect(QRectF(0, 0, size, size), rectColor);
+    qreal border = 0.05 * size;
+    const QPointF downRightPolygon[6] =
+        {
+            QPointF(border, size - border),
+            QPointF(size - border, size - border),
+            QPointF(size - border, border),
+            QPointF(size, 0),
+            QPointF(size, size),
+            QPointF(0, size)
+        };
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(downRightColor);
+    painter.drawPolygon(downRightPolygon, 6);
+    const QPointF upLeftPolygon[6] =
+        {
+            QPointF(0, 0),
+            QPointF(size, 0),
+            QPointF(size - border, border),
+            QPointF(border, border),
+            QPointF(border, size - border),
+            QPointF(0, size)
+        };
+    painter.setBrush(upLeftColor);
+    painter.drawPolygon(upLeftPolygon, 6);
     painter.restore();
 }
 
@@ -83,77 +79,71 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
     painter.translate(x, y);
     qreal left = -0.5 * width;
     qreal right = 1.5 * width;
-    if (! painter.hasClipping()
-        || painter.clipRegion().contains(QRect(floor(left), -1,
-                                               ceil(right) - floor(left),
-                                               ceil(height + 2))))
+    if (isUpside)
     {
-        if (isUpside)
-        {
-            const QPointF polygon[3] =
-                {
-                    QPointF(left, height),
-                    QPointF(right, height),
-                    QPointF(0.5 * width, 0)
-                };
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(color);
-            painter.drawConvexPolygon(polygon, 3);
-            qreal border = 0.08 * width;
-            const QPointF downRightPolygon[6] =
-                {
-                    QPointF(left, height),
-                    QPointF(right, height),
-                    QPointF(0.5 * width, 0),
-                    QPointF(0.5 * width, 2 * border),
-                    QPointF(right - 1.732 * border, height - border),
-                    QPointF(left + 1.732 * border, height - border)
-                };
-            painter.setBrush(downRightColor);
-            painter.drawPolygon(downRightPolygon, 6);
-            const QPointF upLeftPolygon[4] =
-                {
-                    QPointF(0.5 * width, 0),
-                    QPointF(0.5 * width, 2 * border),
-                    QPointF(left + 1.732 * border, height - border),
-                    QPointF(left, height),
-                };
-            painter.setBrush(upLeftColor);
-            painter.drawPolygon(upLeftPolygon, 4);
-        }
-        else
-        {
-            const QPointF polygon[3] =
-                {
-                    QPointF(left, 0),
-                    QPointF(right, 0),
-                    QPointF(0.5 * width, height)
-                };
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(color);
-            painter.drawConvexPolygon(polygon, 3);
-            qreal border = 0.05 * width;
-            const QPointF downRightPolygon[4] =
-                {
-                    QPointF(0.5 * width, height),
-                    QPointF(0.5 * width, height - 2 * border),
-                    QPointF(right - 1.732 * border, border),
-                    QPointF(right, 0)
-                };
-            painter.setBrush(downRightColor);
-            painter.drawPolygon(downRightPolygon, 4);
-            const QPointF upLeftPolygon[6] =
-                {
-                    QPointF(right, 0),
-                    QPointF(right - 1.732 * border, border),
-                    QPointF(left + 1.732 * border, border),
-                    QPointF(0.5 * width, height - 2 * border),
-                    QPointF(0.5 * width, height),
-                    QPointF(left, 0)
-                };
-            painter.setBrush(upLeftColor);
-            painter.drawPolygon(upLeftPolygon, 6);
-        }
+        const QPointF polygon[3] =
+            {
+                QPointF(left, height),
+                QPointF(right, height),
+                QPointF(0.5 * width, 0)
+            };
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(color);
+        painter.drawConvexPolygon(polygon, 3);
+        qreal border = 0.08 * width;
+        const QPointF downRightPolygon[6] =
+            {
+                QPointF(left, height),
+                QPointF(right, height),
+                QPointF(0.5 * width, 0),
+                QPointF(0.5 * width, 2 * border),
+                QPointF(right - 1.732 * border, height - border),
+                QPointF(left + 1.732 * border, height - border)
+            };
+        painter.setBrush(downRightColor);
+        painter.drawPolygon(downRightPolygon, 6);
+        const QPointF upLeftPolygon[4] =
+            {
+                QPointF(0.5 * width, 0),
+                QPointF(0.5 * width, 2 * border),
+                QPointF(left + 1.732 * border, height - border),
+                QPointF(left, height),
+            };
+        painter.setBrush(upLeftColor);
+        painter.drawPolygon(upLeftPolygon, 4);
+    }
+    else
+    {
+        const QPointF polygon[3] =
+            {
+                QPointF(left, 0),
+                QPointF(right, 0),
+                QPointF(0.5 * width, height)
+            };
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(color);
+        painter.drawConvexPolygon(polygon, 3);
+        qreal border = 0.05 * width;
+        const QPointF downRightPolygon[4] =
+            {
+                QPointF(0.5 * width, height),
+                QPointF(0.5 * width, height - 2 * border),
+                QPointF(right - 1.732 * border, border),
+                QPointF(right, 0)
+            };
+        painter.setBrush(downRightColor);
+        painter.drawPolygon(downRightPolygon, 4);
+        const QPointF upLeftPolygon[6] =
+            {
+                QPointF(right, 0),
+                QPointF(right - 1.732 * border, border),
+                QPointF(left + 1.732 * border, border),
+                QPointF(0.5 * width, height - 2 * border),
+                QPointF(0.5 * width, height),
+                QPointF(left, 0)
+            };
+        painter.setBrush(upLeftColor);
+        painter.drawPolygon(upLeftPolygon, 6);
     }
     painter.restore();
 }

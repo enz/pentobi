@@ -29,6 +29,8 @@ class GuiBoard
 public:
     GuiBoard(QWidget* parent, const Board& bd);
 
+    ~GuiBoard();
+
     void setDrawCoordLabels(bool enable);
 
     const Board& getBoard() const;
@@ -91,6 +93,11 @@ private:
 
     bool m_isInitialized;
 
+    /** Does the board need redrawing?
+        If true, the cached board pixmap needs to be repainted. This does not
+        include the selected piece (the selected piece is always painted). */
+    bool m_dirty;
+
     GameVariant m_gameVariant;
 
     Board::PointStateGrid m_pointState;
@@ -111,6 +118,8 @@ private:
 
     BoardPainter m_boardPainter;
 
+    QPixmap* m_boardPixmap;
+
     bool m_isMoveShown;
 
     Color m_currentMoveShownColor;
@@ -123,14 +132,14 @@ private:
 
     Move findSelectedPieceMove();
 
+    void setDirty();
+
     void setSelectedPieceOffset(const QMouseEvent& event);
 
     void setSelectedPieceOffset(const CoordPoint& offset,
                                 bool requireOnboard = true);
 
-    void updatePoint(Point p);
-
-    void updateSelectedPiecePoints();
+    void setSelectedPiecePoints();
 
 private slots:
     void showMoveAnimation();

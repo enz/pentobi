@@ -158,7 +158,6 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
 void PieceSelector::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    painter.setClipRegion(event->region());
     painter.setRenderHint(QPainter::Antialiasing, true);
     BoardType boardType = m_bd.get_board_type();
     bool isTrigon =

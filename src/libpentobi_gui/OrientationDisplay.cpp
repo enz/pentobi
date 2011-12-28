@@ -55,7 +55,6 @@ void OrientationDisplay::clearSelectedPiece()
 void OrientationDisplay::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    painter.setClipRegion(event->region());
     painter.setRenderHint(QPainter::Antialiasing, true);
     BoardType board_type = m_bd.get_board_type();
     qreal fieldWidth;
