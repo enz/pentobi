@@ -1236,8 +1236,9 @@ void MainWindow::exportImage()
     if (coordinateLabels)
         painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
     const Board& bd = getBoard();
-    boardPainter.paint(painter, size, size, bd.get_game_variant(),
-                       bd.get_grid(), &m_guiBoard->getLabels());
+    boardPainter.paintEmptyBoard(painter, size, size, bd.get_game_variant(),
+                                 bd.get_geometry());
+    boardPainter.paintPieces(painter, bd.get_grid(), &m_guiBoard->getLabels());
     painter.end();
     QString file;
     while (true)

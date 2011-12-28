@@ -40,17 +40,24 @@ public:
 
     void setCoordLabelColor(const QColor& color);
 
-    void paint(QPainter& painter, unsigned int width, unsigned int height,
-               GameVariant gameVariant,
-               const FullGrid<PointStateExt>& pointState,
-               const Grid<QString>* labels = 0,
-               const Grid<MarkupFlags>* markupFlags = 0);
+    void paintEmptyBoard(QPainter& painter, unsigned int width,
+                         unsigned int height, GameVariant gameVariant,
+                         const Geometry& geometry);
+
+    /** Paint the pieces and markup.
+        This function must only be called after paintEmptyBoard() because it
+        uses the arguments from the paintEmptyBoard() function to determine the
+        board properties. */
+    void paintPieces(QPainter& painter,
+                     const FullGrid<PointStateExt>& pointState,
+                     const Grid<QString>* labels = 0,
+                     const Grid<MarkupFlags>* markupFlags = 0);
 
     /** Paint the selected piece.
         Paints the selected piece either transparent (if not legal) or opaque
-        (if legal). This function must only be called after a call to paint()
-        because it uses the arguments from the paint() function to determine
-        the board properties. */
+        (if legal). This function must only be called after paintEmptyBoard()
+        because it uses the arguments from the paintEmptyBoard() function to
+        determine the board properties. */
     void paintSelectedPiece(QPainter& painter, Color c,
                             const MovePoints& points, bool isLegal);
 

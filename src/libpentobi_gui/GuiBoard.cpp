@@ -32,9 +32,11 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd),
       m_isInitialized(false),
+      m_emptyBoardDirty(true),
       m_dirty(true),
       m_selectedPiece(0),
       m_selectedPieceTransform(0),
+      m_emptyBoardPixmap(0),
       m_boardPixmap(0),
       m_isMoveShown(false)
 {
@@ -46,6 +48,7 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
 
 GuiBoard::~GuiBoard()
 {
+    delete m_emptyBoardPixmap;
     delete m_boardPixmap;
 }
 
@@ -77,21 +80,23 @@ void GuiBoard::clearSelectedPiece()
 
 void GuiBoard::copyFromBoard(const Board& bd)
 {
-    m_gameVariant = bd.get_game_variant();
     const Geometry& geometry = bd.get_geometry();
-    if (! m_isInitialized
-        || geometry.get_width() != m_pointState.get_geometry().get_width())
+    if (! m_isInitialized || m_gameVariant != bd.get_game_variant())
     {
+        m_gameVariant = bd.get_game_variant();
         m_isInitialized = true;
         m_pointState = bd.get_grid();
         m_labels.init(geometry, "");
         m_markupFlags.init(geometry);
+        setEmptyBoardDirty();
     }
     else
+    {
         for (BoardIterator i(bd); i; ++i)
             if (m_pointState[*i] != bd.get_point_state(*i))
                 m_pointState[*i] = bd.get_point_state(*i);
-    setDirty();
+        setDirty();
+    }
 }
 
 Move GuiBoard::findSelectedPieceMove()
@@ -282,20 +287,35 @@ void GuiBoard::paintEvent(QPaintEvent* event)
 {
     if (! m_isInitialized)
         return;
+    if (m_emptyBoardPixmap == 0 || m_emptyBoardPixmap->size() != size())
+    {
+        delete m_emptyBoardPixmap;
+        m_emptyBoardPixmap = new QPixmap(size());
+        m_emptyBoardDirty = true;
+    }
     if (m_boardPixmap == 0 || m_boardPixmap->size() != size())
     {
         delete m_boardPixmap;
         m_boardPixmap = new QPixmap(size());
         m_dirty = true;
     }
-    if (m_dirty)
+    if (m_emptyBoardDirty)
     {
         QColor coordLabelColor = palette().color(QPalette::WindowText);
         m_boardPainter.setCoordLabelColor(coordLabelColor);
-        m_boardPixmap->fill(this, 0, 0);
+        m_emptyBoardPixmap->fill(this, 0, 0);
+        QPainter painter(m_emptyBoardPixmap);
+        m_boardPainter.paintEmptyBoard(painter, width(), height(),
+                                       m_gameVariant,
+                                       m_pointState.get_geometry());
+        m_emptyBoardDirty = false;
+    }
+    if (m_dirty)
+    {
         QPainter painter(m_boardPixmap);
-        m_boardPainter.paint(painter, width(), height(), m_gameVariant,
-                             m_pointState, &m_labels, &m_markupFlags);
+        painter.drawPixmap(0, 0, *m_emptyBoardPixmap);
+        m_boardPainter.paintPieces(painter, m_pointState, &m_labels,
+                                   &m_markupFlags);
         m_dirty = false;
     }
     QPainter painter(this);
@@ -338,6 +358,13 @@ void GuiBoard::selectPiece(Color color, const Piece& piece)
     setMouseTracking(true);
 }
 
+void GuiBoard::setEmptyBoardDirty()
+{
+    m_emptyBoardDirty = true;
+    m_dirty = true;
+    update();
+}
+
 void GuiBoard::setDirty()
 {
     m_dirty = true;
@@ -347,7 +374,7 @@ void GuiBoard::setDirty()
 void GuiBoard::setDrawCoordLabels(bool enable)
 {
     m_boardPainter.setDrawCoordLabels(enable);
-    setDirty();
+    setEmptyBoardDirty();
 }
 
 void GuiBoard::setLabel(Point p, const QString& text)

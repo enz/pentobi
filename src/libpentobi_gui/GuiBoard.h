@@ -93,7 +93,10 @@ private:
 
     bool m_isInitialized;
 
-    /** Does the board need redrawing?
+    /** Does the empty board need redrawing? */
+    bool m_emptyBoardDirty;
+
+    /** Do the pieces and markup on the board need redrawing?
         If true, the cached board pixmap needs to be repainted. This does not
         include the selected piece (the selected piece is always painted). */
     bool m_dirty;
@@ -118,6 +121,8 @@ private:
 
     BoardPainter m_boardPainter;
 
+    QPixmap* m_emptyBoardPixmap;
+
     QPixmap* m_boardPixmap;
 
     bool m_isMoveShown;
@@ -131,6 +136,8 @@ private:
     QTimer m_currentMoveShownAnimationTimer;
 
     Move findSelectedPieceMove();
+
+    void setEmptyBoardDirty();
 
     void setDirty();
 

@@ -146,16 +146,14 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
         return CoordPoint(x, y);
 }
 
-void BoardPainter::paint(QPainter& painter, unsigned int width,
-                         unsigned int height, GameVariant gameVariant,
-                         const FullGrid<PointStateExt>& pointState,
-                         const Grid<QString>* labels,
-                         const Grid<MarkupFlags>* markupFlags)
+void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
+                                   unsigned int height, GameVariant gameVariant,
+                                   const Geometry& geometry)
 {
     m_hasPainted = true;
     painter.setRenderHint(QPainter::Antialiasing, true);
     m_gameVariant = gameVariant;
-    m_geometry = &pointState.get_geometry();
+    m_geometry = &geometry;
     m_width = static_cast<int>(m_geometry->get_width());
     m_height = static_cast<int>(m_geometry->get_height());
     m_isTrigon = (gameVariant == game_variant_trigon
@@ -212,17 +210,12 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
     {
         int x = i->get_x();
         int y = i->get_y();
-        PointStateExt s = pointState[*i];
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = (m_height - y - 1) * m_fieldHeight;
         if (m_isTrigon)
         {
             bool isUpside = (m_geometry->get_point_type(x, y) == 1);
-            if (s.is_color())
-                Util::paintColorTriangle(painter, gameVariant, s.to_color(),
-                                         isUpside, fieldX, fieldY,
-                                         m_fieldWidth, m_fieldHeight);
-            else if (m_startingPoints.is_colorless_starting_point(*i))
+            if (m_startingPoints.is_colorless_starting_point(*i))
                 Util::paintEmptyTriangleStartingPoint(painter, isUpside, fieldX,
                                                       fieldY, m_fieldWidth,
                                                       m_fieldHeight);
@@ -232,10 +225,7 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
         }
         else
         {
-            if (s.is_color())
-                Util::paintColorSquare(painter, gameVariant, s.to_color(),
-                                       fieldX, fieldY, m_fieldWidth);
-            else if (m_startingPoints.is_colored_starting_point(*i))
+            if (m_startingPoints.is_colored_starting_point(*i))
             {
                 Color color = m_startingPoints.get_starting_point_color(*i);
                 Util::paintEmptySquareStartingPoint(painter, gameVariant,
@@ -246,7 +236,40 @@ void BoardPainter::paint(QPainter& painter, unsigned int width,
                 Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
         }
     }
-    drawLabels(painter, pointState, gameVariant, labels, markupFlags);
+    painter.restore();
+}
+
+void BoardPainter::paintPieces(QPainter& painter,
+                               const FullGrid<PointStateExt>& pointState,
+                               const Grid<QString>* labels,
+                               const Grid<MarkupFlags>* markupFlags)
+{
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.save();
+    painter.translate(m_boardOffset);
+    for (GeometryIterator i(*m_geometry); i; ++i)
+    {
+        int x = i->get_x();
+        int y = i->get_y();
+        PointStateExt s = pointState[*i];
+        qreal fieldX = x * m_fieldWidth;
+        qreal fieldY = (m_height - y - 1) * m_fieldHeight;
+        if (m_isTrigon)
+        {
+            bool isUpside = (m_geometry->get_point_type(x, y) == 1);
+            if (s.is_color())
+                Util::paintColorTriangle(painter, m_gameVariant, s.to_color(),
+                                         isUpside, fieldX, fieldY,
+                                         m_fieldWidth, m_fieldHeight);
+        }
+        else
+        {
+            if (s.is_color())
+                Util::paintColorSquare(painter, m_gameVariant, s.to_color(),
+                                       fieldX, fieldY, m_fieldWidth);
+        }
+    }
+    drawLabels(painter, pointState, m_gameVariant, labels, markupFlags);
     painter.restore();
 }
 

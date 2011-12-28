@@ -155,7 +155,9 @@ int mainFunction(int argc, char* argv[])
     image.fill(Qt::transparent);
     QPainter painter;
     painter.begin(&image);
-    boardPainter.paint(painter, size, size, gameVariant, pointState);
+    boardPainter.paintEmptyBoard(painter, size, size, gameVariant,
+                                 pointState.get_geometry());
+    boardPainter.paintPieces(painter, pointState);
     painter.end();
     QImageWriter writer(files[1].c_str());
     writer.setFormat("png");
