@@ -57,6 +57,12 @@ PieceSelector::PieceSelector(QWidget* parent, const Board& bd, Color color)
     init();
 }
 
+void PieceSelector::checkUpdate()
+{
+    if (m_last_pieces_left != m_bd.get_pieces_left(m_color))
+        update();
+}
+
 void PieceSelector::findPiecePoints(const Piece& piece,
                                     unsigned int x, unsigned int y,
                                     Piece::Points& points) const
@@ -137,6 +143,8 @@ void PieceSelector::init()
             m_transform[x][y] = piece->find_transform(geometry, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
         }
+    m_last_pieces_left = m_bd.get_pieces_left(m_color);
+    update();
 }
 
 void PieceSelector::mousePressEvent(QMouseEvent* event)
@@ -205,6 +213,7 @@ void PieceSelector::paintEvent(QPaintEvent* event)
             }
         }
     painter.restore();
+    m_last_pieces_left = m_bd.get_pieces_left(m_color);
 }
 
 //-----------------------------------------------------------------------------

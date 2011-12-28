@@ -10,6 +10,7 @@
 #include "libpentobi_base/Color.h"
 
 using libboardgame_base::Transform;
+using libboardgame_util::ArrayList;
 using libpentobi_base::Color;
 using libpentobi_base::Board;
 using libpentobi_base::Piece;
@@ -32,6 +33,9 @@ public:
     bool hasHeightForWidth() const;
 
     int heightForWidth(int width) const;
+
+    /** Call update() if pieces laft have changed since last paint. */
+    void checkUpdate();
 
 signals:
     void pieceSelected(Color color, const Piece& piece,
@@ -58,6 +62,9 @@ private:
     const Piece* m_piece[maxColumns][maxRows];
 
     const Transform* m_transform[maxColumns][maxRows];
+
+    /** Pieces left at last time the widget was painted. */
+    ArrayList<unsigned int,Board::max_pieces> m_last_pieces_left;
 
     qreal m_fieldWidth;
 

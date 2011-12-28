@@ -2802,7 +2802,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         clearSelectedPiece();
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         {
-            m_pieceSelector[*i]->update();
+            m_pieceSelector[*i]->checkUpdate();
             m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
         }
         updateComment();
