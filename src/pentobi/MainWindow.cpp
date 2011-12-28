@@ -341,6 +341,7 @@ void MainWindow::cancelGenMove()
     set_abort();
     m_genMoveWatcher.waitForFinished();
     m_isGenMoveRunning = false;
+    clearStatus();
     QApplication::restoreOverrideCursor();
     m_actionInterrupt->setEnabled(false);
 }
