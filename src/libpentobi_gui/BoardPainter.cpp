@@ -276,6 +276,7 @@ void BoardPainter::paintPieces(QPainter& painter,
 void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
                                       const MovePoints& points, bool isLegal)
 {
+    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
     painter.translate(m_boardOffset);
     if (isLegal)
