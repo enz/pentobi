@@ -922,6 +922,7 @@ void MainWindow::createActions()
 
     m_actionShowComment = new QAction(tr("&Comment"), this);
     m_actionShowComment->setCheckable(true);
+    m_actionShowComment->setShortcut(QString("Ctrl+T"));
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
             this, SLOT(showComment(bool)));
 
