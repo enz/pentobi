@@ -167,7 +167,7 @@ void GuiBoard::moveSelectedPieceDown()
     {
         newOffset =
             CoordPoint(geometry.get_width() / 2, geometry.get_height() - 1);
-        setSelectedPieceOffset(newOffset, false);
+        setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
     else
@@ -202,7 +202,7 @@ void GuiBoard::moveSelectedPieceLeft()
     {
         newOffset =
             CoordPoint(geometry.get_width() - 1, geometry.get_height() / 2);
-        setSelectedPieceOffset(newOffset, false);
+        setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
     else
@@ -230,7 +230,7 @@ void GuiBoard::moveSelectedPieceRight()
     if (m_selectedPieceOffset.is_null())
     {
         newOffset = CoordPoint(0, geometry.get_height() / 2);
-        setSelectedPieceOffset(newOffset, false);
+        setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
     else
@@ -258,7 +258,7 @@ void GuiBoard::moveSelectedPieceUp()
     if (m_selectedPieceOffset.is_null())
     {
         newOffset = CoordPoint(geometry.get_width() / 2, 0);
-        setSelectedPieceOffset(newOffset, false);
+        setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
     else
@@ -411,8 +411,7 @@ void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
     setSelectedPieceOffset(m_boardPainter.getCoordPoint(event.x(), event.y()));
 }
 
-void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset,
-                                      bool requireOnboard)
+void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
 {
     if (offset.is_null())
     {
@@ -433,18 +432,6 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset,
         else
             --type_matching_offset.x;
     }
-    if (requireOnboard)
-    {
-        BOOST_FOREACH(const CoordPoint& piecePoint,
-                      m_selectedPiece->get_points())
-        {
-            CoordPoint p =
-                m_selectedPieceTransform->get_transformed(piecePoint);
-            p = p + type_matching_offset;
-            if (! geometry.is_onboard(p))
-                return;
-        }
-    }
     m_selectedPieceOffset = type_matching_offset;
 }
 
@@ -453,7 +440,7 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
     if (m_selectedPieceTransform == transform)
         return;
     m_selectedPieceTransform = transform;
-    setSelectedPieceOffset(m_selectedPieceOffset, false);
+    setSelectedPieceOffset(m_selectedPieceOffset);
     setSelectedPiecePoints();
 }
 

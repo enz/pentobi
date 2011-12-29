@@ -143,8 +143,7 @@ private:
 
     void setSelectedPieceOffset(const QMouseEvent& event);
 
-    void setSelectedPieceOffset(const CoordPoint& offset,
-                                bool requireOnboard = false);
+    void setSelectedPieceOffset(const CoordPoint& offset);
 
     void setSelectedPiecePoints();
 
