@@ -1,5 +1,5 @@
 ; Script for creating a Windows installer with NSIS
-; (http://nsis.sourceforge.net)
+; (http://nsis.sf.net)
 
 !define PENTOBI_VERSION "@PENTOBI_VERSION@"
 !define PENTOBI_SRC_DIR "@CMAKE_SOURCE_DIR@"
@@ -46,7 +46,7 @@ OutFile "pentobi-install.exe"
 InstallDir "$PROGRAMFILES\Pentobi"
 InstallDirRegKey HKLM "Software\Pentobi" ""
 ; Set admin level, needed for shortcut removal on Vista
-; (http://nsis.sourceforge.net/Shortcuts_removal_fails_on_Windows_Vista)
+; (http://nsis.sf.net/Shortcuts_removal_fails_on_Windows_Vista)
 RequestExecutionLevel admin
 
 Section
@@ -80,7 +80,7 @@ WriteUninstaller $INSTDIR\Uninstall.exe
 WriteRegStr HKLM "${UNINST_KEY}" "DisplayName" "Pentobi"
 WriteRegStr HKLM "${UNINST_KEY}" "DisplayVersion" "${PENTOBI_VERSION}"
 WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$INSTDIR\pentobi.ico"
-WriteRegStr HKLM "${UNINST_KEY}" "URLInfoAbout" "http://pentobi.sourceforge.net/"
+WriteRegStr HKLM "${UNINST_KEY}" "URLInfoAbout" "http://pentobi.sf.net/"
 WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
  
 File "${PENTOBI_SRC_DIR}\windows_installer\blksgf.ico"
