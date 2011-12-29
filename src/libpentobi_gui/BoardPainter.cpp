@@ -306,6 +306,8 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
         color.setAlpha(160);
         BOOST_FOREACH(Point p, points)
         {
+            if (! m_geometry->is_onboard(p))
+                continue;
             painter.save();
             painter.translate(p.get_x() * m_fieldWidth,
                               (m_height - p.get_y() - 1) * m_fieldHeight);
