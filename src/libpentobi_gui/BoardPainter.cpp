@@ -34,6 +34,7 @@ BoardPainter::BoardPainter()
       m_drawCoordLabels(false),
       m_coordLabelColor(Qt::black)
 {
+    m_font.setStyleStrategy(QFont::PreferOutline);
 }
 
 void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)

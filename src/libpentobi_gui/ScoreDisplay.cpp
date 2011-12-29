@@ -125,14 +125,9 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     QFont font;
-    int defaultFontSize = font.pointSize();
-    // Try to use the default font size, which usually renders better,
-    // unless height is significantly larg or small
-    int fontSize = 0.7 * height();
-    if (fontSize > 0.9 * defaultFontSize && fontSize < 1.5 * defaultFontSize)
-        fontSize = defaultFontSize;
-    else
-        font.setPointSize(fontSize);
+    font.setStyleStrategy(QFont::PreferOutline);
+    qreal fontSize = 0.7 * height();
+    font.setPointSizeF(fontSize);
     painter.setFont(font);
     m_colorDotSize = 0.8 * fontSize;
     m_colorDotSpace = 0.3 * fontSize;
