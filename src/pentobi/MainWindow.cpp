@@ -110,6 +110,7 @@ bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
 void setIcon(QAction* action, const QString& name)
 {
     action->setIcon(QIcon(QString(":/pentobi/%1.png").arg(name)));
+    action->setIconVisibleInMenu(false);
 }
 
 /** Simple heuristic that prefers moves with more piece points, more attach
@@ -601,7 +602,6 @@ void MainWindow::createActions()
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
     setIcon(m_actionFullscreen, "view-fullscreen");
-    m_actionFullscreen->setIconVisibleInMenu(false);
     m_actionFullscreen->setCheckable(true);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
