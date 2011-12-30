@@ -7,6 +7,8 @@ Current development version
 * Changed Back to Main Variation to go to the last move in the main
   variation that had a variation, not to the last position in the main
   variation
+* Changed variation string in status bar to contain information about the
+  move numbers at the branching points.
 * Fixed small rendering errors
 
 

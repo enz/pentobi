@@ -24,6 +24,10 @@ const Node* find_next_comment(const Node& node);
 
 const Node& find_root(const Node& node);
 
+/** Get the depth of a node.
+    The root node has depth 0. */
+unsigned int get_depth(const Node& node);
+
 /** Get list of nodes from root to a target node.
     @param node The target node.
     @param[out] path The list of nodes. */
@@ -37,11 +41,12 @@ const Node* get_next_node(const Node& node);
 /** Return next variation before this node. */
 const Node* get_next_earlier_variation(const Node& node);
 
-/** Get a text representation of the variation to a certain node.
-    The string contains the number of the child for each node with more
-    than one child in the path from the root node to this node.
-    The childs are counted starting with 1 and the numbers are separated
-    by colons. */
+/** Get a text representation of the variation of a certain node.
+    The variation string is a sequence of X.Y for each branching into a
+    variation that is not the first child since the root node separated by
+    commas, with X being the depth of the child node (starting at 0, and
+    therefore equivalent to the move number if there are no non-root nodes
+    without moves) and Y being the number of the child (starting at 1). */
 string get_variation_string(const Node& node);
 
 bool is_main_variation(const Node& node);

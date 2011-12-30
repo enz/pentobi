@@ -92,6 +92,18 @@ const Node& get_last_node(const Node& node)
     return *n;
 }
 
+unsigned int get_depth(const Node& node)
+{
+    unsigned int depth = 0;
+    const Node* current = &node;
+    while (current->has_parent())
+    {
+        current = &current->get_parent();
+        ++depth;
+    }
+    return depth;
+}
+
 const Node* get_next_earlier_variation(const Node& node)
 {
     const Node* child = &node;
@@ -126,33 +138,30 @@ void get_path_from_root(const Node& node, vector<const Node*>& path)
     reverse(path.begin(), path.end());
 }
 
-/** Get a text representation of the variation to a certain node.
-    The string contains the number of the child for each node with more
-    than one child in the path from the root node to this node.
-    The childs are counted starting with 1 and the numbers are separated
-    by colons. */
 string get_variation_string(const Node& node)
 {
-    vector<unsigned int> list;
+    string result;
     const Node* current = &node;
-    while (current != 0)
+    unsigned int depth = get_depth(*current);
+    while (current->has_parent())
     {
-        const Node* parent = current->get_parent_or_null();
-        if (parent != 0 && parent->get_nu_children() > 1)
+        const Node& parent = current->get_parent();
+        if (parent.get_nu_children() > 1)
         {
-            unsigned int index = parent->get_child_index(*current) + 1;
-            list.insert(list.begin(), index);
+            unsigned int index = parent.get_child_index(*current) + 1;
+            if (index > 1)
+            {
+                ostringstream s;
+                s << depth << '.' << index;
+                if (! result.empty())
+                    s << ',' << result;
+                result = s.str();
+            }
         }
-        current = parent;
+        current = &parent;
+        --depth;
     }
-    ostringstream s;
-    for (unsigned int i = 0; i < list.size(); ++i)
-    {
-        s << list[i];
-        if (i < list.size() - 1)
-            s << '.';
-    }
-    return s.str();
+    return result;
 }
 
 bool has_comment(const Node& node)
