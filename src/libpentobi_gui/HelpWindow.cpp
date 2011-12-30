@@ -25,19 +25,29 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     : QMainWindow(parent)
 {
     setWindowTitle(tr("Pentobi - Help"));
+    m_mainPageUrl = QUrl::fromLocalFile(mainPage);
     QTextBrowser* browser = new QTextBrowser(this);
     setCentralWidget(browser);
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    browser->setSource(QUrl::fromLocalFile(mainPage));
+    browser->setSource(m_mainPageUrl);
     QAction* actionBack = new QAction(tr("Back"), this);
+    actionBack->setEnabled(false);
     setIcon(actionBack, "go-previous");
     connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
+    connect(browser, SIGNAL(backwardAvailable(bool)),
+            actionBack, SLOT(setEnabled(bool)));
     QAction* actionForward = new QAction(tr("Forward"), this);
+    actionForward->setEnabled(false);
     setIcon(actionForward, "go-next");
     connect(actionForward, SIGNAL(triggered()), browser, SLOT(forward()));
-    QAction* actionHome = new QAction(tr("Home"), this);
-    setIcon(actionHome, "go-home");
-    connect(actionHome, SIGNAL(triggered()), browser, SLOT(home()));
+    connect(browser, SIGNAL(forwardAvailable(bool)),
+            actionForward, SLOT(setEnabled(bool)));
+    m_actionHome = new QAction(tr("Home"), this);
+    m_actionHome->setEnabled(false);
+    setIcon(m_actionHome, "go-home");
+    connect(m_actionHome, SIGNAL(triggered()), browser, SLOT(home()));
+    connect(browser, SIGNAL(sourceChanged(const QUrl&)),
+            this, SLOT(handleSourceChanged(const QUrl&)));
     QAction* actionClose = new QAction("", this);
     actionClose->setShortcut(QKeySequence::Close);
     connect(actionClose, SIGNAL(triggered()), this, SLOT(hide()));
@@ -46,7 +56,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     toolBar->setMovable(false);
     toolBar->addAction(actionBack);
     toolBar->addAction(actionForward);
-    toolBar->addAction(actionHome);
+    toolBar->addAction(m_actionHome);
     addToolBar(toolBar);
     QSettings settings;
     if (! restoreGeometry(settings.value("helpwindow_geometry").toByteArray()))
@@ -71,6 +81,11 @@ void HelpWindow::closeEvent(QCloseEvent* event)
     QSettings settings;
     settings.setValue("helpwindow_geometry", saveGeometry());
     QMainWindow::closeEvent(event);
+}
+
+void HelpWindow::handleSourceChanged(const QUrl& src)
+{
+    m_actionHome->setEnabled(src != m_mainPageUrl);
 }
 
 QSize HelpWindow::sizeHint() const
