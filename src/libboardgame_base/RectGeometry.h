@@ -98,12 +98,12 @@ void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
 {
     typename NullTermList<Point, 4>::Init init_adj(adj);
     LIBBOARDGAME_FOREACH_ADJ(p, p_adj,
-        if (is_onboard(p_adj))
+        if (this->is_onboard(p_adj))
             init_adj.push_back(p_adj););
     init_adj.finish();
     typename NullTermList<Point, 9>::Init init_diag(diag);
     LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
-        if (is_onboard(p_diag))
+        if (this->is_onboard(p_diag))
             init_diag.push_back(p_diag););
     init_diag.finish();
 }

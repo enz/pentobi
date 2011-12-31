@@ -192,32 +192,6 @@ protected:
     void add(const string& name, void (T::*f)());
 
 private:
-    class NameKey
-    {
-    public:
-        /** Construct a key to store in the map. */
-        NameKey(const string& name);
-
-        /** Construct a key for lookup in the map.
-            Only for temporary usage during a lookup. Avoids the allocation of
-            a new string object. */
-        NameKey(const CmdLineRange& range);
-
-        /** Construct a key for lookup in the map.
-            Only for temporary usage during a lookup. Avoids the allocation of
-            a new string object. */
-        NameKey(string::const_iterator begin , string::const_iterator end);
-
-        bool operator<(const NameKey& key) const;
-
-        const string& name() const;
-
-    private:
-        shared_ptr<string> m_name;
-
-        sub_range<const string> m_range;
-    };
-
     /** Mapping of command name to command handler.
         They key is a string subrange, not a string, to allow looking up the
         command name using Command::name_as_subrange() without creating a
@@ -225,7 +199,7 @@ private:
         the name string and callback function are stored in an object allocated
         on the heap to ensure that the range stays valid, if the value object
         is copied. */
-    typedef map<NameKey, Handler> Handlers;
+    typedef map<string, Handler> Handlers;
 
     typedef Handlers::const_iterator HandlerIterator;
 
@@ -254,8 +228,7 @@ private:
 };
 
 template<class T>
-void Engine::add(const string& name,
-                          void (T::*f)(const Arguments&, Response&))
+void Engine::add(const string& name, void (T::*f)(const Arguments&, Response&))
 {
     add(name, f, dynamic_cast<T*>(this));
 }

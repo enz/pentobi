@@ -158,7 +158,7 @@ void BookBuilder::build(const path& file)
             throw Exception("File has wrong game variant");
     }
     else
-        m_tree.init(m_game_variant);
+        m_tree.init_game_variant(m_game_variant);
     while (true)
     {
         const Node* node;

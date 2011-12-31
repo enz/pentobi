@@ -42,6 +42,7 @@ struct NormalizedPoints
     }
 };
 
+#if LIBBOARDGAME_DEBUG
 /** Check consistency of transformations.
     Checks that the point list (which must be already sorted) has no
     duplicates. */
@@ -52,6 +53,7 @@ bool check_consistency(const Piece::Points& points)
             return false;
     return true;
 }
+#endif // LIBBOARDGAME_DEBUG
 
 /** Bring piece points into a normal form that is constant under translation. */
 NormalizedPoints normalize(const Piece::Points& points, unsigned int point_type,

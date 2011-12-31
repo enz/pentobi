@@ -31,7 +31,7 @@ public:
 
     Tree(unique_ptr<Node>& root);
 
-    void init(GameVariant game_variant);
+    void init_game_variant(GameVariant game_variant);
 
     void init(unique_ptr<Node>& root);
 

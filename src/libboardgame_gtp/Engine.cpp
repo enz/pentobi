@@ -399,36 +399,6 @@ bool ReadThread::read_cmd(CmdLine& c)
 
 //-----------------------------------------------------------------------------
 
-Engine::NameKey::NameKey(const string& name)
-    : m_name(new string(name)),
-      m_range(m_name->begin(), m_name->end())
-{
-}
-
-Engine::NameKey::NameKey(const CmdLineRange& range)
-    : m_range(range.begin(), range.end())
-{
-}
-
-Engine::NameKey::NameKey(string::const_iterator begin,
-                         string::const_iterator end)
-    : m_range(begin, end)
-{
-}
-
-bool Engine::NameKey::operator<(const NameKey& key) const
-{
-    return m_range < key.m_range;
-}
-
-const string& Engine::NameKey::name() const
-{
-    assert(m_name.get() != 0);
-    return *m_name;
-}
-
-//-----------------------------------------------------------------------------
-
 Engine::Engine()
 {
     add("known_command", &Engine::cmd_known_command);
@@ -445,7 +415,7 @@ Engine::~Engine() throw()
 
 void Engine::add(const string& name, Handler f)
 {
-    m_handlers[NameKey(name)] = f;
+    m_handlers[name] = f;
 }
 
 void Engine::add(const string& name, HandlerNoArgs f)
@@ -497,7 +467,7 @@ void Engine::cmd_known_command(const Arguments& args, Response& response)
 void Engine::cmd_list_commands(Response& response)
 {
     for (HandlerIterator i = m_handlers.begin(); i != m_handlers.end(); ++i)
-        response << i->first.name() << '\n';
+        response << i->first << '\n';
 }
 
 /** Return name. */
@@ -527,13 +497,12 @@ void Engine::cmd_version(Response&)
 
 bool Engine::contains(const string& name) const
 {
-    return (m_handlers.find(NameKey(name.begin(), name.end()))
-            != m_handlers.end());
+    return (m_handlers.find(name) != m_handlers.end());
 }
 
 void Engine::remove(const string& name)
 {
-    auto i = m_handlers.find(NameKey(name.begin(), name.end()));
+    auto i = m_handlers.find(name);
     if (i != m_handlers.end())
         m_handlers.erase(i);
 }

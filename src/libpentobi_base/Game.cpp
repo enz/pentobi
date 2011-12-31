@@ -44,7 +44,7 @@ void Game::goto_node(const Node& node)
 void Game::init(GameVariant game_variant)
 {
     m_bd.init(game_variant);
-    m_tree.init(game_variant);
+    m_tree.init_game_variant(game_variant);
     m_current = &m_tree.get_root();
 }
 

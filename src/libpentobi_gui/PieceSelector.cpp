@@ -68,8 +68,8 @@ void PieceSelector::findPiecePoints(const Piece& piece,
                                     Piece::Points& points) const
 {
     CoordPoint p(x, m_nuRows - y - 1);
-    if (x < 0 || x >= m_nuColumns || y < 0 || y >= m_nuRows
-        || m_piece[x][y] != &piece ||  points.contains(p))
+    if (x >= m_nuColumns || y >= m_nuRows || m_piece[x][y] != &piece
+        ||  points.contains(p))
         return;
     points.push_back(p);
     // This assumes that no Trigon pieces touch at the corners, otherwise

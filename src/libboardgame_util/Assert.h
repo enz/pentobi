@@ -1,13 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file Assert.h */
+/** @file libboardgame_util/Assert.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_ASSERT_H
 #define LIBBOARDGAME_UTIL_ASSERT_H
 
 namespace libboardgame_util {
-
-using namespace std;
 
 //-----------------------------------------------------------------------------
 

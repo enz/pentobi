@@ -31,7 +31,7 @@ using libboardgame_util::string_util::to_string;
 
 Tree::Tree(GameVariant game_variant)
 {
-    init(game_variant);
+    init_game_variant(game_variant);
 }
 
 Tree::Tree(unique_ptr<Node>& root)
@@ -201,7 +201,7 @@ string Tree::get_player_name(Color c) const
     return "";
 }
 
-void Tree::init(GameVariant game_variant)
+void Tree::init_game_variant(GameVariant game_variant)
 {
     libboardgame_sgf::Tree::init();
     m_game_variant = game_variant;
