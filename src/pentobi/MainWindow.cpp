@@ -271,7 +271,7 @@ void MainWindow::about()
              "<p>"
              "Computer program that plays the board game Blokus."
              "<br>"
-             "&copy; 2011 Markus Enzenberger"
+             "&copy; 2011&ndash;2012 Markus Enzenberger"
              "<br>"
              "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
              "</p>"
