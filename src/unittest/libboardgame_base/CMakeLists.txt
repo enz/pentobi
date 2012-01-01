@@ -22,7 +22,6 @@ target_link_libraries(unittest_libboardgame_base
   boardgame_test
   boardgame_util
   boardgame_sys
-  boardgame_gtp
   ${Boost_SYSTEM_LIBRARY}
   ${Boost_FILESYSTEM_LIBRARY}
   )
