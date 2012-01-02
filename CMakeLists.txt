@@ -91,7 +91,7 @@ endif()
 if (UNIX)
 add_custom_target(dist
   COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD
-  | gzip --best > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.gz
+  | bzip2 > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.bz2
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
