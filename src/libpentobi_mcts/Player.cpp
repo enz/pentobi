@@ -214,18 +214,18 @@ void Player::load_book(const string& filename)
     // 1. Current directory
     // 2. Subdirectory books relative to the directory of the main executable
     //    (Windows installation)
-    // 3. Subdirectory src/book relative to the source code directory
-    // 4. DATADIR/games/pentobi (Unix installation)
+    // 3. Subdirectory src/books relative to the source code directory
+    // 4. DATADIR/games/pentobi/books (Unix installation)
     if (try_load_book(filename))
         return;
     if (try_load_book(m_application_dir_path / "books" / filename))
         return;
 #ifdef ABS_TOP_SRCDIR
-    if (try_load_book(path(ABS_TOP_SRCDIR) / "src/book" / filename))
+    if (try_load_book(path(ABS_TOP_SRCDIR) / "src/books" / filename))
         return;
 #endif
 #ifdef DATADIR
-    if (try_load_book(path(DATADIR) / "games/pentobi" / filename))
+    if (try_load_book(path(DATADIR) / "games/pentobi/books" / filename))
         return;
 #endif
 }
