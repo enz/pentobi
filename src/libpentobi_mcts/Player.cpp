@@ -212,12 +212,13 @@ void Player::load_book(const string& filename)
 {
     // Search the opening book file at the following locations (in this order):
     // 1. Current directory
-    // 2. Directory of the main executable
+    // 2. Subdirectory books relative to the directory of the main executable
+    //    (Windows installation)
     // 3. Subdirectory src/book relative to the source code directory
-    // 4. Data installation directory used on Unix (DATADIR/games/pentobi)
+    // 4. DATADIR/games/pentobi (Unix installation)
     if (try_load_book(filename))
         return;
-    if (try_load_book(m_application_dir_path / filename))
+    if (try_load_book(m_application_dir_path / "books" / filename))
         return;
 #ifdef ABS_TOP_SRCDIR
     if (try_load_book(path(ABS_TOP_SRCDIR) / "src/book" / filename))

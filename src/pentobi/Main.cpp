@@ -28,11 +28,11 @@ void loadLibPentobiGuiTranslator(QTranslator& translator)
     QString file = "libpentobi_gui_" + locale;
     QString appDir = QCoreApplication::applicationDirPath();
     // Search for translation file in the following directories in this order
-    // 1. AppDir (Windows installation)
+    // 1. AppDir/translations (Windows installation)
     // 2. AppDir/../libpentobi_gui (CMake build on Unix or with MinGW)
     // 3. AppDir/../../libpentobi_gui (CMake build with MSVC)
-    // 4. DATADIR/pentobi/translations (Unix installation)
-    if (translator.load(file, appDir))
+    // 4. DATADIR/pentobi/games/translations (Unix installation)
+    if (translator.load(file, appDir + "/translations"))
         return;
 #ifndef _MSC_VER
     if (translator.load(file, appDir + "/../libpentobi_gui"))
@@ -53,13 +53,16 @@ void loadPentobiTranslator(QTranslator& translator)
     QString file = "pentobi_" + locale;
     QString appDir = QCoreApplication::applicationDirPath();
     // Search for translation file in the following directories in this order
-    // 1. AppDir (Windows installation or CMake build on Unix or with MinGW)
-    // 2. AppDir/.. (CMake build with MSVC)
-    // 3. DATADIR/pentobi/translations (Unix installation)
+    // 1. AppDir (CMake build on Unix or with MinGW)
+    // 2. AppDir/translations (Windows installation)
+    // 3. AppDir/.. (CMake build with MSVC)
+    // 4. DATADIR/games/pentobi/translations (Unix installation)
 #ifndef _MSC_VER
     if (translator.load(file, appDir))
         return;
 #endif
+    if (translator.load(file, appDir + "/translations"))
+        return;
 #ifdef _MSC_VER
     if (translator.load(file, appDir + "/.."))
         return;
