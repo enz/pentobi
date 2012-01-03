@@ -1,15 +1,23 @@
 Copyright (C) 2011-2012 Markus Enzenberger <enz@users.sourceforge.net>
 
-This program is free software: you can redistribute it and/or modify it under
+Pentobi is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
 version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT
+Pentobi is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 A copy of the GNU General Public License version 3 is appended below.
+
+Icon licenses: some of the icons used by Pentobi are based on the public
+domain Tango icon theme (http://tango.freedesktop.org). Thanks to the authors
+of Tango for making them available. The following Tango icons were used
+without modification, they can be redistributed as public domain: go-home.png,
+go-previous.png, go-next.png, go-last.png, go-up.png, go-previous.png,
+go-down.png, view-fullscreen.png, document-save.png, go-first.png. All other
+icons are licensed under the GNU General Public License version 3 or later.
 
 Trademark disclaimer: the trademark Blokus and other trademarks referred to
 are property of their respective trademark holders. The trademark holders are
