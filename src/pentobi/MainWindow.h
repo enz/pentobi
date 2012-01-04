@@ -482,6 +482,8 @@ private:
 
     void play(Color c, Move mv);
 
+    bool save(const QString& file);
+
     void setGameVariant(GameVariant gameVariant);
 
     void setMoveNumberText();
