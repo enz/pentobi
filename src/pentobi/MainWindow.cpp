@@ -1987,24 +1987,35 @@ void MainWindow::save()
         saveAs();
         return;
     }
+    if (save(m_file))
+    {
+        m_game->clear_modified();
+        updateWindow(false);
+    }
+}
+
+bool MainWindow::save(const QString& file)
+{
 #ifdef VERSION
     m_game->set_application("Pentobi", VERSION);
 #else
     m_game->set_application("Pentobi");
 #endif
-    ofstream out(m_file.toLocal8Bit().constData());
+    ofstream out(file.toLocal8Bit().constData());
     write_tree(out, m_game->get_root(), true, 2);
     if (! out)
+    {
         showError(tr("The file could not be saved."),
                   /*: Error message if file cannot be saved. %1 is
                     replaced by the file name, %2 by the error message
                     of the operating system. */
-                  tr("%1: %2").arg(m_file).arg(strerror(errno)));
+                  tr("%1: %2").arg(file).arg(strerror(errno)));
+        return false;
+    }
     else
     {
-        showStatus(tr("File saved %1").arg(m_file), true);
-        m_game->clear_modified();
-        updateWindow(false);
+        showStatus(tr("File saved %1").arg(file), true);
+        return true;
     }
 }
 
@@ -2029,8 +2040,12 @@ void MainWindow::saveAs()
     file = QFileDialog::getSaveFileName(this, tr("Save"), file, getFilter());
     if (! file.isEmpty())
     {
+        if (save(file))
+        {
+            m_game->clear_modified();
+            updateWindow(false);
+        }
         setFile(file);
-        save();
     }
 }
 
@@ -2256,8 +2271,9 @@ void MainWindow::setFile(const QString& file)
         while (files.size() > maxRecentFiles)
             files.removeLast();
         settings.setValue("recent_files", files);
-        updateRecentFiles();
         settings.setValue("last_dir", info.dir().path());
+        settings.sync();
+        updateRecentFiles();
     }
 }
 
