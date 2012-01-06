@@ -59,11 +59,14 @@ public:
         trees if the caller does not want to handle this case. If
         check_single_tree is false, you can call read() multiple times to read
         all game trees.
+        @param[out] more_game_trees_left set to true if check_single_tree is
+        false and there are more game trees to read.
         @throws ReadError */
-    void read(istream& in, bool check_single_tree = true);
+    void read(istream& in, bool check_single_tree = true,
+              bool* more_game_trees_left = 0);
 
     /** See read(istream&,bool) */
-    void read(const path& file, bool check_single_tree = true);
+    void read(const path& file);
 
 private:
     bool m_read_only_main_variation;

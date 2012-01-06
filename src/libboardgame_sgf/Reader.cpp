@@ -97,37 +97,48 @@ char Reader::peek()
     return char(c);
 }
 
-void Reader::read(istream& in, bool check_single_tree)
+void Reader::read(istream& in, bool check_single_tree,
+                  bool* more_game_trees_left)
 {
     m_in = &in;
     m_is_in_main_variation = true;
     consume_whitespace();
     read_tree(true);
-    if (check_single_tree)
+    while (true)
     {
-        while (true)
+        int c = m_in->peek();
+        if (c == EOF)
         {
-            int c = m_in->peek();
-            if (c == EOF)
-                break;
-            else if (c == '(')
-                throw ReadError("Input has multiple game trees");
-            else if (isspace(c))
-                consume_char(c);
-            else
-                throw ReadError("Extra characters after end of tree.");
+            if (more_game_trees_left != 0)
+                *more_game_trees_left = false;
+            return;
         }
+        else if (c == '(')
+        {
+            if (check_single_tree)
+                throw ReadError("Input has multiple game trees");
+            else
+            {
+                if (more_game_trees_left != 0)
+                    *more_game_trees_left = true;
+                return;
+            }
+        }
+        else if (isspace(c))
+            consume_char(c);
+        else
+            throw ReadError("Extra characters after end of tree.");
     }
 }
 
-void Reader::read(const path& file, bool check_single_tree)
+void Reader::read(const path& file)
 {
     ifstream in(file);
     if (! in)
         throw ReadError(format("Could not open '%1%'") % file);
     try
     {
-        read(in, check_single_tree);
+        read(in, true);
     }
     catch (const ReadError& e)
     {
