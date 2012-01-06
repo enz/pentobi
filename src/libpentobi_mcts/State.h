@@ -5,6 +5,7 @@
 #ifndef LIBPENTOBI_MCTS_STATE_H
 #define LIBPENTOBI_MCTS_STATE_H
 
+#include "LastAttachPoints.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libboardgame_mcts/ValueType.h"
@@ -169,9 +170,7 @@ private:
         Reused for efficiency. */
     MoveMarker m_marker;
 
-    PointList m_local_points;
-
-    Grid<int> m_local_points_marker;
+    LastAttachPoints m_last_attach_points;
 
     RandomGenerator m_random;
 
@@ -199,11 +198,7 @@ private:
 
     void check_local_move(int nu_local, Move mv);
 
-    void clear_local_points();
-
     void compute_features();
-
-    void init_local_points();
 
     void init_move_list_with_local_list(Color c);
 

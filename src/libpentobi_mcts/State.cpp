@@ -275,13 +275,6 @@ void State::compute_features()
     }
 }
 
-void State::clear_local_points()
-{
-    for (auto i = m_local_points.begin(); i != m_local_points.end(); ++i)
-        m_local_points_marker[*i] = 0;
-    m_local_points.clear();
-}
-
 void State::dump(ostream& out) const
 {
     out << "pentobi_mcts::State:\n";
@@ -500,40 +493,11 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     }
 }
 
-void State::init_local_points()
-{
-    LIBBOARDGAME_ASSERT(m_local_points.empty());
-    Color to_play = m_bd.get_to_play();
-    Color second_color = m_bd.get_second_color(to_play);
-    unsigned int move_number = m_bd.get_nu_moves();
-    // Consider last 3 moves for local points (i.e. last 2 opponent moves in
-    // two-player variants)
-    for (unsigned int i = 0; i < 3; ++i)
-    {
-        if (move_number == 0)
-            return;
-        --move_number;
-        ColorMove move = m_bd.get_move(move_number);
-        Color c = move.color;
-        if (c == to_play || c == second_color)
-            continue;
-        Move mv = move.move;
-        if (mv.is_pass())
-            continue;
-        BOOST_FOREACH(Point p, m_bd.get_move_info(mv).attach_points)
-            if (! m_bd.is_forbidden(p, c))
-            {
-                m_local_points.push_back(p);
-                m_local_points_marker[p] = 1;
-            }
-    }
-}
-
 void State::init_move_list_with_local_list(Color c)
 {
     m_last_move[c] = Move::null();
     set_pieces_considered(m_bd, m_is_piece_considered[c]);
-    init_local_points();
+    m_last_attach_points.init(m_bd);
     m_local_moves.clear();
     m_max_local = 1;
     ArrayList<Move, Move::range>& moves = m_moves[c];
@@ -592,7 +556,6 @@ void State::init_move_list_with_local_list(Color c)
             }
     }
     m_marker.clear(moves);
-    clear_local_points();
     m_is_move_list_initialized[c] = true;
 }
 
@@ -731,7 +694,7 @@ bool State::is_forbidden(Color c, const MovePoints& points, int& nu_local) const
     {
         if (is_forbidden[*i])
             return true;
-        nu_local += m_local_points_marker[*i];
+        nu_local += m_last_attach_points[*i];
     }
     return false;
 }
@@ -774,7 +737,7 @@ void State::start_search()
 {
     const Board& bd = m_shared_const.board;
     const Geometry& geometry = bd.get_geometry();
-    m_local_points_marker.init(geometry, 0);
+    m_last_attach_points.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
     m_score_modification_factor =
         m_shared_const.score_modification
@@ -838,7 +801,7 @@ void State::start_simulation(size_t n)
 
 void State::update_move_list(Color c)
 {
-    init_local_points();
+    m_last_attach_points.init(m_bd);
     m_local_moves.clear();
     m_max_local = 1;
     Move last_mv = m_last_move[c];
@@ -940,7 +903,6 @@ void State::update_move_list(Color c)
     }
 
     m_marker.clear(m_moves[c]);
-    clear_local_points();
     m_last_move[c] = Move::null();
 }
 
