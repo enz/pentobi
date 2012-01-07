@@ -68,6 +68,7 @@ inline void LastAttachPoints::clear()
 
 inline void LastAttachPoints::init_geometry(const Geometry& geometry)
 {
+    m_points.clear();
     m_marker.init(geometry, 0);
 }
 
