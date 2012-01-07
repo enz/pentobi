@@ -386,8 +386,13 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
             if (moves->empty())
                 moves = &m_moves[to_play];
             if (log_simulations)
+            {
                 log() << "Moves: " << moves->size() << ", local: "
-                      << m_local_moves.size() << '\n';
+                      << m_local_moves.size();
+                if (m_local_moves.size() > 0)
+                    log() << ", max_local: " << m_max_local;
+                log() << '\n';
+            }
         }
         if (moves->empty())
         {
@@ -689,13 +694,18 @@ void State::init_symmetry_info()
 bool State::is_forbidden(Color c, const MovePoints& points, int& nu_local) const
 {
     nu_local = 0;
+    bool is_adj_local = false;
     const FullGrid<bool>& is_forbidden = m_bd.is_forbidden(c);
     for (auto i = points.begin(); i != points.end(); ++i)
     {
         if (is_forbidden[*i])
             return true;
         nu_local += m_last_attach_points[*i];
+        if (m_last_attach_points.is_adj(*i))
+            is_adj_local = true;
     }
+    if (is_adj_local)
+        ++nu_local;
     return false;
 }
 

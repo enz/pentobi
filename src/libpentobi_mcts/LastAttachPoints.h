@@ -48,10 +48,16 @@ public:
         player occupies while iterating over the points of the move. */
     int operator[](Point p) const;
 
+    bool is_adj(Point p) const;
+
 private:
     PointList m_points;
 
     Grid<int> m_marker;
+
+    PointList m_adj_points;
+
+    Grid<bool> m_adj_marker;
 };
 
 inline int LastAttachPoints::operator[](Point p) const
@@ -64,12 +70,22 @@ inline void LastAttachPoints::clear()
     for (auto i = m_points.begin(); i != m_points.end(); ++i)
         m_marker[*i] = 0;
     m_points.clear();
+    for (auto i = m_adj_points.begin(); i != m_adj_points.end(); ++i)
+        m_adj_marker[*i] = false;
+    m_adj_points.clear();
 }
 
 inline void LastAttachPoints::init_geometry(const Geometry& geometry)
 {
     m_points.clear();
+    m_adj_points.clear();
     m_marker.init(geometry, 0);
+    m_adj_marker.init(geometry, false);
+}
+
+inline bool LastAttachPoints::is_adj(Point p) const
+{
+    return m_adj_marker[p];
 }
 
 //-----------------------------------------------------------------------------

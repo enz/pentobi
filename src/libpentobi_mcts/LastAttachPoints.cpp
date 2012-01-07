@@ -8,9 +8,12 @@
 
 #include "LastAttachPoints.h"
 
+#include "libpentobi_base/AdjIterator.h"
+
 namespace libpentobi_mcts {
 
 using libboardgame_util::ArrayList;
+using libpentobi_base::AdjIterator;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Piece;
@@ -44,7 +47,13 @@ void LastAttachPoints::init(const Board& bd)
             if (! bd.is_forbidden(*j, c) && m_marker[*j] == 0)
             {
                 m_points.push_back(*j);
-                m_marker[*j] = 1;
+                m_marker[*j] = 2;
+                for (AdjIterator k(bd, *j); k; ++k)
+                    if (! m_adj_marker[*k])
+                    {
+                        m_adj_points.push_back(*k);
+                        m_adj_marker[*k] = true;
+                    }
             }
     }
 }
