@@ -137,6 +137,12 @@ public:
 
     ValueType get_bias_term_constant() const;
 
+    /** Reuse the subtree from the previous search if the current position is
+        a follow-up position of the previous one. */
+    void set_reuse_subtree(bool enable);
+
+    bool get_reuse_subtree() const;
+
     void set_prune_full_tree(bool enable);
 
     bool get_prune_full_tree() const;
@@ -296,6 +302,8 @@ private:
 
     ValueType m_widening_parameter;
 
+    bool m_reuse_subtree;
+
     bool m_prune_full_tree;
 
     bool m_rave;
@@ -416,6 +424,7 @@ template<class S, class M, unsigned int P>
 Search<S, M, P>::Search(const State& state)
     : m_expand_threshold(0),
       m_widening_parameter(0),
+      m_reuse_subtree(true),
       m_prune_full_tree(true),
       m_rave(false),
       m_rave_check_same(false),
@@ -618,6 +627,12 @@ ValueType Search<S, M, P>::get_rave_equivalence() const
 }
 
 template<class S, class M, unsigned int P>
+bool Search<S, M, P>::get_reuse_subtree() const
+{
+    return m_reuse_subtree;
+}
+
+template<class S, class M, unsigned int P>
 inline typename Search<S, M, P>::State& Search<S, M, P>::get_state()
 {
     return m_state;
@@ -799,7 +814,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
 {
     bool clear_tree = true;
     bool is_followup = check_followup(m_followup_sequence);
-    if (is_followup && get_reuse_param() == get_last_reuse_param())
+    if (m_reuse_subtree && is_followup
+        && get_reuse_param() == get_last_reuse_param())
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
         if (m_followup_sequence.empty())
@@ -1121,6 +1137,12 @@ template<class S, class M, unsigned int P>
 void Search<S, M, P>::set_rave_equivalence(ValueType n)
 {
     m_rave_equivalence = n;
+}
+
+template<class S, class M, unsigned int P>
+void Search<S, M, P>::set_reuse_subtree(bool enable)
+{
+    m_reuse_subtree = enable;
 }
 
 template<class S, class M, unsigned int P>
