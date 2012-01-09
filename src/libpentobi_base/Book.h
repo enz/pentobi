@@ -41,6 +41,11 @@ public:
                                        const Tree& tree, const Node& node);
 
     /** Select a child in a computer-generated book.
+        @param random
+        @param bd
+        @param c
+        @param tree
+        @param node
         @param delta The width of the exponential probabilty function used
         for move selection from computer-generated books.
         @param max_delta Cutoff for the probabilty function used for move

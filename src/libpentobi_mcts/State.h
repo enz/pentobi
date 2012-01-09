@@ -69,6 +69,7 @@ class State
 {
 public:
     /** Constructor.
+        @param bd
         @param shared_const (@ref libboardgame_doc_storesref) */
     State(const Board& bd, const SharedConst& shared_const);
 

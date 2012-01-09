@@ -42,7 +42,9 @@ public:
         @param points The coordinates of the fields. Must contain the point
         (0, 0). (0, 0) should be a field in or near the center of the
         coordinates; it is used as the center when moving the piece or for
-        drawing a label on the piece. */
+        drawing a label on the piece.
+        @param geometry
+        @param transforms */
     Piece(const string& name, const Piece::Points& points,
           const Geometry& geometry, const PieceTransforms& transforms);
 

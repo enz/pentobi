@@ -24,6 +24,7 @@ class Player
 public:
     /** Constructor.
         @param bd
+        @param game_variant
         @param application_dir_path Directory of the main executable (potential
         location of book files). */
     Player(const Board& bd, GameVariant game_variant,
