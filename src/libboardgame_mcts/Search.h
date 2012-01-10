@@ -225,7 +225,13 @@ public:
         even a partially extracted subtree can be used for move generation, and
         false for pondering searches, because here we don't need a search
         result, but want to keep the full tree for reuse in a future
-        searches. */
+        searches.
+        @bug The node value is not cleared if reusing a subtree from a previous
+        search. It should be cleared because the value of root nodes and inner
+        nodes have a different meaning (position value vs. move value). Since
+        this bug is not critical because it does not affect the move selection,
+        only the values reported, it will not be fixed in the v1-fixes
+        branch. */
     bool search(Move& mv, ValueType max_count, size_t min_simulations,
                 double max_time, TimeSource& time_source,
                 bool always_search = true);
@@ -818,6 +824,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
                                                         &interval_checker);
+                // BUG: should clear node value, see bug details in function
+                // description
                 if (aborted && ! always_search)
                     return false;
                 size_t tmp_tree_nodes = m_tmp_tree.get_nu_nodes();
