@@ -93,10 +93,6 @@
         <source>Date:</source>
         <translation>Datum:</translation>
     </message>
-    <message>
-        <source>YYYY-MM-DD</source>
-        <translation type="obsolete">JJJJ-MM-TT</translation>
-    </message>
 </context>
 <context>
     <name>HelpWindow</name>
