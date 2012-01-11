@@ -73,6 +73,9 @@ public:
     /** Get color to play at root node of the last search. */
     Color get_to_play() const;
 
+protected:
+    void on_start_search();
+
 private:
     typedef libboardgame_mcts::Search<State, Move, 4> ParentClass;
 

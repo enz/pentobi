@@ -60,6 +60,10 @@ struct SharedConst
     /** Lookup table for symmetric points (only used in Duo). */
     SymmetricPoints m_symmetric_points;
 
+    /** Precomputed information if move is forbidden at the start position (and
+        therefore in all positions in the search). */
+    ColorMap<MoveMarker> is_forbidden_at_root;
+
     SharedConst(const Board& bd, const Color& to_play);
 };
 

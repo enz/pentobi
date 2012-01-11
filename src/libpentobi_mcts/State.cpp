@@ -546,7 +546,8 @@ void State::init_move_list_with_local_list(Color c)
                     {
                         BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
                         {
-                            if (m_marker[mv])
+                            if (m_shared_const.is_forbidden_at_root[c][mv]
+                                || m_marker[mv])
                                 continue;
                             int nu_local;
                             const MoveInfo& info = m_bd.get_move_info(mv);
@@ -587,7 +588,8 @@ void State::init_move_list_without_local_list(Color c)
                     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
                     {
-                        if (m_marker[mv])
+                        if (m_shared_const.is_forbidden_at_root[c][mv]
+                            || m_marker[mv])
                             continue;
                         if (! m_bd.is_forbidden(c, mv))
                         {
@@ -848,17 +850,18 @@ void State::update_move_list(Color c)
                             m_bd.get_moves(i, p, adj_status);
                         auto end = move_candidates.end();
                         for (auto i = move_candidates.begin(); i != end; ++i)
-                        {
-                            int nu_local;
-                            const MoveInfo& info = m_bd.get_move_info(*i);
-                            if (! is_forbidden(c, info.points, nu_local)
-                                && ! m_marker[*i])
+                            if (! m_shared_const.is_forbidden_at_root[c][*i])
                             {
-                                moves.push_back(*i);
-                                m_marker.set(*i);
-                                check_local_move(nu_local, *i);
+                                int nu_local;
+                                const MoveInfo& info = m_bd.get_move_info(*i);
+                                if (! is_forbidden(c, info.points, nu_local)
+                                    && ! m_marker[*i])
+                                {
+                                    moves.push_back(*i);
+                                    m_marker.set(*i);
+                                    check_local_move(nu_local, *i);
+                                }
                             }
-                        }
                     }
             }
     }
@@ -890,7 +893,8 @@ void State::update_move_list(Color c)
                             m_bd.get_adj_status_index(p, c);
                         BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
                         {
-                            if (m_marker[mv])
+                            if (m_shared_const.is_forbidden_at_root[c][mv]
+                                || m_marker[mv])
                                 continue;
                             int nu_local;
                             const MoveInfo& info = m_bd.get_move_info(mv);

@@ -13,6 +13,8 @@
 namespace libpentobi_mcts {
 
 using boost::format;
+using libpentobi_base::BoardIterator;
+using libpentobi_base::ColorIterator;
 
 //-----------------------------------------------------------------------------
 
@@ -44,6 +46,32 @@ string Search::get_move_string(Move mv) const
 {
     const Board& bd = get_board();
     return bd.get_move_piece(mv).get_name() + " " + bd.to_string(mv);
+}
+
+void Search::on_start_search()
+{
+    const Board& bd = get_board();
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    {
+        MoveMarker& is_forbidden_at_root =
+            m_shared_const.is_forbidden_at_root[*i];
+        is_forbidden_at_root.set_all();
+        for (BoardIterator j(bd); j; ++j)
+            if (! bd.is_forbidden(*j, *i))
+            {
+                unsigned int adj_status = bd.get_adj_status_index(*j, *i);
+                BOOST_FOREACH(unsigned int k, bd.get_pieces_left(*i))
+                {
+                    BOOST_FOREACH(Move mv, bd.get_moves(k, *j, adj_status))
+                    {
+                        if (! is_forbidden_at_root[mv])
+                            continue;
+                        if (! bd.is_forbidden(*i, mv))
+                            is_forbidden_at_root.clear(mv);
+                    }
+                }
+            }
+    }
 }
 
 bool Search::search(Move& mv, Color to_play, ValueType max_count,

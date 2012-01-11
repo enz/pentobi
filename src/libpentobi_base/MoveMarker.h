@@ -30,6 +30,9 @@ public:
 
     void set(Move mv);
 
+    /** Mark all moves (slow). */
+    void set_all();
+
     bool operator[](Move mv) const;
 
 private:
@@ -70,6 +73,11 @@ inline void MoveMarker::clear(const ArrayList<Move, M>& moves)
 inline void MoveMarker::set(Move mv)
 {
     m_marker.set(mv.to_int());
+}
+
+inline void MoveMarker::set_all()
+{
+    m_marker.set();
 }
 
 //-----------------------------------------------------------------------------
