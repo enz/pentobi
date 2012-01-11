@@ -38,7 +38,6 @@ private:
 
 inline MoveMarker::MoveMarker()
 {
-    m_marker.reset();
 }
 
 inline bool MoveMarker::operator[](Move mv) const
