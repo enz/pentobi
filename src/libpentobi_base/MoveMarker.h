@@ -5,12 +5,13 @@
 #ifndef LIBPENTOBI_BASE_MOVE_MARKER_H
 #define LIBPENTOBI_BASE_MOVE_MARKER_H
 
-#include <vector>
+#include <bitset>
 #include "Move.h"
 #include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
 
+using namespace std;
 using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
@@ -32,22 +33,22 @@ public:
     bool operator[](Move mv) const;
 
 private:
-    vector<bool> m_marker;
+    bitset<Move::range> m_marker;
 };
 
 inline MoveMarker::MoveMarker()
-    : m_marker(Move::range, false)
 {
+    m_marker.reset();
 }
 
 inline bool MoveMarker::operator[](Move mv) const
 {
-    return m_marker[mv.to_int()];
+    return m_marker.test(mv.to_int());
 }
 
 inline void MoveMarker::clear(Move mv)
 {
-    m_marker[mv.to_int()] = false;
+    m_marker.reset(mv.to_int());
 }
 
 inline void MoveMarker::clear(const vector<Move>& moves)
@@ -69,7 +70,7 @@ inline void MoveMarker::clear(const ArrayList<Move, M>& moves)
 
 inline void MoveMarker::set(Move mv)
 {
-    m_marker[mv.to_int()] = true;
+    m_marker.set(mv.to_int());
 }
 
 //-----------------------------------------------------------------------------
