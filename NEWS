@@ -3,8 +3,10 @@ Current development version (bugfix branch for 1.0)
 
 * Bugfix: file was not immediately visible in Recent Files menu after
   saving under a new name.
-* Added explaining label to computer color dialog because windows
+* Added explaining label to computer color dialog because window
   title is not visible in all L&F's
+* Fixed a small bug that distorted the position values reported with
+  --verbose if a subtree from a previous search was reused
 
 
 Version 1.0 (1 Jan 2012)

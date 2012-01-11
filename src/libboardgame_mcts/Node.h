@@ -64,6 +64,13 @@ public:
 
     void clear();
 
+    /** Clears only the value and RAVE value.
+        This operation is needed when reusing a subtree from a previous search
+        because the value of root nodes and inner nodes have a different meaning
+        (position value vs. move values) so the value cannot be reused but the
+        child information and visit count should be preserved. */
+    void clear_values();
+
     void link_children(Node<Move>& first_child, int nu_children);
 
     void unlink_children();
@@ -132,6 +139,15 @@ void Node<M>::clear()
     m_rave_value = 0;
     m_visit_count = 0;
     m_first_child = 0;
+}
+
+template<typename M>
+void Node<M>::clear_values()
+{
+    m_count = 0;
+    m_value = 0;
+    m_rave_count = 0;
+    m_rave_value = 0;
 }
 
 template<typename M>

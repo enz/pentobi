@@ -111,6 +111,9 @@ public:
 
     void inc_visit_count(const Node& node);
 
+    /** See Node::clear_values(). */
+    void clear_values(const Node& node);
+
     void swap(Tree& tree);
 
     /** Extract a subtree.
@@ -199,6 +202,12 @@ void Tree<M>::NodeExpander::add_child(const Move& mv, ValueType value,
         }
         ++m_nu_children;
     }
+}
+
+template<typename M>
+void Tree<M>::clear_values(const Node& node)
+{
+    non_const(node).clear_values();
 }
 
 template<typename M>

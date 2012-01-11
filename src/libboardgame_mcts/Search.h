@@ -225,13 +225,7 @@ public:
         even a partially extracted subtree can be used for move generation, and
         false for pondering searches, because here we don't need a search
         result, but want to keep the full tree for reuse in a future
-        searches.
-        @bug The node value is not cleared if reusing a subtree from a previous
-        search. It should be cleared because the value of root nodes and inner
-        nodes have a different meaning (position value vs. move value). Since
-        this bug is not critical because it does not affect the move selection,
-        only the values reported, it will not be fixed in the v1-fixes
-        branch. */
+        searches. */
     bool search(Move& mv, ValueType max_count, size_t min_simulations,
                 double max_time, TimeSource& time_source,
                 bool always_search = true);
@@ -821,11 +815,14 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
             const Node* node = find_node(m_tree, m_followup_sequence);
             if (node != 0)
             {
+                // The values of root nodes have a different meaning than the
+                // values of inner nodes (position value vs. move values) so
+                // we might have to discard them
+                if (node != &m_tree.get_root())
+                    m_tree.clear_values(*node);
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
                                                         &interval_checker);
-                // BUG: should clear node value, see bug details in function
-                // description
                 if (aborted && ! always_search)
                     return false;
                 size_t tmp_tree_nodes = m_tmp_tree.get_nu_nodes();
@@ -939,15 +936,20 @@ const Node<M>* Search<S, M, P>::select_child(const Node& node)
     ValueType best_explored_value = -numeric_limits<ValueType>::max();
     ValueType best_unexplored_value = -numeric_limits<ValueType>::max();
     ValueType bias_term_constant_part = 0; // Init to avoid compiler warning
+    // Note: use visit count here not count. In most cases, count is larger
+    // than visit count because of prior knowledge initializaion, but it can
+    // happen that count is zero and visit count greater zero if the node
+    // value was cleared but not the visit count after reusing an inner node
+    // from a previous search as the root of the new search
+    ValueType node_count = node.get_visit_count();
     if (m_bias_term_constant != 0)
     {
-        ValueType count = node.get_count();
-        LIBBOARDGAME_ASSERT(count > 0);
+        LIBBOARDGAME_ASSERT(node_count > 0);
         bias_term_constant_part =
-            m_bias_term_constant_sq * m_fast_log.get_log(float(count));
+            m_bias_term_constant_sq * m_fast_log.get_log(float(node_count));
     }
-    ValueType beta = sqrt(m_rave_equivalence
-                          / (3 * node.get_count() + m_rave_equivalence));
+    ValueType beta =
+        sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
     if (log_move_selection)
         log() << "beta=" << beta << '\n';
     unsigned int nu_explored = 0;
