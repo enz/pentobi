@@ -3,6 +3,8 @@ Current development version (bugfix branch for 1.0)
 
 * Bugfix: file was not immediately visible in Recent Files menu after
   saving under a new name.
+* Added explaining label to computer color dialog because windows
+  title is not visible in all L&F's
 
 
 Version 1.0 (1 Jan 2012)

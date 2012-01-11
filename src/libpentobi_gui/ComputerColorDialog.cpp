@@ -28,6 +28,7 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     setWindowTitle(tr("Computer Color"));
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
+    layout->addWidget(new QLabel(tr("Computer color:")));
     if (m_gameVariant == game_variant_duo)
     {
         createCheckBox(layout, Color(0), tr("Blue"));
