@@ -58,7 +58,7 @@ struct SharedConst
     ValueType score_modification;
 
     /** Lookup table for symmetric points (only used in Duo). */
-    SymmetricPoints m_symmetric_points;
+    SymmetricPoints symmetric_points;
 
     /** Precomputed information if move is forbidden at the start position (and
         therefore in all positions in the search). */

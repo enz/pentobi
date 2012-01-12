@@ -174,7 +174,7 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
       avoid_symmetric_draw(false),
       score_modification(ValueType(0.1))
 {
-    m_symmetric_points.init(*RectGeometry<Point>::get(14, 14));
+    symmetric_points.init(*RectGeometry<Point>::get(14, 14));
 }
 
 //-----------------------------------------------------------------------------
@@ -637,7 +637,7 @@ void State::init_symmetry_info()
         // position is symmetric.
         for (BoardIterator i(m_bd); i; ++i)
         {
-            Point symm_p = m_shared_const.m_symmetric_points[*i];
+            Point symm_p = m_shared_const.symmetric_points[*i];
             PointState s1 = m_bd.get_point_state(*i);
             PointState s2 = m_bd.get_point_state(symm_p);
             if (s1 != get_symmetric_state(s2))
@@ -673,7 +673,7 @@ void State::init_symmetry_info()
             points = &m_bd.get_move_points(last_mv.move);
         for (BoardIterator i(m_bd); i; ++i)
         {
-            Point symm_p = m_shared_const.m_symmetric_points[*i];
+            Point symm_p = m_shared_const.symmetric_points[*i];
             PointState s1 = m_bd.get_point_state(*i);
             PointState s2 = m_bd.get_point_state(symm_p);
             if (s1 != get_symmetric_state(s2))
@@ -933,7 +933,7 @@ void State::update_symmetry_info(Move mv)
         // move of the second player are occupied by the first player
         for (auto i = points.begin(); i != points.end(); ++i)
         {
-            Point symm_p = m_shared_const.m_symmetric_points[*i];
+            Point symm_p = m_shared_const.symmetric_points[*i];
             if (m_bd.get_point_state(symm_p) != Color(0))
             {
                 m_is_symmetry_broken = true;
@@ -948,7 +948,7 @@ void State::update_symmetry_info(Move mv)
         // to preserve the symmetry)
         for (auto i = points.begin(); i != points.end(); ++i)
         {
-            Point symm_p = m_shared_const.m_symmetric_points[*i];
+            Point symm_p = m_shared_const.symmetric_points[*i];
             if (! m_bd.get_point_state(symm_p).is_empty())
             {
                 m_is_symmetry_broken = true;
