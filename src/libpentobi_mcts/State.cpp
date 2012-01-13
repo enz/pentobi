@@ -697,12 +697,17 @@ bool State::is_forbidden(Color c, const MovePoints& points, int& nu_local) const
 {
     nu_local = 0;
     const FullGrid<bool>& is_forbidden = m_bd.is_forbidden(c);
-    for (auto i = points.begin(); i != points.end(); ++i)
+    auto end = points.end();
+    auto i = points.begin();
+    LIBBOARDGAME_ASSERT(i != end);
+    do
     {
         if (is_forbidden[*i])
             return true;
         nu_local += m_last_attach_points[*i];
+        ++i;
     }
+    while (i != end);
     return false;
 }
 
