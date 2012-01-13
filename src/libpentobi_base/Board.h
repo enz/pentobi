@@ -529,9 +529,16 @@ inline const FullGrid<bool>& Board::is_forbidden(Color c) const
 inline bool Board::is_forbidden(Color c, Move mv) const
 {
     const MovePoints& points = get_move_points(mv);
-    for (auto i = points.begin(); i != points.end(); ++i)
+    auto end = points.end();
+    auto i = points.begin();
+    LIBBOARDGAME_ASSERT(i != end);
+    do
+    {
         if (m_forbidden[c][*i])
             return true;
+        ++i;
+    }
+    while (i != end);
     return false;
 }
 
