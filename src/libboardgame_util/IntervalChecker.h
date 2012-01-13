@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file IntervalChecker.h */
+/** @file libboardgame_util/IntervalChecker.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_H
@@ -32,11 +32,20 @@ public:
 
     bool operator()();
 
+    /** Disable the dynamic updating of the interval.
+        Can be used if the non-reproducability of the time measurement used
+        for dynamic updating of the check interval is undesirable.
+        @param interval The fixed interval (number of calls) to use for calling
+        the expensive function. (Must be greater zero). */
+    void set_deterministic(unsigned int interval);
+
 protected:
     TimeSource& m_time_source;
 
 private:
     bool m_is_first_check;
+
+    bool m_is_deterministic;
 
     bool m_result;
 

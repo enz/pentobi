@@ -112,6 +112,19 @@ public:
 
     virtual void write_info_ext(ostream& out) const;
 
+    /** Return the expected simulations per second.
+        If the simulations per second vary a lot, it should return a value
+        closer to the lower values. This value is used, for example, to
+        determine an interval for checking expensive abort conditions in
+        deterministic mode (in regular mode, the simulations per second will be
+        measured and the interval will be adjusted automatically). That means
+        that in deterministic mode, a pessimistic low value will cause more
+        calls to the expensive function but an optimistic high value will
+        delay aborting the search.
+        The default implementation returns 100.
+        @see set_deterministic() */
+    virtual double expected_sim_per_sec() const;
+
     // @} // @name
 
 
@@ -209,6 +222,15 @@ public:
 
     size_t get_tree_memory() const;
 
+    /** Set deterministic mode.
+        Note that using a fixed number of simulations instead of a time limit
+        is not enough to make the search fully deterministic because the
+        interval in which expensive abort conditions are checked (e.g. if the
+        best move cannot change anymore) is adjusted dynamically depending on
+        the number of simulations per second. In deterministic mode, a
+        fixed interval is used. */
+    void set_deterministic();
+
     // @} // @name
 
 
@@ -301,6 +323,8 @@ private:
     ValueType m_bias_term_constant_sq;
 
     ValueType m_widening_parameter;
+
+    bool m_deterministic;
 
     bool m_reuse_subtree;
 
@@ -424,6 +448,7 @@ template<class S, class M, unsigned int P>
 Search<S, M, P>::Search(const State& state)
     : m_expand_threshold(0),
       m_widening_parameter(0),
+      m_deterministic(false),
       m_reuse_subtree(true),
       m_prune_full_tree(true),
       m_rave(false),
@@ -559,6 +584,12 @@ bool Search<S, M, P>::expand_node(const Node& node, const Node*& best_child)
         return true;
     }
     return false;
+}
+
+template<class S, class M, unsigned int P>
+double Search<S, M, P>::expected_sim_per_sec() const
+{
+    return 100.0;
 }
 
 template<class S, class M, unsigned int P>
@@ -884,6 +915,11 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
         time_interval = max_time > 1 ? 0.1 : 0.1 * max_time;
     IntervalChecker expensive_abort_checker(time_source, time_interval,
                                    bind(&Search::check_abort_expensive, this));
+    if (m_deterministic)
+    {
+        unsigned int interval  = max(1.0, expected_sim_per_sec() / 5.0);
+        expensive_abort_checker.set_deterministic(interval);
+    }
     while (m_tree.get_root().get_count() == 0
            || m_nu_simulations < min_simulations
            || (! check_abort() && ! expensive_abort_checker()))
@@ -1111,6 +1147,12 @@ template<class S, class M, unsigned int P>
 void Search<S, M, P>::set_expand_threshold(ValueType n)
 {
     m_expand_threshold = n;
+}
+
+template<class S, class M, unsigned int P>
+void Search<S, M, P>::set_deterministic()
+{
+    m_deterministic = true;
 }
 
 template<class S, class M, unsigned int P>

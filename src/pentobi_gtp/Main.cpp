@@ -151,6 +151,8 @@ int main(int argc, char** argv)
                                    application_dir_path);
         if (vm.count("showboard"))
             engine.set_show_board(true);
+        if (vm.count("seed"))
+            engine.set_deterministic();
         if (vm.count("book"))
         {
             ifstream in(book_file);

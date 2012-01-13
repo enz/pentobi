@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file IntervalChecker.cpp */
+/** @file libboardgame_util/IntervalChecker.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -10,6 +10,7 @@
 
 #include <limits>
 #include <boost/format.hpp>
+#include "Assert.h"
 #include "Log.h"
 
 namespace libboardgame_util {
@@ -30,6 +31,7 @@ IntervalChecker::IntervalChecker(TimeSource& time_source, double time_interval,
                                  function<bool()> f)
     : m_time_source(time_source),
       m_is_first_check(true),
+      m_is_deterministic(false),
       m_result(false),
       m_count(1),
       m_count_interval(1),
@@ -46,6 +48,12 @@ bool IntervalChecker::check_expensive()
 {
     if (m_result)
         return true;
+    if (m_is_deterministic)
+    {
+        m_result = m_function();
+        m_count = m_count_interval;
+        return m_result;
+    }
     double time = m_time_source();
     if (! m_is_first_check)
     {
@@ -86,6 +94,14 @@ bool IntervalChecker::check_expensive()
     m_last_time = time;
     m_count = m_count_interval;
     return m_result;
+}
+
+void IntervalChecker::set_deterministic(unsigned int interval)
+{
+    LIBBOARDGAME_ASSERT(interval >= 1);
+    m_is_deterministic = true;
+    m_count = interval;
+    m_count_interval = interval;
 }
 
 //-----------------------------------------------------------------------------

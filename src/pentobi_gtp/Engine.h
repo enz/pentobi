@@ -39,6 +39,9 @@ public:
 
     Player& get_mcts_player();
 
+    /** @see Search::set_deterministic() */
+    void set_deterministic();
+
 private:
     unique_ptr<libpentobi_base::Player> m_player;
 

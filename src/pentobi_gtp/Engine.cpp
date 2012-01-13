@@ -185,6 +185,18 @@ Search& Engine::get_search()
     return get_mcts_player().get_search();
 }
 
+void Engine::set_deterministic()
+{
+    try
+    {
+        get_search().set_deterministic();
+    }
+    catch (Failure&)
+    {
+        // Ignore if player is not MCTS player
+    }
+}
+
 //-----------------------------------------------------------------------------
 
 } // namespace pentobi_gtp
