@@ -483,22 +483,40 @@ void Board::play(Color c, Move mv)
         const MoveInfo& info = m_board_const->get_move_info(mv);
         LIBBOARDGAME_ASSERT(m_pieces_left[c].contains(info.piece));
         m_pieces_left[c].remove(info.piece);
-        for (auto i = info.points.begin(); i != info.points.end(); ++i)
+        auto i = info.points.begin();
+        auto end = info.points.end();
+        LIBBOARDGAME_ASSERT(i != end);
+        do
         {
             m_point_state[*i] = c;
             m_played_move[*i] = mv;
             static_assert(Color::range == 4, "");
             LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c][*i] = true);
+            ++i;
         }
-        for (auto i = info.adj_points.begin(); i != info.adj_points.end(); ++i)
+        while (i != end);
+        i = info.adj_points.begin();
+        end = info.adj_points.end();
+        LIBBOARDGAME_ASSERT(i != end);
+        do
+        {
             m_forbidden[c][*i] = true;
-        for (auto i = info.attach_points.begin(); i != info.attach_points.end();
-             ++i)
+            ++i;
+        }
+        while (i != end);
+        i = info.attach_points.begin();
+        end = info.attach_points.end();
+        LIBBOARDGAME_ASSERT(i != end);
+        do
+        {
             if (! m_is_attach_point[c][*i])
             {
                 m_is_attach_point[c][*i] = true;
                 m_attach_points[c].push_back(*i);
             }
+            ++i;
+        }
+        while (i != end);
     }
     m_moves.push_back(ColorMove(c, mv));
     m_to_play = c.get_next(m_nu_colors);
