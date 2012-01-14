@@ -180,6 +180,18 @@ istream& operator>>(istream& in, Color& c);
 
 //-----------------------------------------------------------------------------
 
+/** Macro to unroll a loop over all colors. */
+#define LIBPENTOBI_FOREACH_COLOR(c, statement)               \
+    {                                                        \
+        static_assert(Color::range == 4, "");                \
+        { Color c(0);  statement; }                          \
+        { Color c(1);  statement; }                          \
+        { Color c(2);  statement; }                          \
+        { Color c(3);  statement; }                          \
+    }
+
+//-----------------------------------------------------------------------------
+
 } // namespace libpentobi_base
 
 #endif // LIBPENTOBI_BASE_COLOR_H

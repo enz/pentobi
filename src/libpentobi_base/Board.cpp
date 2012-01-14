@@ -487,8 +487,8 @@ void Board::play(Color c, Move mv)
         {
             m_point_state[*i] = c;
             m_played_move[*i] = mv;
-            for (ColorIterator j(m_nu_colors); j; ++j)
-                m_forbidden[*j][*i] = true;
+            static_assert(Color::range == 4, "");
+            LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c][*i] = true);
         }
         for (auto i = info.adj_points.begin(); i != info.adj_points.end(); ++i)
             m_forbidden[c][*i] = true;
