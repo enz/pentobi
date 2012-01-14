@@ -305,7 +305,8 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
                     <= target.m_nodes.get() + get_max_nodes());
     abort = false;
     for (ChildIterator i(node); i; ++i, ++target_child)
-        if (! copy_subtree(target, *target_child, *i, min_count))
+        if (! copy_subtree(target, *target_child, *i, min_count, check_abort,
+                           interval_checker))
             // Finish this loop even on abort to make sure the children node
             // data is copied
             abort = true;
