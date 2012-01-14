@@ -45,12 +45,12 @@ inline MoveMarker::MoveMarker()
 
 inline bool MoveMarker::operator[](Move mv) const
 {
-    return m_marker.test(mv.to_int());
+    return m_marker[mv.to_int()];
 }
 
 inline void MoveMarker::clear(Move mv)
 {
-    m_marker.reset(mv.to_int());
+    m_marker[mv.to_int()] = false;
 }
 
 inline void MoveMarker::clear(const vector<Move>& moves)
@@ -72,7 +72,7 @@ inline void MoveMarker::clear(const ArrayList<Move, M>& moves)
 
 inline void MoveMarker::set(Move mv)
 {
-    m_marker.set(mv.to_int());
+    m_marker[mv.to_int()] = true;
 }
 
 inline void MoveMarker::set_all()
