@@ -42,6 +42,7 @@ IntervalChecker::IntervalChecker(TimeSource& time_source, double time_interval,
     log(format("IntervalChecker::IntervalChecker: time_interval=%1%")
             % time_interval);
 #endif
+    LIBBOARDGAME_ASSERT(time_interval > 0);
 }
 
 bool IntervalChecker::check_expensive()
