@@ -142,7 +142,9 @@ public:
         @param min_count Don't copy subtrees of nodes below this count
         @param check_abort Whether to check util::get_abort()
         @param interval_checker
-        @return @c false if the copying was aborted. */
+        @return @c false if the copying was aborted.
+        @bug Aborting does not work as expected. Since Pentobi 1.0 does not
+        use time limits, this bug will only be fixed in the master branch. */
     bool copy_subtree(Tree& target, const Node& target_node, const Node& node,
                       ValueType min_count = 0, bool check_abort = false,
                       IntervalChecker* interval_checker = 0) const;
@@ -305,6 +307,8 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
                     <= target.m_nodes.get() + get_max_nodes());
     abort = false;
     for (ChildIterator i(node); i; ++i, ++target_child)
+        // BUG: recursion does not pass on check_abort and interval_checker
+        // arguments (see bug description in function comment for more info)
         if (! copy_subtree(target, *target_child, *i, min_count))
             // Finish this loop even on abort to make sure the children node
             // data is copied
