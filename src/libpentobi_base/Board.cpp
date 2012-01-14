@@ -414,6 +414,9 @@ void Board::init(GameVariant game_variant)
     m_point_state.fill_onboard(PointState::empty());
     m_played_move.init(*m_geometry);
     m_played_move.fill(Move::null());
+    // m_forbidden needs to be initialized even for colors not used in current
+    // game variant because it is written to in some unrolled color loops
+    LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c].init(*m_geometry));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         if (game_variant == game_variant_classic_2
@@ -422,7 +425,6 @@ void Board::init(GameVariant game_variant)
                 (*i).get_next(m_nu_colors).get_next(m_nu_colors);
         else
             m_second_color[*i] = *i;
-        m_forbidden[*i].init(*m_geometry);
         m_forbidden[*i].fill_all(true);
         m_forbidden[*i].fill_onboard(false);
         m_is_attach_point[*i].init(*m_geometry, false);
