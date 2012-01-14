@@ -195,6 +195,35 @@ State::~State() throw()
 {
 }
 
+inline void State::add_moves(Point p, Color c)
+{
+    unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+    BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+        if (m_is_piece_considered[c][i])
+            add_moves(p, c, i, adj_status);
+}
+
+inline void State::add_moves(Point p, Color c, unsigned int piece,
+                             unsigned int adj_status)
+{
+    ArrayList<Move, Move::range>& moves = m_moves[c];
+    const vector<Move>& move_candidates = m_bd.get_moves(piece, p, adj_status);
+    auto end = move_candidates.end();
+    for (auto i = move_candidates.begin(); i != end; ++i)
+        if (! m_shared_const.is_forbidden_at_root[c][*i])
+        {
+            int nu_local;
+            const MoveInfo& info = m_bd.get_move_info(*i);
+            if (! is_forbidden(c, info.points, nu_local)
+                && ! m_marker[*i])
+            {
+                moves.push_back(*i);
+                m_marker.set(*i);
+                check_local_move(nu_local, *i);
+            }
+        }
+}
+
 void State::check_local_move(int nu_local, Move mv)
 {
     if (nu_local < m_max_local)
@@ -539,27 +568,7 @@ void State::init_move_list_with_local_list(Color c)
     {
         BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
-            {
-                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
-                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                    if (m_is_piece_considered[c][i])
-                    {
-                        BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
-                        {
-                            if (m_shared_const.is_forbidden_at_root[c][mv]
-                                || m_marker[mv])
-                                continue;
-                            int nu_local;
-                            const MoveInfo& info = m_bd.get_move_info(mv);
-                            if (! is_forbidden(c, info.points, nu_local))
-                            {
-                                moves.push_back(mv);
-                                m_marker.set(mv);
-                                check_local_move(nu_local, mv);
-                            }
-                        }
-                    }
-            }
+                add_moves(p, c);
     }
     m_marker.clear(moves);
     m_is_move_list_initialized[c] = true;
@@ -846,29 +855,7 @@ void State::update_move_list(Color c)
         BOOST_FOREACH(Point p, m_bd.get_move_info(last_mv).attach_points)
             if (! m_bd.is_forbidden(p, c)
                 && is_only_move_diag(m_bd, p, c, last_mv))
-            {
-                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
-                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                    if (m_is_piece_considered[c][i])
-                    {
-                        const vector<Move>& move_candidates =
-                            m_bd.get_moves(i, p, adj_status);
-                        auto end = move_candidates.end();
-                        for (auto i = move_candidates.begin(); i != end; ++i)
-                            if (! m_shared_const.is_forbidden_at_root[c][*i])
-                            {
-                                int nu_local;
-                                const MoveInfo& info = m_bd.get_move_info(*i);
-                                if (! is_forbidden(c, info.points, nu_local)
-                                    && ! m_marker[*i])
-                                {
-                                    moves.push_back(*i);
-                                    m_marker.set(*i);
-                                    check_local_move(nu_local, *i);
-                                }
-                            }
-                    }
-            }
+                add_moves(p, c);
     }
 
     // Generate moves for pieces that were not considered in the last position
@@ -890,27 +877,11 @@ void State::update_move_list(Color c)
         BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
+                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                 BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
                 {
                     if (! m_is_piece_considered[c][i] && is_piece_considered[i])
-                    {
-                        unsigned int adj_status =
-                            m_bd.get_adj_status_index(p, c);
-                        BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
-                        {
-                            if (m_shared_const.is_forbidden_at_root[c][mv]
-                                || m_marker[mv])
-                                continue;
-                            int nu_local;
-                            const MoveInfo& info = m_bd.get_move_info(mv);
-                            if (! is_forbidden(c, info.points, nu_local))
-                            {
-                                moves.push_back(mv);
-                                m_marker.set(mv);
-                                check_local_move(nu_local, mv);
-                            }
-                        }
-                    }
+                        add_moves(p, c, i, adj_status);
                 }
             }
         m_is_piece_considered[c] = is_piece_considered;

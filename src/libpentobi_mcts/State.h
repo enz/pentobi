@@ -201,6 +201,11 @@ private:
     /** Not implemented. */
     State& operator=(const State&);
 
+    void add_moves(Point p, Color c);
+
+    void add_moves(Point p, Color c, unsigned int piece,
+                   unsigned int adj_status);
+
     void check_local_move(int nu_local, Move mv);
 
     void compute_features();
