@@ -797,6 +797,11 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
                              size_t min_simulations, double max_time,
                              TimeSource& time_source, bool always_search)
 {
+    if (max_count > 0)
+        // A fixed number of simulations means that no time limit is used, but
+        // max_time is still used at some places in the code, so we set it to
+        // infinity
+        max_time = numeric_limits<double>::max();
     bool clear_tree = true;
     bool is_followup = check_followup(m_followup_sequence);
     if (is_followup && get_reuse_param() == get_last_reuse_param())
