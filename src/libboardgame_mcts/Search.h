@@ -819,6 +819,8 @@ ValueType Search<S, M, P>::prune(TimeSource& time_source, double time,
 {
     Timer timer(time_source);
     TimeIntervalChecker interval_checker(time_source, max_time);
+    if (m_deterministic)
+        interval_checker.set_deterministic(1000000);
     log(format("Pruning count %1% (at time %2%)") % prune_min_count % time);
     m_tmp_tree.clear();
     if (! m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(),
@@ -873,6 +875,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
                 if (node != &m_tree.get_root())
                     m_tree.clear_values(*node);
                 TimeIntervalChecker interval_checker(time_source, max_time);
+                if (m_deterministic)
+                    interval_checker.set_deterministic(1000000);
                 bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
                                                         &interval_checker);
                 if (aborted && ! always_search)
