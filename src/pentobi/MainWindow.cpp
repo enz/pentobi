@@ -22,6 +22,7 @@
 
 using namespace std;
 using boost::filesystem::path;
+using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
@@ -283,6 +284,16 @@ void MainWindow::about()
              ).arg(getVersion()));
 }
 
+void MainWindow::analyzeGame()
+{
+    cancelGenMove();
+    AnalyzeGameWindow* analyzeGameWindow =
+        new AnalyzeGameWindow(this, *m_game, m_player->get_search());
+    connect(analyzeGameWindow,
+            SIGNAL(gotoPosition(GameVariant,const vector<ColorMove>&)),
+            this, SLOT(gotoPosition(GameVariant,const vector<ColorMove>&)));
+}
+
 /** Call to Player::genmove() that runs in a different thread. */
 MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId)
 {
@@ -510,6 +521,10 @@ void MainWindow::createActions()
 
     m_actionAbout = new QAction(tr("&About"), this);
     connect(m_actionAbout, SIGNAL(triggered()), this, SLOT(about()));
+
+    m_actionAnalyzeGame = new QAction(tr("&Analyze Game"), this);
+    connect(m_actionAnalyzeGame, SIGNAL(triggered()),
+            this, SLOT(analyzeGame()));
 
     m_actionBackward = new QAction(tr("B&ackward"), this);
     setIcon(m_actionBackward, "go-previous");
@@ -1062,6 +1077,7 @@ void MainWindow::createMenu()
     QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
+    menuComputer->addAction(m_actionAnalyzeGame);
 
     QMenu* menuHelp = menuBar()->addMenu(tr("&Help"));
     menuHelp->addAction(m_actionHelp);
@@ -1561,6 +1577,32 @@ void MainWindow::gotoNode(const Node& node)
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
     updateWindow(true);
+}
+
+void MainWindow::gotoPosition(GameVariant gameVariant,
+                              const vector<ColorMove>& moves)
+{
+    if (m_game->get_game_variant() != gameVariant)
+        return;
+    const Tree& tree = m_game->get_tree();
+    const Node* node = &tree.get_root();
+    if (tree.has_move(*node))
+        // Move in root node not supported.
+        return;
+    BOOST_FOREACH(ColorMove mv, moves)
+    {
+        bool found = false;
+        for (ChildIterator i(*node); i; ++i)
+            if (tree.get_move(*i) == mv)
+            {
+                found = true;
+                node = &(*i);
+                break;
+            }
+        if (! found)
+            return;
+    }
+    gotoNode(*node);
 }
 
 void MainWindow::help()

@@ -6,6 +6,7 @@
 #define PENTOBI_MAIN_WINDOW_H
 
 #include <QtGui>
+#include "AnalyzeGameWindow.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/Game.h"
 #include "libpentobi_mcts/Player.h"
@@ -43,6 +44,8 @@ public:
 public slots:
     void about();
 
+    void analyzeGame();
+
     void backward();
 
     void backward10();
@@ -74,6 +77,10 @@ public slots:
     void forward10();
 
     void gotoMove();
+
+    /** Go to a node if a node with a position defined by a sequence of moves
+        still exists. */
+    void gotoPosition(GameVariant gameVariant, const vector<ColorMove>& moves);
 
     void help();
 
@@ -236,6 +243,8 @@ private:
     HelpWindow* m_help_window;
 
     QAction* m_actionAbout;
+
+    QAction* m_actionAnalyzeGame;
 
     QAction* m_actionBackward;
 

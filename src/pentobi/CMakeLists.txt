@@ -6,11 +6,13 @@ include_directories(
 )
 
 set(pentobi_SRCS
+  AnalyzeGameWindow.cpp
   MainWindow.cpp
   Main.cpp
   )
 
 set(pentobi_MOC_HDRS
+  AnalyzeGameWindow.h
   MainWindow.h
   )
   

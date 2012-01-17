@@ -242,9 +242,6 @@ public:
         @param min_simulations
         @param max_time Maximum search time. Only used if max_count is zero
         @param time_source Time source for time measurement
-        @return @c false, if no move could be generated. This can happen if the
-        root node was not expanded, because the position is a terminal
-        position or because the search was immediately aborted.
         @param always_search Always call the search, even if extracting the
         subtree to reuse was aborted due to max_time or util::get_abort(). If
         true, this will call a search with the partially extracted subtree,
@@ -253,7 +250,10 @@ public:
         even a partially extracted subtree can be used for move generation, and
         false for pondering searches, because here we don't need a search
         result, but want to keep the full tree for reuse in a future
-        searches. */
+        searches.
+        @return @c false, if no move could be generated. This can happen if the
+        root node was not expanded, because the position is a terminal
+        position or because the search was immediately aborted. */
     bool search(Move& mv, ValueType max_count, size_t min_simulations,
                 double max_time, TimeSource& time_source,
                 bool always_search = true);
