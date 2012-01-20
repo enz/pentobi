@@ -560,6 +560,7 @@ void MainWindow::createActions()
             this, SLOT(clearSelectedPiece()));
 
     m_actionComputerColor = new QAction(tr("&Computer Color"), this);
+    setIcon(m_actionComputerColor, "computer-color");
     connect(m_actionComputerColor, SIGNAL(triggered()),
             this, SLOT(computerColor()));
 
@@ -1185,6 +1186,7 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
     m_toolBar->addAction(m_actionNewGame);
+    m_toolBar->addAction(m_actionComputerColor);
     m_toolBar->addAction(m_actionPlay);
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward10);
