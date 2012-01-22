@@ -547,6 +547,42 @@ inline bool Board::is_legal(Move mv) const
     return is_legal(m_to_play, mv);
 }
 
+inline bool Board::is_legal(Color c, Move mv) const
+{
+    if (mv.is_pass())
+        return true;
+    const MovePoints& points = get_move_points(mv);
+    bool has_attach_point = false;
+    auto i = points.begin();
+    auto end = points.end();
+    LIBBOARDGAME_ASSERT(i != end);
+    do
+    {
+        if (m_forbidden[c][*i])
+            return false;
+        if (is_attach_point(*i, c))
+            has_attach_point = true;
+        ++i;
+    }
+    while (i != end);
+    if (has_attach_point)
+        return true;
+    bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
+    if (! is_first_move)
+        return false;
+    i = points.begin();
+    do
+    {
+        if (is_colorless_starting_point(*i)
+            || (is_colored_starting_point(*i)
+                && get_starting_point_color(*i) == c))
+            return true;
+        ++i;
+    }
+    while (i != end);
+    return false;
+}
+
 inline bool Board::is_onboard(Point p) const
 {
     return m_geometry->is_onboard(p);

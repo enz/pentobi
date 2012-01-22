@@ -445,30 +445,6 @@ bool Board::is_game_over() const
     return true;
 }
 
-bool Board::is_legal(Color c, Move mv) const
-{
-    if (mv.is_pass())
-        return true;
-    const MovePoints& points = get_move_points(mv);
-    bool has_attach_point = false;
-    BOOST_FOREACH(Point p, points)
-    {
-        if (m_forbidden[c][p])
-            return false;
-        if (is_attach_point(p, c))
-            has_attach_point = true;
-    }
-    if (has_attach_point)
-        return true;
-    bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
-    if (! is_first_move)
-        return false;
-    BOOST_FOREACH(Point p, get_starting_points(c))
-        if (points.contains(p))
-            return true;
-    return false;
-}
-
 bool Board::is_piece_left(Color c, const Piece& piece) const
 {
     BOOST_FOREACH(unsigned int i, m_pieces_left[c])
