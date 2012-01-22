@@ -184,12 +184,14 @@ private:
 
     Statistics m_stat_score;
 
-    StatisticsBase m_stat_last_good_reply;
-
     /** Number of simulations of this state in the current search.
         Currently identical to Search::get_nu_simulations() but could be
         different in the future if Search is multi-threaded. */
     size_t m_nu_simulations;
+
+    size_t m_nu_playout_moves;
+
+    size_t m_nu_last_good_reply_moves;
 
     bool m_check_symmetric_draw;
 

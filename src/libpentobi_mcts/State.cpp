@@ -392,20 +392,20 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
                 log() << "Terminate playout. Symmetry not broken.\n";
             return false;
         }
+    ++m_nu_playout_moves;
     Move mv;
     if (! last_good_reply.is_null() && ! last_good_reply.is_pass()
         && m_bd.is_legal(last_good_reply)
         && m_bd.get_pieces_left(to_play).contains(
                                      m_bd.get_move_info(last_good_reply).piece))
     {
-        m_stat_last_good_reply.add(1);
+        ++m_nu_last_good_reply_moves;
         mv = last_good_reply;
         if (log_simulations)
             log() << "Playing last good reply\n";
     }
     else
     {
-        m_stat_last_good_reply.add(0);
         const ArrayList<Move, Move::range>* moves;
         if (pure_random_playout)
             moves = &m_moves[to_play];
@@ -764,8 +764,9 @@ void State::start_search()
         m_shared_const.score_modification
         / bd.get_board_const().get_total_piece_points();
     m_nu_simulations = 0;
+    m_nu_playout_moves = 0;
+    m_nu_last_good_reply_moves = 0;
     m_stat_score.clear();
-    m_stat_last_good_reply.clear();
     m_check_symmetric_draw =
         (bd.get_game_variant() == game_variant_duo
          && m_shared_const.detect_symmetry
@@ -938,8 +939,9 @@ void State::write_info(ostream& out) const
 {
     out << "Sco: ";
     m_stat_score.write(out, true, 1);
-    out << ", LGR: ";
-    m_stat_last_good_reply.write(out, true, 3);
+    if (m_nu_playout_moves > 0)
+        out << (format(", LGR: %.1f%%")
+                % (100.0 * m_nu_last_good_reply_moves / m_nu_playout_moves));
     out << '\n';
 }
 
