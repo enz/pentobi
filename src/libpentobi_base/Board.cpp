@@ -484,7 +484,7 @@ void Board::play(Color c, Move mv)
     {
         const MoveInfo& info = m_board_const->get_move_info(mv);
         LIBBOARDGAME_ASSERT(m_pieces_left[c].contains(info.piece));
-        m_pieces_left[c].remove(info.piece);
+        m_pieces_left[c].remove_fast(info.piece);
         auto i = info.points.begin();
         auto end = info.points.end();
         LIBBOARDGAME_ASSERT(i != end);
