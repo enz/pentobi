@@ -7,6 +7,8 @@ Current development version (bugfix branch for 1.0)
   title is not visible in all L&F's
 * Fixed a small bug that distorted the position values reported with
   --verbose if a subtree from a previous search was reused
+* Bugfix: show error message instead of terminating if opening an
+  invalid file
 
 
 Version 1.0 (1 Jan 2012)
