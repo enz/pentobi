@@ -9,12 +9,12 @@
 
 namespace libpentobi_mcts {
 
+using libboardgame_base::ArrayList;
 using libpentobi_base::Board;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::Point;
-using libpentobi_base::PointList;
 
 //-----------------------------------------------------------------------------
 
@@ -49,7 +49,8 @@ public:
     int operator[](Point p) const;
 
 private:
-    PointList m_points;
+    /** List of last attach points, may contain duplicates. */
+    ArrayList<Point,4 * Point::range_onboard_end> m_points;
 
     Grid<int> m_marker;
 };

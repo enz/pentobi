@@ -10,7 +10,6 @@
 
 namespace libpentobi_mcts {
 
-using libboardgame_util::ArrayList;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Piece;
@@ -40,12 +39,19 @@ void LastAttachPoints::init(const Board& bd)
             continue;
         const ArrayList<Point,Piece::max_attach>& attach_points
             = bd.get_move_info(mv).attach_points;
-        for (auto j = attach_points.begin(); j != attach_points.end(); ++j)
-            if (! bd.is_forbidden(*j, c) && m_marker[*j] == 0)
+        auto j = attach_points.begin();
+        auto end = attach_points.end();
+        LIBBOARDGAME_ASSERT(j != end);
+        do
+        {
+            if (! bd.is_forbidden(*j, c))
             {
                 m_points.push_back(*j);
                 m_marker[*j] = 1;
             }
+            ++j;
+        }
+        while (j != end);
     }
 }
 
