@@ -1840,7 +1840,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_game->goto_node(get_last_node(m_game->get_root()));
         initPieceSelectors();
     }
-    catch (const InvalidPropertyValue& e)
+    catch (const Exception& e)
     {
         showInvalidFile(file, e);
     }
