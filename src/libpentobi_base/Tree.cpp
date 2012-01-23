@@ -146,6 +146,8 @@ ColorMove Tree::get_move(const Node& node) const
     MovePoints points;
     if (! get_move(node, m_game_variant, c, points))
         return ColorMove::null();
+    if (points.size() == 0)
+        return ColorMove(c, Move::pass());
     Move mv;
     if (! m_board_const->find_move(points, mv))
         throw Exception(str(format("Illegal move %1%") % to_string(points)));

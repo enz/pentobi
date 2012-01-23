@@ -9,6 +9,10 @@ Current development version (bugfix branch for 1.0)
   --verbose if a subtree from a previous search was reused
 * Bugfix: show error message instead of terminating if opening an
   invalid file
+* Accept pass moves (without points) in files. Although the current
+  Blokus SGF documentation does not specify if they should be allowed,
+  they might be used in the future and are used by early (unreleased)
+  versions of Pentobi
 
 
 Version 1.0 (1 Jan 2012)
