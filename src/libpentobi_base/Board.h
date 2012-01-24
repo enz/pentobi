@@ -155,10 +155,14 @@ public:
 
     void copy_from(const Board& bd);
 
+    /** Play a move.
+        @pre get_nu_moves() < max_game_moves */
     void play(Color c, Move move);
 
+    /** See play(Color,Move) */
     void play(ColorMove move);
 
+    /** Calls play(Color,Move) with the current color to play. */
     void play(Move mv);
 
     void undo();
