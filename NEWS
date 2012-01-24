@@ -11,8 +11,10 @@ Current development version (bugfix branch for 1.0)
   invalid file
 * Accept pass moves (without points) in files. Although the current
   Blokus SGF documentation does not specify if they should be allowed,
-  they might be used in the future and are used by early (unreleased)
-  versions of Pentobi
+  they might be used in the future and are used in filews written by
+  early (unreleased) versions of Pentobi
+* Do not accept files with more moves in a variation than Pentobi can
+  handle
 
 
 Version 1.0 (1 Jan 2012)

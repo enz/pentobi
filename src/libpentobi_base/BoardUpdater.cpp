@@ -49,7 +49,11 @@ void BoardUpdater::update(const Node& node)
         check_has_not_property(*i, "AE");
         ColorMove mv = m_tree.get_move(*i);
         if (! mv.is_null())
+        {
+            if (m_bd.get_nu_moves() >= Board::max_game_moves)
+                throw Exception("too many moves");
             m_bd.play(mv);
+        }
     }
 }
 
