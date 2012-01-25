@@ -287,8 +287,9 @@ void MainWindow::about()
 void MainWindow::analyzeGame()
 {
     cancelGenMove();
-    AnalyzeGameWindow* analyzeGameWindow =
-        new AnalyzeGameWindow(this, *m_game, m_player->get_search());
+    AnalyzeGameWindow* analyzeGameWindow = new AnalyzeGameWindow(this);
+    analyzeGameWindow->show();
+    analyzeGameWindow->init(*m_game, m_player->get_search());
     connect(analyzeGameWindow,
             SIGNAL(gotoPosition(GameVariant,const vector<ColorMove>&)),
             this, SLOT(gotoPosition(GameVariant,const vector<ColorMove>&)));
@@ -2876,6 +2877,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move(current);
+    m_actionAnalyzeGame->setEnabled(tree.has_main_variation_moves());
     m_actionBackToMainVariation->setEnabled(! isMain);
     m_actionBeginning->setEnabled(hasParent);
     m_actionBackward->setEnabled(hasParent);

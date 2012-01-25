@@ -74,6 +74,8 @@ public:
 
     const BoardConst& get_board_const() const;
 
+    bool has_main_variation_moves() const;
+
 private:
     GameVariant m_game_variant;
 

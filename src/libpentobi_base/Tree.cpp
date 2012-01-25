@@ -203,6 +203,18 @@ string Tree::get_player_name(Color c) const
     return "";
 }
 
+bool Tree::has_main_variation_moves() const
+{
+    const Node* node = &get_root();
+    while (node != 0)
+    {
+        if (has_move(*node))
+            return true;
+        node = node->get_first_child_or_null();
+    }
+    return false;
+}
+
 void Tree::init_game_variant(GameVariant game_variant)
 {
     libboardgame_sgf::Tree::init();

@@ -17,15 +17,19 @@ using libpentobi_base::Board;
 
 //-----------------------------------------------------------------------------
 
-AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent, Game& game,
-                                     Search& search)
+AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(tr("Pentobi - Game Analysis"));
     setMinimumSize(240, 120);
+    m_maxMoves = 0;
+}
+
+void AnalyzeGameWindow::init(Game& game, Search& search)
+{
     const Board& bd = game.get_board();
     m_maxMoves = bd.get_nu_pieces() * bd.get_nu_colors();
-    show();
+    initSize();
     m_progressDialog = new QProgressDialog(this);
     m_progressDialog->setWindowModality(Qt::WindowModal);
     m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
@@ -37,11 +41,22 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent, Game& game,
     m_analyzeGame.run(game, search,
                       bind(&AnalyzeGameWindow::progressCallback, this,
                            placeholders::_1, placeholders::_2));
-    m_progressDialog->setValue(100);
+    m_progressDialog->close();
+}
+
+void AnalyzeGameWindow::initSize()
+{
+    m_borderX = width() / 20;
+    m_borderY = height() / 20;
+    m_maxX = width() - 2 * m_borderX;
+    m_dX = qreal(m_maxX) / m_maxMoves;
+    m_maxY = height() - 2 * m_borderY;
 }
 
 void AnalyzeGameWindow::mousePressEvent(QMouseEvent* event)
 {
+    if (m_maxMoves == 0)
+        return;
     unsigned int moveNumber = (event->x() - m_borderX) / m_dX;
     if (moveNumber >= m_analyzeGame.get_nu_moves())
         return;
@@ -53,6 +68,8 @@ void AnalyzeGameWindow::mousePressEvent(QMouseEvent* event)
 
 void AnalyzeGameWindow::paintEvent(QPaintEvent* event)
 {
+    if (m_maxMoves == 0)
+        return;
     QPainter painter(this);
     QFont font;
     font.setStyleStrategy(QFont::PreferOutline);
@@ -107,11 +124,9 @@ void AnalyzeGameWindow::progressCallback(unsigned int movesAnalyzed,
 
 void AnalyzeGameWindow::resizeEvent(QResizeEvent* event)
 {
-    m_borderX = width() / 20;
-    m_borderY = height() / 20;
-    m_maxX = width() - 2 * m_borderX;
-    m_dX = qreal(m_maxX) / m_maxMoves;
-    m_maxY = height() - 2 * m_borderY;
+    if (m_maxMoves == 0)
+        return;
+    initSize();
 }
 
 //-----------------------------------------------------------------------------

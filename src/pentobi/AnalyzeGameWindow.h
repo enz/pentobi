@@ -24,7 +24,9 @@ class AnalyzeGameWindow
     Q_OBJECT
 
 public:
-    AnalyzeGameWindow(QWidget* parent, Game& game, Search& search);
+    AnalyzeGameWindow(QWidget* parent);
+
+    void init(Game& game, Search& search);
 
 signals:
     void gotoPosition(GameVariant gameVariant, const vector<ColorMove>& moves);
@@ -37,6 +39,8 @@ protected:
     void resizeEvent(QResizeEvent* event);
 
 private:
+    /** Maximum number of moves in the current game variant.
+        Set to 0 if game variant is not known yet. */
     unsigned int m_maxMoves;
 
     AnalyzeGame m_analyzeGame;
@@ -52,6 +56,8 @@ private:
     int m_maxX;
 
     int m_maxY;
+
+    void initSize();
 
     void progressCallback(unsigned int movesAnalyzed, unsigned int totalMoves);
 };
