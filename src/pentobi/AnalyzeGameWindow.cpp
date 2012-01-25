@@ -46,7 +46,7 @@ void AnalyzeGameWindow::mousePressEvent(QMouseEvent* event)
     if (moveNumber >= m_analyzeGame.get_nu_moves())
         return;
     vector<ColorMove> moves;
-    for (unsigned int i = 0; i <= moveNumber; ++i)
+    for (unsigned int i = 0; i < moveNumber; ++i)
         moves.push_back(m_analyzeGame.get_move(i));
     emit gotoPosition(m_analyzeGame.get_game_variant(), moves);
 }
