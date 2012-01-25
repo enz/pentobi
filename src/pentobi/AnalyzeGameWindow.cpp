@@ -85,6 +85,13 @@ void AnalyzeGameWindow::paintEvent(QPaintEvent* event)
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(240, 240, 240));
     painter.drawRect(0, 0, m_maxX, m_maxY);
+    unsigned int nu_moves = m_analyzeGame.get_nu_moves();
+    if (m_currentPosition >= 0
+        && static_cast<unsigned int>(m_currentPosition) < nu_moves)
+    {
+        painter.setBrush(QColor(224, 224, 224));
+        painter.drawRect(m_currentPosition * m_dX, 0, m_dX, m_maxY);
+    }
     painter.setPen(QColor(32, 32, 32));
     painter.drawLine(0, 0, m_maxX, 0);
     painter.drawLine(0, m_maxY, m_maxX, m_maxY);
@@ -105,18 +112,14 @@ void AnalyzeGameWindow::paintEvent(QPaintEvent* event)
     painter.setPen(QColor(128, 128, 128));
     painter.drawLine(0, 0.5 * m_maxY, m_maxX, 0.5 * m_maxY);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    for (unsigned int i = 0; i < m_analyzeGame.get_nu_moves(); ++i)
+    for (unsigned int i = 0; i < nu_moves; ++i)
     {
         if (! m_analyzeGame.has_value(i))
             continue;
         double value = m_analyzeGame.get_value(i);
         QColor color = Util::getPaintColor(m_analyzeGame.get_game_variant(),
                                            m_analyzeGame.get_move(i).color);
-        if (m_currentPosition >= 0
-            && static_cast<unsigned int>(m_currentPosition) == i)
-            painter.setPen(Qt::black);
-        else
-            painter.setPen(Qt::NoPen);
+        painter.setPen(Qt::NoPen);
         painter.setBrush(color);
         painter.drawEllipse(QPointF((i + 0.5) * m_dX, (1 - value) * m_maxY),
                             0.5 * m_dX, 0.5 * m_dX);
