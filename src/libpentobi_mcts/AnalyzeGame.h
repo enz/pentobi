@@ -23,7 +23,7 @@ public:
         @param game
         @param search
         @param progress_callback Function that will be called at the beginning
-        of the analysis of a position. Arguments: number moves analyized so far,
+        of the analysis of a position. Arguments: number moves analyzed so far,
         total number of moves. */
     void run(Game& game, Search& search,
              function<void(unsigned int,unsigned int)> progress_callback);

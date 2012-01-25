@@ -240,7 +240,9 @@ private:
 
     QPlainTextEdit* m_comment;
 
-    HelpWindow* m_help_window;
+    HelpWindow* m_helpWindow;
+
+    AnalyzeGameWindow* m_analyzeGameWindow;
 
     QAction* m_actionAbout;
 

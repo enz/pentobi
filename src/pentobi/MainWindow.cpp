@@ -138,7 +138,8 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     : m_isGenMoveRunning(false),
       m_lastMoveByComputer(false),
       m_genMoveId(0),
-      m_help_window(0),
+      m_helpWindow(0),
+      m_analyzeGameWindow(0),
       m_legalMoves(new ArrayList<Move, Move::range>())
 {
     QSettings settings;
@@ -287,10 +288,13 @@ void MainWindow::about()
 void MainWindow::analyzeGame()
 {
     cancelGenMove();
-    AnalyzeGameWindow* analyzeGameWindow = new AnalyzeGameWindow(this);
-    analyzeGameWindow->show();
-    analyzeGameWindow->init(*m_game, m_player->get_search());
-    connect(analyzeGameWindow,
+    if (m_analyzeGameWindow != 0)
+        delete m_analyzeGameWindow;
+    m_analyzeGameWindow = new AnalyzeGameWindow(this);
+    m_analyzeGameWindow->show();
+    m_analyzeGameWindow->init(*m_game, m_player->get_search());
+    m_analyzeGameWindow->setCurrentPosition(*m_game, m_game->get_current());
+    connect(m_analyzeGameWindow,
             SIGNAL(gotoPosition(GameVariant,const vector<ColorMove>&)),
             this, SLOT(gotoPosition(GameVariant,const vector<ColorMove>&)));
 }
@@ -1579,6 +1583,8 @@ void MainWindow::gotoNode(const Node& node)
     }
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
+    if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
+        m_analyzeGameWindow->setCurrentPosition(*m_game, node);
     updateWindow(true);
 }
 
@@ -1610,16 +1616,16 @@ void MainWindow::gotoPosition(GameVariant gameVariant,
 
 void MainWindow::help()
 {
-    if (m_help_window != 0)
+    if (m_helpWindow != 0)
     {
-        m_help_window->show();
-        m_help_window->raise();
+        m_helpWindow->show();
+        m_helpWindow->raise();
         return;
     }
     QString path = HelpWindow::findMainPage(":/pentobi/manual", "index.html",
                                             QLocale::system().name());
-    m_help_window = new HelpWindow(this, path);
-    m_help_window->show();
+    m_helpWindow = new HelpWindow(this, path);
+    m_helpWindow->show();
 }
 
 void MainWindow::humanPlay(Color c, Move mv)

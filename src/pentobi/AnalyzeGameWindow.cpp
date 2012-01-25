@@ -8,12 +8,17 @@
 
 #include "AnalyzeGameWindow.h"
 
+#include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 
+using libboardgame_sgf::util::find_root;
+using libboardgame_sgf::util::is_main_variation;
 using libboardgame_util::log;
 using libboardgame_util::set_abort;
+using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
+using libpentobi_base::Tree;
 
 //-----------------------------------------------------------------------------
 
@@ -23,6 +28,7 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     setWindowTitle(tr("Pentobi - Game Analysis"));
     setMinimumSize(240, 120);
     m_maxMoves = 0;
+    m_currentPosition = -1;
 }
 
 void AnalyzeGameWindow::init(Game& game, Search& search)
@@ -106,7 +112,11 @@ void AnalyzeGameWindow::paintEvent(QPaintEvent* event)
         double value = m_analyzeGame.get_value(i);
         QColor color = Util::getPaintColor(m_analyzeGame.get_game_variant(),
                                            m_analyzeGame.get_move(i).color);
-        painter.setPen(Qt::NoPen);
+        if (m_currentPosition >= 0
+            && static_cast<unsigned int>(m_currentPosition) == i)
+            painter.setPen(Qt::black);
+        else
+            painter.setPen(Qt::NoPen);
         painter.setBrush(color);
         painter.drawEllipse(QPointF((i + 0.5) * m_dX, (1 - value) * m_maxY),
                             0.5 * m_dX, 0.5 * m_dX);
@@ -127,6 +137,34 @@ void AnalyzeGameWindow::resizeEvent(QResizeEvent* event)
     if (m_maxMoves == 0)
         return;
     initSize();
+}
+
+void AnalyzeGameWindow::setCurrentPosition(const Game& game, const Node& node)
+{
+    update();
+    m_currentPosition = -1;
+    if (is_main_variation(node))
+    {
+        ArrayList<ColorMove,Board::max_game_moves> moves;
+        const Tree& tree = game.get_tree();
+        const Node* current = &find_root(node);
+        while (current != 0)
+        {
+            ColorMove mv = tree.get_move(*current);
+            if (! mv.is_null() && moves.size() < Board::max_game_moves)
+                moves.push_back(mv);
+            if (current == &node)
+                break;
+            current = current->get_first_child_or_null();
+        }
+        if (moves.size() <= m_analyzeGame.get_nu_moves())
+        {
+            for (unsigned int i = 0; i < moves.size(); ++i)
+                if (moves[i] != m_analyzeGame.get_move(i))
+                    return;
+            m_currentPosition = moves.size();
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------

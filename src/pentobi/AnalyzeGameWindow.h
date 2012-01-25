@@ -13,6 +13,7 @@ using namespace std;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
 using libpentobi_base::GameVariant;
+using libpentobi_base::Node;
 using libpentobi_mcts::AnalyzeGame;
 using libpentobi_mcts::Search;
 
@@ -26,7 +27,17 @@ class AnalyzeGameWindow
 public:
     AnalyzeGameWindow(QWidget* parent);
 
+    /** Run the analysis.
+        This will temporarily change the current position in the game and use
+        the search to evaluate positions. During the analysis, the parent
+        window is protected with a modal progress dialog. */
     void init(Game& game, Search& search);
+
+    /** Mark the current position.
+        Will clear the current position if the target node is not in the
+        main variation or does not correspond to a move in the move
+        sequence when the analysis was done. */
+    void setCurrentPosition(const Game& game, const Node& node);
 
 signals:
     void gotoPosition(GameVariant gameVariant, const vector<ColorMove>& moves);
@@ -56,6 +67,9 @@ private:
     int m_maxX;
 
     int m_maxY;
+
+    /** Current position that will be marked or -1 if no position is marked. */
+    int m_currentPosition;
 
     void initSize();
 
