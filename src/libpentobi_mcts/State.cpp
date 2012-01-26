@@ -214,17 +214,16 @@ inline void State::add_moves(Point p, Color c, unsigned int piece,
         {
             int nu_local;
             const MoveInfo& info = m_bd.get_move_info(*i);
-            if (! is_forbidden(c, info.points, nu_local)
-                && ! m_marker[*i])
+            if (! check_move(c, info.points, nu_local) && ! m_marker[*i])
             {
                 moves.push_back(*i);
                 m_marker.set(*i);
-                check_local_move(nu_local, *i);
+                check_local_move(nu_local, *i, info);
             }
         }
 }
 
-void State::check_local_move(int nu_local, Move mv)
+void State::check_local_move(int nu_local, Move mv, const MoveInfo& info)
 {
     if (nu_local < m_max_local)
         return;
@@ -234,6 +233,27 @@ void State::check_local_move(int nu_local, Move mv)
         m_local_moves.clear();
     }
     m_local_moves.push_back(mv);
+    m_max_playable_piece_size_local =
+        max(m_max_playable_piece_size_local, info.points.size());
+}
+
+bool State::check_move(Color c, const MovePoints& points, int& nu_local)
+{
+    nu_local = 0;
+    const FullGrid<bool>& is_forbidden = m_bd.is_forbidden(c);
+    auto end = points.end();
+    auto i = points.begin();
+    LIBBOARDGAME_ASSERT(i != end);
+    do
+    {
+        if (is_forbidden[*i])
+            return true;
+        nu_local += m_last_attach_points[*i];
+        ++i;
+    }
+    while (i != end);
+    m_max_playable_piece_size = max(m_max_playable_piece_size, points.size());
+    return false;
 }
 
 void State::compute_features()
@@ -366,22 +386,27 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     GameVariant variant = m_bd.get_game_variant();
     m_has_moves[to_play] = ! m_moves[to_play].empty();
 
-    // Don't care about the exact score of a playout if we are still early in
-    // the game and we know that the playout is a loss because the player has
-    // no more moves and the score is already negative.
-    if (! m_has_moves[to_play] && m_nu_moves_initial < 10 * nu_colors
-        && (variant == game_variant_duo
-            || ((variant == game_variant_classic_2
-                 || variant == game_variant_trigon_2)
-                && ! m_has_moves[m_bd.get_second_color(to_play)])))
+    if (! m_has_moves[to_play])
     {
-        double game_result;
-        if (m_bd.get_score(to_play, game_result) < 0)
+        // Don't care about the exact score of a playout if we are still early
+        // in the game and we know that the playout is a loss because the
+        // player has no more moves and the score is already negative.
+        if (m_nu_moves_initial < 10 * nu_colors
+            && (variant == game_variant_duo
+                || ((variant == game_variant_classic_2
+                     || variant == game_variant_trigon_2)
+                    && ! m_has_moves[m_bd.get_second_color(to_play)])))
         {
-            if (log_simulations)
-                log() << "Terminate early (no moves and negative score)\n";
-            return false;
+            double game_result;
+            if (m_bd.get_score(to_play, game_result) < 0)
+            {
+                if (log_simulations)
+                    log() << "Terminate early (no moves and negative score)\n";
+                return false;
+            }
         }
+        play(Move::pass());
+        return true;
     }
 
     if (m_check_symmetric_draw)
@@ -407,29 +432,38 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     else
     {
         const ArrayList<Move, Move::range>* moves;
-        if (pure_random_playout)
+        unsigned int max_playable_piece_size;
+        if (pure_random_playout || m_local_moves.empty())
+        {
             moves = &m_moves[to_play];
+            max_playable_piece_size = m_max_playable_piece_size;
+            if (log_simulations)
+                log() << "Moves: " << moves->size() << "\n";
+        }
         else
         {
             moves = &m_local_moves;
-            if (moves->empty())
-                moves = &m_moves[to_play];
+            max_playable_piece_size = m_max_playable_piece_size_local;
             if (log_simulations)
-            {
                 log() << "Moves: " << moves->size() << ", local: "
-                      << m_local_moves.size();
-                if (m_local_moves.size() > 0)
-                    log() << ", max_local: " << m_max_local;
-                log() << '\n';
-            }
+                      << m_local_moves.size() << ", max_local: " << m_max_local
+                      << '\n';
         }
-        if (moves->empty())
+        // Choose a random move from the list of local moves (if not empty) or
+        // the list of all moves. Try more than once if a bad move (e.g. not
+        // maximum playable piece size) is chosen to reduce the probabilty
+        // for such moves without becoming deterministic.
+        const unsigned int max_try = 2;
+        unsigned int nu_try = 0;
+        do
         {
-            play(Move::pass());
-            return true;
+            ++nu_try;
+            int i =
+                m_random.generate_small_int(static_cast<int>(moves->size()));
+            mv = (*moves)[i];
         }
-        int i = m_random.generate_small_int(static_cast<int>(moves->size()));
-        mv = (*moves)[i];
+        while (m_bd.get_move_points(mv).size() < max_playable_piece_size
+               && nu_try < max_try);
     }
     play(mv);
     return true;
@@ -534,6 +568,8 @@ void State::init_move_list_with_local_list(Color c)
     m_last_attach_points.init(m_bd);
     m_local_moves.clear();
     m_max_local = 1;
+    m_max_playable_piece_size = 0;
+    m_max_playable_piece_size_local = 0;
     ArrayList<Move, Move::range>& moves = m_moves[c];
     moves.clear();
     bool is_first_move =
@@ -702,24 +738,6 @@ void State::init_symmetry_info()
     }
 }
 
-bool State::is_forbidden(Color c, const MovePoints& points, int& nu_local) const
-{
-    nu_local = 0;
-    const FullGrid<bool>& is_forbidden = m_bd.is_forbidden(c);
-    auto end = points.end();
-    auto i = points.begin();
-    LIBBOARDGAME_ASSERT(i != end);
-    do
-    {
-        if (is_forbidden[*i])
-            return true;
-        nu_local += m_last_attach_points[*i];
-        ++i;
-    }
-    while (i != end);
-    return false;
-}
-
 void State::play(const Move& mv)
 {
     m_last_move[m_bd.get_to_play()] = mv;
@@ -826,6 +844,8 @@ void State::update_move_list(Color c)
     m_last_attach_points.init(m_bd);
     m_local_moves.clear();
     m_max_local = 1;
+    m_max_playable_piece_size = 0;
+    m_max_playable_piece_size_local = 0;
     Move last_mv = m_last_move[c];
     ArrayList<Move, Move::range>& moves = m_moves[c];
 
@@ -837,11 +857,10 @@ void State::update_move_list(Color c)
     {
         int nu_local;
         const MoveInfo& info = m_bd.get_move_info(*i);
-        if (info.piece != last_piece
-            && ! is_forbidden(c, info.points, nu_local))
+        if (info.piece != last_piece && ! check_move(c, info.points, nu_local))
         {
             m_marker.set(*i);
-            check_local_move(nu_local, *i);
+            check_local_move(nu_local, *i, info);
         }
         else
         {

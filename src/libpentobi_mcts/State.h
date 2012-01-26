@@ -32,6 +32,7 @@ using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
+using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::MovePoints;
 using libpentobi_base::Point;
@@ -139,6 +140,10 @@ private:
 
     int m_max_local;
 
+    unsigned int m_max_playable_piece_size;
+
+    unsigned int m_max_playable_piece_size_local;
+
     /** Maximum of Features::heuristic for all moves. */
     ValueType m_max_heuristic;
 
@@ -208,7 +213,7 @@ private:
     void add_moves(Point p, Color c, unsigned int piece,
                    unsigned int adj_status);
 
-    void check_local_move(int nu_local, Move mv);
+    void check_local_move(int nu_local, Move mv, const MoveInfo& info);
 
     void compute_features();
 
@@ -218,7 +223,7 @@ private:
 
     void init_symmetry_info();
 
-    bool is_forbidden(Color c, const MovePoints& points, int& nu_local) const;
+    bool check_move(Color c, const MovePoints& points, int& nu_local);
 
     void update_move_list(Color c);
 
