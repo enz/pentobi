@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <limits>
+#include <boost/foreach.hpp>
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"

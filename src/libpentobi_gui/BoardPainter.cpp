@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <boost/foreach.hpp>
 #include "Util.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/AdjIterator.h"
