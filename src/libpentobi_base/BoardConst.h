@@ -70,6 +70,8 @@ public:
 
     const MoveInfo& get_move_info(Move move) const;
 
+    const MoveInfoExt& get_move_info_ext(Move move) const;
+
     const MovePoints& get_move_points(Move mv) const;
 
     bool find_move(const MovePoints& points, Move& move) const;
@@ -107,6 +109,8 @@ private:
     unique_ptr<PieceTransforms> m_transforms;
 
     vector<MoveInfo> m_move_info;
+
+    vector<MoveInfoExt> m_move_info_ext;
 
     /** Moves of a piece at a point constrained by the forbidden status of
         adjacent points. */
@@ -155,6 +159,13 @@ inline const MoveInfo& BoardConst::get_move_info(Move move) const
     LIBBOARDGAME_ASSERT(! move.is_null());
     LIBBOARDGAME_ASSERT(! move.is_pass());
     return m_move_info[move.to_int()];
+}
+
+inline const MoveInfoExt& BoardConst::get_move_info_ext(Move move) const
+{
+    LIBBOARDGAME_ASSERT(! move.is_null());
+    LIBBOARDGAME_ASSERT(! move.is_pass());
+    return m_move_info_ext[move.to_int()];
 }
 
 inline const MovePoints& BoardConst::get_move_points(Move mv) const

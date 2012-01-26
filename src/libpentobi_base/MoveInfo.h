@@ -23,7 +23,12 @@ struct MoveInfo
     ArrayList<Point, Piece::max_adj> adj_points;
 
     ArrayList<Point, Piece::max_attach> attach_points;
+};
 
+/** Non-frequently accessed move info.
+    Stored separately from MoveInfo to improve CPU cache performance. */
+struct MoveInfoExt
+{
     bool breaks_symmetry;
 
     Move symmetric_move;

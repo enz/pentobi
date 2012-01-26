@@ -499,12 +499,12 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         if (to_play == Color(1))
         {
             ColorMove last = m_bd.get_move(m_bd.get_nu_moves() - 1);
-            symmetric_mv = m_bd.get_move_info(last.move).symmetric_move;
+            symmetric_mv = m_bd.get_move_info_ext(last.move).symmetric_move;
         }
         else if (m_bd.get_nu_moves() > 0)
         {
             BOOST_FOREACH(Move mv, moves)
-                if (m_bd.get_move_info(mv).breaks_symmetry)
+                if (m_bd.get_move_info_ext(mv).breaks_symmetry)
                 {
                     has_symmetry_breaker = true;
                     break;
@@ -549,7 +549,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             }
             else if (has_symmetry_breaker)
             {
-                if (m_bd.get_move_info(mv).breaks_symmetry)
+                if (m_bd.get_move_info_ext(mv).breaks_symmetry)
                     value += 5 * 1.0f;
                 else
                     value += 5 * 0.1f;

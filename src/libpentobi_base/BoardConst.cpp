@@ -529,11 +529,13 @@ void BoardConst::create_move(unsigned int piece_index,
     for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
         points.push_back(Point((*i).x, (*i).y));
     MoveInfo info;
+    MoveInfoExt info_ext;
     info.piece = piece_index;
     info.points = points;
-    info.center = center;
+    info_ext.center = center;
     set_adj_and_corner_points(info);
     m_move_info.push_back(info);
+    m_move_info_ext.push_back(info_ext);
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
     if (log_move_creation)
     {
@@ -724,17 +726,19 @@ void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
     symmetric_points.init(m_geometry);
-    BOOST_FOREACH(MoveInfo& info, m_move_info)
+    for (unsigned int i = 0; i < m_move_info.size(); ++i)
     {
+        const MoveInfo& info = m_move_info[i];
+        MoveInfoExt& info_ext = m_move_info_ext[i];
         MovePoints sym_points;
-        info.breaks_symmetry = false;
+        info_ext.breaks_symmetry = false;
         BOOST_FOREACH(Point p, info.points)
         {
             if (info.points.contains(symmetric_points[p]))
-                info.breaks_symmetry = true;
+                info_ext.breaks_symmetry = true;
             sym_points.push_back(symmetric_points[p]);
         }
-        find_move(sym_points, info.symmetric_move);
+        find_move(sym_points, info_ext.symmetric_move);
     }
 }
 

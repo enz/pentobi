@@ -248,6 +248,8 @@ public:
 
     const MoveInfo& get_move_info(Move move) const;
 
+    const MoveInfoExt& get_move_info_ext(Move move) const;
+
     bool is_colored_starting_point(Point p) const;
 
     bool is_colorless_starting_point(Point p) const;
@@ -393,6 +395,11 @@ inline ColorMove Board::get_move(unsigned int n) const
 inline const MoveInfo& Board::get_move_info(Move move) const
 {
     return m_board_const->get_move_info(move);
+}
+
+inline const MoveInfoExt& Board::get_move_info_ext(Move move) const
+{
+    return m_board_const->get_move_info_ext(move);
 }
 
 inline const Piece& Board::get_move_piece(Move mv) const

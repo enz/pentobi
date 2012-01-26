@@ -62,7 +62,7 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
     if (mv.is_null() || mv.move.is_pass())
         return;
     const Board& bd = game.get_board();
-    Point p = bd.get_move_info(mv.move).center;
+    Point p = bd.get_move_info_ext(mv.move).center;
     QString label;
     label.setNum(moveNumber);
     appendMoveAnnotation(label, game, node);
@@ -118,7 +118,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
                 {
                     setMoveLabel(guiBoard, game, *node, moveNumber, mv);
                     setVariationMarkup(guiBoard, game, *node,
-                                       bd.get_move_info(mv.move).center);
+                                       bd.get_move_info_ext(mv.move).center);
                     if (markLastMove && ! markAllLastBySameColor)
                         break;
                     --moveNumber;
