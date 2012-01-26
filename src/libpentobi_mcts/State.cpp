@@ -215,7 +215,7 @@ inline void State::add_moves(Point p, Color c, unsigned int piece,
         {
             int nu_local;
             const MoveInfo& info = m_bd.get_move_info(*i);
-            if (! check_move(c, info.points, nu_local) && ! m_marker[*i])
+            if (check_move(c, info.points, nu_local) && ! m_marker[*i])
             {
                 moves.push_back(*i);
                 m_marker.set(*i);
@@ -248,13 +248,13 @@ bool State::check_move(Color c, const MovePoints& points, int& nu_local)
     do
     {
         if (is_forbidden[*i])
-            return true;
+            return false;
         nu_local += m_last_attach_points[*i];
         ++i;
     }
     while (i != end);
     m_max_playable_piece_size = max(m_max_playable_piece_size, points.size());
-    return false;
+    return true;
 }
 
 void State::compute_features()
@@ -858,7 +858,7 @@ void State::update_move_list(Color c)
     {
         int nu_local;
         const MoveInfo& info = m_bd.get_move_info(*i);
-        if (info.piece != last_piece && ! check_move(c, info.points, nu_local))
+        if (info.piece != last_piece && check_move(c, info.points, nu_local))
         {
             m_marker.set(*i);
             check_local_move(nu_local, *i, info);
