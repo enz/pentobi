@@ -9,7 +9,6 @@
 #include <cassert>
 #include <cstddef>
 #include <iostream>
-#include <boost/foreach.hpp>
 #include "Assert.h"
 
 namespace libboardgame_util {

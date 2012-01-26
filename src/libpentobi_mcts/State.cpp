@@ -9,6 +9,7 @@
 #include "State.h"
 
 #include <cmath>
+#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/MathUtil.h"

@@ -1,10 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file TreeUtil.h */
+/** @file libboardgame_mcts/TreeUtil.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_MCTS_TREE_UTIL_H
 #define LIBBOARDGAME_MCTS_TREE_UTIL_H
 
+#include <boost/foreach.hpp>
 #include "NodeUtil.h"
 #include "Tree.h"
 

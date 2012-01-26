@@ -8,6 +8,7 @@
 
 #include "Board.h"
 
+#include <boost/foreach.hpp>
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
