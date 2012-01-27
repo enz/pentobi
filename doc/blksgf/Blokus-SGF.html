@@ -6,9 +6,9 @@
   <body>
 
     <h1>Blokus SGF Files</h1>
-    <small>
+    <div style="font-size:small">
       Author: Markus Enzenberger
-    </small>
+    </div>
 
     <p>
       This document describes the file format for
@@ -27,8 +27,9 @@
       Therefore, a number of game-specific properties and value types
       had to be defined.
       The definitions follow the recommendations of SGF 4 and the proposals
-      for multi-player games from the discussions about the future SGF version
-      5.
+      for multi-player games from the
+      <a href="http://www.red-bean.com/sgf/ff5/ff5.htm">discussions</a> about
+      the future SGF version 5.
     </p>
 
     <h2>File extension and MIME type</h2>
@@ -37,8 +38,8 @@
       <a href="http://en.wikipedia.org/wiki/Internet_media_type">MIME type</a>
       <tt>application/x-blokus-sgf</tt> are used for Blokus SGF files.
     </p>
-    <p>
-      <b>Tip</b><br/>
+    <p style="font-size:small">
+      <b>Note</b><br/>
       Since this is a non-standard MIME type, links to Blokus SGF files on web
       servers will not automatically open the file with Pentobi even if Pentobi
       is installed locally and registered as a handler for Blokus SGF files.
@@ -47,7 +48,7 @@
       server in the same directory that contains the .blksgf files or in
       one of its parent directories.
       This file needs to contain the line:
-      <blockquote>
+      <blockquote style="font-size:small">
       AddType application/x-blokus-sgf blksgf
       </blockquote>
     </p>
@@ -108,7 +109,7 @@
       properties should be interpreted. Pentobi currently has no support for
       game clocks).
     </p>
-    <p>
+    <p style="font-size:small">
       <b>Note</b><br/>
       Old versions of Pentobi (before version 0.2) used the properties
       <tt>BLUE</tt>, <tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt>
@@ -160,7 +161,7 @@
     <p>
       Example: <tt>B[f9,e10,f10,g10,f11]</tt>
     </p>
-    <p>
+    <p style="font-size:small">
       <b>Note</b><br/>
       Old versions of Pentobi (before version 0.3) used to represent moves by a
       list of points, which did not follow the convention used by other games
