@@ -128,7 +128,7 @@ public:
 private:
     const Node* m_current;
 
-    Board m_bd;
+    unique_ptr<Board> m_bd;
 
     Tree m_tree;
 
@@ -147,7 +147,7 @@ inline double Game::get_bad_move() const
 
 inline const Board& Game::get_board() const
 {
-    return m_bd;
+    return *m_bd;
 }
 
 inline string Game::get_comment() const
@@ -162,7 +162,7 @@ inline string Game::get_date() const
 
 inline Color Game::get_effective_to_play() const
 {
-    return m_bd.get_effective_to_play();
+    return m_bd->get_effective_to_play();
 }
 
 inline const Node& Game::get_current() const
@@ -172,7 +172,7 @@ inline const Node& Game::get_current() const
 
 inline GameVariant Game::get_game_variant() const
 {
-    return m_bd.get_game_variant();
+    return m_bd->get_game_variant();
 }
 
 inline double Game::get_good_move() const
@@ -197,7 +197,7 @@ inline string Game::get_player_name(Color c) const
 
 inline Color Game::get_to_play() const
 {
-    return m_bd.get_to_play();
+    return m_bd->get_to_play();
 }
 
 inline const Node& Game::get_root() const
@@ -212,7 +212,7 @@ inline const Tree& Game::get_tree() const
 
 inline void Game::init()
 {
-    init(m_bd.get_game_variant());
+    init(m_bd->get_game_variant());
 }
 
 inline bool Game::is_doubtful_move() const

@@ -16,6 +16,8 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
+/** Marker for moves.
+    @note @ref libboardgame_avoid_stack_allocation */
 class MoveMarker
 {
 public:

@@ -75,6 +75,8 @@ inline bool StartingPoints::is_colorless_starting_point(Point p) const
 
 //-----------------------------------------------------------------------------
 
+/** Blokus board.
+    @note @ref libboardgame_avoid_stack_allocation */
 class Board
 {
 public:

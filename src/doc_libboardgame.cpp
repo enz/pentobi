@@ -5,6 +5,11 @@ This page defines attributes of documentation elements that are in
 widespread use. For brevity, the documentation block contains only
 a reference to the section of this page.
 
+@section libboardgame_avoid_stack_allocation Class size is large
+The size of this class is large because it contains large members that are not
+allocated on the heap to avoid dereferencing pointers for speed reasons. It
+should be avoided to create instances of this class on the stack.
+
 @section libboardgame_doc_obj_ref_opt Object reference optimization
 This class uses a reference to a certain object several times but does not
 store the reference at construction time for memory and/or speed optimization.

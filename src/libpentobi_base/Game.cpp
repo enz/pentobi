@@ -20,17 +20,17 @@ using libboardgame_sgf::util::is_main_variation;
 //-----------------------------------------------------------------------------
 
 Game::Game(GameVariant game_variant)
-    : m_bd(game_variant),
-      m_tree(game_variant),
-      m_updater(m_tree, m_bd)
+  : m_bd(new Board(game_variant)),
+    m_tree(game_variant),
+    m_updater(m_tree, *m_bd)
 {
     init(game_variant);
 }
 
 Game::Game(unique_ptr<Node>& root)
-  : m_bd(m_tree.get_game_variant()),
+  : m_bd(new Board(m_tree.get_game_variant())),
     m_tree(m_tree.get_game_variant()),
-    m_updater(m_tree, m_bd)
+    m_updater(m_tree, *m_bd)
 {
     init(root);
 }
@@ -43,7 +43,7 @@ void Game::goto_node(const Node& node)
 
 void Game::init(GameVariant game_variant)
 {
-    m_bd.init(game_variant);
+    m_bd->init(game_variant);
     m_tree.init_game_variant(game_variant);
     m_current = &m_tree.get_root();
 }
@@ -51,13 +51,13 @@ void Game::init(GameVariant game_variant)
 void Game::init(unique_ptr<Node>& root)
 {
     m_tree.init(root);
-    m_bd.init(m_tree.get_game_variant());
+    m_bd->init(m_tree.get_game_variant());
     goto_node(m_tree.get_root());
 }
 
 void Game::play(ColorMove mv, bool always_create_new_node)
 {
-    m_bd.play(mv);
+    m_bd->play(mv);
     const Node* child = 0;
     if (! always_create_new_node)
         child = m_tree.find_child_with_move(*m_current, mv);
