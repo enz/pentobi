@@ -2415,10 +2415,7 @@ void MainWindow::setMoveNumberText()
             if (move == 0)
             {
                 m_moveNumber->setText(QString("0 / %1").arg(nuMoves));
-                if (nuMoves == 1)
-                    m_moveNumber->setToolTip(tr("1 move"));
-                else
-                    m_moveNumber->setToolTip(tr("%1 moves").arg(nuMoves));
+                m_moveNumber->setToolTip(tr("%n move(s)", "", nuMoves));
             }
             else
             {
@@ -2431,67 +2428,30 @@ void MainWindow::setMoveNumberText()
     }
     else
     {
-        bool isMain = is_main_variation(current);
         if (move == nuMoves)
         {
-            if (isMain)
-            {
-                m_moveNumber->setText(QString("%1").arg(move));
-                m_moveNumber->setToolTip(tr("Move number %1 in main variation")
-                                         .arg(move));
-            }
-            else
-            {
-                m_moveNumber->setText(QString("%1 (%2)")
-                                      .arg(move).arg(variation.c_str()));
-                m_moveNumber->setToolTip(tr("Move number %1 (variation %2)")
-                                         .arg(move).arg(variation.c_str()));
-            }
+            m_moveNumber->setText(QString("%1 (%2)")
+                                  .arg(move).arg(variation.c_str()));
+            m_moveNumber->setToolTip(tr("Move number %1 in variation %2")
+                                     .arg(move).arg(variation.c_str()));
         }
         else
         {
-            if (isMain)
-            {
-                m_moveNumber->setText(QString("%1 / %2")
-                                      .arg(move).arg(nuMoves));
-                if (move == 0)
-                {
-                    if (nuMoves == 1)
-                        m_moveNumber->setToolTip(
-                                                tr("1 move in main variation"));
-                    else
-                        m_moveNumber->setToolTip(
-                                                tr("%1 moves in main variation")
-                                                .arg(nuMoves));
-                }
-                else
-                    m_moveNumber->setToolTip(
-                                    tr("Move number %1 of %2 in main variation")
-                                    .arg(move).arg(nuMoves));
-            }
+            m_moveNumber->setText(QString("%1 / %2 (%3)")
+                                  .arg(move).arg(nuMoves)
+                                  .arg(variation.c_str()));
+            if (move == 0)
+                // 0 moves in non-main variation could happen if SGF file
+                // contains non-root nodes without moves
+                m_moveNumber->setToolTip(tr("%n move(s) in variation %1",
+                                            "", nuMoves)
+                                         .arg(variation.c_str()));
             else
-            {
-                m_moveNumber->setText(QString("%1 / %2 (%3)")
-                                      .arg(move).arg(nuMoves)
+                m_moveNumber->setToolTip(
+                                      tr("Move number %1 of %2 in variation %3")
+                                      .arg(move)
+                                      .arg(nuMoves)
                                       .arg(variation.c_str()));
-                if (move == 0)
-                {
-                    if (nuMoves == 1)
-                        m_moveNumber->setToolTip(tr("1 move (variation %1)")
-                                                 .arg(variation.c_str()));
-                    else
-                        m_moveNumber->setToolTip(tr("%1 moves (variation %2)")
-                                                 .arg(nuMoves)
-                                                 .arg(variation.c_str()));
-                }
-                else
-                    m_moveNumber->setToolTip(
-                                       tr("Move number %1 of %2 (variation %3)")
-                                       .arg(move)
-                                       .arg(nuMoves)
-                                       .arg(variation.c_str()));
-            }
-
         }
     }
 }
@@ -2531,14 +2491,10 @@ void MainWindow::showGameOver()
     {
         double game_result;
         int score = bd.get_score(Color(0), game_result);
-        if (score == 1)
-            info = tr("Blue wins with 1 point.");
-        else if (score > 0)
-            info = tr("Blue wins with %1 points.").arg(score);
-        else if (score == -1)
-            info = tr("Green wins with 1 point.");
+        if (score > 0)
+            info = tr("Blue wins with %n point(s).", "", score);
         else if (score < 0)
-            info = tr("Green wins with %1 points.").arg(-score);
+            info = tr("Green wins with %n point(s).", "", -score);
         else
             info = tr("The game ends in a draw.");
     }
@@ -2547,14 +2503,10 @@ void MainWindow::showGameOver()
     {
         double game_result;
         int score = bd.get_score(Color(0), game_result);
-        if (score == 1)
-            info = tr("Blue/Red wins with 1 point.");
-        else if (score > 0)
-            info = tr("Blue/Red wins with %1 points.").arg(score);
-        else if (score == 1)
-            info = tr("Yellow/Green wins with 1 point.");
+        if (score > 0)
+            info = tr("Blue/Red wins with %n point(s).", "", score);
         else if (score < 0)
-            info = tr("Yellow/Green wins with %1 points.").arg(-score);
+            info = tr("Yellow/Green wins with %n point(s).", "", -score);
         else
             info = tr("The game ends in a draw.");
     }
