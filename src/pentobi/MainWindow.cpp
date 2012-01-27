@@ -2500,7 +2500,7 @@ void MainWindow::showGameOver()
             info = tr("Blue/Red wins with 1 point.");
         else if (score > 0)
             info = tr("Blue/Red wins with %1 points.").arg(score);
-        else if (score == 1)
+        else if (score == -1)
             info = tr("Yellow/Green wins with 1 point.");
         else if (score < 0)
             info = tr("Yellow/Green wins with %1 points.").arg(-score);
