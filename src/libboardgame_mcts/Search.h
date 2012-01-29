@@ -266,14 +266,14 @@ public:
 
     /** Select the move to play.
         Uses select_child_final() on the root node. */
-    bool select_move(Move& mv, vector<Move>* exclude_moves = 0) const;
+    bool select_move(Move& mv, const vector<Move>* exclude_moves = 0) const;
 
     /** Select the best child of a node after the search.
         Selects child with highest visit count; the value is used as a
         tie-breaker for equal counts (important at very low number of
         simulations, e.g. all children have count 1 or 0). */
     const Node* select_child_final(const Node& node,
-                                   vector<Move>* exclude_moves = 0) const;
+                                   const vector<Move>* exclude_moves = 0) const;
 
     State& get_state();
 
@@ -1100,17 +1100,18 @@ const Node<M>* Search<S, M, P>::select_child(const Node& node)
 
 template<class S, class M, unsigned int P>
 const Node<M>* Search<S, M, P>::select_child_final(const Node& node,
-                                             vector<Move>* exclude_moves) const
+                                        const vector<Move>* exclude_moves) const
 {
+    // Select the child with the highest visit count, use value as a tie breaker
     const Node* result = 0;
     ValueType max_count = -1;
-    ValueType max_count_value = numeric_limits<ValueType>::max();
+    ValueType max_count_value = -numeric_limits<ValueType>::max();
     for (ChildIterator i(node); i; ++i)
     {
         ValueType count = i->get_visit_count();
         if (count > max_count
             || (count == max_count && count > 0 && max_count > 0
-                && i->get_value() < max_count_value))
+                && i->get_value() > max_count_value))
         {
             if (exclude_moves != 0
                 && find(exclude_moves->begin(), exclude_moves->end(),
@@ -1126,7 +1127,7 @@ const Node<M>* Search<S, M, P>::select_child_final(const Node& node,
 }
 
 template<class S, class M, unsigned int P>
-bool Search<S, M, P>::select_move(Move& mv, vector<Move>* exclude_moves)
+bool Search<S, M, P>::select_move(Move& mv, const vector<Move>* exclude_moves)
     const
 {
     const Node* child = select_child_final(m_tree.get_root(), exclude_moves);
