@@ -121,6 +121,16 @@ bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
     return true;
 }
 
+void set_piece_considered(const Board& bd, const char* name,
+                          array<bool,Board::max_pieces>& is_piece_considered)
+{
+    unsigned int index;
+    bool found = bd.get_piece_index_by_name(name, index);
+    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
+    LIBBOARDGAME_ASSERT(found);
+    is_piece_considered[index] = true;
+}
+
 void set_pieces_considered(const Board& bd,
                            array<bool,Board::max_pieces>& is_piece_considered)
 {
@@ -138,6 +148,14 @@ void set_pieces_considered(const Board& bd,
     }
     else if (board_type == board_type_classic)
     {
+        if (nu_moves < 4)
+        {
+            for (unsigned int i = 0; i < bd.get_nu_pieces(); ++i)
+                is_piece_considered[i] = false;
+            set_piece_considered(bd, "V5", is_piece_considered);
+            set_piece_considered(bd, "Z5", is_piece_considered);
+            return;
+        }
         if (nu_moves < 12)
             min_piece_size = 5;
         else if (nu_moves < 20)
@@ -148,6 +166,13 @@ void set_pieces_considered(const Board& bd,
     else if (board_type == board_type_trigon
              || board_type == board_type_trigon_3)
     {
+        if (nu_moves < 4)
+        {
+            for (unsigned int i = 0; i < bd.get_nu_pieces(); ++i)
+                is_piece_considered[i] = false;
+            set_piece_considered(bd, "V", is_piece_considered);
+            return;
+        }
         if (nu_moves < 16)
             min_piece_size = 6;
         else if (nu_moves < 20)
