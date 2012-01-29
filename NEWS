@@ -17,6 +17,7 @@ Current development version (bugfix branch for 1.0)
   handle
 * Extended the file format documentation by a hint how to put blksgf
   files on web servers
+* Minor fixes in computer player engine
 
 
 Version 1.0 (1 Jan 2012)
