@@ -330,14 +330,33 @@ void State::compute_features()
         MoveFeatures& features = m_features[i];
         features.heuristic = 0;
         features.dist_to_center = numeric_limits<unsigned int>::max();
-        for (auto j = info.points.begin(); j != info.points.end(); ++j)
+        auto j = info.points.begin();
+        auto end = info.points.end();
+        LIBBOARDGAME_ASSERT(j != end);
+        do
+        {
             features.heuristic += point_value[*j];
-        for (auto j = info.attach_points.begin(); j != info.attach_points.end();
-             ++j)
+            ++j;
+        }
+        while (j != end);
+        j = info.attach_points.begin();
+        end = info.attach_points.end();
+        LIBBOARDGAME_ASSERT(j != end);
+        do
+        {
             features.heuristic += attach_point_value[*j];
-        for (auto j = info.adj_points.begin(); j != info.adj_points.end(); ++j)
-            // Creating new forbidden points is a bad thing
+            ++j;
+        }
+        while (j != end);
+        j = info.adj_points.begin();
+        end = info.adj_points.end();
+        LIBBOARDGAME_ASSERT(j != end);
+        do
+        {
             features.heuristic += adj_point_value[*j];
+            ++j;
+        }
+        while (j != end);
         if (compute_dist_to_center)
         {
             for (auto j = info.points.begin(); j != info.points.end(); ++j)
