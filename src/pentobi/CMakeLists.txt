@@ -22,6 +22,7 @@ set(pentobi_RCS
 
 set(pentobi_TS
   pentobi_de.ts
+  pentobi_en.ts
   )
 
 link_directories(${Boost_LIBRARY_DIRS})
