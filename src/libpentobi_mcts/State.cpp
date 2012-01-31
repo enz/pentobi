@@ -320,6 +320,7 @@ void State::compute_features()
     m_features.resize(moves.size());
     m_max_heuristic = -numeric_limits<ValueType>::max();
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
+    m_has_connect_move = false;
     bool compute_dist_to_center =
         ((board_type == board_type_classic && m_bd.get_nu_moves() < 13)
          || (board_type == board_type_trigon && m_bd.get_nu_moves() < 5)
@@ -329,6 +330,7 @@ void State::compute_features()
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
         MoveFeatures& features = m_features[i];
         features.heuristic = 0;
+        features.connect = false;
         features.dist_to_center = numeric_limits<unsigned int>::max();
         auto j = info.points.begin();
         auto end = info.points.end();
@@ -354,6 +356,11 @@ void State::compute_features()
         do
         {
             features.heuristic += adj_point_value[*j];
+            if (m_bd.get_point_state(*j) == second_color)
+            {
+                features.connect = true;
+                m_has_connect_move = true;
+            }
             ++j;
         }
         while (j != end);
@@ -562,6 +569,12 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         if (m_min_dist_to_center != numeric_limits<unsigned int>::max()
             && features.dist_to_center != m_min_dist_to_center)
             // Prune early moves that don't minimize dist to center
+            continue;
+        if (m_bd.get_board_type() == board_type_classic
+            && m_bd.get_nu_moves() < 14 && m_has_connect_move
+            && ! features.connect)
+            // Prune moves that don't connect in the middle if connection is
+            // possible
             continue;
         // Make heuristic relative to best move and scale it to [0..1]
         ValueType heuristic = 0.3f * (m_max_heuristic - features.heuristic);
@@ -853,6 +866,10 @@ void State::start_search()
         // by max. 0.25 are treated as equal
         float d =
             libboardgame_util::math_util::round(4 * sqrt(dx * dx + dy * dy));
+        if (bd.get_board_type() == board_type_classic)
+            // Don't make a distinction between moves close enough to the center
+            // in game variant Classic/Classic2
+            d = max(d, 10.f);
         m_dist_to_center[*i] = static_cast<unsigned int>(d);
     }
     //log() << "Dist to center:\n" << m_dist_to_center;

@@ -117,8 +117,11 @@ public:
 private:
     struct MoveFeatures
     {
-        /** Only used on 20x20. */
+        /** Only used on Classic and Trigon boards. */
         unsigned int dist_to_center;
+
+        /** Does the move touch a piece of the same player? */
+        bool connect;
 
         /** Heuristic value of the move expressed in score points. */
         ValueType heuristic;
@@ -133,6 +136,8 @@ private:
         that the search does not necessarily always expand a node, if the expand
         threshold is greater than one). */
     bool m_extended_update;
+
+    bool m_has_connect_move;
 
     unsigned int m_nu_moves_initial;
 
