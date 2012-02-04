@@ -43,7 +43,7 @@ public:
     void clear();
 
     /** Check if a point is an attach points of the last opponent moves.
-        Thr returned value is an integer (0=yes, 1=no) to allow the user to
+        The returned value is an integer (1=yes, 0=no) to allow the user to
         quickly compute the number of these points that a move by the current
         player occupies while iterating over the points of the move. */
     int operator[](Point p) const;

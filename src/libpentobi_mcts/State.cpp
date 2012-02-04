@@ -753,7 +753,7 @@ void State::init_symmetry_info()
     else
     {
         // Second player to play: We set m_is_symmetry_broken to true if the
-        // second player cannot copy thr first player's last move to make the
+        // second player cannot copy the first player's last move to make the
         // position symmetric again.
         unsigned int nu_moves = m_bd.get_nu_moves();
         if (nu_moves == 0)

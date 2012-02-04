@@ -533,7 +533,7 @@ void BoardConst::create_move(unsigned int piece_index,
     info.piece = piece_index;
     info.points = points;
     info_ext.center = center;
-    set_adj_and_corner_points(info);
+    set_adj_and_attach_points(info);
     m_move_info.push_back(info);
     m_move_info_ext.push_back(info_ext);
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
@@ -752,7 +752,7 @@ bool BoardConst::is_compatible_with_adj_status(Point p,
     return true;
 }
 
-void BoardConst::set_adj_and_corner_points(MoveInfo& info)
+void BoardConst::set_adj_and_attach_points(MoveInfo& info)
 {
     auto begin = info.points.begin();
     auto end = info.points.end();

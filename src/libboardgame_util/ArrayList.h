@@ -316,13 +316,12 @@ inline unsigned int ArrayList<T, M>::size() const
 template<typename T, unsigned int M>
 ostream& operator<<(ostream& out, const ArrayList<T, M>& l)
 {
-    typedef typename libboardgame_util::ArrayList<T, M>::const_iterator Iterator;
-    Iterator begin = l.begin();
-    Iterator end = l.end();
+    auto begin = l.begin();
+    auto end = l.end();
     if (begin != end)
     {
         out << *begin;
-        for (Iterator i = begin + 1; i != end; ++i)
+        for (auto i = begin + 1; i != end; ++i)
             out << ' ' << *i;
     }
     return out;
