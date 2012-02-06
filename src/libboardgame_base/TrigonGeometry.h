@@ -123,79 +123,85 @@ template<class P>
 void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
                                       NullTermList<Point, 9>& diag) const
 {
-    typename NullTermList<Point, 4>::Init init_adj(adj);
+    unsigned int width = this->get_width();
+    unsigned int height = this->get_height();
+    unsigned int x = p.get_x();
+    unsigned int y = p.get_y();
     unsigned int type = Geometry<P>::get_point_type(p);
-    if (type == 0)
     {
-        if (this->is_onboard(p.get_up()))
-            init_adj.push_back(p.get_up());
-        if (this->is_onboard(p.get_left()))
-            init_adj.push_back(p.get_left());
-        if (this->is_onboard(p.get_right()))
-            init_adj.push_back(p.get_right());
+        typename NullTermList<Point, 4>::Init init_adj(adj);
+        if (type == 0)
+        {
+            if (y < height - 1 && this->is_onboard(p.get_up()))
+                init_adj.push_back(p.get_up());
+            if (x > 0 && this->is_onboard(p.get_left()))
+                init_adj.push_back(p.get_left());
+            if (x < width - 1 && this->is_onboard(p.get_right()))
+                init_adj.push_back(p.get_right());
+        }
+        else
+        {
+            if (y > 0 && this->is_onboard(p.get_down()))
+                init_adj.push_back(p.get_down());
+            if (x > 0 && this->is_onboard(p.get_left()))
+                init_adj.push_back(p.get_left());
+            if (x < width - 1 && this->is_onboard(p.get_right()))
+                init_adj.push_back(p.get_right());
+        }
+        init_adj.finish();
     }
-    else
     {
-        if (this->is_onboard(p.get_down()))
-            init_adj.push_back(p.get_down());
-        if (this->is_onboard(p.get_left()))
-            init_adj.push_back(p.get_left());
-        if (this->is_onboard(p.get_right()))
-            init_adj.push_back(p.get_right());
+        typename NullTermList<Point, 9>::Init init_diag(diag);
+        if (type == 0)
+        {
+            if (x > 1 && this->is_onboard(p.get_left().get_left()))
+                init_diag.push_back(p.get_left().get_left());
+            if (x > 0 && y > 0 && this->is_onboard(p.get_down_left()))
+                init_diag.push_back(p.get_down_left());
+            if (x < width - 1 && y > 0 && this->is_onboard(p.get_down_right()))
+                init_diag.push_back(p.get_down_right());
+            if (x < width - 2 && this->is_onboard(p.get_right().get_right()))
+                init_diag.push_back(p.get_right().get_right());
+            if (x < width - 1 && y < height - 1
+                && this->is_onboard(p.get_up_right()))
+                init_diag.push_back(p.get_up_right());
+            if (x > 0 && y < height - 1 && this->is_onboard(p.get_up_left()))
+                init_diag.push_back(p.get_up_left());
+            if (y > 0 && this->is_onboard(p.get_down()))
+                init_diag.push_back(p.get_down());
+            if (x > 1 && y < height - 1
+                && this->is_onboard(p.get_up_left().get_left()))
+                init_diag.push_back(p.get_up_left().get_left());
+            if (x < width - 2 && y < height - 1
+                && this->is_onboard(p.get_up_right().get_right()))
+                init_diag.push_back(p.get_up_right().get_right());
+        }
+        else
+        {
+            if (x > 0 && y < height - 1 && this->is_onboard(p.get_up_left()))
+                init_diag.push_back(p.get_up_left());
+            if (x < width - 1 && y < height - 1
+                && this->is_onboard(p.get_up_right()))
+                init_diag.push_back(p.get_up_right());
+            if (x < width - 2 && this->is_onboard(p.get_right().get_right()))
+                init_diag.push_back(p.get_right().get_right());
+            if (x < width - 1 && y > 0 && this->is_onboard(p.get_down_right()))
+                init_diag.push_back(p.get_down_right());
+            if (x > 0 && y > 0 && this->is_onboard(p.get_down_left()))
+                init_diag.push_back(p.get_down_left());
+            if (x > 1 && this->is_onboard(p.get_left().get_left()))
+                init_diag.push_back(p.get_left().get_left());
+            if (y < height - 1 && this->is_onboard(p.get_up()))
+                init_diag.push_back(p.get_up());
+            if (x > 1 && y > 0
+                && this->is_onboard(p.get_down_left().get_left()))
+                init_diag.push_back(p.get_down_left().get_left());
+            if (x < width - 2 && y > 0
+                && this->is_onboard(p.get_down_right().get_right()))
+                init_diag.push_back(p.get_down_right().get_right());
+        }
+        init_diag.finish();
     }
-    init_adj.finish();
-    typename NullTermList<Point, 9>::Init init_diag(diag);
-    if (type == 0)
-    {
-        if (this->is_onboard(p.get_left())
-            && this->is_onboard(p.get_left().get_left()))
-            init_diag.push_back(p.get_left().get_left());
-        if (this->is_onboard(p.get_down_left()))
-            init_diag.push_back(p.get_down_left());
-        if (this->is_onboard(p.get_down_right()))
-            init_diag.push_back(p.get_down_right());
-        if (this->is_onboard(p.get_right())
-            && this->is_onboard(p.get_right().get_right()))
-            init_diag.push_back(p.get_right().get_right());
-        if (this->is_onboard(p.get_up_right()))
-            init_diag.push_back(p.get_up_right());
-        if (this->is_onboard(p.get_up_left()))
-            init_diag.push_back(p.get_up_left());
-        if (this->is_onboard(p.get_down()))
-            init_diag.push_back(p.get_down());
-        if (this->is_onboard(p.get_up_left())
-            && this->is_onboard(p.get_up_left().get_left()))
-            init_diag.push_back(p.get_up_left().get_left());
-        if (this->is_onboard(p.get_up_right())
-            && this->is_onboard(p.get_up_right().get_right()))
-            init_diag.push_back(p.get_up_right().get_right());
-    }
-    else
-    {
-        if (this->is_onboard(p.get_up_left()))
-            init_diag.push_back(p.get_up_left());
-        if (this->is_onboard(p.get_up_right()))
-            init_diag.push_back(p.get_up_right());
-        if (this->is_onboard(p.get_right())
-            && this->is_onboard(p.get_right().get_right()))
-            init_diag.push_back(p.get_right().get_right());
-        if (this->is_onboard(p.get_down_right()))
-            init_diag.push_back(p.get_down_right());
-        if (this->is_onboard(p.get_down_left()))
-            init_diag.push_back(p.get_down_left());
-        if (this->is_onboard(p.get_left())
-            && this->is_onboard(p.get_left().get_left()))
-            init_diag.push_back(p.get_left().get_left());
-        if (this->is_onboard(p.get_up()))
-            init_diag.push_back(p.get_up());
-        if (this->is_onboard(p.get_down_left())
-            && this->is_onboard(p.get_down_left().get_left()))
-            init_diag.push_back(p.get_down_left().get_left());
-        if (this->is_onboard(p.get_down_right())
-            && this->is_onboard(p.get_down_right().get_right()))
-            init_diag.push_back(p.get_down_right().get_right());
-    }
-    init_diag.finish();
 }
 
 //-----------------------------------------------------------------------------

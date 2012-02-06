@@ -100,7 +100,7 @@ void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
 }
 
 void BoardPainter::drawLabels(QPainter& painter,
-                              const FullGrid<PointStateExt>& pointState,
+                              const Grid<PointState>& pointState,
                               GameVariant gameVariant,
                               const Grid<QString>* labels,
                               const Grid<MarkupFlags>* markupFlags)
@@ -114,7 +114,7 @@ void BoardPainter::drawLabels(QPainter& painter,
     for (GeometryIterator i(geometry); i; ++i)
         if (! (*labels)[*i].isEmpty())
         {
-            PointState s = pointState[*i].to_point_state();
+            PointState s = pointState[*i];
             painter.setPen(Util::getLabelColor(gameVariant, s));
             bool underline = false;
             if (markupFlags != 0 && (*markupFlags)[*i].test(markup_variation))
@@ -242,7 +242,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
 }
 
 void BoardPainter::paintPieces(QPainter& painter,
-                               const FullGrid<PointStateExt>& pointState,
+                               const Grid<PointState>& pointState,
                                const Grid<QString>* labels,
                                const Grid<MarkupFlags>* markupFlags)
 {
@@ -253,7 +253,7 @@ void BoardPainter::paintPieces(QPainter& painter,
     {
         int x = i->get_x();
         int y = i->get_y();
-        PointStateExt s = pointState[*i];
+        PointState s = pointState[*i];
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = (m_height - y - 1) * m_fieldHeight;
         if (m_isTrigon)

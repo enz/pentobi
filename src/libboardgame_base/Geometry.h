@@ -21,7 +21,8 @@ using libboardgame_util::NullTermList;
     that allow to restrict the shape of the board to a subset of the rectangle
     and/or to define different definitions of adjacent and diagonal neighbors
     of a point for geometries that are not a regular rectangular grid.
-    @tparam P An instantiation of libboardgame_base::Point */
+    @tparam P An instantiation of libboardgame_base::Point (or compatible
+    class) */
 template<class P>
 class Geometry
 {

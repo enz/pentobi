@@ -411,8 +411,7 @@ void Board::init(GameVariant game_variant)
     m_geometry = &m_board_const->get_geometry();
     m_starting_points.init(game_variant, *m_geometry);
     m_point_state.init(*m_geometry);
-    m_point_state.fill_all(PointStateExt::offboard());
-    m_point_state.fill_onboard(PointState::empty());
+    m_point_state.fill(PointState::empty());
     m_played_move.init(*m_geometry);
     m_played_move.fill(Move::null());
     // m_forbidden needs to be initialized even for colors not used in current
@@ -426,8 +425,7 @@ void Board::init(GameVariant game_variant)
                 (*i).get_next(m_nu_colors).get_next(m_nu_colors);
         else
             m_second_color[*i] = *i;
-        m_forbidden[*i].fill_all(true);
-        m_forbidden[*i].fill_onboard(false);
+        m_forbidden[*i].fill(false);
         m_is_attach_point[*i].init(*m_geometry, false);
         m_attach_points[*i].clear();
         m_pieces_left[*i].clear();
@@ -461,7 +459,7 @@ void Board::play(Color c, Move mv)
     {
         const MoveInfo& info = m_board_const->get_move_info(mv);
         LIBBOARDGAME_ASSERT(m_pieces_left[c].contains(info.piece));
-        m_pieces_left[c].remove_fast(info.piece);
+        m_pieces_left[c].remove(info.piece);
         auto i = info.points.begin();
         auto end = info.points.end();
         LIBBOARDGAME_ASSERT(i != end);
@@ -514,13 +512,16 @@ void Board::undo()
 void Board::write(ostream& out, bool mark_last_move) const
 {
     ColorMove last_mv = ColorMove::null();
-    unsigned int n = get_nu_moves();
-    while (n > 0)
+    if (mark_last_move)
     {
-        --n;
-        last_mv = get_move(n);
-        if (! last_mv.move.is_pass())
-            break;
+        unsigned int n = get_nu_moves();
+        while (n > 0)
+        {
+            --n;
+            last_mv = get_move(n);
+            if (! last_mv.move.is_pass())
+                break;
+        }
     }
     unsigned int width = m_geometry->get_width();
     unsigned int height = m_geometry->get_height();
@@ -528,7 +529,6 @@ void Board::write(ostream& out, bool mark_last_move) const
     BoardType board_type = get_board_type();
     bool is_trigon = (board_type == board_type_trigon
                       || board_type == board_type_trigon_3);
-    bool last_mv_marked = false;
     write_x_coord(out, width, is_trigon ? 3 : 2);
     for (unsigned int y = height - 1; ; --y)
     {
@@ -538,28 +538,34 @@ void Board::write(ostream& out, bool mark_last_move) const
         for (unsigned int x = 0; x < width; ++x)
         {
             Point p(x, y);
-            PointStateExt s = get_point_state_ext(p);
-            if ((x > 0
-                 || (is_trigon
-                     && ! get_point_state_ext(Point(x + 1, y)).is_offboard()))
-                && ! s.is_offboard())
+            bool is_offboard = ! is_onboard(p);
+            if ((x > 0 || (is_trigon && x == 0 && is_onboard(p.get_right())))
+                && ! is_offboard)
             {
-                if (mark_last_move && ! last_mv_marked && ! last_mv.is_null()
-                    && get_point_state_ext(p.get_left()) != last_mv.color
-                    && get_played_move(Point(x, y)) == last_mv.move)
+                // Print a space horizontally between fields on the board. On a
+                // Trigon board, a slash or backslash is used instead of the
+                // space to indicate the orientation of the triangles. A
+                // less-than/greater-than character is used instead of the space
+                // to mark the last piece played (the mark is not placed within
+                // the piece or off-board).
+                if (! last_mv.is_null()
+                    && get_played_move(p) == last_mv.move
+                    && (x == 0 || ! is_onboard(p.get_left())
+                        || get_point_state(p.get_left()) != last_mv.color))
                 {
                     set_color(out, "\x1B[1;37;47m");
                     out << '>';
-                    last_mv_marked = true;
+                    last_mv = ColorMove::null();
                 }
-                else if (mark_last_move && ! last_mv_marked
-                         && ! last_mv.is_null() && s != last_mv.color
-                         && get_point_state_ext(p.get_left()) == last_mv.color
-                         && get_played_move(p.get_left()) == last_mv.move)
+                else if (! last_mv.is_null()
+                         && x > 0 && is_onboard(p.get_left())
+                         && get_played_move(p.get_left()) == last_mv.move
+                         && get_point_state(p) != last_mv.color
+                         && get_point_state(p.get_left()) == last_mv.color)
                 {
                     set_color(out, "\x1B[1;37;47m");
                     out << '<';
-                    last_mv_marked = true;
+                    last_mv = ColorMove::null();
                 }
                 else if (is_trigon)
                 {
@@ -572,13 +578,12 @@ void Board::write(ostream& out, bool mark_last_move) const
                     out << ' ';
                 }
             }
-            if (s.is_offboard())
+            if (is_offboard)
             {
-                if (is_trigon && x > 0
-                    && ! get_point_state_ext(p.get_left()).is_offboard())
+                if (is_trigon && x > 0 && is_onboard(p.get_left()))
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geometry->get_point_type(x, y) == 0 ? '\\' : '/');
+                    out << (m_geometry->get_point_type(p) == 0 ? '\\' : '/');
                 }
                 else
                 {
@@ -586,35 +591,39 @@ void Board::write(ostream& out, bool mark_last_move) const
                     out << "  ";
                 }
             }
-            else if (s.is_empty())
+            else
             {
-                if (is_colored_starting_point(p))
+                PointState s = get_point_state(p);
+                if (s.is_empty())
                 {
-                    Color c = get_starting_point_color(p);
-                    set_color(out, m_color_esc_sequence[c]);
-                    out << '+';
-                }
-                else if (is_colorless_starting_point(p))
-                {
-                    set_color(out, "\x1B[1;30;47m");
-                    out << '+';
+                    if (is_colored_starting_point(p))
+                    {
+                        Color c = get_starting_point_color(p);
+                        set_color(out, m_color_esc_sequence[c]);
+                        out << '+';
+                    }
+                    else if (is_colorless_starting_point(p))
+                    {
+                        set_color(out, "\x1B[1;30;47m");
+                        out << '+';
+                    }
+                    else
+                    {
+                        set_color(out, "\x1B[1;30;47m");
+                        out << (is_trigon ? ' ' : '.');
+                    }
                 }
                 else
                 {
-                    set_color(out, "\x1B[1;30;47m");
-                    out << (is_trigon ? ' ' : '.');
+                    Color color = s.to_color();
+                    set_color(out, m_color_esc_sequence[color]);
+                    out << m_color_char[color];
                 }
-            }
-            else
-            {
-                Color color = s.to_color();
-                set_color(out, m_color_esc_sequence[color]);
-                out << m_color_char[color];
             }
         }
         if (is_trigon)
         {
-            if (! get_point_state_ext(Point(width - 1, y)).is_offboard())
+            if (is_onboard(Point(width - 1, y)))
             {
                 set_color(out, "\x1B[1;30;47m");
                 out << (m_geometry->get_point_type(width - 1, y) != 0 ?

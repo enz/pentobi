@@ -8,12 +8,12 @@
 #include "BoardConst.h"
 #include "ColorMap.h"
 #include "ColorMove.h"
-#include "FullGrid.h"
 #include "GameVariant.h"
 #include "Geometry.h"
+#include "Grid.h"
 #include "MoveMarker.h"
 #include "PointList.h"
-#include "PointStateExt.h"
+#include "PointState.h"
 
 namespace libpentobi_base {
 
@@ -80,7 +80,7 @@ inline bool StartingPoints::is_colorless_starting_point(Point p) const
 class Board
 {
 public:
-    typedef FullGrid<PointStateExt> PointStateGrid;
+    typedef Grid<PointState> PointStateGrid;
 
     /** Iterator over all points on the board. */
     class Iterator
@@ -118,10 +118,9 @@ public:
     /** Get the state of an on-board point. */
     PointState get_point_state(Point p) const;
 
-    /** Get the state of an on-board or off-board point. */
-    PointStateExt get_point_state_ext(Point p) const;
-
     bool is_empty(Point p) const;
+
+    bool is_onboard(Point p) const;
 
     const PointStateGrid& get_grid() const;
 
@@ -198,7 +197,7 @@ public:
         @param p The point. Off-board points are allowed and return true. */
     bool is_forbidden(Point p, Color c) const;
 
-    const FullGrid<bool>& is_forbidden(Color c) const;
+    const Grid<bool>& is_forbidden(Color c) const;
 
     /** Check that no points of move are already occupied or adjacent to own
         color.
@@ -261,8 +260,6 @@ public:
     const ArrayList<Point,StartingPoints::max_starting_points>&
                                              get_starting_points(Color c) const;
 
-    bool is_onboard(Point p) const;
-
     /** Get the second color in game variants in which a player plays two
         colors.
         @return The second color of the player that plays color c, or c if
@@ -284,7 +281,7 @@ private:
 
     PointStateGrid m_point_state;
 
-    ColorMap<FullGrid<bool>> m_forbidden;
+    ColorMap<Grid<bool>> m_forbidden;
 
     ColorMap<Grid<bool>> m_is_attach_point;
 
@@ -473,11 +470,6 @@ inline PointState Board::get_point_state(Point p) const
     return PointState(m_point_state[p].to_int());
 }
 
-inline PointStateExt Board::get_point_state_ext(Point p) const
-{
-    return m_point_state[p];
-}
-
 inline Color Board::get_second_color(Color c) const
 {
     return m_second_color[c];
@@ -534,7 +526,7 @@ inline bool Board::is_forbidden(Point p, Color c) const
     return m_forbidden[c][p];
 }
 
-inline const FullGrid<bool>& Board::is_forbidden(Color c) const
+inline const Grid<bool>& Board::is_forbidden(Color c) const
 {
     return m_forbidden[c];
 }

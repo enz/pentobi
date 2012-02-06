@@ -18,7 +18,6 @@ set(pentobi_base_STAT_SRCS
   PieceTransformsClassic.cpp
   PieceTransformsTrigon.cpp
   PointState.cpp
-  PointStateExt.cpp
   SymmetricPoints.cpp
   Tree.cpp
   )

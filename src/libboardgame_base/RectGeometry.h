@@ -96,16 +96,34 @@ template<class P>
 void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
                                     NullTermList<Point, 9>& diag) const
 {
-    typename NullTermList<Point, 4>::Init init_adj(adj);
-    LIBBOARDGAME_FOREACH_ADJ(p, p_adj,
-        if (this->is_onboard(p_adj))
-            init_adj.push_back(p_adj););
-    init_adj.finish();
-    typename NullTermList<Point, 9>::Init init_diag(diag);
-    LIBBOARDGAME_FOREACH_DIAG(p, p_diag,
-        if (this->is_onboard(p_diag))
-            init_diag.push_back(p_diag););
-    init_diag.finish();
+    unsigned int width = this->get_width();
+    unsigned int height = this->get_height();
+    unsigned int x = p.get_x();
+    unsigned int y = p.get_y();
+    {
+        typename NullTermList<Point, 4>::Init init_adj(adj);
+        if (x > 0)
+            init_adj.push_back(p.get_left());
+        if (x < width - 1)
+            init_adj.push_back(p.get_right());
+        if (y > 0)
+            init_adj.push_back(p.get_down());
+        if (y < height - 1)
+            init_adj.push_back(p.get_up());
+        init_adj.finish();
+    }
+    {
+        typename NullTermList<Point, 9>::Init init_diag(diag);
+        if (x > 0 && y < height - 1)
+            init_diag.push_back(p.get_up_left());
+        if (x < width - 1 && y < height - 1)
+            init_diag.push_back(p.get_up_right());
+        if (x > 0 && y > 0)
+            init_diag.push_back(p.get_down_left());
+        if (x < width - 1 && y > 0)
+            init_diag.push_back(p.get_down_right());
+        init_diag.finish();
+    }
 }
 
 //-----------------------------------------------------------------------------

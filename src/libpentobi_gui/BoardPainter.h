@@ -14,14 +14,13 @@ using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
-using libpentobi_base::FullGrid;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::MovePoints;
 using libpentobi_base::Piece;
 using libpentobi_base::Point;
-using libpentobi_base::PointStateExt;
+using libpentobi_base::PointState;
 using libpentobi_base::StartingPoints;
 
 //-----------------------------------------------------------------------------
@@ -48,8 +47,7 @@ public:
         This function must only be called after paintEmptyBoard() because it
         uses the arguments from the paintEmptyBoard() function to determine the
         board properties. */
-    void paintPieces(QPainter& painter,
-                     const FullGrid<PointStateExt>& pointState,
+    void paintPieces(QPainter& painter, const Grid<PointState>& pointState,
                      const Grid<QString>* labels = 0,
                      const Grid<MarkupFlags>* markupFlags = 0);
 
@@ -107,8 +105,7 @@ private:
                    qreal height, const QString& label, bool underline,
                    bool small);
 
-    void drawLabels(QPainter& painter,
-                    const FullGrid<PointStateExt>& pointState,
+    void drawLabels(QPainter& painter, const Grid<PointState>& pointState,
                     GameVariant gameVariant, const Grid<QString>* labels,
                     const Grid<MarkupFlags>* markupFlags);
 };

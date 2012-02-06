@@ -35,9 +35,8 @@ using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
-using libpentobi_base::FullGrid;
+using libpentobi_base::Grid;
 using libpentobi_base::PointState;
-using libpentobi_base::PointStateExt;
 
 //-----------------------------------------------------------------------------
 
@@ -47,7 +46,7 @@ namespace {
     Avoids constructing an instance of a Tree or Game, which would do a costly
     initialization of BoardConst and slow down the thumbnailer unnecessarily. */
 bool getFinalPosition(const Node& root, GameVariant& gameVariant,
-                      FullGrid<PointStateExt>& pointState)
+                      Grid<PointState>& pointState)
 {
     string game = root.get_property("GM", "");
     string s = to_lower_copy(trim_copy(game));
@@ -84,8 +83,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     }
     else
         return false;
-    pointState.init(*geometry);
-    pointState.fill_onboard(PointState::empty());
+    pointState.init(*geometry, PointState::empty());
     const Node* node = &root;
     while (node != 0)
     {
@@ -143,7 +141,7 @@ int mainFunction(int argc, char* argv[])
     reader.read(files[0]);
     GameVariant gameVariant =
         game_variant_classic; // Initialize to avoid compiler warning
-    FullGrid<PointStateExt> pointState;
+    Grid<PointState> pointState;
     if (! getFinalPosition(reader.get_tree(), gameVariant, pointState))
     {
         cerr << "Not a valid Blokus SGF file\n";

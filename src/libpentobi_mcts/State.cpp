@@ -40,8 +40,6 @@ using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::DiagIterator;
-using libpentobi_base::Direction;
-using libpentobi_base::FullGrid;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
@@ -49,7 +47,6 @@ using libpentobi_base::MoveInfo;
 using libpentobi_base::Piece;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
-using libpentobi_base::PointStateExt;
 
 //-----------------------------------------------------------------------------
 
@@ -116,7 +113,7 @@ PointState get_symmetric_state(PointState s)
 bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
 {
     for (DiagIterator i(bd, p); i; ++i)
-        if (bd.get_point_state_ext(*i) == c && bd.get_played_move(*i) != mv)
+        if (bd.get_point_state(*i) == c && bd.get_played_move(*i) != mv)
             return false;
     return true;
 }
@@ -266,7 +263,7 @@ void State::check_local_move(int nu_local, Move mv, const MoveInfo& info)
 bool State::check_move(Color c, const MovePoints& points, int& nu_local)
 {
     nu_local = 0;
-    const FullGrid<bool>& is_forbidden = m_bd.is_forbidden(c);
+    const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
     auto end = points.end();
     auto i = points.begin();
     LIBBOARDGAME_ASSERT(i != end);
@@ -307,7 +304,7 @@ void State::compute_features()
             }
         }
         if (m_bd.is_forbidden(*i, to_play)
-            && m_bd.get_point_state_ext(*i) != to_play)
+            && m_bd.get_point_state(*i) != to_play)
             attach_point_value[*i] = -5;
         else
             attach_point_value[*i] = 1;

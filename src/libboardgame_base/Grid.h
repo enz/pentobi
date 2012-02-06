@@ -19,7 +19,7 @@ using namespace std;
 
 /** Elements assigned to on-board points.
     The elements must be default-constructible.
-    @tparam P An instantiation of libboardgame_base::Point
+    @tparam P An instantiation of libboardgame_base::Point (or compatible class)
     @tparam T The element type. */
 template<class P, typename T>
 class Grid
