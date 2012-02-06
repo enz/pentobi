@@ -154,6 +154,10 @@ public:
 
     void init(GameVariant game_variant);
 
+    /** Copy the board state and move history from another board.
+        This is like an assignment operator but because boards are rarely copied
+        by value and copying is expensive, it is an explicit function to avoid
+        accidental copying. */
     void copy_from(const Board& bd);
 
     /** Play a move.
@@ -315,6 +319,8 @@ private:
                    ArrayList<Move, Move::range>& moves) const;
 
     bool has_moves(Color c, Point p) const;
+
+    void init_game_variant(GameVariant game_variant);
 
     void write_pieces_left(ostream& out, Color c, unsigned int begin,
                            unsigned int end) const;

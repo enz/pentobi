@@ -122,14 +122,25 @@ Board::Board(GameVariant game_variant)
     m_color_char[Color(1)] = 'O';
     m_color_char[Color(2)] = '#';
     m_color_char[Color(3)] = '@';
-    init(game_variant);
+    init_game_variant(game_variant);
+    init();
 }
 
 void Board::copy_from(const Board& bd)
 {
-    init(bd.get_game_variant());
-    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
-        play(bd.get_move(i));
+    if (m_game_variant != bd.m_game_variant)
+        init_game_variant(bd.m_game_variant);
+    m_point_state = bd.m_point_state;
+    m_played_move = bd.m_played_move;
+    for (ColorIterator i(m_nu_colors); i; ++i)
+    {
+        m_forbidden[*i] = bd.m_forbidden[*i];
+        m_is_attach_point[*i] = bd.m_is_attach_point[*i];
+        m_attach_points[*i] = bd.m_attach_points[*i];
+        m_pieces_left[*i] = bd.m_pieces_left[*i];
+    }
+    m_to_play = bd.m_to_play;
+    m_moves = bd.m_moves;
 }
 
 void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
@@ -358,6 +369,28 @@ bool Board::has_moves(Color c, Point p) const
 
 void Board::init(GameVariant game_variant)
 {
+    if (game_variant != m_game_variant)
+        init_game_variant(game_variant);
+
+    // If you make changes here, make sure that you also update copy_from()
+
+    m_point_state.fill(PointState::empty());
+    m_played_move.fill(Move::null());
+    for (ColorIterator i(m_nu_colors); i; ++i)
+    {
+        m_forbidden[*i].fill(false);
+        m_is_attach_point[*i].fill(false);
+        m_attach_points[*i].clear();
+        m_pieces_left[*i].clear();
+        for (unsigned int j = 0; j < get_nu_pieces(); ++j)
+            m_pieces_left[*i].push_back(j);
+    }
+    m_to_play = Color(0);
+    m_moves.clear();
+}
+
+void Board::init_game_variant(GameVariant game_variant)
+{
     m_game_variant = game_variant;
     if (m_game_variant == game_variant_duo)
     {
@@ -411,9 +444,7 @@ void Board::init(GameVariant game_variant)
     m_geometry = &m_board_const->get_geometry();
     m_starting_points.init(game_variant, *m_geometry);
     m_point_state.init(*m_geometry);
-    m_point_state.fill(PointState::empty());
     m_played_move.init(*m_geometry);
-    m_played_move.fill(Move::null());
     // m_forbidden needs to be initialized even for colors not used in current
     // game variant because it is written to in some unrolled color loops
     LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c].init(*m_geometry));
@@ -425,15 +456,8 @@ void Board::init(GameVariant game_variant)
                 (*i).get_next(m_nu_colors).get_next(m_nu_colors);
         else
             m_second_color[*i] = *i;
-        m_forbidden[*i].fill(false);
-        m_is_attach_point[*i].init(*m_geometry, false);
-        m_attach_points[*i].clear();
-        m_pieces_left[*i].clear();
-        for (unsigned int j = 0; j < get_nu_pieces(); ++j)
-            m_pieces_left[*i].push_back(j);
+        m_is_attach_point[*i].init(*m_geometry);
     }
-    m_to_play = Color(0);
-    m_moves.clear();
 }
 
 bool Board::is_game_over() const
