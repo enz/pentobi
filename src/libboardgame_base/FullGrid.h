@@ -17,7 +17,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-/** Elements assigned to on-board points.
+/** Elements assigned to on-board or off-board points.
     The elements must be default-constructible.
     @tparam P An instantiation of libboardgame_base::Point
     @tparam T The element type. */
