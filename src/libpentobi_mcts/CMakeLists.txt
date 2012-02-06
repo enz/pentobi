@@ -6,7 +6,6 @@ include_directories(
 set(pentobi_mcts_STAT_SRCS
   AnalyzeGame.cpp
   BookBuilder.cpp
-  LastAttachPoints.cpp
   Player.cpp
   Search.cpp
   State.cpp
