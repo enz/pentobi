@@ -13,8 +13,86 @@
 namespace libpentobi_mcts {
 
 using boost::format;
+using libpentobi_base::board_type_classic;
+using libpentobi_base::board_type_duo;
+using libpentobi_base::board_type_trigon;
+using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::BoardIterator;
+using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
+
+//-----------------------------------------------------------------------------
+
+namespace {
+
+void set_piece_considered(const BoardConst& board_const, const char* name,
+                          array<bool,Board::max_pieces>& is_piece_considered)
+{
+    unsigned int index;
+    bool found = board_const.get_piece_index_by_name(name, index);
+    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
+    LIBBOARDGAME_ASSERT(found);
+    is_piece_considered[index] = true;
+}
+
+void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
+                           array<bool,Board::max_pieces>& is_piece_considered)
+{
+    BoardType board_type = board_const.get_board_type();
+    unsigned int min_piece_size = 0;
+    if (board_type == board_type_duo)
+    {
+        if (nu_moves < 4)
+            min_piece_size = 5;
+        else if (nu_moves < 6)
+            min_piece_size = 4;
+        else if (nu_moves < 10)
+            min_piece_size = 3;
+    }
+    else if (board_type == board_type_classic)
+    {
+        if (nu_moves < 4)
+        {
+            for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
+                is_piece_considered[i] = false;
+            set_piece_considered(board_const, "V5", is_piece_considered);
+            set_piece_considered(board_const, "Z5", is_piece_considered);
+            return;
+        }
+        if (nu_moves < 12)
+            min_piece_size = 5;
+        else if (nu_moves < 20)
+            min_piece_size = 4;
+        else if (nu_moves < 30)
+            min_piece_size = 3;
+    }
+    else if (board_type == board_type_trigon
+             || board_type == board_type_trigon_3)
+    {
+        if (nu_moves < 4)
+        {
+            for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
+                is_piece_considered[i] = false;
+            set_piece_considered(board_const, "V", is_piece_considered);
+            return;
+        }
+        if (nu_moves < 16)
+            min_piece_size = 6;
+        else if (nu_moves < 20)
+            min_piece_size = 5;
+        else if (nu_moves < 28)
+            min_piece_size = 4;
+        else if (nu_moves < 36)
+            min_piece_size = 3;
+    }
+    for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
+    {
+        const Piece& piece = board_const.get_piece(i);
+        is_piece_considered[i] = (piece.get_size() >= min_piece_size);
+    }
+}
+
+} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -72,6 +150,9 @@ void Search::on_start_search()
                 }
             }
     }
+    for (unsigned int i = 0; i < Board::max_game_moves; ++i)
+        set_pieces_considered(bd.get_board_const(), i,
+                              m_shared_const.is_piece_considered[i]);
 }
 
 bool Search::search(Move& mv, Color to_play, ValueType max_count,

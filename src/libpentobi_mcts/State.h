@@ -65,11 +65,19 @@ struct SharedConst
         therefore in all positions in the search). */
     ColorMap<MoveMarker> is_forbidden_at_root;
 
+    /** Precomputed lists of considered pieces depending on the move number. */
+    ArrayList<array<bool,Board::max_pieces>,Board::max_game_moves>
+                                                           is_piece_considered;
+
     SharedConst(const Board& bd, const Color& to_play);
 };
 
 //-----------------------------------------------------------------------------
 
+/** A state of a simulation.
+    This class contains modifiable data used in a simulation. In multi-threaded
+    search (not yet implemented), each thread uses its own instance of this
+    class. */
 class State
 {
 public:
@@ -163,7 +171,7 @@ private:
         position, the other color is not updated immediately after a move. */
     ColorMap<ArrayList<Move, Move::range>> m_moves;
 
-    ColorMap<array<bool,Board::max_pieces>> m_is_piece_considered;
+    ColorMap<const array<bool,Board::max_pieces>*> m_is_piece_considered;
 
     ArrayList<MoveFeatures, Move::range> m_features;
 

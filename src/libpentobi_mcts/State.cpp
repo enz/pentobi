@@ -118,74 +118,6 @@ bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
     return true;
 }
 
-void set_piece_considered(const Board& bd, const char* name,
-                          array<bool,Board::max_pieces>& is_piece_considered)
-{
-    unsigned int index;
-    bool found = bd.get_piece_index_by_name(name, index);
-    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
-    LIBBOARDGAME_ASSERT(found);
-    is_piece_considered[index] = true;
-}
-
-void set_pieces_considered(const Board& bd,
-                           array<bool,Board::max_pieces>& is_piece_considered)
-{
-    BoardType board_type = bd.get_board_type();
-    unsigned int nu_moves = bd.get_nu_moves();
-    unsigned int min_piece_size = 0;
-    if (board_type == board_type_duo)
-    {
-        if (nu_moves < 4)
-            min_piece_size = 5;
-        else if (nu_moves < 6)
-            min_piece_size = 4;
-        else if (nu_moves < 10)
-            min_piece_size = 3;
-    }
-    else if (board_type == board_type_classic)
-    {
-        if (nu_moves < 4)
-        {
-            for (unsigned int i = 0; i < bd.get_nu_pieces(); ++i)
-                is_piece_considered[i] = false;
-            set_piece_considered(bd, "V5", is_piece_considered);
-            set_piece_considered(bd, "Z5", is_piece_considered);
-            return;
-        }
-        if (nu_moves < 12)
-            min_piece_size = 5;
-        else if (nu_moves < 20)
-            min_piece_size = 4;
-        else if (nu_moves < 30)
-            min_piece_size = 3;
-    }
-    else if (board_type == board_type_trigon
-             || board_type == board_type_trigon_3)
-    {
-        if (nu_moves < 4)
-        {
-            for (unsigned int i = 0; i < bd.get_nu_pieces(); ++i)
-                is_piece_considered[i] = false;
-            set_piece_considered(bd, "V", is_piece_considered);
-            return;
-        }
-        if (nu_moves < 16)
-            min_piece_size = 6;
-        else if (nu_moves < 20)
-            min_piece_size = 5;
-        else if (nu_moves < 28)
-            min_piece_size = 4;
-        else if (nu_moves < 36)
-            min_piece_size = 3;
-    }
-    for (unsigned int i = 0; i < bd.get_nu_pieces(); ++i)
-    {
-        const Piece& piece = bd.get_piece(i);
-        is_piece_considered[i] = (piece.get_size() >= min_piece_size);
-    }
-}
-
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -222,7 +154,7 @@ inline void State::add_moves(Point p, Color c)
 {
     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
     BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-        if (m_is_piece_considered[c][i])
+        if ((*m_is_piece_considered[c])[i])
             add_moves(p, c, i, adj_status);
 }
 
@@ -619,7 +551,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
 void State::init_move_list_with_local_list(Color c)
 {
     m_last_move[c] = Move::null();
-    set_pieces_considered(m_bd, m_is_piece_considered[c]);
+    m_is_piece_considered[c] =
+        &m_shared_const.is_piece_considered[m_bd.get_nu_moves()];
     m_last_attach_points.init(m_bd);
     m_local_moves.clear();
     m_max_local = 1;
@@ -639,7 +572,7 @@ void State::init_move_list_with_local_list(Color c)
         if (! p.is_null())
         {
             BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                if (m_is_piece_considered[c][i])
+                if ((*m_is_piece_considered[c])[i])
                 {
                     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
@@ -668,7 +601,8 @@ void State::init_move_list_with_local_list(Color c)
 void State::init_move_list_without_local_list(Color c)
 {
     m_last_move[c] = Move::null();
-    set_pieces_considered(m_bd, m_is_piece_considered[c]);
+    m_is_piece_considered[c] =
+        &m_shared_const.is_piece_considered[m_bd.get_nu_moves()];
     ArrayList<Move, Move::range>& moves = m_moves[c];
     moves.clear();
     bool is_first_move =
@@ -683,7 +617,7 @@ void State::init_move_list_without_local_list(Color c)
         if (! p.is_null())
         {
             BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                if (m_is_piece_considered[c][i])
+                if ((*m_is_piece_considered[c])[i])
                 {
                     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
@@ -707,7 +641,7 @@ void State::init_move_list_without_local_list(Color c)
             {
                 unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                 BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                    if (m_is_piece_considered[c][i])
+                    if ((*m_is_piece_considered[c])[i])
                     {
                         BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
                         {
@@ -938,14 +872,14 @@ void State::update_move_list(Color c)
     }
 
     // Generate moves for pieces that were not considered in the last position
-    array<bool,Board::max_pieces> is_piece_considered;
-    set_pieces_considered(m_bd, is_piece_considered);
+    const array<bool,Board::max_pieces>& is_piece_considered =
+        m_shared_const.is_piece_considered[m_bd.get_nu_moves()];
     bool pieces_considered_changed = false;
     BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
     {
-        LIBBOARDGAME_ASSERT(! (m_is_piece_considered[c][i]
+        LIBBOARDGAME_ASSERT(! ((*m_is_piece_considered[c])[i]
                                && ! is_piece_considered[i]));
-        if (! m_is_piece_considered[c][i] && is_piece_considered[i])
+        if (! (*m_is_piece_considered[c])[i] && is_piece_considered[i])
         {
             pieces_considered_changed = true;
             break;
@@ -959,11 +893,12 @@ void State::update_move_list(Color c)
                 unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                 BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
                 {
-                    if (! m_is_piece_considered[c][i] && is_piece_considered[i])
+                    if (! (*m_is_piece_considered[c])[i]
+                        && is_piece_considered[i])
                         add_moves(p, c, i, adj_status);
                 }
             }
-        m_is_piece_considered[c] = is_piece_considered;
+        m_is_piece_considered[c] = &is_piece_considered;
     }
 
     m_marker.clear(m_moves[c]);
