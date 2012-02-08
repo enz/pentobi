@@ -164,6 +164,15 @@ public:
         @pre get_nu_moves() < max_game_moves */
     void play(Color c, Move move);
 
+    /** Play a pass move.
+        @pre get_nu_moves() < max_game_moves */
+    void play_pass(Color c);
+
+    /** Play a move that is known to be not a pass move.
+        Slightly faster than play(Color,Move)
+        @pre get_nu_moves() < max_game_moves */
+    void play_nonpass(Color c, Move move);
+
     /** See play(Color,Move) */
     void play(ColorMove move);
 
@@ -607,6 +616,65 @@ inline bool Board::is_same_player(Color c1, Color c2) const
 inline void Board::play(ColorMove move)
 {
     play(move.color, move.move);
+}
+
+inline void Board::play(Color c, Move mv)
+{
+    if (! mv.is_pass())
+        play_nonpass(c, mv);
+    else
+        play_pass(c);
+}
+
+inline void Board::play_nonpass(Color c, Move mv)
+{
+    LIBBOARDGAME_ASSERT(! mv.is_null());
+    LIBBOARDGAME_ASSERT(! mv.is_pass());
+    const MoveInfo& info = m_board_const->get_move_info(mv);
+    LIBBOARDGAME_ASSERT(m_pieces_left[c].contains(info.piece));
+    m_pieces_left[c].remove(info.piece);
+    auto i = info.points.begin();
+    auto end = info.points.end();
+    LIBBOARDGAME_ASSERT(i != end);
+    do
+    {
+        m_point_state[*i] = c;
+        m_played_move[*i] = mv;
+        static_assert(Color::range == 4, "");
+        LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c][*i] = true);
+        ++i;
+    }
+    while (i != end);
+    i = info.adj_points.begin();
+    end = info.adj_points.end();
+    LIBBOARDGAME_ASSERT(i != end);
+    do
+    {
+        m_forbidden[c][*i] = true;
+        ++i;
+    }
+    while (i != end);
+    i = info.attach_points.begin();
+    end = info.attach_points.end();
+    LIBBOARDGAME_ASSERT(i != end);
+    do
+    {
+        if (! m_is_attach_point[c][*i])
+        {
+            m_is_attach_point[c][*i] = true;
+            m_attach_points[c].push_back(*i);
+        }
+        ++i;
+    }
+    while (i != end);
+    m_moves.push_back(ColorMove(c, mv));
+    m_to_play = c.get_next(m_nu_colors);
+}
+
+inline void Board::play_pass(Color c)
+{
+    m_moves.push_back(ColorMove(c, Move::pass()));
+    m_to_play = c.get_next(m_nu_colors);
 }
 
 inline void Board::play(Move move)

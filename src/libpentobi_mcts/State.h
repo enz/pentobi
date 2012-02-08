@@ -91,7 +91,7 @@ public:
     ~State() throw();
 
     /** Play a move in the in-tree phase of the search. */
-    void play(const Move& mv);
+    void play(Move mv);
 
     void start_search();
 
@@ -235,6 +235,10 @@ private:
     void init_move_list_without_local_list(Color c);
 
     void init_symmetry_info();
+
+    void play_pass();
+
+    void play_nonpass(Move mv);
 
     bool check_move(Color c, const MovePoints& points, int& nu_local);
 

@@ -386,7 +386,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
                 return false;
             }
         }
-        play(Move::pass());
+        play_pass();
         return true;
     }
 
@@ -446,7 +446,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         while (m_bd.get_move_points(mv).size() < max_playable_piece_size
                && nu_try < max_try);
     }
-    play(mv);
+    play_nonpass(mv);
     return true;
 }
 
@@ -727,14 +727,38 @@ void State::init_symmetry_info()
     }
 }
 
-void State::play(const Move& mv)
+void State::play_pass()
 {
-    m_last_move[m_bd.get_to_play()] = mv;
-    m_bd.play(mv);
-    if (mv.is_pass())
-        ++m_nu_passes;
-    else
-        m_nu_passes = 0;
+    Color to_play = m_bd.get_to_play();
+    m_last_move[to_play] = Move::pass();
+    m_bd.play_pass(to_play);
+    ++m_nu_passes;
+    if (m_extended_update)
+    {
+        to_play = m_bd.get_to_play();
+        if (m_is_move_list_initialized[to_play])
+            update_move_list(to_play);
+        else
+            init_move_list_with_local_list(to_play);
+        if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+        {
+            // Don't try to handle pass moves: a pass move either breaks
+            // symmetry or both players have passed and it's the end of the
+            // game and we need symmetry detection only as a heuristic
+            // (playouts and move value initialization)
+            m_is_symmetry_broken = true;
+        }
+    }
+    if (log_simulations)
+        log() << m_bd;
+}
+
+void State::play_nonpass(Move mv)
+{
+    Color to_play = m_bd.get_to_play();
+    m_last_move[to_play] = mv;
+    m_bd.play(to_play, mv);
+    m_nu_passes = 0;
     if (m_extended_update)
     {
         Color to_play = m_bd.get_to_play();
@@ -747,6 +771,14 @@ void State::play(const Move& mv)
     }
     if (log_simulations)
         log() << m_bd;
+}
+
+void State::play(Move mv)
+{
+    if (! mv.is_pass())
+        play_nonpass(mv);
+    else
+        play_pass();
 }
 
 void State::start_playout()
@@ -907,15 +939,7 @@ void State::update_move_list(Color c)
 
 void State::update_symmetry_info(Move mv)
 {
-    if (mv.is_pass())
-    {
-        // Don't try to handle pass moves: a pass move either breaks symmetry
-        // or both players have passed and it's the end of the game and
-        // we need symmetry detection only as a heuristic (playouts and
-        // move value initialization)
-        m_is_symmetry_broken = true;
-        return;
-    }
+    LIBBOARDGAME_ASSERT(! mv.is_pass());
     const MovePoints& points = m_bd.get_move_points(mv);
     if (m_bd.get_to_play() == Color(0))
     {
