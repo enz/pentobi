@@ -17,6 +17,7 @@ Current development version (bugfix branch for 1.0)
   handle
 * Extended the file format documentation by a hint how to put blksgf
   files on web servers
+* Fixed exception in tools/twogtp/analyze.py if option -r was used
 * Minor fixes in computer player engine
 
 
