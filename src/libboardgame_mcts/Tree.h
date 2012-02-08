@@ -185,9 +185,10 @@ inline void Tree<M>::NodeExpander::add_child(const Move& mv)
 }
 
 template<typename M>
-void Tree<M>::NodeExpander::add_child(const Move& mv, ValueType value,
-                                      ValueType count, ValueType rave_value,
-                                      ValueType rave_count)
+inline void Tree<M>::NodeExpander::add_child(const Move& mv, ValueType value,
+                                             ValueType count,
+                                             ValueType rave_value,
+                                             ValueType rave_count)
 {
     LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<int>::max());
     if (! (m_is_tree_full |= ! m_tree.create_node(mv, value, count,
