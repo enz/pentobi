@@ -126,7 +126,7 @@ if print_result:
         % (100 * result.get_mean(),
            100 * result.get_error_mean(),
            cpu_black.get_mean(),
-           cpu_whiteget_mean(),
+           cpu_white.get_mean(),
            games)
 else:
     print "Gam: %i" % games,
