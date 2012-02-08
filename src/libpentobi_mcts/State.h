@@ -66,7 +66,7 @@ struct SharedConst
     ColorMap<MoveMarker> is_forbidden_at_root;
 
     /** Precomputed lists of considered pieces depending on the move number. */
-    ArrayList<array<bool,Board::max_pieces>,Board::max_game_moves>
+    array<array<bool,Board::max_pieces>,Board::max_game_moves>
                                                            is_piece_considered;
 
     SharedConst(const Board& bd, const Color& to_play);
