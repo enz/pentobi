@@ -13,11 +13,15 @@ namespace libboardgame_mcts {
 
 using namespace std;
 
+template<typename M> class ChildIterator;
+
 //-----------------------------------------------------------------------------
 
 template<typename M>
 class Node
 {
+    friend class ChildIterator<M>;
+
 public:
     typedef M Move;
 
@@ -53,8 +57,6 @@ public:
         from the point of view of the player at the parent node.
         See @ref libboardgame_doc_rave. */
     ValueType get_rave_value() const;
-
-    const Node* get_first_child() const;
 
     const Node* get_child(unsigned int i) const;
 
@@ -103,6 +105,8 @@ private:
 
     /** Not to be implemented */
     Node& operator=(const Node&);
+
+    const Node* get_first_child() const;
 };
 
 template<typename M>
@@ -278,6 +282,65 @@ template<typename M>
 inline void Node<M>::unlink_children()
 {
     m_first_child = 0;
+}
+
+//-----------------------------------------------------------------------------
+
+template<typename MOVE>
+class ChildIterator
+{
+public:
+    ChildIterator(const Node<MOVE>& node);
+
+    operator bool() const;
+
+    void operator++();
+
+    const Node<MOVE>& operator*();
+
+    const Node<MOVE>* operator->();
+
+private:
+    const Node<MOVE>* m_current;
+
+    const Node<MOVE>* m_end;
+};
+
+template<typename MOVE>
+ChildIterator<MOVE>::ChildIterator(const Node<MOVE>& node)
+{
+    m_current = node.get_first_child();
+    if (m_current != 0)
+        m_end = m_current + node.get_nu_children();
+    else
+        m_end = 0;
+}
+
+template<typename MOVE>
+inline ChildIterator<MOVE>::operator bool() const
+{
+    return m_current != m_end;
+}
+
+template<typename MOVE>
+inline void ChildIterator<MOVE>::operator++()
+{
+    LIBBOARDGAME_ASSERT(operator bool());
+    ++m_current;
+}
+
+template<typename MOVE>
+inline const Node<MOVE>& ChildIterator<MOVE>::operator*()
+{
+    LIBBOARDGAME_ASSERT(operator bool());
+    return *m_current;
+}
+
+template<typename MOVE>
+inline const Node<MOVE>* ChildIterator<MOVE>::operator->()
+{
+    LIBBOARDGAME_ASSERT(operator bool());
+    return m_current;
 }
 
 //-----------------------------------------------------------------------------

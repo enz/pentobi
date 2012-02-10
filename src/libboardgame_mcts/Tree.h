@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file mcts/Tree.h */
+/** @file libboardgame_mcts/Tree.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_MCTS_TREE_H
@@ -7,7 +7,7 @@
 
 #include <algorithm>
 #include <memory>
-#include "ChildIterator.h"
+#include "Node.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/IntervalChecker.h"
 

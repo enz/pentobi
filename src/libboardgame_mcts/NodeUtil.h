@@ -1,11 +1,10 @@
 //-----------------------------------------------------------------------------
-/** @file NodeUtil.h */
+/** @file libboardgame_mcts/NodeUtil.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_MCTS_NODE_UTIL_H
 #define LIBBOARDGAME_MCTS_NODE_UTIL_H
 
-#include "ChildIterator.h"
 #include "Node.h"
 
 namespace libboardgame_mcts {

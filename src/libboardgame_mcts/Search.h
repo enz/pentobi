@@ -9,7 +9,6 @@
 #include <array>
 #include <functional>
 #include <boost/format.hpp>
-#include "ChildIterator.h"
 #include "ReplyTable.h"
 #include "Tree.h"
 #include "TreeUtil.h"
