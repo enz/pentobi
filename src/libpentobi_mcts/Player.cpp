@@ -37,6 +37,15 @@ namespace {
 
 const bool use_weight_max_count = true;
 
+bool is_absolute(const path& p)
+{
+#if defined(BOOST_FILESYSTEM_VERSION) && BOOST_FILESYSTEM_VERSION >= 3
+    return p.is_absolute();
+#else
+    return p.is_complete();
+#endif
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -228,7 +237,7 @@ void Player::init_settings()
     store(parse_config_file(in, options), vm);
     notify(vm);
 
-    if (path(book_dir).is_absolute())
+    if (is_absolute(path(book_dir)))
         m_book_dir = path(book_dir);
     else
         m_book_dir = m_application_dir_path / book_dir;
