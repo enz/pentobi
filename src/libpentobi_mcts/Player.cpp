@@ -9,12 +9,18 @@
 #include "Player.h"
 
 #include <boost/filesystem/fstream.hpp>
+#include <boost/program_options.hpp>
 #include "libboardgame_util/WallTime.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
 using boost::filesystem::ifstream;
+using boost::program_options::options_description;
+using boost::program_options::notify;
+using boost::program_options::store;
+using boost::program_options::value;
+using boost::program_options::variables_map;
 using libboardgame_util::log;
 using libboardgame_util::WallTime;
 using libpentobi_base::game_variant_classic;
@@ -46,6 +52,7 @@ Player::Player(const Board& bd, GameVariant game_variant,
       m_search(bd),
       m_book(game_variant)
 {
+    init_settings();
     for (unsigned int i = 0; i < Board::max_player_moves; ++i)
     {
         // Hand-tuned such that time per move is more evenly spread among all
@@ -202,6 +209,31 @@ Move Player::genmove(Color c)
     return mv;
 }
 
+/** Initialize settings that can be overridden with a file
+    libpentobi_mcts.conf in the application directory. */
+void Player::init_settings()
+{
+#ifdef LIBPENTOBI_MCTS_BOOK_DIR
+    string book_dir_default = LIBPENTOBI_MCTS_BOOK_DIR;
+#else
+    string book_dir_default = "books";
+#endif
+
+    options_description options;
+    string book_dir;
+    options.add_options()
+        ("book_dir", value(&book_dir)->default_value(book_dir_default));
+    ifstream in(m_application_dir_path / "libpentobi_mcts.conf");
+    variables_map vm;
+    store(parse_config_file(in, options), vm);
+    notify(vm);
+
+    if (path(book_dir).is_absolute())
+        m_book_dir = path(book_dir);
+    else
+        m_book_dir = m_application_dir_path / book_dir;
+}
+
 void Player::load_book(istream& in)
 {
     m_book.load(in);
@@ -210,24 +242,7 @@ void Player::load_book(istream& in)
 
 void Player::load_book(const string& filename)
 {
-    // Search the opening book file at the following locations (in this order):
-    // 1. Current directory
-    // 2. Subdirectory books relative to the directory of the main executable
-    //    (Windows installation)
-    // 3. Subdirectory src/books relative to the source code directory
-    // 4. DATADIR/games/pentobi/books (Unix installation)
-    if (try_load_book(filename))
-        return;
-    if (try_load_book(m_application_dir_path / "books" / filename))
-        return;
-#ifdef ABS_TOP_SRCDIR
-    if (try_load_book(path(ABS_TOP_SRCDIR) / "src/books" / filename))
-        return;
-#endif
-#ifdef DATADIR
-    if (try_load_book(path(DATADIR) / "games/pentobi/books" / filename))
-        return;
-#endif
+    try_load_book(m_book_dir / filename);
 }
 
 bool Player::try_load_book(const path& filepath)

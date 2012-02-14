@@ -4,15 +4,17 @@
 /* Define to 1 if you have the <sys/times.h> header file. */
 #cmakedefine01 HAVE_SYS_TIMES_H
 
-/* Floating type for Monte-Carlo tree search values (float|double) */
-#define LIBBOARDGAME_MCTS_VALUE_TYPE @LIBBOARDGAME_MCTS_VALUE_TYPE@
-
 /* Version number of package */
 #define VERSION "@PENTOBI_VERSION@"
 
 #define DATADIR "@CMAKE_INSTALL_PREFIX@/share"
 
-#define ABS_TOP_SRCDIR "@CMAKE_SOURCE_DIR@"
+/* Floating type for Monte-Carlo tree search values (float|double) */
+#define LIBBOARDGAME_MCTS_VALUE_TYPE @LIBBOARDGAME_MCTS_VALUE_TYPE@
+
+/* Directory containing opening books.
+   Path is absolute or relative to location of executable. */
+#define LIBPENTOBI_MCTS_BOOK_DIR "@LIBPENTOBI_MCTS_BOOK_DIR@"
 
 #ifdef _MSC_VER
 // Don't report Visual C++ warning 4355 ('this' : used in base member
