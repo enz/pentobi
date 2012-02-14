@@ -1,0 +1,3 @@
+# Config file to override installation settings such that the executable
+# can be tested without installation
+book_dir=@CMAKE_SOURCE_DIR@/src/books
