@@ -116,7 +116,7 @@ void AnalyzeGame::run(Game& game, Search& search,
                         m_values.push_back(search_root.get_value());
                     }
                 }
-                catch (const Exception& exception)
+                catch (const Exception&)
                 {
                     // Game::goto_node() can throw on invalid SGF tree read
                     // from external file. We simply abort the analysis.

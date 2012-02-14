@@ -925,7 +925,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
                                    bind(&Search::check_abort_expensive, this));
     if (m_deterministic)
     {
-        unsigned int interval  = max(1.0, expected_sim_per_sec() / 5.0);
+        unsigned int interval =
+            static_cast<unsigned int>(max(1.0, expected_sim_per_sec() / 5.0));
         expensive_abort_checker.set_deterministic(interval);
     }
     while (m_tree.get_root().get_count() == 0
