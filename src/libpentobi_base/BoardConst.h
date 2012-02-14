@@ -44,6 +44,10 @@ class BoardConst
 public:
     static const unsigned int max_pieces = 22;
 
+    static const unsigned int max_moves_at_point = 40;
+
+    typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
+
     /** The number of neighbors used for computing the adjacent status.
         The adjacent status is a single number that encodes the forbidden
         status of the first adj_status_nu_adj neighbors (from the list
@@ -78,8 +82,8 @@ public:
 
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
-    const vector<Move>& get_moves(unsigned int piece, Point p,
-                                  unsigned int adj_status_index = 0) const;
+    const LocalMovesList& get_moves(unsigned int piece, Point p,
+                                    unsigned int adj_status_index = 0) const;
 
     BoardType get_board_type() const;
 
@@ -114,7 +118,7 @@ private:
 
     /** Moves of a piece at a point constrained by the forbidden status of
         adjacent points. */
-    array<array<Grid<vector<Move>>, max_pieces>, nu_adj_status_index> m_moves;
+    array<array<Grid<LocalMovesList>,max_pieces>,nu_adj_status_index> m_moves;
 
     /** Local variable reused for efficiency. */
     Marker m_marker;
@@ -173,9 +177,9 @@ inline const MovePoints& BoardConst::get_move_points(Move mv) const
     return get_move_info(mv).points;
 }
 
-inline const vector<Move>& BoardConst::get_moves(unsigned int piece,
-                                            Point p,
-                                            unsigned int adj_status_index) const
+inline const ArrayList<Move,40>& BoardConst::get_moves(unsigned int piece,
+                                           Point p,
+                                           unsigned int adj_status_index) const
 {
     return m_moves[adj_status_index][piece][p];
 }

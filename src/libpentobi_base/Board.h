@@ -82,6 +82,8 @@ class Board
 public:
     typedef Grid<PointState> PointStateGrid;
 
+    typedef BoardConst::LocalMovesList LocalMovesList;
+
     /** Iterator over all points on the board. */
     class Iterator
         : public GeometryIterator
@@ -224,8 +226,8 @@ public:
 
     unsigned int get_adj_status_index(Point p, Color c) const;
 
-    const vector<Move>& get_moves(unsigned int piece, Point p,
-                                  unsigned int adj_status_index) const;
+    const LocalMovesList& get_moves(unsigned int piece, Point p,
+                                    unsigned int adj_status_index) const;
 
     /** Get score.
         The score is the number of points for a color minus the number of
@@ -421,8 +423,9 @@ inline const Piece& Board::get_move_piece(Move mv) const
     return get_piece(get_move_info(mv).piece);
 }
 
-inline const vector<Move>& Board::get_moves(unsigned int piece, Point p,
-                                            unsigned int adj_status_index) const
+inline const Board::LocalMovesList& Board::get_moves(unsigned int piece,
+                                           Point p,
+                                           unsigned int adj_status_index) const
 {
     return m_board_const->get_moves(piece, p, adj_status_index);
 }

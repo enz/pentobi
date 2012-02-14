@@ -162,7 +162,8 @@ inline void State::add_moves(Point p, Color c, unsigned int piece,
                              unsigned int adj_status)
 {
     ArrayList<Move, Move::range>& moves = m_moves[c];
-    const vector<Move>& move_candidates = m_bd.get_moves(piece, p, adj_status);
+    const Board::LocalMovesList& move_candidates =
+        m_bd.get_moves(piece, p, adj_status);
     auto end = move_candidates.end();
     for (auto i = move_candidates.begin(); i != end; ++i)
         if (! m_shared_const.is_forbidden_at_root[c][*i])
