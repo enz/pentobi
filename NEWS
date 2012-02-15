@@ -19,6 +19,7 @@ Current development version (bugfix branch for 1.0)
   files on web servers
 * Fixed exception in tools/twogtp/analyze.py if option -r was used
 * Minor fixes in computer player engine
+* Smaller icons for piece manipulation buttons
 
 
 Version 1.0 (1 Jan 2012)
