@@ -94,14 +94,17 @@ public:
         Iterator(const Board& bd);
     };
 
+    /** Maximum number of pieces in any game variant. */
     static const unsigned int max_pieces = BoardConst::max_pieces;
 
-    /** Maximum number of moves for a player in a game.
+    /** Maximum number of moves for a player in a game in any game variant.
         Assumes that a player is only allowed to pass if she has no legal
         moves and allows an extra pass move per player at the end of a game to
         indicate that the game is over. */
     static const unsigned int max_player_moves = max_pieces + 1;
 
+    /** Maximum number of moves in any game variant.
+        Includes an extra pass move per color at the end of the game. */
     static const unsigned int max_game_moves = Color::range * max_player_moves;
 
     /** Use ANSI escape sequences for colored text output in operator>> */
@@ -114,6 +117,10 @@ public:
     unsigned int get_nu_colors() const;
 
     unsigned int get_nu_pieces() const;
+
+    /** Maximum number of moves in the current game variant.
+        Includes an extra pass move per color at the end of the game. */
+    unsigned int get_max_game_moves() const;
 
     const PieceTransforms& get_transforms() const;
 
@@ -401,6 +408,11 @@ inline const Geometry& Board::get_geometry() const
 inline const Board::PointStateGrid& Board::get_grid() const
 {
     return m_point_state;
+}
+
+inline unsigned int Board::get_max_game_moves() const
+{
+    return get_nu_colors() * (get_nu_pieces() + 1);
 }
 
 inline ColorMove Board::get_move(unsigned int n) const
