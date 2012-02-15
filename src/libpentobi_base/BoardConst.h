@@ -46,7 +46,9 @@ public:
 
     static const unsigned int max_moves_at_point = 40;
 
-    typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
+    /** Begin/end iterator for lists with local moves.
+        See get_moves(). */
+    typedef pair<const Move*,const Move*> LocalMovesListRange;
 
     /** The number of neighbors used for computing the adjacent status.
         The adjacent status is a single number that encodes the forbidden
@@ -82,8 +84,8 @@ public:
 
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
-    const LocalMovesList& get_moves(unsigned int piece, Point p,
-                                    unsigned int adj_status_index = 0) const;
+    LocalMovesListRange get_moves(unsigned int piece, Point p,
+                                  unsigned int adj_status_index = 0) const;
 
     BoardType get_board_type() const;
 
@@ -100,6 +102,12 @@ public:
     Move from_string(const string& s) const;
 
 private:
+    typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
+
+    /** See m_moves */
+    typedef array<array<Grid<LocalMovesList>,max_pieces>,nu_adj_status_index>
+        FullMoveTable;
+
     unsigned int m_nu_pieces;
 
     unsigned int m_total_piece_points;
@@ -116,22 +124,39 @@ private:
 
     vector<MoveInfoExt> m_move_info_ext;
 
-    /** Moves of a piece at a point constrained by the forbidden status of
-        adjacent points. */
-    array<array<Grid<LocalMovesList>,max_pieces>,nu_adj_status_index> m_moves;
+    /** Non-compact representation of lists of moves of a piece at a point
+        constrained by the forbidden status of adjacent points.
+        Only used during construction of m_moves_range and m_move_lists. */
+    unique_ptr<FullMoveTable> m_full_move_table;
+
+    /** See m_move_lists. */
+    Grid<array<array<pair<unsigned int,unsigned int>,max_pieces>,
+               nu_adj_status_index>> m_moves_range;
+
+    /** Compact representation of lists of moves of a piece at a point
+        constrained by the forbidden status of adjacent points.
+        All lists are stored in a single array; m_moves_range contains
+        information about the actual begin/end indices. */
+    unique_ptr<Move[]> m_move_lists;
+
+    /** Sum of sizes of all lists in m_full_move_table.
+        Only used during construction of m_moves_range and m_move_lists. */
+    size_t m_move_lists_sum_length;
 
     /** Local variable reused for efficiency. */
     Marker m_marker;
 
     /** Forbidden neighbors for a given adjacent status index at a given point.
         Only used during construction. */
-    Grid<array<ArrayList<Point, adj_status_nu_adj>, nu_adj_status_index>>
-                                                                   m_adj_status;
+    Grid<array<ArrayList<Point,adj_status_nu_adj>,nu_adj_status_index>>
+                                                                  m_adj_status;
 
     BoardConst(BoardType board_type);
 
     void create_move(unsigned int piece_index,
                      const Piece::Points& coord_points, Point center);
+
+    void create_moves();
 
     void create_moves(unsigned int piece_index);
 
@@ -177,11 +202,15 @@ inline const MovePoints& BoardConst::get_move_points(Move mv) const
     return get_move_info(mv).points;
 }
 
-inline const ArrayList<Move,40>& BoardConst::get_moves(unsigned int piece,
+inline BoardConst::LocalMovesListRange BoardConst::get_moves(
+                                           unsigned int piece,
                                            Point p,
                                            unsigned int adj_status_index) const
 {
-    return m_moves[adj_status_index][piece][p];
+    const pair<unsigned int,unsigned int>& indices =
+        m_moves_range[p][adj_status_index][piece];
+    const Move* begin = m_move_lists.get();
+    return LocalMovesListRange(begin + indices.first, begin + indices.second);
 }
 
 inline unsigned int BoardConst::get_nu_pieces() const
