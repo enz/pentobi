@@ -60,6 +60,7 @@ QToolButton* createOBoxToolButton(QAction* action)
     button->setDefaultAction(action);
     button->setAutoRaise(true);
     button->setFocusPolicy(Qt::NoFocus);
+    button->setIconSize(QSize(16, 16));
     return button;
 }
 
