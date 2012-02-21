@@ -76,4 +76,7 @@ install(TARGETS pentobi DESTINATION games)
 # update the directory used in Main.cpp:loadPentobiTranslator()
 install(FILES ${pentobi_QM_SRCS} DESTINATION share/games/pentobi/translations)
 
+install(DIRECTORY manual DESTINATION share/games/pentobi)
+
 configure_file(libpentobi_mcts.conf.in libpentobi_mcts.conf @ONLY)
+configure_file(pentobi.conf.in pentobi.conf @ONLY)

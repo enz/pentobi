@@ -143,6 +143,20 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
       m_analyzeGameWindow(0),
       m_legalMoves(new ArrayList<Move, Move::range>())
 {
+#ifdef PENTOBI_MANUAL_DIR
+    m_manualDir = PENTOBI_MANUAL_DIR;
+#endif
+    // Allow the user to override installation paths with a config file in the
+    // directory of the executable to test it without installation
+    QString overrideConfigFile =
+        QCoreApplication::applicationDirPath() + "/pentobi.conf";
+    if (QFileInfo(overrideConfigFile).exists())
+    {
+        QSettings overrideSettings(overrideConfigFile, QSettings::IniFormat);
+        m_manualDir =
+            overrideSettings.value("ManualDir", m_manualDir).toString();
+    }
+
     QSettings settings;
     m_level = settings.value("level", 4).toInt();
     if (m_level < 1 || m_level > maxLevel)
@@ -1623,7 +1637,7 @@ void MainWindow::help()
         m_helpWindow->raise();
         return;
     }
-    QString path = HelpWindow::findMainPage(":/pentobi/manual", "index.html",
+    QString path = HelpWindow::findMainPage(m_manualDir, "index.html",
                                             QLocale::system().name());
     m_helpWindow = new HelpWindow(this, path);
     m_helpWindow->show();

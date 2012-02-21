@@ -226,6 +226,8 @@ private:
 
     GuiBoard* m_guiBoard;
 
+    QString m_manualDir;
+
     ColorMap<bool> m_computerColor;
 
     ColorMap<bool> m_noMovesAvailableShown;

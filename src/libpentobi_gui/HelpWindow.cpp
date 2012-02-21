@@ -8,6 +8,10 @@
 
 #include "HelpWindow.h"
 
+#include "libboardgame_util/Log.h"
+
+using libboardgame_util::log;
+
 //-----------------------------------------------------------------------------
 
 namespace {
@@ -24,6 +28,7 @@ void setIcon(QAction* action, const QString& name)
 HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     : QMainWindow(parent)
 {
+    log() << "Loading " << mainPage.toStdString() << '\n';
     setWindowTitle(tr("Pentobi - Help"));
     m_mainPageUrl = QUrl::fromLocalFile(mainPage);
     QTextBrowser* browser = new QTextBrowser(this);

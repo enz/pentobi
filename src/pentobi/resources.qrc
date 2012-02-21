@@ -1,31 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource prefix="/pentobi">
-    <file>manual/de/classic_rules.html</file>
-    <file>manual/de/duo_rules.html</file>
-    <file>manual/de/index.html</file>
-    <file>manual/de/license.html</file>
-    <file>manual/de/shortcuts.html</file>
-    <file>manual/de/trigon_rules.html</file>
-    <file>manual/de/user_interface.html</file>
-    <file>manual/de/window_menu.html</file>
-    <file>manual/en/board_classic.png</file>
-    <file>manual/en/board_duo.png</file>
-    <file>manual/en/board_trigon.png</file>
-    <file>manual/en/classic_rules.html</file>
-    <file>manual/en/duo_rules.html</file>
-    <file>manual/en/index.html</file>
-    <file>manual/en/license.html</file>
-    <file>manual/en/pieces.png</file>
-    <file>manual/en/pieces_trigon.png</file>
-    <file>manual/en/position_classic.png</file>
-    <file>manual/en/position_duo.png</file>
-    <file>manual/en/position_trigon.png</file>
-    <file>manual/en/shortcuts.html</file>
-    <file>manual/en/stylesheet.css</file>
-    <file>manual/en/trigon_rules.html</file>
-    <file>manual/en/user_interface.html</file>
-    <file>manual/en/window_menu.html</file>
     <file>backward10.png</file>
     <file>computer-color.png</file>
     <file>document-open.png</file>

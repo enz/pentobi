@@ -16,6 +16,9 @@
    Path is absolute or relative to location of executable. */
 #define LIBPENTOBI_MCTS_BOOK_DIR "@LIBPENTOBI_MCTS_BOOK_DIR@"
 
+/** Location of the Pentobi user manual. */
+#define PENTOBI_MANUAL_DIR "@PENTOBI_MANUAL_DIR@"
+
 #ifdef _MSC_VER
 // Don't report Visual C++ warning 4355 ('this' : used in base member
 // initializer list) in default warning level 3. Storing a reference to
