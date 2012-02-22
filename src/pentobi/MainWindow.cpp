@@ -135,28 +135,16 @@ bool isMoveBetter(const Board& bd, Move mv1, Move mv2)
 
 //-----------------------------------------------------------------------------
 
-MainWindow::MainWindow(const QString& initialFile, bool noBook)
+MainWindow::MainWindow(const QString& initialFile, QString manualDir,
+                       bool noBook)
     : m_isGenMoveRunning(false),
       m_lastMoveByComputer(false),
       m_genMoveId(0),
+      m_manualDir(manualDir),
       m_helpWindow(0),
       m_analyzeGameWindow(0),
       m_legalMoves(new ArrayList<Move, Move::range>())
 {
-#ifdef PENTOBI_MANUAL_DIR
-    m_manualDir = PENTOBI_MANUAL_DIR;
-#endif
-    // Allow the user to override installation paths with a config file in the
-    // directory of the executable to test it without installation
-    QString overrideConfigFile =
-        QCoreApplication::applicationDirPath() + "/pentobi.conf";
-    if (QFileInfo(overrideConfigFile).exists())
-    {
-        QSettings overrideSettings(overrideConfigFile, QSettings::IniFormat);
-        m_manualDir =
-            overrideSettings.value("ManualDir", m_manualDir).toString();
-    }
-
     QSettings settings;
     m_level = settings.value("level", 4).toInt();
     if (m_level < 1 || m_level > maxLevel)

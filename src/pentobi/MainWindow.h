@@ -35,7 +35,9 @@ class MainWindow
     Q_OBJECT
 
 public:
-    MainWindow(const QString& initialFile = QString(), bool noBook = false);
+    MainWindow(const QString& initialFile = QString(),
+               QString manualDir = QString(),
+               bool noBook = false);
 
     bool eventFilter(QObject* watched, QEvent* event);
 

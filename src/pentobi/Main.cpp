@@ -20,62 +20,6 @@ using libboardgame_util::set_log_null;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-void loadLibPentobiGuiTranslator(QTranslator& translator)
-{
-    QString locale = QLocale::system().name();
-    QString file = "libpentobi_gui_" + locale;
-    QString appDir = QCoreApplication::applicationDirPath();
-    // Search for translation file in the following directories in this order
-    // 1. AppDir/translations (Windows installation)
-    // 2. AppDir/../libpentobi_gui (CMake build on Unix or with MinGW)
-    // 3. AppDir/../../libpentobi_gui (CMake build with MSVC)
-    // 4. DATADIR/pentobi/games/translations (Unix installation)
-    if (translator.load(file, appDir + "/translations"))
-        return;
-#ifndef _MSC_VER
-    if (translator.load(file, appDir + "/../libpentobi_gui"))
-        return;
-#endif
-#ifdef _MSC_VER
-    if (translator.load(file, appDir + "/../../libpentobi_gui"))
-        return;
-#endif
-#ifdef DATADIR
-    translator.load(file, QString(DATADIR) + "/games/pentobi/translations");
-#endif
-}
-
-void loadPentobiTranslator(QTranslator& translator)
-{
-    QString locale = QLocale::system().name();
-    QString file = "pentobi_" + locale;
-    QString appDir = QCoreApplication::applicationDirPath();
-    // Search for translation file in the following directories in this order
-    // 1. AppDir (CMake build on Unix or with MinGW)
-    // 2. AppDir/translations (Windows installation)
-    // 3. AppDir/.. (CMake build with MSVC)
-    // 4. DATADIR/games/pentobi/translations (Unix installation)
-#ifndef _MSC_VER
-    if (translator.load(file, appDir))
-        return;
-#endif
-    if (translator.load(file, appDir + "/translations"))
-        return;
-#ifdef _MSC_VER
-    if (translator.load(file, appDir + "/.."))
-        return;
-#endif
-#ifdef DATADIR
-    translator.load(file, QString(DATADIR) + "/games/pentobi/translations");
-#endif
-}
-
- } // namespace
-
-//-----------------------------------------------------------------------------
-
 int main(int argc, char* argv[])
 {
     try
@@ -84,6 +28,33 @@ int main(int argc, char* argv[])
         QCoreApplication::setOrganizationName("Pentobi");
         QCoreApplication::setApplicationName("Pentobi");
         QApplication app(argc, argv);
+
+        // Allow the user to override installation paths with a config file in
+        // the directory of the executable to test it without installation
+        QString manualDir;
+        QString translationsPentobiDir;
+        QString translationsLibPentobiGuiDir;
+#ifdef PENTOBI_MANUAL_DIR
+        manualDir = PENTOBI_MANUAL_DIR;
+#endif
+#ifdef PENTOBI_TRANSLATIONS
+        translationsPentobiDir = PENTOBI_TRANSLATIONS;
+        translationsLibPentobiGuiDir = PENTOBI_TRANSLATIONS;
+#endif
+        QString overrideConfigFile =
+            QCoreApplication::applicationDirPath() + "/pentobi.conf";
+        if (QFileInfo(overrideConfigFile).exists())
+        {
+            QSettings settings(overrideConfigFile, QSettings::IniFormat);
+            manualDir = settings.value("ManualDir", manualDir).toString();
+            translationsPentobiDir =
+                settings.value("TranslationsPentobiDir",
+                               translationsPentobiDir).toString();
+            translationsLibPentobiGuiDir =
+                settings.value("TranslationsLibPentobiGuiDir",
+                               translationsLibPentobiGuiDir).toString();
+        }
+
 #ifdef Q_WS_WIN
         // In Windows classic L&F, labels in the status bar have a sunken border
         // even if the rest of the status bar is borderless (tested in Qt 4.7).
@@ -98,10 +69,11 @@ int main(int argc, char* argv[])
         qtTranslator.load("qt_" + locale, qtTranslationPath);
         app.installTranslator(&qtTranslator);
         QTranslator libPentobiGuiTranslator;
-        loadLibPentobiGuiTranslator(libPentobiGuiTranslator);
+        libPentobiGuiTranslator.load("libpentobi_gui_" + locale,
+                                     translationsLibPentobiGuiDir);
         app.installTranslator(&libPentobiGuiTranslator);
         QTranslator pentobiTranslator;
-        loadPentobiTranslator(pentobiTranslator);
+        pentobiTranslator.load("pentobi_" + locale, translationsPentobiDir);
         app.installTranslator(&pentobiTranslator);
         vector<string> arguments;
         options_description normal_options("Options");
@@ -126,7 +98,7 @@ int main(int argc, char* argv[])
         QString initialFile;
         if (arguments.size() > 0)
             initialFile = arguments[0].c_str();
-        MainWindow mainWindow(initialFile, noBook);
+        MainWindow mainWindow(initialFile, manualDir, noBook);
         mainWindow.show();
         return app.exec();
     }

@@ -19,6 +19,9 @@
 /** Location of the Pentobi user manual. */
 #define PENTOBI_MANUAL_DIR "@PENTOBI_MANUAL_DIR@"
 
+/** Location of the translations directory. */
+#define PENTOBI_TRANSLATIONS "@PENTOBI_TRANSLATIONS@"
+
 #ifdef _MSC_VER
 // Don't report Visual C++ warning 4355 ('this' : used in base member
 // initializer list) in default warning level 3. Storing a reference to

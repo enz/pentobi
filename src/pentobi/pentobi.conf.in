@@ -1,3 +1,5 @@
 # Config file to override installation settings such that the executable
 # can be tested without installation
 ManualDir=@CMAKE_SOURCE_DIR@/src/pentobi/manual
+TranslationsPentobiDir=@CMAKE_BINARY_DIR@/src/pentobi
+TranslationsLibPentobiGuiDir=@CMAKE_BINARY_DIR@/src/libpentobi_gui
