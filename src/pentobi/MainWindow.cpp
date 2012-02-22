@@ -135,8 +135,8 @@ bool isMoveBetter(const Board& bd, Move mv1, Move mv2)
 
 //-----------------------------------------------------------------------------
 
-MainWindow::MainWindow(const QString& initialFile, QString manualDir,
-                       bool noBook)
+MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
+                       const QString& booksDir, bool noBook)
     : m_isGenMoveRunning(false),
       m_lastMoveByComputer(false),
       m_genMoveId(0),
@@ -165,8 +165,7 @@ MainWindow::MainWindow(const QString& initialFile, QString manualDir,
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
     initGame();
-    path appDirPath(QCoreApplication::applicationDirPath().toStdString());
-    m_player.reset(new Player(getBoard(), variant, appDirPath));
+    m_player.reset(new Player(getBoard(), variant, booksDir.toStdString()));
     m_player->set_use_book(! noBook);
     createActions();
     createToolBar();

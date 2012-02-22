@@ -24,8 +24,8 @@ class Engine
     : public libpentobi_base::Engine
 {
 public:
-    Engine(GameVariant game_variant, int level = 5, bool use_book = true,
-           const path& application_dir_path = path());
+    Engine(GameVariant game_variant, int level = 5,
+           bool use_book = true, const path& books_dir = path());
 
     ~Engine() throw();
 
@@ -45,8 +45,7 @@ public:
 private:
     unique_ptr<libpentobi_base::Player> m_player;
 
-    void create_player(GameVariant game_variant,
-                       const path& application_dir_path);
+    void create_player(GameVariant game_variant, const path& books_dir);
 
     Search& get_search();
 };

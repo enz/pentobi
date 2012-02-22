@@ -147,8 +147,8 @@ int main(int argc, char** argv)
             return EXIT_SUCCESS;
         }
         bool use_book = (vm.count("nobook") == 0);
-        pentobi_gtp::Engine engine(game_variant, level, use_book,
-                                   application_dir_path);
+        path books_dir = application_dir_path;
+        pentobi_gtp::Engine engine(game_variant, level, use_book, books_dir);
         if (vm.count("showboard"))
             engine.set_show_board(true);
         if (vm.count("seed"))

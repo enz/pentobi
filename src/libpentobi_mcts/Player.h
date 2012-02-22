@@ -25,10 +25,8 @@ public:
     /** Constructor.
         @param bd
         @param game_variant
-        @param application_dir_path Directory of the main executable (potential
-        location of book files). */
-    Player(const Board& bd, GameVariant game_variant,
-           const path& application_dir_path = path());
+        @param books_dir Directory containing opening books. */
+    Player(const Board& bd, GameVariant game_variant, const path& books_dir);
 
     ~Player() throw();
 
@@ -66,7 +64,7 @@ private:
 
     bool m_use_book;
 
-    path m_application_dir_path;
+    path m_books_dir;
 
     int m_level;
 
@@ -83,8 +81,6 @@ private:
     Search m_search;
 
     Book m_book;
-
-    path m_book_dir;
 
     void init_settings();
 

@@ -32,10 +32,14 @@ int main(int argc, char* argv[])
         // Allow the user to override installation paths with a config file in
         // the directory of the executable to test it without installation
         QString manualDir;
+        QString booksDir;
         QString translationsPentobiDir;
         QString translationsLibPentobiGuiDir;
 #ifdef PENTOBI_MANUAL_DIR
         manualDir = PENTOBI_MANUAL_DIR;
+#endif
+#ifdef PENTOBI_BOOKS_DIR
+        booksDir = PENTOBI_BOOKS_DIR;
 #endif
 #ifdef PENTOBI_TRANSLATIONS
         translationsPentobiDir = PENTOBI_TRANSLATIONS;
@@ -47,6 +51,7 @@ int main(int argc, char* argv[])
         {
             QSettings settings(overrideConfigFile, QSettings::IniFormat);
             manualDir = settings.value("ManualDir", manualDir).toString();
+            booksDir = settings.value("BooksDir", booksDir).toString();
             translationsPentobiDir =
                 settings.value("TranslationsPentobiDir",
                                translationsPentobiDir).toString();
@@ -98,7 +103,7 @@ int main(int argc, char* argv[])
         QString initialFile;
         if (arguments.size() > 0)
             initialFile = arguments[0].c_str();
-        MainWindow mainWindow(initialFile, manualDir, noBook);
+        MainWindow mainWindow(initialFile, manualDir, booksDir, noBook);
         mainWindow.show();
         return app.exec();
     }

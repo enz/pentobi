@@ -59,7 +59,7 @@ BookBuilder::BookBuilder(GameVariant game_variant)
     m_tree(game_variant),
     m_bd(game_variant),
     m_updater(m_tree, m_bd),
-    m_player(m_bd, game_variant),
+    m_player(m_bd, game_variant, ""),
     m_moves(new ArrayList<Move, Move::range>)
 {
     if (game_variant != game_variant_duo

@@ -26,5 +26,3 @@ target_link_libraries(pentobi-gtp
   ${Boost_THREAD_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}
   )
-
-configure_file(libpentobi_mcts.conf.in libpentobi_mcts.conf @ONLY)

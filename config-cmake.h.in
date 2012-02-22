@@ -7,14 +7,12 @@
 /* Version number of package */
 #define VERSION "@PENTOBI_VERSION@"
 
-#define DATADIR "@CMAKE_INSTALL_PREFIX@/share"
-
 /* Floating type for Monte-Carlo tree search values (float|double) */
 #define LIBBOARDGAME_MCTS_VALUE_TYPE @LIBBOARDGAME_MCTS_VALUE_TYPE@
 
 /* Directory containing opening books.
    Path is absolute or relative to location of executable. */
-#define LIBPENTOBI_MCTS_BOOK_DIR "@LIBPENTOBI_MCTS_BOOK_DIR@"
+#define PENTOBI_BOOKS_DIR "@PENTOBI_BOOKS_DIR@"
 
 /** Location of the Pentobi user manual. */
 #define PENTOBI_MANUAL_DIR "@PENTOBI_MANUAL_DIR@"
