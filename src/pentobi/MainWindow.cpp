@@ -1193,8 +1193,8 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
     m_toolBar->addAction(m_actionNewGame);
-    m_toolBar->addAction(m_actionComputerColor);
     m_toolBar->addAction(m_actionPlay);
+    m_toolBar->addAction(m_actionComputerColor);
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward10);
     m_toolBar->addAction(m_actionBackward);
