@@ -151,7 +151,7 @@ private:
 
     unsigned int m_nu_passes;
 
-    int m_max_local;
+    int m_max_local_value;
 
     unsigned int m_max_playable_piece_size;
 
@@ -226,7 +226,7 @@ private:
     void add_moves(Point p, Color c, unsigned int piece,
                    unsigned int adj_status);
 
-    void check_local_move(int nu_local, Move mv, const MoveInfo& info);
+    void check_local(int local_value, Move mv, const MoveInfo& info);
 
     void compute_features();
 
@@ -240,7 +240,7 @@ private:
 
     void play_nonpass(Move mv);
 
-    bool check_move(Color c, const MovePoints& points, int& nu_local);
+    bool check_move(Color c, const MovePoints& points, int& local_value);
 
     void update_move_list(Color c);
 
