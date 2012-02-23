@@ -9,6 +9,12 @@
 #include <boost/program_options.hpp>
 #include <QtGui>
 #include "MainWindow.h"
+#ifdef Q_WS_WIN
+#include <stdio.h>
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
+#endif
 
 using boost::program_options::command_line_parser;
 using boost::program_options::options_description;
@@ -18,6 +24,34 @@ using boost::program_options::value;
 using boost::program_options::variables_map;
 using libboardgame_util::set_log_null;
 
+//-----------------------------------------------------------------------------
+
+namespace {
+
+#ifdef Q_WS_WIN
+
+/** @todo: Move to an extra file to encapsulate the inclusion of <windows.h>,
+    which does some ugly stuff, like defining a macro named max that breaks
+    standard headers. */
+void redirectStdErr()
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    AllocConsole();
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+    info.dwSize.Y = 500;
+    SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), info.dwSize);
+    long stdErrHandle = (long)GetStdHandle(STD_ERROR_HANDLE);
+    int conHandle = _open_osfhandle(stdErrHandle, _O_TEXT);
+    FILE* f = _fdopen(conHandle, "w");
+    *stderr = *f;
+    setvbuf(stderr, NULL, _IONBF, 0);
+    ios::sync_with_stdio();
+}
+
+#endif
+
+} // namespace
+        
 //-----------------------------------------------------------------------------
 
 int main(int argc, char* argv[])
@@ -99,6 +133,10 @@ int main(int argc, char* argv[])
         boost::program_options::notify(vm);
         if (! vm.count("verbose"))
             set_log_null();
+#ifdef Q_WS_WIN
+        if (vm.count("verbose"))
+            redirectStdErr();
+#endif
         bool noBook = (vm.count("nobook") != 0);
         QString initialFile;
         if (arguments.size() > 0)

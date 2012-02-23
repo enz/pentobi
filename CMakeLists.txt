@@ -30,6 +30,12 @@ if(MSVC)
   add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 endif()
 
+if (MINGW)
+  # -std=c++0x makes MinGW define __STRICT_ANSI__, which also hides
+  # some functions that we use in some Windows-specific code, like fdopen()
+  add_definitions(-U__STRICT_ANSI__)
+endif()
+
 # Define CMAKE_INSTALL_SYSCONFDIR  and CMAKE_INSTALL_FULL_SYSCONFDIR as in
 # GNUInstallDirs (we don't use GNUInstallDirs yet because it requires CMake
 # 2.8.5 and we require only CMake 2.8 so far.

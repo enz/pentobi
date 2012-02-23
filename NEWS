@@ -5,6 +5,8 @@ Current development version
 * Added a toolbar button for selecting the computer colors
 * User manual is no longer compiled into the resources of the
   executable but installed in the installation data directory
+* Open a console for stderr output on Windows if Pentobi is
+  invoked with option --verbose
 
 
 Version 1.0 (1 Jan 2012)
