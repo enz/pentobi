@@ -733,7 +733,8 @@ void State::play_pass()
     m_last_move[to_play] = Move::pass();
     m_bd.play_pass(to_play);
     ++m_nu_passes;
-    if (m_extended_update)
+    if (m_extended_update
+        && m_bd.get_nu_moves() < m_bd.get_max_game_moves())
     {
         to_play = m_bd.get_to_play();
         if (m_is_move_list_initialized[to_play])
@@ -759,7 +760,8 @@ void State::play_nonpass(Move mv)
     m_last_move[to_play] = mv;
     m_bd.play(to_play, mv);
     m_nu_passes = 0;
-    if (m_extended_update)
+    if (m_extended_update
+        && m_bd.get_nu_moves() < m_bd.get_max_game_moves())
     {
         Color to_play = m_bd.get_to_play();
         if (m_is_move_list_initialized[to_play])
