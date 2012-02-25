@@ -19,7 +19,9 @@ public:
     BoardUpdater(const Tree& tree, Board& bd);
 
     /** Update the board to a node.
-        @throws Exception if tree contains invalid properties. */
+        @throws Exception if tree contains invalid properties, moves that play
+        the same piece twice or other conditions that prevent the updater to
+        update the board to the given node. */
     void update(const Node& node);
 
 private:
