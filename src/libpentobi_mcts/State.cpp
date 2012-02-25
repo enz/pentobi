@@ -393,7 +393,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
             if (moves->empty())
                 moves = &m_moves[to_play];
             if (log_simulations)
-                log() << "Moves: " << moves->size() << ", local: "
+                log() << "Moves: " << m_moves[to_play].size() << ", local: "
                       << m_local_moves.size() << '\n';
         }
         if (moves->empty())
