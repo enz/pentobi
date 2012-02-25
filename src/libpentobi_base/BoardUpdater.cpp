@@ -52,6 +52,9 @@ void BoardUpdater::update(const Node& node)
         {
             if (m_bd.get_nu_moves() >= Board::max_game_moves)
                 throw Exception("too many moves");
+            const MoveInfo& info = m_bd.get_move_info(mv.move);
+            if (! m_bd.get_pieces_left(mv.color).contains(info.piece))
+                throw Exception("piece played twice");
             m_bd.play(mv);
         }
     }
