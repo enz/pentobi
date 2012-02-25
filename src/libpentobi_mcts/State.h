@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_MCTS_STATE_H
 #define LIBPENTOBI_MCTS_STATE_H
 
-#include "LastAttachPoints.h"
+#include "LocalValue.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libboardgame_mcts/ValueType.h"
@@ -151,7 +151,7 @@ private:
 
     unsigned int m_nu_passes;
 
-    int m_max_local_value;
+    unsigned int m_max_local_value;
 
     unsigned int m_max_playable_piece_size;
 
@@ -193,7 +193,7 @@ private:
         Reused for efficiency. */
     MoveMarker m_marker;
 
-    LastAttachPoints m_last_attach_points;
+    LocalValue m_local_value;
 
     RandomGenerator m_random;
 
@@ -226,7 +226,7 @@ private:
     void add_moves(Point p, Color c, unsigned int piece,
                    unsigned int adj_status);
 
-    void check_local(int local_value, Move mv, const MoveInfo& info);
+    void check_local(unsigned int local_value, Move mv, const MoveInfo& info);
 
     void compute_features();
 
@@ -240,7 +240,8 @@ private:
 
     void play_nonpass(Move mv);
 
-    bool check_move(Color c, const MovePoints& points, int& local_value);
+    bool check_move(Color c, const MovePoints& points,
+                    unsigned int& local_value);
 
     void update_move_list(Color c);
 

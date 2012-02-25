@@ -167,7 +167,7 @@ inline void State::add_moves(Point p, Color c, unsigned int piece,
     for (auto i = move_candidates.first; i != move_candidates.second; ++i)
         if (! m_shared_const.is_forbidden_at_root[c][*i])
         {
-            int local_value;
+            unsigned int local_value;
             const MoveInfo& info = m_bd.get_move_info(*i);
             if (check_move(c, info.points, local_value) && ! m_marker[*i])
             {
@@ -178,7 +178,7 @@ inline void State::add_moves(Point p, Color c, unsigned int piece,
         }
 }
 
-void State::check_local(int local_value, Move mv, const MoveInfo& info)
+void State::check_local(unsigned int local_value, Move mv, const MoveInfo& info)
 {
     if (local_value < m_max_local_value)
         return;
@@ -192,9 +192,10 @@ void State::check_local(int local_value, Move mv, const MoveInfo& info)
         max(m_max_playable_piece_size_local, info.points.size());
 }
 
-bool State::check_move(Color c, const MovePoints& points, int& local_value)
+bool State::check_move(Color c, const MovePoints& points,
+                       unsigned int& local_value)
 {
-    local_value = 0;
+    LocalValue::Compute compute_local(m_local_value);
     const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
     auto end = points.end();
     auto i = points.begin();
@@ -203,10 +204,11 @@ bool State::check_move(Color c, const MovePoints& points, int& local_value)
     {
         if (is_forbidden[*i])
             return false;
-        local_value += m_last_attach_points[*i];
+        compute_local.add_move_point(*i);
         ++i;
     }
     while (i != end);
+    local_value = compute_local.finish();
     m_max_playable_piece_size = max(m_max_playable_piece_size, points.size());
     return true;
 }
@@ -426,7 +428,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
             moves = &m_local_moves;
             max_playable_piece_size = m_max_playable_piece_size_local;
             if (log_simulations)
-                log() << "Moves: " << moves->size() << ", local: "
+                log() << "Moves: " << m_moves[to_play].size() << ", local: "
                       << m_local_moves.size() << ", max_local_value: "
                       << m_max_local_value << '\n';
         }
@@ -553,7 +555,7 @@ void State::init_move_list_with_local_list(Color c)
     m_last_move[c] = Move::null();
     m_is_piece_considered[c] =
         &m_shared_const.is_piece_considered[m_bd.get_nu_moves()];
-    m_last_attach_points.init(m_bd);
+    m_local_value.init(m_bd);
     m_local_moves.clear();
     m_max_local_value = 1;
     m_max_playable_piece_size = 0;
@@ -798,7 +800,7 @@ void State::start_search()
 {
     const Board& bd = m_shared_const.board;
     const Geometry& geometry = bd.get_geometry();
-    m_last_attach_points.init_geometry(geometry);
+    m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
     m_score_modification_factor =
         m_shared_const.score_modification
@@ -867,7 +869,7 @@ void State::start_simulation(size_t n)
 
 void State::update_move_list(Color c)
 {
-    m_last_attach_points.init(m_bd);
+    m_local_value.init(m_bd);
     m_local_moves.clear();
     m_max_local_value = 1;
     m_max_playable_piece_size = 0;
@@ -881,7 +883,7 @@ void State::update_move_list(Color c)
         last_piece = m_bd.get_move_info(last_mv).piece;
     for (auto i = moves.begin(); i != moves.end(); ++i)
     {
-        int local_value;
+        unsigned int local_value;
         const MoveInfo& info = m_bd.get_move_info(*i);
         if (info.piece != last_piece && check_move(c, info.points, local_value))
         {
