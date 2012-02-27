@@ -1190,6 +1190,7 @@ void MainWindow::createToolBar()
 {
     m_toolBar = new QToolBar(this);
     m_toolBar->setMovable(false);
+    m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
     m_toolBar->addAction(m_actionNewGame);
