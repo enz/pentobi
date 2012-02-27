@@ -2084,7 +2084,7 @@ void MainWindow::saveAs()
         if (QFileInfo(file).exists())
             for (unsigned int i = 1; ; ++i)
             {
-                file = getLastDir();;
+                file = getLastDir();
                 file.append(QDir::separator());
                 file.append(tr("Untitled Game %1.blksgf").arg(i));
                 if (! QFileInfo(file).exists())

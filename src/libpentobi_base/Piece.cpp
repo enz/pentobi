@@ -162,7 +162,7 @@ const Transform* Piece::find_transform(const Geometry& geometry,
         normalize(points, geometry.get_point_type(0, 0), geometry);
     BOOST_FOREACH(const Transform* transform, get_transforms())
     {
-        Points piece_points = get_points();;
+        Points piece_points = get_points();
         transform->transform(piece_points.begin(), piece_points.end());
         NormalizedPoints normalized_piece =
             normalize(piece_points, transform->get_new_point_type(), geometry);
