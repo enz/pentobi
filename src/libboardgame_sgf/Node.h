@@ -27,7 +27,7 @@ struct Property
 
     vector<string> values;
 
-    shared_ptr<Property> next;
+    unique_ptr<Property> next;
 
     Property(const string& id, const vector<string>& values);
 };
