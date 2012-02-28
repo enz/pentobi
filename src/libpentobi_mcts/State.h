@@ -230,9 +230,9 @@ private:
 
     void compute_features();
 
-    void init_move_list_with_local_list(Color c);
+    void init_move_list_with_local(Color c);
 
-    void init_move_list_without_local_list(Color c);
+    void init_move_list_without_local(Color c);
 
     void init_symmetry_info();
 

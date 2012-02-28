@@ -458,7 +458,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     if (m_nu_passes == nu_colors)
         return;
     Color to_play = m_bd.get_to_play();
-    init_move_list_without_local_list(to_play);
+    init_move_list_without_local(to_play);
     init_symmetry_info();
     m_extended_update = true;
     const ArrayList<Move, Move::range>& moves = m_moves[to_play];
@@ -550,7 +550,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     }
 }
 
-void State::init_move_list_with_local_list(Color c)
+void State::init_move_list_with_local(Color c)
 {
     m_last_move[c] = Move::null();
     m_is_piece_considered[c] =
@@ -600,7 +600,7 @@ void State::init_move_list_with_local_list(Color c)
     m_is_move_list_initialized[c] = true;
 }
 
-void State::init_move_list_without_local_list(Color c)
+void State::init_move_list_without_local(Color c)
 {
     m_last_move[c] = Move::null();
     m_is_piece_considered[c] =
@@ -742,7 +742,7 @@ void State::play_pass()
         if (m_is_move_list_initialized[to_play])
             update_move_list(to_play);
         else
-            init_move_list_with_local_list(to_play);
+            init_move_list_with_local(to_play);
         if (m_check_symmetric_draw && ! m_is_symmetry_broken)
         {
             // Don't try to handle pass moves: a pass move either breaks
@@ -768,7 +768,7 @@ void State::play_nonpass(Move mv)
         if (m_is_move_list_initialized[to_play])
             update_move_list(to_play);
         else
-            init_move_list_with_local_list(to_play);
+            init_move_list_with_local(to_play);
         if (m_check_symmetric_draw && ! m_is_symmetry_broken)
             update_symmetry_info(mv);
     }
@@ -790,7 +790,7 @@ void State::start_playout()
         log() << "Start playout\n";
     if (! m_extended_update)
     {
-        init_move_list_with_local_list(m_bd.get_to_play());
+        init_move_list_with_local(m_bd.get_to_play());
         init_symmetry_info();
         m_extended_update = true;
     }
