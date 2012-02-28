@@ -1,0 +1,20 @@
+This directory contains tests with GTP input files using the convention
+of GNU Go[1], which adds expected responses in special comment lines
+after the commands.
+
+Note that (despite the name) these are not really regression tests
+because there is no clear distinction between tests that must not fail
+if the program is correct and tests that merely test the performance
+of the program (i.e. the outcome depends on heuristics used or on the
+amount of search). Maybe a subset of these tests will become real regression
+tests is the future but with the statistical nature of Monte-Carlo searches,
+this will be difficult.
+
+The tests can be run with the lightweight script regression/regress.awk
+from the GNU Go distribution, with the Java program gogui-regress from
+GoGui[2] (see run.sh for an example how to invoke it) or they can be
+used as the standard input for pentobi-gtp directly (without automatic
+comparison of the responses).
+
+[1] http://www.gnu.org/software/gnugo/
+[2] http://gogui.sf.net
