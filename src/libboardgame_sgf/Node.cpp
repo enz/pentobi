@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file sgf/Node.cpp */
+/** @file libboardgame_sgf/Node.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -18,8 +18,8 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 Property::Property(const string& id, const vector<string>& values)
-    : m_id(id),
-      m_values(values)
+    : id(id),
+      values(values)
 {
     LIBBOARDGAME_ASSERT(! values.empty());
 }
@@ -69,9 +69,9 @@ Property* Node::find_property(const string& id) const
     Property* property = m_first_property.get();
     while (property != 0)
     {
-        if (property->m_id == id)
+        if (property->id == id)
             break;
-        property = property->m_next.get();
+        property = property->next.get();
     }
     return property;
 }
@@ -82,7 +82,7 @@ const vector<string> Node::get_multi_property(const string& id) const
     if (property == 0)
         return vector<string>();
     else
-        return property->m_values;
+        return property->values;
 }
 
 bool Node::has_property(const string& id) const
@@ -161,7 +161,7 @@ const string& Node::get_property(const string& id) const
     Property* property = find_property(id);
     if (property == 0)
         throw MissingProperty(id);
-    return property->m_values[0];
+    return property->values[0];
 }
 
 const string& Node::get_property(const string& id,
@@ -171,7 +171,7 @@ const string& Node::get_property(const string& id,
     if (property == 0)
         return default_value;
     else
-        return property->m_values[0];
+        return property->values[0];
 }
 
 void Node::make_first_child()
@@ -201,15 +201,15 @@ bool Node::remove_property(const string& id)
     Property* last = 0;
     while (property != 0)
     {
-        if (property->m_id == id)
+        if (property->id == id)
             break;
         last = property;
-        property = property->m_next.get();
+        property = property->next.get();
     }
     if (property == 0)
         return false;
     if (last != 0)
-        last->m_next = move(property->m_next);
+        last->next = move(property->next);
     return true;
 }
 

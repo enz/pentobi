@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file sgf/Node.h */
+/** @file libboardgame_sgf/Node.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_SGF_NODE_H
@@ -23,11 +23,11 @@ using libboardgame_util::string_util::to_string;
 
 struct Property
 {
-    string m_id;
+    string id;
 
-    vector<string> m_values;
+    vector<string> values;
 
-    shared_ptr<Property> m_next;
+    shared_ptr<Property> next;
 
     Property(const string& id, const vector<string>& values);
 };
@@ -269,18 +269,18 @@ bool Node::set_property(const string& id, const vector<T>& values)
     }
     while (true)
     {
-        if (property->m_id == id)
+        if (property->id == id)
         {
-            bool was_changed = (property->m_values != values_to_string);
-            property->m_values = values_to_string;
+            bool was_changed = (property->values != values_to_string);
+            property->values = values_to_string;
             return was_changed;
         }
-        if (property->m_next.get() == 0)
+        if (property->next.get() == 0)
         {
-            property->m_next.reset(new Property(id, values_to_string));
+            property->next.reset(new Property(id, values_to_string));
             return true;
         }
-        property = property->m_next.get();
+        property = property->next.get();
     }
 }
 
@@ -316,7 +316,7 @@ inline PropertyIterator::operator bool() const
 inline void PropertyIterator::operator++()
 {
     LIBBOARDGAME_ASSERT(operator bool());
-    m_current = m_current->m_next.get();
+    m_current = m_current->next.get();
 }
 
 inline const Property& PropertyIterator::operator*() const

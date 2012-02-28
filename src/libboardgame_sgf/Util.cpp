@@ -27,7 +27,7 @@ void write_node(Writer& writer, const Node& node)
 {
     writer.begin_node();
     for (PropertyIterator i(node); i; ++i)
-        writer.write_property(i->m_id, i->m_values);
+        writer.write_property(i->id, i->values);
     writer.end_node();
     if (! node.has_children())
         return;
