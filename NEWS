@@ -9,6 +9,7 @@ Current development version (bugfix branch for 1.0)
   --verbose if a subtree from a previous search was reused
 * Do not accept files with more moves in a variation than Pentobi can
   handle
+* Do not crash if file contains invalid properties in root node
 * Show an error if a blksgf file contains the same piece played more
   than once.
 * Fixed exception in tools/twogtp/analyze.py if option -r was used

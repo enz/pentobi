@@ -52,6 +52,9 @@ void Game::init(unique_ptr<Node>& root)
 {
     m_tree.init(root);
     m_bd.init(m_tree.get_game_variant());
+    // Set m_current to root such that it has a defined value even if
+    // goto_node() throws because of invalid properties in the root node
+    m_current = &m_tree.get_root();
     goto_node(m_tree.get_root());
 }
 
