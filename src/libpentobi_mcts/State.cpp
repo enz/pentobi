@@ -220,23 +220,26 @@ void State::compute_features()
     BoardType board_type = m_bd.get_board_type();
     const ArrayList<Move, Move::range>& moves = m_moves[to_play];
     const Geometry& geometry = m_bd.get_geometry();
-    Grid<ValueType> point_value(geometry);
+    Grid<ValueType> point_value(geometry, 1);
+    for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+    {
+        if (*i == to_play || *i == second_color)
+            continue;
+        BOOST_FOREACH(Point p, m_bd.get_attach_points(*i))
+        {
+            if (! m_bd.is_forbidden(p, *i))
+            {
+                point_value[p] = 5;
+                for (AdjIterator j(m_bd, p); j; ++j)
+                    if (! m_bd.is_forbidden(*j, *i))
+                        point_value[*j] = max(point_value[*j], ValueType(4));
+            }
+        }
+    }
     Grid<ValueType> attach_point_value(geometry);
     Grid<ValueType> adj_point_value(geometry);
     for (BoardIterator i(m_bd); i; ++i)
     {
-        point_value[*i] = 1;
-        for (unsigned int j = 0; j < m_bd.get_nu_colors(); ++j)
-        {
-            Color c(j);
-            if (c == to_play || c == second_color)
-                continue;
-            if (m_bd.is_attach_point(*i, c) && ! m_bd.is_forbidden(*i, c))
-            {
-                point_value[*i] = 5;
-                break;
-            }
-        }
         if (m_bd.is_forbidden(*i, to_play)
             && m_bd.get_point_state(*i) != to_play)
             attach_point_value[*i] = -5;
