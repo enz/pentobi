@@ -14,6 +14,8 @@
 #include "libpentobi_gui/BoardPainter.h"
 
 using namespace std;
+using boost::is_any_of;
+using boost::split;
 using boost::trim_copy;
 using boost::algorithm::to_lower_copy;
 using boost::program_options::command_line_parser;
@@ -41,6 +43,60 @@ using libpentobi_base::PointState;
 //-----------------------------------------------------------------------------
 
 namespace {
+
+/** Helper function for getFinalPosition() */
+void handleSetup(const char* id, Color c, const Node& node,
+                 const Geometry& geometry, Grid<PointState>& pointState)
+{
+    vector<string> values = node.get_multi_property(id);
+    BOOST_FOREACH(const string& s, values)
+    {
+        if (trim_copy(s).empty())
+            continue;
+        vector<string> v;
+        split(v, s, is_any_of(","));
+        BOOST_FOREACH(const string& p_str, v)
+        {
+            try
+            {
+                Point p = Point::from_string(p_str);
+                if (geometry.is_onboard(p))
+                    pointState[p] = c;
+            }
+            catch (const Point::InvalidString&)
+            {
+                continue;
+            }
+        }
+    }
+}
+
+/** Helper function for getFinalPosition() */
+void handleSetupEmpty(const Node& node, const Geometry& geometry,
+                      Grid<PointState>& pointState)
+{
+    vector<string> values = node.get_multi_property("AE");
+    BOOST_FOREACH(const string& s, values)
+    {
+        if (trim_copy(s).empty())
+            continue;
+        vector<string> v;
+        split(v, s, is_any_of(","));
+        BOOST_FOREACH(const string& p_str, v)
+        {
+            try
+            {
+                Point p = Point::from_string(p_str);
+                if (geometry.is_onboard(p))
+                    pointState[p] = PointState::empty();
+            }
+            catch (const Point::InvalidString&)
+            {
+                continue;
+            }
+        }
+    }
+}
 
 /** Get the board state of the final position of the main variation.
     Avoids constructing an instance of a Tree or Game, which would do a costly
@@ -87,6 +143,16 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     const Node* node = &root;
     while (node != 0)
     {
+        if (libpentobi_base::Tree::has_setup_properties(*node))
+        {
+            handleSetup("AB", Color(0), *node, *geometry, pointState);
+            handleSetup("AW", Color(1), *node, *geometry, pointState);
+            handleSetup("A1", Color(0), *node, *geometry, pointState);
+            handleSetup("A2", Color(1), *node, *geometry, pointState);
+            handleSetup("A3", Color(2), *node, *geometry, pointState);
+            handleSetup("A4", Color(3), *node, *geometry, pointState);
+            handleSetupEmpty(*node, *geometry, pointState);
+        }
         Color c;
         MovePoints points;
         if (libpentobi_base::Tree::get_move(*node, gameVariant, c, points))

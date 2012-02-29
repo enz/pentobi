@@ -32,6 +32,8 @@ struct ColorMove
     bool operator!=(const ColorMove& mv) const;
 
     bool is_null() const;
+
+    bool is_pass() const;
 };
 
 inline ColorMove::ColorMove()
@@ -58,6 +60,11 @@ inline bool ColorMove::operator!=(const ColorMove& mv) const
 inline bool ColorMove::is_null() const
 {
     return move.is_null();
+}
+
+inline bool ColorMove::is_pass() const
+{
+    return move.is_pass();
 }
 
 inline ColorMove ColorMove::null()

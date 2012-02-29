@@ -28,6 +28,18 @@ void dump(const Board& bd, ostream& out)
     }
 }
 
+void get_current_position_as_setup(const Board& bd, Setup& setup)
+{
+    setup = bd.get_setup();
+    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
+    {
+        ColorMove mv = bd.get_move(i);
+        if (! mv.is_pass())
+            setup.placements[mv.color].push_back(mv.move);
+    }
+    setup.to_play = bd.get_to_play();
+}
+
 //-----------------------------------------------------------------------------
 
 } // namespace boardutil

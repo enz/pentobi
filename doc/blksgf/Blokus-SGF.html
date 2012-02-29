@@ -172,15 +172,27 @@
 
     <h2>Setup properties</h2>
     <p>
-      Setup properties are currently not used but they might be used in the
-      future.
-      Therefore, a program that reads Blokus SGF files should already check
-      nodes for the setup properties <tt>AB</tt>, <tt>AW</tt>, <tt>A1</tt>,
-      <tt>A2</tt>, <tt>A3</tt>, <tt>A4</tt>, <tt>AE</tt> and display an error
-      message if they are found.
-      Setup properties cannot be silently ignored because the program would
-      misinterpret the board state if it reads a file written by a future
-      version of Pentobi that uses setup properties.
+      The setup properties <tt>AB</tt>, <tt>AW</tt>, <tt>A1</tt>, <tt>A2</tt>,
+      <tt>A3</tt>, <tt>A4</tt> can be used to place pieces in one step on the
+      board.
+      The setup property <tt>AE</tt> can be used to remove a piece from the
+      board.
+      All these properties can have multiple values, each value represents
+      a piece by its coordinates as in the move properties.
+      The <tt>PL</tt> can be used to set the color to play in a setup position.
+    </p>
+    <p>
+      Example:<br />
+      <tt>
+	AB[e8,e9,f9,d10,e10][g6,f7,g7,h7,g8]<br />
+	AW[i4,h5,i5,j5,i6][j7,j8,j9,k9,j10]<br />
+	PL[B]
+      </tt>
+    </p>
+    <p style="font-size:small">
+      <b>Note</b><br/>
+      Older versions of Pentobi (before version 2.0) did not support setup
+      properties, you need a newer version of Pentobi to read such files.
     </p>
   </body>
 </html>

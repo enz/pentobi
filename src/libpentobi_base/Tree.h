@@ -60,6 +60,8 @@ public:
 
     bool has_move(const Node& node) const;
 
+    static bool has_setup_properties(const Node& node);
+
     const Node* find_child_with_move(const Node& node, ColorMove mv) const;
 
     void set_result(const Node& node, int score);

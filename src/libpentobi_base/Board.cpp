@@ -132,15 +132,17 @@ void Board::copy_from(const Board& bd)
         init_game_variant(bd.m_game_variant);
     m_point_state = bd.m_point_state;
     m_played_move = bd.m_played_move;
+    m_setup.to_play = bd.m_setup.to_play;
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_forbidden[*i] = bd.m_forbidden[*i];
         m_is_attach_point[*i] = bd.m_is_attach_point[*i];
         m_attach_points[*i] = bd.m_attach_points[*i];
         m_pieces_left[*i] = bd.m_pieces_left[*i];
+        m_setup.placements[*i] = bd.m_setup.placements[*i];
     }
-    m_to_play = bd.m_to_play;
     m_moves = bd.m_moves;
+    m_to_play = bd.m_to_play;
 }
 
 void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
@@ -367,7 +369,7 @@ bool Board::has_moves(Color c, Point p) const
     return false;
 }
 
-void Board::init(GameVariant game_variant)
+void Board::init(GameVariant game_variant, const Setup* setup)
 {
     if (game_variant != m_game_variant)
         init_game_variant(game_variant);
@@ -385,7 +387,18 @@ void Board::init(GameVariant game_variant)
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)
             m_pieces_left[*i].push_back(j);
     }
-    m_to_play = Color(0);
+    if (setup == 0)
+    {
+        m_setup.clear();
+        m_to_play = Color(0);
+    }
+    else
+    {
+        for (ColorIterator i(m_nu_colors); i; ++i)
+            BOOST_FOREACH(Move mv, setup->placements[*i])
+                place(*i, mv);
+        m_to_play = setup->to_play;
+    }
     m_moves.clear();
 }
 

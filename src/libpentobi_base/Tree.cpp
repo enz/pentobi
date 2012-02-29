@@ -22,6 +22,7 @@ using boost::trim_copy;
 using boost::algorithm::to_lower_copy;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidPropertyValue;
+using libboardgame_sgf::PropertyIterator;
 using libboardgame_sgf::util::get_go_point_property_value;
 using libboardgame_sgf::util::parse_go_move_property_value;
 using libboardgame_sgf::util::parse_go_point_property_value;
@@ -212,6 +213,18 @@ bool Tree::has_main_variation_moves() const
             return true;
         node = node->get_first_child_or_null();
     }
+    return false;
+}
+
+bool Tree::has_setup_properties(const Node& node)
+{
+    for (PropertyIterator i(node); i; ++i)
+        // Don't check for "PL", we ignore this property if the node has no
+        // other setup property, it doesn't make much sense and might only
+        // confuse the user if suddenly the color to play changes in the GUI
+        if (i->id == "AB" || i->id == "AW" || i->id == "A1" || i->id == "A2"
+            || i->id == "A3" || i->id == "A4" || i->id == "AE")
+            return true;
     return false;
 }
 

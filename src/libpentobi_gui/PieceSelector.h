@@ -64,7 +64,7 @@ private:
     const Transform* m_transform[maxColumns][maxRows];
 
     /** Pieces left at last time the widget was painted. */
-    ArrayList<unsigned int,Board::max_pieces> m_last_pieces_left;
+    Board::PiecesLeftList m_last_pieces_left;
 
     qreal m_fieldWidth;
 

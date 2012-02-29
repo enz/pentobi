@@ -1726,8 +1726,7 @@ void MainWindow::makeMainVariation()
 void MainWindow::nextPiece()
 {
     const Board& bd = getBoard();
-    const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
-        bd.get_pieces_left(m_toPlay);
+    const Board::PiecesLeftList& piecesLeft = bd.get_pieces_left(m_toPlay);
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
@@ -1945,8 +1944,7 @@ void MainWindow::play(Color c, Move mv)
 void MainWindow::previousPiece()
 {
     const Board& bd = getBoard();
-    const ArrayList<unsigned int, Board::max_pieces>& piecesLeft =
-        bd.get_pieces_left(m_toPlay);
+    const Board::PiecesLeftList& piecesLeft = bd.get_pieces_left(m_toPlay);
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;

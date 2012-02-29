@@ -14,6 +14,8 @@
 #include "MoveMarker.h"
 #include "PointList.h"
 #include "PointState.h"
+#include "Setup.h"
+#include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
 
@@ -97,6 +99,8 @@ public:
     /** Maximum number of pieces in any game variant. */
     static const unsigned int max_pieces = BoardConst::max_pieces;
 
+    typedef ArrayList<unsigned int, max_pieces> PiecesLeftList;
+
     /** Maximum number of moves for a player in a game in any game variant.
         Assumes that a player is only allowed to pass if she has no legal
         moves and allows an extra pass move per player at the end of a game to
@@ -137,7 +141,7 @@ public:
 
     Color get_effective_to_play() const;
 
-    const ArrayList<unsigned int, max_pieces>& get_pieces_left(Color c) const;
+    const PiecesLeftList& get_pieces_left(Color c) const;
 
     bool is_piece_left(Color c, const Piece& piece) const;
 
@@ -159,9 +163,15 @@ public:
         Does not check if the point is forbidden.. */
     const PointList&  get_attach_points(Color c) const;
 
-    void init();
+    /** Initialize the current board for a given game variant.
+        @param game_variant The game variant
+        @param setup An optional setup position to initialize the board
+        with. */
+    void init(GameVariant game_variant, const Setup* setup = 0);
 
-    void init(GameVariant game_variant);
+    /** Clear the current board without changing the current game variant.
+        See init(GameVariant,const Setup*) */
+    void init(const Setup* setup = 0);
 
     /** Copy the board state and move history from another board.
         This is like an assignment operator but because boards are rarely copied
@@ -193,6 +203,12 @@ public:
     void set_to_play(Color c);
 
     void write(ostream& out, bool mark_last_move = true) const;
+
+    /** Get the setup of the board before any moves were played.
+        If the board was initialized without setup, the return value contains
+        a setup with empty placement lists and Color(0) as the color to
+        play. */
+    const Setup& get_setup() const;
 
     unsigned int get_nu_moves() const;
 
@@ -311,10 +327,12 @@ private:
 
     Grid<Move> m_played_move;
 
-    ColorMap<ArrayList<unsigned int, max_pieces>> m_pieces_left;
+    ColorMap<PiecesLeftList> m_pieces_left;
 
     /** See get_second_color() */
     ColorMap<Color> m_second_color;
+
+    Setup m_setup;
 
     ArrayList<ColorMove, max_game_moves> m_moves;
 
@@ -339,6 +357,8 @@ private:
     bool has_moves(Color c, Point p) const;
 
     void init_game_variant(GameVariant game_variant);
+
+    void place(Color c, Move mv);
 
     void write_pieces_left(ostream& out, Color c, unsigned int begin,
                            unsigned int end) const;
@@ -483,8 +503,7 @@ inline bool Board::get_piece_index_by_name(const string& name,
     return m_board_const->get_piece_index_by_name(name, index);
 }
 
-inline const ArrayList<unsigned int, Board::max_pieces>&
-                                          Board::get_pieces_left(Color c) const
+inline const Board::PiecesLeftList& Board::get_pieces_left(Color c) const
 {
     return m_pieces_left[c];
 }
@@ -503,6 +522,11 @@ inline PointState Board::get_point_state(Point p) const
 inline Color Board::get_second_color(Color c) const
 {
     return m_second_color[c];
+}
+
+inline const Setup& Board::get_setup() const
+{
+    return m_setup;
 }
 
 inline Color Board::get_starting_point_color(Point p) const
@@ -526,9 +550,9 @@ inline const PieceTransforms& Board::get_transforms() const
     return m_board_const->get_transforms();
 }
 
-inline void Board::init()
+inline void Board::init(const Setup* setup)
 {
-    init(m_game_variant);
+    init(m_game_variant, setup);
 }
 
 inline bool Board::is_attach_point(Point p, Color c) const
@@ -628,26 +652,14 @@ inline bool Board::is_same_player(Color c1, Color c2) const
     return (c1 == c2 || c1 == m_second_color[c2]);
 }
 
-inline void Board::play(ColorMove move)
-{
-    play(move.color, move.move);
-}
-
-inline void Board::play(Color c, Move mv)
-{
-    if (! mv.is_pass())
-        play_nonpass(c, mv);
-    else
-        play_pass(c);
-}
-
-inline void Board::play_nonpass(Color c, Move mv)
+inline void Board::place(Color c, Move mv)
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
     LIBBOARDGAME_ASSERT(! mv.is_pass());
     const MoveInfo& info = m_board_const->get_move_info(mv);
-    LIBBOARDGAME_ASSERT(m_pieces_left[c].contains(info.piece));
-    m_pieces_left[c].remove(info.piece);
+    bool was_removed = m_pieces_left[c].remove(info.piece);
+    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(was_removed);
+    LIBBOARDGAME_ASSERT(was_removed);
     auto i = info.points.begin();
     auto end = info.points.end();
     LIBBOARDGAME_ASSERT(i != end);
@@ -682,6 +694,24 @@ inline void Board::play_nonpass(Color c, Move mv)
         ++i;
     }
     while (i != end);
+}
+
+inline void Board::play(ColorMove move)
+{
+    play(move.color, move.move);
+}
+
+inline void Board::play(Color c, Move mv)
+{
+    if (! mv.is_pass())
+        play_nonpass(c, mv);
+    else
+        play_pass(c);
+}
+
+inline void Board::play_nonpass(Color c, Move mv)
+{
+    place(c, mv);
     m_moves.push_back(ColorMove(c, mv));
     m_to_play = c.get_next(m_nu_colors);
 }
