@@ -8,10 +8,7 @@
 
 int main(int argc, char* argv[])
 {
-    if (libboardgame_test::run_all_tests())
-        return 0;
-    else
-        return 1;
+    return libboardgame_test::test_main(argc, argv);
 }
 
 //----------------------------------------------------------------------------

@@ -54,7 +54,7 @@ void add_test(const string& name, TestFunction function)
 bool run_all_tests()
 {
     unsigned int nu_fail = 0;
-    log() << "Running " << get_all_tests().size() << " tests ...\n";
+    log() << "Running " << get_all_tests().size() << " tests...\n";
     auto all_tests = get_all_tests();
     for (auto i = all_tests.begin(); i != all_tests.end(); ++i)
     {
@@ -78,6 +78,49 @@ bool run_all_tests()
         log() << nu_fail << " tests failed.\n"
               << "FAIL\n";
         return false;
+    }
+}
+
+bool run_test(const string& name)
+{
+    auto all_tests = get_all_tests();
+    for (auto i = all_tests.begin(); i != all_tests.end(); ++i)
+        if (i->first == name)
+        {
+            log() << "Running " << name << "...\n";
+            try
+            {
+                (i->second)();
+                log() << "OK\n";
+                return true;
+            }
+            catch (const TestFail& e)
+            {
+                log() << e.what() << '\n'
+                      << "FAIL\n";
+                return false;
+            }
+        }
+    log() << "Test not found: " << name;
+    return false;
+}
+
+int test_main(int argc, char* argv[])
+{
+    if (argc < 2)
+    {
+        if (libboardgame_test::run_all_tests())
+            return 0;
+        else
+            return 1;
+    }
+    else
+    {
+        int result = 0;
+        for (int i = 1; i < argc; ++i)
+            if (! libboardgame_test::run_test(argv[i]))
+                result = 1;
+        return result;
     }
 }
 
