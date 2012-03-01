@@ -210,6 +210,8 @@ public:
         play. */
     const Setup& get_setup() const;
 
+    bool has_setup() const;
+
     unsigned int get_nu_moves() const;
 
     /** Get the number of pieces on board.
@@ -560,6 +562,14 @@ inline Color Board::get_to_play() const
 inline const PieceTransforms& Board::get_transforms() const
 {
     return m_board_const->get_transforms();
+}
+
+inline bool Board::has_setup() const
+{
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        if (! m_setup.placements[*i].empty())
+            return true;
+    return false;
 }
 
 inline void Board::init(const Setup* setup)

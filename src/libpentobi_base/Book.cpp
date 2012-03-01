@@ -33,6 +33,9 @@ Book::Book(GameVariant game_variant)
 
 Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
 {
+    if (bd.has_setup())
+        // Book dcannot handle setup positions
+        return Move::null();
     Move mv = genmove(bd, c, delta, max_delta,
                       PointTransfIdent<Point>(), PointTransfIdent<Point>());
     if (! mv.is_null())
@@ -48,6 +51,7 @@ Move Book::genmove(const Board& bd, Color c, double delta, double max_delta,
                    const PointTransform<Point>& transform,
                    const PointTransform<Point>& inv_transform)
 {
+    LIBBOARDGAME_ASSERT(! bd.has_setup());
     const libboardgame_sgf::Node* node = &m_tree.get_root();
     for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
     {
