@@ -694,6 +694,10 @@ void MainWindow::createActions()
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
 
+    m_actionKeepOnlyPosition = new QAction(tr("&Keep Only Position"), this);
+    connect(m_actionKeepOnlyPosition, SIGNAL(triggered()),
+            this, SLOT(keepOnlyPosition()));
+
     m_actionMakeMainVariation = new QAction(tr("M&ake Main Variation"), this);
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
             this, SLOT(makeMainVariation()));
@@ -1067,6 +1071,7 @@ void MainWindow::createMenu()
     m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionTruncate);
+    menuEdit->addAction(m_actionKeepOnlyPosition);
     menuEdit->addAction(m_actionSelectNextColor);
 
     QMenu* menuView = menuBar()->addMenu(tr("&View"));
@@ -1717,6 +1722,13 @@ void MainWindow::interrupt()
     set_abort();
 }
 
+void MainWindow::keepOnlyPosition()
+{
+    cancelGenMove();
+    m_game->keep_only_position();
+    updateWindow(true);
+}
+
 void MainWindow::makeMainVariation()
 {
     m_game->make_main_variation();
@@ -1846,7 +1858,8 @@ void MainWindow::open(const QString& file, bool isTemporary)
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
         m_game->init(tree);
-        m_game->goto_node(get_last_node(m_game->get_root()));
+        if (! Tree::has_setup_properties(m_game->get_root()))
+            m_game->goto_node(get_last_node(m_game->get_root()));
         initPieceSelectors();
     }
     catch (const Exception& e)
@@ -2846,6 +2859,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionEnd->setEnabled(hasChildren);
     m_actionFindMove->setEnabled(! isGameOver);
     m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
+    m_actionKeepOnlyPosition->setEnabled(hasParent || hasChildren);
     m_actionMakeMainVariation->setEnabled(! isMain);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);

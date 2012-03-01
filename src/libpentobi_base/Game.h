@@ -103,6 +103,10 @@ public:
         @pre get_current().has_parent() */
     void truncate();
 
+    /** Replace the game tree by a new one that has the current position
+        as a setup in its root node. */
+    void keep_only_position();
+
     void make_main_variation();
 
     /** Make the current node the first child of its parent. */

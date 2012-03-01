@@ -2,11 +2,14 @@ Current development version
 ===========================
 
 * New menu item Computer/Analyze Game
-* Added a toolbar button for selecting the computer colors
-* Improved playing strength of the computer player
 * Support for setup properties in blksgf files (note that files
   with setup properties cannot be read by older versions of
   Pentobi)
+* New menu item Edit/Keep Only Position to create files
+  that start with a given fixed position using the new
+  setup properties
+* Added a toolbar button for selecting the computer colors
+* Improved playing strength of the computer player
 * User manual is no longer compiled into the resources of the
   executable but installed in the installation data directory
 * Open a console for stderr output on Windows if Pentobi is

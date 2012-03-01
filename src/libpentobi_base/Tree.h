@@ -9,6 +9,7 @@
 #include "ColorMove.h"
 #include "BoardConst.h"
 #include "GameVariant.h"
+#include "Setup.h"
 #include "libboardgame_sgf/Tree.h"
 #include "libboardgame_sgf/InvalidPropertyValue.h"
 
@@ -34,6 +35,8 @@ public:
     void init_game_variant(GameVariant game_variant);
 
     void init(unique_ptr<Node>& root);
+
+    void init(GameVariant game_variant, const Setup& setup);
 
     void set_move(const Node& node, ColorMove mv);
 
@@ -77,6 +80,9 @@ public:
     const BoardConst& get_board_const() const;
 
     bool has_main_variation_moves() const;
+
+    void set_setup_property(const Node& node, const char* id,
+                            const Setup::PlacementList& placements);
 
 private:
     GameVariant m_game_variant;

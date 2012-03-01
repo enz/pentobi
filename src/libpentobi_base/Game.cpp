@@ -8,6 +8,7 @@
 
 #include "Game.h"
 
+#include "BoardUtil.h"
 #include "libboardgame_sgf/InvalidPropertyValue.h"
 #include "libboardgame_sgf/Util.h"
 
@@ -16,6 +17,7 @@ namespace libpentobi_base {
 using namespace std;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::util::is_main_variation;
+using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------
 
@@ -55,6 +57,14 @@ void Game::init(unique_ptr<Node>& root)
     // Set m_current to root such that it has a defined value even if
     // goto_node() throws because of invalid properties in the root node
     m_current = &m_tree.get_root();
+    goto_node(m_tree.get_root());
+}
+
+void Game::keep_only_position()
+{
+    Setup setup;
+    get_current_position_as_setup(*m_bd, setup);
+    m_tree.init(m_tree.get_game_variant(), setup);
     goto_node(m_tree.get_root());
 }
 

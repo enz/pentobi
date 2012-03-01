@@ -21,9 +21,11 @@ using libboardgame_util::ArrayList;
     (in no particular order) on the board and a color to play next. */
 struct Setup
 {
+    typedef ArrayList<Move,BoardConst::max_pieces> PlacementList;
+
     Color to_play;
 
-    ColorMap<ArrayList<Move,BoardConst::max_pieces>> placements;
+    ColorMap<PlacementList> placements;
 
     Setup();
 

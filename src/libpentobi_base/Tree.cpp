@@ -258,6 +258,33 @@ void Tree::init_game_variant(GameVariant game_variant)
     clear_modified();
 }
 
+void Tree::init(GameVariant game_variant, const Setup& setup)
+{
+    init_game_variant(game_variant);
+    const Node& root = get_root();
+    switch (game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+        set_setup_property(root, "A1", setup.placements[Color(0)]);
+        set_setup_property(root, "A2", setup.placements[Color(1)]);
+        set_setup_property(root, "A3", setup.placements[Color(2)]);
+        set_setup_property(root, "A4", setup.placements[Color(3)]);
+        break;
+    case game_variant_trigon_3:
+        set_setup_property(root, "A1", setup.placements[Color(0)]);
+        set_setup_property(root, "A2", setup.placements[Color(1)]);
+        set_setup_property(root, "A3", setup.placements[Color(2)]);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        set_setup_property(root, "AB", setup.placements[Color(0)]);
+        set_setup_property(root, "AW", setup.placements[Color(1)]);
+    }
+}
+
 void Tree::init(unique_ptr<Node>& root)
 {
     GameVariant game_variant;
@@ -375,6 +402,17 @@ void Tree::set_result(const Node& node, int score)
         set_property(node, "RE", format("W+%i") % -score);
     else
         set_property(node, "RE", "0");
+}
+
+void Tree::set_setup_property(const Node& node, const char* id,
+                              const Setup::PlacementList& placements)
+{
+    if (placements.empty())
+        return;
+    vector<string> values;
+    BOOST_FOREACH(Move mv, placements)
+        values.push_back(m_board_const->to_string(mv, false));
+    set_property(node, id, values);
 }
 
 //-----------------------------------------------------------------------------

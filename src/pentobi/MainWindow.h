@@ -93,6 +93,8 @@ public slots:
 
     void interrupt();
 
+    void keepOnlyPosition();
+
     void makeMainVariation();
 
     void newGame();
@@ -314,6 +316,8 @@ private:
     QAction* m_actionInterestingMove;
 
     QAction* m_actionInterrupt;
+
+    QAction* m_actionKeepOnlyPosition;
 
     QAction* m_actionLevel[maxLevel];
 
