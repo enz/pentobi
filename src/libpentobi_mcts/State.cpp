@@ -255,10 +255,11 @@ void State::compute_features()
     m_max_heuristic = -numeric_limits<ValueType>::max();
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
     m_has_connect_move = false;
+    unsigned int nu_onboard_pieces = m_bd.get_nu_onboard_pieces();
     bool compute_dist_to_center =
-        ((board_type == board_type_classic && m_bd.get_nu_moves() < 13)
-         || (board_type == board_type_trigon && m_bd.get_nu_moves() < 5)
-         || (board_type == board_type_trigon_3 && m_bd.get_nu_moves() < 5));
+        ((board_type == board_type_classic && nu_onboard_pieces < 13)
+         || (board_type == board_type_trigon && nu_onboard_pieces < 5)
+         || (board_type == board_type_trigon_3 && nu_onboard_pieces < 5));
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = m_bd.get_move_info(moves[i]);
@@ -319,7 +320,7 @@ void State::dump(ostream& out) const
 array<ValueType, 4> State::evaluate_playout()
 {
     if (m_check_symmetric_draw && ! m_is_symmetry_broken
-        && m_bd.get_nu_moves() >= 3)
+        && m_bd.get_nu_onboard_pieces() >= 3)
     {
         // Always evaluate symmetric positions as a draw in the playouts.
         // This will encourage the first player to break the symmetry and
@@ -396,7 +397,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     }
 
     if (m_check_symmetric_draw)
-        if (! m_is_symmetry_broken && m_bd.get_nu_moves() >= 3)
+        if (! m_is_symmetry_broken && m_bd.get_nu_onboard_pieces() >= 3)
         {
             // See also the comment in evaluate_playout()
             if (log_simulations)
@@ -505,7 +506,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             // Prune early moves that don't minimize dist to center
             continue;
         if (m_bd.get_board_type() == board_type_classic
-            && m_bd.get_nu_moves() < 14 && m_has_connect_move
+            && m_bd.get_nu_onboard_pieces() < 14 && m_has_connect_move
             && ! features.connect)
             // Prune moves that don't connect in the middle if connection is
             // possible
@@ -557,7 +558,7 @@ void State::init_move_list_with_local(Color c)
 {
     m_last_move[c] = Move::null();
     m_is_piece_considered[c] =
-        &m_shared_const.is_piece_considered[m_bd.get_nu_moves()];
+        &m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
     m_local_value.init(m_bd);
     m_local_moves.clear();
     m_max_local_value = 1;
@@ -607,7 +608,7 @@ void State::init_move_list_without_local(Color c)
 {
     m_last_move[c] = Move::null();
     m_is_piece_considered[c] =
-        &m_shared_const.is_piece_considered[m_bd.get_nu_moves()];
+        &m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
     ArrayList<Move, Move::range>& moves = m_moves[c];
     moves.clear();
     bool is_first_move =
@@ -911,7 +912,7 @@ void State::update_move_list(Color c)
 
     // Generate moves for pieces that were not considered in the last position
     const array<bool,Board::max_pieces>& is_piece_considered =
-        m_shared_const.is_piece_considered[m_bd.get_nu_moves()];
+        m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
     bool pieces_considered_changed = false;
     BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
     {

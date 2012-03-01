@@ -212,6 +212,11 @@ public:
 
     unsigned int get_nu_moves() const;
 
+    /** Get the number of pieces on board.
+        This is the number of setup pieces, if the board was initialized
+        with a setup position, plus the number of pieces played as moves. */
+    unsigned int get_nu_onboard_pieces() const;
+
     ColorMove get_move(unsigned int n) const;
 
     /** Generate all moves for one player.
@@ -335,6 +340,8 @@ private:
     Setup m_setup;
 
     ArrayList<ColorMove, max_game_moves> m_moves;
+
+    unsigned int m_nu_onboard_pieces;
 
     ColorMap<char> m_color_char;
 
@@ -470,6 +477,11 @@ inline unsigned int Board::get_nu_colors() const
 inline unsigned int Board::get_nu_moves() const
 {
     return m_moves.size();
+}
+
+inline unsigned int Board::get_nu_onboard_pieces() const
+{
+    return m_nu_onboard_pieces;
 }
 
 inline const MovePoints& Board::get_move_points(Move mv) const
@@ -660,6 +672,7 @@ inline void Board::place(Color c, Move mv)
     bool was_removed = m_pieces_left[c].remove(info.piece);
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(was_removed);
     LIBBOARDGAME_ASSERT(was_removed);
+    ++m_nu_onboard_pieces;
     auto i = info.points.begin();
     auto end = info.points.end();
     LIBBOARDGAME_ASSERT(i != end);

@@ -142,6 +142,7 @@ void Board::copy_from(const Board& bd)
         m_setup.placements[*i] = bd.m_setup.placements[*i];
     }
     m_moves = bd.m_moves;
+    m_nu_onboard_pieces = bd.m_nu_onboard_pieces;
     m_to_play = bd.m_to_play;
 }
 
@@ -387,6 +388,7 @@ void Board::init(GameVariant game_variant, const Setup* setup)
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)
             m_pieces_left[*i].push_back(j);
     }
+    m_nu_onboard_pieces = 0;
     if (setup == 0)
     {
         m_setup.clear();
