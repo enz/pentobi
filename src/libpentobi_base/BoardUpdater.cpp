@@ -97,6 +97,17 @@ void init_setup(Board& bd, const Node& node)
         else
             throw Exception("invalid value for PL property");
     }
+    else
+    {
+        // Try to guess who should be to play based on the setup pieces.
+        setup.to_play = Color(0);
+        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+            if (setup.placements[*i].size() < setup.placements[Color(0)].size())
+            {
+                setup.to_play = *i;
+                break;
+            }
+    }
     bd.init(&setup);
 }
 
