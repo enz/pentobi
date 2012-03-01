@@ -1492,8 +1492,6 @@ void MainWindow::genMoveFinished()
     if (mv.is_pass())
     {
         showStatus(tr("The computer has no more moves available."), true);
-        updateWindow(false);
-        checkComputerMove();
         return;
     }
     play(c, mv);
