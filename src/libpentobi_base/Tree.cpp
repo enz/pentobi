@@ -283,6 +283,19 @@ void Tree::init(GameVariant game_variant, const Setup& setup)
         set_setup_property(root, "AB", setup.placements[Color(0)]);
         set_setup_property(root, "AW", setup.placements[Color(1)]);
     }
+    switch (game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+    case game_variant_trigon_3:
+        set_property(root, "PL", setup.to_play.to_int() + 1);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        set_property(root, "PL", setup.to_play == Color(0) ? "B" : "W");
+    }
 }
 
 void Tree::init(unique_ptr<Node>& root)
