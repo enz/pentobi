@@ -396,6 +396,7 @@ void Board::init(GameVariant game_variant, const Setup* setup)
     }
     else
     {
+        m_setup = *setup;
         for (ColorIterator i(m_nu_colors); i; ++i)
             BOOST_FOREACH(Move mv, setup->placements[*i])
                 place(*i, mv);
