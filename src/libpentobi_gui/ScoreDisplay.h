@@ -28,7 +28,13 @@ public:
 protected:
     void paintEvent(QPaintEvent* event);
 
+    void resizeEvent(QResizeEvent* event);
+
 private:
+    qreal m_fontSize;
+
+    QFont m_font;
+
     GameVariant m_gameVariant;
 
     ColorMap<unsigned int> m_points;

@@ -28,6 +28,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
     m_gameVariant = game_variant_classic;
     m_points.fill(0);
     m_bonus.fill(0);
+    m_font.setStyleStrategy(QFont::PreferOutline);
     setMinimumWidth(300);
     setMinimumHeight(15);
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -43,7 +44,7 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
     painter.drawEllipse(x,  y, m_colorDotSize, m_colorDotSize);
     painter.setPen(QApplication::palette().text().color());
     painter.drawText(x + m_colorDotWidth, 0, getTextWidth(text), height(),
-                     Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
+                     Qt::AlignLeft | Qt::AlignVCenter, text);
 }
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
@@ -104,7 +105,7 @@ int ScoreDisplay::getTextWidth(QString text) const
 {
     // Make text width only depend on number of digits to avoid frequent small
     // changes to the layout
-    QFontMetrics metrics(font());
+    QFontMetrics metrics(m_font);
     int maxDigitWidth = 0;
     maxDigitWidth = max(maxDigitWidth, metrics.width('0'));
     maxDigitWidth = max(maxDigitWidth, metrics.width('1'));
@@ -124,13 +125,9 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    QFont font;
-    font.setStyleStrategy(QFont::PreferOutline);
-    qreal fontSize = 0.7 * height();
-    font.setPointSizeF(fontSize);
-    painter.setFont(font);
-    m_colorDotSize = 0.8 * fontSize;
-    m_colorDotSpace = 0.3 * fontSize;
+    painter.setFont(m_font);
+    m_colorDotSize = 0.8 * m_fontSize;
+    m_colorDotSpace = 0.3 * m_fontSize;
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
     if (m_gameVariant == game_variant_duo)
@@ -208,6 +205,12 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
         x+= m_colorDotWidth + textWidthRed + pad;
         drawScore(painter, Color(3), x);
     }
+}
+
+void ScoreDisplay::resizeEvent(QResizeEvent* event)
+{
+    m_fontSize = 0.7 * height();
+    m_font.setPointSizeF(m_fontSize);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)
