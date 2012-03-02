@@ -2467,9 +2467,10 @@ void MainWindow::showComment(bool checked)
     }
 }
 
-void MainWindow::showError(const QString& text, const QString& infoText)
+void MainWindow::showError(const QString& text, const QString& infoText,
+                           const QString& detailText)
 {
-    showMessage(QMessageBox::Critical, text, infoText);
+    showMessage(QMessageBox::Critical, text, infoText, detailText);
 }
 
 void MainWindow::showGameOver()
@@ -2573,20 +2574,20 @@ void MainWindow::showGameOver()
     showInfo(tr("The game is over."), info);
 }
 
-void MainWindow::showInfo(const QString& text, const QString& infoText)
+void MainWindow::showInfo(const QString& text, const QString& infoText,
+                          const QString& detailText)
 {
-    showMessage(QMessageBox::NoIcon, text, infoText);
+    showMessage(QMessageBox::NoIcon, text, infoText, detailText);
 }
 
 void MainWindow::showInvalidFile(QString file, const Exception& e)
 {
     showError(tr("Error in file '%1'").arg(QFileInfo(file).fileName()),
-              tr("The file is not a valid Blokus SGF file."));
-    log() << e.what() << '\n';
+              tr("The file is not a valid Blokus SGF file."), e.what());
 }
 
 void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
-                             const QString& infoText)
+                             const QString& infoText, const QString& detailText)
 {
     // Workaround to avoid very small widths if the main text is short, which
     // causes ugly word wrapping with single-word lines in the informative text.
@@ -2601,6 +2602,7 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
     msgBox.setIcon(icon);
     msgBox.setText(expandedText);
     msgBox.setInformativeText(infoText);
+    msgBox.setDetailedText(detailText);
     msgBox.exec();
 }
 

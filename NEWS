@@ -24,6 +24,7 @@ Current development version (bugfix branch for 1.0)
   files on web servers
 * Smaller icons for piece manipulation buttons
 * Fixed computation of the font bounding box in the score display
+* Show detailed error on loading invalid SGF file
 
 
 Version 1.0 (1 Jan 2012)

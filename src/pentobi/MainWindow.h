@@ -491,16 +491,18 @@ private:
     void setFile(const QString& file);
 
     void showError(const QString& message,
-                   const QString& infoText = QString());
+                   const QString& infoText = QString(),
+                   const QString& detailText = QString());
 
     void showGameOver();
 
-    void showInfo(const QString& message, const QString& infoText = QString());
+    void showInfo(const QString& message, const QString& infoText = QString(),
+                  const QString& detailText = QString());
 
     void showInvalidFile(QString file, const Exception& e);
 
     void showMessage(QMessageBox::Icon icon, const QString& text,
-                     const QString& infoText);
+                     const QString& infoText, const QString& detailText);
 
     void showNoMovesAvailable(Color c);
 
