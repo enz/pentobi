@@ -32,7 +32,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
     setMinimumWidth(300);
-    setMinimumHeight(25);
+    setMinimumHeight(20);
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 }
 
@@ -221,9 +221,9 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
 
 void ScoreDisplay::resizeEvent(QResizeEvent* event)
 {
-    m_fontSize = 0.5 * height();
-    m_font.setPointSize(m_fontSize);
-    m_fontUnderlined.setPointSize(m_fontSize);
+    m_fontSize = floor(0.7 * height());
+    m_font.setPixelSize(m_fontSize);
+    m_fontUnderlined.setPixelSize(m_fontSize);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)
