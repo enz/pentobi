@@ -31,7 +31,7 @@ protected:
     void resizeEvent(QResizeEvent* event);
 
 private:
-    qreal m_fontSize;
+    int m_fontSize;
 
     QFont m_font;
 

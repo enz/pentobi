@@ -30,7 +30,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
     m_bonus.fill(0);
     m_font.setStyleStrategy(QFont::PreferOutline);
     setMinimumWidth(300);
-    setMinimumHeight(15);
+    setMinimumHeight(20);
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 }
 
@@ -209,8 +209,8 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
 
 void ScoreDisplay::resizeEvent(QResizeEvent* event)
 {
-    m_fontSize = 0.7 * height();
-    m_font.setPointSizeF(m_fontSize);
+    m_fontSize = floor(0.7 * height());
+    m_font.setPixelSize(m_fontSize);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)
