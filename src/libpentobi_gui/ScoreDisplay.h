@@ -31,11 +31,15 @@ protected:
     void resizeEvent(QResizeEvent* event);
 
 private:
-    qreal m_fontSize;
+    int m_fontSize;
 
     QFont m_font;
 
+    QFont m_fontUnderlined;
+
     GameVariant m_gameVariant;
+
+    ColorMap<bool> m_hasMoves;
 
     ColorMap<unsigned int> m_points;
 

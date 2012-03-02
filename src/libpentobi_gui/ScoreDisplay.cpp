@@ -29,36 +29,50 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
     m_points.fill(0);
     m_bonus.fill(0);
     m_font.setStyleStrategy(QFont::PreferOutline);
+    m_fontUnderlined = m_font;
+    m_fontUnderlined.setUnderline(true);
     setMinimumWidth(300);
-    setMinimumHeight(15);
+    setMinimumHeight(25);
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 }
 
 void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 {
     QColor color = Util::getPaintColor(m_gameVariant, c);
-    QString text = getScoreText(c);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
+    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawEllipse(x,  y, m_colorDotSize, m_colorDotSize);
+    QString text = getScoreText(c);
+    if (m_hasMoves[c])
+        painter.setFont(m_font);
+    else
+        painter.setFont(m_fontUnderlined);
     painter.setPen(QApplication::palette().text().color());
+    painter.setRenderHint(QPainter::Antialiasing, false);
     painter.drawText(x + m_colorDotWidth, 0, getTextWidth(text), height(),
-                     Qt::AlignLeft | Qt::AlignVCenter, text);
+                     Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
 }
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
 {
     QColor color = Util::getPaintColor(m_gameVariant, c1);
-    QString text = getScoreText2(c1, c2);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
+    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawEllipse(x, y, m_colorDotSize, m_colorDotSize);
     color = Util::getPaintColor(m_gameVariant, c2);
     painter.setBrush(color);
     painter.drawEllipse(x + m_colorDotSize, y, m_colorDotSize, m_colorDotSize);
+    QString text = getScoreText2(c1, c2);
+    if (m_hasMoves[c1] || m_hasMoves[c2])
+        painter.setFont(m_font);
+    else
+        painter.setFont(m_fontUnderlined);
     painter.setPen(QApplication::palette().text().color());
+    painter.setRenderHint(QPainter::Antialiasing, false);
     painter.drawText(x + m_twoColorDotWidth, 0, getTextWidth(text), height(),
                      Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
 }
@@ -105,7 +119,7 @@ int ScoreDisplay::getTextWidth(QString text) const
 {
     // Make text width only depend on number of digits to avoid frequent small
     // changes to the layout
-    QFontMetrics metrics(m_font);
+    QFontMetrics metrics(m_fontUnderlined);
     int maxDigitWidth = 0;
     maxDigitWidth = max(maxDigitWidth, metrics.width('0'));
     maxDigitWidth = max(maxDigitWidth, metrics.width('1'));
@@ -124,8 +138,6 @@ int ScoreDisplay::getTextWidth(QString text) const
 void ScoreDisplay::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setFont(m_font);
     m_colorDotSize = 0.8 * m_fontSize;
     m_colorDotSpace = 0.3 * m_fontSize;
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
@@ -209,8 +221,9 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
 
 void ScoreDisplay::resizeEvent(QResizeEvent* event)
 {
-    m_fontSize = 0.7 * height();
-    m_font.setPointSizeF(m_fontSize);
+    m_fontSize = 0.5 * height();
+    m_font.setPointSize(m_fontSize);
+    m_fontUnderlined.setPointSize(m_fontSize);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)
@@ -221,11 +234,14 @@ void ScoreDisplay::updateScore(const Board& bd)
     for (unsigned int i = 0; i < bd.get_nu_colors(); ++i)
     {
         Color c(i);
+        bool hasMoves = bd.has_moves(c);
         unsigned int points = bd.get_points(c);
         unsigned int bonus = bd.get_bonus(c);
-        if (m_points[c] != points || m_bonus[c] != bonus)
+        if (hasMoves != m_hasMoves[c] || m_points[c] != points
+            || m_bonus[c] != bonus)
         {
             hasChanged = true;
+            m_hasMoves[c] = hasMoves;
             m_points[c] = points;
             m_bonus[c] = bonus;
         }
