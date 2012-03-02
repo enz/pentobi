@@ -23,6 +23,7 @@ Current development version (bugfix branch for 1.0)
 * Extended the file format documentation by a hint how to put blksgf
   files on web servers
 * Smaller icons for piece manipulation buttons
+* Fixed computation of the font bounding box in the score display
 
 
 Version 1.0 (1 Jan 2012)
