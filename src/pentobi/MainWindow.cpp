@@ -2333,7 +2333,7 @@ void MainWindow::setMoveNumberText()
     const Node* node = &current;
     do
     {
-        if (! tree.get_move(*node).is_null())
+        if (! tree.get_move_ignore_invalid(*node).is_null())
             ++move;
         node = node->get_parent_or_null();
     }
@@ -2342,7 +2342,7 @@ void MainWindow::setMoveNumberText()
     node = current.get_first_child_or_null();
     while (node != 0)
     {
-        if (! tree.get_move(*node).is_null())
+        if (! tree.get_move_ignore_invalid(*node).is_null())
             ++nuMoves;
         node = node->get_first_child_or_null();
     }
@@ -2670,7 +2670,8 @@ void MainWindow::truncate()
 void MainWindow::undo()
 {
     const Node& current = m_game->get_current();
-    if (current.has_children() || ! m_game->get_tree().has_move(current))
+    if (current.has_children()
+        || ! m_game->get_tree().has_move_ignore_invalid(current))
         return;
     truncate();
 }
@@ -2703,7 +2704,7 @@ void MainWindow::updateFlipActions()
 
 void MainWindow::updateMoveAnnotationActions()
 {
-    if (m_game->get_move().is_null())
+    if (m_game->get_move_ignore_invalid().is_null())
     {
         m_menuMoveAnnotation->setEnabled(false);
         return;
@@ -2834,7 +2835,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool isMain = is_main_variation(current);
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
-    bool hasMove = tree.has_move(current);
+    bool hasMove = tree.has_move_ignore_invalid(current);
     m_actionBackToMainVariation->setEnabled(! isMain);
     m_actionBeginning->setEnabled(hasParent);
     m_actionBackward->setEnabled(hasParent);

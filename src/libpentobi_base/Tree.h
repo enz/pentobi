@@ -44,6 +44,10 @@ public:
         value. */
     ColorMove get_move(const Node& node) const;
 
+    /** Like get_move() but returns ColorMove::null() on invalid property
+        value. */
+    ColorMove get_move_ignore_invalid(const Node& node) const;
+
     /** Static version of get_move(const Node&).
         Provided for use cases in which it is too much overhead to use
         a libpentobi_base::Tree because of the costly BoardConst construction
@@ -58,7 +62,11 @@ public:
     static bool get_move(const Node& node, GameVariant game_variant, Color& c,
                          MovePoints& points);
 
-    bool has_move(const Node& node) const;
+    /** Same as ! get_move.is_null() */
+     bool has_move(const Node& node) const;
+
+    /** Same as ! get_move_ignore_invalid.is_null() */
+    bool has_move_ignore_invalid(const Node& node) const;
 
     const Node* find_child_with_move(const Node& node, ColorMove mv) const;
 
@@ -95,6 +103,11 @@ inline GameVariant Tree::get_game_variant() const
 inline bool Tree::has_move(const Node& node) const
 {
     return ! get_move(node).is_null();
+}
+
+inline bool Tree::has_move_ignore_invalid(const Node& node) const
+{
+    return ! get_move_ignore_invalid(node).is_null();
 }
 
 inline void Tree::set_move(const Node& node, ColorMove mv)

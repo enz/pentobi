@@ -8,12 +8,16 @@
 
 #include "GuiBoardUtil.h"
 
+#include "libboardgame_util/Log.h"
+
 namespace gui_board_util {
 
 using libpentobi_base::ColorMove;
 using libpentobi_base::Tree;
 using libboardgame_sgf::Node;
 using libboardgame_sgf::ChildIterator;
+using libboardgame_util::log;
+using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
@@ -98,7 +102,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
         const Node* node = &game.get_current();
         do
         {
-            ColorMove mv = tree.get_move(*node);
+            ColorMove mv = tree.get_move_ignore_invalid(*node);
             if (! mv.is_null() && ! mv.move.is_pass())
                 ++moveNumber;
             node = node->get_parent_or_null();
@@ -107,7 +111,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
         node = &game.get_current();
         do
         {
-            ColorMove mv = tree.get_move(*node);
+            ColorMove mv = tree.get_move_ignore_invalid(*node);
             if (! mv.is_null())
             {
                 if (markLastMove && markAllLastBySameColor

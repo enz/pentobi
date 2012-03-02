@@ -154,6 +154,18 @@ ColorMove Tree::get_move(const Node& node) const
     return ColorMove(c, mv);
 }
 
+ColorMove Tree::get_move_ignore_invalid(const Node& node) const
+{
+    try
+    {
+        return get_move(node);
+    }
+    catch (const Exception&)
+    {
+        return ColorMove::null();
+    }
+}
+
 const Node* Tree::get_node_before_move_number(unsigned int move_number) const
 {
     const Node* node = &get_root();
