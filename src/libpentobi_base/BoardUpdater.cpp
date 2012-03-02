@@ -19,10 +19,10 @@ using libboardgame_sgf::util::get_path_from_root;
 
 namespace {
 
-void check_has_not_property(const Node& node, const string& id)
+void check_setup_property(const Node& node, const string& id)
 {
     if (node.has_property(id))
-        throw Exception(format("Cannot handle property '%s'") % id);
+        throw Exception("Setup properties not yet supported");
 }
 
 } // namespace
@@ -40,13 +40,13 @@ void BoardUpdater::update(const Node& node)
         // at the moment, but we don't want to silently ignore them should
         // they be used in the future because then we would misinterpret the
         // board state.
-        check_has_not_property(*i, "AB");
-        check_has_not_property(*i, "AW");
-        check_has_not_property(*i, "A1");
-        check_has_not_property(*i, "A2");
-        check_has_not_property(*i, "A3");
-        check_has_not_property(*i, "A4");
-        check_has_not_property(*i, "AE");
+        check_setup_property(*i, "AB");
+        check_setup_property(*i, "AW");
+        check_setup_property(*i, "A1");
+        check_setup_property(*i, "A2");
+        check_setup_property(*i, "A3");
+        check_setup_property(*i, "A4");
+        check_setup_property(*i, "AE");
         ColorMove mv = m_tree.get_move(*i);
         if (! mv.is_null())
         {
