@@ -510,6 +510,8 @@ bool Search<S, M, P>::check_abort_expensive() const
         // Simulations per second might be inaccurate for very small times
         return false;
     double simulations_per_sec = double(m_nu_simulations) / time;
+    double remaining_time;
+    ValueType remaining_simulations;
     if (m_max_count == 0)
     {
         if (time > m_max_time)
@@ -517,30 +519,20 @@ bool Search<S, M, P>::check_abort_expensive() const
             log("Maximum time reached");
             return true;
         }
-        double remaining_time = m_max_time - time;
-        if (m_callback)
-            m_callback(time, remaining_time);
-        ValueType remaining_simulations =
-            ValueType(remaining_time * simulations_per_sec);
-        if (check_move_cannot_change(count, remaining_simulations))
-        {
-            log("Move cannot change anymore");
-            return true;
-        }
+        remaining_time = m_max_time - time;
+        remaining_simulations = ValueType(remaining_time * simulations_per_sec);
     }
     else
     {
-        ValueType remaining_simulations = m_max_count - count;
-        if (m_callback)
-        {
-            double remaining_time = remaining_simulations / simulations_per_sec;
-            m_callback(time, remaining_time);
-        }
-        if (check_move_cannot_change(count, remaining_simulations))
-        {
-            log("Move cannot change anymore");
-            return true;
-        }
+        remaining_simulations = m_max_count - count;
+        remaining_time = remaining_simulations / simulations_per_sec;
+    }
+    if (m_callback)
+        m_callback(time, remaining_time);
+    if (check_move_cannot_change(count, remaining_simulations))
+    {
+        log("Move cannot change anymore");
+        return true;
     }
     return false;
 }
