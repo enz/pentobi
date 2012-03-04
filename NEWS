@@ -1,6 +1,8 @@
 Current development version
 ===========================
 
+* The user can now disable popup messages if a color has no more
+  moves with Edit/Settings (closes feature request #3431031)
 * Score points are now underlined if they are final (if the color
   has no more moves)
 * New menu item Computer/Analyze Game

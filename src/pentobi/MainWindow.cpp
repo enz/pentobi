@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
+#include "SettingsDialog.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
@@ -947,6 +948,10 @@ void MainWindow::createActions()
     connect(m_actionSelectPieceZ, SIGNAL(triggered()),
             this, SLOT(selectPieceZ()));
 
+    m_actionSettings = new QAction(tr("S&ettings"), this);
+    connect(m_actionSettings, SIGNAL(triggered()),
+            this, SLOT(settings()));
+
     m_actionShowComment = new QAction(tr("&Comment"), this);
     m_actionShowComment->setCheckable(true);
     m_actionShowComment->setShortcut(QString("Ctrl+T"));
@@ -1073,6 +1078,8 @@ void MainWindow::createMenu()
     menuEdit->addAction(m_actionTruncate);
     menuEdit->addAction(m_actionKeepOnlyPosition);
     menuEdit->addAction(m_actionSelectNextColor);
+    menuEdit->addSeparator();
+    menuEdit->addAction(m_actionSettings);
 
     QMenu* menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
@@ -2357,6 +2364,12 @@ void MainWindow::setLevel(bool checked)
     setLevel(qobject_cast<QAction*>(sender())->data().toInt());
 }
 
+void MainWindow::settings()
+{
+    SettingsDialog dialog(this);
+    dialog.exec();
+}
+
 void MainWindow::setMoveNumbersAll(bool checked)
 {
     if (checked)
@@ -2623,15 +2636,22 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
 void MainWindow::showNoMovesAvailable(Color c)
 {
     GameVariant variant = m_game->get_game_variant();
+    QString text;
     if (c == Color(0))
-        showInfo(tr("Blue has no more moves available."));
+        text = tr("Blue has no more moves available.");
     else if ((variant == game_variant_duo && c == Color(1))
              || (variant != game_variant_duo && c == Color(3)))
-        showInfo(tr("Green has no more moves available."));
+        text = tr("Green has no more moves available.");
     else if (c == Color(1))
-        showInfo(tr("Yellow has no more moves available."));
+        text = tr("Yellow has no more moves available.");
     else
-        showInfo(tr("Red has no more moves available."));
+        text = tr("Red has no more moves available.");
+    QSettings settings;
+    bool showMessage = settings.value("show_no_moves_message", true).toBool();
+    if (showMessage)
+        showInfo(text);
+    else
+        showStatus(text);
 }
 
 QMessageBox::StandardButton MainWindow::showQuestion(const QString& text,

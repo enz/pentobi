@@ -177,6 +177,8 @@ public slots:
 
     void setLevel(int level);
 
+    void settings();
+
     void truncate();
 
     void undo();
@@ -418,6 +420,8 @@ private:
     QAction* m_actionSelectPieceY;
 
     QAction* m_actionSelectPieceZ;
+
+    QAction* m_actionSettings;
 
     QAction* m_actionTruncate;
 
