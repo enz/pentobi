@@ -2342,7 +2342,7 @@ void MainWindow::setFile(const QString& file)
             files.removeLast();
         settings.setValue("recent_files", files);
         settings.setValue("last_dir", info.dir().path());
-        settings.sync();
+        settings.sync(); // updateRecentFiles() needs the new settings 
         updateRecentFiles();
     }
 }
