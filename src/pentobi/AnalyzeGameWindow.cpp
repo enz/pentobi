@@ -72,7 +72,7 @@ void AnalyzeGameWindow::mousePressEvent(QMouseEvent* event)
     emit gotoPosition(m_analyzeGame.get_game_variant(), moves);
 }
 
-void AnalyzeGameWindow::paintEvent(QPaintEvent* event)
+void AnalyzeGameWindow::paintEvent(QPaintEvent*)
 {
     if (m_maxMoves == 0)
         return;
@@ -135,7 +135,7 @@ void AnalyzeGameWindow::progressCallback(unsigned int movesAnalyzed,
     update();
 }
 
-void AnalyzeGameWindow::resizeEvent(QResizeEvent* event)
+void AnalyzeGameWindow::resizeEvent(QResizeEvent*)
 {
     if (m_maxMoves == 0)
         return;

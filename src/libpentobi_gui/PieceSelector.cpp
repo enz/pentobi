@@ -163,7 +163,7 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
     emit pieceSelected(m_color, *piece, m_transform[x][y]);
 }
 
-void PieceSelector::paintEvent(QPaintEvent* event)
+void PieceSelector::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);

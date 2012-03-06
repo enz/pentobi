@@ -1235,7 +1235,7 @@ void MainWindow::end()
     gotoNode(get_last_node(m_game->get_current()));
 }
 
-bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+bool MainWindow::eventFilter(QObject*, QEvent* event)
 {
     // By default, Qt 4.7 shows status tips in the status bar if the mouse
     // goes over a menu. This is undesirable because it deletes the current

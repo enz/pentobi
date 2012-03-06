@@ -42,8 +42,7 @@ namespace {
 
 const bool log_move_creation = false;
 
-vector<Piece> create_pieces_classic(BoardType board_type,
-                                    const Geometry& geometry,
+vector<Piece> create_pieces_classic(const Geometry& geometry,
                                     const PieceTransforms& transforms)
 {
     vector<Piece> pieces;
@@ -227,8 +226,7 @@ vector<Piece> create_pieces_classic(BoardType board_type,
     return pieces;
 }
 
-vector<Piece> create_pieces_trigon(BoardType board_type,
-                                   const Geometry& geometry,
+vector<Piece> create_pieces_trigon(const Geometry& geometry,
                                    const PieceTransforms& transforms)
 {
     vector<Piece> pieces;
@@ -469,26 +467,26 @@ BoardConst::BoardConst(BoardType board_type)
     if (board_type == board_type_trigon)
     {
         m_transforms.reset(new PieceTransformsTrigon());
-        m_pieces = create_pieces_trigon(board_type, m_geometry, *m_transforms);
+        m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_trigon);
     }
     else if (board_type == board_type_trigon_3)
     {
         m_transforms.reset(new PieceTransformsTrigon());
-        m_pieces = create_pieces_trigon(board_type, m_geometry, *m_transforms);
+        m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_trigon_3);
     }
     else if (board_type == board_type_classic)
     {
         m_transforms.reset(new PieceTransformsClassic());
-        m_pieces = create_pieces_classic(board_type, m_geometry, *m_transforms);
+        m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_classic);
     }
     else
     {
         LIBBOARDGAME_ASSERT(board_type == board_type_duo);
         m_transforms.reset(new PieceTransformsClassic());
-        m_pieces = create_pieces_classic(board_type, m_geometry, *m_transforms);
+        m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_duo);
     }
     m_nu_pieces = m_pieces.size();

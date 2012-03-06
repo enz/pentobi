@@ -53,7 +53,7 @@ void OrientationDisplay::clearSelectedPiece()
     update();
 }
 
-void OrientationDisplay::paintEvent(QPaintEvent* event)
+void OrientationDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -112,8 +112,7 @@ void OrientationDisplay::paintEvent(QPaintEvent* event)
     unsigned int width;
     unsigned int height;
     CoordPoint offset;
-    normalize_offset(geometry, points.begin(), points.end(), width, height,
-                     offset);
+    normalize_offset(points.begin(), points.end(), width, height, offset);
     bool invertPointType =
         (geometry.get_point_type(offset) != geometry.get_point_type(0, 0));
     painter.save();

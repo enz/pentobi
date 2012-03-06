@@ -135,7 +135,7 @@ int ScoreDisplay::getTextWidth(QString text) const
                 metrics.boundingRect(text).width());
 }
 
-void ScoreDisplay::paintEvent(QPaintEvent* event)
+void ScoreDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     m_colorDotSize = 0.8 * m_fontSize;
@@ -219,7 +219,7 @@ void ScoreDisplay::paintEvent(QPaintEvent* event)
     }
 }
 
-void ScoreDisplay::resizeEvent(QResizeEvent* event)
+void ScoreDisplay::resizeEvent(QResizeEvent*)
 {
     m_fontSize = floor(0.7 * height());
     m_font.setPixelSize(m_fontSize);

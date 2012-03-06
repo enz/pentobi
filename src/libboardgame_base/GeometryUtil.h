@@ -24,10 +24,9 @@ using libboardgame_util::log;
     list was compatible with the point types on the board, the new point type of
     (0,0) will be Geometry::get_point_type(offset).
     @tparam T An iterator over a container containing CoordPoint element. */
-template<typename P, typename T>
-void normalize_offset(const Geometry<P>& geometry, T begin, T end,
-                      unsigned int& width, unsigned int& height,
-                      CoordPoint& offset)
+template<typename T>
+void normalize_offset(T begin, T end, unsigned int& width,
+                      unsigned int& height, CoordPoint& offset)
 {
     int min_x = numeric_limits<int>::max();
     int min_y = numeric_limits<int>::max();
