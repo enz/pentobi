@@ -152,6 +152,10 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
             handleSetup("A3", Color(2), *node, *geometry, pointState);
             handleSetup("A4", Color(3), *node, *geometry, pointState);
             handleSetupEmpty(*node, *geometry, pointState);
+            if (node == &root)
+                // If the file starts with a setup (e.g. a puzzle), we use this
+                // position for the thumbnail.
+                break;
         }
         Color c;
         MovePoints points;
