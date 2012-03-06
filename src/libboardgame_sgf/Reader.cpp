@@ -125,7 +125,7 @@ void Reader::read(istream& in, bool check_single_tree,
             }
         }
         else if (isspace(c))
-            consume_char(c);
+            consume_char(char(c));
         else
             throw ReadError("Extra characters after end of tree.");
     }

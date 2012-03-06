@@ -77,7 +77,7 @@ inline Move::Move()
 inline Move::Move(unsigned int i)
 {
     LIBBOARDGAME_ASSERT(i < range);
-    m_i = i;
+    m_i = static_cast<unsigned short>(i);
 }
 
 inline Move& Move::operator=(const Move& mv)

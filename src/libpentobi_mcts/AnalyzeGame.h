@@ -61,7 +61,7 @@ inline ColorMove AnalyzeGame::get_move(unsigned int i) const
 
 inline unsigned int AnalyzeGame::get_nu_moves() const
 {
-    return m_moves.size();
+    return static_cast<unsigned int>(m_moves.size());
 }
 
 inline double AnalyzeGame::get_value(unsigned int i) const

@@ -347,7 +347,7 @@ template<unsigned int W, unsigned int H, typename I, class S>
 inline Point<W,H,I,S>::Point(unsigned int i)
 {
     LIBBOARDGAME_ASSERT(i < range);
-    m_i = i;
+    m_i = static_cast<I>(i);
 }
 
 template<unsigned int W, unsigned int H, typename I, class S>
@@ -355,7 +355,7 @@ inline Point<W,H,I,S>::Point(unsigned int x, unsigned int y)
 {
     LIBBOARDGAME_ASSERT(is_x_coord(x));
     LIBBOARDGAME_ASSERT(is_y_coord(y));
-    m_i = y * max_width + x + 1;
+    m_i = static_cast<I>(y * max_width + x + 1);
 }
 
 template<unsigned int W, unsigned int H, typename I, class S>
