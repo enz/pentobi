@@ -16,8 +16,8 @@ using boost::posix_time::time_duration;
 //-----------------------------------------------------------------------------
 
 WallTime::WallTime()
+    : m_start(microsec_clock::universal_time())
 {
-    m_start = microsec_clock::universal_time();
 }
 
 double WallTime::operator()()

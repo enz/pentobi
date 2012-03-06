@@ -114,9 +114,9 @@ bool NullTermList<T, M>::Init::include(NullTermList& list, const T& t)
 
 template<typename T, unsigned int M>
 inline NullTermList<T, M>::Iterator::Iterator(const NullTermList& list)
+    : m_t(list.m_a)
 {
     LIBBOARDGAME_ASSERT(list.m_is_initialized);
-    m_t = list.m_a;
 }
 
 template<typename T, unsigned int M>

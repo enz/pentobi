@@ -18,8 +18,9 @@ Timer::Timer()
 }
 
 Timer::Timer(TimeSource& time_source)
+    : m_start(time_source()),
+      m_time_source(&time_source)
 {
-    reset(time_source);
 }
 
 void Timer::reset()
