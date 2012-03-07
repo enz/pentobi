@@ -59,7 +59,7 @@ BookBuilder::BookBuilder(GameVariant game_variant)
     m_tree(game_variant),
     m_bd(game_variant),
     m_updater(m_tree, m_bd),
-    m_player(m_bd, game_variant, ""),
+    m_player(game_variant, ""),
     m_moves(new ArrayList<Move, Move::range>)
 {
     if (game_variant != game_variant_duo
@@ -193,7 +193,7 @@ double BookBuilder::create_heuristic()
     search.set_avoid_symmetric_draw(false);
     m_player.set_level(evaluation_level);
     m_player.set_use_book(false);
-    m_player.genmove(m_bd.get_effective_to_play());
+    m_player.genmove(m_bd, m_bd.get_effective_to_play());
     return search.get_tree().get_root().get_value();
 }
 

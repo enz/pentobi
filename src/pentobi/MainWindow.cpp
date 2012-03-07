@@ -167,7 +167,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
     initGame();
-    m_player.reset(new Player(getBoard(), variant, booksDir.toStdString()));
+    m_player.reset(new Player(variant, booksDir.toStdString()));
     m_player->set_use_book(! noBook);
     m_player->get_search().set_avoid_symmetric_draw(noSymDraw);
     createActions();
@@ -318,7 +318,7 @@ MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId)
     GenMoveResult result;
     result.color = c;
     result.genMoveId = genMoveId;
-    result.move = m_player->genmove(c);
+    result.move = m_player->genmove(getBoard(), c);
     return result;
 }
 

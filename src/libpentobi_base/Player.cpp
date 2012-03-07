@@ -14,11 +14,6 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-Player::Player(const Board& bd)
-    : m_bd(bd)
-{
-}
-
 Player::~Player() throw()
 {
 }

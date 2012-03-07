@@ -161,7 +161,7 @@ void Engine::cmd_point_integers(Response& response)
 void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
 {
     RandomGenerator::set_global_seed_last();
-    Move move = get_player().genmove(get_color_arg(args));
+    Move move = get_player().genmove(get_board(), get_color_arg(args));
     if (move.is_null())
         throw Failure("player failed to generate a move");
     response << get_board().to_string(move, false);
@@ -211,10 +211,10 @@ void Engine::cmd_undo()
 
 void Engine::genmove(Color c, Response& response)
 {
-    Move mv = get_player().genmove(c);
+    const Board& bd = get_board();
+    Move mv = get_player().genmove(bd, c);
     if (mv.is_null())
         throw Failure("player failed to generate a move");
-    const Board& bd = get_board();
     if (! bd.is_legal(c, mv))
         throw Failure(format("player generated illegal move: %1%")
                       % bd.to_string(mv));

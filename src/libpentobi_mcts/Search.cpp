@@ -96,9 +96,9 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
 
 //-----------------------------------------------------------------------------
 
-Search::Search(const Board& bd)
-    : ParentClass(State(bd, m_shared_const)),
-      m_shared_const(bd, m_to_play)
+Search::Search(GameVariant initial_game_variant)
+    : ParentClass(State(initial_game_variant, m_shared_const)),
+      m_shared_const(m_to_play)
 {
     set_rave(true);
     set_unexplored_value(0.5);
@@ -155,10 +155,11 @@ void Search::on_start_search()
                               m_shared_const.is_piece_considered[i]);
 }
 
-bool Search::search(Move& mv, Color to_play, ValueType max_count,
-                    size_t min_simulations, double max_time,
-                    TimeSource& time_source)
+bool Search::search(Move& mv, const Board& bd, Color to_play,
+                    ValueType max_count, size_t min_simulations,
+                    double max_time, TimeSource& time_source)
 {
+    m_shared_const.board = &bd;
     m_to_play = to_play;
     bool result = ParentClass::search(mv, max_count, min_simulations, max_time,
                                       time_source, 0);

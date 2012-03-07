@@ -23,14 +23,15 @@ class Player
 {
 public:
     /** Constructor.
-        @param bd
-        @param game_variant
+        @param initial_game_variant Game variant to initialize the internal
+        board with (may avoid unnecessary BoardConst creation for game variant
+        that is never used)
         @param books_dir Directory containing opening books. */
-    Player(const Board& bd, GameVariant game_variant, const path& books_dir);
+    Player(GameVariant initial_game_variant, const path& books_dir);
 
     ~Player() throw();
 
-    Move genmove(Color c);
+    Move genmove(const Board& bd, Color c);
 
     ValueType get_fixed_simulations() const;
 

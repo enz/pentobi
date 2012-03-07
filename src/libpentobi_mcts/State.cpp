@@ -40,7 +40,6 @@ using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::DiagIterator;
-using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::MoveInfo;
@@ -122,8 +121,8 @@ bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
 
 //-----------------------------------------------------------------------------
 
-SharedConst::SharedConst(const Board& bd, const Color& to_play)
-    : board(bd),
+SharedConst::SharedConst(const Color& to_play)
+    : board(0),
       to_play(to_play),
       detect_symmetry(true),
       avoid_symmetric_draw(false),
@@ -134,9 +133,9 @@ SharedConst::SharedConst(const Board& bd, const Color& to_play)
 
 //-----------------------------------------------------------------------------
 
-State::State(const Board& bd, const SharedConst& shared_const)
+State::State(GameVariant initial_game_variant, const SharedConst& shared_const)
   : m_shared_const(shared_const),
-    m_bd(bd.get_game_variant())
+    m_bd(initial_game_variant)
 {
 }
 
@@ -802,7 +801,7 @@ void State::start_playout()
 
 void State::start_search()
 {
-    const Board& bd = m_shared_const.board;
+    const Board& bd = *m_shared_const.board;
     const Geometry& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
@@ -852,7 +851,7 @@ void State::start_simulation(size_t n)
               << "Simulation " << n << "\n"
               << "==========================================================\n";
     ++m_nu_simulations;
-    m_bd.copy_from(m_shared_const.board);
+    m_bd.copy_from(*m_shared_const.board);
     m_bd.set_to_play(m_shared_const.to_play);
     m_extended_update = false;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)

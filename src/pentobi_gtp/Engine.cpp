@@ -151,7 +151,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
 
 void Engine::create_player(GameVariant game_variant, const path& books_dir)
 {
-    m_player.reset(new Player(get_board(), game_variant, books_dir));
+    m_player.reset(new Player(game_variant, books_dir));
     set_player(*m_player);
 }
 

@@ -19,49 +19,21 @@ using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
 using libboardgame_util::Exception;
 using libboardgame_util::WallTime;
+using libpentobi_base::BoardUpdater;
 using libpentobi_base::Tree;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-class Restorer
-{
-public:
-    Restorer(Game& game);
-
-    ~Restorer();
-
-private:
-    Game& m_game;
-
-    const Node& m_old_current;
-};
-
-Restorer::Restorer(Game& game)
-    : m_game(game),
-      m_old_current(game.get_current())
-{
-}
-
-Restorer::~Restorer()
-{
-    m_game.goto_node(m_old_current);
-}
-
-} // namespace
-
-//-----------------------------------------------------------------------------
-
-void AnalyzeGame::run(Game& game, Search& search,
+void AnalyzeGame::run(const Game& game, Search& search,
                     function<void(unsigned int,unsigned int)> progress_callback)
 {
     m_game_variant = game.get_game_variant();
     m_moves.clear();
     m_has_value.clear();
     m_values.clear();
-    Restorer restorer(game);
     const Tree& tree = game.get_tree();
+    unique_ptr<Board> bd(new Board(m_game_variant));
+    BoardUpdater updater(tree, *bd);
     const Node& root = game.get_root();
     const Node* node = &root;
     unsigned int total_moves = 0;
@@ -91,13 +63,13 @@ void AnalyzeGame::run(Game& game, Search& search,
                 progress_callback(move_number, total_moves);
                 try
                 {
-                    game.goto_node(node->get_parent());
-                    log() << game.get_board();
+                    updater.update(node->get_parent());
+                    log() << "Analyzing move " << bd->get_nu_moves() << "\n";
                     const ValueType max_count = 1000;
                     double max_time = 0;
                     size_t min_simulations = 1;
                     Move computer_mv;
-                    search.search(computer_mv, mv.color, max_count,
+                    search.search(computer_mv, *bd, mv.color, max_count,
                                   min_simulations, max_time, time_source);
                     if (get_abort())
                         break;
@@ -118,8 +90,8 @@ void AnalyzeGame::run(Game& game, Search& search,
                 }
                 catch (const Exception&)
                 {
-                    // Game::goto_node() can throw on invalid SGF tree read
-                    // from external file. We simply abort the analysis.
+                    // BoardUpdater::update() can throw on invalid SGF tree
+                    // read from external file. We simply abort the analysis.
                     break;
                 }
             }

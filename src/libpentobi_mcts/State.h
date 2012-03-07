@@ -30,6 +30,7 @@ using libboardgame_util::StatisticsBase;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMove;
+using libpentobi_base::GameVariant;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
@@ -46,7 +47,7 @@ using libpentobi_base::ColorMap;
 /** Constant data shared between the search states. */
 struct SharedConst
 {
-    const Board& board;
+    const Board* board;
 
     /** The color to play at the root of the search. */
     const Color& to_play;
@@ -69,7 +70,7 @@ struct SharedConst
     array<array<bool,Board::max_pieces>,Board::max_game_moves>
                                                            is_piece_considered;
 
-    SharedConst(const Board& bd, const Color& to_play);
+    SharedConst(const Color& to_play);
 };
 
 //-----------------------------------------------------------------------------
@@ -82,9 +83,11 @@ class State
 {
 public:
     /** Constructor.
-        @param bd
+        @param initial_game_variant Game variant to initialize the internal
+        board with (may avoid unnecessary BoardConst creation for game variant
+        that is never used)
         @param shared_const (@ref libboardgame_doc_storesref) */
-    State(const Board& bd, const SharedConst& shared_const);
+    State(GameVariant initial_game_variant, const SharedConst& shared_const);
 
     State(const State& state);
 

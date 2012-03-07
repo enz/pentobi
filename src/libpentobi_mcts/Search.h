@@ -21,7 +21,7 @@ class Search
     : public libboardgame_mcts::Search<State, Move, 4>
 {
 public:
-    Search(const Board& bd);
+    Search(GameVariant initial_game_variant);
 
     ~Search() throw();
 
@@ -66,7 +66,7 @@ public:
     // @} // @name
 
 
-    bool search(Move& mv, Color to_play, ValueType max_count,
+    bool search(Move& mv, const Board& bd, Color to_play, ValueType max_count,
                 size_t min_simulations, double max_time,
                 TimeSource& time_source);
 
@@ -98,7 +98,7 @@ inline bool Search::get_avoid_symmetric_draw() const
 
 inline const Board& Search::get_board() const
 {
-    return m_shared_const.board;
+    return *m_shared_const.board;
 }
 
 inline bool Search::get_detect_symmetry() const

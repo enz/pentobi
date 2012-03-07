@@ -44,15 +44,14 @@ bool is_absolute(const path& p)
 
 //-----------------------------------------------------------------------------
 
-Player::Player(const Board& bd, GameVariant game_variant, const path& books_dir)
-    : libpentobi_base::Player(bd),
-      m_is_book_loaded(false),
+Player::Player(GameVariant initial_game_variant, const path& books_dir)
+    : m_is_book_loaded(false),
       m_use_book(true),
       m_books_dir(books_dir),
       m_level(4),
       m_fixed_simulations(0),
-      m_search(bd),
-      m_book(game_variant)
+      m_search(initial_game_variant),
+      m_book(initial_game_variant)
 {
     for (unsigned int i = 0; i < Board::max_player_moves; ++i)
     {
@@ -93,12 +92,12 @@ Player::~Player() throw()
 {
 }
 
-Move Player::genmove(Color c)
+Move Player::genmove(const Board& bd, Color c)
 {
-    if (! m_bd.has_moves(c))
+    if (! bd.has_moves(c))
         return Move::pass();
     Move mv;
-    GameVariant variant = m_bd.get_game_variant();
+    GameVariant variant = bd.get_game_variant();
     if (m_use_book)
     {
         if (! m_is_book_loaded
@@ -137,7 +136,7 @@ Move Player::genmove(Color c)
                 delta = 0.015;
             else if (m_level >= 6)
                 delta = 0.01;
-            mv = m_book.genmove(m_bd, c, delta, 2.5 * delta);
+            mv = m_book.genmove(bd, c, delta, 2.5 * delta);
             if (! mv.is_null())
                 return mv;
         }
@@ -187,7 +186,7 @@ Move Player::genmove(Color c)
             max_count = ValueType(minimum * pow(factor_per_level, m_level - 1));
         if (use_weight_max_count)
         {
-            unsigned int player_move = m_bd.get_nu_moves() / Color::range;
+            unsigned int player_move = bd.get_nu_moves() / bd.get_nu_colors();
             float weight = 1;
             if (variant == game_variant_duo)
                 weight = weight_max_count_duo[player_move];
@@ -205,7 +204,7 @@ Move Player::genmove(Color c)
         log() << "MaxCnt " << max_count << '\n';
     else
         log() << "MaxTime " << max_time << '\n';
-    if (! m_search.search(mv, c, max_count, 0, max_time, time_source))
+    if (! m_search.search(mv, bd, c, max_count, 0, max_time, time_source))
         return Move::null();
     return mv;
 }
