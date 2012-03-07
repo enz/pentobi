@@ -170,4 +170,9 @@ void AnalyzeGameWindow::setCurrentPosition(const Game& game, const Node& node)
     }
 }
 
+QSize AnalyzeGameWindow::sizeHint() const
+{
+    return QSize(600, 240);
+}
+
 //-----------------------------------------------------------------------------

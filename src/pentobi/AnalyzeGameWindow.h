@@ -39,6 +39,8 @@ public:
         sequence when the analysis was done. */
     void setCurrentPosition(const Game& game, const Node& node);
 
+    QSize sizeHint() const;
+
 signals:
     void gotoPosition(GameVariant gameVariant, const vector<ColorMove>& moves);
 
