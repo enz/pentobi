@@ -1674,6 +1674,11 @@ void MainWindow::humanPlay(Color c, Move mv)
 
 void MainWindow::initGame()
 {
+    if (m_analyzeGameWindow != 0)
+    {
+        delete m_analyzeGameWindow;
+        m_analyzeGameWindow = 0;
+    }
     m_game->init();
     m_game->set_charset("UTF-8");
     m_game->set_date_today();
@@ -1878,6 +1883,11 @@ void MainWindow::open(const QString& file, bool isTemporary)
         QFile autoSaveFile(getAutoSaveFile());
         if (autoSaveFile.exists())
             autoSaveFile.remove();
+    }
+    if (m_analyzeGameWindow != 0)
+    {
+        delete m_analyzeGameWindow;
+        m_analyzeGameWindow = 0;
     }
     try
     {
