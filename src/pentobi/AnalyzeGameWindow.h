@@ -24,14 +24,24 @@ class AnalyzeGameWindow
 {
     Q_OBJECT
 
+public slots:
+    /** Cancel a running analysis.
+        The function waits for the analysis to finish. The finished() signal
+        will still be invoked. */
+    void cancel();
+
 public:
     AnalyzeGameWindow(QWidget* parent);
 
-    /** Run the analysis.
+    /** Start an analysis.
+        This function will return after the analysis has started but the
+        window will be protected by a modal cancelable progress dialog.
+        Don't use the game and the search from a different thread until
+        the signal finished() was emitted.
         This will temporarily change the current position in the game and use
         the search to evaluate positions. During the analysis, the parent
         window is protected with a modal progress dialog. */
-    void init(Game& game, Search& search);
+    void start(Game& game, Search& search);
 
     /** Mark the current position.
         Will clear the current position if the target node is not in the
@@ -42,6 +52,9 @@ public:
     QSize sizeHint() const;
 
 signals:
+    /** Tells that the analysis has finished. */
+    void finished();
+
     void gotoPosition(GameVariant gameVariant, const vector<ColorMove>& moves);
 
 protected:
@@ -51,12 +64,23 @@ protected:
 
     void resizeEvent(QResizeEvent* event);
 
+private slots:
+    void showProgress(int progress);
+
 private:
     bool m_isInitialized;
+
+    bool m_isRunning;
+
+    Game* m_game;
+
+    Search* m_search;
 
     AnalyzeGame m_analyzeGame;
 
     QProgressDialog* m_progressDialog;
+
+    QFuture<void> m_future;
 
     int m_borderX;
 
@@ -74,6 +98,8 @@ private:
     void initSize();
 
     void progressCallback(unsigned int movesAnalyzed, unsigned int totalMoves);
+
+    void threadFunction();
 };
 
 //-----------------------------------------------------------------------------

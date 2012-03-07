@@ -211,6 +211,8 @@ private:
 
     bool m_isGenMoveRunning;
 
+    bool m_isAnalyzeRunning;
+
     bool m_lastMoveByComputer;
 
     /** Flag indicating that the position after the last move played was
@@ -476,7 +478,7 @@ private:
 
     void createToolBar();
 
-    void cancelGenMove();
+    void cancelThread();
 
     void checkComputerMove();
 
@@ -545,6 +547,8 @@ private:
     void updateFlipActions();
 
 private slots:
+    void analyzeGameFinished();
+
     void badMove(bool checked);
 
     void commentChanged();

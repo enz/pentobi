@@ -20,6 +20,8 @@ class AnalyzeGame
 {
 public:
     /** Run the analysis.
+        The analysis can be aborted from a different thread with
+        libboardgame_util::set_abort().
         @param game
         @param search
         @param progress_callback Function that will be called at the beginning

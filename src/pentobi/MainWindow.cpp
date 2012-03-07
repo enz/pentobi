@@ -139,6 +139,7 @@ bool isMoveBetter(const Board& bd, Move mv1, Move mv2)
 MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                        const QString& booksDir, bool noBook, bool noSymDraw)
     : m_isGenMoveRunning(false),
+      m_isAnalyzeRunning(false),
       m_lastMoveByComputer(false),
       m_genMoveId(0),
       m_manualDir(manualDir),
@@ -291,16 +292,24 @@ void MainWindow::about()
 
 void MainWindow::analyzeGame()
 {
-    cancelGenMove();
+    cancelThread();
     if (m_analyzeGameWindow != 0)
         delete m_analyzeGameWindow;
     m_analyzeGameWindow = new AnalyzeGameWindow(this);
     m_analyzeGameWindow->show();
-    m_analyzeGameWindow->init(*m_game, m_player->get_search());
-    m_analyzeGameWindow->setCurrentPosition(*m_game, m_game->get_current());
+    m_isAnalyzeRunning = true;
+    connect(m_analyzeGameWindow, SIGNAL(finished()),
+            this, SLOT(analyzeGameFinished()));
     connect(m_analyzeGameWindow,
             SIGNAL(gotoPosition(GameVariant,const vector<ColorMove>&)),
             this, SLOT(gotoPosition(GameVariant,const vector<ColorMove>&)));
+    m_analyzeGameWindow->start(*m_game, m_player->get_search());
+}
+
+void MainWindow::analyzeGameFinished()
+{
+    m_analyzeGameWindow->setCurrentPosition(*m_game, m_game->get_current());
+    m_isAnalyzeRunning = false;
 }
 
 /** Call to Player::genmove() that runs in a different thread. */
@@ -351,20 +360,30 @@ void MainWindow::beginning()
     gotoNode(m_game->get_root());
 }
 
-void MainWindow::cancelGenMove()
+void MainWindow::cancelThread()
 {
-    if (! m_isGenMoveRunning)
-        return;
-    // After waitForFinished() returns, we can be sure that the move generation
-    // is no longer running, but we will still receive the finished event.
-    // Increasing m_genMoveId will make genMoveFinished() ignore the event.
-    ++m_genMoveId;
-    set_abort();
-    m_genMoveWatcher.waitForFinished();
-    m_isGenMoveRunning = false;
-    clearStatus();
-    QApplication::restoreOverrideCursor();
-    m_actionInterrupt->setEnabled(false);
+    if (m_isAnalyzeRunning)
+    {
+        // This should never happen because AnalyzeGameWindow protects the
+        // parent with a modal progress dialog while it is running. However,
+        // due to bugs in Unity 2D (tested with Ubuntu 11.04 and 11.10), the
+        // global menu can still trigger menu item events.
+        m_analyzeGameWindow->cancel();
+    }
+    if (m_isGenMoveRunning)
+    {
+        // After waitForFinished() returns, we can be sure that the move
+        // generation is no longer running, but we will still receive the
+        // finished event. Increasing m_genMoveId will make genMoveFinished()
+        // ignore the event.
+        ++m_genMoveId;
+        set_abort();
+        m_genMoveWatcher.waitForFinished();
+        m_isGenMoveRunning = false;
+        clearStatus();
+        QApplication::restoreOverrideCursor();
+        m_actionInterrupt->setEnabled(false);
+    }
 }
 
 void MainWindow::checkComputerMove()
@@ -427,7 +446,7 @@ bool MainWindow::checkQuit()
                 save();
         }
     }
-    cancelGenMove();
+    cancelThread();
     if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
     {
         ofstream out(getAutoSaveFile().toStdString().c_str());
@@ -1474,7 +1493,7 @@ void MainWindow::genMoveFinished()
 {
     GenMoveResult result = m_genMoveWatcher.future().result();
     if (result.genMoveId != m_genMoveId)
-        // Callback from a move generation canceled with cancelGenMove()
+        // Callback from a move generation canceled with cancelThread()
         return;
     LIBBOARDGAME_ASSERT(m_isGenMoveRunning);
     m_isGenMoveRunning = false;
@@ -1586,7 +1605,7 @@ void MainWindow::gotoMove()
 
 void MainWindow::gotoNode(const Node& node)
 {
-    cancelGenMove();
+    cancelThread();
     try
     {
         m_game->goto_node(node);
@@ -1644,7 +1663,7 @@ void MainWindow::help()
 
 void MainWindow::humanPlay(Color c, Move mv)
 {
-    cancelGenMove();
+    cancelThread();
     if (m_computerColor[c])
         // If the user enters a move previously played by the computer (e.g.
         // after undoing moves) then it is unlikely that the user wants to keep
@@ -1730,7 +1749,7 @@ void MainWindow::interrupt()
 
 void MainWindow::keepOnlyPosition()
 {
-    cancelGenMove();
+    cancelThread();
     m_game->keep_only_position();
     updateWindow(true);
 }
@@ -1801,7 +1820,7 @@ void MainWindow::newGame()
 {
     if (! checkSave())
         return;
-    cancelGenMove();
+    cancelThread();
     initGame();
     deleteAutoSaveFile();
     updateWindow(true);
@@ -1832,7 +1851,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
 {
     if (file.isEmpty())
         return;
-    cancelGenMove();
+    cancelThread();
     TreeReader reader;
     ifstream in(file.toLocal8Bit().constData());
     try
@@ -1891,7 +1910,7 @@ void MainWindow::openRecentFile()
 
 void MainWindow::play()
 {
-    cancelGenMove();
+    cancelThread();
     GameVariant variant = m_game->get_game_variant();
     if (variant != game_variant_classic && variant != game_variant_trigon
          && variant != game_variant_trigon_3)
@@ -2294,7 +2313,7 @@ void MainWindow::setGameVariant(GameVariant gameVariant)
         initGameVariantActions();
         return;
     }
-    cancelGenMove();
+    cancelThread();
     QSettings settings;
     switch (gameVariant)
     {

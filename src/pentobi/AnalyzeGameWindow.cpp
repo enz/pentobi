@@ -31,27 +31,17 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     m_currentPosition = -1;
 }
 
-void AnalyzeGameWindow::init(Game& game, Search& search)
+void AnalyzeGameWindow::cancel()
 {
-    m_isInitialized = true;
-    initSize();
-    m_progressDialog = new QProgressDialog(this);
-    m_progressDialog->setWindowModality(Qt::WindowModal);
-    m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
-                                          this));
-    m_progressDialog->setCancelButton(0);
-    m_progressDialog->setWindowTitle(tr("Pentobi - Progress"));
-    m_progressDialog->setMinimumDuration(0);
-    m_progressDialog->show();
-    m_analyzeGame.run(game, search,
-                      bind(&AnalyzeGameWindow::progressCallback, this,
-                           placeholders::_1, placeholders::_2));
-    m_progressDialog->close();
+    if (! m_isRunning)
+        return;
+    set_abort();
+    m_future.waitForFinished();
 }
 
 void AnalyzeGameWindow::initSize()
 {
-    m_borderX = width() / 20;
+    m_borderX = width() / 50;
     m_borderY = height() / 20;
     m_maxX = width() - 2 * m_borderX;
     m_dX = qreal(m_maxX) / Board::max_game_moves;
@@ -60,7 +50,7 @@ void AnalyzeGameWindow::initSize()
 
 void AnalyzeGameWindow::mousePressEvent(QMouseEvent* event)
 {
-    if (! m_isInitialized)
+    if (! m_isInitialized && m_isRunning)
         return;
     unsigned int moveNumber = (event->x() - m_borderX) / m_dX;
     if (moveNumber >= m_analyzeGame.get_nu_moves())
@@ -130,8 +120,10 @@ void AnalyzeGameWindow::progressCallback(unsigned int movesAnalyzed,
 {
     if (totalMoves == 0)
         return;
-    m_progressDialog->setValue(100 * movesAnalyzed / totalMoves);
-    update();
+    // This function is called from a diffrent thread. Invoke showProgress()
+    // in the GUI thread.
+    QMetaObject::invokeMethod(this, "showProgress", Qt::QueuedConnection,
+                              Q_ARG(int, 100 * movesAnalyzed / totalMoves));
 }
 
 void AnalyzeGameWindow::resizeEvent(QResizeEvent*)
@@ -169,9 +161,47 @@ void AnalyzeGameWindow::setCurrentPosition(const Game& game, const Node& node)
     }
 }
 
+void AnalyzeGameWindow::showProgress(int progress)
+{
+    m_progressDialog->setValue(progress);
+    // Repaint the window with the current status of the analysis
+    update();
+}
+
 QSize AnalyzeGameWindow::sizeHint() const
 {
-    return QSize(600, 240);
+    return QSize(800, 240);
+}
+
+void AnalyzeGameWindow::start(Game& game, Search& search)
+{
+    m_isInitialized = true;
+    m_game = &game;
+    m_search = &search;
+    initSize();
+    m_progressDialog = new QProgressDialog(this);
+    m_progressDialog->setWindowModality(Qt::WindowModal);
+    m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
+                                          this));
+    m_progressDialog->setWindowTitle(tr("Pentobi - Progress"));
+    m_progressDialog->setMinimumDuration(0);
+    connect(m_progressDialog, SIGNAL(canceled()), this, SLOT(cancel()));
+    m_progressDialog->show();
+    m_isRunning = true;
+    m_future = QtConcurrent::run(this, &AnalyzeGameWindow::threadFunction);
+}
+
+void AnalyzeGameWindow::threadFunction()
+{
+    m_analyzeGame.run(*m_game, *m_search,
+                      bind(&AnalyzeGameWindow::progressCallback, this,
+                           placeholders::_1, placeholders::_2));
+    // This function is called from a diffrent thread. Invoke showProgress()
+    // in the GUI thread.
+    QMetaObject::invokeMethod(this, "showProgress", Qt::QueuedConnection,
+                              Q_ARG(int, 100));
+    m_isRunning = false;
+    emit finished();
 }
 
 //-----------------------------------------------------------------------------
