@@ -27,14 +27,13 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
 {
     setWindowTitle(tr("Pentobi - Game Analysis"));
     setMinimumSize(240, 120);
-    m_maxMoves = 0;
+    m_isInitialized = false;
     m_currentPosition = -1;
 }
 
 void AnalyzeGameWindow::init(Game& game, Search& search)
 {
-    const Board& bd = game.get_board();
-    m_maxMoves = bd.get_nu_pieces() * bd.get_nu_colors();
+    m_isInitialized = true;
     initSize();
     m_progressDialog = new QProgressDialog(this);
     m_progressDialog->setWindowModality(Qt::WindowModal);
@@ -55,13 +54,13 @@ void AnalyzeGameWindow::initSize()
     m_borderX = width() / 20;
     m_borderY = height() / 20;
     m_maxX = width() - 2 * m_borderX;
-    m_dX = qreal(m_maxX) / m_maxMoves;
+    m_dX = qreal(m_maxX) / Board::max_game_moves;
     m_maxY = height() - 2 * m_borderY;
 }
 
 void AnalyzeGameWindow::mousePressEvent(QMouseEvent* event)
 {
-    if (m_maxMoves == 0)
+    if (! m_isInitialized)
         return;
     unsigned int moveNumber = (event->x() - m_borderX) / m_dX;
     if (moveNumber >= m_analyzeGame.get_nu_moves())
@@ -74,7 +73,7 @@ void AnalyzeGameWindow::mousePressEvent(QMouseEvent* event)
 
 void AnalyzeGameWindow::paintEvent(QPaintEvent*)
 {
-    if (m_maxMoves == 0)
+    if (! m_isInitialized)
         return;
     QPainter painter(this);
     QFont font;
@@ -137,7 +136,7 @@ void AnalyzeGameWindow::progressCallback(unsigned int movesAnalyzed,
 
 void AnalyzeGameWindow::resizeEvent(QResizeEvent*)
 {
-    if (m_maxMoves == 0)
+    if (! m_isInitialized)
         return;
     initSize();
 }

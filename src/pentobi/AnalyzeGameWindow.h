@@ -52,9 +52,7 @@ protected:
     void resizeEvent(QResizeEvent* event);
 
 private:
-    /** Maximum number of moves in the current game variant.
-        Set to 0 if game variant is not known yet. */
-    unsigned int m_maxMoves;
+    bool m_isInitialized;
 
     AnalyzeGame m_analyzeGame;
 
