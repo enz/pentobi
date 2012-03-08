@@ -64,7 +64,7 @@ void Game::keep_only_position()
 {
     Setup setup;
     get_current_position_as_setup(*m_bd, setup);
-    m_tree.init(m_tree.get_game_variant(), setup);
+    m_tree.init_game_variant(m_tree.get_game_variant(), setup);
     goto_node(m_tree.get_root());
 }
 

@@ -240,76 +240,6 @@ bool Tree::has_setup_properties(const Node& node)
     return false;
 }
 
-void Tree::init_game_variant(GameVariant game_variant)
-{
-    libboardgame_sgf::Tree::init();
-    m_game_variant = game_variant;
-    const Node& root = get_root();
-    switch (game_variant)
-    {
-    case game_variant_classic:
-        set_property(root, "GM", "Blokus");
-        break;
-    case game_variant_classic_2:
-        set_property(root, "GM", "Blokus Two-Player");
-        break;
-    case game_variant_trigon:
-        set_property(root, "GM", "Blokus Trigon");
-        break;
-    case game_variant_trigon_2:
-        set_property(root, "GM", "Blokus Trigon Two-Player");
-        break;
-    case game_variant_trigon_3:
-        set_property(root, "GM", "Blokus Trigon Three-Player");
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        set_property(root, "GM", "Blokus Duo");
-    }
-    init_board_const(game_variant);
-    clear_modified();
-}
-
-void Tree::init(GameVariant game_variant, const Setup& setup)
-{
-    init_game_variant(game_variant);
-    const Node& root = get_root();
-    switch (game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-        set_setup_property(root, "A1", setup.placements[Color(0)]);
-        set_setup_property(root, "A2", setup.placements[Color(1)]);
-        set_setup_property(root, "A3", setup.placements[Color(2)]);
-        set_setup_property(root, "A4", setup.placements[Color(3)]);
-        break;
-    case game_variant_trigon_3:
-        set_setup_property(root, "A1", setup.placements[Color(0)]);
-        set_setup_property(root, "A2", setup.placements[Color(1)]);
-        set_setup_property(root, "A3", setup.placements[Color(2)]);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        set_setup_property(root, "AB", setup.placements[Color(0)]);
-        set_setup_property(root, "AW", setup.placements[Color(1)]);
-    }
-    switch (game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-    case game_variant_trigon_3:
-        set_property(root, "PL", setup.to_play.to_int() + 1);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        set_property(root, "PL", setup.to_play == Color(0) ? "B" : "W");
-    }
-}
-
 void Tree::init(unique_ptr<Node>& root)
 {
     GameVariant game_variant;
@@ -355,6 +285,76 @@ void Tree::init_board_const(GameVariant game_variant)
         board_type = board_type_duo;
     }
     m_board_const = &BoardConst::get(board_type);
+}
+
+void Tree::init_game_variant(GameVariant game_variant)
+{
+    libboardgame_sgf::Tree::init();
+    m_game_variant = game_variant;
+    const Node& root = get_root();
+    switch (game_variant)
+    {
+    case game_variant_classic:
+        set_property(root, "GM", "Blokus");
+        break;
+    case game_variant_classic_2:
+        set_property(root, "GM", "Blokus Two-Player");
+        break;
+    case game_variant_trigon:
+        set_property(root, "GM", "Blokus Trigon");
+        break;
+    case game_variant_trigon_2:
+        set_property(root, "GM", "Blokus Trigon Two-Player");
+        break;
+    case game_variant_trigon_3:
+        set_property(root, "GM", "Blokus Trigon Three-Player");
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        set_property(root, "GM", "Blokus Duo");
+    }
+    init_board_const(game_variant);
+    clear_modified();
+}
+
+void Tree::init_game_variant(GameVariant game_variant, const Setup& setup)
+{
+    init_game_variant(game_variant);
+    const Node& root = get_root();
+    switch (game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+        set_setup_property(root, "A1", setup.placements[Color(0)]);
+        set_setup_property(root, "A2", setup.placements[Color(1)]);
+        set_setup_property(root, "A3", setup.placements[Color(2)]);
+        set_setup_property(root, "A4", setup.placements[Color(3)]);
+        break;
+    case game_variant_trigon_3:
+        set_setup_property(root, "A1", setup.placements[Color(0)]);
+        set_setup_property(root, "A2", setup.placements[Color(1)]);
+        set_setup_property(root, "A3", setup.placements[Color(2)]);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        set_setup_property(root, "AB", setup.placements[Color(0)]);
+        set_setup_property(root, "AW", setup.placements[Color(1)]);
+    }
+    switch (game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+    case game_variant_trigon_3:
+        set_property(root, "PL", setup.to_play.to_int() + 1);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        set_property(root, "PL", setup.to_play == Color(0) ? "B" : "W");
+    }
 }
 
 void Tree::set_move(const Node& node, Color c, Move mv)
