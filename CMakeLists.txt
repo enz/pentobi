@@ -19,7 +19,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DLIBBOARDGAME_DEBUG)
 endif()
 
-if(CMAKE_COMPILER_IS_GNUCXX)
+if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   add_definitions(-std=c++0x)
   add_definitions(-ffast-math)
 endif()
