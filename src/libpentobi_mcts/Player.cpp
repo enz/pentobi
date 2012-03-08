@@ -31,15 +31,6 @@ namespace {
 
 const bool use_weight_max_count = true;
 
-bool is_absolute(const path& p)
-{
-#if defined(BOOST_FILESYSTEM_VERSION) && BOOST_FILESYSTEM_VERSION >= 3
-    return p.is_absolute();
-#else
-    return p.is_complete();
-#endif
-}
-
 } // namespace
 
 //-----------------------------------------------------------------------------
