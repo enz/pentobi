@@ -43,7 +43,7 @@ inline const Node& TreeIterator::operator*() const
 {
     LIBBOARDGAME_ASSERT(operator bool());
     return *m_current;
-};
+}
 
 //-----------------------------------------------------------------------------
 

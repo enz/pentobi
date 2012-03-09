@@ -10,7 +10,7 @@
 #include "libpentobi_base/GameVariant.h"
 #include "libpentobi_base/ColorMap.h"
 
-using namespace std;;
+using namespace std;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
