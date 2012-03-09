@@ -623,7 +623,7 @@
     <message>
         <location filename="MainWindow.cpp" line="2525"/>
         <location filename="MainWindow.cpp" line="2537"/>
-        <source>The game ends in a draw.</source>
+        <source>The game ends in a tie.</source>
         <translation>Das Spiel endet in einem Unentschieden.</translation>
     </message>
     <message numerus="yes">
@@ -647,60 +647,60 @@
     <message>
         <location filename="MainWindow.cpp" line="2546"/>
         <location filename="MainWindow.cpp" line="2570"/>
-        <source>The game ends in a draw between all colors.</source>
+        <source>The game ends in a tie between all colors.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen allen Farben.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2572"/>
-        <source>The game ends in a draw between Blue, Yellow and Red.</source>
+        <source>The game ends in a tie between Blue, Yellow and Red.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Gelb und Rot.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2575"/>
-        <source>The game ends in a draw between Blue, Yellow and Green.</source>
+        <source>The game ends in a tie between Blue, Yellow and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Gelb und Grün.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2577"/>
-        <source>The game ends in a draw between Blue, Red and Green.</source>
+        <source>The game ends in a tie between Blue, Red and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Rot und Grün.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2579"/>
-        <source>The game ends in a draw between Yellow, Red and Green.</source>
+        <source>The game ends in a tie between Yellow, Red and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2548"/>
         <location filename="MainWindow.cpp" line="2581"/>
-        <source>The game ends in a draw between Blue and Yellow.</source>
+        <source>The game ends in a tie between Blue and Yellow.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Gelb.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2550"/>
         <location filename="MainWindow.cpp" line="2583"/>
-        <source>The game ends in a draw between Blue and Red.</source>
+        <source>The game ends in a tie between Blue and Red.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Rot.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2585"/>
-        <source>The game ends in a draw between Blue and Green.</source>
+        <source>The game ends in a tie between Blue and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Grün.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2552"/>
         <location filename="MainWindow.cpp" line="2587"/>
-        <source>The game ends in a draw between Yellow and Red.</source>
+        <source>The game ends in a tie between Yellow and Red.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Gelb und Rot.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2589"/>
-        <source>The game ends in a draw between Yellow and Green.</source>
+        <source>The game ends in a tie between Yellow and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Gelb und Grün.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2591"/>
-        <source>The game ends in a draw between Red and Green.</source>
+        <source>The game ends in a tie between Red and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Rot und Grün.</translation>
     </message>
     <message>

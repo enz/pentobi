@@ -2552,7 +2552,7 @@ void MainWindow::showGameOver()
         else if (score < 0)
             info = tr("Green wins with %n point(s).", "", -score);
         else
-            info = tr("The game ends in a draw.");
+            info = tr("The game ends in a tie.");
     }
     else if (variant == game_variant_classic_2
              || variant == game_variant_trigon_2)
@@ -2564,7 +2564,7 @@ void MainWindow::showGameOver()
         else if (score < 0)
             info = tr("Yellow/Green wins with %n point(s).", "", -score);
         else
-            info = tr("The game ends in a draw.");
+            info = tr("The game ends in a tie.");
     }
     else if (variant == game_variant_trigon_3)
     {
@@ -2573,13 +2573,13 @@ void MainWindow::showGameOver()
         unsigned int red = bd.get_points_with_bonus(Color(2));
         unsigned int maxPoints = max(blue, max(yellow, red));
         if (blue == yellow && yellow == red)
-            info = tr("The game ends in a draw between all colors.");
+            info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow)
-            info = tr("The game ends in a draw between Blue and Yellow.");
+            info = tr("The game ends in a tie between Blue and Yellow.");
         else if (blue == maxPoints && blue == red)
-            info = tr("The game ends in a draw between Blue and Red.");
+            info = tr("The game ends in a tie between Blue and Red.");
         else if (yellow == maxPoints && yellow == red)
-            info = tr("The game ends in a draw between Yellow and Red.");
+            info = tr("The game ends in a tie between Yellow and Red.");
         else if (blue == maxPoints)
             info = tr("Blue wins.");
         else if (yellow == maxPoints)
@@ -2597,28 +2597,28 @@ void MainWindow::showGameOver()
         unsigned int green = bd.get_points_with_bonus(Color(3));
         unsigned int maxPoints = max(blue, max(yellow, max(red, green)));
         if (blue == yellow && yellow == red && red == green)
-            info = tr("The game ends in a draw between all colors.");
+            info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow && yellow == red)
-            info = tr("The game ends in a draw between Blue, Yellow and Red.");
+            info = tr("The game ends in a tie between Blue, Yellow and Red.");
         else if (blue == maxPoints && blue == yellow && yellow == green)
             info =
-                tr("The game ends in a draw between Blue, Yellow and Green.");
+                tr("The game ends in a tie between Blue, Yellow and Green.");
         else if (blue == maxPoints && blue == red && red == green)
-            info = tr("The game ends in a draw between Blue, Red and Green.");
+            info = tr("The game ends in a tie between Blue, Red and Green.");
         else if (yellow == maxPoints && yellow == red && red == green)
-            info = tr("The game ends in a draw between Yellow, Red and Green.");
+            info = tr("The game ends in a tie between Yellow, Red and Green.");
         else if (blue == maxPoints && blue == yellow)
-            info = tr("The game ends in a draw between Blue and Yellow.");
+            info = tr("The game ends in a tie between Blue and Yellow.");
         else if (blue == maxPoints && blue == red)
-            info = tr("The game ends in a draw between Blue and Red.");
+            info = tr("The game ends in a tie between Blue and Red.");
         else if (blue == maxPoints && blue == green)
-            info = tr("The game ends in a draw between Blue and Green.");
+            info = tr("The game ends in a tie between Blue and Green.");
         else if (yellow == maxPoints && yellow == red)
-            info = tr("The game ends in a draw between Yellow and Red.");
+            info = tr("The game ends in a tie between Yellow and Red.");
         else if (yellow == maxPoints && yellow == green)
-            info = tr("The game ends in a draw between Yellow and Green.");
+            info = tr("The game ends in a tie between Yellow and Green.");
         else if (red == maxPoints && red == green)
-            info = tr("The game ends in a draw between Red and Green.");
+            info = tr("The game ends in a tie between Red and Green.");
         else if (blue == maxPoints)
             info = tr("Blue wins.");
         else if (yellow == maxPoints)
