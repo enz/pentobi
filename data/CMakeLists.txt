@@ -2,8 +2,10 @@ if(UNIX AND NOT APPLE)
 
   configure_file(pentobi.desktop.in pentobi.desktop @ONLY)
   configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
-  install(FILES pentobi.png DESTINATION share/icons/hicolor/48x48/apps)
-  install(FILES pentobi.svg DESTINATION share/icons/hicolor/scalable/apps)
+  install(FILES ../src/pentobi/pentobi.png
+    DESTINATION share/icons/hicolor/48x48/apps)
+  install(FILES ../src/pentobi/pentobi.svg
+    DESTINATION share/icons/hicolor/scalable/apps)
   install(FILES application-x-blokus-sgf.png
     DESTINATION share/icons/hicolor/48x48/mimetypes)
   install(FILES application-x-blokus-sgf.svg

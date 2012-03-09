@@ -26,6 +26,9 @@ Current development version (bugfix branch for 1.0)
 * Fixed computation of the font bounding box in the score display
 * Show detailed error on loading invalid SGF file
 * Set option -std=c++0x in CMakeLists.txt if compiler ID is CLang
+* Removed duplicate pentobi.png in directories data and src/pentobi
+* The file pentobi.svg was moved from data to src/pentobi and is now
+  used for setting the window icon of Pentobi
 
 
 Version 1.0 (1 Jan 2012)
