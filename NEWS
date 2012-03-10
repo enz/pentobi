@@ -1,19 +1,19 @@
-Current development version (bugfix branch for 1.0)
-===========================
+Version 1.1 (10 Mar 2012)
+=========================
 
 * File is now immediately visible in Recent Files menu after saving
   under a new name.
-* Fix several cases where the program crashed instead of showing an
-  error message in the opened file was invalid. The error message
-  also has a Show Details button to show the reason why the file
+* Fixed several cases where the program crashed instead of showing an
+  error message if the opened file was invalid. The error message
+  now also has a Show Details button to show the reason why the file
   could not be loaded.
-* Fixed a small bug that distorted the position values reported with
+* Fixed a bug that distorted the position values reported with
   --verbose if a subtree from a previous search was reused
 * Fixed exception in tools/twogtp/analyze.py if option -r was used
 * Minor fixes in computer player engine
 * Added explaining label to computer color dialog because window
   title is not visible in all L&F's
-* Accept pass moves (without points) in files. Although the current
+* Accept pass moves (empty value) in files. Although the current
   Blokus SGF documentation does not specify if they should be allowed,
   they might be used in the future and are used in files written by
   early (unreleased) versions of Pentobi
@@ -21,7 +21,7 @@ Current development version (bugfix branch for 1.0)
   files on web servers
 * Smaller icons for piece manipulation buttons
 * Fixed computation of the font bounding box in the score display
-* Set option -std=c++0x in CMakeLists.txt if compiler ID is CLang
+* Set option -std=c++0x in CMakeLists.txt if compiler is CLang
 * Removed duplicate pentobi.png in directories data and src/pentobi;
   The file pentobi.svg was moved from data to src/pentobi and is now
   used for setting the window icon of Pentobi
