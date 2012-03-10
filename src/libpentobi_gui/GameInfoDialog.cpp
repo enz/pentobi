@@ -24,6 +24,9 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
 {
     m_charset = game.get_root().get_property("CA", "");
     setWindowTitle(tr("Game Info"));
+    // Disable '?' button in title bar on Windows, we don't have
+    // context help
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     m_formLayout = new QFormLayout();
