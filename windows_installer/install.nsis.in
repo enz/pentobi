@@ -42,7 +42,7 @@ LangString INSTALLER_TITLE ${LANG_ENGLISH} \
 
 Name "Pentobi"
 Caption "$(INSTALLER_TITLE)"
-OutFile "pentobi-install.exe"
+OutFile "pentobi-${PENTOBI_VERSION}-install.exe"
 InstallDir "$PROGRAMFILES\Pentobi"
 InstallDirRegKey HKLM "Software\Pentobi" ""
 ; Set admin level, needed for shortcut removal on Vista
