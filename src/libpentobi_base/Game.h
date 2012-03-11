@@ -29,7 +29,7 @@ public:
         goto_node() might throw an exception.
         @param root The root node of the SGF tree; the ownership is transfered
         to this class.
-        @throws InvalidPropertyValue, if the root node contains invalid
+        @throws InvalidTree, if the root node contains invalid
         properties */
     void init(unique_ptr<Node>& root);
 
@@ -55,7 +55,7 @@ public:
     void play(Color c, Move mv, bool always_create_new_node);
 
     /** Update game state to a node in the tree.
-        @throws InvalidPropertyValue, if the game was constructed with an
+        @throws InvalidTree, if the game was constructed with an
         external SGF tree and the tree contained invalid property values
         (syntactically or sematically, like moves on occupied points) */
     void goto_node(const Node& node);

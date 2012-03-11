@@ -11,7 +11,6 @@
 #include "GameVariant.h"
 #include "Setup.h"
 #include "libboardgame_sgf/Tree.h"
-#include "libboardgame_sgf/InvalidPropertyValue.h"
 
 namespace libpentobi_base {
 
@@ -43,7 +42,7 @@ public:
     void set_move(const Node& node, Color c, Move mv);
 
     /** Return move or ColorMove::null() if node has no move property.
-        @throws Exception if the node has a move property with an invalid
+        @throws InvalidTree if the node has a move property with an invalid
         value. */
     ColorMove get_move(const Node& node) const;
 

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file MissingProperty.cpp */
+/** @file libboardgame_sgf/MissingProperty.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -15,18 +15,18 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 MissingProperty::MissingProperty(const string& message)
-    : Exception(format("Missing SGF property: %1%") % message)
+    : InvalidTree(format("Missing SGF property: %1%") % message)
 {
 }
 
 MissingProperty::MissingProperty(const string& id, const string& message)
-    : Exception(format("Missing SGF property '%1%': %2%") % id % message)
+    : InvalidTree(format("Missing SGF property '%1%': %2%") % id % message)
 {
 }
 
 MissingProperty::MissingProperty(const string& id, const format& message)
-    : Exception(format("Missing SGF property '%1%': %2%")
-                % id % str(message))
+    : InvalidTree(format("Missing SGF property '%1%': %2%")
+                  % id % str(message))
 {
 }
 

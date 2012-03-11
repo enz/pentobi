@@ -24,7 +24,7 @@
 using namespace std;
 using boost::filesystem::path;
 using libboardgame_sgf::ChildIterator;
-using libboardgame_sgf::InvalidPropertyValue;
+using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::find_next_comment;
@@ -1610,7 +1610,7 @@ void MainWindow::gotoNode(const Node& node)
     {
         m_game->goto_node(node);
     }
-    catch (const Exception& e)
+    catch (const InvalidTree& e)
     {
         showInvalidFile(m_file, e);
     }
@@ -1897,7 +1897,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
             m_game->goto_node(get_last_node(m_game->get_root()));
         initPieceSelectors();
     }
-    catch (const Exception& e)
+    catch (const InvalidTree& e)
     {
         showInvalidFile(file, e);
     }

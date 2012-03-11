@@ -5,18 +5,17 @@
 #ifndef LIBBOARDGAME_SGF_INVALID_PROPERTY_VALUE_H
 #define LIBBOARDGAME_SGF_INVALID_PROPERTY_VALUE_H
 
-#include "libboardgame_util/Exception.h"
+#include "InvalidTree.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
 using boost::format;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
 class InvalidPropertyValue
-    : public Exception
+    : public InvalidTree
 {
 public:
     template<typename T>
@@ -27,8 +26,8 @@ public:
 
 template<typename T>
 InvalidPropertyValue::InvalidPropertyValue(const string& id, const T& value)
-    : Exception(format("Invalid value '%1%' for SGF property '%2%'")
-                % value % id)
+    : InvalidTree(format("Invalid value '%1%' for SGF property '%2%'")
+                  % value % id)
 {
 }
 

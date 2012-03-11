@@ -5,6 +5,7 @@ include_directories(
 
 set(boardgame_sgf_STAT_SRCS
   InvalidPropertyValue.cpp
+  InvalidTree.cpp
   MissingProperty.cpp
   Node.cpp
   Reader.cpp

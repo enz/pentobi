@@ -1,22 +1,20 @@
 //-----------------------------------------------------------------------------
-/** @file MissingProperty.h */
+/** @file libboardgame_sgf/MissingProperty.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_SGF_MISSING_PROPERTY_H
 #define LIBBOARDGAME_SGF_MISSING_PROPERTY_H
 
-#include "libboardgame_util/Exception.h"
+#include "InvalidTree.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
-using boost::format;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
 class MissingProperty
-    : public Exception
+    : public InvalidTree
 {
 public:
     MissingProperty(const string& message);

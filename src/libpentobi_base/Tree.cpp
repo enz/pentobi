@@ -22,6 +22,7 @@ using boost::trim_copy;
 using boost::algorithm::to_lower_copy;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidPropertyValue;
+using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::PropertyIterator;
 using libboardgame_sgf::util::get_go_point_property_value;
 using libboardgame_sgf::util::parse_go_move_property_value;
@@ -151,7 +152,7 @@ ColorMove Tree::get_move(const Node& node) const
         return ColorMove(c, Move::pass());
     Move mv;
     if (! m_board_const->find_move(points, mv))
-        throw Exception(str(format("Illegal move %1%") % to_string(points)));
+        throw InvalidTree(str(format("Illegal move %1%") % to_string(points)));
     return ColorMove(c, mv);
 }
 
@@ -161,7 +162,7 @@ ColorMove Tree::get_move_ignore_invalid(const Node& node) const
     {
         return get_move(node);
     }
-    catch (const Exception&)
+    catch (const InvalidTree&)
     {
         return ColorMove::null();
     }

@@ -9,13 +9,13 @@
 #include "Game.h"
 
 #include "BoardUtil.h"
-#include "libboardgame_sgf/InvalidPropertyValue.h"
+#include "libboardgame_sgf/InvalidTree.h"
 #include "libboardgame_sgf/Util.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using libboardgame_sgf::InvalidPropertyValue;
+using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::util::is_main_variation;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
@@ -45,7 +45,7 @@ void Game::goto_node(const Node& node)
         m_updater.update(node);
         m_current = &node;
     }
-    catch (const Exception& e)
+    catch (const InvalidTree& e)
     {
         m_updater.update(old);
         throw e;

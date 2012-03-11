@@ -14,6 +14,7 @@
 namespace libpentobi_base {
 
 using namespace std;
+using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::util::get_path_from_root;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
@@ -31,10 +32,18 @@ void handle_setup_property(const Node& node, const char* id, Color c,
     vector<string> values = node.get_multi_property(id);
     BOOST_FOREACH(const string& s, values)
     {
-        Move mv = bd.from_string(s);
+        Move mv;
+        try
+        {
+            mv = bd.from_string(s);
+        }
+        catch (Exception& e)
+        {
+            throw InvalidTree(e.what());
+        }
         unsigned int piece = bd.get_move_info(mv).piece;
         if (! pieces_left[c].remove(piece))
-            throw Exception("piece played twice");
+            throw InvalidTree("piece played twice");
         setup.placements[c].push_back(mv);
     }
 }
@@ -48,7 +57,15 @@ void handle_setup_empty(const Node& node, const Board& bd, Setup& setup,
     vector<string> values = node.get_multi_property("AE");
     BOOST_FOREACH(const string& s, values)
     {
-        Move mv = bd.from_string(s);
+        Move mv;
+        try
+        {
+            mv = bd.from_string(s);
+        }
+        catch (Exception& e)
+        {
+            throw InvalidTree(e.what());
+        }
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         {
             if (setup.placements[*i].remove(mv))
@@ -58,7 +75,7 @@ void handle_setup_empty(const Node& node, const Board& bd, Setup& setup,
                 pieces_left[*i].push_back(piece);
                 break;
             }
-            throw Exception("invalid value for AE property");
+            throw InvalidTree("invalid value for AE property");
         }
     }
 }
@@ -95,7 +112,7 @@ void init_setup(Board& bd, const Node& node)
         else if (value == "4")
             setup.to_play = Color(3);
         else
-            throw Exception("invalid value for PL property");
+            throw InvalidTree("invalid value for PL property");
     }
     else
     {
@@ -129,7 +146,7 @@ void BoardUpdater::update(const Node& node)
         {
             const MoveInfo& info = m_bd.get_move_info(mv.move);
             if (! m_bd.get_pieces_left(mv.color).contains(info.piece))
-                throw Exception("piece played twice");
+                throw InvalidTree("piece played twice");
             m_bd.play(mv);
         }
     }
