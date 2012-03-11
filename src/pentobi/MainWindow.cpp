@@ -110,10 +110,26 @@ bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
     return false;
 }
 
+QIcon getIconResource(const QString& name)
+{
+    return QIcon(QString(":/pentobi/%1.png").arg(name));
+}
+
+void setIcon(QAction* action, const QIcon& icon)
+{
+    action->setIcon(icon);
+    action->setIconVisibleInMenu(false);
+}
+
 void setIcon(QAction* action, const QString& name)
 {
-    action->setIcon(QIcon(QString(":/pentobi/%1.png").arg(name)));
-    action->setIconVisibleInMenu(false);
+    setIcon(action, getIconResource(name));
+}
+
+void setIconFromTheme(QAction* action, const QString& name)
+{
+    QIcon fallback = getIconResource(name);
+    setIcon(action, QIcon::fromTheme(name, fallback));
 }
 
 /** Simple heuristic that prefers moves with more piece points, more attach
@@ -645,7 +661,7 @@ void MainWindow::createActions()
 
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
-    setIcon(m_actionFullscreen, "view-fullscreen");
+    setIconFromTheme(m_actionFullscreen, "view-fullscreen");
     m_actionFullscreen->setCheckable(true);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
@@ -803,7 +819,7 @@ void MainWindow::createActions()
 
     m_actionOpen = new QAction(tr("&Open..."), this);
     m_actionOpen->setShortcut(QKeySequence::Open);
-    setIcon(m_actionOpen, "document-open");
+    setIconFromTheme(m_actionOpen, "document-open");
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     m_actionPlaceSelectedPiece = new QAction("", this);
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
@@ -861,7 +877,7 @@ void MainWindow::createActions()
 
     m_actionSave = new QAction(tr("&Save"), this);
     m_actionSave->setShortcut(QKeySequence::Save);
-    setIcon(m_actionSave, "document-save");
+    setIconFromTheme(m_actionSave, "document-save");
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
 
     m_actionSaveAs = new QAction(tr("Save &As..."), this);

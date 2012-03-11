@@ -18,6 +18,7 @@ Current development version
   executable but installed in the installation data directory
 * Open a console for stderr output on Windows if Pentobi is
   invoked with option --verbose
+* Use standard icons from theme
 
 
 Version 1.0 (1 Jan 2012)
