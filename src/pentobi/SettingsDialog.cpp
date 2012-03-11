@@ -21,7 +21,7 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     m_showNoMovesMessage =
-        new QCheckBox(tr("Show message if a color has no more moves"));
+        new QCheckBox(tr("Show message if color has no more moves"));
     m_showNoMovesMessage->setChecked(
                        settings.value("show_no_moves_message", true).toBool());
     layout->addWidget(m_showNoMovesMessage);

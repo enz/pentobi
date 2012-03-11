@@ -788,8 +788,8 @@
     </message>
     <message>
         <location filename="SettingsDialog.cpp" line="21"/>
-        <source>Show message if a color has no more moves</source>
-        <translation>Meldung zeigen, wenn eine Farbe keine Züge mehr hat</translation>
+        <source>Show message if color has no more moves</source>
+        <translation>Meldung zeigen, wenn Farbe keine Züge mehr hat</translation>
     </message>
 </context>
 </TS>
