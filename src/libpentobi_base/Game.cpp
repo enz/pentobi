@@ -39,8 +39,17 @@ Game::Game(unique_ptr<Node>& root)
 
 void Game::goto_node(const Node& node)
 {
-    m_updater.update(node);
-    m_current = &node;
+    const Node& old = *m_current;
+    try
+    {
+        m_updater.update(node);
+        m_current = &node;
+    }
+    catch (const Exception& e)
+    {
+        m_updater.update(old);
+        throw e;
+    }
 }
 
 void Game::init(GameVariant game_variant)
