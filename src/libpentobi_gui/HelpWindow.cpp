@@ -18,7 +18,7 @@ namespace {
 
 void setIcon(QAction* action, const QString& name)
 {
-    QIcon fallback(QIcon(QString(":/libpentobi_gui/%1.png").arg(name)));
+    QIcon fallback(QIcon(QString(":/libpentobi_gui/icons/%1.png").arg(name)));
     action->setIcon(QIcon::fromTheme(name, fallback));
 }
 

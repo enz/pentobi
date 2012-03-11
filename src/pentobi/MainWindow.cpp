@@ -112,7 +112,7 @@ bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
 
 QIcon getIconResource(const QString& name)
 {
-    return QIcon(QString(":/pentobi/%1.png").arg(name));
+    return QIcon(QString(":/pentobi/icons/%1.png").arg(name));
 }
 
 void setIcon(QAction* action, const QIcon& icon)
@@ -255,7 +255,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     bool showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
     initGameVariantActions();
-    setWindowIcon(QIcon(":/pentobi/pentobi.png"));
+    setWindowIcon(QIcon(":/pentobi/icons/pentobi.png"));
 
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
         adjustSize();
@@ -571,12 +571,12 @@ void MainWindow::createActions()
             this, SLOT(analyzeGame()));
 
     m_actionBackward = new QAction(tr("B&ackward"), this);
-    setIcon(m_actionBackward, "go-previous");
+    setIcon(m_actionBackward, "pentobi-go-previous");
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
 
     m_actionBackward10 = new QAction(tr("&Ten Moves Backward"), this);
-    setIcon(m_actionBackward10, "backward10");
+    setIcon(m_actionBackward10, "pentobi-backward10");
     m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
     connect(m_actionBackward10, SIGNAL(triggered()), this, SLOT(backward10()));
 
@@ -593,18 +593,18 @@ void MainWindow::createActions()
             this, SLOT(badMove(bool)));
 
     m_actionBeginning = new QAction(tr("&Beginning"), this);
-    setIcon(m_actionBeginning, "go-first");
+    setIcon(m_actionBeginning, "pentobi-go-first");
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
 
     m_actionClearSelectedPiece = new QAction(tr("Clear Piece"), this);
-    setIcon(m_actionClearSelectedPiece, "piece-clear");
+    setIcon(m_actionClearSelectedPiece, "pentobi-piece-clear");
     m_actionClearSelectedPiece->setShortcut(QString("0"));
     connect(m_actionClearSelectedPiece, SIGNAL(triggered()),
             this, SLOT(clearSelectedPiece()));
 
     m_actionComputerColor = new QAction(tr("&Computer Color"), this);
-    setIcon(m_actionComputerColor, "computer-color");
+    setIcon(m_actionComputerColor, "pentobi-computer-color");
     connect(m_actionComputerColor, SIGNAL(triggered()),
             this, SLOT(computerColor()));
 
@@ -621,7 +621,7 @@ void MainWindow::createActions()
 
     m_actionEnd = new QAction(tr("&End"), this);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
-    setIcon(m_actionEnd, "go-last");
+    setIcon(m_actionEnd, "pentobi-go-last");
     connect(m_actionEnd, SIGNAL(triggered()), this, SLOT(end()));
 
     m_actionExportAsciiArt = new QAction(tr("&ASCII Art"), this);
@@ -642,21 +642,21 @@ void MainWindow::createActions()
             this, SLOT(findNextComment()));
 
     m_actionFlipPieceHorizontally = new QAction(tr("Flip Horizontally"), this);
-    setIcon(m_actionFlipPieceHorizontally, "piece-flip-horizontal");
+    setIcon(m_actionFlipPieceHorizontally, "pentobi-flip-horizontal");
     connect(m_actionFlipPieceHorizontally, SIGNAL(triggered()),
             this, SLOT(flipPieceHorizontally()));
 
     m_actionFlipPieceVertically = new QAction(tr("Flip Vertically"), this);
-    setIcon(m_actionFlipPieceVertically, "piece-flip-vertical");
+    setIcon(m_actionFlipPieceVertically, "pentobi-flip-vertical");
 
     m_actionForward = new QAction(tr("&Forward"), this);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
-    setIcon(m_actionForward, "go-next");
+    setIcon(m_actionForward, "pentobi-go-next");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
 
     m_actionForward10 = new QAction(tr("Ten Moves F&orward"), this);
     m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
-    setIcon(m_actionForward10, "forward10");
+    setIcon(m_actionForward10, "pentobi-forward10");
     connect(m_actionForward10, SIGNAL(triggered()), this, SLOT(forward10()));
 
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
@@ -785,7 +785,7 @@ void MainWindow::createActions()
     m_actionMoveSelectedPieceDown->setShortcut(QString("Down"));
 
     m_actionNextPiece = new QAction(tr("Next Piece"), this);
-    setIcon(m_actionNextPiece, "next-piece");
+    setIcon(m_actionNextPiece, "pentobi-next-piece");
     m_actionNextPiece->setShortcut(QString("+"));
     connect(m_actionNextPiece, SIGNAL(triggered()), this, SLOT(nextPiece()));
 
@@ -796,7 +796,7 @@ void MainWindow::createActions()
 
     m_actionNextVariation = new QAction(tr("&Next Variation"), this);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
-    setIcon(m_actionNextVariation, "go-down");
+    setIcon(m_actionNextVariation, "pentobi-go-down");
     connect(m_actionNextVariation, SIGNAL(triggered()),
             this, SLOT(nextVariation()));
 
@@ -807,7 +807,7 @@ void MainWindow::createActions()
 
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
-    setIcon(m_actionNewGame, "newgame");
+    setIcon(m_actionNewGame, "pentobi-newgame");
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
 
     m_actionNoMoveAnnotation =
@@ -827,11 +827,11 @@ void MainWindow::createActions()
     m_actionPlay = new QAction(tr("&Play"), this);
     m_actionPlay->setShortcut(QString("Ctrl+L"));
     m_actionPlay->setToolTip(tr("Make the computer play"));
-    setIcon(m_actionPlay, "play");
+    setIcon(m_actionPlay, "pentobi-play");
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
 
     m_actionPreviousPiece = new QAction(tr("Previous Piece"), this);
-    setIcon(m_actionPreviousPiece, "previous-piece");
+    setIcon(m_actionPreviousPiece, "pentobi-previous-piece");
     m_actionPreviousPiece->setShortcut(QString("-"));
     connect(m_actionPreviousPiece, SIGNAL(triggered()),
             this, SLOT(previousPiece()));
@@ -843,7 +843,7 @@ void MainWindow::createActions()
 
     m_actionPreviousVariation = new QAction(tr("&Previous Variation"), this);
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
-    setIcon(m_actionPreviousVariation, "go-up");
+    setIcon(m_actionPreviousVariation, "pentobi-go-up");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             this, SLOT(previousVariation()));
 
@@ -862,12 +862,12 @@ void MainWindow::createActions()
 
     m_actionRotatePieceAnticlockwise = new QAction(tr("Rotate Anticlockwise"),
                                                    this);
-    setIcon(m_actionRotatePieceAnticlockwise, "piece-rotate-left");
+    setIcon(m_actionRotatePieceAnticlockwise, "pentobi-rotate-left");
     connect(m_actionRotatePieceAnticlockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceAnticlockwise()));
 
     m_actionRotatePieceClockwise = new QAction(tr("Rotate Clockwise"), this);
-    setIcon(m_actionRotatePieceClockwise, "piece-rotate-right");
+    setIcon(m_actionRotatePieceClockwise, "pentobi-rotate-right");
     connect(m_actionRotatePieceClockwise, SIGNAL(triggered()),
             this, SLOT(rotatePieceClockwise()));
 
