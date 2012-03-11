@@ -658,12 +658,12 @@ void Board::write(ostream& out, bool mark_last_move) const
 void Board::write_color_info_line1(ostream& out, Color c) const
 {
     set_color(out, m_color_esc_sequence_text[c]);
+    if (get_to_play() == c)
+        out << '*';
     out << m_color_name[c] << "(" << m_color_char[c] << "): " << get_points(c);
     unsigned int bonus = get_bonus(c);
     if (bonus > 0)
         out << " (+" << bonus << ')';
-    if (get_to_play() == c)
-        out << " *";
     set_color(out, "\x1B[0m");
 }
 
