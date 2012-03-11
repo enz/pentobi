@@ -27,14 +27,6 @@ using libpentobi_base::GameVariant;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-const bool use_weight_max_count = true;
-
-} // namespace
-
-//-----------------------------------------------------------------------------
-
 Player::Player(GameVariant initial_game_variant, const path& books_dir)
     : m_is_book_loaded(false),
       m_use_book(true),
@@ -175,7 +167,11 @@ Move Player::genmove(const Board& bd, Color c)
             max_count = minimum;
         else
             max_count = ValueType(minimum * pow(factor_per_level, m_level - 1));
-        if (use_weight_max_count)
+        // Don't weight max_count in low levels, otherwise it is still too
+        // strong for beginners (later in the game, the weight becomes much
+        // greater than 1 because the simulations become very fast)
+        bool weight_max_count = (m_level >= 4);
+        if (weight_max_count)
         {
             unsigned int player_move = bd.get_nu_moves() / bd.get_nu_colors();
             float weight = 1;

@@ -13,7 +13,8 @@ Current development version
   that start with a given fixed position using the new
   setup properties
 * Added a toolbar button for selecting the computer colors
-* Improved playing strength of the computer player
+* Improved playing strength of the computer player in higher
+  levels.
 * User manual is no longer compiled into the resources of the
   executable but installed in the installation data directory
 * Open a console for stderr output on Windows if Pentobi is
