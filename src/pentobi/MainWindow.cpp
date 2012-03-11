@@ -233,7 +233,7 @@ MainWindow::MainWindow(const QString& initialFile, bool noBook)
     bool showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
     initGameVariantActions();
-    setWindowIcon(QIcon(":/pentobi/pentobi.svg"));
+    setWindowIcon(QIcon(":/pentobi/pentobi.png"));
 
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
         adjustSize();
