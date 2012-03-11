@@ -15,6 +15,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 {
     QSettings settings;
     setWindowTitle(tr("Pentobi - Settings"));
+    // Disable '?' button in title bar on Windows, we don't have
+    // context help
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     m_showNoMovesMessage =

@@ -26,6 +26,9 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(tr("Pentobi - Game Analysis"));
+    // Disable '?' button in title bar on Windows, we don't have
+    // context help
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setMinimumSize(240, 120);
     m_isInitialized = false;
     m_currentPosition = -1;
@@ -181,6 +184,10 @@ void AnalyzeGameWindow::start(Game& game, Search& search)
     initSize();
     m_progressDialog = new QProgressDialog(this);
     m_progressDialog->setWindowModality(Qt::WindowModal);
+    // Disable '?' button in title bar on Windows, we don't have
+    // context help
+    m_progressDialog->setWindowFlags(m_progressDialog->windowFlags()
+                                     & ~Qt::WindowContextHelpButtonHint);
     m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
                                           this));
     m_progressDialog->setWindowTitle(tr("Pentobi - Progress"));
