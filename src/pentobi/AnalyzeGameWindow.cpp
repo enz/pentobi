@@ -176,7 +176,7 @@ QSize AnalyzeGameWindow::sizeHint() const
     return QSize(800, 240);
 }
 
-void AnalyzeGameWindow::start(Game& game, Search& search)
+void AnalyzeGameWindow::start(const Game& game, Search& search)
 {
     m_isInitialized = true;
     m_game = &game;

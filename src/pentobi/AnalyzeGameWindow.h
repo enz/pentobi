@@ -36,12 +36,12 @@ public:
     /** Start an analysis.
         This function will return after the analysis has started but the
         window will be protected by a modal cancelable progress dialog.
-        Don't use the game and the search from a different thread until
-        the signal finished() was emitted.
-        This will temporarily change the current position in the game and use
-        the search to evaluate positions. During the analysis, the parent
-        window is protected with a modal progress dialog. */
-    void start(Game& game, Search& search);
+        Don't modify the game or use the search from a different thread until
+        the signal finished() was emitted. This will walk through every game
+        position in the main variation and use the search to evaluate
+        positions. During the analysis, the parent window is protected with a
+        modal progress dialog. */
+    void start(const Game& game, Search& search);
 
     /** Mark the current position.
         Will clear the current position if the target node is not in the
@@ -72,7 +72,7 @@ private:
 
     bool m_isRunning;
 
-    Game* m_game;
+    const Game* m_game;
 
     Search* m_search;
 
