@@ -96,7 +96,7 @@ void HelpWindow::handleSourceChanged(const QUrl& src)
 
 QSize HelpWindow::sizeHint() const
 {
-    return QSize(480, 800);
+    return QSize(600, 800);
 }
 
 //-----------------------------------------------------------------------------
