@@ -71,6 +71,8 @@ Point find_best_starting_point(const Board& bd, Color c)
     {
         if (bd.is_forbidden(p, c))
             continue;
+        float px = static_cast<float>(p.get_x());
+        float py = static_cast<float>(p.get_y());
         float d = 0;
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         {
@@ -79,8 +81,10 @@ Point find_best_starting_point(const Board& bd, Color c)
                 PointState s = bd.get_point_state(pp);
                 if (! s.is_empty())
                 {
-                    float dx = float(pp.get_x()) - p.get_x();
-                    float dy = ratio * (float(pp.get_y()) - p.get_y());
+                    float ppx = static_cast<float>(pp.get_x());
+                    float ppy = static_cast<float>(pp.get_y());
+                    float dx = ppx - px;
+                    float dy = ratio * (ppy - py);
                     float weight = 1;
                     if (s == c || s == bd.get_second_color(c))
                         weight = 2;
@@ -343,7 +347,7 @@ array<ValueType, 4> State::evaluate_terminal()
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
         double game_result;
-        int score = m_bd.get_score(*i, game_result);
+        ValueType score = ValueType(m_bd.get_score(*i, game_result));
         ValueType score_modification = m_shared_const.score_modification;
         ValueType result;
         if (game_result == 1)
@@ -805,9 +809,10 @@ void State::start_search()
     const Geometry& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
+    ValueType total_piece_points =
+        ValueType(bd.get_board_const().get_total_piece_points());
     m_score_modification_factor =
-        m_shared_const.score_modification
-        / bd.get_board_const().get_total_piece_points();
+        m_shared_const.score_modification / total_piece_points;
     m_nu_simulations = 0;
     m_nu_playout_moves = 0;
     m_nu_last_good_reply_moves = 0;
@@ -820,8 +825,10 @@ void State::start_search()
 
     // Init m_dist_to_center
     m_dist_to_center.init(geometry);
-    float center_x = 0.5f * geometry.get_width() - 0.5f;
-    float center_y = 0.5f * geometry.get_height() - 0.5f;
+    float width = static_cast<float>(geometry.get_width());
+    float height = static_cast<float>(geometry.get_height());
+    float center_x = 0.5f * width - 0.5f;
+    float center_y = 0.5f * height - 0.5f;
     bool is_trigon = (bd.get_board_type() == board_type_trigon
                       || bd.get_board_type() == board_type_trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
@@ -984,7 +991,8 @@ void State::write_info(ostream& out) const
     m_stat_score.write(out, true, 1);
     if (m_nu_playout_moves > 0)
         out << (format(", LGR: %.1f%%")
-                % (100.0 * m_nu_last_good_reply_moves / m_nu_playout_moves));
+                % (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
+                   / static_cast<double>(m_nu_playout_moves)));
     out << '\n';
 }
 

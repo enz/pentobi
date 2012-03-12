@@ -489,7 +489,7 @@ BoardConst::BoardConst(BoardType board_type)
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_duo);
     }
-    m_nu_pieces = m_pieces.size();
+    m_nu_pieces = static_cast<unsigned int>(m_pieces.size());
     m_max_attach_points.fill(0);
     init_adj_status();
     create_moves();

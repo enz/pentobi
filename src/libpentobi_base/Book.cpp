@@ -163,7 +163,8 @@ const Node* Book::select_annotated_child(RandomGenerator& random,
     if (good_moves.empty())
         return 0;
     log() << "Book moves: " << good_moves.size() << '\n';
-    return good_moves[random.generate_small_int(good_moves.size())];
+    unsigned int nu_good_moves = static_cast<unsigned int>(good_moves.size());
+    return good_moves[random.generate_small_int(nu_good_moves)];
 }
 
 const Node* Book::select_child(RandomGenerator& random, const Board& bd,

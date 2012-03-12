@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file mcts/Node.h */
+/** @file libboardgame_mcts/Node.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_MCTS_NODE_H
@@ -264,7 +264,8 @@ void Node<M>::init(const Move& mv, ValueType value, ValueType count,
 template<typename M>
 inline void Node<M>::link_children(Node<Move>& first_child, int nu_children)
 {
-    m_nu_children = nu_children;
+    LIBBOARDGAME_ASSERT(nu_children <= numeric_limits<unsigned short>::max());
+    m_nu_children = static_cast<unsigned short>(nu_children);
     m_first_child = &first_child;
 }
 

@@ -176,8 +176,10 @@ unsigned int TransfTrigonRefl::get_new_point_type() const
 
 CoordPoint TransfTrigonRot60::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(floor(0.5f * p.x + 1.5f * p.y));
-    int y = static_cast<int>(floor(-0.5f * p.x + 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(floor(0.5f * px + 1.5f * py));
+    int y = static_cast<int>(floor(-0.5f * px + 0.5f * py));
     return CoordPoint(x, y);
 }
 
@@ -195,8 +197,10 @@ unsigned int TransfTrigonRot60::get_new_point_type() const
 
 CoordPoint TransfTrigonRot120::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(floor(-0.5f * p.x + 1.5f * p.y));
-    int y = static_cast<int>(ceil(-0.5f * p.x - 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(floor(-0.5f * px + 1.5f * py));
+    int y = static_cast<int>(ceil(-0.5f * px - 0.5f * py));
     return CoordPoint(x, y);
 }
 
@@ -231,8 +235,10 @@ unsigned int TransfTrigonRot180::get_new_point_type() const
 
 CoordPoint TransfTrigonRot240::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(ceil(-0.5f * p.x - 1.5f * p.y));
-    int y = static_cast<int>(ceil(0.5f * p.x - 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(ceil(-0.5f * px - 1.5f * py));
+    int y = static_cast<int>(ceil(0.5f * px - 0.5f * py));
     return CoordPoint(x, y);
 }
 
@@ -250,8 +256,10 @@ unsigned int TransfTrigonRot240::get_new_point_type() const
 
 CoordPoint TransfTrigonRot300::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(ceil(0.5f * p.x - 1.5f * p.y));
-    int y = static_cast<int>(floor(0.5f * p.x + 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(ceil(0.5f * px - 1.5f * py));
+    int y = static_cast<int>(floor(0.5f * px + 0.5f * py));
     return CoordPoint(x, y);
 }
 
@@ -269,8 +277,10 @@ unsigned int TransfTrigonRot300::get_new_point_type() const
 
 CoordPoint TransfTrigonReflRot60::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(floor(0.5f * (-p.x) + 1.5f * p.y));
-    int y = static_cast<int>(floor(-0.5f * (-p.x) + 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(floor(0.5f * (-px) + 1.5f * py));
+    int y = static_cast<int>(floor(-0.5f * (-px) + 0.5f * py));
     return CoordPoint(x, y);
 }
 
@@ -288,8 +298,10 @@ unsigned int TransfTrigonReflRot60::get_new_point_type() const
 
 CoordPoint TransfTrigonReflRot120::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(floor(-0.5f * (-p.x) + 1.5f * p.y));
-    int y = static_cast<int>(ceil(-0.5f * (-p.x) - 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(floor(-0.5f * (-px) + 1.5f * py));
+    int y = static_cast<int>(ceil(-0.5f * (-px) - 0.5f * py));
     return CoordPoint(x, y);
 }
 
@@ -324,8 +336,10 @@ unsigned int TransfTrigonReflRot180::get_new_point_type() const
 
 CoordPoint TransfTrigonReflRot240::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(ceil(-0.5f * (-p.x) - 1.5f * p.y));
-    int y = static_cast<int>(ceil(0.5f * (-p.x) - 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(ceil(-0.5f * (-px) - 1.5f * py));
+    int y = static_cast<int>(ceil(0.5f * (-px) - 0.5f * py));
     return CoordPoint(x, y);
 }
 
@@ -343,8 +357,10 @@ unsigned int TransfTrigonReflRot240::get_new_point_type() const
 
 CoordPoint TransfTrigonReflRot300::get_transformed(const CoordPoint& p) const
 {
-    int x = static_cast<int>(ceil(0.5f * (-p.x) - 1.5f * p.y));
-    int y = static_cast<int>(floor(0.5f * (-p.x) + 0.5f * p.y));
+    float px = static_cast<float>(p.x);
+    float py = static_cast<float>(p.y);
+    int x = static_cast<int>(ceil(0.5f * (-px) - 1.5f * py));
+    int y = static_cast<int>(floor(0.5f * (-px) + 0.5f * py));
     return CoordPoint(x, y);
 }
 

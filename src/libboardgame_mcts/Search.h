@@ -1342,7 +1342,9 @@ void Search<S, M, P>::update_values(const array<ValueType, max_players>& eval)
 {
     m_tree.add_value(m_tree.get_root(), eval[m_player]);
     m_tree.inc_visit_count(m_tree.get_root());
-    for (size_t i = 1; i < m_simulation.m_nodes.size(); ++i)
+    unsigned int nu_nodes =
+        static_cast<unsigned int>(m_simulation.m_nodes.size());
+    for (unsigned int i = 1; i < nu_nodes; ++i)
     {
         const Node& node = *m_simulation.m_nodes[i];
         PlayerMove mv = m_state.get_move(i - 1);
