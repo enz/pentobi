@@ -31,37 +31,25 @@ Node::Node()
 {
 }
 
-void Node::append(Node& node)
+void Node::append(unique_ptr<Node> node)
 {
-    LIBBOARDGAME_ASSERT(node.m_parent == 0);
     if (m_first_child.get() == 0)
-        m_first_child.reset(&node);
+        m_first_child = move(node);
     else
-        get_last_child()->m_sibling.reset(&node);
-}
-
-void Node::append_to(Node& node)
-{
-    LIBBOARDGAME_ASSERT(m_parent == 0);
-    node.append(*this);
-    m_parent = &node;
-}
-
-Node* Node::create()
-{
-    return new Node();
+        get_last_child()->m_sibling = move(node);
 }
 
 Node& Node::create_new_child()
 {
-    Node* node = create();
+    unique_ptr<Node> node(new Node());
+    node->m_parent = this;
+    Node& result = *(node.get());
     Node* last_child = get_last_child();
     if (last_child == 0)
-        m_first_child.reset(node);
+        m_first_child = move(node);
     else
-        last_child->m_sibling.reset(node);
-    node->m_parent = this;
-    return *node;
+        last_child->m_sibling = move(node);
+    return result;
 }
 
 Property* Node::find_property(const string& id) const

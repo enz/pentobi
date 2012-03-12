@@ -37,17 +37,10 @@ struct Property
 class Node
 {
 public:
-    static Node* create();
+    Node();
 
-    /** Append this node as a new child to another node.
-        The other node takes the ownership of this node.
-        @pre m_parent == 0 */
-    void append_to(Node& node);
-
-    /** Append a new child.
-        @param node (@ref libboardgame_doc_takesownership)
-        @pre node.m_parent == 0 */
-    void append(Node& node);
+    /** Append a new child. */
+    void append(unique_ptr<Node> node);
 
     bool has_property(const string& id) const;
 
@@ -142,8 +135,6 @@ private:
     unique_ptr<Node> m_sibling;
 
     unique_ptr<Property> m_first_property;
-
-    Node();
 
     Property* find_property(const string& id) const;
 

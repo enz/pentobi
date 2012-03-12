@@ -48,7 +48,7 @@ void TreeReader::on_begin_node(bool is_root)
 {
     if (is_root)
     {
-        m_root.reset(Node::create());
+        m_root.reset(new Node());
         m_current = m_root.get();
     }
     else

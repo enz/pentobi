@@ -86,7 +86,7 @@ bool Tree::has_comment_property(const Node& node, const string& key) const
 
 void Tree::init()
 {
-    unique_ptr<Node> root(Node::create());
+    unique_ptr<Node> root(new Node());
     m_root = move(root);
     m_modified = false;
 }

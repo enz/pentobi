@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file sgf/UtilTest.cpp */
+/** @file unittest/libboardgame_sgf/UtilTest.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -18,7 +18,7 @@ using namespace libboardgame_sgf::util;
 
 LIBBOARDGAME_TEST_CASE(sgf_util_get_path_from_root)
 {
-    unique_ptr<Node> root(Node::create());
+    unique_ptr<Node> root(new Node());
     const Node& child = root->create_new_child();
     vector<const Node*> path;
     get_path_from_root(child, path);
