@@ -25,6 +25,9 @@ using libpentobi_mcts::Player;
 //-----------------------------------------------------------------------------
 
 /** Automatic generation of opening books.
+    Note: automatically generated book builder are currently not used in
+    Pentobi, this code exists only for future research.
+
     The algorithm for the book generation is a modified version of the algorithm
     described in T. R. Lincke, "Strategies for the Automatic Construction of
     Opening Books", Computers and Games Conference 2000. For each node in the
@@ -62,11 +65,11 @@ private:
 
     double m_expansion_parameter;
 
-    Board m_bd;
+    unique_ptr<Board> m_bd;
 
     BoardUpdater m_updater;
 
-    Player m_player;
+    unique_ptr<Player> m_player;
 
     unique_ptr<ArrayList<Move, Move::range>> m_moves;
 

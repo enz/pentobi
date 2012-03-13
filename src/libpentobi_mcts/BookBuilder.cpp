@@ -57,9 +57,9 @@ int evaluation_level = 6;
 BookBuilder::BookBuilder(GameVariant game_variant)
   : m_game_variant(game_variant),
     m_tree(game_variant),
-    m_bd(game_variant),
-    m_updater(m_tree, m_bd),
-    m_player(game_variant, ""),
+    m_bd(new Board(game_variant)),
+    m_updater(m_tree, *m_bd),
+    m_player(new Player(game_variant, "")),
     m_moves(new ArrayList<Move, Move::range>)
 {
     if (game_variant != game_variant_duo
@@ -165,7 +165,7 @@ void BookBuilder::build(const path& file)
         while ((node = find_unevaluated_node()) != 0)
         {
             m_updater.update(*node);
-            log() << "Updating unevaluated node:\n" << m_bd;
+            log() << "Updating unevaluated node:\n" << *m_bd;
             double value = create_heuristic();
             log() << "Value: " << value << '\n';
             vector<ColorMove> sequence = get_sequence(*node);
@@ -174,7 +174,7 @@ void BookBuilder::build(const path& file)
         }
         node = &find_node_to_expand();
         m_updater.update(*node);
-        log() << "Next node to expand:\n" << m_bd;
+        log() << "Next node to expand:\n" << *m_bd;
         vector<ColorMove> moves = generate_moves();
         log() << "Moves: " << moves.size() << '\n';
         vector<ColorMove> sequence = get_sequence(*node);
@@ -186,14 +186,14 @@ void BookBuilder::build(const path& file)
 
 double BookBuilder::create_heuristic()
 {
-    Search& search = m_player.get_search();
+    Search& search = m_player->get_search();
     // Do not avoid symmetric draw as second player, otherwise the book will not
     // see that moves are bad for the first player that allow the second player
     // to enforce a symmetric draw
     search.set_avoid_symmetric_draw(false);
-    m_player.set_level(evaluation_level);
-    m_player.set_use_book(false);
-    m_player.genmove(m_bd, m_bd.get_effective_to_play());
+    m_player->set_level(evaluation_level);
+    m_player->set_use_book(false);
+    m_player->genmove(*m_bd, m_bd->get_effective_to_play());
     return search.get_tree().get_root().get_value();
 }
 
@@ -240,10 +240,10 @@ const Node* BookBuilder::find_unevaluated_node() const
 
 vector<ColorMove> BookBuilder::generate_moves() const
 {
-    Color c = m_bd.get_effective_to_play();
-    m_bd.gen_moves(c, *m_moves);
+    Color c = m_bd->get_effective_to_play();
+    m_bd->gen_moves(c, *m_moves);
     unsigned int min_piece_size = 0;
-    unsigned int nu_moves = m_bd.get_nu_moves();
+    unsigned int nu_moves = m_bd->get_nu_moves();
     if (m_game_variant == game_variant_duo)
     {
         if (nu_moves < 4)
@@ -262,8 +262,8 @@ vector<ColorMove> BookBuilder::generate_moves() const
     vector<ColorMove> result;
     BOOST_FOREACH(Move mv, *m_moves)
     {
-        const MoveInfo& info = m_bd.get_move_info(mv);
-        if (m_bd.get_piece(info.piece).get_size() >= min_piece_size)
+        const MoveInfo& info = m_bd->get_move_info(mv);
+        if (m_bd->get_piece(info.piece).get_size() >= min_piece_size)
             result.push_back(ColorMove(c, mv));
     }
     return result;
@@ -286,13 +286,13 @@ ColorMove BookBuilder::get_transformed(ColorMove mv,
 {
     if (mv.move.is_pass())
         return mv;
-    unsigned int width = m_bd.get_geometry().get_width();
-    unsigned int height = m_bd.get_geometry().get_height();
+    unsigned int width = m_bd->get_geometry().get_width();
+    unsigned int height = m_bd->get_geometry().get_height();
     MovePoints points;
-    BOOST_FOREACH(Point p, m_bd.get_move_points(mv.move))
+    BOOST_FOREACH(Point p, m_bd->get_move_points(mv.move))
         points.push_back(transform.get_transformed(p, width, height));
     Move transformed_mv;
-    m_bd.find_move(points, transformed_mv);
+    m_bd->find_move(points, transformed_mv);
     return ColorMove(mv.color, transformed_mv);
 }
 
@@ -382,7 +382,7 @@ void BookBuilder::update_priority(const Node& node, double min_sibling_value)
         log() << "Updating priority, root node\n";
     else
         log() << "Updating priority, node with move: "
-              << m_bd.to_string(m_tree.get_move(node).move) << '\n';
+              << m_bd->to_string(m_tree.get_move(node).move) << '\n';
     if (m_tree.has_comment_property(node, "p"))
         log() << "Old priority: "
               << m_tree.get_comment_property<double>(node, "p") << '\n';
@@ -416,7 +416,7 @@ void BookBuilder::update_value(const Node& node)
         log() << "Updating value, root node\n";
     else
         log() << "Updating value, node with move: "
-              << m_bd.to_string(m_tree.get_move(node).move) << '\n';
+              << m_bd->to_string(m_tree.get_move(node).move) << '\n';
     log() << "Old value: " << m_tree.get_comment_property<double>(node, "v")
           << '\n';
     double value = numeric_limits<double>::max();
