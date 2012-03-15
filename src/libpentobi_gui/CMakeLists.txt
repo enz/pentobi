@@ -17,6 +17,7 @@ set(pentobi_gui_STAT_SRCS
   PieceSelector.cpp
   SameHeightLayout.cpp
   ScoreDisplay.cpp
+  StatusBarButton.cpp
   Util.cpp
   )
 
@@ -30,6 +31,7 @@ set(pentobi_gui_MOC_HDRS
   PieceSelector.h
   SameHeightLayout.h
   ScoreDisplay.h
+  StatusBarButton.h
   )
 
 set(pentobi_gui_RCS

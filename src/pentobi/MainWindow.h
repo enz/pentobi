@@ -15,6 +15,7 @@
 #include "libpentobi_gui/OrientationDisplay.h"
 #include "libpentobi_gui/PieceSelector.h"
 #include "libpentobi_gui/ScoreDisplay.h"
+#include "libpentobi_gui/StatusBarButton.h"
 
 using namespace std;
 using libboardgame_sgf::Node;
@@ -437,7 +438,7 @@ private:
 
     QMenu* m_menuOpenRecent;
 
-    QToolButton* m_buttonFullscreen;
+    StatusBarButton* m_buttonFullscreen;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 

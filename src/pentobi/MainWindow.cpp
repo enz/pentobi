@@ -208,9 +208,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     updateRecentFiles();
     m_moveNumber = new QLabel();
     statusBar()->addPermanentWidget(m_moveNumber);
-    m_buttonFullscreen = new QToolButton();
-    m_buttonFullscreen->setDefaultAction(m_actionFullscreen);
-    m_buttonFullscreen->setIconSize(QSize(16, 16));
+    m_buttonFullscreen = new StatusBarButton(m_actionFullscreen);
     statusBar()->addPermanentWidget(m_buttonFullscreen);
     addAction(m_actionMoveSelectedPieceLeft);
     addAction(m_actionMoveSelectedPieceRight);
