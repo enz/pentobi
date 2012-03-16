@@ -340,6 +340,9 @@ private:
     /** Player to play at the root node of the search. */
     unsigned int m_player;
 
+    /** Currently always 1 (multi-threaded search not yet implemented). */
+    unsigned int m_nu_threads;
+
     /** Time of last search. */
     double m_last_time;
 
@@ -400,11 +403,13 @@ private:
 
     bool check_move_cannot_change(ValueType count, ValueType remaining) const;
 
-    bool expand_node(const Node& node, const Node*& best_child);
+    bool expand_node(unsigned int thread_id, const Node& node,
+                     const Node*& best_child);
 
     LIBBOARDGAME_FLATTEN void playout();
 
-    void play_in_tree(bool& is_out_of_memory, bool& is_terminal);
+    void play_in_tree(unsigned int thread_id, bool& is_out_of_memory,
+                      bool& is_terminal);
 
     ValueType prune(TimeSource& time_source, double time, double max_time,
                     ValueType prune_min_count);
@@ -454,14 +459,15 @@ Search<S, M, P>::Search(const State& state)
       m_rave_check_same(false),
       m_weight_rave_updates(true),
       m_use_last_good_reply(false),
+      m_nu_threads(1),
       m_unexplored_value(numeric_limits<ValueType>::max()),
       m_prune_count_start(16),
       m_rave_equivalence(1000),
       m_tree_memory(256000000),
       m_state(state),
       m_fast_log(10),
-      m_tree(1),
-      m_tmp_tree(1),
+      m_tree(1, m_nu_threads),
+      m_tmp_tree(1, m_nu_threads),
       m_assertion_handler(*this)
 {
     set_bias_term_constant(0.7f);
@@ -564,9 +570,10 @@ void Search<S, M, P>::dump(ostream& out) const
 }
 
 template<class S, class M, unsigned int P>
-bool Search<S, M, P>::expand_node(const Node& node, const Node*& best_child)
+bool Search<S, M, P>::expand_node(unsigned int thread_id, const Node& node,
+                                  const Node*& best_child)
 {
-    typename Tree::NodeExpander expander(m_tree, node);
+    typename Tree::NodeExpander expander(thread_id, m_tree, node);
     m_state.gen_children(expander);
     if (! expander.is_tree_full())
     {
@@ -749,7 +756,8 @@ void Search<S, M, P>::playout()
 }
 
 template<class S, class M, unsigned int P>
-void Search<S, M, P>::play_in_tree(bool& is_out_of_memory, bool& is_terminal)
+void Search<S, M, P>::play_in_tree(unsigned int thread_id,
+                                   bool& is_out_of_memory, bool& is_terminal)
 {
     const Node& root = m_tree.get_root();
     const Node* node = &root;
@@ -762,7 +770,7 @@ void Search<S, M, P>::play_in_tree(bool& is_out_of_memory, bool& is_terminal)
             node = select_child(*node);
         else if (node->get_visit_count() >= m_expand_threshold || node == &root)
         {
-            if (! expand_node(*node, node))
+            if (! expand_node(thread_id, *node, node))
             {
                 is_out_of_memory = true;
                 return;
@@ -898,6 +906,8 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
     m_timer.reset(time_source);
     m_time_source = &time_source;
     on_start_search();
+    // Currently always 0 (multi-threaded search not yet implemented)
+    unsigned int thread_id = 0;
     m_player = get_player();
     m_stat_len.clear();
     m_stat_in_tree_len.clear();
@@ -930,7 +940,7 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
         m_state.start_simulation(m_nu_simulations);
         bool is_out_of_memory;
         bool is_terminal;
-        play_in_tree(is_out_of_memory, is_terminal);
+        play_in_tree(thread_id, is_out_of_memory, is_terminal);
         if (is_out_of_memory)
         {
             if (m_prune_full_tree)

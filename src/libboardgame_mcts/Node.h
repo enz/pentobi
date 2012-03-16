@@ -71,7 +71,7 @@ public:
         child information and visit count should be preserved. */
     void clear_values();
 
-    void link_children(Node<Move>& first_child, int nu_children);
+    void link_children(Node& first_child, int nu_children);
 
     void unlink_children();
 
@@ -80,6 +80,8 @@ public:
     void add_rave_value(ValueType v, ValueType weight);
 
     void copy_data_from(const Node& node);
+
+    const Node* get_first_child() const;
 
 private:
     unsigned short m_nu_children;
@@ -103,8 +105,6 @@ private:
 
     /** Not to be implemented */
     Node& operator=(const Node&);
-
-    const Node* get_first_child() const;
 };
 
 template<typename M>
