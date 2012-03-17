@@ -33,6 +33,7 @@ Node::Node()
 
 void Node::append(unique_ptr<Node> node)
 {
+    node->m_parent = this;
     if (m_first_child.get() == 0)
         m_first_child = move(node);
     else

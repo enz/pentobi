@@ -96,6 +96,8 @@ public slots:
 
     void keepOnlyPosition();
 
+    void keepOnlySubtree();
+
     void makeMainVariation();
 
     void newGame();
@@ -323,6 +325,8 @@ private:
     QAction* m_actionInterrupt;
 
     QAction* m_actionKeepOnlyPosition;
+
+    QAction* m_actionKeepOnlySubtree;
 
     QAction* m_actionLevel[maxLevel];
 

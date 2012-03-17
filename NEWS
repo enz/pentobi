@@ -9,9 +9,9 @@ Current development version
 * Support for setup properties in blksgf files (note that files
   with setup properties cannot be read by older versions of
   Pentobi)
-* New menu item Edit/Keep Only Position to create files
-  that start with a given fixed position using the new
-  setup properties
+* New menu items Edit/Keep Only Position and Edit/Keep Only Subtree
+  to create files that start with a given fixed position using the
+  new setup properties
 * Added a toolbar button for selecting the computer colors
 * Improved playing strength of the computer player in higher
   levels.

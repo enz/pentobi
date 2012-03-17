@@ -110,6 +110,10 @@ public:
         as a setup in its root node. */
     void keep_only_position();
 
+    /** Like keep_only_position() but does not delete the children of the
+        current node. */
+    void keep_only_subtree();
+
     void make_main_variation();
 
     /** Make the current node the first child of its parent. */

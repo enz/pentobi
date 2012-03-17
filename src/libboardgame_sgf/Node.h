@@ -124,6 +124,11 @@ public:
 
     void remove_child(Node& child);
 
+    /** Remove all children.
+        @return A pointer to the first child (which also owns its siblings),
+        which can be used to append the children to a different node. */
+    unique_ptr<Node> remove_children();
+
     /** @pre has_parent() */
     void make_first_child();
 
@@ -232,6 +237,12 @@ inline bool Node::has_parent() const
 inline bool Node::has_single_child() const
 {
     return m_first_child.get() != 0 && m_first_child->m_sibling.get() == 0;
+}
+
+inline unique_ptr<Node> Node::remove_children()
+{
+    m_first_child->m_parent = 0;
+    return move(m_first_child);
 }
 
 template<typename T>

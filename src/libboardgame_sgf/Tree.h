@@ -77,6 +77,11 @@ public:
 
     bool remove_property(const Node& node, const string& id);
 
+    /** See Node::remove_children() */
+    unique_ptr<Node> remove_children(const Node& node);
+
+    void append(const Node& node, unique_ptr<Node> child);
+
     /** Get comment.
         @return The comment, or an empty string if the node contains no
         comment. */
@@ -156,6 +161,13 @@ private:
 
     Node& non_const(const Node& node);
 };
+
+inline void Tree::append(const Node& node, unique_ptr<Node> child)
+{
+    if (child.get() != 0)
+        m_modified = true;
+    non_const(node).append(move(child));
+}
 
 inline void Tree::clear_modified()
 {
@@ -245,6 +257,13 @@ inline Node& Tree::non_const(const Node& node)
 {
     LIBBOARDGAME_ASSERT(contains(node));
     return const_cast<Node&>(node);
+}
+
+inline unique_ptr<Node> Tree::remove_children(const Node& node)
+{
+    if (node.has_children())
+        m_modified = true;
+    return non_const(node).remove_children();
 }
 
 inline void Tree::set_charset(const string& charset)

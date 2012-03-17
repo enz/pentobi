@@ -77,6 +77,17 @@ void Game::keep_only_position()
     goto_node(m_tree.get_root());
 }
 
+void Game::keep_only_subtree()
+{
+    unique_ptr<Node> subtree = m_tree.remove_children(*m_current);
+    Setup setup;
+    get_current_position_as_setup(*m_bd, setup);
+    m_tree.init_game_variant(m_tree.get_game_variant(), setup);
+    const Node& root = m_tree.get_root();
+    m_tree.append(root, move(subtree));
+    goto_node(root);
+}
+
 void Game::play(ColorMove mv, bool always_create_new_node)
 {
     m_bd->play(mv);

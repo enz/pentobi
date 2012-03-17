@@ -734,6 +734,10 @@ void MainWindow::createActions()
     connect(m_actionKeepOnlyPosition, SIGNAL(triggered()),
             this, SLOT(keepOnlyPosition()));
 
+    m_actionKeepOnlySubtree = new QAction(tr("Keep Only &Subtree"), this);
+    connect(m_actionKeepOnlySubtree, SIGNAL(triggered()),
+            this, SLOT(keepOnlySubtree()));
+
     m_actionMakeMainVariation = new QAction(tr("M&ake Main Variation"), this);
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
             this, SLOT(makeMainVariation()));
@@ -883,7 +887,7 @@ void MainWindow::createActions()
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), this, SLOT(saveAs()));
 
-    m_actionSelectNextColor = new QAction(tr("&Select Next Color"), this);
+    m_actionSelectNextColor = new QAction(tr("Select Next &Color"), this);
     m_actionSelectNextColor->setShortcut(QString("Ctrl+C"));
     connect(m_actionSelectNextColor, SIGNAL(triggered()),
             this, SLOT(selectNextColor()));
@@ -1112,6 +1116,7 @@ void MainWindow::createMenu()
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionTruncate);
     menuEdit->addAction(m_actionKeepOnlyPosition);
+    menuEdit->addAction(m_actionKeepOnlySubtree);
     menuEdit->addAction(m_actionSelectNextColor);
     menuEdit->addSeparator();
     menuEdit->addAction(m_actionSettings);
@@ -1771,6 +1776,13 @@ void MainWindow::keepOnlyPosition()
 {
     cancelThread();
     m_game->keep_only_position();
+    updateWindow(true);
+}
+
+void MainWindow::keepOnlySubtree()
+{
+    cancelThread();
+    m_game->keep_only_subtree();
     updateWindow(true);
 }
 
@@ -2926,6 +2938,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionFindMove->setEnabled(! isGameOver);
     m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
     m_actionKeepOnlyPosition->setEnabled(hasParent || hasChildren);
+    m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
     m_actionMakeMainVariation->setEnabled(! isMain);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
