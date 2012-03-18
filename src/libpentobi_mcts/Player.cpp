@@ -134,34 +134,38 @@ Move Player::genmove(const Board& bd, Color c)
     else
     {
         // The minimum number of simulations and increase factor per level are
-        // chosen such that the number of simulations is at minimum in the same
-        // order of magnitude than the typical branching factor (or a bit less),
-        // and that the total time per game and player at level 6 is less than
-        // 20 min (10 min for Duo) even on somewhat outdated PC hardware. (This
-        // also takes the additional weighting of the number of simulations
-        // depending on the move number into account.)
-        // The increase factor should be no less than 2 to produce a noticable
-        // effect on playing strength between levels.
+        // chosen such that the total time per game and player at level 6 is
+        // less than 20 min (10 min for Duo) even on somewhat outdated PC
+        // hardware. (This also takes the additional weighting of the number of
+        // simulations depending on the move number into account.)
+        // The increase factor should be no less than 2-3 to produce a
+        // noticable effect on playing strength between levels.
+        // The minimum number of simulations is very small to avoid that level
+        // 1 is too strong for absolute beginners. Note that using the search
+        // with simulations much smaller than the branching factor works only
+        // because node values are initialized with prior knowledge and the
+        // final move selection based on the visit count uses the value as a
+        // a tie-breaker.
         ValueType minimum;
         ValueType factor_per_level;
         if (variant == game_variant_classic
             || variant == game_variant_classic_2)
         {
-            minimum = 100;
-            factor_per_level = 3.95f;
+            minimum = 30;
+            factor_per_level = 5.0f;
         }
         else if (variant == game_variant_trigon
                  || variant == game_variant_trigon_2
                  || variant == game_variant_trigon_3)
         {
-            minimum = 170;
-            factor_per_level = 2.7f;
+            minimum = 30;
+            factor_per_level = 3.8f;
         }
         else
         {
             LIBBOARDGAME_ASSERT(variant == game_variant_duo);
-            minimum = 180;
-            factor_per_level = 4.7f;
+            minimum = 30;
+            factor_per_level = 6.7f;
         }
         if (m_level <= 1)
             max_count = minimum;
