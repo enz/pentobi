@@ -1,18 +1,16 @@
 //-----------------------------------------------------------------------------
-/** @file RandomGenerator.h */
+/** @file libboardgame_util/RandomGenerator.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_RANDOM_GENERATOR_H
 #define LIBBOARDGAME_UTIL_RANDOM_GENERATOR_H
 
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/lagged_fibonacci.hpp>
+#include <random>
 #include "Assert.h"
 
 namespace libboardgame_util {
 
-using boost::mt19937;
-using boost::lagged_fibonacci607;
+using namespace std;
 
 //-----------------------------------------------------------------------------
 
@@ -62,18 +60,24 @@ public:
 private:
     mt19937 m_generator;
 
-    lagged_fibonacci607 m_float_generator;
+    // GCC 4.4 does not use the name uniform_real_distribution (as in C++11)
+    // but uniform_real. This workaround can be removed when we begin using
+    // other C++11 features that require GCC >4.4 anyway
+#if defined __GNUC__ && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ <= 4))
+    uniform_real<float> m_float_distribution;
+#else
+    uniform_real_distribution<float> m_float_distribution;
+#endif
 };
 
 inline void RandomGenerator::set_seed(ResultType seed)
 {
     m_generator.seed(seed);
-    m_float_generator.seed(seed);
 }
 
 inline double RandomGenerator::generate_float()
 {
-    return m_float_generator();
+    return m_float_distribution(m_generator);
 }
 
 inline int RandomGenerator::generate_small_int(int n)

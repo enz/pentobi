@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file RandomGenerator.cpp */
+/** @file libboardgame_util/RandomGenerator.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -16,7 +16,6 @@
 namespace libboardgame_util {
 
 using namespace std;
-using boost::mt11213b;
 
 //----------------------------------------------------------------------------
 
@@ -24,7 +23,7 @@ namespace {
 
 bool is_seed_set = false;
 
-uint32_t the_seed;
+RandomGenerator::ResultType the_seed;
 
 list<RandomGenerator*>& get_all_generators()
 {
@@ -32,10 +31,10 @@ list<RandomGenerator*>& get_all_generators()
     return all_generators;
 }
 
-uint32_t get_nondet_seed()
+RandomGenerator::ResultType get_nondet_seed()
 {
-    static mt11213b seed_generator;
-    uint32_t seed = uint32_t(time(0));
+    static mt19937 seed_generator;
+    RandomGenerator::ResultType seed = RandomGenerator::ResultType(time(0));
     seed ^= seed_generator();
     return seed;
 }
@@ -55,7 +54,7 @@ RandomGenerator::~RandomGenerator() throw()
     get_all_generators().remove(this);
 }
 
-void RandomGenerator::set_global_seed(uint32_t seed)
+void RandomGenerator::set_global_seed(ResultType seed)
 {
     is_seed_set = true;
     the_seed = seed;
