@@ -243,14 +243,20 @@ void State::compute_features()
     Grid<ValueType> adj_point_value(geometry);
     for (BoardIterator i(m_bd); i; ++i)
     {
-        if (m_bd.is_forbidden(*i, to_play)
-            && m_bd.get_point_state(*i) != to_play)
+        PointState s = m_bd.get_point_state(*i);
+        if (m_bd.is_forbidden(*i, to_play) && s != to_play)
             attach_point_value[*i] = -5;
         else
             attach_point_value[*i] = 1;
         if (! m_bd.is_forbidden(*i, to_play))
             // Creating new forbidden points is a bad thing
             adj_point_value[*i] = -0.2f;
+        else if (s == second_color)
+            // Connecting 2 player colors in 2-colors-per-player game variants
+            // variants is good (in other variants second_color is the same as
+            // to_play but there it doesn't matter what adj_point_value[*i] is
+            // because moves adjacent to to_play are not legal anyway).
+            adj_point_value[*i] = 2;
         else
             adj_point_value[*i] = 0;
     }
