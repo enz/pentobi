@@ -23,4 +23,17 @@ LIBBOARDGAME_TEST_CASE(sgf_node_create_new_child)
     LIBBOARDGAME_CHECK_EQUAL(&child.get_parent(), parent.get());
 }
 
+LIBBOARDGAME_TEST_CASE(sgf_node_remove_property)
+{
+    string id = "B";
+    unique_ptr<Node> node(new Node());
+    LIBBOARDGAME_CHECK(! node->has_property(id));
+    node->set_property(id, "foo");
+    LIBBOARDGAME_CHECK(node->has_property(id));
+    LIBBOARDGAME_CHECK_EQUAL(node->get_property(id), "foo");
+    bool result = node->remove_property(id);
+    LIBBOARDGAME_CHECK(result);
+    LIBBOARDGAME_CHECK(! node->has_property(id));
+}
+
 //-----------------------------------------------------------------------------

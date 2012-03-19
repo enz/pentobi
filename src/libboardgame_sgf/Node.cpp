@@ -199,26 +199,30 @@ bool Node::remove_property(const string& id)
         return false;
     if (last != 0)
         last->next = move(property->next);
+    else
+        m_first_property = move(property->next);
     return true;
 }
 
-void Node::remove_child(Node& child)
+unique_ptr<Node> Node::remove_child(Node& child)
 {
-    Node* node = m_first_child.get();
-    Node* previous = 0;
+    unique_ptr<Node>* node = &m_first_child;
+    unique_ptr<Node>* previous = 0;
     while (true)
     {
-        if (node == &child)
+        if (node->get() == &child)
         {
+            unique_ptr<Node> result = move(*node);
             if (previous == 0)
                 m_first_child = move(child.m_sibling);
             else
-                previous->m_sibling = move(child.m_sibling);
-            return;
+                (*previous)->m_sibling = move(child.m_sibling);
+            result->m_parent = 0;
+            return result;
         }
         previous = node;
-        node = node->m_sibling.get();
-        LIBBOARDGAME_ASSERT(node != 0);
+        node = &(*node)->m_sibling;
+        LIBBOARDGAME_ASSERT(node);
     }
 }
 
