@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file sgf/Tree.cpp */
+/** @file libboardgame_sgf/Tree.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -105,12 +105,22 @@ bool Tree::is_comment_property_line(const string& line, const string& key)
     return (trim_copy(line.substr(0, pos)) == key);
 }
 
+void Tree::make_first_child(const Node& node)
+{
+    const Node* parent = node.get_parent_or_null();
+    if (parent != 0 && &parent->get_first_child() != &node)
+    {
+        non_const(node).make_first_child();
+        m_modified = true;
+    }
+}
+
 void Tree::make_main_variation(const Node& node)
 {
     Node* current = &non_const(node);
     while (current->has_parent())
     {
-        current->make_first_child();
+        make_first_child(*current);
         current = &current->get_parent();
     }
 }
