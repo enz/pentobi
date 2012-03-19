@@ -194,6 +194,8 @@ bool Node::remove_property(const string& id)
         return false;
     if (last != 0)
         last->m_next = move(property->m_next);
+    else
+        m_first_property = move(property->next);
     return true;
 }
 

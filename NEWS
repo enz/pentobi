@@ -6,6 +6,8 @@ Current development version (bugfix branch for version 1)
   Qt SVG plugin.
 * Set file modified marker if game tree was changed with
   Make Main Variation
+* Minor bugfixes in the code (that should not have resulted in
+  user-visible errors)
 * Made the code compile without warnings with GCC -Wunused
 
 
