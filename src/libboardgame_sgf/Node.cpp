@@ -195,7 +195,7 @@ bool Node::remove_property(const string& id)
     if (last != 0)
         last->m_next = move(property->m_next);
     else
-        m_first_property = move(property->next);
+        m_first_property = move(property->m_next);
     return true;
 }
 
