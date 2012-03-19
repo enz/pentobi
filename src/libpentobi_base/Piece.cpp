@@ -72,8 +72,8 @@ NormalizedPoints normalize(const Piece::Points& points, unsigned int point_type,
     unsigned int width; // unused
     unsigned int height; // unused
     CoordPoint offset;
-    normalize_offset(geometry, normalized.points.begin(),
-                     normalized.points.end(), width, height, offset);
+    normalize_offset(normalized.points.begin(), normalized.points.end(), width,
+                     height, offset);
     normalized.point_type = geometry.get_point_type(offset);
     // Sort the coordinates
     sort(normalized.points.begin(), normalized.points.end());

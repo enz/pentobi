@@ -283,7 +283,7 @@ void GuiBoard::moveSelectedPieceUp()
     }
 }
 
-void GuiBoard::paintEvent(QPaintEvent* event)
+void GuiBoard::paintEvent(QPaintEvent*)
 {
     if (! m_isInitialized)
         return;

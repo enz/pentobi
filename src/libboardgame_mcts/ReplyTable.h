@@ -86,6 +86,7 @@ template<class S, class M, unsigned int P>
 void ReplyTable<S,M,P>::forget(PlayerMove mv, PlayerMove reply)
 {
     LIBBOARDGAME_ASSERT(mv.player < m_nu_players);
+    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(reply);
 #if LIBBOARDGAME_DEBUG
     if (m_is_next_player_known[mv.player])
         LIBBOARDGAME_ASSERT(m_next_player[mv.player] == reply.player);

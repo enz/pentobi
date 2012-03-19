@@ -6,7 +6,7 @@
 
 //-----------------------------------------------------------------------------
 
-int main(int argc, char* argv[])
+int main(int, char**)
 {
     if (libboardgame_test::run_all_tests())
         return 0;
