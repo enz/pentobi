@@ -543,6 +543,8 @@ private:
 
     void updateWindow(bool currentNodeChanged);
 
+    void updateWindowModified();
+
     void updateComment();
 
     void updateMoveAnnotationActions();
