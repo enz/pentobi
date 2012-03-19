@@ -122,7 +122,9 @@ public:
 
     Node& create_new_child();
 
-    void remove_child(Node& child);
+    /** Remove a child.
+        @return The removed child node. */
+    unique_ptr<Node> remove_child(Node& child);
 
     /** Remove all children.
         @return A pointer to the first child (which also owns its siblings),

@@ -62,6 +62,18 @@ public:
     /** Make a node the first child of its parent. */
     void make_first_child(const Node& node);
 
+    /** Make a node the root node of the tree.
+        All nodes that are not the given node or in the subtree below it are
+        deleted. Note that this operation in general creates a semantically
+        invalid tree (e.g. missing GM property in the new root). In general,
+        you will also have to examine the nodes in the path to the node in the
+        original tree and then make the tree valid again after calling
+        make_root(). Typically, you will have to look at the moves played
+        before this node and convert them into setup properties to add to the
+        new root such that the board position at this node is the same as
+        originally. */
+    void make_root(const Node& node);
+
     void make_main_variation(const Node& node);
 
     bool contains(const Node& node) const;

@@ -11,6 +11,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include "BoardUpdater.h"
+#include "BoardUtil.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/StringUtil.h"
 
@@ -28,6 +30,7 @@ using libboardgame_sgf::util::get_go_point_property_value;
 using libboardgame_sgf::util::parse_go_move_property_value;
 using libboardgame_sgf::util::parse_go_point_property_value;
 using libboardgame_util::string_util::to_string;
+using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------
 
@@ -39,6 +42,44 @@ Tree::Tree(GameVariant game_variant)
 Tree::Tree(unique_ptr<Node>& root)
 {
     init(root);
+}
+
+void Tree::add_setup(const Node& node, const Setup& setup)
+{
+    switch (m_game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+        set_setup_property(node, "A1", setup.placements[Color(0)]);
+        set_setup_property(node, "A2", setup.placements[Color(1)]);
+        set_setup_property(node, "A3", setup.placements[Color(2)]);
+        set_setup_property(node, "A4", setup.placements[Color(3)]);
+        break;
+    case game_variant_trigon_3:
+        set_setup_property(node, "A1", setup.placements[Color(0)]);
+        set_setup_property(node, "A2", setup.placements[Color(1)]);
+        set_setup_property(node, "A3", setup.placements[Color(2)]);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
+        set_setup_property(node, "AB", setup.placements[Color(0)]);
+        set_setup_property(node, "AW", setup.placements[Color(1)]);
+    }
+    switch (m_game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+    case game_variant_trigon_3:
+        set_property(node, "PL", setup.to_play.to_int() + 1);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
+        set_property(node, "PL", setup.to_play == Color(0) ? "B" : "W");
+    }
 }
 
 const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
@@ -292,8 +333,62 @@ void Tree::init_game_variant(GameVariant game_variant)
 {
     libboardgame_sgf::Tree::init();
     m_game_variant = game_variant;
+    set_game_property();
+    init_board_const(game_variant);
+    clear_modified();
+}
+
+void Tree::keep_only_position(const Node& node)
+{
+    LIBBOARDGAME_ASSERT(contains(node));
+    if (&node == &get_root())
+        return;
+    bool create_new_setup = has_move(node);
+    if (! create_new_setup)
+    {
+        const Node* current = node.get_parent_or_null();
+        while (current != 0)
+        {
+            if (has_move(*current) || has_setup_properties(*current))
+            {
+                create_new_setup = true;
+                break;
+            }
+            current = current->get_parent_or_null();
+        }
+    }
+    if (create_new_setup)
+    {
+        unique_ptr<Board> bd(new Board(m_game_variant));
+        BoardUpdater updater(*this, *bd);
+        updater.update(node);
+        Setup setup;
+        get_current_position_as_setup(*bd, setup);
+        remove_property(node, "B");
+        remove_property(node, "W");
+        remove_property(node, "1");
+        remove_property(node, "2");
+        remove_property(node, "3");
+        remove_property(node, "4");
+        remove_property(node, "AB");
+        remove_property(node, "AW");
+        remove_property(node, "A1");
+        remove_property(node, "A2");
+        remove_property(node, "A3");
+        remove_property(node, "A4");
+        remove_property(node, "AE");
+        LIBBOARDGAME_ASSERT(! has_move(node));
+        LIBBOARDGAME_ASSERT(! has_setup_properties(node));
+        add_setup(node, setup);
+    }
+    make_root(node);
+    set_game_property();
+}
+
+void Tree::set_game_property()
+{
     const Node& root = get_root();
-    switch (game_variant)
+    switch (m_game_variant)
     {
     case game_variant_classic:
         set_property(root, "GM", "Blokus");
@@ -311,50 +406,8 @@ void Tree::init_game_variant(GameVariant game_variant)
         set_property(root, "GM", "Blokus Trigon Three-Player");
         break;
     default:
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
         set_property(root, "GM", "Blokus Duo");
-    }
-    init_board_const(game_variant);
-    clear_modified();
-}
-
-void Tree::init_game_variant(GameVariant game_variant, const Setup& setup)
-{
-    init_game_variant(game_variant);
-    const Node& root = get_root();
-    switch (game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-        set_setup_property(root, "A1", setup.placements[Color(0)]);
-        set_setup_property(root, "A2", setup.placements[Color(1)]);
-        set_setup_property(root, "A3", setup.placements[Color(2)]);
-        set_setup_property(root, "A4", setup.placements[Color(3)]);
-        break;
-    case game_variant_trigon_3:
-        set_setup_property(root, "A1", setup.placements[Color(0)]);
-        set_setup_property(root, "A2", setup.placements[Color(1)]);
-        set_setup_property(root, "A3", setup.placements[Color(2)]);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        set_setup_property(root, "AB", setup.placements[Color(0)]);
-        set_setup_property(root, "AW", setup.placements[Color(1)]);
-    }
-    switch (game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-    case game_variant_trigon_3:
-        set_property(root, "PL", setup.to_play.to_int() + 1);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        set_property(root, "PL", setup.to_play == Color(0) ? "B" : "W");
     }
 }
 

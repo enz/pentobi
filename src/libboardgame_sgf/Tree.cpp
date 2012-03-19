@@ -125,6 +125,17 @@ void Tree::make_main_variation(const Node& node)
     }
 }
 
+void Tree::make_root(const Node& node)
+{
+    if (&node == &get_root())
+        return;
+    LIBBOARDGAME_ASSERT(contains(node));
+    const Node& parent = node.get_parent();
+    unique_ptr<Node> new_root = non_const(parent).remove_child(non_const(node));
+    m_root = move(new_root);
+    m_modified = true;
+}
+
 void Tree::remove_move_annotation(const Node& node)
 {
     remove_property(node, "BM");

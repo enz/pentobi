@@ -35,8 +35,6 @@ public:
 
     void init_game_variant(GameVariant game_variant);
 
-    void init_game_variant(GameVariant game_variant, const Setup& setup);
-
     void set_move(const Node& node, ColorMove mv);
 
     void set_move(const Node& node, Color c, Move mv);
@@ -93,12 +91,18 @@ public:
     void set_setup_property(const Node& node, const char* id,
                             const Setup::PlacementList& placements);
 
+    void keep_only_position(const Node& node);
+
 private:
     GameVariant m_game_variant;
 
     const BoardConst* m_board_const;
 
+    void add_setup(const Node& node, const Setup& setup);
+
     void init_board_const(GameVariant game_variant);
+
+    void set_game_property();
 };
 
 inline const BoardConst& Tree::get_board_const() const
