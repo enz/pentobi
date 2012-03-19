@@ -461,12 +461,13 @@ void MainWindow::commentChanged()
 {
     QString comment = m_comment->toPlainText();
     if (comment.isEmpty())
-    {
         m_game->set_comment("");
-        return;
+    else
+    {
+        string charset = m_game->get_root().get_property("CA", "");
+        m_game->set_comment(Util::convertSgfValueFromQString(comment, charset));
     }
-    string charset = m_game->get_root().get_property("CA", "");
-    m_game->set_comment(Util::convertSgfValueFromQString(comment, charset));
+    updateWindowModified();
 }
 
 void MainWindow::computerColor()
@@ -2788,18 +2789,7 @@ void MainWindow::updateRecentFiles()
 void MainWindow::updateWindow(bool currentNodeChanged)
 {
     const Board& bd = getBoard();
-    if (m_file.isEmpty())
-    {
-        m_actionSave->setEnabled(bd.get_nu_moves() > 0);
-        m_actionSave->setToolTip(QString());
-    }
-    else
-    {
-        bool is_modified = m_game->get_modified();
-        setWindowModified(is_modified);
-        m_actionSave->setEnabled(is_modified);
-        m_actionSave->setToolTip(tr("Save (%1)").arg(m_file));
-    }
+    updateWindowModified();
     m_guiBoard->copyFromBoard(bd);
     // If the last move was played by the computer, show move numbers on all
     // last subsequent moves by the computer because the computer could have
@@ -2850,6 +2840,23 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     m_actionTruncate->setEnabled(hasParent);
     m_actionUndo->setEnabled(hasParent || ! hasChildren || hasMove);
+}
+
+void MainWindow::updateWindowModified()
+{
+    bool is_modified = m_game->get_modified();
+    if (m_file.isEmpty())
+    {
+        m_actionSave->setEnabled(is_modified);
+        m_actionSave->setToolTip(QString());
+    }
+    else
+    {
+        bool is_modified = m_game->get_modified();
+        setWindowModified(is_modified);
+        m_actionSave->setEnabled(is_modified);
+        m_actionSave->setToolTip(tr("Save (%1)").arg(m_file));
+    }
 }
 
 void MainWindow::veryBadMove(bool checked)

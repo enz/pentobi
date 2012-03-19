@@ -4,10 +4,12 @@ Current development version (bugfix branch for version 1)
 * Reverted the change that used the SVG icon for setting the
   window icon because it created an unwanted dependency on the
   Qt SVG plugin.
-* Set file modified marker if game tree was changed with
-  Make Main Variation
-* Minor bugfixes in the code (that should not have resulted in
-  user-visible errors)
+* Fixed setting of file modified marker that was not set on certain
+  changes (Make Main Variation, comment changed)
+* Make Save menu item and tool button active if game is modified even
+  if no file name is associated with the current game
+* Minor bugfixes in the code that should not have resulted in
+  user-visible errors
 * Made the code compile without warnings with GCC -Wunused
 
 
