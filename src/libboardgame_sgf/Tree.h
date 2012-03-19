@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file sgf/Tree.h */
+/** @file libboardgame_sgf/Tree.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_SGF_TREE_H
@@ -234,11 +234,6 @@ inline bool Tree::is_doubtful_move(const Node& node) const
 inline bool Tree::is_interesting_move(const Node& node) const
 {
     return node.has_property("IT");
-}
-
-inline void Tree::make_first_child(const Node& node)
-{
-    non_const(node).make_first_child();
 }
 
 inline Node& Tree::non_const(const Node& node)
