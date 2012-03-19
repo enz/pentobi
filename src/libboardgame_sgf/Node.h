@@ -39,16 +39,6 @@ class Node
 public:
     static Node* create();
 
-    /** Append this node as a new child to another node.
-        The other node takes the ownership of this node.
-        @pre m_parent == 0 */
-    void append_to(Node& node);
-
-    /** Append a new child.
-        @param node (@ref libboardgame_doc_takesownership)
-        @pre node.m_parent == 0 */
-    void append(Node& node);
-
     bool has_property(const string& id) const;
 
     /** Get a property.

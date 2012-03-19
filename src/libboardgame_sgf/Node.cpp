@@ -31,22 +31,6 @@ Node::Node()
 {
 }
 
-void Node::append(Node& node)
-{
-    LIBBOARDGAME_ASSERT(node.m_parent == 0);
-    if (m_first_child.get() == 0)
-        m_first_child.reset(&node);
-    else
-        get_last_child()->m_sibling.reset(&node);
-}
-
-void Node::append_to(Node& node)
-{
-    LIBBOARDGAME_ASSERT(m_parent == 0);
-    node.append(*this);
-    m_parent = &node;
-}
-
 Node* Node::create()
 {
     return new Node();
