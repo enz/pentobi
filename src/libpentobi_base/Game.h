@@ -57,7 +57,8 @@ public:
     /** Update game state to a node in the tree.
         @throws InvalidTree, if the game was constructed with an
         external SGF tree and the tree contained invalid property values
-        (syntactically or sematically, like moves on occupied points) */
+        (syntactically or sematically, like moves on occupied points). If an
+        exception is thrown, the current node is not changed. */
     void goto_node(const Node& node);
 
     /** Undo the current move and go to parent node.

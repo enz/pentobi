@@ -1634,6 +1634,7 @@ void MainWindow::gotoNode(const Node& node)
     catch (const InvalidTree& e)
     {
         showInvalidFile(m_file, e);
+        return;
     }
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
