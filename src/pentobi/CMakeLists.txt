@@ -7,6 +7,7 @@ include_directories(
 
 set(pentobi_SRCS
   AnalyzeGameWindow.cpp
+  Application.cpp
   MainWindow.cpp
   Main.cpp
   SettingsDialog.cpp
@@ -14,6 +15,7 @@ set(pentobi_SRCS
 
 set(pentobi_MOC_HDRS
   AnalyzeGameWindow.h
+  Application.h
   MainWindow.h
   SettingsDialog.h
   )

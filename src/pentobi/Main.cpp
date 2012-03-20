@@ -8,6 +8,7 @@
 
 #include <boost/program_options.hpp>
 #include <QtGui>
+#include "Application.h"
 #include "MainWindow.h"
 #ifdef Q_WS_WIN
 #include <stdio.h>
@@ -61,7 +62,7 @@ int main(int argc, char* argv[])
         Q_INIT_RESOURCE(libpentobi_gui_resources);
         QCoreApplication::setOrganizationName("Pentobi");
         QCoreApplication::setApplicationName("Pentobi");
-        QApplication app(argc, argv);
+        Application app(argc, argv);
 
         // Allow the user to override installation paths with a config file in
         // the directory of the executable to test it without installation
