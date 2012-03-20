@@ -1922,7 +1922,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
         m_game->init(tree);
-        if (! Tree::has_setup_properties(m_game->get_root()))
+        if (! Tree::has_setup(m_game->get_root()))
             m_game->goto_node(get_last_node(m_game->get_root()));
         initPieceSelectors();
     }

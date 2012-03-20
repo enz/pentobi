@@ -143,7 +143,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     const Node* node = &root;
     while (node != 0)
     {
-        if (libpentobi_base::Tree::has_setup_properties(*node))
+        if (libpentobi_base::Tree::has_setup(*node))
         {
             handleSetup("AB", Color(0), *node, *geometry, pointState);
             handleSetup("AW", Color(1), *node, *geometry, pointState);

@@ -68,7 +68,7 @@ public:
     /** Same as ! get_move_ignore_invalid.is_null() */
     bool has_move_ignore_invalid(const Node& node) const;
 
-    static bool has_setup_properties(const Node& node);
+    static bool has_setup(const Node& node);
 
     const Node* find_child_with_move(const Node& node, ColorMove mv) const;
 

@@ -270,7 +270,7 @@ bool Tree::has_main_variation_moves() const
     return false;
 }
 
-bool Tree::has_setup_properties(const Node& node)
+bool Tree::has_setup(const Node& node)
 {
     for (PropertyIterator i(node); i; ++i)
         // Don't check for "PL", we ignore this property if the node has no
@@ -349,7 +349,7 @@ void Tree::keep_only_position(const Node& node)
         const Node* current = node.get_parent_or_null();
         while (current != 0)
         {
-            if (has_move(*current) || has_setup_properties(*current))
+            if (has_move(*current) || has_setup(*current))
             {
                 create_new_setup = true;
                 break;
@@ -378,7 +378,7 @@ void Tree::keep_only_position(const Node& node)
         remove_property(node, "A4");
         remove_property(node, "AE");
         LIBBOARDGAME_ASSERT(! has_move(node));
-        LIBBOARDGAME_ASSERT(! has_setup_properties(node));
+        LIBBOARDGAME_ASSERT(! has_setup(node));
         add_setup(node, setup);
     }
     make_root(node);

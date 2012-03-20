@@ -139,7 +139,7 @@ void BoardUpdater::update(const Node& node)
     get_path_from_root(node, m_path);
     BOOST_FOREACH(const Node* i, m_path)
     {
-        if (Tree::has_setup_properties(*i))
+        if (Tree::has_setup(*i))
             init_setup(m_bd, *i);
         ColorMove mv = m_tree.get_move(*i);
         if (! mv.is_null())
