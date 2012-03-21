@@ -773,6 +773,7 @@ void State::play_nonpass(Move mv)
 {
     Color to_play = m_bd.get_to_play();
     m_last_move[to_play] = mv;
+    LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
     m_bd.play(to_play, mv);
     m_nu_passes = 0;
     if (m_extended_update)
