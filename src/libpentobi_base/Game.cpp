@@ -39,7 +39,7 @@ Game::Game(unique_ptr<Node>& root)
 
 void Game::goto_node(const Node& node)
 {
-    const Node& old = *m_current;
+    const Node* old = m_current;
     try
     {
         m_updater.update(node);
@@ -47,7 +47,20 @@ void Game::goto_node(const Node& node)
     }
     catch (const InvalidTree& e)
     {
-        m_updater.update(old);
+        // Try to restore the old state.
+        if (old == 0)
+            m_current = &node;
+        else
+        {
+            try
+            {
+                m_updater.update(*old);
+            }
+            catch (const InvalidTree&)
+            {
+            }
+            m_current = old;
+        }
         throw e;
     }
 }
@@ -63,9 +76,7 @@ void Game::init(unique_ptr<Node>& root)
 {
     m_tree.init(root);
     m_bd->init(m_tree.get_game_variant());
-    // Set m_current to root such that it has a defined value even if
-    // goto_node() throws because of invalid properties in the root node
-    m_current = &m_tree.get_root();
+    m_current = 0;
     goto_node(m_tree.get_root());
 }
 
@@ -73,12 +84,14 @@ void Game::keep_only_position()
 {
     m_tree.keep_only_position(*m_current);
     m_tree.remove_children(m_tree.get_root());
+    m_current = 0;
     goto_node(m_tree.get_root());
 }
 
 void Game::keep_only_subtree()
 {
     m_tree.keep_only_position(*m_current);
+    m_current = 0;
     goto_node(m_tree.get_root());
 }
 
