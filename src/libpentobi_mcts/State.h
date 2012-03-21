@@ -169,6 +169,8 @@ private:
 
     Board m_bd;
 
+    const MoveInfo* m_move_info_array;
+
     /** Incrementally updated lists of legal moves for both colors.
         Only the move list for the color to play van be used in any given
         position, the other color is not updated immediately after a move. */
@@ -233,6 +235,9 @@ private:
 
     void compute_features();
 
+    /** Equivalent to but faster than Board::get_move_info() */
+    const MoveInfo& get_move_info(Move move) const;
+
     void init_move_list_with_local(Color c);
 
     void init_move_list_without_local(Color c);
@@ -255,6 +260,14 @@ inline PlayerMove<Move> State::get_move(unsigned int n) const
 {
     ColorMove mv = m_bd.get_move(m_nu_moves_initial + n);
     return PlayerMove<Move>(mv.color.to_int(), mv.move);
+}
+
+inline const MoveInfo& State::get_move_info(Move move) const
+{
+    LIBBOARDGAME_ASSERT(move.to_int()
+                        < m_shared_const.board->get_board_const()
+                          .get_nu_all_moves());
+    return *(m_move_info_array + move.to_int());
 }
 
 inline unsigned int State::get_nu_moves() const

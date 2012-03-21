@@ -171,7 +171,7 @@ inline void State::add_moves(Point p, Color c, unsigned int piece,
         if (! m_shared_const.is_forbidden_at_root[c][*i])
         {
             unsigned int local_value;
-            const MoveInfo& info = m_bd.get_move_info(*i);
+            const MoveInfo& info = get_move_info(*i);
             if (check_move(c, info.points, local_value) && ! m_marker[*i])
             {
                 moves.push_back(*i);
@@ -271,7 +271,7 @@ void State::compute_features()
          || (board_type == board_type_trigon_3 && nu_onboard_pieces < 5));
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
-        const MoveInfo& info = m_bd.get_move_info(moves[i]);
+        const MoveInfo& info = get_move_info(moves[i]);
         MoveFeatures& features = m_features[i];
         features.heuristic = 0;
         features.connect = false;
@@ -418,7 +418,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     if (! last_good_reply.is_null() && ! last_good_reply.is_pass()
         && m_bd.is_legal(last_good_reply)
         && m_bd.get_pieces_left(to_play).contains(
-                                     m_bd.get_move_info(last_good_reply).piece))
+                                     get_move_info(last_good_reply).piece))
     {
         ++m_nu_last_good_reply_moves;
         mv = last_good_reply;
@@ -458,7 +458,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
                 m_random.generate_small_int(static_cast<int>(moves->size()));
             mv = (*moves)[i];
         }
-        while (m_bd.get_move_points(mv).size() < max_playable_piece_size
+        while (get_move_info(mv).points.size() < max_playable_piece_size
                && nu_try < max_try);
     }
     play_nonpass(mv);
@@ -719,7 +719,7 @@ void State::init_symmetry_info()
         if (last_mv.move.is_pass())
             points = 0;
         else
-            points = &m_bd.get_move_points(last_mv.move);
+            points = &m_bd.get_move_info(last_mv.move).points;
         for (BoardIterator i(m_bd); i; ++i)
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
@@ -812,6 +812,7 @@ void State::start_playout()
 void State::start_search()
 {
     const Board& bd = *m_shared_const.board;
+    m_move_info_array = bd.get_board_const().get_move_info_array();
     const Geometry& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
@@ -896,11 +897,11 @@ void State::update_move_list(Color c)
     // Find old moves that are still legal
     unsigned int last_piece = numeric_limits<unsigned int>::max();
     if (! last_mv.is_null() && ! last_mv.is_pass())
-        last_piece = m_bd.get_move_info(last_mv).piece;
+        last_piece = get_move_info(last_mv).piece;
     for (auto i = moves.begin(); i != moves.end(); ++i)
     {
         unsigned int local_value;
-        const MoveInfo& info = m_bd.get_move_info(*i);
+        const MoveInfo& info = get_move_info(*i);
         if (info.piece != last_piece && check_move(c, info.points, local_value))
         {
             m_marker.set(*i);
@@ -916,7 +917,7 @@ void State::update_move_list(Color c)
     // Find new legal moves because of the last piece played by this color
     if (! last_mv.is_null() && ! last_mv.is_pass())
     {
-        BOOST_FOREACH(Point p, m_bd.get_move_info(last_mv).attach_points)
+        BOOST_FOREACH(Point p, get_move_info(last_mv).attach_points)
             if (! m_bd.is_forbidden(p, c)
                 && is_only_move_diag(m_bd, p, c, last_mv))
                 add_moves(p, c);
@@ -959,7 +960,7 @@ void State::update_move_list(Color c)
 void State::update_symmetry_info(Move mv)
 {
     LIBBOARDGAME_ASSERT(! mv.is_pass());
-    const MovePoints& points = m_bd.get_move_points(mv);
+    const MovePoints& points = get_move_info(mv).points;
     if (m_bd.get_to_play() == Color(0))
     {
         // First player to play: Check that all symmetric points of the last

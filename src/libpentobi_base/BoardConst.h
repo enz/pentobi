@@ -76,9 +76,16 @@ public:
 
     const MoveInfo& get_move_info(Move move) const;
 
+    /** Get pointer to move info array.
+        Can be used to speed up the access to the move info by avoiding the
+        multiple pointer dereferencing of Board::get_move_info(Move) */
+    const MoveInfo* get_move_info_array() const;
+
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
     const MovePoints& get_move_points(Move mv) const;
+
+    unsigned int get_nu_all_moves() const;
 
     bool find_move(const MovePoints& points, Move& move) const;
 
@@ -198,13 +205,20 @@ inline const MoveInfo& BoardConst::get_move_info(Move move) const
 {
     LIBBOARDGAME_ASSERT(! move.is_null());
     LIBBOARDGAME_ASSERT(! move.is_pass());
+    LIBBOARDGAME_ASSERT(move.to_int() < m_move_info.size());
     return m_move_info[move.to_int()];
+}
+
+inline const MoveInfo* BoardConst::get_move_info_array() const
+{
+    return &m_move_info.front();
 }
 
 inline const MoveInfoExt& BoardConst::get_move_info_ext(Move move) const
 {
     LIBBOARDGAME_ASSERT(! move.is_null());
     LIBBOARDGAME_ASSERT(! move.is_pass());
+    LIBBOARDGAME_ASSERT(move.to_int() < m_move_info_ext.size());
     return m_move_info_ext[move.to_int()];
 }
 
@@ -222,6 +236,11 @@ inline BoardConst::LocalMovesListRange BoardConst::get_moves(
         m_moves_range[p][adj_status_index][piece];
     const Move* begin = m_move_lists.get();
     return LocalMovesListRange(begin + indices.first, begin + indices.second);
+}
+
+inline unsigned int BoardConst::get_nu_all_moves() const
+{
+    return static_cast<unsigned int>(m_move_info.size());
 }
 
 inline unsigned int BoardConst::get_nu_pieces() const
