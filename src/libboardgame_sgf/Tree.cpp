@@ -136,6 +136,14 @@ void Tree::make_root(const Node& node)
     m_modified = true;
 }
 
+bool Tree::move_property_to_front(const Node& node, const string& id)
+{
+    PropertyIterator first(node);
+    if (first && (*first).id != id && node.has_property(id))
+        m_modified = true;
+    return non_const(node).move_property_to_front(id);
+}
+
 void Tree::remove_move_annotation(const Node& node)
 {
     remove_property(node, "BM");

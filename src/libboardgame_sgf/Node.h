@@ -78,6 +78,8 @@ public:
     /** @return true, if node contained the property. */
     bool remove_property(const string& id);
 
+    bool move_property_to_front(const string& id);
+
     const Property* get_first_property() const;
 
     Node* get_sibling();

@@ -409,6 +409,7 @@ void Tree::set_game_property()
         LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
         set_property(root, "GM", "Blokus Duo");
     }
+    move_property_to_front(root, "GM");
 }
 
 void Tree::set_move(const Node& node, Color c, Move mv)

@@ -89,6 +89,8 @@ public:
 
     bool remove_property(const Node& node, const string& id);
 
+    bool move_property_to_front(const Node& node, const string& id);
+
     /** See Node::remove_children() */
     unique_ptr<Node> remove_children(const Node& node);
 

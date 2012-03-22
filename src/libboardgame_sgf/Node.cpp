@@ -184,6 +184,30 @@ void Node::make_first_child()
     }
 }
 
+bool Node::move_property_to_front(const string& id)
+{
+    Property* current = m_first_property.get();
+    Property* last = 0;
+    while (true)
+    {
+        if (current == 0)
+            return false;
+        if (current->id == id)
+        {
+            if (last != 0)
+            {
+                unique_ptr<Property> tmp = move(last->next);
+                last->next = move(current->next);
+                current->next = move(m_first_property);
+                m_first_property = move(tmp);
+            }
+            return true;
+        }
+        last = current;
+        current = current->next.get();
+    }
+}
+
 bool Node::remove_property(const string& id)
 {
     Property* property = m_first_property.get();
