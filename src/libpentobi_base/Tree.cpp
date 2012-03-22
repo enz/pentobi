@@ -343,6 +343,7 @@ void Tree::keep_only_position(const Node& node)
     LIBBOARDGAME_ASSERT(contains(node));
     if (&node == &get_root())
         return;
+    string charset = get_root().get_property("CA", "");
     bool create_new_setup = has_move(node);
     if (! create_new_setup)
     {
@@ -382,6 +383,11 @@ void Tree::keep_only_position(const Node& node)
         add_setup(node, setup);
     }
     make_root(node);
+    if (! charset.empty())
+    {
+        set_property(node, "CA", charset);
+        move_property_to_front(node, "CA");
+    }
     set_game_property();
 }
 
