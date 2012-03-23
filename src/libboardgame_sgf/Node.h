@@ -245,7 +245,8 @@ inline bool Node::has_single_child() const
 
 inline unique_ptr<Node> Node::remove_children()
 {
-    m_first_child->m_parent = 0;
+    if (m_first_child)
+        m_first_child->m_parent = 0;
     return move(m_first_child);
 }
 
