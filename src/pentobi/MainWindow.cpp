@@ -465,7 +465,7 @@ bool MainWindow::checkQuit()
     if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
     {
         ofstream out(getAutoSaveFile().toStdString().c_str());
-        write_tree(out, m_game->get_root(), true, 2);
+        write_tree(out, m_game->get_root(), true, true, 2);
     }
     QSettings settings;
     settings.setValue("geometry", saveGeometry());
@@ -2131,7 +2131,7 @@ bool MainWindow::save(const QString& file)
     m_game->set_application("Pentobi");
 #endif
     ofstream out(file.toLocal8Bit().constData());
-    write_tree(out, m_game->get_root(), true, 2);
+    write_tree(out, m_game->get_root(), true, true, 2);
     if (! out)
     {
         showError(tr("The file could not be saved."),

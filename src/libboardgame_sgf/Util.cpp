@@ -182,10 +182,10 @@ bool is_main_variation(const Node& node)
     return true;
 }
 
-void write_tree(ostream& out, const Node& root, bool one_node_per_line,
-                unsigned int indent)
+void write_tree(ostream& out, const Node& root, bool one_prop_per_line,
+                bool one_prop_value_per_line, unsigned int indent)
 {
-    Writer writer(out, one_node_per_line, indent);
+    Writer writer(out, one_prop_per_line, one_prop_value_per_line, indent);
     writer.begin_tree();
     write_node(writer, root);
     writer.end_tree();

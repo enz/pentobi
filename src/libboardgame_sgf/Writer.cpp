@@ -17,9 +17,11 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-Writer::Writer(ostream& out, bool one_prop_per_line, unsigned int indent)
+Writer::Writer(ostream& out, bool one_prop_per_line,
+               bool one_prop_value_per_line, unsigned int indent)
     : m_out(out),
       m_one_prop_per_line(one_prop_per_line),
+      m_one_prop_value_per_line(one_prop_value_per_line),
       m_indent(indent),
       m_current_indent(0)
 {

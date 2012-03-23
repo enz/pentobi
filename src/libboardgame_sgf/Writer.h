@@ -25,6 +25,7 @@ class Writer
 {
 public:
     Writer(ostream& out, bool one_prop_per_line = false,
+           bool one_prop_value_per_line = false,
            unsigned int indent = 0);
 
     ~Writer() throw();
@@ -50,6 +51,8 @@ private:
 
     bool m_one_prop_per_line;
 
+    bool m_one_prop_value_per_line;
+
     bool m_is_first_prop;
 
     unsigned int m_indent;
@@ -64,15 +67,8 @@ private:
 template<typename T>
 void Writer::write_property(const string& identifier, const T& value)
 {
-    if (m_one_prop_per_line && ! m_is_first_prop)
-    {
-        write_indent();
-        m_out << ' ';
-    }
-    m_out << identifier << '[' << get_escaped(to_string(value)) << ']';
-    if (m_one_prop_per_line)
-        m_out << '\n';
-    m_is_first_prop = false;
+    vector<T> values(1, value);
+    write_property(identifier, values);
 }
 
 template<typename T>
@@ -84,8 +80,20 @@ void Writer::write_property(const string& identifier, const vector<T>& values)
         m_out << ' ';
     }
     m_out << identifier;
+    bool is_first_value = true;
     BOOST_FOREACH(const T& i, values)
+    {
+        if (m_one_prop_per_line && m_one_prop_value_per_line
+            && ! is_first_value)
+        {
+            m_out << '\n';
+            unsigned int indent = m_current_indent + 1 + identifier.size();
+            for (unsigned int i = 0; i < indent; ++i)
+                m_out << ' ';
+        }
         m_out << '[' << get_escaped(to_string(i)) << ']';
+        is_first_value = false;
+    }
     if (m_one_prop_per_line)
         m_out << '\n';
     m_is_first_prop = false;

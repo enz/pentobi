@@ -70,8 +70,8 @@ void parse_go_point_property_value(const string& s, int& x, int& y, int sz);
 
 bool has_comment(const Node& node);
 
-void write_tree(ostream& out, const Node& root, bool one_node_per_line = false,
-                unsigned int indent = 0);
+void write_tree(ostream& out, const Node& root, bool one_prop_per_line = false,
+                bool one_prop_value_per_line = false, unsigned int indent = 0);
 
 //-----------------------------------------------------------------------------
 
