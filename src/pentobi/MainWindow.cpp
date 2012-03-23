@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
+#include <boost/algorithm/string/trim.hpp>
 #include "SettingsDialog.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
@@ -23,6 +24,7 @@
 
 using namespace std;
 using boost::filesystem::path;
+using boost::trim_right;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
@@ -518,7 +520,12 @@ void MainWindow::commentChanged()
     else
     {
         string charset = m_game->get_root().get_property("CA", "");
-        m_game->set_comment(Util::convertSgfValueFromQString(comment, charset));
+        string value = Util::convertSgfValueFromQString(comment, charset);
+        // Trim trailing white space but only if the comment has changed anyway
+        // (to avoid setting the modified flag when browsing a game)
+        if (value != m_game->get_comment())
+            trim_right(value);
+        m_game->set_comment(value);
     }
     updateWindowModified();
 }
