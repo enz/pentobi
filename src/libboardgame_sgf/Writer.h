@@ -59,6 +59,8 @@ private:
 
     unsigned int m_current_indent;
 
+    unsigned int m_level;
+
     static string get_escaped(const string& s);
 
     void write_indent();

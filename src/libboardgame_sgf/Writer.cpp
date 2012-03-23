@@ -23,7 +23,8 @@ Writer::Writer(ostream& out, bool one_prop_per_line,
       m_one_prop_per_line(one_prop_per_line),
       m_one_prop_value_per_line(one_prop_value_per_line),
       m_indent(indent),
-      m_current_indent(0)
+      m_current_indent(0),
+      m_level(0)
 {
 }
 
@@ -42,7 +43,10 @@ void Writer::begin_tree()
 {
     write_indent();
     m_out << '(';
-    m_current_indent += m_indent;
+    // Don't indent the first level
+    if (m_level > 0)
+        m_current_indent += m_indent;
+    ++m_level;
     if (m_one_prop_per_line)
         m_out << '\n';
 }
@@ -55,7 +59,9 @@ void Writer::end_node()
 
 void Writer::end_tree()
 {
-    m_current_indent -= m_indent;
+    --m_level;
+    if (m_level > 0)
+        m_current_indent -= m_indent;
     write_indent();
     m_out << ")\n";
 }
