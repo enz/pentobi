@@ -21,12 +21,22 @@ doc/blksgf/Blokus-SGF.html in the Pentobi source package.
 
 .SH OPTIONS
 .TP
+.B \-\-memory
+The amount of memory in bytes to be used by the search.
+The default value is 256000000 (256 kB).
+This option can be used to reduce the memory requirements on low-end systems
+but it can have a negative effect on the playing strength.
+If the search runs out of memory, it will prune nodes with a low visit count
+from the search tree and these nodes may have to be searched again after the
+search continues.
+You can check how often the pruning happens by running Pentobi at the highest
+level with option --verbose and looking at the messages during move generation.
+Pruning the tree once or twice during a search will not affect the playing
+strength much but a high number of prunings will.
+.TP
 .B \-\-verbose
 Print internal information about the move generation and other debugging
 information to standard error.
-.TP
-.B \-\-nobook
-Play without opening book.
 
 .SH SEE ALSO
 .BR pentobi-thumbnailer (6)

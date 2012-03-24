@@ -96,8 +96,8 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
 
 //-----------------------------------------------------------------------------
 
-Search::Search(GameVariant initial_game_variant)
-    : ParentClass(State(initial_game_variant, m_shared_const)),
+Search::Search(GameVariant initial_game_variant, size_t memory)
+    : ParentClass(State(initial_game_variant, m_shared_const), memory),
       m_shared_const(m_to_play)
 {
     set_rave(true);

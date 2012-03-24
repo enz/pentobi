@@ -27,13 +27,14 @@ using libpentobi_base::GameVariant;
 
 //-----------------------------------------------------------------------------
 
-Player::Player(GameVariant initial_game_variant, const path& books_dir)
+Player::Player(GameVariant initial_game_variant, const path& books_dir,
+               size_t memory)
     : m_is_book_loaded(false),
       m_use_book(true),
       m_books_dir(books_dir),
       m_level(4),
       m_fixed_simulations(0),
-      m_search(initial_game_variant),
+      m_search(initial_game_variant, memory),
       m_book(initial_game_variant)
 {
     for (unsigned int i = 0; i < Board::max_player_moves; ++i)

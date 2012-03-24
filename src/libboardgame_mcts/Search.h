@@ -63,7 +63,11 @@ public:
 
     static const bool log_move_selection = false;
 
-    Search(const State& state);
+    /** Constructor.
+        @param state A prototype for the search state used by one thread.
+        @param memory The memory to be used for (all) the search trees. If
+        zero, a default value will be used. */
+    Search(const State& state, size_t memory = 0);
 
     virtual ~Search() throw();
 
@@ -217,7 +221,7 @@ public:
     ValueType get_prune_count_start() const;
 
     /** Total size of the trees in bytes. */
-    void set_tree_memory(size_t n);
+    void set_tree_memory(size_t memory);
 
     size_t get_tree_memory() const;
 
@@ -357,6 +361,8 @@ private:
 
     size_t m_tree_memory;
 
+    size_t m_max_nodes;
+
     /** Number simulations of current search. */
     size_t m_nu_simulations;
 
@@ -397,6 +403,8 @@ private:
 
     vector<Move> m_followup_sequence;
 
+    static size_t get_max_nodes(size_t memory);
+
     bool check_abort() const;
 
     bool check_abort_expensive() const;
@@ -411,8 +419,8 @@ private:
     void play_in_tree(unsigned int thread_id, bool& is_out_of_memory,
                       bool& is_terminal);
 
-    ValueType prune(TimeSource& time_source, double time, double max_time,
-                    ValueType prune_min_count);
+    bool prune(TimeSource& time_source, double time, double max_time,
+               ValueType prune_min_count, ValueType& new_prune_min_count);
 
     const Node* select_child(const Node& node);
 
@@ -449,7 +457,7 @@ Search<S, M, P>::Simulation::~Simulation() throw()
 }
 
 template<class S, class M, unsigned int P>
-Search<S, M, P>::Search(const State& state)
+Search<S, M, P>::Search(const State& state, size_t memory)
     : m_expand_threshold(0),
       m_widening_parameter(0),
       m_deterministic(false),
@@ -463,15 +471,15 @@ Search<S, M, P>::Search(const State& state)
       m_unexplored_value(numeric_limits<ValueType>::max()),
       m_prune_count_start(16),
       m_rave_equivalence(1000),
-      m_tree_memory(256000000),
+      m_tree_memory(memory == 0 ? 256000000 : memory),
+      m_max_nodes(get_max_nodes(m_tree_memory)),
       m_state(state),
       m_fast_log(10),
-      m_tree(1, m_nu_threads),
-      m_tmp_tree(1, m_nu_threads),
+      m_tree(m_max_nodes, m_nu_threads),
+      m_tmp_tree(m_max_nodes, m_nu_threads),
       m_assertion_handler(*this)
 {
     set_bias_term_constant(0.7f);
-    set_tree_memory(m_tree_memory);
     for (unsigned int i = 0; i < max_players; ++i)
         m_first_play[i].fill(numeric_limits<size_t>::max());
 }
@@ -612,6 +620,15 @@ template<class S, class M, unsigned int P>
 const Parameters& Search<S, M, P>::get_last_reuse_param() const
 {
     return m_last_reuse_param;
+}
+
+template<class S, class M, unsigned int P>
+size_t Search<S, M, P>::get_max_nodes(size_t memory)
+{
+    // Memory is used for 2 trees (m_tree and m_tmp_tree)
+    size_t max_nodes = memory / sizeof(Node) / 2;
+    log(format("Search tree size: 2 x %1% nodes") % max_nodes);
+    return max_nodes;
 }
 
 template<class S, class M, unsigned int P>
@@ -813,8 +830,9 @@ void Search<S, M, P>::write_info_ext(ostream& out) const
 }
 
 template<class S, class M, unsigned int P>
-ValueType Search<S, M, P>::prune(TimeSource& time_source, double time,
-                                 double max_time, ValueType prune_min_count)
+bool Search<S, M, P>::prune(TimeSource& time_source, double time,
+                            double max_time, ValueType prune_min_count,
+                            ValueType& new_prune_min_count)
 {
     Timer timer(time_source);
     TimeIntervalChecker interval_checker(time_source, max_time);
@@ -834,9 +852,17 @@ ValueType Search<S, M, P>::prune(TimeSource& time_source, double time,
                % m_tmp_tree.get_nu_nodes() % percent % timer());
     m_tree.swap(m_tmp_tree);
     if (percent > 50)
-        return prune_min_count * 2;
+    {
+        if (prune_min_count >= 0.5 * numeric_limits<ValueType>::max())
+            return false;
+        new_prune_min_count = prune_min_count * 2;
+        return true;
+    }
     else
-        return prune_min_count;
+    {
+        new_prune_min_count = prune_min_count;
+        return true;
+    }
 }
 
 template<class S, class M, unsigned int P>
@@ -946,8 +972,12 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
             if (m_prune_full_tree)
             {
                 double time = m_timer();
-                prune_min_count =
-                    prune(time_source, time, max_time - time, prune_min_count);
+                if (! prune(time_source, time, max_time - time,
+                            prune_min_count, prune_min_count))
+                {
+                    log("Aborting search because pruning failed.");
+                    break;
+                }
                 continue;
             }
             else
@@ -1210,12 +1240,12 @@ void Search<S, M, P>::set_reuse_subtree(bool enable)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S, M, P>::set_tree_memory(size_t n)
+void Search<S, M, P>::set_tree_memory(size_t memory)
 {
-    m_tree_memory = n;
-    size_t max_nodes = n / sizeof(Node) / 2;
-    m_tree.set_max_nodes(max_nodes);
-    m_tmp_tree.set_max_nodes(max_nodes);
+    m_tree_memory = memory;
+    m_max_nodes = get_max_nodes(memory);
+    m_tree.set_max_nodes(m_max_nodes);
+    m_tmp_tree.set_max_nodes(m_max_nodes);
 }
 
 template<class S, class M, unsigned int P>

@@ -458,6 +458,11 @@ bool Tree<M>::remove_child(const Node& node, const Move& mv)
 template<typename M>
 void Tree<M>::set_max_nodes(size_t max_nodes)
 {
+    if (max_nodes == 0)
+        // We need at least the root node (for useful searches we need of
+        // course also children, but a root node is the minimum requirement to
+        // avoid crashing).
+        max_nodes = 1;
     m_max_nodes = max_nodes;
     m_nodes.reset(new Node[max_nodes]);
     m_thread_storage.reset(new ThreadStorage[m_nu_threads]);

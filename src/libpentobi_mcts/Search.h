@@ -21,7 +21,7 @@ class Search
     : public libboardgame_mcts::Search<State, Move, 4>
 {
 public:
-    Search(GameVariant initial_game_variant);
+    Search(GameVariant initial_game_variant, size_t memory = 0);
 
     ~Search() throw();
 

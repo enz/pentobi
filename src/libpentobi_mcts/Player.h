@@ -26,8 +26,10 @@ public:
         @param initial_game_variant Game variant to initialize the internal
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
-        @param books_dir Directory containing opening books. */
-    Player(GameVariant initial_game_variant, const path& books_dir);
+        @param books_dir Directory containing opening books.
+        @param memory The memory to be used for (all) the search trees. */
+    Player(GameVariant initial_game_variant, const path& books_dir,
+           size_t memory = 0);
 
     ~Player() throw();
 

@@ -117,7 +117,9 @@ int main(int argc, char* argv[])
         app.installTranslator(&pentobiTranslator);
         vector<string> arguments;
         options_description normal_options("Options");
+        size_t memory = 0;
         normal_options.add_options()
+            ("memory", value<>(&memory), "memory to allocate for search trees")
             ("nobook", "do not use opening book")
             ("nosymdraw", "avoid symmetric draws")
             ("verbose", "print logging messages");
@@ -133,6 +135,8 @@ int main(int argc, char* argv[])
         store(command_line_parser(argc, argv).options(all_options).
               positional(positional_options).run(), vm);
         boost::program_options::notify(vm);
+        if (memory == 0 && vm.count("memory"))
+            throw Exception("Value for memory must be greater zero.");
         if (! vm.count("verbose"))
             set_log_null();
 #ifdef Q_WS_WIN
@@ -145,7 +149,7 @@ int main(int argc, char* argv[])
         if (arguments.size() > 0)
             initialFile = arguments[0].c_str();
         MainWindow mainWindow(initialFile, manualDir, booksDir, noBook,
-                              noSymDraw);
+                              noSymDraw, memory);
         mainWindow.show();
         return app.exec();
     }

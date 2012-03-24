@@ -155,7 +155,8 @@ bool isMoveBetter(const Board& bd, Move mv1, Move mv2)
 //-----------------------------------------------------------------------------
 
 MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
-                       const QString& booksDir, bool noBook, bool noSymDraw)
+                       const QString& booksDir, bool noBook, bool noSymDraw,
+                       size_t memory)
     : m_isGenMoveRunning(false),
       m_isAnalyzeRunning(false),
       m_lastMoveByComputer(false),
@@ -185,7 +186,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
     initGame();
-    m_player.reset(new Player(variant, booksDir.toStdString()));
+    m_player.reset(new Player(variant, booksDir.toStdString(), memory));
     m_player->set_use_book(! noBook);
     m_player->get_search().set_avoid_symmetric_draw(noSymDraw);
     createActions();
