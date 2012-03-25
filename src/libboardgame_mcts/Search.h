@@ -1359,13 +1359,19 @@ void Search<S, M, P>::update_rave_values(
                 continue;
             if (m_rave_check_same)
             {
+                bool other_played_same = false;
                 for (unsigned int i = 0; i < max_players; ++i)
                     if (i != player)
                     {
                         size_t first_other = m_first_play[i][m];
                         if (first_other >= i && first_other <= first)
-                            continue;
+                        {
+                            other_played_same = true;
+                            break;
+                        }
                     }
+                if (other_played_same)
+                    continue;
             }
             ValueType weight;
             if (m_weight_rave_updates)
