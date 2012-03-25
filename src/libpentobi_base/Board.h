@@ -533,6 +533,16 @@ inline PointState Board::get_point_state(Point p) const
     return PointState(m_point_state[p].to_int());
 }
 
+inline unsigned int Board::get_points(Color c) const
+{
+    return m_board_const->get_total_piece_points() - get_points_left(c);
+}
+
+inline unsigned int Board::get_points_with_bonus(Color c) const
+{
+    return get_points(c) + get_bonus(c);
+}
+
 inline Color Board::get_second_color(Color c) const
 {
     return m_second_color[c];

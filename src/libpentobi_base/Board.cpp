@@ -238,16 +238,6 @@ Color Board::get_effective_to_play() const
     return m_to_play;
 }
 
-unsigned int Board::get_points(Color c) const
-{
-    return m_board_const->get_total_piece_points() - get_points_left(c);
-}
-
-unsigned int Board::get_points_with_bonus(Color c) const
-{
-    return get_points(c) + get_bonus(c);
-}
-
 unsigned int Board::get_points_left(Color c) const
 {
     unsigned int n = 0;
