@@ -16,6 +16,7 @@ namespace libpentobi_base {
 
 using namespace std;
 using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::is_main_variation;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
@@ -35,6 +36,12 @@ Game::Game(unique_ptr<Node>& root)
     m_updater(m_tree, *m_bd)
 {
     init(root);
+}
+
+void Game::delete_all_variations()
+{
+    goto_node(back_to_main_variation(*m_current));
+    m_tree.delete_all_variations();
 }
 
 void Game::goto_node(const Node& node)

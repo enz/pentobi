@@ -59,6 +59,9 @@ public:
         @return The parent of the truncated node. */
     const Node& truncate(const Node& node);
 
+    /** Delete all variations but the main variation. */
+    void delete_all_variations();
+
     /** Make a node the first child of its parent. */
     void make_first_child(const Node& node);
 
@@ -161,6 +164,8 @@ public:
     void set_date(const string& date);
 
     void set_date_today();
+
+    bool has_variations() const;
 
 private:
     bool m_modified;

@@ -117,6 +117,11 @@ public:
 
     void make_main_variation();
 
+    /** Delete all variations but the main variation.
+        If the current node is not in the main variation it will be changed
+        to the node as in libboardgame_sgf::util::back_to_main_variation() */
+    void delete_all_variations();
+
     /** Make the current node the first child of its parent. */
     void make_first_child();
 

@@ -621,6 +621,11 @@ void MainWindow::createActions()
     connect(m_actionCoordinateLabels, SIGNAL(triggered(bool)),
             this, SLOT(coordinateLabels(bool)));
 
+    m_actionDeleteAllVariations =
+        new QAction(tr("&Delete All Variations"), this);
+    connect(m_actionDeleteAllVariations, SIGNAL(triggered()),
+            this, SLOT(deleteAllVariations()));
+
     m_actionDoubtfulMove = new QAction(tr("&Doubtful"), this);
     m_actionDoubtfulMove->setActionGroup(groupMoveAnnotation);
     m_actionDoubtfulMove->setCheckable(true);
@@ -1123,6 +1128,7 @@ void MainWindow::createMenu()
     m_menuMoveAnnotation->addAction(m_actionDoubtfulMove);
     m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
     menuEdit->addAction(m_actionMakeMainVariation);
+    menuEdit->addAction(m_actionDeleteAllVariations);
     menuEdit->addAction(m_actionTruncate);
     menuEdit->addAction(m_actionKeepOnlyPosition);
     menuEdit->addAction(m_actionKeepOnlySubtree);
@@ -1237,6 +1243,15 @@ QWidget* MainWindow::createRightPanel()
     }
     initPieceSelectors();
     return widget;
+}
+
+void MainWindow::deleteAllVariations()
+{
+    bool currentNodeChanges = ! is_main_variation(m_game->get_current());
+    if (currentNodeChanges)
+        cancelThread();
+    m_game->delete_all_variations();
+    updateWindow(currentNodeChanges);
 }
 
 void MainWindow::doubtfulMove(bool checked)
@@ -2931,6 +2946,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionBeginning->setEnabled(hasParent);
     m_actionBackward->setEnabled(hasParent);
     m_actionBackward10->setEnabled(hasParent);
+    m_actionDeleteAllVariations->setEnabled(tree.has_variations());
     m_actionForward->setEnabled(hasChildren);
     m_actionForward10->setEnabled(hasChildren);
     m_actionEnd->setEnabled(hasChildren);

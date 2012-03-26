@@ -62,6 +62,8 @@ public slots:
 
     void computerColor();
 
+    void deleteAllVariations();
+
     void end();
 
     void exportAsciiArt();
@@ -277,6 +279,8 @@ private:
     QAction* m_actionComputerColor;
 
     QAction* m_actionCoordinateLabels;
+
+    QAction* m_actionDeleteAllVariations;
 
     QAction* m_actionDoubtfulMove;
 

@@ -53,6 +53,12 @@ Node& Node::create_new_child()
     return result;
 }
 
+void Node::delete_variations()
+{
+    if (m_first_child)
+        m_first_child->m_sibling.reset(0);
+}
+
 Property* Node::find_property(const string& id) const
 {
     Property* property = m_first_property.get();

@@ -63,6 +63,16 @@ const Node& Tree::create_new_child(const Node& node)
     return non_const(node).create_new_child();
 }
 
+void Tree::delete_all_variations()
+{
+    const Node* node = &get_root();
+    while (node != 0)
+    {
+        non_const(*node).delete_variations();
+        node = node->get_first_child_or_null();
+    }
+}
+
 string Tree::get_comment(const Node& node) const
 {
     return node.get_property("C", "");
@@ -81,6 +91,18 @@ bool Tree::has_comment_property(const Node& node, const string& key) const
     while (getline(in, line))
         if (is_comment_property_line(line, key))
             return true;
+    return false;
+}
+
+bool Tree::has_variations() const
+{
+    const Node* node = m_root.get();
+    while (node != 0)
+    {
+        if (node->get_sibling() != 0)
+            return true;
+        node = node->get_first_child_or_null();
+    }
     return false;
 }
 

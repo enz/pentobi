@@ -12,6 +12,7 @@ Current development version
 * New menu items Edit/Keep Only Position and Edit/Keep Only Subtree
   to create files that start with a given fixed position using the
   new setup properties
+* New menu item Edit/Delete All Variations
 * Added a toolbar button for selecting the computer colors
 * Improved playing strength of the computer player in higher
   levels.

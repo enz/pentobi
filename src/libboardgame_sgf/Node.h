@@ -136,6 +136,9 @@ public:
     /** @pre has_parent() */
     void make_first_child();
 
+    /** Delete all siblings of the first child. */
+    void delete_variations();
+
 private:
     Node* m_parent;
 
