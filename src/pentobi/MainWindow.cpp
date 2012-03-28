@@ -763,7 +763,8 @@ void MainWindow::createActions()
             tr("&3"),
             tr("&4"),
             tr("&5"),
-            tr("&6")
+            tr("&6"),
+            tr("&7")
         };
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);

@@ -153,20 +153,20 @@ Move Player::genmove(const Board& bd, Color c)
             || variant == game_variant_classic_2)
         {
             minimum = 10;
-            factor_per_level = 6.2f;
+            factor_per_level = 4.5f;
         }
         else if (variant == game_variant_trigon
                  || variant == game_variant_trigon_2
                  || variant == game_variant_trigon_3)
         {
             minimum = 10;
-            factor_per_level = 4.7f;
+            factor_per_level = 3.6f;
         }
         else
         {
             LIBBOARDGAME_ASSERT(variant == game_variant_duo);
             minimum = 10;
-            factor_per_level = 8.3f;
+            factor_per_level = 5.8f;
         }
         if (m_level <= 1)
             max_count = minimum;
