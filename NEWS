@@ -11,6 +11,7 @@ Current development version (bugfix branch for version 1)
 * Minor bugfixes in the code that should not have resulted in
   user-visible errors
 * Made the code compile without warnings with GCC -Wunused
+* Make "make post-install" run continue even if some commands fail.
 
 
 Version 1.1 (10 Mar 2012)

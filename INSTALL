@@ -31,6 +31,10 @@ Boost that was not known to your version of CMake, you may have to add the
 version to Boost_ADDITIONAL_VERSIONS in CMakeLists.txt before running cmake.
 Type "cmake --help-module FindBoost" for more information.
 
+On Unix systems that support only Gnome 3, it is unnecessary to install
+the Gnome 2 registration files for the Pentobi thumbnailer. They can be
+disabled by using the cmake option -DPENTOBI_REGISTER_GNOME2_THUMBNAILER=OFF.
+
 
 == Installing ==
 
@@ -44,3 +48,7 @@ make Pentobi appear in the desktop menu, register it as handler for Blokus
 The databases can be updated with the shell command:
 
   sudo make post-install
+
+This make target assumes that the commands update-desktop-database and
+update-mime-database exist (and gconftool-2 unless the Gnome 2 thumbnailer
+registration was disabled with PENTOBI_REGISTER_GNOME2_THUMBNAILER=OFF).
