@@ -14,10 +14,10 @@
    id="svg4933"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="piece-flip-horizontal.svg"
-   inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/piece-flip-horizontal.png"
-   inkscape:export-xdpi="30"
-   inkscape:export-ydpi="30">
+   sodipodi:docname="pentobi-flip-horizontal.svg"
+   inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-flip-horizontal.png"
+   inkscape:export-xdpi="41.25"
+   inkscape:export-ydpi="41.25">
   <defs
      id="defs4935">
     <linearGradient
@@ -50,7 +50,7 @@
      inkscape:window-width="1369"
      inkscape:window-height="894"
      inkscape:window-x="167"
-     inkscape:window-y="33"
+     inkscape:window-y="38"
      inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
