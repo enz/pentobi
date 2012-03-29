@@ -1080,7 +1080,8 @@ const Node<M>* Search<S, M, P>::select_child(const Node& node)
         ValueType exploration_term = 0;
         if (m_bias_term_constant != 0)
         {
-            exploration_term = sqrt(bias_term_constant_part / (count + 1));
+            exploration_term =
+                sqrt(bias_term_constant_part / max(count, ValueType(1)));
             if (log_move_selection)
                 log() << " e=" << exploration_term;
         }

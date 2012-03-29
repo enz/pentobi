@@ -103,7 +103,7 @@ Search::Search(GameVariant initial_game_variant, size_t memory)
     set_rave(true);
     set_unexplored_value(0.5);
     set_expand_threshold(1);
-    set_bias_term_constant(0.1f);
+    set_bias_term_constant(0.07f);
     set_widening_parameter(0);
     set_last_good_reply(true);
 }
