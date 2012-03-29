@@ -16,8 +16,8 @@
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="pentobi-flip-vertical.svg"
    inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-flip-vertical.png"
-   inkscape:export-xdpi="41.25"
-   inkscape:export-ydpi="41.25">
+   inkscape:export-xdpi="30"
+   inkscape:export-ydpi="30">
   <defs
      id="defs4935">
     <linearGradient
@@ -73,7 +73,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:#ce5c00;fill-opacity:1;stroke:#743400;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#c17d11;fill-opacity:1;stroke:#2e3436;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 9.265625,31.796875 14.6875,14.6875 14.6875,-14.6875 c -8.445603,0.0016 -6.965677,-0.0029 -8.46875,0 l 0,-15.46875 c 1.530079,0.0013 -0.04064,-0.0084 8.46875,0 l -14.6875,-14.6875 -14.6875,14.6875 c 8.445603,-0.0016 6.965677,0.0029 8.46875,0 l 0,15.46875 c -1.530079,-0.0013 0.04064,0.0084 -8.46875,0 z"
        id="rect3814"
        inkscape:connector-curvature="0"
