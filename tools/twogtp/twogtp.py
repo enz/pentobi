@@ -104,7 +104,13 @@ def play_game(game_number, black, white, game_variant):
     else:
         sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (white_cmd, black_cmd)
     while True:        
-        move = strip(to_play.send("genmove " + colors[color_to_play]))
+        try:
+            move = strip(to_play.send("genmove " + colors[color_to_play]))
+        except:
+            sgf += ")\n"
+            with open(prefix + ".fail.blksgf", "w") as f:
+                f.write(sgf)
+            raise
         other.send("play " + colors[color_to_play] + " " + move)
         if lower(move) != "pass":
             nu_passes = 0            
