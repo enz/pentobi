@@ -171,7 +171,8 @@ Move Player::genmove(const Board& bd, Color c)
         if (m_level <= 1)
             max_count = minimum;
         else
-            max_count = ValueType(minimum * pow(factor_per_level, m_level - 1));
+            max_count =
+                ValueType(ceil(minimum * pow(factor_per_level, m_level - 1)));
         // Don't weight max_count in low levels, otherwise it is still too
         // strong for beginners (later in the game, the weight becomes much
         // greater than 1 because the simulations become very fast)
