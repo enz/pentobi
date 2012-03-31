@@ -184,13 +184,13 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     else
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
+    createActions();
+    setCentralWidget(createCentralWidget());
     initGame();
     m_player.reset(new Player(variant, booksDir.toStdString(), memory));
     m_player->set_use_book(! noBook);
     m_player->get_search().set_avoid_symmetric_draw(noSymDraw);
-    createActions();
     createToolBar();
-    setCentralWidget(createCentralWidget());
     connect(&m_genMoveWatcher, SIGNAL(finished()),
             this, SLOT(genMoveFinished()));
     connect(m_guiBoard, SIGNAL(play(Color, Move)),
@@ -671,6 +671,11 @@ void MainWindow::createActions()
     setIcon(m_actionForward10, "pentobi-forward10");
     connect(m_actionForward10, SIGNAL(triggered()), this, SLOT(forward10()));
 
+    m_actionFreePlacement = new QAction(tr("Free &Placement"), this);
+    m_actionFreePlacement->setCheckable(true);
+    connect(m_actionFreePlacement, SIGNAL(triggered(bool)),
+            this, SLOT(freePlacement(bool)));
+
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
     setIconFromTheme(m_actionFullscreen, "view-fullscreen");
@@ -1132,6 +1137,8 @@ void MainWindow::createMenu()
     menuEdit->addAction(m_actionTruncate);
     menuEdit->addAction(m_actionKeepOnlyPosition);
     menuEdit->addAction(m_actionKeepOnlySubtree);
+    menuEdit->addSeparator();
+    menuEdit->addAction(m_actionFreePlacement);
     menuEdit->addAction(m_actionSelectNextColor);
     menuEdit->addSeparator();
     menuEdit->addAction(m_actionSettings);
@@ -1459,6 +1466,13 @@ void MainWindow::forward10()
     gotoNode(*node);
 }
 
+void MainWindow::freePlacement(bool checked)
+{
+    m_guiBoard->setFreePlacement(checked);
+    if (checked)
+        m_computerColor.fill(false);
+}
+
 void MainWindow::fullscreen(bool checked)
 {
     if (checked)
@@ -1741,6 +1755,8 @@ void MainWindow::initGame()
             m_computerColor[Color(3)] = true;
         }
     }
+    m_actionFreePlacement->setChecked(false);
+    m_guiBoard->setFreePlacement(false);
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
     m_gameFinished = false;
@@ -1955,6 +1971,8 @@ void MainWindow::open(const QString& file, bool isTemporary)
     }
     m_noMovesAvailableShown.fill(false);
     m_computerColor.fill(false);
+    m_actionFreePlacement->setChecked(false);
+    m_guiBoard->setFreePlacement(false);
     m_lastMoveByComputer = false;
     initGameVariantActions();
     updateWindow(true);
@@ -2915,21 +2933,25 @@ void MainWindow::updateWindow(bool currentNodeChanged)
                               m_actionMoveNumbersAll->isChecked(),
                               markAllLastBySameColor);
     m_scoreDisplay->updateScore(bd);
-    m_toPlay = m_game->get_effective_to_play();
     m_legalMoves->clear();
     m_legalMoveIndex = 0;
     bool isGameOver = bd.is_game_over();
-    if (isGameOver)
-        m_orientationDisplay->clearSelectedColor();
-    else
-        m_orientationDisplay->selectColor(m_toPlay);
+    if (! m_actionFreePlacement->isChecked())
+    {
+        m_toPlay = m_game->get_effective_to_play();
+        if (isGameOver)
+            m_orientationDisplay->clearSelectedColor();
+        else
+            m_orientationDisplay->selectColor(m_toPlay);
+    }
     if (currentNodeChanged)
     {
         clearSelectedPiece();
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         {
             m_pieceSelector[*i]->checkUpdate();
-            m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
+            if (! m_actionFreePlacement->isChecked())
+                m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
         }
         updateComment();
         updateMoveAnnotationActions();

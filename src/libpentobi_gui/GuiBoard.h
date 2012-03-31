@@ -59,6 +59,8 @@ public:
 
     void setMarkupFlag(Point p, MarkupFlag flag);
 
+    void setFreePlacement(bool enable);
+
 public slots:
     void clearMarkup();
 
@@ -92,6 +94,8 @@ private:
     const Board& m_bd;
 
     bool m_isInitialized;
+
+    bool m_freePlacement;
 
     /** Does the empty board need redrawing? */
     bool m_emptyBoardDirty;

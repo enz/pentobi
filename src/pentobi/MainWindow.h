@@ -302,6 +302,8 @@ private:
 
     QAction* m_actionForward10;
 
+    QAction* m_actionFreePlacement;
+
     QAction* m_actionFullscreen;
 
     QAction* m_actionGameInfo;
@@ -567,6 +569,8 @@ private slots:
     void coordinateLabels(bool checked);
 
     void doubtfulMove(bool checked);
+
+    void freePlacement(bool checked);
 
     void fullscreen(bool checked);
 

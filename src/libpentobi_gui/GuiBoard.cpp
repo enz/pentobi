@@ -29,10 +29,25 @@ using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+bool allPointEmpty(const Board& bd, Move mv)
+{
+    BOOST_FOREACH(Point p, bd.get_move_info(mv).points)
+        if (! bd.is_empty(p))
+            return false;
+    return true;
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd),
       m_isInitialized(false),
+      m_freePlacement(false),
       m_emptyBoardDirty(true),
       m_dirty(true),
       m_selectedPiece(0),
@@ -118,10 +133,12 @@ Move GuiBoard::findSelectedPieceMove()
         movePoints.push_back(Point(x, y));
     }
     Move mv;
-    if (m_bd.find_move(movePoints, mv)
-        && m_bd.is_legal(m_selectedPieceColor, mv))
+    if (! m_bd.find_move(movePoints, mv)
+        || (m_freePlacement && ! allPointEmpty(m_bd, mv))
+        || (! m_freePlacement && ! m_bd.is_legal(m_selectedPieceColor, mv)))
+        return Move::null();
+    else
         return mv;
-    return Move::null();
 }
 
 bool GuiBoard::hasHeightForWidth() const
@@ -381,6 +398,12 @@ void GuiBoard::setDrawCoordLabels(bool enable)
 {
     m_boardPainter.setDrawCoordLabels(enable);
     setEmptyBoardDirty();
+}
+
+void GuiBoard::setFreePlacement(bool enable)
+{
+    m_freePlacement = enable;
+    update();
 }
 
 void GuiBoard::setLabel(Point p, const QString& text)
