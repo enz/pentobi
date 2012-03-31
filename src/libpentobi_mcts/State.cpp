@@ -490,12 +490,18 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     bool has_symmetry_breaker = false;
     if (m_check_symmetric_draw && ! m_is_symmetry_broken)
     {
+        unsigned int nu_moves = m_bd.get_nu_moves();
         if (to_play == Color(1))
         {
-            ColorMove last = m_bd.get_move(m_bd.get_nu_moves() - 1);
-            symmetric_mv = m_bd.get_move_info_ext(last.move).symmetric_move;
+            if (nu_moves > 0)
+            {
+                ColorMove last = m_bd.get_move(nu_moves - 1);
+                if (! last.is_pass())
+                    symmetric_mv =
+                        m_bd.get_move_info_ext(last.move).symmetric_move;
+            }
         }
-        else if (m_bd.get_nu_moves() > 0)
+        else if (nu_moves > 0)
         {
             BOOST_FOREACH(Move mv, moves)
                 if (m_bd.get_move_info_ext(mv).breaks_symmetry)
