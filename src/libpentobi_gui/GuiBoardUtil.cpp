@@ -63,7 +63,7 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
 void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
                   unsigned int moveNumber, ColorMove mv)
 {
-    if (mv.is_null() || mv.move.is_pass())
+    if (! mv.is_regular())
         return;
     const Board& bd = game.get_board();
     Point p = bd.get_move_info_ext(mv.move).center;
@@ -102,7 +102,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
         do
         {
             ColorMove mv = tree.get_move_ignore_invalid(*node);
-            if (! mv.is_null() && ! mv.move.is_pass())
+            if (mv.is_regular())
                 ++moveNumber;
             node = node->get_parent_or_null();
         }

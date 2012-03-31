@@ -34,6 +34,8 @@ struct ColorMove
     bool is_null() const;
 
     bool is_pass() const;
+
+    bool is_regular() const;
 };
 
 inline ColorMove::ColorMove()
@@ -65,6 +67,11 @@ inline bool ColorMove::is_null() const
 inline bool ColorMove::is_pass() const
 {
     return move.is_pass();
+}
+
+inline bool ColorMove::is_regular() const
+{
+    return move.is_regular();
 }
 
 inline ColorMove ColorMove::null()

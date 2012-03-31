@@ -415,8 +415,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         }
     ++m_nu_playout_moves;
     Move mv;
-    if (! last_good_reply.is_null() && ! last_good_reply.is_pass()
-        && m_bd.is_legal(last_good_reply)
+    if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply)
         && m_bd.get_pieces_left(to_play).contains(
                                      get_move_info(last_good_reply).piece))
     {
@@ -897,7 +896,7 @@ void State::update_move_list(Color c)
 
     // Find old moves that are still legal
     unsigned int last_piece = numeric_limits<unsigned int>::max();
-    if (! last_mv.is_null() && ! last_mv.is_pass())
+    if (last_mv.is_regular())
         last_piece = get_move_info(last_mv).piece;
     for (auto i = moves.begin(); i != moves.end(); ++i)
     {
@@ -916,7 +915,7 @@ void State::update_move_list(Color c)
     }
 
     // Find new legal moves because of the last piece played by this color
-    if (! last_mv.is_null() && ! last_mv.is_pass())
+    if (last_mv.is_regular())
     {
         BOOST_FOREACH(Point p, get_move_info(last_mv).attach_points)
             if (! m_bd.is_forbidden(p, c)

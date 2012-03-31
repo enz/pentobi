@@ -50,11 +50,16 @@ public:
 
     bool is_null() const;
 
+    /** Test if move is a regular move (not a null or pass move) */
+    bool is_regular() const;
+
     /** Return move as an integer between 0 and Move::range */
     unsigned int to_int() const;
 
 private:
     static_assert(range <= USHRT_MAX, "");
+
+    static const unsigned short max_regular_value = range - 3;
 
     static const unsigned short value_pass = range - 2;
 
@@ -101,16 +106,22 @@ inline bool Move::is_initialized() const
     return m_i < value_uninitialized;
 }
 
+inline bool Move::is_null() const
+{
+    LIBBOARDGAME_ASSERT(is_initialized());
+    return m_i == value_null;
+}
+
 inline bool Move::is_pass() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i == value_pass;
 }
 
-inline bool Move::is_null() const
+inline bool Move::is_regular() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    return m_i == value_null;
+    return m_i <= max_regular_value;
 }
 
 inline Move Move::null()

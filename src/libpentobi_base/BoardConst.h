@@ -74,6 +74,8 @@ public:
 
     const PieceTransforms& get_transforms() const;
 
+    /** Get move info.
+        @pre move.is_regular() */
     const MoveInfo& get_move_info(Move move) const;
 
     /** Get pointer to move info array.
@@ -81,6 +83,8 @@ public:
         multiple pointer dereferencing of Board::get_move_info(Move) */
     const MoveInfo* get_move_info_array() const;
 
+    /** Get extended move info.
+        @pre move.is_regular() */
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
     const MovePoints& get_move_points(Move mv) const;
@@ -203,8 +207,6 @@ inline unsigned int BoardConst::get_max_attach_points(unsigned int piece) const
 
 inline const MoveInfo& BoardConst::get_move_info(Move move) const
 {
-    LIBBOARDGAME_ASSERT(! move.is_null());
-    LIBBOARDGAME_ASSERT(! move.is_pass());
     LIBBOARDGAME_ASSERT(move.to_int() < m_move_info.size());
     return m_move_info[move.to_int()];
 }
@@ -216,8 +218,6 @@ inline const MoveInfo* BoardConst::get_move_info_array() const
 
 inline const MoveInfoExt& BoardConst::get_move_info_ext(Move move) const
 {
-    LIBBOARDGAME_ASSERT(! move.is_null());
-    LIBBOARDGAME_ASSERT(! move.is_pass());
     LIBBOARDGAME_ASSERT(move.to_int() < m_move_info_ext.size());
     return m_move_info_ext[move.to_int()];
 }

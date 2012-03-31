@@ -50,7 +50,7 @@ void AnalyzeGame::run(const Game& game, Search& search,
     while (node != 0)
     {
         ColorMove mv = tree.get_move(*node);
-        if (! mv.is_null() && ! mv.move.is_pass())
+        if (mv.is_regular())
         {
             if (! node->has_parent())
             {

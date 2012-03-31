@@ -686,8 +686,7 @@ inline bool Board::is_same_player(Color c1, Color c2) const
 
 inline void Board::place(Color c, Move mv)
 {
-    LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(! mv.is_pass());
+    LIBBOARDGAME_ASSERT(mv.is_regular());
     const MoveInfo& info = m_board_const->get_move_info(mv);
     bool was_removed = m_pieces_left[c].remove(info.piece);
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(was_removed);
