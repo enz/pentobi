@@ -9,12 +9,11 @@ Current development version
 * Support for setup properties in blksgf files (note that files
   with setup properties cannot be read by older versions of
   Pentobi)
-* New menu items Edit/Keep Only Position and Edit/Keep Only Subtree
-  to create files that start with a given fixed position using the
-  new setup properties
-* Support for creating setups that cannot occur in legal games
-  (e.g. for Blokus art or puzzles) with Edit/Free Placement
-* New menu item Edit/Delete All Variations
+* New setup mode to create files that start with a fixed position
+  including positions that cannot occur in legal games (e.g. for
+  puzzles or Blokus art)
+* New menu items Delete All Variations, Keep Only Position,
+  Keep Only Subtree
 * Added a toolbar button for selecting the computer colors
 * Number of levels increased to 7. Level 7 is about the same speed
   as the old level 6 but stronger.

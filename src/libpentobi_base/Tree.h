@@ -88,21 +88,40 @@ public:
         Invalid move properties are ignored. */
     bool has_main_variation_moves() const;
 
-    void set_setup_property(const Node& node, const char* id,
-                            const Setup::PlacementList& placements);
-
     void keep_only_position(const Node& node);
+
+    /** Add a piece as setup.
+        @pre mv.is_regular()
+        If the node already contains a move, a new child will be created.
+        @pre The piece points must be empty on the board
+        @return The node or the new child if one was created. */
+    const Node& add_setup(const Node& node, Color c, Move mv);
+
+    /** Remove a piece using setup properties.
+        @pre mv.is_regular()
+        If the node already contains a move, a new child will be created.
+        @pre The move must exist on the board
+        @return The node or the new child if one was created. */
+    const Node& remove_setup(const Node& node, Color c, Move mv);
 
 private:
     GameVariant m_game_variant;
 
     const BoardConst* m_board_const;
 
-    void add_setup(const Node& node, const Setup& setup);
+    Setup::PlacementList get_setup_property(const Node& node,
+                                            const char* id) const;
+
+    const char* get_setup_prop_id(Color c) const;
+
+    void set_setup(const Node& node, const Setup& setup);
 
     void init_board_const(GameVariant game_variant);
 
     void set_game_property();
+
+    void set_setup_property(const Node& node, const char* id,
+                            const Setup::PlacementList& placements);
 };
 
 inline const BoardConst& Tree::get_board_const() const

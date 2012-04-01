@@ -170,7 +170,12 @@ void GuiBoard::mouseMoveEvent(QMouseEvent* event)
 void GuiBoard::mousePressEvent(QMouseEvent* event)
 {
     if (m_selectedPiece == 0)
+    {
+        CoordPoint p = m_boardPainter.getCoordPoint(event->x(), event->y());
+        if (m_bd.get_geometry().is_onboard(p))
+            emit pointClicked(Point(p.x, p.y));
         return;
+    }
     setSelectedPieceOffset(*event);
     placeSelectedPiece();
 }

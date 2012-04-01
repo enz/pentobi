@@ -44,42 +44,21 @@ Tree::Tree(unique_ptr<Node>& root)
     init(root);
 }
 
-void Tree::add_setup(const Node& node, const Setup& setup)
+const Node& Tree::add_setup(const Node& node, Color c, Move mv)
 {
-    switch (m_game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-        set_setup_property(node, "A1", setup.placements[Color(0)]);
-        set_setup_property(node, "A2", setup.placements[Color(1)]);
-        set_setup_property(node, "A3", setup.placements[Color(2)]);
-        set_setup_property(node, "A4", setup.placements[Color(3)]);
-        break;
-    case game_variant_trigon_3:
-        set_setup_property(node, "A1", setup.placements[Color(0)]);
-        set_setup_property(node, "A2", setup.placements[Color(1)]);
-        set_setup_property(node, "A3", setup.placements[Color(2)]);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
-        set_setup_property(node, "AB", setup.placements[Color(0)]);
-        set_setup_property(node, "AW", setup.placements[Color(1)]);
-    }
-    switch (m_game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-    case game_variant_trigon_3:
-        set_property(node, "PL", setup.to_play.to_int() + 1);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
-        set_property(node, "PL", setup.to_play == Color(0) ? "B" : "W");
-    }
+    const Node* result;
+    if (has_move(node))
+        result = &create_new_child(node);
+    else
+        result = &node;
+    Setup::PlacementList add_empty = get_setup_property(*result, "AE");
+    if (add_empty.remove(mv))
+        set_setup_property(*result, "AE", add_empty);
+    const char* id = get_setup_prop_id(c);
+    Setup::PlacementList add_color = get_setup_property(*result, id);
+    if (add_color.include(mv))
+        set_setup_property(*result, id, add_color);
+    return *result;
 }
 
 const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
@@ -258,6 +237,16 @@ string Tree::get_player_name(Color c) const
     return "";
 }
 
+Setup::PlacementList Tree::get_setup_property(const Node& node,
+                                              const char* id) const
+{
+    vector<string> values = node.get_multi_property(id);
+    Setup::PlacementList result;
+    BOOST_FOREACH(const string& s, values)
+        result.push_back(m_board_const->from_string(s));
+    return result;
+}
+
 bool Tree::has_main_variation_moves() const
 {
     const Node* node = &get_root();
@@ -365,22 +354,9 @@ void Tree::keep_only_position(const Node& node)
         updater.update(node);
         Setup setup;
         get_current_position_as_setup(*bd, setup);
-        remove_property(node, "B");
-        remove_property(node, "W");
-        remove_property(node, "1");
-        remove_property(node, "2");
-        remove_property(node, "3");
-        remove_property(node, "4");
-        remove_property(node, "AB");
-        remove_property(node, "AW");
-        remove_property(node, "A1");
-        remove_property(node, "A2");
-        remove_property(node, "A3");
-        remove_property(node, "A4");
-        remove_property(node, "AE");
         LIBBOARDGAME_ASSERT(! has_move(node));
         LIBBOARDGAME_ASSERT(! has_setup(node));
-        add_setup(node, setup);
+        set_setup(node, setup);
     }
     make_root(node);
     if (! charset.empty())
@@ -389,6 +365,26 @@ void Tree::keep_only_position(const Node& node)
         move_property_to_front(node, "CA");
     }
     set_game_property();
+}
+
+const Node& Tree::remove_setup(const Node& node, Color c, Move mv)
+{
+    const Node* result;
+    if (has_move(node))
+        result = &create_new_child(node);
+    else
+        result = &node;
+    const char* id = get_setup_prop_id(c);
+    Setup::PlacementList add_color = get_setup_property(*result, id);
+    if (add_color.remove(mv))
+        set_setup_property(*result, id, add_color);
+    else
+    {
+        Setup::PlacementList add_empty = get_setup_property(*result, "AE");
+        if (add_empty.include(mv))
+            set_setup_property(*result, "AE", add_empty);
+    }
+    return *result;
 }
 
 void Tree::set_game_property()
@@ -490,11 +486,85 @@ void Tree::set_result(const Node& node, int score)
         set_property(node, "RE", "0");
 }
 
+const char* Tree::get_setup_prop_id(Color c) const
+{
+    unsigned int i = c.to_int();
+    if (m_game_variant == game_variant_duo)
+    {
+        if (i == 0)
+            return "AB";
+        LIBBOARDGAME_ASSERT(i == 1);
+        return "AW";
+    }
+    if (i == 0)
+        return "A1";
+    if (i == 1)
+        return "A2";
+    if (i == 2)
+        return "A3";
+    LIBBOARDGAME_ASSERT(i == 3);
+    return "A4";
+}
+
+void Tree::set_setup(const Node& node, const Setup& setup)
+{
+    remove_property(node, "B");
+    remove_property(node, "W");
+    remove_property(node, "1");
+    remove_property(node, "2");
+    remove_property(node, "3");
+    remove_property(node, "4");
+    remove_property(node, "AB");
+    remove_property(node, "AW");
+    remove_property(node, "A1");
+    remove_property(node, "A2");
+    remove_property(node, "A3");
+    remove_property(node, "A4");
+    remove_property(node, "AE");
+    switch (m_game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+        set_setup_property(node, "A1", setup.placements[Color(0)]);
+        set_setup_property(node, "A2", setup.placements[Color(1)]);
+        set_setup_property(node, "A3", setup.placements[Color(2)]);
+        set_setup_property(node, "A4", setup.placements[Color(3)]);
+        break;
+    case game_variant_trigon_3:
+        set_setup_property(node, "A1", setup.placements[Color(0)]);
+        set_setup_property(node, "A2", setup.placements[Color(1)]);
+        set_setup_property(node, "A3", setup.placements[Color(2)]);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
+        set_setup_property(node, "AB", setup.placements[Color(0)]);
+        set_setup_property(node, "AW", setup.placements[Color(1)]);
+    }
+    switch (m_game_variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+    case game_variant_trigon_3:
+        set_property(node, "PL", setup.to_play.to_int() + 1);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
+        set_property(node, "PL", setup.to_play == Color(0) ? "B" : "W");
+    }
+}
+
 void Tree::set_setup_property(const Node& node, const char* id,
                               const Setup::PlacementList& placements)
 {
     if (placements.empty())
+    {
+        remove_property(node, id);
         return;
+    }
     vector<string> values;
     BOOST_FOREACH(Move mv, placements)
         values.push_back(m_board_const->to_string(mv, false));

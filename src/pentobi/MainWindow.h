@@ -118,6 +118,8 @@ public slots:
 
     void play();
 
+    void pointClicked(Point p);
+
     void previousPiece();
 
     void previousTransform();
@@ -302,8 +304,6 @@ private:
 
     QAction* m_actionForward10;
 
-    QAction* m_actionFreePlacement;
-
     QAction* m_actionFullscreen;
 
     QAction* m_actionGameInfo;
@@ -436,6 +436,8 @@ private:
 
     QAction* m_actionSettings;
 
+    QAction* m_actionSetupMode;
+
     QAction* m_actionTruncate;
 
     QAction* m_actionUndo;
@@ -499,6 +501,8 @@ private:
 
     void deleteAutoSaveFile();
 
+    void enablePieceSelector(Color c);
+
     void genMove();
 
     const Board& getBoard() const;
@@ -516,6 +520,8 @@ private:
     void initGameVariantActions();
 
     void initPieceSelectors();
+
+    void leaveSetupMode();
 
     void play(Color c, Move mv);
 
@@ -570,8 +576,6 @@ private slots:
 
     void doubtfulMove(bool checked);
 
-    void freePlacement(bool checked);
-
     void fullscreen(bool checked);
 
     void gameVariantClassic(bool checked);
@@ -606,6 +610,8 @@ private slots:
     void setMoveNumbersLast(bool checked);
 
     void setMoveNumbersNone(bool checked);
+
+    void setupMode(bool checked);
 
     void showComment(bool checked);
 

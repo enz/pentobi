@@ -81,6 +81,8 @@ public slots:
 signals:
     void play(Color color, Move mv);
 
+    void pointClicked(Point p);
+
 protected:
     void leaveEvent(QEvent* event);
 

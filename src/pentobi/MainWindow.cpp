@@ -195,6 +195,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             this, SLOT(genMoveFinished()));
     connect(m_guiBoard, SIGNAL(play(Color, Move)),
             this, SLOT(humanPlay(Color, Move)));
+    connect(m_guiBoard, SIGNAL(pointClicked(Point)),
+            this, SLOT(pointClicked(Point)));
     connect(m_actionMoveSelectedPieceLeft, SIGNAL(triggered()),
             m_guiBoard, SLOT(moveSelectedPieceLeft()));
     connect(m_actionMoveSelectedPieceRight, SIGNAL(triggered()),
@@ -671,11 +673,6 @@ void MainWindow::createActions()
     setIcon(m_actionForward10, "pentobi-forward10");
     connect(m_actionForward10, SIGNAL(triggered()), this, SLOT(forward10()));
 
-    m_actionFreePlacement = new QAction(tr("Free &Placement"), this);
-    m_actionFreePlacement->setCheckable(true);
-    connect(m_actionFreePlacement, SIGNAL(triggered(bool)),
-            this, SLOT(freePlacement(bool)));
-
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
     setIconFromTheme(m_actionFullscreen, "view-fullscreen");
@@ -1010,6 +1007,11 @@ void MainWindow::createActions()
     connect(m_actionSettings, SIGNAL(triggered()),
             this, SLOT(settings()));
 
+    m_actionSetupMode = new QAction(tr("Set&up Mode"), this);
+    m_actionSetupMode->setCheckable(true);
+    connect(m_actionSetupMode, SIGNAL(triggered(bool)),
+            this, SLOT(setupMode(bool)));
+
     m_actionShowComment = new QAction(tr("&Comment"), this);
     m_actionShowComment->setCheckable(true);
     m_actionShowComment->setShortcut(QString("Ctrl+T"));
@@ -1138,7 +1140,7 @@ void MainWindow::createMenu()
     menuEdit->addAction(m_actionKeepOnlyPosition);
     menuEdit->addAction(m_actionKeepOnlySubtree);
     menuEdit->addSeparator();
-    menuEdit->addAction(m_actionFreePlacement);
+    menuEdit->addAction(m_actionSetupMode);
     menuEdit->addAction(m_actionSelectNextColor);
     menuEdit->addSeparator();
     menuEdit->addAction(m_actionSettings);
@@ -1298,6 +1300,15 @@ void MainWindow::deleteAutoSaveFile()
     QFile file(autoSaveFile);
     if (file.exists() && ! file.remove())
         showError(tr("Could not delete %1").arg(autoSaveFile));
+}
+
+void MainWindow::enablePieceSelector(Color c)
+{
+    for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
+    {
+        m_pieceSelector[*i]->checkUpdate();
+        m_pieceSelector[*i]->setEnabled(*i == c);
+    }
 }
 
 void MainWindow::end()
@@ -1464,13 +1475,6 @@ void MainWindow::forward10()
         node = child;
     }
     gotoNode(*node);
-}
-
-void MainWindow::freePlacement(bool checked)
-{
-    m_guiBoard->setFreePlacement(checked);
-    if (checked)
-        m_computerColor.fill(false);
 }
 
 void MainWindow::fullscreen(bool checked)
@@ -1664,6 +1668,7 @@ void MainWindow::gotoMove()
 void MainWindow::gotoNode(const Node& node)
 {
     cancelThread();
+    leaveSetupMode();
     try
     {
         m_game->goto_node(node);
@@ -1723,12 +1728,19 @@ void MainWindow::help()
 void MainWindow::humanPlay(Color c, Move mv)
 {
     cancelThread();
-    if (m_computerColor[c])
+    bool isSetupMode = m_actionSetupMode->isChecked();
+    if (m_computerColor[c] || isSetupMode)
         // If the user enters a move previously played by the computer (e.g.
         // after undoing moves) then it is unlikely that the user wants to keep
         // the computer color settings.
         m_computerColor.fill(false);
-    play(c, mv);
+    if (isSetupMode)
+    {
+        m_game->add_setup(c, mv);
+        updateWindow(true);
+    }
+    else
+        play(c, mv);
 }
 
 void MainWindow::initGame()
@@ -1755,7 +1767,7 @@ void MainWindow::initGame()
             m_computerColor[Color(3)] = true;
         }
     }
-    m_actionFreePlacement->setChecked(false);
+    leaveSetupMode();
     m_guiBoard->setFreePlacement(false);
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
@@ -1825,6 +1837,16 @@ void MainWindow::keepOnlySubtree()
     cancelThread();
     m_game->keep_only_subtree();
     updateWindow(true);
+}
+
+void MainWindow::leaveSetupMode()
+{
+    if (! m_actionSetupMode->isChecked())
+        return;
+    m_actionSetupMode->setChecked(false);
+    m_guiBoard->setFreePlacement(false);
+    clearStatus();
+    enablePieceSelector(m_toPlay);
 }
 
 void MainWindow::makeMainVariation()
@@ -1971,8 +1993,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     }
     m_noMovesAvailableShown.fill(false);
     m_computerColor.fill(false);
-    m_actionFreePlacement->setChecked(false);
-    m_guiBoard->setFreePlacement(false);
+    leaveSetupMode();
     m_lastMoveByComputer = false;
     initGameVariantActions();
     updateWindow(true);
@@ -2057,6 +2078,18 @@ void MainWindow::play(Color c, Move mv)
         updateWindow(true);
         checkComputerMove();
     }
+}
+
+void MainWindow::pointClicked(Point p)
+{
+    if (! m_actionSetupMode->isChecked())
+        return;
+    const Board& bd = getBoard();
+    PointState s = bd.get_point_state(p);
+    if (s.is_empty())
+        return;
+    m_game->remove_setup(s.to_color(), bd.get_played_move(p));
+    updateWindow(true);
 }
 
 void MainWindow::previousPiece()
@@ -2581,6 +2614,32 @@ void MainWindow::setMoveNumberText()
     }
 }
 
+void MainWindow::setupMode(bool checked)
+{
+    // Currently, we allow setup mode only if no moves have been played. It
+    // should also work in inner nodes but this might be confusing for users
+    // and violate some assumptions in the user interface (e.g. node depth is
+    // equal to move number). Therefore, m_actionSetupMode is disabled if the
+    // root node has children, but we still need to check for it here because
+    // due to bugs in the Unitiy interface in Ubuntu 11.10, menu items are
+    // not always disabled if the corresponding action is.
+    if (m_game->get_root().has_children())
+    {
+        m_actionSetupMode->setChecked(false);
+        return;
+    }
+    m_guiBoard->setFreePlacement(checked);
+    if (checked)
+    {
+        showStatus(tr("Setup mode"));
+        m_computerColor.fill(false);
+        for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
+            m_pieceSelector[*i]->setEnabled(true);
+    }
+    else
+        clearStatus();
+}
+
 void MainWindow::showComment(bool checked)
 {
     int height = m_splitter->height();
@@ -2936,7 +2995,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_legalMoves->clear();
     m_legalMoveIndex = 0;
     bool isGameOver = bd.is_game_over();
-    if (! m_actionFreePlacement->isChecked())
+    if (! m_actionSetupMode->isChecked())
     {
         m_toPlay = m_game->get_effective_to_play();
         if (isGameOver)
@@ -2948,11 +3007,9 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     {
         clearSelectedPiece();
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        {
             m_pieceSelector[*i]->checkUpdate();
-            if (! m_actionFreePlacement->isChecked())
-                m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
-        }
+        if (! m_actionSetupMode->isChecked())
+            enablePieceSelector(m_toPlay);
         updateComment();
         updateMoveAnnotationActions();
     }
@@ -2979,6 +3036,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMakeMainVariation->setEnabled(! isMain);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
+    // See also comment in setupMode()
+    m_actionSetupMode->setEnabled(! hasParent && ! hasChildren);
     m_actionTruncate->setEnabled(hasParent);
     m_actionUndo->setEnabled(hasParent || ! hasChildren || hasMove);
 }

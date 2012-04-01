@@ -142,6 +142,10 @@ public:
 
     void set_date_today();
 
+    void add_setup(Color c, Move mv);
+
+    void remove_setup(Color c, Move mv);
+
 private:
     const Node* m_current;
 

@@ -38,6 +38,12 @@ Game::Game(unique_ptr<Node>& root)
     init(root);
 }
 
+void Game::add_setup(Color c, Move mv)
+{
+    const Node& node = m_tree.add_setup(*m_current, c, mv);
+    goto_node(node);
+}
+
 void Game::delete_all_variations()
 {
     goto_node(back_to_main_variation(*m_current));
@@ -115,6 +121,12 @@ void Game::play(ColorMove mv, bool always_create_new_node)
         m_current = &m_tree.create_new_child(*m_current);
         m_tree.set_move(*m_current, mv);
     }
+}
+
+void Game::remove_setup(Color c, Move mv)
+{
+    const Node& node = m_tree.remove_setup(*m_current, c, mv);
+    goto_node(node);
 }
 
 void Game::set_result(int score)
