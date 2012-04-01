@@ -186,6 +186,12 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_game.reset(new Game(variant));
     createActions();
     setCentralWidget(createCentralWidget());
+    m_moveNumber = new QLabel();
+    statusBar()->addPermanentWidget(m_moveNumber);
+    m_setupModeLabel = new QLabel();
+    statusBar()->addWidget(m_setupModeLabel);
+    m_buttonFullscreen = new StatusBarButton(m_actionFullscreen);
+    statusBar()->addPermanentWidget(m_buttonFullscreen);
     initGame();
     m_player.reset(new Player(variant, booksDir.toStdString(), memory));
     m_player->set_use_book(! noBook);
@@ -210,10 +216,6 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     createMenu();
     qApp->installEventFilter(this);
     updateRecentFiles();
-    m_moveNumber = new QLabel();
-    statusBar()->addPermanentWidget(m_moveNumber);
-    m_buttonFullscreen = new StatusBarButton(m_actionFullscreen);
-    statusBar()->addPermanentWidget(m_buttonFullscreen);
     addAction(m_actionMoveSelectedPieceLeft);
     addAction(m_actionMoveSelectedPieceRight);
     addAction(m_actionMoveSelectedPieceUp);
@@ -1668,7 +1670,7 @@ void MainWindow::gotoMove()
 void MainWindow::gotoNode(const Node& node)
 {
     cancelThread();
-    leaveSetupMode();
+    setupMode(false);
     try
     {
         m_game->goto_node(node);
@@ -1767,8 +1769,8 @@ void MainWindow::initGame()
             m_computerColor[Color(3)] = true;
         }
     }
-    leaveSetupMode();
-    m_guiBoard->setFreePlacement(false);
+    m_toPlay = Color(0);
+    setupMode(false);
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
     m_gameFinished = false;
@@ -1837,16 +1839,6 @@ void MainWindow::keepOnlySubtree()
     cancelThread();
     m_game->keep_only_subtree();
     updateWindow(true);
-}
-
-void MainWindow::leaveSetupMode()
-{
-    if (! m_actionSetupMode->isChecked())
-        return;
-    m_actionSetupMode->setChecked(false);
-    m_guiBoard->setFreePlacement(false);
-    clearStatus();
-    enablePieceSelector(m_toPlay);
 }
 
 void MainWindow::makeMainVariation()
@@ -1993,7 +1985,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     }
     m_noMovesAvailableShown.fill(false);
     m_computerColor.fill(false);
-    leaveSetupMode();
+    setupMode(false);
     m_lastMoveByComputer = false;
     initGameVariantActions();
     updateWindow(true);
@@ -2614,7 +2606,7 @@ void MainWindow::setMoveNumberText()
     }
 }
 
-void MainWindow::setupMode(bool checked)
+void MainWindow::setupMode(bool enable)
 {
     // Currently, we allow setup mode only if no moves have been played. It
     // should also work in inner nodes but this might be confusing for users
@@ -2624,20 +2616,21 @@ void MainWindow::setupMode(bool checked)
     // due to bugs in the Unitiy interface in Ubuntu 11.10, menu items are
     // not always disabled if the corresponding action is.
     if (m_game->get_root().has_children())
+        enable = false;
+    m_actionSetupMode->setChecked(enable);
+    m_guiBoard->setFreePlacement(enable);
+    if (enable)
     {
-        m_actionSetupMode->setChecked(false);
-        return;
-    }
-    m_guiBoard->setFreePlacement(checked);
-    if (checked)
-    {
-        showStatus(tr("Setup mode"));
-        m_computerColor.fill(false);
+        m_setupModeLabel->setText(tr("Setup mode"));
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
             m_pieceSelector[*i]->setEnabled(true);
+        m_computerColor.fill(false);
     }
     else
-        clearStatus();
+    {
+        m_setupModeLabel->setText("");
+        enablePieceSelector(m_toPlay);
+    }
 }
 
 void MainWindow::showComment(bool checked)

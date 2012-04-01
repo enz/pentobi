@@ -450,6 +450,8 @@ private:
 
     QMenu* m_menuOpenRecent;
 
+    QLabel* m_setupModeLabel;
+
     StatusBarButton* m_buttonFullscreen;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
