@@ -2615,9 +2615,12 @@ void MainWindow::setupMode(bool enable)
     // equal to move number). Therefore, m_actionSetupMode is disabled if the
     // root node has children, but we still need to check for it here because
     // due to bugs in the Unitiy interface in Ubuntu 11.10, menu items are
-    // not always disabled if the corresponding action is.
-    if (m_game->get_root().has_children())
+    // not always disabled if the corresponding action is disabled.
+    if (enable && m_game->get_root().has_children())
+    {
+        showInfo(tr("Setup mode cannot be used if moves have been played."));
         enable = false;
+    }
     m_actionSetupMode->setChecked(enable);
     m_guiBoard->setFreePlacement(enable);
     if (enable)
