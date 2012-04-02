@@ -200,7 +200,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     connect(&m_genMoveWatcher, SIGNAL(finished()),
             this, SLOT(genMoveFinished()));
     connect(m_guiBoard, SIGNAL(play(Color, Move)),
-            this, SLOT(humanPlay(Color, Move)));
+            this, SLOT(placePiece(Color, Move)));
     connect(m_guiBoard, SIGNAL(pointClicked(Point)),
             this, SLOT(pointClicked(Point)));
     connect(m_actionMoveSelectedPieceLeft, SIGNAL(triggered()),
@@ -1727,24 +1727,6 @@ void MainWindow::help()
     m_helpWindow->show();
 }
 
-void MainWindow::humanPlay(Color c, Move mv)
-{
-    cancelThread();
-    bool isSetupMode = m_actionSetupMode->isChecked();
-    if (m_computerColor[c] || isSetupMode)
-        // If the user enters a move previously played by the computer (e.g.
-        // after undoing moves) then it is unlikely that the user wants to keep
-        // the computer color settings.
-        m_computerColor.fill(false);
-    if (isSetupMode)
-    {
-        m_game->add_setup(c, mv);
-        updateWindow(true);
-    }
-    else
-        play(c, mv);
-}
-
 void MainWindow::initGame()
 {
     if (m_analyzeGameWindow != 0)
@@ -2001,9 +1983,28 @@ void MainWindow::openRecentFile()
      open(action->data().toString());
 }
 
+void MainWindow::placePiece(Color c, Move mv)
+{
+    cancelThread();
+    bool isSetupMode = m_actionSetupMode->isChecked();
+    if (m_computerColor[c] || isSetupMode)
+        // If the user enters a move previously played by the computer (e.g.
+        // after undoing moves) then it is unlikely that the user wants to keep
+        // the computer color settings.
+        m_computerColor.fill(false);
+    if (isSetupMode)
+    {
+        m_game->add_setup(c, mv);
+        updateWindow(true);
+    }
+    else
+        play(c, mv);
+}
+
 void MainWindow::play()
 {
     cancelThread();
+    setupMode(false);
     GameVariant variant = m_game->get_game_variant();
     if (variant != game_variant_classic && variant != game_variant_trigon
          && variant != game_variant_trigon_3)

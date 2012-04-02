@@ -90,8 +90,6 @@ public slots:
 
     void help();
 
-    void humanPlay(Color c, Move mv);
-
     void gameInfo();
 
     void interrupt();
@@ -115,6 +113,8 @@ public slots:
     void open();
 
     void open(const QString& file, bool isTemporary = false);
+
+    void placePiece(Color c, Move mv);
 
     void play();
 
