@@ -249,8 +249,14 @@ void State::compute_features()
         else
             attach_point_value[*i] = 1;
         if (! m_bd.is_forbidden(*i, to_play))
-            // Creating new forbidden points is a bad thing
-            adj_point_value[*i] = -0.2f;
+        {
+            if (m_bd.is_attach_point(*i, to_play))
+                // Making own attach point forbidden is especially bad
+                adj_point_value[*i] = -2;
+            else
+                // Creating new forbidden points is a bad thing
+                adj_point_value[*i] = -0.2f;
+        }
         else if (s == second_color)
             // Connecting 2 player colors in 2-colors-per-player game variants
             // is good (in other variants second_color is the same as to_play
