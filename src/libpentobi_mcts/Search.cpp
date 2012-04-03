@@ -153,6 +153,8 @@ void Search::on_start_search()
     for (unsigned int i = 0; i < Board::max_game_moves; ++i)
         set_pieces_considered(bd.get_board_const(), i,
                               m_shared_const.is_piece_considered[i]);
+    for (unsigned int i = 0; i < Board::max_pieces; ++i)
+        m_shared_const.is_piece_considered_all[i] = true;
 }
 
 bool Search::search(Move& mv, const Board& bd, Color to_play,

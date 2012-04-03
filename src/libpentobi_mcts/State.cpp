@@ -568,11 +568,18 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     }
 }
 
+inline const array<bool,Board::max_pieces>& State::get_pieces_considered() const
+{
+    if (m_consider_all_pieces)
+        return m_shared_const.is_piece_considered_all;
+    else
+        return m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
+}
+
 void State::init_move_list_with_local(Color c)
 {
     m_last_move[c] = Move::null();
-    m_is_piece_considered[c] =
-        &m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
+    m_is_piece_considered[c] = &get_pieces_considered();
     m_local_value.init(m_bd);
     m_local_moves.clear();
     m_max_local_value = 1;
@@ -616,13 +623,17 @@ void State::init_move_list_with_local(Color c)
     }
     m_marker.clear(moves);
     m_is_move_list_initialized[c] = true;
+    if (moves.empty() && ! m_consider_all_pieces)
+    {
+        m_consider_all_pieces = true;
+        init_move_list_with_local(c);
+    }
 }
 
 void State::init_move_list_without_local(Color c)
 {
     m_last_move[c] = Move::null();
-    m_is_piece_considered[c] =
-        &m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
+    m_is_piece_considered[c] = &get_pieces_considered();
     ArrayList<Move, Move::range>& moves = m_moves[c];
     moves.clear();
     bool is_first_move =
@@ -678,6 +689,11 @@ void State::init_move_list_without_local(Color c)
     }
     m_marker.clear(moves);
     m_is_move_list_initialized[c] = true;
+    if (moves.empty() && ! m_consider_all_pieces)
+    {
+        m_consider_all_pieces = true;
+        init_move_list_without_local(c);
+    }
 }
 
 void State::init_symmetry_info()
@@ -874,6 +890,7 @@ void State::start_simulation(size_t n)
     m_bd.copy_from(*m_shared_const.board);
     m_bd.set_to_play(m_shared_const.to_play);
     m_extended_update = false;
+    m_consider_all_pieces = false;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
         m_has_moves[*i] = true;
@@ -931,7 +948,7 @@ void State::update_move_list(Color c)
 
     // Generate moves for pieces that were not considered in the last position
     const array<bool,Board::max_pieces>& is_piece_considered =
-        m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
+        get_pieces_considered();
     bool pieces_considered_changed = false;
     BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
     {
@@ -961,6 +978,11 @@ void State::update_move_list(Color c)
 
     m_marker.clear(m_moves[c]);
     m_last_move[c] = Move::null();
+    if (m_moves[c].empty() && ! m_consider_all_pieces)
+    {
+        m_consider_all_pieces = true;
+        update_move_list(c);
+    }
 }
 
 void State::update_symmetry_info(Move mv)

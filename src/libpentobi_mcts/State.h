@@ -70,6 +70,10 @@ struct SharedConst
     array<array<bool,Board::max_pieces>,Board::max_game_moves>
                                                            is_piece_considered;
 
+    /** Precomputed lists of considered pieces if all pieces are enforced to be
+        considered. */
+    array<bool,Board::max_pieces> is_piece_considered_all;
+
     SharedConst(const Color& to_play);
 };
 
@@ -220,6 +224,9 @@ private:
 
     bool m_is_symmetry_broken;
 
+    /** Enforce all pieces to be considered for the rest of the simulation. */
+    bool m_consider_all_pieces;
+
     /** Distance to center heuristic. */
     Grid<unsigned int> m_dist_to_center;
 
@@ -237,6 +244,8 @@ private:
 
     /** Equivalent to but faster than Board::get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
+
+    const array<bool,Board::max_pieces>& get_pieces_considered() const;
 
     void init_move_list_with_local(Color c);
 
