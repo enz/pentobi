@@ -1,17 +1,19 @@
 Current development version (bugfix branch for version 1)
 ===========================
 
+* Bugfix: program sometimes hung or crashed when generating a move
+  in early game Trigon positions especially when there were no legal
+  moves with any of the large pieces
+* Bugfix: file modified marker was not set on certain changes
+  (Make Main Variation, comment changed)
+* Minor other bugfixes in the code
 * Reverted the change that used the SVG icon for setting the
   window icon because it created an unwanted dependency on the
   Qt SVG plugin.
-* Fixed setting of file modified marker that was not set on certain
-  changes (Make Main Variation, comment changed)
-* Make Save menu item and tool button active if game is modified even
+* Made Save menu item and tool button active if game is modified even
   if no file name is associated with the current game
-* Minor bugfixes in the code that should not have resulted in
-  user-visible errors
 * Made the code compile without warnings with GCC -Wunused
-* Make "make post-install" run continue even if some commands fail.
+* Made "make post-install" continue even if some commands fail.
 
 
 Version 1.1 (10 Mar 2012)

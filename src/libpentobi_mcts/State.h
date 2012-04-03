@@ -191,6 +191,9 @@ private:
 
     bool m_is_symmetry_broken;
 
+    /** Enforce all pieces to be considered for the rest of the simulation. */
+    bool m_consider_all_pieces;
+
     /** Distance to center heuristic. */
     Grid<unsigned int> m_dist_to_center;
 

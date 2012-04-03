@@ -120,7 +120,7 @@ bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
     return true;
 }
 
-void set_pieces_considered(const Board& bd,
+void set_pieces_considered(const Board& bd, bool consider_all_pieces,
                            array<bool,Board::max_pieces>& is_piece_considered)
 {
     BoardType board_type = bd.get_board_type();
@@ -159,7 +159,8 @@ void set_pieces_considered(const Board& bd,
     for (unsigned int i = 0; i < bd.get_nu_pieces(); ++i)
     {
         const Piece& piece = bd.get_piece(i);
-        is_piece_considered[i] = (piece.get_size() >= min_piece_size);
+        is_piece_considered[i] =
+            (consider_all_pieces || piece.get_size() >= min_piece_size);
     }
 }
 
@@ -532,7 +533,8 @@ void State::init_local_points()
 void State::init_move_list_with_local_list(Color c)
 {
     m_last_move[c] = Move::null();
-    set_pieces_considered(m_bd, m_is_piece_considered[c]);
+    set_pieces_considered(m_bd, m_consider_all_pieces,
+                          m_is_piece_considered[c]);
     init_local_points();
     m_local_moves.clear();
     m_max_local = 1;
@@ -594,12 +596,18 @@ void State::init_move_list_with_local_list(Color c)
     m_marker.clear(moves);
     clear_local_points();
     m_is_move_list_initialized[c] = true;
+    if (moves.empty() && ! m_consider_all_pieces)
+    {
+        m_consider_all_pieces = true;
+        init_move_list_with_local_list(c);
+    }
 }
 
 void State::init_move_list_without_local_list(Color c)
 {
     m_last_move[c] = Move::null();
-    set_pieces_considered(m_bd, m_is_piece_considered[c]);
+    set_pieces_considered(m_bd, m_consider_all_pieces,
+                          m_is_piece_considered[c]);
     ArrayList<Move, Move::range>& moves = m_moves[c];
     moves.clear();
     bool is_first_move =
@@ -654,6 +662,11 @@ void State::init_move_list_without_local_list(Color c)
     }
     m_marker.clear(moves);
     m_is_move_list_initialized[c] = true;
+    if (moves.empty() && ! m_consider_all_pieces)
+    {
+        m_consider_all_pieces = true;
+        init_move_list_without_local_list(c);
+    }
 }
 
 void State::init_symmetry_info()
@@ -820,6 +833,7 @@ void State::start_simulation(size_t n)
     m_bd.copy_from(m_shared_const.board);
     m_bd.set_to_play(m_shared_const.to_play);
     m_extended_update = false;
+    m_consider_all_pieces = false;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
         m_has_moves[*i] = true;
@@ -897,7 +911,7 @@ void State::update_move_list(Color c)
 
     // Generate moves for pieces that were not considered in the last position
     array<bool,Board::max_pieces> is_piece_considered;
-    set_pieces_considered(m_bd, is_piece_considered);
+    set_pieces_considered(m_bd, m_consider_all_pieces, is_piece_considered);
     bool pieces_considered_changed = false;
     BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
     {
@@ -942,6 +956,11 @@ void State::update_move_list(Color c)
     m_marker.clear(m_moves[c]);
     clear_local_points();
     m_last_move[c] = Move::null();
+    if (m_moves[c].empty() && ! m_consider_all_pieces)
+    {
+        m_consider_all_pieces = true;
+        update_move_list(c);
+    }
 }
 
 void State::update_symmetry_info(Move mv)
