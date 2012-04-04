@@ -319,17 +319,19 @@ void MainWindow::analyzeGame()
     m_analyzeGameWindow = new AnalyzeGameWindow(this);
     m_analyzeGameWindow->show();
     m_isAnalyzeRunning = true;
-    connect(m_analyzeGameWindow, SIGNAL(finished()),
+    connect(m_analyzeGameWindow->analyzeGameWidget, SIGNAL(finished()),
             this, SLOT(analyzeGameFinished()));
-    connect(m_analyzeGameWindow,
+    connect(m_analyzeGameWindow->analyzeGameWidget,
             SIGNAL(gotoPosition(GameVariant,const vector<ColorMove>&)),
             this, SLOT(gotoPosition(GameVariant,const vector<ColorMove>&)));
-    m_analyzeGameWindow->start(*m_game, m_player->get_search());
+    m_analyzeGameWindow->analyzeGameWidget->start(*m_game,
+                                                  m_player->get_search());
 }
 
 void MainWindow::analyzeGameFinished()
 {
-    m_analyzeGameWindow->setCurrentPosition(*m_game, m_game->get_current());
+    m_analyzeGameWindow->analyzeGameWidget
+        ->setCurrentPosition(*m_game, m_game->get_current());
     m_isAnalyzeRunning = false;
 }
 
@@ -389,7 +391,7 @@ void MainWindow::cancelThread()
         // parent with a modal progress dialog while it is running. However,
         // due to bugs in Unity 2D (tested with Ubuntu 11.04 and 11.10), the
         // global menu can still trigger menu item events.
-        m_analyzeGameWindow->cancel();
+        m_analyzeGameWindow->analyzeGameWidget->cancel();
     }
     if (m_isGenMoveRunning)
     {
@@ -1683,7 +1685,8 @@ void MainWindow::gotoNode(const Node& node)
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
     if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
-        m_analyzeGameWindow->setCurrentPosition(*m_game, node);
+        m_analyzeGameWindow->analyzeGameWidget
+            ->setCurrentPosition(*m_game, node);
     updateWindow(true);
 }
 
