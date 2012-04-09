@@ -9,6 +9,7 @@
 #include "BoardUtil.h"
 
 #include <iostream>
+#include <boost/foreach.hpp>
 
 namespace libpentobi_base {
 namespace boardutil {
@@ -19,13 +20,42 @@ using namespace std;
 
 void dump(const Board& bd, ostream& out)
 {
-    out << bd;
+    GameVariant game_variant = bd.get_game_variant();
+    out << bd
+        << "(\n;GM[" << to_string(game_variant) << "]\n";
+    const Setup& setup = bd.get_setup();
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        if (! setup.placements[*i].empty())
+        {
+            out << " A";
+            if (game_variant == game_variant_duo)
+                out << ((*i).to_int() == 0 ? 'B' : 'W');
+            else
+                out << ((*i).to_int() + 1);
+            bool is_first = true;
+            BOOST_FOREACH(Move mv, setup.placements[*i])
+            {
+                if (! is_first)
+                    out << "   ";
+                is_first = false;
+                out << '[' << bd.to_string(mv, false) << "]\n";
+            }
+        }
     for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
     {
         ColorMove mv =  bd.get_move(i);
-        out << (i + 1) << " play " << mv.color << ' '
-            << bd.to_string(mv.move) << '\n';
+        Color c = mv.color;
+        out << ';';
+        if (game_variant == game_variant_duo)
+            out << (c.to_int() == 0 ? 'B' : 'W');
+        else
+            out << (c.to_int() + 1);
+        out << '[';
+        if (! mv.is_pass())
+            out << bd.to_string(mv.move, false);
+        out << "]\n";
     }
+    out << ")\n";
 }
 
 void get_current_position_as_setup(const Board& bd, Setup& setup)
