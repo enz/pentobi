@@ -202,8 +202,6 @@ Move Player::genmove(const Board& bd, Color c)
     return mv;
 }
 
-/** Initialize settings that can be overridden with a file
-    libpentobi_mcts.conf in the application directory. */
 void Player::load_book(istream& in)
 {
     m_book.load(in);
