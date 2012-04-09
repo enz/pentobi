@@ -5,7 +5,11 @@
 #ifndef LIBPENTOBI_BASE_GAME_VARIANT_H
 #define LIBPENTOBI_BASE_GAME_VARIANT_H
 
+#include <string>
+
 namespace libpentobi_base {
+
+using namespace std;
 
 //-----------------------------------------------------------------------------
 
@@ -23,6 +27,17 @@ enum GameVariant
 
     game_variant_trigon_3
 };
+
+/** Get name of game variant as in the GM property in Blokus SGF files. */
+const char* to_string(GameVariant game_variant);
+
+/** Parse name of game variant as in the GM property in Blokus SGF files.
+    The parsing is case-insensitive, leading and trailing whitespaced are
+    ignored.
+    @param s
+    @param[out] game_variant
+    @result True if the string contained a valid game variant. */
+bool parse_game_variant(const string& s, GameVariant& game_variant);
 
 //-----------------------------------------------------------------------------
 

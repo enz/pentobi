@@ -63,6 +63,14 @@ public:
 
     void set_avoid_symmetric_draw(bool enable);
 
+    /** Automatically set some user-changeable parameters that have different
+        optimal values for different game variants whenever the game variant
+        changes.
+        Default is true. */
+    bool get_auto_param() const;
+
+    void set_auto_param(bool enable);
+
     // @} // @name
 
 
@@ -79,6 +87,13 @@ protected:
 private:
     typedef libboardgame_mcts::Search<State, Move, 4> ParentClass;
 
+    /** Automatically set default parameters for the game variant if
+        the game variant changes. */
+    bool m_auto_param;
+
+    /** Game variant of last search. */
+    GameVariant m_game_variant;
+
     Color m_to_play;
 
     SharedConst m_shared_const;
@@ -89,7 +104,14 @@ private:
     GameStateHistory m_last_state;
 
     const Board& get_board() const;
+
+    void set_default_param(GameVariant game_variant);
 };
+
+inline bool Search::get_auto_param() const
+{
+    return m_auto_param;
+}
 
 inline bool Search::get_avoid_symmetric_draw() const
 {
@@ -124,6 +146,11 @@ inline ValueType Search::get_score_modification() const
 inline Color Search::get_to_play() const
 {
     return m_to_play;
+}
+
+inline void Search::set_auto_param(bool enable)
+{
+    m_auto_param = enable;
 }
 
 inline void Search::set_avoid_symmetric_draw(bool enable)

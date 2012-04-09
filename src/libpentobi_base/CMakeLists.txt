@@ -11,6 +11,7 @@ set(pentobi_base_STAT_SRCS
   Book.cpp
   Color.cpp
   Game.cpp
+  GameVariant.cpp
   GameStateHistory.cpp
   Piece.cpp
   Player.cpp

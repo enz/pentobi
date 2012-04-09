@@ -105,6 +105,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
     if (args.get_size() == 0)
         response
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
+            << "auto_param " << s.get_auto_param() << '\n'
             << "bias_term_constant " << s.get_bias_term_constant() << '\n'
             << "detect_symmetry " << s.get_detect_symmetry() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
@@ -122,6 +123,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         string name = args.get(0);
         if (name == "avoid_symmetric_draw")
             s.set_avoid_symmetric_draw(args.get<bool>(1));
+        else if (name == "auto_param")
+            s.set_auto_param(args.get<bool>(1));
         else if (name == "bias_term_constant")
             s.set_bias_term_constant(args.get<ValueType>(1));
         else if (name == "detect_symmetry")

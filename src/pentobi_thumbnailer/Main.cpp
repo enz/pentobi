@@ -104,41 +104,29 @@ void handleSetupEmpty(const Node& node, const Geometry& geometry,
 bool getFinalPosition(const Node& root, GameVariant& gameVariant,
                       Grid<PointState>& pointState)
 {
-    string game = root.get_property("GM", "");
-    string s = to_lower_copy(trim_copy(game));
-    const Geometry* geometry;
-    if (s == "blokus duo")
-    {
-        gameVariant = game_variant_duo;
-        geometry = RectGeometry<Point>::get(14, 14);
-    }
-    else if (s == "blokus")
-    {
-        gameVariant = game_variant_classic;
-        geometry = RectGeometry<Point>::get(20, 20);
-    }
-    else if (s == "blokus two-player")
-    {
-        gameVariant = game_variant_classic_2;
-        geometry = RectGeometry<Point>::get(20, 20);
-    }
-    else if (s == "blokus trigon")
-    {
-        gameVariant = game_variant_trigon;
-        geometry = TrigonGeometry<Point>::get(9);
-    }
-    else if (s == "blokus trigon two-player")
-    {
-        gameVariant = game_variant_trigon_2;
-        geometry = TrigonGeometry<Point>::get(9);
-    }
-    else if (s == "blokus trigon three-player")
-    {
-        gameVariant = game_variant_trigon_3;
-        geometry = TrigonGeometry<Point>::get(8);
-    }
-    else
+    if (! parse_game_variant(root.get_property("GM", ""), gameVariant))
         return false;
+    const Geometry* geometry;
+    switch (gameVariant)
+    {
+    case game_variant_duo:
+        geometry = RectGeometry<Point>::get(14, 14);
+        break;
+    case game_variant_classic:
+    case game_variant_classic_2:
+        geometry = RectGeometry<Point>::get(20, 20);
+        break;
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+        geometry = TrigonGeometry<Point>::get(9);
+        break;
+    case game_variant_trigon_3:
+        geometry = TrigonGeometry<Point>::get(8);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(false);
+        return false;
+    }
     pointState.init(*geometry, PointState::empty());
     const Node* node = &root;
     while (node != 0)

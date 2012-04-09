@@ -176,22 +176,10 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
     multiple games. */
 void Engine::cmd_set_game(const Arguments& args)
 {
-    string arg = args.get_line();
-    to_lower(arg);
-    if (arg == "blokus")
-        m_game.init(game_variant_classic);
-    else if (arg == "blokus two-player")
-        m_game.init(game_variant_classic_2);
-    else if (arg == "blokus duo")
-        m_game.init(game_variant_duo);
-    else if (arg == "blokus trigon")
-        m_game.init(game_variant_trigon);
-    else if (arg == "blokus trigon two-player")
-        m_game.init(game_variant_trigon_2);
-    else if (arg == "blokus trigon three-player")
-        m_game.init(game_variant_trigon_3);
-    else
+    GameVariant game_variant;
+    if (! parse_game_variant(args.get_line(), game_variant))
         throw Failure("invalid argument");
+    m_game.init(game_variant);
     board_changed();
 }
 

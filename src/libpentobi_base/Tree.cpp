@@ -273,22 +273,9 @@ bool Tree::has_setup(const Node& node)
 
 void Tree::init(unique_ptr<Node>& root)
 {
-    GameVariant game_variant;
     string game = root->get_property("GM");
-    string s = to_lower_copy(trim_copy(game));
-    if (s == "blokus")
-        game_variant = game_variant_classic;
-    else if (s == "blokus two-player")
-        game_variant = game_variant_classic_2;
-    else if (s == "blokus trigon")
-        game_variant = game_variant_trigon;
-    else if (s == "blokus trigon two-player")
-        game_variant = game_variant_trigon_2;
-    else if (s == "blokus trigon three-player")
-        game_variant = game_variant_trigon_3;
-    else if (s == "blokus duo")
-        game_variant = game_variant_duo;
-    else
+    GameVariant game_variant;
+    if (! parse_game_variant(game, game_variant))
         throw InvalidPropertyValue("GM", game);
     libboardgame_sgf::Tree::init(root);
     m_game_variant = game_variant;
@@ -390,27 +377,7 @@ const Node& Tree::remove_setup(const Node& node, Color c, Move mv)
 void Tree::set_game_property()
 {
     const Node& root = get_root();
-    switch (m_game_variant)
-    {
-    case game_variant_classic:
-        set_property(root, "GM", "Blokus");
-        break;
-    case game_variant_classic_2:
-        set_property(root, "GM", "Blokus Two-Player");
-        break;
-    case game_variant_trigon:
-        set_property(root, "GM", "Blokus Trigon");
-        break;
-    case game_variant_trigon_2:
-        set_property(root, "GM", "Blokus Trigon Two-Player");
-        break;
-    case game_variant_trigon_3:
-        set_property(root, "GM", "Blokus Trigon Three-Player");
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
-        set_property(root, "GM", "Blokus Duo");
-    }
+    set_property(root, "GM", to_string(m_game_variant));
     move_property_to_front(root, "GM");
 }
 
