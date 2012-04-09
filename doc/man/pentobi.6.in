@@ -31,8 +31,8 @@ from the search tree and these nodes may have to be searched again after the
 search continues.
 You can check how often the pruning happens by running Pentobi at the highest
 level with option --verbose and looking at the messages during move generation.
-Pruning the tree once or twice during a search will not affect the playing
-strength much but a high number of prunings will.
+Pruning the tree a few times during a search will not affect the playing
+strength much but a large number of prunings will.
 .TP
 .B \-\-verbose
 Print internal information about the move generation and other debugging
