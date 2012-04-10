@@ -699,7 +699,6 @@ inline void Board::place(Color c, Move mv)
     {
         m_point_state[*i] = c;
         m_played_move[*i] = mv;
-        static_assert(Color::range == 4, "");
         LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c][*i] = true);
         ++i;
     }
