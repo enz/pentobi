@@ -1,4 +1,4 @@
-.TH PENTOBI 6 "2011-12-08" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI 6 "2012-04-10" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 
 .SH NAME
 pentobi \- computer program that plays the board game Blokus
@@ -29,7 +29,8 @@ but it can have a negative effect on the playing strength.
 If the search runs out of memory, it will prune nodes with a low visit count
 from the search tree and these nodes may have to be searched again after the
 search continues.
-You can check how often the pruning happens by running Pentobi at the highest
+You can check how often the pruning happens by running Pentobi in game variant
+Duo (which has the highest number of simulations per second) at the highest
 level with option --verbose and looking at the messages during move generation.
 Pruning the tree a few times during a search will not affect the playing
 strength much but a large number of prunings will.
