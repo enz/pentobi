@@ -103,7 +103,8 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
 //-----------------------------------------------------------------------------
 
 Search::Search(GameVariant initial_game_variant, size_t memory)
-    : ParentClass(State(initial_game_variant, m_shared_const), memory),
+    : ParentClass(State(initial_game_variant, m_shared_const),
+                  memory == 0 ? 384000000 : memory),
       m_auto_param(true),
       m_game_variant(initial_game_variant),
       m_shared_const(m_to_play)

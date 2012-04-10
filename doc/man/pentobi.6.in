@@ -23,7 +23,7 @@ doc/blksgf/Blokus-SGF.html in the Pentobi source package.
 .TP
 .B \-\-memory
 The amount of memory in bytes to be used by the search.
-The default value is 256000000 (256 kB).
+The default value is 384000000 (384 kB).
 This option can be used to reduce the memory requirements on low-end systems
 but it can have a negative effect on the playing strength.
 If the search runs out of memory, it will prune nodes with a low visit count
