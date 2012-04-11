@@ -6,6 +6,8 @@ Current development version (bugfix branch for version 1)
   moves with any of the large pieces
 * Bugfix: file modified marker was not set on certain changes
   (Make Main Variation, comment changed)
+* Bugfix: game info dialog showed wrong player labels in Trigon
+  and Trigon Three-Player
 * Minor other bugfixes in the code
 * Reverted the change that used the SVG icon for setting the
   window icon because it created an unwanted dependency on the
