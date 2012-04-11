@@ -845,7 +845,7 @@ bool Search<S, M, P>::prune(TimeSource& time_source, double time,
                               &interval_checker))
     {
         log("Pruning aborted");
-        return prune_min_count;
+        return false;
     }
     int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
     log(format("Pruned size: %1% (%2%%%, time=%3%)")
