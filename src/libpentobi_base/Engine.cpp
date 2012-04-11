@@ -84,7 +84,9 @@ void Engine::cmd_final_score(Response& response)
 {
     const Board& bd = get_board();
     GameVariant game_variant = bd.get_game_variant();
-    if (game_variant == game_variant_classic)
+    if (game_variant == game_variant_classic
+        || game_variant == game_variant_trigon
+        || game_variant == game_variant_trigon_3)
     {
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
             response << bd.get_points_with_bonus(*i) << ' ';
