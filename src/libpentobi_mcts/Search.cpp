@@ -193,8 +193,7 @@ void Search::set_default_param(GameVariant game_variant)
         set_bias_term_constant(0.09f);
         break;
     case game_variant_junior:
-        // Not tuned. Use same value as for game_variant_duo
-        set_bias_term_constant(0.09f);
+        set_bias_term_constant(0.12f);
         break;
     case game_variant_classic:
         // Not tuned. Use same value as for game_variant_classic_2
