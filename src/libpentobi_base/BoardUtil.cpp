@@ -28,7 +28,8 @@ void dump(const Board& bd, ostream& out)
         if (! setup.placements[*i].empty())
         {
             out << " A";
-            if (game_variant == game_variant_duo)
+            if (game_variant == game_variant_duo
+                || game_variant == game_variant_junior)
                 out << ((*i).to_int() == 0 ? 'B' : 'W');
             else
                 out << ((*i).to_int() + 1);
@@ -46,7 +47,8 @@ void dump(const Board& bd, ostream& out)
         ColorMove mv =  bd.get_move(i);
         Color c = mv.color;
         out << ';';
-        if (game_variant == game_variant_duo)
+        if (game_variant == game_variant_duo
+            || game_variant == game_variant_junior)
             out << (c.to_int() == 0 ? 'B' : 'W');
         else
             out << (c.to_int() + 1);

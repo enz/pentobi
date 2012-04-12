@@ -34,6 +34,7 @@ using libboardgame_util::RandomGenerator;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -125,6 +126,8 @@ int main(int argc, char** argv)
             game_variant = game_variant_classic;
         else if (game_variant_string == "duo")
             game_variant = game_variant_duo;
+        else if (game_variant_string == "junior")
+            game_variant = game_variant_junior;
         else if (game_variant_string == "classic_2"
                  || game_variant_string == "c2")
             game_variant = game_variant_classic_2;

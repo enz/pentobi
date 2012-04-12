@@ -20,6 +20,7 @@ using libboardgame_util::WallTime;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -90,6 +91,8 @@ Move Player::genmove(const Board& bd, Color c)
             string filename;
             if (variant == game_variant_duo)
                 filename = "book_duo.blksgf";
+            else if (variant == game_variant_junior)
+                filename = "book_junior.blksgf";
             else if (variant == game_variant_classic_2)
                 filename = "book_classic_2.blksgf";
             else if (variant == game_variant_classic)
@@ -135,7 +138,7 @@ Move Player::genmove(const Board& bd, Color c)
     else
     {
         // The minimum number of simulations and increase factor per level are
-        // chosen such that the total time per game and player at level 6 is
+        // chosen such that the total time per game and player at level 7 is
         // less than 20 min (10 min for Duo) even on somewhat outdated PC
         // hardware. (This also takes the additional weighting of the number of
         // simulations depending on the move number into account.)
@@ -153,20 +156,25 @@ Move Player::genmove(const Board& bd, Color c)
             || variant == game_variant_classic_2)
         {
             minimum = 10;
-            factor_per_level = 4.5f;
+            factor_per_level = 4.98f;
         }
         else if (variant == game_variant_trigon
                  || variant == game_variant_trigon_2
                  || variant == game_variant_trigon_3)
         {
             minimum = 10;
-            factor_per_level = 3.6f;
+            factor_per_level = 3.96f;
+        }
+        else if (variant == game_variant_junior)
+        {
+            minimum = 10;
+            factor_per_level = 5.8f; // TODO: needs update
         }
         else
         {
             LIBBOARDGAME_ASSERT(variant == game_variant_duo);
             minimum = 10;
-            factor_per_level = 5.8f;
+            factor_per_level = 5.8f; // TODO: needs update
         }
         if (m_level <= 1)
             max_count = minimum;

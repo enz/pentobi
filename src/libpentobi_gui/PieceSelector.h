@@ -34,11 +34,11 @@ public:
 
     int heightForWidth(int width) const;
 
-    /** Call update() if pieces laft have changed since last paint. */
+    /** Call update() if pieces left have changed since last paint. */
     void checkUpdate();
 
 signals:
-    void pieceSelected(Color color, const Piece& piece,
+    void pieceSelected(Color color, const unsigned int piece,
                        const Transform* transform);
 
 protected:
@@ -59,12 +59,12 @@ private:
 
     unsigned int m_nuRows;
 
-    const Piece* m_piece[maxColumns][maxRows];
+    int m_piece[maxColumns][maxRows];
 
     const Transform* m_transform[maxColumns][maxRows];
 
     /** Pieces left at last time the widget was painted. */
-    Board::PiecesLeftList m_last_pieces_left;
+    bool m_disabledStatus[maxColumns][maxRows];
 
     qreal m_fieldWidth;
 
@@ -74,8 +74,10 @@ private:
 
     qreal m_selectorHeight;
 
-    void findPiecePoints(const Piece& piece, unsigned int x,
+    void findPiecePoints(unsigned int piece, unsigned int x,
                          unsigned int y, Piece::Points& points) const;
+
+    void setDisabledStatus(bool disabledStatus[maxColumns][maxRows]);
 };
 
 //-----------------------------------------------------------------------------

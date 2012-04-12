@@ -28,7 +28,7 @@ using libpentobi_base::Piece;
 OrientationDisplay::OrientationDisplay(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd),
-      m_piece(0),
+      m_piece(-1),
       m_transform(0),
       m_isColorSelected(false)
 {
@@ -47,9 +47,9 @@ void OrientationDisplay::clearSelectedColor()
 
 void OrientationDisplay::clearSelectedPiece()
 {
-    if (m_piece == 0)
+    if (m_piece == -1)
         return;
-    m_piece = 0;
+    m_piece = -1;
     update();
 }
 
@@ -85,7 +85,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
         displayWidth = fieldWidth * columns;
         displayHeight = fieldHeight * rows;
     }
-    if (m_piece == 0)
+    if (m_piece == -1)
     {
         if (m_isColorSelected)
         {
@@ -104,7 +104,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     painter.save();
     painter.translate(0.5 * (width() - displayWidth),
                       0.5 * (height() - displayHeight));
-    Piece::Points points = m_piece->get_points();
+    Piece::Points points = m_bd.get_piece(m_piece).get_points();
     m_transform->transform(points.begin(), points.end());
     const Geometry& geometry = m_bd.get_geometry();
     type_match_shift(geometry, points.begin(), points.end(),
@@ -148,12 +148,12 @@ void OrientationDisplay::selectColor(Color c)
     update();
 }
 
-void OrientationDisplay::setSelectedPiece(const Piece& piece)
+void OrientationDisplay::setSelectedPiece(unsigned int piece)
 {
     const Transform* transform = m_bd.get_transforms().get_default();
-    if (m_piece == &piece && m_transform == transform)
+    if (m_piece == static_cast<int>(piece) && m_transform == transform)
         return;
-    m_piece = &piece;
+    m_piece = piece;
     m_transform = transform;
     update();
 }

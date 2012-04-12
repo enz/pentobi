@@ -14,6 +14,7 @@
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -37,7 +38,7 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     formWidget->setLayout(m_formLayout);
     layout->addWidget(formWidget);
     GameVariant variant = game.get_game_variant();
-    if (variant == game_variant_duo)
+    if (variant == game_variant_duo || variant == game_variant_junior)
     {
         m_playerBlue = createPlayerName(tr("Player Blue:"), Color(0));
         m_playerGreen = createPlayerName(tr("Player Green:"), Color(1));
@@ -76,7 +77,8 @@ void GameInfoDialog::accept()
 {
     GameVariant variant = m_game.get_game_variant();
     string value;
-    if (variant == game_variant_duo)
+    if (variant == game_variant_duo
+        || variant == game_variant_junior)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);

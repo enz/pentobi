@@ -16,6 +16,7 @@ using libboardgame_util::log;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -142,7 +143,8 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
     m_colorDotSpace = 0.3 * m_fontSize;
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
-    if (m_gameVariant == game_variant_duo)
+    if (m_gameVariant == game_variant_duo
+        || m_gameVariant == game_variant_junior)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthGreen = getScoreTextWidth(Color(1));

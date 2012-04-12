@@ -29,7 +29,7 @@ public:
 
     void clearSelectedPiece();
 
-    void setSelectedPiece(const Piece& piece);
+    void setSelectedPiece(unsigned int piece);
 
     void setSelectedPieceTransform(const Transform* transform);
 
@@ -39,7 +39,7 @@ protected:
 private:
     const Board& m_bd;
 
-    const Piece* m_piece;
+    int m_piece;
 
     const Transform* m_transform;
 

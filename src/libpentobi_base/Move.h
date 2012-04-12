@@ -27,6 +27,8 @@ public:
 
     static const unsigned int onboard_moves_duo = 13729;
 
+    static const unsigned int onboard_moves_junior = 7217;
+
     /** Integer range of moves.
         The maximum is given by the number of on-board moves in game variant
         Trigon, plus a pass and a null move. */

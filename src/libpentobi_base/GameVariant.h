@@ -21,6 +21,8 @@ enum GameVariant
 
     game_variant_duo,
 
+    game_variant_junior,
+
     game_variant_trigon,
 
     game_variant_trigon_2,

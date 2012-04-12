@@ -20,6 +20,7 @@ using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -32,17 +33,17 @@ using libpentobi_base::ColorIterator;
 namespace {
 
 void set_piece_considered(const BoardConst& board_const, const char* name,
-                          array<bool,Board::max_pieces>& is_piece_considered)
+                          PieceConsideredTable& is_piece_considered)
 {
-    unsigned int index;
-    bool found = board_const.get_piece_index_by_name(name, index);
+    unsigned int piece;
+    bool found = board_const.get_piece_by_name(name, piece);
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
     LIBBOARDGAME_ASSERT(found);
-    is_piece_considered[index] = true;
+    is_piece_considered[piece] = true;
 }
 
 void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
-                           array<bool,Board::max_pieces>& is_piece_considered)
+                           PieceConsideredTable& is_piece_considered)
 {
     BoardType board_type = board_const.get_board_type();
     unsigned int min_piece_size = 0;
@@ -162,7 +163,7 @@ void Search::on_start_search()
     for (unsigned int i = 0; i < Board::max_game_moves; ++i)
         set_pieces_considered(bd.get_board_const(), i,
                               m_shared_const.is_piece_considered[i]);
-    for (unsigned int i = 0; i < Board::max_pieces; ++i)
+    for (unsigned int i = 0; i < Board::max_uniq_pieces; ++i)
         m_shared_const.is_piece_considered_all[i] = true;
 }
 
@@ -188,25 +189,33 @@ void Search::set_default_param(GameVariant game_variant)
     switch (game_variant)
     {
     case game_variant_duo:
-        set_bias_term_constant(0.08f);
+        set_bias_term_constant(0.09f);
+        break;
+    case game_variant_junior:
+        // Not tuned. Use same value as for game_variant_duo
+        set_bias_term_constant(0.09f);
         break;
     case game_variant_classic:
         // Not tuned. Use same value as for game_variant_classic_2
+        set_bias_term_constant(0.11f);
+        break;
     case game_variant_classic_2:
         set_bias_term_constant(0.11f);
         break;
     case game_variant_trigon:
         // Not tuned. Use same value as for game_variant_trigon_2
+        set_bias_term_constant(0.10f);
+        break;
     case game_variant_trigon_2:
-        set_bias_term_constant(0.09f);
+        set_bias_term_constant(0.10f);
         break;
     case game_variant_trigon_3:
-        // Not tuned. Use same value as for game_variant_trigon
-        set_bias_term_constant(0.09f);
+        // Not tuned. Use same value as for game_variant_trigon_2
+        set_bias_term_constant(0.10f);
         break;
     default:
         LIBBOARDGAME_ASSERT(false);
-        set_bias_term_constant(0.09f);
+        set_bias_term_constant(0.10f);
         break;
     }
 }

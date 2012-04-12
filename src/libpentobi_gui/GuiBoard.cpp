@@ -50,7 +50,7 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_freePlacement(false),
       m_emptyBoardDirty(true),
       m_dirty(true),
-      m_selectedPiece(0),
+      m_selectedPiece(-1),
       m_selectedPieceTransform(0),
       m_emptyBoardPixmap(0),
       m_boardPixmap(0),
@@ -117,9 +117,9 @@ void GuiBoard::copyFromBoard(const Board& bd)
 
 Move GuiBoard::findSelectedPieceMove()
 {
-    if (m_selectedPiece == 0 || m_selectedPieceOffset.is_null())
+    if (m_selectedPiece == -1 || m_selectedPieceOffset.is_null())
         return Move::null();
-    const Piece::Points& points = m_selectedPiece->get_points();
+    const Piece::Points& points = m_bd.get_piece(m_selectedPiece).get_points();
     MovePoints movePoints;
     int width = static_cast<int>(m_bd.get_geometry().get_width());
     int height = static_cast<int>(m_bd.get_geometry().get_height());
@@ -372,15 +372,16 @@ void GuiBoard::placeSelectedPiece()
         emit play(m_selectedPieceColor, mv);
 }
 
-void GuiBoard::selectPiece(Color color, const Piece& piece)
+void GuiBoard::selectPiece(Color color, unsigned int piece)
 {
-    if (m_selectedPiece == &piece && m_selectedPieceColor == color)
+    if (m_selectedPiece == static_cast<int>(piece)
+        && m_selectedPieceColor == color)
         return;
     m_selectedPieceColor = color;
     m_selectedPieceTransform = m_bd.get_transforms().get_default();
     if (m_selectedPiece == 0)
         m_selectedPieceOffset = CoordPoint::null();
-    m_selectedPiece = &piece;
+    m_selectedPiece = piece;
     setSelectedPieceOffset(m_selectedPieceOffset);
     setSelectedPiecePoints();
     setMouseTracking(true);
@@ -501,7 +502,8 @@ void GuiBoard::setSelectedPiecePoints()
     {
         int width = static_cast<int>(m_bd.get_geometry().get_width());
         int height = static_cast<int>(m_bd.get_geometry().get_height());
-        BOOST_FOREACH(CoordPoint p, m_selectedPiece->get_points())
+        BOOST_FOREACH(CoordPoint p,
+                      m_bd.get_piece(m_selectedPiece).get_points())
         {
             p = m_selectedPieceTransform->get_transformed(p);
             int x = p.x + m_selectedPieceOffset.x;

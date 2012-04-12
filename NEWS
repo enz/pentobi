@@ -2,9 +2,10 @@ Current development version
 ===========================
 
 * The user can now disable popup messages if a color has no more
-  moves with Edit/Settings (closes feature request #3431031)
+  moves with Edit/Settings (feature request #3431031)
 * Score points are now underlined if they are final (if the color
   has no more moves)
+* Support for game variant Junior
 * New menu item Computer/Analyze Game
 * Support for setup properties in blksgf files (note that files
   with setup properties cannot be read by older versions of
@@ -15,13 +16,14 @@ Current development version
 * New menu items Delete All Variations, Keep Only Position,
   Keep Only Subtree
 * Added a toolbar button for selecting the computer colors
-* Number of levels increased to 7. Level 7 is about the same speed
-  as the old level 6 but stronger.
+* Improved playing strength. Number of levels increased to 7.
+  Level 7 is about the same speed as the old level 6 but stronger.
 * User manual is no longer compiled into the resources of the
   executable but installed in the installation data directory
 * Open a console for stderr output on Windows if Pentobi is
   invoked with option --verbose
-* New option --memory
+* New option --memory to make Pentobi run on systems with low
+  memory at the cost of reduced playing strength.
 * Use standard icons from theme
 
 

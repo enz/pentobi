@@ -34,6 +34,8 @@ bool parse_game_variant(const string& s, GameVariant& game_variant)
         game_variant = game_variant_trigon_3;
     else if (t == "blokus duo")
         game_variant = game_variant_duo;
+    else if (t == "blokus junior")
+        game_variant = game_variant_junior;
     else
         return false;
     return true;
@@ -49,6 +51,8 @@ const char* to_string(GameVariant game_variant)
         return "Blokus Two-Player";
     case game_variant_duo:
         return "Blokus Duo";
+    case game_variant_junior:
+        return "Blokus Junior";
     case game_variant_trigon:
         return "Blokus Trigon";
     case game_variant_trigon_2:

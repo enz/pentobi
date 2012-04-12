@@ -227,6 +227,7 @@ string Tree::get_player_name(Color c) const
             return root.get_property("PW", "");
         break;
     case game_variant_duo:
+    case game_variant_junior:
         if (c == Color(0))
             return root.get_property("PB", "");
         if (c == Color(1))
@@ -284,25 +285,7 @@ void Tree::init(unique_ptr<Node>& root)
 
 void Tree::init_board_const(GameVariant game_variant)
 {
-    BoardType board_type;
-    switch (game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-        board_type = board_type_classic;
-        break;
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-        board_type = board_type_trigon;
-        break;
-    case game_variant_trigon_3:
-        board_type = board_type_trigon_3;
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
-        board_type = board_type_duo;
-    }
-    m_board_const = &BoardConst::get(board_type);
+    m_board_const = &BoardConst::get(game_variant);
 }
 
 void Tree::init_game_variant(GameVariant game_variant)
@@ -432,6 +415,7 @@ void Tree::set_player_name(Color c, const string& name)
             LIBBOARDGAME_ASSERT(false);
         return;
     case game_variant_duo:
+    case game_variant_junior:
         if (c == Color(0))
             set_property(root, "PB", name);
         else if (c == Color(1))

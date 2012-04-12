@@ -226,6 +226,106 @@ vector<Piece> create_pieces_classic(const Geometry& geometry,
     return pieces;
 }
 
+vector<Piece> create_pieces_junior(const Geometry& geometry,
+                                   const PieceTransforms& transforms)
+{
+    vector<Piece> pieces;
+    pieces.reserve(12);
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(1, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(0, 2));
+        pieces.push_back(Piece("L5", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(1, 1));
+        pieces.push_back(Piece("P", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, -2));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(0, 2));
+        pieces.push_back(Piece("I5", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(1, 1));
+        pieces.push_back(Piece("O", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        points.push_back(CoordPoint(0, -1));
+        pieces.push_back(Piece("T4", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(1, -1));
+        pieces.push_back(Piece("Z4", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(1, -1));
+        pieces.push_back(Piece("L4", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(0, 2));
+        pieces.push_back(Piece("I4", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("V3", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        pieces.push_back(Piece("I3", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(1, 0));
+        pieces.push_back(Piece("2", points, geometry, transforms));
+    }
+    {
+        Piece::Points points;
+        points.push_back(CoordPoint(0, 0));
+        pieces.push_back(Piece("1", points, geometry, transforms));
+    }
+    return pieces;
+}
+
 vector<Piece> create_pieces_trigon(const Geometry& geometry,
                                    const PieceTransforms& transforms)
 {
@@ -460,9 +560,13 @@ const Geometry& create_geometry(BoardType board_type)
 
 //-----------------------------------------------------------------------------
 
-BoardConst::BoardConst(BoardType board_type)
+BoardConst::BoardConst(BoardType board_type, GameVariant game_variant)
     : m_geometry(create_geometry(board_type))
 {
+    // TODO: Better distinction between board type and set of pieces.
+    // Currently the game_variant parameter is used only to distinct between
+    // the set of pieces in Duo and Junior, otherwise the parameter is ignored
+    // because the set of pieces is derived from the board type.
     m_board_type = board_type;
     if (board_type == board_type_trigon)
     {
@@ -482,9 +586,15 @@ BoardConst::BoardConst(BoardType board_type)
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_classic);
     }
+    else if (game_variant == game_variant_junior)
+    {
+        m_transforms.reset(new PieceTransformsClassic());
+        m_pieces = create_pieces_junior(m_geometry, *m_transforms);
+        m_move_info.reserve(Move::onboard_moves_junior);
+    }
     else
     {
-        LIBBOARDGAME_ASSERT(board_type == board_type_duo);
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_duo);
@@ -495,19 +605,26 @@ BoardConst::BoardConst(BoardType board_type)
     create_moves();
     if (board_type == board_type_classic)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_classic);
-    else if (board_type == board_type_duo)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_duo);
     else if (board_type == board_type_trigon)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon);
     else if (board_type == board_type_trigon_3)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon_3);
+    else if (game_variant == game_variant_duo)
+        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_duo);
+    else if (game_variant == game_variant_junior)
+        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_junior);
     m_total_piece_points = 0;
     BOOST_FOREACH(const Piece& piece, m_pieces)
         m_total_piece_points += piece.get_size();
-    if (board_type == board_type_classic || board_type == board_type_duo)
+    if (board_type == board_type_classic || game_variant == game_variant_duo)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 89);
+    }
+    else if (game_variant == game_variant_junior)
+    {
+        LIBBOARDGAME_ASSERT(m_nu_pieces == 12);
+        LIBBOARDGAME_ASSERT(m_total_piece_points == 44);
     }
     else if (board_type == board_type_trigon
              || board_type == board_type_trigon_3)
@@ -648,46 +765,60 @@ Move BoardConst::from_string(const string& s) const
     return mv;
 }
 
-const BoardConst& BoardConst::get(BoardType board_type)
+const BoardConst& BoardConst::get(GameVariant game_variant)
 {
     static unique_ptr<BoardConst> board_const_classic;
     static unique_ptr<BoardConst> board_const_duo;
+    static unique_ptr<BoardConst> board_const_junior;
     static unique_ptr<BoardConst> board_const_trigon;
     static unique_ptr<BoardConst> board_const_trigon_3;
-    if (board_type == board_type_classic)
+    if (game_variant == game_variant_classic
+        || game_variant == game_variant_classic_2)
     {
         if (board_const_classic.get() == 0)
-            board_const_classic.reset(new BoardConst(board_type_classic));
+            board_const_classic.reset(new BoardConst(board_type_classic,
+                                                     game_variant_classic));
         return *board_const_classic;
     }
-    else if (board_type == board_type_duo)
+    else if (game_variant == game_variant_duo)
     {
         if (board_const_duo.get() == 0)
-            board_const_duo.reset(new BoardConst(board_type_duo));
+            board_const_duo.reset(new BoardConst(board_type_duo,
+                                                 game_variant_duo));
         return *board_const_duo;
     }
-    else if (board_type == board_type_trigon)
+    else if (game_variant == game_variant_junior)
+    {
+        if (board_const_junior.get() == 0)
+            board_const_junior.reset(new BoardConst(board_type_duo,
+                                                    game_variant_junior));
+        return *board_const_junior;
+    }
+    else if (game_variant == game_variant_trigon
+        || game_variant == game_variant_trigon_2)
     {
         if (board_const_trigon.get() == 0)
-            board_const_trigon.reset(new BoardConst(board_type_trigon));
+            board_const_trigon.reset(new BoardConst(board_type_trigon,
+                                                    game_variant_trigon));
         return *board_const_trigon;
     }
     else
     {
-        LIBBOARDGAME_ASSERT(board_type == board_type_trigon_3);
+        LIBBOARDGAME_ASSERT(game_variant == game_variant_trigon_3);
         if (board_const_trigon_3.get() == 0)
-            board_const_trigon_3.reset(new BoardConst(board_type_trigon_3));
+            board_const_trigon_3.reset(new BoardConst(board_type_trigon_3,
+                                                      game_variant_trigon_3));
         return *board_const_trigon_3;
     }
 }
 
-bool BoardConst::get_piece_index_by_name(const string& name,
-                                         unsigned int& index) const
+bool BoardConst::get_piece_by_name(const string& name,
+                                   unsigned int& piece) const
 {
     for (unsigned int i = 0; i < m_nu_pieces; ++i)
         if (get_piece(i).get_name() == name)
         {
-            index = i;
+            piece = i;
             return true;
         }
     return false;

@@ -5,14 +5,10 @@
 #ifndef LIBPENTOBI_BASE_SETUP_H
 #define LIBPENTOBI_BASE_SETUP_H
 
-#include "BoardConst.h"
 #include "ColorMap.h"
 #include "Move.h"
-#include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
-
-using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
@@ -21,7 +17,9 @@ using libboardgame_util::ArrayList;
     (in no particular order) on the board and a color to play next. */
 struct Setup
 {
-    typedef ArrayList<Move,BoardConst::max_pieces> PlacementList;
+    static const unsigned int max_pieces = 24;
+
+    typedef ArrayList<Move,max_pieces> PlacementList;
 
     Color to_play;
 

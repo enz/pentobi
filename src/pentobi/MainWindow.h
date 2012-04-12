@@ -178,9 +178,9 @@ public slots:
 
     void selectPieceZ();
 
-    void selectPiece(Color c, const Piece& piece);
+    void selectPiece(Color c, unsigned int piece);
 
-    void selectPiece(Color c, const Piece& piece, const Transform* transform);
+    void selectPiece(Color c, unsigned int piece, const Transform* transform);
 
     void setLevel(int level);
 
@@ -313,6 +313,8 @@ private:
     QAction* m_actionGameVariantClassic2;
 
     QAction* m_actionGameVariantDuo;
+
+    QAction* m_actionGameVariantJunior;
 
     QAction* m_actionGameVariantTrigon;
 
@@ -585,6 +587,8 @@ private slots:
     void gameVariantClassic2(bool checked);
 
     void gameVariantDuo(bool checked);
+
+    void gameVariantJunior(bool checked);
 
     void gameVariantTrigon(bool checked);
 

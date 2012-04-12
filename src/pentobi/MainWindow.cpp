@@ -43,6 +43,7 @@ using libboardgame_util::ArrayList;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -173,6 +174,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     GameVariant variant;
     if (variantString == "duo")
         variant = game_variant_duo;
+    else if (variantString == "junior")
+        variant = game_variant_junior;
     else if (variantString == "classic_2")
         variant = game_variant_classic_2;
     else if (variantString == "trigon")
@@ -706,6 +709,12 @@ void MainWindow::createActions()
     connect(m_actionGameVariantDuo, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantDuo(bool)));
 
+    m_actionGameVariantJunior = new QAction(tr("&Junior"), this);
+    m_actionGameVariantJunior->setActionGroup(groupGameVariant);
+    m_actionGameVariantJunior->setCheckable(true);
+    connect(m_actionGameVariantJunior, SIGNAL(triggered(bool)),
+            this, SLOT(gameVariantJunior(bool)));
+
     m_actionGameVariantTrigon = new QAction(tr("&Trigon"), this);
     m_actionGameVariantTrigon->setActionGroup(groupGameVariant);
     m_actionGameVariantTrigon->setCheckable(true);
@@ -1111,6 +1120,7 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantTrigon);
     menuGameVariant->addAction(m_actionGameVariantTrigon2);
     menuGameVariant->addAction(m_actionGameVariantTrigon3);
+    menuGameVariant->addAction(m_actionGameVariantJunior);
     menuGame->addAction(m_actionComputerColor);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addAction(m_actionUndo);
@@ -1250,8 +1260,8 @@ QWidget* MainWindow::createRightPanel()
     {
         m_pieceSelector[*i] = new PieceSelector(0, getBoard(), *i);
         connect(m_pieceSelector[*i],
-                SIGNAL(pieceSelected(Color, const Piece&, const Transform*)),
-                this, SLOT(selectPiece(Color, const Piece&, const Transform*)));
+                SIGNAL(pieceSelected(Color, unsigned int, const Transform*)),
+                this, SLOT(selectPiece(Color, unsigned int, const Transform*)));
         pieceSelectorLayout->addWidget(m_pieceSelector[*i]);
     }
     initPieceSelectors();
@@ -1400,7 +1410,7 @@ void MainWindow::findMove()
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
     Move mv = (*m_legalMoves)[m_legalMoveIndex];
-    selectPiece(m_toPlay, bd.get_piece(bd.get_move_info(mv).piece));
+    selectPiece(m_toPlay, bd.get_move_info(mv).piece);
     m_guiBoard->showMove(m_toPlay, mv);
     ++m_legalMoveIndex;
 }
@@ -1436,26 +1446,26 @@ void MainWindow::findNextComment()
 
 void MainWindow::flipPieceHorizontally()
 {
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
         return;
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_mirrored_horizontally(transform);
-    transform = piece->get_equivalent_transform(transform);
+    transform = bd.get_piece(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
 
 void MainWindow::flipPieceVertically()
 {
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     const Board& bd = getBoard();
     transform = bd.get_transforms().get_mirrored_vertically(transform);
-    transform = piece->get_equivalent_transform(transform);
+    transform = bd.get_piece(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -1519,6 +1529,12 @@ void MainWindow::gameVariantDuo(bool checked)
 {
     if (checked)
         setGameVariant(game_variant_duo);
+}
+
+void MainWindow::gameVariantJunior(bool checked)
+{
+    if (checked)
+        setGameVariant(game_variant_junior);
 }
 
 void MainWindow::gameVariantTrigon(bool checked)
@@ -1772,6 +1788,12 @@ void MainWindow::initGameVariantActions()
     case game_variant_classic_2:
         m_actionGameVariantClassic2->setChecked(true);
         break;
+    case game_variant_duo:
+        m_actionGameVariantDuo->setChecked(true);
+        break;
+    case game_variant_junior:
+        m_actionGameVariantJunior->setChecked(true);
+        break;
     case game_variant_trigon:
         m_actionGameVariantTrigon->setChecked(true);
         break;
@@ -1780,9 +1802,6 @@ void MainWindow::initGameVariantActions()
         break;
     case game_variant_trigon_3:
         m_actionGameVariantTrigon3->setChecked(true);
-        break;
-    case  game_variant_duo:
-        m_actionGameVariantDuo->setChecked(true);
         break;
     }
 }
@@ -1839,31 +1858,31 @@ void MainWindow::nextPiece()
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
-        piece = &bd.get_piece(piecesLeft[0]);
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
+        piece = piecesLeft[0];
     else
     {
-        for (unsigned int i = 0; i< nuPiecesLeft; ++i)
-            if (&bd.get_piece(piecesLeft[i]) == piece)
+        for (unsigned int i = 0; i < nuPiecesLeft; ++i)
+            if (piecesLeft[i] == static_cast<unsigned int>(piece))
             {
                 if (i + 1 >= nuPiecesLeft)
-                    piece = &bd.get_piece(piecesLeft[0]);
+                    piece = piecesLeft[0];
                 else
-                    piece = &bd.get_piece(piecesLeft[i + 1]);
+                    piece = piecesLeft[i + 1];
                 break;
             }
     }
-    selectPiece(m_toPlay, *piece);
+    selectPiece(m_toPlay, piece);
 }
 
 void MainWindow::nextTransform()
 {
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
-    transform = piece->get_next_transform(transform);
+    transform = getBoard().get_piece(piece).get_next_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -2095,31 +2114,31 @@ void MainWindow::previousPiece()
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
-        piece = &bd.get_piece(piecesLeft[nuPiecesLeft - 1]);
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
+        piece = piecesLeft[nuPiecesLeft - 1];
     else
     {
-        for (unsigned int i = 0; i< nuPiecesLeft; ++i)
-            if (&bd.get_piece(piecesLeft[i]) == piece)
+        for (unsigned int i = 0; i < nuPiecesLeft; ++i)
+            if (piecesLeft[i] == static_cast<unsigned int>(piece))
             {
                 if (i == 0)
-                    piece = &bd.get_piece(piecesLeft[nuPiecesLeft - 1]);
+                    piece = piecesLeft[nuPiecesLeft - 1];
                 else
-                    piece = &bd.get_piece(piecesLeft[i - 1]);
+                    piece = piecesLeft[i - 1];
                 break;
             }
     }
-    selectPiece(m_toPlay, *piece);
+    selectPiece(m_toPlay, piece);
 }
 
 void MainWindow::previousTransform()
 {
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
-    transform = piece->get_previous_transform(transform);
+    transform = getBoard().get_piece(piece).get_previous_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -2153,13 +2172,13 @@ void MainWindow::quit()
 
 void MainWindow::rotatePieceAnticlockwise()
 {
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
         return;
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_rotated_anticlockwise(transform);
-    transform = piece->get_equivalent_transform(transform);
+    transform = bd.get_piece(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
     updateFlipActions();
@@ -2167,13 +2186,13 @@ void MainWindow::rotatePieceAnticlockwise()
 
 void MainWindow::rotatePieceClockwise()
 {
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
         return;
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_rotated_clockwise(transform);
-    transform = piece->get_equivalent_transform(transform);
+    transform = bd.get_piece(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
     updateFlipActions();
@@ -2252,19 +2271,19 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
                                   const char* name3, const char* name4)
 {
     const Board& bd = getBoard();
-    vector<const Piece*> pieces;
-    const Piece* piece;
+    vector<unsigned int> pieces;
+    unsigned int piece;
     if (bd.get_piece_by_name(name1, piece)
-        && bd.is_piece_left(m_toPlay, *piece))
+        && bd.is_piece_left(m_toPlay, piece))
         pieces.push_back(piece);
     if (name2 != 0 && bd.get_piece_by_name(name2, piece)
-        && bd.is_piece_left(m_toPlay, *piece))
+        && bd.is_piece_left(m_toPlay, piece))
         pieces.push_back(piece);
     if (name3 != 0 && bd.get_piece_by_name(name3, piece)
-        && bd.is_piece_left(m_toPlay, *piece))
+        && bd.is_piece_left(m_toPlay, piece))
         pieces.push_back(piece);
     if (name4 != 0 && bd.get_piece_by_name(name4, piece)
-        && bd.is_piece_left(m_toPlay, *piece))
+        && bd.is_piece_left(m_toPlay, piece))
         pieces.push_back(piece);
     if (pieces.empty())
         return;
@@ -2285,7 +2304,7 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
                 piece = *pos;
         }
     }
-    selectPiece(m_toPlay, *piece);
+    selectPiece(m_toPlay, piece);
 }
 
 void MainWindow::selectNextColor()
@@ -2298,12 +2317,12 @@ void MainWindow::selectNextColor()
         m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
 }
 
-void MainWindow::selectPiece(Color c, const Piece& piece)
+void MainWindow::selectPiece(Color c, unsigned int piece)
 {
     selectPiece(c, piece, getBoard().get_transforms().get_default());
 }
 
-void MainWindow::selectPiece(Color c, const Piece& piece,
+void MainWindow::selectPiece(Color c, unsigned int piece,
                              const Transform* transform)
 {
     m_guiBoard->selectPiece(c, piece);
@@ -2311,7 +2330,7 @@ void MainWindow::selectPiece(Color c, const Piece& piece,
     m_orientationDisplay->selectColor(c);
     m_orientationDisplay->setSelectedPiece(piece);
     m_orientationDisplay->setSelectedPieceTransform(transform);
-    bool can_rotate = piece.can_rotate();
+    bool can_rotate = getBoard().get_piece(piece).can_rotate();
     m_actionRotatePieceClockwise->setEnabled(can_rotate);
     m_actionRotatePieceAnticlockwise->setEnabled(can_rotate);
     updateFlipActions();
@@ -2434,6 +2453,9 @@ void MainWindow::setGameVariant(GameVariant gameVariant)
         break;
     case game_variant_duo:
         settings.setValue("game_variant", "duo");
+        break;
+    case game_variant_junior:
+        settings.setValue("game_variant", "junior");
         break;
     case game_variant_trigon:
         settings.setValue("game_variant", "trigon");
@@ -2672,7 +2694,8 @@ void MainWindow::showGameOver()
     GameVariant variant = m_game->get_game_variant();
     const Board& bd = getBoard();
     QString info;
-    if (variant == game_variant_duo)
+    if (variant == game_variant_duo
+        || variant == game_variant_junior)
     {
         double game_result;
         int score = bd.get_score(Color(0), game_result);
@@ -2885,13 +2908,15 @@ void MainWindow::updateComment()
 
 void MainWindow::updateFlipActions()
 {
-    const Piece* piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    int piece = m_guiBoard->getSelectedPiece();
+    if (piece == -1)
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
-    bool can_flip_horizontally = piece->can_flip_horizontally(transform);
+    bool can_flip_horizontally =
+        getBoard().get_piece(piece).can_flip_horizontally(transform);
     m_actionFlipPieceHorizontally->setEnabled(can_flip_horizontally);
-    bool can_flip_vertically = piece->can_flip_vertically(transform);
+    bool can_flip_vertically =
+        getBoard().get_piece(piece).can_flip_vertically(transform);
     m_actionFlipPieceVertically->setEnabled(can_flip_vertically);
 }
 

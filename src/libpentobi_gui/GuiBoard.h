@@ -39,7 +39,7 @@ public:
 
     const Grid<MarkupFlags>& getMarkupFlags() const;
 
-    const Piece* getSelectedPiece() const;
+    int getSelectedPiece() const;
 
     const Transform* getSelectedPieceTransform() const;
 
@@ -66,7 +66,7 @@ public slots:
 
     void clearSelectedPiece();
 
-    void selectPiece(Color color, const Piece& piece);
+    void selectPiece(Color color, unsigned int piece);
 
     void moveSelectedPieceLeft();
 
@@ -111,7 +111,7 @@ private:
 
     Board::PointStateGrid m_pointState;
 
-    const Piece* m_selectedPiece;
+    int m_selectedPiece;
 
     Color m_selectedPieceColor;
 
@@ -167,7 +167,7 @@ inline const Grid<QString>& GuiBoard::getLabels() const
     return m_labels;
 }
 
-inline const Piece* GuiBoard::getSelectedPiece() const
+inline int GuiBoard::getSelectedPiece() const
 {
     return m_selectedPiece;
 }

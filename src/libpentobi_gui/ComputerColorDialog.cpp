@@ -11,6 +11,7 @@
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -32,7 +33,8 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     layout->addWidget(new QLabel(tr("Computer color:")));
-    if (m_gameVariant == game_variant_duo)
+    if (m_gameVariant == game_variant_duo
+        || m_gameVariant == game_variant_junior)
     {
         createCheckBox(layout, Color(0), tr("Blue"));
         createCheckBox(layout, Color(1), tr("Green"));
@@ -68,7 +70,8 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 
 void ComputerColorDialog::accept()
 {
-    if (m_gameVariant == game_variant_duo)
+    if (m_gameVariant == game_variant_duo
+        || m_gameVariant == game_variant_junior)
     {
         for (ColorIterator i(2); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();

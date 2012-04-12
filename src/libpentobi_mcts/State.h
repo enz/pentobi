@@ -44,6 +44,12 @@ using libpentobi_base::ColorMap;
 
 //-----------------------------------------------------------------------------
 
+/** Lookup table with precomputed information if a piece is considered for
+    move generation at a certain game stage. */
+typedef array<bool,Board::max_uniq_pieces> PieceConsideredTable;
+
+//-----------------------------------------------------------------------------
+
 /** Constant data shared between the search states. */
 struct SharedConst
 {
@@ -67,12 +73,12 @@ struct SharedConst
     ColorMap<MoveMarker> is_forbidden_at_root;
 
     /** Precomputed lists of considered pieces depending on the move number. */
-    array<array<bool,Board::max_pieces>,Board::max_game_moves>
-                                                           is_piece_considered;
+    array<PieceConsideredTable,Board::max_game_moves> is_piece_considered;
 
     /** Precomputed lists of considered pieces if all pieces are enforced to be
-        considered. */
-    array<bool,Board::max_pieces> is_piece_considered_all;
+        considered (because using the restricted set of pieces would generate
+        no moves). */
+    PieceConsideredTable is_piece_considered_all;
 
     SharedConst(const Color& to_play);
 };
@@ -180,7 +186,7 @@ private:
         position, the other color is not updated immediately after a move. */
     ColorMap<ArrayList<Move, Move::range>> m_moves;
 
-    ColorMap<const array<bool,Board::max_pieces>*> m_is_piece_considered;
+    ColorMap<const PieceConsideredTable*> m_is_piece_considered;
 
     ArrayList<MoveFeatures, Move::range> m_features;
 
@@ -245,7 +251,7 @@ private:
     /** Equivalent to but faster than Board::get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
 
-    const array<bool,Board::max_pieces>& get_pieces_considered() const;
+    const PieceConsideredTable& get_pieces_considered() const;
 
     void init_move_list_with_local(Color c);
 

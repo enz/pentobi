@@ -7,6 +7,7 @@
 
 #include <array>
 #include <algorithm>
+#include "GameVariant.h"
 #include "Geometry.h"
 #include "Grid.h"
 #include "Marker.h"
@@ -38,11 +39,12 @@ enum BoardType
 
 //-----------------------------------------------------------------------------
 
-/** Constant precomputed data that is shared between all instances of Board. */
+/** Constant precomputed data that is shared between all instances of Board
+    with a given board type and set of unique pieces. */
 class BoardConst
 {
 public:
-    static const unsigned int max_pieces = 22;
+    static const unsigned int max_uniq_pieces = 22;
 
     static const unsigned int max_moves_at_point = 40;
 
@@ -61,7 +63,7 @@ public:
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
-    static const BoardConst& get(BoardType board_type);
+    static const BoardConst& get(GameVariant game_variant);
 
     unsigned int get_nu_pieces() const;
 
@@ -69,8 +71,7 @@ public:
 
     const Piece& get_piece(unsigned int n) const;
 
-    bool get_piece_index_by_name(const string& name,
-                                 unsigned int& index) const;
+    bool get_piece_by_name(const string& name, unsigned int& piece) const;
 
     const PieceTransforms& get_transforms() const;
 
@@ -118,7 +119,8 @@ private:
     typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
 
     /** See m_moves */
-    typedef array<array<Grid<LocalMovesList>,max_pieces>,nu_adj_status_index>
+    typedef array<array<Grid<LocalMovesList>,max_uniq_pieces>,
+                  nu_adj_status_index>
         FullMoveTable;
 
     unsigned int m_nu_pieces;
@@ -143,7 +145,7 @@ private:
     unique_ptr<FullMoveTable> m_full_move_table;
 
     /** See m_move_lists. */
-    Grid<array<array<pair<unsigned int,unsigned int>,max_pieces>,
+    Grid<array<array<pair<unsigned int,unsigned int>,max_uniq_pieces>,
                nu_adj_status_index>> m_moves_range;
 
     /** Compact representation of lists of moves of a piece at a point
@@ -165,9 +167,9 @@ private:
                                                                   m_adj_status;
 
 
-    array<unsigned int,max_pieces> m_max_attach_points;
+    array<unsigned int,max_uniq_pieces> m_max_attach_points;
 
-    BoardConst(BoardType board_type);
+    BoardConst(BoardType board_type, GameVariant game_variant);
 
     void create_move(unsigned int piece_index,
                      const Piece::Points& coord_points, Point center);

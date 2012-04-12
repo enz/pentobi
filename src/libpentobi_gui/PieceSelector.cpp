@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/foreach.hpp>
 #include "libboardgame_base/GeometryUtil.h"
 #include "libpentobi_gui/Util.h"
 
@@ -17,12 +18,14 @@ using namespace std;
 using boost::trim;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::geometry_util::type_match_shift;
+using libboardgame_util::log;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::board_type_trigon;
 using libpentobi_base::board_type_trigon_3;
+using libpentobi_base::game_variant_junior;
 
 //-----------------------------------------------------------------------------
 
@@ -35,6 +38,14 @@ const string pieceLayoutClassic =
     " . . .I3 .I4 . P . . . W W . F . . X X X . . . . .T5 .Z5Z5 . U U .I5"
     " O O .I3 .I4 . P P . W W . . F F . . X . . Y . . . . .Z5 . . . U .I5"
     " O O .I3 .I4 . P P . W . . F F . . . . . Y Y Y Y . .Z5Z5 . . U U .I5";
+
+const string pieceLayoutJunior =
+    "1 . 1 . V3V3. . L4L4L4. T4T4T4. . O O . O O . P P . . I5. I5. . L5L5"
+    ". . . . V3. . . L4. . . . T4. . . O O . O O . P P . . I5. I5. . . L5"
+    "2 . 2 . . . V3. . . . L4. . . T4. . . . . . . P . . . I5. I5. L5. L5"
+    "2 . 2 . . V3V3. . L4L4L4. . T4T4T4. . Z4. Z4. . . P . I5. I5. L5. L5"
+    ". . . . . . . . . . . . . . . . . . Z4Z4. Z4Z4. P P . I5. I5. L5. . "
+    "I3I3I3. I3I3I3. I4I4I4I4. I4I4I4I4. Z4. . . Z4. P P . . . . . L5L5. ";
 
 const string pieceLayoutTrigon =
     " F F F . . V V V V . . . . . S S S . . . . X X X . . .A6A6 . . G G G G . . Y Y . . . .I4I4I4I4"
@@ -59,17 +70,28 @@ PieceSelector::PieceSelector(QWidget* parent, const Board& bd, Color color)
 
 void PieceSelector::checkUpdate()
 {
-    if (m_last_pieces_left != m_bd.get_pieces_left(m_color))
+    bool disabledStatus[maxColumns][maxRows];
+    setDisabledStatus(disabledStatus);
+    bool changed = false;
+    for (unsigned int x = 0; x < m_nuColumns; ++x)
+        for (unsigned int y = 0; y < m_nuRows; ++y)
+            if (m_piece[x][y] != -1
+                && disabledStatus[x][y] != m_disabledStatus[x][y])
+            {
+                changed = true;
+                update();
+            }
+    if (changed)
         update();
 }
 
-void PieceSelector::findPiecePoints(const Piece& piece,
+void PieceSelector::findPiecePoints(unsigned int piece,
                                     unsigned int x, unsigned int y,
                                     Piece::Points& points) const
 {
-    CoordPoint p(x, m_nuRows - y - 1);
-    if (x >= m_nuColumns || y >= m_nuRows || m_piece[x][y] != &piece
-        ||  points.contains(p))
+    CoordPoint p(x, y);
+    if (x >= m_nuColumns || y >= m_nuRows
+        || m_piece[x][y] != static_cast<int>(piece) || points.contains(p))
         return;
     points.push_back(p);
     // This assumes that no Trigon pieces touch at the corners, otherwise
@@ -97,11 +119,18 @@ int PieceSelector::heightForWidth(int width) const
 void PieceSelector::init()
 {
     BoardType boardType = m_bd.get_board_type();
+    GameVariant gameVariant = m_bd.get_game_variant();
     const string* pieceLayout;
     if (boardType == board_type_trigon || boardType == board_type_trigon_3)
     {
         pieceLayout = &pieceLayoutTrigon;
         m_nuColumns = 47;
+        m_nuRows = 6;
+    }
+    else if (gameVariant == game_variant_junior)
+    {
+        pieceLayout = &pieceLayoutJunior;
+        m_nuColumns = 34;
         m_nuRows = 6;
     }
     else
@@ -115,18 +144,18 @@ void PieceSelector::init()
         {
             string name = pieceLayout->substr(y * m_nuColumns * 2 + x * 2, 2);
             trim(name);
-            const Piece* piece = 0;
+            int piece = -1;
             if (name != ".")
             {
                 for (unsigned int i = 0; i < m_bd.get_nu_pieces(); ++i)
                 {
                     if (m_bd.get_piece(i).get_name() == name)
                     {
-                        piece = &m_bd.get_piece(i);
+                        piece = i;
                         break;
                     }
                 }
-                LIBBOARDGAME_ASSERT(piece != 0);
+                LIBBOARDGAME_ASSERT(piece != -1);
             }
             m_piece[x][y] = piece;
         }
@@ -134,16 +163,20 @@ void PieceSelector::init()
     for (unsigned int y = 0; y < m_nuRows; ++y)
         for (unsigned int x = 0; x < m_nuColumns; ++x)
         {
-            const Piece* piece = m_piece[x][y];
-            if (piece == 0)
+            int piece = m_piece[x][y];
+            if (piece == -1)
                 continue;
             Piece::Points points;
-            findPiecePoints(*piece, x, y, points);
+            findPiecePoints(piece, x, y, points);
+            // Mirror y to match the convention of CoordPoint coordinates
+            BOOST_FOREACH(CoordPoint& p, points)
+                p.y = m_nuRows - p.y - 1;
             type_match_shift(geometry, points.begin(), points.end(), 0);
-            m_transform[x][y] = piece->find_transform(geometry, points);
+            m_transform[x][y] =
+                m_bd.get_piece(piece).find_transform(geometry, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
         }
-    m_last_pieces_left = m_bd.get_pieces_left(m_color);
+    setDisabledStatus(m_disabledStatus);
     update();
 }
 
@@ -156,15 +189,16 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
         return;
     int x = pixelX / m_fieldWidth;
     int y = pixelY / m_fieldHeight;
-    const Piece* piece = m_piece[x][y];
-    if (piece == 0 || ! m_bd.is_piece_left(m_color, *piece))
+    int piece = m_piece[x][y];
+    if (piece == -1 || m_disabledStatus[x][y])
         return;
     update();
-    emit pieceSelected(m_color, *piece, m_transform[x][y]);
+    emit pieceSelected(m_color, piece, m_transform[x][y]);
 }
 
 void PieceSelector::paintEvent(QPaintEvent*)
 {
+    setDisabledStatus(m_disabledStatus);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     BoardType boardType = m_bd.get_board_type();
@@ -193,8 +227,8 @@ void PieceSelector::paintEvent(QPaintEvent*)
     for (unsigned int x = 0; x < m_nuColumns; ++x)
         for (unsigned int y = 0; y < m_nuRows; ++y)
         {
-            const Piece* piece = m_piece[x][y];
-            if (piece != 0 && m_bd.is_piece_left(m_color, *piece))
+            int piece = m_piece[x][y];
+            if (piece != -1 && ! m_disabledStatus[x][y])
             {
                 if (isTrigon)
                 {
@@ -213,7 +247,38 @@ void PieceSelector::paintEvent(QPaintEvent*)
             }
         }
     painter.restore();
-    m_last_pieces_left = m_bd.get_pieces_left(m_color);
+}
+
+void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
+{
+    bool marker[maxColumns][maxRows];
+    for (unsigned int x = 0; x < m_nuColumns; ++x)
+        for (unsigned int y = 0; y < m_nuRows; ++y)
+        {
+            marker[x][y] = false;
+            disabledStatus[x][y] = false;
+        }
+    array<unsigned int,Board::max_uniq_pieces> nuInstances;
+    nuInstances.fill(0);
+    for (unsigned int x = 0; x < m_nuColumns; ++x)
+        for (unsigned int y = 0; y < m_nuRows; ++y)
+        {
+            if (marker[x][y])
+                continue;
+            int piece = m_piece[x][y];
+            if (piece == -1)
+                continue;
+            Piece::Points points;
+            findPiecePoints(piece, x, y, points);
+            bool disabled = false;
+            if (++nuInstances[piece] > m_bd.get_nu_left_piece(m_color, piece))
+                disabled = true;
+            BOOST_FOREACH(CoordPoint p, points)
+            {
+                disabledStatus[p.x][p.y] = disabled;
+                marker[p.x][p.y] = true;
+            }
+        }
 }
 
 //-----------------------------------------------------------------------------

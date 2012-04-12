@@ -33,6 +33,7 @@ using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::BoardIterator;
@@ -574,7 +575,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     }
 }
 
-inline const array<bool,Board::max_pieces>& State::get_pieces_considered() const
+inline const PieceConsideredTable& State::get_pieces_considered() const
 {
     if (m_consider_all_pieces)
         return m_shared_const.is_piece_considered_all;
@@ -593,9 +594,7 @@ void State::init_move_list_with_local(Color c)
     m_max_playable_piece_size_local = 0;
     ArrayList<Move, Move::range>& moves = m_moves[c];
     moves.clear();
-    bool is_first_move =
-        (m_bd.get_pieces_left(c).size() == m_bd.get_nu_pieces());
-    if (is_first_move)
+    if (m_bd.is_first_piece(c))
     {
         // Using only one starting point (if game variant has more than one) not
         // only reduces the branching factor but is also necessary because
@@ -642,9 +641,7 @@ void State::init_move_list_without_local(Color c)
     m_is_piece_considered[c] = &get_pieces_considered();
     ArrayList<Move, Move::range>& moves = m_moves[c];
     moves.clear();
-    bool is_first_move =
-        (m_bd.get_pieces_left(c).size() == m_bd.get_nu_pieces());
-    if (is_first_move)
+    if (m_bd.is_first_piece(c))
     {
         // Using only one starting point (if game variant has more than one) not
         // only reduces the branching factor but is also necessary because
@@ -852,8 +849,10 @@ void State::start_search()
     m_nu_playout_moves = 0;
     m_nu_last_good_reply_moves = 0;
     m_stat_score.clear();
+    GameVariant game_variant = bd.get_game_variant();
     m_check_symmetric_draw =
-        (bd.get_game_variant() == game_variant_duo
+        ((game_variant == game_variant_duo
+          || game_variant == game_variant_junior)
          && m_shared_const.detect_symmetry
          && ! (m_shared_const.to_play == Color(1)
                && m_shared_const.avoid_symmetric_draw));
@@ -903,7 +902,7 @@ void State::start_simulation(size_t n)
         m_is_move_list_initialized[*i] = false;
     }
     m_nu_passes = 0;
-    // TODO: m_nu_passes should be initialized without asuming alternating
+    // TODO: m_nu_passes should be initialized without assuming alternating
     // colors in the board's move history
     for (unsigned int i = m_bd.get_nu_moves(); i > 0; --i)
     {
@@ -926,7 +925,11 @@ void State::update_move_list(Color c)
     // Find old moves that are still legal
     unsigned int last_piece = numeric_limits<unsigned int>::max();
     if (last_mv.is_regular())
-        last_piece = get_move_info(last_mv).piece;
+    {
+        unsigned int piece = get_move_info(last_mv).piece;
+        if (m_bd.get_nu_left_piece(c, piece) == 0)
+            last_piece = piece;
+    }
     for (auto i = moves.begin(); i != moves.end(); ++i)
     {
         unsigned int local_value;
@@ -953,8 +956,7 @@ void State::update_move_list(Color c)
     }
 
     // Generate moves for pieces that were not considered in the last position
-    const array<bool,Board::max_pieces>& is_piece_considered =
-        get_pieces_considered();
+    const PieceConsideredTable& is_piece_considered = get_pieces_considered();
     bool pieces_considered_changed = false;
     BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
     {

@@ -84,7 +84,8 @@ void StartingPoints::init(GameVariant game_variant, const Geometry& geometry)
         add_colored_starting_point(19, 0, Color(2));
         add_colored_starting_point(0, 0, Color(3));
     }
-    else if (game_variant == game_variant_duo)
+    else if (game_variant == game_variant_duo
+             || game_variant == game_variant_junior)
     {
         add_colored_starting_point(4, 9, Color(0));
         add_colored_starting_point(9, 4, Color(1));
@@ -139,6 +140,8 @@ void Board::copy_from(const Board& bd)
         m_is_attach_point[*i] = bd.m_is_attach_point[*i];
         m_attach_points[*i] = bd.m_attach_points[*i];
         m_pieces_left[*i] = bd.m_pieces_left[*i];
+        m_is_first_piece[*i] = bd.m_is_first_piece[*i];
+        m_nu_left_piece[*i] = bd.m_nu_left_piece[*i];
         m_setup.placements[*i] = bd.m_setup.placements[*i];
     }
     m_moves = bd.m_moves;
@@ -149,8 +152,7 @@ void Board::copy_from(const Board& bd)
 void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 {
     moves.clear();
-    bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
-    if (is_first_move)
+    if (m_is_first_piece[c])
     {
         BOOST_FOREACH(Point p, get_starting_points(c))
             if (! m_forbidden[c][p])
@@ -205,7 +207,7 @@ void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
 unsigned int Board::get_bonus(Color c) const
 {
     unsigned int bonus = 0;
-    if (m_pieces_left[c].size() == 0)
+    if (m_game_variant != game_variant_junior && m_pieces_left[c].size() == 0)
     {
         bonus = 15;
         for (unsigned int i = get_nu_moves(); i > 0; --i)
@@ -242,13 +244,14 @@ unsigned int Board::get_points_left(Color c) const
 {
     unsigned int n = 0;
     BOOST_FOREACH(unsigned int i, m_pieces_left[c])
-        n += get_piece(i).get_size();
+        n += get_nu_left_piece(c, i) * get_piece(i).get_size();
     return n;
 }
 
 int Board::get_score(Color c, double& game_result) const
 {
-    if (m_game_variant == game_variant_duo)
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
     {
         unsigned int points0 = get_points_with_bonus(Color(0));
         unsigned int points1 = get_points_with_bonus(Color(1));
@@ -329,11 +332,11 @@ int Board::get_score(Color c, double& game_result) const
 
 bool Board::has_moves(Color c) const
 {
-    bool is_first_move = (m_pieces_left[c].size() == get_nu_pieces());
+    bool is_first = m_is_first_piece[c];
     for (Iterator i(*this); i; ++i)
         if (! m_forbidden[c][*i]
             && (is_attach_point(*i, c)
-                || (is_first_move && get_starting_points(c).contains(*i))))
+                || (is_first && get_starting_points(c).contains(*i))))
             if (has_moves(c, *i))
                 return true;
     return false;
@@ -374,9 +377,14 @@ void Board::init(GameVariant game_variant, const Setup* setup)
         m_forbidden[*i].fill(false);
         m_is_attach_point[*i].fill(false);
         m_attach_points[*i].clear();
+        m_is_first_piece[*i] = true; 
         m_pieces_left[*i].clear();
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)
             m_pieces_left[*i].push_back(j);
+        if (game_variant == game_variant_junior)
+            fill(m_nu_left_piece[*i].begin(), m_nu_left_piece[*i].end(), 2);
+        else
+            fill(m_nu_left_piece[*i].begin(), m_nu_left_piece[*i].end(), 1);
     }
     m_nu_onboard_pieces = 0;
     if (setup == 0)
@@ -398,7 +406,8 @@ void Board::init(GameVariant game_variant, const Setup* setup)
 void Board::init_game_variant(GameVariant game_variant)
 {
     m_game_variant = game_variant;
-    if (m_game_variant == game_variant_duo)
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
     {
         m_color_name[Color(0)] = "Blue";
         m_color_name[Color(1)] = "Green";
@@ -422,31 +431,27 @@ void Board::init_game_variant(GameVariant game_variant)
         m_color_esc_sequence_text[Color(2)] = "\x1B[1;31m";
         m_color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
     }
-    BoardType board_type;
     if (game_variant == game_variant_classic
         || game_variant == game_variant_classic_2)
     {
-        board_type = board_type_classic;
         m_nu_colors = 4;
     }
     else if (game_variant == game_variant_trigon_3)
     {
-        board_type = board_type_trigon_3;
         m_nu_colors = 3;
     }
-    else if (game_variant == game_variant_duo)
+    else if (game_variant == game_variant_duo
+             || game_variant == game_variant_junior)
     {
-        board_type = board_type_duo;
         m_nu_colors = 2;
     }
     else
     {
         LIBBOARDGAME_ASSERT(game_variant == game_variant_trigon
                             || game_variant == game_variant_trigon_2);
-        board_type = board_type_trigon;
         m_nu_colors = 4;
     }
-    m_board_const = &BoardConst::get(board_type);
+    m_board_const = &BoardConst::get(game_variant);
     m_geometry = &m_board_const->get_geometry();
     m_starting_points.init(game_variant, *m_geometry);
     m_point_state.init(*m_geometry);
@@ -472,14 +477,6 @@ bool Board::is_game_over() const
         if (has_moves(*i))
             return false;
     return true;
-}
-
-bool Board::is_piece_left(Color c, const Piece& piece) const
-{
-    BOOST_FOREACH(unsigned int i, m_pieces_left[c])
-        if (&get_piece(i) == &piece)
-            return true;
-    return false;
 }
 
 void Board::undo()
@@ -703,7 +700,11 @@ void Board::write_pieces_left(ostream& out, Color c, unsigned int begin,
         {
             if (i > begin)
                 out << ' ';
-            out << get_piece(m_pieces_left[c][i]).get_name();
+            unsigned int piece = m_pieces_left[c][i];
+            out << get_piece(piece).get_name();
+            unsigned int nu_left = m_nu_left_piece[c][piece];
+            if (nu_left > 1)
+                out << '(' << nu_left << ')';
         }
 }
 

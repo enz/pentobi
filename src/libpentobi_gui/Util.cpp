@@ -11,6 +11,7 @@
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 
 //-----------------------------------------------------------------------------
 
@@ -192,7 +193,7 @@ QColor Util::getLabelColor(GameVariant gameVariant, PointState s)
 
 QColor Util::getPaintColor(GameVariant gameVariant, Color c)
 {
-    if (gameVariant == game_variant_duo)
+    if (gameVariant == game_variant_duo || gameVariant == game_variant_junior)
         return c == Color(0) ? blue : green;
     else
     {
