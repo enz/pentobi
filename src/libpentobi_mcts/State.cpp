@@ -987,7 +987,7 @@ void State::update_move_list(Color c)
     if (m_moves[c].empty() && ! m_consider_all_pieces)
     {
         m_consider_all_pieces = true;
-        init_move_list_with_local(c);
+        update_move_list(c);
     }
 }
 
