@@ -88,7 +88,7 @@ void GuiBoard::clearMarkupFlag(Point p, MarkupFlag flag)
 
 void GuiBoard::clearSelectedPiece()
 {
-    m_selectedPiece = 0;
+    m_selectedPiece = -1;
     m_selectedPieceTransform = 0;
     setSelectedPiecePoints();
     setMouseTracking(false);
@@ -160,7 +160,7 @@ void GuiBoard::leaveEvent(QEvent*)
 
 void GuiBoard::mouseMoveEvent(QMouseEvent* event)
 {
-    if (m_selectedPiece == 0)
+    if (m_selectedPiece == -1)
         return;
     CoordPoint oldOffset = m_selectedPieceOffset;
     setSelectedPieceOffset(*event);
@@ -170,7 +170,7 @@ void GuiBoard::mouseMoveEvent(QMouseEvent* event)
 
 void GuiBoard::mousePressEvent(QMouseEvent* event)
 {
-    if (m_selectedPiece == 0)
+    if (m_selectedPiece == -1)
     {
         CoordPoint p = m_boardPainter.getCoordPoint(event->x(), event->y());
         if (m_bd.get_geometry().is_onboard(p))
@@ -183,7 +183,7 @@ void GuiBoard::mousePressEvent(QMouseEvent* event)
 
 void GuiBoard::moveSelectedPieceDown()
 {
-    if (m_selectedPiece == 0)
+    if (m_selectedPiece == -1)
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -218,7 +218,7 @@ void GuiBoard::moveSelectedPieceDown()
 
 void GuiBoard::moveSelectedPieceLeft()
 {
-    if (m_selectedPiece == 0)
+    if (m_selectedPiece == -1)
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -247,7 +247,7 @@ void GuiBoard::moveSelectedPieceLeft()
 
 void GuiBoard::moveSelectedPieceRight()
 {
-    if (m_selectedPiece == 0)
+    if (m_selectedPiece == -1)
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -275,7 +275,7 @@ void GuiBoard::moveSelectedPieceRight()
 
 void GuiBoard::moveSelectedPieceUp()
 {
-    if (m_selectedPiece == 0)
+    if (m_selectedPiece == -1)
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -357,7 +357,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
     }
     else
     {
-        if (m_selectedPiece != 0 && ! m_selectedPieceOffset.is_null())
+        if (m_selectedPiece != -1 && ! m_selectedPieceOffset.is_null())
         {
             bool isLegal = ! findSelectedPieceMove().is_null();
             m_boardPainter.paintSelectedPiece(painter, m_selectedPieceColor,
@@ -380,7 +380,7 @@ void GuiBoard::selectPiece(Color color, unsigned int piece)
         return;
     m_selectedPieceColor = color;
     m_selectedPieceTransform = m_bd.get_transforms().get_default();
-    if (m_selectedPiece == 0)
+    if (m_selectedPiece == -1)
         m_selectedPieceOffset = CoordPoint::null();
     m_selectedPiece = piece;
     setSelectedPieceOffset(m_selectedPieceOffset);
@@ -499,7 +499,7 @@ void GuiBoard::showMoveAnimation()
 void GuiBoard::setSelectedPiecePoints()
 {
     m_selectedPiecePoints.clear();
-    if (m_selectedPiece != 0 && m_selectedPieceOffset != CoordPoint::null())
+    if (m_selectedPiece != -1 && m_selectedPieceOffset != CoordPoint::null())
     {
         int width = static_cast<int>(m_bd.get_geometry().get_width());
         int height = static_cast<int>(m_bd.get_geometry().get_height());
