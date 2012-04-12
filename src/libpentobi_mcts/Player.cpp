@@ -174,7 +174,7 @@ Move Player::genmove(const Board& bd, Color c)
         {
             LIBBOARDGAME_ASSERT(variant == game_variant_duo);
             minimum = 10;
-            factor_per_level = 5.8f; // TODO: needs update
+            factor_per_level = 5.90f;
         }
         if (m_level <= 1)
             max_count = minimum;
