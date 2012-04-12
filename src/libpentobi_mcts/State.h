@@ -15,6 +15,7 @@
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/MoveMarker.h"
+#include "libpentobi_base/PieceMap.h"
 #include "libpentobi_base/PointList.h"
 #include "libpentobi_base/SymmetricPoints.h"
 
@@ -36,17 +37,13 @@ using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::MovePoints;
+using libpentobi_base::Piece;
+using libpentobi_base::PieceMap;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
 using libpentobi_base::SymmetricPoints;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
-
-//-----------------------------------------------------------------------------
-
-/** Lookup table with precomputed information if a piece is considered for
-    move generation at a certain game stage. */
-typedef array<bool,Board::max_uniq_pieces> PieceConsideredTable;
 
 //-----------------------------------------------------------------------------
 
@@ -73,12 +70,12 @@ struct SharedConst
     ColorMap<MoveMarker> is_forbidden_at_root;
 
     /** Precomputed lists of considered pieces depending on the move number. */
-    array<PieceConsideredTable,Board::max_game_moves> is_piece_considered;
+    array<PieceMap<bool>,Board::max_game_moves> is_piece_considered;
 
     /** Precomputed lists of considered pieces if all pieces are enforced to be
         considered (because using the restricted set of pieces would generate
         no moves). */
-    PieceConsideredTable is_piece_considered_all;
+    PieceMap<bool> is_piece_considered_all;
 
     SharedConst(const Color& to_play);
 };
@@ -186,7 +183,7 @@ private:
         position, the other color is not updated immediately after a move. */
     ColorMap<ArrayList<Move, Move::range>> m_moves;
 
-    ColorMap<const PieceConsideredTable*> m_is_piece_considered;
+    ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
     ArrayList<MoveFeatures, Move::range> m_features;
 
@@ -241,8 +238,7 @@ private:
 
     void add_moves(Point p, Color c);
 
-    void add_moves(Point p, Color c, unsigned int piece,
-                   unsigned int adj_status);
+    void add_moves(Point p, Color c, Piece piece, unsigned int adj_status);
 
     void check_local(unsigned int local_value, Move mv, const MoveInfo& info);
 
@@ -251,7 +247,7 @@ private:
     /** Equivalent to but faster than Board::get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
 
-    const PieceConsideredTable& get_pieces_considered() const;
+    const PieceMap<bool>& get_pieces_considered() const;
 
     void init_move_list_with_local(Color c);
 

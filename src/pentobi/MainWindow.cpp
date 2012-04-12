@@ -1260,8 +1260,8 @@ QWidget* MainWindow::createRightPanel()
     {
         m_pieceSelector[*i] = new PieceSelector(0, getBoard(), *i);
         connect(m_pieceSelector[*i],
-                SIGNAL(pieceSelected(Color, unsigned int, const Transform*)),
-                this, SLOT(selectPiece(Color, unsigned int, const Transform*)));
+                SIGNAL(pieceSelected(Color,Piece,const Transform*)),
+                this, SLOT(selectPiece(Color,Piece,const Transform*)));
         pieceSelectorLayout->addWidget(m_pieceSelector[*i]);
     }
     initPieceSelectors();
@@ -1446,8 +1446,8 @@ void MainWindow::findNextComment()
 
 void MainWindow::flipPieceHorizontally()
 {
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         return;
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
@@ -1459,8 +1459,8 @@ void MainWindow::flipPieceHorizontally()
 
 void MainWindow::flipPieceVertically()
 {
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     const Board& bd = getBoard();
@@ -1858,13 +1858,13 @@ void MainWindow::nextPiece()
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         piece = piecesLeft[0];
     else
     {
         for (unsigned int i = 0; i < nuPiecesLeft; ++i)
-            if (piecesLeft[i] == static_cast<unsigned int>(piece))
+            if (piecesLeft[i] == piece)
             {
                 if (i + 1 >= nuPiecesLeft)
                     piece = piecesLeft[0];
@@ -1878,8 +1878,8 @@ void MainWindow::nextPiece()
 
 void MainWindow::nextTransform()
 {
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = getBoard().get_piece_info(piece).get_next_transform(transform);
@@ -2114,13 +2114,13 @@ void MainWindow::previousPiece()
     unsigned int nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         piece = piecesLeft[nuPiecesLeft - 1];
     else
     {
         for (unsigned int i = 0; i < nuPiecesLeft; ++i)
-            if (piecesLeft[i] == static_cast<unsigned int>(piece))
+            if (piecesLeft[i] == piece)
             {
                 if (i == 0)
                     piece = piecesLeft[nuPiecesLeft - 1];
@@ -2134,8 +2134,8 @@ void MainWindow::previousPiece()
 
 void MainWindow::previousTransform()
 {
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform =
@@ -2173,8 +2173,8 @@ void MainWindow::quit()
 
 void MainWindow::rotatePieceAnticlockwise()
 {
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         return;
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
@@ -2187,8 +2187,8 @@ void MainWindow::rotatePieceAnticlockwise()
 
 void MainWindow::rotatePieceClockwise()
 {
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         return;
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
@@ -2272,8 +2272,8 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
                                   const char* name3, const char* name4)
 {
     const Board& bd = getBoard();
-    vector<unsigned int> pieces;
-    unsigned int piece;
+    vector<Piece> pieces;
+    Piece piece;
     if (bd.get_piece_by_name(name1, piece)
         && bd.is_piece_left(m_toPlay, piece))
         pieces.push_back(piece);
@@ -2289,7 +2289,7 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
     if (pieces.empty())
         return;
     piece = m_guiBoard->getSelectedPiece();
-    if (piece == 0)
+    if (piece.is_null())
         piece = pieces[0];
     else
     {
@@ -2318,13 +2318,12 @@ void MainWindow::selectNextColor()
         m_pieceSelector[*i]->setEnabled(m_toPlay == *i);
 }
 
-void MainWindow::selectPiece(Color c, unsigned int piece)
+void MainWindow::selectPiece(Color c, Piece piece)
 {
     selectPiece(c, piece, getBoard().get_transforms().get_default());
 }
 
-void MainWindow::selectPiece(Color c, unsigned int piece,
-                             const Transform* transform)
+void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
 {
     m_guiBoard->selectPiece(c, piece);
     m_guiBoard->setSelectedPieceTransform(transform);
@@ -2909,8 +2908,8 @@ void MainWindow::updateComment()
 
 void MainWindow::updateFlipActions()
 {
-    int piece = m_guiBoard->getSelectedPiece();
-    if (piece == -1)
+    Piece piece = m_guiBoard->getSelectedPiece();
+    if (piece.is_null())
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     bool can_flip_horizontally =

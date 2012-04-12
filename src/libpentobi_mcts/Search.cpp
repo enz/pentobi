@@ -27,15 +27,16 @@ using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
+using libpentobi_base::Piece;
 
 //-----------------------------------------------------------------------------
 
 namespace {
 
 void set_piece_considered(const BoardConst& board_const, const char* name,
-                          PieceConsideredTable& is_piece_considered)
+                          PieceMap<bool>& is_piece_considered)
 {
-    unsigned int piece;
+    Piece piece;
     bool found = board_const.get_piece_by_name(name, piece);
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
     LIBBOARDGAME_ASSERT(found);
@@ -43,7 +44,7 @@ void set_piece_considered(const BoardConst& board_const, const char* name,
 }
 
 void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
-                           PieceConsideredTable& is_piece_considered)
+                           PieceMap<bool>& is_piece_considered)
 {
     BoardType board_type = board_const.get_board_type();
     unsigned int min_piece_size = 0;
@@ -60,8 +61,7 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
     {
         if (nu_moves < 4)
         {
-            for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
-                is_piece_considered[i] = false;
+            is_piece_considered.fill(false);
             set_piece_considered(board_const, "V5", is_piece_considered);
             set_piece_considered(board_const, "Z5", is_piece_considered);
             return;
@@ -78,8 +78,7 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
     {
         if (nu_moves < 4)
         {
-            for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
-                is_piece_considered[i] = false;
+            is_piece_considered.fill(false);
             set_piece_considered(board_const, "V", is_piece_considered);
             return;
         }
@@ -94,8 +93,9 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
     }
     for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
     {
-        const PieceInfo& piece_info = board_const.get_piece_info(i);
-        is_piece_considered[i] = (piece_info.get_size() >= min_piece_size);
+        Piece piece(i);
+        const PieceInfo& piece_info = board_const.get_piece_info(piece);
+        is_piece_considered[piece] = (piece_info.get_size() >= min_piece_size);
     }
 }
 
@@ -150,9 +150,9 @@ void Search::on_start_search()
             if (! bd.is_forbidden(*j, *i))
             {
                 unsigned int adj_status = bd.get_adj_status_index(*j, *i);
-                BOOST_FOREACH(unsigned int k, bd.get_pieces_left(*i))
+                BOOST_FOREACH(Piece piece, bd.get_pieces_left(*i))
                 {
-                    BOOST_FOREACH(Move mv, bd.get_moves(k, *j, adj_status))
+                    BOOST_FOREACH(Move mv, bd.get_moves(piece, *j, adj_status))
                     {
                         if (! is_forbidden_at_root[mv])
                             continue;
@@ -165,8 +165,7 @@ void Search::on_start_search()
     for (unsigned int i = 0; i < Board::max_game_moves; ++i)
         set_pieces_considered(bd.get_board_const(), i,
                               m_shared_const.is_piece_considered[i]);
-    for (unsigned int i = 0; i < Board::max_uniq_pieces; ++i)
-        m_shared_const.is_piece_considered_all[i] = true;
+    m_shared_const.is_piece_considered_all.fill(true);
 }
 
 bool Search::search(Move& mv, const Board& bd, Color to_play,

@@ -170,9 +170,9 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 void Board::gen_moves(Color c, Point p, MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
-    BOOST_FOREACH(unsigned int i, m_pieces_left[c])
+    BOOST_FOREACH(Piece piece, m_pieces_left[c])
     {
-        BOOST_FOREACH(Move mv, m_board_const->get_moves(i, p))
+        BOOST_FOREACH(Move mv, m_board_const->get_moves(piece, p))
         {
             if (marker[mv])
                 continue;
@@ -189,9 +189,10 @@ void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
                       MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
-    BOOST_FOREACH(unsigned int i, m_pieces_left[c])
+    BOOST_FOREACH(Piece piece, m_pieces_left[c])
     {
-        BOOST_FOREACH(Move mv, m_board_const->get_moves(i, p, adj_status_index))
+        BOOST_FOREACH(Move mv,
+                      m_board_const->get_moves(piece, p, adj_status_index))
         {
             if (marker[mv])
                 continue;
@@ -243,8 +244,8 @@ Color Board::get_effective_to_play() const
 unsigned int Board::get_points_left(Color c) const
 {
     unsigned int n = 0;
-    BOOST_FOREACH(unsigned int i, m_pieces_left[c])
-        n += get_nu_left_piece(c, i) * get_piece_info(i).get_size();
+    BOOST_FOREACH(Piece piece, m_pieces_left[c])
+        n += get_nu_left_piece(c, piece) * get_piece_info(piece).get_size();
     return n;
 }
 
@@ -344,9 +345,9 @@ bool Board::has_moves(Color c) const
 
 bool Board::has_moves(Color c, Point p) const
 {
-    BOOST_FOREACH(unsigned int i, m_pieces_left[c])
+    BOOST_FOREACH(Piece piece, m_pieces_left[c])
     {
-        BOOST_FOREACH(Move mv, m_board_const->get_moves(i, p))
+        BOOST_FOREACH(Move mv, m_board_const->get_moves(piece, p))
         {
             const MovePoints& points = get_move_points(mv);
             bool is_legal = true;
@@ -380,11 +381,11 @@ void Board::init(GameVariant game_variant, const Setup* setup)
         m_is_first_piece[*i] = true; 
         m_pieces_left[*i].clear();
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)
-            m_pieces_left[*i].push_back(j);
+            m_pieces_left[*i].push_back(Piece(j));
         if (game_variant == game_variant_junior)
-            fill(m_nu_left_piece[*i].begin(), m_nu_left_piece[*i].end(), 2);
+            m_nu_left_piece[*i].fill(2);
         else
-            fill(m_nu_left_piece[*i].begin(), m_nu_left_piece[*i].end(), 1);
+            m_nu_left_piece[*i].fill(1);
     }
     m_nu_onboard_pieces = 0;
     if (setup == 0)
@@ -700,7 +701,7 @@ void Board::write_pieces_left(ostream& out, Color c, unsigned int begin,
         {
             if (i > begin)
                 out << ' ';
-            unsigned int piece = m_pieces_left[c][i];
+            Piece piece = m_pieces_left[c][i];
             out << get_piece_info(piece).get_name();
             unsigned int nu_left = m_nu_left_piece[c][piece];
             if (nu_left > 1)

@@ -13,6 +13,7 @@ using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Color;
 using libpentobi_base::Board;
+using libpentobi_base::Piece;
 using libpentobi_base::PiecePoints;
 
 //-----------------------------------------------------------------------------
@@ -38,8 +39,7 @@ public:
     void checkUpdate();
 
 signals:
-    void pieceSelected(Color color, const unsigned int piece,
-                       const Transform* transform);
+    void pieceSelected(Color color, Piece piece, const Transform* transform);
 
 protected:
     void mousePressEvent(QMouseEvent* event);
@@ -59,7 +59,7 @@ private:
 
     unsigned int m_nuRows;
 
-    int m_piece[maxColumns][maxRows];
+    Piece m_piece[maxColumns][maxRows];
 
     const Transform* m_transform[maxColumns][maxRows];
 
@@ -74,8 +74,8 @@ private:
 
     qreal m_selectorHeight;
 
-    void findPiecePoints(unsigned int piece, unsigned int x,
-                         unsigned int y, PiecePoints& points) const;
+    void findPiecePoints(Piece piece, unsigned int x, unsigned int y,
+                         PiecePoints& points) const;
 
     void setDisabledStatus(bool disabledStatus[maxColumns][maxRows]);
 };

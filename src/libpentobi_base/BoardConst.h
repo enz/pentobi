@@ -15,6 +15,7 @@
 #include "MoveInfo.h"
 #include "Point.h"
 #include "PieceInfo.h"
+#include "PieceMap.h"
 #include "PieceTransforms.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/ColorMap.h"
@@ -22,6 +23,7 @@
 
 namespace libpentobi_base {
 
+using namespace std;
 using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
@@ -44,8 +46,6 @@ enum BoardType
 class BoardConst
 {
 public:
-    static const unsigned int max_uniq_pieces = 22;
-
     static const unsigned int max_moves_at_point = 40;
 
     /** Begin/end iterator for lists with local moves.
@@ -69,9 +69,9 @@ public:
 
     unsigned int get_total_piece_points() const;
 
-    const PieceInfo& get_piece_info(unsigned int n) const;
+    const PieceInfo& get_piece_info(Piece piece) const;
 
-    bool get_piece_by_name(const string& name, unsigned int& piece) const;
+    bool get_piece_by_name(const string& name, Piece& piece) const;
 
     const PieceTransforms& get_transforms() const;
 
@@ -96,7 +96,7 @@ public:
 
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
-    LocalMovesListRange get_moves(unsigned int piece, Point p,
+    LocalMovesListRange get_moves(Piece piece, Point p,
                                   unsigned int adj_status_index = 0) const;
 
     BoardType get_board_type() const;
@@ -113,14 +113,13 @@ public:
 
     Move from_string(const string& s) const;
 
-    unsigned int get_max_attach_points(unsigned int piece) const;
+    unsigned int get_max_attach_points(Piece piece) const;
 
 private:
     typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
 
     /** See m_moves */
-    typedef array<array<Grid<LocalMovesList>,max_uniq_pieces>,
-                  nu_adj_status_index>
+    typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status_index>
         FullMoveTable;
 
     unsigned int m_nu_pieces;
@@ -145,8 +144,8 @@ private:
     unique_ptr<FullMoveTable> m_full_move_table;
 
     /** See m_move_lists. */
-    Grid<array<array<pair<unsigned int,unsigned int>,max_uniq_pieces>,
-               nu_adj_status_index>> m_moves_range;
+    Grid<array<PieceMap<pair<unsigned int,unsigned int>>,nu_adj_status_index>>
+        m_moves_range;
 
     /** Compact representation of lists of moves of a piece at a point
         constrained by the forbidden status of adjacent points.
@@ -167,16 +166,16 @@ private:
                                                                   m_adj_status;
 
 
-    array<unsigned int,max_uniq_pieces> m_max_attach_points;
+    PieceMap<unsigned int> m_max_attach_points;
 
     BoardConst(BoardType board_type, GameVariant game_variant);
 
-    void create_move(unsigned int piece_index,
-                     const PiecePoints& coord_points, Point center);
+    void create_move(Piece piece, const PiecePoints& coord_points,
+                     Point center);
 
     void create_moves();
 
-    void create_moves(unsigned int piece_index);
+    void create_moves(Piece piece);
 
     void init_adj_status();
 
@@ -201,9 +200,9 @@ inline const Geometry& BoardConst::get_geometry() const
     return m_geometry;
 }
 
-inline unsigned int BoardConst::get_max_attach_points(unsigned int piece) const
+inline unsigned int BoardConst::get_max_attach_points(Piece piece) const
 {
-    LIBBOARDGAME_ASSERT(piece <= m_nu_pieces);
+    LIBBOARDGAME_ASSERT(piece.to_int() <= m_nu_pieces);
     return m_max_attach_points[piece];
 }
 
@@ -230,8 +229,7 @@ inline const MovePoints& BoardConst::get_move_points(Move mv) const
 }
 
 inline BoardConst::LocalMovesListRange BoardConst::get_moves(
-                                           unsigned int piece,
-                                           Point p,
+                                           Piece piece, Point p,
                                            unsigned int adj_status_index) const
 {
     const pair<unsigned int,unsigned int>& indices =
@@ -250,10 +248,10 @@ inline unsigned int BoardConst::get_nu_pieces() const
     return m_nu_pieces;
 }
 
-inline const PieceInfo& BoardConst::get_piece_info(unsigned int n) const
+inline const PieceInfo& BoardConst::get_piece_info(Piece piece) const
 {
-    LIBBOARDGAME_ASSERT(n < m_pieces.size());
-    return m_pieces[n];
+    LIBBOARDGAME_ASSERT(piece.to_int() < m_pieces.size());
+    return m_pieces[piece.to_int()];
 }
 
 inline unsigned int BoardConst::get_total_piece_points() const

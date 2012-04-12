@@ -11,6 +11,7 @@
 using libboardgame_base::Transform;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
+using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
 
 //-----------------------------------------------------------------------------
@@ -29,7 +30,7 @@ public:
 
     void clearSelectedPiece();
 
-    void setSelectedPiece(unsigned int piece);
+    void setSelectedPiece(Piece piece);
 
     void setSelectedPieceTransform(const Transform* transform);
 
@@ -39,7 +40,7 @@ protected:
 private:
     const Board& m_bd;
 
-    int m_piece;
+    Piece m_piece;
 
     const Transform* m_transform;
 

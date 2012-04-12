@@ -178,9 +178,9 @@ public slots:
 
     void selectPieceZ();
 
-    void selectPiece(Color c, unsigned int piece);
+    void selectPiece(Color c, Piece piece);
 
-    void selectPiece(Color c, unsigned int piece, const Transform* transform);
+    void selectPiece(Color c, Piece piece, const Transform* transform);
 
     void setLevel(int level);
 

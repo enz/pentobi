@@ -635,15 +635,15 @@ BoardConst::BoardConst(BoardType board_type, GameVariant game_variant)
     init_symmetry_info();
 }
 
-void BoardConst::create_move(unsigned int piece_index,
-                             const PiecePoints& coord_points, Point center)
+void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
+                             Point center)
 {
     MovePoints points;
     for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
         points.push_back(Point((*i).x, (*i).y));
     MoveInfo info;
     MoveInfoExt info_ext;
-    info.piece = piece_index;
+    info.piece = piece;
     info.points = points;
     info_ext.center = center;
     set_adj_and_attach_points(info);
@@ -666,7 +666,7 @@ void BoardConst::create_move(unsigned int piece_index,
         {
             if (is_compatible_with_adj_status(p, i, points))
             {
-                (*m_full_move_table)[i][piece_index][p].push_back(move);
+                (*m_full_move_table)[i][piece][p].push_back(move);
                 ++m_move_lists_sum_length;
             }
         }
@@ -678,7 +678,7 @@ void BoardConst::create_moves()
     m_moves_range.init(m_geometry);
     m_move_lists_sum_length = 0;
     for (unsigned int i = 0; i < m_nu_pieces; ++i)
-        create_moves(i);
+        create_moves(Piece(i));
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << '\n';
     m_move_lists.reset(new Move[m_move_lists_sum_length]);
@@ -687,23 +687,24 @@ void BoardConst::create_moves()
         for (unsigned int j = 0; j < nu_adj_status_index; ++j)
             for (unsigned int k = 0; k < m_nu_pieces; ++k)
             {
+                Piece piece(k);
                 unsigned int begin = current;
-                const LocalMovesList& list = (*m_full_move_table)[j][k][*i];
+                const LocalMovesList& list = (*m_full_move_table)[j][piece][*i];
                 for (unsigned int l = 0; l < list.size(); ++l)
                     m_move_lists[current++] = list[l];
                 unsigned int end = current;
-                m_moves_range[*i][j][k] = make_pair(begin, end);
+                m_moves_range[*i][j][piece] = make_pair(begin, end);
             }
     m_full_move_table.reset(0); // Free space, no longer needed
 }
 
-void BoardConst::create_moves(unsigned int piece_index)
+void BoardConst::create_moves(Piece piece)
 {
-    const PieceInfo& piece = m_pieces[piece_index];
+    const PieceInfo& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
-        log() << "Creating moves for piece " << piece.get_name() << "\n";
+        log() << "Creating moves for piece " << piece_info.get_name() << "\n";
     for (unsigned int i = 0; i < nu_adj_status_index; ++i)
-        (*m_full_move_table)[i][piece_index].init(m_geometry);
+        (*m_full_move_table)[i][piece].init(m_geometry);
     PiecePoints points;
     for (GeometryIterator i(m_geometry); i; ++i)
     {
@@ -711,7 +712,7 @@ void BoardConst::create_moves(unsigned int piece_index)
             log() << "Creating moves at " << *i << "\n";
         unsigned int x = (*i).get_x();
         unsigned int y = (*i).get_y();
-        BOOST_FOREACH(const Transform* transform, piece.get_transforms())
+        BOOST_FOREACH(const Transform* transform, piece_info.get_transforms())
         {
             if (log_move_creation)
                 log() << "Transformation " << typeid(*transform).name() << "\n";
@@ -721,12 +722,11 @@ void BoardConst::create_moves(unsigned int piece_index)
             LIBBOARDGAME_ASSERT(transform->get_point_type() == 0);
             if (transform->get_new_point_type() != point_type)
                 continue;
-            points = piece.get_points();
+            points = piece_info.get_points();
             transform->transform(points.begin(), points.end());
             sort(points.begin(), points.end());
-            auto center_pos =
-                find(points.begin(), points.end(), CoordPoint(0, 0));
-            LIBBOARDGAME_ASSERT(center_pos != points.end());
+            auto center = find(points.begin(), points.end(), CoordPoint(0, 0));
+            LIBBOARDGAME_ASSERT(center != points.end());
             bool is_onboard = true;
             BOOST_FOREACH(CoordPoint& p, points)
             {
@@ -739,8 +739,7 @@ void BoardConst::create_moves(unsigned int piece_index)
                 }
             }
             if (is_onboard)
-                create_move(piece_index, points,
-                            Point(center_pos->x, center_pos->y));
+                create_move(piece, points, Point(center->x, center->y));
         }
     }
 }
@@ -812,13 +811,12 @@ const BoardConst& BoardConst::get(GameVariant game_variant)
     }
 }
 
-bool BoardConst::get_piece_by_name(const string& name,
-                                   unsigned int& piece) const
+bool BoardConst::get_piece_by_name(const string& name, Piece& piece) const
 {
     for (unsigned int i = 0; i < m_nu_pieces; ++i)
-        if (get_piece_info(i).get_name() == name)
+        if (get_piece_info(Piece(i)).get_name() == name)
         {
-            piece = i;
+            piece = Piece(i);
             return true;
         }
     return false;
@@ -834,9 +832,11 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     if (! m_geometry.is_onboard(p))
         return false;
     for (unsigned int i = 0; i < m_pieces.size(); ++i)
-        if (get_piece_info(i).get_size() == points.size())
+    {
+        Piece piece(i);
+        if (get_piece_info(piece).get_size() == points.size())
         {
-            const Board::LocalMovesListRange& moves = get_moves(i, p);
+            const Board::LocalMovesListRange& moves = get_moves(piece, p);
             for (auto j = moves.first; j != moves.second; ++j)
                 if (m_move_info[j->to_int()].points == sorted_points)
                 {
@@ -844,6 +844,7 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
                     return true;
                 }
         }
+    }
     return false;
 }
 

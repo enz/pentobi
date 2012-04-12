@@ -28,7 +28,7 @@ using libpentobi_base::PiecePoints;
 OrientationDisplay::OrientationDisplay(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd),
-      m_piece(-1),
+      m_piece(Piece::null()),
       m_transform(0),
       m_isColorSelected(false)
 {
@@ -47,9 +47,9 @@ void OrientationDisplay::clearSelectedColor()
 
 void OrientationDisplay::clearSelectedPiece()
 {
-    if (m_piece == -1)
+    if (m_piece.is_null())
         return;
-    m_piece = -1;
+    m_piece = Piece::null();
     update();
 }
 
@@ -85,7 +85,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
         displayWidth = fieldWidth * columns;
         displayHeight = fieldHeight * rows;
     }
-    if (m_piece == -1)
+    if (m_piece.is_null())
     {
         if (m_isColorSelected)
         {
@@ -148,10 +148,10 @@ void OrientationDisplay::selectColor(Color c)
     update();
 }
 
-void OrientationDisplay::setSelectedPiece(unsigned int piece)
+void OrientationDisplay::setSelectedPiece(Piece piece)
 {
     const Transform* transform = m_bd.get_transforms().get_default();
-    if (m_piece == static_cast<int>(piece) && m_transform == transform)
+    if (m_piece == piece && m_transform == transform)
         return;
     m_piece = piece;
     m_transform = transform;

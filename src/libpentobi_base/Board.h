@@ -96,13 +96,10 @@ public:
         Iterator(const Board& bd);
     };
 
-    /** Maximum number of unique pieces in any game variant. */
-    static const unsigned int max_uniq_pieces = BoardConst::max_uniq_pieces;
-
     /** Maximum number of pieces per player in any game variant. */
     static const unsigned int max_pieces = Setup::max_pieces;
 
-    typedef ArrayList<unsigned int,max_pieces> PiecesLeftList;
+    typedef ArrayList<Piece,Piece::max_pieces> PiecesLeftList;
 
     /** Maximum number of moves for a player in a game in any game variant.
         Assumes that a player is only allowed to pass if she has no legal
@@ -146,7 +143,7 @@ public:
 
     const PiecesLeftList& get_pieces_left(Color c) const;
 
-    bool is_piece_left(Color c, unsigned int piece) const;
+    bool is_piece_left(Color c, Piece piece) const;
 
     /** Check if no piece of a color has been placed on the board yet.
         This includes setup pieces and played moves. */
@@ -155,7 +152,7 @@ public:
     /** Get number of instances left of a piece.
         This value can be greater 1 in game variants that use multiple instances
         of a unique piece per player. */
-    unsigned int get_nu_left_piece(Color c, unsigned int piece) const;
+    unsigned int get_nu_left_piece(Color c, Piece piece) const;
 
     unsigned int get_points(Color c) const;
 
@@ -268,7 +265,7 @@ public:
 
     unsigned int get_adj_status_index(Point p, Color c) const;
 
-    LocalMovesListRange get_moves(unsigned int piece, Point p,
+    LocalMovesListRange get_moves(Piece piece, Point p,
                                   unsigned int adj_status_index) const;
 
     /** Get score.
@@ -293,9 +290,9 @@ public:
 
     bool find_move(const MovePoints& points, Move& move) const;
 
-    const PieceInfo& get_piece_info(unsigned int n) const;
+    const PieceInfo& get_piece_info(Piece piece) const;
 
-    bool get_piece_by_name(const string& name, unsigned int& piece) const;
+    bool get_piece_by_name(const string& name, Piece& piece) const;
 
     const MovePoints& get_move_points(Move mv) const;
 
@@ -345,7 +342,7 @@ private:
 
     ColorMap<bool> m_is_first_piece;
 
-    ColorMap<array<unsigned int,max_uniq_pieces>> m_nu_left_piece;
+    ColorMap<PieceMap<unsigned int>> m_nu_left_piece;
 
     /** See get_second_color() */
     ColorMap<Color> m_second_color;
@@ -473,8 +470,7 @@ inline const MoveInfoExt& Board::get_move_info_ext(Move move) const
     return m_board_const->get_move_info_ext(move);
 }
 
-inline Board::LocalMovesListRange Board::get_moves(unsigned int piece,
-                                           Point p,
+inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
                                            unsigned int adj_status_index) const
 {
     return m_board_const->get_moves(piece, p, adj_status_index);
@@ -485,9 +481,9 @@ inline unsigned int Board::get_nu_colors() const
     return m_nu_colors;
 }
 
-inline unsigned int Board::get_nu_left_piece(Color c, unsigned int piece) const
+inline unsigned int Board::get_nu_left_piece(Color c, Piece piece) const
 {
-    LIBBOARDGAME_ASSERT(piece < get_nu_pieces());
+    LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_pieces());
     return m_nu_left_piece[c][piece];
 }
 
@@ -511,13 +507,12 @@ inline unsigned int Board::get_nu_pieces() const
     return m_board_const->get_nu_pieces();
 }
 
-inline const PieceInfo& Board::get_piece_info(unsigned int n) const
+inline const PieceInfo& Board::get_piece_info(Piece piece) const
 {
-    return m_board_const->get_piece_info(n);
+    return m_board_const->get_piece_info(piece);
 }
 
-inline bool Board::get_piece_by_name(const string& name,
-                                     unsigned int& piece) const
+inline bool Board::get_piece_by_name(const string& name, Piece& piece) const
 {
     return m_board_const->get_piece_by_name(name, piece);
 }
@@ -691,9 +686,9 @@ inline bool Board::is_onboard(Point p) const
     return m_geometry->is_onboard(p);
 }
 
-inline bool Board::is_piece_left(Color c, unsigned int piece) const
+inline bool Board::is_piece_left(Color c, Piece piece) const
 {
-    LIBBOARDGAME_ASSERT(piece < get_nu_pieces());
+    LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_pieces());
     return m_nu_left_piece[c][piece] > 0;
 }
 
@@ -706,7 +701,7 @@ inline void Board::place(Color c, Move mv)
 {
     LIBBOARDGAME_ASSERT(mv.is_regular());
     const MoveInfo& info = m_board_const->get_move_info(mv);
-    unsigned int piece = info.piece;
+    Piece piece = info.piece;
     LIBBOARDGAME_ASSERT(m_nu_left_piece[c][piece] > 0);
     if (--m_nu_left_piece[c][piece] == 0)
         m_pieces_left[c].remove(piece);

@@ -50,7 +50,7 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_freePlacement(false),
       m_emptyBoardDirty(true),
       m_dirty(true),
-      m_selectedPiece(-1),
+      m_selectedPiece(Piece::null()),
       m_selectedPieceTransform(0),
       m_emptyBoardPixmap(0),
       m_boardPixmap(0),
@@ -88,7 +88,7 @@ void GuiBoard::clearMarkupFlag(Point p, MarkupFlag flag)
 
 void GuiBoard::clearSelectedPiece()
 {
-    m_selectedPiece = -1;
+    m_selectedPiece = Piece::null();
     m_selectedPieceTransform = 0;
     setSelectedPiecePoints();
     setMouseTracking(false);
@@ -117,7 +117,7 @@ void GuiBoard::copyFromBoard(const Board& bd)
 
 Move GuiBoard::findSelectedPieceMove()
 {
-    if (m_selectedPiece == -1 || m_selectedPieceOffset.is_null())
+    if (m_selectedPiece.is_null() || m_selectedPieceOffset.is_null())
         return Move::null();
     const PiecePoints& points =
         m_bd.get_piece_info(m_selectedPiece).get_points();
@@ -160,7 +160,7 @@ void GuiBoard::leaveEvent(QEvent*)
 
 void GuiBoard::mouseMoveEvent(QMouseEvent* event)
 {
-    if (m_selectedPiece == -1)
+    if (m_selectedPiece.is_null())
         return;
     CoordPoint oldOffset = m_selectedPieceOffset;
     setSelectedPieceOffset(*event);
@@ -170,7 +170,7 @@ void GuiBoard::mouseMoveEvent(QMouseEvent* event)
 
 void GuiBoard::mousePressEvent(QMouseEvent* event)
 {
-    if (m_selectedPiece == -1)
+    if (m_selectedPiece.is_null())
     {
         CoordPoint p = m_boardPainter.getCoordPoint(event->x(), event->y());
         if (m_bd.get_geometry().is_onboard(p))
@@ -183,7 +183,7 @@ void GuiBoard::mousePressEvent(QMouseEvent* event)
 
 void GuiBoard::moveSelectedPieceDown()
 {
-    if (m_selectedPiece == -1)
+    if (m_selectedPiece.is_null())
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -218,7 +218,7 @@ void GuiBoard::moveSelectedPieceDown()
 
 void GuiBoard::moveSelectedPieceLeft()
 {
-    if (m_selectedPiece == -1)
+    if (m_selectedPiece.is_null())
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -247,7 +247,7 @@ void GuiBoard::moveSelectedPieceLeft()
 
 void GuiBoard::moveSelectedPieceRight()
 {
-    if (m_selectedPiece == -1)
+    if (m_selectedPiece.is_null())
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -275,7 +275,7 @@ void GuiBoard::moveSelectedPieceRight()
 
 void GuiBoard::moveSelectedPieceUp()
 {
-    if (m_selectedPiece == -1)
+    if (m_selectedPiece.is_null())
         return;
     const Geometry& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
@@ -357,7 +357,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
     }
     else
     {
-        if (m_selectedPiece != -1 && ! m_selectedPieceOffset.is_null())
+        if (! m_selectedPiece.is_null() && ! m_selectedPieceOffset.is_null())
         {
             bool isLegal = ! findSelectedPieceMove().is_null();
             m_boardPainter.paintSelectedPiece(painter, m_selectedPieceColor,
@@ -373,14 +373,13 @@ void GuiBoard::placeSelectedPiece()
         emit play(m_selectedPieceColor, mv);
 }
 
-void GuiBoard::selectPiece(Color color, unsigned int piece)
+void GuiBoard::selectPiece(Color color, Piece piece)
 {
-    if (m_selectedPiece == static_cast<int>(piece)
-        && m_selectedPieceColor == color)
+    if (m_selectedPiece == piece && m_selectedPieceColor == color)
         return;
     m_selectedPieceColor = color;
     m_selectedPieceTransform = m_bd.get_transforms().get_default();
-    if (m_selectedPiece == -1)
+    if (m_selectedPiece.is_null())
         m_selectedPieceOffset = CoordPoint::null();
     m_selectedPiece = piece;
     setSelectedPieceOffset(m_selectedPieceOffset);
@@ -499,7 +498,7 @@ void GuiBoard::showMoveAnimation()
 void GuiBoard::setSelectedPiecePoints()
 {
     m_selectedPiecePoints.clear();
-    if (m_selectedPiece != -1 && m_selectedPieceOffset != CoordPoint::null())
+    if (! m_selectedPiece.is_null() && ! m_selectedPieceOffset.is_null())
     {
         int width = static_cast<int>(m_bd.get_geometry().get_width());
         int height = static_cast<int>(m_bd.get_geometry().get_height());

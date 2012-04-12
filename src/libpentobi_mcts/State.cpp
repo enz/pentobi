@@ -157,12 +157,12 @@ State::~State() throw()
 inline void State::add_moves(Point p, Color c)
 {
     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
-    BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-        if ((*m_is_piece_considered[c])[i])
-            add_moves(p, c, i, adj_status);
+    BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+        if ((*m_is_piece_considered[c])[piece])
+            add_moves(p, c, piece, adj_status);
 }
 
-inline void State::add_moves(Point p, Color c, unsigned int piece,
+inline void State::add_moves(Point p, Color c, Piece piece,
                              unsigned int adj_status)
 {
     ArrayList<Move, Move::range>& moves = m_moves[c];
@@ -575,7 +575,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
     }
 }
 
-inline const PieceConsideredTable& State::get_pieces_considered() const
+inline const PieceMap<bool>& State::get_pieces_considered() const
 {
     if (m_consider_all_pieces)
         return m_shared_const.is_piece_considered_all;
@@ -603,11 +603,11 @@ void State::init_move_list_with_local(Color c)
         Point p = find_best_starting_point(m_bd, c);
         if (! p.is_null())
         {
-            BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                if ((*m_is_piece_considered[c])[i])
+            BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+                if ((*m_is_piece_considered[c])[piece])
                 {
                     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
-                    BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
+                    BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
                         if (m_marker[mv])
                             continue;
@@ -650,11 +650,11 @@ void State::init_move_list_without_local(Color c)
         Point p = find_best_starting_point(m_bd, c);
         if (! p.is_null())
         {
-            BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                if ((*m_is_piece_considered[c])[i])
+            BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+                if ((*m_is_piece_considered[c])[piece])
                 {
                     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
-                    BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
+                    BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
                         if (m_shared_const.is_forbidden_at_root[c][mv]
                             || m_marker[mv])
@@ -674,10 +674,11 @@ void State::init_move_list_without_local(Color c)
             if (! m_bd.is_forbidden(p, c))
             {
                 unsigned int adj_status = m_bd.get_adj_status_index(p, c);
-                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
-                    if ((*m_is_piece_considered[c])[i])
+                BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+                    if ((*m_is_piece_considered[c])[piece])
                     {
-                        BOOST_FOREACH(Move mv, m_bd.get_moves(i, p, adj_status))
+                        BOOST_FOREACH(Move mv,
+                                      m_bd.get_moves(piece, p, adj_status))
                         {
                             if (m_marker[mv])
                                 continue;
@@ -923,10 +924,10 @@ void State::update_move_list(Color c)
     ArrayList<Move, Move::range>& moves = m_moves[c];
 
     // Find old moves that are still legal
-    unsigned int last_piece = numeric_limits<unsigned int>::max();
+    Piece last_piece = Piece::null();
     if (last_mv.is_regular())
     {
-        unsigned int piece = get_move_info(last_mv).piece;
+        Piece piece = get_move_info(last_mv).piece;
         if (m_bd.get_nu_left_piece(c, piece) == 0)
             last_piece = piece;
     }
@@ -956,13 +957,13 @@ void State::update_move_list(Color c)
     }
 
     // Generate moves for pieces that were not considered in the last position
-    const PieceConsideredTable& is_piece_considered = get_pieces_considered();
+    const PieceMap<bool>& is_piece_considered = get_pieces_considered();
     bool pieces_considered_changed = false;
-    BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+    BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
     {
-        LIBBOARDGAME_ASSERT(! ((*m_is_piece_considered[c])[i]
-                               && ! is_piece_considered[i]));
-        if (! (*m_is_piece_considered[c])[i] && is_piece_considered[i])
+        LIBBOARDGAME_ASSERT(! ((*m_is_piece_considered[c])[piece]
+                               && ! is_piece_considered[piece]));
+        if (! (*m_is_piece_considered[c])[piece] && is_piece_considered[piece])
         {
             pieces_considered_changed = true;
             break;
@@ -974,11 +975,11 @@ void State::update_move_list(Color c)
             if (! m_bd.is_forbidden(p, c))
             {
                 unsigned int adj_status = m_bd.get_adj_status_index(p, c);
-                BOOST_FOREACH(unsigned int i, m_bd.get_pieces_left(c))
+                BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                 {
-                    if (! (*m_is_piece_considered[c])[i]
-                        && is_piece_considered[i])
-                        add_moves(p, c, i, adj_status);
+                    if (! (*m_is_piece_considered[c])[piece]
+                        && is_piece_considered[piece])
+                        add_moves(p, c, piece, adj_status);
                 }
             }
         m_is_piece_considered[c] = &is_piece_considered;

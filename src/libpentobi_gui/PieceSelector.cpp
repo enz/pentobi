@@ -19,13 +19,14 @@ using boost::trim;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::log;
+using libpentobi_base::board_type_trigon;
+using libpentobi_base::board_type_trigon_3;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
-using libpentobi_base::board_type_trigon;
-using libpentobi_base::board_type_trigon_3;
-using libpentobi_base::game_variant_junior;
+using libpentobi_base::PieceMap;
 
 //-----------------------------------------------------------------------------
 
@@ -75,7 +76,7 @@ void PieceSelector::checkUpdate()
     bool changed = false;
     for (unsigned int x = 0; x < m_nuColumns; ++x)
         for (unsigned int y = 0; y < m_nuRows; ++y)
-            if (m_piece[x][y] != -1
+            if (! m_piece[x][y].is_null()
                 && disabledStatus[x][y] != m_disabledStatus[x][y])
             {
                 changed = true;
@@ -85,13 +86,12 @@ void PieceSelector::checkUpdate()
         update();
 }
 
-void PieceSelector::findPiecePoints(unsigned int piece,
-                                    unsigned int x, unsigned int y,
+void PieceSelector::findPiecePoints(Piece piece, unsigned int x, unsigned int y,
                                     PiecePoints& points) const
 {
     CoordPoint p(x, y);
-    if (x >= m_nuColumns || y >= m_nuRows
-        || m_piece[x][y] != static_cast<int>(piece) || points.contains(p))
+    if (x >= m_nuColumns || y >= m_nuRows || m_piece[x][y] != piece
+        || points.contains(p))
         return;
     points.push_back(p);
     // This assumes that no Trigon pieces touch at the corners, otherwise
@@ -144,18 +144,11 @@ void PieceSelector::init()
         {
             string name = pieceLayout->substr(y * m_nuColumns * 2 + x * 2, 2);
             trim(name);
-            int piece = -1;
+            Piece piece = Piece::null();
             if (name != ".")
             {
-                for (unsigned int i = 0; i < m_bd.get_nu_pieces(); ++i)
-                {
-                    if (m_bd.get_piece_info(i).get_name() == name)
-                    {
-                        piece = i;
-                        break;
-                    }
-                }
-                LIBBOARDGAME_ASSERT(piece != -1);
+                m_bd.get_piece_by_name(name, piece);
+                LIBBOARDGAME_ASSERT(! piece.is_null());
             }
             m_piece[x][y] = piece;
         }
@@ -163,8 +156,8 @@ void PieceSelector::init()
     for (unsigned int y = 0; y < m_nuRows; ++y)
         for (unsigned int x = 0; x < m_nuColumns; ++x)
         {
-            int piece = m_piece[x][y];
-            if (piece == -1)
+            Piece piece = m_piece[x][y];
+            if (piece.is_null())
                 continue;
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
@@ -189,8 +182,8 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
         return;
     int x = pixelX / m_fieldWidth;
     int y = pixelY / m_fieldHeight;
-    int piece = m_piece[x][y];
-    if (piece == -1 || m_disabledStatus[x][y])
+    Piece piece = m_piece[x][y];
+    if (piece.is_null() || m_disabledStatus[x][y])
         return;
     update();
     emit pieceSelected(m_color, piece, m_transform[x][y]);
@@ -227,8 +220,8 @@ void PieceSelector::paintEvent(QPaintEvent*)
     for (unsigned int x = 0; x < m_nuColumns; ++x)
         for (unsigned int y = 0; y < m_nuRows; ++y)
         {
-            int piece = m_piece[x][y];
-            if (piece != -1 && ! m_disabledStatus[x][y])
+            Piece piece = m_piece[x][y];
+            if (! piece.is_null() && ! m_disabledStatus[x][y])
             {
                 if (isTrigon)
                 {
@@ -258,15 +251,15 @@ void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
             marker[x][y] = false;
             disabledStatus[x][y] = false;
         }
-    array<unsigned int,Board::max_uniq_pieces> nuInstances;
+    PieceMap<unsigned int> nuInstances;
     nuInstances.fill(0);
     for (unsigned int x = 0; x < m_nuColumns; ++x)
         for (unsigned int y = 0; y < m_nuRows; ++y)
         {
             if (marker[x][y])
                 continue;
-            int piece = m_piece[x][y];
-            if (piece == -1)
+            Piece piece = m_piece[x][y];
+            if (piece.is_null())
                 continue;
             PiecePoints points;
             findPiecePoints(piece, x, y, points);

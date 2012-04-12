@@ -16,6 +16,7 @@ using libboardgame_base::CoordPoint;
 using libpentobi_base::Board;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
+using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 
@@ -39,7 +40,7 @@ public:
 
     const Grid<MarkupFlags>& getMarkupFlags() const;
 
-    int getSelectedPiece() const;
+    Piece getSelectedPiece() const;
 
     const Transform* getSelectedPieceTransform() const;
 
@@ -66,7 +67,7 @@ public slots:
 
     void clearSelectedPiece();
 
-    void selectPiece(Color color, unsigned int piece);
+    void selectPiece(Color color, Piece piece);
 
     void moveSelectedPieceLeft();
 
@@ -111,7 +112,7 @@ private:
 
     Board::PointStateGrid m_pointState;
 
-    int m_selectedPiece;
+    Piece m_selectedPiece;
 
     Color m_selectedPieceColor;
 
@@ -167,7 +168,7 @@ inline const Grid<QString>& GuiBoard::getLabels() const
     return m_labels;
 }
 
-inline int GuiBoard::getSelectedPiece() const
+inline Piece GuiBoard::getSelectedPiece() const
 {
     return m_selectedPiece;
 }

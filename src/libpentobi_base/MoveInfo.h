@@ -6,6 +6,7 @@
 #define LIBPENTOBI_BASE_MOVE_INFO_H
 
 #include "MovePoints.h"
+#include "Piece.h"
 #include "PieceInfo.h"
 
 namespace libpentobi_base {
@@ -16,7 +17,7 @@ using namespace std;
 
 struct MoveInfo
 {
-    unsigned int piece;
+    Piece piece;
 
     MovePoints points;
 
