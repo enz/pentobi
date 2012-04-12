@@ -238,7 +238,7 @@ Color Engine::get_color_arg(const Arguments& args, unsigned int i) const
         if (s == "4" || s == "green")
             return Color(3);
     }
-    if (variant == game_variant_duo)
+    if (variant == game_variant_duo || variant == game_variant_junior)
     {
         if (s == "blue" || s == "black" || s == "b")
             return Color(0);

@@ -91,7 +91,7 @@ def play_game(game_number, black, white, game_variant):
         black, white = white, black
     to_play = black
     other = white
-    if game_variant == "duo":
+    if game_variant == "duo" or game_variant == "junior":
         colors = [ "b", "w" ]
     else:
         colors = [ "blue", "yellow", "red", "green" ]
@@ -223,6 +223,8 @@ elif game_variant == "trigon_2":
     game_name = "Blokus Trigon Two-Player"
 elif game_variant == "duo":
     game_name = "Blokus Duo"
+elif game_variant == "junior":
+    game_name = "Blokus Junior"
 else:
     exit("invalid game variant: " + game_variant)
 black = GtpClient(black_cmd, "B")
