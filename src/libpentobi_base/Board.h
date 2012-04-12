@@ -293,13 +293,11 @@ public:
 
     bool find_move(const MovePoints& points, Move& move) const;
 
-    const Piece& get_piece(unsigned int n) const;
+    const PieceInfo& get_piece_info(unsigned int n) const;
 
     bool get_piece_by_name(const string& name, unsigned int& piece) const;
 
     const MovePoints& get_move_points(Move mv) const;
-
-    const Piece& get_move_piece(Move mv) const;
 
     const MoveInfo& get_move_info(Move move) const;
 
@@ -475,11 +473,6 @@ inline const MoveInfoExt& Board::get_move_info_ext(Move move) const
     return m_board_const->get_move_info_ext(move);
 }
 
-inline const Piece& Board::get_move_piece(Move mv) const
-{
-    return get_piece(get_move_info(mv).piece);
-}
-
 inline Board::LocalMovesListRange Board::get_moves(unsigned int piece,
                                            Point p,
                                            unsigned int adj_status_index) const
@@ -518,9 +511,9 @@ inline unsigned int Board::get_nu_pieces() const
     return m_board_const->get_nu_pieces();
 }
 
-inline const Piece& Board::get_piece(unsigned int n) const
+inline const PieceInfo& Board::get_piece_info(unsigned int n) const
 {
-    return m_board_const->get_piece(n);
+    return m_board_const->get_piece_info(n);
 }
 
 inline bool Board::get_piece_by_name(const string& name,

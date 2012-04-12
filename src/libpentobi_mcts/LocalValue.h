@@ -21,7 +21,7 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
-using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
 
@@ -99,7 +99,7 @@ inline unsigned int LocalValue::Compute::finish()
     // how many (attach points use a value of 0x10 adjacent points a value of
     // 0x01 during computation). This works only as long as there are not more
     // than 0x10 points covered by a piece.
-    static_assert(Piece::max_size < 0x10, "");
+    static_assert(PieceInfo::max_size < 0x10, "");
     if ((m_value & 0xf) != 0)
         return (m_value & 0xf0) + 1;
     else
@@ -134,7 +134,7 @@ inline void LocalValue::init(const Board& bd)
         Move mv = move.move;
         if (mv.is_pass())
             continue;
-        const ArrayList<Point,Piece::max_attach>& attach_points
+        const ArrayList<Point,PieceInfo::max_attach>& attach_points
             = bd.get_move_info(mv).attach_points;
         auto j = attach_points.begin();
         auto end = attach_points.end();

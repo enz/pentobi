@@ -87,7 +87,7 @@ void PieceSelector::checkUpdate()
 
 void PieceSelector::findPiecePoints(unsigned int piece,
                                     unsigned int x, unsigned int y,
-                                    Piece::Points& points) const
+                                    PiecePoints& points) const
 {
     CoordPoint p(x, y);
     if (x >= m_nuColumns || y >= m_nuRows
@@ -149,7 +149,7 @@ void PieceSelector::init()
             {
                 for (unsigned int i = 0; i < m_bd.get_nu_pieces(); ++i)
                 {
-                    if (m_bd.get_piece(i).get_name() == name)
+                    if (m_bd.get_piece_info(i).get_name() == name)
                     {
                         piece = i;
                         break;
@@ -166,14 +166,14 @@ void PieceSelector::init()
             int piece = m_piece[x][y];
             if (piece == -1)
                 continue;
-            Piece::Points points;
+            PiecePoints points;
             findPiecePoints(piece, x, y, points);
             // Mirror y to match the convention of CoordPoint coordinates
             BOOST_FOREACH(CoordPoint& p, points)
                 p.y = m_nuRows - p.y - 1;
             type_match_shift(geometry, points.begin(), points.end(), 0);
             m_transform[x][y] =
-                m_bd.get_piece(piece).find_transform(geometry, points);
+                m_bd.get_piece_info(piece).find_transform(geometry, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
         }
     setDisabledStatus(m_disabledStatus);
@@ -268,7 +268,7 @@ void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
             int piece = m_piece[x][y];
             if (piece == -1)
                 continue;
-            Piece::Points points;
+            PiecePoints points;
             findPiecePoints(piece, x, y, points);
             bool disabled = false;
             if (++nuInstances[piece] > m_bd.get_nu_left_piece(m_color, piece))

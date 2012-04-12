@@ -50,7 +50,7 @@ using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MoveInfo;
-using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Search;
 
@@ -1452,7 +1452,7 @@ void MainWindow::flipPieceHorizontally()
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_mirrored_horizontally(transform);
-    transform = bd.get_piece(piece).get_equivalent_transform(transform);
+    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -1465,7 +1465,7 @@ void MainWindow::flipPieceVertically()
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     const Board& bd = getBoard();
     transform = bd.get_transforms().get_mirrored_vertically(transform);
-    transform = bd.get_piece(piece).get_equivalent_transform(transform);
+    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -1882,7 +1882,7 @@ void MainWindow::nextTransform()
     if (piece == -1)
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
-    transform = getBoard().get_piece(piece).get_next_transform(transform);
+    transform = getBoard().get_piece_info(piece).get_next_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -2138,7 +2138,8 @@ void MainWindow::previousTransform()
     if (piece == -1)
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
-    transform = getBoard().get_piece(piece).get_previous_transform(transform);
+    transform =
+        getBoard().get_piece_info(piece).get_previous_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -2178,7 +2179,7 @@ void MainWindow::rotatePieceAnticlockwise()
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_rotated_anticlockwise(transform);
-    transform = bd.get_piece(piece).get_equivalent_transform(transform);
+    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
     updateFlipActions();
@@ -2192,7 +2193,7 @@ void MainWindow::rotatePieceClockwise()
     const Board& bd = getBoard();
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_rotated_clockwise(transform);
-    transform = bd.get_piece(piece).get_equivalent_transform(transform);
+    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
     updateFlipActions();
@@ -2330,7 +2331,7 @@ void MainWindow::selectPiece(Color c, unsigned int piece,
     m_orientationDisplay->selectColor(c);
     m_orientationDisplay->setSelectedPiece(piece);
     m_orientationDisplay->setSelectedPieceTransform(transform);
-    bool can_rotate = getBoard().get_piece(piece).can_rotate();
+    bool can_rotate = getBoard().get_piece_info(piece).can_rotate();
     m_actionRotatePieceClockwise->setEnabled(can_rotate);
     m_actionRotatePieceAnticlockwise->setEnabled(can_rotate);
     updateFlipActions();
@@ -2913,10 +2914,10 @@ void MainWindow::updateFlipActions()
         return;
     const Transform* transform = m_guiBoard->getSelectedPieceTransform();
     bool can_flip_horizontally =
-        getBoard().get_piece(piece).can_flip_horizontally(transform);
+        getBoard().get_piece_info(piece).can_flip_horizontally(transform);
     m_actionFlipPieceHorizontally->setEnabled(can_flip_horizontally);
     bool can_flip_vertically =
-        getBoard().get_piece(piece).can_flip_vertically(transform);
+        getBoard().get_piece_info(piece).can_flip_vertically(transform);
     m_actionFlipPieceVertically->setEnabled(can_flip_vertically);
 }
 

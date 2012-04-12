@@ -21,7 +21,7 @@ using libpentobi_base::board_type_trigon;
 using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
-using libpentobi_base::Piece;
+using libpentobi_base::PiecePoints;
 
 //-----------------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     painter.save();
     painter.translate(0.5 * (width() - displayWidth),
                       0.5 * (height() - displayHeight));
-    Piece::Points points = m_bd.get_piece(m_piece).get_points();
+    PiecePoints points = m_bd.get_piece_info(m_piece).get_points();
     m_transform->transform(points.begin(), points.end());
     const Geometry& geometry = m_bd.get_geometry();
     type_match_shift(geometry, points.begin(), points.end(),

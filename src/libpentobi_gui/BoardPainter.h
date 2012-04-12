@@ -18,7 +18,7 @@ using libpentobi_base::GameVariant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::MovePoints;
-using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 using libpentobi_base::StartingPoints;

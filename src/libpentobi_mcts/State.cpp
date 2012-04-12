@@ -44,7 +44,7 @@ using libpentobi_base::DiagIterator;
 using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::MoveInfo;
-using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 

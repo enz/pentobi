@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_BASE_MOVE_POINTS_H
 #define LIBPENTOBI_BASE_MOVE_POINTS_H
 
-#include "Piece.h"
+#include "PieceInfo.h"
 #include "Point.h"
 #include "libboardgame_util/ArrayList.h"
 
@@ -15,7 +15,7 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
-typedef ArrayList<Point, Piece::max_size> MovePoints;
+typedef ArrayList<Point, PieceInfo::max_size> MovePoints;
 
 //-----------------------------------------------------------------------------
 

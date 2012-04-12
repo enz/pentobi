@@ -20,7 +20,7 @@ using libboardgame_mcts::ChildIterator;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::log;
 using libpentobi_base::Board;
-using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Move;
 using libpentobi_mcts::State;

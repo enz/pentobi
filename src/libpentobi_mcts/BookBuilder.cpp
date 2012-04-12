@@ -263,7 +263,7 @@ vector<ColorMove> BookBuilder::generate_moves() const
     BOOST_FOREACH(Move mv, *m_moves)
     {
         const MoveInfo& info = m_bd->get_move_info(mv);
-        if (m_bd->get_piece(info.piece).get_size() >= min_piece_size)
+        if (m_bd->get_piece_info(info.piece).get_size() >= min_piece_size)
             result.push_back(ColorMove(c, mv));
     }
     return result;

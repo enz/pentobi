@@ -218,7 +218,7 @@ unsigned int Board::get_bonus(Color c) const
                 if (! mv.move.is_pass())
                 {
                     const MoveInfo& info = get_move_info(mv.move);
-                    if (get_piece(info.piece).get_size() == 1)
+                    if (get_piece_info(info.piece).get_size() == 1)
                         bonus += 5;
                 }
                 break;
@@ -244,7 +244,7 @@ unsigned int Board::get_points_left(Color c) const
 {
     unsigned int n = 0;
     BOOST_FOREACH(unsigned int i, m_pieces_left[c])
-        n += get_nu_left_piece(c, i) * get_piece(i).get_size();
+        n += get_nu_left_piece(c, i) * get_piece_info(i).get_size();
     return n;
 }
 
@@ -701,7 +701,7 @@ void Board::write_pieces_left(ostream& out, Color c, unsigned int begin,
             if (i > begin)
                 out << ' ';
             unsigned int piece = m_pieces_left[c][i];
-            out << get_piece(piece).get_name();
+            out << get_piece_info(piece).get_name();
             unsigned int nu_left = m_nu_left_piece[c][piece];
             if (nu_left > 1)
                 out << '(' << nu_left << ')';

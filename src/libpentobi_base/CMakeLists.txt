@@ -13,7 +13,7 @@ set(pentobi_base_STAT_SRCS
   Game.cpp
   GameVariant.cpp
   GameStateHistory.cpp
-  Piece.cpp
+  PieceInfo.cpp
   Player.cpp
   PieceTransforms.cpp
   PieceTransformsClassic.cpp

@@ -11,7 +11,7 @@
 using libboardgame_base::Transform;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
-using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 
 //-----------------------------------------------------------------------------
 

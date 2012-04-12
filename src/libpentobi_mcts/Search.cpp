@@ -94,8 +94,8 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
     }
     for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
     {
-        const Piece& piece = board_const.get_piece(i);
-        is_piece_considered[i] = (piece.get_size() >= min_piece_size);
+        const PieceInfo& piece_info = board_const.get_piece_info(i);
+        is_piece_considered[i] = (piece_info.get_size() >= min_piece_size);
     }
 }
 
@@ -133,7 +133,9 @@ bool Search::check_followup(vector<Move>& sequence)
 string Search::get_move_string(Move mv) const
 {
     const Board& bd = get_board();
-    return bd.get_move_piece(mv).get_name() + " " + bd.to_string(mv);
+    const MoveInfo& move_info = bd.get_move_info(mv);
+    const PieceInfo& piece_info = bd.get_piece_info(move_info.piece);
+    return piece_info.get_name() + " " + bd.to_string(mv);
 }
 
 void Search::on_start_search()

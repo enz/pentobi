@@ -13,7 +13,7 @@ using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Color;
 using libpentobi_base::Board;
-using libpentobi_base::Piece;
+using libpentobi_base::PiecePoints;
 
 //-----------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ private:
     qreal m_selectorHeight;
 
     void findPiecePoints(unsigned int piece, unsigned int x,
-                         unsigned int y, Piece::Points& points) const;
+                         unsigned int y, PiecePoints& points) const;
 
     void setDisabledStatus(bool disabledStatus[maxColumns][maxRows]);
 };

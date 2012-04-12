@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/Piece.cpp */
+/** @file libpentobi_base/PieceInfo.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include "Piece.h"
+#include "PieceInfo.h"
 
 #include <algorithm>
 #include <boost/foreach.hpp>
@@ -31,7 +31,7 @@ struct NormalizedPoints
 {
     /** The normalized points of the transformed piece.
         The points were shifted using GeometryUtil::normalize_offset(). */
-    Piece::Points points;
+    PiecePoints points;
 
     /** The point type of (0,0) in the normalized points. */
     unsigned int point_type;
@@ -46,7 +46,7 @@ struct NormalizedPoints
 /** Check consistency of transformations.
     Checks that the point list (which must be already sorted) has no
     duplicates. */
-bool check_consistency(const Piece::Points& points)
+bool check_consistency(const PiecePoints& points)
 {
     for (unsigned int i = 0; i < points.size(); ++i)
         if (i > 0 && points[i] == points[i - 1])
@@ -56,8 +56,8 @@ bool check_consistency(const Piece::Points& points)
 #endif // LIBBOARDGAME_DEBUG
 
 /** Bring piece points into a normal form that is constant under translation. */
-NormalizedPoints normalize(const Piece::Points& points, unsigned int point_type,
-                           const Geometry& geometry)
+NormalizedPoints normalize(const PiecePoints& points,
+                           unsigned int point_type, const Geometry& geometry)
 {
     if (log_piece_creation)
         log() << "Points " << points << '\n';
@@ -84,8 +84,9 @@ NormalizedPoints normalize(const Piece::Points& points, unsigned int point_type,
 
 //-----------------------------------------------------------------------------
 
-Piece::Piece(const string& name, const Piece::Points& points,
-             const Geometry& geometry, const PieceTransforms& transforms)
+PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
+                     const Geometry& geometry,
+                     const PieceTransforms& transforms)
     : m_name(name),
       m_points(points),
       m_transforms(&transforms)
@@ -95,7 +96,7 @@ Piece::Piece(const string& name, const Piece::Points& points,
               << ' ' << points << '\n';
     LIBBOARDGAME_ASSERT(points.contains(CoordPoint(0, 0)));
     vector<NormalizedPoints> all_transformed_points;
-    Piece::Points transformed_points;
+    PiecePoints transformed_points;
     BOOST_FOREACH(const Transform* transform, transforms.get_all())
     {
         if (log_piece_creation)
@@ -131,7 +132,7 @@ Piece::Piece(const string& name, const Piece::Points& points,
     };
 }
 
-bool Piece::can_flip_horizontally(const Transform* transform) const
+bool PieceInfo::can_flip_horizontally(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
     const Transform* flip = get_equivalent_transform(
@@ -139,7 +140,7 @@ bool Piece::can_flip_horizontally(const Transform* transform) const
     return flip != transform;
 }
 
-bool Piece::can_flip_vertically(const Transform* transform) const
+bool PieceInfo::can_flip_vertically(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
     const Transform* flip = get_equivalent_transform(
@@ -147,7 +148,7 @@ bool Piece::can_flip_vertically(const Transform* transform) const
     return flip != transform;
 }
 
-bool Piece::can_rotate() const
+bool PieceInfo::can_rotate() const
 {
     const Transform* transform = m_uniq_transforms[0];
     const Transform* rotate = get_equivalent_transform(
@@ -155,8 +156,8 @@ bool Piece::can_rotate() const
     return rotate != transform;
 }
 
-const Transform* Piece::find_transform(const Geometry& geometry,
-                                       const Points& points) const
+const Transform* PieceInfo::find_transform(const Geometry& geometry,
+                                           const Points& points) const
 {
     NormalizedPoints normalized =
         normalize(points, geometry.get_point_type(0, 0), geometry);
@@ -172,7 +173,7 @@ const Transform* Piece::find_transform(const Geometry& geometry,
     return 0;
 }
 
-const Transform* Piece::get_equivalent_transform(
+const Transform* PieceInfo::get_equivalent_transform(
                                                const Transform* transform) const
 {
     auto pos = m_equivalent_transform.find(transform);
@@ -184,7 +185,7 @@ const Transform* Piece::get_equivalent_transform(
     return pos->second;
 }
 
-const Transform* Piece::get_next_transform(const Transform* transform) const
+const Transform* PieceInfo::get_next_transform(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
     auto begin = m_uniq_transforms.begin();
@@ -197,7 +198,8 @@ const Transform* Piece::get_next_transform(const Transform* transform) const
         return *(pos + 1);
 }
 
-const Transform* Piece::get_previous_transform(const Transform* transform) const
+const Transform* PieceInfo::get_previous_transform(
+                                              const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
     auto begin = m_uniq_transforms.begin();

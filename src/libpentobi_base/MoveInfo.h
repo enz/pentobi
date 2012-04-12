@@ -6,7 +6,7 @@
 #define LIBPENTOBI_BASE_MOVE_INFO_H
 
 #include "MovePoints.h"
-#include "Piece.h"
+#include "PieceInfo.h"
 
 namespace libpentobi_base {
 
@@ -20,9 +20,9 @@ struct MoveInfo
 
     MovePoints points;
 
-    ArrayList<Point, Piece::max_adj> adj_points;
+    ArrayList<Point,PieceInfo::max_adj> adj_points;
 
-    ArrayList<Point, Piece::max_attach> attach_points;
+    ArrayList<Point,PieceInfo::max_attach> attach_points;
 };
 
 /** Non-frequently accessed move info.

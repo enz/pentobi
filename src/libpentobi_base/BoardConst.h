@@ -14,7 +14,7 @@
 #include "Move.h"
 #include "MoveInfo.h"
 #include "Point.h"
-#include "Piece.h"
+#include "PieceInfo.h"
 #include "PieceTransforms.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/ColorMap.h"
@@ -69,7 +69,7 @@ public:
 
     unsigned int get_total_piece_points() const;
 
-    const Piece& get_piece(unsigned int n) const;
+    const PieceInfo& get_piece_info(unsigned int n) const;
 
     bool get_piece_by_name(const string& name, unsigned int& piece) const;
 
@@ -131,7 +131,7 @@ private:
 
     const Geometry& m_geometry;
 
-    vector<Piece> m_pieces;
+    vector<PieceInfo> m_pieces;
 
     unique_ptr<PieceTransforms> m_transforms;
 
@@ -172,7 +172,7 @@ private:
     BoardConst(BoardType board_type, GameVariant game_variant);
 
     void create_move(unsigned int piece_index,
-                     const Piece::Points& coord_points, Point center);
+                     const PiecePoints& coord_points, Point center);
 
     void create_moves();
 
@@ -250,7 +250,7 @@ inline unsigned int BoardConst::get_nu_pieces() const
     return m_nu_pieces;
 }
 
-inline const Piece& BoardConst::get_piece(unsigned int n) const
+inline const PieceInfo& BoardConst::get_piece_info(unsigned int n) const
 {
     LIBBOARDGAME_ASSERT(n < m_pieces.size());
     return m_pieces[n];

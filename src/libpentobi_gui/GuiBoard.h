@@ -16,7 +16,7 @@ using libboardgame_base::CoordPoint;
 using libpentobi_base::Board;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
-using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 
 //-----------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/Piece.h */
+/** @file libpentobi_base/PieceInfo.h */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_BASE_PIECE_H
-#define LIBPENTOBI_BASE_PIECE_H
+#ifndef LIBPENTOBI_BASE_PIECE_INFO_H
+#define LIBPENTOBI_BASE_PIECE_INFO_H
 
 #include <map>
 #include <string>
@@ -23,7 +23,7 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
-class Piece
+class PieceInfo
 {
 public:
     /** Maximum number of fields of a piece. */
@@ -45,8 +45,8 @@ public:
         drawing a label on the piece.
         @param geometry
         @param transforms */
-    Piece(const string& name, const Piece::Points& points,
-          const Geometry& geometry, const PieceTransforms& transforms);
+    PieceInfo(const string& name, const Points& points,
+              const Geometry& geometry, const PieceTransforms& transforms);
 
     const string& get_name() const;
 
@@ -92,28 +92,32 @@ private:
     const PieceTransforms* m_transforms;
 };
 
-inline const string& Piece::get_name() const
+inline const string& PieceInfo::get_name() const
 {
     return m_name;
 }
 
-inline const Piece::Points& Piece::get_points() const
+inline const PieceInfo::Points& PieceInfo::get_points() const
 {
     return m_points;
 }
 
-inline unsigned int Piece::get_size() const
+inline unsigned int PieceInfo::get_size() const
 {
     return static_cast<unsigned int>(m_points.size());
 }
 
-inline const vector<const Transform*>& Piece::get_transforms() const
+inline const vector<const Transform*>& PieceInfo::get_transforms() const
 {
     return m_uniq_transforms;
 }
 
 //-----------------------------------------------------------------------------
 
+typedef PieceInfo::Points PiecePoints;
+
+//-----------------------------------------------------------------------------
+
 } // namespace libpentobi_base
 
-#endif // LIBPENTOBI_BASE_PIECE_H
+#endif // LIBPENTOBI_BASE_PIECE_INFO_H

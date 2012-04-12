@@ -23,7 +23,7 @@ using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
-using libpentobi_base::Piece;
+using libpentobi_base::PiecePoints;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 
@@ -119,7 +119,8 @@ Move GuiBoard::findSelectedPieceMove()
 {
     if (m_selectedPiece == -1 || m_selectedPieceOffset.is_null())
         return Move::null();
-    const Piece::Points& points = m_bd.get_piece(m_selectedPiece).get_points();
+    const PiecePoints& points =
+        m_bd.get_piece_info(m_selectedPiece).get_points();
     MovePoints movePoints;
     int width = static_cast<int>(m_bd.get_geometry().get_width());
     int height = static_cast<int>(m_bd.get_geometry().get_height());
@@ -503,7 +504,7 @@ void GuiBoard::setSelectedPiecePoints()
         int width = static_cast<int>(m_bd.get_geometry().get_width());
         int height = static_cast<int>(m_bd.get_geometry().get_height());
         BOOST_FOREACH(CoordPoint p,
-                      m_bd.get_piece(m_selectedPiece).get_points())
+                      m_bd.get_piece_info(m_selectedPiece).get_points())
         {
             p = m_selectedPieceTransform->get_transformed(p);
             int x = p.x + m_selectedPieceOffset.x;
