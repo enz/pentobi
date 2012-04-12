@@ -142,7 +142,7 @@ Move Player::genmove(const Board& bd, Color c)
         // less than 20 min (10 min for Duo) even on somewhat outdated PC
         // hardware. (This also takes the additional weighting of the number of
         // simulations depending on the move number into account.)
-        // The increase factor should be no less than 2-3 to produce a
+        // The increase factor should be no less than 3-4 to produce a
         // noticable effect on playing strength between levels.
         // The minimum number of simulations is very small to avoid that level
         // 1 is too strong for absolute beginners. Note that using the search
@@ -168,7 +168,7 @@ Move Player::genmove(const Board& bd, Color c)
         else if (variant == game_variant_junior)
         {
             minimum = 10;
-            factor_per_level = 5.8f; // TODO: needs update
+            factor_per_level = 6.09f;
         }
         else
         {
