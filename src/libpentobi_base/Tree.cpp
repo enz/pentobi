@@ -242,7 +242,7 @@ void Tree::init_game_variant(GameVariant game_variant)
         set_property(root, "GM", "Blokus Duo");
     }
     init_board_const(game_variant);
-    clear_modified();
+    set_modified(false);
 }
 
 void Tree::init(unique_ptr<Node>& root)
