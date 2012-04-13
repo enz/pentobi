@@ -125,7 +125,7 @@ public:
     /** Make the current node the first child of its parent. */
     void make_first_child();
 
-    void clear_modified();
+    void set_modified(bool modified);
 
     bool get_modified() const;
 
@@ -155,11 +155,6 @@ private:
 
     BoardUpdater m_updater;
 };
-
-inline void Game::clear_modified()
-{
-    m_tree.clear_modified();
-}
 
 inline double Game::get_bad_move() const
 {
@@ -314,6 +309,11 @@ inline void Game::set_good_move(double value)
 inline void Game::set_interesting_move()
 {
     m_tree.set_interesting_move(*m_current);
+}
+
+inline void Game::set_modified(bool modified)
+{
+    m_tree.set_modified(modified);
 }
 
 inline void Game::set_player_name(Color c, const string& name)

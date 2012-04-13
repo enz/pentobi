@@ -304,7 +304,7 @@ void Tree::init_game_variant(GameVariant game_variant)
     m_game_variant = game_variant;
     set_game_property();
     init_board_const(game_variant);
-    clear_modified();
+    set_modified(false);
 }
 
 void Tree::keep_only_position(const Node& node)

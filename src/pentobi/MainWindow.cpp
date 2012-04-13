@@ -1756,7 +1756,7 @@ void MainWindow::initGame()
     m_game->init();
     m_game->set_charset("UTF-8");
     m_game->set_date_today();
-    m_game->clear_modified();
+    m_game->set_modified(false);
     m_computerColor.fill(false);
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
@@ -1989,6 +1989,9 @@ void MainWindow::open(const QString& file, bool isTemporary)
     {
         showInvalidFile(file, e);
     }
+    if (isTemporary)
+        // Set as modified to enable the Save action in updateWindowModified()
+        m_game->set_modified(true);
     m_noMovesAvailableShown.fill(false);
     m_computerColor.fill(false);
     setupMode(false);
@@ -2210,7 +2213,7 @@ void MainWindow::save()
     }
     if (save(m_file))
     {
-        m_game->clear_modified();
+        m_game->set_modified(false);
         updateWindow(false);
     }
 }
@@ -2263,7 +2266,7 @@ void MainWindow::saveAs()
     {
         if (save(file))
         {
-            m_game->clear_modified();
+            m_game->set_modified(false);
             updateWindow(false);
         }
         setFile(file);
@@ -3081,7 +3084,6 @@ void MainWindow::updateWindowModified()
     }
     else
     {
-        bool is_modified = m_game->get_modified();
         setWindowModified(is_modified);
         m_actionSave->setEnabled(is_modified);
         m_actionSave->setToolTip(tr("Save (%1)").arg(m_file));
