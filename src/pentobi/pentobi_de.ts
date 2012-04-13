@@ -593,7 +593,7 @@
     <message>
         <location filename="MainWindow.cpp" line="1611"/>
         <source>Blokus games (*.blksgf);;All files (*.*)</source>
-        <translation>Blokus-Spiele (*.blksgf);;Alle Dateien (*.*)</translation>
+        <translation>Blokus-Partien (*.blksgf);;Alle Dateien (*.*)</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1681"/>
