@@ -73,7 +73,7 @@ bool Tree::get_move(const Node& node, GameVariant game_variant, Color& c,
                     MovePoints& points)
 {
     string id;
-    if (game_variant == game_variant_duo)
+    if (game_variant == game_variant_duo || game_variant == game_variant_junior)
     {
         if (node.has_property("B"))
         {
@@ -367,7 +367,8 @@ void Tree::set_game_property()
 void Tree::set_move(const Node& node, Color c, Move mv)
 {
     string id;
-    if (m_game_variant == game_variant_duo)
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
         id = (c == Color(0) ? "B" : "W");
     else
     {
@@ -440,7 +441,8 @@ void Tree::set_result(const Node& node, int score)
 const char* Tree::get_setup_prop_id(Color c) const
 {
     unsigned int i = c.to_int();
-    if (m_game_variant == game_variant_duo)
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
     {
         if (i == 0)
             return "AB";
@@ -489,7 +491,8 @@ void Tree::set_setup(const Node& node, const Setup& setup)
         set_setup_property(node, "A3", setup.placements[Color(2)]);
         break;
     default:
-        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo
+                            || m_game_variant == game_variant_junior);
         set_setup_property(node, "AB", setup.placements[Color(0)]);
         set_setup_property(node, "AW", setup.placements[Color(1)]);
     }
@@ -503,7 +506,8 @@ void Tree::set_setup(const Node& node, const Setup& setup)
         set_property(node, "PL", setup.to_play.to_int() + 1);
         break;
     default:
-        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo);
+        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo
+                            || m_game_variant == game_variant_junior);
         set_property(node, "PL", setup.to_play == Color(0) ? "B" : "W");
     }
 }

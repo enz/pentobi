@@ -395,7 +395,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         // in the game and we know that the playout is a loss because the
         // player has no more moves and the score is already negative.
         if (m_nu_moves_initial < 10 * nu_colors
-            && (variant == game_variant_duo
+            && (variant == game_variant_duo || variant == game_variant_junior
                 || ((variant == game_variant_classic_2
                      || variant == game_variant_trigon_2)
                     && ! m_has_moves[m_bd.get_second_color(to_play)])))

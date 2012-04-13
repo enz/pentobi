@@ -1761,10 +1761,12 @@ void MainWindow::initGame()
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
     {
-        if (m_game->get_game_variant() == game_variant_duo)
+        GameVariant game_variant = m_game->get_game_variant();
+        if (game_variant == game_variant_duo
+            || game_variant == game_variant_junior)
             m_computerColor[Color(1)] = true;
-        else if (m_game->get_game_variant() == game_variant_classic_2
-                 || m_game->get_game_variant() == game_variant_trigon_2)
+        else if (game_variant == game_variant_classic_2
+                 || game_variant == game_variant_trigon_2)
         {
             m_computerColor[Color(1)] = true;
             m_computerColor[Color(3)] = true;
@@ -2821,8 +2823,10 @@ void MainWindow::showNoMovesAvailable(Color c)
     QString text;
     if (c == Color(0))
         text = tr("Blue has no more moves available.");
-    else if ((variant == game_variant_duo && c == Color(1))
-             || (variant != game_variant_duo && c == Color(3)))
+    else if (((variant == game_variant_duo || variant == game_variant_junior)
+              && c == Color(1))
+             || (variant != game_variant_duo
+                 && variant != game_variant_junior && c == Color(3)))
         text = tr("Green has no more moves available.");
     else if (c == Color(1))
         text = tr("Yellow has no more moves available.");

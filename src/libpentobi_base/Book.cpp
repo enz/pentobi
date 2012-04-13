@@ -40,7 +40,8 @@ Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
                       PointTransfIdent<Point>(), PointTransfIdent<Point>());
     if (! mv.is_null())
         return mv;
-    if (bd.get_game_variant() == game_variant_duo)
+    GameVariant game_variant = bd.get_game_variant();
+    if (game_variant == game_variant_duo || game_variant == game_variant_junior)
         mv = genmove(bd, c, delta, max_delta,
                      PointTransfRot270Refl<Point>(),
                      PointTransfRot270Refl<Point>());

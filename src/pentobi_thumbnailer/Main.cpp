@@ -32,6 +32,7 @@ using libboardgame_sgf::TreeReader;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::game_variant_trigon;
 using libpentobi_base::game_variant_trigon_2;
 using libpentobi_base::game_variant_trigon_3;
@@ -110,6 +111,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
     switch (gameVariant)
     {
     case game_variant_duo:
+    case game_variant_junior:
         geometry = RectGeometry<Point>::get(14, 14);
         break;
     case game_variant_classic:

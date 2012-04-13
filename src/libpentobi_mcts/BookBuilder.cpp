@@ -38,6 +38,7 @@ using libboardgame_util::Exception;
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
+using libpentobi_base::game_variant_junior;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
 using libpentobi_base::Move;
@@ -63,6 +64,7 @@ BookBuilder::BookBuilder(GameVariant game_variant)
     m_moves(new ArrayList<Move, Move::range>)
 {
     if (game_variant != game_variant_duo
+        && game_variant != game_variant_junior
         && game_variant != game_variant_classic_2)
         throw Exception("BookBuilder supports only two-player game variants");
     m_expansion_parameter = 40; // TODO: Make configurable
@@ -71,7 +73,8 @@ BookBuilder::BookBuilder(GameVariant game_variant)
 void BookBuilder::add_leaf(const vector<ColorMove>& sequence, ColorMove mv)
 {
     add_leaf(sequence, mv, PointTransfIdent<Point>());
-    if (m_game_variant == game_variant_duo)
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
         add_leaf(sequence, mv, PointTransfRot270Refl<Point>());
 }
 
@@ -94,7 +97,8 @@ void BookBuilder::add_leaf(const vector<ColorMove>& sequence, ColorMove mv,
 void BookBuilder::add_value(const vector<ColorMove>& sequence, double value)
 {
     add_value(sequence, value, PointTransfIdent<Point>());
-    if (m_game_variant == game_variant_duo)
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
         add_value(sequence, value, PointTransfRot270Refl<Point>());
 }
 
@@ -244,7 +248,8 @@ vector<ColorMove> BookBuilder::generate_moves() const
     m_bd->gen_moves(c, *m_moves);
     unsigned int min_piece_size = 0;
     unsigned int nu_moves = m_bd->get_nu_moves();
-    if (m_game_variant == game_variant_duo)
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
     {
         if (nu_moves < 4)
             min_piece_size = 5;
