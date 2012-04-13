@@ -85,6 +85,16 @@ bool Tree::get_move(const Node& node, GameVariant game_variant, Color& c,
             id = "W";
             c = Color(1);
         }
+        else if (node.has_property("1"))
+        {
+            id = "1";
+            c = Color(0);
+        }
+        else if (node.has_property("2"))
+        {
+            id = "2";
+            c = Color(1);
+        }
     }
     else
     {
