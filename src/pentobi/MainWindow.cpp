@@ -709,7 +709,7 @@ void MainWindow::createActions()
     connect(m_actionGameVariantDuo, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantDuo(bool)));
 
-    m_actionGameVariantJunior = new QAction(tr("&Junior"), this);
+    m_actionGameVariantJunior = new QAction(tr("J&unior"), this);
     m_actionGameVariantJunior->setActionGroup(groupGameVariant);
     m_actionGameVariantJunior->setCheckable(true);
     connect(m_actionGameVariantJunior, SIGNAL(triggered(bool)),
