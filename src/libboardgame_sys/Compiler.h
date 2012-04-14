@@ -10,11 +10,11 @@ namespace libboardgame_sys {
 //-----------------------------------------------------------------------------
 
 #if defined __GNUC__
-#define LIBBOARDGAME_FORCE_INLINE __attribute__((always_inline))
+#define LIBBOARDGAME_FORCE_INLINE inline __attribute__((always_inline))
 #elif defined _MSC_VER
-#define LIBBOARDGAME_FORCE_INLINE __forceinline
+#define LIBBOARDGAME_FORCE_INLINE inline __forceinline
 #else
-#define LIBBOARDGAME_FORCE_INLINE
+#define LIBBOARDGAME_FORCE_INLINE inline
 #endif
 
 #if defined __GNUC__ && ! defined __ICC &&  ! defined __clang__ && \
