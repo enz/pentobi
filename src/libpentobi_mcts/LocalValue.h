@@ -135,7 +135,7 @@ inline void LocalValue::init(const Board& bd)
         if (mv.is_pass())
             continue;
         const ArrayList<Point,PieceInfo::max_attach>& attach_points
-            = bd.get_move_info(mv).attach_points;
+            = bd.get_move_info_ext(mv).attach_points;
         auto j = attach_points.begin();
         auto end = attach_points.end();
         LIBBOARDGAME_ASSERT(j != end);

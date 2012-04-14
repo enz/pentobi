@@ -646,7 +646,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     info.piece = piece;
     info.points = points;
     info_ext.center = center;
-    set_adj_and_attach_points(info);
+    set_adj_and_attach_points(info, info_ext);
     m_move_info.push_back(info);
     m_move_info_ext.push_back(info_ext);
     Move move(static_cast<unsigned int>(m_move_info.size() - 1));
@@ -655,9 +655,9 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
         Grid<char> grid(m_geometry, '.');
         BOOST_FOREACH(Point p, info.points)
             grid[p] = 'O';
-        BOOST_FOREACH(Point p, info.adj_points)
+        BOOST_FOREACH(Point p, info_ext.adj_points)
             grid[p] = '+';
-        BOOST_FOREACH(Point p, info.attach_points)
+        BOOST_FOREACH(Point p, info_ext.attach_points)
             grid[p] = '*';
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
@@ -908,31 +908,32 @@ bool BoardConst::is_compatible_with_adj_status(Point p,
     return true;
 }
 
-void BoardConst::set_adj_and_attach_points(MoveInfo& info)
+void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
+                                           MoveInfoExt& info_ext)
 {
     auto begin = info.points.begin();
     auto end = info.points.end();
     m_marker.clear();
     for (auto i = begin; i != end; ++i)
         m_marker.set(*i);
-    info.adj_points.clear();
+    info_ext.adj_points.clear();
     for (auto i = begin; i != end; ++i)
         for (AdjIterator j(m_geometry, *i); j; ++j)
             if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
-                info.adj_points.push_back(*j);
+                info_ext.adj_points.push_back(*j);
             }
-    info.attach_points.clear();
+    info_ext.attach_points.clear();
     for (auto i = begin; i != end; ++i)
         for (DiagIterator j(m_geometry, *i); j; ++j)
             if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
-                info.attach_points.push_back(*j);
+                info_ext.attach_points.push_back(*j);
             }
     m_max_attach_points[info.piece] =
-        max(m_max_attach_points[info.piece], info.attach_points.size());
+        max(m_max_attach_points[info.piece], info_ext.attach_points.size());
 }
 
 string BoardConst::to_string(Move mv, bool with_piece_name) const

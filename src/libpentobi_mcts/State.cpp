@@ -44,6 +44,7 @@ using libpentobi_base::DiagIterator;
 using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::MoveInfo;
+using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
@@ -279,6 +280,7 @@ void State::compute_features()
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = get_move_info(moves[i]);
+        const MoveInfoExt& info_ext = m_bd.get_move_info_ext(moves[i]);
         MoveFeatures& features = m_features[i];
         features.heuristic = 0;
         features.connect = false;
@@ -292,8 +294,8 @@ void State::compute_features()
             ++j;
         }
         while (j != end);
-        j = info.attach_points.begin();
-        end = info.attach_points.end();
+        j = info_ext.attach_points.begin();
+        end = info_ext.attach_points.end();
         LIBBOARDGAME_ASSERT(j != end);
         do
         {
@@ -301,8 +303,8 @@ void State::compute_features()
             ++j;
         }
         while (j != end);
-        j = info.adj_points.begin();
-        end = info.adj_points.end();
+        j = info_ext.adj_points.begin();
+        end = info_ext.adj_points.end();
         LIBBOARDGAME_ASSERT(j != end);
         do
         {
@@ -950,7 +952,7 @@ void State::update_move_list(Color c)
     // Find new legal moves because of the last piece played by this color
     if (last_mv.is_regular())
     {
-        BOOST_FOREACH(Point p, get_move_info(last_mv).attach_points)
+        BOOST_FOREACH(Point p, m_bd.get_move_info_ext(last_mv).attach_points)
             if (! m_bd.is_forbidden(p, c)
                 && is_only_move_diag(m_bd, p, c, last_mv))
                 add_moves(p, c);

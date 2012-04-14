@@ -187,7 +187,7 @@ private:
     bool is_compatible_with_adj_status(Point p, unsigned int adj_status_index,
                                        const MovePoints& points) const;
 
-    void set_adj_and_attach_points(MoveInfo& info);
+    void set_adj_and_attach_points(const MoveInfo& info, MoveInfoExt& info_ext);
 };
 
 inline BoardType BoardConst::get_board_type() const

@@ -50,6 +50,7 @@ using libpentobi_base::game_variant_trigon_3;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MoveInfo;
+using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Search;
@@ -140,8 +141,9 @@ void setIconFromTheme(QAction* action, const QString& name)
 float getMoveHeuristic(const Board& bd, Move mv)
 {
     const MoveInfo& info = bd.get_move_info(mv);
-    return (1000 * info.points.size() + 10 * info.attach_points.size()
-            - info.adj_points.size());
+    const MoveInfoExt& info_ext = bd.get_move_info_ext(mv);
+    return (1000 * info.points.size() + 10 * info_ext.attach_points.size()
+            - info_ext.adj_points.size());
 }
 
 /** Comparison for sorting move list in Find Move. */

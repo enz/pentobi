@@ -701,6 +701,7 @@ inline void Board::place(Color c, Move mv)
 {
     LIBBOARDGAME_ASSERT(mv.is_regular());
     const MoveInfo& info = m_board_const->get_move_info(mv);
+    const MoveInfoExt& info_ext = m_board_const->get_move_info_ext(mv);
     Piece piece = info.piece;
     LIBBOARDGAME_ASSERT(m_nu_left_piece[c][piece] > 0);
     if (--m_nu_left_piece[c][piece] == 0)
@@ -718,8 +719,8 @@ inline void Board::place(Color c, Move mv)
         ++i;
     }
     while (i != end);
-    i = info.adj_points.begin();
-    end = info.adj_points.end();
+    i = info_ext.adj_points.begin();
+    end = info_ext.adj_points.end();
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
@@ -727,8 +728,8 @@ inline void Board::place(Color c, Move mv)
         ++i;
     }
     while (i != end);
-    i = info.attach_points.begin();
-    end = info.attach_points.end();
+    i = info_ext.attach_points.begin();
+    end = info_ext.attach_points.end();
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
