@@ -702,10 +702,14 @@ void Board::write_pieces_left(ostream& out, Color c, unsigned int begin,
             if (i > begin)
                 out << ' ';
             Piece piece = m_pieces_left[c][i];
-            out << get_piece_info(piece).get_name();
+            const string& name = get_piece_info(piece).get_name();
             unsigned int nu_left = m_nu_left_piece[c][piece];
-            if (nu_left > 1)
-                out << '(' << nu_left << ')';
+            for (unsigned int j = 0; j < nu_left; ++j)
+            {
+                if (j > 0)
+                    out << ' ';
+                out << name;
+            }
         }
 }
 
