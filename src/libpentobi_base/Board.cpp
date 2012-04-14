@@ -657,12 +657,18 @@ void Board::write_color_info_line1(ostream& out, Color c) const
 
 void Board::write_color_info_line2(ostream& out, Color c) const
 {
-    write_pieces_left(out, c, 0, 10);
+    if (m_game_variant == game_variant_junior)
+        write_pieces_left(out, c, 0, 6);
+    else
+        write_pieces_left(out, c, 0, 10);
 }
 
 void Board::write_color_info_line3(ostream& out, Color c) const
 {
-    write_pieces_left(out, c, 10, get_nu_pieces());
+    if (m_game_variant == game_variant_junior)
+        write_pieces_left(out, c, 6, get_nu_pieces());
+    else
+        write_pieces_left(out, c, 10, get_nu_pieces());
 }
 
 void Board::write_info_line(ostream& out, unsigned int y) const
