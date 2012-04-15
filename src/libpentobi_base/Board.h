@@ -137,8 +137,20 @@ public:
 
     const PointStateGrid& get_grid() const;
 
+    /** Get next color to play.
+        The next color to play is the next color of the color of the last move
+        played even if it has no more moves to play (apart from a pass
+        move). */
     Color get_to_play() const;
 
+    /** Get next color to play that still has moves.
+        This function can also be used to guess the color to play in positions
+        that cannot occur in real games (where a color may not pass if it still
+        has moves). The effective color to play is the color with the least
+        number of pieces on the board that still has moves available. In case
+        of a tie, the first color found is preferred. Colors are tried in their
+        playing order starting with get_to_play(). If no color has moves left,
+        get_to_play() is returned. */
     Color get_effective_to_play() const;
 
     const PiecesLeftList& get_pieces_left(Color c) const;
@@ -170,7 +182,7 @@ public:
 
     /** Get potential attachment points for a color.
         Does not check if the point is forbidden.. */
-    const PointList&  get_attach_points(Color c) const;
+    const PointList& get_attach_points(Color c) const;
 
     /** Initialize the current board for a given game variant.
         @param game_variant The game variant
@@ -227,6 +239,11 @@ public:
         This is the number of setup pieces, if the board was initialized
         with a setup position, plus the number of pieces played as moves. */
     unsigned int get_nu_onboard_pieces() const;
+
+    /** Get the number of pieces on board of a color.
+        This is the number of setup pieces, if the board was initialized
+        with a setup position, plus the number of pieces played as moves. */
+    unsigned int get_nu_onboard_pieces(Color c) const;
 
     ColorMove get_move(unsigned int n) const;
 
@@ -351,7 +368,9 @@ private:
 
     ArrayList<ColorMove, max_game_moves> m_moves;
 
-    unsigned int m_nu_onboard_pieces;
+    ColorMap<unsigned int> m_nu_onboard_pieces;
+
+    unsigned int m_nu_onboard_pieces_all;
 
     ColorMap<char> m_color_char;
 
@@ -494,7 +513,12 @@ inline unsigned int Board::get_nu_moves() const
 
 inline unsigned int Board::get_nu_onboard_pieces() const
 {
-    return m_nu_onboard_pieces;
+    return m_nu_onboard_pieces_all;
+}
+
+inline unsigned int Board::get_nu_onboard_pieces(Color c) const
+{
+    return m_nu_onboard_pieces[c];
 }
 
 inline const MovePoints& Board::get_move_points(Move mv) const
@@ -706,7 +730,8 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(m_nu_left_piece[c][piece] > 0);
     if (--m_nu_left_piece[c][piece] == 0)
         m_pieces_left[c].remove(piece);
-    ++m_nu_onboard_pieces;
+    ++m_nu_onboard_pieces_all;
+    ++m_nu_onboard_pieces[c];
     m_is_first_piece[c] = false;
     auto i = info.points.begin();
     auto end = info.points.end();

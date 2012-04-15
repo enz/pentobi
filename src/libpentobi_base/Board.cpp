@@ -143,9 +143,10 @@ void Board::copy_from(const Board& bd)
         m_is_first_piece[*i] = bd.m_is_first_piece[*i];
         m_nu_left_piece[*i] = bd.m_nu_left_piece[*i];
         m_setup.placements[*i] = bd.m_setup.placements[*i];
+        m_nu_onboard_pieces[*i] = bd.m_nu_onboard_pieces[*i];
     }
     m_moves = bd.m_moves;
-    m_nu_onboard_pieces = bd.m_nu_onboard_pieces;
+    m_nu_onboard_pieces_all = bd.m_nu_onboard_pieces_all;
     m_to_play = bd.m_to_play;
 }
 
@@ -231,14 +232,24 @@ unsigned int Board::get_bonus(Color c) const
 
 Color Board::get_effective_to_play() const
 {
+    Color effective_to_play = m_to_play;
+    unsigned int min_pieces = numeric_limits<unsigned int>::max();
     Color c = m_to_play;
-    for (unsigned int i = 0; i < m_nu_colors; ++i)
+    do
     {
         if (has_moves(c))
-            return c;
+        {
+            unsigned int pieces = get_nu_onboard_pieces(c);
+            if (pieces < min_pieces)
+            {
+                effective_to_play = c;
+                min_pieces = pieces;
+            }
+        }
         c = c.get_next(m_nu_colors);
     }
-    return m_to_play;
+    while (c != m_to_play);
+    return effective_to_play;
 }
 
 unsigned int Board::get_points_left(Color c) const
@@ -380,6 +391,7 @@ void Board::init(GameVariant game_variant, const Setup* setup)
         m_attach_points[*i].clear();
         m_is_first_piece[*i] = true; 
         m_pieces_left[*i].clear();
+        m_nu_onboard_pieces[*i] = 0;
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)
             m_pieces_left[*i].push_back(Piece(j));
         if (game_variant == game_variant_junior)
@@ -387,7 +399,7 @@ void Board::init(GameVariant game_variant, const Setup* setup)
         else
             m_nu_left_piece[*i].fill(1);
     }
-    m_nu_onboard_pieces = 0;
+    m_nu_onboard_pieces_all = 0;
     if (setup == 0)
     {
         m_setup.clear();

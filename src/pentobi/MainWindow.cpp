@@ -1700,6 +1700,7 @@ void MainWindow::gotoNode(const Node& node)
         showInvalidFile(m_file, e);
         return;
     }
+    m_toPlay = m_game->get_effective_to_play();
     m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
     if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
@@ -1985,6 +1986,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_game->init(tree);
         if (! Tree::has_setup(m_game->get_root()))
             m_game->goto_node(get_last_node(m_game->get_root()));
+        m_toPlay = m_game->get_effective_to_play();
         initPieceSelectors();
     }
     catch (const InvalidTree& e)
@@ -2066,6 +2068,7 @@ void MainWindow::play(Color c, Move mv)
     m_game->play(c, mv, false);
     c = m_game->get_to_play();
     m_gameFinished = false;
+    Color effective_to_play = m_game->get_effective_to_play();
     if (bd.is_game_over())
     {
         updateWindow(true);
@@ -2073,14 +2076,14 @@ void MainWindow::play(Color c, Move mv)
         showGameOver();
         m_gameFinished = true;
         deleteAutoSaveFile();
+        return;
     }
-    else if (! bd.has_moves(c))
+    updateWindow(true);
+    repaint();
+    if (! bd.has_moves(c))
     {
-        updateWindow(true);
-        repaint();
         if (! computerPlaysAll())
         {
-            Color effective_to_play = m_game->get_effective_to_play();
             while (c != effective_to_play)
             {
                 if (! m_noMovesAvailableShown[c])
@@ -2093,13 +2096,10 @@ void MainWindow::play(Color c, Move mv)
                     break;
             }
         }
-        checkComputerMove();
     }
-    else
-    {
-        updateWindow(true);
-        checkComputerMove();
-    }
+    m_toPlay = effective_to_play;
+    updateWindow(true);
+    checkComputerMove();
 }
 
 void MainWindow::pointClicked(Point p)
@@ -3029,14 +3029,10 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_legalMoves->clear();
     m_legalMoveIndex = 0;
     bool isGameOver = bd.is_game_over();
-    if (! m_actionSetupMode->isChecked())
-    {
-        m_toPlay = m_game->get_effective_to_play();
-        if (isGameOver)
-            m_orientationDisplay->clearSelectedColor();
-        else
-            m_orientationDisplay->selectColor(m_toPlay);
-    }
+    if (isGameOver && ! m_actionSetupMode->isChecked())
+        m_orientationDisplay->clearSelectedColor();
+    else
+        m_orientationDisplay->selectColor(m_toPlay);
     if (currentNodeChanged)
     {
         clearSelectedPiece();
