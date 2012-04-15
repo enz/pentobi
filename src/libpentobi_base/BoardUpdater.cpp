@@ -22,10 +22,12 @@ using libpentobi_base::boardutil::get_current_position_as_setup;
 
 namespace {
 
+typedef ArrayList<Piece,2 * Piece::max_pieces> AllPiecesLeftList;
+
 /** Helper function used in init_setup. */
 void handle_setup_property(const Node& node, const char* id, Color c,
                            const Board& bd, Setup& setup,
-                           ColorMap<Board::PiecesLeftList>& pieces_left)
+                           ColorMap<AllPiecesLeftList>& pieces_left)
 {
     if (! node.has_property(id))
         return;
@@ -50,7 +52,7 @@ void handle_setup_property(const Node& node, const char* id, Color c,
 
 /** Helper function used in init_setup. */
 void handle_setup_empty(const Node& node, const Board& bd, Setup& setup,
-                        ColorMap<Board::PiecesLeftList>& pieces_left)
+                        ColorMap<AllPiecesLeftList>& pieces_left)
 {
     if (! node.has_property("AE"))
         return;
@@ -89,17 +91,27 @@ void init_setup(Board& bd, const Node& node)
 {
     Setup setup;
     get_current_position_as_setup(bd, setup);
-    ColorMap<Board::PiecesLeftList> pieces_left;
+    GameVariant game_variant = bd.get_game_variant();
+    unsigned int nu_instances;
+    if (game_variant == game_variant_junior)
+        nu_instances = 2;
+    else
+        nu_instances = 1;
+    ColorMap<AllPiecesLeftList> all_pieces_left;
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        pieces_left[*i] = bd.get_pieces_left(*i);
-    handle_setup_property(node, "A1", Color(0), bd, setup, pieces_left);
-    handle_setup_property(node, "A2", Color(1), bd, setup, pieces_left);
-    handle_setup_property(node, "A3", Color(2), bd, setup, pieces_left);
-    handle_setup_property(node, "A4", Color(3), bd, setup, pieces_left);
+        BOOST_FOREACH(Piece piece, bd.get_pieces_left(*i))
+        {
+            for (unsigned int j = 0; j < nu_instances; ++j)
+                all_pieces_left[*i].push_back(piece);
+        }
+    handle_setup_property(node, "A1", Color(0), bd, setup, all_pieces_left);
+    handle_setup_property(node, "A2", Color(1), bd, setup, all_pieces_left);
+    handle_setup_property(node, "A3", Color(2), bd, setup, all_pieces_left);
+    handle_setup_property(node, "A4", Color(3), bd, setup, all_pieces_left);
     // AB, AW are equivalent to A1, A2 but only used in games with two colors
-    handle_setup_property(node, "AB", Color(0), bd, setup, pieces_left);
-    handle_setup_property(node, "AW", Color(1), bd, setup, pieces_left);
-    handle_setup_empty(node, bd, setup, pieces_left);
+    handle_setup_property(node, "AB", Color(0), bd, setup, all_pieces_left);
+    handle_setup_property(node, "AW", Color(1), bd, setup, all_pieces_left);
+    handle_setup_empty(node, bd, setup, all_pieces_left);
     if (node.has_property("PL"))
     {
         string value = node.get_property("PL");
@@ -145,7 +157,7 @@ void BoardUpdater::update(const Node& node)
         if (! mv.is_null())
         {
             const MoveInfo& info = m_bd.get_move_info(mv.move);
-            if (! m_bd.get_pieces_left(mv.color).contains(info.piece))
+            if (m_bd.get_nu_left_piece(mv.color, info.piece) == 0)
                 throw InvalidTree("piece played twice");
             m_bd.play(mv);
         }
