@@ -9,6 +9,7 @@
 #include <cassert>
 #include <cstddef>
 #include <iostream>
+#include <limits>
 #include "Assert.h"
 
 namespace libboardgame_util {
