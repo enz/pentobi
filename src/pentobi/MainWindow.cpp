@@ -699,7 +699,7 @@ void MainWindow::createActions()
     connect(m_actionGameVariantClassic, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantClassic(bool)));
 
-    m_actionGameVariantClassic2 = new QAction(tr("Cl&assic Two-Player"), this);
+    m_actionGameVariantClassic2 = new QAction(tr("Classic T&wo-Player"), this);
     m_actionGameVariantClassic2->setActionGroup(groupGameVariant);
     m_actionGameVariantClassic2->setCheckable(true);
     connect(m_actionGameVariantClassic2, SIGNAL(triggered(bool)),
@@ -723,13 +723,13 @@ void MainWindow::createActions()
     connect(m_actionGameVariantTrigon, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantTrigon(bool)));
 
-    m_actionGameVariantTrigon2 = new QAction(tr("T&rigon Two-Player"), this);
+    m_actionGameVariantTrigon2 = new QAction(tr("Trigon Tw&o-Player"), this);
     m_actionGameVariantTrigon2->setActionGroup(groupGameVariant);
     m_actionGameVariantTrigon2->setCheckable(true);
     connect(m_actionGameVariantTrigon2, SIGNAL(triggered(bool)),
             this, SLOT(gameVariantTrigon2(bool)));
 
-    m_actionGameVariantTrigon3 = new QAction(tr("Tri&gon Three-Player"), this);
+    m_actionGameVariantTrigon3 = new QAction(tr("Trigon Thr&ee-Player"), this);
     m_actionGameVariantTrigon3->setActionGroup(groupGameVariant);
     m_actionGameVariantTrigon3->setCheckable(true);
     connect(m_actionGameVariantTrigon3, SIGNAL(triggered(bool)),
