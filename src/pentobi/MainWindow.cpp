@@ -12,7 +12,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <boost/algorithm/string/trim.hpp>
-#include "SettingsDialog.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
@@ -1018,10 +1017,6 @@ void MainWindow::createActions()
     connect(m_actionSelectPieceZ, SIGNAL(triggered()),
             this, SLOT(selectPieceZ()));
 
-    m_actionSettings = new QAction(tr("S&ettings"), this);
-    connect(m_actionSettings, SIGNAL(triggered()),
-            this, SLOT(settings()));
-
     m_actionSetupMode = new QAction(tr("Set&up Mode"), this);
     m_actionSetupMode->setCheckable(true);
     connect(m_actionSetupMode, SIGNAL(triggered(bool)),
@@ -1158,8 +1153,6 @@ void MainWindow::createMenu()
     menuEdit->addSeparator();
     menuEdit->addAction(m_actionSetupMode);
     menuEdit->addAction(m_actionSelectNextColor);
-    menuEdit->addSeparator();
-    menuEdit->addAction(m_actionSettings);
 
     QMenu* menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
@@ -1701,7 +1694,6 @@ void MainWindow::gotoNode(const Node& node)
         return;
     }
     m_toPlay = m_game->get_effective_to_play();
-    m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
     if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
@@ -1777,7 +1769,6 @@ void MainWindow::initGame()
     }
     m_toPlay = Color(0);
     setupMode(false);
-    m_noMovesAvailableShown.fill(false);
     m_lastMoveByComputer = false;
     m_gameFinished = false;
     setFile(QString());
@@ -1996,7 +1987,6 @@ void MainWindow::open(const QString& file, bool isTemporary)
     if (isTemporary)
         // Set as modified to enable the Save action in updateWindowModified()
         m_game->set_modified(true);
-    m_noMovesAvailableShown.fill(false);
     m_computerColor.fill(false);
     setupMode(false);
     m_lastMoveByComputer = false;
@@ -2080,23 +2070,6 @@ void MainWindow::play(Color c, Move mv)
     }
     updateWindow(true);
     repaint();
-    if (! bd.has_moves(c))
-    {
-        if (! computerPlaysAll())
-        {
-            while (c != effective_to_play)
-            {
-                if (! m_noMovesAvailableShown[c])
-                {
-                    showNoMovesAvailable(c);
-                    m_noMovesAvailableShown[c] = true;
-                }
-                c = c.get_next(bd.get_nu_colors());
-                if (bd.has_moves(c))
-                    break;
-            }
-        }
-    }
     m_toPlay = effective_to_play;
     updateWindow(true);
     checkComputerMove();
@@ -2522,12 +2495,6 @@ void MainWindow::setLevel(bool checked)
     setLevel(qobject_cast<QAction*>(sender())->data().toInt());
 }
 
-void MainWindow::settings()
-{
-    SettingsDialog dialog(this);
-    dialog.exec();
-}
-
 void MainWindow::setMoveNumbersAll(bool checked)
 {
     if (checked)
@@ -2820,29 +2787,6 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
     msgBox.setInformativeText(infoText);
     msgBox.setDetailedText(detailText);
     msgBox.exec();
-}
-
-void MainWindow::showNoMovesAvailable(Color c)
-{
-    GameVariant variant = m_game->get_game_variant();
-    QString text;
-    if (c == Color(0))
-        text = tr("Blue has no more moves available.");
-    else if (((variant == game_variant_duo || variant == game_variant_junior)
-              && c == Color(1))
-             || (variant != game_variant_duo
-                 && variant != game_variant_junior && c == Color(3)))
-        text = tr("Green has no more moves available.");
-    else if (c == Color(1))
-        text = tr("Yellow has no more moves available.");
-    else
-        text = tr("Red has no more moves available.");
-    QSettings settings;
-    bool showMessage = settings.value("show_no_moves_message", true).toBool();
-    if (showMessage)
-        showInfo(text);
-    else
-        showStatus(text);
 }
 
 QMessageBox::StandardButton MainWindow::showQuestion(const QString& text,

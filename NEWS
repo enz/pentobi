@@ -1,10 +1,9 @@
 Current development version
 ===========================
 
-* The user can now disable popup messages if a color has no more
-  moves with Edit/Settings (feature request #3431031)
-* Score points are now underlined if they are final (if the color
-  has no more moves)
+* No more popup messages if a color has no more moves;
+  instead, score points of this color are underlined
+  (feature request #3431031)
 * Support for game variant Junior
 * New menu item Computer/Analyze Game
 * Support for setup properties in blksgf files (note that files

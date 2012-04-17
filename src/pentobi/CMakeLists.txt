@@ -11,7 +11,6 @@ set(pentobi_SRCS
   Application.cpp
   MainWindow.cpp
   Main.cpp
-  SettingsDialog.cpp
   )
 
 set(pentobi_MOC_HDRS
@@ -19,7 +18,6 @@ set(pentobi_MOC_HDRS
   AnalyzeGameWindow.h
   Application.h
   MainWindow.h
-  SettingsDialog.h
   )
   
 set(pentobi_RCS

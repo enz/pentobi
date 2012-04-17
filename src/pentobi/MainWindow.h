@@ -184,8 +184,6 @@ public slots:
 
     void setLevel(int level);
 
-    void settings();
-
     void truncate();
 
     void undo();
@@ -245,8 +243,6 @@ private:
     QString m_manualDir;
 
     ColorMap<bool> m_computerColor;
-
-    ColorMap<bool> m_noMovesAvailableShown;
 
     ColorMap<PieceSelector*> m_pieceSelector;
 
@@ -436,8 +432,6 @@ private:
 
     QAction* m_actionSelectPieceZ;
 
-    QAction* m_actionSettings;
-
     QAction* m_actionSetupMode;
 
     QAction* m_actionTruncate;
@@ -550,8 +544,6 @@ private:
 
     void showMessage(QMessageBox::Icon icon, const QString& text,
                      const QString& infoText, const QString& detailText);
-
-    void showNoMovesAvailable(Color c);
 
     QMessageBox::StandardButton showQuestion(const QString& text,
                                              const QString& infoText,
