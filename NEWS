@@ -1,5 +1,5 @@
-Current development version (bugfix branch for version 1)
-===========================
+Version 1.2 (17 Apr 2012)
+=========================
 
 * Bugfix: program sometimes hung or crashed when generating a move
   in early game Trigon positions especially when there were no legal
