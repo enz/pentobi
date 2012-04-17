@@ -800,11 +800,6 @@
         <translation>Grün gewinnt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2757"/>
-        <source>The game is over.</source>
-        <translation>Das Spiel ist beendet.</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="2768"/>
         <source>Error in file &apos;%1&apos;</source>
         <translation>Fehler in Datei &apos;%1&apos;</translation>

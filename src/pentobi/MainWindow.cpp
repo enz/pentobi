@@ -2754,7 +2754,7 @@ void MainWindow::showGameOver()
         else
             info = tr("Green wins.");
     }
-    showInfo(tr("The game is over."), info);
+    showInfo(info);
 }
 
 void MainWindow::showInfo(const QString& text, const QString& infoText,
