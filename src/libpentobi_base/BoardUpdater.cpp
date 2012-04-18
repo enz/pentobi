@@ -154,7 +154,7 @@ void BoardUpdater::update(const Node& node)
         if (Tree::has_setup(*i))
             init_setup(m_bd, *i);
         ColorMove mv = m_tree.get_move(*i);
-        if (! mv.is_null())
+        if (mv.is_regular())
         {
             const MoveInfo& info = m_bd.get_move_info(mv.move);
             if (m_bd.get_nu_left_piece(mv.color, info.piece) == 0)
