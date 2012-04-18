@@ -210,7 +210,7 @@ private:
 
     unique_ptr<Game> m_game;
 
-    Color m_toPlay;
+    Color m_currentColor;
 
     unique_ptr<Player> m_player;
 
@@ -608,6 +608,8 @@ private slots:
     void setMoveNumbersLast(bool checked);
 
     void setMoveNumbersNone(bool checked);
+
+    void setSetupPlayer();
 
     void setupMode(bool checked);
 

@@ -142,9 +142,17 @@ public:
 
     void set_date_today();
 
+    bool has_setup() const;
+
     void add_setup(Color c, Move mv);
 
     void remove_setup(Color c, Move mv);
+
+    /** See libpentobi_base::Tree::set_player() */
+    void set_player(Color c);
+
+    /** See libpentobi_base::Tree::remove_player() */
+    void remove_player();
 
 private:
     const Node* m_current;
@@ -229,6 +237,11 @@ inline const Node& Game::get_root() const
 inline const Tree& Game::get_tree() const
 {
     return m_tree;
+}
+
+inline bool Game::has_setup() const
+{
+    return m_tree.has_setup(*m_current);
 }
 
 inline void Game::init()

@@ -69,6 +69,21 @@ const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
     return 0;
 }
 
+const char* Tree::get_color(Color c) const
+{
+    if (m_game_variant == game_variant_duo
+        || m_game_variant == game_variant_junior)
+        return (c == Color(0) ? "B" : "W");
+    if (c == Color(0))
+        return "1";
+    if (c == Color(1))
+        return "2";
+    if (c == Color(2))
+        return "3";
+    LIBBOARDGAME_ASSERT(c == Color(3));
+    return "4";
+}
+
 bool Tree::get_move(const Node& node, GameVariant game_variant, Color& c,
                     MovePoints& points)
 {
@@ -273,9 +288,6 @@ bool Tree::has_main_variation_moves() const
 bool Tree::has_setup(const Node& node)
 {
     for (PropertyIterator i(node); i; ++i)
-        // Don't check for "PL", we ignore this property if the node has no
-        // other setup property, it doesn't make much sense and might only
-        // confuse the user if suddenly the color to play changes in the GUI
         if (i->id == "AB" || i->id == "AW" || i->id == "A1" || i->id == "A2"
             || i->id == "A3" || i->id == "A4" || i->id == "AE")
             return true;
@@ -347,6 +359,11 @@ void Tree::keep_only_position(const Node& node)
     set_game_property();
 }
 
+void Tree::remove_player(const Node& node)
+{
+    remove_property(node, "PL");
+}
+
 const Node& Tree::remove_setup(const Node& node, Color c, Move mv)
 {
     const Node* result;
@@ -376,25 +393,16 @@ void Tree::set_game_property()
 
 void Tree::set_move(const Node& node, Color c, Move mv)
 {
-    string id;
-    if (m_game_variant == game_variant_duo
-        || m_game_variant == game_variant_junior)
-        id = (c == Color(0) ? "B" : "W");
-    else
-    {
-        if (c == Color(0))
-            id = "1";
-        else if (c == Color(1))
-            id = "2";
-        else if (c == Color(2))
-            id = "3";
-        else if (c == Color(3))
-            id = "4";
-    }
+    const char* id = get_color(c);
     if (! mv.is_pass())
         set_property(node, id, m_board_const->to_string(mv, false));
     else
         set_property(node, id, "");
+}
+
+void Tree::set_player(const Node& node, Color c)
+{
+    set_property(node, "PL", get_color(c));
 }
 
 void Tree::set_player_name(Color c, const string& name)
@@ -506,20 +514,7 @@ void Tree::set_setup(const Node& node, const Setup& setup)
         set_setup_property(node, "AB", setup.placements[Color(0)]);
         set_setup_property(node, "AW", setup.placements[Color(1)]);
     }
-    switch (m_game_variant)
-    {
-    case game_variant_classic:
-    case game_variant_classic_2:
-    case game_variant_trigon:
-    case game_variant_trigon_2:
-    case game_variant_trigon_3:
-        set_property(node, "PL", setup.to_play.to_int() + 1);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(m_game_variant == game_variant_duo
-                            || m_game_variant == game_variant_junior);
-        set_property(node, "PL", setup.to_play == Color(0) ? "B" : "W");
-    }
+    set_player(node, setup.to_play);
 }
 
 void Tree::set_setup_property(const Node& node, const char* id,

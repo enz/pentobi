@@ -68,6 +68,7 @@ public:
     /** Same as ! get_move_ignore_invalid.is_null() */
     bool has_move_ignore_invalid(const Node& node) const;
 
+    /** Check if a node has setup properties (not including the PL property). */
     static bool has_setup(const Node& node);
 
     const Node* find_child_with_move(const Node& node, ColorMove mv) const;
@@ -104,10 +105,19 @@ public:
         @return The node or the new child if one was created. */
     const Node& remove_setup(const Node& node, Color c, Move mv);
 
+    /** Set the color to play in a setup position (PL property). */
+    void set_player(const Node& node, Color c);
+
+    /** Remove the PL property.
+        @see set_player() */
+    void remove_player(const Node& node);
+
 private:
     GameVariant m_game_variant;
 
     const BoardConst* m_board_const;
+
+    const char* get_color(Color c) const;
 
     Setup::PlacementList get_setup_property(const Node& node,
                                             const char* id) const;

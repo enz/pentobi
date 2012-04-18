@@ -123,10 +123,22 @@ void Game::play(ColorMove mv, bool always_create_new_node)
     }
 }
 
+void Game::remove_player()
+{
+    m_tree.remove_player(*m_current);
+    m_updater.update(*m_current);
+}
+
 void Game::remove_setup(Color c, Move mv)
 {
     const Node& node = m_tree.remove_setup(*m_current, c, mv);
     goto_node(node);
+}
+
+void Game::set_player(Color c)
+{
+    m_tree.set_player(*m_current, c);
+    m_updater.update(*m_current);
 }
 
 void Game::set_result(int score)

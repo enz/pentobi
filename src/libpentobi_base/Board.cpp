@@ -232,24 +232,15 @@ unsigned int Board::get_bonus(Color c) const
 
 Color Board::get_effective_to_play() const
 {
-    Color effective_to_play = m_to_play;
-    unsigned int min_pieces = numeric_limits<unsigned int>::max();
     Color c = m_to_play;
     do
     {
         if (has_moves(c))
-        {
-            unsigned int pieces = get_nu_onboard_pieces(c);
-            if (pieces < min_pieces)
-            {
-                effective_to_play = c;
-                min_pieces = pieces;
-            }
-        }
+            return c;
         c = c.get_next(m_nu_colors);
     }
     while (c != m_to_play);
-    return effective_to_play;
+    return c;
 }
 
 unsigned int Board::get_points_left(Color c) const

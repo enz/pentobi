@@ -144,13 +144,8 @@ public:
     Color get_to_play() const;
 
     /** Get next color to play that still has moves.
-        This function can also be used to guess the color to play in positions
-        that cannot occur in real games (where a color may not pass if it still
-        has moves). The effective color to play is the color with the least
-        number of pieces on the board that still has moves available. In case
-        of a tie, the first color found is preferred. Colors are tried in their
-        playing order starting with get_to_play(). If no color has moves left,
-        get_to_play() is returned. */
+        Colors are tried in their playing order starting with get_to_play().
+        If no color has moves left, get_to_play() is returned. */
     Color get_effective_to_play() const;
 
     const PiecesLeftList& get_pieces_left(Color c) const;
