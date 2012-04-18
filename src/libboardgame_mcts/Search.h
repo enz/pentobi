@@ -816,8 +816,8 @@ void Search<S, M, P>::write_info(ostream& out) const
     out << format(
                "Val: %.2f, Cnt: %.0f, Sim: %i, Nds: %i, Tm: %s, Sim/s: %.0f\n"
                "Len: %s, Dp: %s\n")
-        % root.get_value() % count % m_nu_simulations % m_tree.get_nu_nodes()
-        % time_to_string(m_last_time)
+        % root.get_value() % root.get_visit_count() % m_nu_simulations
+        % m_tree.get_nu_nodes() % time_to_string(m_last_time)
         % (double(m_nu_simulations) / m_last_time)
         % m_stat_len.to_string(true, 1, true)
         % m_stat_in_tree_len.to_string(true, 1, true);
