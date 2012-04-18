@@ -42,10 +42,13 @@ enum BoardType
 //-----------------------------------------------------------------------------
 
 /** Constant precomputed data that is shared between all instances of Board
-    with a given board type and set of unique pieces. */
+    with a given board type and set of unique pieces per color. */
 class BoardConst
 {
 public:
+    /** Maximum number of unique pieces per color. */
+    static const unsigned int max_pieces = 22;
+
     static const unsigned int max_moves_at_point = 40;
 
     /** Begin/end iterator for lists with local moves.

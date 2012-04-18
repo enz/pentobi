@@ -99,7 +99,7 @@ public:
     /** Maximum number of pieces per player in any game variant. */
     static const unsigned int max_pieces = Setup::max_pieces;
 
-    typedef ArrayList<Piece,Piece::max_pieces> PiecesLeftList;
+    typedef ArrayList<Piece,BoardConst::max_pieces> PiecesLeftList;
 
     /** Maximum number of moves for a player in a game in any game variant.
         Assumes that a player is only allowed to pass if she has no legal
