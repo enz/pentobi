@@ -307,11 +307,6 @@ void MainWindow::about()
              "<br>"
              "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
              "</p>"
-             "<p>"
-             "You can support the development of this program by making a "
-             "donation:<br>"
-             "<a href=\"http://sf.net/projects/pentobi/donate\">http://sf.net/projects/pentobi/donate</a>"
-             "</p>"
              ).arg(getVersion()));
 }
 
