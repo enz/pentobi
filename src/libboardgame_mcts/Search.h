@@ -159,6 +159,12 @@ public:
 
     bool get_reuse_subtree() const;
 
+    /** Reuse the tree from the previous search if the current position is
+        the same position as the previous one. */
+    void set_reuse_tree(bool enable);
+
+    bool get_reuse_tree() const;
+
     void set_prune_full_tree(bool enable);
 
     bool get_prune_full_tree() const;
@@ -331,6 +337,8 @@ private:
 
     bool m_reuse_subtree;
 
+    bool m_reuse_tree;
+
     bool m_prune_full_tree;
 
     bool m_rave;
@@ -462,6 +470,7 @@ Search<S, M, P>::Search(const State& state, size_t memory)
       m_widening_parameter(0),
       m_deterministic(false),
       m_reuse_subtree(true),
+      m_reuse_tree(false),
       m_prune_full_tree(true),
       m_rave(false),
       m_rave_check_same(false),
@@ -679,6 +688,12 @@ bool Search<S, M, P>::get_reuse_subtree() const
 }
 
 template<class S, class M, unsigned int P>
+bool Search<S, M, P>::get_reuse_tree() const
+{
+    return m_reuse_tree;
+}
+
+template<class S, class M, unsigned int P>
 inline typename Search<S, M, P>::State& Search<S, M, P>::get_state()
 {
     return m_state;
@@ -877,7 +892,13 @@ bool Search<S, M, P>::search(Move& mv, ValueType max_count,
         max_time = numeric_limits<double>::max();
     bool clear_tree = true;
     bool is_followup = check_followup(m_followup_sequence);
-    if (m_reuse_subtree && is_followup
+    bool is_same = false;
+    if (is_followup && m_followup_sequence.empty())
+    {
+        is_same = true;
+        is_followup = false;
+    }
+    if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
         && get_reuse_param() == get_last_reuse_param())
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
@@ -1238,6 +1259,12 @@ template<class S, class M, unsigned int P>
 void Search<S, M, P>::set_reuse_subtree(bool enable)
 {
     m_reuse_subtree = enable;
+}
+
+template<class S, class M, unsigned int P>
+void Search<S, M, P>::set_reuse_tree(bool enable)
+{
+    m_reuse_tree = enable;
 }
 
 template<class S, class M, unsigned int P>
