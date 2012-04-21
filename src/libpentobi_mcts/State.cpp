@@ -131,7 +131,7 @@ SharedConst::SharedConst(const Color& to_play)
     : board(0),
       to_play(to_play),
       detect_symmetry(true),
-      avoid_symmetric_draw(false),
+      avoid_symmetric_draw(true),
       score_modification(ValueType(0.1))
 {
     symmetric_points.init(*RectGeometry<Point>::get(14, 14));

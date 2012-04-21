@@ -39,7 +39,7 @@ public:
     MainWindow(const QString& initialFile = QString(),
                const QString& manualDir = QString(),
                const QString& booksDir = QString(),
-               bool noBook = false, bool noSymDraw = false, size_t memory = 0);
+               bool noBook = false, size_t memory = 0);
 
     bool eventFilter(QObject* watched, QEvent* event);
 

@@ -121,7 +121,6 @@ int main(int argc, char* argv[])
         normal_options.add_options()
             ("memory", value<>(&memory), "memory to allocate for search trees")
             ("nobook", "do not use opening book")
-            ("nosymdraw", "avoid symmetric draws")
             ("verbose", "print logging messages");
         options_description hidden_options;
         hidden_options.add_options()
@@ -144,12 +143,11 @@ int main(int argc, char* argv[])
             redirectStdErr();
 #endif
         bool noBook = (vm.count("nobook") != 0);
-        bool noSymDraw = (vm.count("nosymdraw") != 0);
         QString initialFile;
         if (arguments.size() > 0)
             initialFile = arguments[0].c_str();
         MainWindow mainWindow(initialFile, manualDir, booksDir, noBook,
-                              noSymDraw, memory);
+                              memory);
         mainWindow.show();
         return app.exec();
     }
