@@ -187,7 +187,7 @@ Move Player::genmove(const Board& bd, Color c)
         bool weight_max_count = (m_level >= 4);
         if (weight_max_count)
         {
-            unsigned int player_move = bd.get_nu_moves() / bd.get_nu_colors();
+            unsigned int player_move = bd.get_nu_onboard_pieces(c);
             float weight = 1;
             if (variant == game_variant_duo
                 || variant == game_variant_junior)

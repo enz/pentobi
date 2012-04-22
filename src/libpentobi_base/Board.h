@@ -101,11 +101,17 @@ public:
 
     typedef ArrayList<Piece,BoardConst::max_pieces> PiecesLeftList;
 
-    /** Maximum number of moves for a player in a game in any game variant.
-        Assumes that a player is only allowed to pass if she has no legal
-        moves and allows an extra pass move per player at the end of a game to
-        indicate that the game is over. */
-    static const unsigned int max_player_moves = max_pieces + 1;
+    /** Maximum number of moves for a player in a game.
+        Assumes that pass moves are only played in the search and the search
+        uses alternating move sequences plus one extra pass move per color at
+        the end of a game to indicate that the game is over. The case with the
+        maximum moves is reached if a color plays all its pieces in a
+        non-alternating move sequence on the board and then a search starts,
+        which allows pass moves if a color has no more moves but uses only
+        alternating move sequences. Then the color that has already played all
+        its pieces will always pass and the other color(s) can play at
+        maximum max_pieces moves. */
+    static const unsigned int max_player_moves = 2 * max_pieces + 1;
 
     /** Maximum number of moves in any game variant.
         Includes an extra pass move per color at the end of the game. */
