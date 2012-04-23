@@ -4,7 +4,9 @@ Current development version
 * No more popup messages if a color has no more moves;
   instead, score points of this color are underlined
   (feature request #3431031)
-* Support for game variant Junior
+* New support for game variant Junior
+* Improved playing strength. Number of levels increased to 7.
+  Level 7 is about the same speed as the old level 6 but stronger.
 * New menu item Computer/Analyze Game
 * Support for setup properties in blksgf files (note that files
   with setup properties cannot be read by older versions of
@@ -15,8 +17,6 @@ Current development version
 * New menu items Delete All Variations, Keep Only Position,
   Keep Only Subtree
 * Added a toolbar button for selecting the computer colors
-* Improved playing strength. Number of levels increased to 7.
-  Level 7 is about the same speed as the old level 6 but stronger.
 * User manual is no longer compiled into the resources of the
   executable but installed in the installation data directory
 * Open a console for stderr output on Windows if Pentobi is
