@@ -113,9 +113,14 @@ public:
         maximum max_pieces moves. */
     static const unsigned int max_player_moves = 2 * max_pieces + 1;
 
+    static const unsigned int max_nonpass_player_moves = max_pieces;
+
     /** Maximum number of moves in any game variant.
         Includes an extra pass move per color at the end of the game. */
     static const unsigned int max_game_moves = Color::range * max_player_moves;
+
+    static const unsigned int max_nonpass_game_moves =
+        Color::range * max_nonpass_player_moves;
 
     /** Use ANSI escape sequences for colored text output in operator>> */
     static bool color_output;
