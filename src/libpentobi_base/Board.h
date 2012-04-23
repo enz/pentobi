@@ -102,16 +102,12 @@ public:
     typedef ArrayList<Piece,BoardConst::max_pieces> PiecesLeftList;
 
     /** Maximum number of moves for a player in a game.
-        Assumes that pass moves are only played in the search and the search
-        uses alternating move sequences plus one extra pass move per color at
-        the end of a game to indicate that the game is over. The case with the
-        maximum moves is reached if a color plays all its pieces in a
-        non-alternating move sequence on the board and then a search starts,
-        which allows pass moves if a color has no more moves but uses only
-        alternating move sequences. Then the color that has already played all
-        its pieces will always pass and the other color(s) can play at
-        maximum max_pieces moves. */
-    static const unsigned int max_player_moves = 2 * max_pieces + 1;
+        Non-alternating moves and alternating pass moves are allowed but the
+        game must end after all colors have passed in a row. Therefore, the
+        maximum number of moves is reached in case that a piece move is
+        followed by (Color::range-1) pass moves and an extra Color::range pass
+        moves at the end. */
+    static const unsigned int max_player_moves = Color::range * max_pieces + 1;
 
     static const unsigned int max_nonpass_player_moves = max_pieces;
 
