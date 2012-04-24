@@ -1,8 +1,8 @@
 #!/bin/bash
 # Runs test GTP files using gogui-regress (http://gogui.sf.net)
 
-PENTOBI_DBG="../build/dbg/src/pentobi_gtp/pentobi-gtp"
-PENTOBI_OPT="../build/opt/src/pentobi_gtp/pentobi-gtp"
+PENTOBI_DBG="../../build/dbg/src/pentobi_gtp/pentobi-gtp"
+PENTOBI_OPT="../../build/opt/src/pentobi_gtp/pentobi-gtp"
 TESTS=\
 symmetry.tst
 
