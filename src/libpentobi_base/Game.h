@@ -117,6 +117,10 @@ public:
 
     void make_main_variation();
 
+    void move_up_variation();
+
+    void move_down_variation();
+
     /** Delete all variations but the main variation.
         If the current node is not in the main variation it will be changed
         to the node as in libboardgame_sgf::util::back_to_main_variation() */
@@ -267,6 +271,16 @@ inline void Game::make_first_child()
 inline void Game::make_main_variation()
 {
     m_tree.make_main_variation(*m_current);
+}
+
+inline void Game::move_down_variation()
+{
+    m_tree.move_down(*m_current);
+}
+
+inline void Game::move_up_variation()
+{
+    m_tree.move_up(*m_current);
 }
 
 inline void Game::play(Color c, Move mv, bool always_create_new_node)

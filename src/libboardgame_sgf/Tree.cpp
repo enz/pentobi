@@ -166,6 +166,25 @@ bool Tree::move_property_to_front(const Node& node, const string& id)
     return non_const(node).move_property_to_front(id);
 }
 
+void Tree::move_down(const Node& node)
+{
+    if (node.get_sibling())
+    {
+        non_const(node).move_down();
+        m_modified = true;
+    }
+}
+
+void Tree::move_up(const Node& node)
+{
+    const Node* parent = node.get_parent_or_null();
+    if (parent != 0 && &parent->get_first_child() != &node)
+    {
+        non_const(node).move_up();
+        m_modified = true;
+    }
+}
+
 void Tree::remove_move_annotation(const Node& node)
 {
     remove_property(node, "BM");

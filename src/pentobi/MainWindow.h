@@ -100,6 +100,10 @@ public slots:
 
     void makeMainVariation();
 
+    void moveDownVariation();
+
+    void moveUpVariation();
+
     void newGame();
 
     void nextVariation();
@@ -336,11 +340,15 @@ private:
 
     QAction* m_actionMakeMainVariation;
 
+    QAction* m_actionMoveDownVariation;
+
     QAction* m_actionMoveNumbersAll;
 
     QAction* m_actionMoveNumbersLast;
 
     QAction* m_actionMoveNumbersNone;
+
+    QAction* m_actionMoveUpVariation;
 
     QAction* m_actionMoveSelectedPieceLeft;
 

@@ -136,6 +136,16 @@ public:
     /** @pre has_parent() */
     void make_first_child();
 
+    /** Switch place with previous sibling.
+        If the node is already the first child, nothing happens.
+        @pre has_parent() */
+    void move_up();
+
+    /** Switch place with sibling.
+        If the node is the last sibling, nothing happens.
+        @pre has_parent() */
+    void move_down();
+
     /** Delete all siblings of the first child. */
     void delete_variations();
 

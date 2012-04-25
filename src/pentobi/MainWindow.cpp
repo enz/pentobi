@@ -764,6 +764,14 @@ void MainWindow::createActions()
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
             this, SLOT(makeMainVariation()));
 
+    m_actionMoveDownVariation = new QAction(tr("Move D&own Variation"), this);
+    connect(m_actionMoveDownVariation, SIGNAL(triggered()),
+            this, SLOT(moveDownVariation()));
+
+    m_actionMoveUpVariation = new QAction(tr("Move &Up Variation"), this);
+    connect(m_actionMoveUpVariation, SIGNAL(triggered()),
+            this, SLOT(moveUpVariation()));
+
     QString levelText[maxLevel] =
         {
             tr("&1"),
@@ -1010,7 +1018,7 @@ void MainWindow::createActions()
     connect(m_actionSelectPieceZ, SIGNAL(triggered()),
             this, SLOT(selectPieceZ()));
 
-    m_actionSetupMode = new QAction(tr("Set&up Mode"), this);
+    m_actionSetupMode = new QAction(tr("S&etup Mode"), this);
     m_actionSetupMode->setCheckable(true);
     connect(m_actionSetupMode, SIGNAL(triggered(bool)),
             this, SLOT(setupMode(bool)));
@@ -1140,6 +1148,8 @@ void MainWindow::createMenu()
     m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionDeleteAllVariations);
+    menuEdit->addAction(m_actionMoveUpVariation);
+    menuEdit->addAction(m_actionMoveDownVariation);
     menuEdit->addAction(m_actionTruncate);
     menuEdit->addAction(m_actionKeepOnlyPosition);
     menuEdit->addAction(m_actionKeepOnlySubtree);
@@ -1837,6 +1847,18 @@ void MainWindow::keepOnlySubtree()
 void MainWindow::makeMainVariation()
 {
     m_game->make_main_variation();
+    updateWindow(false);
+}
+
+void MainWindow::moveDownVariation()
+{
+    m_game->move_down_variation();
+    updateWindow(false);
+}
+
+void MainWindow::moveUpVariation()
+{
+    m_game->move_up_variation();
     updateWindow(false);
 }
 
@@ -3017,6 +3039,9 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionKeepOnlyPosition->setEnabled(hasParent || hasChildren);
     m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
     m_actionMakeMainVariation->setEnabled(! isMain);
+    m_actionMoveDownVariation->setEnabled(current.get_sibling());
+    m_actionMoveUpVariation->setEnabled(hasParent
+                       && &current.get_parent().get_first_child() != &current);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     // See also comment in setupMode()

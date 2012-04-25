@@ -214,6 +214,63 @@ bool Node::move_property_to_front(const string& id)
     }
 }
 
+void Node::move_down()
+{
+    LIBBOARDGAME_ASSERT(has_parent());
+    Node* current = m_parent->m_first_child.get();
+    if (current == this)
+    {
+        unique_ptr<Node> tmp = move(m_parent->m_first_child);
+        m_parent->m_first_child = move(m_sibling);
+        m_sibling = move(m_parent->m_first_child->m_sibling);
+        m_parent->m_first_child->m_sibling = move(tmp);
+        return;
+    }
+    while (true)
+    {
+        Node* sibling = current->m_sibling.get();
+        if (sibling == this)
+        {
+            if (! m_sibling)
+                return;
+            unique_ptr<Node> tmp = move(current->m_sibling);
+            current->m_sibling = move(m_sibling);
+            m_sibling = move(current->m_sibling->m_sibling);
+            current->m_sibling->m_sibling = move(tmp);
+            return;
+        }
+        current = sibling;
+    }
+}
+
+void Node::move_up()
+{
+    LIBBOARDGAME_ASSERT(has_parent());
+    Node* current = m_parent->m_first_child.get();
+    if (current == this)
+        return;
+    Node* prev = 0;
+    while (true)
+    {
+        Node* sibling = current->m_sibling.get();
+        if (sibling == this)
+        {
+            if (prev == 0)
+            {
+                make_first_child();
+                return;
+            }
+            unique_ptr<Node> tmp = move(prev->m_sibling);
+            prev->m_sibling = move(current->m_sibling);
+            current->m_sibling = move(m_sibling);
+            m_sibling = move(tmp);
+            return;
+        }
+        prev = current;
+        current = sibling;
+    }
+}
+
 bool Node::remove_property(const string& id)
 {
     Property* property = m_first_property.get();

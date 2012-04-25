@@ -65,6 +65,14 @@ public:
     /** Make a node the first child of its parent. */
     void make_first_child(const Node& node);
 
+    /** Make a node switch place with its previous sibling (if it is not
+        already the first child). */
+    void move_up(const Node& node);
+
+    /** Make a node switch place with its next sibling (if it is not
+        already the last child). */
+    void move_down(const Node& node);
+
     /** Make a node the root node of the tree.
         All nodes that are not the given node or in the subtree below it are
         deleted. Note that this operation in general creates a semantically
