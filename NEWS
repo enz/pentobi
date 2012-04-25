@@ -15,7 +15,7 @@ Current development version
   with a setup position including positions that cannot occur in
   real games (e.g. for puzzles or Blokus art)
 * New menu items Delete All Variations, Keep Only Position,
-  Keep Only Subtree, Move Up/Down Variation
+  Keep Only Subtree, Move Variation Up/Down
 * Added a toolbar button for fast selection of the computer colors
   without having to use the window menu.
 * User manual is no longer compiled into the resources of the

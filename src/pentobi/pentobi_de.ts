@@ -319,12 +319,12 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="767"/>
-        <source>Move D&amp;own Variation</source>
+        <source>Move Variation D&amp;own</source>
         <translation>Variante nach &amp;unten</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="771"/>
-        <source>Move &amp;Up Variation</source>
+        <source>Move Variation &amp;Up</source>
         <translation>Variante nach &amp;oben</translation>
     </message>
     <message>

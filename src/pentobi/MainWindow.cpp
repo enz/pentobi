@@ -764,11 +764,11 @@ void MainWindow::createActions()
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
             this, SLOT(makeMainVariation()));
 
-    m_actionMoveDownVariation = new QAction(tr("Move D&own Variation"), this);
+    m_actionMoveDownVariation = new QAction(tr("Move Variation D&own"), this);
     connect(m_actionMoveDownVariation, SIGNAL(triggered()),
             this, SLOT(moveDownVariation()));
 
-    m_actionMoveUpVariation = new QAction(tr("Move &Up Variation"), this);
+    m_actionMoveUpVariation = new QAction(tr("Move Variation &Up"), this);
     connect(m_actionMoveUpVariation, SIGNAL(triggered()),
             this, SLOT(moveUpVariation()));
 
