@@ -1146,6 +1146,7 @@ void MainWindow::createMenu()
     m_menuMoveAnnotation->addAction(m_actionInterestingMove);
     m_menuMoveAnnotation->addAction(m_actionDoubtfulMove);
     m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
+    menuEdit->addSeparator();
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionDeleteAllVariations);
     menuEdit->addAction(m_actionMoveUpVariation);
