@@ -261,6 +261,9 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_actionCoordinateLabels->setChecked(coordinateLabels);
     bool showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
+    bool underlineVariations =
+        settings.value("underline_variations", true).toBool();
+    m_actionUnderlineVariations->setChecked(underlineVariations);
     initGameVariantActions();
     setWindowIcon(QIcon(":/pentobi/icons/pentobi.png"));
 
@@ -1032,6 +1035,12 @@ void MainWindow::createActions()
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 
+    m_actionUnderlineVariations =
+        new QAction(tr("&Underline Variations"), this);
+    m_actionUnderlineVariations->setCheckable(true);
+    connect(m_actionUnderlineVariations, SIGNAL(triggered(bool)),
+            this, SLOT(underlineVariations(bool)));
+
     m_actionUndo = new QAction(tr("&Undo Move"), this);
     connect(m_actionUndo, SIGNAL(triggered()), this, SLOT(undo()));
 
@@ -1167,6 +1176,7 @@ void MainWindow::createMenu()
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
     menuMoveNumbers->addAction(m_actionMoveNumbersNone);
     menuView->addAction(m_actionCoordinateLabels);
+    menuView->addAction(m_actionUnderlineVariations);
 
     QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
@@ -2868,6 +2878,15 @@ void MainWindow::truncate()
     updateWindow(true);
 }
 
+void MainWindow::underlineVariations(bool checked)
+{
+    {
+        QSettings settings;
+        settings.setValue("underline_variations", checked);
+    }
+    updateWindow(false);
+}
+
 void MainWindow::undo()
 {
     const Node& current = m_game->get_current();
@@ -2993,14 +3012,16 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     const Board& bd = getBoard();
     updateWindowModified();
     m_guiBoard->copyFromBoard(bd);
+    QSettings settings;
     // If the last move was played by the computer, show move numbers on all
     // last subsequent moves by the computer because the computer could have
     // played them quickly if the other colors cannot move anymore.
     bool markAllLastBySameColor = m_lastMoveByComputer;
+    bool markVariations = settings.value("underline_variations", true).toBool();
     gui_board_util::setMarkup(*m_guiBoard, *m_game,
                               m_actionMoveNumbersLast->isChecked(),
                               m_actionMoveNumbersAll->isChecked(),
-                              markAllLastBySameColor);
+                              markAllLastBySameColor, markVariations);
     m_scoreDisplay->updateScore(bd);
     m_legalMoves->clear();
     m_legalMoveIndex = 0;

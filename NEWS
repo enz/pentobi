@@ -8,14 +8,16 @@ Current development version
 * Improved playing strength. Number of levels increased to 7.
   Level 7 is about the same speed as the old level 6 but stronger.
 * New game analysis function that shows a graph with the estimated
-  value of each position in a game (menu item Computer/Analyze Game)
+  value of each position in a game (menu item "Computer/Analyze Game")
 * Support for setup properties in blksgf files (note that files
   with setup properties cannot be read by older versions of
   Pentobi). A new setup mode can be used to create files that start
   with a setup position including positions that cannot occur in
   real games (e.g. for puzzles or Blokus art)
-* New menu items Delete All Variations, Keep Only Position,
-  Keep Only Subtree, Move Variation Up/Down
+* New menu items "Delete All Variations", "Keep Only Position",
+  "Keep Only Subtree", "Move Variation Up/Down"
+* Underlining of move numbers on the board for moves that have a
+  variation can now be disabled with "View/Underline Variations".
 * Added a toolbar button for fast selection of the computer colors
   without having to use the window menu.
 * User manual is no longer compiled into the resources of the

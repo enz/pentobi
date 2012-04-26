@@ -86,7 +86,8 @@ void setVariationMarkup(GuiBoard& guiBoard, const Node& node, Point p)
 //-----------------------------------------------------------------------------
 
 void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
-               bool markAllMoves, bool markAllLastBySameColor)
+               bool markAllMoves, bool markAllLastBySameColor,
+               bool markVariations)
 {
     guiBoard.clearMarkup();
     const Tree& tree = game.get_tree();
@@ -120,8 +121,9 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
                 if (! mv.move.is_pass())
                 {
                     setMoveLabel(guiBoard, game, *node, moveNumber, mv);
-                    setVariationMarkup(guiBoard, *node,
-                                       bd.get_move_info_ext(mv.move).center);
+                    if (markVariations)
+                        setVariationMarkup(guiBoard, *node,
+                                         bd.get_move_info_ext(mv.move).center);
                     if (markLastMove && ! markAllLastBySameColor)
                         break;
                     --moveNumber;
