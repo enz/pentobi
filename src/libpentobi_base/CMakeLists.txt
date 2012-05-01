@@ -21,6 +21,7 @@ set(pentobi_base_STAT_SRCS
   PointState.cpp
   SymmetricPoints.cpp
   Tree.cpp
+  TreeUtil.cpp
   )
 
 if (PENTOBI_BUILD_GTP)

@@ -15,6 +15,7 @@
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
+#include "libpentobi_base/TreeUtil.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
 #include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
@@ -52,6 +53,8 @@ using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Tree;
+using libpentobi_base::tree_util::get_move_number;
+using libpentobi_base::tree_util::get_moves_left;
 using libpentobi_mcts::Search;
 
 //-----------------------------------------------------------------------------
@@ -2560,23 +2563,8 @@ void MainWindow::setMoveNumberText()
 {
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
-    unsigned int move = 0;
-    const Node* node = &current;
-    do
-    {
-        if (! tree.get_move_ignore_invalid(*node).is_null())
-            ++move;
-        node = node->get_parent_or_null();
-    }
-    while (node != 0);
-    unsigned int nuMoves = move;
-    node = current.get_first_child_or_null();
-    while (node != 0)
-    {
-        if (! tree.get_move_ignore_invalid(*node).is_null())
-            ++nuMoves;
-        node = node->get_first_child_or_null();
-    }
+    unsigned int move = get_move_number(tree, current);
+    unsigned int nuMoves = move + get_moves_left(tree, current);;
     if (move == 0 && nuMoves == 0)
     {
         m_moveNumber->setText("");
