@@ -162,8 +162,9 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                        const QString& booksDir, bool noBook, size_t memory)
     : m_isGenMoveRunning(false),
       m_isAnalyzeRunning(false),
-      m_lastMoveByComputer(false),
       m_genMoveId(0),
+      m_lastComputerMovesBegin(0),
+      m_lastComputerMovesEnd(0),
       m_manualDir(manualDir),
       m_helpWindow(0),
       m_analyzeGameWindow(0),
@@ -417,6 +418,8 @@ void MainWindow::checkComputerMove()
     bool isGameOver = getBoard().is_game_over();
     if (! isGameOver && m_computerColor[m_currentColor])
         genMove();
+    else
+        m_lastComputerMovesBegin = 0;
 }
 
 bool MainWindow::checkSave()
@@ -1581,6 +1584,11 @@ void MainWindow::genMove()
                           m_genMoveId);
     m_genMoveWatcher.setFuture(future);
     m_isGenMoveRunning = true;
+    if (m_lastComputerMovesBegin == 0)
+    {
+        m_lastComputerMovesBegin = getBoard().get_nu_moves() + 1;
+        m_lastComputerMovesEnd = m_lastComputerMovesBegin;
+    }
 }
 
 void MainWindow::genMoveFinished()
@@ -1615,6 +1623,7 @@ void MainWindow::genMoveFinished()
         showStatus(tr("The computer has no more moves available."), true);
         return;
     }
+    m_lastComputerMovesEnd = bd.get_nu_moves() + 1;
     play(c, mv);
 }
 
@@ -1711,7 +1720,7 @@ void MainWindow::gotoNode(const Node& node)
         return;
     }
     m_currentColor = m_game->get_effective_to_play();
-    m_lastMoveByComputer = false;
+    m_lastComputerMovesBegin = 0;
     if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
             ->setCurrentPosition(*m_game, node);
@@ -1786,7 +1795,7 @@ void MainWindow::initGame()
     }
     m_currentColor = Color(0);
     setupMode(false);
-    m_lastMoveByComputer = false;
+    m_lastComputerMovesBegin = 0;
     m_gameFinished = false;
     setFile(QString());
 }
@@ -2019,7 +2028,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_game->set_modified(true);
     m_computerColor.fill(false);
     setupMode(false);
-    m_lastMoveByComputer = false;
+    m_lastComputerMovesBegin = 0;
     initGameVariantActions();
     updateWindow(true);
 }
@@ -2085,7 +2094,6 @@ void MainWindow::play()
 void MainWindow::play(Color c, Move mv)
 {
     const Board& bd = getBoard();
-    m_lastMoveByComputer = m_computerColor[c];
     m_game->play(c, mv, false);
     c = m_game->get_to_play();
     m_gameFinished = false;
@@ -3001,15 +3009,30 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     updateWindowModified();
     m_guiBoard->copyFromBoard(bd);
     QSettings settings;
-    // If the last move was played by the computer, show move numbers on all
-    // last subsequent moves by the computer because the computer could have
-    // played them quickly if the other colors cannot move anymore.
-    bool markAllLastBySameColor = m_lastMoveByComputer;
     bool markVariations = settings.value("underline_variations", true).toBool();
-    gui_board_util::setMarkup(*m_guiBoard, *m_game,
-                              m_actionMoveNumbersLast->isChecked(),
-                              m_actionMoveNumbersAll->isChecked(),
-                              markAllLastBySameColor, markVariations);
+    unsigned int nuMoves = bd.get_nu_moves();
+    unsigned int markMovesBegin = 0;
+    unsigned int markMovesEnd = 0;
+    if (m_actionMoveNumbersAll->isChecked())
+    {
+        markMovesBegin = 1;
+        markMovesEnd = nuMoves;
+    }
+    else if (m_actionMoveNumbersLast->isChecked())
+    {
+        if (m_lastComputerMovesBegin != 0)
+        {
+            markMovesBegin = m_lastComputerMovesBegin;
+            markMovesEnd = m_lastComputerMovesEnd;
+        }
+        else
+        {
+            markMovesBegin = nuMoves;
+            markMovesEnd = nuMoves;
+        }
+    }
+    gui_board_util::setMarkup(*m_guiBoard, *m_game, markMovesBegin,
+                              markMovesEnd, markVariations);
     m_scoreDisplay->updateScore(bd);
     m_legalMoves->clear();
     m_legalMoveIndex = 0;

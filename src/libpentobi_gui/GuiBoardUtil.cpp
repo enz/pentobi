@@ -85,49 +85,45 @@ void setVariationMarkup(GuiBoard& guiBoard, const Node& node, Point p)
 
 //-----------------------------------------------------------------------------
 
-void setMarkup(GuiBoard& guiBoard, const Game& game, bool markLastMove,
-               bool markAllMoves, bool markAllLastBySameColor,
+void setMarkup(GuiBoard& guiBoard, const Game& game,
+               unsigned int markMovesBegin, unsigned int markMovesEnd,
                bool markVariations)
 {
     guiBoard.clearMarkup();
-    const Tree& tree = game.get_tree();
-    const Board& bd = game.get_board();
-    unsigned int nu_moves = bd.get_nu_moves();
-    Color lastColor = Color(0); // Initialize to avoid compiler warning
-    if (nu_moves > 0)
-        lastColor = bd.get_move(nu_moves - 1).color;
-    if (markAllMoves || markLastMove)
+    if (markMovesBegin > 0)
     {
-        unsigned int moveNumber = 0;
+        const Tree& tree = game.get_tree();
+        const Board& bd = game.get_board();
+        unsigned int displayedMoveNumber = 0; // pass moves have no number
         const Node* node = &game.get_current();
         do
         {
             ColorMove mv = tree.get_move_ignore_invalid(*node);
             if (mv.is_regular())
-                ++moveNumber;
+                ++displayedMoveNumber;
             node = node->get_parent_or_null();
         }
         while (node != 0);
+        unsigned int moveNumber = bd.get_nu_moves();
         node = &game.get_current();
         do
         {
             ColorMove mv = tree.get_move_ignore_invalid(*node);
             if (! mv.is_null())
             {
-                if (markLastMove && markAllLastBySameColor
-                    && nu_moves > 0 &&
-                    ! bd.is_same_player(mv.color, lastColor))
-                    break;
                 if (! mv.move.is_pass())
                 {
-                    setMoveLabel(guiBoard, game, *node, moveNumber, mv);
-                    if (markVariations)
-                        setVariationMarkup(guiBoard, *node,
-                                         bd.get_move_info_ext(mv.move).center);
-                    if (markLastMove && ! markAllLastBySameColor)
-                        break;
-                    --moveNumber;
+                    if (moveNumber >= markMovesBegin
+                        && moveNumber <= markMovesEnd)
+                    {
+                        setMoveLabel(guiBoard, game, *node, moveNumber, mv);
+                        if (markVariations)
+                            setVariationMarkup(guiBoard, *node,
+                                          bd.get_move_info_ext(mv.move).center);
+                    }
+                    --displayedMoveNumber;
                 }
+                --moveNumber;
             }
             node = node->get_parent_or_null();
         }

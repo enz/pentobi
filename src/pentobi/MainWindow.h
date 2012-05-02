@@ -224,8 +224,6 @@ private:
 
     bool m_isAnalyzeRunning;
 
-    bool m_lastMoveByComputer;
-
     /** Flag indicating that the position after the last move played was
         a terminal position. */
     bool m_gameFinished;
@@ -233,6 +231,21 @@ private:
     /** Integer ID assigned to the currently running move generation.
         Used to ignore finished events from canceled move generations. */
     unsigned int m_genMoveId;
+
+    /** Beginning of move number range of last moves played by the computer
+        without pause.
+        Used to mark all last moves played by the computer if it plays several
+        moves in a row because the other players have no more moves. Otherwise,
+        it would be hard to see what the last moves were if the computer plays
+        quickly. A value of 0 means that there are no last moves played by
+        the computer to be marked. */
+    unsigned int m_lastComputerMovesBegin;
+
+    /** End (inclusive) of move number range of last moves played by the
+        computer without pause.
+        Only defined if m_lastComputerMovesBegin is not 0.
+        @see m_lastComputerMovesBegin */
+    unsigned int m_lastComputerMovesEnd;
 
     /** Current playing level of m_player.
         Only use if m_useTimeLimit is false. Possible values for m_level are in
