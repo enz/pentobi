@@ -1712,7 +1712,7 @@ void MainWindow::gotoMove()
 void MainWindow::gotoNode(const Node& node)
 {
     cancelThread();
-    setupMode(false);
+    leaveSetupMode();
     try
     {
         m_game->goto_node(node);
@@ -1797,7 +1797,7 @@ void MainWindow::initGame()
         }
     }
     m_currentColor = Color(0);
-    setupMode(false);
+    leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     m_gameFinished = false;
     setFile(QString());
@@ -1868,6 +1868,13 @@ void MainWindow::keepOnlySubtree()
     cancelThread();
     m_game->keep_only_subtree();
     updateWindow(true);
+}
+
+void MainWindow::leaveSetupMode()
+{
+    if (! m_actionSetupMode->isChecked())
+        return;
+    setupMode(false);
 }
 
 void MainWindow::makeMainVariation()
@@ -2030,7 +2037,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         // Set as modified to enable the Save action in updateWindowModified()
         m_game->set_modified(true);
     m_computerColor.fill(false);
-    setupMode(false);
+    leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     initGameVariantActions();
     updateWindow(true);
@@ -2068,7 +2075,7 @@ void MainWindow::placePiece(Color c, Move mv)
 void MainWindow::play()
 {
     cancelThread();
-    setupMode(false);
+    leaveSetupMode();
     GameVariant variant = m_game->get_game_variant();
     if (variant != game_variant_classic && variant != game_variant_trigon
          && variant != game_variant_trigon_3)
@@ -2646,8 +2653,6 @@ void MainWindow::setSetupPlayer()
 
 void MainWindow::setupMode(bool enable)
 {
-    if (m_actionSetupMode->isChecked() == enable)
-        return;
     // Currently, we allow setup mode only if no moves have been played. It
     // should also work in inner nodes but this might be confusing for users
     // and violate some assumptions in the user interface (e.g. node depth is
