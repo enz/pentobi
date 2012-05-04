@@ -149,6 +149,14 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
     painter.restore();
 }
 
+void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
+{
+    if (saturation != 1)
+        c.setHsv(c.hue(), saturation * c.saturation(), c.value());
+    if (alpha != 1)
+        c.setAlphaF(alpha);
+}
+
 } //namespace
 
 //-----------------------------------------------------------------------------
@@ -214,21 +222,49 @@ QColor Util::getPaintColorEmpty()
 }
 
 void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
-                            Color c, qreal x, qreal y, qreal size)
+                            Color c, qreal x, qreal y, qreal size,
+                            qreal alpha, qreal saturation, bool flat)
 {
-    QColor rectColor = getPaintColor(gameVariant, c);
-    QColor upLeftColor = rectColor.lighter(130);
-    QColor downRightColor = rectColor.darker(160);
-    paintSquare(painter, x, y, size, rectColor, upLeftColor, downRightColor);
+    QColor color = getPaintColor(gameVariant, c);
+    QColor upLeftColor;
+    QColor downRightColor;
+    if (flat)
+    {
+        upLeftColor = color;
+        downRightColor = color;
+    }
+    else
+    {
+        upLeftColor = color.lighter(130);
+        downRightColor = color.darker(160);
+    }
+    setAlphaSaturation(color, alpha, saturation);
+    setAlphaSaturation(upLeftColor, alpha, saturation);
+    setAlphaSaturation(downRightColor, alpha, saturation);
+    paintSquare(painter, x, y, size, color, upLeftColor, downRightColor);
 }
 
 void Util::paintColorTriangle(QPainter& painter, GameVariant gameVariant,
                               Color c, bool isUpside, qreal x, qreal y,
-                              qreal width, qreal height)
+                              qreal width, qreal height, qreal alpha,
+                              qreal saturation, bool flat)
 {
     QColor color = getPaintColor(gameVariant, c);
-    QColor upLeftColor = color.lighter(130);
-    QColor downRightColor = color.darker(160);
+    QColor upLeftColor;
+    QColor downRightColor;
+    if (flat)
+    {
+        upLeftColor = color;
+        downRightColor = color;
+    }
+    else
+    {
+        upLeftColor = color.lighter(130);
+        downRightColor = color.darker(160);
+    }
+    setAlphaSaturation(color, alpha, saturation);
+    setAlphaSaturation(upLeftColor, alpha, saturation);
+    setAlphaSaturation(downRightColor, alpha, saturation);
     paintTriangle(painter, isUpside, x, y, width, height, color, upLeftColor,
                   downRightColor);
 }

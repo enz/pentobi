@@ -281,72 +281,36 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
     painter.translate(m_boardOffset);
+    qreal alpha;
+    qreal saturation;
+    bool flat;
     if (isLegal)
     {
-        BOOST_FOREACH(Point p, points)
-        {
-            qreal fieldX = p.get_x() * m_fieldWidth;
-            qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
-            if (m_isTrigon)
-            {
-                bool isUpside = (m_geometry->get_point_type(p) == 1);
-                Util::paintColorTriangle(painter, m_gameVariant, c, isUpside,
-                                         fieldX, fieldY, m_fieldWidth,
-                                         m_fieldHeight);
-            }
-            else
-            {
-                Util::paintColorSquare(painter, m_gameVariant, c, fieldX,
-                                       fieldY, m_fieldWidth);
-            }
-        }
+        alpha = 0.9;
+        saturation = 0.8;
+        flat = false;
     }
     else
     {
-        QColor color = Util::getPaintColor(m_gameVariant, c);
-        color.setHsv(color.hue(), color.saturation() / 2, color.value());
-        color.setAlpha(160);
-        BOOST_FOREACH(Point p, points)
+        alpha = 0.63;
+        saturation = 0.5;
+        flat = true;
+    }
+    BOOST_FOREACH(Point p, points)
+    {
+        qreal fieldX = p.get_x() * m_fieldWidth;
+        qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
+        if (m_isTrigon)
         {
-            if (! m_geometry->is_onboard(p))
-                continue;
-            painter.save();
-            painter.translate(p.get_x() * m_fieldWidth,
-                              (m_height - p.get_y() - 1) * m_fieldHeight);
-            if (m_isTrigon)
-            {
-                painter.setPen(Qt::NoPen);
-                painter.setBrush(color);
-                qreal left = -0.5 * m_fieldWidth;
-                qreal right = 1.5 * m_fieldWidth;
-                bool isUpside = (m_geometry->get_point_type(p) == 1);
-                if (isUpside)
-                {
-                    const QPointF polygon[3] =
-                        {
-                            QPointF(left, m_fieldHeight),
-                            QPointF(right, m_fieldHeight),
-                            QPointF(0.5 * m_fieldWidth, 0)
-                        };
-                    painter.drawConvexPolygon(polygon, 3);
-                }
-                else
-                {
-                    const QPointF polygon[3] =
-                        {
-                            QPointF(left, 0),
-                            QPointF(right, 0),
-                            QPointF(0.5 * m_fieldWidth, m_fieldHeight)
-                        };
-                    painter.drawConvexPolygon(polygon, 3);
-                }
-            }
-            else
-            {
-                painter.fillRect(QRectF(0, 0, m_fieldWidth, m_fieldHeight),
-                                 color);
-            }
-            painter.restore();
+            bool isUpside = (m_geometry->get_point_type(p) == 1);
+            Util::paintColorTriangle(painter, m_gameVariant, c, isUpside,
+                                     fieldX, fieldY, m_fieldWidth,
+                                     m_fieldHeight, alpha, saturation, flat);
+        }
+        else
+        {
+            Util::paintColorSquare(painter, m_gameVariant, c, fieldX, fieldY,
+                                   m_fieldWidth, alpha, saturation, flat);
         }
     }
     painter.restore();
