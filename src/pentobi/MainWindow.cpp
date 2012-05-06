@@ -476,11 +476,6 @@ bool MainWindow::checkQuit()
         }
     }
     cancelThread();
-    if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
-    {
-        ofstream out(getAutoSaveFile().toStdString().c_str());
-        write_tree(out, m_game->get_root(), true, true, 2);
-    }
     QSettings settings;
     settings.setValue("geometry", saveGeometry());
     settings.setValue("splitter_state", m_splitter->saveState());
@@ -2011,9 +2006,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     if (! isTemporary)
     {
         setFile(file);
-        QFile autoSaveFile(getAutoSaveFile());
-        if (autoSaveFile.exists())
-            autoSaveFile.remove();
+        deleteAutoSaveFile();
     }
     if (m_analyzeGameWindow != 0)
     {
@@ -2116,6 +2109,11 @@ void MainWindow::play(Color c, Move mv)
         m_gameFinished = true;
         deleteAutoSaveFile();
         return;
+    }
+    if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
+    {
+        ofstream out(getAutoSaveFile().toStdString().c_str());
+        write_tree(out, m_game->get_root(), true, true, 2);
     }
     updateWindow(true);
     repaint();
