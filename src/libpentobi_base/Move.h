@@ -48,6 +48,8 @@ public:
 
     bool operator!=(const Move& mv) const;
 
+    bool operator<(const Move& mv) const;
+
     bool is_pass() const;
 
     bool is_null() const;
@@ -95,12 +97,21 @@ inline Move& Move::operator=(const Move& mv)
 
 inline bool Move::operator==(const Move& mv) const
 {
+    LIBBOARDGAME_ASSERT(is_initialized());
+    LIBBOARDGAME_ASSERT(mv.is_initialized());
     return m_i == mv.m_i;
 }
 
 inline bool Move::operator!=(const Move& mv) const
 {
     return ! operator==(mv);
+}
+
+inline bool Move::operator<(const Move& mv) const
+{
+    LIBBOARDGAME_ASSERT(is_initialized());
+    LIBBOARDGAME_ASSERT(mv.is_initialized());
+    return m_i < mv.m_i;
 }
 
 inline bool Move::is_initialized() const
