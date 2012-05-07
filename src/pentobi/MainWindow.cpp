@@ -1112,15 +1112,18 @@ void MainWindow::createMenu()
     m_menuOpenRecent = menuFile->addMenu(tr("Open &Recent"));
     for (int i = 0; i < maxRecentFiles; ++i)
         m_menuOpenRecent->addAction(m_actionRecentFile[i]);
+    menuFile->addSeparator();
     menuFile->addAction(m_actionSave);
     menuFile->addAction(m_actionSaveAs);
     QMenu* menuExport = menuFile->addMenu(tr("&Export"));
     menuExport->addAction(m_actionExportImage);
     menuExport->addAction(m_actionExportAsciiArt);
+    menuFile->addSeparator();
     menuFile->addAction(m_actionQuit);
 
     QMenu* menuGame = menuBar()->addMenu(tr("G&ame"));
     menuGame->addAction(m_actionNewGame);
+    menuGame->addSeparator();
     QMenu* menuGameVariant = menuGame->addMenu(tr("&Game Variant"));
     menuGameVariant->addAction(m_actionGameVariantClassic);
     menuGameVariant->addAction(m_actionGameVariantClassic2);
@@ -1131,6 +1134,7 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantJunior);
     menuGame->addAction(m_actionComputerColor);
     menuGame->addAction(m_actionGameInfo);
+    menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
     menuGame->addAction(m_actionFindMove);
 
@@ -1143,6 +1147,7 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionEnd);
     menuGo->addAction(m_actionNextVariation);
     menuGo->addAction(m_actionPreviousVariation);
+    menuGo->addSeparator();
     menuGo->addAction(m_actionGotoMove);
     menuGo->addAction(m_actionBackToMainVariation);
 
@@ -1171,7 +1176,9 @@ void MainWindow::createMenu()
     QMenu* menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
     menuView->addAction(m_actionShowComment);
+    menuView->addSeparator();
     menuView->addAction(m_actionFullscreen);
+    menuView->addSeparator();
     QMenu* menuMoveNumbers = menuView->addMenu(tr("&Move Numbers"));
     menuMoveNumbers->addAction(m_actionMoveNumbersLast);
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
@@ -1185,6 +1192,7 @@ void MainWindow::createMenu()
     QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
+    menuComputer->addSeparator();
     menuComputer->addAction(m_actionAnalyzeGame);
 
     QMenu* menuHelp = menuBar()->addMenu(tr("&Help"));
