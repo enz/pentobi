@@ -35,6 +35,7 @@ public:
     void cmd_g(Response&);
     void cmd_genmove(const Arguments&, Response&);
     void cmd_loadsgf(const Arguments&);
+    void cmd_move_info(const Arguments&, Response&);
     void cmd_p(const Arguments&);
     void cmd_play(const Arguments&);
     void cmd_point_integers(Response&);

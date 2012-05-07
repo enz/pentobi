@@ -47,6 +47,7 @@ Engine::Engine(GameVariant game_variant)
     add("final_score", &Engine::cmd_final_score);
     add("loadsgf", &Engine::cmd_loadsgf);
     add("point_integers", &Engine::cmd_point_integers);
+    add("move_info", &Engine::cmd_move_info);
     add("p", &Engine::cmd_p);
     add("play", &Engine::cmd_play);
     add("set_game", &Engine::cmd_set_game);
@@ -139,6 +140,12 @@ void Engine::cmd_loadsgf(const Arguments& args)
     {
         throw Failure(e.what());
     }
+}
+
+/** Return move info of a move given by its integer ID. */
+void Engine::cmd_move_info(const Arguments& args, Response& response)
+{
+    response << get_board().to_string(Move(args.get<unsigned int>()), true);
 }
 
 void Engine::cmd_p(const Arguments& args)
