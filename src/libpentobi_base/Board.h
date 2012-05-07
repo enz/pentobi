@@ -129,10 +129,6 @@ public:
 
     unsigned int get_nu_pieces() const;
 
-    /** Maximum number of moves in the current game variant.
-        Includes an extra pass move per color at the end of the game. */
-    unsigned int get_max_game_moves() const;
-
     const PieceTransforms& get_transforms() const;
 
     /** Get the state of an on-board point. */
@@ -466,14 +462,6 @@ inline const Geometry& Board::get_geometry() const
 inline const Board::PointStateGrid& Board::get_grid() const
 {
     return m_point_state;
-}
-
-inline unsigned int Board::get_max_game_moves() const
-{
-    unsigned int nu_pieces = get_nu_pieces();
-    if (m_game_variant == game_variant_junior)
-        nu_pieces *= 2;
-    return get_nu_colors() * (nu_pieces + 1);
 }
 
 inline ColorMove Board::get_move(unsigned int n) const
