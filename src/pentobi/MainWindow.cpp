@@ -1581,8 +1581,7 @@ void MainWindow::genMove()
     m_isGenMoveRunning = true;
     const Board& bd = getBoard();
     unsigned int nuMoves = bd.get_nu_moves();
-    if (m_lastComputerMovesBegin == 0
-        || (nuMoves > 0 && bd.get_move(nuMoves - 1).color != m_currentColor))
+    if (m_lastComputerMovesBegin == 0 && ! computerPlaysAll())
     {
         m_lastComputerMovesBegin = nuMoves + 1;
         m_lastComputerMovesEnd = m_lastComputerMovesBegin;
