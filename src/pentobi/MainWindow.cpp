@@ -864,7 +864,6 @@ void MainWindow::createActions()
 
     m_actionPlay = new QAction(tr("&Play"), this);
     m_actionPlay->setShortcut(QString("Ctrl+L"));
-    m_actionPlay->setToolTip(tr("Make the computer play"));
     setIcon(m_actionPlay, "pentobi-play");
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
 
@@ -2646,6 +2645,66 @@ void MainWindow::setMoveNumberText()
     }
 }
 
+void MainWindow::setPlayToolTip()
+{
+    QString s;
+    GameVariant variant = m_game->get_game_variant();
+    Color c = m_currentColor;
+    bool isComputerColor = m_computerColor[m_currentColor];
+    if (variant == game_variant_classic_2 || variant == game_variant_trigon_2)
+    {
+        if (c == Color(0) || c == Color(2))
+        {
+            if (isComputerColor)
+                s = tr("Make the computer continue to play Blue/Red.");
+            else
+                s = tr("Make the computer play Blue/Red.");
+        }
+        else
+        {
+            if (isComputerColor)
+                s = tr("Make the computer continue to play Yellow/Green.");
+            else
+                s = tr("Make the computer play Yellow/Green.");
+        }
+    }
+    else
+    {
+        bool isTwoColorVariant =
+            (variant == game_variant_duo || variant == game_variant_junior);
+        if (c == Color(0))
+        {
+            if (isComputerColor)
+                s = tr("Make the computer continue to play Blue.");
+            else
+                s = tr("Make the computer play Blue.");
+        }
+        else if (c == Color(1) && ! isTwoColorVariant)
+        {
+            if (isComputerColor)
+                s = tr("Make the computer continue to play Yellow.");
+            else
+                s = tr("Make the computer play Yellow.");
+        }
+        else if ((c == Color(1) && isTwoColorVariant)
+                 || (c == Color(3) && ! isTwoColorVariant))
+        {
+            if (isComputerColor)
+                s = tr("Make the computer continue to play Green.");
+            else
+                s = tr("Make the computer play Green.");
+        }
+        else
+        {
+            if (isComputerColor)
+                s = tr("Make the computer continue to play Red.");
+            else
+                s = tr("Make the computer play Red.");
+        }
+    }
+    m_actionPlay->setToolTip(s);
+}
+
 void MainWindow::setSetupPlayer()
 {
     if (! m_game->has_setup())
@@ -3063,6 +3122,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         updateMoveAnnotationActions();
     }
     setMoveNumberText();
+    setPlayToolTip();
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
     bool isMain = is_main_variation(current);

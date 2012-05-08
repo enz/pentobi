@@ -554,6 +554,8 @@ private:
 
     void setMoveNumberText();
 
+    void setPlayToolTip();
+
     void setFile(const QString& file);
 
     void showError(const QString& message,
