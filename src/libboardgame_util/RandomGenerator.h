@@ -63,7 +63,7 @@ private:
     // GCC 4.4 does not use the name uniform_real_distribution (as in C++11)
     // but uniform_real. This workaround can be removed when we begin using
     // other C++11 features that require GCC >4.4 anyway
-#if defined __GNUC__ && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ <= 4))
+#if defined __GLIBCXX__ && __GLIBCXX__ < 20100414
     uniform_real<float> m_float_distribution;
 #else
     uniform_real_distribution<float> m_float_distribution;
