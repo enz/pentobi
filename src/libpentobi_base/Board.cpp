@@ -237,7 +237,7 @@ Color Board::get_effective_to_play() const
     {
         if (has_moves(c))
             return c;
-        c = c.get_next(m_nu_colors);
+        c = get_next(c);
     }
     while (c != m_to_play);
     return c;
@@ -467,8 +467,7 @@ void Board::init_game_variant(GameVariant game_variant)
     {
         if (game_variant == game_variant_classic_2
             || game_variant == game_variant_trigon_2)
-            m_second_color[*i] =
-                (*i).get_next(m_nu_colors).get_next(m_nu_colors);
+            m_second_color[*i] = get_next(get_next(*i));
         else
             m_second_color[*i] = *i;
         m_is_attach_point[*i].init(*m_geometry);

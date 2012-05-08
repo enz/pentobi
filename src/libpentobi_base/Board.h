@@ -127,6 +127,10 @@ public:
 
     unsigned int get_nu_colors() const;
 
+    Color get_next(Color c) const;
+
+    Color get_previous(Color c) const;
+
     unsigned int get_nu_pieces() const;
 
     const PieceTransforms& get_transforms() const;
@@ -485,6 +489,11 @@ inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
     return m_board_const->get_moves(piece, p, adj_status_index);
 }
 
+inline Color Board::get_next(Color c) const
+{
+    return c.get_next(m_nu_colors);
+}
+
 inline unsigned int Board::get_nu_colors() const
 {
     return m_nu_colors;
@@ -558,6 +567,11 @@ inline unsigned int Board::get_points(Color c) const
 inline unsigned int Board::get_points_with_bonus(Color c) const
 {
     return get_points(c) + get_bonus(c);
+}
+
+inline Color Board::get_previous(Color c) const
+{
+    return c.get_previous(m_nu_colors);
 }
 
 inline Color Board::get_second_color(Color c) const
@@ -775,13 +789,13 @@ inline void Board::play_nonpass(Color c, Move mv)
 {
     place(c, mv);
     m_moves.push_back(ColorMove(c, mv));
-    m_to_play = c.get_next(m_nu_colors);
+    m_to_play = get_next(c);
 }
 
 inline void Board::play_pass(Color c)
 {
     m_moves.push_back(ColorMove(c, Move::pass()));
-    m_to_play = c.get_next(m_nu_colors);
+    m_to_play = get_next(c);
 }
 
 inline void Board::play(Move move)

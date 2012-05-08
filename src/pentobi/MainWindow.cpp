@@ -1613,21 +1613,18 @@ void MainWindow::genMoveFinished()
     Move mv = result.move;
     if (mv.is_null())
     {
-        showError(tr("Player failed to generate a move."));
+        showError(tr("Computer failed to generate a move."));
         return;
     }
     const Board& bd = getBoard();
     if (! bd.is_legal(c, mv))
     {
-        showError(tr("Player generated illegal move: %1")
+        showError(tr("Computer generated illegal move: %1")
                   .arg(bd.to_string(mv).c_str()));
         return;
     }
     if (mv.is_pass())
-    {
-        showStatus(tr("The computer has no more moves available."), true);
         return;
-    }
     m_lastComputerMovesEnd = bd.get_nu_moves() + 1;
     play(c, mv);
 }
@@ -2346,13 +2343,14 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
 void MainWindow::selectNextColor()
 {
     const Board& bd = getBoard();
-    m_currentColor = m_currentColor.get_next(bd.get_nu_colors());
+    m_currentColor = bd.get_next(m_currentColor);
     m_orientationDisplay->selectColor(m_currentColor);
     clearSelectedPiece();
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         m_pieceSelector[*i]->setEnabled(m_currentColor == *i);
     if (m_actionSetupMode->isChecked())
         setSetupPlayer();
+    updateWindow(false);
 }
 
 void MainWindow::selectPiece(Color c, Piece piece)
@@ -3071,6 +3069,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move_ignore_invalid(current);
+    bool hasMoves = bd.has_moves(m_currentColor);
     m_actionAnalyzeGame->setEnabled(tree.has_main_variation_moves());
     m_actionBackToMainVariation->setEnabled(! isMain);
     m_actionBeginning->setEnabled(hasParent);
@@ -3089,6 +3088,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
+    m_actionPlay->setEnabled(hasMoves);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     // See also comment in setupMode()
     m_actionSetupMode->setEnabled(! hasParent && ! hasChildren);
