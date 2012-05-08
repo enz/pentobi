@@ -46,10 +46,10 @@ bool is_child_better(const Search::Node* n1, const Search::Node* n2)
 //-----------------------------------------------------------------------------
 
 Engine::Engine(GameVariant game_variant, int level, bool use_book,
-               const path& books_dir)
+               const path& books_dir, size_t memory)
     : libpentobi_base::Engine(game_variant)
 {
-    create_player(game_variant, books_dir);
+    create_player(game_variant, books_dir, memory);
     get_mcts_player().set_use_book(use_book);
     get_mcts_player().set_level(level);
     add("gen_playout_move", &Engine::cmd_gen_playout_move);
@@ -152,9 +152,10 @@ void Engine::cmd_param(const Arguments& args, Response& response)
     }
 }
 
-void Engine::create_player(GameVariant game_variant, const path& books_dir)
+void Engine::create_player(GameVariant game_variant, const path& books_dir,
+                           size_t memory)
 {
-    m_player.reset(new Player(game_variant, books_dir));
+    m_player.reset(new Player(game_variant, books_dir, memory));
     set_player(*m_player);
 }
 

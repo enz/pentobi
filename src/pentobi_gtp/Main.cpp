@@ -72,6 +72,7 @@ int main(int argc, char** argv)
         options_description normal_options("Options");
         int level = 4;
         double prune_book_diff;
+        size_t memory = 0;
         normal_options.add_options()
             ("book", value<>(&book_file), "load an external book file")
             ("buildbook", value<>(&build_book_file),
@@ -82,6 +83,7 @@ int main(int argc, char** argv)
              "game variant (classic, classic_2, duo, trigon, trigon_2)")
             ("help,h", "print help message and exit")
             ("level,l", value<int>(&level), "set playing strength level")
+            ("memory", value<>(&memory), "memory to allocate for search trees")
             ("seed,r", value<uint32_t>(&seed), "set random seed")
             ("showboard", "automatically write board to stderr after changes")
             ("nobook", "do not use opening book")
@@ -116,6 +118,8 @@ int main(int argc, char** argv)
 #endif
             return EXIT_SUCCESS;
         }
+        if (memory == 0 && vm.count("memory"))
+            throw Exception("Value for memory must be greater zero.");
         Board::color_output = (vm.count("color") != 0);
         if (vm.count("quiet"))
             set_log_null();
@@ -151,7 +155,8 @@ int main(int argc, char** argv)
         }
         bool use_book = (vm.count("nobook") == 0);
         path books_dir = application_dir_path;
-        pentobi_gtp::Engine engine(game_variant, level, use_book, books_dir);
+        pentobi_gtp::Engine engine(game_variant, level, use_book, books_dir,
+                                   memory);
         if (vm.count("showboard"))
             engine.set_show_board(true);
         if (vm.count("seed"))
