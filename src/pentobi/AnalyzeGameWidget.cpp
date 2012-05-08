@@ -84,7 +84,9 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     if (m_currentPosition >= 0
         && static_cast<unsigned int>(m_currentPosition) < nu_moves)
     {
-        painter.setPen(Qt::DotLine);
+        QPen pen(QColor(96, 96, 96));
+        pen.setStyle(Qt::DotLine);
+        painter.setPen(pen);
         qreal x = m_currentPosition * m_dX + 0.5 * m_dX;
         painter.drawLine(x, 0, x, m_maxY);
     }
