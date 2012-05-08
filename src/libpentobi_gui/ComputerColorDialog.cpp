@@ -26,13 +26,13 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
       m_computerColor(computerColor),
       m_gameVariant(gameVariant)
 {
-    setWindowTitle(tr("Computer Color"));
+    setWindowTitle(tr("Computer Colors"));
     // Disable '?' button in title bar on Windows, we don't have
     // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
-    layout->addWidget(new QLabel(tr("Computer color:")));
+    layout->addWidget(new QLabel(tr("Colors played by the computer:")));
     if (m_gameVariant == game_variant_duo
         || m_gameVariant == game_variant_junior)
     {

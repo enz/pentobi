@@ -60,7 +60,7 @@ public slots:
 
     void clearSelectedPiece();
 
-    void computerColor();
+    void computerColors();
 
     void deleteAllVariations();
 
@@ -261,7 +261,7 @@ private:
 
     QString m_manualDir;
 
-    ColorMap<bool> m_computerColor;
+    ColorMap<bool> m_computerColors;
 
     ColorMap<PieceSelector*> m_pieceSelector;
 
@@ -293,7 +293,7 @@ private:
 
     QAction* m_actionClearSelectedPiece;
 
-    QAction* m_actionComputerColor;
+    QAction* m_actionComputerColors;
 
     QAction* m_actionCoordinateLabels;
 

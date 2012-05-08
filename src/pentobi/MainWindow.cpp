@@ -416,7 +416,7 @@ void MainWindow::cancelThread()
 void MainWindow::checkComputerMove()
 {
     bool isGameOver = getBoard().is_game_over();
-    if (! isGameOver && m_computerColor[m_currentColor])
+    if (! isGameOver && m_computerColors[m_currentColor])
         genMove();
     else
         m_lastComputerMovesBegin = 0;
@@ -537,17 +537,17 @@ void MainWindow::commentChanged()
     updateWindowModified();
 }
 
-void MainWindow::computerColor()
+void MainWindow::computerColors()
 {
     GameVariant variant = m_game->get_game_variant();
-    ComputerColorDialog dialog(this, variant, m_computerColor);
+    ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
     if (variant != game_variant_classic && variant != game_variant_trigon
         && variant != game_variant_trigon_3)
     {
         bool computerNone = true;
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
-            if (m_computerColor[*i])
+            if (m_computerColors[*i])
             {
                 computerNone = false;
                 break;
@@ -565,7 +565,7 @@ void MainWindow::computerColor()
 bool MainWindow::computerPlaysAll() const
 {
     for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
-        if (! m_computerColor[*i])
+        if (! m_computerColors[*i])
             return false;
     return true;
 }
@@ -617,10 +617,10 @@ void MainWindow::createActions()
     connect(m_actionClearSelectedPiece, SIGNAL(triggered()),
             this, SLOT(clearSelectedPiece()));
 
-    m_actionComputerColor = new QAction(tr("&Computer Color"), this);
-    setIcon(m_actionComputerColor, "pentobi-computer-color");
-    connect(m_actionComputerColor, SIGNAL(triggered()),
-            this, SLOT(computerColor()));
+    m_actionComputerColors = new QAction(tr("&Computer Colors"), this);
+    setIcon(m_actionComputerColors, "pentobi-computer-color");
+    connect(m_actionComputerColors, SIGNAL(triggered()),
+            this, SLOT(computerColors()));
 
     m_actionCoordinateLabels = new QAction(tr("C&oordinate Labels"), this);
     m_actionCoordinateLabels->setCheckable(true);
@@ -1131,7 +1131,7 @@ void MainWindow::createMenu()
     menuGameVariant->addAction(m_actionGameVariantTrigon2);
     menuGameVariant->addAction(m_actionGameVariantTrigon3);
     menuGameVariant->addAction(m_actionGameVariantJunior);
-    menuGame->addAction(m_actionComputerColor);
+    menuGame->addAction(m_actionComputerColors);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
@@ -1311,7 +1311,7 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionSave);
     m_toolBar->addAction(m_actionNewGame);
     m_toolBar->addAction(m_actionPlay);
-    m_toolBar->addAction(m_actionComputerColor);
+    m_toolBar->addAction(m_actionComputerColors);
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward10);
     m_toolBar->addAction(m_actionBackward);
@@ -1607,7 +1607,7 @@ void MainWindow::genMoveFinished()
     m_actionInterrupt->setEnabled(false);
     clearStatus();
     if (get_abort() && computerPlaysAll())
-        m_computerColor.fill(false);
+        m_computerColors.fill(false);
     Color c = result.color;
     Move mv = result.move;
     if (mv.is_null())
@@ -1779,19 +1779,19 @@ void MainWindow::initGame()
     m_game->set_charset("UTF-8");
     m_game->set_date_today();
     m_game->set_modified(false);
-    m_computerColor.fill(false);
+    m_computerColors.fill(false);
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
     {
         GameVariant game_variant = m_game->get_game_variant();
         if (game_variant == game_variant_duo
             || game_variant == game_variant_junior)
-            m_computerColor[Color(1)] = true;
+            m_computerColors[Color(1)] = true;
         else if (game_variant == game_variant_classic_2
                  || game_variant == game_variant_trigon_2)
         {
-            m_computerColor[Color(1)] = true;
-            m_computerColor[Color(3)] = true;
+            m_computerColors[Color(1)] = true;
+            m_computerColors[Color(3)] = true;
         }
     }
     m_currentColor = Color(0);
@@ -2032,7 +2032,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     if (isTemporary)
         // Set as modified to enable the Save action in updateWindowModified()
         m_game->set_modified(true);
-    m_computerColor.fill(false);
+    m_computerColors.fill(false);
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     initGameVariantActions();
@@ -2053,11 +2053,11 @@ void MainWindow::placePiece(Color c, Move mv)
 {
     cancelThread();
     bool isSetupMode = m_actionSetupMode->isChecked();
-    if (m_computerColor[c] || isSetupMode)
+    if (m_computerColors[c] || isSetupMode)
         // If the user enters a move previously played by the computer (e.g.
         // after undoing moves) then it is unlikely that the user wants to keep
         // the computer color settings.
-        m_computerColor.fill(false);
+        m_computerColors.fill(false);
     if (isSetupMode)
     {
         m_game->add_setup(c, mv);
@@ -2079,20 +2079,20 @@ void MainWindow::play()
         QSettings settings;
         settings.setValue("computer_color_none", false);
     }
-    if (! m_computerColor[m_currentColor])
+    if (! m_computerColors[m_currentColor])
     {
-        m_computerColor.fill(false);
-        m_computerColor[m_currentColor] = true;
+        m_computerColors.fill(false);
+        m_computerColors[m_currentColor] = true;
         if (variant == game_variant_classic_2
             || variant == game_variant_trigon_2)
         {
             if (m_currentColor == Color(0) || m_currentColor == Color(2))
-                m_computerColor[Color(0)] = m_computerColor[Color(2)] = true;
+                m_computerColors[Color(0)] = m_computerColors[Color(2)] = true;
             else
-                m_computerColor[Color(1)] = m_computerColor[Color(3)] = true;
+                m_computerColors[Color(1)] = m_computerColors[Color(3)] = true;
         }
         else
-            m_computerColor[m_currentColor] = true;
+            m_computerColors[m_currentColor] = true;
     }
     genMove();
 }
@@ -2650,7 +2650,7 @@ void MainWindow::setPlayToolTip()
     QString s;
     GameVariant variant = m_game->get_game_variant();
     Color c = m_currentColor;
-    bool isComputerColor = m_computerColor[m_currentColor];
+    bool isComputerColor = m_computerColors[m_currentColor];
     if (variant == game_variant_classic_2 || variant == game_variant_trigon_2)
     {
         if (c == Color(0) || c == Color(2))
@@ -2734,7 +2734,7 @@ void MainWindow::setupMode(bool enable)
         m_setupModeLabel->setText(tr("Setup mode"));
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
             m_pieceSelector[*i]->setEnabled(true);
-        m_computerColor.fill(false);
+        m_computerColors.fill(false);
     }
     else
     {

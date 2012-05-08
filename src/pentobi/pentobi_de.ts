@@ -183,8 +183,9 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="620"/>
-        <source>&amp;Computer Color</source>
-        <translation>&amp;Computer-Farbe</translation>
+        <source>&amp;Computer Colors</source>
+        <oldsource>&amp;Computer Color</oldsource>
+        <translation>&amp;Computer-Farben</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="625"/>
