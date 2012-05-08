@@ -429,7 +429,10 @@ bool MainWindow::checkSave()
         if (! m_game->get_modified())
             return true;
         QMessageBox::StandardButton button =
-            showQuestion(tr("The file has been modified. Save changes?"), "",
+            showQuestion(tr("Save changes?"),
+                         tr("The file has been modified."
+                            " If you do not save the file,"
+                            " the changes will be lost."),
                          QMessageBox::Yes | QMessageBox::No
                          | QMessageBox::Cancel);
         if (button == QMessageBox::Cancel)
@@ -462,7 +465,10 @@ bool MainWindow::checkQuit()
     if (! m_file.isEmpty() && m_game->get_modified())
     {
         QMessageBox::StandardButton button =
-            showQuestion(tr("The file has been modified. Save changes?"), "",
+            showQuestion(tr("Save changes?"),
+                         tr("The file has been modified."
+                            " If you do not save the file,"
+                            " the changes will be lost."),
                          QMessageBox::Save | QMessageBox::Discard
                          | QMessageBox::Cancel);
         if (button == QMessageBox::Cancel)
@@ -1287,6 +1293,12 @@ QWidget* MainWindow::createRightPanel()
 
 void MainWindow::deleteAllVariations()
 {
+    if (showQuestion(tr("Delete all variations?"),
+                     tr("All variations but the main variation will be"
+                        " removed from the game tree."),
+                     QMessageBox::Yes | QMessageBox::No)
+        != QMessageBox::Yes)
+        return;
     bool currentNodeChanges = ! is_main_variation(m_game->get_current());
     if (currentNodeChanges)
         cancelThread();
@@ -1856,6 +1868,12 @@ void MainWindow::interrupt()
 
 void MainWindow::keepOnlyPosition()
 {
+    if (showQuestion(tr("Keep only position?"),
+                     tr("All previous and following moves and variations will"
+                        " be removed from the game tree."),
+                     QMessageBox::Yes | QMessageBox::No)
+        != QMessageBox::Yes)
+        return;
     cancelThread();
     m_game->keep_only_position();
     updateWindow(true);
@@ -1863,6 +1881,12 @@ void MainWindow::keepOnlyPosition()
 
 void MainWindow::keepOnlySubtree()
 {
+    if (showQuestion(tr("Keep only subtree?"),
+                     tr("All previous moves and variations will be removed"
+                        " from the game tree."),
+                     QMessageBox::Yes | QMessageBox::No)
+        != QMessageBox::Yes)
+        return;
     cancelThread();
     m_game->keep_only_subtree();
     updateWindow(true);
@@ -2938,8 +2962,25 @@ void MainWindow::splitterMoved(int pos, int index)
 
 void MainWindow::truncate()
 {
-    if (! m_game->get_current().has_parent())
+    const Node& current = m_game->get_current();
+    if (! current.has_parent())
         return;
+    if (current.has_children())
+    {
+        if (showQuestion(tr("Remove this position and its subtree?"),
+                         tr("This position and all following moves and"
+                            " variations will be removed from the game tree."),
+                         QMessageBox::Yes | QMessageBox::No)
+            != QMessageBox::Yes)
+            return;
+    }
+    else
+    {
+        if (showQuestion(tr("Remove this position from the game tree?"),
+                         "", QMessageBox::Yes | QMessageBox::No)
+            != QMessageBox::Yes)
+            return;
+    }
     m_game->truncate();
     updateWindow(true);
 }
