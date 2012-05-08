@@ -10,6 +10,7 @@
 #include "BoardConst.h"
 #include "GameVariant.h"
 #include "Setup.h"
+#include "SgfUtil.h"
 #include "libboardgame_sgf/Tree.h"
 
 namespace libpentobi_base {
@@ -139,9 +140,19 @@ inline const BoardConst& Tree::get_board_const() const
     return *m_board_const;
 }
 
+inline const char* Tree::get_color(Color c) const
+{
+    return sgf_util::get_color_id(m_game_variant, c);
+}
+
 inline GameVariant Tree::get_game_variant() const
 {
     return m_game_variant;
+}
+
+inline const char* Tree::get_setup_prop_id(Color c) const
+{
+    return sgf_util::get_setup_id(m_game_variant, c);
 }
 
 inline bool Tree::has_move(const Node& node) const

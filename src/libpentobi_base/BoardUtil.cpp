@@ -10,54 +10,48 @@
 
 #include <iostream>
 #include <boost/foreach.hpp>
+#include "SgfUtil.h"
+#include "libboardgame_sgf/Writer.h"
 
 namespace libpentobi_base {
 namespace boardutil {
 
 using namespace std;
+using sgf_util::get_color_id;
+using sgf_util::get_setup_id;
+using libboardgame_sgf::Writer;
 
 //-----------------------------------------------------------------------------
 
 void dump(const Board& bd, ostream& out)
 {
-    GameVariant game_variant = bd.get_game_variant();
-    out << bd
-        << "(\n;GM[" << to_string(game_variant) << "]\n";
+    GameVariant variant = bd.get_game_variant();
+    Writer writer(out, true, true);
+    writer.begin_tree();
+    writer.begin_node();
+    writer.write_property("GM", to_string(variant));
     const Setup& setup = bd.get_setup();
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         if (! setup.placements[*i].empty())
         {
-            out << " A";
-            if (game_variant == game_variant_duo
-                || game_variant == game_variant_junior)
-                out << ((*i).to_int() == 0 ? 'B' : 'W');
-            else
-                out << ((*i).to_int() + 1);
-            bool is_first = true;
+            vector<string> values;
             BOOST_FOREACH(Move mv, setup.placements[*i])
-            {
-                if (! is_first)
-                    out << "   ";
-                is_first = false;
-                out << '[' << bd.to_string(mv, false) << "]\n";
-            }
+                values.push_back(bd.to_string(mv, false));
+            writer.write_property(get_setup_id(variant, *i), values);
         }
+    writer.end_node();
     for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
     {
+        writer.begin_node();
         ColorMove mv =  bd.get_move(i);
-        Color c = mv.color;
-        out << ';';
-        if (game_variant == game_variant_duo
-            || game_variant == game_variant_junior)
-            out << (c.to_int() == 0 ? 'B' : 'W');
-        else
-            out << (c.to_int() + 1);
-        out << '[';
+        const char* id = get_color_id(variant, mv.color);
         if (! mv.is_pass())
-            out << bd.to_string(mv.move, false);
-        out << "]\n";
+            writer.write_property(id, bd.to_string(mv.move, false));
+        else
+            writer.write_property(id, "");
+        writer.end_node();
     }
-    out << ")\n";
+    writer.end_tree();
 }
 
 void get_current_position_as_setup(const Board& bd, Setup& setup)

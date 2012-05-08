@@ -69,21 +69,6 @@ const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
     return 0;
 }
 
-const char* Tree::get_color(Color c) const
-{
-    if (m_game_variant == game_variant_duo
-        || m_game_variant == game_variant_junior)
-        return (c == Color(0) ? "B" : "W");
-    if (c == Color(0))
-        return "1";
-    if (c == Color(1))
-        return "2";
-    if (c == Color(2))
-        return "3";
-    LIBBOARDGAME_ASSERT(c == Color(3));
-    return "4";
-}
-
 bool Tree::get_move(const Node& node, GameVariant game_variant, Color& c,
                     MovePoints& points)
 {
@@ -454,27 +439,6 @@ void Tree::set_result(const Node& node, int score)
         set_property(node, "RE", format("W+%i") % -score);
     else
         set_property(node, "RE", "0");
-}
-
-const char* Tree::get_setup_prop_id(Color c) const
-{
-    unsigned int i = c.to_int();
-    if (m_game_variant == game_variant_duo
-        || m_game_variant == game_variant_junior)
-    {
-        if (i == 0)
-            return "AB";
-        LIBBOARDGAME_ASSERT(i == 1);
-        return "AW";
-    }
-    if (i == 0)
-        return "A1";
-    if (i == 1)
-        return "A2";
-    if (i == 2)
-        return "A3";
-    LIBBOARDGAME_ASSERT(i == 3);
-    return "A4";
 }
 
 void Tree::set_setup(const Node& node, const Setup& setup)

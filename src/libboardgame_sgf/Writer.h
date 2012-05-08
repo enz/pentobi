@@ -38,6 +38,8 @@ public:
 
     void end_node();
 
+    void write_property(const string& identifier, const char* value);
+
     template<typename T>
     void write_property(const string& identifier, const T& value);
 
@@ -65,6 +67,12 @@ private:
 
     void write_indent();
 };
+
+inline void Writer::write_property(const string& identifier, const char* value)
+{
+    vector<const char*> values(1, value);
+    write_property(identifier, values);
+}
 
 template<typename T>
 void Writer::write_property(const string& identifier, const T& value)
