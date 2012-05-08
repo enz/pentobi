@@ -4,22 +4,22 @@
 <context>
     <name>AnalyzeGameWidget</name>
     <message>
-        <location filename="AnalyzeGameWidget.cpp" line="94"/>
+        <location filename="AnalyzeGameWidget.cpp" line="95"/>
         <source>Win</source>
         <translation>Gewinn</translation>
     </message>
     <message>
-        <location filename="AnalyzeGameWidget.cpp" line="100"/>
+        <location filename="AnalyzeGameWidget.cpp" line="101"/>
         <source>Loss</source>
         <translation>Verlust</translation>
     </message>
     <message>
-        <location filename="AnalyzeGameWidget.cpp" line="194"/>
+        <location filename="AnalyzeGameWidget.cpp" line="195"/>
         <source>Running game analysis...</source>
         <translation>Spiel wird analysiert...</translation>
     </message>
     <message>
-        <location filename="AnalyzeGameWidget.cpp" line="196"/>
+        <location filename="AnalyzeGameWidget.cpp" line="197"/>
         <source>Pentobi - Progress</source>
         <translation>Pentobi - Fortschritt</translation>
     </message>
@@ -126,12 +126,7 @@
         <translation>Diese Brettstellung und alle folgenden Züge und Varianten werden aus dem Spielbaum entfernt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2979"/>
-        <source>Remove this position from the game tree?</source>
-        <translation>Diese Brettstellung aus dem Spielbaum entfernen?</translation>
-    </message>
-    <message>
-        <location filename="MainWindow.cpp" line="3212"/>
+        <location filename="MainWindow.cpp" line="3205"/>
         <source>Save (%1)</source>
         <translation>Speichern (%1)</translation>
     </message>
@@ -921,7 +916,7 @@
         <translation>Fehler in Datei &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3106"/>
+        <location filename="MainWindow.cpp" line="3099"/>
         <source>&amp;%1: %2</source>
         <extracomment>Label in Recent Files menu. The first 10 items are numbered to provide a mnemonic. %1 is replaced by the number, %2 by the file name.</extracomment>
         <translation>&amp;%1: %2</translation>

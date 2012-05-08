@@ -2974,13 +2974,6 @@ void MainWindow::truncate()
             != QMessageBox::Yes)
             return;
     }
-    else
-    {
-        if (showQuestion(tr("Remove this position from the game tree?"),
-                         "", QMessageBox::Yes | QMessageBox::No)
-            != QMessageBox::Yes)
-            return;
-    }
     m_game->truncate();
     updateWindow(true);
 }
