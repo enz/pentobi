@@ -331,12 +331,12 @@
     <message>
         <location filename="MainWindow.cpp" line="771"/>
         <source>Move Variation D&amp;own</source>
-        <translation>Variante nach &amp;unten</translation>
+        <translation>Variante nach &amp;unten schieben</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="775"/>
         <source>Move Variation &amp;Up</source>
-        <translation>Variante nach &amp;oben</translation>
+        <translation>Variante nach &amp;oben schieben</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="781"/>
