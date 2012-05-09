@@ -112,21 +112,8 @@ void init_setup(Board& bd, const Node& node)
     handle_setup_property(node, "AB", Color(0), bd, setup, all_pieces_left);
     handle_setup_property(node, "AW", Color(1), bd, setup, all_pieces_left);
     handle_setup_empty(node, bd, setup, all_pieces_left);
-    if (node.has_property("PL"))
-    {
-        string value = node.get_property("PL");
-        if (value == "B" || value == "1")
-            setup.to_play = Color(0);
-        else if (value == "W" || value == "2")
-            setup.to_play = Color(1);
-        else if (value == "3")
-            setup.to_play = Color(2);
-        else if (value == "4")
-            setup.to_play = Color(3);
-        else
-            throw InvalidTree("invalid value for PL property");
-    }
-    else
+    Color to_play;
+    if (! Tree::get_player(node, setup.to_play))
     {
         // Try to guess who should be to play based on the setup pieces.
         setup.to_play = Color(0);

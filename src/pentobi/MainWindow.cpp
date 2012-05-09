@@ -96,6 +96,48 @@ QString getAutoSaveFile()
     return dir + sep + "autosave.blksgf";
 }
 
+/** Determine the current color at the current node in the game.
+    - If the color was explicitely set with a setup property, it will be used.
+    - Otherwise, if the current node has children all with moves of the same
+      color, this color will be used. This is because some trees like search
+      dumps contain pass moves, so using the effective color to play is not
+      appropriate there.
+    - Otherwise, the effective color to play will be used. (see
+      Game::get_effective_to_play())  */
+Color getCurrentColor(const Game& game)
+{
+    const Tree& tree = game.get_tree();
+    const Node* node = &game.get_current();
+    Color c;
+    while (node != 0 && ! tree.has_move(*node))
+    {
+        if (Tree::get_player(*node, c))
+            return c;
+        node = node->get_parent_or_null();
+    }
+    bool all_same_color = true;
+    bool is_first = true;
+    for (ChildIterator i(game.get_current()); i; ++i)
+    {
+        if (! tree.has_move(*i))
+            continue;
+        if (is_first)
+        {
+            c = tree.get_move(*i).color;
+            is_first = false;
+            continue;
+        }
+        if (tree.get_move(*i).color != c)
+        {
+            all_same_color = false;
+            break;
+        }
+    }
+    if (! is_first && all_same_color)
+        return c;
+    return game.get_effective_to_play();
+}
+
 bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
 {
     const Node* node = current.get_parent_or_null();
@@ -1732,7 +1774,7 @@ void MainWindow::gotoNode(const Node& node)
         showInvalidFile(m_file, e);
         return;
     }
-    m_currentColor = m_game->get_effective_to_play();
+    m_currentColor = getCurrentColor(*m_game);
     m_lastComputerMovesBegin = 0;
     if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
@@ -2046,7 +2088,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_game->init(tree);
         if (! Tree::has_setup(m_game->get_root()))
             m_game->goto_node(get_last_node(m_game->get_root()));
-        m_currentColor = m_game->get_effective_to_play();
+        m_currentColor = getCurrentColor(*m_game);
         initPieceSelectors();
     }
     catch (const InvalidTree& e)
@@ -2127,7 +2169,6 @@ void MainWindow::play(Color c, Move mv)
     m_game->play(c, mv, false);
     c = m_game->get_to_play();
     m_gameFinished = false;
-    Color effective_to_play = m_game->get_effective_to_play();
     if (bd.is_game_over())
     {
         updateWindow(true);
@@ -2144,7 +2185,7 @@ void MainWindow::play(Color c, Move mv)
     }
     updateWindow(true);
     repaint();
-    m_currentColor = effective_to_play;
+    m_currentColor = m_game->get_effective_to_play();
     updateWindow(true);
     checkComputerMove();
 }

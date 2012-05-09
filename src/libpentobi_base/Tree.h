@@ -109,6 +109,9 @@ public:
     /** Set the color to play in a setup position (PL property). */
     void set_player(const Node& node, Color c);
 
+    /** Get the color to play in a setup position (PL property). */
+    static bool get_player(const Node& node, Color& c);
+
     /** Remove the PL property.
         @see set_player() */
     void remove_player(const Node& node);

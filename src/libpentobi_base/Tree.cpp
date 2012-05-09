@@ -212,6 +212,24 @@ const Node* Tree::get_node_before_move_number(unsigned int move_number) const
     return 0;
 }
 
+bool Tree::get_player(const Node& node, Color& c)
+{
+    if (! node.has_property("PL"))
+        return false;
+    string value = node.get_property("PL");
+    if (value == "B" || value == "1")
+        c = Color(0);
+    else if (value == "W" || value == "2")
+        c = Color(1);
+    else if (value == "3")
+        c = Color(2);
+    else if (value == "4")
+        c = Color(3);
+    else
+        throw InvalidTree("invalid value for PL property");
+    return true;
+}
+
 string Tree::get_player_name(Color c) const
 {
     const Node& root = get_root();

@@ -43,8 +43,13 @@ public:
 
     const Tree& get_tree() const;
 
+    /** Get the current color to play.
+        This takes not into account if the current color to play still has
+        moves available. */
     Color get_to_play() const;
 
+    /** Get the next color to play that still has moves.
+        The colors are tested in playing order starting with get_to_play(). */
     Color get_effective_to_play() const;
 
     /** @param mv
