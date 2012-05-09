@@ -59,8 +59,11 @@
       <a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> as the character
       set.
       Pentobi always writes files in UTF-8 and indicates that with the
-      <tt>CA</tt> property in the file.
-      Pentobi can read SGF files encoded in UTF-8 or Latin1.
+      <tt>CA</tt> property.
+      Pentobi can read SGF files encoded in UTF-8 or ISO-8859-1 (Latin1).
+      Other character sets are currently not supported.
+      As specified by the SGF standard, ISO-8859-1 is assumed for files
+      without <tt>CA</tt> property.
     </p>
 
     <h2>Game property</h2>
