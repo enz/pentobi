@@ -49,6 +49,12 @@ public:
     bool is_followup(const GameStateHistory& other,
                      vector<Move>& sequence) const;
 
+    /** Get the position of the board state as setup.
+        @pre is_valid()
+        @param[out] variant
+        @param[out] setup */
+    void get_as_setup(GameVariant& variant, Setup& setup) const;
+
 private:
     bool m_is_valid;
 

@@ -380,7 +380,7 @@ void Board::init(GameVariant game_variant, const Setup* setup)
         m_forbidden[*i].fill(false);
         m_is_attach_point[*i].fill(false);
         m_attach_points[*i].clear();
-        m_is_first_piece[*i] = true; 
+        m_is_first_piece[*i] = true;
         m_pieces_left[*i].clear();
         m_nu_onboard_pieces[*i] = 0;
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)
@@ -435,26 +435,7 @@ void Board::init_game_variant(GameVariant game_variant)
         m_color_esc_sequence_text[Color(2)] = "\x1B[1;31m";
         m_color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
     }
-    if (game_variant == game_variant_classic
-        || game_variant == game_variant_classic_2)
-    {
-        m_nu_colors = 4;
-    }
-    else if (game_variant == game_variant_trigon_3)
-    {
-        m_nu_colors = 3;
-    }
-    else if (game_variant == game_variant_duo
-             || game_variant == game_variant_junior)
-    {
-        m_nu_colors = 2;
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_trigon
-                            || game_variant == game_variant_trigon_2);
-        m_nu_colors = 4;
-    }
+    m_nu_colors = libpentobi_base::get_nu_colors(game_variant);
     m_board_const = &BoardConst::get(game_variant);
     m_geometry = &m_board_const->get_geometry();
     m_starting_points.init(game_variant, *m_geometry);

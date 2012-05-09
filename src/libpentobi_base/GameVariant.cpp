@@ -19,6 +19,25 @@ using boost::algorithm::to_lower_copy;
 
 //-----------------------------------------------------------------------------
 
+unsigned int get_nu_colors(GameVariant variant)
+{
+    switch (variant)
+    {
+    case game_variant_duo:
+    case game_variant_junior:
+        return 2;
+    case game_variant_trigon_3:
+        return 3;
+    case game_variant_classic:
+    case game_variant_classic_2:
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+        return 4;
+    }
+    LIBBOARDGAME_ASSERT(false);
+    return 0;
+}
+
 bool parse_game_variant(const string& s, GameVariant& game_variant)
 {
     string t = to_lower_copy(trim_copy(s));

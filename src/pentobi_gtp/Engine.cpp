@@ -8,9 +8,11 @@
 
 #include "Engine.h"
 
+#include <fstream>
 #include <boost/format.hpp>
 #include "libboardgame_sgf/TreeReader.h"
 #include "libpentobi_base/Tree.h"
+#include "libpentobi_mcts/Util.h"
 
 namespace pentobi_gtp {
 
@@ -56,6 +58,7 @@ Engine::Engine(GameVariant game_variant, int level, bool use_book,
     add("get_value", &Engine::cmd_get_value);
     add("param", &Engine::cmd_param);
     add("move_values", &Engine::cmd_move_values);
+    add("save_tree", &Engine::cmd_save_tree);
 }
 
 Engine::~Engine() throw()
@@ -77,7 +80,7 @@ void Engine::cmd_move_values(Response& response)
     vector<const Search::Node*> children;
     for (ChildIterator<Move> i(search.get_tree().get_root()); i; ++i)
         children.push_back(&(*i));
-    sort(children.begin(), children.end(), is_child_better);
+    sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);
     response << fixed;
     BOOST_FOREACH(const Search::Node* node, children)
     {
@@ -96,6 +99,16 @@ void Engine::cmd_move_values(Response& response)
             response << '-';
         response << ' ' << bd.to_string(node->get_move()) << '\n';
     }
+}
+
+void Engine::cmd_save_tree(const Arguments& args)
+{
+    const Search& search = get_search();
+    if (! search.get_last_state().is_valid())
+        throw Failure("no search tree");
+    string file = args.get();
+    ofstream out(file.c_str());
+    libpentobi_mcts::util::dump_tree(out, search);
 }
 
 void Engine::cmd_param(const Arguments& args, Response& response)

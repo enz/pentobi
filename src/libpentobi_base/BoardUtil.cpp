@@ -11,7 +11,6 @@
 #include <iostream>
 #include <boost/foreach.hpp>
 #include "SgfUtil.h"
-#include "libboardgame_sgf/Writer.h"
 
 namespace libpentobi_base {
 namespace boardutil {
@@ -19,7 +18,6 @@ namespace boardutil {
 using namespace std;
 using sgf_util::get_color_id;
 using sgf_util::get_setup_id;
-using libboardgame_sgf::Writer;
 
 //-----------------------------------------------------------------------------
 
@@ -30,15 +28,7 @@ void dump(const Board& bd, ostream& out)
     writer.begin_tree();
     writer.begin_node();
     writer.write_property("GM", to_string(variant));
-    const Setup& setup = bd.get_setup();
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        if (! setup.placements[*i].empty())
-        {
-            vector<string> values;
-            BOOST_FOREACH(Move mv, setup.placements[*i])
-                values.push_back(bd.to_string(mv, false));
-            writer.write_property(get_setup_id(variant, *i), values);
-        }
+    write_setup(writer, variant, bd.get_setup());
     writer.end_node();
     for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
     {
@@ -64,6 +54,19 @@ void get_current_position_as_setup(const Board& bd, Setup& setup)
             setup.placements[mv.color].push_back(mv.move);
     }
     setup.to_play = bd.get_to_play();
+}
+
+void write_setup(Writer& writer, GameVariant variant, const Setup& setup)
+{
+    const BoardConst& board_const = BoardConst::get(variant);
+    for (ColorIterator i(get_nu_colors(variant)); i; ++i)
+        if (! setup.placements[*i].empty())
+        {
+            vector<string> values;
+            BOOST_FOREACH(Move mv, setup.placements[*i])
+                values.push_back(board_const.to_string(mv, false));
+            writer.write_property(get_setup_id(variant, *i), values);
+        }
 }
 
 //-----------------------------------------------------------------------------

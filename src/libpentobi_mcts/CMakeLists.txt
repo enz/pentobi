@@ -9,6 +9,7 @@ set(pentobi_mcts_STAT_SRCS
   Player.cpp
   Search.cpp
   State.cpp
+  Util.cpp
   )
 
 add_library(pentobi_mcts STATIC ${pentobi_mcts_STAT_SRCS})

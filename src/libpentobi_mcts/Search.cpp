@@ -138,6 +138,12 @@ string Search::get_move_string(Move mv) const
     return piece_info.get_name() + " " + bd.to_string(mv);
 }
 
+void Search::get_root_position(GameVariant& variant, Setup& setup) const
+{
+    m_last_state.get_as_setup(variant, setup);
+    setup.to_play = m_to_play;
+}
+
 void Search::on_start_search()
 {
     const Board& bd = get_board();

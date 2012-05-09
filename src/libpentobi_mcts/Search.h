@@ -14,6 +14,7 @@ namespace libpentobi_mcts {
 using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
 using libpentobi_base::GameStateHistory;
+using libpentobi_base::Setup;
 
 //-----------------------------------------------------------------------------
 
@@ -81,6 +82,13 @@ public:
     /** Get color to play at root node of the last search. */
     Color get_to_play() const;
 
+    const GameStateHistory& get_last_state() const;
+
+    /** Get board position of last search at root node as setup.
+        @param[out] variant
+        @param[out] setup */
+    void get_root_position(GameVariant& variant, Setup& setup) const;
+
 protected:
     void on_start_search();
 
@@ -126,6 +134,11 @@ inline const Board& Search::get_board() const
 inline bool Search::get_detect_symmetry() const
 {
     return m_shared_const.detect_symmetry;
+}
+
+inline const GameStateHistory& Search::get_last_state() const
+{
+    return m_last_state;
 }
 
 inline unsigned int Search::get_nu_players() const

@@ -41,6 +41,8 @@ const char* to_string(GameVariant game_variant);
     @result True if the string contained a valid game variant. */
 bool parse_game_variant(const string& s, GameVariant& game_variant);
 
+unsigned int get_nu_colors(GameVariant variant);
+
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_base
