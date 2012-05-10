@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 #endif
         bool noBook = (vm.count("nobook") != 0);
         QString initialFile;
-        if (arguments.size() > 0)
+        if (! arguments.empty())
             initialFile = arguments[0].c_str();
         MainWindow mainWindow(initialFile, manualDir, booksDir, noBook,
                               memory);

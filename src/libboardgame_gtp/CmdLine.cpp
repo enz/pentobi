@@ -73,9 +73,9 @@ void CmdLine::init(const string& line)
 {
     m_line = line;
     find_elem();
-    assert(m_elem.size() > 0);
+    assert(! m_elem.empty());
     parse_id();
-    assert(m_elem.size() > 0);
+    assert(! m_elem.empty());
 }
 
 void CmdLine::init(const CmdLine& c)
