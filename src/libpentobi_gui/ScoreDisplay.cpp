@@ -139,8 +139,8 @@ int ScoreDisplay::getTextWidth(QString text) const
 void ScoreDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
-    m_colorDotSize = 0.8 * m_fontSize;
-    m_colorDotSpace = 0.3 * m_fontSize;
+    m_colorDotSize = static_cast<int>(0.8 * m_fontSize);
+    m_colorDotSpace = static_cast<int>(0.3 * m_fontSize);
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
     if (m_gameVariant == game_variant_duo
@@ -151,9 +151,9 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
         int totalWidth = textWidthBlue + textWidthGreen + 2 * m_colorDotWidth;
         qreal pad = qreal(width() - totalWidth) / 3.f;
         qreal x = pad;
-        drawScore(painter, Color(0), x);
-        x+= m_colorDotWidth + textWidthBlue + pad;
-        drawScore(painter, Color(1), x);
+        drawScore(painter, Color(0), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthBlue + pad;
+        drawScore(painter, Color(1), static_cast<int>(x));
     }
     else if (m_gameVariant == game_variant_classic
              || m_gameVariant == game_variant_trigon)
@@ -167,13 +167,13 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
             + 4 * m_colorDotWidth;
         qreal pad = qreal(width() - totalWidth) / 5.f;
         qreal x = pad;
-        drawScore(painter, Color(0), x);
-        x+= m_colorDotWidth + textWidthBlue + pad;
-        drawScore(painter, Color(1), x);
-        x+= m_colorDotWidth + textWidthYellow + pad;
-        drawScore(painter, Color(2), x);
-        x+= m_colorDotWidth + textWidthRed + pad;
-        drawScore(painter, Color(3), x);
+        drawScore(painter, Color(0), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthBlue + pad;
+        drawScore(painter, Color(1), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthYellow + pad;
+        drawScore(painter, Color(2), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthRed + pad;
+        drawScore(painter, Color(3), static_cast<int>(x));
     }
     else if (m_gameVariant == game_variant_trigon_3)
     {
@@ -185,11 +185,11 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
             + 3 * m_colorDotWidth;
         qreal pad = qreal(width() - totalWidth) / 4.f;
         qreal x = pad;
-        drawScore(painter, Color(0), x);
-        x+= m_colorDotWidth + textWidthBlue + pad;
-        drawScore(painter, Color(1), x);
-        x+= m_colorDotWidth + textWidthYellow + pad;
-        drawScore(painter, Color(2), x);
+        drawScore(painter, Color(0), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthBlue + pad;
+        drawScore(painter, Color(1), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthYellow + pad;
+        drawScore(painter, Color(2), static_cast<int>(x));
     }
     else
     {
@@ -207,23 +207,23 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
             + 2 * m_twoColorDotWidth + 4 * m_colorDotWidth;
         qreal pad = qreal(width() - totalWidth) / 7.f;
         qreal x = pad;
-        drawScore2(painter, Color(0), Color(2), x);
-        x+= m_twoColorDotWidth + textWidthBlueRed + pad;
-        drawScore2(painter, Color(1), Color(3), x);
-        x+= m_twoColorDotWidth + textWidthYellowGreen + pad;
-        drawScore(painter, Color(0), x);
-        x+= m_colorDotWidth + textWidthBlue + pad;
-        drawScore(painter, Color(1), x);
-        x+= m_colorDotWidth + textWidthYellow + pad;
-        drawScore(painter, Color(2), x);
-        x+= m_colorDotWidth + textWidthRed + pad;
-        drawScore(painter, Color(3), x);
+        drawScore2(painter, Color(0), Color(2), static_cast<int>(x));
+        x += m_twoColorDotWidth + textWidthBlueRed + pad;
+        drawScore2(painter, Color(1), Color(3), static_cast<int>(x));
+        x += m_twoColorDotWidth + textWidthYellowGreen + pad;
+        drawScore(painter, Color(0), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthBlue + pad;
+        drawScore(painter, Color(1), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthYellow + pad;
+        drawScore(painter, Color(2), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthRed + pad;
+        drawScore(painter, Color(3), static_cast<int>(x));
     }
 }
 
 void ScoreDisplay::resizeEvent(QResizeEvent*)
 {
-    m_fontSize = floor(0.7 * height());
+    m_fontSize = static_cast<int>(floor(0.7 * height()));
     m_font.setPixelSize(m_fontSize);
     m_fontUnderlined.setPixelSize(m_fontSize);
 }

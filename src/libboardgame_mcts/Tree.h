@@ -410,7 +410,8 @@ inline const typename Tree<M>::Node& Tree<M>::get_root() const
 template<typename M>
 inline unsigned int Tree<M>::get_thread_storage(const Node& node) const
 {
-    return (&node - m_nodes.get()) / m_nodes_per_thread;
+    size_t diff = &node - m_nodes.get();
+    return static_cast<unsigned int>(diff / m_nodes_per_thread);
 }
 
 template<typename M>

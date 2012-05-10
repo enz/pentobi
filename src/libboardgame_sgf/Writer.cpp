@@ -87,9 +87,9 @@ void Writer::write_indent()
         m_out << ' ';
 }
 
-void Writer::write_property(const string& identifier, const format& f)
+void Writer::write_property(const string& id, const format& f)
 {
-    write_property(identifier, str(f));
+    write_property(id, str(f));
 }
 
 //-----------------------------------------------------------------------------

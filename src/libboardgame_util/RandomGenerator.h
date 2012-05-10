@@ -83,16 +83,14 @@ inline double RandomGenerator::generate_float()
 
 inline int RandomGenerator::generate_small_int(int n)
 {
-    LIBBOARDGAME_ASSERT(n < (1 << 16));
-    int i = ((m_generator() & 0xffff) * n) >> 16;
-    LIBBOARDGAME_ASSERT(i < n);
-    return i;
+    return static_cast<int>(generate_small_uint(static_cast<unsigned int>(n)));
 }
 
 inline unsigned int RandomGenerator::generate_small_uint(unsigned int n)
 {
     LIBBOARDGAME_ASSERT(n < (1 << 16));
-    unsigned int i = ((m_generator() & 0xffff) * n) >> 16;
+    unsigned int i =
+        static_cast<unsigned int>(((m_generator() & 0xffff) * n) >> 16);
     LIBBOARDGAME_ASSERT(i < n);
     return i;
 }

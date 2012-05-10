@@ -139,8 +139,8 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
 {
     if (! m_hasPainted)
         return CoordPoint::null();
-    x = (x - m_boardOffset.x()) / m_fieldWidth;
-    y = (y - m_boardOffset.y()) / m_fieldHeight;
+    x = static_cast<int>((x - m_boardOffset.x()) / m_fieldWidth);
+    y = static_cast<int>((y - m_boardOffset.y()) / m_fieldHeight);
     y = m_height - y - 1;
     if (x < 0 || x >= m_width || y < 0 || y >= m_height)
         return CoordPoint::null();

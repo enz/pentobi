@@ -58,7 +58,8 @@ void AnalyzeGameWidget::mousePressEvent(QMouseEvent* event)
 {
     if (! m_isInitialized && m_isRunning)
         return;
-    unsigned int moveNumber = (event->x() - m_borderX) / m_dX;
+    unsigned int moveNumber =
+        static_cast<unsigned int>((event->x() - m_borderX) / m_dX);
     if (moveNumber >= m_analyzeGame.get_nu_moves())
         return;
     vector<ColorMove> moves;
@@ -87,7 +88,7 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
         painter.setPen(pen);
-        qreal x = m_currentPosition * m_dX + 0.5 * m_dX;
+        int x = static_cast<int>(m_currentPosition * m_dX + 0.5 * m_dX);
         painter.drawLine(x, 0, x, m_maxY);
     }
     painter.setPen(QColor(32, 32, 32));
@@ -108,7 +109,7 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
                      labelLoss);
     painter.setRenderHint(QPainter::Antialiasing, false);
     painter.setPen(QColor(128, 128, 128));
-    painter.drawLine(0, 0.5 * m_maxY, m_maxX, 0.5 * m_maxY);
+    painter.drawLine(0, m_maxY / 2, m_maxX, m_maxY / 2);
     painter.setRenderHint(QPainter::Antialiasing, true);
     for (unsigned int i = 0; i < nu_moves; ++i)
     {

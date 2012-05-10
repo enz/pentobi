@@ -186,8 +186,9 @@ float getMoveHeuristic(const Board& bd, Move mv)
 {
     const MoveInfo& info = bd.get_move_info(mv);
     const MoveInfoExt& info_ext = bd.get_move_info_ext(mv);
-    return (1000 * info.points.size() + 10 * info_ext.attach_points.size()
-            - info_ext.adj_points.size());
+    return static_cast<float>((1000 * info.points.size()
+                               + 10 * info_ext.attach_points.size()
+                               - info_ext.adj_points.size()));
 }
 
 /** Comparison for sorting move list in Find Move. */
@@ -1755,7 +1756,8 @@ void MainWindow::gotoMove()
         defaultValue = maxMoves;
     bool ok;
     int i = QInputDialog::getInt(this, tr("Go to Move"), tr("Move number:"),
-                                 defaultValue, 1, nodes.size(), 1, &ok);
+                                 defaultValue, 1,
+                                 static_cast<int>(nodes.size()), 1, &ok);
     if (! ok)
         return;
     gotoNode(*nodes[i - 1]);
@@ -2817,8 +2819,8 @@ void MainWindow::showComment(bool checked)
         if (m_comment->height() > 0)
             return;
         QList<int> sizes;
-        sizes.push_back(0.85 * height);
-        sizes.push_back(0.15 * height);
+        sizes.push_back(static_cast<int>(0.85 * height));
+        sizes.push_back(static_cast<int>(0.15 * height));
         m_splitter->setSizes(sizes);
     }
     else

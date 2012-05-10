@@ -180,8 +180,8 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
     if (pixelX < 0 || pixelX >= m_selectorWidth
         || pixelY < 0 || pixelY >= m_selectorHeight)
         return;
-    int x = pixelX / m_fieldWidth;
-    int y = pixelY / m_fieldHeight;
+    int x = static_cast<int>(pixelX / m_fieldWidth);
+    int y = static_cast<int>(pixelY / m_fieldHeight);
     Piece piece = m_piece[x][y];
     if (piece.is_null() || m_disabledStatus[x][y])
         return;

@@ -152,7 +152,8 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
 void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
 {
     if (saturation != 1)
-        c.setHsv(c.hue(), saturation * c.saturation(), c.value());
+        c.setHsv(c.hue(), static_cast<int>(saturation * c.saturation()),
+                 c.value());
     if (alpha != 1)
         c.setAlphaF(alpha);
 }
