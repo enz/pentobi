@@ -30,23 +30,6 @@ using libpentobi_mcts::ValueType;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-bool is_child_better(const Search::Node* n1, const Search::Node* n2)
-{
-    ValueType visit_count1 = n1->get_visit_count();
-    ValueType visit_count2 = n2->get_visit_count();
-    if (visit_count1 != visit_count2)
-        return visit_count1 > visit_count2;
-    if (n1->get_count() > 0 && n2->get_count() > 0)
-        return n1->get_value() > n2->get_value();
-    return false;
-}
-
-} // namespace
-
-//-----------------------------------------------------------------------------
-
 Engine::Engine(GameVariant game_variant, int level, bool use_book,
                const path& books_dir, size_t memory)
     : libpentobi_base::Engine(game_variant)
