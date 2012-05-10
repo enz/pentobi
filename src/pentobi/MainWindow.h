@@ -544,6 +544,9 @@ private:
 
     void initPieceSelectors();
 
+    void initQuestion(QMessageBox& msgBox, const QString& text,
+                      const QString& infoText = QString());
+
     void leaveSetupMode();
 
     void play(Color c, Move mv);
@@ -571,10 +574,6 @@ private:
 
     void showMessage(QMessageBox::Icon icon, const QString& text,
                      const QString& infoText, const QString& detailText);
-
-    QMessageBox::StandardButton showQuestion(const QString& text,
-                                             const QString& infoText,
-                                         QMessageBox::StandardButtons buttons);
 
     void updateWindow(bool currentNodeChanged);
 

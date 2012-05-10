@@ -471,34 +471,41 @@ bool MainWindow::checkSave()
     {
         if (! m_game->get_modified())
             return true;
-        QMessageBox::StandardButton button =
-            showQuestion(tr("Save changes?"),
-                         tr("The file has been modified."
-                            " If you do not save the file,"
-                            " the changes will be lost."),
-                         QMessageBox::Yes | QMessageBox::No
-                         | QMessageBox::Cancel);
-        if (button == QMessageBox::Cancel)
-            return false;
-        if (button == QMessageBox::Yes)
+        QMessageBox msgBox(this);
+        initQuestion(msgBox, tr("The file has been modified."),
+                     tr("Do you want to save your changes?"));
+        // Don't use QMessageBox::Discard because on some platforms it uses the
+        // text "Close without saving" which implies that the window would be
+        // closed
+        QPushButton* discardButton =
+            msgBox.addButton(tr("Don't Save"), QMessageBox::DestructiveRole);
+        QPushButton* saveButton = msgBox.addButton(QMessageBox::Save);
+        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        msgBox.setDefaultButton(cancelButton);
+        msgBox.exec();
+        QAbstractButton* result = msgBox.clickedButton();
+        if (result == saveButton)
         {
-            if (m_file.isEmpty())
-                saveAs();
-            else
-                save();
+            save();
+            return true;
         }
-        return true;
+        return (result == discardButton);
     }
     // Don't ask if game should be saved if it was finished because the user
     // might only want to play and never save games.
     if (m_game->get_tree().get_root().has_children() && ! m_gameFinished)
     {
-        QMessageBox::StandardButton button =
-            showQuestion(tr("Abort current game?"), "",
-                         QMessageBox::Yes | QMessageBox::No);
-        if (button == QMessageBox::Yes || button == QMessageBox::Cancel)
-            return true;
-        return false;
+        QMessageBox msgBox(this);
+        initQuestion(msgBox, tr("The current game is not finished."),
+                     tr("Do you want to abort the game?"));
+        QPushButton* abortGameButton =
+            msgBox.addButton(tr("Abort Game"), QMessageBox::DestructiveRole);
+        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        msgBox.setDefaultButton(cancelButton);
+        msgBox.exec();
+        if (msgBox.clickedButton() != abortGameButton)
+            return false;
+        return true;
     }
     return true;
 }
@@ -507,22 +514,21 @@ bool MainWindow::checkQuit()
 {
     if (! m_file.isEmpty() && m_game->get_modified())
     {
-        QMessageBox::StandardButton button =
-            showQuestion(tr("Save changes?"),
-                         tr("The file has been modified."
-                            " If you do not save the file,"
-                            " the changes will be lost."),
-                         QMessageBox::Save | QMessageBox::Discard
-                         | QMessageBox::Cancel);
-        if (button == QMessageBox::Cancel)
-            return false;
-        if (button == QMessageBox::Save)
+        QMessageBox msgBox(this);
+        initQuestion(msgBox, tr("The file has been modified."),
+                     tr("Do you want to save your changes?"));
+        QPushButton* discardButton = msgBox.addButton(QMessageBox::Discard);
+        QPushButton* saveButton = msgBox.addButton(QMessageBox::Save);
+        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        msgBox.setDefaultButton(cancelButton);
+        msgBox.exec();
+        QAbstractButton* result = msgBox.clickedButton();
+        if (result == saveButton)
         {
-            if (m_file.isEmpty())
-                saveAs();
-            else
-                save();
+            save();
+            return true;
         }
+        return (result == discardButton);
     }
     cancelThread();
     QSettings settings;
@@ -1336,11 +1342,16 @@ QWidget* MainWindow::createRightPanel()
 
 void MainWindow::deleteAllVariations()
 {
-    if (showQuestion(tr("Delete all variations?"),
-                     tr("All variations but the main variation will be"
-                        " removed from the game tree."),
-                     QMessageBox::Yes | QMessageBox::No)
-        != QMessageBox::Yes)
+    QMessageBox msgBox(this);
+    initQuestion(msgBox, tr("Delete all variations?"),
+                 tr("All variations but the main variation will be"
+                    " removed from the game tree."));
+    QPushButton* deleteButton =
+        msgBox.addButton(tr("Delete Variations"), QMessageBox::DestructiveRole);
+    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(cancelButton);
+    msgBox.exec();
+    if (msgBox.clickedButton() != deleteButton)
         return;
     bool currentNodeChanges = ! is_main_variation(m_game->get_current());
     if (currentNodeChanges)
@@ -1494,11 +1505,16 @@ void MainWindow::findNextComment()
     const Node* node = find_next_comment(current);
     if (node == 0 && &current != &root)
     {
-        if (showQuestion(tr("Continue from start?"),
-                         tr("The end of the tree was reached. "
-                            "Continue the search from the start of the tree?"),
-                         QMessageBox::Yes | QMessageBox::No)
-            == QMessageBox::Yes)
+        QMessageBox msgBox(this);
+        initQuestion(msgBox, tr("The end of the tree was reached."),
+                     tr("Continue the search from the start of the tree?"));
+        QPushButton* continueButton =
+            msgBox.addButton(tr("Continue From Start"),
+                             QMessageBox::AcceptRole);
+        msgBox.addButton(QMessageBox::Cancel);
+        msgBox.setDefaultButton(continueButton);
+        msgBox.exec();
+        if (msgBox.clickedButton() == continueButton)
         {
             node = &root;
             if (! has_comment(*node))
@@ -1897,6 +1913,23 @@ void MainWindow::initPieceSelectors()
     }
 }
 
+void MainWindow::initQuestion(QMessageBox& msgBox, const QString& text,
+                              const QString& infoText)
+{
+    msgBox.setWindowTitle(tr("Pentobi"));
+    // Workaround to avoid very small widths if the main text is short, which
+    // causes ugly word wrapping with single-word lines in the informative text.
+    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
+    QString expandedText = text;
+    QFontMetrics metrics(qApp->font("QLabel"));
+    int minWidth = 30 * metrics.averageCharWidth();
+    while (metrics.width(expandedText) < minWidth)
+        expandedText.append(" ");
+    msgBox.setIcon(QMessageBox::Question);
+    msgBox.setText(expandedText);
+    msgBox.setInformativeText(infoText);
+}
+
 void MainWindow::interestingMove(bool checked)
 {
     if (! checked)
@@ -1912,11 +1945,17 @@ void MainWindow::interrupt()
 
 void MainWindow::keepOnlyPosition()
 {
-    if (showQuestion(tr("Keep only position?"),
-                     tr("All previous and following moves and variations will"
-                        " be removed from the game tree."),
-                     QMessageBox::Yes | QMessageBox::No)
-        != QMessageBox::Yes)
+    QMessageBox msgBox(this);
+    initQuestion(msgBox, tr("Keep only position?"),
+                 tr("All previous and following moves and variations will"
+                    " be removed from the game tree."));
+    QPushButton* keepOnlyPositionButton =
+        msgBox.addButton(tr("Keep Only Position"),
+                         QMessageBox::DestructiveRole);
+    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(cancelButton);
+    msgBox.exec();
+    if (msgBox.clickedButton() != keepOnlyPositionButton)
         return;
     cancelThread();
     m_game->keep_only_position();
@@ -1925,11 +1964,17 @@ void MainWindow::keepOnlyPosition()
 
 void MainWindow::keepOnlySubtree()
 {
-    if (showQuestion(tr("Keep only subtree?"),
-                     tr("All previous moves and variations will be removed"
-                        " from the game tree."),
-                     QMessageBox::Yes | QMessageBox::No)
-        != QMessageBox::Yes)
+    QMessageBox msgBox(this);
+    initQuestion(msgBox, tr("Keep only subtree?"),
+                 tr("All previous moves and variations will be removed"
+                    " from the game tree."));
+    QPushButton* keepOnlySubtreeButton =
+        msgBox.addButton(tr("Keep Only Subtree"),
+                         QMessageBox::DestructiveRole);
+    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(cancelButton);
+    msgBox.exec();
+    if (msgBox.clickedButton() != keepOnlySubtreeButton)
         return;
     cancelThread();
     m_game->keep_only_subtree();
@@ -2964,27 +3009,6 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
     msgBox.exec();
 }
 
-QMessageBox::StandardButton MainWindow::showQuestion(const QString& text,
-                                                     const QString& infoText,
-                                           QMessageBox::StandardButtons buttons)
-{
-    // Workaround to avoid very small widths if the main text is short, which
-    // causes ugly word wrapping with single-word lines in the informative text.
-    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
-    QString expandedText = text;
-    QFontMetrics metrics(qApp->font("QLabel"));
-    int minWidth = 30 * metrics.averageCharWidth();
-    while (metrics.width(expandedText) < minWidth)
-        expandedText.append(" ");
-    QMessageBox msgBox(this);
-    msgBox.setWindowTitle(tr("Pentobi"));
-    msgBox.setIcon(QMessageBox::Question);
-    msgBox.setText(expandedText);
-    msgBox.setInformativeText(infoText);
-    msgBox.setStandardButtons(buttons);
-    return static_cast<QMessageBox::StandardButton>(msgBox.exec());
-}
-
 void MainWindow::showStatus(const QString& text, bool temporary)
 {
     int timeout = (temporary ? 4000 : 0);
@@ -3010,11 +3034,17 @@ void MainWindow::truncate()
         return;
     if (current.has_children())
     {
-        if (showQuestion(tr("Remove this position and its subtree?"),
-                         tr("This position and all following moves and"
-                            " variations will be removed from the game tree."),
-                         QMessageBox::Yes | QMessageBox::No)
-            != QMessageBox::Yes)
+        QMessageBox msgBox(this);
+        initQuestion(msgBox, tr("Truncate this subtree?"),
+                     tr("This position and all following moves and"
+                        " variations will be removed from the game tree."));
+        QPushButton* truncateButton =
+            msgBox.addButton(tr("Truncate"),
+                             QMessageBox::DestructiveRole);
+        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        msgBox.setDefaultButton(cancelButton);
+        msgBox.exec();
+        if (msgBox.clickedButton() != truncateButton)
             return;
     }
     m_game->truncate();
