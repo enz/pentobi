@@ -3018,6 +3018,7 @@ void MainWindow::truncate()
             return;
     }
     m_game->truncate();
+    m_currentColor = getCurrentColor(*m_game);
     updateWindow(true);
 }
 
