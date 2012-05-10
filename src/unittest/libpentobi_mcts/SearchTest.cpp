@@ -64,14 +64,14 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     BoardUpdater updater(tree, *bd);
     updater.update(get_last_node(tree.get_root()));
     size_t memory = 10000;
-    Search search(bd->get_game_variant(), memory);
+    unique_ptr<Search> search(new Search(bd->get_game_variant(), memory));
     ValueType max_count = 1;
     size_t min_simulations = 1;
     double max_time = 0;
     CpuTime time_source;
     Move mv;
-    bool res = search.search(mv, *bd, Color(1), max_count, min_simulations,
-                             max_time, time_source);
+    bool res = search->search(mv, *bd, Color(1), max_count, min_simulations,
+                              max_time, time_source);
     LIBBOARDGAME_CHECK(res);
     LIBBOARDGAME_CHECK(! mv.is_null());
     LIBBOARDGAME_CHECK(! mv.is_pass());

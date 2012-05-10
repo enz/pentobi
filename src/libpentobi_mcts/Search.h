@@ -18,6 +18,8 @@ using libpentobi_base::Setup;
 
 //-----------------------------------------------------------------------------
 
+/** Monte-Carlo tree search implementation for Blokus.
+    @note @ref libboardgame_avoid_stack_allocation */
 class Search
     : public libboardgame_mcts::Search<State, Move, 4>
 {
