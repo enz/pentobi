@@ -16,6 +16,12 @@
       <dt>Open</dt>
       <dd>
 	Load a saved game.
+	The board position after loading will be the last position in the
+	main variation unless the game starts with a setup position.
+	If the game starts with a setup, the board position will be the first
+	position instead.
+	This avoids that solutions are immediately shown if the file contains
+	a Blokus puzzle as a setup with the solution as the main variation.
       </dd>
       <dt>Open Recent</dt>
       <dd>
