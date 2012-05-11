@@ -2478,6 +2478,7 @@ void MainWindow::selectPiece(Color c, Piece piece)
 
 void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
 {
+    m_currentColor = c;
     m_guiBoard->selectPiece(c, piece);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->selectColor(c);
