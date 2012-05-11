@@ -11,6 +11,7 @@ set(pentobi_SRCS
   Application.cpp
   MainWindow.cpp
   Main.cpp
+  Util.cpp
   )
 
 set(pentobi_MOC_HDRS

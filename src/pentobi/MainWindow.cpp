@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <boost/algorithm/string/trim.hpp>
+#include "Util.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
@@ -2381,6 +2382,7 @@ bool MainWindow::save(const QString& file)
     }
     else
     {
+        Util::removeThumbnail(file);
         showStatus(tr("File saved %1").arg(file), true);
         return true;
     }
