@@ -53,6 +53,12 @@ void OrientationDisplay::clearSelectedPiece()
     update();
 }
 
+void OrientationDisplay::mousePressEvent(QMouseEvent*)
+{
+    if (m_isColorSelected && m_piece.is_null())
+        emit colorClicked(m_color);
+}
+
 void OrientationDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);

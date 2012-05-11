@@ -1317,6 +1317,8 @@ QWidget* MainWindow::createOrientationSelector()
     QHBoxLayout* frameLayout = new QHBoxLayout();
     frame->setLayout(frameLayout);
     m_orientationDisplay = new OrientationDisplay(0, getBoard());
+    connect(m_orientationDisplay, SIGNAL(colorClicked(Color)),
+            this, SLOT(orientationDisplayColorClicked(Color)));
     frameLayout->addWidget(m_orientationDisplay);
     layout->addWidget(createOrientationButtonBoxRight(), 0);
     return widget;
@@ -2171,6 +2173,12 @@ void MainWindow::openRecentFile()
      if (! checkSave())
          return;
      open(action->data().toString());
+}
+
+void MainWindow::orientationDisplayColorClicked(Color)
+{
+    if (m_actionSetupMode->isChecked())
+        selectNextColor();
 }
 
 void MainWindow::placePiece(Color c, Move mv)

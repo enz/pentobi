@@ -34,7 +34,14 @@ public:
 
     void setSelectedPieceTransform(const Transform* transform);
 
+signals:
+    /** A mouse click on the orientation display while a color but no no piece
+        was selected. */
+    void colorClicked(Color color);
+
 protected:
+    void mousePressEvent(QMouseEvent* event);
+
     void paintEvent(QPaintEvent* event);
 
 private:

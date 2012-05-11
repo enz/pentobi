@@ -628,6 +628,8 @@ private slots:
 
     void openRecentFile();
 
+    void orientationDisplayColorClicked(Color c);
+
     void selectNamedPiece(const char* name1, const char* name2 = 0,
                           const char* name3 = 0, const char* name4 = 0);
 
