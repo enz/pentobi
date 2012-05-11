@@ -328,6 +328,7 @@ void Tree::keep_only_subtree(const Node& node)
     if (&node == &get_root())
         return;
     string charset = get_root().get_property("CA", "");
+    string application = get_root().get_property("AP", "");
     bool create_new_setup = has_move(node);
     if (! create_new_setup)
     {
@@ -353,6 +354,11 @@ void Tree::keep_only_subtree(const Node& node)
         set_setup(node, setup);
     }
     make_root(node);
+    if (! application.empty())
+    {
+        set_property(node, "AP", application);
+        move_property_to_front(node, "AP");
+    }
     if (! charset.empty())
     {
         set_property(node, "CA", charset);

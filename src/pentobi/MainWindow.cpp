@@ -1849,6 +1849,11 @@ void MainWindow::initGame()
     }
     m_game->init();
     m_game->set_charset("UTF-8");
+#ifdef VERSION
+    m_game->set_application("Pentobi", VERSION);
+#else
+    m_game->set_application("Pentobi");
+#endif
     m_game->set_date_today();
     m_game->set_modified(false);
     m_computerColors.fill(false);
@@ -2358,11 +2363,6 @@ void MainWindow::save()
 
 bool MainWindow::save(const QString& file)
 {
-#ifdef VERSION
-    m_game->set_application("Pentobi", VERSION);
-#else
-    m_game->set_application("Pentobi");
-#endif
     ofstream out(file.toLocal8Bit().constData());
     write_tree(out, m_game->get_root(), true, true, 2);
     if (! out)
