@@ -722,12 +722,12 @@
     <message>
         <location filename="MainWindow.cpp" line="500"/>
         <source>Do you want to abort the game?</source>
-        <translation>Spiel abbrechen?</translation>
+        <translation>Spiel vorzeitig beenden?</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="502"/>
         <source>Abort Game</source>
-        <translation>Spiel abbrechen</translation>
+        <translation>Vorzeitig beenden</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1514"/>
