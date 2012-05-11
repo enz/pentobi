@@ -83,4 +83,9 @@ install(FILES ${pentobi_QM_SRCS} DESTINATION share/games/pentobi/translations)
 
 install(DIRECTORY manual DESTINATION share/games/pentobi)
 
-configure_file(pentobi.conf.in pentobi.conf @ONLY)
+if(MSVC)
+  configure_file(pentobi.conf.in Debug/pentobi.conf @ONLY)
+  configure_file(pentobi.conf.in Release/pentobi.conf @ONLY)
+else()
+  configure_file(pentobi.conf.in pentobi.conf @ONLY)
+endif()
