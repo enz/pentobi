@@ -1090,6 +1090,10 @@ void MainWindow::createActions()
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 
+    m_actionTruncateChildren = new QAction(tr("Truncate C&hildren"), this);
+    connect(m_actionTruncateChildren, SIGNAL(triggered()),
+            this, SLOT(truncateChildren()));
+
     m_actionUnderlineVariations =
         new QAction(tr("&Underline Variations"), this);
     m_actionUnderlineVariations->setCheckable(true);
@@ -1221,6 +1225,7 @@ void MainWindow::createMenu()
     menuEdit->addAction(m_actionMoveUpVariation);
     menuEdit->addAction(m_actionMoveDownVariation);
     menuEdit->addAction(m_actionTruncate);
+    menuEdit->addAction(m_actionTruncateChildren);
     menuEdit->addAction(m_actionKeepOnlyPosition);
     menuEdit->addAction(m_actionKeepOnlySubtree);
     menuEdit->addSeparator();
@@ -3052,6 +3057,26 @@ void MainWindow::truncate()
     updateWindow(true);
 }
 
+void MainWindow::truncateChildren()
+{
+    if (! m_game->get_current().has_children())
+        return;
+    QMessageBox msgBox(this);
+    initQuestion(msgBox, tr("Truncate children?"),
+                 tr("All following moves and variations will"
+                    " be removed from the game tree."));
+    QPushButton* truncateButton =
+        msgBox.addButton(tr("Truncate Children"),
+                         QMessageBox::DestructiveRole);
+    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(cancelButton);
+    msgBox.exec();
+    if (msgBox.clickedButton() != truncateButton)
+        return;
+    m_game->truncate_children();
+    updateWindow(false);
+}
+
 void MainWindow::underlineVariations(bool checked)
 {
     {
@@ -3261,6 +3286,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     // See also comment in setupMode()
     m_actionSetupMode->setEnabled(! hasParent && ! hasChildren);
     m_actionTruncate->setEnabled(hasParent);
+    m_actionTruncateChildren->setEnabled(hasChildren);
     m_actionUndo->setEnabled(hasParent || ! hasChildren || hasMove);
 }
 

@@ -190,6 +190,8 @@ public slots:
 
     void truncate();
 
+    void truncateChildren();
+
     void undo();
 
     void underlineVariations(bool checked);
@@ -458,6 +460,8 @@ private:
     QAction* m_actionSetupMode;
 
     QAction* m_actionTruncate;
+
+    QAction* m_actionTruncateChildren;
 
     QAction* m_actionUnderlineVariations;
 

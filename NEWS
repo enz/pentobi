@@ -14,8 +14,9 @@ Current development version
   Pentobi). A new setup mode can be used to create files that start
   with a setup position including positions that cannot occur in
   real games (e.g. for puzzles or Blokus art)
-* New menu items "Delete All Variations", "Keep Only Position",
-  "Keep Only Subtree", "Move Variation Up/Down"
+* New menu items for editing the game tree: "Delete All Variations",
+  "Keep Only Position", "Keep Only Subtree", "Move Variation Up/Down",
+  "Truncate Children"
 * Underlining of move numbers on the board for moves that have a
   variation can now be disabled with "View/Underline Variations".
 * Added a toolbar button for fast selection of the computer colors

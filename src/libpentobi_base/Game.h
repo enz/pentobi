@@ -112,6 +112,8 @@ public:
         @pre get_current().has_parent() */
     void truncate();
 
+    void truncate_children();
+
     /** Replace the game tree by a new one that has the current position
         as a setup in its root node. */
     void keep_only_position();
@@ -351,6 +353,11 @@ inline void Game::set_modified(bool modified)
 inline void Game::set_player_name(Color c, const string& name)
 {
     m_tree.set_player_name(c, name);
+}
+
+inline void Game::truncate_children()
+{
+    m_tree.remove_children(*m_current);
 }
 
 //-----------------------------------------------------------------------------
