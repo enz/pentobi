@@ -90,7 +90,7 @@ public:
         Invalid move properties are ignored. */
     bool has_main_variation_moves() const;
 
-    void keep_only_position(const Node& node);
+    void keep_only_subtree(const Node& node);
 
     /** Add a piece as setup.
         @pre mv.is_regular()

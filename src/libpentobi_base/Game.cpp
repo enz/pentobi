@@ -95,7 +95,7 @@ void Game::init(unique_ptr<Node>& root)
 
 void Game::keep_only_position()
 {
-    m_tree.keep_only_position(*m_current);
+    m_tree.keep_only_subtree(*m_current);
     m_tree.remove_children(m_tree.get_root());
     m_current = 0;
     goto_node(m_tree.get_root());
@@ -103,7 +103,7 @@ void Game::keep_only_position()
 
 void Game::keep_only_subtree()
 {
-    m_tree.keep_only_position(*m_current);
+    m_tree.keep_only_subtree(*m_current);
     m_current = 0;
     goto_node(m_tree.get_root());
 }

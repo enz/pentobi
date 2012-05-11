@@ -322,7 +322,7 @@ void Tree::init_game_variant(GameVariant game_variant)
     set_modified(false);
 }
 
-void Tree::keep_only_position(const Node& node)
+void Tree::keep_only_subtree(const Node& node)
 {
     LIBBOARDGAME_ASSERT(contains(node));
     if (&node == &get_root())
@@ -349,7 +349,6 @@ void Tree::keep_only_position(const Node& node)
         updater.update(node);
         Setup setup;
         get_current_position_as_setup(*bd, setup);
-        LIBBOARDGAME_ASSERT(! has_move(node));
         LIBBOARDGAME_ASSERT(! has_setup(node));
         set_setup(node, setup);
     }
