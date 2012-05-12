@@ -8,10 +8,6 @@
 
 #include "Util.h"
 
-#include "libboardgame_util/Log.h"
-
-using libboardgame_util::log;
-
 //-----------------------------------------------------------------------------
 
 namespace Util
@@ -30,10 +26,9 @@ void removeThumbnail(const QString& file)
     QByteArray md5 =
         QCryptographicHash::hash(url, QCryptographicHash::Md5).toHex();
     QString home = QDir::home().path();
-    QString normalThumbnail = home + "/.thumbnails/normal/" + md5 + ".png";
-    QString largeThumbnail = home + "/.thumbnails/large/" + md5 + ".png";
-    QFile::remove(normalThumbnail);
-    QFile::remove(largeThumbnail);
+    QFile::remove(home + "/.thumbnails/normal/" + md5 + ".png");
+    QFile::remove(home + "/.thumbnails/large/" + md5 + ".png");
+    QFile::remove(home + "/.thumbnails/fail/" + md5 + ".png");
 }
 
 } // namespace Util
