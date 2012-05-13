@@ -1237,14 +1237,14 @@ void MainWindow::createMenu()
     menuView->addAction(m_actionShowToolbar);
     menuView->addAction(m_actionShowComment);
     menuView->addSeparator();
-    menuView->addAction(m_actionFullscreen);
-    menuView->addSeparator();
     QMenu* menuMoveNumbers = menuView->addMenu(tr("&Move Numbers"));
     menuMoveNumbers->addAction(m_actionMoveNumbersLast);
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
     menuMoveNumbers->addAction(m_actionMoveNumbersNone);
     menuView->addAction(m_actionCoordinateLabels);
     menuView->addAction(m_actionUnderlineVariations);
+    menuView->addSeparator();
+    menuView->addAction(m_actionFullscreen);
 
     QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
