@@ -81,7 +81,8 @@ install(TARGETS pentobi DESTINATION games)
 # update the directory used in Main.cpp:loadPentobiTranslator()
 install(FILES ${pentobi_QM_SRCS} DESTINATION share/games/pentobi/translations)
 
-install(DIRECTORY manual DESTINATION share/games/pentobi)
+install(DIRECTORY manual DESTINATION share/games/pentobi
+  FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png")
 
 if(MSVC)
   configure_file(pentobi.conf.in Debug/pentobi.conf @ONLY)
