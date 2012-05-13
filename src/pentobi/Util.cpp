@@ -28,7 +28,6 @@ void removeThumbnail(const QString& file)
     QString home = QDir::home().path();
     QFile::remove(home + "/.thumbnails/normal/" + md5 + ".png");
     QFile::remove(home + "/.thumbnails/large/" + md5 + ".png");
-    QFile::remove(home + "/.thumbnails/fail/" + md5 + ".png");
 }
 
 } // namespace Util
