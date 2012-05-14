@@ -1312,7 +1312,7 @@ QWidget* MainWindow::createOrientationSelector()
     layout->setContentsMargins(QMargins());
     layout->addWidget(createOrientationButtonBoxLeft(), 0);
     QFrame* frame = new QFrame();
-    frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    frame->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     layout->addWidget(frame, 1);
     QHBoxLayout* frameLayout = new QHBoxLayout();
     frame->setLayout(frameLayout);
