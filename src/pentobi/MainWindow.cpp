@@ -322,9 +322,12 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     else
         statusBar()->removeWidget(m_buttonFullscreen);
 
-    showComment(false);
-    m_splitter->restoreState(settings.value("splitter_state").toByteArray());
-    m_actionShowComment->setChecked(m_comment->height() > 0);
+    bool showComment = settings.value("show_comment", false).toBool();
+    m_comment->setVisible(showComment);
+    if (showComment)
+        m_splitter->restoreState(
+                               settings.value("splitter_state").toByteArray());
+    m_actionShowComment->setChecked(showComment);
     updateWindow(true);
     clearFile();
     if (! initialFile.isEmpty())
@@ -534,7 +537,8 @@ bool MainWindow::checkQuit()
     cancelThread();
     QSettings settings;
     settings.setValue("geometry", saveGeometry());
-    settings.setValue("splitter_state", m_splitter->saveState());
+    if (m_comment->isVisible())
+        settings.setValue("splitter_state", m_splitter->saveState());
     settings.setValue("toolbar", m_toolBar->isVisible());
     return true;
 }
@@ -1144,8 +1148,7 @@ QWidget* MainWindow::createLeftPanel()
     m_splitter->setStretchFactor(0, 85);
     m_splitter->setStretchFactor(1, 15);
     m_splitter->setCollapsible(0, false);
-    connect(m_splitter, SIGNAL(splitterMoved(int, int)),
-            this, SLOT(splitterMoved(int, int)));
+    m_splitter->setCollapsible(1, false);
     return m_splitter;
 }
 
@@ -2874,23 +2877,16 @@ void MainWindow::setupMode(bool enable)
 
 void MainWindow::showComment(bool checked)
 {
-    int height = m_splitter->height();
-    if (checked)
-    {
-        if (m_comment->height() > 0)
-            return;
-        QList<int> sizes;
-        sizes.push_back(static_cast<int>(0.85 * height));
-        sizes.push_back(static_cast<int>(0.15 * height));
-        m_splitter->setSizes(sizes);
-    }
-    else
-    {
-        QList<int> sizes;
-        sizes.push_back(height);
-        sizes.push_back(0);
-        m_splitter->setSizes(sizes);
-    }
+    QSettings settings;
+    bool wasVisible = m_comment->isVisible();
+    if (wasVisible && ! checked)
+        settings.setValue("splitter_state", m_splitter->saveState());
+    settings.setValue("show_comment", checked);
+    m_comment->setVisible(checked);
+    if (! wasVisible && checked)
+        m_splitter->restoreState(
+                               settings.value("splitter_state").toByteArray());
+
 }
 
 void MainWindow::showError(const QString& text, const QString& infoText,
@@ -3034,13 +3030,6 @@ void MainWindow::showStatus(const QString& text, bool temporary)
 QSize MainWindow::sizeHint() const
 {
     return QSize(1020, 634);
-}
-
-void MainWindow::splitterMoved(int pos, int index)
-{
-    LIBBOARDGAME_UNUSED(pos);
-    LIBBOARDGAME_UNUSED(index);
-    m_actionShowComment->setChecked(m_comment->height() > 0);
 }
 
 void MainWindow::truncate()

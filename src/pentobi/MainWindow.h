@@ -649,8 +649,6 @@ private slots:
 
     void showStatus(const QString& text, bool temporary = false);
 
-    void splitterMoved(int pos, int index);
-
     void veryBadMove(bool checked);
 
     void veryGoodMove(bool checked);
