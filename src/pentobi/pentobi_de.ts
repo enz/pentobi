@@ -701,7 +701,7 @@
     <message>
         <location filename="MainWindow.cpp" line="356"/>
         <source>Computer program which plays the board game Blokus.</source>
-        <translation>Computerprogramm, das das Brettspiel Blokus spielt.</translation>
+        <translation>Computerprogramm, welches das Brettspiel Blokus spielt.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="358"/>
