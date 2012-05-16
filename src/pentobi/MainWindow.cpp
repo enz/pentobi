@@ -347,19 +347,18 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About Pentobi"),
-          QString("<style type=\"text/css\">"
-                  ":link { text-decoration: none; }"
-                  "</style>") +
-          tr("<h2>Pentobi</h2>"
-             "<p>Version %1</p>"
-             "<p>"
-             "Computer program that plays the board game Blokus."
-             "<br>"
-             "&copy; 2011&ndash;2012 Markus Enzenberger"
-             "<br>"
-             "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
-             "</p>"
-             ).arg(getVersion()));
+                       "<style type=\"text/css\">"
+                       ":link { text-decoration: none; }"
+                       "</style>"
+                       "<h2>" + tr("Pentobi") + "</h2>"
+                       "<p>" + tr("Version %1").arg(getVersion()) + "</p>"
+                       "<p>" +
+                       tr("Computer program which plays the board game Blokus.")
+                       + "<br>" +
+                       tr("&copy; 2011&ndash;2012 Markus Enzenberger") +
+                       "<br>"
+                       "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
+                       "</p>");
 }
 
 void MainWindow::analyzeGame()
