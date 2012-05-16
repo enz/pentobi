@@ -353,7 +353,7 @@ void MainWindow::about()
                        "<h2>" + tr("Pentobi") + "</h2>"
                        "<p>" + tr("Version %1").arg(getVersion()) + "</p>"
                        "<p>" +
-                       tr("Computer program which plays the board game Blokus.")
+                       tr("Computer program that plays the board game Blokus.")
                        + "<br>" +
                        tr("&copy; 2011&ndash;2012 Markus Enzenberger") +
                        "<br>"
