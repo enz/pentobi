@@ -350,14 +350,15 @@ void MainWindow::about()
                        "<style type=\"text/css\">"
                        ":link { text-decoration: none; }"
                        "</style>"
-                       "<h2>" + tr("Pentobi") + "</h2>"
+                       "<h3>" + tr("Pentobi") + "</h3>"
                        "<p>" + tr("Version %1").arg(getVersion()) + "</p>"
                        "<p>" +
                        tr("Computer program that plays the board game Blokus.")
-                       + "<br>" +
-                       tr("&copy; 2011&ndash;2012 Markus Enzenberger") +
-                       "<br>"
-                       "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
+                       + "<br>"
+                       "<a href=\"http://pentobi.sourceforge.net\">http://pentobi.sourceforge.net</a>"
+                       + "</p>"
+                       "<p>" +
+                       tr("Copyright &copy; 2011&ndash;2012 Markus Enzenberger") +
                        "</p>");
 }
 
