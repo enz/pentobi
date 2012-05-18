@@ -340,6 +340,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             open(autoSaveFile, true);
             m_gameFinished = getBoard().is_game_over();
             updateWindow(true);
+            deleteAutoSaveFile();
         }
     }
 }
@@ -535,6 +536,11 @@ bool MainWindow::checkQuit()
         return (result == discardButton);
     }
     cancelThread();
+    if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
+    {
+        ofstream out(getAutoSaveFile().toStdString().c_str());
+        write_tree(out, m_game->get_root(), true, true, 2);
+    }
     QSettings settings;
     settings.setValue("geometry", saveGeometry());
     if (m_comment->isVisible())
@@ -2246,11 +2252,6 @@ void MainWindow::play(Color c, Move mv)
         m_gameFinished = true;
         deleteAutoSaveFile();
         return;
-    }
-    if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
-    {
-        ofstream out(getAutoSaveFile().toStdString().c_str());
-        write_tree(out, m_game->get_root(), true, true, 2);
     }
     updateWindow(true);
     repaint();
