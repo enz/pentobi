@@ -17,11 +17,11 @@ using libpentobi_base::game_variant_junior;
 
 namespace {
 
-const QColor blue(0, 115, 207);
+const QColor blue(0, 122, 219);
 
-const QColor green(0, 192, 0);
+const QColor green(0, 204, 0);
 
-const QColor red(230, 62, 44);
+const QColor red(237, 55, 36);
 
 const QColor yellow(235, 205, 35);
 
@@ -272,14 +272,14 @@ void Util::paintColorTriangle(QPainter& painter, GameVariant gameVariant,
 
 void Util::paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size)
 {
-    paintSquare(painter, x, y, size, gray, gray.darker(130), gray.lighter(115));
+    paintSquare(painter, x, y, size, gray, gray.darker(140), gray.lighter(120));
 }
 
 void Util::paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x,
                               qreal y, qreal width, qreal height)
 {
     paintTriangle(painter, isUpside, x, y, width, height, gray,
-                  gray.darker(130), gray.lighter(115));
+                  gray.darker(140), gray.lighter(120));
 }
 
 void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside,
