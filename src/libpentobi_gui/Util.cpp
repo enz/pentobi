@@ -25,7 +25,7 @@ const QColor red(237, 55, 36);
 
 const QColor yellow(235, 205, 35);
 
-const QColor gray(166, 159, 164);
+const QColor gray(174, 167, 172);
 
 void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal width,
               qreal height, qreal size)
