@@ -34,7 +34,9 @@ public:
     void cmd_param(const Arguments&, Response&);
     void cmd_get_value(Response&);
     void cmd_move_values(Response&);
+    void cmd_name(Response&);
     void cmd_save_tree(const Arguments&);
+    void cmd_version(Response&);
 
     Player& get_mcts_player();
 

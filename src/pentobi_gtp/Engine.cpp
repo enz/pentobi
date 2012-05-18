@@ -39,9 +39,11 @@ Engine::Engine(GameVariant game_variant, int level, bool use_book,
     get_mcts_player().set_level(level);
     add("gen_playout_move", &Engine::cmd_gen_playout_move);
     add("get_value", &Engine::cmd_get_value);
+    add("name", &Engine::cmd_name);
     add("param", &Engine::cmd_param);
     add("move_values", &Engine::cmd_move_values);
     add("save_tree", &Engine::cmd_save_tree);
+    add("version", &Engine::cmd_version);
 }
 
 Engine::~Engine() throw()
@@ -82,6 +84,11 @@ void Engine::cmd_move_values(Response& response)
             response << '-';
         response << ' ' << bd.to_string(node->get_move()) << '\n';
     }
+}
+
+void Engine::cmd_name(Response& response)
+{
+    response.set("Pentobi");
 }
 
 void Engine::cmd_save_tree(const Arguments& args)
@@ -146,6 +153,29 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         else
             throw Failure(format("unknown parameter '%1%'") % name);
     }
+}
+
+void Engine::cmd_version(Response& response)
+{
+    string version;
+#ifdef VERSION
+    version = VERSION;
+#endif
+    if (version.empty())
+        version = "UNKNOWN";
+    // By convention, the version string of unreleased versions contains the
+    // string UNKNOWN (appended to the last released version). In this case, or
+    // if VERSION was undefined, we append the build date.
+    if (version.find("UNKNOWN") != string::npos)
+    {
+        version.append(" (");
+        version.append(__DATE__);
+        version.append(")");
+    }
+#if LIBBOARDGAME_DEBUG
+    version.append(" (dbg)");
+#endif
+    response.set(version);
 }
 
 void Engine::create_player(GameVariant game_variant, const path& books_dir,
