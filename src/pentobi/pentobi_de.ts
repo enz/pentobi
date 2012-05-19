@@ -722,8 +722,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="490"/>
-        <source>Don&apos;t Save</source>
-        <translation>Nicht speichern</translation>
+        <source>&amp;Don&apos;t Save</source>
+        <translation>&amp;Nicht speichern</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="508"/>

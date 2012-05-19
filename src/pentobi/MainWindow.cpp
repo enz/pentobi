@@ -487,7 +487,7 @@ bool MainWindow::checkSave()
         // text "Close without saving" which implies that the window would be
         // closed
         QPushButton* discardButton =
-            msgBox.addButton(tr("Don't Save"), QMessageBox::DestructiveRole);
+            msgBox.addButton(tr("&Don't Save"), QMessageBox::DestructiveRole);
         QPushButton* saveButton = msgBox.addButton(QMessageBox::Save);
         QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
         msgBox.setDefaultButton(cancelButton);
