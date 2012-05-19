@@ -415,12 +415,17 @@ void MainWindow::backward()
 
 void MainWindow::backward10()
 {
+    const Tree& tree = m_game->get_tree();
     const Node* node = &m_game->get_current();
-    for (unsigned int i = 0; i < 10; ++i)
+    unsigned int n = 0;
+    while (n < 10)
     {
-        if (! node->has_parent())
+        if (tree.has_move(*node))
+            ++n;
+        const Node* parent = node->get_parent_or_null();
+        if (parent == 0)
             break;
-        node = &node->get_parent();
+        node = parent;
     }
     gotoNode(*node);
 }
@@ -1585,9 +1590,13 @@ void MainWindow::forward()
 
 void MainWindow::forward10()
 {
+    const Tree& tree = m_game->get_tree();
     const Node* node = &m_game->get_current();
-    for (unsigned int i = 0; i < 10; ++i)
+    unsigned int n = 0;
+    while (n < 10)
     {
+        if (tree.has_move(*node))
+            ++n;
         const Node* child = node->get_first_child_or_null();
         if (child == 0)
             break;
