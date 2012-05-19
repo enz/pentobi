@@ -508,7 +508,7 @@ bool MainWindow::checkSave()
         initQuestion(msgBox, tr("The current game is not finished."),
                      tr("Do you want to abort the game?"));
         QPushButton* abortGameButton =
-            msgBox.addButton(tr("Abort Game"), QMessageBox::DestructiveRole);
+            msgBox.addButton(tr("&Abort Game"), QMessageBox::DestructiveRole);
         QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
         msgBox.setDefaultButton(cancelButton);
         msgBox.exec();

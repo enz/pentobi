@@ -737,8 +737,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="511"/>
-        <source>Abort Game</source>
-        <translation>Vorzeitig beenden</translation>
+        <source>&amp;Abort Game</source>
+        <translation>&amp;Vorzeitig beenden</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1529"/>
