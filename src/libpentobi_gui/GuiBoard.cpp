@@ -312,7 +312,8 @@ void GuiBoard::paintEvent(QPaintEvent*)
     }
     if (m_emptyBoardDirty)
     {
-        QColor coordLabelColor = palette().color(QPalette::WindowText);
+        QColor coordLabelColor =
+            QApplication::palette().color(QPalette::WindowText);
         m_boardPainter.setCoordLabelColor(coordLabelColor);
         // Why does QPixmap::fill(QWidget) not work on KDE? It does not fill the
         // pixmap with the backgound gradient but with a solid color (tested

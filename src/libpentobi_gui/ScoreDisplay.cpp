@@ -50,7 +50,7 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
         painter.setFont(m_font);
     else
         painter.setFont(m_fontUnderlined);
-    painter.setPen(QApplication::palette().text().color());
+    painter.setPen(QApplication::palette().color(QPalette::WindowText));
     painter.setRenderHint(QPainter::Antialiasing, false);
     painter.drawText(x + m_colorDotWidth, 0, getTextWidth(text), height(),
                      Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
