@@ -35,6 +35,7 @@ BoardPainter::BoardPainter()
       m_drawCoordLabels(false),
       m_coordLabelColor(Qt::black)
 {
+    m_font.setFamily("Helvetica");
     m_font.setStyleStrategy(QFont::PreferOutline);
     m_fontSemiCondensed = m_font;
     m_fontSemiCondensed.setStretch(QFont::SemiCondensed);
