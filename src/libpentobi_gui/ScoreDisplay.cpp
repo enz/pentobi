@@ -24,11 +24,12 @@ using libpentobi_base::game_variant_trigon_3;
 //-----------------------------------------------------------------------------
 
 ScoreDisplay::ScoreDisplay(QWidget* parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      m_hasMoves(false),
+      m_points(0),
+      m_bonus(0)
 {
     m_gameVariant = game_variant_classic;
-    m_points.fill(0);
-    m_bonus.fill(0);
     m_font.setStyleStrategy(QFont::PreferOutline);
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
