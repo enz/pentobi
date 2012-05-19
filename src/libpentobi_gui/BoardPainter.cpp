@@ -40,6 +40,8 @@ BoardPainter::BoardPainter()
     m_fontSemiCondensed.setStretch(QFont::SemiCondensed);
     m_fontCondensed = m_font;
     m_fontCondensed.setStretch(QFont::Condensed);
+    m_fontCoordLabels = m_font;
+    m_fontCoordLabels.setStretch(QFont::SemiCondensed);
 }
 
 void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
@@ -85,25 +87,28 @@ void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
 
 void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
                              qreal width, qreal height, const QString& label,
-                             bool semiCondensed)
+                             bool isCoordLabel)
 {
-    if (semiCondensed)
-        painter.setFont(m_fontSemiCondensed);
+    if (isCoordLabel)
+        painter.setFont(m_fontCoordLabels);
     else
         painter.setFont(m_font);
     QFontMetrics metrics(painter.font());
     QRect boundingRect = metrics.boundingRect(label);
-    if (boundingRect.width() > width)
+    if (! isCoordLabel)
     {
-        painter.setFont(m_fontSemiCondensed);
-        QFontMetrics metrics(painter.font());
-        boundingRect = metrics.boundingRect(label);
-    }
-    if (boundingRect.width() > width)
-    {
-        painter.setFont(m_fontCondensed);
-        QFontMetrics metrics(painter.font());
-        boundingRect = metrics.boundingRect(label);
+        if (boundingRect.width() > width)
+        {
+            painter.setFont(m_fontSemiCondensed);
+            QFontMetrics metrics(painter.font());
+            boundingRect = metrics.boundingRect(label);
+        }
+        if (boundingRect.width() > width)
+        {
+            painter.setFont(m_fontCondensed);
+            QFontMetrics metrics(painter.font());
+            boundingRect = metrics.boundingRect(label);
+        }
     }
     qreal dx = 0.5 * (width - boundingRect.width());
     qreal dy = 0.5 * (height - boundingRect.height());
@@ -200,11 +205,15 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
                     0.5 * (height - m_fieldHeight * m_height));
     }
     if (m_isTrigon)
+    {
         m_font.setPointSizeF(0.55 * m_fieldWidth);
+        m_fontCoordLabels.setPointSizeF(0.43 * m_fieldWidth);
+    }
     else
+    {
         m_font.setPointSizeF(0.4 * m_fieldWidth);
-    m_fontUnderlined = m_font;
-    m_fontUnderlined.setUnderline(true);
+        m_fontCoordLabels.setPointSizeF(0.34 * m_fieldWidth);
+    }
     painter.save();
     painter.translate(m_boardOffset);
     if (m_drawCoordLabels)

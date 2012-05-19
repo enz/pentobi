@@ -95,14 +95,14 @@ private:
 
     QFont m_fontSemiCondensed;
 
-    QFont m_fontUnderlined;
+    QFont m_fontCoordLabels;
 
     StartingPoints m_startingPoints;
 
     void drawCoordinates(QPainter& painter, bool isTrigon);
 
     void drawLabel(QPainter& painter, qreal x, qreal y, qreal width,
-                   qreal height, const QString& label, bool semiCondensed);
+                   qreal height, const QString& label, bool isCoordLabel);
 
     void drawLabels(QPainter& painter, const Grid<PointState>& pointState,
                     GameVariant gameVariant, const Grid<QString>* labels);
