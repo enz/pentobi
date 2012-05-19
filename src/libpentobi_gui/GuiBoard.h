@@ -7,7 +7,6 @@
 
 #include <QtGui>
 #include "BoardPainter.h"
-#include "MarkupFlags.h"
 #include "libboardgame_base/CoordPoint.h"
 #include "libpentobi_base/Board.h"
 
@@ -38,8 +37,6 @@ public:
 
     const Grid<QString>& getLabels() const;
 
-    const Grid<MarkupFlags>& getMarkupFlags() const;
-
     Piece getSelectedPiece() const;
 
     const Transform* getSelectedPieceTransform() const;
@@ -56,15 +53,11 @@ public:
 
     void setLabel(Point p, const QString& text);
 
-    void clearMarkupFlag(Point p, MarkupFlag flag);
-
-    void setMarkupFlag(Point p, MarkupFlag flag);
+    void clearMarkup();
 
     void setFreePlacement(bool enable);
 
 public slots:
-    void clearMarkup();
-
     void clearSelectedPiece();
 
     void selectPiece(Color color, Piece piece);
@@ -123,8 +116,6 @@ private:
     MovePoints m_selectedPiecePoints;
 
     Grid<QString> m_labels;
-
-    Grid<MarkupFlags> m_markupFlags;
 
     BoardPainter m_boardPainter;
 

@@ -6,7 +6,6 @@
 #define LIBPENTOBI_GUI_BOARD_PAINTER_H
 
 #include <QtGui>
-#include "MarkupFlags.h"
 #include "libpentobi_base/Grid.h"
 #include "libpentobi_base/Board.h"
 
@@ -48,8 +47,7 @@ public:
         uses the arguments from the paintEmptyBoard() function to determine the
         board properties. */
     void paintPieces(QPainter& painter, const Grid<PointState>& pointState,
-                     const Grid<QString>* labels = 0,
-                     const Grid<MarkupFlags>* markupFlags = 0);
+                     const Grid<QString>* labels = 0);
 
     /** Paint the selected piece.
         Paints the selected piece either transparent (if not legal) or opaque
@@ -93,6 +91,10 @@ private:
 
     QFont m_font;
 
+    QFont m_fontCondensed;
+
+    QFont m_fontSemiCondensed;
+
     QFont m_fontUnderlined;
 
     StartingPoints m_startingPoints;
@@ -100,11 +102,10 @@ private:
     void drawCoordinates(QPainter& painter, bool isTrigon);
 
     void drawLabel(QPainter& painter, qreal x, qreal y, qreal width,
-                   qreal height, const QString& label, bool underline);
+                   qreal height, const QString& label, bool semiCondensed);
 
     void drawLabels(QPainter& painter, const Grid<PointState>& pointState,
-                    GameVariant gameVariant, const Grid<QString>* labels,
-                    const Grid<MarkupFlags>* markupFlags);
+                    GameVariant gameVariant, const Grid<QString>* labels);
 };
 
 inline void BoardPainter::setCoordLabelColor(const QColor& color)

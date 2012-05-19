@@ -36,7 +36,10 @@ BoardPainter::BoardPainter()
       m_coordLabelColor(Qt::black)
 {
     m_font.setStyleStrategy(QFont::PreferOutline);
-    m_font.setStretch(QFont::SemiCondensed);
+    m_fontSemiCondensed = m_font;
+    m_fontSemiCondensed.setStretch(QFont::SemiCondensed);
+    m_fontCondensed = m_font;
+    m_fontCondensed.setStretch(QFont::Condensed);
 }
 
 void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
@@ -53,9 +56,9 @@ void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
             label.append(QChar('A' + (x - 26)));
         }
         drawLabel(painter, x * m_fieldWidth, m_height * m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false);
+                  m_fieldWidth, m_fieldHeight, label, true);
         drawLabel(painter, x * m_fieldWidth, -m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false);
+                  m_fieldWidth, m_fieldHeight, label, true);
     }
     for (int y = 0; y < m_height; ++y)
     {
@@ -74,22 +77,34 @@ void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
             right = m_width * m_fieldWidth;
         }
         drawLabel(painter, left, (m_height - y - 1) * m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false);
+                  m_fieldWidth, m_fieldHeight, label, true);
         drawLabel(painter, right, (m_height - y - 1) * m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false);
+                  m_fieldWidth, m_fieldHeight, label, true);
     }
 }
 
 void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
                              qreal width, qreal height, const QString& label,
-                             bool underline)
+                             bool semiCondensed)
 {
-    if (underline)
-        painter.setFont(m_fontUnderlined);
+    if (semiCondensed)
+        painter.setFont(m_fontSemiCondensed);
     else
         painter.setFont(m_font);
     QFontMetrics metrics(painter.font());
     QRect boundingRect = metrics.boundingRect(label);
+    if (boundingRect.width() > width)
+    {
+        painter.setFont(m_fontSemiCondensed);
+        QFontMetrics metrics(painter.font());
+        boundingRect = metrics.boundingRect(label);
+    }
+    if (boundingRect.width() > width)
+    {
+        painter.setFont(m_fontCondensed);
+        QFontMetrics metrics(painter.font());
+        boundingRect = metrics.boundingRect(label);
+    }
     qreal dx = 0.5 * (width - boundingRect.width());
     qreal dy = 0.5 * (height - boundingRect.height());
     QRectF rect;
@@ -101,8 +116,7 @@ void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
 void BoardPainter::drawLabels(QPainter& painter,
                               const Grid<PointState>& pointState,
                               GameVariant gameVariant,
-                              const Grid<QString>* labels,
-                              const Grid<MarkupFlags>* markupFlags)
+                              const Grid<QString>* labels)
 {
     if (labels == 0)
         return;
@@ -115,9 +129,6 @@ void BoardPainter::drawLabels(QPainter& painter,
         {
             PointState s = pointState[*i];
             painter.setPen(Util::getLabelColor(gameVariant, s));
-            bool underline = false;
-            if (markupFlags != 0 && (*markupFlags)[*i].test(markup_variation))
-                underline = true;
             qreal x = i->get_x() * m_fieldWidth;
             qreal y = (m_height - i->get_y() - 1) * m_fieldHeight;
             qreal width = m_fieldWidth;
@@ -129,7 +140,7 @@ void BoardPainter::drawLabels(QPainter& painter,
                     y += 0.333 * height;
                 height = 0.666 * height;
             }
-            drawLabel(painter, x, y, width, height, (*labels)[*i], underline);
+            drawLabel(painter, x, y, width, height, (*labels)[*i], false);
         }
 }
 
@@ -234,8 +245,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
 
 void BoardPainter::paintPieces(QPainter& painter,
                                const Grid<PointState>& pointState,
-                               const Grid<QString>* labels,
-                               const Grid<MarkupFlags>* markupFlags)
+                               const Grid<QString>* labels)
 {
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
@@ -262,7 +272,7 @@ void BoardPainter::paintPieces(QPainter& painter,
                                        fieldX, fieldY, m_fieldWidth);
         }
     }
-    drawLabels(painter, pointState, m_gameVariant, labels, markupFlags);
+    drawLabels(painter, pointState, m_gameVariant, labels);
     painter.restore();
 }
 

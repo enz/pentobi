@@ -17,8 +17,8 @@ Current development version
 * New menu items for editing the game tree: "Delete All Variations",
   "Keep Only Position", "Keep Only Subtree", "Move Variation Up/Down",
   "Truncate Children"
-* Underlining of move numbers on the board for moves that have a
-  variation can now be disabled with "View/Underline Variations".
+* Variations are now displayed by appending a letter to the move number
+  instead of underlining
 * Added a toolbar button for fast selection of the computer colors
   without having to use the window menu.
 * User manual is no longer compiled into the resources of the

@@ -194,7 +194,7 @@ public slots:
 
     void undo();
 
-    void underlineVariations(bool checked);
+    void showVariations(bool checked);
 
 protected:
     void closeEvent(QCloseEvent* event);
@@ -463,7 +463,7 @@ private:
 
     QAction* m_actionTruncateChildren;
 
-    QAction* m_actionUnderlineVariations;
+    QAction* m_actionShowVariations;
 
     QAction* m_actionUndo;
 

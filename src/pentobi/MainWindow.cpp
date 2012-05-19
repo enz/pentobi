@@ -309,9 +309,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_actionCoordinateLabels->setChecked(coordinateLabels);
     bool showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
-    bool underlineVariations =
-        settings.value("underline_variations", true).toBool();
-    m_actionUnderlineVariations->setChecked(underlineVariations);
+    bool showVariations = settings.value("show_variations", true).toBool();
+    m_actionShowVariations->setChecked(showVariations);
     initGameVariantActions();
     setWindowIcon(QIcon(":/pentobi/icons/pentobi.png"));
 
@@ -1110,11 +1109,10 @@ void MainWindow::createActions()
     connect(m_actionTruncateChildren, SIGNAL(triggered()),
             this, SLOT(truncateChildren()));
 
-    m_actionUnderlineVariations =
-        new QAction(tr("&Underline Variations"), this);
-    m_actionUnderlineVariations->setCheckable(true);
-    connect(m_actionUnderlineVariations, SIGNAL(triggered(bool)),
-            this, SLOT(underlineVariations(bool)));
+    m_actionShowVariations = new QAction(tr("Show &Variations"), this);
+    m_actionShowVariations->setCheckable(true);
+    connect(m_actionShowVariations, SIGNAL(triggered(bool)),
+            this, SLOT(showVariations(bool)));
 
     m_actionUndo = new QAction(tr("&Undo Move"), this);
     connect(m_actionUndo, SIGNAL(triggered()), this, SLOT(undo()));
@@ -1256,7 +1254,7 @@ void MainWindow::createMenu()
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
     menuMoveNumbers->addAction(m_actionMoveNumbersNone);
     menuView->addAction(m_actionCoordinateLabels);
-    menuView->addAction(m_actionUnderlineVariations);
+    menuView->addAction(m_actionShowVariations);
     menuView->addSeparator();
     menuView->addAction(m_actionFullscreen);
 
@@ -3087,11 +3085,11 @@ void MainWindow::truncateChildren()
     updateWindow(false);
 }
 
-void MainWindow::underlineVariations(bool checked)
+void MainWindow::showVariations(bool checked)
 {
     {
         QSettings settings;
-        settings.setValue("underline_variations", checked);
+        settings.setValue("show_variations", checked);
     }
     updateWindow(false);
 }
@@ -3222,7 +3220,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     updateWindowModified();
     m_guiBoard->copyFromBoard(bd);
     QSettings settings;
-    bool markVariations = settings.value("underline_variations", true).toBool();
+    bool markVariations = settings.value("show_variations", true).toBool();
     unsigned int nuMoves = bd.get_nu_moves();
     unsigned int markMovesBegin = 0;
     unsigned int markMovesEnd = 0;

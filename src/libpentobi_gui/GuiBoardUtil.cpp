@@ -60,8 +60,20 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
     }
 }
 
+void appendVariation(QString& label, const Node& node)
+{
+    const Node* parent = node.get_parent_or_null();
+    if (parent == 0 || parent->has_single_child())
+        return;
+    unsigned int n = parent->get_child_index(node);
+    if (n > 26)
+        label.append("+");
+    else
+        label.append(QChar(QChar('a').unicode() + n));
+}
+
 void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
-                  unsigned int moveNumber, ColorMove mv)
+                  unsigned int moveNumber, ColorMove mv, bool markVariations)
 {
     if (! mv.is_regular())
         return;
@@ -69,16 +81,10 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
     Point p = bd.get_move_info_ext(mv.move).center;
     QString label;
     label.setNum(moveNumber);
+    if (markVariations)
+        appendVariation(label, node);
     appendMoveAnnotation(label, game, node);
     guiBoard.setLabel(p, label);
-}
-
-void setVariationMarkup(GuiBoard& guiBoard, const Node& node, Point p)
-{
-    const Node* parent = node.get_parent_or_null();
-    if (parent == 0 || parent->get_nu_children() < 2)
-        return;
-    guiBoard.setMarkupFlag(p, markup_variation);
 }
 
 } // namespace
@@ -115,12 +121,8 @@ void setMarkup(GuiBoard& guiBoard, const Game& game,
                 {
                     if (moveNumber >= markMovesBegin
                         && moveNumber <= markMovesEnd)
-                    {
-                        setMoveLabel(guiBoard, game, *node, moveNumber, mv);
-                        if (markVariations)
-                            setVariationMarkup(guiBoard, *node,
-                                          bd.get_move_info_ext(mv.move).center);
-                    }
+                        setMoveLabel(guiBoard, game, *node, moveNumber, mv,
+                                     markVariations);
                     --displayedMoveNumber;
                 }
                 --moveNumber;

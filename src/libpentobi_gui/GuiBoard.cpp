@@ -71,19 +71,7 @@ GuiBoard::~GuiBoard()
 void GuiBoard::clearMarkup()
 {
     for (Geometry::Iterator i(m_labels.get_geometry()); i; ++i)
-    {
         setLabel(*i, "");
-        for (unsigned int j = 0; j < _nu_markup_flags; ++j)
-            clearMarkupFlag(*i, static_cast<MarkupFlag>(j));
-    }
-}
-
-void GuiBoard::clearMarkupFlag(Point p, MarkupFlag flag)
-{
-    if (! m_markupFlags[p].test(flag))
-        return;
-    m_markupFlags[p].reset(flag);
-    setDirty();
 }
 
 void GuiBoard::clearSelectedPiece()
@@ -103,7 +91,6 @@ void GuiBoard::copyFromBoard(const Board& bd)
         m_isInitialized = true;
         m_pointState = bd.get_grid();
         m_labels.init(geometry, "");
-        m_markupFlags.init(geometry);
         setEmptyBoardDirty();
     }
     else
@@ -343,8 +330,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
         m_boardPixmap->fill(Qt::transparent);
         QPainter painter(m_boardPixmap);
         painter.drawPixmap(0, 0, *m_emptyBoardPixmap);
-        m_boardPainter.paintPieces(painter, m_pointState, &m_labels,
-                                   &m_markupFlags);
+        m_boardPainter.paintPieces(painter, m_pointState, &m_labels);
         m_dirty = false;
     }
     QPainter painter(this);
@@ -426,14 +412,6 @@ void GuiBoard::setLabel(Point p, const QString& text)
         m_labels[p] = text;
         setDirty();
     }
-}
-
-void GuiBoard::setMarkupFlag(Point p, MarkupFlag flag)
-{
-    if (m_markupFlags[p].test(flag))
-        return;
-    m_markupFlags[p].set(flag);
-    setDirty();
 }
 
 void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
