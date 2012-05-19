@@ -78,6 +78,8 @@ signals:
     void pointClicked(Point p);
 
 protected:
+    void changeEvent(QEvent* event);
+
     void leaveEvent(QEvent* event);
 
     void mouseMoveEvent(QMouseEvent* event);

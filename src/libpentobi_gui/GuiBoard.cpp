@@ -68,6 +68,12 @@ GuiBoard::~GuiBoard()
     delete m_boardPixmap;
 }
 
+void GuiBoard::changeEvent(QEvent* event)
+{
+    if (event->type() == QEvent::StyleChange)
+        setEmptyBoardDirty();
+}
+
 void GuiBoard::clearMarkup()
 {
     for (Geometry::Iterator i(m_labels.get_geometry()); i; ++i)
