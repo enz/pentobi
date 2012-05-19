@@ -36,6 +36,7 @@ BoardPainter::BoardPainter()
       m_coordLabelColor(Qt::black)
 {
     m_font.setStyleStrategy(QFont::PreferOutline);
+    m_font.setStretch(QFont::SemiCondensed);
 }
 
 void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
@@ -52,9 +53,9 @@ void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
             label.append(QChar('A' + (x - 26)));
         }
         drawLabel(painter, x * m_fieldWidth, m_height * m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false, true);
+                  m_fieldWidth, m_fieldHeight, label, false);
         drawLabel(painter, x * m_fieldWidth, -m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false, true);
+                  m_fieldWidth, m_fieldHeight, label, false);
     }
     for (int y = 0; y < m_height; ++y)
     {
@@ -73,19 +74,17 @@ void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
             right = m_width * m_fieldWidth;
         }
         drawLabel(painter, left, (m_height - y - 1) * m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false, true);
+                  m_fieldWidth, m_fieldHeight, label, false);
         drawLabel(painter, right, (m_height - y - 1) * m_fieldHeight,
-                  m_fieldWidth, m_fieldHeight, label, false, true);
+                  m_fieldWidth, m_fieldHeight, label, false);
     }
 }
 
 void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
                              qreal width, qreal height, const QString& label,
-                             bool underline, bool small)
+                             bool underline)
 {
-    if (small)
-        painter.setFont(m_fontSmall);
-    else if (underline)
+    if (underline)
         painter.setFont(m_fontUnderlined);
     else
         painter.setFont(m_font);
@@ -130,8 +129,7 @@ void BoardPainter::drawLabels(QPainter& painter,
                     y += 0.333 * height;
                 height = 0.666 * height;
             }
-            drawLabel(painter, x, y, width, height, (*labels)[*i], underline,
-                      false);
+            drawLabel(painter, x, y, width, height, (*labels)[*i], underline);
         }
 }
 
@@ -190,17 +188,10 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
             QPointF(0.5 * (width - m_fieldWidth * m_width),
                     0.5 * (height - m_fieldHeight * m_height));
     }
-    m_fontSmall = m_font;
     if (m_isTrigon)
-    {
         m_font.setPointSizeF(0.55 * m_fieldWidth);
-        m_fontSmall.setPointSizeF(0.4 * m_fieldWidth);
-    }
     else
-    {
         m_font.setPointSizeF(0.4 * m_fieldWidth);
-        m_fontSmall.setPointSizeF(0.34 * m_fieldWidth);
-    }
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
     painter.save();

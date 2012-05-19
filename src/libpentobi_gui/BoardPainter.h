@@ -93,8 +93,6 @@ private:
 
     QFont m_font;
 
-    QFont m_fontSmall;
-
     QFont m_fontUnderlined;
 
     StartingPoints m_startingPoints;
@@ -102,8 +100,7 @@ private:
     void drawCoordinates(QPainter& painter, bool isTrigon);
 
     void drawLabel(QPainter& painter, qreal x, qreal y, qreal width,
-                   qreal height, const QString& label, bool underline,
-                   bool small);
+                   qreal height, const QString& label, bool underline);
 
     void drawLabels(QPainter& painter, const Grid<PointState>& pointState,
                     GameVariant gameVariant, const Grid<QString>* labels,
