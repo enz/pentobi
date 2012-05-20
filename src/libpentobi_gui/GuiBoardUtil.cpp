@@ -60,16 +60,27 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
     }
 }
 
-void appendVariation(QString& label, const Node& node)
+void appendVariation(QString& label, const Tree& tree, const Node& node)
 {
     const Node* parent = node.get_parent_or_null();
     if (parent == 0 || parent->has_single_child())
         return;
-    unsigned int n = parent->get_child_index(node);
-    if (n > 26)
+    unsigned int nuSiblingMoves = 0;
+    unsigned int moveIndex = 0;
+    for (ChildIterator i(*parent); i; ++i)
+    {
+        if (! tree.has_move(*i))
+            continue;
+        if (&(*i) == &node)
+            moveIndex = nuSiblingMoves;
+        ++nuSiblingMoves;
+    }
+    if (nuSiblingMoves == 1)
+        return;
+    if (moveIndex > 26)
         label.append("+");
     else
-        label.append(QChar(QChar('a').unicode() + n));
+        label.append(QChar(QChar('a').unicode() + moveIndex));
 }
 
 void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
@@ -82,7 +93,7 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
     QString label;
     label.setNum(moveNumber);
     if (markVariations)
-        appendVariation(label, node);
+        appendVariation(label, game.get_tree(), node);
     appendMoveAnnotation(label, game, node);
     guiBoard.setLabel(p, label);
 }
