@@ -77,7 +77,7 @@ void appendVariation(QString& label, const Tree& tree, const Node& node)
     }
     if (nuSiblingMoves == 1)
         return;
-    if (moveIndex > 26)
+    if (moveIndex >= 26)
         label.append("+");
     else
         label.append(QChar(QChar('a').unicode() + moveIndex));
