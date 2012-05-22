@@ -106,7 +106,7 @@ Move Player::genmove(const Board& bd, Color c)
                 LIBBOARDGAME_ASSERT(variant == game_variant_trigon);
                 filename = "book_trigon.blksgf";
             }
-            load_book(filename);
+            load_book(m_books_dir / filename);
         }
         if (m_is_book_loaded)
         {
@@ -217,12 +217,7 @@ void Player::load_book(istream& in)
     m_is_book_loaded = true;
 }
 
-void Player::load_book(const string& filename)
-{
-    try_load_book(m_books_dir / filename);
-}
-
-bool Player::try_load_book(const path& filepath)
+bool Player::load_book(const path& filepath)
 {
     log() << "Trying to load " << filepath << "... ";
     if (! exists(filepath))

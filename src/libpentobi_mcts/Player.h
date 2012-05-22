@@ -87,9 +87,7 @@ private:
 
     void init_settings();
 
-    void load_book(const string& filename);
-
-    bool try_load_book(const path& filepath);
+    bool load_book(const path& filepath);
 };
 
 inline ValueType Player::get_fixed_simulations() const
