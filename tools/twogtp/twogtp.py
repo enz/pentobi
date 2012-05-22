@@ -100,9 +100,9 @@ def play_game(game_number, black, white, game_variant):
     nu_passes = 0
     sgf = "(;GM[%s]GN[%s]\n" % (game_name, game_number)
     if exchange_color:
-        sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (black_cmd, white_cmd)
-    else:
         sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (white_cmd, black_cmd)
+    else:
+        sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (black_cmd, white_cmd)
     while True:        
         try:
             move = strip(to_play.send("genmove " + colors[color_to_play]))
