@@ -208,17 +208,17 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
     }
     if (m_isTrigon)
     {
-        m_font.setPointSizeF(0.55 * m_fieldWidth);
-        m_fontSemiCondensed.setPointSizeF(0.55 * m_fieldWidth);
-        m_fontCondensed.setPointSizeF(0.55 * m_fieldWidth);
-        m_fontCoordLabels.setPointSizeF(0.43 * m_fieldWidth);
+        m_font.setPointSizeF(0.6 * m_fieldWidth);
+        m_fontSemiCondensed.setPointSizeF(0.6 * m_fieldWidth);
+        m_fontCondensed.setPointSizeF(0.6 * m_fieldWidth);
+        m_fontCoordLabels.setPointSizeF(0.6 * m_fieldWidth);
     }
     else
     {
         m_font.setPointSizeF(0.4 * m_fieldWidth);
         m_fontSemiCondensed.setPointSizeF(0.4 * m_fieldWidth);
         m_fontCondensed.setPointSizeF(0.4 * m_fieldWidth);
-        m_fontCoordLabels.setPointSizeF(0.34 * m_fieldWidth);
+        m_fontCoordLabels.setPointSizeF(0.36 * m_fieldWidth);
     }
     painter.save();
     painter.translate(m_boardOffset);
