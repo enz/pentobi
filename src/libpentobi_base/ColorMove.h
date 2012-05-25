@@ -21,14 +21,24 @@ struct ColorMove
 
     Move move;
 
+    /** Return a color move with a null move and an undefined color.
+        Even if the color is logically not defined, it is still initialized
+        (with Color(0)), such that this color move can be used in
+        comparisons. If you are sure that the color is never used and don't
+        want to initialize it for efficiency, use the default constructor
+        and then assign only the move. */
     static ColorMove null();
 
     ColorMove();
 
     ColorMove(Color c, Move mv);
 
+    /** Equality operator.
+        @pre move, color, mv.move, mv.color are initialized. */
     bool operator==(const ColorMove& mv) const;
 
+    /** Inequality operator.
+        @pre move, color, mv.move, mv.color are initialized. */
     bool operator!=(const ColorMove& mv) const;
 
     bool is_null() const;
@@ -50,7 +60,6 @@ inline ColorMove::ColorMove(Color c, Move mv)
 
 inline bool ColorMove::operator==(const ColorMove& mv) const
 {
-    // Test move first, color may be uninitialized if move is null
     return move == mv.move && color == mv.color;
 }
 
@@ -76,7 +85,7 @@ inline bool ColorMove::is_regular() const
 
 inline ColorMove ColorMove::null()
 {
-    return ColorMove(Color(), Move::null());
+    return ColorMove(Color(0), Move::null());
 }
 
 //-----------------------------------------------------------------------------
