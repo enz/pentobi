@@ -1,5 +1,16 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_test/Test.h */
+/** @file libboardgame_test/Test.h
+    Provides functionality similar to Boost.Test.
+
+    The main reason that Boost.Test is not used is that it has the flaw that
+    the way how the main function is created depends on whether static or
+    dynamic versions of the Boost libraries are used, which we don't know if
+    the libraries are auto-detected. While it was possible in earlier versions
+    of Boost to disable the main function from the library in any of the two
+    cases and provide our own, this no longer seems to be possible with
+    Boost 1.48.
+    A second reason is that it might be desirable to drop the dependence
+    on Boost completely in the future. */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_TEST_TEST_H
