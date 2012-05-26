@@ -293,7 +293,14 @@ public:
         are more than two players).
         @param c
         @param[out] game_result The game result from the point of view of the
-        color: 1=win, 0=loss, 0.5=draw
+        color: 1=win, 0=loss, 0.5=draw. If there are n &gt; 2 players, this is
+        generalized in the following way: The scores are sorted in ascending
+        order. Each rank r_i (i in 0..n-1) is assigned a result value of
+        r_i/(n-1). If a multiple players have the same score, the result value
+        is the average of all ranks with this score. So being the single winner
+        still gives the result 1 and having the lowest score gives the result
+        0. Being the single winner is better than sharing the best place,
+        which is better than getting the second place, etc.
         @todo The score should be a floating point type because averaging the
         points of the opponents in the four-player version leads to fractional
         points. */

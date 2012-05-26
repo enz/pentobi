@@ -283,23 +283,25 @@ int Board::get_score(Color c, double& game_result) const
              || m_game_variant == game_variant_trigon
              || m_game_variant == game_variant_trigon_3)
     {
-        unsigned int points = get_points_with_bonus(c);
+        array<unsigned int,Color::range> points_array;
+        for (unsigned int i = 0; i < m_nu_colors; ++i)
+            points_array[i] = get_points_with_bonus(Color(i));
+        unsigned int points = points_array[c.to_int()];
         int score = 0;
-        unsigned int max_opponent_points = 0;
-        for (ColorIterator i(m_nu_colors); i; ++i)
-            if (*i != c)
-            {
-                unsigned int points = get_points_with_bonus(*i);
-                score -= points;
-                max_opponent_points = max(max_opponent_points, points);
-            }
+        for (unsigned int i = 0; i < m_nu_colors; ++i)
+            if (i != c.to_int())
+                score -= points_array[i];
         score = score / (static_cast<int>(m_nu_colors) - 1) + points;
-        if (points > max_opponent_points)
-            game_result = 1;
-        else if (points < max_opponent_points)
-            game_result = 0;
-        else
-            game_result = 0.5;
+        sort(points_array.begin(), points_array.begin() + m_nu_colors);
+        game_result = 0;
+        unsigned int n = 0;
+        for (unsigned int i = 0; i < m_nu_colors; ++i)
+            if (points_array[i] == points)
+            {
+                game_result += static_cast<double>(i) / (m_nu_colors - 1);
+                ++n;
+            }
+        game_result /= n;
         return score;
     }
     else

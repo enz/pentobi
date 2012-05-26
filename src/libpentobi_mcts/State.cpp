@@ -364,20 +364,19 @@ array<ValueType, 4> State::evaluate_terminal()
         double game_result;
         ValueType score = ValueType(m_bd.get_score(*i, game_result));
         ValueType score_modification = m_shared_const.score_modification;
-        ValueType result;
-        if (game_result == 1)
-            result =
-                1 - score_modification + score * m_score_modification_factor;
-        else if (game_result == 0)
-            result = score_modification + score * m_score_modification_factor;
-        else
-            result = 0.5;
+        // Apply score modification. Example: If score modification is 0.1,
+        // the game result is rescaled to [0..0.9] and the score modification
+        // is added with 0.05 as the middle (corresponding to score 0).
+        ValueType result =
+            (1 - score_modification) * game_result
+            + 0.5 * (score_modification + score * m_score_modification_factor);
         if (*i == m_shared_const.to_play)
             m_stat_score.add(score);
         result_array[(*i).to_int()] = result;
         if (log_simulations)
             log() << "Result color " << (*i).to_int() << ": score=" << score
-                  << " result=" << result << '\n';
+                  << " game_result=" << game_result << " result=" << result
+                  << '\n';
     }
     return result_array;
 }
