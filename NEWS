@@ -1,7 +1,7 @@
 Current development version (branch v2-fixes)
 =============================================
 
-*
+* Fixed floating point tolerance in unit tests.
 
 
 Version 2.0 (22 May 2012)
