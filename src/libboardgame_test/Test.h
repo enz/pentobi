@@ -16,6 +16,7 @@
 #ifndef LIBBOARDGAME_TEST_TEST_H
 #define LIBBOARDGAME_TEST_TEST_H
 
+#include <cmath>
 #include <string>
 #include "libboardgame_util/Exception.h"
 
