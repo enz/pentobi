@@ -171,6 +171,9 @@ public:
 
     void set_date(const string& date);
 
+    /** Get today's date in format YYYY-MM-DD as required by DT property. */
+    static string get_date_today();
+
     void set_date_today();
 
     bool has_variations() const;

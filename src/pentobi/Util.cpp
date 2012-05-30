@@ -8,10 +8,62 @@
 
 #include "Util.h"
 
+#include "libpentobi_mcts/Player.h"
+
+using libpentobi_mcts::Player;
+
+//-----------------------------------------------------------------------------
+
+namespace {
+
+void saveRating(GameVariant variant, Rating rating, unsigned int nuGames)
+{
+    QString variantStr = QString(to_string_id(variant));
+    QSettings settings;
+    settings.setValue("rated_games_" + variantStr, nuGames);
+    settings.setValue("rating_" + variantStr,
+                      static_cast<double>(rating.get()));
+}
+
+} // namespace
+
 //-----------------------------------------------------------------------------
 
 namespace Util
 {
+
+void getNextRatedGameSettings(GameVariant variant, int maxLevel, int& level,
+                              Color& userColor)
+{
+    Rating rating;
+    unsigned int nuGames;
+    getRating(variant, rating, nuGames);
+    userColor = Color(nuGames % get_nu_colors(variant));
+    float minDiff;
+    for (int i = 1; i <= maxLevel; ++i)
+    {
+        float diff = abs(rating.get() - Player::get_rating(variant, i).get());
+        if (i == 1 || diff < minDiff)
+        {
+            minDiff = diff;
+            level = i;
+        }
+    }
+}
+
+void getRating(GameVariant variant, Rating& rating, unsigned int& nuGames)
+{
+    QString variantStr = QString(to_string_id(variant));
+    QSettings settings;
+    nuGames = settings.value("rated_games_" + variantStr, 0).toUInt();
+    // Default value is 1000 (Elo-rating for beginner-level play)
+    rating = Rating(settings.value("rating_" + variantStr, 1000).toFloat());
+}
+
+void initRating(GameVariant variant, Rating rating)
+{
+    saveRating(variant, rating, 0);
+}
 
 void removeThumbnail(const QString& file)
 {
@@ -28,6 +80,16 @@ void removeThumbnail(const QString& file)
     QString home = QDir::home().path();
     QFile::remove(home + "/.thumbnails/normal/" + md5 + ".png");
     QFile::remove(home + "/.thumbnails/large/" + md5 + ".png");
+}
+
+void updateRating(GameVariant variant, float score, Rating opponentRating,
+                  unsigned int nuOpponents)
+{
+    Rating rating;
+    unsigned int nuGames;
+    getRating(variant, rating, nuGames);
+    rating.update_multiplayer(score, opponentRating, nuOpponents, 32);
+    saveRating(variant, rating, nuGames + 1);
 }
 
 } // namespace Util

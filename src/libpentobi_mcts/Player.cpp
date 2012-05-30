@@ -211,6 +211,66 @@ Move Player::genmove(const Board& bd, Color c)
     return mv;
 }
 
+Rating Player::get_rating(GameVariant variant, int level)
+{
+    // The initial rating estimates for version 2.0 are loosely based on
+    // earlier experiments that measured the rating differences depending on
+    // different number of simulations in Pentobi 1.0. A general factor of 0.5
+    // was applied to measured Elo differences to take into account that
+    // self-play experiments usually overestimate Elo differences when
+    // playing vs. humans. The ratings were anchored such that level 1 was
+    // at beginner level (~1000 Elo) and level 6 at lower expert level (~2000
+    // Elo), which corresponds to estimates of the performance of Pentobi 1.0
+    // vs. humans. Not all game variants were tested (for example, the ratings
+    // for Classic 2-Player was also used for Classic, and those of Duo for
+    // Junior). Modifications for the estimated playing strength of Pentobi
+    // 1.0 in different game variants were applied (e.g. stronger in Duo,
+    // weaker in Trigon).
+    // Ratings of future versions of Pentobi should be roughly calibrated by
+    // testing vs. Pentobi 2.0 and the same factor of 0.5 should be used to
+    // rescale Elo differences measured in self-play experiments such that
+    // they are somewhat comparable. This avoids jumps in the ratings of humans
+    // after an upgrade of Pentobi if the computer player is used to assign a
+    // rating to the human user.
+    level = max(level, 1);
+    switch (variant)
+    {
+    case game_variant_classic:
+    case game_variant_classic_2:
+        {
+            static float elo[] = { 1000, 1255, 1510, 1740, 1880, 1950, 1990 };
+            if (level <= 7)
+                return Rating(elo[level - 1]);
+            else
+                // Ratings for levels greater 7 are not really tested.
+                return Rating(elo[6] + 10 * (level - 7));
+        }
+    case game_variant_trigon:
+    case game_variant_trigon_2:
+    case game_variant_trigon_3:
+        {
+            static float elo[] = {  900, 1150, 1400, 1630, 1750, 1840, 1900 };
+            if (level <= 7)
+                return Rating(elo[level - 1]);
+            else
+                // Ratings for levels greater 7 are not really tested.
+                return Rating(elo[6] + 10 * (level - 7));
+        }
+    case game_variant_duo:
+    case game_variant_junior:
+        {
+            static float elo[] = { 1100, 1325, 1550, 1750, 1880, 1950, 2020 };
+            if (level <= 7)
+                return Rating(elo[level - 1]);
+            else
+                // Ratings for levels greater 7 are not really tested.
+                return Rating(elo[6] + 10 * (level - 7));
+        }
+    }
+    LIBBOARDGAME_ASSERT(false);
+    return Rating(0);
+}
+
 void Player::load_book(istream& in)
 {
     m_book.load(in);

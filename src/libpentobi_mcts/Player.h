@@ -7,12 +7,14 @@
 
 #include <boost/filesystem.hpp>
 #include "Search.h"
+#include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Book.h"
 #include "libpentobi_base/Player.h"
 
 namespace libpentobi_mcts {
 
 using boost::filesystem::path;
+using libboardgame_base::Rating;
 using libpentobi_base::Book;
 using libpentobi_base::GameVariant;
 
@@ -62,6 +64,17 @@ public:
 
     void load_book(istream& in);
 
+    /** Get an estimated Elo-rating of a level.
+        This rating is an estimated rating when playing vs. humans. Although
+        it is based on computer vs. computer experiments, the ratings were
+        modified and rescaled to take into account that self-play experiments
+        usually overestimate the rating differences when playing against
+        humans. */
+    static Rating get_rating(GameVariant variant, int level);
+
+    /** Get an estimated Elo-rating of the current level. */
+    Rating get_rating(GameVariant variant) const;
+
 private:
     bool m_is_book_loaded;
 
@@ -105,14 +118,19 @@ inline int Player::get_level() const
     return m_level;
 }
 
-inline bool Player::get_use_book() const
+inline Rating Player::get_rating(GameVariant variant) const
 {
-    return m_use_book;
+    return get_rating(variant, m_level);
 }
 
 inline Search& Player::get_search()
 {
     return m_search;
+}
+
+inline bool Player::get_use_book() const
+{
+    return m_use_book;
 }
 
 inline void Player::set_fixed_simulations(ValueType n)

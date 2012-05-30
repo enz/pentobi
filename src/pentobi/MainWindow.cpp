@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <boost/algorithm/string/trim.hpp>
+#include "RatingDialog.h"
+#include "RatingHistory.h"
 #include "Util.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
@@ -20,10 +22,12 @@
 #include "libpentobi_gui/ComputerColorDialog.h"
 #include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
+#include "libpentobi_gui/InitialRatingDialog.h"
 #include "libpentobi_gui/SameHeightLayout.h"
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
+using Util::getPlayerString;
 using boost::filesystem::path;
 using boost::trim_right;
 using libboardgame_sgf::ChildIterator;
@@ -71,8 +75,7 @@ QToolButton* createOBoxToolButton(QAction* action)
     return button;
 }
 
-/** Return auto-save file name as a native path name. */
-QString getAutoSaveFile()
+QString getDataDir()
 {
     QString home = QDir::toNativeSeparators(QDir::home().path());
     QChar sep = QDir::separator();
@@ -94,7 +97,13 @@ QString getAutoSaveFile()
     else
         dir = dir + sep + "pentobi";
 #endif
-    return dir + sep + "autosave.blksgf";
+    return dir;
+}
+
+/** Return auto-save file name as a native path name. */
+QString getAutoSaveFile()
+{
+    return getDataDir() + QDir::separator() + "autosave.blksgf";
 }
 
 /** Determine the current color at the current node in the game.
@@ -913,6 +922,10 @@ void MainWindow::createActions()
     connect(m_actionNextVariation10, SIGNAL(triggered()),
             this, SLOT(nextVariation10()));
 
+    m_actionNewRatedGame = new QAction(tr("New &Rated Game"), this);
+    connect(m_actionNewRatedGame, SIGNAL(triggered()),
+            this, SLOT(newRatedGame()));
+
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
     setIcon(m_actionNewGame, "pentobi-newgame");
@@ -1102,6 +1115,9 @@ void MainWindow::createActions()
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
             this, SLOT(showComment(bool)));
 
+    m_actionShowRating = new QAction(tr("Your &Rating"), this);
+    connect(m_actionShowRating, SIGNAL(triggered()), this, SLOT(showRating()));
+
     m_actionTruncate = new QAction(tr("&Truncate"), this);
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 
@@ -1194,6 +1210,7 @@ void MainWindow::createMenu()
 
     QMenu* menuGame = menuBar()->addMenu(tr("G&ame"));
     menuGame->addAction(m_actionNewGame);
+    menuGame->addAction(m_actionNewRatedGame);
     menuGame->addSeparator();
     QMenu* menuGameVariant = menuGame->addMenu(tr("&Game Variant"));
     menuGameVariant->addAction(m_actionGameVariantClassic);
@@ -1264,8 +1281,10 @@ void MainWindow::createMenu()
     QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
-    menuComputer->addSeparator();
-    menuComputer->addAction(m_actionAnalyzeGame);
+
+    QMenu* menuTools = menuBar()->addMenu(tr("&Tools"));
+    menuTools->addAction(m_actionShowRating);
+    menuTools->addAction(m_actionAnalyzeGame);
 
     QMenu* menuHelp = menuBar()->addMenu(tr("&Help"));
     menuHelp->addAction(m_actionHelp);
@@ -1625,6 +1644,130 @@ void MainWindow::gameInfo()
     updateWindow(false);
 }
 
+void MainWindow::gameOver()
+{
+    GameVariant variant = m_game->get_game_variant();
+    const Board& bd = getBoard();
+    QString info;
+    if (variant == game_variant_duo
+        || variant == game_variant_junior)
+    {
+        double game_result;
+        int score = bd.get_score(Color(0), game_result);
+        if (score > 0)
+            info = tr("Blue wins with %n point(s).", "", score);
+        else if (score < 0)
+            info = tr("Green wins with %n point(s).", "", -score);
+        else
+            info = tr("The game ends in a tie.");
+    }
+    else if (variant == game_variant_classic_2
+             || variant == game_variant_trigon_2)
+    {
+        double game_result;
+        int score = bd.get_score(Color(0), game_result);
+        if (score > 0)
+            info = tr("Blue/Red wins with %n point(s).", "", score);
+        else if (score < 0)
+            info = tr("Yellow/Green wins with %n point(s).", "", -score);
+        else
+            info = tr("The game ends in a tie.");
+    }
+    else if (variant == game_variant_trigon_3)
+    {
+        unsigned int blue = bd.get_points_with_bonus(Color(0));
+        unsigned int yellow = bd.get_points_with_bonus(Color(1));
+        unsigned int red = bd.get_points_with_bonus(Color(2));
+        unsigned int maxPoints = max(blue, max(yellow, red));
+        if (blue == yellow && yellow == red)
+            info = tr("The game ends in a tie between all colors.");
+        else if (blue == maxPoints && blue == yellow)
+            info = tr("The game ends in a tie between Blue and Yellow.");
+        else if (blue == maxPoints && blue == red)
+            info = tr("The game ends in a tie between Blue and Red.");
+        else if (yellow == maxPoints && yellow == red)
+            info = tr("The game ends in a tie between Yellow and Red.");
+        else if (blue == maxPoints)
+            info = tr("Blue wins.");
+        else if (yellow == maxPoints)
+            info = tr("Yellow wins.");
+        else
+            info = tr("Red wins.");
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(variant == game_variant_classic
+                            || variant == game_variant_trigon);
+        unsigned int blue = bd.get_points_with_bonus(Color(0));
+        unsigned int yellow = bd.get_points_with_bonus(Color(1));
+        unsigned int red = bd.get_points_with_bonus(Color(2));
+        unsigned int green = bd.get_points_with_bonus(Color(3));
+        unsigned int maxPoints = max(blue, max(yellow, max(red, green)));
+        if (blue == yellow && yellow == red && red == green)
+            info = tr("The game ends in a tie between all colors.");
+        else if (blue == maxPoints && blue == yellow && yellow == red)
+            info = tr("The game ends in a tie between Blue, Yellow and Red.");
+        else if (blue == maxPoints && blue == yellow && yellow == green)
+            info =
+                tr("The game ends in a tie between Blue, Yellow and Green.");
+        else if (blue == maxPoints && blue == red && red == green)
+            info = tr("The game ends in a tie between Blue, Red and Green.");
+        else if (yellow == maxPoints && yellow == red && red == green)
+            info = tr("The game ends in a tie between Yellow, Red and Green.");
+        else if (blue == maxPoints && blue == yellow)
+            info = tr("The game ends in a tie between Blue and Yellow.");
+        else if (blue == maxPoints && blue == red)
+            info = tr("The game ends in a tie between Blue and Red.");
+        else if (blue == maxPoints && blue == green)
+            info = tr("The game ends in a tie between Blue and Green.");
+        else if (yellow == maxPoints && yellow == red)
+            info = tr("The game ends in a tie between Yellow and Red.");
+        else if (yellow == maxPoints && yellow == green)
+            info = tr("The game ends in a tie between Yellow and Green.");
+        else if (red == maxPoints && red == green)
+            info = tr("The game ends in a tie between Red and Green.");
+        else if (blue == maxPoints)
+            info = tr("Blue wins.");
+        else if (yellow == maxPoints)
+            info = tr("Yellow wins.");
+        else if (red == maxPoints)
+            info = tr("Red wins.");
+        else
+            info = tr("Green wins.");
+    }
+    QString detailText;
+    if (m_isRated)
+    {
+        Rating oldRating;
+        unsigned int nuGames;
+        Util::getRating(variant, oldRating, nuGames);
+        double gameResult;
+        bd.get_score(m_ratedGameColor, gameResult);
+        unsigned int nuOpp = get_nu_players(variant) - 1;
+        Rating oppRating = m_player->get_rating(variant);
+        Util::updateRating(variant, gameResult, oppRating, nuOpp);
+        Rating newRating;
+        Util::getRating(variant, newRating, nuGames);
+        RatingHistory history(variant, getDataDir().toLocal8Bit().constData());
+        history.add(nuGames, m_ratedGameColor, gameResult,
+                    Tree::get_date_today(), newRating);
+        history.save();
+        int oldRatingInt = static_cast<int>(oldRating.get());
+        int newRatingInt = static_cast<int>(newRating.get());
+        if (newRatingInt > oldRatingInt)
+            detailText =
+                tr("Your rating has increased from %1 to %2.")
+                .arg(oldRatingInt).arg(newRatingInt);
+        else if (newRatingInt == oldRatingInt)
+            detailText = tr("Your rating stays at %1.").arg(oldRatingInt);
+        else
+            detailText =
+                tr("Your rating has decreased from %1 to %2.")
+                .arg(oldRatingInt).arg(newRatingInt);
+    }
+    showInfo(info, detailText);
+}
+
 void MainWindow::gameVariantClassic(bool checked)
 {
     if (checked)
@@ -1866,6 +2009,7 @@ void MainWindow::help()
 
 void MainWindow::initGame()
 {
+    m_isRated = false;
     if (m_analyzeGameWindow != 0)
     {
         delete m_analyzeGameWindow;
@@ -2092,6 +2236,54 @@ void MainWindow::nextVariation10()
     gotoNode(*node);
 }
 
+void MainWindow::newRatedGame()
+{
+    if (! checkSave())
+        return;
+    cancelThread();
+    GameVariant variant = m_game->get_game_variant();
+    Rating rating;
+    unsigned int nuGames;
+    Util::getRating(variant, rating, nuGames);
+    if (nuGames == 0)
+    {
+        InitialRatingDialog dialog(this);
+        if (dialog.exec() != QDialog::Accepted)
+            return;
+        rating = Rating(dialog.getRating());
+        Util::initRating(variant, rating);
+    }
+    int level;
+    Util::getNextRatedGameSettings(variant, maxLevel, level, m_ratedGameColor);
+    QMessageBox msgBox(this);
+    initQuestion(msgBox, tr("Start new rated game?"),
+                 tr("Your rating in this game variant is currently %1."
+                 " In the next game, you will play %2 versus Pentobi level %3.")
+                 .arg(static_cast<int>(rating.get()))
+                 .arg(getPlayerString(variant, m_ratedGameColor))
+                 .arg(level));
+    QPushButton* startGameButton =
+        msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
+    msgBox.addButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(startGameButton);
+    msgBox.exec();
+    QAbstractButton* result = msgBox.clickedButton();
+    if (result != startGameButton)
+        return;
+    setLevel(level);
+    initGame();
+    m_isRated = true;
+    setFile(QString());
+    m_computerColors.fill(true);
+    const Board& bd = getBoard();
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        if (bd.is_same_player(*i, m_ratedGameColor))
+            m_computerColors[*i] = false;
+    deleteAutoSaveFile();
+    updateWindow(true);
+    checkComputerMove();
+}
+
 void MainWindow::newGame()
 {
     if (! checkSave())
@@ -2158,6 +2350,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         delete m_analyzeGameWindow;
         m_analyzeGameWindow = 0;
     }
+    m_isRated = false;
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
@@ -2255,7 +2448,7 @@ void MainWindow::play(Color c, Move mv)
     {
         updateWindow(true);
         repaint();
-        showGameOver();
+        gameOver();
         m_gameFinished = true;
         deleteAutoSaveFile();
         return;
@@ -2605,9 +2798,9 @@ void MainWindow::selectPieceZ()
     selectNamedPiece("Z5", "Z4");
 }
 
-void MainWindow::setGameVariant(GameVariant gameVariant)
+void MainWindow::setGameVariant(GameVariant variant)
 {
-    if (m_game->get_game_variant() == gameVariant)
+    if (m_game->get_game_variant() == variant)
         return;
     if (! checkSave())
     {
@@ -2616,32 +2809,9 @@ void MainWindow::setGameVariant(GameVariant gameVariant)
     }
     cancelThread();
     QSettings settings;
-    switch (gameVariant)
-    {
-    case game_variant_classic:
-        settings.setValue("game_variant", "classic");
-        break;
-    case game_variant_classic_2:
-        settings.setValue("game_variant", "classic_2");
-        break;
-    case game_variant_duo:
-        settings.setValue("game_variant", "duo");
-        break;
-    case game_variant_junior:
-        settings.setValue("game_variant", "junior");
-        break;
-    case game_variant_trigon:
-        settings.setValue("game_variant", "trigon");
-        break;
-    case game_variant_trigon_2:
-        settings.setValue("game_variant", "trigon_2");
-        break;
-    case game_variant_trigon_3:
-        settings.setValue("game_variant", "trigon_3");
-        break;
-    }
+    settings.setValue("game_variant", to_string_id(variant));
     clearSelectedPiece();
-    m_game->init(gameVariant);
+    m_game->init(variant);
     initPieceSelectors();
     newGame();
 }
@@ -2650,7 +2820,12 @@ void MainWindow::setFile(const QString& file)
 {
     m_file = file;
     if (m_file.isEmpty())
-        setWindowTitle(tr("Pentobi"));
+    {
+        if (m_isRated)
+            setWindowTitle(tr("Pentobi - Rated Game"));
+        else
+            setWindowTitle(tr("Pentobi"));
+    }
     else
     {
         QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
@@ -2903,100 +3078,6 @@ void MainWindow::showError(const QString& text, const QString& infoText,
     showMessage(QMessageBox::Critical, text, infoText, detailText);
 }
 
-void MainWindow::showGameOver()
-{
-    GameVariant variant = m_game->get_game_variant();
-    const Board& bd = getBoard();
-    QString info;
-    if (variant == game_variant_duo
-        || variant == game_variant_junior)
-    {
-        double game_result;
-        int score = bd.get_score(Color(0), game_result);
-        if (score > 0)
-            info = tr("Blue wins with %n point(s).", "", score);
-        else if (score < 0)
-            info = tr("Green wins with %n point(s).", "", -score);
-        else
-            info = tr("The game ends in a tie.");
-    }
-    else if (variant == game_variant_classic_2
-             || variant == game_variant_trigon_2)
-    {
-        double game_result;
-        int score = bd.get_score(Color(0), game_result);
-        if (score > 0)
-            info = tr("Blue/Red wins with %n point(s).", "", score);
-        else if (score < 0)
-            info = tr("Yellow/Green wins with %n point(s).", "", -score);
-        else
-            info = tr("The game ends in a tie.");
-    }
-    else if (variant == game_variant_trigon_3)
-    {
-        unsigned int blue = bd.get_points_with_bonus(Color(0));
-        unsigned int yellow = bd.get_points_with_bonus(Color(1));
-        unsigned int red = bd.get_points_with_bonus(Color(2));
-        unsigned int maxPoints = max(blue, max(yellow, red));
-        if (blue == yellow && yellow == red)
-            info = tr("The game ends in a tie between all colors.");
-        else if (blue == maxPoints && blue == yellow)
-            info = tr("The game ends in a tie between Blue and Yellow.");
-        else if (blue == maxPoints && blue == red)
-            info = tr("The game ends in a tie between Blue and Red.");
-        else if (yellow == maxPoints && yellow == red)
-            info = tr("The game ends in a tie between Yellow and Red.");
-        else if (blue == maxPoints)
-            info = tr("Blue wins.");
-        else if (yellow == maxPoints)
-            info = tr("Yellow wins.");
-        else
-            info = tr("Red wins.");
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == game_variant_classic
-                            || variant == game_variant_trigon);
-        unsigned int blue = bd.get_points_with_bonus(Color(0));
-        unsigned int yellow = bd.get_points_with_bonus(Color(1));
-        unsigned int red = bd.get_points_with_bonus(Color(2));
-        unsigned int green = bd.get_points_with_bonus(Color(3));
-        unsigned int maxPoints = max(blue, max(yellow, max(red, green)));
-        if (blue == yellow && yellow == red && red == green)
-            info = tr("The game ends in a tie between all colors.");
-        else if (blue == maxPoints && blue == yellow && yellow == red)
-            info = tr("The game ends in a tie between Blue, Yellow and Red.");
-        else if (blue == maxPoints && blue == yellow && yellow == green)
-            info =
-                tr("The game ends in a tie between Blue, Yellow and Green.");
-        else if (blue == maxPoints && blue == red && red == green)
-            info = tr("The game ends in a tie between Blue, Red and Green.");
-        else if (yellow == maxPoints && yellow == red && red == green)
-            info = tr("The game ends in a tie between Yellow, Red and Green.");
-        else if (blue == maxPoints && blue == yellow)
-            info = tr("The game ends in a tie between Blue and Yellow.");
-        else if (blue == maxPoints && blue == red)
-            info = tr("The game ends in a tie between Blue and Red.");
-        else if (blue == maxPoints && blue == green)
-            info = tr("The game ends in a tie between Blue and Green.");
-        else if (yellow == maxPoints && yellow == red)
-            info = tr("The game ends in a tie between Yellow and Red.");
-        else if (yellow == maxPoints && yellow == green)
-            info = tr("The game ends in a tie between Yellow and Green.");
-        else if (red == maxPoints && red == green)
-            info = tr("The game ends in a tie between Red and Green.");
-        else if (blue == maxPoints)
-            info = tr("Blue wins.");
-        else if (yellow == maxPoints)
-            info = tr("Yellow wins.");
-        else if (red == maxPoints)
-            info = tr("Red wins.");
-        else
-            info = tr("Green wins.");
-    }
-    showInfo(info);
-}
-
 void MainWindow::showInfo(const QString& text, const QString& infoText,
                           const QString& detailText)
 {
@@ -3027,6 +3108,15 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
     msgBox.setInformativeText(infoText);
     msgBox.setDetailedText(detailText);
     msgBox.exec();
+}
+
+void MainWindow::showRating()
+{
+    GameVariant variant = m_game->get_game_variant();
+    RatingDialog dialog(this, variant);
+    RatingHistory history(variant, getDataDir().toLocal8Bit().constData());
+    dialog.setHistory(history);
+    dialog.exec();
 }
 
 void MainWindow::showStatus(const QString& text, bool temporary)

@@ -31,7 +31,11 @@ enum GameVariant
 };
 
 /** Get name of game variant as in the GM property in Blokus SGF files. */
-const char* to_string(GameVariant game_variant);
+const char* to_string(GameVariant variant);
+
+/** Get a short lowercase string without spaces that can be used as
+    a identifier for a game variant. */
+const char* to_string_id(GameVariant variant);
 
 /** Parse name of game variant as in the GM property in Blokus SGF files.
     The parsing is case-insensitive, leading and trailing whitespaced are
@@ -42,6 +46,8 @@ const char* to_string(GameVariant game_variant);
 bool parse_game_variant(const string& s, GameVariant& game_variant);
 
 unsigned int get_nu_colors(GameVariant variant);
+
+unsigned int get_nu_players(GameVariant variant);
 
 //-----------------------------------------------------------------------------
 

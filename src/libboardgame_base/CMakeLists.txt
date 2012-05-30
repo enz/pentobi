@@ -6,6 +6,7 @@ include_directories(
 set(boardgame_base_STAT_SRCS
   CoordPoint.cpp
   Engine.cpp
+  Rating.cpp
   SpreadsheetStringRep.cpp
   Transform.cpp
   )

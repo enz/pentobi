@@ -2,10 +2,17 @@
 /** @file pentobi/Util.h */
 //-----------------------------------------------------------------------------
 
-#ifndef PENTOBI_GUI_UTIL_H
-#define PENTOBI_GUI_UTIL_H
+#ifndef PENTOBI_UTIL_H
+#define PENTOBI_UTIL_H
 
 #include <QtGui>
+#include "libboardgame_base/Rating.h"
+#include "libpentobi_base/Color.h"
+#include "libpentobi_base/GameVariant.h"
+
+using libboardgame_base::Rating;
+using libpentobi_base::Color;
+using libpentobi_base::GameVariant;
 
 //-----------------------------------------------------------------------------
 
@@ -19,8 +26,18 @@ namespace Util
     changed (e.g. after saving). */
 void removeThumbnail(const QString& file);
 
+void getRating(GameVariant variant, Rating& rating, unsigned int& nuGames);
+
+void initRating(GameVariant variant, Rating rating);
+
+void updateRating(GameVariant variant, float score, Rating opponentRating,
+                  unsigned int nuOpponents);
+
+void getNextRatedGameSettings(GameVariant variant, int maxLevel, int& level,
+                              Color& userColor);
+
 }
 
 //-----------------------------------------------------------------------------
 
-#endif // PENTOBI_GUI_UTIL_H
+#endif // PENTOBI_UTIL_H

@@ -12,6 +12,9 @@ using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
 using libpentobi_base::game_variant_junior;
+using libpentobi_base::game_variant_trigon;
+using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::game_variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
@@ -220,6 +223,47 @@ QColor Util::getPaintColor(GameVariant gameVariant, Color c)
 QColor Util::getPaintColorEmpty()
 {
     return gray;
+}
+
+QString Util::getPlayerString(GameVariant variant, Color c)
+{
+    if (variant == game_variant_duo || variant == game_variant_junior)
+    {
+        if (c == Color(0))
+            return qApp->translate("Util", "Blue");
+        if (c == Color(1))
+            return qApp->translate("Util", "Green");
+    }
+    else if (variant == game_variant_classic || variant == game_variant_trigon)
+    {
+        if (c == Color(0))
+            return qApp->translate("Util", "Blue");
+        if (c == Color(1))
+            return qApp->translate("Util", "Yellow");
+        if (c == Color(2))
+            return qApp->translate("Util", "Red");
+        if (c == Color(3))
+            return qApp->translate("Util", "Green");
+    }
+    else if (variant == game_variant_trigon_3)
+    {
+        if (c == Color(0))
+            return qApp->translate("Util", "Blue");
+        if (c == Color(1))
+            return qApp->translate("Util", "Yellow");
+        if (c == Color(2))
+            return qApp->translate("Util", "Red");
+    }
+    else if (variant == game_variant_classic_2
+             || variant == game_variant_trigon_2)
+    {
+        if (c == Color(0) || c == Color(2))
+            return qApp->translate("Util", "Blue/Red");
+        if (c == Color(1) || c == Color(3))
+            return qApp->translate("Util", "Yellow/Green");
+    }
+    LIBBOARDGAME_ASSERT(false);
+    return "";
 }
 
 void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,

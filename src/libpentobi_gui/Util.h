@@ -64,6 +64,12 @@ string convertSgfValueFromQString(const QString& value, const string& charset);
     ignored and the string is converted using the default system charset. */
 QString convertSgfValueToQString(const string& value, const string& charset);
 
+/** Get a translated string identifying a player, like "Blue" or "Blue/Red".
+    @param variant The game variant
+    @param c The player color or one of the player colors in game variants
+    with multiple colors per player. */
+QString getPlayerString(GameVariant variant, Color c);
+
 }
 
 //-----------------------------------------------------------------------------

@@ -78,6 +78,17 @@ string Tree::get_comment(const Node& node) const
     return node.get_property("C", "");
 }
 
+string Tree::get_date_today()
+{
+   time_t t = time(0);
+   struct tm* tmp = localtime(&t);
+   if (tmp == 0)
+       return "?";
+    char date[128];
+    strftime(date, sizeof(date), "%Y-%m-%d", tmp);
+    return date;
+}
+
 unique_ptr<Node> Tree::get_tree_transfer_ownership()
 {
     return move(m_root);
@@ -238,14 +249,7 @@ void Tree::set_comment(const Node& node, const format& f)
 
 void Tree::set_date_today()
 {
-   time_t t = time(0);
-   struct tm* tmp = localtime(&t);
-   if (tmp == 0)
-       return;
-    char date[128];
-    if (strftime(date, sizeof(date), "%Y-%m-%d", tmp) == 0)
-        return;
-    set_date(date);
+    set_date(get_date_today());
 }
 
 void Tree::set_doubtful_move(const Node& node)

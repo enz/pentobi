@@ -8,6 +8,8 @@
 
 #include "ComputerColorDialog.h"
 
+#include "Util.h"
+
 using libpentobi_base::game_variant_classic;
 using libpentobi_base::game_variant_classic_2;
 using libpentobi_base::game_variant_duo;
@@ -36,29 +38,29 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     if (m_gameVariant == game_variant_duo
         || m_gameVariant == game_variant_junior)
     {
-        createCheckBox(layout, Color(0), tr("Blue"));
-        createCheckBox(layout, Color(1), tr("Green"));
+        createCheckBox(layout, Color(0));
+        createCheckBox(layout, Color(1));
     }
     else if (m_gameVariant == game_variant_classic
              || m_gameVariant == game_variant_trigon)
     {
-        createCheckBox(layout, Color(0), tr("Blue"));
-        createCheckBox(layout, Color(1), tr("Yellow"));
-        createCheckBox(layout, Color(2), tr("Red"));
-        createCheckBox(layout, Color(3), tr("Green"));
+        createCheckBox(layout, Color(0));
+        createCheckBox(layout, Color(1));
+        createCheckBox(layout, Color(2));
+        createCheckBox(layout, Color(3));
     }
     else if (m_gameVariant == game_variant_trigon_3)
     {
-        createCheckBox(layout, Color(0), tr("Blue"));
-        createCheckBox(layout, Color(1), tr("Yellow"));
-        createCheckBox(layout, Color(2), tr("Red"));
+        createCheckBox(layout, Color(0));
+        createCheckBox(layout, Color(1));
+        createCheckBox(layout, Color(2));
     }
     else
     {
         LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2
                             || m_gameVariant == game_variant_trigon_2);
-        createCheckBox(layout, Color(0), tr("Blue/Red"));
-        createCheckBox(layout, Color(1), tr("Yellow/Green"));
+        createCheckBox(layout, Color(0));
+        createCheckBox(layout, Color(1));
     }
     QDialogButtonBox* buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
@@ -100,10 +102,10 @@ void ComputerColorDialog::accept()
     QDialog::accept();
 }
 
-void ComputerColorDialog::createCheckBox(QLayout* layout, Color c,
-                                         const QString& text)
+void ComputerColorDialog::createCheckBox(QLayout* layout, Color c)
 {
-    QCheckBox* checkBox = new QCheckBox(text);
+    QCheckBox* checkBox =
+        new QCheckBox(Util::getPlayerString(m_gameVariant, c));
     checkBox->setChecked(m_computerColor[c]);
     layout->addWidget(checkBox);
     m_checkBox[c.to_int()] = checkBox;

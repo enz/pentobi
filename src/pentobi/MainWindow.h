@@ -106,6 +106,8 @@ public slots:
 
     void newGame();
 
+    void newRatedGame();
+
     void nextVariation();
 
     void nextVariation10();
@@ -196,6 +198,8 @@ public slots:
 
     void showVariations(bool checked);
 
+    void showRating();
+
 protected:
     void closeEvent(QCloseEvent* event);
 
@@ -229,6 +233,14 @@ private:
     /** Flag indicating that the position after the last move played was
         a terminal position. */
     bool m_gameFinished;
+
+    bool m_isRated;
+
+    /** Color played by the user in a rated game.
+        Only defined if m_isRated is true. In game variants with multiple
+        colors per player, the user plays all colors of the player with
+        this color. */
+    Color m_ratedGameColor;
 
     /** Integer ID assigned to the currently running move generation.
         Used to ignore finished events from canceled move generations. */
@@ -385,6 +397,8 @@ private:
 
     QAction* m_actionNewGame;
 
+    QAction* m_actionNewRatedGame;
+
     QAction* m_actionNoMoveAnnotation;
 
     QAction* m_actionOpen;
@@ -414,6 +428,8 @@ private:
     QAction* m_actionSaveAs;
 
     QAction* m_actionShowComment;
+
+    QAction* m_actionShowRating;
 
     QAction* m_actionShowToolbar;
 
@@ -557,7 +573,7 @@ private:
 
     bool save(const QString& file);
 
-    void setGameVariant(GameVariant gameVariant);
+    void setGameVariant(GameVariant variant);
 
     void setMoveNumberText();
 
@@ -569,7 +585,7 @@ private:
                    const QString& infoText = QString(),
                    const QString& detailText = QString());
 
-    void showGameOver();
+    void gameOver();
 
     void showInfo(const QString& message, const QString& infoText = QString(),
                   const QString& detailText = QString());

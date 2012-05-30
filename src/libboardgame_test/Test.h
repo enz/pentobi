@@ -122,16 +122,30 @@ struct TestRegistrar
         }                                                               \
     }
 
-#define LIBBOARDGAME_CHECK_CLOSE(expr1, expr2, epsilon)                 \
+/** Compare floating points using a tolerance in percent. */
+#define LIBBOARDGAME_CHECK_CLOSE(expr1, expr2, tolerance)               \
     {                                                                   \
         using libboardgame_test::TestFail;                              \
         auto result1 = (expr1);                                         \
         auto result2 = (expr2);                                         \
-        if (fabs(result1 - result2) > 0.01 * epsilon * result1)         \
+        if (fabs(result1 - result2) > 0.01 * tolerance * result1)       \
             throw TestFail(__FILE__, __LINE__,                          \
-                           boost::format("Difference between '%1%' and '%2%'" \
-                                         " exceeds %3% percent")        \
-                           % result1 % result2 % (0.01 * epsilon));     \
+                           boost::format("Difference between %1% and"   \
+                                         " %2% exceeds %3% percent")    \
+                           % result1 % result2 % (0.01 * tolerance));   \
+    }
+
+/** Compare floating points using an epsilon. */
+#define LIBBOARDGAME_CHECK_CLOSE_EPS(expr1, expr2, epsilon)             \
+    {                                                                   \
+        using libboardgame_test::TestFail;                              \
+        auto result1 = (expr1);                                         \
+        auto result2 = (expr2);                                         \
+        if (fabs(result1 - result2) > epsilon)                          \
+            throw TestFail(__FILE__, __LINE__,                          \
+                           boost::format("Difference between %1% and"   \
+                                         " %2% exceeds %3%")            \
+                           % result1 % result2 % epsilon);              \
     }
 
 //-----------------------------------------------------------------------------
