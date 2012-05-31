@@ -675,11 +675,6 @@
         <translation>Alle vorhergehenden Züge und Varianten werden aus dem Spielbaum entfernt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2263"/>
-        <source>Start new rated game?</source>
-        <translation>Neues gewertetes Spiel beginnen?</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="2270"/>
         <source>&amp;Start Game</source>
         <translation>&amp;Spiel beginnen</translation>
@@ -797,8 +792,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2264"/>
-        <source>Your rating in this game variant is currently %1. In the next game, you will play %2 versus Pentobi level %3.</source>
-        <translation>Ihre Wertung in dieser Spielvariante ist gegenwärtig %1. Im nächsten Spiel spielen Sie %2 gegen Pentobi Spielstufe %3.</translation>
+        <source>In the next rated game, you will play %1 versus Pentobi level %2.</source>
+        <translation>Im nächsten gewerteten Spiel spielen Sie %1 gegen Pentobi Spielstufe %2.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="3026"/>

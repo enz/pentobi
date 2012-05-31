@@ -2260,12 +2260,11 @@ void MainWindow::newRatedGame()
     int level;
     Util::getNextRatedGameSettings(variant, maxLevel, level, m_ratedGameColor);
     QMessageBox msgBox(this);
-    initQuestion(msgBox, tr("Start new rated game?"),
-                 tr("Your rating in this game variant is currently %1."
-                 " In the next game, you will play %2 versus Pentobi level %3.")
-                 .arg(static_cast<int>(rating.get()))
-                 .arg(getPlayerString(variant, m_ratedGameColor))
-                 .arg(level));
+    msgBox.setWindowTitle(tr("Pentobi"));
+    msgBox.setText(tr("In the next rated game, you will play %1 versus"
+                      " Pentobi level %2.")
+                   .arg(getPlayerString(variant, m_ratedGameColor))
+                   .arg(level));
     QPushButton* startGameButton =
         msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
     msgBox.addButton(QMessageBox::Cancel);
