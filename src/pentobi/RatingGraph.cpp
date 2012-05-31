@@ -67,6 +67,7 @@ void RatingGraph::paintEvent(QPaintEvent*)
             x += dX;
         }
         painter.setPen(Qt::red);
+        painter.setBrush(Qt::NoBrush);
         painter.drawPath(path);
     }
 }
