@@ -493,6 +493,8 @@ private:
 
     QLabel* m_setupModeLabel;
 
+    QLabel* m_ratedGameLabel;
+
     StatusBarButton* m_buttonFullscreen;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
@@ -578,6 +580,8 @@ private:
     void setMoveNumberText();
 
     void setPlayToolTip();
+
+    void setRated(bool isRated);
 
     void setFile(const QString& file);
 

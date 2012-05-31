@@ -248,8 +248,12 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     setCentralWidget(createCentralWidget());
     m_moveNumber = new QLabel();
     statusBar()->addPermanentWidget(m_moveNumber);
-    m_setupModeLabel = new QLabel();
+    m_setupModeLabel = new QLabel(tr("Setup mode"));
     statusBar()->addWidget(m_setupModeLabel);
+    m_setupModeLabel->hide();
+    m_ratedGameLabel = new QLabel(tr("Rated game"));
+    statusBar()->addWidget(m_ratedGameLabel);
+    m_ratedGameLabel->hide();
     m_buttonFullscreen = new StatusBarButton(m_actionFullscreen);
     statusBar()->addPermanentWidget(m_buttonFullscreen);
     initGame();
@@ -2009,7 +2013,7 @@ void MainWindow::help()
 
 void MainWindow::initGame()
 {
-    m_isRated = false;
+    setRated(false);
     if (m_analyzeGameWindow != 0)
     {
         delete m_analyzeGameWindow;
@@ -2272,8 +2276,8 @@ void MainWindow::newRatedGame()
         return;
     setLevel(level);
     initGame();
-    m_isRated = true;
     setFile(QString());
+    setRated(true);
     m_computerColors.fill(true);
     const Board& bd = getBoard();
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
@@ -2350,7 +2354,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         delete m_analyzeGameWindow;
         m_analyzeGameWindow = 0;
     }
-    m_isRated = false;
+    setRated(false);
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
@@ -2820,12 +2824,7 @@ void MainWindow::setFile(const QString& file)
 {
     m_file = file;
     if (m_file.isEmpty())
-    {
-        if (m_isRated)
-            setWindowTitle(tr("Pentobi - Rated Game"));
-        else
-            setWindowTitle(tr("Pentobi"));
-    }
+        setWindowTitle(tr("Pentobi"));
     else
     {
         QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
@@ -3019,6 +3018,19 @@ void MainWindow::setPlayToolTip()
     m_actionPlay->setToolTip(s);
 }
 
+void MainWindow::setRated(bool isRated)
+{
+    m_isRated = isRated;
+    if (isRated)
+    {
+        setWindowTitle(tr("Pentobi - Rated Game"));
+        statusBar()->addWidget(m_ratedGameLabel);
+        m_ratedGameLabel->show();
+    }
+    else
+        statusBar()->removeWidget(m_ratedGameLabel);
+}
+
 void MainWindow::setSetupPlayer()
 {
     if (! m_game->has_setup())
@@ -3045,7 +3057,7 @@ void MainWindow::setupMode(bool enable)
     m_guiBoard->setFreePlacement(enable);
     if (enable)
     {
-        m_setupModeLabel->setText(tr("Setup mode"));
+        m_setupModeLabel->show();
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
             m_pieceSelector[*i]->setEnabled(true);
         m_computerColors.fill(false);
@@ -3053,7 +3065,7 @@ void MainWindow::setupMode(bool enable)
     else
     {
         setSetupPlayer();
-        m_setupModeLabel->setText("");
+        m_setupModeLabel->hide();
         enablePieceSelector(m_currentColor);
     }
 }
