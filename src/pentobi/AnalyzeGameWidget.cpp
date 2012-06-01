@@ -183,11 +183,13 @@ QSize AnalyzeGameWidget::sizeHint() const
     return QSize(800, 240);
 }
 
-void AnalyzeGameWidget::start(const Game& game, Search& search)
+void AnalyzeGameWidget::start(const Game& game, Search& search,
+                              size_t nuSimulations)
 {
     m_isInitialized = true;
     m_game = &game;
     m_search = &search;
+    m_nuSimulations = nuSimulations;
     initSize();
     m_progressDialog = new QProgressDialog(this);
     m_progressDialog->setWindowModality(Qt::WindowModal);
@@ -207,7 +209,7 @@ void AnalyzeGameWidget::start(const Game& game, Search& search)
 
 void AnalyzeGameWidget::threadFunction()
 {
-    m_analyzeGame.run(*m_game, *m_search,
+    m_analyzeGame.run(*m_game, *m_search, m_nuSimulations,
                       bind(&AnalyzeGameWidget::progressCallback, this,
                            placeholders::_1, placeholders::_2));
     // This function is called from a diffrent thread. Invoke showProgress()

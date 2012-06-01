@@ -41,7 +41,7 @@ public:
         position in the main variation and use the search to evaluate
         positions. During the analysis, the parent window is protected with a
         modal progress dialog. */
-    void start(const Game& game, Search& search);
+    void start(const Game& game, Search& search, size_t nuSimulations);
 
     /** Mark the current position.
         Will clear the current position if the target node is not in the
@@ -75,6 +75,8 @@ private:
     const Game* m_game;
 
     Search* m_search;
+
+    size_t m_nuSimulations;
 
     AnalyzeGame m_analyzeGame;
 

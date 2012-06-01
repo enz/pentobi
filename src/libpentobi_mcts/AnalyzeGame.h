@@ -24,10 +24,11 @@ public:
         libboardgame_util::set_abort().
         @param game
         @param search
+        @param nu_simulations
         @param progress_callback Function that will be called at the beginning
         of the analysis of a position. Arguments: number moves analyzed so far,
         total number of moves. */
-    void run(const Game& game, Search& search,
+    void run(const Game& game, Search& search, size_t nu_simulations,
              function<void(unsigned int,unsigned int)> progress_callback);
 
     GameVariant get_game_variant() const;

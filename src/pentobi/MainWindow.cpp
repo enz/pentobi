@@ -377,6 +377,15 @@ void MainWindow::about()
 
 void MainWindow::analyzeGame()
 {
+    QStringList items;
+    items << tr("Fast") << tr("Normal") << tr("Slow");
+    bool ok;
+    QString item = QInputDialog::getItem(this, tr("Analyze Game"),
+                                         tr("Analysis speed:"), items, 0,
+                                         false, &ok);
+    if (! ok || item.isEmpty())
+        return;
+    int speed = items.indexOf(item);
     cancelThread();
     if (m_analyzeGameWindow != 0)
         delete m_analyzeGameWindow;
@@ -388,8 +397,22 @@ void MainWindow::analyzeGame()
     connect(m_analyzeGameWindow->analyzeGameWidget,
             SIGNAL(gotoPosition(GameVariant,const vector<ColorMove>&)),
             this, SLOT(gotoPosition(GameVariant,const vector<ColorMove>&)));
+    size_t nuSimulations;
+    switch (speed)
+    {
+    case 2:
+        nuSimulations = 48000;
+        break;
+    case 1:
+        nuSimulations = 12000;
+        break;
+    default:
+        nuSimulations = 3000;
+        break;
+    }
     m_analyzeGameWindow->analyzeGameWidget->start(*m_game,
-                                                  m_player->get_search());
+                                                  m_player->get_search(),
+                                                  nuSimulations);
 }
 
 void MainWindow::analyzeGameFinished()
@@ -663,7 +686,7 @@ void MainWindow::createActions()
     m_actionAbout = new QAction(tr("&About"), this);
     connect(m_actionAbout, SIGNAL(triggered()), this, SLOT(about()));
 
-    m_actionAnalyzeGame = new QAction(tr("&Analyze Game"), this);
+    m_actionAnalyzeGame = new QAction(tr("&Analyze Game..."), this);
     connect(m_actionAnalyzeGame, SIGNAL(triggered()),
             this, SLOT(analyzeGame()));
 
