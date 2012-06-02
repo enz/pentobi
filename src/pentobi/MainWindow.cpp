@@ -2284,8 +2284,9 @@ void MainWindow::newRatedGame()
     Util::getNextRatedGameSettings(variant, maxLevel, level, m_ratedGameColor);
     QMessageBox msgBox(this);
     msgBox.setWindowTitle(tr("Pentobi"));
-    msgBox.setText(tr("In the next rated game, you will play %1 versus"
-                      " Pentobi level %2.")
+    msgBox.setText("<html>" +
+                   tr("In the next rated game, you will play %1 against"
+                      " Pentobi level&nbsp;%2.")
                    .arg(getPlayerString(variant, m_ratedGameColor))
                    .arg(level));
     QPushButton* startGameButton =
