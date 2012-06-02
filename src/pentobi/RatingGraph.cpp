@@ -15,22 +15,19 @@
 RatingGraph::RatingGraph(QWidget* parent)
     : QWidget(parent)
 {
+    setMinimumSize(200, 60);
 }
 
 void RatingGraph::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    QFont font;
-    font.setStyleStrategy(QFont::PreferOutline);
-    font.setPointSizeF(0.1 * height());
-    QFontMetrics metrics(font);
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255, 255, 255));
     painter.drawRect(0, 0, width(), height());
     if (! m_values.empty())
     {
-        QFontMetrics metrics(font);
+        QFontMetrics metrics(painter.font());
         float yRange = m_yMax - m_yMin;
         float yTic = ceil((m_yMin / 100.f)) * 100;
         QPen pen(QColor(96, 96, 96));
@@ -43,14 +40,10 @@ void RatingGraph::paintEvent(QPaintEvent*)
             painter.drawLine(0, y, width(), y);
             QString label;
             label.setNum(yTic, 'f', 0);
-            QRect rect = metrics.boundingRect(label);
-            maxLabelWidth = max(maxLabelWidth, rect.width());
-            if (y > rect.height())
-                painter.drawText(QRect(width() - rect.width(),
-                                       y - rect.height(),
-                                       width(), y),
-                                 Qt::AlignLeft | Qt::AlignTop
-                                 | Qt::TextDontClip,
+            int labelWidth = metrics.width(label);
+            maxLabelWidth = max(maxLabelWidth, labelWidth);
+            if (y > metrics.height())
+                painter.drawText(width() - labelWidth, y - metrics.descent(),
                                  label);
             yTic += 100;
         }
