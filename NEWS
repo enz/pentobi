@@ -1,6 +1,7 @@
 Current development version (branch v2-fixes)
 =============================================
 
+* Fixed duplicate menu shortcut in German translation
 * Fixed floating point tolerance in unit tests.
 
 

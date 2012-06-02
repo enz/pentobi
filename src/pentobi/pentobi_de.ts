@@ -567,7 +567,7 @@
     <message>
         <location filename="MainWindow.cpp" line="1264"/>
         <source>&amp;Level</source>
-        <translation>Spielst&amp;ufe</translation>
+        <translation>S&amp;pielstufe</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1270"/>
