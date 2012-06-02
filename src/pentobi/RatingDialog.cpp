@@ -70,9 +70,9 @@ RatingDialog::RatingDialog(QWidget* parent, GameVariant variant)
         ratingStr.setNum(rating.get(), 'f', 0);
     formLayout->addRow(tr("Your rating:"), new QLabel(ratingStr));
     layout->addSpacing(layout->spacing());
-    layout->addWidget(new QLabel(tr("Recent development")));
+    layout->addWidget(new QLabel(tr("Recent development:")));
     m_graph = new RatingGraph();
-    layout->addWidget(m_graph);
+    layout->addWidget(m_graph, 1);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
     layout->addWidget(buttonBox);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));

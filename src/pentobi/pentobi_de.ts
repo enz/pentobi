@@ -1131,8 +1131,8 @@
     </message>
     <message>
         <location filename="RatingDialog.cpp" line="73"/>
-        <source>Recent development</source>
-        <translation>Aktuelle Entwicklung</translation>
+        <source>Recent development:</source>
+        <translation>Aktuelle Entwicklung:</translation>
     </message>
 </context>
 </TS>
