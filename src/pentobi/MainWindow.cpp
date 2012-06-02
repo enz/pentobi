@@ -1454,7 +1454,10 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
     m_toolBar->addAction(m_actionNewGame);
-    m_toolBar->addAction(m_actionPlay);
+    m_playButton = new QToolButton();
+    m_playButton->setDefaultAction(m_actionPlay);
+    m_playButton->installEventFilter(this);
+    m_toolBar->addWidget(m_playButton);
     m_toolBar->addAction(m_actionComputerColors);
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward10);
@@ -1491,12 +1494,23 @@ void MainWindow::end()
     gotoNode(get_last_node(m_game->get_current()));
 }
 
-bool MainWindow::eventFilter(QObject*, QEvent* event)
+bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
     // By default, Qt 4.7 shows status tips in the status bar if the mouse
     // goes over a menu. This is undesirable because it deletes the current
     // text in the status line (e.g. the "The computer is thinking..." status)
-    return (event->type() == QEvent::StatusTip);
+    if (event->type() == QEvent::StatusTip)
+        return true;
+
+    // Detect Shift-clicks on "Computer Play" toolbar button
+    if (object == m_playButton && event->type() == QEvent::MouseButtonPress)
+        if (static_cast<QMouseEvent*>(event)->modifiers() == Qt::ShiftModifier)
+        {
+            playSingleMove();
+            return true;
+        }
+
+    return QMainWindow::eventFilter(object, event);
 }
 
 void MainWindow::exportAsciiArt()
@@ -3059,7 +3073,9 @@ void MainWindow::setPlayToolTip()
                 s = tr("Make the computer play Red.");
         }
     }
-    m_actionPlay->setToolTip(s);
+    s += "\n" + tr("(Shift-click to play a single move\n"
+                   "without changing the computer colors.)");
+    m_playButton->setToolTip(s);
 }
 
 void MainWindow::setRated(bool isRated)

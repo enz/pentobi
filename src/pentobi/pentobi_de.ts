@@ -78,27 +78,27 @@
         <translation>&amp;Stellungsaufbau</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1892"/>
+        <location filename="MainWindow.cpp" line="1906"/>
         <source>Computer failed to generate a move.</source>
         <translation>Der Computer konnte keinen Zug generieren.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1898"/>
+        <location filename="MainWindow.cpp" line="1912"/>
         <source>Computer generated illegal move: %1</source>
         <translation>Der Computer generierte einen illegalen Zug: %1</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2374"/>
+        <location filename="MainWindow.cpp" line="2388"/>
         <source>Could not read file &apos;%1&apos;</source>
         <translation>Datei &apos;%1&apos; konnte nicht gelesen werden</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2981"/>
+        <location filename="MainWindow.cpp" line="2995"/>
         <source>Move number %1 in variation %2</source>
         <translation>Zug Nummer %1 in Variante %2</translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="2992"/>
+        <location filename="MainWindow.cpp" line="3006"/>
         <source>%n move(s) in variation %1</source>
         <translation>
             <numerusform>%n Zug in Variante %1</numerusform>
@@ -106,52 +106,60 @@
         </translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2997"/>
+        <location filename="MainWindow.cpp" line="3011"/>
         <source>Move number %1 of %2 in variation %3</source>
         <translation>Zug Nummer %1 von %2 in Variante %3</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3146"/>
+        <location filename="MainWindow.cpp" line="3076"/>
+        <source>(Shift-click to play a single move
+without changing the computer colors.)</source>
+        <oldsource>(Shift-click to play a single move without changing the computer colors)</oldsource>
+        <translation>(Umschalt+Klicken um einen einzelnen Zug zu spielen
+ohne die Computer-Farben zu ändern.)</translation>
+    </message>
+    <message>
+        <location filename="MainWindow.cpp" line="3162"/>
         <source>The file is not a valid Blokus SGF file.</source>
         <translation>Die Datei ist keine gültige Blokus-SGF-Datei.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3197"/>
+        <location filename="MainWindow.cpp" line="3213"/>
         <source>Truncate this subtree?</source>
         <translation>Diesen Teilbaum abschneiden?</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3198"/>
+        <location filename="MainWindow.cpp" line="3214"/>
         <source>This position and all following moves and variations will be removed from the game tree.</source>
         <translation>Diese Brettstellung und alle folgenden Züge und Varianten werden aus dem Spielbaum entfernt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3201"/>
+        <location filename="MainWindow.cpp" line="3217"/>
         <source>Truncate</source>
         <translation>Abschneiden</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3219"/>
+        <location filename="MainWindow.cpp" line="3235"/>
         <source>Truncate children?</source>
         <translation>Kindknoten abschneiden?</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3220"/>
+        <location filename="MainWindow.cpp" line="3236"/>
         <source>All following moves and variations will be removed from the game tree.</source>
         <translation>Alle folgenden Züge und Varianten werden aus dem Spielbaum entfernt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3223"/>
+        <location filename="MainWindow.cpp" line="3239"/>
         <source>Truncate Children</source>
         <translation>Kindknoten abschneiden</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3459"/>
+        <location filename="MainWindow.cpp" line="3475"/>
         <source>Save (%1)</source>
         <translation>Speichern (%1)</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1477"/>
+        <location filename="MainWindow.cpp" line="1480"/>
         <source>Could not delete %1</source>
         <translation>%1 konnte nicht gelöscht werden</translation>
     </message>
@@ -640,122 +648,122 @@
         <translation>Varianten löschen</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1469"/>
+        <location filename="MainWindow.cpp" line="1472"/>
         <source>&amp;Toolbar</source>
         <translation>&amp;Werkzeugleiste</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1505"/>
+        <location filename="MainWindow.cpp" line="1519"/>
         <source>Text files (*.txt)</source>
         <translation>Textdateien (*.txt)</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1520"/>
+        <location filename="MainWindow.cpp" line="1534"/>
         <source>Export Image</source>
         <translation>Grafik exportieren</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1520"/>
+        <location filename="MainWindow.cpp" line="1534"/>
         <source>Image size:</source>
         <translation>Bildgröße:</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1606"/>
+        <location filename="MainWindow.cpp" line="1620"/>
         <source>No comment found</source>
         <translation>Kein Kommentar gefunden</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1855"/>
+        <location filename="MainWindow.cpp" line="1869"/>
         <source>The computer is thinking...</source>
         <translation>Der Computer denkt...</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1911"/>
+        <location filename="MainWindow.cpp" line="1925"/>
         <source>Blokus games (*.blksgf);;All files (*.*)</source>
         <translation>Blokus-Partien (*.blksgf);;Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1981"/>
+        <location filename="MainWindow.cpp" line="1995"/>
         <source>Move number:</source>
         <translation>Zugnummer:</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1981"/>
+        <location filename="MainWindow.cpp" line="1995"/>
         <source>Go to Move</source>
         <translation>Gehe zu Zug</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2162"/>
+        <location filename="MainWindow.cpp" line="2176"/>
         <source>Keep only position?</source>
         <translation>Nur Brettstellung behalten?</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2163"/>
+        <location filename="MainWindow.cpp" line="2177"/>
         <source>All previous and following moves and variations will be removed from the game tree.</source>
         <translation>Alle vorhergehenden und nachfolgenden Züge und Varianten werden aus dem Spielbaum entfernt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2181"/>
+        <location filename="MainWindow.cpp" line="2195"/>
         <source>Keep only subtree?</source>
         <translation>Nur Teilbaum behalten?</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2182"/>
+        <location filename="MainWindow.cpp" line="2196"/>
         <source>All previous moves and variations will be removed from the game tree.</source>
         <translation>Alle vorhergehenden Züge und Varianten werden aus dem Spielbaum entfernt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2301"/>
+        <location filename="MainWindow.cpp" line="2315"/>
         <source>In the next rated game, you will play %1 against Pentobi level&amp;nbsp;%2.</source>
         <translation>Im nächsten gewerteten Spiel spielen Sie %1 gegen Pentobi Spielstufe&amp;nbsp;%2.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2306"/>
+        <location filename="MainWindow.cpp" line="2320"/>
         <source>&amp;Start Game</source>
         <translation>&amp;Spiel beginnen</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2350"/>
+        <location filename="MainWindow.cpp" line="2364"/>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2636"/>
+        <location filename="MainWindow.cpp" line="2650"/>
         <source>The file could not be saved.</source>
         <translation>Die Datei konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2640"/>
+        <location filename="MainWindow.cpp" line="2654"/>
         <source>%1: %2</source>
         <extracomment>Error message if file cannot be saved. %1 is replaced by the file name, %2 by the error message of the operating system.</extracomment>
         <translation>%1: %2</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2646"/>
+        <location filename="MainWindow.cpp" line="2660"/>
         <source>File saved %1</source>
         <translation>Datei gespeichert %1</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2658"/>
+        <location filename="MainWindow.cpp" line="2672"/>
         <source>Untitled Game.blksgf</source>
         <translation>Unbenanntes Spiel.blksgf</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2664"/>
+        <location filename="MainWindow.cpp" line="2678"/>
         <source>Untitled Game %1.blksgf</source>
         <translation>Unbenanntes Spiel %1.blksgf</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2669"/>
+        <location filename="MainWindow.cpp" line="2683"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="366"/>
-        <location filename="MainWindow.cpp" line="2132"/>
-        <location filename="MainWindow.cpp" line="2299"/>
-        <location filename="MainWindow.cpp" line="2871"/>
-        <location filename="MainWindow.cpp" line="3161"/>
+        <location filename="MainWindow.cpp" line="2146"/>
+        <location filename="MainWindow.cpp" line="2313"/>
+        <location filename="MainWindow.cpp" line="2885"/>
+        <location filename="MainWindow.cpp" line="3177"/>
         <source>Pentobi</source>
         <translation>Pentobi</translation>
     </message>
@@ -802,112 +810,112 @@
         <translation>&amp;Vorzeitig beenden</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1587"/>
+        <location filename="MainWindow.cpp" line="1601"/>
         <source>The end of the tree was reached.</source>
         <translation>Das Ende des Spielbaums wurde erreicht.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1588"/>
+        <location filename="MainWindow.cpp" line="1602"/>
         <source>Continue the search from the start of the tree?</source>
         <translation>Die Suche vom Beginn des Spielbaums fortsetzen?</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1590"/>
+        <location filename="MainWindow.cpp" line="1604"/>
         <source>Continue From Start</source>
         <translation>Suche vom Beginn fortsetzen</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2166"/>
+        <location filename="MainWindow.cpp" line="2180"/>
         <source>Keep Only Position</source>
         <translation>Nur Brettstellung behalten</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2185"/>
+        <location filename="MainWindow.cpp" line="2199"/>
         <source>Keep Only Subtree</source>
         <translation>Nur Teilbaum behalten</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3070"/>
+        <location filename="MainWindow.cpp" line="3086"/>
         <source>Pentobi - Rated Game</source>
         <translation>Pentobi - Gewertetes Spiel</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2878"/>
+        <location filename="MainWindow.cpp" line="2892"/>
         <source>%1[*] - Pentobi</source>
         <translation>%1[*] - Pentobi</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2957"/>
+        <location filename="MainWindow.cpp" line="2971"/>
         <source>Move number %1</source>
         <translation>Zug Nummer %1</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="2970"/>
+        <location filename="MainWindow.cpp" line="2984"/>
         <source>Move number %1 of %2</source>
         <translation>Zug Nummer %1 von %2</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3016"/>
+        <location filename="MainWindow.cpp" line="3030"/>
         <source>Make the computer continue to play Blue/Red.</source>
         <translation>Den Computer weiter Blau/Rot spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3018"/>
+        <location filename="MainWindow.cpp" line="3032"/>
         <source>Make the computer play Blue/Red.</source>
         <translation>Den Computer Blau/Rot spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3023"/>
+        <location filename="MainWindow.cpp" line="3037"/>
         <source>Make the computer continue to play Yellow/Green.</source>
         <translation>Den Computer weiter Gelb/Grün spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3025"/>
+        <location filename="MainWindow.cpp" line="3039"/>
         <source>Make the computer play Yellow/Green.</source>
         <translation>Den Computer Gelb/Grün spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3035"/>
+        <location filename="MainWindow.cpp" line="3049"/>
         <source>Make the computer continue to play Blue.</source>
         <translation>Den Computer weiter Blau spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3037"/>
+        <location filename="MainWindow.cpp" line="3051"/>
         <source>Make the computer play Blue.</source>
         <translation>Den Computer Blau spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3042"/>
+        <location filename="MainWindow.cpp" line="3056"/>
         <source>Make the computer continue to play Yellow.</source>
         <translation>Den Computer weiter Gelb spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3044"/>
+        <location filename="MainWindow.cpp" line="3058"/>
         <source>Make the computer play Yellow.</source>
         <translation>Den Computer Gelb spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3050"/>
+        <location filename="MainWindow.cpp" line="3064"/>
         <source>Make the computer continue to play Green.</source>
         <translation>Den Computer weiter Grün spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3052"/>
+        <location filename="MainWindow.cpp" line="3066"/>
         <source>Make the computer play Green.</source>
         <translation>Den Computer Grün spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3057"/>
+        <location filename="MainWindow.cpp" line="3071"/>
         <source>Make the computer continue to play Red.</source>
         <translation>Den Computer weiter Rot spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3059"/>
+        <location filename="MainWindow.cpp" line="3073"/>
         <source>Make the computer play Red.</source>
         <translation>Den Computer Rot spielen lassen.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3097"/>
+        <location filename="MainWindow.cpp" line="3113"/>
         <source>Setup mode cannot be used if moves have been played.</source>
         <translation>Stellungsaufbau-Modus kann nicht benutzt werden, wenn Züge gespielt wurden.</translation>
     </message>
@@ -917,7 +925,7 @@
         <translation>Stellungsaufbau</translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1697"/>
+        <location filename="MainWindow.cpp" line="1711"/>
         <source>Blue wins with %n point(s).</source>
         <oldsource>Green wins with %1 points.</oldsource>
         <translation>
@@ -926,13 +934,13 @@
         </translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1701"/>
-        <location filename="MainWindow.cpp" line="1713"/>
+        <location filename="MainWindow.cpp" line="1715"/>
+        <location filename="MainWindow.cpp" line="1727"/>
         <source>The game ends in a tie.</source>
         <translation>Das Spiel endet in einem Unentschieden.</translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1709"/>
+        <location filename="MainWindow.cpp" line="1723"/>
         <source>Blue/Red wins with %n point(s).</source>
         <oldsource>Blue/Red wins with %1 points.</oldsource>
         <translation>
@@ -941,7 +949,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1711"/>
+        <location filename="MainWindow.cpp" line="1725"/>
         <source>Yellow/Green wins with %n point(s).</source>
         <oldsource>Yellow/Green wins with 1 point.</oldsource>
         <translation>
@@ -950,72 +958,72 @@
         </translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1722"/>
-        <location filename="MainWindow.cpp" line="1746"/>
+        <location filename="MainWindow.cpp" line="1736"/>
+        <location filename="MainWindow.cpp" line="1760"/>
         <source>The game ends in a tie between all colors.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen allen Farben.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1748"/>
+        <location filename="MainWindow.cpp" line="1762"/>
         <source>The game ends in a tie between Blue, Yellow and Red.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Gelb und Rot.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1751"/>
+        <location filename="MainWindow.cpp" line="1765"/>
         <source>The game ends in a tie between Blue, Yellow and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Gelb und Grün.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1753"/>
+        <location filename="MainWindow.cpp" line="1767"/>
         <source>The game ends in a tie between Blue, Red and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Rot und Grün.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1755"/>
+        <location filename="MainWindow.cpp" line="1769"/>
         <source>The game ends in a tie between Yellow, Red and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1724"/>
-        <location filename="MainWindow.cpp" line="1757"/>
+        <location filename="MainWindow.cpp" line="1738"/>
+        <location filename="MainWindow.cpp" line="1771"/>
         <source>The game ends in a tie between Blue and Yellow.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Gelb.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1726"/>
-        <location filename="MainWindow.cpp" line="1759"/>
+        <location filename="MainWindow.cpp" line="1740"/>
+        <location filename="MainWindow.cpp" line="1773"/>
         <source>The game ends in a tie between Blue and Red.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Rot.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1761"/>
+        <location filename="MainWindow.cpp" line="1775"/>
         <source>The game ends in a tie between Blue and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Grün.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1728"/>
-        <location filename="MainWindow.cpp" line="1763"/>
+        <location filename="MainWindow.cpp" line="1742"/>
+        <location filename="MainWindow.cpp" line="1777"/>
         <source>The game ends in a tie between Yellow and Red.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Gelb und Rot.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1765"/>
+        <location filename="MainWindow.cpp" line="1779"/>
         <source>The game ends in a tie between Yellow and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Gelb und Grün.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1767"/>
+        <location filename="MainWindow.cpp" line="1781"/>
         <source>The game ends in a tie between Red and Green.</source>
         <translation>Das Spiel endet in einem Unentschieden zwischen Rot und Grün.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1730"/>
-        <location filename="MainWindow.cpp" line="1769"/>
+        <location filename="MainWindow.cpp" line="1744"/>
+        <location filename="MainWindow.cpp" line="1783"/>
         <source>Blue wins.</source>
         <translation>Blau gewinnt.</translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="2964"/>
+        <location filename="MainWindow.cpp" line="2978"/>
         <source>%n move(s)</source>
         <translation>
             <numerusform>%n Zug</numerusform>
@@ -1023,7 +1031,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1699"/>
+        <location filename="MainWindow.cpp" line="1713"/>
         <source>Green wins with %n point(s).</source>
         <translation>
             <numerusform>Grün gewinnt mit %n Punkt.</numerusform>
@@ -1031,47 +1039,47 @@
         </translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1732"/>
-        <location filename="MainWindow.cpp" line="1771"/>
+        <location filename="MainWindow.cpp" line="1746"/>
+        <location filename="MainWindow.cpp" line="1785"/>
         <source>Yellow wins.</source>
         <translation>Gelb gewinnt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1734"/>
-        <location filename="MainWindow.cpp" line="1773"/>
+        <location filename="MainWindow.cpp" line="1748"/>
+        <location filename="MainWindow.cpp" line="1787"/>
         <source>Red wins.</source>
         <translation>Rot gewinnt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1775"/>
+        <location filename="MainWindow.cpp" line="1789"/>
         <source>Green wins.</source>
         <translation>Grün gewinnt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1798"/>
+        <location filename="MainWindow.cpp" line="1812"/>
         <source>Your rating has increased from %1 to %2.</source>
         <oldsource>Your rating has increased from %1 to %2</oldsource>
         <translation>Ihre Wertung hat sich von %1 auf %2 erhöht.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1801"/>
+        <location filename="MainWindow.cpp" line="1815"/>
         <source>Your rating stays at %1.</source>
         <oldsource>Your rating stays at %1</oldsource>
         <translation>Ihre Wertung bleibt auf %1.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1804"/>
+        <location filename="MainWindow.cpp" line="1818"/>
         <source>Your rating has decreased from %1 to %2.</source>
         <oldsource>Your rating has decreased from %1 to %2</oldsource>
         <translation>Ihre Wertung hat sich von %1 auf %2 erniedrigt.</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3145"/>
+        <location filename="MainWindow.cpp" line="3161"/>
         <source>Error in file &apos;%1&apos;</source>
         <translation>Fehler in Datei &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3352"/>
+        <location filename="MainWindow.cpp" line="3368"/>
         <source>&amp;%1: %2</source>
         <extracomment>Label in Recent Files menu. The first 10 items are numbered to provide a mnemonic. %1 is replaced by the number, %2 by the file name.</extracomment>
         <translation>&amp;%1: %2</translation>

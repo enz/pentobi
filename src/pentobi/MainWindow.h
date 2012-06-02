@@ -41,7 +41,7 @@ public:
                const QString& booksDir = QString(),
                bool noBook = false, size_t memory = 0);
 
-    bool eventFilter(QObject* watched, QEvent* event);
+    bool eventFilter(QObject* object, QEvent* event);
 
     QSize sizeHint() const;
 
@@ -496,6 +496,8 @@ private:
     QMenu* m_menuMoveAnnotation;
 
     QMenu* m_menuOpenRecent;
+
+    QToolButton* m_playButton;
 
     QLabel* m_setupModeLabel;
 
