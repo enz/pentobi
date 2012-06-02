@@ -124,6 +124,8 @@ public slots:
 
     void play();
 
+    void playSingleMove();
+
     void pointClicked(Point p);
 
     void previousPiece();
@@ -208,6 +210,8 @@ protected:
 private:
     struct GenMoveResult
     {
+        bool playSingleMove;
+
         Color color;
 
         Move move;
@@ -407,6 +411,8 @@ private:
 
     QAction* m_actionPlay;
 
+    QAction* m_actionPlaySingleMove;
+
     QAction* m_actionPreviousPiece;
 
     QAction* m_actionPreviousTransform;
@@ -507,7 +513,7 @@ private:
 
     QLabel* m_moveNumber;
 
-    GenMoveResult asyncGenMove(Color c, int genMoveId);
+    GenMoveResult asyncGenMove(Color c, int genMoveId, bool playSingleMove);
 
     bool checkSave();
 
@@ -548,7 +554,7 @@ private:
 
     void enablePieceSelector(Color c);
 
-    void genMove();
+    void genMove(bool playSingleMove = false);
 
     const Board& getBoard() const;
 
@@ -571,7 +577,7 @@ private:
 
     void leaveSetupMode();
 
-    void play(Color c, Move mv);
+    void play(Color c, Move mv, bool checkComputerMove);
 
     bool save(const QString& file);
 

@@ -423,9 +423,11 @@ void MainWindow::analyzeGameFinished()
 }
 
 /** Call to Player::genmove() that runs in a different thread. */
-MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId)
+MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId,
+                                                   bool playSingleMove)
 {
     GenMoveResult result;
+    result.playSingleMove = playSingleMove;
     result.color = c;
     result.genMoveId = genMoveId;
     result.move = m_player->genmove(getBoard(), c);
@@ -645,6 +647,7 @@ void MainWindow::commentChanged()
 
 void MainWindow::computerColors()
 {
+    bool wasCurrentPlayedByComputer = m_computerColors[m_currentColor];
     GameVariant variant = m_game->get_game_variant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
@@ -664,7 +667,9 @@ void MainWindow::computerColors()
             settings.setValue("computer_color_none", true);
         }
     }
-    if (! m_isGenMoveRunning)
+    bool isCurrentPlayedByComputer = m_computerColors[m_currentColor];
+    if (! m_isGenMoveRunning && isCurrentPlayedByComputer
+        && ! wasCurrentPlayedByComputer)
         checkComputerMove();
 }
 
@@ -976,6 +981,11 @@ void MainWindow::createActions()
     m_actionPlay->setShortcut(QString("Ctrl+L"));
     setIcon(m_actionPlay, "pentobi-play");
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
+
+    m_actionPlaySingleMove = new QAction(tr("Play &Single Move"), this);
+    m_actionPlay->setShortcut(QString("Ctrl+Shift+L"));
+    connect(m_actionPlaySingleMove, SIGNAL(triggered()),
+            this, SLOT(playSingleMove()));
 
     m_actionPreviousPiece = new QAction(tr("Previous Piece"), this);
     setIcon(m_actionPreviousPiece, "pentobi-previous-piece");
@@ -1304,7 +1314,9 @@ void MainWindow::createMenu()
 
     QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
+    menuComputer->addAction(m_actionPlaySingleMove);
     menuComputer->addAction(m_actionInterrupt);
+    menuComputer->addSeparator();
     QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
@@ -1837,7 +1849,7 @@ void MainWindow::gameVariantTrigon3(bool checked)
         setGameVariant(game_variant_trigon_3);
 }
 
-void MainWindow::genMove()
+void MainWindow::genMove(bool playSingleMove)
 {
     ++m_genMoveId;
     showStatus(tr("The computer is thinking..."));
@@ -1848,7 +1860,7 @@ void MainWindow::genMove()
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
-                          m_genMoveId);
+                          m_genMoveId, playSingleMove);
     m_genMoveWatcher.setFuture(future);
     m_isGenMoveRunning = true;
     const Board& bd = getBoard();
@@ -1890,7 +1902,8 @@ void MainWindow::genMoveFinished()
     if (mv.is_pass())
         return;
     m_lastComputerMovesEnd = bd.get_nu_moves() + 1;
-    play(c, mv);
+    bool checkComputerMove = ! result.playSingleMove;
+    play(c, mv, checkComputerMove);
 }
 
 QString MainWindow::getFilter() const
@@ -2433,7 +2446,7 @@ void MainWindow::placePiece(Color c, Move mv)
         updateWindow(true);
     }
     else
-        play(c, mv);
+        play(c, mv, true);
 }
 
 void MainWindow::play()
@@ -2465,7 +2478,7 @@ void MainWindow::play()
     genMove();
 }
 
-void MainWindow::play(Color c, Move mv)
+void MainWindow::play(Color c, Move mv, bool checkComputerMove)
 {
     const Board& bd = getBoard();
     m_game->play(c, mv, false);
@@ -2484,7 +2497,15 @@ void MainWindow::play(Color c, Move mv)
     repaint();
     m_currentColor = m_game->get_effective_to_play();
     updateWindow(true);
-    checkComputerMove();
+    if (checkComputerMove)
+        MainWindow::checkComputerMove();
+}
+
+void MainWindow::playSingleMove()
+{
+    cancelThread();
+    leaveSetupMode();
+    genMove(true);
 }
 
 void MainWindow::pointClicked(Point p)
