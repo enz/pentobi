@@ -20,8 +20,8 @@ using namespace std;
 float Rating::get_expected_result(Rating elo_opponent,
                                   unsigned int nu_opponents) const
 {
-    float elo_diff = elo_opponent.m_elo - m_elo;
-    return 1 / (1 + pow(10, nu_opponents * elo_diff / 400));
+    float diff = elo_opponent.m_elo - m_elo;
+    return 1 / (1 + nu_opponents * pow(10, diff / 400));
 }
 
 void Rating::update_multiplayer(float game_result, Rating elo_opponent,

@@ -20,6 +20,15 @@ LIBBOARDGAME_TEST_CASE(boardgame_rating_get_expected_result)
     LIBBOARDGAME_CHECK_CLOSE_EPS(a.get_expected_result(b), 0.789, 0.001);
 }
 
+LIBBOARDGAME_TEST_CASE(boardgame_rating_get_expected_result_multiplayer)
+{
+    // Player and 3 opponents, all with rating 1000, should have 25%
+    // winning probability
+    Rating a(1000);
+    Rating b(1000);
+    LIBBOARDGAME_CHECK_CLOSE_EPS(a.get_expected_result(b, 3), 0.25, 0.001);
+}
+
 LIBBOARDGAME_TEST_CASE(boardgame_rating_update_1)
 {
     Rating a(2806);
