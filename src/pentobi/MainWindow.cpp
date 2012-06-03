@@ -353,6 +353,27 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             m_gameFinished = getBoard().is_game_over();
             updateWindow(true);
             deleteAutoSaveFile();
+            if (settings.value("autosave_rated", false).toBool())
+            {
+                GameVariant variant = m_game->get_game_variant();
+                unsigned int ratedGameColor =
+                    settings.value("autosave_rated_color", 0).toUInt();
+                if (ratedGameColor < get_nu_colors(variant))
+                {
+                    m_ratedGameColor = Color(ratedGameColor);
+                    m_computerColors.fill(true);
+                    const Board& bd = getBoard();
+                    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+                        if (bd.is_same_player(*i, m_ratedGameColor))
+                            m_computerColors[*i] = false;
+                    setRated(true);
+                    show();
+                    showInfo(tr("Continuing unfinished rated game."),
+                             tr("You play %1 in this game.")
+                             .arg(getPlayerString(variant, m_ratedGameColor)));
+                    checkComputerMove();
+                }
+            }
         }
     }
 }
@@ -578,12 +599,16 @@ bool MainWindow::checkQuit()
         return (result == discardButton);
     }
     cancelThread();
+    QSettings settings;
     if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
     {
         ofstream out(getAutoSaveFile().toStdString().c_str());
         write_tree(out, m_game->get_root(), true, true, 2);
+        settings.setValue("autosave_rated", m_isRated);
+        if (m_isRated)
+            settings.setValue("autosave_rated_color",
+                              m_ratedGameColor.to_int());
     }
-    QSettings settings;
     settings.setValue("geometry", saveGeometry());
     if (m_comment->isVisible())
         settings.setValue("splitter_state", m_splitter->saveState());
@@ -2310,12 +2335,12 @@ void MainWindow::newRatedGame()
     int level;
     Util::getNextRatedGameSettings(variant, maxLevel, level, m_ratedGameColor);
     QMessageBox msgBox(this);
-    msgBox.setWindowTitle(tr("Pentobi"));
-    msgBox.setText("<html>" +
-                   tr("In the next rated game, you will play %1 against"
-                      " Pentobi level&nbsp;%2.")
-                   .arg(getPlayerString(variant, m_ratedGameColor))
-                   .arg(level));
+    initQuestion(msgBox, tr("Start new rated game?"),
+                 "<html>" +
+                 tr("In the next rated game, you will play %1 against"
+                    " Pentobi level&nbsp;%2.")
+                 .arg(getPlayerString(variant, m_ratedGameColor))
+                 .arg(level));
     QPushButton* startGameButton =
         msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
     msgBox.addButton(QMessageBox::Cancel);
@@ -3154,7 +3179,7 @@ void MainWindow::showError(const QString& text, const QString& infoText,
 void MainWindow::showInfo(const QString& text, const QString& infoText,
                           const QString& detailText)
 {
-    showMessage(QMessageBox::NoIcon, text, infoText, detailText);
+    showMessage(QMessageBox::Information, text, infoText, detailText);
 }
 
 void MainWindow::showInvalidFile(QString file, const Exception& e)
