@@ -1008,7 +1008,7 @@ void MainWindow::createActions()
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
 
     m_actionPlaySingleMove = new QAction(tr("Play &Single Move"), this);
-    m_actionPlay->setShortcut(QString("Ctrl+Shift+L"));
+    m_actionPlaySingleMove->setShortcut(QString("Ctrl+Shift+L"));
     connect(m_actionPlaySingleMove, SIGNAL(triggered()),
             this, SLOT(playSingleMove()));
 
