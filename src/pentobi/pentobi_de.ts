@@ -112,11 +112,10 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="3076"/>
-        <source>(Shift-click to play a single move
-without changing the computer colors.)</source>
-        <oldsource>(Shift-click to play a single move without changing the computer colors)</oldsource>
-        <translation>(Umschalt+Klicken um einen einzelnen Zug zu spielen
-ohne die Computer-Farben zu ändern.)</translation>
+        <source>(Shift+click to play a single move
+without changing the computer colors)</source>
+        <translation>(Umschalt+Klick um einen einzelnen Zug zu spielen
+ohne die Computer-Farben zu ändern)</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="3162"/>

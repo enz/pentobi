@@ -3073,8 +3073,8 @@ void MainWindow::setPlayToolTip()
                 s = tr("Make the computer play Red.");
         }
     }
-    s += "\n" + tr("(Shift-click to play a single move\n"
-                   "without changing the computer colors.)");
+    s += "\n" + tr("(Shift+click to play a single move\n"
+                   "without changing the computer colors)");
     m_playButton->setToolTip(s);
 }
 
