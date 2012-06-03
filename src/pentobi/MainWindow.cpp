@@ -2337,7 +2337,7 @@ void MainWindow::newRatedGame()
     QMessageBox msgBox(this);
     initQuestion(msgBox, tr("Start new rated game?"),
                  "<html>" +
-                 tr("In the next rated game, you will play %1 against"
+                 tr("In the next game, you will play %1 against"
                     " Pentobi level&nbsp;%2.")
                  .arg(getPlayerString(variant, m_ratedGameColor))
                  .arg(level));

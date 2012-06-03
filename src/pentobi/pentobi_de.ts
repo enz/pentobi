@@ -726,8 +726,8 @@ ohne die Computer-Farben zu ändern)</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2340"/>
-        <source>In the next rated game, you will play %1 against Pentobi level&amp;nbsp;%2.</source>
-        <translation>Im nächsten gewerteten Spiel spielen Sie %1 gegen Pentobi Spielstufe&amp;nbsp;%2.</translation>
+        <source>In the next game, you will play %1 against Pentobi level&amp;nbsp;%2.</source>
+        <translation>Im nächsten Spiel spielen Sie %1 gegen Pentobi Spielstufe&amp;nbsp;%2.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2345"/>
