@@ -240,7 +240,6 @@ ohne die Computer-Farben zu ändern)</translation>
     <message>
         <location filename="MainWindow.cpp" line="731"/>
         <source>&amp;Computer Colors</source>
-        <oldsource>&amp;Computer Color</oldsource>
         <translation>&amp;Computer-Farben</translation>
     </message>
     <message>
@@ -326,7 +325,6 @@ ohne die Computer-Farben zu ändern)</translation>
     <message>
         <location filename="MainWindow.cpp" line="821"/>
         <source>J&amp;unior</source>
-        <oldsource>&amp;Junior</oldsource>
         <translation>J&amp;unior</translation>
     </message>
     <message>
@@ -926,7 +924,6 @@ ohne die Computer-Farben zu ändern)</translation>
     <message numerus="yes">
         <location filename="MainWindow.cpp" line="1711"/>
         <source>Blue wins with %n point(s).</source>
-        <oldsource>Green wins with %1 points.</oldsource>
         <translation>
             <numerusform>Blau gewinnt mit %n Punkt.</numerusform>
             <numerusform>Blau gewinnt mit %n Punkten.</numerusform>
@@ -941,7 +938,6 @@ ohne die Computer-Farben zu ändern)</translation>
     <message numerus="yes">
         <location filename="MainWindow.cpp" line="1723"/>
         <source>Blue/Red wins with %n point(s).</source>
-        <oldsource>Blue/Red wins with %1 points.</oldsource>
         <translation>
             <numerusform>Blau/Rot gewinnt mit %n Punkt.</numerusform>
             <numerusform>Blau/Rot gewinnt mit %n Punkten.</numerusform>
@@ -950,7 +946,6 @@ ohne die Computer-Farben zu ändern)</translation>
     <message numerus="yes">
         <location filename="MainWindow.cpp" line="1725"/>
         <source>Yellow/Green wins with %n point(s).</source>
-        <oldsource>Yellow/Green wins with 1 point.</oldsource>
         <translation>
             <numerusform>Gelb/Grün gewinnt mit %n Punkt.</numerusform>
             <numerusform>Gelb/Grün gewinnt mit %n Punkten.</numerusform>
@@ -1057,19 +1052,16 @@ ohne die Computer-Farben zu ändern)</translation>
     <message>
         <location filename="MainWindow.cpp" line="1812"/>
         <source>Your rating has increased from %1 to %2.</source>
-        <oldsource>Your rating has increased from %1 to %2</oldsource>
         <translation>Ihre Wertung hat sich von %1 auf %2 erhöht.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1815"/>
         <source>Your rating stays at %1.</source>
-        <oldsource>Your rating stays at %1</oldsource>
         <translation>Ihre Wertung bleibt auf %1.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1818"/>
         <source>Your rating has decreased from %1 to %2.</source>
-        <oldsource>Your rating has decreased from %1 to %2</oldsource>
         <translation>Ihre Wertung hat sich von %1 auf %2 erniedrigt.</translation>
     </message>
     <message>
