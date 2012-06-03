@@ -1821,6 +1821,7 @@ void MainWindow::gameOver()
         Util::getRating(variant, oldRating, nuGames);
         double gameResult;
         bd.get_score(m_ratedGameColor, gameResult);
+        log() << "Updating rating with game result " << gameResult << '\n';
         unsigned int nuOpp = get_nu_players(variant) - 1;
         Rating oppRating = m_player->get_rating(variant);
         Util::updateRating(variant, gameResult, oppRating, nuOpp);
