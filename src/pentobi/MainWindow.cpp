@@ -229,19 +229,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         m_level = 4;
     QString variantString = settings.value("game_variant", "").toString();
     GameVariant variant;
-    if (variantString == "duo")
-        variant = game_variant_duo;
-    else if (variantString == "junior")
-        variant = game_variant_junior;
-    else if (variantString == "classic_2")
-        variant = game_variant_classic_2;
-    else if (variantString == "trigon")
-        variant = game_variant_trigon;
-    else if (variantString == "trigon_2")
-        variant = game_variant_trigon_2;
-    else if (variantString == "trigon_3")
-        variant = game_variant_trigon_3;
-    else
+    if (! parse_game_variant_id(variantString.toStdString(), variant))
         variant = game_variant_classic;
     m_game.reset(new Game(variant));
     createActions();

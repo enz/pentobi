@@ -57,23 +57,45 @@ unsigned int get_nu_players(GameVariant variant)
     return 0;
 }
 
-bool parse_game_variant(const string& s, GameVariant& game_variant)
+bool parse_game_variant(const string& s, GameVariant& variant)
 {
     string t = to_lower_copy(trim_copy(s));
     if (t == "blokus")
-        game_variant = game_variant_classic;
+        variant = game_variant_classic;
     else if (t == "blokus two-player")
-        game_variant = game_variant_classic_2;
+        variant = game_variant_classic_2;
     else if (t == "blokus trigon")
-        game_variant = game_variant_trigon;
+        variant = game_variant_trigon;
     else if (t == "blokus trigon two-player")
-        game_variant = game_variant_trigon_2;
+        variant = game_variant_trigon_2;
     else if (t == "blokus trigon three-player")
-        game_variant = game_variant_trigon_3;
+        variant = game_variant_trigon_3;
     else if (t == "blokus duo")
-        game_variant = game_variant_duo;
+        variant = game_variant_duo;
     else if (t == "blokus junior")
-        game_variant = game_variant_junior;
+        variant = game_variant_junior;
+    else
+        return false;
+    return true;
+}
+
+bool parse_game_variant_id(const string& s, GameVariant& variant)
+{
+    string t = to_lower_copy(trim_copy(s));
+    if (t == "classic")
+        variant = game_variant_classic;
+    else if (t == "classic_2")
+        variant = game_variant_classic_2;
+    else if (t == "trigon")
+        variant = game_variant_trigon;
+    else if (t == "trigon_2")
+        variant = game_variant_trigon_2;
+    else if (t == "trigon_3")
+        variant = game_variant_trigon_3;
+    else if (t == "duo")
+        variant = game_variant_duo;
+    else if (t == "junior")
+        variant = game_variant_junior;
     else
         return false;
     return true;
