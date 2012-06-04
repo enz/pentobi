@@ -249,7 +249,7 @@ Rating Player::get_rating(GameVariant variant, int level)
     case game_variant_trigon_2:
     case game_variant_trigon_3:
         {
-            static float elo[] = {  850, 1050, 1250, 1435, 1530, 1600, 1650 };
+            static float elo[] = { 750, 950, 1150, 1335, 1430, 1500, 1550 };
             if (level <= 7)
                 return Rating(elo[level - 1]);
             else
