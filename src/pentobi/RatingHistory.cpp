@@ -18,7 +18,7 @@ using libpentobi_base::to_string_id;
 RatingHistory::RatingHistory(GameVariant variant, const path& datadir)
 {
     m_games.clear();
-    m_dir = datadir / "rated_games" / to_string_id(variant);
+    m_dir = datadir;
     m_file = m_dir / "history.dat";
     boost::filesystem::ifstream file(m_file);
     if (! file)
@@ -37,7 +37,8 @@ RatingHistory::RatingHistory(GameVariant variant, const path& datadir)
     }
     size_t nuGames = m_games.size();
     if (nuGames > maxGames)
-        m_games.erase(m_games.begin(), m_games.begin() + maxGames - nuGames);
+        m_games.erase(m_games.begin(),
+                      m_games.begin() + nuGames - maxGames + 1);
 }
 
 void RatingHistory::add(unsigned int number, Color color, float result,

@@ -10,8 +10,9 @@
 
 #include <algorithm>
 #include <cstdlib>
-#include <fstream>
+#include <boost/format.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/filesystem/fstream.hpp>
 #include "RatingDialog.h"
 #include "RatingHistory.h"
 #include "Util.h"
@@ -28,8 +29,9 @@
 
 using namespace std;
 using Util::getPlayerString;
-using boost::filesystem::path;
+using boost::format;
 using boost::trim_right;
+using boost::filesystem::path;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
@@ -98,6 +100,20 @@ QString getDataDir()
         dir = dir + sep + "pentobi";
 #endif
     return dir;
+}
+
+path getRatedGamesDir(GameVariant variant)
+{
+    path dir = getDataDir().toLocal8Bit().constData();
+    dir = dir / "rated_games" / to_string_id(variant);
+    return dir;
+}
+
+path getRatedGameFile(unsigned int n, GameVariant variant)
+{
+    path dir = getRatedGamesDir(variant);
+    string file = str(format("%1%.blksgf") % n);
+    return dir / file;
 }
 
 /** Return auto-save file name as a native path name. */
@@ -590,7 +606,8 @@ bool MainWindow::checkQuit()
     QSettings settings;
     if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
     {
-        ofstream out(getAutoSaveFile().toStdString().c_str());
+        boost::filesystem::ofstream out(
+                                      getAutoSaveFile().toStdString().c_str());
         write_tree(out, m_game->get_root(), true, true, 2);
         settings.setValue("autosave_rated", m_isRated);
         if (m_isRated)
@@ -1815,10 +1832,18 @@ void MainWindow::gameOver()
         Util::updateRating(variant, gameResult, oppRating, nuOpp);
         Rating newRating;
         Util::getRating(variant, newRating, nuGames);
-        RatingHistory history(variant, getDataDir().toLocal8Bit().constData());
+        RatingHistory history(variant, getRatedGamesDir(variant));
         history.add(nuGames, m_ratedGameColor, gameResult,
                     Tree::get_date_today(), newRating);
         history.save();
+        {
+            boost::filesystem::ofstream out(getRatedGameFile(nuGames, variant));
+            write_tree(out, m_game->get_root(), true, true, 2);
+            // Only save the last RatingHistory::maxGames games
+            if (nuGames > RatingHistory::maxGames)
+                remove(getRatedGameFile(nuGames - RatingHistory::maxGames,
+                                        variant));
+        }
         int oldRatingInt = static_cast<int>(oldRating.get());
         int newRatingInt = static_cast<int>(newRating.get());
         if (newRatingInt > oldRatingInt)
@@ -3210,7 +3235,7 @@ void MainWindow::showRating()
 {
     GameVariant variant = m_game->get_game_variant();
     RatingDialog dialog(this, variant);
-    RatingHistory history(variant, getDataDir().toLocal8Bit().constData());
+    RatingHistory history(variant, getRatedGamesDir(variant));
     dialog.setHistory(history);
     dialog.exec();
 }
