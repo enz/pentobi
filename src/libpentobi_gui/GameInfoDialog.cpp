@@ -69,6 +69,8 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     QDialogButtonBox* buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
+    if (! m_playerBlue->text().isEmpty())
+        buttonBox->setFocus();
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
@@ -135,7 +137,10 @@ QLineEdit* GameInfoDialog::createLine(const QString& label, const string& text)
 {
     QLineEdit* lineEdit = new LineEdit(0, 30);
     if (! text.empty())
+    {
         lineEdit->setText(Util::convertSgfValueToQString(text, m_charset));
+        lineEdit->setCursorPosition(0);
+    }
     m_formLayout->addRow(label, lineEdit);
     return lineEdit;
 }
