@@ -563,6 +563,8 @@ private:
 
     const Board& getBoard() const;
 
+    GameVariant getGameVariant() const;
+
     QString getFilter() const;
 
     QString getLastDir();
@@ -690,6 +692,11 @@ private slots:
 inline const Board& MainWindow::getBoard() const
 {
     return m_game->get_board();
+}
+
+inline GameVariant MainWindow::getGameVariant() const
+{
+    return m_game->get_game_variant();
 }
 
 //-----------------------------------------------------------------------------

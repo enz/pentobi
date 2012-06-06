@@ -359,7 +359,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             deleteAutoSaveFile();
             if (settings.value("autosave_rated", false).toBool())
             {
-                GameVariant variant = m_game->get_game_variant();
+                GameVariant variant = getGameVariant();
                 unsigned int ratedGameColor =
                     settings.value("autosave_rated_color", 0).toUInt();
                 if (ratedGameColor < get_nu_colors(variant))
@@ -678,7 +678,7 @@ void MainWindow::commentChanged()
 void MainWindow::computerColors()
 {
     bool wasCurrentPlayedByComputer = m_computerColors[m_currentColor];
-    GameVariant variant = m_game->get_game_variant();
+    GameVariant variant = getGameVariant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
     if (variant != game_variant_classic && variant != game_variant_trigon
@@ -1729,7 +1729,7 @@ void MainWindow::gameInfo()
 
 void MainWindow::gameOver()
 {
-    GameVariant variant = m_game->get_game_variant();
+    GameVariant variant = getGameVariant();
     const Board& bd = getBoard();
     QString info;
     if (variant == game_variant_duo
@@ -2064,7 +2064,7 @@ void MainWindow::gotoNode(const Node& node)
 void MainWindow::gotoPosition(GameVariant gameVariant,
                               const vector<ColorMove>& moves)
 {
-    if (m_game->get_game_variant() != gameVariant)
+    if (getGameVariant() != gameVariant)
         return;
     const Tree& tree = m_game->get_tree();
     const Node* node = &tree.get_root();
@@ -2122,7 +2122,7 @@ void MainWindow::initGame()
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
     {
-        GameVariant game_variant = m_game->get_game_variant();
+        GameVariant game_variant = getGameVariant();
         if (game_variant == game_variant_duo
             || game_variant == game_variant_junior)
             m_computerColors[Color(1)] = true;
@@ -2142,7 +2142,7 @@ void MainWindow::initGame()
 
 void MainWindow::initGameVariantActions()
 {
-    switch (m_game->get_game_variant())
+    switch (getGameVariant())
     {
     case game_variant_classic:
         m_actionGameVariantClassic->setChecked(true);
@@ -2335,7 +2335,7 @@ void MainWindow::newRatedGame()
     if (! checkSave())
         return;
     cancelThread();
-    GameVariant variant = m_game->get_game_variant();
+    GameVariant variant = getGameVariant();
     Rating rating;
     unsigned int nuGames;
     Util::getRating(variant, rating, nuGames);
@@ -2454,7 +2454,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_analyzeGameWindow = 0;
     }
     setRated(false);
-    GameVariant oldVariant = m_game->get_game_variant();
+    GameVariant oldVariant = getGameVariant();
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
@@ -2476,7 +2476,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     m_lastComputerMovesBegin = 0;
     initGameVariantActions();
     updateWindow(true);
-    if (m_game->get_game_variant() != oldVariant)
+    if (getGameVariant() != oldVariant)
         updateRatingDialog();
 }
 
@@ -2519,7 +2519,7 @@ void MainWindow::play()
 {
     cancelThread();
     leaveSetupMode();
-    GameVariant variant = m_game->get_game_variant();
+    GameVariant variant = getGameVariant();
     if (variant != game_variant_classic && variant != game_variant_trigon
          && variant != game_variant_trigon_3)
     {
@@ -2914,7 +2914,7 @@ void MainWindow::selectPieceZ()
 
 void MainWindow::setGameVariant(GameVariant variant)
 {
-    if (m_game->get_game_variant() == variant)
+    if (getGameVariant() == variant)
         return;
     if (! checkSave())
     {
@@ -3072,7 +3072,7 @@ void MainWindow::setMoveNumberText()
 void MainWindow::setPlayToolTip()
 {
     QString s;
-    GameVariant variant = m_game->get_game_variant();
+    GameVariant variant = getGameVariant();
     Color c = m_currentColor;
     bool isComputerColor = m_computerColors[m_currentColor];
     if (variant == game_variant_classic_2 || variant == game_variant_trigon_2)
@@ -3393,7 +3393,7 @@ void MainWindow::updateRatingDialog()
 {
     if (m_ratingDialog == 0)
         return;
-    GameVariant variant = m_game->get_game_variant();
+    GameVariant variant = getGameVariant();
     RatingHistory history(variant, getRatedGamesDir(variant));
     m_ratingDialog->updateContent(variant, history);
 }
