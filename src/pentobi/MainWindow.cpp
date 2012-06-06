@@ -2454,6 +2454,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_analyzeGameWindow = 0;
     }
     setRated(false);
+    GameVariant oldVariant = m_game->get_game_variant();
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
@@ -2475,6 +2476,8 @@ void MainWindow::open(const QString& file, bool isTemporary)
     m_lastComputerMovesBegin = 0;
     initGameVariantActions();
     updateWindow(true);
+    if (m_game->get_game_variant() != oldVariant)
+        updateRatingDialog();
 }
 
 void MainWindow::openRecentFile()
