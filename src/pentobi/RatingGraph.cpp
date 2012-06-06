@@ -90,6 +90,7 @@ void RatingGraph::setHistory(const RatingHistory& history)
     m_yMin = floor((m_yMin / 100.f)) * 100 - 10;
     // Leave some space above yMax
     m_yMax += 10;
+    update();
 }
 
 //-----------------------------------------------------------------------------

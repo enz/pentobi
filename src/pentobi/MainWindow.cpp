@@ -13,7 +13,6 @@
 #include <boost/format.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "RatingDialog.h"
 #include "RatingHistory.h"
 #include "Util.h"
 #include "libboardgame_sgf/TreeReader.h"
@@ -236,6 +235,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
       m_lastComputerMovesEnd(0),
       m_manualDir(manualDir),
       m_helpWindow(0),
+      m_ratingDialog(0),
       m_analyzeGameWindow(0),
       m_legalMoves(new ArrayList<Move, Move::range>())
 {
@@ -1844,6 +1844,7 @@ void MainWindow::gameOver()
                 remove(getRatedGameFile(nuGames - RatingHistory::maxGames,
                                         variant));
         }
+        updateRatingDialog();
         int oldRatingInt = static_cast<int>(oldRating.get());
         int newRatingInt = static_cast<int>(newRating.get());
         if (newRatingInt > oldRatingInt)
@@ -2924,6 +2925,7 @@ void MainWindow::setGameVariant(GameVariant variant)
     m_game->init(variant);
     initPieceSelectors();
     newGame();
+    updateRatingDialog();
 }
 
 void MainWindow::setFile(const QString& file)
@@ -3233,11 +3235,10 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
 
 void MainWindow::showRating()
 {
-    GameVariant variant = m_game->get_game_variant();
-    RatingDialog dialog(this, variant);
-    RatingHistory history(variant, getRatedGamesDir(variant));
-    dialog.setHistory(history);
-    dialog.exec();
+    if (m_ratingDialog == 0)
+        m_ratingDialog = new RatingDialog(this);
+    updateRatingDialog();
+    m_ratingDialog->show();
 }
 
 void MainWindow::showStatus(const QString& text, bool temporary)
@@ -3383,6 +3384,15 @@ void MainWindow::updateMoveAnnotationActions()
         return;
     }
     m_actionNoMoveAnnotation->setChecked(true);
+}
+
+void MainWindow::updateRatingDialog()
+{
+    if (m_ratingDialog == 0)
+        return;
+    GameVariant variant = m_game->get_game_variant();
+    RatingHistory history(variant, getRatedGamesDir(variant));
+    m_ratingDialog->updateContent(variant, history);
 }
 
 void MainWindow::updateRecentFiles()

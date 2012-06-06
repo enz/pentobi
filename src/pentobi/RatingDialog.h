@@ -20,18 +20,19 @@ class RatingDialog
     Q_OBJECT
 
 public:
-    RatingDialog(QWidget* parent, GameVariant variant);
+    RatingDialog(QWidget* parent);
 
-    void setHistory(const RatingHistory& history);
+    void updateContent(GameVariant variant, const RatingHistory& history);
 
 private:
+    QLabel* m_labelVariant;
+
+    QLabel* m_labelNuGames;
+
+    QLabel* m_labelRating;
+
     RatingGraph* m_graph;
 };
-
-inline void RatingDialog::setHistory(const RatingHistory& history)
-{
-    m_graph->setHistory(history);
-}
 
 //-----------------------------------------------------------------------------
 

@@ -21,7 +21,7 @@ using libpentobi_base::game_variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
-RatingDialog::RatingDialog(QWidget* parent, GameVariant variant)
+RatingDialog::RatingDialog(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(tr("Pentobi - Your Rating"));
@@ -32,6 +32,24 @@ RatingDialog::RatingDialog(QWidget* parent, GameVariant variant)
     setLayout(layout);
     QFormLayout* formLayout = new QFormLayout();
     layout->addLayout(formLayout);
+    m_labelVariant = new QLabel();
+    formLayout->addRow(tr("Game variant:"), m_labelVariant);
+    m_labelNuGames = new QLabel();
+    formLayout->addRow(tr("Games played:"), m_labelNuGames);
+    m_labelRating = new QLabel();
+    formLayout->addRow(tr("Your rating:"), m_labelRating);
+    layout->addSpacing(layout->spacing());
+    layout->addWidget(new QLabel(tr("Recent development:")));
+    m_graph = new RatingGraph();
+    layout->addWidget(m_graph, 1);
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
+    layout->addWidget(buttonBox);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+}
+
+void RatingDialog::updateContent(GameVariant variant,
+                                 const RatingHistory& history)
+{
     QString variantStr;
     switch (variant)
     {
@@ -57,25 +75,19 @@ RatingDialog::RatingDialog(QWidget* parent, GameVariant variant)
         variantStr = tr("Junior");
         break;
     }
-    formLayout->addRow(tr("Game variant:"), new QLabel(variantStr));
+    m_labelVariant->setText(variantStr);
     QSettings settings;
     Rating rating;
     unsigned int nuGames;
     Util::getRating(variant, rating, nuGames);
     QString nuGamesStr;
     nuGamesStr.setNum(nuGames);
-    formLayout->addRow(tr("Games played:"), new QLabel(nuGamesStr));
+    m_labelNuGames->setText(nuGamesStr);
     QString ratingStr;
     if (nuGames > 0)
         ratingStr.setNum(rating.get(), 'f', 0);
-    formLayout->addRow(tr("Your rating:"), new QLabel(ratingStr));
-    layout->addSpacing(layout->spacing());
-    layout->addWidget(new QLabel(tr("Recent development:")));
-    m_graph = new RatingGraph();
-    layout->addWidget(m_graph, 1);
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
-    layout->addWidget(buttonBox);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    m_labelRating->setText(ratingStr);
+    m_graph->setHistory(history);
 }
 
 //-----------------------------------------------------------------------------

@@ -7,6 +7,7 @@
 
 #include <QtGui>
 #include "AnalyzeGameWindow.h"
+#include "RatingDialog.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/Game.h"
 #include "libpentobi_mcts/Player.h"
@@ -292,6 +293,8 @@ private:
     QPlainTextEdit* m_comment;
 
     HelpWindow* m_helpWindow;
+
+    RatingDialog* m_ratingDialog;
 
     AnalyzeGameWindow* m_analyzeGameWindow;
 
@@ -614,6 +617,8 @@ private:
     void updateComment();
 
     void updateMoveAnnotationActions();
+
+    void updateRatingDialog();
 
     void updateRecentFiles();
 
