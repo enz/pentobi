@@ -75,7 +75,10 @@ void RatingGraph::setHistory(const RatingHistory& history)
     m_values.clear();
     const vector<RatingHistory::GameInfo>& games = history.get();
     if (games.empty())
+    {
+        update();
         return;
+    }
     m_yMin = games[0].rating.get();
     m_yMax = m_yMin;
     BOOST_FOREACH(const RatingHistory::GameInfo& info, games)
