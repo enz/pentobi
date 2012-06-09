@@ -2480,6 +2480,13 @@ void MainWindow::open(const QString& file, bool isTemporary)
         updateRatingDialog();
 }
 
+void MainWindow::openRatedGame(GameVariant variant, unsigned int n)
+{
+     if (! checkSave())
+         return;
+     open(getRatedGameFile(n, variant).string().c_str());
+}
+
 void MainWindow::openRecentFile()
 {
      QAction* action = qobject_cast<QAction*>(sender());
@@ -3239,7 +3246,13 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
 void MainWindow::showRating()
 {
     if (m_ratingDialog == 0)
+    {
         m_ratingDialog = new RatingDialog(this);
+        connect(m_ratingDialog,
+                SIGNAL(openRatedGame(GameVariant, unsigned int)),
+                this,
+                SLOT(openRatedGame(GameVariant, unsigned int)));
+    }
     updateRatingDialog();
     m_ratingDialog->show();
 }

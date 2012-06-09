@@ -661,6 +661,8 @@ private slots:
 
     void noMoveAnnotation(bool checked);
 
+    void openRatedGame(GameVariant variant, unsigned int n);
+
     void openRecentFile();
 
     void orientationDisplayColorClicked(Color c);

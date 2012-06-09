@@ -24,7 +24,12 @@ public:
 
     void updateContent(GameVariant variant, const RatingHistory& history);
 
+signals:
+    void openRatedGame(GameVariant variant, unsigned int n);
+
 private:
+    GameVariant m_variant;
+
     QLabel* m_labelVariant;
 
     QLabel* m_labelNuGames;
@@ -32,6 +37,13 @@ private:
     QLabel* m_labelRating;
 
     RatingGraph* m_graph;
+
+    QTableView* m_table;
+
+    QStandardItemModel* m_model;
+
+private slots:
+    void gameClicked(const QModelIndex& index);
 };
 
 //-----------------------------------------------------------------------------
