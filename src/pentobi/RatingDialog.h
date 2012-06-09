@@ -22,6 +22,8 @@ class RatingDialog
 public:
     RatingDialog(QWidget* parent);
 
+    bool eventFilter(QObject* object, QEvent* event);
+
     void updateContent(GameVariant variant, const RatingHistory& history);
 
 signals:
@@ -43,7 +45,7 @@ private:
     QStandardItemModel* m_model;
 
 private slots:
-    void gameClicked(const QModelIndex& index);
+    void activateGame(const QModelIndex& index);
 };
 
 //-----------------------------------------------------------------------------
