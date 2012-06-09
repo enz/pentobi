@@ -1834,7 +1834,7 @@ void MainWindow::gameOver()
         Util::getRating(variant, newRating, nuGames);
         RatingHistory history(variant, getRatedGamesDir(variant));
         history.add(nuGames, m_ratedGameColor, gameResult,
-                    Tree::get_date_today(), newRating);
+                    Tree::get_date_today(), m_level, newRating);
         history.save();
         {
             boost::filesystem::ofstream out(getRatedGameFile(nuGames, variant));

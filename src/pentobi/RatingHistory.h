@@ -45,6 +45,9 @@ public:
         /** Date of the game in "YYYY-MM-DD" format. */
         string date;
 
+        /** The playing level of the computer opponent. */
+        int level;
+
         /** The rating of the human after the game. */
         Rating rating;
     };
@@ -53,7 +56,7 @@ public:
 
     /** Append a new game. */
     void add(unsigned int number, Color color, float result,
-             const string& date, Rating rating);
+             const string& date, int level, Rating rating);
 
     /** Saves the history. */
     void save() const;

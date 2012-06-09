@@ -1145,6 +1145,11 @@ ohne die Computer-Farben zu ändern)</translation>
     </message>
     <message>
         <location filename="RatingDialog.cpp" line="121"/>
+        <source>Level</source>
+        <translation>Stufe</translation>
+    </message>
+    <message>
+        <location filename="RatingDialog.cpp" line="122"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>

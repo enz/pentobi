@@ -67,7 +67,7 @@ void RatingGraph::paintEvent(QPaintEvent*)
 
 QSize RatingGraph::sizeHint() const
 {
-    return QSize(400, 120);
+    return QSize(480, 120);
 }
 
 void RatingGraph::setHistory(const RatingHistory& history)

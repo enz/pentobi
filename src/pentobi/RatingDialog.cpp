@@ -53,7 +53,7 @@ RatingDialog::RatingDialog(QWidget* parent)
     m_table->setSelectionBehavior(QAbstractItemView::SelectRows);
     m_model = new QStandardItemModel(m_table);
     m_table->setModel(m_model);
-    m_model->setColumnCount(4);
+    m_model->setColumnCount(5);
     layout->addWidget(m_table, 1);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
     layout->addWidget(buttonBox);
@@ -118,13 +118,16 @@ void RatingDialog::updateContent(GameVariant variant,
     m_graph->setHistory(history);
     m_model->clear();
     QStringList headers;
-    headers << tr("Game") << tr("Date") << tr("Your Color") << tr("Result");
+    headers << tr("Game") << tr("Your Color") << tr("Level") << tr("Result")
+            << tr("Date");
     m_model->setHorizontalHeaderLabels(headers);
     QHeaderView* header = m_table->horizontalHeader();
+    header->setDefaultAlignment(Qt::AlignLeft);
     header->setResizeMode(0, QHeaderView::ResizeToContents);
     header->setResizeMode(1, QHeaderView::ResizeToContents);
     header->setResizeMode(2, QHeaderView::ResizeToContents);
     header->setResizeMode(3, QHeaderView::ResizeToContents);
+    header->setResizeMode(4, QHeaderView::Stretch);
     int nuRows = history.get().size();
     m_model->setRowCount(nuRows);
     m_table->setSortingEnabled(false);
@@ -139,12 +142,15 @@ void RatingDialog::updateContent(GameVariant variant,
             color = Util::getPlayerString(variant, info.color);
         else
             log() << "Error: invalid color in rating history\n";
+        QString level;
+        level.setNum(info.level);
         QString result;
         result.setNum(info.result, 'g', 2);
         m_model->setItem(i, 0, new QStandardItem(number));
-        m_model->setItem(i, 1, new QStandardItem(date));
-        m_model->setItem(i, 2, new QStandardItem(color));
+        m_model->setItem(i, 1, new QStandardItem(color));
+        m_model->setItem(i, 2, new QStandardItem(level));
         m_model->setItem(i, 3, new QStandardItem(result));
+        m_model->setItem(i, 4, new QStandardItem(date));
     }
     m_table->setSortingEnabled(true);
     m_table->sortByColumn(0, Qt::DescendingOrder);

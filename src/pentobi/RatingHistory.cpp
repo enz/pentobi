@@ -29,7 +29,8 @@ RatingHistory::RatingHistory(GameVariant variant, const path& datadir)
         istringstream in(line);
         GameInfo info;
         unsigned int c;
-        in >> info.number >> c >> info.result >> info.date >> info.rating;
+        in >> info.number >> c >> info.result >> info.date >> info.level
+           >> info.rating;
         if (! in || c >= get_nu_colors(variant))
             return;
         info.color = Color(c);
@@ -42,7 +43,7 @@ RatingHistory::RatingHistory(GameVariant variant, const path& datadir)
 }
 
 void RatingHistory::add(unsigned int number, Color color, float result,
-                        const string& date, Rating rating)
+                        const string& date, int level, Rating rating)
 {
     LIBBOARDGAME_ASSERT(! m_file.empty());
     GameInfo info;
@@ -50,6 +51,7 @@ void RatingHistory::add(unsigned int number, Color color, float result,
     info.color = color;
     info.result = result;
     info.date = date;
+    info.level = level;
     info.rating = rating;
     size_t nuGames = m_games.size();
     if (nuGames > maxGames)
@@ -66,7 +68,8 @@ void RatingHistory::save() const
     {
         const GameInfo& info = m_games[i];
         out << info.number << ' ' << info.color.to_int() << ' '
-            << info.result << ' ' << info.date << ' ' << info.rating << '\n';
+            << info.result << ' ' << info.date << ' ' << info.level << ' '
+            << info.rating << '\n';
     }
 }
 
