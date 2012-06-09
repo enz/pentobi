@@ -23,8 +23,7 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     layout->addWidget(analyzeGameWidget);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
-    // Standard button "Close" has reject role
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(close()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     buttonBox->setFocus();
 }
 
