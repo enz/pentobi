@@ -38,9 +38,14 @@ public:
             all colors played by the player of this color. */
         Color color;
 
-        /** Game result as defined in libpentobi_base::Board::get_score()
+        /** Place in game result as defined in
+            libpentobi_base::Board::get_place()
             from the viewpoint of the human. */
-        float result;
+        unsigned int place;
+
+        /** Whether the place was shared (see
+            libpentobi_base::Board::get_place()) */
+        bool is_place_shared;
 
         /** Date of the game in "YYYY-MM-DD" format. */
         string date;
@@ -55,8 +60,9 @@ public:
     RatingHistory(GameVariant variant, const path& datadir);
 
     /** Append a new game. */
-    void add(unsigned int number, Color color, float result,
-             const string& date, int level, Rating rating);
+    void add(unsigned int number, Color color, unsigned int place,
+             bool is_place_shared, const string& date, int level,
+             Rating rating);
 
     /** Saves the history. */
     void save() const;

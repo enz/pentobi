@@ -243,6 +243,30 @@ Color Board::get_effective_to_play() const
     return c;
 }
 
+void Board::get_place(Color c, unsigned int& place, bool& is_shared) const
+{
+    array<unsigned int,Color::range> points_array;
+    for (unsigned int i = 0; i < m_nu_colors; ++i)
+        points_array[i] = get_points_with_bonus(Color(i));
+    unsigned int points = points_array[c.to_int()];
+    unsigned int nu_players = get_nu_players(m_game_variant);
+    sort(points_array.begin(), points_array.begin() + nu_players,
+         greater<unsigned int>());
+    is_shared = false;
+    bool found = false;
+    for (unsigned int i = 0; i < nu_players; ++i)
+        if (points_array[i] == points)
+        {
+            if (! found)
+            {
+                place = i;
+                found = true;
+            }
+            else
+                is_shared = true;
+        }
+}
+
 unsigned int Board::get_points_left(Color c) const
 {
     unsigned int n = 0;

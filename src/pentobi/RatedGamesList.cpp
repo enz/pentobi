@@ -101,7 +101,28 @@ void RatedGamesList::updateContent(GameVariant variant,
         QStandardItem* level = new QStandardItem();
         level->setData(info.level, Qt::DisplayRole);
         QString result;
-        result.setNum(info.result, 'g', 2);
+        if (get_nu_players(variant) == 2)
+        {
+            if (info.place == 0 && ! info.is_place_shared)
+                result = tr("Win");
+            else if (info.place == 0 && info.is_place_shared)
+                result = tr("Tie");
+            else if (info.place == 1)
+                result = tr("Loss");
+        }
+        else
+        {
+            if (info.place == 0)
+                result = tr("1st place");
+            else if (info.place == 1)
+                result = tr("2nd place");
+            else if (info.place == 2)
+                result = tr("3rd place");
+            else if (info.place == 3)
+                result = tr("4th place");
+            if (info.is_place_shared)
+                result += " " + tr("(shared)");
+        }
         QString date = QString::fromLocal8Bit(info.date.c_str());
         int row = nuRows - i - 1;
         m_model->setItem(row, 0, number);

@@ -306,6 +306,15 @@ public:
         points. */
     int get_score(Color c, double& game_result) const;
 
+    /** Get the place of a player in the game result.
+        @param c The color of the player.
+        @param[out] place The place of the player with that color. The place
+        numbers start with 0. A place can be shared if several players have the
+        same score. If a place is shared by n players, the following n-1 places
+        are not used.
+        @param[out] is_shared True if the place was shared. */
+    void get_place(Color c, unsigned int& place, bool& is_shared) const;
+
     const Geometry& get_geometry() const;
 
     /** See BoardConst::to_string() */
