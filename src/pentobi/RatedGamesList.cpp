@@ -45,6 +45,7 @@ void RatedGamesList::focusInEvent(QFocusEvent* event)
 {
     // Select current index if list has focus
     selectRow(currentIndex().row());
+    scrollTo(currentIndex());
     QTableView::focusInEvent(event);
 }
 
