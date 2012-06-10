@@ -1824,19 +1824,23 @@ void MainWindow::gameOver()
         Rating oldRating;
         unsigned int nuGames;
         Util::getRating(variant, oldRating, nuGames);
-        double gameResult;
-        bd.get_score(m_ratedGameColor, gameResult);
-        log() << "Updating rating with game result " << gameResult << '\n';
+        unsigned int place;
+        bool isPlaceShared;
+        bd.get_place(m_ratedGameColor, place, isPlaceShared);
+        float gameResult;
+        if (place == 0 && ! isPlaceShared)
+            gameResult = 1;
+        else if (place == 0 && isPlaceShared)
+            gameResult = 0.5;
+        else
+            gameResult = 0;
         unsigned int nuOpp = get_nu_players(variant) - 1;
         Rating oppRating = m_player->get_rating(variant);
         Util::updateRating(variant, gameResult, oppRating, nuOpp);
         Rating newRating;
         Util::getRating(variant, newRating, nuGames);
-        unsigned int place;
-        bool is_place_shared;
-        bd.get_place(m_ratedGameColor, place, is_place_shared);
         RatingHistory history(variant, getRatedGamesDir(variant));
-        history.add(nuGames, m_ratedGameColor, place, is_place_shared,
+        history.add(nuGames, m_ratedGameColor, gameResult,
                     Tree::get_date_today(), m_level, newRating);
         history.save();
         {
