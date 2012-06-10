@@ -1819,7 +1819,7 @@ void MainWindow::gameOver()
             info = tr("Green wins.");
     }
     QString detailText;
-    if (m_isRated)
+    if (m_isRated && ! m_isRatedGameFinished)
     {
         Rating oldRating;
         unsigned int nuGames;
@@ -1864,6 +1864,7 @@ void MainWindow::gameOver()
             detailText =
                 tr("Your rating has decreased from %1 to %2.")
                 .arg(oldRatingInt).arg(newRatingInt);
+        m_isRatedGameFinished = true;
     }
     showInfo(info, detailText);
 }
@@ -3154,6 +3155,7 @@ void MainWindow::setRated(bool isRated)
         setWindowTitle(tr("Pentobi - Rated Game"));
         statusBar()->addWidget(m_ratedGameLabel);
         m_ratedGameLabel->show();
+        m_isRatedGameFinished = false;
     }
     else
         statusBar()->removeWidget(m_ratedGameLabel);

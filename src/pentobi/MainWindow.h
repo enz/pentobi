@@ -241,6 +241,8 @@ private:
 
     bool m_isRated;
 
+    bool m_isRatedGameFinished;
+
     /** Color played by the user in a rated game.
         Only defined if m_isRated is true. In game variants with multiple
         colors per player, the user plays all colors of the player with
