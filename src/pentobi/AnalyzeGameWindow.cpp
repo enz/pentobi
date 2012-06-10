@@ -13,7 +13,7 @@
 AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     : QDialog(parent)
 {
-    setWindowTitle(tr("Pentobi - Game Analysis"));
+    setWindowTitle(tr("Analyze Game"));
     // Disable '?' button in title bar on Windows, we don't have
     // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);

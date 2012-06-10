@@ -25,7 +25,7 @@ RatingDialog::RatingDialog(QWidget* parent)
     : QDialog(parent),
       m_variant(game_variant_classic)
 {
-    setWindowTitle(tr("Pentobi - Your Rating"));
+    setWindowTitle(tr("Your Rating"));
     // Disable '?' button in title bar on Windows, we don't have
     // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);

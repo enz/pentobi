@@ -66,8 +66,9 @@
     <name>HelpWindow</name>
     <message>
         <location filename="HelpWindow.cpp" line="33"/>
-        <source>Pentobi - Help</source>
-        <translation>Pentobi - Hilfe</translation>
+        <source>Pentobi User Manual</source>
+        <oldsource>Pentobi - Help</oldsource>
+        <translation>Pentobi-Benutzerhandbuch</translation>
     </message>
     <message>
         <location filename="HelpWindow.cpp" line="39"/>
@@ -103,12 +104,12 @@
         <translation>Anfänger</translation>
     </message>
     <message>
-        <location filename="InitialRatingDialog.cpp" line="36"/>
+        <location filename="InitialRatingDialog.cpp" line="37"/>
         <source>Expert</source>
         <translation>Experte</translation>
     </message>
     <message>
-        <location filename="InitialRatingDialog.cpp" line="51"/>
+        <location filename="InitialRatingDialog.cpp" line="52"/>
         <source>Your initial rating: %1</source>
         <translation>Ihre Anfangswertung: %1</translation>
     </message>

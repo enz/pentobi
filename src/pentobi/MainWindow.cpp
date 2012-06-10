@@ -2950,14 +2950,17 @@ void MainWindow::setFile(const QString& file)
 {
     m_file = file;
     if (m_file.isEmpty())
+    {
         setWindowTitle(tr("Pentobi"));
+        setWindowFilePath("");
+    }
     else
     {
         QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
         if (! canonicalFilePath.isEmpty())
             m_file = canonicalFilePath;
-        QFileInfo info(m_file);
-        setWindowTitle(tr("%1[*] - Pentobi").arg(info.fileName()));
+        setWindowTitle("");
+        setWindowFilePath(m_file);
         QSettings settings;
         QStringList files = settings.value("recent_files").toStringList();
         files.removeAll(m_file);
@@ -2965,7 +2968,7 @@ void MainWindow::setFile(const QString& file)
         while (files.size() > maxRecentFiles)
             files.removeLast();
         settings.setValue("recent_files", files);
-        settings.setValue("last_dir", info.dir().path());
+        settings.setValue("last_dir", QFileInfo(m_file).dir().path());
         settings.sync(); // updateRecentFiles() needs the new settings 
         updateRecentFiles();
     }
@@ -3152,7 +3155,6 @@ void MainWindow::setRated(bool isRated)
     m_isRated = isRated;
     if (isRated)
     {
-        setWindowTitle(tr("Pentobi - Rated Game"));
         statusBar()->addWidget(m_ratedGameLabel);
         m_ratedGameLabel->show();
         m_isRatedGameFinished = false;

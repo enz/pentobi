@@ -41,7 +41,7 @@ bool Application::notify(QObject* receiver, QEvent* event)
 void Application::showError(const QString& detailedText)
 {
     QMessageBox msgBox;
-    msgBox.setWindowTitle(tr("Pentobi - Error"));
+    msgBox.setWindowTitle(tr("Pentobi"));
     msgBox.setIcon(QMessageBox::Critical);
     msgBox.setText(tr("An unexpected error occurred."));
     msgBox.setInformativeText("<html>" +

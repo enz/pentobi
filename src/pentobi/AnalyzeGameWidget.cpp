@@ -199,7 +199,7 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
                                      & ~Qt::WindowContextHelpButtonHint);
     m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
                                           this));
-    m_progressDialog->setWindowTitle(tr("Pentobi - Progress"));
+    m_progressDialog->setWindowTitle(tr("Pentobi"));
     m_progressDialog->setMinimumDuration(0);
     connect(m_progressDialog, SIGNAL(canceled()), this, SLOT(cancel()));
     m_progressDialog->show();
