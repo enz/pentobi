@@ -11,6 +11,7 @@ set(pentobi_SRCS
   Application.cpp
   MainWindow.cpp
   Main.cpp
+  RatedGamesList.cpp
   RatingDialog.cpp
   RatingHistory.cpp
   RatingGraph.cpp
@@ -22,6 +23,7 @@ set(pentobi_MOC_HDRS
   AnalyzeGameWindow.h
   Application.h
   MainWindow.h
+  RatedGamesList.h
   RatingDialog.h
   RatingGraph.h
   )

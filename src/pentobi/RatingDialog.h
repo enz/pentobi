@@ -1,11 +1,12 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_gui/RatingDialog.h */
+/** @file pentobi/RatingDialog.h */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_RATING_DIALOG_H
 #define PENTOBI_RATING_DIALOG_H
 
 #include <QtGui>
+#include "RatedGamesList.h"
 #include "RatingGraph.h"
 #include "libpentobi_base/GameVariant.h"
 
@@ -21,8 +22,6 @@ class RatingDialog
 
 public:
     RatingDialog(QWidget* parent);
-
-    bool eventFilter(QObject* object, QEvent* event);
 
     void updateContent(GameVariant variant, const RatingHistory& history);
 
@@ -40,12 +39,10 @@ private:
 
     RatingGraph* m_graph;
 
-    QTableView* m_table;
-
-    QStandardItemModel* m_model;
+    RatedGamesList* m_list;
 
 private slots:
-    void activateGame(const QModelIndex& index);
+    void activateGame(unsigned int n);
 };
 
 //-----------------------------------------------------------------------------
