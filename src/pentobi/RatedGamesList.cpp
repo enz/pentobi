@@ -133,7 +133,8 @@ void RatedGamesList::updateContent(GameVariant variant,
     }
     setSortingEnabled(true);
     if (nuRows > 0)
-        setCurrentIndex(model()->index(0, 0));
+        selectionModel()->setCurrentIndex(model()->index(0, 0),
+                                          QItemSelectionModel::NoUpdate);
 }
 
 //-----------------------------------------------------------------------------
