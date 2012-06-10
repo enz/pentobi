@@ -5,6 +5,8 @@ Current development version
 * Different options for speed of game analysis
 * New menu item "Play Single Move" to make the computer play a move
   without changing the colors played by the computer 
+* The mouse wheel can now be used to navigate in the current variation
+  if no piece is selected
 
 
 Version 2.0 (22 May 2012)

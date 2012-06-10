@@ -3583,13 +3583,21 @@ void MainWindow::wheelEvent(QWheelEvent* event)
     int delta = event->delta() / 8 / 15;
     if (delta > 0)
     {
-        for (int i = 0; i < delta; ++i)
-            nextTransform();
+        if (m_guiBoard->getSelectedPiece().is_null())
+            for (int i = 0; i < delta; ++i)
+                backward();
+        else
+            for (int i = 0; i < delta; ++i)
+                nextTransform();
     }
     else if (delta < 0)
     {
-        for (int i = 0; i < -delta; ++i)
-            previousTransform();
+        if (m_guiBoard->getSelectedPiece().is_null())
+            for (int i = 0; i < -delta; ++i)
+                forward();
+        else
+            for (int i = 0; i < -delta; ++i)
+                previousTransform();
     }
     event->accept();
 }
