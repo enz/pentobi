@@ -38,7 +38,7 @@ void getNextRatedGameSettings(GameVariant variant, int maxLevel, int& level,
     Rating rating;
     unsigned int nuGames;
     getRating(variant, rating, nuGames);
-    userColor = Color(nuGames % get_nu_colors(variant));
+    userColor = Color(nuGames % get_nu_players(variant));
     float minDiff;
     for (int i = 1; i <= maxLevel; ++i)
     {
