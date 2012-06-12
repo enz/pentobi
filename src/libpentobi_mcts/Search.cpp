@@ -235,6 +235,13 @@ void Search::write_info(ostream& out) const
         return;
     ParentClass::write_info(out);
     out << (format("Mov: %i, ") % root.get_nu_children());
+    if (libpentobi_base::get_nu_players(m_game_variant) > 2)
+    {
+        out << "All:";
+        BOOST_FOREACH(const StatisticsBase& i, get_root_eval())
+            out << (format(" %.2f") % i.get_mean());
+        out << ", ";
+    }
     get_state().write_info(out);
 }
 

@@ -33,6 +33,7 @@ using libboardgame_util::log;
 using libboardgame_util::FastLog;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::Parameters;
+using libboardgame_util::StatisticsBase;
 using libboardgame_util::StatisticsExt;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeIntervalChecker;
@@ -302,6 +303,9 @@ public:
         of the callback function are: elapsed time, estimated remaining time. */
     void set_callback(function<void(double, double)> callback);
 
+    /** Get mean evaluation for all players at root node. */
+    const array<StatisticsBase,max_players>& get_root_eval() const;
+
 protected:
     struct Simulation
     {
@@ -412,6 +416,9 @@ private:
     StatisticsExt m_stat_len;
 
     StatisticsExt m_stat_in_tree_len;
+
+    /** See get_root_eval(). */
+    array<StatisticsBase,max_players> m_root_eval;
 
     function<void(double, double)> m_callback;
 
@@ -652,6 +659,13 @@ template<class S, class M, unsigned int P>
 size_t Search<S,M,P>::get_nu_simulations() const
 {
     return m_nu_simulations;
+}
+
+template<class S, class M, unsigned int P>
+inline const array<StatisticsBase,Search<S,M,P>::max_players>&
+Search<S,M,P>::get_root_eval() const
+{
+    return m_root_eval;
 }
 
 template<class S, class M, unsigned int P>
@@ -965,8 +979,11 @@ bool Search<S,M,P>::search(Move& mv, ValueType max_count,
     m_player = get_player();
     m_stat_len.clear();
     m_stat_in_tree_len.clear();
+    unsigned int nu_players = get_nu_players();
+    for (unsigned int i = 0; i < nu_players; ++i)
+        m_root_eval[i].clear();
     if (m_use_last_good_reply && ! is_followup)
-        m_reply_table.init(get_nu_players());
+        m_reply_table.init(nu_players);
     m_state.start_search();
     m_max_count = max_count;
     m_nu_simulations = 0;
@@ -1432,6 +1449,9 @@ void Search<S,M,P>::update_values(const array<ValueType, max_players>& eval)
         m_tree.add_value(node, eval[mv.player]);
         m_tree.inc_visit_count(node);
     }
+    unsigned int nu_players = get_nu_players();
+    for (unsigned int i = 0; i < nu_players; ++i)
+        m_root_eval[i].add(eval[i]);
 }
 
 //-----------------------------------------------------------------------------
