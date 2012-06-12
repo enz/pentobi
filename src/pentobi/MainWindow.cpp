@@ -2947,18 +2947,16 @@ void MainWindow::setVariant(Variant variant)
 void MainWindow::setFile(const QString& file)
 {
     m_file = file;
+    // Don't use setWindowFilePath(), it is buggy in Qt 4.6.
     if (m_file.isEmpty())
-    {
         setWindowTitle(tr("Pentobi"));
-        setWindowFilePath("");
-    }
     else
     {
         QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
         if (! canonicalFilePath.isEmpty())
             m_file = canonicalFilePath;
-        setWindowTitle("");
-        setWindowFilePath(m_file);
+        QFileInfo info(m_file);
+        setWindowTitle(tr("%1[*] - Pentobi").arg(info.fileName()));
         QSettings settings;
         QStringList files = settings.value("recent_files").toStringList();
         files.removeAll(m_file);
@@ -2966,8 +2964,8 @@ void MainWindow::setFile(const QString& file)
         while (files.size() > maxRecentFiles)
             files.removeLast();
         settings.setValue("recent_files", files);
-        settings.setValue("last_dir", QFileInfo(m_file).dir().path());
-        settings.sync(); // updateRecentFiles() needs the new settings 
+        settings.setValue("last_dir", info.dir().path());
+        settings.sync(); // updateRecentFiles() needs the new settings
         updateRecentFiles();
     }
 }
