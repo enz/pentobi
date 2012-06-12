@@ -1,8 +1,12 @@
 Current development version (branch v2-fixes)
 =============================================
 
+* Bugfix: File was erroneously marked as modified if a multiline
+  comment was shown and the platform that was used to create the
+  file had Windows-style end of line convention and the platform
+  on which the file was shown had Unix-style.
 * Fixed duplicate menu shortcut in German translation
-* Fixed floating point tolerance in unit tests.
+* Fixed too high floating point tolerance in unit tests.
 
 
 Version 2.0 (22 May 2012)

@@ -55,7 +55,7 @@ void Reader::consume_whitespace()
 {
     char c;
     while (isspace(c = peek()))
-        consume_char(c);
+        m_in->get();
 }
 
 void Reader::on_begin_node(bool is_root)
@@ -125,7 +125,7 @@ void Reader::read(istream& in, bool check_single_tree,
             }
         }
         else if (isspace(c))
-            consume_char(char(c));
+            m_in->get();
         else
             throw ReadError("Extra characters after end of tree.");
     }
@@ -151,6 +151,13 @@ char Reader::read_char()
     int c = m_in->get();
     if (c == EOF)
         throw ReadError("Unexpected end of SGF stream");
+    if (c == '\r')
+    {
+        // Convert CR+LF or single CR into LF
+        if (peek() == '\n')
+            m_in->get();
+        return '\n';
+    }
     return char(c);
 }
 
