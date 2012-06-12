@@ -30,12 +30,12 @@ using libpentobi_base::board_type_classic;
 using libpentobi_base::board_type_duo;
 using libpentobi_base::board_type_trigon;
 using libpentobi_base::board_type_trigon_3;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -104,14 +104,14 @@ Point find_best_starting_point(const Board& bd, Color c)
 }
 
 /** Return the symmetric point state for symmetry detection.
-    Only used for game_variant_duo. Returns the other color or empty, if the
+    Only used for variant_duo. Returns the other color or empty, if the
     given point state is empty. */
 PointState get_symmetric_state(PointState s)
 {
     if (s.is_empty())
         return s;
     Color c = s.to_color();
-    LIBBOARDGAME_ASSERT(c.to_int() < 2); // game_variant_duo
+    LIBBOARDGAME_ASSERT(c.to_int() < 2); // variant_duo
     return PointState(Color(1 - c.to_int()));
 }
 
@@ -139,15 +139,15 @@ SharedConst::SharedConst(const Color& to_play)
 
 //-----------------------------------------------------------------------------
 
-State::State(GameVariant initial_game_variant, const SharedConst& shared_const)
+State::State(Variant initial_variant, const SharedConst& shared_const)
   : m_shared_const(shared_const),
-    m_bd(initial_game_variant)
+    m_bd(initial_variant)
 {
 }
 
 State::State(const State& state)
   : m_shared_const(state.m_shared_const),
-    m_bd(state.m_bd.get_game_variant())
+    m_bd(state.m_bd.get_variant())
 {
 }
 
@@ -387,7 +387,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     if (m_nu_passes == nu_colors)
         return false;
     Color to_play = m_bd.get_to_play();
-    GameVariant variant = m_bd.get_game_variant();
+    Variant variant = m_bd.get_variant();
     m_has_moves[to_play] = ! m_moves[to_play].empty();
 
     if (! m_has_moves[to_play])
@@ -396,9 +396,9 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         // in the game and we know that the playout is a loss because the
         // player has no more moves and the score is already negative.
         if (m_nu_moves_initial < 10 * nu_colors
-            && (variant == game_variant_duo || variant == game_variant_junior
-                || ((variant == game_variant_classic_2
-                     || variant == game_variant_trigon_2)
+            && (variant == variant_duo || variant == variant_junior
+                || ((variant == variant_classic_2
+                     || variant == variant_trigon_2)
                     && ! m_has_moves[m_bd.get_second_color(to_play)])))
         {
             double game_result;
@@ -850,10 +850,9 @@ void State::start_search()
     m_nu_playout_moves = 0;
     m_nu_last_good_reply_moves = 0;
     m_stat_score.clear();
-    GameVariant game_variant = bd.get_game_variant();
+    Variant variant = bd.get_variant();
     m_check_symmetric_draw =
-        ((game_variant == game_variant_duo
-          || game_variant == game_variant_junior)
+        ((variant == variant_duo || variant == variant_junior)
          && m_shared_const.detect_symmetry
          && ! (m_shared_const.to_play == Color(1)
                && m_shared_const.avoid_symmetric_draw));

@@ -11,7 +11,7 @@
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ private:
 
     QFont m_fontUnderlined;
 
-    GameVariant m_gameVariant;
+    Variant m_variant;
 
     ColorMap<bool> m_hasMoves;
 

@@ -36,10 +36,10 @@ using libpentobi_base::Color;
 
 //-----------------------------------------------------------------------------
 
-Engine::Engine(GameVariant game_variant)
+Engine::Engine(Variant variant)
     : m_accept_illegal(false),
       m_show_board(false),
-      m_game(game_variant),
+      m_game(variant),
       m_player(0)
 {
     add("all_legal", &Engine::cmd_all_legal);
@@ -84,10 +84,10 @@ void Engine::cmd_clear_board()
 void Engine::cmd_final_score(Response& response)
 {
     const Board& bd = get_board();
-    GameVariant game_variant = bd.get_game_variant();
-    if (game_variant == game_variant_classic
-        || game_variant == game_variant_trigon
-        || game_variant == game_variant_trigon_3)
+    Variant variant = bd.get_variant();
+    if (variant == variant_classic
+        || variant == variant_trigon
+        || variant == variant_trigon_3)
     {
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
             response << bd.get_points_with_bonus(*i) << ' ';
@@ -185,10 +185,10 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
     multiple games. */
 void Engine::cmd_set_game(const Arguments& args)
 {
-    GameVariant game_variant;
-    if (! parse_game_variant(args.get_line(), game_variant))
+    Variant variant;
+    if (! parse_variant(args.get_line(), variant))
         throw Failure("invalid argument");
-    m_game.init(game_variant);
+    m_game.init(variant);
     board_changed();
 }
 
@@ -231,10 +231,10 @@ Color Engine::get_color_arg(const Arguments& args, unsigned int i) const
 {
     string s = args.get_tolower(i);
     const Board& bd = get_board();
-    GameVariant variant = bd.get_game_variant();
-    if (variant == game_variant_classic || variant == game_variant_classic_2
-        || variant == game_variant_trigon || variant == game_variant_trigon_2
-        || variant == game_variant_trigon_3)
+    Variant variant = bd.get_variant();
+    if (variant == variant_classic || variant == variant_classic_2
+        || variant == variant_trigon || variant == variant_trigon_2
+        || variant == variant_trigon_3)
     {
         if (s == "1" || s == "blue")
             return Color(0);
@@ -245,7 +245,7 @@ Color Engine::get_color_arg(const Arguments& args, unsigned int i) const
         if (s == "4" || s == "green")
             return Color(3);
     }
-    if (variant == game_variant_duo || variant == game_variant_junior)
+    if (variant == variant_duo || variant == variant_junior)
     {
         if (s == "blue" || s == "black" || s == "b")
             return Color(0);

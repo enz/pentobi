@@ -13,7 +13,7 @@ using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::MovePoints;
@@ -39,7 +39,7 @@ public:
     void setCoordLabelColor(const QColor& color);
 
     void paintEmptyBoard(QPainter& painter, unsigned int width,
-                         unsigned int height, GameVariant gameVariant,
+                         unsigned int height, Variant variant,
                          const Geometry& geometry);
 
     /** Paint the pieces and markup.
@@ -73,7 +73,7 @@ private:
 
     const Geometry* m_geometry;
 
-    GameVariant m_gameVariant;
+    Variant m_variant;
 
     /** The width of the last board painted. */
     int m_width;
@@ -105,7 +105,7 @@ private:
                    qreal height, const QString& label, bool isCoordLabel);
 
     void drawLabels(QPainter& painter, const Grid<PointState>& pointState,
-                    GameVariant gameVariant, const Grid<QString>* labels);
+                    Variant variant, const Grid<QString>* labels);
 };
 
 inline void BoardPainter::setCoordLabelColor(const QColor& color)

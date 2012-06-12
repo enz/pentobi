@@ -35,10 +35,10 @@ using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::write_tree;
 using libboardgame_util::log;
 using libboardgame_util::Exception;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
 using libpentobi_base::Move;
@@ -55,17 +55,17 @@ int evaluation_level = 6;
 
 //-----------------------------------------------------------------------------
 
-BookBuilder::BookBuilder(GameVariant game_variant)
-  : m_game_variant(game_variant),
-    m_tree(game_variant),
-    m_bd(new Board(game_variant)),
+BookBuilder::BookBuilder(Variant variant)
+  : m_variant(variant),
+    m_tree(variant),
+    m_bd(new Board(variant)),
     m_updater(m_tree, *m_bd),
-    m_player(new Player(game_variant, "")),
+    m_player(new Player(variant, "")),
     m_moves(new ArrayList<Move, Move::range>)
 {
-    if (game_variant != game_variant_duo
-        && game_variant != game_variant_junior
-        && game_variant != game_variant_classic_2)
+    if (variant != variant_duo
+        && variant != variant_junior
+        && variant != variant_classic_2)
         throw Exception("BookBuilder supports only two-player game variants");
     m_expansion_parameter = 40; // TODO: Make configurable
 }
@@ -73,8 +73,7 @@ BookBuilder::BookBuilder(GameVariant game_variant)
 void BookBuilder::add_leaf(const vector<ColorMove>& sequence, ColorMove mv)
 {
     add_leaf(sequence, mv, PointTransfIdent<Point>());
-    if (m_game_variant == game_variant_duo
-        || m_game_variant == game_variant_junior)
+    if (m_variant == variant_duo || m_variant == variant_junior)
         add_leaf(sequence, mv, PointTransfRot270Refl<Point>());
 }
 
@@ -97,8 +96,7 @@ void BookBuilder::add_leaf(const vector<ColorMove>& sequence, ColorMove mv,
 void BookBuilder::add_value(const vector<ColorMove>& sequence, double value)
 {
     add_value(sequence, value, PointTransfIdent<Point>());
-    if (m_game_variant == game_variant_duo
-        || m_game_variant == game_variant_junior)
+    if (m_variant == variant_duo || m_variant == variant_junior)
         add_value(sequence, value, PointTransfRot270Refl<Point>());
 }
 
@@ -158,11 +156,11 @@ void BookBuilder::build(const path& file)
         reader.read(file);
         unique_ptr<Node> node = reader.get_tree_transfer_ownership();
         m_tree.init(node);
-        if (m_tree.get_game_variant() != m_game_variant)
+        if (m_tree.get_variant() != m_variant)
             throw Exception("File has wrong game variant");
     }
     else
-        m_tree.init_game_variant(m_game_variant);
+        m_tree.init_variant(m_variant);
     while (true)
     {
         const Node* node;
@@ -248,16 +246,14 @@ vector<ColorMove> BookBuilder::generate_moves() const
     m_bd->gen_moves(c, *m_moves);
     unsigned int min_piece_size = 0;
     unsigned int nu_moves = m_bd->get_nu_moves();
-    if (m_game_variant == game_variant_duo
-        || m_game_variant == game_variant_junior)
+    if (m_variant == variant_duo || m_variant == variant_junior)
     {
         if (nu_moves < 4)
             min_piece_size = 5;
         else if (nu_moves < 6)
             min_piece_size = 4;
     }
-    else if (m_game_variant == game_variant_classic
-             || m_game_variant == game_variant_classic_2)
+    else if (m_variant == variant_classic || m_variant == variant_classic_2)
     {
         if (nu_moves < 12)
             min_piece_size = 5;
@@ -314,7 +310,7 @@ void BookBuilder::prune(const path& file, double prune_book_diff)
     reader.read(file);
     unique_ptr<Node> node = reader.get_tree_transfer_ownership();
     m_tree.init(node);
-    if (m_tree.get_game_variant() != m_game_variant)
+    if (m_tree.get_variant() != m_variant)
         throw Exception("File has wrong game variant");
     for (TreeIterator i(m_tree.get_root()); i; ++i)
     {

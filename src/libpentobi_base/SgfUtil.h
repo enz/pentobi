@@ -6,7 +6,7 @@
 #define LIBPENTOBI_BASE_SGF_UTIL_H
 
 #include "Color.h"
-#include "GameVariant.h"
+#include "Variant.h"
 
 namespace libpentobi_base {
 namespace sgf_util {
@@ -14,10 +14,10 @@ namespace sgf_util {
 //-----------------------------------------------------------------------------
 
 /** Get SGF move property ID for a color in a game variant. */
-const char* get_color_id(GameVariant variant, Color c);
+const char* get_color_id(Variant variant, Color c);
 
 /** Get SGF setup property ID for a color in a game variant. */
-const char* get_setup_id(GameVariant variant, Color c);
+const char* get_setup_id(Variant variant, Color c);
 
 //-----------------------------------------------------------------------------
 

@@ -26,7 +26,7 @@ using libpentobi_base::sgf_util::get_color_id;
 
 namespace {
 
-void dump_tree_recurse(Writer& writer, GameVariant variant,
+void dump_tree_recurse(Writer& writer, Variant variant,
                        const Node<Move>& node, Color to_play)
 {
     ostringstream comment;
@@ -80,7 +80,7 @@ bool compare_node(const Node<Move>* n1, const Node<Move>* n2)
 
 void dump_tree(ostream& out, const Search& search)
 {
-    GameVariant variant;
+    Variant variant;
     Setup setup;
     search.get_root_position(variant, setup);
     Writer writer(out, true, true);

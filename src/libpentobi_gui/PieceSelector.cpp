@@ -21,10 +21,10 @@ using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::log;
 using libpentobi_base::board_type_trigon;
 using libpentobi_base::board_type_trigon_3;
-using libpentobi_base::game_variant_junior;
+using libpentobi_base::variant_junior;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::PieceMap;
 
@@ -119,7 +119,7 @@ int PieceSelector::heightForWidth(int width) const
 void PieceSelector::init()
 {
     BoardType boardType = m_bd.get_board_type();
-    GameVariant gameVariant = m_bd.get_game_variant();
+    Variant variant = m_bd.get_variant();
     const string* pieceLayout;
     if (boardType == board_type_trigon || boardType == board_type_trigon_3)
     {
@@ -127,7 +127,7 @@ void PieceSelector::init()
         m_nuColumns = 47;
         m_nuRows = 6;
     }
-    else if (gameVariant == game_variant_junior)
+    else if (variant == variant_junior)
     {
         pieceLayout = &pieceLayoutJunior;
         m_nuColumns = 34;
@@ -215,7 +215,7 @@ void PieceSelector::paintEvent(QPaintEvent*)
     painter.save();
     painter.translate(0.5 * (width() - m_selectorWidth),
                       0.5 * (height() - m_selectorHeight));
-    GameVariant gameVariant = m_bd.get_game_variant();
+    Variant variant = m_bd.get_variant();
     const Geometry& geometry = m_bd.get_geometry();
     for (unsigned int x = 0; x < m_nuColumns; ++x)
         for (unsigned int y = 0; y < m_nuRows; ++y)
@@ -228,13 +228,13 @@ void PieceSelector::paintEvent(QPaintEvent*)
                     bool isUpside =
                         (geometry.get_point_type(x, m_nuRows - y - 1)
                          != geometry.get_point_type(0, 0));
-                    Util::paintColorTriangle(painter, gameVariant, m_color,
+                    Util::paintColorTriangle(painter, variant, m_color,
                                              isUpside, x * m_fieldWidth,
                                              y * m_fieldHeight, m_fieldWidth,
                                              m_fieldHeight);
                 }
                 else
-                    Util::paintColorSquare(painter, gameVariant, m_color,
+                    Util::paintColorSquare(painter, variant, m_color,
                                            x * m_fieldWidth, y * m_fieldHeight,
                                            m_fieldWidth);
             }

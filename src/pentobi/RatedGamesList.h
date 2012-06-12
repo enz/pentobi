@@ -18,7 +18,7 @@ class RatedGamesList
 public:
     RatedGamesList(QWidget* parent = 0);
 
-    void updateContent(GameVariant variant, const RatingHistory& history);
+    void updateContent(Variant variant, const RatingHistory& history);
 
 signals:
     void openRatedGame(unsigned int n);

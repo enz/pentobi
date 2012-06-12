@@ -15,7 +15,7 @@ using libpentobi_base::to_string_id;
 
 //-----------------------------------------------------------------------------
 
-RatingHistory::RatingHistory(GameVariant variant, const path& datadir)
+RatingHistory::RatingHistory(Variant variant, const path& datadir)
 {
     m_games.clear();
     m_dir = datadir;

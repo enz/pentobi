@@ -24,7 +24,7 @@ void dump(const Board& bd, ostream& out);
     play. */
 void get_current_position_as_setup(const Board& bd, Setup& setup);
 
-void write_setup(Writer& writer, GameVariant variant, const Setup& setup);
+void write_setup(Writer& writer, Variant variant, const Setup& setup);
 
 //-----------------------------------------------------------------------------
 

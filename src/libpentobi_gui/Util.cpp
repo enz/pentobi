@@ -8,13 +8,13 @@
 
 #include "Util.h"
 
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
@@ -191,21 +191,21 @@ QString Util::convertSgfValueToQString(const string& value,
         return QString::fromAscii(value.c_str());
 }
 
-QColor Util::getLabelColor(GameVariant gameVariant, PointState s)
+QColor Util::getLabelColor(Variant variant, PointState s)
 {
     if (s.is_empty())
         return Qt::black;
     Color c = s.to_color();
-    QColor paintColor = getPaintColor(gameVariant, c);
+    QColor paintColor = getPaintColor(variant, c);
     if (paintColor == yellow || paintColor == green)
         return Qt::black;
     else
         return Qt::white;
 }
 
-QColor Util::getPaintColor(GameVariant gameVariant, Color c)
+QColor Util::getPaintColor(Variant variant, Color c)
 {
-    if (gameVariant == game_variant_duo || gameVariant == game_variant_junior)
+    if (variant == variant_duo || variant == variant_junior)
         return c == Color(0) ? blue : green;
     else
     {
@@ -225,16 +225,16 @@ QColor Util::getPaintColorEmpty()
     return gray;
 }
 
-QString Util::getPlayerString(GameVariant variant, Color c)
+QString Util::getPlayerString(Variant variant, Color c)
 {
-    if (variant == game_variant_duo || variant == game_variant_junior)
+    if (variant == variant_duo || variant == variant_junior)
     {
         if (c == Color(0))
             return qApp->translate("Util", "Blue");
         if (c == Color(1))
             return qApp->translate("Util", "Green");
     }
-    else if (variant == game_variant_classic || variant == game_variant_trigon)
+    else if (variant == variant_classic || variant == variant_trigon)
     {
         if (c == Color(0))
             return qApp->translate("Util", "Blue");
@@ -245,7 +245,7 @@ QString Util::getPlayerString(GameVariant variant, Color c)
         if (c == Color(3))
             return qApp->translate("Util", "Green");
     }
-    else if (variant == game_variant_trigon_3)
+    else if (variant == variant_trigon_3)
     {
         if (c == Color(0))
             return qApp->translate("Util", "Blue");
@@ -254,8 +254,7 @@ QString Util::getPlayerString(GameVariant variant, Color c)
         if (c == Color(2))
             return qApp->translate("Util", "Red");
     }
-    else if (variant == game_variant_classic_2
-             || variant == game_variant_trigon_2)
+    else if (variant == variant_classic_2 || variant == variant_trigon_2)
     {
         if (c == Color(0) || c == Color(2))
             return qApp->translate("Util", "Blue/Red");
@@ -266,11 +265,11 @@ QString Util::getPlayerString(GameVariant variant, Color c)
     return "";
 }
 
-void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
+void Util::paintColorSquare(QPainter& painter, Variant variant,
                             Color c, qreal x, qreal y, qreal size,
                             qreal alpha, qreal saturation, bool flat)
 {
-    QColor color = getPaintColor(gameVariant, c);
+    QColor color = getPaintColor(variant, c);
     QColor upLeftColor;
     QColor downRightColor;
     if (flat)
@@ -289,12 +288,12 @@ void Util::paintColorSquare(QPainter& painter, GameVariant gameVariant,
     paintSquare(painter, x, y, size, color, upLeftColor, downRightColor);
 }
 
-void Util::paintColorTriangle(QPainter& painter, GameVariant gameVariant,
+void Util::paintColorTriangle(QPainter& painter, Variant variant,
                               Color c, bool isUpside, qreal x, qreal y,
                               qreal width, qreal height, qreal alpha,
                               qreal saturation, bool flat)
 {
-    QColor color = getPaintColor(gameVariant, c);
+    QColor color = getPaintColor(variant, c);
     QColor upLeftColor;
     QColor downRightColor;
     if (flat)
@@ -338,11 +337,11 @@ void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside,
 }
 
 void Util::paintEmptySquareStartingPoint(QPainter& painter,
-                                         GameVariant gameVariant, Color c,
+                                         Variant variant, Color c,
                                          qreal x, qreal y, qreal size)
 {
     paintEmptySquare(painter, x, y, size);
-    paintDot(painter, getPaintColor(gameVariant, c), x, y, size, size,
+    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
              0.13 * size);
 }
 

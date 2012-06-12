@@ -8,10 +8,10 @@
 #include <QtGui>
 #include "RatedGamesList.h"
 #include "RatingGraph.h"
-#include "libpentobi_base/GameVariant.h"
+#include "libpentobi_base/Variant.h"
 
 using namespace std;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -23,13 +23,13 @@ class RatingDialog
 public:
     RatingDialog(QWidget* parent);
 
-    void updateContent(GameVariant variant, const RatingHistory& history);
+    void updateContent(Variant variant, const RatingHistory& history);
 
 signals:
-    void openRatedGame(GameVariant variant, unsigned int n);
+    void openRatedGame(Variant variant, unsigned int n);
 
 private:
-    GameVariant m_variant;
+    Variant m_variant;
 
     QLabel* m_labelVariant;
 

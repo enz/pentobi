@@ -11,7 +11,6 @@ set(pentobi_base_STAT_SRCS
   Book.cpp
   Color.cpp
   Game.cpp
-  GameVariant.cpp
   GameStateHistory.cpp
   PieceInfo.cpp
   Player.cpp
@@ -23,6 +22,7 @@ set(pentobi_base_STAT_SRCS
   SymmetricPoints.cpp
   Tree.cpp
   TreeUtil.cpp
+  Variant.cpp
   )
 
 if (PENTOBI_BUILD_GTP)

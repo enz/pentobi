@@ -7,7 +7,7 @@
 
 #include <array>
 #include <algorithm>
-#include "GameVariant.h"
+#include "Variant.h"
 #include "Geometry.h"
 #include "Grid.h"
 #include "Marker.h"
@@ -66,7 +66,7 @@ public:
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
-    static const BoardConst& get(GameVariant game_variant);
+    static const BoardConst& get(Variant variant);
 
     unsigned int get_nu_pieces() const;
 
@@ -171,7 +171,7 @@ private:
 
     PieceMap<unsigned int> m_max_attach_points;
 
-    BoardConst(BoardType board_type, GameVariant game_variant);
+    BoardConst(BoardType board_type, Variant variant);
 
     void create_move(Piece piece, const PiecePoints& coord_points,
                      Point center);

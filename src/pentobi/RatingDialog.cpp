@@ -11,19 +11,19 @@
 #include "Util.h"
 
 using namespace std;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
 RatingDialog::RatingDialog(QWidget* parent)
     : QDialog(parent),
-      m_variant(game_variant_classic)
+      m_variant(variant_classic)
 {
     setWindowTitle(tr("Your Rating"));
     // Disable '?' button in title bar on Windows, we don't have
@@ -58,32 +58,32 @@ void RatingDialog::activateGame(unsigned int n)
     emit openRatedGame(m_variant, n);
 }
 
-void RatingDialog::updateContent(GameVariant variant,
+void RatingDialog::updateContent(Variant variant,
                                  const RatingHistory& history)
 {
     m_variant = variant;
     QString variantStr;
     switch (variant)
     {
-    case game_variant_classic:
+    case variant_classic:
         variantStr = tr("Classic");
         break;
-    case game_variant_classic_2:
+    case variant_classic_2:
         variantStr = tr("Classic Two-Player");
         break;
-    case game_variant_duo:
+    case variant_duo:
         variantStr = tr("Duo");
         break;
-    case game_variant_trigon:
+    case variant_trigon:
         variantStr = tr("Trigon");
         break;
-    case game_variant_trigon_2:
+    case variant_trigon_2:
         variantStr = tr("Trigon Two-Player");
         break;
-    case game_variant_trigon_3:
+    case variant_trigon_3:
         variantStr = tr("Trigon Three-Player");
         break;
-    case game_variant_junior:
+    case variant_junior:
         variantStr = tr("Junior");
         break;
     }

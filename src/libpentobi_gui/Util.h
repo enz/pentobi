@@ -7,12 +7,12 @@
 
 #include <QtGui>
 #include "libpentobi_base/Color.h"
-#include "libpentobi_base/GameVariant.h"
+#include "libpentobi_base/Variant.h"
 #include "libpentobi_base/PointState.h"
 
 using namespace std;
 using libpentobi_base::Color;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
@@ -20,17 +20,17 @@ using libpentobi_base::PointState;
 namespace Util
 {
 
-QColor getPaintColor(GameVariant gameVariant, Color c);
+QColor getPaintColor(Variant variant, Color c);
 
 QColor getPaintColorEmpty();
 
-QColor getLabelColor(GameVariant gameVariant, PointState s);
+QColor getLabelColor(Variant variant, PointState s);
 
-void paintColorSquare(QPainter& painter, GameVariant gameVariant, Color c,
+void paintColorSquare(QPainter& painter, Variant variant, Color c,
                       qreal x, qreal y, qreal size, qreal alpha = 1,
                       qreal saturation = 1, bool flat = false);
 
-void paintColorTriangle(QPainter& painter, GameVariant gameVariant,
+void paintColorTriangle(QPainter& painter, Variant variant,
                         Color c, bool isUpside, qreal x, qreal y, qreal width,
                         qreal height, qreal alpha = 1, qreal saturation = 1,
                         bool flat = false);
@@ -43,7 +43,7 @@ void paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
 void paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside, qreal x,
                                      qreal y, qreal width, qreal height);
 
-void paintEmptySquareStartingPoint(QPainter& painter, GameVariant gameVariant,
+void paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
                                    Color c, qreal x, qreal y, qreal size);
 
 /** Convert a property value of a SGF tree unto a QString.
@@ -68,7 +68,7 @@ QString convertSgfValueToQString(const string& value, const string& charset);
     @param variant The game variant
     @param c The player color or one of the player colors in game variants
     with multiple colors per player. */
-QString getPlayerString(GameVariant variant, Color c);
+QString getPlayerString(Variant variant, Color c);
 
 }
 

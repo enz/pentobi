@@ -24,7 +24,7 @@ class Search
     : public libboardgame_mcts::Search<State, Move, 4>
 {
 public:
-    Search(GameVariant initial_game_variant, size_t memory = 0);
+    Search(Variant initial_variant, size_t memory = 0);
 
     ~Search() throw();
 
@@ -89,7 +89,7 @@ public:
     /** Get board position of last search at root node as setup.
         @param[out] variant
         @param[out] setup */
-    void get_root_position(GameVariant& variant, Setup& setup) const;
+    void get_root_position(Variant& variant, Setup& setup) const;
 
 protected:
     void on_start_search();
@@ -102,7 +102,7 @@ private:
     bool m_auto_param;
 
     /** Game variant of last search. */
-    GameVariant m_game_variant;
+    Variant m_variant;
 
     Color m_to_play;
 
@@ -115,7 +115,7 @@ private:
 
     const Board& get_board() const;
 
-    void set_default_param(GameVariant game_variant);
+    void set_default_param(Variant variant);
 };
 
 inline bool Search::get_auto_param() const

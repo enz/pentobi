@@ -8,7 +8,7 @@
 #include "BoardConst.h"
 #include "ColorMap.h"
 #include "ColorMove.h"
-#include "GameVariant.h"
+#include "Variant.h"
 #include "Geometry.h"
 #include "Grid.h"
 #include "MoveMarker.h"
@@ -28,7 +28,7 @@ class StartingPoints
 public:
     static const unsigned int max_starting_points = 6;
 
-    void init(GameVariant game_variant, const Geometry& geometry);
+    void init(Variant variant, const Geometry& geometry);
 
     bool is_colored_starting_point(Point p) const;
 
@@ -121,9 +121,9 @@ public:
     /** Use ANSI escape sequences for colored text output in operator>> */
     static bool color_output;
 
-    Board(GameVariant game_variant);
+    Board(Variant variant);
 
-    GameVariant get_game_variant() const;
+    Variant get_variant() const;
 
     unsigned int get_nu_colors() const;
 
@@ -187,13 +187,13 @@ public:
     const PointList& get_attach_points(Color c) const;
 
     /** Initialize the current board for a given game variant.
-        @param game_variant The game variant
+        @param variant The game variant
         @param setup An optional setup position to initialize the board
         with. */
-    void init(GameVariant game_variant, const Setup* setup = 0);
+    void init(Variant variant, const Setup* setup = 0);
 
     /** Clear the current board without changing the current game variant.
-        See init(GameVariant,const Setup*) */
+        See init(Variant,const Setup*) */
     void init(const Setup* setup = 0);
 
     /** Copy the board state and move history from another board.
@@ -353,7 +353,7 @@ public:
     bool is_same_player(Color c1, Color c2) const;
 
 private:
-    GameVariant m_game_variant;
+    Variant m_variant;
 
     unsigned int m_nu_colors;
 
@@ -410,7 +410,7 @@ private:
 
     bool has_moves(Color c, Point p) const;
 
-    void init_game_variant(GameVariant game_variant);
+    void init_variant(Variant variant);
 
     void place(Color c, Move mv);
 
@@ -467,11 +467,6 @@ inline const BoardConst& Board::get_board_const() const
 inline BoardType Board::get_board_type() const
 {
     return m_board_const->get_board_type();
-}
-
-inline GameVariant Board::get_game_variant() const
-{
-    return m_game_variant;
 }
 
 inline const Geometry& Board::get_geometry() const
@@ -575,7 +570,7 @@ inline PointState Board::get_point_state(Point p) const
 inline unsigned int Board::get_points(Color c) const
 {
     unsigned int total_piece_points = m_board_const->get_total_piece_points();
-    if (m_game_variant == game_variant_junior)
+    if (m_variant == variant_junior)
         total_piece_points *= 2;
     return total_piece_points - get_points_left(c);
 }
@@ -621,6 +616,11 @@ inline const PieceTransforms& Board::get_transforms() const
     return m_board_const->get_transforms();
 }
 
+inline Variant Board::get_variant() const
+{
+    return m_variant;
+}
+
 inline bool Board::has_setup() const
 {
     for (ColorIterator i(m_nu_colors); i; ++i)
@@ -631,7 +631,7 @@ inline bool Board::has_setup() const
 
 inline void Board::init(const Setup* setup)
 {
-    init(m_game_variant, setup);
+    init(m_variant, setup);
 }
 
 inline bool Board::is_attach_point(Point p, Color c) const

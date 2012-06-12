@@ -18,9 +18,9 @@
 
 using namespace std;
 using libboardgame_util::log;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 using libpentobi_base::AdjIterator;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::DiagIterator;
@@ -122,20 +122,20 @@ void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
 
 void BoardPainter::drawLabels(QPainter& painter,
                               const Grid<PointState>& pointState,
-                              GameVariant gameVariant,
+                              Variant variant,
                               const Grid<QString>* labels)
 {
     if (labels == 0)
         return;
     const Geometry& geometry = pointState.get_geometry();
-    bool isTrigon = (gameVariant == game_variant_trigon
-                     || gameVariant == game_variant_trigon_2
-                     || gameVariant == game_variant_trigon_3);
+    bool isTrigon = (variant == variant_trigon
+                     || variant == variant_trigon_2
+                     || variant == variant_trigon_3);
     for (GeometryIterator i(geometry); i; ++i)
         if (! (*labels)[*i].isEmpty())
         {
             PointState s = pointState[*i];
-            painter.setPen(Util::getLabelColor(gameVariant, s));
+            painter.setPen(Util::getLabelColor(variant, s));
             qreal x = i->get_x() * m_fieldWidth;
             qreal y = (m_height - i->get_y() - 1) * m_fieldHeight;
             qreal width = m_fieldWidth;
@@ -165,18 +165,18 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
 }
 
 void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
-                                   unsigned int height, GameVariant gameVariant,
+                                   unsigned int height, Variant variant,
                                    const Geometry& geometry)
 {
     m_hasPainted = true;
     painter.setRenderHint(QPainter::Antialiasing, true);
-    m_gameVariant = gameVariant;
+    m_variant = variant;
     m_geometry = &geometry;
     m_width = static_cast<int>(m_geometry->get_width());
     m_height = static_cast<int>(m_geometry->get_height());
-    m_isTrigon = (gameVariant == game_variant_trigon
-                  || gameVariant == game_variant_trigon_2
-                  || gameVariant == game_variant_trigon_3);
+    m_isTrigon = (variant == variant_trigon
+                  || variant == variant_trigon_2
+                  || variant == variant_trigon_3);
     if (m_isTrigon)
     {
         qreal ratio = 1.732;
@@ -224,7 +224,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
     painter.translate(m_boardOffset);
     if (m_drawCoordLabels)
         drawCoordinates(painter, m_isTrigon);
-    m_startingPoints.init(gameVariant, *m_geometry);
+    m_startingPoints.init(variant, *m_geometry);
     for (GeometryIterator i(*m_geometry); i; ++i)
     {
         int x = i->get_x();
@@ -247,7 +247,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
             if (m_startingPoints.is_colored_starting_point(*i))
             {
                 Color color = m_startingPoints.get_starting_point_color(*i);
-                Util::paintEmptySquareStartingPoint(painter, gameVariant,
+                Util::paintEmptySquareStartingPoint(painter, variant,
                                                     color, fieldX, fieldY,
                                                     m_fieldWidth);
             }
@@ -276,18 +276,18 @@ void BoardPainter::paintPieces(QPainter& painter,
         {
             bool isUpside = (m_geometry->get_point_type(x, y) == 1);
             if (s.is_color())
-                Util::paintColorTriangle(painter, m_gameVariant, s.to_color(),
+                Util::paintColorTriangle(painter, m_variant, s.to_color(),
                                          isUpside, fieldX, fieldY,
                                          m_fieldWidth, m_fieldHeight);
         }
         else
         {
             if (s.is_color())
-                Util::paintColorSquare(painter, m_gameVariant, s.to_color(),
+                Util::paintColorSquare(painter, m_variant, s.to_color(),
                                        fieldX, fieldY, m_fieldWidth);
         }
     }
-    drawLabels(painter, pointState, m_gameVariant, labels);
+    drawLabels(painter, pointState, m_variant, labels);
     painter.restore();
 }
 
@@ -319,13 +319,13 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
         if (m_isTrigon)
         {
             bool isUpside = (m_geometry->get_point_type(p) == 1);
-            Util::paintColorTriangle(painter, m_gameVariant, c, isUpside,
+            Util::paintColorTriangle(painter, m_variant, c, isUpside,
                                      fieldX, fieldY, m_fieldWidth,
                                      m_fieldHeight, alpha, saturation, flat);
         }
         else
         {
-            Util::paintColorSquare(painter, m_gameVariant, c, fieldX, fieldY,
+            Util::paintColorSquare(painter, m_variant, c, fieldX, fieldY,
                                    m_fieldWidth, alpha, saturation, flat);
         }
     }

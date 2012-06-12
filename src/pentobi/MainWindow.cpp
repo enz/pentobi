@@ -46,13 +46,13 @@ using libboardgame_util::get_abort;
 using libboardgame_util::log;
 using libboardgame_util::set_abort;
 using libboardgame_util::ArrayList;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MoveInfo;
@@ -101,14 +101,14 @@ QString getDataDir()
     return dir;
 }
 
-path getRatedGamesDir(GameVariant variant)
+path getRatedGamesDir(Variant variant)
 {
     path dir = getDataDir().toLocal8Bit().constData();
     dir = dir / "rated_games" / to_string_id(variant);
     return dir;
 }
 
-path getRatedGameFile(unsigned int n, GameVariant variant)
+path getRatedGameFile(unsigned int n, Variant variant)
 {
     path dir = getRatedGamesDir(variant);
     string file = str(format("%1%.blksgf") % n);
@@ -243,10 +243,10 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_level = settings.value("level", 4).toInt();
     if (m_level < 1 || m_level > maxLevel)
         m_level = 4;
-    QString variantString = settings.value("game_variant", "").toString();
-    GameVariant variant;
-    if (! parse_game_variant_id(variantString.toStdString(), variant))
-        variant = game_variant_classic;
+    QString variantString = settings.value("variant", "").toString();
+    Variant variant;
+    if (! parse_variant_id(variantString.toStdString(), variant))
+        variant = variant_classic;
     m_game.reset(new Game(variant));
     createActions();
     setCentralWidget(createCentralWidget());
@@ -328,7 +328,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_toolBar->setVisible(showToolbar);
     bool showVariations = settings.value("show_variations", true).toBool();
     m_actionShowVariations->setChecked(showVariations);
-    initGameVariantActions();
+    initVariantActions();
     setWindowIcon(QIcon(":/pentobi/icons/pentobi.png"));
 
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
@@ -359,7 +359,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             deleteAutoSaveFile();
             if (settings.value("autosave_rated", false).toBool())
             {
-                GameVariant variant = getGameVariant();
+                Variant variant = getVariant();
                 unsigned int ratedGameColor =
                     settings.value("autosave_rated_color", 0).toUInt();
                 if (ratedGameColor < get_nu_colors(variant))
@@ -420,8 +420,8 @@ void MainWindow::analyzeGame()
     connect(m_analyzeGameWindow->analyzeGameWidget, SIGNAL(finished()),
             this, SLOT(analyzeGameFinished()));
     connect(m_analyzeGameWindow->analyzeGameWidget,
-            SIGNAL(gotoPosition(GameVariant,const vector<ColorMove>&)),
-            this, SLOT(gotoPosition(GameVariant,const vector<ColorMove>&)));
+            SIGNAL(gotoPosition(Variant,const vector<ColorMove>&)),
+            this, SLOT(gotoPosition(Variant,const vector<ColorMove>&)));
     size_t nuSimulations;
     switch (speed)
     {
@@ -678,11 +678,11 @@ void MainWindow::commentChanged()
 void MainWindow::computerColors()
 {
     bool wasCurrentPlayedByComputer = m_computerColors[m_currentColor];
-    GameVariant variant = getGameVariant();
+    Variant variant = getVariant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
-    if (variant != game_variant_classic && variant != game_variant_trigon
-        && variant != game_variant_trigon_3)
+    if (variant != variant_classic && variant != variant_trigon
+        && variant != variant_trigon_3)
     {
         bool computerNone = true;
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
@@ -713,7 +713,7 @@ bool MainWindow::computerPlaysAll() const
 
 void MainWindow::createActions()
 {
-    QActionGroup* groupGameVariant = new QActionGroup(this);
+    QActionGroup* groupVariant = new QActionGroup(this);
     QActionGroup* groupLevel = new QActionGroup(this);
     QActionGroup* groupMoveNumbers = new QActionGroup(this);
     QActionGroup* groupMoveAnnotation = new QActionGroup(this);
@@ -830,47 +830,47 @@ void MainWindow::createActions()
     m_actionGameInfo->setShortcut(QString("Ctrl+I"));
     connect(m_actionGameInfo, SIGNAL(triggered()), this, SLOT(gameInfo()));
 
-    m_actionGameVariantClassic = new QAction(tr("&Classic"), this);
-    m_actionGameVariantClassic->setActionGroup(groupGameVariant);
-    m_actionGameVariantClassic->setCheckable(true);
-    connect(m_actionGameVariantClassic, SIGNAL(triggered(bool)),
-            this, SLOT(gameVariantClassic(bool)));
+    m_actionVariantClassic = new QAction(tr("&Classic"), this);
+    m_actionVariantClassic->setActionGroup(groupVariant);
+    m_actionVariantClassic->setCheckable(true);
+    connect(m_actionVariantClassic, SIGNAL(triggered(bool)),
+            this, SLOT(variantClassic(bool)));
 
-    m_actionGameVariantClassic2 = new QAction(tr("Classic T&wo-Player"), this);
-    m_actionGameVariantClassic2->setActionGroup(groupGameVariant);
-    m_actionGameVariantClassic2->setCheckable(true);
-    connect(m_actionGameVariantClassic2, SIGNAL(triggered(bool)),
-            this, SLOT(gameVariantClassic2(bool)));
+    m_actionVariantClassic2 = new QAction(tr("Classic T&wo-Player"), this);
+    m_actionVariantClassic2->setActionGroup(groupVariant);
+    m_actionVariantClassic2->setCheckable(true);
+    connect(m_actionVariantClassic2, SIGNAL(triggered(bool)),
+            this, SLOT(variantClassic2(bool)));
 
-    m_actionGameVariantDuo = new QAction(tr("&Duo"), this);
-    m_actionGameVariantDuo->setActionGroup(groupGameVariant);
-    m_actionGameVariantDuo->setCheckable(true);
-    connect(m_actionGameVariantDuo, SIGNAL(triggered(bool)),
-            this, SLOT(gameVariantDuo(bool)));
+    m_actionVariantDuo = new QAction(tr("&Duo"), this);
+    m_actionVariantDuo->setActionGroup(groupVariant);
+    m_actionVariantDuo->setCheckable(true);
+    connect(m_actionVariantDuo, SIGNAL(triggered(bool)),
+            this, SLOT(variantDuo(bool)));
 
-    m_actionGameVariantJunior = new QAction(tr("J&unior"), this);
-    m_actionGameVariantJunior->setActionGroup(groupGameVariant);
-    m_actionGameVariantJunior->setCheckable(true);
-    connect(m_actionGameVariantJunior, SIGNAL(triggered(bool)),
-            this, SLOT(gameVariantJunior(bool)));
+    m_actionVariantJunior = new QAction(tr("J&unior"), this);
+    m_actionVariantJunior->setActionGroup(groupVariant);
+    m_actionVariantJunior->setCheckable(true);
+    connect(m_actionVariantJunior, SIGNAL(triggered(bool)),
+            this, SLOT(variantJunior(bool)));
 
-    m_actionGameVariantTrigon = new QAction(tr("&Trigon"), this);
-    m_actionGameVariantTrigon->setActionGroup(groupGameVariant);
-    m_actionGameVariantTrigon->setCheckable(true);
-    connect(m_actionGameVariantTrigon, SIGNAL(triggered(bool)),
-            this, SLOT(gameVariantTrigon(bool)));
+    m_actionVariantTrigon = new QAction(tr("&Trigon"), this);
+    m_actionVariantTrigon->setActionGroup(groupVariant);
+    m_actionVariantTrigon->setCheckable(true);
+    connect(m_actionVariantTrigon, SIGNAL(triggered(bool)),
+            this, SLOT(variantTrigon(bool)));
 
-    m_actionGameVariantTrigon2 = new QAction(tr("Trigon Tw&o-Player"), this);
-    m_actionGameVariantTrigon2->setActionGroup(groupGameVariant);
-    m_actionGameVariantTrigon2->setCheckable(true);
-    connect(m_actionGameVariantTrigon2, SIGNAL(triggered(bool)),
-            this, SLOT(gameVariantTrigon2(bool)));
+    m_actionVariantTrigon2 = new QAction(tr("Trigon Tw&o-Player"), this);
+    m_actionVariantTrigon2->setActionGroup(groupVariant);
+    m_actionVariantTrigon2->setCheckable(true);
+    connect(m_actionVariantTrigon2, SIGNAL(triggered(bool)),
+            this, SLOT(variantTrigon2(bool)));
 
-    m_actionGameVariantTrigon3 = new QAction(tr("Trigon Thr&ee-Player"), this);
-    m_actionGameVariantTrigon3->setActionGroup(groupGameVariant);
-    m_actionGameVariantTrigon3->setCheckable(true);
-    connect(m_actionGameVariantTrigon3, SIGNAL(triggered(bool)),
-            this, SLOT(gameVariantTrigon3(bool)));
+    m_actionVariantTrigon3 = new QAction(tr("Trigon Thr&ee-Player"), this);
+    m_actionVariantTrigon3->setActionGroup(groupVariant);
+    m_actionVariantTrigon3->setCheckable(true);
+    connect(m_actionVariantTrigon3, SIGNAL(triggered(bool)),
+            this, SLOT(variantTrigon3(bool)));
 
     m_actionGoodMove = new QAction(tr("&Good"), this);
     m_actionGoodMove->setActionGroup(groupMoveAnnotation);
@@ -1279,14 +1279,14 @@ void MainWindow::createMenu()
     menuGame->addAction(m_actionNewGame);
     menuGame->addAction(m_actionNewRatedGame);
     menuGame->addSeparator();
-    QMenu* menuGameVariant = menuGame->addMenu(tr("&Game Variant"));
-    menuGameVariant->addAction(m_actionGameVariantClassic);
-    menuGameVariant->addAction(m_actionGameVariantClassic2);
-    menuGameVariant->addAction(m_actionGameVariantDuo);
-    menuGameVariant->addAction(m_actionGameVariantTrigon);
-    menuGameVariant->addAction(m_actionGameVariantTrigon2);
-    menuGameVariant->addAction(m_actionGameVariantTrigon3);
-    menuGameVariant->addAction(m_actionGameVariantJunior);
+    QMenu* menuVariant = menuGame->addMenu(tr("&Game Variant"));
+    menuVariant->addAction(m_actionVariantClassic);
+    menuVariant->addAction(m_actionVariantClassic2);
+    menuVariant->addAction(m_actionVariantDuo);
+    menuVariant->addAction(m_actionVariantTrigon);
+    menuVariant->addAction(m_actionVariantTrigon2);
+    menuVariant->addAction(m_actionVariantTrigon3);
+    menuVariant->addAction(m_actionVariantJunior);
     menuGame->addAction(m_actionComputerColors);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
@@ -1577,7 +1577,7 @@ void MainWindow::exportImage()
     if (coordinateLabels)
         painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
     const Board& bd = getBoard();
-    boardPainter.paintEmptyBoard(painter, size, size, bd.get_game_variant(),
+    boardPainter.paintEmptyBoard(painter, size, size, bd.get_variant(),
                                  bd.get_geometry());
     boardPainter.paintPieces(painter, bd.get_grid(), &m_guiBoard->getLabels());
     painter.end();
@@ -1729,11 +1729,10 @@ void MainWindow::gameInfo()
 
 void MainWindow::gameOver()
 {
-    GameVariant variant = getGameVariant();
+    Variant variant = getVariant();
     const Board& bd = getBoard();
     QString info;
-    if (variant == game_variant_duo
-        || variant == game_variant_junior)
+    if (variant == variant_duo || variant == variant_junior)
     {
         double game_result;
         int score = bd.get_score(Color(0), game_result);
@@ -1744,8 +1743,7 @@ void MainWindow::gameOver()
         else
             info = tr("The game ends in a tie.");
     }
-    else if (variant == game_variant_classic_2
-             || variant == game_variant_trigon_2)
+    else if (variant == variant_classic_2 || variant == variant_trigon_2)
     {
         double game_result;
         int score = bd.get_score(Color(0), game_result);
@@ -1756,7 +1754,7 @@ void MainWindow::gameOver()
         else
             info = tr("The game ends in a tie.");
     }
-    else if (variant == game_variant_trigon_3)
+    else if (variant == variant_trigon_3)
     {
         unsigned int blue = bd.get_points_with_bonus(Color(0));
         unsigned int yellow = bd.get_points_with_bonus(Color(1));
@@ -1779,8 +1777,8 @@ void MainWindow::gameOver()
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == game_variant_classic
-                            || variant == game_variant_trigon);
+        LIBBOARDGAME_ASSERT(variant == variant_classic
+                            || variant == variant_trigon);
         unsigned int blue = bd.get_points_with_bonus(Color(0));
         unsigned int yellow = bd.get_points_with_bonus(Color(1));
         unsigned int red = bd.get_points_with_bonus(Color(2));
@@ -1869,46 +1867,46 @@ void MainWindow::gameOver()
     showInfo(info, detailText);
 }
 
-void MainWindow::gameVariantClassic(bool checked)
+void MainWindow::variantClassic(bool checked)
 {
     if (checked)
-        setGameVariant(game_variant_classic);
+        setVariant(variant_classic);
 }
 
-void MainWindow::gameVariantClassic2(bool checked)
+void MainWindow::variantClassic2(bool checked)
 {
     if (checked)
-        setGameVariant(game_variant_classic_2);
+        setVariant(variant_classic_2);
 }
 
-void MainWindow::gameVariantDuo(bool checked)
+void MainWindow::variantDuo(bool checked)
 {
     if (checked)
-        setGameVariant(game_variant_duo);
+        setVariant(variant_duo);
 }
 
-void MainWindow::gameVariantJunior(bool checked)
+void MainWindow::variantJunior(bool checked)
 {
     if (checked)
-        setGameVariant(game_variant_junior);
+        setVariant(variant_junior);
 }
 
-void MainWindow::gameVariantTrigon(bool checked)
+void MainWindow::variantTrigon(bool checked)
 {
     if (checked)
-        setGameVariant(game_variant_trigon);
+        setVariant(variant_trigon);
 }
 
-void MainWindow::gameVariantTrigon2(bool checked)
+void MainWindow::variantTrigon2(bool checked)
 {
     if (checked)
-        setGameVariant(game_variant_trigon_2);
+        setVariant(variant_trigon_2);
 }
 
-void MainWindow::gameVariantTrigon3(bool checked)
+void MainWindow::variantTrigon3(bool checked)
 {
     if (checked)
-        setGameVariant(game_variant_trigon_3);
+        setVariant(variant_trigon_3);
 }
 
 void MainWindow::genMove(bool playSingleMove)
@@ -2069,10 +2067,10 @@ void MainWindow::gotoNode(const Node& node)
     updateWindow(true);
 }
 
-void MainWindow::gotoPosition(GameVariant gameVariant,
+void MainWindow::gotoPosition(Variant variant,
                               const vector<ColorMove>& moves)
 {
-    if (getGameVariant() != gameVariant)
+    if (getVariant() != variant)
         return;
     const Tree& tree = m_game->get_tree();
     const Node* node = &tree.get_root();
@@ -2130,12 +2128,12 @@ void MainWindow::initGame()
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
     {
-        GameVariant game_variant = getGameVariant();
-        if (game_variant == game_variant_duo
-            || game_variant == game_variant_junior)
+        Variant variant = getVariant();
+        if (variant == variant_duo
+            || variant == variant_junior)
             m_computerColors[Color(1)] = true;
-        else if (game_variant == game_variant_classic_2
-                 || game_variant == game_variant_trigon_2)
+        else if (variant == variant_classic_2
+                 || variant == variant_trigon_2)
         {
             m_computerColors[Color(1)] = true;
             m_computerColors[Color(3)] = true;
@@ -2148,30 +2146,30 @@ void MainWindow::initGame()
     setFile(QString());
 }
 
-void MainWindow::initGameVariantActions()
+void MainWindow::initVariantActions()
 {
-    switch (getGameVariant())
+    switch (getVariant())
     {
-    case game_variant_classic:
-        m_actionGameVariantClassic->setChecked(true);
+    case variant_classic:
+        m_actionVariantClassic->setChecked(true);
         break;
-    case game_variant_classic_2:
-        m_actionGameVariantClassic2->setChecked(true);
+    case variant_classic_2:
+        m_actionVariantClassic2->setChecked(true);
         break;
-    case game_variant_duo:
-        m_actionGameVariantDuo->setChecked(true);
+    case variant_duo:
+        m_actionVariantDuo->setChecked(true);
         break;
-    case game_variant_junior:
-        m_actionGameVariantJunior->setChecked(true);
+    case variant_junior:
+        m_actionVariantJunior->setChecked(true);
         break;
-    case game_variant_trigon:
-        m_actionGameVariantTrigon->setChecked(true);
+    case variant_trigon:
+        m_actionVariantTrigon->setChecked(true);
         break;
-    case game_variant_trigon_2:
-        m_actionGameVariantTrigon2->setChecked(true);
+    case variant_trigon_2:
+        m_actionVariantTrigon2->setChecked(true);
         break;
-    case game_variant_trigon_3:
-        m_actionGameVariantTrigon3->setChecked(true);
+    case variant_trigon_3:
+        m_actionVariantTrigon3->setChecked(true);
         break;
     }
 }
@@ -2343,7 +2341,7 @@ void MainWindow::newRatedGame()
     if (! checkSave())
         return;
     cancelThread();
-    GameVariant variant = getGameVariant();
+    Variant variant = getVariant();
     Rating rating;
     unsigned int nuGames;
     Util::getRating(variant, rating, nuGames);
@@ -2462,7 +2460,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_analyzeGameWindow = 0;
     }
     setRated(false);
-    GameVariant oldVariant = getGameVariant();
+    Variant oldVariant = getVariant();
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
@@ -2482,13 +2480,13 @@ void MainWindow::open(const QString& file, bool isTemporary)
     m_computerColors.fill(false);
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
-    initGameVariantActions();
+    initVariantActions();
     updateWindow(true);
-    if (getGameVariant() != oldVariant)
+    if (getVariant() != oldVariant)
         updateRatingDialog();
 }
 
-void MainWindow::openRatedGame(GameVariant variant, unsigned int n)
+void MainWindow::openRatedGame(Variant variant, unsigned int n)
 {
      if (! checkSave())
          return;
@@ -2534,9 +2532,9 @@ void MainWindow::play()
 {
     cancelThread();
     leaveSetupMode();
-    GameVariant variant = getGameVariant();
-    if (variant != game_variant_classic && variant != game_variant_trigon
-         && variant != game_variant_trigon_3)
+    Variant variant = getVariant();
+    if (variant != variant_classic && variant != variant_trigon
+         && variant != variant_trigon_3)
     {
         QSettings settings;
         settings.setValue("computer_color_none", false);
@@ -2545,8 +2543,8 @@ void MainWindow::play()
     {
         m_computerColors.fill(false);
         m_computerColors[m_currentColor] = true;
-        if (variant == game_variant_classic_2
-            || variant == game_variant_trigon_2)
+        if (variant == variant_classic_2
+            || variant == variant_trigon_2)
         {
             if (m_currentColor == Color(0) || m_currentColor == Color(2))
                 m_computerColors[Color(0)] = m_computerColors[Color(2)] = true;
@@ -2927,18 +2925,18 @@ void MainWindow::selectPieceZ()
     selectNamedPiece("Z5", "Z4");
 }
 
-void MainWindow::setGameVariant(GameVariant variant)
+void MainWindow::setVariant(Variant variant)
 {
-    if (getGameVariant() == variant)
+    if (getVariant() == variant)
         return;
     if (! checkSave())
     {
-        initGameVariantActions();
+        initVariantActions();
         return;
     }
     cancelThread();
     QSettings settings;
-    settings.setValue("game_variant", to_string_id(variant));
+    settings.setValue("variant", to_string_id(variant));
     clearSelectedPiece();
     m_game->init(variant);
     initPieceSelectors();
@@ -3090,10 +3088,10 @@ void MainWindow::setMoveNumberText()
 void MainWindow::setPlayToolTip()
 {
     QString s;
-    GameVariant variant = getGameVariant();
+    Variant variant = getVariant();
     Color c = m_currentColor;
     bool isComputerColor = m_computerColors[m_currentColor];
-    if (variant == game_variant_classic_2 || variant == game_variant_trigon_2)
+    if (variant == variant_classic_2 || variant == variant_trigon_2)
     {
         if (c == Color(0) || c == Color(2))
         {
@@ -3113,7 +3111,7 @@ void MainWindow::setPlayToolTip()
     else
     {
         bool isTwoColorVariant =
-            (variant == game_variant_duo || variant == game_variant_junior);
+            (variant == variant_duo || variant == variant_junior);
         if (c == Color(0))
         {
             if (isComputerColor)
@@ -3260,9 +3258,9 @@ void MainWindow::showRating()
     {
         m_ratingDialog = new RatingDialog(this);
         connect(m_ratingDialog,
-                SIGNAL(openRatedGame(GameVariant, unsigned int)),
+                SIGNAL(openRatedGame(Variant, unsigned int)),
                 this,
-                SLOT(openRatedGame(GameVariant, unsigned int)));
+                SLOT(openRatedGame(Variant, unsigned int)));
     }
     updateRatingDialog();
     m_ratingDialog->show();
@@ -3417,7 +3415,7 @@ void MainWindow::updateRatingDialog()
 {
     if (m_ratingDialog == 0)
         return;
-    GameVariant variant = getGameVariant();
+    Variant variant = getVariant();
     RatingHistory history(variant, getRatedGamesDir(variant));
     m_ratingDialog->updateContent(variant, history);
 }

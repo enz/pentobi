@@ -12,7 +12,7 @@
 using namespace std;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_base::Node;
 using libpentobi_mcts::AnalyzeGame;
 using libpentobi_mcts::Search;
@@ -55,7 +55,7 @@ signals:
     /** Tells that the analysis has finished. */
     void finished();
 
-    void gotoPosition(GameVariant gameVariant, const vector<ColorMove>& moves);
+    void gotoPosition(Variant variant, const vector<ColorMove>& moves);
 
 protected:
     void mousePressEvent(QMouseEvent* event);

@@ -27,12 +27,12 @@ using libpentobi_base::Tree;
 void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     function<void(unsigned int,unsigned int)> progress_callback)
 {
-    m_game_variant = game.get_game_variant();
+    m_variant = game.get_variant();
     m_moves.clear();
     m_has_value.clear();
     m_values.clear();
     const Tree& tree = game.get_tree();
-    unique_ptr<Board> bd(new Board(m_game_variant));
+    unique_ptr<Board> bd(new Board(m_variant));
     BoardUpdater updater(tree, *bd);
     const Node& root = game.get_root();
     const Node* node = &root;

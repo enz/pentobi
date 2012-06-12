@@ -560,11 +560,11 @@ const Geometry& create_geometry(BoardType board_type)
 
 //-----------------------------------------------------------------------------
 
-BoardConst::BoardConst(BoardType board_type, GameVariant game_variant)
+BoardConst::BoardConst(BoardType board_type, Variant variant)
     : m_geometry(create_geometry(board_type))
 {
     // TODO: Better distinction between board type and set of pieces.
-    // Currently the game_variant parameter is used only to distinct between
+    // Currently the variant parameter is used only to distinct between
     // the set of pieces in Duo and Junior, otherwise the parameter is ignored
     // because the set of pieces is derived from the board type.
     m_board_type = board_type;
@@ -586,7 +586,7 @@ BoardConst::BoardConst(BoardType board_type, GameVariant game_variant)
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_classic);
     }
-    else if (game_variant == game_variant_junior)
+    else if (variant == variant_junior)
     {
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_junior(m_geometry, *m_transforms);
@@ -594,7 +594,7 @@ BoardConst::BoardConst(BoardType board_type, GameVariant game_variant)
     }
     else
     {
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_duo);
+        LIBBOARDGAME_ASSERT(variant == variant_duo);
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_duo);
@@ -609,19 +609,19 @@ BoardConst::BoardConst(BoardType board_type, GameVariant game_variant)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon);
     else if (board_type == board_type_trigon_3)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon_3);
-    else if (game_variant == game_variant_duo)
+    else if (variant == variant_duo)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_duo);
-    else if (game_variant == game_variant_junior)
+    else if (variant == variant_junior)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_junior);
     m_total_piece_points = 0;
     BOOST_FOREACH(const PieceInfo& piece, m_pieces)
         m_total_piece_points += piece.get_size();
-    if (board_type == board_type_classic || game_variant == game_variant_duo)
+    if (board_type == board_type_classic || variant == variant_duo)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 89);
     }
-    else if (game_variant == game_variant_junior)
+    else if (variant == variant_junior)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 12);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 44);
@@ -764,49 +764,47 @@ Move BoardConst::from_string(const string& s) const
     return mv;
 }
 
-const BoardConst& BoardConst::get(GameVariant game_variant)
+const BoardConst& BoardConst::get(Variant variant)
 {
     static unique_ptr<BoardConst> board_const_classic;
     static unique_ptr<BoardConst> board_const_duo;
     static unique_ptr<BoardConst> board_const_junior;
     static unique_ptr<BoardConst> board_const_trigon;
     static unique_ptr<BoardConst> board_const_trigon_3;
-    if (game_variant == game_variant_classic
-        || game_variant == game_variant_classic_2)
+    if (variant == variant_classic || variant == variant_classic_2)
     {
         if (board_const_classic.get() == 0)
             board_const_classic.reset(new BoardConst(board_type_classic,
-                                                     game_variant_classic));
+                                                     variant_classic));
         return *board_const_classic;
     }
-    else if (game_variant == game_variant_duo)
+    else if (variant == variant_duo)
     {
         if (board_const_duo.get() == 0)
             board_const_duo.reset(new BoardConst(board_type_duo,
-                                                 game_variant_duo));
+                                                 variant_duo));
         return *board_const_duo;
     }
-    else if (game_variant == game_variant_junior)
+    else if (variant == variant_junior)
     {
         if (board_const_junior.get() == 0)
             board_const_junior.reset(new BoardConst(board_type_duo,
-                                                    game_variant_junior));
+                                                    variant_junior));
         return *board_const_junior;
     }
-    else if (game_variant == game_variant_trigon
-        || game_variant == game_variant_trigon_2)
+    else if (variant == variant_trigon || variant == variant_trigon_2)
     {
         if (board_const_trigon.get() == 0)
             board_const_trigon.reset(new BoardConst(board_type_trigon,
-                                                    game_variant_trigon));
+                                                    variant_trigon));
         return *board_const_trigon;
     }
     else
     {
-        LIBBOARDGAME_ASSERT(game_variant == game_variant_trigon_3);
+        LIBBOARDGAME_ASSERT(variant == variant_trigon_3);
         if (board_const_trigon_3.get() == 0)
             board_const_trigon_3.reset(new BoardConst(board_type_trigon_3,
-                                                      game_variant_trigon_3));
+                                                      variant_trigon_3));
         return *board_const_trigon_3;
     }
 }

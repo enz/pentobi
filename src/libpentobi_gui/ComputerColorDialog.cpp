@@ -10,23 +10,23 @@
 
 #include "Util.h"
 
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 using libpentobi_base::ColorIterator;
 
 //-----------------------------------------------------------------------------
 
 ComputerColorDialog::ComputerColorDialog(QWidget* parent,
-                                         GameVariant gameVariant,
+                                         Variant variant,
                                          ColorMap<bool>& computerColor)
     : QDialog(parent),
       m_computerColor(computerColor),
-      m_gameVariant(gameVariant)
+      m_variant(variant)
 {
     setWindowTitle(tr("Computer Colors"));
     // Disable '?' button in title bar on Windows, we don't have
@@ -35,21 +35,19 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     layout->addWidget(new QLabel(tr("Colors played by the computer:")));
-    if (m_gameVariant == game_variant_duo
-        || m_gameVariant == game_variant_junior)
+    if (m_variant == variant_duo || m_variant == variant_junior)
     {
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
     }
-    else if (m_gameVariant == game_variant_classic
-             || m_gameVariant == game_variant_trigon)
+    else if (m_variant == variant_classic || m_variant == variant_trigon)
     {
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
         createCheckBox(layout, Color(2));
         createCheckBox(layout, Color(3));
     }
-    else if (m_gameVariant == game_variant_trigon_3)
+    else if (m_variant == variant_trigon_3)
     {
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
@@ -57,8 +55,8 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2
-                            || m_gameVariant == game_variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
+                            || m_variant == variant_trigon_2);
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
     }
@@ -72,19 +70,17 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 
 void ComputerColorDialog::accept()
 {
-    if (m_gameVariant == game_variant_duo
-        || m_gameVariant == game_variant_junior)
+    if (m_variant == variant_duo || m_variant == variant_junior)
     {
         for (ColorIterator i(2); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
     }
-    else if (m_gameVariant == game_variant_classic
-             || m_gameVariant == game_variant_trigon)
+    else if (m_variant == variant_classic || m_variant == variant_trigon)
     {
         for (ColorIterator i(4); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
     }
-    else if (m_gameVariant == game_variant_trigon_3)
+    else if (m_variant == variant_trigon_3)
     {
         m_computerColor[Color(0)] = m_checkBox[0]->isChecked();
         m_computerColor[Color(2)] = m_checkBox[0]->isChecked();
@@ -92,8 +88,8 @@ void ComputerColorDialog::accept()
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2
-                            || m_gameVariant == game_variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
+                            || m_variant == variant_trigon_2);
         m_computerColor[Color(0)] = m_checkBox[0]->isChecked();
         m_computerColor[Color(2)] = m_checkBox[0]->isChecked();
         m_computerColor[Color(1)] = m_checkBox[1]->isChecked();
@@ -105,7 +101,7 @@ void ComputerColorDialog::accept()
 void ComputerColorDialog::createCheckBox(QLayout* layout, Color c)
 {
     QCheckBox* checkBox =
-        new QCheckBox(Util::getPlayerString(m_gameVariant, c));
+        new QCheckBox(Util::getPlayerString(m_variant, c));
     checkBox->setChecked(m_computerColor[c]);
     layout->addWidget(checkBox);
     m_checkBox[c.to_int()] = checkBox;

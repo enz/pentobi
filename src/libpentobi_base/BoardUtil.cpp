@@ -23,7 +23,7 @@ using sgf_util::get_setup_id;
 
 void dump(const Board& bd, ostream& out)
 {
-    GameVariant variant = bd.get_game_variant();
+    Variant variant = bd.get_variant();
     Writer writer(out, true, true);
     writer.begin_tree();
     writer.begin_node();
@@ -56,7 +56,7 @@ void get_current_position_as_setup(const Board& bd, Setup& setup)
     setup.to_play = bd.get_to_play();
 }
 
-void write_setup(Writer& writer, GameVariant variant, const Setup& setup)
+void write_setup(Writer& writer, Variant variant, const Setup& setup)
 {
     const BoardConst& board_const = BoardConst::get(variant);
     for (ColorIterator i(get_nu_colors(variant)); i; ++i)

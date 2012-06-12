@@ -31,7 +31,7 @@ using libboardgame_util::StatisticsBase;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMove;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
@@ -90,11 +90,11 @@ class State
 {
 public:
     /** Constructor.
-        @param initial_game_variant Game variant to initialize the internal
+        @param initial_variant Game variant to initialize the internal
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
         @param shared_const (@ref libboardgame_doc_storesref) */
-    State(GameVariant initial_game_variant, const SharedConst& shared_const);
+    State(Variant initial_variant, const SharedConst& shared_const);
 
     State(const State& state);
 

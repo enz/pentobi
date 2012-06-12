@@ -25,7 +25,7 @@ class Engine
     : public libboardgame_base::Engine
 {
 public:
-    Engine(GameVariant game_variant);
+    Engine(Variant variant);
 
     ~Engine() throw();
 

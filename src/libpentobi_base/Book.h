@@ -33,7 +33,7 @@ using libboardgame_util::RandomGenerator;
 class Book
 {
 public:
-    Book(GameVariant game_variant);
+    Book(Variant variant);
 
     /** Select a child in a human-generated book. */
     const Node* select_annotated_child(RandomGenerator& random,

@@ -98,8 +98,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
             qreal dotSize = 0.04 * height();
             if (dotSize < 10)
                 dotSize = 0.07 * height();
-            QColor color =
-                Util::getPaintColor(m_bd.get_game_variant(), m_color);
+            QColor color = Util::getPaintColor(m_bd.get_variant(), m_color);
             painter.setPen(Qt::NoPen);
             painter.setBrush(color);
             painter.drawEllipse(QPointF(0.5 * width(), 0.5 * height()),
@@ -124,7 +123,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     painter.save();
     painter.translate(0.5 * (displayWidth - width * fieldWidth),
                       0.5 * (displayHeight - height * fieldHeight));
-    GameVariant game_variant = m_bd.get_game_variant();
+    Variant variant = m_bd.get_variant();
     BOOST_FOREACH(CoordPoint p, points)
     {
         qreal x = p.x * fieldWidth;
@@ -134,12 +133,11 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
             bool isUpside = (geometry.get_point_type(p) != 0);
             if (invertPointType)
                 isUpside = ! isUpside;
-            Util::paintColorTriangle(painter, game_variant, m_color, isUpside,
+            Util::paintColorTriangle(painter, variant, m_color, isUpside,
                                      x, y, fieldWidth, fieldHeight);
         }
         else
-            Util::paintColorSquare(painter, game_variant, m_color, x, y,
-                                   fieldWidth);
+            Util::paintColorSquare(painter, variant, m_color, x, y, fieldWidth);
     }
     painter.restore();
     painter.restore();

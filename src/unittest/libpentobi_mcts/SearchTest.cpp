@@ -60,11 +60,11 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     unique_ptr<libboardgame_sgf::Node> root =
         reader.get_tree_transfer_ownership();
     libpentobi_base::Tree tree(root);
-    unique_ptr<Board> bd(new Board(tree.get_game_variant()));
+    unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater(tree, *bd);
     updater.update(get_last_node(tree.get_root()));
     size_t memory = 10000;
-    unique_ptr<Search> search(new Search(bd->get_game_variant(), memory));
+    unique_ptr<Search> search(new Search(bd->get_variant(), memory));
     ValueType max_count = 1;
     size_t min_simulations = 1;
     double max_time = 0;

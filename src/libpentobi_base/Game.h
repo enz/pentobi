@@ -16,11 +16,11 @@ namespace libpentobi_base {
 class Game
 {
 public:
-    Game(GameVariant game_variant);
+    Game(Variant variant);
 
     Game(unique_ptr<Node>& root);
 
-    void init(GameVariant game_variant);
+    void init(Variant variant);
 
     void init();
 
@@ -35,7 +35,7 @@ public:
 
     const Board& get_board() const;
 
-    GameVariant get_game_variant() const;
+    Variant get_variant() const;
 
     const Node& get_current() const;
 
@@ -205,11 +205,6 @@ inline const Node& Game::get_current() const
     return *m_current;
 }
 
-inline GameVariant Game::get_game_variant() const
-{
-    return m_bd->get_game_variant();
-}
-
 inline double Game::get_good_move() const
 {
     return m_tree.get_good_move(*m_current);
@@ -255,9 +250,14 @@ inline bool Game::has_setup() const
     return m_tree.has_setup(*m_current);
 }
 
+inline Variant Game::get_variant() const
+{
+    return m_bd->get_variant();
+}
+
 inline void Game::init()
 {
-    init(m_bd->get_game_variant());
+    init(m_bd->get_variant());
 }
 
 inline bool Game::is_doubtful_move() const

@@ -103,7 +103,7 @@ private:
         include the selected piece (the selected piece is always painted). */
     bool m_dirty;
 
-    GameVariant m_gameVariant;
+    Variant m_variant;
 
     Board::PointStateGrid m_pointState;
 

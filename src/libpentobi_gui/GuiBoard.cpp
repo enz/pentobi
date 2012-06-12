@@ -91,9 +91,9 @@ void GuiBoard::clearSelectedPiece()
 void GuiBoard::copyFromBoard(const Board& bd)
 {
     const Geometry& geometry = bd.get_geometry();
-    if (! m_isInitialized || m_gameVariant != bd.get_game_variant())
+    if (! m_isInitialized || m_variant != bd.get_variant())
     {
-        m_gameVariant = bd.get_game_variant();
+        m_variant = bd.get_variant();
         m_isInitialized = true;
         m_pointState = bd.get_grid();
         m_labels.init(geometry, "");
@@ -328,7 +328,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
         m_emptyBoardPixmap->fill(Qt::transparent);
         QPainter painter(m_emptyBoardPixmap);
         m_boardPainter.paintEmptyBoard(painter, width(), height(),
-                                       m_gameVariant,
+                                       m_variant,
                                        m_pointState.get_geometry());
         m_emptyBoardDirty = false;
     }

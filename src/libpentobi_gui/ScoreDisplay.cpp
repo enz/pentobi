@@ -13,13 +13,13 @@
 
 using namespace std;
 using libboardgame_util::log;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
       m_points(0),
       m_bonus(0)
 {
-    m_gameVariant = game_variant_classic;
+    m_variant = variant_classic;
     m_font.setStyleStrategy(QFont::PreferOutline);
     m_fontUnderlined = m_font;
     m_fontUnderlined.setUnderline(true);
@@ -40,7 +40,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
 
 void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 {
-    QColor color = Util::getPaintColor(m_gameVariant, c);
+    QColor color = Util::getPaintColor(m_variant, c);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
@@ -59,13 +59,13 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
 {
-    QColor color = Util::getPaintColor(m_gameVariant, c1);
+    QColor color = Util::getPaintColor(m_variant, c1);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawEllipse(x, y, m_colorDotSize, m_colorDotSize);
-    color = Util::getPaintColor(m_gameVariant, c2);
+    color = Util::getPaintColor(m_variant, c2);
     painter.setBrush(color);
     painter.drawEllipse(x + m_colorDotSize, y, m_colorDotSize, m_colorDotSize);
     QString text = getScoreText2(c1, c2);
@@ -144,8 +144,7 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
     m_colorDotSpace = static_cast<int>(0.3 * m_fontSize);
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
-    if (m_gameVariant == game_variant_duo
-        || m_gameVariant == game_variant_junior)
+    if (m_variant == variant_duo || m_variant == variant_junior)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthGreen = getScoreTextWidth(Color(1));
@@ -156,8 +155,7 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
         x += m_colorDotWidth + textWidthBlue + pad;
         drawScore(painter, Color(1), static_cast<int>(x));
     }
-    else if (m_gameVariant == game_variant_classic
-             || m_gameVariant == game_variant_trigon)
+    else if (m_variant == variant_classic || m_variant == variant_trigon)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthYellow = getScoreTextWidth(Color(1));
@@ -176,7 +174,7 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
         x += m_colorDotWidth + textWidthRed + pad;
         drawScore(painter, Color(3), static_cast<int>(x));
     }
-    else if (m_gameVariant == game_variant_trigon_3)
+    else if (m_variant == variant_trigon_3)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthYellow = getScoreTextWidth(Color(1));
@@ -194,8 +192,8 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_gameVariant == game_variant_classic_2
-                            || m_gameVariant == game_variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
+                            || m_variant == variant_trigon_2);
         int textWidthBlueRed = getScoreTextWidth2(Color(0), Color(2));
         int textWidthYellowGreen = getScoreTextWidth2(Color(1), Color(3));
         int textWidthBlue = getScoreTextWidth(Color(0));
@@ -231,9 +229,9 @@ void ScoreDisplay::resizeEvent(QResizeEvent*)
 
 void ScoreDisplay::updateScore(const Board& bd)
 {
-    GameVariant variant = bd.get_game_variant();
-    bool hasChanged = (m_gameVariant != variant);
-    m_gameVariant = variant;
+    Variant variant = bd.get_variant();
+    bool hasChanged = (m_variant != variant);
+    m_variant = variant;
     for (unsigned int i = 0; i < bd.get_nu_colors(); ++i)
     {
         Color c(i);

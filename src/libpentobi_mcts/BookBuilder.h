@@ -7,7 +7,7 @@
 
 #include <boost/filesystem.hpp>
 #include "libboardgame_base/PointTransform.h"
-#include "libpentobi_base/GameVariant.h"
+#include "libpentobi_base/Variant.h"
 #include "libpentobi_base/BoardUpdater.h"
 #include "libpentobi_mcts/Player.h"
 
@@ -17,7 +17,7 @@ using boost::filesystem::path;
 using libboardgame_sgf::Node;
 using libpentobi_base::Board;
 using libpentobi_base::BoardUpdater;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libboardgame_base::PointTransform;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Player;
@@ -46,7 +46,7 @@ using libpentobi_mcts::Player;
 class BookBuilder
 {
 public:
-    BookBuilder(GameVariant game_variant);
+    BookBuilder(Variant variant);
 
     void build(const path& file);
 
@@ -59,7 +59,7 @@ public:
     void prune(const path& file, double prune_book_diff);
 
 private:
-    GameVariant m_game_variant;
+    Variant m_variant;
 
     Tree m_tree;
 

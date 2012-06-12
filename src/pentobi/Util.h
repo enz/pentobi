@@ -8,11 +8,11 @@
 #include <QtGui>
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Color.h"
-#include "libpentobi_base/GameVariant.h"
+#include "libpentobi_base/Variant.h"
 
 using libboardgame_base::Rating;
 using libpentobi_base::Color;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -26,14 +26,14 @@ namespace Util
     changed (e.g. after saving). */
 void removeThumbnail(const QString& file);
 
-void getRating(GameVariant variant, Rating& rating, unsigned int& nuGames);
+void getRating(Variant variant, Rating& rating, unsigned int& nuGames);
 
-void initRating(GameVariant variant, Rating rating);
+void initRating(Variant variant, Rating rating);
 
-void updateRating(GameVariant variant, float score, Rating opponentRating,
+void updateRating(Variant variant, float score, Rating opponentRating,
                   unsigned int nuOpponents);
 
-void getNextRatedGameSettings(GameVariant variant, int maxLevel, int& level,
+void getNextRatedGameSettings(Variant variant, int maxLevel, int& level,
                               Color& userColor);
 
 }

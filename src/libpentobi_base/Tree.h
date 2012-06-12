@@ -8,7 +8,7 @@
 #include <boost/format.hpp>
 #include "ColorMove.h"
 #include "BoardConst.h"
-#include "GameVariant.h"
+#include "Variant.h"
 #include "Setup.h"
 #include "SgfUtil.h"
 #include "libboardgame_sgf/Tree.h"
@@ -28,13 +28,13 @@ class Tree
     : public libboardgame_sgf::Tree
 {
 public:
-    Tree(GameVariant game_variant);
+    Tree(Variant variant);
 
     Tree(unique_ptr<Node>& root);
 
     void init(unique_ptr<Node>& root);
 
-    void init_game_variant(GameVariant game_variant);
+    void init_variant(Variant variant);
 
     void set_move(const Node& node, ColorMove mv);
 
@@ -54,13 +54,13 @@ public:
         a libpentobi_base::Tree because of the costly BoardConst construction
         (e.g. the Pentobi thumbnailer).
         @param node
-        @param game_variant
+        @param variant
         @param[out] c The move color (only defined if return value is true)
         @param[out] points The move points (only defined if return value is
         true)
         @return true if the node has a move property and the move is not a pass
         move. */
-    static bool get_move(const Node& node, GameVariant game_variant, Color& c,
+    static bool get_move(const Node& node, Variant variant, Color& c,
                          MovePoints& points);
 
     /** Same as ! get_move.is_null() */
@@ -78,7 +78,7 @@ public:
 
     const Node* get_node_before_move_number(unsigned int move_number) const;
 
-    GameVariant get_game_variant() const;
+    Variant get_variant() const;
 
     string get_player_name(Color c) const;
 
@@ -117,7 +117,7 @@ public:
     void remove_player(const Node& node);
 
 private:
-    GameVariant m_game_variant;
+    Variant m_variant;
 
     const BoardConst* m_board_const;
 
@@ -130,7 +130,7 @@ private:
 
     void set_setup(const Node& node, const Setup& setup);
 
-    void init_board_const(GameVariant game_variant);
+    void init_board_const(Variant variant);
 
     void set_game_property();
 
@@ -145,17 +145,17 @@ inline const BoardConst& Tree::get_board_const() const
 
 inline const char* Tree::get_color(Color c) const
 {
-    return sgf_util::get_color_id(m_game_variant, c);
-}
-
-inline GameVariant Tree::get_game_variant() const
-{
-    return m_game_variant;
+    return sgf_util::get_color_id(m_variant, c);
 }
 
 inline const char* Tree::get_setup_prop_id(Color c) const
 {
-    return sgf_util::get_setup_id(m_game_variant, c);
+    return sgf_util::get_setup_id(m_variant, c);
+}
+
+inline Variant Tree::get_variant() const
+{
+    return m_variant;
 }
 
 inline bool Tree::has_move(const Node& node) const

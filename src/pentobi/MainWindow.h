@@ -25,7 +25,7 @@ using libboardgame_util::Exception;
 using libpentobi_base::Board;
 using libpentobi_base::ColorMap;
 using libpentobi_base::Game;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_base::Move;
 using libpentobi_mcts::Player;
 
@@ -87,7 +87,7 @@ public slots:
 
     /** Go to a node if a node with a position defined by a sequence of moves
         still exists. */
-    void gotoPosition(GameVariant gameVariant, const vector<ColorMove>& moves);
+    void gotoPosition(Variant variant, const vector<ColorMove>& moves);
 
     void help();
 
@@ -346,19 +346,19 @@ private:
 
     QAction* m_actionGameInfo;
 
-    QAction* m_actionGameVariantClassic;
+    QAction* m_actionVariantClassic;
 
-    QAction* m_actionGameVariantClassic2;
+    QAction* m_actionVariantClassic2;
 
-    QAction* m_actionGameVariantDuo;
+    QAction* m_actionVariantDuo;
 
-    QAction* m_actionGameVariantJunior;
+    QAction* m_actionVariantJunior;
 
-    QAction* m_actionGameVariantTrigon;
+    QAction* m_actionVariantTrigon;
 
-    QAction* m_actionGameVariantTrigon2;
+    QAction* m_actionVariantTrigon2;
 
-    QAction* m_actionGameVariantTrigon3;
+    QAction* m_actionVariantTrigon3;
 
     QAction* m_actionGoodMove;
 
@@ -565,7 +565,7 @@ private:
 
     const Board& getBoard() const;
 
-    GameVariant getGameVariant() const;
+    Variant getVariant() const;
 
     QString getFilter() const;
 
@@ -577,7 +577,7 @@ private:
 
     void initGame();
 
-    void initGameVariantActions();
+    void initVariantActions();
 
     void initPieceSelectors();
 
@@ -590,7 +590,7 @@ private:
 
     bool save(const QString& file);
 
-    void setGameVariant(GameVariant variant);
+    void setVariant(Variant variant);
 
     void setMoveNumberText();
 
@@ -641,19 +641,19 @@ private slots:
 
     void fullscreen(bool checked);
 
-    void gameVariantClassic(bool checked);
+    void variantClassic(bool checked);
 
-    void gameVariantClassic2(bool checked);
+    void variantClassic2(bool checked);
 
-    void gameVariantDuo(bool checked);
+    void variantDuo(bool checked);
 
-    void gameVariantJunior(bool checked);
+    void variantJunior(bool checked);
 
-    void gameVariantTrigon(bool checked);
+    void variantTrigon(bool checked);
 
-    void gameVariantTrigon2(bool checked);
+    void variantTrigon2(bool checked);
 
-    void gameVariantTrigon3(bool checked);
+    void variantTrigon3(bool checked);
 
     void genMoveFinished();
 
@@ -663,7 +663,7 @@ private slots:
 
     void noMoveAnnotation(bool checked);
 
-    void openRatedGame(GameVariant variant, unsigned int n);
+    void openRatedGame(Variant variant, unsigned int n);
 
     void openRecentFile();
 
@@ -698,9 +698,9 @@ inline const Board& MainWindow::getBoard() const
     return m_game->get_board();
 }
 
-inline GameVariant MainWindow::getGameVariant() const
+inline Variant MainWindow::getVariant() const
 {
-    return m_game->get_game_variant();
+    return m_game->get_variant();
 }
 
 //-----------------------------------------------------------------------------

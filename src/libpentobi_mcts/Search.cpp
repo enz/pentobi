@@ -17,13 +17,13 @@ using libpentobi_base::board_type_classic;
 using libpentobi_base::board_type_duo;
 using libpentobi_base::board_type_trigon;
 using libpentobi_base::board_type_trigon_3;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -103,11 +103,11 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
 
 //-----------------------------------------------------------------------------
 
-Search::Search(GameVariant initial_game_variant, size_t memory)
-    : ParentClass(State(initial_game_variant, m_shared_const),
+Search::Search(Variant initial_variant, size_t memory)
+    : ParentClass(State(initial_variant, m_shared_const),
                   memory == 0 ? 384000000 : memory),
       m_auto_param(true),
-      m_game_variant(initial_game_variant),
+      m_variant(initial_variant),
       m_shared_const(m_to_play)
 {
     set_rave(true);
@@ -115,7 +115,7 @@ Search::Search(GameVariant initial_game_variant, size_t memory)
     set_expand_threshold(1);
     set_widening_parameter(0);
     set_last_good_reply(true);
-    set_default_param(m_game_variant);
+    set_default_param(m_variant);
 }
 
 Search::~Search() throw()
@@ -138,7 +138,7 @@ string Search::get_move_string(Move mv) const
     return piece_info.get_name() + " " + bd.to_string(mv);
 }
 
-void Search::get_root_position(GameVariant& variant, Setup& setup) const
+void Search::get_root_position(Variant& variant, Setup& setup) const
 {
     m_last_state.get_as_setup(variant, setup);
     setup.to_play = m_to_play;
@@ -180,43 +180,43 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
 {
     m_shared_const.board = &bd;
     m_to_play = to_play;
-    GameVariant game_variant = bd.get_game_variant();
-    if (m_auto_param && game_variant != m_game_variant)
-        set_default_param(game_variant);
-    m_game_variant = game_variant;
+    Variant variant = bd.get_variant();
+    if (m_auto_param && variant != m_variant)
+        set_default_param(variant);
+    m_variant = variant;
     bool result = ParentClass::search(mv, max_count, min_simulations, max_time,
                                       time_source, 0);
     return result;
 }
 
-void Search::set_default_param(GameVariant game_variant)
+void Search::set_default_param(Variant variant)
 {
-    log() << "Setting default parameters for " << to_string(game_variant)
+    log() << "Setting default parameters for " << to_string(variant)
           << '\n';
-    switch (game_variant)
+    switch (variant)
     {
-    case game_variant_duo:
+    case variant_duo:
         set_bias_term_constant(0.09f);
         break;
-    case game_variant_junior:
+    case variant_junior:
         set_bias_term_constant(0.12f);
         break;
-    case game_variant_classic:
-        // Not tuned. Use same value as for game_variant_classic_2
+    case variant_classic:
+        // Not tuned. Use same value as for variant_classic_2
         set_bias_term_constant(0.11f);
         break;
-    case game_variant_classic_2:
+    case variant_classic_2:
         set_bias_term_constant(0.11f);
         break;
-    case game_variant_trigon:
-        // Not tuned. Use same value as for game_variant_trigon_2
+    case variant_trigon:
+        // Not tuned. Use same value as for variant_trigon_2
         set_bias_term_constant(0.10f);
         break;
-    case game_variant_trigon_2:
+    case variant_trigon_2:
         set_bias_term_constant(0.10f);
         break;
-    case game_variant_trigon_3:
-        // Not tuned. Use same value as for game_variant_trigon_2
+    case variant_trigon_3:
+        // Not tuned. Use same value as for variant_trigon_2
         set_bias_term_constant(0.10f);
         break;
     default:
@@ -235,7 +235,7 @@ void Search::write_info(ostream& out) const
         return;
     ParentClass::write_info(out);
     out << (format("Mov: %i, ") % root.get_nu_children());
-    if (libpentobi_base::get_nu_players(m_game_variant) > 2)
+    if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
         out << "All:";
         BOOST_FOREACH(const StatisticsBase& i, get_root_eval())

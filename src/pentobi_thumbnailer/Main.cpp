@@ -29,14 +29,14 @@ using libboardgame_base::RectGeometry;
 using libboardgame_base::TrigonGeometry;
 using libboardgame_sgf::Node;
 using libboardgame_sgf::TreeReader;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
-using libpentobi_base::GameVariant;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
+using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::PointState;
@@ -102,27 +102,27 @@ void handleSetupEmpty(const Node& node, const Geometry& geometry,
 /** Get the board state of the final position of the main variation.
     Avoids constructing an instance of a Tree or Game, which would do a costly
     initialization of BoardConst and slow down the thumbnailer unnecessarily. */
-bool getFinalPosition(const Node& root, GameVariant& gameVariant,
+bool getFinalPosition(const Node& root, Variant& variant,
                       Grid<PointState>& pointState)
 {
-    if (! parse_game_variant(root.get_property("GM", ""), gameVariant))
+    if (! parse_variant(root.get_property("GM", ""), variant))
         return false;
     const Geometry* geometry;
-    switch (gameVariant)
+    switch (variant)
     {
-    case game_variant_duo:
-    case game_variant_junior:
+    case variant_duo:
+    case variant_junior:
         geometry = RectGeometry<Point>::get(14, 14);
         break;
-    case game_variant_classic:
-    case game_variant_classic_2:
+    case variant_classic:
+    case variant_classic_2:
         geometry = RectGeometry<Point>::get(20, 20);
         break;
-    case game_variant_trigon:
-    case game_variant_trigon_2:
+    case variant_trigon:
+    case variant_trigon_2:
         geometry = TrigonGeometry<Point>::get(9);
         break;
-    case game_variant_trigon_3:
+    case variant_trigon_3:
         geometry = TrigonGeometry<Point>::get(8);
         break;
     default:
@@ -149,7 +149,7 @@ bool getFinalPosition(const Node& root, GameVariant& gameVariant,
         }
         Color c;
         MovePoints points;
-        if (libpentobi_base::Tree::get_move(*node, gameVariant, c, points))
+        if (libpentobi_base::Tree::get_move(*node, variant, c, points))
         {
             BOOST_FOREACH(Point p, points)
             {
@@ -199,10 +199,10 @@ int mainFunction(int argc, char* argv[])
     TreeReader reader;
     reader.set_read_only_main_variation(true);
     reader.read(files[0]);
-    GameVariant gameVariant =
-        game_variant_classic; // Initialize to avoid compiler warning
+    Variant variant =
+        variant_classic; // Initialize to avoid compiler warning
     Grid<PointState> pointState;
-    if (! getFinalPosition(reader.get_tree(), gameVariant, pointState))
+    if (! getFinalPosition(reader.get_tree(), variant, pointState))
     {
         cerr << "Not a valid Blokus SGF file\n";
         return 1;
@@ -213,7 +213,7 @@ int mainFunction(int argc, char* argv[])
     image.fill(Qt::transparent);
     QPainter painter;
     painter.begin(&image);
-    boardPainter.paintEmptyBoard(painter, size, size, gameVariant,
+    boardPainter.paintEmptyBoard(painter, size, size, variant,
                                  pointState.get_geometry());
     boardPainter.paintPieces(painter, pointState);
     painter.end();

@@ -15,9 +15,9 @@ namespace sgf_util {
 
 //-----------------------------------------------------------------------------
 
-const char* get_color_id(GameVariant variant, Color c)
+const char* get_color_id(Variant variant, Color c)
 {
-    if (variant == game_variant_duo || variant == game_variant_junior)
+    if (variant == variant_duo || variant == variant_junior)
         return (c == Color(0) ? "B" : "W");
     if (c == Color(0))
         return "1";
@@ -29,9 +29,9 @@ const char* get_color_id(GameVariant variant, Color c)
     return "4";
 }
 
-const char* get_setup_id(GameVariant variant, Color c)
+const char* get_setup_id(Variant variant, Color c)
 {
-    if (variant == game_variant_duo || variant == game_variant_junior)
+    if (variant == variant_duo || variant == variant_junior)
         return (c == Color(0) ? "AB" : "AW");
     if (c == Color(0))
         return "A1";

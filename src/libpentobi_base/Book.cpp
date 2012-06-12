@@ -25,8 +25,8 @@ using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 
-Book::Book(GameVariant game_variant)
-    : m_tree(game_variant),
+Book::Book(Variant variant)
+    : m_tree(variant),
       m_is_computer_generated(true)
 {
 }
@@ -40,8 +40,8 @@ Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
                       PointTransfIdent<Point>(), PointTransfIdent<Point>());
     if (! mv.is_null())
         return mv;
-    GameVariant game_variant = bd.get_game_variant();
-    if (game_variant == game_variant_duo || game_variant == game_variant_junior)
+    Variant variant = bd.get_variant();
+    if (variant == variant_duo || variant == variant_junior)
         mv = genmove(bd, c, delta, max_delta,
                      PointTransfRot270Refl<Point>(),
                      PointTransfRot270Refl<Point>());

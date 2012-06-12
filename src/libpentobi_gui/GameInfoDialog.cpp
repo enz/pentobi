@@ -11,14 +11,14 @@
 #include "LineEdit.h"
 #include "libpentobi_gui/Util.h"
 
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
-using libpentobi_base::GameVariant;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -37,21 +37,21 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     QWidget* formWidget = new QWidget();
     formWidget->setLayout(m_formLayout);
     layout->addWidget(formWidget);
-    GameVariant variant = game.get_game_variant();
-    if (variant == game_variant_duo || variant == game_variant_junior)
+    Variant variant = game.get_variant();
+    if (variant == variant_duo || variant == variant_junior)
     {
         m_playerBlue = createPlayerName(tr("Player Blue:"), Color(0));
         m_playerGreen = createPlayerName(tr("Player Green:"), Color(1));
     }
-    else if (variant == game_variant_classic
-             || variant == game_variant_trigon)
+    else if (variant == variant_classic
+             || variant == variant_trigon)
     {
         m_playerBlue = createPlayerName(tr("Player Blue:"), Color(0));
         m_playerYellow = createPlayerName(tr("Player Yellow:"), Color(1));
         m_playerRed = createPlayerName(tr("Player Red:"), Color(2));
         m_playerGreen = createPlayerName(tr("Player Green:"), Color(3));
     }
-    else if (variant == game_variant_trigon_3)
+    else if (variant == variant_trigon_3)
     {
         m_playerBlue = createPlayerName(tr("Player Blue:"), Color(0));
         m_playerYellow = createPlayerName(tr("Player Yellow:"), Color(1));
@@ -59,8 +59,8 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == game_variant_classic_2
-                            || variant == game_variant_trigon_2);
+        LIBBOARDGAME_ASSERT(variant == variant_classic_2
+                            || variant == variant_trigon_2);
         m_playerBlueRed = createPlayerName(tr("Player Blue/Red:"), Color(0));
         m_playerYellowGreen =
             createPlayerName(tr("Player Yellow/Green:"), Color(1));
@@ -77,18 +77,16 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
 
 void GameInfoDialog::accept()
 {
-    GameVariant variant = m_game.get_game_variant();
+    Variant variant = m_game.get_variant();
     string value;
-    if (variant == game_variant_duo
-        || variant == game_variant_junior)
+    if (variant == variant_duo || variant == variant_junior)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);
         if (acceptLine(m_playerGreen, value))
             m_game.set_player_name(Color(1), value);
     }
-    else if (variant == game_variant_classic
-             || variant == game_variant_trigon)
+    else if (variant == variant_classic || variant == variant_trigon)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);
@@ -99,7 +97,7 @@ void GameInfoDialog::accept()
         if (acceptLine(m_playerGreen, value))
             m_game.set_player_name(Color(3), value);
     }
-    else if (variant == game_variant_trigon_3)
+    else if (variant == variant_trigon_3)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);
@@ -110,8 +108,8 @@ void GameInfoDialog::accept()
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == game_variant_classic_2
-                            || variant == game_variant_trigon_2);
+        LIBBOARDGAME_ASSERT(variant == variant_classic_2
+                            || variant == variant_trigon_2);
         if (acceptLine(m_playerBlueRed, value))
             m_game.set_player_name(Color(0), value);
         if (acceptLine(m_playerYellowGreen, value))

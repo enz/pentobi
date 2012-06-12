@@ -18,10 +18,10 @@ using boardutil::get_current_position_as_setup;
 
 //----------------------------------------------------------------------------
 
-void GameStateHistory::get_as_setup(GameVariant& variant, Setup& setup) const
+void GameStateHistory::get_as_setup(Variant& variant, Setup& setup) const
 {
     LIBBOARDGAME_ASSERT(is_valid());
-    variant = m_game_variant;
+    variant = m_variant;
     unique_ptr<Board> bd(new Board(variant));
     BOOST_FOREACH(ColorMove mv, m_moves)
         bd->play(mv);
@@ -36,7 +36,7 @@ void GameStateHistory::init(const Board& bd)
 void GameStateHistory::init(const Board& bd, Color to_play)
 {
     m_is_valid = true;
-    m_game_variant = bd.get_game_variant();
+    m_variant = bd.get_variant();
     m_nu_colors = bd.get_nu_colors();
     m_moves.clear();
     for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
@@ -48,7 +48,7 @@ bool GameStateHistory::is_followup(const GameStateHistory& other,
                                    vector<Move>& sequence) const
 {
     if (! m_is_valid || ! other.m_is_valid
-        || m_game_variant != other.m_game_variant
+        || m_variant != other.m_variant
         || m_moves.size() < other.m_moves.size())
         return false;
     for (unsigned int i = 0; i < other.m_moves.size(); ++i)

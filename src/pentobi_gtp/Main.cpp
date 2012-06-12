@@ -31,16 +31,16 @@ using libboardgame_util::log;
 using libboardgame_util::set_log_null;
 using libboardgame_util::Exception;
 using libboardgame_util::RandomGenerator;
-using libpentobi_base::game_variant_classic;
-using libpentobi_base::game_variant_classic_2;
-using libpentobi_base::game_variant_duo;
-using libpentobi_base::game_variant_junior;
-using libpentobi_base::game_variant_trigon;
-using libpentobi_base::game_variant_trigon_2;
-using libpentobi_base::game_variant_trigon_3;
-using libpentobi_base::parse_game_variant_id;
+using libpentobi_base::variant_classic;
+using libpentobi_base::variant_classic_2;
+using libpentobi_base::variant_duo;
+using libpentobi_base::variant_junior;
+using libpentobi_base::variant_trigon;
+using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
+using libpentobi_base::parse_variant_id;
 using libpentobi_base::Board;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_mcts::BookBuilder;
 
 //-----------------------------------------------------------------------------
@@ -126,8 +126,8 @@ int main(int argc, char** argv)
             set_log_null();
         if (vm.count("seed"))
             RandomGenerator::set_global_seed(seed);
-        GameVariant variant;
-        if (! parse_game_variant_id(variant_string, variant))
+        Variant variant;
+        if (! parse_variant_id(variant_string, variant))
             throw Exception(format("invalid game variant '%1%'")
                             % variant_string);
         if (vm.count("buildbook"))

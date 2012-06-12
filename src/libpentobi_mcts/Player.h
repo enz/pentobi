@@ -16,7 +16,7 @@ namespace libpentobi_mcts {
 using boost::filesystem::path;
 using libboardgame_base::Rating;
 using libpentobi_base::Book;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -25,12 +25,12 @@ class Player
 {
 public:
     /** Constructor.
-        @param initial_game_variant Game variant to initialize the internal
+        @param initial_variant Game variant to initialize the internal
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
         @param books_dir Directory containing opening books.
         @param memory The memory to be used for (all) the search trees. */
-    Player(GameVariant initial_game_variant, const path& books_dir,
+    Player(Variant initial_variant, const path& books_dir,
            size_t memory = 0);
 
     ~Player() throw();
@@ -70,10 +70,10 @@ public:
         modified and rescaled to take into account that self-play experiments
         usually overestimate the rating differences when playing against
         humans. */
-    static Rating get_rating(GameVariant variant, int level);
+    static Rating get_rating(Variant variant, int level);
 
     /** Get an estimated Elo-rating of the current level. */
-    Rating get_rating(GameVariant variant) const;
+    Rating get_rating(Variant variant) const;
 
 private:
     bool m_is_book_loaded;
@@ -118,7 +118,7 @@ inline int Player::get_level() const
     return m_level;
 }
 
-inline Rating Player::get_rating(GameVariant variant) const
+inline Rating Player::get_rating(Variant variant) const
 {
     return get_rating(variant, m_level);
 }

@@ -11,7 +11,7 @@
 namespace libpentobi_mcts {
 
 using libpentobi_base::Game;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ public:
     void run(const Game& game, Search& search, size_t nu_simulations,
              function<void(unsigned int,unsigned int)> progress_callback);
 
-    GameVariant get_game_variant() const;
+    Variant get_variant() const;
 
     unsigned int get_nu_moves() const;
 
@@ -42,7 +42,7 @@ public:
     double get_value(unsigned int i) const;
 
 private:
-    GameVariant m_game_variant;
+    Variant m_variant;
 
     vector<ColorMove> m_moves;
 
@@ -50,11 +50,6 @@ private:
 
     vector<double> m_values;
 };
-
-inline GameVariant AnalyzeGame::get_game_variant() const
-{
-    return m_game_variant;
-}
 
 inline ColorMove AnalyzeGame::get_move(unsigned int i) const
 {
@@ -72,6 +67,11 @@ inline double AnalyzeGame::get_value(unsigned int i) const
     LIBBOARDGAME_ASSERT(i < m_values.size());
     LIBBOARDGAME_ASSERT(has_value(i));
     return m_values[i];
+}
+
+inline Variant AnalyzeGame::get_variant() const
+{
+    return m_variant;
 }
 
 inline bool AnalyzeGame::has_value(unsigned int i) const

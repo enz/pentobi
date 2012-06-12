@@ -10,13 +10,13 @@
 #include <boost/filesystem.hpp>
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Color.h"
-#include "libpentobi_base/GameVariant.h"
+#include "libpentobi_base/Variant.h"
 
 using namespace std;
 using boost::filesystem::path;
 using libboardgame_base::Rating;
 using libpentobi_base::Color;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ public:
         Rating rating;
     };
 
-    RatingHistory(GameVariant variant, const path& datadir);
+    RatingHistory(Variant variant, const path& datadir);
 
     /** Append a new game. */
     void add(unsigned int number, Color color, float result,

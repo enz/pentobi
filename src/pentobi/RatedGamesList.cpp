@@ -70,7 +70,7 @@ void RatedGamesList::keyPressEvent(QKeyEvent* event)
     QTableView::keyPressEvent(event);
 }
 
-void RatedGamesList::updateContent(GameVariant variant,
+void RatedGamesList::updateContent(Variant variant,
                                    const RatingHistory& history)
 {
     m_model->clear();

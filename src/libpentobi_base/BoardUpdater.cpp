@@ -91,9 +91,9 @@ void init_setup(Board& bd, const Node& node)
 {
     Setup setup;
     get_current_position_as_setup(bd, setup);
-    GameVariant game_variant = bd.get_game_variant();
+    Variant variant = bd.get_variant();
     unsigned int nu_instances;
-    if (game_variant == game_variant_junior)
+    if (variant == variant_junior)
         nu_instances = 2;
     else
         nu_instances = 1;

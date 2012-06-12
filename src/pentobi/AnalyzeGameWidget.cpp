@@ -65,7 +65,7 @@ void AnalyzeGameWidget::mousePressEvent(QMouseEvent* event)
     vector<ColorMove> moves;
     for (unsigned int i = 0; i < moveNumber; ++i)
         moves.push_back(m_analyzeGame.get_move(i));
-    emit gotoPosition(m_analyzeGame.get_game_variant(), moves);
+    emit gotoPosition(m_analyzeGame.get_variant(), moves);
 }
 
 void AnalyzeGameWidget::paintEvent(QPaintEvent*)
@@ -116,7 +116,7 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
         if (! m_analyzeGame.has_value(i))
             continue;
         double value = m_analyzeGame.get_value(i);
-        QColor color = Util::getPaintColor(m_analyzeGame.get_game_variant(),
+        QColor color = Util::getPaintColor(m_analyzeGame.get_variant(),
                                            m_analyzeGame.get_move(i).color);
         painter.setPen(Qt::NoPen);
         painter.setBrush(color);

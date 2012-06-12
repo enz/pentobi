@@ -53,12 +53,12 @@ public:
         @pre is_valid()
         @param[out] variant
         @param[out] setup */
-    void get_as_setup(GameVariant& variant, Setup& setup) const;
+    void get_as_setup(Variant& variant, Setup& setup) const;
 
 private:
     bool m_is_valid;
 
-    GameVariant m_game_variant;
+    Variant m_variant;
 
     unsigned int m_nu_colors;
 

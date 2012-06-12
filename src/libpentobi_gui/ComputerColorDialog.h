@@ -7,11 +7,11 @@
 
 #include <array>
 #include <QtGui>
-#include "libpentobi_base/GameVariant.h"
+#include "libpentobi_base/Variant.h"
 #include "libpentobi_base/ColorMap.h"
 
 using namespace std;
-using libpentobi_base::GameVariant;
+using libpentobi_base::Variant;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
 
@@ -23,7 +23,7 @@ class ComputerColorDialog
     Q_OBJECT
 
 public:
-    ComputerColorDialog(QWidget* parent, GameVariant gameVariant,
+    ComputerColorDialog(QWidget* parent, Variant variant,
                         ColorMap<bool>& computerColor);
 
 public slots:
@@ -32,7 +32,7 @@ public slots:
 private:
     ColorMap<bool>& m_computerColor;
 
-    GameVariant m_gameVariant;
+    Variant m_variant;
 
     array<QCheckBox*, 4> m_checkBox;
 

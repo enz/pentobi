@@ -16,7 +16,7 @@ using libpentobi_mcts::Player;
 
 namespace {
 
-void saveRating(GameVariant variant, Rating rating, unsigned int nuGames)
+void saveRating(Variant variant, Rating rating, unsigned int nuGames)
 {
     QString variantStr = QString(to_string_id(variant));
     QSettings settings;
@@ -32,7 +32,7 @@ void saveRating(GameVariant variant, Rating rating, unsigned int nuGames)
 namespace Util
 {
 
-void getNextRatedGameSettings(GameVariant variant, int maxLevel, int& level,
+void getNextRatedGameSettings(Variant variant, int maxLevel, int& level,
                               Color& userColor)
 {
     Rating rating;
@@ -51,7 +51,7 @@ void getNextRatedGameSettings(GameVariant variant, int maxLevel, int& level,
     }
 }
 
-void getRating(GameVariant variant, Rating& rating, unsigned int& nuGames)
+void getRating(Variant variant, Rating& rating, unsigned int& nuGames)
 {
     QString variantStr = QString(to_string_id(variant));
     QSettings settings;
@@ -60,7 +60,7 @@ void getRating(GameVariant variant, Rating& rating, unsigned int& nuGames)
     rating = Rating(settings.value("rating_" + variantStr, 1000).toFloat());
 }
 
-void initRating(GameVariant variant, Rating rating)
+void initRating(Variant variant, Rating rating)
 {
     saveRating(variant, rating, 0);
 }
@@ -82,7 +82,7 @@ void removeThumbnail(const QString& file)
     QFile::remove(home + "/.thumbnails/large/" + md5 + ".png");
 }
 
-void updateRating(GameVariant variant, float score, Rating opponentRating,
+void updateRating(Variant variant, float score, Rating opponentRating,
                   unsigned int nuOpponents)
 {
     Rating rating;
