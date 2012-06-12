@@ -37,10 +37,9 @@ class MainWindow
     Q_OBJECT
 
 public:
-    MainWindow(const QString& initialFile = QString(),
-               const QString& manualDir = QString(),
-               const QString& booksDir = QString(),
-               bool noBook = false, size_t memory = 0);
+    MainWindow(const QString& initialFile = "", const QString& manualDir = "",
+               const QString& booksDir = "", bool noBook = false,
+               size_t memory = 0);
 
     bool eventFilter(QObject* object, QEvent* event);
 
@@ -582,7 +581,7 @@ private:
     void initPieceSelectors();
 
     void initQuestion(QMessageBox& msgBox, const QString& text,
-                      const QString& infoText = QString());
+                      const QString& infoText = "");
 
     void leaveSetupMode();
 
@@ -600,14 +599,13 @@ private:
 
     void setFile(const QString& file);
 
-    void showError(const QString& message,
-                   const QString& infoText = QString(),
-                   const QString& detailText = QString());
+    void showError(const QString& message, const QString& infoText = "",
+                   const QString& detailText = "");
 
     void gameOver();
 
-    void showInfo(const QString& message, const QString& infoText = QString(),
-                  const QString& detailText = QString());
+    void showInfo(const QString& message, const QString& infoText = "",
+                  const QString& detailText = "");
 
     void showInvalidFile(QString file, const Exception& e);
 

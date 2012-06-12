@@ -623,7 +623,7 @@ bool MainWindow::checkQuit()
 
 void MainWindow::clearFile()
 {
-    setFile(QString());
+    setFile("");
 }
 
 void MainWindow::clearSelectedPiece()
@@ -1545,7 +1545,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
 
 void MainWindow::exportAsciiArt()
 {
-    QString file = QFileDialog::getSaveFileName(this, QString(), QString(),
+    QString file = QFileDialog::getSaveFileName(this, "", "",
                                                 tr("Text files (*.txt)"));
     if (file.isEmpty())
         return;
@@ -2143,7 +2143,7 @@ void MainWindow::initGame()
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     m_gameFinished = false;
-    setFile(QString());
+    setFile("");
 }
 
 void MainWindow::initVariantActions()
@@ -2372,7 +2372,7 @@ void MainWindow::newRatedGame()
         return;
     setLevel(level);
     initGame();
-    setFile(QString());
+    setFile("");
     setRated(true);
     m_computerColors.fill(true);
     const Board& bd = getBoard();
@@ -3546,16 +3546,13 @@ void MainWindow::updateWindow(bool currentNodeChanged)
 
 void MainWindow::updateWindowModified()
 {
-    bool is_modified = m_game->get_modified();
+    bool modified = m_game->get_modified();
+    m_actionSave->setEnabled(modified);
     if (m_file.isEmpty())
-    {
-        m_actionSave->setEnabled(is_modified);
-        m_actionSave->setToolTip(QString());
-    }
+        m_actionSave->setToolTip("");
     else
     {
-        setWindowModified(is_modified);
-        m_actionSave->setEnabled(is_modified);
+        setWindowModified(modified);
         m_actionSave->setToolTip(tr("Save (%1)").arg(m_file));
     }
 }
