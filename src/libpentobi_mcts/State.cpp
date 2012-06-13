@@ -533,11 +533,15 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
             // Prune moves that don't connect in the middle if connection is
             // possible
             continue;
-        // Make heuristic relative to best move and scale it to [0..1]
-        ValueType heuristic = 0.3f * (m_max_heuristic - features.heuristic);
 
-        // Quickly squash to [0..1] roughly as in exp(-x)  (and make sure it
-        // stays greater than 0 and is monotonically decreasing)
+        // Convert the heuristic, which is so far estimated in score points,
+        // into a value in [0..1] by making it relative to the heuristic
+        // of the best move and let it decrease exponentially with a certain
+        // width.
+        ValueType heuristic = 0.3f * (m_max_heuristic - features.heuristic);
+        // Piecewise linear approximation of exp(-x) (make sure the
+        // approximation is always greater than 0 and is always monotonically
+        // decreasing)
         if (heuristic < 0.5)
             heuristic = 1.f - 0.9f * heuristic;
         else if (heuristic < 2)
@@ -547,6 +551,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         else
             heuristic = 0.0248f / (heuristic - 3.0f);
 
+        // Rescale to [0.1..1]. If the value is too close to 0, the move might
+        // never get explored (in practice) if the bias term constant is small.
         ValueType value = 1 * (0.1f + 0.9f * heuristic);
         ValueType count = 1;
         // Encourage to explore a move that keeps or breaks symmetry
