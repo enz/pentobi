@@ -90,9 +90,10 @@ void RatingGraph::setHistory(const RatingHistory& history)
     }
     // Make yMin slightly below a multiple of 100, such that the lowest y tics
     // line is not on the edge of the graph.
-    m_yMin = floor((m_yMin / 100.f)) * 100 - 10;
-    // Leave some space above yMax
-    m_yMax += 10;
+    m_yMin = floor((m_yMin / 100.f)) * 100 - 5;
+    // Make yMax slightly above a multiple of 100 such that the label still
+    // fits in the picture (TODO: this should depend on the font size)
+    m_yMax = ceil((m_yMax / 100.f)) * 100 + 15;
     update();
 }
 

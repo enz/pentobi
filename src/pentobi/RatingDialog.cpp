@@ -33,10 +33,10 @@ RatingDialog::RatingDialog(QWidget* parent)
     setLayout(layout);
     QFormLayout* formLayout = new QFormLayout();
     layout->addLayout(formLayout);
+    m_labelRating = new QLabel();
+    formLayout->addRow("<b>" + tr("Your rating:"), m_labelRating);
     m_labelVariant = new QLabel();
     formLayout->addRow(tr("Game variant:"), m_labelVariant);
-    m_labelRating = new QLabel();
-    formLayout->addRow(tr("Your rating:"), m_labelRating);
     m_labelNuGames = new QLabel();
     formLayout->addRow(tr("Games played:"), m_labelNuGames);
     layout->addSpacing(layout->spacing());
@@ -98,7 +98,7 @@ void RatingDialog::updateContent(Variant variant,
     QString ratingStr;
     if (nuGames > 0)
         ratingStr.setNum(rating.get(), 'f', 0);
-    m_labelRating->setText(ratingStr);
+    m_labelRating->setText("<b>" + ratingStr);
     m_graph->setHistory(history);
     m_list->updateContent(variant, history);
 }
