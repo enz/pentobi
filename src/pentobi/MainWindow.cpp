@@ -250,8 +250,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_game.reset(new Game(variant));
     createActions();
     setCentralWidget(createCentralWidget());
-    m_moveNumber = new QLabel();
-    statusBar()->addPermanentWidget(m_moveNumber);
+    m_variationLabel = new QLabel();
+    statusBar()->addPermanentWidget(m_variationLabel);
     m_setupModeLabel = new QLabel(tr("Setup mode"));
     statusBar()->addWidget(m_setupModeLabel);
     m_setupModeLabel->hide();
@@ -3015,72 +3015,6 @@ void MainWindow::setMoveNumbersNone(bool checked)
     }
 }
 
-void MainWindow::setMoveNumberText()
-{
-    const Tree& tree = m_game->get_tree();
-    const Node& current = m_game->get_current();
-    unsigned int move = get_move_number(tree, current);
-    unsigned int nuMoves = move + get_moves_left(tree, current);;
-    if (move == 0 && nuMoves == 0)
-    {
-        m_moveNumber->setText("");
-        m_moveNumber->setToolTip("");
-        return;
-    }
-    string variation = get_variation_string(current);
-    if (variation.empty())
-    {
-        if (move == nuMoves)
-        {
-            m_moveNumber->setText(QString("%1").arg(move));
-            m_moveNumber->setToolTip(tr("Move number %1").arg(move));
-        }
-        else
-        {
-            if (move == 0)
-            {
-                m_moveNumber->setText(QString("0 / %1").arg(nuMoves));
-                m_moveNumber->setToolTip(tr("%n move(s)", "", nuMoves));
-            }
-            else
-            {
-                m_moveNumber->setText(QString("%1 / %2")
-                                      .arg(move).arg(nuMoves));
-                m_moveNumber->setToolTip(tr("Move number %1 of %2")
-                                         .arg(move).arg(nuMoves));
-            }
-        }
-    }
-    else
-    {
-        if (move == nuMoves)
-        {
-            m_moveNumber->setText(QString("%1 (%2)")
-                                  .arg(move).arg(variation.c_str()));
-            m_moveNumber->setToolTip(tr("Move number %1 in variation %2")
-                                     .arg(move).arg(variation.c_str()));
-        }
-        else
-        {
-            m_moveNumber->setText(QString("%1 / %2 (%3)")
-                                  .arg(move).arg(nuMoves)
-                                  .arg(variation.c_str()));
-            if (move == 0)
-                // 0 moves in non-main variation could happen if SGF file
-                // contains non-root nodes without moves
-                m_moveNumber->setToolTip(tr("%n move(s) in variation %1",
-                                            "", nuMoves)
-                                         .arg(variation.c_str()));
-            else
-                m_moveNumber->setToolTip(
-                                      tr("Move number %1 of %2 in variation %3")
-                                      .arg(move)
-                                      .arg(nuMoves)
-                                      .arg(variation.c_str()));
-        }
-    }
-}
-
 void MainWindow::setPlayToolTip()
 {
     QString s;
@@ -3456,6 +3390,22 @@ void MainWindow::updateRecentFiles()
         m_actionRecentFile[j]->setVisible(false);
 }
 
+void MainWindow::updateVariationLabel()
+{
+    const Node& current = m_game->get_current();
+    string variation = get_variation_string(current);
+    if (variation.empty())
+    {
+        m_variationLabel->setText("");
+        m_variationLabel->setToolTip("");
+    }
+    else
+    {
+        m_variationLabel->setText(variation.c_str());
+        m_variationLabel->setToolTip(tr("Variation %1").arg(variation.c_str()));
+    }
+}
+
 void MainWindow::updateWindow(bool currentNodeChanged)
 {
     const Board& bd = getBoard();
@@ -3504,7 +3454,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         updateComment();
         updateMoveAnnotationActions();
     }
-    setMoveNumberText();
+    updateVariationLabel();
     setPlayToolTip();
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
