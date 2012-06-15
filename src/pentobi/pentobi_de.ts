@@ -1146,57 +1146,60 @@ ohne die Computer-Farben zu ändern)</translation>
         <translation>Ihre Wertung</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="69"/>
+        <location filename="RatingDialog.cpp" line="78"/>
+        <source>Your rating: %1</source>
+        <translation>Ihre Wertung: %1</translation>
+    </message>
+    <message>
+        <location filename="RatingDialog.cpp" line="84"/>
         <source>Classic</source>
         <translation>Klassisch</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="72"/>
+        <location filename="RatingDialog.cpp" line="87"/>
         <source>Classic Two-Player</source>
         <translation>Klassisch zwei Spieler</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="75"/>
+        <location filename="RatingDialog.cpp" line="90"/>
         <source>Duo</source>
         <translation>Duo</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="78"/>
+        <location filename="RatingDialog.cpp" line="93"/>
         <source>Trigon</source>
         <translation>Trigon</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="81"/>
+        <location filename="RatingDialog.cpp" line="96"/>
         <source>Trigon Two-Player</source>
         <translation>Trigon zwei Spieler</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="84"/>
+        <location filename="RatingDialog.cpp" line="99"/>
         <source>Trigon Three-Player</source>
         <translation>Trigon drei Spieler</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="87"/>
+        <location filename="RatingDialog.cpp" line="102"/>
         <source>Junior</source>
         <translation>Junior</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="37"/>
-        <source>Game variant:</source>
-        <translation>Spielvariante:</translation>
+        <location filename="RatingDialog.cpp" line="105"/>
+        <source>Game variant %1</source>
+        <translation>Spielvariante %1</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="RatingDialog.cpp" line="106"/>
+        <source>%n game(s) played</source>
+        <translation>
+            <numerusform>%n Spiel gespielt</numerusform>
+            <numerusform>%n Spiele gespielt</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="RatingDialog.cpp" line="41"/>
-        <source>Games played:</source>
-        <translation>Anzahl Spiele:</translation>
-    </message>
-    <message>
-        <location filename="RatingDialog.cpp" line="39"/>
-        <source>Your rating:</source>
-        <translation>Ihre Wertung:</translation>
-    </message>
-    <message>
-        <location filename="RatingDialog.cpp" line="43"/>
         <source>Recent development:</source>
         <translation>Aktuelle Entwicklung:</translation>
     </message>

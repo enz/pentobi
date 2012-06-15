@@ -31,14 +31,12 @@ RatingDialog::RatingDialog(QWidget* parent)
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
-    QFormLayout* formLayout = new QFormLayout();
-    layout->addLayout(formLayout);
     m_labelRating = new QLabel();
-    formLayout->addRow("<b>" + tr("Your rating:"), m_labelRating);
+    layout->addWidget(m_labelRating);
     m_labelVariant = new QLabel();
-    formLayout->addRow(tr("Game variant:"), m_labelVariant);
+    layout->addWidget(m_labelVariant);
     m_labelNuGames = new QLabel();
-    formLayout->addRow(tr("Games played:"), m_labelNuGames);
+    layout->addWidget(m_labelNuGames);
     layout->addSpacing(layout->spacing());
     layout->addWidget(new QLabel(tr("Recent development:")));
     m_graph = new RatingGraph();
@@ -47,6 +45,7 @@ RatingDialog::RatingDialog(QWidget* parent)
     layout->addWidget(m_list, 1);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
+    updateLabels(Rating(0), 0);
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     connect(m_list, SIGNAL(openRatedGame(unsigned int)),
             this, SLOT(activateGame(unsigned int)));
@@ -62,8 +61,24 @@ void RatingDialog::updateContent(Variant variant,
                                  const RatingHistory& history)
 {
     m_variant = variant;
+    QSettings settings;
+    Rating rating;
+    unsigned int nuGames;
+    Util::getRating(variant, rating, nuGames);
+    updateLabels(rating, nuGames);
+    m_graph->setHistory(history);
+    m_list->updateContent(variant, history);
+}
+
+void RatingDialog::updateLabels(Rating rating, unsigned int nuGames)
+{
+    if (nuGames == 0)
+        rating = Rating(0);
+    m_labelRating->setText("<b>"
+                           + tr("Your rating: %1").arg(rating.get(),
+                                                       0, 'f', 0));
     QString variantStr;
-    switch (variant)
+    switch (m_variant)
     {
     case variant_classic:
         variantStr = tr("Classic");
@@ -87,20 +102,8 @@ void RatingDialog::updateContent(Variant variant,
         variantStr = tr("Junior");
         break;
     }
-    m_labelVariant->setText(variantStr);
-    QSettings settings;
-    Rating rating;
-    unsigned int nuGames;
-    Util::getRating(variant, rating, nuGames);
-    QString nuGamesStr;
-    nuGamesStr.setNum(nuGames);
-    m_labelNuGames->setText(nuGamesStr);
-    QString ratingStr;
-    if (nuGames > 0)
-        ratingStr.setNum(rating.get(), 'f', 0);
-    m_labelRating->setText("<b>" + ratingStr);
-    m_graph->setHistory(history);
-    m_list->updateContent(variant, history);
+    m_labelVariant->setText(tr("Game variant %1").arg(variantStr));
+    m_labelNuGames->setText(tr("%n game(s) played", "", nuGames));
 }
 
 //-----------------------------------------------------------------------------

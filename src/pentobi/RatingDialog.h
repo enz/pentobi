@@ -41,6 +41,8 @@ private:
 
     RatedGamesList* m_list;
 
+    void updateLabels(Rating rating, unsigned int nuGames);
+
 private slots:
     void activateGame(unsigned int n);
 };

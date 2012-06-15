@@ -29,30 +29,39 @@ void RatingGraph::paintEvent(QPaintEvent*)
     {
         QFontMetrics metrics(painter.font());
         float yRange = m_yMax - m_yMin;
-        float yTic = ceil((m_yMin / 100.f)) * 100;
+        float yTic = m_yMin;
+        float topMargin = metrics.height();
+        float bottomMargin = metrics.height() / 2;
+        float graphHeight = height() - topMargin - bottomMargin;
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
         painter.setPen(pen);
         int maxLabelWidth = 0;
-        while (yTic < m_yMax)
+        while (yTic <= m_yMax)
         {
-            qreal y = height() - (yTic - m_yMin) / yRange * height();
+            qreal y =
+                topMargin
+                + graphHeight - (yTic - m_yMin) / yRange * graphHeight;
             painter.drawLine(0, y, width(), y);
             QString label;
             label.setNum(yTic, 'f', 0);
             int labelWidth = metrics.width(label);
             maxLabelWidth = max(maxLabelWidth, labelWidth);
-            if (y > metrics.height())
-                painter.drawText(width() - labelWidth, y - metrics.descent(),
-                                 label);
-            yTic += 100;
+            painter.drawText(width() - labelWidth, y - metrics.descent(),
+                             label);
+            if (yRange < 600)
+                yTic += 100;
+            else
+                yTic += 200;
         }
         qreal dX = qreal(width() - maxLabelWidth) / RatingHistory::maxGames;
         qreal x = 0;
         QPainterPath path;
         for (unsigned int i = 0; i < m_values.size(); ++i)
         {
-            qreal y = height() - (m_values[i] - m_yMin) / yRange * height();
+            qreal y =
+                topMargin
+                + graphHeight - (m_values[i] - m_yMin) / yRange * graphHeight;
             if (i == 0)
                 path.moveTo(x, y);
             else
@@ -88,12 +97,10 @@ void RatingGraph::setHistory(const RatingHistory& history)
         m_yMax = max(m_yMax, rating);
         m_values.push_back(rating);
     }
-    // Make yMin slightly below a multiple of 100, such that the lowest y tics
-    // line is not on the edge of the graph.
-    m_yMin = floor((m_yMin / 100.f)) * 100 - 5;
-    // Make yMax slightly above a multiple of 100 such that the label still
-    // fits in the picture (TODO: this should depend on the font size)
-    m_yMax = ceil((m_yMax / 100.f)) * 100 + 15;
+    m_yMin = floor((m_yMin / 100.f)) * 100;
+    m_yMax = ceil((m_yMax / 100.f)) * 100;
+    if (m_yMax == m_yMin)
+        m_yMax = m_yMin + 100;
     update();
 }
 
