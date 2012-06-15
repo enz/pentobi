@@ -19,8 +19,8 @@ add_executable(unittest_libboardgame_sgf
 
 target_link_libraries(unittest_libboardgame_sgf
   boardgame_test
-  boardgame_util
   boardgame_sgf
+  boardgame_util
   ${Boost_SYSTEM_LIBRARY}
   ${Boost_FILESYSTEM_LIBRARY}
   )

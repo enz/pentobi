@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file StringUtil.cpp */
+/** @file libboardgame_util/StringUtil.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -24,6 +24,25 @@ bool from_string(const string& s, string& t)
 {
     t = s;
     return true;
+}
+
+string get_letter_coord(unsigned int i)
+{
+    string result;
+    ++i;
+    unsigned int n = 1;
+    while (n * 26 < i)
+        n *= 26;
+    while (true)
+    {
+        unsigned int d = i / n;
+        result += char('a' + d - 1);
+        if (n == 1)
+            break;
+        i -= n * d;
+        n /= 26;
+    }
+    return result;
 }
 
 string time_to_string(double seconds, bool with_seconds_as_double)

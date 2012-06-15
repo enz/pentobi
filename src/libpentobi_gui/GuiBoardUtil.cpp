@@ -9,6 +9,7 @@
 #include "GuiBoardUtil.h"
 
 #include "libboardgame_util/Log.h"
+#include "libboardgame_util/StringUtil.h"
 
 namespace gui_board_util {
 
@@ -18,6 +19,7 @@ using libboardgame_sgf::Node;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_util::log;
 using libboardgame_util::Exception;
+using libboardgame_util::string_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
@@ -60,13 +62,20 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
     }
 }
 
-void appendVariation(QString& label, const Tree& tree, const Node& node)
+/** Get the index of a variation.
+    This ignores child nodes without moves so that the moves are still labeled
+    1a, 1b, 1c, etc. even if this does not correspond to the child node
+    index. (Note that this is a different convention from variation strings
+    which does not use move number and child move index, but node depth and
+    child node index) */
+bool getVariationIndex(const Tree& tree, const Node& node,
+                       unsigned int& moveIndex)
 {
     const Node* parent = node.get_parent_or_null();
     if (parent == 0 || parent->has_single_child())
-        return;
+        return false;
     unsigned int nuSiblingMoves = 0;
-    unsigned int moveIndex = 0;
+    moveIndex = 0;
     for (ChildIterator i(*parent); i; ++i)
     {
         if (! tree.has_move(*i))
@@ -76,11 +85,8 @@ void appendVariation(QString& label, const Tree& tree, const Node& node)
         ++nuSiblingMoves;
     }
     if (nuSiblingMoves == 1)
-        return;
-    if (moveIndex >= 26)
-        label.append("+");
-    else
-        label.append(QChar(QChar('a').unicode() + moveIndex));
+        return false;
+    return true;
 }
 
 void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
@@ -93,7 +99,11 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
     QString label;
     label.setNum(moveNumber);
     if (markVariations)
-        appendVariation(label, game.get_tree(), node);
+    {
+        unsigned int moveIndex;
+        if (getVariationIndex(game.get_tree(), node, moveIndex))
+            label.append(get_letter_coord(moveIndex).c_str());
+    }
     appendMoveAnnotation(label, game, node);
     guiBoard.setLabel(p, label);
 }

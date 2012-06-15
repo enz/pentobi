@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file StringUtil.h */
+/** @file libboardgame_util/StringUtil.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_STRING_UTIL_H
@@ -25,6 +25,11 @@ bool from_string(const string& s, T& t)
 
 template<>
 bool from_string(const string& s, string& t);
+
+/** Get a letter representing a coordinate.
+    Returns 'a' to 'z' for i between 0 and 25 and continues with 'aa','ab'...
+    for coordinates larger than 25. */
+string get_letter_coord(unsigned int i);
 
 string time_to_string(double seconds, bool with_seconds_as_double = false);
 

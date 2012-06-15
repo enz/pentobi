@@ -11,8 +11,11 @@
 #include <cstdio>
 #include <iostream>
 #include "libboardgame_util/Assert.h"
+#include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_base {
+
+using libboardgame_util::string_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
@@ -68,20 +71,7 @@ bool SpreadsheetStringRep::read(istream& in, unsigned int width,
 
 void SpreadsheetStringRep::write(ostream& out, unsigned int x, unsigned int y)
 {
-    ++x;
-    unsigned int n = 1;
-    while (n * 26 < x)
-        n *= 26;
-    while (true)
-    {
-        unsigned int d = x / n;
-        out << char('a' + d - 1);
-        if (n == 1)
-            break;
-        x -= n * d;
-        n /= 26;
-    }
-    out << (y + 1);
+    out << get_letter_coord(x) << (y + 1);
 }
 
 //-----------------------------------------------------------------------------

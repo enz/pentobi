@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file sgf/Util.cpp */
+/** @file libboardgame_sgf/Util.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -13,11 +13,13 @@
 #include "InvalidPropertyValue.h"
 #include "Node.h"
 #include "Writer.h"
+#include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_sgf {
 namespace util {
 
 using namespace std;
+using libboardgame_util::string_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
@@ -148,13 +150,13 @@ string get_variation_string(const Node& node)
         const Node& parent = current->get_parent();
         if (parent.get_nu_children() > 1)
         {
-            unsigned int index = parent.get_child_index(*current) + 1;
-            if (index > 1)
+            unsigned int index = parent.get_child_index(*current);
+            if (index > 0)
             {
                 ostringstream s;
-                s << depth << '.' << index;
+                s << depth << get_letter_coord(index);
                 if (! result.empty())
-                    s << ',' << result;
+                    s << '-' << result;
                 result = s.str();
             }
         }
