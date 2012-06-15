@@ -94,11 +94,10 @@ void Engine::cmd_final_score(Response& response)
     }
     else
     {
-        double game_result;
-        int score = bd.get_score(Color(0), game_result);
-        if (game_result == 1)
+        int score = bd.get_score(Color(0));
+        if (score > 0)
             response << format("B+%1%") % score;
-        else if (game_result == 0)
+        else if (score == 0)
             response << format("W+%1%") % -score;
         else
             response << "0";

@@ -290,21 +290,8 @@ public:
     /** Get score.
         The score is the number of points for a color minus the number of
         points of the opponent (or the average score of the opponents if there
-        are more than two players).
-        @param c
-        @param[out] game_result The game result from the point of view of the
-        color: 1=win, 0=loss, 0.5=draw. If there are n &gt; 2 players, this is
-        generalized in the following way: The scores are sorted in ascending
-        order. Each rank r_i (i in 0..n-1) is assigned a result value of
-        r_i/(n-1). If a multiple players have the same score, the result value
-        is the average of all ranks with this score. So being the single winner
-        still gives the result 1 and having the lowest score gives the result
-        0. Being the single winner is better than sharing the best place,
-        which is better than getting the second place, etc.
-        @todo The score should be a floating point type because averaging the
-        points of the opponents in the four-player version leads to fractional
-        points. */
-    int get_score(Color c, double& game_result) const;
+        are more than two players). */
+    int get_score(Color c) const;
 
     /** Get the place of a player in the game result.
         @param c The color of the player.

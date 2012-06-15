@@ -272,56 +272,28 @@ unsigned int Board::get_points_left(Color c) const
     return n;
 }
 
-int Board::get_score(Color c, double& game_result) const
+int Board::get_score(Color c) const
 {
     if (m_variant == variant_duo || m_variant == variant_junior)
     {
         unsigned int points0 = get_points_with_bonus(Color(0));
         unsigned int points1 = get_points_with_bonus(Color(1));
         if (c == Color(0))
-        {
-            if (points0 > points1)
-                game_result = 1;
-            else if (points0 < points1)
-                game_result = 0;
-            else
-                game_result = 0.5;
             return points0 - points1;
-        }
         else
-        {
-            if (points1 > points0)
-                game_result = 1;
-            else if (points1 < points0)
-                game_result = 0;
-            else
-                game_result = 0.5;
             return points1 - points0;
-        }
     }
     else if (m_variant == variant_classic
              || m_variant == variant_trigon
              || m_variant == variant_trigon_3)
     {
-        array<unsigned int,Color::range> points_array;
-        for (unsigned int i = 0; i < m_nu_colors; ++i)
-            points_array[i] = get_points_with_bonus(Color(i));
-        unsigned int points = points_array[c.to_int()];
         int score = 0;
-        for (unsigned int i = 0; i < m_nu_colors; ++i)
-            if (i != c.to_int())
-                score -= points_array[i];
-        score = score / (static_cast<int>(m_nu_colors) - 1) + points;
-        sort(points_array.begin(), points_array.begin() + m_nu_colors);
-        game_result = 0;
-        unsigned int n = 0;
-        for (unsigned int i = 0; i < m_nu_colors; ++i)
-            if (points_array[i] == points)
-            {
-                game_result += static_cast<double>(i) / (m_nu_colors - 1);
-                ++n;
-            }
-        game_result /= n;
+        for (ColorIterator i(m_nu_colors); i; ++i)
+            if (*i != c)
+                score -= get_points_with_bonus(*i);
+        score =
+            get_points_with_bonus(c)
+            + score / (static_cast<int>(m_nu_colors) - 1);
         return score;
     }
     else
@@ -333,25 +305,9 @@ int Board::get_score(Color c, double& game_result) const
         unsigned int points1 =
             get_points_with_bonus(Color(1)) + get_points_with_bonus(Color(3));
         if (c == Color(0) || c == Color(2))
-        {
-            if (points0 > points1)
-                game_result = 1;
-            else if (points0 < points1)
-                game_result = 0;
-            else
-                game_result = 0.5;
             return points0 - points1;
-        }
         else
-        {
-            if (points1 > points0)
-                game_result = 1;
-            else if (points1 < points0)
-                game_result = 0;
-            else
-                game_result = 0.5;
             return points1 - points0;
-        }
     }
 }
 

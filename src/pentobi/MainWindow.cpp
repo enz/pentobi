@@ -1734,8 +1734,7 @@ void MainWindow::gameOver()
     QString info;
     if (variant == variant_duo || variant == variant_junior)
     {
-        double game_result;
-        int score = bd.get_score(Color(0), game_result);
+        int score = bd.get_score(Color(0));
         if (score > 0)
             info = tr("Blue wins with %n point(s).", "", score);
         else if (score < 0)
@@ -1745,8 +1744,7 @@ void MainWindow::gameOver()
     }
     else if (variant == variant_classic_2 || variant == variant_trigon_2)
     {
-        double game_result;
-        int score = bd.get_score(Color(0), game_result);
+        int score = bd.get_score(Color(0));
         if (score > 0)
             info = tr("Blue/Red wins with %n point(s).", "", score);
         else if (score < 0)

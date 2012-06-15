@@ -36,6 +36,7 @@ using libpentobi_base::variant_duo;
 using libpentobi_base::variant_junior;
 using libpentobi_base::variant_trigon;
 using libpentobi_base::variant_trigon_2;
+using libpentobi_base::variant_trigon_3;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -101,6 +102,93 @@ Point find_best_starting_point(const Board& bd, Color c)
         }
     }
     return best;
+}
+
+/** Get game result from the view point of a color.
+    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there are
+    n &gt; 2 players, this is generalized in the following way: The scores are
+    sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned a result
+    value of r_i/(n-1). If a multiple players have the same score, the result
+    value is the average of all ranks with this score. So being the single
+    winner still gives the result 1 and having the lowest score gives the
+    result 0. Being the single winner is better than sharing the best place,
+    which is better than getting the second place, etc. */
+ValueType get_result(const Board& bd, Color c)
+{
+    Variant variant = bd.get_variant();
+    if (variant == variant_duo || variant == variant_junior)
+    {
+        unsigned int points0 = bd.get_points_with_bonus(Color(0));
+        unsigned int points1 = bd.get_points_with_bonus(Color(1));
+        if (c == Color(0))
+        {
+            if (points0 > points1)
+                return 1;
+            else if (points0 < points1)
+                return 0;
+            else
+                return 0.5;
+        }
+        else
+        {
+            if (points1 > points0)
+                return 1;
+            else if (points1 < points0)
+                return 0;
+            else
+                return 0.5;
+        }
+    }
+    else if (variant == variant_classic
+             || variant == variant_trigon
+             || variant == variant_trigon_3)
+    {
+        unsigned int nu_colors = bd.get_nu_colors();
+        array<unsigned int,Color::range> points_array;
+        for (unsigned int i = 0; i < nu_colors; ++i)
+            points_array[i] = bd.get_points_with_bonus(Color(i));
+        unsigned int points = points_array[c.to_int()];
+        sort(points_array.begin(), points_array.begin() + nu_colors);
+        ValueType result = 0;
+        unsigned int n = 0;
+        for (unsigned int i = 0; i < nu_colors; ++i)
+            if (points_array[i] == points)
+            {
+                result += ValueType(i) / (nu_colors - 1);
+                ++n;
+            }
+        result /= n;
+        return result;
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(variant == variant_classic_2
+                            || variant == variant_trigon_2);
+        unsigned int points0 =
+            bd.get_points_with_bonus(Color(0))
+            + bd.get_points_with_bonus(Color(2));
+        unsigned int points1 =
+            bd.get_points_with_bonus(Color(1))
+            + bd.get_points_with_bonus(Color(3));
+        if (c == Color(0) || c == Color(2))
+        {
+            if (points0 > points1)
+                return 1;
+            else if (points0 < points1)
+                return 0;
+            else
+                return 0.5;
+        }
+        else
+        {
+            if (points1 > points0)
+                return 1;
+            else if (points1 < points0)
+                return 0;
+            else
+                return 0.5;
+        }
+    }
 }
 
 /** Return the symmetric point state for symmetry detection.
@@ -361,8 +449,8 @@ array<ValueType, 4> State::evaluate_terminal()
     array<ValueType, 4> result_array;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
-        double game_result;
-        ValueType score = ValueType(m_bd.get_score(*i, game_result));
+        ValueType score = m_bd.get_score(*i);
+        ValueType game_result = get_result(m_bd, *i);
         ValueType score_modification = m_shared_const.score_modification;
         // Apply score modification. Example: If score modification is 0.1,
         // the game result is rescaled to [0..0.9] and the score modification
@@ -401,8 +489,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
                      || variant == variant_trigon_2)
                     && ! m_has_moves[m_bd.get_second_color(to_play)])))
         {
-            double game_result;
-            if (m_bd.get_score(to_play, game_result) < 0)
+            if (m_bd.get_score(to_play) < 0)
             {
                 if (log_simulations)
                     log() << "Terminate early (no moves and negative score)\n";
