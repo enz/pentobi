@@ -1,0 +1,58 @@
+//-----------------------------------------------------------------------------
+/** @file libboardgame_sgf/TreeWriter.cpp */
+//-----------------------------------------------------------------------------
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "TreeWriter.h"
+
+namespace libboardgame_sgf {
+
+//-----------------------------------------------------------------------------
+
+TreeWriter::TreeWriter(ostream& out, const Node& root)
+    : m_root(root),
+      m_writer(out)
+{
+}
+
+TreeWriter::~TreeWriter()
+{
+}
+
+void TreeWriter::write()
+{
+    m_writer.begin_tree();
+    write_node(m_root);
+    m_writer.end_tree();
+}
+
+void TreeWriter::write_node(const Node& node)
+{
+    m_writer.begin_node();
+    for (PropertyIterator i(node); i; ++i)
+        write_property(i->id, i->values);
+    m_writer.end_node();
+    if (! node.has_children())
+        return;
+    else if (node.has_single_child())
+        write_node(node.get_child());
+    else
+        for (ChildIterator i(node); i; ++i)
+        {
+            m_writer.begin_tree();
+            write_node(*i);
+            m_writer.end_tree();
+        }
+}
+
+void TreeWriter::write_property(const string& id, const vector<string>& values)
+{
+    m_writer.write_property(id, values);
+}
+
+//-----------------------------------------------------------------------------
+
+} // namespace libboardgame_sgf
