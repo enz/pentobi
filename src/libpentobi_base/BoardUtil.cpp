@@ -24,7 +24,9 @@ using sgf_util::get_setup_id;
 void dump(const Board& bd, ostream& out)
 {
     Variant variant = bd.get_variant();
-    Writer writer(out, true, true);
+    Writer writer(out);
+    writer.set_one_prop_per_line(true);
+    writer.set_one_prop_value_per_line(true);
     writer.begin_tree();
     writer.begin_node();
     writer.write_property("GM", to_string(variant));

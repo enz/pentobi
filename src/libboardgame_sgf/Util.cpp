@@ -12,7 +12,7 @@
 #include <sstream>
 #include "InvalidPropertyValue.h"
 #include "Node.h"
-#include "Writer.h"
+#include "TreeWriter.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_sgf {
@@ -20,31 +20,6 @@ namespace util {
 
 using namespace std;
 using libboardgame_util::string_util::get_letter_coord;
-
-//-----------------------------------------------------------------------------
-
-namespace {
-
-void write_node(Writer& writer, const Node& node)
-{
-    writer.begin_node();
-    for (PropertyIterator i(node); i; ++i)
-        writer.write_property(i->id, i->values);
-    writer.end_node();
-    if (! node.has_children())
-        return;
-    else if (node.has_single_child())
-        write_node(writer, node.get_child());
-    else
-        for (ChildIterator i(node); i; ++i)
-        {
-            writer.begin_tree();
-            write_node(writer, *i);
-            writer.end_tree();
-        }
-}
-
-} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -182,15 +157,6 @@ bool is_main_variation(const Node& node)
         current = &parent;
     }
     return true;
-}
-
-void write_tree(ostream& out, const Node& root, bool one_prop_per_line,
-                bool one_prop_value_per_line, unsigned int indent)
-{
-    Writer writer(out, one_prop_per_line, one_prop_value_per_line, indent);
-    writer.begin_tree();
-    write_node(writer, root);
-    writer.end_tree();
 }
 
 //-----------------------------------------------------------------------------

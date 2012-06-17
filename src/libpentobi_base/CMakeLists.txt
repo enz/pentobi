@@ -22,6 +22,7 @@ set(pentobi_base_STAT_SRCS
   SymmetricPoints.cpp
   Tree.cpp
   TreeUtil.cpp
+  TreeWriter.cpp
   Variant.cpp
   )
 

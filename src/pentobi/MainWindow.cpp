@@ -19,6 +19,7 @@
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
 #include "libpentobi_base/TreeUtil.h"
+#include "libpentobi_base/TreeWriter.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
 #include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
@@ -40,7 +41,6 @@ using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::get_variation_string;
 using libboardgame_sgf::util::has_comment;
 using libboardgame_sgf::util::is_main_variation;
-using libboardgame_sgf::util::write_tree;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
@@ -59,6 +59,7 @@ using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Tree;
+using libpentobi_base::TreeWriter;
 using libpentobi_base::tree_util::get_move_number;
 using libpentobi_base::tree_util::get_moves_left;
 using libpentobi_mcts::Search;
@@ -606,9 +607,7 @@ bool MainWindow::checkQuit()
     QSettings settings;
     if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
     {
-        boost::filesystem::ofstream out(
-                                      getAutoSaveFile().toStdString().c_str());
-        write_tree(out, m_game->get_root(), true, true, 2);
+        writeGame(getAutoSaveFile().toStdString());
         settings.setValue("autosave_rated", m_isRated);
         if (m_isRated)
             settings.setValue("autosave_rated_color",
@@ -1840,8 +1839,7 @@ void MainWindow::gameOver()
                     Tree::get_date_today(), m_level, newRating);
         history.save();
         {
-            boost::filesystem::ofstream out(getRatedGameFile(nuGames, variant));
-            write_tree(out, m_game->get_root(), true, true, 2);
+            writeGame(getRatedGameFile(nuGames, variant));
             // Only save the last RatingHistory::maxGames games
             if (nuGames > RatingHistory::maxGames)
                 remove(getRatedGameFile(nuGames - RatingHistory::maxGames,
@@ -2706,9 +2704,7 @@ void MainWindow::save()
 
 bool MainWindow::save(const QString& file)
 {
-    ofstream out(file.toLocal8Bit().constData());
-    write_tree(out, m_game->get_root(), true, true, 2);
-    if (! out)
+    if (! writeGame(file.toLocal8Bit().constData()))
     {
         showError(tr("The file could not be saved."),
                   /*: Error message if file cannot be saved. %1 is
@@ -3541,6 +3537,17 @@ void MainWindow::wheelEvent(QWheelEvent* event)
                 previousTransform();
     }
     event->accept();
+}
+
+bool MainWindow::writeGame(const path& file)
+{
+    boost::filesystem::ofstream out(file);
+    TreeWriter writer(out, m_game->get_tree());
+    writer.set_one_prop_per_line(true);
+    writer.set_one_prop_value_per_line(true);
+    writer.set_indent(2);
+    writer.write();
+    return static_cast<bool>(out);
 }
 
 //-----------------------------------------------------------------------------

@@ -83,7 +83,9 @@ void dump_tree(ostream& out, const Search& search)
     Variant variant;
     Setup setup;
     search.get_root_position(variant, setup);
-    Writer writer(out, true, true);
+    Writer writer(out);
+    writer.set_one_prop_per_line(true);
+    writer.set_one_prop_value_per_line(true);
     writer.begin_tree();
     writer.begin_node();
     writer.write_property("GM", to_string(variant));

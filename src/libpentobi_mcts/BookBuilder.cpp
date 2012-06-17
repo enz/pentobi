@@ -14,10 +14,10 @@
 #include "libboardgame_sgf/MissingProperty.h"
 #include "libboardgame_sgf/TreeIterator.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Exception.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/Game.h"
+#include "libpentobi_base/TreeWriter.h"
 
 namespace libpentobi_mcts {
 
@@ -32,7 +32,6 @@ using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeIterator;
 using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::util::write_tree;
 using libboardgame_util::log;
 using libboardgame_util::Exception;
 using libpentobi_base::variant_classic;
@@ -44,6 +43,7 @@ using libpentobi_base::Game;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MovePoints;
+using libpentobi_base::TreeWriter;
 
 //-----------------------------------------------------------------------------
 
@@ -436,7 +436,8 @@ void BookBuilder::write(const path& file) const
     path tmp_file = file.string() + ".new";
     {
         ofstream out(tmp_file);
-        write_tree(out, m_tree.get_root());
+        TreeWriter writer(out, m_tree);
+        writer.write();
         if (! out)
             throw Exception(format("Could not write '%1%'") % file);
     }

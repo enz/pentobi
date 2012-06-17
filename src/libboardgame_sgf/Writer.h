@@ -24,11 +24,23 @@ using libboardgame_util::string_util::to_string;
 class Writer
 {
 public:
-    Writer(ostream& out, bool one_prop_per_line = false,
-           bool one_prop_value_per_line = false,
-           unsigned int indent = 0);
+    Writer(ostream& out);
 
     ~Writer() throw();
+
+
+    /** @name Formatting options.
+        Should be set before starting to write. */
+    // @{
+
+    void set_one_prop_per_line(bool enable);
+
+    void set_one_prop_value_per_line(bool enable);
+
+    void set_indent(unsigned int indent);
+
+    // @} // @name
+
 
     void begin_tree();
 
@@ -67,6 +79,21 @@ private:
 
     void write_indent();
 };
+
+inline void Writer::set_one_prop_per_line(bool enable)
+{
+    m_one_prop_per_line = enable;
+}
+
+inline void Writer::set_one_prop_value_per_line(bool enable)
+{
+    m_one_prop_value_per_line = enable;
+}
+
+inline void Writer::set_indent(unsigned int indent)
+{
+    m_indent = indent;
+}
 
 inline void Writer::write_property(const string& id, const char* value)
 {

@@ -626,6 +626,8 @@ private:
 
     void updateFlipActions();
 
+    bool writeGame(const path& file);
+
 private slots:
     void analyzeGameFinished();
 
