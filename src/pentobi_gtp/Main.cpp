@@ -14,7 +14,6 @@
 #include "libboardgame_util/Exception.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
-#include "libpentobi_mcts/BookBuilder.h"
 
 using namespace std;
 using boost::filesystem::path;
@@ -41,7 +40,6 @@ using libpentobi_base::variant_trigon_3;
 using libpentobi_base::parse_variant_id;
 using libpentobi_base::Board;
 using libpentobi_base::Variant;
-using libpentobi_mcts::BookBuilder;
 
 //-----------------------------------------------------------------------------
 
@@ -67,17 +65,13 @@ int main(int argc, char** argv)
         uint32_t seed;
         string config_file;
         string book_file;
-        string build_book_file;
         string variant_string = "classic";
         vector<string> input_file;
         options_description normal_options("Options");
         int level = 4;
-        double prune_book_diff;
         size_t memory = 0;
         normal_options.add_options()
             ("book", value<>(&book_file), "load an external book file")
-            ("buildbook", value<>(&build_book_file),
-             "run the opening book builder")
             ("config,c", value<>(&config_file), "set GTP config file")
             ("color", "colorize text output of boards")
             ("game,g", value<>(&variant_string),
@@ -88,8 +82,6 @@ int main(int argc, char** argv)
             ("seed,r", value<uint32_t>(&seed), "set random seed")
             ("showboard", "automatically write board to stderr after changes")
             ("nobook", "do not use opening book")
-            ("prunebook", value<double>(&prune_book_diff),
-             "prune opening book (requires --buildbook)")
             ("quiet,q", "do not print logging messages")
             ("version,v", "print version and exit");
         options_description hidden_options;
@@ -130,15 +122,6 @@ int main(int argc, char** argv)
         if (! parse_variant_id(variant_string, variant))
             throw Exception(format("invalid game variant '%1%'")
                             % variant_string);
-        if (vm.count("buildbook"))
-        {
-            BookBuilder book_builder(variant);
-            if (vm.count("prunebook"))
-                book_builder.prune(build_book_file, prune_book_diff);
-            else
-                book_builder.build(build_book_file);
-            return EXIT_SUCCESS;
-        }
         bool use_book = (vm.count("nobook") == 0);
         path books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,

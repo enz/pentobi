@@ -26,29 +26,27 @@ using libboardgame_util::log;
 //-----------------------------------------------------------------------------
 
 Book::Book(Variant variant)
-    : m_tree(variant),
-      m_is_computer_generated(true)
+    : m_tree(variant)
 {
 }
 
-Move Book::genmove(const Board& bd, Color c, double delta, double max_delta)
+Move Book::genmove(const Board& bd, Color c)
 {
     if (bd.has_setup())
-        // Book dcannot handle setup positions
+        // Book cannot handle setup positions
         return Move::null();
-    Move mv = genmove(bd, c, delta, max_delta,
-                      PointTransfIdent<Point>(), PointTransfIdent<Point>());
+    Move mv = genmove(bd, c, PointTransfIdent<Point>(),
+                      PointTransfIdent<Point>());
     if (! mv.is_null())
         return mv;
     Variant variant = bd.get_variant();
     if (variant == variant_duo || variant == variant_junior)
-        mv = genmove(bd, c, delta, max_delta,
-                     PointTransfRot270Refl<Point>(),
+        mv = genmove(bd, c, PointTransfRot270Refl<Point>(),
                      PointTransfRot270Refl<Point>());
     return mv;
 }
 
-Move Book::genmove(const Board& bd, Color c, double delta, double max_delta,
+Move Book::genmove(const Board& bd, Color c,
                    const PointTransform<Point>& transform,
                    const PointTransform<Point>& inv_transform)
 {
@@ -62,21 +60,7 @@ Move Book::genmove(const Board& bd, Color c, double delta, double max_delta,
         if (node == 0)
             return Move::null();
     }
-    if (m_is_computer_generated)
-    {
-        try
-        {
-            node = select_child(m_random, bd, c, m_tree, *node, delta,
-                                max_delta);
-        }
-        catch (const Exception&)
-        {
-            log() << "Position in book but not all children evaluated.\n";
-            return Move::null();
-        }
-    }
-    else
-        node = select_annotated_child(m_random, bd, c, m_tree, *node);
+    node = select_child(bd, c, m_tree, *node);
     if (node == 0)
         return Move::null();
     return get_transformed(bd, m_tree.get_move(*node).move, inv_transform);
@@ -97,11 +81,6 @@ Move Book::get_transformed(const Board& bd, Move mv,
     return transformed_mv;
 }
 
-double Book::inv_value(double value) const
-{
-    return 1- value;
-}
-
 void Book::load(istream& in)
 {
     TreeReader reader;
@@ -116,19 +95,10 @@ void Book::load(istream& in)
     unique_ptr<libboardgame_sgf::Node> root
         = reader.get_tree_transfer_ownership();
     m_tree.init(root);
-    bool has_root_annotated_good_children = false;
-    for (ChildIterator i(m_tree.get_root()); i; ++i)
-        if (m_tree.get_good_move(*i) > 0)
-        {
-            has_root_annotated_good_children = true;
-            break;
-        }
-    m_is_computer_generated = ! has_root_annotated_good_children;
 }
 
-const Node* Book::select_annotated_child(RandomGenerator& random,
-                                         const Board& bd, Color c,
-                                         const Tree& tree, const Node& node)
+const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
+                               const Node& node)
 {
     unsigned int nu_children = node.get_nu_children();
     if (nu_children == 0)
@@ -165,63 +135,7 @@ const Node* Book::select_annotated_child(RandomGenerator& random,
         return 0;
     log() << "Book moves: " << good_moves.size() << '\n';
     unsigned int nu_good_moves = static_cast<unsigned int>(good_moves.size());
-    return good_moves[random.generate_small_int(nu_good_moves)];
-}
-
-const Node* Book::select_child(RandomGenerator& random, const Board& bd,
-                               Color c, const Tree& tree, const Node& node,
-                               double delta, double max_delta)
-{
-    unsigned int nu_children = node.get_nu_children();
-    if (nu_children == 0)
-        return 0;
-    double best_value = numeric_limits<double>::max();
-    for (ChildIterator i(node); i; ++i)
-    {
-        double value = tree.get_comment_property<double>(*i, "v");
-        best_value = min(value, best_value);
-    }
-    // Chose move with the largest difference to the best move that is still
-    // below a threshold selected using an exponentially decreasing probability
-    // distribution with width delta and cut-off max_delta
-    unsigned int n = 0;
-    double threshold =
-        min(-delta * std::log(random.generate_float()), max_delta);
-    const Node* result = 0;
-    double result_value = 0;
-    for (ChildIterator i(node); i; ++i)
-    {
-        ColorMove mv = tree.get_move(*i);
-        if (mv.is_null())
-        {
-            log() << "WARNING: Book contains nodes without moves\n";
-            continue;
-        }
-        if (mv.color != c)
-        {
-            log() << "WARNING: Book contains non-alternating move sequences\n";
-            continue;
-        }
-        if (! bd.is_legal(mv.color, mv.move))
-        {
-            log() << "WARNING: Book contains illegal move\n";
-            continue;
-        }
-        double value = tree.get_comment_property<double>(*i, "v");
-        if (value < best_value + max_delta)
-            ++n;
-        if (result == 0 ||
-            (value > result_value && value < best_value + threshold))
-        {
-            result = &(*i);
-            result_value = value;
-        }
-        log() << (format("%s %.3f\n")
-                  % bd.to_string(mv.move) % inv_value(value));
-    }
-    log(format("Book moves: %i (d=%.3f max_d=%.3f thr=%.3f")
-        %n % delta % max_delta % threshold);
-    return result;
+    return good_moves[m_random.generate_small_int(nu_good_moves)];
 }
 
 //-----------------------------------------------------------------------------

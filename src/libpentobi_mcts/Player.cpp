@@ -109,20 +109,7 @@ Move Player::genmove(const Board& bd, Color c)
         }
         if (m_is_book_loaded)
         {
-            double delta;
-            if (m_level <= 1)
-                delta = 0.05;
-            else if (m_level <= 2)
-                delta = 0.04;
-            else if (m_level <= 3)
-                delta = 0.03;
-            else if (m_level <= 4)
-                delta = 0.02;
-            else if (m_level <= 5)
-                delta = 0.015;
-            else if (m_level >= 6)
-                delta = 0.01;
-            mv = m_book.genmove(bd, c, delta, 2.5 * delta);
+            mv = m_book.genmove(bd, c);
             if (! mv.is_null())
                 return mv;
         }
