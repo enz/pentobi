@@ -84,10 +84,7 @@ void Engine::cmd_clear_board()
 void Engine::cmd_final_score(Response& response)
 {
     const Board& bd = get_board();
-    Variant variant = bd.get_variant();
-    if (variant == variant_classic
-        || variant == variant_trigon
-        || variant == variant_trigon_3)
+    if (get_nu_players(bd.get_variant()) > 2)
     {
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
             response << bd.get_points_with_bonus(*i) << ' ';
@@ -97,7 +94,7 @@ void Engine::cmd_final_score(Response& response)
         int score = bd.get_score(Color(0));
         if (score > 0)
             response << format("B+%1%") % score;
-        else if (score == 0)
+        else if (score < 0)
             response << format("W+%1%") % -score;
         else
             response << "0";
