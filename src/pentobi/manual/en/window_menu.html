@@ -14,7 +14,7 @@
 
     <h4>File</h4>
     <dl>
-      <dt>Open</dt>
+      <dt><i>Open</i></dt>
       <dd>
 	Load a saved game.
 	The board position after loading will be the last position in the
@@ -24,30 +24,30 @@
 	This avoids that solutions are immediately shown if the file contains
 	a Blokus puzzle as a setup with the solution as the main variation.
       </dd>
-      <dt>Open Recent</dt>
+      <dt><i>Open Recent</i></dt>
       <dd>
 	Load a recently used saved game.
       </dd>
-      <dt>Save</dt>
+      <dt><i>Save</i></dt>
       <dd>
 	Save the current game.
       </dd>
-      <dt>Save As</dt>
+      <dt><i>Save As</i></dt>
       <dd>
 	Save the current game under a new file name.
       </dd>
-      <dt>Export/Image</dt>
+      <dt><i>Export/Image</i></dt>
       <dd>
 	Save the current position as an image file.
 	Several image file formats are supported, the file format
 	is derived from the file name ending (e.g. ".png" for the PNG format).
       </dd>
-      <dt>Export/ASCII Art</dt>
+      <dt><i>Export/ASCII Art</i></dt>
       <dd>
 	Save the current position as a text diagram.
 	The text diagram should be viewed using a monospace font.
       </dd>
-      <dt>Quit</dt>
+      <dt><i>Quit</i></dt>
       <dd>
 	Quit Pentobi.
       </dd>
@@ -55,41 +55,36 @@
 
     <h4>Game</h4>
     <dl>
-      <dt>New Game</dt>
+      <dt><i>New Game</i></dt>
       <dd>
 	Start a new game.
       </dd>
-      <dt>New Rated Game</dt>
+      <dt><i>New Rated Game</i></dt>
       <dd>
-	Start a new rated game against the computer.
-	The level of the computer player will be selected according to the
-	current rating of the user.
-	The user will play a different color in each new rated game.
-	After the game is finished, the rating of the user will be updated.
-	The rating is only based on whether a game is won or lost, the score
-	points of the players do not matter.
+	Start a new <a href="become_stronger.html#rating">rated game</a>
+	against the computer.
       </dd>
-      <dt>Game Variant</dt>
+      <dt><i>Game Variant</i></dt>
       <dd>
 	Select a game variant and start a new game of this game variant.
       </dd>
-      <dt>Computer Colors</dt>
+      <dt><i>Computer Colors</i></dt>
       <dd>
 	Select which colors are played by the computer.
       </dd>
-      <dt>Game Info</dt>
+      <dt><i>Game Info</i></dt>
       <dd>
 	Display or edit additional information about the game like the
 	name of the players or the date when the game was played.
       </dd>
-      <dt>Undo Move</dt>
+      <dt><i>Undo Move</i></dt>
       <dd>
 	Undo the last move played and remove it from the game tree.
 	Undoing a move is only possible if it is the last move in the
 	current variation (i.e. a leaf node in the game tree; use
-	"Edit/Truncate"	to remove inner nodes of the game tree).
+	<i>Edit/Truncate</i> to remove inner nodes of the game tree).
       </dd>
-      <dt>Find Move</dt>
+      <dt><i>Find Move</i></dt>
       <dd>
 	Find a legal move for the current color and display it for a few
 	seconds on the board. Selecting this item repeatedly will show all
@@ -99,52 +94,52 @@
 
     <h4>Go</h4>
     <dl>
-      <dt>Beginning</dt>
+      <dt><i>Beginning</i></dt>
       <dd>
 	Go to the beginning of the game.
       </dd>
-      <dt>Ten Moves Backward</dt>
+      <dt><i>Ten Moves Backward</i></dt>
       <dd>
 	Go ten moves backward in the current variation.
       </dd>
-      <dt>Backward</dt>
+      <dt><i>Backward</i></dt>
       <dd>
 	Go one move backward in the current variation.
       </dd>
-      <dt>Forward</dt>
+      <dt><i>Forward</i></dt>
       <dd>
 	Go one move forward in the current variation.
 	If the current position has several follow-up variations (i.e. the
 	current node in the game tree has several child nodes), the first
 	variation will be used.
       </dd>
-      <dt>Ten Moves Forward</dt>
+      <dt><i>Ten Moves Forward</i></dt>
       <dd>
 	Go ten moves forward in the current variation.
 	Like Forward, this also uses the first variation in positions with
 	several follow-up variations.
       </dd>
-      <dt>End</dt>
+      <dt><i>End</i></dt>
       <dd>
 	Go to the end of the current variation.
 	Like Forward, this also uses the first variation in positions with
 	several follow-up variations.
       </dd>
-      <dt>Next Variation</dt>
+      <dt><i>Next Variation</i></dt>
       <dd>
 	Go to the next variation to the last move played (i.e. the next sibling
 	node of the current node in the game tree).
       </dd>
-      <dt>Previous Variation</dt>
+      <dt><i>Previous Variation</i></dt>
       <dd>
 	Go to the previous variation to the last move played (i.e. the previous
 	sibling node of the current node in the game tree).
       </dd>
-      <dt>Go to Move</dt>
+      <dt><i>Go to Move</i></dt>
       <dd>
 	Go to the move with a given move number in the current variation.
       </dd>
-      <dt>Back to Main Variation</dt>
+      <dt><i>Back to Main Variation</i></dt>
       <dd>
 	Return to the last move in the main variation that had a variation.
       </dd>
@@ -152,65 +147,65 @@
 
     <h4>Edit</h4>
     <dl>
-      <dt>Find Next Comment</dt>
+      <dt><i>Find Next Comment</i></dt>
       <dd>
 	Go to the next position that has a comment.
 	If the comment text field was not visible, it will become visible.
 	Selecting this item repeatedly will show all positions with comments
 	in the game tree.
       </dd>
-      <dt>Move Annotation</dt>
+      <dt><i>Move Annotation</i></dt>
       <dd>
 	Add a chess-style move annotation symbol (e.g. !!) to the current move.
 	Annotation symbols are shown after the move numbers on the board and
 	only visible if move numbers are shown.
       </dd>
-      <dt>Make Main Variation</dt>
+      <dt><i>Make Main Variation</i></dt>
       <dd>
 	Make the current variation the main variation of the game.
 	This reorders the nodes in the game tree such that the current variation
 	becomes the main variation.
       </dd>
-      <dt>Delete All Variations</dt>
+      <dt><i>Delete All Variations</i></dt>
       <dd>
 	Delete all variations but the main variation.
 	If the current position is not on the main variation, it will be
 	changed to a position in the main variation as in
-	"Back to Main Variation".
+	<i>Back to Main Variation</i>.
       </dd>
-      <dt>Move Variation Up</dt>
+      <dt><i>Move Variation Up</i></dt>
       <dd>
 	Changes the order of variations such that the current position
 	will appear earlier when iterating over the variations with
-	"Next/Previous Variation".
+	<i>Next/Previous Variation</i>.
       </dd>
-      <dt>Move Variation Down</dt>
+      <dt><i>Move Variation Down</i></dt>
       <dd>
 	Changes the order of variations such that the current position
 	will appear later when iterating over the variations with
-	"Next/Previous Variation".
+	<i>Next/Previous Variation</i>.
       </dd>
-      <dt>Truncate</dt>
+      <dt><i>Truncate</i></dt>
       <dd>
 	Remove the node with the current position, including any subtree,
 	from the game tree.
       </dd>
-      <dt>Truncate Children</dt>
+      <dt><i>Truncate Children</i></dt>
       <dd>
 	Remove all children nodes of the node with the current position from
 	the game tree.
       </dd>
-      <dt>Keep Only Position</dt>
+      <dt><i>Keep Only Position</i></dt>
       <dd>
 	Delete all moves and keep only the current position as a setup.
 	This can be used to create files that start with a given fixed position.
       </dd>
-      <dt>Keep Only Subtree</dt>
+      <dt><i>Keep Only Subtree</i></dt>
       <dd>
 	Like Keep Only Position but does not delete the moves after the
 	current position.
       </dd>
-      <dt>Setup Mode</dt>
+      <dt><i>Setup Mode</i></dt>
       <dd>
 	Enter or leave setup mode.
 	In setup mode, pieces can be placed anywhere on the board, even
@@ -218,11 +213,11 @@
 	Existing pieces can be removed from the board by clicking on them.
 	The currently selected color also determines the color to play after
 	the setup is finished.
-	It can be changed with "Select Next Color" or by clicking on the
+	It can be changed with <i>Select Next Color</i> or by clicking on the
 	orientation selector while no piece is selected.
 	Setup mode can only be used if no moves have been played.
       </dd>
-      <dt>Select Next Color</dt>
+      <dt><i>Select Next Color</i></dt>
       <dd>
 	Choose the next color for selecting pieces.
 	This can be used for example to enter game records in which moves
@@ -232,37 +227,38 @@
 
     <h4>View</h4>
     <dl>
-      <dt>Toolbar</dt>
+      <dt><i>Toolbar</i></dt>
       <dd>
 	Show or hide the toolbar.
       </dd>
-      <dt>Comment</dt>
+      <dt><i>Comment</i></dt>
       <dd>
 	Show or hide a text field to display or edit comments on the current
 	position.
       </dd>
-      <dt>Move Numbers</dt>
+      <dt><i>Move Numbers</i></dt>
       <dd>
 	Change the way move numbers are displayed on the board.
 	The options are to show only the number of the last move or of all
 	moves or to show no numbers at all.
       </dd>
-      <dt>Coordinate Labels</dt>
+      <dt><i>Coordinate Labels</i></dt>
       <dd>
 	Display coordinate labels for the fields on the board around the
 	board.
 	The convention for labeling coordinates is the same as in the
 	Blokus SGF file format used by Pentobi.
       </dd>
-      <dt>Show Variations</dt>
+      <dt><i>Show Variations</i></dt>
       <dd>
 	Appends a letter to the move number on the board if the moves has
 	a variation.
       </dd>
-      <dt>Fullscreen</dt>
+      <dt><i>Fullscreen</i></dt>
       <dd>
 	Make the main window full screen or leave full screen mode.
-	It is platform-dependent if the window menu is shown in full screen mode.
+	It is platform-dependent if the window menu is shown in full screen
+	mode.
 	To leave full screen mode without using the window menu, use the small
 	button at the right of the status bar or press the F11 key.
       </dd>
@@ -270,7 +266,7 @@
 
     <h4>Computer</h4>
     <dl>
-      <dt>Play</dt>
+      <dt><i>Play</i></dt>
       <dd>
 	Make the computer play a move for the current color.
 	This can be used to change the color the computer plays or to
@@ -278,17 +274,17 @@
 	If the computer did not already play the current color, it will play
 	this color (and only this color) from now on.
       </dd>
-      <dt>Play Single Move</dt>
+      <dt><i>Play Single Move</i></dt>
       <dd>
 	Make the computer play a single move for the current color without
 	changing the colors played by the computer.
       </dd>
-      <dt>Interrupt</dt>
+      <dt><i>Interrupt</i></dt>
       <dd>
 	Interrupt the current move generation.
 	The computer will play the best move it has found so far.
       </dd>
-      <dt>Level</dt>
+      <dt><i>Level</i></dt>
       <dd>
 	Change the playing strength of the computer.
 	Higher levels are stronger but can make the computer take a long
@@ -298,35 +294,25 @@
 
     <h4>Tools</h4>
     <dl>
-      <dt>Your Rating</dt>
+      <dt><i>Your Rating</i></dt>
       <dd>
-	Show a dialog window with the rating and the number of rated games
-	of the user in the current game	variant.	
+	Show a dialog window with the
+	<a href="become_stronger.html#rating">rating</a> of the user in the
+	current game variant.	
       </dd>
-      <dt>Analyze Game</dt>
+      <dt><i>Analyze Game</i></dt>
       <dd>
-	Makes the computer player do a quick evaluation of each position
-	in the main variation.
-	This can be a useful tool to find potentially bad moves in a game
-	but note that the values are only estimates and the computer will not
-	always evaluate positions correctly.
-	The result is displayed in a window with a diagram of colored dots.
-	Each dot represents a game position in which the color of the dot is to
-	play.
-	The dots are ordered horizontally by increasing move number.
-	The vertical axis represents the estimated probability of winning the
-	game for the color to play.
-	Mouse clicks in the diagram will go the the corresponding position.
+	Perform a <a href="become_stronger.html#analysis">game analysis</a>.
       </dd>
     </dl>
 
     <h4>Help</h4>
     <dl>
-      <dt>Contents</dt>
+      <dt><i>Contents</i></dt>
       <dd>
 	Show a window to browse the Pentobi user manual.
       </dd>
-      <dt>About</dt>
+      <dt><i>About</i></dt>
       <dd>
 	Show an info dialog with information about this version of Pentobi.
       </dd>
