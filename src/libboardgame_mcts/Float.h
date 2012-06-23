@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
-/** @file ValueType.h */
+/** @file libboardgame_mcts/Float.h */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_MCTS_VALUE_TYPE_H
-#define LIBBOARDGAME_MCTS_VALUE_TYPE_H
+#ifndef LIBBOARDGAME_MCTS_FLOAT_H
+#define LIBBOARDGAME_MCTS_FLOAT_H
 
 #include <limits>
 
@@ -13,7 +13,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-/** @typedef ValueType
+/** @typedef Float
     The floating type used for mean values and counts in the Monte-Carlo tree
     search.
     The default type is @c float for a reduced node size and performance gains
@@ -22,19 +22,19 @@ using namespace std;
     saturation. This maximum is given by 2^d-1 with d being the digits in the
     mantissa (=23 for IEEE 754 float's). The search will terminate when this
     number is reached. For longer searches, the code should be compiled with
-    LIBBOARDGAME_MCTS_VALUE_TYPE_DOUBLE set to @c double. */
+    LIBBOARDGAME_MCTS_FLOAT_TYPE set to @c double. */
 
-#ifdef LIBBOARDGAME_MCTS_VALUE_TYPE
-typedef LIBBOARDGAME_MCTS_VALUE_TYPE ValueType;
+#ifdef LIBBOARDGAME_MCTS_FLOAT_TYPE
+typedef LIBBOARDGAME_MCTS_FLOAT_TYPE Float;
 #else
-typedef float ValueType;
+typedef float Float;
 #endif
 
-static_assert(! numeric_limits<ValueType>::is_exact,
-              "libboardgame_mcts::ValueType is not a floating type");
+static_assert(! numeric_limits<Float>::is_exact,
+              "libboardgame_mcts::Float is not a floating type");
 
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_mcts
 
-#endif // LIBBOARDGAME_MCTS_VALUE_TYPE_H
+#endif // LIBBOARDGAME_MCTS_FLOAT_H

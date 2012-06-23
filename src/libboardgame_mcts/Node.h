@@ -6,7 +6,7 @@
 #define LIBBOARDGAME_MCTS_NODE_H
 
 #include <limits>
-#include "ValueType.h"
+#include "Float.h"
 #include "libboardgame_util/Assert.h"
 
 namespace libboardgame_mcts {
@@ -29,34 +29,34 @@ public:
 
     void init(const Move& mv);
 
-    void init(const Move& mv, ValueType value, ValueType count,
-              ValueType rave_value, ValueType rave_count);
+    void init(const Move& mv, Float value, Float count, Float rave_value,
+              Float rave_count);
 
     const Move& get_move() const;
 
     /** Number of values that were added.
         This can be larger than the visit count if prior knowledge is used. */
-    ValueType get_count() const;
+    Float get_count() const;
 
     /** Value of the node.
         For the root node, this is the value of the position from the point of
         view of the player at the root node; for all other nodes, this is the
         value of the move leading to the position at the node from the point
         of view of the player at the parent node. */
-    ValueType get_value() const;
+    Float get_value() const;
 
-    ValueType get_visit_count() const;
+    Float get_visit_count() const;
 
     void inc_visit_count();
 
-    ValueType get_rave_count() const;
+    Float get_rave_count() const;
 
     /** RAVE value of the node.
         For the root node, this is the value id undefined; for all other nodes,
         this is the RAVE value of the move leading to the position at the node
         from the point of view of the player at the parent node.
         See @ref libboardgame_doc_rave. */
-    ValueType get_rave_value() const;
+    Float get_rave_value() const;
 
     bool has_children() const;
 
@@ -75,9 +75,9 @@ public:
 
     void unlink_children();
 
-    void add_value(ValueType v);
+    void add_value(Float v);
 
-    void add_rave_value(ValueType v, ValueType weight);
+    void add_rave_value(Float v, Float weight);
 
     void copy_data_from(const Node& node);
 
@@ -88,15 +88,15 @@ private:
 
     Move m_move;
 
-    ValueType m_count;
+    Float m_count;
 
-    ValueType m_value;
+    Float m_value;
 
-    ValueType m_rave_count;
+    Float m_rave_count;
 
-    ValueType m_rave_value;
+    Float m_rave_value;
 
-    ValueType m_visit_count;
+    Float m_visit_count;
 
     Node* m_first_child;
 
@@ -113,9 +113,9 @@ inline Node<M>::Node()
 }
 
 template<typename M>
-void Node<M>::add_rave_value(ValueType v, ValueType weight)
+void Node<M>::add_rave_value(Float v, Float weight)
 {
-    ValueType count = m_rave_count;
+    Float count = m_rave_count;
     count += weight;
     v -= m_rave_value;
     m_rave_value +=  weight * v / count;
@@ -123,9 +123,9 @@ void Node<M>::add_rave_value(ValueType v, ValueType weight)
 }
 
 template<typename M>
-void Node<M>::add_value(ValueType v)
+void Node<M>::add_value(Float v)
 {
-    ValueType count = m_count;
+    Float count = m_count;
     ++count;
     v -= m_value;
     m_value +=  v / count;
@@ -160,11 +160,11 @@ void Node<M>::copy_data_from(const Node& node)
     {
         unsigned short m_nu_children;
         Move m_move;
-        ValueType m_count;
-        ValueType m_value;
-        ValueType m_rave_count;
-        ValueType m_rave_value;
-        ValueType m_visit_count;
+        Float m_count;
+        Float m_value;
+        Float m_rave_count;
+        Float m_rave_value;
+        Float m_visit_count;
         Node* m_first_child;
     };
     static_assert(sizeof(Node) == sizeof(Dummy),
@@ -179,7 +179,7 @@ void Node<M>::copy_data_from(const Node& node)
 }
 
 template<typename M>
-inline ValueType Node<M>::get_count() const
+inline Float Node<M>::get_count() const
 {
     return m_count;
 }
@@ -204,27 +204,27 @@ inline unsigned int Node<M>::get_nu_children() const
 }
 
 template<typename M>
-inline ValueType Node<M>::get_rave_count() const
+inline Float Node<M>::get_rave_count() const
 {
     return m_rave_count;
 }
 
 template<typename M>
-inline ValueType Node<M>::get_rave_value() const
+inline Float Node<M>::get_rave_value() const
 {
     LIBBOARDGAME_ASSERT(m_rave_count > 0);
     return m_rave_value;
 }
 
 template<typename M>
-inline ValueType Node<M>::get_value() const
+inline Float Node<M>::get_value() const
 {
     LIBBOARDGAME_ASSERT(m_count > 0);
     return m_value;
 }
 
 template<typename M>
-inline ValueType Node<M>::get_visit_count() const
+inline Float Node<M>::get_visit_count() const
 {
     return m_visit_count;
 }
@@ -249,8 +249,8 @@ void Node<M>::init(const Move& mv)
 }
 
 template<typename M>
-void Node<M>::init(const Move& mv, ValueType value, ValueType count,
-                   ValueType rave_value, ValueType rave_count)
+void Node<M>::init(const Move& mv, Float value, Float count, Float rave_value,
+                   Float rave_count)
 {
     m_move = mv;
     m_count = count;

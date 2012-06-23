@@ -37,7 +37,7 @@ public:
 
     Move genmove(const Board& bd, Color c);
 
-    ValueType get_fixed_simulations() const;
+    Float get_fixed_simulations() const;
 
     double get_fixed_time() const;
 
@@ -45,7 +45,7 @@ public:
         If set to a value greater than zero, this value will enforce a
         fixed number of simulations per search independent of the playing
         level. */
-    void set_fixed_simulations(ValueType n);
+    void set_fixed_simulations(Float n);
 
     /** Use a fixed time limit per move.
         If set to a value greater than zero, this value will set a fixed
@@ -90,7 +90,7 @@ private:
 
     array<float, Board::max_player_moves> weight_max_count_duo;
 
-    ValueType m_fixed_simulations;
+    Float m_fixed_simulations;
 
     double m_fixed_time;
 
@@ -103,7 +103,7 @@ private:
     bool load_book(const path& filepath);
 };
 
-inline ValueType Player::get_fixed_simulations() const
+inline Float Player::get_fixed_simulations() const
 {
     return m_fixed_simulations;
 }
@@ -133,7 +133,7 @@ inline bool Player::get_use_book() const
     return m_use_book;
 }
 
-inline void Player::set_fixed_simulations(ValueType n)
+inline void Player::set_fixed_simulations(Float n)
 {
     m_fixed_simulations = n;
     m_fixed_time = 0;

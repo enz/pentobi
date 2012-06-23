@@ -54,9 +54,9 @@ public:
     /** @name Parameters */
     // @{
 
-    ValueType get_score_modification() const;
+    Float get_score_modification() const;
 
-    void set_score_modification(ValueType value);
+    void set_score_modification(Float value);
 
     bool get_detect_symmetry() const;
 
@@ -77,7 +77,7 @@ public:
     // @} // @name
 
 
-    bool search(Move& mv, const Board& bd, Color to_play, ValueType max_count,
+    bool search(Move& mv, const Board& bd, Color to_play, Float max_count,
                 size_t min_simulations, double max_time,
                 TimeSource& time_source);
 
@@ -153,7 +153,7 @@ inline unsigned int Search::get_player() const
     return m_to_play.to_int();
 }
 
-inline ValueType Search::get_score_modification() const
+inline Float Search::get_score_modification() const
 {
     return m_shared_const.score_modification;
 }
@@ -178,7 +178,7 @@ inline void Search::set_detect_symmetry(bool enable)
     m_shared_const.detect_symmetry = enable;
 }
 
-inline void Search::set_score_modification(ValueType value)
+inline void Search::set_score_modification(Float value)
 {
     m_shared_const.score_modification = value;
 }

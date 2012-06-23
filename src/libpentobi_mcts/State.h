@@ -6,9 +6,9 @@
 #define LIBPENTOBI_MCTS_STATE_H
 
 #include "LocalValue.h"
+#include "libboardgame_mcts/Float.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_mcts/Tree.h"
-#include "libboardgame_mcts/ValueType.h"
 #include "libboardgame_util/RandomGenerator.h"
 #include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/Unused.h"
@@ -22,8 +22,8 @@
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_mcts::Float;
 using libboardgame_mcts::PlayerMove;
-using libboardgame_mcts::ValueType;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
 using libboardgame_util::Statistics;
@@ -60,7 +60,7 @@ struct SharedConst
     bool avoid_symmetric_draw;
 
     /** Maximum value to modify the win/loss result by the score. */
-    ValueType score_modification;
+    Float score_modification;
 
     /** Lookup table for symmetric points (only used in Duo). */
     SymmetricPoints symmetric_points;
@@ -115,9 +115,9 @@ public:
         @return @c false if end of game was reached, and no move was played */
     bool gen_and_play_playout_move(Move last_good_reply);
 
-    array<ValueType, 4> evaluate_playout();
+    array<Float,4> evaluate_playout();
 
-    array<ValueType, 4> evaluate_terminal();
+    array<Float,4> evaluate_terminal();
 
     /** Get number of moves in the current simulation. */
     unsigned int get_nu_moves() const;
@@ -142,7 +142,7 @@ private:
         bool connect;
 
         /** Heuristic value of the move expressed in score points. */
-        ValueType heuristic;
+        Float heuristic;
     };
 
     /** Flag set to true at the beginning of the playout or node expansion.
@@ -168,7 +168,7 @@ private:
     unsigned int m_max_playable_piece_size_local;
 
     /** Maximum of Features::heuristic for all moves. */
-    ValueType m_max_heuristic;
+    Float m_max_heuristic;
 
     unsigned int m_min_dist_to_center;
 
@@ -210,7 +210,7 @@ private:
     RandomGenerator m_random;
 
     /** Precomputed State::m_score_modification / BoardConst::max_score. */
-    ValueType m_score_modification_factor;
+    Float m_score_modification_factor;
 
     Statistics m_stat_score;
 

@@ -43,7 +43,7 @@ Player::Player(Variant initial_variant, const path& books_dir, size_t memory)
         // moves than with a fixed number of simulations (because the
         // simulations per second increase rapidly with the move number) but
         // the average time per game is roughly the same.
-        weight_max_count_duo[i] = ValueType(0.7 * exp(0.1 * i));
+        weight_max_count_duo[i] = Float(0.7 * exp(0.1 * i));
         weight_max_count_classic[i] = weight_max_count_duo[i];
         weight_max_count_trigon[i] = weight_max_count_duo[i];
         // Less weight for the first move(s) because number of legal moves
@@ -51,23 +51,23 @@ Player::Player(Variant initial_variant, const path& books_dir, size_t memory)
         // branching factor in early moves
         if (i == 0)
         {
-            weight_max_count_classic[i] *= ValueType(0.2);
-            weight_max_count_trigon[i] *= ValueType(0.2);
-            weight_max_count_duo[i] *= ValueType(0.6);
+            weight_max_count_classic[i] *= Float(0.2);
+            weight_max_count_trigon[i] *= Float(0.2);
+            weight_max_count_duo[i] *= Float(0.6);
         }
         else if (i == 1)
         {
-            weight_max_count_classic[i] *= ValueType(0.2);
-            weight_max_count_trigon[i] *= ValueType(0.5);
+            weight_max_count_classic[i] *= Float(0.2);
+            weight_max_count_trigon[i] *= Float(0.5);
         }
         else if (i == 2)
         {
-            weight_max_count_classic[i] *= ValueType(0.3);
-            weight_max_count_trigon[i] *= ValueType(0.6);
+            weight_max_count_classic[i] *= Float(0.3);
+            weight_max_count_trigon[i] *= Float(0.6);
         }
         else if (i == 3)
         {
-            weight_max_count_trigon[i] *= ValueType(0.8);
+            weight_max_count_trigon[i] *= Float(0.8);
         }
     }
 }
@@ -115,7 +115,7 @@ Move Player::genmove(const Board& bd, Color c)
         }
     }
     WallTime time_source;
-    ValueType max_count = 0;
+    Float max_count = 0;
     double max_time = 0;
     if (m_fixed_simulations > 0)
         max_count = m_fixed_simulations;
@@ -136,8 +136,8 @@ Move Player::genmove(const Board& bd, Color c)
         // because node values are initialized with prior knowledge and the
         // final move selection based on the visit count uses the value as a
         // a tie-breaker.
-        ValueType minimum;
-        ValueType factor_per_level;
+        Float minimum;
+        Float factor_per_level;
         if (variant == variant_classic || variant == variant_classic_2)
         {
             minimum = 10;
@@ -165,7 +165,7 @@ Move Player::genmove(const Board& bd, Color c)
             max_count = minimum;
         else
             max_count =
-                ValueType(ceil(minimum * pow(factor_per_level, m_level - 1)));
+                Float(ceil(minimum * pow(factor_per_level, m_level - 1)));
         // Don't weight max_count in low levels, otherwise it is still too
         // strong for beginners (later in the game, the weight becomes much
         // greater than 1 because the simulations become very fast)

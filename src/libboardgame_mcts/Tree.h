@@ -55,8 +55,8 @@ public:
 
         /** Add new child with prior knowledge initialization.
             The child will only be added if the tree is not full. */
-        void add_child(const Move& mv, ValueType value, ValueType count,
-                       ValueType rave_value, ValueType rave_count);
+        void add_child(const Move& mv, Float value, Float count,
+                       Float rave_value, Float rave_count);
 
         /** Link the children to the parent node. */
         void link_children();
@@ -78,7 +78,7 @@ public:
 
         int m_nu_children;
 
-        ValueType m_best_value;
+        Float m_best_value;
 
         Tree& m_tree;
 
@@ -108,13 +108,12 @@ public:
 
     bool create_node(unsigned int thread_id, const Move& mv);
 
-    bool create_node(unsigned int thread_id, const Move& mv, ValueType value,
-                     ValueType count, ValueType rave_value,
-                     ValueType rave_count);
+    bool create_node(unsigned int thread_id, const Move& mv, Float value,
+                     Float count, Float rave_value, Float rave_count);
 
-    void add_value(const Node& node, ValueType v);
+    void add_value(const Node& node, Float v);
 
-    void add_rave_value(const Node& node, ValueType v, ValueType weight);
+    void add_rave_value(const Node& node, Float v, Float weight);
 
     void inc_visit_count(const Node& node);
 
@@ -151,7 +150,7 @@ public:
         @param interval_checker
         @return @c false if the copying was aborted. */
     bool copy_subtree(Tree& target, const Node& target_node, const Node& node,
-                      ValueType min_count = 0, bool check_abort = false,
+                      Float min_count = 0, bool check_abort = false,
                       IntervalChecker* interval_checker = 0) const;
 
     /** Remove a child.
@@ -209,10 +208,9 @@ inline void Tree<M>::NodeExpander::add_child(const Move& mv)
 }
 
 template<typename M>
-inline void Tree<M>::NodeExpander::add_child(const Move& mv, ValueType value,
-                                             ValueType count,
-                                             ValueType rave_value,
-                                             ValueType rave_count)
+inline void Tree<M>::NodeExpander::add_child(const Move& mv, Float value,
+                                             Float count, Float rave_value,
+                                             Float rave_count)
 {
     LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<int>::max());
     if (! (m_is_tree_full |= ! m_tree.create_node(m_thread_id, mv, value,
@@ -271,14 +269,13 @@ Tree<M>::~Tree() throw()
 }
 
 template<typename M>
-inline void Tree<M>::add_rave_value(const Node& node, ValueType v,
-                                    ValueType weight)
+inline void Tree<M>::add_rave_value(const Node& node, Float v, Float weight)
 {
     non_const(node).add_rave_value(v, weight);
 }
 
 template<typename M>
-inline void Tree<M>::add_value(const Node& node, ValueType v)
+inline void Tree<M>::add_value(const Node& node, Float v)
 {
     non_const(node).add_value(v);
 }
@@ -300,7 +297,7 @@ bool Tree<M>::contains(const Node& node) const
 
 template<typename M>
 bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
-                           const Node& node, ValueType min_count,
+                           const Node& node, Float min_count,
                            bool check_abort,
                            IntervalChecker* interval_checker) const
 {
@@ -355,8 +352,8 @@ inline bool Tree<M>::create_node(unsigned int thread_id, const Move& mv)
 
 template<typename M>
 bool Tree<M>::create_node(unsigned int thread_id, const Move& mv,
-                          ValueType value, ValueType count,
-                          ValueType rave_value, ValueType rave_count)
+                          Float value, Float count, Float rave_value,
+                          Float rave_count)
 {
     LIBBOARDGAME_ASSERT(thread_id < m_nu_threads);
     ThreadStorage& thread_storage = m_thread_storage[thread_id];

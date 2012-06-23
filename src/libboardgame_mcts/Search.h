@@ -143,9 +143,9 @@ public:
     /** @name Parameters */
     // @{
 
-    void set_expand_threshold(ValueType n);
+    void set_expand_threshold(Float n);
 
-    ValueType get_expand_threshold() const;
+    Float get_expand_threshold() const;
 
     /** Set the parameter for progressive widening.
         If this parameter is non-zero then only explored children (with a visit
@@ -153,14 +153,14 @@ public:
         childrenvisit count of the parent is less than
         widening_parameter * log(visit_count_of_the_parent)
         in which case the best unexplored child is played. */
-    void set_widening_parameter(ValueType n);
+    void set_widening_parameter(Float n);
 
-    ValueType get_widening_parameter() const;
+    Float get_widening_parameter() const;
 
     /** Constant used in UCT bias term. */
-    void set_bias_term_constant(ValueType c);
+    void set_bias_term_constant(Float c);
 
-    ValueType get_bias_term_constant() const;
+    Float get_bias_term_constant() const;
 
     /** Reuse the subtree from the previous search if the current position is
         a follow-up position of the previous one. */
@@ -199,13 +199,13 @@ public:
         updated to earlier positions. Default is false. */
     void set_rave_check_same(bool enable);
 
-    void set_rave_equivalence(ValueType value);
+    void set_rave_equivalence(Float value);
 
-    ValueType get_rave_equivalence() const;
+    Float get_rave_equivalence() const;
 
-    void set_unexplored_value(ValueType value);
+    void set_unexplored_value(Float value);
 
-    ValueType get_unexplored_value() const;
+    Float get_unexplored_value() const;
 
     void set_weight_rave_updates(bool enable);
 
@@ -231,9 +231,9 @@ public:
     /** Value to start the tree pruning with.
         This value should be above typical count initializations if prior
         knowledge initialization is used. */
-    void set_prune_count_start(ValueType n);
+    void set_prune_count_start(Float n);
 
-    ValueType get_prune_count_start() const;
+    Float get_prune_count_start() const;
 
     /** Total size of the trees in bytes. */
     void set_tree_memory(size_t memory);
@@ -272,7 +272,7 @@ public:
         @return @c false, if no move could be generated. This can happen if the
         root node was not expanded, because the position is a terminal
         position or because the search was immediately aborted. */
-    bool search(Move& mv, ValueType max_count, size_t min_simulations,
+    bool search(Move& mv, Float max_count, size_t min_simulations,
                 double max_time, TimeSource& time_source,
                 bool always_search = true);
 
@@ -337,13 +337,13 @@ private:
         const Search& m_search;
     };
 
-    ValueType m_expand_threshold;
+    Float m_expand_threshold;
 
-    ValueType m_bias_term_constant;
+    Float m_bias_term_constant;
 
-    ValueType m_bias_term_constant_sq;
+    Float m_bias_term_constant_sq;
 
-    ValueType m_widening_parameter;
+    Float m_widening_parameter;
 
     bool m_deterministic;
 
@@ -370,14 +370,14 @@ private:
     /** Time of last search. */
     double m_last_time;
 
-    ValueType m_unexplored_value;
+    Float m_unexplored_value;
 
-    ValueType m_prune_count_start;
+    Float m_prune_count_start;
 
-    ValueType m_rave_equivalence;
+    Float m_rave_equivalence;
 
     /** Maximum simulations of current search. */
-    ValueType m_max_count;
+    Float m_max_count;
 
     size_t m_tree_memory;
 
@@ -432,7 +432,7 @@ private:
 
     bool check_abort_expensive() const;
 
-    bool check_move_cannot_change(ValueType count, ValueType remaining) const;
+    bool check_move_cannot_change(Float count, Float remaining) const;
 
     bool expand_node(unsigned int thread_id, const Node& node,
                      const Node*& best_child);
@@ -443,18 +443,18 @@ private:
                       bool& is_terminal);
 
     bool prune(TimeSource& time_source, double time, double max_time,
-               ValueType prune_min_count, ValueType& new_prune_min_count);
+               Float prune_min_count, Float& new_prune_min_count);
 
     const Node* select_child(const Node& node);
 
-    void update_last_good_reply(const array<ValueType, max_players>& eval);
+    void update_last_good_reply(const array<Float,max_players>& eval);
 
-    void update_rave_values(const array<ValueType, max_players>& eval);
+    void update_rave_values(const array<Float,max_players>& eval);
 
-    void update_rave_values(const array<ValueType, max_players>&, size_t i,
+    void update_rave_values(const array<Float,max_players>&, size_t i,
                             unsigned int player);
 
-    void update_values(const array<ValueType, max_players>& eval);
+    void update_values(const array<Float,max_players>& eval);
 };
 
 template<class S, class M, unsigned int P>
@@ -492,7 +492,7 @@ Search<S,M,P>::Search(const State& state, size_t memory)
       m_weight_rave_updates(true),
       m_use_last_good_reply(false),
       m_nu_threads(1),
-      m_unexplored_value(numeric_limits<ValueType>::max()),
+      m_unexplored_value(numeric_limits<Float>::max()),
       m_prune_count_start(16),
       m_rave_equivalence(1000),
       m_tree_memory(memory == 0 ? 256000000 : memory),
@@ -521,10 +521,10 @@ bool Search<S,M,P>::check_abort() const
         log("Search aborted");
         return true;
     }
-    ValueType count = m_tree.get_root().get_count();
-    static_assert(numeric_limits<ValueType>::radix == 2,
-                  "libboardgame_mcts::ValueType must have radix 2");
-    if (count == (size_t(1) << numeric_limits<ValueType>::digits) - 1)
+    Float count = m_tree.get_root().get_count();
+    static_assert(numeric_limits<Float>::radix == 2,
+                  "libboardgame_mcts::Float must have radix 2");
+    if (count == (size_t(1) << numeric_limits<Float>::digits) - 1)
     {
         log("Maximum count supported by floating type reached");
         return true;
@@ -540,7 +540,7 @@ bool Search<S,M,P>::check_abort() const
 template<class S, class M, unsigned int P>
 bool Search<S,M,P>::check_abort_expensive() const
 {
-    ValueType count = m_tree.get_root().get_count();
+    Float count = m_tree.get_root().get_count();
     if (count == 0)
         return false;
     double time = m_timer();
@@ -549,7 +549,7 @@ bool Search<S,M,P>::check_abort_expensive() const
         return false;
     double simulations_per_sec = double(m_nu_simulations) / time;
     double remaining_time;
-    ValueType remaining_simulations;
+    Float remaining_simulations;
     if (m_max_count == 0)
     {
         if (time > m_max_time)
@@ -558,7 +558,7 @@ bool Search<S,M,P>::check_abort_expensive() const
             return true;
         }
         remaining_time = m_max_time - time;
-        remaining_simulations = ValueType(remaining_time * simulations_per_sec);
+        remaining_simulations = Float(remaining_time * simulations_per_sec);
     }
     else
     {
@@ -576,16 +576,16 @@ bool Search<S,M,P>::check_abort_expensive() const
 }
 
 template<class S, class M, unsigned int P>
-bool Search<S,M,P>::check_move_cannot_change(ValueType count,
-                                             ValueType remaining) const
+bool Search<S,M,P>::check_move_cannot_change(Float count,
+                                             Float remaining) const
 {
     if (remaining > count)
         return false;
-    ValueType max_count = 0;
-    ValueType second_max_count = 0;
+    Float max_count = 0;
+    Float second_max_count = 0;
     for (ChildIterator i(m_tree.get_root()); i; ++i)
     {
-        ValueType count = i->get_count();
+        Float count = i->get_count();
         if (count > max_count)
         {
             second_max_count = max_count;
@@ -623,13 +623,13 @@ double Search<S,M,P>::expected_sim_per_sec() const
 }
 
 template<class S, class M, unsigned int P>
-ValueType Search<S,M,P>::get_bias_term_constant() const
+Float Search<S,M,P>::get_bias_term_constant() const
 {
     return m_bias_term_constant;
 }
 
 template<class S, class M, unsigned int P>
-ValueType Search<S,M,P>::get_expand_threshold() const
+Float Search<S,M,P>::get_expand_threshold() const
 {
     return m_expand_threshold;
 }
@@ -673,13 +673,13 @@ Parameters Search<S,M,P>::get_reuse_param() const
     Parameters p;
     p.create<bool>("rave", m_rave);
     p.create<bool>("weight_rave_updates", m_weight_rave_updates);
-    p.create<ValueType>("rave_equivalence", m_rave_equivalence);
-    p.create<ValueType>("unexplored_value", m_unexplored_value);
+    p.create<Float>("rave_equivalence", m_rave_equivalence);
+    p.create<Float>("unexplored_value", m_unexplored_value);
     return p;
 }
 
 template<class S, class M, unsigned int P>
-ValueType Search<S,M,P>::get_prune_count_start() const
+Float Search<S,M,P>::get_prune_count_start() const
 {
     return m_prune_count_start;
 }
@@ -697,7 +697,7 @@ bool Search<S,M,P>::get_rave() const
 }
 
 template<class S, class M, unsigned int P>
-ValueType Search<S,M,P>::get_rave_equivalence() const
+Float Search<S,M,P>::get_rave_equivalence() const
 {
     return m_rave_equivalence;
 }
@@ -748,7 +748,7 @@ inline const typename Search<S,M,P>::Tree& Search<S,M,P>::get_tree()
 }
 
 template<class S, class M, unsigned int P>
-ValueType Search<S,M,P>::get_unexplored_value() const
+Float Search<S,M,P>::get_unexplored_value() const
 {
     return m_unexplored_value;
 }
@@ -760,7 +760,7 @@ bool Search<S,M,P>::get_weight_rave_updates() const
 }
 
 template<class S, class M, unsigned int P>
-ValueType Search<S,M,P>::get_widening_parameter() const
+Float Search<S,M,P>::get_widening_parameter() const
 {
     return m_widening_parameter;
 }
@@ -845,7 +845,7 @@ template<class S, class M, unsigned int P>
 void Search<S,M,P>::write_info(ostream& out) const
 {
     const Node& root = m_tree.get_root();
-    ValueType count = root.get_count();
+    Float count = root.get_count();
     if (m_nu_simulations == 0 || count == 0)
         return;
     out << format(
@@ -866,8 +866,8 @@ void Search<S,M,P>::write_info_ext(ostream& out) const
 
 template<class S, class M, unsigned int P>
 bool Search<S,M,P>::prune(TimeSource& time_source, double time,
-                          double max_time, ValueType prune_min_count,
-                          ValueType& new_prune_min_count)
+                          double max_time, Float prune_min_count,
+                          Float& new_prune_min_count)
 {
     Timer timer(time_source);
     TimeIntervalChecker interval_checker(time_source, max_time);
@@ -888,7 +888,7 @@ bool Search<S,M,P>::prune(TimeSource& time_source, double time,
     m_tree.swap(m_tmp_tree);
     if (percent > 50)
     {
-        if (prune_min_count >= 0.5 * numeric_limits<ValueType>::max())
+        if (prune_min_count >= 0.5 * numeric_limits<Float>::max())
             return false;
         new_prune_min_count = prune_min_count * 2;
         return true;
@@ -901,9 +901,9 @@ bool Search<S,M,P>::prune(TimeSource& time_source, double time,
 }
 
 template<class S, class M, unsigned int P>
-bool Search<S,M,P>::search(Move& mv, ValueType max_count,
-                           size_t min_simulations, double max_time,
-                           TimeSource& time_source, bool always_search)
+bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
+                           double max_time, TimeSource& time_source,
+                           bool always_search)
 {
     if (max_count > 0)
         // A fixed number of simulations means that no time limit is used, but
@@ -986,7 +986,7 @@ bool Search<S,M,P>::search(Move& mv, ValueType max_count,
     m_state.start_search();
     m_max_count = max_count;
     m_nu_simulations = 0;
-    ValueType prune_min_count = get_prune_count_start();
+    Float prune_min_count = get_prune_count_start();
     m_max_time = max_time;
     double time_interval;
     if (max_count > 0)
@@ -1031,7 +1031,7 @@ bool Search<S,M,P>::search(Move& mv, ValueType max_count,
             }
         }
         m_stat_in_tree_len.add(double(m_state.get_nu_moves()));
-        array<ValueType, max_players> eval;
+        array<Float,max_players> eval;
         if (! is_terminal)
         {
             playout();
@@ -1069,23 +1069,23 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     const Node* best_child = 0;
     const Node* best_explored_child = 0;
     const Node* best_unexplored_child = 0;
-    ValueType best_value = -numeric_limits<ValueType>::max();
-    ValueType best_explored_value = -numeric_limits<ValueType>::max();
-    ValueType best_unexplored_value = -numeric_limits<ValueType>::max();
-    ValueType bias_term_constant_part = 0; // Init to avoid compiler warning
+    Float best_value = -numeric_limits<Float>::max();
+    Float best_explored_value = -numeric_limits<Float>::max();
+    Float best_unexplored_value = -numeric_limits<Float>::max();
+    Float bias_term_constant_part = 0; // Init to avoid compiler warning
     // Note: use visit count here not count. In most cases, count is larger
     // than visit count because of prior knowledge initializaion, but it can
     // happen that count is zero and visit count greater zero if the node
     // value was cleared but not the visit count after reusing an inner node
     // from a previous search as the root of the new search
-    ValueType node_count = node.get_visit_count();
+    Float node_count = node.get_visit_count();
     if (m_bias_term_constant != 0)
     {
         LIBBOARDGAME_ASSERT(node_count > 0);
         bias_term_constant_part =
             m_bias_term_constant_sq * m_fast_log.get_log(float(node_count));
     }
-    ValueType beta =
+    Float beta =
         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
     if (log_move_selection)
         log() << "beta=" << beta << '\n';
@@ -1096,11 +1096,11 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
             log() << get_move_string(i->get_move())
                   << " | c=" << i->get_count()
                   << " rc=" << i->get_rave_count();
-        ValueType value;
-        ValueType count = i->get_count();
+        Float value;
+        Float count = i->get_count();
         if (count > 0)
         {
-            ValueType child_value = i->get_value();
+            Float child_value = i->get_value();
             if (log_move_selection)
                 log() << " v=" << child_value;
             if (m_rave && i->get_rave_count() > 0)
@@ -1121,15 +1121,15 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
         }
         else
             value = m_unexplored_value;
-        ValueType exploration_term = 0;
+        Float exploration_term = 0;
         if (m_bias_term_constant != 0)
         {
             exploration_term =
-                sqrt(bias_term_constant_part / max(count, ValueType(1)));
+                sqrt(bias_term_constant_part / max(count, Float(1)));
             if (log_move_selection)
                 log() << " e=" << exploration_term;
         }
-        ValueType value_with_exploration_term = value + exploration_term;
+        Float value_with_exploration_term = value + exploration_term;
         if (log_move_selection)
             log() << " | " << value_with_exploration_term << '\n';
         if (value_with_exploration_term > best_value)
@@ -1181,11 +1181,11 @@ const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
 {
     // Select the child with the highest visit count, use value as a tie breaker
     const Node* result = 0;
-    ValueType max_count = -1;
-    ValueType max_count_value = -numeric_limits<ValueType>::max();
+    Float max_count = -1;
+    Float max_count_value = -numeric_limits<Float>::max();
     for (ChildIterator i(node); i; ++i)
     {
-        ValueType count = i->get_visit_count();
+        Float count = i->get_visit_count();
         if (count > max_count
             || (count == max_count && count > 0 && max_count > 0
                 && i->get_value() > max_count_value))
@@ -1218,7 +1218,7 @@ bool Search<S,M,P>::select_move(Move& mv, const vector<Move>* exclude_moves)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::set_bias_term_constant(ValueType c)
+void Search<S,M,P>::set_bias_term_constant(Float c)
 {
     m_bias_term_constant = c;
     m_bias_term_constant_sq = c * c;
@@ -1231,7 +1231,7 @@ void Search<S,M,P>::set_callback(function<void(double, double)> callback)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::set_expand_threshold(ValueType n)
+void Search<S,M,P>::set_expand_threshold(Float n)
 {
     m_expand_threshold = n;
 }
@@ -1249,7 +1249,7 @@ void Search<S,M,P>::set_last_good_reply(bool enable)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::set_prune_count_start(ValueType n)
+void Search<S,M,P>::set_prune_count_start(Float n)
 {
     m_prune_count_start = n;
 }
@@ -1273,7 +1273,7 @@ void Search<S,M,P>::set_rave_check_same(bool enable)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::set_rave_equivalence(ValueType n)
+void Search<S,M,P>::set_rave_equivalence(Float n)
 {
     m_rave_equivalence = n;
 }
@@ -1300,7 +1300,7 @@ void Search<S,M,P>::set_tree_memory(size_t memory)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::set_unexplored_value(ValueType value)
+void Search<S,M,P>::set_unexplored_value(Float value)
 {
     m_unexplored_value = value;
 }
@@ -1312,17 +1312,16 @@ void Search<S,M,P>::set_weight_rave_updates(bool enable)
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::set_widening_parameter(ValueType value)
+void Search<S,M,P>::set_widening_parameter(Float value)
 {
     m_widening_parameter = value;
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::update_last_good_reply(
-                                      const array<ValueType, max_players>& eval)
+void Search<S,M,P>::update_last_good_reply(const array<Float,max_players>& eval)
 {
     unsigned int nu_players = get_nu_players();
-    ValueType max_eval = eval[0];
+    Float max_eval = eval[0];
     for (unsigned int i = 1; i < nu_players; ++i)
         max_eval = max(eval[i], max_eval);
     array<bool,max_players> is_winner;
@@ -1348,8 +1347,7 @@ void Search<S,M,P>::update_last_good_reply(
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::update_rave_values(
-                                      const array<ValueType, max_players>& eval)
+void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval)
 {
     unsigned int nu_moves = m_state.get_nu_moves();
     if (nu_moves == 0)
@@ -1388,16 +1386,15 @@ void Search<S,M,P>::update_rave_values(
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::update_rave_values(
-                            const array<ValueType, max_players>& eval, size_t i,
-                            unsigned int player)
+void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
+                                       size_t i, unsigned int player)
 {
     LIBBOARDGAME_ASSERT(i < m_simulation.m_nodes.size());
     const Node* node = m_simulation.m_nodes[i];
     if (! node->has_children())
         return;
     size_t len = m_state.get_nu_moves();
-    ValueType weight_factor = 1 / ValueType(len - i);
+    Float weight_factor = 1 / Float(len - i);
     for (ChildIterator it(*node); it; ++it)
     {
         Move mv = it->get_move();
@@ -1424,9 +1421,9 @@ void Search<S,M,P>::update_rave_values(
                 if (other_played_same)
                     continue;
             }
-            ValueType weight;
+            Float weight;
             if (m_weight_rave_updates)
-                weight = 2 - ValueType(first - i) * weight_factor;
+                weight = 2 - Float(first - i) * weight_factor;
             else
                 weight = 1;
             m_tree.add_rave_value(*it, eval[player], weight);
@@ -1435,7 +1432,7 @@ void Search<S,M,P>::update_rave_values(
 }
 
 template<class S, class M, unsigned int P>
-void Search<S,M,P>::update_values(const array<ValueType, max_players>& eval)
+void Search<S,M,P>::update_values(const array<Float,max_players>& eval)
 {
     m_tree.add_value(m_tree.get_root(), eval[m_player]);
     m_tree.inc_visit_count(m_tree.get_root());

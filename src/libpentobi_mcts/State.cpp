@@ -113,7 +113,7 @@ Point find_best_starting_point(const Board& bd, Color c)
     winner still gives the result 1 and having the lowest score gives the
     result 0. Being the single winner is better than sharing the best place,
     which is better than getting the second place, etc. */
-ValueType get_result(const Board& bd, Color c)
+Float get_result(const Board& bd, Color c)
 {
     Variant variant = bd.get_variant();
     if (variant == variant_duo || variant == variant_junior)
@@ -149,12 +149,12 @@ ValueType get_result(const Board& bd, Color c)
             points_array[i] = bd.get_points_with_bonus(Color(i));
         unsigned int points = points_array[c.to_int()];
         sort(points_array.begin(), points_array.begin() + nu_colors);
-        ValueType result = 0;
+        Float result = 0;
         unsigned int n = 0;
         for (unsigned int i = 0; i < nu_colors; ++i)
             if (points_array[i] == points)
             {
-                result += ValueType(i) / (nu_colors - 1);
+                result += Float(i) / (nu_colors - 1);
                 ++n;
             }
         result /= n;
@@ -220,7 +220,7 @@ SharedConst::SharedConst(const Color& to_play)
       to_play(to_play),
       detect_symmetry(true),
       avoid_symmetric_draw(true),
-      score_modification(ValueType(0.1))
+      score_modification(Float(0.1))
 {
     symmetric_points.init(*RectGeometry<Point>::get(14, 14));
 }
@@ -313,7 +313,7 @@ void State::compute_features()
     BoardType board_type = m_bd.get_board_type();
     const ArrayList<Move, Move::range>& moves = m_moves[to_play];
     const Geometry& geometry = m_bd.get_geometry();
-    Grid<ValueType> point_value(geometry, 1);
+    Grid<Float> point_value(geometry, 1);
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
         if (*i == to_play || *i == second_color)
@@ -325,12 +325,12 @@ void State::compute_features()
                 point_value[p] = 5;
                 for (AdjIterator j(m_bd, p); j; ++j)
                     if (! m_bd.is_forbidden(*j, *i))
-                        point_value[*j] = max(point_value[*j], ValueType(4));
+                        point_value[*j] = max(point_value[*j], Float(4));
             }
         }
     }
-    Grid<ValueType> attach_point_value(geometry);
-    Grid<ValueType> adj_point_value(geometry);
+    Grid<Float> attach_point_value(geometry);
+    Grid<Float> adj_point_value(geometry);
     for (BoardIterator i(m_bd); i; ++i)
     {
         PointState s = m_bd.get_point_state(*i);
@@ -357,7 +357,7 @@ void State::compute_features()
             adj_point_value[*i] = 0;
     }
     m_features.resize(moves.size());
-    m_max_heuristic = -numeric_limits<ValueType>::max();
+    m_max_heuristic = -numeric_limits<Float>::max();
     m_min_dist_to_center = numeric_limits<unsigned int>::max();
     m_has_connect_move = false;
     unsigned int nu_onboard_pieces = m_bd.get_nu_onboard_pieces();
@@ -423,7 +423,7 @@ void State::dump(ostream& out) const
     libpentobi_base::boardutil::dump(m_bd, out);
 }
 
-array<ValueType, 4> State::evaluate_playout()
+array<Float,4> State::evaluate_playout()
 {
     if (m_check_symmetric_draw && ! m_is_symmetry_broken
         && m_bd.get_nu_onboard_pieces() >= 3)
@@ -437,25 +437,25 @@ array<ValueType, 4> State::evaluate_playout()
         if (log_simulations)
             log() << "Result: 0.5 (symmetry)\n";
         m_stat_score.add(0);
-        array<ValueType, 4> result;
+        array<Float,4> result;
         result[0] = result[1] = 0.5;
         return result;
     }
     return evaluate_terminal();
 }
 
-array<ValueType, 4> State::evaluate_terminal()
+array<Float,4> State::evaluate_terminal()
 {
-    array<ValueType, 4> result_array;
+    array<Float,4> result_array;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
-        ValueType score = ValueType(m_bd.get_score(*i));
-        ValueType game_result = get_result(m_bd, *i);
-        ValueType score_modification = m_shared_const.score_modification;
+        Float score = Float(m_bd.get_score(*i));
+        Float game_result = get_result(m_bd, *i);
+        Float score_modification = m_shared_const.score_modification;
         // Apply score modification. Example: If score modification is 0.1,
         // the game result is rescaled to [0..0.9] and the score modification
         // is added with 0.05 as the middle (corresponding to score 0).
-        ValueType result =
+        Float result =
             (1.f - score_modification) * game_result
             + 0.5f * (score_modification + score * m_score_modification_factor);
         if (*i == m_shared_const.to_play)
@@ -625,7 +625,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         // into a value in [0..1] by making it relative to the heuristic
         // of the best move and let it decrease exponentially with a certain
         // width.
-        ValueType heuristic = 0.3f * (m_max_heuristic - features.heuristic);
+        Float heuristic = 0.3f * (m_max_heuristic - features.heuristic);
         // Piecewise linear approximation of exp(-x) (make sure the
         // approximation is always greater than 0 and is always monotonically
         // decreasing)
@@ -640,8 +640,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
 
         // Rescale to [0.1..1]. If the value is too close to 0, the move might
         // never get explored (in practice) if the bias term constant is small.
-        ValueType value = 1 * (0.1f + 0.9f * heuristic);
-        ValueType count = 1;
+        Float value = 1 * (0.1f + 0.9f * heuristic);
+        Float count = 1;
         // Encourage to explore a move that keeps or breaks symmetry
         // See also the comment in evaluate_playout()
         if (m_check_symmetric_draw && ! m_is_symmetry_broken)
@@ -935,8 +935,8 @@ void State::start_search()
     const Geometry& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
-    ValueType total_piece_points =
-        ValueType(bd.get_board_const().get_total_piece_points());
+    Float total_piece_points =
+        Float(bd.get_board_const().get_total_piece_points());
     m_score_modification_factor =
         m_shared_const.score_modification / total_piece_points;
     m_nu_simulations = 0;

@@ -24,9 +24,9 @@ using libboardgame_util::log;
 using libpentobi_base::Board;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Tree;
+using libpentobi_mcts::Float;
 using libpentobi_mcts::Move;
 using libpentobi_mcts::State;
-using libpentobi_mcts::ValueType;
 
 //-----------------------------------------------------------------------------
 
@@ -70,13 +70,13 @@ void Engine::cmd_move_values(Response& response)
     BOOST_FOREACH(const Search::Node* node, children)
     {
         response << setprecision(0) << node->get_visit_count() << ' ';
-        ValueType count = node->get_count();
+        Float count = node->get_count();
         response << setprecision(0) << count << ' ';
         if (count > 0)
             response << setprecision(3) << node->get_value();
         else
             response << '-';
-        ValueType rave_count = node->get_rave_count();
+        Float rave_count = node->get_rave_count();
         response << ' ' << setprecision(0) << rave_count << ' ';
         if (rave_count > 0)
             response << setprecision(3) << node->get_rave_value();
@@ -129,13 +129,13 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         else if (name == "auto_param")
             s.set_auto_param(args.get<bool>(1));
         else if (name == "bias_term_constant")
-            s.set_bias_term_constant(args.get<ValueType>(1));
+            s.set_bias_term_constant(args.get<Float>(1));
         else if (name == "detect_symmetry")
             s.set_detect_symmetry(args.get<bool>(1));
         else if (name == "expand_threshold")
-            s.set_expand_threshold(args.get<ValueType>(1));
+            s.set_expand_threshold(args.get<Float>(1));
         else if (name == "fixed_simulations")
-            p.set_fixed_simulations(args.get<ValueType>(1));
+            p.set_fixed_simulations(args.get<Float>(1));
         else if (name == "last_good_reply")
             s.set_last_good_reply(args.get<bool>(1));
         else if (name == "level")
@@ -145,11 +145,11 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         else if (name == "reuse_subtree")
             s.set_reuse_subtree(args.get<bool>(1));
         else if (name == "score_modification")
-            s.set_score_modification(args.get<ValueType>(1));
+            s.set_score_modification(args.get<Float>(1));
         else if (name == "use_book")
             p.set_use_book(args.get<bool>(1));
         else if (name == "widening_parameter")
-            s.set_widening_parameter(args.get<ValueType>(1));
+            s.set_widening_parameter(args.get<Float>(1));
         else
             throw Failure(format("unknown parameter '%1%'") % name);
     }

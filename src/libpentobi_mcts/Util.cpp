@@ -69,8 +69,8 @@ void dump_tree_recurse(Writer& writer, Variant variant,
 
 bool compare_node(const Node<Move>* n1, const Node<Move>* n2)
 {
-    ValueType visit_count1 = n1->get_visit_count();
-    ValueType visit_count2 = n2->get_visit_count();
+    Float visit_count1 = n1->get_visit_count();
+    Float visit_count2 = n2->get_visit_count();
     if (visit_count1 != visit_count2)
         return visit_count1 > visit_count2;
     if (n1->get_count() > 0 && n2->get_count() > 0)

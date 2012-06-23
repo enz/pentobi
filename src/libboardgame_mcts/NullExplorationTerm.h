@@ -21,7 +21,7 @@ public:
 
     void begin_select_child(const Node& parent);
 
-    ValueType get(const Node& child);
+    Float get(const Node& child);
 };
 
 template<class M>
@@ -31,7 +31,7 @@ inline void NullExplorationTerm<M>::begin_select_child(const Node& parent)
 }
 
 template<class M>
-inline ValueType NullExplorationTerm<M>::get(const Node& child)
+inline Float NullExplorationTerm<M>::get(const Node& child)
 {
     LIBBOARDGAME_UNUSED(child);
     return 0;
