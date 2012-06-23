@@ -449,15 +449,15 @@ array<ValueType, 4> State::evaluate_terminal()
     array<ValueType, 4> result_array;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
-        ValueType score = m_bd.get_score(*i);
+        ValueType score = ValueType(m_bd.get_score(*i));
         ValueType game_result = get_result(m_bd, *i);
         ValueType score_modification = m_shared_const.score_modification;
         // Apply score modification. Example: If score modification is 0.1,
         // the game result is rescaled to [0..0.9] and the score modification
         // is added with 0.05 as the middle (corresponding to score 0).
         ValueType result =
-            (1 - score_modification) * game_result
-            + 0.5 * (score_modification + score * m_score_modification_factor);
+            (1.f - score_modification) * game_result
+            + 0.5f * (score_modification + score * m_score_modification_factor);
         if (*i == m_shared_const.to_play)
             m_stat_score.add(score);
         result_array[(*i).to_int()] = result;

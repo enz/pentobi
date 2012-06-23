@@ -65,7 +65,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                 {
                     updater.update(node->get_parent());
                     log() << "Analyzing move " << bd->get_nu_moves() << "\n";
-                    const ValueType max_count = nu_simulations;
+                    const ValueType max_count = ValueType(nu_simulations);
                     double max_time = 0;
                     size_t min_simulations = 1;
                     Move computer_mv;
