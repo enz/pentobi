@@ -237,7 +237,7 @@ ohne die Computer-Farben zu ändern)</translation>
     <message>
         <location filename="MainWindow.cpp" line="760"/>
         <source>&amp;Computer Colors</source>
-        <translation>&amp;Computer-Farben</translation>
+        <translation>Computer-&amp;Farben</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="765"/>
@@ -307,7 +307,7 @@ ohne die Computer-Farben zu ändern)</translation>
     <message>
         <location filename="MainWindow.cpp" line="828"/>
         <source>G&amp;ame Info</source>
-        <translation>Spi&amp;el-Info</translation>
+        <translation>Spiel-Inf&amp;o</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="832"/>
@@ -453,7 +453,7 @@ ohne die Computer-Farben zu ändern)</translation>
     <message>
         <location filename="MainWindow.cpp" line="986"/>
         <source>New &amp;Rated Game</source>
-        <translation>Neues &amp;gewertetes Spiel</translation>
+        <translation>Neues ge&amp;wertetes Spiel</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="990"/>
@@ -579,7 +579,7 @@ ohne die Computer-Farben zu ändern)</translation>
     <message>
         <location filename="MainWindow.cpp" line="1281"/>
         <source>&amp;Game Variant</source>
-        <translation>&amp;Spielvariante</translation>
+        <translation>Spiel&amp;variante</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1295"/>
