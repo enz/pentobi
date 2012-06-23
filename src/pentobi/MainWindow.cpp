@@ -2377,13 +2377,17 @@ void MainWindow::newRatedGame()
             m_computerColors[*i] = false;
     QString computerPlayerName =
         //: The first argument is the version of Pentobi
-        tr("Pentobi %1 level %2").arg(getVersion()).arg(level);
+        tr("Pentobi %1 (level %2)").arg(getVersion()).arg(level);
     string charset = m_game->get_root().get_property("CA", "");
     string computerPlayerNameStdStr =
         Util::convertSgfValueFromQString(computerPlayerName, charset);
+    string humanPlayerNameStdStr =
+        Util::convertSgfValueFromQString(tr("Human"), charset);
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         if (m_computerColors[*i])
             m_game->set_player_name(*i, computerPlayerNameStdStr);
+        else
+            m_game->set_player_name(*i, humanPlayerNameStdStr);
     deleteAutoSaveFile();
     updateWindow(true);
     checkComputerMove();
