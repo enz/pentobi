@@ -792,11 +792,11 @@ void MainWindow::createActions()
             this, SLOT(exportImage()));
 
     m_actionFindMove = new QAction(tr("&Find Move"), this);
-    m_actionFindMove->setShortcut(QString("F2"));
+    m_actionFindMove->setShortcut(QString("F6"));
     connect(m_actionFindMove, SIGNAL(triggered()), this, SLOT(findMove()));
 
     m_actionFindNextComment = new QAction(tr("&Find Next Comment"), this);
-    m_actionFindNextComment->setShortcut(QString("F4"));
+    m_actionFindNextComment->setShortcut(QString("F3"));
     connect(m_actionFindNextComment, SIGNAL(triggered()),
             this, SLOT(findNextComment()));
 
@@ -1182,6 +1182,7 @@ void MainWindow::createActions()
             this, SLOT(showComment(bool)));
 
     m_actionShowRating = new QAction(tr("Your &Rating"), this);
+    m_actionShowRating->setShortcut(QString("F7"));
     connect(m_actionShowRating, SIGNAL(triggered()), this, SLOT(showRating()));
 
     m_actionTruncate = new QAction(tr("&Truncate"), this);
