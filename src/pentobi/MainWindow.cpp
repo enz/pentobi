@@ -1984,18 +1984,6 @@ QString MainWindow::getVersion() const
 #endif
     if (version.isEmpty())
         version = "UNKNOWN";
-    // By convention, the version string of unreleased versions contains the
-    // string UNKNOWN (appended to the last released version). In this case, or
-    // if VERSION was undefined, we append the build date.
-    if (version.contains("UNKNOWN"))
-    {
-        version.append(" (");
-        version.append(__DATE__);
-        version.append(")");
-    }
-#if LIBBOARDGAME_DEBUG
-    version.append(" (dbg)");
-#endif
     return version;
 }
 
