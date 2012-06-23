@@ -1484,10 +1484,7 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
     m_toolBar->addAction(m_actionNewGame);
-    m_playButton = new QToolButton();
-    m_playButton->setDefaultAction(m_actionPlay);
-    m_playButton->installEventFilter(this);
-    m_toolBar->addWidget(m_playButton);
+    m_toolBar->addAction(m_actionPlay);
     m_toolBar->addAction(m_actionComputerColors);
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward10);
@@ -1531,15 +1528,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     // text in the status line (e.g. the "The computer is thinking..." status)
     if (event->type() == QEvent::StatusTip)
         return true;
-
-    // Detect Shift-clicks on "Computer Play" toolbar button
-    if (object == m_playButton && event->type() == QEvent::MouseButtonPress)
-        if (static_cast<QMouseEvent*>(event)->modifiers() == Qt::ShiftModifier)
-        {
-            playSingleMove();
-            return true;
-        }
-
     return QMainWindow::eventFilter(object, event);
 }
 
@@ -3061,10 +3049,7 @@ void MainWindow::setPlayToolTip()
                 s = tr("Make the computer play Red.");
         }
     }
-    if (! isComputerColor)
-        s += "\n" + tr("(Shift+click to play a single move\n"
-                       "without changing the computer colors)");
-    m_playButton->setToolTip(s);
+    m_actionPlay->setToolTip(s);
 }
 
 void MainWindow::setRated(bool isRated)

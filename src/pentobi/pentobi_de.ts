@@ -93,13 +93,6 @@
         <translation>Datei &apos;%1&apos; konnte nicht gelesen werden</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3076"/>
-        <source>(Shift+click to play a single move
-without changing the computer colors)</source>
-        <translation>(Umschalt+Klick um einen einzelnen Zug zu spielen
-ohne die Computer-Farben zu ändern)</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="3162"/>
         <source>The file is not a valid Blokus SGF file.</source>
         <translation>Die Datei ist keine gültige Blokus-SGF-Datei.</translation>

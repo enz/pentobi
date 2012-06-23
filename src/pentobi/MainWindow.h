@@ -501,8 +501,6 @@ private:
 
     QMenu* m_menuOpenRecent;
 
-    QToolButton* m_playButton;
-
     QLabel* m_setupModeLabel;
 
     QLabel* m_ratedGameLabel;
