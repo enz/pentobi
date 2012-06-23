@@ -25,7 +25,7 @@ RatingDialog::RatingDialog(QWidget* parent)
     : QDialog(parent),
       m_variant(variant_classic)
 {
-    setWindowTitle(tr("Your Rating"));
+    setWindowTitle(tr("Rating"));
     // Disable '?' button in title bar on Windows, we don't have
     // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);

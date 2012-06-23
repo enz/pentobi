@@ -21,7 +21,6 @@
     <message>
         <location filename="AnalyzeGameWidget.cpp" line="202"/>
         <source>Pentobi</source>
-        <oldsource>Pentobi - Progress</oldsource>
         <translation>Pentobi</translation>
     </message>
 </context>
@@ -30,7 +29,6 @@
     <message>
         <location filename="AnalyzeGameWindow.cpp" line="16"/>
         <source>Analyze Game</source>
-        <oldsource>Pentobi - Game Analysis</oldsource>
         <translation>Spiel analysieren</translation>
     </message>
 </context>
@@ -39,7 +37,6 @@
     <message>
         <location filename="Application.cpp" line="44"/>
         <source>Pentobi</source>
-        <oldsource>Pentobi - Error</oldsource>
         <translation>Pentobi</translation>
     </message>
     <message>
@@ -1110,9 +1107,8 @@ ohne die Computer-Farben zu ändern)</translation>
     <name>RatingDialog</name>
     <message>
         <location filename="RatingDialog.cpp" line="28"/>
-        <source>Your Rating</source>
-        <oldsource>Pentobi - Your Rating</oldsource>
-        <translation>Ihre Wertung</translation>
+        <source>Rating</source>
+        <translation>Wertung</translation>
     </message>
     <message>
         <location filename="RatingDialog.cpp" line="78"/>
