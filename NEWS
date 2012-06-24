@@ -1,7 +1,8 @@
 Current development version
 ===========================
 
-* Get a player rating by playing rated games against the computer
+* New functionality to compute a player rating for the user by playing
+  rated games against the computer
 * Different options for speed of game analysis
 * New menu item "Play Single Move" to make the computer play a move
   without changing the colors played by the computer 
