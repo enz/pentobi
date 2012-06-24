@@ -7,6 +7,9 @@ Current development version
   without changing the colors played by the computer 
 * The mouse wheel can now be used to navigate in the current variation
   if no piece is selected
+* Files written by older versions of Pentobi that use a deprecated format
+  for move properties are now automatically converted to the current format
+  on write
 
 
 Version 2.0 (22 May 2012)
