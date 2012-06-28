@@ -2908,7 +2908,8 @@ void MainWindow::setCommentText(const QString& text)
     m_ignoreCommentTextChanged = true;
     m_comment->setPlainText(text);
     m_ignoreCommentTextChanged = false;
-    m_comment->ensureCursorVisible();
+    if (! text.isEmpty())
+        m_comment->ensureCursorVisible();
     m_comment->clearFocus();
 }
 
