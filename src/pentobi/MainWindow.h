@@ -242,6 +242,12 @@ private:
 
     bool m_isRatedGameFinished;
 
+    /** Flag set while setting the text in m_comment for fast return in the
+        textChanged() handler.
+        Used because QPlainTextEdit does not have a textEdited() signal and
+        we only need to handle edits. */
+    bool m_ignoreCommentTextChanged;
+
     /** Color played by the user in a rated game.
         Only defined if m_isRated is true. In game variants with multiple
         colors per player, the user plays all colors of the player with
@@ -586,6 +592,8 @@ private:
     void play(Color c, Move mv, bool checkComputerMove);
 
     bool save(const QString& file);
+
+    void setCommentText(const QString& text);
 
     void setVariant(Variant variant);
 
