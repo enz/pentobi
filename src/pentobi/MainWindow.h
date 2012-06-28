@@ -230,6 +230,12 @@ private:
         a terminal position. */
     bool m_gameFinished;
 
+    /** Flag set while setting the text in m_comment for fast return in the
+        textChanged() handler.
+        Used because QPlainTextEdit does not have a textEdited() signal and
+        we only need to handle edits. */
+    bool m_ignoreCommentTextChanged;
+
     /** Integer ID assigned to the currently running move generation.
         Used to ignore finished events from canceled move generations. */
     unsigned int m_genMoveId;
@@ -556,6 +562,8 @@ private:
     void play(Color c, Move mv);
 
     bool save(const QString& file);
+
+    void setCommentText(const QString& text);
 
     void setGameVariant(GameVariant gameVariant);
 

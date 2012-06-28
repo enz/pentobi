@@ -206,6 +206,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                        const QString& booksDir, bool noBook, size_t memory)
     : m_isGenMoveRunning(false),
       m_isAnalyzeRunning(false),
+      m_ignoreCommentTextChanged(false),
       m_genMoveId(0),
       m_lastComputerMovesBegin(0),
       m_lastComputerMovesEnd(0),
@@ -591,6 +592,8 @@ void MainWindow::coordinateLabels(bool checked)
 
 void MainWindow::commentChanged()
 {
+    if (m_ignoreCommentTextChanged)
+        return;
     QString comment = m_comment->toPlainText();
     if (comment.isEmpty())
         m_game->set_comment("");
@@ -2605,6 +2608,15 @@ void MainWindow::selectPieceZ()
     selectNamedPiece("Z5", "Z4");
 }
 
+void MainWindow::setCommentText(const QString& text)
+{
+    m_ignoreCommentTextChanged = true;
+    m_comment->setPlainText(text);
+    m_ignoreCommentTextChanged = false;
+    m_comment->ensureCursorVisible();
+    m_comment->clearFocus();
+}
+
 void MainWindow::setGameVariant(GameVariant gameVariant)
 {
     if (m_game->get_game_variant() == gameVariant)
@@ -3108,13 +3120,11 @@ void MainWindow::updateComment()
     string comment = m_game->get_comment();
     if (comment.empty())
     {
-        m_comment->clear();
+        setCommentText("");
         return;
     }
     string charset = m_game->get_root().get_property("CA", "");
-    m_comment->setPlainText(Util::convertSgfValueToQString(comment, charset));
-    m_comment->ensureCursorVisible();
-    m_comment->clearFocus();
+    setCommentText(Util::convertSgfValueToQString(comment, charset));
 }
 
 void MainWindow::updateFlipActions()
