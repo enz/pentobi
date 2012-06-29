@@ -72,7 +72,12 @@ string Writer::get_escaped(const string& s)
     {
         if (c == ']' || c == '\\')
             buffer << '\\' << c;
-        else if (c != '\n' && isspace(c))
+        else if (c == '\t' || c == '\f' || c == '\v')
+            // Replace whitespace as required by the SGF standard.
+            // Note: Don't use isspace(c), it triggers an assertion in MSVC 10 if
+            // (int)(c) < 0 and caused problems that we don't fully understand (it
+            // replaced characters in UTF8 strings in WINE even if the same
+            // executable worked correctly on Windows 7).
             buffer << ' ';
         else
             buffer << c;
