@@ -668,10 +668,7 @@ void MainWindow::commentChanged()
     {
         string charset = m_game->get_root().get_property("CA", "");
         string value = Util::convertSgfValueFromQString(comment, charset);
-        // Trim trailing white space but only if the comment has changed anyway
-        // (to avoid setting the modified flag when browsing a game)
-        if (value != m_game->get_comment())
-            trim_right(value);
+        trim_right(value);
         m_game->set_comment(value);
     }
     updateWindowModified();
