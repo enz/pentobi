@@ -6,9 +6,12 @@
 #define LIBBOARDGAME_UTIL_STATISTICS_H
 
 #include <cmath>
-#include <iosfwd>
+#include <iomanip>
+#include <iostream>
 #include <limits>
+#include <sstream>
 #include <string>
+#include <boost/io/ios_state.hpp>
 #include "Assert.h"
 
 namespace libboardgame_util {
@@ -17,131 +20,204 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+template<typename FLOAT = double>
 class StatisticsBase
 {
 public:
     StatisticsBase();
 
-    void add(double val);
+    void add(FLOAT val);
 
     void clear();
 
-    double get_count() const;
+    FLOAT get_count() const;
 
-    double get_mean() const;
+    FLOAT get_mean() const;
 
     void write(ostream& out, bool fixed = false,
                unsigned int precision = 6) const;
 
 private:
-    double m_count;
+    FLOAT m_count;
 
-    double m_mean;
+    FLOAT m_mean;
 };
 
-inline StatisticsBase::StatisticsBase()
+template<typename FLOAT>
+inline StatisticsBase<FLOAT>::StatisticsBase()
 {
     clear();
 }
 
-inline void StatisticsBase::clear()
+template<typename FLOAT>
+void StatisticsBase<FLOAT>::add(FLOAT val)
+{
+    FLOAT count = m_count;
+    ++count;
+    val -= m_mean;
+    m_mean +=  val / count;
+    m_count = count;
+}
+
+template<typename FLOAT>
+inline void StatisticsBase<FLOAT>::clear()
 {
     m_count = 0;
     m_mean = 0;
 }
 
-inline double StatisticsBase::get_count() const
+template<typename FLOAT>
+inline FLOAT StatisticsBase<FLOAT>::get_count() const
 {
     return m_count;
 }
 
-inline double StatisticsBase::get_mean() const
+template<typename FLOAT>
+inline FLOAT StatisticsBase<FLOAT>::get_mean() const
 {
     LIBBOARDGAME_ASSERT(m_count > 0);
     return m_mean;
 }
 
+template<typename FLOAT>
+void StatisticsBase<FLOAT>::write(ostream& out, bool fixed,
+                                  unsigned int precision) const
+{
+    if (m_count > 0)
+    {
+        boost::io::ios_all_saver saver(out);
+        if (fixed)
+            out << std::fixed;
+        out << setprecision(precision) << m_mean;
+    }
+    else
+        out << '-';
+}
+
 //----------------------------------------------------------------------------
 
+template<typename FLOAT = double>
 class Statistics
 {
 public:
     Statistics();
 
-    void add(double val);
+    void add(FLOAT val);
 
     void clear();
 
-    double get_mean() const;
+    FLOAT get_mean() const;
 
-    double get_count() const;
+    FLOAT get_count() const;
 
-    double get_deviation() const;
+    FLOAT get_deviation() const;
 
-    double get_variance() const;
+    FLOAT get_variance() const;
 
     void write(ostream& out, bool fixed = false,
                unsigned int precision = 6) const;
 
 private:
-    StatisticsBase m_statistics_base;
+    StatisticsBase<FLOAT> m_statistics_base;
 
-    double m_variance;
+    FLOAT m_variance;
 };
 
-inline Statistics::Statistics()
+template<typename FLOAT>
+inline Statistics<FLOAT>::Statistics()
 {
     clear();
 }
 
-inline void Statistics::clear()
+template<typename FLOAT>
+void Statistics<FLOAT>::add(FLOAT val)
+{
+    if (get_count() > 0)
+    {
+        FLOAT count_old = get_count();
+        FLOAT mean_old = get_mean();
+        m_statistics_base.add(val);
+        FLOAT mean = get_mean();
+        FLOAT count = get_count();
+        m_variance = (count_old * (m_variance + mean_old * mean_old)
+                      + val * val) / count  - mean * mean;
+    }
+    else
+    {
+        m_statistics_base.add(val);
+        m_variance = 0;
+    }
+}
+
+template<typename FLOAT>
+inline void Statistics<FLOAT>::clear()
 {
     m_statistics_base.clear();
     m_variance = 0;
 }
 
-inline double Statistics::get_count() const
+template<typename FLOAT>
+inline FLOAT Statistics<FLOAT>::get_count() const
 {
     return m_statistics_base.get_count();
 }
 
-inline double Statistics::get_deviation() const
+template<typename FLOAT>
+inline FLOAT Statistics<FLOAT>::get_deviation() const
 {
     return sqrt(m_variance);
 }
 
-inline double Statistics::get_mean() const
+template<typename FLOAT>
+inline FLOAT Statistics<FLOAT>::get_mean() const
 {
     return m_statistics_base.get_mean();
 }
 
-inline double Statistics::get_variance() const
+template<typename FLOAT>
+inline FLOAT Statistics<FLOAT>::get_variance() const
 {
     return m_variance;
 }
 
+template<typename FLOAT>
+void Statistics<FLOAT>::write(ostream& out, bool fixed, unsigned int precision) const
+{
+    if (get_count() > 0)
+    {
+        boost::io::ios_all_saver saver(out);
+        if (fixed)
+            out << std::fixed;
+        out << setprecision(precision) << get_mean() << " dev="
+            << get_deviation();
+    }
+    else
+        out << '-';
+}
+
 //----------------------------------------------------------------------------
 
+template<typename FLOAT = double>
 class StatisticsExt
 {
 public:
     StatisticsExt();
 
-    void add(double val);
+    void add(FLOAT val);
 
     void clear();
 
-    double get_mean() const;
+    FLOAT get_mean() const;
 
-    double get_count() const;
+    FLOAT get_count() const;
 
-    double get_max() const;
+    FLOAT get_max() const;
 
-    double get_min() const;
+    FLOAT get_min() const;
 
-    double get_deviation() const;
+    FLOAT get_deviation() const;
 
-    double get_variance() const;
+    FLOAT get_variance() const;
 
     void write(ostream& out, bool fixed = false, unsigned int precision = 6,
                bool integer_values = false) const;
@@ -150,58 +226,106 @@ public:
                      bool integer_values = false) const;
 
 private:
-    Statistics m_statistics;
+    Statistics<FLOAT> m_statistics;
 
-    double m_max;
+    FLOAT m_max;
 
-    double m_min;
+    FLOAT m_min;
 };
 
-inline StatisticsExt::StatisticsExt()
+template<typename FLOAT>
+inline StatisticsExt<FLOAT>::StatisticsExt()
 {
     clear();
 }
 
-inline void StatisticsExt::clear()
+template<typename FLOAT>
+void StatisticsExt<FLOAT>::add(FLOAT val)
 {
-    m_statistics.clear();
-    m_min = numeric_limits<double>::max();
-    m_max = -numeric_limits<double>::max();
+    m_statistics.add(val);
+    if (val > m_max)
+        m_max = val;
+    if (val < m_min)
+        m_min = val;
 }
 
-inline double StatisticsExt::get_count() const
+template<typename FLOAT>
+inline void StatisticsExt<FLOAT>::clear()
+{
+    m_statistics.clear();
+    m_min = numeric_limits<FLOAT>::max();
+    m_max = -numeric_limits<FLOAT>::max();
+}
+
+template<typename FLOAT>
+inline FLOAT StatisticsExt<FLOAT>::get_count() const
 {
     return m_statistics.get_count();
 }
 
-inline double StatisticsExt::get_deviation() const
+template<typename FLOAT>
+inline FLOAT StatisticsExt<FLOAT>::get_deviation() const
 {
     return m_statistics.get_deviation();
 }
 
-inline double StatisticsExt::get_max() const
+template<typename FLOAT>
+inline FLOAT StatisticsExt<FLOAT>::get_max() const
 {
     return m_max;
 }
 
-inline double StatisticsExt::get_mean() const
+template<typename FLOAT>
+inline FLOAT StatisticsExt<FLOAT>::get_mean() const
 {
     return m_statistics.get_mean();
 }
 
-inline double StatisticsExt::get_min() const
+template<typename FLOAT>
+inline FLOAT StatisticsExt<FLOAT>::get_min() const
 {
     return m_min;
 }
 
-inline double StatisticsExt::get_variance() const
+template<typename FLOAT>
+inline FLOAT StatisticsExt<FLOAT>::get_variance() const
 {
     return m_statistics.get_variance();
 }
 
+template<typename FLOAT>
+string StatisticsExt<FLOAT>::to_string(bool fixed, unsigned int precision,
+                                       bool integer_values) const
+{
+    ostringstream s;
+    write(s, fixed, precision, integer_values);
+    return s.str();
+}
+
+template<typename FLOAT>
+void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned int precision,
+                                 bool integer_values) const
+{
+    if (get_count() > 0)
+    {
+        m_statistics.write(out, fixed, precision);
+        boost::io::ios_all_saver saver(out);
+        if (fixed)
+            out << std::fixed;
+        if (integer_values)
+            out << setprecision(0);
+        else
+            out << setprecision(precision);
+        out << " min=" << m_min << " max=" << m_max;
+    }
+    else
+        out << '-';
+}
+
 //----------------------------------------------------------------------------
 
-inline ostream& operator<<(ostream& out, const StatisticsExt& s)
+template<typename FLOAT>
+inline ostream& operator<<(ostream& out, const StatisticsExt<FLOAT>& s)
 {
     s.write(out);
     return out;

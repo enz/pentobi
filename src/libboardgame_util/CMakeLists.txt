@@ -13,7 +13,6 @@ set(boardgame_util_STAT_SRCS
   Log.cpp
   Parameters.cpp
   RandomGenerator.cpp
-  Statistics.cpp
   StringUtil.cpp
   TimeIntervalChecker.cpp
   Timer.cpp

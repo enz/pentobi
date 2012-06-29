@@ -307,7 +307,7 @@ public:
     void set_callback(function<void(double, double)> callback);
 
     /** Get mean evaluation for all players at root node. */
-    const array<StatisticsBase,P>& get_root_val() const;
+    const array<StatisticsBase<Float>,P>& get_root_val() const;
 
 protected:
     struct Simulation
@@ -417,17 +417,17 @@ private:
     /** See get_reuse_param() */
     Parameters m_last_reuse_param;
 
-    StatisticsExt m_stat_len;
+    StatisticsExt<> m_stat_len;
 
-    StatisticsExt m_stat_in_tree_len;
+    StatisticsExt<> m_stat_in_tree_len;
 
     /** See get_root_val(). */
-    array<StatisticsBase,P> m_root_val;
+    array<StatisticsBase<Float>,P> m_root_val;
 
     /** Current position value estimate for prior knowledge initialization.
         Derived form root values of last search and updated with root values
         of current search. */
-    array<StatisticsBase,P> m_init_val;
+    array<StatisticsBase<Float>,P> m_init_val;
 
     function<void(double, double)> m_callback;
 
@@ -671,7 +671,7 @@ size_t Search<S,M,P>::get_nu_simulations() const
 }
 
 template<class S, class M, unsigned int P>
-inline const array<StatisticsBase,P>& Search<S,M,P>::get_root_val() const
+inline const array<StatisticsBase<Float>,P>& Search<S,M,P>::get_root_val() const
 {
     return m_root_val;
 }

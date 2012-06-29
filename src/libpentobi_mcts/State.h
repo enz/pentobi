@@ -215,7 +215,7 @@ private:
     /** Precomputed State::m_score_modification / BoardConst::max_score. */
     Float m_score_modification_factor;
 
-    Statistics m_stat_score;
+    Statistics<> m_stat_score;
 
     /** Number of simulations of this state in the current search.
         Currently identical to Search::get_nu_simulations() but could be

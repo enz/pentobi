@@ -243,7 +243,7 @@ void Search::write_info(ostream& out) const
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
         out << "All:";
-        BOOST_FOREACH(const StatisticsBase& i, get_root_val())
+        BOOST_FOREACH(const StatisticsBase<Float>& i, get_root_val())
             out << (format(" %.2f") % i.get_mean());
         out << ", ";
     }
