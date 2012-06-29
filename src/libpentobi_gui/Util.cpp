@@ -170,12 +170,12 @@ string Util::convertSgfValueFromQString(const QString& value,
 {
     QString charsetToLower = QString(charset.c_str()).trimmed().toLower();
     if (charsetToLower == "utf-8" || charsetToLower == "utf8")
-        return value.toUtf8().data();
+        return value.toUtf8().constData();
     else if (charsetToLower == "iso-8859-1" || charsetToLower == "latin1"
              || charsetToLower.isEmpty())
-        return value.toLatin1().data();
+        return value.toLatin1().constData();
     else
-        return value.toAscii().data();
+        return value.toAscii().constData();
 }
 
 QString Util::convertSgfValueToQString(const string& value,
