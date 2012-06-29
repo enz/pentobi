@@ -5,6 +5,8 @@ Current development version (branch v2-fixes)
   comment was shown and the platform that was used to create the
   file had Windows-style end of line convention and the platform
   on which the file was shown had Unix-style.
+* Fixed the corruption of non-ASCII characters in game files on
+  some platforms. 
 * Fixed duplicate menu shortcut in German translation
 * Fixed too high floating point tolerance in unit tests.
 
