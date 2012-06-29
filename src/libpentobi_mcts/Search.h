@@ -38,6 +38,8 @@ public:
 
     unsigned int get_player() const;
 
+    Float get_tie_value() const;
+
     // @} // @name
 
 

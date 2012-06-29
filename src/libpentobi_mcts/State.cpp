@@ -559,7 +559,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     return true;
 }
 
-void State::gen_children(Tree<Move>::NodeExpander& expander)
+void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
 {
     unsigned int nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
@@ -642,6 +642,10 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
         // never get explored (in practice) if the bias term constant is small.
         Float value = 1 * (0.1f + 0.9f * heuristic);
         Float count = 1;
+
+        value += init_val;
+        count += 1;
+
         // Encourage to explore a move that keeps or breaks symmetry
         // See also the comment in evaluate_playout()
         if (m_check_symmetric_draw && ! m_is_symmetry_broken)
@@ -663,8 +667,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander)
                 count += 5;
             }
         }
-        if (count > 0)
-            value /= count;
+        value /= count;
         expander.add_child(mv, value, count, value, count);
     }
 }

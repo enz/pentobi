@@ -103,11 +103,14 @@ public:
     /** Play a move in the in-tree phase of the search. */
     void play(Move mv);
 
+    unsigned int get_to_play() const;
+
     void start_search();
 
     void start_simulation(size_t n);
 
-    void gen_children(libboardgame_mcts::Tree<Move>::NodeExpander& expander);
+    void gen_children(libboardgame_mcts::Tree<Move>::NodeExpander& expander,
+                      Float init_val);
 
     void start_playout();
 
@@ -285,6 +288,11 @@ inline unsigned int State::get_nu_moves() const
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_moves() >= m_nu_moves_initial);
     return m_bd.get_nu_moves() - m_nu_moves_initial;
+}
+
+inline unsigned int State::get_to_play() const
+{
+    return m_bd.get_to_play().to_int();
 }
 
 inline bool State::skip_rave(Move mv) const

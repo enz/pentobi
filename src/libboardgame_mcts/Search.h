@@ -92,6 +92,9 @@ public:
     /** Get player to play at root node of the search. */
     virtual unsigned int get_player() const = 0;
 
+    /** An evaluation value representing a 50% winning probability. */
+    virtual Float get_tie_value() const = 0;
+
     // @} // @name
 
 
@@ -304,7 +307,7 @@ public:
     void set_callback(function<void(double, double)> callback);
 
     /** Get mean evaluation for all players at root node. */
-    const array<StatisticsBase,P>& get_root_eval() const;
+    const array<StatisticsBase,P>& get_root_val() const;
 
 protected:
     struct Simulation
@@ -393,6 +396,7 @@ private:
 
     Timer m_timer;
 
+    /** Game dependent data per thread. */
     State m_state;
 
     Simulation m_simulation;
@@ -417,8 +421,13 @@ private:
 
     StatisticsExt m_stat_in_tree_len;
 
-    /** See get_root_eval(). */
-    array<StatisticsBase,P> m_root_eval;
+    /** See get_root_val(). */
+    array<StatisticsBase,P> m_root_val;
+
+    /** Current position value estimate for prior knowledge initialization.
+        Derived form root values of last search and updated with root values
+        of current search. */
+    array<StatisticsBase,P> m_init_val;
 
     function<void(double, double)> m_callback;
 
@@ -435,7 +444,7 @@ private:
     bool check_move_cannot_change(Float count, Float remaining) const;
 
     bool expand_node(unsigned int thread_id, const Node& node,
-                     const Node*& best_child);
+                     const Node*& best_child, Float init_val);
 
     LIBBOARDGAME_FLATTEN void playout();
 
@@ -603,10 +612,10 @@ void Search<S,M,P>::dump(ostream& out) const
 
 template<class S, class M, unsigned int P>
 bool Search<S,M,P>::expand_node(unsigned int thread_id, const Node& node,
-                                const Node*& best_child)
+                                const Node*& best_child, Float init_val)
 {
     typename Tree::NodeExpander expander(thread_id, m_tree, node);
-    m_state.gen_children(expander);
+    m_state.gen_children(expander, init_val);
     if (! expander.is_tree_full())
     {
         expander.link_children();
@@ -662,9 +671,9 @@ size_t Search<S,M,P>::get_nu_simulations() const
 }
 
 template<class S, class M, unsigned int P>
-inline const array<StatisticsBase,P>& Search<S,M,P>::get_root_eval() const
+inline const array<StatisticsBase,P>& Search<S,M,P>::get_root_val() const
 {
-    return m_root_eval;
+    return m_root_val;
 }
 
 template<class S, class M, unsigned int P>
@@ -822,7 +831,9 @@ void Search<S,M,P>::play_in_tree(unsigned int thread_id,
             node = select_child(*node);
         else if (node->get_visit_count() >= m_expand_threshold || node == &root)
         {
-            if (! expand_node(thread_id, *node, node))
+            unsigned int to_play = m_state.get_to_play();
+            if (! expand_node(thread_id, *node, node,
+                              m_init_val[to_play].get_mean()))
             {
                 is_out_of_memory = true;
                 return;
@@ -910,6 +921,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
         // max_time is still used at some places in the code, so we set it to
         // infinity
         max_time = numeric_limits<double>::max();
+    unsigned int nu_players = get_nu_players();
     bool clear_tree = true;
     bool is_followup = check_followup(m_followup_sequence);
     bool is_same = false;
@@ -918,6 +930,15 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
         is_same = true;
         is_followup = false;
     }
+    for (unsigned int i = 0; i < nu_players; ++i)
+    {
+        m_init_val[i].clear();
+        m_init_val[i].add(get_tie_value());
+    }
+    if (is_same || (is_followup && m_followup_sequence.size() <= nu_players))
+        for (unsigned int i = 0; i < nu_players; ++i)
+            if (m_root_val[i].get_count() > 0)
+                m_init_val[i] = m_root_val[i];
     if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
         && get_reuse_param() == get_last_reuse_param())
     {
@@ -978,9 +999,8 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
     m_player = get_player();
     m_stat_len.clear();
     m_stat_in_tree_len.clear();
-    unsigned int nu_players = get_nu_players();
     for (unsigned int i = 0; i < nu_players; ++i)
-        m_root_eval[i].clear();
+        m_root_val[i].clear();
     if (m_use_last_good_reply && ! is_followup)
         m_reply_table.init(nu_players);
     m_state.start_search();
@@ -1447,7 +1467,10 @@ void Search<S,M,P>::update_values(const array<Float,max_players>& eval)
     }
     unsigned int nu_players = get_nu_players();
     for (unsigned int i = 0; i < nu_players; ++i)
-        m_root_eval[i].add(eval[i]);
+    {
+        m_root_val[i].add(eval[i]);
+        m_init_val[i].add(eval[i]);
+    }
 }
 
 //-----------------------------------------------------------------------------

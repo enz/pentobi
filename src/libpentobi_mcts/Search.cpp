@@ -144,6 +144,11 @@ void Search::get_root_position(Variant& variant, Setup& setup) const
     setup.to_play = m_to_play;
 }
 
+Float Search::get_tie_value() const
+{
+    return 0.5;
+}
+
 void Search::on_start_search()
 {
     const Board& bd = get_board();
@@ -238,7 +243,7 @@ void Search::write_info(ostream& out) const
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
         out << "All:";
-        BOOST_FOREACH(const StatisticsBase& i, get_root_eval())
+        BOOST_FOREACH(const StatisticsBase& i, get_root_val())
             out << (format(" %.2f") % i.get_mean());
         out << ", ";
     }
