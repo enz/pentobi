@@ -53,7 +53,7 @@ void Reader::consume_char(char expected)
 
 void Reader::consume_whitespace()
 {
-    char c;
+    int c;
     while (isspace(c = peek()))
         m_in->get();
 }

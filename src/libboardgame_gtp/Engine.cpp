@@ -38,7 +38,7 @@ namespace {
 bool is_cmd_line(const string& line)
 {
     BOOST_FOREACH(char c, line)
-        if (! isspace(c))
+        if (! isspace(static_cast<unsigned char>(c)))
             return c != '#';
     return false;
 }
