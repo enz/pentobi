@@ -6,7 +6,6 @@ include_directories(
 link_directories(${Boost_LIBRARY_DIRS})
 
 set(unittest_libboardgame_base_STAT_SRCS
-  Main.cpp
   MarkerTest.cpp
   PointTest.cpp
   PointTransformTest.cpp
@@ -19,6 +18,7 @@ add_executable(unittest_libboardgame_base
   ${unittest_libboardgame_base_STAT_SRCS})
 
 target_link_libraries(unittest_libboardgame_base
+  boardgame_test_main
   boardgame_base
   boardgame_test
   boardgame_util

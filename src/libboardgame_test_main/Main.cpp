@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libpentobi_base/Main.cpp */
+/** @file libboardgame_test_main/Main.cpp */
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_test/Test.h"

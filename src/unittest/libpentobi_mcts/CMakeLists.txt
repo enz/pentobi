@@ -6,7 +6,6 @@ include_directories(
 link_directories(${Boost_LIBRARY_DIRS})
 
 set(unittest_libpentobi_mcts_STAT_SRCS
-  Main.cpp
   SearchTest.cpp
   )
 
@@ -14,6 +13,7 @@ add_executable(unittest_libpentobi_mcts
   ${unittest_libpentobi_mcts_STAT_SRCS})
 
 target_link_libraries(unittest_libpentobi_mcts
+  boardgame_test_main
   pentobi_mcts
   pentobi_base
   boardgame_base

@@ -13,6 +13,7 @@ endif()
 
 if (PENTOBI_BUILD_TESTS)
   add_subdirectory(libboardgame_test)
+  add_subdirectory(libboardgame_test_main)
   add_subdirectory(unittest)
 endif()
 
