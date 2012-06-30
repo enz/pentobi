@@ -22,6 +22,19 @@ using boost::filesystem::ifstream;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+/** Replacement for std::isspace() that returns true only for whitespaces
+    in the ASCII range. */
+bool is_ascii_space(int c)
+{
+    return c >= 0 && c < 128 && isspace(c);
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 Reader::ReadError::ReadError(const string& s)
     : Exception(s)
 {
@@ -54,7 +67,7 @@ void Reader::consume_char(char expected)
 void Reader::consume_whitespace()
 {
     int c;
-    while (isspace(c = peek()))
+    while (is_ascii_space(c = peek()))
         m_in->get();
 }
 
@@ -124,7 +137,7 @@ void Reader::read(istream& in, bool check_single_tree,
                 return;
             }
         }
-        else if (isspace(c))
+        else if (is_ascii_space(c))
             m_in->get();
         else
             throw ReadError("Extra characters after end of tree.");
