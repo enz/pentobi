@@ -1835,8 +1835,8 @@ void MainWindow::gameOver()
                                         variant));
         }
         updateRatingDialog();
-        int oldRatingInt = static_cast<int>(oldRating.get());
-        int newRatingInt = static_cast<int>(newRating.get());
+        int oldRatingInt = static_cast<int>(round(oldRating.get()));
+        int newRatingInt = static_cast<int>(round(newRating.get()));
         if (newRatingInt > oldRatingInt)
             detailText =
                 tr("Your rating has increased from %1 to %2.")
