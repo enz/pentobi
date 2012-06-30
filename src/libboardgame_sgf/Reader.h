@@ -77,7 +77,7 @@ private:
 
     /** Local variable in read_property().
         Reused for efficiency. */
-    string m_identifier;
+    string m_id;
 
     /** Local variable in read_property().
         Reused for efficiency. */

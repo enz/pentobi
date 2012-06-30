@@ -210,9 +210,9 @@ void Reader::read_property()
     }
     else
     {
-        m_identifier.clear();
+        m_id.clear();
         while (peek() != '[')
-            m_identifier += read_char();
+            m_id += read_char();
         m_values.clear();
         while (peek() == '[')
         {
@@ -234,7 +234,7 @@ void Reader::read_property()
             consume_whitespace();
             m_values.push_back(m_value);
         }
-        on_property(m_identifier, m_values);
+        on_property(m_id, m_values);
     }
 }
 
@@ -256,6 +256,8 @@ void Reader::read_tree(bool is_root)
         }
         else if (c == '(')
             read_tree(false);
+        else
+            throw ReadError("Extra text before node");
     }
     read_expected(')');
     m_is_in_main_variation = false;
