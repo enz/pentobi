@@ -103,4 +103,18 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_newline)
     }
 }
 
+LIBBOARDGAME_TEST_CASE(sgf_tree_reader_property_without_value)
+{
+    istringstream in("(;B)");
+    TreeReader reader;
+    LIBBOARDGAME_CHECK_THROW(reader.read(in), TreeReader::ReadError);
+}
+
+LIBBOARDGAME_TEST_CASE(sgf_tree_reader_text_before_node)
+{
+    istringstream in("(B;)");
+    TreeReader reader;
+    LIBBOARDGAME_CHECK_THROW(reader.read(in), TreeReader::ReadError);
+}
+
 //-----------------------------------------------------------------------------
