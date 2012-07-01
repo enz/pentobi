@@ -1,5 +1,5 @@
-Current development version (branch v2-fixes)
-=============================================
+Version 2.0 (1 Jul 2012)
+========================
 
 * Bugfix: File was erroneously marked as modified if a multiline
   comment was shown and the platform that was used to create the
