@@ -34,11 +34,12 @@ using libpentobi_base::PointList;
     last three moves by the opponent (i.e. the last move of each opponent in
     four-player game variants, the last two opponent moves in Duo, and the last
     two opponent moves, one of each opponent color, in the game variants with
-    two players and four colors). If a move does not occupy any, it has a
-    higher value if it occupies any point adjacent to these attach points (no
-    matter how many). Using these values will prefer local responses in the
-    playouts without becoming too deterministic. Attach points that are
-    forbidden to the color of the opponent move are not considered. */
+    two players and four colors). Within moves with the same number of attach
+    points occupied, the value is higher if it also occupies any point
+    adjacent to the attach points (no matter how many). Using these values
+    will prefer local responses in the playouts without becoming too
+    deterministic. Attach points that are forbidden to the color of the
+    opponent move are not considered. */
 class LocalValue
 {
 public:
