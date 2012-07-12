@@ -984,6 +984,7 @@ void MainWindow::createActions()
             this, SLOT(nextVariation10()));
 
     m_actionNewRatedGame = new QAction(tr("New &Rated Game"), this);
+    m_actionNewRatedGame->setShortcut(QString("Ctrl+Shift+N"));
     connect(m_actionNewRatedGame, SIGNAL(triggered()),
             this, SLOT(newRatedGame()));
 
