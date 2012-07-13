@@ -38,8 +38,7 @@ RatingHistory::RatingHistory(Variant variant, const path& datadir)
     }
     size_t nuGames = m_games.size();
     if (nuGames > maxGames)
-        m_games.erase(m_games.begin(),
-                      m_games.begin() + nuGames - maxGames + 1);
+        m_games.erase(m_games.begin(), m_games.begin() + nuGames - maxGames);
 }
 
 void RatingHistory::add(unsigned int number, Color color, float result,
@@ -53,10 +52,10 @@ void RatingHistory::add(unsigned int number, Color color, float result,
     info.date = date;
     info.level = level;
     info.rating = rating;
+    m_games.push_back(info);
     size_t nuGames = m_games.size();
     if (nuGames > maxGames)
-        m_games.erase(m_games.begin(), m_games.begin() + maxGames - nuGames);
-    m_games.push_back(info);
+        m_games.erase(m_games.begin(), m_games.begin() + nuGames - maxGames);
 }
 
 void RatingHistory::save() const
