@@ -103,7 +103,7 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames)
         break;
     }
     m_labelVariant->setText(tr("Game variant %1").arg(variantStr));
-    m_labelNuGames->setText(tr("%n game(s) played", "", nuGames));
+    m_labelNuGames->setText(tr("%n rated game(s)", "", nuGames));
 }
 
 //-----------------------------------------------------------------------------

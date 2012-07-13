@@ -56,10 +56,10 @@
     <name>RatingDialog</name>
     <message numerus="yes">
         <location filename="RatingDialog.cpp" line="106"/>
-        <source>%n game(s) played</source>
+        <source>%n rated game(s)</source>
         <translation>
-            <numerusform>%n game played</numerusform>
-            <numerusform>%n games played</numerusform>
+            <numerusform>%n rated game</numerusform>
+            <numerusform>%n rated games</numerusform>
         </translation>
     </message>
 </context>

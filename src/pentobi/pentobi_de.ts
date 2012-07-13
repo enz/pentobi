@@ -1155,10 +1155,10 @@
     </message>
     <message numerus="yes">
         <location filename="RatingDialog.cpp" line="106"/>
-        <source>%n game(s) played</source>
+        <source>%n rated game(s)</source>
         <translation>
-            <numerusform>%n Spiel gespielt</numerusform>
-            <numerusform>%n Spiele gespielt</numerusform>
+            <numerusform>%n gewertetes Spiel</numerusform>
+            <numerusform>%n gewertete Spiele</numerusform>
         </translation>
     </message>
     <message>
