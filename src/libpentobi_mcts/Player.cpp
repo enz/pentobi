@@ -226,7 +226,7 @@ Rating Player::get_rating(Variant variant, int level)
                 return Rating(elo[level - 1]);
             else
                 // Ratings for levels greater 7 are not really tested.
-                return Rating(elo[6] + 10 * (level - 7));
+                return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
         }
     case variant_trigon:
     case variant_trigon_2:
@@ -237,7 +237,7 @@ Rating Player::get_rating(Variant variant, int level)
                 return Rating(elo[level - 1]);
             else
                 // Ratings for levels greater 7 are not really tested.
-                return Rating(elo[6] + 10 * (level - 7));
+                return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
         }
     case variant_duo:
     case variant_junior:
@@ -247,7 +247,7 @@ Rating Player::get_rating(Variant variant, int level)
                 return Rating(elo[level - 1]);
             else
                 // Ratings for levels greater 7 are not really tested.
-                return Rating(elo[6] + 10 * (level - 7));
+                return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
         }
     }
     LIBBOARDGAME_ASSERT(false);

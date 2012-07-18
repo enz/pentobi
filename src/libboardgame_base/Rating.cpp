@@ -21,7 +21,9 @@ float Rating::get_expected_result(Rating elo_opponent,
                                   unsigned int nu_opponents) const
 {
     float diff = elo_opponent.m_elo - m_elo;
-    return 1 / (1 + nu_opponents * pow(10, diff / 400));
+    return
+        1.f
+        / (1.f + static_cast<float>(nu_opponents) * pow(10.f, diff / 400.f));
 }
 
 void Rating::update_multiplayer(float game_result, Rating elo_opponent,

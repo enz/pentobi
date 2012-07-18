@@ -154,10 +154,10 @@ Float get_result(const Board& bd, Color c)
         for (unsigned int i = 0; i < nu_colors; ++i)
             if (points_array[i] == points)
             {
-                result += Float(i) / (nu_colors - 1);
+                result += Float(i) / Float(nu_colors - 1);
                 ++n;
             }
-        result /= n;
+        result /= Float(n);
         return result;
     }
     else
