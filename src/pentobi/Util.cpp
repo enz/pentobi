@@ -39,7 +39,7 @@ void getNextRatedGameSettings(Variant variant, int maxLevel, int& level,
     unsigned int nuGames;
     getRating(variant, rating, nuGames);
     userColor = Color(nuGames % get_nu_players(variant));
-    float minDiff;
+    float minDiff = 0; // Initialize to avoid compiler warning
     for (int i = 1; i <= maxLevel; ++i)
     {
         float diff = abs(rating.get() - Player::get_rating(variant, i).get());
