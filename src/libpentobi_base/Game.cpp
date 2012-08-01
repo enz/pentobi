@@ -74,7 +74,7 @@ void Game::goto_node(const Node& node)
             }
             m_current = old;
         }
-        throw e;
+        throw;
     }
 }
 
