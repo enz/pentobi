@@ -188,6 +188,11 @@ QIcon getIconResource(const QString& name)
     return QIcon(QString(":/pentobi/icons/%1.png").arg(name));
 }
 
+float round(float d)
+{
+    return floor(d + 0.5f);
+}
+
 void setIcon(QAction* action, const QIcon& icon)
 {
     action->setIcon(icon);
@@ -1836,8 +1841,8 @@ void MainWindow::gameOver()
                                         variant));
         }
         updateRatingDialog();
-        int oldRatingInt = static_cast<int>(round(oldRating.get()));
-        int newRatingInt = static_cast<int>(round(newRating.get()));
+        int oldRatingInt = static_cast<int>(::round(oldRating.get()));
+        int newRatingInt = static_cast<int>(::round(newRating.get()));
         if (newRatingInt > oldRatingInt)
             detailText =
                 tr("Your rating has increased from %1 to %2.")

@@ -58,7 +58,7 @@ void Game::goto_node(const Node& node)
         m_updater.update(node);
         m_current = &node;
     }
-    catch (const InvalidTree& e)
+    catch (const InvalidTree&)
     {
         // Try to restore the old state.
         if (old == 0)
