@@ -66,7 +66,7 @@ if (PENTOBI_BUILD_GTP)
 endif()
 # Boost versions that were not released when CMake 2.8 came out.
 # You might have to update this list if you use a newer version of Boost.
-set(Boost_ADDITIONAL_VERSIONS "1.45 1.45.0 1.46 1.46.0 1.46.1 1.47 1.47.0 1.48 1.48.0 1.49.0")
+set(Boost_ADDITIONAL_VERSIONS "1.45 1.45.0 1.46 1.46.0 1.46.1 1.47 1.47.0 1.48 1.48.0 1.49.0 1.50.0")
 # Note: some versions of Boost cause compilation errors if
 # used with certain versions of GCC and option -std=c++0x
 # (e.g. the combinations GCC 4.4/Boost 1.40 in Ubuntu 10.04
