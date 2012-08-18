@@ -19,6 +19,7 @@ endif()
 
 if (PENTOBI_BUILD_GUI)
   add_subdirectory(libpentobi_gui)
+  add_subdirectory(libpentobi_thumbnail)
   add_subdirectory(pentobi_thumbnailer)
   add_subdirectory(pentobi)
 endif()

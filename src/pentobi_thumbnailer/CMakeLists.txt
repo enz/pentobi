@@ -16,6 +16,7 @@ if(UNIX AND NOT APPLE)
   add_executable(pentobi-thumbnailer ${pentobi_thumbnailer_SRCS})
 
   target_link_libraries(pentobi-thumbnailer
+    pentobi_thumbnail
     pentobi_gui
     ${QT_LIBRARIES}
     pentobi_base
