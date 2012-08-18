@@ -2,6 +2,7 @@
 /** @file pentobi_thumbnailer/Main.cpp */
 //-----------------------------------------------------------------------------
 
+#include <iostream>
 #include <vector>
 #include <boost/program_options.hpp>
 #include "libboardgame_util/Exception.h"
