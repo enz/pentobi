@@ -61,6 +61,7 @@ void mainFunction(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+    QCoreApplication app(argc, argv);
     try
     {
         mainFunction(argc, argv);
