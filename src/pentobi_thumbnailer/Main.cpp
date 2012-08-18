@@ -50,8 +50,7 @@ void mainFunction(int argc, char* argv[])
     if (! createThumbnail(QString::fromLocal8Bit(files[0].c_str()), size, size,
                           image))
         throw Exception("Thumbnail generation failed");
-    QImageWriter writer(QString::fromLocal8Bit(files[1].c_str()));
-    writer.setFormat("png");
+    QImageWriter writer(QString::fromLocal8Bit(files[1].c_str()), "png");
     if (! writer.write(image))
         throw Exception(writer.errorString().toStdString());
 }
