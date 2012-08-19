@@ -5,6 +5,8 @@ set(PENTOBI_VERSION 3.UNKNOWN)
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
+option(PENTOBI_BUILD_KDE_THUMBNAILER
+  "Build thumbnailer for KDE (also requires PENTOBI_BUILD_GUI)" OFF)
 option(PENTOBI_REGISTER_GNOME2_THUMBNAILER
   "Install files for registering thumbnailer for old versions of Gnome" ON)
 
@@ -30,7 +32,7 @@ if(MSVC)
   add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 endif()
 
-if (MINGW)
+if(MINGW)
   # -std=c++0x makes MinGW define __STRICT_ANSI__, which also hides
   # some functions that we use in some Windows-specific code, like fdopen()
   add_definitions(-U__STRICT_ANSI__)
@@ -56,7 +58,7 @@ check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 
 set(PENTOBI_BOOST_COMPONENTS system filesystem program_options)
-if (PENTOBI_BUILD_GTP)
+if(PENTOBI_BUILD_GTP)
   set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} thread)
   # Package Threads is needed because some versions of CMake/FindBoost fail to
   # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread.
@@ -86,7 +88,7 @@ if(NOT DEFINED LIBBOARDGAME_MCTS_FLOAT_TYPE)
   set(LIBBOARDGAME_MCTS_FLOAT_TYPE float)
 endif()
 if(NOT DEFINED PENTOBI_BOOKS_DIR)
-  if (UNIX AND NOT APPLE)
+  if(UNIX AND NOT APPLE)
     set(PENTOBI_BOOKS_DIR
       "${CMAKE_INSTALL_PREFIX}/share/games/pentobi/books")
   else()
@@ -94,7 +96,7 @@ if(NOT DEFINED PENTOBI_BOOKS_DIR)
   endif()
 endif()
 if(NOT DEFINED PENTOBI_MANUAL_DIR)
-  if (UNIX AND NOT APPLE)
+  if(UNIX AND NOT APPLE)
     set(PENTOBI_MANUAL_DIR
       "${CMAKE_INSTALL_PREFIX}/share/games/pentobi/manual")
   else()
@@ -102,7 +104,7 @@ if(NOT DEFINED PENTOBI_MANUAL_DIR)
   endif()
 endif()
 if(NOT DEFINED PENTOBI_TRANSLATIONS)
-  if (UNIX AND NOT APPLE)
+  if(UNIX AND NOT APPLE)
     set(PENTOBI_TRANSLATIONS
       "${CMAKE_INSTALL_PREFIX}/share/games/pentobi/translations")
   else()
@@ -121,14 +123,14 @@ if(PENTOBI_BUILD_GUI)
   find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
 endif()
 
-if (UNIX)
+if(UNIX)
 add_custom_target(dist
   COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD
   | gzip --best > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.gz
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
-if (UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE)
   add_custom_target(post-install
     COMMAND
     update-desktop-database ${CMAKE_INSTALL_PREFIX}/share/applications\;

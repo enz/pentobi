@@ -40,6 +40,10 @@ On Unix systems that support only Gnome 3, it is unnecessary to install
 the Gnome 2 registration files for the Pentobi thumbnailer. They can be
 disabled by using the cmake option -DPENTOBI_REGISTER_GNOME2_THUMBNAILER=OFF.
 
+A thumbnailer plugin for KDE can be built by using the CMake option
+-DPENTOBI_BUILD_KDE_THUMBNAILER=ON. In this case, the KDE development
+files need to be installed (package kdelibs5-dev on Ubuntu 12.04).
+
 
 == Installing ==
 
