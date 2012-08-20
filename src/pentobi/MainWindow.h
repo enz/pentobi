@@ -58,6 +58,8 @@ public slots:
 
     void beginning();
 
+    void beginningOfBranch();
+
     void clearSelectedPiece();
 
     void computerColors();
@@ -318,6 +320,8 @@ private:
     QAction* m_actionBadMove;
 
     QAction* m_actionBeginning;
+
+    QAction* m_actionBeginningOfBranch;
 
     QAction* m_actionClearSelectedPiece;
 

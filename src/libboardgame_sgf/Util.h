@@ -16,6 +16,9 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+/** Return the last node in the current variation that had a sibling. */
+const Node& beginning_of_branch(const Node& node);
+
 /** Find next node with a comment in the iteration through complete tree.
     @param node The current node in the iteration.
     @return The next node in the iteration through the complete tree
@@ -48,6 +51,9 @@ const Node* get_next_earlier_variation(const Node& node);
     therefore equivalent to the move number if there are no non-root nodes
     without moves) and Y being the number of the child (starting at 1). */
 string get_variation_string(const Node& node);
+
+/** Check if any previous node had a sibling. */
+bool has_earlier_variation(const Node& node);
 
 bool is_main_variation(const Node& node);
 

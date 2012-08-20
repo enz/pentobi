@@ -36,10 +36,12 @@ using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
+using libboardgame_sgf::util::beginning_of_branch;
 using libboardgame_sgf::util::find_next_comment;
 using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::get_variation_string;
 using libboardgame_sgf::util::has_comment;
+using libboardgame_sgf::util::has_earlier_variation;
 using libboardgame_sgf::util::is_main_variation;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
@@ -509,6 +511,11 @@ void MainWindow::beginning()
     gotoNode(m_game->get_root());
 }
 
+void MainWindow::beginningOfBranch()
+{
+    gotoNode(beginning_of_branch(m_game->get_current()));
+}
+
 void MainWindow::cancelThread()
 {
     if (m_isAnalyzeRunning)
@@ -755,6 +762,11 @@ void MainWindow::createActions()
     setIcon(m_actionBeginning, "pentobi-go-first");
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
+
+    m_actionBeginningOfBranch = new QAction(tr("Beginning of Bran&ch"), this);
+    m_actionBeginningOfBranch->setShortcut(QString("Ctrl+Shift+Home"));
+    connect(m_actionBeginningOfBranch, SIGNAL(triggered()),
+            this, SLOT(beginningOfBranch()));
 
     m_actionClearSelectedPiece = new QAction(tr("Clear Piece"), this);
     setIcon(m_actionClearSelectedPiece, "pentobi-piece-clear");
@@ -1311,6 +1323,7 @@ void MainWindow::createMenu()
     menuGo->addSeparator();
     menuGo->addAction(m_actionGotoMove);
     menuGo->addAction(m_actionBackToMainVariation);
+    menuGo->addAction(m_actionBeginningOfBranch);
 
     QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
     menuEdit->addAction(m_actionFindNextComment);
@@ -3447,6 +3460,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
     bool isMain = is_main_variation(current);
+    bool hasEarlierVariation = has_earlier_variation(current);
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move_ignore_invalid(current);
@@ -3454,6 +3468,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionAnalyzeGame->setEnabled(tree.has_main_variation_moves());
     m_actionBackToMainVariation->setEnabled(! isMain);
     m_actionBeginning->setEnabled(hasParent);
+    m_actionBeginningOfBranch->setEnabled(hasEarlierVariation);
     m_actionBackward->setEnabled(hasParent);
     m_actionBackward10->setEnabled(hasParent);
     m_actionDeleteAllVariations->setEnabled(tree.has_variations());

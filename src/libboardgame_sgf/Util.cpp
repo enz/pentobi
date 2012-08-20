@@ -33,6 +33,21 @@ const Node& back_to_main_variation(const Node& node)
     return current->get_first_child();
 }
 
+const Node& beginning_of_branch(const Node& node)
+{
+    const Node* current = node.get_parent_or_null();
+    if (current == 0)
+        return node;
+    while (true)
+    {
+        const Node* parent = current->get_parent_or_null();
+        if (parent == 0 || ! parent->has_single_child())
+            break;
+        current = parent;
+    }
+    return *current;
+}
+
 const Node* find_next_comment(const Node& node)
 {
     const Node* current = get_next_node(node);
@@ -144,6 +159,22 @@ string get_variation_string(const Node& node)
 bool has_comment(const Node& node)
 {
     return node.has_property("C");
+}
+
+bool has_earlier_variation(const Node& node)
+{
+    const Node* current = node.get_parent_or_null();
+    if (current == 0)
+        return false;
+    while (true)
+    {
+        const Node* parent = current->get_parent_or_null();
+        if (parent == 0)
+            return false;
+        if (! parent->has_single_child())
+            return true;
+        current = parent;
+    }
 }
 
 bool is_main_variation(const Node& node)
