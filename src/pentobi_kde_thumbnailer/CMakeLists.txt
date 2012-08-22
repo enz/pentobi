@@ -14,15 +14,9 @@ set(pentobi_thumbnail_SRCS PentobiThumbCreator.cpp)
 kde4_add_plugin(pentobi-thumbnail ${pentobi_thumbnail_SRCS})
 
 target_link_libraries(pentobi-thumbnail
+  pentobi_kde_thumbnailer
   ${KDE4_KIO_LIBS}
-  pentobi_thumbnail
-  pentobi_gui
   ${QT_LIBRARIES}
-  pentobi_base
-  boardgame_base
-  boardgame_sgf
-  boardgame_util
-  boardgame_sys
   ${Boost_SYSTEM_LIBRARY}
   ${Boost_FILESYSTEM_LIBRARY}
   )
