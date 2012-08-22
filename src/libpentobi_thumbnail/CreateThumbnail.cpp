@@ -11,7 +11,7 @@
 #include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
-#include "libpentobi_base/Tree.h"
+#include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_gui/BoardPainter.h"
 
 using namespace std;
@@ -126,7 +126,7 @@ bool getFinalPosition(const Node& root, Variant& variant,
     const Node* node = &root;
     while (node != 0)
     {
-        if (libpentobi_base::Tree::has_setup(*node))
+        if (libpentobi_base::node_util::has_setup(*node))
         {
             handleSetup("AB", Color(0), *node, *geometry, pointState);
             handleSetup("AW", Color(1), *node, *geometry, pointState);
@@ -142,7 +142,7 @@ bool getFinalPosition(const Node& root, Variant& variant,
         }
         Color c;
         MovePoints points;
-        if (libpentobi_base::Tree::get_move(*node, variant, c, points))
+        if (libpentobi_base::node_util::get_move(*node, variant, c, points))
         {
             BOOST_FOREACH(Point p, points)
             {

@@ -140,7 +140,7 @@ Color getCurrentColor(const Game& game)
     Color c;
     while (node != 0 && ! tree.has_move(*node))
     {
-        if (Tree::get_player(*node, c))
+        if (libpentobi_base::node_util::get_player(*node, c))
             return c;
         node = node->get_parent_or_null();
     }
@@ -2457,7 +2457,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
         m_game->init(tree);
-        if (! Tree::has_setup(m_game->get_root()))
+        if (! libpentobi_base::node_util::has_setup(m_game->get_root()))
             m_game->goto_node(get_last_node(m_game->get_root()));
         m_currentColor = getCurrentColor(*m_game);
         initPieceSelectors();

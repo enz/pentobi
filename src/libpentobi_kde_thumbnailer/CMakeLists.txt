@@ -27,7 +27,6 @@ set(pentobi_kde_thumbnailer_STAT_SRCS
   ../libboardgame_util/Log.cpp
   ../libboardgame_util/StringUtil.cpp
   ../libboardgame_base/SpreadsheetStringRep.cpp
-  ../libboardgame_base/Transform.cpp
   ../libboardgame_sgf/InvalidPropertyValue.cpp
   ../libboardgame_sgf/InvalidTree.cpp
   ../libboardgame_sgf/MissingProperty.cpp
@@ -35,19 +34,8 @@ set(pentobi_kde_thumbnailer_STAT_SRCS
   ../libboardgame_sgf/Reader.cpp
   ../libboardgame_sgf/Tree.cpp
   ../libboardgame_sgf/TreeReader.cpp
-  ../libboardgame_sgf/Util.cpp
-  ../libboardgame_sgf/Writer.cpp
-  ../libpentobi_base/Board.cpp
-  ../libpentobi_base/BoardConst.cpp
-  ../libpentobi_base/BoardUpdater.cpp
-  ../libpentobi_base/BoardUtil.cpp
-  ../libpentobi_base/PieceInfo.cpp
-  ../libpentobi_base/PieceTransforms.cpp
-  ../libpentobi_base/PieceTransformsClassic.cpp
-  ../libpentobi_base/PieceTransformsTrigon.cpp
-  ../libpentobi_base/SgfUtil.cpp
-  ../libpentobi_base/SymmetricPoints.cpp
-  ../libpentobi_base/Tree.cpp
+  ../libpentobi_base/NodeUtil.cpp
+  ../libpentobi_base/StartingPoints.cpp
   ../libpentobi_base/Variant.cpp
   ../libpentobi_gui/BoardPainter.cpp
   ../libpentobi_gui/Util.cpp

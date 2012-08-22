@@ -7,6 +7,7 @@
 
 #include "Board.h"
 #include "BoardUpdater.h"
+#include "NodeUtil.h"
 #include "Tree.h"
 
 namespace libpentobi_base {
@@ -247,7 +248,7 @@ inline const Tree& Game::get_tree() const
 
 inline bool Game::has_setup() const
 {
-    return m_tree.has_setup(*m_current);
+    return libpentobi_base::node_util::has_setup(*m_current);
 }
 
 inline Variant Game::get_variant() const

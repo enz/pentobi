@@ -9,6 +9,7 @@
 #include "BoardUpdater.h"
 
 #include "BoardUtil.h"
+#include "NodeUtil.h"
 #include "libboardgame_sgf/Util.h"
 
 namespace libpentobi_base {
@@ -113,7 +114,7 @@ void init_setup(Board& bd, const Node& node)
     handle_setup_property(node, "AW", Color(1), bd, setup, all_pieces_left);
     handle_setup_empty(node, bd, setup, all_pieces_left);
     Color to_play;
-    if (! Tree::get_player(node, setup.to_play))
+    if (! libpentobi_base::node_util::get_player(node, setup.to_play))
     {
         // Try to guess who should be to play based on the setup pieces.
         setup.to_play = Color(0);
@@ -138,7 +139,7 @@ void BoardUpdater::update(const Node& node)
     get_path_from_root(node, m_path);
     BOOST_FOREACH(const Node* i, m_path)
     {
-        if (Tree::has_setup(*i))
+        if (libpentobi_base::node_util::has_setup(*i))
             init_setup(m_bd, *i);
         ColorMove mv = m_tree.get_move(*i);
         if (mv.is_regular())

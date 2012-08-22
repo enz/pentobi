@@ -49,28 +49,11 @@ public:
         value. */
     ColorMove get_move_ignore_invalid(const Node& node) const;
 
-    /** Static version of get_move(const Node&).
-        Provided for use cases in which it is too much overhead to use
-        a libpentobi_base::Tree because of the costly BoardConst construction
-        (e.g. the Pentobi thumbnailer).
-        @param node
-        @param variant
-        @param[out] c The move color (only defined if return value is true)
-        @param[out] points The move points (only defined if return value is
-        true)
-        @return true if the node has a move property and the move is not a pass
-        move. */
-    static bool get_move(const Node& node, Variant variant, Color& c,
-                         MovePoints& points);
-
     /** Same as ! get_move.is_null() */
     bool has_move(const Node& node) const;
 
     /** Same as ! get_move_ignore_invalid.is_null() */
     bool has_move_ignore_invalid(const Node& node) const;
-
-    /** Check if a node has setup properties (not including the PL property). */
-    static bool has_setup(const Node& node);
 
     const Node* find_child_with_move(const Node& node, ColorMove mv) const;
 
@@ -108,9 +91,6 @@ public:
 
     /** Set the color to play in a setup position (PL property). */
     void set_player(const Node& node, Color c);
-
-    /** Get the color to play in a setup position (PL property). */
-    static bool get_player(const Node& node, Color& c);
 
     /** Remove the PL property.
         @see set_player() */

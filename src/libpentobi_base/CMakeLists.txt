@@ -12,6 +12,7 @@ set(pentobi_base_STAT_SRCS
   Color.cpp
   Game.cpp
   GameStateHistory.cpp
+  NodeUtil.cpp
   PieceInfo.cpp
   Player.cpp
   PieceTransforms.cpp
@@ -19,6 +20,7 @@ set(pentobi_base_STAT_SRCS
   PieceTransformsTrigon.cpp
   PointState.cpp
   SgfUtil.cpp
+  StartingPoints.cpp
   SymmetricPoints.cpp
   Tree.cpp
   TreeUtil.cpp
