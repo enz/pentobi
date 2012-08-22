@@ -1,6 +1,6 @@
 # libpentobi_kde_thumbnailer contains the files needed by
 # the pentobi_kde_thumbnailer plugin compiled with shared library options
-# (-fPIC) because this is required for building shared libraries on
+# (usually -fPIC) because this is required for building shared libraries on
 # some targets (e.g. x86_64).
 #
 # The alternative would be to add -fPIC to the global compiler flags even for
@@ -14,7 +14,7 @@
 
 include(${QT_USE_FILE})
 
-add_definitions(-fPIC)
+add_definitions(${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/src
