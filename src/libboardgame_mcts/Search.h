@@ -45,13 +45,16 @@ using libboardgame_util::string_util::to_string;
 
 /** Game-independent Monte-Carlo tree search.
     For best performance, the game-dependent functionality is added to this
-    class by template parameters, like the type representing a move (which must
-    be convertible to an integer by providing M::to_int() and M::range) and the
-    state of a simulation that provides function for move generation,
-    evaluation of terminal positions, etc. (the state should be thread-safe
-    to support multiple states if multi-threading will be implemented in the
-    future). Additionally, you need to derive from this class and implement
-    some pure virtual functions like get_move_string(). */
+    class by template parameters, like the type M representing a move (which
+    must be convertible to an integer by providing M::to_int() and M::range)
+    and the state S of a simulation that provides functions for move
+    generation, evaluation of terminal positions, etc. (the state should be
+    thread-safe to support multiple states if multi-threading will be
+    implemented in the future). Additionally, you need to derive from this
+    class and implement some pure virtual functions like get_move_string().
+    @tparam S The state of a simulation
+    @tparam M The move type
+    @tparam P The maximum number of players */
 template<class S, class M, unsigned int P>
 class Search
 {
@@ -84,9 +87,13 @@ public:
     /** @name Pure virtual functions */
     // @{
 
-    /** Get string representation of a move. */
+    /** Get string representation of a move.
+        This function is not a member function of the move type M because
+        the move type may be a lightweight class that needs a context to
+        be converted to a string. */
     virtual string get_move_string(Move mv) const = 0;
 
+    /** Get the current number of players. */
     virtual unsigned int get_nu_players() const = 0;
 
     /** Get player to play at root node of the search. */
@@ -202,6 +209,8 @@ public:
         updated to earlier positions. Default is false. */
     void set_rave_check_same(bool enable);
 
+    /** Set the equivalence parameter in the @ref libboardgame_doc_rave
+        formula. */
     void set_rave_equivalence(Float value);
 
     Float get_rave_equivalence() const;
@@ -210,6 +219,9 @@ public:
 
     Float get_unexplored_value() const;
 
+    /** Enable weighting of @ref libboardgame_doc_rave updates.
+        The weight decreases linearly from the start to the end of a
+        simulation. */
     void set_weight_rave_updates(bool enable);
 
     bool get_weight_rave_updates() const;
