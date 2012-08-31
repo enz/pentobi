@@ -1455,6 +1455,12 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
             }
             Float weight;
             if (m_weight_rave_updates)
+                // Weight decreases linearly from 2 at the start to 1 at the
+                // end of a simulation. Being proportional to the relative move
+                // distance (by dividing it by the length of the simulation),
+                // is essential for a positive effect of rave weighting,
+                // however the scaling to [2..1] could not be optimal for
+                // different games and should be made configurable in the future
                 weight = 2 - Float(first - i) * weight_factor;
             else
                 weight = 1;
