@@ -24,11 +24,11 @@
     <linearGradient
        id="linearGradient3790">
       <stop
-         style="stop-color:#ffffff;stop-opacity:1;"
+         style="stop-color:#a0a39d;stop-opacity:1;"
          offset="0"
          id="stop3792" />
       <stop
-         style="stop-color:#e6e6e6;stop-opacity:1;"
+         style="stop-color:#c8cac6;stop-opacity:1;"
          offset="1"
          id="stop3794" />
     </linearGradient>
@@ -43,15 +43,6 @@
          offset="1"
          id="stop3786" />
     </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3782"
-       id="linearGradient3788"
-       x1="7.0119681"
-       y1="0.05048006"
-       x2="10.999503"
-       y2="14.932162"
-       gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3790"
@@ -69,8 +60,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="29.521708"
-     inkscape:cx="1.3417974"
+     inkscape:zoom="20.875"
+     inkscape:cx="6.3365761"
      inkscape:cy="8.839737"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -78,10 +69,10 @@
      inkscape:document-units="px"
      showguides="true"
      inkscape:snap-global="false"
-     inkscape:window-width="1463"
+     inkscape:window-width="970"
      inkscape:window-height="847"
-     inkscape:window-x="93"
-     inkscape:window-y="50"
+     inkscape:window-x="582"
+     inkscape:window-y="95"
      inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
@@ -95,7 +86,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -104,7 +95,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="opacity:1;fill:url(#linearGradient3796);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3788);stroke-width:0.99964303000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+       style="opacity:1;fill:url(#linearGradient3796);fill-opacity:1;fill-rule:evenodd;stroke:#555753;stroke-width:0.99964303000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
        d="M 7.5 0.46875 C 3.6340068 0.46874982 0.50000018 3.6027568 0.5 7.46875 L 3.5 7.46875 C 3.5 5.2596109 5.2908609 3.46875 7.5 3.46875 C 9.7091391 3.46875 11.5 5.2596109 11.5 7.46875 C 11.5 8.6102525 11.01784 9.6218967 10.25 10.34375 L 8.375 8.46875 L 8.375 14.46875 L 14.375 14.46875 L 12.375 12.46875 C 13.712834 11.16742 14.5 9.382869 14.5 7.46875 C 14.5 3.6027568 11.365993 0.46875018 7.5 0.46875 z "
        id="rect2995" />
   </g>

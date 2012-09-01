@@ -35,11 +35,11 @@
     <linearGradient
        id="linearGradient3851">
       <stop
-         style="stop-color:#ffffff;stop-opacity:1;"
+         style="stop-color:#c8cac6;stop-opacity:1;"
          offset="0"
          id="stop3853" />
       <stop
-         style="stop-color:#e6e6e6;stop-opacity:1;"
+         style="stop-color:#a0a39d;stop-opacity:1;"
          offset="1"
          id="stop3855" />
     </linearGradient>
@@ -47,16 +47,6 @@
        inkscape:collect="always"
        xlink:href="#linearGradient3851"
        id="linearGradient4070"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(-0.66228421,0.66553078,-0.66228421,-0.66553078,17.386647,8.1679171)"
-       x1="1.8461231"
-       y1="13.944267"
-       x2="10.558049"
-       y2="-1.1880153" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3859"
-       id="linearGradient4072"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(-0.66228421,0.66553078,-0.66228421,-0.66553078,17.386647,8.1679171)"
        x1="1.8461231"
@@ -72,7 +62,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.197802"
-     inkscape:cx="-4.2439638"
+     inkscape:cx="-4.7829211"
      inkscape:cy="8"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -105,7 +95,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:url(#linearGradient4070);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient4072);stroke-width:0.99966687000000021;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:url(#linearGradient4070);fill-opacity:1;fill-rule:evenodd;stroke:#555753;stroke-width:0.99966687000000021;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="M 3.57794,1.4998337 1.5876409,3.4998894 5.5389699,7.470588 1.4998334,11.500113 3.4901327,13.500167 7.4999998,9.4706436 11.509867,13.500167 13.500166,11.529525 9.4902991,7.470588 13.441628,3.5293019 11.451329,1.5292464 7.4999998,5.4705323 3.57794,1.4998337 z"
        id="rect3074"
        inkscape:connector-curvature="0" />

@@ -35,11 +35,11 @@
     <linearGradient
        id="linearGradient3851">
       <stop
-         style="stop-color:#ffffff;stop-opacity:1;"
+         style="stop-color:#c8cac6;stop-opacity:1;"
          offset="0"
          id="stop3853" />
       <stop
-         style="stop-color:#e6e6e6;stop-opacity:1;"
+         style="stop-color:#a0a39d;stop-opacity:1;"
          offset="1"
          id="stop3855" />
     </linearGradient>
@@ -47,15 +47,6 @@
        inkscape:collect="always"
        xlink:href="#linearGradient3851"
        id="linearGradient3857"
-       x1="6.9193068"
-       y1="0"
-       x2="11.197797"
-       y2="15.967541"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3859"
-       id="linearGradient3865"
        x1="6.9193068"
        y1="0"
        x2="11.197797"
@@ -70,7 +61,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.197802"
-     inkscape:cx="-5.0817774"
+     inkscape:cx="2.7246524"
      inkscape:cy="8"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -103,7 +94,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:url(#linearGradient3857);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3865);stroke-width:1.00015031999999993;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:url(#linearGradient3857);fill-opacity:1;fill-rule:evenodd;stroke:#555753;stroke-width:1.00015031999999993;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 5.5,3 -5,5 5,4.96875 0,-3.46875 5,0 0,3.5 5,-5 -5,-4.96875 0,3.46875 -5,0 z"
        id="rect3074"
        inkscape:connector-curvature="0"

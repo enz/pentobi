@@ -24,11 +24,11 @@
     <linearGradient
        id="linearGradient3790">
       <stop
-         style="stop-color:#ffffff;stop-opacity:1;"
+         style="stop-color:#c8cac6;stop-opacity:1;"
          offset="0"
          id="stop3792" />
       <stop
-         style="stop-color:#e6e6e6;stop-opacity:1;"
+         style="stop-color:#a0a39d;stop-opacity:1;"
          offset="1"
          id="stop3794" />
     </linearGradient>
@@ -43,16 +43,6 @@
          offset="1"
          id="stop3786" />
     </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3782"
-       id="linearGradient3788"
-       x1="7.9999876"
-       y1="0.011238591"
-       x2="3.9811041"
-       y2="15.009915"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(-1,0,0,1,15,0)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3790"
@@ -72,7 +62,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="29.521708"
-     inkscape:cx="3.4955517"
+     inkscape:cx="-4.3122621"
      inkscape:cy="8.839737"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -106,7 +96,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:url(#linearGradient3796);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3788);stroke-width:0.99964303000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+       style="fill:url(#linearGradient3796);fill-opacity:1;fill-rule:evenodd;stroke:#555753;stroke-width:0.99964303000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
        d="m 7.5,0.46875 c 3.865993,-1.8e-7 7,3.1340068 7,7 l -3,0 c 0,-2.2091391 -1.7908609,-4 -4,-4 -2.2091391,0 -4,1.7908609 -4,4 0,1.1415025 0.48216,2.1531467 1.25,2.875 l 1.875,-1.875 0,6 -6,0 2,-2 C 1.287166,11.16742 0.5,9.382869 0.5,7.46875 c 0,-3.8659932 3.134007,-6.99999982 7,-7 z"
        id="rect2995"
        inkscape:connector-curvature="0" />
