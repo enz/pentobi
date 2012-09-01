@@ -18,7 +18,7 @@
    inkscape:export-filename="/local/scratch/markus/pentobi/src/pentobi/icons/pentobi-forward10.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="Zeichnung.svg">
+   sodipodi:docname="pentobi-forward10.svg">
   <defs
      id="defs2987">
     <linearGradient
@@ -77,20 +77,20 @@
        xlink:href="#linearGradient3851"
        id="linearGradient4034"
        gradientUnits="userSpaceOnUse"
-       x1="4.924366"
-       y1="10.176986"
-       x2="10.726401"
-       y2="31.830479"
+       x1="10.103694"
+       y1="10.213718"
+       x2="15.968225"
+       y2="32.100445"
        gradientTransform="translate(-0.06566604,-10.13628)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3835"
        id="linearGradient4036"
        gradientUnits="userSpaceOnUse"
-       x1="4.924366"
-       y1="10.176986"
-       x2="10.726401"
-       y2="31.830479"
+       x1="10.103694"
+       y1="10.213718"
+       x2="15.968225"
+       y2="32.100445"
        gradientTransform="translate(-0.06566604,-10.13628)" />
   </defs>
   <sodipodi:namedview
@@ -102,7 +102,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="27.223611"
      inkscape:cx="6.5594017"
-     inkscape:cy="11.355849"
+     inkscape:cy="13.432112"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
@@ -139,45 +139,12 @@
      inkscape:groupmode="layer"
      transform="translate(0,-10)">
     <path
-       style="fill:url(#linearGradient4034);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient4036);stroke-width:1.50019085;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:url(#linearGradient4034);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient4036);stroke-width:1.50019085000000008;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 9.40625,4.40625 c 0,0 -1.589e-4,1.8331121 0,2.75 l -6.21875,0 0,7.5 6.21875,0 c -1.585e-4,0.919269 5.5e-4,2.745873 0,2.75 l 3.817983,-3.778519 c 0,0 -0.03618,3.774392 -0.03673,3.778519 l 6.5,-6.5 -6.5,-6.5 0.03673,3.6866869 z"
        transform="translate(0,10)"
        id="path3789"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccccccccc" />
-    <rect
-       y="40.572601"
-       x="0.70407045"
-       height="7.499836"
-       width="11.499836"
-       id="rect3776"
-       style="fill:#3465a4;stroke:#204a87;stroke-width:1.50016391;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       sodipodi:nodetypes="cccc"
-       inkscape:connector-curvature="0"
-       id="path3006"
-       d="m 28.310316,51.013909 c 0.0026,-0.01951 0,-13.01042 0,-13.01042 l 6.50521,6.50521 z"
-       style="fill:#3465a4;fill-opacity:1;fill-rule:evenodd;stroke:#204a87;stroke-width:1.50024366;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
-    <path
-       style="fill:none;stroke:#555753;stroke-width:0.99984419;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 15.616715,54.588853 c 0.0033,-0.02545 0,-16.970784 0,-16.970784 l 8.485392,8.485392 z"
-       id="rect2995"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
-    <rect
-       style="fill:none;stroke:#555753;stroke-width:1.00007391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="rect3766"
-       width="10.999926"
-       height="8.9999256"
-       x="-15.520564"
-       y="46.139046" />
-    <rect
-       style="fill:#3465a4;fill-opacity:1;fill-rule:evenodd;stroke:#204a87;stroke-width:0.99954772;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="rect3771"
-       width="4.0004525"
-       height="17.000452"
-       x="29.645405"
-       y="11.704279" />
     <path
        style="fill:none;stroke:#555753;stroke-width:1.00007391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
        d="M 8.5 2.53125 C 8.5 2.53125 8.4997649 5.0794369 8.5 6.5 L 2.5 6.5 L 2.5 15.5 L 8.5 15.5 C 8.4998254 16.942728 8.5007803 19.494001 8.5 19.5 L 12.5 15.5 C 12.499826 16.942795 12.500778 19.494001 12.5 19.5 L 21 11 L 12.5 2.53125 C 12.5 2.53125 12.499766 5.07937 12.5 6.5 L 12.46875 6.5 L 8.5 2.53125 z "

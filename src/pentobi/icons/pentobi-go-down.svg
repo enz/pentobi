@@ -18,7 +18,7 @@
    inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-go-down.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="pentobi-go-up.svg">
+   sodipodi:docname="pentobi-go-down.svg">
   <defs
      id="defs3812">
     <linearGradient
@@ -107,20 +107,20 @@
        id="linearGradient4002"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0,-1,-1,0,32,48.073466)"
-       x1="1.5672228"
-       y1="28.9627"
-       x2="23.642847"
-       y2="23.047554" />
+       x1="0.21007998"
+       y1="22.034128"
+       x2="21.964693"
+       y2="16.204998" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3835"
        id="linearGradient4004"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0,-1,-1,0,32,48.073466)"
-       x1="1.5672228"
-       y1="28.9627"
-       x2="23.642847"
-       y2="23.047554" />
+       x1="0.21007998"
+       y1="22.034128"
+       x2="21.964693"
+       y2="16.204998" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -173,7 +173,7 @@
       <g
          id="g3998">
         <path
-           style="fill:url(#linearGradient4002);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient4004);stroke-width:1.50019085;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+           style="fill:url(#linearGradient4002);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient4004);stroke-width:1.50019085000000008;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
            d="m 17.450104,34.823486 c 0,0 -1.833111,1.59e-4 -2.750002,0 l 0,9.999885 -7.500005,0 0,-9.999885 c -0.919272,1.58e-4 -2.745875,-5.5e-4 -2.750002,0 l 6.500005,-6.499925 6.500004,6.499925 z"
            id="path3789"
            inkscape:connector-curvature="0" />

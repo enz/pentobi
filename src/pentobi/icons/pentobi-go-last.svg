@@ -18,7 +18,7 @@
    inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-go-last.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="pentobi-go-next.svg">
+   sodipodi:docname="pentobi-go-last.svg">
   <defs
      id="defs3812">
     <linearGradient
@@ -47,10 +47,10 @@
        inkscape:collect="always"
        xlink:href="#linearGradient3851-2"
        id="linearGradient4508"
-       x1="3.8751545"
+       x1="9.8751545"
        y1="0.12499997"
-       x2="9.7230701"
-       y2="21.94972"
+       x2="15.713292"
+       y2="21.913225"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        id="linearGradient3851-2">
@@ -67,10 +67,10 @@
        inkscape:collect="always"
        xlink:href="#linearGradient3835-4"
        id="linearGradient4516"
-       x1="3.8751545"
+       x1="9.8751545"
        y1="0.12499997"
-       x2="9.7230701"
-       y2="21.94972"
+       x2="15.713292"
+       y2="21.913225"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        id="linearGradient3835-4">
@@ -137,7 +137,7 @@
          id="rect4487"
          transform="translate(0,10)"
          d="m 17.25,3.25 0,15.5 2.5,0 0,-15.5 -2.5,0 z m -8,1.25 c 0,0 -1.589e-4,1.8331121 0,2.75 l -6,0 0,7.5 6,0 c -1.585e-4,0.919269 5.5e-4,2.745873 0,2.75 L 15.75,11 9.25,4.5 z"
-         style="fill:url(#linearGradient4508);fill-opacity:1;stroke:url(#linearGradient4516);stroke-width:1.49969113;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:url(#linearGradient4508);fill-opacity:1;stroke:url(#linearGradient4516);stroke-width:1.49969112999999998;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path
          inkscape:connector-curvature="0"
          id="rect4479"

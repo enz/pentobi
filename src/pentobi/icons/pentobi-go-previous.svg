@@ -18,7 +18,7 @@
    inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-go-previous.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="pentobi-go-next.svg">
+   sodipodi:docname="pentobi-go-previous.svg">
   <defs
      id="defs3812">
     <linearGradient
@@ -66,20 +66,20 @@
        xlink:href="#linearGradient3851"
        id="linearGradient3912"
        gradientUnits="userSpaceOnUse"
-       x1="4.924366"
+       x1="12.21008"
        y1="10.176986"
-       x2="-0.89312726"
-       y2="31.888166"
+       x2="6.3517885"
+       y2="32.040428"
        gradientTransform="matrix(-1,0,0,1,22.07354,16)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3835"
        id="linearGradient3914"
        gradientUnits="userSpaceOnUse"
-       x1="4.924366"
+       x1="12.21008"
        y1="10.176986"
-       x2="-0.89312726"
-       y2="31.888166"
+       x2="6.3517885"
+       y2="32.040428"
        gradientTransform="matrix(-1,0,0,1,22.07354,16)" />
   </defs>
   <sodipodi:namedview
