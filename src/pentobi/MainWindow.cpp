@@ -202,12 +202,6 @@ void setIcon(QAction* action, const QString& name)
     setIcon(action, getIconResource(name));
 }
 
-void setIconFromTheme(QAction* action, const QString& name)
-{
-    QIcon fallback = getIconResource(name);
-    setIcon(action, QIcon::fromTheme(name, fallback));
-}
-
 /** Simple heuristic that prefers moves with more piece points, more attach
     points and less adjacent points.
     Used for sorting the list used in Find Move. */
@@ -833,7 +827,7 @@ void MainWindow::createActions()
 
     m_actionFullscreen = new QAction(tr("&Fullscreen"), this);
     m_actionFullscreen->setShortcut(QString("F11"));
-    setIconFromTheme(m_actionFullscreen, "view-fullscreen");
+    setIcon(m_actionFullscreen, "view-fullscreen");
     m_actionFullscreen->setCheckable(true);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
@@ -1015,7 +1009,7 @@ void MainWindow::createActions()
 
     m_actionOpen = new QAction(tr("&Open..."), this);
     m_actionOpen->setShortcut(QKeySequence::Open);
-    setIconFromTheme(m_actionOpen, "document-open");
+    setIcon(m_actionOpen, "document-open");
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     m_actionPlaceSelectedPiece = new QAction("", this);
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
@@ -1077,7 +1071,7 @@ void MainWindow::createActions()
 
     m_actionSave = new QAction(tr("&Save"), this);
     m_actionSave->setShortcut(QKeySequence::Save);
-    setIconFromTheme(m_actionSave, "document-save");
+    setIcon(m_actionSave, "document-save");
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
 
     m_actionSaveAs = new QAction(tr("Save &As..."), this);
