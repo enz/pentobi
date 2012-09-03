@@ -319,10 +319,9 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         m_actionMoveNumbersAll->setChecked(true);
     else
         m_actionMoveNumbersNone->setChecked(true);
-    bool coordinateLabels =
-        settings.value("coordinate_labels", false).toBool();
-    m_guiBoard->setDrawCoordLabels(coordinateLabels);
-    m_actionCoordinateLabels->setChecked(coordinateLabels);
+    bool coordinates = settings.value("coordinates", false).toBool();
+    m_guiBoard->setCoordinates(coordinates);
+    m_actionCoordinates->setChecked(coordinates);
     bool showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
     bool showVariations = settings.value("show_variations", true).toBool();
@@ -652,11 +651,11 @@ void MainWindow::closeEvent(QCloseEvent* event)
         event->ignore();
 }
 
-void MainWindow::coordinateLabels(bool checked)
+void MainWindow::coordinates(bool checked)
 {
-    m_guiBoard->setDrawCoordLabels(checked);
+    m_guiBoard->setCoordinates(checked);
     QSettings settings;
-    settings.setValue("coordinate_labels", checked);
+    settings.setValue("coordinates", checked);
 }
 
 void MainWindow::commentChanged()
@@ -769,10 +768,10 @@ void MainWindow::createActions()
     connect(m_actionComputerColors, SIGNAL(triggered()),
             this, SLOT(computerColors()));
 
-    m_actionCoordinateLabels = new QAction(tr("C&oordinate Labels"), this);
-    m_actionCoordinateLabels->setCheckable(true);
-    connect(m_actionCoordinateLabels, SIGNAL(triggered(bool)),
-            this, SLOT(coordinateLabels(bool)));
+    m_actionCoordinates = new QAction(tr("C&oordinates"), this);
+    m_actionCoordinates->setCheckable(true);
+    connect(m_actionCoordinates, SIGNAL(triggered(bool)),
+            this, SLOT(coordinates(bool)));
 
     m_actionDeleteAllVariations =
         new QAction(tr("&Delete All Variations"), this);
@@ -1346,7 +1345,7 @@ void MainWindow::createMenu()
     menuMoveNumbers->addAction(m_actionMoveNumbersLast);
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
     menuMoveNumbers->addAction(m_actionMoveNumbersNone);
-    menuView->addAction(m_actionCoordinateLabels);
+    menuView->addAction(m_actionCoordinates);
     menuView->addAction(m_actionShowVariations);
     menuView->addSeparator();
     menuView->addAction(m_actionFullscreen);
@@ -1563,15 +1562,15 @@ void MainWindow::exportImage()
     if (! ok)
         return;
     settings.setValue("export_image_size", size);
-    bool coordinateLabels = m_actionCoordinateLabels->isChecked();
+    bool coordinates = m_actionCoordinates->isChecked();
     BoardPainter boardPainter;
-    boardPainter.setDrawCoordLabels(coordinateLabels);
-    boardPainter.setCoordLabelColor(QColor(100, 100, 100));
+    boardPainter.setCoordinates(coordinates);
+    boardPainter.setCoordinateColor(QColor(100, 100, 100));
     QImage image(size, size, QImage::Format_ARGB32);
     image.fill(Qt::transparent);
     QPainter painter;
     painter.begin(&image);
-    if (coordinateLabels)
+    if (coordinates)
         painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
     const Board& bd = getBoard();
     boardPainter.paintEmptyBoard(painter, size, size, bd.get_variant(),

@@ -327,7 +327,7 @@ private:
 
     QAction* m_actionComputerColors;
 
-    QAction* m_actionCoordinateLabels;
+    QAction* m_actionCoordinates;
 
     QAction* m_actionDeleteAllVariations;
 
@@ -645,7 +645,7 @@ private slots:
 
     void commentChanged();
 
-    void coordinateLabels(bool checked);
+    void coordinates(bool checked);
 
     void doubtfulMove(bool checked);
 

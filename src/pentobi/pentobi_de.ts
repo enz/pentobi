@@ -239,8 +239,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="782"/>
-        <source>C&amp;oordinate Labels</source>
-        <translation>K&amp;oordinatenbeschriftung</translation>
+        <source>C&amp;oordinates</source>
+        <translation>K&amp;oordinaten</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="788"/>

@@ -32,8 +32,8 @@ using libpentobi_base::PointState;
 
 BoardPainter::BoardPainter()
     : m_hasPainted(false),
-      m_drawCoordLabels(false),
-      m_coordLabelColor(Qt::black)
+      m_coordinates(false),
+      m_coordinateColor(Qt::black)
 {
     m_font.setFamily("Helvetica");
     m_font.setStyleHint(QFont::SansSerif);
@@ -48,7 +48,7 @@ BoardPainter::BoardPainter()
 
 void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
 {
-    painter.setPen(m_coordLabelColor);
+    painter.setPen(m_coordinateColor);
     for (int x = 0; x < m_width; ++x)
     {
         QString label;
@@ -180,7 +180,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
     if (m_isTrigon)
     {
         qreal ratio = 1.732;
-        if (m_drawCoordLabels)
+        if (m_coordinates)
             m_fieldWidth =
                 min(qreal(width) / (m_width + 3),
                     height / (ratio * (m_height + 2)));
@@ -194,7 +194,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
     }
     else
     {
-        if (m_drawCoordLabels)
+        if (m_coordinates)
             m_fieldWidth =
                 min(qreal(width) / (m_width + 2),
                     qreal(height) / (m_height + 2));
@@ -222,7 +222,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
     }
     painter.save();
     painter.translate(m_boardOffset);
-    if (m_drawCoordLabels)
+    if (m_coordinates)
         drawCoordinates(painter, m_isTrigon);
     m_startingPoints.init(variant, *m_geometry);
     for (GeometryIterator i(*m_geometry); i; ++i)

@@ -31,7 +31,7 @@ public:
 
     ~GuiBoard();
 
-    void setDrawCoordLabels(bool enable);
+    void setCoordinates(bool enable);
 
     const Board& getBoard() const;
 

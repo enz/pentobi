@@ -34,9 +34,9 @@ class BoardPainter
 public:
     BoardPainter();
 
-    void setDrawCoordLabels(bool enable);
+    void setCoordinates(bool enable);
 
-    void setCoordLabelColor(const QColor& color);
+    void setCoordinateColor(const QColor& color);
 
     void paintEmptyBoard(QPainter& painter, unsigned int width,
                          unsigned int height, Variant variant,
@@ -67,7 +67,7 @@ public:
 private:
     bool m_hasPainted;
 
-    bool m_drawCoordLabels;
+    bool m_coordinates;
 
     bool m_isTrigon;
 
@@ -81,7 +81,7 @@ private:
     /** The height of the last board painted. */
     int m_height;
 
-    QColor m_coordLabelColor;
+    QColor m_coordinateColor;
 
     qreal m_fieldWidth;
 
@@ -108,9 +108,9 @@ private:
                     Variant variant, const Grid<QString>* labels);
 };
 
-inline void BoardPainter::setCoordLabelColor(const QColor& color)
+inline void BoardPainter::setCoordinateColor(const QColor& color)
 {
-    m_coordLabelColor = color;
+    m_coordinateColor = color;
 }
 
 inline bool BoardPainter::hasPainted() const
@@ -118,9 +118,9 @@ inline bool BoardPainter::hasPainted() const
     return m_hasPainted;
 }
 
-inline void BoardPainter::setDrawCoordLabels(bool enable)
+inline void BoardPainter::setCoordinates(bool enable)
 {
-    m_drawCoordLabels = enable;
+    m_coordinates = enable;
 }
 
 //-----------------------------------------------------------------------------
