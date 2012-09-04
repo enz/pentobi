@@ -22,6 +22,17 @@
   <defs
      id="defs2987">
     <linearGradient
+       id="linearGradient6730">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop6732" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.4351145;"
+         offset="1"
+         id="stop6734" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient5351">
       <stop
          style="stop-color:#474747;stop-opacity:1;"
@@ -2111,28 +2122,18 @@
     <linearGradient
        id="linearGradient12512-4">
       <stop
-         style="stop-color:#ffffff;stop-opacity:1.0000000;"
-         offset="0.0000000"
+         style="stop-color:#e6e6e6;stop-opacity:1;"
+         offset="0"
          id="stop12513-6" />
       <stop
-         style="stop-color:#fff520;stop-opacity:0.89108908;"
-         offset="0.50000000"
+         style="stop-color:#f8f8f8;stop-opacity:0.89108908;"
+         offset="0.5"
          id="stop12517-9" />
       <stop
-         style="stop-color:#fff300;stop-opacity:0.0000000;"
-         offset="1.0000000"
+         style="stop-color:#c7c7bd;stop-opacity:0;"
+         offset="1"
          id="stop12514-2" />
     </linearGradient>
-    <radialGradient
-       r="14.375"
-       fy="125"
-       fx="55"
-       cy="125"
-       cx="55"
-       gradientUnits="userSpaceOnUse"
-       id="radialGradient3485"
-       xlink:href="#linearGradient12512-4"
-       inkscape:collect="always" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5351"
@@ -2192,6 +2193,17 @@
        y1="11.808548"
        x2="-9.5003023"
        y2="4.7246728" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6730"
+       id="radialGradient6736"
+       cx="-9.9878826"
+       cy="6.6268568"
+       fx="-9.9878826"
+       fy="6.6268568"
+       r="4.7020329"
+       gradientTransform="matrix(0.91945226,0,0,0.9557715,-0.80450136,0.29309596)"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -2201,7 +2213,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.627418"
-     inkscape:cx="9.9371138"
+     inkscape:cx="-0.29383699"
      inkscape:cy="12.107256"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -2348,17 +2360,21 @@
        inkscape:transform-center-x="4.5794589"
        inkscape:transform-center-y="-8.3735404" />
     <path
-       sodipodi:type="arc"
-       style="color:#000000;fill:url(#radialGradient3485);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25000024;marker:none;visibility:visible;display:block"
-       id="path12511"
-       sodipodi:cx="55"
-       sodipodi:cy="125"
-       sodipodi:rx="14.375"
-       sodipodi:ry="14.375"
-       d="m 69.375,125 a 14.375,14.375 0 1 1 -28.75,0 14.375,14.375 0 1 1 28.75,0 z"
-       transform="matrix(0.4173913,0,0,0.4173913,-6.9565216,-20.173912)"
-       inkscape:export-filename="/home/jimmac/ximian_art/icons/nautilus/suse93/stock_new-16.png"
-       inkscape:export-xdpi="33.852203"
-       inkscape:export-ydpi="33.852203" />
+       sodipodi:type="star"
+       style="fill:url(#radialGradient6736);fill-opacity:1;fill-rule:evenodd;stroke:#fbfbfa;stroke-opacity:1"
+       id="path6728"
+       sodipodi:sides="5"
+       sodipodi:cx="-9.9878826"
+       sodipodi:cy="7.0623698"
+       sodipodi:r1="4.9295821"
+       sodipodi:r2="3.0627271"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.92804929"
+       inkscape:flatsided="false"
+       inkscape:rounded="0.18352206"
+       inkscape:randomized="0"
+       d="m -9.9878825,2.1327877 c 0.5659119,0.00817 1.377908,2.1453463 1.8357881,2.4780153 0.4453809,0.323588 2.6899749,0.4022656 2.852523,0.9282423 0.1671099,0.5407377 -1.6145485,1.9734168 -1.7894429,2.511687 -0.1701201,0.5235767 0.4486707,2.6826247 -0.00133,2.9997537 -0.4626323,0.326028 -2.3757538,-0.925708 -2.9417249,-0.925708 -0.550521,0 -2.412681,1.255688 -2.853346,0.925707 -0.453033,-0.339241 0.146252,-2.5455351 -0.02864,-3.0838052 -0.170121,-0.5235765 -1.93979,-1.9065673 -1.762133,-2.4276348 0.182643,-0.5356906 2.466143,-0.6475198 2.924023,-0.9801893 0.44538,-0.3235883 1.213825,-2.4340113 1.7642885,-2.426068 z"
+       transform="matrix(1.1668794,0,0,1.0861167,27.774982,24.324613)"
+       inkscape:transform-center-y="-0.47301798" />
   </g>
 </svg>

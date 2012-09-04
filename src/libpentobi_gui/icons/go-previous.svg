@@ -15,10 +15,10 @@
    id="svg3810"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   inkscape:export-filename="/home/markus/scratch/pentobi/src/libpentobi_gui/icons/go-previous.png"
+   inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-go-previous.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="go-previous.svg">
+   sodipodi:docname="pentobi-go-previous.svg">
   <defs
      id="defs3812">
     <linearGradient
@@ -33,11 +33,11 @@
     <linearGradient
        id="linearGradient3851">
       <stop
-         style="stop-color:#86abe2;stop-opacity:1;"
+         style="stop-color:#b4b6b2;stop-opacity:1;"
          offset="0"
          id="stop3853" />
       <stop
-         style="stop-color:#1b3e71;stop-opacity:1;"
+         style="stop-color:#464844;stop-opacity:1;"
          offset="1"
          id="stop3855" />
     </linearGradient>
@@ -53,11 +53,11 @@
     <linearGradient
        id="linearGradient3835">
       <stop
-         style="stop-color:#a6c2ea;stop-opacity:1;"
+         style="stop-color:#c8c9c7;stop-opacity:1;"
          offset="0"
          id="stop3837" />
       <stop
-         style="stop-color:#6595db;stop-opacity:1;"
+         style="stop-color:#a0a39d;stop-opacity:1;"
          offset="1"
          id="stop3839" />
     </linearGradient>
@@ -90,14 +90,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="14"
-     inkscape:cx="24.772072"
+     inkscape:cx="8.3077866"
      inkscape:cy="11.574751"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      inkscape:snap-global="false"
-     inkscape:window-width="830"
+     inkscape:window-width="685"
      inkscape:window-height="631"
      inkscape:window-x="260"
      inkscape:window-y="138"
@@ -133,7 +133,7 @@
        id="path3789"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#204a87;stroke-width:1.00007391000000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
+       style="fill:none;stroke:#555753;stroke-width:1.00007391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
        d="m 9.500037,28.531213 c 0,0 2.34e-4,2.54812 0,3.96875 l 10,0 0,9 -10,0 c 1.74e-4,1.442795 -7.78e-4,3.994001 0,4 l -8.5,-8.5 8.5,-8.46875 z"
        id="rect3778"
        inkscape:connector-curvature="0" />
