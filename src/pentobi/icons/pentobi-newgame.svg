@@ -28,7 +28,7 @@
          offset="0"
          id="stop6732" />
       <stop
-         style="stop-color:#ffffff;stop-opacity:0.4351145;"
+         style="stop-color:#dbdbdb;stop-opacity:1;"
          offset="1"
          id="stop6734" />
     </linearGradient>
@@ -2213,7 +2213,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.627418"
-     inkscape:cx="-0.29383699"
+     inkscape:cx="3.2308765"
      inkscape:cy="12.107256"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -2361,7 +2361,7 @@
        inkscape:transform-center-y="-8.3735404" />
     <path
        sodipodi:type="star"
-       style="fill:url(#radialGradient6736);fill-opacity:1;fill-rule:evenodd;stroke:#fbfbfa;stroke-opacity:1"
+       style="fill:url(#radialGradient6736);fill-opacity:1;fill-rule:evenodd;stroke:#fce94f;stroke-opacity:1"
        id="path6728"
        sodipodi:sides="5"
        sodipodi:cx="-9.9878826"
