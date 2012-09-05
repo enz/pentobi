@@ -68,22 +68,22 @@
     <linearGradient
        id="linearGradient4216">
       <stop
-         style="stop-color:#88baf0;stop-opacity:1;"
+         style="stop-color:#d5d5d5;stop-opacity:1;"
          offset="0"
          id="stop4218" />
       <stop
-         style="stop-color:#737373;stop-opacity:1;"
+         style="stop-color:#8c8c8c;stop-opacity:1;"
          offset="1"
          id="stop4220" />
     </linearGradient>
     <linearGradient
        id="linearGradient4208">
       <stop
-         style="stop-color:#dddedb;stop-opacity:1;"
+         style="stop-color:#cbcbcb;stop-opacity:1;"
          offset="0"
          id="stop4210" />
       <stop
-         style="stop-color:#868b80;stop-opacity:1;"
+         style="stop-color:#575757;stop-opacity:1;"
          offset="1"
          id="stop4212" />
     </linearGradient>
@@ -393,7 +393,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.627417"
-     inkscape:cx="8.5216088"
+     inkscape:cx="9.9205603"
      inkscape:cy="11.343717"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -439,19 +439,19 @@
        style="fill:url(#linearGradient3071);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3073);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path
        style="fill:url(#linearGradient3066);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3068);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 21.5,16.5 -21,0 0,14 21,0 z"
+       d="M 21.477903,16.46967 9.5,16.5 l 0,1 -9,0 0,13 21.022097,0.03033 z"
        id="path5577"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccccc" />
     <g
        id="g3044"
        transform="translate(1,0)">
       <path
-         sodipodi:nodetypes="cccc"
+         sodipodi:nodetypes="cccccc"
          transform="translate(0,10)"
          inkscape:connector-curvature="0"
          id="path4624"
-         d="m 0.5,20 0,-12.5 19,0 0,12.5"
+         d="m 0.5,20 0,-11.5 9,0 L 9.532932,7.5277282 19.5,7.5 19.5,20"
          style="fill:none;stroke:url(#linearGradient3061);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
   </g>
