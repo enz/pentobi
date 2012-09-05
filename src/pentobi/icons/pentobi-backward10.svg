@@ -18,7 +18,7 @@
    inkscape:export-filename="/local/scratch/markus/pentobi/src/pentobi/icons/pentobi-backward10.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="pentobi-forward10.svg">
+   sodipodi:docname="pentobi-backward10.svg">
   <defs
      id="defs2987">
     <linearGradient
@@ -206,14 +206,15 @@
          inkscape:connector-curvature="0"
          id="path3789"
          transform="translate(0,10)"
-         d="m 9.40625,4.40625 c 0,0 -1.589e-4,1.8331121 0,2.75 l -6.21875,0 0,7.5 6.21875,0 c -1.585e-4,0.919269 5.5e-4,2.745873 0,2.75 l 3.817983,-3.778519 c 0,0 -0.03618,3.774392 -0.03673,3.778519 l 6.5,-6.5 -6.5,-6.5 0.03673,3.6866869 z"
-         style="fill:url(#linearGradient3241);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3239);stroke-width:1.50019085000000008;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+         d="m 9.3325714,4.3695172 -0.04434,2.8599484 -8.1742663,-1.25e-4 0.073072,7.6103234 8.0355489,-0.07322 c 0,0 -0.072916,2.745873 -0.073466,2.75 l 4.0751127,-3.888717 c 0,0 -0.03618,3.774392 -0.03673,3.778519 l 6.5,-6.5 -6.5,-6.5 0.03673,3.6866869 z"
+         style="fill:url(#linearGradient3241);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3239);stroke-width:1.50019085;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
       <path
          id="rect3778"
          transform="translate(0,10)"
-         d="m 8.5,2.53125 c 0,0 -2.351e-4,2.5481869 0,3.96875 l -6,0 0,9 6,0 c -1.746e-4,1.442728 7.803e-4,3.994001 0,4 l 4,-4 c -1.74e-4,1.442795 7.78e-4,3.994001 0,4 L 21,11 12.5,2.53125 c 0,0 -2.34e-4,2.54812 0,3.96875 L 12.46875,6.5 8.5,2.53125 z"
+         d="m 8.5,2.53125 c 0,0 -2.351e-4,2.5481869 0,3.96875 l -7.999963,0 0,9 7.999963,0 c -1.746e-4,1.442728 7.803e-4,3.994001 0,4 l 4,-4 c -1.74e-4,1.442795 7.78e-4,3.994001 0,4 L 21,11 12.5,2.53125 c 0,0 -2.34e-4,2.54812 0,3.96875 l -0.03125,0 z"
          style="fill:none;stroke:#555753;stroke-width:1.00007391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
-         inkscape:connector-curvature="0" />
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccccccccc" />
     </g>
   </g>
 </svg>
