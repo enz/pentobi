@@ -12,6 +12,9 @@ if(UNIX AND NOT APPLE)
     DESTINATION share/icons/hicolor/scalable/apps)
   install(FILES application-x-blokus-sgf.png
     DESTINATION share/icons/hicolor/48x48/mimetypes)
+  install(FILES application-x-blokus-sgf16.png
+    DESTINATION share/icons/hicolor/16x16/mimetypes
+    RENAME application-x-blokus-sgf.png)
   install(FILES application-x-blokus-sgf.svg
     DESTINATION share/icons/hicolor/scalable/mimetypes)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.desktop
