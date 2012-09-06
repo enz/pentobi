@@ -327,7 +327,11 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     bool showVariations = settings.value("show_variations", true).toBool();
     m_actionShowVariations->setChecked(showVariations);
     initVariantActions();
-    setWindowIcon(QIcon(":/pentobi/icons/pentobi.png"));
+    QIcon icon;
+    icon.addFile(":/pentobi/icons/pentobi.png");
+    icon.addFile(":/pentobi/icons/pentobi16.png");
+    icon.addFile(":/pentobi/icons/pentobi32.png");
+    setWindowIcon(icon);
 
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
         adjustSize();
