@@ -55,6 +55,13 @@ void getNextRatedGameSettings(Variant variant, int maxLevel, int& level,
     }
 }
 
+void fixRating(const RatingHistory& history, Rating& bestRating)
+{
+    BOOST_FOREACH(const RatingHistory::GameInfo& info, history.get())
+        if (info.rating.get() > bestRating.get())
+            bestRating = info.rating;
+}
+
 void getRating(Variant variant, Rating& rating, unsigned int& nuGames,
                Rating& bestRating)
 {

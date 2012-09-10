@@ -1820,6 +1820,8 @@ void MainWindow::gameOver()
         Rating bestRating;
         unsigned int nuGames;
         Util::getRating(variant, oldRating, nuGames, bestRating);
+        RatingHistory history(variant, getRatedGamesDir(variant));
+        Util::fixRating(history, bestRating);
         unsigned int place;
         bool isPlaceShared;
         bd.get_place(m_ratedGameColor, place, isPlaceShared);
@@ -1835,7 +1837,6 @@ void MainWindow::gameOver()
         Util::updateRating(variant, gameResult, oppRating, nuOpp);
         Rating newRating;
         Util::getRating(variant, newRating, nuGames, bestRating);
-        RatingHistory history(variant, getRatedGamesDir(variant));
         history.add(nuGames, m_ratedGameColor, gameResult,
                     Tree::get_date_today(), m_level, newRating);
         history.save();

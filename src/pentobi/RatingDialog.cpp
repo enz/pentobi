@@ -8,7 +8,6 @@
 
 #include "RatingDialog.h"
 
-#include <boost/foreach.hpp>
 #include "Util.h"
 
 using namespace std;
@@ -69,18 +68,7 @@ void RatingDialog::updateContent(Variant variant,
     unsigned int nuGames;
     Rating bestRating;
     Util::getRating(variant, rating, nuGames, bestRating);
-
-    // Older versions of Pentobi (up to version 3) did not save the all-time
-    // best rating, so after an upgrade to a newer version of Pentobi, the
-    // history of recent rated games can contain a higher rating than the
-    // stored all-time best rating.
-    // Fixing this here is a hack, but the code can be removed some time in
-    // the future anyway when it is sufficiently unlikely that someone
-    // still upgrades from an old version.
-    BOOST_FOREACH(const RatingHistory::GameInfo& info, history.get())
-        if (info.rating.get() > bestRating.get())
-            bestRating = info.rating;
-
+    Util::fixRating(history, bestRating);
     updateLabels(rating, nuGames, bestRating);
     m_graph->setHistory(history);
     m_list->updateContent(variant, history);
