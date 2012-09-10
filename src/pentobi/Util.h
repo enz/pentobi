@@ -31,7 +31,7 @@ void removeThumbnail(const QString& file);
     Older versions of Pentobi (up to version 3) did not save the all-time best
     rating, so after an upgrade to a newer version of Pentobi, the history of
     recent rated games can contain a higher rating than the stored all-time
-    best rating. This function can be remove when it is sufficiently unlikely
+    best rating. This function can be removed when it is sufficiently unlikely
     that someone still upgrades from an old version. */
 void fixRating(const RatingHistory& history, Rating& bestRating);
 
