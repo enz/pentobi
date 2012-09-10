@@ -4,6 +4,7 @@ Current development version
 * New menu item "Beginning of Branch"
 * A thumbnail plugin for KDE can be built by using the CMake option
   -DPENTOBI_BUILD_KDE_THUMBNAILER=ON
+* Rating dialog now also shows the best previous rating
 
 
 Version 3.0 (1 Aug 2012)

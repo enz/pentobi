@@ -1817,8 +1817,9 @@ void MainWindow::gameOver()
     if (m_isRated && ! m_isRatedGameFinished)
     {
         Rating oldRating;
+        Rating bestRating;
         unsigned int nuGames;
-        Util::getRating(variant, oldRating, nuGames);
+        Util::getRating(variant, oldRating, nuGames, bestRating);
         unsigned int place;
         bool isPlaceShared;
         bd.get_place(m_ratedGameColor, place, isPlaceShared);
@@ -1833,7 +1834,7 @@ void MainWindow::gameOver()
         Rating oppRating = m_player->get_rating(variant);
         Util::updateRating(variant, gameResult, oppRating, nuOpp);
         Rating newRating;
-        Util::getRating(variant, newRating, nuGames);
+        Util::getRating(variant, newRating, nuGames, bestRating);
         RatingHistory history(variant, getRatedGamesDir(variant));
         history.add(nuGames, m_ratedGameColor, gameResult,
                     Tree::get_date_today(), m_level, newRating);
@@ -2327,8 +2328,9 @@ void MainWindow::newRatedGame()
     cancelThread();
     Variant variant = getVariant();
     Rating rating;
+    Rating bestRating;
     unsigned int nuGames;
-    Util::getRating(variant, rating, nuGames);
+    Util::getRating(variant, rating, nuGames, bestRating);
     if (nuGames == 0)
     {
         InitialRatingDialog dialog(this);

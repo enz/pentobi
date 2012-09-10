@@ -37,11 +37,13 @@ private:
 
     QLabel* m_labelRating;
 
+    QLabel* m_labelBestRating;
+
     RatingGraph* m_graph;
 
     RatedGamesList* m_list;
 
-    void updateLabels(Rating rating, unsigned int nuGames);
+    void updateLabels(Rating rating, unsigned int nuGames, Rating bestRating);
 
 private slots:
     void activateGame(unsigned int n);

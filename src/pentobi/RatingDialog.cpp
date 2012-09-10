@@ -37,6 +37,8 @@ RatingDialog::RatingDialog(QWidget* parent)
     layout->addWidget(m_labelVariant);
     m_labelNuGames = new QLabel();
     layout->addWidget(m_labelNuGames);
+    m_labelBestRating = new QLabel();
+    layout->addWidget(m_labelBestRating);
     layout->addSpacing(layout->spacing());
     layout->addWidget(new QLabel(tr("Recent development:")));
     m_graph = new RatingGraph();
@@ -45,7 +47,7 @@ RatingDialog::RatingDialog(QWidget* parent)
     layout->addWidget(m_list, 1);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
-    updateLabels(Rating(0), 0);
+    updateLabels(Rating(0), 0, Rating(0));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     connect(m_list, SIGNAL(openRatedGame(unsigned int)),
             this, SLOT(activateGame(unsigned int)));
@@ -64,19 +66,21 @@ void RatingDialog::updateContent(Variant variant,
     QSettings settings;
     Rating rating;
     unsigned int nuGames;
-    Util::getRating(variant, rating, nuGames);
-    updateLabels(rating, nuGames);
+    Rating bestRating;
+    Util::getRating(variant, rating, nuGames, bestRating);
+    updateLabels(rating, nuGames, bestRating);
     m_graph->setHistory(history);
     m_list->updateContent(variant, history);
 }
 
-void RatingDialog::updateLabels(Rating rating, unsigned int nuGames)
+void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
+                                Rating bestRating)
 {
     if (nuGames == 0)
         rating = Rating(0);
     m_labelRating->setText("<b>"
-                           + tr("Your rating: %1").arg(rating.get(),
-                                                       0, 'f', 0));
+                           + tr("Your rating: %1")
+                           .arg(rating.get(), 0, 'f', 0));
     QString variantStr;
     switch (m_variant)
     {
@@ -104,6 +108,8 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames)
     }
     m_labelVariant->setText(tr("Game variant %1").arg(variantStr));
     m_labelNuGames->setText(tr("%n rated game(s)", "", nuGames));
+    m_labelBestRating->setText(tr("Best previous rating: %1")
+                               .arg(bestRating.get(), 0, 'f', 0));
 }
 
 //-----------------------------------------------------------------------------

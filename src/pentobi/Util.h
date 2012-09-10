@@ -26,7 +26,8 @@ namespace Util
     changed (e.g. after saving). */
 void removeThumbnail(const QString& file);
 
-void getRating(Variant variant, Rating& rating, unsigned int& nuGames);
+void getRating(Variant variant, Rating& rating, unsigned int& nuGames,
+               Rating& bestRating);
 
 void initRating(Variant variant, Rating rating);
 
