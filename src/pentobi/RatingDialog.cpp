@@ -79,9 +79,7 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
 {
     if (nuGames == 0)
         rating = Rating(0);
-    m_labelRating->setText("<b>"
-                           + tr("Your rating: %1")
-                           .arg(rating.get(), 0, 'f', 0));
+    m_labelRating->setText("<b>" + tr("Your rating: %1").arg(rating.toInt()));
     QString variantStr;
     switch (m_variant)
     {
@@ -110,7 +108,7 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
     m_labelVariant->setText(tr("Game variant %1").arg(variantStr));
     m_labelNuGames->setText(tr("%n rated game(s)", "", nuGames));
     m_labelBestRating->setText(tr("Best previous rating: %1")
-                               .arg(bestRating.get(), 0, 'f', 0));
+                               .arg(bestRating.toInt()));
 }
 
 //-----------------------------------------------------------------------------

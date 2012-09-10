@@ -7,6 +7,7 @@
 
 #include <climits>
 #include <iostream>
+#include "libboardgame_util/MathUtil.h"
 
 namespace libboardgame_base {
 
@@ -47,6 +48,9 @@ public:
 
     float get() const;
 
+    /** Get rating rounded to an interger. */
+    int toInt() const;
+
 private:
     float m_elo;
 };
@@ -71,6 +75,11 @@ inline Rating::Rating(float elo)
 inline float Rating::get() const
 {
     return m_elo;
+}
+
+inline int Rating::toInt() const
+{
+    return static_cast<int>(libboardgame_util::math_util::round(m_elo));
 }
 
 inline void Rating::update(float game_result, Rating elo_opponent,

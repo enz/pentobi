@@ -18,7 +18,6 @@
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/TreeUtil.h"
 #include "libpentobi_base/TreeWriter.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
@@ -1848,8 +1847,8 @@ void MainWindow::gameOver()
                                         variant));
         }
         updateRatingDialog();
-        int oldRatingInt = static_cast<int>(libboardgame_util::math_util::round(oldRating.get()));
-        int newRatingInt = static_cast<int>(libboardgame_util::math_util::round(newRating.get()));
+        int oldRatingInt = oldRating.toInt();
+        int newRatingInt = newRating.toInt();
         if (newRatingInt > oldRatingInt)
             detailText =
                 tr("Your rating has increased from %1 to %2.")
