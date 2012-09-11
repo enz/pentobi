@@ -3373,9 +3373,13 @@ void MainWindow::updateMoveNumber()
     }
     else
     {
-        m_moveNumber->setText(QString("%1/%2 (%3)")
-                              .arg(move).arg(totalMoves)
-                              .arg(variation.c_str()));
+        if (movesLeft == 0)
+            m_moveNumber->setText(QString("%1 (%2)")
+                                  .arg(move).arg(variation.c_str()));
+        else
+            m_moveNumber->setText(QString("%1/%2 (%3)")
+                                  .arg(move).arg(totalMoves)
+                                  .arg(variation.c_str()));
         m_moveNumber->setToolTip(tr("Move number %1 of %2 in variation %3")
                                  .arg(move).arg(totalMoves)
                                  .arg(variation.c_str()));
