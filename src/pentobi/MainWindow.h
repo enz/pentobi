@@ -525,7 +525,7 @@ private:
 
     unsigned int m_legalMoveIndex;
 
-    QLabel* m_variationLabel;
+    QLabel* m_moveNumber;
 
     GenMoveResult asyncGenMove(Color c, int genMoveId, bool playSingleMove);
 
@@ -620,7 +620,7 @@ private:
     void showMessage(QMessageBox::Icon icon, const QString& text,
                      const QString& infoText, const QString& detailText);
 
-    void updateVariationLabel();
+    void updateMoveNumber();
 
     void updateWindow(bool currentNodeChanged);
 

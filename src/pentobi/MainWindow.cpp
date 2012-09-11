@@ -248,8 +248,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_game.reset(new Game(variant));
     createActions();
     setCentralWidget(createCentralWidget());
-    m_variationLabel = new QLabel();
-    statusBar()->addPermanentWidget(m_variationLabel);
+    m_moveNumber = new QLabel();
+    statusBar()->addPermanentWidget(m_moveNumber);
     m_setupModeLabel = new QLabel(tr("Setup mode"));
     statusBar()->addWidget(m_setupModeLabel);
     m_setupModeLabel->hide();
@@ -3336,6 +3336,49 @@ void MainWindow::updateMoveAnnotationActions()
     m_actionNoMoveAnnotation->setChecked(true);
 }
 
+void MainWindow::updateMoveNumber()
+{
+    const Tree& tree = m_game->get_tree();
+    const Node& current = m_game->get_current();
+    unsigned int move = get_move_number(tree, current);
+    unsigned int movesLeft = get_moves_left(tree, current);
+    unsigned int totalMoves = move + movesLeft;
+    string variation = get_variation_string(current);
+    m_moveNumber->setText("");
+    m_moveNumber->setToolTip("");
+    if (variation.empty())
+    {
+        if (movesLeft == 0)
+        {
+            // If last move in main variation, show the number only if it is
+            // not already displayed on the board.
+            if (! m_actionMoveNumbersLast->isChecked())
+            {
+                m_moveNumber->setText(QString("%1").arg(move));
+                m_moveNumber->setToolTip(tr("Move number %1").arg(move));
+            }
+        }
+        else
+        {
+            m_moveNumber->setText(QString("%1/%2").arg(move).arg(totalMoves));
+            if (move == 0)
+                m_moveNumber->setToolTip(tr("%n move(s)", "", totalMoves));
+            else
+                m_moveNumber->setToolTip(tr("Move number %1 of %2")
+                                         .arg(move).arg(totalMoves));
+        }
+    }
+    else
+    {
+        m_moveNumber->setText(QString("%1/%2 (%3)")
+                              .arg(move).arg(totalMoves)
+                              .arg(variation.c_str()));
+        m_moveNumber->setToolTip(tr("Move number %1 of %2 in variation %3")
+                                 .arg(move).arg(totalMoves)
+                                 .arg(variation.c_str()));
+    }
+}
+
 void MainWindow::updateRatingDialog()
 {
     if (m_ratingDialog == 0)
@@ -3383,22 +3426,6 @@ void MainWindow::updateRecentFiles()
     }
     for (int j = nuRecentFiles; j < maxRecentFiles; ++j)
         m_actionRecentFile[j]->setVisible(false);
-}
-
-void MainWindow::updateVariationLabel()
-{
-    const Node& current = m_game->get_current();
-    string variation = get_variation_string(current);
-    if (variation.empty())
-    {
-        m_variationLabel->setText("");
-        m_variationLabel->setToolTip("");
-    }
-    else
-    {
-        m_variationLabel->setText(variation.c_str());
-        m_variationLabel->setToolTip(tr("Variation %1").arg(variation.c_str()));
-    }
 }
 
 void MainWindow::updateWindow(bool currentNodeChanged)
@@ -3449,7 +3476,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         updateComment();
         updateMoveAnnotationActions();
     }
-    updateVariationLabel();
+    updateMoveNumber();
     setPlayToolTip();
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
