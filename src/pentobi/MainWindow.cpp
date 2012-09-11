@@ -3344,8 +3344,6 @@ void MainWindow::updateMoveNumber()
     unsigned int movesLeft = get_moves_left(tree, current);
     unsigned int totalMoves = move + movesLeft;
     string variation = get_variation_string(current);
-    m_moveNumber->setText("");
-    m_moveNumber->setToolTip("");
     if (variation.empty())
     {
         if (movesLeft == 0)
@@ -3356,6 +3354,11 @@ void MainWindow::updateMoveNumber()
             {
                 m_moveNumber->setText(QString("%1").arg(move));
                 m_moveNumber->setToolTip(tr("Move number %1").arg(move));
+            }
+            else
+            {
+                m_moveNumber->setText("");
+                m_moveNumber->setToolTip("");
             }
         }
         else
