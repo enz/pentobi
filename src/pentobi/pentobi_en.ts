@@ -4,7 +4,7 @@
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="3365"/>
+        <location filename="MainWindow.cpp" line="3368"/>
         <source>%n move(s)</source>
         <translation>
             <numerusform>%n move</numerusform>
@@ -41,17 +41,6 @@
         <translation>
             <numerusform>Yellow/Green wins with %n point.</numerusform>
             <numerusform>Yellow/Green wins with %n points.</numerusform>
-        </translation>
-    </message>
-</context>
-<context>
-    <name>RatingDialog</name>
-    <message numerus="yes">
-        <location filename="RatingDialog.cpp" line="109"/>
-        <source>%n rated game(s)</source>
-        <translation>
-            <numerusform>%n rated game</numerusform>
-            <numerusform>%n rated games</numerusform>
         </translation>
     </message>
 </context>

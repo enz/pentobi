@@ -128,7 +128,7 @@
         <translation>Kindknoten abschneiden</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3526"/>
+        <location filename="MainWindow.cpp" line="3533"/>
         <source>Save (%1)</source>
         <translation>Speichern (%1)</translation>
     </message>
@@ -1052,12 +1052,12 @@
         <translation>Fehler in Datei &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3358"/>
+        <location filename="MainWindow.cpp" line="3356"/>
         <source>Move number %1</source>
         <translation>Zug Nummer %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="3365"/>
+        <location filename="MainWindow.cpp" line="3368"/>
         <source>%n move(s)</source>
         <translation>
             <numerusform>%n Zug</numerusform>
@@ -1065,17 +1065,17 @@
         </translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3367"/>
+        <location filename="MainWindow.cpp" line="3370"/>
         <source>Move number %1 of %2</source>
         <translation>Zug Nummer %1 von %2</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3376"/>
+        <location filename="MainWindow.cpp" line="3383"/>
         <source>Move number %1 of %2 in variation %3</source>
         <translation>Zug Nummer %1 von %2 in Variante %3</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="3420"/>
+        <location filename="MainWindow.cpp" line="3427"/>
         <source>&amp;%1: %2</source>
         <extracomment>Label in Recent Files menu. The first 10 items are numbered to provide a mnemonic. %1 is replaced by the number, %2 by the file name.</extracomment>
         <translation>&amp;%1: %2</translation>
@@ -1132,65 +1132,62 @@
         <translation>Wertung</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="82"/>
-        <source>Your rating: %1</source>
-        <translation>Ihre Wertung: %1</translation>
+        <location filename="RatingDialog.cpp" line="37"/>
+        <source>Your rating:</source>
+        <translation>Ihre Wertung:</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="87"/>
+        <location filename="RatingDialog.cpp" line="39"/>
+        <source>Game variant:</source>
+        <translation>Spielvariante:</translation>
+    </message>
+    <message>
+        <location filename="RatingDialog.cpp" line="41"/>
+        <source>Number rated games:</source>
+        <translation>Anzahl gewertete Spiele:</translation>
+    </message>
+    <message>
+        <location filename="RatingDialog.cpp" line="43"/>
+        <source>Best previous rating:</source>
+        <translation>Beste frühere Wertung:</translation>
+    </message>
+    <message>
+        <location filename="RatingDialog.cpp" line="88"/>
         <source>Classic</source>
         <translation>Klassisch</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="90"/>
+        <location filename="RatingDialog.cpp" line="91"/>
         <source>Classic Two-Player</source>
         <translation>Klassisch zwei Spieler</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="93"/>
+        <location filename="RatingDialog.cpp" line="94"/>
         <source>Duo</source>
         <translation>Duo</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="96"/>
+        <location filename="RatingDialog.cpp" line="97"/>
         <source>Trigon</source>
         <translation>Trigon</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="99"/>
+        <location filename="RatingDialog.cpp" line="100"/>
         <source>Trigon Two-Player</source>
         <translation>Trigon zwei Spieler</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="102"/>
+        <location filename="RatingDialog.cpp" line="103"/>
         <source>Trigon Three-Player</source>
         <translation>Trigon drei Spieler</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="105"/>
+        <location filename="RatingDialog.cpp" line="106"/>
         <source>Junior</source>
         <translation>Junior</translation>
     </message>
     <message>
-        <location filename="RatingDialog.cpp" line="108"/>
-        <source>Game variant %1</source>
-        <translation>Spielvariante %1</translation>
-    </message>
-    <message numerus="yes">
-        <location filename="RatingDialog.cpp" line="109"/>
-        <source>%n rated game(s)</source>
-        <translation>
-            <numerusform>%n gewertetes Spiel</numerusform>
-            <numerusform>%n gewertete Spiele</numerusform>
-        </translation>
-    </message>
-    <message>
-        <location filename="RatingDialog.cpp" line="110"/>
-        <source>Best previous rating: %1</source>
-        <translation>Beste frühere Wertung: %1</translation>
-    </message>
-    <message>
-        <location filename="RatingDialog.cpp" line="43"/>
+        <location filename="RatingDialog.cpp" line="45"/>
         <source>Recent development:</source>
         <translation>Aktuelle Entwicklung:</translation>
     </message>

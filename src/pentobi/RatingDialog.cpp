@@ -31,14 +31,16 @@ RatingDialog::RatingDialog(QWidget* parent)
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
+    QFormLayout* formLayout = new QFormLayout();
+    layout->addLayout(formLayout);
     m_labelRating = new QLabel();
-    layout->addWidget(m_labelRating);
+    formLayout->addRow(tr("Your rating:"), m_labelRating);
     m_labelVariant = new QLabel();
-    layout->addWidget(m_labelVariant);
+    formLayout->addRow(tr("Game variant:"), m_labelVariant);
     m_labelNuGames = new QLabel();
-    layout->addWidget(m_labelNuGames);
+    formLayout->addRow(tr("Number rated games:"), m_labelNuGames);
     m_labelBestRating = new QLabel();
-    layout->addWidget(m_labelBestRating);
+    formLayout->addRow(tr("Best previous rating:"), m_labelBestRating);
     layout->addSpacing(layout->spacing());
     layout->addWidget(new QLabel(tr("Recent development:")));
     m_graph = new RatingGraph();
@@ -79,7 +81,6 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
 {
     if (nuGames == 0)
         rating = Rating(0);
-    m_labelRating->setText("<b>" + tr("Your rating: %1").arg(rating.toInt()));
     QString variantStr;
     switch (m_variant)
     {
@@ -105,10 +106,19 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
         variantStr = tr("Junior");
         break;
     }
-    m_labelVariant->setText(tr("Game variant %1").arg(variantStr));
-    m_labelNuGames->setText(tr("%n rated game(s)", "", nuGames));
-    m_labelBestRating->setText(tr("Best previous rating: %1")
-                               .arg(bestRating.toInt()));
+    m_labelVariant->setText(variantStr);
+    if (nuGames == 0)
+    {
+        m_labelRating->setText("");
+        m_labelNuGames->setText("0");
+        m_labelBestRating->setText("");
+    }
+    else
+    {
+        m_labelRating->setText(QString("<b>%1").arg(rating.toInt()));
+        m_labelNuGames->setText(QString("%1").arg(nuGames));
+        m_labelBestRating->setText(QString("%1").arg(bestRating.toInt()));
+    }
 }
 
 //-----------------------------------------------------------------------------
