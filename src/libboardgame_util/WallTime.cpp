@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file WallTime.cpp */
+/** @file libboardgame_util/WallTime.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -10,20 +10,22 @@
 
 namespace libboardgame_util {
 
-using boost::posix_time::microsec_clock;
-using boost::posix_time::time_duration;
+using namespace std::chrono;
 
 //-----------------------------------------------------------------------------
 
 WallTime::WallTime()
-    : m_start(microsec_clock::universal_time())
+    : m_start(system_clock::now())
 {
 }
 
 double WallTime::operator()()
 {
-    time_duration diff = microsec_clock::universal_time() - m_start;
-    return double(diff.total_nanoseconds()) * 1e-9;
+    // Logically, there is no need to return the time since m_start, we could
+    // also use time_since_epoch(), but during debugging it is nicer to
+    // deal with smaller numbers.
+    system_clock::duration diff = system_clock::now() - m_start;
+    return duration_cast<duration<double>>(diff).count();
 }
 
 //----------------------------------------------------------------------------

@@ -1,16 +1,14 @@
 //-----------------------------------------------------------------------------
-/** @file WallTime.h */
+/** @file libboardgame_util/WallTime.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_WALL_TIME_H
 #define LIBBOARDGAME_UTIL_WALL_TIME_H
 
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <chrono>
 #include "TimeSource.h"
 
 namespace libboardgame_util {
-
-using boost::posix_time::ptime;
 
 //-----------------------------------------------------------------------------
 
@@ -23,7 +21,7 @@ public:
     double operator()();
 
 private:
-    ptime m_start;
+    std::chrono::system_clock::time_point m_start;
 };
 //-----------------------------------------------------------------------------
 
