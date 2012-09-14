@@ -107,16 +107,15 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
         break;
     }
     m_labelVariant->setText(variantStr);
+        m_labelNuGames->setText(QString("%1").arg(nuGames));
     if (nuGames == 0)
     {
         m_labelRating->setText("");
-        m_labelNuGames->setText("0");
         m_labelBestRating->setText("");
     }
     else
     {
         m_labelRating->setText(QString("<b>%1").arg(rating.toInt()));
-        m_labelNuGames->setText(QString("%1").arg(nuGames));
         m_labelBestRating->setText(QString("%1").arg(bestRating.toInt()));
     }
 }
