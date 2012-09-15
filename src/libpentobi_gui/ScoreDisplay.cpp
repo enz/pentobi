@@ -8,6 +8,7 @@
 
 #include "ScoreDisplay.h"
 
+#include <cmath>
 #include <QApplication>
 #include <QPainter>
 #include "libboardgame_util/Log.h"
