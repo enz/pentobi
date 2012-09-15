@@ -8,6 +8,10 @@
 
 #include "StatusBarButton.h"
 
+#include <QAction>
+#include <QIcon>
+#include <QMouseEvent>
+
 //-----------------------------------------------------------------------------
 
 StatusBarButton::StatusBarButton(QAction* action, QWidget* parent)

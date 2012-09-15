@@ -8,6 +8,9 @@
 
 #include "SameHeightLayout.h"
 
+#include <QStyle>
+#include <QWidget>
+
 using namespace std;
 
 //-----------------------------------------------------------------------------

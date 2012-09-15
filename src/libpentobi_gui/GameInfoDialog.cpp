@@ -8,6 +8,7 @@
 
 #include "GameInfoDialog.h"
 
+#include <QDialogButtonBox>
 #include "LineEdit.h"
 #include "libpentobi_gui/Util.h"
 

@@ -8,6 +8,13 @@
 
 #include "RatingDialog.h"
 
+#include <QDialogButtonBox>
+#include <QFormLayout>
+#include <QLabel>
+#include <QPainter>
+#include <QPen>
+#include <QSettings>
+#include <QVBoxLayout>
 #include "Util.h"
 
 using namespace std;

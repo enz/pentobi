@@ -5,7 +5,8 @@
 #ifndef LIBPENTOBI_THUMBNAIL_CREATE_THUMBNAIL_H
 #define LIBPENTOBI_THUMBNAIL_CREATE_THUMBNAIL_H
 
-#include <QtGui>
+class QImage;
+class QString;
 
 //-----------------------------------------------------------------------------
 

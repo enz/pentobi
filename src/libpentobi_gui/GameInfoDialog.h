@@ -5,7 +5,9 @@
 #ifndef LIBPENTOBI_GUI_GAME_INFO_DIALOG_H
 #define LIBPENTOBI_GUI_GAME_INFO_DIALOG_H
 
-#include <QtGui>
+#include <QDialog>
+#include <QFormLayout>
+#include <QLineEdit>
 #include "libpentobi_base/Game.h"
 
 using namespace std;

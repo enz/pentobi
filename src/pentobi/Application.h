@@ -5,7 +5,7 @@
 #ifndef PENTOBI_APPLICATION_H
 #define PENTOBI_APPLICATION_H
 
-#include <QtGui>
+#include <QApplication>
 
 //-----------------------------------------------------------------------------
 

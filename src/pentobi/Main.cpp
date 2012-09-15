@@ -7,9 +7,13 @@
 #endif
 
 #include <boost/program_options.hpp>
-#include <QtGui>
+#include <QFileInfo>
+#include <QLibraryInfo>
+#include <QSettings>
+#include <QTranslator>
 #include "Application.h"
 #include "MainWindow.h"
+
 #ifdef Q_WS_WIN
 #include <stdio.h>
 #include <windows.h>

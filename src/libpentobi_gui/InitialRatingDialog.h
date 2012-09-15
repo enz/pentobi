@@ -5,7 +5,10 @@
 #ifndef LIBPENTOBI_GUI_INITIAL_RATING_DIALOG_H
 #define LIBPENTOBI_GUI_INITIAL_RATING_DIALOG_H
 
-#include <QtGui>
+#include <QDialog>
+
+class QLabel;
+class QSlider;
 
 using namespace std;
 

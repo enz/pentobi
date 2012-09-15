@@ -5,8 +5,10 @@
 #ifndef PENTOBI_RATED_GAMES_LIST
 #define PENTOBI_RATED_GAMES_LIST
 
-#include <QtGui>
+#include <QTableView>
 #include "RatingHistory.h"
+
+class QStandardItemModel;
 
 //-----------------------------------------------------------------------------
 

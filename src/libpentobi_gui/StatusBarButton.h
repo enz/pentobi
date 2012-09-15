@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_GUI_STATUS_BAR_BUTTON_H
 #define LIBPENTOBI_GUI_STATUS_BAR_BUTTON_H
 
-#include <QtGui>
+#include <QLabel>
 
 //-----------------------------------------------------------------------------
 

@@ -8,6 +8,12 @@
 
 #include "Util.h"
 
+#include <QCryptographicHash>
+#include <QDir>
+#include <QFileInfo>
+#include <QSettings>
+#include <QString>
+#include <QUrl>
 #include "libpentobi_mcts/Player.h"
 
 using libpentobi_mcts::Player;

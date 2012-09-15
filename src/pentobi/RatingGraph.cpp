@@ -9,6 +9,8 @@
 #include "RatingGraph.h"
 
 #include <boost/foreach.hpp>
+#include <QPainter>
+#include <QPen>
 
 //-----------------------------------------------------------------------------
 

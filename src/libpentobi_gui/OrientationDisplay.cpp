@@ -9,6 +9,7 @@
 #include "OrientationDisplay.h"
 
 #include <boost/foreach.hpp>
+#include <QPainter>
 #include "libboardgame_base/GeometryUtil.h"
 #include "libpentobi_gui/Util.h"
 

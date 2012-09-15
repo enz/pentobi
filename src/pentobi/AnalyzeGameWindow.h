@@ -6,7 +6,7 @@
 #define PENTOBI_ANALYZE_GAME_WINDOW_H
 
 #include <vector>
-#include <QtGui>
+#include <QDialog>
 #include "AnalyzeGameWidget.h"
 
 using namespace std;

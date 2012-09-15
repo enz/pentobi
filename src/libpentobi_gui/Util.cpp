@@ -8,6 +8,8 @@
 
 #include "Util.h"
 
+#include <QCoreApplication>
+
 using libpentobi_base::variant_classic;
 using libpentobi_base::variant_classic_2;
 using libpentobi_base::variant_duo;

@@ -8,6 +8,9 @@
 
 #include "RatedGamesList.h"
 
+#include <QHeaderView>
+#include <QKeyEvent>
+#include <QStandardItemModel>
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 

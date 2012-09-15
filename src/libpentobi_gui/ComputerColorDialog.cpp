@@ -8,6 +8,9 @@
 
 #include "ComputerColorDialog.h"
 
+#include <QDialogButtonBox>
+#include <QLabel>
+#include <QVBoxLayout>
 #include "Util.h"
 
 using libpentobi_base::variant_classic;

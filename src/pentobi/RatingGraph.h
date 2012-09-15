@@ -5,7 +5,7 @@
 #ifndef PENTOBI_RATING_GRAPH_H
 #define PENTOBI_RATING_GRAPH_H
 
-#include <QtGui>
+#include <QWidget>
 #include "RatingHistory.h"
 
 //-----------------------------------------------------------------------------

@@ -5,10 +5,12 @@
 #ifndef PENTOBI_RATING_DIALOG_H
 #define PENTOBI_RATING_DIALOG_H
 
-#include <QtGui>
+#include <QDialog>
 #include "RatedGamesList.h"
 #include "RatingGraph.h"
 #include "libpentobi_base/Variant.h"
+
+class QLabel;
 
 using namespace std;
 using libpentobi_base::Variant;

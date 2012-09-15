@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_GUI_LINE_EDIT_H
 #define LIBPENTOBI_GUI_LINE_EDIT_H
 
-#include <QtGui>
+#include <QLineEdit>
 
 //-----------------------------------------------------------------------------
 

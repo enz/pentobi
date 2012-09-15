@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_GUI_SAME_HEIGHT_LAYOUT_H
 #define LIBPENTOBI_GUI_SAME_HEIGHT_LAYOUT_H
 
-#include <QtGui>
+#include <QLayout>
 
 //-----------------------------------------------------------------------------
 

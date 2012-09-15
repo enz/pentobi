@@ -8,6 +8,8 @@
 
 #include "ScoreDisplay.h"
 
+#include <QApplication>
+#include <QPainter>
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 

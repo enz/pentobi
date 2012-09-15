@@ -5,7 +5,8 @@
 #ifndef LIBPENTOBI_GUI_GUI_BOARD_H
 #define LIBPENTOBI_GUI_GUI_BOARD_H
 
-#include <QtGui>
+#include <QTimer>
+#include <QWidget>
 #include "BoardPainter.h"
 #include "libboardgame_base/CoordPoint.h"
 #include "libpentobi_base/Board.h"

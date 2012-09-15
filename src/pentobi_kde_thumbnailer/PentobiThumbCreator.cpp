@@ -4,6 +4,7 @@
 
 #include "PentobiThumbCreator.h"
 
+#include <QImage>
 #include "libpentobi_thumbnail/CreateThumbnail.h"
 
 using namespace std;

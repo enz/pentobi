@@ -8,6 +8,11 @@
 
 #include "HelpWindow.h"
 
+#include <QAction>
+#include <QFile>
+#include <QSettings>
+#include <QTextBrowser>
+#include <QToolBar>
 #include "libboardgame_util/Log.h"
 
 using libboardgame_util::log;

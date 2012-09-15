@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_GUI_ORIENTATION_DISPLAY_H
 #define LIBPENTOBI_GUI_ORIENTATION_DISPLAY_H
 
-#include <QtGui>
+#include <QWidget>
 #include "libpentobi_base/Board.h"
 
 using libboardgame_base::Transform;

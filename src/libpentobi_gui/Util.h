@@ -5,7 +5,8 @@
 #ifndef LIBPENTOBI_GUI_UTIL_H
 #define LIBPENTOBI_GUI_UTIL_H
 
-#include <QtGui>
+#include <QColor>
+#include <QPainter>
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Variant.h"
 #include "libpentobi_base/PointState.h"

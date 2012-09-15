@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_GUI_PIECE_SELECTOR_H
 #define LIBPENTOBI_GUI_PIECE_SELECTOR_H
 
-#include <QtGui>
+#include <QWidget>
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/Color.h"
 

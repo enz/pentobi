@@ -5,7 +5,8 @@
 #ifndef LIBPENTOBI_GUI_HELP_WINDOW_H
 #define LIBPENTOBI_GUI_HELP_WINDOW_H
 
-#include <QtGui>
+#include <QMainWindow>
+#include <QUrl>
 
 //-----------------------------------------------------------------------------
 

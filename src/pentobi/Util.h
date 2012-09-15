@@ -5,11 +5,12 @@
 #ifndef PENTOBI_UTIL_H
 #define PENTOBI_UTIL_H
 
-#include <QtGui>
 #include "RatingHistory.h"
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Variant.h"
+
+class QString;
 
 using libboardgame_base::Rating;
 using libpentobi_base::Color;

@@ -11,6 +11,8 @@
 #include <algorithm>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/foreach.hpp>
+#include <QMouseEvent>
+#include <QPainter>
 #include "libboardgame_base/GeometryUtil.h"
 #include "libpentobi_gui/Util.h"
 

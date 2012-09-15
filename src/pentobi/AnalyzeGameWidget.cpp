@@ -8,6 +8,10 @@
 
 #include "AnalyzeGameWidget.h"
 
+#include <QLabel>
+#include <QMouseEvent>
+#include <QProgressDialog>
+#include <QtConcurrentRun>
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"

@@ -6,7 +6,8 @@
 #define LIBPENTOBI_GUI_COMPUTER_COLOR_DIALOG_H
 
 #include <array>
-#include <QtGui>
+#include <QCheckBox>
+#include <QDialog>
 #include "libpentobi_base/Variant.h"
 #include "libpentobi_base/ColorMap.h"
 

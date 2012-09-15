@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_GUI_BOARD_PAINTER_H
 #define LIBPENTOBI_GUI_BOARD_PAINTER_H
 
-#include <QtGui>
+#include <QPainter>
 #include "libpentobi_base/Grid.h"
 #include "libpentobi_base/Board.h"
 

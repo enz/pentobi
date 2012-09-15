@@ -5,7 +5,9 @@
 #ifndef PENTOBI_MAIN_WINDOW_H
 #define PENTOBI_MAIN_WINDOW_H
 
-#include <QtGui>
+#include <QFutureWatcher>
+#include <QMainWindow>
+#include <QMessageBox>
 #include "AnalyzeGameWindow.h"
 #include "RatingDialog.h"
 #include "libpentobi_base/ColorMap.h"
@@ -17,6 +19,10 @@
 #include "libpentobi_gui/PieceSelector.h"
 #include "libpentobi_gui/ScoreDisplay.h"
 #include "libpentobi_gui/StatusBarButton.h"
+
+class QActionGroup;
+class QPlainTextEdit;
+class QSplitter;
 
 using namespace std;
 using libboardgame_sgf::Node;

@@ -6,8 +6,11 @@
 #define PENTOBI_ANALYZE_GAME_WIDGET_H
 
 #include <vector>
-#include <QtGui>
+#include <QFuture>
+#include <QWidget>
 #include "libpentobi_mcts/AnalyzeGame.h"
+
+class QProgressDialog;
 
 using namespace std;
 using libpentobi_base::ColorMove;

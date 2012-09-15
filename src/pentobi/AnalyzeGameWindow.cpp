@@ -8,6 +8,9 @@
 
 #include "AnalyzeGameWindow.h"
 
+#include <QVBoxLayout>
+#include <QDialogButtonBox>
+
 //-----------------------------------------------------------------------------
 
 AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)

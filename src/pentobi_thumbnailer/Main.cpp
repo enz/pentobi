@@ -5,6 +5,10 @@
 #include <iostream>
 #include <vector>
 #include <boost/program_options.hpp>
+#include <QCoreApplication>
+#include <QImage>
+#include <QImageWriter>
+#include <QString>
 #include "libboardgame_util/Exception.h"
 #include "libpentobi_thumbnail/CreateThumbnail.h"
 

@@ -8,6 +8,11 @@
 
 #include "InitialRatingDialog.h"
 
+#include <QDialogButtonBox>
+#include <QLabel>
+#include <QSlider>
+#include <QVBoxLayout>
+
 //-----------------------------------------------------------------------------
 
 InitialRatingDialog::InitialRatingDialog(QWidget* parent)

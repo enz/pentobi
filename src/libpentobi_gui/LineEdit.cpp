@@ -8,6 +8,8 @@
 
 #include "LineEdit.h"
 
+#include <QApplication>
+
 //-----------------------------------------------------------------------------
 
 LineEdit::LineEdit(QWidget* parent, int nuCharactersHint)
