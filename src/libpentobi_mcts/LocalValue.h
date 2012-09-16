@@ -80,7 +80,7 @@ private:
     /** Points with point value greater zero. */
     PointList m_points;
 
-    Grid<int> m_point_value;
+    Grid<unsigned> m_point_value;
 };
 
 inline LocalValue::Compute::Compute(const LocalValue& local_value)
