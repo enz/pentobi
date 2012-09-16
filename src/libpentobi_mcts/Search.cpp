@@ -113,7 +113,6 @@ Search::Search(Variant initial_variant, size_t memory)
     set_rave(true);
     set_unexplored_value(0.5);
     set_expand_threshold(1);
-    set_widening_parameter(0);
     set_last_good_reply(true);
     set_default_param(m_variant);
 }

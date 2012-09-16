@@ -118,8 +118,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "rave " << s.get_rave() << '\n'
             << "reuse_subtree " << s.get_reuse_subtree() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
-            << "use_book " << p.get_use_book() << '\n'
-            << "widening_parameter " << s.get_widening_parameter() << '\n';
+            << "use_book " << p.get_use_book() << '\n';
     else
     {
         args.check_size(2);
@@ -148,8 +147,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_score_modification(args.get<Float>(1));
         else if (name == "use_book")
             p.set_use_book(args.get<bool>(1));
-        else if (name == "widening_parameter")
-            s.set_widening_parameter(args.get<Float>(1));
         else
             throw Failure(format("unknown parameter '%1%'") % name);
     }

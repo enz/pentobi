@@ -157,16 +157,6 @@ public:
 
     Float get_expand_threshold() const;
 
-    /** Set the parameter for progressive widening.
-        If this parameter is non-zero then only explored children (with a visit
-        count greater than zero) are played until the number of explored
-        childrenvisit count of the parent is less than
-        widening_parameter * log(visit_count_of_the_parent)
-        in which case the best unexplored child is played. */
-    void set_widening_parameter(Float n);
-
-    Float get_widening_parameter() const;
-
     /** Constant used in UCT bias term. */
     void set_bias_term_constant(Float c);
 
@@ -358,8 +348,6 @@ private:
 
     Float m_bias_term_constant_sq;
 
-    Float m_widening_parameter;
-
     bool m_deterministic;
 
     bool m_reuse_subtree;
@@ -503,7 +491,6 @@ Search<S,M,P>::Simulation::~Simulation() throw()
 template<class S, class M, unsigned int P>
 Search<S,M,P>::Search(const State& state, size_t memory)
     : m_expand_threshold(0),
-      m_widening_parameter(0),
       m_deterministic(false),
       m_reuse_subtree(true),
       m_reuse_tree(false),
@@ -778,12 +765,6 @@ template<class S, class M, unsigned int P>
 bool Search<S,M,P>::get_weight_rave_updates() const
 {
     return m_weight_rave_updates;
-}
-
-template<class S, class M, unsigned int P>
-Float Search<S,M,P>::get_widening_parameter() const
-{
-    return m_widening_parameter;
 }
 
 template<class S, class M, unsigned int P>
@@ -1099,11 +1080,7 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     }
     LIBBOARDGAME_ASSERT(node.has_children());
     const Node* best_child = 0;
-    const Node* best_explored_child = 0;
-    const Node* best_unexplored_child = 0;
     Float best_value = -numeric_limits<Float>::max();
-    Float best_explored_value = -numeric_limits<Float>::max();
-    Float best_unexplored_value = -numeric_limits<Float>::max();
     Float bias_term_constant_part = 0; // Init to avoid compiler warning
     // Note: use visit count here not count. In most cases, count is larger
     // than visit count because of prior knowledge initializaion, but it can
@@ -1121,7 +1098,6 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
     if (log_move_selection)
         log() << "beta=" << beta << '\n';
-    unsigned int nu_explored = 0;
     for (ChildIterator i(node); i; ++i)
     {
         if (log_move_selection)
@@ -1169,37 +1145,6 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
             best_value = value_with_exploration_term;
             best_child = &(*i);
         }
-        if (i->get_visit_count() == 0)
-        {
-            if (value > best_unexplored_value)
-            {
-                best_unexplored_value = value;
-                best_unexplored_child = &(*i);
-            }
-        }
-        else
-        {
-            ++nu_explored;
-            if (value_with_exploration_term > best_explored_value)
-            {
-                best_explored_value = value_with_exploration_term;
-                best_explored_child = &(*i);
-            }
-        }
-    }
-    if (m_widening_parameter != 0)
-    {
-        float n = float(node.get_visit_count());
-        if ((n == 0
-             || nu_explored < m_widening_parameter * m_fast_log.get_log(n))
-            && best_unexplored_child != 0)
-        {
-            if (log_move_selection)
-                log() << "Progressive widening\n";
-            best_child = best_unexplored_child;
-        }
-        else
-            best_child = best_explored_child;
     }
     if (log_move_selection)
         log() << "Selected: " << get_move_string(best_child->get_move())
@@ -1341,12 +1286,6 @@ template<class S, class M, unsigned int P>
 void Search<S,M,P>::set_weight_rave_updates(bool enable)
 {
     m_weight_rave_updates = enable;
-}
-
-template<class S, class M, unsigned int P>
-void Search<S,M,P>::set_widening_parameter(Float value)
-{
-    m_widening_parameter = value;
 }
 
 template<class S, class M, unsigned int P>
