@@ -59,7 +59,10 @@ public:
         The adjacent status is a single number that encodes the forbidden
         status of the first adj_status_nu_adj neighbors (from the list
         Geometry::get_adj_diag()). It is used for speeding up the matching of
-        moves at a given point. */
+        moves at a given point. Increasing this number will make the
+        precomputed lists shorter but exponentially increase the number of
+        lists and the total memory used for all lists. Therefore, the optimal
+        value for speeding up the matching depends on the CPU cache size. */
     static const unsigned int adj_status_nu_adj = 4;
 
     static const unsigned int nu_adj_status_index = 1 << adj_status_nu_adj;
