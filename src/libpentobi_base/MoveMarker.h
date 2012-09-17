@@ -122,9 +122,10 @@ inline bool MoveMarker::test_and_set(Move mv)
 {
     unsigned char& elem = m_array[get_index(mv)];
     unsigned char mask = get_mask(mv);
-    bool result = elem & mask;
+    if (elem & mask)
+        return true;
     elem |= mask;
-    return result;
+    return false;
 }
 
 //-----------------------------------------------------------------------------
