@@ -706,13 +706,9 @@ void State::init_move_list_with_local(Color c)
                     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
-                        if (m_marker[mv])
-                            continue;
-                        if (! m_bd.is_forbidden(c, mv))
-                        {
+                        if (! m_bd.is_forbidden(c, mv)
+                            && ! m_marker.test_and_set(mv))
                             moves.push_back(mv);
-                            m_marker.set(mv);
-                        }
                     }
                 }
         }
@@ -753,14 +749,10 @@ void State::init_move_list_without_local(Color c)
                     unsigned int adj_status = m_bd.get_adj_status_index(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
-                        if (m_shared_const.is_forbidden_at_root[c][mv]
-                            || m_marker[mv])
-                            continue;
-                        if (! m_bd.is_forbidden(c, mv))
-                        {
+                        if (! m_shared_const.is_forbidden_at_root[c][mv]
+                            && ! m_bd.is_forbidden(c, mv)
+                            && ! m_marker.test_and_set(mv))
                             moves.push_back(mv);
-                            m_marker.set(mv);
-                        }
                     }
                 }
         }
@@ -777,13 +769,9 @@ void State::init_move_list_without_local(Color c)
                         BOOST_FOREACH(Move mv,
                                       m_bd.get_moves(piece, p, adj_status))
                         {
-                            if (m_marker[mv])
-                                continue;
-                            if (! m_bd.is_forbidden(c, mv))
-                            {
+                            if (! m_bd.is_forbidden(c, mv)
+                                && ! m_marker.test_and_set(mv))
                                 moves.push_back(mv);
-                                m_marker.set(mv);
-                            }
                         }
                     }
             }
