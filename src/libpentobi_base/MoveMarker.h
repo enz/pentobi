@@ -5,7 +5,8 @@
 #ifndef LIBPENTOBI_BASE_MOVE_MARKER_H
 #define LIBPENTOBI_BASE_MOVE_MARKER_H
 
-#include <bitset>
+#include <climits>
+#include <cstring>
 #include "Move.h"
 #include "libboardgame_util/ArrayList.h"
 
@@ -30,6 +31,13 @@ public:
     template<unsigned int M>
     void clear(const ArrayList<Move, M>& moves);
 
+    /** Clear all moves from a list optimized for the case when we know
+        that the list contains all marked moves in the marker.
+        This function assumes that all moves not in the list are not marked
+        and is faster than clear(ArrayList). */
+    template<unsigned int M>
+    void clear_all_set_known(const ArrayList<Move, M>& moves);
+
     void set(Move mv);
 
     /** Mark all moves (slow). */
@@ -37,8 +45,17 @@ public:
 
     bool operator[](Move mv) const;
 
+    /** Mark a move and return whether it was already marked. */
+    bool test_and_set(Move mv);
+
 private:
-    bitset<Move::range> m_marker;
+    static const size_t array_size = Move::range / CHAR_BIT;
+
+    unsigned char m_array[array_size];
+
+    size_t get_index(Move mv) const;
+
+    unsigned char get_mask(Move mv) const;
 };
 
 inline MoveMarker::MoveMarker()
@@ -47,12 +64,12 @@ inline MoveMarker::MoveMarker()
 
 inline bool MoveMarker::operator[](Move mv) const
 {
-    return m_marker[mv.to_int()];
+    return m_array[get_index(mv)] & get_mask(mv);
 }
 
 inline void MoveMarker::clear(Move mv)
 {
-    m_marker[mv.to_int()] = false;
+    m_array[get_index(mv)] &= ~get_mask(mv);
 }
 
 inline void MoveMarker::clear(const vector<Move>& moves)
@@ -72,14 +89,42 @@ inline void MoveMarker::clear(const ArrayList<Move, M>& moves)
         clear(*i);
 }
 
+template<unsigned int M>
+inline void MoveMarker::clear_all_set_known(const ArrayList<Move, M>& moves)
+{
+    auto begin = moves.begin();
+    auto end = moves.end();
+    for (auto i = begin; i != end; ++i)
+        m_array[get_index(*i)] = 0;
+}
+
+inline size_t MoveMarker::get_index(Move mv) const
+{
+    return mv.to_int() / CHAR_BIT;
+}
+
+inline unsigned char MoveMarker::get_mask(Move mv) const
+{
+    return static_cast<unsigned char>(1) << (mv.to_int() % CHAR_BIT);
+}
+
 inline void MoveMarker::set(Move mv)
 {
-    m_marker[mv.to_int()] = true;
+    m_array[get_index(mv)] |= get_mask(mv);
 }
 
 inline void MoveMarker::set_all()
 {
-    m_marker.set();
+    memset(m_array, ~static_cast<unsigned char>(0), array_size);
+}
+
+inline bool MoveMarker::test_and_set(Move mv)
+{
+    unsigned char& elem = m_array[get_index(mv)];
+    unsigned char mask = get_mask(mv);
+    bool result = elem & mask;
+    elem |= mask;
+    return result;
 }
 
 //-----------------------------------------------------------------------------

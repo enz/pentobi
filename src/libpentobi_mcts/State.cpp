@@ -262,10 +262,10 @@ inline void State::add_moves(Point p, Color c, Piece piece,
         {
             unsigned int local_value;
             const MoveInfo& info = get_move_info(*i);
-            if (check_move(c, info.points, local_value) && ! m_marker[*i])
+            if (check_move(c, info.points, local_value)
+                && ! m_marker.test_and_set(*i))
             {
                 moves.push_back(*i);
-                m_marker.set(*i);
                 check_local(local_value, *i, info);
             }
         }
@@ -723,7 +723,7 @@ void State::init_move_list_with_local(Color c)
             if (! m_bd.is_forbidden(p, c))
                 add_moves(p, c);
     }
-    m_marker.clear(moves);
+    m_marker.clear_all_set_known(moves);
     m_is_move_list_initialized[c] = true;
     if (moves.empty() && ! m_consider_all_pieces)
     {
@@ -788,7 +788,7 @@ void State::init_move_list_without_local(Color c)
                     }
             }
     }
-    m_marker.clear(moves);
+    m_marker.clear_all_set_known(moves);
     m_is_move_list_initialized[c] = true;
     if (moves.empty() && ! m_consider_all_pieces)
     {
@@ -1080,7 +1080,7 @@ void State::update_move_list(Color c)
         m_is_piece_considered[c] = &is_piece_considered;
     }
 
-    m_marker.clear(m_moves[c]);
+    m_marker.clear_all_set_known(m_moves[c]);
     m_last_move[c] = Move::null();
     if (m_moves[c].empty() && ! m_consider_all_pieces)
     {
