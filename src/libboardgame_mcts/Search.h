@@ -1129,20 +1129,19 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
         }
         else
             value = m_unexplored_value;
-        Float exploration_term = 0;
         if (m_bias_term_constant != 0)
         {
-            exploration_term =
+            Float exploration_term =
                 sqrt(bias_term_constant_part / max(count, Float(1)));
             if (log_move_selection)
                 log() << " e=" << exploration_term;
+            value += exploration_term;
         }
-        Float value_with_exploration_term = value + exploration_term;
         if (log_move_selection)
-            log() << " | " << value_with_exploration_term << '\n';
-        if (value_with_exploration_term > best_value)
+            log() << " | " << value << '\n';
+        if (value > best_value)
         {
-            best_value = value_with_exploration_term;
+            best_value = value;
             best_child = &(*i);
         }
     }
