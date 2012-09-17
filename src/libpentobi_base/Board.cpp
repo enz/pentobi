@@ -72,7 +72,6 @@ void Board::copy_from(const Board& bd)
         m_is_attach_point[*i] = bd.m_is_attach_point[*i];
         m_attach_points[*i] = bd.m_attach_points[*i];
         m_pieces_left[*i] = bd.m_pieces_left[*i];
-        m_is_first_piece[*i] = bd.m_is_first_piece[*i];
         m_nu_left_piece[*i] = bd.m_nu_left_piece[*i];
         m_setup.placements[*i] = bd.m_setup.placements[*i];
         m_nu_onboard_pieces[*i] = bd.m_nu_onboard_pieces[*i];
@@ -85,7 +84,7 @@ void Board::copy_from(const Board& bd)
 void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 {
     moves.clear();
-    if (m_is_first_piece[c])
+    if (is_first_piece(c))
     {
         BOOST_FOREACH(Point p, get_starting_points(c))
             if (! m_forbidden[c][p])
@@ -248,7 +247,7 @@ int Board::get_score(Color c) const
 
 bool Board::has_moves(Color c) const
 {
-    bool is_first = m_is_first_piece[c];
+    bool is_first = is_first_piece(c);
     for (Iterator i(*this); i; ++i)
         if (! m_forbidden[c][*i]
             && (is_attach_point(*i, c)
@@ -293,7 +292,6 @@ void Board::init(Variant variant, const Setup* setup)
         m_forbidden[*i].fill(false);
         m_is_attach_point[*i].fill(false);
         m_attach_points[*i].clear();
-        m_is_first_piece[*i] = true;
         m_pieces_left[*i].clear();
         m_nu_onboard_pieces[*i] = 0;
         for (unsigned int j = 0; j < get_nu_pieces(); ++j)

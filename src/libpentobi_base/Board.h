@@ -309,8 +309,6 @@ private:
 
     ColorMap<PiecesLeftList> m_pieces_left;
 
-    ColorMap<bool> m_is_first_piece;
-
     ColorMap<PieceMap<unsigned int>> m_nu_left_piece;
 
     /** See get_second_color() */
@@ -590,7 +588,7 @@ inline bool Board::is_empty(Point p) const
 
 inline bool Board::is_first_piece(Color c) const
 {
-    return m_is_first_piece[c];
+    return m_nu_onboard_pieces[c] == 0;
 }
 
 inline bool Board::is_forbidden(Point p, Color c) const
@@ -644,7 +642,7 @@ inline bool Board::is_legal(Color c, Move mv) const
     while (i != end);
     if (has_attach_point)
         return true;
-    if (! m_is_first_piece[c])
+    if (! is_first_piece(c))
         return false;
     i = points.begin();
     do
@@ -686,7 +684,6 @@ inline void Board::place(Color c, Move mv)
         m_pieces_left[c].remove(piece);
     ++m_nu_onboard_pieces_all;
     ++m_nu_onboard_pieces[c];
-    m_is_first_piece[c] = false;
     auto i = info.points.begin();
     auto end = info.points.end();
     LIBBOARDGAME_ASSERT(i != end);
