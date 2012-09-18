@@ -24,6 +24,9 @@ class MoveMarker
 public:
     MoveMarker();
 
+    /** Clear all moves (slow). */
+    void clear();
+
     void clear(Move mv);
 
     void clear(const vector<Move>& moves);
@@ -60,11 +63,17 @@ private:
 
 inline MoveMarker::MoveMarker()
 {
+    clear();
 }
 
 inline bool MoveMarker::operator[](Move mv) const
 {
     return m_array[get_index(mv)] & get_mask(mv);
+}
+
+inline void MoveMarker::clear()
+{
+    memset(m_array, 0, array_size);
 }
 
 inline void MoveMarker::clear(Move mv)
