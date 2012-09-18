@@ -37,6 +37,7 @@ public:
     void cmd_loadsgf(const Arguments&);
     void cmd_move_info(const Arguments&, Response&);
     void cmd_p(const Arguments&);
+    void cmd_param_base(const Arguments&, Response&);
     void cmd_play(const Arguments&);
     void cmd_point_integers(Response&);
     void cmd_showboard(Response&);

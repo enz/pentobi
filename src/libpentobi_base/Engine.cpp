@@ -49,6 +49,7 @@ Engine::Engine(Variant variant)
     add("point_integers", &Engine::cmd_point_integers);
     add("move_info", &Engine::cmd_move_info);
     add("p", &Engine::cmd_p);
+    add("param_base", &Engine::cmd_param_base);
     add("play", &Engine::cmd_play);
     add("set_game", &Engine::cmd_set_game);
     add("showboard", &Engine::cmd_showboard);
@@ -147,6 +148,22 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
 void Engine::cmd_p(const Arguments& args)
 {
     play(get_board().get_to_play(), args, 0);
+}
+
+void Engine::cmd_param_base(const Arguments& args, Response& response)
+{
+    if (args.get_size() == 0)
+        response
+            << "accept_illegal " << m_accept_illegal << '\n';
+    else
+    {
+        args.check_size(2);
+        string name = args.get(0);
+        if (name == "accept_illegal")
+            m_accept_illegal = args.get<bool>(1);
+        else
+            throw Failure(format("unknown parameter '%1%'") % name);
+    }
 }
 
 void Engine::cmd_play(const Arguments& args)
