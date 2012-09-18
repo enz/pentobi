@@ -21,8 +21,14 @@ using libboardgame_gtp::Failure;
 using libboardgame_mcts::ChildIterator;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::log;
+using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
+using libpentobi_base::Color;
+using libpentobi_base::Grid;
+using libpentobi_base::Move;
+using libpentobi_base::MoveMarker;
 using libpentobi_base::PieceInfo;
+using libpentobi_base::Point;
 using libpentobi_base::Tree;
 using libpentobi_mcts::Float;
 using libpentobi_mcts::Move;
@@ -42,6 +48,7 @@ Engine::Engine(Variant variant, int level, bool use_book,
     add("name", &Engine::cmd_name);
     add("param", &Engine::cmd_param);
     add("move_values", &Engine::cmd_move_values);
+    add("moves_stat", &Engine::cmd_moves_stat);
     add("save_tree", &Engine::cmd_save_tree);
     add("version", &Engine::cmd_version);
 }
@@ -84,6 +91,27 @@ void Engine::cmd_move_values(Response& response)
             response << '-';
         response << ' ' << bd.to_string(node->get_move()) << '\n';
     }
+}
+
+void Engine::cmd_moves_stat(const Arguments& args, Response& response)
+{
+    Color c = get_color_arg(args);
+    const Board& bd = get_board();
+    Grid<unsigned> nu_moves_grid(bd.get_geometry(), 0);
+    ArrayList<Move,Move::range> moves;
+    MoveMarker marker;
+    BOOST_FOREACH(Point p, bd.get_attach_points(c))
+    {
+        bd.gen_moves(c, p, marker, moves);
+        BOOST_FOREACH(Move mv, moves)
+        {
+            BOOST_FOREACH(Point p, bd.get_move_points(mv))
+                ++nu_moves_grid[p];
+        }
+        marker.clear_all_set_known(moves);
+        moves.clear();
+    }
+    response << '\n' << nu_moves_grid;
 }
 
 void Engine::cmd_name(Response& response)
