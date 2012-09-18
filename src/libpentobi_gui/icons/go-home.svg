@@ -35,11 +35,11 @@
     <linearGradient
        id="linearGradient8218">
       <stop
-         style="stop-color:#5e615c;stop-opacity:1;"
+         style="stop-color:#cf4949;stop-opacity:1;"
          offset="0"
          id="stop8220" />
       <stop
-         style="stop-color:#3c3e3b;stop-opacity:1;"
+         style="stop-color:#6d3838;stop-opacity:1;"
          offset="1"
          id="stop8222" />
     </linearGradient>
@@ -226,18 +226,18 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="16.620563"
-     inkscape:cx="-7.5445636"
+     inkscape:cx="6.4773425"
      inkscape:cy="5.5274823"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      inkscape:snap-global="false"
-     inkscape:window-width="1623"
-     inkscape:window-height="1026"
-     inkscape:window-x="57"
+     inkscape:window-width="1328"
+     inkscape:window-height="939"
+     inkscape:window-x="65"
      inkscape:window-y="24"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid2993"
@@ -288,6 +288,6 @@
        inkscape:connector-curvature="0"
        id="path3806"
        d="M 11,11 1,21 2.5296074,22.338406 11,14 19.5,22.378 21,21 z"
-       style="fill:url(#linearGradient8224);fill-opacity:1.0;fill-rule:evenodd;stroke:#2e3436;stroke-width:1.00019455000000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       style="fill:url(#linearGradient8224);fill-opacity:1;fill-rule:evenodd;stroke:#6f1b1b;stroke-width:1.00019455000000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   </g>
 </svg>
