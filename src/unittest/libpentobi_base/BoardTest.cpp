@@ -34,4 +34,14 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
     }
 }
 
+/** Check the number of generated moves at a starting point. */
+LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
+{
+    Board bd(variant_classic);
+    ArrayList<Move,Move::range> moves;
+    MoveMarker marker;
+    bd.gen_moves(Color(0), Point("A20"), marker, moves);
+    LIBBOARDGAME_CHECK_EQUAL(moves.size(), 58u);
+}
+
 //-----------------------------------------------------------------------------
