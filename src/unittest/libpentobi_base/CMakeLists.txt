@@ -6,6 +6,7 @@ include_directories(
 link_directories(${Boost_LIBRARY_DIRS})
 
 set(unittest_libpentobi_base_STAT_SRCS
+  BoardTest.cpp
   BoardUpdaterTest.cpp
   GameTest.cpp
   TreeTest.cpp
