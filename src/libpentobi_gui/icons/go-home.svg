@@ -22,6 +22,28 @@
   <defs
      id="defs2987">
     <linearGradient
+       id="linearGradient3799">
+      <stop
+         style="stop-color:#f27e7e;stop-opacity:1;"
+         offset="0"
+         id="stop3801" />
+      <stop
+         style="stop-color:#c71111;stop-opacity:1;"
+         offset="1"
+         id="stop3803" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3791">
+      <stop
+         style="stop-color:#bb2d2d;stop-opacity:1;"
+         offset="0"
+         id="stop3793" />
+      <stop
+         style="stop-color:#7e1e1e;stop-opacity:1;"
+         offset="1"
+         id="stop3795" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient8226">
       <stop
          style="stop-color:#747671;stop-opacity:1;"
@@ -35,11 +57,11 @@
     <linearGradient
        id="linearGradient8218">
       <stop
-         style="stop-color:#cf4949;stop-opacity:1;"
+         style="stop-color:#d66565;stop-opacity:1;"
          offset="0"
          id="stop8220" />
       <stop
-         style="stop-color:#6d3838;stop-opacity:1;"
+         style="stop-color:#a65555;stop-opacity:1;"
          offset="1"
          id="stop8222" />
     </linearGradient>
@@ -201,21 +223,21 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient8218"
-       id="linearGradient8224"
-       x1="9.9460325"
-       y1="10.552023"
-       x2="13.256087"
-       y2="22.905317"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient8226"
        id="linearGradient8232"
        x1="8.0456591"
        y1="21.348515"
        x2="10.244157"
        y2="29.553419"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3799"
+       id="linearGradient3805"
+       x1="10.788363"
+       y1="11.27402"
+       x2="11.933635"
+       y2="22.464977"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -226,7 +248,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="16.620563"
-     inkscape:cx="6.4773425"
+     inkscape:cx="12.873447"
      inkscape:cy="5.5274823"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -288,6 +310,6 @@
        inkscape:connector-curvature="0"
        id="path3806"
        d="M 11,11 1,21 2.5296074,22.338406 11,14 19.5,22.378 21,21 z"
-       style="fill:url(#linearGradient8224);fill-opacity:1;fill-rule:evenodd;stroke:#6f1b1b;stroke-width:1.00019455000000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       style="fill:url(#linearGradient3805);fill-opacity:1.0;fill-rule:evenodd;stroke:#2e3436;stroke-width:1.00019455000000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   </g>
 </svg>
