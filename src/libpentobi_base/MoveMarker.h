@@ -47,7 +47,8 @@ public:
     bool test_and_set(Move mv);
 
 private:
-    static const size_t array_size = Move::range / CHAR_BIT;
+    static const size_t array_size =
+        Move::range / CHAR_BIT + (Move::range % CHAR_BIT == 0 ? 0 : 1);
 
     unsigned char m_array[array_size];
 
