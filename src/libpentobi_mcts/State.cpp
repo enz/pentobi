@@ -254,7 +254,7 @@ inline void State::add_moves(Point p, Color c)
 inline void State::add_moves(Point p, Color c, Piece piece,
                              unsigned int adj_status)
 {
-    ArrayList<Move, Move::range>& moves = m_moves[c];
+    MoveList& moves = m_moves[c];
     const Board::LocalMovesListRange& move_candidates =
         m_bd.get_moves(piece, p, adj_status);
     for (auto i = move_candidates.first; i != move_candidates.second; ++i)
@@ -311,7 +311,7 @@ void State::compute_features()
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
     BoardType board_type = m_bd.get_board_type();
-    const ArrayList<Move, Move::range>& moves = m_moves[to_play];
+    const MoveList& moves = m_moves[to_play];
     const Geometry& geometry = m_bd.get_geometry();
     Grid<Float> point_value(geometry, 1);
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
@@ -521,7 +521,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     }
     else
     {
-        const ArrayList<Move, Move::range>* moves;
+        const MoveList* moves;
         unsigned int max_playable_piece_size;
         if (pure_random_playout || m_local_moves.empty())
         {
@@ -568,7 +568,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     init_move_list_without_local(to_play);
     init_symmetry_info();
     m_extended_update = true;
-    const ArrayList<Move, Move::range>& moves = m_moves[to_play];
+    const MoveList& moves = m_moves[to_play];
     if (moves.empty())
     {
         expander.add_child(Move::pass());
@@ -689,7 +689,7 @@ void State::init_move_list_with_local(Color c)
     m_max_local_value = 1;
     m_max_playable_piece_size = 0;
     m_max_playable_piece_size_local = 0;
-    ArrayList<Move, Move::range>& moves = m_moves[c];
+    MoveList& moves = m_moves[c];
     moves.clear();
     if (m_bd.is_first_piece(c))
     {
@@ -732,7 +732,7 @@ void State::init_move_list_without_local(Color c)
 {
     m_last_move[c] = Move::null();
     m_is_piece_considered[c] = &get_pieces_considered();
-    ArrayList<Move, Move::range>& moves = m_moves[c];
+    MoveList& moves = m_moves[c];
     moves.clear();
     if (m_bd.is_first_piece(c))
     {
@@ -1004,7 +1004,7 @@ void State::update_move_list(Color c)
     m_max_playable_piece_size = 0;
     m_max_playable_piece_size_local = 0;
     Move last_mv = m_last_move[c];
-    ArrayList<Move, Move::range>& moves = m_moves[c];
+    MoveList& moves = m_moves[c];
 
     // Find old moves that are still legal
     Piece last_piece = Piece::null();

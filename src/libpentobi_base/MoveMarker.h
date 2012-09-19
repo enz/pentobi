@@ -7,13 +7,12 @@
 
 #include <climits>
 #include <cstring>
-#include "Move.h"
-#include "libboardgame_util/ArrayList.h"
+#include <vector>
+#include "MoveList.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
@@ -31,15 +30,11 @@ public:
 
     void clear(const vector<Move>& moves);
 
-    template<unsigned int M>
-    void clear(const ArrayList<Move, M>& moves);
-
     /** Clear all moves from a list optimized for the case when we know
         that the list contains all marked moves in the marker.
         This function assumes that all moves not in the list are not marked
         and is faster than clear(ArrayList). */
-    template<unsigned int M>
-    void clear_all_set_known(const ArrayList<Move, M>& moves);
+    void clear_all_set_known(const MoveList& moves);
 
     void set(Move mv);
 
@@ -89,17 +84,7 @@ inline void MoveMarker::clear(const vector<Move>& moves)
         clear(*i);
 }
 
-template<unsigned int M>
-inline void MoveMarker::clear(const ArrayList<Move, M>& moves)
-{
-    auto begin = moves.begin();
-    auto end = moves.end();
-    for (auto i = begin; i != end; ++i)
-        clear(*i);
-}
-
-template<unsigned int M>
-inline void MoveMarker::clear_all_set_known(const ArrayList<Move, M>& moves)
+inline void MoveMarker::clear_all_set_known(const MoveList& moves)
 {
     auto begin = moves.begin();
     auto end = moves.end();

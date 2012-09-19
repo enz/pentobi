@@ -96,7 +96,7 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
             if (is_attach_point(*i, c) && ! m_forbidden[c][*i])
                 gen_moves(c, *i, get_adj_status_index(*i, c), m_marker, moves);
     }
-    m_marker.clear(moves);
+    m_marker.clear_all_set_known(moves);
 }
 
 void Board::gen_moves(Color c, Point p, MoveMarker& marker,

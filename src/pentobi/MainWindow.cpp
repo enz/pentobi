@@ -75,6 +75,7 @@ using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
+using libpentobi_base::MoveList;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Tree;
 using libpentobi_base::TreeWriter;
@@ -251,7 +252,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
       m_helpWindow(0),
       m_ratingDialog(0),
       m_analyzeGameWindow(0),
-      m_legalMoves(new ArrayList<Move, Move::range>())
+      m_legalMoves(new MoveList())
 {
     QSettings settings;
     m_level = settings.value("level", 4).toInt();

@@ -35,6 +35,7 @@ using libpentobi_base::Variant;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
+using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::MovePoints;
 using libpentobi_base::Piece;
@@ -184,7 +185,7 @@ private:
     /** Incrementally updated lists of legal moves for both colors.
         Only the move list for the color to play van be used in any given
         position, the other color is not updated immediately after a move. */
-    ColorMap<ArrayList<Move, Move::range>> m_moves;
+    ColorMap<MoveList> m_moves;
 
     ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
@@ -202,7 +203,7 @@ private:
     /** Moves that are a local response to the last move.
         These moves occupy at least one of the corner points of the last
         piece played. */
-    ArrayList<Move, Move::range> m_local_moves;
+    MoveList m_local_moves;
 
     /** Local variable during initializing and updating of move lists.
         Reused for efficiency. */

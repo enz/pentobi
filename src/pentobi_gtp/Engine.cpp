@@ -26,6 +26,7 @@ using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
+using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
@@ -98,7 +99,7 @@ void Engine::cmd_moves_stat(const Arguments& args, Response& response)
     Color c = get_color_arg(args);
     const Board& bd = get_board();
     Grid<unsigned> nu_moves_grid(bd.get_geometry(), 0);
-    ArrayList<Move,Move::range> moves;
+    MoveList moves;
     MoveMarker marker;
     BOOST_FOREACH(Point p, bd.get_attach_points(c))
     {
