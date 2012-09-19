@@ -24,13 +24,21 @@ struct MoveInfo
 
 //-----------------------------------------------------------------------------
 
+typedef ArrayList<Point,PieceInfo::max_adj,unsigned short> AdjPoints;
+
+//-----------------------------------------------------------------------------
+
+typedef ArrayList<Point,PieceInfo::max_attach,unsigned short> AttachPoints;
+
+//-----------------------------------------------------------------------------
+
 /** Less frequently accessed move info.
     Stored separately from MoveInfo to improve CPU cache performance. */
 struct MoveInfoExt
 {
-    ArrayList<Point,PieceInfo::max_adj> adj_points;
+    AdjPoints adj_points;
 
-    ArrayList<Point,PieceInfo::max_attach> attach_points;
+    AttachPoints attach_points;
 
     bool breaks_symmetry;
 

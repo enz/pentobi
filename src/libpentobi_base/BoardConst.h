@@ -119,7 +119,7 @@ public:
 
     Move from_string(const string& s) const;
 
-    unsigned int get_max_attach_points(Piece piece) const;
+    unsigned short get_max_attach_points(Piece piece) const;
 
 private:
     typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
@@ -172,7 +172,7 @@ private:
                                                                   m_adj_status;
 
 
-    PieceMap<unsigned int> m_max_attach_points;
+    PieceMap<unsigned short> m_max_attach_points;
 
     BoardConst(BoardType board_type, Variant variant);
 
@@ -206,7 +206,7 @@ inline const Geometry& BoardConst::get_geometry() const
     return m_geometry;
 }
 
-inline unsigned int BoardConst::get_max_attach_points(Piece piece) const
+inline unsigned short BoardConst::get_max_attach_points(Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() <= m_nu_pieces);
     return m_max_attach_points[piece];

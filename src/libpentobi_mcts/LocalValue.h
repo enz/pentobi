@@ -15,6 +15,7 @@ namespace libpentobi_mcts {
 using libboardgame_base::ArrayList;
 using libboardgame_util::log;
 using libpentobi_base::AdjIterator;
+using libpentobi_base::AttachPoints;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
@@ -135,7 +136,7 @@ inline void LocalValue::init(const Board& bd)
         Move mv = move.move;
         if (mv.is_pass())
             continue;
-        const ArrayList<Point,PieceInfo::max_attach>& attach_points
+        const AttachPoints& attach_points
             = bd.get_move_info_ext(mv).attach_points;
         auto j = attach_points.begin();
         auto end = attach_points.end();
