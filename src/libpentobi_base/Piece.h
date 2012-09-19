@@ -49,7 +49,7 @@ private:
 
     static const unsigned short value_uninitialized = range;
 
-    unsigned int m_i;
+    unsigned short m_i;
 
     bool is_initialized() const;
 };

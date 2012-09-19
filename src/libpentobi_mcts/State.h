@@ -166,9 +166,9 @@ private:
 
     unsigned int m_max_local_value;
 
-    unsigned int m_max_playable_piece_size;
+    unsigned short m_max_playable_piece_size;
 
-    unsigned int m_max_playable_piece_size_local;
+    unsigned short m_max_playable_piece_size_local;
 
     /** Maximum of Features::heuristic for all moves. */
     Float m_max_heuristic;
