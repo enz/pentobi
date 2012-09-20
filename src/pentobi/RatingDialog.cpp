@@ -10,6 +10,7 @@
 
 #include <QDialogButtonBox>
 #include <QFormLayout>
+#include <QFrame>
 #include <QLabel>
 #include <QMessageBox>
 #include <QPainter>
@@ -50,7 +51,9 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     formLayout->addRow(tr("Number rated games:"), m_labelNuGames);
     m_labelBestRating = new QLabel();
     formLayout->addRow(tr("Best previous rating:"), m_labelBestRating);
-    layout->addSpacing(layout->spacing());
+    QFrame* separator = new QFrame();
+    separator->setFrameStyle(QFrame::HLine | QFrame::Plain);
+    layout->addWidget(separator);
     layout->addWidget(new QLabel(tr("Recent development:")));
     m_graph = new RatingGraph();
     layout->addWidget(m_graph, 1);
