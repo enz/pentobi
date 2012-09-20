@@ -80,12 +80,12 @@ void RatingDialog::buttonClicked(QAbstractButton* button)
 {
     if (button != static_cast<QAbstractButton*>(m_clearButton))
         return;
-    QMessageBox msgBox(QMessageBox::Question, tr("Pentobi"),
+    QMessageBox msgBox(QMessageBox::Warning, tr("Pentobi"),
                        tr("Clear rating and delete rating history?"),
                        QMessageBox::Cancel, this);
     QPushButton* clearButton =
         msgBox.addButton(tr("Clear rating"), QMessageBox::DestructiveRole);
-    msgBox.setDefaultButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(clearButton);
     msgBox.exec();
     if (msgBox.clickedButton() != clearButton)
         return;

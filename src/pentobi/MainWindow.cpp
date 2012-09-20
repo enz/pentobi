@@ -2147,7 +2147,6 @@ void MainWindow::initQuestion(QMessageBox& msgBox, const QString& text,
     int minWidth = 30 * metrics.averageCharWidth();
     while (metrics.width(expandedText) < minWidth)
         expandedText.append(" ");
-    msgBox.setIcon(QMessageBox::Question);
     msgBox.setText(expandedText);
     msgBox.setInformativeText(infoText);
 }
@@ -3109,7 +3108,7 @@ void MainWindow::showError(const QString& text, const QString& infoText,
 void MainWindow::showInfo(const QString& text, const QString& infoText,
                           const QString& detailText)
 {
-    showMessage(QMessageBox::Information, text, infoText, detailText);
+    showMessage(QMessageBox::NoIcon, text, infoText, detailText);
 }
 
 void MainWindow::showInvalidFile(QString file, const Exception& e)
