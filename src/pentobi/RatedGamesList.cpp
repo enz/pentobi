@@ -89,12 +89,12 @@ void RatedGamesList::updateContent(Variant variant,
     header->setResizeMode(2, QHeaderView::ResizeToContents);
     header->setResizeMode(3, QHeaderView::ResizeToContents);
     header->setResizeMode(4, QHeaderView::Stretch);
-    int nuRows = history.get().size();
+    int nuRows = history.getGameInfos().size();
     m_model->setRowCount(nuRows);
     setSortingEnabled(false);
     for (int i = 0; i < nuRows; ++i)
     {
-        const RatingHistory::GameInfo& info = history.get()[i];
+        const RatingHistory::GameInfo& info = history.getGameInfos()[i];
         QStandardItem* number = new QStandardItem();
         number->setData(info.number, Qt::DisplayRole);
         QStandardItem* color = new QStandardItem();

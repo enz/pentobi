@@ -289,6 +289,8 @@ private:
         generation. */
     int m_level;
 
+    unique_ptr<RatingHistory> m_history;
+
     QToolBar* m_toolBar;
 
     GuiBoard* m_guiBoard;
@@ -636,7 +638,7 @@ private:
 
     void updateMoveAnnotationActions();
 
-    void updateRatingDialog();
+    void loadHistory();
 
     void updateRecentFiles();
 
@@ -678,8 +680,6 @@ private slots:
     void interestingMove(bool checked);
 
     void noMoveAnnotation(bool checked);
-
-    void openRatedGame(Variant variant, unsigned int n);
 
     void openRecentFile();
 

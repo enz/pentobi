@@ -2,7 +2,8 @@ Current development version
 ===========================
 
 * New menu item "Beginning of Branch"
-* The rating dialog now also shows the best previous rating
+* The rating dialog now also shows the best previous rating and has
+  a button to reset the rating
 * A thumbnail plugin for KDE can be built by using the CMake option
   -DPENTOBI_BUILD_KDE_THUMBNAILER=ON
 * The source code uses more C++11 features and now requires at least

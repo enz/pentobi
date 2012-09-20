@@ -10,12 +10,14 @@
 #include <boost/filesystem.hpp>
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Color.h"
+#include "libpentobi_base/Tree.h"
 #include "libpentobi_base/Variant.h"
 
 using namespace std;
 using boost::filesystem::path;
 using libboardgame_base::Rating;
 using libpentobi_base::Color;
+using libpentobi_base::Tree;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -24,7 +26,7 @@ using libpentobi_base::Variant;
 class RatingHistory
 {
 public:
-    /** Maximum number of games to remember ing the history. */
+    /** Maximum number of games to remember in the history. */
     static const unsigned int maxGames = 100;
 
     struct GameInfo
@@ -52,18 +54,48 @@ public:
         Rating rating;
     };
 
-    RatingHistory(Variant variant, const path& datadir);
+    RatingHistory(Variant variant);
+
+    /** Initialize rating to a given a-priori value. */
+    void init(Rating rating);
+
+    /** Get level and user color for next rated games. */
+    void getNextRatedGameSettings(int maxLevel, int& level, Color& userColor);
 
     /** Append a new game. */
-    void add(unsigned int number, Color color, float result,
-             const string& date, int level, Rating rating);
+    void addGame(float score, Rating opponentRating, unsigned int nuOpponents,
+                 Color color, float result, const string& date, int level,
+                 const Tree& tree);
+
+    /** Get file name of the n'th rated game. */
+    path getFile(unsigned int n) const;
+
+    void load(Variant variant);
 
     /** Saves the history. */
     void save() const;
 
-    const vector<GameInfo>& get() const;
+    const vector<GameInfo>& getGameInfos() const;
+
+    Variant getVariant() const;
+
+    const Rating& getRating() const;
+
+    const Rating& getBestRating() const;
+
+    unsigned int getNuGames() const;
+
+    void clear();
 
 private:
+    Variant m_variant;
+
+    Rating m_rating;
+
+    unsigned int m_nuGames;
+
+    Rating m_bestRating;
+
     path m_dir;
 
     path m_file;
@@ -71,9 +103,30 @@ private:
     vector<GameInfo> m_games;
 };
 
-inline const vector<RatingHistory::GameInfo>& RatingHistory::get() const
+inline const vector<RatingHistory::GameInfo>& RatingHistory::getGameInfos()
+    const
 {
     return m_games;
+}
+
+inline unsigned int RatingHistory::getNuGames() const
+{
+    return m_nuGames;
+}
+
+inline const Rating& RatingHistory::getBestRating() const
+{
+    return m_bestRating;
+}
+
+inline const Rating& RatingHistory::getRating() const
+{
+    return m_rating;
+}
+
+inline Variant RatingHistory::getVariant() const
+{
+    return m_variant;
 }
 
 //-----------------------------------------------------------------------------

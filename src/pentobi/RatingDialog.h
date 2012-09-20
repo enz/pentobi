@@ -10,6 +10,7 @@
 #include "RatingGraph.h"
 #include "libpentobi_base/Variant.h"
 
+class QAbstractButton;
 class QLabel;
 
 using namespace std;
@@ -23,15 +24,20 @@ class RatingDialog
     Q_OBJECT
 
 public:
-    RatingDialog(QWidget* parent);
+    /** Constructor.
+        @param parent
+        @param history (@ref libboardgame_doc_storesref) */
+    RatingDialog(QWidget* parent, RatingHistory& history);
 
-    void updateContent(Variant variant, const RatingHistory& history);
+    void updateContent();
 
 signals:
-    void openRatedGame(Variant variant, unsigned int n);
+    void open(const QString& file);
 
 private:
-    Variant m_variant;
+    RatingHistory& m_history;
+
+    QPushButton* m_clearButton;
 
     QLabel* m_labelVariant;
 
@@ -45,10 +51,10 @@ private:
 
     RatedGamesList* m_list;
 
-    void updateLabels(Rating rating, unsigned int nuGames, Rating bestRating);
-
 private slots:
     void activateGame(unsigned int n);
+
+    void buttonClicked(QAbstractButton*);
 };
 
 //-----------------------------------------------------------------------------

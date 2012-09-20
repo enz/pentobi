@@ -96,49 +96,10 @@ QToolButton* createOBoxToolButton(QAction* action)
     return button;
 }
 
-QString getDataDir()
-{
-    QString home = QDir::toNativeSeparators(QDir::home().path());
-    QChar sep = QDir::separator();
-    QString dir;
-#ifdef Q_WS_WIN
-    dir = home + sep + "AppData" + sep + "Roaming";
-    if (! QDir(dir).exists("Pentobi") && ! QDir(dir).mkpath("Pentobi"))
-        dir = home;
-    else
-        dir = dir + sep + "Pentobi";
-#else
-    const char* xdgDataHome = getenv("XDG_DATA_HOME");
-    if (xdgDataHome != 0)
-        dir = xdgDataHome;
-    else
-        dir = home + sep + ".local" + sep + "share";
-    if (! QDir(dir).exists("pentobi") && ! QDir(dir).mkpath("pentobi"))
-        dir = home;
-    else
-        dir = dir + sep + "pentobi";
-#endif
-    return dir;
-}
-
-path getRatedGamesDir(Variant variant)
-{
-    path dir = getDataDir().toLocal8Bit().constData();
-    dir = dir / "rated_games" / to_string_id(variant);
-    return dir;
-}
-
-path getRatedGameFile(unsigned int n, Variant variant)
-{
-    path dir = getRatedGamesDir(variant);
-    string file = str(format("%1%.blksgf") % n);
-    return dir / file;
-}
-
 /** Return auto-save file name as a native path name. */
 QString getAutoSaveFile()
 {
-    return getDataDir() + QDir::separator() + "autosave.blksgf";
+    return Util::getDataDir() + QDir::separator() + "autosave.blksgf";
 }
 
 /** Determine the current color at the current node in the game.
@@ -263,6 +224,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     if (! parse_variant_id(variantString.toStdString(), variant))
         variant = variant_classic;
     m_game.reset(new Game(variant));
+    m_history.reset(new RatingHistory(variant));
     createActions();
     setCentralWidget(createCentralWidget());
     m_moveNumber = new QLabel();
@@ -1832,12 +1794,7 @@ void MainWindow::gameOver()
     QString detailText;
     if (m_isRated && ! m_isRatedGameFinished)
     {
-        Rating oldRating;
-        Rating bestRating;
-        unsigned int nuGames;
-        Util::getRating(variant, oldRating, nuGames, bestRating);
-        RatingHistory history(variant, getRatedGamesDir(variant));
-        Util::fixRating(history, bestRating);
+        int oldRating = m_history->getRating().toInt();
         unsigned int place;
         bool isPlaceShared;
         bd.get_place(m_ratedGameColor, place, isPlaceShared);
@@ -1850,32 +1807,22 @@ void MainWindow::gameOver()
             gameResult = 0;
         unsigned int nuOpp = get_nu_players(variant) - 1;
         Rating oppRating = m_player->get_rating(variant);
-        Util::updateRating(variant, gameResult, oppRating, nuOpp);
-        Rating newRating;
-        Util::getRating(variant, newRating, nuGames, bestRating);
-        history.add(nuGames, m_ratedGameColor, gameResult,
-                    Tree::get_date_today(), m_level, newRating);
-        history.save();
-        {
-            writeGame(getRatedGameFile(nuGames, variant));
-            // Only save the last RatingHistory::maxGames games
-            if (nuGames > RatingHistory::maxGames)
-                remove(getRatedGameFile(nuGames - RatingHistory::maxGames,
-                                        variant));
-        }
-        updateRatingDialog();
-        int oldRatingInt = oldRating.toInt();
-        int newRatingInt = newRating.toInt();
-        if (newRatingInt > oldRatingInt)
+        m_history->addGame(gameResult, oppRating, nuOpp, m_ratedGameColor,
+                           gameResult, Tree::get_date_today(), m_level,
+                           m_game->get_tree());
+        if (m_ratingDialog != 0)
+            m_ratingDialog->updateContent();
+        int newRating = m_history->getRating().toInt();
+        if (newRating > oldRating)
             detailText =
                 tr("Your rating has increased from %1 to %2.")
-                .arg(oldRatingInt).arg(newRatingInt);
-        else if (newRatingInt == oldRatingInt)
-            detailText = tr("Your rating stays at %1.").arg(oldRatingInt);
+                .arg(oldRating).arg(newRating);
+        else if (newRating == oldRating)
+            detailText = tr("Your rating stays at %1.").arg(oldRating);
         else
             detailText =
                 tr("Your rating has decreased from %1 to %2.")
-                .arg(oldRatingInt).arg(newRatingInt);
+                .arg(oldRating).arg(newRating);
         m_isRatedGameFinished = true;
     }
     showInfo(info, detailText);
@@ -2263,6 +2210,16 @@ void MainWindow::leaveSetupMode()
     setupMode(false);
 }
 
+void MainWindow::loadHistory()
+{
+    Variant variant = m_game->get_variant();
+    if (m_history->getVariant() == variant)
+        return;
+    m_history->load(variant);
+    if (m_ratingDialog != 0)
+        m_ratingDialog->updateContent();
+}
+
 void MainWindow::makeMainVariation()
 {
     m_game->make_main_variation();
@@ -2343,27 +2300,21 @@ void MainWindow::newRatedGame()
     if (! checkSave())
         return;
     cancelThread();
-    Variant variant = getVariant();
-    Rating rating;
-    Rating bestRating;
-    unsigned int nuGames;
-    Util::getRating(variant, rating, nuGames, bestRating);
-    if (nuGames == 0)
+    if (m_history->getNuGames() == 0)
     {
         InitialRatingDialog dialog(this);
         if (dialog.exec() != QDialog::Accepted)
             return;
-        rating = Rating(dialog.getRating());
-        Util::initRating(variant, rating);
+        m_history->init(Rating(dialog.getRating()));
     }
     int level;
-    Util::getNextRatedGameSettings(variant, maxLevel, level, m_ratedGameColor);
+    m_history->getNextRatedGameSettings(maxLevel, level, m_ratedGameColor);
     QMessageBox msgBox(this);
     initQuestion(msgBox, tr("Start new rated game?"),
                  "<html>" +
                  tr("In the next game, you will play %1 against"
                     " Pentobi level&nbsp;%2.")
-                 .arg(getPlayerString(variant, m_ratedGameColor))
+                 .arg(getPlayerString(getVariant(), m_ratedGameColor))
                  .arg(level));
     QPushButton* startGameButton =
         msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
@@ -2467,7 +2418,6 @@ void MainWindow::open(const QString& file, bool isTemporary)
         m_analyzeGameWindow = 0;
     }
     setRated(false);
-    Variant oldVariant = getVariant();
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
@@ -2489,15 +2439,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     m_lastComputerMovesBegin = 0;
     initVariantActions();
     updateWindow(true);
-    if (getVariant() != oldVariant)
-        updateRatingDialog();
-}
-
-void MainWindow::openRatedGame(Variant variant, unsigned int n)
-{
-     if (! checkSave())
-         return;
-     open(getRatedGameFile(n, variant).string().c_str());
+    loadHistory();
 }
 
 void MainWindow::openRecentFile()
@@ -2956,7 +2898,7 @@ void MainWindow::setVariant(Variant variant)
     m_game->init(variant);
     initPieceSelectors();
     newGame();
-    updateRatingDialog();
+    loadHistory();
 }
 
 void MainWindow::setFile(const QString& file)
@@ -3200,13 +3142,11 @@ void MainWindow::showRating()
 {
     if (m_ratingDialog == 0)
     {
-        m_ratingDialog = new RatingDialog(this);
-        connect(m_ratingDialog,
-                SIGNAL(openRatedGame(Variant, unsigned int)),
-                this,
-                SLOT(openRatedGame(Variant, unsigned int)));
+        m_ratingDialog = new RatingDialog(this, *m_history);
+        connect(m_ratingDialog, SIGNAL(open(const QString&)),
+                this, SLOT(open(const QString&)));
     }
-    updateRatingDialog();
+    loadHistory();
     m_ratingDialog->show();
 }
 
@@ -3401,15 +3341,6 @@ void MainWindow::updateMoveNumber()
                                  .arg(move).arg(totalMoves)
                                  .arg(variation.c_str()));
     }
-}
-
-void MainWindow::updateRatingDialog()
-{
-    if (m_ratingDialog == 0)
-        return;
-    Variant variant = getVariant();
-    RatingHistory history(variant, getRatedGamesDir(variant));
-    m_ratingDialog->updateContent(variant, history);
 }
 
 void MainWindow::updateRecentFiles()

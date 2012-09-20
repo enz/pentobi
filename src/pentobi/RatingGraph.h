@@ -18,7 +18,7 @@ class RatingGraph
 public:
     RatingGraph(QWidget* parent = 0);
 
-    void setHistory(const RatingHistory& history);
+    void updateContent(const RatingHistory& history);
 
     QSize sizeHint() const;
 

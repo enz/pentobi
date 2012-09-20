@@ -11,8 +11,10 @@
 #include <QDialogButtonBox>
 #include <QFormLayout>
 #include <QLabel>
+#include <QMessageBox>
 #include <QPainter>
 #include <QPen>
+#include <QPushButton>
 #include <QSettings>
 #include <QVBoxLayout>
 #include "Util.h"
@@ -28,9 +30,9 @@ using libpentobi_base::variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
-RatingDialog::RatingDialog(QWidget* parent)
+RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     : QDialog(parent),
-      m_variant(variant_classic)
+      m_history(history)
 {
     setWindowTitle(tr("Rating"));
     // Disable '?' button in title bar on Windows, we don't have
@@ -56,40 +58,49 @@ RatingDialog::RatingDialog(QWidget* parent)
     layout->addWidget(m_list, 1);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
-    updateLabels(Rating(0), 0, Rating(0));
+    m_clearButton =
+        buttonBox->addButton(tr("Clear"), QDialogButtonBox::ActionRole);
+    buttonBox->setFocus();
+    updateContent();
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, SIGNAL(clicked(QAbstractButton*)),
+            this, SLOT(buttonClicked(QAbstractButton*)));
     connect(m_list, SIGNAL(openRatedGame(unsigned int)),
             this, SLOT(activateGame(unsigned int)));
-    buttonBox->setFocus();
 }
 
 void RatingDialog::activateGame(unsigned int n)
 {
-    emit openRatedGame(m_variant, n);
+    emit open(m_history.getFile(n).c_str());
 }
 
-void RatingDialog::updateContent(Variant variant,
-                                 const RatingHistory& history)
+void RatingDialog::buttonClicked(QAbstractButton* button)
 {
-    m_variant = variant;
-    QSettings settings;
-    Rating rating;
-    unsigned int nuGames;
-    Rating bestRating;
-    Util::getRating(variant, rating, nuGames, bestRating);
-    Util::fixRating(history, bestRating);
-    updateLabels(rating, nuGames, bestRating);
-    m_graph->setHistory(history);
-    m_list->updateContent(variant, history);
+    if (button != static_cast<QAbstractButton*>(m_clearButton))
+        return;
+    QMessageBox msgBox(QMessageBox::Question, tr("Pentobi"),
+                       tr("Clear rating and delete rating history?"),
+                       QMessageBox::Cancel, this);
+    QPushButton* clearButton =
+        msgBox.addButton(tr("Clear rating"), QMessageBox::DestructiveRole);
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+    msgBox.exec();
+    if (msgBox.clickedButton() != clearButton)
+        return;
+    m_history.clear();
+    updateContent();
 }
 
-void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
-                                Rating bestRating)
+void RatingDialog::updateContent()
 {
+    Variant variant = m_history.getVariant();
+    unsigned int nuGames = m_history.getNuGames();
+    Rating rating = m_history.getRating();
+    Rating bestRating = m_history.getBestRating();
     if (nuGames == 0)
         rating = Rating(0);
     QString variantStr;
-    switch (m_variant)
+    switch (variant)
     {
     case variant_classic:
         variantStr = tr("Classic");
@@ -125,6 +136,9 @@ void RatingDialog::updateLabels(Rating rating, unsigned int nuGames,
         m_labelRating->setText(QString("<b>%1").arg(rating.toInt()));
         m_labelBestRating->setText(QString("%1").arg(bestRating.toInt()));
     }
+    m_graph->updateContent(m_history);
+    m_list->updateContent(variant, m_history);
+    m_clearButton->setEnabled(nuGames > 0);
 }
 
 //-----------------------------------------------------------------------------

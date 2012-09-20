@@ -81,10 +81,10 @@ QSize RatingGraph::sizeHint() const
     return QSize(480, 120);
 }
 
-void RatingGraph::setHistory(const RatingHistory& history)
+void RatingGraph::updateContent(const RatingHistory& history)
 {
     m_values.clear();
-    const vector<RatingHistory::GameInfo>& games = history.get();
+    const vector<RatingHistory::GameInfo>& games = history.getGameInfos();
     if (games.empty())
     {
         update();
