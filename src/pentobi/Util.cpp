@@ -8,7 +8,9 @@
 
 #include "Util.h"
 
+#include <QCoreApplication>
 #include <QCryptographicHash>
+#include <QDialog>
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
@@ -63,6 +65,16 @@ void removeThumbnail(const QString& file)
     QString home = QDir::home().path();
     QFile::remove(home + "/.thumbnails/normal/" + md5 + ".png");
     QFile::remove(home + "/.thumbnails/large/" + md5 + ".png");
+}
+
+void setMsgTitle(QDialog& dialog)
+{
+    // On many platforms, message boxes should have no title but using
+    // an emtpy string causes Qt to use the lower-case application name (tested
+    // on Linux with Qt 4.8). The second best solution is the set the title
+    // to "Pentobi". To avoid that this becomes "Pentobi <2>" on KDE if the
+    // main window title is already "Pentobi", we append a space character.
+    dialog.setWindowTitle(qApp->translate("Util", "Pentobi") + " ");
 }
 
 } // namespace Util

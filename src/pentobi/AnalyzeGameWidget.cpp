@@ -12,6 +12,7 @@
 #include <QMouseEvent>
 #include <QProgressDialog>
 #include <QtConcurrentRun>
+#include "Util.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
@@ -203,7 +204,7 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
                                      & ~Qt::WindowContextHelpButtonHint);
     m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
                                           this));
-    m_progressDialog->setWindowTitle(tr("Pentobi"));
+    Util::setMsgTitle(*m_progressDialog);
     m_progressDialog->setMinimumDuration(0);
     connect(m_progressDialog, SIGNAL(canceled()), this, SLOT(cancel()));
     m_progressDialog->show();

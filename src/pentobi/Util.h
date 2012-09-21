@@ -10,6 +10,7 @@
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Variant.h"
 
+class QDialog;
 class QString;
 
 using libboardgame_base::Rating;
@@ -29,6 +30,9 @@ namespace Util
 void removeThumbnail(const QString& file);
 
 QString getDataDir();
+
+/** Set a default window title for message boxes and similar small dialogs. */
+void setMsgTitle(QDialog& dialog);
 
 }
 
