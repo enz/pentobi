@@ -43,6 +43,7 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     setLayout(layout);
     QFormLayout* formLayout = new QFormLayout();
     layout->addLayout(formLayout);
+    formLayout->setLabelAlignment(Qt::AlignLeft);
     m_labelRating = new QLabel();
     formLayout->addRow(tr("Your rating:"), m_labelRating);
     m_labelVariant = new QLabel();
