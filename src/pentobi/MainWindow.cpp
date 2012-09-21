@@ -2138,7 +2138,7 @@ void MainWindow::initPieceSelectors()
 void MainWindow::initQuestion(QMessageBox& msgBox, const QString& text,
                               const QString& infoText)
 {
-    Util::setMsgTitle(msgBox);
+    Util::setNoTitle(msgBox);
     // Workaround to avoid very small widths if the main text is short, which
     // causes ugly word wrapping with single-word lines in the informative text.
     // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
@@ -3129,7 +3129,7 @@ void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
     while (metrics.width(expandedText) < minWidth)
         expandedText.append(" ");
     QMessageBox msgBox(this);
-    Util::setMsgTitle(msgBox);
+    Util::setNoTitle(msgBox);
     msgBox.setIcon(icon);
     msgBox.setText(expandedText);
     msgBox.setInformativeText(infoText);

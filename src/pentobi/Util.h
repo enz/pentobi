@@ -31,8 +31,8 @@ void removeThumbnail(const QString& file);
 
 QString getDataDir();
 
-/** Set a default window title for message boxes and similar small dialogs. */
-void setMsgTitle(QDialog& dialog);
+/** Set an empty window title for message boxes and similar small dialogs. */
+void setNoTitle(QDialog& dialog);
 
 }
 

@@ -204,7 +204,7 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
                                      & ~Qt::WindowContextHelpButtonHint);
     m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
                                           this));
-    Util::setMsgTitle(*m_progressDialog);
+    Util::setNoTitle(*m_progressDialog);
     m_progressDialog->setMinimumDuration(0);
     connect(m_progressDialog, SIGNAL(canceled()), this, SLOT(cancel()));
     m_progressDialog->show();
