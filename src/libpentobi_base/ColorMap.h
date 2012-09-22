@@ -61,7 +61,7 @@ inline const T& ColorMap<T>::operator[](Color c) const
 template<typename T>
 void ColorMap<T>::fill(const T& val)
 {
-    for (unsigned int i = 0; i < Color::range; ++i)
+    for (unsigned i = 0; i < Color::range; ++i)
         m_a[i] = val;
 }
 

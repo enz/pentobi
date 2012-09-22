@@ -104,7 +104,7 @@ public:
     /** Play a move in the in-tree phase of the search. */
     void play(Move mv);
 
-    unsigned int get_to_play() const;
+    unsigned get_to_play() const;
 
     void start_search();
 
@@ -124,10 +124,10 @@ public:
     array<Float,4> evaluate_terminal();
 
     /** Get number of moves in the current simulation. */
-    unsigned int get_nu_moves() const;
+    unsigned get_nu_moves() const;
 
     /** Get move in the current simulation. */
-    PlayerMove<Move> get_move(unsigned int n) const;
+    PlayerMove<Move> get_move(unsigned n) const;
 
     /** Do not update RAVE values for n'th move of the current simulation. */
     bool skip_rave(Move mv) const;
@@ -140,7 +140,7 @@ private:
     struct MoveFeatures
     {
         /** Only used on Classic and Trigon boards. */
-        unsigned int dist_to_center;
+        unsigned dist_to_center;
 
         /** Does the move touch a piece of the same player? */
         bool connect;
@@ -161,11 +161,11 @@ private:
 
     bool m_has_connect_move;
 
-    unsigned int m_nu_moves_initial;
+    unsigned m_nu_moves_initial;
 
-    unsigned int m_nu_passes;
+    unsigned m_nu_passes;
 
-    unsigned int m_max_local_value;
+    unsigned m_max_local_value;
 
     unsigned short m_max_playable_piece_size;
 
@@ -174,7 +174,7 @@ private:
     /** Maximum of Features::heuristic for all moves. */
     Float m_max_heuristic;
 
-    unsigned int m_min_dist_to_center;
+    unsigned m_min_dist_to_center;
 
     const SharedConst& m_shared_const;
 
@@ -235,16 +235,16 @@ private:
     bool m_consider_all_pieces;
 
     /** Distance to center heuristic. */
-    Grid<unsigned int> m_dist_to_center;
+    Grid<unsigned> m_dist_to_center;
 
     /** Not implemented. */
     State& operator=(const State&);
 
     void add_moves(Point p, Color c);
 
-    void add_moves(Point p, Color c, Piece piece, unsigned int adj_status);
+    void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
 
-    void check_local(unsigned int local_value, Move mv, const MoveInfo& info);
+    void check_local(unsigned local_value, Move mv, const MoveInfo& info);
 
     void compute_features();
 
@@ -264,14 +264,14 @@ private:
     void play_nonpass(Move mv);
 
     bool check_move(Color c, const MovePoints& points,
-                    unsigned int& local_value);
+                    unsigned& local_value);
 
     void update_move_list(Color c);
 
     void update_symmetry_info(Move mv);
 };
 
-inline PlayerMove<Move> State::get_move(unsigned int n) const
+inline PlayerMove<Move> State::get_move(unsigned n) const
 {
     ColorMove mv = m_bd.get_move(m_nu_moves_initial + n);
     return PlayerMove<Move>(mv.color.to_int(), mv.move);
@@ -285,13 +285,13 @@ inline const MoveInfo& State::get_move_info(Move move) const
     return *(m_move_info_array + move.to_int());
 }
 
-inline unsigned int State::get_nu_moves() const
+inline unsigned State::get_nu_moves() const
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_moves() >= m_nu_moves_initial);
     return m_bd.get_nu_moves() - m_nu_moves_initial;
 }
 
-inline unsigned int State::get_to_play() const
+inline unsigned State::get_to_play() const
 {
     return m_bd.get_to_play().to_int();
 }

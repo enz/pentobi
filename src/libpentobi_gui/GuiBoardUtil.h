@@ -15,7 +15,7 @@ using libpentobi_base::Game;
 //-----------------------------------------------------------------------------
 
 void setMarkup(GuiBoard& guiBoard, const Game& game,
-               unsigned int markMovesBegin, unsigned int markMovesEnd,
+               unsigned markMovesBegin, unsigned markMovesEnd,
                bool markVariations);
 
 //-----------------------------------------------------------------------------

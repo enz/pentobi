@@ -59,7 +59,7 @@ void RatingGraph::paintEvent(QPaintEvent*)
         qreal dX = qreal(width() - maxLabelWidth) / RatingHistory::maxGames;
         qreal x = 0;
         QPainterPath path;
-        for (unsigned int i = 0; i < m_values.size(); ++i)
+        for (unsigned i = 0; i < m_values.size(); ++i)
         {
             qreal y =
                 topMargin

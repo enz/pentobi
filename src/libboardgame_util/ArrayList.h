@@ -27,7 +27,7 @@ using namespace std;
     @tparam T The type of the elements
     @tparam M The maximum number of elements
     @tparam I The integer type for the array size */
-template<typename T, unsigned int M, typename I = unsigned int>
+template<typename T, unsigned M, typename I = unsigned>
 class ArrayList
 {
 public:
@@ -114,33 +114,33 @@ private:
     T m_a[max_size];
 };
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline ArrayList<T,M,I>::ArrayList()
     : m_size(0)
 {
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline ArrayList<T,M,I>::ArrayList(const T& t)
 {
     assign(t);
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline T& ArrayList<T,M,I>::operator[](I i)
 {
     LIBBOARDGAME_ASSERT(i < m_size);
     return m_a[i];
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline const T& ArrayList<T,M,I>::operator[](I i) const
 {
     LIBBOARDGAME_ASSERT(i < m_size);
     return m_a[i];
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 bool ArrayList<T,M,I>::operator==(const ArrayList& array_list) const
 {
     if (m_size != array_list.m_size)
@@ -153,52 +153,52 @@ bool ArrayList<T,M,I>::operator==(const ArrayList& array_list) const
     return true;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 bool ArrayList<T,M,I>::operator!=(const ArrayList& array_list) const
 {
     return ! operator==(array_list);
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline void ArrayList<T,M,I>::assign(const T& t)
 {
     m_size = 1;
     m_a[0] = t;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline T& ArrayList<T,M,I>::back()
 {
     LIBBOARDGAME_ASSERT(m_size > 0);
     return m_a[m_size - 1];
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline const T& ArrayList<T,M,I>::back() const
 {
     LIBBOARDGAME_ASSERT(m_size > 0);
     return m_a[m_size - 1];
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline typename ArrayList<T,M,I>::iterator ArrayList<T,M,I>::begin()
 {
     return m_a;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline typename ArrayList<T,M,I>::const_iterator ArrayList<T,M,I>::begin() const
 {
     return m_a;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline void ArrayList<T,M,I>::clear()
 {
     m_size = 0;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 bool ArrayList<T,M,I>::contains(const T& t) const
 {
     for (const_iterator i = begin(); i != end(); ++i)
@@ -207,25 +207,25 @@ bool ArrayList<T,M,I>::contains(const T& t) const
     return false;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline bool ArrayList<T,M,I>::empty() const
 {
     return m_size == 0;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline typename ArrayList<T,M,I>::iterator ArrayList<T,M,I>::end()
 {
     return begin() + m_size;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline typename ArrayList<T,M,I>::const_iterator ArrayList<T,M,I>::end() const
 {
     return begin() + m_size;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 bool ArrayList<T,M,I>::include(const T& t)
 {
     iterator i;
@@ -238,7 +238,7 @@ bool ArrayList<T,M,I>::include(const T& t)
     return true;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 bool ArrayList<T,M,I>::is_permutation(const ArrayList& l) const
 {
     if (size() != l.size())
@@ -250,21 +250,21 @@ bool ArrayList<T,M,I>::is_permutation(const ArrayList& l) const
     return equal(sorted_this.begin(), sorted_this.end(), sorted_other.begin());
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline const T& ArrayList<T,M,I>::pop_back()
 {
     LIBBOARDGAME_ASSERT(m_size > 0);
     return m_a[--m_size];
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline void ArrayList<T,M,I>::push_back(const T& t)
 {
     LIBBOARDGAME_ASSERT(m_size < max_size);
     m_a[m_size++] = t;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline bool ArrayList<T,M,I>::remove(const T& t)
 {
     T* end = this->end();
@@ -280,7 +280,7 @@ inline bool ArrayList<T,M,I>::remove(const T& t)
     return false;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline bool ArrayList<T,M,I>::remove_fast(const T& t)
 {
     T* current = m_a + m_size - 1;
@@ -293,21 +293,21 @@ inline bool ArrayList<T,M,I>::remove_fast(const T& t)
     return false;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline void ArrayList<T,M,I>::remove_fast(iterator i)
 {
     --m_size;
     *i = *(m_a + m_size);
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline void ArrayList<T,M,I>::resize(I size)
 {
     LIBBOARDGAME_ASSERT(size <= max_size);
     m_size = size;
 }
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 inline I ArrayList<T,M,I>::size() const
 {
     return m_size;
@@ -315,7 +315,7 @@ inline I ArrayList<T,M,I>::size() const
 
 //-----------------------------------------------------------------------------
 
-template<typename T, unsigned int M, typename I>
+template<typename T, unsigned M, typename I>
 ostream& operator<<(ostream& out, const ArrayList<T,M,I>& l)
 {
     auto begin = l.begin();

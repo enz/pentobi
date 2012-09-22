@@ -25,14 +25,14 @@ public:
 
     /** Get the point type of the (0,0) coordinates.
         The transformation can only applied to this point type at (0,0). */
-    virtual unsigned int get_point_type() const = 0;
+    virtual unsigned get_point_type() const = 0;
 
     /** Get the new point type of the (0,0) coordinates.
         The transformation may change the point type of the (0,0) coordinates.
         For example, in the Blokus Trigon board, a reflection at the y axis
         changes the type from 0 (=downside triangle) to 1 (=upside triangle).
         @see Geometry::get_point_type() */
-    virtual unsigned int get_new_point_type() const = 0;
+    virtual unsigned get_new_point_type() const = 0;
 
     /** @tparam I An iterator of a container with elements of type CoordPoint */
     template<class I>
@@ -54,9 +54,9 @@ class TransfIdentity
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -67,9 +67,9 @@ class TransfRectRot90
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -80,9 +80,9 @@ class TransfRectRot180
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -93,9 +93,9 @@ class TransfRectRot270
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -106,9 +106,9 @@ class TransfRectRefl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -119,9 +119,9 @@ class TransfRectRot90Refl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -132,9 +132,9 @@ class TransfRectRot180Refl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -145,9 +145,9 @@ class TransfRectRot270Refl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -158,9 +158,9 @@ class TransfTrigonRot60
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -171,9 +171,9 @@ class TransfTrigonRot120
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -184,9 +184,9 @@ class TransfTrigonRot180
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -197,9 +197,9 @@ class TransfTrigonRot240
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -210,9 +210,9 @@ class TransfTrigonRot300
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -223,9 +223,9 @@ class TransfTrigonRefl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -236,9 +236,9 @@ class TransfTrigonReflRot60
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -249,9 +249,9 @@ class TransfTrigonReflRot120
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -262,9 +262,9 @@ class TransfTrigonReflRot180
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -275,9 +275,9 @@ class TransfTrigonReflRot240
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------
@@ -288,9 +288,9 @@ class TransfTrigonReflRot300
 public:
     CoordPoint get_transformed(const CoordPoint& p) const;
 
-    unsigned int get_point_type() const;
+    unsigned get_point_type() const;
 
-    unsigned int get_new_point_type() const;
+    unsigned get_new_point_type() const;
 };
 
 //-----------------------------------------------------------------------------

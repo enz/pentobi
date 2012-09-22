@@ -35,7 +35,7 @@ public:
     FLOAT get_mean() const;
 
     void write(ostream& out, bool fixed = false,
-               unsigned int precision = 6) const;
+               unsigned precision = 6) const;
 
 private:
     FLOAT m_count;
@@ -81,7 +81,7 @@ inline FLOAT StatisticsBase<FLOAT>::get_mean() const
 
 template<typename FLOAT>
 void StatisticsBase<FLOAT>::write(ostream& out, bool fixed,
-                                  unsigned int precision) const
+                                  unsigned precision) const
 {
     if (m_count > 0)
     {
@@ -115,7 +115,7 @@ public:
     FLOAT get_variance() const;
 
     void write(ostream& out, bool fixed = false,
-               unsigned int precision = 6) const;
+               unsigned precision = 6) const;
 
 private:
     StatisticsBase<FLOAT> m_statistics_base;
@@ -181,7 +181,7 @@ inline FLOAT Statistics<FLOAT>::get_variance() const
 }
 
 template<typename FLOAT>
-void Statistics<FLOAT>::write(ostream& out, bool fixed, unsigned int precision) const
+void Statistics<FLOAT>::write(ostream& out, bool fixed, unsigned precision) const
 {
     if (get_count() > 0)
     {
@@ -219,10 +219,10 @@ public:
 
     FLOAT get_variance() const;
 
-    void write(ostream& out, bool fixed = false, unsigned int precision = 6,
+    void write(ostream& out, bool fixed = false, unsigned precision = 6,
                bool integer_values = false) const;
 
-    string to_string(bool fixed = false, unsigned int precision = 6,
+    string to_string(bool fixed = false, unsigned precision = 6,
                      bool integer_values = false) const;
 
 private:
@@ -294,7 +294,7 @@ inline FLOAT StatisticsExt<FLOAT>::get_variance() const
 }
 
 template<typename FLOAT>
-string StatisticsExt<FLOAT>::to_string(bool fixed, unsigned int precision,
+string StatisticsExt<FLOAT>::to_string(bool fixed, unsigned precision,
                                        bool integer_values) const
 {
     ostringstream s;
@@ -303,7 +303,7 @@ string StatisticsExt<FLOAT>::to_string(bool fixed, unsigned int precision,
 }
 
 template<typename FLOAT>
-void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned int precision,
+void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned precision,
                                  bool integer_values) const
 {
     if (get_count() > 0)

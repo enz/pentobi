@@ -38,9 +38,8 @@ public:
 
     void setCoordinateColor(const QColor& color);
 
-    void paintEmptyBoard(QPainter& painter, unsigned int width,
-                         unsigned int height, Variant variant,
-                         const Geometry& geometry);
+    void paintEmptyBoard(QPainter& painter, unsigned width, unsigned height,
+                         Variant variant, const Geometry& geometry);
 
     /** Paint the pieces and markup.
         This function must only be called after paintEmptyBoard() because it

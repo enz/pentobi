@@ -141,7 +141,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
 /** Return move info of a move given by its integer ID. */
 void Engine::cmd_move_info(const Arguments& args, Response& response)
 {
-    response << get_board().to_string(Move(args.get<unsigned int>()), true);
+    response << get_board().to_string(Move(args.get<unsigned>()), true);
 }
 
 void Engine::cmd_p(const Arguments& args)
@@ -239,7 +239,7 @@ Color Engine::get_color_arg(const Arguments& args) const
     return get_color_arg(args, 0);
 }
 
-Color Engine::get_color_arg(const Arguments& args, unsigned int i) const
+Color Engine::get_color_arg(const Arguments& args, unsigned i) const
 {
     string s = args.get_tolower(i);
     const Board& bd = get_board();
@@ -274,7 +274,7 @@ Player& Engine::get_player() const
     return *m_player;
 }
 
-void Engine::play(Color c, const Arguments& args, unsigned int arg_move_begin)
+void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
 {
     const Board& bd = get_board();
     if (bd.get_nu_moves() >= Board::max_game_moves)

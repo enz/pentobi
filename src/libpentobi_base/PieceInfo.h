@@ -27,15 +27,15 @@ class PieceInfo
 {
 public:
     /** Maximum number of fields of a piece. */
-    static const unsigned int max_size = 6;
+    static const unsigned max_size = 6;
 
     typedef ArrayList<CoordPoint, max_size> Points;
 
     /** Maximum number of adjacent points to a piece. */
-    static const unsigned int max_adj = 12;
+    static const unsigned max_adj = 12;
 
     /** Maximum number of attach points of a piece. */
-    static const unsigned int max_attach = 14;
+    static const unsigned max_attach = 14;
 
     /** Constructor.
         @param name A short unique name for the piece.
@@ -53,7 +53,7 @@ public:
     const Points& get_points() const;
 
     /** Return the number of fields of the piece. */
-    unsigned int get_size() const;
+    unsigned get_size() const;
 
     /** Get a list with unique transformations.
         The list has the same order as PieceTransforms::get_all() but
@@ -102,9 +102,9 @@ inline const PieceInfo::Points& PieceInfo::get_points() const
     return m_points;
 }
 
-inline unsigned int PieceInfo::get_size() const
+inline unsigned PieceInfo::get_size() const
 {
-    return static_cast<unsigned int>(m_points.size());
+    return static_cast<unsigned>(m_points.size());
 }
 
 inline const vector<const Transform*>& PieceInfo::get_transforms() const

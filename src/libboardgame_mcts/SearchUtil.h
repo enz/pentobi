@@ -12,7 +12,7 @@ namespace search_util {
 
 //-----------------------------------------------------------------------------
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 vector<M> find_principal_variation(const Search<S, M, P>& search)
 {
     vector<M> result;

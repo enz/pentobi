@@ -88,10 +88,10 @@ ColorMove Tree::get_move_ignore_invalid(const Node& node) const
     }
 }
 
-const Node* Tree::get_node_before_move_number(unsigned int move_number) const
+const Node* Tree::get_node_before_move_number(unsigned move_number) const
 {
     const Node* node = &get_root();
-    unsigned int n = 0;
+    unsigned n = 0;
     while (node->has_children())
     {
         const Node& child = node->get_first_child();

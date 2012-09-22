@@ -25,8 +25,8 @@ using libboardgame_util::log;
     (0,0) will be Geometry::get_point_type(offset).
     @tparam T An iterator over a container containing CoordPoint element. */
 template<typename T>
-void normalize_offset(T begin, T end, unsigned int& width,
-                      unsigned int& height, CoordPoint& offset)
+void normalize_offset(T begin, T end, unsigned& width, unsigned& height,
+                      CoordPoint& offset)
 {
     int min_x = numeric_limits<int>::max();
     int min_y = numeric_limits<int>::max();
@@ -61,12 +61,12 @@ void normalize_offset(T begin, T end, unsigned int& width,
     @param point_type The point type of (0,0) in the list of points. */
 template<typename P, typename T>
 void type_match_shift(const Geometry<P>& geometry, T begin, T end,
-                         unsigned int point_type)
+                      unsigned point_type)
 {
     CoordPoint type_match_shift(0, 0); // Init to avoid compiler warning
     bool found = false;
-    for (unsigned int y = 0; ! found && y < geometry.get_period_y(); ++y)
-        for (unsigned int x = 0; ! found && x < geometry.get_period_x(); ++x)
+    for (unsigned y = 0; ! found && y < geometry.get_period_y(); ++y)
+        for (unsigned x = 0; ! found && x < geometry.get_period_x(); ++x)
             if (geometry.get_point_type(x, y) == point_type)
             {
                 type_match_shift = CoordPoint(x, y);

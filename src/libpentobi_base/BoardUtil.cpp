@@ -32,7 +32,7 @@ void dump(const Board& bd, ostream& out)
     writer.write_property("GM", to_string(variant));
     write_setup(writer, variant, bd.get_setup());
     writer.end_node();
-    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
+    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         writer.begin_node();
         ColorMove mv =  bd.get_move(i);
@@ -49,7 +49,7 @@ void dump(const Board& bd, ostream& out)
 void get_current_position_as_setup(const Board& bd, Setup& setup)
 {
     setup = bd.get_setup();
-    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
+    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         ColorMove mv = bd.get_move(i);
         if (! mv.is_pass())

@@ -25,15 +25,15 @@ public:
     typedef P Point;
 
     /** Create or reuse an already created geometry with a given size. */
-    static const RectGeometry* get(unsigned int width, unsigned int height);
+    static const RectGeometry* get(unsigned width, unsigned height);
 
-    RectGeometry(unsigned int width, unsigned int height);
+    RectGeometry(unsigned width, unsigned height);
 
-    unsigned int get_point_type(int x, int y) const;
+    unsigned get_point_type(int x, int y) const;
 
-    unsigned int get_period_x() const;
+    unsigned get_period_x() const;
 
-    unsigned int get_period_y() const;
+    unsigned get_period_y() const;
 
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
@@ -51,14 +51,13 @@ unique_ptr<RectGeometry<P>>
                RectGeometry<P>::s_geometry[P::max_width + 1][P::max_height + 1];
 
 template<class P>
-RectGeometry<P>::RectGeometry(unsigned int width, unsigned int height)
+RectGeometry<P>::RectGeometry(unsigned width, unsigned height)
 {
     Geometry<P>::init(width, height);
 }
 
 template<class P>
-const RectGeometry<P>* RectGeometry<P>::get(unsigned int width,
-                                            unsigned int height)
+const RectGeometry<P>* RectGeometry<P>::get(unsigned width, unsigned height)
 {
     if (s_geometry[width][height].get() == 0)
         s_geometry[width][height].reset(new RectGeometry(width, height));
@@ -66,19 +65,19 @@ const RectGeometry<P>* RectGeometry<P>::get(unsigned int width,
 }
 
 template<class P>
-unsigned int RectGeometry<P>::get_period_x() const
+unsigned RectGeometry<P>::get_period_x() const
 {
     return 1;
 }
 
 template<class P>
-unsigned int RectGeometry<P>::get_period_y() const
+unsigned RectGeometry<P>::get_period_y() const
 {
     return 1;
 }
 
 template<class P>
-unsigned int RectGeometry<P>::get_point_type(int x, int y) const
+unsigned RectGeometry<P>::get_point_type(int x, int y) const
 {
     LIBBOARDGAME_UNUSED(x);
     LIBBOARDGAME_UNUSED(y);
@@ -96,10 +95,10 @@ template<class P>
 void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
                                     NullTermList<Point, 9>& diag) const
 {
-    unsigned int width = this->get_width();
-    unsigned int height = this->get_height();
-    unsigned int x = p.get_x();
-    unsigned int y = p.get_y();
+    unsigned width = this->get_width();
+    unsigned height = this->get_height();
+    unsigned x = p.get_x();
+    unsigned y = p.get_y();
     {
         typename NullTermList<Point, 4>::Init init_adj(adj);
         if (x > 0)

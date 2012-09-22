@@ -47,9 +47,9 @@ class BoardConst
 {
 public:
     /** Maximum number of unique pieces per color. */
-    static const unsigned int max_pieces = 22;
+    static const unsigned max_pieces = 22;
 
-    static const unsigned int max_moves_at_point = 40;
+    static const unsigned max_moves_at_point = 40;
 
     /** Begin/end iterator for lists with local moves.
         See get_moves(). */
@@ -63,17 +63,17 @@ public:
         precomputed lists shorter but exponentially increase the number of
         lists and the total memory used for all lists. Therefore, the optimal
         value for speeding up the matching depends on the CPU cache size. */
-    static const unsigned int adj_status_nu_adj = 4;
+    static const unsigned adj_status_nu_adj = 4;
 
-    static const unsigned int nu_adj_status_index = 1 << adj_status_nu_adj;
+    static const unsigned nu_adj_status_index = 1 << adj_status_nu_adj;
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
     static const BoardConst& get(Variant variant);
 
-    unsigned int get_nu_pieces() const;
+    unsigned get_nu_pieces() const;
 
-    unsigned int get_total_piece_points() const;
+    unsigned get_total_piece_points() const;
 
     const PieceInfo& get_piece_info(Piece piece) const;
 
@@ -96,14 +96,14 @@ public:
 
     const MovePoints& get_move_points(Move mv) const;
 
-    unsigned int get_nu_all_moves() const;
+    unsigned get_nu_all_moves() const;
 
     bool find_move(const MovePoints& points, Move& move) const;
 
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
     LocalMovesListRange get_moves(Piece piece, Point p,
-                                  unsigned int adj_status_index = 0) const;
+                                  unsigned adj_status_index = 0) const;
 
     BoardType get_board_type() const;
 
@@ -128,9 +128,9 @@ private:
     typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status_index>
         FullMoveTable;
 
-    unsigned int m_nu_pieces;
+    unsigned m_nu_pieces;
 
-    unsigned int m_total_piece_points;
+    unsigned m_total_piece_points;
 
     BoardType m_board_type;
 
@@ -150,7 +150,7 @@ private:
     unique_ptr<FullMoveTable> m_full_move_table;
 
     /** See m_move_lists. */
-    Grid<array<PieceMap<pair<unsigned int,unsigned int>>,nu_adj_status_index>>
+    Grid<array<PieceMap<pair<unsigned,unsigned>>,nu_adj_status_index>>
         m_moves_range;
 
     /** Compact representation of lists of moves of a piece at a point
@@ -186,11 +186,11 @@ private:
     void init_adj_status();
 
     void init_adj_status(Point p, array<bool, adj_status_nu_adj>& forbidden,
-                         unsigned int i);
+                         unsigned i);
 
     void init_symmetry_info();
 
-    bool is_compatible_with_adj_status(Point p, unsigned int adj_status_index,
+    bool is_compatible_with_adj_status(Point p, unsigned adj_status_index,
                                        const MovePoints& points) const;
 
     void set_adj_and_attach_points(const MoveInfo& info, MoveInfoExt& info_ext);
@@ -236,20 +236,20 @@ inline const MovePoints& BoardConst::get_move_points(Move mv) const
 
 inline BoardConst::LocalMovesListRange BoardConst::get_moves(
                                            Piece piece, Point p,
-                                           unsigned int adj_status_index) const
+                                           unsigned adj_status_index) const
 {
-    const pair<unsigned int,unsigned int>& indices =
+    const pair<unsigned,unsigned>& indices =
         m_moves_range[p][adj_status_index][piece];
     const Move* begin = m_move_lists.get();
     return LocalMovesListRange(begin + indices.first, begin + indices.second);
 }
 
-inline unsigned int BoardConst::get_nu_all_moves() const
+inline unsigned BoardConst::get_nu_all_moves() const
 {
-    return static_cast<unsigned int>(m_move_info.size());
+    return static_cast<unsigned>(m_move_info.size());
 }
 
-inline unsigned int BoardConst::get_nu_pieces() const
+inline unsigned BoardConst::get_nu_pieces() const
 {
     return m_nu_pieces;
 }
@@ -260,7 +260,7 @@ inline const PieceInfo& BoardConst::get_piece_info(Piece piece) const
     return m_pieces[piece.to_int()];
 }
 
-inline unsigned int BoardConst::get_total_piece_points() const
+inline unsigned BoardConst::get_total_piece_points() const
 {
     return m_total_piece_points;
 }

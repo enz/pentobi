@@ -29,7 +29,7 @@ public:
         @param nu_opponents The number of opponents (all with the same rating
         elo_opponent) */
     float get_expected_result(Rating elo_opponent,
-                              unsigned int nu_opponents = 1) const;
+                              unsigned nu_opponents = 1) const;
 
     /** Update a rating after a two-player game.
         @param game_result The outcome of the game (0=loss, 0.5=tie, 1=win)
@@ -44,7 +44,7 @@ public:
         @param nu_opponents The number of opponents (all with the same rating
         elo_opponent) */
     void update_multiplayer(float game_result, Rating elo_opponent,
-                            unsigned int nu_opponents, float k_value = 32);
+                            unsigned nu_opponents, float k_value = 32);
 
     float get() const;
 

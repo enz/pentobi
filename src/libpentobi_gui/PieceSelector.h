@@ -47,17 +47,17 @@ protected:
     void paintEvent(QPaintEvent* event);
 
 private:
-    static const unsigned int maxColumns = 47;
+    static const unsigned maxColumns = 47;
 
-    static const unsigned int maxRows = 6;
+    static const unsigned maxRows = 6;
 
     const Board& m_bd;
 
     Color m_color;
 
-    unsigned int m_nuColumns;
+    unsigned m_nuColumns;
 
-    unsigned int m_nuRows;
+    unsigned m_nuRows;
 
     Piece m_piece[maxColumns][maxRows];
 
@@ -74,7 +74,7 @@ private:
 
     qreal m_selectorHeight;
 
-    void findPiecePoints(Piece piece, unsigned int x, unsigned int y,
+    void findPiecePoints(Piece piece, unsigned x, unsigned y,
                          PiecePoints& points) const;
 
     void setDisabledStatus(bool disabledStatus[maxColumns][maxRows]);

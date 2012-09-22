@@ -92,8 +92,7 @@ int ScoreDisplay::getMaxScoreTextWidth2() const
     return getTextWidth(getScoreText(88, 20));
 }
 
-QString ScoreDisplay::getScoreText(unsigned int points,
-                                   unsigned int bonus) const
+QString ScoreDisplay::getScoreText(unsigned points, unsigned bonus) const
 {
     QString text;
     text.setNum(points + bonus);
@@ -235,12 +234,12 @@ void ScoreDisplay::updateScore(const Board& bd)
     Variant variant = bd.get_variant();
     bool hasChanged = (m_variant != variant);
     m_variant = variant;
-    for (unsigned int i = 0; i < bd.get_nu_colors(); ++i)
+    for (unsigned i = 0; i < bd.get_nu_colors(); ++i)
     {
         Color c(i);
         bool hasMoves = bd.has_moves(c);
-        unsigned int points = bd.get_points(c);
-        unsigned int bonus = bd.get_bonus(c);
+        unsigned points = bd.get_points(c);
+        unsigned bonus = bd.get_bonus(c);
         if (hasMoves != m_hasMoves[c] || m_points[c] != points
             || m_bonus[c] != bonus)
         {

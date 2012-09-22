@@ -76,8 +76,8 @@ void PieceSelector::checkUpdate()
     bool disabledStatus[maxColumns][maxRows];
     setDisabledStatus(disabledStatus);
     bool changed = false;
-    for (unsigned int x = 0; x < m_nuColumns; ++x)
-        for (unsigned int y = 0; y < m_nuRows; ++y)
+    for (unsigned x = 0; x < m_nuColumns; ++x)
+        for (unsigned y = 0; y < m_nuRows; ++y)
             if (! m_piece[x][y].is_null()
                 && disabledStatus[x][y] != m_disabledStatus[x][y])
             {
@@ -88,7 +88,7 @@ void PieceSelector::checkUpdate()
         update();
 }
 
-void PieceSelector::findPiecePoints(Piece piece, unsigned int x, unsigned int y,
+void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
                                     PiecePoints& points) const
 {
     CoordPoint p(x, y);
@@ -141,8 +141,8 @@ void PieceSelector::init()
         m_nuColumns = 34;
         m_nuRows = 6;
     }
-    for (unsigned int y = 0; y < m_nuRows; ++y)
-        for (unsigned int x = 0; x < m_nuColumns; ++x)
+    for (unsigned y = 0; y < m_nuRows; ++y)
+        for (unsigned x = 0; x < m_nuColumns; ++x)
         {
             string name = pieceLayout->substr(y * m_nuColumns * 2 + x * 2, 2);
             trim(name);
@@ -155,8 +155,8 @@ void PieceSelector::init()
             m_piece[x][y] = piece;
         }
     const Geometry& geometry = m_bd.get_geometry();
-    for (unsigned int y = 0; y < m_nuRows; ++y)
-        for (unsigned int x = 0; x < m_nuColumns; ++x)
+    for (unsigned y = 0; y < m_nuRows; ++y)
+        for (unsigned x = 0; x < m_nuColumns; ++x)
         {
             Piece piece = m_piece[x][y];
             if (piece.is_null())
@@ -219,8 +219,8 @@ void PieceSelector::paintEvent(QPaintEvent*)
                       0.5 * (height() - m_selectorHeight));
     Variant variant = m_bd.get_variant();
     const Geometry& geometry = m_bd.get_geometry();
-    for (unsigned int x = 0; x < m_nuColumns; ++x)
-        for (unsigned int y = 0; y < m_nuRows; ++y)
+    for (unsigned x = 0; x < m_nuColumns; ++x)
+        for (unsigned y = 0; y < m_nuRows; ++y)
         {
             Piece piece = m_piece[x][y];
             if (! piece.is_null() && ! m_disabledStatus[x][y])
@@ -247,16 +247,16 @@ void PieceSelector::paintEvent(QPaintEvent*)
 void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
 {
     bool marker[maxColumns][maxRows];
-    for (unsigned int x = 0; x < m_nuColumns; ++x)
-        for (unsigned int y = 0; y < m_nuRows; ++y)
+    for (unsigned x = 0; x < m_nuColumns; ++x)
+        for (unsigned y = 0; y < m_nuRows; ++y)
         {
             marker[x][y] = false;
             disabledStatus[x][y] = false;
         }
-    PieceMap<unsigned int> nuInstances;
+    PieceMap<unsigned> nuInstances;
     nuInstances.fill(0);
-    for (unsigned int x = 0; x < m_nuColumns; ++x)
-        for (unsigned int y = 0; y < m_nuRows; ++y)
+    for (unsigned x = 0; x < m_nuColumns; ++x)
+        for (unsigned y = 0; y < m_nuRows; ++y)
         {
             if (marker[x][y])
                 continue;

@@ -12,15 +12,15 @@ namespace libboardgame_mcts {
 template<typename MOVE>
 struct PlayerMove
 {
-    unsigned int player;
+    unsigned player;
 
     MOVE move;
 
-    PlayerMove(unsigned int player, MOVE move);
+    PlayerMove(unsigned player, MOVE move);
 };
 
 template<typename MOVE>
-inline PlayerMove<MOVE>::PlayerMove(unsigned int player, MOVE move)
+inline PlayerMove<MOVE>::PlayerMove(unsigned player, MOVE move)
 {
     this->player = player;
     this->move = move;

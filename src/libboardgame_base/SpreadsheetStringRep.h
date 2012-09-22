@@ -23,14 +23,14 @@ using namespace std;
     in class Point. */
 struct SpreadsheetStringRep
 {
-    static const unsigned int max_width = UINT_MAX;
+    static const unsigned max_width = UINT_MAX;
 
-    static const unsigned int max_height = UINT_MAX;
+    static const unsigned max_height = UINT_MAX;
 
-    static bool read(istream& in, unsigned int width, unsigned int height,
-                     unsigned int& x, unsigned int& y);
+    static bool read(istream& in, unsigned width, unsigned height,
+                     unsigned& x, unsigned& y);
 
-    static void write(ostream& out, unsigned int x, unsigned int y);
+    static void write(ostream& out, unsigned x, unsigned y);
 };
 
 //-----------------------------------------------------------------------------

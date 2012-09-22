@@ -26,16 +26,16 @@ bool from_string(const string& s, string& t)
     return true;
 }
 
-string get_letter_coord(unsigned int i)
+string get_letter_coord(unsigned i)
 {
     string result;
     ++i;
-    unsigned int n = 1;
+    unsigned n = 1;
     while (n * 26 < i)
         n *= 26;
     while (true)
     {
-        unsigned int d = i / n;
+        unsigned d = i / n;
         result += char('a' + d - 1);
         if (n == 1)
             break;

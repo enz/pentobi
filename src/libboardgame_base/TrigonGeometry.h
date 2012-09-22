@@ -34,17 +34,17 @@ class TrigonGeometry
 public:
     typedef P Point;
 
-    static const unsigned int max_size = (Point::max_width + 1) / 4;
+    static const unsigned max_size = (Point::max_width + 1) / 4;
 
     /** Create or reuse an already created geometry with a given size.
         @param sz The edge size of the hexagon. */
-    static const TrigonGeometry* get(unsigned int sz);
+    static const TrigonGeometry* get(unsigned sz);
 
-    unsigned int get_point_type(int x, int y) const;
+    unsigned get_point_type(int x, int y) const;
 
-    unsigned int get_period_x() const;
+    unsigned get_period_x() const;
 
-    unsigned int get_period_y() const;
+    unsigned get_period_y() const;
 
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
@@ -55,16 +55,16 @@ protected:
 private:
     static unique_ptr<TrigonGeometry> s_geometry[max_size + 1];
 
-    unsigned int m_sz;
+    unsigned m_sz;
 
-    TrigonGeometry(unsigned int size);
+    TrigonGeometry(unsigned size);
 };
 
 template<class P>
 unique_ptr<TrigonGeometry<P>> TrigonGeometry<P>::s_geometry[max_size + 1];
 
 template<class P>
-TrigonGeometry<P>::TrigonGeometry(unsigned int sz)
+TrigonGeometry<P>::TrigonGeometry(unsigned sz)
 {
     LIBBOARDGAME_ASSERT(sz <= max_size);
     m_sz = sz;
@@ -72,7 +72,7 @@ TrigonGeometry<P>::TrigonGeometry(unsigned int sz)
 }
 
 template<class P>
-const TrigonGeometry<P>* TrigonGeometry<P>::get(unsigned int sz)
+const TrigonGeometry<P>* TrigonGeometry<P>::get(unsigned sz)
 {
     if (s_geometry[sz].get() == 0)
         s_geometry[sz].reset(new TrigonGeometry(sz));
@@ -80,19 +80,19 @@ const TrigonGeometry<P>* TrigonGeometry<P>::get(unsigned int sz)
 }
 
 template<class P>
-unsigned int TrigonGeometry<P>::get_period_x() const
+unsigned TrigonGeometry<P>::get_period_x() const
 {
     return 2;
 }
 
 template<class P>
-unsigned int TrigonGeometry<P>::get_period_y() const
+unsigned TrigonGeometry<P>::get_period_y() const
 {
     return 2;
 }
 
 template<class P>
-unsigned int TrigonGeometry<P>::get_point_type(int x, int y) const
+unsigned TrigonGeometry<P>::get_point_type(int x, int y) const
 {
     if (m_sz % 2 == 0)
     {
@@ -113,9 +113,9 @@ unsigned int TrigonGeometry<P>::get_point_type(int x, int y) const
 template<class P>
 void TrigonGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
 {
-    unsigned int dy = min(p.get_y(), Geometry<P>::get_height() - p.get_y() - 1);
-    unsigned int min_x = m_sz - dy - 1;
-    unsigned int max_x = Geometry<P>::get_width() - min_x - 1;
+    unsigned dy = min(p.get_y(), Geometry<P>::get_height() - p.get_y() - 1);
+    unsigned min_x = m_sz - dy - 1;
+    unsigned max_x = Geometry<P>::get_width() - min_x - 1;
     is_onboard = (p.get_x() >= min_x && p.get_x() <= max_x);
 }
 
@@ -123,11 +123,11 @@ template<class P>
 void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
                                       NullTermList<Point, 9>& diag) const
 {
-    unsigned int width = this->get_width();
-    unsigned int height = this->get_height();
-    unsigned int x = p.get_x();
-    unsigned int y = p.get_y();
-    unsigned int type = Geometry<P>::get_point_type(p);
+    unsigned width = this->get_width();
+    unsigned height = this->get_height();
+    unsigned x = p.get_x();
+    unsigned y = p.get_y();
+    unsigned type = Geometry<P>::get_point_type(p);
     {
         typename NullTermList<Point, 4>::Init init_adj(adj);
         if (type == 0)

@@ -27,13 +27,13 @@ class RatingHistory
 {
 public:
     /** Maximum number of games to remember in the history. */
-    static const unsigned int maxGames = 100;
+    static const unsigned maxGames = 100;
 
     struct GameInfo
     {
         /** Game number.
             The first game played has number 0. */
-        unsigned int number;
+        unsigned number;
 
         /** Color played by the human.
             In game variants with multiple colors per player, the human played
@@ -63,12 +63,12 @@ public:
     void getNextRatedGameSettings(int maxLevel, int& level, Color& userColor);
 
     /** Append a new game. */
-    void addGame(float score, Rating opponentRating, unsigned int nuOpponents,
+    void addGame(float score, Rating opponentRating, unsigned nuOpponents,
                  Color color, float result, const string& date, int level,
                  const Tree& tree);
 
     /** Get file name of the n'th rated game. */
-    path getFile(unsigned int n) const;
+    path getFile(unsigned n) const;
 
     void load(Variant variant);
 
@@ -83,7 +83,7 @@ public:
 
     const Rating& getBestRating() const;
 
-    unsigned int getNuGames() const;
+    unsigned getNuGames() const;
 
     void clear();
 
@@ -92,7 +92,7 @@ private:
 
     Rating m_rating;
 
-    unsigned int m_nuGames;
+    unsigned m_nuGames;
 
     Rating m_bestRating;
 
@@ -109,7 +109,7 @@ inline const vector<RatingHistory::GameInfo>& RatingHistory::getGameInfos()
     return m_games;
 }
 
-inline unsigned int RatingHistory::getNuGames() const
+inline unsigned RatingHistory::getNuGames() const
 {
     return m_nuGames;
 }

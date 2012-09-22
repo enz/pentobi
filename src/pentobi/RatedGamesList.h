@@ -23,7 +23,7 @@ public:
     void updateContent(Variant variant, const RatingHistory& history);
 
 signals:
-    void openRatedGame(unsigned int n);
+    void openRatedGame(unsigned n);
 
 protected:
     void focusInEvent(QFocusEvent* event);

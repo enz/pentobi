@@ -85,7 +85,7 @@ bool Node::has_property(const string& id) const
     return find_property(id) != 0;
 }
 
-const Node& Node::get_child(unsigned int i) const
+const Node& Node::get_child(unsigned i) const
 {
     LIBBOARDGAME_ASSERT(i < get_nu_children());
     const Node* child = m_first_child.get();
@@ -97,10 +97,10 @@ const Node& Node::get_child(unsigned int i) const
     return *child;
 }
 
-unsigned int Node::get_child_index(const Node& child) const
+unsigned Node::get_child_index(const Node& child) const
 {
     const Node* current = m_first_child.get();
-    unsigned int i = 0;
+    unsigned i = 0;
     while (true)
     {
         if (current == &child)
@@ -121,9 +121,9 @@ Node* Node::get_last_child() const
     return node;
 }
 
-unsigned int Node::get_nu_children() const
+unsigned Node::get_nu_children() const
 {
-    unsigned int n = 0;
+    unsigned n = 0;
     const Node* child = m_first_child.get();
     while (child != 0)
     {

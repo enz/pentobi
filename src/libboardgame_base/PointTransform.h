@@ -22,8 +22,8 @@ public:
 
     virtual ~PointTransform();
 
-    virtual Point get_transformed(const Point& p, unsigned int width,
-                                  unsigned int height) const = 0;
+    virtual Point get_transformed(const Point& p, unsigned width,
+                                  unsigned height) const = 0;
 };
 
 template<class P>
@@ -40,13 +40,13 @@ class PointTransfIdent
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned int width,
-                          unsigned int height) const;
+    Point get_transformed(const Point& p, unsigned width,
+                          unsigned height) const;
 };
 
 template<class P>
-P PointTransfIdent<P>::get_transformed(const Point& p, unsigned int width,
-                                       unsigned int height) const
+P PointTransfIdent<P>::get_transformed(const Point& p, unsigned width,
+                                       unsigned height) const
 {
     LIBBOARDGAME_UNUSED(width);
     LIBBOARDGAME_UNUSED(height);
@@ -63,16 +63,16 @@ class PointTransfRot180
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned int width,
-                          unsigned int height) const;
+    Point get_transformed(const Point& p, unsigned width,
+                          unsigned height) const;
 };
 
 template<class P>
-P PointTransfRot180<P>::get_transformed(const Point& p, unsigned int width,
-                                        unsigned int height) const
+P PointTransfRot180<P>::get_transformed(const Point& p, unsigned width,
+                                        unsigned height) const
 {
-    unsigned int x = width - p.get_x() - 1;
-    unsigned int y = height - p.get_y() - 1;
+    unsigned x = width - p.get_x() - 1;
+    unsigned y = height - p.get_y() - 1;
     return Point(x, y);
 }
 
@@ -87,16 +87,16 @@ class PointTransfRot270Refl
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned int width,
-                          unsigned int height) const;
+    Point get_transformed(const Point& p, unsigned width,
+                          unsigned height) const;
 };
 
 template<class P>
-P PointTransfRot270Refl<P>::get_transformed(const Point& p, unsigned int width,
-                                            unsigned int height) const
+P PointTransfRot270Refl<P>::get_transformed(const Point& p, unsigned width,
+                                            unsigned height) const
 {
-    unsigned int x = height - p.get_y() - 1;
-    unsigned int y = width - p.get_x() - 1;
+    unsigned x = height - p.get_y() - 1;
+    unsigned y = width - p.get_x() - 1;
     return Point(x, y);
 }
 

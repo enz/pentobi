@@ -340,7 +340,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             if (settings.value("autosave_rated", false).toBool())
             {
                 Variant variant = getVariant();
-                unsigned int ratedGameColor =
+                unsigned ratedGameColor =
                     settings.value("autosave_rated_color", 0).toUInt();
                 if (ratedGameColor < get_nu_colors(variant))
                 {
@@ -459,7 +459,7 @@ void MainWindow::backward10()
 {
     const Tree& tree = m_game->get_tree();
     const Node* node = &m_game->get_current();
-    unsigned int n = 0;
+    unsigned n = 0;
     while (n < 10)
     {
         if (tree.has_move(*node))
@@ -1669,7 +1669,7 @@ void MainWindow::forward10()
 {
     const Tree& tree = m_game->get_tree();
     const Node* node = &m_game->get_current();
-    unsigned int n = 0;
+    unsigned n = 0;
     while (n < 10)
     {
         if (tree.has_move(*node))
@@ -1731,10 +1731,10 @@ void MainWindow::gameOver()
     }
     else if (variant == variant_trigon_3)
     {
-        unsigned int blue = bd.get_points_with_bonus(Color(0));
-        unsigned int yellow = bd.get_points_with_bonus(Color(1));
-        unsigned int red = bd.get_points_with_bonus(Color(2));
-        unsigned int maxPoints = max(blue, max(yellow, red));
+        unsigned blue = bd.get_points_with_bonus(Color(0));
+        unsigned yellow = bd.get_points_with_bonus(Color(1));
+        unsigned red = bd.get_points_with_bonus(Color(2));
+        unsigned maxPoints = max(blue, max(yellow, red));
         if (blue == yellow && yellow == red)
             info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow)
@@ -1754,11 +1754,11 @@ void MainWindow::gameOver()
     {
         LIBBOARDGAME_ASSERT(variant == variant_classic
                             || variant == variant_trigon);
-        unsigned int blue = bd.get_points_with_bonus(Color(0));
-        unsigned int yellow = bd.get_points_with_bonus(Color(1));
-        unsigned int red = bd.get_points_with_bonus(Color(2));
-        unsigned int green = bd.get_points_with_bonus(Color(3));
-        unsigned int maxPoints = max(blue, max(yellow, max(red, green)));
+        unsigned blue = bd.get_points_with_bonus(Color(0));
+        unsigned yellow = bd.get_points_with_bonus(Color(1));
+        unsigned red = bd.get_points_with_bonus(Color(2));
+        unsigned green = bd.get_points_with_bonus(Color(3));
+        unsigned maxPoints = max(blue, max(yellow, max(red, green)));
         if (blue == yellow && yellow == red && red == green)
             info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow && yellow == red)
@@ -1795,7 +1795,7 @@ void MainWindow::gameOver()
     if (m_isRated && ! m_isRatedGameFinished)
     {
         int oldRating = m_history->getRating().toInt();
-        unsigned int place;
+        unsigned place;
         bool isPlaceShared;
         bd.get_place(m_ratedGameColor, place, isPlaceShared);
         float gameResult;
@@ -1805,7 +1805,7 @@ void MainWindow::gameOver()
             gameResult = 0.5;
         else
             gameResult = 0;
-        unsigned int nuOpp = get_nu_players(variant) - 1;
+        unsigned nuOpp = get_nu_players(variant) - 1;
         Rating oppRating = m_player->get_rating(variant);
         m_history->addGame(gameResult, oppRating, nuOpp, m_ratedGameColor,
                            gameResult, Tree::get_date_today(), m_level,
@@ -1885,7 +1885,7 @@ void MainWindow::genMove(bool playSingleMove)
     m_genMoveWatcher.setFuture(future);
     m_isGenMoveRunning = true;
     const Board& bd = getBoard();
-    unsigned int nuMoves = bd.get_nu_moves();
+    unsigned nuMoves = bd.get_nu_moves();
     if (m_lastComputerMovesBegin == 0 && ! computerPlaysAll())
     {
         m_lastComputerMovesBegin = nuMoves + 1;
@@ -2126,7 +2126,7 @@ void MainWindow::initVariantActions()
 void MainWindow::initPieceSelectors()
 {
     const Board& bd = getBoard();
-    for (unsigned int i = 0; i < Color::range; ++i)
+    for (unsigned i = 0; i < Color::range; ++i)
     {
         bool isVisible = (i < bd.get_nu_colors());
         m_pieceSelector[Color(i)]->setVisible(isVisible);
@@ -2242,7 +2242,7 @@ void MainWindow::nextPiece()
     const Board& bd = getBoard();
     const Board::PiecesLeftList& piecesLeft =
         bd.get_pieces_left(m_currentColor);
-    unsigned int nuPiecesLeft = piecesLeft.size();
+    unsigned nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
     Piece piece = m_guiBoard->getSelectedPiece();
@@ -2250,7 +2250,7 @@ void MainWindow::nextPiece()
         piece = piecesLeft[0];
     else
     {
-        for (unsigned int i = 0; i < nuPiecesLeft; ++i)
+        for (unsigned i = 0; i < nuPiecesLeft; ++i)
             if (piecesLeft[i] == piece)
             {
                 if (i + 1 >= nuPiecesLeft)
@@ -2285,7 +2285,7 @@ void MainWindow::nextVariation()
 void MainWindow::nextVariation10()
 {
     const Node* node = &m_game->get_current();
-    for (unsigned int i = 0; i < 10; ++i)
+    for (unsigned i = 0; i < 10; ++i)
     {
         if (node->get_sibling() == 0)
             break;
@@ -2552,7 +2552,7 @@ void MainWindow::previousPiece()
 {
     const Board& bd = getBoard();
     const Board::PiecesLeftList& piecesLeft = bd.get_pieces_left(m_currentColor);
-    unsigned int nuPiecesLeft = piecesLeft.size();
+    unsigned nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
     Piece piece = m_guiBoard->getSelectedPiece();
@@ -2560,7 +2560,7 @@ void MainWindow::previousPiece()
         piece = piecesLeft[nuPiecesLeft - 1];
     else
     {
-        for (unsigned int i = 0; i < nuPiecesLeft; ++i)
+        for (unsigned i = 0; i < nuPiecesLeft; ++i)
             if (piecesLeft[i] == piece)
             {
                 if (i == 0)
@@ -2596,7 +2596,7 @@ void MainWindow::previousVariation()
 void MainWindow::previousVariation10()
 {
     const Node* node = &m_game->get_current();
-    for (unsigned int i = 0; i < 10; ++i)
+    for (unsigned i = 0; i < 10; ++i)
     {
         if (node->get_previous_sibling() == 0)
             break;
@@ -2682,7 +2682,7 @@ void MainWindow::saveAs()
         file.append(QDir::separator());
         file.append(tr("Untitled Game.blksgf"));
         if (QFileInfo(file).exists())
-            for (unsigned int i = 1; ; ++i)
+            for (unsigned i = 1; ; ++i)
             {
                 file = getLastDir();
                 file.append(QDir::separator());
@@ -3296,9 +3296,9 @@ void MainWindow::updateMoveNumber()
 {
     const Tree& tree = m_game->get_tree();
     const Node& current = m_game->get_current();
-    unsigned int move = get_move_number(tree, current);
-    unsigned int movesLeft = get_moves_left(tree, current);
-    unsigned int totalMoves = move + movesLeft;
+    unsigned move = get_move_number(tree, current);
+    unsigned movesLeft = get_moves_left(tree, current);
+    unsigned totalMoves = move + movesLeft;
     string variation = get_variation_string(current);
     if (variation.empty())
     {
@@ -3389,9 +3389,9 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_guiBoard->copyFromBoard(bd);
     QSettings settings;
     bool markVariations = settings.value("show_variations", true).toBool();
-    unsigned int nuMoves = bd.get_nu_moves();
-    unsigned int markMovesBegin = 0;
-    unsigned int markMovesEnd = 0;
+    unsigned nuMoves = bd.get_nu_moves();
+    unsigned markMovesBegin = 0;
+    unsigned markMovesEnd = 0;
     if (m_actionMoveNumbersAll->isChecked())
     {
         markMovesBegin = 1;

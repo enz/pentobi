@@ -34,7 +34,7 @@ struct NormalizedPoints
     PiecePoints points;
 
     /** The point type of (0,0) in the normalized points. */
-    unsigned int point_type;
+    unsigned point_type;
 
     bool operator==(const NormalizedPoints& n) const
     {
@@ -48,7 +48,7 @@ struct NormalizedPoints
     duplicates. */
 bool check_consistency(const PiecePoints& points)
 {
-    for (unsigned int i = 0; i < points.size(); ++i)
+    for (unsigned i = 0; i < points.size(); ++i)
         if (i > 0 && points[i] == points[i - 1])
             return false;
     return true;
@@ -56,8 +56,8 @@ bool check_consistency(const PiecePoints& points)
 #endif // LIBBOARDGAME_DEBUG
 
 /** Bring piece points into a normal form that is constant under translation. */
-NormalizedPoints normalize(const PiecePoints& points,
-                           unsigned int point_type, const Geometry& geometry)
+NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
+                           const Geometry& geometry)
 {
     if (log_piece_creation)
         log() << "Points " << points << '\n';
@@ -69,8 +69,8 @@ NormalizedPoints normalize(const PiecePoints& points,
         log() << "Point type " << point_type << ", type match shift "
               << normalized.points << '\n';
     // Make the coordinates positive and minimal
-    unsigned int width; // unused
-    unsigned int height; // unused
+    unsigned width; // unused
+    unsigned height; // unused
     CoordPoint offset;
     normalize_offset(normalized.points.begin(), normalized.points.end(),
                      width, height, offset);

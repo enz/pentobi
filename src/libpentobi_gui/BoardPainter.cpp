@@ -164,8 +164,8 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
         return CoordPoint(x, y);
 }
 
-void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned int width,
-                                   unsigned int height, Variant variant,
+void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
+                                   unsigned height, Variant variant,
                                    const Geometry& geometry)
 {
     m_hasPainted = true;

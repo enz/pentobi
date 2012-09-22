@@ -25,7 +25,7 @@ using libpentobi_base::Tree;
 //-----------------------------------------------------------------------------
 
 void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
-                    function<void(unsigned int,unsigned int)> progress_callback)
+                    function<void(unsigned,unsigned)> progress_callback)
 {
     m_variant = game.get_variant();
     m_moves.clear();
@@ -36,7 +36,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     BoardUpdater updater(tree, *bd);
     const Node& root = game.get_root();
     const Node* node = &root;
-    unsigned int total_moves = 0;
+    unsigned total_moves = 0;
     while (node != 0)
     {
         if (tree.has_move(*node))
@@ -46,7 +46,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     WallTime time_source;
     clear_abort();
     node = &root;
-    unsigned int move_number = 0;
+    unsigned move_number = 0;
     while (node != 0)
     {
         ColorMove mv = tree.get_move(*node);

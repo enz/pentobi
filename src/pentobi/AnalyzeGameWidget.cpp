@@ -63,12 +63,12 @@ void AnalyzeGameWidget::mousePressEvent(QMouseEvent* event)
 {
     if (! m_isInitialized && m_isRunning)
         return;
-    unsigned int moveNumber =
-        static_cast<unsigned int>((event->x() - m_borderX) / m_dX);
+    unsigned moveNumber =
+        static_cast<unsigned>((event->x() - m_borderX) / m_dX);
     if (moveNumber >= m_analyzeGame.get_nu_moves())
         return;
     vector<ColorMove> moves;
-    for (unsigned int i = 0; i < moveNumber; ++i)
+    for (unsigned i = 0; i < moveNumber; ++i)
         moves.push_back(m_analyzeGame.get_move(i));
     emit gotoPosition(m_analyzeGame.get_variant(), moves);
 }
@@ -86,9 +86,9 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(240, 240, 240));
     painter.drawRect(0, 0, m_maxX, m_maxY);
-    unsigned int nu_moves = m_analyzeGame.get_nu_moves();
+    unsigned nu_moves = m_analyzeGame.get_nu_moves();
     if (m_currentPosition >= 0
-        && static_cast<unsigned int>(m_currentPosition) < nu_moves)
+        && static_cast<unsigned>(m_currentPosition) < nu_moves)
     {
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
@@ -116,7 +116,7 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     painter.setPen(QColor(128, 128, 128));
     painter.drawLine(0, m_maxY / 2, m_maxX, m_maxY / 2);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    for (unsigned int i = 0; i < nu_moves; ++i)
+    for (unsigned i = 0; i < nu_moves; ++i)
     {
         if (! m_analyzeGame.has_value(i))
             continue;
@@ -130,8 +130,8 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     }
 }
 
-void AnalyzeGameWidget::progressCallback(unsigned int movesAnalyzed,
-                                         unsigned int totalMoves)
+void AnalyzeGameWidget::progressCallback(unsigned movesAnalyzed,
+                                         unsigned totalMoves)
 {
     if (totalMoves == 0)
         return;
@@ -168,7 +168,7 @@ void AnalyzeGameWidget::setCurrentPosition(const Game& game, const Node& node)
         }
         if (moves.size() <= m_analyzeGame.get_nu_moves())
         {
-            for (unsigned int i = 0; i < moves.size(); ++i)
+            for (unsigned i = 0; i < moves.size(); ++i)
                 if (moves[i] != m_analyzeGame.get_move(i))
                     return;
             m_currentPosition = moves.size();

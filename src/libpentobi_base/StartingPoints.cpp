@@ -14,7 +14,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-void StartingPoints::add_colored_starting_point(unsigned int x, unsigned int y,
+void StartingPoints::add_colored_starting_point(unsigned x, unsigned y,
                                                 Color c)
 {
     Point p(x, y);
@@ -23,8 +23,7 @@ void StartingPoints::add_colored_starting_point(unsigned int x, unsigned int y,
     m_starting_points[c].push_back(p);
 }
 
-void StartingPoints::add_colorless_starting_point(unsigned int x,
-                                                  unsigned int y)
+void StartingPoints::add_colorless_starting_point(unsigned x, unsigned y)
 {
     Point p(x, y);
     m_is_colorless_starting_point[p] = true;

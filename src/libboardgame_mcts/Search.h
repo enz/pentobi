@@ -55,7 +55,7 @@ using libboardgame_util::string_util::to_string;
     @tparam S The state of a simulation
     @tparam M The move type
     @tparam P The maximum number of players */
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 class Search
 {
 public:
@@ -63,7 +63,7 @@ public:
 
     typedef M Move;
 
-    static const unsigned int max_players = P;
+    static const unsigned max_players = P;
 
     typedef libboardgame_mcts::Node<M> Node;
 
@@ -94,10 +94,10 @@ public:
     virtual string get_move_string(Move mv) const = 0;
 
     /** Get the current number of players. */
-    virtual unsigned int get_nu_players() const = 0;
+    virtual unsigned get_nu_players() const = 0;
 
     /** Get player to play at root node of the search. */
-    virtual unsigned int get_player() const = 0;
+    virtual unsigned get_player() const = 0;
 
     /** An evaluation value representing a 50% winning probability. */
     virtual Float get_tie_value() const = 0;
@@ -365,10 +365,10 @@ private:
     bool m_use_last_good_reply;
 
     /** Player to play at the root node of the search. */
-    unsigned int m_player;
+    unsigned m_player;
 
     /** Currently always 1 (multi-threaded search not yet implemented). */
-    unsigned int m_nu_threads;
+    unsigned m_nu_threads;
 
     /** Time of last search. */
     double m_last_time;
@@ -443,12 +443,12 @@ private:
 
     bool check_move_cannot_change(Float count, Float remaining) const;
 
-    bool expand_node(unsigned int thread_id, const Node& node,
+    bool expand_node(unsigned thread_id, const Node& node,
                      const Node*& best_child, Float init_val);
 
     LIBBOARDGAME_FLATTEN void playout();
 
-    void play_in_tree(unsigned int thread_id, bool& is_out_of_memory,
+    void play_in_tree(unsigned thread_id, bool& is_out_of_memory,
                       bool& is_terminal);
 
     bool prune(TimeSource& time_source, double time, double max_time,
@@ -461,34 +461,34 @@ private:
     void update_rave_values(const array<Float,max_players>& eval);
 
     void update_rave_values(const array<Float,max_players>&, unsigned i,
-                            unsigned int player);
+                            unsigned player);
 
     void update_values(const array<Float,max_players>& eval);
 };
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Search<S,M,P>::AssertionHandler::AssertionHandler(const Search& search)
     : m_search(search)
 {
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Search<S,M,P>::AssertionHandler::~AssertionHandler() throw()
 {
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::AssertionHandler::run()
 {
     m_search.dump(log());
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Search<S,M,P>::Simulation::~Simulation() throw()
 {
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Search<S,M,P>::Search(const State& state, size_t memory)
     : m_expand_threshold(0),
       m_deterministic(false),
@@ -512,16 +512,16 @@ Search<S,M,P>::Search(const State& state, size_t memory)
       m_assertion_handler(*this)
 {
     set_bias_term_constant(0.7f);
-    for (unsigned int i = 0; i < max_players; ++i)
+    for (unsigned i = 0; i < max_players; ++i)
         m_first_play[i].fill(numeric_limits<unsigned>::max());
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Search<S,M,P>::~Search() throw()
 {
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_abort() const
 {
     if (get_abort())
@@ -545,7 +545,7 @@ bool Search<S,M,P>::check_abort() const
     return false;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_abort_expensive() const
 {
     Float count = m_tree.get_root().get_count();
@@ -583,7 +583,7 @@ bool Search<S,M,P>::check_abort_expensive() const
     return false;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_move_cannot_change(Float count,
                                              Float remaining) const
 {
@@ -603,14 +603,14 @@ bool Search<S,M,P>::check_move_cannot_change(Float count,
     return (max_count > second_max_count + remaining);
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::dump(ostream& out) const
 {
     m_state.dump(out);
 }
 
-template<class S, class M, unsigned int P>
-bool Search<S,M,P>::expand_node(unsigned int thread_id, const Node& node,
+template<class S, class M, unsigned P>
+bool Search<S,M,P>::expand_node(unsigned thread_id, const Node& node,
                                 const Node*& best_child, Float init_val)
 {
     typename Tree::NodeExpander expander(thread_id, m_tree, node);
@@ -624,37 +624,37 @@ bool Search<S,M,P>::expand_node(unsigned int thread_id, const Node& node,
     return false;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 double Search<S,M,P>::expected_sim_per_sec() const
 {
     return 100.0;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Float Search<S,M,P>::get_bias_term_constant() const
 {
     return m_bias_term_constant;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Float Search<S,M,P>::get_expand_threshold() const
 {
     return m_expand_threshold;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::get_last_good_reply() const
 {
     return m_use_last_good_reply;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 const Parameters& Search<S,M,P>::get_last_reuse_param() const
 {
     return m_last_reuse_param;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 size_t Search<S,M,P>::get_max_nodes(size_t memory)
 {
     // Memory is used for 2 trees (m_tree and m_tmp_tree)
@@ -663,19 +663,19 @@ size_t Search<S,M,P>::get_max_nodes(size_t memory)
     return max_nodes;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 size_t Search<S,M,P>::get_nu_simulations() const
 {
     return m_nu_simulations;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 inline const array<StatisticsBase<Float>,P>& Search<S,M,P>::get_root_val() const
 {
     return m_root_val;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Parameters Search<S,M,P>::get_reuse_param() const
 {
     Parameters p;
@@ -686,95 +686,95 @@ Parameters Search<S,M,P>::get_reuse_param() const
     return p;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Float Search<S,M,P>::get_prune_count_start() const
 {
     return m_prune_count_start;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::get_prune_full_tree() const
 {
     return m_prune_full_tree;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::get_rave() const
 {
     return m_rave;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Float Search<S,M,P>::get_rave_equivalence() const
 {
     return m_rave_equivalence;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::get_reuse_subtree() const
 {
     return m_reuse_subtree;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::get_reuse_tree() const
 {
     return m_reuse_tree;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 inline typename Search<S,M,P>::State& Search<S,M,P>::get_state()
 {
     return m_state;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 inline const typename Search<S,M,P>::State& Search<S,M,P>::get_state()
     const
 {
     return m_state;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 inline TimeSource& Search<S,M,P>::get_time_source()
 {
     LIBBOARDGAME_ASSERT(m_time_source != 0);
     return *m_time_source;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 size_t Search<S,M,P>::get_tree_memory() const
 {
     return m_tree_memory;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 inline const typename Search<S,M,P>::Tree& Search<S,M,P>::get_tree()
     const
 {
     return m_tree;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 Float Search<S,M,P>::get_unexplored_value() const
 {
     return m_unexplored_value;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::get_weight_rave_updates() const
 {
     return m_weight_rave_updates;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_followup(vector<Move>& sequence)
 {
     LIBBOARDGAME_UNUSED(sequence);
     return false;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::on_search_iteration(size_t n, const Simulation& simulation)
 {
     LIBBOARDGAME_UNUSED(n);
@@ -782,13 +782,13 @@ void Search<S,M,P>::on_search_iteration(size_t n, const Simulation& simulation)
     // Default implementation does nothing
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::on_start_search()
 {
     // Default implementation does nothing
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::playout()
 {
     m_state.start_playout();
@@ -797,7 +797,7 @@ void Search<S,M,P>::playout()
         Move last_good_reply = Move::null();
         if (m_use_last_good_reply)
         {
-            unsigned int nu_moves = m_state.get_nu_moves();
+            unsigned nu_moves = m_state.get_nu_moves();
             if (nu_moves > 0)
             {
                 PlayerMove last_move = m_state.get_move(nu_moves - 1);
@@ -809,9 +809,9 @@ void Search<S,M,P>::playout()
     }
 }
 
-template<class S, class M, unsigned int P>
-void Search<S,M,P>::play_in_tree(unsigned int thread_id,
-                                 bool& is_out_of_memory, bool& is_terminal)
+template<class S, class M, unsigned P>
+void Search<S,M,P>::play_in_tree(unsigned thread_id, bool& is_out_of_memory,
+                                 bool& is_terminal)
 {
     const Node& root = m_tree.get_root();
     const Node* node = &root;
@@ -824,7 +824,7 @@ void Search<S,M,P>::play_in_tree(unsigned int thread_id,
             node = select_child(*node);
         else if (node->get_visit_count() >= m_expand_threshold || node == &root)
         {
-            unsigned int to_play = m_state.get_to_play();
+            unsigned to_play = m_state.get_to_play();
             if (! expand_node(thread_id, *node, node,
                               m_init_val[to_play].get_mean()))
             {
@@ -845,7 +845,7 @@ void Search<S,M,P>::play_in_tree(unsigned int thread_id,
     }
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::write_info(ostream& out) const
 {
     const Node& root = m_tree.get_root();
@@ -862,13 +862,13 @@ void Search<S,M,P>::write_info(ostream& out) const
         % m_stat_in_tree_len.to_string(true, 1, true);
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::write_info_ext(ostream& out) const
 {
     LIBBOARDGAME_UNUSED(out);
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::prune(TimeSource& time_source, double time,
                           double max_time, Float prune_min_count,
                           Float& new_prune_min_count)
@@ -904,7 +904,7 @@ bool Search<S,M,P>::prune(TimeSource& time_source, double time,
     }
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
                            double max_time, TimeSource& time_source,
                            bool always_search)
@@ -914,7 +914,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
         // max_time is still used at some places in the code, so we set it to
         // infinity
         max_time = numeric_limits<double>::max();
-    unsigned int nu_players = get_nu_players();
+    unsigned nu_players = get_nu_players();
     bool clear_tree = true;
     bool is_followup = check_followup(m_followup_sequence);
     bool is_same = false;
@@ -923,13 +923,13 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
         is_same = true;
         is_followup = false;
     }
-    for (unsigned int i = 0; i < nu_players; ++i)
+    for (unsigned i = 0; i < nu_players; ++i)
     {
         m_init_val[i].clear();
         m_init_val[i].add(get_tie_value());
     }
     if (is_same || (is_followup && m_followup_sequence.size() <= nu_players))
-        for (unsigned int i = 0; i < nu_players; ++i)
+        for (unsigned i = 0; i < nu_players; ++i)
             if (m_root_val[i].get_count() > 0)
                 m_init_val[i] = m_root_val[i];
     if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
@@ -988,11 +988,11 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
     m_time_source = &time_source;
     on_start_search();
     // Currently always 0 (multi-threaded search not yet implemented)
-    unsigned int thread_id = 0;
+    unsigned thread_id = 0;
     m_player = get_player();
     m_stat_len.clear();
     m_stat_in_tree_len.clear();
-    for (unsigned int i = 0; i < nu_players; ++i)
+    for (unsigned i = 0; i < nu_players; ++i)
         m_root_val[i].clear();
     if (m_use_last_good_reply && ! is_followup)
         m_reply_table.init(nu_players);
@@ -1010,8 +1010,8 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
                                    bind(&Search::check_abort_expensive, this));
     if (m_deterministic)
     {
-        unsigned int interval =
-            static_cast<unsigned int>(max(1.0, expected_sim_per_sec() / 5.0));
+        unsigned interval =
+            static_cast<unsigned>(max(1.0, expected_sim_per_sec() / 5.0));
         expensive_abort_checker.set_deterministic(interval);
     }
     while (m_tree.get_root().get_count() == 0
@@ -1068,7 +1068,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
     return result;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 const Node<M>* Search<S,M,P>::select_child(const Node& node)
 {
     if (log_move_selection)
@@ -1151,7 +1151,7 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     return best_child;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
                                        const vector<Move>* exclude_moves) const
 {
@@ -1179,7 +1179,7 @@ const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
     return result;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 bool Search<S,M,P>::select_move(Move& mv, const vector<Move>* exclude_moves)
     const
 {
@@ -1193,80 +1193,80 @@ bool Search<S,M,P>::select_move(Move& mv, const vector<Move>* exclude_moves)
         return false;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_bias_term_constant(Float c)
 {
     m_bias_term_constant = c;
     m_bias_term_constant_sq = c * c;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_callback(function<void(double, double)> callback)
 {
     m_callback = callback;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_expand_threshold(Float n)
 {
     m_expand_threshold = n;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_deterministic()
 {
     m_deterministic = true;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_last_good_reply(bool enable)
 {
     m_use_last_good_reply = enable;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_prune_count_start(Float n)
 {
     m_prune_count_start = n;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_prune_full_tree(bool enable)
 {
     m_prune_full_tree = enable;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_rave(bool enable)
 {
     m_rave = enable;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_rave_check_same(bool enable)
 {
     m_rave_check_same = enable;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_rave_equivalence(Float n)
 {
     m_rave_equivalence = n;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_reuse_subtree(bool enable)
 {
     m_reuse_subtree = enable;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_reuse_tree(bool enable)
 {
     m_reuse_tree = enable;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_tree_memory(size_t memory)
 {
     m_tree_memory = memory;
@@ -1275,37 +1275,37 @@ void Search<S,M,P>::set_tree_memory(size_t memory)
     m_tmp_tree.set_max_nodes(m_max_nodes);
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_unexplored_value(Float value)
 {
     m_unexplored_value = value;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::set_weight_rave_updates(bool enable)
 {
     m_weight_rave_updates = enable;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::update_last_good_reply(const array<Float,max_players>& eval)
 {
-    unsigned int nu_players = get_nu_players();
+    unsigned nu_players = get_nu_players();
     Float max_eval = eval[0];
-    for (unsigned int i = 1; i < nu_players; ++i)
+    for (unsigned i = 1; i < nu_players; ++i)
         max_eval = max(eval[i], max_eval);
     array<bool,max_players> is_winner;
-    for (unsigned int i = 0; i < nu_players; ++i)
+    for (unsigned i = 0; i < nu_players; ++i)
         // Note: this handles a draw as a win. Without additional information
         // we cannot make a good decision how to handle draws and some
         // experiments in Blokus Duo showed (with low confidence) that treating
         // them as a win for both players is slighly better than treating them
         // as a loss for both.
         is_winner[i] = (eval[i] == max_eval);
-    unsigned int nu_moves = m_state.get_nu_moves();
+    unsigned nu_moves = m_state.get_nu_moves();
     // Iterate backwards to store 1st reply if a move was played more than once
     if (nu_moves > 1)
-        for (unsigned int i = nu_moves - 1; i > 0; --i)
+        for (unsigned i = nu_moves - 1; i > 0; --i)
         {
             PlayerMove reply = m_state.get_move(i);
             PlayerMove mv = m_state.get_move(i - 1);
@@ -1316,15 +1316,15 @@ void Search<S,M,P>::update_last_good_reply(const array<Float,max_players>& eval)
         }
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval)
 {
-    unsigned int nu_moves = m_state.get_nu_moves();
+    unsigned nu_moves = m_state.get_nu_moves();
     if (nu_moves == 0)
         return;
     vector<const Node*>& nodes = m_simulation.m_nodes;
     size_t nu_nodes = nodes.size();
-    unsigned int i = nu_moves - 1;
+    unsigned i = nu_moves - 1;
     for ( ; i >= nu_nodes; --i)
     {
         LIBBOARDGAME_ASSERT(i < nu_moves);
@@ -1347,7 +1347,7 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval)
         --i;
     }
     // Reset m_first_play
-    for (unsigned int i = 0; i < nu_moves; ++i)
+    for (unsigned i = 0; i < nu_moves; ++i)
     {
         PlayerMove mv = m_state.get_move(i);
         m_first_play[mv.player][mv.move.to_int()] =
@@ -1355,9 +1355,9 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval)
     }
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
-                                       unsigned i, unsigned int player)
+                                       unsigned i, unsigned player)
 {
     LIBBOARDGAME_ASSERT(i < m_simulation.m_nodes.size());
     const Node* node = m_simulation.m_nodes[i];
@@ -1378,7 +1378,7 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
             if (m_rave_check_same)
             {
                 bool other_played_same = false;
-                for (unsigned int i = 0; i < max_players; ++i)
+                for (unsigned i = 0; i < max_players; ++i)
                     if (i != player)
                     {
                         unsigned first_other = m_first_play[i][m];
@@ -1407,22 +1407,21 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
     }
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void Search<S,M,P>::update_values(const array<Float,max_players>& eval)
 {
     m_tree.add_value(m_tree.get_root(), eval[m_player]);
     m_tree.inc_visit_count(m_tree.get_root());
-    unsigned int nu_nodes =
-        static_cast<unsigned int>(m_simulation.m_nodes.size());
-    for (unsigned int i = 1; i < nu_nodes; ++i)
+    unsigned nu_nodes = static_cast<unsigned>(m_simulation.m_nodes.size());
+    for (unsigned i = 1; i < nu_nodes; ++i)
     {
         const Node& node = *m_simulation.m_nodes[i];
         PlayerMove mv = m_state.get_move(i - 1);
         m_tree.add_value(node, eval[mv.player]);
         m_tree.inc_visit_count(node);
     }
-    unsigned int nu_players = get_nu_players();
-    for (unsigned int i = 0; i < nu_players; ++i)
+    unsigned nu_players = get_nu_players();
+    for (unsigned i = 0; i < nu_players; ++i)
     {
         m_root_val[i].add(eval[i]);
         m_init_val[i].add(eval[i]);

@@ -52,7 +52,7 @@ Move Book::genmove(const Board& bd, Color c,
 {
     LIBBOARDGAME_ASSERT(! bd.has_setup());
     const libboardgame_sgf::Node* node = &m_tree.get_root();
-    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
+    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         ColorMove mv = bd.get_move(i);
         mv.move = get_transformed(bd, mv.move, transform);
@@ -71,8 +71,8 @@ Move Book::get_transformed(const Board& bd, Move mv,
 {
     if (mv.is_pass())
         return mv;
-    unsigned int width = bd.get_geometry().get_width();
-    unsigned int height = bd.get_geometry().get_height();
+    unsigned width = bd.get_geometry().get_width();
+    unsigned height = bd.get_geometry().get_height();
     MovePoints points;
     BOOST_FOREACH(Point p, bd.get_move_points(mv))
         points.push_back(transform.get_transformed(p, width, height));
@@ -100,11 +100,11 @@ void Book::load(istream& in)
 const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
                                const Node& node)
 {
-    unsigned int nu_children = node.get_nu_children();
+    unsigned nu_children = node.get_nu_children();
     if (nu_children == 0)
         return 0;
     vector<const Node*> good_moves;
-    for (unsigned int i = 0; i < nu_children; ++i)
+    for (unsigned i = 0; i < nu_children; ++i)
     {
         const Node& child = node.get_child(i);
         ColorMove mv = tree.get_move(child);
@@ -134,7 +134,7 @@ const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
     if (good_moves.empty())
         return 0;
     log() << "Book moves: " << good_moves.size() << '\n';
-    unsigned int nu_good_moves = static_cast<unsigned int>(good_moves.size());
+    unsigned nu_good_moves = static_cast<unsigned>(good_moves.size());
     return good_moves[m_random.generate_small_int(nu_good_moves)];
 }
 

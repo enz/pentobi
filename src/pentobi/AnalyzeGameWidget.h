@@ -102,7 +102,7 @@ private:
 
     void initSize();
 
-    void progressCallback(unsigned int movesAnalyzed, unsigned int totalMoves);
+    void progressCallback(unsigned movesAnalyzed, unsigned totalMoves);
 
     void threadFunction();
 };

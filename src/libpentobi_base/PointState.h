@@ -32,12 +32,12 @@ public:
         PointState operator*() const;
 
     private:
-        unsigned int m_i;
+        unsigned m_i;
     };
 
-    static const unsigned int range = Color::range + 1;
+    static const unsigned range = Color::range + 1;
 
-    static const unsigned int value_empty = range - 1;
+    static const unsigned value_empty = range - 1;
 
     PointState();
 
@@ -45,7 +45,7 @@ public:
 
     PointState(Color c);
 
-    explicit PointState(unsigned int i);
+    explicit PointState(unsigned i);
 
     bool operator==(const PointState& s) const;
 
@@ -55,7 +55,7 @@ public:
 
     bool operator!=(const Color& c) const;
 
-    unsigned int to_int() const;
+    unsigned to_int() const;
 
     static PointState empty();
 
@@ -66,9 +66,9 @@ public:
     Color to_color() const;
 
 private:
-    static const unsigned int value_uninitialized = range;
+    static const unsigned value_uninitialized = range;
 
-    unsigned int m_i;
+    unsigned m_i;
 
     bool is_initialized() const;
 };
@@ -113,7 +113,7 @@ inline PointState::PointState(Color c)
     m_i = c.to_int();
 }
 
-inline PointState::PointState(unsigned int i)
+inline PointState::PointState(unsigned i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
@@ -167,7 +167,7 @@ inline Color PointState::to_color() const
     return Color(m_i);
 }
 
-inline unsigned int PointState::to_int() const
+inline unsigned PointState::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;

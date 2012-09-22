@@ -16,7 +16,7 @@ using namespace std;
 
 /** Array-based list terminated with a null element.
     Fast construction and iteration. */
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 class NullTermList
 {
     friend class Init;
@@ -57,11 +57,11 @@ public:
         const T* m_t;
     };
 
-    static const unsigned int max_size = M;
+    static const unsigned max_size = M;
 
     NullTermList();
 
-    unsigned int size() const;
+    unsigned size() const;
 
     bool empty() const;
 
@@ -75,7 +75,7 @@ private:
 #endif
 };
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline NullTermList<T, M>::Init::Init(NullTermList& list)
     : m_t(list.m_a)
 {
@@ -85,7 +85,7 @@ inline NullTermList<T, M>::Init::Init(NullTermList& list)
 #endif
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline void NullTermList<T, M>::Init::push_back(const T& t)
 {
     LIBBOARDGAME_ASSERT(m_t - m_list->m_a < max_size);
@@ -93,7 +93,7 @@ inline void NullTermList<T, M>::Init::push_back(const T& t)
     ++m_t;
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline void NullTermList<T, M>::Init::finish()
 {
     set_null(*m_t);
@@ -102,7 +102,7 @@ inline void NullTermList<T, M>::Init::finish()
 #endif
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 bool NullTermList<T, M>::Init::include(NullTermList& list, const T& t)
 {
     for (T* i = list.m_a; i != m_t; ++i)
@@ -112,34 +112,34 @@ bool NullTermList<T, M>::Init::include(NullTermList& list, const T& t)
     return true;
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline NullTermList<T, M>::Iterator::Iterator(const NullTermList& list)
     : m_t(list.m_a)
 {
     LIBBOARDGAME_ASSERT(list.m_is_initialized);
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline const T& NullTermList<T, M>::Iterator::operator*() const
 {
     LIBBOARDGAME_ASSERT(operator bool());
     return *m_t;
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline NullTermList<T, M>::Iterator::operator bool() const
 {
     return ! is_null(*m_t);
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline void NullTermList<T, M>::Iterator::operator++()
 {
     LIBBOARDGAME_ASSERT(operator bool());
     ++m_t;
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline NullTermList<T, M>::NullTermList()
 {
 #if LIBBOARDGAME_DEBUG
@@ -147,7 +147,7 @@ inline NullTermList<T, M>::NullTermList()
 #endif
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline bool NullTermList<T, M>::contains(const T& t) const
 {
     LIBBOARDGAME_ASSERT(m_is_initialized);
@@ -157,17 +157,17 @@ inline bool NullTermList<T, M>::contains(const T& t) const
     return false;
 }
 
-template<typename T, unsigned int M>
+template<typename T, unsigned M>
 inline bool NullTermList<T, M>::empty() const
 {
     return is_null(m_a[0]);
 }
 
-template<typename T, unsigned int M>
-inline unsigned int NullTermList<T, M>::size() const
+template<typename T, unsigned M>
+inline unsigned NullTermList<T, M>::size() const
 {
     LIBBOARDGAME_ASSERT(m_is_initialized);
-    unsigned int n = 0;
+    unsigned n = 0;
     for (Iterator i(*this); i; ++i)
         ++n;
     return n;

@@ -47,7 +47,7 @@ public:
     class NodeExpander
     {
     public:
-        NodeExpander(unsigned int thread_id, Tree& tree, const Node& node);
+        NodeExpander(unsigned thread_id, Tree& tree, const Node& node);
 
         /** Add new child without prior knowledge initialization.
             The child will only be added if the tree is not full. */
@@ -72,7 +72,7 @@ public:
         const Node* get_best_child() const;
 
     private:
-        unsigned int m_thread_id;
+        unsigned m_thread_id;
 
         bool m_is_tree_full;
 
@@ -89,7 +89,7 @@ public:
         const Node* m_best_child;
     };
 
-    Tree(size_t max_nodes, unsigned int nu_threads);
+    Tree(size_t max_nodes, unsigned nu_threads);
 
     ~Tree() throw();
 
@@ -100,15 +100,15 @@ public:
     size_t get_nu_nodes() const;
 
     void link_children(const Node& node, const Node& first_child,
-                       unsigned int nu_children);
+                       unsigned nu_children);
 
     void set_max_nodes(size_t max_nodes);
 
     size_t get_max_nodes() const;
 
-    bool create_node(unsigned int thread_id, const Move& mv);
+    bool create_node(unsigned thread_id, const Move& mv);
 
-    bool create_node(unsigned int thread_id, const Move& mv, Float value,
+    bool create_node(unsigned thread_id, const Move& mv, Float value,
                      Float count, Float rave_value, Float rave_count);
 
     void add_value(const Node& node, Float v);
@@ -168,7 +168,7 @@ private:
         Node* next;
     };
 
-    unsigned int m_nu_threads;
+    unsigned m_nu_threads;
 
     size_t m_max_nodes;
 
@@ -180,13 +180,13 @@ private:
 
     bool contains(const Node& node) const;
 
-    unsigned int get_thread_storage(const Node& node) const;
+    unsigned get_thread_storage(const Node& node) const;
 
     Node& non_const(const Node& node) const;
 };
 
 template<typename M>
-inline Tree<M>::NodeExpander::NodeExpander(unsigned int thread_id,
+inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id,
                                            Tree& tree, const Node& node)
     : m_thread_id(thread_id),
       m_is_tree_full(false),
@@ -257,7 +257,7 @@ inline void Tree<M>::NodeExpander::link_children()
 }
 
 template<typename M>
-Tree<M>::Tree(size_t max_nodes, unsigned int nu_threads)
+Tree<M>::Tree(size_t max_nodes, unsigned nu_threads)
     : m_nu_threads(nu_threads)
 {
     set_max_nodes(max_nodes);
@@ -284,7 +284,7 @@ template<typename M>
 void Tree<M>::clear()
 {
     m_thread_storage[0].next = m_thread_storage[0].begin + 1;
-    for (unsigned int i = 1; i < m_nu_threads; ++i)
+    for (unsigned i = 1; i < m_nu_threads; ++i)
         m_thread_storage[i].next = m_thread_storage[i].begin;
     m_nodes[0].clear();
 }
@@ -320,7 +320,7 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     ThreadStorage& thread_storage =
         target.m_thread_storage[get_thread_storage(*node.get_first_child())];
     Node* target_child = thread_storage.next;
-    unsigned int nu_children = node.get_nu_children();
+    unsigned nu_children = node.get_nu_children();
     target_node_non_const.link_children(*target_child, nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
@@ -337,7 +337,7 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
 }
 
 template<typename M>
-inline bool Tree<M>::create_node(unsigned int thread_id, const Move& mv)
+inline bool Tree<M>::create_node(unsigned thread_id, const Move& mv)
 {
     LIBBOARDGAME_ASSERT(thread_id < m_nu_threads);
     ThreadStorage& thread_storage = m_thread_storage[thread_id];
@@ -351,7 +351,7 @@ inline bool Tree<M>::create_node(unsigned int thread_id, const Move& mv)
 }
 
 template<typename M>
-bool Tree<M>::create_node(unsigned int thread_id, const Move& mv,
+bool Tree<M>::create_node(unsigned thread_id, const Move& mv,
                           Float value, Float count, Float rave_value,
                           Float rave_count)
 {
@@ -389,7 +389,7 @@ template<typename M>
 size_t Tree<M>::get_nu_nodes() const
 {
     size_t result = 0;
-    for (unsigned int i = 0; i < m_nu_threads; ++i)
+    for (unsigned i = 0; i < m_nu_threads; ++i)
     {
         ThreadStorage& thread_storage = m_thread_storage[i];
         result += thread_storage.next - thread_storage.begin;
@@ -405,10 +405,10 @@ inline const typename Tree<M>::Node& Tree<M>::get_root() const
 
 /** Get the thread storage a node belongs to. */
 template<typename M>
-inline unsigned int Tree<M>::get_thread_storage(const Node& node) const
+inline unsigned Tree<M>::get_thread_storage(const Node& node) const
 {
     size_t diff = &node - m_nodes.get();
-    return static_cast<unsigned int>(diff / m_nodes_per_thread);
+    return static_cast<unsigned>(diff / m_nodes_per_thread);
 }
 
 template<typename M>
@@ -419,7 +419,7 @@ inline void Tree<M>::inc_visit_count(const Node& node)
 
 template<typename M>
 inline void Tree<M>::link_children(const Node& node, const Node& first_child,
-                                   unsigned int nu_children)
+                                   unsigned nu_children)
 {
     non_const(node).link_children(non_const(first_child), nu_children);
 }
@@ -437,7 +437,7 @@ inline typename Tree<M>::Node& Tree<M>::non_const(const Node& node) const
 template<typename M>
 bool Tree<M>::remove_child(const Node& node, const Move& mv)
 {
-    unsigned int nu_children = node.get_nu_children();
+    unsigned nu_children = node.get_nu_children();
     if (nu_children == 0)
         return false;
     Node& first_child = non_const(*node.get_first_child());
@@ -465,7 +465,7 @@ void Tree<M>::set_max_nodes(size_t max_nodes)
     m_nodes.reset(new Node[max_nodes]);
     m_thread_storage.reset(new ThreadStorage[m_nu_threads]);
     m_nodes_per_thread = max_nodes / m_nu_threads;
-    for (unsigned int i = 0; i < m_nu_threads; ++i)
+    for (unsigned i = 0; i < m_nu_threads; ++i)
     {
         ThreadStorage& thread_storage = m_thread_storage[i];
         thread_storage.begin = &m_nodes[i * m_nodes_per_thread];
@@ -480,7 +480,7 @@ void Tree<M>::swap(Tree& tree)
     // Reminder to update this function when the class gets additional members
     struct Dummy
     {
-        unsigned int m_nu_threads;
+        unsigned m_nu_threads;
         size_t m_max_nodes;
         size_t m_nodes_per_thread;
         unique_ptr<ThreadStorage> m_thread_storage;

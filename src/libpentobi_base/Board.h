@@ -44,7 +44,7 @@ public:
     };
 
     /** Maximum number of pieces per player in any game variant. */
-    static const unsigned int max_pieces = Setup::max_pieces;
+    static const unsigned max_pieces = Setup::max_pieces;
 
     typedef ArrayList<Piece,BoardConst::max_pieces> PiecesLeftList;
 
@@ -54,15 +54,15 @@ public:
         maximum number of moves is reached in case that a piece move is
         followed by (Color::range-1) pass moves and an extra Color::range pass
         moves at the end. */
-    static const unsigned int max_player_moves = Color::range * max_pieces + 1;
+    static const unsigned max_player_moves = Color::range * max_pieces + 1;
 
-    static const unsigned int max_nonpass_player_moves = max_pieces;
+    static const unsigned max_nonpass_player_moves = max_pieces;
 
     /** Maximum number of moves in any game variant.
         Includes an extra pass move per color at the end of the game. */
-    static const unsigned int max_game_moves = Color::range * max_player_moves;
+    static const unsigned max_game_moves = Color::range * max_player_moves;
 
-    static const unsigned int max_nonpass_game_moves =
+    static const unsigned max_nonpass_game_moves =
         Color::range * max_nonpass_player_moves;
 
     /** Use ANSI escape sequences for colored text output in operator>> */
@@ -72,13 +72,13 @@ public:
 
     Variant get_variant() const;
 
-    unsigned int get_nu_colors() const;
+    unsigned get_nu_colors() const;
 
     Color get_next(Color c) const;
 
     Color get_previous(Color c) const;
 
-    unsigned int get_nu_pieces() const;
+    unsigned get_nu_pieces() const;
 
     const PieceTransforms& get_transforms() const;
 
@@ -113,15 +113,15 @@ public:
     /** Get number of instances left of a piece.
         This value can be greater 1 in game variants that use multiple instances
         of a unique piece per player. */
-    unsigned int get_nu_left_piece(Color c, Piece piece) const;
+    unsigned get_nu_left_piece(Color c, Piece piece) const;
 
-    unsigned int get_points(Color c) const;
+    unsigned get_points(Color c) const;
 
-    unsigned int get_bonus(Color c) const;
+    unsigned get_bonus(Color c) const;
 
-    unsigned int get_points_with_bonus(Color c) const;
+    unsigned get_points_with_bonus(Color c) const;
 
-    unsigned int get_points_left(Color c) const;
+    unsigned get_points_left(Color c) const;
 
     Move get_played_move(Point p) const;
 
@@ -182,19 +182,19 @@ public:
 
     bool has_setup() const;
 
-    unsigned int get_nu_moves() const;
+    unsigned get_nu_moves() const;
 
     /** Get the number of pieces on board.
         This is the number of setup pieces, if the board was initialized
         with a setup position, plus the number of pieces played as moves. */
-    unsigned int get_nu_onboard_pieces() const;
+    unsigned get_nu_onboard_pieces() const;
 
     /** Get the number of pieces on board of a color.
         This is the number of setup pieces, if the board was initialized
         with a setup position, plus the number of pieces played as moves. */
-    unsigned int get_nu_onboard_pieces(Color c) const;
+    unsigned get_nu_onboard_pieces(Color c) const;
 
-    ColorMove get_move(unsigned int n) const;
+    ColorMove get_move(unsigned n) const;
 
     /** Generate all moves for one player.
         The generated moves do not include the pass move. */
@@ -229,10 +229,10 @@ public:
 
     BoardType get_board_type() const;
 
-    unsigned int get_adj_status_index(Point p, Color c) const;
+    unsigned get_adj_status_index(Point p, Color c) const;
 
     LocalMovesListRange get_moves(Piece piece, Point p,
-                                  unsigned int adj_status_index) const;
+                                  unsigned adj_status_index) const;
 
     /** Get score.
         The score is the number of points for a color minus the number of
@@ -247,7 +247,7 @@ public:
         same score. If a place is shared by n players, the following n-1 places
         are not used.
         @param[out] is_shared True if the place was shared. */
-    void get_place(Color c, unsigned int& place, bool& is_shared) const;
+    void get_place(Color c, unsigned& place, bool& is_shared) const;
 
     const Geometry& get_geometry() const;
 
@@ -289,7 +289,7 @@ public:
 private:
     Variant m_variant;
 
-    unsigned int m_nu_colors;
+    unsigned m_nu_colors;
 
     const BoardConst* m_board_const;
 
@@ -309,7 +309,7 @@ private:
 
     ColorMap<PiecesLeftList> m_pieces_left;
 
-    ColorMap<PieceMap<unsigned int>> m_nu_left_piece;
+    ColorMap<PieceMap<unsigned>> m_nu_left_piece;
 
     /** See get_second_color() */
     ColorMap<Color> m_second_color;
@@ -318,9 +318,9 @@ private:
 
     ArrayList<ColorMove, max_game_moves> m_moves;
 
-    ColorMap<unsigned int> m_nu_onboard_pieces;
+    ColorMap<unsigned> m_nu_onboard_pieces;
 
-    unsigned int m_nu_onboard_pieces_all;
+    unsigned m_nu_onboard_pieces_all;
 
     ColorMap<char> m_color_char;
 
@@ -336,7 +336,7 @@ private:
         Reused for efficiency. */
     mutable MoveMarker m_marker;
 
-    void gen_moves(Color c, Point p, unsigned int adj_status_index,
+    void gen_moves(Color c, Point p, unsigned adj_status_index,
                    MoveMarker& marker,
                    ArrayList<Move, Move::range>& moves) const;
 
@@ -346,8 +346,8 @@ private:
 
     void place(Color c, Move mv);
 
-    void write_pieces_left(ostream& out, Color c, unsigned int begin,
-                           unsigned int end) const;
+    void write_pieces_left(ostream& out, Color c, unsigned begin,
+                           unsigned end) const;
 
     void write_color_info_line1(ostream& out, Color c) const;
 
@@ -355,7 +355,7 @@ private:
 
     void write_color_info_line3(ostream& out, Color c) const;
 
-    void write_info_line(ostream& out, unsigned int y) const;
+    void write_info_line(ostream& out, unsigned y) const;
 };
 
 typedef Board::Iterator BoardIterator;
@@ -375,10 +375,10 @@ inline Move Board::from_string(const string& s) const
     return m_board_const->from_string(s);
 }
 
-inline unsigned int Board::get_adj_status_index(Point p, Color c) const
+inline unsigned Board::get_adj_status_index(Point p, Color c) const
 {
-    unsigned int result = 0;
-    unsigned int n = 0;
+    unsigned result = 0;
+    unsigned n = 0;
     for (NullTermList<Point, 12>::Iterator i(m_geometry->get_adj_diag(p));
          n < BoardConst::adj_status_nu_adj && i; ++i, ++n)
         if (is_forbidden(*i, c))
@@ -411,7 +411,7 @@ inline const Board::PointStateGrid& Board::get_grid() const
     return m_point_state;
 }
 
-inline ColorMove Board::get_move(unsigned int n) const
+inline ColorMove Board::get_move(unsigned n) const
 {
     return m_moves[n];
 }
@@ -427,7 +427,7 @@ inline const MoveInfoExt& Board::get_move_info_ext(Move move) const
 }
 
 inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
-                                           unsigned int adj_status_index) const
+                                               unsigned adj_status_index) const
 {
     return m_board_const->get_moves(piece, p, adj_status_index);
 }
@@ -437,28 +437,28 @@ inline Color Board::get_next(Color c) const
     return c.get_next(m_nu_colors);
 }
 
-inline unsigned int Board::get_nu_colors() const
+inline unsigned Board::get_nu_colors() const
 {
     return m_nu_colors;
 }
 
-inline unsigned int Board::get_nu_left_piece(Color c, Piece piece) const
+inline unsigned Board::get_nu_left_piece(Color c, Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_pieces());
     return m_nu_left_piece[c][piece];
 }
 
-inline unsigned int Board::get_nu_moves() const
+inline unsigned Board::get_nu_moves() const
 {
     return m_moves.size();
 }
 
-inline unsigned int Board::get_nu_onboard_pieces() const
+inline unsigned Board::get_nu_onboard_pieces() const
 {
     return m_nu_onboard_pieces_all;
 }
 
-inline unsigned int Board::get_nu_onboard_pieces(Color c) const
+inline unsigned Board::get_nu_onboard_pieces(Color c) const
 {
     return m_nu_onboard_pieces[c];
 }
@@ -468,7 +468,7 @@ inline const MovePoints& Board::get_move_points(Move mv) const
     return m_board_const->get_move_points(mv);
 }
 
-inline unsigned int Board::get_nu_pieces() const
+inline unsigned Board::get_nu_pieces() const
 {
     return m_board_const->get_nu_pieces();
 }
@@ -499,15 +499,15 @@ inline PointState Board::get_point_state(Point p) const
     return PointState(m_point_state[p].to_int());
 }
 
-inline unsigned int Board::get_points(Color c) const
+inline unsigned Board::get_points(Color c) const
 {
-    unsigned int total_piece_points = m_board_const->get_total_piece_points();
+    unsigned total_piece_points = m_board_const->get_total_piece_points();
     if (m_variant == variant_junior)
         total_piece_points *= 2;
     return total_piece_points - get_points_left(c);
 }
 
-inline unsigned int Board::get_points_with_bonus(Color c) const
+inline unsigned Board::get_points_with_bonus(Color c) const
 {
     return get_points(c) + get_bonus(c);
 }

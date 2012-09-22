@@ -68,13 +68,12 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
     index. (Note that this is a different convention from variation strings
     which does not use move number and child move index, but node depth and
     child node index) */
-bool getVariationIndex(const Tree& tree, const Node& node,
-                       unsigned int& moveIndex)
+bool getVariationIndex(const Tree& tree, const Node& node, unsigned& moveIndex)
 {
     const Node* parent = node.get_parent_or_null();
     if (parent == 0 || parent->has_single_child())
         return false;
-    unsigned int nuSiblingMoves = 0;
+    unsigned nuSiblingMoves = 0;
     moveIndex = 0;
     for (ChildIterator i(*parent); i; ++i)
     {
@@ -90,7 +89,7 @@ bool getVariationIndex(const Tree& tree, const Node& node,
 }
 
 void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
-                  unsigned int moveNumber, ColorMove mv, bool markVariations)
+                  unsigned moveNumber, ColorMove mv, bool markVariations)
 {
     if (! mv.is_regular())
         return;
@@ -100,7 +99,7 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
     label.setNum(moveNumber);
     if (markVariations)
     {
-        unsigned int moveIndex;
+        unsigned moveIndex;
         if (getVariationIndex(game.get_tree(), node, moveIndex))
             label.append(get_letter_coord(moveIndex).c_str());
     }
@@ -112,16 +111,15 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
 
 //-----------------------------------------------------------------------------
 
-void setMarkup(GuiBoard& guiBoard, const Game& game,
-               unsigned int markMovesBegin, unsigned int markMovesEnd,
-               bool markVariations)
+void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
+               unsigned markMovesEnd, bool markVariations)
 {
     guiBoard.clearMarkup();
     if (markMovesBegin > 0)
     {
         const Tree& tree = game.get_tree();
         const Board& bd = game.get_board();
-        unsigned int displayedMoveNumber = 0; // pass moves have no number
+        unsigned displayedMoveNumber = 0; // pass moves have no number
         const Node* node = &game.get_current();
         do
         {
@@ -131,7 +129,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game,
             node = node->get_parent_or_null();
         }
         while (node != 0);
-        unsigned int moveNumber = bd.get_nu_moves();
+        unsigned moveNumber = bd.get_nu_moves();
         node = &game.get_current();
         do
         {

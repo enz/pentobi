@@ -83,7 +83,7 @@ string Writer::get_escaped(const string& s)
 
 void Writer::write_indent()
 {
-    for (unsigned int i = 0; i < m_current_indent; ++i)
+    for (unsigned i = 0; i < m_current_indent; ++i)
         m_out << ' ';
 }
 

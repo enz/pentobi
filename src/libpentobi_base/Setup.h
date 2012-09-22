@@ -18,7 +18,7 @@ namespace libpentobi_base {
 struct Setup
 {
     /** Maximum number of pieces on board per color. */
-    static const unsigned int max_pieces = 24;
+    static const unsigned max_pieces = 24;
 
     typedef ArrayList<Move,max_pieces> PlacementList;
 

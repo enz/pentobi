@@ -39,13 +39,13 @@ public:
         The function is equivalent to calling reset() and then clear()
         nu_clear times. It allows a faster implementation of a unit test case
         that tests if the overflow is handled correctly, if clear() is called
-        more than numeric_limits<unsigned int>::max() times. */
-    void setup_for_overflow_test(unsigned int nu_clear);
+        more than numeric_limits<unsigned>::max() times. */
+    void setup_for_overflow_test(unsigned nu_clear);
 
 private:
-    unsigned int m_current;
+    unsigned m_current;
 
-    unsigned int m_a[Point::range];
+    unsigned m_a[Point::range];
 
     void reset();
 };
@@ -71,7 +71,7 @@ inline void Marker<P>::clear()
 }
 
 template<class P>
-inline void Marker<P>::setup_for_overflow_test(unsigned int nu_clear)
+inline void Marker<P>::setup_for_overflow_test(unsigned nu_clear)
 {
     reset();
     m_current -= nu_clear;
@@ -80,8 +80,8 @@ inline void Marker<P>::setup_for_overflow_test(unsigned int nu_clear)
 template<class P>
 inline void Marker<P>::reset()
 {
-    m_current = numeric_limits<unsigned int>::max() - 1;
-    fill(m_a, m_a + Point::range, numeric_limits<unsigned int>::max());
+    m_current = numeric_limits<unsigned>::max() - 1;
+    fill(m_a, m_a + Point::range, numeric_limits<unsigned>::max());
 }
 
 template<class P>
@@ -93,7 +93,7 @@ inline void Marker<P>::set(Point p)
 template<class P>
 inline bool Marker<P>::toggle(Point p)
 {
-    unsigned int& ref = m_a[p.to_int()];
+    unsigned& ref = m_a[p.to_int()];
     if (ref == m_current)
     {
         ++ref;

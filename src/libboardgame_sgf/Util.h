@@ -29,7 +29,7 @@ const Node& find_root(const Node& node);
 
 /** Get the depth of a node.
     The root node has depth 0. */
-unsigned int get_depth(const Node& node);
+unsigned get_depth(const Node& node);
 
 /** Get list of nodes from root to a target node.
     @param node The target node.

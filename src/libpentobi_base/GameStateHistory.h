@@ -60,7 +60,7 @@ private:
 
     Variant m_variant;
 
-    unsigned int m_nu_colors;
+    unsigned m_nu_colors;
 
     vector<ColorMove> m_moves;
 

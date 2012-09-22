@@ -40,8 +40,8 @@ public:
         @return A random number between 0 and n - 1 */
     int generate_small_int(int n);
 
-    /** Like generate_small_int() but for unsigned int. */
-    unsigned int generate_small_uint(unsigned int n);
+    /** Like generate_small_int() but for unsigned. */
+    unsigned generate_small_uint(unsigned n);
 
     /** Generate a floating point value in [0..1]. */
     double generate_float();
@@ -83,14 +83,13 @@ inline double RandomGenerator::generate_float()
 
 inline int RandomGenerator::generate_small_int(int n)
 {
-    return static_cast<int>(generate_small_uint(static_cast<unsigned int>(n)));
+    return static_cast<int>(generate_small_uint(static_cast<unsigned>(n)));
 }
 
-inline unsigned int RandomGenerator::generate_small_uint(unsigned int n)
+inline unsigned RandomGenerator::generate_small_uint(unsigned n)
 {
     LIBBOARDGAME_ASSERT(n < (1 << 16));
-    unsigned int i =
-        static_cast<unsigned int>(((m_generator() & 0xffff) * n) >> 16);
+    unsigned i = static_cast<unsigned>(((m_generator() & 0xffff) * n) >> 16);
     LIBBOARDGAME_ASSERT(i < n);
     return i;
 }

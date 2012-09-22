@@ -19,20 +19,20 @@ using libboardgame_util::Exception;
 class Move
 {
 public:
-    static const unsigned int onboard_moves_classic = 30433;
+    static const unsigned onboard_moves_classic = 30433;
 
-    static const unsigned int onboard_moves_trigon = 32131;
+    static const unsigned onboard_moves_trigon = 32131;
 
-    static const unsigned int onboard_moves_trigon_3 = 24859;
+    static const unsigned onboard_moves_trigon_3 = 24859;
 
-    static const unsigned int onboard_moves_duo = 13729;
+    static const unsigned onboard_moves_duo = 13729;
 
-    static const unsigned int onboard_moves_junior = 7217;
+    static const unsigned onboard_moves_junior = 7217;
 
     /** Integer range of moves.
         The maximum is given by the number of on-board moves in game variant
         Trigon, plus a pass and a null move. */
-    static const unsigned int range = onboard_moves_trigon + 1 + 1;
+    static const unsigned range = onboard_moves_trigon + 1 + 1;
 
     static Move pass();
 
@@ -40,7 +40,7 @@ public:
 
     Move();
 
-    explicit Move(unsigned int i);
+    explicit Move(unsigned i);
 
     Move& operator=(const Move& mv);
 
@@ -58,7 +58,7 @@ public:
     bool is_regular() const;
 
     /** Return move as an integer between 0 and Move::range */
-    unsigned int to_int() const;
+    unsigned to_int() const;
 
 private:
     static_assert(range <= USHRT_MAX, "");
@@ -83,7 +83,7 @@ inline Move::Move()
 #endif
 }
 
-inline Move::Move(unsigned int i)
+inline Move::Move(unsigned i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = static_cast<unsigned short>(i);
@@ -147,7 +147,7 @@ inline Move Move::pass()
     return Move(value_pass);
 }
 
-inline unsigned int Move::to_int() const
+inline unsigned Move::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;

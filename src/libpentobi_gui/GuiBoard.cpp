@@ -436,8 +436,8 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         return;
     }
     const Geometry& geometry = m_bd.get_geometry();
-    unsigned int old_point_type = geometry.get_point_type(offset);
-    unsigned int point_type = m_selectedPieceTransform->get_new_point_type();
+    unsigned old_point_type = geometry.get_point_type(offset);
+    unsigned point_type = m_selectedPieceTransform->get_new_point_type();
     CoordPoint type_matching_offset = offset;
     if (old_point_type != point_type)
     {

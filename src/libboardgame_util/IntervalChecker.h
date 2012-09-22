@@ -37,7 +37,7 @@ public:
         for dynamic updating of the check interval is undesirable.
         @param interval The fixed interval (number of calls) to use for calling
         the expensive function. (Must be greater zero). */
-    void set_deterministic(unsigned int interval);
+    void set_deterministic(unsigned interval);
 
 protected:
     TimeSource& m_time_source;
@@ -49,9 +49,9 @@ private:
 
     bool m_result;
 
-    unsigned int m_count;
+    unsigned m_count;
 
-    unsigned int m_count_interval;
+    unsigned m_count_interval;
 
     double m_time_interval;
 

@@ -46,10 +46,10 @@ LIBBOARDGAME_TEST_CASE(boardgame_marker_basic)
     it would take too long. */
 LIBBOARDGAME_TEST_CASE(boardgame_marker_overflow)
 {
-    if (numeric_limits<unsigned int>::digits > 32)
+    if (numeric_limits<unsigned>::digits > 32)
         return;
     Marker m;
-    m.setup_for_overflow_test(numeric_limits<unsigned int>::max() - 5);
+    m.setup_for_overflow_test(numeric_limits<unsigned>::max() - 5);
     Point p1(0, 1);
     Point p2(0, 0);
     for (int i = 0; i < 10; ++i)

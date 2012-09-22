@@ -22,8 +22,7 @@ struct CoordPoint
 
     int y;
 
-    static bool is_onboard(int x, int y, unsigned int width,
-                           unsigned int height);
+    static bool is_onboard(int x, int y, unsigned width, unsigned height);
 
     static CoordPoint null();
 
@@ -47,12 +46,12 @@ struct CoordPoint
 
     bool is_null() const;
 
-    bool is_onboard(unsigned int width, unsigned int height) const;
+    bool is_onboard(unsigned width, unsigned height) const;
 
     /** Find the width and height of the bounding box. */
     template<typename T>
-    static void find_width_height(T begin, T end, unsigned int& width,
-                                  unsigned int& height);
+    static void find_width_height(T begin, T end, unsigned& width,
+                                  unsigned& height);
 };
 
 inline CoordPoint::CoordPoint()
@@ -110,8 +109,8 @@ inline CoordPoint CoordPoint::null()
 }
 
 template<typename T>
-void CoordPoint::find_width_height(T begin, T end,
-                                   unsigned int& width, unsigned int& height)
+void CoordPoint::find_width_height(T begin, T end, unsigned& width,
+                                   unsigned& height)
 {
     int min_x = numeric_limits<int>::max();
     int min_y = numeric_limits<int>::max();
@@ -132,15 +131,14 @@ void CoordPoint::find_width_height(T begin, T end,
     height = max_y - min_y + 1;
 }
 
-inline bool CoordPoint::is_onboard(int x, int y, unsigned int width,
-                                   unsigned int height)
+inline bool CoordPoint::is_onboard(int x, int y, unsigned width,
+                                   unsigned height)
 {
     return (x >= 0 && x < static_cast<int>(width)
             && y >= 0 && y < static_cast<int>(height));
 }
 
-inline bool CoordPoint::is_onboard(unsigned int width,
-                                   unsigned int height) const
+inline bool CoordPoint::is_onboard(unsigned width, unsigned height) const
 {
     return is_onboard(x, y, width, height);
 }

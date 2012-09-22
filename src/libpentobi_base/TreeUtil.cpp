@@ -15,9 +15,9 @@ namespace tree_util {
 
 //-----------------------------------------------------------------------------
 
-unsigned int get_move_number(const Tree& tree, const Node& node)
+unsigned get_move_number(const Tree& tree, const Node& node)
 {
-    unsigned int move_number = 0;
+    unsigned move_number = 0;
     const Node* current = &node;
     while (current != 0)
     {
@@ -30,9 +30,9 @@ unsigned int get_move_number(const Tree& tree, const Node& node)
     return move_number;
 }
 
-unsigned int get_moves_left(const Tree& tree, const Node& node)
+unsigned get_moves_left(const Tree& tree, const Node& node)
 {
-    unsigned int moves_left = 0;
+    unsigned moves_left = 0;
     const Node* current = node.get_first_child_or_null();
     while (current != 0)
     {

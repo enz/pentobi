@@ -19,7 +19,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
 {
     typedef libboardgame_base::Point<19,19,unsigned short,SpreadsheetStringRep>
         Point;
-    unsigned int sz = 9;
+    unsigned sz = 9;
     Point p("B7");
     {
         PointTransfIdent<Point> transform;

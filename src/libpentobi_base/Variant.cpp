@@ -19,7 +19,7 @@ using boost::algorithm::to_lower_copy;
 
 //-----------------------------------------------------------------------------
 
-unsigned int get_nu_colors(Variant variant)
+unsigned get_nu_colors(Variant variant)
 {
     switch (variant)
     {
@@ -38,7 +38,7 @@ unsigned int get_nu_colors(Variant variant)
     return 0;
 }
 
-unsigned int get_nu_players(Variant variant)
+unsigned get_nu_players(Variant variant)
 {
     switch (variant)
     {

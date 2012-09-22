@@ -95,7 +95,7 @@ inline void LocalValue::Compute::add_move_point(Point p)
     m_value += m_local_value.m_point_value[p];
 }
 
-inline unsigned int LocalValue::Compute::finish()
+inline unsigned LocalValue::Compute::finish()
 {
     // We only care if it occupied any point ajacent to the attach points, not
     // how many (attach points use a value of 0x10 adjacent points a value of
@@ -121,10 +121,10 @@ inline void LocalValue::init(const Board& bd)
         clear();
     Color to_play = bd.get_to_play();
     Color second_color = bd.get_second_color(to_play);
-    unsigned int move_number = bd.get_nu_moves();
+    unsigned move_number = bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-player variants)
-    for (unsigned int i = 0; i < 3; ++i)
+    for (unsigned i = 0; i < 3; ++i)
     {
         if (move_number == 0)
             return;

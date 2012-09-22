@@ -84,9 +84,9 @@ const Node& get_last_node(const Node& node)
     return *n;
 }
 
-unsigned int get_depth(const Node& node)
+unsigned get_depth(const Node& node)
 {
-    unsigned int depth = 0;
+    unsigned depth = 0;
     const Node* current = &node;
     while (current->has_parent())
     {
@@ -134,13 +134,13 @@ string get_variation_string(const Node& node)
 {
     string result;
     const Node* current = &node;
-    unsigned int depth = get_depth(*current);
+    unsigned depth = get_depth(*current);
     while (current->has_parent())
     {
         const Node& parent = current->get_parent();
         if (parent.get_nu_children() > 1)
         {
-            unsigned int index = parent.get_child_index(*current);
+            unsigned index = parent.get_child_index(*current);
             if (index > 0)
             {
                 ostringstream s;

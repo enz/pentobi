@@ -39,7 +39,7 @@ void GameStateHistory::init(const Board& bd, Color to_play)
     m_variant = bd.get_variant();
     m_nu_colors = bd.get_nu_colors();
     m_moves.clear();
-    for (unsigned int i = 0; i < bd.get_nu_moves(); ++i)
+    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
         m_moves.push_back(bd.get_move(i));
     m_to_play = to_play;
 }
@@ -51,7 +51,7 @@ bool GameStateHistory::is_followup(const GameStateHistory& other,
         || m_variant != other.m_variant
         || m_moves.size() < other.m_moves.size())
         return false;
-    for (unsigned int i = 0; i < other.m_moves.size(); ++i)
+    for (unsigned i = 0; i < other.m_moves.size(); ++i)
         if (m_moves[i] != other.m_moves[i])
             return false;
     sequence.clear();

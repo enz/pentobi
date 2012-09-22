@@ -72,12 +72,12 @@ bool IntervalChecker::check_expensive()
                 adjust_factor = 0.1;
         }
         double new_count_interval = adjust_factor * double(m_count_interval);
-        if (new_count_interval > double(numeric_limits<unsigned int>::max()))
-            m_count_interval = numeric_limits<unsigned int>::max();
+        if (new_count_interval > double(numeric_limits<unsigned>::max()))
+            m_count_interval = numeric_limits<unsigned>::max();
         else if (new_count_interval < 1)
             m_count_interval = 1;
         else
-            m_count_interval = (unsigned int)(new_count_interval);
+            m_count_interval = (unsigned)(new_count_interval);
         m_result = m_function();
 #if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
         log(format("IntervalChecker::check_expensive: "
@@ -97,7 +97,7 @@ bool IntervalChecker::check_expensive()
     return m_result;
 }
 
-void IntervalChecker::set_deterministic(unsigned int interval)
+void IntervalChecker::set_deterministic(unsigned interval)
 {
     LIBBOARDGAME_ASSERT(interval >= 1);
     m_is_deterministic = true;

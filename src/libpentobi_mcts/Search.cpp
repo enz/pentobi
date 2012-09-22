@@ -43,11 +43,11 @@ void set_piece_considered(const BoardConst& board_const, const char* name,
     is_piece_considered[piece] = true;
 }
 
-void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
+void set_pieces_considered(const BoardConst& board_const, unsigned nu_moves,
                            PieceMap<bool>& is_piece_considered)
 {
     BoardType board_type = board_const.get_board_type();
-    unsigned int min_piece_size = 0;
+    unsigned min_piece_size = 0;
     if (board_type == board_type_duo)
     {
         if (nu_moves < 4)
@@ -91,7 +91,7 @@ void set_pieces_considered(const BoardConst& board_const, unsigned int nu_moves,
         else if (nu_moves < 36)
             min_piece_size = 3;
     }
-    for (unsigned int i = 0; i < board_const.get_nu_pieces(); ++i)
+    for (unsigned i = 0; i < board_const.get_nu_pieces(); ++i)
     {
         Piece piece(i);
         const PieceInfo& piece_info = board_const.get_piece_info(piece);
@@ -159,7 +159,7 @@ void Search::on_start_search()
         for (BoardIterator j(bd); j; ++j)
             if (! bd.is_forbidden(*j, *i))
             {
-                unsigned int adj_status = bd.get_adj_status_index(*j, *i);
+                unsigned adj_status = bd.get_adj_status_index(*j, *i);
                 BOOST_FOREACH(Piece piece, bd.get_pieces_left(*i))
                 {
                     BOOST_FOREACH(Move mv, bd.get_moves(piece, *j, adj_status))
@@ -172,7 +172,7 @@ void Search::on_start_search()
                 }
             }
     }
-    for (unsigned int i = 0; i < Board::max_game_moves; ++i)
+    for (unsigned i = 0; i < Board::max_game_moves; ++i)
         set_pieces_considered(bd.get_board_const(), i,
                               m_shared_const.is_piece_considered[i]);
     m_shared_const.is_piece_considered_all.fill(true);

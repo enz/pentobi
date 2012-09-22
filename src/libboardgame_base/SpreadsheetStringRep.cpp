@@ -19,9 +19,8 @@ using libboardgame_util::string_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
-bool SpreadsheetStringRep::read(istream& in, unsigned int width,
-                                unsigned int height, unsigned int& x,
-                                unsigned int& y)
+bool SpreadsheetStringRep::read(istream& in, unsigned width, unsigned height,
+                                unsigned& x, unsigned& y)
 {
     int c;
     while (true)
@@ -69,7 +68,7 @@ bool SpreadsheetStringRep::read(istream& in, unsigned int width,
     return false;
 }
 
-void SpreadsheetStringRep::write(ostream& out, unsigned int x, unsigned int y)
+void SpreadsheetStringRep::write(ostream& out, unsigned x, unsigned y)
 {
     out << get_letter_coord(x) << (y + 1);
 }

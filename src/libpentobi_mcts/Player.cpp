@@ -37,7 +37,7 @@ Player::Player(Variant initial_variant, const path& books_dir, size_t memory)
       m_search(initial_variant, memory),
       m_book(initial_variant)
 {
-    for (unsigned int i = 0; i < Board::max_player_moves; ++i)
+    for (unsigned i = 0; i < Board::max_player_moves; ++i)
     {
         // Hand-tuned such that time per move is more evenly spread among all
         // moves than with a fixed number of simulations (because the
@@ -172,7 +172,7 @@ Move Player::genmove(const Board& bd, Color c)
         bool weight_max_count = (m_level >= 4);
         if (weight_max_count)
         {
-            unsigned int player_move = bd.get_nu_onboard_pieces(c);
+            unsigned player_move = bd.get_nu_onboard_pieces(c);
             float weight = 1;
             if (variant == variant_duo || variant == variant_junior)
                 weight = weight_max_count_duo[player_move];

@@ -52,7 +52,7 @@ private:
     RatedGamesList* m_list;
 
 private slots:
-    void activateGame(unsigned int n);
+    void activateGame(unsigned n);
 
     void buttonClicked(QAbstractButton*);
 };

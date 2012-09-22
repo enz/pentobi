@@ -59,7 +59,7 @@ inline const T& PieceMap<T>::operator[](Piece piece) const
 template<typename T>
 void PieceMap<T>::fill(const T& val)
 {
-    for (unsigned int i = 0; i < Piece::range_not_null; ++i)
+    for (unsigned i = 0; i < Piece::range_not_null; ++i)
         m_a[i] = val;
 }
 

@@ -17,15 +17,15 @@ using libboardgame_base::SpreadsheetStringRep;
 
 namespace {
 
-bool read(const string& s, unsigned int& x, unsigned int& y,
-          unsigned int width = SpreadsheetStringRep::max_width,
-          unsigned int height = SpreadsheetStringRep::max_height)
+bool read(const string& s, unsigned& x, unsigned& y,
+          unsigned width = SpreadsheetStringRep::max_width,
+          unsigned height = SpreadsheetStringRep::max_height)
 {
     istringstream in(s);
     return SpreadsheetStringRep::read(in, width, height, x, y);
 }
 
-string write(unsigned int x, unsigned int y)
+string write(unsigned x, unsigned y)
 {
     ostringstream out;
     SpreadsheetStringRep::write(out, x, y);
@@ -38,8 +38,8 @@ string write(unsigned int x, unsigned int y)
 
 LIBBOARDGAME_TEST_CASE(boardgame_base_spreadsheet_string_rep_read)
 {
-    unsigned int x;
-    unsigned int y;
+    unsigned x;
+    unsigned y;
 
     LIBBOARDGAME_CHECK(read("a1", x, y));
     LIBBOARDGAME_CHECK_EQUAL(x, 0u);

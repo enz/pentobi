@@ -41,9 +41,9 @@ private:
 
     ColorMap<bool> m_hasMoves;
 
-    ColorMap<unsigned int> m_points;
+    ColorMap<unsigned> m_points;
 
-    ColorMap<unsigned int> m_bonus;
+    ColorMap<unsigned> m_bonus;
 
     int m_colorDotSize;
 
@@ -69,7 +69,7 @@ private:
 
     int getMaxScoreTextWidth2() const;
 
-    QString getScoreText(unsigned int points, unsigned int bonus) const;
+    QString getScoreText(unsigned points, unsigned bonus) const;
 
     int getTextWidth(QString text) const;
 };

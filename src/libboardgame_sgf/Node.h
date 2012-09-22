@@ -100,12 +100,12 @@ public:
 
     bool has_single_child() const;
 
-    unsigned int get_nu_children() const;
+    unsigned get_nu_children() const;
 
     /** @pre i < get_nu_children() */
-    const Node& get_child(unsigned int i) const;
+    const Node& get_child(unsigned i) const;
 
-    unsigned int get_child_index(const Node& child) const;
+    unsigned get_child_index(const Node& child) const;
 
     /** Get single child.
         @pre has_single_child() */

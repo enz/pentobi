@@ -46,7 +46,7 @@ RatingHistory::RatingHistory(Variant variant)
 }
 
 void RatingHistory::addGame(float score, Rating opponentRating,
-                            unsigned int nuOpponents, Color color,
+                            unsigned nuOpponents, Color color,
                             float result, const string& date, int level,
                             const Tree& tree)
 {
@@ -93,7 +93,7 @@ void RatingHistory::clear()
     m_games.clear();
 }
 
-path RatingHistory::getFile(unsigned int n) const
+path RatingHistory::getFile(unsigned n) const
 {
     string file = str(format("%1%.blksgf") % n);
     return m_dir / file;
@@ -147,7 +147,7 @@ void RatingHistory::load(Variant variant)
     {
         istringstream in(line);
         GameInfo info;
-        unsigned int c;
+        unsigned c;
         in >> info.number >> c >> info.result >> info.date >> info.level
            >> info.rating;
         if (! in || c >= get_nu_colors(variant))

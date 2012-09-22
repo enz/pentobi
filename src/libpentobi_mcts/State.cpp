@@ -118,8 +118,8 @@ Float get_result(const Board& bd, Color c)
     Variant variant = bd.get_variant();
     if (variant == variant_duo || variant == variant_junior)
     {
-        unsigned int points0 = bd.get_points_with_bonus(Color(0));
-        unsigned int points1 = bd.get_points_with_bonus(Color(1));
+        unsigned points0 = bd.get_points_with_bonus(Color(0));
+        unsigned points1 = bd.get_points_with_bonus(Color(1));
         if (c == Color(0))
         {
             if (points0 > points1)
@@ -143,15 +143,15 @@ Float get_result(const Board& bd, Color c)
              || variant == variant_trigon
              || variant == variant_trigon_3)
     {
-        unsigned int nu_colors = bd.get_nu_colors();
-        array<unsigned int,Color::range> points_array;
-        for (unsigned int i = 0; i < nu_colors; ++i)
+        unsigned nu_colors = bd.get_nu_colors();
+        array<unsigned,Color::range> points_array;
+        for (unsigned i = 0; i < nu_colors; ++i)
             points_array[i] = bd.get_points_with_bonus(Color(i));
-        unsigned int points = points_array[c.to_int()];
+        unsigned points = points_array[c.to_int()];
         sort(points_array.begin(), points_array.begin() + nu_colors);
         Float result = 0;
-        unsigned int n = 0;
-        for (unsigned int i = 0; i < nu_colors; ++i)
+        unsigned n = 0;
+        for (unsigned i = 0; i < nu_colors; ++i)
             if (points_array[i] == points)
             {
                 result += Float(i) / Float(nu_colors - 1);
@@ -164,10 +164,10 @@ Float get_result(const Board& bd, Color c)
     {
         LIBBOARDGAME_ASSERT(variant == variant_classic_2
                             || variant == variant_trigon_2);
-        unsigned int points0 =
+        unsigned points0 =
             bd.get_points_with_bonus(Color(0))
             + bd.get_points_with_bonus(Color(2));
-        unsigned int points1 =
+        unsigned points1 =
             bd.get_points_with_bonus(Color(1))
             + bd.get_points_with_bonus(Color(3));
         if (c == Color(0) || c == Color(2))
@@ -245,14 +245,14 @@ State::~State() throw()
 
 inline void State::add_moves(Point p, Color c)
 {
-    unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+    unsigned adj_status = m_bd.get_adj_status_index(p, c);
     BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             add_moves(p, c, piece, adj_status);
 }
 
 inline void State::add_moves(Point p, Color c, Piece piece,
-                             unsigned int adj_status)
+                             unsigned adj_status)
 {
     MoveList& moves = m_moves[c];
     const Board::LocalMovesListRange& move_candidates =
@@ -260,7 +260,7 @@ inline void State::add_moves(Point p, Color c, Piece piece,
     for (auto i = move_candidates.first; i != move_candidates.second; ++i)
         if (! m_shared_const.is_forbidden_at_root[c][*i])
         {
-            unsigned int local_value;
+            unsigned local_value;
             const MoveInfo& info = get_move_info(*i);
             if (check_move(c, info.points, local_value)
                 && ! m_marker.test_and_set(*i))
@@ -271,7 +271,7 @@ inline void State::add_moves(Point p, Color c, Piece piece,
         }
 }
 
-void State::check_local(unsigned int local_value, Move mv, const MoveInfo& info)
+void State::check_local(unsigned local_value, Move mv, const MoveInfo& info)
 {
     if (local_value < m_max_local_value)
         return;
@@ -286,7 +286,7 @@ void State::check_local(unsigned int local_value, Move mv, const MoveInfo& info)
 }
 
 bool State::check_move(Color c, const MovePoints& points,
-                       unsigned int& local_value)
+                       unsigned& local_value)
 {
     LocalValue::Compute compute_local(m_local_value);
     const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
@@ -358,23 +358,23 @@ void State::compute_features()
     }
     m_features.resize(moves.size());
     m_max_heuristic = -numeric_limits<Float>::max();
-    m_min_dist_to_center = numeric_limits<unsigned int>::max();
+    m_min_dist_to_center = numeric_limits<unsigned>::max();
     m_has_connect_move = false;
-    unsigned int nu_onboard_pieces = m_bd.get_nu_onboard_pieces();
+    unsigned nu_onboard_pieces = m_bd.get_nu_onboard_pieces();
     bool compute_dist_to_center =
         ((board_type == board_type_classic && nu_onboard_pieces < 13)
          || (board_type == board_type_trigon && nu_onboard_pieces < 5)
          || (board_type == board_type_trigon_3 && nu_onboard_pieces < 5));
     bool check_connect =
         (board_type == board_type_classic && m_bd.get_nu_onboard_pieces() < 14);
-    for (unsigned int i = 0; i < moves.size(); ++i)
+    for (unsigned i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = get_move_info(moves[i]);
         const MoveInfoExt& info_ext = m_bd.get_move_info_ext(moves[i]);
         MoveFeatures& features = m_features[i];
         features.heuristic = 0;
         features.connect = false;
-        features.dist_to_center = numeric_limits<unsigned int>::max();
+        features.dist_to_center = numeric_limits<unsigned>::max();
         auto j = info.points.begin();
         auto end = info.points.end();
         LIBBOARDGAME_ASSERT(j != end);
@@ -484,7 +484,7 @@ array<Float,4> State::evaluate_terminal()
 
 bool State::gen_and_play_playout_move(Move last_good_reply)
 {
-    unsigned int nu_colors = m_bd.get_nu_colors();
+    unsigned nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
         return false;
     Color to_play = m_bd.get_to_play();
@@ -535,7 +535,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     else
     {
         const MoveList* moves;
-        unsigned int max_playable_piece_size;
+        unsigned max_playable_piece_size;
         if (pure_random_playout || m_local_moves.empty())
         {
             moves = &m_moves[to_play];
@@ -556,8 +556,8 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         // the list of all moves. Try more than once if a bad move (e.g. not
         // maximum playable piece size) is chosen to reduce the probabilty
         // for such moves without becoming deterministic.
-        const unsigned int max_try = 2;
-        unsigned int nu_try = 0;
+        const unsigned max_try = 2;
+        unsigned nu_try = 0;
         do
         {
             ++nu_try;
@@ -574,7 +574,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
 
 void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
 {
-    unsigned int nu_colors = m_bd.get_nu_colors();
+    unsigned nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
         return;
     Color to_play = m_bd.get_to_play();
@@ -598,7 +598,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     bool has_symmetry_breaker = false;
     if (m_check_symmetric_draw && ! m_is_symmetry_broken)
     {
-        unsigned int nu_moves = m_bd.get_nu_moves();
+        unsigned nu_moves = m_bd.get_nu_moves();
         if (to_play == Color(1))
         {
             if (nu_moves > 0)
@@ -619,11 +619,11 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
                 }
         }
     }
-    for (unsigned int i = 0; i < moves.size(); ++i)
+    for (unsigned i = 0; i < moves.size(); ++i)
     {
         Move mv = moves[i];
         const MoveFeatures& features = m_features[i];
-        if (m_min_dist_to_center != numeric_limits<unsigned int>::max()
+        if (m_min_dist_to_center != numeric_limits<unsigned>::max()
             && features.dist_to_center != m_min_dist_to_center)
             // Prune early moves that don't minimize dist to center
             continue;
@@ -716,7 +716,7 @@ void State::init_move_list_with_local(Color c)
             BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                 if ((*m_is_piece_considered[c])[piece])
                 {
-                    unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                    unsigned adj_status = m_bd.get_adj_status_index(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
                         if (! m_bd.is_forbidden(c, mv)
@@ -759,7 +759,7 @@ void State::init_move_list_without_local(Color c)
             BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                 if ((*m_is_piece_considered[c])[piece])
                 {
-                    unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                    unsigned adj_status = m_bd.get_adj_status_index(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
                         if (! m_shared_const.is_forbidden_at_root[c][mv]
@@ -775,7 +775,7 @@ void State::init_move_list_without_local(Color c)
         BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
-                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                unsigned adj_status = m_bd.get_adj_status_index(p, c);
                 BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                     if ((*m_is_piece_considered[c])[piece])
                     {
@@ -824,7 +824,7 @@ void State::init_symmetry_info()
         // Second player to play: We set m_is_symmetry_broken to true if the
         // second player cannot copy the first player's last move to make the
         // position symmetric again.
-        unsigned int nu_moves = m_bd.get_nu_moves();
+        unsigned nu_moves = m_bd.get_nu_moves();
         if (nu_moves == 0)
         {
             // Don't try to handle white to play as first move
@@ -977,7 +977,7 @@ void State::start_search()
             // Don't make a distinction between moves close enough to the center
             // in game variant Classic/Classic2
             d = max(d, 10.f);
-        m_dist_to_center[*i] = static_cast<unsigned int>(d);
+        m_dist_to_center[*i] = static_cast<unsigned>(d);
     }
     //log() << "Dist to center:\n" << m_dist_to_center;
 }
@@ -1001,7 +1001,7 @@ void State::start_simulation(size_t n)
     m_nu_passes = 0;
     // TODO: m_nu_passes should be initialized without assuming alternating
     // colors in the board's move history
-    for (unsigned int i = m_bd.get_nu_moves(); i > 0; --i)
+    for (unsigned i = m_bd.get_nu_moves(); i > 0; --i)
     {
         if (! m_bd.get_move(i - 1).move.is_pass())
             break;
@@ -1029,7 +1029,7 @@ void State::update_move_list(Color c)
     }
     for (auto i = moves.begin(); i != moves.end(); ++i)
     {
-        unsigned int local_value;
+        unsigned local_value;
         const MoveInfo& info = get_move_info(*i);
         if (info.piece != last_piece && check_move(c, info.points, local_value))
         {
@@ -1070,7 +1070,7 @@ void State::update_move_list(Color c)
         BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
-                unsigned int adj_status = m_bd.get_adj_status_index(p, c);
+                unsigned adj_status = m_bd.get_adj_status_index(p, c);
                 BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                 {
                     if (! (*m_is_piece_considered[c])[piece]

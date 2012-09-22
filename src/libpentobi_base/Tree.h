@@ -59,7 +59,7 @@ public:
 
     void set_result(const Node& node, int score);
 
-    const Node* get_node_before_move_number(unsigned int move_number) const;
+    const Node* get_node_before_move_number(unsigned move_number) const;
 
     Variant get_variant() const;
 

@@ -15,13 +15,13 @@ namespace tree_util {
 /** Get the move number at a node.
     Counts the number of non-pass moves since the root node or the last node
     that contained setup properties. Invalid moves are ignored. */
-unsigned int get_move_number(const Tree& tree, const Node& node);
+unsigned get_move_number(const Tree& tree, const Node& node);
 
 /** Get the number of remaining moves in the current variation.
     Counts the number of non-pass moves remaining in the current variation
     until the end of the variation or the next node that contains setup
     properties. Invalid moves are ignored. */
-unsigned int get_moves_left(const Tree& tree, const Node& node);
+unsigned get_moves_left(const Tree& tree, const Node& node);
 
 //-----------------------------------------------------------------------------
 

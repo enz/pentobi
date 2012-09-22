@@ -39,7 +39,7 @@ void RatedGamesList::activateGame(const QModelIndex& index)
     if (item == 0)
         return;
     bool ok;
-    unsigned int n = item->text().toUInt(&ok);
+    unsigned n = item->text().toUInt(&ok);
     if (ok)
         emit openRatedGame(n);
 }

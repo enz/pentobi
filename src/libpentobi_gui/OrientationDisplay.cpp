@@ -115,8 +115,8 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     const Geometry& geometry = m_bd.get_geometry();
     type_match_shift(geometry, points.begin(), points.end(),
                      m_transform->get_new_point_type());
-    unsigned int width;
-    unsigned int height;
+    unsigned width;
+    unsigned height;
     CoordPoint offset;
     normalize_offset(points.begin(), points.end(), width, height, offset);
     bool invertPointType =

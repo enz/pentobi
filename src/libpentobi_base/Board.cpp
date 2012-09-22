@@ -19,12 +19,12 @@ using namespace std;
 
 namespace {
 
-void write_x_coord(ostream& out, unsigned int width, unsigned int offset)
+void write_x_coord(ostream& out, unsigned width, unsigned offset)
 {
-    for (unsigned int i = 0; i < offset; ++i)
+    for (unsigned i = 0; i < offset; ++i)
         out << ' ';
     char c = 'A';
-    for (unsigned int x = 0; x < width; ++x, ++c)
+    for (unsigned x = 0; x < width; ++x, ++c)
     {
         if (x < 26)
             out << ' ';
@@ -117,7 +117,7 @@ void Board::gen_moves(Color c, Point p, MoveMarker& marker,
     }
 }
 
-void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
+void Board::gen_moves(Color c, Point p, unsigned adj_status_index,
                       MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
@@ -137,13 +137,13 @@ void Board::gen_moves(Color c, Point p, unsigned int adj_status_index,
     }
 }
 
-unsigned int Board::get_bonus(Color c) const
+unsigned Board::get_bonus(Color c) const
 {
-    unsigned int bonus = 0;
+    unsigned bonus = 0;
     if (m_variant != variant_junior && m_pieces_left[c].size() == 0)
     {
         bonus = 15;
-        for (unsigned int i = get_nu_moves(); i > 0; --i)
+        for (unsigned i = get_nu_moves(); i > 0; --i)
         {
             ColorMove mv = get_move(i - 1);
             if (mv.color == c)
@@ -174,18 +174,18 @@ Color Board::get_effective_to_play() const
     return c;
 }
 
-void Board::get_place(Color c, unsigned int& place, bool& is_shared) const
+void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 {
-    array<unsigned int,Color::range> points_array;
-    for (unsigned int i = 0; i < m_nu_colors; ++i)
+    array<unsigned,Color::range> points_array;
+    for (unsigned i = 0; i < m_nu_colors; ++i)
         points_array[i] = get_points_with_bonus(Color(i));
-    unsigned int points = points_array[c.to_int()];
-    unsigned int nu_players = get_nu_players(m_variant);
+    unsigned points = points_array[c.to_int()];
+    unsigned nu_players = get_nu_players(m_variant);
     sort(points_array.begin(), points_array.begin() + nu_players,
-         greater<unsigned int>());
+         greater<unsigned>());
     is_shared = false;
     bool found = false;
-    for (unsigned int i = 0; i < nu_players; ++i)
+    for (unsigned i = 0; i < nu_players; ++i)
         if (points_array[i] == points)
         {
             if (! found)
@@ -198,9 +198,9 @@ void Board::get_place(Color c, unsigned int& place, bool& is_shared) const
         }
 }
 
-unsigned int Board::get_points_left(Color c) const
+unsigned Board::get_points_left(Color c) const
 {
-    unsigned int n = 0;
+    unsigned n = 0;
     BOOST_FOREACH(Piece piece, m_pieces_left[c])
         n += get_nu_left_piece(c, piece) * get_piece_info(piece).get_size();
     return n;
@@ -210,8 +210,8 @@ int Board::get_score(Color c) const
 {
     if (m_variant == variant_duo || m_variant == variant_junior)
     {
-        unsigned int points0 = get_points_with_bonus(Color(0));
-        unsigned int points1 = get_points_with_bonus(Color(1));
+        unsigned points0 = get_points_with_bonus(Color(0));
+        unsigned points1 = get_points_with_bonus(Color(1));
         if (c == Color(0))
             return points0 - points1;
         else
@@ -234,9 +234,9 @@ int Board::get_score(Color c) const
     {
         LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
                             || m_variant == variant_trigon_2);
-        unsigned int points0 =
+        unsigned points0 =
             get_points_with_bonus(Color(0)) + get_points_with_bonus(Color(2));
-        unsigned int points1 =
+        unsigned points1 =
             get_points_with_bonus(Color(1)) + get_points_with_bonus(Color(3));
         if (c == Color(0) || c == Color(2))
             return points0 - points1;
@@ -294,7 +294,7 @@ void Board::init(Variant variant, const Setup* setup)
         m_attach_points[*i].clear();
         m_pieces_left[*i].clear();
         m_nu_onboard_pieces[*i] = 0;
-        for (unsigned int j = 0; j < get_nu_pieces(); ++j)
+        for (unsigned j = 0; j < get_nu_pieces(); ++j)
             m_pieces_left[*i].push_back(Piece(j));
         if (variant == variant_junior)
             m_nu_left_piece[*i].fill(2);
@@ -379,7 +379,7 @@ void Board::undo()
     ArrayList<ColorMove, max_game_moves> moves = m_moves;
     moves.pop_back();
     init();
-    for (unsigned int i = 0; i < moves.size(); ++i)
+    for (unsigned i = 0; i < moves.size(); ++i)
         play(moves[i]);
 }
 
@@ -388,7 +388,7 @@ void Board::write(ostream& out, bool mark_last_move) const
     ColorMove last_mv = ColorMove::null();
     if (mark_last_move)
     {
-        unsigned int n = get_nu_moves();
+        unsigned n = get_nu_moves();
         while (n > 0)
         {
             --n;
@@ -397,19 +397,19 @@ void Board::write(ostream& out, bool mark_last_move) const
                 break;
         }
     }
-    unsigned int width = m_geometry->get_width();
-    unsigned int height = m_geometry->get_height();
+    unsigned width = m_geometry->get_width();
+    unsigned height = m_geometry->get_height();
     bool is_info_location_right = (width <= 20);
     BoardType board_type = get_board_type();
     bool is_trigon = (board_type == board_type_trigon
                       || board_type == board_type_trigon_3);
     write_x_coord(out, width, is_trigon ? 3 : 2);
-    for (unsigned int y = height - 1; ; --y)
+    for (unsigned y = height - 1; ; --y)
     {
         if (y < 9)
             out << ' ';
         out << (y + 1) << ' ';
-        for (unsigned int x = 0; x < width; ++x)
+        for (unsigned x = 0; x < width; ++x)
         {
             Point p(x, y);
             bool is_offboard = ! is_onboard(p);
@@ -542,7 +542,7 @@ void Board::write_color_info_line1(ostream& out, Color c) const
     if (get_to_play() == c)
         out << '*';
     out << m_color_name[c] << "(" << m_color_char[c] << "): " << get_points(c);
-    unsigned int bonus = get_bonus(c);
+    unsigned bonus = get_bonus(c);
     if (bonus > 0)
         out << " (+" << bonus << ')';
     set_color(out, "\x1B[0m");
@@ -564,7 +564,7 @@ void Board::write_color_info_line3(ostream& out, Color c) const
         write_pieces_left(out, c, 10, get_nu_pieces());
 }
 
-void Board::write_info_line(ostream& out, unsigned int y) const
+void Board::write_info_line(ostream& out, unsigned y) const
 {
     if (y == 0)
         write_color_info_line1(out, Color(0));
@@ -592,18 +592,18 @@ void Board::write_info_line(ostream& out, unsigned int y) const
         write_color_info_line3(out, Color(3));
 }
 
-void Board::write_pieces_left(ostream& out, Color c, unsigned int begin,
-                              unsigned int end) const
+void Board::write_pieces_left(ostream& out, Color c, unsigned begin,
+                              unsigned end) const
 {
-    for (unsigned int i = begin; i < end; ++i)
+    for (unsigned i = begin; i < end; ++i)
         if (i < m_pieces_left[c].size())
         {
             if (i > begin)
                 out << ' ';
             Piece piece = m_pieces_left[c][i];
             const string& name = get_piece_info(piece).get_name();
-            unsigned int nu_left = m_nu_left_piece[c][piece];
-            for (unsigned int j = 0; j < nu_left; ++j)
+            unsigned nu_left = m_nu_left_piece[c][piece];
+            for (unsigned j = 0; j < nu_left; ++j)
             {
                 if (j > 0)
                     out << ' ';

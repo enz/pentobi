@@ -21,7 +21,7 @@ using libboardgame_util::ArrayList;
 class StartingPoints
 {
 public:
-    static const unsigned int max_starting_points = 6;
+    static const unsigned max_starting_points = 6;
 
     void init(Variant variant, const Geometry& geometry);
 
@@ -43,9 +43,9 @@ private:
 
     ColorMap<ArrayList<Point,max_starting_points>> m_starting_points;
 
-    void add_colored_starting_point(unsigned int x, unsigned int y, Color c);
+    void add_colored_starting_point(unsigned x, unsigned y, Color c);
 
-    void add_colorless_starting_point(unsigned int x, unsigned int y);
+    void add_colorless_starting_point(unsigned x, unsigned y);
 };
 
 inline Color StartingPoints::get_starting_point_color(Point p) const

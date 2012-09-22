@@ -37,7 +37,7 @@ public:
 
     void set_one_prop_value_per_line(bool enable);
 
-    void set_indent(unsigned int indent);
+    void set_indent(unsigned indent);
 
     // @} // @name
 
@@ -69,11 +69,11 @@ private:
 
     bool m_is_first_prop;
 
-    unsigned int m_indent;
+    unsigned m_indent;
 
-    unsigned int m_current_indent;
+    unsigned m_current_indent;
 
-    unsigned int m_level;
+    unsigned m_level;
 
     static string get_escaped(const string& s);
 
@@ -90,7 +90,7 @@ inline void Writer::set_one_prop_value_per_line(bool enable)
     m_one_prop_value_per_line = enable;
 }
 
-inline void Writer::set_indent(unsigned int indent)
+inline void Writer::set_indent(unsigned indent)
 {
     m_indent = indent;
 }
@@ -124,9 +124,9 @@ void Writer::write_property(const string& id, const vector<T>& values)
             && ! is_first_value)
         {
             m_out << '\n';
-            unsigned int indent =
-                static_cast<unsigned int>(m_current_indent + 1 + id.size());
-            for (unsigned int i = 0; i < indent; ++i)
+            unsigned indent =
+                static_cast<unsigned>(m_current_indent + 1 + id.size());
+            for (unsigned i = 0; i < indent; ++i)
                 m_out << ' ';
         }
         m_out << '[' << get_escaped(to_string(i)) << ']';

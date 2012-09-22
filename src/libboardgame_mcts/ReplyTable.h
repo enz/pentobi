@@ -24,17 +24,17 @@ using libboardgame_util::log;
     To save space, it assumes that the color of the next move is always the
     same for a given color of a previous move (checked with assertions).
     @see Search::set_last_good_reply() */
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 class ReplyTable
 {
 public:
     typedef M Move;
 
-    static const unsigned int max_players = P;
+    static const unsigned max_players = P;
 
     typedef libboardgame_mcts::PlayerMove<M> PlayerMove;
 
-    void init(unsigned int nu_players);
+    void init(unsigned nu_players);
 
     void store(PlayerMove mv, PlayerMove reply);
 
@@ -46,27 +46,27 @@ private:
     array<array<Move,Move::range>,max_players> m_reply;
 
 #if LIBBOARDGAME_DEBUG
-    unsigned int m_nu_players;
+    unsigned m_nu_players;
 
-    array<unsigned int,max_players> m_next_player;
+    array<unsigned,max_players> m_next_player;
 
     array<bool,max_players> m_is_next_player_known;
 #endif
 };
 
-template<class S, class M, unsigned int P>
-void ReplyTable<S,M,P>::init(unsigned int nu_players)
+template<class S, class M, unsigned P>
+void ReplyTable<S,M,P>::init(unsigned nu_players)
 {
 #if LIBBOARDGAME_DEBUG
     m_nu_players = nu_players;
-    for (unsigned int i = 0; i < nu_players; ++i)
+    for (unsigned i = 0; i < nu_players; ++i)
         m_is_next_player_known[i] = false;
 #endif
-    for (unsigned int i = 0; i < nu_players; ++i)
+    for (unsigned i = 0; i < nu_players; ++i)
         fill(m_reply[i].begin(), m_reply[i].end(), Move::null());
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void ReplyTable<S,M,P>::store(PlayerMove mv, PlayerMove reply)
 {
     LIBBOARDGAME_ASSERT(mv.player < m_nu_players);
@@ -82,7 +82,7 @@ void ReplyTable<S,M,P>::store(PlayerMove mv, PlayerMove reply)
     m_reply[mv.player][mv.move.to_int()] = reply.move;
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 void ReplyTable<S,M,P>::forget(PlayerMove mv, PlayerMove reply)
 {
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(reply);
@@ -100,7 +100,7 @@ void ReplyTable<S,M,P>::forget(PlayerMove mv, PlayerMove reply)
     m_reply[mv.player][mv.move.to_int()] = Move::null();
 }
 
-template<class S, class M, unsigned int P>
+template<class S, class M, unsigned P>
 M ReplyTable<S,M,P>::get_reply(PlayerMove mv) const
 {
     LIBBOARDGAME_ASSERT(mv.player < m_nu_players);

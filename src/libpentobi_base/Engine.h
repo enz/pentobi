@@ -56,7 +56,7 @@ public:
     const Board& get_board() const;
 
 protected:
-    Color get_color_arg(const Arguments& args, unsigned int i) const;
+    Color get_color_arg(const Arguments& args, unsigned i) const;
 
     Color get_color_arg(const Arguments& args) const;
 
@@ -75,7 +75,7 @@ private:
 
     Player& get_player() const;
 
-    void play(Color c, const Arguments& args, unsigned int arg_move_begin);
+    void play(Color c, const Arguments& args, unsigned arg_move_begin);
 };
 
 inline const Board& Engine::get_board() const

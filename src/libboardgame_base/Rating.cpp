@@ -18,7 +18,7 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 float Rating::get_expected_result(Rating elo_opponent,
-                                  unsigned int nu_opponents) const
+                                  unsigned nu_opponents) const
 {
     float diff = elo_opponent.m_elo - m_elo;
     return
@@ -27,7 +27,7 @@ float Rating::get_expected_result(Rating elo_opponent,
 }
 
 void Rating::update_multiplayer(float game_result, Rating elo_opponent,
-                    unsigned int nu_opponents, float k_value)
+                    unsigned nu_opponents, float k_value)
 {
     LIBBOARDGAME_ASSERT(k_value > 0);
     float diff = game_result - get_expected_result(elo_opponent, nu_opponents);

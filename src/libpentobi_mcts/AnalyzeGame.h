@@ -29,17 +29,17 @@ public:
         of the analysis of a position. Arguments: number moves analyzed so far,
         total number of moves. */
     void run(const Game& game, Search& search, size_t nu_simulations,
-             function<void(unsigned int,unsigned int)> progress_callback);
+             function<void(unsigned,unsigned)> progress_callback);
 
     Variant get_variant() const;
 
-    unsigned int get_nu_moves() const;
+    unsigned get_nu_moves() const;
 
-    bool has_value(unsigned int i) const;
+    bool has_value(unsigned i) const;
 
-    ColorMove get_move(unsigned int i) const;
+    ColorMove get_move(unsigned i) const;
 
-    double get_value(unsigned int i) const;
+    double get_value(unsigned i) const;
 
 private:
     Variant m_variant;
@@ -51,18 +51,18 @@ private:
     vector<double> m_values;
 };
 
-inline ColorMove AnalyzeGame::get_move(unsigned int i) const
+inline ColorMove AnalyzeGame::get_move(unsigned i) const
 {
     LIBBOARDGAME_ASSERT(i < m_moves.size());
     return m_moves[i];
 }
 
-inline unsigned int AnalyzeGame::get_nu_moves() const
+inline unsigned AnalyzeGame::get_nu_moves() const
 {
-    return static_cast<unsigned int>(m_moves.size());
+    return static_cast<unsigned>(m_moves.size());
 }
 
-inline double AnalyzeGame::get_value(unsigned int i) const
+inline double AnalyzeGame::get_value(unsigned i) const
 {
     LIBBOARDGAME_ASSERT(i < m_values.size());
     LIBBOARDGAME_ASSERT(has_value(i));
@@ -74,7 +74,7 @@ inline Variant AnalyzeGame::get_variant() const
     return m_variant;
 }
 
-inline bool AnalyzeGame::has_value(unsigned int i) const
+inline bool AnalyzeGame::has_value(unsigned i) const
 {
     LIBBOARDGAME_ASSERT(i < m_has_value.size());
     return m_has_value[i];

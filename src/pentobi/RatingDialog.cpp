@@ -71,11 +71,11 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     connect(buttonBox, SIGNAL(clicked(QAbstractButton*)),
             this, SLOT(buttonClicked(QAbstractButton*)));
-    connect(m_list, SIGNAL(openRatedGame(unsigned int)),
-            this, SLOT(activateGame(unsigned int)));
+    connect(m_list, SIGNAL(openRatedGame(unsigned)),
+            this, SLOT(activateGame(unsigned)));
 }
 
-void RatingDialog::activateGame(unsigned int n)
+void RatingDialog::activateGame(unsigned n)
 {
     emit open(m_history.getFile(n).string().c_str());
 }
@@ -101,7 +101,7 @@ void RatingDialog::buttonClicked(QAbstractButton* button)
 void RatingDialog::updateContent()
 {
     Variant variant = m_history.getVariant();
-    unsigned int nuGames = m_history.getNuGames();
+    unsigned nuGames = m_history.getNuGames();
     Rating rating = m_history.getRating();
     Rating bestRating = m_history.getBestRating();
     if (nuGames == 0)

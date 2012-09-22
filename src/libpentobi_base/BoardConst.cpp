@@ -599,7 +599,7 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_duo);
     }
-    m_nu_pieces = static_cast<unsigned int>(m_pieces.size());
+    m_nu_pieces = static_cast<unsigned>(m_pieces.size());
     m_max_attach_points.fill(0);
     init_adj_status();
     create_moves();
@@ -649,7 +649,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     set_adj_and_attach_points(info, info_ext);
     m_move_info.push_back(info);
     m_move_info_ext.push_back(info_ext);
-    Move move(static_cast<unsigned int>(m_move_info.size() - 1));
+    Move move(static_cast<unsigned>(m_move_info.size() - 1));
     if (log_move_creation)
     {
         Grid<char> grid(m_geometry, '.');
@@ -662,7 +662,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
     BOOST_FOREACH(Point p, points)
-        for (unsigned int i = 0; i < nu_adj_status_index; ++i)
+        for (unsigned i = 0; i < nu_adj_status_index; ++i)
         {
             if (is_compatible_with_adj_status(p, i, points))
             {
@@ -677,22 +677,22 @@ void BoardConst::create_moves()
     m_full_move_table.reset(new FullMoveTable);
     m_moves_range.init(m_geometry);
     m_move_lists_sum_length = 0;
-    for (unsigned int i = 0; i < m_nu_pieces; ++i)
+    for (unsigned i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << '\n';
     m_move_lists.reset(new Move[m_move_lists_sum_length]);
-    unsigned int current = 0;
+    unsigned current = 0;
     for (GeometryIterator i(m_geometry); i; ++i)
-        for (unsigned int j = 0; j < nu_adj_status_index; ++j)
-            for (unsigned int k = 0; k < m_nu_pieces; ++k)
+        for (unsigned j = 0; j < nu_adj_status_index; ++j)
+            for (unsigned k = 0; k < m_nu_pieces; ++k)
             {
                 Piece piece(k);
-                unsigned int begin = current;
+                unsigned begin = current;
                 const LocalMovesList& list = (*m_full_move_table)[j][piece][*i];
-                for (unsigned int l = 0; l < list.size(); ++l)
+                for (unsigned l = 0; l < list.size(); ++l)
                     m_move_lists[current++] = list[l];
-                unsigned int end = current;
+                unsigned end = current;
                 m_moves_range[*i][j][piece] = make_pair(begin, end);
             }
     m_full_move_table.reset(0); // Free space, no longer needed
@@ -703,22 +703,22 @@ void BoardConst::create_moves(Piece piece)
     const PieceInfo& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
         log() << "Creating moves for piece " << piece_info.get_name() << "\n";
-    for (unsigned int i = 0; i < nu_adj_status_index; ++i)
+    for (unsigned i = 0; i < nu_adj_status_index; ++i)
         (*m_full_move_table)[i][piece].init(m_geometry);
     PiecePoints points;
     for (GeometryIterator i(m_geometry); i; ++i)
     {
         if (log_move_creation)
             log() << "Creating moves at " << *i << "\n";
-        unsigned int x = (*i).get_x();
-        unsigned int y = (*i).get_y();
+        unsigned x = (*i).get_x();
+        unsigned y = (*i).get_y();
         BOOST_FOREACH(const Transform* transform, piece_info.get_transforms())
         {
             if (log_move_creation)
                 log() << "Transformation " << typeid(*transform).name() << "\n";
             // Pieces are defined such that (0,0) has point type 0. Check if the
             // transformed type is compatible with the location on the board.
-            unsigned int point_type = m_geometry.get_point_type(x, y);
+            unsigned point_type = m_geometry.get_point_type(x, y);
             LIBBOARDGAME_ASSERT(transform->get_point_type() == 0);
             if (transform->get_new_point_type() != point_type)
                 continue;
@@ -811,7 +811,7 @@ const BoardConst& BoardConst::get(Variant variant)
 
 bool BoardConst::get_piece_by_name(const string& name, Piece& piece) const
 {
-    for (unsigned int i = 0; i < m_nu_pieces; ++i)
+    for (unsigned i = 0; i < m_nu_pieces; ++i)
         if (get_piece_info(Piece(i)).get_name() == name)
         {
             piece = Piece(i);
@@ -829,7 +829,7 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     Point p = points[0];
     if (! m_geometry.is_onboard(p))
         return false;
-    for (unsigned int i = 0; i < m_pieces.size(); ++i)
+    for (unsigned i = 0; i < m_pieces.size(); ++i)
     {
         Piece piece(i);
         if (get_piece_info(piece).get_size() == points.size())
@@ -856,15 +856,15 @@ void BoardConst::init_adj_status()
 
 void BoardConst::init_adj_status(Point p,
                                  array<bool, adj_status_nu_adj>& forbidden,
-                                 unsigned int i)
+                                 unsigned i)
 {
     if (i == adj_status_nu_adj || i == m_geometry.get_adj_diag(p).size())
     {
-        unsigned int index = 0;
-        for (unsigned int j = 0; j < i; ++j)
+        unsigned index = 0;
+        for (unsigned j = 0; j < i; ++j)
             if (forbidden[j])
                 index |= (1 << j);
-        unsigned int n = 0;
+        unsigned n = 0;
         for (AdjDiagIterator j(m_geometry, p); n < i; ++j, ++n)
             if (forbidden[n])
                 m_adj_status[p][index].push_back(*j);
@@ -880,7 +880,7 @@ void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
     symmetric_points.init(m_geometry);
-    for (unsigned int i = 0; i < m_move_info.size(); ++i)
+    for (unsigned i = 0; i < m_move_info.size(); ++i)
     {
         const MoveInfo& info = m_move_info[i];
         MoveInfoExt& info_ext = m_move_info_ext[i];
@@ -897,7 +897,7 @@ void BoardConst::init_symmetry_info()
 }
 
 bool BoardConst::is_compatible_with_adj_status(Point p,
-                                               unsigned int adj_status_index,
+                                               unsigned adj_status_index,
                                                const MovePoints& points) const
 {
     BOOST_FOREACH(Point p_adj, m_adj_status[p][adj_status_index])

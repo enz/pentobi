@@ -53,7 +53,7 @@ void add_test(const string& name, TestFunction function)
 
 bool run_all_tests()
 {
-    unsigned int nu_fail = 0;
+    unsigned nu_fail = 0;
     log() << "Running " << get_all_tests().size() << " tests...\n";
     auto all_tests = get_all_tests();
     for (auto i = all_tests.begin(); i != all_tests.end(); ++i)

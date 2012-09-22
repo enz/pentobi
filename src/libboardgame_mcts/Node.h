@@ -60,7 +60,7 @@ public:
 
     bool has_children() const;
 
-    unsigned int get_nu_children() const;
+    unsigned get_nu_children() const;
 
     void clear();
 
@@ -197,7 +197,7 @@ inline const typename Node<M>::Move& Node<M>::get_move() const
 }
 
 template<typename M>
-inline unsigned int Node<M>::get_nu_children() const
+inline unsigned Node<M>::get_nu_children() const
 {
     LIBBOARDGAME_ASSERT(m_first_child != 0);
     return m_nu_children;

@@ -34,7 +34,7 @@ public:
 
     void set_one_prop_value_per_line(bool enable);
 
-    void set_indent(unsigned int indent);
+    void set_indent(unsigned indent);
 
     // @} // @name
 
@@ -59,7 +59,7 @@ inline void TreeWriter::set_one_prop_value_per_line(bool enable)
     m_writer.set_one_prop_value_per_line(enable);
 }
 
-inline void TreeWriter::set_indent(unsigned int indent)
+inline void TreeWriter::set_indent(unsigned indent)
 {
     m_writer.set_indent(indent);
 }
