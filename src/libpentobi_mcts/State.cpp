@@ -365,6 +365,8 @@ void State::compute_features()
         ((board_type == board_type_classic && nu_onboard_pieces < 13)
          || (board_type == board_type_trigon && nu_onboard_pieces < 5)
          || (board_type == board_type_trigon_3 && nu_onboard_pieces < 5));
+    bool check_connect =
+        (board_type == board_type_classic && m_bd.get_nu_onboard_pieces() < 14);
     for (unsigned int i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = get_move_info(moves[i]);
@@ -394,17 +396,28 @@ void State::compute_features()
         j = info_ext.adj_points.begin();
         end = info_ext.adj_points.end();
         LIBBOARDGAME_ASSERT(j != end);
-        do
+        if (! check_connect)
         {
-            features.heuristic += adj_point_value[*j];
-            if (m_bd.get_point_state(*j) == second_color)
+            do
             {
-                features.connect = true;
-                m_has_connect_move = true;
+                features.heuristic += adj_point_value[*j];
+                ++j;
             }
-            ++j;
+            while (j != end);
         }
-        while (j != end);
+        else
+        {
+            do
+            {
+                features.heuristic += adj_point_value[*j];
+                if (m_bd.get_point_state(*j) == second_color)
+                    features.connect = true;
+                ++j;
+            }
+            while (j != end);
+            if (features.connect)
+                m_has_connect_move = true;
+        }
         if (compute_dist_to_center)
         {
             for (auto j = info.points.begin(); j != info.points.end(); ++j)
