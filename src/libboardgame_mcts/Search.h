@@ -404,7 +404,7 @@ private:
     /** Local variable for update_rave_values().
         Stores the first time a move was played for each player.
         Reused for efficiency. */
-    array<array<size_t, Move::range>, max_players> m_first_play;
+    array<array<unsigned,Move::range>,max_players> m_first_play;
 
     FastLog m_fast_log;
 
@@ -460,7 +460,7 @@ private:
 
     void update_rave_values(const array<Float,max_players>& eval);
 
-    void update_rave_values(const array<Float,max_players>&, size_t i,
+    void update_rave_values(const array<Float,max_players>&, unsigned i,
                             unsigned int player);
 
     void update_values(const array<Float,max_players>& eval);
@@ -513,7 +513,7 @@ Search<S,M,P>::Search(const State& state, size_t memory)
 {
     set_bias_term_constant(0.7f);
     for (unsigned int i = 0; i < max_players; ++i)
-        m_first_play[i].fill(numeric_limits<size_t>::max());
+        m_first_play[i].fill(numeric_limits<unsigned>::max());
 }
 
 template<class S, class M, unsigned int P>
@@ -1329,7 +1329,7 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval)
     {
         LIBBOARDGAME_ASSERT(i < nu_moves);
         PlayerMove mv = m_state.get_move(i);
-        size_t& first = m_first_play[mv.player][mv.move.to_int()];
+        unsigned& first = m_first_play[mv.player][mv.move.to_int()];
         if (i < first)
             first = i;
     }
@@ -1338,7 +1338,7 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval)
         LIBBOARDGAME_ASSERT(i < nu_moves);
         LIBBOARDGAME_ASSERT(i < nu_nodes);
         PlayerMove mv = m_state.get_move(i);
-        size_t& first = m_first_play[mv.player][mv.move.to_int()];
+        unsigned& first = m_first_play[mv.player][mv.move.to_int()];
         if (i < first)
             first = i;
         update_rave_values(eval, i, mv.player);
@@ -1351,19 +1351,19 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval)
     {
         PlayerMove mv = m_state.get_move(i);
         m_first_play[mv.player][mv.move.to_int()] =
-            numeric_limits<size_t>::max();
+            numeric_limits<unsigned>::max();
     }
 }
 
 template<class S, class M, unsigned int P>
 void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
-                                       size_t i, unsigned int player)
+                                       unsigned i, unsigned int player)
 {
     LIBBOARDGAME_ASSERT(i < m_simulation.m_nodes.size());
     const Node* node = m_simulation.m_nodes[i];
     if (! node->has_children())
         return;
-    size_t len = m_state.get_nu_moves();
+    unsigned len = m_state.get_nu_moves();
     Float weight_factor = 1 / Float(len - i);
     for (ChildIterator it(*node); it; ++it)
     {
@@ -1371,9 +1371,9 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
         if (! m_state.skip_rave(mv))
         {
             int m = mv.to_int();
-            size_t first = m_first_play[player][m];
+            unsigned first = m_first_play[player][m];
             LIBBOARDGAME_ASSERT(first >= i);
-            if (first == numeric_limits<size_t>::max())
+            if (first == numeric_limits<unsigned>::max())
                 continue;
             if (m_rave_check_same)
             {
@@ -1381,7 +1381,7 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
                 for (unsigned int i = 0; i < max_players; ++i)
                     if (i != player)
                     {
-                        size_t first_other = m_first_play[i][m];
+                        unsigned first_other = m_first_play[i][m];
                         if (first_other >= i && first_other <= first)
                         {
                             other_played_same = true;
