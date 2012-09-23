@@ -5,6 +5,7 @@
 #ifndef LIBPENTOBI_MCTS_LOCAL_VALUE_H
 #define LIBPENTOBI_MCTS_LOCAL_VALUE_H
 
+#include <algorithm>
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/AdjIterator.h"
 #include "libpentobi_base/Board.h"
@@ -12,6 +13,7 @@
 
 namespace libpentobi_mcts {
 
+using namespace std;
 using libboardgame_base::ArrayList;
 using libboardgame_util::log;
 using libpentobi_base::AdjIterator;
@@ -36,11 +38,13 @@ using libpentobi_base::PointList;
     four-player game variants, the last two opponent moves in Duo, and the last
     two opponent moves, one of each opponent color, in the game variants with
     two players and four colors). Within moves with the same number of attach
-    points occupied, the value is higher if it also occupies any point
-    adjacent to the attach points (no matter how many). Using these values
-    will prefer local responses in the playouts without becoming too
-    deterministic. Attach points that are forbidden to the color of the
-    opponent move are not considered. */
+    points occupied, the value is higher if it also occupies any point adjacent
+    to the attach points (no matter how many). Similarly, the fact if a move
+    occupies at least one second order neighbor of the attach points is used
+    to assign a higher value to moves that would have the same value otherwise.
+    Using these values will prefer local responses in the playouts without
+    becoming too deterministic. Attach points that are forbidden to the color
+    of the opponent move are not considered. */
 class LocalValue
 {
 public:
@@ -97,13 +101,16 @@ inline void LocalValue::Compute::add_move_point(Point p)
 
 inline unsigned LocalValue::Compute::finish()
 {
-    // We only care if it occupied any point ajacent to the attach points, not
-    // how many (attach points use a value of 0x10 adjacent points a value of
-    // 0x01 during computation). This works only as long as there are not more
-    // than 0x10 points covered by a piece.
+    // The exact number of points adjacent (or 2nd order adjacent) to the
+    // attach points is not used, only if there are any (attach points use a
+    // value of 0x100, adjacent points a value of 0x010, 2nd order addjacent
+    // points 0x001 during computation). This works only as long as there are
+    // less than 0x10 points covered by a piece.
     static_assert(PieceInfo::max_size < 0x10, "");
-    if ((m_value & 0xf) != 0)
-        return (m_value & 0xf0) + 1;
+    if ((m_value & 0x0f0) != 0)
+        return (m_value & 0xf00) + 0x010;
+    else if ((m_value & 0x00f) != 0)
+        return (m_value & 0xf00) + 0x001;
     else
         return m_value;
 }
@@ -147,13 +154,23 @@ inline void LocalValue::init(const Board& bd)
             {
                 if (m_point_value[*j] == 0)
                     m_points.push_back(*j);
-                m_point_value[*j] = 0x10;
+                m_point_value[*j] = 0x100;
                 for (AdjIterator k(bd, *j); k; ++k)
-                    if (! bd.is_forbidden(*k, c) && m_point_value[*k] == 0)
-                    {
+                {
+                    if (bd.is_forbidden(*k, c))
+                        continue;
+                    if (m_point_value[*k] == 0)
                         m_points.push_back(*k);
-                        m_point_value[*k] = 0x01;
+                    m_point_value[*k] = max(m_point_value[*k], 0x010u);
+                    for (AdjIterator l(bd, *k); l; ++l)
+                    {
+                        if (bd.is_forbidden(*l, c))
+                            continue;
+                        if (m_point_value[*l] == 0)
+                            m_points.push_back(*l);
+                        m_point_value[*l] = max(m_point_value[*l], 0x001u);
                     }
+                }
             }
             ++j;
         }
