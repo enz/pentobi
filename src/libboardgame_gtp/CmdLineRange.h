@@ -5,7 +5,7 @@
 #ifndef LIBBOARDGAME_GTP_CMDLINERANGE_H
 #define LIBBOARDGAME_GTP_CMDLINERANGE_H
 
-#include <iostream>
+#include <iosfwd>
 #include <string>
 #include <boost/range.hpp>
 

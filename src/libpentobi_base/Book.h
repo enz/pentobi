@@ -5,7 +5,7 @@
 #ifndef LIBPENTOBI_BASE_BOOK_H
 #define LIBPENTOBI_BASE_BOOK_H
 
-#include <iostream>
+#include <iosfwd>
 #include "Board.h"
 #include "Game.h"
 #include "Tree.h"

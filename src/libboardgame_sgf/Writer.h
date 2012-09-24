@@ -5,7 +5,7 @@
 #ifndef LIBBOARDGAME_SGF_WRITER_H
 #define LIBBOARDGAME_SGF_WRITER_H
 
-#include <iostream>
+#include <iosfwd>
 #include <sstream>
 #include <string>
 #include <vector>

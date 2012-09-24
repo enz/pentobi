@@ -8,7 +8,7 @@
 #include <array>
 #include <cassert>
 #include <exception>
-#include <iostream>
+#include <iosfwd>
 #include <sstream>
 #include <string>
 #include "libboardgame_util/Assert.h"

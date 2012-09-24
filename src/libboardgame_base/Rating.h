@@ -6,7 +6,7 @@
 #define LIBBOARDGAME_BASE_RATING_H
 
 #include <climits>
-#include <iostream>
+#include <iosfwd>
 #include "libboardgame_util/MathUtil.h"
 
 namespace libboardgame_base {
@@ -54,18 +54,6 @@ public:
 private:
     float m_elo;
 };
-
-inline ostream& operator<<(ostream& out, const Rating& rating)
-{
-    out << rating.m_elo;
-    return out;
-}
-
-inline istream& operator>>(istream& in, Rating& rating)
-{
-    in >> rating.m_elo;
-    return in;
-}
 
 inline Rating::Rating(float elo)
   : m_elo(elo)

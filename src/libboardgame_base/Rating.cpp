@@ -9,6 +9,7 @@
 #include "Rating.h"
 
 #include <cmath>
+#include <iostream>
 #include "libboardgame_util/Assert.h"
 
 namespace libboardgame_base {
@@ -16,6 +17,18 @@ namespace libboardgame_base {
 using namespace std;
 
 //-----------------------------------------------------------------------------
+
+ostream& operator<<(ostream& out, const Rating& rating)
+{
+    out << rating.m_elo;
+    return out;
+}
+
+istream& operator>>(istream& in, Rating& rating)
+{
+    in >> rating.m_elo;
+    return in;
+}
 
 float Rating::get_expected_result(Rating elo_opponent,
                                   unsigned nu_opponents) const

@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file Response.h */
+/** @file libboardgame_gtp/Response.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_GTP_RESPONSE_H
 #define LIBBOARDGAME_GTP_RESPONSE_H
 
-#include <iostream>
+#include <iosfwd>
 #include <sstream>
 #include <string>
 

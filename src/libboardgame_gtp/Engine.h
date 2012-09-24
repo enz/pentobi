@@ -6,7 +6,7 @@
 #define LIBBOARDGAME_GTP_ENGINE_H
 
 #include <functional>
-#include <iostream>
+#include <iosfwd>
 #include <map>
 #include <memory>
 #include "Arguments.h"

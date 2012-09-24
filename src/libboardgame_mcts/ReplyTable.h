@@ -7,7 +7,7 @@
 
 #include <algorithm>
 #include <array>
-#include <iostream>
+#include <iosfwd>
 #include <memory>
 #include "PlayerMove.h"
 #include "libboardgame_util/Assert.h"

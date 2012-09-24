@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
-#include <iostream>
+#include <iosfwd>
 #include <limits>
 #include "Assert.h"
 
