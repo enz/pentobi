@@ -11,6 +11,7 @@
 #include <cassert>
 #include <cctype>
 #include <fstream>
+#include <iostream>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/foreach.hpp>
 #include <boost/thread/barrier.hpp>

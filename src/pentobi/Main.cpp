@@ -6,6 +6,7 @@
 #include <config.h>
 #endif
 
+#include <iostream>
 #include <boost/program_options.hpp>
 #include <QFileInfo>
 #include <QLibraryInfo>

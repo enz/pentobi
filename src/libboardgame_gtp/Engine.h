@@ -67,11 +67,10 @@ public:
         @param in The input stream
         @param throw_on_fail Whether to throw an exception if a command fails,
         or to continue executing the remainign commands
-        @param log Stream for logging the commands and responses to (default
-        is cerr).
+        @param log Stream for logging the commands and responses to.
         @return The stream state as a bool
         @throws Failure If a command fails, and @c throw_on_fail is @c true */
-    bool exec(istream& in, bool throw_on_fail, ostream& log = cerr);
+    bool exec(istream& in, bool throw_on_fail, ostream& log);
 
     /** Execute a single command line.
         @param line The command line (must contain a valid command, comment
