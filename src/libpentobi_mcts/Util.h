@@ -15,9 +15,8 @@ using libboardgame_mcts::Node;
 
 //-----------------------------------------------------------------------------
 
-/** Comparison function for sorting children of a node by visit count.
-    Prefers nodes with higher visit counts. Uses the node value as a tie
-    breaker. */
+/** Comparison function for sorting children of a node by count.
+    Prefers nodes with higher counts. Uses the node value as a tie breaker. */
 bool compare_node(const Node<Move>* n1, const Node<Move>* n2);
 
 /** Dump the search tree in SGF format. */

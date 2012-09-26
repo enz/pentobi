@@ -77,7 +77,6 @@ void Engine::cmd_move_values(Response& response)
     response << fixed;
     BOOST_FOREACH(const Search::Node* node, children)
     {
-        response << setprecision(0) << node->get_visit_count() << ' ';
         Float count = node->get_count();
         response << setprecision(0) << count << ' ';
         if (count > 0)

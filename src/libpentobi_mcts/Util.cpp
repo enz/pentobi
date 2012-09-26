@@ -30,8 +30,7 @@ void dump_tree_recurse(Writer& writer, Variant variant,
                        const Node<Move>& node, Color to_play)
 {
     ostringstream comment;
-    comment << "Visit: " << node.get_visit_count() << '\n'
-            << "Cnt: " << node.get_count();
+    comment << "Cnt: " << node.get_count();
     if (node.get_count() > 0)
         comment << "\nVal: " << node.get_value();
     comment << "\nRAVE cnt: " << node.get_rave_count();
@@ -69,11 +68,11 @@ void dump_tree_recurse(Writer& writer, Variant variant,
 
 bool compare_node(const Node<Move>* n1, const Node<Move>* n2)
 {
-    Float visit_count1 = n1->get_visit_count();
-    Float visit_count2 = n2->get_visit_count();
-    if (visit_count1 != visit_count2)
-        return visit_count1 > visit_count2;
-    if (n1->get_count() > 0 && n2->get_count() > 0)
+    Float count1 = n1->get_count();
+    Float count2 = n2->get_count();
+    if (count1 != count2)
+        return count1 > count2;
+    if (count1 > 0 && count2 > 0)
         return n1->get_value() > n2->get_value();
     return false;
 }

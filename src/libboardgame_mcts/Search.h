@@ -382,6 +382,14 @@ private:
     /** Maximum simulations of current search. */
     Float m_max_count;
 
+    /** Count of root node of reused subtree if its values had to be cleared.
+        If a subtree (not the full tree) is reused because the current position
+        is a follow-up position of the last search, the root values need to be
+        cleared because the root value has a different meaning than inner node
+        values (position value vs. move values). We remember the count of the
+        root node before clearing for the max count abort condition. */
+    Float m_reuse_count;
+
     size_t m_tree_memory;
 
     size_t m_max_nodes;
@@ -529,7 +537,7 @@ bool Search<S,M,P>::check_abort() const
         log("Search aborted");
         return true;
     }
-    Float count = m_tree.get_root().get_count();
+    Float count = m_tree.get_root().get_count() + m_reuse_count;
     static_assert(numeric_limits<Float>::radix == 2,
                   "libboardgame_mcts::Float must have radix 2");
     if (count == (size_t(1) << numeric_limits<Float>::digits) - 1)
@@ -548,7 +556,7 @@ bool Search<S,M,P>::check_abort() const
 template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_abort_expensive() const
 {
-    Float count = m_tree.get_root().get_count();
+    Float count = m_tree.get_root().get_count() + m_reuse_count;
     if (count == 0)
         return false;
     double time = m_timer();
@@ -822,7 +830,7 @@ void Search<S,M,P>::play_in_tree(unsigned thread_id, bool& is_out_of_memory,
     {
         if (node->has_children())
             node = select_child(*node);
-        else if (node->get_visit_count() >= m_expand_threshold || node == &root)
+        else if (node->get_count() >= m_expand_threshold || node == &root)
         {
             unsigned to_play = m_state.get_to_play();
             if (! expand_node(thread_id, *node, node,
@@ -853,9 +861,9 @@ void Search<S,M,P>::write_info(ostream& out) const
     if (m_nu_simulations == 0 || count == 0)
         return;
     out << format(
-               "Val: %.2f, Cnt: %.0f, Sim: %i, Nds: %i, Tm: %s, Sim/s: %.0f\n"
-               "Len: %s, Dp: %s\n")
-        % root.get_value() % root.get_visit_count() % m_nu_simulations
+             "Val: %.2f, Cnt: %.0f, ReuseCnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
+             "Sim/s: %.0f, Len: %s, Dp: %s\n")
+        % root.get_value() % count % m_reuse_count % m_nu_simulations
         % m_tree.get_nu_nodes() % time_to_string(m_last_time)
         % (double(m_nu_simulations) / m_last_time)
         % m_stat_len.to_string(true, 1, true)
@@ -932,6 +940,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
         for (unsigned i = 0; i < nu_players; ++i)
             if (m_root_val[i].get_count() > 0)
                 m_init_val[i] = m_root_val[i];
+    m_reuse_count = 0;
     if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
         && get_reuse_param() == get_last_reuse_param())
     {
@@ -953,7 +962,10 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
                 // values of inner nodes (position value vs. move values) so
                 // we might have to discard them
                 if (node != &m_tree.get_root())
+                {
+                    m_reuse_count = node->get_count();
                     m_tree.clear_values(*node);
+                }
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 if (m_deterministic)
                     interval_checker.set_deterministic(1000000);
@@ -1082,17 +1094,14 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     const Node* best_child = 0;
     Float best_value = -numeric_limits<Float>::max();
     Float bias_term_constant_part = 0; // Init to avoid compiler warning
-    // Note: use visit count here not count. In most cases, count is larger
-    // than visit count because of prior knowledge initializaion, but it can
-    // happen that count is zero and visit count greater zero if the node
-    // value was cleared but not the visit count after reusing an inner node
-    // from a previous search as the root of the new search
-    Float node_count = node.get_visit_count();
+    Float node_count = node.get_count();
     if (m_bias_term_constant != 0)
     {
-        LIBBOARDGAME_ASSERT(node_count > 0);
-        bias_term_constant_part =
-            m_bias_term_constant_sq * m_fast_log.get_log(float(node_count));
+        if (node_count == 0)
+            bias_term_constant_part = 0;
+        else
+            bias_term_constant_part =
+                m_bias_term_constant_sq * m_fast_log.get_log(float(node_count));
     }
     Float beta =
         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
@@ -1161,7 +1170,7 @@ const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
     Float max_count_value = -numeric_limits<Float>::max();
     for (ChildIterator i(node); i; ++i)
     {
-        Float count = i->get_visit_count();
+        Float count = i->get_count();
         if (count > max_count
             || (count == max_count && count > 0 && max_count > 0
                 && i->get_value() > max_count_value))
@@ -1411,14 +1420,12 @@ template<class S, class M, unsigned P>
 void Search<S,M,P>::update_values(const array<Float,max_players>& eval)
 {
     m_tree.add_value(m_tree.get_root(), eval[m_player]);
-    m_tree.inc_visit_count(m_tree.get_root());
     unsigned nu_nodes = static_cast<unsigned>(m_simulation.m_nodes.size());
     for (unsigned i = 1; i < nu_nodes; ++i)
     {
         const Node& node = *m_simulation.m_nodes[i];
         PlayerMove mv = m_state.get_move(i - 1);
         m_tree.add_value(node, eval[mv.player]);
-        m_tree.inc_visit_count(node);
     }
     unsigned nu_players = get_nu_players();
     for (unsigned i = 0; i < nu_players; ++i)

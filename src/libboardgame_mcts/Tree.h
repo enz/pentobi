@@ -115,8 +115,6 @@ public:
 
     void add_rave_value(const Node& node, Float v, Float weight);
 
-    void inc_visit_count(const Node& node);
-
     /** See Node::clear_values(). */
     void clear_values(const Node& node);
 
@@ -409,12 +407,6 @@ inline unsigned Tree<M>::get_thread_storage(const Node& node) const
 {
     size_t diff = &node - m_nodes.get();
     return static_cast<unsigned>(diff / m_nodes_per_thread);
-}
-
-template<typename M>
-inline void Tree<M>::inc_visit_count(const Node& node)
-{
-    non_const(node).inc_visit_count();
 }
 
 template<typename M>

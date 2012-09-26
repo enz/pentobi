@@ -34,8 +34,7 @@ public:
 
     const Move& get_move() const;
 
-    /** Number of values that were added.
-        This can be larger than the visit count if prior knowledge is used. */
+    /** Number of values that were added. */
     Float get_count() const;
 
     /** Value of the node.
@@ -44,10 +43,6 @@ public:
         value of the move leading to the position at the node from the point
         of view of the player at the parent node. */
     Float get_value() const;
-
-    Float get_visit_count() const;
-
-    void inc_visit_count();
 
     Float get_rave_count() const;
 
@@ -96,8 +91,6 @@ private:
 
     Float m_rave_value;
 
-    Float m_visit_count;
-
     Node* m_first_child;
 
     /** Not to be implemented */
@@ -139,7 +132,6 @@ void Node<M>::clear()
     m_value = 0;
     m_rave_count = 0;
     m_rave_value = 0;
-    m_visit_count = 0;
     m_first_child = 0;
 }
 
@@ -164,7 +156,6 @@ void Node<M>::copy_data_from(const Node& node)
         Float m_value;
         Float m_rave_count;
         Float m_rave_value;
-        Float m_visit_count;
         Node* m_first_child;
     };
     static_assert(sizeof(Node) == sizeof(Dummy),
@@ -175,7 +166,6 @@ void Node<M>::copy_data_from(const Node& node)
     m_value = node.m_value;
     m_rave_count = node.m_rave_count;
     m_rave_value = node.m_rave_value;
-    m_visit_count = node.m_visit_count;
 }
 
 template<typename M>
@@ -224,21 +214,9 @@ inline Float Node<M>::get_value() const
 }
 
 template<typename M>
-inline Float Node<M>::get_visit_count() const
-{
-    return m_visit_count;
-}
-
-template<typename M>
 inline bool Node<M>::has_children() const
 {
     return m_first_child != 0;
-}
-
-template<typename M>
-inline void Node<M>::inc_visit_count()
-{
-    ++m_visit_count;
 }
 
 template<typename M>
@@ -257,7 +235,6 @@ void Node<M>::init(const Move& mv, Float value, Float count, Float rave_value,
     m_value = value;
     m_rave_count = rave_count;
     m_rave_value = rave_value;
-    m_visit_count = 0;
     m_first_child = 0;
 }
 
