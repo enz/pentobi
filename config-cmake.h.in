@@ -8,7 +8,7 @@
 #define VERSION "@PENTOBI_VERSION@"
 
 /* Floating type for Monte-Carlo tree search values (float|double) */
-#define LIBBOARDGAME_MCTS_VALUE_TYPE @LIBBOARDGAME_MCTS_VALUE_TYPE@
+#define LIBBOARDGAME_MCTS_FLOAT_TYPE @LIBBOARDGAME_MCTS_FLOAT_TYPE@
 
 /* Directory containing opening books.
    Path is absolute or relative to location of executable. */
