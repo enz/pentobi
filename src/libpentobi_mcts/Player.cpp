@@ -35,7 +35,7 @@ Player::Player(Variant initial_variant, const path& books_dir, size_t memory)
       m_books_dir(books_dir),
       m_level(4),
       m_fixed_simulations(0),
-      m_resign_threshold(0.07),
+      m_resign_threshold(0.09),
       m_resign_min_simulations(500),
       m_search(initial_variant, memory),
       m_book(initial_variant)
