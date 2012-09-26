@@ -18,6 +18,11 @@ Player::~Player() throw()
 {
 }
 
+bool Player::resign() const
+{
+    return false;
+}
+
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_base

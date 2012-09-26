@@ -17,6 +17,12 @@ public:
     virtual ~Player() throw();
 
     virtual Move genmove(const Board& bd, Color c) = 0;
+
+    /** Check if the player wants to resign.
+        This may only be called after a genmove() and returns true if the
+        players wants to resign in the position at the last genmove().
+        The default implementation returns false. */
+    virtual bool resign() const;
 };
 
 //-----------------------------------------------------------------------------

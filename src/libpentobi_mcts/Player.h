@@ -35,7 +35,16 @@ public:
 
     ~Player() throw();
 
+
+    /** @name Virtual functions of libpentobi_base::Player */
+    // @{
+
     Move genmove(const Board& bd, Color c);
+
+    bool resign() const;
+
+    // @} // @name
+
 
     Float get_fixed_simulations() const;
 
@@ -80,6 +89,8 @@ private:
 
     bool m_use_book;
 
+    bool m_resign;
+
     path m_books_dir;
 
     int m_level;
@@ -91,6 +102,10 @@ private:
     array<float, Board::max_player_moves> weight_max_count_duo;
 
     Float m_fixed_simulations;
+
+    Float m_resign_threshold;
+
+    Float m_resign_min_simulations;
 
     double m_fixed_time;
 

@@ -45,15 +45,15 @@ class GtpClient:
             exit(self.color + " terminated")
         return line
 
-def invert_score(score):
-    if score.find("B+") != -1:
-        return score.replace("B+", "W+")
-    elif score.find("W+") != -1:
-        return score.replace("W+", "B+")
+def invert_result(result):
+    if result.find("B+") != -1:
+        return result.replace("B+", "W+")
+    elif result.find("W+") != -1:
+        return result.replace("W+", "B+")
     else:
-        return score
+        return result
 
-def convert_four_player_score(score):
+def convert_four_player_result(result):
     """
     Make a two-player score out of the score of the four players in game
     variant classic. Assumes that Black plays Blue and Red, and White plays
@@ -62,15 +62,15 @@ def convert_four_player_score(score):
     B+1 if the winning color was played by Black, W+1 if it was played by White
     and 0 if it ties with one of the colors played by the other player.
     """
-    score_array = score.split()
-    if int(score_array[0]) > int(score_array[2]):
-        max_black = int(score_array[0])
+    result_array = result.split()
+    if int(result_array[0]) > int(result_array[2]):
+        max_black = int(result_array[0])
     else:
-        max_black = int(score_array[2])
-    if int(score_array[1]) > int(score_array[3]):
-        max_white = int(score_array[1])
+        max_black = int(result_array[2])
+    if int(result_array[1]) > int(result_array[3]):
+        max_white = int(result_array[1])
     else:
-        max_white = int(score_array[3])
+        max_white = int(result_array[3])
     if max_black > max_white:
         return "B+1"
     elif max_white > max_black:
@@ -78,7 +78,7 @@ def convert_four_player_score(score):
     else:
         return "0"
         
-def play_game(game_number, black, white, game_variant):
+def play_game(game_number, black, white, variant):
     stderr.write("=========================================================\n")
     stderr.write("Game %i\n" % game_number)
     stderr.write("=========================================================\n")
@@ -91,13 +91,14 @@ def play_game(game_number, black, white, game_variant):
         black, white = white, black
     to_play = black
     other = white
-    if game_variant == "duo" or game_variant == "junior":
+    if variant == "duo" or variant == "junior":
         colors = [ "b", "w" ]
     else:
         colors = [ "blue", "yellow", "red", "green" ]
     color_to_play = 0
     move_number = 0
     nu_passes = 0
+    resign = False
     sgf = "(;GM[%s]GN[%s]\n" % (game_name, game_number)
     if exchange_color:
         sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (white_cmd, black_cmd)
@@ -111,10 +112,14 @@ def play_game(game_number, black, white, game_variant):
             with open(prefix + ".fail.blksgf", "w") as f:
                 f.write(sgf)
             raise
+        move = lower(move)
+        if move == "resign":
+            resign = True
+            break
         other.send("play " + colors[color_to_play] + " " + move)
-        if lower(move) != "pass":
+        if move != "pass":
             nu_passes = 0            
-            if game_variant == "duo":
+            if variant == "duo":
                 if color_to_play == 0:
                     prop_id = "B"
                 else:
@@ -144,24 +149,35 @@ def play_game(game_number, black, white, game_variant):
         black, white = white, black
     cpu_black = float(black.send("cputime")) - cpu_black
     cpu_white = float(white.send("cputime")) - cpu_white
-    score_black = black.send("final_score")
-    score_white = white.send("final_score")
-    if game_variant == "classic" or game_variant == "trigon":
-        score_black = convert_four_player_score(score_black)
-        score_white = convert_four_player_score(score_white)
+    if resign:
+        if not (variant == "duo" or variant == "junior"
+                or variant == "classic_2" or variant == "trigon_2"):
+            exit("resign only allowed in two-player game variants")
+        if color_to_play == 0 or color_to_play == 2:
+            result_black = "W+R"
+            result_white = "W+R"
+        else:
+            result_black = "B+R"
+            result_white = "B+R"
+    else:
+        result_black = black.send("final_score")
+        result_white = white.send("final_score")
+        if variant == "classic" or variant == "trigon":
+            result_black = convert_four_player_result(result_black)
+            result_white = convert_four_player_result(result_white)
     if exchange_color:
-        score_black = invert_score(score_black)
-        score_white = invert_score(score_white)
+        result_black = invert_result(result_black)
+        result_white = invert_result(result_white)
     filename = prefix + ".blksgf"
     with open(filename, "a") as f:
         f.write(sgf)
     filename = prefix + ".dat"
     if not exists(filename):
         with open(filename, "w") as f:
-            f.write("# game\tscore_b\tscore_w\tlen\texchange\tcpu_b\tcpu_w\n")
+            f.write("# game\tres_b\tres_w\tlen\texchg\tcpu_b\tcpu_w\n")
     with open(filename, "a") as f:
         f.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
-                % (game_number, score_black, score_white, move_number,
+                % (game_number, result_black, result_white, move_number,
                    exchange_color, cpu_black, cpu_white))
 
 def find_start_index():
@@ -181,7 +197,7 @@ white_cmd = ""
 black_cmd = ""
 alternate = False
 number_games = 1
-game_variant = "duo"
+variant = "duo"
 prefix = "output"
 evaluate = ""
 
@@ -204,7 +220,7 @@ for opt, val in opts:
     elif opt in ("-f", "--file"):
         prefix = val
     elif opt in ("-g", "--game"):
-        game_variant = val
+        variant = val
     elif opt in ("-n", "--nugames"):
         number_games = int(val)
     elif opt in ("-w", "--white"):
@@ -213,20 +229,20 @@ if black_cmd == "":
     exit("Missing black player")
 if white_cmd == "":
     exit("Missing white player")
-if game_variant == "classic":
+if variant == "classic":
     game_name = "Blokus"
-elif game_variant == "classic_2":
+elif variant == "classic_2":
     game_name = "Blokus Two-Player"
-elif game_variant == "trigon":
+elif variant == "trigon":
     game_name = "Blokus Trigon"
-elif game_variant == "trigon_2":
+elif variant == "trigon_2":
     game_name = "Blokus Trigon Two-Player"
-elif game_variant == "duo":
+elif variant == "duo":
     game_name = "Blokus Duo"
-elif game_variant == "junior":
+elif variant == "junior":
     game_name = "Blokus Junior"
 else:
-    exit("invalid game variant: " + game_variant)
+    exit("invalid game variant: " + variant)
 black = GtpClient(black_cmd, "B")
 white = GtpClient(white_cmd, "W")
 black.evaluate = (evaluate == "black" or evaluate == "both")
@@ -235,4 +251,4 @@ black.send_no_err("set_game " + game_name)
 white.send_no_err("set_game " + game_name)
 start = find_start_index()
 for game_number in range(start, number_games):
-    play_game(game_number, black, white, game_variant)
+    play_game(game_number, black, white, variant)

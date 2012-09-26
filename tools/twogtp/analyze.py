@@ -70,7 +70,6 @@ win = Statistics("Win")
 loss = Statistics("Loss")
 draw = Statistics("Draw")
 result = Statistics("Res")
-score_stat = Statistics("Sco")
 result_color_black = Statistics("ResB")
 result_color_white = Statistics("ResW")
 alternate_used = False
@@ -83,38 +82,31 @@ for line in stdin.readlines():
     games += 1
     columns = line.split("\t")
     game_number = int(columns[0])
-    score_black = columns[1]
-    score_white = columns[2]
+    result_black = columns[1]
+    result_white = columns[2]
     exchange_color = (columns[4].strip() == "True")
     cpu_black.add(float(columns[5]))
     cpu_white.add(float(columns[6]))
     len.add(int(columns[3]))
     if exchange_color:
         alternate_used = True
-    if score_black.startswith("B+"):
-        score = int(score_black[2:])
-    elif score_black.startswith("W+"):
-        score = -int(score_black[2:])
-    elif score_black == "0":
-        score = 0
-    else:
-        exit("Invalid score: " + score_black)
-    score_stat.add(score)
-    if score > 0:
+    if result_black.startswith("B+"):
         win.add(1)
         loss.add(0)
         draw.add(0)
         result_value = 1.0
-    elif score < 0:
+    elif result_black.startswith("W+"):
         win.add(0)
         loss.add(1)
         draw.add(0)
         result_value = 0.0
-    elif score == 0:
+    elif result_black == "0":
         win.add(0)
         loss.add(0)
         draw.add(1)
         result_value = 0.5
+    else:
+        exit("Invalid result: " + result_black)
     result.add(result_value)
     if exchange_color:
         result_color_white.add(result_value)
@@ -150,7 +142,5 @@ else:
         print_stat(cpu_white)
         print ",",
         print_stat(len)
-        print ",",
-        print_stat(score_stat)
     print
 

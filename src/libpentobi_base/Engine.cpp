@@ -39,6 +39,7 @@ using libpentobi_base::Color;
 Engine::Engine(Variant variant)
     : m_accept_illegal(false),
       m_show_board(false),
+      m_resign(true),
       m_game(variant),
       m_player(0)
 {
@@ -153,13 +154,16 @@ void Engine::cmd_param_base(const Arguments& args, Response& response)
 {
     if (args.get_size() == 0)
         response
-            << "accept_illegal " << m_accept_illegal << '\n';
+            << "accept_illegal " << m_accept_illegal << '\n'
+            << "resign " << m_resign << '\n';
     else
     {
         args.check_size(2);
         string name = args.get(0);
         if (name == "accept_illegal")
             m_accept_illegal = args.get<bool>(1);
+        else if (name == "resign")
+            m_resign = args.get<bool>(1);
         else
             throw Failure(format("unknown parameter '%1%'") % name);
     }
@@ -221,12 +225,18 @@ void Engine::cmd_undo()
 void Engine::genmove(Color c, Response& response)
 {
     const Board& bd = get_board();
-    Move mv = get_player().genmove(bd, c);
+    Player& player = get_player();
+    Move mv = player.genmove(bd, c);
     if (mv.is_null())
         throw Failure("player failed to generate a move");
     if (! bd.is_legal(c, mv))
         throw Failure(format("player generated illegal move: %1%")
                       % bd.to_string(mv));
+    if (m_resign && player.resign())
+    {
+        response << "resign";
+        return;
+    }
     m_game.play(c, mv, true);
     response << bd.to_string(mv, false);
     board_changed();

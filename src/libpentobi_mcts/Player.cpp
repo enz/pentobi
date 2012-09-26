@@ -31,9 +31,12 @@ using libpentobi_base::Variant;
 Player::Player(Variant initial_variant, const path& books_dir, size_t memory)
     : m_is_book_loaded(false),
       m_use_book(true),
+      m_resign(false),
       m_books_dir(books_dir),
       m_level(4),
       m_fixed_simulations(0),
+      m_resign_threshold(0.07),
+      m_resign_min_simulations(500),
       m_search(initial_variant, memory),
       m_book(initial_variant)
 {
@@ -78,6 +81,7 @@ Player::~Player() throw()
 
 Move Player::genmove(const Board& bd, Color c)
 {
+    m_resign = false;
     if (! bd.has_moves(c))
         return Move::pass();
     Move mv;
@@ -191,6 +195,14 @@ Move Player::genmove(const Board& bd, Color c)
         log() << "MaxTime " << max_time << '\n';
     if (! m_search.search(mv, bd, c, max_count, 0, max_time, time_source))
         return Move::null();
+    // Resign only in two-player game variants
+    if (get_nu_players(variant) == 2)
+    {
+        const Search::Node& root = m_search.get_tree().get_root();
+        if (root.get_count() > 0 && root.get_count() > m_resign_min_simulations
+            && root.get_value() < m_resign_threshold)
+            m_resign = true;
+    }
     return mv;
 }
 
@@ -273,6 +285,11 @@ bool Player::load_book(const path& filepath)
     m_is_book_loaded = true;
     log() << "ok\n";
     return true;
+}
+
+bool Player::resign() const
+{
+    return m_resign;
 }
 
 //-----------------------------------------------------------------------------

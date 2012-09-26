@@ -51,6 +51,9 @@ public:
 
     void set_accept_illegal(bool enable);
 
+    /** Enable or disable resigning. */
+    void set_resign(bool enable);
+
     void set_show_board(bool enable);
 
     const Board& get_board() const;
@@ -64,6 +67,8 @@ private:
     bool m_accept_illegal;
 
     bool m_show_board;
+
+    bool m_resign;
 
     Game m_game;
 
@@ -86,6 +91,11 @@ inline const Board& Engine::get_board() const
 inline void Engine::set_accept_illegal(bool enable)
 {
     m_accept_illegal = enable;
+}
+
+inline void Engine::set_resign(bool enable)
+{
+    m_resign = enable;
 }
 
 //-----------------------------------------------------------------------------

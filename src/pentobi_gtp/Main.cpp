@@ -81,7 +81,8 @@ int main(int argc, char** argv)
             ("memory", value<>(&memory), "memory to allocate for search trees")
             ("seed,r", value<uint32_t>(&seed), "set random seed")
             ("showboard", "automatically write board to stderr after changes")
-            ("nobook", "do not use opening book")
+            ("nobook", "disable opening book")
+            ("noresign", "disable resign")
             ("quiet,q", "do not print logging messages")
             ("version,v", "print version and exit");
         options_description hidden_options;
@@ -126,6 +127,7 @@ int main(int argc, char** argv)
         path books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
                                    memory);
+        engine.set_resign(vm.count("noresign") == 0);
         if (vm.count("showboard"))
             engine.set_show_board(true);
         if (vm.count("seed"))
