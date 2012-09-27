@@ -560,10 +560,14 @@ bool Search<S,M,P>::check_abort_expensive() const
     if (count == 0)
         return false;
     double time = m_timer();
-    if (time < 0.1)
+    if (! m_deterministic && time < 0.1)
         // Simulations per second might be inaccurate for very small times
         return false;
-    double simulations_per_sec = double(m_nu_simulations) / time;
+    double simulations_per_sec;
+    if (time == 0)
+        simulations_per_sec = expected_sim_per_sec();
+    else
+        simulations_per_sec = double(m_nu_simulations) / time;
     double remaining_time;
     Float remaining_simulations;
     if (m_max_count == 0)
