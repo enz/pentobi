@@ -57,7 +57,7 @@ void mainFunction(int argc, char* argv[])
         throw Exception("Thumbnail generation failed");
     QImageWriter writer(QString::fromLocal8Bit(files[1].c_str()), "png");
     if (! writer.write(image))
-        throw Exception(writer.errorString().toStdString());
+        throw Exception(writer.errorString().toLocal8Bit().constData());
 }
 
 } //namespace

@@ -33,7 +33,7 @@ void setIcon(QAction* action, const QString& name)
 HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     : QMainWindow(parent)
 {
-    log() << "Loading " << mainPage.toStdString() << '\n';
+    log() << "Loading " << mainPage.toLocal8Bit().constData() << '\n';
     setWindowTitle(tr("Pentobi User Manual"));
     m_mainPageUrl = QUrl::fromLocalFile(mainPage);
     QTextBrowser* browser = new QTextBrowser(this);
