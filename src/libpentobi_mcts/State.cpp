@@ -561,8 +561,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         do
         {
             ++nu_try;
-            int i =
-                m_random.generate_small_int(static_cast<int>(moves->size()));
+            unsigned i = m_random.generate_small_uint(moves->size());
             mv = (*moves)[i];
         }
         while (get_move_info(mv).points.size() < max_playable_piece_size
