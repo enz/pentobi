@@ -801,6 +801,7 @@ inline void Board::restore_snapshot()
     LIBBOARDGAME_ASSERT(m_snapshot);
     LIBBOARDGAME_ASSERT(m_snapshot->moves_size <= m_moves.size());
     m_moves.resize(m_snapshot->moves_size);
+    // See also the comment in copy_from() about the following memcpy's.
     memcpy(&m_state_base, &m_snapshot->state_base, sizeof(StateBase));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {

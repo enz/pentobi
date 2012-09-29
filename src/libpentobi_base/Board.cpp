@@ -65,6 +65,11 @@ void Board::copy_from(const Board& bd)
         init_variant(bd.m_variant);
     m_moves = bd.m_moves;
     m_setup.to_play = bd.m_setup.to_play;
+    // Note: the following memcpy's are for efficiency but are dangerous
+    // because they might break if the classes change. In the future, this
+    // should be replaced by a normal assignment ass soon as C++11 type_traits
+    // and defaulted functions are supported well enough by compilers that
+    // they can figure out themselves if they can use memcpy here.
     memcpy(&m_state_base, &bd.m_state_base, sizeof(StateBase));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
@@ -371,6 +376,7 @@ void Board::take_snapshot()
     if (! m_snapshot)
         m_snapshot.reset(new Snapshot());
     m_snapshot->moves_size = m_moves.size();
+    // See also the comment in copy_from() about the following memcpy's.
     memcpy(&m_snapshot->state_base, &m_state_base, sizeof(StateBase));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
