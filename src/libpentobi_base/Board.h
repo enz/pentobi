@@ -5,6 +5,7 @@
 #ifndef LIBPENTOBI_BASE_BOARD_H
 #define LIBPENTOBI_BASE_BOARD_H
 
+#include <memory>
 #include "BoardConst.h"
 #include "ColorMap.h"
 #include "ColorMove.h"
@@ -286,7 +287,56 @@ public:
 
     bool is_same_player(Color c1, Color c2) const;
 
+    /** Remember the board state to quickly restore it later.
+        A snapshot can only be restored from a position that was reached
+        after playing moves from the snapshot position. */
+    void take_snapshot();
+
+    /** See take_snapshot() */
+    void restore_snapshot();
+
 private:
+    /** Color-independent part of the board state for fast snapshot restoration.
+        Must have only POD-like members such that it can quickly be copied
+        with memcpy in copy_from(). */
+    struct StateBase
+    {
+        PointStateGrid point_state;
+
+        Grid<Move> played_move;
+
+        unsigned nu_onboard_pieces_all;
+
+        Color to_play;
+    };
+
+    /** Color-dependent part of the board state for fast snapshot restoration..
+        Must have only POD-like members such that it can quickly be copied
+        with memcpy in copy_from(). */
+    struct StateColor
+    {
+        Grid<bool> forbidden;
+
+        Grid<bool> is_attach_point;
+
+        PiecesLeftList pieces_left;
+
+        PieceMap<unsigned> nu_left_piece;
+
+        unsigned nu_onboard_pieces;
+    };
+
+    struct Snapshot
+    {
+        unsigned moves_size;
+
+        ColorMap<unsigned> attach_points_size;
+
+        StateBase state_base;
+
+        ColorMap<StateColor> state_color;
+    };
+
     Variant m_variant;
 
     unsigned m_nu_colors;
@@ -295,32 +345,14 @@ private:
 
     const Geometry* m_geometry;
 
-    Color m_to_play;
+    StateBase m_state_base;
 
-    PointStateGrid m_point_state;
-
-    ColorMap<Grid<bool>> m_forbidden;
-
-    ColorMap<Grid<bool>> m_is_attach_point;
+    ColorMap<StateColor> m_state_color;
 
     ColorMap<PointList> m_attach_points;
 
-    Grid<Move> m_played_move;
-
-    ColorMap<PiecesLeftList> m_pieces_left;
-
-    ColorMap<PieceMap<unsigned>> m_nu_left_piece;
-
     /** See get_second_color() */
     ColorMap<Color> m_second_color;
-
-    Setup m_setup;
-
-    ArrayList<ColorMove, max_game_moves> m_moves;
-
-    ColorMap<unsigned> m_nu_onboard_pieces;
-
-    unsigned m_nu_onboard_pieces_all;
 
     ColorMap<char> m_color_char;
 
@@ -330,11 +362,25 @@ private:
 
     ColorMap<const char*> m_color_name;
 
+    ArrayList<ColorMove,max_game_moves> m_moves;
+
+    unique_ptr<Snapshot> m_snapshot;
+
+    Setup m_setup;
+
     StartingPoints m_starting_points;
 
     /** Local variable during move generation.
         Reused for efficiency. */
     mutable MoveMarker m_marker;
+
+    /** Not to be implemented.
+        Use copy_from() to copy a board state. */
+    Board(const Board&);
+
+    /** Not to be implemented.
+        Use copy_from() to copy a board state. */
+    Board& operator=(const Board&);
 
     void gen_moves(Color c, Point p, unsigned adj_status_index,
                    MoveMarker& marker,
@@ -408,7 +454,7 @@ inline const Geometry& Board::get_geometry() const
 
 inline const Board::PointStateGrid& Board::get_grid() const
 {
-    return m_point_state;
+    return m_state_base.point_state;
 }
 
 inline ColorMove Board::get_move(unsigned n) const
@@ -445,7 +491,7 @@ inline unsigned Board::get_nu_colors() const
 inline unsigned Board::get_nu_left_piece(Color c, Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_pieces());
-    return m_nu_left_piece[c][piece];
+    return m_state_color[c].nu_left_piece[piece];
 }
 
 inline unsigned Board::get_nu_moves() const
@@ -455,12 +501,12 @@ inline unsigned Board::get_nu_moves() const
 
 inline unsigned Board::get_nu_onboard_pieces() const
 {
-    return m_nu_onboard_pieces_all;
+    return m_state_base.nu_onboard_pieces_all;
 }
 
 inline unsigned Board::get_nu_onboard_pieces(Color c) const
 {
-    return m_nu_onboard_pieces[c];
+    return m_state_color[c].nu_onboard_pieces;
 }
 
 inline const MovePoints& Board::get_move_points(Move mv) const
@@ -485,18 +531,18 @@ inline bool Board::get_piece_by_name(const string& name, Piece& piece) const
 
 inline const Board::PiecesLeftList& Board::get_pieces_left(Color c) const
 {
-    return m_pieces_left[c];
+    return m_state_color[c].pieces_left;
 }
 
 inline Move Board::get_played_move(Point p) const
 {
-    return m_played_move[p];
+    return m_state_base.played_move[p];
 }
 
 inline PointState Board::get_point_state(Point p) const
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
-    return PointState(m_point_state[p].to_int());
+    return PointState(m_state_base.point_state[p].to_int());
 }
 
 inline unsigned Board::get_points(Color c) const
@@ -540,7 +586,7 @@ inline const ArrayList<Point,StartingPoints::max_starting_points>&
 
 inline Color Board::get_to_play() const
 {
-    return m_to_play;
+    return m_state_base.to_play;
 }
 
 inline const PieceTransforms& Board::get_transforms() const
@@ -568,7 +614,7 @@ inline void Board::init(const Setup* setup)
 
 inline bool Board::is_attach_point(Point p, Color c) const
 {
-    return m_is_attach_point[c][p];
+    return m_state_color[c].is_attach_point[p];
 }
 
 inline bool Board::is_colored_starting_point(Point p) const
@@ -588,17 +634,17 @@ inline bool Board::is_empty(Point p) const
 
 inline bool Board::is_first_piece(Color c) const
 {
-    return m_nu_onboard_pieces[c] == 0;
+    return m_state_color[c].nu_onboard_pieces == 0;
 }
 
 inline bool Board::is_forbidden(Point p, Color c) const
 {
-    return m_forbidden[c][p];
+    return m_state_color[c].forbidden[p];
 }
 
 inline const Grid<bool>& Board::is_forbidden(Color c) const
 {
-    return m_forbidden[c];
+    return m_state_color[c].forbidden;
 }
 
 inline bool Board::is_forbidden(Color c, Move mv) const
@@ -609,7 +655,7 @@ inline bool Board::is_forbidden(Color c, Move mv) const
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
-        if (m_forbidden[c][*i])
+        if (m_state_color[c].forbidden[*i])
             return true;
         ++i;
     }
@@ -619,7 +665,7 @@ inline bool Board::is_forbidden(Color c, Move mv) const
 
 inline bool Board::is_legal(Move mv) const
 {
-    return is_legal(m_to_play, mv);
+    return is_legal(m_state_base.to_play, mv);
 }
 
 inline bool Board::is_legal(Color c, Move mv) const
@@ -633,7 +679,7 @@ inline bool Board::is_legal(Color c, Move mv) const
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
-        if (m_forbidden[c][*i])
+        if (m_state_color[c].forbidden[*i])
             return false;
         if (is_attach_point(*i, c))
             has_attach_point = true;
@@ -665,7 +711,7 @@ inline bool Board::is_onboard(Point p) const
 inline bool Board::is_piece_left(Color c, Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_pieces());
-    return m_nu_left_piece[c][piece] > 0;
+    return m_state_color[c].nu_left_piece[piece] > 0;
 }
 
 inline bool Board::is_same_player(Color c1, Color c2) const
@@ -679,19 +725,19 @@ inline void Board::place(Color c, Move mv)
     const MoveInfo& info = m_board_const->get_move_info(mv);
     const MoveInfoExt& info_ext = m_board_const->get_move_info_ext(mv);
     Piece piece = info.piece;
-    LIBBOARDGAME_ASSERT(m_nu_left_piece[c][piece] > 0);
-    if (--m_nu_left_piece[c][piece] == 0)
-        m_pieces_left[c].remove(piece);
-    ++m_nu_onboard_pieces_all;
-    ++m_nu_onboard_pieces[c];
+    LIBBOARDGAME_ASSERT(m_state_color[c].nu_left_piece[piece] > 0);
+    if (--m_state_color[c].nu_left_piece[piece] == 0)
+        m_state_color[c].pieces_left.remove(piece);
+    ++m_state_base.nu_onboard_pieces_all;
+    ++m_state_color[c].nu_onboard_pieces;
     auto i = info.points.begin();
     auto end = info.points.end();
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
-        m_point_state[*i] = c;
-        m_played_move[*i] = mv;
-        LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c][*i] = true);
+        m_state_base.point_state[*i] = c;
+        m_state_base.played_move[*i] = mv;
+        LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden[*i] = true);
         ++i;
     }
     while (i != end);
@@ -700,7 +746,7 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
-        m_forbidden[c][*i] = true;
+        m_state_color[c].forbidden[*i] = true;
         ++i;
     }
     while (i != end);
@@ -709,9 +755,9 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
-        if (! m_is_attach_point[c][*i])
+        if (! m_state_color[c].is_attach_point[*i])
         {
-            m_is_attach_point[c][*i] = true;
+            m_state_color[c].is_attach_point[*i] = true;
             m_attach_points[c].push_back(*i);
         }
         ++i;
@@ -736,23 +782,39 @@ inline void Board::play_nonpass(Color c, Move mv)
 {
     place(c, mv);
     m_moves.push_back(ColorMove(c, mv));
-    m_to_play = get_next(c);
+    m_state_base.to_play = get_next(c);
 }
 
 inline void Board::play_pass(Color c)
 {
     m_moves.push_back(ColorMove(c, Move::pass()));
-    m_to_play = get_next(c);
+    m_state_base.to_play = get_next(c);
 }
 
 inline void Board::play(Move move)
 {
-    play(m_to_play, move);
+    play(m_state_base.to_play, move);
+}
+
+inline void Board::restore_snapshot()
+{
+    LIBBOARDGAME_ASSERT(m_snapshot);
+    LIBBOARDGAME_ASSERT(m_snapshot->moves_size <= m_moves.size());
+    m_moves.resize(m_snapshot->moves_size);
+    memcpy(&m_state_base, &m_snapshot->state_base, sizeof(StateBase));
+    for (ColorIterator i(m_nu_colors); i; ++i)
+    {
+        LIBBOARDGAME_ASSERT(m_snapshot->attach_points_size[*i]
+                            <= m_attach_points[*i].size());
+        m_attach_points[*i].resize(m_snapshot->attach_points_size[*i]);
+        memcpy(&m_state_color[*i], &m_snapshot->state_color[*i],
+               sizeof(StateColor));
+    }
 }
 
 inline void Board::set_to_play(Color c)
 {
-    m_to_play = c;
+    m_state_base.to_play = c;
 }
 
 inline string Board::to_string(Move mv, bool with_piece_name) const

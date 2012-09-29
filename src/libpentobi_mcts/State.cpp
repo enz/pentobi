@@ -934,6 +934,9 @@ void State::start_playout()
 void State::start_search()
 {
     const Board& bd = *m_shared_const.board;
+    m_bd.copy_from(bd);
+    m_bd.set_to_play(m_shared_const.to_play);
+    m_bd.take_snapshot();
     m_move_info_array = bd.get_board_const().get_move_info_array();
     const Geometry& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
@@ -988,8 +991,7 @@ void State::start_simulation(size_t n)
               << "Simulation " << n << "\n"
               << "==========================================================\n";
     ++m_nu_simulations;
-    m_bd.copy_from(*m_shared_const.board);
-    m_bd.set_to_play(m_shared_const.to_play);
+    m_bd.restore_snapshot();
     m_extended_update = false;
     m_consider_all_pieces = false;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)

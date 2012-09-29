@@ -63,22 +63,15 @@ void Board::copy_from(const Board& bd)
 {
     if (m_variant != bd.m_variant)
         init_variant(bd.m_variant);
-    m_point_state = bd.m_point_state;
-    m_played_move = bd.m_played_move;
+    m_moves = bd.m_moves;
     m_setup.to_play = bd.m_setup.to_play;
+    memcpy(&m_state_base, &bd.m_state_base, sizeof(StateBase));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
-        m_forbidden[*i] = bd.m_forbidden[*i];
-        m_is_attach_point[*i] = bd.m_is_attach_point[*i];
-        m_attach_points[*i] = bd.m_attach_points[*i];
-        m_pieces_left[*i] = bd.m_pieces_left[*i];
-        m_nu_left_piece[*i] = bd.m_nu_left_piece[*i];
+        memcpy(&m_state_color[*i], &bd.m_state_color[*i], sizeof(StateColor));
         m_setup.placements[*i] = bd.m_setup.placements[*i];
-        m_nu_onboard_pieces[*i] = bd.m_nu_onboard_pieces[*i];
+        m_attach_points[*i] = bd.m_attach_points[*i];
     }
-    m_moves = bd.m_moves;
-    m_nu_onboard_pieces_all = bd.m_nu_onboard_pieces_all;
-    m_to_play = bd.m_to_play;
 }
 
 void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
@@ -87,13 +80,13 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
     if (is_first_piece(c))
     {
         BOOST_FOREACH(Point p, get_starting_points(c))
-            if (! m_forbidden[c][p])
+            if (! m_state_color[c].forbidden[p])
                 gen_moves(c, p, m_marker, moves);
     }
     else
     {
         for (Iterator i(*this); i; ++i)
-            if (is_attach_point(*i, c) && ! m_forbidden[c][*i])
+            if (is_attach_point(*i, c) && ! m_state_color[c].forbidden[*i])
                 gen_moves(c, *i, get_adj_status_index(*i, c), m_marker, moves);
     }
     m_marker.clear_all_set_known(moves);
@@ -102,7 +95,7 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 void Board::gen_moves(Color c, Point p, MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
-    BOOST_FOREACH(Piece piece, m_pieces_left[c])
+    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
     {
         BOOST_FOREACH(Move mv, m_board_const->get_moves(piece, p))
         {
@@ -121,7 +114,7 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status_index,
                       MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
-    BOOST_FOREACH(Piece piece, m_pieces_left[c])
+    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
     {
         BOOST_FOREACH(Move mv,
                       m_board_const->get_moves(piece, p, adj_status_index))
@@ -140,7 +133,7 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status_index,
 unsigned Board::get_bonus(Color c) const
 {
     unsigned bonus = 0;
-    if (m_variant != variant_junior && m_pieces_left[c].size() == 0)
+    if (m_variant != variant_junior && m_state_color[c].pieces_left.size() == 0)
     {
         bonus = 15;
         for (unsigned i = get_nu_moves(); i > 0; --i)
@@ -163,14 +156,14 @@ unsigned Board::get_bonus(Color c) const
 
 Color Board::get_effective_to_play() const
 {
-    Color c = m_to_play;
+    Color c = m_state_base.to_play;
     do
     {
         if (has_moves(c))
             return c;
         c = get_next(c);
     }
-    while (c != m_to_play);
+    while (c != m_state_base.to_play);
     return c;
 }
 
@@ -201,7 +194,7 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 unsigned Board::get_points_left(Color c) const
 {
     unsigned n = 0;
-    BOOST_FOREACH(Piece piece, m_pieces_left[c])
+    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
         n += get_nu_left_piece(c, piece) * get_piece_info(piece).get_size();
     return n;
 }
@@ -249,7 +242,7 @@ bool Board::has_moves(Color c) const
 {
     bool is_first = is_first_piece(c);
     for (Iterator i(*this); i; ++i)
-        if (! m_forbidden[c][*i]
+        if (! m_state_color[c].forbidden[*i]
             && (is_attach_point(*i, c)
                 || (is_first && get_starting_points(c).contains(*i))))
             if (has_moves(c, *i))
@@ -259,14 +252,14 @@ bool Board::has_moves(Color c) const
 
 bool Board::has_moves(Color c, Point p) const
 {
-    BOOST_FOREACH(Piece piece, m_pieces_left[c])
+    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
     {
         BOOST_FOREACH(Move mv, m_board_const->get_moves(piece, p))
         {
             const MovePoints& points = get_move_points(mv);
             bool is_legal = true;
             BOOST_FOREACH(Point p2, points)
-                if (m_forbidden[c][p2])
+                if (m_state_color[c].forbidden[p2])
                 {
                     is_legal = false;
                     break;
@@ -285,27 +278,27 @@ void Board::init(Variant variant, const Setup* setup)
 
     // If you make changes here, make sure that you also update copy_from()
 
-    m_point_state.fill(PointState::empty());
-    m_played_move.fill(Move::null());
+    m_state_base.point_state.fill(PointState::empty());
+    m_state_base.played_move.fill(Move::null());
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
-        m_forbidden[*i].fill(false);
-        m_is_attach_point[*i].fill(false);
+        m_state_color[*i].forbidden.fill(false);
+        m_state_color[*i].is_attach_point.fill(false);
         m_attach_points[*i].clear();
-        m_pieces_left[*i].clear();
-        m_nu_onboard_pieces[*i] = 0;
+        m_state_color[*i].pieces_left.clear();
+        m_state_color[*i].nu_onboard_pieces = 0;
         for (unsigned j = 0; j < get_nu_pieces(); ++j)
-            m_pieces_left[*i].push_back(Piece(j));
+            m_state_color[*i].pieces_left.push_back(Piece(j));
         if (variant == variant_junior)
-            m_nu_left_piece[*i].fill(2);
+            m_state_color[*i].nu_left_piece.fill(2);
         else
-            m_nu_left_piece[*i].fill(1);
+            m_state_color[*i].nu_left_piece.fill(1);
     }
-    m_nu_onboard_pieces_all = 0;
+    m_state_base.nu_onboard_pieces_all = 0;
     if (setup == 0)
     {
         m_setup.clear();
-        m_to_play = Color(0);
+        m_state_base.to_play = Color(0);
     }
     else
     {
@@ -313,7 +306,7 @@ void Board::init(Variant variant, const Setup* setup)
         for (ColorIterator i(m_nu_colors); i; ++i)
             BOOST_FOREACH(Move mv, setup->placements[*i])
                 place(*i, mv);
-        m_to_play = setup->to_play;
+        m_state_base.to_play = setup->to_play;
     }
     m_moves.clear();
 }
@@ -349,11 +342,11 @@ void Board::init_variant(Variant variant)
     m_board_const = &BoardConst::get(variant);
     m_geometry = &m_board_const->get_geometry();
     m_starting_points.init(variant, *m_geometry);
-    m_point_state.init(*m_geometry);
-    m_played_move.init(*m_geometry);
+    m_state_base.point_state.init(*m_geometry);
+    m_state_base.played_move.init(*m_geometry);
     // m_forbidden needs to be initialized even for colors not used in current
     // game variant because it is written to in some unrolled color loops
-    LIBPENTOBI_FOREACH_COLOR(c, m_forbidden[c].init(*m_geometry));
+    LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden.init(*m_geometry));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         if (variant == variant_classic_2
@@ -361,7 +354,7 @@ void Board::init_variant(Variant variant)
             m_second_color[*i] = get_next(get_next(*i));
         else
             m_second_color[*i] = *i;
-        m_is_attach_point[*i].init(*m_geometry);
+        m_state_color[*i].is_attach_point.init(*m_geometry);
     }
 }
 
@@ -371,6 +364,20 @@ bool Board::is_game_over() const
         if (has_moves(*i))
             return false;
     return true;
+}
+
+void Board::take_snapshot()
+{
+    if (! m_snapshot)
+        m_snapshot.reset(new Snapshot());
+    m_snapshot->moves_size = m_moves.size();
+    memcpy(&m_snapshot->state_base, &m_state_base, sizeof(StateBase));
+    for (ColorIterator i(m_nu_colors); i; ++i)
+    {
+        m_snapshot->attach_points_size[*i] = m_attach_points[*i].size();
+        memcpy(&m_snapshot->state_color[*i], &m_state_color[*i],
+               sizeof(StateColor));
+    }
 }
 
 void Board::undo()
@@ -596,13 +603,13 @@ void Board::write_pieces_left(ostream& out, Color c, unsigned begin,
                               unsigned end) const
 {
     for (unsigned i = begin; i < end; ++i)
-        if (i < m_pieces_left[c].size())
+        if (i < m_state_color[c].pieces_left.size())
         {
             if (i > begin)
                 out << ' ';
-            Piece piece = m_pieces_left[c][i];
+            Piece piece = m_state_color[c].pieces_left[i];
             const string& name = get_piece_info(piece).get_name();
-            unsigned nu_left = m_nu_left_piece[c][piece];
+            unsigned nu_left = m_state_color[c].nu_left_piece[piece];
             for (unsigned j = 0; j < nu_left; ++j)
             {
                 if (j > 0)

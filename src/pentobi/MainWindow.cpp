@@ -192,9 +192,9 @@ float getMoveHeuristic(const Board& bd, Move mv)
 }
 
 /** Comparison for sorting move list in Find Move. */
-bool isMoveBetter(const Board& bd, Move mv1, Move mv2)
+bool isMoveBetter(const Board* bd, Move mv1, Move mv2)
 {
-    return getMoveHeuristic(bd, mv1) > getMoveHeuristic(bd, mv2);
+    return getMoveHeuristic(*bd, mv1) > getMoveHeuristic(*bd, mv2);
 }
 
 } // namespace
@@ -1582,7 +1582,7 @@ void MainWindow::findMove()
     {
         bd.gen_moves(m_currentColor, *m_legalMoves);
         sort(m_legalMoves->begin(), m_legalMoves->end(),
-             bind(&isMoveBetter, bd, placeholders::_1, placeholders::_2));
+             bind(&isMoveBetter, &bd, placeholders::_1, placeholders::_2));
     }
     if (m_legalMoves->empty())
     {
