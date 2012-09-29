@@ -67,7 +67,7 @@ void Board::copy_from(const Board& bd)
     m_setup.to_play = bd.m_setup.to_play;
     // Note: the following memcpy's are for efficiency but are dangerous
     // because they might break if the classes change. In the future, this
-    // should be replaced by a normal assignment ass soon as C++11 type_traits
+    // should be replaced by a normal assignment as soon as C++11 type_traits
     // and defaulted functions are supported well enough by compilers that
     // they can figure out themselves if they can use memcpy here.
     memcpy(&m_state_base, &bd.m_state_base, sizeof(StateBase));
