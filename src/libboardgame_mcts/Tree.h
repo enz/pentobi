@@ -37,8 +37,6 @@ public:
 
     typedef libboardgame_mcts::Node<M> Node;
 
-    typedef libboardgame_mcts::ChildIterator<M> ChildIterator;
-
     /** Helper class that is passed to the search state during node expansion.
         This class allows the search state to directly create children of a
         node at the node expansion, so that copying to a temporary move list
@@ -325,12 +323,17 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     // assert, GCC 4.6.1 gives the error: parse error in template argument list
     LIBBOARDGAME_ASSERT((thread_storage.next) < thread_storage.end);
     abort = false;
-    for (ChildIterator i(node); i; ++i, ++target_child)
-        if (! copy_subtree(target, *target_child, *i, min_count, check_abort,
-                           interval_checker))
-            // Finish this loop even on abort to make sure the children node
-            // data is copied
-            abort = true;
+    const Node* begin = node.get_first_child();
+    if (begin != 0)
+    {
+        const Node* end = begin + node.get_nu_children();
+        for (const Node* i = begin; i != end; ++i, ++target_child)
+            if (! copy_subtree(target, *target_child, *i, min_count,
+                               check_abort, interval_checker))
+                // Finish this loop even on abort to make sure the children
+                // node data is copied
+                abort = true;
+    }
     return ! abort;
 }
 
