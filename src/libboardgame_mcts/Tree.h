@@ -99,8 +99,8 @@ public:
 
     const Node& get_node(NodeIndex i) const;
 
-    void link_children(unsigned thread_id, const Node& node,
-                       const Node* first_child, unsigned nu_children);
+    void link_children(const Node& node, const Node* first_child,
+                       unsigned nu_children);
 
     void set_max_nodes(size_t max_nodes);
 
@@ -200,7 +200,7 @@ inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
 template<typename M>
 inline void Tree<M>::NodeExpander::add_child(const Move& mv)
 {
-    LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<int>::max());
+    LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<unsigned short>::max());
     if (! (m_is_tree_full |= ! m_tree.create_node(m_thread_id, mv)))
         ++m_nu_children;
 }
@@ -251,7 +251,7 @@ template<typename M>
 inline void Tree<M>::NodeExpander::link_children()
 {
     if (m_nu_children > 0)
-        m_tree.link_children(m_thread_id, m_node, m_first_child, m_nu_children);
+        m_tree.link_children(m_node, m_first_child, m_nu_children);
 }
 
 template<typename M>
@@ -419,13 +419,14 @@ inline unsigned Tree<M>::get_thread_storage(const Node& node) const
 }
 
 template<typename M>
-inline void Tree<M>::link_children(unsigned thread_id, const Node& node,
-                                   const Node* first_child,
+inline void Tree<M>::link_children(const Node& node, const Node* first_child,
                                    unsigned nu_children)
 {
-    ThreadStorage& thread_storage = m_thread_storage[thread_id];
-    non_const(node).link_children(first_child - thread_storage.begin,
-                                  nu_children);
+    NodeIndex first_child_index =
+        static_cast<NodeIndex>(first_child - m_nodes.get());
+    LIBBOARDGAME_ASSERT(first_child_index > 0);
+    LIBBOARDGAME_ASSERT(first_child_index < m_max_nodes);
+    non_const(node).link_children(first_child_index, nu_children);
 }
 
 /** Convert a const reference to node from user to a non-const reference.
@@ -460,6 +461,8 @@ bool Tree<M>::remove_child(const Node& node, const Move& mv)
 template<typename M>
 void Tree<M>::set_max_nodes(size_t max_nodes)
 {
+    max_nodes =
+        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIndex>::max()));
     if (max_nodes == 0)
         // We need at least the root node (for useful searches we need of
         // course also children, but a root node is the minimum requirement to
@@ -472,7 +475,7 @@ void Tree<M>::set_max_nodes(size_t max_nodes)
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
         ThreadStorage& thread_storage = m_thread_storage[i];
-        thread_storage.begin = &m_nodes[0] + i * m_nodes_per_thread;
+        thread_storage.begin = m_nodes.get() + i * m_nodes_per_thread;
         thread_storage.end = thread_storage.begin + m_nodes_per_thread;
     }
     clear();

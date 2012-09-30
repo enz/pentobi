@@ -29,6 +29,7 @@ using boost::program_options::store;
 using boost::program_options::value;
 using boost::program_options::variables_map;
 using libboardgame_util::set_log_null;
+using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 
@@ -122,10 +123,12 @@ int main(int argc, char* argv[])
         app.installTranslator(&pentobiTranslator);
         vector<string> arguments;
         options_description normal_options("Options");
+        uint32_t seed;
         size_t memory = 0;
         normal_options.add_options()
             ("memory", value<>(&memory), "memory to allocate for search trees")
             ("nobook", "do not use opening book")
+            ("seed,r", value<uint32_t>(&seed), "set random seed")
             ("verbose", "print logging messages");
         options_description hidden_options;
         hidden_options.add_options()
@@ -143,6 +146,8 @@ int main(int argc, char* argv[])
             throw Exception("Value for memory must be greater zero.");
         if (! vm.count("verbose"))
             set_log_null();
+        if (vm.count("seed"))
+            RandomGenerator::set_global_seed(seed);
 #ifdef Q_WS_WIN
         if (vm.count("verbose"))
             redirectStdErr();
@@ -153,6 +158,8 @@ int main(int argc, char* argv[])
             initialFile = arguments[0].c_str();
         MainWindow mainWindow(initialFile, manualDir, booksDir, noBook,
                               memory);
+        if (vm.count("seed"))
+            mainWindow.setDeterministic();
         mainWindow.show();
         return app.exec();
     }

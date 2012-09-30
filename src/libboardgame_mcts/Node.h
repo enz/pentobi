@@ -129,11 +129,8 @@ void Node<M>::add_value(Float v)
 template<typename M>
 void Node<M>::clear()
 {
-    m_count = 0;
-    m_value = 0;
-    m_rave_count = 0;
-    m_rave_value = 0;
-    m_first_child = 0;
+    clear_values();
+    m_nu_children = 0;
 }
 
 template<typename M>
@@ -217,7 +214,7 @@ inline Float Node<M>::get_value() const
 template<typename M>
 inline bool Node<M>::has_children() const
 {
-    return m_nu_children != 0;
+    return m_nu_children > 0;
 }
 
 template<typename M>

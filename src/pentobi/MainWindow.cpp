@@ -2920,6 +2920,11 @@ void MainWindow::setCommentText(const QString& text)
     m_comment->clearFocus();
 }
 
+void MainWindow::setDeterministic()
+{
+    m_player->get_search().set_deterministic();
+}
+
 void MainWindow::setVariant(Variant variant)
 {
     if (getVariant() == variant)

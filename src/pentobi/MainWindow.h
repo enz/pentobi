@@ -210,6 +210,8 @@ public slots:
 
     void showRating();
 
+    void setDeterministic();
+
 protected:
     void closeEvent(QCloseEvent* event);
 
