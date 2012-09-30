@@ -126,7 +126,7 @@ public slots:
 
     void open();
 
-    void open(const QString& file, bool isTemporary = false);
+    bool open(const QString& file, bool isTemporary = false);
 
     void placePiece(Color c, Move mv);
 
@@ -684,6 +684,10 @@ private slots:
     void openRecentFile();
 
     void orientationDisplayColorClicked(Color c);
+
+    void rememberFile(const QString& file);
+
+    void rememberDir(const QString& file);
 
     void selectNamedPiece(const char* name1, const char* name2 = 0,
                           const char* name3 = 0, const char* name4 = 0);

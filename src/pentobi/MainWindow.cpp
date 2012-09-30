@@ -328,7 +328,10 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     updateWindow(true);
     clearFile();
     if (! initialFile.isEmpty())
-        open(initialFile);
+    {
+        if (open(initialFile))
+            rememberFile(initialFile);
+    }
     else
     {
         QString autoSaveFile = getAutoSaveFile();
@@ -2378,14 +2381,15 @@ void MainWindow::open()
                                                 getFilter());
     if (file.isEmpty())
         return;
-    settings.setValue("last_dir", QFileInfo(file).dir().path());
-    open(file);
+    rememberDir(file);
+    if (open(file))
+        rememberFile(file);
 }
 
-void MainWindow::open(const QString& file, bool isTemporary)
+bool MainWindow::open(const QString& file, bool isTemporary)
 {
     if (file.isEmpty())
-        return;
+        return false;
     cancelThread();
     TreeReader reader;
     ifstream in(file.toLocal8Bit().constData());
@@ -2405,7 +2409,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
         {
             showInvalidFile(file, e);
         }
-        return;
+        return false;
     }
     if (! isTemporary)
     {
@@ -2440,6 +2444,7 @@ void MainWindow::open(const QString& file, bool isTemporary)
     initVariantActions();
     updateWindow(true);
     loadHistory();
+    return true;
 }
 
 void MainWindow::openRecentFile()
@@ -2611,6 +2616,39 @@ void MainWindow::quit()
     if (! checkQuit())
         return;
     qApp->quit();
+}
+
+void MainWindow::rememberDir(const QString& file)
+{
+    if (file.isEmpty())
+        return;
+    QString canonicalFile = file;
+    QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
+    if (! canonicalFilePath.isEmpty())
+        canonicalFile = canonicalFilePath;
+    QFileInfo info(canonicalFile);
+    QSettings settings;
+    settings.setValue("last_dir", info.dir().path());
+}
+
+void MainWindow::rememberFile(const QString& file)
+{
+    if (file.isEmpty())
+        return;
+    QString canonicalFile = file;
+    QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
+    if (! canonicalFilePath.isEmpty())
+        canonicalFile = canonicalFilePath;
+    QFileInfo info(canonicalFile);
+    QSettings settings;
+    QStringList files = settings.value("recent_files").toStringList();
+    files.removeAll(canonicalFile);
+    files.prepend(canonicalFile);
+    while (files.size() > maxRecentFiles)
+        files.removeLast();
+    settings.setValue("recent_files", files);
+    settings.sync(); // updateRecentFiles() needs the new settings
+    updateRecentFiles();
 }
 
 void MainWindow::rotatePieceAnticlockwise()
@@ -2909,21 +2947,8 @@ void MainWindow::setFile(const QString& file)
         setWindowTitle(tr("Pentobi"));
     else
     {
-        QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
-        if (! canonicalFilePath.isEmpty())
-            m_file = canonicalFilePath;
         QFileInfo info(m_file);
         setWindowTitle(tr("%1[*] - Pentobi").arg(info.fileName()));
-        QSettings settings;
-        QStringList files = settings.value("recent_files").toStringList();
-        files.removeAll(m_file);
-        files.prepend(m_file);
-        while (files.size() > maxRecentFiles)
-            files.removeLast();
-        settings.setValue("recent_files", files);
-        settings.setValue("last_dir", info.dir().path());
-        settings.sync(); // updateRecentFiles() needs the new settings
-        updateRecentFiles();
     }
 }
 
