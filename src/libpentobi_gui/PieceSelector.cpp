@@ -255,6 +255,7 @@ void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
         }
     PieceMap<unsigned> nuInstances;
     nuInstances.fill(0);
+    bool isColorUsed = (m_color.to_int() < m_bd.get_nu_colors());
     for (unsigned x = 0; x < m_nuColumns; ++x)
         for (unsigned y = 0; y < m_nuRows; ++y)
         {
@@ -266,7 +267,9 @@ void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
             bool disabled = false;
-            if (++nuInstances[piece] > m_bd.get_nu_left_piece(m_color, piece))
+            if (! isColorUsed
+                || ++nuInstances[piece] > m_bd.get_nu_left_piece(m_color,
+                                                                 piece))
                 disabled = true;
             BOOST_FOREACH(CoordPoint p, points)
             {
