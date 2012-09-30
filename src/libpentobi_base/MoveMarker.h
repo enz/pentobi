@@ -64,7 +64,7 @@ inline MoveMarker::MoveMarker()
 
 inline bool MoveMarker::operator[](Move mv) const
 {
-    return m_array[get_index(mv)] & get_mask(mv);
+    return ((m_array[get_index(mv)] & get_mask(mv)) != 0);
 }
 
 inline void MoveMarker::clear()
