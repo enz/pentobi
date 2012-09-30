@@ -5,7 +5,7 @@
 #ifndef LIBBOARDGAME_MCTS_CHILD_ITERATOR_H
 #define LIBBOARDGAME_MCTS_CHILD_ITERATOR_H
 
-#include "Node.h"
+#include "Tree.h"
 
 namespace libboardgame_mcts {
 
@@ -19,7 +19,7 @@ template<typename M>
 class ChildIterator
 {
 public:
-    ChildIterator(const Node<M>& node);
+    ChildIterator(const Tree<M>& tree, const Node<M>& node);
 
     operator bool() const;
 
@@ -36,13 +36,16 @@ private:
 };
 
 template<typename M>
-ChildIterator<M>::ChildIterator(const Node<M>& node)
+ChildIterator<M>::ChildIterator(const Tree<M>& tree, const Node<M>& node)
 {
-    m_current = node.get_first_child();
-    if (m_current != 0)
-        m_end = m_current + node.get_nu_children();
+    auto nu_children = node.get_nu_children();
+    if (nu_children != 0)
+    {
+        m_current = &tree.get_node(node.get_first_child());
+        m_end = m_current + nu_children;
+    }
     else
-        m_end = 0;
+        m_current = m_end = 0;
 }
 
 template<typename M>

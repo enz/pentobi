@@ -603,7 +603,7 @@ bool Search<S,M,P>::check_move_cannot_change(Float count,
         return false;
     Float max_count = 0;
     Float second_max_count = 0;
-    for (ChildIterator i(m_tree.get_root()); i; ++i)
+    for (ChildIterator i(m_tree, m_tree.get_root()); i; ++i)
     {
         Float count = i->get_count();
         if (count > max_count)
@@ -671,6 +671,10 @@ size_t Search<S,M,P>::get_max_nodes(size_t memory)
 {
     // Memory is used for 2 trees (m_tree and m_tmp_tree)
     size_t max_nodes = memory / sizeof(Node) / 2;
+    // It doesn't make sense to set max_nodes higher than what can be accessed
+    // with NodeIndex
+    max_nodes =
+        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIndex>::max()));
     log(format("Search tree size: 2 x %1% nodes") % max_nodes);
     return max_nodes;
 }
@@ -1111,7 +1115,7 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
     if (log_move_selection)
         log() << "beta=" << beta << '\n';
-    for (ChildIterator i(node); i; ++i)
+    for (ChildIterator i(m_tree, node); i; ++i)
     {
         if (log_move_selection)
             log() << get_move_string(i->get_move())
@@ -1172,7 +1176,7 @@ const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
     const Node* result = 0;
     Float max_count = -1;
     Float max_count_value = -numeric_limits<Float>::max();
-    for (ChildIterator i(node); i; ++i)
+    for (ChildIterator i(m_tree, node); i; ++i)
     {
         Float count = i->get_count();
         if (count > max_count
@@ -1378,7 +1382,7 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
         return;
     unsigned len = m_state.get_nu_moves();
     Float weight_factor = 1 / Float(len - i);
-    for (ChildIterator it(*node); it; ++it)
+    for (ChildIterator it(m_tree, *node); it; ++it)
     {
         Move mv = it->get_move();
         if (! m_state.skip_rave(mv))

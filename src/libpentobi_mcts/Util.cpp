@@ -27,7 +27,8 @@ using libpentobi_base::sgf_util::get_color_id;
 namespace {
 
 void dump_tree_recurse(Writer& writer, Variant variant,
-                       const Node<Move>& node, Color to_play)
+                       const Tree<Move>& tree, const Node<Move>& node,
+                       Color to_play)
 {
     ostringstream comment;
     comment << "Cnt: " << node.get_count();
@@ -40,7 +41,7 @@ void dump_tree_recurse(Writer& writer, Variant variant,
     writer.end_node();
     Color next_to_play = to_play.get_next(get_nu_colors(variant));
     vector<const Node<Move>*> children;
-    for (ChildIterator<Move> i(node); i; ++i)
+    for (ChildIterator<Move> i(tree, node); i; ++i)
         children.push_back(&(*i));
     sort(children.begin(), children.end(), compare_node);
     BOOST_FOREACH(const Node<Move>* i, children)
@@ -57,7 +58,7 @@ void dump_tree_recurse(Writer& writer, Variant variant,
             else
                 writer.write_property(id, "");
         }
-        dump_tree_recurse(writer, variant, *i, next_to_play);
+        dump_tree_recurse(writer, variant, tree, *i, next_to_play);
         writer.end_tree();
     }
 }
@@ -90,8 +91,8 @@ void dump_tree(ostream& out, const Search& search)
     writer.write_property("GM", to_string(variant));
     write_setup(writer, variant, setup);
     writer.write_property("PL", get_color_id(variant, setup.to_play));
-    dump_tree_recurse(writer, variant, search.get_tree().get_root(),
-                      setup.to_play);
+    const Tree<Move>& tree = search.get_tree();
+    dump_tree_recurse(writer, variant, tree, tree.get_root(), setup.to_play);
     writer.end_tree();
 }
 

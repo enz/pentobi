@@ -82,7 +82,7 @@ public:
 
         const Node& m_node;
 
-        Node* m_first_child;
+        const Node* m_first_child;
 
         const Node* m_best_child;
     };
@@ -97,8 +97,10 @@ public:
 
     size_t get_nu_nodes() const;
 
-    void link_children(const Node& node, const Node& first_child,
-                       unsigned nu_children);
+    const Node& get_node(NodeIndex i) const;
+
+    void link_children(unsigned thread_id, const Node& node,
+                       const Node* first_child, unsigned nu_children);
 
     void set_max_nodes(size_t max_nodes);
 
@@ -182,8 +184,8 @@ private:
 };
 
 template<typename M>
-inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id,
-                                           Tree& tree, const Node& node)
+inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
+                                           const Node& node)
     : m_thread_id(thread_id),
       m_is_tree_full(false),
       m_nu_children(0),
@@ -225,18 +227,18 @@ inline void Tree<M>::NodeExpander::add_child(const Move& mv, Float value,
 }
 
 template<typename M>
-void Tree<M>::clear_values(const Node& node)
-{
-    non_const(node).clear_values();
-}
-
-template<typename M>
 inline const Node<M>* Tree<M>::NodeExpander::get_best_child() const
 {
     if (m_nu_children > 0)
         return m_best_child;
     else
         return 0;
+}
+
+template<typename M>
+inline const Node<M>& Tree<M>::get_node(NodeIndex i) const
+{
+    return m_nodes[i];
 }
 
 template<typename M>
@@ -249,7 +251,7 @@ template<typename M>
 inline void Tree<M>::NodeExpander::link_children()
 {
     if (m_nu_children > 0)
-        m_tree.link_children(m_node, *m_first_child, m_nu_children);
+        m_tree.link_children(m_thread_id, m_node, m_first_child, m_nu_children);
 }
 
 template<typename M>
@@ -286,6 +288,12 @@ void Tree<M>::clear()
 }
 
 template<typename M>
+inline void Tree<M>::clear_values(const Node& node)
+{
+    non_const(node).clear_values();
+}
+
+template<typename M>
 bool Tree<M>::contains(const Node& node) const
 {
     return (&node >= m_nodes.get() && &node < m_nodes.get() + m_max_nodes);
@@ -310,30 +318,28 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
         target_node_non_const.unlink_children();
         return ! abort;
     }
+    unsigned nu_children = node.get_nu_children();
+    const Node& first_child = get_node(node.get_first_child());
     // Create target children in the equivalent thread storage as in source.
     // This ensures that the thread storage will not overflow (because the
     // trees have identical nu_threads/max_nodes)
     ThreadStorage& thread_storage =
-        target.m_thread_storage[get_thread_storage(*node.get_first_child())];
-    Node* target_child = thread_storage.next;
-    unsigned nu_children = node.get_nu_children();
-    target_node_non_const.link_children(*target_child, nu_children);
+        target.m_thread_storage[get_thread_storage(first_child)];
+    const Node* target_child = thread_storage.next;
+    target_node_non_const.link_children(target_child - thread_storage.begin,
+                                        nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
     // assert, GCC 4.6.1 gives the error: parse error in template argument list
     LIBBOARDGAME_ASSERT((thread_storage.next) < thread_storage.end);
     abort = false;
-    const Node* begin = node.get_first_child();
-    if (begin != 0)
-    {
-        const Node* end = begin + node.get_nu_children();
-        for (const Node* i = begin; i != end; ++i, ++target_child)
-            if (! copy_subtree(target, *target_child, *i, min_count,
-                               check_abort, interval_checker))
-                // Finish this loop even on abort to make sure the children
-                // node data is copied
-                abort = true;
-    }
+    const Node* end = &first_child + node.get_nu_children();
+    for (const Node* i = &first_child; i != end; ++i, ++target_child)
+        if (! copy_subtree(target, *target_child, *i, min_count,
+                           check_abort, interval_checker))
+            // Finish this loop even on abort to make sure the children
+            // node data is copied
+            abort = true;
     return ! abort;
 }
 
@@ -413,10 +419,13 @@ inline unsigned Tree<M>::get_thread_storage(const Node& node) const
 }
 
 template<typename M>
-inline void Tree<M>::link_children(const Node& node, const Node& first_child,
+inline void Tree<M>::link_children(unsigned thread_id, const Node& node,
+                                   const Node* first_child,
                                    unsigned nu_children)
 {
-    non_const(node).link_children(non_const(first_child), nu_children);
+    ThreadStorage& thread_storage = m_thread_storage[thread_id];
+    non_const(node).link_children(first_child - thread_storage.begin,
+                                  nu_children);
 }
 
 /** Convert a const reference to node from user to a non-const reference.
@@ -463,7 +472,7 @@ void Tree<M>::set_max_nodes(size_t max_nodes)
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
         ThreadStorage& thread_storage = m_thread_storage[i];
-        thread_storage.begin = &m_nodes[i * m_nodes_per_thread];
+        thread_storage.begin = &m_nodes[0] + i * m_nodes_per_thread;
         thread_storage.end = thread_storage.begin + m_nodes_per_thread;
     }
     clear();

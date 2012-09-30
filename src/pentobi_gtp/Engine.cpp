@@ -69,9 +69,10 @@ void Engine::cmd_get_value(Response& response)
 void Engine::cmd_move_values(Response& response)
 {
     const Search& search = get_search();
+    const Search::Tree& tree = search.get_tree();
     const Board& bd = get_board();
     vector<const Search::Node*> children;
-    for (ChildIterator<Move> i(search.get_tree().get_root()); i; ++i)
+    for (ChildIterator<Move> i(tree, tree.get_root()); i; ++i)
         children.push_back(&(*i));
     sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);
     response << fixed;

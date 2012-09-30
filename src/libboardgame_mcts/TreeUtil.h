@@ -15,9 +15,9 @@ namespace tree_util {
 //-----------------------------------------------------------------------------
 
 template<typename M>
-const Node<M>* find_child(const Node<M>& node, M mv)
+const Node<M>* find_child(const Tree<M>& tree, const Node<M>& node, M mv)
 {
-    for (ChildIterator<M> i(node); i; ++i)
+    for (ChildIterator<M> i(tree, node); i; ++i)
         if (i->get_move() == mv)
             return &(*i);
     return 0;
@@ -28,7 +28,7 @@ const Node<M>* find_node(const Tree<M>& tree, const S& sequence)
 {
     const Node<M>* node = &tree.get_root();
     BOOST_FOREACH(M mv, sequence)
-        if ((node = find_child(*node, mv)) == 0)
+        if ((node = find_child(tree, *node, mv)) == 0)
             break;
     return node;
 }

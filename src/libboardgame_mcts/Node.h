@@ -6,12 +6,17 @@
 #define LIBBOARDGAME_MCTS_NODE_H
 
 #include <limits>
+#include <cstdint>
 #include "Float.h"
 #include "libboardgame_util/Assert.h"
 
 namespace libboardgame_mcts {
 
 using namespace std;
+
+//-----------------------------------------------------------------------------
+
+typedef uint32_t NodeIndex;
 
 //-----------------------------------------------------------------------------
 
@@ -62,7 +67,7 @@ public:
         child information and visit count should be preserved. */
     void clear_values();
 
-    void link_children(Node& first_child, int nu_children);
+    void link_children(NodeIndex first_child, int nu_children);
 
     void unlink_children();
 
@@ -72,13 +77,9 @@ public:
 
     void copy_data_from(const Node& node);
 
-    const Node* get_first_child() const;
+    NodeIndex get_first_child() const;
 
 private:
-    unsigned short m_nu_children;
-
-    Move m_move;
-
     Float m_count;
 
     Float m_value;
@@ -87,7 +88,11 @@ private:
 
     Float m_rave_value;
 
-    Node* m_first_child;
+    unsigned short m_nu_children;
+
+    Move m_move;
+
+    NodeIndex m_first_child;
 
     /** Not to be implemented */
     Node(const Node&);
@@ -146,13 +151,13 @@ void Node<M>::copy_data_from(const Node& node)
     // Reminder to update this function when the class gets additional members
     struct Dummy
     {
-        unsigned short m_nu_children;
-        Move m_move;
         Float m_count;
         Float m_value;
         Float m_rave_count;
         Float m_rave_value;
-        Node* m_first_child;
+        unsigned short m_nu_children;
+        Move m_move;
+        NodeIndex m_first_child;
     };
     static_assert(sizeof(Node) == sizeof(Dummy),
                   "libboardgame_mcts::Node::copy_data_from needs updating");
@@ -171,8 +176,9 @@ inline Float Node<M>::get_count() const
 }
 
 template<typename M>
-inline const Node<M>* Node<M>::get_first_child() const
+inline NodeIndex Node<M>::get_first_child() const
 {
+    LIBBOARDGAME_ASSERT(m_nu_children > 0);
     return m_first_child;
 }
 
@@ -185,7 +191,6 @@ inline const typename Node<M>::Move& Node<M>::get_move() const
 template<typename M>
 inline unsigned Node<M>::get_nu_children() const
 {
-    LIBBOARDGAME_ASSERT(m_first_child != 0);
     return m_nu_children;
 }
 
@@ -212,7 +217,7 @@ inline Float Node<M>::get_value() const
 template<typename M>
 inline bool Node<M>::has_children() const
 {
-    return m_first_child != 0;
+    return m_nu_children != 0;
 }
 
 template<typename M>
@@ -231,21 +236,21 @@ void Node<M>::init(const Move& mv, Float value, Float count, Float rave_value,
     m_value = value;
     m_rave_count = rave_count;
     m_rave_value = rave_value;
-    m_first_child = 0;
+    m_nu_children = 0;
 }
 
 template<typename M>
-inline void Node<M>::link_children(Node<Move>& first_child, int nu_children)
+inline void Node<M>::link_children(NodeIndex first_child, int nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children <= numeric_limits<unsigned short>::max());
     m_nu_children = static_cast<unsigned short>(nu_children);
-    m_first_child = &first_child;
+    m_first_child = first_child;
 }
 
 template<typename M>
 inline void Node<M>::unlink_children()
 {
-    m_first_child = 0;
+    m_nu_children = 0;
 }
 
 //-----------------------------------------------------------------------------
