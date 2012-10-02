@@ -128,6 +128,13 @@ private:
     typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status_index>
         FullMoveTable;
 
+    struct ListIndex
+    {
+        unsigned begin : 24;
+
+        unsigned size : 8;
+    };
+
     unsigned m_nu_pieces;
 
     unsigned m_total_piece_points;
@@ -150,8 +157,7 @@ private:
     unique_ptr<FullMoveTable> m_full_move_table;
 
     /** See m_move_lists. */
-    Grid<array<PieceMap<pair<unsigned,unsigned>>,nu_adj_status_index>>
-        m_moves_range;
+    Grid<array<PieceMap<ListIndex>,nu_adj_status_index>> m_moves_range;
 
     /** Compact representation of lists of moves of a piece at a point
         constrained by the forbidden status of adjacent points.
@@ -238,10 +244,10 @@ inline BoardConst::LocalMovesListRange BoardConst::get_moves(
                                            Piece piece, Point p,
                                            unsigned adj_status_index) const
 {
-    const pair<unsigned,unsigned>& indices =
-        m_moves_range[p][adj_status_index][piece];
-    const Move* begin = m_move_lists.get();
-    return LocalMovesListRange(begin + indices.first, begin + indices.second);
+    ListIndex idx = m_moves_range[p][adj_status_index][piece];
+    const Move* begin = m_move_lists.get() + idx.begin;
+    const Move* end = begin + idx.size;
+    return LocalMovesListRange(begin, end);
 }
 
 inline unsigned BoardConst::get_nu_all_moves() const

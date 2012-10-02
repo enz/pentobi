@@ -682,6 +682,8 @@ void BoardConst::create_moves()
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << '\n';
     m_move_lists.reset(new Move[m_move_lists_sum_length]);
+    // Ensure that m_move_lists_sum_length fits into ListIndex::begin (24 bit)
+    LIBBOARDGAME_ASSERT(m_move_lists_sum_length < (1 << 24));
     unsigned current = 0;
     for (GeometryIterator i(m_geometry); i; ++i)
         for (unsigned j = 0; j < nu_adj_status_index; ++j)
@@ -692,8 +694,10 @@ void BoardConst::create_moves()
                 const LocalMovesList& list = (*m_full_move_table)[j][piece][*i];
                 for (unsigned l = 0; l < list.size(); ++l)
                     m_move_lists[current++] = list[l];
-                unsigned end = current;
-                m_moves_range[*i][j][piece] = make_pair(begin, end);
+                ListIndex idx;
+                idx.begin = begin;
+                idx.size = current - begin;
+                m_moves_range[*i][j][piece] = idx;
             }
     m_full_move_table.reset(0); // Free space, no longer needed
 }
