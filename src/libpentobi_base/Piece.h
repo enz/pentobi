@@ -64,7 +64,7 @@ inline Piece::Piece()
 inline Piece::Piece(unsigned i)
 {
     LIBBOARDGAME_ASSERT(i < range);
-    m_i = static_cast<unsigned>(i);
+    m_i = static_cast<unsigned short>(i);
 }
 
 inline Piece& Piece::operator=(const Piece& piece)
