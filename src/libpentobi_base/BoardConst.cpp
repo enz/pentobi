@@ -682,8 +682,6 @@ void BoardConst::create_moves()
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << '\n';
     m_move_lists.reset(new Move[m_move_lists_sum_length]);
-    // Ensure that m_move_lists_sum_length fits into ListIndex::begin (24 bit)
-    LIBBOARDGAME_ASSERT(m_move_lists_sum_length < (1 << 24));
     unsigned current = 0;
     for (GeometryIterator i(m_geometry); i; ++i)
         for (unsigned j = 0; j < nu_adj_status; ++j)
@@ -695,6 +693,9 @@ void BoardConst::create_moves()
                 for (unsigned l = 0; l < list.size(); ++l)
                     m_move_lists[current++] = list[l];
                 ListIndex idx;
+                // Ensure that values fit in bit-packed ListIndex members
+                LIBBOARDGAME_ASSERT(begin < (1 << 24));
+                LIBBOARDGAME_ASSERT(current - begin < (1 << 8));
                 idx.begin = begin;
                 idx.size = current - begin;
                 m_moves_range[*i][j][piece] = idx;
