@@ -65,7 +65,7 @@ public:
         value for speeding up the matching depends on the CPU cache size. */
     static const unsigned adj_status_nu_adj = 4;
 
-    static const unsigned nu_adj_status_index = 1 << adj_status_nu_adj;
+    static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
@@ -103,7 +103,7 @@ public:
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
     LocalMovesListRange get_moves(Piece piece, Point p,
-                                  unsigned adj_status_index = 0) const;
+                                  unsigned adj_status = 0) const;
 
     BoardType get_board_type() const;
 
@@ -125,8 +125,7 @@ private:
     typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
 
     /** See m_moves */
-    typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status_index>
-        FullMoveTable;
+    typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status> FullMoveTable;
 
     struct ListIndex
     {
@@ -157,7 +156,7 @@ private:
     unique_ptr<FullMoveTable> m_full_move_table;
 
     /** See m_move_lists. */
-    Grid<array<PieceMap<ListIndex>,nu_adj_status_index>> m_moves_range;
+    Grid<array<PieceMap<ListIndex>,nu_adj_status>> m_moves_range;
 
     /** Compact representation of lists of moves of a piece at a point
         constrained by the forbidden status of adjacent points.
@@ -174,9 +173,7 @@ private:
 
     /** Forbidden neighbors for a given adjacent status index at a given point.
         Only used during construction. */
-    Grid<array<ArrayList<Point,adj_status_nu_adj>,nu_adj_status_index>>
-                                                                  m_adj_status;
-
+    Grid<array<ArrayList<Point,adj_status_nu_adj>,nu_adj_status>> m_adj_status;
 
     PieceMap<unsigned short> m_max_attach_points;
 
@@ -196,7 +193,7 @@ private:
 
     void init_symmetry_info();
 
-    bool is_compatible_with_adj_status(Point p, unsigned adj_status_index,
+    bool is_compatible_with_adj_status(Point p, unsigned adj_status,
                                        const MovePoints& points) const;
 
     void set_adj_and_attach_points(const MoveInfo& info, MoveInfoExt& info_ext);
@@ -241,10 +238,9 @@ inline const MovePoints& BoardConst::get_move_points(Move mv) const
 }
 
 inline BoardConst::LocalMovesListRange BoardConst::get_moves(
-                                           Piece piece, Point p,
-                                           unsigned adj_status_index) const
+                               Piece piece, Point p, unsigned adj_status) const
 {
-    ListIndex idx = m_moves_range[p][adj_status_index][piece];
+    ListIndex idx = m_moves_range[p][adj_status][piece];
     const Move* begin = m_move_lists.get() + idx.begin;
     const Move* end = begin + idx.size;
     return LocalMovesListRange(begin, end);

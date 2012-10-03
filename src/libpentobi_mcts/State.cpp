@@ -245,7 +245,7 @@ State::~State() throw()
 
 inline void State::add_moves(Point p, Color c)
 {
-    unsigned adj_status = m_bd.get_adj_status_index(p, c);
+    unsigned adj_status = m_bd.get_adj_status(p, c);
     BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             add_moves(p, c, piece, adj_status);
@@ -715,7 +715,7 @@ void State::init_move_list_with_local(Color c)
             BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                 if ((*m_is_piece_considered[c])[piece])
                 {
-                    unsigned adj_status = m_bd.get_adj_status_index(p, c);
+                    unsigned adj_status = m_bd.get_adj_status(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
                         if (! m_bd.is_forbidden(c, mv)
@@ -758,7 +758,7 @@ void State::init_move_list_without_local(Color c)
             BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                 if ((*m_is_piece_considered[c])[piece])
                 {
-                    unsigned adj_status = m_bd.get_adj_status_index(p, c);
+                    unsigned adj_status = m_bd.get_adj_status(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
                         if (! m_shared_const.is_forbidden_at_root[c][mv]
@@ -774,7 +774,7 @@ void State::init_move_list_without_local(Color c)
         BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
-                unsigned adj_status = m_bd.get_adj_status_index(p, c);
+                unsigned adj_status = m_bd.get_adj_status(p, c);
                 BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                     if ((*m_is_piece_considered[c])[piece])
                     {
@@ -1071,7 +1071,7 @@ void State::update_move_list(Color c)
         BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
-                unsigned adj_status = m_bd.get_adj_status_index(p, c);
+                unsigned adj_status = m_bd.get_adj_status(p, c);
                 BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
                 {
                     if (! (*m_is_piece_considered[c])[piece]

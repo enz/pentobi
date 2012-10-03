@@ -230,10 +230,10 @@ public:
 
     BoardType get_board_type() const;
 
-    unsigned get_adj_status_index(Point p, Color c) const;
+    unsigned get_adj_status(Point p, Color c) const;
 
     LocalMovesListRange get_moves(Piece piece, Point p,
-                                  unsigned adj_status_index) const;
+                                  unsigned adj_status) const;
 
     /** Get score.
         The score is the number of points for a color minus the number of
@@ -382,9 +382,8 @@ private:
         Use copy_from() to copy a board state. */
     Board& operator=(const Board&);
 
-    void gen_moves(Color c, Point p, unsigned adj_status_index,
-                   MoveMarker& marker,
-                   ArrayList<Move, Move::range>& moves) const;
+    void gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
+                   ArrayList<Move,Move::range>& moves) const;
 
     bool has_moves(Color c, Point p) const;
 
@@ -421,7 +420,7 @@ inline Move Board::from_string(const string& s) const
     return m_board_const->from_string(s);
 }
 
-inline unsigned Board::get_adj_status_index(Point p, Color c) const
+inline unsigned Board::get_adj_status(Point p, Color c) const
 {
     unsigned result = 0;
     unsigned n = 0;
@@ -473,9 +472,9 @@ inline const MoveInfoExt& Board::get_move_info_ext(Move move) const
 }
 
 inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
-                                               unsigned adj_status_index) const
+                                                   unsigned adj_status) const
 {
-    return m_board_const->get_moves(piece, p, adj_status_index);
+    return m_board_const->get_moves(piece, p, adj_status);
 }
 
 inline Color Board::get_next(Color c) const

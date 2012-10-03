@@ -159,7 +159,7 @@ void Search::on_start_search()
         for (BoardIterator j(bd); j; ++j)
             if (! bd.is_forbidden(*j, *i))
             {
-                unsigned adj_status = bd.get_adj_status_index(*j, *i);
+                unsigned adj_status = bd.get_adj_status(*j, *i);
                 BOOST_FOREACH(Piece piece, bd.get_pieces_left(*i))
                 {
                     BOOST_FOREACH(Move mv, bd.get_moves(piece, *j, adj_status))

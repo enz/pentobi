@@ -662,7 +662,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
     BOOST_FOREACH(Point p, points)
-        for (unsigned i = 0; i < nu_adj_status_index; ++i)
+        for (unsigned i = 0; i < nu_adj_status; ++i)
         {
             if (is_compatible_with_adj_status(p, i, points))
             {
@@ -686,7 +686,7 @@ void BoardConst::create_moves()
     LIBBOARDGAME_ASSERT(m_move_lists_sum_length < (1 << 24));
     unsigned current = 0;
     for (GeometryIterator i(m_geometry); i; ++i)
-        for (unsigned j = 0; j < nu_adj_status_index; ++j)
+        for (unsigned j = 0; j < nu_adj_status; ++j)
             for (unsigned k = 0; k < m_nu_pieces; ++k)
             {
                 Piece piece(k);
@@ -707,7 +707,7 @@ void BoardConst::create_moves(Piece piece)
     const PieceInfo& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
         log() << "Creating moves for piece " << piece_info.get_name() << "\n";
-    for (unsigned i = 0; i < nu_adj_status_index; ++i)
+    for (unsigned i = 0; i < nu_adj_status; ++i)
         (*m_full_move_table)[i][piece].init(m_geometry);
     PiecePoints points;
     for (GeometryIterator i(m_geometry); i; ++i)
@@ -900,11 +900,10 @@ void BoardConst::init_symmetry_info()
     }
 }
 
-bool BoardConst::is_compatible_with_adj_status(Point p,
-                                               unsigned adj_status_index,
+bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
                                                const MovePoints& points) const
 {
-    BOOST_FOREACH(Point p_adj, m_adj_status[p][adj_status_index])
+    BOOST_FOREACH(Point p_adj, m_adj_status[p][adj_status])
         if (points.contains(p_adj))
             return false;
     return true;
