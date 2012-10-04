@@ -1,11 +1,14 @@
-Current development version
-===========================
+Version 4.0 (4 Oct 2012)
+========================
 
 * New menu item "Beginning of Branch"
 * The rating dialog now also shows the best previous rating and has
   a button to reset the rating
 * A thumbnail plugin for KDE can be built by using the CMake option
   -DPENTOBI_BUILD_KDE_THUMBNAILER=ON
+* Replaced the icons with less colorful ones. All icons are now licensed
+  under the GPLv3+ and include SVG sources. No icons from the Tango icon
+  set are used anymore.
 
 
 Version 3.0 (1 Aug 2012)
