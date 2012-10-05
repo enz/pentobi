@@ -1,8 +1,10 @@
 Current development version (branch v4-fixes)
 =============================================
 
-* Fix potential crash if Undo, Truncate or Truncate Children is selected
-  while the computer is thinking on a move. 
+* Fixed potential crash if Undo, Truncate or Truncate Children is selected
+  while the computer is thinking.
+* Automatic continuing of computer play did not work in some cases if the
+  computer was thinking while the Computer Color dialog was used.
 
 
 Version 4.0 (4 Oct 2012)
