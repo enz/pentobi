@@ -46,6 +46,7 @@ Engine::Engine(Variant variant)
     add("all_legal", &Engine::cmd_all_legal);
     add("clear_board", &Engine::cmd_clear_board);
     add("final_score", &Engine::cmd_final_score);
+    add("get_place", &Engine::cmd_get_place);
     add("loadsgf", &Engine::cmd_loadsgf);
     add("point_integers", &Engine::cmd_point_integers);
     add("move_info", &Engine::cmd_move_info);
@@ -110,6 +111,17 @@ void Engine::cmd_g(Response& response)
 void Engine::cmd_genmove(const Arguments& args, Response& response)
 {
     genmove(get_color_arg(args), response);
+}
+
+void Engine::cmd_get_place(const Arguments& args, Response& response)
+{
+    const Board& bd = get_board();
+    unsigned place;
+    bool isPlaceShared;
+    bd.get_place(get_color_arg(args), place, isPlaceShared);
+    response << place;
+    if (isPlaceShared)
+        response << " shared";
 }
 
 void Engine::cmd_loadsgf(const Arguments& args)

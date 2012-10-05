@@ -34,6 +34,7 @@ public:
     void cmd_final_score(Response&);
     void cmd_g(Response&);
     void cmd_genmove(const Arguments&, Response&);
+    void cmd_get_place(const Arguments& args, Response&);
     void cmd_loadsgf(const Arguments&);
     void cmd_move_info(const Arguments&, Response&);
     void cmd_p(const Arguments&);
