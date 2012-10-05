@@ -1,6 +1,9 @@
 Current development version (branch v4-fixes)
 =============================================
 
+* Rated game result was counted wrongly in four-color/two-player game
+  variants if the first player had a higher score than the second player
+  but the first color a lower score than the second color.
 * Fixed potential crash if Undo, Truncate or Truncate Children is selected
   while the computer is thinking.
 * Automatic continuing of computer play did not work in some cases if the
