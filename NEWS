@@ -1,7 +1,8 @@
 Current development version (branch v4-fixes)
 =============================================
 
-* 
+* Fix potential crash if Undo, Truncate or Truncate Children is selected
+  while the computer is thinking on a move. 
 
 
 Version 4.0 (4 Oct 2012)
