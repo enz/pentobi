@@ -663,7 +663,8 @@ void MainWindow::commentChanged()
 
 void MainWindow::computerColors()
 {
-    bool wasCurrentPlayedByComputer = m_computerColors[m_currentColor];
+    ColorMap<bool> oldComputerColors = m_computerColors;
+    Color oldCurrentColor = m_currentColor;
     Variant variant = getVariant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
@@ -683,9 +684,17 @@ void MainWindow::computerColors()
             settings.setValue("computer_color_none", true);
         }
     }
+    // Don't automatically start playing if color was already played by the
+    // computer, this could be irritating if the computer currently does not
+    // think (even if it is set to play the current color) and the user only
+    // opens the dialog to check the computer color settings.
     bool isCurrentPlayedByComputer = m_computerColors[m_currentColor];
+    bool wasCurrentPlayedByComputer = oldComputerColors[m_currentColor];
+    // Current color could have changed if a move generation finished while
+    // the dialog was running.
+    bool hasCurrentColorChanged = (oldCurrentColor != m_currentColor);
     if (! m_isGenMoveRunning && isCurrentPlayedByComputer
-        && ! wasCurrentPlayedByComputer)
+        && (hasCurrentColorChanged || ! wasCurrentPlayedByComputer))
         checkComputerMove();
 }
 
