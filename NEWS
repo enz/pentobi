@@ -1,7 +1,7 @@
-Current development version (branch v4-fixes)
-=============================================
+Version 4.1 (5 Oct 2012)
+========================
 
-* Rated game result was counted wrongly in four-color/two-player game
+* Result of rated game was counted wrongly in four-color/two-player game
   variants if the first player had a higher score than the second player
   but the first color a lower score than the second color.
 * Fixed potential crash if Undo, Truncate or Truncate Children is selected
