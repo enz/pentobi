@@ -33,13 +33,13 @@
 
     All LibBoardGame and Pentobi modules depend on the following
     <a href="http://www.boost.org/">Boost</a> libraries: thread, system,
-    filesystem and program_options.
+    filesystem, date_time  and program_options.
 
     @section mainpage_gui Pentobi GUI Modules
 
     The Pentobi GUI modules implement the user interface.
     They have the additional dependency on the following
-    <a href="http://qt.nokia.com/">Qt</a> libraries: QtCore
+    <a href="http://qt.digia.com/">Qt</a> libraries: QtCore
     and QtGui.
 
     - libpentobi_gui -
@@ -47,5 +47,9 @@
     - pentobi -
       Main program that provides a GUI for the player in libpentobi_mcts
     - pentobi_thumbnailer -
-      Generates file preview thumbnails for the Gnome desktop
+      Generates file preview thumbnails for the
+      <a href="http://www.gnome.org/">Gnome</a> desktop
+    - pentobi_kde_thumbnailer -
+      Plugin for file preview thumbnails for the
+      <a href="http://www.kde.org/">KDE</a> desktop
 */
