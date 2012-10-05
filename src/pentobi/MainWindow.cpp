@@ -3196,6 +3196,7 @@ void MainWindow::truncate()
     const Node& current = m_game->get_current();
     if (! current.has_parent())
         return;
+    cancelThread();
     if (current.has_children())
     {
         QMessageBox msgBox(this);
@@ -3220,6 +3221,7 @@ void MainWindow::truncateChildren()
 {
     if (! m_game->get_current().has_children())
         return;
+    cancelThread();
     QMessageBox msgBox(this);
     initQuestion(msgBox, tr("Truncate children?"),
                  tr("All following moves and variations will"
