@@ -44,4 +44,30 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
     LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u);
 }
 
+/** Test get_place() in a 4-color, 2-player game when the player 1 has
+    a higher score but color 1 has less points than color 2. */
+LIBBOARDGAME_TEST_CASE(pentobi_base_get_place)
+{
+    unique_ptr<Board> bd(new Board(variant_classic_2));
+    bd->play(Color(0), bd->from_string("a20,b20"));
+    bd->play(Color(1), bd->from_string("r20,s20,t20"));
+    bd->play(Color(2), bd->from_string("q1,r1,s1,t1"));
+    bd->play(Color(3), bd->from_string("a1,b1"));
+    // Not a final position but Board::get_place() should not care about that
+    unsigned place;
+    bool isPlaceShared;
+    bd->get_place(Color(0), place, isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 0u);
+    LIBBOARDGAME_CHECK(! isPlaceShared);
+    bd->get_place(Color(1), place, isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 1u);
+    LIBBOARDGAME_CHECK(! isPlaceShared);
+    bd->get_place(Color(2), place, isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 0u);
+    LIBBOARDGAME_CHECK(! isPlaceShared);
+    bd->get_place(Color(3), place, isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 1u);
+    LIBBOARDGAME_CHECK(! isPlaceShared);
+}
+
 //-----------------------------------------------------------------------------

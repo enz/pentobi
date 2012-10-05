@@ -173,17 +173,16 @@ Color Board::get_effective_to_play() const
 
 void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 {
-    array<unsigned,Color::range> points_array;
-    for (unsigned i = 0; i < m_nu_colors; ++i)
-        points_array[i] = get_points_with_bonus(Color(i));
-    unsigned points = points_array[c.to_int()];
+    array<int,Color::range> all_scores;
+    for (unsigned i = 0; i < Color::range; ++i)
+        all_scores[i] = get_score(Color(i));
+    int score = all_scores[c.to_int()];
     unsigned nu_players = get_nu_players(m_variant);
-    sort(points_array.begin(), points_array.begin() + nu_players,
-         greater<unsigned>());
+    sort(all_scores.begin(), all_scores.begin() + nu_players, greater<int>());
     is_shared = false;
     bool found = false;
     for (unsigned i = 0; i < nu_players; ++i)
-        if (points_array[i] == points)
+        if (all_scores[i] == score)
         {
             if (! found)
             {
