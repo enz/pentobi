@@ -110,22 +110,22 @@ void RatingDialog::updateContent()
     switch (variant)
     {
     case variant_classic:
-        variantStr = tr("Classic");
+        variantStr = tr("Classic (4 players)");
         break;
     case variant_classic_2:
-        variantStr = tr("Classic Two-Player");
+        variantStr = tr("Classic (2 players)");
         break;
     case variant_duo:
         variantStr = tr("Duo");
         break;
     case variant_trigon:
-        variantStr = tr("Trigon");
+        variantStr = tr("Trigon (4 players)");
         break;
     case variant_trigon_2:
-        variantStr = tr("Trigon Two-Player");
+        variantStr = tr("Trigon (2 players)");
         break;
     case variant_trigon_3:
-        variantStr = tr("Trigon Three-Player");
+        variantStr = tr("Trigon (3 players)");
         break;
     case variant_junior:
         variantStr = tr("Junior");
