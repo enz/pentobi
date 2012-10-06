@@ -5,6 +5,7 @@
 #ifndef LIBBOARDGAME_BASE_POINT_LIST_H
 #define LIBBOARDGAME_BASE_POINT_LIST_H
 
+#include <sstream>
 #include <string>
 #include "Point.h"
 #include "libboardgame_util/ArrayList.h"
@@ -49,7 +50,7 @@ PointList<P>::PointList(const string& s)
     istringstream in(s);
     string t;
     while (in >> t)
-        push_back(P::from_string(t));
+        ArrayList<P,P::max_onboard>::push_back(P::from_string(t));
 }
 
 //-----------------------------------------------------------------------------
