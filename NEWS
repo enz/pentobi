@@ -1,7 +1,8 @@
 Current development version (branch v4-fixes):
 ==============================================
 
-*
+* Fixed crash when opening game info dialog in game variants Classic Two-Player
+  or Trigon Two-Player
 
 
 Version 4.1 (5 Oct 2012)

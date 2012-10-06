@@ -70,7 +70,16 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     QDialogButtonBox* buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
-    if (! m_playerBlue->text().isEmpty())
+    // We assume that the user wants to edit the game info if it is still empty
+    // and that he only wants to display it is not empty. Therefore, we leave
+    // the foxus at the first text field if it is empty and put it on the
+    // button box otherwise.
+    if (variant == variant_classic_2 || variant == variant_trigon_2)
+    {
+        if (! m_playerBlueRed->text().isEmpty())
+            buttonBox->setFocus();
+    }
+    else if (! m_playerBlue->text().isEmpty())
         buttonBox->setFocus();
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
