@@ -67,7 +67,6 @@
     <message>
         <location filename="HelpWindow.cpp" line="37"/>
         <source>Pentobi User Manual</source>
-        <oldsource>Pentobi - Help</oldsource>
         <translation>Pentobi-Benutzerhandbuch</translation>
     </message>
     <message>

@@ -830,13 +830,13 @@ void MainWindow::createActions()
     m_actionGameInfo->setShortcut(QString("Ctrl+I"));
     connect(m_actionGameInfo, SIGNAL(triggered()), this, SLOT(gameInfo()));
 
-    m_actionVariantClassic = new QAction(tr("&Classic"), this);
+    m_actionVariantClassic = new QAction(tr("&Classic (4 Players)"), this);
     m_actionVariantClassic->setActionGroup(groupVariant);
     m_actionVariantClassic->setCheckable(true);
     connect(m_actionVariantClassic, SIGNAL(triggered(bool)),
             this, SLOT(variantClassic(bool)));
 
-    m_actionVariantClassic2 = new QAction(tr("Classic T&wo-Player"), this);
+    m_actionVariantClassic2 = new QAction(tr("Classic (&2 Players)"), this);
     m_actionVariantClassic2->setActionGroup(groupVariant);
     m_actionVariantClassic2->setCheckable(true);
     connect(m_actionVariantClassic2, SIGNAL(triggered(bool)),
@@ -854,19 +854,19 @@ void MainWindow::createActions()
     connect(m_actionVariantJunior, SIGNAL(triggered(bool)),
             this, SLOT(variantJunior(bool)));
 
-    m_actionVariantTrigon = new QAction(tr("&Trigon"), this);
+    m_actionVariantTrigon = new QAction(tr("&Trigon (4 Players)"), this);
     m_actionVariantTrigon->setActionGroup(groupVariant);
     m_actionVariantTrigon->setCheckable(true);
     connect(m_actionVariantTrigon, SIGNAL(triggered(bool)),
             this, SLOT(variantTrigon(bool)));
 
-    m_actionVariantTrigon2 = new QAction(tr("Trigon Tw&o-Player"), this);
+    m_actionVariantTrigon2 = new QAction(tr("Tri&gon (2 Players)"), this);
     m_actionVariantTrigon2->setActionGroup(groupVariant);
     m_actionVariantTrigon2->setCheckable(true);
     connect(m_actionVariantTrigon2, SIGNAL(triggered(bool)),
             this, SLOT(variantTrigon2(bool)));
 
-    m_actionVariantTrigon3 = new QAction(tr("Trigon Thr&ee-Player"), this);
+    m_actionVariantTrigon3 = new QAction(tr("Trigon (&3 Players)"), this);
     m_actionVariantTrigon3->setActionGroup(groupVariant);
     m_actionVariantTrigon3->setCheckable(true);
     connect(m_actionVariantTrigon3, SIGNAL(triggered(bool)),
@@ -1286,8 +1286,8 @@ void MainWindow::createMenu()
     menuVariant->addAction(m_actionVariantClassic2);
     menuVariant->addAction(m_actionVariantDuo);
     menuVariant->addAction(m_actionVariantTrigon);
-    menuVariant->addAction(m_actionVariantTrigon2);
     menuVariant->addAction(m_actionVariantTrigon3);
+    menuVariant->addAction(m_actionVariantTrigon2);
     menuVariant->addAction(m_actionVariantJunior);
     menuGame->addAction(m_actionComputerColors);
     menuGame->addAction(m_actionGameInfo);
