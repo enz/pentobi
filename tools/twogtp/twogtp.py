@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # Python script to play a number of games between two different GTP engines.
 
+from fcntl import flock, LOCK_EX, LOCK_NB
 from getopt import getopt
 from os.path import exists
 from shlex import split
@@ -171,21 +172,19 @@ def play_game(game_number, black, white, variant):
     filename = prefix + ".blksgf"
     with open(filename, "a") as f:
         f.write(sgf)
-    filename = prefix + ".dat"
-    if not exists(filename):
-        with open(filename, "w") as f:
+    if not exists(output_file):
+        with open(output_file, "w") as f:
             f.write("# game\tres_b\tres_w\tlen\texchg\tcpu_b\tcpu_w\n")
-    with open(filename, "a") as f:
+    with open(output_file, "a") as f:
         f.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
                 % (game_number, result_black, result_white, move_number,
                    exchange_color, cpu_black, cpu_white))
 
 def find_start_index():
-    filename = prefix + ".dat"
     start_index = 0
-    if not exists(filename):
+    if not exists(output_file):
         return start_index
-    with open(filename, "r") as f:
+    with open(output_file, "r") as f:
         for line in f.readlines():
             if line.strip().startswith("#"):
                 continue
@@ -199,6 +198,7 @@ alternate = False
 number_games = 1
 variant = "duo"
 prefix = "output"
+output_file = ""
 evaluate = ""
 
 opts, args = getopt(argv[1:], "ab:f:g:w:n:", [
@@ -243,6 +243,7 @@ elif variant == "junior":
     game_name = "Blokus Junior"
 else:
     exit("invalid game variant: " + variant)
+output_file = prefix + ".dat"
 black = GtpClient(black_cmd, "B")
 white = GtpClient(white_cmd, "W")
 black.evaluate = (evaluate == "black" or evaluate == "both")
@@ -250,5 +251,9 @@ white.evaluate = (evaluate == "white" or evaluate == "both")
 black.send_no_err("set_game " + game_name)
 white.send_no_err("set_game " + game_name)
 start = find_start_index()
-for game_number in range(start, number_games):
-    play_game(game_number, black, white, variant)
+lock_filename = prefix + ".lock"
+with open(lock_filename, "w") as lock_file:
+    flock(lock_file, LOCK_EX | LOCK_NB)
+    for game_number in range(start, number_games):
+        play_game(game_number, black, white, variant)
+remove(lock_filename)
