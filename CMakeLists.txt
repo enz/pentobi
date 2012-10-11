@@ -60,6 +60,10 @@ check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 set(PENTOBI_BOOST_COMPONENTS system filesystem program_options)
 if(PENTOBI_BUILD_GTP)
   set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} thread)
+  # On MinGW, the thread library needs chrono (tested with Boost 1.51.0)
+  if (MINGW)
+    set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} chrono)
+  endif()
   # Package Threads is needed because some versions of CMake/FindBoost fail to
   # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread.
   # (e.g. this occurs with CMake 2.8.4/MinGW 3.18 or CLang 3.0 on Ubuntu 12.04)
