@@ -42,6 +42,7 @@ set(pentobi_gui_RCS
 
 set(pentobi_gui_TS
   libpentobi_gui_de.ts
+  libpentobi_gui_en_CA.ts
   libpentobi_gui_en_GB.ts
   )
 
