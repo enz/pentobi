@@ -1,3 +1,4 @@
+
 include(${QT_USE_FILE})
 
 include_directories(
@@ -33,8 +34,8 @@ set(pentobi_RCS
   )
 
 set(pentobi_TS
+  pentobi.ts
   pentobi_de.ts
-  pentobi_en.ts
   pentobi_en_CA.ts
   pentobi_en_GB.ts
   )
