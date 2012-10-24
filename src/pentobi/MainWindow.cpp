@@ -755,6 +755,8 @@ void MainWindow::createActions()
             this, SLOT(clearSelectedPiece()));
 
     m_actionComputerColors = new QAction(tr("&Computer Colors"), this);
+    m_actionComputerColors->setToolTip(
+                                 tr("Set the colors played by the computer."));
     setIcon(m_actionComputerColors, "pentobi-computer-color");
     connect(m_actionComputerColors, SIGNAL(triggered()),
             this, SLOT(computerColors()));
@@ -991,6 +993,7 @@ void MainWindow::createActions()
 
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
+    m_actionNewGame->setToolTip(tr("Start a new game."));
     setIcon(m_actionNewGame, "pentobi-newgame");
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
 
