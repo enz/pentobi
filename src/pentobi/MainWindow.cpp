@@ -1483,15 +1483,17 @@ void MainWindow::doubtfulMove(bool checked)
 
 void MainWindow::createToolBar()
 {
-    m_toolBar = new QToolBar(this);
+    m_toolBar = new QToolBar();
     m_toolBar->setMovable(false);
     m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
+    m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionNewGame);
     m_toolBar->addAction(m_actionPlay);
     m_toolBar->addAction(m_actionComputerColors);
+    m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward10);
     m_toolBar->addAction(m_actionBackward);
