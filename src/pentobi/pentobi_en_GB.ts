@@ -172,8 +172,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="722"/>
-        <source>&amp;Ten Moves Backward</source>
-        <translation>&amp;Ten Moves Backward</translation>
+        <source>10 Moves Back&amp;ward</source>
+        <translation>10 Moves Back&amp;ward</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="728"/>
@@ -267,8 +267,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="817"/>
-        <source>Ten Moves F&amp;orward</source>
-        <translation>Ten Moves F&amp;orward</translation>
+        <source>10 Moves F&amp;orward</source>
+        <translation>10 Moves F&amp;orward</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="823"/>

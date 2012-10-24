@@ -185,17 +185,17 @@
     <message>
         <location filename="MainWindow.cpp" line="716"/>
         <source>B&amp;ackward</source>
-        <translation>Z&amp;urück</translation>
+        <translation>&amp;Zurück</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="722"/>
-        <source>&amp;Ten Moves Backward</source>
-        <translation>&amp;Zehn Züge zurück</translation>
+        <source>10 Moves Back&amp;ward</source>
+        <translation>10 Züge z&amp;urück</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="728"/>
         <source>Back to &amp;Main Variation</source>
-        <translation>Zurück zu &amp;Hauptvariante</translation>
+        <translation>Zurück zu Hau&amp;ptvariante</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="734"/>
@@ -245,7 +245,7 @@
     <message>
         <location filename="MainWindow.cpp" line="780"/>
         <source>&amp;End</source>
-        <translation>E&amp;nde</translation>
+        <translation>&amp;Ende</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="786"/>
@@ -284,8 +284,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="817"/>
-        <source>Ten Moves F&amp;orward</source>
-        <translation>Z&amp;ehn Züge vorwärts</translation>
+        <source>10 Moves F&amp;orward</source>
+        <translation>10 Züge v&amp;orwärts</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="823"/>
@@ -416,7 +416,7 @@
     <message>
         <location filename="MainWindow.cpp" line="977"/>
         <source>&amp;Next Variation</source>
-        <translation>Nä&amp;chste Variante</translation>
+        <translation>&amp;Nächste Variante</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="989"/>
@@ -462,7 +462,7 @@
     <message>
         <location filename="MainWindow.cpp" line="1036"/>
         <source>&amp;Previous Variation</source>
-        <translation>V&amp;orherige Variante</translation>
+        <translation>Vor&amp;herige Variante</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1056"/>

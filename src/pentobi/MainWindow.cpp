@@ -719,7 +719,7 @@ void MainWindow::createActions()
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
 
-    m_actionBackward10 = new QAction(tr("&Ten Moves Backward"), this);
+    m_actionBackward10 = new QAction(tr("10 Moves Back&ward"), this);
     setIcon(m_actionBackward10, "pentobi-backward10");
     m_actionBackward10->setPriority(QAction::LowPriority);
     m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
@@ -814,7 +814,7 @@ void MainWindow::createActions()
     setIcon(m_actionForward, "pentobi-forward");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
 
-    m_actionForward10 = new QAction(tr("Ten Moves F&orward"), this);
+    m_actionForward10 = new QAction(tr("10 Moves F&orward"), this);
     m_actionForward10->setPriority(QAction::LowPriority);
     m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
     setIcon(m_actionForward10, "pentobi-forward10");
