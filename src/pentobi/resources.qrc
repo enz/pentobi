@@ -26,8 +26,6 @@
     <file>icons/pentobi-next-piece.png</file>
     <file>icons/pentobi-next-variation.png</file>
     <file>icons/pentobi-next-variation-16.png</file>
-    <file>icons/pentobi-open.png</file>
-    <file>icons/pentobi-open-16.png</file>
     <file>icons/pentobi-piece-clear.png</file>
     <file>icons/pentobi-play.png</file>
     <file>icons/pentobi-play-16.png</file>
@@ -36,7 +34,5 @@
     <file>icons/pentobi-previous-variation-16.png</file>
     <file>icons/pentobi-rotate-left.png</file>
     <file>icons/pentobi-rotate-right.png</file>
-    <file>icons/pentobi-save.png</file>
-    <file>icons/pentobi-save-16.png</file>
   </qresource>
 </RCC>

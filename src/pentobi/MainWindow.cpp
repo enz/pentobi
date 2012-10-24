@@ -1007,7 +1007,6 @@ void MainWindow::createActions()
     m_actionOpen = new QAction(tr("&Open..."), this);
     m_actionOpen->setPriority(QAction::LowPriority);
     m_actionOpen->setShortcut(QKeySequence::Open);
-    setIcon(m_actionOpen, "pentobi-open");
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     m_actionPlaceSelectedPiece = new QAction("", this);
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
@@ -1071,7 +1070,6 @@ void MainWindow::createActions()
     m_actionSave = new QAction(tr("&Save"), this);
     m_actionSave->setPriority(QAction::LowPriority);
     m_actionSave->setShortcut(QKeySequence::Save);
-    setIcon(m_actionSave, "pentobi-save");
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
 
     m_actionSaveAs = new QAction(tr("Save &As..."), this);
@@ -1490,9 +1488,6 @@ void MainWindow::createToolBar()
     m_toolBar->setMovable(false);
     m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
-    m_toolBar->addAction(m_actionOpen);
-    m_toolBar->addAction(m_actionSave);
-    m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionNewGame);
     m_toolBar->addAction(m_actionPlay);
     m_toolBar->addAction(m_actionComputerColors);
