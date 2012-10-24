@@ -710,6 +710,8 @@ private slots:
 
     void showStatus(const QString& text, bool temporary = false);
 
+    void showThinking();
+
     void veryBadMove(bool checked);
 
     void veryGoodMove(bool checked);

@@ -505,7 +505,7 @@ void MainWindow::cancelThread()
         m_genMoveWatcher.waitForFinished();
         m_isGenMoveRunning = false;
         clearStatus();
-        QApplication::restoreOverrideCursor();
+        setCursor(QCursor(Qt::ArrowCursor));
         m_actionInterrupt->setEnabled(false);
     }
 }
@@ -1879,8 +1879,9 @@ void MainWindow::variantTrigon3(bool checked)
 void MainWindow::genMove(bool playSingleMove)
 {
     ++m_genMoveId;
-    showStatus(tr("The computer is thinking..."));
-    QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+    // Show "Computer is thinking" status only after a delay such that it is
+    // not shown for very short thinking times
+    QTimer::singleShot(800, this, SLOT(showThinking()));
     m_actionInterrupt->setEnabled(true);
     clearSelectedPiece();
     clear_abort();
@@ -1907,7 +1908,7 @@ void MainWindow::genMoveFinished()
         return;
     LIBBOARDGAME_ASSERT(m_isGenMoveRunning);
     m_isGenMoveRunning = false;
-    QApplication::restoreOverrideCursor();
+    setCursor(QCursor(Qt::ArrowCursor));
     m_actionInterrupt->setEnabled(false);
     clearStatus();
     if (get_abort() && computerPlaysAll())
@@ -3186,6 +3187,14 @@ void MainWindow::showStatus(const QString& text, bool temporary)
 {
     int timeout = (temporary ? 4000 : 0);
     statusBar()->showMessage(text, timeout);
+}
+
+void MainWindow::showThinking()
+{
+    if (! m_isGenMoveRunning)
+        return;
+    setCursor(QCursor(Qt::BusyCursor));
+    showStatus(tr("The computer is thinking..."));
 }
 
 QSize MainWindow::sizeHint() const
