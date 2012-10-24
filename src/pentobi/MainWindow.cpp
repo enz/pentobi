@@ -715,11 +715,13 @@ void MainWindow::createActions()
 
     m_actionBackward = new QAction(tr("B&ackward"), this);
     setIcon(m_actionBackward, "pentobi-backward");
+    m_actionBackward->setPriority(QAction::LowPriority);
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
 
     m_actionBackward10 = new QAction(tr("&Ten Moves Backward"), this);
     setIcon(m_actionBackward10, "pentobi-backward10");
+    m_actionBackward10->setPriority(QAction::LowPriority);
     m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
     connect(m_actionBackward10, SIGNAL(triggered()), this, SLOT(backward10()));
 
@@ -737,6 +739,7 @@ void MainWindow::createActions()
 
     m_actionBeginning = new QAction(tr("&Beginning"), this);
     setIcon(m_actionBeginning, "pentobi-beginning");
+    m_actionBeginning->setPriority(QAction::LowPriority);
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
 
@@ -773,6 +776,7 @@ void MainWindow::createActions()
             this, SLOT(doubtfulMove(bool)));
 
     m_actionEnd = new QAction(tr("&End"), this);
+    m_actionEnd->setPriority(QAction::LowPriority);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
     setIcon(m_actionEnd, "pentobi-end");
     connect(m_actionEnd, SIGNAL(triggered()), this, SLOT(end()));
@@ -803,11 +807,13 @@ void MainWindow::createActions()
     setIcon(m_actionFlipPieceVertically, "pentobi-flip-vertical");
 
     m_actionForward = new QAction(tr("&Forward"), this);
+    m_actionForward->setPriority(QAction::LowPriority);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     setIcon(m_actionForward, "pentobi-forward");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
 
     m_actionForward10 = new QAction(tr("Ten Moves F&orward"), this);
+    m_actionForward10->setPriority(QAction::LowPriority);
     m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
     setIcon(m_actionForward10, "pentobi-forward10");
     connect(m_actionForward10, SIGNAL(triggered()), this, SLOT(forward10()));
@@ -967,6 +973,7 @@ void MainWindow::createActions()
             this, SLOT(nextTransform()));
 
     m_actionNextVariation = new QAction(tr("&Next Variation"), this);
+    m_actionNextVariation->setPriority(QAction::LowPriority);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
     setIcon(m_actionNextVariation, "pentobi-next-variation");
     connect(m_actionNextVariation, SIGNAL(triggered()),
@@ -995,6 +1002,7 @@ void MainWindow::createActions()
             this, SLOT(noMoveAnnotation(bool)));
 
     m_actionOpen = new QAction(tr("&Open..."), this);
+    m_actionOpen->setPriority(QAction::LowPriority);
     m_actionOpen->setShortcut(QKeySequence::Open);
     setIcon(m_actionOpen, "pentobi-open");
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
@@ -1024,6 +1032,7 @@ void MainWindow::createActions()
 
     m_actionPreviousVariation = new QAction(tr("&Previous Variation"), this);
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
+    m_actionPreviousVariation->setPriority(QAction::LowPriority);
     setIcon(m_actionPreviousVariation, "pentobi-previous-variation");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             this, SLOT(previousVariation()));
@@ -1057,6 +1066,7 @@ void MainWindow::createActions()
     connect(m_actionQuit, SIGNAL(triggered()), this, SLOT(quit()));
 
     m_actionSave = new QAction(tr("&Save"), this);
+    m_actionSave->setPriority(QAction::LowPriority);
     m_actionSave->setShortcut(QKeySequence::Save);
     setIcon(m_actionSave, "pentobi-save");
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
@@ -1476,6 +1486,7 @@ void MainWindow::createToolBar()
     m_toolBar = new QToolBar(this);
     m_toolBar->setMovable(false);
     m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     m_toolBar->addAction(m_actionOpen);
     m_toolBar->addAction(m_actionSave);
     m_toolBar->addAction(m_actionNewGame);
