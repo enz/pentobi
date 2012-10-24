@@ -630,6 +630,8 @@ private:
     void showMessage(QMessageBox::Icon icon, const QString& text,
                      const QString& infoText, const QString& detailText);
 
+    void showStatus(const QString& text, bool temporary = false);
+
     void updateMoveNumber();
 
     void updateWindow(bool currentNodeChanged);
@@ -707,8 +709,6 @@ private slots:
     void setupMode(bool checked);
 
     void showComment(bool checked);
-
-    void showStatus(const QString& text, bool temporary = false);
 
     void showThinking();
 
