@@ -525,6 +525,14 @@ private:
 
     QLabel* m_ratedGameLabel;
 
+    /** Tool button in status bar to provide a way to leave fullscreen (only
+        used in Ubuntu Unity.
+        Unity does not show the menu bar and the user may not remember the
+        keyboard shortcut for m_actionFullscreen (problem still exists in
+        Ubuntu 12.10; see also
+        // http://bugs.launchpad.net/indicator-appmenu/+bug/591189).
+        Not necessary in other desktop environments because they still show
+        the menu bar.*/
     StatusBarButton* m_buttonFullscreen;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;

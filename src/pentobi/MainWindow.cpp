@@ -190,6 +190,12 @@ bool isMoveBetter(const Board* bd, Move mv1, Move mv2)
     return getMoveHeuristic(*bd, mv1) > getMoveHeuristic(*bd, mv2);
 }
 
+bool isUbuntuUnity()
+{
+    QString session = QString::fromLocal8Bit(qgetenv("DESKTOP_SESSION"));
+    return (session == "ubuntu");
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -309,7 +315,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         adjustSize();
     if (isFullScreen())
         m_actionFullscreen->setChecked(true);
-    else
+    if (! isUbuntuUnity() || ! isFullScreen())
+        // See comment at m_buttonFullscreen
         statusBar()->removeWidget(m_buttonFullscreen);
 
     bool showComment = settings.value("show_comment", false).toBool();
@@ -1713,16 +1720,9 @@ void MainWindow::fullscreen(bool checked)
     if (checked)
     {
         showFullScreen();
-        // Provide a way to leave fullscreen mode via a button in the status
-        // bar for Unity in Ubuntu because Unity does not show the menu bar and
-        // the user may not remember the keyboard shortcut for
-        // m_actionFullscreen (problem still exists in Ubuntu 12.10; see also
-        // http://bugs.launchpad.net/indicator-appmenu/+bug/591189).
-        // Not necessary in other desktop environments because they still
-        // show the menu bar.
-        QString session = QString::fromLocal8Bit(qgetenv("DESKTOP_SESSION"));
-        if (session == "ubuntu")
+        if (isUbuntuUnity())
         {
+            // See comment at m_buttonFullscreen
             statusBar()->addPermanentWidget(m_buttonFullscreen);
             m_buttonFullscreen->show();
         }
