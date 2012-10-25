@@ -830,6 +830,7 @@ void MainWindow::createActions()
     m_actionFullscreen->setShortcut(QString("F11"));
     setIcon(m_actionFullscreen, "pentobi-fullscreen");
     m_actionFullscreen->setCheckable(true);
+    m_actionFullscreen->setIconVisibleInMenu(false);
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
 
@@ -1712,8 +1713,19 @@ void MainWindow::fullscreen(bool checked)
     if (checked)
     {
         showFullScreen();
-        statusBar()->addPermanentWidget(m_buttonFullscreen);
-        m_buttonFullscreen->show();
+        // Provide a way to leave fullscreen mode via a button in the status
+        // bar for Unity in Ubuntu because Unity does not show the menu bar and
+        // the user may not remember the keyboard shortcut for
+        // m_actionFullscreen (problem still exists in Ubuntu 12.10; see also
+        // http://bugs.launchpad.net/indicator-appmenu/+bug/591189).
+        // Not necessary in other desktop environments because they still
+        // show the menu bar.
+        QString session = QString::fromLocal8Bit(qgetenv("DESKTOP_SESSION"));
+        if (session == "ubuntu")
+        {
+            statusBar()->addPermanentWidget(m_buttonFullscreen);
+            m_buttonFullscreen->show();
+        }
     }
     else
     {
