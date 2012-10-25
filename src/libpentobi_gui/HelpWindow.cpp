@@ -42,18 +42,21 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     browser->setSource(m_mainPageUrl);
     QAction* actionBack = new QAction(tr("Back"), this);
     actionBack->setEnabled(false);
+    actionBack->setPriority(QAction::LowPriority);
     setIcon(actionBack, "go-previous");
     connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
     connect(browser, SIGNAL(backwardAvailable(bool)),
             actionBack, SLOT(setEnabled(bool)));
     QAction* actionForward = new QAction(tr("Forward"), this);
     actionForward->setEnabled(false);
+    actionForward->setPriority(QAction::LowPriority);
     setIcon(actionForward, "go-next");
     connect(actionForward, SIGNAL(triggered()), browser, SLOT(forward()));
     connect(browser, SIGNAL(forwardAvailable(bool)),
             actionForward, SLOT(setEnabled(bool)));
     m_actionHome = new QAction(tr("Home"), this);
     m_actionHome->setEnabled(false);
+    m_actionHome->setPriority(QAction::LowPriority);
     setIcon(m_actionHome, "go-home");
     connect(m_actionHome, SIGNAL(triggered()), browser, SLOT(home()));
     connect(browser, SIGNAL(sourceChanged(const QUrl&)),
@@ -64,6 +67,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     addAction(actionClose);
     QToolBar* toolBar = new QToolBar(this);
     toolBar->setMovable(false);
+    toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     toolBar->addAction(actionBack);
     toolBar->addAction(actionForward);
     toolBar->addAction(m_actionHome);
