@@ -105,11 +105,6 @@ void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
     findPiecePoints(piece, x, y - 1, points);
 }
 
-bool PieceSelector::hasHeightForWidth() const
-{
-    return true;
-}
-
 int PieceSelector::heightForWidth(int width) const
 {
     // Use ratio for layout of classic pieces, which has larger relative width

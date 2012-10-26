@@ -31,8 +31,6 @@ public:
         game variant. */
     void init();
 
-    bool hasHeightForWidth() const;
-
     int heightForWidth(int width) const;
 
     /** Call update() if pieces left have changed since last paint. */
