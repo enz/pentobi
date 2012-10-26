@@ -226,6 +226,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_history.reset(new RatingHistory(variant));
     createActions();
     setCentralWidget(createCentralWidget());
+    initPieceSelectors();
     m_moveNumber = new QLabel();
     statusBar()->addPermanentWidget(m_moveNumber);
     m_setupModeLabel = new QLabel(tr("Setup mode"));
@@ -1457,7 +1458,6 @@ QLayout* MainWindow::createRightPanel()
                 this, SLOT(selectPiece(Color,Piece,const Transform*)));
         pieceSelectorLayout->addWidget(m_pieceSelector[*i]);
     }
-    initPieceSelectors();
     return layout;
 }
 
