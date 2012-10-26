@@ -1425,12 +1425,14 @@ QLayout* MainWindow::createOrientationSelector()
     layout->setContentsMargins(QMargins());
     layout->addStretch();
     layout->addLayout(createOrientationButtonBoxLeft());
+    layout->addSpacing(8);
     m_orientationDisplay = new OrientationDisplay(0, getBoard());
     connect(m_orientationDisplay, SIGNAL(colorClicked(Color)),
             this, SLOT(orientationDisplayColorClicked(Color)));
     m_orientationDisplay->setSizePolicy(QSizePolicy::MinimumExpanding,
                                         QSizePolicy::MinimumExpanding);
     layout->addWidget(m_orientationDisplay);
+    layout->addSpacing(8);
     layout->addLayout(createOrientationButtonBoxRight());
     layout->addStretch();
     return layout;
