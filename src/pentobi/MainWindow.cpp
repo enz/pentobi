@@ -1423,16 +1423,16 @@ QLayout* MainWindow::createOrientationSelector()
 {
     QHBoxLayout* layout = new QHBoxLayout();
     layout->setContentsMargins(QMargins());
-    layout->addLayout(createOrientationButtonBoxLeft(), 0);
-    QFrame* frame = new QFrame();
-    layout->addWidget(frame, 1);
-    QHBoxLayout* frameLayout = new QHBoxLayout();
-    frame->setLayout(frameLayout);
+    layout->addStretch();
+    layout->addLayout(createOrientationButtonBoxLeft());
     m_orientationDisplay = new OrientationDisplay(0, getBoard());
     connect(m_orientationDisplay, SIGNAL(colorClicked(Color)),
             this, SLOT(orientationDisplayColorClicked(Color)));
-    frameLayout->addWidget(m_orientationDisplay);
-    layout->addLayout(createOrientationButtonBoxRight(), 0);
+    m_orientationDisplay->setSizePolicy(QSizePolicy::MinimumExpanding,
+                                        QSizePolicy::MinimumExpanding);
+    layout->addWidget(m_orientationDisplay);
+    layout->addLayout(createOrientationButtonBoxRight());
+    layout->addStretch();
     return layout;
 }
 

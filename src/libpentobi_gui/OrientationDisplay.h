@@ -24,6 +24,8 @@ class OrientationDisplay
 public:
     OrientationDisplay(QWidget* parent, const Board& bd);
 
+    int heightForWidth(int width) const;
+
     void selectColor(Color c);
 
     void clearSelectedColor();
