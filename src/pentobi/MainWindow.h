@@ -564,13 +564,13 @@ private:
 
     void createMenu();
 
-    QWidget* createOrientationButtonBoxLeft();
+    QLayout* createOrientationButtonBoxLeft();
 
-    QWidget* createOrientationButtonBoxRight();
+    QLayout* createOrientationButtonBoxRight();
 
-    QWidget* createOrientationSelector();
+    QLayout* createOrientationSelector();
 
-    QWidget* createRightPanel();
+    QLayout* createRightPanel();
 
     void createToolBar();
 

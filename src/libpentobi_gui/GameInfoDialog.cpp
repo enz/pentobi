@@ -35,9 +35,7 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     m_formLayout = new QFormLayout();
-    QWidget* formWidget = new QWidget();
-    formWidget->setLayout(m_formLayout);
-    layout->addWidget(formWidget);
+    layout->addLayout(m_formLayout);
     Variant variant = game.get_variant();
     if (variant == variant_duo || variant == variant_junior)
     {

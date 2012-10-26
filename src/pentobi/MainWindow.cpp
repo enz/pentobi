@@ -1241,7 +1241,7 @@ QWidget* MainWindow::createCentralWidget()
     QBoxLayout* layout = new QBoxLayout(QBoxLayout::LeftToRight);
     widget->setLayout(layout);
     layout->addWidget(createLeftPanel(), 55);
-    layout->addWidget(createRightPanel(), 45);
+    layout->addLayout(createRightPanel(), 45);
     // The central widget doesn't do anything with the focus right now, but we
     // allow it to receive the focus such that the user can switch away the
     // focus from the comment field and its blinking cursor.
@@ -1383,15 +1383,11 @@ void MainWindow::createMenu()
     menuHelp->addAction(m_actionAbout);
 }
 
-QWidget* MainWindow::createOrientationButtonBoxLeft()
+QLayout* MainWindow::createOrientationButtonBoxLeft()
 {
-    QWidget* outerWidget = new QWidget();
     QVBoxLayout* outerLayout = new QVBoxLayout();
-    outerWidget->setLayout(outerLayout);
-    QWidget* widget = new QWidget();
     QGridLayout* layout = new QGridLayout();
     layout->setContentsMargins(QMargins());
-    widget->setLayout(layout);
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceAnticlockwise),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceClockwise),
@@ -1401,20 +1397,16 @@ QWidget* MainWindow::createOrientationButtonBoxLeft()
     layout->addWidget(createOBoxToolButton(m_actionFlipPieceVertically),
                       1, 1);
     outerLayout->addStretch();
-    outerLayout->addWidget(widget);
+    outerLayout->addLayout(layout);
     outerLayout->addStretch();
-    return outerWidget;
+    return outerLayout;
 }
 
-QWidget* MainWindow::createOrientationButtonBoxRight()
+QLayout* MainWindow::createOrientationButtonBoxRight()
 {
-    QWidget* outerWidget = new QWidget();
     QVBoxLayout* outerLayout = new QVBoxLayout();
-    outerWidget->setLayout(outerLayout);
-    QWidget* widget = new QWidget();
     QGridLayout* layout = new QGridLayout();
     layout->setContentsMargins(QMargins());
-    widget->setLayout(layout);
     layout->addWidget(createOBoxToolButton(m_actionPreviousPiece),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionNextPiece),
@@ -1422,18 +1414,16 @@ QWidget* MainWindow::createOrientationButtonBoxRight()
     layout->addWidget(createOBoxToolButton(m_actionClearSelectedPiece),
                       1, 0, 1, 2, Qt::AlignHCenter);
     outerLayout->addStretch();
-    outerLayout->addWidget(widget);
+    outerLayout->addLayout(layout);
     outerLayout->addStretch();
-    return outerWidget;
+    return outerLayout;
 }
 
-QWidget* MainWindow::createOrientationSelector()
+QLayout* MainWindow::createOrientationSelector()
 {
-    QWidget* widget = new QWidget();
     QHBoxLayout* layout = new QHBoxLayout();
-    widget->setLayout(layout);
     layout->setContentsMargins(QMargins());
-    layout->addWidget(createOrientationButtonBoxLeft(), 0);
+    layout->addLayout(createOrientationButtonBoxLeft(), 0);
     QFrame* frame = new QFrame();
     layout->addWidget(frame, 1);
     QHBoxLayout* frameLayout = new QHBoxLayout();
@@ -1442,22 +1432,18 @@ QWidget* MainWindow::createOrientationSelector()
     connect(m_orientationDisplay, SIGNAL(colorClicked(Color)),
             this, SLOT(orientationDisplayColorClicked(Color)));
     frameLayout->addWidget(m_orientationDisplay);
-    layout->addWidget(createOrientationButtonBoxRight(), 0);
-    return widget;
+    layout->addLayout(createOrientationButtonBoxRight(), 0);
+    return layout;
 }
 
-QWidget* MainWindow::createRightPanel()
+QLayout* MainWindow::createRightPanel()
 {
-    QWidget* widget = new QWidget();
     QBoxLayout* layout = new QBoxLayout(QBoxLayout::TopToBottom);
-    widget->setLayout(layout);
-    layout->addWidget(createOrientationSelector(), 23);
+    layout->addLayout(createOrientationSelector(), 23);
     m_scoreDisplay = new ScoreDisplay();
     layout->addWidget(m_scoreDisplay, 3);
-    QWidget* pieceSelectorBox = new QWidget();
-    layout->addWidget(pieceSelectorBox, 74);
     SameHeightLayout* pieceSelectorLayout = new SameHeightLayout();
-    pieceSelectorBox->setLayout(pieceSelectorLayout);
+    layout->addLayout(pieceSelectorLayout, 74);
     for (ColorIterator i(Color::range); i; ++i)
     {
         m_pieceSelector[*i] = new PieceSelector(0, getBoard(), *i);
@@ -1467,7 +1453,7 @@ QWidget* MainWindow::createRightPanel()
         pieceSelectorLayout->addWidget(m_pieceSelector[*i]);
     }
     initPieceSelectors();
-    return widget;
+    return layout;
 }
 
 void MainWindow::deleteAllVariations()
