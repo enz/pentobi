@@ -137,11 +137,6 @@ Move GuiBoard::findSelectedPieceMove()
         return mv;
 }
 
-bool GuiBoard::hasHeightForWidth() const
-{
-    return true;
-}
-
 int GuiBoard::heightForWidth(int width) const
 {
     return width;

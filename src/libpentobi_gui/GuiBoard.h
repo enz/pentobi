@@ -46,8 +46,6 @@ public:
 
     void showMove(Color c, Move mv);
 
-    bool hasHeightForWidth() const;
-
     int heightForWidth(int width) const;
 
     void copyFromBoard(const Board& bd);
