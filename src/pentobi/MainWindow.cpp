@@ -767,6 +767,7 @@ void MainWindow::createActions()
     m_actionComputerColors = new QAction(tr("&Computer Colors"), this);
     m_actionComputerColors->setToolTip(
                                  tr("Set the colors played by the computer."));
+    m_actionComputerColors->setPriority(QAction::LowPriority);
     setIcon(m_actionComputerColors, "pentobi-computer-color");
     connect(m_actionComputerColors, SIGNAL(triggered()),
             this, SLOT(computerColors()));
@@ -1009,6 +1010,7 @@ void MainWindow::createActions()
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
     m_actionNewGame->setToolTip(tr("Start a new game."));
+    m_actionNewGame->setPriority(QAction::LowPriority);
     setIcon(m_actionNewGame, "pentobi-newgame");
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
 
@@ -1027,6 +1029,7 @@ void MainWindow::createActions()
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
 
     m_actionPlay = new QAction(tr("&Play"), this);
+    m_actionPlay->setPriority(QAction::LowPriority);
     m_actionPlay->setShortcut(QString("Ctrl+L"));
     setIcon(m_actionPlay, "pentobi-play");
     connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
