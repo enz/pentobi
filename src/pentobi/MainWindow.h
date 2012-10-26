@@ -628,15 +628,15 @@ private:
     void showError(const QString& message, const QString& infoText = "",
                    const QString& detailText = "");
 
-    void gameOver();
-
     void showInfo(const QString& message, const QString& infoText = "",
-                  const QString& detailText = "");
+                  const QString& detailText = "", bool withIcon = false);
 
     void showInvalidFile(QString file, const Exception& e);
 
     void showMessage(QMessageBox::Icon icon, const QString& text,
                      const QString& infoText, const QString& detailText);
+
+    void showResult();
 
     void showStatus(const QString& text, bool temporary = false);
 
@@ -655,6 +655,8 @@ private:
     void updateRecentFiles();
 
     void updateFlipActions();
+
+    void updateRating();
 
     bool writeGame(const path& file);
 

@@ -1,8 +1,9 @@
 Current development version
 ===========================
 
+* The game result is now shown in the status bar instead of a message box
 * Removed less frequently used buttons (Open, Save) from the tool bar
-* British and Canadian English translations of the user interface
+* Added British and Canadian English language variants
 
 
 Version 4.0 (4 Oct 2012)
