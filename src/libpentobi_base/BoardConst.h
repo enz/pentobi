@@ -124,7 +124,7 @@ public:
 private:
     typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
 
-    /** See m_moves */
+    /** See m_full_move_table */
     typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status> FullMoveTable;
 
     struct ListIndex
