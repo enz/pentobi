@@ -6,6 +6,7 @@
 #define LIBPENTOBI_BASE_VARIANT_H
 
 #include <string>
+#include "Color.h"
 
 namespace libpentobi_base {
 
@@ -54,7 +55,7 @@ bool parse_variant(const string& s, Variant& variant);
     @result True if the string contained a valid game variant. */
 bool parse_variant_id(const string& s, Variant& variant);
 
-unsigned get_nu_colors(Variant variant);
+Color::IntType get_nu_colors(Variant variant);
 
 unsigned get_nu_players(Variant variant);
 

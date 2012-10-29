@@ -143,15 +143,15 @@ Float get_result(const Board& bd, Color c)
              || variant == variant_trigon
              || variant == variant_trigon_3)
     {
-        unsigned nu_colors = bd.get_nu_colors();
+        Color::IntType nu_colors = bd.get_nu_colors();
         array<unsigned,Color::range> points_array;
-        for (unsigned i = 0; i < nu_colors; ++i)
+        for (Color::IntType i = 0; i < nu_colors; ++i)
             points_array[i] = bd.get_points_with_bonus(Color(i));
         unsigned points = points_array[c.to_int()];
         sort(points_array.begin(), points_array.begin() + nu_colors);
         Float result = 0;
         unsigned n = 0;
-        for (unsigned i = 0; i < nu_colors; ++i)
+        for (Color::IntType i = 0; i < nu_colors; ++i)
             if (points_array[i] == points)
             {
                 result += Float(i) / Float(nu_colors - 1);
@@ -484,7 +484,7 @@ array<Float,4> State::evaluate_terminal()
 
 bool State::gen_and_play_playout_move(Move last_good_reply)
 {
-    unsigned nu_colors = m_bd.get_nu_colors();
+    Color::IntType nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
         return false;
     Color to_play = m_bd.get_to_play();
@@ -573,7 +573,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
 
 void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
 {
-    unsigned nu_colors = m_bd.get_nu_colors();
+    Color::IntType nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
         return;
     Color to_play = m_bd.get_to_play();

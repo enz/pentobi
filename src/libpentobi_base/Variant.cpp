@@ -19,7 +19,7 @@ using boost::algorithm::to_lower_copy;
 
 //-----------------------------------------------------------------------------
 
-unsigned get_nu_colors(Variant variant)
+Color::IntType get_nu_colors(Variant variant)
 {
     switch (variant)
     {

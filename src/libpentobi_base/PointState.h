@@ -18,6 +18,8 @@ using namespace std;
 class PointState
 {
 public:
+    typedef Color::IntType IntType;
+
     class Iterator
     {
         friend class PointState;
@@ -32,12 +34,12 @@ public:
         PointState operator*() const;
 
     private:
-        unsigned m_i;
+        IntType m_i;
     };
 
-    static const unsigned range = Color::range + 1;
+    static const IntType range = Color::range + 1;
 
-    static const unsigned value_empty = range - 1;
+    static const IntType value_empty = range - 1;
 
     PointState();
 
@@ -45,7 +47,7 @@ public:
 
     PointState(Color c);
 
-    explicit PointState(unsigned i);
+    explicit PointState(IntType i);
 
     bool operator==(const PointState& s) const;
 
@@ -55,7 +57,7 @@ public:
 
     bool operator!=(const Color& c) const;
 
-    unsigned to_int() const;
+    IntType to_int() const;
 
     static PointState empty();
 
@@ -66,9 +68,9 @@ public:
     Color to_color() const;
 
 private:
-    static const unsigned value_uninitialized = range;
+    static const IntType value_uninitialized = range;
 
-    unsigned m_i;
+    IntType m_i;
 
     bool is_initialized() const;
 };
@@ -113,7 +115,7 @@ inline PointState::PointState(Color c)
     m_i = c.to_int();
 }
 
-inline PointState::PointState(unsigned i)
+inline PointState::PointState(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
@@ -167,7 +169,7 @@ inline Color PointState::to_color() const
     return Color(m_i);
 }
 
-inline unsigned PointState::to_int() const
+inline PointState::IntType PointState::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;

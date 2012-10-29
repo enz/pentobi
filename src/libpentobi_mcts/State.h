@@ -163,7 +163,7 @@ private:
 
     unsigned m_nu_moves_initial;
 
-    unsigned m_nu_passes;
+    Color::IntType m_nu_passes;
 
     unsigned m_max_local_value;
 

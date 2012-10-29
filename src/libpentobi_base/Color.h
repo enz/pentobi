@@ -21,6 +21,8 @@ using libboardgame_util::Exception;
 class Color
 {
 public:
+    typedef unsigned IntType;
+
     class InvalidString
         : public Exception
     {
@@ -33,7 +35,7 @@ public:
         friend class Color;
 
     public:
-        Iterator(unsigned nu_colors);
+        Iterator(IntType nu_colors);
 
         operator bool() const;
 
@@ -42,18 +44,18 @@ public:
         Color operator*() const;
 
     private:
-        const unsigned m_nu_colors;
+        const IntType m_nu_colors;
 
-        unsigned m_i;
+        IntType m_i;
     };
 
-    static const unsigned range = 4;
+    static const IntType range = 4;
 
     Color();
 
     Color(const Color& c);
 
-    explicit Color(unsigned i);
+    explicit Color(IntType i);
 
     explicit Color(const string& s);
 
@@ -63,16 +65,16 @@ public:
 
     bool operator<(const Color& c) const;
 
-    unsigned to_int() const;
+    IntType to_int() const;
 
-    Color get_next(unsigned nu_colors) const;
+    Color get_next(IntType nu_colors) const;
 
-    Color get_previous(unsigned nu_colors) const;
+    Color get_previous(IntType nu_colors) const;
 
 private:
-    static const unsigned value_uninitialized = range;
+    static const IntType value_uninitialized = range;
 
-    unsigned m_i;
+    IntType m_i;
 
     bool is_initialized() const;
 };
@@ -84,7 +86,7 @@ inline Color::InvalidString::InvalidString(const string& s)
 {
 }
 
-inline Color::Iterator::Iterator(unsigned nu_colors)
+inline Color::Iterator::Iterator(IntType nu_colors)
     : m_nu_colors(nu_colors),
       m_i(0)
 {
@@ -113,7 +115,7 @@ inline Color::Color()
 #endif
 }
 
-inline Color::Color(unsigned i)
+inline Color::Color(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
@@ -143,15 +145,15 @@ inline bool Color::operator<(const Color& c) const
     return (m_i < c.m_i);
 }
 
-inline Color Color::get_next(unsigned nu_colors) const
+inline Color Color::get_next(IntType nu_colors) const
 {
-    unsigned i = m_i + 1;
+    IntType i = m_i + 1;
     if (i == nu_colors)
         return Color(0);
     return Color(i);
 }
 
-inline Color Color::get_previous(unsigned nu_colors) const
+inline Color Color::get_previous(IntType nu_colors) const
 {
     if (m_i == 0)
         return Color(nu_colors - 1);
@@ -163,7 +165,7 @@ inline bool Color::is_initialized() const
     return m_i < value_uninitialized;
 }
 
-inline unsigned Color::to_int() const
+inline Color::IntType Color::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;

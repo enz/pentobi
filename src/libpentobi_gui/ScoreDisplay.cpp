@@ -23,6 +23,7 @@ using libpentobi_base::variant_junior;
 using libpentobi_base::variant_trigon;
 using libpentobi_base::variant_trigon_2;
 using libpentobi_base::variant_trigon_3;
+using libpentobi_base::ColorIterator;
 
 //-----------------------------------------------------------------------------
 
@@ -234,19 +235,18 @@ void ScoreDisplay::updateScore(const Board& bd)
     Variant variant = bd.get_variant();
     bool hasChanged = (m_variant != variant);
     m_variant = variant;
-    for (unsigned i = 0; i < bd.get_nu_colors(); ++i)
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
     {
-        Color c(i);
-        bool hasMoves = bd.has_moves(c);
-        unsigned points = bd.get_points(c);
-        unsigned bonus = bd.get_bonus(c);
-        if (hasMoves != m_hasMoves[c] || m_points[c] != points
-            || m_bonus[c] != bonus)
+        bool hasMoves = bd.has_moves(*i);
+        unsigned points = bd.get_points(*i);
+        unsigned bonus = bd.get_bonus(*i);
+        if (hasMoves != m_hasMoves[*i] || m_points[*i] != points
+            || m_bonus[*i] != bonus)
         {
             hasChanged = true;
-            m_hasMoves[c] = hasMoves;
-            m_points[c] = points;
-            m_bonus[c] = bonus;
+            m_hasMoves[*i] = hasMoves;
+            m_points[*i] = points;
+            m_bonus[*i] = bonus;
         }
     }
     if (hasChanged)

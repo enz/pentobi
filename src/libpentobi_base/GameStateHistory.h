@@ -58,9 +58,9 @@ public:
 private:
     bool m_is_valid;
 
-    Variant m_variant;
+    Color::IntType m_nu_colors;
 
-    unsigned m_nu_colors;
+    Variant m_variant;
 
     vector<ColorMove> m_moves;
 

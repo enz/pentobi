@@ -73,7 +73,7 @@ public:
 
     Variant get_variant() const;
 
-    unsigned get_nu_colors() const;
+    Color::IntType get_nu_colors() const;
 
     Color get_next(Color c) const;
 
@@ -339,7 +339,7 @@ private:
 
     Variant m_variant;
 
-    unsigned m_nu_colors;
+    Color::IntType m_nu_colors;
 
     const BoardConst* m_board_const;
 
@@ -482,7 +482,7 @@ inline Color Board::get_next(Color c) const
     return c.get_next(m_nu_colors);
 }
 
-inline unsigned Board::get_nu_colors() const
+inline Color::IntType Board::get_nu_colors() const
 {
     return m_nu_colors;
 }
