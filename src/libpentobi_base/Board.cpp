@@ -232,6 +232,41 @@ int Board::get_score(Color c) const
     }
 }
 
+int Board::get_score_without_bonus(Color c) const
+{
+    if (m_variant == variant_duo || m_variant == variant_junior)
+    {
+        unsigned points0 = get_points(Color(0));
+        unsigned points1 = get_points(Color(1));
+        if (c == Color(0))
+            return points0 - points1;
+        else
+            return points1 - points0;
+    }
+    else if (m_variant == variant_classic
+             || m_variant == variant_trigon
+             || m_variant == variant_trigon_3)
+    {
+        int score = 0;
+        for (ColorIterator i(m_nu_colors); i; ++i)
+            if (*i != c)
+                score -= get_points(*i);
+        score =
+            get_points(c) + score / (static_cast<int>(m_nu_colors) - 1);
+        return score;
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
+                            || m_variant == variant_trigon_2);
+        unsigned points0 = get_points(Color(0)) + get_points(Color(2));
+        unsigned points1 = get_points(Color(1)) + get_points(Color(3));
+        if (c == Color(0) || c == Color(2))
+            return points0 - points1;
+        else
+            return points1 - points0;
+    }
+}
 bool Board::has_moves(Color c) const
 {
     bool is_first = is_first_piece(c);

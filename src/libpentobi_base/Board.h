@@ -251,6 +251,8 @@ public:
         are more than two players). */
     int get_score(Color c) const;
 
+    int get_score_without_bonus(Color c) const;
+
     /** Get the place of a player in the game result.
         @param c The color of the player.
         @param[out] place The place of the player with that color. The place

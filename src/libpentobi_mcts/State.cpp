@@ -502,7 +502,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
                      || variant == variant_trigon_2)
                     && ! m_has_moves[m_bd.get_second_color(to_play)])))
         {
-            if (m_bd.get_score(to_play) < 0)
+            if (m_bd.get_score_without_bonus(to_play) < 0)
             {
                 if (log_simulations)
                     log() << "Terminate early (no moves and negative score)\n";
