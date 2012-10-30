@@ -10,11 +10,9 @@ option(PENTOBI_BUILD_KDE_THUMBNAILER
 option(PENTOBI_REGISTER_GNOME2_THUMBNAILER
   "Install files for registering thumbnailer for old versions of Gnome" ON)
 
-# Use optimized build as default for CMAKE_BUILD_TYPE
-if(NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
-  set(CMAKE_BUILD_TYPE Release CACHE STRING
-      "Type of build (None Debug Release RelWithDebInfo MinSizeRel)"
-      FORCE)
+if(NOT CMAKE_BUILD_TYPE)
+  message(STATUS "No build type selected, default to Release")
+  set(CMAKE_BUILD_TYPE "Release")
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
