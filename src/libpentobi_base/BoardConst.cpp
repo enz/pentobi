@@ -614,8 +614,12 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
     else if (variant == variant_junior)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_junior);
     m_total_piece_points = 0;
+    m_max_piece_size = 0;
     BOOST_FOREACH(const PieceInfo& piece, m_pieces)
+    {
+        m_max_piece_size = max(m_max_piece_size, piece.get_size());
         m_total_piece_points += piece.get_size();
+    }
     if (board_type == board_type_classic || variant == variant_duo)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 21);

@@ -63,6 +63,7 @@ public:
         Includes an extra pass move per color at the end of the game. */
     static const unsigned max_game_moves = Color::range * max_player_moves;
 
+    /** Maximum number of real (=non-pass) moves in any game variant. */
     static const unsigned max_nonpass_game_moves =
         Color::range * max_nonpass_player_moves;
 
@@ -75,11 +76,22 @@ public:
 
     Color::IntType get_nu_colors() const;
 
+    unsigned get_nu_players() const;
+
+    /** Get number of unique pieces per player in the current game variant. */
+    unsigned get_nu_uniq_pieces() const;
+
+    /** Get number of pieces per player in the current game variant. */
+    unsigned get_nu_pieces() const;
+
+    unsigned get_max_nonpass_player_moves() const;
+
+    /** Maximum number of real (=non-pass) moves in the current game variant. */
+    unsigned get_max_nonpass_game_moves() const;
+
     Color get_next(Color c) const;
 
     Color get_previous(Color c) const;
-
-    unsigned get_nu_pieces() const;
 
     const PieceTransforms& get_transforms() const;
 
@@ -121,8 +133,6 @@ public:
     unsigned get_bonus(Color c) const;
 
     unsigned get_points_with_bonus(Color c) const;
-
-    unsigned get_points_left(Color c) const;
 
     Move get_played_move(Point p) const;
 
@@ -324,6 +334,8 @@ private:
         PieceMap<unsigned> nu_left_piece;
 
         unsigned nu_onboard_pieces;
+
+        unsigned points;
     };
 
     struct Snapshot
@@ -340,6 +352,8 @@ private:
     Variant m_variant;
 
     Color::IntType m_nu_colors;
+
+    unsigned m_nu_players;
 
     const BoardConst* m_board_const;
 
@@ -456,6 +470,16 @@ inline const Board::PointStateGrid& Board::get_grid() const
     return m_state_base.point_state;
 }
 
+inline unsigned Board::get_max_nonpass_game_moves() const
+{
+    return m_nu_colors * get_max_nonpass_player_moves();
+}
+
+inline unsigned Board::get_max_nonpass_player_moves() const
+{
+    return get_nu_pieces();
+}
+
 inline ColorMove Board::get_move(unsigned n) const
 {
     return m_moves[n];
@@ -508,12 +532,25 @@ inline unsigned Board::get_nu_onboard_pieces(Color c) const
     return m_state_color[c].nu_onboard_pieces;
 }
 
+inline unsigned Board::get_nu_players() const
+{
+    return m_nu_players;
+}
+
 inline const MovePoints& Board::get_move_points(Move mv) const
 {
     return m_board_const->get_move_points(mv);
 }
 
 inline unsigned Board::get_nu_pieces() const
+{
+    if (m_variant == variant_junior)
+        return 2 * m_board_const->get_nu_pieces();
+    else
+        return m_board_const->get_nu_pieces();
+}
+
+inline unsigned Board::get_nu_uniq_pieces() const
 {
     return m_board_const->get_nu_pieces();
 }
@@ -546,10 +583,7 @@ inline PointState Board::get_point_state(Point p) const
 
 inline unsigned Board::get_points(Color c) const
 {
-    unsigned total_piece_points = m_board_const->get_total_piece_points();
-    if (m_variant == variant_junior)
-        total_piece_points *= 2;
-    return total_piece_points - get_points_left(c);
+    return m_state_color[c].points;
 }
 
 inline unsigned Board::get_points_with_bonus(Color c) const
@@ -724,11 +758,13 @@ inline void Board::place(Color c, Move mv)
     const MoveInfo& info = m_board_const->get_move_info(mv);
     const MoveInfoExt& info_ext = m_board_const->get_move_info_ext(mv);
     Piece piece = info.piece;
-    LIBBOARDGAME_ASSERT(m_state_color[c].nu_left_piece[piece] > 0);
-    if (--m_state_color[c].nu_left_piece[piece] == 0)
-        m_state_color[c].pieces_left.remove(piece);
+    StateColor& state_color = m_state_color[c];
+    LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
+    if (--state_color.nu_left_piece[piece] == 0)
+        state_color.pieces_left.remove(piece);
     ++m_state_base.nu_onboard_pieces_all;
-    ++m_state_color[c].nu_onboard_pieces;
+    ++state_color.nu_onboard_pieces;
+    state_color.points += info.points.size();
     auto i = info.points.begin();
     auto end = info.points.end();
     LIBBOARDGAME_ASSERT(i != end);
@@ -745,7 +781,7 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
-        m_state_color[c].forbidden[*i] = true;
+        state_color.forbidden[*i] = true;
         ++i;
     }
     while (i != end);
@@ -754,9 +790,9 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
-        if (! m_state_color[c].is_attach_point[*i])
+        if (! state_color.is_attach_point[*i])
         {
-            m_state_color[c].is_attach_point[*i] = true;
+            state_color.is_attach_point[*i] = true;
             m_attach_points[c].push_back(*i);
         }
         ++i;

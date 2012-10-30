@@ -177,11 +177,10 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
     for (unsigned i = 0; i < Color::range; ++i)
         all_scores[i] = get_score(Color(i));
     int score = all_scores[c.to_int()];
-    unsigned nu_players = get_nu_players(m_variant);
-    sort(all_scores.begin(), all_scores.begin() + nu_players, greater<int>());
+    sort(all_scores.begin(), all_scores.begin() + m_nu_players, greater<int>());
     is_shared = false;
     bool found = false;
-    for (unsigned i = 0; i < nu_players; ++i)
+    for (unsigned i = 0; i < m_nu_players; ++i)
         if (all_scores[i] == score)
         {
             if (! found)
@@ -192,14 +191,6 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
             else
                 is_shared = true;
         }
-}
-
-unsigned Board::get_points_left(Color c) const
-{
-    unsigned n = 0;
-    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
-        n += get_nu_left_piece(c, piece) * get_piece_info(piece).get_size();
-    return n;
 }
 
 int Board::get_score(Color c) const
@@ -290,7 +281,8 @@ void Board::init(Variant variant, const Setup* setup)
         m_attach_points[*i].clear();
         m_state_color[*i].pieces_left.clear();
         m_state_color[*i].nu_onboard_pieces = 0;
-        for (unsigned j = 0; j < get_nu_pieces(); ++j)
+        m_state_color[*i].points = 0;
+        for (unsigned j = 0; j < get_nu_uniq_pieces(); ++j)
             m_state_color[*i].pieces_left.push_back(Piece(j));
         if (variant == variant_junior)
             m_state_color[*i].nu_left_piece.fill(2);
@@ -342,6 +334,7 @@ void Board::init_variant(Variant variant)
         m_color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
     }
     m_nu_colors = libpentobi_base::get_nu_colors(variant);
+    m_nu_players = libpentobi_base::get_nu_players(variant);
     m_board_const = &BoardConst::get(variant);
     m_geometry = &m_board_const->get_geometry();
     m_starting_points.init(variant, *m_geometry);
@@ -570,9 +563,9 @@ void Board::write_color_info_line2(ostream& out, Color c) const
 void Board::write_color_info_line3(ostream& out, Color c) const
 {
     if (m_variant == variant_junior)
-        write_pieces_left(out, c, 6, get_nu_pieces());
+        write_pieces_left(out, c, 6, get_nu_uniq_pieces());
     else
-        write_pieces_left(out, c, 10, get_nu_pieces());
+        write_pieces_left(out, c, 10, get_nu_uniq_pieces());
 }
 
 void Board::write_info_line(ostream& out, unsigned y) const

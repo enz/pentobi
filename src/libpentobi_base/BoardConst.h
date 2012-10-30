@@ -75,6 +75,8 @@ public:
 
     unsigned get_total_piece_points() const;
 
+    unsigned get_max_piece_size() const;
+
     const PieceInfo& get_piece_info(Piece piece) const;
 
     bool get_piece_by_name(const string& name, Piece& piece) const;
@@ -137,6 +139,8 @@ private:
     unsigned m_nu_pieces;
 
     unsigned m_total_piece_points;
+
+    unsigned m_max_piece_size;
 
     BoardType m_board_type;
 
@@ -213,6 +217,11 @@ inline unsigned short BoardConst::get_max_attach_points(Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() <= m_nu_pieces);
     return m_max_attach_points[piece];
+}
+
+inline unsigned BoardConst::get_max_piece_size() const
+{
+    return m_max_piece_size;
 }
 
 inline const MoveInfo& BoardConst::get_move_info(Move move) const
