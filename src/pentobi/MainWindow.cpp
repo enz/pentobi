@@ -722,14 +722,14 @@ void MainWindow::createActions()
             this, SLOT(analyzeGame()));
 
     m_actionBackward = new QAction(tr("B&ackward"), this);
-    m_actionBackward->setToolTip(tr("Go one move backward."));
+    m_actionBackward->setToolTip(tr("Go one move backward"));
     setIcon(m_actionBackward, "pentobi-backward");
     m_actionBackward->setPriority(QAction::LowPriority);
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
 
     m_actionBackward10 = new QAction(tr("10 Moves Back&ward"), this);
-    m_actionBackward10->setToolTip(tr("Go ten moves backward."));
+    m_actionBackward10->setToolTip(tr("Go ten moves backward"));
     setIcon(m_actionBackward10, "pentobi-backward10");
     m_actionBackward10->setPriority(QAction::LowPriority);
     m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
@@ -748,7 +748,7 @@ void MainWindow::createActions()
             this, SLOT(badMove(bool)));
 
     m_actionBeginning = new QAction(tr("&Beginning"), this);
-    m_actionBeginning->setToolTip(tr("Go to beginning of game."));
+    m_actionBeginning->setToolTip(tr("Go to beginning of game"));
     setIcon(m_actionBeginning, "pentobi-beginning");
     m_actionBeginning->setPriority(QAction::LowPriority);
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
@@ -767,7 +767,7 @@ void MainWindow::createActions()
 
     m_actionComputerColors = new QAction(tr("&Computer Colors"), this);
     m_actionComputerColors->setToolTip(
-                                 tr("Set the colors played by the computer."));
+                                  tr("Set the colors played by the computer"));
     setIcon(m_actionComputerColors, "pentobi-computer-color");
     connect(m_actionComputerColors, SIGNAL(triggered()),
             this, SLOT(computerColors()));
@@ -789,7 +789,7 @@ void MainWindow::createActions()
             this, SLOT(doubtfulMove(bool)));
 
     m_actionEnd = new QAction(tr("&End"), this);
-    m_actionEnd->setToolTip(tr("Go to end of moves."));
+    m_actionEnd->setToolTip(tr("Go to end of moves"));
     m_actionEnd->setPriority(QAction::LowPriority);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
     setIcon(m_actionEnd, "pentobi-end");
@@ -821,14 +821,14 @@ void MainWindow::createActions()
     setIcon(m_actionFlipPieceVertically, "pentobi-flip-vertical");
 
     m_actionForward = new QAction(tr("&Forward"), this);
-    m_actionForward->setToolTip(tr("Go one move forward."));
+    m_actionForward->setToolTip(tr("Go one move forward"));
     m_actionForward->setPriority(QAction::LowPriority);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     setIcon(m_actionForward, "pentobi-forward");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
 
     m_actionForward10 = new QAction(tr("10 Moves F&orward"), this);
-    m_actionForward10->setToolTip(tr("Go ten moves forward."));
+    m_actionForward10->setToolTip(tr("Go ten moves forward"));
     m_actionForward10->setPriority(QAction::LowPriority);
     m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
     setIcon(m_actionForward10, "pentobi-forward10");
@@ -990,7 +990,7 @@ void MainWindow::createActions()
             this, SLOT(nextTransform()));
 
     m_actionNextVariation = new QAction(tr("&Next Variation"), this);
-    m_actionNextVariation->setToolTip(tr("Go to next variation."));
+    m_actionNextVariation->setToolTip(tr("Go to next variation"));
     m_actionNextVariation->setPriority(QAction::LowPriority);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
     setIcon(m_actionNextVariation, "pentobi-next-variation");
@@ -1009,7 +1009,7 @@ void MainWindow::createActions()
 
     m_actionNewGame = new QAction(tr("&New Game"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
-    m_actionNewGame->setToolTip(tr("Start a new game."));
+    m_actionNewGame->setToolTip(tr("Start a new game"));
     setIcon(m_actionNewGame, "pentobi-newgame");
     connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
 
@@ -1049,7 +1049,7 @@ void MainWindow::createActions()
             this, SLOT(previousTransform()));
 
     m_actionPreviousVariation = new QAction(tr("&Previous Variation"), this);
-    m_actionPreviousVariation->setToolTip(tr("Go to previous variation."));
+    m_actionPreviousVariation->setToolTip(tr("Go to previous variation"));
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
     m_actionPreviousVariation->setPriority(QAction::LowPriority);
     setIcon(m_actionPreviousVariation, "pentobi-previous-variation");
@@ -2917,16 +2917,16 @@ void MainWindow::setPlayToolTip()
         if (c == Color(0) || c == Color(2))
         {
             if (isComputerColor)
-                s = tr("Make the computer continue to play Blue/Red.");
+                s = tr("Make the computer continue to play Blue/Red");
             else
-                s = tr("Make the computer play Blue/Red.");
+                s = tr("Make the computer play Blue/Red");
         }
         else
         {
             if (isComputerColor)
-                s = tr("Make the computer continue to play Yellow/Green.");
+                s = tr("Make the computer continue to play Yellow/Green");
             else
-                s = tr("Make the computer play Yellow/Green.");
+                s = tr("Make the computer play Yellow/Green");
         }
     }
     else
@@ -2936,31 +2936,31 @@ void MainWindow::setPlayToolTip()
         if (c == Color(0))
         {
             if (isComputerColor)
-                s = tr("Make the computer continue to play Blue.");
+                s = tr("Make the computer continue to play Blue");
             else
-                s = tr("Make the computer play Blue.");
+                s = tr("Make the computer play Blue");
         }
         else if (c == Color(1) && ! isTwoColorVariant)
         {
             if (isComputerColor)
-                s = tr("Make the computer continue to play Yellow.");
+                s = tr("Make the computer continue to play Yellow");
             else
-                s = tr("Make the computer play Yellow.");
+                s = tr("Make the computer play Yellow");
         }
         else if ((c == Color(1) && isTwoColorVariant)
                  || (c == Color(3) && ! isTwoColorVariant))
         {
             if (isComputerColor)
-                s = tr("Make the computer continue to play Green.");
+                s = tr("Make the computer continue to play Green");
             else
-                s = tr("Make the computer play Green.");
+                s = tr("Make the computer play Green");
         }
         else
         {
             if (isComputerColor)
-                s = tr("Make the computer continue to play Red.");
+                s = tr("Make the computer continue to play Red");
             else
-                s = tr("Make the computer play Red.");
+                s = tr("Make the computer play Red");
         }
     }
     m_actionPlay->setToolTip(s);
@@ -3547,13 +3547,8 @@ void MainWindow::updateWindowModified()
 {
     bool modified = m_game->get_modified();
     m_actionSave->setEnabled(modified);
-    if (m_file.isEmpty())
-        m_actionSave->setToolTip("");
-    else
-    {
+    if (! m_file.isEmpty())
         setWindowModified(modified);
-        m_actionSave->setToolTip(tr("Save (%1)").arg(m_file));
-    }
 }
 
 void MainWindow::veryBadMove(bool checked)
