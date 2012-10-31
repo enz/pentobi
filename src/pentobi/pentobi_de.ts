@@ -455,8 +455,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1010"/>
-        <source>&amp;New Game</source>
-        <translation>&amp;Neues Spiel</translation>
+        <source>&amp;New</source>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1012"/>

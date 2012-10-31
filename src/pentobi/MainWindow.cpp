@@ -1007,7 +1007,7 @@ void MainWindow::createActions()
     connect(m_actionNewRatedGame, SIGNAL(triggered()),
             this, SLOT(newRatedGame()));
 
-    m_actionNewGame = new QAction(tr("&New Game"), this);
+    m_actionNewGame = new QAction(tr("&New"), this);
     m_actionNewGame->setShortcut(QKeySequence::New);
     m_actionNewGame->setToolTip(tr("Start a new game"));
     setIcon(m_actionNewGame, "pentobi-newgame");
