@@ -429,7 +429,7 @@ private:
 
     QAction* m_actionNextVariation10;
 
-    QAction* m_actionNewGame;
+    QAction* m_actionNew;
 
     QAction* m_actionNewRatedGame;
 

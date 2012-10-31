@@ -1009,11 +1009,11 @@ void MainWindow::createActions()
     connect(m_actionNewRatedGame, SIGNAL(triggered()),
             this, SLOT(newRatedGame()));
 
-    m_actionNewGame = new QAction(tr("&New"), this);
-    m_actionNewGame->setShortcut(QKeySequence::New);
-    m_actionNewGame->setToolTip(tr("Start a new game"));
-    setIcon(m_actionNewGame, "pentobi-newgame");
-    connect(m_actionNewGame, SIGNAL(triggered()), this, SLOT(newGame()));
+    m_actionNew = new QAction(tr("&New"), this);
+    m_actionNew->setShortcut(QKeySequence::New);
+    m_actionNew->setToolTip(tr("Start a new game"));
+    setIcon(m_actionNew, "pentobi-newgame");
+    connect(m_actionNew, SIGNAL(triggered()), this, SLOT(newGame()));
 
     m_actionNoMoveAnnotation =
         new QAction(tr("N&one", "move annotation"), this);
@@ -1301,7 +1301,7 @@ void MainWindow::createMenu()
     menuFile->addAction(m_actionQuit);
 
     QMenu* menuGame = menuBar()->addMenu(tr("G&ame"));
-    menuGame->addAction(m_actionNewGame);
+    menuGame->addAction(m_actionNew);
     menuGame->addAction(m_actionNewRatedGame);
     menuGame->addSeparator();
     QMenu* menuVariant = menuGame->addMenu(tr("&Game Variant"));
@@ -1494,7 +1494,7 @@ void MainWindow::createToolBar()
     m_toolBar->setMovable(false);
     m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
-    m_toolBar->addAction(m_actionNewGame);
+    m_toolBar->addAction(m_actionNew);
     m_toolBar->addAction(m_actionPlay);
     m_toolBar->addAction(m_actionComputerColors);
     m_toolBar->addSeparator();
@@ -3539,8 +3539,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
-    m_actionNewGame->setEnabled(m_isRated || m_game->get_modified()
-                                || m_wasModified);
+    m_actionNew->setEnabled(m_isRated || m_game->get_modified()
+                            || m_wasModified);
     m_actionNewRatedGame->setEnabled(! m_isRated || m_game->get_modified()
                                      || m_wasModified);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
