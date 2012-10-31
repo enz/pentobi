@@ -3,8 +3,8 @@ Current development version
 
 * The computer now also knows about the possibility of rotational-symmetric
   tied games in game variant Trigon Two-Player (like it already knew in the
-  variants Duo and Junior) and will try to prevent positions that allow the
-  second player to enforce such a tie
+  variants Duo and Junior) and will avoid positions that allow the second
+  player to enforce such a tie
 * Minor playing strength improvements
 * The game result is now shown in the status bar instead of a message box
 * Removed less frequently used buttons (Open, Save) from the tool bar
