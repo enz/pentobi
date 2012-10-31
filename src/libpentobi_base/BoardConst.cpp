@@ -31,6 +31,7 @@ using boost::is_any_of;
 using boost::split;
 using boost::trim_copy;
 using boost::algorithm::to_lower_copy;
+using libboardgame_base::PointTransfRot180;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_base::TrigonGeometry;
@@ -888,7 +889,8 @@ void BoardConst::init_adj_status(Point p,
 void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
-    symmetric_points.init(m_geometry);
+    PointTransfRot180<Point> transform;
+    symmetric_points.init(m_geometry, transform);
     for (unsigned i = 0; i < m_move_info.size(); ++i)
     {
         const MoveInfo& info = m_move_info[i];

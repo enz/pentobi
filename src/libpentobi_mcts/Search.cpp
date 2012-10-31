@@ -13,6 +13,7 @@
 namespace libpentobi_mcts {
 
 using boost::format;
+using libboardgame_base::PointTransfRot180;
 using libpentobi_base::board_type_classic;
 using libpentobi_base::board_type_duo;
 using libpentobi_base::board_type_trigon;
@@ -151,6 +152,7 @@ Float Search::get_tie_value() const
 void Search::on_start_search()
 {
     const Board& bd = get_board();
+
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
     {
         MoveMarker& is_forbidden_at_root =
@@ -172,10 +174,14 @@ void Search::on_start_search()
                 }
             }
     }
+
     for (unsigned i = 0; i < Board::max_game_moves; ++i)
         set_pieces_considered(bd.get_board_const(), i,
                               m_shared_const.is_piece_considered[i]);
     m_shared_const.is_piece_considered_all.fill(true);
+
+    PointTransfRot180<Point> transform;
+    m_shared_const.symmetric_points.init(bd.get_geometry(), transform);
 }
 
 bool Search::search(Move& mv, const Board& bd, Color to_play,
