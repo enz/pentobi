@@ -182,7 +182,7 @@ void Tree::init_variant(Variant variant)
     m_variant = variant;
     set_game_property();
     init_board_const(variant);
-    set_modified(false);
+    clear_modified();
 }
 
 void Tree::keep_only_subtree(const Node& node)

@@ -42,10 +42,12 @@ public:
     unique_ptr<Node> get_tree_transfer_ownership();
 
     /** Check if the tree was modified since the construction or the last call
-        to init() or set_modified(false) */
-    bool get_modified() const;
+        to init() or clear_modified() */
+    bool is_modified() const;
 
-    void set_modified(bool modified);
+    void set_modified();
+
+    void clear_modified();
 
     const Node& get_root() const;
 
@@ -199,6 +201,11 @@ inline void Tree::append(const Node& node, unique_ptr<Node> child)
     non_const(node).append(move(child));
 }
 
+inline void Tree::clear_modified()
+{
+    m_modified = false;
+}
+
 inline double Tree::get_bad_move(const Node& node) const
 {
     return node.get_property<double>("BM", 0);
@@ -241,7 +248,7 @@ inline double Tree::get_good_move(const Node& node) const
     return node.get_property<double>("TE", 0);
 }
 
-inline bool Tree::get_modified() const
+inline bool Tree::is_modified() const
 {
     return m_modified;
 }
@@ -320,9 +327,9 @@ void Tree::set_comment_property(const Node& node, const string& key,
     set_comment(node, new_comment);
 }
 
-inline void Tree::set_modified(bool modified)
+inline void Tree::set_modified()
 {
-    m_modified = modified;
+    m_modified = true;
 }
 
 template<typename T>

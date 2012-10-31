@@ -260,7 +260,7 @@ private:
 
     /** Was the current game modified and then saved?
         Used to know if the new game action should be enabled because
-        looking at Game::get_modified() is not enough it only tells if the
+        looking at Game::is_modified() is not enough it only tells if the
         game was modified after creation or loading or the last save. */
     bool m_wasModified;
 

@@ -137,9 +137,11 @@ public:
     /** Make the current node the first child of its parent. */
     void make_first_child();
 
-    void set_modified(bool modified);
+    void set_modified();
 
-    bool get_modified() const;
+    void clear_modified();
+
+    bool is_modified() const;
 
     /** Set the AP property at the root node. */
     void set_application(const string& name, const string& version = "");
@@ -176,6 +178,11 @@ private:
     BoardUpdater m_updater;
 };
 
+inline void Game::clear_modified()
+{
+    m_tree.clear_modified();
+}
+
 inline double Game::get_bad_move() const
 {
     return m_tree.get_bad_move(*m_current);
@@ -209,11 +216,6 @@ inline const Node& Game::get_current() const
 inline double Game::get_good_move() const
 {
     return m_tree.get_good_move(*m_current);
-}
-
-inline bool Game::get_modified() const
-{
-    return m_tree.get_modified();
 }
 
 inline ColorMove Game::get_move() const
@@ -269,6 +271,11 @@ inline bool Game::is_doubtful_move() const
 inline bool Game::is_interesting_move() const
 {
     return m_tree.is_interesting_move(*m_current);
+}
+
+inline bool Game::is_modified() const
+{
+    return m_tree.is_modified();
 }
 
 inline void Game::make_first_child()
@@ -346,9 +353,9 @@ inline void Game::set_interesting_move()
     m_tree.set_interesting_move(*m_current);
 }
 
-inline void Game::set_modified(bool modified)
+inline void Game::set_modified()
 {
-    m_tree.set_modified(modified);
+    m_tree.set_modified();
 }
 
 inline void Game::set_player_name(Color c, const string& name)

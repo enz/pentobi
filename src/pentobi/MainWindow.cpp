@@ -533,7 +533,7 @@ bool MainWindow::checkSave()
 {
     if (! m_file.isEmpty())
     {
-        if (! m_game->get_modified())
+        if (! m_game->is_modified())
             return true;
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The file has been modified."),
@@ -576,7 +576,7 @@ bool MainWindow::checkSave()
 
 bool MainWindow::checkQuit()
 {
-    if (! m_file.isEmpty() && m_game->get_modified())
+    if (! m_file.isEmpty() && m_game->is_modified())
     {
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The file has been modified."),
@@ -596,7 +596,7 @@ bool MainWindow::checkQuit()
     }
     cancelThread();
     QSettings settings;
-    if (m_file.isEmpty() && ! m_gameFinished && m_game->get_modified())
+    if (m_file.isEmpty() && ! m_gameFinished && m_game->is_modified())
     {
         writeGame(getAutoSaveFile().toLocal8Bit().constData());
         settings.setValue("autosave_rated", m_isRated);
@@ -1976,7 +1976,7 @@ void MainWindow::initGame()
     m_game->set_application("Pentobi");
 #endif
     m_game->set_date_today();
-    m_game->set_modified(false);
+    m_game->clear_modified();
     m_wasModified = false;
     m_computerColors.fill(false);
     QSettings settings;
@@ -2252,7 +2252,7 @@ void MainWindow::newRatedGame()
             m_game->set_player_name(*i, humanPlayerNameStdStr);
     // Setting the player names marks the game as modified but there is nothing
     // important that would need to be saved yet
-    m_game->set_modified(false);
+    m_game->clear_modified();
     deleteAutoSaveFile();
     updateWindow(true);
     checkComputerMove();
@@ -2594,8 +2594,8 @@ void MainWindow::save()
     }
     if (save(m_file))
     {
-        m_wasModified = m_game->get_modified();
-        m_game->set_modified(false);
+        m_wasModified = m_game->is_modified();
+        m_game->clear_modified();
         updateWindow(false);
     }
 }
@@ -2642,8 +2642,8 @@ void MainWindow::saveAs()
     {
         if (save(file))
         {
-            m_wasModified = m_game->get_modified();
-            m_game->set_modified(false);
+            m_wasModified = m_game->is_modified();
+            m_game->clear_modified();
             updateWindow(false);
         }
         setFile(file);
@@ -3539,9 +3539,9 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
-    m_actionNew->setEnabled(m_isRated || m_game->get_modified()
+    m_actionNew->setEnabled(m_isRated || m_game->is_modified()
                             || m_wasModified);
-    m_actionNewRatedGame->setEnabled(! m_isRated || m_game->get_modified()
+    m_actionNewRatedGame->setEnabled(! m_isRated || m_game->is_modified()
                                      || m_wasModified);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPlay->setEnabled(hasMoves);
@@ -3555,7 +3555,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
 
 void MainWindow::updateWindowModified()
 {
-    bool modified = m_game->get_modified();
+    bool modified = m_game->is_modified();
     m_actionSave->setEnabled(modified);
     if (! m_file.isEmpty())
         setWindowModified(modified);
