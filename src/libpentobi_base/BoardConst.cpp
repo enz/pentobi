@@ -574,24 +574,28 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         m_transforms.reset(new PieceTransformsTrigon());
         m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_trigon);
+        m_move_info_ext.reserve(Move::onboard_moves_trigon);
     }
     else if (board_type == board_type_trigon_3)
     {
         m_transforms.reset(new PieceTransformsTrigon());
         m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_trigon_3);
+        m_move_info_ext.reserve(Move::onboard_moves_trigon_3);
     }
     else if (board_type == board_type_classic)
     {
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_classic);
+        m_move_info_ext.reserve(Move::onboard_moves_classic);
     }
     else if (variant == variant_junior)
     {
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_junior(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_junior);
+        m_move_info_ext.reserve(Move::onboard_moves_junior);
     }
     else
     {
@@ -599,6 +603,7 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
         m_move_info.reserve(Move::onboard_moves_duo);
+        m_move_info_ext.reserve(Move::onboard_moves_duo);
     }
     m_nu_pieces = static_cast<unsigned>(m_pieces.size());
     m_max_attach_points.fill(0);
