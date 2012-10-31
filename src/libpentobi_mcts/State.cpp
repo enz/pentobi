@@ -448,22 +448,34 @@ void State::dump(ostream& out) const
 
 array<Float,4> State::evaluate_playout()
 {
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken
-        && m_bd.get_nu_onboard_pieces() >= 3)
+    // Always evaluate symmetric positions as a draw in the playouts. This
+    // will encourage the first player to break the symmetry and the second
+    // player to preserve it. (Exception: don't do this if the move number is
+    // less than 3 in Duo/Junior or 5 in Trigon because this is the earliest
+    // time to break the symmetry; otherwise all moves are evaluated as draw,
+    // which can case bad move selection in very short searches.)
+    if (m_check_symmetric_draw && ! m_is_symmetry_broken)
     {
-        // Always evaluate symmetric positions as a draw in the playouts.
-        // This will encourage the first player to break the symmetry and
-        // the second player to preserve it. (Exception: don't do this if
-        // the move number is less than 3 because the earliest time to break
-        // the symmetry is move 3 and otherwise all moves are evaluated as
-        // draw in very short searches.)
-        if (log_simulations)
-            log() << "Result: 0.5 (symmetry)\n";
-        m_stat_score.add(0);
-        array<Float,4> result;
-        result[0] = result[1] = 0.5;
-        return result;
+        Variant variant = m_bd.get_variant();
+        unsigned min_nu_pieces;
+        if (variant == variant_duo || variant == variant_junior)
+            min_nu_pieces = 3;
+        else
+        {
+            LIBBOARDGAME_ASSERT(variant == variant_trigon_2);
+            min_nu_pieces = 5;
+        }
+        if (m_bd.get_nu_onboard_pieces() >= min_nu_pieces)
+        {
+            if (log_simulations)
+                log() << "Result: 0.5 (symmetry)\n";
+            m_stat_score.add(0);
+            array<Float,4> result;
+            result[0] = result[1] = 0.5;
+            return result;
+        }
     }
+
     return evaluate_terminal();
 }
 
