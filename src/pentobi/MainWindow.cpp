@@ -340,7 +340,6 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         {
             open(autoSaveFile, true);
             m_gameFinished = getBoard().is_game_over();
-            updateWindow(true);
             deleteAutoSaveFile();
             if (settings.value("autosave_rated", false).toBool())
             {
@@ -356,6 +355,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                         if (bd.is_same_player(*i, m_ratedGameColor))
                             m_computerColors[*i] = false;
                     setRated(true);
+                    updateWindow(true);
                     show();
                     showInfo(tr("Continuing unfinished rated game."),
                              tr("You play %1 in this game.")
@@ -363,6 +363,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                     checkComputerMove();
                 }
             }
+            else
+                updateWindow(true);
         }
     }
 }
@@ -1975,6 +1977,7 @@ void MainWindow::initGame()
 #endif
     m_game->set_date_today();
     m_game->set_modified(false);
+    m_wasModified = false;
     m_computerColors.fill(false);
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
@@ -2247,6 +2250,9 @@ void MainWindow::newRatedGame()
             m_game->set_player_name(*i, computerPlayerNameStdStr);
         else
             m_game->set_player_name(*i, humanPlayerNameStdStr);
+    // Setting the player names marks the game as modified but there is nothing
+    // important that would need to be saved yet
+    m_game->set_modified(false);
     deleteAutoSaveFile();
     updateWindow(true);
     checkComputerMove();
@@ -2323,6 +2329,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
+        m_wasModified = true;
         m_game->init(tree);
         if (! libpentobi_base::node_util::has_setup(m_game->get_root()))
             m_game->goto_node(get_last_node(m_game->get_root()));
@@ -2333,9 +2340,6 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     {
         showInvalidFile(file, e);
     }
-    if (isTemporary)
-        // Set as modified to enable the Save action in updateWindowModified()
-        m_game->set_modified(true);
     m_computerColors.fill(false);
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
@@ -2590,6 +2594,7 @@ void MainWindow::save()
     }
     if (save(m_file))
     {
+        m_wasModified = m_game->get_modified();
         m_game->set_modified(false);
         updateWindow(false);
     }
@@ -2637,6 +2642,7 @@ void MainWindow::saveAs()
     {
         if (save(file))
         {
+            m_wasModified = m_game->get_modified();
             m_game->set_modified(false);
             updateWindow(false);
         }
@@ -3533,6 +3539,10 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
+    m_actionNewGame->setEnabled(m_isRated || m_game->get_modified()
+                                || m_wasModified);
+    m_actionNewRatedGame->setEnabled(! m_isRated || m_game->get_modified()
+                                     || m_wasModified);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPlay->setEnabled(hasMoves);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
