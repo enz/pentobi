@@ -40,8 +40,17 @@ struct MoveInfoExt
 
     AttachPoints attach_points;
 
+    /** Whether the move breaks rotational symmetry of the board.
+        Currently not initialized for classic and trigon_3 board types because
+        enforced rotational-symmetric draws are not used in the MCTS search on
+        these boards (trigon_3 has no 2-player game variant and classic_2
+        currently only supports colored starting points, which makes rotational
+        draws impossible. */
     bool breaks_symmetry;
 
+    /** The rotational-symmetric counterpart to this move.
+        Currently not initialized for classic and trigon_3 board types (see
+        comment at breaks_symmetry. */
     Move symmetric_move;
 
     Point center;

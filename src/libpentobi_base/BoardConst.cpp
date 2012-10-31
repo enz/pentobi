@@ -637,7 +637,9 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         LIBBOARDGAME_ASSERT(m_nu_pieces == 22);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 110);
     }
-    init_symmetry_info();
+    if (variant == variant_duo || variant == variant_junior
+        || variant == variant_trigon_2)
+        init_symmetry_info();
 }
 
 void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
@@ -651,6 +653,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     info.piece = piece;
     info.points = points;
     info_ext.center = center;
+    info_ext.symmetric_move = Move::null();
     set_adj_and_attach_points(info, info_ext);
     m_move_info.push_back(info);
     m_move_info_ext.push_back(info_ext);
