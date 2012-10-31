@@ -3507,7 +3507,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionSetupMode->setEnabled(! hasParent && ! hasChildren);
     m_actionTruncate->setEnabled(hasParent);
     m_actionTruncateChildren->setEnabled(hasChildren);
-    m_actionUndo->setEnabled(hasParent || ! hasChildren || hasMove);
+    m_actionUndo->setEnabled(hasParent && ! hasChildren && hasMove);
 }
 
 void MainWindow::updateWindowModified()
