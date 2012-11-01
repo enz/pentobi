@@ -789,6 +789,7 @@ const BoardConst& BoardConst::get(Variant variant)
     static unique_ptr<BoardConst> board_const_duo;
     static unique_ptr<BoardConst> board_const_junior;
     static unique_ptr<BoardConst> board_const_trigon;
+    static unique_ptr<BoardConst> board_const_trigon_2;
     static unique_ptr<BoardConst> board_const_trigon_3;
     if (variant == variant_classic || variant == variant_classic_2)
     {
@@ -811,12 +812,19 @@ const BoardConst& BoardConst::get(Variant variant)
                                                     variant_junior));
         return *board_const_junior;
     }
-    else if (variant == variant_trigon || variant == variant_trigon_2)
+    else if (variant == variant_trigon)
     {
         if (board_const_trigon.get() == 0)
             board_const_trigon.reset(new BoardConst(board_type_trigon,
                                                     variant_trigon));
         return *board_const_trigon;
+    }
+    else if (variant == variant_trigon_2)
+    {
+        if (board_const_trigon_2.get() == 0)
+            board_const_trigon_2.reset(new BoardConst(board_type_trigon,
+                                                      variant_trigon_2));
+        return *board_const_trigon_2;
     }
     else
     {
