@@ -277,12 +277,13 @@ inline PlayerMove<Move> State::get_move(unsigned n) const
     return PlayerMove<Move>(mv.color.to_int(), mv.move);
 }
 
-inline const MoveInfo& State::get_move_info(Move move) const
+inline const MoveInfo& State::get_move_info(Move mv) const
 {
-    LIBBOARDGAME_ASSERT(move.to_int()
+    LIBBOARDGAME_ASSERT(! mv.is_null());
+    LIBBOARDGAME_ASSERT(mv.to_int()
                         < m_shared_const.board->get_board_const()
                           .get_nu_all_moves());
-    return *(m_move_info_array + move.to_int());
+    return *(m_move_info_array + mv.to_int());
 }
 
 inline unsigned State::get_nu_moves() const
