@@ -73,21 +73,11 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 
 void ComputerColorDialog::accept()
 {
-    if (m_variant == variant_duo || m_variant == variant_junior)
+    unsigned nu_colors = get_nu_colors(m_variant);
+    if (get_nu_players(m_variant) == nu_colors)
     {
-        for (ColorIterator i(2); i; ++i)
+        for (ColorIterator i(nu_colors); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
-    }
-    else if (m_variant == variant_classic || m_variant == variant_trigon)
-    {
-        for (ColorIterator i(4); i; ++i)
-            m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
-    }
-    else if (m_variant == variant_trigon_3)
-    {
-        m_computerColor[Color(0)] = m_checkBox[0]->isChecked();
-        m_computerColor[Color(2)] = m_checkBox[0]->isChecked();
-        m_computerColor[Color(1)] = m_checkBox[1]->isChecked();
     }
     else
     {

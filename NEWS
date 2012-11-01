@@ -1,7 +1,9 @@
 Current development version (branch v4-fixes)
 =============================================
 
-* The Undo menu item is now disabled when it is not applicable
+* Setting the computer color for Red with the computer colors dialog did
+  not work for game variant Trigon Three-Player
+* Disable Undo menu item when it is not applicable
 
 
 Version 4.2 (7 Oct 2012)
