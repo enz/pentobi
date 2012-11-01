@@ -242,8 +242,13 @@ void Search::write_info(ostream& out) const
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
         out << "All:";
-        BOOST_FOREACH(const StatisticsBase<Float>& i, get_root_val())
-            out << (format(" %.2f") % i.get_mean());
+        for (unsigned i = 0; i < libpentobi_base::get_nu_colors(m_variant); ++i)
+        {
+            if (get_root_val()[i].get_count() == 0)
+                out << " -";
+            else
+                out << (format(" %.2f") % get_root_val()[i].get_mean());
+        }
         out << ", ";
     }
     get_state().write_info(out);

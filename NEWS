@@ -4,6 +4,8 @@ Current development version (branch v4-fixes)
 * Setting the computer color for Red with the computer colors dialog did
   not work for game variant Trigon Three-Player
 * Disable Undo menu item when it is not applicable
+* Fixed an assertion at end of move generation in Trigon Three-Player if
+  Pentobi was compiled in debug mode
 
 
 Version 4.2 (7 Oct 2012)
