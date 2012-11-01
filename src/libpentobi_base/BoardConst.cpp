@@ -658,6 +658,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     info.piece = piece;
     info.points = points;
     info_ext.center = center;
+    info_ext.breaks_symmetry = false;
     info_ext.symmetric_move = Move::null();
     set_adj_and_attach_points(info, info_ext);
     m_move_info.push_back(info);
