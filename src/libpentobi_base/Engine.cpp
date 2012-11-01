@@ -151,10 +151,40 @@ void Engine::cmd_loadsgf(const Arguments& args)
     }
 }
 
-/** Return move info of a move given by its integer ID. */
+/** Return move info of a move given by its integer or string representation. */
 void Engine::cmd_move_info(const Arguments& args, Response& response)
 {
-    response << get_board().to_string(Move(args.get<unsigned>()), true);
+    const Board& bd = get_board();
+    Move mv;
+    try
+    {
+        mv = Move(args.get<unsigned>());
+    }
+    catch (const Failure&)
+    {
+        try
+        {
+            mv = bd.from_string(args.get());
+        }
+        catch (Exception&)
+        {
+            throw Failure(format(
+                           "invalid argument '%1%' (expected move or move ID)")
+                          % args.get());
+        }
+    }
+    const MoveInfo& info = bd.get_move_info(mv);
+    const MoveInfoExt& info_ext = bd.get_move_info_ext(mv);
+    response
+        << "\n"
+        << "ID:     " << mv.to_int() << "\n"
+        << "Piece:  " << info.piece.to_int()
+              << " (" << bd.get_piece_info(info.piece).get_name() << ")\n"
+        << "Points: " << info.points << "\n"
+        << "Adj:    " << info_ext.adj_points << "\n"
+        << "Attach: " << info_ext.attach_points << "\n"
+        << "BrkSym: " << info_ext.breaks_symmetry << "\n"
+        << "SymMv:  " << bd.to_string(info_ext.symmetric_move);
 }
 
 void Engine::cmd_p(const Arguments& args)
