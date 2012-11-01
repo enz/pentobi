@@ -148,12 +148,25 @@ inline void LocalValue::init(const Board& bd)
                 if (m_point_value[*j] == 0)
                     m_points.push_back(*j);
                 m_point_value[*j] = 0x10;
+                unsigned nu_adj = 0;
                 for (AdjIterator k(bd, *j); k; ++k)
-                    if (! bd.is_forbidden(*k, c) && m_point_value[*k] == 0)
+                    if (! bd.is_forbidden(*k, c))
                     {
-                        m_points.push_back(*k);
-                        m_point_value[*k] = 0x01;
+                        ++nu_adj;
+                        if (m_point_value[*k] == 0)
+                        {
+                            m_points.push_back(*k);
+                            m_point_value[*k] = 0x01;
+                        }
                     }
+                // If occupying the attach point is forbidden for us but there
+                // is only one adjacent point missing to make it a 1-point
+                // hole for the opponent, then occupying this adjacent
+                // point is (almost) as good as occupying the attach point.
+                if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
+                    for (AdjIterator k(bd, *j); k; ++k)
+                        if (! bd.is_forbidden(*k, c))
+                            m_point_value[*k] = 0x10;
             }
             ++j;
         }
