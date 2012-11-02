@@ -22,42 +22,42 @@
         <translation>Spiel-Info</translation>
     </message>
     <message>
-        <location filename="GameInfoDialog.cpp" line="44"/>
-        <location filename="GameInfoDialog.cpp" line="50"/>
-        <location filename="GameInfoDialog.cpp" line="57"/>
+        <location filename="GameInfoDialog.cpp" line="42"/>
+        <location filename="GameInfoDialog.cpp" line="48"/>
+        <location filename="GameInfoDialog.cpp" line="55"/>
         <source>Player Blue:</source>
         <translation>Spieler Blau:</translation>
     </message>
     <message>
-        <location filename="GameInfoDialog.cpp" line="45"/>
-        <location filename="GameInfoDialog.cpp" line="53"/>
+        <location filename="GameInfoDialog.cpp" line="43"/>
+        <location filename="GameInfoDialog.cpp" line="51"/>
         <source>Player Green:</source>
         <translation>Spieler Grün:</translation>
     </message>
     <message>
-        <location filename="GameInfoDialog.cpp" line="51"/>
-        <location filename="GameInfoDialog.cpp" line="58"/>
+        <location filename="GameInfoDialog.cpp" line="49"/>
+        <location filename="GameInfoDialog.cpp" line="56"/>
         <source>Player Yellow:</source>
         <translation>Spieler Gelb:</translation>
     </message>
     <message>
-        <location filename="GameInfoDialog.cpp" line="52"/>
-        <location filename="GameInfoDialog.cpp" line="59"/>
+        <location filename="GameInfoDialog.cpp" line="50"/>
+        <location filename="GameInfoDialog.cpp" line="57"/>
         <source>Player Red:</source>
         <translation>Spieler Rot:</translation>
     </message>
     <message>
-        <location filename="GameInfoDialog.cpp" line="65"/>
+        <location filename="GameInfoDialog.cpp" line="63"/>
         <source>Player Blue/Red:</source>
         <translation>Spieler Blau/Rot:</translation>
     </message>
     <message>
-        <location filename="GameInfoDialog.cpp" line="67"/>
+        <location filename="GameInfoDialog.cpp" line="65"/>
         <source>Player Yellow/Green:</source>
         <translation>Spieler Gelb/Grün:</translation>
     </message>
     <message>
-        <location filename="GameInfoDialog.cpp" line="69"/>
+        <location filename="GameInfoDialog.cpp" line="67"/>
         <source>Date:</source>
         <translation>Datum:</translation>
     </message>
@@ -75,14 +75,29 @@
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="49"/>
+        <location filename="HelpWindow.cpp" line="44"/>
+        <source>Show previous page in history</source>
+        <translation>Die vorherige Seite in der Chronik anzeigen</translation>
+    </message>
+    <message>
+        <location filename="HelpWindow.cpp" line="50"/>
         <source>Forward</source>
         <translation>Vorwärts</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="55"/>
-        <source>Home</source>
-        <translation>Startseite</translation>
+        <location filename="HelpWindow.cpp" line="51"/>
+        <source>Show next page in history</source>
+        <translation>Die nächste Seite in der Chronik anzeigen</translation>
+    </message>
+    <message>
+        <location filename="HelpWindow.cpp" line="57"/>
+        <source>Contents</source>
+        <translation>Inhalt</translation>
+    </message>
+    <message>
+        <location filename="HelpWindow.cpp" line="58"/>
+        <source>Show table of contents</source>
+        <translation>Das Inhaltsverzeichnis anzeigen</translation>
     </message>
 </context>
 <context>
