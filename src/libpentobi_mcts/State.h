@@ -257,8 +257,6 @@ private:
 
     void init_move_list_without_local(Color c);
 
-    void init_symmetry_info();
-
     void play_pass();
 
     void play_nonpass(Move mv);
@@ -268,7 +266,9 @@ private:
 
     void update_move_list(Color c);
 
-    void update_symmetry_info(Move mv);
+    bool check_symmetry_broken();
+
+    void update_symmetry_broken(Move mv);
 };
 
 inline PlayerMove<Move> State::get_move(unsigned n) const

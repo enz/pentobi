@@ -212,6 +212,26 @@ PointState get_symmetric_state(PointState s)
     }
 }
 
+/** Check for a minimum number of pieces on board to perform a symmetry check.
+    Checks for 3 in Duo/Junior or 5 in Trigon because this is the earliest move
+    number to break the symmetry. The early playout termination that evaluates
+    all symmetric positions as a draw should not be used earlier because it
+    can case bad move selection in very short searches if all moves are
+    evaluated as draw and the search is not deep enough to find that the
+    symmetry can be broken a few moves later. */
+bool check_symmetry_min_nu_pieces(const Board& bd)
+{
+    Variant variant = bd.get_variant();
+    unsigned nu_pieces = bd.get_nu_onboard_pieces();
+    if (variant == variant_duo || variant == variant_junior)
+        return nu_pieces >= 3;
+    else
+    {
+        LIBBOARDGAME_ASSERT(variant == variant_trigon_2);
+        return nu_pieces >= 5;
+    }
+}
+
 bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
 {
     for (DiagIterator i(bd, p); i; ++i)
@@ -440,6 +460,58 @@ void State::compute_features()
     }
 }
 
+bool State::check_symmetry_broken()
+{
+    Color to_play = m_bd.get_to_play();
+    if (to_play == Color(0) || to_play == Color(2))
+    {
+        // First player to play: the symmetry is broken if the position is
+        // not symmetric.
+        for (BoardIterator i(m_bd); i; ++i)
+        {
+            Point symm_p = m_shared_const.symmetric_points[*i];
+            PointState s1 = m_bd.get_point_state(*i);
+            PointState s2 = m_bd.get_point_state(symm_p);
+            if (s1 != get_symmetric_state(s2))
+                return true;
+        }
+    }
+    else
+    {
+        // Second player to play: the symmetry is broken if the second player
+        // cannot copy the first player's last move to make the position
+        // symmetric again.
+        unsigned nu_moves = m_bd.get_nu_moves();
+        if (nu_moves == 0)
+            // Don't try to handle the case if the second player has to play as
+            // first move (e.g. in setup positions)
+            return true;
+        Color previous_color = m_bd.get_previous(to_play);
+        ColorMove last_mv = m_bd.get_move(nu_moves - 1);
+        if (last_mv.color != previous_color || last_mv.move.is_pass())
+            // Don't try to handle non-alternating moves or pass moves in
+            // board history
+            return true;
+        const MovePoints& points = m_bd.get_move_info(last_mv.move).points;
+        for (BoardIterator i(m_bd); i; ++i)
+        {
+            Point symm_p = m_shared_const.symmetric_points[*i];
+            PointState s1 = m_bd.get_point_state(*i);
+            PointState s2 = m_bd.get_point_state(symm_p);
+            if (s1 != get_symmetric_state(s2))
+            {
+                if ((points.contains(*i)
+                     && s1 == previous_color && s2.is_empty())
+                    || (points.contains(symm_p)
+                        && s1.is_empty() && s2 == previous_color))
+                    continue;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void State::dump(ostream& out) const
 {
     out << "pentobi_mcts::State:\n";
@@ -450,30 +522,16 @@ array<Float,4> State::evaluate_playout()
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
     // will encourage the first player to break the symmetry and the second
-    // player to preserve it. (Exception: don't do this if the move number is
-    // less than 3 in Duo/Junior or 5 in Trigon because this is the earliest
-    // time to break the symmetry; otherwise all moves are evaluated as draw,
-    // which can case bad move selection in very short searches.)
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+    // player to preserve it.
+    if (m_check_symmetric_draw && ! m_is_symmetry_broken
+        && check_symmetry_min_nu_pieces(m_bd))
     {
-        Variant variant = m_bd.get_variant();
-        unsigned min_nu_pieces;
-        if (variant == variant_duo || variant == variant_junior)
-            min_nu_pieces = 3;
-        else
-        {
-            LIBBOARDGAME_ASSERT(variant == variant_trigon_2);
-            min_nu_pieces = 5;
-        }
-        if (m_bd.get_nu_onboard_pieces() >= min_nu_pieces)
-        {
-            if (log_simulations)
-                log() << "Result: 0.5 (symmetry)\n";
-            m_stat_score.add(0);
-            array<Float,4> result;
-            result[0] = result[1] = 0.5;
-            return result;
-        }
+        if (log_simulations)
+            log() << "Result: 0.5 (symmetry)\n";
+        m_stat_score.add(0);
+        array<Float,4> result;
+        result[0] = result[1] = 0.5;
+        return result;
     }
 
     return evaluate_terminal();
@@ -535,14 +593,14 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         return true;
     }
 
-    if (m_check_symmetric_draw)
-        if (! m_is_symmetry_broken && m_bd.get_nu_onboard_pieces() >= 3)
-        {
-            // See also the comment in evaluate_playout()
-            if (log_simulations)
-                log() << "Terminate playout. Symmetry not broken.\n";
-            return false;
-        }
+    if (m_check_symmetric_draw && ! m_is_symmetry_broken
+        && check_symmetry_min_nu_pieces(m_bd))
+    {
+        // See also the comment in evaluate_playout()
+        if (log_simulations)
+            log() << "Terminate playout. Symmetry not broken.\n";
+        return false;
+    }
     ++m_nu_playout_moves;
     Move mv;
     if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply)
@@ -600,7 +658,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
         return;
     Color to_play = m_bd.get_to_play();
     init_move_list_without_local(to_play);
-    init_symmetry_info();
+    if (m_check_symmetric_draw)
+        m_is_symmetry_broken = check_symmetry_broken();
     m_extended_update = true;
     const MoveList& moves = m_moves[to_play];
     if (moves.empty())
@@ -682,25 +741,23 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
 
         // Encourage to explore a move that keeps or breaks symmetry
         // See also the comment in evaluate_playout()
-        if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+        if (! symmetric_mv.is_null())
         {
-            if (to_play == Color(1))
-            {
-                if (mv == symmetric_mv)
-                    value += 5 * 1.0f;
-                else
-                    value += 5 * 0.1f;
-                count += 5;
-            }
-            else if (has_symmetry_breaker)
-            {
-                if (m_bd.get_move_info_ext(mv).breaks_symmetry)
-                    value += 5 * 1.0f;
-                else
-                    value += 5 * 0.1f;
-                count += 5;
-            }
+            if (mv == symmetric_mv)
+                value += 5 * 1.0f;
+            else
+                value += 5 * 0.1f;
+            count += 5;
         }
+        else if (has_symmetry_breaker)
+        {
+            if (m_bd.get_move_info_ext(mv).breaks_symmetry)
+                value += 5 * 1.0f;
+            else
+                value += 5 * 0.1f;
+            count += 5;
+        }
+
         value /= count;
         expander.add_child(mv, value, count, value, count);
     }
@@ -819,69 +876,6 @@ void State::init_move_list_without_local(Color c)
     }
 }
 
-void State::init_symmetry_info()
-{
-    if (! m_check_symmetric_draw)
-        return;
-    m_is_symmetry_broken = false;
-    Color to_play = m_bd.get_to_play();
-    if (to_play == Color(0) || to_play == Color(2))
-    {
-        // First player to play: We set m_is_symmetry_broken to true if the
-        // position is symmetric.
-        for (BoardIterator i(m_bd); i; ++i)
-        {
-            Point symm_p = m_shared_const.symmetric_points[*i];
-            PointState s1 = m_bd.get_point_state(*i);
-            PointState s2 = m_bd.get_point_state(symm_p);
-            if (s1 != get_symmetric_state(s2))
-            {
-                m_is_symmetry_broken = true;
-                return;
-            }
-        }
-    }
-    else
-    {
-        // Second player to play: We set m_is_symmetry_broken to true if the
-        // second player cannot copy the first player's last move to make the
-        // position symmetric again.
-        unsigned nu_moves = m_bd.get_nu_moves();
-        if (nu_moves == 0)
-        {
-            // Don't try to handle white to play as first move
-            m_is_symmetry_broken = true;
-            return;
-        }
-        Color previous_color = m_bd.get_previous(to_play);
-        ColorMove last_mv = m_bd.get_move(nu_moves - 1);
-        if (last_mv.color != previous_color || last_mv.move.is_pass())
-        {
-            // Don't try to handle non-alternating moves or pass moves in
-            // board history
-            m_is_symmetry_broken = true;
-            return;
-        }
-        const MovePoints& points = m_bd.get_move_info(last_mv.move).points;
-        for (BoardIterator i(m_bd); i; ++i)
-        {
-            Point symm_p = m_shared_const.symmetric_points[*i];
-            PointState s1 = m_bd.get_point_state(*i);
-            PointState s2 = m_bd.get_point_state(symm_p);
-            if (s1 != get_symmetric_state(s2))
-            {
-                if ((points.contains(*i)
-                     && s1 == previous_color && s2.is_empty())
-                    || (points.contains(symm_p)
-                        && s1.is_empty() && s2 == previous_color))
-                    continue;
-                m_is_symmetry_broken = true;
-                return;
-            }
-        }
-    }
-}
-
 void State::play_pass()
 {
     Color to_play = m_bd.get_to_play();
@@ -923,7 +917,7 @@ void State::play_nonpass(Move mv)
         else
             init_move_list_with_local(to_play);
         if (m_check_symmetric_draw && ! m_is_symmetry_broken)
-            update_symmetry_info(mv);
+            update_symmetry_broken(mv);
     }
     if (log_simulations)
         log() << m_bd;
@@ -944,7 +938,8 @@ void State::start_playout()
     if (! m_extended_update)
     {
         init_move_list_with_local(m_bd.get_to_play());
-        init_symmetry_info();
+        if (m_check_symmetric_draw)
+            m_is_symmetry_broken = check_symmetry_broken();
         m_extended_update = true;
     }
 }
@@ -974,7 +969,8 @@ void State::start_search()
          && m_shared_const.detect_symmetry
          && ! ((m_shared_const.to_play == Color(1)
                 || m_shared_const.to_play == Color(3))
-               && m_shared_const.avoid_symmetric_draw));
+               && m_shared_const.avoid_symmetric_draw)
+         && ! check_symmetry_broken());
 
     // Init m_dist_to_center
     m_dist_to_center.init(geometry);
@@ -1111,7 +1107,7 @@ void State::update_move_list(Color c)
     }
 }
 
-void State::update_symmetry_info(Move mv)
+void State::update_symmetry_broken(Move mv)
 {
     LIBBOARDGAME_ASSERT(! mv.is_pass());
     const MovePoints& points = get_move_info(mv).points;
