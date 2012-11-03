@@ -552,7 +552,7 @@
     <message>
         <location filename="MainWindow.cpp" line="1223"/>
         <source>&amp;Undo Move</source>
-        <translation>&amp;Zug zurücknehmen</translation>
+        <translation>&amp;Zug rückgängig</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1226"/>
