@@ -18,11 +18,12 @@
 #include "libpentobi_gui/OrientationDisplay.h"
 #include "libpentobi_gui/PieceSelector.h"
 #include "libpentobi_gui/ScoreDisplay.h"
-#include "libpentobi_gui/StatusBarButton.h"
 
 class QActionGroup;
 class QPlainTextEdit;
+class QPropertyAnimation;
 class QSplitter;
+class QToolButton;
 
 using namespace std;
 using libboardgame_sgf::Node;
@@ -205,6 +206,8 @@ public slots:
     void truncateChildren();
 
     void undo();
+
+    void showToolbar(bool checked);
 
     void showVariations(bool checked);
 
@@ -399,6 +402,8 @@ private:
 
     QAction* m_actionKeepOnlySubtree;
 
+    QAction* m_actionLeaveFullscreen;
+
     QAction* m_actionLevel[maxLevel];
 
     QAction* m_actionMakeMainVariation;
@@ -531,16 +536,6 @@ private:
 
     QLabel* m_ratedGameLabel;
 
-    /** Tool button in status bar to provide a way to leave fullscreen (only
-        used in Ubuntu Unity.
-        Unity does not show the menu bar and the user may not remember the
-        keyboard shortcut for m_actionFullscreen (problem still exists in
-        Ubuntu 12.10; see also
-        // http://bugs.launchpad.net/indicator-appmenu/+bug/591189).
-        Not necessary in other desktop environments because they still show
-        the menu bar.*/
-    StatusBarButton* m_buttonFullscreen;
-
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
     QString m_file;
@@ -551,6 +546,16 @@ private:
 
     QLabel* m_moveNumber;
 
+    QToolButton* m_fullscreenButton;
+
+    QWidget* m_fullscreenButtonTrigger;
+
+    QPoint m_fullscreenButtonPos;
+
+    QTimer m_fullscreenButtonTimer;
+
+    QPropertyAnimation* m_fullscreenButtonAnimation;
+
     GenMoveResult asyncGenMove(Color c, int genMoveId, bool playSingleMove);
 
     bool checkSave();
@@ -558,6 +563,8 @@ private:
     bool checkQuit();
 
     void clearFile();
+
+    QAction* createAction(const QString& text = "");
 
     void createActions();
 
@@ -699,6 +706,8 @@ private slots:
 
     void interestingMove(bool checked);
 
+    void leaveFullscreen();
+
     void noMoveAnnotation(bool checked);
 
     void openRecentFile();
@@ -726,7 +735,11 @@ private slots:
 
     void showComment(bool checked);
 
+    void showFullscreenButton();
+
     void showThinking();
+
+    void slideOutFullscreenButton();
 
     void veryBadMove(bool checked);
 
