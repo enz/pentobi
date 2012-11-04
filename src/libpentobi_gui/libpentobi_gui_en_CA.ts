@@ -129,6 +129,14 @@
     </message>
 </context>
 <context>
+    <name>LeaveFullscreenButton</name>
+    <message>
+        <location filename="LeaveFullscreenButton.cpp" line="27"/>
+        <source>Leave Fullscreen</source>
+        <translation>Leave Fullscreen</translation>
+    </message>
+</context>
+<context>
     <name>Util</name>
     <message>
         <location filename="Util.cpp" line="235"/>

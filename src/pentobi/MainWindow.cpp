@@ -24,7 +24,6 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QPlainTextEdit>
-#include <QPropertyAnimation>
 #include <QPushButton>
 #include <QSettings>
 #include <QSplitter>
@@ -43,6 +42,7 @@
 #include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
 #include "libpentobi_gui/InitialRatingDialog.h"
+#include "libpentobi_gui/LeaveFullscreenButton.h"
 #include "libpentobi_gui/SameHeightLayout.h"
 #include "libpentobi_gui/Util.h"
 
@@ -210,7 +210,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
       m_ratingDialog(0),
       m_analyzeGameWindow(0),
       m_legalMoves(new MoveList()),
-      m_fullscreenButton(0)
+      m_leaveFullscreenButton(0)
 {
     QSettings settings;
     m_level = settings.value("level", 4).toInt();
@@ -1515,12 +1515,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     // text in the status line (e.g. the "The computer is thinking..." status)
     if (event->type() == QEvent::StatusTip)
         return true;
-
-    if (event->type() == QEvent::MouseMove
-        && (object == m_fullscreenButtonTrigger
-            || object == m_fullscreenButton))
-        showFullscreenButton();
-
     return QMainWindow::eventFilter(object, event);
 }
 
@@ -1694,36 +1688,13 @@ void MainWindow::fullscreen(bool checked)
         menuBar()->hide();
         m_toolBar->hide();
         showFullScreen();
-        if (m_fullscreenButton == 0)
+        if (m_leaveFullscreenButton == 0)
         {
-            m_fullscreenButtonTrigger = new QWidget(this);
-            m_fullscreenButtonTrigger->setMouseTracking(true);
-            m_fullscreenButton = new QToolButton(this);
-            m_fullscreenButton->setDefaultAction(m_actionLeaveFullscreen);
-            m_fullscreenButton->setToolTip("");
-            m_fullscreenButtonTimer.setSingleShot(true);
-            m_fullscreenButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
-            // Resize to size hint as a workaround for a bug that clips the
-            // text (if it is long; tested on Qt 4.8.3 on Linux/KDE).
-            m_fullscreenButton->resize(m_fullscreenButton->sizeHint());
-            int x =
-                qApp->desktop()->screenGeometry().width()
-                - m_fullscreenButton->width();
-            m_fullscreenButtonPos = QPoint(x, 0);
-            m_fullscreenButtonTrigger->resize(m_fullscreenButton->size());
-            m_fullscreenButtonTrigger->move(m_fullscreenButtonPos);
-            connect(&m_fullscreenButtonTimer, SIGNAL(timeout()),
-                    this, SLOT(slideOutFullscreenButton()));
-            m_fullscreenButtonAnimation =
-                new QPropertyAnimation(m_fullscreenButton, "pos");
-            m_fullscreenButtonAnimation->setDuration(3000);
-            m_fullscreenButtonAnimation->setStartValue(m_fullscreenButtonPos);
-            // Don't slide it out completely, leave a few pixels visible
-            m_fullscreenButtonAnimation->setEndValue(
-                                 QPoint(x, -m_fullscreenButton->height() + 5));
+            m_leaveFullscreenButton = new LeaveFullscreenButton(this);
+            connect(m_leaveFullscreenButton, SIGNAL(clicked()),
+                    this, SLOT(leaveFullscreen()));
         }
-        m_fullscreenButton->show();
-        showFullscreenButton();
+        m_leaveFullscreenButton->showButton();
     }
     else
     {
@@ -1731,9 +1702,7 @@ void MainWindow::fullscreen(bool checked)
         bool showToolbar = settings.value("toolbar", true).toBool();
         menuBar()->show();
         m_toolBar->setVisible(showToolbar);
-        m_fullscreenButton->hide();
-        m_fullscreenButtonTrigger->hide();
-        m_fullscreenButtonTimer.stop();
+        m_leaveFullscreenButton->hideButton();
         showNormal();
     }
 }
@@ -3065,14 +3034,6 @@ void MainWindow::showError(const QString& text, const QString& infoText,
     showMessage(QMessageBox::Critical, text, infoText, detailText);
 }
 
-void MainWindow::showFullscreenButton()
-{
-    m_fullscreenButton->move(m_fullscreenButtonPos);
-    m_fullscreenButtonTrigger->hide();
-    m_fullscreenButtonAnimation->stop();
-    m_fullscreenButtonTimer.start(5000);
-}
-
 void MainWindow::showInfo(const QString& text, const QString& infoText,
                           const QString& detailText, bool withIcon)
 {
@@ -3232,12 +3193,6 @@ void MainWindow::showToolbar(bool checked)
 QSize MainWindow::sizeHint() const
 {
     return QSize(1020, 634);
-}
-
-void MainWindow::slideOutFullscreenButton()
-{
-    m_fullscreenButtonTrigger->show();
-    m_fullscreenButtonAnimation->start();
 }
 
 void MainWindow::truncate()

@@ -21,9 +21,8 @@
 
 class QActionGroup;
 class QPlainTextEdit;
-class QPropertyAnimation;
 class QSplitter;
-class QToolButton;
+class LeaveFullscreenButton;
 
 using namespace std;
 using libboardgame_sgf::Node;
@@ -546,15 +545,7 @@ private:
 
     QLabel* m_moveNumber;
 
-    QToolButton* m_fullscreenButton;
-
-    QWidget* m_fullscreenButtonTrigger;
-
-    QPoint m_fullscreenButtonPos;
-
-    QTimer m_fullscreenButtonTimer;
-
-    QPropertyAnimation* m_fullscreenButtonAnimation;
+    LeaveFullscreenButton* m_leaveFullscreenButton;
 
     GenMoveResult asyncGenMove(Color c, int genMoveId, bool playSingleMove);
 
@@ -735,11 +726,7 @@ private slots:
 
     void showComment(bool checked);
 
-    void showFullscreenButton();
-
     void showThinking();
-
-    void slideOutFullscreenButton();
 
     void veryBadMove(bool checked);
 

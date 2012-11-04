@@ -13,6 +13,7 @@ set(pentobi_gui_STAT_SRCS
   GuiBoardUtil.cpp
   HelpWindow.cpp
   InitialRatingDialog.cpp
+  LeaveFullscreenButton.cpp
   LineEdit.cpp
   OrientationDisplay.cpp
   PieceSelector.cpp
@@ -27,6 +28,7 @@ set(pentobi_gui_MOC_HDRS
   GuiBoard.h
   HelpWindow.h
   InitialRatingDialog.h
+  LeaveFullscreenButton.h
   LineEdit.h
   OrientationDisplay.h
   PieceSelector.h
