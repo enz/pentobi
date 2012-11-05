@@ -36,7 +36,7 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
     m_triggerArea->resize(QSize(m_button->width(), m_button->height() / 2));
     m_triggerArea->move(m_buttonPos);
     m_animation = new QPropertyAnimation(m_button, "pos");
-    m_animation->setDuration(2000);
+    m_animation->setDuration(1000);
     m_animation->setStartValue(m_buttonPos);
     m_animation->setEndValue(QPoint(x, -m_button->height() + 5));
     qApp->installEventFilter(this);
