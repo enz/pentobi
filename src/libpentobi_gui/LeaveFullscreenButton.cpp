@@ -41,7 +41,6 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
     m_animation->setEndValue(QPoint(x, -m_button->height() + 5));
     qApp->installEventFilter(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(slideOut()));
-    connect(m_button, SIGNAL(clicked(bool)), this, SLOT(handleClicked(bool)));
 }
 
 void LeaveFullscreenButton::hideButton()
