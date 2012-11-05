@@ -568,7 +568,10 @@ bool MainWindow::checkQuit()
             settings.setValue("autosave_rated_color",
                               m_ratedGameColor.to_int());
     }
-    settings.setValue("geometry", saveGeometry());
+    // Don't save geometry if fullscreen because restoring fullscreen can cause
+    // the window to appear below other windows on Gnome 2 (Debian 6.0)
+    if (! isFullScreen())
+        settings.setValue("geometry", saveGeometry());
     if (m_comment->isVisible())
         settings.setValue("splitter_state", m_splitter->saveState());
     return true;
@@ -1681,10 +1684,12 @@ void MainWindow::forward10()
 void MainWindow::fullscreen(bool checked)
 {
     m_actionFullscreen->setChecked(checked);
+    QSettings settings;
     if (checked)
     {
         menuBar()->hide();
         m_toolBar->hide();
+        settings.setValue("geometry", saveGeometry());
         showFullScreen();
         if (m_leaveFullscreenButton == 0)
             m_leaveFullscreenButton =
@@ -1693,7 +1698,6 @@ void MainWindow::fullscreen(bool checked)
     }
     else
     {
-        QSettings settings;
         bool showToolbar = settings.value("toolbar", true).toBool();
         menuBar()->show();
         m_toolBar->setVisible(showToolbar);
