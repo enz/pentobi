@@ -16,7 +16,7 @@
 
 //-----------------------------------------------------------------------------
 
-LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent)
+LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
     : QObject(parent)
 {
     m_timer = new QTimer();
@@ -24,7 +24,7 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent)
     m_triggerArea = new QWidget(parent);
     m_triggerArea->setMouseTracking(true);
     m_button = new QToolButton(parent);
-    m_button->setText(tr("Leave Fullscreen"));
+    m_button->setDefaultAction(action);
     m_button->setToolTip("");
     m_button->setToolButtonStyle(Qt::ToolButtonTextOnly);
     m_button->show();
@@ -42,11 +42,6 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent)
     qApp->installEventFilter(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(slideOut()));
     connect(m_button, SIGNAL(clicked(bool)), this, SLOT(handleClicked(bool)));
-}
-
-void LeaveFullscreenButton::handleClicked(bool)
-{
-    emit clicked();
 }
 
 void LeaveFullscreenButton::hideButton()

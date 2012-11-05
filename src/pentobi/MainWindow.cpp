@@ -1687,11 +1687,8 @@ void MainWindow::fullscreen(bool checked)
         m_toolBar->hide();
         showFullScreen();
         if (m_leaveFullscreenButton == 0)
-        {
-            m_leaveFullscreenButton = new LeaveFullscreenButton(this);
-            connect(m_leaveFullscreenButton, SIGNAL(clicked()),
-                    this, SLOT(leaveFullscreen()));
-        }
+            m_leaveFullscreenButton =
+                new LeaveFullscreenButton(this, m_actionLeaveFullscreen);
         m_leaveFullscreenButton->showButton();
     }
     else

@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QPoint>
 
+class QAction;
 class QPropertyAnimation;
 class QTimer;
 class QToolButton;
@@ -25,16 +26,20 @@ class LeaveFullscreenButton
     Q_OBJECT
 
 public:
-    LeaveFullscreenButton(QWidget* parent);
+    /** Constructor.
+        @param parent The widget that will become fullscreen. This class adds
+        two child widgets to the parent: the actual button and the trigger area
+        (an invisible widget that listens for mouse movements and triggers the
+        button to become visible again if it is slid out).
+        @param action The action for leaving fullscreen mode associated with
+        the button */
+    LeaveFullscreenButton(QWidget* parent, QAction* action);
 
     bool eventFilter(QObject* watched, QEvent* event);
 
     void showButton();
 
     void hideButton();
-
-signals:
-    void clicked();
 
 private:
     QToolButton* m_button;
@@ -48,8 +53,6 @@ private:
     QPropertyAnimation* m_animation;
 
 private slots:
-    void handleClicked(bool checked);
-
     void slideOut();
 };
 
