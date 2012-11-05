@@ -8,12 +8,11 @@
 
 #include "Util.h"
 
-#include <QCoreApplication>
 #include <QCryptographicHash>
+#include <QDesktopServices>
 #include <QDialog>
 #include <QDir>
 #include <QFileInfo>
-#include <QSettings>
 #include <QString>
 #include <QUrl>
 #include "libpentobi_mcts/Player.h"
@@ -27,27 +26,7 @@ namespace Util
 
 QString getDataDir()
 {
-    QString home = QDir::toNativeSeparators(QDir::home().path());
-    QChar sep = QDir::separator();
-    QString dir;
-#ifdef Q_WS_WIN
-    dir = home + sep + "AppData" + sep + "Roaming";
-    if (! QDir(dir).exists("Pentobi") && ! QDir(dir).mkpath("Pentobi"))
-        dir = home;
-    else
-        dir = dir + sep + "Pentobi";
-#else
-    const char* xdgDataHome = getenv("XDG_DATA_HOME");
-    if (xdgDataHome != 0)
-        dir = xdgDataHome;
-    else
-        dir = home + sep + ".local" + sep + "share";
-    if (! QDir(dir).exists("pentobi") && ! QDir(dir).mkpath("pentobi"))
-        dir = home;
-    else
-        dir = dir + sep + "pentobi";
-#endif
-    return dir;
+    return QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 }
 
 void removeThumbnail(const QString& file)
