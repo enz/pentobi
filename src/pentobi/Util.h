@@ -29,6 +29,9 @@ namespace Util
     changed (e.g. after saving). */
 void removeThumbnail(const QString& file);
 
+/** Return the platform-dependent directory for storing data for the current
+    application.
+    Also tries to create the directory if it doesn't exist yet. */
 QString getDataDir();
 
 /** Set an empty window title for message boxes and similar small dialogs. */

@@ -26,7 +26,12 @@ namespace Util
 
 QString getDataDir()
 {
-    return QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QString dataLocation =
+        QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    QDir dir(dataLocation);
+    if (! dir.exists())
+        dir.mkpath(dataLocation);
+    return dataLocation;
 }
 
 void removeThumbnail(const QString& file)
