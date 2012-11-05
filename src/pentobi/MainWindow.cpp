@@ -813,7 +813,7 @@ void MainWindow::createActions()
     connect(m_actionFullscreen, SIGNAL(triggered(bool)),
             this, SLOT(fullscreen(bool)));
 
-    m_actionGameInfo = createAction(tr("G&ame Info"));
+    m_actionGameInfo = createAction(tr("Ga&me Info"));
     m_actionGameInfo->setShortcut(QString("Ctrl+I"));
     connect(m_actionGameInfo, SIGNAL(triggered()), this, SLOT(gameInfo()));
 
@@ -1262,26 +1262,11 @@ QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
 
 void MainWindow::createMenu()
 {
-
-    QMenu* menuFile = menuBar()->addMenu(tr("&File"));
-    menuFile->addAction(m_actionOpen);
-    m_menuOpenRecent = menuFile->addMenu(tr("Open &Recent"));
-    for (int i = 0; i < maxRecentFiles; ++i)
-        m_menuOpenRecent->addAction(m_actionRecentFile[i]);
-    menuFile->addSeparator();
-    menuFile->addAction(m_actionSave);
-    menuFile->addAction(m_actionSaveAs);
-    QMenu* menuExport = menuFile->addMenu(tr("&Export"));
-    menuExport->addAction(m_actionExportImage);
-    menuExport->addAction(m_actionExportAsciiArt);
-    menuFile->addSeparator();
-    menuFile->addAction(m_actionQuit);
-
-    QMenu* menuGame = menuBar()->addMenu(tr("G&ame"));
+    QMenu* menuGame = menuBar()->addMenu(tr("&Game"));
     menuGame->addAction(m_actionNew);
     menuGame->addAction(m_actionNewRatedGame);
     menuGame->addSeparator();
-    QMenu* menuVariant = menuGame->addMenu(tr("&Game Variant"));
+    QMenu* menuVariant = menuGame->addMenu(tr("Game &Variant"));
     menuVariant->addAction(m_actionVariantClassic);
     menuVariant->addAction(m_actionVariantClassic2);
     menuVariant->addAction(m_actionVariantDuo);
@@ -1294,8 +1279,21 @@ void MainWindow::createMenu()
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
     menuGame->addAction(m_actionFindMove);
+    menuGame->addSeparator();
+    menuGame->addAction(m_actionOpen);
+    m_menuOpenRecent = menuGame->addMenu(tr("Open R&ecent"));
+    for (int i = 0; i < maxRecentFiles; ++i)
+        m_menuOpenRecent->addAction(m_actionRecentFile[i]);
+    menuGame->addSeparator();
+    menuGame->addAction(m_actionSave);
+    menuGame->addAction(m_actionSaveAs);
+    QMenu* menuExport = menuGame->addMenu(tr("E&xport"));
+    menuExport->addAction(m_actionExportImage);
+    menuExport->addAction(m_actionExportAsciiArt);
+    menuGame->addSeparator();
+    menuGame->addAction(m_actionQuit);
 
-    QMenu* menuGo = menuBar()->addMenu(tr("&Go"));
+    QMenu* menuGo = menuBar()->addMenu(tr("G&o"));
     menuGo->addAction(m_actionBeginning);
     menuGo->addAction(m_actionBackward10);
     menuGo->addAction(m_actionBackward);
