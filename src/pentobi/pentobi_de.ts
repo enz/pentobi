@@ -733,8 +733,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2604"/>
-        <source>File saved %1</source>
-        <translation>Datei gespeichert %1</translation>
+        <source>Game saved: %1</source>
+        <translation>Spiel gespeichert: %1</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2616"/>
