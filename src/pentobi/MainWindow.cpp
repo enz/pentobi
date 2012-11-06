@@ -47,6 +47,7 @@
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
+using namespace std::placeholders;
 using Util::getPlayerString;
 using boost::format;
 using boost::trim_right;
@@ -237,6 +238,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     initGame();
     m_player.reset(new Player(variant, booksDir.toLocal8Bit().constData(),
                               memory));
+    m_player->get_search().set_callback(bind(&MainWindow::searchCallback,
+                                             this, _1, _2));
     m_player->set_use_book(! noBook);
     createToolBar();
     connect(&m_genMoveWatcher, SIGNAL(finished()),
@@ -1800,6 +1803,7 @@ void MainWindow::genMove(bool playSingleMove)
     m_actionInterrupt->setEnabled(true);
     clearSelectedPiece();
     clear_abort();
+    m_percent = 0;
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
@@ -2673,6 +2677,25 @@ void MainWindow::saveAs()
         setFile(file);
         rememberFile(file);
     }
+}
+
+void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
+{
+    // If the search is longer than 10 sec, we show the (estimated) completion
+    // percentage in the status message. Note that this callback is invoked
+    // from a different thread, so we need to use QMetaObject::invokeMethod()
+    if (elapsedSeconds < 10)
+        return;
+    double percentDouble =
+        100 * elapsedSeconds / (elapsedSeconds + remainingSeconds);
+    unsigned percent =
+      static_cast<unsigned>(libboardgame_util::math_util::round(percentDouble));
+    if (percent == m_percent)
+        return;
+    m_percent = percent;
+    QString text = tr("The computer is thinking... (%1%)").arg(percent);
+    QMetaObject::invokeMethod(statusBar(), "showMessage", Qt::QueuedConnection,
+                              Q_ARG(QString, text), Q_ARG(int, 0));
 }
 
 void MainWindow::selectNamedPiece(const char* name1, const char* name2,

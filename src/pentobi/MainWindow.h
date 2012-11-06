@@ -547,6 +547,10 @@ private:
 
     LeaveFullscreenButton* m_leaveFullscreenButton;
 
+    /** Remember last percent thinking time shown in status bar to avoid too
+        many updates. */
+    unsigned m_percent;
+
     GenMoveResult asyncGenMove(Color c, int genMoveId, bool playSingleMove);
 
     bool checkSave();
@@ -618,6 +622,8 @@ private:
     void play(Color c, Move mv, bool checkComputerMove);
 
     bool save(const QString& file);
+
+    void searchCallback(double elapsedSeconds, double remainingSeconds);
 
     void setCommentText(const QString& text);
 
