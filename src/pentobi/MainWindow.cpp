@@ -1227,10 +1227,19 @@ void MainWindow::createActions()
 QWidget* MainWindow::createCentralWidget()
 {
     QWidget* widget = new QWidget();
-    QBoxLayout* layout = new QBoxLayout(QBoxLayout::LeftToRight);
-    widget->setLayout(layout);
-    layout->addWidget(createLeftPanel(), 6);
-    layout->addLayout(createRightPanel(), 4);
+    // We add spacing around and between the two panels using streches (such
+    // that the spacing grows with the window size)
+    QVBoxLayout* outerLayout = new QVBoxLayout();
+    widget->setLayout(outerLayout);
+    QHBoxLayout* innerLayout = new QHBoxLayout();
+    outerLayout->addStretch(1);
+    outerLayout->addLayout(innerLayout, 100);
+    outerLayout->addStretch(1);
+    innerLayout->addStretch(1);
+    innerLayout->addWidget(createLeftPanel(), 60);
+    innerLayout->addStretch(1);
+    innerLayout->addLayout(createRightPanel(), 40);
+    innerLayout->addStretch(1);
     // The central widget doesn't do anything with the focus right now, but we
     // allow it to receive the focus such that the user can switch away the
     // focus from the comment field and its blinking cursor.
