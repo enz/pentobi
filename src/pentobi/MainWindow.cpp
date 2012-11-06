@@ -759,7 +759,7 @@ void MainWindow::createActions()
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
 
     m_actionBeginningOfBranch = createAction(tr("Beginning of Bran&ch"));
-    m_actionBeginningOfBranch->setShortcut(QString("Ctrl+Shift+Home"));
+    m_actionBeginningOfBranch->setShortcut(QString("Ctrl+B"));
     connect(m_actionBeginningOfBranch, SIGNAL(triggered()),
             this, SLOT(beginningOfBranch()));
 
