@@ -368,6 +368,11 @@ void MainWindow::analyzeGame()
     if (m_analyzeGameWindow != 0)
         delete m_analyzeGameWindow;
     m_analyzeGameWindow = new AnalyzeGameWindow(this);
+    // Make sure all action shortcuts work when the analyze dialog has the
+    // focus apart from m_actionLeaveFullscreen because the Esc key is used
+    // to close the dialog
+    m_analyzeGameWindow->addActions(actions());
+    m_analyzeGameWindow->removeAction(m_actionLeaveFullscreen);
     m_analyzeGameWindow->show();
     m_isAnalyzeRunning = true;
     connect(m_analyzeGameWindow->analyzeGameWidget, SIGNAL(finished()),
