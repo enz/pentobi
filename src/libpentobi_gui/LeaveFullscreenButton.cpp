@@ -45,9 +45,10 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
 
 void LeaveFullscreenButton::hideButton()
 {
+    m_animation->stop();
+    m_timer->stop();
     m_button->hide();
     m_triggerArea->hide();
-    m_timer->stop();
 }
 
 bool LeaveFullscreenButton::eventFilter(QObject* watched, QEvent* event)
@@ -60,10 +61,10 @@ bool LeaveFullscreenButton::eventFilter(QObject* watched, QEvent* event)
 
 void LeaveFullscreenButton::showButton()
 {
+    m_animation->stop();
     m_button->move(m_buttonPos);
     m_button->show();
     m_triggerArea->hide();
-    m_animation->stop();
     m_timer->start(5000);
 }
 
