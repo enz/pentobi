@@ -16,7 +16,7 @@
     <message>
         <location filename="AnalyzeGameWidget.cpp" line="205"/>
         <source>Running game analysis...</source>
-        <translation>Spiel wird analysiert...</translation>
+        <translation>Spiel wird analysiert ...</translation>
     </message>
 </context>
 <context>
@@ -175,7 +175,7 @@
     <message>
         <location filename="MainWindow.cpp" line="728"/>
         <source>&amp;Analyze Game...</source>
-        <translation>Spiel &amp;analysieren...</translation>
+        <translation>Spiel &amp;analysieren ...</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="732"/>
@@ -340,7 +340,7 @@
     <message>
         <location filename="MainWindow.cpp" line="859"/>
         <source>&amp;Go to Move...</source>
-        <translation>&amp;Gehe zu Zug...</translation>
+        <translation>&amp;Gehe zu Zug ...</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="863"/>
@@ -477,7 +477,7 @@
     <message>
         <location filename="MainWindow.cpp" line="989"/>
         <source>&amp;Open...</source>
-        <translation>Öffn&amp;en...</translation>
+        <translation>Öffn&amp;en ...</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="996"/>
@@ -527,7 +527,7 @@
     <message>
         <location filename="MainWindow.cpp" line="1057"/>
         <source>Save &amp;As...</source>
-        <translation>Speichern &amp;unter...</translation>
+        <translation>Speichern &amp;unter ...</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1166"/>
@@ -652,7 +652,7 @@
     <message>
         <location filename="MainWindow.cpp" line="3241"/>
         <source>The computer is thinking...</source>
-        <translation>Der Computer denkt...</translation>
+        <translation>Der Computer denkt ...</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1858"/>
@@ -877,7 +877,7 @@
     <message>
         <location filename="MainWindow.cpp" line="2696"/>
         <source>The computer is thinking... (%1%)</source>
-        <translation>Der Computer denkt... (%1 %)</translation>
+        <translation>Der Computer denkt ... (%1 %)</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="2912"/>
