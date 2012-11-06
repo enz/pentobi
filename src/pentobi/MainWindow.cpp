@@ -330,8 +330,9 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         if (QFile(autoSaveFile).exists())
         {
             open(autoSaveFile, true);
-            m_gameFinished = getBoard().is_game_over();
+            m_isAutoSaveLoaded = true;
             deleteAutoSaveFile();
+            m_gameFinished = getBoard().is_game_over();
             if (settings.value("autosave_rated", false).toBool())
             {
                 Variant variant = getVariant();
@@ -592,7 +593,8 @@ bool MainWindow::checkQuit()
     }
     cancelThread();
     QSettings settings;
-    if (m_file.isEmpty() && ! m_gameFinished && m_game->is_modified())
+    if (m_file.isEmpty() && ! m_gameFinished
+        && (m_game->is_modified() || m_isAutoSaveLoaded))
     {
         writeGame(getAutoSaveFile().toLocal8Bit().constData());
         settings.setValue("autosave_rated", m_isRated);
@@ -2017,6 +2019,7 @@ void MainWindow::initGame()
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     m_gameFinished = false;
+    m_isAutoSaveLoaded = false;
     setFile("");
 }
 
@@ -2341,6 +2344,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
         }
         return false;
     }
+    m_isAutoSaveLoaded = false;
     if (! isTemporary)
     {
         setFile(file);
