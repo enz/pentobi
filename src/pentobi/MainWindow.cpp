@@ -3571,10 +3571,6 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
-    m_actionNew->setEnabled(m_isRated || m_game->is_modified()
-                            || m_wasModified);
-    m_actionNewRatedGame->setEnabled(! m_isRated || m_game->is_modified()
-                                     || m_wasModified);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
     m_actionPlay->setEnabled(hasMoves);
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
@@ -3587,10 +3583,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
 
 void MainWindow::updateWindowModified()
 {
-    bool modified = m_game->is_modified();
-    m_actionSave->setEnabled(modified);
     if (! m_file.isEmpty())
-        setWindowModified(modified);
+        setWindowModified(m_game->is_modified());
 }
 
 void MainWindow::veryBadMove(bool checked)
