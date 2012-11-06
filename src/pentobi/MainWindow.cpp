@@ -281,8 +281,10 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
 
     if (! restoreGeometry(settings.value("geometry").toByteArray()))
         adjustSize();
+    // We don't save the geometry anymore if it is fullscreen, but this can
+    // happen if the geometry was saved by a previous version of Pentobi
     if (isFullScreen())
-        fullscreen(true);
+        showNormal();
 
     bool showComment = settings.value("show_comment", false).toBool();
     m_comment->setVisible(showComment);
@@ -568,8 +570,6 @@ bool MainWindow::checkQuit()
             settings.setValue("autosave_rated_color",
                               m_ratedGameColor.to_int());
     }
-    // Don't save geometry if fullscreen because restoring fullscreen can cause
-    // the window to appear below other windows on Gnome 2 (Debian 6.0)
     if (! isFullScreen())
         settings.setValue("geometry", saveGeometry());
     if (m_comment->isVisible())
