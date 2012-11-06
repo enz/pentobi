@@ -871,7 +871,6 @@ void MainWindow::createActions()
             this, SLOT(interestingMove(bool)));
 
     m_actionInterrupt = createAction(tr("I&nterrupt"));
-    m_actionInterrupt->setShortcut(QString("Ctrl+Escape"));
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
 
