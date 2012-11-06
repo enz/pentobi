@@ -79,7 +79,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     if (isTrigon)
     {
         int columns = 7;
-        int rows = 5;
+        int rows = 4;
         qreal ratio = 1.732;
         fieldWidth = min(qreal(width()) / columns,
                                qreal(height()) / (ratio * rows));
@@ -89,8 +89,8 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     }
     else
     {
-        int columns = 6;
-        int rows = 6;
+        int columns = 5;
+        int rows = 5;
         fieldWidth = min(qreal(width()) / columns,
                                qreal(height()) / rows);
         fieldHeight = fieldWidth;

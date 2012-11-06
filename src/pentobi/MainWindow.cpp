@@ -1261,9 +1261,9 @@ QWidget* MainWindow::createCentralWidget()
     outerLayout->addLayout(innerLayout, 100);
     outerLayout->addStretch(1);
     innerLayout->addStretch(1);
-    innerLayout->addWidget(createLeftPanel(), 60);
+    innerLayout->addWidget(createLeftPanel(), 58);
     innerLayout->addStretch(1);
-    innerLayout->addLayout(createRightPanel(), 40);
+    innerLayout->addLayout(createRightPanel(), 42);
     innerLayout->addStretch(1);
     // The central widget doesn't do anything with the focus right now, but we
     // allow it to receive the focus such that the user can switch away the
@@ -1408,7 +1408,6 @@ QLayout* MainWindow::createOrientationButtonBoxLeft()
 {
     QVBoxLayout* outerLayout = new QVBoxLayout();
     QGridLayout* layout = new QGridLayout();
-    layout->setContentsMargins(QMargins());
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceAnticlockwise),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceClockwise),
@@ -1427,7 +1426,6 @@ QLayout* MainWindow::createOrientationButtonBoxRight()
 {
     QVBoxLayout* outerLayout = new QVBoxLayout();
     QGridLayout* layout = new QGridLayout();
-    layout->setContentsMargins(QMargins());
     layout->addWidget(createOBoxToolButton(m_actionPreviousPiece),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionNextPiece),
@@ -1443,7 +1441,6 @@ QLayout* MainWindow::createOrientationButtonBoxRight()
 QLayout* MainWindow::createOrientationSelector()
 {
     QHBoxLayout* layout = new QHBoxLayout();
-    layout->setContentsMargins(QMargins());
     layout->addStretch();
     layout->addLayout(createOrientationButtonBoxLeft());
     layout->addSpacing(8);
