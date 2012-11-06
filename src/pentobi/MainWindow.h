@@ -541,10 +541,6 @@ private:
 
     LeaveFullscreenButton* m_leaveFullscreenButton;
 
-    /** Remember last percent thinking time shown in status bar to avoid too
-        many updates. */
-    unsigned m_percent;
-
     /** Is the current game a game loaded from the autosave file?
         If yes, we need it to save again on quit even if it was not modified.
         Note that the autosave game is deleted after loading to avoid that

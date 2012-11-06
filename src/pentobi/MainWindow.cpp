@@ -1804,7 +1804,6 @@ void MainWindow::genMove(bool playSingleMove)
     m_actionInterrupt->setEnabled(true);
     clearSelectedPiece();
     clear_abort();
-    m_percent = 0;
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
@@ -2680,21 +2679,27 @@ void MainWindow::saveAs()
 
 void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
 {
-    // If the search is longer than 10 sec, we show the (estimated) completion
-    // percentage in the status message. Note that this callback is invoked
-    // from a different thread, so we need to use QMetaObject::invokeMethod()
+    // If the search is longer than 10 sec, we show the (maximum) remaining
+    // time
     if (elapsedSeconds < 10)
         return;
-    double percentDouble =
-        100 * elapsedSeconds / (elapsedSeconds + remainingSeconds);
-    unsigned percent =
-      static_cast<unsigned>(libboardgame_util::math_util::round(percentDouble));
-    if (percent == m_percent)
-        return;
-    m_percent = percent;
-    QString text = tr("The computer is thinking... (%1%)").arg(percent);
-    QMetaObject::invokeMethod(statusBar(), "showMessage", Qt::QueuedConnection,
-                              Q_ARG(QString, text), Q_ARG(int, 0));
+    QString text;
+    if (remainingSeconds < 90)
+    {
+        int seconds = static_cast<int>(remainingSeconds);
+        text =
+            tr("The computer is thinking... (max. %1 seconds remaining)")
+            .arg(seconds);
+    }
+    else
+    {
+        int minutes = static_cast<int>(ceil(remainingSeconds / 60));
+        text =
+            tr("The computer is thinking... (max. %1 minutes remaining)")
+            .arg(minutes);
+    }
+    QMetaObject::invokeMethod(statusBar(), "showMessage", Q_ARG(QString, text),
+                              Q_ARG(int, 0));
 }
 
 void MainWindow::selectNamedPiece(const char* name1, const char* name2,
