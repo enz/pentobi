@@ -212,6 +212,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
       m_legalMoves(new MoveList()),
       m_leaveFullscreenButton(0)
 {
+    Util::initDataDir();
     QSettings settings;
     m_level = settings.value("level", 4).toInt();
     if (m_level < 1 || m_level > maxLevel)

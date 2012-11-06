@@ -10,10 +10,6 @@ Current development version
 * The menu bar and tool bar are no longer shown in fullscreen mode
 * Merged File menu into Game menu
 * Avoided some window flickering at startup
-* The location of application data is now queried with
-  QDesktopServices::DataLocation, which should work on more platforms
-  (unfortunately the change of location means that rating history data
-  written by previous versions of Pentobi is lost)
 * Added British and Canadian English language variants
 
 

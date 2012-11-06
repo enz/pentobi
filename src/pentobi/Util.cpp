@@ -26,12 +26,34 @@ namespace Util
 
 QString getDataDir()
 {
-    QString dataLocation =
-        QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    return QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+}
+
+void initDataDir()
+{
+    QString dataLocation = getDataDir();
     QDir dir(dataLocation);
     if (! dir.exists())
+        // Note: dataLocation is an absolute path but there is no static
+        // function QDir::mkpath()
         dir.mkpath(dataLocation);
-    return dataLocation;
+
+    // Check for locations used by previous versions of Pentobi
+#ifdef Q_WS_WIN
+    QString oldLocation = QDir::home().path() + "/AppData/Roaming/Pentobi";
+#else
+    QString oldLocation;
+    const char* xdgDataHome = getenv("XDG_DATA_HOME");
+    if (xdgDataHome != 0)
+        oldLocation = QString(xdgDataHome) + "/pentobi";
+    else
+        oldLocation = QDir::home().path() + "/.local/share/pentobi";
+#endif
+    if (QDir(oldLocation).exists())
+    {
+        if (dir.rmdir(dataLocation))
+            QFile::rename(oldLocation, dataLocation);
+    }
 }
 
 void removeThumbnail(const QString& file)

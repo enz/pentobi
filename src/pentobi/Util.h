@@ -30,9 +30,12 @@ namespace Util
 void removeThumbnail(const QString& file);
 
 /** Return the platform-dependent directory for storing data for the current
-    application.
-    Also tries to create the directory if it doesn't exist yet. */
+    application. */
 QString getDataDir();
+
+/** Create the platform-dependent directory for storing data for the current
+    application if it does not exist yet. */
+void initDataDir();
 
 /** Set an empty window title for message boxes and similar small dialogs. */
 void setNoTitle(QDialog& dialog);
