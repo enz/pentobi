@@ -280,12 +280,33 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     icon.addFile(":/pentobi/icons/pentobi-32.png");
     setWindowIcon(icon);
 
-    if (! restoreGeometry(settings.value("geometry").toByteArray()))
+    bool centerOnScreen = false;
+    QRect screenGeometry = QApplication::desktop()->screenGeometry();
+    if (restoreGeometry(settings.value("geometry").toByteArray()))
+    {
+        // We don't save the geometry anymore if it is fullscreen, but this can
+        // happen if the geometry was saved by a previous version of Pentobi
+        if (isFullScreen())
+            showNormal();
+        if (! screenGeometry.contains(geometry()))
+        {
+            if (width() > screenGeometry.width()
+                || height() > screenGeometry.height())
+                adjustSize();
+            centerOnScreen = true;
+        }
+    }
+    else
+    {
         adjustSize();
-    // We don't save the geometry anymore if it is fullscreen, but this can
-    // happen if the geometry was saved by a previous version of Pentobi
-    if (isFullScreen())
-        showNormal();
+        centerOnScreen = true;
+    }
+    if (centerOnScreen)
+    {
+        int x = (screenGeometry.width() - width()) / 2;
+        int y = (screenGeometry.height() - height()) / 2;
+        move(x, y);
+    }
 
     bool showComment = settings.value("show_comment", false).toBool();
     m_comment->setVisible(showComment);
