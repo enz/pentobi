@@ -260,12 +260,6 @@ private:
         we only need to handle edits. */
     bool m_ignoreCommentTextChanged;
 
-    /** Was the current game modified and then saved?
-        Used to know if the new game action should be enabled because
-        looking at Game::is_modified() is not enough it only tells if the
-        game was modified after creation or loading or the last save. */
-    bool m_wasModified;
-
     /** Color played by the user in a rated game.
         Only defined if m_isRated is true. In game variants with multiple
         colors per player, the user plays all colors of the player with

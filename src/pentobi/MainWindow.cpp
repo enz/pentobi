@@ -1999,7 +1999,6 @@ void MainWindow::initGame()
 #endif
     m_game->set_date_today();
     m_game->clear_modified();
-    m_wasModified = false;
     m_computerColors.fill(false);
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
@@ -2357,7 +2356,6 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     try
     {
         unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
-        m_wasModified = true;
         m_game->init(tree);
         if (! libpentobi_base::node_util::has_setup(m_game->get_root()))
             m_game->goto_node(get_last_node(m_game->get_root()));
@@ -2622,7 +2620,6 @@ void MainWindow::save()
     }
     if (save(m_file))
     {
-        m_wasModified = m_game->is_modified();
         m_game->clear_modified();
         updateWindow(false);
     }
@@ -2670,7 +2667,6 @@ void MainWindow::saveAs()
     {
         if (save(file))
         {
-            m_wasModified = m_game->is_modified();
             m_game->clear_modified();
             updateWindow(false);
         }
