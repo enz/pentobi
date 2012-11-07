@@ -2,8 +2,8 @@
 Name=Pentobi
 GenericName=Blokus Board Game
 GenericName[de]=Blokus-Brettspiel
-Comment=Computer program that plays the board game Blokus
-Comment[de]=Computerprogramm, welches das Brettspiel Blokus spielt
+Comment=Play the board game Blokus
+Comment[de]=Spielen Sie das Brettspiel Blokus
 Exec=@CMAKE_INSTALL_PREFIX@/games/pentobi %f
 Icon=pentobi
 Terminal=false
