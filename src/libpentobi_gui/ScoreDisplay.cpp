@@ -35,8 +35,6 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
 {
     m_variant = variant_classic;
     m_font.setStyleStrategy(QFont::PreferOutline);
-    m_fontUnderlined = m_font;
-    m_fontUnderlined.setUnderline(true);
     setMinimumWidth(300);
     setMinimumHeight(20);
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -51,14 +49,14 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawEllipse(x,  y, m_colorDotSize, m_colorDotSize);
     QString text = getScoreText(c);
-    if (m_hasMoves[c])
-        painter.setFont(m_font);
-    else
-        painter.setFont(m_fontUnderlined);
+    painter.setFont(m_font);
     painter.setPen(QApplication::palette().color(QPalette::WindowText));
     painter.setRenderHint(QPainter::Antialiasing, false);
-    painter.drawText(x + m_colorDotWidth, 0, getTextWidth(text), height(),
+    int textWidth = getTextWidth(text);
+    painter.drawText(x + m_colorDotWidth, 0, textWidth, height(),
                      Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
+    if (! m_hasMoves[c])
+        underline(painter, x + m_colorDotWidth, textWidth);
 }
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
@@ -73,14 +71,14 @@ void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
     painter.setBrush(color);
     painter.drawEllipse(x + m_colorDotSize, y, m_colorDotSize, m_colorDotSize);
     QString text = getScoreText2(c1, c2);
-    if (m_hasMoves[c1] || m_hasMoves[c2])
-        painter.setFont(m_font);
-    else
-        painter.setFont(m_fontUnderlined);
+    int textWidth = getTextWidth(text);
+    painter.setFont(m_font);
     painter.setPen(QApplication::palette().text().color());
     painter.setRenderHint(QPainter::Antialiasing, false);
-    painter.drawText(x + m_twoColorDotWidth, 0, getTextWidth(text), height(),
+    painter.drawText(x + m_twoColorDotWidth, 0, textWidth, height(),
                      Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
+    if (! m_hasMoves[c1] && ! m_hasMoves[c2])
+        underline(painter, x + m_twoColorDotWidth, textWidth);
 }
 
 int ScoreDisplay::getMaxScoreTextWidth() const
@@ -124,7 +122,7 @@ int ScoreDisplay::getTextWidth(QString text) const
 {
     // Make text width only depend on number of digits to avoid frequent small
     // changes to the layout
-    QFontMetrics metrics(m_fontUnderlined);
+    QFontMetrics metrics(m_font);
     int maxDigitWidth = 0;
     maxDigitWidth = max(maxDigitWidth, metrics.width('0'));
     maxDigitWidth = max(maxDigitWidth, metrics.width('1'));
@@ -227,7 +225,20 @@ void ScoreDisplay::resizeEvent(QResizeEvent*)
 {
     m_fontSize = static_cast<int>(floor(0.7 * height()));
     m_font.setPixelSize(m_fontSize);
-    m_fontUnderlined.setPixelSize(m_fontSize);
+}
+
+void ScoreDisplay::underline(QPainter& painter, int x, int textWidth)
+{
+    // We don't use an underlined font for final points because the underline
+    // is too close to the number with some fonts. Instead, we draw the
+    // underline ourselves.
+    QFontMetrics metrics(m_font);
+    int y = static_cast<int>(ceil(
+                  0.5 * (height() - metrics.height()) + metrics.height() - 1));
+    QPen pen(QApplication::palette().text().color());
+    pen.setWidth(metrics.lineWidth());
+    painter.setPen(pen);
+    painter.drawLine(x, y, x + textWidth, y);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)

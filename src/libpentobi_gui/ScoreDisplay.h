@@ -35,8 +35,6 @@ private:
 
     QFont m_font;
 
-    QFont m_fontUnderlined;
-
     Variant m_variant;
 
     ColorMap<bool> m_hasMoves;
@@ -72,6 +70,8 @@ private:
     QString getScoreText(unsigned points, unsigned bonus) const;
 
     int getTextWidth(QString text) const;
+
+    void underline(QPainter& painter, int x, int textWidth);
 };
 
 //-----------------------------------------------------------------------------
