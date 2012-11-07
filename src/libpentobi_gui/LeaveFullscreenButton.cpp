@@ -47,13 +47,13 @@ void LeaveFullscreenButton::hideButton()
 {
     m_animation->stop();
     m_timer->stop();
-    m_button->hide();
     m_triggerArea->hide();
+    m_button->hide();
 }
 
 bool LeaveFullscreenButton::eventFilter(QObject* watched, QEvent* event)
 {
-    if (event->type() == QEvent::MouseMove
+    if (m_button->isVisible() && event->type() == QEvent::MouseMove
         && (watched == m_triggerArea || watched == m_button))
         showButton();
     return false;
