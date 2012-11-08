@@ -71,7 +71,8 @@ private:
 
     int getTextWidth(QString text) const;
 
-    void underline(QPainter& painter, int x, int textWidth);
+    void drawText(QPainter& painter, const QString& text, int x, int y,
+                  bool underline);
 };
 
 //-----------------------------------------------------------------------------

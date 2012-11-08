@@ -45,18 +45,15 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
     QColor color = Util::getPaintColor(m_variant, c);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
-    int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
+    QFontMetrics metrics(m_font);
+    int ascent = metrics.ascent();
+    // y is baseline
+    int y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.drawEllipse(x,  y, m_colorDotSize, m_colorDotSize);
+    painter.drawEllipse(x,  y - m_colorDotSize, m_colorDotSize, m_colorDotSize);
     QString text = getScoreText(c);
-    painter.setFont(m_font);
-    painter.setPen(QApplication::palette().color(QPalette::WindowText));
-    painter.setRenderHint(QPainter::Antialiasing, false);
-    int textWidth = getTextWidth(text);
-    painter.drawText(x + m_colorDotWidth, 0, textWidth, height(),
-                     Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
-    if (! m_hasMoves[c])
-        underline(painter, x + m_colorDotWidth, textWidth);
+    bool underline = ! m_hasMoves[c];
+    drawText(painter, text, x + m_colorDotWidth, y, underline);
 }
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
@@ -64,21 +61,43 @@ void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
     QColor color = Util::getPaintColor(m_variant, c1);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
-    int y = static_cast<int>(ceil(0.5 * (height() - m_colorDotSize)));
+    QFontMetrics metrics(m_font);
+    int ascent = metrics.ascent();
+    // y is baseline
+    int y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.drawEllipse(x, y, m_colorDotSize, m_colorDotSize);
+    painter.drawEllipse(x, y - m_colorDotSize, m_colorDotSize, m_colorDotSize);
     color = Util::getPaintColor(m_variant, c2);
     painter.setBrush(color);
-    painter.drawEllipse(x + m_colorDotSize, y, m_colorDotSize, m_colorDotSize);
+    painter.drawEllipse(x + m_colorDotSize, y - m_colorDotSize, m_colorDotSize,
+                        m_colorDotSize);
     QString text = getScoreText2(c1, c2);
-    int textWidth = getTextWidth(text);
+    bool underline = (! m_hasMoves[c1] && ! m_hasMoves[c2]);
+    drawText(painter, text, x + m_twoColorDotWidth, y, underline);
+}
+
+void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
+                            int y, bool underline)
+{
     painter.setFont(m_font);
-    painter.setPen(QApplication::palette().text().color());
+    QFontMetrics metrics(m_font);
+    QColor color = QApplication::palette().color(QPalette::WindowText);
+    painter.setPen(color);
     painter.setRenderHint(QPainter::Antialiasing, false);
-    painter.drawText(x + m_twoColorDotWidth, 0, textWidth, height(),
-                     Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
-    if (! m_hasMoves[c1] && ! m_hasMoves[c2])
-        underline(painter, x + m_twoColorDotWidth, textWidth);
+    int textWidth = getTextWidth(text);
+    painter.drawText(x, y, text);
+    if (underline)
+    {
+        // Draw underline (instead of using an underlined font because the
+        // underline of some fonts is too close to the text and we want it
+        // to be very visible)
+        int lineWidth = metrics.lineWidth();
+        QPen pen(color);
+        pen.setWidth(lineWidth);
+        painter.setPen(pen);
+        y += 2 * lineWidth;
+        painter.drawLine(x, y, x + textWidth, y);
+    }
 }
 
 int ScoreDisplay::getMaxScoreTextWidth() const
@@ -225,20 +244,6 @@ void ScoreDisplay::resizeEvent(QResizeEvent*)
 {
     m_fontSize = static_cast<int>(floor(0.7 * height()));
     m_font.setPixelSize(m_fontSize);
-}
-
-void ScoreDisplay::underline(QPainter& painter, int x, int textWidth)
-{
-    // We don't use an underlined font for final points because the underline
-    // is too close to the number with some fonts. Instead, we draw the
-    // underline ourselves.
-    QFontMetrics metrics(m_font);
-    int y = static_cast<int>(ceil(
-                  0.5 * (height() - metrics.height()) + metrics.height() - 1));
-    QPen pen(QApplication::palette().text().color());
-    pen.setWidth(metrics.lineWidth());
-    painter.setPen(pen);
-    painter.drawLine(x, y, x + textWidth, y);
 }
 
 void ScoreDisplay::updateScore(const Board& bd)
