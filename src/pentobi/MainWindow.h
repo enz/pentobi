@@ -8,29 +8,35 @@
 #include <QFutureWatcher>
 #include <QMainWindow>
 #include <QMessageBox>
-#include "AnalyzeGameWindow.h"
-#include "RatingDialog.h"
+#include "RatingHistory.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/Game.h"
 #include "libpentobi_mcts/Player.h"
-#include "libpentobi_gui/GuiBoard.h"
-#include "libpentobi_gui/HelpWindow.h"
-#include "libpentobi_gui/OrientationDisplay.h"
-#include "libpentobi_gui/PieceSelector.h"
-#include "libpentobi_gui/ScoreDisplay.h"
 
 class QActionGroup;
 class QPlainTextEdit;
 class QSplitter;
+class AnalyzeGameWindow;
+class GuiBoard;
+class HelpWindow;
 class LeaveFullscreenButton;
+class OrientationDisplay;
+class PieceSelector;
+class RatingDialog;
+class ScoreDisplay;
 
 using namespace std;
+using boost::filesystem::path;
 using libboardgame_sgf::Node;
+using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
 using libboardgame_util::Exception;
 using libpentobi_base::Board;
 using libpentobi_base::ColorMap;
+using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
+using libpentobi_base::Piece;
+using libpentobi_base::Point;
 using libpentobi_base::Variant;
 using libpentobi_base::Move;
 using libpentobi_mcts::Player;

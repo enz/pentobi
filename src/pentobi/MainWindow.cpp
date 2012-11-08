@@ -31,7 +31,8 @@
 #include <QToolBar>
 #include <QToolButton>
 #include <QtConcurrentRun>
-#include "RatingHistory.h"
+#include "AnalyzeGameWindow.h"
+#include "RatingDialog.h"
 #include "Util.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
@@ -40,10 +41,15 @@
 #include "libpentobi_base/TreeWriter.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
 #include "libpentobi_gui/GameInfoDialog.h"
+#include "libpentobi_gui/GuiBoard.h"
 #include "libpentobi_gui/GuiBoardUtil.h"
+#include "libpentobi_gui/HelpWindow.h"
 #include "libpentobi_gui/InitialRatingDialog.h"
 #include "libpentobi_gui/LeaveFullscreenButton.h"
+#include "libpentobi_gui/OrientationDisplay.h"
+#include "libpentobi_gui/PieceSelector.h"
 #include "libpentobi_gui/SameHeightLayout.h"
+#include "libpentobi_gui/ScoreDisplay.h"
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
@@ -76,7 +82,6 @@ using libpentobi_base::variant_trigon;
 using libpentobi_base::variant_trigon_2;
 using libpentobi_base::variant_trigon_3;
 using libpentobi_base::ColorIterator;
-using libpentobi_base::ColorMove;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::MoveList;
