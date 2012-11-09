@@ -258,8 +258,6 @@ private:
 
     bool m_isRated;
 
-    bool m_isRatedGameFinished;
-
     /** Flag set while setting the text in m_comment for fast return in the
         textChanged() handler.
         Used because QPlainTextEdit does not have a textEdited() signal and

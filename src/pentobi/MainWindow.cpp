@@ -1843,7 +1843,7 @@ void MainWindow::gameOver()
             info = tr("Green wins.");
     }
     QString detailText;
-    if (m_isRated && ! m_isRatedGameFinished)
+    if (m_isRated)
     {
         int oldRating = m_history->getRating().toInt();
         unsigned place;
@@ -1874,7 +1874,7 @@ void MainWindow::gameOver()
             detailText =
                 tr("Your rating has decreased from %1 to %2.")
                 .arg(oldRating).arg(newRating);
-        m_isRatedGameFinished = true;
+        setRated(false);
     }
     showInfo(info, detailText, "", true);
 }
@@ -3153,7 +3153,6 @@ void MainWindow::setRated(bool isRated)
     {
         statusBar()->addWidget(m_ratedGameLabel);
         m_ratedGameLabel->show();
-        m_isRatedGameFinished = false;
     }
     else
         statusBar()->removeWidget(m_ratedGameLabel);
