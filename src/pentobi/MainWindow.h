@@ -596,6 +596,8 @@ private:
 
     void enablePieceSelector(Color c);
 
+    void gameOver();
+
     void genMove(bool playSingleMove = false);
 
     const Board& getBoard() const;
@@ -648,8 +650,6 @@ private:
     void showMessage(QMessageBox::Icon icon, const QString& text,
                      const QString& infoText, const QString& detailText);
 
-    void showResult();
-
     void showStatus(const QString& text, bool temporary = false);
 
     void updateMoveNumber();
@@ -667,8 +667,6 @@ private:
     void updateRecentFiles();
 
     void updateFlipActions();
-
-    void updateRating();
 
     bool writeGame(const path& file);
 

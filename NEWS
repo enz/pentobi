@@ -5,7 +5,6 @@ Current development version
   tied games in game variant Trigon Two-Player (like it already knew in the
   variants Duo and Junior) and will avoid positions that allow the second
   player to enforce such a tie
-* The game result is now shown in the status bar instead of a message box
 * Removed less frequently used buttons (Open, Save) from the tool bar
 * The menu bar and tool bar are no longer shown in fullscreen mode
 * Merged File menu into Game menu
