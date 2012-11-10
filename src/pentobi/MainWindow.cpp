@@ -1053,7 +1053,7 @@ void MainWindow::createActions()
 
     m_actionQuit = createAction(tr("&Quit"));
     m_actionQuit->setShortcut(QKeySequence::Quit);
-    connect(m_actionQuit, SIGNAL(triggered()), this, SLOT(quit()));
+    connect(m_actionQuit, SIGNAL(triggered()), this, SLOT(close()));
 
     m_actionSave = createAction(tr("&Save"));
     m_actionSave->setPriority(QAction::LowPriority);
@@ -2665,13 +2665,6 @@ void MainWindow::previousVariation10()
         node = node->get_previous_sibling();
     }
     gotoNode(*node);
-}
-
-void MainWindow::quit()
-{
-    if (! checkQuit())
-        return;
-    qApp->quit();
 }
 
 void MainWindow::rememberDir(const QString& file)

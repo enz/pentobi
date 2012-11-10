@@ -150,8 +150,6 @@ public slots:
 
     void previousVariation10();
 
-    void quit();
-
     void rotatePieceAnticlockwise();
 
     void rotatePieceClockwise();
