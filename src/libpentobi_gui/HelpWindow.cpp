@@ -23,7 +23,8 @@ namespace {
 
 void setIcon(QAction* action, const QString& name)
 {
-    action->setIcon(QIcon(QString(":/libpentobi_gui/icons/%1.png").arg(name)));
+    QString fallback = QString(":/libpentobi_gui/icons/%1.png").arg(name);
+    action->setIcon(QIcon::fromTheme(name, QIcon(fallback)));
 }
 
 } // namespace
