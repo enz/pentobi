@@ -36,6 +36,8 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
 {
     log() << "Loading " << mainPage.toLocal8Bit().constData() << '\n';
     setWindowTitle(tr("Pentobi User Manual"));
+    if (QIcon::hasThemeIcon("help-browser"))
+        setWindowIcon(QIcon::fromTheme("help-browser"));
     m_mainPageUrl = QUrl::fromLocalFile(mainPage);
     QTextBrowser* browser = new QTextBrowser(this);
     setCentralWidget(browser);
