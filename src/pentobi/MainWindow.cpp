@@ -3035,7 +3035,7 @@ void MainWindow::setFile(const QString& file)
     else
     {
         QFileInfo info(m_file);
-        setWindowTitle(tr("%1[*] - Pentobi").arg(info.fileName()));
+        setWindowTitle(tr("[*]%1 - Pentobi").arg(info.fileName()));
     }
 }
 
