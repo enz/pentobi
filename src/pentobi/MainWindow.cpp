@@ -2112,7 +2112,7 @@ void MainWindow::help()
     }
     QString path = HelpWindow::findMainPage(m_manualDir, "index.html",
                                             QLocale::system().name());
-    m_helpWindow = new HelpWindow(this, path);
+    m_helpWindow = new HelpWindow(0, path);
     m_helpWindow->show();
 }
 
