@@ -8,6 +8,7 @@
 
 #include "AnalyzeGame.h"
 
+#include "Search.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/WallTime.h"
 
@@ -25,7 +26,7 @@ using libpentobi_base::Tree;
 //-----------------------------------------------------------------------------
 
 void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
-                    function<void(unsigned,unsigned)> progress_callback)
+                      function<void(unsigned,unsigned)> progress_callback)
 {
     m_variant = game.get_variant();
     m_moves.clear();

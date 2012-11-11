@@ -14,6 +14,7 @@
 #include <QtConcurrentRun>
 #include "Util.h"
 #include "libboardgame_sgf/Util.h"
+#include "libboardgame_util/Abort.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 

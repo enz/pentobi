@@ -5,11 +5,15 @@
 #ifndef LIBPENTOBI_MCTS_ANALYZE_GAME_H
 #define LIBPENTOBI_MCTS_ANALYZE_GAME_H
 
-#include "Search.h"
+#include <vector>
 #include "libpentobi_base/Game.h"
 
 namespace libpentobi_mcts {
 
+class Search;
+
+using namespace std;
+using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
 using libpentobi_base::Variant;
 
