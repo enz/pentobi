@@ -131,10 +131,7 @@ bool Search::check_followup(vector<Move>& sequence)
 
 string Search::get_move_string(Move mv) const
 {
-    const Board& bd = get_board();
-    const MoveInfo& move_info = bd.get_move_info(mv);
-    const PieceInfo& piece_info = bd.get_piece_info(move_info.piece);
-    return piece_info.get_name() + " " + bd.to_string(mv);
+    return get_board().to_string(mv);
 }
 
 void Search::get_root_position(Variant& variant, Setup& setup) const
