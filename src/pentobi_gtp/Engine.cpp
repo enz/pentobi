@@ -60,10 +60,7 @@ Engine::~Engine() throw()
 
 void Engine::cmd_get_value(Response& response)
 {
-    const Search::Node& root = get_search().get_tree().get_root();
-    if (root.get_count() == 0)
-        throw Failure("root node has no count");
-    response << root.get_value();
+    response << get_search().get_tree().get_root().get_value();
 }
 
 void Engine::cmd_move_values(Response& response)
@@ -79,17 +76,11 @@ void Engine::cmd_move_values(Response& response)
     BOOST_FOREACH(const Search::Node* node, children)
     {
         Float count = node->get_count();
-        response << setprecision(0) << count << ' ';
-        if (count > 0)
-            response << setprecision(3) << node->get_value();
-        else
-            response << '-';
+        response << setprecision(0) << count << ' '
+                 << setprecision(3) << node->get_value();
         Float rave_count = node->get_rave_count();
-        response << ' ' << setprecision(0) << rave_count << ' ';
-        if (rave_count > 0)
-            response << setprecision(3) << node->get_rave_value();
-        else
-            response << '-';
+        response << ' ' << setprecision(0) << rave_count << ' '
+                 << setprecision(3) << node->get_rave_value();
         response << ' ' << bd.to_string(node->get_move()) << '\n';
     }
 }

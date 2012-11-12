@@ -28,8 +28,11 @@ public:
 
     Node();
 
-    void init(const Move& mv);
-
+    /** Initialize the node.
+        The node may be initialized with values and counts greater zero
+        (prior knowledge) but even if it is initialized with count zero, it
+        must be initialized with a usable value (e.g. first play urgency for
+        inner nodes or tie value for the root node). */
     void init(const Move& mv, Float value, Float count, Float rave_value,
               Float rave_count);
 
@@ -58,14 +61,13 @@ public:
 
     unsigned get_nu_children() const;
 
-    void clear();
-
-    /** Clears only the value and RAVE value.
+    /** Set a new value.
         This operation is needed when reusing a subtree from a previous search
-        because the value of root nodes and inner nodes have a different meaning
-        (position value vs. move values) so the value cannot be reused but the
-        child information and visit count should be preserved. */
-    void clear_values();
+        because the value of root nodes and inner nodes have a different
+        meaning (position value vs. move values) so the root value cannot be
+        reused but all other nodes in the tree can be reused without
+        changes. */
+    void init_value(Float value, Float count);
 
     void link_children(NodeIndex first_child, int nu_children);
 
@@ -127,22 +129,6 @@ void Node<M>::add_value(Float v)
 }
 
 template<typename M>
-void Node<M>::clear()
-{
-    clear_values();
-    m_nu_children = 0;
-}
-
-template<typename M>
-void Node<M>::clear_values()
-{
-    m_count = 0;
-    m_value = 0;
-    m_rave_count = 0;
-    m_rave_value = 0;
-}
-
-template<typename M>
 void Node<M>::copy_data_from(const Node& node)
 {
     // Reminder to update this function when the class gets additional members
@@ -200,14 +186,12 @@ inline Float Node<M>::get_rave_count() const
 template<typename M>
 inline Float Node<M>::get_rave_value() const
 {
-    LIBBOARDGAME_ASSERT(m_rave_count > 0);
     return m_rave_value;
 }
 
 template<typename M>
 inline Float Node<M>::get_value() const
 {
-    LIBBOARDGAME_ASSERT(m_count > 0);
     return m_value;
 }
 
@@ -215,13 +199,6 @@ template<typename M>
 inline bool Node<M>::has_children() const
 {
     return m_nu_children > 0;
-}
-
-template<typename M>
-void Node<M>::init(const Move& mv)
-{
-    m_move = mv;
-    clear();
 }
 
 template<typename M>
@@ -234,6 +211,13 @@ void Node<M>::init(const Move& mv, Float value, Float count, Float rave_value,
     m_rave_count = rave_count;
     m_rave_value = rave_value;
     m_nu_children = 0;
+}
+
+template<typename M>
+void Node<M>::init_value(Float value, Float count)
+{
+    m_count = count;
+    m_value = value;
 }
 
 template<typename M>

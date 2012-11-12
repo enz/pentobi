@@ -112,7 +112,6 @@ Search::Search(Variant initial_variant, size_t memory)
       m_shared_const(m_to_play)
 {
     set_rave(true);
-    set_unexplored_value(0.5);
     set_expand_threshold(3);
     set_last_good_reply(true);
     set_default_param(m_variant);

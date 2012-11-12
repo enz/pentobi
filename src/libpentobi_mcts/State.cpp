@@ -664,13 +664,13 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     const MoveList& moves = m_moves[to_play];
     if (moves.empty())
     {
-        expander.add_child(Move::pass());
+        expander.add_child(Move::pass(), 0.5, 0, 0.5, 0);
         return;
     }
     if (! use_prior_knowledge)
     {
         BOOST_FOREACH(Move mv, moves)
-            expander.add_child(mv);
+            expander.add_child(mv, 0.5, 0, 0.5, 0);
         return;
     }
     compute_features();

@@ -199,7 +199,7 @@ Move Player::genmove(const Board& bd, Color c)
     if (get_nu_players(variant) == 2)
     {
         const Search::Node& root = m_search.get_tree().get_root();
-        if (root.get_count() > 0 && root.get_count() > m_resign_min_simulations
+        if (root.get_count() > m_resign_min_simulations
             && root.get_value() < m_resign_threshold)
             m_resign = true;
     }

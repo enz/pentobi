@@ -205,10 +205,6 @@ public:
 
     Float get_rave_equivalence() const;
 
-    void set_unexplored_value(Float value);
-
-    Float get_unexplored_value() const;
-
     /** Enable weighting of @ref libboardgame_doc_rave updates.
         The weight decreases linearly from the start to the end of a
         simulation. */
@@ -373,8 +369,6 @@ private:
     /** Time of last search. */
     double m_last_time;
 
-    Float m_unexplored_value;
-
     Float m_prune_count_start;
 
     Float m_rave_equivalence;
@@ -508,7 +502,6 @@ Search<S,M,P>::Search(const State& state, size_t memory)
       m_weight_rave_updates(true),
       m_use_last_good_reply(false),
       m_nu_threads(1),
-      m_unexplored_value(numeric_limits<Float>::max()),
       m_prune_count_start(16),
       m_rave_equivalence(1000),
       m_tree_memory(memory == 0 ? 256000000 : memory),
@@ -557,8 +550,6 @@ template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_abort_expensive() const
 {
     Float count = m_tree.get_root().get_count() + m_reuse_count;
-    if (count == 0)
-        return false;
     double time = m_timer();
     if (! m_deterministic && time < 0.1)
         // Simulations per second might be inaccurate for very small times
@@ -698,7 +689,6 @@ Parameters Search<S,M,P>::get_reuse_param() const
     p.create<bool>("rave", m_rave);
     p.create<bool>("weight_rave_updates", m_weight_rave_updates);
     p.create<Float>("rave_equivalence", m_rave_equivalence);
-    p.create<Float>("unexplored_value", m_unexplored_value);
     return p;
 }
 
@@ -769,12 +759,6 @@ inline const typename Search<S,M,P>::Tree& Search<S,M,P>::get_tree()
     const
 {
     return m_tree;
-}
-
-template<class S, class M, unsigned P>
-Float Search<S,M,P>::get_unexplored_value() const
-{
-    return m_unexplored_value;
 }
 
 template<class S, class M, unsigned P>
@@ -894,7 +878,7 @@ bool Search<S,M,P>::prune(TimeSource& time_source, double time,
     if (m_deterministic)
         interval_checker.set_deterministic(1000000);
     log(format("Pruning count %1% (at time %2%)") % prune_min_count % time);
-    m_tmp_tree.clear();
+    m_tmp_tree.clear(m_tree.get_root().get_value());
     if (! m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(),
                               m_tree.get_root(), prune_min_count, true,
                               &interval_checker))
@@ -962,7 +946,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
         else
         {
             Timer timer(time_source);
-            m_tmp_tree.clear();
+            m_tmp_tree.clear(get_tie_value());
             const Node* node = find_node(m_tree, m_followup_sequence);
             if (node != 0)
             {
@@ -972,7 +956,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
                 if (node != &m_tree.get_root())
                 {
                     m_reuse_count = node->get_count();
-                    m_tree.clear_values(*node);
+                    m_tree.clear_root_value(get_tie_value());
                 }
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 if (m_deterministic)
@@ -1001,7 +985,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
         }
     }
     if (clear_tree)
-        m_tree.clear();
+        m_tree.clear(get_tie_value());
 
     m_last_reuse_param = get_reuse_param();
     m_timer.reset(time_source);
@@ -1091,26 +1075,20 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
 template<class S, class M, unsigned P>
 const Node<M>* Search<S,M,P>::select_child(const Node& node)
 {
+    LIBBOARDGAME_ASSERT(node.has_children());
+    Float node_count = node.get_count();
     if (log_move_selection)
     {
         log() << "Search::select_child:\n"
-              << "c=" << node.get_count() << '\n';
-        if (node.get_count() > 0)
-            log() << "v=" << node.get_value() << '\n';
+              << "c=" << node_count << '\n'
+              << "v=" << node.get_value() << '\n';
     }
-    LIBBOARDGAME_ASSERT(node.has_children());
     const Node* best_child = 0;
     Float best_value = -numeric_limits<Float>::max();
-    Float bias_term_constant_part = 0; // Init to avoid compiler warning
-    Float node_count = node.get_count();
-    if (m_bias_term_constant != 0)
-    {
-        if (node_count == 0)
-            bias_term_constant_part = 0;
-        else
-            bias_term_constant_part =
-                m_bias_term_constant_sq * m_fast_log.get_log(float(node_count));
-    }
+    Float bias_term_constant_part = 0;
+    if (m_bias_term_constant != 0 && node_count > 0)
+        bias_term_constant_part =
+            m_bias_term_constant_sq * m_fast_log.get_log(float(node_count));
     Float beta =
         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
     if (log_move_selection)
@@ -1121,33 +1099,22 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
             log() << get_move_string(i->get_move())
                   << " | c=" << i->get_count()
                   << " rc=" << i->get_rave_count();
+        Float child_value = i->get_value();
+        if (log_move_selection)
+            log() << " v=" << child_value;
         Float value;
-        Float count = i->get_count();
-        if (count > 0)
-        {
-            Float child_value = i->get_value();
-            if (log_move_selection)
-                log() << " v=" << child_value;
-            if (m_rave && i->get_rave_count() > 0)
-            {
-                if (log_move_selection)
-                    log() << " r=" << i->get_rave_value();
-                value =
-                    beta * i->get_rave_value() + (1 - beta) * child_value;
-            }
-            else
-                value = child_value;
-        }
-        else if (m_rave && i->get_rave_count() > 0)
+        if (m_rave)
         {
             if (log_move_selection)
                 log() << " r=" << i->get_rave_value();
-            value = i->get_rave_value();
+            value =
+                beta * i->get_rave_value() + (1 - beta) * child_value;
         }
         else
-            value = m_unexplored_value;
-        if (m_bias_term_constant != 0)
+            value = child_value;
+        if (bias_term_constant_part != 0)
         {
+            Float count = i->get_count();
             Float exploration_term =
                 sqrt(bias_term_constant_part / max(count, Float(1)));
             if (log_move_selection)
@@ -1180,16 +1147,14 @@ const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
     {
         Float count = i->get_count();
         if (count > max_count
-            || (count == max_count && count > 0 && max_count > 0
-                && i->get_value() > max_count_value))
+            || (count == max_count && i->get_value() > max_count_value))
         {
             if (exclude_moves != 0
                 && find(exclude_moves->begin(), exclude_moves->end(),
                         i->get_move()) != exclude_moves->end())
                 continue;
             max_count = count;
-            if (count > 0)
-                max_count_value = i->get_value();
+            max_count_value = i->get_value();
             result = &(*i);
         }
     }
@@ -1290,12 +1255,6 @@ void Search<S,M,P>::set_tree_memory(size_t memory)
     m_max_nodes = get_max_nodes(memory);
     m_tree.set_max_nodes(m_max_nodes);
     m_tmp_tree.set_max_nodes(m_max_nodes);
-}
-
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_unexplored_value(Float value)
-{
-    m_unexplored_value = value;
 }
 
 template<class S, class M, unsigned P>

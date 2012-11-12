@@ -47,11 +47,7 @@ public:
     public:
         NodeExpander(unsigned thread_id, Tree& tree, const Node& node);
 
-        /** Add new child without prior knowledge initialization.
-            The child will only be added if the tree is not full. */
-        void add_child(const Move& mv);
-
-        /** Add new child with prior knowledge initialization.
+        /** Add new child.
             The child will only be added if the tree is not full. */
         void add_child(const Move& mv, Float value, Float count,
                        Float rave_value, Float rave_count);
@@ -91,7 +87,9 @@ public:
 
     ~Tree() throw();
 
-    void clear();
+    /** Remove all nodes and initialize the root node with count 0 and a given
+        value. */
+    void clear(Float root_value);
 
     const Node& get_root() const;
 
@@ -106,8 +104,6 @@ public:
 
     size_t get_max_nodes() const;
 
-    bool create_node(unsigned thread_id, const Move& mv);
-
     bool create_node(unsigned thread_id, const Move& mv, Float value,
                      Float count, Float rave_value, Float rave_count);
 
@@ -115,8 +111,8 @@ public:
 
     void add_rave_value(const Node& node, Float v, Float weight);
 
-    /** See Node::clear_values(). */
-    void clear_values(const Node& node);
+    /** Reset the root count to 0 and the value to a given value. */
+    void clear_root_value(Float value);
 
     void swap(Tree& tree);
 
@@ -124,7 +120,11 @@ public:
         This operation can be lengthy and can be aborted by providing an abort
         checker argument. If the extraction was aborted, the copied subtree is
         a valid partial tree of the full tree that would have been extracted.
-        @param target The target tree (will be cleared before the extraction)
+        Note that you still have to re-initialize the value of the subtree
+        after the extraction because the value of the root node and the values
+        of inner nodes have a different meaning.
+        @pre Target tree is empty (! target.get_root().has_children())
+        @param target The target tree
         @param node The root node of the subtree.
         @param check_abort Whether to check util::get_abort()
         @param interval_checker An optional expensive function to check if the
@@ -195,14 +195,6 @@ inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
       m_first_child(m_tree.m_thread_storage[thread_id].next),
       m_best_child(m_first_child)
 {
-}
-
-template<typename M>
-inline void Tree<M>::NodeExpander::add_child(const Move& mv)
-{
-    LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<unsigned short>::max());
-    if (! (m_is_tree_full |= ! m_tree.create_node(m_thread_id, mv)))
-        ++m_nu_children;
 }
 
 template<typename M>
@@ -279,18 +271,18 @@ inline void Tree<M>::add_value(const Node& node, Float v)
 }
 
 template<typename M>
-void Tree<M>::clear()
+void Tree<M>::clear(Float root_value)
 {
     m_thread_storage[0].next = m_thread_storage[0].begin + 1;
     for (unsigned i = 1; i < m_nu_threads; ++i)
         m_thread_storage[i].next = m_thread_storage[i].begin;
-    m_nodes[0].clear();
+    m_nodes[0].init(Move::null(), root_value, 0, root_value, 0);
 }
 
 template<typename M>
-inline void Tree<M>::clear_values(const Node& node)
+inline void Tree<M>::clear_root_value(Float value)
 {
-    non_const(node).clear_values();
+    m_nodes[0].init_value(value, 0);
 }
 
 template<typename M>
@@ -344,20 +336,6 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
 }
 
 template<typename M>
-inline bool Tree<M>::create_node(unsigned thread_id, const Move& mv)
-{
-    LIBBOARDGAME_ASSERT(thread_id < m_nu_threads);
-    ThreadStorage& thread_storage = m_thread_storage[thread_id];
-    if (thread_storage.next != thread_storage.end)
-    {
-        thread_storage.next->init(mv);
-        ++thread_storage.next;
-        return true;
-    }
-    return false;
-}
-
-template<typename M>
 bool Tree<M>::create_node(unsigned thread_id, const Move& mv,
                           Float value, Float count, Float rave_value,
                           Float rave_count)
@@ -381,7 +359,7 @@ bool Tree<M>::extract_subtree(Tree& target, const Node& node,
     LIBBOARDGAME_ASSERT(contains(node));
     LIBBOARDGAME_ASSERT(&target != this);
     LIBBOARDGAME_ASSERT(target.get_max_nodes() == get_max_nodes());
-    target.clear();
+    LIBBOARDGAME_ASSERT(! target.get_root().has_children());
     return copy_subtree(target, target.m_nodes[0], node, 0, check_abort,
                         interval_checker);
 }
@@ -478,7 +456,7 @@ void Tree<M>::set_max_nodes(size_t max_nodes)
         thread_storage.begin = m_nodes.get() + i * m_nodes_per_thread;
         thread_storage.end = thread_storage.begin + m_nodes_per_thread;
     }
-    clear();
+    clear(0);
 }
 
 template<typename M>
