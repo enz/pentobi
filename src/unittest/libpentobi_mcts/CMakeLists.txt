@@ -16,6 +16,7 @@ target_link_libraries(unittest_libpentobi_mcts
   boardgame_test_main
   pentobi_mcts
   pentobi_base
+  boardgame_mcts
   boardgame_base
   boardgame_sgf
   boardgame_test

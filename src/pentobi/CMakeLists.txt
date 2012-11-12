@@ -72,6 +72,7 @@ target_link_libraries(pentobi
   ${QT_LIBRARIES}
   pentobi_mcts
   pentobi_base
+  boardgame_mcts
   boardgame_base
   boardgame_sgf
   boardgame_util

@@ -15,6 +15,7 @@ add_executable(pentobi-gtp ${pentobi_gtp_SRCS})
 target_link_libraries(pentobi-gtp
   pentobi_mcts
   pentobi_base
+  boardgame_mcts
   boardgame_base
   boardgame_sgf
   boardgame_util

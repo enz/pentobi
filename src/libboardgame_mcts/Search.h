@@ -9,11 +9,11 @@
 #include <array>
 #include <functional>
 #include <boost/format.hpp>
+#include "BiasTerm.h"
 #include "ReplyTable.h"
 #include "Tree.h"
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
-#include "libboardgame_util/FastLog.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/Parameters.h"
@@ -30,7 +30,6 @@ using boost::format;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
-using libboardgame_util::FastLog;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::Parameters;
 using libboardgame_util::StatisticsBase;
@@ -340,10 +339,6 @@ private:
 
     Float m_expand_threshold;
 
-    Float m_bias_term_constant;
-
-    Float m_bias_term_constant_sq;
-
     bool m_deterministic;
 
     bool m_reuse_subtree;
@@ -396,6 +391,8 @@ private:
 
     TimeSource* m_time_source;
 
+    BiasTerm m_bias_term;
+
     Timer m_timer;
 
     /** Game dependent data per thread. */
@@ -407,8 +404,6 @@ private:
         Stores the first time a move was played for each player.
         Reused for efficiency. */
     array<array<unsigned,Move::range>,max_players> m_first_play;
-
-    FastLog m_fast_log;
 
     Tree m_tree;
 
@@ -506,13 +501,12 @@ Search<S,M,P>::Search(const State& state, size_t memory)
       m_rave_equivalence(1000),
       m_tree_memory(memory == 0 ? 256000000 : memory),
       m_max_nodes(get_max_nodes(m_tree_memory)),
+      m_bias_term(0),
       m_state(state),
-      m_fast_log(10),
       m_tree(m_max_nodes, m_nu_threads),
       m_tmp_tree(m_max_nodes, m_nu_threads),
       m_assertion_handler(*this)
 {
-    set_bias_term_constant(0.7f);
     for (unsigned i = 0; i < max_players; ++i)
         m_first_play[i].fill(numeric_limits<unsigned>::max());
 }
@@ -636,7 +630,7 @@ double Search<S,M,P>::expected_sim_per_sec() const
 template<class S, class M, unsigned P>
 Float Search<S,M,P>::get_bias_term_constant() const
 {
-    return m_bias_term_constant;
+    return m_bias_term.get_bias_term_constant();
 }
 
 template<class S, class M, unsigned P>
@@ -1085,10 +1079,7 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     }
     const Node* best_child = 0;
     Float best_value = -numeric_limits<Float>::max();
-    Float bias_term_constant_part = 0;
-    if (m_bias_term_constant != 0 && node_count > 0)
-        bias_term_constant_part =
-            m_bias_term_constant_sq * m_fast_log.get_log(float(node_count));
+    m_bias_term.start_iteration(node_count);
     Float beta =
         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
     if (log_move_selection)
@@ -1107,20 +1098,14 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
         {
             if (log_move_selection)
                 log() << " r=" << i->get_rave_value();
-            value =
-                beta * i->get_rave_value() + (1 - beta) * child_value;
+            value = beta * i->get_rave_value() + (1 - beta) * child_value;
         }
         else
             value = child_value;
-        if (bias_term_constant_part != 0)
-        {
-            Float count = i->get_count();
-            Float exploration_term =
-                sqrt(bias_term_constant_part / max(count, Float(1)));
-            if (log_move_selection)
-                log() << " e=" << exploration_term;
-            value += exploration_term;
-        }
+        Float bias = m_bias_term.get(i->get_count());
+        if (log_move_selection)
+            log() << " e=" << bias;
+        value += bias;
         if (log_move_selection)
             log() << " | " << value << '\n';
         if (value > best_value)
@@ -1178,8 +1163,7 @@ bool Search<S,M,P>::select_move(Move& mv, const vector<Move>* exclude_moves)
 template<class S, class M, unsigned P>
 void Search<S,M,P>::set_bias_term_constant(Float c)
 {
-    m_bias_term_constant = c;
-    m_bias_term_constant_sq = c * c;
+    m_bias_term.set_bias_term_constant(c);
 }
 
 template<class S, class M, unsigned P>
