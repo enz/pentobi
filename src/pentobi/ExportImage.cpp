@@ -23,13 +23,19 @@ void exportImage(QWidget* parent, const Board& bd, bool coordinates,
 {
     QSettings settings;
     int size = settings.value("export_image_size", 420).toInt();
-    bool ok;
-    size = QInputDialog::getInt(parent,
-                                qApp->translate("ExportImage", "Export Image"),
-                                qApp->translate("ExportImage", "Image size:"),
-                                size, 0, 2147483647, 40, &ok);
-    if (! ok)
+    QInputDialog dialog(parent);
+    Qt::WindowFlags windowFlags = dialog.windowFlags();
+    windowFlags &= ~Qt::WindowContextHelpButtonHint;
+    dialog.setWindowFlags(windowFlags);
+    dialog.setWindowTitle(qApp->translate("ExportImage", "Export Image"));
+    dialog.setLabelText(qApp->translate("ExportImage", "Image size:"));
+    dialog.setInputMode(QInputDialog::IntInput);
+    dialog.setIntRange(0, 2147483647);
+    dialog.setIntStep(40);
+    dialog.setIntValue(size);
+    if (! dialog.exec())
         return;
+    size = dialog.intValue();
     settings.setValue("export_image_size", size);
     BoardPainter boardPainter;
     boardPainter.setCoordinates(coordinates);

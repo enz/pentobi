@@ -390,11 +390,19 @@ void MainWindow::analyzeGame()
 {
     QStringList items;
     items << tr("Fast") << tr("Normal") << tr("Slow");
-    bool ok;
-    QString item = QInputDialog::getItem(this, tr("Analyze Game"),
-                                         tr("Analysis speed:"), items, 0,
-                                         false, &ok);
-    if (! ok || item.isEmpty())
+    QInputDialog dialog(this);
+    Qt::WindowFlags windowFlags = dialog.windowFlags();
+    windowFlags &= ~Qt::WindowContextHelpButtonHint;
+    dialog.setWindowFlags(windowFlags);
+    dialog.setWindowTitle(tr("Analyze Game"));
+    dialog.setLabelText(tr("Analysis speed:"));
+    dialog.setInputMode(QInputDialog::TextInput);
+    dialog.setComboBoxItems(items);
+    dialog.setComboBoxEditable(false);
+    if (! dialog.exec())
+        return;
+    QString item = dialog.textValue();
+    if (item.isEmpty())
         return;
     int speed = items.indexOf(item);
     cancelThread();
@@ -2015,13 +2023,19 @@ void MainWindow::gotoMove()
     int defaultValue = getBoard().get_nu_moves();
     if (defaultValue == 0)
         defaultValue = maxMoves;
-    bool ok;
-    int i = QInputDialog::getInt(this, tr("Go to Move"), tr("Move number:"),
-                                 defaultValue, 1,
-                                 static_cast<int>(nodes.size()), 1, &ok);
-    if (! ok)
+    QInputDialog dialog(this);
+    Qt::WindowFlags windowFlags = dialog.windowFlags();
+    windowFlags &= ~Qt::WindowContextHelpButtonHint;
+    dialog.setWindowFlags(windowFlags);
+    dialog.setWindowTitle(tr("Go to Move"));
+    dialog.setLabelText(tr("Move number:"));
+    dialog.setInputMode(QInputDialog::IntInput);
+    dialog.setIntRange(1, static_cast<int>(nodes.size()));
+    dialog.setIntStep(1);
+    dialog.setIntValue(defaultValue);
+    if (! dialog.exec())
         return;
-    gotoNode(*nodes[i - 1]);
+    gotoNode(*nodes[dialog.intValue() - 1]);
 }
 
 void MainWindow::gotoNode(const Node& node)
