@@ -7,13 +7,14 @@
 
 #include <QFutureWatcher>
 #include <QMainWindow>
-#include <QMessageBox>
 #include "RatingHistory.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/Game.h"
 #include "libpentobi_mcts/Player.h"
 
 class QActionGroup;
+class QLabel;
+class QMessageBox;
 class QPlainTextEdit;
 class QSplitter;
 class AnalyzeGameWindow;
@@ -614,9 +615,6 @@ private:
 
     void initPieceSelectors();
 
-    void initQuestion(QMessageBox& msgBox, const QString& text,
-                      const QString& infoText = "");
-
     void leaveSetupMode();
 
     void play(Color c, Move mv, bool checkComputerMove);
@@ -642,9 +640,6 @@ private:
                   const QString& detailText = "", bool withIcon = false);
 
     void showInvalidFile(QString file, const Exception& e);
-
-    void showMessage(QMessageBox::Icon icon, const QString& text,
-                     const QString& infoText, const QString& detailText);
 
     void showStatus(const QString& text, bool temporary = false);
 

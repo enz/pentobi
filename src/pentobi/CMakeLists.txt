@@ -10,12 +10,14 @@ set(pentobi_SRCS
   AnalyzeGameWidget.cpp
   AnalyzeGameWindow.cpp
   Application.cpp
+  ExportImage.cpp
   MainWindow.cpp
   Main.cpp
   RatedGamesList.cpp
   RatingDialog.cpp
   RatingHistory.cpp
   RatingGraph.cpp
+  ShowMessage.cpp
   Util.cpp
   )
 

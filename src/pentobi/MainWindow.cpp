@@ -18,11 +18,11 @@
 #include <QDir>
 #include <QDesktopWidget>
 #include <QFileDialog>
-#include <QImageWriter>
 #include <QInputDialog>
 #include <QLabel>
 #include <QMenu>
 #include <QMenuBar>
+#include <QMessageBox>
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QSettings>
@@ -32,7 +32,9 @@
 #include <QToolButton>
 #include <QtConcurrentRun>
 #include "AnalyzeGameWindow.h"
+#include "ExportImage.h"
 #include "RatingDialog.h"
+#include "ShowMessage.h"
 #include "Util.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
@@ -1584,41 +1586,8 @@ void MainWindow::exportAsciiArt()
 
 void MainWindow::exportImage()
 {
-    QSettings settings;
-    int size = settings.value("export_image_size", 420).toInt();
-    bool ok;
-    size = QInputDialog::getInt(this, tr("Export Image"), tr("Image size:"),
-                                size, 0, 2147483647, 40, &ok);
-    if (! ok)
-        return;
-    settings.setValue("export_image_size", size);
-    bool coordinates = m_actionCoordinates->isChecked();
-    BoardPainter boardPainter;
-    boardPainter.setCoordinates(coordinates);
-    boardPainter.setCoordinateColor(QColor(100, 100, 100));
-    QImage image(size, size, QImage::Format_ARGB32);
-    image.fill(Qt::transparent);
-    QPainter painter;
-    painter.begin(&image);
-    if (coordinates)
-        painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
-    const Board& bd = getBoard();
-    boardPainter.paintEmptyBoard(painter, size, size, bd.get_variant(),
-                                 bd.get_geometry());
-    boardPainter.paintPieces(painter, bd.get_grid(), &m_guiBoard->getLabels());
-    painter.end();
-    QString file;
-    while (true)
-    {
-        file = QFileDialog::getSaveFileName(this, file);
-        if (file.isEmpty())
-            break;
-        QImageWriter writer(file);
-        if (writer.write(image))
-            break;
-        else
-            showError(writer.errorString());
-    }
+    ::exportImage(this, getBoard(), m_actionCoordinates->isChecked(),
+                  m_guiBoard->getLabels());
 }
 
 void MainWindow::findMove()
@@ -2194,22 +2163,6 @@ void MainWindow::initPieceSelectors()
         if (isVisible)
             m_pieceSelector[Color(i)]->init();
     }
-}
-
-void MainWindow::initQuestion(QMessageBox& msgBox, const QString& text,
-                              const QString& infoText)
-{
-    Util::setNoTitle(msgBox);
-    // Workaround to avoid very small widths if the main text is short, which
-    // causes ugly word wrapping with single-word lines in the informative text.
-    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
-    QString expandedText = text;
-    QFontMetrics metrics(qApp->font("QLabel"));
-    int minWidth = 30 * metrics.averageCharWidth();
-    while (metrics.width(expandedText) < minWidth)
-        expandedText.append(" ");
-    msgBox.setText(expandedText);
-    msgBox.setInformativeText(infoText);
 }
 
 void MainWindow::interestingMove(bool checked)
@@ -3215,40 +3168,19 @@ void MainWindow::showComment(bool checked)
 void MainWindow::showError(const QString& text, const QString& infoText,
                            const QString& detailText)
 {
-    showMessage(QMessageBox::Critical, text, infoText, detailText);
+    ::showError(this, text, infoText, detailText);
 }
 
 void MainWindow::showInfo(const QString& text, const QString& infoText,
                           const QString& detailText, bool withIcon)
 {
-    showMessage(withIcon ? QMessageBox::Information : QMessageBox::NoIcon,
-                text, infoText, detailText);
+    ::showInfo(this, text, infoText, detailText, withIcon);
 }
 
 void MainWindow::showInvalidFile(QString file, const Exception& e)
 {
     showError(tr("Error in file '%1'").arg(QFileInfo(file).fileName()),
               tr("The file is not a valid Blokus SGF file."), e.what());
-}
-
-void MainWindow::showMessage(QMessageBox::Icon icon, const QString& text,
-                             const QString& infoText, const QString& detailText)
-{
-    // Workaround to avoid very small widths if the main text is short, which
-    // causes ugly word wrapping with single-word lines in the informative text.
-    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
-    QString expandedText = text;
-    QFontMetrics metrics(qApp->font("QLabel"));
-    int minWidth = 30 * metrics.averageCharWidth();
-    while (metrics.width(expandedText) < minWidth)
-        expandedText.append(" ");
-    QMessageBox msgBox(this);
-    Util::setNoTitle(msgBox);
-    msgBox.setIcon(icon);
-    msgBox.setText(expandedText);
-    msgBox.setInformativeText(infoText);
-    msgBox.setDetailedText(detailText);
-    msgBox.exec();
 }
 
 void MainWindow::showRating()

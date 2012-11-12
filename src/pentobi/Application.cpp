@@ -8,6 +8,7 @@
 
 #include "Application.h"
 
+#include <QMessageBox>
 #include "MainWindow.h"
 #include "libboardgame_sys/Compiler.h"
 
