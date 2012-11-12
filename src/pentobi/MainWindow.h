@@ -544,6 +544,8 @@ private:
 
     LeaveFullscreenButton* m_leaveFullscreenButton;
 
+    int m_lastRemainingSeconds;
+
     /** Is the current game a game loaded from the autosave file?
         If yes, we need it to save again on quit even if it was not modified.
         Note that the autosave game is deleted after loading to avoid that
