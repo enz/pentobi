@@ -525,11 +525,6 @@ Search<S,M,P>::~Search() throw()
 template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_abort() const
 {
-    if (get_abort())
-    {
-        log("Search aborted");
-        return true;
-    }
     Float count = m_tree.get_root().get_count() + m_reuse_count;
     static_assert(numeric_limits<Float>::radix == 2,
                   "libboardgame_mcts::Float must have radix 2");
@@ -549,6 +544,11 @@ bool Search<S,M,P>::check_abort() const
 template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_abort_expensive() const
 {
+    if (get_abort())
+    {
+        log("Search aborted");
+        return true;
+    }
     Float count = m_tree.get_root().get_count() + m_reuse_count;
     double time = m_timer();
     if (! m_deterministic && time < 0.1)
