@@ -251,6 +251,11 @@ private:
 
     bool m_isAnalyzeRunning;
 
+    /** Should the computer generate a move if it is its turn?
+        Enabled on game start (if the computer plays at least one color)
+        or after selecting Play. Disabled when navigating in the game. */
+    bool m_autoPlay;
+
     /** Flag indicating that the position after the last move played was
         a terminal position. */
     bool m_gameFinished;

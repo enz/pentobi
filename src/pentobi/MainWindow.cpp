@@ -209,6 +209,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                        const QString& booksDir, bool noBook, size_t memory)
     : m_isGenMoveRunning(false),
       m_isAnalyzeRunning(false),
+      m_autoPlay(true),
       m_ignoreCommentTextChanged(false),
       m_genMoveId(0),
       m_lastComputerMovesBegin(0),
@@ -536,6 +537,8 @@ void MainWindow::cancelThread()
 
 void MainWindow::checkComputerMove()
 {
+    if (! m_autoPlay)
+        return;
     bool isGameOver = getBoard().is_game_over();
     if (! isGameOver && m_computerColors[m_currentColor])
         genMove();
@@ -713,7 +716,10 @@ void MainWindow::computerColors()
     bool hasCurrentColorChanged = (oldCurrentColor != m_currentColor);
     if (! m_isGenMoveRunning && isCurrentPlayedByComputer
         && (hasCurrentColorChanged || ! wasCurrentPlayedByComputer))
+    {
+        m_autoPlay = true;
         checkComputerMove();
+    }
 }
 
 bool MainWindow::computerPlaysAll() const
@@ -2062,6 +2068,7 @@ void MainWindow::gotoNode(const Node& node)
     if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
             ->setCurrentPosition(*m_game, node);
+    m_autoPlay = false;
     updateWindow(true);
 }
 
@@ -2136,7 +2143,10 @@ void MainWindow::initGame()
             m_computerColors[Color(1)] = true;
             m_computerColors[Color(3)] = true;
         }
+        m_autoPlay = true;
     }
+    else
+        m_autoPlay = false;
     m_currentColor = Color(0);
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
@@ -2476,6 +2486,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
         showInvalidFile(file, e);
     }
     m_computerColors.fill(false);
+    m_autoPlay = false;
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     initVariantActions();
@@ -2548,6 +2559,7 @@ void MainWindow::play()
         else
             m_computerColors[m_currentColor] = true;
     }
+    m_autoPlay = true;
     genMove();
 }
 
