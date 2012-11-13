@@ -76,18 +76,26 @@ int main(int argc, char* argv[])
         QString booksDir;
         QString translationsPentobiDir;
         QString translationsLibPentobiGuiDir;
+        QString appDir = QCoreApplication::applicationDirPath();
 #ifdef PENTOBI_MANUAL_DIR
         manualDir = PENTOBI_MANUAL_DIR;
 #endif
+        if (manualDir.isEmpty())
+            manualDir = appDir + "/manual";
 #ifdef PENTOBI_BOOKS_DIR
         booksDir = PENTOBI_BOOKS_DIR;
 #endif
+        if (booksDir.isEmpty())
+            booksDir = appDir + "/books";
 #ifdef PENTOBI_TRANSLATIONS
         translationsPentobiDir = PENTOBI_TRANSLATIONS;
         translationsLibPentobiGuiDir = PENTOBI_TRANSLATIONS;
 #endif
-        QString overrideConfigFile =
-            QCoreApplication::applicationDirPath() + "/pentobi.conf";
+        if (translationsPentobiDir.isEmpty())
+            translationsPentobiDir = appDir + "/translations";
+        if (translationsLibPentobiGuiDir.isEmpty())
+            translationsLibPentobiGuiDir = appDir + "/translations";
+        QString overrideConfigFile = appDir + "/pentobi.conf";
         if (QFileInfo(overrideConfigFile).exists())
         {
             QSettings settings(overrideConfigFile, QSettings::IniFormat);

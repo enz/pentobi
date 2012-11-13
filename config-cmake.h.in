@@ -10,15 +10,14 @@
 /* Floating type for Monte-Carlo tree search values (float|double) */
 #define LIBBOARDGAME_MCTS_FLOAT_TYPE @LIBBOARDGAME_MCTS_FLOAT_TYPE@
 
-/* Directory containing opening books.
-   Path is absolute or relative to location of executable. */
-#define PENTOBI_BOOKS_DIR "@PENTOBI_BOOKS_DIR@"
+/* Directory containing opening books. */
+#cmakedefine PENTOBI_BOOKS_DIR "@PENTOBI_BOOKS_DIR@"
 
 /** Location of the Pentobi user manual. */
-#define PENTOBI_MANUAL_DIR "@PENTOBI_MANUAL_DIR@"
+#cmakedefine PENTOBI_MANUAL_DIR "@PENTOBI_MANUAL_DIR@"
 
 /** Location of the translations directory. */
-#define PENTOBI_TRANSLATIONS "@PENTOBI_TRANSLATIONS@"
+#cmakedefine PENTOBI_TRANSLATIONS "@PENTOBI_TRANSLATIONS@"
 
 #ifdef _MSC_VER
 // Don't report Visual C++ warning 4355 ('this' : used in base member
