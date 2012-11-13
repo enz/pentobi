@@ -899,6 +899,7 @@ void MainWindow::createActions()
             this, SLOT(interestingMove(bool)));
 
     m_actionInterrupt = createAction(tr("I&nterrupt"));
+    m_actionInterrupt->setIcon(QIcon::fromTheme("process-stop"));
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
 
@@ -911,6 +912,7 @@ void MainWindow::createActions()
             this, SLOT(keepOnlySubtree()));
 
     m_actionLeaveFullscreen = createAction(tr("Leave Fullscreen"));
+    m_actionLeaveFullscreen->setIcon(QIcon::fromTheme("view-restore"));
     m_actionLeaveFullscreen->setShortcut(QString("Esc"));
     connect(m_actionLeaveFullscreen, SIGNAL(triggered()),
             this, SLOT(leaveFullscreen()));

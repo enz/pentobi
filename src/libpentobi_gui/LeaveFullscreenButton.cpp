@@ -26,7 +26,7 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
     m_button = new QToolButton(parent);
     m_button->setDefaultAction(action);
     m_button->setToolTip("");
-    m_button->setToolButtonStyle(Qt::ToolButtonTextOnly);
+    m_button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     m_button->show();
     // Resize to size hint as a workaround for a bug that clips the
     // long button text (tested on Qt 4.8.3 on Linux/KDE).
