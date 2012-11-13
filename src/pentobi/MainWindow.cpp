@@ -529,6 +529,8 @@ void MainWindow::cancelThread()
         clearStatus();
         setCursor(QCursor(Qt::ArrowCursor));
         m_actionInterrupt->setEnabled(false);
+        m_actionPlay->setEnabled(true);
+        m_actionPlaySingleMove->setEnabled(true);
     }
 }
 
@@ -1962,8 +1964,10 @@ void MainWindow::genMoveFinished()
     if (mv.is_pass())
         return;
     m_lastComputerMovesEnd = bd.get_nu_moves() + 1;
-    bool checkComputerMove = ! result.playSingleMove;
-    play(c, mv, checkComputerMove);
+    play(c, mv);
+    if (! result.playSingleMove)
+        checkComputerMove();
+    updateWindow(true);
 }
 
 QString MainWindow::getFilter() const
@@ -2509,10 +2513,13 @@ void MainWindow::placePiece(Color c, Move mv)
     {
         m_game->add_setup(c, mv);
         setSetupPlayer();
-        updateWindow(true);
     }
     else
-        play(c, mv, true);
+    {
+        play(c, mv);
+        checkComputerMove();
+    }
+    updateWindow(true);
 }
 
 void MainWindow::play()
@@ -2544,7 +2551,7 @@ void MainWindow::play()
     genMove();
 }
 
-void MainWindow::play(Color c, Move mv, bool checkComputerMove)
+void MainWindow::play(Color c, Move mv)
 {
     const Board& bd = getBoard();
     m_game->play(c, mv, false);
@@ -2559,12 +2566,7 @@ void MainWindow::play(Color c, Move mv, bool checkComputerMove)
         deleteAutoSaveFile();
         return;
     }
-    updateWindow(true);
-    repaint();
     m_currentColor = m_game->get_effective_to_play();
-    updateWindow(true);
-    if (checkComputerMove)
-        MainWindow::checkComputerMove();
 }
 
 void MainWindow::playSingleMove()
@@ -3228,6 +3230,8 @@ void MainWindow::showThinking()
     if (! m_isGenMoveRunning)
         return;
     setCursor(QCursor(Qt::BusyCursor));
+    m_actionPlay->setEnabled(false);
+    m_actionPlaySingleMove->setEnabled(false);
     showStatus(tr("The computer is thinking..."));
 }
 
@@ -3551,7 +3555,11 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
     m_actionNextVariation->setEnabled(current.get_sibling() != 0);
-    m_actionPlay->setEnabled(hasMoves);
+    if (! m_isGenMoveRunning)
+    {
+        m_actionPlay->setEnabled(hasMoves);
+        m_actionPlaySingleMove->setEnabled(hasMoves);
+    }
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
     // See also comment in setupMode()
     m_actionSetupMode->setEnabled(! hasParent && ! hasChildren);

@@ -621,7 +621,7 @@ private:
 
     void leaveSetupMode();
 
-    void play(Color c, Move mv, bool checkComputerMove);
+    void play(Color c, Move mv);
 
     bool save(const QString& file);
 
