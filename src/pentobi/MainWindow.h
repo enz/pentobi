@@ -681,7 +681,7 @@ private slots:
 
     void doubtfulMove(bool checked);
 
-    void fullscreen(bool checked);
+    void fullscreen();
 
     void variantClassic(bool checked);
 

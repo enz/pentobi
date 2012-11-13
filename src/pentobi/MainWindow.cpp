@@ -869,9 +869,7 @@ void MainWindow::createActions()
     m_actionFullscreen = createAction(tr("&Fullscreen"));
     m_actionFullscreen->setIcon(QIcon::fromTheme("view-fullscreen"));
     m_actionFullscreen->setShortcut(QString("F11"));
-    m_actionFullscreen->setCheckable(true);
-    connect(m_actionFullscreen, SIGNAL(triggered(bool)),
-            this, SLOT(fullscreen(bool)));
+    connect(m_actionFullscreen, SIGNAL(triggered()), this, SLOT(fullscreen()));
 
     m_actionGameInfo = createAction(tr("Ga&me Info"));
     m_actionGameInfo->setShortcut(QString("Ctrl+I"));
@@ -1718,29 +1716,23 @@ void MainWindow::forward10()
     gotoNode(*node);
 }
 
-void MainWindow::fullscreen(bool checked)
+void MainWindow::fullscreen()
 {
-    m_actionFullscreen->setChecked(checked);
+    if (isFullScreen())
+    {
+        // If F11 is pressed in fullscreen, we switch to normal
+        leaveFullscreen();
+        return;
+    }
     QSettings settings;
-    if (checked)
-    {
-        menuBar()->hide();
-        m_toolBar->hide();
-        settings.setValue("geometry", saveGeometry());
-        showFullScreen();
-        if (m_leaveFullscreenButton == 0)
-            m_leaveFullscreenButton =
-                new LeaveFullscreenButton(this, m_actionLeaveFullscreen);
-        m_leaveFullscreenButton->showButton();
-    }
-    else
-    {
-        bool showToolbar = settings.value("toolbar", true).toBool();
-        menuBar()->show();
-        m_toolBar->setVisible(showToolbar);
-        m_leaveFullscreenButton->hideButton();
-        showNormal();
-    }
+    menuBar()->hide();
+    m_toolBar->hide();
+    settings.setValue("geometry", saveGeometry());
+    showFullScreen();
+    if (m_leaveFullscreenButton == 0)
+        m_leaveFullscreenButton =
+            new LeaveFullscreenButton(this, m_actionLeaveFullscreen);
+    m_leaveFullscreenButton->showButton();
 }
 
 void MainWindow::gameInfo()
@@ -2250,8 +2242,14 @@ void MainWindow::keepOnlySubtree()
 
 void MainWindow::leaveFullscreen()
 {
-    if (isFullScreen())
-        fullscreen(false);
+    if (! isFullScreen())
+        return;
+    QSettings settings;
+    bool showToolbar = settings.value("toolbar", true).toBool();
+    menuBar()->show();
+    m_toolBar->setVisible(showToolbar);
+    m_leaveFullscreenButton->hideButton();
+    showNormal();
 }
 
 void MainWindow::leaveSetupMode()
