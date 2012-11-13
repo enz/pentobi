@@ -1916,6 +1916,7 @@ void MainWindow::genMove(bool playSingleMove)
     clearSelectedPiece();
     clear_abort();
     m_lastRemainingSeconds = 0;
+    m_lastRemainingMinutes = 0;
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
@@ -2774,18 +2775,23 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
     // time
     if (elapsedSeconds < 10)
         return;
-    int seconds = static_cast<int>(ceil(remainingSeconds));
-    if (seconds == m_lastRemainingSeconds)
-        return;
-    m_lastRemainingSeconds = seconds;
     QString text;
+    int seconds = static_cast<int>(ceil(remainingSeconds));
     if (seconds < 90)
+    {
+        if (seconds == m_lastRemainingSeconds)
+            return;
+        m_lastRemainingSeconds = seconds;
         text =
             tr("The computer is thinking... (max. %1 seconds remaining)")
             .arg(seconds);
+    }
     else
     {
-        int minutes = seconds / 60;
+        int minutes = static_cast<int>(ceil(remainingSeconds / 60));
+        if (minutes == m_lastRemainingMinutes)
+            return;
+        m_lastRemainingMinutes = minutes;
         text =
             tr("The computer is thinking... (max. %1 minutes remaining)")
             .arg(minutes);
