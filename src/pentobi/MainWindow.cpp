@@ -3385,6 +3385,8 @@ void MainWindow::updateMoveNumber()
     unsigned movesLeft = get_moves_left(tree, current);
     unsigned totalMoves = move + movesLeft;
     string variation = get_variation_string(current);
+    QString text;
+    QString toolTip;
     if (variation.empty())
     {
         if (movesLeft == 0)
@@ -3393,37 +3395,42 @@ void MainWindow::updateMoveNumber()
             // not already displayed on the board.
             if (! m_actionMoveNumbersLast->isChecked())
             {
-                m_moveNumber->setText(QString("%1").arg(move));
-                m_moveNumber->setToolTip(tr("Move number %1").arg(move));
-            }
-            else
-            {
-                m_moveNumber->setText("");
-                m_moveNumber->setToolTip("");
+                text = QString("%1").arg(move);
+                toolTip = tr("Move number %1").arg(move);
             }
         }
         else
         {
-            m_moveNumber->setText(QString("%1/%2").arg(move).arg(totalMoves));
+            text = QString("%1/%2").arg(move).arg(totalMoves);
             if (move == 0)
-                m_moveNumber->setToolTip(tr("%n move(s)", "", totalMoves));
+                toolTip = tr("%n move(s)", "", totalMoves);
             else
-                m_moveNumber->setToolTip(tr("Move number %1 of %2")
-                                         .arg(move).arg(totalMoves));
+                toolTip = tr("Move number %1 of %2").arg(move).arg(totalMoves);
         }
     }
     else
     {
         if (movesLeft == 0)
-            m_moveNumber->setText(QString("%1 (%2)")
-                                  .arg(move).arg(variation.c_str()));
+            text = QString("%1 (%2)").arg(move).arg(variation.c_str());
         else
-            m_moveNumber->setText(QString("%1/%2 (%3)")
-                                  .arg(move).arg(totalMoves)
-                                  .arg(variation.c_str()));
-        m_moveNumber->setToolTip(tr("Move number %1 of %2 in variation %3")
-                                 .arg(move).arg(totalMoves)
-                                 .arg(variation.c_str()));
+            text =
+                QString("%1/%2 (%3)")
+                .arg(move).arg(totalMoves).arg(variation.c_str());
+        toolTip =
+            tr("Move number %1 of %2 in variation %3")
+            .arg(move).arg(totalMoves).arg(variation.c_str());
+    }
+    if (text.isEmpty())
+        statusBar()->removeWidget(m_moveNumber);
+    else
+    {
+        m_moveNumber->setText(text);
+        m_moveNumber->setToolTip(toolTip);
+        if (! m_moveNumber->isVisible())
+        {
+            statusBar()->addPermanentWidget(m_moveNumber);
+            m_moveNumber->show();
+        }
     }
 }
 
