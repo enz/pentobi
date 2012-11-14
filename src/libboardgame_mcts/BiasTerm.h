@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include "Float.h"
+#include "libboardgame_util/Assert.h"
 #include "libboardgame_util/FastLog.h"
 
 namespace libboardgame_mcts {
@@ -54,6 +55,7 @@ inline Float BiasTerm::get(Float child_count) const
 {
     if (m_parent_part == 0)
         return 0;
+    LIBBOARDGAME_ASSERT(child_count >= 0);
     Float child_part;
     if (child_count < nu_precomp)
         child_part = m_precomp_child_part[static_cast<size_t>(child_count)];
@@ -81,6 +83,7 @@ inline Float BiasTerm::get_bias_term_constant() const
 
 inline void BiasTerm::start_iteration(Float parent_count)
 {
+    LIBBOARDGAME_ASSERT(parent_count >= 0);
     if (parent_count < nu_precomp)
         m_parent_part =
             m_precomp_parent_part[static_cast<size_t>(parent_count)];

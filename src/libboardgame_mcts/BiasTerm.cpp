@@ -25,8 +25,8 @@ void BiasTerm::set_bias_term_constant(Float value)
     m_bias_term_constant = value;
     for (unsigned i = 0; i < nu_precomp; ++i)
     {
-        m_precomp_parent_part[i] = compute_parent_part(i);
-        m_precomp_child_part[i] = compute_child_part(i);
+        m_precomp_parent_part[i] = compute_parent_part(static_cast<Float>(i));
+        m_precomp_child_part[i] = compute_child_part(static_cast<Float>(i));
     }
 }
 
