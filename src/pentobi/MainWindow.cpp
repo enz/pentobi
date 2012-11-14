@@ -537,13 +537,11 @@ void MainWindow::cancelThread()
 
 void MainWindow::checkComputerMove()
 {
-    if (! m_autoPlay)
-        return;
-    bool isGameOver = getBoard().is_game_over();
-    if (! isGameOver && m_computerColors[m_currentColor])
-        genMove();
-    else
+    if (! m_autoPlay || ! m_computerColors[m_currentColor]
+        || getBoard().is_game_over())
         m_lastComputerMovesBegin = 0;
+    else
+        genMove();
 }
 
 bool MainWindow::checkSave()
@@ -1965,9 +1963,12 @@ void MainWindow::genMoveFinished()
         return;
     m_lastComputerMovesEnd = bd.get_nu_moves() + 1;
     play(c, mv);
+    // Call updateWindow() before checkComputerMove() because checkComputerMove
+    // resets m_lastComputerMovesBegin if computer doesn't play current color
+    // and updateWindow needs m_lastComputerMovesBegin
+    updateWindow(true);
     if (! result.playSingleMove)
         checkComputerMove();
-    updateWindow(true);
 }
 
 QString MainWindow::getFilter() const
