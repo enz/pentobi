@@ -16,6 +16,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QDir>
+#include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFileDialog>
 #include <QInputDialog>
@@ -1981,7 +1982,8 @@ QString MainWindow::getLastDir()
     QSettings settings;
     QString dir = settings.value("last_dir", "").toString();
     if (dir.isEmpty() || ! QFileInfo(dir).exists())
-        dir = QDir::home().path();
+        dir = QDesktopServices::storageLocation(
+                                          QDesktopServices::DocumentsLocation);
     return dir;
 }
 
