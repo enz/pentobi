@@ -909,7 +909,6 @@ void MainWindow::createActions()
             this, SLOT(keepOnlySubtree()));
 
     m_actionLeaveFullscreen = createAction(tr("Leave Fullscreen"));
-    m_actionLeaveFullscreen->setIcon(QIcon::fromTheme("view-restore"));
     m_actionLeaveFullscreen->setShortcut(QString("Esc"));
     connect(m_actionLeaveFullscreen, SIGNAL(triggered()),
             this, SLOT(leaveFullscreen()));
