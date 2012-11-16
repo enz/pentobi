@@ -530,7 +530,8 @@ array<Float,4> State::evaluate_playout()
             log() << "Result: 0.5 (symmetry)\n";
         m_stat_score.add(0);
         array<Float,4> result;
-        result[0] = result[1] = 0.5;
+        for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+            result[(*i).to_int()] = 0.5;
         return result;
     }
 
