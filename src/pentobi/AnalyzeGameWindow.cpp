@@ -16,7 +16,7 @@
 AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     : QDialog(parent)
 {
-    setWindowTitle(tr("Analyze Game"));
+    setWindowTitle(tr("Game Analysis"));
     // Disable '?' button in title bar on Windows, we don't have
     // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
