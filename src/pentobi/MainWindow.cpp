@@ -2788,8 +2788,9 @@ void MainWindow::saveAs()
 void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
 {
     // If the search is longer than 10 sec, we show the (maximum) remaining
-    // time
-    if (elapsedSeconds < 10)
+    // time (only during a move generation, ignore search callbacks during
+    // game analysis)
+    if (! m_isGenMoveRunning || elapsedSeconds < 10)
         return;
     QString text;
     int seconds = static_cast<int>(ceil(remainingSeconds));
