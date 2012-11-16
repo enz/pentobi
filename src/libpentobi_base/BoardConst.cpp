@@ -650,13 +650,12 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
 void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
                              Point center)
 {
-    MovePoints points;
-    for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
-        points.push_back(Point((*i).x, (*i).y));
     MoveInfo info;
     MoveInfoExt info_ext;
     info.piece = piece;
-    info.points = points;
+    info.points.clear();
+    for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
+        info.points.push_back(Point((*i).x, (*i).y));
     info_ext.center = center;
     info_ext.breaks_symmetry = false;
     info_ext.symmetric_move = Move::null();
@@ -675,10 +674,10 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
             grid[p] = '*';
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
-    BOOST_FOREACH(Point p, points)
+    BOOST_FOREACH(Point p, info.points)
         for (unsigned i = 0; i < nu_adj_status; ++i)
         {
-            if (is_compatible_with_adj_status(p, i, points))
+            if (is_compatible_with_adj_status(p, i, info.points))
             {
                 (*m_full_move_table)[i][piece][p].push_back(move);
                 ++m_move_lists_sum_length;
@@ -744,8 +743,6 @@ void BoardConst::create_moves(Piece piece)
             points = piece_info.get_points();
             transform->transform(points.begin(), points.end());
             sort(points.begin(), points.end());
-            auto center = find(points.begin(), points.end(), CoordPoint(0, 0));
-            LIBBOARDGAME_ASSERT(center != points.end());
             bool is_onboard = true;
             BOOST_FOREACH(CoordPoint& p, points)
             {
@@ -757,8 +754,10 @@ void BoardConst::create_moves(Piece piece)
                     break;
                 }
             }
-            if (is_onboard)
-                create_move(piece, points, Point(center->x, center->y));
+            if (! is_onboard)
+                continue;
+            LIBBOARDGAME_ASSERT(points.contains(CoordPoint(x, y)));
+            create_move(piece, points, Point(x, y));
         }
     }
 }

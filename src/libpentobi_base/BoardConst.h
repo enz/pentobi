@@ -63,7 +63,7 @@ public:
         precomputed lists shorter but exponentially increase the number of
         lists and the total memory used for all lists. Therefore, the optimal
         value for speeding up the matching depends on the CPU cache size. */
-    static const unsigned adj_status_nu_adj = 4;
+    static const unsigned adj_status_nu_adj = 5;
 
     static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
 
