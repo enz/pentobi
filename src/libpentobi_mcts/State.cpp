@@ -292,9 +292,9 @@ inline void State::add_moves(Point p, Color c, Piece piece,
         {
             unsigned local_value;
             const MoveInfo& info = get_move_info(*i);
-            if (check_move(c, info.points, local_value)
-                && ! m_marker.test_and_set(*i))
+            if (! m_marker[*i] && check_move(c, info.points, local_value))
             {
+                m_marker.set(*i);
                 moves.push_back(*i);
                 check_local(local_value, *i, info);
             }
@@ -798,9 +798,11 @@ void State::init_move_list_with_local(Color c)
                     unsigned adj_status = m_bd.get_adj_status(p, c);
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
-                        if (! m_bd.is_forbidden(c, mv)
-                            && ! m_marker.test_and_set(mv))
+                        if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
+                        {
+                            m_marker.set(mv);
                             moves.push_back(mv);
+                        }
                     }
                 }
         }
@@ -842,9 +844,12 @@ void State::init_move_list_without_local(Color c)
                     BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
                     {
                         if (! m_shared_const.is_forbidden_at_root[c][mv]
-                            && ! m_bd.is_forbidden(c, mv)
-                            && ! m_marker.test_and_set(mv))
+                            && ! m_marker[mv]
+                            && ! m_bd.is_forbidden(c, mv))
+                        {
+                            m_marker.set(mv);
                             moves.push_back(mv);
+                        }
                     }
                 }
         }
@@ -861,9 +866,11 @@ void State::init_move_list_without_local(Color c)
                         BOOST_FOREACH(Move mv,
                                       m_bd.get_moves(piece, p, adj_status))
                         {
-                            if (! m_bd.is_forbidden(c, mv)
-                                && ! m_marker.test_and_set(mv))
+                            if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
+                            {
+                                m_marker.set(mv);
                                 moves.push_back(mv);
+                            }
                         }
                     }
             }
