@@ -693,7 +693,8 @@ void BoardConst::create_moves()
     for (unsigned i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
     if (log_move_creation)
-        log() << "Created moves: " << m_move_info.size() << '\n';
+        log() << "Created moves: " << m_move_info.size() << ", "
+              << "precomputed: " << m_move_lists_sum_length << '\n';
     m_move_lists.reset(new Move[m_move_lists_sum_length]);
     unsigned current = 0;
     for (GeometryIterator i(m_geometry); i; ++i)
