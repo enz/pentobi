@@ -152,7 +152,7 @@ Move Player::genmove(const Board& bd, Color c)
                  || variant == variant_trigon_3)
         {
             minimum = 5;
-            factor_per_level = 4.67f;
+            factor_per_level = 4.72f;
         }
         else if (variant == variant_junior)
         {
