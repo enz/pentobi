@@ -291,17 +291,17 @@ inline void State::add_moves(Point p, Color c, Piece piece,
         if (! m_shared_const.is_forbidden_at_root[c][*i])
         {
             unsigned local_value;
-            const MoveInfo& info = get_move_info(*i);
-            if (! m_marker[*i] && check_move(c, info.points, local_value))
+            const MovePoints& points = get_move_info(*i).points;
+            if (! m_marker[*i] && check_move(c, points, local_value))
             {
                 m_marker.set(*i);
                 moves.push_back(*i);
-                check_local(local_value, *i, info);
+                check_local(local_value, *i, points);
             }
         }
 }
 
-void State::check_local(unsigned local_value, Move mv, const MoveInfo& info)
+void State::check_local(unsigned local_value, Move mv, const MovePoints& points)
 {
     if (local_value < m_max_local_value)
         return;
@@ -312,7 +312,7 @@ void State::check_local(unsigned local_value, Move mv, const MoveInfo& info)
     }
     m_local_moves.push_back(mv);
     m_max_playable_piece_size_local =
-        max(m_max_playable_piece_size_local, info.points.size());
+        max(m_max_playable_piece_size_local, points.size());
 }
 
 bool State::check_move(Color c, const MovePoints& points,
@@ -1056,7 +1056,7 @@ void State::update_move_list(Color c)
         if (info.piece != last_piece && check_move(c, info.points, local_value))
         {
             m_marker.set(*i);
-            check_local(local_value, *i, info);
+            check_local(local_value, *i, info.points);
         }
         else
         {

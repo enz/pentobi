@@ -244,7 +244,7 @@ private:
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
 
-    void check_local(unsigned local_value, Move mv, const MoveInfo& info);
+    void check_local(unsigned local_value, Move mv, const MovePoints& points);
 
     void compute_features();
 
