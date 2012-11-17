@@ -34,69 +34,82 @@ using libpentobi_base::Piece;
 
 namespace {
 
+void filter_min_size(const BoardConst& board_const, unsigned min_size,
+                     PieceMap<bool>& is_piece_considered)
+{
+    for (unsigned i = 0; i < board_const.get_nu_pieces(); ++i)
+    {
+        Piece piece(i);
+        const PieceInfo& piece_info = board_const.get_piece_info(piece);
+        if (piece_info.get_size() < min_size)
+            is_piece_considered[piece] = false;
+    }
+}
+
 void set_piece_considered(const BoardConst& board_const, const char* name,
-                          PieceMap<bool>& is_piece_considered)
+                          PieceMap<bool>& is_piece_considered,
+                          bool is_considered = true)
 {
     Piece piece;
     bool found = board_const.get_piece_by_name(name, piece);
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
     LIBBOARDGAME_ASSERT(found);
-    is_piece_considered[piece] = true;
+    is_piece_considered[piece] = is_considered;
 }
 
-void set_pieces_considered(const BoardConst& board_const, unsigned nu_moves,
+void set_pieces_considered(const Board& bd, unsigned nu_moves,
                            PieceMap<bool>& is_piece_considered)
 {
+    const BoardConst& board_const = bd.get_board_const();
     BoardType board_type = board_const.get_board_type();
-    unsigned min_piece_size = 0;
+    unsigned nu_colors = bd.get_nu_colors();
+    is_piece_considered.fill(true);
     if (board_type == board_type_duo)
     {
-        if (nu_moves < 4)
-            min_piece_size = 5;
-        else if (nu_moves < 6)
-            min_piece_size = 4;
-        else if (nu_moves < 10)
-            min_piece_size = 3;
+        if (nu_moves < 2 * nu_colors)
+            filter_min_size(board_const, 5, is_piece_considered);
+        else if (nu_moves < 3 * nu_colors)
+            filter_min_size(board_const, 4, is_piece_considered);
+        else if (nu_moves < 5 * nu_colors)
+            filter_min_size(board_const, 3, is_piece_considered);
     }
     else if (board_type == board_type_classic)
     {
-        if (nu_moves < 4)
+        if (nu_moves < 1 * nu_colors)
         {
             is_piece_considered.fill(false);
             set_piece_considered(board_const, "V5", is_piece_considered);
             set_piece_considered(board_const, "Z5", is_piece_considered);
-            return;
         }
-        if (nu_moves < 12)
-            min_piece_size = 5;
-        else if (nu_moves < 20)
-            min_piece_size = 4;
-        else if (nu_moves < 30)
-            min_piece_size = 3;
+        else if (nu_moves < 3 * nu_colors)
+            filter_min_size(board_const, 5, is_piece_considered);
+        else if (nu_moves < 5 * nu_colors)
+            filter_min_size(board_const, 4, is_piece_considered);
+        else if (nu_moves < 7 * nu_colors)
+            filter_min_size(board_const, 3, is_piece_considered);
     }
     else if (board_type == board_type_trigon
              || board_type == board_type_trigon_3)
     {
-        if (nu_moves < 4)
+        if (nu_moves < 1 * nu_colors)
         {
             is_piece_considered.fill(false);
             set_piece_considered(board_const, "V", is_piece_considered);
-            return;
+            // I5 would also be good but the distance to center pruning in
+            // State would prune them anyway
         }
-        if (nu_moves < 16)
-            min_piece_size = 6;
-        else if (nu_moves < 20)
-            min_piece_size = 5;
-        else if (nu_moves < 28)
-            min_piece_size = 4;
-        else if (nu_moves < 36)
-            min_piece_size = 3;
-    }
-    for (unsigned i = 0; i < board_const.get_nu_pieces(); ++i)
-    {
-        Piece piece(i);
-        const PieceInfo& piece_info = board_const.get_piece_info(piece);
-        is_piece_considered[piece] = (piece_info.get_size() >= min_piece_size);
+        if (nu_moves < 4 * nu_colors)
+        {
+            filter_min_size(board_const, 6, is_piece_considered);
+            // O is a bad early move, it neither extends, nor blocks well
+            set_piece_considered(board_const, "O", is_piece_considered, false);
+        }
+        else if (nu_moves < 5 * nu_colors)
+            filter_min_size(board_const, 5, is_piece_considered);
+        else if (nu_moves < 7 * nu_colors)
+            filter_min_size(board_const, 4, is_piece_considered);
+        else if (nu_moves < 9 * nu_colors)
+            filter_min_size(board_const, 3, is_piece_considered);
     }
 }
 
@@ -172,8 +185,7 @@ void Search::on_start_search()
     }
 
     for (unsigned i = 0; i < Board::max_game_moves; ++i)
-        set_pieces_considered(bd.get_board_const(), i,
-                              m_shared_const.is_piece_considered[i]);
+        set_pieces_considered(bd, i, m_shared_const.is_piece_considered[i]);
     m_shared_const.is_piece_considered_all.fill(true);
 
     PointTransfRot180<Point> transform;
