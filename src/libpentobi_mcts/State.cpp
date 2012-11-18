@@ -296,23 +296,26 @@ inline void State::add_moves(Point p, Color c, Piece piece,
             {
                 m_marker.set(*i);
                 moves.push_back(*i);
-                check_local(local_value, *i, points);
+                check_local(local_value, *i, points.size());
             }
         }
 }
 
-void State::check_local(unsigned local_value, Move mv, const MovePoints& points)
+void State::check_local(unsigned local_value, Move mv,
+                        unsigned short piece_size)
 {
     if (local_value < m_max_local_value)
         return;
     if (local_value > m_max_local_value)
     {
-        m_max_local_value = local_value;
         m_local_moves.clear();
+        m_max_local_value = local_value;
+        m_max_playable_piece_size_local = piece_size;
     }
+    else
+        m_max_playable_piece_size_local =
+            max(m_max_playable_piece_size_local, piece_size);
     m_local_moves.push_back(mv);
-    m_max_playable_piece_size_local =
-        max(m_max_playable_piece_size_local, points.size());
 }
 
 bool State::check_move(Color c, const MovePoints& points,
@@ -1057,7 +1060,7 @@ void State::update_move_list(Color c)
             unsigned local_value;
             if (check_move(c, info.points, local_value))
             {
-                check_local(local_value, *i, info.points);
+                check_local(local_value, *i, info.points.size());
                 m_marker.set(*i);
                 ++i;
                 continue;
