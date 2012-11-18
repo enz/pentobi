@@ -1049,20 +1049,21 @@ void State::update_move_list(Color c)
         if (m_bd.get_nu_left_piece(c, piece) == 0)
             last_piece = piece;
     }
-    for (auto i = moves.begin(); i != moves.end(); ++i)
+    for (auto i = moves.begin(); i != moves.end(); )
     {
-        unsigned local_value;
         const MoveInfo& info = get_move_info(*i);
-        if (info.piece != last_piece && check_move(c, info.points, local_value))
+        if (info.piece != last_piece)
         {
-            m_marker.set(*i);
-            check_local(local_value, *i, info.points);
+            unsigned local_value;
+            if (check_move(c, info.points, local_value))
+            {
+                check_local(local_value, *i, info.points);
+                m_marker.set(*i);
+                ++i;
+                continue;
+            }
         }
-        else
-        {
-            moves.remove_fast(i);
-            --i;
-        }
+        moves.remove_fast(i);
     }
 
     // Find new legal moves because of the last piece played by this color
