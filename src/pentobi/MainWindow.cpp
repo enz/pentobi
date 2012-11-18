@@ -757,14 +757,12 @@ void MainWindow::createActions()
     m_actionBackward = createAction(tr("B&ackward"));
     m_actionBackward->setToolTip(tr("Go one move backward"));
     setIcon(m_actionBackward, "pentobi-backward");
-    m_actionBackward->setPriority(QAction::LowPriority);
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
 
     m_actionBackward10 = createAction(tr("10 Moves Back&ward"));
     m_actionBackward10->setToolTip(tr("Go ten moves backward"));
     setIcon(m_actionBackward10, "pentobi-backward10");
-    m_actionBackward10->setPriority(QAction::LowPriority);
     m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
     connect(m_actionBackward10, SIGNAL(triggered()), this, SLOT(backward10()));
 
@@ -782,7 +780,6 @@ void MainWindow::createActions()
     m_actionBeginning = createAction(tr("&Beginning"));
     m_actionBeginning->setToolTip(tr("Go to beginning of game"));
     setIcon(m_actionBeginning, "pentobi-beginning");
-    m_actionBeginning->setPriority(QAction::LowPriority);
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
     connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
 
@@ -821,7 +818,6 @@ void MainWindow::createActions()
 
     m_actionEnd = createAction(tr("&End"));
     m_actionEnd->setToolTip(tr("Go to end of moves"));
-    m_actionEnd->setPriority(QAction::LowPriority);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
     setIcon(m_actionEnd, "pentobi-end");
     connect(m_actionEnd, SIGNAL(triggered()), this, SLOT(end()));
@@ -853,14 +849,12 @@ void MainWindow::createActions()
 
     m_actionForward = createAction(tr("&Forward"));
     m_actionForward->setToolTip(tr("Go one move forward"));
-    m_actionForward->setPriority(QAction::LowPriority);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     setIcon(m_actionForward, "pentobi-forward");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
 
     m_actionForward10 = createAction(tr("10 Moves F&orward"));
     m_actionForward10->setToolTip(tr("Go ten moves forward"));
-    m_actionForward10->setPriority(QAction::LowPriority);
     m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
     setIcon(m_actionForward10, "pentobi-forward10");
     connect(m_actionForward10, SIGNAL(triggered()), this, SLOT(forward10()));
@@ -983,7 +977,6 @@ void MainWindow::createActions()
 
     m_actionNextVariation = createAction(tr("&Next Variation"));
     m_actionNextVariation->setToolTip(tr("Go to next variation"));
-    m_actionNextVariation->setPriority(QAction::LowPriority);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
     setIcon(m_actionNextVariation, "pentobi-next-variation");
     connect(m_actionNextVariation, SIGNAL(triggered()),
@@ -1013,7 +1006,6 @@ void MainWindow::createActions()
 
     m_actionOpen = createAction(tr("&Open..."));
     m_actionOpen->setIcon(QIcon::fromTheme("document-open"));
-    m_actionOpen->setPriority(QAction::LowPriority);
     m_actionOpen->setShortcut(QKeySequence::Open);
     connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     m_actionPlaceSelectedPiece = createAction();
@@ -1043,7 +1035,6 @@ void MainWindow::createActions()
     m_actionPreviousVariation = createAction(tr("&Previous Variation"));
     m_actionPreviousVariation->setToolTip(tr("Go to previous variation"));
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
-    m_actionPreviousVariation->setPriority(QAction::LowPriority);
     setIcon(m_actionPreviousVariation, "pentobi-previous-variation");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             this, SLOT(previousVariation()));
@@ -1078,7 +1069,6 @@ void MainWindow::createActions()
 
     m_actionSave = createAction(tr("&Save"));
     m_actionSave->setIcon(QIcon::fromTheme("document-save"));
-    m_actionSave->setPriority(QAction::LowPriority);
     m_actionSave->setShortcut(QKeySequence::Save);
     connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
 
@@ -1534,10 +1524,14 @@ void MainWindow::doubtfulMove(bool checked)
 
 void MainWindow::createToolBar()
 {
+    // The toolbar does intentionally not use Qt::ToolButtonFollowStyle (which
+    // might use text) or actions with themed icons (which might be very
+    // colorful) because it doesn't want to distract from the board and the
+    // colors of the pieces
     m_toolBar = new QToolBar();
     m_toolBar->setMovable(false);
     m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
     m_toolBar->addAction(m_actionNew);
     m_toolBar->addAction(m_actionPlay);
     m_toolBar->addAction(m_actionComputerColors);
