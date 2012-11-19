@@ -1062,6 +1062,8 @@ void State::update_move_list(Color c)
     }
 
     // Generate moves for pieces that were not considered in the last position
+    if (m_moves[c].empty())
+        m_consider_all_pieces = true;
     const PieceMap<bool>& is_piece_considered = get_pieces_considered();
     bool pieces_considered_changed = false;
     BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
@@ -1092,11 +1094,6 @@ void State::update_move_list(Color c)
 
     m_marker.clear_all_set_known(m_moves[c]);
     m_last_move[c] = Move::null();
-    if (m_moves[c].empty() && ! m_consider_all_pieces)
-    {
-        m_consider_all_pieces = true;
-        update_move_list(c);
-    }
 }
 
 void State::update_symmetry_broken(Move mv)
