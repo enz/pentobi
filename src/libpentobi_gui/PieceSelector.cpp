@@ -51,12 +51,12 @@ const string pieceLayoutJunior =
     "I3I3I3. I3I3I3. I4I4I4I4. I4I4I4I4. Z4. . . Z4. P P . . . . . L5L5. ";
 
 const string pieceLayoutTrigon =
-    " F F F . . V V V V . . . . . S S S . . . . X X X . . .A6A6 . . G G G G . . Y Y . . . .I4I4I4I4"
-    " . F F F . . . . V V . . . . . . S S S . . X X X . .A6A6A6A6 . . . G G . . Y Y Y Y . . . . . ."
-    " . . . . . .L6 . . . . . O O O . . . . . . . . . . . . . . . . . . . . . . . . . . . . .I3I3I3"
-    " . .L6L6L6L6L6 . . . . . O O O . . . .P5P5P5P5 . . . . W . . . .C4C4 . .I5I5I5I5I5 . . . . . ."
-    "L5 . . . . . . .C5 .C5 . . . . .P6 . . . .P5 . .A4 . . W W W . .C4C4 . . . . . . . . . . . 2 2"
-    "L5L5L5L5 . . . .C5C5C5 . . . .P6P6P6P6P6 . . .A4A4A4 . . W W . . . . .I6I6I6I6I6I6 . . 1 . . .";
+    "L5L5 . . F F F F . .L6L6 . . O O O . . X X X . . .A6A6 . . G G G G . . Y Y . . . .I4I4I4I4"
+    "L5L5 . . F . F . . .L6L6 . . O O O . . X X X . .A6A6A6A6 . . . G G . . Y Y Y Y . . . . . ."
+    " .L5 . . . . . . S . .L6L6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . .I3I3I3"
+    " . . . . . S S S S . . . . . . . .P5P5P5P5 . . . . W . . . .C4C4 . .I5I5I5I5I5 . . . . . ."
+    "C5 .C5 . . S . . . . V V . .P6 . . . .P5 . .A4 . . W W W . .C4C4 . . . . . . . . . . . 2 2"
+    "C5C5C5 . . . . V V V V . .P6P6P6P6P6 . . .A4A4A4 . . W W . . . . .I6I6I6I6I6I6 . . 1 . . .";
 }
 
 //-----------------------------------------------------------------------------
@@ -121,7 +121,7 @@ void PieceSelector::init()
     if (boardType == board_type_trigon || boardType == board_type_trigon_3)
     {
         pieceLayout = &pieceLayoutTrigon;
-        m_nuColumns = 47;
+        m_nuColumns = 45;
         m_nuRows = 6;
     }
     else if (variant == variant_junior)
