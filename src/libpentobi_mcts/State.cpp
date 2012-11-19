@@ -566,12 +566,24 @@ array<Float,4> State::evaluate_terminal()
     return result_array;
 }
 
+void State::finish_in_tree()
+{
+    if (log_simulations)
+        log() << "Finish in-tree\n";
+    if (m_check_symmetric_draw)
+        m_is_symmetry_broken = check_symmetry_broken();
+}
+
 bool State::gen_and_play_playout_move(Move last_good_reply)
 {
     Color::IntType nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
         return false;
     Color to_play = m_bd.get_to_play();
+    if (m_is_move_list_initialized[to_play])
+        update_move_list(to_play);
+    else
+        init_move_list_with_local(to_play);
     Variant variant = m_bd.get_variant();
     m_has_moves[to_play] = ! m_moves[to_play].empty();
 
@@ -593,7 +605,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
                 return false;
             }
         }
-        play_pass();
+        play_playout_pass();
         return true;
     }
 
@@ -651,7 +663,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         while (get_move_info(mv).points.size() < max_playable_piece_size
                && nu_try < max_try);
     }
-    play_nonpass(mv);
+    play_playout_nonpass(mv);
     return true;
 }
 
@@ -662,9 +674,6 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
         return;
     Color to_play = m_bd.get_to_play();
     init_move_list_without_local(to_play);
-    if (m_check_symmetric_draw)
-        m_is_symmetry_broken = check_symmetry_broken();
-    m_extended_update = true;
     const MoveList& moves = m_moves[to_play];
     if (moves.empty())
     {
@@ -888,69 +897,62 @@ void State::init_move_list_without_local(Color c)
     }
 }
 
-void State::play_pass()
+void State::play_expanded_child(Move mv)
+{
+    if (! mv.is_pass())
+        play_playout_nonpass(mv);
+    else
+        play_playout_pass();
+    if (log_simulations)
+        log() << "Playing expanded child\n" << m_bd;
+}
+
+void State::play_in_tree(Move mv)
 {
     Color to_play = m_bd.get_to_play();
-    m_last_move[to_play] = Move::pass();
-    m_bd.play_pass(to_play);
-    ++m_nu_passes;
-    if (m_extended_update)
+    if (! mv.is_pass())
     {
-        to_play = m_bd.get_to_play();
-        if (m_is_move_list_initialized[to_play])
-            update_move_list(to_play);
-        else
-            init_move_list_with_local(to_play);
-        // Don't try to handle pass moves: a pass move either breaks symmetry
-        // or both players have passed and it's the end of the game and we need
-        // symmetry detection only as a heuristic ((playouts and move value
-        // initialization)
-        m_is_symmetry_broken = true;
+        LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
+        m_bd.play_nonpass(to_play, mv);
+        m_nu_passes = 0;
+    }
+    else
+    {
+        m_bd.play_pass(to_play);
+        ++m_nu_passes;
     }
     if (log_simulations)
         log() << m_bd;
 }
 
-void State::play_nonpass(Move mv)
+void State::play_playout_pass()
+{
+    Color to_play = m_bd.get_to_play();
+    m_last_move[to_play] = Move::pass();
+    m_bd.play_pass(to_play);
+    ++m_nu_passes;
+    to_play = m_bd.get_to_play();
+    // Don't try to handle pass moves: a pass move either breaks symmetry
+    // or both players have passed and it's the end of the game and we need
+    // symmetry detection only as a heuristic ((playouts and move value
+    // initialization)
+    m_is_symmetry_broken = true;
+    if (log_simulations)
+        log() << m_bd;
+}
+
+void State::play_playout_nonpass(Move mv)
 {
     Color to_play = m_bd.get_to_play();
     m_last_move[to_play] = mv;
     LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
     m_bd.play_nonpass(to_play, mv);
     m_nu_passes = 0;
-    if (m_extended_update)
-    {
-        Color to_play = m_bd.get_to_play();
-        if (m_is_move_list_initialized[to_play])
-            update_move_list(to_play);
-        else
-            init_move_list_with_local(to_play);
-        if (m_check_symmetric_draw && ! m_is_symmetry_broken)
-            update_symmetry_broken(mv);
-    }
+    to_play = m_bd.get_to_play();
+    if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+        update_symmetry_broken(mv);
     if (log_simulations)
         log() << m_bd;
-}
-
-void State::play(Move mv)
-{
-    if (! mv.is_pass())
-        play_nonpass(mv);
-    else
-        play_pass();
-}
-
-void State::start_playout()
-{
-    if (log_simulations)
-        log() << "Start playout\n";
-    if (! m_extended_update)
-    {
-        init_move_list_with_local(m_bd.get_to_play());
-        if (m_check_symmetric_draw)
-            m_is_symmetry_broken = check_symmetry_broken();
-        m_extended_update = true;
-    }
 }
 
 void State::start_search()
@@ -1018,7 +1020,6 @@ void State::start_simulation(size_t n)
               << "==========================================================\n";
     ++m_nu_simulations;
     m_bd.restore_snapshot();
-    m_extended_update = false;
     m_consider_all_pieces = false;
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {

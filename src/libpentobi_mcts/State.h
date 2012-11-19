@@ -103,7 +103,16 @@ public:
     ~State() throw();
 
     /** Play a move in the in-tree phase of the search. */
-    void play(Move mv);
+    void play_in_tree(Move mv);
+
+    /** Handle end of in-tree phase. */
+    void finish_in_tree();
+
+    /** Play a move right after expanding a node. */
+    void play_expanded_child(Move mv);
+
+    /** Finish in-tree phase without expanding a node. */
+    void finish_in_tree_no_expansion();
 
     unsigned get_to_play() const;
 
@@ -113,8 +122,6 @@ public:
 
     void gen_children(libboardgame_mcts::Tree<Move>::NodeExpander& expander,
                       Float init_val);
-
-    void start_playout();
 
     /** Generate and play a playout move.
         @return @c false if end of game was reached, and no move was played */
@@ -149,16 +156,6 @@ private:
         /** Heuristic value of the move expressed in score points. */
         Float heuristic;
     };
-
-    /** Flag set to true at the beginning of the playout or node expansion.
-        In the in-tree phase, the state simplay follows the moves that the
-        MCTS search plays but does not need to update expensive data like
-        move lists. This flag is set to true once the extended update should
-        begin, which means at the call to gen_children() (expansion of the last
-        node in the in-tree phase) or at the beginning of the playout. (Note
-        that the search does not necessarily always expand a node, if the expand
-        threshold is greater than one). */
-    bool m_extended_update;
 
     bool m_has_connect_move;
 
@@ -265,9 +262,9 @@ private:
 
     void init_move_list_without_local(Color c);
 
-    void play_pass();
+    void play_playout_pass();
 
-    void play_nonpass(Move mv);
+    void play_playout_nonpass(Move mv);
 
     bool check_move(Color c, const MovePoints& points,
                     unsigned& local_value);

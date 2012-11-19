@@ -207,7 +207,7 @@ void Engine::cmd_gen_playout_move(Response& response)
     State& state = get_mcts_player().get_search().get_state();
     state.start_search();
     state.start_simulation(0);
-    state.start_playout();
+    state.finish_in_tree();
     if (! state.gen_and_play_playout_move(Move::null()))
         throw Failure("terminal playout position");
     const Board& bd = get_board();

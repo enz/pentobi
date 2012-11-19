@@ -785,7 +785,6 @@ void Search<S,M,P>::on_start_search()
 template<class S, class M, unsigned P>
 void Search<S,M,P>::playout()
 {
-    m_state.start_playout();
     while (true)
     {
         Move last_good_reply = Move::null();
@@ -809,33 +808,27 @@ void Search<S,M,P>::play_in_tree(unsigned thread_id, bool& is_out_of_memory,
 {
     const Node& root = m_tree.get_root();
     const Node* node = &root;
-    bool done = false;
     is_out_of_memory = false;
     is_terminal = false;
-    while (! done)
+    while (node->has_children())
     {
-        if (node->has_children())
-            node = select_child(*node);
-        else if (node->get_count() >= m_expand_threshold || node == &root)
-        {
-            unsigned to_play = m_state.get_to_play();
-            if (! expand_node(thread_id, *node, node,
-                              m_init_val[to_play].get_mean()))
-            {
-                is_out_of_memory = true;
-                return;
-            }
-            if (node == 0)
-            {
-                is_terminal = true;
-                return;
-            }
-            done = true;
-        }
-        else
-            return;
+        node = select_child(*node);
         m_simulation.m_nodes.push_back(node);
-        m_state.play(node->get_move());
+        m_state.play_in_tree(node->get_move());
+    }
+    m_state.finish_in_tree();
+    if (node->get_count() >= m_expand_threshold || node == &root)
+    {
+        Float init_val = m_init_val[m_state.get_to_play()].get_mean();
+        if (! expand_node(thread_id, *node, node, init_val))
+            is_out_of_memory = true;
+        else if (node == 0)
+            is_terminal = true;
+        else
+        {
+            m_simulation.m_nodes.push_back(node);
+            m_state.play_expanded_child(node->get_move());
+        }
     }
 }
 
