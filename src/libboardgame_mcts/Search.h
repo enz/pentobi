@@ -785,6 +785,7 @@ void Search<S,M,P>::on_start_search()
 template<class S, class M, unsigned P>
 void Search<S,M,P>::playout()
 {
+    m_state.start_playout();
     while (true)
     {
         Move last_good_reply = Move::null();

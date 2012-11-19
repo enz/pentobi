@@ -123,6 +123,8 @@ public:
     void gen_children(libboardgame_mcts::Tree<Move>::NodeExpander& expander,
                       Float init_val);
 
+    void start_playout();
+
     /** Generate and play a playout move.
         @return @c false if end of game was reached, and no move was played */
     bool gen_and_play_playout_move(Move last_good_reply);
@@ -305,6 +307,10 @@ inline unsigned State::get_nu_moves() const
 inline unsigned State::get_to_play() const
 {
     return m_bd.get_to_play().to_int();
+}
+
+inline void State::start_playout()
+{
 }
 
 inline bool State::skip_rave(Move mv) const
