@@ -54,8 +54,6 @@ using libpentobi_base::PointState;
 
 namespace {
 
-const bool log_simulations = false;
-
 const bool use_prior_knowledge = true;
 
 const bool pure_random_playout = false;
@@ -905,24 +903,6 @@ void State::play_expanded_child(Move mv)
         play_playout_pass();
     if (log_simulations)
         log() << "Playing expanded child\n" << m_bd;
-}
-
-void State::play_in_tree(Move mv)
-{
-    Color to_play = m_bd.get_to_play();
-    if (! mv.is_pass())
-    {
-        LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
-        m_bd.play_nonpass(to_play, mv);
-        m_nu_passes = 0;
-    }
-    else
-    {
-        m_bd.play_pass(to_play);
-        ++m_nu_passes;
-    }
-    if (log_simulations)
-        log() << m_bd;
 }
 
 void State::play_playout_pass()

@@ -159,6 +159,8 @@ private:
         Float heuristic;
     };
 
+    static const bool log_simulations = false;
+
     bool m_has_connect_move;
 
     unsigned m_nu_moves_initial;
@@ -307,6 +309,24 @@ inline unsigned State::get_nu_moves() const
 inline unsigned State::get_to_play() const
 {
     return m_bd.get_to_play().to_int();
+}
+
+inline void State::play_in_tree(Move mv)
+{
+    Color to_play = m_bd.get_to_play();
+    if (! mv.is_pass())
+    {
+        LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
+        m_bd.play_nonpass(to_play, mv);
+        m_nu_passes = 0;
+    }
+    else
+    {
+        m_bd.play_pass(to_play);
+        ++m_nu_passes;
+    }
+    if (log_simulations)
+        log() << m_bd;
 }
 
 inline void State::start_playout()
