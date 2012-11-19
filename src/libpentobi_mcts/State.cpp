@@ -286,7 +286,7 @@ inline void State::add_moves(Point p, Color c, Piece piece,
 {
     MoveList& moves = m_moves[c];
     const Board::LocalMovesListRange& move_candidates =
-        m_bd.get_moves(piece, p, adj_status);
+        m_bc->get_moves(piece, p, adj_status);
     for (auto i = move_candidates.first; i != move_candidates.second; ++i)
         if (! m_shared_const.is_forbidden_at_root[c][*i])
         {
@@ -343,9 +343,9 @@ void State::compute_features()
 {
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
-    BoardType board_type = m_bd.get_board_type();
+    BoardType board_type = m_bc->get_board_type();
     const MoveList& moves = m_moves[to_play];
-    const Geometry& geometry = m_bd.get_geometry();
+    const Geometry& geometry = m_bc->get_geometry();
     Grid<Float> point_value(geometry, 1);
     for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
     {
@@ -403,7 +403,7 @@ void State::compute_features()
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = get_move_info(moves[i]);
-        const MoveInfoExt& info_ext = m_bd.get_move_info_ext(moves[i]);
+        const MoveInfoExt& info_ext = get_move_info_ext(moves[i]);
         MoveFeatures& features = m_features[i];
         features.heuristic = 0;
         features.connect = false;
@@ -495,7 +495,7 @@ bool State::check_symmetry_broken()
             // Don't try to handle non-alternating moves or pass moves in
             // board history
             return true;
-        const MovePoints& points = m_bd.get_move_info(last_mv.move).points;
+        const MovePoints& points = get_move_info(last_mv.move).points;
         for (BoardIterator i(m_bd); i; ++i)
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
@@ -689,14 +689,13 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             {
                 ColorMove last = m_bd.get_move(nu_moves - 1);
                 if (! last.is_pass())
-                    symmetric_mv =
-                        m_bd.get_move_info_ext(last.move).symmetric_move;
+                    symmetric_mv = get_move_info_ext(last.move).symmetric_move;
             }
         }
         else if (nu_moves > 0)
         {
             BOOST_FOREACH(Move mv, moves)
-                if (m_bd.get_move_info_ext(mv).breaks_symmetry)
+                if (get_move_info_ext(mv).breaks_symmetry)
                 {
                     has_symmetry_breaker = true;
                     break;
@@ -711,7 +710,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             && features.dist_to_center != m_min_dist_to_center)
             // Prune early moves that don't minimize dist to center
             continue;
-        if (m_bd.get_board_type() == board_type_classic
+        if (m_bc->get_board_type() == board_type_classic
             && m_bd.get_nu_onboard_pieces() < 14 && m_has_connect_move
             && ! features.connect)
             // Prune moves that don't connect in the middle if connection is
@@ -755,7 +754,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
         }
         else if (has_symmetry_breaker)
         {
-            if (m_bd.get_move_info_ext(mv).breaks_symmetry)
+            if (get_move_info_ext(mv).breaks_symmetry)
                 value += 5 * 1.0f;
             else
                 value += 5 * 0.1f;
@@ -799,7 +798,8 @@ void State::init_move_list_with_local(Color c)
                 if ((*m_is_piece_considered[c])[piece])
                 {
                     unsigned adj_status = m_bd.get_adj_status(p, c);
-                    BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
+                    BOOST_FOREACH(Move mv,
+                                  m_bc->get_moves(piece, p, adj_status))
                     {
                         if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
                         {
@@ -844,7 +844,8 @@ void State::init_move_list_without_local(Color c)
                 if ((*m_is_piece_considered[c])[piece])
                 {
                     unsigned adj_status = m_bd.get_adj_status(p, c);
-                    BOOST_FOREACH(Move mv, m_bd.get_moves(piece, p, adj_status))
+                    BOOST_FOREACH(Move mv,
+                                  m_bc->get_moves(piece, p, adj_status))
                     {
                         if (! m_shared_const.is_forbidden_at_root[c][mv]
                             && ! m_marker[mv]
@@ -867,7 +868,7 @@ void State::init_move_list_without_local(Color c)
                     if ((*m_is_piece_considered[c])[piece])
                     {
                         BOOST_FOREACH(Move mv,
-                                      m_bd.get_moves(piece, p, adj_status))
+                                      m_bc->get_moves(piece, p, adj_status))
                         {
                             if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
                             {
@@ -958,12 +959,13 @@ void State::start_search()
     m_bd.copy_from(bd);
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
-    m_move_info_array = bd.get_board_const().get_move_info_array();
+    m_bc = &m_bd.get_board_const();
+    m_move_info_array = m_bc->get_move_info_array();
+    m_move_info_ext_array = m_bc->get_move_info_ext_array();
     const Geometry& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
-    Float total_piece_points =
-        Float(bd.get_board_const().get_total_piece_points());
+    Float total_piece_points = Float(m_bc->get_total_piece_points());
     m_score_modification_factor =
         m_shared_const.score_modification / total_piece_points;
     m_nu_simulations = 0;
@@ -1072,7 +1074,7 @@ void State::update_move_list(Color c)
     // Find new legal moves because of the last piece played by this color
     if (last_mv.is_regular())
     {
-        BOOST_FOREACH(Point p, m_bd.get_move_info_ext(last_mv).attach_points)
+        BOOST_FOREACH(Point p, get_move_info_ext(last_mv).attach_points)
             if (! m_bd.is_forbidden(p, c)
                 && is_only_move_diag(m_bd, p, c, last_mv))
                 add_moves(p, c);

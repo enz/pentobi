@@ -35,6 +35,7 @@ using libpentobi_base::Variant;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
+using libpentobi_base::MoveInfoExt;
 using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::MovePoints;
@@ -180,7 +181,11 @@ private:
 
     Board m_bd;
 
+    const BoardConst* m_bc;
+
     const MoveInfo* m_move_info_array;
+
+    const MoveInfoExt* m_move_info_ext_array;
 
     /** Incrementally updated lists of legal moves for both colors.
         Only the move list for the color to play van be used in any given
@@ -248,8 +253,11 @@ private:
 
     void compute_features();
 
-    /** Equivalent to but faster than Board::get_move_info() */
+    /** Equivalent to but faster than m_bd.get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
+
+    /** Equivalent to but faster than m_bd.get_move_info_ext() */
+    const MoveInfoExt& get_move_info_ext(Move move) const;
 
     const PieceMap<bool>& get_pieces_considered() const;
 
@@ -280,10 +288,15 @@ inline PlayerMove<Move> State::get_move(unsigned n) const
 inline const MoveInfo& State::get_move_info(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int()
-                        < m_shared_const.board->get_board_const()
-                          .get_nu_all_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_all_moves());
     return *(m_move_info_array + mv.to_int());
+}
+
+inline const MoveInfoExt& State::get_move_info_ext(Move mv) const
+{
+    LIBBOARDGAME_ASSERT(! mv.is_null());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_all_moves());
+    return *(m_move_info_ext_array + mv.to_int());
 }
 
 inline unsigned State::get_nu_moves() const

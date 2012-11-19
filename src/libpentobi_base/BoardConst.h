@@ -92,6 +92,11 @@ public:
         multiple pointer dereferencing of Board::get_move_info(Move) */
     const MoveInfo* get_move_info_array() const;
 
+    /** Get pointer to extended move info array.
+        Can be used to speed up the access to the move info by avoiding the
+        multiple pointer dereferencing of Board::get_move_info_ext(Move) */
+    const MoveInfoExt* get_move_info_ext_array() const;
+
     /** Get extended move info.
         @pre move.is_regular() */
     const MoveInfoExt& get_move_info_ext(Move move) const;
@@ -239,6 +244,11 @@ inline const MoveInfoExt& BoardConst::get_move_info_ext(Move move) const
 {
     LIBBOARDGAME_ASSERT(move.to_int() < m_move_info_ext.size());
     return m_move_info_ext[move.to_int()];
+}
+
+inline const MoveInfoExt* BoardConst::get_move_info_ext_array() const
+{
+    return &m_move_info_ext.front();
 }
 
 inline const MovePoints& BoardConst::get_move_points(Move mv) const
