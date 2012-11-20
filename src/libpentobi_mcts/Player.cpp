@@ -86,7 +86,7 @@ Move Player::genmove(const Board& bd, Color c)
         return Move::pass();
     Move mv;
     Variant variant = bd.get_variant();
-    if (m_use_book)
+    if (m_use_book && m_level >= 4)
     {
         if (! m_is_book_loaded
             || m_book.get_tree().get_variant() != variant)
