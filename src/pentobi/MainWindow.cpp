@@ -2373,11 +2373,12 @@ void MainWindow::newRatedGame()
     initGame();
     setFile("");
     setRated(true);
-    m_computerColors.fill(true);
     const Board& bd = getBoard();
+    m_computerColors.fill(true);
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         if (bd.is_same_player(*i, m_ratedGameColor))
             m_computerColors[*i] = false;
+    m_autoPlay = true;
     QString computerPlayerName =
         //: The first argument is the version of Pentobi
         tr("Pentobi %1 (level %2)").arg(getVersion()).arg(level);
