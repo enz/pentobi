@@ -618,8 +618,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     ++m_nu_playout_moves;
     Move mv;
     if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply)
-        && m_bd.get_pieces_left(to_play).contains(
-                                     get_move_info(last_good_reply).piece))
+        && m_bd.is_piece_left(to_play, get_move_info(last_good_reply).piece))
     {
         ++m_nu_last_good_reply_moves;
         mv = last_good_reply;
