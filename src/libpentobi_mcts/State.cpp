@@ -635,16 +635,16 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
             moves = &m_moves[to_play];
             max_playable_piece_size = m_max_playable_piece_size;
             if (log_simulations)
-                log() << "Moves: " << moves->size() << "\n";
+                log(format("Moves: %i") % moves->size());
         }
         else
         {
             moves = &m_local_moves;
             max_playable_piece_size = m_max_playable_piece_size_local;
             if (log_simulations)
-                log() << "Moves: " << m_moves[to_play].size() << ", local: "
-                      << m_local_moves.size() << ", max_local_value: "
-                      << m_max_local_value << '\n';
+                log(format("Moves: %i, local: %i, local_val: 0x%02x")
+                    % m_moves[to_play].size() % m_local_moves.size()
+                    % m_max_local_value);
         }
         // Choose a random move from the list of local moves (if not empty) or
         // the list of all moves. Try more than once if a bad move (e.g. not
