@@ -197,10 +197,9 @@ private:
 
     ArrayList<MoveFeatures, Move::range> m_features;
 
-    /** The last move by each color.
-        Used for updating the move lists and only defined if m_extended_update
-        is true. */
-    ColorMap<Move> m_last_move;
+    /** Move number when move list for a color was last updated.
+        Only used after in-tree phase. */
+    ColorMap<unsigned> m_last_update;
 
     ColorMap<bool> m_is_move_list_initialized;
 

@@ -230,14 +230,6 @@ bool check_symmetry_min_nu_pieces(const Board& bd)
     }
 }
 
-bool is_only_move_diag(const Board& bd, Point p, Color c, Move mv)
-{
-    for (DiagIterator i(bd, p); i; ++i)
-        if (bd.get_point_state(*i) == c && bd.get_played_move(*i) != mv)
-            return false;
-    return true;
-}
-
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -577,11 +569,34 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     Color::IntType nu_colors = m_bd.get_nu_colors();
     if (m_nu_passes == nu_colors)
         return false;
+
+    if (m_check_symmetric_draw && ! m_is_symmetry_broken
+        && check_symmetry_min_nu_pieces(m_bd))
+    {
+        // See also the comment in evaluate_playout()
+        if (log_simulations)
+            log() << "Terminate playout. Symmetry not broken.\n";
+        return false;
+    }
+
     Color to_play = m_bd.get_to_play();
+    ++m_nu_playout_moves;
+    if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply)
+        && m_bd.is_piece_left(to_play, get_move_info(last_good_reply).piece))
+    {
+        if (log_simulations)
+            log() << "Playing last good reply\n";
+        ++m_nu_last_good_reply_moves;
+        play_playout_nonpass(last_good_reply);
+        return true;
+    }
+
     if (m_is_move_list_initialized[to_play])
         update_move_list(to_play);
     else
         init_move_list_with_local(to_play);
+    m_last_update[to_play] = m_bd.get_nu_moves();
+
     Variant variant = m_bd.get_variant();
     m_has_moves[to_play] = ! m_moves[to_play].empty();
 
@@ -607,59 +622,39 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         return true;
     }
 
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken
-        && check_symmetry_min_nu_pieces(m_bd))
+    const MoveList* moves;
+    unsigned max_playable_piece_size;
+    if (pure_random_playout || m_local_moves.empty())
     {
-        // See also the comment in evaluate_playout()
+        moves = &m_moves[to_play];
+        max_playable_piece_size = m_max_playable_piece_size;
         if (log_simulations)
-            log() << "Terminate playout. Symmetry not broken.\n";
-        return false;
-    }
-    ++m_nu_playout_moves;
-    Move mv;
-    if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply)
-        && m_bd.is_piece_left(to_play, get_move_info(last_good_reply).piece))
-    {
-        ++m_nu_last_good_reply_moves;
-        mv = last_good_reply;
-        if (log_simulations)
-            log() << "Playing last good reply\n";
+            log(format("Moves: %i") % moves->size());
     }
     else
     {
-        const MoveList* moves;
-        unsigned max_playable_piece_size;
-        if (pure_random_playout || m_local_moves.empty())
-        {
-            moves = &m_moves[to_play];
-            max_playable_piece_size = m_max_playable_piece_size;
-            if (log_simulations)
-                log(format("Moves: %i") % moves->size());
-        }
-        else
-        {
-            moves = &m_local_moves;
-            max_playable_piece_size = m_max_playable_piece_size_local;
-            if (log_simulations)
-                log(format("Moves: %i, local: %i, local_val: 0x%02x")
-                    % m_moves[to_play].size() % m_local_moves.size()
-                    % m_max_local_value);
-        }
-        // Choose a random move from the list of local moves (if not empty) or
-        // the list of all moves. Try more than once if a bad move (e.g. not
-        // maximum playable piece size) is chosen to reduce the probabilty
-        // for such moves without becoming deterministic.
-        const unsigned max_try = 2;
-        unsigned nu_try = 0;
-        do
-        {
-            ++nu_try;
-            unsigned i = m_random.generate_small_uint(moves->size());
-            mv = (*moves)[i];
-        }
-        while (get_move_info(mv).points.size() < max_playable_piece_size
-               && nu_try < max_try);
+        moves = &m_local_moves;
+        max_playable_piece_size = m_max_playable_piece_size_local;
+        if (log_simulations)
+            log(format("Moves: %i, local: %i, local_val: 0x%02x")
+                % m_moves[to_play].size() % m_local_moves.size()
+                % m_max_local_value);
     }
+    // Choose a random move from the list of local moves (if not empty) or
+    // the list of all moves. Try more than once if a bad move (e.g. not
+    // maximum playable piece size) is chosen to reduce the probabilty
+    // for such moves without becoming deterministic.
+    Move mv;
+    const unsigned max_try = 2;
+    unsigned nu_try = 0;
+    do
+    {
+        ++nu_try;
+        unsigned i = m_random.generate_small_uint(moves->size());
+        mv = (*moves)[i];
+    }
+    while (get_move_info(mv).points.size() < max_playable_piece_size
+           && nu_try < max_try);
     play_playout_nonpass(mv);
     return true;
 }
@@ -670,7 +665,10 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     if (m_nu_passes == nu_colors)
         return;
     Color to_play = m_bd.get_to_play();
+
     init_move_list_without_local(to_play);
+    m_last_update[to_play] = m_bd.get_nu_moves();
+
     const MoveList& moves = m_moves[to_play];
     if (moves.empty())
     {
@@ -782,7 +780,6 @@ inline const PieceMap<bool>& State::get_pieces_considered() const
 
 void State::init_move_list_with_local(Color c)
 {
-    m_last_move[c] = Move::null();
     m_is_piece_considered[c] = &get_pieces_considered();
     m_local_value.init(m_bd);
     m_local_moves.clear();
@@ -833,7 +830,6 @@ void State::init_move_list_with_local(Color c)
 
 void State::init_move_list_without_local(Color c)
 {
-    m_last_move[c] = Move::null();
     m_is_piece_considered[c] = &get_pieces_considered();
     MoveList& moves = m_moves[c];
     moves.clear();
@@ -907,7 +903,6 @@ void State::play_expanded_child(Move mv)
 void State::play_playout_pass()
 {
     Color to_play = m_bd.get_to_play();
-    m_last_move[to_play] = Move::pass();
     m_bd.play_pass(to_play);
     ++m_nu_passes;
     to_play = m_bd.get_to_play();
@@ -923,7 +918,6 @@ void State::play_playout_pass()
 void State::play_playout_nonpass(Move mv)
 {
     Color to_play = m_bd.get_to_play();
-    m_last_move[to_play] = mv;
     LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
     m_bd.play_nonpass(to_play, mv);
     m_nu_passes = 0;
@@ -1023,21 +1017,16 @@ void State::update_move_list(Color c)
     m_max_local_value = 1;
     m_max_playable_piece_size = 0;
     m_max_playable_piece_size_local = 0;
-    Move last_mv = m_last_move[c];
     MoveList& moves = m_moves[c];
 
     // Find old moves that are still legal
-    Piece last_piece = Piece::null();
-    if (last_mv.is_regular())
-    {
-        Piece piece = get_move_info(last_mv).piece;
-        if (m_bd.get_nu_left_piece(c, piece) == 0)
-            last_piece = piece;
-    }
+    PieceMap<bool> is_piece_left(false);
+    BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+        is_piece_left[piece] = true;
     for (auto i = moves.begin(); i != moves.end(); )
     {
         const MoveInfo& info = get_move_info(*i);
-        if (info.piece != last_piece)
+        if (is_piece_left[info.piece])
         {
             unsigned local_value;
             if (check_move(c, info.points, local_value))
@@ -1051,13 +1040,18 @@ void State::update_move_list(Color c)
         moves.remove_fast(i);
     }
 
-    // Find new legal moves because of the last piece played by this color
-    if (last_mv.is_regular())
+    // Find new legal moves because of new pieces played by this color
+    for (unsigned i = m_last_update[c]; i < m_bd.get_nu_moves();
+         i += m_bd.get_nu_colors())
     {
-        BOOST_FOREACH(Point p, get_move_info_ext(last_mv).attach_points)
-            if (! m_bd.is_forbidden(p, c)
-                && is_only_move_diag(m_bd, p, c, last_mv))
-                add_moves(p, c);
+        LIBBOARDGAME_ASSERT(m_bd.get_move(i).color == c);
+        Move mv = m_bd.get_move(i).move;
+        if (mv.is_regular())
+        {
+            BOOST_FOREACH(Point p, get_move_info_ext(mv).attach_points)
+                if (! m_bd.is_forbidden(p, c))
+                    add_moves(p, c);
+        }
     }
 
     // Generate moves for pieces that were not considered in the last position
@@ -1092,7 +1086,6 @@ void State::update_move_list(Color c)
     }
 
     m_marker.clear_all_set_known(m_moves[c]);
-    m_last_move[c] = Move::null();
 }
 
 void State::update_symmetry_broken(Move mv)
