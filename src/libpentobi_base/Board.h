@@ -707,12 +707,15 @@ inline bool Board::is_legal(Move mv) const
 
 inline bool Board::is_legal(Color c, Move mv) const
 {
+    LIBBOARDGAME_ASSERT(! mv.is_null());
     if (mv.is_pass())
         return true;
-    const MovePoints& points = get_move_points(mv);
+    const MoveInfo& info = get_move_info(mv);
+    if (! is_piece_left(c, info.piece))
+        return false;
     bool has_attach_point = false;
-    auto i = points.begin();
-    auto end = points.end();
+    auto i = info.points.begin();
+    auto end = info.points.end();
     LIBBOARDGAME_ASSERT(i != end);
     do
     {
@@ -727,7 +730,7 @@ inline bool Board::is_legal(Color c, Move mv) const
         return true;
     if (! is_first_piece(c))
         return false;
-    i = points.begin();
+    i = info.points.begin();
     do
     {
         if (is_colorless_starting_point(*i)

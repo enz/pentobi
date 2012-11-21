@@ -581,8 +581,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
 
     Color to_play = m_bd.get_to_play();
     ++m_nu_playout_moves;
-    if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply)
-        && m_bd.is_piece_left(to_play, get_move_info(last_good_reply).piece))
+    if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply))
     {
         if (log_simulations)
             log() << "Playing last good reply\n";
