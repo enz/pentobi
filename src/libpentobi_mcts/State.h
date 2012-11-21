@@ -33,6 +33,7 @@ using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Variant;
 using libpentobi_base::Grid;
+using libpentobi_base::Marker;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
@@ -238,6 +239,12 @@ private:
 
     /** Enforce all pieces to be considered for the rest of the simulation. */
     bool m_consider_all_pieces;
+
+    /** Remember attach points that were already used for move generation.
+        Allows the incremental update of the move lists to skip attach points
+        of newly played pieces that were already attach points of previously
+        played pieces. */
+    ColorMap<Marker> m_moves_added_at;
 
     /** Distance to center heuristic. */
     Grid<unsigned> m_dist_to_center;

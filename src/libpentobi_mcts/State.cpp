@@ -269,6 +269,7 @@ inline void State::add_moves(Point p, Color c)
     BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             add_moves(p, c, piece, adj_status);
+    m_moves_added_at[c].set(p);
 }
 
 inline void State::add_moves(Point p, Color c, Piece piece,
@@ -810,6 +811,7 @@ void State::init_move_list_with_local(Color c)
                         }
                     }
                 }
+            m_moves_added_at[c].set(p);
         }
     }
     else
@@ -857,6 +859,7 @@ void State::init_move_list_without_local(Color c)
                         }
                     }
                 }
+            m_moves_added_at[c].set(p);
         }
     }
     else
@@ -878,6 +881,7 @@ void State::init_move_list_without_local(Color c)
                             }
                         }
                     }
+                m_moves_added_at[c].set(p);
             }
     }
     m_marker.clear_all_set_known(moves);
@@ -997,6 +1001,7 @@ void State::start_simulation(size_t n)
     {
         m_has_moves[*i] = true;
         m_is_move_list_initialized[*i] = false;
+        m_moves_added_at[*i].clear();
     }
     m_nu_passes = 0;
     // TODO: m_nu_passes should be initialized without assuming alternating
@@ -1048,7 +1053,7 @@ void State::update_move_list(Color c)
         if (mv.is_regular())
         {
             BOOST_FOREACH(Point p, get_move_info_ext(mv).attach_points)
-                if (! m_bd.is_forbidden(p, c))
+                if (! m_bd.is_forbidden(p, c) && ! m_moves_added_at[c][p])
                     add_moves(p, c);
         }
     }
