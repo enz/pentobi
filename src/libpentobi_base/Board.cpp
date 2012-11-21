@@ -337,6 +337,7 @@ void Board::init(Variant variant, const Setup* setup)
             BOOST_FOREACH(Move mv, setup->placements[*i])
                 place(*i, mv);
         m_state_base.to_play = setup->to_play;
+        optimize_attach_point_lists();
     }
     m_moves.clear();
 }
@@ -397,10 +398,32 @@ bool Board::is_game_over() const
     return true;
 }
 
+/** Remove forbidden points from attach point lists.
+    The attach point lists do not guarantee that they contain only
+    non-forbidden attach points because that would be too expensive to
+    incrementally update but at certain points that are not performance
+    critical (e.g. before taking a snapshot), we can remove them. */
+void Board::optimize_attach_point_lists()
+{
+    for (ColorIterator i(m_nu_colors); i; ++i)
+    {
+        auto& attach_points = m_attach_points[*i];
+        for (auto j = attach_points.begin(); j != attach_points.end(); ++j)
+            if (is_forbidden(*j, *i))
+            {
+                m_state_color[*i].is_attach_point[*j] = false;
+                attach_points.remove_fast(j);
+                --j;
+                continue;
+            }
+    }
+}
+
 void Board::take_snapshot()
 {
     if (! m_snapshot)
         m_snapshot.reset(new Snapshot());
+    optimize_attach_point_lists();
     m_snapshot->moves_size = m_moves.size();
     // See also the comment in copy_from() about the following memcpy's.
     memcpy(&m_snapshot->state_base, &m_state_base, sizeof(StateBase));

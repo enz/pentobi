@@ -405,6 +405,8 @@ private:
 
     void init_variant(Variant variant);
 
+    void optimize_attach_point_lists();
+
     void place(Color c, Move mv);
 
     void write_pieces_left(ostream& out, Color c, unsigned begin,
