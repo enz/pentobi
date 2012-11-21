@@ -278,9 +278,9 @@ public:
 
     const MovePoints& get_move_points(Move mv) const;
 
-    const MoveInfo& get_move_info(Move move) const;
+    const MoveInfo& get_move_info(Move mv) const;
 
-    const MoveInfoExt& get_move_info_ext(Move move) const;
+    const MoveInfoExt& get_move_info_ext(Move mv) const;
 
     bool is_colored_starting_point(Point p) const;
 
@@ -358,6 +358,12 @@ private:
     unsigned m_nu_players;
 
     const BoardConst* m_board_const;
+
+    /** Same as m_board_const->get_move_info_array() */
+    const MoveInfo* m_move_info_array;
+
+    /** Same as m_board_const->get_move_info_ext_array() */
+    const MoveInfoExt* m_move_info_ext_array;
 
     const Geometry* m_geometry;
 
@@ -489,14 +495,18 @@ inline ColorMove Board::get_move(unsigned n) const
     return m_moves[n];
 }
 
-inline const MoveInfo& Board::get_move_info(Move move) const
+inline const MoveInfo& Board::get_move_info(Move mv) const
 {
-    return m_board_const->get_move_info(move);
+    LIBBOARDGAME_ASSERT(! mv.is_null());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_all_moves());
+    return *(m_move_info_array + mv.to_int());
 }
 
-inline const MoveInfoExt& Board::get_move_info_ext(Move move) const
+inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
 {
-    return m_board_const->get_move_info_ext(move);
+    LIBBOARDGAME_ASSERT(! mv.is_null());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_all_moves());
+    return *(m_move_info_ext_array + mv.to_int());
 }
 
 inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
@@ -762,8 +772,8 @@ inline bool Board::is_same_player(Color c1, Color c2) const
 inline void Board::place(Color c, Move mv)
 {
     LIBBOARDGAME_ASSERT(mv.is_regular());
-    const MoveInfo& info = m_board_const->get_move_info(mv);
-    const MoveInfoExt& info_ext = m_board_const->get_move_info_ext(mv);
+    const MoveInfo& info = get_move_info(mv);
+    const MoveInfoExt& info_ext = get_move_info_ext(mv);
     Piece piece = info.piece;
     StateColor& state_color = m_state_color[c];
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
