@@ -3,9 +3,9 @@ define p_point
   if ($p == 0)
     printf "null (%i)\n", $p
   else
-    set $x = ($p - 1) % (Point::max_size + 2) - 1
+    set $x = ($p - 1) % 35
     set $x_char = 'A' + $x
-    set $y = ($p - 1) / (Point::max_size + 2) - 1
+    set $y = ($p - 1) / 35
     printf "%c%i (%i)\n", $x_char, $y + 1, $p
   end
 end
