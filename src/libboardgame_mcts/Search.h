@@ -938,25 +938,25 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
             const Node* node = find_node(m_tree, m_followup_sequence);
             if (node != 0)
             {
-                // The values of root nodes have a different meaning than the
-                // values of inner nodes (position value vs. move values) so
-                // we might have to discard them
-                if (node != &m_tree.get_root())
-                {
-                    m_reuse_count = node->get_count();
-                    m_tree.clear_root_value(get_tie_value());
-                }
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 if (m_deterministic)
                     interval_checker.set_deterministic(1000000);
                 bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
                                                         &interval_checker);
+                const Node& tmp_tree_root = m_tmp_tree.get_root();
+                // The values of root nodes have a different meaning than the
+                // values of inner nodes (position value vs. move values) so
+                // we might have to discard them
+                if (! is_same)
+                {
+                    m_reuse_count = tmp_tree_root.get_count();
+                    m_tmp_tree.clear_root_value(get_tie_value());
+                }
                 if (aborted && ! always_search)
                     return false;
                 size_t tmp_tree_nodes = m_tmp_tree.get_nu_nodes();
                 if (tree_nodes > 1 && tmp_tree_nodes > 1)
                 {
-                    const Node& tmp_tree_root = m_tmp_tree.get_root();
                     double time = timer();
                     double reuse = double(tmp_tree_nodes) / double(tree_nodes);
                     double percent = 100 * reuse;
