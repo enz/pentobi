@@ -9,7 +9,7 @@ Current development version
 * The menu bar and tool bar are no longer shown in fullscreen mode
 * If the move generation takes longer than 10 seconds, the maximum remaining
   time is now shown in the status bar
-* Merged File menu into Game menu
+* Re-organized menu bar
 * Avoided some window flickering at startup
 * Added British and Canadian English language variants
 

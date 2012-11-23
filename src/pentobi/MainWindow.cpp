@@ -760,7 +760,7 @@ void MainWindow::createActions()
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
 
-    m_actionBackward10 = createAction(tr("10 Moves Back&ward"));
+    m_actionBackward10 = createAction(tr("10 Back&ward"));
     m_actionBackward10->setToolTip(tr("Go ten moves backward"));
     setIcon(m_actionBackward10, "pentobi-backward10");
     m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
@@ -834,7 +834,7 @@ void MainWindow::createActions()
     m_actionFindMove->setShortcut(QString("F6"));
     connect(m_actionFindMove, SIGNAL(triggered()), this, SLOT(findMove()));
 
-    m_actionFindNextComment = createAction(tr("&Find Next Comment"));
+    m_actionFindNextComment = createAction(tr("Find Next &Comment"));
     m_actionFindNextComment->setShortcut(QString("F3"));
     connect(m_actionFindNextComment, SIGNAL(triggered()),
             this, SLOT(findNextComment()));
@@ -853,7 +853,7 @@ void MainWindow::createActions()
     setIcon(m_actionForward, "pentobi-forward");
     connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
 
-    m_actionForward10 = createAction(tr("10 Moves F&orward"));
+    m_actionForward10 = createAction(tr("10 F&orward"));
     m_actionForward10->setToolTip(tr("Go ten moves forward"));
     m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
     setIcon(m_actionForward10, "pentobi-forward10");
@@ -1360,15 +1360,16 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionForward);
     menuGo->addAction(m_actionForward10);
     menuGo->addAction(m_actionEnd);
+    menuGo->addSeparator();
     menuGo->addAction(m_actionNextVariation);
     menuGo->addAction(m_actionPreviousVariation);
     menuGo->addSeparator();
     menuGo->addAction(m_actionGotoMove);
     menuGo->addAction(m_actionBackToMainVariation);
     menuGo->addAction(m_actionBeginningOfBranch);
+    menuGo->addAction(m_actionFindNextComment);
 
     QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
-    menuEdit->addAction(m_actionFindNextComment);
     m_menuMoveAnnotation = menuEdit->addMenu(tr("&Move Annotation"));
     m_menuMoveAnnotation->addAction(m_actionGoodMove);
     m_menuMoveAnnotation->addAction(m_actionVeryGoodMove);
@@ -1379,9 +1380,10 @@ void MainWindow::createMenu()
     m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
     menuEdit->addSeparator();
     menuEdit->addAction(m_actionMakeMainVariation);
-    menuEdit->addAction(m_actionDeleteAllVariations);
     menuEdit->addAction(m_actionMoveUpVariation);
     menuEdit->addAction(m_actionMoveDownVariation);
+    menuEdit->addSeparator();
+    menuEdit->addAction(m_actionDeleteAllVariations);
     menuEdit->addAction(m_actionTruncate);
     menuEdit->addAction(m_actionTruncateChildren);
     menuEdit->addAction(m_actionKeepOnlyPosition);
@@ -1540,6 +1542,7 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionForward);
     m_toolBar->addAction(m_actionForward10);
     m_toolBar->addAction(m_actionEnd);
+    m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionNextVariation);
     m_toolBar->addAction(m_actionPreviousVariation);
     addToolBar(m_toolBar);

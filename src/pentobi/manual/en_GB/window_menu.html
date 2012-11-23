@@ -94,7 +94,7 @@
       <dd>
 	Go to the beginning of the game.
       </dd>
-      <dt><i>10 Moves Backward</i></dt>
+      <dt><i>10 Backward</i></dt>
       <dd>
 	Go ten moves backward in the current variation.
       </dd>
@@ -109,7 +109,7 @@
 	current node in the game tree has several child nodes), the first
 	variation will be used.
       </dd>
-      <dt><i>10 Moves Forward</i></dt>
+      <dt><i>10 Forward</i></dt>
       <dd>
 	Go ten moves forward in the current variation.
 	Like Forward, this also uses the first variation in positions with
@@ -144,10 +144,6 @@
 	Go back to the last position in the current variation that had an
 	alternative move.
       </dd>
-    </dl>
-
-    <h4>Edit</h4>
-    <dl>
       <dt><i>Find Next Comment</i></dt>
       <dd>
 	Go to the next position that has a comment.
@@ -155,6 +151,10 @@
 	Selecting this item repeatedly will show all positions with comments
 	in the game tree.
       </dd>
+    </dl>
+
+    <h4>Edit</h4>
+    <dl>
       <dt><i>Move Annotation</i></dt>
       <dd>
 	Add a chess-style move annotation symbol (e.g. !!) to the current move.
@@ -167,13 +167,6 @@
 	This reorders the nodes in the game tree such that the current variation
 	becomes the main variation.
       </dd>
-      <dt><i>Delete All Variations</i></dt>
-      <dd>
-	Delete all variations but the main variation.
-	If the current position is not on the main variation, it will be
-	changed to a position in the main variation as in
-	<i>Back to Main Variation</i>.
-      </dd>
       <dt><i>Move Variation Up</i></dt>
       <dd>
 	Changes the order of variations such that the current position
@@ -185,6 +178,13 @@
 	Changes the order of variations such that the current position
 	will appear later when iterating over the variations with
 	<i>Next/Previous Variation</i>.
+      </dd>
+      <dt><i>Delete All Variations</i></dt>
+      <dd>
+	Delete all variations but the main variation.
+	If the current position is not on the main variation, it will be
+	changed to a position in the main variation as in
+	<i>Back to Main Variation</i>.
       </dd>
       <dt><i>Truncate</i></dt>
       <dd>
