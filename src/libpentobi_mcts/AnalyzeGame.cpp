@@ -86,7 +86,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     {
                         m_moves.push_back(mv);
                         m_has_value.push_back(true);
-                        m_values.push_back(search_root.get_value());
+                        m_values.push_back(search.get_value());
                     }
                 }
                 catch (const Exception&)
