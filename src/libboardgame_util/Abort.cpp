@@ -20,7 +20,9 @@
 
 namespace libboardgame_util {
 
+#if LIBBOARDGAME_USE_STD_ATOMIC
 using namespace std;
+#endif
 
 //-----------------------------------------------------------------------------
 
