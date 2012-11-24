@@ -889,7 +889,7 @@ void MainWindow::createActions()
     connect(m_actionInterestingMove, SIGNAL(triggered(bool)),
             this, SLOT(interestingMove(bool)));
 
-    m_actionInterrupt = createAction(tr("I&nterrupt"));
+    m_actionInterrupt = createAction(tr("St&op"));
     m_actionInterrupt->setIcon(QIcon::fromTheme("process-stop"));
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
@@ -2196,7 +2196,8 @@ void MainWindow::interestingMove(bool checked)
 
 void MainWindow::interrupt()
 {
-    set_abort();
+    cancelThread();
+    m_autoPlay = false;
 }
 
 void MainWindow::keepOnlyPosition()
