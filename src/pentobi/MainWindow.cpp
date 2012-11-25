@@ -361,6 +361,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                     showInfo(tr("Continuing unfinished rated game."),
                              tr("You play %1 in this game.")
                              .arg(getPlayerString(variant, m_ratedGameColor)));
+                    m_autoPlay = true;
                     checkComputerMove();
                 }
             }
