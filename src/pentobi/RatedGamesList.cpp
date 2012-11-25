@@ -78,7 +78,7 @@ void RatedGamesList::updateContent(Variant variant,
 {
     m_model->clear();
     QStringList headers;
-    headers << tr("Game") << tr("Your Color") << tr("Level") << tr("Result")
+    headers << tr("Game") << tr("Your color") << tr("Level") << tr("Result")
             << tr("Date");
     m_model->setHorizontalHeaderLabels(headers);
     QHeaderView* header = horizontalHeader();

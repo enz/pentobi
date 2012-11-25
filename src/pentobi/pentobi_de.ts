@@ -1144,7 +1144,7 @@
     </message>
     <message>
         <location filename="RatedGamesList.cpp" line="81"/>
-        <source>Your Color</source>
+        <source>Your color</source>
         <translation>Ihre Farbe</translation>
     </message>
     <message>
