@@ -1303,7 +1303,6 @@ QWidget* MainWindow::createLeftPanel()
     m_guiBoard = new GuiBoard(0, getBoard());
     m_splitter->addWidget(m_guiBoard);
     m_comment = new QPlainTextEdit();
-    m_comment->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     m_comment->setTabChangesFocus(true);
     connect(m_comment, SIGNAL(textChanged()), this, SLOT(commentChanged()));
     m_splitter->addWidget(m_comment);
