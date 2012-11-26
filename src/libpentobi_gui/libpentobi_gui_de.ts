@@ -4,14 +4,49 @@
 <context>
     <name>ComputerColorDialog</name>
     <message>
-        <location filename="ComputerColorDialog.cpp" line="34"/>
+        <location filename="ComputerColorDialog.cpp" line="33"/>
         <source>Computer Colors</source>
         <translation>Computer-Farben</translation>
     </message>
     <message>
-        <location filename="ComputerColorDialog.cpp" line="40"/>
+        <location filename="ComputerColorDialog.cpp" line="39"/>
         <source>Colors played by the computer:</source>
         <translation>Vom Computer gespielte Farben:</translation>
+    </message>
+    <message>
+        <location filename="ComputerColorDialog.cpp" line="106"/>
+        <location filename="ComputerColorDialog.cpp" line="113"/>
+        <location filename="ComputerColorDialog.cpp" line="124"/>
+        <source>&amp;Blue</source>
+        <translation>&amp;Blau</translation>
+    </message>
+    <message>
+        <location filename="ComputerColorDialog.cpp" line="108"/>
+        <location filename="ComputerColorDialog.cpp" line="119"/>
+        <source>&amp;Green</source>
+        <translation>&amp;Grün</translation>
+    </message>
+    <message>
+        <location filename="ComputerColorDialog.cpp" line="115"/>
+        <location filename="ComputerColorDialog.cpp" line="126"/>
+        <source>&amp;Yellow</source>
+        <translation>G&amp;elb</translation>
+    </message>
+    <message>
+        <location filename="ComputerColorDialog.cpp" line="117"/>
+        <location filename="ComputerColorDialog.cpp" line="128"/>
+        <source>&amp;Red</source>
+        <translation>&amp;Rot</translation>
+    </message>
+    <message>
+        <location filename="ComputerColorDialog.cpp" line="133"/>
+        <source>&amp;Blue/Red</source>
+        <translation>&amp;Blau/Rot</translation>
+    </message>
+    <message>
+        <location filename="ComputerColorDialog.cpp" line="135"/>
+        <source>&amp;Yellow/Green</source>
+        <translation>&amp;Gelb/Grün</translation>
     </message>
 </context>
 <context>
@@ -25,77 +60,84 @@
         <location filename="GameInfoDialog.cpp" line="42"/>
         <location filename="GameInfoDialog.cpp" line="48"/>
         <location filename="GameInfoDialog.cpp" line="55"/>
-        <source>Player Blue:</source>
-        <translation>Spieler Blau:</translation>
+        <source>Player &amp;Blue:</source>
+        <oldsource>Player Blue:</oldsource>
+        <translation>Spieler &amp;Blau:</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="43"/>
         <location filename="GameInfoDialog.cpp" line="51"/>
-        <source>Player Green:</source>
-        <translation>Spieler Grün:</translation>
+        <source>Player &amp;Green:</source>
+        <oldsource>Player Green:</oldsource>
+        <translation>Spieler &amp;Grün:</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="49"/>
         <location filename="GameInfoDialog.cpp" line="56"/>
-        <source>Player Yellow:</source>
-        <translation>Spieler Gelb:</translation>
+        <source>Player &amp;Yellow:</source>
+        <oldsource>Player Yellow:</oldsource>
+        <translation>Spieler G&amp;elb:</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="50"/>
         <location filename="GameInfoDialog.cpp" line="57"/>
-        <source>Player Red:</source>
-        <translation>Spieler Rot:</translation>
+        <source>Player &amp;Red:</source>
+        <oldsource>Player Red:</oldsource>
+        <translation>Spieler &amp;Rot:</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="63"/>
-        <source>Player Blue/Red:</source>
-        <translation>Spieler Blau/Rot:</translation>
+        <source>Player &amp;Blue/Red:</source>
+        <oldsource>Player Blue/Red:</oldsource>
+        <translation>Spieler &amp;Blau/Rot:</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="65"/>
-        <source>Player Yellow/Green:</source>
-        <translation>Spieler Gelb/Grün:</translation>
+        <source>Player &amp;Yellow/Green:</source>
+        <oldsource>Player Yellow/Green:</oldsource>
+        <translation>Spieler &amp;Gelb/Grün:</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="67"/>
-        <source>Date:</source>
-        <translation>Datum:</translation>
+        <source>&amp;Date:</source>
+        <oldsource>Date:</oldsource>
+        <translation>&amp;Datum:</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
-        <location filename="HelpWindow.cpp" line="37"/>
+        <location filename="HelpWindow.cpp" line="38"/>
         <source>Pentobi User Manual</source>
         <translation>Pentobi-Benutzerhandbuch</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="43"/>
+        <location filename="HelpWindow.cpp" line="46"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="44"/>
+        <location filename="HelpWindow.cpp" line="47"/>
         <source>Show previous page in history</source>
         <translation>Die vorherige Seite in der Chronik anzeigen</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="50"/>
+        <location filename="HelpWindow.cpp" line="53"/>
         <source>Forward</source>
         <translation>Vorwärts</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="51"/>
+        <location filename="HelpWindow.cpp" line="54"/>
         <source>Show next page in history</source>
         <translation>Die nächste Seite in der Chronik anzeigen</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="57"/>
+        <location filename="HelpWindow.cpp" line="60"/>
         <source>Contents</source>
         <translation>Inhalt</translation>
     </message>
     <message>
-        <location filename="HelpWindow.cpp" line="58"/>
+        <location filename="HelpWindow.cpp" line="61"/>
         <source>Show table of contents</source>
         <translation>Das Inhaltsverzeichnis anzeigen</translation>
     </message>
@@ -126,14 +168,6 @@
         <location filename="InitialRatingDialog.cpp" line="57"/>
         <source>Your initial rating: %1</source>
         <translation>Ihre Anfangswertung: %1</translation>
-    </message>
-</context>
-<context>
-    <name>LeaveFullscreenButton</name>
-    <message>
-        <location filename="LeaveFullscreenButton.cpp" line="27"/>
-        <source>Leave Fullscreen</source>
-        <translation>Vollbild verlassen</translation>
     </message>
 </context>
 <context>

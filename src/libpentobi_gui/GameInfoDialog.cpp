@@ -39,32 +39,32 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     Variant variant = game.get_variant();
     if (variant == variant_duo || variant == variant_junior)
     {
-        m_playerBlue = createPlayerName(tr("Player Blue:"), Color(0));
-        m_playerGreen = createPlayerName(tr("Player Green:"), Color(1));
+        m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
+        m_playerGreen = createPlayerName(tr("Player &Green:"), Color(1));
     }
     else if (variant == variant_classic
              || variant == variant_trigon)
     {
-        m_playerBlue = createPlayerName(tr("Player Blue:"), Color(0));
-        m_playerYellow = createPlayerName(tr("Player Yellow:"), Color(1));
-        m_playerRed = createPlayerName(tr("Player Red:"), Color(2));
-        m_playerGreen = createPlayerName(tr("Player Green:"), Color(3));
+        m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
+        m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
+        m_playerRed = createPlayerName(tr("Player &Red:"), Color(2));
+        m_playerGreen = createPlayerName(tr("Player &Green:"), Color(3));
     }
     else if (variant == variant_trigon_3)
     {
-        m_playerBlue = createPlayerName(tr("Player Blue:"), Color(0));
-        m_playerYellow = createPlayerName(tr("Player Yellow:"), Color(1));
-        m_playerRed = createPlayerName(tr("Player Red:"), Color(2));
+        m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
+        m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
+        m_playerRed = createPlayerName(tr("Player &Red:"), Color(2));
     }
     else
     {
         LIBBOARDGAME_ASSERT(variant == variant_classic_2
                             || variant == variant_trigon_2);
-        m_playerBlueRed = createPlayerName(tr("Player Blue/Red:"), Color(0));
+        m_playerBlueRed = createPlayerName(tr("Player &Blue/Red:"), Color(0));
         m_playerYellowGreen =
-            createPlayerName(tr("Player Yellow/Green:"), Color(1));
+            createPlayerName(tr("Player &Yellow/Green:"), Color(1));
     }
-    m_date = createLine(tr("Date:"), m_game.get_date());
+    m_date = createLine(tr("&Date:"), m_game.get_date());
     QDialogButtonBox* buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);

@@ -11,7 +11,6 @@
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QVBoxLayout>
-#include "Util.h"
 
 using libpentobi_base::variant_classic;
 using libpentobi_base::variant_classic_2;
@@ -93,11 +92,50 @@ void ComputerColorDialog::accept()
 
 void ComputerColorDialog::createCheckBox(QLayout* layout, Color c)
 {
-    QCheckBox* checkBox =
-        new QCheckBox(Util::getPlayerString(m_variant, c));
+    QCheckBox* checkBox = new QCheckBox(getPlayerString(m_variant, c));
     checkBox->setChecked(m_computerColor[c]);
     layout->addWidget(checkBox);
     m_checkBox[c.to_int()] = checkBox;
+}
+
+QString ComputerColorDialog::getPlayerString(Variant variant, Color c)
+{
+    if (variant == variant_duo || variant == variant_junior)
+    {
+        if (c == Color(0))
+            return tr("&Blue");
+        if (c == Color(1))
+            return tr("&Green");
+    }
+    else if (variant == variant_classic || variant == variant_trigon)
+    {
+        if (c == Color(0))
+            return tr("&Blue");
+        if (c == Color(1))
+            return tr("&Yellow");
+        if (c == Color(2))
+            return tr("&Red");
+        if (c == Color(3))
+            return tr("&Green");
+    }
+    else if (variant == variant_trigon_3)
+    {
+        if (c == Color(0))
+            return tr("&Blue");
+        if (c == Color(1))
+            return tr("&Yellow");
+        if (c == Color(2))
+            return tr("&Red");
+    }
+    else if (variant == variant_classic_2 || variant == variant_trigon_2)
+    {
+        if (c == Color(0) || c == Color(2))
+            return tr("&Blue/Red");
+        if (c == Color(1) || c == Color(3))
+            return tr("&Yellow/Green");
+    }
+    LIBBOARDGAME_ASSERT(false);
+    return "";
 }
 
 //-----------------------------------------------------------------------------

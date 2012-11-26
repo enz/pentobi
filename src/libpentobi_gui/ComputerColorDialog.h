@@ -38,6 +38,8 @@ private:
     array<QCheckBox*, 4> m_checkBox;
 
     void createCheckBox(QLayout* layout, Color c);
+
+    QString getPlayerString(Variant variant, Color c);
 };
 
 //-----------------------------------------------------------------------------
