@@ -54,10 +54,12 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     formLayout->addRow(tr("Best previous rating:"), m_labelBestRating);
     QFrame* separator = new QFrame();
     separator->setFrameStyle(QFrame::HLine | QFrame::Plain);
-    layout->addWidget(separator);
+    layout->addSpacing(layout->margin());
     layout->addWidget(new QLabel(tr("Recent development:")));
     m_graph = new RatingGraph();
     layout->addWidget(m_graph, 1);
+    layout->addSpacing(layout->margin());
+    layout->addWidget(new QLabel(tr("Recent games:")));
     m_list = new RatedGamesList();
     layout->addWidget(m_list, 1);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
