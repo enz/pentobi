@@ -1213,8 +1213,8 @@
     </message>
     <message>
         <location filename="RatingDialog.cpp" line="67"/>
-        <source>Clear</source>
-        <translation>Löschen</translation>
+        <source>&amp;Clear</source>
+        <translation>&amp;Löschen</translation>
     </message>
     <message>
         <location filename="RatingDialog.cpp" line="89"/>

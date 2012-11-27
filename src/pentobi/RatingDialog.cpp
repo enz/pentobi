@@ -65,7 +65,7 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
     m_clearButton =
-        buttonBox->addButton(tr("Clear"), QDialogButtonBox::ActionRole);
+        buttonBox->addButton(tr("&Clear"), QDialogButtonBox::ActionRole);
     buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
     buttonBox->button(QDialogButtonBox::Close)->setAutoDefault(true);
     buttonBox->button(QDialogButtonBox::Close)->setFocus();
