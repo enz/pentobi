@@ -2527,13 +2527,14 @@ void MainWindow::placePiece(Color c, Move mv)
     {
         m_game->add_setup(c, mv);
         setSetupPlayer();
+        updateWindow(true);
     }
     else
     {
         play(c, mv);
+        updateWindow(true);
         checkComputerMove();
     }
-    updateWindow(true);
 }
 
 void MainWindow::play()
