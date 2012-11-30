@@ -33,6 +33,8 @@ public:
 
     void set_seed(ResultType seed);
 
+    ResultType generate();
+
     /** Generate a small random number.
         Fast way to generate a small integer that avoids an expensive modulo
         operation. Uses only the lower 16 bits of the random generator.
@@ -71,9 +73,9 @@ private:
 #endif
 };
 
-inline void RandomGenerator::set_seed(ResultType seed)
+inline RandomGenerator::ResultType RandomGenerator::generate()
 {
-    m_generator.seed(seed);
+    return m_generator();
 }
 
 inline double RandomGenerator::generate_float()
@@ -92,6 +94,11 @@ inline unsigned RandomGenerator::generate_small_uint(unsigned n)
     unsigned i = static_cast<unsigned>(((m_generator() & 0xffff) * n) >> 16);
     LIBBOARDGAME_ASSERT(i < n);
     return i;
+}
+
+inline void RandomGenerator::set_seed(ResultType seed)
+{
+    m_generator.seed(seed);
 }
 
 //-----------------------------------------------------------------------------

@@ -10,7 +10,7 @@
 #include <functional>
 #include <boost/format.hpp>
 #include "BiasTerm.h"
-#include "ReplyTable.h"
+#include "LastGoodReply.h"
 #include "Tree.h"
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
@@ -212,15 +212,7 @@ public:
     bool get_weight_rave_updates() const;
 
     /** Enable Last-Good-Reply heuristic.
-        Uses LGRF-1 to remember good reply moves and passes them to the
-        gen_and_play_playout_move() function of the state, which needs to check
-        if the reply is legal in the current position and decide when and if
-        to use it for the playout move. Can only be use in games, in which the
-        sequence of players does not change.
-        See Baier, Drake: The Power of Forgetting: Improving the Last-Good-Reply
-        Policy in Monte-Carlo Go. (2010)
-        http://webdisk.lclark.edu/drake/publications/baier-drake-ieee-2010.pdf
-        @see ReplyTable */
+        @see LastGoodReply */
     void set_last_good_reply(bool enable);
 
     bool get_last_good_reply() const;
@@ -435,7 +427,7 @@ private:
 
     function<void(double, double)> m_callback;
 
-    ReplyTable<S,M,P> m_reply_table;
+    LastGoodReply<S,M,P> m_last_good_reply;
 
     vector<Move> m_followup_sequence;
 
@@ -815,8 +807,13 @@ void Search<S,M,P>::playout()
             unsigned nu_moves = m_state.get_nu_moves();
             if (nu_moves > 0)
             {
-                PlayerMove last_move = m_state.get_move(nu_moves - 1);
-                last_good_reply = m_reply_table.get_reply(last_move);
+                Move last_mv = m_state.get_move(nu_moves - 1).move;
+                Move second_last_mv = Move::null();
+                if (nu_moves > 1)
+                    second_last_mv = m_state.get_move(nu_moves - 2).move;
+                last_good_reply =
+                    m_last_good_reply.get(m_state.get_to_play(), last_mv,
+                                          second_last_mv);
             }
         }
         if (! m_state.gen_and_play_playout_move(last_good_reply))
@@ -1008,7 +1005,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
     for (unsigned i = 0; i < nu_players; ++i)
         m_root_val[i].clear();
     if (m_use_last_good_reply && ! is_followup)
-        m_reply_table.init(nu_players);
+        m_last_good_reply.init(nu_players);
     m_state.start_search();
     m_max_count = max_count;
     m_nu_simulations = 0;
@@ -1283,11 +1280,16 @@ void Search<S,M,P>::update_last_good_reply(const array<Float,max_players>& eval)
         for (unsigned i = nu_moves - 1; i > 0; --i)
         {
             PlayerMove reply = m_state.get_move(i);
-            PlayerMove mv = m_state.get_move(i - 1);
+            Move last_mv = m_state.get_move(i - 1).move;
+            Move second_last_mv = Move::null();
+            if (i >= 2)
+                second_last_mv = m_state.get_move(i - 2).move;
             if (is_winner[reply.player])
-                m_reply_table.store(mv, reply);
-            else if (m_reply_table.get_reply(mv) == reply.move)
-                m_reply_table.forget(mv, reply);
+                m_last_good_reply.store(reply.player, last_mv, second_last_mv,
+                                        reply.move);
+            else
+                m_last_good_reply.forget(reply.player, last_mv, second_last_mv,
+                                         reply.move);
         }
 }
 
