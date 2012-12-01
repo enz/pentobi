@@ -22,7 +22,15 @@ using namespace std;
 class RandomGenerator
 {
 public:
-    typedef mt19937::result_type ResultType;
+    /** This generator is the same as mt11213b in the Boost library.
+        According to the documentation of Boost 1.52, this generator is a bit
+        faster and uses less memory than mt19937. (The typedef mt11213b does
+        not exist in C++11.) */
+    typedef mersenne_twister_engine<uint32_t,32,351,175,19,0xccab8ee7,11,
+                                    0xffffffff,7,0x31b6ab00,15,0xffe50000,17,
+                                    1812433253> Generator;
+
+    typedef Generator::result_type ResultType;
 
     /** Constructor.
         Cinstructs the random generator with the global seed, if one was
@@ -60,7 +68,7 @@ public:
     static void set_global_seed_last();
 
 private:
-    mt19937 m_generator;
+    Generator m_generator;
 
     // GCC 4.4 does not use the name uniform_real_distribution (as in C++11)
     // but uniform_real. This workaround can be removed when we begin using
