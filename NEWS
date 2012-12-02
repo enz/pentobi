@@ -7,7 +7,7 @@ Current development version
   player to enforce such a tie
 * The computer now allocates more memory to use for the search if there is
   enough physical memory available on the system. This slightly increases
-  the playing strength al level 7.
+  the playing strength at level 7.
 * If the move generation takes longer than 10 seconds, the maximum remaining
   time is now shown in the status bar
 * Removed less frequently used buttons (Open, Save) from the tool bar
