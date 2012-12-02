@@ -9,7 +9,7 @@
 #include "Memory.h"
 
 #include <algorithm>
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #else
 #include <unistd.h>
@@ -26,7 +26,7 @@ using namespace std;
 
 size_t get_memory()
 {
-#if defined WIN32
+#ifdef _WIN32
 
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);

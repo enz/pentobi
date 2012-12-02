@@ -34,6 +34,7 @@ if(MINGW)
   # -std=c++0x makes MinGW define __STRICT_ANSI__, which also hides
   # some functions that we use in some Windows-specific code, like fdopen()
   add_definitions(-U__STRICT_ANSI__)
+  add_definitions(-DWINVER=0x0501)
 endif()
 
 # Define CMAKE_INSTALL_SYSCONFDIR  and CMAKE_INSTALL_FULL_SYSCONFDIR as in
