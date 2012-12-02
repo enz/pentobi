@@ -1,4 +1,4 @@
-.TH PENTOBI 6 "2012-04-10" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI 6 "2012-12-02" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 
 .SH NAME
 pentobi \- computer program that plays the board game Blokus
@@ -23,17 +23,15 @@ doc/blksgf/Blokus-SGF.html in the Pentobi source package.
 .TP
 .B \-\-memory
 The amount of memory in bytes to be used by the search.
-The default value is 384000000 (384 MB).
-This option can be used to reduce the memory requirements on low-end systems
-but it can have a negative effect on the playing strength.
-If the search runs out of memory, it will prune nodes with a low visit count
-from the search tree and these nodes may have to be searched again after the
-search continues.
-You can check how often the pruning happens by running Pentobi in game variant
-Duo (which has the highest number of simulations per second) at the highest
-level with option --verbose and looking at the messages during move generation.
-Pruning the tree a few times during a search will not affect the playing
-strength much but a large number of prunings will.
+If this option is not used, it depends on the amount of physical memory
+available on the system how much memory Pentobi will allocate (currently up
+to 1 GB).
+If the memory for the search is too low, the playing strength at higher
+playing levels will be impaired.
+This can be checked by running Pentobi with option --verbose in a game variant
+with a high number of Monte-Carlo simulations per second (e.g. Duo).
+If a message that the search tree was pruned occurs more than a few times
+during a move generation, the playing strength is likely to be affected.
 .TP
 .B \-\-verbose
 Print internal information about the move generation and other debugging

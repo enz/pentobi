@@ -54,6 +54,7 @@ endif()
 include(CheckIncludeFiles)
 check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
+check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 
 set(PENTOBI_BOOST_COMPONENTS system filesystem program_options)
 if(PENTOBI_BUILD_GTP)

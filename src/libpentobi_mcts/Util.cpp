@@ -9,6 +9,8 @@
 #include "Util.h"
 
 #include "libboardgame_sgf/Writer.h"
+#include "libboardgame_sys/Memory.h"
+#include "libboardgame_util/Log.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/SgfUtil.h"
 
@@ -19,6 +21,7 @@ using libboardgame_mcts::ChildIterator;
 using libboardgame_mcts::Node;
 using libboardgame_mcts::Tree;
 using libboardgame_sgf::Writer;
+using libboardgame_util::log;
 using libpentobi_base::boardutil::write_setup;
 using libpentobi_base::sgf_util::get_color_id;
 
@@ -72,6 +75,23 @@ bool compare_node(const Node<Move>* n1, const Node<Move>* n2)
     if (count1 != count2)
         return count1 > count2;
     return n1->get_value() > n2->get_value();
+}
+
+size_t get_memory()
+{
+    size_t memory;
+    size_t total_mem = libboardgame_sys::get_memory();
+    if (total_mem == 0)
+        // System memory could not be determined
+        memory = 128000000;
+    else if (total_mem < 512000000)
+        memory = total_mem / 2;
+    else
+        memory = total_mem / 3;
+    if (memory > 1000000000)
+        memory = 1000000000;
+    log() << "Using " << memory << " of " << total_mem << " bytes\n";
+    return memory;
 }
 
 void dump_tree(ostream& out, const Search& search)

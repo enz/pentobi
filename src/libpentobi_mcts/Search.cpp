@@ -9,6 +9,7 @@
 #include "Search.h"
 
 #include <boost/format.hpp>
+#include "Util.h"
 
 namespace libpentobi_mcts {
 
@@ -119,7 +120,7 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
 
 Search::Search(Variant initial_variant, size_t memory)
     : ParentClass(State(initial_variant, m_shared_const),
-                  memory == 0 ? 384000000 : memory),
+                  memory == 0 ? util::get_memory() : memory),
       m_auto_param(true),
       m_variant(initial_variant),
       m_shared_const(m_to_play)

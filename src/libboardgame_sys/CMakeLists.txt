@@ -5,6 +5,7 @@ include_directories(
 
 set(boardgame_sys_STAT_SRCS
   CpuTime.cpp
+  Memory.cpp
   )
 
 add_library(boardgame_sys STATIC ${boardgame_sys_STAT_SRCS})
