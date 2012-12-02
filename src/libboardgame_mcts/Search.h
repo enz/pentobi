@@ -11,6 +11,7 @@
 #include <boost/format.hpp>
 #include "BiasTerm.h"
 #include "LastGoodReply.h"
+#include "PlayerMove.h"
 #include "Tree.h"
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
