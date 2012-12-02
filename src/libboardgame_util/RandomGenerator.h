@@ -5,6 +5,7 @@
 #ifndef LIBBOARDGAME_UTIL_RANDOM_GENERATOR_H
 #define LIBBOARDGAME_UTIL_RANDOM_GENERATOR_H
 
+#include <cstdint>
 #include <random>
 #include "Assert.h"
 
