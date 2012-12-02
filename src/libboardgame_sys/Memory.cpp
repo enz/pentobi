@@ -14,7 +14,7 @@
 #else
 #include <unistd.h>
 #endif
-#ifdef HAVE_SYS_SYSCTL_H
+#if HAVE_SYS_SYSCTL_H
 #include <sys/sysctl.h>
 #endif
 
