@@ -34,7 +34,7 @@ public:
     typedef Generator::result_type ResultType;
 
     /** Constructor.
-        Cinstructs the random generator with the global seed, if one was
+        Constructs the random generator with the global seed, if one was
         defined, otherwise with a non-deterministic seed. */
     RandomGenerator();
 
