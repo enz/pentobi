@@ -82,12 +82,12 @@ size_t get_memory()
     size_t memory;
     size_t total_mem = libboardgame_sys::get_memory();
     if (total_mem == 0)
-        // System memory could not be determined
-        memory = 128000000;
-    else if (total_mem < 512000000)
-        memory = total_mem / 2;
+    {
+        log("WARNING: could not determine system memory (assuming 512 MB)");
+        memory = 512000000;
+    }
     else
-        memory = total_mem / 3;
+        memory = total_mem / 2;
     if (memory > 1000000000)
         memory = 1000000000;
     log() << "Using " << memory << " of " << total_mem << " bytes\n";
