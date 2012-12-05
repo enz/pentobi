@@ -33,7 +33,7 @@ list<RandomGenerator*>& get_all_generators()
 
 RandomGenerator::ResultType get_nondet_seed()
 {
-    static mt19937 seed_generator;
+    static RandomGenerator::Generator seed_generator;
     RandomGenerator::ResultType seed = RandomGenerator::ResultType(time(0));
     seed ^= seed_generator();
     return seed;
