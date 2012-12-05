@@ -5,14 +5,18 @@ Current development version
   tied games in game variant Trigon Two-Player (like it already knew in the
   variants Duo and Junior) and will avoid positions that allow the second
   player to enforce such a tie
-* The computer now allocates more memory to use for the search if there is
-  enough physical memory available on the system. This slightly increases
-  the playing strength at level 7.
+* Slightly increased overall playing strength at higher levels in all game
+  variants (especially Trigon)
+* The computer now allocates more memory to use for the search (up to 1 GB)
+  if there is enough physical memory available on the system. This slightly
+  increases the playing strength at level 7.
 * If the move generation takes longer than 10 seconds, the maximum remaining
   time is now shown in the status bar
 * Removed less frequently used buttons (Open, Save) from the tool bar
 * The menu bar and tool bar are no longer shown in fullscreen mode
 * Re-organized menu bar
+* Optimized the layout of the piece orientation selector to avoid space
+  between the buttons and the selected piece
 * Avoided some window flickering at startup
 
 
