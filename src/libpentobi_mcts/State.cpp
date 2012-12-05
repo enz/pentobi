@@ -645,7 +645,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
     // maximum playable piece size) is chosen to reduce the probabilty
     // for such moves without becoming deterministic.
     Move mv;
-    const unsigned max_try = 2;
+    const unsigned max_try = 3;
     unsigned nu_try = 0;
     do
     {
