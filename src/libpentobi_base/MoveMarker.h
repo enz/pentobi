@@ -5,8 +5,8 @@
 #ifndef LIBPENTOBI_BASE_MOVE_MARKER_H
 #define LIBPENTOBI_BASE_MOVE_MARKER_H
 
-#include <climits>
 #include <cstring>
+#include <limits>
 #include <vector>
 #include "MoveList.h"
 
@@ -47,14 +47,18 @@ public:
     bool test_and_set(Move mv);
 
 private:
-    static const size_t array_size =
-        Move::range / CHAR_BIT + (Move::range % CHAR_BIT == 0 ? 0 : 1);
+    typedef unsigned Word;
 
-    unsigned char m_array[array_size];
+    static const int word_bits = numeric_limits<Word>::digits;
+
+    static const size_t array_size =
+        Move::range / word_bits + (Move::range % word_bits == 0 ? 0 : 1);
+
+    Word m_array[array_size];
 
     size_t get_index(Move mv) const;
 
-    unsigned char get_mask(Move mv) const;
+    Word get_mask(Move mv) const;
 };
 
 inline MoveMarker::MoveMarker()
@@ -95,12 +99,12 @@ inline void MoveMarker::clear_all_set_known(const MoveList& moves)
 
 inline size_t MoveMarker::get_index(Move mv) const
 {
-    return mv.to_int() / CHAR_BIT;
+    return mv.to_int() / word_bits;
 }
 
-inline unsigned char MoveMarker::get_mask(Move mv) const
+inline MoveMarker::Word MoveMarker::get_mask(Move mv) const
 {
-    return static_cast<unsigned char>(1) << (mv.to_int() % CHAR_BIT);
+    return static_cast<Word>(1) << (mv.to_int() % word_bits);
 }
 
 inline void MoveMarker::set(Move mv)
@@ -110,13 +114,13 @@ inline void MoveMarker::set(Move mv)
 
 inline void MoveMarker::set_all()
 {
-    memset(m_array, ~static_cast<unsigned char>(0), array_size);
+    memset(m_array, ~static_cast<Word>(0), array_size);
 }
 
 inline bool MoveMarker::test_and_set(Move mv)
 {
-    unsigned char& elem = m_array[get_index(mv)];
-    unsigned char mask = get_mask(mv);
+    Word& elem = m_array[get_index(mv)];
+    Word mask = get_mask(mv);
     if (elem & mask)
         return true;
     elem |= mask;
