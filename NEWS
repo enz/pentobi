@@ -7,9 +7,9 @@ Current development version
   player to enforce such a tie
 * Slightly increased overall playing strength at higher levels in all game
   variants (especially Trigon)
-* The computer now allocates more memory to use for the search (up to 1 GB)
-  if there is enough physical memory available on the system. This slightly
-  increases the playing strength at level 7.
+* The computer now allocates more memory to use for the search (up to
+  768 MB, but not more than half the physical memory available on the
+  system).This slightly increases the playing strength at level 7.
 * If the move generation takes longer than 10 seconds, the maximum remaining
   time is now shown in the status bar
 * Removed less frequently used buttons (Open, Save) from the tool bar
