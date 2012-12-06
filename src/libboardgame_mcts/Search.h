@@ -860,7 +860,7 @@ void Search<S,M,P>::write_info(ostream& out) const
     if (m_nu_simulations == 0 || count == 0)
         return;
     out << format(
-             "Val: %.2f, Cnt: %.0f, ReuseCnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
+             "Val: %.2f, Cnt: %.0f, ReCnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
              "Sim/s: %.0f, Len: %s, Dp: %s\n")
         % get_value() % count % m_reuse_count % m_nu_simulations
         % m_tree.get_nu_nodes() % time_to_string(m_last_time)
@@ -979,9 +979,8 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, size_t min_simulations,
                     double time = timer();
                     double reuse = double(tmp_tree_nodes) / double(tree_nodes);
                     double percent = 100 * reuse;
-                    log(format("Reusing %i nodes (%.1f%% count=%i time=%f)")
-                        % tmp_tree_nodes % percent % tmp_tree_root.get_count()
-                        % time);
+                    log(format("Reusing %i nodes (%.1f%% tm=%f)")
+                        % tmp_tree_nodes % percent % time);
                     m_tree.swap(m_tmp_tree);
                     clear_tree = false;
                     max_time -= time;
