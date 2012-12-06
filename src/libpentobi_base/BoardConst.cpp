@@ -709,9 +709,9 @@ void BoardConst::create_moves()
                 ListIndex idx;
                 // Ensure that values fit in bit-packed ListIndex members
                 LIBBOARDGAME_ASSERT(begin < (1 << 24));
-                idx.begin = begin;
+                idx.begin = begin & ((1 << 24) - 1);
                 LIBBOARDGAME_ASSERT(current - begin < (1 << 8));
-                idx.size = current - begin;
+                idx.size = (current - begin) & ((1 << 8) - 1);
                 m_moves_range[*i][j][piece] = idx;
             }
     m_full_move_table.reset(0); // Free space, no longer needed

@@ -318,8 +318,9 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     ThreadStorage& thread_storage =
         target.m_thread_storage[get_thread_storage(first_child)];
     const Node* target_child = thread_storage.next;
-    target_node_non_const.link_children(target_child - thread_storage.begin,
-                                        nu_children);
+    NodeIndex target_first_child =
+        static_cast<NodeIndex>(target_child - thread_storage.begin);
+    target_node_non_const.link_children(target_first_child, nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
     // assert, GCC 4.6.1 gives the error: parse error in template argument list
