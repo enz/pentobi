@@ -21,13 +21,6 @@
 #include "Util.h"
 
 using namespace std;
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 
 //-----------------------------------------------------------------------------
 
@@ -111,25 +104,25 @@ void RatingDialog::updateContent()
     QString variantStr;
     switch (variant)
     {
-    case variant_classic:
+    case Variant::classic:
         variantStr = tr("Classic (4 players)");
         break;
-    case variant_classic_2:
+    case Variant::classic_2:
         variantStr = tr("Classic (2 players)");
         break;
-    case variant_duo:
+    case Variant::duo:
         variantStr = tr("Duo");
         break;
-    case variant_trigon:
+    case Variant::trigon:
         variantStr = tr("Trigon (4 players)");
         break;
-    case variant_trigon_2:
+    case Variant::trigon_2:
         variantStr = tr("Trigon (2 players)");
         break;
-    case variant_trigon_3:
+    case Variant::trigon_3:
         variantStr = tr("Trigon (3 players)");
         break;
-    case variant_junior:
+    case Variant::junior:
         variantStr = tr("Junior");
         break;
     }

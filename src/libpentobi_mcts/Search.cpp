@@ -15,17 +15,6 @@ namespace libpentobi_mcts {
 
 using boost::format;
 using libboardgame_base::PointTransfRot180;
-using libpentobi_base::board_type_classic;
-using libpentobi_base::board_type_duo;
-using libpentobi_base::board_type_trigon;
-using libpentobi_base::board_type_trigon_3;
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -65,7 +54,7 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
     BoardType board_type = board_const.get_board_type();
     unsigned nu_colors = bd.get_nu_colors();
     is_piece_considered.fill(true);
-    if (board_type == board_type_duo)
+    if (board_type == BoardType::duo)
     {
         if (nu_moves < 2 * nu_colors)
             filter_min_size(board_const, 5, is_piece_considered);
@@ -74,7 +63,7 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
         else if (nu_moves < 5 * nu_colors)
             filter_min_size(board_const, 3, is_piece_considered);
     }
-    else if (board_type == board_type_classic)
+    else if (board_type == BoardType::classic)
     {
         if (nu_moves < 1 * nu_colors)
         {
@@ -89,8 +78,8 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
         else if (nu_moves < 7 * nu_colors)
             filter_min_size(board_const, 3, is_piece_considered);
     }
-    else if (board_type == board_type_trigon
-             || board_type == board_type_trigon_3)
+    else if (board_type == BoardType::trigon
+             || board_type == BoardType::trigon_3)
     {
         if (nu_moves < 1 * nu_colors)
         {
@@ -214,28 +203,28 @@ void Search::set_default_param(Variant variant)
           << '\n';
     switch (variant)
     {
-    case variant_duo:
+    case Variant::duo:
         set_bias_term_constant(0.09f);
         break;
-    case variant_junior:
+    case Variant::junior:
         set_bias_term_constant(0.12f);
         break;
-    case variant_classic:
-        // Not tuned. Use same value as for variant_classic_2
+    case Variant::classic:
+        // Not tuned. Use same value as for Variant::classic_2
         set_bias_term_constant(0.11f);
         break;
-    case variant_classic_2:
+    case Variant::classic_2:
         set_bias_term_constant(0.11f);
         break;
-    case variant_trigon:
-        // Not tuned. Use same value as for variant_trigon_2
+    case Variant::trigon:
+        // Not tuned. Use same value as for Variant::trigon_2
         set_bias_term_constant(0.10f);
         break;
-    case variant_trigon_2:
+    case Variant::trigon_2:
         set_bias_term_constant(0.10f);
         break;
-    case variant_trigon_3:
-        // Not tuned. Use same value as for variant_trigon_2
+    case Variant::trigon_3:
+        // Not tuned. Use same value as for Variant::trigon_2
         set_bias_term_constant(0.10f);
         break;
     default:

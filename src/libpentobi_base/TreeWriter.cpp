@@ -38,7 +38,7 @@ void TreeWriter::write_property(const string& id, const vector<string>& values)
             new_id = "2";
         else if (id == "GREEN")
         {
-            if (m_variant == variant_duo || m_variant == variant_junior)
+            if (m_variant == Variant::duo || m_variant == Variant::junior)
                 new_id = "2";
             else
                 new_id = "4";

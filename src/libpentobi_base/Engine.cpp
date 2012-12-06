@@ -296,9 +296,9 @@ Color Engine::get_color_arg(const Arguments& args, unsigned i) const
     string s = args.get_tolower(i);
     const Board& bd = get_board();
     Variant variant = bd.get_variant();
-    if (variant == variant_classic || variant == variant_classic_2
-        || variant == variant_trigon || variant == variant_trigon_2
-        || variant == variant_trigon_3)
+    if (variant == Variant::classic || variant == Variant::classic_2
+        || variant == Variant::trigon || variant == Variant::trigon_2
+        || variant == Variant::trigon_3)
     {
         if (s == "1" || s == "blue")
             return Color(0);
@@ -309,7 +309,7 @@ Color Engine::get_color_arg(const Arguments& args, unsigned i) const
         if (s == "4" || s == "green")
             return Color(3);
     }
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         if (s == "blue" || s == "black" || s == "b")
             return Color(0);

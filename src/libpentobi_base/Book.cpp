@@ -40,7 +40,7 @@ Move Book::genmove(const Board& bd, Color c)
     if (! mv.is_null())
         return mv;
     Variant variant = bd.get_variant();
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
         mv = genmove(bd, c, PointTransfRot270Refl<Point>(),
                      PointTransfRot270Refl<Point>());
     return mv;

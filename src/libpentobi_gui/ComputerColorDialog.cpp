@@ -12,13 +12,6 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::ColorIterator;
 
 //-----------------------------------------------------------------------------
@@ -37,19 +30,19 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
     layout->addWidget(new QLabel(tr("Colors played by the computer:")));
-    if (m_variant == variant_duo || m_variant == variant_junior)
+    if (m_variant == Variant::duo || m_variant == Variant::junior)
     {
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
     }
-    else if (m_variant == variant_classic || m_variant == variant_trigon)
+    else if (m_variant == Variant::classic || m_variant == Variant::trigon)
     {
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
         createCheckBox(layout, Color(2));
         createCheckBox(layout, Color(3));
     }
-    else if (m_variant == variant_trigon_3)
+    else if (m_variant == Variant::trigon_3)
     {
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
@@ -57,8 +50,8 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
-                            || m_variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
+                            || m_variant == Variant::trigon_2);
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
     }
@@ -80,8 +73,8 @@ void ComputerColorDialog::accept()
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
-                            || m_variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
+                            || m_variant == Variant::trigon_2);
         m_computerColor[Color(0)] = m_checkBox[0]->isChecked();
         m_computerColor[Color(2)] = m_checkBox[0]->isChecked();
         m_computerColor[Color(1)] = m_checkBox[1]->isChecked();
@@ -100,14 +93,14 @@ void ComputerColorDialog::createCheckBox(QLayout* layout, Color c)
 
 QString ComputerColorDialog::getPlayerString(Variant variant, Color c)
 {
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         if (c == Color(0))
             return tr("&Blue");
         if (c == Color(1))
             return tr("&Green");
     }
-    else if (variant == variant_classic || variant == variant_trigon)
+    else if (variant == Variant::classic || variant == Variant::trigon)
     {
         if (c == Color(0))
             return tr("&Blue");
@@ -118,7 +111,7 @@ QString ComputerColorDialog::getPlayerString(Variant variant, Color c)
         if (c == Color(3))
             return tr("&Green");
     }
-    else if (variant == variant_trigon_3)
+    else if (variant == Variant::trigon_3)
     {
         if (c == Color(0))
             return tr("&Blue");
@@ -127,7 +120,7 @@ QString ComputerColorDialog::getPlayerString(Variant variant, Color c)
         if (c == Color(2))
             return tr("&Red");
     }
-    else if (variant == variant_classic_2 || variant == variant_trigon_2)
+    else if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
         if (c == Color(0) || c == Color(2))
             return tr("&Blue/Red");

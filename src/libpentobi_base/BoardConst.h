@@ -28,15 +28,15 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
-enum BoardType
+enum class BoardType
 {
-    board_type_classic,
+    classic,
 
-    board_type_duo,
+    duo,
 
-    board_type_trigon,
+    trigon,
 
-    board_type_trigon_3
+    trigon_3
 };
 
 //-----------------------------------------------------------------------------

@@ -17,13 +17,6 @@ using namespace std;
 using boost::filesystem::ifstream;
 using libboardgame_util::log;
 using libboardgame_util::WallTime;
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -92,21 +85,21 @@ Move Player::genmove(const Board& bd, Color c)
             || m_book.get_tree().get_variant() != variant)
         {
             string filename;
-            if (variant == variant_duo)
+            if (variant == Variant::duo)
                 filename = "book_duo.blksgf";
-            else if (variant == variant_junior)
+            else if (variant == Variant::junior)
                 filename = "book_junior.blksgf";
-            else if (variant == variant_classic_2)
+            else if (variant == Variant::classic_2)
                 filename = "book_classic_2.blksgf";
-            else if (variant == variant_classic)
+            else if (variant == Variant::classic)
                 filename = "book_classic.blksgf";
-            else if (variant == variant_trigon_2)
+            else if (variant == Variant::trigon_2)
                 filename = "book_trigon_2.blksgf";
-            else if (variant == variant_trigon_3)
+            else if (variant == Variant::trigon_3)
                 filename = "book_trigon_3.blksgf";
             else
             {
-                LIBBOARDGAME_ASSERT(variant == variant_trigon);
+                LIBBOARDGAME_ASSERT(variant == Variant::trigon);
                 filename = "book_trigon.blksgf";
             }
             load_book(m_books_dir / filename);
@@ -142,26 +135,26 @@ Move Player::genmove(const Board& bd, Color c)
         // a tie-breaker.
         Float minimum;
         Float factor_per_level;
-        if (variant == variant_classic || variant == variant_classic_2)
+        if (variant == Variant::classic || variant == Variant::classic_2)
         {
             minimum = 5;
             factor_per_level = 5.87f;
         }
-        else if (variant == variant_trigon
-                 || variant == variant_trigon_2
-                 || variant == variant_trigon_3)
+        else if (variant == Variant::trigon
+                 || variant == Variant::trigon_2
+                 || variant == Variant::trigon_3)
         {
             minimum = 5;
             factor_per_level = 4.78f;
         }
-        else if (variant == variant_junior)
+        else if (variant == Variant::junior)
         {
             minimum = 5;
             factor_per_level = 7.10f;
         }
         else
         {
-            LIBBOARDGAME_ASSERT(variant == variant_duo);
+            LIBBOARDGAME_ASSERT(variant == Variant::duo);
             minimum = 5;
             factor_per_level = 6.98f;
         }
@@ -178,13 +171,14 @@ Move Player::genmove(const Board& bd, Color c)
         {
             unsigned player_move = bd.get_nu_onboard_pieces(c);
             float weight = 1;
-            if (variant == variant_duo || variant == variant_junior)
+            if (variant == Variant::duo || variant == Variant::junior)
                 weight = weight_max_count_duo[player_move];
-            else if (variant == variant_classic || variant == variant_classic_2)
+            else if (variant == Variant::classic
+                     || variant == Variant::classic_2)
                 weight = weight_max_count_classic[player_move];
-            else if (variant == variant_trigon
-                     || variant == variant_trigon_2
-                     || variant == variant_trigon_3)
+            else if (variant == Variant::trigon
+                     || variant == Variant::trigon_2
+                     || variant == Variant::trigon_3)
                 weight = weight_max_count_trigon[player_move];
             max_count = ceil(max_count * weight);
         }
@@ -230,8 +224,8 @@ Rating Player::get_rating(Variant variant, int level)
     level = max(level, 1);
     switch (variant)
     {
-    case variant_classic:
-    case variant_classic_2:
+    case Variant::classic:
+    case Variant::classic_2:
         {
             static float elo[] = { 1000, 1255, 1510, 1740, 1880, 1950, 1990 };
             if (level <= 7)
@@ -240,9 +234,9 @@ Rating Player::get_rating(Variant variant, int level)
                 // Ratings for levels greater 7 are not really tested.
                 return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
         }
-    case variant_trigon:
-    case variant_trigon_2:
-    case variant_trigon_3:
+    case Variant::trigon:
+    case Variant::trigon_2:
+    case Variant::trigon_3:
         {
             static float elo[] = { 750, 950, 1150, 1335, 1430, 1500, 1550 };
             if (level <= 7)
@@ -251,8 +245,8 @@ Rating Player::get_rating(Variant variant, int level)
                 // Ratings for levels greater 7 are not really tested.
                 return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
         }
-    case variant_duo:
-    case variant_junior:
+    case Variant::duo:
+    case Variant::junior:
         {
             static float elo[] = { 1100, 1325, 1550, 1750, 1880, 1950, 2020 };
             if (level <= 7)

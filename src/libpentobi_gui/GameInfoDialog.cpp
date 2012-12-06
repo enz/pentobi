@@ -12,13 +12,6 @@
 #include "LineEdit.h"
 #include "libpentobi_gui/Util.h"
 
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -37,20 +30,20 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     m_formLayout = new QFormLayout();
     layout->addLayout(m_formLayout);
     Variant variant = game.get_variant();
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerGreen = createPlayerName(tr("Player &Green:"), Color(1));
     }
-    else if (variant == variant_classic
-             || variant == variant_trigon)
+    else if (variant == Variant::classic
+             || variant == Variant::trigon)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
         m_playerRed = createPlayerName(tr("Player &Red:"), Color(2));
         m_playerGreen = createPlayerName(tr("Player &Green:"), Color(3));
     }
-    else if (variant == variant_trigon_3)
+    else if (variant == Variant::trigon_3)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
@@ -58,8 +51,8 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == variant_classic_2
-                            || variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
+                            || variant == Variant::trigon_2);
         m_playerBlueRed = createPlayerName(tr("Player &Blue/Red:"), Color(0));
         m_playerYellowGreen =
             createPlayerName(tr("Player &Yellow/Green:"), Color(1));
@@ -72,7 +65,7 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     // and that he only wants to display it is not empty. Therefore, we leave
     // the foxus at the first text field if it is empty and put it on the
     // button box otherwise.
-    if (variant == variant_classic_2 || variant == variant_trigon_2)
+    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
         if (! m_playerBlueRed->text().isEmpty())
             buttonBox->setFocus();
@@ -87,14 +80,14 @@ void GameInfoDialog::accept()
 {
     Variant variant = m_game.get_variant();
     string value;
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);
         if (acceptLine(m_playerGreen, value))
             m_game.set_player_name(Color(1), value);
     }
-    else if (variant == variant_classic || variant == variant_trigon)
+    else if (variant == Variant::classic || variant == Variant::trigon)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);
@@ -105,7 +98,7 @@ void GameInfoDialog::accept()
         if (acceptLine(m_playerGreen, value))
             m_game.set_player_name(Color(3), value);
     }
-    else if (variant == variant_trigon_3)
+    else if (variant == Variant::trigon_3)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);
@@ -116,8 +109,8 @@ void GameInfoDialog::accept()
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == variant_classic_2
-                            || variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
+                            || variant == Variant::trigon_2);
         if (acceptLine(m_playerBlueRed, value))
             m_game.set_player_name(Color(0), value);
         if (acceptLine(m_playerYellowGreen, value))

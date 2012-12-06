@@ -20,9 +20,8 @@
 using namespace std;
 using libboardgame_base::Transform;
 using libboardgame_util::log;
-using libpentobi_base::board_type_trigon;
-using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::BoardIterator;
+using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
 using libpentobi_base::PiecePoints;
@@ -187,8 +186,8 @@ void GuiBoard::moveSelectedPieceDown()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == board_type_trigon
-            || m_bd.get_board_type() == board_type_trigon_3)
+        if (m_bd.get_board_type() == BoardType::trigon
+            || m_bd.get_board_type() == BoardType::trigon_3)
         {
             if (m_selectedPieceOffset.x % 2 == 0)
                 ++newOffset.x;
@@ -222,8 +221,8 @@ void GuiBoard::moveSelectedPieceLeft()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == board_type_trigon
-            || m_bd.get_board_type() == board_type_trigon_3)
+        if (m_bd.get_board_type() == BoardType::trigon
+            || m_bd.get_board_type() == BoardType::trigon_3)
             newOffset.x -= 2;
         else
             --newOffset.x;
@@ -250,8 +249,8 @@ void GuiBoard::moveSelectedPieceRight()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == board_type_trigon
-            || m_bd.get_board_type() == board_type_trigon_3)
+        if (m_bd.get_board_type() == BoardType::trigon
+            || m_bd.get_board_type() == BoardType::trigon_3)
             newOffset.x += 2;
         else
             ++newOffset.x;
@@ -278,8 +277,8 @@ void GuiBoard::moveSelectedPieceUp()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == board_type_trigon
-            || m_bd.get_board_type() == board_type_trigon_3)
+        if (m_bd.get_board_type() == BoardType::trigon
+            || m_bd.get_board_type() == BoardType::trigon_3)
         {
             if (m_selectedPieceOffset.x % 2 == 0)
                 ++newOffset.x;

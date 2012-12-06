@@ -21,9 +21,6 @@ using boost::trim;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::log;
-using libpentobi_base::board_type_trigon;
-using libpentobi_base::board_type_trigon_3;
-using libpentobi_base::variant_junior;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::Variant;
@@ -118,13 +115,13 @@ void PieceSelector::init()
     BoardType boardType = m_bd.get_board_type();
     Variant variant = m_bd.get_variant();
     const string* pieceLayout;
-    if (boardType == board_type_trigon || boardType == board_type_trigon_3)
+    if (boardType == BoardType::trigon || boardType == BoardType::trigon_3)
     {
         pieceLayout = &pieceLayoutTrigon;
         m_nuColumns = 45;
         m_nuRows = 6;
     }
-    else if (variant == variant_junior)
+    else if (variant == Variant::junior)
     {
         pieceLayout = &pieceLayoutJunior;
         m_nuColumns = 34;
@@ -192,7 +189,7 @@ void PieceSelector::paintEvent(QPaintEvent*)
     painter.setRenderHint(QPainter::Antialiasing, true);
     BoardType boardType = m_bd.get_board_type();
     bool isTrigon =
-        (boardType == board_type_trigon || boardType == board_type_trigon_3);
+        (boardType == BoardType::trigon || boardType == BoardType::trigon_3);
     if (isTrigon)
     {
         qreal ratio = 1.732;

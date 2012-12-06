@@ -20,7 +20,7 @@ using namespace libpentobi_base;
     case. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
 {
-    unique_ptr<Board> bd(new Board(variant_classic));
+    unique_ptr<Board> bd(new Board(Variant::classic));
     Color c(0);
     bd->play(c, bd->from_string("i11,j11,k11,l11"));
     unique_ptr<MoveList> moves(new MoveList());
@@ -37,7 +37,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
 /** Check the number of generated moves at a starting point. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
 {
-    unique_ptr<Board> bd(new Board(variant_classic));
+    unique_ptr<Board> bd(new Board(Variant::classic));
     unique_ptr<MoveList> moves(new MoveList());
     unique_ptr<MoveMarker> marker(new MoveMarker());;
     bd->gen_moves(Color(0), Point("A20"), *marker, *moves);
@@ -48,7 +48,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
     a higher score but color 1 has less points than color 2. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_get_place)
 {
-    unique_ptr<Board> bd(new Board(variant_classic_2));
+    unique_ptr<Board> bd(new Board(Variant::classic_2));
     bd->play(Color(0), bd->from_string("a20,b20"));
     bd->play(Color(1), bd->from_string("r20,s20,t20"));
     bd->play(Color(2), bd->from_string("q1,r1,s1,t1"));

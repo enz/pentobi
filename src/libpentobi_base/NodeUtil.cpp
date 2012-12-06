@@ -26,7 +26,7 @@ using libboardgame_sgf::PropertyIterator;
 bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points)
 {
     string id;
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         if (node.has_property("B"))
         {

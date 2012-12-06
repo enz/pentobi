@@ -18,9 +18,6 @@
 
 using namespace std;
 using libboardgame_util::log;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::AdjIterator;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::DiagIterator;
@@ -128,9 +125,9 @@ void BoardPainter::drawLabels(QPainter& painter,
     if (labels == 0)
         return;
     const Geometry& geometry = pointState.get_geometry();
-    bool isTrigon = (variant == variant_trigon
-                     || variant == variant_trigon_2
-                     || variant == variant_trigon_3);
+    bool isTrigon = (variant == Variant::trigon
+                     || variant == Variant::trigon_2
+                     || variant == Variant::trigon_3);
     for (GeometryIterator i(geometry); i; ++i)
         if (! (*labels)[*i].isEmpty())
         {
@@ -174,9 +171,9 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     m_geometry = &geometry;
     m_width = static_cast<int>(m_geometry->get_width());
     m_height = static_cast<int>(m_geometry->get_height());
-    m_isTrigon = (variant == variant_trigon
-                  || variant == variant_trigon_2
-                  || variant == variant_trigon_3);
+    m_isTrigon = (variant == Variant::trigon
+                  || variant == Variant::trigon_2
+                  || variant == Variant::trigon_3);
     if (m_isTrigon)
     {
         qreal ratio = 1.732;

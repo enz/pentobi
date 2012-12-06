@@ -16,13 +16,6 @@
 
 using namespace std;
 using libboardgame_util::log;
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::ColorIterator;
 
 //-----------------------------------------------------------------------------
@@ -33,7 +26,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
       m_points(0),
       m_bonus(0)
 {
-    m_variant = variant_classic;
+    m_variant = Variant::classic;
     m_font.setStyleStrategy(QFont::PreferOutline);
     setMinimumWidth(300);
     setMinimumHeight(20);
@@ -164,7 +157,7 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
     m_colorDotSpace = static_cast<int>(0.3 * m_fontSize);
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
-    if (m_variant == variant_duo || m_variant == variant_junior)
+    if (m_variant == Variant::duo || m_variant == Variant::junior)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthGreen = getScoreTextWidth(Color(1));
@@ -175,7 +168,7 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
         x += m_colorDotWidth + textWidthBlue + pad;
         drawScore(painter, Color(1), static_cast<int>(x));
     }
-    else if (m_variant == variant_classic || m_variant == variant_trigon)
+    else if (m_variant == Variant::classic || m_variant == Variant::trigon)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthYellow = getScoreTextWidth(Color(1));
@@ -194,7 +187,7 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
         x += m_colorDotWidth + textWidthRed + pad;
         drawScore(painter, Color(3), static_cast<int>(x));
     }
-    else if (m_variant == variant_trigon_3)
+    else if (m_variant == Variant::trigon_3)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthYellow = getScoreTextWidth(Color(1));
@@ -212,8 +205,8 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
-                            || m_variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
+                            || m_variant == Variant::trigon_2);
         int textWidthBlueRed = getScoreTextWidth2(Color(0), Color(2));
         int textWidthYellowGreen = getScoreTextWidth2(Color(1), Color(3));
         int textWidthBlue = getScoreTextWidth(Color(0));

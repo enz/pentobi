@@ -16,7 +16,6 @@ using namespace std;
 using namespace libpentobi_base;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::get_last_node;
-using libpentobi_base::variant_classic;
 
 //-----------------------------------------------------------------------------
 
@@ -28,7 +27,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_game_current_defined_invalid_root)
     TreeReader reader;
     reader.read(in);
     unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Game game(variant_classic);
+    Game game(Variant::classic);
     try
     {
         game.init(root);

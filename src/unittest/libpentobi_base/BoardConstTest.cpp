@@ -18,7 +18,7 @@ using namespace libpentobi_base;
 /** Check symmetry information in MoveInfoExt for some moves. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_symmetry_info)
 {
-    const BoardConst& bc = BoardConst::get(variant_trigon_2);
+    const BoardConst& bc = BoardConst::get(Variant::trigon_2);
     const MoveInfoExt& info_ext =
         bc.get_move_info_ext(bc.from_string("q9,q10,r10,q11,r11,s11"));
     LIBBOARDGAME_CHECK(! info_ext.breaks_symmetry);

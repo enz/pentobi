@@ -23,15 +23,15 @@ Color::IntType get_nu_colors(Variant variant)
 {
     switch (variant)
     {
-    case variant_duo:
-    case variant_junior:
+    case Variant::duo:
+    case Variant::junior:
         return 2;
-    case variant_trigon_3:
+    case Variant::trigon_3:
         return 3;
-    case variant_classic:
-    case variant_classic_2:
-    case variant_trigon:
-    case variant_trigon_2:
+    case Variant::classic:
+    case Variant::classic_2:
+    case Variant::trigon:
+    case Variant::trigon_2:
         return 4;
     }
     LIBBOARDGAME_ASSERT(false);
@@ -42,15 +42,15 @@ unsigned get_nu_players(Variant variant)
 {
     switch (variant)
     {
-    case variant_duo:
-    case variant_junior:
-    case variant_classic_2:
-    case variant_trigon_2:
+    case Variant::duo:
+    case Variant::junior:
+    case Variant::classic_2:
+    case Variant::trigon_2:
         return 2;
-    case variant_trigon_3:
+    case Variant::trigon_3:
         return 3;
-    case variant_classic:
-    case variant_trigon:
+    case Variant::classic:
+    case Variant::trigon:
         return 4;
     }
     LIBBOARDGAME_ASSERT(false);
@@ -61,19 +61,19 @@ bool parse_variant(const string& s, Variant& variant)
 {
     string t = to_lower_copy(trim_copy(s));
     if (t == "blokus")
-        variant = variant_classic;
+        variant = Variant::classic;
     else if (t == "blokus two-player")
-        variant = variant_classic_2;
+        variant = Variant::classic_2;
     else if (t == "blokus trigon")
-        variant = variant_trigon;
+        variant = Variant::trigon;
     else if (t == "blokus trigon two-player")
-        variant = variant_trigon_2;
+        variant = Variant::trigon_2;
     else if (t == "blokus trigon three-player")
-        variant = variant_trigon_3;
+        variant = Variant::trigon_3;
     else if (t == "blokus duo")
-        variant = variant_duo;
+        variant = Variant::duo;
     else if (t == "blokus junior")
-        variant = variant_junior;
+        variant = Variant::junior;
     else
         return false;
     return true;
@@ -83,19 +83,19 @@ bool parse_variant_id(const string& s, Variant& variant)
 {
     string t = to_lower_copy(trim_copy(s));
     if (t == "classic")
-        variant = variant_classic;
+        variant = Variant::classic;
     else if (t == "classic_2")
-        variant = variant_classic_2;
+        variant = Variant::classic_2;
     else if (t == "trigon")
-        variant = variant_trigon;
+        variant = Variant::trigon;
     else if (t == "trigon_2")
-        variant = variant_trigon_2;
+        variant = Variant::trigon_2;
     else if (t == "trigon_3")
-        variant = variant_trigon_3;
+        variant = Variant::trigon_3;
     else if (t == "duo")
-        variant = variant_duo;
+        variant = Variant::duo;
     else if (t == "junior")
-        variant = variant_junior;
+        variant = Variant::junior;
     else
         return false;
     return true;
@@ -105,19 +105,19 @@ const char* to_string(Variant variant)
 {
     switch (variant)
     {
-    case variant_classic:
+    case Variant::classic:
         return "Blokus";
-    case variant_classic_2:
+    case Variant::classic_2:
         return "Blokus Two-Player";
-    case variant_duo:
+    case Variant::duo:
         return "Blokus Duo";
-    case variant_junior:
+    case Variant::junior:
         return "Blokus Junior";
-    case variant_trigon:
+    case Variant::trigon:
         return "Blokus Trigon";
-    case variant_trigon_2:
+    case Variant::trigon_2:
         return "Blokus Trigon Two-Player";
-    case variant_trigon_3:
+    case Variant::trigon_3:
         return "Blokus Trigon Three-Player";
     default:
         LIBBOARDGAME_ASSERT(false);
@@ -129,19 +129,19 @@ const char* to_string_id(Variant variant)
 {
     switch (variant)
     {
-    case variant_classic:
+    case Variant::classic:
         return "classic";
-    case variant_classic_2:
+    case Variant::classic_2:
         return "classic_2";
-    case variant_duo:
+    case Variant::duo:
         return "duo";
-    case variant_junior:
+    case Variant::junior:
         return "junior";
-    case variant_trigon:
+    case Variant::trigon:
         return "trigon";
-    case variant_trigon_2:
+    case Variant::trigon_2:
         return "trigon_2";
-    case variant_trigon_3:
+    case Variant::trigon_3:
         return "trigon_3";
     default:
         LIBBOARDGAME_ASSERT(false);

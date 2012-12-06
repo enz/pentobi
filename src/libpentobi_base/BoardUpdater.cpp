@@ -94,7 +94,7 @@ void init_setup(Board& bd, const Node& node)
     get_current_position_as_setup(bd, setup);
     Variant variant = bd.get_variant();
     unsigned nu_instances;
-    if (variant == variant_junior)
+    if (variant == Variant::junior)
         nu_instances = 2;
     else
         nu_instances = 1;

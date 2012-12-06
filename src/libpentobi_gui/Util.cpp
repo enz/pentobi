@@ -10,14 +10,6 @@
 
 #include <QCoreApplication>
 
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
-
 //-----------------------------------------------------------------------------
 
 namespace {
@@ -207,7 +199,7 @@ QColor Util::getLabelColor(Variant variant, PointState s)
 
 QColor Util::getPaintColor(Variant variant, Color c)
 {
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
         return c == Color(0) ? blue : green;
     else
     {
@@ -229,14 +221,14 @@ QColor Util::getPaintColorEmpty()
 
 QString Util::getPlayerString(Variant variant, Color c)
 {
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         if (c == Color(0))
             return qApp->translate("Util", "Blue");
         if (c == Color(1))
             return qApp->translate("Util", "Green");
     }
-    else if (variant == variant_classic || variant == variant_trigon)
+    else if (variant == Variant::classic || variant == Variant::trigon)
     {
         if (c == Color(0))
             return qApp->translate("Util", "Blue");
@@ -247,7 +239,7 @@ QString Util::getPlayerString(Variant variant, Color c)
         if (c == Color(3))
             return qApp->translate("Util", "Green");
     }
-    else if (variant == variant_trigon_3)
+    else if (variant == Variant::trigon_3)
     {
         if (c == Color(0))
             return qApp->translate("Util", "Blue");
@@ -256,7 +248,7 @@ QString Util::getPlayerString(Variant variant, Color c)
         if (c == Color(2))
             return qApp->translate("Util", "Red");
     }
-    else if (variant == variant_classic_2 || variant == variant_trigon_2)
+    else if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
         if (c == Color(0) || c == Color(2))
             return qApp->translate("Util", "Blue/Red");

@@ -137,7 +137,7 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
 unsigned Board::get_bonus(Color c) const
 {
     unsigned bonus = 0;
-    if (m_variant != variant_junior && m_state_color[c].pieces_left.size() == 0)
+    if (m_variant != Variant::junior && m_state_color[c].pieces_left.size() == 0)
     {
         bonus = 15;
         for (unsigned i = get_nu_moves(); i > 0; --i)
@@ -195,7 +195,7 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 
 int Board::get_score(Color c) const
 {
-    if (m_variant == variant_duo || m_variant == variant_junior)
+    if (m_variant == Variant::duo || m_variant == Variant::junior)
     {
         unsigned points0 = get_points_with_bonus(Color(0));
         unsigned points1 = get_points_with_bonus(Color(1));
@@ -204,9 +204,9 @@ int Board::get_score(Color c) const
         else
             return points1 - points0;
     }
-    else if (m_variant == variant_classic
-             || m_variant == variant_trigon
-             || m_variant == variant_trigon_3)
+    else if (m_variant == Variant::classic
+             || m_variant == Variant::trigon
+             || m_variant == Variant::trigon_3)
     {
         int score = 0;
         for (ColorIterator i(m_nu_colors); i; ++i)
@@ -219,8 +219,8 @@ int Board::get_score(Color c) const
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
-                            || m_variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
+                            || m_variant == Variant::trigon_2);
         unsigned points0 =
             get_points_with_bonus(Color(0)) + get_points_with_bonus(Color(2));
         unsigned points1 =
@@ -234,7 +234,7 @@ int Board::get_score(Color c) const
 
 int Board::get_score_without_bonus(Color c) const
 {
-    if (m_variant == variant_duo || m_variant == variant_junior)
+    if (m_variant == Variant::duo || m_variant == Variant::junior)
     {
         unsigned points0 = get_points(Color(0));
         unsigned points1 = get_points(Color(1));
@@ -243,9 +243,9 @@ int Board::get_score_without_bonus(Color c) const
         else
             return points1 - points0;
     }
-    else if (m_variant == variant_classic
-             || m_variant == variant_trigon
-             || m_variant == variant_trigon_3)
+    else if (m_variant == Variant::classic
+             || m_variant == Variant::trigon
+             || m_variant == Variant::trigon_3)
     {
         int score = 0;
         for (ColorIterator i(m_nu_colors); i; ++i)
@@ -257,8 +257,8 @@ int Board::get_score_without_bonus(Color c) const
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_variant == variant_classic_2
-                            || m_variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
+                            || m_variant == Variant::trigon_2);
         unsigned points0 = get_points(Color(0)) + get_points(Color(2));
         unsigned points1 = get_points(Color(1)) + get_points(Color(3));
         if (c == Color(0) || c == Color(2))
@@ -319,7 +319,7 @@ void Board::init(Variant variant, const Setup* setup)
         m_state_color[*i].points = 0;
         for (unsigned j = 0; j < get_nu_uniq_pieces(); ++j)
             m_state_color[*i].pieces_left.push_back(Piece(j));
-        if (variant == variant_junior)
+        if (variant == Variant::junior)
             m_state_color[*i].nu_left_piece.fill(2);
         else
             m_state_color[*i].nu_left_piece.fill(1);
@@ -345,7 +345,7 @@ void Board::init(Variant variant, const Setup* setup)
 void Board::init_variant(Variant variant)
 {
     m_variant = variant;
-    if (m_variant == variant_duo || m_variant == variant_junior)
+    if (m_variant == Variant::duo || m_variant == Variant::junior)
     {
         m_color_name[Color(0)] = "Blue";
         m_color_name[Color(1)] = "Green";
@@ -383,8 +383,8 @@ void Board::init_variant(Variant variant)
     LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden.init(*m_geometry));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
-        if (variant == variant_classic_2
-            || variant == variant_trigon_2)
+        if (variant == Variant::classic_2
+            || variant == Variant::trigon_2)
             m_second_color[*i] = get_next(get_next(*i));
         else
             m_second_color[*i] = *i;
@@ -465,8 +465,8 @@ void Board::write(ostream& out, bool mark_last_move) const
     unsigned height = m_geometry->get_height();
     bool is_info_location_right = (width <= 20);
     BoardType board_type = get_board_type();
-    bool is_trigon = (board_type == board_type_trigon
-                      || board_type == board_type_trigon_3);
+    bool is_trigon = (board_type == BoardType::trigon
+                      || board_type == BoardType::trigon_3);
     write_x_coord(out, width, is_trigon ? 3 : 2);
     for (unsigned y = height - 1; ; --y)
     {
@@ -614,7 +614,7 @@ void Board::write_color_info_line1(ostream& out, Color c) const
 
 void Board::write_color_info_line2(ostream& out, Color c) const
 {
-    if (m_variant == variant_junior)
+    if (m_variant == Variant::junior)
         write_pieces_left(out, c, 0, 6);
     else
         write_pieces_left(out, c, 0, 10);
@@ -622,7 +622,7 @@ void Board::write_color_info_line2(ostream& out, Color c) const
 
 void Board::write_color_info_line3(ostream& out, Color c) const
 {
-    if (m_variant == variant_junior)
+    if (m_variant == Variant::junior)
         write_pieces_left(out, c, 6, get_nu_uniq_pieces());
     else
         write_pieces_left(out, c, 10, get_nu_uniq_pieces());

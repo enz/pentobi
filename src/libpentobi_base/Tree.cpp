@@ -107,9 +107,9 @@ string Tree::get_player_name(Color c) const
     const Node& root = get_root();
     switch (m_variant)
     {
-    case variant_classic:
-    case variant_trigon:
-    case variant_trigon_3:
+    case Variant::classic:
+    case Variant::trigon:
+    case Variant::trigon_3:
         if (c == Color(0))
             return root.get_property("P1", "");
         if (c == Color(1))
@@ -119,15 +119,15 @@ string Tree::get_player_name(Color c) const
         if (c == Color(3))
             return root.get_property("P4", "");
         break;
-    case variant_classic_2:
-    case variant_trigon_2:
+    case Variant::classic_2:
+    case Variant::trigon_2:
         if (c == Color(0) || c == Color(2))
             return root.get_property("PB", "");
         if (c == Color(1) || c == Color(3))
             return root.get_property("PW", "");
         break;
-    case variant_duo:
-    case variant_junior:
+    case Variant::duo:
+    case Variant::junior:
         if (c == Color(0))
             return root.get_property("PB", "");
         if (c == Color(1))
@@ -281,9 +281,9 @@ void Tree::set_player_name(Color c, const string& name)
     const Node& root = get_root();
     switch (m_variant)
     {
-    case variant_classic:
-    case variant_trigon:
-    case variant_trigon_3:
+    case Variant::classic:
+    case Variant::trigon:
+    case Variant::trigon_3:
         if (c == Color(0))
             set_property(root, "P1", name);
         else if (c == Color(1))
@@ -295,8 +295,8 @@ void Tree::set_player_name(Color c, const string& name)
         else
             LIBBOARDGAME_ASSERT(false);
         return;
-    case variant_classic_2:
-    case variant_trigon_2:
+    case Variant::classic_2:
+    case Variant::trigon_2:
         if (c == Color(0) || c == Color(2))
             set_property(root, "PB", name);
         else if (c == Color(1) || c == Color(3))
@@ -304,8 +304,8 @@ void Tree::set_player_name(Color c, const string& name)
         else
             LIBBOARDGAME_ASSERT(false);
         return;
-    case variant_duo:
-    case variant_junior:
+    case Variant::duo:
+    case Variant::junior:
         if (c == Color(0))
             set_property(root, "PB", name);
         else if (c == Color(1))
@@ -344,23 +344,23 @@ void Tree::set_setup(const Node& node, const Setup& setup)
     remove_property(node, "AE");
     switch (m_variant)
     {
-    case variant_classic:
-    case variant_classic_2:
-    case variant_trigon:
-    case variant_trigon_2:
+    case Variant::classic:
+    case Variant::classic_2:
+    case Variant::trigon:
+    case Variant::trigon_2:
         set_setup_property(node, "A1", setup.placements[Color(0)]);
         set_setup_property(node, "A2", setup.placements[Color(1)]);
         set_setup_property(node, "A3", setup.placements[Color(2)]);
         set_setup_property(node, "A4", setup.placements[Color(3)]);
         break;
-    case variant_trigon_3:
+    case Variant::trigon_3:
         set_setup_property(node, "A1", setup.placements[Color(0)]);
         set_setup_property(node, "A2", setup.placements[Color(1)]);
         set_setup_property(node, "A3", setup.placements[Color(2)]);
         break;
     default:
-        LIBBOARDGAME_ASSERT(m_variant == variant_duo
-                            || m_variant == variant_junior);
+        LIBBOARDGAME_ASSERT(m_variant == Variant::duo
+                            || m_variant == Variant::junior);
         set_setup_property(node, "AB", setup.placements[Color(0)]);
         set_setup_property(node, "AW", setup.placements[Color(1)]);
     }

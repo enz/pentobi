@@ -23,13 +23,6 @@ using libboardgame_base::RectGeometry;
 using libboardgame_base::TrigonGeometry;
 using libboardgame_sgf::Node;
 using libboardgame_sgf::TreeReader;
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
@@ -104,19 +97,19 @@ bool getFinalPosition(const Node& root, Variant& variant,
     const Geometry* geometry;
     switch (variant)
     {
-    case variant_duo:
-    case variant_junior:
+    case Variant::duo:
+    case Variant::junior:
         geometry = RectGeometry<Point>::get(14, 14);
         break;
-    case variant_classic:
-    case variant_classic_2:
+    case Variant::classic:
+    case Variant::classic_2:
         geometry = RectGeometry<Point>::get(20, 20);
         break;
-    case variant_trigon:
-    case variant_trigon_2:
+    case Variant::trigon:
+    case Variant::trigon_2:
         geometry = TrigonGeometry<Point>::get(9);
         break;
-    case variant_trigon_3:
+    case Variant::trigon_3:
         geometry = TrigonGeometry<Point>::get(8);
         break;
     default:
@@ -167,7 +160,7 @@ bool createThumbnail(const QString& path, int width, int height,
     reader.set_read_only_main_variation(true);
     reader.read(path.toLocal8Bit().constData());
     Variant variant =
-        variant_classic; // Initialize to avoid compiler warning
+        Variant::classic; // Initialize to avoid compiler warning
     Grid<PointState> pointState;
     if (! getFinalPosition(reader.get_tree(), variant, pointState))
     {

@@ -42,19 +42,19 @@ void StartingPoints::init(Variant variant, const Geometry& geometry)
     m_starting_points[Color(1)].clear();
     m_starting_points[Color(2)].clear();
     m_starting_points[Color(3)].clear();
-    if (variant == variant_classic || variant == variant_classic_2)
+    if (variant == Variant::classic || variant == Variant::classic_2)
     {
         add_colored_starting_point(0, 19, Color(0));
         add_colored_starting_point(19, 19, Color(1));
         add_colored_starting_point(19, 0, Color(2));
         add_colored_starting_point(0, 0, Color(3));
     }
-    else if (variant == variant_duo || variant == variant_junior)
+    else if (variant == Variant::duo || variant == Variant::junior)
     {
         add_colored_starting_point(4, 9, Color(0));
         add_colored_starting_point(9, 4, Color(1));
     }
-    else if (variant == variant_trigon || variant == variant_trigon_2)
+    else if (variant == Variant::trigon || variant == Variant::trigon_2)
     {
         add_colorless_starting_point(17, 3);
         add_colorless_starting_point(17, 14);
@@ -63,7 +63,7 @@ void StartingPoints::init(Variant variant, const Geometry& geometry)
         add_colorless_starting_point(25, 6);
         add_colorless_starting_point(25, 11);
     }
-    else if (variant == variant_trigon_3)
+    else if (variant == Variant::trigon_3)
     {
         add_colorless_starting_point(15, 2);
         add_colorless_starting_point(15, 13);

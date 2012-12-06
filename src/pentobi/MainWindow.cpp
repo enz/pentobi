@@ -77,13 +77,6 @@ using libboardgame_util::get_abort;
 using libboardgame_util::log;
 using libboardgame_util::set_abort;
 using libboardgame_util::ArrayList;
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
@@ -230,7 +223,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     QString variantString = settings.value("variant", "").toString();
     Variant variant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
-        variant = variant_classic;
+        variant = Variant::classic;
     m_game.reset(new Game(variant));
     m_history.reset(new RatingHistory(variant));
     createActions();
@@ -689,8 +682,8 @@ void MainWindow::computerColors()
     Variant variant = getVariant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
-    if (variant != variant_classic && variant != variant_trigon
-        && variant != variant_trigon_3)
+    if (variant != Variant::classic && variant != Variant::trigon
+        && variant != Variant::trigon_3)
     {
         bool computerNone = true;
         for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
@@ -1744,7 +1737,7 @@ void MainWindow::gameOver()
     Variant variant = getVariant();
     const Board& bd = getBoard();
     QString info;
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         int score = bd.get_score(Color(0));
         if (score > 0)
@@ -1754,7 +1747,7 @@ void MainWindow::gameOver()
         else
             info = tr("The game ends in a tie.");
     }
-    else if (variant == variant_classic_2 || variant == variant_trigon_2)
+    else if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
         int score = bd.get_score(Color(0));
         if (score > 0)
@@ -1764,7 +1757,7 @@ void MainWindow::gameOver()
         else
             info = tr("The game ends in a tie.");
     }
-    else if (variant == variant_trigon_3)
+    else if (variant == Variant::trigon_3)
     {
         unsigned blue = bd.get_points_with_bonus(Color(0));
         unsigned yellow = bd.get_points_with_bonus(Color(1));
@@ -1787,8 +1780,8 @@ void MainWindow::gameOver()
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == variant_classic
-                            || variant == variant_trigon);
+        LIBBOARDGAME_ASSERT(variant == Variant::classic
+                            || variant == Variant::trigon);
         unsigned blue = bd.get_points_with_bonus(Color(0));
         unsigned yellow = bd.get_points_with_bonus(Color(1));
         unsigned red = bd.get_points_with_bonus(Color(2));
@@ -1866,43 +1859,43 @@ void MainWindow::gameOver()
 void MainWindow::variantClassic(bool checked)
 {
     if (checked)
-        setVariant(variant_classic);
+        setVariant(Variant::classic);
 }
 
 void MainWindow::variantClassic2(bool checked)
 {
     if (checked)
-        setVariant(variant_classic_2);
+        setVariant(Variant::classic_2);
 }
 
 void MainWindow::variantDuo(bool checked)
 {
     if (checked)
-        setVariant(variant_duo);
+        setVariant(Variant::duo);
 }
 
 void MainWindow::variantJunior(bool checked)
 {
     if (checked)
-        setVariant(variant_junior);
+        setVariant(Variant::junior);
 }
 
 void MainWindow::variantTrigon(bool checked)
 {
     if (checked)
-        setVariant(variant_trigon);
+        setVariant(Variant::trigon);
 }
 
 void MainWindow::variantTrigon2(bool checked)
 {
     if (checked)
-        setVariant(variant_trigon_2);
+        setVariant(Variant::trigon_2);
 }
 
 void MainWindow::variantTrigon3(bool checked)
 {
     if (checked)
-        setVariant(variant_trigon_3);
+        setVariant(Variant::trigon_3);
 }
 
 void MainWindow::genMove(bool playSingleMove)
@@ -2129,11 +2122,11 @@ void MainWindow::initGame()
     if (! settings.value("computer_color_none").toBool())
     {
         Variant variant = getVariant();
-        if (variant == variant_duo
-            || variant == variant_junior)
+        if (variant == Variant::duo
+            || variant == Variant::junior)
             m_computerColors[Color(1)] = true;
-        else if (variant == variant_classic_2
-                 || variant == variant_trigon_2)
+        else if (variant == Variant::classic_2
+                 || variant == Variant::trigon_2)
         {
             m_computerColors[Color(1)] = true;
             m_computerColors[Color(3)] = true;
@@ -2154,25 +2147,25 @@ void MainWindow::initVariantActions()
 {
     switch (getVariant())
     {
-    case variant_classic:
+    case Variant::classic:
         m_actionVariantClassic->setChecked(true);
         break;
-    case variant_classic_2:
+    case Variant::classic_2:
         m_actionVariantClassic2->setChecked(true);
         break;
-    case variant_duo:
+    case Variant::duo:
         m_actionVariantDuo->setChecked(true);
         break;
-    case variant_junior:
+    case Variant::junior:
         m_actionVariantJunior->setChecked(true);
         break;
-    case variant_trigon:
+    case Variant::trigon:
         m_actionVariantTrigon->setChecked(true);
         break;
-    case variant_trigon_2:
+    case Variant::trigon_2:
         m_actionVariantTrigon2->setChecked(true);
         break;
-    case variant_trigon_3:
+    case Variant::trigon_3:
         m_actionVariantTrigon3->setChecked(true);
         break;
     }
@@ -2542,8 +2535,8 @@ void MainWindow::play()
     cancelThread();
     leaveSetupMode();
     Variant variant = getVariant();
-    if (variant != variant_classic && variant != variant_trigon
-         && variant != variant_trigon_3)
+    if (variant != Variant::classic && variant != Variant::trigon
+         && variant != Variant::trigon_3)
     {
         QSettings settings;
         settings.setValue("computer_color_none", false);
@@ -2552,8 +2545,8 @@ void MainWindow::play()
     {
         m_computerColors.fill(false);
         m_computerColors[m_currentColor] = true;
-        if (variant == variant_classic_2
-            || variant == variant_trigon_2)
+        if (variant == Variant::classic_2
+            || variant == Variant::trigon_2)
         {
             if (m_currentColor == Color(0) || m_currentColor == Color(2))
                 m_computerColors[Color(0)] = m_computerColors[Color(2)] = true;
@@ -3087,7 +3080,7 @@ void MainWindow::setPlayToolTip()
     Variant variant = getVariant();
     Color c = m_currentColor;
     bool isComputerColor = m_computerColors[m_currentColor];
-    if (variant == variant_classic_2 || variant == variant_trigon_2)
+    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
         if (c == Color(0) || c == Color(2))
         {
@@ -3107,7 +3100,7 @@ void MainWindow::setPlayToolTip()
     else
     {
         bool isTwoColorVariant =
-            (variant == variant_duo || variant == variant_junior);
+            (variant == Variant::duo || variant == Variant::junior);
         if (c == Color(0))
         {
             if (isComputerColor)

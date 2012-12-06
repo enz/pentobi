@@ -18,8 +18,6 @@ using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
 using libboardgame_base::geometry_util::normalize_offset;
 using libboardgame_base::geometry_util::type_match_shift;
-using libpentobi_base::board_type_trigon;
-using libpentobi_base::board_type_trigon_3;
 using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::PiecePoints;
@@ -75,7 +73,8 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     qreal displayWidth;
     qreal displayHeight;
     bool isTrigon =
-        (board_type == board_type_trigon || board_type == board_type_trigon_3);
+        (board_type == BoardType::trigon
+         || board_type == BoardType::trigon_3);
     if (isTrigon)
     {
         int columns = 7;

@@ -15,21 +15,21 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 /** Game variant. */
-enum Variant
+enum class Variant
 {
-    variant_classic,
+    classic,
 
-    variant_classic_2,
+    classic_2,
 
-    variant_duo,
+    duo,
 
-    variant_junior,
+    junior,
 
-    variant_trigon,
+    trigon,
 
-    variant_trigon_2,
+    trigon_2,
 
-    variant_trigon_3
+    trigon_3
 };
 
 /** Get name of game variant as in the GM property in Blokus SGF files. */

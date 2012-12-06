@@ -26,17 +26,6 @@ using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_mcts::Tree;
 using libboardgame_util::log;
-using libpentobi_base::board_type_classic;
-using libpentobi_base::board_type_duo;
-using libpentobi_base::board_type_trigon;
-using libpentobi_base::board_type_trigon_3;
-using libpentobi_base::variant_classic;
-using libpentobi_base::variant_classic_2;
-using libpentobi_base::variant_duo;
-using libpentobi_base::variant_junior;
-using libpentobi_base::variant_trigon;
-using libpentobi_base::variant_trigon_2;
-using libpentobi_base::variant_trigon_3;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -65,8 +54,8 @@ Point find_best_starting_point(const Board& bd, Color c)
     // distance is weighted with a factor of 2)
     Point best = Point::null();
     float max_distance = -1;
-    bool is_trigon = (bd.get_board_type() == board_type_trigon
-                      || bd.get_board_type() == board_type_trigon_3);
+    bool is_trigon = (bd.get_board_type() == BoardType::trigon
+                      || bd.get_board_type() == BoardType::trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
     BOOST_FOREACH(Point p, bd.get_starting_points(c))
     {
@@ -114,7 +103,7 @@ Point find_best_starting_point(const Board& bd, Color c)
 Float get_result(const Board& bd, Color c)
 {
     Variant variant = bd.get_variant();
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
     {
         unsigned points0 = bd.get_points_with_bonus(Color(0));
         unsigned points1 = bd.get_points_with_bonus(Color(1));
@@ -137,9 +126,9 @@ Float get_result(const Board& bd, Color c)
                 return 0.5;
         }
     }
-    else if (variant == variant_classic
-             || variant == variant_trigon
-             || variant == variant_trigon_3)
+    else if (variant == Variant::classic
+             || variant == Variant::trigon
+             || variant == Variant::trigon_3)
     {
         Color::IntType nu_colors = bd.get_nu_colors();
         array<unsigned,Color::range> points_array;
@@ -160,8 +149,8 @@ Float get_result(const Board& bd, Color c)
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == variant_classic_2
-                            || variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
+                            || variant == Variant::trigon_2);
         unsigned points0 =
             bd.get_points_with_bonus(Color(0))
             + bd.get_points_with_bonus(Color(2));
@@ -190,7 +179,7 @@ Float get_result(const Board& bd, Color c)
 }
 
 /** Return the symmetric point state for symmetry detection.
-    Only used for variant_duo. Returns the other color or empty, if the
+    Only used for Variant::duo. Returns the other color or empty, if the
     given point state is empty. */
 PointState get_symmetric_state(PointState s)
 {
@@ -221,11 +210,11 @@ bool check_symmetry_min_nu_pieces(const Board& bd)
 {
     Variant variant = bd.get_variant();
     unsigned nu_pieces = bd.get_nu_onboard_pieces();
-    if (variant == variant_duo || variant == variant_junior)
+    if (variant == Variant::duo || variant == Variant::junior)
         return nu_pieces >= 3;
     else
     {
-        LIBBOARDGAME_ASSERT(variant == variant_trigon_2);
+        LIBBOARDGAME_ASSERT(variant == Variant::trigon_2);
         return nu_pieces >= 5;
     }
 }
@@ -386,11 +375,11 @@ void State::compute_features()
     m_has_connect_move = false;
     unsigned nu_onboard_pieces = m_bd.get_nu_onboard_pieces();
     bool compute_dist_to_center =
-        ((board_type == board_type_classic && nu_onboard_pieces < 13)
-         || (board_type == board_type_trigon && nu_onboard_pieces < 5)
-         || (board_type == board_type_trigon_3 && nu_onboard_pieces < 5));
+        ((board_type == BoardType::classic && nu_onboard_pieces < 13)
+         || (board_type == BoardType::trigon && nu_onboard_pieces < 5)
+         || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
     bool check_connect =
-        (board_type == board_type_classic && m_bd.get_nu_onboard_pieces() < 14);
+        (board_type == BoardType::classic && m_bd.get_nu_onboard_pieces() < 14);
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const MoveInfo& info = get_move_info(moves[i]);
@@ -606,9 +595,9 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         // in the game and we know that the playout is a loss because the
         // player has no more moves and the score is already negative.
         if (m_nu_moves_initial < 10 * nu_colors
-            && (variant == variant_duo || variant == variant_junior
-                || ((variant == variant_classic_2
-                     || variant == variant_trigon_2)
+            && (variant == Variant::duo || variant == Variant::junior
+                || ((variant == Variant::classic_2
+                     || variant == Variant::trigon_2)
                     && ! m_has_moves[m_bd.get_second_color(to_play)])))
         {
             if (m_bd.get_score_without_bonus(to_play) < 0)
@@ -714,7 +703,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             && features.dist_to_center != m_min_dist_to_center)
             // Prune early moves that don't minimize dist to center
             continue;
-        if (m_bc->get_board_type() == board_type_classic
+        if (m_bc->get_board_type() == BoardType::classic
             && m_bd.get_nu_onboard_pieces() < 14 && m_has_connect_move
             && ! features.connect)
             // Prune moves that don't connect in the middle if connection is
@@ -952,8 +941,8 @@ void State::start_search()
     m_stat_score.clear();
     Variant variant = bd.get_variant();
     m_check_symmetric_draw =
-        ((variant == variant_duo || variant == variant_junior
-          || variant == variant_trigon_2)
+        ((variant == Variant::duo || variant == Variant::junior
+          || variant == Variant::trigon_2)
          && m_shared_const.detect_symmetry
          && ! ((m_shared_const.to_play == Color(1)
                 || m_shared_const.to_play == Color(3))
@@ -966,8 +955,8 @@ void State::start_search()
     float height = static_cast<float>(geometry.get_height());
     float center_x = 0.5f * width - 0.5f;
     float center_y = 0.5f * height - 0.5f;
-    bool is_trigon = (bd.get_board_type() == board_type_trigon
-                      || bd.get_board_type() == board_type_trigon_3);
+    bool is_trigon = (bd.get_board_type() == BoardType::trigon
+                      || bd.get_board_type() == BoardType::trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
     for (GeometryIterator i(geometry); i; ++i)
     {
@@ -979,7 +968,7 @@ void State::start_search()
         // by max. 0.25 are treated as equal
         float d =
             libboardgame_util::math_util::round(4 * sqrt(dx * dx + dy * dy));
-        if (bd.get_board_type() == board_type_classic)
+        if (bd.get_board_type() == BoardType::classic)
             // Don't make a distinction between moves close enough to the center
             // in game variant Classic/Classic2
             d = max(d, 10.f);

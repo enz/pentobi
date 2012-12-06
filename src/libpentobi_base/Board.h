@@ -558,7 +558,7 @@ inline const MovePoints& Board::get_move_points(Move mv) const
 
 inline unsigned Board::get_nu_pieces() const
 {
-    if (m_variant == variant_junior)
+    if (m_variant == Variant::junior)
         return 2 * m_board_const->get_nu_pieces();
     else
         return m_board_const->get_nu_pieces();
