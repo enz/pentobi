@@ -1,17 +1,17 @@
 Current development version
 ===========================
 
+* Slightly increased overall playing strength at higher levels in all game
+  variants (especially Trigon)
 * The computer now also knows about the possibility of rotational-symmetric
   tied games in game variant Trigon Two-Player (like it already knew in the
   variants Duo and Junior) and will avoid positions that allow the second
   player to enforce such a tie
-* Slightly increased overall playing strength at higher levels in all game
-  variants (especially Trigon)
 * If the move generation takes longer than 10 seconds, the maximum remaining
   time is now shown in the status bar
 * Removed less frequently used buttons (Open, Save) from the tool bar
-* The menu bar and tool bar are no longer shown in fullscreen mode
 * Re-organized menu bar
+* The menu bar and tool bar are no longer shown in fullscreen mode
 * Optimized the layout of the piece orientation selector to avoid space
   between the buttons and the selected piece
 * Avoided some window flickering at startup
