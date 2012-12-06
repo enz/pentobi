@@ -32,8 +32,8 @@ struct Setup
 };
 
 inline Setup::Setup()
+    : to_play(Color(0))
 {
-    to_play = Color(0);
 }
 
 inline void Setup::clear()
