@@ -35,6 +35,8 @@ if(MINGW)
   # some functions that we use in some Windows-specific code, like fdopen()
   add_definitions(-U__STRICT_ANSI__)
   add_definitions(-DWINVER=0x0501)
+  set(CMAKE_EXE_LINKER_FLAGS
+    "${CMAKE_EXE_LINKER_FLAGS} -Wl,--large-address-aware")
 endif()
 
 # Define CMAKE_INSTALL_SYSCONFDIR  and CMAKE_INSTALL_FULL_SYSCONFDIR as in
