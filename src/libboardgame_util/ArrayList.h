@@ -18,7 +18,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-/** List with stack-based pre-allocated maximum number of elements.
+/** Array-based list with maximum number of elements.
     The user is responsible for not inserting more than the maximum number of
     elements. The elements must be default-constructible. If the size of the
     list shrinks, the destructor of elements will be not be called immediately.
