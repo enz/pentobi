@@ -421,13 +421,13 @@ void MainWindow::analyzeGame()
     switch (speed)
     {
     case 2:
-        nuSimulations = 56000;
+        nuSimulations = 60000;
         break;
     case 1:
-        nuSimulations = 14000;
+        nuSimulations = 15000;
         break;
     default:
-        nuSimulations = 3500;
+        nuSimulations = 3750;
         break;
     }
     m_analyzeGameWindow->analyzeGameWidget->start(*m_game,

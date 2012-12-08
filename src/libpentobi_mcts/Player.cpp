@@ -138,25 +138,25 @@ Move Player::genmove(const Board& bd, Color c)
         if (variant == Variant::classic || variant == Variant::classic_2)
         {
             minimum = 5;
-            factor_per_level = 5.87f;
+            factor_per_level = 5.92f;
         }
         else if (variant == Variant::trigon
                  || variant == Variant::trigon_2
                  || variant == Variant::trigon_3)
         {
-            minimum = 5;
-            factor_per_level = 4.78f;
+            minimum = 10;
+            factor_per_level = 4.31f;
         }
         else if (variant == Variant::junior)
         {
             minimum = 5;
-            factor_per_level = 7.10f;
+            factor_per_level = 7.28f;
         }
         else
         {
             LIBBOARDGAME_ASSERT(variant == Variant::duo);
             minimum = 5;
-            factor_per_level = 6.98f;
+            factor_per_level = 7.16f;
         }
         if (m_level <= 1)
             max_count = minimum;
@@ -211,7 +211,7 @@ Rating Player::get_rating(Variant variant, int level)
     // at beginner level (~1000 Elo) and level 6 at lower expert level (~2000
     // Elo), which corresponds to estimates of the performance of Pentobi 1.0
     // vs. humans. Not all game variants were tested (for example, the ratings
-    // for Classic 2-Player was also used for Classic, and those of Duo for
+    // for Classic 2 was also used for Classic, and those of Duo for
     // Junior). Modifications for the estimated playing strength of Pentobi
     // 1.0 in different game variants were applied (e.g. stronger in Duo,
     // weaker in Trigon).
@@ -238,7 +238,7 @@ Rating Player::get_rating(Variant variant, int level)
     case Variant::trigon_2:
     case Variant::trigon_3:
         {
-            static float elo[] = { 750, 950, 1150, 1335, 1430, 1500, 1550 };
+            static float elo[] = { 920, 1100, 1300, 1485, 1580, 1650, 1700 };
             if (level <= 7)
                 return Rating(elo[level - 1]);
             else
