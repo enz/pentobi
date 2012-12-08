@@ -235,7 +235,7 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
 
 void ScoreDisplay::resizeEvent(QResizeEvent*)
 {
-    m_fontSize = static_cast<int>(floor(0.7 * height()));
+    m_fontSize = static_cast<int>(floor(0.6 * height()));
     m_font.setPixelSize(m_fontSize);
 }
 

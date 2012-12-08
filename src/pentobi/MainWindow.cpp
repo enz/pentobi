@@ -1481,7 +1481,7 @@ QLayout* MainWindow::createRightPanel()
     QBoxLayout* layout = new QBoxLayout(QBoxLayout::TopToBottom);
     layout->addLayout(createOrientationSelector(), 20);
     m_scoreDisplay = new ScoreDisplay();
-    layout->addWidget(m_scoreDisplay, 3);
+    layout->addWidget(m_scoreDisplay, 5);
     SameHeightLayout* pieceSelectorLayout = new SameHeightLayout();
     layout->addLayout(pieceSelectorLayout, 80);
     for (ColorIterator i(Color::range); i; ++i)

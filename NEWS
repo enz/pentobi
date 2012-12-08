@@ -12,8 +12,6 @@ Current development version
 * Removed less frequently used buttons (Open, Save) from the tool bar
 * Re-organized menu bar
 * The menu bar and tool bar are no longer shown in fullscreen mode
-* Optimized the layout of the piece orientation selector to avoid space
-  between the buttons and the selected piece
 * Avoided some window flickering at startup
 
 
