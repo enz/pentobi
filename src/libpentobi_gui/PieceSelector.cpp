@@ -164,6 +164,7 @@ void PieceSelector::init()
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
         }
     setDisabledStatus(m_disabledStatus);
+    update();
 }
 
 void PieceSelector::mousePressEvent(QMouseEvent* event)
