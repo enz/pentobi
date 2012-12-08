@@ -77,7 +77,6 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
     QColor color = QApplication::palette().color(QPalette::WindowText);
     painter.setPen(color);
     painter.setRenderHint(QPainter::Antialiasing, false);
-    int textWidth = getTextWidth(text);
     painter.drawText(x, y, text);
     if (underline)
     {
@@ -89,7 +88,7 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
         pen.setWidth(lineWidth);
         painter.setPen(pen);
         y += 2 * lineWidth;
-        painter.drawLine(x, y, x + textWidth, y);
+        painter.drawLine(x, y, x + metrics.width(text), y);
     }
 }
 
