@@ -884,7 +884,7 @@ bool Search<S,M,P>::prune(TimeSource& time_source, double time,
     TimeIntervalChecker interval_checker(time_source, max_time);
     if (m_deterministic)
         interval_checker.set_deterministic(1000000);
-    log(format("Pruning count %1% (at time %2%)") % prune_min_count % time);
+    log(format("Pruning count %1% (at tm %2%)") % prune_min_count % time);
     m_tmp_tree.clear(m_tree.get_root().get_value());
     if (! m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(),
                               m_tree.get_root(), prune_min_count, true,
@@ -894,7 +894,7 @@ bool Search<S,M,P>::prune(TimeSource& time_source, double time,
         return false;
     }
     int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
-    log(format("Pruned size: %1% (%2%%%, time=%3%)")
+    log(format("Pruned size: %1% (%2%%%, tm=%3%)")
                % m_tmp_tree.get_nu_nodes() % percent % timer());
     m_tree.swap(m_tmp_tree);
     if (percent > 50)
