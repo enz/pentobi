@@ -384,6 +384,11 @@ void MainWindow::about()
 
 void MainWindow::analyzeGame()
 {
+    if (! is_main_variation(m_game->get_current()))
+    {
+        showInfo(tr("Only the main variation can be analyzed."));
+        return;
+    }
     QStringList items;
     items << tr("Fast") << tr("Normal") << tr("Slow");
     QInputDialog dialog(this);
