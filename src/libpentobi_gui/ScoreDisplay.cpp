@@ -88,6 +88,8 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
         pen.setWidth(lineWidth);
         painter.setPen(pen);
         y += 2 * lineWidth;
+        if (y > height() - 1)
+            y = height() - 1;
         painter.drawLine(x, y, x + metrics.width(text), y);
     }
 }
