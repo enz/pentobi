@@ -73,7 +73,7 @@ inline bool MoveMarker::operator[](Move mv) const
 
 inline void MoveMarker::clear()
 {
-    memset(m_array, 0, array_size);
+    memset(m_array, 0, array_size * sizeof(Word));
 }
 
 inline void MoveMarker::clear(Move mv)
@@ -114,7 +114,7 @@ inline void MoveMarker::set(Move mv)
 
 inline void MoveMarker::set_all()
 {
-    memset(m_array, ~static_cast<Word>(0), array_size);
+    memset(m_array, ~0, array_size * sizeof(Word));
 }
 
 inline bool MoveMarker::test_and_set(Move mv)
