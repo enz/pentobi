@@ -1,12 +1,12 @@
-Current development version
-===========================
+Version 5.0 (10 Dec 2012)
+=========================
 
-* Slightly increased overall playing strength at higher levels in all game
+* Small increase in overall playing strength at higher levels in all game
   variants (especially Trigon)
-* The computer now also knows about the possibility of rotational-symmetric
-  tied games in game variant Trigon Two-Player (like it already knew in the
-  variants Duo and Junior) and will avoid positions that allow the second
-  player to enforce such a tie
+* The computer now knows about the possibility of rotational-symmetric tied
+  games in game variant Trigon Two-Player (like it already knew in the
+  variants Duo and Junior) and will prevent the second player from enforcing
+  such a tie
 * If the move generation takes longer than 10 seconds, the maximum remaining
   time is now shown in the status bar
 * Removed less frequently used buttons (Open, Save) from the tool bar
