@@ -386,7 +386,7 @@ void MainWindow::analyzeGame()
 {
     if (! is_main_variation(m_game->get_current()))
     {
-        showInfo(tr("Only the main variation can be analyzed."));
+        showInfo(tr("Game analysis is only possible in the main variation."));
         return;
     }
     QStringList items;

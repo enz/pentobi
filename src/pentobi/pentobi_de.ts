@@ -24,7 +24,6 @@
     <message>
         <location filename="AnalyzeGameWindow.cpp" line="19"/>
         <source>Game Analysis</source>
-        <oldsource>Analyze Game</oldsource>
         <translation>Spielanalyse</translation>
     </message>
 </context>
@@ -204,7 +203,6 @@
     <message>
         <location filename="MainWindow.cpp" line="763"/>
         <source>10 Back&amp;ward</source>
-        <oldsource>10 Moves Back&amp;ward</oldsource>
         <translation>10 z&amp;urück</translation>
     </message>
     <message>
@@ -315,7 +313,6 @@
     <message>
         <location filename="MainWindow.cpp" line="860"/>
         <source>10 F&amp;orward</source>
-        <oldsource>10 Moves F&amp;orward</oldsource>
         <translation>10 v&amp;orwärts</translation>
     </message>
     <message>
@@ -355,9 +352,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="389"/>
-        <source>Only the main variation can be analyzed.</source>
-        <oldsource>Only the main variation can be analyzed</oldsource>
-        <translation>Nur die Hauptvariante kann analysiert werden.</translation>
+        <source>Game analysis is only possible in the main variation.</source>
+        <translation>Spielanalyse ist nur in der Hauptvariante möglich.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="840"/>
@@ -1189,7 +1185,6 @@
     <message>
         <location filename="RatingDialog.cpp" line="31"/>
         <source>Your Rating</source>
-        <oldsource>Rating</oldsource>
         <translation>Ihre Wertung</translation>
     </message>
     <message>
