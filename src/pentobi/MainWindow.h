@@ -517,6 +517,16 @@ private:
 
     QAction* m_actionSetupMode;
 
+    QAction* m_actionToolBarNoText;
+
+    QAction* m_actionToolBarTextBesideIcons;
+
+    QAction* m_actionToolBarTextBelowIcons;
+
+    QAction* m_actionToolBarTextOnly;
+
+    QAction* m_actionToolBarTextSystem;
+
     QAction* m_actionTruncate;
 
     QAction* m_actionTruncateChildren;
@@ -532,6 +542,8 @@ private:
     QMenu* m_menuMoveAnnotation;
 
     QMenu* m_menuOpenRecent;
+
+    QMenu* m_menuToolBarText;
 
     QLabel* m_setupModeLabel;
 
@@ -733,6 +745,16 @@ private slots:
     void showComment(bool checked);
 
     void showThinking();
+
+    void toolBarNoText(bool checked);
+
+    void toolBarTextBesideIcons(bool checked);
+
+    void toolBarTextBelowIcons(bool checked);
+
+    void toolBarTextOnly(bool checked);
+
+    void toolBarTextSystem(bool checked);
 
     void veryBadMove(bool checked);
 

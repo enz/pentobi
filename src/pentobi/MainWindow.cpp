@@ -275,6 +275,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_actionCoordinates->setChecked(coordinates);
     bool showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
+    m_menuToolBarText->setEnabled(showToolbar);
     m_actionShowToolbar->setChecked(showToolbar);
     bool showVariations = settings.value("show_variations", true).toBool();
     m_actionShowVariations->setChecked(showVariations);
@@ -744,6 +745,7 @@ void MainWindow::createActions()
     QActionGroup* groupLevel = new QActionGroup(this);
     QActionGroup* groupMoveNumbers = new QActionGroup(this);
     QActionGroup* groupMoveAnnotation = new QActionGroup(this);
+    QActionGroup* groupToolBarText = new QActionGroup(this);
 
     m_actionAbout = createAction(tr("&About"));
     m_actionAbout->setIcon(QIcon::fromTheme("help-about"));
@@ -1198,6 +1200,36 @@ void MainWindow::createActions()
     m_actionShowRating->setShortcut(QString("F7"));
     connect(m_actionShowRating, SIGNAL(triggered()), this, SLOT(showRating()));
 
+    m_actionToolBarNoText = createAction(tr("&No Text"));
+    m_actionToolBarNoText->setActionGroup(groupToolBarText);
+    m_actionToolBarNoText->setCheckable(true);
+    connect(m_actionToolBarNoText, SIGNAL(triggered(bool)),
+            this, SLOT(toolBarNoText(bool)));
+
+    m_actionToolBarTextBesideIcons = createAction(tr("Text &Beside Icons"));
+    m_actionToolBarTextBesideIcons->setActionGroup(groupToolBarText);
+    m_actionToolBarTextBesideIcons->setCheckable(true);
+    connect(m_actionToolBarTextBesideIcons, SIGNAL(triggered(bool)),
+            this, SLOT(toolBarTextBesideIcons(bool)));
+
+    m_actionToolBarTextBelowIcons = createAction(tr("Text Bel&ow Icons"));
+    m_actionToolBarTextBelowIcons->setActionGroup(groupToolBarText);
+    m_actionToolBarTextBelowIcons->setCheckable(true);
+    connect(m_actionToolBarTextBelowIcons, SIGNAL(triggered(bool)),
+            this, SLOT(toolBarTextBelowIcons(bool)));
+
+    m_actionToolBarTextOnly = createAction(tr("&Text Only"));
+    m_actionToolBarTextOnly->setActionGroup(groupToolBarText);
+    m_actionToolBarTextOnly->setCheckable(true);
+    connect(m_actionToolBarTextOnly, SIGNAL(triggered(bool)),
+            this, SLOT(toolBarTextOnly(bool)));
+
+    m_actionToolBarTextSystem = createAction(tr("&System Setting"));
+    m_actionToolBarTextSystem->setActionGroup(groupToolBarText);
+    m_actionToolBarTextSystem->setCheckable(true);
+    connect(m_actionToolBarTextSystem, SIGNAL(triggered(bool)),
+            this, SLOT(toolBarTextSystem(bool)));
+
     m_actionTruncate = createAction(tr("&Truncate"));
     connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
 
@@ -1400,6 +1432,12 @@ void MainWindow::createMenu()
 
     QMenu* menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
+    m_menuToolBarText = menuView->addMenu(tr("Toolbar T&ext"));
+    m_menuToolBarText->addAction(m_actionToolBarNoText);
+    m_menuToolBarText->addAction(m_actionToolBarTextBesideIcons);
+    m_menuToolBarText->addAction(m_actionToolBarTextBelowIcons);
+    m_menuToolBarText->addAction(m_actionToolBarTextOnly);
+    m_menuToolBarText->addAction(m_actionToolBarTextSystem);
     menuView->addAction(m_actionShowComment);
     menuView->addSeparator();
     QMenu* menuMoveNumbers = menuView->addMenu(tr("&Move Numbers"));
@@ -1548,6 +1586,33 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionNextVariation);
     m_toolBar->addAction(m_actionPreviousVariation);
     addToolBar(m_toolBar);
+    QSettings settings;
+    QString toolBarText = settings.value("toolbar_text", "system").toString();
+    if (toolBarText == "no_text")
+    {
+        m_toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+        m_actionToolBarNoText->setChecked(true);
+    }
+    else if (toolBarText == "beside_icons")
+    {
+        m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        m_actionToolBarTextBesideIcons->setChecked(true);
+    }
+    else if (toolBarText == "below_icons")
+    {
+        m_toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+        m_actionToolBarTextBelowIcons->setChecked(true);
+    }
+    else if (toolBarText == "text_only")
+    {
+        m_toolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
+        m_actionToolBarTextOnly->setChecked(true);
+    }
+    else
+    {
+        m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+        m_actionToolBarTextSystem->setChecked(true);
+    }
 }
 
 void MainWindow::deleteAutoSaveFile()
@@ -3255,11 +3320,57 @@ void MainWindow::showToolbar(bool checked)
     QSettings settings;
     settings.setValue("toolbar", checked);
     m_toolBar->setVisible(checked);
+    m_menuToolBarText->setEnabled(checked);
 }
 
 QSize MainWindow::sizeHint() const
 {
     return QSize(1020, 634);
+}
+
+void MainWindow::toolBarNoText(bool checked)
+{
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("toolbar_text", "no_text");
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+}
+
+void MainWindow::toolBarTextBesideIcons(bool checked)
+{
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("toolbar_text", "beside_icons");
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+}
+
+void MainWindow::toolBarTextBelowIcons(bool checked)
+{
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("toolbar_text", "below_icons");
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+}
+
+void MainWindow::toolBarTextOnly(bool checked)
+{
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("toolbar_text", "text_only");
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
+}
+
+void MainWindow::toolBarTextSystem(bool checked)
+{
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("toolbar_text", "system");
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 }
 
 void MainWindow::truncate()
