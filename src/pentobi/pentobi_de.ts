@@ -630,7 +630,7 @@
     <message>
         <location filename="MainWindow.cpp" line="1434"/>
         <source>Toolbar T&amp;ext</source>
-        <translation>Werkzeugleistente&amp;xt</translation>
+        <translation>Werkzeugleistent&amp;ext</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1442"/>
