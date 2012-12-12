@@ -565,7 +565,7 @@
     <message>
         <location filename="MainWindow.cpp" line="1208"/>
         <source>Text &amp;Beside Icons</source>
-        <translation>Text &amp;neben Symbolen</translation>
+        <translation>Text n&amp;eben Symbolen</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1214"/>
