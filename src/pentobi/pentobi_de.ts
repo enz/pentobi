@@ -579,8 +579,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1226"/>
-        <source>&amp;System Setting</source>
-        <translation>&amp;Systemeinstellung</translation>
+        <source>&amp;System Default</source>
+        <translation>&amp;Systemvorgabe</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1232"/>

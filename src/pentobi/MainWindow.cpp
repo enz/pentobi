@@ -1224,7 +1224,7 @@ void MainWindow::createActions()
     connect(m_actionToolBarTextOnly, SIGNAL(triggered(bool)),
             this, SLOT(toolBarTextOnly(bool)));
 
-    m_actionToolBarTextSystem = createAction(tr("&System Setting"));
+    m_actionToolBarTextSystem = createAction(tr("&System Default"));
     m_actionToolBarTextSystem->setActionGroup(groupToolBarText);
     m_actionToolBarTextSystem->setCheckable(true);
     connect(m_actionToolBarTextSystem, SIGNAL(triggered(bool)),
