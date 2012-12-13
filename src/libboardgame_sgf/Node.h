@@ -8,7 +8,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include <boost/foreach.hpp>
 #include "InvalidPropertyValue.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/StringUtil.h"
@@ -279,7 +278,7 @@ template<typename T>
 bool Node::set_property(const string& id, const vector<T>& values)
 {
     vector<string> values_to_string;
-    BOOST_FOREACH(const T& v, values)
+    for (const T& v : values)
         values_to_string.push_back(to_string(v));
     Property* property = m_first_property.get();
     if (property == 0)

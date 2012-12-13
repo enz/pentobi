@@ -9,7 +9,6 @@
 #include "PieceInfo.h"
 
 #include <algorithm>
-#include <boost/foreach.hpp>
 #include "libboardgame_base/GeometryUtil.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Log.h"
@@ -97,7 +96,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
     LIBBOARDGAME_ASSERT(points.contains(CoordPoint(0, 0)));
     vector<NormalizedPoints> all_transformed_points;
     PiecePoints transformed_points;
-    BOOST_FOREACH(const Transform* transform, transforms.get_all())
+    for (const Transform* transform : transforms.get_all())
     {
         if (log_piece_creation)
             log() << "Transformation " << typeid(*transform).name() << '\n';
@@ -161,7 +160,7 @@ const Transform* PieceInfo::find_transform(const Geometry& geometry,
 {
     NormalizedPoints normalized =
         normalize(points, geometry.get_point_type(0, 0), geometry);
-    BOOST_FOREACH(const Transform* transform, get_transforms())
+    for (const Transform* transform : get_transforms())
     {
         Points piece_points = get_points();
         transform->transform(piece_points.begin(), piece_points.end());

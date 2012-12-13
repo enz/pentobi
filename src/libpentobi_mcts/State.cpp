@@ -9,7 +9,6 @@
 #include "State.h"
 
 #include <cmath>
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/MathUtil.h"
@@ -57,7 +56,7 @@ Point find_best_starting_point(const Board& bd, Color c)
     bool is_trigon = (bd.get_board_type() == BoardType::trigon
                       || bd.get_board_type() == BoardType::trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
-    BOOST_FOREACH(Point p, bd.get_starting_points(c))
+    for (Point p : bd.get_starting_points(c))
     {
         if (bd.is_forbidden(p, c))
             continue;
@@ -66,7 +65,7 @@ Point find_best_starting_point(const Board& bd, Color c)
         float d = 0;
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         {
-            BOOST_FOREACH(Point pp, bd.get_starting_points(*i))
+            for (Point pp : bd.get_starting_points(*i))
             {
                 PointState s = bd.get_point_state(pp);
                 if (! s.is_empty())
@@ -255,7 +254,7 @@ State::~State() throw()
 inline void State::add_moves(Point p, Color c)
 {
     unsigned adj_status = m_bd.get_adj_status(p, c);
-    BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+    for (Piece piece : m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             add_moves(p, c, piece, adj_status);
     m_moves_added_at[c].set(p);
@@ -265,9 +264,9 @@ inline void State::add_moves(Point p, Color c, Piece piece,
                              unsigned adj_status)
 {
     MoveList& moves = m_moves[c];
-    const Board::LocalMovesListRange& move_candidates =
+    Board::LocalMovesListRange move_candidates =
         m_bc->get_moves(piece, p, adj_status);
-    for (auto i = move_candidates.first; i != move_candidates.second; ++i)
+    for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
         if (! m_shared_const.is_forbidden_at_root[c][*i])
         {
             unsigned local_value;
@@ -331,7 +330,7 @@ void State::compute_features()
     {
         if (*i == to_play || *i == second_color)
             continue;
-        BOOST_FOREACH(Point p, m_bd.get_attach_points(*i))
+        for (Point p : m_bd.get_attach_points(*i))
         {
             if (! m_bd.is_forbidden(p, *i))
             {
@@ -666,7 +665,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     }
     if (! use_prior_knowledge)
     {
-        BOOST_FOREACH(Move mv, moves)
+        for (Move mv : moves)
             expander.add_child(mv, 0.5, 0, 0.5, 0);
         return;
     }
@@ -686,14 +685,12 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             }
         }
         else if (nu_moves > 0)
-        {
-            BOOST_FOREACH(Move mv, moves)
+            for (Move mv : moves)
                 if (get_move_info_ext(mv).breaks_symmetry)
                 {
                     has_symmetry_breaker = true;
                     break;
                 }
-        }
     }
     for (unsigned i = 0; i < moves.size(); ++i)
     {
@@ -786,12 +783,11 @@ void State::init_move_list_with_local(Color c)
         Point p = find_best_starting_point(m_bd, c);
         if (! p.is_null())
         {
-            BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+            for (Piece piece : m_bd.get_pieces_left(c))
                 if ((*m_is_piece_considered[c])[piece])
                 {
                     unsigned adj_status = m_bd.get_adj_status(p, c);
-                    BOOST_FOREACH(Move mv,
-                                  m_bc->get_moves(piece, p, adj_status))
+                    for (Move mv : m_bc->get_moves(piece, p, adj_status))
                     {
                         if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
                         {
@@ -805,7 +801,7 @@ void State::init_move_list_with_local(Color c)
     }
     else
     {
-        BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
+        for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
                 add_moves(p, c);
     }
@@ -832,12 +828,11 @@ void State::init_move_list_without_local(Color c)
         Point p = find_best_starting_point(m_bd, c);
         if (! p.is_null())
         {
-            BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+            for (Piece piece : m_bd.get_pieces_left(c))
                 if ((*m_is_piece_considered[c])[piece])
                 {
                     unsigned adj_status = m_bd.get_adj_status(p, c);
-                    BOOST_FOREACH(Move mv,
-                                  m_bc->get_moves(piece, p, adj_status))
+                    for (Move mv : m_bc->get_moves(piece, p, adj_status))
                     {
                         if (! m_shared_const.is_forbidden_at_root[c][mv]
                             && ! m_marker[mv]
@@ -853,15 +848,14 @@ void State::init_move_list_without_local(Color c)
     }
     else
     {
-        BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
+        for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
                 unsigned adj_status = m_bd.get_adj_status(p, c);
-                BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+                for (Piece piece : m_bd.get_pieces_left(c))
                     if ((*m_is_piece_considered[c])[piece])
                     {
-                        BOOST_FOREACH(Move mv,
-                                      m_bc->get_moves(piece, p, adj_status))
+                        for (Move mv : m_bc->get_moves(piece, p, adj_status))
                         {
                             if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
                             {
@@ -1014,7 +1008,7 @@ void State::update_move_list(Color c)
 
     // Find old moves that are still legal
     PieceMap<bool> is_piece_left(false);
-    BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+    for (Piece piece : m_bd.get_pieces_left(c))
         is_piece_left[piece] = true;
     for (auto i = moves.begin(); i != moves.end(); )
     {
@@ -1041,7 +1035,7 @@ void State::update_move_list(Color c)
         Move mv = m_bd.get_move(i).move;
         if (mv.is_regular())
         {
-            BOOST_FOREACH(Point p, get_move_info_ext(mv).attach_points)
+            for (Point p : get_move_info_ext(mv).attach_points)
                 if (! m_bd.is_forbidden(p, c) && ! m_moves_added_at[c][p])
                     add_moves(p, c);
         }
@@ -1052,7 +1046,7 @@ void State::update_move_list(Color c)
         m_consider_all_pieces = true;
     const PieceMap<bool>& is_piece_considered = get_pieces_considered();
     bool pieces_considered_changed = false;
-    BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+    for (Piece piece : m_bd.get_pieces_left(c))
     {
         LIBBOARDGAME_ASSERT(! ((*m_is_piece_considered[c])[piece]
                                && ! is_piece_considered[piece]));
@@ -1064,11 +1058,11 @@ void State::update_move_list(Color c)
     }
     if (pieces_considered_changed)
     {
-        BOOST_FOREACH(Point p, m_bd.get_attach_points(c))
+        for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
                 unsigned adj_status = m_bd.get_adj_status(p, c);
-                BOOST_FOREACH(Piece piece, m_bd.get_pieces_left(c))
+                for (Piece piece : m_bd.get_pieces_left(c))
                 {
                     if (! (*m_is_piece_considered[c])[piece]
                         && is_piece_considered[piece])

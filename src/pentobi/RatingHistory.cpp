@@ -84,7 +84,7 @@ void RatingHistory::clear()
     settings.remove("rated_games_" + variantStr);
     settings.remove("rating_" + variantStr);
     settings.remove("best_rating_" + variantStr);
-    BOOST_FOREACH(const RatingHistory::GameInfo& info, getGameInfos())
+    for (const RatingHistory::GameInfo& info : getGameInfos())
         remove(getFile(info.number));
     remove(m_file);
     m_nuGames = 0;
@@ -163,7 +163,7 @@ void RatingHistory::load(Variant variant)
     // rating, so after an upgrade to a newer version of Pentobi, the history
     // of recent rated games can contain a higher rating than the stored
     // all-time best rating.
-    BOOST_FOREACH(const RatingHistory::GameInfo& info, getGameInfos())
+    for (const RatingHistory::GameInfo& info : getGameInfos())
         if (info.rating.get() > m_bestRating.get())
             m_bestRating = info.rating;
 }

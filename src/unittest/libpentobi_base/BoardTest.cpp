@@ -8,7 +8,6 @@
 
 #include "libpentobi_base/Board.h"
 
-#include <boost/foreach.hpp>
 #include "libboardgame_test/Test.h"
 
 using namespace std;
@@ -25,7 +24,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
     bd->play(c, bd->from_string("i11,j11,k11,l11"));
     unique_ptr<MoveList> moves(new MoveList());
     unique_ptr<MoveMarker> marker(new MoveMarker());;
-    BOOST_FOREACH(Point p, bd->get_attach_points(c))
+    for (Point p : bd->get_attach_points(c))
     {
         bd->gen_moves(c, p, *marker, *moves);
         LIBBOARDGAME_CHECK_EQUAL(moves->size(), 124u);

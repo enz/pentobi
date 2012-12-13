@@ -51,9 +51,33 @@ public:
 
     static const unsigned max_moves_at_point = 40;
 
-    /** Begin/end iterator for lists with local moves.
+    /** Begin/end range for lists with local moves.
         See get_moves(). */
-    typedef pair<const Move*,const Move*> LocalMovesListRange;
+    class LocalMovesListRange
+    {
+    public:
+        LocalMovesListRange(const Move* begin, const Move* end)
+        {
+            m_begin = begin;
+            m_end = end;
+        }
+
+        const Move* begin() const
+        {
+            return m_begin;
+        }
+
+        const Move* end() const
+        {
+            return m_end;
+        }
+
+    private:
+        const Move* m_begin;
+
+        const Move* m_end;
+
+    };
 
     /** The number of neighbors used for computing the adjacent status.
         The adjacent status is a single number that encodes the forbidden

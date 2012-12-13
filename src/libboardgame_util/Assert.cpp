@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include "Log.h"
 
@@ -68,7 +67,7 @@ void handle_assertion(const char* expression, const char* file, int line)
     if (! additional_assertions.empty())
     {
         log("Assertions triggered during execution of assertion handlers:");
-        BOOST_FOREACH(const string& s, additional_assertions)
+        for (const string& s : additional_assertions)
             log(s);
     }
     abort();

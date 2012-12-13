@@ -8,7 +8,6 @@
 
 #include "RatingGraph.h"
 
-#include <boost/foreach.hpp>
 #include <QPainter>
 #include <QPen>
 
@@ -92,7 +91,7 @@ void RatingGraph::updateContent(const RatingHistory& history)
     }
     m_yMin = games[0].rating.get();
     m_yMax = m_yMin;
-    BOOST_FOREACH(const RatingHistory::GameInfo& info, games)
+    for (const RatingHistory::GameInfo& info : games)
     {
         float rating = info.rating.get();
         m_yMin = min(m_yMin, rating);

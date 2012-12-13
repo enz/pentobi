@@ -74,7 +74,7 @@ Move Book::get_transformed(const Board& bd, Move mv,
     unsigned width = bd.get_geometry().get_width();
     unsigned height = bd.get_geometry().get_height();
     MovePoints points;
-    BOOST_FOREACH(Point p, bd.get_move_points(mv))
+    for (Point p : bd.get_move_points(mv))
         points.push_back(transform.get_transformed(p, width, height));
     Move transformed_mv;
     bd.find_move(points, transformed_mv);

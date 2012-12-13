@@ -9,7 +9,6 @@
 #include "BoardUtil.h"
 
 #include <iostream>
-#include <boost/foreach.hpp>
 #include "SgfUtil.h"
 
 namespace libpentobi_base {
@@ -65,7 +64,7 @@ void write_setup(Writer& writer, Variant variant, const Setup& setup)
         if (! setup.placements[*i].empty())
         {
             vector<string> values;
-            BOOST_FOREACH(Move mv, setup.placements[*i])
+            for (Move mv : setup.placements[*i])
                 values.push_back(board_const.to_string(mv, false));
             writer.write_property(get_setup_id(variant, *i), values);
         }

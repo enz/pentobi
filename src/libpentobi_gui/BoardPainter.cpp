@@ -10,7 +10,6 @@
 
 #include <algorithm>
 #include <cmath>
-#include <boost/foreach.hpp>
 #include "Util.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/AdjIterator.h"
@@ -309,7 +308,7 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
         saturation = 0.5;
         flat = true;
     }
-    BOOST_FOREACH(Point p, points)
+    for (Point p : points)
     {
         qreal fieldX = p.get_x() * m_fieldWidth;
         qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;

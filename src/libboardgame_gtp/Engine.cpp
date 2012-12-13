@@ -13,7 +13,6 @@
 #include <fstream>
 #include <iostream>
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/foreach.hpp>
 #include <boost/thread/barrier.hpp>
 #include <boost/thread/condition.hpp>
 #include <boost/thread/mutex.hpp>
@@ -38,7 +37,7 @@ namespace {
 /** Check, if line contains a command. */
 bool is_cmd_line(const string& line)
 {
-    BOOST_FOREACH(char c, line)
+    for (char c : line)
         if (! isspace(static_cast<unsigned char>(c)))
             return c != '#';
     return false;

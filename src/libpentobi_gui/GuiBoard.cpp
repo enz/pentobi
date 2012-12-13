@@ -10,7 +10,6 @@
 
 #include <algorithm>
 #include <limits>
-#include <boost/foreach.hpp>
 #include <QApplication>
 #include <QMouseEvent>
 #include "libboardgame_base/Transform.h"
@@ -34,7 +33,7 @@ namespace {
 
 bool allPointEmpty(const Board& bd, Move mv)
 {
-    BOOST_FOREACH(Point p, bd.get_move_info(mv).points)
+    for (Point p : bd.get_move_info(mv).points)
         if (! bd.is_empty(p))
             return false;
     return true;
@@ -118,7 +117,7 @@ Move GuiBoard::findSelectedPieceMove()
     MovePoints movePoints;
     int width = static_cast<int>(m_bd.get_geometry().get_width());
     int height = static_cast<int>(m_bd.get_geometry().get_height());
-    BOOST_FOREACH(CoordPoint p, points)
+    for (CoordPoint p : points)
     {
         p = m_selectedPieceTransform->get_transformed(p);
         int x = p.x + m_selectedPieceOffset.x;
@@ -479,8 +478,7 @@ void GuiBoard::setSelectedPiecePoints()
     {
         int width = static_cast<int>(m_bd.get_geometry().get_width());
         int height = static_cast<int>(m_bd.get_geometry().get_height());
-        BOOST_FOREACH(CoordPoint p,
-                      m_bd.get_piece_info(m_selectedPiece).get_points())
+        for (CoordPoint p : m_bd.get_piece_info(m_selectedPiece).get_points())
         {
             p = m_selectedPieceTransform->get_transformed(p);
             int x = p.x + m_selectedPieceOffset.x;

@@ -9,7 +9,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include "libboardgame_util/StringUtil.h"
 
@@ -118,7 +117,7 @@ void Writer::write_property(const string& id, const vector<T>& values)
     }
     m_out << id;
     bool is_first_value = true;
-    BOOST_FOREACH(const T& i, values)
+    for (const T& i : values)
     {
         if (m_one_prop_per_line && m_one_prop_value_per_line
             && ! is_first_value)

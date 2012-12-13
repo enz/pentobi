@@ -8,7 +8,6 @@
 
 #include "Board.h"
 
-#include <boost/foreach.hpp>
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
@@ -84,7 +83,7 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
     moves.clear();
     if (is_first_piece(c))
     {
-        BOOST_FOREACH(Point p, get_starting_points(c))
+        for (Point p : get_starting_points(c))
             if (! m_state_color[c].forbidden[p])
                 gen_moves(c, p, m_marker, moves);
     }
@@ -100,9 +99,8 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
 void Board::gen_moves(Color c, Point p, MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
-    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
-    {
-        BOOST_FOREACH(Move mv, m_board_const->get_moves(piece, p))
+    for (Piece piece : m_state_color[c].pieces_left)
+        for (Move mv : m_board_const->get_moves(piece, p))
         {
             if (marker[mv])
                 continue;
@@ -112,16 +110,13 @@ void Board::gen_moves(Color c, Point p, MoveMarker& marker,
                 marker.set(mv);
             }
         }
-    }
 }
 
 void Board::gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
                       ArrayList<Move,Move::range>& moves) const
 {
-    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
-    {
-        BOOST_FOREACH(Move mv,
-                      m_board_const->get_moves(piece, p, adj_status))
+    for (Piece piece : m_state_color[c].pieces_left)
+        for (Move mv : m_board_const->get_moves(piece, p, adj_status))
         {
             if (marker[mv])
                 continue;
@@ -131,7 +126,6 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
                 marker.set(mv);
             }
         }
-    }
 }
 
 unsigned Board::get_bonus(Color c) const
@@ -281,13 +275,12 @@ bool Board::has_moves(Color c) const
 
 bool Board::has_moves(Color c, Point p) const
 {
-    BOOST_FOREACH(Piece piece, m_state_color[c].pieces_left)
-    {
-        BOOST_FOREACH(Move mv, m_board_const->get_moves(piece, p))
+    for (Piece piece : m_state_color[c].pieces_left)
+        for (Move mv : m_board_const->get_moves(piece, p))
         {
             const MovePoints& points = get_move_points(mv);
             bool is_legal = true;
-            BOOST_FOREACH(Point p2, points)
+            for (Point p2 : points)
                 if (m_state_color[c].forbidden[p2])
                 {
                     is_legal = false;
@@ -296,7 +289,6 @@ bool Board::has_moves(Color c, Point p) const
             if (is_legal)
                 return true;
         }
-    }
     return false;
 }
 
@@ -334,7 +326,7 @@ void Board::init(Variant variant, const Setup* setup)
     {
         m_setup = *setup;
         for (ColorIterator i(m_nu_colors); i; ++i)
-            BOOST_FOREACH(Move mv, setup->placements[*i])
+            for (Move mv : setup->placements[*i])
                 place(*i, mv);
         m_state_base.to_play = setup->to_play;
         optimize_attach_point_lists();

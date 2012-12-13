@@ -11,7 +11,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/foreach.hpp>
 #include "AdjIterator.h"
 #include "AdjDiagIterator.h"
 #include "DiagIterator.h"
@@ -621,7 +620,7 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_junior);
     m_total_piece_points = 0;
     m_max_piece_size = 0;
-    BOOST_FOREACH(const PieceInfo& piece, m_pieces)
+    for (const PieceInfo& piece : m_pieces)
     {
         m_max_piece_size = max(m_max_piece_size, piece.get_size());
         m_total_piece_points += piece.get_size();
@@ -666,15 +665,15 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     if (log_move_creation)
     {
         Grid<char> grid(m_geometry, '.');
-        BOOST_FOREACH(Point p, info.points)
+        for (Point p : info.points)
             grid[p] = 'O';
-        BOOST_FOREACH(Point p, info_ext.adj_points)
+        for (Point p : info_ext.adj_points)
             grid[p] = '+';
-        BOOST_FOREACH(Point p, info_ext.attach_points)
+        for (Point p : info_ext.attach_points)
             grid[p] = '*';
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
-    BOOST_FOREACH(Point p, info.points)
+    for (Point p : info.points)
         for (unsigned i = 0; i < nu_adj_status; ++i)
         {
             if (is_compatible_with_adj_status(p, i, info.points))
@@ -731,7 +730,7 @@ void BoardConst::create_moves(Piece piece)
             log() << "Creating moves at " << *i << "\n";
         unsigned x = (*i).get_x();
         unsigned y = (*i).get_y();
-        BOOST_FOREACH(const Transform* transform, piece_info.get_transforms())
+        for (const Transform* transform : piece_info.get_transforms())
         {
             if (log_move_creation)
                 log() << "Transformation " << typeid(*transform).name() << "\n";
@@ -745,7 +744,7 @@ void BoardConst::create_moves(Piece piece)
             transform->transform(points.begin(), points.end());
             sort(points.begin(), points.end());
             bool is_onboard = true;
-            BOOST_FOREACH(CoordPoint& p, points)
+            for (CoordPoint& p : points)
             {
                 p.x += x;
                 p.y += y;
@@ -775,7 +774,7 @@ Move BoardConst::from_string(const string& s) const
     if (v.size() > PieceInfo::max_size)
         throw Exception("illegal move (too many points)");
     MovePoints points;
-    BOOST_FOREACH(const string& p, v)
+    for (const string& p : v)
         points.push_back(Point::from_string(p));
     Move mv;
     if (! find_move(points, mv))
@@ -861,8 +860,8 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
         Piece piece(i);
         if (get_piece_info(piece).get_size() == points.size())
         {
-            const Board::LocalMovesListRange& moves = get_moves(piece, p);
-            for (auto j = moves.first; j != moves.second; ++j)
+            Board::LocalMovesListRange moves = get_moves(piece, p);
+            for (auto j = moves.begin(); j != moves.end(); ++j)
                 if (m_move_info[j->to_int()].points == sorted_points)
                 {
                     move = *j;
@@ -914,7 +913,7 @@ void BoardConst::init_symmetry_info()
         MoveInfoExt& info_ext = m_move_info_ext[i];
         MovePoints sym_points;
         info_ext.breaks_symmetry = false;
-        BOOST_FOREACH(Point p, info.points)
+        for (Point p : info.points)
         {
             if (info.points.contains(symmetric_points[p]))
                 info_ext.breaks_symmetry = true;
@@ -927,7 +926,7 @@ void BoardConst::init_symmetry_info()
 bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
                                                const MovePoints& points) const
 {
-    BOOST_FOREACH(Point p_adj, m_adj_status[p][adj_status])
+    for (Point p_adj : m_adj_status[p][adj_status])
         if (points.contains(p_adj))
             return false;
     return true;
@@ -972,7 +971,7 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
     if (with_piece_name)
         s << '[' << get_piece_info(info.piece).get_name() << "]";
     bool is_first = true;
-    BOOST_FOREACH(Point p, info.points)
+    for (Point p : info.points)
     {
         if (! is_first)
             s << ',';

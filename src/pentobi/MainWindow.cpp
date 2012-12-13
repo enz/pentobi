@@ -2140,7 +2140,7 @@ void MainWindow::gotoPosition(Variant variant,
     if (tree.has_move_ignore_invalid(*node))
         // Move in root node not supported.
         return;
-    BOOST_FOREACH(ColorMove mv, moves)
+    for (ColorMove mv : moves)
     {
         bool found = false;
         for (ChildIterator i(*node); i; ++i)

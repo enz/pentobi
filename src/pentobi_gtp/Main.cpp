@@ -139,7 +139,7 @@ int main(int argc, char** argv)
         }
         if (! input_file.empty())
         {
-            BOOST_FOREACH(string file, input_file)
+            for (string file : input_file)
             {
                 ifstream in(file.c_str());
                 if (! in)

@@ -45,7 +45,7 @@ void dump_tree_recurse(Writer& writer, Variant variant,
     for (ChildIterator<Move> i(tree, node); i; ++i)
         children.push_back(&(*i));
     sort(children.begin(), children.end(), compare_node);
-    BOOST_FOREACH(const Node<Move>* i, children)
+    for (const Node<Move>* i : children)
     {
         writer.begin_tree();
         writer.begin_node();

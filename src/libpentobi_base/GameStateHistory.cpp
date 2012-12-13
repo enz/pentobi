@@ -8,7 +8,6 @@
 
 #include "GameStateHistory.h"
 
-#include <boost/foreach.hpp>
 #include "BoardUtil.h"
 
 namespace libpentobi_base {
@@ -23,7 +22,7 @@ void GameStateHistory::get_as_setup(Variant& variant, Setup& setup) const
     LIBBOARDGAME_ASSERT(is_valid());
     variant = m_variant;
     unique_ptr<Board> bd(new Board(variant));
-    BOOST_FOREACH(ColorMove mv, m_moves)
+    for (ColorMove mv : m_moves)
         bd->play(mv);
     get_current_position_as_setup(*bd, setup);
 }

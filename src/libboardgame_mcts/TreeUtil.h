@@ -5,7 +5,6 @@
 #ifndef LIBBOARDGAME_MCTS_TREE_UTIL_H
 #define LIBBOARDGAME_MCTS_TREE_UTIL_H
 
-#include <boost/foreach.hpp>
 #include "ChildIterator.h"
 #include "Tree.h"
 
@@ -27,7 +26,7 @@ template<typename M, class S>
 const Node<M>* find_node(const Tree<M>& tree, const S& sequence)
 {
     const Node<M>* node = &tree.get_root();
-    BOOST_FOREACH(M mv, sequence)
+    for (M mv : sequence)
         if ((node = find_child(tree, *node, mv)) == 0)
             break;
     return node;

@@ -143,7 +143,7 @@ Setup::PlacementList Tree::get_setup_property(const Node& node,
 {
     vector<string> values = node.get_multi_property(id);
     Setup::PlacementList result;
-    BOOST_FOREACH(const string& s, values)
+    for (const string& s : values)
         result.push_back(m_board_const->from_string(s));
     return result;
 }
@@ -376,7 +376,7 @@ void Tree::set_setup_property(const Node& node, const char* id,
         return;
     }
     vector<string> values;
-    BOOST_FOREACH(Move mv, placements)
+    for (Move mv : placements)
         values.push_back(m_board_const->to_string(mv, false));
     set_property(node, id, values);
 }

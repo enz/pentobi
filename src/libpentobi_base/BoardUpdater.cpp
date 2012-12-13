@@ -33,7 +33,7 @@ void handle_setup_property(const Node& node, const char* id, Color c,
     if (! node.has_property(id))
         return;
     vector<string> values = node.get_multi_property(id);
-    BOOST_FOREACH(const string& s, values)
+    for (const string& s : values)
     {
         Move mv;
         try
@@ -58,7 +58,7 @@ void handle_setup_empty(const Node& node, const Board& bd, Setup& setup,
     if (! node.has_property("AE"))
         return;
     vector<string> values = node.get_multi_property("AE");
-    BOOST_FOREACH(const string& s, values)
+    for (const string& s : values)
     {
         Move mv;
         try
@@ -100,7 +100,7 @@ void init_setup(Board& bd, const Node& node)
         nu_instances = 1;
     ColorMap<AllPiecesLeftList> all_pieces_left;
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        BOOST_FOREACH(Piece piece, bd.get_pieces_left(*i))
+        for (Piece piece : bd.get_pieces_left(*i))
         {
             for (unsigned j = 0; j < nu_instances; ++j)
                 all_pieces_left[*i].push_back(piece);
@@ -137,7 +137,7 @@ void BoardUpdater::update(const Node& node)
     LIBBOARDGAME_ASSERT(m_tree.contains(node));
     m_bd.init();
     get_path_from_root(node, m_path);
-    BOOST_FOREACH(const Node* i, m_path)
+    for (const Node* i : m_path)
     {
         if (libpentobi_base::node_util::has_setup(*i))
             init_setup(m_bd, *i);

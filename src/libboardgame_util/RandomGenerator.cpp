@@ -11,7 +11,6 @@
 #include <ctime>
 #include <list>
 #include <sstream>
-#include <boost/foreach.hpp>
 
 namespace libboardgame_util {
 
@@ -58,17 +57,15 @@ void RandomGenerator::set_global_seed(ResultType seed)
 {
     is_seed_set = true;
     the_seed = seed;
-    BOOST_FOREACH(RandomGenerator* i, get_all_generators())
+    for (RandomGenerator* i : get_all_generators())
         i->set_seed(the_seed);
 }
 
 void RandomGenerator::set_global_seed_last()
 {
     if (is_seed_set)
-    {
-        BOOST_FOREACH(RandomGenerator* i, get_all_generators())
+        for (RandomGenerator* i : get_all_generators())
             i->set_seed(the_seed);
-    }
 }
 
 //-----------------------------------------------------------------------------

@@ -8,7 +8,6 @@
 
 #include "OrientationDisplay.h"
 
-#include <boost/foreach.hpp>
 #include <QPainter>
 #include "libboardgame_base/GeometryUtil.h"
 #include "libpentobi_gui/Util.h"
@@ -127,7 +126,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     painter.translate(0.5 * (displayWidth - width * fieldWidth),
                       0.5 * (displayHeight - height * fieldHeight));
     Variant variant = m_bd.get_variant();
-    BOOST_FOREACH(CoordPoint p, points)
+    for (CoordPoint p : points)
     {
         qreal x = p.x * fieldWidth;
         qreal y = (height - p.y - 1) * fieldHeight;

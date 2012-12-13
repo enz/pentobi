@@ -68,7 +68,7 @@ void Writer::end_tree()
 string Writer::get_escaped(const string& s)
 {
     ostringstream buffer;
-    BOOST_FOREACH(char c, s)
+    for (char c : s)
     {
         if (c == ']' || c == '\\')
             buffer << '\\' << c;

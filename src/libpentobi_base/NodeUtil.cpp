@@ -102,13 +102,13 @@ bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points)
     // values instead of a single value as used by Pentobi <= 0.2, but it
     // is deprecated
     points.clear();
-    BOOST_FOREACH(const string& s, values)
+    for (const string& s : values)
     {
         if (trim_copy(s).empty())
             continue;
         vector<string> v;
         split(v, s, is_any_of(","));
-        BOOST_FOREACH(const string& p_str, v)
+        for (const string& p_str : v)
         {
             Point p;
             try

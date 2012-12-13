@@ -10,7 +10,6 @@
 
 #include <algorithm>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/foreach.hpp>
 #include <QMouseEvent>
 #include <QPainter>
 #include "libboardgame_base/GeometryUtil.h"
@@ -156,7 +155,7 @@ void PieceSelector::init()
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
             // Mirror y to match the convention of CoordPoint coordinates
-            BOOST_FOREACH(CoordPoint& p, points)
+            for (CoordPoint& p : points)
                 p.y = m_nuRows - p.y - 1;
             type_match_shift(geometry, points.begin(), points.end(), 0);
             m_transform[x][y] =
@@ -263,7 +262,7 @@ void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
                 || ++nuInstances[piece] > m_bd.get_nu_left_piece(m_color,
                                                                  piece))
                 disabled = true;
-            BOOST_FOREACH(CoordPoint p, points)
+            for (CoordPoint p : points)
             {
                 disabledStatus[p.x][p.y] = disabled;
                 marker[p.x][p.y] = true;

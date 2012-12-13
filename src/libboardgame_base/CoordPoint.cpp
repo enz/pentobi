@@ -9,7 +9,6 @@
 #include "CoordPoint.h"
 
 #include <iostream>
-#include <boost/foreach.hpp>
 
 namespace libboardgame_base {
 

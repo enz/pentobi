@@ -161,9 +161,9 @@ void Search::on_start_search()
             if (! bd.is_forbidden(*j, *i))
             {
                 unsigned adj_status = bd.get_adj_status(*j, *i);
-                BOOST_FOREACH(Piece piece, bd.get_pieces_left(*i))
+                for (Piece piece : bd.get_pieces_left(*i))
                 {
-                    BOOST_FOREACH(Move mv, bd.get_moves(piece, *j, adj_status))
+                    for (Move mv : bd.get_moves(piece, *j, adj_status))
                     {
                         if (! is_forbidden_at_root[mv])
                             continue;

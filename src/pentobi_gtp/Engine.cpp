@@ -73,7 +73,7 @@ void Engine::cmd_move_values(Response& response)
         children.push_back(&(*i));
     sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);
     response << fixed;
-    BOOST_FOREACH(const Search::Node* node, children)
+    for (const Search::Node* node : children)
     {
         Float count = node->get_count();
         response << setprecision(0) << count << ' '
@@ -92,14 +92,12 @@ void Engine::cmd_moves_stat(const Arguments& args, Response& response)
     Grid<unsigned> nu_moves_grid(bd.get_geometry(), 0);
     MoveList moves;
     MoveMarker marker;
-    BOOST_FOREACH(Point p, bd.get_attach_points(c))
+    for (Point p : bd.get_attach_points(c))
     {
         bd.gen_moves(c, p, marker, moves);
-        BOOST_FOREACH(Move mv, moves)
-        {
-            BOOST_FOREACH(Point p, bd.get_move_points(mv))
+        for (Move mv : moves)
+            for (Point p : bd.get_move_points(mv))
                 ++nu_moves_grid[p];
-        }
         marker.clear_all_set_known(moves);
         moves.clear();
     }

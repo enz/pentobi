@@ -37,13 +37,13 @@ void handleSetup(const char* id, Color c, const Node& node,
                  const Geometry& geometry, Grid<PointState>& pointState)
 {
     vector<string> values = node.get_multi_property(id);
-    BOOST_FOREACH(const string& s, values)
+    for (const string& s : values)
     {
         if (trim_copy(s).empty())
             continue;
         vector<string> v;
         split(v, s, is_any_of(","));
-        BOOST_FOREACH(const string& p_str, v)
+        for (const string& p_str : v)
         {
             try
             {
@@ -64,13 +64,13 @@ void handleSetupEmpty(const Node& node, const Geometry& geometry,
                       Grid<PointState>& pointState)
 {
     vector<string> values = node.get_multi_property("AE");
-    BOOST_FOREACH(const string& s, values)
+    for (const string& s : values)
     {
         if (trim_copy(s).empty())
             continue;
         vector<string> v;
         split(v, s, is_any_of(","));
-        BOOST_FOREACH(const string& p_str, v)
+        for (const string& p_str : v)
         {
             try
             {
@@ -137,13 +137,11 @@ bool getFinalPosition(const Node& root, Variant& variant,
         Color c;
         MovePoints points;
         if (libpentobi_base::node_util::get_move(*node, variant, c, points))
-        {
-            BOOST_FOREACH(Point p, points)
+            for (Point p : points)
             {
                 if (geometry->is_onboard(p))
                     pointState[p] = c;
             }
-        }
         node = node->get_first_child_or_null();
     }
     return true;
