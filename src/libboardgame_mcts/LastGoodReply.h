@@ -6,8 +6,7 @@
 #define LIBBOARDGAME_MCTS_LAST_GOOD_REPLY_H
 
 #include <algorithm>
-#include <array>
-#include <iosfwd>
+#include <atomic>
 #include <memory>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/RandomGenerator.h"
@@ -53,13 +52,15 @@ public:
     Move get(unsigned player, Move last_mv, Move second_last_mv) const;
 
 private:
+    typedef atomic<typename Move::IntType> AtomicMove;
+
     static const size_t hash_table_size = (1 << 21);
 
     size_t m_hash[Move::range];
 
-    Move m_reply_1[max_players][Move::range];
+    AtomicMove m_reply_1[max_players][Move::range];
 
-    Move m_reply_2[max_players][hash_table_size];
+    AtomicMove m_reply_2[max_players][hash_table_size];
 
     size_t get_index(Move last_mv, Move second_last_mv) const;
 };
@@ -88,11 +89,12 @@ inline M LastGoodReply<S,M,P>::get(unsigned player, Move last_mv,
     Move reply;
     if (! second_last_mv.is_null())
     {
-        reply = m_reply_2[player][get_index(last_mv, second_last_mv)];
+        auto index = get_index(last_mv, second_last_mv);
+        reply = Move(m_reply_2[player][index].load(memory_order_relaxed));
         if (! reply.is_null())
             return reply;
     }
-    return m_reply_1[player][last_mv.to_int()];
+    return Move(m_reply_1[player][last_mv.to_int()].load(memory_order_relaxed));
 }
 
 template<class S, class M, unsigned P>
@@ -100,8 +102,14 @@ void LastGoodReply<S,M,P>::init(unsigned nu_players)
 {
     for (unsigned i = 0; i < nu_players; ++i)
     {
-        fill(m_reply_1[i], m_reply_1[i] + Move::range, Move::null());
-        fill(m_reply_2[i], m_reply_2[i] + hash_table_size, Move::null());
+        auto null_int = Move::null().to_int();
+        // Don't use memory_order_relaxed here. init() could be called after
+        // the game variant changed (e.g. board size) and while this class
+        // does not guarantee that a move is legal in the current position,
+        // it should at least only return moves that belong to the same game
+        // variant.
+        fill(m_reply_1[i], m_reply_1[i] + Move::range, null_int);
+        fill(m_reply_2[i], m_reply_2[i] + hash_table_size, null_int);
     }
 }
 
@@ -110,16 +118,18 @@ inline void LastGoodReply<S,M,P>::forget(unsigned player, Move last_mv,
                                          Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
+    auto reply_int = reply.to_int();
+    auto null_int = Move::null().to_int();
     if (! second_last_mv.is_null())
     {
-        Move& stored_reply =
-            m_reply_2[player][get_index(last_mv, second_last_mv)];
-        if (stored_reply == reply)
-            stored_reply = Move::null();
+        auto index = get_index(last_mv, second_last_mv);
+        AtomicMove& stored_reply = m_reply_2[player][index];
+        if (stored_reply.load(memory_order_relaxed) == reply_int)
+            stored_reply.store(null_int, memory_order_relaxed);
     }
-    Move& stored_reply = m_reply_1[player][last_mv.to_int()];
-    if (stored_reply == reply)
-        stored_reply = Move::null();
+    AtomicMove& stored_reply = m_reply_1[player][last_mv.to_int()];
+    if (stored_reply.load(memory_order_relaxed) == reply_int)
+        stored_reply.store(null_int, memory_order_relaxed);
 }
 
 template<class S, class M, unsigned P>
@@ -127,9 +137,13 @@ inline void LastGoodReply<S,M,P>::store(unsigned player, Move last_mv,
                                         Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
+    auto reply_int = reply.to_int();
     if (! second_last_mv.is_null())
-        m_reply_2[player][get_index(last_mv, second_last_mv)] = reply;
-    m_reply_1[player][last_mv.to_int()] = reply;
+    {
+        auto index = get_index(last_mv, second_last_mv);
+        m_reply_2[player][index].store(reply_int, memory_order_relaxed);
+    }
+    m_reply_1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
 }
 
 //-----------------------------------------------------------------------------
