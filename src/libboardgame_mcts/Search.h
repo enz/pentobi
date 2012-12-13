@@ -1347,7 +1347,7 @@ void Search<S,M,P>::update_rave_values(const array<Float,max_players>& eval,
         Move mv = it->get_move();
         if (! m_state.skip_rave(mv))
         {
-            int m = mv.to_int();
+            typename Move::IntType m = mv.to_int();
             unsigned first = m_first_play[player][m];
             LIBBOARDGAME_ASSERT(first >= i);
             if (first == numeric_limits<unsigned>::max())

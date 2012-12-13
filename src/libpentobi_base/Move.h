@@ -6,33 +6,38 @@
 #define LIBPENTOBI_BASE_MOVE_H
 
 #include <climits>
+#include <cstdint>
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/Exception.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
 class Move
 {
 public:
-    static const unsigned onboard_moves_classic = 30433;
+    /** Integer type used internally in this class to store a move.
+        This class is optimized for size not for speed because there are
+        large precomputed data structures that store moves and move lists.
+        Therefore it uses uint_least16_t, not uint_fast16_t. */
+    typedef uint_least16_t IntType;
 
-    static const unsigned onboard_moves_trigon = 32131;
+    static const IntType onboard_moves_classic = 30433;
 
-    static const unsigned onboard_moves_trigon_3 = 24859;
+    static const IntType onboard_moves_trigon = 32131;
 
-    static const unsigned onboard_moves_duo = 13729;
+    static const IntType onboard_moves_trigon_3 = 24859;
 
-    static const unsigned onboard_moves_junior = 7217;
+    static const IntType onboard_moves_duo = 13729;
+
+    static const IntType onboard_moves_junior = 7217;
 
     /** Integer range of moves.
         The maximum is given by the number of on-board moves in game variant
         Trigon, plus a pass and a null move. */
-    static const unsigned range = onboard_moves_trigon + 1 + 1;
+    static const IntType range = onboard_moves_trigon + 1 + 1;
 
     static Move pass();
 
@@ -40,7 +45,7 @@ public:
 
     Move();
 
-    explicit Move(unsigned i);
+    explicit Move(IntType i);
 
     Move& operator=(const Move& mv);
 
@@ -58,20 +63,18 @@ public:
     bool is_regular() const;
 
     /** Return move as an integer between 0 and Move::range */
-    unsigned to_int() const;
+    IntType to_int() const;
 
 private:
-    static_assert(range <= USHRT_MAX, "");
+    static const IntType max_regular_value = range - 3;
 
-    static const unsigned short max_regular_value = range - 3;
+    static const IntType value_pass = range - 2;
 
-    static const unsigned short value_pass = range - 2;
+    static const IntType value_null = range - 1;
 
-    static const unsigned short value_null = range - 1;
+    static const IntType value_uninitialized = range;
 
-    static const unsigned short value_uninitialized = range;
-
-    unsigned short m_i;
+    IntType m_i;
 
     bool is_initialized() const;
 };
@@ -83,10 +86,10 @@ inline Move::Move()
 #endif
 }
 
-inline Move::Move(unsigned i)
+inline Move::Move(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
-    m_i = static_cast<unsigned short>(i);
+    m_i = i;
 }
 
 inline Move& Move::operator=(const Move& mv)
@@ -147,7 +150,7 @@ inline Move Move::pass()
     return Move(value_pass);
 }
 
-inline unsigned Move::to_int() const
+inline Move::IntType Move::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;
