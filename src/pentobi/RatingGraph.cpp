@@ -37,8 +37,8 @@ void RatingGraph::paintEvent(QPaintEvent* event)
         QFontMetrics metrics(painter.font());
         float yRange = m_yMax - m_yMin;
         float yTic = m_yMin;
-        float topMargin = metrics.height();
-        float bottomMargin = metrics.height() / 2;
+        float topMargin = ceil(1.2f * metrics.height());
+        float bottomMargin = ceil(0.3f * metrics.height());
         float graphHeight = height - topMargin - bottomMargin;
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
