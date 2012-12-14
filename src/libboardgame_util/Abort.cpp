@@ -26,17 +26,17 @@ atomic<bool> abort(false);
 
 void clear_abort()
 {
-    abort.store(false, memory_order_relaxed);
+    abort.store(false, memory_order_release);
 }
 
 bool get_abort()
 {
-    return abort.load(memory_order_relaxed);
+    return abort.load(memory_order_consume);
 }
 
 void set_abort()
 {
-    abort.store(true, memory_order_relaxed);
+    abort.store(true, memory_order_release);
 }
 
 //----------------------------------------------------------------------------
