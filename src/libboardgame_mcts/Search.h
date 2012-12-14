@@ -371,6 +371,9 @@ private:
     /** Maximum simulations of current search. */
     Float m_max_count;
 
+    /** Maximum count that can be exactly expressed in floating point type. */
+    Float m_max_float_count;
+
     /** Count of root node of reused subtree if its values had to be cleared.
         If a subtree (not the full tree) is reused because the current position
         is a follow-up position of the last search, the root values need to be
@@ -507,6 +510,9 @@ Search<S,M,P>::Search(const State& state, size_t memory)
       m_tmp_tree(m_max_nodes, m_nu_threads),
       m_assertion_handler(*this)
 {
+    static_assert(numeric_limits<Float>::radix == 2,
+                  "libboardgame_mcts::Float must have radix 2");
+    m_max_float_count = (size_t(1) << numeric_limits<Float>::digits) - 1;
     for (unsigned i = 0; i < max_players; ++i)
         m_first_play[i].fill(numeric_limits<unsigned>::max());
 }
@@ -520,9 +526,7 @@ template<class S, class M, unsigned P>
 bool Search<S,M,P>::check_abort() const
 {
     Float count = m_tree.get_root().get_count() + m_reuse_count;
-    static_assert(numeric_limits<Float>::radix == 2,
-                  "libboardgame_mcts::Float must have radix 2");
-    if (count == (size_t(1) << numeric_limits<Float>::digits) - 1)
+    if (count >= m_max_float_count)
     {
         log("Maximum count supported by floating type reached");
         return true;
@@ -557,6 +561,7 @@ bool Search<S,M,P>::check_abort_expensive() const
     Float remaining_simulations;
     if (m_max_count == 0)
     {
+        // Search uses time limit
         if (time > m_max_time)
         {
             log("Maximum time reached");
@@ -567,11 +572,14 @@ bool Search<S,M,P>::check_abort_expensive() const
     }
     else
     {
+        // Search uses count limit
         remaining_simulations = m_max_count - count;
         remaining_time = remaining_simulations / simulations_per_sec;
     }
     if (m_callback)
         m_callback(time, remaining_time);
+    if (count + remaining_simulations > m_max_float_count)
+        remaining_simulations = m_max_float_count - count;
     if (check_move_cannot_change(count, remaining_simulations))
     {
         log("Move cannot change anymore");
