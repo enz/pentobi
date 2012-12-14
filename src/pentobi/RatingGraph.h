@@ -5,13 +5,13 @@
 #ifndef PENTOBI_RATING_GRAPH_H
 #define PENTOBI_RATING_GRAPH_H
 
-#include <QWidget>
+#include <QFrame>
 #include "RatingHistory.h"
 
 //-----------------------------------------------------------------------------
 
 class RatingGraph
-    : public QWidget
+    : public QFrame
 {
     Q_OBJECT
 

@@ -14,18 +14,24 @@
 //-----------------------------------------------------------------------------
 
 RatingGraph::RatingGraph(QWidget* parent)
-    : QWidget(parent)
+    : QFrame(parent)
 {
     setMinimumSize(200, 60);
+    setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
 }
 
-void RatingGraph::paintEvent(QPaintEvent*)
+void RatingGraph::paintEvent(QPaintEvent* event)
 {
+    QFrame::paintEvent(event);
+    QRect contentsRect = QFrame::contentsRect();
+    int width = contentsRect.width();
+    int height = contentsRect.height();
     QPainter painter(this);
+    painter.translate(contentsRect.x(), contentsRect.y());
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255, 255, 255));
-    painter.drawRect(0, 0, width(), height());
+    painter.drawRect(0, 0, width, height);
     if (! m_values.empty())
     {
         QFontMetrics metrics(painter.font());
@@ -33,7 +39,7 @@ void RatingGraph::paintEvent(QPaintEvent*)
         float yTic = m_yMin;
         float topMargin = metrics.height();
         float bottomMargin = metrics.height() / 2;
-        float graphHeight = height() - topMargin - bottomMargin;
+        float graphHeight = height - topMargin - bottomMargin;
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
         painter.setPen(pen);
@@ -43,19 +49,19 @@ void RatingGraph::paintEvent(QPaintEvent*)
             qreal y =
                 topMargin
                 + graphHeight - (yTic - m_yMin) / yRange * graphHeight;
-            painter.drawLine(0, y, width(), y);
+            painter.drawLine(0, y, width, y);
             QString label;
             label.setNum(yTic, 'f', 0);
-            int labelWidth = metrics.width(label);
+            int labelWidth = metrics.width(label + " ");
             maxLabelWidth = max(maxLabelWidth, labelWidth);
-            painter.drawText(width() - labelWidth, y - metrics.descent(),
+            painter.drawText(width - labelWidth, y - metrics.descent(),
                              label);
             if (yRange < 600)
                 yTic += 100;
             else
                 yTic += 200;
         }
-        qreal dX = qreal(width() - maxLabelWidth) / RatingHistory::maxGames;
+        qreal dX = qreal(width - maxLabelWidth) / RatingHistory::maxGames;
         qreal x = 0;
         QPainterPath path;
         for (unsigned i = 0; i < m_values.size(); ++i)
