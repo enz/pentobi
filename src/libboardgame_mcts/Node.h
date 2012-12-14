@@ -5,6 +5,7 @@
 #ifndef LIBBOARDGAME_MCTS_NODE_H
 #define LIBBOARDGAME_MCTS_NODE_H
 
+#include <atomic>
 #include <limits>
 #include <cstdint>
 #include "Float.h"
@@ -16,10 +17,13 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef uint32_t NodeIndex;
+typedef uint_least32_t NodeIndex;
 
 //-----------------------------------------------------------------------------
 
+/** Node in a MCTS tree.
+    For details about how the nodes are used in lock-free multi-threaded mode,
+    see @ref libboardgame_doc_enz_2009. */
 template<typename M>
 class Node
 {
@@ -29,6 +33,8 @@ public:
     Node();
 
     /** Initialize the node.
+        This function may not be called on a node that is already part of
+        the tree in multi-threaded mode.
         The node may be initialized with values and counts greater zero
         (prior knowledge) but even if it is initialized with count zero, it
         must be initialized with a usable value (e.g. first play urgency for
@@ -66,8 +72,15 @@ public:
         because the value of root nodes and inner nodes have a different
         meaning (position value vs. move values) so the root value cannot be
         reused but all other nodes in the tree can be reused without
-        changes. */
+        changes.
+        It is not thread-safe and may not be called during the search. */
     void init_value(Float value, Float count);
+
+    /** Copy the value and RAVE value from another node without changed
+        the chil information.
+        This function is not thread-safe and may not be called during the
+        search. */
+    void copy_data_from(const Node& node);
 
     void link_children(NodeIndex first_child, int nu_children);
 
@@ -77,20 +90,20 @@ public:
 
     void add_rave_value(Float v, Float weight);
 
-    void copy_data_from(const Node& node);
-
+    /** Get node index of first child.
+        @pre has_children() */
     NodeIndex get_first_child() const;
 
 private:
-    Float m_count;
+    atomic<Float> m_count;
 
-    Float m_value;
+    atomic<Float> m_value;
 
-    Float m_rave_count;
+    atomic<Float> m_rave_count;
 
-    Float m_rave_value;
+    atomic<Float> m_rave_value;
 
-    unsigned short m_nu_children;
+    atomic<unsigned short> m_nu_children;
 
     Move m_move;
 
@@ -111,21 +124,27 @@ inline Node<M>::Node()
 template<typename M>
 void Node<M>::add_rave_value(Float v, Float weight)
 {
-    Float count = m_rave_count;
+    // Intentionally uses no synchronization and does not care about
+    // lost updates in multi-threaded mode
+    Float count = m_rave_count.load(memory_order_relaxed);
+    Float value = m_rave_value.load(memory_order_relaxed);
     count += weight;
-    v -= m_rave_value;
-    m_rave_value +=  weight * v / count;
-    m_rave_count = count;
+    value += weight * (v - value) / count;
+    m_rave_value.store(value, memory_order_relaxed);
+    m_rave_count.store(count, memory_order_relaxed);
 }
 
 template<typename M>
 void Node<M>::add_value(Float v)
 {
-    Float count = m_count;
+    // Intentionally uses no synchronization and does not care about
+    // lost updates in multi-threaded mode
+    Float count = m_count.load(memory_order_relaxed);
+    Float value = m_value.load(memory_order_relaxed);
     ++count;
-    v -= m_value;
-    m_value +=  v / count;
-    m_count = count;
+    value +=  (v - value) / count;
+    m_value.store(value, memory_order_relaxed);
+    m_count.store(count, memory_order_relaxed);
 }
 
 template<typename M>
@@ -134,11 +153,11 @@ void Node<M>::copy_data_from(const Node& node)
     // Reminder to update this function when the class gets additional members
     struct Dummy
     {
-        Float m_count;
-        Float m_value;
-        Float m_rave_count;
-        Float m_rave_value;
-        unsigned short m_nu_children;
+        atomic<Float> m_count;
+        atomic<Float> m_value;
+        atomic<Float> m_rave_count;
+        atomic<Float> m_rave_value;
+        atomic<unsigned short> m_nu_children;
         Move m_move;
         NodeIndex m_first_child;
     };
@@ -146,22 +165,22 @@ void Node<M>::copy_data_from(const Node& node)
                   "libboardgame_mcts::Node::copy_data_from needs updating");
 
     m_move = node.m_move;
-    m_count = node.m_count;
-    m_value = node.m_value;
-    m_rave_count = node.m_rave_count;
-    m_rave_value = node.m_rave_value;
+    m_count.store(node.m_count);
+    m_value.store(node.m_value);
+    m_rave_count.store(node.m_rave_count);
+    m_rave_value.store(node.m_rave_value);
 }
 
 template<typename M>
 inline Float Node<M>::get_count() const
 {
-    return m_count;
+    return m_count.load(memory_order_relaxed);
 }
 
 template<typename M>
 inline NodeIndex Node<M>::get_first_child() const
 {
-    LIBBOARDGAME_ASSERT(m_nu_children > 0);
+    LIBBOARDGAME_ASSERT(has_children());
     return m_first_child;
 }
 
@@ -174,43 +193,48 @@ inline const typename Node<M>::Move& Node<M>::get_move() const
 template<typename M>
 inline unsigned Node<M>::get_nu_children() const
 {
-    return m_nu_children;
+    return m_nu_children.load(memory_order_acquire);
 }
 
 template<typename M>
 inline Float Node<M>::get_rave_count() const
 {
-    return m_rave_count;
+    return m_rave_count.load(memory_order_relaxed);
 }
 
 template<typename M>
 inline Float Node<M>::get_rave_value() const
 {
-    return m_rave_value;
+    return m_rave_value.load(memory_order_relaxed);
 }
 
 template<typename M>
 inline Float Node<M>::get_value() const
 {
-    return m_value;
+    return m_value.load(memory_order_relaxed);
 }
 
 template<typename M>
 inline bool Node<M>::has_children() const
 {
-    return m_nu_children > 0;
+    return get_nu_children() > 0;
 }
 
 template<typename M>
 void Node<M>::init(const Move& mv, Float value, Float count, Float rave_value,
                    Float rave_count)
 {
+    // The node is not yet visible to other threads because init() is called
+    // before the children are linked to its parent with link_children()
+    // (which does a memory_order_release on m_nu_children of the parent).
+    // Therefore, the most efficient way here is to initialize all values with
+    // memory_order_relaxed.
     m_move = mv;
-    m_count = count;
-    m_value = value;
-    m_rave_count = rave_count;
-    m_rave_value = rave_value;
-    m_nu_children = 0;
+    m_count.store(count, memory_order_relaxed);
+    m_value.store(value, memory_order_relaxed);
+    m_rave_count.store(rave_count, memory_order_relaxed);
+    m_rave_value.store(rave_value, memory_order_relaxed);
+    m_nu_children.store(0, memory_order_relaxed);
 }
 
 template<typename M>
@@ -224,14 +248,15 @@ template<typename M>
 inline void Node<M>::link_children(NodeIndex first_child, int nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children <= numeric_limits<unsigned short>::max());
-    m_nu_children = static_cast<unsigned short>(nu_children);
     m_first_child = first_child;
+    m_nu_children.store(static_cast<unsigned short>(nu_children),
+                        memory_order_release);
 }
 
 template<typename M>
 inline void Node<M>::unlink_children()
 {
-    m_nu_children = 0;
+    m_nu_children.store(0, memory_order_release);
 }
 
 //-----------------------------------------------------------------------------

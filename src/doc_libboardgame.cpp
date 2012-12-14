@@ -63,6 +63,10 @@ Smart Game Format http://www.red-bean.com/sgf/
 @page libboardgame_doc_bibliography Bibliography
 List of publications.
 
+@section libboardgame_doc_enz_2009 A Lock-free Multithreaded Monte-Carlo Tree Search Algorithm.
+M. Enzenberger, M. Mueller. Advances in Computer Games 2009.
+<a href="http://webdocs.cs.ualberta.ca/~mmueller/ps/enzenberger-mueller-acg12.pdf">(PDF)</a>
+
 @section libboardgame_doc_gelly_silver_2007 Combining Online and Offline Knowledge in UCT.
 S. Gelly, D. Silver. Proceedings of the 24th international conference on Machine learning, pp. 273-280, 2007.
 <a href="http://www.machinelearning.org/proceedings/icml2007/papers/387.pdf">(PDF)</a>
