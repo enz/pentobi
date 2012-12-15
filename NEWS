@@ -5,6 +5,8 @@ Current development version
   of C++11 features is used)
 * New menu item Toolbar Text to configure the toolbar button appearance
   independent of the system settings
+* Thumbnailer registration for blksgf files via a schemes file (as used by
+  Gnome 2) is no longer supported
 
 
 Version 5.0 (10 Dec 2012)

@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.9)
 project(Pentobi)
 set(PENTOBI_VERSION 5.UNKNOWN)
+
+include(CheckIncludeFiles)
 
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
@@ -39,22 +41,6 @@ if(MINGW)
     "${CMAKE_EXE_LINKER_FLAGS} -Wl,--large-address-aware")
 endif()
 
-# Define CMAKE_INSTALL_SYSCONFDIR  and CMAKE_INSTALL_FULL_SYSCONFDIR as in
-# GNUInstallDirs (we don't use GNUInstallDirs yet because it requires CMake
-# 2.8.5 and we require only CMake 2.8 so far.
-if(NOT DEFINED CMAKE_INSTALL_SYSCONFDIR)
-  set(CMAKE_INSTALL_SYSCONFDIR etc CACHE PATH
-    "Unix etc directory (absolute path or relative to CMAKE_INSTALL_PREFIX)"
-    FORCE)
-endif()
-if(NOT IS_ABSOLUTE ${CMAKE_INSTALL_SYSCONFDIR})
-  set(CMAKE_INSTALL_FULL_SYSCONFDIR
-    "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_SYSCONFDIR}")
-else()
-  set(CMAKE_INSTALL_FULL_SYSCONFDIR "${CMAKE_INSTALL_SYSCONFDIR}")
-endif()
-
-include(CheckIncludeFiles)
 check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
@@ -62,31 +48,23 @@ check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 set(PENTOBI_BOOST_COMPONENTS system filesystem program_options)
 if(PENTOBI_BUILD_GTP)
   set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} thread)
-  # On MinGW, the thread library needs chrono (tested with Boost 1.51.0)
+  # On MinGW, the thread library needs chrono (last tested with Boost 1.51)
   if (MINGW)
     set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} chrono)
   endif()
   # Package Threads is needed because some versions of CMake/FindBoost fail to
-  # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread.
-  # (e.g. this occurs with CMake 2.8.4/MinGW 3.18 or CLang 3.0 on Ubuntu 12.04)
-  # We solve this by adding CMAKE_THREAD_LIBS_INIT to the link libraries.
+  # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread
+  # (e.g. this occurs with CMake 2.8.9/MinGW 3.18). We solve this by adding
+  # CMAKE_THREAD_LIBS_INIT to the link libraries.
   find_package(Threads)
 endif()
-# Boost versions that were not released when CMake 2.8 came out.
-# You might have to update this list if you use a newer version of Boost.
-set(Boost_ADDITIONAL_VERSIONS "1.45 1.45.0 1.46 1.46.0 1.46.1 1.47 1.47.0 1.48 1.48.0 1.49.0 1.50.0 1.51.0 1.52.0")
-# Note: some versions of Boost cause compilation errors if
-# used with certain versions of GCC and option -std=c++0x
-# (e.g. the combinations GCC 4.4/Boost 1.40 in Ubuntu 10.04
-# and GCC 4.4/Boost 1.42 in Debian 6.0 work but the combination
-# GCC 4.5/Boost 1.42 in Ubuntu 11.04 causes errors).
-find_package(Boost 1.40 REQUIRED COMPONENTS ${PENTOBI_BOOST_COMPONENTS})
+find_package(Boost 1.49 REQUIRED COMPONENTS ${PENTOBI_BOOST_COMPONENTS})
 if(NOT Boost_FOUND)
   message(FATAL_ERROR "Boost not found")
 endif()
 if(MINGW AND Boost_USE_STATIC_LIBS)
-  # Boost 1.45 static libs generate link errors with MinGW if
-  # BOOST_THREAD_USE_LIB is not explicetly defined.
+  # Boost static libs generate link errors with MinGW if BOOST_THREAD_USE_LIB
+  # is not explicetly defined (last tested with Boost 1.52)
   add_definitions(-DBOOST_THREAD_USE_LIB)
 endif()
 
@@ -135,11 +113,6 @@ if(UNIX AND NOT APPLE)
     COMMAND
     update-desktop-database ${CMAKE_INSTALL_PREFIX}/share/applications\;
     update-mime-database ${CMAKE_INSTALL_PREFIX}/share/mime\;
-    if test -f ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\; then
-      env GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-      gconftool-2 --makefile-install-rule
-      ${CMAKE_INSTALL_FULL_SYSCONFDIR}/gconf/schemas/pentobi.schemas\;
-    fi
   )
 endif()
 

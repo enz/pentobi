@@ -3,17 +3,12 @@ This file explains how to compile and install Pentobi from the sources.
 
 == Requirements ==
 
-Pentobi requires the Boost libraries (>=1.40) and the Qt libraries (>=4.6).
+Pentobi requires the Boost libraries (>= 1.40) and the Qt libraries (>= 4.8).
 The C++ compiler needs to support certain C++11 features (only features that
 are already implemented by MSVC 2012 and GCC 4.4). For creating cross-platform
-makefiles, CMake (>=2.8) is required.
+makefiles, CMake (>= 2.8.9) is required.
 
-Note: some versions of Boost cause compilation errors if used with
-certain versions of GCC and option -std=c++0x (e.g. the combinations
-GCC 4.4/Boost 1.40 in Ubuntu 10.04 and GCC 4.4/Boost 1.42 in Debian 6.0 work
-but the combination GCC 4.5/Boost 1.42 in Ubuntu 11.04 causes errors).
-
-Ubuntu 12.04 provides suitable versions of the required tools and libraries in
+Ubuntu 12.10 provides suitable versions of the required tools and libraries in
 its package repository. The packages can be installed with the shell command:
 
   sudo apt-get install g++ make cmake libqt4-dev libboost-all-dev
@@ -26,24 +21,10 @@ Pentobi can be compiled with CMake using the shell commands:
   cmake .
   make
 
-If a compatible version of the Boost libraries is not installed on the system,
-it is possible to specify a custom location of Boost using the cmake options
--DBOOST_ROOT, -DBOOST_LIBRARYDIR and -DBoost_NO_SYSTEM_PATHS=1. In this case,
-it is advisable to also use -DBoost_USE_STATIC_LIBS=1 if Pentobi should be
-installed system-wide because CMake removes a compile-time custom path for
-finding dynamic libraries at installation time. If you use a newer version of
-Boost that was not known to your version of CMake, you may have to add the
-version to Boost_ADDITIONAL_VERSIONS in CMakeLists.txt before running cmake.
-Type "cmake --help-module FindBoost" for more information.
-
-On Linux systems that support only Gnome 3, it is unnecessary to install
-the Gnome 2 registration files for the Pentobi thumbnailer. They can be
-disabled by using the cmake option -DPENTOBI_REGISTER_GNOME2_THUMBNAILER=OFF.
-
 A thumbnailer plugin for KDE can be built by using the CMake option
 -DPENTOBI_BUILD_KDE_THUMBNAILER=ON. In this case, the KDE development files
-need to be installed (package kdelibs5-dev on Ubuntu 12.04). Note that on
-Ubuntu 12.04, the plugin will not be found if the default installation prefix
+need to be installed (package kdelibs5-dev on Ubuntu 12.10). Note that on
+Ubuntu 12.10, the plugin will not be found if the default installation prefix
 /usr/local is used. You need to add KDEDIRS=/usr/local to /etc/environment.
 After that, you can enable previews for Blokus game file in the Dolphin file
 manager in "Configure Dolphin/General/Previews".
@@ -63,5 +44,4 @@ The databases can be updated with the shell command:
   sudo make post-install
 
 This make target assumes that the commands update-desktop-database and
-update-mime-database exist (and gconftool-2 unless the Gnome 2 thumbnailer
-registration was disabled with PENTOBI_REGISTER_GNOME2_THUMBNAILER=OFF).
+update-mime-database exist.
