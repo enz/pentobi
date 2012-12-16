@@ -319,7 +319,7 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
         target.m_thread_storage[get_thread_storage(first_child)];
     const Node* target_child = thread_storage.next;
     NodeIndex target_first_child =
-        static_cast<NodeIndex>(target_child - thread_storage.begin);
+        static_cast<NodeIndex>(target_child - target.m_nodes.get());
     target_node_non_const.link_children(target_first_child, nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
