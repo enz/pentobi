@@ -16,11 +16,11 @@ namespace {
 
 const QColor blue(0, 115, 207);
 
-const QColor green(0, 192, 0);
+const QColor green(0, 191, 0);
 
 const QColor red(230, 62, 44);
 
-const QColor yellow(235, 205, 35);
+const QColor yellow(232, 203, 34);
 
 const QColor gray(174, 167, 172);
 
