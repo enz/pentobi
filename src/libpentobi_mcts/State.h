@@ -252,8 +252,6 @@ private:
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
 
-    void check_local(unsigned local_value, Move mv, unsigned short piece_size);
-
     void compute_features();
 
     /** Equivalent to but faster than m_bd.get_move_info() */
@@ -272,8 +270,8 @@ private:
 
     void play_playout_nonpass(Move mv);
 
-    bool check_move(Color c, const MovePoints& points,
-                    unsigned& local_value);
+    bool check_move(const Grid<bool>& is_forbidden, Move mv,
+                    const MovePoints& points);
 
     void update_move_list(Color c);
 

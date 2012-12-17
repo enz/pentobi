@@ -260,42 +260,22 @@ inline void State::add_moves(Point p, Color c, Piece piece,
     MoveList& moves = m_moves[c];
     Board::LocalMovesListRange move_candidates =
         m_bc->get_moves(piece, p, adj_status);
+    const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
     for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
-        if (! m_shared_const.is_forbidden_at_root[c][*i])
+        if (! m_shared_const.is_forbidden_at_root[c][*i] && ! m_marker[*i]
+            && check_move(is_forbidden, *i, get_move_info(*i).points))
         {
-            unsigned local_value;
-            const MovePoints& points = get_move_info(*i).points;
-            if (! m_marker[*i] && check_move(c, points, local_value))
-            {
-                m_marker.set(*i);
-                moves.push_back(*i);
-                check_local(local_value, *i, points.size());
-            }
+            m_marker.set(*i);
+            moves.push_back(*i);
         }
 }
 
-void State::check_local(unsigned local_value, Move mv,
-                        unsigned short piece_size)
-{
-    if (local_value < m_max_local_value)
-        return;
-    if (local_value > m_max_local_value)
-    {
-        m_local_moves.clear();
-        m_max_local_value = local_value;
-        m_max_playable_piece_size_local = piece_size;
-    }
-    else
-        m_max_playable_piece_size_local =
-            max(m_max_playable_piece_size_local, piece_size);
-    m_local_moves.push_back(mv);
-}
-
-bool State::check_move(Color c, const MovePoints& points,
-                       unsigned& local_value)
+/** Check if move is not forbidden and compute/handle its local value in the
+    same loop. */
+bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
+                       const MovePoints& points)
 {
     LocalValue::Compute compute_local(m_local_value);
-    const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
     auto end = points.end();
     auto i = points.begin();
     LIBBOARDGAME_ASSERT(i != end);
@@ -307,8 +287,22 @@ bool State::check_move(Color c, const MovePoints& points,
         ++i;
     }
     while (i != end);
-    local_value = compute_local.finish();
-    m_max_playable_piece_size = max(m_max_playable_piece_size, points.size());
+    auto local_value = compute_local.finish();
+    auto piece_size = points.size();
+    m_max_playable_piece_size = max(m_max_playable_piece_size, piece_size);
+    if (local_value >= m_max_local_value)
+    {
+        if (local_value > m_max_local_value)
+        {
+            m_local_moves.clear();
+            m_max_local_value = local_value;
+            m_max_playable_piece_size_local = piece_size;
+        }
+        else
+            m_max_playable_piece_size_local =
+                max(m_max_playable_piece_size_local, piece_size);
+        m_local_moves.push_back(mv);
+    }
     return true;
 }
 
@@ -1004,19 +998,16 @@ void State::update_move_list(Color c)
     PieceMap<bool> is_piece_left(false);
     for (Piece piece : m_bd.get_pieces_left(c))
         is_piece_left[piece] = true;
+    const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
     for (auto i = moves.begin(); i != moves.end(); )
     {
         const MoveInfo& info = get_move_info(*i);
-        if (is_piece_left[info.piece])
+        if (is_piece_left[info.piece]
+            && check_move(is_forbidden, *i, info.points))
         {
-            unsigned local_value;
-            if (check_move(c, info.points, local_value))
-            {
-                check_local(local_value, *i, info.points.size());
-                m_marker.set(*i);
-                ++i;
-                continue;
-            }
+            m_marker.set(*i);
+            ++i;
+            continue;
         }
         moves.remove_fast(i);
     }
