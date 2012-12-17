@@ -275,7 +275,7 @@ inline void State::add_moves(Point p, Color c, Piece piece,
 bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
                        const MovePoints& points)
 {
-    LocalValue::Compute compute_local(m_local_value);
+    LocalValue::Compute compute_local;
     auto end = points.end();
     auto i = points.begin();
     LIBBOARDGAME_ASSERT(i != end);
@@ -283,7 +283,7 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
     {
         if (is_forbidden[*i])
             return false;
-        compute_local.add_move_point(*i);
+        compute_local.add_move_point(*i, m_local_value);
         ++i;
     }
     while (i != end);

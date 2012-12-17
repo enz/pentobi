@@ -48,17 +48,15 @@ public:
     class Compute
     {
     public:
-        Compute(const LocalValue& local_value);
+        Compute();
 
         /** Add a point of the move. */
-        void add_move_point(Point p);
+        void add_move_point(Point p, const LocalValue& local_value);
 
         /** Finish the computation and return the value. */
         unsigned finish();
 
     private:
-        const LocalValue& m_local_value;
-
         unsigned m_value;
     };
 
@@ -78,21 +76,21 @@ public:
     void clear();
 
 private:
+    Grid<unsigned> m_point_value;
+
     /** Points with point value greater zero. */
     PointList m_points;
-
-    Grid<unsigned> m_point_value;
 };
 
-inline LocalValue::Compute::Compute(const LocalValue& local_value)
-    : m_local_value(local_value)
+inline LocalValue::Compute::Compute()
 {
     m_value = 0;
 }
 
-inline void LocalValue::Compute::add_move_point(Point p)
+inline void LocalValue::Compute::add_move_point(Point p,
+                                                const LocalValue& local_value)
 {
-    m_value += m_local_value.m_point_value[p];
+    m_value += local_value.m_point_value[p];
 }
 
 inline unsigned LocalValue::Compute::finish()
