@@ -99,8 +99,6 @@ public:
         @param shared_const (@ref libboardgame_doc_storesref) */
     State(Variant initial_variant, const SharedConst& shared_const);
 
-    State(const State& state);
-
     ~State() throw();
 
     /** Play a move in the in-tree phase of the search. */
@@ -224,9 +222,7 @@ private:
 
     Statistics<> m_stat_score;
 
-    /** Number of simulations of this state in the current search.
-        Currently identical to Search::get_nu_simulations() but could be
-        different in the future if Search is multi-threaded. */
+    /** Number of simulations of this state in the current search. */
     size_t m_nu_simulations;
 
     size_t m_nu_playout_moves;

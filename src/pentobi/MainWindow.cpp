@@ -56,7 +56,6 @@
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
-using namespace std::placeholders;
 using Util::getPlayerString;
 using boost::format;
 using boost::trim_right;
@@ -200,7 +199,8 @@ bool isMoveBetter(const Board* bd, Move mv1, Move mv2)
 //-----------------------------------------------------------------------------
 
 MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
-                       const QString& booksDir, bool noBook, size_t memory)
+                       const QString& booksDir, bool noBook,
+                       unsigned nu_threads, size_t memory)
     : m_isGenMoveRunning(false),
       m_isAnalyzeRunning(false),
       m_autoPlay(true),
@@ -239,9 +239,10 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_ratedGameLabel->hide();
     initGame();
     m_player.reset(new Player(variant, booksDir.toLocal8Bit().constData(),
-                              memory));
+                              nu_threads, memory));
     m_player->get_search().set_callback(bind(&MainWindow::searchCallback,
-                                             this, _1, _2));
+                                             this, placeholders::_1,
+                                             placeholders::_2));
     m_player->set_use_book(! noBook);
     createToolBar();
     connect(&m_genMoveWatcher, SIGNAL(finished()),
@@ -926,6 +927,7 @@ void MainWindow::createActions()
     connect(m_actionMoveUpVariation, SIGNAL(triggered()),
             this, SLOT(moveUpVariation()));
 
+    static_assert(maxLevel == 8, "");
     QString levelText[maxLevel] =
         {
             tr("&1"),
@@ -934,7 +936,8 @@ void MainWindow::createActions()
             tr("&4"),
             tr("&5"),
             tr("&6"),
-            tr("&7")
+            tr("&7"),
+            tr("&8")
         };
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);

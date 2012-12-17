@@ -63,6 +63,7 @@ int main(int argc, char** argv)
         options_description normal_options("Options");
         int level = 4;
         size_t memory = 0;
+        unsigned threads = 0;
         normal_options.add_options()
             ("book", value<>(&book_file), "load an external book file")
             ("config,c", value<>(&config_file), "set GTP config file")
@@ -77,6 +78,7 @@ int main(int argc, char** argv)
             ("nobook", "disable opening book")
             ("noresign", "disable resign")
             ("quiet,q", "do not print logging messages")
+            ("threads", value<>(&threads), "number of threads in the search")
             ("version,v", "print version and exit");
         options_description hidden_options;
         hidden_options.add_options()
@@ -107,6 +109,8 @@ int main(int argc, char** argv)
         }
         if (memory == 0 && vm.count("memory"))
             throw Exception("Value for memory must be greater zero.");
+        if (threads == 0 && vm.count("threads"))
+            throw Exception("Number of threads must be greater zero.");
         Board::color_output = (vm.count("color") != 0);
         if (vm.count("quiet"))
             set_log_null();
@@ -119,7 +123,7 @@ int main(int argc, char** argv)
         bool use_book = (vm.count("nobook") == 0);
         path books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
-                                   memory);
+                                   threads, memory);
         engine.set_resign(vm.count("noresign") == 0);
         if (vm.count("showboard"))
             engine.set_show_board(true);

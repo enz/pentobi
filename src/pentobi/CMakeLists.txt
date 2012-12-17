@@ -80,6 +80,9 @@ target_link_libraries(pentobi
   ${Boost_SYSTEM_LIBRARY}
   ${Boost_FILESYSTEM_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY}
+  ${Boost_THREAD_LIBRARY}
+  ${Boost_CHRONO_LIBRARY}
+  ${CMAKE_THREAD_LIBS_INIT}
   )
 
 if (WIN32)

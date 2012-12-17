@@ -24,13 +24,15 @@ class Search
     : public libboardgame_mcts::Search<State, Move, 4>
 {
 public:
-    Search(Variant initial_variant, size_t memory = 0);
+    Search(Variant initial_variant, unsigned nu_threads, size_t memory);
 
     ~Search() throw();
 
 
     /** @name Pure virtual functions of libboardgame_mcts::Search */
     // @{
+
+    unique_ptr<State> create_state();
 
     string get_move_string(Move mv) const;
 

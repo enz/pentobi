@@ -5,6 +5,7 @@
 #ifndef LIBBOARDGAME_UTIL_STATISTICS_H
 #define LIBBOARDGAME_UTIL_STATISTICS_H
 
+#include <atomic>
 #include <cmath>
 #include <iomanip>
 #include <iosfwd>
@@ -24,11 +25,14 @@ template<typename FLOAT = double>
 class StatisticsBase
 {
 public:
-    StatisticsBase();
+    /** Constructor.
+        @param init_val The value to return in get_mean() if count is 0. This
+        value does not affect the mean returned if count is greater 0. */
+    StatisticsBase(FLOAT init_val = 0);
 
     void add(FLOAT val);
 
-    void clear();
+    void clear(FLOAT init_val = 0);
 
     FLOAT get_count() const;
 
@@ -44,9 +48,9 @@ private:
 };
 
 template<typename FLOAT>
-inline StatisticsBase<FLOAT>::StatisticsBase()
+inline StatisticsBase<FLOAT>::StatisticsBase(FLOAT init_val)
 {
-    clear();
+    clear(init_val);
 }
 
 template<typename FLOAT>
@@ -60,10 +64,10 @@ void StatisticsBase<FLOAT>::add(FLOAT val)
 }
 
 template<typename FLOAT>
-inline void StatisticsBase<FLOAT>::clear()
+inline void StatisticsBase<FLOAT>::clear(FLOAT init_val)
 {
     m_count = 0;
-    m_mean = 0;
+    m_mean = init_val;
 }
 
 template<typename FLOAT>
@@ -75,7 +79,6 @@ inline FLOAT StatisticsBase<FLOAT>::get_count() const
 template<typename FLOAT>
 inline FLOAT StatisticsBase<FLOAT>::get_mean() const
 {
-    LIBBOARDGAME_ASSERT(m_count > 0);
     return m_mean;
 }
 
@@ -83,15 +86,10 @@ template<typename FLOAT>
 void StatisticsBase<FLOAT>::write(ostream& out, bool fixed,
                                   unsigned precision) const
 {
-    if (m_count > 0)
-    {
-        boost::io::ios_all_saver saver(out);
-        if (fixed)
-            out << std::fixed;
-        out << setprecision(precision) << m_mean;
-    }
-    else
-        out << '-';
+    boost::io::ios_all_saver saver(out);
+    if (fixed)
+        out << std::fixed;
+    out << setprecision(precision) << m_mean;
 }
 
 //----------------------------------------------------------------------------
@@ -100,11 +98,11 @@ template<typename FLOAT = double>
 class Statistics
 {
 public:
-    Statistics();
+    Statistics(FLOAT init_val = 0);
 
     void add(FLOAT val);
 
-    void clear();
+    void clear(FLOAT init_val = 0);
 
     FLOAT get_mean() const;
 
@@ -124,9 +122,9 @@ private:
 };
 
 template<typename FLOAT>
-inline Statistics<FLOAT>::Statistics()
+inline Statistics<FLOAT>::Statistics(FLOAT init_val)
 {
-    clear();
+    clear(init_val);
 }
 
 template<typename FLOAT>
@@ -150,9 +148,9 @@ void Statistics<FLOAT>::add(FLOAT val)
 }
 
 template<typename FLOAT>
-inline void Statistics<FLOAT>::clear()
+inline void Statistics<FLOAT>::clear(FLOAT init_val)
 {
-    m_statistics_base.clear();
+    m_statistics_base.clear(init_val);
     m_variance = 0;
 }
 
@@ -181,18 +179,14 @@ inline FLOAT Statistics<FLOAT>::get_variance() const
 }
 
 template<typename FLOAT>
-void Statistics<FLOAT>::write(ostream& out, bool fixed, unsigned precision) const
+void Statistics<FLOAT>::write(ostream& out, bool fixed,
+                              unsigned precision) const
 {
-    if (get_count() > 0)
-    {
-        boost::io::ios_all_saver saver(out);
-        if (fixed)
-            out << std::fixed;
-        out << setprecision(precision) << get_mean() << " dev="
-            << get_deviation();
-    }
-    else
-        out << '-';
+    boost::io::ios_all_saver saver(out);
+    if (fixed)
+        out << std::fixed;
+    out << setprecision(precision) << get_mean() << " dev="
+        << get_deviation();
 }
 
 //----------------------------------------------------------------------------
@@ -201,11 +195,11 @@ template<typename FLOAT = double>
 class StatisticsExt
 {
 public:
-    StatisticsExt();
+    StatisticsExt(FLOAT init_val = 0);
 
     void add(FLOAT val);
 
-    void clear();
+    void clear(FLOAT init_val = 0);
 
     FLOAT get_mean() const;
 
@@ -234,9 +228,9 @@ private:
 };
 
 template<typename FLOAT>
-inline StatisticsExt<FLOAT>::StatisticsExt()
+inline StatisticsExt<FLOAT>::StatisticsExt(FLOAT init_val)
 {
-    clear();
+    clear(init_val);
 }
 
 template<typename FLOAT>
@@ -250,9 +244,9 @@ void StatisticsExt<FLOAT>::add(FLOAT val)
 }
 
 template<typename FLOAT>
-inline void StatisticsExt<FLOAT>::clear()
+inline void StatisticsExt<FLOAT>::clear(FLOAT init_val)
 {
-    m_statistics.clear();
+    m_statistics.clear(init_val);
     m_min = numeric_limits<FLOAT>::max();
     m_max = -numeric_limits<FLOAT>::max();
 }
@@ -306,20 +300,105 @@ template<typename FLOAT>
 void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned precision,
                                  bool integer_values) const
 {
-    if (get_count() > 0)
-    {
-        m_statistics.write(out, fixed, precision);
-        boost::io::ios_all_saver saver(out);
-        if (fixed)
-            out << std::fixed;
-        if (integer_values)
-            out << setprecision(0);
-        else
-            out << setprecision(precision);
-        out << " min=" << m_min << " max=" << m_max;
-    }
+    m_statistics.write(out, fixed, precision);
+    boost::io::ios_all_saver saver(out);
+    if (fixed)
+        out << std::fixed;
+    if (integer_values)
+        out << setprecision(0);
     else
-        out << '-';
+        out << setprecision(precision);
+    out << " min=" << m_min << " max=" << m_max;
+}
+
+//----------------------------------------------------------------------------
+
+/** Like StatisticsBase, but for lock-free multithreading with potentially
+    lost updates.
+    Updates and accesses of the moving average and the count are atomic but
+    not synchronized and use memory_order_relaxed. Therefore, updates can be
+    lost. Initializing via the constructor, operator= or clear() uses
+    memory_order_seq_cst */
+template<typename FLOAT = double>
+class StatisticsDirtyLockFree
+{
+public:
+    /** Constructor.
+        @param init_val See StatisticBase::StatisticBase() */
+    StatisticsDirtyLockFree(FLOAT init_val = 0);
+
+    StatisticsDirtyLockFree& operator=(const StatisticsDirtyLockFree& s);
+
+    void add(FLOAT val);
+
+    void clear(FLOAT init_val = 0);
+
+    FLOAT get_count() const;
+
+    FLOAT get_mean() const;
+
+    void write(ostream& out, bool fixed = false,
+               unsigned precision = 6) const;
+
+private:
+    atomic<FLOAT> m_count;
+
+    atomic<FLOAT> m_mean;
+};
+
+template<typename FLOAT>
+inline StatisticsDirtyLockFree<FLOAT>::StatisticsDirtyLockFree(FLOAT init_val)
+{
+    clear(init_val);
+}
+
+template<typename FLOAT>
+StatisticsDirtyLockFree<FLOAT>&
+StatisticsDirtyLockFree<FLOAT>::operator=(const StatisticsDirtyLockFree& s)
+{
+    m_count = s.m_count.load();
+    m_mean = s.m_mean.load();
+    return *this;
+}
+
+template<typename FLOAT>
+void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val)
+{
+    FLOAT count = m_count.load(memory_order_relaxed);
+    FLOAT mean = m_mean.load(memory_order_relaxed);
+    ++count;
+    mean +=  (val - mean) / count;
+    m_mean.store(mean, memory_order_relaxed);
+    m_count.store(count, memory_order_relaxed);
+}
+
+template<typename FLOAT>
+inline void StatisticsDirtyLockFree<FLOAT>::clear(FLOAT init_val)
+{
+    m_count = 0;
+    m_mean = init_val;
+}
+
+template<typename FLOAT>
+inline FLOAT StatisticsDirtyLockFree<FLOAT>::get_count() const
+{
+    return m_count.load(memory_order_relaxed);
+}
+
+template<typename FLOAT>
+inline FLOAT StatisticsDirtyLockFree<FLOAT>::get_mean() const
+{
+    return m_mean.load(memory_order_relaxed);
+}
+
+template<typename FLOAT>
+void StatisticsDirtyLockFree<FLOAT>::write(ostream& out, bool fixed,
+                                           unsigned precision) const
+{
+    boost::io::ios_all_saver saver(out);
+    if (fixed)
+        out << std::fixed;
+    out << setprecision(precision) << get_mean();
 }
 
 //----------------------------------------------------------------------------

@@ -1,10 +1,13 @@
 Current development version
 ===========================
 
-* The source code now requires at least GCC 4.7 (because a larger subset
-  of C++11 features is used)
+* The search algorithm used for move generation is now parallelized and
+  can take advantage of multi-core CPUs. There is a new playing level 8,
+  which has a dual-core CPU as the recommended system requirement.
 * New menu item Toolbar Text to configure the toolbar button appearance
   independent of the system settings
+* The source code now requires at least GCC 4.7 (because a larger subset
+  of C++11 features is used)
 * Thumbnailer registration for blksgf files via a schemes file (as used by
   Gnome 2) is no longer supported
 

@@ -26,6 +26,10 @@ void dump_tree(ostream& out, const Search& search);
     physical memory available on the system. */
 size_t get_memory();
 
+/** Suggest how many threads to use in the search depending on the current
+    system. */
+unsigned get_nu_threads();
+
 //-----------------------------------------------------------------------------
 
 } // namespace util

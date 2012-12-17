@@ -323,7 +323,7 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     target_node_non_const.link_children(target_first_child, nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
-    // assert, GCC 4.6.1 gives the error: parse error in template argument list
+    // assert, GCC 4.7.2 gives the error: parse error in template argument list
     LIBBOARDGAME_ASSERT((thread_storage.next) < thread_storage.end);
     abort = false;
     const Node* end = &first_child + node.get_nu_children();

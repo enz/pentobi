@@ -63,8 +63,10 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater(tree, *bd);
     updater.update(get_last_node(tree.get_root()));
+    unsigned nu_threads = 1;
     size_t memory = 10000;
-    unique_ptr<Search> search(new Search(bd->get_variant(), memory));
+    unique_ptr<Search> search(new Search(bd->get_variant(), nu_threads,
+                                         memory));
     Float max_count = 1;
     size_t min_simulations = 1;
     double max_time = 0;

@@ -248,6 +248,8 @@ template<typename M>
 inline void Node<M>::link_children(NodeIndex first_child, int nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children <= numeric_limits<unsigned short>::max());
+    // first_child cannot be 0 because 0 is always used for the root node
+    LIBBOARDGAME_ASSERT(first_child != 0);
     m_first_child = first_child;
     m_nu_children.store(static_cast<unsigned short>(nu_children),
                         memory_order_release);

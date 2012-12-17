@@ -29,9 +29,11 @@ public:
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
         @param books_dir Directory containing opening books.
+        @param nu_threads The number of threads to use in the search (0 means
+        to select a reasonable default value)
         @param memory The memory to be used for (all) the search trees. */
     Player(Variant initial_variant, const path& books_dir,
-           size_t memory = 0);
+           unsigned nu_threads = 0, size_t memory = 0);
 
     ~Player() throw();
 

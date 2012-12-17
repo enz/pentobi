@@ -38,10 +38,10 @@ using libpentobi_mcts::State;
 //-----------------------------------------------------------------------------
 
 Engine::Engine(Variant variant, int level, bool use_book,
-               const path& books_dir, size_t memory)
+               const path& books_dir, unsigned nu_threads, size_t memory)
     : libpentobi_base::Engine(variant)
 {
-    create_player(variant, books_dir, memory);
+    create_player(variant, books_dir, nu_threads, memory);
     get_mcts_player().set_use_book(use_book);
     get_mcts_player().set_level(level);
     add("gen_playout_move", &Engine::cmd_gen_playout_move);
@@ -194,15 +194,15 @@ void Engine::cmd_version(Response& response)
 }
 
 void Engine::create_player(Variant variant, const path& books_dir,
-                           size_t memory)
+                           unsigned nu_threads, size_t memory)
 {
-    m_player.reset(new Player(variant, books_dir, memory));
+    m_player.reset(new Player(variant, books_dir, nu_threads, memory));
     set_player(*m_player);
 }
 
 void Engine::cmd_gen_playout_move(Response& response)
 {
-    State& state = get_mcts_player().get_search().get_state();
+    State& state = get_mcts_player().get_search().get_state(0);
     state.start_search();
     state.start_simulation(0);
     state.finish_in_tree();

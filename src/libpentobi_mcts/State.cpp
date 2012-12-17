@@ -241,12 +241,6 @@ State::State(Variant initial_variant, const SharedConst& shared_const)
 {
 }
 
-State::State(const State& state)
-  : m_shared_const(state.m_shared_const),
-    m_bd(state.m_bd.get_variant())
-{
-}
-
 State::~State() throw()
 {
 }

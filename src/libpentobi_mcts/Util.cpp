@@ -8,6 +8,7 @@
 
 #include "Util.h"
 
+#include <boost/thread.hpp>
 #include "libboardgame_sgf/Writer.h"
 #include "libboardgame_sys/Memory.h"
 #include "libboardgame_util/Log.h"
@@ -81,7 +82,7 @@ size_t get_memory()
 {
     size_t memory;
     size_t total_mem = libboardgame_sys::get_memory();
-    // Use half the system memory but not more than 768 MB
+    // Use half the system memory but not more than 1 GB
     if (total_mem == 0)
     {
         log("WARNING: could not determine system memory (assuming 512 MB)");
@@ -89,10 +90,30 @@ size_t get_memory()
     }
     else
         memory = total_mem / 2;
-    if (memory > 768000000)
-        memory = 768000000;
+    if (memory > 1000000000)
+        memory = 1000000000;
     log() << "Using " << memory << " of " << total_mem << " bytes\n";
     return memory;
+}
+
+unsigned get_nu_threads()
+{
+    unsigned nu_threads = boost::thread::hardware_concurrency();
+    if (nu_threads == 0)
+        nu_threads = 1;
+    // The lock-free search probably scales up to 16-32 threads, but we
+    // haven't tested more than 4 threads, we still use single precision
+    // float for LIBBOARDGAME_MCTS_FLOAT_TYPE (which limits the maximum number
+    // of simulations per search) and CPUs with more than 4 cores are
+    // currently not very common anyway. Also, the loss of playing strength
+    // of a multi-threaded search with the same count as a single-threaded
+    // search will become larger with many threads, so there would need to be
+    // a correction factor in the number of simulations per level to take this
+    // into account.
+    if (nu_threads > 4)
+        nu_threads = 4;
+    log() << "Using " << nu_threads << " threads\n";
+    return nu_threads;
 }
 
 void dump_tree(ostream& out, const Search& search)

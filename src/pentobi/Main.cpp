@@ -126,10 +126,12 @@ int main(int argc, char* argv[])
         options_description normal_options("Options");
         uint32_t seed;
         size_t memory = 0;
+        unsigned threads = 0;
         normal_options.add_options()
             ("memory", value<>(&memory), "memory to allocate for search trees")
             ("nobook", "do not use opening book")
             ("seed,r", value<uint32_t>(&seed), "set random seed")
+            ("threads", value<>(&threads), "number of threads in the search")
             ("verbose", "print logging messages");
         options_description hidden_options;
         hidden_options.add_options()
@@ -145,6 +147,8 @@ int main(int argc, char* argv[])
         boost::program_options::notify(vm);
         if (memory == 0 && vm.count("memory"))
             throw Exception("Value for memory must be greater zero.");
+        if (threads == 0 && vm.count("threads"))
+            throw Exception("Number of threads must be greater zero.");
         if (! vm.count("verbose"))
             set_log_null();
         if (vm.count("seed"))
@@ -158,7 +162,7 @@ int main(int argc, char* argv[])
         if (! arguments.empty())
             initialFile = arguments[0].c_str();
         MainWindow mainWindow(initialFile, manualDir, booksDir, noBook,
-                              memory);
+                              threads, memory);
         if (vm.count("seed"))
             mainWindow.setDeterministic();
         mainWindow.show();

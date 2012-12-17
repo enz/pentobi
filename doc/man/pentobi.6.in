@@ -33,6 +33,14 @@ with a high number of Monte-Carlo simulations per second (e.g. Duo).
 If a message that the search tree was pruned occurs more than a few times
 during a move generation, the playing strength is likely to be affected.
 .TP
+.B \-\-threads
+The number of threads to use in the search. By default, up to 4 threads are
+used in the search depending on the number of hardware threads supported
+by the current system.
+Using more threads will speed up the move generation but using a very high
+number of threads (e.g. more than 8) can degrade the playing strength
+in higher playing levels.
+.TP
 .B \-\-verbose
 Print internal information about the move generation and other debugging
 information to standard error.

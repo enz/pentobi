@@ -21,7 +21,8 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-Player::Player(Variant initial_variant, const path& books_dir, size_t memory)
+Player::Player(Variant initial_variant, const path& books_dir,
+               unsigned nu_threads, size_t memory)
     : m_is_book_loaded(false),
       m_use_book(true),
       m_resign(false),
@@ -30,7 +31,7 @@ Player::Player(Variant initial_variant, const path& books_dir, size_t memory)
       m_fixed_simulations(0),
       m_resign_threshold(0.09f),
       m_resign_min_simulations(500),
-      m_search(initial_variant, memory),
+      m_search(initial_variant, nu_threads, memory),
       m_book(initial_variant)
 {
     for (unsigned i = 0; i < Board::max_player_moves; ++i)
@@ -138,25 +139,25 @@ Move Player::genmove(const Board& bd, Color c)
         if (variant == Variant::classic || variant == Variant::classic_2)
         {
             minimum = 5;
-            factor_per_level = 5.92f;
+            factor_per_level = 5.36f;
         }
         else if (variant == Variant::trigon
                  || variant == Variant::trigon_2
                  || variant == Variant::trigon_3)
         {
             minimum = 10;
-            factor_per_level = 4.31f;
+            factor_per_level = 3.90f;
         }
         else if (variant == Variant::junior)
         {
             minimum = 5;
-            factor_per_level = 7.28f;
+            factor_per_level = 6.54f;
         }
         else
         {
             LIBBOARDGAME_ASSERT(variant == Variant::duo);
             minimum = 5;
-            factor_per_level = 7.16f;
+            factor_per_level = 6.44f;
         }
         if (m_level <= 1)
             max_count = minimum;
@@ -227,33 +228,36 @@ Rating Player::get_rating(Variant variant, int level)
     case Variant::classic:
     case Variant::classic_2:
         {
-            static float elo[] = { 1000, 1255, 1510, 1740, 1880, 1950, 1990 };
-            if (level <= 7)
+            static float elo[] =
+                { 1000, 1255, 1510, 1740, 1880, 1950, 1990, 2030 };
+            if (level <= 8)
                 return Rating(elo[level - 1]);
             else
-                // Ratings for levels greater 7 are not really tested.
-                return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
+                // Ratings for levels greater 8 are not really tested.
+                return Rating(elo[7] + static_cast<float>(10 * (level - 8)));
         }
     case Variant::trigon:
     case Variant::trigon_2:
     case Variant::trigon_3:
         {
-            static float elo[] = { 920, 1100, 1300, 1485, 1580, 1650, 1700 };
-            if (level <= 7)
+            static float elo[] =
+                { 920, 1100, 1300, 1485, 1580, 1650, 1700, 1750 };
+            if (level <= 8)
                 return Rating(elo[level - 1]);
             else
-                // Ratings for levels greater 7 are not really tested.
-                return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
+                // Ratings for levels greater 8 are not really tested.
+                return Rating(elo[7] + static_cast<float>(10 * (level - 8)));
         }
     case Variant::duo:
     case Variant::junior:
         {
-            static float elo[] = { 1100, 1325, 1550, 1750, 1880, 1950, 2020 };
-            if (level <= 7)
+            static float elo[] =
+                { 1100, 1325, 1550, 1750, 1880, 1950, 2020, 2090 };
+            if (level <= 8)
                 return Rating(elo[level - 1]);
             else
-                // Ratings for levels greater 7 are not really tested.
-                return Rating(elo[6] + static_cast<float>(10 * (level - 7)));
+                // Ratings for levels greater 8 are not really tested.
+                return Rating(elo[7] + static_cast<float>(10 * (level - 8)));
         }
     }
     LIBBOARDGAME_ASSERT(false);

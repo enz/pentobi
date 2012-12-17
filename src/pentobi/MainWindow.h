@@ -52,7 +52,7 @@ class MainWindow
 public:
     MainWindow(const QString& initialFile = "", const QString& manualDir = "",
                const QString& booksDir = "", bool noBook = false,
-               size_t memory = 0);
+               unsigned nu_threads = 0, size_t memory = 0);
 
     bool eventFilter(QObject* object, QEvent* event);
 
@@ -237,7 +237,7 @@ private:
     };
 
     /** Possible values for m_level are in 1..maxLevel */
-    static const int maxLevel = 7;
+    static const int maxLevel = 8;
 
     static const int maxRecentFiles = 9;
 

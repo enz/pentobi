@@ -107,8 +107,8 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
 
 //-----------------------------------------------------------------------------
 
-Search::Search(Variant initial_variant, size_t memory)
-    : ParentClass(State(initial_variant, m_shared_const),
+Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
+    : ParentClass(nu_threads == 0 ? util::get_nu_threads() : nu_threads,
                   memory == 0 ? util::get_memory() : memory),
       m_auto_param(true),
       m_variant(initial_variant),
@@ -118,6 +118,7 @@ Search::Search(Variant initial_variant, size_t memory)
     set_expand_threshold(3);
     set_last_good_reply(true);
     set_default_param(m_variant);
+    create_threads();
 }
 
 Search::~Search() throw()
@@ -130,6 +131,11 @@ bool Search::check_followup(vector<Move>& sequence)
     bool is_followup = m_state.is_followup(m_last_state, sequence);
     m_last_state = m_state;
     return is_followup;
+}
+
+unique_ptr<State> Search::create_state()
+{
+    return unique_ptr<State>(new State(m_variant, m_shared_const));
 }
 
 string Search::get_move_string(Move mv) const
@@ -255,7 +261,7 @@ void Search::write_info(ostream& out) const
         }
         out << ", ";
     }
-    get_state().write_info(out);
+    get_state(0).write_info(out);
 }
 
 //-----------------------------------------------------------------------------
