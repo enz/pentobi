@@ -527,7 +527,7 @@ private:
 
     static size_t get_max_nodes(size_t memory);
 
-    bool check_abort() const;
+    bool check_abort(const ThreadState& thread_state) const;
 
     bool check_abort_expensive(ThreadState& thread_state) const;
 
@@ -537,6 +537,8 @@ private:
 
     bool expand_node(unsigned thread_id, const Node& node,
                      const Node*& best_child, Float init_val);
+
+    void log_thread(const ThreadState& thread_state, const string& s) const;
 
     LIBBOARDGAME_FLATTEN void playout(ThreadState& thread_state);
 
@@ -679,17 +681,18 @@ Search<S,M,P>::~Search() throw()
 }
 
 template<class S, class M, unsigned P>
-bool Search<S,M,P>::check_abort() const
+bool Search<S,M,P>::check_abort(const ThreadState& thread_state) const
 {
     Float count = m_tree.get_root().get_count() + m_reuse_count;
     if (count >= m_max_float_count)
     {
-        log("Maximum count supported by floating type reached");
+        log_thread(thread_state,
+                   "Maximum count supported by floating type reached");
         return true;
     }
     if (m_max_count > 0 && count >= m_max_count)
     {
-        log("Maximum count reached");
+        log_thread(thread_state, "Maximum count reached");
         return true;
     }
     return false;
@@ -700,7 +703,7 @@ bool Search<S,M,P>::check_abort_expensive(ThreadState& thread_state) const
 {
     if (get_abort())
     {
-        log("Search aborted");
+        log_thread(thread_state, "Search aborted");
         return true;
     }
     Float count = m_tree.get_root().get_count() + m_reuse_count;
@@ -723,7 +726,7 @@ bool Search<S,M,P>::check_abort_expensive(ThreadState& thread_state) const
         // Search uses time limit
         if (time > m_max_time)
         {
-            log("Maximum time reached");
+            log_thread(thread_state, "Maximum time reached");
             return true;
         }
         remaining_time = m_max_time - time;
@@ -741,7 +744,7 @@ bool Search<S,M,P>::check_abort_expensive(ThreadState& thread_state) const
         remaining_simulations = m_max_float_count - count;
     if (check_move_cannot_change(count, remaining_simulations))
     {
-        log("Move cannot change anymore");
+        log_thread(thread_state, "Move cannot change anymore");
         return true;
     }
     return false;
@@ -752,6 +755,13 @@ void Search<S,M,P>::check_create_threads()
 {
     if (m_nu_threads != m_threads.size())
         create_threads();
+}
+
+template<class S, class M, unsigned P>
+bool Search<S,M,P>::check_followup(vector<Move>& sequence)
+{
+    LIBBOARDGAME_UNUSED(sequence);
+    return false;
 }
 
 template<class S, class M, unsigned P>
@@ -777,6 +787,7 @@ bool Search<S,M,P>::check_move_cannot_change(Float count,
 template<class S, class M, unsigned P>
 void Search<S,M,P>::create_threads()
 {
+    log() << "Creating " << m_nu_threads << " threads\n";
     m_threads.clear();
     typename Thread::SearchLoopFunc search_loop_func =
         static_cast<typename Thread::SearchLoopFunc>(
@@ -977,10 +988,10 @@ bool Search<S,M,P>::get_weight_rave_updates() const
 }
 
 template<class S, class M, unsigned P>
-bool Search<S,M,P>::check_followup(vector<Move>& sequence)
+void Search<S,M,P>::log_thread(const ThreadState& thread_state,
+                               const string& s) const
 {
-    LIBBOARDGAME_UNUSED(sequence);
-    return false;
+    log(format("[%i] %s") % thread_state.thread_id % s);
 }
 
 template<class S, class M, unsigned P>
@@ -1218,12 +1229,24 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, Float min_simulations,
     m_nu_simulations = 0;
     Float prune_min_count = get_prune_count_start();
 
+    // Don't use multi-threading for very short searches (less than 0.5s).
+    // There are too many lost updates at the beginning (e.g. if all threads
+    // expand the root node and only the children of the last thread are used)
+    unsigned nu_threads = m_nu_threads;
+    if (max_time < 0.5
+        || (max_count > 0
+            && (max_count - m_reuse_count) / expected_sim_per_sec() < 0.5))
+    {
+        log("Using single-threading for very short search");
+        nu_threads = 1;
+    }
+
     while (true)
     {
-        for (unsigned i = 1; i < m_threads.size(); ++i)
+        for (unsigned i = 1; i < nu_threads; ++i)
             m_threads[i]->start_search_loop();
         search_loop(m_threads[0]->thread_state);
-        for (unsigned i = 1; i < m_threads.size(); ++i)
+        for (unsigned i = 1; i < nu_threads; ++i)
             m_threads[i]->wait_search_loop_finished();
         bool is_out_of_mem = false;
         for (unsigned i = 0; i < m_threads.size(); ++i)
@@ -1277,7 +1300,7 @@ void Search<S,M,P>::search_loop(ThreadState& thread_state)
         size_t nu_simulations = m_nu_simulations.fetch_add(1);
         Float root_count = m_tree.get_root().get_count();
         if (root_count > 0 && nu_simulations > m_min_simulations
-            && (check_abort() || expensive_abort_checker()))
+            && (check_abort(thread_state) || expensive_abort_checker()))
             break;
         thread_state.simulation.nodes.clear();
         thread_state.simulation.nodes.push_back(&m_tree.get_root());

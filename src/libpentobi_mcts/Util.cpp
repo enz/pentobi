@@ -112,7 +112,6 @@ unsigned get_nu_threads()
     // into account.
     if (nu_threads > 4)
         nu_threads = 4;
-    log() << "Using " << nu_threads << " threads\n";
     return nu_threads;
 }
 
