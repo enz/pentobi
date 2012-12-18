@@ -397,9 +397,11 @@ private:
 
         ~Thread();
 
-        void start_search();
+        void run();
 
-        void wait_search_finished();
+        void start_search_loop();
+
+        void wait_search_loop_finished();
 
     private:
         SearchLoopFunc m_search_loop_func;
@@ -569,21 +571,32 @@ Search<S,M,P>::Thread::Thread(SearchLoopFunc& search_loop_func)
       m_thread_ready(2),
       m_search_finished_lock(m_search_finished_mutex)
 {
-    m_thread = thread(bind(&Thread::thread_main, this));
-    m_thread_ready.wait();
 }
 
 template<class S, class M, unsigned P>
 Search<S,M,P>::Thread::~Thread()
 {
+    if (! m_thread.joinable())
+        return;
     m_quit = true;
-    start_search();
+    {
+        mutex::scoped_lock lock(m_start_search_mutex);
+        m_start_search.notify_all();
+    }
     m_thread.join();
 }
 
 template<class S, class M, unsigned P>
-void Search<S,M,P>::Thread::start_search()
+void Search<S,M,P>::Thread::run()
 {
+    m_thread = thread(bind(&Thread::thread_main, this));
+    m_thread_ready.wait();
+}
+
+template<class S, class M, unsigned P>
+void Search<S,M,P>::Thread::start_search_loop()
+{
+    LIBBOARDGAME_ASSERT(m_thread.joinable());
     mutex::scoped_lock lock(m_start_search_mutex);
     m_start_search.notify_all();
 }
@@ -609,8 +622,9 @@ void Search<S,M,P>::Thread::thread_main()
 }
 
 template<class S, class M, unsigned P>
-void Search<S,M,P>::Thread::wait_search_finished()
+void Search<S,M,P>::Thread::wait_search_loop_finished()
 {
+    LIBBOARDGAME_ASSERT(m_thread.joinable());
     m_search_finished.wait(m_search_finished_lock);
 }
 
@@ -769,13 +783,15 @@ void Search<S,M,P>::create_threads()
                           bind(&Search::search_loop, this, placeholders::_1));
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
-        unique_ptr<Thread> thread(new Thread(search_loop_func));
-        ThreadState& thread_state = thread->thread_state;
+        unique_ptr<Thread> t(new Thread(search_loop_func));
+        auto& thread_state = t->thread_state;
         thread_state.thread_id = i;
         thread_state.state = create_state();
         for (unsigned i = 0; i < max_players; ++i)
             thread_state.first_play[i].fill(numeric_limits<unsigned>::max());
-        m_threads.push_back(move(thread));
+        if (i > 0)
+            t->run();
+        m_threads.push_back(move(t));
     }
 }
 
@@ -1204,10 +1220,11 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, Float min_simulations,
 
     while (true)
     {
-        for (unsigned i = 0; i < m_threads.size(); ++i)
-            m_threads[i]->start_search();
-        for (unsigned i = 0; i < m_threads.size(); ++i)
-            m_threads[i]->wait_search_finished();
+        for (unsigned i = 1; i < m_threads.size(); ++i)
+            m_threads[i]->start_search_loop();
+        search_loop(m_threads[0]->thread_state);
+        for (unsigned i = 1; i < m_threads.size(); ++i)
+            m_threads[i]->wait_search_loop_finished();
         bool is_out_of_mem = false;
         for (unsigned i = 0; i < m_threads.size(); ++i)
             if (m_threads[i]->thread_state.is_out_of_mem)
