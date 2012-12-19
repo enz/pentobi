@@ -336,7 +336,8 @@ protected:
 
     virtual void on_start_search();
 
-    virtual void on_search_iteration(size_t n, const Simulation& simulation);
+    virtual void on_search_iteration(size_t n, const State& state,
+                                     const Simulation& simulation);
 
     /** Time source for current search.
         Only valid during a search. */
@@ -995,9 +996,11 @@ void Search<S,M,P>::log_thread(const ThreadState& thread_state,
 }
 
 template<class S, class M, unsigned P>
-void Search<S,M,P>::on_search_iteration(size_t n, const Simulation& simulation)
+void Search<S,M,P>::on_search_iteration(size_t n, const State& state,
+                                        const Simulation& simulation)
 {
     LIBBOARDGAME_UNUSED(n);
+    LIBBOARDGAME_UNUSED(state);
     LIBBOARDGAME_UNUSED(simulation);
     // Default implementation does nothing
 }
@@ -1324,7 +1327,8 @@ void Search<S,M,P>::search_loop(ThreadState& thread_state)
             update_rave_values(thread_state, eval);
         if (m_use_last_good_reply)
             update_last_good_reply(thread_state, eval);
-        on_search_iteration(nu_simulations, thread_state.simulation);
+        on_search_iteration(nu_simulations, *thread_state.state,
+                            thread_state.simulation);
     }
 }
 
