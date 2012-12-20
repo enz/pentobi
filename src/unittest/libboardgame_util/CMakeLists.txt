@@ -9,6 +9,7 @@ set(unittest_libboardgame_util_STAT_SRCS
   ArrayListTest.cpp
   FastLogTest.cpp
   NullTermListTest.cpp
+  StringUtilTest.cpp
   )
 
 add_executable(unittest_libboardgame_util

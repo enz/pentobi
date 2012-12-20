@@ -29,18 +29,13 @@ bool from_string(const string& s, string& t)
 string get_letter_coord(unsigned i)
 {
     string result;
-    ++i;
-    unsigned n = 1;
-    while (n * 26 < i)
-        n *= 26;
     while (true)
     {
-        unsigned d = i / n;
-        result += char('a' + d - 1);
-        if (n == 1)
+        result.insert(0, 1, char('a' + i % 26));
+        i /= 26;
+        if (i == 0)
             break;
-        i -= n * d;
-        n /= 26;
+        --i;
     }
     return result;
 }
