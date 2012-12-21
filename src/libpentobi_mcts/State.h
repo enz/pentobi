@@ -183,6 +183,8 @@ private:
 
     const BoardConst* m_bc;
 
+    Color::IntType m_nu_colors;
+
     const MoveInfo* m_move_info_array;
 
     const MoveInfoExt* m_move_info_ext_array;
@@ -257,6 +259,8 @@ private:
 
     void compute_features();
 
+    Point find_best_starting_point(Color c) const;
+
     /** Equivalent to but faster than m_bd.get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
 
@@ -264,6 +268,8 @@ private:
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
     const PieceMap<bool>& get_pieces_considered() const;
+
+    Float get_result(Color c) const;
 
     void init_move_list_with_local(Color c);
 

@@ -46,137 +46,6 @@ const bool use_prior_knowledge = true;
 
 const bool pure_random_playout = false;
 
-Point find_best_starting_point(const Board& bd, Color c)
-{
-    // We use the starting point that maximizes the distance to occupied
-    // starting points, especially to the ones occupied by the player (their
-    // distance is weighted with a factor of 2)
-    Point best = Point::null();
-    float max_distance = -1;
-    bool is_trigon = (bd.get_board_type() == BoardType::trigon
-                      || bd.get_board_type() == BoardType::trigon_3);
-    float ratio = (is_trigon ? 1.732f : 1);
-    for (Point p : bd.get_starting_points(c))
-    {
-        if (bd.is_forbidden(p, c))
-            continue;
-        float px = static_cast<float>(p.get_x());
-        float py = static_cast<float>(p.get_y());
-        float d = 0;
-        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        {
-            for (Point pp : bd.get_starting_points(*i))
-            {
-                PointState s = bd.get_point_state(pp);
-                if (! s.is_empty())
-                {
-                    float ppx = static_cast<float>(pp.get_x());
-                    float ppy = static_cast<float>(pp.get_y());
-                    float dx = ppx - px;
-                    float dy = ratio * (ppy - py);
-                    float weight = 1;
-                    if (s == c || s == bd.get_second_color(c))
-                        weight = 2;
-                    d += weight * sqrt(dx * dx + dy * dy);
-                }
-            }
-        }
-        if (d > max_distance)
-        {
-            best = p;
-            max_distance = d;
-        }
-    }
-    return best;
-}
-
-/** Get game result from the view point of a color.
-    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there are
-    n &gt; 2 players, this is generalized in the following way: The scores are
-    sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned a result
-    value of r_i/(n-1). If a multiple players have the same score, the result
-    value is the average of all ranks with this score. So being the single
-    winner still gives the result 1 and having the lowest score gives the
-    result 0. Being the single winner is better than sharing the best place,
-    which is better than getting the second place, etc. */
-Float get_result(const Board& bd, Color c)
-{
-    Variant variant = bd.get_variant();
-    if (variant == Variant::duo || variant == Variant::junior)
-    {
-        unsigned points0 = bd.get_points_with_bonus(Color(0));
-        unsigned points1 = bd.get_points_with_bonus(Color(1));
-        if (c == Color(0))
-        {
-            if (points0 > points1)
-                return 1;
-            else if (points0 < points1)
-                return 0;
-            else
-                return 0.5;
-        }
-        else
-        {
-            if (points1 > points0)
-                return 1;
-            else if (points1 < points0)
-                return 0;
-            else
-                return 0.5;
-        }
-    }
-    else if (variant == Variant::classic
-             || variant == Variant::trigon
-             || variant == Variant::trigon_3)
-    {
-        Color::IntType nu_colors = bd.get_nu_colors();
-        array<unsigned,Color::range> points_array;
-        for (Color::IntType i = 0; i < nu_colors; ++i)
-            points_array[i] = bd.get_points_with_bonus(Color(i));
-        unsigned points = points_array[c.to_int()];
-        sort(points_array.begin(), points_array.begin() + nu_colors);
-        Float result = 0;
-        unsigned n = 0;
-        for (Color::IntType i = 0; i < nu_colors; ++i)
-            if (points_array[i] == points)
-            {
-                result += Float(i) / Float(nu_colors - 1);
-                ++n;
-            }
-        result /= Float(n);
-        return result;
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
-                            || variant == Variant::trigon_2);
-        unsigned points0 =
-            bd.get_points_with_bonus(Color(0))
-            + bd.get_points_with_bonus(Color(2));
-        unsigned points1 =
-            bd.get_points_with_bonus(Color(1))
-            + bd.get_points_with_bonus(Color(3));
-        if (c == Color(0) || c == Color(2))
-        {
-            if (points0 > points1)
-                return 1;
-            else if (points0 < points1)
-                return 0;
-            else
-                return 0.5;
-        }
-        else
-        {
-            if (points1 > points0)
-                return 1;
-            else if (points1 < points0)
-                return 0;
-            else
-                return 0.5;
-        }
-    }
-}
-
 /** Return the symmetric point state for symmetry detection.
     Only used for Variant::duo. Returns the other color or empty, if the
     given point state is empty. */
@@ -315,7 +184,7 @@ void State::compute_features()
     auto& moves = *m_moves[to_play];
     const Geometry& geometry = m_bc->get_geometry();
     Grid<Float> point_value(geometry, 1);
-    for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+    for (ColorIterator i(m_nu_colors); i; ++i)
     {
         if (*i == to_play || *i == second_color)
             continue;
@@ -501,7 +370,7 @@ array<Float,4> State::evaluate_playout()
             log() << "Result: 0.5 (symmetry)\n";
         m_stat_score.add(0);
         array<Float,4> result;
-        for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+        for (ColorIterator i(m_nu_colors); i; ++i)
             result[(*i).to_int()] = 0.5;
         return result;
     }
@@ -512,10 +381,10 @@ array<Float,4> State::evaluate_playout()
 array<Float,4> State::evaluate_terminal()
 {
     array<Float,4> result_array;
-    for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+    for (ColorIterator i(m_nu_colors); i; ++i)
     {
         Float score = Float(m_bd.get_score(*i));
-        Float game_result = get_result(m_bd, *i);
+        Float game_result = get_result(*i);
         Float score_modification = m_shared_const.score_modification;
         // Apply score modification. Example: If score modification is 0.1,
         // the game result is rescaled to [0..0.9] and the score modification
@@ -534,6 +403,50 @@ array<Float,4> State::evaluate_terminal()
     return result_array;
 }
 
+Point State::find_best_starting_point(Color c) const
+{
+    // We use the starting point that maximizes the distance to occupied
+    // starting points, especially to the ones occupied by the player (their
+    // distance is weighted with a factor of 2)
+    Point best = Point::null();
+    float max_distance = -1;
+    bool is_trigon = (m_bd.get_board_type() == BoardType::trigon
+                      || m_bd.get_board_type() == BoardType::trigon_3);
+    float ratio = (is_trigon ? 1.732f : 1);
+    for (Point p : m_bd.get_starting_points(c))
+    {
+        if (m_bd.is_forbidden(p, c))
+            continue;
+        float px = static_cast<float>(p.get_x());
+        float py = static_cast<float>(p.get_y());
+        float d = 0;
+        for (ColorIterator i(m_nu_colors); i; ++i)
+        {
+            for (Point pp : m_bd.get_starting_points(*i))
+            {
+                PointState s = m_bd.get_point_state(pp);
+                if (! s.is_empty())
+                {
+                    float ppx = static_cast<float>(pp.get_x());
+                    float ppy = static_cast<float>(pp.get_y());
+                    float dx = ppx - px;
+                    float dy = ratio * (ppy - py);
+                    float weight = 1;
+                    if (s == c || s == m_bd.get_second_color(c))
+                        weight = 2;
+                    d += weight * sqrt(dx * dx + dy * dy);
+                }
+            }
+        }
+        if (d > max_distance)
+        {
+            best = p;
+            max_distance = d;
+        }
+    }
+    return best;
+}
+
 void State::finish_in_tree()
 {
     if (log_simulations)
@@ -544,8 +457,7 @@ void State::finish_in_tree()
 
 bool State::gen_and_play_playout_move(Move last_good_reply)
 {
-    Color::IntType nu_colors = m_bd.get_nu_colors();
-    if (m_nu_passes == nu_colors)
+    if (m_nu_passes == m_nu_colors)
         return false;
 
     if (m_check_symmetric_draw && ! m_is_symmetry_broken
@@ -582,7 +494,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         // Don't care about the exact score of a playout if we are still early
         // in the game and we know that the playout is a loss because the
         // player has no more moves and the score is already negative.
-        if (m_nu_moves_initial < 10 * nu_colors
+        if (m_nu_moves_initial < 10 * m_nu_colors
             && (variant == Variant::duo || variant == Variant::junior
                 || ((variant == Variant::classic_2
                      || variant == Variant::trigon_2)
@@ -638,8 +550,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
 
 void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
 {
-    Color::IntType nu_colors = m_bd.get_nu_colors();
-    if (m_nu_passes == nu_colors)
+    if (m_nu_passes == m_nu_colors)
         return;
     Color to_play = m_bd.get_to_play();
 
@@ -753,6 +664,92 @@ inline const PieceMap<bool>& State::get_pieces_considered() const
         return m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
 }
 
+/** Get game result from the view point of a color.
+    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there are
+    n &gt; 2 players, this is generalized in the following way: The scores are
+    sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned a result
+    value of r_i/(n-1). If a multiple players have the same score, the result
+    value is the average of all ranks with this score. So being the single
+    winner still gives the result 1 and having the lowest score gives the
+    result 0. Being the single winner is better than sharing the best place,
+    which is better than getting the second place, etc. */
+Float State::get_result(Color c) const
+{
+    Variant variant = m_bd.get_variant();
+    if (variant == Variant::duo || variant == Variant::junior)
+    {
+        unsigned points0 = m_bd.get_points_with_bonus(Color(0));
+        unsigned points1 = m_bd.get_points_with_bonus(Color(1));
+        if (c == Color(0))
+        {
+            if (points0 > points1)
+                return 1;
+            else if (points0 < points1)
+                return 0;
+            else
+                return 0.5;
+        }
+        else
+        {
+            if (points1 > points0)
+                return 1;
+            else if (points1 < points0)
+                return 0;
+            else
+                return 0.5;
+        }
+    }
+    else if (variant == Variant::classic
+             || variant == Variant::trigon
+             || variant == Variant::trigon_3)
+    {
+        array<unsigned,Color::range> points_array;
+        for (Color::IntType i = 0; i < m_nu_colors; ++i)
+            points_array[i] = m_bd.get_points_with_bonus(Color(i));
+        unsigned points = points_array[c.to_int()];
+        sort(points_array.begin(), points_array.begin() + m_nu_colors);
+        Float result = 0;
+        unsigned n = 0;
+        for (Color::IntType i = 0; i < m_nu_colors; ++i)
+            if (points_array[i] == points)
+            {
+                result += Float(i) / Float(m_nu_colors - 1);
+                ++n;
+            }
+        result /= Float(n);
+        return result;
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
+                            || variant == Variant::trigon_2);
+        unsigned points0 =
+            m_bd.get_points_with_bonus(Color(0))
+            + m_bd.get_points_with_bonus(Color(2));
+        unsigned points1 =
+            m_bd.get_points_with_bonus(Color(1))
+            + m_bd.get_points_with_bonus(Color(3));
+        if (c == Color(0) || c == Color(2))
+        {
+            if (points0 > points1)
+                return 1;
+            else if (points0 < points1)
+                return 0;
+            else
+                return 0.5;
+        }
+        else
+        {
+            if (points1 > points0)
+                return 1;
+            else if (points1 < points0)
+                return 0;
+            else
+                return 0.5;
+        }
+    }
+}
+
 void State::init_move_list_with_local(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
@@ -769,7 +766,7 @@ void State::init_move_list_with_local(Color c)
         // only reduces the branching factor but is also necessary because
         // update_move_list() assumes that a move stays legal if the forbidden
         // status for all of its points does not change.
-        Point p = find_best_starting_point(m_bd, c);
+        Point p = find_best_starting_point(c);
         if (! p.is_null())
         {
             for (Piece piece : m_bd.get_pieces_left(c))
@@ -814,7 +811,7 @@ void State::init_move_list_without_local(Color c)
         // only reduces the branching factor but is also necessary because
         // update_move_list() assumes that a move stays legal if the forbidden
         // status for all of its points does not change.
-        Point p = find_best_starting_point(m_bd, c);
+        Point p = find_best_starting_point(c);
         if (! p.is_null())
         {
             for (Piece piece : m_bd.get_pieces_left(c))
@@ -910,6 +907,7 @@ void State::start_search()
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
     m_bc = &m_bd.get_board_const();
+    m_nu_colors = bd.get_nu_colors();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
     const Geometry& geometry = bd.get_geometry();
@@ -931,7 +929,7 @@ void State::start_search()
                 || m_shared_const.to_play == Color(3))
                && m_shared_const.avoid_symmetric_draw)
          && ! check_symmetry_broken());
-    for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+    for (ColorIterator i(m_nu_colors); i; ++i)
         if (! m_moves[*i])
             m_moves[*i].reset(new MoveList());
 
@@ -972,7 +970,7 @@ void State::start_simulation(size_t n)
     ++m_nu_simulations;
     m_bd.restore_snapshot();
     m_consider_all_pieces = false;
-    for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+    for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_has_moves[*i] = true;
         m_is_move_list_initialized[*i] = false;
@@ -1017,16 +1015,14 @@ void State::update_move_list(Color c)
 
     // Find new legal moves because of new pieces played by this color
     for (unsigned i = m_last_update[c]; i < m_bd.get_nu_moves();
-         i += m_bd.get_nu_colors())
+         i += m_nu_colors)
     {
         LIBBOARDGAME_ASSERT(m_bd.get_move(i).color == c);
         Move mv = m_bd.get_move(i).move;
-        if (mv.is_regular())
-        {
+        if (! mv.is_pass())
             for (Point p : get_move_info_ext(mv).attach_points)
                 if (! m_bd.is_forbidden(p, c) && ! m_moves_added_at[c][p])
                     add_moves(p, c);
-        }
     }
 
     // Generate moves for pieces that were not considered in the last position
