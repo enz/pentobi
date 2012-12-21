@@ -277,18 +277,8 @@ bool Board::has_moves(Color c, Point p) const
 {
     for (Piece piece : m_state_color[c].pieces_left)
         for (Move mv : m_board_const->get_moves(piece, p))
-        {
-            const MovePoints& points = get_move_points(mv);
-            bool is_legal = true;
-            for (Point p2 : points)
-                if (m_state_color[c].forbidden[p2])
-                {
-                    is_legal = false;
-                    break;
-                }
-            if (is_legal)
+            if (! is_forbidden(c, mv))
                 return true;
-        }
     return false;
 }
 
