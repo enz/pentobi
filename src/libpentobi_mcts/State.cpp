@@ -525,7 +525,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
         moves = &m_local_moves;
         max_playable_piece_size = m_max_playable_piece_size_local;
         if (log_simulations)
-            log(format("Moves: %i, local: %i, local_val: 0x%02x")
+            log(format("Moves: %i, local: %i, local_val: 0x%03x")
                 % m_moves[to_play]->size() % m_local_moves.size()
                 % m_max_local_value);
     }

@@ -5,6 +5,7 @@
 #ifndef LIBPENTOBI_MCTS_LOCAL_VALUE_H
 #define LIBPENTOBI_MCTS_LOCAL_VALUE_H
 
+#include <algorithm>
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/AdjIterator.h"
 #include "libpentobi_base/Board.h"
@@ -12,6 +13,7 @@
 
 namespace libpentobi_mcts {
 
+using namespace std;
 using libboardgame_base::ArrayList;
 using libboardgame_util::log;
 using libpentobi_base::AdjIterator;
@@ -31,16 +33,8 @@ using libpentobi_base::PointList;
 /** Classify playout moves to prefer local response moves.
     In the playout policy, local response moves are preferred. That is, a
     random move is chosen from the set of moves with the highest local response
-    value. The value is higher if the move occupies more attach points of the
-    last three moves by the opponent (i.e. the last move of each opponent in
-    four-player game variants, the last two opponent moves in Duo, and the last
-    two opponent moves, one of each opponent color, in the game variants with
-    two players and four colors). Within moves with the same number of attach
-    points occupied, the value is higher if it also occupies any point
-    adjacent to the attach points (no matter how many). Using these values
-    will prefer local responses in the playouts without becoming too
-    deterministic. Attach points that are forbidden to the color of the
-    opponent move are not considered. */
+    value. The value depends on the proximity to the last opponent moves and
+    the number of attach points of those moves occupied. */
 class LocalValue
 {
 public:
@@ -95,15 +89,21 @@ inline void LocalValue::Compute::add_move_point(Point p,
 
 inline unsigned LocalValue::Compute::finish()
 {
-    // We only care if it occupied any point ajacent to the attach points, not
-    // how many (attach points use a value of 0x10 adjacent points a value of
-    // 0x01 during computation). This works only as long as there are not more
+    // The bit ranges used in the value work only as long as there are not more
     // than 0x10 points covered by a piece.
     static_assert(PieceInfo::max_size < 0x10, "");
-    if ((m_value & 0xf) != 0)
-        return (m_value & 0xf0) + 1;
+    if (m_value == 0)
+        return 0;
+    if (m_value < 0x010u)
+        // Only 2nd-order adjacent to opp. attach point. Don't care how many.
+        return 0x001u;
+    // Ignore 2nd-order adj. if we have attach points or adj. to attach points
+    unsigned value = m_value & 0xff0u;
+    if ((m_value & 0x0f0u) != 0)
+        // Only care if we have any adj. to attach points, not how many
+        return (value & 0xf00u) + 0x010u;
     else
-        return m_value;
+        return value;
 }
 
 inline void LocalValue::clear()
@@ -145,26 +145,36 @@ inline void LocalValue::init(const Board& bd)
             {
                 if (m_point_value[*j] == 0)
                     m_points.push_back(*j);
-                m_point_value[*j] = 0x10;
+                // Opponent attach point
+                m_point_value[*j] = 0x100u;
                 unsigned nu_adj = 0;
                 for (AdjIterator k(bd, *j); k; ++k)
                     if (! bd.is_forbidden(*k, c))
                     {
                         ++nu_adj;
                         if (m_point_value[*k] == 0)
-                        {
                             m_points.push_back(*k);
-                            m_point_value[*k] = 0x01;
-                        }
+                        // Adjacent to opp. attach point
+                        m_point_value[*k] = max(m_point_value[*k], 0x010u);
+                        for (AdjIterator l(bd, *k); l; ++l)
+                            if (! bd.is_forbidden(*l, c))
+                            {
+                                if (m_point_value[*l] == 0)
+                                    m_points.push_back(*l);
+                                // 2nd-order adjacent to opp. attach point
+                                m_point_value[*l] =
+                                    max(m_point_value[*l], 0x001u);
+                            }
                     }
                 // If occupying the attach point is forbidden for us but there
-                // is only one adjacent point missing to make it a 1-point
-                // hole for the opponent, then occupying this adjacent
-                // point is (almost) as good as occupying the attach point.
+                // is only one adjacent point missing to make it a 1-point hole
+                // for the opponent, then occupying this adjacent point is
+                // (almost) as good as occupying the attach point. (This is
+                // done only for 1-point holes that are forbidden for to_play.)
                 if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
                     for (AdjIterator k(bd, *j); k; ++k)
                         if (! bd.is_forbidden(*k, c))
-                            m_point_value[*k] = 0x10;
+                            m_point_value[*k] = 0x100u;
             }
             ++j;
         }
