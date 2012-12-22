@@ -658,10 +658,14 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
 
 inline const PieceMap<bool>& State::get_pieces_considered() const
 {
-    if (m_consider_all_pieces)
+    // Use number of on-board pieces for move number to handle the case where
+    // there are more pieces on the board than moves (setup positions)
+    unsigned nu_moves = m_bd.get_nu_onboard_pieces();
+    if (nu_moves >= m_shared_const.min_move_all_considered
+        || m_force_consider_all_pieces)
         return m_shared_const.is_piece_considered_all;
     else
-        return m_shared_const.is_piece_considered[m_bd.get_nu_onboard_pieces()];
+        return *m_shared_const.is_piece_considered[nu_moves];
 }
 
 /** Get game result from the view point of a color.
@@ -793,9 +797,9 @@ void State::init_move_list_with_local(Color c)
     }
     m_marker.clear_all_set_known(moves);
     m_is_move_list_initialized[c] = true;
-    if (moves.empty() && ! m_consider_all_pieces)
+    if (moves.empty() && ! m_force_consider_all_pieces)
     {
-        m_consider_all_pieces = true;
+        m_force_consider_all_pieces = true;
         init_move_list_with_local(c);
     }
 }
@@ -855,9 +859,9 @@ void State::init_move_list_without_local(Color c)
     }
     m_marker.clear_all_set_known(moves);
     m_is_move_list_initialized[c] = true;
-    if (moves.empty() && ! m_consider_all_pieces)
+    if (moves.empty() && ! m_force_consider_all_pieces)
     {
-        m_consider_all_pieces = true;
+        m_force_consider_all_pieces = true;
         init_move_list_without_local(c);
     }
 }
@@ -969,7 +973,7 @@ void State::start_simulation(size_t n)
               << "==========================================================\n";
     ++m_nu_simulations;
     m_bd.restore_snapshot();
-    m_consider_all_pieces = false;
+    m_force_consider_all_pieces = false;
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_has_moves[*i] = true;
@@ -1025,35 +1029,26 @@ void State::update_move_list(Color c)
                     add_moves(p, c);
     }
 
-    // Generate moves for pieces that were not considered in the last position
-    if (m_moves[c]->empty())
-        m_consider_all_pieces = true;
-    const PieceMap<bool>& is_piece_considered = get_pieces_considered();
-    bool pieces_considered_changed = false;
-    for (Piece piece : m_bd.get_pieces_left(c))
+    // Generate moves for pieces not considered in the last position
+    auto& is_piece_considered = *m_is_piece_considered[c];
+    if (&is_piece_considered != &m_shared_const.is_piece_considered_all)
     {
-        LIBBOARDGAME_ASSERT(! ((*m_is_piece_considered[c])[piece]
-                               && ! is_piece_considered[piece]));
-        if (! (*m_is_piece_considered[c])[piece] && is_piece_considered[piece])
+        if (m_moves[c]->empty())
+            m_force_consider_all_pieces = true;
+        auto& is_piece_considered_new = get_pieces_considered();
+        if (&is_piece_considered !=  &is_piece_considered_new)
         {
-            pieces_considered_changed = true;
-            break;
-        }
-    }
-    if (pieces_considered_changed)
-    {
-        for (Point p : m_bd.get_attach_points(c))
-            if (! m_bd.is_forbidden(p, c))
-            {
-                unsigned adj_status = m_bd.get_adj_status(p, c);
-                for (Piece piece : m_bd.get_pieces_left(c))
+            for (Point p : m_bd.get_attach_points(c))
+                if (! m_bd.is_forbidden(p, c))
                 {
-                    if (! (*m_is_piece_considered[c])[piece]
-                        && is_piece_considered[piece])
-                        add_moves(p, c, piece, adj_status);
+                    unsigned adj_status = m_bd.get_adj_status(p, c);
+                    for (Piece piece : m_bd.get_pieces_left(c))
+                        if (! is_piece_considered[piece]
+                            && is_piece_considered_new[piece])
+                            add_moves(p, c, piece, adj_status);
                 }
-            }
-        m_is_piece_considered[c] = &is_piece_considered;
+            m_is_piece_considered[c] = &is_piece_considered_new;
+        }
     }
 
     m_marker.clear_all_set_known(*m_moves[c]);

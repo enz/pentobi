@@ -21,6 +21,10 @@ public:
 
     PieceMap(const T& val);
 
+    PieceMap& operator=(const PieceMap& piece_map);
+
+    bool operator==(const PieceMap& piece_map) const;
+
     T& operator[](Piece piece);
 
     const T& operator[](Piece piece) const;
@@ -40,6 +44,23 @@ template<typename T>
 inline PieceMap<T>::PieceMap(const T& val)
 {
     fill(val);
+}
+
+template<typename T>
+PieceMap<T>& PieceMap<T>::operator=(const PieceMap& piece_map)
+{
+    for (unsigned i = 0; i < Piece::range_not_null; ++i)
+        m_a[i] = piece_map.m_a[i];
+    return *this;
+}
+
+template<typename T>
+bool PieceMap<T>::operator==(const PieceMap& piece_map) const
+{
+    for (unsigned i = 0; i < Piece::range_not_null; ++i)
+        if (m_a[i] != piece_map.m_a[i])
+            return false;
+    return true;
 }
 
 template<typename T>

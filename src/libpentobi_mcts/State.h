@@ -72,8 +72,18 @@ struct SharedConst
         therefore in all positions in the search). */
     ColorMap<MoveMarker> is_forbidden_at_root;
 
-    /** Precomputed lists of considered pieces depending on the move number. */
-    array<PieceMap<bool>,Board::max_game_moves> is_piece_considered;
+    /** Minimum move number where all pieces are considered until the rest
+        of the simulation. */
+    unsigned min_move_all_considered;
+
+    /** Precomputed lists of considered pieces depending on the move number.
+        Only initialized for move numbers less than min_move_all_considered.
+        Contains pointers to unique values auch that the comparison of the
+        lists can be done by comparing the pointers to the lists. */
+    array<const PieceMap<bool>*,Board::max_game_moves> is_piece_considered;
+
+    /** List of unique values for is_piece_considered. */
+    ArrayList<PieceMap<bool>,Board::max_game_moves> is_piece_considered_list;
 
     /** Precomputed lists of considered pieces if all pieces are enforced to be
         considered (because using the restricted set of pieces would generate
@@ -239,7 +249,7 @@ private:
     bool m_is_symmetry_broken;
 
     /** Enforce all pieces to be considered for the rest of the simulation. */
-    bool m_consider_all_pieces;
+    bool m_force_consider_all_pieces;
 
     /** Remember attach points that were already used for move generation.
         Allows the incremental update of the move lists to skip attach points

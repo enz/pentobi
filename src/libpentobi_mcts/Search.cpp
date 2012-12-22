@@ -180,8 +180,36 @@ void Search::on_start_search()
             }
     }
 
+    auto& is_piece_considered_list = m_shared_const.is_piece_considered_list;
+    is_piece_considered_list.clear();
     for (unsigned i = 0; i < Board::max_game_moves; ++i)
-        set_pieces_considered(bd, i, m_shared_const.is_piece_considered[i]);
+    {
+        PieceMap<bool> is_piece_considered;
+        set_pieces_considered(bd, i, is_piece_considered);
+        bool are_all_considered = true;
+        for (unsigned j = 0; j < bd.get_nu_pieces(); ++j)
+            if (! is_piece_considered[Piece(j)])
+            {
+                are_all_considered = false;
+                break;
+            }
+        if (are_all_considered)
+        {
+            m_shared_const.min_move_all_considered = i;
+            break;
+        }
+        auto pos = find(is_piece_considered_list.begin(),
+                        is_piece_considered_list.end(),
+                        is_piece_considered);
+        if (pos != is_piece_considered_list.end())
+            m_shared_const.is_piece_considered[i] = pos;
+        else
+        {
+            is_piece_considered_list.push_back(is_piece_considered);
+            m_shared_const.is_piece_considered[i] =
+                &is_piece_considered_list.back();
+        }
+    }
     m_shared_const.is_piece_considered_all.fill(true);
 
     PointTransfRot180<Point> transform;
