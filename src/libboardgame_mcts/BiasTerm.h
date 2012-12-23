@@ -58,7 +58,7 @@ inline Float BiasTerm::get(Float child_count) const
     LIBBOARDGAME_ASSERT(child_count >= 0);
     Float child_part;
     if (child_count < nu_precomp)
-        child_part = m_precomp_child_part[static_cast<size_t>(child_count)];
+        child_part = m_precomp_child_part[static_cast<unsigned>(child_count)];
     else
         child_part = compute_child_part(child_count);
     return m_parent_part * child_part;
@@ -86,7 +86,7 @@ inline void BiasTerm::start_iteration(Float parent_count)
     LIBBOARDGAME_ASSERT(parent_count >= 0);
     if (parent_count < nu_precomp)
         m_parent_part =
-            m_precomp_parent_part[static_cast<size_t>(parent_count)];
+            m_precomp_parent_part[static_cast<unsigned>(parent_count)];
     else
         m_parent_part = compute_parent_part(parent_count);
 }
