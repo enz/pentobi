@@ -1338,42 +1338,28 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     LIBBOARDGAME_ASSERT(node.has_children());
     Float node_count = node.get_count();
     if (log_move_selection)
-    {
         log() << "Search::select_child:\n"
               << "c=" << node_count << '\n'
               << "v=" << node.get_value() << '\n';
-    }
     const Node* best_child = 0;
     Float best_value = -numeric_limits<Float>::max();
     m_bias_term.start_iteration(node_count);
     Float beta =
-        sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
+        (m_rave ?
+         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence)) : 0);
+    Float beta_inv = 1 - beta;
     if (log_move_selection)
         log() << "beta=" << beta << '\n';
     for (ChildIterator i(m_tree, node); i; ++i)
     {
+        Float bias = m_bias_term.get(i->get_count());
+        Float value =
+            beta * i->get_rave_value() + beta_inv * i->get_value() + bias;
         if (log_move_selection)
             log() << get_move_string(i->get_move())
-                  << " | c=" << i->get_count()
-                  << " rc=" << i->get_rave_count();
-        Float child_value = i->get_value();
-        if (log_move_selection)
-            log() << " v=" << child_value;
-        Float value;
-        if (m_rave)
-        {
-            if (log_move_selection)
-                log() << " r=" << i->get_rave_value();
-            value = beta * i->get_rave_value() + (1 - beta) * child_value;
-        }
-        else
-            value = child_value;
-        Float bias = m_bias_term.get(i->get_count());
-        if (log_move_selection)
-            log() << " e=" << bias;
-        value += bias;
-        if (log_move_selection)
-            log() << " | " << value << '\n';
+                  << " | c=" << i->get_count() << " rc=" << i->get_rave_count()
+                  << " v=" << i->get_value() << " r=" << i->get_rave_value()
+                  << " e=" << bias << " | " << value << '\n';
         if (value > best_value)
         {
             best_value = value;
