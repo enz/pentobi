@@ -1545,24 +1545,19 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
         return;
     auto& first_play = thread_state.first_play;
     auto& nodes = thread_state.simulation.nodes;
-    size_t nu_nodes = nodes.size();
+    unsigned nu_nodes = static_cast<unsigned>(nodes.size());
     unsigned i = nu_moves - 1;
     for ( ; i >= nu_nodes; --i)
     {
-        LIBBOARDGAME_ASSERT(i < nu_moves);
         PlayerMove mv = state.get_move(i);
-        unsigned& first = first_play[mv.player][mv.move.to_int()];
-        if (i < first)
-            first = i;
+        if (! state.skip_rave(mv.move))
+            first_play[mv.player][mv.move.to_int()] = i;
     }
     while (true)
     {
-        LIBBOARDGAME_ASSERT(i < nu_moves);
-        LIBBOARDGAME_ASSERT(i < nu_nodes);
         PlayerMove mv = state.get_move(i);
-        unsigned& first = first_play[mv.player][mv.move.to_int()];
-        if (i < first)
-            first = i;
+        if (! state.skip_rave(mv.move))
+            first_play[mv.player][mv.move.to_int()] = i;
         update_rave_values(thread_state, eval, i, mv.player);
         if (i == 0)
             break;
@@ -1591,45 +1586,43 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
         return;
     unsigned len = state.get_nu_moves();
     Float weight_factor = 1 / Float(len - i);
+    unsigned nu_players = get_nu_players();
     for (ChildIterator it(m_tree, *node); it; ++it)
     {
         Move mv = it->get_move();
-        if (! state.skip_rave(mv))
+        auto m = mv.to_int();
+        unsigned first = first_play[player][m];
+        LIBBOARDGAME_ASSERT(first >= i);
+        if (first == numeric_limits<unsigned>::max())
+            continue;
+        if (m_rave_check_same)
         {
-            typename Move::IntType m = mv.to_int();
-            unsigned first = first_play[player][m];
-            LIBBOARDGAME_ASSERT(first >= i);
-            if (first == numeric_limits<unsigned>::max())
-                continue;
-            if (m_rave_check_same)
-            {
-                bool other_played_same = false;
-                for (unsigned i = 0; i < max_players; ++i)
-                    if (i != player)
+            bool other_played_same = false;
+            for (unsigned i = 0; i < nu_players; ++i)
+                if (i != player)
+                {
+                    unsigned first_other = first_play[i][m];
+                    if (first_other >= i && first_other <= first)
                     {
-                        unsigned first_other = first_play[i][m];
-                        if (first_other >= i && first_other <= first)
-                        {
-                            other_played_same = true;
-                            break;
-                        }
+                        other_played_same = true;
+                        break;
                     }
-                if (other_played_same)
-                    continue;
-            }
-            Float weight;
-            if (m_weight_rave_updates)
-                // Weight decreases linearly from 2 at the start to 1 at the
-                // end of a simulation. Being proportional to the relative move
-                // distance (by dividing it by the length of the simulation),
-                // is essential for a positive effect of rave weighting,
-                // however the scaling to [2..1] could not be optimal for
-                // different games and should be made configurable in the future
-                weight = 2 - Float(first - i) * weight_factor;
-            else
-                weight = 1;
-            m_tree.add_rave_value(*it, eval[player], weight);
+                }
+            if (other_played_same)
+                continue;
         }
+        Float weight;
+        if (m_weight_rave_updates)
+            // Weight decreases linearly from 2 at the start to 1 at the end of
+            // a simulation. Being proportional to the relative move distance
+            // (by dividing it by the length of the simulation) is essential
+            // for a positive effect of rave weighting, however the scaling to
+            // [2..1] could not be optimal for different games and should be
+            // made configurable in the future
+            weight = 2 - Float(first - i) * weight_factor;
+        else
+            weight = 1;
+        m_tree.add_rave_value(*it, eval[player], weight);
     }
 }
 
