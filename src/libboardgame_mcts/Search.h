@@ -1018,8 +1018,8 @@ void Search<S,M,P>::playout(ThreadState& thread_state)
     state.start_playout();
     while (true)
     {
-        Move last_good_reply_1;
-        Move last_good_reply_2;
+        Move last_good_reply_1 = Move::null();
+        Move last_good_reply_2 = Move::null();
         if (m_use_last_good_reply)
         {
             unsigned nu_moves = state.get_nu_moves();
@@ -1033,11 +1033,6 @@ void Search<S,M,P>::playout(ThreadState& thread_state)
                                       second_last_mv, last_good_reply_1,
                                       last_good_reply_2);
             }
-        }
-        else
-        {
-            last_good_reply_1 = Move::null();
-            last_good_reply_2 = Move::null();
         }
         if (! state.gen_and_play_playout_move(last_good_reply_1,
                                               last_good_reply_2))
