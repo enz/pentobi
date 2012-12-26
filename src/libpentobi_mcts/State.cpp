@@ -117,10 +117,24 @@ State::~State() throw()
 
 inline void State::add_moves(Point p, Color c)
 {
+    auto& moves = *m_moves[c];
     unsigned adj_status = m_bd.get_adj_status(p, c);
+    auto& is_forbidden = m_bd.is_forbidden(c);
+    auto& is_forbidden_at_root = m_shared_const.is_forbidden_at_root[c];
     for (Piece piece : m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
-            add_moves(p, c, piece, adj_status);
+        {
+            Board::LocalMovesListRange move_candidates =
+                m_bc->get_moves(piece, p, adj_status);
+            for (auto i = move_candidates.begin(); i != move_candidates.end();
+                 ++i)
+                if (! is_forbidden_at_root[*i] && ! m_marker[*i]
+                    && check_move(is_forbidden, *i, get_move_info(*i).points))
+                {
+                    m_marker.set(*i);
+                    moves.push_back(*i);
+                }
+        }
     m_moves_added_at[c].set(p);
 }
 
