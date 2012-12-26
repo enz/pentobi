@@ -206,7 +206,7 @@ void Engine::cmd_gen_playout_move(Response& response)
     state.start_search();
     state.start_simulation(0);
     state.finish_in_tree();
-    if (! state.gen_and_play_playout_move(Move::null()))
+    if (! state.gen_and_play_playout_move(Move::null(), Move::null()))
         throw Failure("terminal playout position");
     const Board& bd = get_board();
     response << bd.to_string(state.get_move(state.get_nu_moves() - 1).move);

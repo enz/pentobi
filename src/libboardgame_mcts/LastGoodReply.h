@@ -49,7 +49,8 @@ public:
 
     void forget(unsigned player, Move last_mv, Move second_last_mv, Move reply);
 
-    Move get(unsigned player, Move last_mv, Move second_last_mv) const;
+    void get(unsigned player, Move last_mv, Move second_last_mv,
+             Move& last_good_reply_1, Move& last_good_reply_2) const;
 
 private:
     typedef atomic<typename Move::IntType> AtomicMove;
@@ -82,19 +83,22 @@ inline size_t LastGoodReply<S,M,P>::get_index(Move last_mv,
 }
 
 template<class S, class M, unsigned P>
-inline M LastGoodReply<S,M,P>::get(unsigned player, Move last_mv,
-                                   Move second_last_mv) const
+inline void LastGoodReply<S,M,P>::get(unsigned player, Move last_mv,
+                                      Move second_last_mv,
+                                      Move& last_good_reply_1,
+                                      Move& last_good_reply_2) const
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
-    Move reply;
     if (! second_last_mv.is_null())
     {
         auto index = get_index(last_mv, second_last_mv);
-        reply = Move(m_reply_2[player][index].load(memory_order_relaxed));
-        if (! reply.is_null())
-            return reply;
+        last_good_reply_2 =
+            Move(m_reply_2[player][index].load(memory_order_relaxed));
     }
-    return Move(m_reply_1[player][last_mv.to_int()].load(memory_order_relaxed));
+    else
+        last_good_reply_2 = Move::null();
+    last_good_reply_1 =
+        Move(m_reply_1[player][last_mv.to_int()].load(memory_order_relaxed));
 }
 
 template<class S, class M, unsigned P>

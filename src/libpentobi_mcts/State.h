@@ -136,7 +136,8 @@ public:
 
     /** Generate and play a playout move.
         @return @c false if end of game was reached, and no move was played */
-    bool gen_and_play_playout_move(Move last_good_reply);
+    bool gen_and_play_playout_move(Move last_good_reply_1,
+                                   Move last_good_reply_2);
 
     array<Float,4> evaluate_playout();
 

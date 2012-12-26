@@ -469,7 +469,8 @@ void State::finish_in_tree()
         m_is_symmetry_broken = check_symmetry_broken();
 }
 
-bool State::gen_and_play_playout_move(Move last_good_reply)
+bool State::gen_and_play_playout_move(Move last_good_reply_1,
+                                      Move last_good_reply_2)
 {
     if (m_nu_passes == m_nu_colors)
         return false;
@@ -485,12 +486,20 @@ bool State::gen_and_play_playout_move(Move last_good_reply)
 
     Color to_play = m_bd.get_to_play();
     ++m_nu_playout_moves;
-    if (last_good_reply.is_regular() && m_bd.is_legal(last_good_reply))
+    if (last_good_reply_2.is_regular() && m_bd.is_legal(last_good_reply_2))
     {
         if (log_simulations)
-            log() << "Playing last good reply\n";
+            log() << "Playing last good reply 2\n";
         ++m_nu_last_good_reply_moves;
-        play_playout_nonpass(last_good_reply);
+        play_playout_nonpass(last_good_reply_2);
+        return true;
+    }
+    if (last_good_reply_1.is_regular() && m_bd.is_legal(last_good_reply_1))
+    {
+        if (log_simulations)
+            log() << "Playing last good reply 1\n";
+        ++m_nu_last_good_reply_moves;
+        play_playout_nonpass(last_good_reply_1);
         return true;
     }
 
