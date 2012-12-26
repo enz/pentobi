@@ -152,19 +152,21 @@ inline void LocalValue::init(const Board& bd)
                     if (! bd.is_forbidden(*k, c))
                     {
                         ++nu_adj;
-                        if (m_point_value[*k] == 0)
-                            m_points.push_back(*k);
-                        // Adjacent to opp. attach point
-                        m_point_value[*k] = max(m_point_value[*k], 0x010u);
-                        for (AdjIterator l(bd, *k); l; ++l)
-                            if (! bd.is_forbidden(*l, c))
-                            {
-                                if (m_point_value[*l] == 0)
-                                    m_points.push_back(*l);
-                                // 2nd-order adjacent to opp. attach point
-                                m_point_value[*l] =
-                                    max(m_point_value[*l], 0x001u);
-                            }
+                        if (m_point_value[*k] < 0x010u)
+                        {
+                            if (m_point_value[*k] == 0)
+                                m_points.push_back(*k);
+                            // Adjacent to opp. attach point
+                            m_point_value[*k] = 0x010u;
+                            for (AdjIterator l(bd, *k); l; ++l)
+                                if (! bd.is_forbidden(*l, c))
+                                    if (m_point_value[*l] == 0)
+                                    {
+                                        m_points.push_back(*l);
+                                        // 2nd-order adj. to opp. attach point
+                                        m_point_value[*l] = 0x001u;
+                                    }
+                        }
                     }
                 // If occupying the attach point is forbidden for us but there
                 // is only one adjacent point missing to make it a 1-point hole
