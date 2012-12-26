@@ -31,12 +31,12 @@ using libpentobi_base::PieceMap;
 namespace {
 
 const string pieceLayoutClassic =
-    " 1 .V3V3 .L4L4L4 .T4 . . .Z4Z4 .L5L5L5L5 .V5V5V5 . . . . N N . . . ."
-    " . . .V3 . . .L4 .T4T4 .Z4Z4 . .L5 . . . .V5 . . .T5 . . . N N N .I5"
-    " 2 2 . . .I4 . . .T4 . . . . . . . . X . .V5 .T5T5T5 . . . . . . .I5"
-    " . . .I3 .I4 . P . . . W W . F . . X X X . . . . .T5 .Z5Z5 . U U .I5"
-    " O O .I3 .I4 . P P . W W . . F F . . X . . Y . . . . .Z5 . . . U .I5"
-    " O O .I3 .I4 . P P . W . . F F . . . . . Y Y Y Y . .Z5Z5 . . U U .I5";
+    " 1 .V3V3 .L4L4L4 .T4 . . .Z4Z4 .L5L5L5L5 .V5V5V5 . U U U . N . . ."
+    " . . .V3 . . .L4 .T4T4 .Z4Z4 . .L5 . . . .V5 . . . U . U . N N .I5"
+    " 2 2 . . .I4 . . .T4 . . . . . . . . X . .V5 .Z5 . . . . . . N .I5"
+    " . . .I3 .I4 . P . . . W W . F . . X X X . . .Z5Z5Z5 . .T5 . N .I5"
+    " O O .I3 .I4 . P P . W W . . F F . . X . . Y . . .Z5 . .T5 . . .I5"
+    " O O .I3 .I4 . P P . W . . F F . . . . . Y Y Y Y . . .T5T5T5 . .I5";
 
 const string pieceLayoutJunior =
     "1 . 1 . V3V3. . L4L4L4. T4T4T4. . O O . O O . P P . . I5. I5. . L5L5"
@@ -106,7 +106,7 @@ int PieceSelector::heightForWidth(int width) const
     // Use ratio for layout of classic pieces, which has larger relative width
     // because the limiting factor in the right panel of the main window is the
     // width
-    return width / 34 * 6;
+    return width / 33 * 6;
 }
 
 void PieceSelector::init()
@@ -129,7 +129,7 @@ void PieceSelector::init()
     else
     {
         pieceLayout = &pieceLayoutClassic;
-        m_nuColumns = 34;
+        m_nuColumns = 33;
         m_nuRows = 6;
     }
     for (unsigned y = 0; y < m_nuRows; ++y)
