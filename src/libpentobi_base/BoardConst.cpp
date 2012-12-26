@@ -605,7 +605,6 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         m_move_info_ext.reserve(Move::onboard_moves_duo);
     }
     m_nu_pieces = static_cast<unsigned>(m_pieces.size());
-    m_max_attach_points.fill(0);
     init_adj_status();
     create_moves();
     if (board_type == BoardType::classic)
@@ -956,8 +955,6 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
                 m_marker.set(*j);
                 info_ext.attach_points.push_back(*j);
             }
-    m_max_attach_points[info.piece] =
-        max(m_max_attach_points[info.piece], info_ext.attach_points.size());
 }
 
 string BoardConst::to_string(Move mv, bool with_piece_name) const
