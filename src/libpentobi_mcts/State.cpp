@@ -901,10 +901,8 @@ void State::play_expanded_child(Move mv)
 
 void State::play_playout_pass()
 {
-    Color to_play = m_bd.get_to_play();
-    m_bd.play_pass(to_play);
+    m_bd.play_pass();
     ++m_nu_passes;
-    to_play = m_bd.get_to_play();
     // Don't try to handle pass moves: a pass move either breaks symmetry
     // or both players have passed and it's the end of the game and we need
     // symmetry detection only as a heuristic ((playouts and move value
@@ -916,11 +914,9 @@ void State::play_playout_pass()
 
 void State::play_playout_nonpass(Move mv)
 {
-    Color to_play = m_bd.get_to_play();
-    LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
-    m_bd.play_nonpass(to_play, mv);
+    LIBBOARDGAME_ASSERT(m_bd.is_legal(mv));
+    m_bd.play_nonpass(mv);
     m_nu_passes = 0;
-    to_play = m_bd.get_to_play();
     if (m_check_symmetric_draw && ! m_is_symmetry_broken)
         update_symmetry_broken(mv);
     if (log_simulations)

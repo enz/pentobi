@@ -168,10 +168,20 @@ public:
         @pre get_nu_moves() < max_game_moves */
     void play_pass(Color c);
 
+    /** Play a pass move for the current color to play.
+        @pre get_nu_moves() < max_game_moves */
+    void play_pass();
+
     /** Play a move that is known to be not a pass move.
         Slightly faster than play(Color,Move)
         @pre get_nu_moves() < max_game_moves */
     void play_nonpass(Color c, Move move);
+
+    /** Play a move that is known to be not a pass move for the current color
+        to play.
+        Slightly faster than play(Move)
+        @pre get_nu_moves() < max_game_moves */
+    void play_nonpass(Move move);
 
     /** See play(Color,Move) */
     void play(ColorMove move);
@@ -837,10 +847,20 @@ inline void Board::play_nonpass(Color c, Move mv)
     m_state_base.to_play = get_next(c);
 }
 
+inline void Board::play_nonpass(Move mv)
+{
+    play_nonpass(m_state_base.to_play, mv);
+}
+
 inline void Board::play_pass(Color c)
 {
     m_moves.push_back(ColorMove(c, Move::pass()));
     m_state_base.to_play = get_next(c);
+}
+
+inline void Board::play_pass()
+{
+    play_pass(m_state_base.to_play);
 }
 
 inline void Board::play(Move move)
