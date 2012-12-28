@@ -631,9 +631,9 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             continue;
 
         // Convert the heuristic, which is so far estimated in score points,
-        // into a value in [0..1] by making it relative to the heuristic
-        // of the best move and let it decrease exponentially with a certain
-        // width.
+        // into a win/loss value in [0..1] by making it relative to the
+        // heuristic of the best move and let it decrease exponentially with a
+        // certain width.
         Float heuristic = 0.3f * (m_max_heuristic - features.heuristic);
         // Piecewise linear approximation of exp(-x) (make sure the
         // approximation is always greater than 0 and is always monotonically
@@ -646,35 +646,36 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             heuristic = 0.27f - 0.08f * (heuristic - 0.27f);
         else
             heuristic = 0.0248f / (heuristic - 3.0f);
-
         // Rescale to [0.1..1]. If the value is too close to 0, the move might
         // never get explored (in practice) if the bias term constant is small.
-        Float value = 1 * (0.1f + 0.9f * heuristic);
-        Float count = 1;
+        heuristic = 0.1f + 0.9f * heuristic;
 
-        value += init_val;
-        count += 1;
+        // Initialize value from heuristic and init_val, each with a count of 1
+        Float value = 0.5f * heuristic + 0.5f * init_val;
+        Float count = 2;
 
-        // Encourage to explore a move that keeps or breaks symmetry
-        // See also the comment in evaluate_playout()
+        // If a symmetric draw is still possible, encourage exploring a move
+        // that keeps or breaks the symmetry by adding 5 wins or 5 losses
+        // (use 0.1 for a loss to avoid values too close to 0). See also the
+        // comment in evaluate_playout()
         if (! symmetric_mv.is_null())
         {
             if (mv == symmetric_mv)
-                value += 5 * 1.0f;
+                value = (2.f / 7.f) * value + (5.f / 7.f) * 1.0f;
             else
-                value += 5 * 0.1f;
-            count += 5;
+                value += (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
+            count = 7;
         }
         else if (has_symmetry_breaker)
         {
+            // Add five wins or (nearly) losses
             if (get_move_info_ext(mv).breaks_symmetry)
-                value += 5 * 1.0f;
+                value = (2.f / 7.f) * value + (5.f / 7.f) * 1.0f;
             else
-                value += 5 * 0.1f;
-            count += 5;
+                value += (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
+            count = 7;
         }
 
-        value /= count;
         expander.add_child(mv, value, count, value, count);
     }
 }
