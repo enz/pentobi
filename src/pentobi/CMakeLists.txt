@@ -91,13 +91,14 @@ target_link_libraries(pentobi
   )
 endif()
 
-install(TARGETS pentobi DESTINATION games)
+install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install translation files. If you change the destination, you need to
-# update the directory used in Main.cpp:loadPentobiTranslator()
-install(FILES ${pentobi_QM_SRCS} DESTINATION share/games/pentobi/translations)
+# update the default for PENTOBI_TRANSLATIONS in the main CMakeLists.txt
+install(FILES ${pentobi_QM_SRCS}
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/pentobi/translations)
 
-install(DIRECTORY manual DESTINATION share/games/pentobi
+install(DIRECTORY manual DESTINATION ${CMAKE_INSTALL_DOCDIR}
   FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png")
 
 if(MSVC)

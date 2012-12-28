@@ -59,6 +59,6 @@ add_library(pentobi_gui STATIC
   ${pentobi_gui_QM_SRCS})
 
 # Install translation files. If you change the destination, you need to
-# update the directory used in
-# src/pentobi/Main.cpp:loadLibPentobiGuiTranslator()
-install(FILES ${pentobi_gui_QM_SRCS} DESTINATION share/games/pentobi/translations)
+# update the default for PENTOBI_TRANSLATIONS in the main CMakeLists.txt
+install(FILES ${pentobi_gui_QM_SRCS}
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/pentobi/translations)

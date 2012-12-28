@@ -1,22 +1,22 @@
 cmake_minimum_required(VERSION 2.8.9)
-project(Pentobi)
+# Use all lower-case for project name because it is used in
+# CMAKE_INSTALL_DOCDIR of GNUInstallDirs
+project(pentobi)
 set(PENTOBI_VERSION 5.UNKNOWN)
 
 include(CheckIncludeFiles)
+include(GNUInstallDirs)
 
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
 option(PENTOBI_BUILD_KDE_THUMBNAILER
   "Build thumbnailer for KDE (also requires PENTOBI_BUILD_GUI)" OFF)
-option(PENTOBI_REGISTER_GNOME2_THUMBNAILER
-  "Install files for registering thumbnailer for old versions of Gnome" ON)
 
 if(NOT CMAKE_BUILD_TYPE)
   message(STATUS "No build type selected, default to Release")
   set(CMAKE_BUILD_TYPE "Release")
 endif()
-
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DLIBBOARDGAME_DEBUG)
 endif()
@@ -68,24 +68,26 @@ endif()
 if(NOT DEFINED LIBBOARDGAME_MCTS_FLOAT_TYPE)
   set(LIBBOARDGAME_MCTS_FLOAT_TYPE float)
 endif()
-if(NOT DEFINED PENTOBI_BOOKS_DIR)
-  if(UNIX AND NOT APPLE)
-    set(PENTOBI_BOOKS_DIR
-      "${CMAKE_INSTALL_PREFIX}/share/games/pentobi/books")
+
+# Don't set the Pentobi data dirs on Windows. This is currently needed for
+# building a version of Pentobi for the NSIS installer on Windows (see
+# directory windows_installer) such that Pentobi will look for data dirs
+# relative to the installation directory. However, it breaks installing
+# Pentobi on Windows with "make install" if a Unix-like filesystem structure
+# is preferred.
+if(UNIX)
+  if(NOT DEFINED PENTOBI_BOOKS_DIR)
+    set(PENTOBI_BOOKS_DIR "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/books")
   endif()
-endif()
-if(NOT DEFINED PENTOBI_MANUAL_DIR)
-  if(UNIX AND NOT APPLE)
-    set(PENTOBI_MANUAL_DIR
-      "${CMAKE_INSTALL_PREFIX}/share/games/pentobi/manual")
+  if(NOT DEFINED PENTOBI_MANUAL_DIR)
+    set(PENTOBI_MANUAL_DIR "${CMAKE_INSTALL_FULL_DOCDIR}/manual")
   endif()
-endif()
-if(NOT DEFINED PENTOBI_TRANSLATIONS)
-  if(UNIX AND NOT APPLE)
+  if(NOT DEFINED PENTOBI_TRANSLATIONS)
     set(PENTOBI_TRANSLATIONS
-      "${CMAKE_INSTALL_PREFIX}/share/games/pentobi/translations")
+      "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/translations")
   endif()
-endif()
+endif(UNIX)
+
 configure_file(config-cmake.h.in config.h)
 add_definitions(-DHAVE_CONFIG_H)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -98,20 +100,18 @@ if(PENTOBI_BUILD_GUI)
   find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
 endif()
 
-if(UNIX)
 add_custom_target(dist
   COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD
   | gzip --best > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.gz
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-endif()
 
-if(UNIX AND NOT APPLE)
-  add_custom_target(post-install
-    COMMAND
-    update-desktop-database ${CMAKE_INSTALL_PREFIX}/share/applications\;
-    update-mime-database ${CMAKE_INSTALL_PREFIX}/share/mime\;
+add_custom_target(post-install
+  COMMAND
+  update-desktop-database ${CMAKE_INSTALL_DATAROOTDIR}/applications\;
+  update-mime-database ${CMAKE_INSTALL_DATAROOTDIR}/mime\;
   )
-endif()
+
+install(FILES README NEWS COPYING DESTINATION ${CMAKE_INSTALL_DOCDIR})
 
 add_subdirectory(doc)
 add_subdirectory(src)
