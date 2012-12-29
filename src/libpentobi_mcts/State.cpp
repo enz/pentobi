@@ -173,7 +173,8 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
     while (i != end);
     auto local_value = compute_local.finish();
     auto piece_size = points.size();
-    m_max_playable_piece_size = max(m_max_playable_piece_size, piece_size);
+    if (piece_size > m_max_playable_piece_size)
+        m_max_playable_piece_size = piece_size;
     if (local_value >= m_max_local_value)
     {
         if (local_value > m_max_local_value)
@@ -182,9 +183,8 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
             m_max_local_value = local_value;
             m_max_playable_piece_size_local = piece_size;
         }
-        else
-            m_max_playable_piece_size_local =
-                max(m_max_playable_piece_size_local, piece_size);
+        else if (piece_size > m_max_playable_piece_size_local)
+            m_max_playable_piece_size_local = piece_size;
         m_local_moves.push_back(mv);
     }
     return true;
