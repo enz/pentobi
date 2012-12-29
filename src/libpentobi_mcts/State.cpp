@@ -310,7 +310,8 @@ void State::compute_features()
             m_min_dist_to_center =
                 min(m_min_dist_to_center, features.dist_to_center);
         }
-        m_max_heuristic = max(m_max_heuristic, features.heuristic);
+        if (features.heuristic > m_max_heuristic)
+            m_max_heuristic = features.heuristic;
     }
 }
 
