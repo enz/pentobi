@@ -30,7 +30,7 @@ RatedGamesList::RatedGamesList(QWidget* parent)
     m_model = new QStandardItemModel(this);
     setModel(m_model);
     connect(this, SIGNAL(doubleClicked(const QModelIndex&)),
-            this, SLOT(activateGame(const QModelIndex&)));
+            SLOT(activateGame(const QModelIndex&)));
 }
 
 void RatedGamesList::activateGame(const QModelIndex& index)

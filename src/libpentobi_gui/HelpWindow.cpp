@@ -63,10 +63,10 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     setIcon(m_actionHome, "go-home");
     connect(m_actionHome, SIGNAL(triggered()), browser, SLOT(home()));
     connect(browser, SIGNAL(sourceChanged(const QUrl&)),
-            this, SLOT(handleSourceChanged(const QUrl&)));
+            SLOT(handleSourceChanged(const QUrl&)));
     QAction* actionClose = new QAction("", this);
     actionClose->setShortcut(QKeySequence::Close);
-    connect(actionClose, SIGNAL(triggered()), this, SLOT(hide()));
+    connect(actionClose, SIGNAL(triggered()), SLOT(hide()));
     addAction(actionClose);
     QToolBar* toolBar = new QToolBar(this);
     toolBar->setMovable(false);

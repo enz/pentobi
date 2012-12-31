@@ -17,8 +17,6 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(tr("Game Analysis"));
-    // Disable '?' button in title bar on Windows, we don't have
-    // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
@@ -26,7 +24,7 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     layout->addWidget(analyzeGameWidget);
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
     buttonBox->setFocus();
 }
 

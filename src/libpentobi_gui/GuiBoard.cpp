@@ -59,7 +59,7 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
     setMinimumWidth(14 * (Point::max_width + 2));
     setMinimumHeight(14 * (Point::max_height + 2));
     connect(&m_currentMoveShownAnimationTimer, SIGNAL(timeout()),
-            this, SLOT(showMoveAnimation()));
+            SLOT(showMoveAnimation()));
 }
 
 GuiBoard::~GuiBoard()

@@ -19,8 +19,6 @@ InitialRatingDialog::InitialRatingDialog(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(tr("Initial Rating"));
-    // Disable '?' button in title bar on Windows, we don't have
-    // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
@@ -43,12 +41,12 @@ InitialRatingDialog::InitialRatingDialog(QWidget* parent)
     m_ratingLabel = new QLabel();
     layout->addWidget(m_ratingLabel);
     setRating(1000);
-    connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(setRating(int)));
+    connect(m_slider, SIGNAL(valueChanged(int)), SLOT(setRating(int)));
     QDialogButtonBox* buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
 void InitialRatingDialog::setRating(int rating)

@@ -246,11 +246,11 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_player->set_use_book(! noBook);
     createToolBar();
     connect(&m_genMoveWatcher, SIGNAL(finished()),
-            this, SLOT(genMoveFinished()));
+            SLOT(genMoveFinished()));
     connect(m_guiBoard, SIGNAL(play(Color, Move)),
-            this, SLOT(placePiece(Color, Move)));
+            SLOT(placePiece(Color, Move)));
     connect(m_guiBoard, SIGNAL(pointClicked(Point)),
-            this, SLOT(pointClicked(Point)));
+            SLOT(pointClicked(Point)));
     connect(m_actionMoveSelectedPieceLeft, SIGNAL(triggered()),
             m_guiBoard, SLOT(moveSelectedPieceLeft()));
     connect(m_actionMoveSelectedPieceRight, SIGNAL(triggered()),
@@ -420,10 +420,10 @@ void MainWindow::analyzeGame()
     m_analyzeGameWindow->show();
     m_isAnalyzeRunning = true;
     connect(m_analyzeGameWindow->analyzeGameWidget, SIGNAL(finished()),
-            this, SLOT(analyzeGameFinished()));
+            SLOT(analyzeGameFinished()));
     connect(m_analyzeGameWindow->analyzeGameWidget,
             SIGNAL(gotoPosition(Variant,const vector<ColorMove>&)),
-            this, SLOT(gotoPosition(Variant,const vector<ColorMove>&)));
+            SLOT(gotoPosition(Variant,const vector<ColorMove>&)));
     size_t nuSimulations;
     switch (speed)
     {
@@ -750,105 +750,102 @@ void MainWindow::createActions()
 
     m_actionAbout = createAction(tr("&About"));
     m_actionAbout->setIcon(QIcon::fromTheme("help-about"));
-    connect(m_actionAbout, SIGNAL(triggered()), this, SLOT(about()));
+    connect(m_actionAbout, SIGNAL(triggered()), SLOT(about()));
 
     m_actionAnalyzeGame = createAction(tr("&Analyze Game..."));
-    connect(m_actionAnalyzeGame, SIGNAL(triggered()),
-            this, SLOT(analyzeGame()));
+    connect(m_actionAnalyzeGame, SIGNAL(triggered()), SLOT(analyzeGame()));
 
     m_actionBackward = createAction(tr("B&ackward"));
     m_actionBackward->setToolTip(tr("Go one move backward"));
     m_actionBackward->setPriority(QAction::LowPriority);
     setIcon(m_actionBackward, "pentobi-backward");
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
-    connect(m_actionBackward, SIGNAL(triggered()), this, SLOT(backward()));
+    connect(m_actionBackward, SIGNAL(triggered()), SLOT(backward()));
 
     m_actionBackward10 = createAction(tr("10 Back&ward"));
     m_actionBackward10->setToolTip(tr("Go ten moves backward"));
     m_actionBackward10->setPriority(QAction::LowPriority);
     setIcon(m_actionBackward10, "pentobi-backward10");
     m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
-    connect(m_actionBackward10, SIGNAL(triggered()), this, SLOT(backward10()));
+    connect(m_actionBackward10, SIGNAL(triggered()), SLOT(backward10()));
 
     m_actionBackToMainVariation = createAction(tr("Back to &Main Variation"));
     m_actionBackToMainVariation->setShortcut(QString("Ctrl+M"));
     connect(m_actionBackToMainVariation, SIGNAL(triggered()),
-            this, SLOT(backToMainVariation()));
+            SLOT(backToMainVariation()));
 
     m_actionBadMove = createAction(tr("&Bad"));
     m_actionBadMove->setActionGroup(groupMoveAnnotation);
     m_actionBadMove->setCheckable(true);
-    connect(m_actionBadMove, SIGNAL(triggered(bool)),
-            this, SLOT(badMove(bool)));
+    connect(m_actionBadMove, SIGNAL(triggered(bool)), SLOT(badMove(bool)));
 
     m_actionBeginning = createAction(tr("&Beginning"));
     m_actionBeginning->setToolTip(tr("Go to beginning of game"));
     m_actionBeginning->setPriority(QAction::LowPriority);
     setIcon(m_actionBeginning, "pentobi-beginning");
     m_actionBeginning->setShortcut(QString("Ctrl+Home"));
-    connect(m_actionBeginning, SIGNAL(triggered()), this, SLOT(beginning()));
+    connect(m_actionBeginning, SIGNAL(triggered()), SLOT(beginning()));
 
     m_actionBeginningOfBranch = createAction(tr("Beginning of Bran&ch"));
     m_actionBeginningOfBranch->setShortcut(QString("Ctrl+B"));
     connect(m_actionBeginningOfBranch, SIGNAL(triggered()),
-            this, SLOT(beginningOfBranch()));
+            SLOT(beginningOfBranch()));
 
     m_actionClearSelectedPiece = createAction(tr("Clear Piece"));
     setIcon(m_actionClearSelectedPiece, "pentobi-piece-clear");
     m_actionClearSelectedPiece->setShortcut(QString("0"));
     connect(m_actionClearSelectedPiece, SIGNAL(triggered()),
-            this, SLOT(clearSelectedPiece()));
+            SLOT(clearSelectedPiece()));
 
     m_actionComputerColors = createAction(tr("&Computer Colors"));
     m_actionComputerColors->setToolTip(
                                   tr("Set the colors played by the computer"));
     setIcon(m_actionComputerColors, "pentobi-computer-color");
     connect(m_actionComputerColors, SIGNAL(triggered()),
-            this, SLOT(computerColors()));
+            SLOT(computerColors()));
 
     m_actionCoordinates = createAction(tr("C&oordinates"));
     m_actionCoordinates->setCheckable(true);
     connect(m_actionCoordinates, SIGNAL(triggered(bool)),
-            this, SLOT(coordinates(bool)));
+            SLOT(coordinates(bool)));
 
     m_actionDeleteAllVariations = createAction(tr("&Delete All Variations"));
     connect(m_actionDeleteAllVariations, SIGNAL(triggered()),
-            this, SLOT(deleteAllVariations()));
+            SLOT(deleteAllVariations()));
 
     m_actionDoubtfulMove = createAction(tr("&Doubtful"));
     m_actionDoubtfulMove->setActionGroup(groupMoveAnnotation);
     m_actionDoubtfulMove->setCheckable(true);
     connect(m_actionDoubtfulMove, SIGNAL(triggered(bool)),
-            this, SLOT(doubtfulMove(bool)));
+            SLOT(doubtfulMove(bool)));
 
     m_actionEnd = createAction(tr("&End"));
     m_actionEnd->setToolTip(tr("Go to end of moves"));
     m_actionEnd->setPriority(QAction::LowPriority);
     m_actionEnd->setShortcut(QString("Ctrl+End"));
     setIcon(m_actionEnd, "pentobi-end");
-    connect(m_actionEnd, SIGNAL(triggered()), this, SLOT(end()));
+    connect(m_actionEnd, SIGNAL(triggered()), SLOT(end()));
 
     m_actionExportAsciiArt = createAction(tr("&ASCII Art"));
     connect(m_actionExportAsciiArt, SIGNAL(triggered()),
-            this, SLOT(exportAsciiArt()));
+            SLOT(exportAsciiArt()));
 
     m_actionExportImage = createAction(tr("I&mage"));
-    connect(m_actionExportImage, SIGNAL(triggered()),
-            this, SLOT(exportImage()));
+    connect(m_actionExportImage, SIGNAL(triggered()), SLOT(exportImage()));
 
     m_actionFindMove = createAction(tr("&Find Move"));
     m_actionFindMove->setShortcut(QString("F6"));
-    connect(m_actionFindMove, SIGNAL(triggered()), this, SLOT(findMove()));
+    connect(m_actionFindMove, SIGNAL(triggered()), SLOT(findMove()));
 
     m_actionFindNextComment = createAction(tr("Find Next &Comment"));
     m_actionFindNextComment->setShortcut(QString("F3"));
     connect(m_actionFindNextComment, SIGNAL(triggered()),
-            this, SLOT(findNextComment()));
+            SLOT(findNextComment()));
 
     m_actionFlipPieceHorizontally = createAction(tr("Flip Horizontally"));
     setIcon(m_actionFlipPieceHorizontally, "pentobi-flip-horizontal");
     connect(m_actionFlipPieceHorizontally, SIGNAL(triggered()),
-            this, SLOT(flipPieceHorizontally()));
+            SLOT(flipPieceHorizontally()));
 
     m_actionFlipPieceVertically = createAction(tr("Flip Vertically"));
     setIcon(m_actionFlipPieceVertically, "pentobi-flip-vertical");
@@ -858,74 +855,73 @@ void MainWindow::createActions()
     m_actionForward->setPriority(QAction::LowPriority);
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     setIcon(m_actionForward, "pentobi-forward");
-    connect(m_actionForward, SIGNAL(triggered()), this, SLOT(forward()));
+    connect(m_actionForward, SIGNAL(triggered()), SLOT(forward()));
 
     m_actionForward10 = createAction(tr("10 F&orward"));
     m_actionForward10->setToolTip(tr("Go ten moves forward"));
     m_actionForward10->setPriority(QAction::LowPriority);
     m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
     setIcon(m_actionForward10, "pentobi-forward10");
-    connect(m_actionForward10, SIGNAL(triggered()), this, SLOT(forward10()));
+    connect(m_actionForward10, SIGNAL(triggered()), SLOT(forward10()));
 
     m_actionFullscreen = createAction(tr("&Fullscreen"));
     m_actionFullscreen->setIcon(QIcon::fromTheme("view-fullscreen"));
     m_actionFullscreen->setShortcut(QString("F11"));
-    connect(m_actionFullscreen, SIGNAL(triggered()), this, SLOT(fullscreen()));
+    connect(m_actionFullscreen, SIGNAL(triggered()), SLOT(fullscreen()));
 
     m_actionGameInfo = createAction(tr("Ga&me Info"));
     m_actionGameInfo->setShortcut(QString("Ctrl+I"));
-    connect(m_actionGameInfo, SIGNAL(triggered()), this, SLOT(gameInfo()));
+    connect(m_actionGameInfo, SIGNAL(triggered()), SLOT(gameInfo()));
 
     m_actionGoodMove = createAction(tr("&Good"));
     m_actionGoodMove->setActionGroup(groupMoveAnnotation);
     m_actionGoodMove->setCheckable(true);
-    connect(m_actionGoodMove, SIGNAL(triggered(bool)),
-            this, SLOT(goodMove(bool)));
+    connect(m_actionGoodMove, SIGNAL(triggered(bool)), SLOT(goodMove(bool)));
 
     m_actionGotoMove = createAction(tr("&Go to Move..."));
     m_actionGotoMove->setShortcut(QString("Ctrl+G"));
-    connect(m_actionGotoMove, SIGNAL(triggered()), this, SLOT(gotoMove()));
+    connect(m_actionGotoMove, SIGNAL(triggered()), SLOT(gotoMove()));
 
     m_actionHelp = createAction(tr("&Contents"));
     m_actionHelp->setIcon(QIcon::fromTheme("help-contents"));
     m_actionHelp->setShortcut(QKeySequence::HelpContents);
-    connect(m_actionHelp, SIGNAL(triggered()), this, SLOT(help()));
+    connect(m_actionHelp, SIGNAL(triggered()), SLOT(help()));
 
     m_actionInterestingMove = createAction(tr("I&nteresting"));
     m_actionInterestingMove->setActionGroup(groupMoveAnnotation);
     m_actionInterestingMove->setCheckable(true);
     connect(m_actionInterestingMove, SIGNAL(triggered(bool)),
-            this, SLOT(interestingMove(bool)));
+            SLOT(interestingMove(bool)));
 
     m_actionInterrupt = createAction(tr("St&op"));
     m_actionInterrupt->setIcon(QIcon::fromTheme("process-stop"));
     m_actionInterrupt->setEnabled(false);
-    connect(m_actionInterrupt, SIGNAL(triggered()), this, SLOT(interrupt()));
+    connect(m_actionInterrupt, SIGNAL(triggered()), SLOT(interrupt()));
 
     m_actionKeepOnlyPosition = createAction(tr("&Keep Only Position"));
     connect(m_actionKeepOnlyPosition, SIGNAL(triggered()),
-            this, SLOT(keepOnlyPosition()));
+            SLOT(keepOnlyPosition()));
 
     m_actionKeepOnlySubtree = createAction(tr("Keep Only &Subtree"));
     connect(m_actionKeepOnlySubtree, SIGNAL(triggered()),
-            this, SLOT(keepOnlySubtree()));
+            SLOT(keepOnlySubtree()));
 
     m_actionLeaveFullscreen = createAction(tr("Leave Fullscreen"));
     m_actionLeaveFullscreen->setShortcut(QString("Esc"));
     connect(m_actionLeaveFullscreen, SIGNAL(triggered()),
-            this, SLOT(leaveFullscreen()));
+            SLOT(leaveFullscreen()));
 
     m_actionMakeMainVariation = createAction(tr("M&ake Main Variation"));
     connect(m_actionMakeMainVariation, SIGNAL(triggered()),
-            this, SLOT(makeMainVariation()));
+            SLOT(makeMainVariation()));
 
     m_actionMoveDownVariation = createAction(tr("Move Variation D&own"));
     connect(m_actionMoveDownVariation, SIGNAL(triggered()),
-            this, SLOT(moveDownVariation()));
+            SLOT(moveDownVariation()));
 
     m_actionMoveUpVariation = createAction(tr("Move Variation &Up"));
     connect(m_actionMoveUpVariation, SIGNAL(triggered()),
-            this, SLOT(moveUpVariation()));
+            SLOT(moveUpVariation()));
 
     static_assert(maxLevel == 8, "");
     QString levelText[maxLevel] =
@@ -942,26 +938,26 @@ void MainWindow::createActions()
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
     connect(m_actionFlipPieceVertically, SIGNAL(triggered()),
-            this, SLOT(flipPieceVertically()));
+            SLOT(flipPieceVertically()));
 
     m_actionMoveNumbersAll = createAction(tr("&All"));
     m_actionMoveNumbersAll->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersAll->setCheckable(true);
     connect(m_actionMoveNumbersAll, SIGNAL(triggered(bool)),
-            this, SLOT(setMoveNumbersAll(bool)));
+            SLOT(setMoveNumbersAll(bool)));
 
     m_actionMoveNumbersLast = createAction(tr("&Last"));
     m_actionMoveNumbersLast->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersLast->setCheckable(true);
     m_actionMoveNumbersLast->setChecked(true);
     connect(m_actionMoveNumbersLast, SIGNAL(triggered(bool)),
-            this, SLOT(setMoveNumbersLast(bool)));
+            SLOT(setMoveNumbersLast(bool)));
 
     m_actionMoveNumbersNone = createAction(tr("&None", "move numbers"));
     m_actionMoveNumbersNone->setActionGroup(groupMoveNumbers);
     m_actionMoveNumbersNone->setCheckable(true);
     connect(m_actionMoveNumbersNone, SIGNAL(triggered(bool)),
-            this, SLOT(setMoveNumbersNone(bool)));
+            SLOT(setMoveNumbersNone(bool)));
 
     m_actionMoveSelectedPieceLeft = createAction();
     m_actionMoveSelectedPieceLeft->setShortcut(QString("Left"));
@@ -978,70 +974,67 @@ void MainWindow::createActions()
     m_actionNextPiece = createAction(tr("Next Piece"));
     setIcon(m_actionNextPiece, "pentobi-next-piece");
     m_actionNextPiece->setShortcut(QString("+"));
-    connect(m_actionNextPiece, SIGNAL(triggered()), this, SLOT(nextPiece()));
+    connect(m_actionNextPiece, SIGNAL(triggered()), SLOT(nextPiece()));
 
     m_actionNextTransform = createAction();
     m_actionNextTransform->setShortcut(QString("Space"));
-    connect(m_actionNextTransform, SIGNAL(triggered()),
-            this, SLOT(nextTransform()));
+    connect(m_actionNextTransform, SIGNAL(triggered()), SLOT(nextTransform()));
 
     m_actionNextVariation = createAction(tr("&Next Variation"));
     m_actionNextVariation->setToolTip(tr("Go to next variation"));
     m_actionNextVariation->setPriority(QAction::LowPriority);
     m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
     setIcon(m_actionNextVariation, "pentobi-next-variation");
-    connect(m_actionNextVariation, SIGNAL(triggered()),
-            this, SLOT(nextVariation()));
+    connect(m_actionNextVariation, SIGNAL(triggered()), SLOT(nextVariation()));
 
     m_actionNextVariation10 = createAction();
     m_actionNextVariation10->setShortcut(QString("Ctrl+Shift+Down"));
     connect(m_actionNextVariation10, SIGNAL(triggered()),
-            this, SLOT(nextVariation10()));
+            SLOT(nextVariation10()));
 
     m_actionNewRatedGame = createAction(tr("New &Rated Game"));
     m_actionNewRatedGame->setShortcut(QString("Ctrl+Shift+N"));
-    connect(m_actionNewRatedGame, SIGNAL(triggered()),
-            this, SLOT(newRatedGame()));
+    connect(m_actionNewRatedGame, SIGNAL(triggered()), SLOT(newRatedGame()));
 
     m_actionNew = createAction(tr("&New"));
     m_actionNew->setShortcut(QKeySequence::New);
     m_actionNew->setToolTip(tr("Start a new game"));
     setIcon(m_actionNew, "pentobi-newgame");
-    connect(m_actionNew, SIGNAL(triggered()), this, SLOT(newGame()));
+    connect(m_actionNew, SIGNAL(triggered()), SLOT(newGame()));
 
     m_actionNoMoveAnnotation = createAction(tr("N&one", "move annotation"));
     m_actionNoMoveAnnotation->setActionGroup(groupMoveAnnotation);
     m_actionNoMoveAnnotation->setCheckable(true);
     connect(m_actionNoMoveAnnotation, SIGNAL(triggered(bool)),
-            this, SLOT(noMoveAnnotation(bool)));
+            SLOT(noMoveAnnotation(bool)));
 
     m_actionOpen = createAction(tr("&Open..."));
     m_actionOpen->setIcon(QIcon::fromTheme("document-open"));
     m_actionOpen->setShortcut(QKeySequence::Open);
-    connect(m_actionOpen, SIGNAL(triggered()), this, SLOT(open()));
+    connect(m_actionOpen, SIGNAL(triggered()), SLOT(open()));
     m_actionPlaceSelectedPiece = createAction();
     m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
 
     m_actionPlay = createAction(tr("&Play"));
     m_actionPlay->setShortcut(QString("Ctrl+L"));
     setIcon(m_actionPlay, "pentobi-play");
-    connect(m_actionPlay, SIGNAL(triggered()), this, SLOT(play()));
+    connect(m_actionPlay, SIGNAL(triggered()), SLOT(play()));
 
     m_actionPlaySingleMove = createAction(tr("Play &Single Move"));
     m_actionPlaySingleMove->setShortcut(QString("Ctrl+Shift+L"));
     connect(m_actionPlaySingleMove, SIGNAL(triggered()),
-            this, SLOT(playSingleMove()));
+            SLOT(playSingleMove()));
 
     m_actionPreviousPiece = createAction(tr("Previous Piece"));
     setIcon(m_actionPreviousPiece, "pentobi-previous-piece");
     m_actionPreviousPiece->setShortcut(QString("-"));
     connect(m_actionPreviousPiece, SIGNAL(triggered()),
-            this, SLOT(previousPiece()));
+            SLOT(previousPiece()));
 
     m_actionPreviousTransform = createAction();
     m_actionPreviousTransform->setShortcut(QString("Shift+Space"));
     connect(m_actionPreviousTransform, SIGNAL(triggered()),
-            this, SLOT(previousTransform()));
+            SLOT(previousTransform()));
 
     m_actionPreviousVariation = createAction(tr("&Previous Variation"));
     m_actionPreviousVariation->setToolTip(tr("Go to previous variation"));
@@ -1049,263 +1042,243 @@ void MainWindow::createActions()
     m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
     setIcon(m_actionPreviousVariation, "pentobi-previous-variation");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
-            this, SLOT(previousVariation()));
+            SLOT(previousVariation()));
 
     m_actionPreviousVariation10 = createAction();
     m_actionPreviousVariation10->setShortcut(QString("Ctrl+Shift+Up"));
     connect(m_actionPreviousVariation10, SIGNAL(triggered()),
-            this, SLOT(previousVariation10()));
+            SLOT(previousVariation10()));
 
     for (int i = 0; i < maxRecentFiles; ++i)
     {
          m_actionRecentFile[i] = createAction();
          m_actionRecentFile[i]->setVisible(false);
          connect(m_actionRecentFile[i], SIGNAL(triggered()),
-                 this, SLOT(openRecentFile()));
+                 SLOT(openRecentFile()));
      }
 
     m_actionRotatePieceAnticlockwise = createAction(tr("Rotate Anticlockwise"));
     setIcon(m_actionRotatePieceAnticlockwise, "pentobi-rotate-left");
     connect(m_actionRotatePieceAnticlockwise, SIGNAL(triggered()),
-            this, SLOT(rotatePieceAnticlockwise()));
+            SLOT(rotatePieceAnticlockwise()));
 
     m_actionRotatePieceClockwise = createAction(tr("Rotate Clockwise"));
     setIcon(m_actionRotatePieceClockwise, "pentobi-rotate-right");
     connect(m_actionRotatePieceClockwise, SIGNAL(triggered()),
-            this, SLOT(rotatePieceClockwise()));
+            SLOT(rotatePieceClockwise()));
 
     m_actionQuit = createAction(tr("&Quit"));
     m_actionQuit->setIcon(QIcon::fromTheme("application-exit"));
     m_actionQuit->setShortcut(QKeySequence::Quit);
-    connect(m_actionQuit, SIGNAL(triggered()), this, SLOT(close()));
+    connect(m_actionQuit, SIGNAL(triggered()), SLOT(close()));
 
     m_actionSave = createAction(tr("&Save"));
     m_actionSave->setIcon(QIcon::fromTheme("document-save"));
     m_actionSave->setShortcut(QKeySequence::Save);
-    connect(m_actionSave, SIGNAL(triggered()), this, SLOT(save()));
+    connect(m_actionSave, SIGNAL(triggered()), SLOT(save()));
 
     m_actionSaveAs = createAction(tr("Save &As..."));
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
-    connect(m_actionSaveAs, SIGNAL(triggered()), this, SLOT(saveAs()));
+    connect(m_actionSaveAs, SIGNAL(triggered()), SLOT(saveAs()));
 
     m_actionSelectNextColor = createAction(tr("Select Next &Color"));
     m_actionSelectNextColor->setShortcut(QString("Ctrl+C"));
     connect(m_actionSelectNextColor, SIGNAL(triggered()),
-            this, SLOT(selectNextColor()));
+            SLOT(selectNextColor()));
 
     m_actionSelectPiece1 = createAction();
     m_actionSelectPiece1->setShortcut(QString("1"));
-    connect(m_actionSelectPiece1, SIGNAL(triggered()),
-            this, SLOT(selectPiece1()));
+    connect(m_actionSelectPiece1, SIGNAL(triggered()), SLOT(selectPiece1()));
 
     m_actionSelectPiece2 = createAction();
     m_actionSelectPiece2->setShortcut(QString("2"));
-    connect(m_actionSelectPiece2, SIGNAL(triggered()),
-            this, SLOT(selectPiece2()));
+    connect(m_actionSelectPiece2, SIGNAL(triggered()), SLOT(selectPiece2()));
 
     m_actionSelectPieceA = createAction();
     m_actionSelectPieceA->setShortcut(QString("A"));
-    connect(m_actionSelectPieceA, SIGNAL(triggered()),
-            this, SLOT(selectPieceA()));
+    connect(m_actionSelectPieceA, SIGNAL(triggered()), SLOT(selectPieceA()));
 
     m_actionSelectPieceC = createAction();
     m_actionSelectPieceC->setShortcut(QString("C"));
-    connect(m_actionSelectPieceC, SIGNAL(triggered()),
-            this, SLOT(selectPieceC()));
+    connect(m_actionSelectPieceC, SIGNAL(triggered()), SLOT(selectPieceC()));
 
     m_actionSelectPieceF = createAction();
     m_actionSelectPieceF->setShortcut(QString("F"));
-    connect(m_actionSelectPieceF, SIGNAL(triggered()),
-            this, SLOT(selectPieceF()));
+    connect(m_actionSelectPieceF, SIGNAL(triggered()), SLOT(selectPieceF()));
 
     m_actionSelectPieceG = createAction();
     m_actionSelectPieceG->setShortcut(QString("G"));
-    connect(m_actionSelectPieceG, SIGNAL(triggered()),
-            this, SLOT(selectPieceG()));
+    connect(m_actionSelectPieceG, SIGNAL(triggered()), SLOT(selectPieceG()));
 
     m_actionSelectPieceI = createAction();
     m_actionSelectPieceI->setShortcut(QString("I"));
-    connect(m_actionSelectPieceI, SIGNAL(triggered()),
-            this, SLOT(selectPieceI()));
+    connect(m_actionSelectPieceI, SIGNAL(triggered()), SLOT(selectPieceI()));
 
     m_actionSelectPieceL = createAction();
     m_actionSelectPieceL->setShortcut(QString("L"));
-    connect(m_actionSelectPieceL, SIGNAL(triggered()),
-            this, SLOT(selectPieceL()));
+    connect(m_actionSelectPieceL, SIGNAL(triggered()), SLOT(selectPieceL()));
 
     m_actionSelectPieceN = createAction();
     m_actionSelectPieceN->setShortcut(QString("N"));
-    connect(m_actionSelectPieceN, SIGNAL(triggered()),
-            this, SLOT(selectPieceN()));
+    connect(m_actionSelectPieceN, SIGNAL(triggered()), SLOT(selectPieceN()));
 
     m_actionSelectPieceO = createAction();
     m_actionSelectPieceO->setShortcut(QString("O"));
-    connect(m_actionSelectPieceO, SIGNAL(triggered()),
-            this, SLOT(selectPieceO()));
+    connect(m_actionSelectPieceO, SIGNAL(triggered()), SLOT(selectPieceO()));
 
     m_actionSelectPieceP = createAction();
     m_actionSelectPieceP->setShortcut(QString("P"));
-    connect(m_actionSelectPieceP, SIGNAL(triggered()),
-            this, SLOT(selectPieceP()));
+    connect(m_actionSelectPieceP, SIGNAL(triggered()), SLOT(selectPieceP()));
 
     m_actionSelectPieceS = createAction();
     m_actionSelectPieceS->setShortcut(QString("S"));
-    connect(m_actionSelectPieceS, SIGNAL(triggered()),
-            this, SLOT(selectPieceS()));
+    connect(m_actionSelectPieceS, SIGNAL(triggered()), SLOT(selectPieceS()));
 
     m_actionSelectPieceT = createAction();
     m_actionSelectPieceT->setShortcut(QString("T"));
-    connect(m_actionSelectPieceT, SIGNAL(triggered()),
-            this, SLOT(selectPieceT()));
+    connect(m_actionSelectPieceT, SIGNAL(triggered()), SLOT(selectPieceT()));
 
     m_actionSelectPieceU = createAction();
     m_actionSelectPieceU->setShortcut(QString("U"));
-    connect(m_actionSelectPieceU, SIGNAL(triggered()),
-            this, SLOT(selectPieceU()));
+    connect(m_actionSelectPieceU, SIGNAL(triggered()), SLOT(selectPieceU()));
 
     m_actionSelectPieceV = createAction();
     m_actionSelectPieceV->setShortcut(QString("V"));
-    connect(m_actionSelectPieceV, SIGNAL(triggered()),
-            this, SLOT(selectPieceV()));
+    connect(m_actionSelectPieceV, SIGNAL(triggered()), SLOT(selectPieceV()));
 
     m_actionSelectPieceW = createAction();
     m_actionSelectPieceW->setShortcut(QString("W"));
-    connect(m_actionSelectPieceW, SIGNAL(triggered()),
-            this, SLOT(selectPieceW()));
+    connect(m_actionSelectPieceW, SIGNAL(triggered()), SLOT(selectPieceW()));
 
     m_actionSelectPieceX = createAction();
     m_actionSelectPieceX->setShortcut(QString("X"));
-    connect(m_actionSelectPieceX, SIGNAL(triggered()),
-            this, SLOT(selectPieceX()));
+    connect(m_actionSelectPieceX, SIGNAL(triggered()), SLOT(selectPieceX()));
 
     m_actionSelectPieceY = createAction();
     m_actionSelectPieceY->setShortcut(QString("Y"));
-    connect(m_actionSelectPieceY, SIGNAL(triggered()),
-            this, SLOT(selectPieceY()));
+    connect(m_actionSelectPieceY, SIGNAL(triggered()), SLOT(selectPieceY()));
 
     m_actionSelectPieceZ = createAction();
     m_actionSelectPieceZ->setShortcut(QString("Z"));
-    connect(m_actionSelectPieceZ, SIGNAL(triggered()),
-            this, SLOT(selectPieceZ()));
+    connect(m_actionSelectPieceZ, SIGNAL(triggered()), SLOT(selectPieceZ()));
 
     m_actionSetupMode = createAction(tr("S&etup Mode"));
     m_actionSetupMode->setCheckable(true);
-    connect(m_actionSetupMode, SIGNAL(triggered(bool)),
-            this, SLOT(setupMode(bool)));
+    connect(m_actionSetupMode, SIGNAL(triggered(bool)), SLOT(setupMode(bool)));
 
     m_actionShowComment = createAction(tr("&Comment"));
     m_actionShowComment->setCheckable(true);
     m_actionShowComment->setShortcut(QString("Ctrl+T"));
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
-            this, SLOT(showComment(bool)));
+            SLOT(showComment(bool)));
 
     m_actionShowRating = createAction(tr("Your &Rating"));
     m_actionShowRating->setShortcut(QString("F7"));
-    connect(m_actionShowRating, SIGNAL(triggered()), this, SLOT(showRating()));
+    connect(m_actionShowRating, SIGNAL(triggered()), SLOT(showRating()));
 
     m_actionToolBarNoText = createAction(tr("&No Text"));
     m_actionToolBarNoText->setActionGroup(groupToolBarText);
     m_actionToolBarNoText->setCheckable(true);
     connect(m_actionToolBarNoText, SIGNAL(triggered(bool)),
-            this, SLOT(toolBarNoText(bool)));
+            SLOT(toolBarNoText(bool)));
 
     m_actionToolBarTextBesideIcons = createAction(tr("Text &Beside Icons"));
     m_actionToolBarTextBesideIcons->setActionGroup(groupToolBarText);
     m_actionToolBarTextBesideIcons->setCheckable(true);
     connect(m_actionToolBarTextBesideIcons, SIGNAL(triggered(bool)),
-            this, SLOT(toolBarTextBesideIcons(bool)));
+            SLOT(toolBarTextBesideIcons(bool)));
 
     m_actionToolBarTextBelowIcons = createAction(tr("Text Bel&ow Icons"));
     m_actionToolBarTextBelowIcons->setActionGroup(groupToolBarText);
     m_actionToolBarTextBelowIcons->setCheckable(true);
     connect(m_actionToolBarTextBelowIcons, SIGNAL(triggered(bool)),
-            this, SLOT(toolBarTextBelowIcons(bool)));
+            SLOT(toolBarTextBelowIcons(bool)));
 
     m_actionToolBarTextOnly = createAction(tr("&Text Only"));
     m_actionToolBarTextOnly->setActionGroup(groupToolBarText);
     m_actionToolBarTextOnly->setCheckable(true);
     connect(m_actionToolBarTextOnly, SIGNAL(triggered(bool)),
-            this, SLOT(toolBarTextOnly(bool)));
+            SLOT(toolBarTextOnly(bool)));
 
     m_actionToolBarTextSystem = createAction(tr("&System Default"));
     m_actionToolBarTextSystem->setActionGroup(groupToolBarText);
     m_actionToolBarTextSystem->setCheckable(true);
     connect(m_actionToolBarTextSystem, SIGNAL(triggered(bool)),
-            this, SLOT(toolBarTextSystem(bool)));
+            SLOT(toolBarTextSystem(bool)));
 
     m_actionTruncate = createAction(tr("&Truncate"));
-    connect(m_actionTruncate, SIGNAL(triggered()), this, SLOT(truncate()));
+    connect(m_actionTruncate, SIGNAL(triggered()), SLOT(truncate()));
 
     m_actionTruncateChildren = createAction(tr("Truncate C&hildren"));
     connect(m_actionTruncateChildren, SIGNAL(triggered()),
-            this, SLOT(truncateChildren()));
+             SLOT(truncateChildren()));
 
     m_actionShowToolbar = createAction(tr("&Toolbar"));
     m_actionShowToolbar->setCheckable(true);
     connect(m_actionShowToolbar, SIGNAL(triggered(bool)),
-            this, SLOT(showToolbar(bool)));
+            SLOT(showToolbar(bool)));
 
     m_actionShowVariations = createAction(tr("Show &Variations"));
     m_actionShowVariations->setCheckable(true);
     connect(m_actionShowVariations, SIGNAL(triggered(bool)),
-            this, SLOT(showVariations(bool)));
+            SLOT(showVariations(bool)));
 
     m_actionUndo = createAction(tr("&Undo Move"));
-    connect(m_actionUndo, SIGNAL(triggered()), this, SLOT(undo()));
+    connect(m_actionUndo, SIGNAL(triggered()), SLOT(undo()));
 
     m_actionVariantClassic = createAction(tr("&Classic (4 Players)"));
     m_actionVariantClassic->setActionGroup(groupVariant);
     m_actionVariantClassic->setCheckable(true);
     connect(m_actionVariantClassic, SIGNAL(triggered(bool)),
-            this, SLOT(variantClassic(bool)));
+            SLOT(variantClassic(bool)));
 
     m_actionVariantClassic2 = createAction(tr("Classic (&2 Players)"));
     m_actionVariantClassic2->setActionGroup(groupVariant);
     m_actionVariantClassic2->setCheckable(true);
     connect(m_actionVariantClassic2, SIGNAL(triggered(bool)),
-            this, SLOT(variantClassic2(bool)));
+            SLOT(variantClassic2(bool)));
 
     m_actionVariantDuo = createAction(tr("&Duo"));
     m_actionVariantDuo->setActionGroup(groupVariant);
     m_actionVariantDuo->setCheckable(true);
     connect(m_actionVariantDuo, SIGNAL(triggered(bool)),
-            this, SLOT(variantDuo(bool)));
+            SLOT(variantDuo(bool)));
 
     m_actionVariantJunior = createAction(tr("J&unior"));
     m_actionVariantJunior->setActionGroup(groupVariant);
     m_actionVariantJunior->setCheckable(true);
     connect(m_actionVariantJunior, SIGNAL(triggered(bool)),
-            this, SLOT(variantJunior(bool)));
+            SLOT(variantJunior(bool)));
 
     m_actionVariantTrigon = createAction(tr("&Trigon (4 Players)"));
     m_actionVariantTrigon->setActionGroup(groupVariant);
     m_actionVariantTrigon->setCheckable(true);
     connect(m_actionVariantTrigon, SIGNAL(triggered(bool)),
-            this, SLOT(variantTrigon(bool)));
+            SLOT(variantTrigon(bool)));
 
     m_actionVariantTrigon2 = createAction(tr("Tri&gon (2 Players)"));
     m_actionVariantTrigon2->setActionGroup(groupVariant);
     m_actionVariantTrigon2->setCheckable(true);
     connect(m_actionVariantTrigon2, SIGNAL(triggered(bool)),
-            this, SLOT(variantTrigon2(bool)));
+            SLOT(variantTrigon2(bool)));
 
     m_actionVariantTrigon3 = createAction(tr("Trigon (&3 Players)"));
     m_actionVariantTrigon3->setActionGroup(groupVariant);
     m_actionVariantTrigon3->setCheckable(true);
     connect(m_actionVariantTrigon3, SIGNAL(triggered(bool)),
-            this, SLOT(variantTrigon3(bool)));
+            SLOT(variantTrigon3(bool)));
 
     m_actionVeryBadMove = createAction(tr("V&ery Bad"));
     m_actionVeryBadMove->setActionGroup(groupMoveAnnotation);
     m_actionVeryBadMove->setCheckable(true);
     connect(m_actionVeryBadMove, SIGNAL(triggered(bool)),
-            this, SLOT(veryBadMove(bool)));
+            SLOT(veryBadMove(bool)));
 
     m_actionVeryGoodMove = createAction(tr("&Very Good"));
     m_actionVeryGoodMove->setActionGroup(groupMoveAnnotation);
     m_actionVeryGoodMove->setCheckable(true);
     connect(m_actionVeryGoodMove, SIGNAL(triggered(bool)),
-            this, SLOT(veryGoodMove(bool)));
+            SLOT(veryGoodMove(bool)));
 }
 
 QWidget* MainWindow::createCentralWidget()
@@ -1338,7 +1311,7 @@ QWidget* MainWindow::createLeftPanel()
     m_splitter->addWidget(m_guiBoard);
     m_comment = new QPlainTextEdit();
     m_comment->setTabChangesFocus(true);
-    connect(m_comment, SIGNAL(textChanged()), this, SLOT(commentChanged()));
+    connect(m_comment, SIGNAL(textChanged()), SLOT(commentChanged()));
     m_splitter->addWidget(m_comment);
     m_splitter->setStretchFactor(0, 85);
     m_splitter->setStretchFactor(1, 15);
@@ -1357,7 +1330,7 @@ QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
         action->setChecked(true);
     action->setActionGroup(group);
     action->setData(level);
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(setLevel(bool)));
+    connect(action, SIGNAL(triggered(bool)), SLOT(setLevel(bool)));
     return action;
 }
 
@@ -1512,7 +1485,7 @@ QLayout* MainWindow::createOrientationSelector()
     layout->addSpacing(8);
     m_orientationDisplay = new OrientationDisplay(0, getBoard());
     connect(m_orientationDisplay, SIGNAL(colorClicked(Color)),
-            this, SLOT(orientationDisplayColorClicked(Color)));
+            SLOT(orientationDisplayColorClicked(Color)));
     m_orientationDisplay->setSizePolicy(QSizePolicy::MinimumExpanding,
                                         QSizePolicy::MinimumExpanding);
     layout->addWidget(m_orientationDisplay);
@@ -1535,7 +1508,7 @@ QLayout* MainWindow::createRightPanel()
         m_pieceSelector[*i] = new PieceSelector(0, getBoard(), *i);
         connect(m_pieceSelector[*i],
                 SIGNAL(pieceSelected(Color,Piece,const Transform*)),
-                this, SLOT(selectPiece(Color,Piece,const Transform*)));
+                SLOT(selectPiece(Color,Piece,const Transform*)));
         pieceSelectorLayout->addWidget(m_pieceSelector[*i]);
     }
     return layout;
@@ -3296,7 +3269,7 @@ void MainWindow::showRating()
     {
         m_ratingDialog = new RatingDialog(this, *m_history);
         connect(m_ratingDialog, SIGNAL(open(const QString&)),
-                this, SLOT(open(const QString&)));
+                SLOT(open(const QString&)));
     }
     loadHistory();
     m_ratingDialog->show();

@@ -22,8 +22,6 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
 {
     m_charset = game.get_root().get_property("CA", "");
     setWindowTitle(tr("Game Info"));
-    // Disable '?' button in title bar on Windows, we don't have
-    // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
@@ -72,8 +70,8 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     }
     else if (! m_playerBlue->text().isEmpty())
         buttonBox->setFocus();
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
 void GameInfoDialog::accept()

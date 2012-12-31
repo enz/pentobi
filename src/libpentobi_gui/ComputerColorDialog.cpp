@@ -24,8 +24,6 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
       m_variant(variant)
 {
     setWindowTitle(tr("Computer Colors"));
-    // Disable '?' button in title bar on Windows, we don't have
-    // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
@@ -58,8 +56,8 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     QDialogButtonBox* buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
     buttonBox->setFocus();
 }
 

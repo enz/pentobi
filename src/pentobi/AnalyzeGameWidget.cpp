@@ -136,7 +136,7 @@ void AnalyzeGameWidget::progressCallback(unsigned movesAnalyzed,
 {
     if (totalMoves == 0)
         return;
-    // This function is called from a diffrent thread. Invoke showProgress()
+    // This function is called from a different thread. Invoke showProgress()
     // in the GUI thread.
     QMetaObject::invokeMethod(this, "showProgress", Qt::QueuedConnection,
                               Q_ARG(int, 100 * movesAnalyzed / totalMoves));
@@ -199,15 +199,13 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
     initSize();
     m_progressDialog = new QProgressDialog(this);
     m_progressDialog->setWindowModality(Qt::WindowModal);
-    // Disable '?' button in title bar on Windows, we don't have
-    // context help
     m_progressDialog->setWindowFlags(m_progressDialog->windowFlags()
                                      & ~Qt::WindowContextHelpButtonHint);
     m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
                                           this));
     Util::setNoTitle(*m_progressDialog);
     m_progressDialog->setMinimumDuration(0);
-    connect(m_progressDialog, SIGNAL(canceled()), this, SLOT(cancel()));
+    connect(m_progressDialog, SIGNAL(canceled()), SLOT(cancel()));
     m_progressDialog->show();
     m_isRunning = true;
     m_future = QtConcurrent::run(this, &AnalyzeGameWidget::threadFunction);
@@ -218,7 +216,7 @@ void AnalyzeGameWidget::threadFunction()
     m_analyzeGame.run(*m_game, *m_search, m_nuSimulations,
                       bind(&AnalyzeGameWidget::progressCallback, this,
                            placeholders::_1, placeholders::_2));
-    // This function is called from a diffrent thread. Invoke showProgress()
+    // This function is called from a different thread. Invoke showProgress()
     // in the GUI thread.
     QMetaObject::invokeMethod(this, "showProgress", Qt::QueuedConnection,
                               Q_ARG(int, 100));

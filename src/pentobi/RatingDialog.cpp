@@ -29,8 +29,6 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
       m_history(history)
 {
     setWindowTitle(tr("Your Rating"));
-    // Disable '?' button in title bar on Windows, we don't have
-    // context help
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     QVBoxLayout* layout = new QVBoxLayout();
     setLayout(layout);
@@ -61,11 +59,11 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     buttonBox->button(QDialogButtonBox::Close)->setAutoDefault(true);
     buttonBox->button(QDialogButtonBox::Close)->setFocus();
     updateContent();
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
     connect(buttonBox, SIGNAL(clicked(QAbstractButton*)),
-            this, SLOT(buttonClicked(QAbstractButton*)));
+            SLOT(buttonClicked(QAbstractButton*)));
     connect(m_list, SIGNAL(openRatedGame(unsigned)),
-            this, SLOT(activateGame(unsigned)));
+            SLOT(activateGame(unsigned)));
 }
 
 void RatingDialog::activateGame(unsigned n)
