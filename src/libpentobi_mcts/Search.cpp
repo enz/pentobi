@@ -156,12 +156,13 @@ Float Search::get_tie_value() const
 
 void Search::on_start_search()
 {
-    const Board& bd = get_board();
+    auto& bd = get_board();
+    auto& bc = bd.get_board_const();
+    auto nu_colors = bd.get_nu_colors();
 
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    for (ColorIterator i(nu_colors); i; ++i)
     {
-        MoveMarker& is_forbidden_at_root =
-            m_shared_const.is_forbidden_at_root[*i];
+        auto& is_forbidden_at_root = m_shared_const.is_forbidden_at_root[*i];
         is_forbidden_at_root.set_all();
         for (BoardIterator j(bd); j; ++j)
             if (! bd.is_forbidden(*j, *i))
@@ -179,6 +180,36 @@ void Search::on_start_search()
                 }
             }
     }
+
+    // Initialize m_shared_const.moves_lists/moves_range
+    for (ColorIterator i(nu_colors); i; ++i)
+    {
+        auto& move_lists = m_shared_const.move_lists[*i];
+        if (! move_lists)
+            move_lists.reset(new Move[BoardConst::max_move_lists_sum_length]);
+        m_shared_const.moves_range[*i].init(bd.get_geometry());
+    }
+    ColorMap<unsigned> current(0);
+    for (BoardIterator i(bd); i; ++i)
+        for (unsigned j = 0; j < BoardConst::nu_adj_status; ++j)
+            for (unsigned k = 0; k < bd.get_nu_pieces(); ++k)
+            {
+                Piece piece(k);
+                auto moves = bc.get_moves(piece, *i, j);
+                for (ColorIterator l(nu_colors); l; ++l)
+                {
+                    if (! bd.is_piece_left(*l, piece)
+                        || bd.is_forbidden(*i, *l))
+                        continue;
+                    auto& move_lists = m_shared_const.move_lists[*l];
+                    unsigned begin = current[*l];
+                    for (Move mv : moves)
+                        if (! m_shared_const.is_forbidden_at_root[*l][mv])
+                            move_lists[current[*l]++] = mv;
+                    m_shared_const.moves_range[*l][*i][j][piece] =
+                        BoardConst::ListIndex(begin, current[*l] - begin);
+                }
+            }
 
     auto& is_piece_considered_list = m_shared_const.is_piece_considered_list;
     is_piece_considered_list.clear();

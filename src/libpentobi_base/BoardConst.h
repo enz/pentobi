@@ -51,6 +51,10 @@ public:
 
     static const unsigned max_moves_at_point = 40;
 
+    /** The maximum sum of the sizes of all precomputed move lists in any
+        game variant. */
+    static const unsigned max_move_lists_sum_length = 1425934;
+
     /** Begin/end range for lists with local moves.
         See get_moves(). */
     class LocalMovesListRange
@@ -76,7 +80,32 @@ public:
         const Move* m_begin;
 
         const Move* m_end;
+    };
 
+    /** Compressed begin/end range for lists with local moves.
+        This struct is used in the private implementation and will be unpacked
+        into a LocalMovesListRange as a return value for get_moves().
+        The struct is public to make it reusable for implementing similar
+        precomputed move lists outside this class. */
+    struct ListIndex
+    {
+        unsigned begin : 24;
+
+        unsigned size : 8;
+
+        ListIndex()
+        {
+        }
+
+        ListIndex(unsigned begin, unsigned size)
+        {
+            LIBBOARDGAME_ASSERT(begin < max_move_lists_sum_length);
+            LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
+            LIBBOARDGAME_ASSERT(begin < (1 << 24));
+            this->begin = begin & ((1 << 24) - 1);
+            LIBBOARDGAME_ASSERT(size < (1 << 8));
+            this->size = size & ((1 << 8) - 1);
+        }
     };
 
     /** The number of neighbors used for computing the adjacent status.
@@ -155,13 +184,6 @@ private:
 
     /** See m_full_move_table */
     typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status> FullMoveTable;
-
-    struct ListIndex
-    {
-        unsigned begin : 24;
-
-        unsigned size : 8;
-    };
 
     unsigned m_nu_pieces;
 

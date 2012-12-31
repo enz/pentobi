@@ -90,6 +90,17 @@ struct SharedConst
         no moves). */
     PieceMap<bool> is_piece_considered_all;
 
+    /** Like BoardConst::m_moves_range but for SharedConst::move_lists.
+        Only elements for pieces still available and non-forbidden points
+        are initialized. */
+    ColorMap<Grid<array<PieceMap<BoardConst::ListIndex>,
+                        BoardConst::nu_adj_status>>>
+        moves_range;
+
+    /** Like BoardConst::m_move_lists but moves that are forbidden at the
+        root position filtered out. */
+    ColorMap<unique_ptr<Move[]>> move_lists;
+
     SharedConst(const Color& to_play);
 };
 
@@ -278,6 +289,9 @@ private:
     /** Equivalent to but faster than m_bd.get_move_info_ext() */
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
+    BoardConst::LocalMovesListRange get_moves(Color c, Piece piece, Point p,
+                                              unsigned adj_status) const;
+
     const PieceMap<bool>& get_pieces_considered() const;
 
     Float get_result(Color c) const;
@@ -318,6 +332,16 @@ inline const MoveInfoExt& State::get_move_info_ext(Move mv) const
     LIBBOARDGAME_ASSERT(! mv.is_null());
     LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_all_moves());
     return *(m_move_info_ext_array + mv.to_int());
+}
+
+inline BoardConst::LocalMovesListRange State::get_moves(Color c, Piece piece,
+                                           Point p, unsigned adj_status) const
+{
+    BoardConst::ListIndex idx =
+        m_shared_const.moves_range[c][p][adj_status][piece];
+    const Move* begin = m_shared_const.move_lists[c].get() + idx.begin;
+    const Move* end = begin + idx.size;
+    return BoardConst::LocalMovesListRange(begin, end);
 }
 
 inline unsigned State::get_nu_moves() const
