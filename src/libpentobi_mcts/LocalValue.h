@@ -95,15 +95,16 @@ inline unsigned LocalValue::Compute::finish()
     if (m_value == 0)
         return 0;
     if (m_value < 0x010u)
-        // Only 2nd-order adjacent to opp. attach point. Don't care how many.
+        // Only 2nd-order adjacent to opponent attach point. Don't care how
+        // many
         return 0x001u;
-    // Ignore 2nd-order adj. if we have attach points or adj. to attach points
-    unsigned value = m_value & 0xff0u;
+    // Ignore 2nd-order adj. to opp. attach point if we have opp. attach
+    // points or adj. to opp. attach point. Only care if we have any adj. to
+    // opp. attach points, not how many.
     if ((m_value & 0x0f0u) != 0)
-        // Only care if we have any adj. to attach points, not how many
-        return (value & 0xf00u) + 0x010u;
+        return (m_value & 0xf00u) + 0x010u;
     else
-        return value;
+        return m_value & 0xf00u;
 }
 
 inline void LocalValue::clear()
