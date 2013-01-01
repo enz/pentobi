@@ -19,8 +19,6 @@ using libboardgame_base::SpreadsheetStringRep;
 typedef libboardgame_base::Point<35,20,unsigned short,SpreadsheetStringRep,685>
     Point;
 
-typedef Point::Direction Direction;
-
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_base
