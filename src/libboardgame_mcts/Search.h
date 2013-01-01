@@ -1602,10 +1602,10 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
         if (m_rave_check_same)
         {
             bool other_played_same = false;
-            for (unsigned i = 0; i < m_nu_players; ++i)
-                if (i != player)
+            for (unsigned j = 0; j < m_nu_players; ++j)
+                if (j != player)
                 {
-                    unsigned first_other = first_play[i][m];
+                    unsigned first_other = first_play[j][m];
                     if (first_other >= i && first_other <= first)
                     {
                         other_played_same = true;
