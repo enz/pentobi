@@ -1552,7 +1552,8 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
     auto& nodes = thread_state.simulation.nodes;
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
     unsigned i = nu_moves - 1;
-    for ( ; i >= nu_nodes; --i)
+    LIBBOARDGAME_ASSERT(nu_nodes > 1);
+    for ( ; i >= nu_nodes - 1; --i)
     {
         PlayerMove mv = state.get_move(i);
         if (! state.skip_rave(mv.move))
@@ -1587,8 +1588,7 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
     auto& nodes = thread_state.simulation.nodes;
     LIBBOARDGAME_ASSERT(i < nodes.size());
     const Node* node = nodes[i];
-    if (! node->has_children())
-        return;
+    LIBBOARDGAME_ASSERT(node->has_children());
     unsigned len = state.get_nu_moves();
     Float weight_factor = 1 / Float(len - i);
     for (ChildIterator it(m_tree, *node); it; ++it)
