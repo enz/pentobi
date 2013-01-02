@@ -131,9 +131,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "detect_symmetry " << s.get_detect_symmetry() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
-            << "last_good_reply " << s.get_last_good_reply() << '\n'
             << "level " << p.get_level() << '\n'
-            << "rave " << s.get_rave() << '\n'
             << "reuse_subtree " << s.get_reuse_subtree() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
             << "use_book " << p.get_use_book() << '\n';
@@ -153,12 +151,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_expand_threshold(args.get<Float>(1));
         else if (name == "fixed_simulations")
             p.set_fixed_simulations(args.get<Float>(1));
-        else if (name == "last_good_reply")
-            s.set_last_good_reply(args.get<bool>(1));
         else if (name == "level")
             p.set_level(args.get<int>(1));
-        else if (name == "rave")
-            s.set_rave(args.get<bool>(1));
         else if (name == "reuse_subtree")
             s.set_reuse_subtree(args.get<bool>(1));
         else if (name == "score_modification")

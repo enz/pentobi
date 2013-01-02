@@ -52,6 +52,41 @@ using libboardgame_util::string_util::to_string;
 
 //-----------------------------------------------------------------------------
 
+/** Default optional compile-time parameters for Search. */
+struct SearchParamConstDefault
+{
+    /** Use @ref libboardgame_doc_rave.
+        @note The implementation of RAVE slightly differs from the one
+        described in the original paper: The value of a move is computed
+        as the weighted average of move value and RAVE value (without
+        exploration terms) and then only one exploration term is added.
+        The rationale is that the UCT-like exploration term based on the
+        RAVE counts in the paper is probably not well-defined, since the
+        RAVE count does not only depend on decisions made by the player in
+        the current node, so it is not a UCB bandit problem. */
+    static const bool rave = false;
+
+    /** Do not update RAVE values if the same move was played first by the
+        other player.
+        This improves RAVE performance in Go, where moves at the same point
+        indicate that something was captured there, so the position has
+        changed so significantly that the RAVE value of this move should not be
+        updated to earlier positions. Setting it to true causes a slight
+        slow-down in the update of the RAVE values. */
+    static const bool rave_check_same = false;
+
+    /** Enable weighting of @ref libboardgame_doc_rave updates.
+        The weight decreases linearly from the start to the end of a
+        simulation. */
+    static const bool rave_weighting = false;
+
+    /** Enable Last-Good-Reply heuristic.
+        @see LastGoodReply */
+    static const bool use_last_good_reply = false;
+};
+
+//-----------------------------------------------------------------------------
+
 /** Game-independent Monte-Carlo tree search.
     For best performance, the game-dependent functionality is added to this
     class by template parameters, like the type M representing a move (which
@@ -63,14 +98,17 @@ using libboardgame_util::string_util::to_string;
     class and implement some pure virtual functions like get_move_string().
     @tparam S The state of a simulation
     @tparam M The move type
-    @tparam P The maximum number of players */
-template<class S, class M, unsigned P>
+    @tparam P The maximum number of players
+    @tparam R Optional compile-time parameters, see SearchParamConstDefault */
+template<class S, class M, unsigned P, class R = SearchParamConstDefault>
 class Search
 {
 public:
     typedef S State;
 
     typedef M Move;
+
+    typedef R SearchParamConst;
 
     static const unsigned max_players = P;
 
@@ -191,45 +229,11 @@ public:
 
     bool get_prune_full_tree() const;
 
-    /** Use @ref libboardgame_doc_rave.
-        @note The implementation of RAVE slightly differs from the one
-        described in the original paper: The value of a move is computed
-        as the weighted average of move value and RAVE value (without
-        exploration terms) and then only one exploration term is added.
-        The rationale is that the UCT-like exploration term based on the
-        RAVE counts in the paper is probably not well-defined, since the
-        RAVE count does not only depend on decisions made by the player in
-        the current node, so it is not a UCB bandit problem. */
-    void set_rave(bool enable);
-
-    bool get_rave() const;
-
-    /** Do not update RAVE values if the same move was played first by the
-        other player.
-        This improves RAVE performance in Go, where moves at the same point
-        indicate that something was captured there, so the position has
-        changed so significantly that the RAVE value of this move should not be
-        updated to earlier positions. Default is false. */
-    void set_rave_check_same(bool enable);
-
     /** Set the equivalence parameter in the @ref libboardgame_doc_rave
         formula. */
     void set_rave_equivalence(Float value);
 
     Float get_rave_equivalence() const;
-
-    /** Enable weighting of @ref libboardgame_doc_rave updates.
-        The weight decreases linearly from the start to the end of a
-        simulation. */
-    void set_weight_rave_updates(bool enable);
-
-    bool get_weight_rave_updates() const;
-
-    /** Enable Last-Good-Reply heuristic.
-        @see LastGoodReply */
-    void set_last_good_reply(bool enable);
-
-    bool get_last_good_reply() const;
 
     /** See get_reuse_param() */
     const Parameters& get_last_reuse_param() const;
@@ -438,14 +442,6 @@ private:
 
     bool m_prune_full_tree;
 
-    bool m_rave;
-
-    bool m_rave_check_same;
-
-    bool m_weight_rave_updates;
-
-    bool m_use_last_good_reply;
-
     /** Player to play at the root node of the search. */
     unsigned m_player;
 
@@ -571,8 +567,8 @@ private:
 };
 
 
-template<class S, class M, unsigned P>
-Search<S,M,P>::Thread::Thread(SearchLoopFunc& search_loop_func)
+template<class S, class M, unsigned P, class R>
+Search<S,M,P,R>::Thread::Thread(SearchLoopFunc& search_loop_func)
     : m_search_loop_func(search_loop_func),
       m_quit(false),
       m_thread_ready(2),
@@ -580,8 +576,8 @@ Search<S,M,P>::Thread::Thread(SearchLoopFunc& search_loop_func)
 {
 }
 
-template<class S, class M, unsigned P>
-Search<S,M,P>::Thread::~Thread()
+template<class S, class M, unsigned P, class R>
+Search<S,M,P,R>::Thread::~Thread()
 {
     if (! m_thread.joinable())
         return;
@@ -593,23 +589,23 @@ Search<S,M,P>::Thread::~Thread()
     m_thread.join();
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::Thread::run()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::Thread::run()
 {
     m_thread = thread(bind(&Thread::thread_main, this));
     m_thread_ready.wait();
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::Thread::start_search_loop()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::Thread::start_search_loop()
 {
     LIBBOARDGAME_ASSERT(m_thread.joinable());
     mutex::scoped_lock lock(m_start_search_mutex);
     m_start_search.notify_all();
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::Thread::thread_main()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::Thread::thread_main()
 {
     //log() << "Start thread " << thread_state.thread_id << '\n';
     mutex::scoped_lock lock(m_start_search_mutex);
@@ -628,44 +624,40 @@ void Search<S,M,P>::Thread::thread_main()
     //log() << "Finish thread " << thread_state.thread_id << '\n';
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::Thread::wait_search_loop_finished()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::Thread::wait_search_loop_finished()
 {
     LIBBOARDGAME_ASSERT(m_thread.joinable());
     m_search_finished.wait(m_search_finished_lock);
 }
 
 
-template<class S, class M, unsigned P>
-Search<S,M,P>::AssertionHandler::AssertionHandler(const Search& search)
+template<class S, class M, unsigned P, class R>
+Search<S,M,P,R>::AssertionHandler::AssertionHandler(const Search& search)
     : m_search(search)
 {
 }
 
-template<class S, class M, unsigned P>
-Search<S,M,P>::AssertionHandler::~AssertionHandler() throw()
+template<class S, class M, unsigned P, class R>
+Search<S,M,P,R>::AssertionHandler::~AssertionHandler() throw()
 {
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::AssertionHandler::run()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::AssertionHandler::run()
 {
     m_search.dump(log());
 }
 
 
-template<class S, class M, unsigned P>
-Search<S,M,P>::Search(unsigned nu_threads, size_t memory)
+template<class S, class M, unsigned P, class R>
+Search<S,M,P,R>::Search(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
       m_expand_threshold(0),
       m_deterministic(false),
       m_reuse_subtree(true),
       m_reuse_tree(false),
       m_prune_full_tree(true),
-      m_rave(false),
-      m_rave_check_same(false),
-      m_weight_rave_updates(true),
-      m_use_last_good_reply(false),
       m_prune_count_start(16),
       m_rave_equivalence(1000),
       m_tree_memory(memory == 0 ? 256000000 : memory),
@@ -680,13 +672,13 @@ Search<S,M,P>::Search(unsigned nu_threads, size_t memory)
     m_max_float_count = (size_t(1) << numeric_limits<Float>::digits) - 1;
 }
 
-template<class S, class M, unsigned P>
-Search<S,M,P>::~Search() throw()
+template<class S, class M, unsigned P, class R>
+Search<S,M,P,R>::~Search() throw()
 {
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::check_abort(const ThreadState& thread_state) const
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::check_abort(const ThreadState& thread_state) const
 {
     Float count = m_tree.get_root().get_count() + m_reuse_count;
     if (count >= m_max_float_count)
@@ -703,8 +695,8 @@ bool Search<S,M,P>::check_abort(const ThreadState& thread_state) const
     return false;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::check_abort_expensive(ThreadState& thread_state) const
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::check_abort_expensive(ThreadState& thread_state) const
 {
     if (get_abort())
     {
@@ -755,22 +747,22 @@ bool Search<S,M,P>::check_abort_expensive(ThreadState& thread_state) const
     return false;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::check_create_threads()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::check_create_threads()
 {
     if (m_nu_threads != m_threads.size())
         create_threads();
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::check_followup(vector<Move>& sequence)
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::check_followup(vector<Move>& sequence)
 {
     LIBBOARDGAME_UNUSED(sequence);
     return false;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::check_move_cannot_change(Float count,
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::check_move_cannot_change(Float count,
                                              Float remaining) const
 {
     if (remaining > count)
@@ -789,8 +781,8 @@ bool Search<S,M,P>::check_move_cannot_change(Float count,
     return (max_count > second_max_count + remaining);
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::create_threads()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::create_threads()
 {
     log() << "Creating " << m_nu_threads << " threads\n";
     m_threads.clear();
@@ -811,8 +803,8 @@ void Search<S,M,P>::create_threads()
     }
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::dump(ostream& out) const
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::dump(ostream& out) const
 {
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
@@ -821,8 +813,8 @@ void Search<S,M,P>::dump(ostream& out) const
     }
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::expand_node(unsigned thread_id, const Node& node,
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::expand_node(unsigned thread_id, const Node& node,
                                 const Node*& best_child, Float init_val)
 {
     typename Tree::NodeExpander expander(thread_id, m_tree, node);
@@ -836,38 +828,32 @@ bool Search<S,M,P>::expand_node(unsigned thread_id, const Node& node,
     return false;
 }
 
-template<class S, class M, unsigned P>
-double Search<S,M,P>::expected_sim_per_sec() const
+template<class S, class M, unsigned P, class R>
+double Search<S,M,P,R>::expected_sim_per_sec() const
 {
     return 100.0;
 }
 
-template<class S, class M, unsigned P>
-Float Search<S,M,P>::get_bias_term_constant() const
+template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_bias_term_constant() const
 {
     return m_bias_term.get_bias_term_constant();
 }
 
-template<class S, class M, unsigned P>
-Float Search<S,M,P>::get_expand_threshold() const
+template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_expand_threshold() const
 {
     return m_expand_threshold;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::get_last_good_reply() const
-{
-    return m_use_last_good_reply;
-}
-
-template<class S, class M, unsigned P>
-const Parameters& Search<S,M,P>::get_last_reuse_param() const
+template<class S, class M, unsigned P, class R>
+const Parameters& Search<S,M,P,R>::get_last_reuse_param() const
 {
     return m_last_reuse_param;
 }
 
-template<class S, class M, unsigned P>
-size_t Search<S,M,P>::get_max_nodes(size_t memory)
+template<class S, class M, unsigned P, class R>
+size_t Search<S,M,P,R>::get_max_nodes(size_t memory)
 {
     // Memory is used for 2 trees (m_tree and m_tmp_tree)
     size_t max_nodes = memory / sizeof(Node) / 2;
@@ -879,101 +865,93 @@ size_t Search<S,M,P>::get_max_nodes(size_t memory)
     return max_nodes;
 }
 
-template<class S, class M, unsigned P>
-size_t Search<S,M,P>::get_nu_simulations() const
+template<class S, class M, unsigned P, class R>
+size_t Search<S,M,P,R>::get_nu_simulations() const
 {
     return m_nu_simulations;
 }
 
-template<class S, class M, unsigned P>
+template<class S, class M, unsigned P, class R>
 inline const array<StatisticsDirtyLockFree<Float>,P>&
-Search<S,M,P>::get_root_val() const
+Search<S,M,P,R>::get_root_val() const
 {
     return m_root_val;
 }
 
-template<class S, class M, unsigned P>
-Parameters Search<S,M,P>::get_reuse_param() const
+template<class S, class M, unsigned P, class R>
+Parameters Search<S,M,P,R>::get_reuse_param() const
 {
     Parameters p;
-    p.create<bool>("rave", m_rave);
-    p.create<bool>("weight_rave_updates", m_weight_rave_updates);
     p.create<Float>("rave_equivalence", m_rave_equivalence);
     return p;
 }
 
-template<class S, class M, unsigned P>
-Float Search<S,M,P>::get_prune_count_start() const
+template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_prune_count_start() const
 {
     return m_prune_count_start;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::get_prune_full_tree() const
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::get_prune_full_tree() const
 {
     return m_prune_full_tree;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::get_rave() const
-{
-    return m_rave;
-}
-
-template<class S, class M, unsigned P>
-Float Search<S,M,P>::get_rave_equivalence() const
+template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_rave_equivalence() const
 {
     return m_rave_equivalence;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::get_reuse_subtree() const
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::get_reuse_subtree() const
 {
     return m_reuse_subtree;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::get_reuse_tree() const
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::get_reuse_tree() const
 {
     return m_reuse_tree;
 }
 
-template<class S, class M, unsigned P>
-inline S& Search<S,M,P>::get_state(unsigned thread_id)
+template<class S, class M, unsigned P, class R>
+inline S& Search<S,M,P,R>::get_state(unsigned thread_id)
 {
     LIBBOARDGAME_ASSERT(thread_id < m_threads.size());
     return *m_threads[thread_id]->thread_state.state;
 }
 
-template<class S, class M, unsigned P>
-inline const S& Search<S,M,P>::get_state(unsigned thread_id) const
+template<class S, class M, unsigned P, class R>
+inline const S& Search<S,M,P,R>::get_state(unsigned thread_id) const
 {
     LIBBOARDGAME_ASSERT(thread_id < m_threads.size());
     return *m_threads[thread_id]->thread_state.state;
 }
 
-template<class S, class M, unsigned P>
-inline TimeSource& Search<S,M,P>::get_time_source()
+template<class S, class M, unsigned P, class R>
+inline TimeSource& Search<S,M,P,R>::get_time_source()
 {
     LIBBOARDGAME_ASSERT(m_time_source != 0);
     return *m_time_source;
 }
 
-template<class S, class M, unsigned P>
-size_t Search<S,M,P>::get_tree_memory() const
+template<class S, class M, unsigned P, class R>
+size_t Search<S,M,P,R>::get_tree_memory() const
 {
     return m_tree_memory;
 }
 
-template<class S, class M, unsigned P>
-inline const typename Search<S,M,P>::Tree& Search<S,M,P>::get_tree()
+template<class S, class M, unsigned P, class R>
+inline const typename Search<S,M,P,R>::Tree& Search<S,M,P,R>::get_tree()
     const
 {
     return m_tree;
 }
 
-template<class S, class M, unsigned P>
-Float Search<S,M,P>::get_value() const
+template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_value() const
 {
     const Node& root = m_tree.get_root();
     Float root_count = root.get_count();
@@ -986,21 +964,15 @@ Float Search<S,M,P>::get_value() const
         return get_tie_value();
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::get_weight_rave_updates() const
-{
-    return m_weight_rave_updates;
-}
-
-template<class S, class M, unsigned P>
-void Search<S,M,P>::log_thread(const ThreadState& thread_state,
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::log_thread(const ThreadState& thread_state,
                                const string& s) const
 {
     log(format("[%i] %s") % thread_state.thread_id % s);
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::on_search_iteration(size_t n, const State& state,
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::on_search_iteration(size_t n, const State& state,
                                         const Simulation& simulation)
 {
     LIBBOARDGAME_UNUSED(n);
@@ -1009,14 +981,14 @@ void Search<S,M,P>::on_search_iteration(size_t n, const State& state,
     // Default implementation does nothing
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::on_start_search()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::on_start_search()
 {
     // Default implementation does nothing
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::playout(ThreadState& thread_state)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::playout(ThreadState& thread_state)
 {
     State& state = *thread_state.state;
     state.start_playout();
@@ -1024,7 +996,7 @@ void Search<S,M,P>::playout(ThreadState& thread_state)
     {
         Move last_good_reply_1 = Move::null();
         Move last_good_reply_2 = Move::null();
-        if (m_use_last_good_reply)
+        if (SearchParamConst::use_last_good_reply)
         {
             unsigned nu_moves = state.get_nu_moves();
             if (nu_moves > 0)
@@ -1044,8 +1016,8 @@ void Search<S,M,P>::playout(ThreadState& thread_state)
     }
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
 {
     State& state = *thread_state.state;
     const Node& root = m_tree.get_root();
@@ -1073,8 +1045,8 @@ void Search<S,M,P>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
     }
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::write_info(ostream& out) const
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::write_info(ostream& out) const
 {
     const Node& root = m_tree.get_root();
     Float count = root.get_count();
@@ -1091,14 +1063,14 @@ void Search<S,M,P>::write_info(ostream& out) const
         % thread_state.stat_in_tree_len.to_string(true, 1, true);
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::write_info_ext(ostream& out) const
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::write_info_ext(ostream& out) const
 {
     LIBBOARDGAME_UNUSED(out);
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::prune(TimeSource& time_source, double time,
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::prune(TimeSource& time_source, double time,
                           double max_time, Float prune_min_count,
                           Float& new_prune_min_count)
 {
@@ -1133,8 +1105,8 @@ bool Search<S,M,P>::prune(TimeSource& time_source, double time,
     }
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::search(Move& mv, Float max_count, Float min_simulations,
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
                            double max_time, TimeSource& time_source,
                            bool always_search)
 {
@@ -1223,7 +1195,7 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, Float min_simulations,
     m_player = get_player();
     for (unsigned i = 0; i < m_nu_players; ++i)
         m_root_val[i].clear();
-    if (m_use_last_good_reply && ! is_followup)
+    if (SearchParamConst::use_last_good_reply && ! is_followup)
         m_last_good_reply.init(m_nu_players);
     for (unsigned i = 0; i < m_threads.size(); ++i)
     {
@@ -1287,8 +1259,8 @@ bool Search<S,M,P>::search(Move& mv, Float max_count, Float min_simulations,
     return result;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::search_loop(ThreadState& thread_state)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::search_loop(ThreadState& thread_state)
 {
     State& state = *thread_state.state;
     double time_interval = 0.1;
@@ -1329,17 +1301,17 @@ void Search<S,M,P>::search_loop(ThreadState& thread_state)
             eval = state.evaluate_terminal();
         thread_state.stat_len.add(double(state.get_nu_moves()));
         update_values(thread_state, eval);
-        if (m_rave)
+        if (SearchParamConst::rave)
             update_rave_values(thread_state, eval);
-        if (m_use_last_good_reply)
+        if (SearchParamConst::use_last_good_reply)
             update_last_good_reply(thread_state, eval);
         on_search_iteration(nu_simulations, *thread_state.state,
                             thread_state.simulation);
     }
 }
 
-template<class S, class M, unsigned P>
-const Node<M>* Search<S,M,P>::select_child(const Node& node)
+template<class S, class M, unsigned P, class R>
+const Node<M>* Search<S,M,P,R>::select_child(const Node& node)
 {
     LIBBOARDGAME_ASSERT(node.has_children());
     Float node_count = node.get_count();
@@ -1351,7 +1323,7 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     Float best_value = -numeric_limits<Float>::max();
     m_bias_term.start_iteration(node_count);
     Float beta =
-        (m_rave ?
+        (SearchParamConst::rave ?
          sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence)) : 0);
     Float beta_inv = 1 - beta;
     if (log_move_selection)
@@ -1378,8 +1350,8 @@ const Node<M>* Search<S,M,P>::select_child(const Node& node)
     return best_child;
 }
 
-template<class S, class M, unsigned P>
-const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
+template<class S, class M, unsigned P, class R>
+const Node<M>* Search<S,M,P,R>::select_child_final(const Node& node,
                                        const vector<Move>* exclude_moves) const
 {
     // Select the child with the highest visit count, use value as a tie breaker
@@ -1404,8 +1376,8 @@ const Node<M>* Search<S,M,P>::select_child_final(const Node& node,
     return result;
 }
 
-template<class S, class M, unsigned P>
-bool Search<S,M,P>::select_move(Move& mv, const vector<Move>* exclude_moves)
+template<class S, class M, unsigned P, class R>
+bool Search<S,M,P,R>::select_move(Move& mv, const vector<Move>* exclude_moves)
     const
 {
     const Node* child = select_child_final(m_tree.get_root(), exclude_moves);
@@ -1418,80 +1390,62 @@ bool Search<S,M,P>::select_move(Move& mv, const vector<Move>* exclude_moves)
         return false;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_bias_term_constant(Float c)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_bias_term_constant(Float c)
 {
     m_bias_term.set_bias_term_constant(c);
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_callback(function<void(double, double)> callback)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_callback(function<void(double, double)> callback)
 {
     m_callback = callback;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_expand_threshold(Float n)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_expand_threshold(Float n)
 {
     m_expand_threshold = n;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_deterministic()
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_deterministic()
 {
     m_deterministic = true;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_last_good_reply(bool enable)
-{
-    m_use_last_good_reply = enable;
-}
-
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_prune_count_start(Float n)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_prune_count_start(Float n)
 {
     m_prune_count_start = n;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_prune_full_tree(bool enable)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_prune_full_tree(bool enable)
 {
     m_prune_full_tree = enable;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_rave(bool enable)
-{
-    m_rave = enable;
-}
-
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_rave_check_same(bool enable)
-{
-    m_rave_check_same = enable;
-}
-
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_rave_equivalence(Float n)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_rave_equivalence(Float n)
 {
     m_rave_equivalence = n;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_reuse_subtree(bool enable)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_reuse_subtree(bool enable)
 {
     m_reuse_subtree = enable;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_reuse_tree(bool enable)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_reuse_tree(bool enable)
 {
     m_reuse_tree = enable;
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_tree_memory(size_t memory)
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_tree_memory(size_t memory)
 {
     m_tree_memory = memory;
     m_max_nodes = get_max_nodes(memory);
@@ -1499,14 +1453,8 @@ void Search<S,M,P>::set_tree_memory(size_t memory)
     m_tmp_tree.set_max_nodes(m_max_nodes);
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::set_weight_rave_updates(bool enable)
-{
-    m_weight_rave_updates = enable;
-}
-
-template<class S, class M, unsigned P>
-void Search<S,M,P>::update_last_good_reply(ThreadState& thread_state,
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::update_last_good_reply(ThreadState& thread_state,
                                            const array<Float,max_players>& eval)
 {
     const State& state = *thread_state.state;
@@ -1540,8 +1488,8 @@ void Search<S,M,P>::update_last_good_reply(ThreadState& thread_state,
         }
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
                                        const array<Float,max_players>& eval)
 {
     const State& state = *thread_state.state;
@@ -1578,8 +1526,8 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
     }
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
                                        const array<Float,max_players>& eval,
                                        unsigned i, unsigned player)
 {
@@ -1599,7 +1547,7 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
         LIBBOARDGAME_ASSERT(first >= i);
         if (first == numeric_limits<unsigned>::max())
             continue;
-        if (m_rave_check_same)
+        if (SearchParamConst::rave_check_same)
         {
             bool other_played_same = false;
             for (unsigned j = 0; j < m_nu_players; ++j)
@@ -1616,7 +1564,7 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
                 continue;
         }
         Float weight;
-        if (m_weight_rave_updates)
+        if (SearchParamConst::rave_weighting)
             // Weight decreases linearly from 2 at the start to 1 at the end of
             // a simulation. Being proportional to the relative move distance
             // (by dividing it by the length of the simulation) is essential
@@ -1630,8 +1578,8 @@ void Search<S,M,P>::update_rave_values(ThreadState& thread_state,
     }
 }
 
-template<class S, class M, unsigned P>
-void Search<S,M,P>::update_values(ThreadState& thread_state,
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::update_values(ThreadState& thread_state,
                                   const array<Float,max_players>& eval)
 {
     const State& state = *thread_state.state;

@@ -18,10 +18,26 @@ using libpentobi_base::Setup;
 
 //-----------------------------------------------------------------------------
 
+/** Optional compile-time parameters for libboardgame_mcts::Search.
+    See libboardgame_mcts::SearchParamConstDefault for the meaning of the
+    members. */
+struct SearchParamConst
+{
+    static const bool rave = true;
+
+    static const bool rave_check_same = false;
+
+    static const bool rave_weighting = true;
+
+    static const bool use_last_good_reply = true;
+};
+
+//-----------------------------------------------------------------------------
+
 /** Monte-Carlo tree search implementation for Blokus.
     @note @ref libboardgame_avoid_stack_allocation */
 class Search
-    : public libboardgame_mcts::Search<State, Move, 4>
+    : public libboardgame_mcts::Search<State,Move,4,SearchParamConst>
 {
 public:
     Search(Variant initial_variant, unsigned nu_threads, size_t memory);
@@ -99,7 +115,8 @@ protected:
     void on_start_search();
 
 private:
-    typedef libboardgame_mcts::Search<State, Move, 4> ParentClass;
+    typedef libboardgame_mcts::Search<State,Move,4,SearchParamConst>
+                                                                   ParentClass;
 
     /** Automatically set default parameters for the game variant if
         the game variant changes. */
