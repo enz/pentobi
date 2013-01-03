@@ -10,7 +10,7 @@
 #include <functional>
 #include <boost/format.hpp>
 #include <boost/thread/barrier.hpp>
-#include <boost/thread/condition.hpp>
+#include <boost/thread/condition_variable.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
 #include "BiasTerm.h"
@@ -33,9 +33,11 @@ namespace libboardgame_mcts {
 using namespace std;
 using boost::format;
 using boost::barrier;
-using boost::condition;
+using boost::condition_variable;
+using boost::lock_guard;
 using boost::mutex;
 using boost::thread;
+using boost::unique_lock;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
@@ -419,11 +421,11 @@ private:
 
         mutex m_search_finished_mutex;
 
-        condition m_start_search;
+        condition_variable m_start_search;
 
-        condition m_search_finished;
+        condition_variable m_search_finished;
 
-        mutex::scoped_lock m_search_finished_lock;
+        unique_lock<mutex> m_search_finished_lock;
 
         thread m_thread;
 
@@ -583,7 +585,7 @@ Search<S,M,P,R>::Thread::~Thread()
         return;
     m_quit = true;
     {
-        mutex::scoped_lock lock(m_start_search_mutex);
+        lock_guard<mutex> lock(m_start_search_mutex);
         m_start_search.notify_all();
     }
     m_thread.join();
@@ -600,7 +602,7 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::Thread::start_search_loop()
 {
     LIBBOARDGAME_ASSERT(m_thread.joinable());
-    mutex::scoped_lock lock(m_start_search_mutex);
+    lock_guard<mutex> lock(m_start_search_mutex);
     m_start_search.notify_all();
 }
 
@@ -608,7 +610,7 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::Thread::thread_main()
 {
     //log() << "Start thread " << thread_state.thread_id << '\n';
-    mutex::scoped_lock lock(m_start_search_mutex);
+    unique_lock<mutex> lock(m_start_search_mutex);
     m_thread_ready.wait();
     while (true)
     {
@@ -617,7 +619,7 @@ void Search<S,M,P,R>::Thread::thread_main()
             break;
         m_search_loop_func(thread_state);
         {
-            mutex::scoped_lock lock(m_search_finished_mutex);
+            lock_guard<mutex> lock(m_search_finished_mutex);
             m_search_finished.notify_all();
         }
     }

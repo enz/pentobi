@@ -14,7 +14,7 @@
 #include <iostream>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/thread/barrier.hpp>
-#include <boost/thread/condition.hpp>
+#include <boost/thread/condition_variable.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
 
@@ -22,7 +22,7 @@ namespace libboardgame_gtp {
 
 using namespace std;
 using boost::barrier;
-using boost::condition;
+using boost::condition_variable;
 using boost::lock_guard;
 using boost::mutex;
 using boost::thread;
@@ -107,9 +107,9 @@ private:
 
     mutex m_ponder_finished_mutex;
 
-    condition m_start_ponder;
+    condition_variable m_start_ponder;
 
-    condition m_ponder_finished;
+    condition_variable m_ponder_finished;
 
     unique_lock<mutex> m_ponder_finished_lock;
 
@@ -224,11 +224,11 @@ private:
 
         mutex wait_cmd_mutex;
 
-        condition wait_cmd;
+        condition_variable wait_cmd;
 
         mutex cmd_received_mutex;
 
-        condition cmd_received;
+        condition_variable cmd_received;
 
         unique_lock<mutex> cmd_received_lock;
 
