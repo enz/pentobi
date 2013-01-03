@@ -1,13 +1,12 @@
 //----------------------------------------------------------------------------
-/** @file FastLog.h
-    Fast logarithm. */
+/** @file libboardgame_util/FastLog.h */
 //----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_FAST_LOG_H
 #define LIBBOARDGAME_UTIL_FAST_LOG_H
 
 #include <memory>
-#include <boost/cstdint.hpp>
+#include <cstdint>
 
 namespace libboardgame_util {
 
