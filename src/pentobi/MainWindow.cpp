@@ -380,7 +380,7 @@ void MainWindow::about()
                        "<a href=\"http://pentobi.sourceforge.net\">http://pentobi.sourceforge.net</a>"
                        + "</p>"
                        "<p>" +
-                       tr("Copyright &copy; 2011&ndash;2012 Markus Enzenberger") +
+                       tr("Copyright &copy; 2011&ndash;2013 Markus Enzenberger") +
                        "</p>");
 }
 

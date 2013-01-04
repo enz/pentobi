@@ -108,8 +108,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="381"/>
-        <source>Copyright &amp;copy; 2011&amp;ndash;2012 Markus Enzenberger</source>
-        <translation>Copyright &amp;copy; 2011&amp;ndash;2012 Markus Enzenberger</translation>
+        <source>Copyright &amp;copy; 2011&amp;ndash;2013 Markus Enzenberger</source>
+        <translation>Copyright &amp;copy; 2011&amp;ndash;2013 Markus Enzenberger</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="393"/>
