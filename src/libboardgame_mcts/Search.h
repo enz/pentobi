@@ -797,8 +797,8 @@ void Search<S,M,P,R>::create_threads()
         auto& thread_state = t->thread_state;
         thread_state.thread_id = i;
         thread_state.state = create_state();
-        for (unsigned i = 0; i < max_players; ++i)
-            thread_state.first_play[i].fill(numeric_limits<unsigned>::max());
+        for (unsigned j = 0; j < max_players; ++j)
+            thread_state.first_play[j].fill(numeric_limits<unsigned>::max());
         if (i > 0)
             t->run();
         m_threads.push_back(move(t));
