@@ -128,30 +128,6 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
         }
 }
 
-unsigned Board::get_bonus(Color c) const
-{
-    unsigned bonus = 0;
-    if (m_variant != Variant::junior && m_state_color[c].pieces_left.size() == 0)
-    {
-        bonus = 15;
-        for (unsigned i = get_nu_moves(); i > 0; --i)
-        {
-            ColorMove mv = get_move(i - 1);
-            if (mv.color == c)
-            {
-                if (! mv.move.is_pass())
-                {
-                    const MoveInfo& info = get_move_info(mv.move);
-                    if (get_piece_info(info.piece).get_size() == 1)
-                        bonus += 5;
-                }
-                break;
-            }
-        }
-    }
-    return bonus;
-}
-
 Color Board::get_effective_to_play() const
 {
     Color c = m_state_base.to_play;

@@ -480,6 +480,26 @@ inline BoardType Board::get_board_type() const
     return m_board_const->get_board_type();
 }
 
+inline unsigned Board::get_bonus(Color c) const
+{
+    if (m_state_color[c].pieces_left.size() > 0
+        || m_variant == Variant::junior)
+        return 0;
+    unsigned bonus = 15;
+    for (unsigned i = get_nu_moves(); i > 0; --i)
+    {
+        ColorMove mv = get_move(i - 1);
+        if (mv.color == c && ! mv.move.is_pass())
+        {
+            const MoveInfo& info = get_move_info(mv.move);
+            if (get_piece_info(info.piece).get_size() == 1)
+                bonus += 5;
+            break;
+        }
+    }
+    return bonus;
+}
+
 inline const Geometry& Board::get_geometry() const
 {
     return *m_geometry;
