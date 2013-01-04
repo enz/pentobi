@@ -21,7 +21,6 @@
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_util/Parameters.h"
 #include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libboardgame_util/TimeIntervalChecker.h"
@@ -42,7 +41,6 @@ using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
 using libboardgame_util::IntervalChecker;
-using libboardgame_util::Parameters;
 using libboardgame_util::StatisticsBase;
 using libboardgame_util::StatisticsDirtyLockFree;
 using libboardgame_util::StatisticsExt;
@@ -161,14 +159,6 @@ public:
     /** @name Virtual functions */
     // @{
 
-    /** Get a copy of the search parameters that determine the reusability of
-        (a part of) the tree between searches.
-        Usually, one should not try to use a subtree from the last search as an
-        init tree for the next search (should the current state be a follow-up
-        state of the last search) if any of those parameters were changed.
-        @see check_followup() */
-    virtual Parameters get_reuse_param() const;
-
     /** Check if the position at the root is a follow-up position of the last
         search.
         In this function, the subclass can store the game state at the root of
@@ -179,8 +169,7 @@ public:
         This function will be called exactly once at the beginning of each
         search. The default implementation returns false.
         The information is also used for deciding whether to clear other
-        caches from the last search (e.g. Last-Good-Reply heuristic).
-        @see get_reuse_param() */
+        caches from the last search (e.g. Last-Good-Reply heuristic). */
     virtual bool check_followup(vector<Move>& sequence);
 
     virtual void write_info(ostream& out) const;
@@ -236,9 +225,6 @@ public:
     void set_rave_equivalence(Float value);
 
     Float get_rave_equivalence() const;
-
-    /** See get_reuse_param() */
-    const Parameters& get_last_reuse_param() const;
 
     /** Value to start the tree pruning with.
         This value should be above typical count initializations if prior
@@ -497,9 +483,6 @@ private:
     Tree m_tmp_tree;
 
     AssertionHandler m_assertion_handler;
-
-    /** See get_reuse_param() */
-    Parameters m_last_reuse_param;
 
 
     /** @name Members that are used concurrently by all threads during the
@@ -849,12 +832,6 @@ Float Search<S,M,P,R>::get_expand_threshold() const
 }
 
 template<class S, class M, unsigned P, class R>
-const Parameters& Search<S,M,P,R>::get_last_reuse_param() const
-{
-    return m_last_reuse_param;
-}
-
-template<class S, class M, unsigned P, class R>
 size_t Search<S,M,P,R>::get_max_nodes(size_t memory)
 {
     // Memory is used for 2 trees (m_tree and m_tmp_tree)
@@ -878,14 +855,6 @@ inline const array<StatisticsDirtyLockFree<Float>,P>&
 Search<S,M,P,R>::get_root_val() const
 {
     return m_root_val;
-}
-
-template<class S, class M, unsigned P, class R>
-Parameters Search<S,M,P,R>::get_reuse_param() const
-{
-    Parameters p;
-    p.create<Float>("rave_equivalence", m_rave_equivalence);
-    return p;
 }
 
 template<class S, class M, unsigned P, class R>
@@ -1137,8 +1106,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
             if (m_root_val[i].get_count() > 0)
                 m_init_val[i] = m_root_val[i];
     m_reuse_count = 0;
-    if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
-        && get_reuse_param() == get_last_reuse_param())
+    if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same)))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
         if (m_followup_sequence.empty())
@@ -1190,7 +1158,6 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
     if (clear_tree)
         m_tree.clear(get_tie_value());
 
-    m_last_reuse_param = get_reuse_param();
     m_timer.reset(time_source);
     m_time_source = &time_source;
     on_start_search();

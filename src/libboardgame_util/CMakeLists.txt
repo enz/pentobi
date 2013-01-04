@@ -11,7 +11,6 @@ set(boardgame_util_STAT_SRCS
   FastLog.cpp
   IntervalChecker.cpp
   Log.cpp
-  Parameters.cpp
   RandomGenerator.cpp
   StringUtil.cpp
   TimeIntervalChecker.cpp
