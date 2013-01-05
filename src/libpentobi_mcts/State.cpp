@@ -390,27 +390,87 @@ array<Float,4> State::evaluate_playout()
     return evaluate_terminal();
 }
 
+/** Get the game result for each color.
+    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there
+    are n &gt; 2 players, this is generalized in the following way: The scores
+    are sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned
+    a result value of r_i/(n-1). If multiple players have the same score,
+    the result value is the average of all ranks with this score. So being
+    the single winner still gives the result 1 and having the lowest score
+    gives the result 0. Being the single winner is better than sharing the
+    best place, which is better than getting the second place, etc.
+
+    There is small modification applied to the result that encorages wins
+    with larger scores. */
 array<Float,4> State::evaluate_terminal()
 {
-    array<Float,4> result_array;
+    unsigned nu_players = m_bd.get_nu_players();
+    ColorMap<Float> points;
+    ColorMap<Float> score;
     for (ColorIterator i(m_nu_colors); i; ++i)
+        points[*i] = Float(m_bd.get_points_with_bonus(*i));
+    for (unsigned i = 0; i < nu_players; ++i)
+        score[Color(i)] = Float(m_bd.get_score(Color(i)));
+    if (m_nu_colors > nu_players)
     {
-        Float score = Float(m_bd.get_score(*i));
-        Float game_result = get_result(*i);
+        LIBBOARDGAME_ASSERT(m_nu_colors == 4);
+        score[Color(2)] = score[Color(0)];
+        score[Color(3)] = score[Color(1)];
+    }
+    m_stat_score.add(score[m_shared_const.to_play]);
+    array<Float,Color::range> sorted_points;
+    if (nu_players > 2)
+    {
+        for (ColorIterator i(m_nu_colors); i; ++i)
+            sorted_points[(*i).to_int()] = points[*i];
+        sort(sorted_points.begin(), sorted_points.begin() + m_nu_colors);
+    }
+    array<Float,4> result_array;
+    for (unsigned i = 0; i < nu_players; ++i)
+    {
+        Color c(i);
+        Float game_result;
+        if (nu_players == 2)
+        {
+            if (score[c] > 0)
+                game_result = 1;
+            else if (score[c] < 0)
+                game_result = 0;
+            else
+                game_result = 0.5;
+        }
+        else
+        {
+            game_result = 0;
+            Float n = 0;
+            for (Color::IntType j = 0; j < m_nu_colors; ++j)
+                if (sorted_points[j] == points[c])
+                {
+                    game_result += Float(j) / Float(m_nu_colors - 1);
+                    ++n;
+                }
+            game_result /= n;
+        }
+
         Float score_modification = m_shared_const.score_modification;
         // Apply score modification. Example: If score modification is 0.1,
         // the game result is rescaled to [0..0.9] and the score modification
         // is added with 0.05 as the middle (corresponding to score 0).
         Float result =
             (1.f - score_modification) * game_result
-            + 0.5f * (score_modification + score * m_score_modification_factor);
-        if (*i == m_shared_const.to_play)
-            m_stat_score.add(score);
-        result_array[(*i).to_int()] = result;
+            + 0.5f * (score_modification
+                      + score[c] * m_score_modification_factor);
+        result_array[i] = result;
         if (log_simulations)
-            log() << "Result color " << (*i).to_int() << ": score=" << score
+            log() << "Result color " << i << ": score=" << score[c]
                   << " game_result=" << game_result << " result=" << result
                   << '\n';
+    }
+    if (m_nu_colors > nu_players)
+    {
+        LIBBOARDGAME_ASSERT(m_nu_colors == 4);
+        result_array[2] = result_array[0];
+        result_array[3] = result_array[1];
     }
     return result_array;
 }
@@ -688,92 +748,6 @@ inline const PieceMap<bool>& State::get_pieces_considered() const
         return m_shared_const.is_piece_considered_all;
     else
         return *m_shared_const.is_piece_considered[nu_moves];
-}
-
-/** Get game result from the view point of a color.
-    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there are
-    n &gt; 2 players, this is generalized in the following way: The scores are
-    sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned a result
-    value of r_i/(n-1). If a multiple players have the same score, the result
-    value is the average of all ranks with this score. So being the single
-    winner still gives the result 1 and having the lowest score gives the
-    result 0. Being the single winner is better than sharing the best place,
-    which is better than getting the second place, etc. */
-Float State::get_result(Color c) const
-{
-    Variant variant = m_bd.get_variant();
-    if (variant == Variant::duo || variant == Variant::junior)
-    {
-        unsigned points0 = m_bd.get_points_with_bonus(Color(0));
-        unsigned points1 = m_bd.get_points_with_bonus(Color(1));
-        if (c == Color(0))
-        {
-            if (points0 > points1)
-                return 1;
-            else if (points0 < points1)
-                return 0;
-            else
-                return 0.5;
-        }
-        else
-        {
-            if (points1 > points0)
-                return 1;
-            else if (points1 < points0)
-                return 0;
-            else
-                return 0.5;
-        }
-    }
-    else if (variant == Variant::classic
-             || variant == Variant::trigon
-             || variant == Variant::trigon_3)
-    {
-        array<unsigned,Color::range> points_array;
-        for (Color::IntType i = 0; i < m_nu_colors; ++i)
-            points_array[i] = m_bd.get_points_with_bonus(Color(i));
-        unsigned points = points_array[c.to_int()];
-        sort(points_array.begin(), points_array.begin() + m_nu_colors);
-        Float result = 0;
-        unsigned n = 0;
-        for (Color::IntType i = 0; i < m_nu_colors; ++i)
-            if (points_array[i] == points)
-            {
-                result += Float(i) / Float(m_nu_colors - 1);
-                ++n;
-            }
-        result /= Float(n);
-        return result;
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
-                            || variant == Variant::trigon_2);
-        unsigned points0 =
-            m_bd.get_points_with_bonus(Color(0))
-            + m_bd.get_points_with_bonus(Color(2));
-        unsigned points1 =
-            m_bd.get_points_with_bonus(Color(1))
-            + m_bd.get_points_with_bonus(Color(3));
-        if (c == Color(0) || c == Color(2))
-        {
-            if (points0 > points1)
-                return 1;
-            else if (points0 < points1)
-                return 0;
-            else
-                return 0.5;
-        }
-        else
-        {
-            if (points1 > points0)
-                return 1;
-            else if (points1 < points0)
-                return 0;
-            else
-                return 0.5;
-        }
-    }
 }
 
 void State::init_move_list_with_local(Color c)

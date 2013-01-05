@@ -294,8 +294,6 @@ private:
 
     const PieceMap<bool>& get_pieces_considered() const;
 
-    Float get_result(Color c) const;
-
     void init_move_list_with_local(Color c);
 
     void init_move_list_without_local(Color c);
