@@ -572,6 +572,9 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
 
     if (! m_has_moves[to_play])
     {
+        if (m_nu_passes + 1 == m_nu_colors)
+            return false;
+
         // Don't care about the exact score of a playout if we are still early
         // in the game and we know that the playout is a loss because the
         // player has no more moves and the score is already negative.
