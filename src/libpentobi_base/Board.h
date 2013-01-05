@@ -84,6 +84,9 @@ public:
     /** Get number of pieces per player in the current game variant. */
     unsigned get_nu_pieces() const;
 
+    /** Number of instances of each unique piece per color. */
+    unsigned get_nu_piece_instances() const;
+
     unsigned get_max_nonpass_player_moves() const;
 
     /** Maximum number of real (=non-pass) moves in the current game variant. */
@@ -377,6 +380,9 @@ private:
     /** Bonus for playing the 1-piece last. */
     unsigned m_bonus_one_piece;
 
+    /** See get_nu_piece_instances() */
+    unsigned m_nu_piece_instances;
+
     /** Same as m_board_const->get_move_info_array() */
     const MoveInfo* m_move_info_array;
 
@@ -532,6 +538,11 @@ inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
     return *(m_move_info_ext_array + mv.to_int());
 }
 
+inline const MovePoints& Board::get_move_points(Move mv) const
+{
+    return m_board_const->get_move_points(mv);
+}
+
 inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
                                                    unsigned adj_status) const
 {
@@ -574,17 +585,14 @@ inline unsigned Board::get_nu_players() const
     return m_nu_players;
 }
 
-inline const MovePoints& Board::get_move_points(Move mv) const
+inline unsigned Board::get_nu_piece_instances() const
 {
-    return m_board_const->get_move_points(mv);
+    return m_nu_piece_instances;
 }
 
 inline unsigned Board::get_nu_pieces() const
 {
-    if (m_variant == Variant::junior)
-        return 2 * m_board_const->get_nu_pieces();
-    else
-        return m_board_const->get_nu_pieces();
+    return m_nu_piece_instances * m_board_const->get_nu_pieces();
 }
 
 inline unsigned Board::get_nu_uniq_pieces() const

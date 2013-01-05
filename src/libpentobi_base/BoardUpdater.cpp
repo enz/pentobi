@@ -92,19 +92,11 @@ void init_setup(Board& bd, const Node& node)
 {
     Setup setup;
     get_current_position_as_setup(bd, setup);
-    Variant variant = bd.get_variant();
-    unsigned nu_instances;
-    if (variant == Variant::junior)
-        nu_instances = 2;
-    else
-        nu_instances = 1;
     ColorMap<AllPiecesLeftList> all_pieces_left;
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         for (Piece piece : bd.get_pieces_left(*i))
-        {
-            for (unsigned j = 0; j < nu_instances; ++j)
+            for (unsigned j = 0; j < bd.get_nu_piece_instances(); ++j)
                 all_pieces_left[*i].push_back(piece);
-        }
     handle_setup_property(node, "A1", Color(0), bd, setup, all_pieces_left);
     handle_setup_property(node, "A2", Color(1), bd, setup, all_pieces_left);
     handle_setup_property(node, "A3", Color(2), bd, setup, all_pieces_left);

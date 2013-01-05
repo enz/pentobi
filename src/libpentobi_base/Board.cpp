@@ -193,6 +193,10 @@ void Board::init(Variant variant, const Setup* setup)
 
     m_state_base.point_state.fill(PointState::empty());
     m_state_base.played_move.fill(Move::null());
+    if (variant == Variant::junior)
+        m_nu_piece_instances = 2;
+    else
+        m_nu_piece_instances = 1;
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_state_color[*i].forbidden.fill(false);
@@ -204,10 +208,7 @@ void Board::init(Variant variant, const Setup* setup)
         m_state_color[*i].bonus = 0;
         for (unsigned j = 0; j < get_nu_uniq_pieces(); ++j)
             m_state_color[*i].pieces_left.push_back(Piece(j));
-        if (variant == Variant::junior)
-            m_state_color[*i].nu_left_piece.fill(2);
-        else
-            m_state_color[*i].nu_left_piece.fill(1);
+        m_state_color[*i].nu_left_piece.fill(m_nu_piece_instances);
     }
     m_state_base.nu_onboard_pieces_all = 0;
     if (setup == 0)
@@ -233,7 +234,7 @@ void Board::init(Variant variant, const Setup* setup)
 void Board::init_variant(Variant variant)
 {
     m_variant = variant;
-    if (m_variant == Variant::duo || m_variant == Variant::junior)
+    if (m_nu_colors == 2)
     {
         m_color_name[Color(0)] = "Blue";
         m_color_name[Color(1)] = "Green";
