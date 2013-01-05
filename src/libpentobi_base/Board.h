@@ -78,7 +78,7 @@ public:
 
     unsigned get_nu_players() const;
 
-    /** Get number of unique pieces per player in the current game variant. */
+
     unsigned get_nu_uniq_pieces() const;
 
     /** Get number of pieces per player in the current game variant. */
