@@ -163,80 +163,6 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
         }
 }
 
-int Board::get_score(Color c) const
-{
-    if (m_variant == Variant::duo || m_variant == Variant::junior)
-    {
-        unsigned points0 = get_points_with_bonus(Color(0));
-        unsigned points1 = get_points_with_bonus(Color(1));
-        if (c == Color(0))
-            return points0 - points1;
-        else
-            return points1 - points0;
-    }
-    else if (m_variant == Variant::classic
-             || m_variant == Variant::trigon
-             || m_variant == Variant::trigon_3)
-    {
-        int score = 0;
-        for (ColorIterator i(m_nu_colors); i; ++i)
-            if (*i != c)
-                score -= get_points_with_bonus(*i);
-        score =
-            get_points_with_bonus(c)
-            + score / (static_cast<int>(m_nu_colors) - 1);
-        return score;
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
-                            || m_variant == Variant::trigon_2);
-        unsigned points0 =
-            get_points_with_bonus(Color(0)) + get_points_with_bonus(Color(2));
-        unsigned points1 =
-            get_points_with_bonus(Color(1)) + get_points_with_bonus(Color(3));
-        if (c == Color(0) || c == Color(2))
-            return points0 - points1;
-        else
-            return points1 - points0;
-    }
-}
-
-int Board::get_score_without_bonus(Color c) const
-{
-    if (m_variant == Variant::duo || m_variant == Variant::junior)
-    {
-        unsigned points0 = get_points(Color(0));
-        unsigned points1 = get_points(Color(1));
-        if (c == Color(0))
-            return points0 - points1;
-        else
-            return points1 - points0;
-    }
-    else if (m_variant == Variant::classic
-             || m_variant == Variant::trigon
-             || m_variant == Variant::trigon_3)
-    {
-        int score = 0;
-        for (ColorIterator i(m_nu_colors); i; ++i)
-            if (*i != c)
-                score -= get_points(*i);
-        score =
-            get_points(c) + score / (static_cast<int>(m_nu_colors) - 1);
-        return score;
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
-                            || m_variant == Variant::trigon_2);
-        unsigned points0 = get_points(Color(0)) + get_points(Color(2));
-        unsigned points1 = get_points(Color(1)) + get_points(Color(3));
-        if (c == Color(0) || c == Color(2))
-            return points0 - points1;
-        else
-            return points1 - points0;
-    }
-}
 bool Board::has_moves(Color c) const
 {
     bool is_first = is_first_piece(c);
@@ -275,6 +201,7 @@ void Board::init(Variant variant, const Setup* setup)
         m_state_color[*i].pieces_left.clear();
         m_state_color[*i].nu_onboard_pieces = 0;
         m_state_color[*i].points = 0;
+        m_state_color[*i].bonus = 0;
         for (unsigned j = 0; j < get_nu_uniq_pieces(); ++j)
             m_state_color[*i].pieces_left.push_back(Piece(j));
         if (variant == Variant::junior)
@@ -296,6 +223,9 @@ void Board::init(Variant variant, const Setup* setup)
                 place(*i, mv);
         m_state_base.to_play = setup->to_play;
         optimize_attach_point_lists();
+        for (ColorIterator i(m_nu_colors); i; ++i)
+            if (m_state_color[*i].pieces_left.empty())
+                m_state_color[*i].bonus = m_bonus_all_pieces;
     }
     m_moves.clear();
 }
@@ -330,6 +260,16 @@ void Board::init_variant(Variant variant)
     m_nu_colors = libpentobi_base::get_nu_colors(variant);
     m_nu_players = libpentobi_base::get_nu_players(variant);
     m_board_const = &BoardConst::get(variant);
+    if (m_variant == Variant::junior)
+    {
+        m_bonus_all_pieces = 0;
+        m_bonus_one_piece = 0;
+    }
+    else
+    {
+        m_bonus_all_pieces = 15;
+        m_bonus_one_piece = 5;
+    }
     m_geometry = &m_board_const->get_geometry();
     m_move_info_array = m_board_const->get_move_info_array();
     m_move_info_ext_array = m_board_const->get_move_info_ext_array();

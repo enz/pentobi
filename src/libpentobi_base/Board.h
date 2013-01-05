@@ -128,10 +128,12 @@ public:
         of a unique piece per player. */
     unsigned get_nu_left_piece(Color c, Piece piece) const;
 
+    /** Get number of points on board occupied by a color. */
     unsigned get_points(Color c) const;
 
     unsigned get_bonus(Color c) const;
 
+    /** Equivalent to get_points(c) + get_bonus(c) */
     unsigned get_points_with_bonus(Color c) const;
 
     Move get_played_move(Point p) const;
@@ -261,8 +263,6 @@ public:
         are more than two players). */
     int get_score(Color c) const;
 
-    int get_score_without_bonus(Color c) const;
-
     /** Get the place of a player in the game result.
         @param c The color of the player.
         @param[out] place The place of the player with that color. The place
@@ -348,6 +348,8 @@ private:
         unsigned nu_onboard_pieces;
 
         unsigned points;
+
+        unsigned bonus;
     };
 
     struct Snapshot
@@ -368,6 +370,12 @@ private:
     unsigned m_nu_players;
 
     const BoardConst* m_board_const;
+
+    /** Bonus for playing all pieces. */
+    unsigned m_bonus_all_pieces;
+
+    /** Bonus for playing the 1-piece last. */
+    unsigned m_bonus_one_piece;
 
     /** Same as m_board_const->get_move_info_array() */
     const MoveInfo* m_move_info_array;
@@ -482,22 +490,7 @@ inline BoardType Board::get_board_type() const
 
 inline unsigned Board::get_bonus(Color c) const
 {
-    if (m_state_color[c].pieces_left.size() > 0
-        || m_variant == Variant::junior)
-        return 0;
-    unsigned bonus = 15;
-    for (unsigned i = get_nu_moves(); i > 0; --i)
-    {
-        ColorMove mv = get_move(i - 1);
-        if (mv.color == c && ! mv.move.is_pass())
-        {
-            const MoveInfo& info = get_move_info(mv.move);
-            if (get_piece_info(info.piece).get_size() == 1)
-                bonus += 5;
-            break;
-        }
-    }
-    return bonus;
+    return m_state_color[c].bonus;
 }
 
 inline const Geometry& Board::get_geometry() const
@@ -638,6 +631,44 @@ inline unsigned Board::get_points_with_bonus(Color c) const
 inline Color Board::get_previous(Color c) const
 {
     return c.get_previous(m_nu_colors);
+}
+
+inline int Board::get_score(Color c) const
+{
+    if (m_nu_colors == 2)
+    {
+        LIBBOARDGAME_ASSERT(m_nu_players == 2);
+        unsigned points0 = get_points_with_bonus(Color(0));
+        unsigned points1 = get_points_with_bonus(Color(1));
+        if (c == Color(0))
+            return points0 - points1;
+        else
+            return points1 - points0;
+    }
+    else if (m_nu_players == 2)
+    {
+        LIBBOARDGAME_ASSERT(m_nu_colors == 4);
+        unsigned points0 =
+            get_points_with_bonus(Color(0)) + get_points_with_bonus(Color(2));
+        unsigned points1 =
+            get_points_with_bonus(Color(1)) + get_points_with_bonus(Color(3));
+        if (c == Color(0) || c == Color(2))
+            return points0 - points1;
+        else
+            return points1 - points0;
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_nu_colors == m_nu_players);
+        int score = 0;
+        for (ColorIterator i(m_nu_colors); i; ++i)
+            if (*i != c)
+                score -= get_points_with_bonus(*i);
+        score =
+            get_points_with_bonus(c)
+            + score / (static_cast<int>(m_nu_colors) - 1);
+        return score;
+    }
 }
 
 inline Color Board::get_second_color(Color c) const
@@ -805,13 +836,22 @@ inline void Board::place(Color c, Move mv)
     const MoveInfo& info = get_move_info(mv);
     const MoveInfoExt& info_ext = get_move_info_ext(mv);
     Piece piece = info.piece;
+    unsigned piece_size = info.points.size();
     StateColor& state_color = m_state_color[c];
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
     if (--state_color.nu_left_piece[piece] == 0)
+    {
         state_color.pieces_left.remove(piece);
+        if (state_color.pieces_left.empty())
+        {
+            state_color.bonus = m_bonus_all_pieces;
+            if (piece_size == 1)
+                state_color.bonus += m_bonus_one_piece;
+        }
+    }
     ++m_state_base.nu_onboard_pieces_all;
     ++state_color.nu_onboard_pieces;
-    state_color.points += info.points.size();
+    state_color.points += piece_size;
     auto i = info.points.begin();
     auto end = info.points.end();
     LIBBOARDGAME_ASSERT(i != end);
