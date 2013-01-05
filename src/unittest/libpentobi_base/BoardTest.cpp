@@ -9,6 +9,8 @@
 #include "libpentobi_base/Board.h"
 
 #include "libboardgame_test/Test.h"
+#include "libpentobi_base/MoveList.h"
+#include "libpentobi_base/MoveMarker.h"
 
 using namespace std;
 using namespace libpentobi_base;

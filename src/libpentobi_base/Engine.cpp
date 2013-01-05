@@ -11,6 +11,7 @@
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/format.hpp>
+#include "MoveList.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Log.h"

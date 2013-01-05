@@ -14,6 +14,7 @@
 #include "libboardgame_util/Unused.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/ColorMap.h"
+#include "libpentobi_base/MoveList.h"
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/PieceMap.h"
 #include "libpentobi_base/PointList.h"
