@@ -22,7 +22,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
-  add_definitions(-std=c++0x)
+  add_definitions(-std=c++11)
   add_definitions(-ffast-math)
 endif()
 
@@ -33,7 +33,7 @@ if(MSVC)
 endif()
 
 if(MINGW)
-  # -std=c++0x makes MinGW define __STRICT_ANSI__, which also hides
+  # -std=c++11 makes MinGW define __STRICT_ANSI__, which also hides
   # some functions that we use in some Windows-specific code, like fdopen()
   add_definitions(-U__STRICT_ANSI__)
   add_definitions(-DWINVER=0x0501)
