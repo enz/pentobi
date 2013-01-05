@@ -111,7 +111,8 @@ add_custom_target(post-install
   update-mime-database ${CMAKE_INSTALL_DATAROOTDIR}/mime\;
   )
 
-install(FILES README NEWS COPYING DESTINATION ${CMAKE_INSTALL_DOCDIR})
+install(FILES README NEWS COPYING doc/blksgf/Blokus-SGF.html
+  DESTINATION ${CMAKE_INSTALL_DOCDIR})
 
 add_subdirectory(doc)
 add_subdirectory(src)
