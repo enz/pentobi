@@ -8,8 +8,8 @@ Current development version
   independent of the system settings
 * The source code now requires at least GCC 4.7 (because a larger subset
   of C++11 features is used)
-* Thumbnailer registration for blksgf files via a schemes file (as used by
-  Gnome 2) is no longer supported
+* Thumbnailer registration for blksgf files is no longer supported on
+  Gnome 2
 * The CMake module GNUInstallDirs is now used for setting the installation
   directories on Unix. (Note that the defaults for bindir and datadir are now
   /usr/local/bin and /usr/local/share instead of /usr/local/games and
