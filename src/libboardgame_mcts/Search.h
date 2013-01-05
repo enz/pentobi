@@ -368,7 +368,13 @@ private:
         StatisticsExt<> stat_in_tree_len;
 
         /** Local variable for update_rave_values().
+            Stores if a move was played for each player.
+            Reused for efficiency. */
+        array<array<bool,Move::range>,max_players> was_played;
+
+        /** Local variable for update_rave_values().
             Stores the first time a move was played for each player.
+            Elements are only defined if was_played is true.
             Reused for efficiency. */
         array<array<unsigned,Move::range>,max_players> first_play;
     };
@@ -781,7 +787,7 @@ void Search<S,M,P,R>::create_threads()
         thread_state.thread_id = i;
         thread_state.state = create_state();
         for (unsigned j = 0; j < max_players; ++j)
-            thread_state.first_play[j].fill(numeric_limits<unsigned>::max());
+            thread_state.was_played[j].fill(false);
         if (i > 0)
             t->run();
         m_threads.push_back(move(t));
@@ -1465,6 +1471,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     unsigned nu_moves = state.get_nu_moves();
     if (nu_moves == 0)
         return;
+    auto& was_played = thread_state.was_played;
     auto& first_play = thread_state.first_play;
     auto& nodes = thread_state.simulation.nodes;
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
@@ -1474,24 +1481,29 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     {
         PlayerMove mv = state.get_move(i);
         if (! state.skip_rave(mv.move))
+        {
+            was_played[mv.player][mv.move.to_int()] = true;
             first_play[mv.player][mv.move.to_int()] = i;
+        }
     }
     while (true)
     {
         PlayerMove mv = state.get_move(i);
         if (! state.skip_rave(mv.move))
+        {
+            was_played[mv.player][mv.move.to_int()] = true;
             first_play[mv.player][mv.move.to_int()] = i;
+        }
         update_rave_values(thread_state, eval, i, mv.player);
         if (i == 0)
             break;
         --i;
     }
-    // Reset first_play
+    // Reset was_played
     for (unsigned i = 0; i < nu_moves; ++i)
     {
         PlayerMove mv = state.get_move(i);
-        first_play[mv.player][mv.move.to_int()] =
-            numeric_limits<unsigned>::max();
+        was_played[mv.player][mv.move.to_int()] = false;
     }
 }
 
@@ -1501,6 +1513,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
                                        unsigned i, unsigned player)
 {
     const State& state = *thread_state.state;
+    auto& was_played = thread_state.was_played;
     auto& first_play = thread_state.first_play;
     auto& nodes = thread_state.simulation.nodes;
     LIBBOARDGAME_ASSERT(i < nodes.size());
@@ -1510,19 +1523,18 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     Float weight_factor = 1 / Float(len - i);
     for (ChildIterator it(m_tree, *node); it; ++it)
     {
-        Move mv = it->get_move();
-        auto m = mv.to_int();
-        unsigned first = first_play[player][m];
-        LIBBOARDGAME_ASSERT(first >= i);
-        if (first == numeric_limits<unsigned>::max())
+        auto mv = it->get_move().to_int();
+        if (! was_played[player][mv])
             continue;
+        unsigned first = first_play[player][mv];
+        LIBBOARDGAME_ASSERT(first >= i);
         if (SearchParamConst::rave_check_same)
         {
             bool other_played_same = false;
             for (unsigned j = 0; j < m_nu_players; ++j)
-                if (j != player)
+                if (j != player && was_played[j][mv])
                 {
-                    unsigned first_other = first_play[j][m];
+                    unsigned first_other = first_play[j][mv];
                     if (first_other >= i && first_other <= first)
                     {
                         other_played_same = true;
