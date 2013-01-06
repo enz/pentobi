@@ -375,8 +375,7 @@ array<Float,4> State::evaluate_playout()
     // Always evaluate symmetric positions as a draw in the playouts. This
     // will encourage the first player to break the symmetry and the second
     // player to preserve it.
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken
-        && check_symmetry_min_nu_pieces(m_bd))
+    if (! m_is_symmetry_broken && check_symmetry_min_nu_pieces(m_bd))
     {
         if (log_simulations)
             log() << "Result: 0.5 (symmetry)\n";
@@ -525,6 +524,10 @@ void State::finish_in_tree()
         log() << "Finish in-tree\n";
     if (m_check_symmetric_draw)
         m_is_symmetry_broken = check_symmetry_broken();
+    else
+        // Pretending that the symmetry is always broken is equivalent to
+        // ignoring symmetric draws
+        m_is_symmetry_broken = true;
 }
 
 bool State::gen_and_play_playout_move(Move last_good_reply_1,
@@ -533,8 +536,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
     if (m_nu_passes == m_nu_colors)
         return false;
 
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken
-        && check_symmetry_min_nu_pieces(m_bd))
+    if (! m_is_symmetry_broken && check_symmetry_min_nu_pieces(m_bd))
     {
         // See also the comment in evaluate_playout()
         if (log_simulations)
@@ -656,7 +658,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     compute_features();
     Move symmetric_mv = Move::null();
     bool has_symmetry_breaker = false;
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+    if (! m_is_symmetry_broken)
     {
         unsigned nu_moves = m_bd.get_nu_moves();
         if (to_play == Color(1) || to_play == Color(3))
@@ -885,7 +887,7 @@ void State::play_playout_nonpass(Move mv)
     LIBBOARDGAME_ASSERT(m_bd.is_legal(mv));
     m_bd.play_nonpass(mv);
     m_nu_passes = 0;
-    if (m_check_symmetric_draw && ! m_is_symmetry_broken)
+    if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);
     if (log_simulations)
         log() << m_bd;
