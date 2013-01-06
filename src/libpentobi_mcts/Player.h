@@ -71,6 +71,9 @@ public:
 
     void set_level(int level);
 
+    /** Use CPU time instead of Wall time to measure time. */
+    void use_cpu_time(bool enable);
+
     Search& get_search();
 
     void load_book(istream& in);
@@ -114,6 +117,8 @@ private:
     Search m_search;
 
     Book m_book;
+
+    unique_ptr<TimeSource> m_time_source;
 
     void init_settings();
 

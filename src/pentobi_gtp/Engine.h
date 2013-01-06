@@ -44,6 +44,9 @@ public:
     /** @see Search::set_deterministic() */
     void set_deterministic();
 
+    /** @see Player::use_cpu_time() */
+    void use_cpu_time(bool enable);
+
 private:
     unique_ptr<libpentobi_base::Player> m_player;
 

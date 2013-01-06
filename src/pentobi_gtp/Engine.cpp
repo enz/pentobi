@@ -235,6 +235,11 @@ void Engine::set_deterministic()
     }
 }
 
+void Engine::use_cpu_time(bool enable)
+{
+    get_mcts_player().use_cpu_time(enable);
+}
+
 //-----------------------------------------------------------------------------
 
 } // namespace pentobi_gtp

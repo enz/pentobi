@@ -68,6 +68,7 @@ int main(int argc, char** argv)
             ("book", value<>(&book_file), "load an external book file")
             ("config,c", value<>(&config_file), "set GTP config file")
             ("color", "colorize text output of boards")
+            ("cputime", "use CPU time")
             ("game,g", value<>(&variant_string),
              "game variant (classic, classic_2, duo, trigon, trigon_2)")
             ("help,h", "print help message and exit")
@@ -129,6 +130,8 @@ int main(int argc, char** argv)
             engine.set_show_board(true);
         if (vm.count("seed"))
             engine.set_deterministic();
+        if (vm.count("cputime"))
+            engine.use_cpu_time(true);
         if (vm.count("book"))
         {
             ifstream in(book_file);

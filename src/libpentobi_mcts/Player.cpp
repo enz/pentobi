@@ -9,6 +9,7 @@
 #include "Player.h"
 
 #include <boost/filesystem/fstream.hpp>
+#include "libboardgame_util/CpuTime.h"
 #include "libboardgame_util/WallTime.h"
 
 namespace libpentobi_mcts {
@@ -16,6 +17,7 @@ namespace libpentobi_mcts {
 using namespace std;
 using boost::filesystem::ifstream;
 using libboardgame_util::log;
+using libboardgame_util::CpuTime;
 using libboardgame_util::WallTime;
 using libpentobi_base::Variant;
 
@@ -32,7 +34,8 @@ Player::Player(Variant initial_variant, const path& books_dir,
       m_resign_threshold(0.09f),
       m_resign_min_simulations(500),
       m_search(initial_variant, nu_threads, memory),
-      m_book(initial_variant)
+      m_book(initial_variant),
+      m_time_source(new WallTime())
 {
     for (unsigned i = 0; i < Board::max_player_moves; ++i)
     {
@@ -124,7 +127,6 @@ Move Player::genmove(const Board& bd, Color c)
                 return mv;
         }
     }
-    WallTime time_source;
     Float max_count = 0;
     double max_time = 0;
     if (m_fixed_simulations > 0)
@@ -200,7 +202,7 @@ Move Player::genmove(const Board& bd, Color c)
         log() << "MaxCnt " << max_count << '\n';
     else
         log() << "MaxTime " << max_time << '\n';
-    if (! m_search.search(mv, bd, c, max_count, 0, max_time, time_source))
+    if (! m_search.search(mv, bd, c, max_count, 0, max_time, *m_time_source))
         return Move::null();
     // Resign only in two-player game variants
     if (get_nu_players(variant) == 2)
@@ -300,6 +302,14 @@ bool Player::load_book(const path& filepath)
 bool Player::resign() const
 {
     return m_resign;
+}
+
+void Player::use_cpu_time(bool enable)
+{
+    if (enable)
+        m_time_source.reset(new CpuTime());
+    else
+        m_time_source.reset(new WallTime());
 }
 
 //-----------------------------------------------------------------------------
