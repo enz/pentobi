@@ -159,7 +159,6 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
     LocalValue::Compute compute_local;
     auto end = points.end();
     auto i = points.begin();
-    LIBBOARDGAME_ASSERT(i != end);
     do
     {
         if (is_forbidden[*i])
@@ -258,7 +257,6 @@ void State::compute_features()
         features.dist_to_center = numeric_limits<unsigned>::max();
         auto j = info.points.begin();
         auto end = info.points.end();
-        LIBBOARDGAME_ASSERT(j != end);
         do
         {
             features.heuristic += point_value[*j];
@@ -267,7 +265,6 @@ void State::compute_features()
         while (j != end);
         j = info_ext.attach_points.begin();
         end = info_ext.attach_points.end();
-        LIBBOARDGAME_ASSERT(j != end);
         do
         {
             features.heuristic += attach_point_value[*j];
@@ -276,7 +273,6 @@ void State::compute_features()
         while (j != end);
         j = info_ext.adj_points.begin();
         end = info_ext.adj_points.end();
-        LIBBOARDGAME_ASSERT(j != end);
         if (! check_connect)
         {
             do

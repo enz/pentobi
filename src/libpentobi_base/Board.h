@@ -768,7 +768,6 @@ inline bool Board::is_forbidden(Color c, Move mv) const
     const MovePoints& points = get_move_points(mv);
     auto end = points.end();
     auto i = points.begin();
-    LIBBOARDGAME_ASSERT(i != end);
     do
     {
         if (m_state_color[c].forbidden[*i])
@@ -795,7 +794,6 @@ inline bool Board::is_legal(Color c, Move mv) const
     bool has_attach_point = false;
     auto i = info.points.begin();
     auto end = info.points.end();
-    LIBBOARDGAME_ASSERT(i != end);
     do
     {
         if (m_state_color[c].forbidden[*i])
@@ -862,7 +860,6 @@ inline void Board::place(Color c, Move mv)
     state_color.points += piece_size;
     auto i = info.points.begin();
     auto end = info.points.end();
-    LIBBOARDGAME_ASSERT(i != end);
     do
     {
         m_state_base.point_state[*i] = c;
@@ -873,7 +870,6 @@ inline void Board::place(Color c, Move mv)
     while (i != end);
     i = info_ext.adj_points.begin();
     end = info_ext.adj_points.end();
-    LIBBOARDGAME_ASSERT(i != end);
     do
     {
         state_color.forbidden[*i] = true;
@@ -882,7 +878,6 @@ inline void Board::place(Color c, Move mv)
     while (i != end);
     i = info_ext.attach_points.begin();
     end = info_ext.attach_points.end();
-    LIBBOARDGAME_ASSERT(i != end);
     do
     {
         if (! state_color.is_attach_point[*i])

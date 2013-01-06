@@ -139,7 +139,6 @@ inline void LocalValue::init(const Board& bd)
             = bd.get_move_info_ext(mv).attach_points;
         auto j = attach_points.begin();
         auto end = attach_points.end();
-        LIBBOARDGAME_ASSERT(j != end);
         do
         {
             if (! bd.is_forbidden(*j, c))
