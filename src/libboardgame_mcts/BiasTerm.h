@@ -53,8 +53,6 @@ private:
 
 inline Float BiasTerm::get(Float child_count) const
 {
-    if (m_parent_part == 0)
-        return 0;
     LIBBOARDGAME_ASSERT(child_count >= 0);
     Float child_part;
     if (child_count < nu_precomp)
