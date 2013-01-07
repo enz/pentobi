@@ -6,7 +6,6 @@
 #define LIBBOARDGAME_UTIL_ARRAY_LIST_H
 
 #include <algorithm>
-#include <cassert>
 #include <cstddef>
 #include <iosfwd>
 #include <limits>

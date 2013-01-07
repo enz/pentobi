@@ -5,9 +5,6 @@
 #ifndef LIBBOARDGAME_BASE_POINT_H
 #define LIBBOARDGAME_BASE_POINT_H
 
-#include <array>
-#include <cassert>
-#include <exception>
 #include <iosfwd>
 #include <sstream>
 #include <string>

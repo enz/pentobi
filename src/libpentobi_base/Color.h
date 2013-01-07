@@ -5,7 +5,6 @@
 #ifndef LIBPENTOBI_BASE_COLOR_H
 #define LIBPENTOBI_BASE_COLOR_H
 
-#include <cassert>
 #include <iosfwd>
 #include <string>
 #include "libboardgame_util/Assert.h"
