@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <atomic>
 #include <memory>
+#include "PlayerMove.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/RandomGenerator.h"
 
@@ -43,13 +44,14 @@ public:
 
     LastGoodReply();
 
-    void init(unsigned nu_players);
+    void init(PlayerInt nu_players);
 
-    void store(unsigned player, Move last_mv, Move second_last_mv, Move reply);
+    void store(PlayerInt player, Move last_mv, Move second_last_mv, Move reply);
 
-    void forget(unsigned player, Move last_mv, Move second_last_mv, Move reply);
+    void forget(PlayerInt player, Move last_mv, Move second_last_mv,
+                Move reply);
 
-    void get(unsigned player, Move last_mv, Move second_last_mv,
+    void get(PlayerInt player, Move last_mv, Move second_last_mv,
              Move& last_good_reply_1, Move& last_good_reply_2) const;
 
 private:
@@ -83,7 +85,7 @@ inline size_t LastGoodReply<S,M,P>::get_index(Move last_mv,
 }
 
 template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::get(unsigned player, Move last_mv,
+inline void LastGoodReply<S,M,P>::get(PlayerInt player, Move last_mv,
                                       Move second_last_mv,
                                       Move& last_good_reply_1,
                                       Move& last_good_reply_2) const
@@ -102,9 +104,9 @@ inline void LastGoodReply<S,M,P>::get(unsigned player, Move last_mv,
 }
 
 template<class S, class M, unsigned P>
-void LastGoodReply<S,M,P>::init(unsigned nu_players)
+void LastGoodReply<S,M,P>::init(PlayerInt nu_players)
 {
-    for (unsigned i = 0; i < nu_players; ++i)
+    for (PlayerInt i = 0; i < nu_players; ++i)
     {
         auto null_int = Move::null().to_int();
         // Don't use memory_order_relaxed here. init() could be called after
@@ -118,7 +120,7 @@ void LastGoodReply<S,M,P>::init(unsigned nu_players)
 }
 
 template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::forget(unsigned player, Move last_mv,
+inline void LastGoodReply<S,M,P>::forget(PlayerInt player, Move last_mv,
                                          Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
@@ -137,7 +139,7 @@ inline void LastGoodReply<S,M,P>::forget(unsigned player, Move last_mv,
 }
 
 template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::store(unsigned player, Move last_mv,
+inline void LastGoodReply<S,M,P>::store(PlayerInt player, Move last_mv,
                                         Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());

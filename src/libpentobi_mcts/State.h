@@ -24,6 +24,7 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_mcts::Float;
+using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
@@ -135,7 +136,7 @@ public:
     /** Finish in-tree phase without expanding a node. */
     void finish_in_tree_no_expansion();
 
-    unsigned get_to_play() const;
+    PlayerInt get_to_play() const;
 
     void start_search();
 
@@ -349,7 +350,7 @@ inline unsigned State::get_nu_moves() const
     return m_bd.get_nu_moves() - m_nu_moves_initial;
 }
 
-inline unsigned State::get_to_play() const
+inline PlayerInt State::get_to_play() const
 {
     return m_bd.get_to_play().to_int();
 }
