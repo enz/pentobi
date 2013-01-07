@@ -722,7 +722,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             if (mv == symmetric_mv)
                 value = (2.f / 7.f) * value + (5.f / 7.f) * 1.0f;
             else
-                value += (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
+                value = (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
             count = 7;
         }
         else if (has_symmetry_breaker)
@@ -731,7 +731,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
             if (get_move_info_ext(mv).breaks_symmetry)
                 value = (2.f / 7.f) * value + (5.f / 7.f) * 1.0f;
             else
-                value += (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
+                value = (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
             count = 7;
         }
 
