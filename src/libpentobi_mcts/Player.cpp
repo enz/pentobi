@@ -83,19 +83,10 @@ Move Player::genmove(const Board& bd, Color c)
         return Move::pass();
     Move mv;
     Variant variant = bd.get_variant();
-    // Don't use opening book in lower levels because they are supposed to be
-    // weak but always use it in game variants with potiential symmetric draws
-    // until the first move that breaks the symmetry because the (heuristic)
-    // handling of symmetry breaking often fails in short searches.
-    unsigned low_level_book_moves;
-    if (variant == Variant::duo)
-        low_level_book_moves = 3;
-    else if (variant == Variant::trigon_2)
-        low_level_book_moves = 5;
-    else
-        low_level_book_moves = 0;
+    // Don't use more thane 2 moves per color from opening book in lower levels
+    // because they are supposed to be weak
     if (m_use_book
-        && (m_level >= 4 || bd.get_nu_moves() < low_level_book_moves))
+        && (m_level >= 4 || bd.get_nu_moves() < 2 * bd.get_nu_colors()))
     {
         if (! m_is_book_loaded
             || m_book.get_tree().get_variant() != variant)
