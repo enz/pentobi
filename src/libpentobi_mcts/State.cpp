@@ -565,9 +565,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
         init_move_list_with_local(to_play);
     m_last_update[to_play] = m_bd.get_nu_moves();
 
-    Variant variant = m_bd.get_variant();
     m_has_moves[to_play] = ! m_moves[to_play]->empty();
-
     if (! m_has_moves[to_play])
     {
         if (m_nu_passes + 1 == m_nu_colors)
@@ -577,17 +575,13 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
         // in the game and we know that the playout is a loss because the
         // player has no more moves and the score is already negative.
         if (m_nu_moves_initial < 10 * m_nu_colors
-            && (variant == Variant::duo || variant == Variant::junior
-                || ((variant == Variant::classic_2
-                     || variant == Variant::trigon_2)
-                    && ! m_has_moves[m_bd.get_second_color(to_play)])))
+            && m_bd.get_nu_players() == 2
+            && m_bd.get_score(to_play) < 0
+            && ! m_has_moves[m_bd.get_second_color(to_play)])
         {
-            if (m_bd.get_score(to_play) < 0)
-            {
-                if (log_simulations)
-                    log() << "Terminate early (no moves and negative score)\n";
-                return false;
-            }
+            if (log_simulations)
+                log() << "Terminate early (no moves and negative score)\n";
+            return false;
         }
         play_playout_pass();
         return true;
