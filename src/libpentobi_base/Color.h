@@ -20,7 +20,7 @@ using libboardgame_util::Exception;
 class Color
 {
 public:
-    typedef unsigned IntType;
+    typedef uint_fast8_t IntType;
 
     class InvalidString
         : public Exception

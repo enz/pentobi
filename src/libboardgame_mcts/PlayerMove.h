@@ -9,18 +9,22 @@ namespace libboardgame_mcts {
 
 //-----------------------------------------------------------------------------
 
+typedef uint_fast8_t PlayerInt;
+
+//-----------------------------------------------------------------------------
+
 template<typename MOVE>
 struct PlayerMove
 {
-    unsigned player;
+    PlayerInt player;
 
     MOVE move;
 
-    PlayerMove(unsigned player, MOVE move);
+    PlayerMove(PlayerInt player, MOVE move);
 };
 
 template<typename MOVE>
-inline PlayerMove<MOVE>::PlayerMove(unsigned player, MOVE move)
+inline PlayerMove<MOVE>::PlayerMove(PlayerInt player, MOVE move)
 {
     this->player = player;
     this->move = move;

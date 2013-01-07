@@ -11,6 +11,7 @@
 
 namespace libpentobi_mcts {
 
+using libboardgame_mcts::PlayerInt;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
 using libpentobi_base::GameStateHistory;
@@ -52,9 +53,9 @@ public:
 
     string get_move_string(Move mv) const;
 
-    unsigned get_nu_players() const;
+    PlayerInt get_nu_players() const;
 
-    unsigned get_player() const;
+    PlayerInt get_player() const;
 
     Float get_tie_value() const;
 
@@ -164,12 +165,12 @@ inline const GameStateHistory& Search::get_last_state() const
     return m_last_state;
 }
 
-inline unsigned Search::get_nu_players() const
+inline PlayerInt Search::get_nu_players() const
 {
     return get_board().get_nu_colors();
 }
 
-inline unsigned Search::get_player() const
+inline PlayerInt Search::get_player() const
 {
     return m_to_play.to_int();
 }

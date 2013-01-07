@@ -112,7 +112,7 @@ public:
 
     typedef R SearchParamConst;
 
-    static const unsigned max_players = P;
+    static const PlayerInt max_players = P;
 
     typedef libboardgame_mcts::Node<M> Node;
 
@@ -147,10 +147,10 @@ public:
     virtual string get_move_string(Move mv) const = 0;
 
     /** Get the current number of players. */
-    virtual unsigned get_nu_players() const = 0;
+    virtual PlayerInt get_nu_players() const = 0;
 
     /** Get player to play at root node of the search. */
-    virtual unsigned get_player() const = 0;
+    virtual PlayerInt get_player() const = 0;
 
     /** An evaluation value representing a 50% winning probability. */
     virtual Float get_tie_value() const = 0;
@@ -439,11 +439,11 @@ private:
     bool m_prune_full_tree;
 
     /** Player to play at the root node of the search. */
-    unsigned m_player;
+    PlayerInt m_player;
 
     /** Cached return value of get_nu_players() that stays constant during
         a search. */
-    unsigned m_nu_players;
+    PlayerInt m_nu_players;
 
     /** Time of last search. */
     double m_last_time;
@@ -553,7 +553,7 @@ private:
 
     void update_rave_values(ThreadState& thread_state,
                             const array<Float,max_players>&, unsigned i,
-                            unsigned player);
+                            PlayerInt player);
 
     void update_values(ThreadState& thread_state,
                        const array<Float,max_players>& eval);
@@ -788,7 +788,7 @@ void Search<S,M,P,R>::create_threads()
         auto& thread_state = t->thread_state;
         thread_state.thread_id = i;
         thread_state.state = create_state();
-        for (unsigned j = 0; j < max_players; ++j)
+        for (PlayerInt j = 0; j < max_players; ++j)
             thread_state.was_played[j].clear();
         if (i > 0)
             t->run();
@@ -1104,13 +1104,13 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
         is_same = true;
         is_followup = false;
     }
-    for (unsigned i = 0; i < m_nu_players; ++i)
+    for (PlayerInt i = 0; i < m_nu_players; ++i)
     {
         m_init_val[i].clear();
         m_init_val[i].add(get_tie_value());
     }
     if (is_same || (is_followup && m_followup_sequence.size() <= m_nu_players))
-        for (unsigned i = 0; i < m_nu_players; ++i)
+        for (PlayerInt i = 0; i < m_nu_players; ++i)
             if (m_root_val[i].get_count() > 0)
                 m_init_val[i] = m_root_val[i];
     m_reuse_count = 0;
@@ -1170,7 +1170,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
     m_time_source = &time_source;
     on_start_search();
     m_player = get_player();
-    for (unsigned i = 0; i < m_nu_players; ++i)
+    for (PlayerInt i = 0; i < m_nu_players; ++i)
         m_root_val[i].clear();
     if (SearchParamConst::use_last_good_reply && ! is_followup)
         m_last_good_reply.init(m_nu_players);
@@ -1436,10 +1436,10 @@ void Search<S,M,P,R>::update_last_good_reply(ThreadState& thread_state,
 {
     const State& state = *thread_state.state;
     Float max_eval = eval[0];
-    for (unsigned i = 1; i < m_nu_players; ++i)
+    for (PlayerInt i = 1; i < m_nu_players; ++i)
         max_eval = max(eval[i], max_eval);
     array<bool,max_players> is_winner;
-    for (unsigned i = 0; i < m_nu_players; ++i)
+    for (PlayerInt i = 0; i < m_nu_players; ++i)
         // Note: this handles a draw as a win. Without additional information
         // we cannot make a good decision how to handle draws and some
         // experiments in Blokus Duo showed (with low confidence) that treating
@@ -1512,7 +1512,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
 template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
                                        const array<Float,max_players>& eval,
-                                       unsigned i, unsigned player)
+                                       unsigned i, PlayerInt player)
 {
     const State& state = *thread_state.state;
     auto& was_played = thread_state.was_played;
@@ -1533,7 +1533,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
         if (SearchParamConst::rave_check_same)
         {
             bool other_played_same = false;
-            for (unsigned j = 0; j < m_nu_players; ++j)
+            for (PlayerInt j = 0; j < m_nu_players; ++j)
                 if (j != player && was_played[j][mv])
                 {
                     unsigned first_other = first_play[j][mv.to_int()];
@@ -1575,7 +1575,7 @@ void Search<S,M,P,R>::update_values(ThreadState& thread_state,
         PlayerMove mv = state.get_move(i - 1);
         m_tree.add_value(node, eval[mv.player]);
     }
-    for (unsigned i = 0; i < m_nu_players; ++i)
+    for (PlayerInt i = 0; i < m_nu_players; ++i)
     {
         m_root_val[i].add(eval[i]);
         m_init_val[i].add(eval[i]);
