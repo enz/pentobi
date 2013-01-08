@@ -12,24 +12,19 @@
 #include <boost/format.hpp>
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/MathUtil.h"
-#include "libboardgame_base/RectGeometry.h"
 #include "libpentobi_base/BoardUtil.h"
-#include "libpentobi_base/DiagIterator.h"
 #include "libpentobi_base/Geometry.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
 using boost::format;
-using libboardgame_base::RectGeometry;
-using libboardgame_base::Transform;
 using libboardgame_mcts::Tree;
 using libboardgame_util::log;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
-using libpentobi_base::DiagIterator;
 using libpentobi_base::Geometry;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::MoveInfo;
