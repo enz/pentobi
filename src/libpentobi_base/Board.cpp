@@ -234,6 +234,7 @@ void Board::init(Variant variant, const Setup* setup)
 void Board::init_variant(Variant variant)
 {
     m_variant = variant;
+    m_nu_colors = libpentobi_base::get_nu_colors(variant);
     if (m_nu_colors == 2)
     {
         m_color_name[Color(0)] = "Blue";
@@ -258,7 +259,6 @@ void Board::init_variant(Variant variant)
         m_color_esc_sequence_text[Color(2)] = "\x1B[1;31m";
         m_color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
     }
-    m_nu_colors = libpentobi_base::get_nu_colors(variant);
     m_nu_players = libpentobi_base::get_nu_players(variant);
     m_board_const = &BoardConst::get(variant);
     if (m_variant == Variant::junior)
