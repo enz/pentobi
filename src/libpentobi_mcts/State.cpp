@@ -191,7 +191,7 @@ void State::compute_features()
     Grid<Float> point_value(geometry);
     Grid<Float> attach_point_value(geometry);
     Grid<Float> adj_point_value(geometry);
-    for (BoardIterator i(m_bd); i; ++i)
+    for (GeometryIterator i(geometry); i; ++i)
     {
         point_value[*i] = 1;
         PointState s = m_bd.get_point_state(*i);
@@ -225,7 +225,7 @@ void State::compute_features()
             if (! m_bd.is_forbidden(p, *i))
             {
                 point_value[p] = 5;
-                for (AdjIterator j(m_bd, p); j; ++j)
+                for (AdjIterator j(geometry, p); j; ++j)
                     if (! m_bd.is_forbidden(*j, *i))
                         point_value[*j] = max(point_value[*j], Float(4));
             }
