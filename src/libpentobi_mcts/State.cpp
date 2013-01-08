@@ -193,26 +193,12 @@ void State::compute_features()
     BoardType board_type = m_bc->get_board_type();
     auto& moves = *m_moves[to_play];
     const Geometry& geometry = m_bc->get_geometry();
-    Grid<Float> point_value(geometry, 1);
-    for (ColorIterator i(m_nu_colors); i; ++i)
-    {
-        if (*i == to_play || *i == second_color)
-            continue;
-        for (Point p : m_bd.get_attach_points(*i))
-        {
-            if (! m_bd.is_forbidden(p, *i))
-            {
-                point_value[p] = 5;
-                for (AdjIterator j(m_bd, p); j; ++j)
-                    if (! m_bd.is_forbidden(*j, *i))
-                        point_value[*j] = max(point_value[*j], Float(4));
-            }
-        }
-    }
+    Grid<Float> point_value(geometry);
     Grid<Float> attach_point_value(geometry);
     Grid<Float> adj_point_value(geometry);
     for (BoardIterator i(m_bd); i; ++i)
     {
+        point_value[*i] = 1;
         PointState s = m_bd.get_point_state(*i);
         if (m_bd.is_forbidden(*i, to_play) && s != to_play)
             attach_point_value[*i] = -5;
@@ -235,6 +221,19 @@ void State::compute_features()
             adj_point_value[*i] = 2;
         else
             adj_point_value[*i] = 0;
+    }
+    for (ColorIterator i(m_nu_colors); i; ++i)
+    {
+        if (*i == to_play || *i == second_color)
+            continue;
+        for (Point p : m_bd.get_attach_points(*i))
+            if (! m_bd.is_forbidden(p, *i))
+            {
+                point_value[p] = 5;
+                for (AdjIterator j(m_bd, p); j; ++j)
+                    if (! m_bd.is_forbidden(*j, *i))
+                        point_value[*j] = max(point_value[*j], Float(4));
+            }
     }
     m_features.resize(moves.size());
     m_max_heuristic = -numeric_limits<Float>::max();
