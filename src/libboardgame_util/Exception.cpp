@@ -10,8 +10,6 @@
 
 namespace libboardgame_util {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 Exception::Exception(const string& s)

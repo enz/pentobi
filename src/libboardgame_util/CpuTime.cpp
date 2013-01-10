@@ -12,13 +12,11 @@
 
 namespace libboardgame_util {
 
-using libboardgame_sys::cpu_time;
-
 //-----------------------------------------------------------------------------
 
 double CpuTime::operator()()
 {
-    return cpu_time();
+    return libboardgame_sys::cpu_time();
 }
 
 //----------------------------------------------------------------------------

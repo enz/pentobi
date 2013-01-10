@@ -10,7 +10,6 @@
 
 #include <ctime>
 #include <list>
-#include <sstream>
 
 namespace libboardgame_util {
 
@@ -33,7 +32,7 @@ list<RandomGenerator*>& get_all_generators()
 RandomGenerator::ResultType get_nondet_seed()
 {
     static RandomGenerator::Generator seed_generator;
-    RandomGenerator::ResultType seed = RandomGenerator::ResultType(time(0));
+    RandomGenerator::ResultType seed(time(0));
     seed ^= seed_generator();
     return seed;
 }
