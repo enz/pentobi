@@ -224,7 +224,7 @@ void State::compute_features()
         for (Point p : m_bd.get_attach_points(*i))
             if (! m_bd.is_forbidden(p, *i))
             {
-                point_value[p] = 5;
+                point_value[p] = 5.5f;
                 for (AdjIterator j(geometry, p); j; ++j)
                     if (! m_bd.is_forbidden(*j, *i))
                         point_value[*j] = max(point_value[*j], Float(4));
@@ -697,9 +697,10 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
         // never get explored (in practice) if the bias term constant is small.
         heuristic = 0.1f + 0.9f * heuristic;
 
-        // Initialize value from heuristic and init_val, each with a count of 1
+        // Initialize value from heuristic and init_val, each with a count
+        // of 1.5
         Float value = 0.5f * heuristic + 0.5f * init_val;
-        Float count = 2;
+        Float count = 3;
 
         // If a symmetric draw is still possible, encourage exploring a move
         // that keeps or breaks the symmetry by adding 5 wins or 5 losses
@@ -708,19 +709,18 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
         if (! symmetric_mv.is_null())
         {
             if (mv == symmetric_mv)
-                value = (2.f / 7.f) * value + (5.f / 7.f) * 1.0f;
+                value = (3.f / 8) * value + (5.f / 8) * 1.0f;
             else
-                value = (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
-            count = 7;
+                value = (3.f / 8) * value + (5.f / 8) * 0.1f;
+            count = 8;
         }
         else if (has_symmetry_breaker)
         {
-            // Add five wins or (nearly) losses
             if (get_move_info_ext(mv).breaks_symmetry)
-                value = (2.f / 7.f) * value + (5.f / 7.f) * 1.0f;
+                value = (3.f / 8) * value + (5.f / 8) * 1.0f;
             else
-                value = (2.f / 7.f) * value + (5.f / 7.f) * 0.1f;
-            count = 7;
+                value = (3.f / 8) * value + (5.f / 8) * 0.1f;
+            count = 8;
         }
 
         expander.add_child(mv, value, count, value, count);

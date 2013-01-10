@@ -114,7 +114,7 @@ Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
       m_variant(initial_variant),
       m_shared_const(m_to_play)
 {
-    set_expand_threshold(3);
+    set_expand_threshold(4);
     set_default_param(m_variant);
     create_threads();
 }
