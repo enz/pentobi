@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file CmdLineRange.h */
+/** @file libboardgame_gtp/CmdLineRange.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_GTP_CMDLINERANGE_H

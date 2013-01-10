@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file Abort.h
+/** @file libboardgame_util/Abort.h
     Global flag to interrupt move generation or other commands. */
 //-----------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file NullTermList.h */
+/** @file libboardgame_util/NullTermList.h */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_NULL_TERM_LIST_H
