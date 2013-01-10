@@ -183,9 +183,9 @@ void RatingHistory::save() const
     for (size_t i = 0; i < m_games.size(); ++i)
     {
         const GameInfo& info = m_games[i];
-        out << info.number << ' ' << info.color.to_int() << ' '
-            << info.result << ' ' << info.date << ' ' << info.level << ' '
-            << info.rating << '\n';
+        out << info.number << ' ' << static_cast<unsigned>(info.color.to_int())
+            << ' ' << info.result << ' ' << info.date << ' ' << info.level
+            << ' ' << info.rating << '\n';
     }
 }
 
