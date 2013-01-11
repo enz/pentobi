@@ -154,8 +154,6 @@ public:
         @pre move.is_regular() */
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
-    const MovePoints& get_move_points(Move mv) const;
-
     unsigned get_nu_all_moves() const;
 
     bool find_move(const MovePoints& points, Move& move) const;
@@ -245,7 +243,7 @@ private:
     void init_symmetry_info();
 
     bool is_compatible_with_adj_status(Point p, unsigned adj_status,
-                                       const MovePoints& points) const;
+                                       const MoveInfo& info) const;
 
     void set_adj_and_attach_points(const MoveInfo& info, MoveInfoExt& info_ext);
 };
@@ -285,11 +283,6 @@ inline const MoveInfoExt& BoardConst::get_move_info_ext(Move move) const
 inline const MoveInfoExt* BoardConst::get_move_info_ext_array() const
 {
     return &m_move_info_ext.front();
-}
-
-inline const MovePoints& BoardConst::get_move_points(Move mv) const
-{
-    return get_move_info(mv).points;
 }
 
 inline BoardConst::LocalMovesListRange BoardConst::get_moves(

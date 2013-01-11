@@ -8,6 +8,7 @@
 
 #include "BoardConst.h"
 
+#include <algorithm>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -648,12 +649,11 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
 void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
                              Point center)
 {
-    MoveInfo info;
-    MoveInfoExt info_ext;
-    info.piece = piece;
-    info.points.clear();
+    MovePoints points;
     for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
-        info.points.push_back(Point((*i).x, (*i).y));
+        points.push_back(Point((*i).x, (*i).y));
+    MoveInfo info(piece, points);
+    MoveInfoExt info_ext;
     info_ext.center = center;
     info_ext.breaks_symmetry = false;
     info_ext.symmetric_move = Move::null();
@@ -664,7 +664,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     if (log_move_creation)
     {
         Grid<char> grid(m_geometry, '.');
-        for (Point p : info.points)
+        for (Point p : info)
             grid[p] = 'O';
         for (Point p : info_ext.adj_points)
             grid[p] = '+';
@@ -672,10 +672,10 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
             grid[p] = '*';
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
-    for (Point p : info.points)
+    for (Point p : info)
         for (unsigned i = 0; i < nu_adj_status; ++i)
         {
-            if (is_compatible_with_adj_status(p, i, info.points))
+            if (is_compatible_with_adj_status(p, i, info))
             {
                 (*m_full_move_table)[i][piece][p].push_back(move);
                 ++m_move_lists_sum_length;
@@ -856,7 +856,9 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
         {
             Board::LocalMovesListRange moves = get_moves(piece, p);
             for (auto j = moves.begin(); j != moves.end(); ++j)
-                if (m_move_info[j->to_int()].points == sorted_points)
+                if (equal(sorted_points.begin(),
+                          sorted_points.end(),
+                          m_move_info[j->to_int()].begin()))
                 {
                     move = *j;
                     return true;
@@ -907,9 +909,9 @@ void BoardConst::init_symmetry_info()
         MoveInfoExt& info_ext = m_move_info_ext[i];
         MovePoints sym_points;
         info_ext.breaks_symmetry = false;
-        for (Point p : info.points)
+        for (Point p : info)
         {
-            if (info.points.contains(symmetric_points[p]))
+            if (info.contains(symmetric_points[p]))
                 info_ext.breaks_symmetry = true;
             sym_points.push_back(symmetric_points[p]);
         }
@@ -918,10 +920,10 @@ void BoardConst::init_symmetry_info()
 }
 
 bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
-                                               const MovePoints& points) const
+                                               const MoveInfo& info) const
 {
     for (Point p_adj : m_adj_status[p][adj_status])
-        if (points.contains(p_adj))
+        if (info.contains(p_adj))
             return false;
     return true;
 }
@@ -929,8 +931,8 @@ bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
 void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
                                            MoveInfoExt& info_ext)
 {
-    auto begin = info.points.begin();
-    auto end = info.points.end();
+    auto begin = info.begin();
+    auto end = info.end();
     m_marker.clear();
     for (auto i = begin; i != end; ++i)
         m_marker.set(*i);
@@ -961,9 +963,9 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
     const MoveInfo& info = get_move_info(mv);
     ostringstream s;
     if (with_piece_name)
-        s << '[' << get_piece_info(info.piece).get_name() << "]";
+        s << '[' << get_piece_info(info.get_piece()).get_name() << "]";
     bool is_first = true;
-    for (Point p : info.points)
+    for (Point p : info)
     {
         if (! is_first)
             s << ',';

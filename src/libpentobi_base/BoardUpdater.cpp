@@ -44,7 +44,7 @@ void handle_setup_property(const Node& node, const char* id, Color c,
         {
             throw InvalidTree(e.what());
         }
-        Piece piece = bd.get_move_info(mv).piece;
+        Piece piece = bd.get_move_info(mv).get_piece();
         if (! pieces_left[c].remove(piece))
             throw InvalidTree("piece played twice");
         setup.placements[c].push_back(mv);
@@ -73,7 +73,7 @@ void handle_setup_empty(const Node& node, const Board& bd, Setup& setup,
         {
             if (setup.placements[*i].remove(mv))
             {
-                Piece piece = bd.get_move_info(mv).piece;
+                Piece piece = bd.get_move_info(mv).get_piece();
                 LIBBOARDGAME_ASSERT(! pieces_left[*i].contains(piece));
                 pieces_left[*i].push_back(piece);
                 break;
@@ -137,7 +137,7 @@ void BoardUpdater::update(const Node& node)
         if (mv.is_regular())
         {
             const MoveInfo& info = m_bd.get_move_info(mv.move);
-            if (m_bd.get_nu_left_piece(mv.color, info.piece) == 0)
+            if (m_bd.get_nu_left_piece(mv.color, info.get_piece()) == 0)
                 throw InvalidTree("piece played twice");
             m_bd.play(mv);
         }

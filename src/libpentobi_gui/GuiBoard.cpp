@@ -33,7 +33,7 @@ namespace {
 
 bool allPointEmpty(const Board& bd, Move mv)
 {
-    for (Point p : bd.get_move_info(mv).points)
+    for (Point p : bd.get_move_info(mv))
         if (! bd.is_empty(p))
             return false;
     return true;
@@ -454,7 +454,9 @@ void GuiBoard::showMove(Color c, Move mv)
 {
     m_isMoveShown = true;
     m_currentMoveShownColor = c;
-    m_currentMoveShownPoints = m_bd.get_move_points(mv);
+    m_currentMoveShownPoints.clear();
+    for (Point p : m_bd.get_move_info(mv))
+        m_currentMoveShownPoints.push_back(p);
     m_currentMoveShownAnimationIndex = 0;
     m_currentMoveShownAnimationTimer.start(500);
     update();

@@ -5,6 +5,7 @@
 #ifndef LIBPENTOBI_BASE_MOVE_INFO_H
 #define LIBPENTOBI_BASE_MOVE_INFO_H
 
+#include <algorithm>
 #include "MovePoints.h"
 #include "Piece.h"
 #include "PieceInfo.h"
@@ -15,11 +16,52 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-struct MoveInfo
+class MoveInfo
 {
-    Piece piece;
+public:
+    MoveInfo()
+    {
+    }
 
-    MovePoints points;
+    MoveInfo(Piece piece, const MovePoints& points)
+    {
+        m_piece = static_cast<uint8_t>(piece.to_int());
+        m_size = 0;
+        for (auto p : points)
+            m_points[m_size++] = p;
+    }
+
+    const Point* begin() const
+    {
+        return m_points;
+    }
+
+    const Point* end() const
+    {
+        return m_points + m_size;
+    }
+
+    uint8_t size() const
+    {
+        return m_size;
+    }
+
+    Piece get_piece() const
+    {
+        return Piece(m_piece);
+    }
+
+    bool contains(Point p) const
+    {
+        return find(begin(), end(), p) != end();
+    }
+
+private:
+    uint8_t m_piece;
+
+    uint8_t m_size;
+
+    Point m_points[PieceInfo::max_size];
 };
 
 //-----------------------------------------------------------------------------

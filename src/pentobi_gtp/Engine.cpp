@@ -96,7 +96,7 @@ void Engine::cmd_moves_stat(const Arguments& args, Response& response)
     {
         bd.gen_moves(c, p, marker, moves);
         for (Move mv : moves)
-            for (Point p : bd.get_move_points(mv))
+            for (Point p : bd.get_move_info(mv))
                 ++nu_moves_grid[p];
         marker.clear_all_set_known(moves);
         moves.clear();

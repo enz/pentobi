@@ -181,9 +181,9 @@ void setIcon(QAction* action, const QString& name)
     Used for sorting the list used in Find Move. */
 float getMoveHeuristic(const Board& bd, Move mv)
 {
-    const MoveInfo& info = bd.get_move_info(mv);
-    const MoveInfoExt& info_ext = bd.get_move_info_ext(mv);
-    return static_cast<float>((1000 * info.points.size()
+    auto& info = bd.get_move_info(mv);
+    auto& info_ext = bd.get_move_info_ext(mv);
+    return static_cast<float>((1000 * info.size()
                                + 10 * info_ext.attach_points.size()
                                - info_ext.adj_points.size()));
 }
@@ -1662,7 +1662,7 @@ void MainWindow::findMove()
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
     Move mv = (*m_legalMoves)[m_legalMoveIndex];
-    selectPiece(m_currentColor, bd.get_move_info(mv).piece);
+    selectPiece(m_currentColor, bd.get_move_info(mv).get_piece());
     m_guiBoard->showMove(m_currentColor, mv);
     ++m_legalMoveIndex;
 }

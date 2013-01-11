@@ -122,7 +122,7 @@ inline void State::add_moves(Point p, Color c)
             for (auto i = move_candidates.begin(); i != move_candidates.end();
                  ++i)
                 if (! m_marker[*i]
-                    && check_move(is_forbidden, *i, get_move_info(*i).points))
+                    && check_move(is_forbidden, *i, get_move_info(*i)))
                 {
                     m_marker.set(*i);
                     moves.push_back(*i);
@@ -138,8 +138,7 @@ inline void State::add_moves(Point p, Color c, Piece piece,
     auto move_candidates = get_moves(c, piece, p, adj_status);
     const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
     for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
-        if (! m_marker[*i]
-            && check_move(is_forbidden, *i, get_move_info(*i).points))
+        if (! m_marker[*i] && check_move(is_forbidden, *i, get_move_info(*i)))
         {
             m_marker.set(*i);
             moves.push_back(*i);
@@ -149,11 +148,11 @@ inline void State::add_moves(Point p, Color c, Piece piece,
 /** Check if move is not forbidden and compute/handle its local value in the
     same loop. */
 bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
-                       const MovePoints& points)
+                       const MoveInfo& info)
 {
     LocalValue::Compute compute_local;
-    auto end = points.end();
-    auto i = points.begin();
+    auto end = info.end();
+    auto i = info.begin();
     do
     {
         if (is_forbidden[*i])
@@ -163,7 +162,7 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
     }
     while (i != end);
     auto local_value = compute_local.finish();
-    auto piece_size = points.size();
+    auto piece_size = info.size();
     if (piece_size > m_max_playable_piece_size)
         m_max_playable_piece_size = piece_size;
     if (local_value >= m_max_local_value)
@@ -249,16 +248,18 @@ void State::compute_features()
         features.heuristic = 0;
         features.connect = false;
         features.dist_to_center = numeric_limits<unsigned>::max();
-        auto j = info.points.begin();
-        auto end = info.points.end();
-        do
         {
-            features.heuristic += point_value[*j];
-            ++j;
+            auto j = info.begin();
+            auto end = info.end();
+            do
+            {
+                features.heuristic += point_value[*j];
+                ++j;
+            }
+            while (j != end);
         }
-        while (j != end);
-        j = info_ext.attach_points.begin();
-        end = info_ext.attach_points.end();
+        auto j = info_ext.attach_points.begin();
+        auto end = info_ext.attach_points.end();
         do
         {
             features.heuristic += attach_point_value[*j];
@@ -291,7 +292,7 @@ void State::compute_features()
         }
         if (compute_dist_to_center)
         {
-            for (auto j = info.points.begin(); j != info.points.end(); ++j)
+            for (auto j = info.begin(); j != info.end(); ++j)
                 features.dist_to_center =
                     min(features.dist_to_center, m_dist_to_center[*j]);
             m_min_dist_to_center =
@@ -334,7 +335,7 @@ bool State::check_symmetry_broken()
             // Don't try to handle non-alternating moves or pass moves in
             // board history
             return true;
-        const MovePoints& points = get_move_info(last_mv.move).points;
+        const MoveInfo& info = get_move_info(last_mv.move);
         for (BoardIterator i(m_bd); i; ++i)
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
@@ -342,9 +343,9 @@ bool State::check_symmetry_broken()
             PointState s2 = m_bd.get_point_state(symm_p);
             if (s1 != get_symmetric_state(s2))
             {
-                if ((points.contains(*i)
+                if ((info.contains(*i)
                      && s1 == previous_color && s2.is_empty())
-                    || (points.contains(symm_p)
+                    || (info.contains(symm_p)
                         && s1.is_empty() && s2 == previous_color))
                     continue;
                 return true;
@@ -612,7 +613,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
         unsigned i = m_random.generate_small_uint(moves->size());
         mv = (*moves)[i];
     }
-    while (get_move_info(mv).points.size() < max_playable_piece_size
+    while (get_move_info(mv).size() < max_playable_piece_size
            && nu_try < max_try);
     play_playout_nonpass(mv);
     return true;
@@ -981,8 +982,8 @@ void State::update_move_list(Color c)
     for (Move mv : *m_moves[c])
     {
         const MoveInfo& info = get_move_info(mv);
-        if (is_piece_left[info.piece]
-            && check_move(is_forbidden, mv, info.points))
+        if (is_piece_left[info.get_piece()]
+            && check_move(is_forbidden, mv, info))
         {
             m_tmp_moves->push_back(mv);
             m_marker.set(mv);
@@ -1030,14 +1031,14 @@ void State::update_move_list(Color c)
 void State::update_symmetry_broken(Move mv)
 {
     LIBBOARDGAME_ASSERT(! mv.is_pass());
-    const MovePoints& points = get_move_info(mv).points;
+    const MoveInfo& info = get_move_info(mv);
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
     if (to_play == Color(0) || to_play == Color(2))
     {
         // First player to play: Check that all symmetric points of the last
         // move of the second player are occupied by the first player
-        for (auto i = points.begin(); i != points.end(); ++i)
+        for (auto i = info.begin(); i != info.end(); ++i)
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
             if (m_bd.get_point_state(symm_p) != second_color)
@@ -1052,7 +1053,7 @@ void State::update_symmetry_broken(Move mv)
         // Second player to play: Check that all symmetric points of the last
         // move of the first player are empty (i.e. the second player can play
         // there to preserve the symmetry)
-        for (auto i = points.begin(); i != points.end(); ++i)
+        for (auto i = info.begin(); i != info.end(); ++i)
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
             if (! m_bd.get_point_state(symm_p).is_empty())

@@ -305,7 +305,7 @@ private:
     void play_playout_nonpass(Move mv);
 
     bool check_move(const Grid<bool>& is_forbidden, Move mv,
-                    const MovePoints& points);
+                    const MoveInfo& info);
 
     void update_move_list(Color c);
 

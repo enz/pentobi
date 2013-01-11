@@ -289,8 +289,6 @@ public:
 
     bool get_piece_by_name(const string& name, Piece& piece) const;
 
-    const MovePoints& get_move_points(Move mv) const;
-
     const MoveInfo& get_move_info(Move mv) const;
 
     const MoveInfoExt& get_move_info_ext(Move mv) const;
@@ -538,11 +536,6 @@ inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
     return *(m_move_info_ext_array + mv.to_int());
 }
 
-inline const MovePoints& Board::get_move_points(Move mv) const
-{
-    return m_board_const->get_move_points(mv);
-}
-
 inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
                                                    unsigned adj_status) const
 {
@@ -765,9 +758,9 @@ inline const Grid<bool>& Board::is_forbidden(Color c) const
 
 inline bool Board::is_forbidden(Color c, Move mv) const
 {
-    const MovePoints& points = get_move_points(mv);
-    auto end = points.end();
-    auto i = points.begin();
+    auto& info = get_move_info(mv);
+    auto i = info.begin();
+    auto end = info.end();
     do
     {
         if (m_state_color[c].forbidden[*i])
@@ -789,11 +782,11 @@ inline bool Board::is_legal(Color c, Move mv) const
     if (mv.is_pass())
         return true;
     const MoveInfo& info = get_move_info(mv);
-    if (! is_piece_left(c, info.piece))
+    if (! is_piece_left(c, info.get_piece()))
         return false;
     bool has_attach_point = false;
-    auto i = info.points.begin();
-    auto end = info.points.end();
+    auto i = info.begin();
+    auto end = info.end();
     do
     {
         if (m_state_color[c].forbidden[*i])
@@ -807,7 +800,7 @@ inline bool Board::is_legal(Color c, Move mv) const
         return true;
     if (! is_first_piece(c))
         return false;
-    i = info.points.begin();
+    i = info.begin();
     do
     {
         if (is_colorless_starting_point(*i)
@@ -841,8 +834,8 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(mv.is_regular());
     const MoveInfo& info = get_move_info(mv);
     const MoveInfoExt& info_ext = get_move_info_ext(mv);
-    Piece piece = info.piece;
-    unsigned piece_size = info.points.size();
+    Piece piece = info.get_piece();
+    unsigned piece_size = info.size();
     StateColor& state_color = m_state_color[c];
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
     if (--state_color.nu_left_piece[piece] == 0)
@@ -858,8 +851,8 @@ inline void Board::place(Color c, Move mv)
     ++m_state_base.nu_onboard_pieces_all;
     ++state_color.nu_onboard_pieces;
     state_color.points += piece_size;
-    auto i = info.points.begin();
-    auto end = info.points.end();
+    auto i = info.begin();
+    auto end = info.end();
     do
     {
         m_state_base.point_state[*i] = c;

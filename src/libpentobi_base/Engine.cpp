@@ -175,13 +175,18 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         }
     }
     const MoveInfo& info = bd.get_move_info(mv);
+    Piece piece = info.get_piece();
     const MoveInfoExt& info_ext = bd.get_move_info_ext(mv);
     response
         << "\n"
         << "ID:     " << mv.to_int() << "\n"
-        << "Piece:  " << info.piece.to_int()
-              << " (" << bd.get_piece_info(info.piece).get_name() << ")\n"
-        << "Points: " << info.points << "\n"
+        << "Piece:  " << piece.to_int()
+        << " (" << bd.get_piece_info(piece).get_name() << ")\n"
+        << "Points:";
+    for (Point p : info)
+        response << ' ' << p;
+    response
+        << "\n"
         << "Adj:    " << info_ext.adj_points << "\n"
         << "Attach: " << info_ext.attach_points << "\n"
         << "BrkSym: " << info_ext.breaks_symmetry << "\n"

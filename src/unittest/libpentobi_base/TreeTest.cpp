@@ -39,52 +39,52 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
         ColorMove mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(0));
-        const MovePoints& points =  board_const.get_move_points(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(points.size(), 5u);
-        LIBBOARDGAME_CHECK(points.contains(Point("a16")));
-        LIBBOARDGAME_CHECK(points.contains(Point("a17")));
-        LIBBOARDGAME_CHECK(points.contains(Point("a18")));
-        LIBBOARDGAME_CHECK(points.contains(Point("a19")));
-        LIBBOARDGAME_CHECK(points.contains(Point("a20")));
+        auto& info =  board_const.get_move_info(mv.move);
+        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
+        LIBBOARDGAME_CHECK(info.contains(Point("a16")));
+        LIBBOARDGAME_CHECK(info.contains(Point("a17")));
+        LIBBOARDGAME_CHECK(info.contains(Point("a18")));
+        LIBBOARDGAME_CHECK(info.contains(Point("a19")));
+        LIBBOARDGAME_CHECK(info.contains(Point("a20")));
     }
     node = &node->get_child();
     {
         ColorMove mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(1));
-        const MovePoints& points =  board_const.get_move_points(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(points.size(), 5u);
-        LIBBOARDGAME_CHECK(points.contains(Point("s17")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t17")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t18")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t19")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t20")));
+        auto& info =  board_const.get_move_info(mv.move);
+        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
+        LIBBOARDGAME_CHECK(info.contains(Point("s17")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t17")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t18")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t19")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t20")));
     }
     node = &node->get_child();
     {
         ColorMove mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(2));
-        const MovePoints& points =  board_const.get_move_points(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(points.size(), 5u);
-        LIBBOARDGAME_CHECK(points.contains(Point("t1")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t2")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t3")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t4")));
-        LIBBOARDGAME_CHECK(points.contains(Point("t5")));
+        auto& info =  board_const.get_move_info(mv.move);
+        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
+        LIBBOARDGAME_CHECK(info.contains(Point("t1")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t2")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t3")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t4")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t5")));
     }
     node = &node->get_child();
     {
         ColorMove mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(3));
-        const MovePoints& points =  board_const.get_move_points(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(points.size(), 5u);
-        LIBBOARDGAME_CHECK(points.contains(Point("a1")));
-        LIBBOARDGAME_CHECK(points.contains(Point("b1")));
-        LIBBOARDGAME_CHECK(points.contains(Point("c1")));
-        LIBBOARDGAME_CHECK(points.contains(Point("d1")));
-        LIBBOARDGAME_CHECK(points.contains(Point("d2")));
+        auto& info =  board_const.get_move_info(mv.move);
+        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
+        LIBBOARDGAME_CHECK(info.contains(Point("a1")));
+        LIBBOARDGAME_CHECK(info.contains(Point("b1")));
+        LIBBOARDGAME_CHECK(info.contains(Point("c1")));
+        LIBBOARDGAME_CHECK(info.contains(Point("d1")));
+        LIBBOARDGAME_CHECK(info.contains(Point("d2")));
     }
 }
 
