@@ -78,9 +78,9 @@ typedef ArrayList<Point,PieceInfo::max_attach,unsigned short> AttachPoints;
     Stored separately from MoveInfo to improve CPU cache performance. */
 struct MoveInfoExt
 {
-    AdjPoints adj_points;
-
     AttachPoints attach_points;
+
+    AdjPoints adj_points;
 
     /** Whether the move breaks rotational symmetry of the board.
         Currently not initialized for classic and trigon_3 board types because
