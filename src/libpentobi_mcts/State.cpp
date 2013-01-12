@@ -110,24 +110,23 @@ State::~State() throw()
 {
 }
 
-inline void State::add_moves(Point p, Color c)
+inline void State::add_moves(Point p, Color c,
+                             const Board::PiecesLeftList& pieces_considered)
 {
     auto& moves = *m_moves[c];
     unsigned adj_status = m_bd.get_adj_status(p, c);
     auto& is_forbidden = m_bd.is_forbidden(c);
-    for (Piece piece : m_bd.get_pieces_left(c))
-        if ((*m_is_piece_considered[c])[piece])
-        {
-            auto move_candidates = get_moves(c, piece, p, adj_status);
-            for (auto i = move_candidates.begin(); i != move_candidates.end();
-                 ++i)
-                if (! m_marker[*i]
-                    && check_move(is_forbidden, *i, get_move_info(*i)))
-                {
-                    m_marker.set(*i);
-                    moves.push_back(*i);
-                }
-        }
+    for (Piece piece : pieces_considered)
+    {
+        auto move_candidates = get_moves(c, piece, p, adj_status);
+        for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
+            if (! m_marker[*i]
+                && check_move(is_forbidden, *i, get_move_info(*i)))
+            {
+                m_marker.set(*i);
+                moves.push_back(*i);
+            }
+    }
     m_moves_added_at[c].set(p);
 }
 
@@ -161,21 +160,25 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
         ++i;
     }
     while (i != end);
-    auto local_value = compute_local.finish();
-    auto piece_size = info.size();
+    unsigned piece_size = info.size();
     if (piece_size > m_max_playable_piece_size)
         m_max_playable_piece_size = piece_size;
-    if (local_value >= m_max_local_value)
+    if (compute_local.get_upper_bound() >= m_max_local_value)
     {
+        auto local_value = compute_local.get();
         if (local_value > m_max_local_value)
         {
             m_local_moves.clear();
             m_max_local_value = local_value;
             m_max_playable_piece_size_local = piece_size;
+            m_local_moves.push_back(mv);
         }
-        else if (piece_size > m_max_playable_piece_size_local)
-            m_max_playable_piece_size_local = piece_size;
-        m_local_moves.push_back(mv);
+        else if (local_value == m_max_local_value)
+        {
+            if (piece_size > m_max_playable_piece_size_local)
+                m_max_playable_piece_size_local = piece_size;
+            m_local_moves.push_back(mv);
+        }
     }
     return true;
 }
@@ -750,6 +753,10 @@ void State::init_move_list_with_local(Color c)
     m_max_playable_piece_size_local = 0;
     auto& moves = *m_moves[c];
     moves.clear();
+    Board::PiecesLeftList pieces_considered;
+    for (Piece piece : m_bd.get_pieces_left(c))
+        if ((*m_is_piece_considered[c])[piece])
+            pieces_considered.push_back(piece);
     if (m_bd.is_first_piece(c))
     {
         // Using only one starting point (if game variant has more than one) not
@@ -759,19 +766,16 @@ void State::init_move_list_with_local(Color c)
         Point p = find_best_starting_point(c);
         if (! p.is_null())
         {
-            for (Piece piece : m_bd.get_pieces_left(c))
-                if ((*m_is_piece_considered[c])[piece])
-                {
-                    unsigned adj_status = m_bd.get_adj_status(p, c);
-                    for (Move mv : get_moves(c, piece, p, adj_status))
+            for (Piece piece : pieces_considered)
+            {
+                unsigned adj_status = m_bd.get_adj_status(p, c);
+                for (Move mv : get_moves(c, piece, p, adj_status))
+                    if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
                     {
-                        if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
-                        {
-                            m_marker.set(mv);
-                            moves.push_back(mv);
-                        }
+                        m_marker.set(mv);
+                        moves.push_back(mv);
                     }
-                }
+            }
             m_moves_added_at[c].set(p);
         }
     }
@@ -779,7 +783,7 @@ void State::init_move_list_with_local(Color c)
     {
         for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
-                add_moves(p, c);
+                add_moves(p, c, pieces_considered);
     }
     m_marker.clear_all_set_known(moves);
     m_is_move_list_initialized[c] = true;
@@ -992,6 +996,10 @@ void State::update_move_list(Color c)
     swap(m_tmp_moves, m_moves[c]);
 
     // Find new legal moves because of new pieces played by this color
+    Board::PiecesLeftList pieces_considered;
+    for (Piece piece : m_bd.get_pieces_left(c))
+        if ((*m_is_piece_considered[c])[piece])
+            pieces_considered.push_back(piece);
     for (unsigned i = m_last_update[c]; i < m_bd.get_nu_moves();
          i += m_nu_colors)
     {
@@ -1000,7 +1008,7 @@ void State::update_move_list(Color c)
         if (! mv.is_pass())
             for (Point p : get_move_info_ext(mv).attach_points)
                 if (! m_bd.is_forbidden(p, c) && ! m_moves_added_at[c][p])
-                    add_moves(p, c);
+                    add_moves(p, c, pieces_considered);
     }
 
     // Generate moves for pieces not considered in the last position

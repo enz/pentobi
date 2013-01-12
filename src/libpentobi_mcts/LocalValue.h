@@ -47,8 +47,13 @@ public:
         /** Add a point of the move. */
         void add_move_point(Point p, const LocalValue& local_value);
 
-        /** Finish the computation and return the value. */
-        unsigned finish();
+        /** Return the value. */
+        unsigned get() const;
+
+        /** Return upper bound on the value.
+            Faster than get() and often good enough to know that we
+            already have a move with a higher value. */
+        unsigned get_upper_bound() const;
 
     private:
         unsigned m_value;
@@ -87,7 +92,7 @@ inline void LocalValue::Compute::add_move_point(Point p,
     m_value += local_value.m_point_value[p];
 }
 
-inline unsigned LocalValue::Compute::finish()
+inline unsigned LocalValue::Compute::get() const
 {
     // The bit ranges used in the value work only as long as there are not more
     // than 0x10 points covered by a piece.
@@ -105,6 +110,11 @@ inline unsigned LocalValue::Compute::finish()
         return (m_value & 0xf00u) + 0x010u;
     else
         return m_value & 0xf00u;
+}
+
+inline unsigned LocalValue::Compute::get_upper_bound() const
+{
+    return m_value;
 }
 
 inline void LocalValue::clear()

@@ -192,9 +192,9 @@ private:
 
     unsigned m_max_local_value;
 
-    unsigned short m_max_playable_piece_size;
+    unsigned m_max_playable_piece_size;
 
-    unsigned short m_max_playable_piece_size_local;
+    unsigned m_max_playable_piece_size_local;
 
     /** Maximum of Features::heuristic for all moves. */
     Float m_max_heuristic;
@@ -277,7 +277,8 @@ private:
     /** Not implemented. */
     State& operator=(const State&);
 
-    void add_moves(Point p, Color c);
+    void add_moves(Point p, Color c,
+                   const Board::PiecesLeftList& pieces_considered);
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
 
