@@ -5,7 +5,7 @@ This file explains how to compile and install Pentobi from the sources.
 
 Pentobi requires the Boost libraries (>= 1.40) and the Qt libraries (>= 4.8).
 The C++ compiler needs to support certain C++11 features (only features that
-are already implemented by MSVC 2012 and GCC 4.4). For creating cross-platform
+are already implemented by MSVC 2012 and GCC 4.7). For creating cross-platform
 makefiles, CMake (>= 2.8.9) is required.
 
 Ubuntu 12.10 provides suitable versions of the required tools and libraries in
