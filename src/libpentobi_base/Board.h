@@ -293,6 +293,8 @@ public:
 
     const MoveInfoExt& get_move_info_ext(Move mv) const;
 
+    const MoveInfoExt2& get_move_info_ext_2(Move mv) const;
+
     bool is_colored_starting_point(Point p) const;
 
     bool is_colorless_starting_point(Point p) const;
@@ -386,6 +388,9 @@ private:
 
     /** Same as m_board_const->get_move_info_ext_array() */
     const MoveInfoExt* m_move_info_ext_array;
+
+    /** Same as m_board_const->get_move_info_ext_2_array() */
+    const MoveInfoExt2* m_move_info_ext_2_array;
 
     const Geometry* m_geometry;
 
@@ -534,6 +539,13 @@ inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
     LIBBOARDGAME_ASSERT(! mv.is_null());
     LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_all_moves());
     return *(m_move_info_ext_array + mv.to_int());
+}
+
+inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
+{
+    LIBBOARDGAME_ASSERT(! mv.is_null());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_all_moves());
+    return *(m_move_info_ext_2_array + mv.to_int());
 }
 
 inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,

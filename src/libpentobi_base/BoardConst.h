@@ -154,6 +154,10 @@ public:
         @pre move.is_regular() */
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
+    const MoveInfoExt2& get_move_info_ext_2(Move mv) const;
+
+    const MoveInfoExt2* get_move_info_ext_2_array() const;
+
     unsigned get_nu_all_moves() const;
 
     bool find_move(const MovePoints& points, Move& move) const;
@@ -201,6 +205,8 @@ private:
 
     vector<MoveInfoExt> m_move_info_ext;
 
+    vector<MoveInfoExt2> m_move_info_ext_2;
+
     /** Non-compact representation of lists of moves of a piece at a point
         constrained by the forbidden status of adjacent points.
         Only used during construction of m_moves_range and m_move_lists. */
@@ -245,6 +251,8 @@ private:
     bool is_compatible_with_adj_status(Point p, unsigned adj_status,
                                        const MoveInfo& info) const;
 
+    void reserve_info(size_t nu_moves);
+
     void set_adj_and_attach_points(const MoveInfo& info, MoveInfoExt& info_ext);
 };
 
@@ -280,9 +288,20 @@ inline const MoveInfoExt& BoardConst::get_move_info_ext(Move move) const
     return m_move_info_ext[move.to_int()];
 }
 
+inline const MoveInfoExt2& BoardConst::get_move_info_ext_2(Move mv) const
+{
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_move_info_ext_2.size());
+    return m_move_info_ext_2[mv.to_int()];
+}
+
 inline const MoveInfoExt* BoardConst::get_move_info_ext_array() const
 {
     return &m_move_info_ext.front();
+}
+
+inline const MoveInfoExt2* BoardConst::get_move_info_ext_2_array() const
+{
+    return &m_move_info_ext_2.front();
 }
 
 inline BoardConst::LocalMovesListRange BoardConst::get_moves(

@@ -274,6 +274,7 @@ void Board::init_variant(Variant variant)
     m_geometry = &m_board_const->get_geometry();
     m_move_info_array = m_board_const->get_move_info_array();
     m_move_info_ext_array = m_board_const->get_move_info_ext_array();
+    m_move_info_ext_2_array = m_board_const->get_move_info_ext_2_array();
     m_starting_points.init(variant, *m_geometry);
     m_state_base.point_state.init(*m_geometry);
     m_state_base.played_move.init(*m_geometry);

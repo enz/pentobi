@@ -573,37 +573,32 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
     {
         m_transforms.reset(new PieceTransformsTrigon());
         m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
-        m_move_info.reserve(Move::onboard_moves_trigon);
-        m_move_info_ext.reserve(Move::onboard_moves_trigon);
+        reserve_info(Move::onboard_moves_trigon);
     }
     else if (board_type == BoardType::trigon_3)
     {
         m_transforms.reset(new PieceTransformsTrigon());
         m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
-        m_move_info.reserve(Move::onboard_moves_trigon_3);
-        m_move_info_ext.reserve(Move::onboard_moves_trigon_3);
+        reserve_info(Move::onboard_moves_trigon_3);
     }
     else if (board_type == BoardType::classic)
     {
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
-        m_move_info.reserve(Move::onboard_moves_classic);
-        m_move_info_ext.reserve(Move::onboard_moves_classic);
+        reserve_info(Move::onboard_moves_classic);
     }
     else if (variant == Variant::junior)
     {
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_junior(m_geometry, *m_transforms);
-        m_move_info.reserve(Move::onboard_moves_junior);
-        m_move_info_ext.reserve(Move::onboard_moves_junior);
+        reserve_info(Move::onboard_moves_junior);
     }
     else
     {
         LIBBOARDGAME_ASSERT(variant == Variant::duo);
         m_transforms.reset(new PieceTransformsClassic());
         m_pieces = create_pieces_classic(m_geometry, *m_transforms);
-        m_move_info.reserve(Move::onboard_moves_duo);
-        m_move_info_ext.reserve(Move::onboard_moves_duo);
+        reserve_info(Move::onboard_moves_duo);
     }
     m_nu_pieces = static_cast<unsigned>(m_pieces.size());
     init_adj_status();
@@ -654,12 +649,14 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
         points.push_back(Point((*i).x, (*i).y));
     MoveInfo info(piece, points);
     MoveInfoExt info_ext;
-    info_ext.center = center;
-    info_ext.breaks_symmetry = false;
-    info_ext.symmetric_move = Move::null();
     set_adj_and_attach_points(info, info_ext);
+    MoveInfoExt2 info_ext_2;
+    info_ext_2.center = center;
+    info_ext_2.breaks_symmetry = false;
+    info_ext_2.symmetric_move = Move::null();
     m_move_info.push_back(info);
     m_move_info_ext.push_back(info_ext);
+    m_move_info_ext_2.push_back(info_ext_2);
     Move move(static_cast<unsigned>(m_move_info.size() - 1));
     if (log_move_creation)
     {
@@ -905,17 +902,17 @@ void BoardConst::init_symmetry_info()
     symmetric_points.init(m_geometry, transform);
     for (unsigned i = 0; i < m_move_info.size(); ++i)
     {
-        const MoveInfo& info = m_move_info[i];
-        MoveInfoExt& info_ext = m_move_info_ext[i];
+        const auto& info = m_move_info[i];
+        auto& info_ext_2 = m_move_info_ext_2[i];
         MovePoints sym_points;
-        info_ext.breaks_symmetry = false;
+        info_ext_2.breaks_symmetry = false;
         for (Point p : info)
         {
             if (info.contains(symmetric_points[p]))
-                info_ext.breaks_symmetry = true;
+                info_ext_2.breaks_symmetry = true;
             sym_points.push_back(symmetric_points[p]);
         }
-        find_move(sym_points, info_ext.symmetric_move);
+        find_move(sym_points, info_ext_2.symmetric_move);
     }
 }
 
@@ -926,6 +923,13 @@ bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
         if (info.contains(p_adj))
             return false;
     return true;
+}
+
+void BoardConst::reserve_info(size_t nu_moves)
+{
+    m_move_info.reserve(nu_moves);
+    m_move_info_ext.reserve(nu_moves);
+    m_move_info_ext_2.reserve(nu_moves);
 }
 
 void BoardConst::set_adj_and_attach_points(const MoveInfo& info,

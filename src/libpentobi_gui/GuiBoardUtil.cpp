@@ -94,7 +94,7 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
     if (! mv.is_regular())
         return;
     const Board& bd = game.get_board();
-    Point p = bd.get_move_info_ext(mv.move).center;
+    Point p = bd.get_move_info_ext_2(mv.move).center;
     QString label;
     label.setNum(moveNumber);
     if (markVariations)

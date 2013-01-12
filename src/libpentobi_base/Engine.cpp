@@ -174,9 +174,10 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
                           % args.get());
         }
     }
-    const MoveInfo& info = bd.get_move_info(mv);
+    auto& info = bd.get_move_info(mv);
     Piece piece = info.get_piece();
-    const MoveInfoExt& info_ext = bd.get_move_info_ext(mv);
+    auto& info_ext = bd.get_move_info_ext(mv);
+    auto& info_ext_2 = bd.get_move_info_ext_2(mv);
     response
         << "\n"
         << "ID:     " << mv.to_int() << "\n"
@@ -189,8 +190,8 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         << "\n"
         << "Adj:    " << info_ext.adj_points << "\n"
         << "Attach: " << info_ext.attach_points << "\n"
-        << "BrkSym: " << info_ext.breaks_symmetry << "\n"
-        << "SymMv:  " << bd.to_string(info_ext.symmetric_move);
+        << "BrkSym: " << info_ext_2.breaks_symmetry << "\n"
+        << "SymMv:  " << bd.to_string(info_ext_2.symmetric_move);
 }
 
 void Engine::cmd_p(const Arguments& args)

@@ -81,7 +81,14 @@ struct MoveInfoExt
     AttachPoints attach_points;
 
     AdjPoints adj_points;
+};
 
+//-----------------------------------------------------------------------------
+
+/** Leeast frequently accessed move info.
+    Stored separately from MoveInfo to improve CPU cache performance. */
+struct MoveInfoExt2
+{
     /** Whether the move breaks rotational symmetry of the board.
         Currently not initialized for classic and trigon_3 board types because
         enforced rotational-symmetric draws are not used in the MCTS search on
