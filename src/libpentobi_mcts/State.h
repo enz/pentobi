@@ -55,6 +55,19 @@ using libpentobi_base::ColorMap;
 /** Constant data shared between the search states. */
 struct SharedConst
 {
+    /** Like BoardConst::m_moves_range but for SharedConst::move_lists.
+        Only elements for pieces still available and non-forbidden points
+        are initialized. */
+    ColorMap<Grid<array<PieceMap<BoardConst::ListIndex>,
+                        BoardConst::nu_adj_status>>>
+        moves_range;
+
+    /** Like BoardConst::m_move_lists but moves that are forbidden at the
+        root position filtered out. */
+    ColorMap<array<Move,BoardConst::max_move_lists_sum_length>> move_lists;
+
+    /** The game board.
+        Contains the current position. */
     const Board* board;
 
     /** The color to play at the root of the search. */
@@ -91,17 +104,6 @@ struct SharedConst
         considered (because using the restricted set of pieces would generate
         no moves). */
     PieceMap<bool> is_piece_considered_all;
-
-    /** Like BoardConst::m_moves_range but for SharedConst::move_lists.
-        Only elements for pieces still available and non-forbidden points
-        are initialized. */
-    ColorMap<Grid<array<PieceMap<BoardConst::ListIndex>,
-                        BoardConst::nu_adj_status>>>
-        moves_range;
-
-    /** Like BoardConst::m_move_lists but moves that are forbidden at the
-        root position filtered out. */
-    ColorMap<unique_ptr<Move[]>> move_lists;
 
     SharedConst(const Color& to_play);
 };
@@ -340,7 +342,7 @@ inline BoardConst::LocalMovesListRange State::get_moves(Color c, Piece piece,
 {
     BoardConst::ListIndex idx =
         m_shared_const.moves_range[c][p][adj_status][piece];
-    const Move* begin = m_shared_const.move_lists[c].get() + idx.begin;
+    const Move* begin = &m_shared_const.move_lists[c][idx.begin];
     const Move* end = begin + idx.size;
     return BoardConst::LocalMovesListRange(begin, end);
 }

@@ -35,10 +35,10 @@ public:
 private:
     static const unsigned nu_precomp = 50;
 
-    Float m_bias_term_constant;
-
     /** The part of the bias term that does not depend on the child count. */
     Float m_parent_part;
+
+    Float m_bias_term_constant;
 
     Float m_precomp_parent_part[nu_precomp];
 

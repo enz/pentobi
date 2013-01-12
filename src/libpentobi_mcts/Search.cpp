@@ -181,12 +181,7 @@ void Search::on_start_search()
 
     // Initialize m_shared_const.moves_lists/moves_range
     for (ColorIterator i(nu_colors); i; ++i)
-    {
-        auto& move_lists = m_shared_const.move_lists[*i];
-        if (! move_lists)
-            move_lists.reset(new Move[BoardConst::max_move_lists_sum_length]);
         m_shared_const.moves_range[*i].init(bd.get_geometry());
-    }
     ColorMap<unsigned> current(0);
     for (BoardIterator i(bd); i; ++i)
         for (unsigned j = 0; j < BoardConst::nu_adj_status; ++j)

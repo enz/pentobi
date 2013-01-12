@@ -161,8 +161,7 @@ void Node<M>::copy_data_from(const Node& node)
         Move m_move;
         NodeIndex m_first_child;
     };
-    static_assert(sizeof(Node) == sizeof(Dummy),
-                  "libboardgame_mcts::Node::copy_data_from needs updating");
+    static_assert(sizeof(Node) == sizeof(Dummy), "");
 
     m_move = node.m_move;
     m_count.store(node.m_count);
