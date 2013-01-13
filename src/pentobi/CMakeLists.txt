@@ -9,6 +9,7 @@ include_directories(
 set(pentobi_SRCS
   AnalyzeGameWidget.cpp
   AnalyzeGameWindow.cpp
+  AnalyzeSpeedDialog.cpp
   Application.cpp
   ExportImage.cpp
   MainWindow.cpp
@@ -24,6 +25,7 @@ set(pentobi_SRCS
 set(pentobi_MOC_HDRS
   AnalyzeGameWidget.h
   AnalyzeGameWindow.h
+  AnalyzeSpeedDialog.h
   Application.h
   MainWindow.h
   RatedGamesList.h

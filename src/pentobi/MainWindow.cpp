@@ -33,6 +33,7 @@
 #include <QToolButton>
 #include <QtConcurrentRun>
 #include "AnalyzeGameWindow.h"
+#include "AnalyzeSpeedDialog.h"
 #include "ExportImage.h"
 #include "RatingDialog.h"
 #include "ShowMessage.h"
@@ -391,23 +392,10 @@ void MainWindow::analyzeGame()
         showInfo(tr("Game analysis is only possible in the main variation."));
         return;
     }
-    QStringList items;
-    items << tr("Fast") << tr("Normal") << tr("Slow");
-    QInputDialog dialog(this);
-    Qt::WindowFlags windowFlags = dialog.windowFlags();
-    windowFlags &= ~Qt::WindowContextHelpButtonHint;
-    dialog.setWindowFlags(windowFlags);
-    dialog.setWindowTitle(tr("Analyze Game"));
-    dialog.setLabelText(tr("Analysis speed:"));
-    dialog.setInputMode(QInputDialog::TextInput);
-    dialog.setComboBoxItems(items);
-    dialog.setComboBoxEditable(false);
+    AnalyzeSpeedDialog dialog(this, tr("Analyze Game"));
     if (! dialog.exec())
         return;
-    QString item = dialog.textValue();
-    if (item.isEmpty())
-        return;
-    int speed = items.indexOf(item);
+    int speed = dialog.getSpeedValue();
     cancelThread();
     if (m_analyzeGameWindow != 0)
         delete m_analyzeGameWindow;
@@ -427,15 +415,14 @@ void MainWindow::analyzeGame()
     size_t nuSimulations;
     switch (speed)
     {
-    case 2:
-        nuSimulations = 80000;
+    case 0:
+        nuSimulations = 5000;
         break;
     case 1:
         nuSimulations = 20000;
         break;
     default:
-        nuSimulations = 5000;
-        break;
+        nuSimulations = 80000;
     }
     m_analyzeGameWindow->analyzeGameWidget->start(*m_game,
                                                   m_player->get_search(),
