@@ -800,6 +800,10 @@ void State::init_move_list_without_local(Color c)
     m_is_piece_considered[c] = &get_pieces_considered();
     auto& moves = *m_moves[c];
     moves.clear();
+    Board::PiecesLeftList pieces_considered;
+    for (Piece piece : m_bd.get_pieces_left(c))
+        if ((*m_is_piece_considered[c])[piece])
+            pieces_considered.push_back(piece);
     if (m_bd.is_first_piece(c))
     {
         // Using only one starting point (if game variant has more than one) not
@@ -809,17 +813,16 @@ void State::init_move_list_without_local(Color c)
         Point p = find_best_starting_point(c);
         if (! p.is_null())
         {
-            for (Piece piece : m_bd.get_pieces_left(c))
-                if ((*m_is_piece_considered[c])[piece])
-                {
-                    unsigned adj_status = m_bd.get_adj_status(p, c);
-                    for (Move mv : get_moves(c, piece, p, adj_status))
-                        if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
-                        {
-                            m_marker.set(mv);
-                            moves.push_back(mv);
-                        }
-                }
+            for (Piece piece : pieces_considered)
+            {
+                unsigned adj_status = m_bd.get_adj_status(p, c);
+                for (Move mv : get_moves(c, piece, p, adj_status))
+                    if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
+                    {
+                        m_marker.set(mv);
+                        moves.push_back(mv);
+                    }
+            }
             m_moves_added_at[c].set(p);
         }
     }
@@ -829,14 +832,13 @@ void State::init_move_list_without_local(Color c)
             if (! m_bd.is_forbidden(p, c))
             {
                 unsigned adj_status = m_bd.get_adj_status(p, c);
-                for (Piece piece : m_bd.get_pieces_left(c))
-                    if ((*m_is_piece_considered[c])[piece])
-                        for (Move mv : get_moves(c, piece, p, adj_status))
-                            if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
-                            {
-                                m_marker.set(mv);
-                                moves.push_back(mv);
-                            }
+                for (Piece piece : pieces_considered)
+                    for (Move mv : get_moves(c, piece, p, adj_status))
+                        if (! m_marker[mv] && ! m_bd.is_forbidden(c, mv))
+                        {
+                            m_marker.set(mv);
+                            moves.push_back(mv);
+                        }
                 m_moves_added_at[c].set(p);
             }
     }
@@ -982,7 +984,7 @@ void State::update_move_list(Color c)
     PieceMap<bool> is_piece_left(false);
     for (Piece piece : m_bd.get_pieces_left(c))
         is_piece_left[piece] = true;
-    const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
+    auto& is_forbidden = m_bd.is_forbidden(c);
     m_tmp_moves->clear();
     for (Move mv : *m_moves[c])
     {
@@ -1008,7 +1010,7 @@ void State::update_move_list(Color c)
         Move mv = m_bd.get_move(i).move;
         if (! mv.is_pass())
             for (Point p : get_move_info_ext(mv).attach_points)
-                if (! m_bd.is_forbidden(p, c) && ! m_moves_added_at[c][p])
+                if (! is_forbidden[p] && ! m_moves_added_at[c][p])
                     add_moves(p, c, pieces_considered);
     }
 
@@ -1022,7 +1024,7 @@ void State::update_move_list(Color c)
         if (&is_piece_considered !=  &is_piece_considered_new)
         {
             for (Point p : m_bd.get_attach_points(c))
-                if (! m_bd.is_forbidden(p, c))
+                if (! is_forbidden[p])
                 {
                     unsigned adj_status = m_bd.get_adj_status(p, c);
                     for (Piece piece : m_bd.get_pieces_left(c))

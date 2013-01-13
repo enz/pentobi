@@ -534,7 +534,7 @@ private:
 
     void log_thread(const ThreadState& thread_state, const string& s) const;
 
-    LIBBOARDGAME_FLATTEN void playout(ThreadState& thread_state);
+    void playout(ThreadState& thread_state);
 
     void play_in_tree(ThreadState& thread_state, bool& is_terminal);
 
