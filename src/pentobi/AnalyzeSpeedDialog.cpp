@@ -25,10 +25,7 @@ AnalyzeSpeedDialog::AnalyzeSpeedDialog(QWidget* parent, const QString& title)
 
 void AnalyzeSpeedDialog::accept()
 {
-    QString item = textValue();
-    if (item.isEmpty())
-        return;
-    m_speedValue = m_items.indexOf(item);
+    m_speedValue = m_items.indexOf(textValue());
     QDialog::accept();
 }
 
