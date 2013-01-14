@@ -130,6 +130,7 @@ inline void LocalValue::init(const Board& bd)
         clear();
     Color to_play = bd.get_to_play();
     Color second_color = bd.get_second_color(to_play);
+    auto& geometry = bd.get_geometry();
     unsigned move_number = bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-player variants)
@@ -145,21 +146,21 @@ inline void LocalValue::init(const Board& bd)
         Move mv = move.move;
         if (mv.is_pass())
             continue;
-        const AttachPoints& attach_points
-            = bd.get_move_info_ext(mv).attach_points;
+        auto& is_forbidden = bd.is_forbidden(c);
+        auto& attach_points = bd.get_move_info_ext(mv).attach_points;
         auto j = attach_points.begin();
         auto end = attach_points.end();
         do
         {
-            if (! bd.is_forbidden(*j, c))
+            if (! is_forbidden[*j])
             {
                 if (m_point_value[*j] == 0)
                     m_points.push_back(*j);
                 // Opponent attach point
                 m_point_value[*j] = 0x100u;
                 unsigned nu_adj = 0;
-                for (AdjIterator k(bd, *j); k; ++k)
-                    if (! bd.is_forbidden(*k, c))
+                for (AdjIterator k(geometry, *j); k; ++k)
+                    if (! is_forbidden[*k])
                     {
                         ++nu_adj;
                         if (m_point_value[*k] < 0x010u)
@@ -168,14 +169,14 @@ inline void LocalValue::init(const Board& bd)
                                 m_points.push_back(*k);
                             // Adjacent to opp. attach point
                             m_point_value[*k] = 0x010u;
-                            for (AdjIterator l(bd, *k); l; ++l)
-                                if (! bd.is_forbidden(*l, c))
-                                    if (m_point_value[*l] == 0)
-                                    {
-                                        m_points.push_back(*l);
-                                        // 2nd-order adj. to opp. attach point
-                                        m_point_value[*l] = 0x001u;
-                                    }
+                            for (AdjIterator l(geometry, *k); l; ++l)
+                                if (! is_forbidden[*l]
+                                    && m_point_value[*l] == 0)
+                                {
+                                    m_points.push_back(*l);
+                                    // 2nd-order adj. to opp. attach point
+                                    m_point_value[*l] = 0x001u;
+                                }
                         }
                     }
                 // If occupying the attach point is forbidden for us but there
@@ -184,13 +185,12 @@ inline void LocalValue::init(const Board& bd)
                 // (almost) as good as occupying the attach point. (This is
                 // done only for 1-point holes that are forbidden for to_play.)
                 if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
-                    for (AdjIterator k(bd, *j); k; ++k)
-                        if (! bd.is_forbidden(*k, c))
+                    for (AdjIterator k(geometry, *j); k; ++k)
+                        if (! is_forbidden[*k])
                             m_point_value[*k] = 0x100u;
             }
-            ++j;
         }
-        while (j != end);
+        while (++j != end);
     }
 }
 
