@@ -852,7 +852,7 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
     if (--state_color.nu_left_piece[piece] == 0)
     {
-        state_color.pieces_left.remove(piece);
+        state_color.pieces_left.remove_fast(piece);
         if (state_color.pieces_left.empty())
         {
             state_color.bonus = m_bonus_all_pieces;

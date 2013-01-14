@@ -282,11 +282,11 @@ inline bool ArrayList<T,M,I>::remove(const T& t)
 template<typename T, unsigned M, typename I>
 inline bool ArrayList<T,M,I>::remove_fast(const T& t)
 {
-    T* current = m_a + m_size - 1;
-    for (int i = m_size; i--; --current)
-        if (*current == t)
+    T* end = this->end();
+    for (T* i = m_a; i != end; ++i)
+        if (*i == t)
         {
-            remove_fast(current);
+            remove_fast(i);
             return true;
         }
     return false;
