@@ -838,12 +838,12 @@
     <message>
         <location filename="MainWindow.cpp" line="568"/>
         <source>Do you want to abort the game?</source>
-        <translation>Spiel vorzeitig beenden?</translation>
+        <translation>Möchten Sie das Spiel verwerfen?</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="570"/>
         <source>&amp;Abort Game</source>
-        <translation>&amp;Vorzeitig beenden</translation>
+        <translation>Spiel &amp;verwerfen</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1216"/>
