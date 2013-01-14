@@ -37,7 +37,7 @@ public:
 
     /** Clear all from a list optimized for the case when we know that the
         list contains all marked objects in the marker.
-        This function assumes that all container not in the list are not marked
+        This function assumes that all objects not in the list are not marked
         and is faster than clear(CONTAINER). */
     template<class CONTAINER>
     void clear_all_set_known(const CONTAINER& container);
@@ -54,22 +54,21 @@ public:
 
     bool operator[](T t) const;
 
-    /** Mark a move and return whether it was already marked. */
-    bool test_and_set(T t);
-
 private:
     typedef unsigned Word;
 
-    static const int word_bits = numeric_limits<Word>::digits;
+    typedef unsigned IntType;
 
-    static const size_t array_size =
+    static const IntType word_bits = numeric_limits<Word>::digits;
+
+    static const IntType array_size =
         T::range / word_bits + (T::range % word_bits == 0 ? 0 : 1);
 
+    static IntType get_index(T t);
+
+    static Word get_mask(T t);
+
     Word m_array[array_size];
-
-    size_t get_index(T t) const;
-
-    Word get_mask(T t) const;
 };
 
 template<class T>
@@ -119,13 +118,13 @@ inline void BitMarker<T>::clear_word(T t)
 }
 
 template<class T>
-inline size_t BitMarker<T>::get_index(T t) const
+inline auto BitMarker<T>::get_index(T t) -> IntType
 {
     return t.to_int() / word_bits;
 }
 
 template<class T>
-inline typename BitMarker<T>::Word BitMarker<T>::get_mask(T t) const
+inline auto BitMarker<T>::get_mask(T t) -> Word
 {
     return static_cast<Word>(1) << (t.to_int() % word_bits);
 }
@@ -140,17 +139,6 @@ template<class T>
 inline void BitMarker<T>::set_all()
 {
     memset(m_array, ~0, array_size * sizeof(Word));
-}
-
-template<class T>
-inline bool BitMarker<T>::test_and_set(T t)
-{
-    Word& elem = m_array[get_index(t)];
-    Word mask = get_mask(t);
-    if (elem & mask)
-        return true;
-    elem |= mask;
-    return false;
 }
 
 //-----------------------------------------------------------------------------
