@@ -174,14 +174,14 @@ public:
 private:
     struct MoveFeatures
     {
+        /** Heuristic value of the move expressed in score points. */
+        Float heuristic;
+
         /** Only used on Classic and Trigon boards. */
         unsigned dist_to_center;
 
         /** Does the move touch a piece of the same player? */
         bool connect;
-
-        /** Heuristic value of the move expressed in score points. */
-        Float heuristic;
     };
 
     static const bool log_simulations = false;
