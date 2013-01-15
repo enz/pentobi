@@ -295,6 +295,8 @@ inline bool ArrayList<T,M,I>::remove_fast(const T& t)
 template<typename T, unsigned M, typename I>
 inline void ArrayList<T,M,I>::remove_fast(iterator i)
 {
+    LIBBOARDGAME_ASSERT(i >= begin());
+    LIBBOARDGAME_ASSERT(i < end());
     --m_size;
     *i = *(m_a + m_size);
 }
