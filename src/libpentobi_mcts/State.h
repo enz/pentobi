@@ -240,9 +240,8 @@ private:
         piece played. */
     MoveList m_local_moves;
 
-    /** Local variable during initializing and updating of move lists.
-        Reused for efficiency. */
-    MoveMarker m_marker;
+    /** Marks moves contained in m_moves. */
+    ColorMap<MoveMarker> m_marker;
 
     LocalValue m_local_value;
 
