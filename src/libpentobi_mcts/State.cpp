@@ -245,7 +245,8 @@ void State::compute_features()
          || (board_type == BoardType::trigon && nu_onboard_pieces < 5)
          || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
     bool check_connect =
-        (board_type == BoardType::classic && m_bd.get_nu_onboard_pieces() < 14);
+        (board_type == BoardType::classic
+         && m_bd.get_nu_onboard_pieces() < 14);
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         auto& info = get_move_info(moves[i]);
@@ -505,20 +506,8 @@ Point State::find_best_starting_point(Color c) const
     return best;
 }
 
-void State::finish_in_tree()
-{
-    if (log_simulations)
-        log() << "Finish in-tree\n";
-    if (m_check_symmetric_draw)
-        m_is_symmetry_broken = check_symmetry_broken();
-    else
-        // Pretending that the symmetry is always broken is equivalent to
-        // ignoring symmetric draws
-        m_is_symmetry_broken = true;
-}
-
-bool State::gen_and_play_playout_move(Move last_good_reply_1,
-                                      Move last_good_reply_2)
+bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
+                             Move& mv)
 {
     if (m_nu_passes == m_nu_colors)
         return false;
@@ -531,14 +520,13 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
         return false;
     }
 
-    Color to_play = m_bd.get_to_play();
     ++m_nu_playout_moves;
     if (last_good_reply_2.is_regular() && m_bd.is_legal(last_good_reply_2))
     {
         if (log_simulations)
             log() << "Playing last good reply 2\n";
         ++m_nu_last_good_reply_moves;
-        play_playout_nonpass(last_good_reply_2);
+        mv = last_good_reply_2;
         return true;
     }
     if (last_good_reply_1.is_regular() && m_bd.is_legal(last_good_reply_1))
@@ -546,37 +534,40 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
         if (log_simulations)
             log() << "Playing last good reply 1\n";
         ++m_nu_last_good_reply_moves;
-        play_playout_nonpass(last_good_reply_1);
+        mv = last_good_reply_1;
         return true;
     }
 
-    if (m_is_move_list_initialized[to_play])
-        update_move_list(to_play);
-    else
-        init_move_list_with_local(to_play);
-    m_last_update[to_play] = m_bd.get_nu_moves();
-
-    m_has_moves[to_play] = ! m_moves[to_play]->empty();
-    if (! m_has_moves[to_play])
+    Color to_play;
+    while (true)
     {
+        to_play = m_bd.get_to_play();
+        if (m_is_move_list_initialized[to_play])
+            update_move_list(to_play);
+        else
+            init_move_list_with_local(to_play);
+        if ((m_has_moves[to_play] = ! m_moves[to_play]->empty()))
+            break;
         if (m_nu_passes + 1 == m_nu_colors)
             return false;
-
-        // Don't care about the exact score of a playout if we are still early
-        // in the game and we know that the playout is a loss because the
-        // player has no more moves and the score is already negative.
-        if (m_nu_moves_initial < 10 * m_nu_colors
-            && m_bd.get_nu_players() == 2
-            && m_bd.get_score(to_play) < 0
+        if (m_check_terminate_early && m_bd.get_score(to_play) < 0
             && ! m_has_moves[m_bd.get_second_color(to_play)])
         {
             if (log_simulations)
                 log() << "Terminate early (no moves and negative score)\n";
             return false;
         }
-        play_playout_pass();
-        return true;
+        --m_nu_playout_moves;
+        ++m_nu_passes;
+        m_bd.set_to_play(m_bd.get_next(to_play));
+        // Don't try to handle symmetry after pass moves
+        m_is_symmetry_broken = true;
     }
+
+    // Choose a random move from the list of local moves (if not empty) or
+    // the list of all moves. Try more than once if a bad move (e.g. not
+    // maximum playable piece size) is chosen to reduce the probabilty
+    // for such moves without becoming deterministic.
 
     const MoveList* moves;
     unsigned max_playable_piece_size;
@@ -596,11 +587,6 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
                 % m_moves[to_play]->size() % m_local_moves.size()
                 % m_max_local_value);
     }
-    // Choose a random move from the list of local moves (if not empty) or
-    // the list of all moves. Try more than once if a bad move (e.g. not
-    // maximum playable piece size) is chosen to reduce the probabilty
-    // for such moves without becoming deterministic.
-    Move mv;
     const unsigned max_try = 3;
     unsigned nu_try = 0;
     do
@@ -611,8 +597,19 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
     }
     while (get_move_info(mv).size() < max_playable_piece_size
            && nu_try < max_try);
-    play_playout_nonpass(mv);
     return true;
+}
+
+bool State::gen_and_play_playout_move(Move last_good_reply_1,
+                                      Move last_good_reply_2)
+{
+    Move mv;
+    if (gen_playout_move(last_good_reply_1, last_good_reply_2, mv))
+    {
+        play_playout(mv);
+        return true;
+    }
+    return false;
 }
 
 void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
@@ -622,7 +619,6 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     Color to_play = m_bd.get_to_play();
 
     init_move_list_without_local(to_play);
-    m_last_update[to_play] = m_bd.get_nu_moves();
 
     const auto& moves = *m_moves[to_play];
     if (moves.empty())
@@ -782,6 +778,7 @@ void State::init_move_list_with_local(Color c)
                 add_moves(p, c, pieces_considered);
     }
     m_is_move_list_initialized[c] = true;
+    m_new_moves[c].clear();
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
@@ -839,6 +836,7 @@ void State::init_move_list_without_local(Color c)
             }
     }
     m_is_move_list_initialized[c] = true;
+    m_new_moves[c].clear();
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
@@ -849,29 +847,25 @@ void State::init_move_list_without_local(Color c)
 void State::play_expanded_child(Move mv)
 {
     if (! mv.is_pass())
-        play_playout_nonpass(mv);
+        play_playout(mv);
     else
-        play_playout_pass();
+    {
+        m_bd.play_pass();
+        ++m_nu_passes;
+        // Don't try to handle pass moves: a pass move either breaks symmetry
+        // or both players have passed and it's the end of the game and we need
+        // symmetry detection only as a heuristic ((playouts and move value
+        // initialization)
+        m_is_symmetry_broken = true;
+    }
     if (log_simulations)
         log() << "Playing expanded child\n" << m_bd;
 }
 
-void State::play_playout_pass()
-{
-    m_bd.play_pass();
-    ++m_nu_passes;
-    // Don't try to handle pass moves: a pass move either breaks symmetry
-    // or both players have passed and it's the end of the game and we need
-    // symmetry detection only as a heuristic ((playouts and move value
-    // initialization)
-    m_is_symmetry_broken = true;
-    if (log_simulations)
-        log() << m_bd;
-}
-
-void State::play_playout_nonpass(Move mv)
+void State::play_playout(Move mv)
 {
     LIBBOARDGAME_ASSERT(m_bd.is_legal(mv));
+    m_new_moves[m_bd.get_to_play()].push_back(mv);
     m_bd.play_nonpass(mv);
     m_nu_passes = 0;
     if (! m_is_symmetry_broken)
@@ -893,6 +887,9 @@ void State::start_search()
     const Geometry& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
+    m_check_terminate_early =
+        (m_nu_moves_initial < 10 * m_nu_colors
+         && m_bd.get_nu_players() == 2);
     Float total_piece_points = Float(m_bc->get_total_piece_points());
     m_score_modification_factor =
         m_shared_const.score_modification / total_piece_points;
@@ -954,6 +951,7 @@ void State::start_simulation(size_t n)
     {
         m_has_moves[*i] = true;
         m_is_move_list_initialized[*i] = false;
+        m_new_moves[*i].clear();
         m_moves_added_at[*i].clear();
     }
     m_nu_passes = 0;
@@ -998,16 +996,11 @@ void State::update_move_list(Color c)
     for (Piece piece : m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             pieces_considered.push_back(piece);
-    for (unsigned i = m_last_update[c]; i < m_bd.get_nu_moves();
-         i += m_nu_colors)
-    {
-        LIBBOARDGAME_ASSERT(m_bd.get_move(i).color == c);
-        Move mv = m_bd.get_move(i).move;
-        if (! mv.is_pass())
-            for (Point p : get_move_info_ext(mv).attach_points)
-                if (! is_forbidden[p] && ! m_moves_added_at[c][p])
-                    add_moves(p, c, pieces_considered);
-    }
+    for (Move mv : m_new_moves[c])
+        for (Point p : get_move_info_ext(mv).attach_points)
+            if (! is_forbidden[p] && ! m_moves_added_at[c][p])
+                add_moves(p, c, pieces_considered);
+    m_new_moves[c].clear();
 
     // Generate moves for pieces not considered in the last position
     auto& is_piece_considered = *m_is_piece_considered[c];

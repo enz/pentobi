@@ -227,9 +227,8 @@ private:
 
     ArrayList<MoveFeatures, Move::range> m_features;
 
-    /** Move number when move list for a color was last updated.
-        Only used after in-tree phase. */
-    ColorMap<unsigned> m_last_update;
+    /** Moves played by a color since the last update of its move list. */
+    ColorMap<ArrayList<Move, Board::max_nonpass_player_moves>> m_new_moves;
 
     ColorMap<bool> m_is_move_list_initialized;
 
@@ -261,6 +260,8 @@ private:
 
     bool m_check_symmetric_draw;
 
+    bool m_check_terminate_early;
+
     bool m_is_symmetry_broken;
 
     /** Enforce all pieces to be considered for the rest of the simulation. */
@@ -287,6 +288,9 @@ private:
 
     Point find_best_starting_point(Color c) const;
 
+    bool gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
+                          Move& result);
+
     /** Equivalent to but faster than m_bd.get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
 
@@ -302,9 +306,7 @@ private:
 
     void init_move_list_without_local(Color c);
 
-    void play_playout_pass();
-
-    void play_playout_nonpass(Move mv);
+    void play_playout(Move mv);
 
     bool check_move(const Grid<bool>& is_forbidden, Move mv,
                     const MoveInfo& info);
@@ -315,6 +317,18 @@ private:
 
     void update_symmetry_broken(Move mv);
 };
+
+inline void State::finish_in_tree()
+{
+    if (log_simulations)
+        log() << "Finish in-tree\n";
+    if (m_check_symmetric_draw)
+        m_is_symmetry_broken = check_symmetry_broken();
+    else
+        // Pretending that the symmetry is always broken is equivalent to
+        // ignoring symmetric draws
+        m_is_symmetry_broken = true;
+}
 
 inline PlayerMove<Move> State::get_move(unsigned n) const
 {
