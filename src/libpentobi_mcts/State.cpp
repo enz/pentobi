@@ -200,24 +200,24 @@ void State::compute_features()
         point_value[*i] = 1;
         auto s = m_bd.get_point_state(*i);
         if (is_forbidden[*i] && s != to_play)
-            attach_point_value[*i] = -5;
+            attach_point_value[*i] = -2.5;
         else
-            attach_point_value[*i] = 1;
+            attach_point_value[*i] = 0.5;
         if (! is_forbidden[*i])
         {
             if (m_bd.is_attach_point(*i, to_play))
                 // Making own attach point forbidden is especially bad
-                adj_point_value[*i] = -2;
+                adj_point_value[*i] = -1;
             else
                 // Creating new forbidden points is a bad thing
-                adj_point_value[*i] = -0.2f;
+                adj_point_value[*i] = -0.1f;
         }
         else if (s == second_color)
             // Connecting 2 player colors in 2-colors-per-player game variants
             // is good (in other variants second_color is the same as to_play
             // but there it doesn't matter what adj_point_value[*i] is because
             // moves adjacent to to_play are not legal anyway).
-            adj_point_value[*i] = 2;
+            adj_point_value[*i] = 1;
         else
             adj_point_value[*i] = 0;
     }
@@ -229,10 +229,10 @@ void State::compute_features()
         for (Point p : m_bd.get_attach_points(*i))
             if (! is_forbidden[p])
             {
-                point_value[p] = 5.5f;
+                point_value[p] = 3.2f;
                 for (AdjIterator j(geometry, p); j; ++j)
                     if (! is_forbidden[*j])
-                        point_value[*j] = max(point_value[*j], Float(4));
+                        point_value[*j] = max(point_value[*j], Float(2.5));
             }
     }
     m_features.resize(moves.size());
@@ -675,7 +675,7 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
         // into a win/loss value in [0..1] by making it relative to the
         // heuristic of the best move and let it decrease exponentially with a
         // certain width.
-        Float heuristic = 0.3f * (m_max_heuristic - features.heuristic);
+        Float heuristic = 0.6f * (m_max_heuristic - features.heuristic);
         // Piecewise linear approximation of exp(-x) (make sure the
         // approximation is always greater than 0 and is always monotonically
         // decreasing)
