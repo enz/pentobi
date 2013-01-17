@@ -1434,8 +1434,8 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::update_last_good_reply(ThreadState& thread_state,
                                            const array<Float,max_players>& eval)
 {
-    const State& state = *thread_state.state;
-    Float max_eval = eval[0];
+    const auto& state = *thread_state.state;
+    auto max_eval = eval[0];
     for (PlayerInt i = 1; i < m_nu_players; ++i)
         max_eval = max(eval[i], max_eval);
     array<bool,max_players> is_winner;
@@ -1447,27 +1447,36 @@ void Search<S,M,P,R>::update_last_good_reply(ThreadState& thread_state,
         // as a loss for both.
         is_winner[i] = (eval[i] == max_eval);
     unsigned nu_moves = state.get_nu_moves();
-    // Iterate backwards to store 1st reply if a move was played more than once
-    if (nu_moves > 1)
-        for (unsigned i = nu_moves - 1; i > 0; --i)
-        {
-            PlayerMove reply = state.get_move(i);
-            Move last_mv = state.get_move(i - 1).move;
-            Move second_last_mv = Move::null();
-            if (i >= 2)
-                second_last_mv = state.get_move(i - 2).move;
-            if (is_winner[reply.player])
-                m_last_good_reply.store(reply.player, last_mv, second_last_mv,
-                                        reply.move);
-            else
-                m_last_good_reply.forget(reply.player, last_mv, second_last_mv,
-                                         reply.move);
-        }
+    if (nu_moves >= 2)
+    {
+        // Iterate backwards to store first reply if move was played more than
+        // once
+        PlayerMove reply = state.get_move(nu_moves - 1);
+        PlayerMove last = state.get_move(nu_moves - 2);
+        PlayerMove second_last;
+        if (nu_moves >= 3)
+            for (unsigned i = nu_moves - 1; i >= 2; --i)
+            {
+                second_last = state.get_move(i - 2);
+                if (is_winner[reply.player])
+                    m_last_good_reply.store(reply.player, last.move,
+                                            second_last.move, reply.move);
+                else
+                    m_last_good_reply.forget(reply.player, last.move,
+                                             second_last.move, reply.move);
+                reply = last;
+                last = second_last;
+            }
+        if (is_winner[reply.player])
+            m_last_good_reply.store(reply.player, last.move, reply.move);
+        else
+            m_last_good_reply.forget(reply.player, last.move, reply.move);
+    }
 }
 
 template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
-                                       const array<Float,max_players>& eval)
+                                         const array<Float,max_players>& eval)
 {
     const State& state = *thread_state.state;
     unsigned nu_moves = state.get_nu_moves();

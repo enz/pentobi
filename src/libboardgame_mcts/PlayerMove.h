@@ -20,15 +20,23 @@ struct PlayerMove
 
     MOVE move;
 
-    PlayerMove(PlayerInt player, MOVE move);
-};
+    static PlayerMove null()
+    {
+        PlayerMove m;
+        m.move = MOVE::null();
+        return m;
+    }
 
-template<typename MOVE>
-inline PlayerMove<MOVE>::PlayerMove(PlayerInt player, MOVE move)
-{
-    this->player = player;
-    this->move = move;
-}
+    PlayerMove()
+    {
+    }
+
+    PlayerMove(PlayerInt player, MOVE move)
+    {
+        this->player = player;
+        this->move = move;
+    }
+};
 
 //-----------------------------------------------------------------------------
 

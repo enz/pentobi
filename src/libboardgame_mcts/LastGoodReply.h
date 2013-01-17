@@ -48,22 +48,24 @@ public:
 
     void store(PlayerInt player, Move last_mv, Move second_last_mv, Move reply);
 
+    void store(PlayerInt player, Move last_mv, Move reply);
+
     void forget(PlayerInt player, Move last_mv, Move second_last_mv,
                 Move reply);
+
+    void forget(PlayerInt player, Move last_mv, Move reply);
 
     void get(PlayerInt player, Move last_mv, Move second_last_mv,
              Move& last_good_reply_1, Move& last_good_reply_2) const;
 
 private:
-    typedef atomic<typename Move::IntType> AtomicMove;
-
     static const size_t hash_table_size = (1 << 21);
 
     size_t m_hash[Move::range];
 
-    AtomicMove m_reply_1[max_players][Move::range];
+    atomic<typename Move::IntType> m_reply_1[max_players][Move::range];
 
-    AtomicMove m_reply_2[max_players][hash_table_size];
+    atomic<typename Move::IntType> m_reply_2[max_players][hash_table_size];
 
     size_t get_index(Move last_mv, Move second_last_mv) const;
 };
@@ -124,16 +126,28 @@ inline void LastGoodReply<S,M,P>::forget(PlayerInt player, Move last_mv,
                                          Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
+    LIBBOARDGAME_ASSERT(! second_last_mv.is_null());
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
-    if (! second_last_mv.is_null())
     {
         auto index = get_index(last_mv, second_last_mv);
-        AtomicMove& stored_reply = m_reply_2[player][index];
+        auto& stored_reply = m_reply_2[player][index];
         if (stored_reply.load(memory_order_relaxed) == reply_int)
             stored_reply.store(null_int, memory_order_relaxed);
     }
-    AtomicMove& stored_reply = m_reply_1[player][last_mv.to_int()];
+    auto& stored_reply = m_reply_1[player][last_mv.to_int()];
+    if (stored_reply.load(memory_order_relaxed) == reply_int)
+        stored_reply.store(null_int, memory_order_relaxed);
+}
+
+template<class S, class M, unsigned P>
+inline void LastGoodReply<S,M,P>::forget(PlayerInt player, Move last_mv,
+                                         Move reply)
+{
+    LIBBOARDGAME_ASSERT(! last_mv.is_null());
+    auto reply_int = reply.to_int();
+    auto null_int = Move::null().to_int();
+    auto& stored_reply = m_reply_1[player][last_mv.to_int()];
     if (stored_reply.load(memory_order_relaxed) == reply_int)
         stored_reply.store(null_int, memory_order_relaxed);
 }
@@ -143,12 +157,21 @@ inline void LastGoodReply<S,M,P>::store(PlayerInt player, Move last_mv,
                                         Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
+    LIBBOARDGAME_ASSERT(! second_last_mv.is_null());
     auto reply_int = reply.to_int();
-    if (! second_last_mv.is_null())
     {
         auto index = get_index(last_mv, second_last_mv);
         m_reply_2[player][index].store(reply_int, memory_order_relaxed);
     }
+    m_reply_1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
+}
+
+template<class S, class M, unsigned P>
+inline void LastGoodReply<S,M,P>::store(PlayerInt player, Move last_mv,
+                                        Move reply)
+{
+    LIBBOARDGAME_ASSERT(! last_mv.is_null());
+    auto reply_int = reply.to_int();
     m_reply_1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
 }
 
