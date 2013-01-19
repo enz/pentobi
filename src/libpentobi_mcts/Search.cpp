@@ -262,7 +262,7 @@ void Search::set_default_param(Variant variant)
     switch (variant)
     {
     case Variant::duo:
-        set_bias_term_constant(0.09f);
+        set_bias_term_constant(0.12f);
         break;
     case Variant::junior:
         set_bias_term_constant(0.12f);
