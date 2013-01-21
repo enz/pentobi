@@ -63,7 +63,7 @@ int main(int argc, char** argv)
         options_description normal_options("Options");
         int level = 4;
         size_t memory = 0;
-        unsigned threads = 0;
+        unsigned threads = 1;
         normal_options.add_options()
             ("book", value<>(&book_file), "load an external book file")
             ("config,c", value<>(&config_file), "set GTP config file")
