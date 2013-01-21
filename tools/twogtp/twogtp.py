@@ -3,11 +3,13 @@
 
 from fcntl import flock, LOCK_EX, LOCK_NB
 from getopt import getopt
+from os import remove
 from os.path import exists
 from shlex import split
 from string import lower, strip
 from subprocess import PIPE, Popen
 from sys import argv, exit, stderr
+from threading import Lock, Thread
 
 class GtpClient:
     def __init__(self, cmd, color):
@@ -46,6 +48,51 @@ class GtpClient:
             exit(self.color + " terminated")
         return line
 
+class OutputFile:
+    """
+    Result file. Keeps track of the game results and provides synchronized
+    access for the threads to the number of the next game to play.
+    """
+    def __init__(self, file):
+        self.file = file
+        self.lock = Lock()
+        self.games = dict()
+        self.game_numbers = set()
+        self.next_game_number = 0
+        if not exists(file):
+            return
+        with open(file, "r") as f:
+            for line in f.readlines():
+                if line.strip().startswith("#"):
+                    continue
+                columns = line.split("\t")
+                game_number = int(columns[0])
+                self.game_numbers.add(game_number)
+                self.games[game_number] = line
+        while self.next_game_number in self.game_numbers:
+            self.next_game_number += 1
+
+    def get_next_game_number(self):
+        with self.lock:
+            result = self.next_game_number
+            self.next_game_number += 1
+            while self.next_game_number in self.game_numbers:
+                self.next_game_number += 1
+            return result
+
+    def add_result(self, game_number, result_black, result_white, move_number,
+                   exchange_color, cpu_black, cpu_white):
+        with self.lock:
+            self.game_numbers.add(game_number)
+            self.games[game_number] =  \
+                "%s\t%s\t%s\t%s\t%s\t%s\t%s\n" \
+                % (game_number, result_black, result_white, move_number,
+                   exchange_color, cpu_black, cpu_white)
+            with open(self.file, "w") as f:
+                f.write("# game\tres_b\tres_w\tlen\texchg\tcpu_b\tcpu_w\n")
+                for i in self.game_numbers:
+                    f.write(self.games[i])
+
 def invert_result(result):
     if result.find("B+") != -1:
         return result.replace("B+", "W+")
@@ -79,7 +126,7 @@ def convert_four_player_result(result):
     else:
         return "0"
         
-def play_game(game_number, black, white, variant):
+def play_game(game_number, black, white, variant, output_file):
     stderr.write("=========================================================\n")
     stderr.write("Game %i\n" % game_number)
     stderr.write("=========================================================\n")
@@ -172,43 +219,39 @@ def play_game(game_number, black, white, variant):
     filename = prefix + ".blksgf"
     with open(filename, "a") as f:
         f.write(sgf)
-    if not exists(output_file):
-        with open(output_file, "w") as f:
-            f.write("# game\tres_b\tres_w\tlen\texchg\tcpu_b\tcpu_w\n")
-    with open(output_file, "a") as f:
-        f.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
-                % (game_number, result_black, result_white, move_number,
-                   exchange_color, cpu_black, cpu_white))
+    output_file.add_result(game_number, result_black, result_white, move_number,
+                           exchange_color, cpu_black, cpu_white)
 
-def find_start_index():
-    start_index = 0
-    if not exists(output_file):
-        return start_index
-    with open(output_file, "r") as f:
-        for line in f.readlines():
-            if line.strip().startswith("#"):
-                continue
-            columns = line.split("\t")
-            start_index = int(columns[0]) + 1
-    return start_index
+def thread_main():
+    black = GtpClient(black_cmd, "B")
+    white = GtpClient(white_cmd, "W")
+    black.evaluate = (evaluate == "black" or evaluate == "both")
+    white.evaluate = (evaluate == "white" or evaluate == "both")
+    black.send_no_err("set_game " + game_name)
+    white.send_no_err("set_game " + game_name)
+    while True:
+        game_number = output_file.get_next_game_number()
+        if game_number >= nu_games:
+            break
+        play_game(game_number, black, white, variant, output_file)
 
 white_cmd = ""
 black_cmd = ""
 alternate = False
-number_games = 1
+nu_games = 1
+nu_threads = 1
 variant = "duo"
 prefix = "output"
-output_file = ""
 evaluate = ""
-
 opts, args = getopt(argv[1:], "ab:f:g:w:n:", [
         "alternate",
         "black=",
         "eval=",
         "file=",
         "game=",
-        "white=",
         "nugames=",
+        "threads=",
+        "white=",
         ])
 for opt, val in opts:
     if opt in ("-a", "--alternate"):
@@ -222,13 +265,17 @@ for opt, val in opts:
     elif opt in ("-g", "--game"):
         variant = val
     elif opt in ("-n", "--nugames"):
-        number_games = int(val)
+        nu_games = int(val)
+    elif opt in ("--threads"):
+        nu_threads = int(val)
     elif opt in ("-w", "--white"):
         white_cmd = val
 if black_cmd == "":
     exit("Missing black player")
 if white_cmd == "":
     exit("Missing white player")
+if nu_threads <= 0:
+    exit("Invalid number of threads")
 if variant == "classic":
     game_name = "Blokus"
 elif variant == "classic_2":
@@ -243,17 +290,15 @@ elif variant == "junior":
     game_name = "Blokus Junior"
 else:
     exit("invalid game variant: " + variant)
-output_file = prefix + ".dat"
-black = GtpClient(black_cmd, "B")
-white = GtpClient(white_cmd, "W")
-black.evaluate = (evaluate == "black" or evaluate == "both")
-white.evaluate = (evaluate == "white" or evaluate == "both")
-black.send_no_err("set_game " + game_name)
-white.send_no_err("set_game " + game_name)
-start = find_start_index()
+output_file = OutputFile(prefix + ".dat")
 lock_filename = prefix + ".lock"
 with open(lock_filename, "w") as lock_file:
     flock(lock_file, LOCK_EX | LOCK_NB)
-    for game_number in range(start, number_games):
-        play_game(game_number, black, white, variant)
+    threads = []
+    for i in range(0, nu_threads):
+        t = Thread(None, thread_main)
+        t.start()
+        threads.append(t)
+    for t in threads:
+        t.join()
 remove(lock_filename)
