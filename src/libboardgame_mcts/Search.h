@@ -197,9 +197,15 @@ public:
     /** @name Parameters */
     // @{
 
+    /** Minimum count of a node to be expanded. */
     void set_expand_threshold(Float n);
 
     Float get_expand_threshold() const;
+
+    /** Increase of the expand threshold per in-tree move played. */
+    void set_expand_threshold_incr(Float n);
+
+    Float get_expand_threshold_incr() const;
 
     /** Constant used in UCT bias term. */
     void set_bias_term_constant(Float c);
@@ -430,6 +436,8 @@ private:
 
     Float m_expand_threshold;
 
+    Float m_expand_threshold_incr;
+
     bool m_deterministic;
 
     bool m_reuse_subtree;
@@ -647,6 +655,7 @@ template<class S, class M, unsigned P, class R>
 Search<S,M,P,R>::Search(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
       m_expand_threshold(0),
+      m_expand_threshold_incr(0),
       m_deterministic(false),
       m_reuse_subtree(true),
       m_reuse_tree(false),
@@ -840,6 +849,12 @@ Float Search<S,M,P,R>::get_expand_threshold() const
 }
 
 template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_expand_threshold_incr() const
+{
+    return m_expand_threshold_incr;
+}
+
+template<class S, class M, unsigned P, class R>
 size_t Search<S,M,P,R>::get_max_nodes(size_t memory)
 {
     // Memory is used for 2 trees (m_tree and m_tmp_tree)
@@ -1002,14 +1017,16 @@ void Search<S,M,P,R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
     const Node& root = m_tree.get_root();
     const Node* node = &root;
     is_terminal = false;
+    Float expand_threshold = m_expand_threshold;
     while (node->has_children())
     {
         node = select_child(*node);
         thread_state.simulation.nodes.push_back(node);
         state.play_in_tree(node->get_move());
+        expand_threshold += m_expand_threshold_incr;
     }
     state.finish_in_tree();
-    if (node->get_count() >= m_expand_threshold || node == &root)
+    if (node->get_count() >= expand_threshold || node == &root)
     {
         Float init_val = m_init_val[state.get_to_play()].get_mean();
         if (! expand_node(thread_state.thread_id, *node, node, init_val))
@@ -1383,6 +1400,12 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::set_expand_threshold(Float n)
 {
     m_expand_threshold = n;
+}
+
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_expand_threshold_incr(Float n)
+{
+    m_expand_threshold_incr = n;
 }
 
 template<class S, class M, unsigned P, class R>
