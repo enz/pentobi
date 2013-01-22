@@ -82,7 +82,7 @@ size_t get_memory()
 {
     size_t memory;
     size_t total_mem = libboardgame_sys::get_memory();
-    // Use a third of the system memory but not more than 768 KB
+    // Use a third of the system memory but not more than 768 MB
     if (total_mem == 0)
     {
         log("WARNING: could not determine system memory (assuming 512 MB)");
