@@ -286,6 +286,7 @@ public:
 
     void dump(ostream& out) const;
 
+    /** Number of simulations in the current search in all threads. */
     size_t get_nu_simulations() const;
 
     /** Select the move to play.
@@ -368,6 +369,9 @@ private:
         /** Was the search in this thread terminated because the search tree
             was full? */
         bool is_out_of_mem;
+
+        /** Number of simulations in the current search in this thread. */
+        size_t nu_simulations;
 
         Simulation simulation;
 
@@ -517,7 +521,7 @@ private:
 
     LastGoodReply<S,M,P> m_last_good_reply;
 
-    /** Number simulations of current search. */
+    /** See get_nu_simulations(). */
     atomic<size_t> m_nu_simulations;
 
     // @} // @name
@@ -1044,11 +1048,16 @@ void Search<S,M,P,R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
 template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::write_info(ostream& out) const
 {
-    const Node& root = m_tree.get_root();
+    auto& root = m_tree.get_root();
     Float count = root.get_count();
     if (m_threads.empty())
         return;
-    const ThreadState& thread_state = m_threads[0]->thread_state;
+    auto& thread_state = m_threads[0]->thread_state;
+    if (thread_state.nu_simulations == 0)
+    {
+        out << "No simulations in thread 0\n";
+        return;
+    }
     out << format(
              "Val: %.2f, Cnt: %.0f, ReCnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
              "Sim/s: %.0f, Len: %s, Dp: %s\n")
@@ -1194,6 +1203,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
     for (unsigned i = 0; i < m_threads.size(); ++i)
     {
         ThreadState& thread_state = m_threads[i]->thread_state;
+        thread_state.nu_simulations = 0;
         thread_state.stat_len.clear();
         thread_state.stat_in_tree_len.clear();
         thread_state.state->start_search();
@@ -1272,11 +1282,15 @@ void Search<S,M,P,R>::search_loop(ThreadState& thread_state)
     while (true)
     {
         thread_state.is_out_of_mem = false;
-        size_t nu_simulations = m_nu_simulations.fetch_add(1);
         Float root_count = m_tree.get_root().get_count();
+        size_t nu_simulations = m_nu_simulations.fetch_add(1);
         if (root_count > 0 && nu_simulations > m_min_simulations
             && (check_abort(thread_state) || expensive_abort_checker()))
+        {
+            m_nu_simulations.fetch_add(-1);
             break;
+        }
+        ++thread_state.nu_simulations;
         thread_state.simulation.nodes.clear();
         thread_state.simulation.nodes.push_back(&m_tree.get_root());
         state.start_simulation(nu_simulations);
