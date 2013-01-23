@@ -53,15 +53,15 @@ class OutputFile:
     Result file. Keeps track of the game results and provides synchronized
     access for the threads to the number of the next game to play.
     """
-    def __init__(self, file):
-        self.file = file
+    def __init__(self, prefix):
+        self.prefix = prefix
         self.lock = Lock()
         self.games = dict()
         self.game_numbers = set()
         self.next_game_number = 0
-        if not exists(file):
+        if not exists(self.prefix + ".dat"):
             return
-        with open(file, "r") as f:
+        with open(self.prefix + ".dat", "r") as f:
             for line in f.readlines():
                 if line.strip().startswith("#"):
                     continue
@@ -81,17 +81,19 @@ class OutputFile:
             return result
 
     def add_result(self, game_number, result_black, result_white, move_number,
-                   exchange_color, cpu_black, cpu_white):
+                   exchange_color, cpu_black, cpu_white, sgf):
         with self.lock:
             self.game_numbers.add(game_number)
             self.games[game_number] =  \
                 "%s\t%s\t%s\t%s\t%s\t%s\t%s\n" \
                 % (game_number, result_black, result_white, move_number,
                    exchange_color, cpu_black, cpu_white)
-            with open(self.file, "w") as f:
+            with open(self.prefix + ".dat", "w") as f:
                 f.write("# game\tres_b\tres_w\tlen\texchg\tcpu_b\tcpu_w\n")
                 for i in self.game_numbers:
                     f.write(self.games[i])
+            with open(self.prefix + ".blksgf", "a") as f:
+                f.write(sgf)
 
 def invert_result(result):
     if result.find("B+") != -1:
@@ -216,11 +218,8 @@ def play_game(game_number, black, white, variant, output_file):
     if exchange_color:
         result_black = invert_result(result_black)
         result_white = invert_result(result_white)
-    filename = prefix + ".blksgf"
-    with open(filename, "a") as f:
-        f.write(sgf)
     output_file.add_result(game_number, result_black, result_white, move_number,
-                           exchange_color, cpu_black, cpu_white)
+                           exchange_color, cpu_black, cpu_white, sgf)
 
 def thread_main():
     black = GtpClient(black_cmd, "B")
@@ -290,7 +289,7 @@ elif variant == "junior":
     game_name = "Blokus Junior"
 else:
     exit("invalid game variant: " + variant)
-output_file = OutputFile(prefix + ".dat")
+output_file = OutputFile(prefix)
 lock_filename = prefix + ".lock"
 with open(lock_filename, "w") as lock_file:
     flock(lock_file, LOCK_EX | LOCK_NB)
