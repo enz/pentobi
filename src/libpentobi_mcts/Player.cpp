@@ -143,20 +143,20 @@ Move Player::genmove(const Board& bd, Color c)
         Float factor_per_level;
         if (variant == Variant::classic || variant == Variant::classic_2)
         {
-            minimum = 5;
-            factor_per_level = 5.36f;
+            minimum = 8;
+            factor_per_level = 5.01f;
         }
         else if (variant == Variant::trigon
                  || variant == Variant::trigon_2
                  || variant == Variant::trigon_3)
         {
-            minimum = 10;
-            factor_per_level = 3.90f;
+            minimum = 20;
+            factor_per_level = 3.53f;
         }
         else if (variant == Variant::junior)
         {
-            minimum = 5;
-            factor_per_level = 6.54f;
+            minimum = 4;
+            factor_per_level = 6.63f;
         }
         else
         {
