@@ -553,6 +553,8 @@ private:
     bool prune(TimeSource& time_source, double time, double max_time,
                Float prune_min_count, Float& new_prune_min_count);
 
+    void restore_root_from_children(Tree& tree, const Node& root);
+
     void search_loop(ThreadState& thread_state);
 
     const Node* select_child(const Node& node);
@@ -1110,6 +1112,29 @@ bool Search<S,M,P,R>::prune(TimeSource& time_source, double time,
     }
 }
 
+/** Restore the value and count of a root node from its children.
+    The value of a root node has a different meaning than than values of inner
+    nodes (position vs. move value) so after reusing a subtree, we need to
+    restore it from the children. We use only the child with the highest count
+    to avoid backing up many values of unvisited children that have only a
+    value and count from prior knowledge initialization. */
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::restore_root_from_children(Tree& tree, const Node& root)
+{
+    const Node* best_child = 0;
+    Float max_count = 0;
+    for (ChildIterator i(tree, root); i; ++i)
+        if (i->get_count() > max_count)
+        {
+            best_child = &(*i);
+            max_count = i->get_count();
+        }
+    if (best_child == 0)
+        tree.init_root_value(get_tie_value(), 0);
+    else
+        tree.init_root_value(best_child->get_value(), best_child->get_count());
+}
+
 template<class S, class M, unsigned P, class R>
 bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
                            double max_time, TimeSource& time_source,
@@ -1162,13 +1187,14 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
                 bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
                                                         &interval_checker);
                 const Node& tmp_tree_root = m_tmp_tree.get_root();
-                // The values of root nodes have a different meaning than the
-                // values of inner nodes (position value vs. move values) so
-                // we might have to discard them
                 if (! is_same)
                 {
                     m_reuse_count = tmp_tree_root.get_count();
-                    m_tmp_tree.clear_root_value(get_tie_value());
+                    restore_root_from_children(m_tmp_tree, tmp_tree_root);
+                    if (m_reuse_count > tmp_tree_root.get_count())
+                        m_reuse_count -= tmp_tree_root.get_count();
+                    else
+                        m_reuse_count = 0;
                 }
                 if (aborted && ! always_search)
                     return false;

@@ -111,8 +111,8 @@ public:
 
     void add_rave_value(const Node& node, Float v, Float weight);
 
-    /** Reset the root count to 0 and the value to a given value. */
-    void clear_root_value(Float value);
+    /** Overwrite the root value and count. */
+    void init_root_value(Float value, Float count);
 
     void swap(Tree& tree);
 
@@ -280,12 +280,6 @@ void Tree<M>::clear(Float root_value)
 }
 
 template<typename M>
-inline void Tree<M>::clear_root_value(Float value)
-{
-    m_nodes[0].init_value(value, 0);
-}
-
-template<typename M>
 bool Tree<M>::contains(const Node& node) const
 {
     return (&node >= m_nodes.get() && &node < m_nodes.get() + m_max_nodes);
@@ -395,6 +389,12 @@ inline unsigned Tree<M>::get_thread_storage(const Node& node) const
 {
     size_t diff = &node - m_nodes.get();
     return static_cast<unsigned>(diff / m_nodes_per_thread);
+}
+
+template<typename M>
+inline void Tree<M>::init_root_value(Float value, Float count)
+{
+    m_nodes[0].init_value(value, count);
 }
 
 template<typename M>
