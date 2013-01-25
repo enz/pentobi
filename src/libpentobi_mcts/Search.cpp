@@ -117,6 +117,8 @@ Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
     // Note: most nodes are initialized with a prior knowledge count 3
     set_expand_threshold(3);
     set_expand_threshold_incr(0.5);
+    set_rave_equivalence(1000);
+    set_rave_max_count(50000);
     set_default_param(m_variant);
     create_threads();
 }

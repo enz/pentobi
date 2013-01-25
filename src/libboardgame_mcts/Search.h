@@ -228,11 +228,16 @@ public:
 
     bool get_prune_full_tree() const;
 
-    /** Set the equivalence parameter in the @ref libboardgame_doc_rave
-        formula. */
+    /** Set the equivalence parameter in the RAVE formula.
+        See @ref libboardgame_doc_rave */
     void set_rave_equivalence(Float value);
 
     Float get_rave_equivalence() const;
+
+    /** Maximum parent count to apply RAVE. */
+    void set_rave_max_count(Float value);
+
+    Float get_rave_max_count() const;
 
     /** Value to start the tree pruning with.
         This value should be above typical count initializations if prior
@@ -464,6 +469,8 @@ private:
 
     Float m_rave_equivalence;
 
+    Float m_rave_max_count;
+
     /** Minimum simulations to perform in the current search.
         This does not include the count of simulations reused from a subtree of
         a previous search. */
@@ -668,6 +675,7 @@ Search<S,M,P,R>::Search(unsigned nu_threads, size_t memory)
       m_prune_full_tree(true),
       m_prune_count_start(16),
       m_rave_equivalence(1000),
+      m_rave_max_count(1000000),
       m_tree_memory(memory == 0 ? 256000000 : memory),
       m_max_nodes(get_max_nodes(m_tree_memory)),
       m_bias_term(0),
@@ -902,6 +910,12 @@ template<class S, class M, unsigned P, class R>
 Float Search<S,M,P,R>::get_rave_equivalence() const
 {
     return m_rave_equivalence;
+}
+
+template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_rave_max_count() const
+{
+    return m_rave_max_count;
 }
 
 template<class S, class M, unsigned P, class R>
@@ -1356,28 +1370,46 @@ const Node<M>* Search<S,M,P,R>::select_child(const Node& node)
     const Node* best_child = 0;
     Float best_value = -numeric_limits<Float>::max();
     m_bias_term.start_iteration(node_count);
-    Float beta =
-        (SearchParamConst::rave ?
-         sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence)) : 0);
-    Float beta_inv = 1 - beta;
-    if (log_move_selection)
-        log() << "beta=" << beta << '\n';
-    for (ChildIterator i(m_tree, node); i; ++i)
+    if (SearchParamConst::rave && node_count <= m_rave_max_count)
     {
-        Float bias = m_bias_term.get(i->get_count());
-        Float value =
-            beta * i->get_rave_value() + beta_inv * i->get_value() + bias;
+        Float beta =
+            sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
+        Float beta_inv = 1 - beta;
         if (log_move_selection)
-            log() << get_move_string(i->get_move())
-                  << " | c=" << i->get_count() << " rc=" << i->get_rave_count()
-                  << " v=" << i->get_value() << " r=" << i->get_rave_value()
-                  << " e=" << bias << " | " << value << '\n';
-        if (value > best_value)
+            log() << "beta=" << beta << '\n';
+        for (ChildIterator i(m_tree, node); i; ++i)
         {
-            best_value = value;
-            best_child = &(*i);
+            Float bias = m_bias_term.get(i->get_count());
+            Float value =
+                beta * i->get_rave_value() + beta_inv * i->get_value() + bias;
+            if (log_move_selection)
+                log() << get_move_string(i->get_move())
+                      << " | c=" << i->get_count() << " rc="
+                      << i->get_rave_count() << " v=" << i->get_value()
+                      << " r=" << i->get_rave_value() << " e=" << bias << " | "
+                      << value << '\n';
+            if (value > best_value)
+            {
+                best_value = value;
+                best_child = &(*i);
+            }
         }
     }
+    else
+        for (ChildIterator i(m_tree, node); i; ++i)
+        {
+            Float bias = m_bias_term.get(i->get_count());
+            Float value = i->get_value() + bias;
+            if (log_move_selection)
+                log() << get_move_string(i->get_move())
+                      << " | c=" << i->get_count() << " v=" << i->get_value()
+                      << " e=" << bias << " | " << value << '\n';
+            if (value > best_value)
+            {
+                best_value = value;
+                best_child = &(*i);
+            }
+        }
     if (log_move_selection)
         log() << "Selected: " << get_move_string(best_child->get_move())
               << '\n';
@@ -1470,6 +1502,12 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::set_rave_equivalence(Float n)
 {
     m_rave_equivalence = n;
+}
+
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_rave_max_count(Float n)
+{
+    m_rave_max_count = n;
 }
 
 template<class S, class M, unsigned P, class R>
@@ -1586,13 +1624,15 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
                                        const array<Float,max_players>& eval,
                                        unsigned i, PlayerInt player)
 {
-    const State& state = *thread_state.state;
-    auto& was_played = thread_state.was_played;
-    auto& first_play = thread_state.first_play;
     auto& nodes = thread_state.simulation.nodes;
     LIBBOARDGAME_ASSERT(i < nodes.size());
-    const Node* node = nodes[i];
+    const auto node = nodes[i];
     LIBBOARDGAME_ASSERT(node->has_children());
+    if (node->get_count() > m_rave_max_count)
+        return;
+    const auto& state = *thread_state.state;
+    auto& was_played = thread_state.was_played;
+    auto& first_play = thread_state.first_play;
     unsigned len = state.get_nu_moves();
     Float weight_factor = 1 / Float(len - i);
     for (ChildIterator it(m_tree, *node); it; ++it)
