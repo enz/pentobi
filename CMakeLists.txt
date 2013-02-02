@@ -75,9 +75,8 @@ endif()
 # Don't set the Pentobi data dirs on Windows. This is currently needed for
 # building a version of Pentobi for the NSIS installer on Windows (see
 # directory windows_installer) such that Pentobi will look for data dirs
-# relative to the installation directory. However, it breaks installing
-# Pentobi on Windows with "make install" if a Unix-like filesystem structure
-# is preferred.
+# relative to the installation directory. (It breaks installing Pentobi on
+# Windows with "make install" but we don't support that on Windows anyway.)
 if(UNIX)
   if(NOT DEFINED PENTOBI_BOOKS_DIR)
     set(PENTOBI_BOOKS_DIR "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/books")
