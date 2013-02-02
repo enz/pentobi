@@ -11,7 +11,6 @@
 namespace libpentobi_base {
 
 using namespace std;
-using libpentobi_base::Color;
 
 //-----------------------------------------------------------------------------
 

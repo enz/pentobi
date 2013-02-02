@@ -30,10 +30,6 @@ using libboardgame_sgf::util::get_last_node;
 using libboardgame_util::log;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
-using libpentobi_base::BoardConst;
-using libpentobi_base::Move;
-using libpentobi_base::Point;
-using libpentobi_base::Color;
 
 //-----------------------------------------------------------------------------
 

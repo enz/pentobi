@@ -12,9 +12,6 @@
 namespace libpentobi_base {
 
 using namespace std;
-using libpentobi_base::Board;
-using libpentobi_base::Game;
-using libpentobi_base::Player;
 using libboardgame_gtp::Arguments;
 using libboardgame_gtp::Response;
 

@@ -14,7 +14,6 @@ namespace libboardgame_sgf {
 using namespace std;
 using boost::format;
 using boost::trim_copy;
-using libboardgame_sgf::Node;
 
 //-----------------------------------------------------------------------------
 

@@ -11,13 +11,14 @@
 #include <limits>
 #include <boost/format.hpp>
 #include "Assert.h"
+#if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
 #include "Log.h"
+#endif
 
 namespace libboardgame_util {
 
 using namespace std;
 using boost::format;
-using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 
