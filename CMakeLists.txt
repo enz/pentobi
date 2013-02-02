@@ -21,8 +21,11 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DLIBBOARDGAME_DEBUG)
 endif()
 
-if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
+if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    OR (CMAKE_CXX_COMPILER_ID MATCHES "Intel"))
   add_definitions(-std=c++11)
+endif()
+if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   add_definitions(-ffast-math)
 endif()
 
