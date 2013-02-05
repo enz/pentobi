@@ -114,11 +114,9 @@ Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
       m_variant(initial_variant),
       m_shared_const(m_to_play)
 {
-    // Note: most nodes are initialized with a prior knowledge count 3
-    set_expand_threshold(3);
+    set_expand_threshold(1);
     set_expand_threshold_incr(0.5);
-    set_rave_equivalence(1000);
-    set_rave_max_count(50000);
+    set_rave_max_count(5000);
     set_default_param(m_variant);
     create_threads();
 }
@@ -261,38 +259,29 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
 
 void Search::set_default_param(Variant variant)
 {
-    log() << "Setting default parameters for " << to_string(variant)
-          << '\n';
+    log() << "Setting default parameters for " << to_string(variant) << '\n';
+    // The parameters are currently tuned for duo, classic_2 and trigon_2
+    // and used for all other game variants with the same board type
     switch (variant)
     {
     case Variant::duo:
-        set_bias_term_constant(0.12f);
-        break;
     case Variant::junior:
-        set_bias_term_constant(0.12f);
-        break;
-    case Variant::classic:
-        // Not tuned. Use same value as for Variant::classic_2
-        set_bias_term_constant(0.11f);
+        set_bias_term_constant(0.07f);
+        set_rave_weight(0.2);
         break;
     case Variant::classic_2:
-        set_bias_term_constant(0.11f);
-        break;
-    case Variant::trigon:
-        // Not tuned. Use same value as for Variant::trigon_2
-        set_bias_term_constant(0.10f);
+    case Variant::classic:
+        set_bias_term_constant(0.06f);
+        set_rave_weight(0.3);
         break;
     case Variant::trigon_2:
-        set_bias_term_constant(0.10f);
-        break;
     case Variant::trigon_3:
-        // Not tuned. Use same value as for Variant::trigon_2
-        set_bias_term_constant(0.10f);
+    case Variant::trigon:
+        set_bias_term_constant(0.06f);
+        set_rave_weight(0.4);
         break;
     default:
         LIBBOARDGAME_ASSERT(false);
-        set_bias_term_constant(0.10f);
-        break;
     }
 }
 

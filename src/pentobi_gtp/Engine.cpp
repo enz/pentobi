@@ -74,15 +74,10 @@ void Engine::cmd_move_values(Response& response)
     sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);
     response << fixed;
     for (const Search::Node* node : children)
-    {
-        Float count = node->get_count();
-        response << setprecision(0) << count << ' '
-                 << setprecision(3) << node->get_value();
-        Float rave_count = node->get_rave_count();
-        response << ' ' << setprecision(0) << rave_count << ' '
-                 << setprecision(3) << node->get_rave_value();
-        response << ' ' << bd.to_string(node->get_move()) << '\n';
-    }
+        response << setprecision(0) << node->get_visit_count() << ' '
+                 << setprecision(1) << node->get_value_count() << ' '
+                 << setprecision(3) << node->get_value() << ' '
+                 << bd.to_string(node->get_move()) << '\n';
 }
 
 void Engine::cmd_moves_stat(const Arguments& args, Response& response)
@@ -132,6 +127,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "level " << p.get_level() << '\n'
+            << "rave_max_count " << s.get_rave_max_count() << '\n'
+            << "rave_weight " << s.get_rave_weight() << '\n'
             << "reuse_subtree " << s.get_reuse_subtree() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
             << "use_book " << p.get_use_book() << '\n';
@@ -153,6 +150,10 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             p.set_fixed_simulations(args.get<Float>(1));
         else if (name == "level")
             p.set_level(args.get<int>(1));
+        else if (name == "rave_max_count")
+            s.set_rave_max_count(args.get<Float>(1));
+        else if (name == "rave_weight")
+            s.set_rave_weight(args.get<Float>(1));
         else if (name == "reuse_subtree")
             s.set_reuse_subtree(args.get<bool>(1));
         else if (name == "score_modification")

@@ -54,18 +54,11 @@ using libboardgame_util::string_util::to_string;
 
 //-----------------------------------------------------------------------------
 
-/** Default optional compile-time parameters for Search. */
+/** Default optional compile-time parameters for Search.
+    See description of class Search for more information. */
 struct SearchParamConstDefault
 {
-    /** Use @ref libboardgame_doc_rave.
-        @note The implementation of RAVE slightly differs from the one
-        described in the original paper: The value of a move is computed
-        as the weighted average of move value and RAVE value (without
-        exploration terms) and then only one exploration term is added.
-        The rationale is that the UCT-like exploration term based on the
-        RAVE counts in the paper is probably not well-defined, since the
-        RAVE count does not only depend on decisions made by the player in
-        the current node, so it is not a UCB bandit problem. */
+    /** Use RAVE. */
     static const bool rave = false;
 
     /** Do not update RAVE values if the same move was played first by the
@@ -77,10 +70,11 @@ struct SearchParamConstDefault
         slow-down in the update of the RAVE values. */
     static const bool rave_check_same = false;
 
-    /** Enable weighting of @ref libboardgame_doc_rave updates.
+    /** Enable distance weighting of RAVE updates.
         The weight decreases linearly from the start to the end of a
-        simulation. */
-    static const bool rave_weighting = false;
+        simulation. The distance weight is applied in addition to the normal
+        RAVE weight. */
+    static const bool rave_dist_weighting = false;
 
     /** Enable Last-Good-Reply heuristic.
         @see LastGoodReply */
@@ -90,16 +84,23 @@ struct SearchParamConstDefault
 //-----------------------------------------------------------------------------
 
 /** Game-independent Monte-Carlo tree search.
-    For best performance, the game-dependent functionality is added to this
-    class by template parameters, like the type M representing a move (which
-    must be convertible to an integer by providing M::to_int() and M::range)
-    and the state S of a simulation that provides functions for move
-    generation, evaluation of terminal positions, etc. The state should be
-    thread-safe to support multiple states if multi-threading is used.
-    Additionally, you need to derive from this
-    class and implement some pure virtual functions like get_move_string().
-    @tparam S The state of a simulation
-    @tparam M The move type
+    Game-dependent functionality is added by implementing some pure virtual
+    functions and by template parameters.
+
+    RAVE (see @ref libboardgame_doc_rave) is implemented differently from
+    the algorithm described in the original paper: RAVE values are not stored
+    separately in the nodes but added to the normal values with a certain
+    (constant) weight and up to a maximum visit count of the parent node. This
+    saves memory in the tree and speeds up move selection in the in-tree phase.
+    It is weaker than the original RAVE at a low number of simulations but
+    seems to be equally good or even better at a high number of simulations.
+
+    @tparam S The game-dependent state of a simulation. The state provides
+    functions for move generation, evaluation of terminal positions, etc. The
+    state should be thread-safe to support multiple states if multi-threading
+    is used.
+    @tparam M The move type. The type must be convertible to an integer by
+    providing M::to_int() and M::range.
     @tparam P The maximum number of players
     @tparam R Optional compile-time parameters, see SearchParamConstDefault */
 template<class S, class M, unsigned P, class R = SearchParamConstDefault>
@@ -228,16 +229,15 @@ public:
 
     bool get_prune_full_tree() const;
 
-    /** Set the equivalence parameter in the RAVE formula.
-        See @ref libboardgame_doc_rave */
-    void set_rave_equivalence(Float value);
-
-    Float get_rave_equivalence() const;
-
-    /** Maximum parent count to apply RAVE. */
+    /** Maximum parent count for applying RAVE. */
     void set_rave_max_count(Float value);
 
     Float get_rave_max_count() const;
+
+    /** Weight used for adding RAVE values to the node value. */
+    void set_rave_weight(Float value);
+
+    Float get_rave_weight() const;
 
     /** Value to start the tree pruning with.
         This value should be above typical count initializations if prior
@@ -317,13 +317,6 @@ public:
 
     /** Get mean evaluation for all players at root node. */
     const array<StatisticsDirtyLockFree<Float>,P>& get_root_val() const;
-
-    /** Get the value of the root position.
-        If the count of the root node is less than the count of the child
-        with the highest count, the value of this child will be returned,
-        otherwise the value of the root node (this can happen because the root
-        values are cleared when reusing a subtree from a previous search). */
-    Float get_value() const;
 
     /** Create the threads used in the search.
         This cannot be done in the constructor because it uses the virtual
@@ -467,9 +460,9 @@ private:
 
     Float m_prune_count_start;
 
-    Float m_rave_equivalence;
-
     Float m_rave_max_count;
+
+    Float m_rave_weight;
 
     /** Minimum simulations to perform in the current search.
         This does not include the count of simulations reused from a subtree of
@@ -483,14 +476,6 @@ private:
 
     /** Maximum count that can be exactly expressed in floating point type. */
     Float m_max_float_count;
-
-    /** Count of root node of reused subtree if its values had to be cleared.
-        If a subtree (not the full tree) is reused because the current position
-        is a follow-up position of the last search, the root values need to be
-        cleared because the root value has a different meaning than inner node
-        values (position value vs. move values). We remember the count of the
-        root node before clearing for the max count abort condition. */
-    Float m_reuse_count;
 
     size_t m_tree_memory;
 
@@ -674,8 +659,8 @@ Search<S,M,P,R>::Search(unsigned nu_threads, size_t memory)
       m_reuse_tree(false),
       m_prune_full_tree(true),
       m_prune_count_start(16),
-      m_rave_equivalence(1000),
-      m_rave_max_count(1000000),
+      m_rave_max_count(5000),
+      m_rave_weight(0.3),
       m_tree_memory(memory == 0 ? 256000000 : memory),
       m_max_nodes(get_max_nodes(m_tree_memory)),
       m_bias_term(0),
@@ -696,7 +681,7 @@ Search<S,M,P,R>::~Search() throw()
 template<class S, class M, unsigned P, class R>
 bool Search<S,M,P,R>::check_abort(const ThreadState& thread_state) const
 {
-    Float count = m_tree.get_root().get_count() + m_reuse_count;
+    Float count = m_tree.get_root().get_visit_count();
     if (count >= m_max_float_count)
     {
         log_thread(thread_state,
@@ -719,7 +704,7 @@ bool Search<S,M,P,R>::check_abort_expensive(ThreadState& thread_state) const
         log_thread(thread_state, "Search aborted");
         return true;
     }
-    Float count = m_tree.get_root().get_count() + m_reuse_count;
+    Float count = m_tree.get_root().get_visit_count();
     double time = m_timer();
     if (! m_deterministic && time < 0.1)
         // Simulations per second might be inaccurate for very small times
@@ -779,7 +764,7 @@ bool Search<S,M,P,R>::check_followup(vector<Move>& sequence)
 
 template<class S, class M, unsigned P, class R>
 bool Search<S,M,P,R>::check_move_cannot_change(Float count,
-                                             Float remaining) const
+                                               Float remaining) const
 {
     if (remaining > count)
         return false;
@@ -787,7 +772,7 @@ bool Search<S,M,P,R>::check_move_cannot_change(Float count,
     Float second_max_count = 0;
     for (ChildIterator i(m_tree, m_tree.get_root()); i; ++i)
     {
-        Float count = i->get_count();
+        Float count = i->get_visit_count();
         if (count > max_count)
         {
             second_max_count = max_count;
@@ -907,15 +892,15 @@ bool Search<S,M,P,R>::get_prune_full_tree() const
 }
 
 template<class S, class M, unsigned P, class R>
-Float Search<S,M,P,R>::get_rave_equivalence() const
-{
-    return m_rave_equivalence;
-}
-
-template<class S, class M, unsigned P, class R>
 Float Search<S,M,P,R>::get_rave_max_count() const
 {
     return m_rave_max_count;
+}
+
+template<class S, class M, unsigned P, class R>
+Float Search<S,M,P,R>::get_rave_weight() const
+{
+    return m_rave_weight;
 }
 
 template<class S, class M, unsigned P, class R>
@@ -962,20 +947,6 @@ inline const typename Search<S,M,P,R>::Tree& Search<S,M,P,R>::get_tree()
     const
 {
     return m_tree;
-}
-
-template<class S, class M, unsigned P, class R>
-Float Search<S,M,P,R>::get_value() const
-{
-    const Node& root = m_tree.get_root();
-    Float root_count = root.get_count();
-    const Node* child = select_child_final(root);
-    if (child != 0 && child->get_count() > root_count)
-        return child->get_value();
-    else if (root_count > 0)
-        return root.get_value();
-    else
-        return get_tie_value();
 }
 
 template<class S, class M, unsigned P, class R>
@@ -1036,17 +1007,20 @@ void Search<S,M,P,R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
     State& state = *thread_state.state;
     const Node& root = m_tree.get_root();
     const Node* node = &root;
+    m_tree.inc_visit_count(*node);
+    thread_state.simulation.nodes.push_back(node);
     is_terminal = false;
     Float expand_threshold = m_expand_threshold;
     while (node->has_children())
     {
         node = select_child(*node);
+        m_tree.inc_visit_count(*node);
         thread_state.simulation.nodes.push_back(node);
         state.play_in_tree(node->get_move());
         expand_threshold += m_expand_threshold_incr;
     }
     state.finish_in_tree();
-    if (node->get_count() >= expand_threshold || node == &root)
+    if (node->get_visit_count() > expand_threshold || node == &root)
     {
         Float init_val = m_init_val[state.get_to_play()].get_mean();
         if (! expand_node(thread_state.thread_id, *node, node, init_val))
@@ -1065,7 +1039,7 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::write_info(ostream& out) const
 {
     auto& root = m_tree.get_root();
-    Float count = root.get_count();
+    Float count = root.get_visit_count();
     if (m_threads.empty())
         return;
     auto& thread_state = m_threads[0]->thread_state;
@@ -1075,9 +1049,9 @@ void Search<S,M,P,R>::write_info(ostream& out) const
         return;
     }
     out << format(
-             "Val: %.2f, Cnt: %.0f, ReCnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
+             "Val: %.2f, Cnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
              "Sim/s: %.0f, Len: %s, Dp: %s\n")
-        % get_value() % count % m_reuse_count % m_nu_simulations
+        % root.get_value() % count % m_nu_simulations
         % m_tree.get_nu_nodes() % time_to_string(m_last_time)
         % (double(m_nu_simulations) / m_last_time)
         % thread_state.stat_len.to_string(true, 1, true)
@@ -1138,15 +1112,16 @@ void Search<S,M,P,R>::restore_root_from_children(Tree& tree, const Node& root)
     const Node* best_child = 0;
     Float max_count = 0;
     for (ChildIterator i(tree, root); i; ++i)
-        if (i->get_count() > max_count)
+        if (i->get_visit_count() > max_count)
         {
             best_child = &(*i);
-            max_count = i->get_count();
+            max_count = i->get_visit_count();
         }
     if (best_child == 0)
         tree.init_root_value(get_tie_value(), 0);
     else
-        tree.init_root_value(best_child->get_value(), best_child->get_count());
+        tree.init_root_value(best_child->get_value(),
+                             best_child->get_value_count());
 }
 
 template<class S, class M, unsigned P, class R>
@@ -1178,7 +1153,6 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
         for (PlayerInt i = 0; i < m_nu_players; ++i)
             if (m_root_val[i].get_count() > 0)
                 m_init_val[i] = m_root_val[i];
-    m_reuse_count = 0;
     if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same)))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
@@ -1186,7 +1160,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
         {
             if (tree_nodes > 1)
                 log(format("Reusing all %1% nodes (count=%2%)")
-                    % tree_nodes % m_tree.get_root().get_count());
+                    % tree_nodes % m_tree.get_root().get_visit_count());
         }
         else
         {
@@ -1202,14 +1176,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
                                                         &interval_checker);
                 const Node& tmp_tree_root = m_tmp_tree.get_root();
                 if (! is_same)
-                {
-                    m_reuse_count = tmp_tree_root.get_count();
                     restore_root_from_children(m_tmp_tree, tmp_tree_root);
-                    if (m_reuse_count > tmp_tree_root.get_count())
-                        m_reuse_count -= tmp_tree_root.get_count();
-                    else
-                        m_reuse_count = 0;
-                }
                 if (aborted && ! always_search)
                     return false;
                 size_t tmp_tree_nodes = m_tmp_tree.get_nu_nodes();
@@ -1257,10 +1224,11 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
     // Don't use multi-threading for very short searches (less than 0.5s).
     // There are too many lost updates at the beginning (e.g. if all threads
     // expand the root node and only the children of the last thread are used)
+    auto reused_count = m_tree.get_root().get_visit_count();
     unsigned nu_threads = m_nu_threads;
     if (max_time < 0.5
         || (max_count > 0
-            && (max_count - m_reuse_count) / expected_sim_per_sec() < 0.5))
+            && (max_count - reused_count) / expected_sim_per_sec() < 0.5))
     {
         log("Using single-threading for very short search");
         nu_threads = 1;
@@ -1322,7 +1290,7 @@ void Search<S,M,P,R>::search_loop(ThreadState& thread_state)
     while (true)
     {
         thread_state.is_out_of_mem = false;
-        Float root_count = m_tree.get_root().get_count();
+        Float root_count = m_tree.get_root().get_visit_count();
         size_t nu_simulations = m_nu_simulations.fetch_add(1);
         if (root_count > 0 && nu_simulations > m_min_simulations
             && (check_abort(thread_state) || expensive_abort_checker()))
@@ -1332,7 +1300,6 @@ void Search<S,M,P,R>::search_loop(ThreadState& thread_state)
         }
         ++thread_state.nu_simulations;
         thread_state.simulation.nodes.clear();
-        thread_state.simulation.nodes.push_back(&m_tree.get_root());
         state.start_simulation(nu_simulations);
         bool is_terminal;
         play_in_tree(thread_state, is_terminal);
@@ -1362,54 +1329,29 @@ template<class S, class M, unsigned P, class R>
 const Node<M>* Search<S,M,P,R>::select_child(const Node& node)
 {
     LIBBOARDGAME_ASSERT(node.has_children());
-    Float node_count = node.get_count();
+    auto node_count = node.get_visit_count();
     if (log_move_selection)
         log() << "Search::select_child:\n"
-              << "c=" << node_count << '\n'
+              << "vc=" << node_count << '\n'
               << "v=" << node.get_value() << '\n';
     const Node* best_child = 0;
     Float best_value = -numeric_limits<Float>::max();
     m_bias_term.start_iteration(node_count);
-    if (SearchParamConst::rave && node_count <= m_rave_max_count)
+    for (ChildIterator i(m_tree, node); i; ++i)
     {
-        Float beta =
-            sqrt(m_rave_equivalence / (3 * node_count + m_rave_equivalence));
-        Float beta_inv = 1 - beta;
+        auto child_count = i->get_visit_count();
+        auto bias = m_bias_term.get(child_count);
+        Float value = i->get_value() + bias;
         if (log_move_selection)
-            log() << "beta=" << beta << '\n';
-        for (ChildIterator i(m_tree, node); i; ++i)
+            log() << get_move_string(i->get_move())
+                  << " | vc=" << child_count << " v=" << i->get_value()
+                  << " e=" << bias << " | " << value << '\n';
+        if (value > best_value)
         {
-            Float bias = m_bias_term.get(i->get_count());
-            Float value =
-                beta * i->get_rave_value() + beta_inv * i->get_value() + bias;
-            if (log_move_selection)
-                log() << get_move_string(i->get_move())
-                      << " | c=" << i->get_count() << " rc="
-                      << i->get_rave_count() << " v=" << i->get_value()
-                      << " r=" << i->get_rave_value() << " e=" << bias << " | "
-                      << value << '\n';
-            if (value > best_value)
-            {
-                best_value = value;
-                best_child = &(*i);
-            }
+            best_value = value;
+            best_child = &(*i);
         }
     }
-    else
-        for (ChildIterator i(m_tree, node); i; ++i)
-        {
-            Float bias = m_bias_term.get(i->get_count());
-            Float value = i->get_value() + bias;
-            if (log_move_selection)
-                log() << get_move_string(i->get_move())
-                      << " | c=" << i->get_count() << " v=" << i->get_value()
-                      << " e=" << bias << " | " << value << '\n';
-            if (value > best_value)
-            {
-                best_value = value;
-                best_child = &(*i);
-            }
-        }
     if (log_move_selection)
         log() << "Selected: " << get_move_string(best_child->get_move())
               << '\n';
@@ -1426,7 +1368,7 @@ const Node<M>* Search<S,M,P,R>::select_child_final(const Node& node,
     Float max_count_value = -numeric_limits<Float>::max();
     for (ChildIterator i(m_tree, node); i; ++i)
     {
-        Float count = i->get_count();
+        Float count = i->get_visit_count();
         if (count > max_count
             || (count == max_count && i->get_value() > max_count_value))
         {
@@ -1499,15 +1441,15 @@ void Search<S,M,P,R>::set_prune_full_tree(bool enable)
 }
 
 template<class S, class M, unsigned P, class R>
-void Search<S,M,P,R>::set_rave_equivalence(Float n)
-{
-    m_rave_equivalence = n;
-}
-
-template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::set_rave_max_count(Float n)
 {
     m_rave_max_count = n;
+}
+
+template<class S, class M, unsigned P, class R>
+void Search<S,M,P,R>::set_rave_weight(Float v)
+{
+    m_rave_weight = v;
 }
 
 template<class S, class M, unsigned P, class R>
@@ -1628,13 +1570,13 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     LIBBOARDGAME_ASSERT(i < nodes.size());
     const auto node = nodes[i];
     LIBBOARDGAME_ASSERT(node->has_children());
-    if (node->get_count() > m_rave_max_count)
+    if (node->get_visit_count() > m_rave_max_count)
         return;
     const auto& state = *thread_state.state;
     auto& was_played = thread_state.was_played;
     auto& first_play = thread_state.first_play;
     unsigned len = state.get_nu_moves();
-    Float weight_factor = 1 / Float(len - i);
+    Float dist_weight_factor = 1 / Float(len - i);
     for (ChildIterator it(m_tree, *node); it; ++it)
     {
         Move mv = it->get_move();
@@ -1658,18 +1600,16 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
             if (other_played_same)
                 continue;
         }
-        Float weight;
-        if (SearchParamConst::rave_weighting)
-            // Weight decreases linearly from 2 at the start to 1 at the end of
-            // a simulation. Being proportional to the relative move distance
-            // (by dividing it by the length of the simulation) is essential
-            // for a positive effect of rave weighting, however the scaling to
-            // [2..1] could not be optimal for different games and should be
-            // made configurable in the future
-            weight = 2 - Float(first - i) * weight_factor;
-        else
-            weight = 1;
-        m_tree.add_rave_value(*it, eval[player], weight);
+        Float weight = m_rave_weight;
+        if (SearchParamConst::rave_dist_weighting)
+            // Distance weight decreases linearly from 2 at the start to 1 at
+            // the end of a simulation. Being proportional to the relative move
+            // distance (by dividing it by the length of the simulation) is
+            // essential for a positive effect of rave weighting, however the
+            // scaling to [2..1] could not be optimal for different games and
+            // should be made configurable in the future
+            weight *= 2 - Float(first - i) * dist_weight_factor;
+        m_tree.add_value(*it, eval[player], weight);
     }
 }
 

@@ -28,7 +28,7 @@ struct SearchParamConst
 
     static const bool rave_check_same = false;
 
-    static const bool rave_weighting = true;
+    static const bool rave_dist_weighting = true;
 
     static const bool use_last_good_reply = true;
 };

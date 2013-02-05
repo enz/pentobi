@@ -35,10 +35,9 @@ void dump_tree_recurse(Writer& writer, Variant variant,
                        Color to_play)
 {
     ostringstream comment;
-    comment << "Cnt: " << node.get_count()
-            << "\nVal: " << node.get_value();
-    comment << "\nRAVE cnt: " << node.get_rave_count()
-            << "\nRAVE val: " << node.get_rave_value();
+    comment << "Visits: " << node.get_visit_count()
+            << "\nVal: " << node.get_value()
+            << "\nCnt: " << node.get_value_count();
     writer.write_property("C", comment.str());
     writer.end_node();
     Color next_to_play = to_play.get_next(get_nu_colors(variant));
@@ -71,8 +70,8 @@ void dump_tree_recurse(Writer& writer, Variant variant,
 
 bool compare_node(const Node<Move>* n1, const Node<Move>* n2)
 {
-    Float count1 = n1->get_count();
-    Float count2 = n2->get_count();
+    Float count1 = n1->get_visit_count();
+    Float count2 = n2->get_visit_count();
     if (count1 != count2)
         return count1 > count2;
     return n1->get_value() > n2->get_value();

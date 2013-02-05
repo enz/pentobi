@@ -49,8 +49,7 @@ public:
 
         /** Add new child.
             The child will only be added if the tree is not full. */
-        void add_child(const Move& mv, Float value, Float count,
-                       Float rave_value, Float rave_count);
+        void add_child(const Move& mv, Float value, Float count);
 
         /** Link the children to the parent node. */
         void link_children();
@@ -105,11 +104,13 @@ public:
     size_t get_max_nodes() const;
 
     bool create_node(unsigned thread_id, const Move& mv, Float value,
-                     Float count, Float rave_value, Float rave_count);
+                     Float count);
 
     void add_value(const Node& node, Float v);
 
-    void add_rave_value(const Node& node, Float v, Float weight);
+    void add_value(const Node& node, Float v, Float weight);
+
+    void inc_visit_count(const Node& node);
 
     /** Overwrite the root value and count. */
     void init_root_value(Float value, Float count);
@@ -199,13 +200,11 @@ inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
 
 template<typename M>
 inline void Tree<M>::NodeExpander::add_child(const Move& mv, Float value,
-                                             Float count, Float rave_value,
-                                             Float rave_count)
+                                             Float count)
 {
     LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<int>::max());
     if (! (m_is_tree_full |= ! m_tree.create_node(m_thread_id, mv, value,
-                                                  count, rave_value,
-                                                  rave_count)))
+                                                  count)))
     {
         if (m_nu_children == 0)
             m_best_value = value;
@@ -259,15 +258,15 @@ Tree<M>::~Tree() throw()
 }
 
 template<typename M>
-inline void Tree<M>::add_rave_value(const Node& node, Float v, Float weight)
-{
-    non_const(node).add_rave_value(v, weight);
-}
-
-template<typename M>
 inline void Tree<M>::add_value(const Node& node, Float v)
 {
     non_const(node).add_value(v);
+}
+
+template<typename M>
+inline void Tree<M>::add_value(const Node& node, Float v, Float weight)
+{
+    non_const(node).add_value(v, weight);
 }
 
 template<typename M>
@@ -276,7 +275,7 @@ void Tree<M>::clear(Float root_value)
     m_thread_storage[0].next = m_thread_storage[0].begin + 1;
     for (unsigned i = 1; i < m_nu_threads; ++i)
         m_thread_storage[i].next = m_thread_storage[i].begin;
-    m_nodes[0].init(Move::null(), root_value, 0, root_value, 0);
+    m_nodes[0].init(Move::null(), root_value, 0);
 }
 
 template<typename M>
@@ -299,7 +298,7 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     bool abort =
         (check_abort && get_abort())
         || (interval_checker != 0 && (*interval_checker)());
-    if (! node.has_children() || node.get_count() < min_count || abort)
+    if (! node.has_children() || node.get_visit_count() < min_count || abort)
     {
         target_node_non_const.unlink_children();
         return ! abort;
@@ -332,14 +331,13 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
 
 template<typename M>
 bool Tree<M>::create_node(unsigned thread_id, const Move& mv,
-                          Float value, Float count, Float rave_value,
-                          Float rave_count)
+                          Float value, Float count)
 {
     LIBBOARDGAME_ASSERT(thread_id < m_nu_threads);
     ThreadStorage& thread_storage = m_thread_storage[thread_id];
     if (thread_storage.next != thread_storage.end)
     {
-        thread_storage.next->init(mv, value, count, rave_value, rave_count);
+        thread_storage.next->init(mv, value, count);
         ++thread_storage.next;
         return true;
     }
@@ -389,6 +387,12 @@ inline unsigned Tree<M>::get_thread_storage(const Node& node) const
 {
     size_t diff = &node - m_nodes.get();
     return static_cast<unsigned>(diff / m_nodes_per_thread);
+}
+
+template<typename M>
+inline void Tree<M>::inc_visit_count(const Node& node)
+{
+    non_const(node).inc_visit_count();
 }
 
 template<typename M>

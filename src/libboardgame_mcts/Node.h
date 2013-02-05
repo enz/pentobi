@@ -39,13 +39,18 @@ public:
         (prior knowledge) but even if it is initialized with count zero, it
         must be initialized with a usable value (e.g. first play urgency for
         inner nodes or tie value for the root node). */
-    void init(const Move& mv, Float value, Float count, Float rave_value,
-              Float rave_count);
+    void init(const Move& mv, Float value, Float count);
 
     const Move& get_move() const;
 
-    /** Number of values that were added. */
-    Float get_count() const;
+    /** Number of simulations that went through this node. */
+    Float get_visit_count() const;
+
+    /** Number of values that were added.
+        This count is usually larger than the visit count because in addition
+        to the terminal values of the simulations, prior knowledge values and
+        weighted RAVE values could have been added added. */
+    Float get_value_count() const;
 
     /** Value of the node.
         For the root node, this is the value of the position from the point of
@@ -53,15 +58,6 @@ public:
         value of the move leading to the position at the node from the point
         of view of the player at the parent node. */
     Float get_value() const;
-
-    Float get_rave_count() const;
-
-    /** RAVE value of the node.
-        For the root node, this is the value id undefined; for all other nodes,
-        this is the RAVE value of the move leading to the position at the node
-        from the point of view of the player at the parent node.
-        See @ref libboardgame_doc_rave. */
-    Float get_rave_value() const;
 
     bool has_children() const;
 
@@ -76,8 +72,8 @@ public:
         It is not thread-safe and may not be called during the search. */
     void init_value(Float value, Float count);
 
-    /** Copy the value and RAVE value from another node without changed
-        the chil information.
+    /** Copy the value count from another node without changing the child
+        information.
         This function is not thread-safe and may not be called during the
         search. */
     void copy_data_from(const Node& node);
@@ -88,20 +84,20 @@ public:
 
     void add_value(Float v);
 
-    void add_rave_value(Float v, Float weight);
+    void add_value(Float v, Float weight);
+
+    void inc_visit_count();
 
     /** Get node index of first child.
         @pre has_children() */
     NodeIndex get_first_child() const;
 
 private:
-    atomic<Float> m_count;
-
     atomic<Float> m_value;
 
-    atomic<Float> m_rave_count;
+    atomic<Float> m_value_count;
 
-    atomic<Float> m_rave_value;
+    atomic<Float> m_visit_count;
 
     atomic<unsigned short> m_nu_children;
 
@@ -122,29 +118,29 @@ inline Node<M>::Node()
 }
 
 template<typename M>
-void Node<M>::add_rave_value(Float v, Float weight)
-{
-    // Intentionally uses no synchronization and does not care about
-    // lost updates in multi-threaded mode
-    Float count = m_rave_count.load(memory_order_relaxed);
-    Float value = m_rave_value.load(memory_order_relaxed);
-    count += weight;
-    value += weight * (v - value) / count;
-    m_rave_value.store(value, memory_order_relaxed);
-    m_rave_count.store(count, memory_order_relaxed);
-}
-
-template<typename M>
 void Node<M>::add_value(Float v)
 {
     // Intentionally uses no synchronization and does not care about
     // lost updates in multi-threaded mode
-    Float count = m_count.load(memory_order_relaxed);
+    Float count = m_value_count.load(memory_order_relaxed);
     Float value = m_value.load(memory_order_relaxed);
     ++count;
-    value +=  (v - value) / count;
+    value += (v - value) / count;
     m_value.store(value, memory_order_relaxed);
-    m_count.store(count, memory_order_relaxed);
+    m_value_count.store(count, memory_order_relaxed);
+}
+
+template<typename M>
+void Node<M>::add_value(Float v, Float weight)
+{
+    // Intentionally uses no synchronization and does not care about
+    // lost updates in multi-threaded mode
+    Float count = m_value_count.load(memory_order_relaxed);
+    Float value = m_value.load(memory_order_relaxed);
+    count += weight;
+    value += weight * (v - value) / count;
+    m_value.store(value, memory_order_relaxed);
+    m_value_count.store(count, memory_order_relaxed);
 }
 
 template<typename M>
@@ -153,10 +149,9 @@ void Node<M>::copy_data_from(const Node& node)
     // Reminder to update this function when the class gets additional members
     struct Dummy
     {
-        atomic<Float> m_count;
         atomic<Float> m_value;
-        atomic<Float> m_rave_count;
-        atomic<Float> m_rave_value;
+        atomic<Float> m_value_count;
+        atomic<Float> m_visit_count;
         atomic<unsigned short> m_nu_children;
         Move m_move;
         NodeIndex m_first_child;
@@ -164,16 +159,15 @@ void Node<M>::copy_data_from(const Node& node)
     static_assert(sizeof(Node) == sizeof(Dummy), "");
 
     m_move = node.m_move;
-    m_count.store(node.m_count);
+    m_value_count.store(node.m_value_count);
     m_value.store(node.m_value);
-    m_rave_count.store(node.m_rave_count);
-    m_rave_value.store(node.m_rave_value);
+    m_visit_count.store(node.m_visit_count);
 }
 
 template<typename M>
-inline Float Node<M>::get_count() const
+inline Float Node<M>::get_value_count() const
 {
-    return m_count.load(memory_order_relaxed);
+    return m_value_count.load(memory_order_relaxed);
 }
 
 template<typename M>
@@ -196,21 +190,15 @@ inline unsigned Node<M>::get_nu_children() const
 }
 
 template<typename M>
-inline Float Node<M>::get_rave_count() const
-{
-    return m_rave_count.load(memory_order_relaxed);
-}
-
-template<typename M>
-inline Float Node<M>::get_rave_value() const
-{
-    return m_rave_value.load(memory_order_relaxed);
-}
-
-template<typename M>
 inline Float Node<M>::get_value() const
 {
     return m_value.load(memory_order_relaxed);
+}
+
+template<typename M>
+inline Float Node<M>::get_visit_count() const
+{
+    return m_visit_count.load(memory_order_relaxed);
 }
 
 template<typename M>
@@ -220,8 +208,17 @@ inline bool Node<M>::has_children() const
 }
 
 template<typename M>
-void Node<M>::init(const Move& mv, Float value, Float count, Float rave_value,
-                   Float rave_count)
+inline void Node<M>::inc_visit_count()
+{
+    // We don't care about the unlikely case that updates are lost because
+    // incrementing is not atomic
+    Float count = m_visit_count.load(memory_order_relaxed);
+    ++count;
+    m_visit_count.store(count, memory_order_relaxed);
+}
+
+template<typename M>
+void Node<M>::init(const Move& mv, Float value, Float count)
 {
     // The node is not yet visible to other threads because init() is called
     // before the children are linked to its parent with link_children()
@@ -229,17 +226,16 @@ void Node<M>::init(const Move& mv, Float value, Float count, Float rave_value,
     // Therefore, the most efficient way here is to initialize all values with
     // memory_order_relaxed.
     m_move = mv;
-    m_count.store(count, memory_order_relaxed);
+    m_value_count.store(count, memory_order_relaxed);
     m_value.store(value, memory_order_relaxed);
-    m_rave_count.store(rave_count, memory_order_relaxed);
-    m_rave_value.store(rave_value, memory_order_relaxed);
+    m_visit_count.store(0, memory_order_relaxed);
     m_nu_children.store(0, memory_order_relaxed);
 }
 
 template<typename M>
 void Node<M>::init_value(Float value, Float count)
 {
-    m_count = count;
+    m_value_count = count;
     m_value = value;
 }
 
