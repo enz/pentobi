@@ -35,7 +35,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
 
 void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 {
-    QColor color = Util::getPaintColor(m_variant, c);
+    auto color = Util::getPaintColor(m_variant, c);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     QFontMetrics metrics(m_font);
@@ -51,7 +51,7 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
 {
-    QColor color = Util::getPaintColor(m_variant, c1);
+    auto color = Util::getPaintColor(m_variant, c1);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     QFontMetrics metrics(m_font);
@@ -74,7 +74,7 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
 {
     painter.setFont(m_font);
     QFontMetrics metrics(m_font);
-    QColor color = QApplication::palette().color(QPalette::WindowText);
+    auto color = QApplication::palette().color(QPalette::WindowText);
     painter.setPen(color);
     painter.setRenderHint(QPainter::Antialiasing, false);
     painter.drawText(x, y, text);
@@ -242,7 +242,7 @@ void ScoreDisplay::resizeEvent(QResizeEvent*)
 
 void ScoreDisplay::updateScore(const Board& bd)
 {
-    Variant variant = bd.get_variant();
+    auto variant = bd.get_variant();
     bool hasChanged = (m_variant != variant);
     m_variant = variant;
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)

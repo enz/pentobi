@@ -261,7 +261,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
     LIBBOARDGAME_ASSERT(height >= 1 && height <= Point::max_height);
     fill(m_is_onboard, m_is_onboard + Point::range, false);
     m_all_points_begin = m_all_points.get();
-    Point* all_points_end = m_all_points.get();
+    auto all_points_end = m_all_points.get();
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)
         {

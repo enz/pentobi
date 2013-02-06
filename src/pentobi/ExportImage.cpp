@@ -22,11 +22,10 @@ void exportImage(QWidget* parent, const Board& bd, bool coordinates,
                  const Grid<QString>& labels)
 {
     QSettings settings;
-    int size = settings.value("export_image_size", 420).toInt();
+    auto size = settings.value("export_image_size", 420).toInt();
     QInputDialog dialog(parent);
-    Qt::WindowFlags windowFlags = dialog.windowFlags();
-    windowFlags &= ~Qt::WindowContextHelpButtonHint;
-    dialog.setWindowFlags(windowFlags);
+    dialog.setWindowFlags(dialog.windowFlags()
+                          & ~Qt::WindowContextHelpButtonHint);
     dialog.setWindowTitle(qApp->translate("ExportImage", "Export Image"));
     dialog.setLabelText(qApp->translate("ExportImage", "Image size:"));
     dialog.setInputMode(QInputDialog::IntInput);

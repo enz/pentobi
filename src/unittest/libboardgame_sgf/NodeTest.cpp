@@ -18,7 +18,7 @@ using namespace libboardgame_sgf;
 LIBBOARDGAME_TEST_CASE(sgf_node_create_new_child)
 {
     unique_ptr<Node> parent(new Node());
-    Node& child = parent->create_new_child();
+    auto& child = parent->create_new_child();
     LIBBOARDGAME_CHECK_EQUAL(&parent->get_child(), &child);
     LIBBOARDGAME_CHECK_EQUAL(&child.get_parent(), parent.get());
 }

@@ -117,7 +117,7 @@ bool getFinalPosition(const Node& root, Variant& variant,
         return false;
     }
     pointState.init(*geometry, PointState::empty());
-    const Node* node = &root;
+    auto node = &root;
     while (node != 0)
     {
         if (libpentobi_base::node_util::has_setup(*node))
@@ -157,7 +157,7 @@ bool createThumbnail(const QString& path, int width, int height,
     TreeReader reader;
     reader.set_read_only_main_variation(true);
     reader.read(path.toLocal8Bit().constData());
-    Variant variant =
+    auto variant =
         Variant::classic; // Initialize to avoid compiler warning
     Grid<PointState> pointState;
     if (! getFinalPosition(reader.get_tree(), variant, pointState))

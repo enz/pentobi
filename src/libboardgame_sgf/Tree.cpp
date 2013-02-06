@@ -65,7 +65,7 @@ const Node& Tree::create_new_child(const Node& node)
 
 void Tree::delete_all_variations()
 {
-    const Node* node = &get_root();
+    auto node = &get_root();
     while (node != 0)
     {
         non_const(*node).delete_variations();
@@ -81,7 +81,7 @@ string Tree::get_comment(const Node& node) const
 string Tree::get_date_today()
 {
    time_t t = time(0);
-   struct tm* tmp = localtime(&t);
+   auto tmp = localtime(&t);
    if (tmp == 0)
        return "?";
     char date[128];
@@ -107,7 +107,7 @@ bool Tree::has_comment_property(const Node& node, const string& key) const
 
 bool Tree::has_variations() const
 {
-    const Node* node = m_root.get();
+    auto node = m_root.get();
     while (node != 0)
     {
         if (node->get_sibling() != 0)
@@ -140,7 +140,7 @@ bool Tree::is_comment_property_line(const string& line, const string& key)
 
 void Tree::make_first_child(const Node& node)
 {
-    const Node* parent = node.get_parent_or_null();
+    auto parent = node.get_parent_or_null();
     if (parent != 0 && &parent->get_first_child() != &node)
     {
         non_const(node).make_first_child();
@@ -150,7 +150,7 @@ void Tree::make_first_child(const Node& node)
 
 void Tree::make_main_variation(const Node& node)
 {
-    Node* current = &non_const(node);
+    auto current = &non_const(node);
     while (current->has_parent())
     {
         make_first_child(*current);
@@ -163,7 +163,7 @@ void Tree::make_root(const Node& node)
     if (&node == &get_root())
         return;
     LIBBOARDGAME_ASSERT(contains(node));
-    const Node& parent = node.get_parent();
+    auto& parent = node.get_parent();
     unique_ptr<Node> new_root = non_const(parent).remove_child(non_const(node));
     m_root = move(new_root);
     m_modified = true;
@@ -188,7 +188,7 @@ void Tree::move_down(const Node& node)
 
 void Tree::move_up(const Node& node)
 {
-    const Node* parent = node.get_parent_or_null();
+    auto parent = node.get_parent_or_null();
     if (parent != 0 && &parent->get_first_child() != &node)
     {
         non_const(node).move_up();
@@ -273,7 +273,7 @@ void Tree::set_interesting_move(const Node& node)
 const Node& Tree::truncate(const Node& node)
 {
     LIBBOARDGAME_ASSERT(node.has_parent());
-    const Node& parent = node.get_parent();
+    auto& parent = node.get_parent();
     non_const(parent).remove_child(non_const(node));
     m_modified = true;
     return parent;

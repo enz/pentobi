@@ -699,7 +699,7 @@ void BoardConst::create_moves()
             {
                 Piece piece(k);
                 unsigned begin = current;
-                const LocalMovesList& list = (*m_full_move_table)[j][piece][*i];
+                auto& list = (*m_full_move_table)[j][piece][*i];
                 for (unsigned l = 0; l < list.size(); ++l)
                     m_move_lists[current++] = list[l];
                 m_moves_range[*i][j][piece] = ListIndex(begin, current - begin);
@@ -709,7 +709,7 @@ void BoardConst::create_moves()
 
 void BoardConst::create_moves(Piece piece)
 {
-    const PieceInfo& piece_info = m_pieces[piece.to_int()];
+    auto& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
         log() << "Creating moves for piece " << piece_info.get_name() << "\n";
     for (unsigned i = 0; i < nu_adj_status; ++i)
@@ -964,7 +964,7 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
         return "null";
     if (mv.is_pass())
         return "pass";
-    const MoveInfo& info = get_move_info(mv);
+    auto& info = get_move_info(mv);
     ostringstream s;
     if (with_piece_name)
         s << '[' << get_piece_info(info.get_piece()).get_name() << "]";

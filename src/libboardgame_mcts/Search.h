@@ -975,7 +975,7 @@ void Search<S,M,P,R>::on_start_search()
 template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::playout(ThreadState& thread_state)
 {
-    State& state = *thread_state.state;
+    auto& state = *thread_state.state;
     state.start_playout();
     while (true)
     {
@@ -1004,9 +1004,9 @@ void Search<S,M,P,R>::playout(ThreadState& thread_state)
 template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
 {
-    State& state = *thread_state.state;
-    const Node& root = m_tree.get_root();
-    const Node* node = &root;
+    auto& state = *thread_state.state;
+    auto& root = m_tree.get_root();
+    auto node = &root;
     m_tree.inc_visit_count(*node);
     thread_state.simulation.nodes.push_back(node);
     is_terminal = false;
@@ -1166,7 +1166,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
         {
             Timer timer(time_source);
             m_tmp_tree.clear(get_tie_value());
-            const Node* node = find_node(m_tree, m_followup_sequence);
+            auto node = find_node(m_tree, m_followup_sequence);
             if (node != 0)
             {
                 TimeIntervalChecker interval_checker(time_source, max_time);
@@ -1174,7 +1174,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
                     interval_checker.set_deterministic(1000000);
                 bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
                                                         &interval_checker);
-                const Node& tmp_tree_root = m_tmp_tree.get_root();
+                auto& tmp_tree_root = m_tmp_tree.get_root();
                 if (! is_same)
                     restore_root_from_children(m_tmp_tree, tmp_tree_root);
                 if (aborted && ! always_search)
@@ -1209,7 +1209,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
         m_last_good_reply.init(m_nu_players);
     for (unsigned i = 0; i < m_threads.size(); ++i)
     {
-        ThreadState& thread_state = m_threads[i]->thread_state;
+        auto& thread_state = m_threads[i]->thread_state;
         thread_state.nu_simulations = 0;
         thread_state.stat_len.clear();
         thread_state.stat_in_tree_len.clear();
@@ -1274,7 +1274,7 @@ bool Search<S,M,P,R>::search(Move& mv, Float max_count, Float min_simulations,
 template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::search_loop(ThreadState& thread_state)
 {
-    State& state = *thread_state.state;
+    auto& state = *thread_state.state;
     double time_interval = 0.1;
     if (m_max_count == 0 && m_max_time < 1)
         time_interval = 0.1 * m_max_time;
@@ -1388,7 +1388,7 @@ template<class S, class M, unsigned P, class R>
 bool Search<S,M,P,R>::select_move(Move& mv, const vector<Move>* exclude_moves)
     const
 {
-    const Node* child = select_child_final(m_tree.get_root(), exclude_moves);
+    auto child = select_child_final(m_tree.get_root(), exclude_moves);
     if (child != 0)
     {
         mv = child->get_move();
@@ -1521,7 +1521,7 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
                                          const array<Float,max_players>& eval)
 {
-    const State& state = *thread_state.state;
+    const auto& state = *thread_state.state;
     unsigned nu_moves = state.get_nu_moves();
     if (nu_moves == 0)
         return;
@@ -1533,7 +1533,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     LIBBOARDGAME_ASSERT(nu_nodes > 1);
     for ( ; i >= nu_nodes - 1; --i)
     {
-        PlayerMove mv = state.get_move(i);
+        auto mv = state.get_move(i);
         if (! state.skip_rave(mv.move))
         {
             was_played[mv.player].set(mv.move);
@@ -1542,7 +1542,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     }
     while (true)
     {
-        PlayerMove mv = state.get_move(i);
+        auto mv = state.get_move(i);
         if (! state.skip_rave(mv.move))
         {
             was_played[mv.player].set(mv.move);
@@ -1556,7 +1556,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     // Reset was_played
     for (unsigned i = 0; i < nu_moves; ++i)
     {
-        PlayerMove mv = state.get_move(i);
+        auto mv = state.get_move(i);
         was_played[mv.player].clear_word(mv.move);
     }
 }
@@ -1579,7 +1579,7 @@ void Search<S,M,P,R>::update_rave_values(ThreadState& thread_state,
     Float dist_weight_factor = 1 / Float(len - i);
     for (ChildIterator it(m_tree, *node); it; ++it)
     {
-        Move mv = it->get_move();
+        auto mv = it->get_move();
         if (! was_played[player][mv])
             continue;
         unsigned first = first_play[player][mv.to_int()];
@@ -1617,14 +1617,14 @@ template<class S, class M, unsigned P, class R>
 void Search<S,M,P,R>::update_values(ThreadState& thread_state,
                                   const array<Float,max_players>& eval)
 {
-    const State& state = *thread_state.state;
+    const auto& state = *thread_state.state;
     auto& nodes = thread_state.simulation.nodes;
     m_tree.add_value(m_tree.get_root(), eval[m_player]);
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
     for (unsigned i = 1; i < nu_nodes; ++i)
     {
-        const Node& node = *nodes[i];
-        PlayerMove mv = state.get_move(i - 1);
+        auto& node = *nodes[i];
+        auto mv = state.get_move(i - 1);
         m_tree.add_value(node, eval[mv.player]);
     }
     for (PlayerInt i = 0; i < m_nu_players; ++i)

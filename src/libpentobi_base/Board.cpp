@@ -364,7 +364,7 @@ void Board::write(ostream& out, bool mark_last_move) const
     unsigned width = m_geometry->get_width();
     unsigned height = m_geometry->get_height();
     bool is_info_location_right = (width <= 20);
-    BoardType board_type = get_board_type();
+    auto board_type = get_board_type();
     bool is_trigon = (board_type == BoardType::trigon
                       || board_type == BoardType::trigon_3);
     write_x_coord(out, width, is_trigon ? 3 : 2);
@@ -565,7 +565,7 @@ void Board::write_pieces_left(ostream& out, Color c, unsigned begin,
             if (i > begin)
                 out << ' ';
             Piece piece = m_state_color[c].pieces_left[i];
-            const string& name = get_piece_info(piece).get_name();
+            auto& name = get_piece_info(piece).get_name();
             unsigned nu_left = m_state_color[c].nu_left_piece[piece];
             for (unsigned j = 0; j < nu_left; ++j)
             {

@@ -32,11 +32,11 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     reader.read(in);
     unique_ptr<Node> root = reader.get_tree_transfer_ownership();
     Tree tree(root);
-    const BoardConst& board_const = tree.get_board_const();
-    const Node* node = &tree.get_root();
+    auto& board_const = tree.get_board_const();
+    auto node = &tree.get_root();
     node = &node->get_child();
     {
-        ColorMove mv = tree.get_move(*node);
+        auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(0));
         auto& info =  board_const.get_move_info(mv.move);
@@ -49,7 +49,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     }
     node = &node->get_child();
     {
-        ColorMove mv = tree.get_move(*node);
+        auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(1));
         auto& info =  board_const.get_move_info(mv.move);
@@ -62,7 +62,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     }
     node = &node->get_child();
     {
-        ColorMove mv = tree.get_move(*node);
+        auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(2));
         auto& info =  board_const.get_move_info(mv.move);
@@ -75,7 +75,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     }
     node = &node->get_child();
     {
-        ColorMove mv = tree.get_move(*node);
+        auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(3));
         auto& info =  board_const.get_move_info(mv.move);
@@ -99,9 +99,9 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_get_move_pass)
     reader.read(in);
     unique_ptr<Node> root = reader.get_tree_transfer_ownership();
     Tree tree(root);
-    const Node* node = &tree.get_root();
+    auto node = &tree.get_root();
     node = &node->get_child();
-    ColorMove mv = tree.get_move(*node);
+    auto mv = tree.get_move(*node);
     LIBBOARDGAME_CHECK(mv.move.is_pass());
 }
 

@@ -90,7 +90,7 @@ void GuiBoard::clearSelectedPiece()
 
 void GuiBoard::copyFromBoard(const Board& bd)
 {
-    const Geometry& geometry = bd.get_geometry();
+    auto& geometry = bd.get_geometry();
     if (! m_isInitialized || m_variant != bd.get_variant())
     {
         m_variant = bd.get_variant();
@@ -173,7 +173,7 @@ void GuiBoard::moveSelectedPieceDown()
 {
     if (m_selectedPiece.is_null())
         return;
-    const Geometry& geometry = m_bd.get_geometry();
+    auto& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
@@ -208,7 +208,7 @@ void GuiBoard::moveSelectedPieceLeft()
 {
     if (m_selectedPiece.is_null())
         return;
-    const Geometry& geometry = m_bd.get_geometry();
+    auto& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
@@ -237,7 +237,7 @@ void GuiBoard::moveSelectedPieceRight()
 {
     if (m_selectedPiece.is_null())
         return;
-    const Geometry& geometry = m_bd.get_geometry();
+    auto& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
@@ -265,7 +265,7 @@ void GuiBoard::moveSelectedPieceUp()
 {
     if (m_selectedPiece.is_null())
         return;
-    const Geometry& geometry = m_bd.get_geometry();
+    auto& geometry = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
@@ -352,7 +352,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
 
 void GuiBoard::placeSelectedPiece()
 {
-    Move mv = findSelectedPieceMove();
+    auto mv = findSelectedPieceMove();
     if (! mv.is_null())
         emit play(m_selectedPieceColor, mv);
 }
@@ -424,7 +424,7 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         m_selectedPieceOffset = offset;
         return;
     }
-    const Geometry& geometry = m_bd.get_geometry();
+    auto& geometry = m_bd.get_geometry();
     unsigned old_point_type = geometry.get_point_type(offset);
     unsigned point_type = m_selectedPieceTransform->get_new_point_type();
     CoordPoint type_matching_offset = offset;

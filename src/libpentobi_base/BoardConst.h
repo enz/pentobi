@@ -308,8 +308,8 @@ inline BoardConst::LocalMovesListRange BoardConst::get_moves(
                                Piece piece, Point p, unsigned adj_status) const
 {
     ListIndex idx = m_moves_range[p][adj_status][piece];
-    const Move* begin = m_move_lists.get() + idx.begin;
-    const Move* end = begin + idx.size;
+    auto begin = m_move_lists.get() + idx.begin;
+    auto end = begin + idx.size;
     return LocalMovesListRange(begin, end);
 }
 

@@ -134,7 +134,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
 bool PieceInfo::can_flip_horizontally(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    const Transform* flip = get_equivalent_transform(
+    auto flip = get_equivalent_transform(
                             m_transforms->get_mirrored_horizontally(transform));
     return flip != transform;
 }
@@ -142,15 +142,15 @@ bool PieceInfo::can_flip_horizontally(const Transform* transform) const
 bool PieceInfo::can_flip_vertically(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    const Transform* flip = get_equivalent_transform(
+    auto flip = get_equivalent_transform(
                               m_transforms->get_mirrored_vertically(transform));
     return flip != transform;
 }
 
 bool PieceInfo::can_rotate() const
 {
-    const Transform* transform = m_uniq_transforms[0];
-    const Transform* rotate = get_equivalent_transform(
+    auto transform = m_uniq_transforms[0];
+    auto rotate = get_equivalent_transform(
                                 m_transforms->get_rotated_clockwise(transform));
     return rotate != transform;
 }

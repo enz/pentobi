@@ -280,7 +280,7 @@ bool Node::set_property(const string& id, const vector<T>& values)
     vector<string> values_to_string;
     for (const T& v : values)
         values_to_string.push_back(to_string(v));
-    Property* property = m_first_property.get();
+    auto property = m_first_property.get();
     if (property == 0)
     {
         m_first_property.reset(new Property(id, values_to_string));

@@ -53,7 +53,7 @@ Move Book::genmove(const Board& bd, Color c)
                 PointTransfIdent<Point>(),
                 PointTransfIdent<Point>()))
         return mv;
-    BoardType board_type = bd.get_board_type();
+    auto board_type = bd.get_board_type();
     if (board_type == BoardType::duo)
         if (genmove(bd, c, mv,
                     PointTransfRot270Refl<Point>(),
@@ -115,7 +115,7 @@ bool Book::genmove(const Board& bd, Color c, Move& mv,
                    const PointTransform& inv_transform)
 {
     LIBBOARDGAME_ASSERT(! bd.has_setup());
-    const libboardgame_sgf::Node* node = &m_tree.get_root();
+    auto node = &m_tree.get_root();
     for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         ColorMove color_mv = bd.get_move(i);
@@ -172,7 +172,7 @@ const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
     vector<const Node*> good_moves;
     for (unsigned i = 0; i < nu_children; ++i)
     {
-        const Node& child = node.get_child(i);
+        auto& child = node.get_child(i);
         ColorMove color_mv = tree.get_move(child);
         if (color_mv.is_null())
         {
@@ -184,7 +184,7 @@ const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
             log() << "WARNING: Book contains non-alternating move sequences\n";
             continue;
         }
-        Move mv = get_transformed(bd, color_mv.move, inv_transform);
+        auto mv = get_transformed(bd, color_mv.move, inv_transform);
         if (! bd.is_legal(color_mv.color, mv))
         {
             log() << "WARNING: Book contains illegal move\n";

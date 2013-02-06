@@ -122,8 +122,8 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
         if (! m_analyzeGame.has_value(i))
             continue;
         double value = m_analyzeGame.get_value(i);
-        QColor color = Util::getPaintColor(m_analyzeGame.get_variant(),
-                                           m_analyzeGame.get_move(i).color);
+        auto color = Util::getPaintColor(m_analyzeGame.get_variant(),
+                                         m_analyzeGame.get_move(i).color);
         painter.setPen(Qt::NoPen);
         painter.setBrush(color);
         painter.drawEllipse(QPointF((i + 0.5) * m_dX, (1 - value) * m_maxY),
@@ -156,11 +156,11 @@ void AnalyzeGameWidget::setCurrentPosition(const Game& game, const Node& node)
     if (is_main_variation(node))
     {
         ArrayList<ColorMove,Board::max_game_moves> moves;
-        const Tree& tree = game.get_tree();
-        const Node* current = &find_root(node);
+        auto& tree = game.get_tree();
+        auto current = &find_root(node);
         while (current != 0)
         {
-            ColorMove mv = tree.get_move(*current);
+            auto mv = tree.get_move(*current);
             if (! mv.is_null() && moves.size() < Board::max_game_moves)
                 moves.push_back(mv);
             if (current == &node)

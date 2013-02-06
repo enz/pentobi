@@ -109,7 +109,7 @@ inline void CmdLine::write_id(ostream& out) const
 {
     if (m_idx_name == 0)
         return;
-    const CmdLineRange& e = m_elem[0];
+    auto& e = m_elem[0];
     copy(e.begin(), e.end(), ostream_iterator<char>(out));
 }
 

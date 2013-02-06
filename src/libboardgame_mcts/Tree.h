@@ -293,7 +293,7 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     LIBBOARDGAME_ASSERT(target.m_max_nodes == m_max_nodes);
     LIBBOARDGAME_ASSERT(target.m_nu_threads == m_nu_threads);
     LIBBOARDGAME_ASSERT(contains(node));
-    Node& target_node_non_const = target.non_const(target_node);
+    auto& target_node_non_const = target.non_const(target_node);
     target_node_non_const.copy_data_from(node);
     bool abort =
         (check_abort && get_abort())
@@ -304,14 +304,14 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
         return ! abort;
     }
     unsigned nu_children = node.get_nu_children();
-    const Node& first_child = get_node(node.get_first_child());
+    auto& first_child = get_node(node.get_first_child());
     // Create target children in the equivalent thread storage as in source.
     // This ensures that the thread storage will not overflow (because the
     // trees have identical nu_threads/max_nodes)
     ThreadStorage& thread_storage =
         target.m_thread_storage[get_thread_storage(first_child)];
-    const Node* target_child = thread_storage.next;
-    NodeIndex target_first_child =
+    auto target_child = thread_storage.next;
+    auto target_first_child =
         static_cast<NodeIndex>(target_child - target.m_nodes.get());
     target_node_non_const.link_children(target_first_child, nu_children);
     thread_storage.next += nu_children;
@@ -319,8 +319,8 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     // assert, GCC 4.7.2 gives the error: parse error in template argument list
     LIBBOARDGAME_ASSERT((thread_storage.next) < thread_storage.end);
     abort = false;
-    const Node* end = &first_child + node.get_nu_children();
-    for (const Node* i = &first_child; i != end; ++i, ++target_child)
+    auto end = &first_child + node.get_nu_children();
+    for (auto i = &first_child; i != end; ++i, ++target_child)
         if (! copy_subtree(target, *target_child, *i, min_count,
                            check_abort, interval_checker))
             // Finish this loop even on abort to make sure the children
@@ -334,7 +334,7 @@ bool Tree<M>::create_node(unsigned thread_id, const Move& mv,
                           Float value, Float count)
 {
     LIBBOARDGAME_ASSERT(thread_id < m_nu_threads);
-    ThreadStorage& thread_storage = m_thread_storage[thread_id];
+    auto& thread_storage = m_thread_storage[thread_id];
     if (thread_storage.next != thread_storage.end)
     {
         thread_storage.next->init(mv, value, count);
@@ -369,7 +369,7 @@ size_t Tree<M>::get_nu_nodes() const
     size_t result = 0;
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
-        ThreadStorage& thread_storage = m_thread_storage[i];
+        auto& thread_storage = m_thread_storage[i];
         result += thread_storage.next - thread_storage.begin;
     }
     return result;
@@ -428,8 +428,8 @@ bool Tree<M>::remove_child(const Node& node, const Move& mv)
     unsigned nu_children = node.get_nu_children();
     if (nu_children == 0)
         return false;
-    Node& first_child = non_const(*node.get_first_child());
-    Node* child = &first_child;
+    auto& first_child = non_const(*node.get_first_child());
+    auto child = &first_child;
     for (int i = 0; i < nu_children; ++i, ++child)
         if (child->get_move() == mv)
         {
@@ -457,7 +457,7 @@ void Tree<M>::set_max_nodes(size_t max_nodes)
     m_nodes_per_thread = max_nodes / m_nu_threads;
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
-        ThreadStorage& thread_storage = m_thread_storage[i];
+        auto& thread_storage = m_thread_storage[i];
         thread_storage.begin = m_nodes.get() + i * m_nodes_per_thread;
         thread_storage.end = thread_storage.begin + m_nodes_per_thread;
     }

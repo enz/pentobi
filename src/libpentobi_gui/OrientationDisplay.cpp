@@ -66,7 +66,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    BoardType board_type = m_bd.get_board_type();
+    auto board_type = m_bd.get_board_type();
     qreal fieldWidth;
     qreal fieldHeight;
     qreal displayWidth;
@@ -100,7 +100,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
         if (m_isColorSelected)
         {
             qreal dotSize = 0.06 * height();
-            QColor color = Util::getPaintColor(m_bd.get_variant(), m_color);
+            auto color = Util::getPaintColor(m_bd.get_variant(), m_color);
             painter.setPen(Qt::NoPen);
             painter.setBrush(color);
             painter.drawEllipse(QPointF(0.5 * width(), 0.5 * height()),
@@ -113,7 +113,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
                       0.5 * (height() - displayHeight));
     PiecePoints points = m_bd.get_piece_info(m_piece).get_points();
     m_transform->transform(points.begin(), points.end());
-    const Geometry& geometry = m_bd.get_geometry();
+    auto& geometry = m_bd.get_geometry();
     type_match_shift(geometry, points.begin(), points.end(),
                      m_transform->get_new_point_type());
     unsigned width;
@@ -125,7 +125,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     painter.save();
     painter.translate(0.5 * (displayWidth - width * fieldWidth),
                       0.5 * (displayHeight - height * fieldHeight));
-    Variant variant = m_bd.get_variant();
+    auto variant = m_bd.get_variant();
     for (CoordPoint p : points)
     {
         qreal x = p.x * fieldWidth;
@@ -156,7 +156,7 @@ void OrientationDisplay::selectColor(Color c)
 
 void OrientationDisplay::setSelectedPiece(Piece piece)
 {
-    const Transform* transform = m_bd.get_transforms().get_default();
+    auto transform = m_bd.get_transforms().get_default();
     if (m_piece == piece && m_transform == transform)
         return;
     m_piece = piece;

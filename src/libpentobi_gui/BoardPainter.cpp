@@ -123,7 +123,7 @@ void BoardPainter::drawLabels(QPainter& painter,
 {
     if (labels == 0)
         return;
-    const Geometry& geometry = pointState.get_geometry();
+    auto& geometry = pointState.get_geometry();
     bool isTrigon = (variant == Variant::trigon
                      || variant == Variant::trigon_2
                      || variant == Variant::trigon_3);

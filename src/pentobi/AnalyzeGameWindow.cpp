@@ -18,11 +18,11 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
 {
     setWindowTitle(tr("Game Analysis"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    QVBoxLayout* layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout();
     setLayout(layout);
     analyzeGameWidget = new AnalyzeGameWidget(this);
     layout->addWidget(analyzeGameWidget);
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
     connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
     buttonBox->setFocus();

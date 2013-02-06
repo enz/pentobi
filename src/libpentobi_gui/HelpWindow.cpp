@@ -39,18 +39,18 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     if (QIcon::hasThemeIcon("help-browser"))
         setWindowIcon(QIcon::fromTheme("help-browser"));
     m_mainPageUrl = QUrl::fromLocalFile(mainPage);
-    QTextBrowser* browser = new QTextBrowser(this);
+    auto browser = new QTextBrowser(this);
     setCentralWidget(browser);
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     browser->setSource(m_mainPageUrl);
-    QAction* actionBack = new QAction(tr("Back"), this);
+    auto actionBack = new QAction(tr("Back"), this);
     actionBack->setToolTip(tr("Show previous page in history"));
     actionBack->setEnabled(false);
     setIcon(actionBack, "go-previous");
     connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
     connect(browser, SIGNAL(backwardAvailable(bool)),
             actionBack, SLOT(setEnabled(bool)));
-    QAction* actionForward = new QAction(tr("Forward"), this);
+    auto actionForward = new QAction(tr("Forward"), this);
     actionForward->setToolTip(tr("Show next page in history"));
     actionForward->setEnabled(false);
     setIcon(actionForward, "go-next");
@@ -64,11 +64,11 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     connect(m_actionHome, SIGNAL(triggered()), browser, SLOT(home()));
     connect(browser, SIGNAL(sourceChanged(const QUrl&)),
             SLOT(handleSourceChanged(const QUrl&)));
-    QAction* actionClose = new QAction("", this);
+    auto actionClose = new QAction("", this);
     actionClose->setShortcut(QKeySequence::Close);
     connect(actionClose, SIGNAL(triggered()), SLOT(hide()));
     addAction(actionClose);
-    QToolBar* toolBar = new QToolBar(this);
+    auto toolBar = new QToolBar(this);
     toolBar->setMovable(false);
     toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     toolBar->addAction(actionBack);

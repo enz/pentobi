@@ -32,11 +32,11 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     m_moves.clear();
     m_has_value.clear();
     m_values.clear();
-    const Tree& tree = game.get_tree();
+    auto& tree = game.get_tree();
     unique_ptr<Board> bd(new Board(m_variant));
     BoardUpdater updater(tree, *bd);
-    const Node& root = game.get_root();
-    const Node* node = &root;
+    auto& root = game.get_root();
+    auto node = &root;
     unsigned total_moves = 0;
     while (node != 0)
     {
@@ -50,7 +50,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     unsigned move_number = 0;
     while (node != 0)
     {
-        ColorMove mv = tree.get_move(*node);
+        auto mv = tree.get_move(*node);
         if (mv.is_regular())
         {
             if (! node->has_parent())

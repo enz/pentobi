@@ -27,7 +27,7 @@ const Node& back_to_main_variation(const Node& node)
 {
     if (is_main_variation(node))
         return node;
-    const Node* current = &node;
+    auto current = &node;
     while (! is_main_variation(*current))
         current = &current->get_parent();
     return current->get_first_child();
@@ -35,12 +35,12 @@ const Node& back_to_main_variation(const Node& node)
 
 const Node& beginning_of_branch(const Node& node)
 {
-    const Node* current = node.get_parent_or_null();
+    auto current = node.get_parent_or_null();
     if (current == 0)
         return node;
     while (true)
     {
-        const Node* parent = current->get_parent_or_null();
+        auto parent = current->get_parent_or_null();
         if (parent == 0 || ! parent->has_single_child())
             break;
         current = parent;
@@ -50,7 +50,7 @@ const Node& beginning_of_branch(const Node& node)
 
 const Node* find_next_comment(const Node& node)
 {
-    const Node* current = get_next_node(node);
+    auto current = get_next_node(node);
     while (current != 0)
     {
         if (has_comment(*current))
@@ -62,7 +62,7 @@ const Node* find_next_comment(const Node& node)
 
 const Node& find_root(const Node& node)
 {
-    const Node* current = &node;
+    auto current = &node;
     while (current->has_parent())
         current = &current->get_parent();
     return *current;
@@ -78,7 +78,7 @@ string get_go_point_property_value(int x, int y, int sz)
 
 const Node& get_last_node(const Node& node)
 {
-    const Node* n = &node;
+    auto n = &node;
     while (n->has_children())
         n = &n->get_first_child();
     return *n;
@@ -87,7 +87,7 @@ const Node& get_last_node(const Node& node)
 unsigned get_depth(const Node& node)
 {
     unsigned depth = 0;
-    const Node* current = &node;
+    auto current = &node;
     while (current->has_parent())
     {
         current = &current->get_parent();
@@ -98,8 +98,8 @@ unsigned get_depth(const Node& node)
 
 const Node* get_next_earlier_variation(const Node& node)
 {
-    const Node* child = &node;
-    const Node* current = node.get_parent_or_null();
+    auto child = &node;
+    auto current = node.get_parent_or_null();
     while (current != 0 && child->get_sibling() == 0)
     {
         child = current;
@@ -112,7 +112,7 @@ const Node* get_next_earlier_variation(const Node& node)
 
 const Node* get_next_node(const Node& node)
 {
-    const Node* child = node.get_first_child_or_null();
+    auto child = node.get_first_child_or_null();
     if (child != 0)
         return child;
     return get_next_earlier_variation(node);
@@ -120,7 +120,7 @@ const Node* get_next_node(const Node& node)
 
 void get_path_from_root(const Node& node, vector<const Node*>& path)
 {
-    const Node* current = &node;
+    auto current = &node;
     path.assign(1, current);
     while(current->has_parent())
     {
@@ -133,11 +133,11 @@ void get_path_from_root(const Node& node, vector<const Node*>& path)
 string get_variation_string(const Node& node)
 {
     string result;
-    const Node* current = &node;
+    auto current = &node;
     unsigned depth = get_depth(*current);
     while (current->has_parent())
     {
-        const Node& parent = current->get_parent();
+        auto& parent = current->get_parent();
         if (parent.get_nu_children() > 1)
         {
             unsigned index = parent.get_child_index(*current);
@@ -163,12 +163,12 @@ bool has_comment(const Node& node)
 
 bool has_earlier_variation(const Node& node)
 {
-    const Node* current = node.get_parent_or_null();
+    auto current = node.get_parent_or_null();
     if (current == 0)
         return false;
     while (true)
     {
-        const Node* parent = current->get_parent_or_null();
+        auto parent = current->get_parent_or_null();
         if (parent == 0)
             return false;
         if (! parent->has_single_child())
@@ -179,10 +179,10 @@ bool has_earlier_variation(const Node& node)
 
 bool is_main_variation(const Node& node)
 {
-    const Node* current = &node;
+    auto current = &node;
     while (current->has_parent())
     {
-        const Node& parent = current->get_parent();
+        auto& parent = current->get_parent();
         if (current != &parent.get_first_child())
             return false;
         current = &parent;

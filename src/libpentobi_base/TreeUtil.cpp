@@ -18,7 +18,7 @@ namespace tree_util {
 unsigned get_move_number(const Tree& tree, const Node& node)
 {
     unsigned move_number = 0;
-    const Node* current = &node;
+    auto current = &node;
     while (current != 0)
     {
         if (tree.get_move_ignore_invalid(*current).is_regular())
@@ -33,7 +33,7 @@ unsigned get_move_number(const Tree& tree, const Node& node)
 unsigned get_moves_left(const Tree& tree, const Node& node)
 {
     unsigned moves_left = 0;
-    const Node* current = node.get_first_child_or_null();
+    auto current = node.get_first_child_or_null();
     while (current != 0)
     {
         if (libpentobi_base::node_util::has_setup(*current))

@@ -65,9 +65,9 @@ void Engine::cmd_get_value(Response& response)
 
 void Engine::cmd_move_values(Response& response)
 {
-    const Search& search = get_search();
-    const Search::Tree& tree = search.get_tree();
-    const Board& bd = get_board();
+    auto& search = get_search();
+    auto& tree = search.get_tree();
+    auto& bd = get_board();
     vector<const Search::Node*> children;
     for (ChildIterator<Move> i(tree, tree.get_root()); i; ++i)
         children.push_back(&(*i));
@@ -83,7 +83,7 @@ void Engine::cmd_move_values(Response& response)
 void Engine::cmd_moves_stat(const Arguments& args, Response& response)
 {
     Color c = get_color_arg(args);
-    const Board& bd = get_board();
+    auto& bd = get_board();
     Grid<unsigned> nu_moves_grid(bd.get_geometry(), 0);
     MoveList moves;
     MoveMarker marker;
@@ -106,7 +106,7 @@ void Engine::cmd_name(Response& response)
 
 void Engine::cmd_save_tree(const Arguments& args)
 {
-    const Search& search = get_search();
+    auto& search = get_search();
     if (! search.get_last_state().is_valid())
         throw Failure("no search tree");
     string file = args.get();
@@ -116,8 +116,8 @@ void Engine::cmd_save_tree(const Arguments& args)
 
 void Engine::cmd_param(const Arguments& args, Response& response)
 {
-    Player& p = get_mcts_player();
-    Search& s = get_search();
+    auto& p = get_mcts_player();
+    auto& s = get_search();
     if (args.get_size() == 0)
         response
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
@@ -197,13 +197,13 @@ void Engine::create_player(Variant variant, const path& books_dir,
 
 void Engine::cmd_gen_playout_move(Response& response)
 {
-    State& state = get_mcts_player().get_search().get_state(0);
+    auto& state = get_mcts_player().get_search().get_state(0);
     state.start_search();
     state.start_simulation(0);
     state.finish_in_tree();
     if (! state.gen_and_play_playout_move(Move::null(), Move::null()))
         throw Failure("terminal playout position");
-    const Board& bd = get_board();
+    auto& bd = get_board();
     response << bd.to_string(state.get_move(state.get_nu_moves() - 1).move);
 }
 

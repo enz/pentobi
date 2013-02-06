@@ -27,7 +27,7 @@ namespace {
 
 void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
 {
-    const Tree& tree = game.get_tree();
+    auto& tree = game.get_tree();
     double goodMove = tree.get_good_move(node);
     if (goodMove > 1)
     {
@@ -70,7 +70,7 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
     child node index) */
 bool getVariationIndex(const Tree& tree, const Node& node, unsigned& moveIndex)
 {
-    const Node* parent = node.get_parent_or_null();
+    auto parent = node.get_parent_or_null();
     if (parent == 0 || parent->has_single_child())
         return false;
     unsigned nuSiblingMoves = 0;
@@ -93,7 +93,7 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
 {
     if (! mv.is_regular())
         return;
-    const Board& bd = game.get_board();
+    auto& bd = game.get_board();
     Point p = bd.get_move_info_ext_2(mv.move).center;
     QString label;
     label.setNum(moveNumber);
@@ -117,13 +117,13 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
     guiBoard.clearMarkup();
     if (markMovesBegin > 0)
     {
-        const Tree& tree = game.get_tree();
-        const Board& bd = game.get_board();
+        auto& tree = game.get_tree();
+        auto& bd = game.get_board();
         unsigned displayedMoveNumber = 0; // pass moves have no number
-        const Node* node = &game.get_current();
+        auto node = &game.get_current();
         do
         {
-            ColorMove mv = tree.get_move_ignore_invalid(*node);
+            auto mv = tree.get_move_ignore_invalid(*node);
             if (mv.is_regular())
                 ++displayedMoveNumber;
             node = node->get_parent_or_null();
@@ -133,7 +133,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
         node = &game.get_current();
         do
         {
-            ColorMove mv = tree.get_move_ignore_invalid(*node);
+            auto mv = tree.get_move_ignore_invalid(*node);
             if (! mv.is_null())
             {
                 if (! mv.move.is_pass())

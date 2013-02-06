@@ -132,7 +132,7 @@ void PonderThread::Function::operator()()
     while (true)
     {
         m_thread.m_start_ponder.wait(lock);
-        Engine& engine = m_thread.m_engine;
+        auto& engine = m_thread.m_engine;
         if (! m_thread.m_quit)
         {
             engine.ponder();
@@ -328,11 +328,11 @@ ReadThread::Function::Function(Data& data)
 
 void ReadThread::Function::operator()()
 {
-    ReadThread::Data& data = m_data_ref.data;
+    auto& data = m_data_ref.data;
     unique_lock<mutex> lock(data.wait_cmd_mutex);
     data.ready.wait();
-    Engine& engine = data.engine;
-    istream& in = data.in;
+    auto& engine = data.engine;
+    auto& in = data.in;
     string line;
     data.is_stream_good = true;
     while (true)
@@ -372,7 +372,7 @@ ReadThread::ReadThread(istream& in, Engine& engine)
 
 ReadThread::~ReadThread() throw()
 {
-    ReadThread::Data& data = m_data_ref.data;
+    auto& data = m_data_ref.data;
     data.quit = true;
     if (data.is_stream_good)
         // User destructs ReadThread before EOF was reached, so we cannot wait
@@ -383,7 +383,7 @@ ReadThread::~ReadThread() throw()
 
 bool ReadThread::read_cmd(CmdLine& c)
 {
-    ReadThread::Data& data = m_data_ref.data;
+    auto& data = m_data_ref.data;
     {
         lock_guard<mutex> lock(data.wait_cmd_mutex);
         data.wait_cmd.notify_all();

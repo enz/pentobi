@@ -143,7 +143,7 @@ inline void LocalValue::init(const Board& bd)
         Color c = move.color;
         if (c == to_play || c == second_color)
             continue;
-        Move mv = move.move;
+        auto mv = move.move;
         if (mv.is_pass())
             continue;
         auto& is_forbidden = bd.is_forbidden(c);

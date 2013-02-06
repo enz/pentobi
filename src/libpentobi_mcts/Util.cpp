@@ -49,11 +49,11 @@ void dump_tree_recurse(Writer& writer, Variant variant,
     {
         writer.begin_tree();
         writer.begin_node();
-        Move mv =  i->get_move();
+        auto mv =  i->get_move();
         if (! mv.is_null())
         {
-            const BoardConst& board_const = BoardConst::get(variant);
-            const char* id = get_color_id(variant, to_play);
+            auto& board_const = BoardConst::get(variant);
+            auto id = get_color_id(variant, to_play);
             if (! mv.is_pass())
                 writer.write_property(id, board_const.to_string(mv, false));
             else
@@ -127,7 +127,7 @@ void dump_tree(ostream& out, const Search& search)
     writer.write_property("GM", to_string(variant));
     write_setup(writer, variant, setup);
     writer.write_property("PL", get_color_id(variant, setup.to_play));
-    const Tree<Move>& tree = search.get_tree();
+    auto& tree = search.get_tree();
     dump_tree_recurse(writer, variant, tree, tree.get_root(), setup.to_play);
     writer.end_tree();
 }

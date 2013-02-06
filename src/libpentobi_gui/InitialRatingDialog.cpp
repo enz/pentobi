@@ -20,15 +20,15 @@ InitialRatingDialog::InitialRatingDialog(QWidget* parent)
 {
     setWindowTitle(tr("Initial Rating"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    QVBoxLayout* layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout();
     setLayout(layout);
-    QLabel* label =
+    auto label =
         new QLabel(tr("You have not yet played rated games in this game"
                       " variant. Estimate your playing strength to"
                       " initialize your rating."));
     label->setWordWrap(true);
     layout->addWidget(label);
-    QHBoxLayout* sliderBoxLayout = new QHBoxLayout();
+    auto sliderBoxLayout = new QHBoxLayout();
     layout->addLayout(sliderBoxLayout);
     sliderBoxLayout->addWidget(new QLabel(tr("Beginner")));
     m_slider = new QSlider(Qt::Horizontal);
@@ -42,7 +42,7 @@ InitialRatingDialog::InitialRatingDialog(QWidget* parent)
     layout->addWidget(m_ratingLabel);
     setRating(1000);
     connect(m_slider, SIGNAL(valueChanged(int)), SLOT(setRating(int)));
-    QDialogButtonBox* buttonBox =
+    auto buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
     connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));

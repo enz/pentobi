@@ -30,7 +30,7 @@ void filter_min_size(const BoardConst& board_const, unsigned min_size,
     for (unsigned i = 0; i < board_const.get_nu_pieces(); ++i)
     {
         Piece piece(i);
-        const PieceInfo& piece_info = board_const.get_piece_info(piece);
+        auto& piece_info = board_const.get_piece_info(piece);
         if (piece_info.get_size() < min_size)
             is_piece_considered[piece] = false;
     }
@@ -50,8 +50,8 @@ void set_piece_considered(const BoardConst& board_const, const char* name,
 void set_pieces_considered(const Board& bd, unsigned nu_moves,
                            PieceMap<bool>& is_piece_considered)
 {
-    const BoardConst& board_const = bd.get_board_const();
-    BoardType board_type = board_const.get_board_type();
+    auto& board_const = bd.get_board_const();
+    auto board_type = board_const.get_board_type();
     unsigned nu_colors = bd.get_nu_colors();
     is_piece_considered.fill(true);
     if (board_type == BoardType::duo)
@@ -248,7 +248,7 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
 {
     m_shared_const.board = &bd;
     m_to_play = to_play;
-    Variant variant = bd.get_variant();
+    auto variant = bd.get_variant();
     if (m_auto_param && variant != m_variant)
         set_default_param(variant);
     m_variant = variant;
@@ -289,7 +289,7 @@ void Search::write_info(ostream& out) const
 {
     if (get_nu_simulations() == 0)
         return;
-    const Node& root = get_tree().get_root();
+    auto& root = get_tree().get_root();
     if (! root.has_children())
         return;
     ParentClass::write_info(out);

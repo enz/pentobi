@@ -35,7 +35,7 @@ RatedGamesList::RatedGamesList(QWidget* parent)
 
 void RatedGamesList::activateGame(const QModelIndex& index)
 {
-    QStandardItem* item = m_model->item(index.row(), 0);
+    auto item = m_model->item(index.row(), 0);
     if (item == 0)
         return;
     bool ok;
@@ -81,7 +81,7 @@ void RatedGamesList::updateContent(Variant variant,
     headers << tr("Game") << tr("Your Color") << tr("Level") << tr("Result")
             << tr("Date");
     m_model->setHorizontalHeaderLabels(headers);
-    QHeaderView* header = horizontalHeader();
+    auto header = horizontalHeader();
     header->setDefaultAlignment(Qt::AlignLeft);
     header->setHighlightSections(false);
     header->setResizeMode(0, QHeaderView::ResizeToContents);
@@ -95,14 +95,14 @@ void RatedGamesList::updateContent(Variant variant,
     for (int i = 0; i < nuRows; ++i)
     {
         const RatingHistory::GameInfo& info = history.getGameInfos()[i];
-        QStandardItem* number = new QStandardItem();
+        auto number = new QStandardItem();
         number->setData(info.number, Qt::DisplayRole);
-        QStandardItem* color = new QStandardItem();
+        auto color = new QStandardItem();
         if (info.color.to_int() < get_nu_colors(variant))
             color->setText(Util::getPlayerString(variant, info.color));
         else
             log() << "Error: invalid color in rating history\n";
-        QStandardItem* level = new QStandardItem();
+        auto level = new QStandardItem();
         level->setData(info.level, Qt::DisplayRole);
         QString result;
         if (info.result == 1)

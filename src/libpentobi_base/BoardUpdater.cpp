@@ -133,10 +133,10 @@ void BoardUpdater::update(const Node& node)
     {
         if (libpentobi_base::node_util::has_setup(*i))
             init_setup(m_bd, *i);
-        ColorMove mv = m_tree.get_move(*i);
+        auto mv = m_tree.get_move(*i);
         if (mv.is_regular())
         {
-            const MoveInfo& info = m_bd.get_move_info(mv.move);
+            auto& info = m_bd.get_move_info(mv.move);
             if (m_bd.get_nu_left_piece(mv.color, info.get_piece()) == 0)
                 throw InvalidTree("piece played twice");
             m_bd.play(mv);

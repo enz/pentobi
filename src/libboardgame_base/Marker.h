@@ -93,7 +93,7 @@ inline void Marker<P>::set(Point p)
 template<class P>
 inline bool Marker<P>::toggle(Point p)
 {
-    unsigned& ref = m_a[p.to_int()];
+    auto& ref = m_a[p.to_int()];
     if (ref == m_current)
     {
         ++ref;

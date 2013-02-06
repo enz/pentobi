@@ -25,7 +25,7 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 {
     setWindowTitle(tr("Computer Colors"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    QVBoxLayout* layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout();
     setLayout(layout);
     layout->addWidget(new QLabel(tr("Colors played by the computer:")));
     if (m_variant == Variant::duo || m_variant == Variant::junior)
@@ -53,7 +53,7 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
         createCheckBox(layout, Color(0));
         createCheckBox(layout, Color(1));
     }
-    QDialogButtonBox* buttonBox =
+    auto buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
     connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
@@ -83,7 +83,7 @@ void ComputerColorDialog::accept()
 
 void ComputerColorDialog::createCheckBox(QLayout* layout, Color c)
 {
-    QCheckBox* checkBox = new QCheckBox(getPlayerString(m_variant, c));
+    auto checkBox = new QCheckBox(getPlayerString(m_variant, c));
     checkBox->setChecked(m_computerColor[c]);
     layout->addWidget(checkBox);
     m_checkBox[c.to_int()] = checkBox;

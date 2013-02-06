@@ -33,7 +33,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_piece_played_twice)
     Tree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater(tree, *bd);
-    const Node& node = get_last_node(tree.get_root());
+    auto& node = get_last_node(tree.get_root());
     LIBBOARDGAME_CHECK_THROW(updater.update(node), Exception);
 }
 
@@ -68,7 +68,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_inner_node)
     Tree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater(tree, *bd);
-    const Node& node = get_last_node(tree.get_root());
+    auto& node = get_last_node(tree.get_root());
     updater.update(node);
     // BoardUpdater merges setup properties with existing position, so
     // get_nu_moves() should return the number of moves played after the setup
@@ -90,7 +90,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty)
     Tree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater(tree, *bd);
-    const Node& node = get_last_node(tree.get_root());
+    auto& node = get_last_node(tree.get_root());
     updater.update(node);
     // BoardUpdater merges setup properties with existing position, so
     // get_nu_moves() should return the number of moves played after the setup

@@ -23,11 +23,11 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     m_charset = game.get_root().get_property("CA", "");
     setWindowTitle(tr("Game Info"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    QVBoxLayout* layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout();
     setLayout(layout);
     m_formLayout = new QFormLayout();
     layout->addLayout(m_formLayout);
-    Variant variant = game.get_variant();
+    auto variant = game.get_variant();
     if (variant == Variant::duo || variant == Variant::junior)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
@@ -56,7 +56,7 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
             createPlayerName(tr("Player &Yellow/Green:"), Color(1));
     }
     m_date = createLine(tr("&Date:"), m_game.get_date());
-    QDialogButtonBox* buttonBox =
+    auto buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
     // We assume that the user wants to edit the game info if it is still empty
@@ -76,7 +76,7 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
 
 void GameInfoDialog::accept()
 {
-    Variant variant = m_game.get_variant();
+    auto variant = m_game.get_variant();
     string value;
     if (variant == Variant::duo || variant == Variant::junior)
     {
@@ -132,7 +132,7 @@ bool GameInfoDialog::acceptLine(QLineEdit* lineEdit, string& value)
 
 QLineEdit* GameInfoDialog::createLine(const QString& label, const string& text)
 {
-    QLineEdit* lineEdit = new LineEdit(0, 30);
+    auto lineEdit = new LineEdit(0, 30);
     if (! text.empty())
     {
         lineEdit->setText(Util::convertSgfValueToQString(text, m_charset));

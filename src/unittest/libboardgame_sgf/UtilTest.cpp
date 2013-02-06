@@ -19,7 +19,7 @@ using namespace libboardgame_sgf::util;
 LIBBOARDGAME_TEST_CASE(sgf_util_get_path_from_root)
 {
     unique_ptr<Node> root(new Node());
-    const Node& child = root->create_new_child();
+    auto& child = root->create_new_child();
     vector<const Node*> path;
     get_path_from_root(child, path);
     LIBBOARDGAME_CHECK_EQUAL(path.size(), 2u);

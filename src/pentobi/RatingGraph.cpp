@@ -89,7 +89,7 @@ QSize RatingGraph::sizeHint() const
 void RatingGraph::updateContent(const RatingHistory& history)
 {
     m_values.clear();
-    const vector<RatingHistory::GameInfo>& games = history.getGameInfos();
+    auto& games = history.getGameInfos();
     if (games.empty())
     {
         update();

@@ -40,7 +40,7 @@ Game::Game(unique_ptr<Node>& root)
 
 void Game::add_setup(Color c, Move mv)
 {
-    const Node& node = m_tree.add_setup(*m_current, c, mv);
+    auto& node = m_tree.add_setup(*m_current, c, mv);
     goto_node(node);
 }
 
@@ -52,7 +52,7 @@ void Game::delete_all_variations()
 
 void Game::goto_node(const Node& node)
 {
-    const Node* old = m_current;
+    auto old = m_current;
     try
     {
         m_updater.update(node);
@@ -131,7 +131,7 @@ void Game::remove_player()
 
 void Game::remove_setup(Color c, Move mv)
 {
-    const Node& node = m_tree.remove_setup(*m_current, c, mv);
+    auto& node = m_tree.remove_setup(*m_current, c, mv);
     goto_node(node);
 }
 

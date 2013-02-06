@@ -30,9 +30,9 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
 {
     setWindowTitle(tr("Your Rating"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    QVBoxLayout* layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout();
     setLayout(layout);
-    QFormLayout* formLayout = new QFormLayout();
+    auto formLayout = new QFormLayout();
     layout->addLayout(formLayout);
     formLayout->setLabelAlignment(Qt::AlignLeft);
     m_labelRating = new QLabel();
@@ -51,7 +51,7 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     layout->addWidget(new QLabel(tr("Recent games:")));
     m_list = new RatedGamesList();
     layout->addWidget(m_list, 1);
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
     m_clearButton =
         buttonBox->addButton(tr("&Clear"), QDialogButtonBox::ActionRole);
@@ -79,7 +79,7 @@ void RatingDialog::buttonClicked(QAbstractButton* button)
                        tr("Clear rating and delete rating history?"),
                        QMessageBox::Cancel, this);
     Util::setNoTitle(msgBox);
-    QPushButton* clearButton =
+    auto clearButton =
         msgBox.addButton(tr("Clear rating"), QMessageBox::DestructiveRole);
     msgBox.setDefaultButton(clearButton);
     msgBox.exec();
@@ -91,7 +91,7 @@ void RatingDialog::buttonClicked(QAbstractButton* button)
 
 void RatingDialog::updateContent()
 {
-    Variant variant = m_history.getVariant();
+    auto variant = m_history.getVariant();
     unsigned nuGames = m_history.getNuGames();
     Rating rating = m_history.getRating();
     Rating bestRating = m_history.getBestRating();

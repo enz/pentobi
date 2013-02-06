@@ -49,7 +49,7 @@ void redirectStdErr()
     SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), info.dwSize);
     long stdErrHandle = (long)GetStdHandle(STD_ERROR_HANDLE);
     int conHandle = _open_osfhandle(stdErrHandle, _O_TEXT);
-    FILE* f = _fdopen(conHandle, "w");
+    auto f = _fdopen(conHandle, "w");
     *stderr = *f;
     setvbuf(stderr, NULL, _IONBF, 0);
     ios::sync_with_stdio();

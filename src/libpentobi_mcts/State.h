@@ -332,7 +332,7 @@ inline void State::finish_in_tree()
 
 inline PlayerMove<Move> State::get_move(unsigned n) const
 {
-    ColorMove mv = m_bd.get_move(m_nu_moves_initial + n);
+    auto mv = m_bd.get_move(m_nu_moves_initial + n);
     return PlayerMove<Move>(mv.color.to_int(), mv.move);
 }
 
@@ -355,8 +355,8 @@ inline BoardConst::LocalMovesListRange State::get_moves(Color c, Piece piece,
 {
     BoardConst::ListIndex idx =
         m_shared_const.moves_range[c][p][adj_status][piece];
-    const Move* begin = &m_shared_const.move_lists[c][idx.begin];
-    const Move* end = begin + idx.size;
+    auto begin = &m_shared_const.move_lists[c][idx.begin];
+    auto end = begin + idx.size;
     return BoardConst::LocalMovesListRange(begin, end);
 }
 

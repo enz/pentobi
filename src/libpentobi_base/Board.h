@@ -793,7 +793,7 @@ inline bool Board::is_legal(Color c, Move mv) const
     LIBBOARDGAME_ASSERT(! mv.is_null());
     if (mv.is_pass())
         return true;
-    const MoveInfo& info = get_move_info(mv);
+    auto& info = get_move_info(mv);
     if (! is_piece_left(c, info.get_piece()))
         return false;
     bool has_attach_point = false;
@@ -844,11 +844,11 @@ inline bool Board::is_same_player(Color c1, Color c2) const
 inline void Board::place(Color c, Move mv)
 {
     LIBBOARDGAME_ASSERT(mv.is_regular());
-    const MoveInfo& info = get_move_info(mv);
-    const MoveInfoExt& info_ext = get_move_info_ext(mv);
+    auto& info = get_move_info(mv);
+    auto& info_ext = get_move_info_ext(mv);
     Piece piece = info.get_piece();
     unsigned piece_size = info.size();
-    StateColor& state_color = m_state_color[c];
+    auto& state_color = m_state_color[c];
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
     if (--state_color.nu_left_piece[piece] == 0)
     {

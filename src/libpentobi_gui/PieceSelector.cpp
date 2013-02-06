@@ -112,7 +112,7 @@ int PieceSelector::heightForWidth(int width) const
 void PieceSelector::init()
 {
     BoardType boardType = m_bd.get_board_type();
-    Variant variant = m_bd.get_variant();
+    auto variant = m_bd.get_variant();
     const string* pieceLayout;
     if (boardType == BoardType::trigon || boardType == BoardType::trigon_3)
     {
@@ -145,7 +145,7 @@ void PieceSelector::init()
             }
             m_piece[x][y] = piece;
         }
-    const Geometry& geometry = m_bd.get_geometry();
+    auto& geometry = m_bd.get_geometry();
     for (unsigned y = 0; y < m_nuRows; ++y)
         for (unsigned x = 0; x < m_nuColumns; ++x)
         {
@@ -208,8 +208,8 @@ void PieceSelector::paintEvent(QPaintEvent*)
     painter.save();
     painter.translate(0.5 * (width() - m_selectorWidth),
                       0.5 * (height() - m_selectorHeight));
-    Variant variant = m_bd.get_variant();
-    const Geometry& geometry = m_bd.get_geometry();
+    auto variant = m_bd.get_variant();
+    auto& geometry = m_bd.get_geometry();
     for (unsigned x = 0; x < m_nuColumns; ++x)
         for (unsigned y = 0; y < m_nuRows; ++y)
         {

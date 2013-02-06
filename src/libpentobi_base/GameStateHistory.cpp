@@ -57,7 +57,7 @@ bool GameStateHistory::is_followup(const GameStateHistory& other,
     Color to_play = other.m_to_play;
     for (size_t i = other.m_moves.size(); i < m_moves.size(); ++i)
     {
-        ColorMove mv = m_moves[i];
+        auto mv = m_moves[i];
         if (mv.color != to_play)
             return false;
         sequence.push_back(mv.move);

@@ -46,7 +46,7 @@ TestFail::TestFail(const char* file, int line, const format& f)
 
 void add_test(const string& name, TestFunction function)
 {
-    map<string, TestFunction>& all_tests = get_all_tests();
+    auto& all_tests = get_all_tests();
     LIBBOARDGAME_ASSERT(all_tests.find(name) == all_tests.end());
     all_tests.insert(make_pair(name, function));
 }

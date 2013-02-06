@@ -57,7 +57,7 @@ void CmdLine::find_elem()
 CmdLineRange CmdLine::get_trimmed_line_after_elem(size_t i) const
 {
     assert(i < m_elem.size());
-    const CmdLineRange& e = m_elem[i];
+    auto& e = m_elem[i];
     auto begin = e.end();
     if (begin < m_line.end() && *begin == '"')
         ++begin;

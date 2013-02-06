@@ -67,7 +67,7 @@ void Engine::board_changed()
 
 void Engine::cmd_all_legal(const Arguments& args, Response& response)
 {
-    const Board& bd = get_board();
+    auto& bd = get_board();
     unique_ptr<MoveList> moves(new MoveList());
     bd.gen_moves(get_color_arg(args), *moves);
     for (Move mv : *moves)
@@ -82,7 +82,7 @@ void Engine::cmd_clear_board()
 
 void Engine::cmd_final_score(Response& response)
 {
-    const Board& bd = get_board();
+    auto& bd = get_board();
     if (get_nu_players(bd.get_variant()) > 2)
     {
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
@@ -112,7 +112,7 @@ void Engine::cmd_genmove(const Arguments& args, Response& response)
 
 void Engine::cmd_get_place(const Arguments& args, Response& response)
 {
-    const Board& bd = get_board();
+    auto& bd = get_board();
     unsigned place;
     bool isPlaceShared;
     bd.get_place(get_color_arg(args), place, isPlaceShared);
@@ -132,7 +132,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
     {
         TreeReader reader;
         reader.read(file);
-        unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
+        auto tree = reader.get_tree_transfer_ownership();
         m_game.init(tree);
         const Node* node = 0;
         if (move_number != -1)
@@ -151,7 +151,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
 /** Return move info of a move given by its integer or string representation. */
 void Engine::cmd_move_info(const Arguments& args, Response& response)
 {
-    const Board& bd = get_board();
+    auto& bd = get_board();
     Move mv;
     try
     {
@@ -221,7 +221,7 @@ void Engine::cmd_play(const Arguments& args)
 
 void Engine::cmd_point_integers(Response& response)
 {
-    const Geometry& geometry = get_board().get_geometry();
+    auto& geometry = get_board().get_geometry();
     Grid<int> grid(geometry);
     for (GeometryIterator i(geometry); i; ++i)
         grid[*i] = (*i).to_int();
@@ -260,7 +260,7 @@ void Engine::cmd_showboard(Response& response)
 
 void Engine::cmd_undo()
 {
-    const Board& bd = get_board();
+    auto& bd = get_board();
     if (bd.get_nu_moves() == 0)
         throw Failure("cannot undo");
     m_game.undo();
@@ -269,9 +269,9 @@ void Engine::cmd_undo()
 
 void Engine::genmove(Color c, Response& response)
 {
-    const Board& bd = get_board();
-    Player& player = get_player();
-    Move mv = player.genmove(bd, c);
+    auto& bd = get_board();
+    auto& player = get_player();
+    auto mv = player.genmove(bd, c);
     if (mv.is_null())
         throw Failure("player failed to generate a move");
     if (! bd.is_legal(c, mv))
@@ -297,8 +297,8 @@ Color Engine::get_color_arg(const Arguments& args) const
 Color Engine::get_color_arg(const Arguments& args, unsigned i) const
 {
     string s = args.get_tolower(i);
-    const Board& bd = get_board();
-    Variant variant = bd.get_variant();
+    auto& bd = get_board();
+    auto variant = bd.get_variant();
     if (variant == Variant::classic || variant == Variant::classic_2
         || variant == Variant::trigon || variant == Variant::trigon_2
         || variant == Variant::trigon_3)
@@ -331,7 +331,7 @@ Player& Engine::get_player() const
 
 void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
 {
-    const Board& bd = get_board();
+    auto& bd = get_board();
     if (bd.get_nu_moves() >= Board::max_game_moves)
         throw Failure("too many moves");
     Move mv;

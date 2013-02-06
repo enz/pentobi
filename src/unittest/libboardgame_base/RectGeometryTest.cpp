@@ -27,7 +27,7 @@ typedef libboardgame_base::PointList<Point> PointList;
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_get_adj_diag)
 {
-    const Geometry* g = RectGeometry::get(9, 9);
+    auto g = RectGeometry::get(9, 9);
     PointList l;
     for (NullTermList<Point, 12>::Iterator i(g->get_adj_diag(Point("B9")));
          i; ++i)
@@ -42,7 +42,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_get_adj_diag)
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
 {
-    const Geometry* g = RectGeometry::get(3, 3);
+    auto g = RectGeometry::get(3, 3);
     Geometry::Iterator i(*g);
     LIBBOARDGAME_CHECK(i);
     LIBBOARDGAME_CHECK_EQUAL(Point(0, 0), *i);
@@ -76,7 +76,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_dist_to_edge)
 {
-    const Geometry* g = RectGeometry::get(9, 9);
+    auto g = RectGeometry::get(9, 9);
     LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(3, 0)), 0u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(3, 2)), 2u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(6, 8)), 0u);
@@ -85,7 +85,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_dist_to_edge)
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_second_dist_to_edge)
 {
-    const Geometry* g = RectGeometry::get(9, 9);
+    auto g = RectGeometry::get(9, 9);
     LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(3, 0)), 3u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(3, 2)), 3u);
     LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(6, 8)), 2u);

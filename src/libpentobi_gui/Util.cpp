@@ -263,7 +263,7 @@ void Util::paintColorSquare(QPainter& painter, Variant variant,
                             Color c, qreal x, qreal y, qreal size,
                             qreal alpha, qreal saturation, bool flat)
 {
-    QColor color = getPaintColor(variant, c);
+    auto color = getPaintColor(variant, c);
     QColor upLeftColor;
     QColor downRightColor;
     if (flat)
@@ -287,7 +287,7 @@ void Util::paintColorTriangle(QPainter& painter, Variant variant,
                               qreal width, qreal height, qreal alpha,
                               qreal saturation, bool flat)
 {
-    QColor color = getPaintColor(variant, c);
+    auto color = getPaintColor(variant, c);
     QColor upLeftColor;
     QColor downRightColor;
     if (flat)

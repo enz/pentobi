@@ -25,7 +25,7 @@ const Node<M>* find_child(const Tree<M>& tree, const Node<M>& node, M mv)
 template<typename M, class S>
 const Node<M>* find_node(const Tree<M>& tree, const S& sequence)
 {
-    const Node<M>* node = &tree.get_root();
+    auto node = &tree.get_root();
     for (M mv : sequence)
         if ((node = find_child(tree, *node, mv)) == 0)
             break;

@@ -17,7 +17,7 @@ using namespace libboardgame_sgf;
 LIBBOARDGAME_TEST_CASE(boardgamesgf_tree_iterator_1)
 {
     Tree tree;
-    const Node& root = tree.get_root();
+    auto& root = tree.get_root();
     TreeIterator i(root);
     LIBBOARDGAME_CHECK(i);
     LIBBOARDGAME_CHECK_EQUAL(&(*i), &root);
@@ -28,10 +28,10 @@ LIBBOARDGAME_TEST_CASE(boardgamesgf_tree_iterator_1)
 LIBBOARDGAME_TEST_CASE(boardgamesgf_tree_iterator_2)
 {
     Tree tree;
-    const Node& root = tree.get_root();
-    const Node& child1 = tree.create_new_child(root);
-    const Node& child2 = tree.create_new_child(root);
-    const Node& child3 = tree.create_new_child(child1);
+    auto& root = tree.get_root();
+    auto& child1 = tree.create_new_child(root);
+    auto& child2 = tree.create_new_child(root);
+    auto& child3 = tree.create_new_child(child1);
     TreeIterator i(root);
     LIBBOARDGAME_CHECK(i);
     LIBBOARDGAME_CHECK_EQUAL(&(*i), &root);

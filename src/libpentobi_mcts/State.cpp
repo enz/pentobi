@@ -71,7 +71,7 @@ PointState get_symmetric_state(PointState s)
     symmetry can be broken a few moves later. */
 bool check_symmetry_min_nu_pieces(const Board& bd)
 {
-    Variant variant = bd.get_variant();
+    auto variant = bd.get_variant();
     unsigned nu_pieces = bd.get_nu_onboard_pieces();
     if (variant == Variant::duo || variant == Variant::junior)
         return nu_pieces >= 3;
@@ -136,7 +136,7 @@ inline void State::add_moves(Point p, Color c, Piece piece,
     auto& moves = *m_moves[c];
     auto& marker = m_marker[c];
     auto move_candidates = get_moves(c, piece, p, adj_status);
-    const Grid<bool>& is_forbidden = m_bd.is_forbidden(c);
+    auto& is_forbidden = m_bd.is_forbidden(c);
     for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
         if (! marker[*i] && check_move(is_forbidden, *i, get_move_info(*i)))
         {
@@ -332,7 +332,7 @@ bool State::check_symmetry_broken()
             // Don't try to handle non-alternating moves or pass moves in
             // board history
             return true;
-        const MoveInfo& info = get_move_info(last_mv.move);
+        auto& info = get_move_info(last_mv.move);
         for (BoardIterator i(m_bd); i; ++i)
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
@@ -658,8 +658,8 @@ void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
     }
     for (unsigned i = 0; i < moves.size(); ++i)
     {
-        Move mv = moves[i];
-        const MoveFeatures& features = m_features[i];
+        auto mv = moves[i];
+        const auto& features = m_features[i];
         if (m_min_dist_to_center != numeric_limits<unsigned>::max()
             && features.dist_to_center != m_min_dist_to_center)
             // Prune early moves that don't minimize dist to center
@@ -876,7 +876,7 @@ void State::play_playout(Move mv)
 
 void State::start_search()
 {
-    const Board& bd = *m_shared_const.board;
+    auto& bd = *m_shared_const.board;
     m_bd.copy_from(bd);
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
@@ -884,7 +884,7 @@ void State::start_search()
     m_nu_colors = bd.get_nu_colors();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
-    const Geometry& geometry = bd.get_geometry();
+    auto& geometry = bd.get_geometry();
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
     m_check_terminate_early =
@@ -897,7 +897,7 @@ void State::start_search()
     m_nu_playout_moves = 0;
     m_nu_last_good_reply_moves = 0;
     m_stat_score.clear();
-    Variant variant = bd.get_variant();
+    auto variant = bd.get_variant();
     m_check_symmetric_draw =
         ((variant == Variant::duo || variant == Variant::junior
           || variant == Variant::trigon_2)
@@ -1028,7 +1028,7 @@ void State::update_move_list(Color c)
 void State::update_symmetry_broken(Move mv)
 {
     LIBBOARDGAME_ASSERT(! mv.is_pass());
-    const MoveInfo& info = get_move_info(mv);
+    auto& info = get_move_info(mv);
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
     if (to_play == Color(0) || to_play == Color(2))

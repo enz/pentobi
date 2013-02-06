@@ -47,7 +47,7 @@ const Node& Tree::add_setup(const Node& node, Color c, Move mv)
     Setup::PlacementList add_empty = get_setup_property(*result, "AE");
     if (add_empty.remove(mv))
         set_setup_property(*result, "AE", add_empty);
-    const char* id = get_setup_prop_id(c);
+    auto id = get_setup_prop_id(c);
     Setup::PlacementList add_color = get_setup_property(*result, id);
     if (add_color.include(mv))
         set_setup_property(*result, id, add_color);
@@ -90,11 +90,11 @@ ColorMove Tree::get_move_ignore_invalid(const Node& node) const
 
 const Node* Tree::get_node_before_move_number(unsigned move_number) const
 {
-    const Node* node = &get_root();
+    auto node = &get_root();
     unsigned n = 0;
     while (node->has_children())
     {
-        const Node& child = node->get_first_child();
+        auto& child = node->get_first_child();
         if (! get_move(child).is_null() && n++ == move_number)
                 return node;
         node = &child;
@@ -104,7 +104,7 @@ const Node* Tree::get_node_before_move_number(unsigned move_number) const
 
 string Tree::get_player_name(Color c) const
 {
-    const Node& root = get_root();
+    auto& root = get_root();
     switch (m_variant)
     {
     case Variant::classic:
@@ -150,7 +150,7 @@ Setup::PlacementList Tree::get_setup_property(const Node& node,
 
 bool Tree::has_main_variation_moves() const
 {
-    const Node* node = &get_root();
+    auto node = &get_root();
     while (node != 0)
     {
         if (has_move_ignore_invalid(*node))
@@ -195,7 +195,7 @@ void Tree::keep_only_subtree(const Node& node)
     bool create_new_setup = has_move(node);
     if (! create_new_setup)
     {
-        const Node* current = node.get_parent_or_null();
+        auto current = node.get_parent_or_null();
         while (current != 0)
         {
             if (has_move(*current) || node_util::has_setup(*current))
@@ -242,8 +242,8 @@ const Node& Tree::remove_setup(const Node& node, Color c, Move mv)
         result = &create_new_child(node);
     else
         result = &node;
-    const char* id = get_setup_prop_id(c);
-    Setup::PlacementList add_color = get_setup_property(*result, id);
+    auto id = get_setup_prop_id(c);
+    auto add_color = get_setup_property(*result, id);
     if (add_color.remove(mv))
         set_setup_property(*result, id, add_color);
     else
@@ -257,14 +257,14 @@ const Node& Tree::remove_setup(const Node& node, Color c, Move mv)
 
 void Tree::set_game_property()
 {
-    const Node& root = get_root();
+    auto& root = get_root();
     set_property(root, "GM", to_string(m_variant));
     move_property_to_front(root, "GM");
 }
 
 void Tree::set_move(const Node& node, Color c, Move mv)
 {
-    const char* id = get_color(c);
+    auto id = get_color(c);
     if (! mv.is_pass())
         set_property(node, id, m_board_const->to_string(mv, false));
     else
@@ -278,7 +278,7 @@ void Tree::set_player(const Node& node, Color c)
 
 void Tree::set_player_name(Color c, const string& name)
 {
-    const Node& root = get_root();
+    auto& root = get_root();
     switch (m_variant)
     {
     case Variant::classic:

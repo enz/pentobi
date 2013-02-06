@@ -45,7 +45,7 @@ Node& Node::create_new_child()
     unique_ptr<Node> node(new Node());
     node->m_parent = this;
     Node& result = *(node.get());
-    Node* last_child = get_last_child();
+    auto last_child = get_last_child();
     if (last_child == 0)
         m_first_child = move(node);
     else
@@ -61,7 +61,7 @@ void Node::delete_variations()
 
 Property* Node::find_property(const string& id) const
 {
-    Property* property = m_first_property.get();
+    auto property = m_first_property.get();
     while (property != 0)
     {
         if (property->id == id)
@@ -73,7 +73,7 @@ Property* Node::find_property(const string& id) const
 
 const vector<string> Node::get_multi_property(const string& id) const
 {
-    Property* property = find_property(id);
+    auto property = find_property(id);
     if (property == 0)
         return vector<string>();
     else
@@ -88,7 +88,7 @@ bool Node::has_property(const string& id) const
 const Node& Node::get_child(unsigned i) const
 {
     LIBBOARDGAME_ASSERT(i < get_nu_children());
-    const Node* child = m_first_child.get();
+    auto child = m_first_child.get();
     while (i > 0)
     {
         child = child->m_sibling.get();
@@ -99,7 +99,7 @@ const Node& Node::get_child(unsigned i) const
 
 unsigned Node::get_child_index(const Node& child) const
 {
-    const Node* current = m_first_child.get();
+    auto current = m_first_child.get();
     unsigned i = 0;
     while (true)
     {
@@ -113,7 +113,7 @@ unsigned Node::get_child_index(const Node& child) const
 
 Node* Node::get_last_child() const
 {
-    Node* node = m_first_child.get();
+    auto node = m_first_child.get();
     if (node == 0)
         return 0;
     while (node->m_sibling.get() != 0)
@@ -124,7 +124,7 @@ Node* Node::get_last_child() const
 unsigned Node::get_nu_children() const
 {
     unsigned n = 0;
-    const Node* child = m_first_child.get();
+    auto child = m_first_child.get();
     while (child != 0)
     {
         ++n;
@@ -137,7 +137,7 @@ const Node* Node::get_previous_sibling() const
 {
     if (m_parent == 0)
         return 0;
-    const Node* child = &m_parent->get_first_child();
+    auto child = &m_parent->get_first_child();
     if (child == this)
         return 0;
     do
@@ -153,7 +153,7 @@ const Node* Node::get_previous_sibling() const
 
 const string& Node::get_property(const string& id) const
 {
-    Property* property = find_property(id);
+    auto property = find_property(id);
     if (property == 0)
         throw MissingProperty(id);
     return property->values[0];
@@ -162,7 +162,7 @@ const string& Node::get_property(const string& id) const
 const string& Node::get_property(const string& id,
                                  const string& default_value) const
 {
-    Property* property = find_property(id);
+    auto property = find_property(id);
     if (property == 0)
         return default_value;
     else
@@ -172,12 +172,12 @@ const string& Node::get_property(const string& id,
 void Node::make_first_child()
 {
     LIBBOARDGAME_ASSERT(has_parent());
-    Node* current_child = m_parent->m_first_child.get();
+    auto current_child = m_parent->m_first_child.get();
     if (current_child == this)
         return;
     while (true)
     {
-        Node* sibling = current_child->m_sibling.get();
+        auto sibling = current_child->m_sibling.get();
         if (sibling == this)
         {
             unique_ptr<Node> tmp = move(m_parent->m_first_child);
@@ -192,7 +192,7 @@ void Node::make_first_child()
 
 bool Node::move_property_to_front(const string& id)
 {
-    Property* current = m_first_property.get();
+    auto current = m_first_property.get();
     Property* last = 0;
     while (true)
     {
@@ -217,7 +217,7 @@ bool Node::move_property_to_front(const string& id)
 void Node::move_down()
 {
     LIBBOARDGAME_ASSERT(has_parent());
-    Node* current = m_parent->m_first_child.get();
+    auto current = m_parent->m_first_child.get();
     if (current == this)
     {
         unique_ptr<Node> tmp = move(m_parent->m_first_child);
@@ -228,7 +228,7 @@ void Node::move_down()
     }
     while (true)
     {
-        Node* sibling = current->m_sibling.get();
+        auto sibling = current->m_sibling.get();
         if (sibling == this)
         {
             if (! m_sibling)
@@ -246,13 +246,13 @@ void Node::move_down()
 void Node::move_up()
 {
     LIBBOARDGAME_ASSERT(has_parent());
-    Node* current = m_parent->m_first_child.get();
+    auto current = m_parent->m_first_child.get();
     if (current == this)
         return;
     Node* prev = 0;
     while (true)
     {
-        Node* sibling = current->m_sibling.get();
+        auto sibling = current->m_sibling.get();
         if (sibling == this)
         {
             if (prev == 0)
@@ -273,7 +273,7 @@ void Node::move_up()
 
 bool Node::remove_property(const string& id)
 {
-    Property* property = m_first_property.get();
+    auto property = m_first_property.get();
     Property* last = 0;
     while (property != 0)
     {
@@ -293,7 +293,7 @@ bool Node::remove_property(const string& id)
 
 unique_ptr<Node> Node::remove_child(Node& child)
 {
-    unique_ptr<Node>* node = &m_first_child;
+    auto node = &m_first_child;
     unique_ptr<Node>* previous = 0;
     while (true)
     {

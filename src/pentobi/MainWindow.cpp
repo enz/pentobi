@@ -94,7 +94,7 @@ namespace {
 
 QToolButton* createOBoxToolButton(QAction* action)
 {
-    QToolButton* button = new QToolButton();
+    auto button = new QToolButton();
     button->setDefaultAction(action);
     button->setAutoRaise(true);
     button->setFocusPolicy(Qt::NoFocus);
@@ -117,8 +117,8 @@ QString getAutoSaveFile()
       Game::get_effective_to_play())  */
 Color getCurrentColor(const Game& game)
 {
-    const Tree& tree = game.get_tree();
-    const Node* node = &game.get_current();
+    auto& tree = game.get_tree();
+    auto node = &game.get_current();
     Color c;
     while (node != 0 && ! tree.has_move(*node))
     {
@@ -151,7 +151,7 @@ Color getCurrentColor(const Game& game)
 
 bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
 {
-    const Node* node = current.get_parent_or_null();
+    auto node = current.get_parent_or_null();
     while (node != 0)
     {
         if (! tree.get_move(*node).is_null())
@@ -221,7 +221,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_level = settings.value("level", 3).toInt();
     if (m_level < 1 || m_level > maxLevel)
         m_level = 3;
-    QString variantString = settings.value("variant", "").toString();
+    auto variantString = settings.value("variant", "").toString();
     Variant variant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
         variant = Variant::classic;
@@ -265,21 +265,21 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     createMenu();
     qApp->installEventFilter(this);
     updateRecentFiles();
-    QString moveNumbers = settings.value("move_numbers", "last").toString();
+    auto moveNumbers = settings.value("move_numbers", "last").toString();
     if (moveNumbers == "last")
         m_actionMoveNumbersLast->setChecked(true);
     else if (moveNumbers == "all")
         m_actionMoveNumbersAll->setChecked(true);
     else
         m_actionMoveNumbersNone->setChecked(true);
-    bool coordinates = settings.value("coordinates", false).toBool();
+    auto coordinates = settings.value("coordinates", false).toBool();
     m_guiBoard->setCoordinates(coordinates);
     m_actionCoordinates->setChecked(coordinates);
-    bool showToolbar = settings.value("toolbar", true).toBool();
+    auto showToolbar = settings.value("toolbar", true).toBool();
     m_toolBar->setVisible(showToolbar);
     m_menuToolBarText->setEnabled(showToolbar);
     m_actionShowToolbar->setChecked(showToolbar);
-    bool showVariations = settings.value("show_variations", true).toBool();
+    auto showVariations = settings.value("show_variations", true).toBool();
     m_actionShowVariations->setChecked(showVariations);
     initVariantActions();
     QIcon icon;
@@ -316,7 +316,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
         move(x, y);
     }
 
-    bool showComment = settings.value("show_comment", false).toBool();
+    auto showComment = settings.value("show_comment", false).toBool();
     m_comment->setVisible(showComment);
     if (showComment)
         m_splitter->restoreState(
@@ -340,14 +340,14 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             m_gameFinished = getBoard().is_game_over();
             if (settings.value("autosave_rated", false).toBool())
             {
-                Variant variant = getVariant();
+                auto variant = getVariant();
                 unsigned ratedGameColor =
                     settings.value("autosave_rated_color", 0).toUInt();
                 if (ratedGameColor < get_nu_colors(variant))
                 {
                     m_ratedGameColor = Color(ratedGameColor);
                     m_computerColors.fill(true);
-                    const Board& bd = getBoard();
+                    auto& bd = getBoard();
                     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
                         if (bd.is_same_player(*i, m_ratedGameColor))
                             m_computerColors[*i] = false;
@@ -458,7 +458,7 @@ void MainWindow::badMove(bool checked)
 
 void MainWindow::backward()
 {
-    const Node& node = m_game->get_current();
+    auto& node = m_game->get_current();
     if (! node.has_parent())
         return;
     gotoNode(node.get_parent());
@@ -466,14 +466,14 @@ void MainWindow::backward()
 
 void MainWindow::backward10()
 {
-    const Tree& tree = m_game->get_tree();
-    const Node* node = &m_game->get_current();
+    auto& tree = m_game->get_tree();
+    auto node = &m_game->get_current();
     unsigned n = 0;
     while (n < 10)
     {
         if (tree.has_move(*node))
             ++n;
-        const Node* parent = node->get_parent_or_null();
+        auto parent = node->get_parent_or_null();
         if (parent == 0)
             break;
         node = parent;
@@ -545,13 +545,13 @@ bool MainWindow::checkSave()
         // Don't use QMessageBox::Discard because on some platforms it uses the
         // text "Close without saving" which implies that the window would be
         // closed
-        QPushButton* discardButton =
+        auto discardButton =
             msgBox.addButton(tr("&Don't Save"), QMessageBox::DestructiveRole);
-        QPushButton* saveButton = msgBox.addButton(QMessageBox::Save);
-        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        auto saveButton = msgBox.addButton(QMessageBox::Save);
+        auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
         msgBox.setDefaultButton(cancelButton);
         msgBox.exec();
-        QAbstractButton* result = msgBox.clickedButton();
+        auto result = msgBox.clickedButton();
         if (result == saveButton)
         {
             save();
@@ -566,9 +566,9 @@ bool MainWindow::checkSave()
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The current game is not finished."),
                      tr("Do you want to abort the game?"));
-        QPushButton* abortGameButton =
+        auto abortGameButton =
             msgBox.addButton(tr("&Abort Game"), QMessageBox::DestructiveRole);
-        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
         msgBox.setDefaultButton(cancelButton);
         msgBox.exec();
         if (msgBox.clickedButton() != abortGameButton)
@@ -585,12 +585,12 @@ bool MainWindow::checkQuit()
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The file has been modified."),
                      tr("Do you want to save your changes?"));
-        QPushButton* discardButton = msgBox.addButton(QMessageBox::Discard);
-        QPushButton* saveButton = msgBox.addButton(QMessageBox::Save);
-        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        auto discardButton = msgBox.addButton(QMessageBox::Discard);
+        auto saveButton = msgBox.addButton(QMessageBox::Save);
+        auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
         msgBox.setDefaultButton(cancelButton);
         msgBox.exec();
-        QAbstractButton* result = msgBox.clickedButton();
+        auto result = msgBox.clickedButton();
         if (result == saveButton)
         {
             save();
@@ -673,7 +673,7 @@ void MainWindow::computerColors()
 {
     ColorMap<bool> oldComputerColors = m_computerColors;
     Color oldCurrentColor = m_currentColor;
-    Variant variant = getVariant();
+    auto variant = getVariant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
     if (variant != Variant::classic && variant != Variant::trigon
@@ -719,7 +719,7 @@ bool MainWindow::computerPlaysAll() const
 
 QAction* MainWindow::createAction(const QString& text)
 {
-    QAction* action = new QAction(text, this);
+    auto action = new QAction(text, this);
     // Add all actions also to main window. if an action is only added to
     // the menu bar, shortcuts won,t work in fullscreen mode because the menu
     // is not visible in fullscreen mode
@@ -729,11 +729,11 @@ QAction* MainWindow::createAction(const QString& text)
 
 void MainWindow::createActions()
 {
-    QActionGroup* groupVariant = new QActionGroup(this);
-    QActionGroup* groupLevel = new QActionGroup(this);
-    QActionGroup* groupMoveNumbers = new QActionGroup(this);
-    QActionGroup* groupMoveAnnotation = new QActionGroup(this);
-    QActionGroup* groupToolBarText = new QActionGroup(this);
+    auto groupVariant = new QActionGroup(this);
+    auto groupLevel = new QActionGroup(this);
+    auto groupMoveNumbers = new QActionGroup(this);
+    auto groupMoveAnnotation = new QActionGroup(this);
+    auto groupToolBarText = new QActionGroup(this);
 
     m_actionAbout = createAction(tr("&About"));
     m_actionAbout->setIcon(QIcon::fromTheme("help-about"));
@@ -1270,12 +1270,12 @@ void MainWindow::createActions()
 
 QWidget* MainWindow::createCentralWidget()
 {
-    QWidget* widget = new QWidget();
+    auto widget = new QWidget();
     // We add spacing around and between the two panels using streches (such
     // that the spacing grows with the window size)
-    QVBoxLayout* outerLayout = new QVBoxLayout();
+    auto outerLayout = new QVBoxLayout();
     widget->setLayout(outerLayout);
-    QHBoxLayout* innerLayout = new QHBoxLayout();
+    auto innerLayout = new QHBoxLayout();
     outerLayout->addStretch(1);
     outerLayout->addLayout(innerLayout, 100);
     outerLayout->addStretch(1);
@@ -1311,7 +1311,7 @@ QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
                                        const QString& text)
 {
     LIBBOARDGAME_ASSERT(level >= 1 && level <= maxLevel);
-    QAction* action = createAction(text);
+    auto action = createAction(text);
     action->setCheckable(true);
     if (level == m_level)
         action->setChecked(true);
@@ -1323,11 +1323,11 @@ QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
 
 void MainWindow::createMenu()
 {
-    QMenu* menuGame = menuBar()->addMenu(tr("&Game"));
+    auto menuGame = menuBar()->addMenu(tr("&Game"));
     menuGame->addAction(m_actionNew);
     menuGame->addAction(m_actionNewRatedGame);
     menuGame->addSeparator();
-    QMenu* menuVariant = menuGame->addMenu(tr("Game &Variant"));
+    auto menuVariant = menuGame->addMenu(tr("Game &Variant"));
     menuVariant->addAction(m_actionVariantClassic);
     menuVariant->addAction(m_actionVariantClassic2);
     menuVariant->addAction(m_actionVariantDuo);
@@ -1348,13 +1348,13 @@ void MainWindow::createMenu()
     menuGame->addSeparator();
     menuGame->addAction(m_actionSave);
     menuGame->addAction(m_actionSaveAs);
-    QMenu* menuExport = menuGame->addMenu(tr("E&xport"));
+    auto menuExport = menuGame->addMenu(tr("E&xport"));
     menuExport->addAction(m_actionExportImage);
     menuExport->addAction(m_actionExportAsciiArt);
     menuGame->addSeparator();
     menuGame->addAction(m_actionQuit);
 
-    QMenu* menuGo = menuBar()->addMenu(tr("G&o"));
+    auto menuGo = menuBar()->addMenu(tr("G&o"));
     menuGo->addAction(m_actionBeginning);
     menuGo->addAction(m_actionBackward10);
     menuGo->addAction(m_actionBackward);
@@ -1370,7 +1370,7 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionBeginningOfBranch);
     menuGo->addAction(m_actionFindNextComment);
 
-    QMenu* menuEdit = menuBar()->addMenu(tr("&Edit"));
+    auto menuEdit = menuBar()->addMenu(tr("&Edit"));
     m_menuMoveAnnotation = menuEdit->addMenu(tr("&Move Annotation"));
     m_menuMoveAnnotation->addAction(m_actionGoodMove);
     m_menuMoveAnnotation->addAction(m_actionVeryGoodMove);
@@ -1393,7 +1393,7 @@ void MainWindow::createMenu()
     menuEdit->addAction(m_actionSetupMode);
     menuEdit->addAction(m_actionSelectNextColor);
 
-    QMenu* menuView = menuBar()->addMenu(tr("&View"));
+    auto menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
     m_menuToolBarText = menuView->addMenu(tr("Toolbar T&ext"));
     m_menuToolBarText->addAction(m_actionToolBarNoText);
@@ -1403,7 +1403,7 @@ void MainWindow::createMenu()
     m_menuToolBarText->addAction(m_actionToolBarTextSystem);
     menuView->addAction(m_actionShowComment);
     menuView->addSeparator();
-    QMenu* menuMoveNumbers = menuView->addMenu(tr("&Move Numbers"));
+    auto menuMoveNumbers = menuView->addMenu(tr("&Move Numbers"));
     menuMoveNumbers->addAction(m_actionMoveNumbersLast);
     menuMoveNumbers->addAction(m_actionMoveNumbersAll);
     menuMoveNumbers->addAction(m_actionMoveNumbersNone);
@@ -1412,28 +1412,28 @@ void MainWindow::createMenu()
     menuView->addSeparator();
     menuView->addAction(m_actionFullscreen);
 
-    QMenu* menuComputer = menuBar()->addMenu(tr("&Computer"));
+    auto menuComputer = menuBar()->addMenu(tr("&Computer"));
     menuComputer->addAction(m_actionPlay);
     menuComputer->addAction(m_actionPlaySingleMove);
     menuComputer->addAction(m_actionInterrupt);
     menuComputer->addSeparator();
-    QMenu* menuLevel = menuComputer->addMenu(tr("&Level"));
+    auto menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
         menuLevel->addAction(m_actionLevel[i]);
 
-    QMenu* menuTools = menuBar()->addMenu(tr("&Tools"));
+    auto menuTools = menuBar()->addMenu(tr("&Tools"));
     menuTools->addAction(m_actionShowRating);
     menuTools->addAction(m_actionAnalyzeGame);
 
-    QMenu* menuHelp = menuBar()->addMenu(tr("&Help"));
+    auto menuHelp = menuBar()->addMenu(tr("&Help"));
     menuHelp->addAction(m_actionHelp);
     menuHelp->addAction(m_actionAbout);
 }
 
 QLayout* MainWindow::createOrientationButtonBoxLeft()
 {
-    QVBoxLayout* outerLayout = new QVBoxLayout();
-    QGridLayout* layout = new QGridLayout();
+    auto outerLayout = new QVBoxLayout();
+    auto layout = new QGridLayout();
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceAnticlockwise),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceClockwise),
@@ -1450,8 +1450,8 @@ QLayout* MainWindow::createOrientationButtonBoxLeft()
 
 QLayout* MainWindow::createOrientationButtonBoxRight()
 {
-    QVBoxLayout* outerLayout = new QVBoxLayout();
-    QGridLayout* layout = new QGridLayout();
+    auto outerLayout = new QVBoxLayout();
+    auto layout = new QGridLayout();
     layout->addWidget(createOBoxToolButton(m_actionPreviousPiece),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionNextPiece),
@@ -1466,7 +1466,7 @@ QLayout* MainWindow::createOrientationButtonBoxRight()
 
 QLayout* MainWindow::createOrientationSelector()
 {
-    QHBoxLayout* layout = new QHBoxLayout();
+    auto layout = new QHBoxLayout();
     layout->addStretch();
     layout->addLayout(createOrientationButtonBoxLeft());
     layout->addSpacing(8);
@@ -1484,11 +1484,11 @@ QLayout* MainWindow::createOrientationSelector()
 
 QLayout* MainWindow::createRightPanel()
 {
-    QBoxLayout* layout = new QBoxLayout(QBoxLayout::TopToBottom);
+    auto layout = new QBoxLayout(QBoxLayout::TopToBottom);
     layout->addLayout(createOrientationSelector(), 20);
     m_scoreDisplay = new ScoreDisplay();
     layout->addWidget(m_scoreDisplay, 5);
-    SameHeightLayout* pieceSelectorLayout = new SameHeightLayout();
+    auto pieceSelectorLayout = new SameHeightLayout();
     layout->addLayout(pieceSelectorLayout, 80);
     for (ColorIterator i(Color::range); i; ++i)
     {
@@ -1507,9 +1507,9 @@ void MainWindow::deleteAllVariations()
     initQuestion(msgBox, tr("Delete all variations?"),
                  tr("All variations but the main variation will be"
                     " removed from the game tree."));
-    QPushButton* deleteButton =
+    auto deleteButton =
         msgBox.addButton(tr("Delete Variations"), QMessageBox::DestructiveRole);
-    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
     msgBox.setDefaultButton(cancelButton);
     msgBox.exec();
     if (msgBox.clickedButton() != deleteButton)
@@ -1550,7 +1550,7 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionPreviousVariation);
     addToolBar(m_toolBar);
     QSettings settings;
-    QString toolBarText = settings.value("toolbar_text", "system").toString();
+    auto toolBarText = settings.value("toolbar_text", "system").toString();
     if (toolBarText == "no_text")
     {
         m_toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
@@ -1617,7 +1617,7 @@ void MainWindow::exportAsciiArt()
     if (file.isEmpty())
         return;
     ofstream out(file.toLocal8Bit().constData());
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     bd.write(out, false);
     if (! out)
         showError(strerror(errno));
@@ -1631,7 +1631,7 @@ void MainWindow::exportImage()
 
 void MainWindow::findMove()
 {
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     if (bd.is_game_over())
         return;
     if (m_legalMoves->empty())
@@ -1648,7 +1648,7 @@ void MainWindow::findMove()
     }
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
-    Move mv = (*m_legalMoves)[m_legalMoveIndex];
+    auto mv = (*m_legalMoves)[m_legalMoveIndex];
     selectPiece(m_currentColor, bd.get_move_info(mv).get_piece());
     m_guiBoard->showMove(m_currentColor, mv);
     ++m_legalMoveIndex;
@@ -1656,15 +1656,15 @@ void MainWindow::findMove()
 
 void MainWindow::findNextComment()
 {
-    const Node& root = m_game->get_root();
-    const Node& current = m_game->get_current();
-    const Node* node = find_next_comment(current);
+    auto& root = m_game->get_root();
+    auto& current = m_game->get_current();
+    auto node = find_next_comment(current);
     if (node == 0 && &current != &root)
     {
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The end of the tree was reached."),
                      tr("Continue the search from the start of the tree?"));
-        QPushButton* continueButton =
+        auto continueButton =
             msgBox.addButton(tr("Continue From Start"),
                              QMessageBox::AcceptRole);
         msgBox.addButton(QMessageBox::Cancel);
@@ -1693,8 +1693,8 @@ void MainWindow::flipPieceHorizontally()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    const Board& bd = getBoard();
-    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    auto& bd = getBoard();
+    auto transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_mirrored_horizontally(transform);
     transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
@@ -1706,8 +1706,8 @@ void MainWindow::flipPieceVertically()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
-    const Board& bd = getBoard();
+    auto transform = m_guiBoard->getSelectedPieceTransform();
+    auto& bd = getBoard();
     transform = bd.get_transforms().get_mirrored_vertically(transform);
     transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
@@ -1716,7 +1716,7 @@ void MainWindow::flipPieceVertically()
 
 void MainWindow::forward()
 {
-    const Node* node = m_game->get_current().get_first_child_or_null();
+    auto node = m_game->get_current().get_first_child_or_null();
     if (node == 0)
         return;
     gotoNode(*node);
@@ -1724,14 +1724,14 @@ void MainWindow::forward()
 
 void MainWindow::forward10()
 {
-    const Tree& tree = m_game->get_tree();
-    const Node* node = &m_game->get_current();
+    auto& tree = m_game->get_tree();
+    auto node = &m_game->get_current();
     unsigned n = 0;
     while (n < 10)
     {
         if (tree.has_move(*node))
             ++n;
-        const Node* child = node->get_first_child_or_null();
+        auto child = node->get_first_child_or_null();
         if (child == 0)
             break;
         node = child;
@@ -1767,8 +1767,8 @@ void MainWindow::gameInfo()
 
 void MainWindow::gameOver()
 {
-    Variant variant = getVariant();
-    const Board& bd = getBoard();
+    auto variant = getVariant();
+    auto& bd = getBoard();
     QString info;
     if (variant == Variant::duo || variant == Variant::junior)
     {
@@ -1948,7 +1948,7 @@ void MainWindow::genMove(bool playSingleMove)
                           m_genMoveId, playSingleMove);
     m_genMoveWatcher.setFuture(future);
     m_isGenMoveRunning = true;
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     unsigned nuMoves = bd.get_nu_moves();
     if (m_lastComputerMovesBegin == 0 && ! computerPlaysAll())
     {
@@ -1971,13 +1971,13 @@ void MainWindow::genMoveFinished()
     if (get_abort() && computerPlaysAll())
         m_computerColors.fill(false);
     Color c = result.color;
-    Move mv = result.move;
+    auto mv = result.move;
     if (mv.is_null())
     {
         showError(tr("Computer failed to generate a move."));
         return;
     }
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     if (! bd.is_legal(c, mv))
     {
         showError(tr("Computer generated illegal move: %1")
@@ -2004,7 +2004,7 @@ QString MainWindow::getFilter() const
 QString MainWindow::getLastDir()
 {
     QSettings settings;
-    QString dir = settings.value("last_dir", "").toString();
+    auto dir = settings.value("last_dir", "").toString();
     if (dir.isEmpty() || ! QFileInfo(dir).exists())
         dir = QDesktopServices::storageLocation(
                                           QDesktopServices::DocumentsLocation);
@@ -2034,8 +2034,8 @@ void MainWindow::gotoMove()
 {
     QSettings settings;
     vector<const Node*> nodes;
-    const Tree& tree = m_game->get_tree();
-    const Node* node = &m_game->get_current();
+    auto& tree = m_game->get_tree();
+    auto node = &m_game->get_current();
     do
     {
         if (! tree.get_move(*node).is_null())
@@ -2057,9 +2057,8 @@ void MainWindow::gotoMove()
     if (defaultValue == 0)
         defaultValue = maxMoves;
     QInputDialog dialog(this);
-    Qt::WindowFlags windowFlags = dialog.windowFlags();
-    windowFlags &= ~Qt::WindowContextHelpButtonHint;
-    dialog.setWindowFlags(windowFlags);
+    dialog.setWindowFlags(dialog.windowFlags()
+                          & ~Qt::WindowContextHelpButtonHint);
     dialog.setWindowTitle(tr("Go to Move"));
     dialog.setLabelText(tr("Move number:"));
     dialog.setInputMode(QInputDialog::IntInput);
@@ -2098,8 +2097,8 @@ void MainWindow::gotoPosition(Variant variant,
 {
     if (getVariant() != variant)
         return;
-    const Tree& tree = m_game->get_tree();
-    const Node* node = &tree.get_root();
+    auto& tree = m_game->get_tree();
+    auto node = &tree.get_root();
     if (tree.has_move_ignore_invalid(*node))
         // Move in root node not supported.
         return;
@@ -2154,7 +2153,7 @@ void MainWindow::initGame()
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
     {
-        Variant variant = getVariant();
+        auto variant = getVariant();
         if (variant == Variant::duo
             || variant == Variant::junior)
             m_computerColors[Color(1)] = true;
@@ -2206,7 +2205,7 @@ void MainWindow::initVariantActions()
 
 void MainWindow::initPieceSelectors()
 {
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     for (unsigned i = 0; i < Color::range; ++i)
     {
         bool isVisible = (i < bd.get_nu_colors());
@@ -2236,10 +2235,10 @@ void MainWindow::keepOnlyPosition()
     initQuestion(msgBox, tr("Keep only position?"),
                  tr("All previous and following moves and variations will"
                     " be removed from the game tree."));
-    QPushButton* keepOnlyPositionButton =
+    auto keepOnlyPositionButton =
         msgBox.addButton(tr("Keep Only Position"),
                          QMessageBox::DestructiveRole);
-    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
     msgBox.setDefaultButton(cancelButton);
     msgBox.exec();
     if (msgBox.clickedButton() != keepOnlyPositionButton)
@@ -2255,10 +2254,10 @@ void MainWindow::keepOnlySubtree()
     initQuestion(msgBox, tr("Keep only subtree?"),
                  tr("All previous moves and variations will be removed"
                     " from the game tree."));
-    QPushButton* keepOnlySubtreeButton =
+    auto keepOnlySubtreeButton =
         msgBox.addButton(tr("Keep Only Subtree"),
                          QMessageBox::DestructiveRole);
-    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
     msgBox.setDefaultButton(cancelButton);
     msgBox.exec();
     if (msgBox.clickedButton() != keepOnlySubtreeButton)
@@ -2273,7 +2272,7 @@ void MainWindow::leaveFullscreen()
     if (! isFullScreen())
         return;
     QSettings settings;
-    bool showToolbar = settings.value("toolbar", true).toBool();
+    auto showToolbar = settings.value("toolbar", true).toBool();
     menuBar()->show();
     m_toolBar->setVisible(showToolbar);
     m_leaveFullscreenButton->hideButton();
@@ -2289,7 +2288,7 @@ void MainWindow::leaveSetupMode()
 
 void MainWindow::loadHistory()
 {
-    Variant variant = m_game->get_variant();
+    auto variant = m_game->get_variant();
     if (m_history->getVariant() == variant)
         return;
     m_history->load(variant);
@@ -2317,7 +2316,7 @@ void MainWindow::moveUpVariation()
 
 void MainWindow::nextPiece()
 {
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     const Board::PiecesLeftList& piecesLeft =
         bd.get_pieces_left(m_currentColor);
     unsigned nuPiecesLeft = piecesLeft.size();
@@ -2346,7 +2345,7 @@ void MainWindow::nextTransform()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    auto transform = m_guiBoard->getSelectedPieceTransform();
     transform = getBoard().get_piece_info(piece).get_next_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
@@ -2354,7 +2353,7 @@ void MainWindow::nextTransform()
 
 void MainWindow::nextVariation()
 {
-    const Node* node = m_game->get_current().get_sibling();
+    auto node = m_game->get_current().get_sibling();
     if (node == 0)
         return;
     gotoNode(*node);
@@ -2362,7 +2361,7 @@ void MainWindow::nextVariation()
 
 void MainWindow::nextVariation10()
 {
-    const Node* node = &m_game->get_current();
+    auto node = &m_game->get_current();
     for (unsigned i = 0; i < 10; ++i)
     {
         if (node->get_sibling() == 0)
@@ -2393,19 +2392,19 @@ void MainWindow::newRatedGame()
                     " Pentobi level&nbsp;%2.")
                  .arg(getPlayerString(getVariant(), m_ratedGameColor))
                  .arg(level));
-    QPushButton* startGameButton =
+    auto startGameButton =
         msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
     msgBox.addButton(QMessageBox::Cancel);
     msgBox.setDefaultButton(startGameButton);
     msgBox.exec();
-    QAbstractButton* result = msgBox.clickedButton();
+    auto result = msgBox.clickedButton();
     if (result != startGameButton)
         return;
     setLevel(level);
     initGame();
     setFile("");
     setRated(true);
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     m_computerColors.fill(true);
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
         if (bd.is_same_player(*i, m_ratedGameColor))
@@ -2503,7 +2502,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     setRated(false);
     try
     {
-        unique_ptr<Node> tree = reader.get_tree_transfer_ownership();
+        auto tree = reader.get_tree_transfer_ownership();
         m_game->init(tree);
         if (! libpentobi_base::node_util::has_setup(m_game->get_root()))
             m_game->goto_node(get_last_node(m_game->get_root()));
@@ -2526,7 +2525,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
 
 void MainWindow::openRecentFile()
 {
-     QAction* action = qobject_cast<QAction*>(sender());
+     auto action = qobject_cast<QAction*>(sender());
      if (action == 0)
          return;
      if (! checkSave())
@@ -2567,7 +2566,7 @@ void MainWindow::play()
 {
     cancelThread();
     leaveSetupMode();
-    Variant variant = getVariant();
+    auto variant = getVariant();
     if (variant != Variant::classic && variant != Variant::trigon
          && variant != Variant::trigon_3)
     {
@@ -2596,7 +2595,7 @@ void MainWindow::play()
 
 void MainWindow::play(Color c, Move mv)
 {
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     m_game->play(c, mv, false);
     c = m_game->get_to_play();
     m_gameFinished = false;
@@ -2625,7 +2624,7 @@ void MainWindow::pointClicked(Point p)
 {
     if (! m_actionSetupMode->isChecked())
         return;
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     PointState s = bd.get_point_state(p);
     if (s.is_empty())
         return;
@@ -2636,8 +2635,8 @@ void MainWindow::pointClicked(Point p)
 
 void MainWindow::previousPiece()
 {
-    const Board& bd = getBoard();
-    const Board::PiecesLeftList& piecesLeft = bd.get_pieces_left(m_currentColor);
+    auto& bd = getBoard();
+    auto& piecesLeft = bd.get_pieces_left(m_currentColor);
     unsigned nuPiecesLeft = piecesLeft.size();
     if (nuPiecesLeft == 0)
         return;
@@ -2664,7 +2663,7 @@ void MainWindow::previousTransform()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    auto transform = m_guiBoard->getSelectedPieceTransform();
     transform =
         getBoard().get_piece_info(piece).get_previous_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
@@ -2673,7 +2672,7 @@ void MainWindow::previousTransform()
 
 void MainWindow::previousVariation()
 {
-    const Node* node = m_game->get_current().get_previous_sibling();
+    auto node = m_game->get_current().get_previous_sibling();
     if (node == 0)
         return;
     gotoNode(*node);
@@ -2681,7 +2680,7 @@ void MainWindow::previousVariation()
 
 void MainWindow::previousVariation10()
 {
-    const Node* node = &m_game->get_current();
+    auto node = &m_game->get_current();
     for (unsigned i = 0; i < 10; ++i)
     {
         if (node->get_previous_sibling() == 0)
@@ -2714,7 +2713,7 @@ void MainWindow::rememberFile(const QString& file)
         canonicalFile = canonicalFilePath;
     QFileInfo info(canonicalFile);
     QSettings settings;
-    QStringList files = settings.value("recent_files").toStringList();
+    auto files = settings.value("recent_files").toStringList();
     files.removeAll(canonicalFile);
     files.prepend(canonicalFile);
     while (files.size() > maxRecentFiles)
@@ -2729,8 +2728,8 @@ void MainWindow::rotatePieceAnticlockwise()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    const Board& bd = getBoard();
-    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    auto& bd = getBoard();
+    auto transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_rotated_anticlockwise(transform);
     transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
@@ -2743,8 +2742,8 @@ void MainWindow::rotatePieceClockwise()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    const Board& bd = getBoard();
-    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    auto& bd = getBoard();
+    auto transform = m_guiBoard->getSelectedPieceTransform();
     transform = bd.get_transforms().get_rotated_clockwise(transform);
     transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
@@ -2851,7 +2850,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
 void MainWindow::selectNamedPiece(const char* name1, const char* name2,
                                   const char* name3, const char* name4)
 {
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     vector<Piece> pieces;
     Piece piece;
     if (bd.get_piece_by_name(name1, piece)
@@ -2890,7 +2889,7 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
 
 void MainWindow::selectNextColor()
 {
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     m_currentColor = bd.get_next(m_currentColor);
     m_orientationDisplay->selectColor(m_currentColor);
     clearSelectedPiece();
@@ -3110,7 +3109,7 @@ void MainWindow::setMoveNumbersNone(bool checked)
 void MainWindow::setPlayToolTip()
 {
     QString s;
-    Variant variant = getVariant();
+    auto variant = getVariant();
     Color c = m_currentColor;
     bool isComputerColor = m_computerColors[m_currentColor];
     if (variant == Variant::classic_2 || variant == Variant::trigon_2)
@@ -3338,7 +3337,7 @@ void MainWindow::toolBarTextSystem(bool checked)
 
 void MainWindow::truncate()
 {
-    const Node& current = m_game->get_current();
+    auto& current = m_game->get_current();
     if (! current.has_parent())
         return;
     cancelThread();
@@ -3348,10 +3347,10 @@ void MainWindow::truncate()
         initQuestion(msgBox, tr("Truncate this subtree?"),
                      tr("This position and all following moves and"
                         " variations will be removed from the game tree."));
-        QPushButton* truncateButton =
+        auto truncateButton =
             msgBox.addButton(tr("Truncate"),
                              QMessageBox::DestructiveRole);
-        QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+        auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
         msgBox.setDefaultButton(cancelButton);
         msgBox.exec();
         if (msgBox.clickedButton() != truncateButton)
@@ -3371,10 +3370,10 @@ void MainWindow::truncateChildren()
     initQuestion(msgBox, tr("Truncate children?"),
                  tr("All following moves and variations will"
                     " be removed from the game tree."));
-    QPushButton* truncateButton =
+    auto truncateButton =
         msgBox.addButton(tr("Truncate Children"),
                          QMessageBox::DestructiveRole);
-    QPushButton* cancelButton = msgBox.addButton(QMessageBox::Cancel);
+    auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
     msgBox.setDefaultButton(cancelButton);
     msgBox.exec();
     if (msgBox.clickedButton() != truncateButton)
@@ -3394,7 +3393,7 @@ void MainWindow::showVariations(bool checked)
 
 void MainWindow::undo()
 {
-    const Node& current = m_game->get_current();
+    auto& current = m_game->get_current();
     if (current.has_children()
         || ! m_game->get_tree().has_move_ignore_invalid(current))
         return;
@@ -3418,7 +3417,7 @@ void MainWindow::updateFlipActions()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    const Transform* transform = m_guiBoard->getSelectedPieceTransform();
+    auto transform = m_guiBoard->getSelectedPieceTransform();
     bool can_flip_horizontally =
         getBoard().get_piece_info(piece).can_flip_horizontally(transform);
     m_actionFlipPieceHorizontally->setEnabled(can_flip_horizontally);
@@ -3472,8 +3471,8 @@ void MainWindow::updateMoveAnnotationActions()
 
 void MainWindow::updateMoveNumber()
 {
-    const Tree& tree = m_game->get_tree();
-    const Node& current = m_game->get_current();
+    auto& tree = m_game->get_tree();
+    auto& current = m_game->get_current();
     unsigned move = get_move_number(tree, current);
     unsigned movesLeft = get_moves_left(tree, current);
     unsigned totalMoves = move + movesLeft;
@@ -3530,7 +3529,7 @@ void MainWindow::updateMoveNumber()
 void MainWindow::updateRecentFiles()
 {
     QSettings settings;
-    QStringList files = settings.value("recent_files").toStringList();
+    auto files = settings.value("recent_files").toStringList();
     for (int i = 0; i < files.size(); ++i)
         if (! QFileInfo(files[i]).exists())
         {
@@ -3569,11 +3568,11 @@ void MainWindow::updateRecentFiles()
 
 void MainWindow::updateWindow(bool currentNodeChanged)
 {
-    const Board& bd = getBoard();
+    auto& bd = getBoard();
     updateWindowModified();
     m_guiBoard->copyFromBoard(bd);
     QSettings settings;
-    bool markVariations = settings.value("show_variations", true).toBool();
+    auto markVariations = settings.value("show_variations", true).toBool();
     unsigned nuMoves = bd.get_nu_moves();
     unsigned markMovesBegin = 0;
     unsigned markMovesEnd = 0;
@@ -3617,8 +3616,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     }
     updateMoveNumber();
     setPlayToolTip();
-    const Tree& tree = m_game->get_tree();
-    const Node& current = m_game->get_current();
+    auto& tree = m_game->get_tree();
+    auto& current = m_game->get_current();
     bool isMain = is_main_variation(current);
     bool hasEarlierVariation = has_earlier_variation(current);
     bool hasParent = current.has_parent();
