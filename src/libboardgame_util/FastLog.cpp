@@ -17,8 +17,7 @@ using namespace std;
 
 //----------------------------------------------------------------------------
 
-static_assert(numeric_limits<float>::is_iec559,
-              "libboardgame_util::FastLog requires IEEE 754 float format");
+static_assert(numeric_limits<float>::is_iec559, "");
 
 FastLog::FastLog(int mantissa_bits)
     : m_mantissa_bits_diff(max_mantissa_bits - mantissa_bits),

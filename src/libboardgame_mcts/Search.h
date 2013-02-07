@@ -670,8 +670,7 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
       m_assertion_handler(*this),
       m_tree(m_max_nodes, m_nu_threads)
 {
-    static_assert(numeric_limits<Float>::radix == 2,
-                  "libboardgame_mcts::Float must have radix 2");
+    static_assert(numeric_limits<Float>::radix == 2, "");
     m_max_float_count = (size_t(1) << numeric_limits<Float>::digits) - 1;
 }
 

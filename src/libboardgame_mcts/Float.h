@@ -30,8 +30,7 @@ typedef LIBBOARDGAME_MCTS_FLOAT_TYPE Float;
 typedef float Float;
 #endif
 
-static_assert(! numeric_limits<Float>::is_exact,
-              "libboardgame_mcts::Float is not a floating type");
+static_assert(! numeric_limits<Float>::is_exact, "");
 
 //-----------------------------------------------------------------------------
 
