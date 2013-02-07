@@ -335,6 +335,8 @@ protected:
     struct Simulation
     {
         vector<const Node*> nodes;
+
+        array<Float, max_players> eval;
     };
 
     virtual void on_start_search();
@@ -555,18 +557,14 @@ private:
 
     const Node* select_child(const Node& node);
 
-    void update_last_good_reply(ThreadState& thread_state,
-                                const array<Float,max_players>& eval);
+    void update_last_good_reply(ThreadState& thread_state);
 
-    void update_rave_values(ThreadState& thread_state,
-                            const array<Float,max_players>& eval);
+    void update_rave_values(ThreadState& thread_state);
 
-    void update_rave_values(ThreadState& thread_state,
-                            const array<Float,max_players>&, unsigned i,
+    void update_rave_values(ThreadState& thread_state, unsigned i,
                             PlayerInt player);
 
-    void update_values(ThreadState& thread_state,
-                       const array<Float,max_players>& eval);
+    void update_values(ThreadState& thread_state);
 };
 
 
@@ -1301,27 +1299,27 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
             break;
         }
         ++thread_state.nu_simulations;
-        thread_state.simulation.nodes.clear();
+        auto& simulation = thread_state.simulation;
+        simulation.nodes.clear();
         state.start_simulation(nu_simulations);
         bool is_terminal;
         play_in_tree(thread_state, is_terminal);
         if (thread_state.is_out_of_mem)
             return;
         thread_state.stat_in_tree_len.add(double(state.get_nu_moves()));
-        array<Float,max_players> eval;
         if (! is_terminal)
         {
             playout(thread_state);
-            eval = state.evaluate_playout();
+            simulation.eval = state.evaluate_playout();
         }
         else
-            eval = state.evaluate_terminal();
+            simulation.eval = state.evaluate_terminal();
         thread_state.stat_len.add(double(state.get_nu_moves()));
-        update_values(thread_state, eval);
+        update_values(thread_state);
         if (SearchParamConst::rave)
-            update_rave_values(thread_state, eval);
+            update_rave_values(thread_state);
         if (SearchParamConst::use_last_good_reply)
-            update_last_good_reply(thread_state, eval);
+            update_last_good_reply(thread_state);
         on_search_iteration(nu_simulations, *thread_state.state,
                             thread_state.simulation);
     }
@@ -1476,10 +1474,10 @@ void Search<S, M, R>::set_tree_memory(size_t memory)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::update_last_good_reply(ThreadState& thread_state,
-                                           const array<Float,max_players>& eval)
+void Search<S, M, R>::update_last_good_reply(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
+    const auto& eval = thread_state.simulation.eval;
     auto max_eval = eval[0];
     for (PlayerInt i = 1; i < m_nu_players; ++i)
         max_eval = max(eval[i], max_eval);
@@ -1520,8 +1518,7 @@ void Search<S, M, R>::update_last_good_reply(ThreadState& thread_state,
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
-                                         const array<Float,max_players>& eval)
+void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
     unsigned nu_moves = state.get_nu_moves();
@@ -1550,7 +1547,7 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
             was_played[mv.player].set(mv.move);
             first_play[mv.player][mv.move.to_int()] = i;
         }
-        update_rave_values(thread_state, eval, i, mv.player);
+        update_rave_values(thread_state, i, mv.player);
         if (i == 0)
             break;
         --i;
@@ -1565,7 +1562,6 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
 
 template<class S, class M, class R>
 void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
-                                         const array<Float,max_players>& eval,
                                          unsigned i, PlayerInt player)
 {
     auto& nodes = thread_state.simulation.nodes;
@@ -1611,16 +1607,16 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
             // scaling to [2..1] could not be optimal for different games and
             // should be made configurable in the future
             weight *= 2 - Float(first - i) * dist_weight_factor;
-        m_tree.add_value(*it, eval[player], weight);
+        m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
     }
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::update_values(ThreadState& thread_state,
-                                    const array<Float,max_players>& eval)
+void Search<S, M, R>::update_values(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
     auto& nodes = thread_state.simulation.nodes;
+    const auto& eval = thread_state.simulation.eval;
     m_tree.add_value(m_tree.get_root(), eval[m_player]);
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
     for (unsigned i = 1; i < nu_nodes; ++i)
