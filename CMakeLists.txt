@@ -68,8 +68,8 @@ if(MINGW AND Boost_USE_STATIC_LIBS)
   add_definitions(-DBOOST_THREAD_USE_LIB)
 endif()
 
-if(NOT DEFINED LIBBOARDGAME_MCTS_FLOAT_TYPE)
-  set(LIBBOARDGAME_MCTS_FLOAT_TYPE float)
+if(NOT DEFINED LIBPENTOBI_MCTS_FLOAT_TYPE)
+  set(LIBPENTOBI_MCTS_FLOAT_TYPE float)
 endif()
 
 # Don't set the Pentobi data dirs on Windows. This is currently needed for

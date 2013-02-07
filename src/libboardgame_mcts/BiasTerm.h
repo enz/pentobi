@@ -6,7 +6,6 @@
 #define LIBBOARDGAME_MCTS_BIAS_TERM_H
 
 #include <cmath>
-#include "Float.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/FastLog.h"
 
@@ -19,9 +18,12 @@ using libboardgame_util::FastLog;
 
 /** Computes the UCT bias term.
     Uses a lookup table for small counts. */
+template<typename F>
 class BiasTerm
 {
 public:
+    typedef F Float;
+
     BiasTerm(Float bias_term_constant);
 
     void set_bias_term_constant(Float value);
@@ -51,7 +53,15 @@ private:
     Float compute_child_part(Float child_count) const;
 };
 
-inline Float BiasTerm::get(Float child_count) const
+template<typename F>
+BiasTerm<F>::BiasTerm(Float bias_term_constant)
+    : m_fast_log(10)
+{
+    set_bias_term_constant(bias_term_constant);
+}
+
+template<typename F>
+inline auto BiasTerm<F>::get(Float child_count) const -> Float
 {
     LIBBOARDGAME_ASSERT(child_count >= 0);
     Float child_part;
@@ -62,24 +72,39 @@ inline Float BiasTerm::get(Float child_count) const
     return m_parent_part * child_part;
 }
 
-inline Float BiasTerm::compute_child_part(Float child_count) const
+template<typename F>
+inline auto BiasTerm<F>::compute_child_part(Float child_count) const -> Float
 {
     return sqrt(1 / max(child_count, Float(1)));
 }
 
-inline Float BiasTerm::compute_parent_part(Float parent_count) const
+template<typename F>
+inline auto BiasTerm<F>::compute_parent_part(Float parent_count) const -> Float
 {
     if (m_bias_term_constant == 0 || parent_count == 0)
         return 0;
     return m_bias_term_constant * sqrt(m_fast_log.get_log(float(parent_count)));
 }
 
-inline Float BiasTerm::get_bias_term_constant() const
+template<typename F>
+inline auto BiasTerm<F>::get_bias_term_constant() const -> Float
 {
     return m_bias_term_constant;
 }
 
-inline void BiasTerm::start_iteration(Float parent_count)
+template<typename F>
+void BiasTerm<F>::set_bias_term_constant(Float value)
+{
+    m_bias_term_constant = value;
+    for (unsigned i = 0; i < nu_precomp; ++i)
+    {
+        m_precomp_parent_part[i] = compute_parent_part(static_cast<Float>(i));
+        m_precomp_child_part[i] = compute_child_part(static_cast<Float>(i));
+    }
+}
+
+template<typename F>
+inline void BiasTerm<F>::start_iteration(Float parent_count)
 {
     LIBBOARDGAME_ASSERT(parent_count >= 0);
     if (parent_count < nu_precomp)

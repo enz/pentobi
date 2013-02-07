@@ -8,7 +8,6 @@
 #include <atomic>
 #include <limits>
 #include <cstdint>
-#include "Float.h"
 #include "libboardgame_util/Assert.h"
 
 namespace libboardgame_mcts {
@@ -24,11 +23,13 @@ typedef uint_least32_t NodeIndex;
 /** Node in a MCTS tree.
     For details about how the nodes are used in lock-free multi-threaded mode,
     see @ref libboardgame_doc_enz_2009. */
-template<typename M>
+template<typename M, typename F>
 class Node
 {
 public:
     typedef M Move;
+
+    typedef F Float;
 
     Node();
 
@@ -112,13 +113,13 @@ private:
     Node& operator=(const Node&);
 };
 
-template<typename M>
-inline Node<M>::Node()
+template<typename M, typename F>
+inline Node<M, F>::Node()
 {
 }
 
-template<typename M>
-void Node<M>::add_value(Float v)
+template<typename M, typename F>
+void Node<M, F>::add_value(Float v)
 {
     // Intentionally uses no synchronization and does not care about
     // lost updates in multi-threaded mode
@@ -130,8 +131,8 @@ void Node<M>::add_value(Float v)
     m_value_count.store(count, memory_order_relaxed);
 }
 
-template<typename M>
-void Node<M>::add_value(Float v, Float weight)
+template<typename M, typename F>
+void Node<M, F>::add_value(Float v, Float weight)
 {
     // Intentionally uses no synchronization and does not care about
     // lost updates in multi-threaded mode
@@ -143,8 +144,8 @@ void Node<M>::add_value(Float v, Float weight)
     m_value_count.store(count, memory_order_relaxed);
 }
 
-template<typename M>
-void Node<M>::copy_data_from(const Node& node)
+template<typename M, typename F>
+void Node<M, F>::copy_data_from(const Node& node)
 {
     // Reminder to update this function when the class gets additional members
     struct Dummy
@@ -164,51 +165,51 @@ void Node<M>::copy_data_from(const Node& node)
     m_visit_count.store(node.m_visit_count);
 }
 
-template<typename M>
-inline Float Node<M>::get_value_count() const
+template<typename M, typename F>
+inline auto Node<M, F>::get_value_count() const -> Float
 {
     return m_value_count.load(memory_order_relaxed);
 }
 
-template<typename M>
-inline NodeIndex Node<M>::get_first_child() const
+template<typename M, typename F>
+inline NodeIndex Node<M, F>::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
     return m_first_child;
 }
 
-template<typename M>
-inline const typename Node<M>::Move& Node<M>::get_move() const
+template<typename M, typename F>
+inline auto Node<M, F>::get_move() const -> const Move&
 {
     return m_move;
 }
 
-template<typename M>
-inline unsigned Node<M>::get_nu_children() const
+template<typename M, typename F>
+inline unsigned Node<M, F>::get_nu_children() const
 {
     return m_nu_children.load(memory_order_acquire);
 }
 
-template<typename M>
-inline Float Node<M>::get_value() const
+template<typename M, typename F>
+inline auto Node<M, F>::get_value() const -> Float
 {
     return m_value.load(memory_order_relaxed);
 }
 
-template<typename M>
-inline Float Node<M>::get_visit_count() const
+template<typename M, typename F>
+inline auto Node<M, F>::get_visit_count() const -> Float
 {
     return m_visit_count.load(memory_order_relaxed);
 }
 
-template<typename M>
-inline bool Node<M>::has_children() const
+template<typename M, typename F>
+inline bool Node<M, F>::has_children() const
 {
     return get_nu_children() > 0;
 }
 
-template<typename M>
-inline void Node<M>::inc_visit_count()
+template<typename M, typename F>
+inline void Node<M, F>::inc_visit_count()
 {
     // We don't care about the unlikely case that updates are lost because
     // incrementing is not atomic
@@ -217,8 +218,8 @@ inline void Node<M>::inc_visit_count()
     m_visit_count.store(count, memory_order_relaxed);
 }
 
-template<typename M>
-void Node<M>::init(const Move& mv, Float value, Float count)
+template<typename M, typename F>
+void Node<M, F>::init(const Move& mv, Float value, Float count)
 {
     // The node is not yet visible to other threads because init() is called
     // before the children are linked to its parent with link_children()
@@ -232,15 +233,15 @@ void Node<M>::init(const Move& mv, Float value, Float count)
     m_nu_children.store(0, memory_order_relaxed);
 }
 
-template<typename M>
-void Node<M>::init_value(Float value, Float count)
+template<typename M, typename F>
+void Node<M, F>::init_value(Float value, Float count)
 {
     m_value_count = count;
     m_value = value;
 }
 
-template<typename M>
-inline void Node<M>::link_children(NodeIndex first_child, int nu_children)
+template<typename M, typename F>
+inline void Node<M, F>::link_children(NodeIndex first_child, int nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children <= numeric_limits<unsigned short>::max());
     // first_child cannot be 0 because 0 is always used for the root node
@@ -250,8 +251,8 @@ inline void Node<M>::link_children(NodeIndex first_child, int nu_children)
                         memory_order_release);
 }
 
-template<typename M>
-inline void Node<M>::unlink_children()
+template<typename M, typename F>
+inline void Node<M, F>::unlink_children()
 {
     m_nu_children.store(0, memory_order_release);
 }

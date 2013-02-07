@@ -13,20 +13,20 @@ namespace tree_util {
 
 //-----------------------------------------------------------------------------
 
-template<typename M>
-const Node<M>* find_child(const Tree<M>& tree, const Node<M>& node, M mv)
+template<typename N>
+const N* find_child(const Tree<N>& tree, const N& node, typename N::Move mv)
 {
-    for (ChildIterator<M> i(tree, node); i; ++i)
+    for (ChildIterator<N> i(tree, node); i; ++i)
         if (i->get_move() == mv)
             return &(*i);
     return 0;
 }
 
-template<typename M, class S>
-const Node<M>* find_node(const Tree<M>& tree, const S& sequence)
+template<typename N, class S>
+const N* find_node(const Tree<N>& tree, const S& sequence)
 {
     auto node = &tree.get_root();
-    for (M mv : sequence)
+    for (typename N::Move mv : sequence)
         if ((node = find_child(tree, *node, mv)) == 0)
             break;
     return node;

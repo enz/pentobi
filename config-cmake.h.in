@@ -11,7 +11,7 @@
 #define VERSION "@PENTOBI_VERSION@"
 
 /* Floating type for Monte-Carlo tree search values (float|double) */
-#define LIBBOARDGAME_MCTS_FLOAT_TYPE @LIBBOARDGAME_MCTS_FLOAT_TYPE@
+#define LIBPENTOBI_MCTS_FLOAT_TYPE @LIBPENTOBI_MCTS_FLOAT_TYPE@
 
 /* Directory containing opening books. */
 #cmakedefine PENTOBI_BOOKS_DIR "@PENTOBI_BOOKS_DIR@"

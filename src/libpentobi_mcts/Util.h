@@ -11,13 +11,12 @@ namespace libpentobi_mcts {
 namespace util {
 
 using namespace std;
-using libboardgame_mcts::Node;
 
 //-----------------------------------------------------------------------------
 
 /** Comparison function for sorting children of a node by count.
     Prefers nodes with higher counts. Uses the node value as a tie breaker. */
-bool compare_node(const Node<Move>* n1, const Node<Move>* n2);
+bool compare_node(const Search::Node* n1, const Search::Node* n2);
 
 /** Dump the search tree in SGF format. */
 void dump_tree(ostream& out, const Search& search);

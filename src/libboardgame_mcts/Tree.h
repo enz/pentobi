@@ -27,15 +27,17 @@ using libboardgame_util::IntervalChecker;
     so it can be used without locking in multi-threaded search. Not all
     functions are thread-safe, only the ones that are used during a search
     (e.g. expanding a node is thread-safe, but clear() is not) */
-template<typename M>
+template<typename N>
 class Tree
 {
     friend class NodeExpander;
 
 public:
-    typedef M Move;
+    typedef N Node;
 
-    typedef libboardgame_mcts::Node<M> Node;
+    typedef typename Node::Move Move;
+
+    typedef typename Node::Float Float;
 
     /** Helper class that is passed to the search state during node expansion.
         This class allows the search state to directly create children of a
@@ -184,8 +186,8 @@ private:
     Node& non_const(const Node& node) const;
 };
 
-template<typename M>
-inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
+template<typename N>
+inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
                                            const Node& node)
     : m_thread_id(thread_id),
       m_is_tree_full(false),
@@ -198,8 +200,8 @@ inline Tree<M>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
 {
 }
 
-template<typename M>
-inline void Tree<M>::NodeExpander::add_child(const Move& mv, Float value,
+template<typename N>
+inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
                                              Float count)
 {
     LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<int>::max());
@@ -217,8 +219,8 @@ inline void Tree<M>::NodeExpander::add_child(const Move& mv, Float value,
     }
 }
 
-template<typename M>
-inline const Node<M>* Tree<M>::NodeExpander::get_best_child() const
+template<typename N>
+inline auto Tree<N>::NodeExpander::get_best_child() const -> const Node*
 {
     if (m_nu_children > 0)
         return m_best_child;
@@ -226,51 +228,51 @@ inline const Node<M>* Tree<M>::NodeExpander::get_best_child() const
         return 0;
 }
 
-template<typename M>
-inline const Node<M>& Tree<M>::get_node(NodeIndex i) const
+template<typename N>
+inline auto Tree<N>::get_node(NodeIndex i) const -> const Node&
 {
     return m_nodes[i];
 }
 
-template<typename M>
-inline bool Tree<M>::NodeExpander::is_tree_full() const
+template<typename N>
+inline bool Tree<N>::NodeExpander::is_tree_full() const
 {
     return m_is_tree_full;
 }
 
-template<typename M>
-inline void Tree<M>::NodeExpander::link_children()
+template<typename N>
+inline void Tree<N>::NodeExpander::link_children()
 {
     if (m_nu_children > 0)
         m_tree.link_children(m_node, m_first_child, m_nu_children);
 }
 
-template<typename M>
-Tree<M>::Tree(size_t max_nodes, unsigned nu_threads)
+template<typename N>
+Tree<N>::Tree(size_t max_nodes, unsigned nu_threads)
     : m_nu_threads(nu_threads)
 {
     set_max_nodes(max_nodes);
 }
 
-template<typename M>
-Tree<M>::~Tree() throw()
+template<typename N>
+Tree<N>::~Tree() throw()
 {
 }
 
-template<typename M>
-inline void Tree<M>::add_value(const Node& node, Float v)
+template<typename N>
+inline void Tree<N>::add_value(const Node& node, Float v)
 {
     non_const(node).add_value(v);
 }
 
-template<typename M>
-inline void Tree<M>::add_value(const Node& node, Float v, Float weight)
+template<typename N>
+inline void Tree<N>::add_value(const Node& node, Float v, Float weight)
 {
     non_const(node).add_value(v, weight);
 }
 
-template<typename M>
-void Tree<M>::clear(Float root_value)
+template<typename N>
+void Tree<N>::clear(Float root_value)
 {
     m_thread_storage[0].next = m_thread_storage[0].begin + 1;
     for (unsigned i = 1; i < m_nu_threads; ++i)
@@ -278,14 +280,14 @@ void Tree<M>::clear(Float root_value)
     m_nodes[0].init(Move::null(), root_value, 0);
 }
 
-template<typename M>
-bool Tree<M>::contains(const Node& node) const
+template<typename N>
+bool Tree<N>::contains(const Node& node) const
 {
     return (&node >= m_nodes.get() && &node < m_nodes.get() + m_max_nodes);
 }
 
-template<typename M>
-bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
+template<typename N>
+bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
                            const Node& node, Float min_count,
                            bool check_abort,
                            IntervalChecker* interval_checker) const
@@ -329,8 +331,8 @@ bool Tree<M>::copy_subtree(Tree& target, const Node& target_node,
     return ! abort;
 }
 
-template<typename M>
-bool Tree<M>::create_node(unsigned thread_id, const Move& mv,
+template<typename N>
+bool Tree<N>::create_node(unsigned thread_id, const Move& mv,
                           Float value, Float count)
 {
     LIBBOARDGAME_ASSERT(thread_id < m_nu_threads);
@@ -344,8 +346,8 @@ bool Tree<M>::create_node(unsigned thread_id, const Move& mv,
     return false;
 }
 
-template<typename M>
-bool Tree<M>::extract_subtree(Tree& target, const Node& node,
+template<typename N>
+bool Tree<N>::extract_subtree(Tree& target, const Node& node,
                               bool check_abort,
                               IntervalChecker* interval_checker) const
 {
@@ -357,14 +359,14 @@ bool Tree<M>::extract_subtree(Tree& target, const Node& node,
                         interval_checker);
 }
 
-template<typename M>
-size_t Tree<M>::get_max_nodes() const
+template<typename N>
+size_t Tree<N>::get_max_nodes() const
 {
     return m_max_nodes;
 }
 
-template<typename M>
-size_t Tree<M>::get_nu_nodes() const
+template<typename N>
+size_t Tree<N>::get_nu_nodes() const
 {
     size_t result = 0;
     for (unsigned i = 0; i < m_nu_threads; ++i)
@@ -375,34 +377,34 @@ size_t Tree<M>::get_nu_nodes() const
     return result;
 }
 
-template<typename M>
-inline const typename Tree<M>::Node& Tree<M>::get_root() const
+template<typename N>
+inline const typename Tree<N>::Node& Tree<N>::get_root() const
 {
     return m_nodes[0];
 }
 
 /** Get the thread storage a node belongs to. */
-template<typename M>
-inline unsigned Tree<M>::get_thread_storage(const Node& node) const
+template<typename N>
+inline unsigned Tree<N>::get_thread_storage(const Node& node) const
 {
     size_t diff = &node - m_nodes.get();
     return static_cast<unsigned>(diff / m_nodes_per_thread);
 }
 
-template<typename M>
-inline void Tree<M>::inc_visit_count(const Node& node)
+template<typename N>
+inline void Tree<N>::inc_visit_count(const Node& node)
 {
     non_const(node).inc_visit_count();
 }
 
-template<typename M>
-inline void Tree<M>::init_root_value(Float value, Float count)
+template<typename N>
+inline void Tree<N>::init_root_value(Float value, Float count)
 {
     m_nodes[0].init_value(value, count);
 }
 
-template<typename M>
-inline void Tree<M>::link_children(const Node& node, const Node* first_child,
+template<typename N>
+inline void Tree<N>::link_children(const Node& node, const Node* first_child,
                                    unsigned nu_children)
 {
     NodeIndex first_child_index =
@@ -415,15 +417,15 @@ inline void Tree<M>::link_children(const Node& node, const Node* first_child,
 /** Convert a const reference to node from user to a non-const reference.
     The user has only read access to the nodes, because the tree guarantees
     the validity of the tree structure. */
-template<typename M>
-inline typename Tree<M>::Node& Tree<M>::non_const(const Node& node) const
+template<typename N>
+inline typename Tree<N>::Node& Tree<N>::non_const(const Node& node) const
 {
     LIBBOARDGAME_ASSERT(contains(node));
     return const_cast<Node&>(node);
 }
 
-template<typename M>
-bool Tree<M>::remove_child(const Node& node, const Move& mv)
+template<typename N>
+bool Tree<N>::remove_child(const Node& node, const Move& mv)
 {
     unsigned nu_children = node.get_nu_children();
     if (nu_children == 0)
@@ -441,8 +443,8 @@ bool Tree<M>::remove_child(const Node& node, const Move& mv)
     return false;
 }
 
-template<typename M>
-void Tree<M>::set_max_nodes(size_t max_nodes)
+template<typename N>
+void Tree<N>::set_max_nodes(size_t max_nodes)
 {
     max_nodes =
         min(max_nodes, static_cast<size_t>(numeric_limits<NodeIndex>::max()));
@@ -464,8 +466,8 @@ void Tree<M>::set_max_nodes(size_t max_nodes)
     clear(0);
 }
 
-template<typename M>
-void Tree<M>::swap(Tree& tree)
+template<typename N>
+void Tree<N>::swap(Tree& tree)
 {
     // Reminder to update this function when the class gets additional members
     struct Dummy

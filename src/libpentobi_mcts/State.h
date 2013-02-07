@@ -5,8 +5,8 @@
 #ifndef LIBPENTOBI_MCTS_STATE_H
 #define LIBPENTOBI_MCTS_STATE_H
 
+#include "Float.h"
 #include "LocalValue.h"
-#include "libboardgame_mcts/Float.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libboardgame_util/RandomGenerator.h"
@@ -23,7 +23,6 @@
 namespace libpentobi_mcts {
 
 using namespace std;
-using libboardgame_mcts::Float;
 using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
 using libboardgame_util::ArrayList;
@@ -117,6 +116,10 @@ struct SharedConst
 class State
 {
 public:
+    typedef libboardgame_mcts::Node<Move, Float> Node;
+
+    typedef libboardgame_mcts::Tree<Node> Tree;
+
     /** Constructor.
         @param initial_variant Game variant to initialize the internal
         board with (may avoid unnecessary BoardConst creation for game variant
@@ -144,8 +147,7 @@ public:
 
     void start_simulation(size_t n);
 
-    void gen_children(libboardgame_mcts::Tree<Move>::NodeExpander& expander,
-                      Float init_val);
+    void gen_children(Tree::NodeExpander& expander, Float init_val);
 
     void start_playout();
 

@@ -58,6 +58,16 @@ using libboardgame_util::string_util::to_string;
     See description of class Search for more information. */
 struct SearchParamConstDefault
 {
+    /** The floating type used for mean values and counts.
+        The default type is @c float for a reduced node size and performance
+        gains (especially on 32-bit systems). However, using @c float sets a
+        practical limit on the number of simulations before the count and mean
+        values go into saturation. This maximum is given by 2^d-1 with d being
+        the digits in the mantissa (=23 for IEEE 754 float's). The search will
+        terminate when this number is reached. For longer searches, the code
+        should be compiled with floating type @c double. */
+    typedef float Float;
+
     /** The maximum number of players. */
     static const PlayerInt max_players = 2;
 
@@ -115,15 +125,17 @@ public:
 
     typedef R SearchParamConst;
 
-    static const PlayerInt max_players = SearchParamConst::max_players;
+    typedef typename SearchParamConst::Float Float;
 
-    typedef libboardgame_mcts::Node<M> Node;
+    typedef libboardgame_mcts::Node<M, Float> Node;
 
-    typedef libboardgame_mcts::ChildIterator<M> ChildIterator;
+    typedef libboardgame_mcts::ChildIterator<Node> ChildIterator;
 
-    typedef libboardgame_mcts::Tree<M> Tree;
+    typedef libboardgame_mcts::Tree<Node> Tree;
 
     typedef libboardgame_mcts::PlayerMove<M> PlayerMove;
+
+    static const PlayerInt max_players = SearchParamConst::max_players;
 
     typedef array<StatisticsDirtyLockFree<Float>, max_players> RootStat;
 
@@ -492,7 +504,7 @@ private:
 
     TimeSource* m_time_source;
 
-    BiasTerm m_bias_term;
+    BiasTerm<Float> m_bias_term;
 
     Timer m_timer;
 
@@ -837,19 +849,19 @@ double Search<S, M, R>::expected_sim_per_sec() const
 }
 
 template<class S, class M, class R>
-Float Search<S, M, R>::get_bias_term_constant() const
+inline auto Search<S, M, R>::get_bias_term_constant() const -> Float
 {
     return m_bias_term.get_bias_term_constant();
 }
 
 template<class S, class M, class R>
-Float Search<S, M, R>::get_expand_threshold() const
+inline auto Search<S, M, R>::get_expand_threshold() const -> Float
 {
     return m_expand_threshold;
 }
 
 template<class S, class M, class R>
-Float Search<S, M, R>::get_expand_threshold_incr() const
+inline auto Search<S, M, R>::get_expand_threshold_incr() const -> Float
 {
     return m_expand_threshold_incr;
 }
@@ -868,7 +880,7 @@ size_t Search<S, M, R>::get_max_nodes(size_t memory)
 }
 
 template<class S, class M, class R>
-size_t Search<S, M, R>::get_nu_simulations() const
+inline size_t Search<S, M, R>::get_nu_simulations() const
 {
     return m_nu_simulations;
 }
@@ -880,37 +892,37 @@ inline auto Search<S, M, R>::get_root_val() const -> const RootStat&
 }
 
 template<class S, class M, class R>
-Float Search<S, M, R>::get_prune_count_start() const
+inline auto Search<S, M, R>::get_prune_count_start() const -> Float
 {
     return m_prune_count_start;
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::get_prune_full_tree() const
+inline bool Search<S, M, R>::get_prune_full_tree() const
 {
     return m_prune_full_tree;
 }
 
 template<class S, class M, class R>
-Float Search<S, M, R>::get_rave_max_count() const
+inline auto Search<S, M, R>::get_rave_max_count() const -> Float
 {
     return m_rave_max_count;
 }
 
 template<class S, class M, class R>
-Float Search<S, M, R>::get_rave_weight() const
+inline auto Search<S, M, R>::get_rave_weight() const -> Float
 {
     return m_rave_weight;
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::get_reuse_subtree() const
+inline bool Search<S, M, R>::get_reuse_subtree() const
 {
     return m_reuse_subtree;
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::get_reuse_tree() const
+inline bool Search<S, M, R>::get_reuse_tree() const
 {
     return m_reuse_tree;
 }
@@ -1325,7 +1337,7 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-const Node<M>* Search<S, M, R>::select_child(const Node& node)
+auto Search<S, M, R>::select_child(const Node& node) -> const Node*
 {
     LIBBOARDGAME_ASSERT(node.has_children());
     auto node_count = node.get_visit_count();
@@ -1358,10 +1370,10 @@ const Node<M>* Search<S, M, R>::select_child(const Node& node)
 }
 
 template<class S, class M, class R>
-const Node<M>* Search<S, M, R>::select_child_final(const Node& node,
-                                       const vector<Move>* exclude_moves) const
+auto Search<S, M, R>::select_child_final(const Node& node,
+                       const vector<Move>* exclude_moves) const -> const Node*
 {
-    // Select the child with the highest visit count, use value as a tie breaker
+    // Select the child with the highest visit count, use value as tie breaker
     const Node* result = 0;
     Float max_count = -1;
     Float max_count_value = -numeric_limits<Float>::max();

@@ -31,7 +31,7 @@ using libpentobi_base::sgf_util::get_color_id;
 namespace {
 
 void dump_tree_recurse(Writer& writer, Variant variant,
-                       const Tree<Move>& tree, const Node<Move>& node,
+                       const Search::Tree& tree, const Search::Node& node,
                        Color to_play)
 {
     ostringstream comment;
@@ -41,11 +41,11 @@ void dump_tree_recurse(Writer& writer, Variant variant,
     writer.write_property("C", comment.str());
     writer.end_node();
     Color next_to_play = to_play.get_next(get_nu_colors(variant));
-    vector<const Node<Move>*> children;
-    for (ChildIterator<Move> i(tree, node); i; ++i)
+    vector<const Search::Node*> children;
+    for (Search::ChildIterator i(tree, node); i; ++i)
         children.push_back(&(*i));
     sort(children.begin(), children.end(), compare_node);
-    for (const Node<Move>* i : children)
+    for (const auto i : children)
     {
         writer.begin_tree();
         writer.begin_node();
@@ -68,7 +68,7 @@ void dump_tree_recurse(Writer& writer, Variant variant,
 
 //-----------------------------------------------------------------------------
 
-bool compare_node(const Node<Move>* n1, const Node<Move>* n2)
+bool compare_node(const Search::Node* n1, const Search::Node* n2)
 {
     Float count1 = n1->get_visit_count();
     Float count2 = n2->get_visit_count();

@@ -612,7 +612,7 @@ bool State::gen_and_play_playout_move(Move last_good_reply_1,
     return false;
 }
 
-void State::gen_children(Tree<Move>::NodeExpander& expander, Float init_val)
+void State::gen_children(Tree::NodeExpander& expander, Float init_val)
 {
     if (m_nu_passes == m_nu_colors)
         return;

@@ -11,6 +11,7 @@
 
 namespace libpentobi_mcts {
 
+using namespace std;
 using libboardgame_mcts::PlayerInt;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
@@ -24,6 +25,8 @@ using libpentobi_base::Setup;
     members. */
 struct SearchParamConst
 {
+    typedef libpentobi_mcts::Float Float;
+
     static const PlayerInt max_players = 4;
 
     static const bool rave = true;
