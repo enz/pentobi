@@ -378,7 +378,7 @@ void MainWindow::about()
                        "<p>" +
                        tr("Computer program that plays the board game Blokus.")
                        + "<br>"
-                       "<a href=\"http://pentobi.sourceforge.net\">http://pentobi.sourceforge.net</a>"
+                       "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
                        + "</p>"
                        "<p>" +
                        tr("Copyright &copy; 2011&ndash;2013 Markus Enzenberger") +
@@ -387,6 +387,7 @@ void MainWindow::about()
 
 void MainWindow::analyzeGame()
 {
+    throw "foo"; // XXX
     if (! is_main_variation(m_game->get_current()))
     {
         showInfo(tr("Game analysis is only possible in the main variation."));

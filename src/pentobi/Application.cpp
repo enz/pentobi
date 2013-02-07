@@ -49,7 +49,7 @@ void Application::showError(const QString& detailedText)
                               tr("Please report this error together with any"
                                  " details available with the button below"
                                  " and other context information at the Pentobi"
-                                 " <a href=\"http://sourceforge.net/tracker/?atid=2298094&group_id=566594\">bug tracker</a>."));
+                                 " <a href=\"http://sf.net/p/pentobi/bugs\">bug tracker</a>."));
     if (detailedText.isEmpty())
         msgBox.setDetailedText(tr("No detailed information is available"));
     else

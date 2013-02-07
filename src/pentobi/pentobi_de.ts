@@ -64,8 +64,8 @@
     </message>
     <message>
         <location filename="Application.cpp" line="49"/>
-        <source>Please report this error together with any details available with the button below and other context information at the Pentobi &lt;a href=&quot;http://sourceforge.net/tracker/?atid=2298094&amp;group_id=566594&quot;&gt;bug tracker&lt;/a&gt;.</source>
-        <translation>Bitte melden Sie diesen Fehler zusammen mit den Details, die mit der Schaltfläche unten verfügbar sind, und anderen Informationen zum Kontext im &lt;a href=&quot;http://sourceforge.net/tracker/?atid=2298094&amp;group_id=566594&quot;&gt;Bug-Tracker&lt;/a&gt; von Pentobi.</translation>
+        <source>Please report this error together with any details available with the button below and other context information at the Pentobi &lt;a href=&quot;http://sf.net/p/pentobi/bugs&quot;&gt;bug tracker&lt;/a&gt;.</source>
+        <translation>Bitte melden Sie diesen Fehler zusammen mit den Details, die mit der Schaltfläche unten verfügbar sind, und anderen Informationen zum Kontext im &lt;a href=&quot;http://sf.net/p/pentobi/bugs&quot;&gt;Bug-Tracker&lt;/a&gt; von Pentobi.</translation>
     </message>
     <message>
         <location filename="Application.cpp" line="54"/>
