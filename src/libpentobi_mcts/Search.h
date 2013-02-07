@@ -24,6 +24,8 @@ using libpentobi_base::Setup;
     members. */
 struct SearchParamConst
 {
+    static const PlayerInt max_players = 4;
+
     static const bool rave = true;
 
     static const bool rave_check_same = false;
@@ -38,7 +40,7 @@ struct SearchParamConst
 /** Monte-Carlo tree search implementation for Blokus.
     @note @ref libboardgame_avoid_stack_allocation */
 class Search
-    : public libboardgame_mcts::Search<State,Move,4,SearchParamConst>
+    : public libboardgame_mcts::Search<State, Move, SearchParamConst>
 {
 public:
     Search(Variant initial_variant, unsigned nu_threads, size_t memory);
@@ -116,7 +118,7 @@ protected:
     void on_start_search();
 
 private:
-    typedef libboardgame_mcts::Search<State,Move,4,SearchParamConst>
+    typedef libboardgame_mcts::Search<State, Move, SearchParamConst>
                                                                    ParentClass;
 
     /** Automatically set default parameters for the game variant if
