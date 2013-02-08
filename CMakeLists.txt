@@ -90,7 +90,7 @@ if(UNIX)
   endif()
 endif(UNIX)
 
-configure_file(config-cmake.h.in config.h)
+configure_file(config.h.in config.h)
 add_definitions(-DHAVE_CONFIG_H)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
