@@ -116,7 +116,6 @@ Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
 {
     set_expand_threshold(1);
     set_expand_threshold_incr(0.5);
-    set_rave_max_count(5000);
     set_default_param(m_variant);
     create_threads();
 }
@@ -267,17 +266,20 @@ void Search::set_default_param(Variant variant)
     case Variant::duo:
     case Variant::junior:
         set_bias_term_constant(0.07f);
+        set_rave_max_count(25000);
         set_rave_weight(0.2);
         break;
     case Variant::classic_2:
     case Variant::classic:
         set_bias_term_constant(0.06f);
-        set_rave_weight(0.3);
+        set_rave_max_count(25000);
+        set_rave_weight(0.2);
         break;
     case Variant::trigon_2:
     case Variant::trigon_3:
     case Variant::trigon:
         set_bias_term_constant(0.06f);
+        set_rave_max_count(25000);
         set_rave_weight(0.4);
         break;
     default:
