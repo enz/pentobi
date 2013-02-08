@@ -21,11 +21,3 @@
 
 /** Location of the translations directory. */
 #cmakedefine PENTOBI_TRANSLATIONS "@PENTOBI_TRANSLATIONS@"
-
-#ifdef _MSC_VER
-// Don't report Visual C++ warning 4355 ('this' : used in base member
-// initializer list) in default warning level 3. Storing a reference to
-// 'this' is used at several places in the Pentobi code (e.g. constructors of
-// thread functions). This is not a problem as long as 'this' is not used yet.
-#pragma warning(4:4355)
-#endif // _MSC_VER
