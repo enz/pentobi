@@ -246,9 +246,14 @@ public:
     bool get_prune_full_tree() const;
 
     /** Maximum parent count for applying RAVE. */
-    void set_rave_max_count(Float value);
+    void set_rave_max_parent_count(Float value);
 
-    Float get_rave_max_count() const;
+    Float get_rave_max_parent_count() const;
+
+    /** Maximum child count for applying RAVE. */
+    void set_rave_max_child_count(Float value);
+
+    Float get_rave_max_child_count() const;
 
     /** Weight used for adding RAVE values to the node value. */
     void set_rave_weight(Float value);
@@ -478,7 +483,9 @@ private:
 
     Float m_prune_count_start;
 
-    Float m_rave_max_count;
+    Float m_rave_max_parent_count;
+
+    Float m_rave_max_child_count;
 
     Float m_rave_weight;
 
@@ -673,7 +680,8 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
       m_reuse_tree(false),
       m_prune_full_tree(true),
       m_prune_count_start(16),
-      m_rave_max_count(5000),
+      m_rave_max_parent_count(50000),
+      m_rave_max_child_count(500),
       m_rave_weight(0.3),
       m_tree_memory(memory == 0 ? 256000000 : memory),
       m_max_nodes(get_max_nodes(m_tree_memory)),
@@ -904,9 +912,15 @@ inline bool Search<S, M, R>::get_prune_full_tree() const
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_rave_max_count() const -> Float
+inline auto Search<S, M, R>::get_rave_max_parent_count() const -> Float
 {
-    return m_rave_max_count;
+    return m_rave_max_parent_count;
+}
+
+template<class S, class M, class R>
+inline auto Search<S, M, R>::get_rave_max_child_count() const -> Float
+{
+    return m_rave_max_child_count;
 }
 
 template<class S, class M, class R>
@@ -1452,9 +1466,15 @@ void Search<S, M, R>::set_prune_full_tree(bool enable)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_rave_max_count(Float n)
+void Search<S, M, R>::set_rave_max_parent_count(Float n)
 {
-    m_rave_max_count = n;
+    m_rave_max_parent_count = n;
+}
+
+template<class S, class M, class R>
+void Search<S, M, R>::set_rave_max_child_count(Float n)
+{
+    m_rave_max_child_count = n;
 }
 
 template<class S, class M, class R>
@@ -1579,7 +1599,7 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
     LIBBOARDGAME_ASSERT(i < nodes.size());
     const auto node = nodes[i];
     LIBBOARDGAME_ASSERT(node->has_children());
-    if (node->get_visit_count() > m_rave_max_count)
+    if (node->get_visit_count() > m_rave_max_parent_count)
         return;
     const auto& state = *thread_state.state;
     auto& was_played = thread_state.was_played;
@@ -1589,7 +1609,8 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
     for (ChildIterator it(m_tree, *node); it; ++it)
     {
         auto mv = it->get_move();
-        if (! was_played[player][mv])
+        if (! was_played[player][mv]
+            || it->get_visit_count() > m_rave_max_child_count)
             continue;
         unsigned first = first_play[player][mv.to_int()];
         LIBBOARDGAME_ASSERT(first >= i);

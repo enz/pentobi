@@ -127,7 +127,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "level " << p.get_level() << '\n'
-            << "rave_max_count " << s.get_rave_max_count() << '\n'
+            << "rave_max_child_count " << s.get_rave_max_child_count() << '\n'
+            << "rave_max_parent_count " << s.get_rave_max_parent_count() << '\n'
             << "rave_weight " << s.get_rave_weight() << '\n'
             << "reuse_subtree " << s.get_reuse_subtree() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
@@ -150,8 +151,10 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             p.set_fixed_simulations(args.get<Float>(1));
         else if (name == "level")
             p.set_level(args.get<int>(1));
-        else if (name == "rave_max_count")
-            s.set_rave_max_count(args.get<Float>(1));
+        else if (name == "rave_max_child_count")
+            s.set_rave_max_child_count(args.get<Float>(1));
+        else if (name == "rave_max_parent_count")
+            s.set_rave_max_parent_count(args.get<Float>(1));
         else if (name == "rave_weight")
             s.set_rave_weight(args.get<Float>(1));
         else if (name == "reuse_subtree")
