@@ -31,12 +31,12 @@ using libpentobi_base::PieceMap;
 namespace {
 
 const string pieceLayoutClassic =
-    " 1 .V3V3 .L4L4L4 .T4 . . .Z4Z4 .L5L5L5L5 .V5V5V5 . U U U . N . . ."
-    " . . .V3 . . .L4 .T4T4 .Z4Z4 . .L5 . . . .V5 . . . U . U . N N .I5"
-    " 2 2 . . .I4 . . .T4 . . . . . . . . X . .V5 .Z5 . . . . . . N .I5"
-    " . . .I3 .I4 . P . . . W W . F . . X X X . . .Z5Z5Z5 . .T5 . N .I5"
-    " O O .I3 .I4 . P P . W W . . F F . . X . . Y . . .Z5 . .T5 . . .I5"
-    " O O .I3 .I4 . P P . W . . F F . . . . . Y Y Y Y . . .T5T5T5 . .I5";
+    " 1 .Z4Z4 . .L4L4L4 . O O . P P .L5L5L5L5 .V5V5V5 . U U U . N . . ."
+    " . . .Z4Z4 . . .L4 . O O . P P .L5 . . . .V5 . . . U . U . N N .I5"
+    " 2 2 . . . .T4 . . . . . . P . . . . X . .V5 .Z5 . . . . . . N .I5"
+    " . . .I3 .T4T4T4 . . W W . . . F . X X X . . .Z5Z5Z5 . .T5 . N .I5"
+    "V3 . .I3 . . . . . . . W W . F F . . X . . Y . . .Z5 . .T5 . . .I5"
+    "V3V3 .I3 . .I4I4I4I4 . . W . . F F . . . Y Y Y Y . . .T5T5T5 . .I5";
 
 const string pieceLayoutJunior =
     "1 . 1 . V3V3. . L4L4L4. T4T4T4. . O O . O O . P P . . I5. I5. . L5L5"
