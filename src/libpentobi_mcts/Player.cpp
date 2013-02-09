@@ -86,7 +86,7 @@ Move Player::genmove(const Board& bd, Color c)
     // Don't use more thane 2 moves per color from opening book in lower levels
     // because they are supposed to be weak
     if (m_use_book
-        && (m_level >= 4 || bd.get_nu_moves() < 2 * bd.get_nu_colors()))
+        && (m_level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
     {
         if (! m_is_book_loaded
             || m_book.get_tree().get_variant() != variant)

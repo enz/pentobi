@@ -888,7 +888,7 @@ void State::start_search()
     m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
     m_check_terminate_early =
-        (m_nu_moves_initial < 10 * m_nu_colors
+        (m_nu_moves_initial < 10u * m_nu_colors
          && m_bd.get_nu_players() == 2);
     Float total_piece_points = Float(m_bc->get_total_piece_points());
     m_score_modification_factor =

@@ -68,7 +68,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     log() << "Analyzing move " << bd->get_nu_moves() << "\n";
                     const Float max_count = Float(nu_simulations);
                     double max_time = 0;
-                    size_t min_simulations = 1;
+                    Float min_simulations = 1;
                     Move computer_mv;
                     search.search(computer_mv, *bd, mv.color, max_count,
                                   min_simulations, max_time, time_source);

@@ -242,7 +242,7 @@ void Search::on_start_search()
 }
 
 bool Search::search(Move& mv, const Board& bd, Color to_play,
-                    Float max_count, size_t min_simulations,
+                    Float max_count, Float min_simulations,
                     double max_time, TimeSource& time_source)
 {
     m_shared_const.board = &bd;
