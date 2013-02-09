@@ -846,6 +846,8 @@ void State::init_move_list_without_local(Color c)
 
 void State::play_expanded_child(Move mv)
 {
+    if (log_simulations)
+        log() << "Playing expanded child\n";
     if (! mv.is_pass())
         play_playout(mv);
     else
@@ -857,9 +859,9 @@ void State::play_expanded_child(Move mv)
         // symmetry detection only as a heuristic ((playouts and move value
         // initialization)
         m_is_symmetry_broken = true;
+        if (log_simulations)
+            log() << m_bd;
     }
-    if (log_simulations)
-        log() << "Playing expanded child\n" << m_bd;
 }
 
 void State::play_playout(Move mv)
