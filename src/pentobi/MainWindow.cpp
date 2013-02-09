@@ -1280,9 +1280,9 @@ QWidget* MainWindow::createCentralWidget()
     outerLayout->addLayout(innerLayout, 100);
     outerLayout->addStretch(1);
     innerLayout->addStretch(1);
-    innerLayout->addWidget(createLeftPanel(), 58);
+    innerLayout->addWidget(createLeftPanel(), 60);
     innerLayout->addStretch(1);
-    innerLayout->addLayout(createRightPanel(), 42);
+    innerLayout->addLayout(createRightPanel(), 40);
     innerLayout->addStretch(1);
     // The central widget doesn't do anything with the focus right now, but we
     // allow it to receive the focus such that the user can switch away the
