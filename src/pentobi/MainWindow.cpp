@@ -387,7 +387,6 @@ void MainWindow::about()
 
 void MainWindow::analyzeGame()
 {
-    throw "foo"; // XXX
     if (! is_main_variation(m_game->get_current()))
     {
         showInfo(tr("Game analysis is only possible in the main variation."));
