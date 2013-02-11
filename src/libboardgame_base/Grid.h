@@ -62,7 +62,7 @@ template<class P, typename T>
 inline Grid<P, T>::Grid()
 {
 #if LIBBOARDGAME_DEBUG
-    m_geometry = 0;
+    m_geometry = nullptr;
 #endif
 }
 
@@ -140,7 +140,7 @@ inline void Grid<P, T>::init(const Geometry<P>& geometry, const T& val)
 template<class P, typename T>
 bool Grid<P, T>::is_initialized() const
 {
-    return m_geometry != 0;
+    return m_geometry != nullptr;
 }
 
 template<class P, typename T>

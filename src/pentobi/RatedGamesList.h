@@ -18,7 +18,7 @@ class RatedGamesList
     Q_OBJECT
 
 public:
-    RatedGamesList(QWidget* parent = 0);
+    RatedGamesList(QWidget* parent = nullptr);
 
     void updateContent(Variant variant, const RatingHistory& history);
 

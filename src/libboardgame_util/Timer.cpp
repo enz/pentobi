@@ -13,7 +13,7 @@ namespace libboardgame_util {
 //-----------------------------------------------------------------------------
 
 Timer::Timer()
-    : m_time_source(0)
+    : m_time_source(nullptr)
 {
 }
 

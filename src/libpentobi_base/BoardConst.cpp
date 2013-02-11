@@ -704,7 +704,7 @@ void BoardConst::create_moves()
                     m_move_lists[current++] = list[l];
                 m_moves_range[*i][j][piece] = ListIndex(begin, current - begin);
             }
-    m_full_move_table.reset(0); // Free space, no longer needed
+    m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
 
 void BoardConst::create_moves(Piece piece)
@@ -783,35 +783,35 @@ const BoardConst& BoardConst::get(Variant variant)
     static unique_ptr<BoardConst> board_const_trigon_3;
     if (variant == Variant::classic || variant == Variant::classic_2)
     {
-        if (board_const_classic.get() == 0)
+        if (! board_const_classic)
             board_const_classic.reset(new BoardConst(BoardType::classic,
                                                      Variant::classic));
         return *board_const_classic;
     }
     else if (variant == Variant::duo)
     {
-        if (board_const_duo.get() == 0)
+        if (! board_const_duo)
             board_const_duo.reset(new BoardConst(BoardType::duo,
                                                  Variant::duo));
         return *board_const_duo;
     }
     else if (variant == Variant::junior)
     {
-        if (board_const_junior.get() == 0)
+        if (! board_const_junior)
             board_const_junior.reset(new BoardConst(BoardType::duo,
                                                     Variant::junior));
         return *board_const_junior;
     }
     else if (variant == Variant::trigon)
     {
-        if (board_const_trigon.get() == 0)
+        if (! board_const_trigon)
             board_const_trigon.reset(new BoardConst(BoardType::trigon,
                                                     Variant::trigon));
         return *board_const_trigon;
     }
     else if (variant == Variant::trigon_2)
     {
-        if (board_const_trigon_2.get() == 0)
+        if (! board_const_trigon_2)
             board_const_trigon_2.reset(new BoardConst(BoardType::trigon,
                                                       Variant::trigon_2));
         return *board_const_trigon_2;
@@ -819,7 +819,7 @@ const BoardConst& BoardConst::get(Variant variant)
     else
     {
         LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
-        if (board_const_trigon_3.get() == 0)
+        if (! board_const_trigon_3)
             board_const_trigon_3.reset(new BoardConst(BoardType::trigon_3,
                                                       Variant::trigon_3));
         return *board_const_trigon_3;

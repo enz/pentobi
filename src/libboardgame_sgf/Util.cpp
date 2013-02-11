@@ -36,12 +36,12 @@ const Node& back_to_main_variation(const Node& node)
 const Node& beginning_of_branch(const Node& node)
 {
     auto current = node.get_parent_or_null();
-    if (current == 0)
+    if (current == nullptr)
         return node;
     while (true)
     {
         auto parent = current->get_parent_or_null();
-        if (parent == 0 || ! parent->has_single_child())
+        if (parent == nullptr || ! parent->has_single_child())
             break;
         current = parent;
     }
@@ -51,13 +51,13 @@ const Node& beginning_of_branch(const Node& node)
 const Node* find_next_comment(const Node& node)
 {
     auto current = get_next_node(node);
-    while (current != 0)
+    while (current != nullptr)
     {
         if (has_comment(*current))
             return current;
         current = get_next_node(*current);
     }
-    return 0;
+    return nullptr;
 }
 
 const Node& find_root(const Node& node)
@@ -100,20 +100,20 @@ const Node* get_next_earlier_variation(const Node& node)
 {
     auto child = &node;
     auto current = node.get_parent_or_null();
-    while (current != 0 && child->get_sibling() == 0)
+    while (current != nullptr && child->get_sibling() == nullptr)
     {
         child = current;
         current = current->get_parent_or_null();
     }
-    if (current == 0)
-        return 0;
+    if (current == nullptr)
+        return nullptr;
     return child->get_sibling();
 }
 
 const Node* get_next_node(const Node& node)
 {
     auto child = node.get_first_child_or_null();
-    if (child != 0)
+    if (child != nullptr)
         return child;
     return get_next_earlier_variation(node);
 }
@@ -164,12 +164,12 @@ bool has_comment(const Node& node)
 bool has_earlier_variation(const Node& node)
 {
     auto current = node.get_parent_or_null();
-    if (current == 0)
+    if (current == nullptr)
         return false;
     while (true)
     {
         auto parent = current->get_parent_or_null();
-        if (parent == 0)
+        if (parent == nullptr)
             return false;
         if (! parent->has_single_child())
             return true;

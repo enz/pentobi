@@ -16,7 +16,7 @@ class RatingGraph
     Q_OBJECT
 
 public:
-    RatingGraph(QWidget* parent = 0);
+    RatingGraph(QWidget* parent = nullptr);
 
     void updateContent(const RatingHistory& history);
 

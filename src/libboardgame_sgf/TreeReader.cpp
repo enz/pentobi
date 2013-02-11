@@ -15,7 +15,7 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 TreeReader::TreeReader()
-    : m_current(0)
+    : m_current(nullptr)
 {
 }
 

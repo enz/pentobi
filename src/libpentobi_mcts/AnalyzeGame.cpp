@@ -38,7 +38,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     auto& root = game.get_root();
     auto node = &root;
     unsigned total_moves = 0;
-    while (node != 0)
+    while (node != nullptr)
     {
         if (tree.has_move(*node))
             ++total_moves;
@@ -48,7 +48,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     clear_abort();
     node = &root;
     unsigned move_number = 0;
-    while (node != 0)
+    while (node != nullptr)
     {
         auto mv = tree.get_move(*node);
         if (mv.is_regular())

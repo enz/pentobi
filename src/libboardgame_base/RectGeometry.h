@@ -59,7 +59,7 @@ RectGeometry<P>::RectGeometry(unsigned width, unsigned height)
 template<class P>
 const RectGeometry<P>* RectGeometry<P>::get(unsigned width, unsigned height)
 {
-    if (s_geometry[width][height].get() == 0)
+    if (! s_geometry[width][height])
         s_geometry[width][height].reset(new RectGeometry(width, height));
     return s_geometry[width][height].get();
 }

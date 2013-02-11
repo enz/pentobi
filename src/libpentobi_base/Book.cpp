@@ -121,11 +121,11 @@ bool Book::genmove(const Board& bd, Color c, Move& mv,
         ColorMove color_mv = bd.get_move(i);
         color_mv.move = get_transformed(bd, color_mv.move, transform);
         node = m_tree.find_child_with_move(*node, color_mv);
-        if (node == 0)
+        if (node == nullptr)
             return false;
     }
     node = select_child(bd, c, m_tree, *node, inv_transform);
-    if (node == 0)
+    if (node == nullptr)
         return false;
     mv = get_transformed(bd, m_tree.get_move(*node).move, inv_transform);
     return true;
@@ -168,7 +168,7 @@ const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
 {
     unsigned nu_children = node.get_nu_children();
     if (nu_children == 0)
-        return 0;
+        return nullptr;
     vector<const Node*> good_moves;
     for (unsigned i = 0; i < nu_children; ++i)
     {
@@ -199,7 +199,7 @@ const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
             log() << bd.to_string(mv) << '\n';
     }
     if (good_moves.empty())
-        return 0;
+        return nullptr;
     log() << "Book moves: " << good_moves.size() << '\n';
     unsigned nu_good_moves = static_cast<unsigned>(good_moves.size());
     return good_moves[m_random.generate_small_int(nu_good_moves)];

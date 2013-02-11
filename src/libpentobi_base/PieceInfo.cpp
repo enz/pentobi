@@ -169,7 +169,7 @@ const Transform* PieceInfo::find_transform(const Geometry& geometry,
         if (normalized_piece == normalized)
             return transform;
     }
-    return 0;
+    return nullptr;
 }
 
 const Transform* PieceInfo::get_equivalent_transform(
@@ -179,7 +179,7 @@ const Transform* PieceInfo::get_equivalent_transform(
     if (pos == m_equivalent_transform.end())
     {
         LIBBOARDGAME_ASSERT(false);
-        return 0;
+        return nullptr;
     }
     return pos->second;
 }

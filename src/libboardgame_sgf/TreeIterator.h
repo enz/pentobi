@@ -36,7 +36,7 @@ inline TreeIterator::TreeIterator(const Node& root)
 
 inline TreeIterator::operator bool() const
 {
-    return m_current != 0;
+    return m_current != nullptr;
 }
 
 inline const Node& TreeIterator::operator*() const

@@ -225,7 +225,7 @@ inline auto Tree<N>::NodeExpander::get_best_child() const -> const Node*
     if (m_nu_children > 0)
         return m_best_child;
     else
-        return 0;
+        return nullptr;
 }
 
 template<typename N>
@@ -299,7 +299,7 @@ bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
     target_node_non_const.copy_data_from(node);
     bool abort =
         (check_abort && get_abort())
-        || (interval_checker != 0 && (*interval_checker)());
+        || (interval_checker != nullptr && (*interval_checker)());
     if (! node.has_children() || node.get_visit_count() < min_count || abort)
     {
         target_node_non_const.unlink_children();

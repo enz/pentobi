@@ -66,7 +66,7 @@ const Node& Tree::create_new_child(const Node& node)
 void Tree::delete_all_variations()
 {
     auto node = &get_root();
-    while (node != 0)
+    while (node != nullptr)
     {
         non_const(*node).delete_variations();
         node = node->get_first_child_or_null();
@@ -80,9 +80,9 @@ string Tree::get_comment(const Node& node) const
 
 string Tree::get_date_today()
 {
-   time_t t = time(0);
+   time_t t = time(nullptr);
    auto tmp = localtime(&t);
-   if (tmp == 0)
+   if (tmp == nullptr)
        return "?";
     char date[128];
     strftime(date, sizeof(date), "%Y-%m-%d", tmp);
@@ -108,9 +108,9 @@ bool Tree::has_comment_property(const Node& node, const string& key) const
 bool Tree::has_variations() const
 {
     auto node = m_root.get();
-    while (node != 0)
+    while (node != nullptr)
     {
-        if (node->get_sibling() != 0)
+        if (node->get_sibling() != nullptr)
             return true;
         node = node->get_first_child_or_null();
     }
@@ -141,7 +141,7 @@ bool Tree::is_comment_property_line(const string& line, const string& key)
 void Tree::make_first_child(const Node& node)
 {
     auto parent = node.get_parent_or_null();
-    if (parent != 0 && &parent->get_first_child() != &node)
+    if (parent != nullptr && &parent->get_first_child() != &node)
     {
         non_const(node).make_first_child();
         m_modified = true;
@@ -189,7 +189,7 @@ void Tree::move_down(const Node& node)
 void Tree::move_up(const Node& node)
 {
     auto parent = node.get_parent_or_null();
-    if (parent != 0 && &parent->get_first_child() != &node)
+    if (parent != nullptr && &parent->get_first_child() != &node)
     {
         non_const(node).move_up();
         m_modified = true;

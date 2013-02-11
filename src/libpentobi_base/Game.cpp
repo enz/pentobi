@@ -61,7 +61,7 @@ void Game::goto_node(const Node& node)
     catch (const InvalidTree&)
     {
         // Try to restore the old state.
-        if (old == 0)
+        if (old == nullptr)
             m_current = &node;
         else
         {
@@ -89,7 +89,7 @@ void Game::init(unique_ptr<Node>& root)
 {
     m_tree.init(root);
     m_bd->init(m_tree.get_variant());
-    m_current = 0;
+    m_current = nullptr;
     goto_node(m_tree.get_root());
 }
 
@@ -97,24 +97,24 @@ void Game::keep_only_position()
 {
     m_tree.keep_only_subtree(*m_current);
     m_tree.remove_children(m_tree.get_root());
-    m_current = 0;
+    m_current = nullptr;
     goto_node(m_tree.get_root());
 }
 
 void Game::keep_only_subtree()
 {
     m_tree.keep_only_subtree(*m_current);
-    m_current = 0;
+    m_current = nullptr;
     goto_node(m_tree.get_root());
 }
 
 void Game::play(ColorMove mv, bool always_create_new_node)
 {
     m_bd->play(mv);
-    const Node* child = 0;
+    const Node* child = nullptr;
     if (! always_create_new_node)
         child = m_tree.find_child_with_move(*m_current, mv);
-    if (child != 0)
+    if (child != nullptr)
         m_current = child;
     else
     {

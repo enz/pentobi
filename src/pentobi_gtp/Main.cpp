@@ -40,7 +40,7 @@ namespace {
 
 path get_application_dir_path(int argc, char** argv)
 {
-    if (argc == 0 || argv == 0 || argv[0] == 0)
+    if (argc == 0 || argv == nullptr || argv[0] == nullptr)
         return path();
     path application_path(argv[0]);
     return application_path.branch_path();

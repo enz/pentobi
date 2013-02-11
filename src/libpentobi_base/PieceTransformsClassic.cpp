@@ -47,7 +47,7 @@ const Transform* PieceTransformsClassic::get_mirrored_horizontally(
     if (transf == &m_rot270refl)
         return &m_rot90;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 const Transform* PieceTransformsClassic::get_mirrored_vertically(
@@ -70,7 +70,7 @@ const Transform* PieceTransformsClassic::get_mirrored_vertically(
     if (transf == &m_rot270refl)
         return &m_rot270;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 const Transform* PieceTransformsClassic::get_rotated_anticlockwise(
@@ -93,7 +93,7 @@ const Transform* PieceTransformsClassic::get_rotated_anticlockwise(
     if (transf == &m_rot270refl)
         return &m_rot180refl;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 const Transform* PieceTransformsClassic::get_rotated_clockwise(
@@ -116,7 +116,7 @@ const Transform* PieceTransformsClassic::get_rotated_clockwise(
     if (transf == &m_rot270refl)
         return &m_refl;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 //-----------------------------------------------------------------------------

@@ -74,7 +74,7 @@ TrigonGeometry<P>::TrigonGeometry(unsigned sz)
 template<class P>
 const TrigonGeometry<P>* TrigonGeometry<P>::get(unsigned sz)
 {
-    if (s_geometry[sz].get() == 0)
+    if (! s_geometry[sz])
         s_geometry[sz].reset(new TrigonGeometry(sz));
     return s_geometry[sz].get();
 }

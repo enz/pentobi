@@ -120,7 +120,7 @@ Color getCurrentColor(const Game& game)
     auto& tree = game.get_tree();
     auto node = &game.get_current();
     Color c;
-    while (node != 0 && ! tree.has_move(*node))
+    while (node != nullptr && ! tree.has_move(*node))
     {
         if (libpentobi_base::node_util::get_player(*node, c))
             return c;
@@ -152,14 +152,14 @@ Color getCurrentColor(const Game& game)
 bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
 {
     auto node = current.get_parent_or_null();
-    while (node != 0)
+    while (node != nullptr)
     {
         if (! tree.get_move(*node).is_null())
             return true;
         node = node->get_parent_or_null();
     }
     node = current.get_first_child_or_null();
-    while (node != 0)
+    while (node != nullptr)
     {
         if (! tree.get_move(*node).is_null())
             return true;
@@ -210,11 +210,11 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
       m_lastComputerMovesBegin(0),
       m_lastComputerMovesEnd(0),
       m_manualDir(manualDir),
-      m_helpWindow(0),
-      m_ratingDialog(0),
-      m_analyzeGameWindow(0),
+      m_helpWindow(nullptr),
+      m_ratingDialog(nullptr),
+      m_analyzeGameWindow(nullptr),
       m_legalMoves(new MoveList()),
-      m_leaveFullscreenButton(0)
+      m_leaveFullscreenButton(nullptr)
 {
     Util::initDataDir();
     QSettings settings;
@@ -397,7 +397,7 @@ void MainWindow::analyzeGame()
         return;
     int speed = dialog.getSpeedValue();
     cancelThread();
-    if (m_analyzeGameWindow != 0)
+    if (m_analyzeGameWindow != nullptr)
         delete m_analyzeGameWindow;
     m_analyzeGameWindow = new AnalyzeGameWindow(this);
     // Make sure all action shortcuts work when the analyze dialog has the
@@ -474,7 +474,7 @@ void MainWindow::backward10()
         if (tree.has_move(*node))
             ++n;
         auto parent = node->get_parent_or_null();
-        if (parent == 0)
+        if (parent == nullptr)
             break;
         node = parent;
     }
@@ -1659,7 +1659,7 @@ void MainWindow::findNextComment()
     auto& root = m_game->get_root();
     auto& current = m_game->get_current();
     auto node = find_next_comment(current);
-    if (node == 0 && &current != &root)
+    if (node == nullptr && &current != &root)
     {
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The end of the tree was reached."),
@@ -1679,7 +1679,7 @@ void MainWindow::findNextComment()
         else
             return;
     }
-    if (node == 0)
+    if (node == nullptr)
     {
         showInfo(tr("No comment found"));
         return;
@@ -1717,7 +1717,7 @@ void MainWindow::flipPieceVertically()
 void MainWindow::forward()
 {
     auto node = m_game->get_current().get_first_child_or_null();
-    if (node == 0)
+    if (node == nullptr)
         return;
     gotoNode(*node);
 }
@@ -1732,7 +1732,7 @@ void MainWindow::forward10()
         if (tree.has_move(*node))
             ++n;
         auto child = node->get_first_child_or_null();
-        if (child == 0)
+        if (child == nullptr)
             break;
         node = child;
     }
@@ -1752,7 +1752,7 @@ void MainWindow::fullscreen()
     m_toolBar->hide();
     settings.setValue("geometry", saveGeometry());
     showFullScreen();
-    if (m_leaveFullscreenButton == 0)
+    if (m_leaveFullscreenButton == nullptr)
         m_leaveFullscreenButton =
             new LeaveFullscreenButton(this, m_actionLeaveFullscreen);
     m_leaveFullscreenButton->showButton();
@@ -1871,7 +1871,7 @@ void MainWindow::gameOver()
         m_history->addGame(gameResult, oppRating, nuOpp, m_ratedGameColor,
                            gameResult, Tree::get_date_today(), m_level,
                            m_game->get_tree());
-        if (m_ratingDialog != 0)
+        if (m_ratingDialog != nullptr)
             m_ratingDialog->updateContent();
         int newRating = m_history->getRating().toInt();
         if (newRating > oldRating)
@@ -2042,9 +2042,9 @@ void MainWindow::gotoMove()
             nodes.insert(nodes.begin(), node);
         node = node->get_parent_or_null();
     }
-    while (node != 0);
+    while (node != nullptr);
     node = m_game->get_current().get_first_child_or_null();
-    while (node != 0)
+    while (node != nullptr)
     {
         if (! tree.get_move(*node).is_null())
             nodes.push_back(node);
@@ -2120,7 +2120,7 @@ void MainWindow::gotoPosition(Variant variant,
 
 void MainWindow::help()
 {
-    if (m_helpWindow != 0)
+    if (m_helpWindow != nullptr)
     {
         m_helpWindow->show();
         m_helpWindow->raise();
@@ -2135,10 +2135,10 @@ void MainWindow::help()
 void MainWindow::initGame()
 {
     setRated(false);
-    if (m_analyzeGameWindow != 0)
+    if (m_analyzeGameWindow != nullptr)
     {
         delete m_analyzeGameWindow;
-        m_analyzeGameWindow = 0;
+        m_analyzeGameWindow = nullptr;
     }
     m_game->init();
     m_game->set_charset("UTF-8");
@@ -2292,7 +2292,7 @@ void MainWindow::loadHistory()
     if (m_history->getVariant() == variant)
         return;
     m_history->load(variant);
-    if (m_ratingDialog != 0)
+    if (m_ratingDialog != nullptr)
         m_ratingDialog->updateContent();
 }
 
@@ -2354,7 +2354,7 @@ void MainWindow::nextTransform()
 void MainWindow::nextVariation()
 {
     auto node = m_game->get_current().get_sibling();
-    if (node == 0)
+    if (node == nullptr)
         return;
     gotoNode(*node);
 }
@@ -2364,7 +2364,7 @@ void MainWindow::nextVariation10()
     auto node = &m_game->get_current();
     for (unsigned i = 0; i < 10; ++i)
     {
-        if (node->get_sibling() == 0)
+        if (node->get_sibling() == nullptr)
             break;
         node = node->get_sibling();
     }
@@ -2494,10 +2494,10 @@ bool MainWindow::open(const QString& file, bool isTemporary)
         setFile(file);
         deleteAutoSaveFile();
     }
-    if (m_analyzeGameWindow != 0)
+    if (m_analyzeGameWindow != nullptr)
     {
         delete m_analyzeGameWindow;
-        m_analyzeGameWindow = 0;
+        m_analyzeGameWindow = nullptr;
     }
     setRated(false);
     try
@@ -2526,7 +2526,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
 void MainWindow::openRecentFile()
 {
      auto action = qobject_cast<QAction*>(sender());
-     if (action == 0)
+     if (action == nullptr)
          return;
      if (! checkSave())
          return;
@@ -2673,7 +2673,7 @@ void MainWindow::previousTransform()
 void MainWindow::previousVariation()
 {
     auto node = m_game->get_current().get_previous_sibling();
-    if (node == 0)
+    if (node == nullptr)
         return;
     gotoNode(*node);
 }
@@ -2683,7 +2683,7 @@ void MainWindow::previousVariation10()
     auto node = &m_game->get_current();
     for (unsigned i = 0; i < 10; ++i)
     {
-        if (node->get_previous_sibling() == 0)
+        if (node->get_previous_sibling() == nullptr)
             break;
         node = node->get_previous_sibling();
     }
@@ -2856,13 +2856,13 @@ void MainWindow::selectNamedPiece(const char* name1, const char* name2,
     if (bd.get_piece_by_name(name1, piece)
         && bd.is_piece_left(m_currentColor, piece))
         pieces.push_back(piece);
-    if (name2 != 0 && bd.get_piece_by_name(name2, piece)
+    if (name2 != nullptr && bd.get_piece_by_name(name2, piece)
         && bd.is_piece_left(m_currentColor, piece))
         pieces.push_back(piece);
-    if (name3 != 0 && bd.get_piece_by_name(name3, piece)
+    if (name3 != nullptr && bd.get_piece_by_name(name3, piece)
         && bd.is_piece_left(m_currentColor, piece))
         pieces.push_back(piece);
-    if (name4 != 0 && bd.get_piece_by_name(name4, piece)
+    if (name4 != nullptr && bd.get_piece_by_name(name4, piece)
         && bd.is_piece_left(m_currentColor, piece))
         pieces.push_back(piece);
     if (pieces.empty())
@@ -3251,7 +3251,7 @@ void MainWindow::showInvalidFile(QString file, const Exception& e)
 
 void MainWindow::showRating()
 {
-    if (m_ratingDialog == 0)
+    if (m_ratingDialog == nullptr)
     {
         m_ratingDialog = new RatingDialog(this, *m_history);
         connect(m_ratingDialog, SIGNAL(open(const QString&)),
@@ -3642,13 +3642,14 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
-    m_actionNextVariation->setEnabled(current.get_sibling() != 0);
+    m_actionNextVariation->setEnabled(current.get_sibling() != nullptr);
     if (! m_isGenMoveRunning)
     {
         m_actionPlay->setEnabled(hasMoves);
         m_actionPlaySingleMove->setEnabled(hasMoves);
     }
-    m_actionPreviousVariation->setEnabled(current.get_previous_sibling() != 0);
+    m_actionPreviousVariation->setEnabled(
+                                    current.get_previous_sibling() != nullptr);
     // See also comment in setupMode()
     m_actionSetupMode->setEnabled(! hasParent && ! hasChildren);
     m_actionTruncate->setEnabled(hasParent);

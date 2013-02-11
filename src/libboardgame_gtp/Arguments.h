@@ -233,7 +233,8 @@ string Arguments::get_type_name()
 {
 #ifdef __GNUC__
     int status;
-    auto name_ptr = abi::__cxa_demangle(typeid(T).name(), 0, 0, &status);
+    auto name_ptr =
+        abi::__cxa_demangle(typeid(T).name(), nullptr, nullptr, &status);
     if (status == 0)
     {
         string result(name_ptr);

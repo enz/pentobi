@@ -87,11 +87,11 @@ bool check_symmetry_min_nu_pieces(const Board& bd)
 //-----------------------------------------------------------------------------
 
 SharedConst::SharedConst(const Color& to_play)
-    : board(0),
+    : board(nullptr),
       to_play(to_play),
       detect_symmetry(true),
       avoid_symmetric_draw(true),
-      score_modification(Float(0.1))
+      score_modification(0.1f)
 {
     // Game variant and position dependent variables are initialized in
     // libpentobi_mcts::Search::start_search()

@@ -153,11 +153,11 @@ public:
         @param variant The game variant
         @param setup An optional setup position to initialize the board
         with. */
-    void init(Variant variant, const Setup* setup = 0);
+    void init(Variant variant, const Setup* setup = nullptr);
 
     /** Clear the current board without changing the current game variant.
         See init(Variant,const Setup*) */
-    void init(const Setup* setup = 0);
+    void init(const Setup* setup = nullptr);
 
     /** Copy the board state and move history from another board.
         This is like an assignment operator but because boards are rarely copied

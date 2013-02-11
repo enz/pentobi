@@ -63,7 +63,7 @@ public:
         false and there are more game trees to read.
         @throws ReadError */
     void read(istream& in, bool check_single_tree = true,
-              bool* more_game_trees_left = 0);
+              bool* more_game_trees_left = nullptr);
 
     /** See read(istream&,bool) */
     void read(const path& file);

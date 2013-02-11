@@ -19,7 +19,7 @@ unsigned get_move_number(const Tree& tree, const Node& node)
 {
     unsigned move_number = 0;
     auto current = &node;
-    while (current != 0)
+    while (current != nullptr)
     {
         if (tree.get_move_ignore_invalid(*current).is_regular())
             ++move_number;
@@ -34,7 +34,7 @@ unsigned get_moves_left(const Tree& tree, const Node& node)
 {
     unsigned moves_left = 0;
     auto current = node.get_first_child_or_null();
-    while (current != 0)
+    while (current != nullptr)
     {
         if (libpentobi_base::node_util::has_setup(*current))
             break;

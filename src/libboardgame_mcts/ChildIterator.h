@@ -43,7 +43,8 @@ template<typename N>
 ChildIterator<N>::ChildIterator(const Tree& tree, const Node& node)
 {
     auto nu_children = node.get_nu_children();
-    m_current = (nu_children != 0 ? &tree.get_node(node.get_first_child()) : 0);
+    m_current =
+        (nu_children != 0 ? &tree.get_node(node.get_first_child()) : nullptr);
     m_end = m_current + nu_children;
 }
 

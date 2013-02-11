@@ -546,7 +546,7 @@ void Engine::exec_main_loop(istream& in, ostream& out)
     // needed by this class and potentially harmful if threads are enabled and
     // the standard library implementation does not support simultaneous writes
     // to output stream by multiple threads
-    in.tie(0);
+    in.tie(nullptr);
     m_quit = false;
     PonderThread ponder_thread(*this);
     ReadThread read_thread(in, *this);
@@ -567,7 +567,7 @@ void Engine::exec_main_loop(istream& in, ostream& out)
 
 void Engine::exec_main_loop_st(istream& in, ostream& out)
 {
-    in.tie(0); // See comment in exec_main_loop()
+    in.tie(nullptr); // See comment in exec_main_loop()
     m_quit = false;
     CmdLine cmd;
     Response response;

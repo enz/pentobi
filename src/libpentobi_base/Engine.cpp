@@ -38,7 +38,7 @@ Engine::Engine(Variant variant)
       m_show_board(false),
       m_resign(true),
       m_game(variant),
-      m_player(0)
+      m_player(nullptr)
 {
     add("all_legal", &Engine::cmd_all_legal);
     add("clear_board", &Engine::cmd_clear_board);
@@ -134,10 +134,10 @@ void Engine::cmd_loadsgf(const Arguments& args)
         reader.read(file);
         auto tree = reader.get_tree_transfer_ownership();
         m_game.init(tree);
-        const Node* node = 0;
+        const Node* node = nullptr;
         if (move_number != -1)
             node = m_game.get_tree().get_node_before_move_number(move_number);
-        if (node == 0)
+        if (node == nullptr)
             node = &get_last_node(m_game.get_root());
         m_game.goto_node(*node);
         board_changed();
@@ -324,7 +324,7 @@ Color Engine::get_color_arg(const Arguments& args, unsigned i) const
 
 Player& Engine::get_player() const
 {
-    if (m_player == 0)
+    if (m_player == nullptr)
         throw Failure("no player set");
     return *m_player;
 }

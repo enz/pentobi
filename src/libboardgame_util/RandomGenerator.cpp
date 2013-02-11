@@ -32,7 +32,7 @@ list<RandomGenerator*>& get_all_generators()
 RandomGenerator::ResultType get_nondet_seed()
 {
     static RandomGenerator::Generator seed_generator;
-    auto seed = static_cast<RandomGenerator::ResultType>(time(0));
+    auto seed = static_cast<RandomGenerator::ResultType>(time(nullptr));
     seed ^= seed_generator();
     return seed;
 }

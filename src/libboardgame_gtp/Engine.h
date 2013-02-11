@@ -254,7 +254,7 @@ template<class T>
 void Engine::add(const string& name,
                  void (T::*f)(const Arguments&, Response&), T* t)
 {
-    assert(f != 0);
+    assert(f != nullptr);
     add(name,
         static_cast<Handler>(bind(f, t, placeholders::_1, placeholders::_2)));
 }
@@ -262,21 +262,21 @@ void Engine::add(const string& name,
 template<class T>
 void Engine::add(const string& name, void (T::*f)(Response&), T* t)
 {
-    assert(f != 0);
+    assert(f != nullptr);
     add(name, static_cast<HandlerNoArgs>(bind(f, t, placeholders::_1)));
 }
 
 template<class T>
 void Engine::add(const string& name, void (T::*f)(const Arguments&), T* t)
 {
-    assert(f != 0);
+    assert(f != nullptr);
     add(name, static_cast<HandlerNoResponse>(bind(f, t, placeholders::_1)));
 }
 
 template<class T>
 void Engine::add(const string& name, void (T::*f)(), T* t)
 {
-    assert(f != 0);
+    assert(f != nullptr);
     add(name, static_cast<HandlerNoArgsNoResponse>(bind(f, t)));
 }
 

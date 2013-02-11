@@ -59,7 +59,7 @@ const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
     for (ChildIterator i(node); i; ++i)
         if (get_move(*i) == mv)
             return &(*i);
-    return 0;
+    return nullptr;
 }
 
 ColorMove Tree::get_move(const Node& node) const
@@ -99,7 +99,7 @@ const Node* Tree::get_node_before_move_number(unsigned move_number) const
                 return node;
         node = &child;
     }
-    return 0;
+    return nullptr;
 }
 
 string Tree::get_player_name(Color c) const
@@ -151,7 +151,7 @@ Setup::PlacementList Tree::get_setup_property(const Node& node,
 bool Tree::has_main_variation_moves() const
 {
     auto node = &get_root();
-    while (node != 0)
+    while (node != nullptr)
     {
         if (has_move_ignore_invalid(*node))
             return true;
@@ -196,7 +196,7 @@ void Tree::keep_only_subtree(const Node& node)
     if (! create_new_setup)
     {
         auto current = node.get_parent_or_null();
-        while (current != 0)
+        while (current != nullptr)
         {
             if (has_move(*current) || node_util::has_setup(*current))
             {

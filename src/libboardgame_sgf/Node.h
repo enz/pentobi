@@ -242,23 +242,23 @@ inline const Node* Node::get_sibling() const
 
 inline bool Node::has_children() const
 {
-    return m_first_child.get() != 0;
+    return static_cast<bool>(m_first_child);
 }
 
 inline bool Node::has_parent() const
 {
-    return m_parent != 0;
+    return m_parent != nullptr;
 }
 
 inline bool Node::has_single_child() const
 {
-    return m_first_child.get() != 0 && m_first_child->m_sibling.get() == 0;
+    return (m_first_child && ! m_first_child->m_sibling);
 }
 
 inline unique_ptr<Node> Node::remove_children()
 {
     if (m_first_child)
-        m_first_child->m_parent = 0;
+        m_first_child->m_parent = nullptr;
     return move(m_first_child);
 }
 
@@ -281,7 +281,7 @@ bool Node::set_property(const string& id, const vector<T>& values)
     for (const T& v : values)
         values_to_string.push_back(to_string(v));
     auto property = m_first_property.get();
-    if (property == 0)
+    if (property == nullptr)
     {
         m_first_property.reset(new Property(id, values_to_string));
         return true;
@@ -294,7 +294,7 @@ bool Node::set_property(const string& id, const vector<T>& values)
             property->values = values_to_string;
             return was_changed;
         }
-        if (property->next.get() == 0)
+        if (! property->next)
         {
             property->next.reset(new Property(id, values_to_string));
             return true;
@@ -329,7 +329,7 @@ inline PropertyIterator::PropertyIterator(const Node& node)
 
 inline PropertyIterator::operator bool() const
 {
-    return m_current != 0;
+    return m_current != nullptr;
 }
 
 inline void PropertyIterator::operator++()
@@ -378,7 +378,7 @@ inline ChildIterator::ChildIterator(const Node& node)
 
 inline ChildIterator::operator bool() const
 {
-    return m_current != 0;
+    return m_current != nullptr;
 }
 
 inline void ChildIterator::operator++()

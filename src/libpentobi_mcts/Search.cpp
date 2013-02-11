@@ -250,7 +250,7 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
         set_default_param(variant);
     m_variant = variant;
     bool result = ParentClass::search(mv, max_count, min_simulations, max_time,
-                                      time_source, 0);
+                                      time_source);
     return result;
 }
 

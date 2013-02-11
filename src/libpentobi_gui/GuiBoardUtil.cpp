@@ -71,7 +71,7 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
 bool getVariationIndex(const Tree& tree, const Node& node, unsigned& moveIndex)
 {
     auto parent = node.get_parent_or_null();
-    if (parent == 0 || parent->has_single_child())
+    if (parent == nullptr || parent->has_single_child())
         return false;
     unsigned nuSiblingMoves = 0;
     moveIndex = 0;
@@ -128,7 +128,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
                 ++displayedMoveNumber;
             node = node->get_parent_or_null();
         }
-        while (node != 0);
+        while (node != nullptr);
         unsigned moveNumber = bd.get_nu_moves();
         node = &game.get_current();
         do
@@ -148,7 +148,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
             }
             node = node->get_parent_or_null();
         }
-        while (node != 0);
+        while (node != nullptr);
     }
 }
 

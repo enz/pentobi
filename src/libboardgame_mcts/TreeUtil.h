@@ -19,7 +19,7 @@ const N* find_child(const Tree<N>& tree, const N& node, typename N::Move mv)
     for (ChildIterator<N> i(tree, node); i; ++i)
         if (i->get_move() == mv)
             return &(*i);
-    return 0;
+    return nullptr;
 }
 
 template<typename N, class S>
@@ -27,7 +27,7 @@ const N* find_node(const Tree<N>& tree, const S& sequence)
 {
     auto node = &tree.get_root();
     for (typename N::Move mv : sequence)
-        if ((node = find_child(tree, *node, mv)) == 0)
+        if ((node = find_child(tree, *node, mv)) == nullptr)
             break;
     return node;
 }

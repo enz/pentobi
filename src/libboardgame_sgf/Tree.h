@@ -195,7 +195,7 @@ private:
 
 inline void Tree::append(const Node& node, unique_ptr<Node> child)
 {
-    if (child.get() != 0)
+    if (child)
         m_modified = true;
     non_const(node).append(move(child));
 }

@@ -36,7 +36,7 @@ private:
 
 inline double Timer::operator()() const
 {
-    LIBBOARDGAME_ASSERT(m_time_source != 0);
+    LIBBOARDGAME_ASSERT(m_time_source != nullptr);
     return (*m_time_source)() - m_start;
 }
 

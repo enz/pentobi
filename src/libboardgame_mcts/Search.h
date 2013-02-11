@@ -317,14 +317,15 @@ public:
 
     /** Select the move to play.
         Uses select_child_final() on the root node. */
-    bool select_move(Move& mv, const vector<Move>* exclude_moves = 0) const;
+    bool select_move(Move& mv,
+                     const vector<Move>* exclude_moves = nullptr) const;
 
     /** Select the best child of a node after the search.
         Selects child with highest visit count; the value is used as a
         tie-breaker for equal counts (important at very low number of
         simulations, e.g. all children have count 1 or 0). */
     const Node* select_child_final(const Node& node,
-                                   const vector<Move>* exclude_moves = 0) const;
+                            const vector<Move>* exclude_moves = nullptr) const;
 
     State& get_state(unsigned thread_id);
 
@@ -1050,7 +1051,7 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
         Float init_val = m_init_val[state.get_to_play()].get_mean();
         if (! expand_node(thread_state.thread_id, *node, node, init_val))
             thread_state.is_out_of_mem = true;
-        else if (node == 0)
+        else if (node == nullptr)
             is_terminal = true;
         else
         {
@@ -1134,7 +1135,7 @@ bool Search<S, M, R>::prune(TimeSource& time_source, double time,
 template<class S, class M, class R>
 void Search<S, M, R>::restore_root_from_children(Tree& tree, const Node& root)
 {
-    const Node* best_child = 0;
+    const Node* best_child = nullptr;
     Float max_count = 0;
     for (ChildIterator i(tree, root); i; ++i)
         if (i->get_visit_count() > max_count)
@@ -1142,7 +1143,7 @@ void Search<S, M, R>::restore_root_from_children(Tree& tree, const Node& root)
             best_child = &(*i);
             max_count = i->get_visit_count();
         }
-    if (best_child == 0)
+    if (best_child == nullptr)
         tree.init_root_value(get_tie_value(), 0);
     else
         tree.init_root_value(best_child->get_value(),
@@ -1192,7 +1193,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
             Timer timer(time_source);
             m_tmp_tree.clear(get_tie_value());
             auto node = find_node(m_tree, m_followup_sequence);
-            if (node != 0)
+            if (node != nullptr)
             {
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 if (m_deterministic)
@@ -1292,7 +1293,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
     m_last_time = m_timer();
     write_info(log());
     bool result = select_move(mv);
-    m_time_source = 0;
+    m_time_source = nullptr;
     return result;
 }
 
@@ -1359,7 +1360,7 @@ auto Search<S, M, R>::select_child(const Node& node) -> const Node*
         log() << "Search::select_child:\n"
               << "vc=" << node_count << '\n'
               << "v=" << node.get_value() << '\n';
-    const Node* best_child = 0;
+    const Node* best_child = nullptr;
     Float best_value = -numeric_limits<Float>::max();
     m_bias_term.start_iteration(node_count);
     for (ChildIterator i(m_tree, node); i; ++i)
@@ -1388,7 +1389,7 @@ auto Search<S, M, R>::select_child_final(const Node& node,
                        const vector<Move>* exclude_moves) const -> const Node*
 {
     // Select the child with the highest visit count, use value as tie breaker
-    const Node* result = 0;
+    const Node* result = nullptr;
     Float max_count = -1;
     Float max_count_value = -numeric_limits<Float>::max();
     for (ChildIterator i(m_tree, node); i; ++i)
@@ -1397,7 +1398,7 @@ auto Search<S, M, R>::select_child_final(const Node& node,
         if (count > max_count
             || (count == max_count && i->get_value() > max_count_value))
         {
-            if (exclude_moves != 0
+            if (exclude_moves != nullptr
                 && find(exclude_moves->begin(), exclude_moves->end(),
                         i->get_move()) != exclude_moves->end())
                 continue;
@@ -1414,7 +1415,7 @@ bool Search<S, M, R>::select_move(Move& mv, const vector<Move>* exclude_moves)
     const
 {
     auto child = select_child_final(m_tree.get_root(), exclude_moves);
-    if (child != 0)
+    if (child != nullptr)
     {
         mv = child->get_move();
         return true;

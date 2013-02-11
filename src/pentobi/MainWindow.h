@@ -727,8 +727,9 @@ private slots:
 
     void rememberDir(const QString& file);
 
-    void selectNamedPiece(const char* name1, const char* name2 = 0,
-                          const char* name3 = 0, const char* name4 = 0);
+    void selectNamedPiece(const char* name1, const char* name2 = nullptr,
+                          const char* name3 = nullptr,
+                          const char* name4 = nullptr);
 
     void setLevel(bool checked);
 

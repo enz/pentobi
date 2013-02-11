@@ -62,7 +62,7 @@ const Transform* PieceTransformsTrigon::get_mirrored_horizontally(
     if (transf == &m_refl_rot300)
         return &m_rot60;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 const Transform* PieceTransformsTrigon::get_mirrored_vertically(
@@ -93,7 +93,7 @@ const Transform* PieceTransformsTrigon::get_mirrored_vertically(
     if (transf == &m_refl_rot300)
         return &m_rot240;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 const Transform* PieceTransformsTrigon::get_rotated_anticlockwise(
@@ -124,7 +124,7 @@ const Transform* PieceTransformsTrigon::get_rotated_anticlockwise(
     if (transf == &m_refl_rot300)
         return &m_refl_rot240;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 const Transform* PieceTransformsTrigon::get_rotated_clockwise(
@@ -155,7 +155,7 @@ const Transform* PieceTransformsTrigon::get_rotated_clockwise(
     if (transf == &m_refl_rot300)
         return &m_refl;
     LIBBOARDGAME_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 //-----------------------------------------------------------------------------

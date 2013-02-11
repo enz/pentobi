@@ -46,7 +46,7 @@ public:
         uses the arguments from the paintEmptyBoard() function to determine the
         board properties. */
     void paintPieces(QPainter& painter, const Grid<PointState>& pointState,
-                     const Grid<QString>* labels = 0);
+                     const Grid<QString>* labels = nullptr);
 
     /** Paint the selected piece.
         Paints the selected piece either transparent (if not legal) or opaque
