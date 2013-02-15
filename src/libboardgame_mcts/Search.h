@@ -1065,7 +1065,6 @@ template<class S, class M, class R>
 void Search<S, M, R>::write_info(ostream& out) const
 {
     auto& root = m_tree.get_root();
-    Float count = root.get_visit_count();
     if (m_threads.empty())
         return;
     auto& thread_state = m_threads[0]->thread_state;
@@ -1075,10 +1074,11 @@ void Search<S, M, R>::write_info(ostream& out) const
         return;
     }
     out << format(
-             "Val: %.2f, Cnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
+             "Val: %.2f, Cnt: %.0f, VCnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
              "Sim/s: %.0f, Len: %s, Dp: %s\n")
-        % root.get_value() % count % m_nu_simulations
-        % m_tree.get_nu_nodes() % time_to_string(m_last_time)
+        % root.get_value() % root.get_value_count() % root.get_visit_count()
+        % m_nu_simulations % m_tree.get_nu_nodes()
+        % time_to_string(m_last_time)
         % (double(m_nu_simulations) / m_last_time)
         % thread_state.stat_len.to_string(true, 1, true)
         % thread_state.stat_in_tree_len.to_string(true, 1, true);
