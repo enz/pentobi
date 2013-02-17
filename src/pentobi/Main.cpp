@@ -118,8 +118,12 @@ int main(int argc, char* argv[])
         pentobiTranslator.load("pentobi_" + locale, translationsPentobiDir);
         app.installTranslator(&pentobiTranslator);
 
-        vector<string> specs{
-            "memory:", "nobook", "seed|r:", "threads:", "verbose" };
+        vector<string> specs;
+        specs.push_back("memory:");
+        specs.push_back("nobook");
+        specs.push_back("seed|r:");
+        specs.push_back("threads:");
+        specs.push_back("verbose");
         Options opt(argc, argv, specs);
         size_t memory = 0;
         if (opt.contains("memory"))
