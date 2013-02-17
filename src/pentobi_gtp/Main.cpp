@@ -136,7 +136,7 @@ int main(int argc, char** argv)
         if (! args.empty())
             for (auto& file : args)
             {
-                ifstream in(file.c_str());
+                ifstream in(file);
                 if (! in)
                     throw Exception(format("Error opening '%1%'") % file);
                 engine.exec_main_loop_st(in, cout);

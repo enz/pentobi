@@ -109,8 +109,7 @@ void Engine::cmd_save_tree(const Arguments& args)
     auto& search = get_search();
     if (! search.get_last_state().is_valid())
         throw Failure("no search tree");
-    string file = args.get();
-    ofstream out(file.c_str());
+    ofstream out(args.get());
     libpentobi_mcts::util::dump_tree(out, search);
 }
 
