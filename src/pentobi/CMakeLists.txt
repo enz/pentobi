@@ -80,7 +80,6 @@ target_link_libraries(pentobi
   boardgame_sys
   ${Boost_SYSTEM_LIBRARY}
   ${Boost_FILESYSTEM_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY}
   ${Boost_THREAD_LIBRARY}
   ${Boost_CHRONO_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}

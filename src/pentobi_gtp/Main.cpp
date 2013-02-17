@@ -9,26 +9,20 @@
 #include <fstream>
 #include <iostream>
 #include <boost/format.hpp>
-#include <boost/program_options.hpp>
 #include "Engine.h"
 #include "libboardgame_util/Exception.h"
 #include "libboardgame_util/Log.h"
+#include "libboardgame_util/Options.h"
 #include "libboardgame_util/RandomGenerator.h"
 
 using namespace std;
 using boost::filesystem::path;
 using boost::format;
-using boost::program_options::command_line_parser;
-using boost::program_options::options_description;
-using boost::program_options::notify;
-using boost::program_options::positional_options_description;
-using boost::program_options::store;
-using boost::program_options::value;
-using boost::program_options::variables_map;
 using libboardgame_gtp::Failure;
 using libboardgame_util::log;
 using libboardgame_util::set_log_null;
 using libboardgame_util::Exception;
+using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
 using libpentobi_base::parse_variant_id;
 using libpentobi_base::Board;
@@ -55,105 +49,98 @@ int main(int argc, char** argv)
     path application_dir_path = get_application_dir_path(argc, argv);
     try
     {
-        uint32_t seed;
-        string config_file;
-        string book_file;
-        string variant_string = "classic";
-        vector<string> input_file;
-        options_description normal_options("Options");
-        int level = 4;
-        size_t memory = 0;
-        unsigned threads = 1;
-        normal_options.add_options()
-            ("book", value<>(&book_file), "load an external book file")
-            ("config,c", value<>(&config_file), "set GTP config file")
-            ("color", "colorize text output of boards")
-            ("cputime", "use CPU time")
-            ("game,g", value<>(&variant_string),
-             "game variant (classic, classic_2, duo, trigon, trigon_2)")
-            ("help,h", "print help message and exit")
-            ("level,l", value<int>(&level), "set playing strength level")
-            ("memory", value<>(&memory), "memory to allocate for search trees")
-            ("seed,r", value<uint32_t>(&seed), "set random seed")
-            ("showboard", "automatically write board to stderr after changes")
-            ("nobook", "disable opening book")
-            ("noresign", "disable resign")
-            ("quiet,q", "do not print logging messages")
-            ("threads", value<>(&threads), "number of threads in the search")
-            ("version,v", "print version and exit");
-        options_description hidden_options;
-        hidden_options.add_options()
-            ("input-file", value<vector<string>>(&input_file),
-             "input file");
-        options_description all_options;
-        all_options.add(normal_options).add(hidden_options);
-        positional_options_description positional_options;
-        positional_options.add("input-file", -1);
-        variables_map vm;
-        store(command_line_parser(argc, argv).options(all_options).
-              positional(positional_options).run(), vm);
-        notify(vm);
-        if (vm.count("help"))
+        vector<string> specs{
+            "book:", "config|c:", "color", "cputime", "game|g:", "help|h",
+                "level|l:", "memory:", "nobook", "noresign", "quiet|q",
+                "seed|r:", "showboard", "threads:", "version|v" };
+        Options opt(argc, argv, specs);
+        if (opt.contains("help"))
         {
-            cout << "Usage: pentobi_gtp [options] [input files]\n"
-                 << normal_options;
-            return EXIT_SUCCESS;
+            cout <<
+                "Usage: pentobi_gtp [options] [input files]\n"
+                "--book       load an external book file\n"
+                "--config,-c  set GTP config file\n"
+                "--color      colorize text output of boards\n"
+                "--cputime    use CPU time\n"
+                "--game,-g    game variant (classic, classic_2, duo, trigon,\n"
+                "             trigon_2, junior)\n"
+                "--help,-h    print help message and exit\n"
+                "--level,-l   set playing strength level\n"
+                "--memory     memory to allocate for search trees\n"
+                "--seed,-r    set random seed\n"
+                "--showboard  automatically write board to stderr after\n"
+                "             changes\n"
+                "--nobook     disable opening book\n"
+                "--noresign   disable resign\n"
+                "--quiet,-q   do not print logging messages\n"
+                "--threads    number of threads in the search\n"
+                "--version,-v print version and exit\n";
+            return 0;
         }
-        if (vm.count("version"))
+        if (opt.contains("version"))
         {
 #ifdef VERSION
             cout << "Pentobi " << VERSION << '\n';
 #else
             cout << "Pentobi UNKNONW";
 #endif
-            return EXIT_SUCCESS;
+            return 0;
         }
-        if (memory == 0 && vm.count("memory"))
-            throw Exception("Value for memory must be greater zero.");
-        if (threads == 0 && vm.count("threads"))
+        size_t memory = 0;
+        if (opt.contains("memory"))
+        {
+            memory = opt.get<size_t>("memory");
+            if (memory == 0)
+                throw Exception("Value for memory must be greater zero.");
+        }
+        auto threads = opt.get<unsigned>("threads", 1);;
+        if (threads == 0)
             throw Exception("Number of threads must be greater zero.");
-        Board::color_output = (vm.count("color") != 0);
-        if (vm.count("quiet"))
+        Board::color_output = opt.contains("color");
+        if (opt.contains("quiet"))
             set_log_null();
-        if (vm.count("seed"))
-            RandomGenerator::set_global_seed(seed);
+        if (opt.contains("seed"))
+            RandomGenerator::set_global_seed(opt.get<uint32_t>("seed"));
+        string variant_string = opt.get("game", "classic");
         Variant variant;
         if (! parse_variant_id(variant_string, variant))
             throw Exception(format("invalid game variant '%1%'")
                             % variant_string);
-        bool use_book = (vm.count("nobook") == 0);
+        auto level = opt.get<int>("level", 4);
+        auto use_book = (! opt.contains("nobook"));
         path books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
                                    threads, memory);
-        engine.set_resign(vm.count("noresign") == 0);
-        if (vm.count("showboard"))
+        engine.set_resign(! opt.contains("noresign"));
+        if (opt.contains("showboard"))
             engine.set_show_board(true);
-        if (vm.count("seed"))
+        if (opt.contains("seed"))
             engine.set_deterministic();
-        if (vm.count("cputime"))
+        if (opt.contains("cputime"))
             engine.use_cpu_time(true);
-        if (vm.count("book"))
+        string book_file = opt.get("book", "");
+        if (! book_file.empty())
         {
             ifstream in(book_file);
             engine.get_mcts_player().load_book(in);
         }
+        string config_file = opt.get("config", "");
         if (! config_file.empty())
         {
-            ifstream in(config_file.c_str());
+            ifstream in(config_file);
             if (! in)
                 throw Exception(format("Error opening '%1%'") % config_file);
             engine.exec(in, true, log());
         }
-        if (! input_file.empty())
-        {
-            for (string file : input_file)
+        auto& args = opt.get_args();
+        if (! args.empty())
+            for (auto& file : args)
             {
                 ifstream in(file.c_str());
                 if (! in)
                     throw Exception(format("Error opening '%1%'") % file);
                 engine.exec_main_loop_st(in, cout);
             }
-        }
         else
             engine.exec_main_loop_st(cin, cout);
         return 0;

@@ -7,13 +7,13 @@
 #endif
 
 #include <iostream>
-#include <boost/program_options.hpp>
 #include <QFileInfo>
 #include <QLibraryInfo>
 #include <QSettings>
 #include <QTranslator>
 #include "Application.h"
 #include "MainWindow.h"
+#include "libboardgame_util/Options.h"
 
 #ifdef Q_WS_WIN
 #include <stdio.h>
@@ -22,13 +22,8 @@
 #include <fcntl.h>
 #endif
 
-using boost::program_options::command_line_parser;
-using boost::program_options::options_description;
-using boost::program_options::positional_options_description;
-using boost::program_options::store;
-using boost::program_options::value;
-using boost::program_options::variables_map;
 using libboardgame_util::set_log_null;
+using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
@@ -122,48 +117,36 @@ int main(int argc, char* argv[])
         QTranslator pentobiTranslator;
         pentobiTranslator.load("pentobi_" + locale, translationsPentobiDir);
         app.installTranslator(&pentobiTranslator);
-        vector<string> arguments;
-        options_description normal_options("Options");
-        uint32_t seed;
+
+        vector<string> specs{
+            "memory:", "nobook", "seed|r:", "threads:", "verbose" };
+        Options opt(argc, argv, specs);
         size_t memory = 0;
-        unsigned threads = 0;
-        normal_options.add_options()
-            ("memory", value<>(&memory), "memory to allocate for search trees")
-            ("nobook", "do not use opening book")
-            ("seed,r", value<uint32_t>(&seed), "set random seed")
-            ("threads", value<>(&threads), "number of threads in the search")
-            ("verbose", "print logging messages");
-        options_description hidden_options;
-        hidden_options.add_options()
-            ("input-file", value<vector<string>>(&arguments),
-             "input file");
-        options_description all_options;
-        all_options.add(normal_options).add(hidden_options);
-        positional_options_description positional_options;
-        positional_options.add("input-file", -1);
-        variables_map vm;
-        store(command_line_parser(argc, argv).options(all_options).
-              positional(positional_options).run(), vm);
-        boost::program_options::notify(vm);
-        if (memory == 0 && vm.count("memory"))
-            throw Exception("Value for memory must be greater zero.");
-        if (threads == 0 && vm.count("threads"))
+        if (opt.contains("memory"))
+        {
+            memory = opt.get<size_t>("memory");
+            if (memory == 0)
+                throw Exception("Value for memory must be greater zero.");
+        }
+        auto threads = opt.get<unsigned>("threads", 1);;
+        if (threads == 0)
             throw Exception("Number of threads must be greater zero.");
-        if (! vm.count("verbose"))
+        if (! opt.contains("verbose"))
             set_log_null();
-        if (vm.count("seed"))
-            RandomGenerator::set_global_seed(seed);
 #ifdef Q_WS_WIN
-        if (vm.count("verbose"))
+        if (opt.contains("verbose"))
             redirectStdErr();
 #endif
-        bool noBook = (vm.count("nobook") != 0);
+        if (opt.contains("seed"))
+            RandomGenerator::set_global_seed(opt.get<uint32_t>("seed"));
+        bool noBook = opt.contains("nobook");
         QString initialFile;
-        if (! arguments.empty())
-            initialFile = arguments[0].c_str();
+        auto& args = opt.get_args();
+        if (! args.empty())
+            initialFile = args[0].c_str();
         MainWindow mainWindow(initialFile, manualDir, booksDir, noBook,
                               threads, memory);
-        if (vm.count("seed"))
+        if (opt.contains("seed"))
             mainWindow.setDeterministic();
         mainWindow.show();
         return app.exec();

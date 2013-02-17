@@ -9,6 +9,7 @@ set(unittest_libboardgame_util_STAT_SRCS
   ArrayListTest.cpp
   FastLogTest.cpp
   NullTermListTest.cpp
+  OptionsTest.cpp
   StringUtilTest.cpp
   )
 

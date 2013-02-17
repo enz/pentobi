@@ -33,7 +33,7 @@
 
     All LibBoardGame and Pentobi modules depend on the following
     <a href="http://www.boost.org/">Boost</a> libraries: thread, system,
-    filesystem, date_time  and program_options.
+    filesystem
 
     @section mainpage_gui Pentobi GUI Modules
 

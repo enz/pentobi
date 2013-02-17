@@ -48,7 +48,7 @@ check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 
-set(PENTOBI_BOOST_COMPONENTS system filesystem program_options thread)
+set(PENTOBI_BOOST_COMPONENTS system filesystem thread)
 # On MinGW, the thread library needs chrono (last tested with Boost 1.51)
 if (MINGW)
   set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} chrono)
