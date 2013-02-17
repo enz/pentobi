@@ -376,12 +376,11 @@ void MainWindow::about()
                        "<h3>" + tr("Pentobi") + "</h3>"
                        "<p>" + tr("Version %1").arg(getVersion()) + "</p>"
                        "<p>" +
-                       tr("Computer program that plays the board game Blokus.")
-                       + "<br>"
-                       "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
-                       + "</p>"
-                       "<p>" +
+                       tr("Computer program that plays the board game Blokus")
+                       + "<br>" +
                        tr("Copyright &copy; 2011&ndash;2013 Markus Enzenberger") +
+                       + "<br>" +
+                       "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
                        "</p>");
 }
 
