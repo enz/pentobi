@@ -126,7 +126,6 @@ void Options::check_name(const string& name) const
         throw Exception("Internal error: invalid option name " + name);
 }
 
-template<>
 string Options::get(const string& name) const
 {
     check_name(name);
@@ -136,7 +135,6 @@ string Options::get(const string& name) const
     return pos->second;
 }
 
-template<>
 string Options::get(const string& name, const string& default_value) const
 {
     check_name(name);
@@ -148,7 +146,7 @@ string Options::get(const string& name, const string& default_value) const
 
 string Options::get(const string& name, const char* default_value) const
 {
-    return get<string>(name, default_value);
+    return get(name, string(default_value));
 }
 
 //----------------------------------------------------------------------------

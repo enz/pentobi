@@ -49,20 +49,24 @@ public:
         @param name The (long) option name.  */
     bool contains(const string& name) const;
 
+    string get(const string& name) const;
+
+    string get(const string& name, const string& default_value) const;
+
+    string get(const string& name, const char* default_value) const;
+
     /** Get option value.
         @param name The (long) option name.
         @throws Exception If option does not exist or has the wrong type. */
-    template<typename T = string>
+    template<typename T>
     T get(const string& name) const;
 
     /** Get option value or default value.
         @param name The (long) option name.
         @return The option value or the default value if the option does not
         exist. */
-    template<typename T = string>
+    template<typename T>
     T get(const string& name, const T& default_value) const;
-
-    string get(const string& name, const char* default_value) const;
 
     /** Remaining command line arguments that are not an option or an option
         value. */
@@ -90,7 +94,7 @@ template<typename T>
 T Options::get(const string& name) const
 {
     T t;
-    if (! from_string(get<string>(name), t))
+    if (! from_string(get(name), t))
         throw Exception("Option --" + name + " needs type " + get_type_name(t));
     return t;
 }
@@ -102,12 +106,6 @@ T Options::get(const string& name, const T& default_value) const
         return default_value;
     return get<T>(name);
 }
-
-template<>
-string Options::get(const string& name) const;
-
-template<>
-string Options::get(const string& name, const string& default_value) const;
 
 inline const vector<string>& Options::get_args() const
 {
