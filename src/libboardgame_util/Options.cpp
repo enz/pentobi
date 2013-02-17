@@ -14,6 +14,16 @@ namespace libboardgame_util {
 
 Options::Options(int argc, const char** argv, const vector<string>& specs)
 {
+    init(argc, argv, specs);
+}
+
+Options::Options(int argc, char** argv, const vector<string>& specs)
+{
+    init(argc, const_cast<const char**>(argv), specs);
+}
+
+void Options::init(int argc, const char** argv, const vector<string>& specs)
+{
     for (const auto& s : specs)
     {
         auto pos = s.find("|");
