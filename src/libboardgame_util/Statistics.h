@@ -12,8 +12,8 @@
 #include <limits>
 #include <sstream>
 #include <string>
-#include <boost/io/ios_state.hpp>
 #include "Assert.h"
+#include "FmtSaver.h"
 
 namespace libboardgame_util {
 
@@ -86,7 +86,7 @@ template<typename FLOAT>
 void StatisticsBase<FLOAT>::write(ostream& out, bool fixed,
                                   unsigned precision) const
 {
-    boost::io::ios_all_saver saver(out);
+    FmtSaver saver(out);
     if (fixed)
         out << std::fixed;
     out << setprecision(precision) << m_mean;
@@ -182,7 +182,7 @@ template<typename FLOAT>
 void Statistics<FLOAT>::write(ostream& out, bool fixed,
                               unsigned precision) const
 {
-    boost::io::ios_all_saver saver(out);
+    FmtSaver saver(out);
     if (fixed)
         out << std::fixed;
     out << setprecision(precision) << get_mean() << " dev="
@@ -301,7 +301,7 @@ void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned precision,
                                  bool integer_values) const
 {
     m_statistics.write(out, fixed, precision);
-    boost::io::ios_all_saver saver(out);
+    FmtSaver saver(out);
     if (fixed)
         out << std::fixed;
     if (integer_values)
@@ -395,7 +395,7 @@ template<typename FLOAT>
 void StatisticsDirtyLockFree<FLOAT>::write(ostream& out, bool fixed,
                                            unsigned precision) const
 {
-    boost::io::ios_all_saver saver(out);
+    FmtSaver saver(out);
     if (fixed)
         out << std::fixed;
     out << setprecision(precision) << get_mean();
