@@ -21,8 +21,6 @@ target_link_libraries(unittest_libboardgame_sgf
   boardgame_test
   boardgame_sgf
   boardgame_util
-  ${Boost_SYSTEM_LIBRARY}
-  ${Boost_FILESYSTEM_LIBRARY}
   )
 
 add_test(libboardgame_sgf unittest_libboardgame_sgf)

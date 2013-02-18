@@ -38,7 +38,7 @@ using libpentobi_mcts::State;
 //-----------------------------------------------------------------------------
 
 Engine::Engine(Variant variant, int level, bool use_book,
-               const path& books_dir, unsigned nu_threads, size_t memory)
+               const string& books_dir, unsigned nu_threads, size_t memory)
     : libpentobi_base::Engine(variant)
 {
     create_player(variant, books_dir, nu_threads, memory);
@@ -190,7 +190,7 @@ void Engine::cmd_version(Response& response)
     response.set(version);
 }
 
-void Engine::create_player(Variant variant, const path& books_dir,
+void Engine::create_player(Variant variant, const string& books_dir,
                            unsigned nu_threads, size_t memory)
 {
     m_player.reset(new Player(variant, books_dir, nu_threads, memory));

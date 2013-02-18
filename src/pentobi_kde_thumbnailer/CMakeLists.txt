@@ -17,8 +17,6 @@ target_link_libraries(pentobi-thumbnail
   pentobi_kde_thumbnailer
   ${KDE4_KIO_LIBS}
   ${QT_LIBRARIES}
-  ${Boost_SYSTEM_LIBRARY}
-  ${Boost_FILESYSTEM_LIBRARY}
   )
 
 install(TARGETS pentobi-thumbnail DESTINATION ${PLUGIN_INSTALL_DIR})

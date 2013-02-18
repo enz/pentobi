@@ -10,9 +10,9 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <fstream>
 #include <boost/format.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/filesystem/fstream.hpp>
 #include <QAction>
 #include <QApplication>
 #include <QDir>
@@ -60,7 +60,6 @@ using namespace std;
 using Util::getPlayerString;
 using boost::format;
 using boost::trim_right;
-using boost::filesystem::path;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
@@ -1867,9 +1866,9 @@ void MainWindow::gameOver()
             gameResult = 0;
         unsigned nuOpp = get_nu_players(variant) - 1;
         Rating oppRating = m_player->get_rating(variant);
+        QString date = QString(Tree::get_date_today().c_str());
         m_history->addGame(gameResult, oppRating, nuOpp, m_ratedGameColor,
-                           gameResult, Tree::get_date_today(), m_level,
-                           m_game->get_tree());
+                           gameResult, date, m_level, m_game->get_tree());
         if (m_ratingDialog != nullptr)
             m_ratingDialog->updateContent();
         int newRating = m_history->getRating().toInt();
@@ -3702,9 +3701,9 @@ void MainWindow::wheelEvent(QWheelEvent* event)
     event->accept();
 }
 
-bool MainWindow::writeGame(const path& file)
+bool MainWindow::writeGame(const string& file)
 {
-    boost::filesystem::ofstream out(file);
+    ofstream out(file);
     TreeWriter writer(out, m_game->get_tree());
     writer.set_one_prop_per_line(true);
     writer.set_one_prop_value_per_line(true);

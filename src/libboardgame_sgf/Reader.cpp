@@ -10,15 +10,13 @@
 
 #include <cctype>
 #include <cstdio>
-#include <iostream>
-#include <boost/filesystem/fstream.hpp>
+#include <fstream>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
-using boost::filesystem::ifstream;
 
 //-----------------------------------------------------------------------------
 
@@ -144,7 +142,7 @@ void Reader::read(istream& in, bool check_single_tree,
     }
 }
 
-void Reader::read(const path& file)
+void Reader::read(const string& file)
 {
     ifstream in(file);
     if (! in)

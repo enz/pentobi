@@ -8,14 +8,13 @@
 
 #include "Player.h"
 
-#include <boost/filesystem/fstream.hpp>
+#include <fstream>
 #include "libboardgame_util/CpuTime.h"
 #include "libboardgame_util/WallTime.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
-using boost::filesystem::ifstream;
 using libboardgame_util::log;
 using libboardgame_util::CpuTime;
 using libboardgame_util::WallTime;
@@ -23,7 +22,7 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-Player::Player(Variant initial_variant, const path& books_dir,
+Player::Player(Variant initial_variant, const string& books_dir,
                unsigned nu_threads, size_t memory)
     : m_is_book_loaded(false),
       m_use_book(true),
@@ -109,7 +108,7 @@ Move Player::genmove(const Board& bd, Color c)
                 LIBBOARDGAME_ASSERT(variant == Variant::trigon);
                 filename = "book_trigon.blksgf";
             }
-            load_book(m_books_dir / filename);
+            load_book(m_books_dir + "/" + filename);
         }
         if (m_is_book_loaded)
         {
@@ -275,15 +274,15 @@ void Player::load_book(istream& in)
     m_is_book_loaded = true;
 }
 
-bool Player::load_book(const path& filepath)
+bool Player::load_book(const string& filepath)
 {
     log() << "Trying to load " << filepath << "... ";
-    if (! exists(filepath))
+    ifstream in(filepath);
+    if (! in)
     {
         log() << "not found\n";
         return false;
     }
-    ifstream in(filepath);
     m_book.load(in);
     m_is_book_loaded = true;
     log() << "ok\n";

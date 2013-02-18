@@ -9,7 +9,6 @@
 #include "Engine.h"
 
 #include <boost/algorithm/string/case_conv.hpp>
-#include <boost/filesystem/fstream.hpp>
 #include <boost/format.hpp>
 #include "MoveList.h"
 #include "libboardgame_sgf/TreeReader.h"
@@ -20,8 +19,6 @@
 namespace libpentobi_base {
 
 using boost::algorithm::to_lower;
-using boost::filesystem::ifstream;
-using boost::filesystem::path;
 using boost::format;
 using libboardgame_gtp::Failure;
 using libboardgame_sgf::InvalidPropertyValue;
@@ -124,7 +121,7 @@ void Engine::cmd_get_place(const Arguments& args, Response& response)
 void Engine::cmd_loadsgf(const Arguments& args)
 {
     args.check_size_less_equal(2);
-    path file = args.get<path>(0);
+    string file = args.get(0);
     int move_number = -1;
     if (args.get_size() == 2)
         move_number = args.get_min<int>(1, 1) - 1;

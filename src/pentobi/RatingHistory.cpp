@@ -8,9 +8,11 @@
 
 #include "RatingHistory.h"
 
+#include <fstream>
 #include <sstream>
-#include <boost/filesystem/fstream.hpp>
 #include <boost/format.hpp>
+#include <QDir>
+#include <QFile>
 #include <QSettings>
 #include <QString>
 #include "Util.h"
@@ -29,11 +31,10 @@ namespace {
 /** 1000 Elo represents a beginner level. */
 const double startRating = 1000;
 
-path getRatedGamesDir(Variant variant)
+QString getRatedGamesDir(Variant variant)
 {
-    path dir = Util::getDataDir().toLocal8Bit().constData();
-    dir = dir / "rated_games" / to_string_id(variant);
-    return dir;
+    return
+        Util::getDataDir() + "/rated_games/" + QString(to_string_id(variant));
 }
 
 } // namespace
@@ -47,7 +48,7 @@ RatingHistory::RatingHistory(Variant variant)
 
 void RatingHistory::addGame(float score, Rating opponentRating,
                             unsigned nuOpponents, Color color,
-                            float result, const string& date, int level,
+                            float result, const QString& date, int level,
                             const Tree& tree)
 {
     m_rating.update_multiplayer(score, opponentRating, nuOpponents, 32);
@@ -66,7 +67,7 @@ void RatingHistory::addGame(float score, Rating opponentRating,
     if (nuGames > maxGames)
         m_games.erase(m_games.begin(), m_games.begin() + nuGames - maxGames);
     save();
-    boost::filesystem::ofstream out(getFile(m_nuGames));
+    ofstream out(getFile(m_nuGames).toLocal8Bit().constData());
     TreeWriter writer(out, tree);
     writer.set_one_prop_per_line(true);
     writer.set_one_prop_value_per_line(true);
@@ -74,7 +75,7 @@ void RatingHistory::addGame(float score, Rating opponentRating,
     writer.write();
     // Only save the last RatingHistory::maxGames games
     if (m_nuGames > maxGames)
-        remove(getFile(m_nuGames - maxGames));
+        QFile::remove(getFile(m_nuGames - maxGames));
 }
 
 void RatingHistory::clear()
@@ -85,18 +86,17 @@ void RatingHistory::clear()
     settings.remove("rating_" + variantStr);
     settings.remove("best_rating_" + variantStr);
     for (const RatingHistory::GameInfo& info : getGameInfos())
-        remove(getFile(info.number));
-    remove(m_file);
+        QFile::remove(getFile(info.number));
+    QFile::remove(m_file);
     m_nuGames = 0;
     m_rating = Rating(startRating);
     m_bestRating = Rating(startRating);
     m_games.clear();
 }
 
-path RatingHistory::getFile(unsigned n) const
+QString RatingHistory::getFile(unsigned n) const
 {
-    string file = str(format("%1%.blksgf") % n);
-    return m_dir / file;
+    return QString("%1/%2.blksgf").arg(m_dir).arg(n);
 }
 
 void RatingHistory::getNextRatedGameSettings(int maxLevel, int& level,
@@ -138,8 +138,8 @@ void RatingHistory::load(Variant variant)
         Rating(settings.value("best_rating_" + variantStr, 0).toFloat());
     m_games.clear();
     m_dir = getRatedGamesDir(variant);
-    m_file = m_dir / "history.dat";
-    boost::filesystem::ifstream file(m_file);
+    m_file = m_dir + "/history.dat";
+    ifstream file(m_file.toLocal8Bit().constData());
     if (! file)
         return;
     string line;
@@ -148,8 +148,10 @@ void RatingHistory::load(Variant variant)
         istringstream in(line);
         GameInfo info;
         unsigned c;
-        in >> info.number >> c >> info.result >> info.date >> info.level
+        string date;
+        in >> info.number >> c >> info.result >> date >> info.level
            >> info.rating;
+        info.date = QString(date.c_str());
         if (! in || c >= get_nu_colors(variant))
             return;
         info.color = Color(c);
@@ -177,14 +179,16 @@ void RatingHistory::save() const
                       static_cast<double>(m_rating.get()));
     settings.setValue("best_rating_" + variantStr,
                       static_cast<double>(m_bestRating.get()));
-    LIBBOARDGAME_ASSERT(! m_file.empty());
-    create_directories(m_dir);
-    boost::filesystem::ofstream out(m_file);
+    LIBBOARDGAME_ASSERT(! m_file.isEmpty());
+    QDir dir("");
+    dir.mkpath(m_dir);
+    ofstream out(m_file.toLocal8Bit().constData());
     for (size_t i = 0; i < m_games.size(); ++i)
     {
-        const GameInfo& info = m_games[i];
+        auto& info = m_games[i];
         out << info.number << ' ' << static_cast<unsigned>(info.color.to_int())
-            << ' ' << info.result << ' ' << info.date << ' ' << info.level
+            << ' ' << info.result << ' '
+            << info.date.toLocal8Bit().constData() << ' ' << info.level
             << ' ' << info.rating << '\n';
     }
 }

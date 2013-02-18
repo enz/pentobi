@@ -7,7 +7,6 @@
 
 #include <iosfwd>
 #include <string>
-#include <boost/filesystem.hpp>
 #include <boost/format.hpp>
 #include "libboardgame_util/Exception.h"
 
@@ -15,7 +14,6 @@ namespace libboardgame_sgf {
 
 using namespace std;
 using boost::format;
-using boost::filesystem::path;
 using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
@@ -66,7 +64,7 @@ public:
               bool* more_game_trees_left = nullptr);
 
     /** See read(istream&,bool) */
-    void read(const path& file);
+    void read(const string& file);
 
 private:
     bool m_read_only_main_variation;

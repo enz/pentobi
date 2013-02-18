@@ -21,10 +21,9 @@ target_link_libraries(unittest_libpentobi_mcts
   boardgame_test
   boardgame_util
   boardgame_sys
-  ${Boost_SYSTEM_LIBRARY}
-  ${Boost_FILESYSTEM_LIBRARY}
   ${Boost_THREAD_LIBRARY}
   ${Boost_CHRONO_LIBRARY}
+  ${Boost_SYSTEM_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}
   )
 

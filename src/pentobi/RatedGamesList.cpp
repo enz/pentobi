@@ -94,7 +94,7 @@ void RatedGamesList::updateContent(Variant variant,
     setSortingEnabled(false);
     for (int i = 0; i < nuRows; ++i)
     {
-        const RatingHistory::GameInfo& info = history.getGameInfos()[i];
+        auto& info = history.getGameInfos()[i];
         auto number = new QStandardItem();
         number->setData(info.number, Qt::DisplayRole);
         auto color = new QStandardItem();
@@ -111,13 +111,12 @@ void RatedGamesList::updateContent(Variant variant,
             result = tr("Tie");
         else if (info.result == 0)
             result = tr("Loss");
-        QString date = QString::fromLocal8Bit(info.date.c_str());
         int row = nuRows - i - 1;
         m_model->setItem(row, 0, number);
         m_model->setItem(row, 1, color);
         m_model->setItem(row, 2, level);
         m_model->setItem(row, 3, new QStandardItem(result));
-        m_model->setItem(row, 4, new QStandardItem(date));
+        m_model->setItem(row, 4, new QStandardItem(info.date));
     }
     setSortingEnabled(true);
     if (nuRows > 0)

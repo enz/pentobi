@@ -16,7 +16,6 @@
 #include "libboardgame_util/RandomGenerator.h"
 
 using namespace std;
-using boost::filesystem::path;
 using boost::format;
 using libboardgame_gtp::Failure;
 using libboardgame_util::log;
@@ -32,12 +31,19 @@ using libpentobi_base::Variant;
 
 namespace {
 
-path get_application_dir_path(int argc, char** argv)
+string get_application_dir_path(int argc, char** argv)
 {
     if (argc == 0 || argv == nullptr || argv[0] == nullptr)
-        return path();
-    path application_path(argv[0]);
-    return application_path.branch_path();
+        return "";
+    string application_path(argv[0]);
+#ifdef _WIN32
+    auto pos = application_path.find_last_of("/\\");
+#else
+    auto pos = application_path.find_last_of("/");
+#endif
+    if (pos == string::npos)
+        return "";
+    return application_path.substr(0, pos);
 }
 
 } // namespace
@@ -46,7 +52,7 @@ path get_application_dir_path(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    path application_dir_path = get_application_dir_path(argc, argv);
+    string application_dir_path = get_application_dir_path(argc, argv);
     try
     {
         vector<string> specs;
@@ -120,7 +126,7 @@ int main(int argc, char** argv)
                             % variant_string);
         auto level = opt.get<int>("level", 4);
         auto use_book = (! opt.contains("nobook"));
-        path books_dir = application_dir_path;
+        string books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
                                    threads, memory);
         engine.set_resign(! opt.contains("noresign"));

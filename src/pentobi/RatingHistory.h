@@ -5,16 +5,14 @@
 #ifndef PENTOBI_RATING_HISTORY_H
 #define PENTOBI_RATING_HISTORY_H
 
-#include <string>
 #include <vector>
-#include <boost/filesystem.hpp>
+#include <QString>
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Tree.h"
 #include "libpentobi_base/Variant.h"
 
 using namespace std;
-using boost::filesystem::path;
 using libboardgame_base::Rating;
 using libpentobi_base::Color;
 using libpentobi_base::Tree;
@@ -45,7 +43,7 @@ public:
         float result;
 
         /** Date of the game in "YYYY-MM-DD" format. */
-        string date;
+        QString date;
 
         /** The playing level of the computer opponent. */
         int level;
@@ -64,11 +62,11 @@ public:
 
     /** Append a new game. */
     void addGame(float score, Rating opponentRating, unsigned nuOpponents,
-                 Color color, float result, const string& date, int level,
+                 Color color, float result, const QString& date, int level,
                  const Tree& tree);
 
     /** Get file name of the n'th rated game. */
-    path getFile(unsigned n) const;
+    QString getFile(unsigned n) const;
 
     void load(Variant variant);
 
@@ -96,9 +94,9 @@ private:
 
     Rating m_bestRating;
 
-    path m_dir;
+    QString m_dir;
 
-    path m_file;
+    QString m_file;
 
     vector<GameInfo> m_games;
 };

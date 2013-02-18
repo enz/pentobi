@@ -23,8 +23,6 @@ target_link_libraries(unittest_libboardgame_base
   boardgame_test
   boardgame_util
   boardgame_sys
-  ${Boost_SYSTEM_LIBRARY}
-  ${Boost_FILESYSTEM_LIBRARY}
   )
 
 add_test(libboardgame_base unittest_libboardgame_base)

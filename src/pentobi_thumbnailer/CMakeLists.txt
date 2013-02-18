@@ -22,8 +22,6 @@ target_link_libraries(pentobi-thumbnailer
   boardgame_sgf
   boardgame_util
   boardgame_sys
-  ${Boost_SYSTEM_LIBRARY}
-  ${Boost_FILESYSTEM_LIBRARY}
   )
 
 install(TARGETS pentobi-thumbnailer DESTINATION ${CMAKE_INSTALL_BINDIR})

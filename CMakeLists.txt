@@ -48,10 +48,10 @@ check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 
-set(PENTOBI_BOOST_COMPONENTS system filesystem thread)
+set(PENTOBI_BOOST_COMPONENTS thread)
 # On MinGW, the thread library needs chrono (last tested with Boost 1.51)
 if (MINGW)
-  set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} chrono)
+  set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} chrono system)
 endif()
 # Package Threads is needed because some versions of CMake/FindBoost fail to
 # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread

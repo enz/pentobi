@@ -27,7 +27,6 @@ class RatingDialog;
 class ScoreDisplay;
 
 using namespace std;
-using boost::filesystem::path;
 using libboardgame_sgf::Node;
 using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
@@ -680,7 +679,7 @@ private:
 
     void updateFlipActions();
 
-    bool writeGame(const path& file);
+    bool writeGame(const string& file);
 
 private slots:
     void analyzeGameFinished();

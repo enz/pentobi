@@ -31,16 +31,11 @@
     - pentobi_gtp -
       @ref libboardgame_doc_gtp interface to the player in libpentobi_mcts
 
-    All LibBoardGame and Pentobi modules depend on the following
-    <a href="http://www.boost.org/">Boost</a> libraries: thread, system,
-    filesystem
-
     @section mainpage_gui Pentobi GUI Modules
 
     The Pentobi GUI modules implement the user interface.
-    They have the additional dependency on the following
-    <a href="http://qt.digia.com/">Qt</a> libraries: QtCore
-    and QtGui.
+    They have a dependency on the following
+    <a href="http://qt.digia.com/">Qt</a> libraries: QtCore4, QtGui4.
 
     - libpentobi_gui -
       GUI functionality that could be reused for other projects

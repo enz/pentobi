@@ -5,7 +5,6 @@
 #ifndef LIBPENTOBI_MCTS_PLAYER_H
 #define LIBPENTOBI_MCTS_PLAYER_H
 
-#include <boost/filesystem.hpp>
 #include "Search.h"
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Book.h"
@@ -13,7 +12,6 @@
 
 namespace libpentobi_mcts {
 
-using boost::filesystem::path;
 using libboardgame_base::Rating;
 using libpentobi_base::Book;
 using libpentobi_base::Variant;
@@ -32,7 +30,7 @@ public:
         @param nu_threads The number of threads to use in the search (0 means
         to select a reasonable default value)
         @param memory The memory to be used for (all) the search trees. */
-    Player(Variant initial_variant, const path& books_dir,
+    Player(Variant initial_variant, const string& books_dir,
            unsigned nu_threads = 0, size_t memory = 0);
 
     ~Player() throw();
@@ -96,7 +94,7 @@ private:
 
     bool m_resign;
 
-    path m_books_dir;
+    string m_books_dir;
 
     int m_level;
 
@@ -122,7 +120,7 @@ private:
 
     void init_settings();
 
-    bool load_book(const path& filepath);
+    bool load_book(const string& filepath);
 };
 
 inline Float Player::get_fixed_simulations() const
