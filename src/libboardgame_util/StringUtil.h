@@ -7,9 +7,9 @@
 
 #include <sstream>
 #include <string>
+#include <vector>
 
 namespace libboardgame_util {
-namespace string_util {
 
 using namespace std;
 
@@ -31,6 +31,8 @@ bool from_string(const string& s, string& t);
     for coordinates larger than 25. */
 string get_letter_coord(unsigned i);
 
+vector<string> split(const string& s, char separator);
+
 string time_to_string(double seconds, bool with_seconds_as_double = false);
 
 template<typename T>
@@ -41,9 +43,14 @@ string to_string(const T& t)
     return buffer.str();
 }
 
+string to_lower(const string& s);
+
+string trim(const string& s);
+
+string trim_right(const string& s);
+
 //-----------------------------------------------------------------------------
 
-} // namespace string_util
 } // namespace libboardgame_util
 
 #endif // LIBBOARDGAME_UTIL_STRING_UTIL_H

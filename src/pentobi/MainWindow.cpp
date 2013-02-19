@@ -12,7 +12,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <boost/format.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include <QAction>
 #include <QApplication>
 #include <QDir>
@@ -59,7 +58,6 @@
 using namespace std;
 using Util::getPlayerString;
 using boost::format;
-using boost::trim_right;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
@@ -75,6 +73,7 @@ using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
 using libboardgame_util::set_abort;
+using libboardgame_util::trim_right;
 using libboardgame_util::ArrayList;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::MoveInfo;

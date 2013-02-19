@@ -15,8 +15,8 @@
 namespace libboardgame_sgf {
 
 using namespace std;
-using libboardgame_util::string_util::from_string;
-using libboardgame_util::string_util::to_string;
+using libboardgame_util::from_string;
+using libboardgame_util::to_string;
 
 //-----------------------------------------------------------------------------
 

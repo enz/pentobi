@@ -8,7 +8,6 @@
 
 #include "Engine.h"
 
-#include <boost/algorithm/string/case_conv.hpp>
 #include <boost/format.hpp>
 #include "MoveList.h"
 #include "libboardgame_sgf/TreeReader.h"
@@ -18,7 +17,6 @@
 
 namespace libpentobi_base {
 
-using boost::algorithm::to_lower;
 using boost::format;
 using libboardgame_gtp::Failure;
 using libboardgame_sgf::InvalidPropertyValue;

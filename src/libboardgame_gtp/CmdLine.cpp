@@ -9,7 +9,6 @@
 #include "CmdLine.h"
 
 #include <cassert>
-#include <boost/algorithm/string/trim.hpp>
 
 namespace libboardgame_gtp {
 

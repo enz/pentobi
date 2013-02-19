@@ -17,7 +17,6 @@ namespace libboardgame_util {
 
 using namespace std;
 using libboardgame_sys::get_type_name;
-using string_util::from_string;
 
 //----------------------------------------------------------------------------
 

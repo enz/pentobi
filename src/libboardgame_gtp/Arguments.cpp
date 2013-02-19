@@ -8,12 +8,11 @@
 
 #include "Arguments.h"
 
-#include <boost/algorithm/string/case_conv.hpp>
+#include <cctype>
 
 namespace libboardgame_gtp {
 
 using namespace std;
-using boost::algorithm::to_lower;
 
 //-----------------------------------------------------------------------------
 
@@ -49,7 +48,8 @@ CmdLineRange Arguments::get(size_t i) const
 string Arguments::get_tolower(size_t i) const
 {
     string value = get(i);
-    to_lower(value);
+    for (auto& c : value)
+        c = tolower(c);
     return value;
 }
 

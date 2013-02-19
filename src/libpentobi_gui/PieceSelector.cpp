@@ -9,17 +9,17 @@
 #include "PieceSelector.h"
 
 #include <algorithm>
-#include <boost/algorithm/string/trim.hpp>
 #include <QMouseEvent>
 #include <QPainter>
 #include "libboardgame_base/GeometryUtil.h"
+#include "libboardgame_util/StringUtil.h"
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
-using boost::trim;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::log;
+using libboardgame_util::trim;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::Variant;
@@ -136,7 +136,7 @@ void PieceSelector::init()
         for (unsigned x = 0; x < m_nuColumns; ++x)
         {
             string name = pieceLayout->substr(y * m_nuColumns * 2 + x * 2, 2);
-            trim(name);
+            name = trim(name);
             Piece piece = Piece::null();
             if (name != ".")
             {

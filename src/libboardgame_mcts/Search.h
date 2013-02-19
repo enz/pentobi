@@ -41,6 +41,8 @@ using boost::unique_lock;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
+using libboardgame_util::time_to_string;
+using libboardgame_util::to_string;
 using libboardgame_util::BitMarker;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::StatisticsBase;
@@ -49,8 +51,6 @@ using libboardgame_util::StatisticsExt;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeIntervalChecker;
 using libboardgame_util::TimeSource;
-using libboardgame_util::string_util::time_to_string;
-using libboardgame_util::string_util::to_string;
 
 //-----------------------------------------------------------------------------
 

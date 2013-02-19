@@ -9,9 +9,6 @@
 #include "BoardConst.h"
 
 #include <algorithm>
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/case_conv.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include "AdjIterator.h"
 #include "AdjDiagIterator.h"
 #include "DiagIterator.h"
@@ -23,19 +20,19 @@
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_util/Log.h"
+#include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using boost::is_any_of;
-using boost::split;
-using boost::trim_copy;
-using boost::algorithm::to_lower_copy;
 using libboardgame_base::PointTransfRot180;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_base::TrigonGeometry;
 using libboardgame_util::log;
+using libboardgame_util::split;
+using libboardgame_util::to_lower;
+using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------
 
@@ -755,13 +752,12 @@ void BoardConst::create_moves(Piece piece)
 
 Move BoardConst::from_string(const string& s) const
 {
-    string trimmed = to_lower_copy(trim_copy(s));
+    string trimmed = to_lower(trim(s));
     if (trimmed == "pass")
         return Move::pass();
     else if (trimmed == "null")
         return Move::null();
-    vector<string> v;
-    split(v, trimmed, is_any_of(","));
+    vector<string> v = split(trimmed, ',');
     if (v.size() > PieceInfo::max_size)
         throw Exception("illegal move (too many points)");
     MovePoints points;

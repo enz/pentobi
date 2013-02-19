@@ -5,24 +5,21 @@
 #include "CreateThumbnail.h"
 
 #include <iostream>
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/case_conv.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
+#include "libboardgame_util/StringUtil.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_gui/BoardPainter.h"
 
 using namespace std;
-using boost::trim_copy;
-using boost::is_any_of;
-using boost::split;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::TrigonGeometry;
 using libboardgame_sgf::Node;
 using libboardgame_sgf::TreeReader;
+using libboardgame_util::split;
+using libboardgame_util::trim;
 using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
@@ -39,10 +36,9 @@ void handleSetup(const char* id, Color c, const Node& node,
     vector<string> values = node.get_multi_property(id);
     for (const string& s : values)
     {
-        if (trim_copy(s).empty())
+        if (trim(s).empty())
             continue;
-        vector<string> v;
-        split(v, s, is_any_of(","));
+        vector<string> v = split(s, ',');
         for (const string& p_str : v)
         {
             try
@@ -66,10 +62,9 @@ void handleSetupEmpty(const Node& node, const Geometry& geometry,
     vector<string> values = node.get_multi_property("AE");
     for (const string& s : values)
     {
-        if (trim_copy(s).empty())
+        if (trim(s).empty())
             continue;
-        vector<string> v;
-        split(v, s, is_any_of(","));
+        vector<string> v = split(s, ',');
         for (const string& p_str : v)
         {
             try

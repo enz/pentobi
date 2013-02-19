@@ -5,15 +5,15 @@
 #ifndef LIBBOARDGAME_SGF_TREE_H
 #define LIBBOARDGAME_SGF_TREE_H
 
-#include <boost/algorithm/string/trim.hpp>
 #include <boost/format.hpp>
 #include "libboardgame_sgf/Node.h"
+#include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
 using boost::format;
-using boost::trim_copy;
+using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------
 
@@ -264,9 +264,9 @@ bool Tree::is_comment_property_line(const string& line, const string& key,
     size_t pos = line.find('=');
     if (pos == string::npos)
         return false;
-    if (trim_copy(line.substr(0, pos)) != key)
+    if (trim(line.substr(0, pos)) != key)
         return false;
-    return from_string(trim_copy(line.substr(pos + 1)), value);
+    return from_string(trim(line.substr(pos + 1)), value);
 }
 
 inline bool Tree::is_doubtful_move(const Node& node) const

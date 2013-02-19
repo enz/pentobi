@@ -17,9 +17,9 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::Tree;
 using libboardgame_sgf::Node;
 using libboardgame_sgf::ChildIterator;
+using libboardgame_util::get_letter_coord;
 using libboardgame_util::log;
 using libboardgame_util::Exception;
-using libboardgame_util::string_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 

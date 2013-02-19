@@ -12,7 +12,6 @@
 #include <cctype>
 #include <fstream>
 #include <iostream>
-#include <boost/algorithm/string/predicate.hpp>
 #include <boost/thread/barrier.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/mutex.hpp>
@@ -27,7 +26,6 @@ using boost::lock_guard;
 using boost::mutex;
 using boost::thread;
 using boost::unique_lock;
-using boost::algorithm::starts_with;
 
 //-----------------------------------------------------------------------------
 
@@ -341,7 +339,7 @@ void ReadThread::Function::operator()()
         {
             if (data.quit)
                 return;
-            if (starts_with(line, "# interrupt"))
+            if (line.find("# interrupt") == 0)
                 engine.interrupt();
             else if (is_cmd_line(line))
                 break;

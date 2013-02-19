@@ -8,14 +8,13 @@
 
 #include "Variant.h"
 
-#include <boost/algorithm/string/case_conv.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include "libboardgame_util/Assert.h"
+#include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 
-using boost::trim_copy;
-using boost::algorithm::to_lower_copy;
+using libboardgame_util::trim;
+using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
 
@@ -59,7 +58,7 @@ unsigned get_nu_players(Variant variant)
 
 bool parse_variant(const string& s, Variant& variant)
 {
-    string t = to_lower_copy(trim_copy(s));
+    string t = to_lower(trim(s));
     if (t == "blokus")
         variant = Variant::classic;
     else if (t == "blokus two-player")
@@ -81,7 +80,7 @@ bool parse_variant(const string& s, Variant& variant)
 
 bool parse_variant_id(const string& s, Variant& variant)
 {
-    string t = to_lower_copy(trim_copy(s));
+    string t = to_lower(trim(s));
     if (t == "classic")
         variant = Variant::classic;
     else if (t == "classic_2")

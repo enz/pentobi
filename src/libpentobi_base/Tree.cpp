@@ -22,7 +22,7 @@ using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::util::get_go_point_property_value;
 using libboardgame_sgf::util::parse_go_move_property_value;
 using libboardgame_sgf::util::parse_go_point_property_value;
-using libboardgame_util::string_util::to_string;
+using libboardgame_util::to_string;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------

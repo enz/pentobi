@@ -8,18 +8,16 @@
 
 #include "NodeUtil.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/trim.hpp>
+#include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 namespace node_util {
 
-using boost::is_any_of;
-using boost::split;
-using boost::trim_copy;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::PropertyIterator;
+using libboardgame_util::split;
+using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------
 
@@ -102,13 +100,12 @@ bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points)
     // values instead of a single value as used by Pentobi <= 0.2, but it
     // is deprecated
     points.clear();
-    for (const string& s : values)
+    for (const auto& s : values)
     {
-        if (trim_copy(s).empty())
+        if (trim(s).empty())
             continue;
-        vector<string> v;
-        split(v, s, is_any_of(","));
-        for (const string& p_str : v)
+        vector<string> v = split(s, ',');
+        for (const auto& p_str : v)
         {
             Point p;
             try

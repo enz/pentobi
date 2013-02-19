@@ -9,14 +9,14 @@
 #include "Color.h"
 
 #include <sstream>
-#include <boost/algorithm/string/case_conv.hpp>
 #include <boost/format.hpp>
+#include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using boost::algorithm::to_lower;
 using boost::format;
+using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ istream& operator>>(istream& in, Color& c)
     in >> s;
     if (in)
     {
-        to_lower(s);
+        s = to_lower(s);
         if (s == "color1" || s == "b" || s == "black")
         {
             c = Color(0);

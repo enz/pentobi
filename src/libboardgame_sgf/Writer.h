@@ -16,7 +16,7 @@ namespace libboardgame_sgf {
 
 using namespace std;
 using boost::format;
-using libboardgame_util::string_util::to_string;
+using libboardgame_util::to_string;
 
 //-----------------------------------------------------------------------------
 

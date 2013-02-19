@@ -15,7 +15,7 @@
 
 namespace libboardgame_base {
 
-using libboardgame_util::string_util::get_letter_coord;
+using libboardgame_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 

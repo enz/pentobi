@@ -11,12 +11,10 @@
 #include <ctime>
 #include <cstdio>
 #include <cstdlib>
-#include <boost/algorithm/string.hpp>
 #include "libboardgame_sgf/Util.h"
 
 namespace libboardgame_sgf {
 
-using boost::algorithm::ends_with;
 using libboardgame_sgf::util::find_root;
 using libboardgame_sgf::util::get_go_point_property_value;
 using libboardgame_sgf::util::parse_go_move_property_value;
@@ -40,8 +38,8 @@ void Tree::append_comment(const Node& node, const string& s)
         comment = s;
     else
     {
-        if (! (ends_with(comment, "\n") || ends_with(comment, "\r")))
-            comment += '\n';
+        if (comment.back() != '\n' && comment.back() != '\r')
+            comment.push_back('\n');
         comment += s;
     }
     set_comment(node, s);
@@ -135,7 +133,7 @@ bool Tree::is_comment_property_line(const string& line, const string& key)
     size_t pos = line.find('=');
     if (pos == string::npos)
         return false;
-    return (trim_copy(line.substr(0, pos)) == key);
+    return (trim(line.substr(0, pos)) == key);
 }
 
 void Tree::make_first_child(const Node& node)
@@ -235,7 +233,7 @@ void Tree::set_bad_move(const Node& node, double value)
 
 void Tree::set_comment(const Node& node, const string& s)
 {
-    string trimmed = trim_copy(s);
+    string trimmed = trim(s);
     if (trimmed.empty())
         remove_property(node, "C");
     else
