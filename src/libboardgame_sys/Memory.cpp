@@ -32,8 +32,8 @@ size_t get_memory()
     status.dwLength = sizeof(status);
     if (! GlobalMemoryStatusEx(&status))
         return 0;
-    size_t total_virtual = static_cast<size_t>(status.ullTotalVirtual);
-    size_t total_phys = static_cast<size_t>(status.ullTotalPhys);
+    auto total_virtual = static_cast<size_t>(status.ullTotalVirtual);
+    auto total_phys = static_cast<size_t>(status.ullTotalPhys);
     return min(total_virtual, total_phys);
 
 #elif defined _SC_PHYS_PAGES
@@ -51,7 +51,8 @@ size_t get_memory()
     unsigned int phys_mem;
     size_t len = sizeof(phys_mem);
     int name[2] = { CTL_HW, HW_PHYSMEM };
-    if (sysctl(name, 2, &phys_mem, &len, 0, 0) != 0 || len != sizeof(phys_mem))
+    if (sysctl(name, 2, &phys_mem, &len, nullptr, 0) != 0
+        || len != sizeof(phys_mem))
         return 0;
     else
         return phys_mem;
