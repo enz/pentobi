@@ -8,15 +8,20 @@
 
 #include "CmdLineRange.h"
 
-namespace libboardgame_gtp {
+#include <iostream>
 
-using namespace std;
+namespace libboardgame_gtp {
 
 //-----------------------------------------------------------------------------
 
 CmdLineRange::operator string() const
 {
-    return string(m_range.begin(), m_range.end());
+    return string(m_begin, m_end);
+}
+
+void CmdLineRange::write(ostream& o) const
+{
+    o << string(*this);
 }
 
 //-----------------------------------------------------------------------------
