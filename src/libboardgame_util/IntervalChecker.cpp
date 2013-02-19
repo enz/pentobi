@@ -9,7 +9,6 @@
 #include "IntervalChecker.h"
 
 #include <limits>
-#include <boost/format.hpp>
 #include "Assert.h"
 #if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
 #include "Log.h"
@@ -18,7 +17,6 @@
 namespace libboardgame_util {
 
 using namespace std;
-using boost::format;
 
 //-----------------------------------------------------------------------------
 

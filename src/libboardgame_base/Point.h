@@ -6,6 +6,7 @@
 #define LIBBOARDGAME_BASE_POINT_H
 
 #include <iosfwd>
+#include <limits>
 #include <sstream>
 #include <string>
 #include "libboardgame_util/Assert.h"
@@ -319,7 +320,7 @@ inline typename Point<W,H,I,S,M>::Direction
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
 Point<W,H,I,S,M>::InvalidString::InvalidString(const string& s)
-    : Exception(format("Invalid point string '%1%'") % s)
+    : Exception("Invalid point string '" + s + "'")
 {
 }
 

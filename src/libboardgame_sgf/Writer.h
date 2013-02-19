@@ -9,13 +9,11 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <boost/format.hpp>
 #include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
-using boost::format;
 using libboardgame_util::to_string;
 
 //-----------------------------------------------------------------------------
@@ -53,8 +51,6 @@ public:
 
     template<typename T>
     void write_property(const string& id, const T& value);
-
-    void write_property(const string& id, const format& f);
 
     template<typename T>
     void write_property(const string& id, const vector<T>& values);

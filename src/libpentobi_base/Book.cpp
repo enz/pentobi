@@ -155,7 +155,7 @@ void Book::load(istream& in)
     }
     catch (const TreeReader::ReadError& e)
     {
-        throw Exception(format("could not read book: %1%") % e.what());
+        throw Exception(string("could not read book: ") + e.what());
     }
     unique_ptr<libboardgame_sgf::Node> root
         = reader.get_tree_transfer_ownership();

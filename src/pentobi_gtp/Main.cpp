@@ -8,7 +8,6 @@
 
 #include <fstream>
 #include <iostream>
-#include <boost/format.hpp>
 #include "Engine.h"
 #include "libboardgame_util/Exception.h"
 #include "libboardgame_util/Log.h"
@@ -16,7 +15,6 @@
 #include "libboardgame_util/RandomGenerator.h"
 
 using namespace std;
-using boost::format;
 using libboardgame_gtp::Failure;
 using libboardgame_util::log;
 using libboardgame_util::set_log_null;
@@ -122,8 +120,7 @@ int main(int argc, char** argv)
         string variant_string = opt.get("game", "classic");
         Variant variant;
         if (! parse_variant_id(variant_string, variant))
-            throw Exception(format("invalid game variant '%1%'")
-                            % variant_string);
+            throw Exception("invalid game variant " + variant_string);
         auto level = opt.get<int>("level", 4);
         auto use_book = (! opt.contains("nobook"));
         string books_dir = application_dir_path;
@@ -147,7 +144,7 @@ int main(int argc, char** argv)
         {
             ifstream in(config_file);
             if (! in)
-                throw Exception(format("Error opening '%1%'") % config_file);
+                throw Exception("Error opening " + config_file);
             engine.exec(in, true, log());
         }
         auto& args = opt.get_args();
@@ -156,7 +153,7 @@ int main(int argc, char** argv)
             {
                 ifstream in(file);
                 if (! in)
-                    throw Exception(format("Error opening '%1%'") % file);
+                    throw Exception("Error opening " + file);
                 engine.exec_main_loop_st(in, cout);
             }
         else
@@ -165,18 +162,17 @@ int main(int argc, char** argv)
     }
     catch (const Failure& e)
     {
-        log(format("Error: command in config file failed: %1%")
-            % e.get_response());
+        log() << "Error: command in config file failed: " << e.get_response();
         return 1;
     }
     catch (const exception& e)
     {
-        log(format("Error: %1%") % e.what());
+        log() << "Error: " << e.what();
         return 1;
     }
     catch (const char* s)
     {
-        log(format("Error: %1%") % s);
+        log() << "Error: " << s;
         return 1;
     }
     catch (...)

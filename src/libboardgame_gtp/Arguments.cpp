@@ -25,7 +25,11 @@ void Arguments::check_size(size_t n) const
     else if (n == 1)
         throw Failure("command needs one argument");
     else
-        throw Failure(format("command needs %1% arguments") % n);
+    {
+        ostringstream msg;
+        msg << "command needs " << n << " arguments";
+        throw Failure(msg.str());
+    }
 }
 
 void Arguments::check_size_less_equal(size_t n) const
@@ -35,14 +39,20 @@ void Arguments::check_size_less_equal(size_t n) const
     if (n == 1)
         throw Failure("command needs at most one argument");
     else
-        throw Failure(format("command needs at most %1% arguments") % n);
+    {
+        ostringstream msg;
+        msg << "command needs at most " << n << " arguments";
+        throw Failure(msg.str());
+    }
 }
 
 CmdLineRange Arguments::get(size_t i) const
 {
     if (i < get_size())
         return m_line.get_element(m_line.get_idx_name() + i + 1);
-    throw Failure(format("missing argument %1%") % (i + 1));
+    ostringstream msg;
+    msg << "missing argument " << (i + 1);
+    throw Failure(msg.str());
 }
 
 string Arguments::get_tolower(size_t i) const
@@ -75,7 +85,9 @@ CmdLineRange Arguments::get_remaining_line(size_t i) const
     if (i < get_size())
         return m_line.get_trimmed_line_after_elem(m_line.get_idx_name() + i
                                                   + 1);
-    throw Failure(format("missing argument %1%") % (i + 1));
+    ostringstream msg;
+    msg << "missing argument " << (i + 1);
+    throw Failure(msg.str());
 }
 
 //-----------------------------------------------------------------------------

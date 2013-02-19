@@ -7,12 +7,10 @@
 
 #include <exception>
 #include <string>
-#include <boost/format.hpp>
 
 namespace libboardgame_util {
 
 using namespace std;
-using boost::format;
 
 //-----------------------------------------------------------------------------
 
@@ -21,8 +19,6 @@ class Exception
 {
 public:
     Exception(const string& s);
-
-    Exception(const format& f);
 
     virtual ~Exception() throw();
 

@@ -8,16 +8,17 @@
 
 #include "Assert.h"
 
-#include <algorithm>
-#include <iostream>
 #include <list>
-#include <boost/format.hpp>
+
+#if LIBBOARDGAME_DEBUG
+#include <algorithm>
+#include <sstream>
 #include "Log.h"
+#endif
 
 namespace libboardgame_util {
 
 using namespace std;
-using boost::format;
 
 //-----------------------------------------------------------------------------
 
@@ -51,8 +52,9 @@ void handle_assertion(const char* expression, const char* file, int line)
 {
     static bool is_during_handle_assertion = false;
     static vector<string> additional_assertions;
-    string message = str(format("%1%:%2%: Assertion '%3%' failed")
-                         % file % line % expression);
+    ostringstream o;
+    o << file << ":" << line << ": Assertion '" << expression << "'%3%' failed";
+    string message = o.str();
     if (is_during_handle_assertion)
     {
         if (find(additional_assertions.begin(), additional_assertions.end(),
@@ -67,7 +69,7 @@ void handle_assertion(const char* expression, const char* file, int line)
     if (! additional_assertions.empty())
     {
         log("Assertions triggered during execution of assertion handlers:");
-        for (const string& s : additional_assertions)
+        for (const auto& s : additional_assertions)
             log(s);
     }
     abort();

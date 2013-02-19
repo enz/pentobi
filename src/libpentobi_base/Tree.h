@@ -5,7 +5,6 @@
 #ifndef LIBPENTOBI_BASE_TREE_H
 #define LIBPENTOBI_BASE_TREE_H
 
-#include <boost/format.hpp>
 #include "ColorMove.h"
 #include "BoardConst.h"
 #include "Variant.h"
@@ -16,7 +15,6 @@
 namespace libpentobi_base {
 
 using namespace std;
-using boost::format;
 using libboardgame_sgf::Node;
 
 //-----------------------------------------------------------------------------

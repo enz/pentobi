@@ -10,12 +10,8 @@
 
 #include <cctype>
 #include <iomanip>
-#include <boost/format.hpp>
 
 namespace libboardgame_util {
-
-using boost::format;
-using boost::io::group;
 
 //-----------------------------------------------------------------------------
 
@@ -66,19 +62,14 @@ string time_to_string(double seconds, bool with_seconds_as_double)
     int_seconds -= hours * 3600;
     int minutes = int_seconds / 60;
     int_seconds -= minutes * 60;
-    string result;
-    if (hours == 0)
-        result = str(format("%1%:%2%")
-                     % group(setfill('0'), setw(2), minutes)
-                     % group(setfill('0'), setw(2), int_seconds));
-    else
-        result = str(format("%1%:%2%:%3%")
-                     % group(setfill('0'), hours)
-                     % group(setfill('0'), setw(2), minutes)
-                     % group(setfill('0'), setw(2), int_seconds));
+    ostringstream s;
+    s << setfill('0');
+    if (hours > 0)
+        s << hours << ':';
+    s << setw(2) << minutes << ':' << int_seconds;
     if (with_seconds_as_double)
-        result += str(format(" (%4%)") % seconds);
-    return result;
+        s << " (" << seconds << ')';
+    return s.str();
 }
 
 string to_lower(const string& s)

@@ -8,9 +8,9 @@
 
 #include "PointState.h"
 
-namespace libpentobi_base {
+#include <iostream>
 
-using namespace std;
+namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 

@@ -10,7 +10,6 @@
 namespace libboardgame_sgf {
 
 using namespace std;
-using boost::format;
 using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
@@ -30,18 +29,11 @@ class InvalidTree
 public:
     InvalidTree(const string& s);
 
-    InvalidTree(const format& f);
-
     ~InvalidTree() throw();
 };
 
 inline InvalidTree::InvalidTree(const string& s)
     : Exception(s)
-{
-}
-
-inline InvalidTree::InvalidTree(const format& f)
-    : Exception(f)
 {
 }
 

@@ -6,12 +6,10 @@
 #define LIBBOARDGAME_GTP_FAILURE_H
 
 #include <string>
-#include <boost/format.hpp>
 
 namespace libboardgame_gtp {
 
 using namespace std;
-using boost::format;
 
 //-----------------------------------------------------------------------------
 
@@ -23,8 +21,6 @@ class Failure
 public:
     Failure(const string& response = "");
 
-    Failure(const format& response);
-
     ~Failure() throw();
 
     string get_response() const;
@@ -35,11 +31,6 @@ private:
 
 inline Failure::Failure(const string& response)
     : m_response(response)
-{
-}
-
-inline Failure::Failure(const format& response)
-    : m_response(response.str())
 {
 }
 

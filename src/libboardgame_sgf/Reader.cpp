@@ -38,11 +38,6 @@ Reader::ReadError::ReadError(const string& s)
 {
 }
 
-Reader::ReadError::ReadError(const format& f)
-    : Exception(f)
-{
-}
-
 //-----------------------------------------------------------------------------
 
 Reader::Reader()
@@ -92,11 +87,10 @@ void Reader::on_end_tree(bool is_root)
     LIBBOARDGAME_UNUSED(is_root);
 }
 
-void Reader::on_property(const string& identifier,
-                         const vector<string>& values)
+void Reader::on_property(const string& id, const vector<string>& values)
 {
     // Default implementation does nothing
-    LIBBOARDGAME_UNUSED(identifier);
+    LIBBOARDGAME_UNUSED(id);
     LIBBOARDGAME_UNUSED(values);
 }
 
@@ -146,14 +140,14 @@ void Reader::read(const string& file)
 {
     ifstream in(file);
     if (! in)
-        throw ReadError(format("Could not open '%1%'") % file);
+        throw ReadError("Could not open '" + file + "'");
     try
     {
         read(in, true);
     }
     catch (const ReadError& e)
     {
-        throw ReadError(format("Could not read '%1%': %2%") % file % e.what());
+        throw ReadError("Could not read '" + file + "': " + e.what());
     }
 }
 
@@ -175,7 +169,7 @@ char Reader::read_char()
 void Reader::read_expected(char expected)
 {
     if (read_char() != expected)
-        throw ReadError(format("Expected '%1%'") % expected);
+        throw ReadError(string("Expected '") + expected + "'");
 }
 
 void Reader::read_node(bool is_root)

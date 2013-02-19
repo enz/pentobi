@@ -8,6 +8,7 @@
 
 #include "Test.h"
 
+#include <sstream>
 #include <map>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Log.h"
@@ -28,17 +29,19 @@ map<string, TestFunction>& get_all_tests()
     return all_tests;
 }
 
+string get_fail_msg(const char* file, int line, const string& s)
+{
+    ostringstream msg;
+    msg << file << ":" << line << ": " << s;
+    return msg.str();
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
 
 TestFail::TestFail(const char* file, int line, const string& s)
-    : Exception(format("%1%:%2%: %3%") % file % line % s)
-{
-}
-
-TestFail::TestFail(const char* file, int line, const format& f)
-    : Exception(format("%1%:%2%: %3%") % file % line % str(f))
+    : Exception(get_fail_msg(file, line, s))
 {
 }
 

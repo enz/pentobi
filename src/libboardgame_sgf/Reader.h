@@ -7,13 +7,12 @@
 
 #include <iosfwd>
 #include <string>
-#include <boost/format.hpp>
+#include <vector>
 #include "libboardgame_util/Exception.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
-using boost::format;
 using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
@@ -26,8 +25,6 @@ public:
     {
     public:
         ReadError(const string& s);
-
-        ReadError(const format& f);
     };
 
     Reader();
@@ -42,8 +39,7 @@ public:
 
     virtual void on_end_node();
 
-    virtual void on_property(const string& identifier,
-                             const vector<string>& values);
+    virtual void on_property(const string& id, const vector<string>& values);
 
     /** Read only the main variation.
         Reduces CPU time and memory if only the main variation is needed. */

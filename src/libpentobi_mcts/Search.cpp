@@ -8,13 +8,13 @@
 
 #include "Search.h"
 
-#include <boost/format.hpp>
 #include "Util.h"
+#include "libboardgame_util/FmtSaver.h"
 
 namespace libpentobi_mcts {
 
-using boost::format;
 using libboardgame_base::PointTransfRot180;
+using libboardgame_util::FmtSaver;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -294,7 +294,8 @@ void Search::write_info(ostream& out) const
     if (! root.has_children())
         return;
     ParentClass::write_info(out);
-    out << (format("Mov: %i, ") % root.get_nu_children());
+    FmtSaver saver(out);
+    out << "Mov: " << root.get_nu_children() << ", ";
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
         out << "All:";
@@ -303,7 +304,7 @@ void Search::write_info(ostream& out) const
             if (get_root_val()[i].get_count() == 0)
                 out << " -";
             else
-                out << (format(" %.2f") % get_root_val()[i].get_mean());
+                out << " " << setprecision(2) << get_root_val()[i].get_mean();
         }
         out << ", ";
     }

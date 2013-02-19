@@ -5,6 +5,7 @@
 #ifndef LIBBOARDGAME_BASE_GEOMETRY_H
 #define LIBBOARDGAME_BASE_GEOMETRY_H
 
+#include <memory>
 #include "CoordPoint.h"
 #include "Point.h"
 #include "libboardgame_util/NullTermList.h"

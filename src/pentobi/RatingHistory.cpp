@@ -10,7 +10,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <boost/format.hpp>
 #include <QDir>
 #include <QFile>
 #include <QSettings>
@@ -19,7 +18,6 @@
 #include "libpentobi_base/TreeWriter.h"
 #include "libpentobi_mcts/Player.h"
 
-using boost::format;
 using libpentobi_base::to_string_id;
 using libpentobi_base::TreeWriter;
 using libpentobi_mcts::Player;

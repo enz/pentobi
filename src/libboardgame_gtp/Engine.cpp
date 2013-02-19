@@ -533,7 +533,11 @@ bool Engine::exec(istream& in, bool throw_on_fail, ostream& log)
         log << cmd.get_line() << '\n';
         bool status = handle_cmd(cmd, log, response, buffer);
         if (! status && throw_on_fail)
-            throw Failure(format("executing '%1%' failed") % cmd.get_line());
+        {
+            ostringstream msg;
+            msg << "executing '" << cmd.get_line() << "' failed";
+            throw Failure(msg.str());
+        }
     }
     return ! in.fail();
 }

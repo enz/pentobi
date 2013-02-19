@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <array>
 #include <functional>
-#include <boost/format.hpp>
 #include <boost/thread/barrier.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/mutex.hpp>
@@ -20,6 +19,7 @@
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/BitMarker.h"
+#include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/Statistics.h"
@@ -31,7 +31,6 @@
 namespace libboardgame_mcts {
 
 using namespace std;
-using boost::format;
 using boost::barrier;
 using boost::condition_variable;
 using boost::lock_guard;
@@ -44,6 +43,7 @@ using libboardgame_util::log;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::BitMarker;
+using libboardgame_util::FmtSaver;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::StatisticsBase;
 using libboardgame_util::StatisticsDirtyLockFree;
@@ -884,7 +884,7 @@ size_t Search<S, M, R>::get_max_nodes(size_t memory)
     // with NodeIndex
     max_nodes =
         min(max_nodes, static_cast<size_t>(numeric_limits<NodeIndex>::max()));
-    log(format("Search tree size: 2 x %1% nodes") % max_nodes);
+    log() << "Search tree size: 2 x " << max_nodes << " nodes";
     return max_nodes;
 }
 
@@ -979,7 +979,9 @@ template<class S, class M, class R>
 void Search<S, M, R>::log_thread(const ThreadState& thread_state,
                                  const string& s) const
 {
-    log(format("[%i] %s") % thread_state.thread_id % s);
+    ostringstream o;
+    o << "[" << thread_state.thread_id << "] " << s;
+    log(o.str());
 }
 
 template<class S, class M, class R>
@@ -1073,15 +1075,17 @@ void Search<S, M, R>::write_info(ostream& out) const
         out << "No simulations in thread 0\n";
         return;
     }
-    out << format(
-             "Val: %.2f, Cnt: %.0f, VCnt: %.0f, Sim: %i, Nds: %i, Tm: %s\n"
-             "Sim/s: %.0f, Len: %s, Dp: %s\n")
-        % root.get_value() % root.get_value_count() % root.get_visit_count()
-        % m_nu_simulations % m_tree.get_nu_nodes()
-        % time_to_string(m_last_time)
-        % (double(m_nu_simulations) / m_last_time)
-        % thread_state.stat_len.to_string(true, 1, true)
-        % thread_state.stat_in_tree_len.to_string(true, 1, true);
+    FmtSaver saver(out);
+    out << setprecision(2) << "Val: " << root.get_value()
+        << setprecision(0) << ", Cnt: " << root.get_value_count()
+        << ", VCnt: " << root.get_visit_count()
+        << ", Sim: " << m_nu_simulations
+        << ", Nds: " << m_tree.get_nu_nodes()
+        << ", Tm: " << time_to_string(m_last_time)
+        << "\nSim/s: " << (double(m_nu_simulations) / m_last_time)
+        << ", Len: " << thread_state.stat_len.to_string(true, 1, true)
+        << ", Dp: " << thread_state.stat_in_tree_len.to_string(true, 1, true)
+        << "\n";
 }
 
 template<class S, class M, class R>
@@ -1099,7 +1103,7 @@ bool Search<S, M, R>::prune(TimeSource& time_source, double time,
     TimeIntervalChecker interval_checker(time_source, max_time);
     if (m_deterministic)
         interval_checker.set_deterministic(1000000);
-    log(format("Pruning count %1% (at tm %2%)") % prune_min_count % time);
+    log() << "Pruning count " << prune_min_count << " (at tm %2%)" << time;
     m_tmp_tree.clear(m_tree.get_root().get_value());
     if (! m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(),
                               m_tree.get_root(), prune_min_count, true,
@@ -1109,8 +1113,8 @@ bool Search<S, M, R>::prune(TimeSource& time_source, double time,
         return false;
     }
     int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
-    log(format("Pruned size: %1% (%2%%%, tm=%3%)")
-               % m_tmp_tree.get_nu_nodes() % percent % timer());
+    log() << "Pruned size: " << m_tmp_tree.get_nu_nodes() << " (" << percent
+          << "%, tm=" << timer() << ")";
     m_tree.swap(m_tmp_tree);
     if (percent > 50)
     {
@@ -1185,8 +1189,8 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
         if (m_followup_sequence.empty())
         {
             if (tree_nodes > 1)
-                log(format("Reusing all %1% nodes (count=%2%)")
-                    % tree_nodes % m_tree.get_root().get_visit_count());
+                log() << "Reusing all " << tree_nodes << "nodes (count="
+                      << m_tree.get_root().get_visit_count() << ")";
         }
         else
         {
@@ -1211,8 +1215,12 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
                     double time = timer();
                     double reuse = double(tmp_tree_nodes) / double(tree_nodes);
                     double percent = 100 * reuse;
-                    log(format("Reusing %i nodes (%.1f%% tm=%f)")
-                        % tmp_tree_nodes % percent % time);
+                    {
+                        FmtSaver saver(log());
+                        log() << "Reusing " << tmp_tree_nodes << " nodes ("
+                              << setprecision(1) << percent << "% tm=" << time
+                              << ")";
+                    }
                     m_tree.swap(m_tmp_tree);
                     clear_tree = false;
                     max_time -= time;

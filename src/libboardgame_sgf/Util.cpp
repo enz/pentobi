@@ -8,6 +8,7 @@
 
 #include "Util.h"
 
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include "InvalidPropertyValue.h"

@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
-#include <boost/format.hpp>
 #include <QAction>
 #include <QApplication>
 #include <QDir>
@@ -57,7 +56,6 @@
 
 using namespace std;
 using Util::getPlayerString;
-using boost::format;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;

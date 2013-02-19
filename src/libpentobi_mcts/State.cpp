@@ -9,7 +9,7 @@
 #include "State.h"
 
 #include <cmath>
-#include <boost/format.hpp>
+#include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/BoardUtil.h"
@@ -18,9 +18,9 @@
 namespace libpentobi_mcts {
 
 using namespace std;
-using boost::format;
 using libboardgame_mcts::Tree;
 using libboardgame_util::log;
+using libboardgame_util::FmtSaver;
 using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -576,16 +576,20 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
         moves = m_moves[to_play].get();
         max_playable_piece_size = m_max_playable_piece_size;
         if (log_simulations)
-            log(format("Moves: %i") % moves->size());
+            log() << "Moves: " << moves->size();
     }
     else
     {
         moves = &m_local_moves;
         max_playable_piece_size = m_max_playable_piece_size_local;
         if (log_simulations)
-            log(format("Moves: %i, local: %i, local_val: 0x%03x")
-                % m_moves[to_play]->size() % m_local_moves.size()
-                % m_max_local_value);
+        {
+            FmtSaver saver(log());
+            log() << "Moves: " << m_moves[to_play]->size() << ", local: "
+                  << m_local_moves.size() << ", local_val: "
+                  << setfill('0') << hex << setw(3) << m_max_local_value
+                  << "x";
+        }
     }
     const unsigned max_try = 3;
     unsigned nu_try = 0;
@@ -1069,9 +1073,13 @@ void State::write_info(ostream& out) const
     out << "Sco: ";
     m_stat_score.write(out, true, 1);
     if (m_nu_playout_moves > 0)
-        out << (format(", LGR: %.1f%%")
-                % (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
-                   / static_cast<double>(m_nu_playout_moves)));
+    {
+        FmtSaver saver(log());
+        out << ", LGR: " << setprecision(1)
+            << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
+                / static_cast<double>(m_nu_playout_moves))
+            << "%";
+    }
     out << '\n';
 }
 

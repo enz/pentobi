@@ -9,14 +9,12 @@
 #include "Engine.h"
 
 #include <fstream>
-#include <boost/format.hpp>
 #include "libboardgame_sgf/TreeReader.h"
 #include "libpentobi_base/Tree.h"
 #include "libpentobi_mcts/Util.h"
 
 namespace pentobi_gtp {
 
-using boost::format;
 using libboardgame_gtp::Failure;
 using libboardgame_mcts::ChildIterator;
 using libboardgame_sgf::TreeReader;
@@ -163,7 +161,11 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         else if (name == "use_book")
             p.set_use_book(args.get<bool>(1));
         else
-            throw Failure(format("unknown parameter '%1%'") % name);
+        {
+            ostringstream msg;
+            msg << "unknown parameter '" << name << "'";
+            throw Failure(msg.str());
+        }
     }
 }
 

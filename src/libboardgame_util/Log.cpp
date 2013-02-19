@@ -40,11 +40,6 @@ void log(const string& s)
     log() << line;
 }
 
-void log(const format& f)
-{
-    log(f.str());
-}
-
 void set_log(ostream& out)
 {
     log_stream = &out;

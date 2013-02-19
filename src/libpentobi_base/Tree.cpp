@@ -72,7 +72,7 @@ ColorMove Tree::get_move(const Node& node) const
         return ColorMove(c, Move::pass());
     Move mv;
     if (! m_board_const->find_move(points, mv))
-        throw InvalidTree(str(format("Illegal move %1%") % to_string(points)));
+        throw InvalidTree("Illegal move " + to_string(points));
     return ColorMove(c, mv);
 }
 
@@ -320,9 +320,17 @@ void Tree::set_player_name(Color c, const string& name)
 void Tree::set_result(const Node& node, int score)
 {
     if (score > 0)
-        set_property(node, "RE", format("B+%i") % score);
+    {
+        ostringstream s;
+        s << "B+" << score;
+        set_property(node, "RE", s.str());
+    }
     else if (score < 0)
-        set_property(node, "RE", format("W+%i") % -score);
+    {
+        ostringstream s;
+        s << "W+" << (-score);
+        set_property(node, "RE", s.str());
+    }
     else
         set_property(node, "RE", "0");
 }

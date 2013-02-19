@@ -8,7 +8,6 @@
 
 #include "Engine.h"
 
-#include <boost/format.hpp>
 #include "MoveList.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/Util.h"
@@ -17,7 +16,6 @@
 
 namespace libpentobi_base {
 
-using boost::format;
 using libboardgame_gtp::Failure;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::TreeReader;
@@ -87,9 +85,9 @@ void Engine::cmd_final_score(Response& response)
     {
         int score = bd.get_score(Color(0));
         if (score > 0)
-            response << format("B+%1%") % score;
+            response << "B+" << score;
         else if (score < 0)
-            response << format("W+%1%") % -score;
+            response << "W+" << (-score);
         else
             response << "0";
     }
@@ -160,9 +158,10 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         }
         catch (Exception&)
         {
-            throw Failure(format(
-                           "invalid argument '%1%' (expected move or move ID)")
-                          % args.get());
+            ostringstream msg;
+            msg << "invalid argument '" << args.get()
+                << "' (expected move or move ID)";
+            throw Failure(msg.str());
         }
     }
     auto& info = bd.get_move_info(mv);
@@ -205,7 +204,11 @@ void Engine::cmd_param_base(const Arguments& args, Response& response)
         else if (name == "resign")
             m_resign = args.get<bool>(1);
         else
-            throw Failure(format("unknown parameter '%1%'") % name);
+        {
+            ostringstream msg;
+            msg << "unknown parameter '" << name << "'";
+            throw Failure(msg.str());
+        }
     }
 }
 
@@ -270,8 +273,11 @@ void Engine::genmove(Color c, Response& response)
     if (mv.is_null())
         throw Failure("player failed to generate a move");
     if (! bd.is_legal(c, mv))
-        throw Failure(format("player generated illegal move: %1%")
-                      % bd.to_string(mv));
+    {
+        ostringstream msg;
+        msg << "player generated illegal move: " << bd.to_string(mv);
+        throw Failure(msg.str());
+    }
     if (m_resign && player.resign())
     {
         response << "resign";
@@ -314,7 +320,9 @@ Color Engine::get_color_arg(const Arguments& args, unsigned i) const
         if (s == "green" || s == "white" || s == "w")
             return Color(1);
     }
-    throw Failure(format("invalid color argument '%1%'") % s);
+    ostringstream msg;
+    msg << "invalid color argument '" << s << "'";
+    throw Failure(msg.str());
 }
 
 Player& Engine::get_player() const

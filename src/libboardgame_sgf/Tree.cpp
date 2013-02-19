@@ -45,11 +45,6 @@ void Tree::append_comment(const Node& node, const string& s)
     set_comment(node, s);
 }
 
-void Tree::append_comment(const Node& node, const format& f)
-{
-    append_comment(node, str(f));
-}
-
 bool Tree::contains(const Node& node) const
 {
     return &find_root(node) == &get_root();
@@ -92,17 +87,6 @@ unique_ptr<Node> Tree::get_tree_transfer_ownership()
     return move(m_root);
 }
 
-bool Tree::has_comment_property(const Node& node, const string& key) const
-{
-    string comment = get_comment(node);
-    istringstream in(comment);
-    string line;
-    while (getline(in, line))
-        if (is_comment_property_line(line, key))
-            return true;
-    return false;
-}
-
 bool Tree::has_variations() const
 {
     auto node = m_root.get();
@@ -126,14 +110,6 @@ void Tree::init(unique_ptr<Node>& root)
 {
     m_root = move(root);
     m_modified = false;
-}
-
-bool Tree::is_comment_property_line(const string& line, const string& key)
-{
-    size_t pos = line.find('=');
-    if (pos == string::npos)
-        return false;
-    return (trim(line.substr(0, pos)) == key);
 }
 
 void Tree::make_first_child(const Node& node)
@@ -238,11 +214,6 @@ void Tree::set_comment(const Node& node, const string& s)
         remove_property(node, "C");
     else
         set_property(node, "C", s);
-}
-
-void Tree::set_comment(const Node& node, const format& f)
-{
-    set_comment(node, str(f));
 }
 
 void Tree::set_date_today()

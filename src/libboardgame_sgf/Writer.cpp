@@ -87,11 +87,6 @@ void Writer::write_indent()
         m_out << ' ';
 }
 
-void Writer::write_property(const string& id, const format& f)
-{
-    write_property(id, str(f));
-}
-
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_sgf

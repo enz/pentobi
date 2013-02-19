@@ -15,18 +15,12 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 MissingProperty::MissingProperty(const string& message)
-    : InvalidTree(format("Missing SGF property: %1%") % message)
+    : InvalidTree("Missing SGF property: " + message)
 {
 }
 
 MissingProperty::MissingProperty(const string& id, const string& message)
-    : InvalidTree(format("Missing SGF property '%1%': %2%") % id % message)
-{
-}
-
-MissingProperty::MissingProperty(const string& id, const format& message)
-    : InvalidTree(format("Missing SGF property '%1%': %2%")
-                  % id % str(message))
+    : InvalidTree("Missing SGF property '" + id + ": " + message)
 {
 }
 

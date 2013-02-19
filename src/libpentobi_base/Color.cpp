@@ -9,13 +9,11 @@
 #include "Color.h"
 
 #include <sstream>
-#include <boost/format.hpp>
 #include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using boost::format;
 using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
@@ -25,7 +23,7 @@ Color::Color(const string& s)
     istringstream in(s);
     in >> *this;
     if (! in)
-        throw InvalidString(str(format("Invalid color string '%1%'") % s));
+        throw InvalidString("Invalid color string '" + s + "'");
 }
 
 //-----------------------------------------------------------------------------

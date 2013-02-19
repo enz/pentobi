@@ -7,10 +7,11 @@
 
 #include "InvalidTree.h"
 
+#include "sstream"
+
 namespace libboardgame_sgf {
 
 using namespace std;
-using boost::format;
 
 //-----------------------------------------------------------------------------
 
@@ -22,13 +23,24 @@ public:
     InvalidPropertyValue(const string& id, const T& value);
 
     ~InvalidPropertyValue() throw();
+
+private:
+    template<typename T>
+    static string get_message(const string& id, const T& value);
 };
 
 template<typename T>
 InvalidPropertyValue::InvalidPropertyValue(const string& id, const T& value)
-    : InvalidTree(format("Invalid value '%1%' for SGF property '%2%'")
-                  % value % id)
+    : InvalidTree(get_message(id, value))
 {
+}
+
+template<typename T>
+string InvalidPropertyValue::get_message(const string& id, const T& value)
+{
+    ostringstream msg;
+    msg << "Invalid value '" << value << " for SGF property '" << id << "'";
+    return msg.str();
 }
 
 //-----------------------------------------------------------------------------

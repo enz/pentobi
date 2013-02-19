@@ -20,8 +20,6 @@ public:
     MissingProperty(const string& message);
 
     MissingProperty(const string& id, const string& message);
-
-    MissingProperty(const string& id, const format& message);
 };
 
 //-----------------------------------------------------------------------------

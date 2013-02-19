@@ -6,6 +6,7 @@
 #define LIBBOARDGAME_GTP_CMDLINE_H
 
 #include <algorithm>
+#include <cassert>
 #include <cstddef>
 #include <sstream>
 #include <string>

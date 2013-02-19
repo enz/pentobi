@@ -17,13 +17,13 @@
 #define LIBBOARDGAME_TEST_TEST_H
 
 #include <cmath>
+#include <sstream>
 #include <string>
 #include "libboardgame_util/Exception.h"
 
 namespace libboardgame_test {
 
 using namespace std;
-using boost::format;
 using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
@@ -37,8 +37,6 @@ class TestFail
 {
 public:
     TestFail(const char* file, int line, const string& s);
-
-    TestFail(const char* file, int line, const format& f);
 };
 
 //-----------------------------------------------------------------------------
@@ -86,9 +84,11 @@ struct TestRegistrar
         auto result1 = (expr1);                                         \
         auto result2 = (expr2);                                         \
         if (result1 != result2)                                         \
-            throw TestFail(__FILE__, __LINE__,                          \
-                           boost::format("'%1%' != '%2%'")              \
-                           % result1 % result2);                        \
+        {                                                               \
+            ostringstream msg;                                          \
+            msg << "'" << result1 << " != " << "'" << result2 << "'";   \
+            throw TestFail(__FILE__, __LINE__, msg.str());              \
+        }                                                               \
     }
 
 #define LIBBOARDGAME_CHECK_THROW(expr, exception)                       \
@@ -104,9 +104,11 @@ struct TestRegistrar
             was_thrown = true;                                          \
         }                                                               \
         if (! was_thrown)                                               \
-            throw TestFail(__FILE__, __LINE__,                          \
-                           boost::format("Exception '%1%' was not thrown") \
-                           % #exception);                               \
+        {                                                               \
+            ostringstream msg;                                          \
+            msg << "Exception '" << #exception << "' was not thrown";   \
+            throw TestFail(__FILE__, __LINE__, msg.str());              \
+        }                                                               \
     }
 
 #define LIBBOARDGAME_CHECK_NO_THROW(expr)                               \
@@ -130,10 +132,13 @@ struct TestRegistrar
         auto result1 = (expr1);                                         \
         auto result2 = (expr2);                                         \
         if (fabs(result1 - result2) > 0.01 * tolerance * result1)       \
-            throw TestFail(__FILE__, __LINE__,                          \
-                           boost::format("Difference between %1% and"   \
-                                         " %2% exceeds %3% percent")    \
-                           % result1 % result2 % (0.01 * tolerance));   \
+        {                                                               \
+            ostringstream msg;                                          \
+            msg << "Difference between " << result1 << " and "          \
+                << result2 << " exceeds " << (0.01 * tolerance)         \
+                << " percent";                                          \
+            throw TestFail(__FILE__, __LINE__, msg.str());              \
+        }                                                               \
     }
 
 /** Compare floating points using an epsilon. */
@@ -143,10 +148,12 @@ struct TestRegistrar
         auto result1 = (expr1);                                         \
         auto result2 = (expr2);                                         \
         if (fabs(result1 - result2) > epsilon)                          \
-            throw TestFail(__FILE__, __LINE__,                          \
-                           boost::format("Difference between %1% and"   \
-                                         " %2% exceeds %3%")            \
-                           % result1 % result2 % epsilon);              \
+        {                                                               \
+            ostringstream msg;                                          \
+            msg << "Difference between " << result1 << " and "          \
+                << result2 << " exceeds " << epsilon;                   \
+            throw TestFail(__FILE__, __LINE__, msg.str());              \
+        }                                                               \
     }
 
 //-----------------------------------------------------------------------------

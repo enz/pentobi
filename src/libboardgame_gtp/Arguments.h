@@ -185,9 +185,12 @@ T Arguments::get(size_t i) const
     T result;
     in >> result;
     if (! in)
-        throw Failure(format(
-                        "argument %1% ('%2%') has invalid type (expected %3%)")
-                      % (i + 1) % s % get_type_name<T>());
+    {
+        ostringstream msg;
+        msg << "argument " << (i + 1) << " ('" << s
+            << "') has invalid type (expected " << get_type_name<T>() << ")";
+        throw Failure(msg.str());
+    }
     return result;
 }
 
@@ -201,8 +204,11 @@ T Arguments::get_min(std::size_t i, T min) const
 {
     T result = get<T>(i);
     if (result < min)
-        throw Failure(format("argument %1% must be greater or equal %2%")
-                      % (i + 1) % min);
+    {
+        ostringstream msg;
+        msg << "argument " << (i + 1) << " must be greater or equal " << min;
+        throw Failure(msg.str());
+    }
     return result;
 }
 
@@ -218,8 +224,11 @@ T Arguments::get_min_max(std::size_t i, T min, T max) const
 {
     T result = get_min(i, min);
     if (max < result)
-        throw Failure(format("argument %1% must be less or equal %2%")
-                      % (i + 1) % max);
+    {
+        ostringstream msg;
+        msg << "argument " << (i + 1) << " must be less or equal " << max;
+        throw Failure(msg.str());
+    }
     return result;
 }
 

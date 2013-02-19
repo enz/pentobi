@@ -17,11 +17,6 @@ Exception::Exception(const string& s)
 {
 }
 
-Exception::Exception(const format& f)
-    : m_s(f.str())
-{
-}
-
 Exception::~Exception() throw()
 {
 }
