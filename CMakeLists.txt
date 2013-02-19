@@ -12,6 +12,7 @@ option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
 option(PENTOBI_BUILD_KDE_THUMBNAILER
   "Build thumbnailer for KDE (also requires PENTOBI_BUILD_GUI)" OFF)
+option(USE_BOOST_THREAD "Use Boost.Thread instead of std::thread" OFF)
 
 if(NOT CMAKE_BUILD_TYPE)
   message(STATUS "No build type selected, default to Release")
@@ -48,26 +49,35 @@ check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 
-set(PENTOBI_BOOST_COMPONENTS thread)
-# On MinGW, the thread library needs chrono (last tested with Boost 1.51)
-if (MINGW)
-  set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} chrono system)
+# Set USE_BOOST_THREAD to use Boost.Thread instead of std::thread
+# (e.g. with MinGW GCC 4.7, std::thread is not functional)
+if(USE_BOOST_THREAD)
+  set(PENTOBI_BOOST_COMPONENTS thread)
+  # On MinGW, the thread library needs chrono (last tested with Boost 1.52)
+  if (MINGW)
+    set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} chrono)
+  endif()
+  # On MinGW or CLang 3.2/Linux, the thread library needs system (last tested
+  # with Boost 1.52)
+  if (MINGW OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
+    set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} system)
+  endif()
+  # Package Threads is needed because some versions of CMake/FindBoost fail to
+  # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread
+  # (e.g. this occurs with CMake 2.8.9/MinGW 3.18). We solve this by adding
+  # CMAKE_THREAD_LIBS_INIT to the link libraries.
+  find_package(Threads)
+  find_package(Boost 1.49 REQUIRED COMPONENTS ${PENTOBI_BOOST_COMPONENTS})
+  if(NOT Boost_FOUND)
+    message(FATAL_ERROR "Boost not found")
+  endif()
+  if(MINGW AND Boost_USE_STATIC_LIBS)
+    # Boost static libs generate link errors with MinGW if BOOST_THREAD_USE_LIB
+    # is not explicetly defined (last tested with Boost 1.52)
+    add_definitions(-DBOOST_THREAD_USE_LIB)
+  endif()
 endif()
-# Package Threads is needed because some versions of CMake/FindBoost fail to
-# include -lpthread in Boost_LIBRARIES, which is required by libboost_thread
-# (e.g. this occurs with CMake 2.8.9/MinGW 3.18). We solve this by adding
-# CMAKE_THREAD_LIBS_INIT to the link libraries.
-find_package(Threads)
-find_package(Boost 1.49 REQUIRED COMPONENTS ${PENTOBI_BOOST_COMPONENTS})
-if(NOT Boost_FOUND)
-  message(FATAL_ERROR "Boost not found")
-endif()
-if(MINGW AND Boost_USE_STATIC_LIBS)
-  # Boost static libs generate link errors with MinGW if BOOST_THREAD_USE_LIB
-  # is not explicetly defined (last tested with Boost 1.52)
-  add_definitions(-DBOOST_THREAD_USE_LIB)
-endif()
-
+  
 if(NOT DEFINED LIBPENTOBI_MCTS_FLOAT_TYPE)
   set(LIBPENTOBI_MCTS_FLOAT_TYPE float)
 endif()

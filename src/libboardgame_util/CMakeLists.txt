@@ -6,6 +6,7 @@ include_directories(
 set(boardgame_util_STAT_SRCS
   Abort.cpp
   Assert.cpp
+  Barrier.cpp
   CpuTime.cpp
   Exception.cpp
   FastLog.cpp

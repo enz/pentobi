@@ -5,6 +5,11 @@
 #ifndef PENTOBI_RATING_GRAPH_H
 #define PENTOBI_RATING_GRAPH_H
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QFrame>
 #include "RatingHistory.h"
 

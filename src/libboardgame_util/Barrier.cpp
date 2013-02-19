@@ -1,0 +1,44 @@
+//-----------------------------------------------------------------------------
+/** @file libboardgame_util/Barrier.cpp */
+//-----------------------------------------------------------------------------
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "Barrier.h"
+
+namespace libboardgame_util {
+
+#ifdef USE_BOOST_THREAD
+using boost::unique_lock;
+#endif
+
+//----------------------------------------------------------------------------
+
+Barrier::Barrier(unsigned count)
+  : m_threshold(count),
+    m_count(count),
+    m_current(0)
+{
+    LIBBOARDGAME_ASSERT(count > 0);
+}
+
+void Barrier::wait()
+{
+    unique_lock<mutex> lock(m_mutex);
+    unsigned current = m_current;
+    if (--m_count == 0)
+    {
+        ++m_current;
+        m_count = m_threshold;
+        m_condition.notify_all();
+    }
+    else
+        while (current == m_current)
+            m_condition.wait(lock);
+}
+
+//----------------------------------------------------------------------------
+
+} // namespace libboardgame_util

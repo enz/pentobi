@@ -5,6 +5,11 @@
 #ifndef LIBPENTOBI_GUI_LEAVE_FULLSCREEN_BUTTON_H
 #define LIBPENTOBI_GUI_LEAVE_FULLSCREEN_BUTTON_H
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QObject>
 #include <QPoint>
 

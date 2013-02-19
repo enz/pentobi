@@ -12,20 +12,28 @@
 #include <cctype>
 #include <fstream>
 #include <iostream>
-#include <boost/thread/barrier.hpp>
+
+#ifdef USE_BOOST_THREAD
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
+#else
+#include <condition_variable>
+#include <mutex>
+#include <thread>
+#endif
 
 namespace libboardgame_gtp {
 
 using namespace std;
-using boost::barrier;
+
+#ifdef USE_BOOST_THREAD
 using boost::condition_variable;
 using boost::lock_guard;
 using boost::mutex;
-using boost::thread;
 using boost::unique_lock;
+using boost::thread;
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -60,11 +68,49 @@ bool read_cmd(CmdLine& c, istream& in)
         return false;
 }
 
-} // namespace
+/** Copied from libboardgame_util because libboardgame_gtp should use only
+    C++11 standard libraries and not depend on any other code. */
+class Barrier
+{
+public:
+    Barrier(unsigned count);
 
-//-----------------------------------------------------------------------------
+    void wait();
 
-namespace {
+private:
+    mutex m_mutex;
+
+    condition_variable m_condition;
+
+    unsigned m_threshold;
+
+    unsigned m_count;
+
+    unsigned m_current;
+};
+
+Barrier::Barrier(unsigned count)
+  : m_threshold(count),
+    m_count(count),
+    m_current(0)
+{
+    assert(count > 0);
+}
+
+void Barrier::wait()
+{
+    unique_lock<mutex> lock(m_mutex);
+    unsigned current = m_current;
+    if (--m_count == 0)
+    {
+        ++m_current;
+        m_count = m_threshold;
+        m_condition.notify_all();
+    }
+    else
+        while (current == m_current)
+            m_condition.wait(lock);
+}
 
 /** Ponder thread used by Engine::MainLoop().
     This thread calls Engine::ponder() while the engine is waiting for the
@@ -99,7 +145,7 @@ private:
 
     Engine& m_engine;
 
-    barrier m_ready;
+    Barrier m_ready;
 
     mutex m_start_ponder_mutex;
 
@@ -218,7 +264,7 @@ private:
 
         bool is_stream_good;
 
-        barrier ready;
+        Barrier ready;
 
         mutex wait_cmd_mutex;
 

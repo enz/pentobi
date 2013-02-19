@@ -5,6 +5,11 @@
 #ifndef PENTOBI_APPLICATION_H
 #define PENTOBI_APPLICATION_H
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QApplication>
 
 //-----------------------------------------------------------------------------

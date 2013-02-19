@@ -16,6 +16,10 @@ Current development version
   /usr/local/bin and /usr/local/share instead of /usr/local/games and
   /usr/local/share/games. The defaults can be changed by setting
   CMAKE_INSTALL_BINDIR and CMAKE_INSTALL_DATADIR. (bug #7)
+* The source code no longer depends on the Boost libraries. However, it
+  is still possible to use Boost.Thread instead of std::thread by
+  configuring with -DUSE_BOOST_THREAD=ON (e.g. needed on MinGW GCC 4.7,
+  which has no functional implementation of std::thread)
 
 
 Version 5.0 (10 Dec 2012)

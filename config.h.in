@@ -21,3 +21,6 @@
 
 /** Location of the translations directory. */
 #cmakedefine PENTOBI_TRANSLATIONS "@PENTOBI_TRANSLATIONS@"
+
+/** Use Boost.Thread instead of std::thread */
+#cmakedefine USE_BOOST_THREAD

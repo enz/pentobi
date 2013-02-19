@@ -5,6 +5,11 @@
 #ifndef PENTOBI_MAIN_WINDOW_H
 #define PENTOBI_MAIN_WINDOW_H
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QFutureWatcher>
 #include <QMainWindow>
 #include "RatingHistory.h"

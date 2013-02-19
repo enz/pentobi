@@ -5,9 +5,12 @@
 #ifndef PENTOBI_ANALYZE_SPEED_DIALOG_H
 #define PENTOBI_ANALYZE_SPEED_DIALOG_H
 
-#include <QInputDialog>
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
-//-----------------------------------------------------------------------------
+#include <QInputDialog>
 
 //-----------------------------------------------------------------------------
 

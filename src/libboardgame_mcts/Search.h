@@ -8,16 +8,13 @@
 #include <algorithm>
 #include <array>
 #include <functional>
-#include <boost/thread/barrier.hpp>
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
 #include "BiasTerm.h"
 #include "LastGoodReply.h"
 #include "PlayerMove.h"
 #include "Tree.h"
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
+#include "libboardgame_util/Barrier.h"
 #include "libboardgame_util/BitMarker.h"
 #include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/IntervalChecker.h"
@@ -28,20 +25,25 @@
 #include "libboardgame_util/Timer.h"
 #include "libboardgame_util/Unused.h"
 
+#ifdef USE_BOOST_THREAD
+#include <boost/thread/condition_variable.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/thread.hpp>
+#else
+#include <condition_variable>
+#include <mutex>
+#include <thread>
+#endif
+
 namespace libboardgame_mcts {
 
 using namespace std;
-using boost::barrier;
-using boost::condition_variable;
-using boost::lock_guard;
-using boost::mutex;
-using boost::thread;
-using boost::unique_lock;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
+using libboardgame_util::Barrier;
 using libboardgame_util::BitMarker;
 using libboardgame_util::FmtSaver;
 using libboardgame_util::IntervalChecker;
@@ -51,6 +53,14 @@ using libboardgame_util::StatisticsExt;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeIntervalChecker;
 using libboardgame_util::TimeSource;
+
+#ifdef USE_BOOST_THREAD
+using boost::condition_variable;
+using boost::lock_guard;
+using boost::mutex;
+using boost::thread;
+using boost::unique_lock;
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -441,7 +451,7 @@ private:
 
         bool m_quit;
 
-        barrier m_thread_ready;
+        Barrier m_thread_ready;
 
         mutex m_start_search_mutex;
 
@@ -884,7 +894,7 @@ size_t Search<S, M, R>::get_max_nodes(size_t memory)
     // with NodeIndex
     max_nodes =
         min(max_nodes, static_cast<size_t>(numeric_limits<NodeIndex>::max()));
-    log() << "Search tree size: 2 x " << max_nodes << " nodes";
+    log() << "Search tree size: 2 x " << max_nodes << " nodes\n";
     return max_nodes;
 }
 

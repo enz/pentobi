@@ -5,6 +5,11 @@
 #ifndef PENTOBI_RATED_GAMES_LIST
 #define PENTOBI_RATED_GAMES_LIST
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QTableView>
 #include "RatingHistory.h"
 

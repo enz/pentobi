@@ -5,6 +5,11 @@
 #ifndef PENTOBI_ANALYZE_GAME_WIDGET_H
 #define PENTOBI_ANALYZE_GAME_WIDGET_H
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <vector>
 #include <QFuture>
 #include <QWidget>

@@ -27,9 +27,7 @@ Engine::Engine()
 {
     add("cputime", &Engine::cmd_cputime);
     add("cputime_diff", &Engine::cmd_cputime_diff);
-#ifdef HAVE_BOOST_THREAD
     add("gogui-interrupt", &Engine::cmd_interrupt);
-#endif
     add("set_random_seed", &Engine::cmd_set_random_seed);
 }
 

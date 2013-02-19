@@ -5,6 +5,11 @@
 #ifndef LIBPENTOBI_GUI_HELP_WINDOW_H
 #define LIBPENTOBI_GUI_HELP_WINDOW_H
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QMainWindow>
 #include <QUrl>
 

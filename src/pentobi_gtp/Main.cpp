@@ -109,9 +109,13 @@ int main(int argc, char** argv)
             if (memory == 0)
                 throw Exception("Value for memory must be greater zero.");
         }
-        auto threads = opt.get<unsigned>("threads", 1);;
-        if (threads == 0)
-            throw Exception("Number of threads must be greater zero.");
+        unsigned threads = 1;
+        if (opt.contains("threads"))
+        {
+            threads = opt.get<unsigned>("threads");
+            if (threads == 0)
+                throw Exception("Number of threads must be greater zero.");
+        }
         Board::color_output = opt.contains("color");
         if (opt.contains("quiet"))
             set_log_null();

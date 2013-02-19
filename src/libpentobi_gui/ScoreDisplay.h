@@ -5,6 +5,11 @@
 #ifndef LIBPENTOBI_GUI_SCORE_DISPLAY_H
 #define LIBPENTOBI_GUI_SCORE_DISPLAY_H
 
+// Needed in the header because moc_*.cxx does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QWidget>
 #include "libpentobi_base/Board.h"
 

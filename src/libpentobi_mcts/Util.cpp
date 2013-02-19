@@ -8,12 +8,17 @@
 
 #include "Util.h"
 
-#include <boost/thread.hpp>
 #include "libboardgame_sgf/Writer.h"
 #include "libboardgame_sys/Memory.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/SgfUtil.h"
+
+#ifdef USE_BOOST_THREAD
+#include <boost/thread.hpp>
+#else
+#include <thread>
+#endif
 
 namespace libpentobi_mcts {
 namespace util {
@@ -25,6 +30,10 @@ using libboardgame_sgf::Writer;
 using libboardgame_util::log;
 using libpentobi_base::boardutil::write_setup;
 using libpentobi_base::sgf_util::get_color_id;
+
+#ifdef USE_BOOST_THREAD
+using boost::thread;
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -97,9 +106,12 @@ size_t get_memory()
 
 unsigned get_nu_threads()
 {
-    unsigned nu_threads = boost::thread::hardware_concurrency();
+    unsigned nu_threads = thread::hardware_concurrency();
     if (nu_threads == 0)
+    {
+        log("Could not determine the number of hardware threads");
         nu_threads = 1;
+    }
     // The lock-free search probably scales up to 16-32 threads, but we
     // haven't tested more than 4 threads, we still use single precision
     // float for LIBBOARDGAME_MCTS_FLOAT_TYPE (which limits the maximum number
