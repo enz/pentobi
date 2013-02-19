@@ -810,8 +810,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="379"/>
-        <source>Computer program that plays the board game Blokus</source>
-        <translation>Computerprogramm, welches das Brettspiel Blokus spielt</translation>
+        <source>Pentobi is a computer program that plays the board game Blokus.</source>
+        <translation>Pentobi ist ein Computerprogramm, welches das Brettspiel Blokus spielt.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="543"/>

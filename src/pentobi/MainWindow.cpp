@@ -369,11 +369,11 @@ void MainWindow::about()
                        "<style type=\"text/css\">"
                        ":link { text-decoration: none; }"
                        "</style>"
-                       "<h3>" + tr("Pentobi") + "</h3>"
+                       "<h2>" + tr("Pentobi") + "</h2>"
                        "<p>" + tr("Version %1").arg(getVersion()) + "</p>"
                        "<p>" +
-                       tr("Computer program that plays the board game Blokus")
-                       + "<br>" +
+                       tr("Pentobi is a computer program that plays the board game Blokus.")
+                       + "</p><p>" +
                        tr("Copyright &copy; 2011&ndash;2013 Markus Enzenberger") +
                        + "<br>" +
                        "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
