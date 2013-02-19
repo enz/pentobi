@@ -261,25 +261,29 @@ void Search::set_default_param(Variant variant)
     // and used for all other game variants with the same board type
     set_expand_threshold(1);
     set_expand_threshold_incr(0.5f);
-    set_rave_max_parent_count(50000);
-    set_rave_max_child_count(500);
     switch (variant)
     {
     case Variant::duo:
     case Variant::junior:
         set_bias_term_constant(0.07f);
         set_rave_weight(0.2f);
+        set_rave_max_parent_count(50000);
+        set_rave_max_child_count(500);
         break;
     case Variant::classic_2:
     case Variant::classic:
         set_bias_term_constant(0.06f);
         set_rave_weight(0.2f);
+        set_rave_max_parent_count(50000);
+        set_rave_max_child_count(500);
         break;
     case Variant::trigon_2:
     case Variant::trigon_3:
     case Variant::trigon:
         set_bias_term_constant(0.06f);
         set_rave_weight(0.4f);
+        set_rave_max_parent_count(50000);
+        set_rave_max_child_count(2000);
         break;
     default:
         LIBBOARDGAME_ASSERT(false);
