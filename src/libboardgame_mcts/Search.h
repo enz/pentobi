@@ -1086,7 +1086,7 @@ void Search<S, M, R>::write_info(ostream& out) const
         return;
     }
     FmtSaver saver(out);
-    out << setprecision(2) << "Val: " << root.get_value()
+    out << fixed << setprecision(2) << "Val: " << root.get_value()
         << setprecision(0) << ", Cnt: " << root.get_value_count()
         << ", VCnt: " << root.get_visit_count()
         << ", Sim: " << m_nu_simulations
@@ -1200,7 +1200,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
         {
             if (tree_nodes > 1)
                 log() << "Reusing all " << tree_nodes << "nodes (count="
-                      << m_tree.get_root().get_visit_count() << ")";
+                      << m_tree.get_root().get_visit_count() << ")\n";
         }
         else
         {
@@ -1228,8 +1228,8 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
                     {
                         FmtSaver saver(log());
                         log() << "Reusing " << tmp_tree_nodes << " nodes ("
-                              << setprecision(1) << percent << "% tm=" << time
-                              << ")";
+                              << fixed << setprecision(1) << percent
+                              << "% tm=" << setprecision(4) << time << ")\n";
                     }
                     m_tree.swap(m_tmp_tree);
                     clear_tree = false;

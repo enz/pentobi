@@ -166,17 +166,18 @@ int main(int argc, char** argv)
     }
     catch (const Failure& e)
     {
-        log() << "Error: command in config file failed: " << e.get_response();
+        log() << "Error: command in config file failed: " << e.get_response()
+              << '\n';
         return 1;
     }
     catch (const exception& e)
     {
-        log() << "Error: " << e.what();
+        log() << "Error: " << e.what() << '\n';
         return 1;
     }
     catch (const char* s)
     {
-        log() << "Error: " << s;
+        log() << "Error: " << s << '\n';
         return 1;
     }
     catch (...)

@@ -66,7 +66,7 @@ string time_to_string(double seconds, bool with_seconds_as_double)
     s << setfill('0');
     if (hours > 0)
         s << hours << ':';
-    s << setw(2) << minutes << ':' << int_seconds;
+    s << setw(2) << minutes << ':' << setw(2) << int_seconds;
     if (with_seconds_as_double)
         s << " (" << seconds << ')';
     return s.str();

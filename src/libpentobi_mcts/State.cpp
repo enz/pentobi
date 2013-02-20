@@ -1075,7 +1075,7 @@ void State::write_info(ostream& out) const
     if (m_nu_playout_moves > 0)
     {
         FmtSaver saver(log());
-        out << ", LGR: " << setprecision(1)
+        out << ", LGR: " << fixed << setprecision(1)
             << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
                 / static_cast<double>(m_nu_playout_moves))
             << "%";
