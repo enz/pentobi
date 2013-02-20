@@ -6,6 +6,7 @@
 #define LIBBOARDGAME_UTIL_LOG_H
 
 #include <iosfwd>
+#include <string>
 
 namespace libboardgame_util {
 

@@ -12,7 +12,10 @@
 
 #if LIBBOARDGAME_DEBUG
 #include <algorithm>
+#include <functional>
 #include <sstream>
+#include <string>
+#include <vector>
 #include "Log.h"
 #endif
 

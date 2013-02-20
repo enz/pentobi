@@ -8,6 +8,7 @@
 
 #include "Board.h"
 
+#include <functional>
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {

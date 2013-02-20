@@ -5,6 +5,7 @@
 #ifndef LIBPENTOBI_MCTS_ANALYZE_GAME_H
 #define LIBPENTOBI_MCTS_ANALYZE_GAME_H
 
+#include <functional>
 #include <vector>
 #include "libpentobi_base/Game.h"
 
