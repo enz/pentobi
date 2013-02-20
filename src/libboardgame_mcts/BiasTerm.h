@@ -64,6 +64,8 @@ template<typename F>
 inline auto BiasTerm<F>::get(Float child_count) const -> Float
 {
     LIBBOARDGAME_ASSERT(child_count >= 0);
+    if (child_count <= 1)
+        return m_parent_part;
     Float child_part;
     if (child_count < nu_precomp)
         child_part = m_precomp_child_part[static_cast<unsigned>(child_count)];
