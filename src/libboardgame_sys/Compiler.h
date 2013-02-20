@@ -6,7 +6,8 @@
 #define LIBBOARDGAME_SYS_COMPILER_H
 
 #include <string>
-#if defined __GNUC__
+#ifdef __GNUC__
+#include <cstdlib>
 #include <cxxabi.h>
 #endif
 
@@ -16,7 +17,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-#if defined __GNUC__
+#ifdef __GNUC__
 #define LIBBOARDGAME_FORCE_INLINE inline __attribute__((always_inline))
 #elif defined _MSC_VER
 #define LIBBOARDGAME_FORCE_INLINE inline __forceinline
