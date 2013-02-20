@@ -62,11 +62,6 @@ if(USE_BOOST_THREAD)
   if (MINGW OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
     set(PENTOBI_BOOST_COMPONENTS ${PENTOBI_BOOST_COMPONENTS} system)
   endif()
-  # Package Threads is needed because some versions of CMake/FindBoost fail to
-  # include -lpthread in Boost_LIBRARIES, which is required by libboost_thread
-  # (e.g. this occurs with CMake 2.8.9/MinGW 3.18). We solve this by adding
-  # CMAKE_THREAD_LIBS_INIT to the link libraries.
-  find_package(Threads)
   find_package(Boost 1.49 REQUIRED COMPONENTS ${PENTOBI_BOOST_COMPONENTS})
   if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost not found")
@@ -78,6 +73,11 @@ if(USE_BOOST_THREAD)
   endif()
 endif()
   
+# -lpthread is needed on Unix but not automatically added to the compiler
+# options if std::thread/GCC 4.7 or CMake/FindBoost on MinGW is used. We
+# solve this by adding CMAKE_THREAD_LIBS_INIT to the link libraries.
+find_package(Threads)
+
 if(NOT DEFINED LIBPENTOBI_MCTS_FLOAT_TYPE)
   set(LIBPENTOBI_MCTS_FLOAT_TYPE float)
 endif()
