@@ -7,6 +7,8 @@ Current development version
   CPU as the recommended system requirement.
 * New menu item Toolbar Text to configure the toolbar button appearance
   independent of the system settings
+* More SGF game info properties (event, round, time) were added to the
+  game info dialog
 * The source code now requires at least GCC 4.7 (because a larger subset
   of C++11 features is used)
 * Thumbnailer registration for blksgf files is no longer supported for

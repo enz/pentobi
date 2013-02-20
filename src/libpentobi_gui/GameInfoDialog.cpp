@@ -56,12 +56,15 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
             createPlayerName(tr("Player &Yellow/Green:"), Color(1));
     }
     m_date = createLine(tr("&Date:"), m_game.get_date());
+    m_time = createLine(tr("&Time limits:"), m_game.get_time());
+    m_event = createLine(tr("&Event:"), m_game.get_event());
+    m_round = createLine(tr("R&ound:"), m_game.get_round());
     auto buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
     // We assume that the user wants to edit the game info if it is still empty
-    // and that he only wants to display it is not empty. Therefore, we leave
-    // the foxus at the first text field if it is empty and put it on the
+    // and that he only wants to display it if not empty. Therefore, we leave
+    // the focus at the first text field if it is empty and put it on the
     // button box otherwise.
     if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
@@ -116,6 +119,12 @@ void GameInfoDialog::accept()
     }
     if (acceptLine(m_date, value))
         m_game.set_date(value);
+    if (acceptLine(m_time, value))
+        m_game.set_time(value);
+    if (acceptLine(m_event, value))
+        m_game.set_event(value);
+    if (acceptLine(m_round, value))
+        m_game.set_round(value);
     QDialog::accept();
 }
 

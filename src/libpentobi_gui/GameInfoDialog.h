@@ -53,6 +53,12 @@ private:
 
     QLineEdit* m_date;
 
+    QLineEdit* m_event;
+
+    QLineEdit* m_round;
+
+    QLineEdit* m_time;
+
     bool acceptLine(QLineEdit* lineEdit, string& value);
 
     QLineEdit* createLine(const QString& label, const string& text);

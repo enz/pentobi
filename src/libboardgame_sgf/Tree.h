@@ -146,6 +146,18 @@ public:
 
     void set_date_today();
 
+    string get_event() const;
+
+    void set_event(const string& event);
+
+    string get_round() const;
+
+    void set_round(const string& date);
+
+    string get_time() const;
+
+    void set_time(const string& time);
+
     bool has_variations() const;
 
 private:
@@ -178,6 +190,11 @@ inline string Tree::get_date() const
     return m_root->get_property("DT", "");
 }
 
+inline string Tree::get_event() const
+{
+    return m_root->get_property("EV", "");
+}
+
 inline double Tree::get_good_move(const Node& node) const
 {
     return node.get_property<double>("TE", 0);
@@ -188,9 +205,19 @@ inline bool Tree::is_modified() const
     return m_modified;
 }
 
+inline string Tree::get_round() const
+{
+    return m_root->get_property("RO", "");
+}
+
 inline const Node& Tree::get_root() const
 {
     return *m_root;
+}
+
+inline string Tree::get_time() const
+{
+    return m_root->get_property("TM", "");
 }
 
 inline bool Tree::is_doubtful_move(const Node& node) const
@@ -226,6 +253,11 @@ inline void Tree::set_date(const string& date)
     set_property(get_root(), "DT", date);
 }
 
+inline void Tree::set_event(const string& event)
+{
+    set_property(get_root(), "EV", event);
+}
+
 inline void Tree::set_modified()
 {
     m_modified = true;
@@ -246,6 +278,16 @@ void Tree::set_property(const Node& node, const string& id,
     bool was_changed = non_const(node).set_property(id, values);
     if (was_changed)
         m_modified = true;
+}
+
+inline void Tree::set_round(const string& round)
+{
+    set_property(get_root(), "RO", round);
+}
+
+inline void Tree::set_time(const string& time)
+{
+    set_property(get_root(), "TM", time);
 }
 
 //-----------------------------------------------------------------------------

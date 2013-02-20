@@ -156,6 +156,21 @@ public:
 
     void set_date_today();
 
+    /** Get event info (standard property EV) from root node. */
+    string get_event() const;
+
+    void set_event(const string& event);
+
+    /** Get round info (standard property RO) from root node. */
+    string get_round() const;
+
+    void set_round(const string& round);
+
+    /** Get time info (standard property TM) from root node. */
+    string get_time() const;
+
+    void set_time(const string& time);
+
     bool has_setup() const;
 
     void add_setup(Color c, Move mv);
@@ -203,6 +218,11 @@ inline string Game::get_date() const
     return m_tree.get_date();
 }
 
+inline string Game::get_event() const
+{
+    return m_tree.get_event();
+}
+
 inline Color Game::get_effective_to_play() const
 {
     return m_bd->get_effective_to_play();
@@ -238,9 +258,19 @@ inline Color Game::get_to_play() const
     return m_bd->get_to_play();
 }
 
+inline string Game::get_round() const
+{
+    return m_tree.get_round();
+}
+
 inline const Node& Game::get_root() const
 {
     return m_tree.get_root();
+}
+
+inline string Game::get_time() const
+{
+    return m_tree.get_time();
 }
 
 inline const Tree& Game::get_tree() const
@@ -333,6 +363,11 @@ inline void Game::set_date(const string& date)
     m_tree.set_date(date);
 }
 
+inline void Game::set_event(const string& event)
+{
+    m_tree.set_event(event);
+}
+
 inline void Game::set_date_today()
 {
     m_tree.set_date_today();
@@ -361,6 +396,16 @@ inline void Game::set_modified()
 inline void Game::set_player_name(Color c, const string& name)
 {
     m_tree.set_player_name(c, name);
+}
+
+inline void Game::set_round(const string& round)
+{
+    m_tree.set_round(round);
+}
+
+inline void Game::set_time(const string& time)
+{
+    m_tree.set_time(time);
 }
 
 inline void Game::truncate_children()
