@@ -1286,7 +1286,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
         for (unsigned i = 1; i < nu_threads; ++i)
             m_threads[i]->wait_search_loop_finished();
         bool is_out_of_mem = false;
-        for (unsigned i = 0; i < m_threads.size(); ++i)
+        for (unsigned i = 0; i < nu_threads; ++i)
             if (m_threads[i]->thread_state.is_out_of_mem)
             {
                 is_out_of_mem = true;
