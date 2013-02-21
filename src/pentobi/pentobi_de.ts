@@ -331,7 +331,7 @@
     <message>
         <location filename="MainWindow.cpp" line="859"/>
         <source>Ga&amp;me Info</source>
-        <translation>Spiel-Inf&amp;o</translation>
+        <translation>Spielinf&amp;ormation</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="883"/>

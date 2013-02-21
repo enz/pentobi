@@ -54,7 +54,7 @@
     <message>
         <location filename="GameInfoDialog.cpp" line="24"/>
         <source>Game Info</source>
-        <translation>Spiel-Info</translation>
+        <translation>Spielinformation</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="33"/>
