@@ -265,7 +265,7 @@ void Search::set_default_param(Variant variant)
     {
     case Variant::duo:
     case Variant::junior:
-        set_bias_term_constant(0.07f);
+        set_bias_term_constant(0.05f);
         set_rave_weight(0.2f);
         set_rave_max_parent_count(50000);
         set_rave_max_child_count(500);
