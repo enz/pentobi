@@ -29,6 +29,8 @@ private:
 
     QPushButton* m_flattrButton;
 
+    void openUrl(const QString& s);
+
 private slots:
     void buttonClicked(QAbstractButton*);
 };
