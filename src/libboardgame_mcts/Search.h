@@ -152,7 +152,7 @@ public:
     static const bool log_move_selection = false;
 
     /** Constructor.
-        @param state A prototype for the search state used by one thread.
+        @param nu_threads
         @param memory The memory to be used for (all) the search trees. If
         zero, a default value will be used. */
     Search(unsigned nu_threads, size_t memory);
