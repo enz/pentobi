@@ -254,21 +254,19 @@ Point<W,H,I,S,M>::Direction::Direction(int i)
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction Point<W,H,I,S,M>::Direction::down()
+inline auto Point<W,H,I,S,M>::Direction::down() -> Direction
 {
     return Direction(-static_cast<int>(max_width));
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction
-                                       Point<W,H,I,S,M>::Direction::down_left()
+inline auto Point<W,H,I,S,M>::Direction::down_left() -> Direction
 {
     return Direction(-static_cast<int>(max_width) - 1);
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction
-                                      Point<W,H,I,S,M>::Direction::down_right()
+inline auto Point<W,H,I,S,M>::Direction::down_right() -> Direction
 {
     return Direction(-static_cast<int>(max_width) + 1);
 }
@@ -280,13 +278,13 @@ inline bool Point<W,H,I,S,M>::Direction::is_initialized() const
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction Point<W,H,I,S,M>::Direction::left()
+inline auto Point<W,H,I,S,M>::Direction::left() -> Direction
 {
     return Direction(-1);
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction Point<W,H,I,S,M>::Direction::right()
+inline auto Point<W,H,I,S,M>::Direction::right() -> Direction
 {
     return Direction(1);
 }
@@ -299,21 +297,19 @@ inline int Point<W,H,I,S,M>::Direction::to_int() const
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction Point<W,H,I,S,M>::Direction::up()
+inline auto Point<W,H,I,S,M>::Direction::up() -> Direction
 {
     return Direction(max_width);
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction
-                                         Point<W,H,I,S,M>::Direction::up_left()
+inline auto Point<W,H,I,S,M>::Direction::up_left() -> Direction
 {
     return Direction(max_width - 1);
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline typename Point<W,H,I,S,M>::Direction
-                                        Point<W,H,I,S,M>::Direction::up_right()
+inline auto Point<W,H,I,S,M>::Direction::up_right() -> Direction
 {
     return Direction(max_width + 1);
 }

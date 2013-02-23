@@ -378,7 +378,7 @@ size_t Tree<N>::get_nu_nodes() const
 }
 
 template<typename N>
-inline const typename Tree<N>::Node& Tree<N>::get_root() const
+inline auto Tree<N>::get_root() const -> const Node&
 {
     return m_nodes[0];
 }
@@ -418,7 +418,7 @@ inline void Tree<N>::link_children(const Node& node, const Node* first_child,
     The user has only read access to the nodes, because the tree guarantees
     the validity of the tree structure. */
 template<typename N>
-inline typename Tree<N>::Node& Tree<N>::non_const(const Node& node) const
+inline auto Tree<N>::non_const(const Node& node) const -> Node&
 {
     LIBBOARDGAME_ASSERT(contains(node));
     return const_cast<Node&>(node);

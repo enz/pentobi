@@ -180,13 +180,13 @@ inline const T& ArrayList<T,M,I>::back() const
 }
 
 template<typename T, unsigned M, typename I>
-inline typename ArrayList<T,M,I>::iterator ArrayList<T,M,I>::begin()
+inline auto ArrayList<T,M,I>::begin() -> iterator
 {
     return m_a;
 }
 
 template<typename T, unsigned M, typename I>
-inline typename ArrayList<T,M,I>::const_iterator ArrayList<T,M,I>::begin() const
+inline auto ArrayList<T,M,I>::begin() const -> const_iterator
 {
     return m_a;
 }
@@ -213,13 +213,13 @@ inline bool ArrayList<T,M,I>::empty() const
 }
 
 template<typename T, unsigned M, typename I>
-inline typename ArrayList<T,M,I>::iterator ArrayList<T,M,I>::end()
+inline auto ArrayList<T,M,I>::end() -> iterator
 {
     return begin() + m_size;
 }
 
 template<typename T, unsigned M, typename I>
-inline typename ArrayList<T,M,I>::const_iterator ArrayList<T,M,I>::end() const
+inline auto ArrayList<T,M,I>::end() const -> const_iterator
 {
     return begin() + m_size;
 }

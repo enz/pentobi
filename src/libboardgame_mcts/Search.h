@@ -834,7 +834,7 @@ void Search<S, M, R>::create_threads()
 {
     log() << "Creating " << m_nu_threads << " threads\n";
     m_threads.clear();
-    typename Thread::SearchFunc search_func =
+    auto search_func =
         static_cast<typename Thread::SearchFunc>(
                           bind(&Search::search_loop, this, placeholders::_1));
     for (unsigned i = 0; i < m_nu_threads; ++i)
@@ -995,7 +995,7 @@ size_t Search<S, M, R>::get_tree_memory() const
 }
 
 template<class S, class M, class R>
-inline const typename Search<S, M, R>::Tree& Search<S, M, R>::get_tree() const
+inline auto Search<S, M, R>::get_tree() const -> const Tree&
 {
     return m_tree;
 }
