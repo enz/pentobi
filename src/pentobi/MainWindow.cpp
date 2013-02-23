@@ -30,7 +30,6 @@
 #include <QToolBar>
 #include <QToolButton>
 #include <QtConcurrentRun>
-#include "AboutDialog.h"
 #include "AnalyzeGameWindow.h"
 #include "AnalyzeSpeedDialog.h"
 #include "ExportImage.h"
@@ -366,8 +365,19 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
 
 void MainWindow::about()
 {
-    AboutDialog dialog(this, getVersion());
-    dialog.exec();
+    QMessageBox::about(this, tr("About Pentobi"),
+                       "<style type=\"text/css\">"
+                       ":link { text-decoration: none; }"
+                       "</style>"
+                       "<h2>" + tr("Pentobi") + "</h2>"
+                       "<p>" + tr("Version %1").arg(getVersion()) + "</p>"
+                       "<p>" +
+                       tr("Pentobi is a computer program that plays the board game Blokus.")
+                       + "</p><p>" +
+                       tr("Copyright &copy; 2011&ndash;2013 Markus Enzenberger") +
+                       + "<br>" +
+                       "<a href=\"http://pentobi.sf.net\">http://pentobi.sf.net</a>"
+                       "</p>");
 }
 
 void MainWindow::analyzeGame()

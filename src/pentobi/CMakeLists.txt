@@ -7,7 +7,6 @@ include_directories(
 )
 
 set(pentobi_SRCS
-  AboutDialog.cpp
   AnalyzeGameWidget.cpp
   AnalyzeGameWindow.cpp
   AnalyzeSpeedDialog.cpp
@@ -24,7 +23,6 @@ set(pentobi_SRCS
   )
 
 set(pentobi_MOC_HDRS
-  AboutDialog.h
   AnalyzeGameWidget.h
   AnalyzeGameWindow.h
   AnalyzeSpeedDialog.h
