@@ -24,6 +24,7 @@ AboutDialog::AboutDialog(QWidget* parent, const QString& version)
     : QDialog(parent)
 {
     setWindowTitle(tr("About Pentobi"));
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     auto outerLayout = new QVBoxLayout();
     setLayout(outerLayout);
     auto innerLayout = new QHBoxLayout();
