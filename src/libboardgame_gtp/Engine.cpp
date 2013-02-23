@@ -105,7 +105,7 @@ void Barrier::wait()
     {
         ++m_current;
         m_count = m_threshold;
-        m_condition.notify_all();
+        m_condition.notify_one();
     }
     else
         while (current == m_current)
@@ -143,6 +143,10 @@ private:
 
     bool m_quit;
 
+    bool m_start_ponder_flag;
+
+    bool m_ponder_finished_flag;
+
     Engine& m_engine;
 
     Barrier m_ready;
@@ -151,9 +155,9 @@ private:
 
     mutex m_ponder_finished_mutex;
 
-    condition_variable m_start_ponder;
+    condition_variable m_start_ponder_cond;
 
-    condition_variable m_ponder_finished;
+    condition_variable m_ponder_finished_cond;
 
     unique_lock<mutex> m_ponder_finished_lock;
 
@@ -175,15 +179,18 @@ void PonderThread::Function::operator()()
     m_thread.m_quit = false;
     while (true)
     {
-        m_thread.m_start_ponder.wait(lock);
+        while (! m_thread.m_start_ponder_flag)
+            m_thread.m_start_ponder_cond.wait(lock);
+        m_thread.m_start_ponder_flag = false;
         auto& engine = m_thread.m_engine;
         if (! m_thread.m_quit)
         {
             engine.ponder();
             {
                 lock_guard<mutex> lock(m_thread.m_ponder_finished_mutex);
-                m_thread.m_ponder_finished.notify_all();
+                m_thread.m_ponder_finished_flag = true;
             }
+            m_thread.m_ponder_finished_cond.notify_one();
         }
         else
             return;
@@ -191,7 +198,9 @@ void PonderThread::Function::operator()()
 }
 
 PonderThread::PonderThread(Engine& engine)
-    : m_engine(engine),
+    : m_start_ponder_flag(false),
+      m_ponder_finished_flag(false),
+      m_engine(engine),
       m_ready(2),
       m_ponder_finished_lock(m_ponder_finished_mutex),
       m_thread(Function(*this))
@@ -204,8 +213,9 @@ PonderThread::~PonderThread() throw()
     m_quit = true;
     {
         lock_guard<mutex> lock(m_start_ponder_mutex);
-        m_start_ponder.notify_all();
+        m_start_ponder_flag = true;
     }
+    m_start_ponder_cond.notify_one();
     m_thread.join();
 }
 
@@ -214,14 +224,17 @@ void PonderThread::start_ponder()
     m_engine.init_ponder();
     {
         lock_guard<mutex> lock(m_start_ponder_mutex);
-        m_start_ponder.notify_all();
+        m_start_ponder_flag = true;
     }
+    m_start_ponder_cond.notify_one();
 }
 
 void PonderThread::stop_ponder()
 {
     m_engine.stop_ponder();
-    m_ponder_finished.wait(m_ponder_finished_lock);
+    while (! m_ponder_finished_flag)
+        m_ponder_finished_cond.wait(m_ponder_finished_lock);
+    m_ponder_finished_flag = false;
 }
 
 /** Thread for reading the next command line.
@@ -248,7 +261,7 @@ private:
         allocated on the heap and uses a thread-safe reference counter to
         determine when it will be deleted. Note that it could be never
         deleted if the program exits before the EOF of the blocking input
-        stream is used. Therefore this struct should not contain any members
+        stream is used. Therefore, this struct should not contain any members
         whose destructor is important to run.  */
     struct Data
     {
@@ -256,23 +269,27 @@ private:
 
         bool quit;
 
+        bool is_stream_good;
+
+        bool wait_cmd_flag;
+
+        bool cmd_received_flag;
+
         mutex ref_count_mutex;
 
         istream& in;
 
         Engine& engine;
 
-        bool is_stream_good;
-
         Barrier ready;
 
         mutex wait_cmd_mutex;
 
-        condition_variable wait_cmd;
-
         mutex cmd_received_mutex;
 
-        condition_variable cmd_received;
+        condition_variable wait_cmd_cond;
+
+        condition_variable cmd_received_cond;
 
         unique_lock<mutex> cmd_received_lock;
 
@@ -324,6 +341,8 @@ private:
 ReadThread::Data::Data(istream& in, Engine& engine)
     : ref_count(0),
       quit(false),
+      wait_cmd_flag(false),
+      cmd_received_flag(false),
       in(in),
       engine(engine),
       ready(2),
@@ -390,7 +409,9 @@ void ReadThread::Function::operator()()
             else if (is_cmd_line(line))
                 break;
         }
-        data.wait_cmd.wait(lock);
+        while (! data.wait_cmd_flag)
+            data.wait_cmd_cond.wait(lock);
+        data.wait_cmd_flag = false;
         if (data.quit)
             return;
         if (! in.fail())
@@ -399,8 +420,9 @@ void ReadThread::Function::operator()()
             data.is_stream_good = false;
         {
             lock_guard<mutex> lock(data.cmd_received_mutex);
-            data.cmd_received.notify_all();
+            data.cmd_received_flag = true;
         }
+        data.cmd_received_cond.notify_one();
         if (in.fail())
             return;
     }
@@ -430,9 +452,12 @@ bool ReadThread::read_cmd(CmdLine& c)
     auto& data = m_data_ref.data;
     {
         lock_guard<mutex> lock(data.wait_cmd_mutex);
-        data.wait_cmd.notify_all();
+        data.wait_cmd_flag = true;
     }
-    data.cmd_received.wait(data.cmd_received_lock);
+    data.wait_cmd_cond.notify_one();
+    while (! data.cmd_received_flag)
+        data.cmd_received_cond.wait(data.cmd_received_lock);
+    data.cmd_received_flag = false;
     if (! data.is_stream_good)
         return false;
     c.init(data.cmd);
