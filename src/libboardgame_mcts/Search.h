@@ -270,6 +270,14 @@ public:
 
     Float get_rave_weight() const;
 
+    /** The RAVE distance weight at the end of a simulation.
+        If RAVE distance weighting is used, the RAVE distance weight decreases
+        linearly from 1 at the current position to this value at the end of a
+        simulation. */
+    void set_rave_dist_final(Float value);
+
+    Float get_rave_dist_final() const;
+
     /** Value to start the tree pruning with.
         This value should be above typical count initializations if prior
         knowledge initialization is used. */
@@ -504,6 +512,8 @@ private:
 
     Float m_rave_weight;
 
+    Float m_rave_dist_final;
+
     /** Minimum simulations to perform in the current search.
         This does not include the count of simulations reused from a subtree of
         a previous search. */
@@ -709,6 +719,7 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
       m_rave_max_parent_count(50000),
       m_rave_max_child_count(500),
       m_rave_weight(0.3f),
+      m_rave_dist_final(0.5f),
       m_tree_memory(memory == 0 ? 256000000 : memory),
       m_max_nodes(get_max_nodes(m_tree_memory)),
       m_bias_term(0),
@@ -935,6 +946,12 @@ template<class S, class M, class R>
 inline bool Search<S, M, R>::get_prune_full_tree() const
 {
     return m_prune_full_tree;
+}
+
+template<class S, class M, class R>
+inline auto Search<S, M, R>::get_rave_dist_final() const -> Float
+{
+    return m_rave_dist_final;
 }
 
 template<class S, class M, class R>
@@ -1500,6 +1517,12 @@ void Search<S, M, R>::set_prune_full_tree(bool enable)
 }
 
 template<class S, class M, class R>
+void Search<S, M, R>::set_rave_dist_final(Float v)
+{
+    m_rave_dist_final = v;
+}
+
+template<class S, class M, class R>
 void Search<S, M, R>::set_rave_max_parent_count(Float n)
 {
     m_rave_max_parent_count = n;
@@ -1639,7 +1662,7 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
     auto& was_played = thread_state.was_played;
     auto& first_play = thread_state.first_play;
     unsigned len = state.get_nu_moves();
-    Float dist_weight_factor = 1 / Float(len - i);
+    Float dist_weight_factor = (1 - m_rave_dist_final) / Float(len - i);
     for (ChildIterator it(m_tree, *node); it; ++it)
     {
         auto mv = it->get_move();
@@ -1666,13 +1689,7 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
         }
         Float weight = m_rave_weight;
         if (SearchParamConst::rave_dist_weighting)
-            // Distance weight decreases linearly from 2 at the start to 1 at
-            // the end of a simulation. Being proportional to the relative move
-            // distance (by dividing it by the length of the simulation) is
-            // essential for a positive effect of rave weighting, however the
-            // scaling to [2..1] could not be optimal for different games and
-            // should be made configurable in the future
-            weight *= 2 - Float(first - i) * dist_weight_factor;
+            weight *= 1 - Float(first - i) * dist_weight_factor;
         m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
     }
 }
