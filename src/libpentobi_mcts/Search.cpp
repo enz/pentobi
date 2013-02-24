@@ -281,7 +281,7 @@ void Search::set_default_param(Variant variant)
     case Variant::trigon_3:
     case Variant::trigon:
         set_bias_term_constant(0.06f);
-        set_rave_weight(0.4f);
+        set_rave_weight(0.3f);
         set_rave_max_parent_count(50000);
         set_rave_max_child_count(2000);
         break;

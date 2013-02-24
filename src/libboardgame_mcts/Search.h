@@ -1607,12 +1607,12 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
     while (true)
     {
         auto mv = state.get_move(i);
+        update_rave_values(thread_state, i, mv.player);
         if (! state.skip_rave(mv.move))
         {
             was_played[mv.player].set(mv.move);
             first_play[mv.player][mv.move.to_int()] = i;
         }
-        update_rave_values(thread_state, i, mv.player);
         if (i == 0)
             break;
         --i;
@@ -1647,7 +1647,7 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
             || it->get_visit_count() > m_rave_max_child_count)
             continue;
         unsigned first = first_play[player][mv.to_int()];
-        LIBBOARDGAME_ASSERT(first >= i);
+        LIBBOARDGAME_ASSERT(first > i);
         if (SearchParamConst::rave_check_same)
         {
             bool other_played_same = false;
