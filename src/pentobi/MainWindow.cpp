@@ -3483,7 +3483,7 @@ void MainWindow::updateMoveNumber()
             if (! m_actionMoveNumbersLast->isChecked())
             {
                 text = QString("%1").arg(move);
-                toolTip = tr("Move number %1").arg(move);
+                toolTip = tr("Move %1").arg(move);
             }
         }
         else
@@ -3492,7 +3492,7 @@ void MainWindow::updateMoveNumber()
             if (move == 0)
                 toolTip = tr("%n move(s)", "", totalMoves);
             else
-                toolTip = tr("Move number %1 of %2").arg(move).arg(totalMoves);
+                toolTip = tr("Move %1 of %2").arg(move).arg(totalMoves);
         }
     }
     else
@@ -3504,7 +3504,7 @@ void MainWindow::updateMoveNumber()
                 QString("%1/%2 (%3)")
                 .arg(move).arg(totalMoves).arg(variation.c_str());
         toolTip =
-            tr("Move number %1 of %2 in variation %3")
+            tr("Move %1 of %2 in variation %3")
             .arg(move).arg(totalMoves).arg(variation.c_str());
     }
     if (text.isEmpty())

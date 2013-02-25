@@ -1147,8 +1147,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="3492"/>
-        <source>Move number %1</source>
-        <translation>Zug Nummer %1</translation>
+        <source>Move %1</source>
+        <translation>Zug %1</translation>
     </message>
     <message numerus="yes">
         <location filename="MainWindow.cpp" line="3499"/>
@@ -1160,13 +1160,13 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="3501"/>
-        <source>Move number %1 of %2</source>
-        <translation>Zug Nummer %1 von %2</translation>
+        <source>Move %1 of %2</source>
+        <translation>Zug %1 von %2</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="3513"/>
-        <source>Move number %1 of %2 in variation %3</source>
-        <translation>Zug Nummer %1 von %2 in Variante %3</translation>
+        <source>Move %1 of %2 in variation %3</source>
+        <translation>Zug %1 von %2 in Variante %3</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="3559"/>
