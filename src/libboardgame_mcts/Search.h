@@ -1631,17 +1631,17 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
     {
         auto mv = state.get_move(i);
         update_rave_values(thread_state, i, mv.player);
+        if (i == 0)
+            break;
         if (! state.skip_rave(mv.move))
         {
             was_played[mv.player].set(mv.move);
             first_play[mv.player][mv.move.to_int()] = i;
         }
-        if (i == 0)
-            break;
         --i;
     }
     // Reset was_played
-    for (unsigned i = 0; i < nu_moves; ++i)
+    for (unsigned i = 1; i < nu_moves; ++i)
     {
         auto mv = state.get_move(i);
         was_played[mv.player].clear_word(mv.move);
