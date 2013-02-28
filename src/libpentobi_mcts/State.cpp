@@ -158,9 +158,8 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
         if (is_forbidden[*i])
             return false;
         compute_local.add_move_point(*i, m_local_value);
-        ++i;
     }
-    while (i != end);
+    while (++i != end);
     unsigned piece_size = info.size();
     if (piece_size > m_max_playable_piece_size)
         m_max_playable_piece_size = piece_size;

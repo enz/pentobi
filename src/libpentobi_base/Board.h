@@ -774,12 +774,9 @@ inline bool Board::is_forbidden(Color c, Move mv) const
     auto i = info.begin();
     auto end = info.end();
     do
-    {
         if (m_state_color[c].forbidden[*i])
             return true;
-        ++i;
-    }
-    while (i != end);
+    while (++i != end);
     return false;
 }
 
@@ -805,23 +802,19 @@ inline bool Board::is_legal(Color c, Move mv) const
             return false;
         if (is_attach_point(*i, c))
             has_attach_point = true;
-        ++i;
     }
-    while (i != end);
+    while (++i != end);
     if (has_attach_point)
         return true;
     if (! is_first_piece(c))
         return false;
     i = info.begin();
     do
-    {
         if (is_colorless_starting_point(*i)
             || (is_colored_starting_point(*i)
                 && get_starting_point_color(*i) == c))
             return true;
-        ++i;
-    }
-    while (i != end);
+    while (++i != end);
     return false;
 }
 
@@ -846,8 +839,8 @@ inline void Board::place(Color c, Move mv)
     LIBBOARDGAME_ASSERT(mv.is_regular());
     auto& info = get_move_info(mv);
     auto& info_ext = get_move_info_ext(mv);
-    Piece piece = info.get_piece();
-    unsigned piece_size = info.size();
+    auto piece = info.get_piece();
+    auto piece_size = info.size();
     auto& state_color = m_state_color[c];
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
     if (--state_color.nu_left_piece[piece] == 0)
@@ -870,29 +863,22 @@ inline void Board::place(Color c, Move mv)
         m_state_base.point_state[*i] = c;
         m_state_base.played_move[*i] = mv;
         LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden[*i] = true);
-        ++i;
     }
-    while (i != end);
+    while (++i != end);
     i = info_ext.adj_points.begin();
     end = info_ext.adj_points.end();
     do
-    {
         state_color.forbidden[*i] = true;
-        ++i;
-    }
-    while (i != end);
+    while (++i != end);
     i = info_ext.attach_points.begin();
     end = info_ext.attach_points.end();
     do
-    {
         if (! state_color.is_attach_point[*i])
         {
             state_color.is_attach_point[*i] = true;
             m_attach_points[c].push_back(*i);
         }
-        ++i;
-    }
-    while (i != end);
+    while (++i != end);
 }
 
 inline void Board::play(ColorMove move)
