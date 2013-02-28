@@ -56,7 +56,7 @@ void handle_assertion(const char* expression, const char* file, int line)
     static bool is_during_handle_assertion = false;
     static vector<string> additional_assertions;
     ostringstream o;
-    o << file << ":" << line << ": Assertion '" << expression << "'%3%' failed";
+    o << file << ":" << line << ": Assertion '" << expression << "' failed";
     string message = o.str();
     if (is_during_handle_assertion)
     {
