@@ -201,7 +201,7 @@ void Board::init(Variant variant, const Setup* setup)
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_state_color[*i].forbidden.fill(false);
-        m_state_color[*i].is_attach_point.fill(false);
+        m_state_color[*i].is_attach_point.clear();
         m_attach_points[*i].clear();
         m_state_color[*i].pieces_left.clear();
         m_state_color[*i].nu_onboard_pieces = 0;
@@ -289,7 +289,6 @@ void Board::init_variant(Variant variant)
             m_second_color[*i] = get_next(get_next(*i));
         else
             m_second_color[*i] = *i;
-        m_state_color[*i].is_attach_point.init(*m_geometry);
     }
 }
 
@@ -314,7 +313,7 @@ void Board::optimize_attach_point_lists()
         for (auto j = attach_points.begin(); j != attach_points.end(); ++j)
             if (is_forbidden(*j, *i))
             {
-                m_state_color[*i].is_attach_point[*j] = false;
+                m_state_color[*i].is_attach_point.clear(*j);
                 attach_points.remove_fast(j);
                 --j;
                 continue;
