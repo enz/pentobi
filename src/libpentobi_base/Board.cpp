@@ -207,7 +207,7 @@ void Board::init(Variant variant, const Setup* setup)
         m_state_color[*i].nu_onboard_pieces = 0;
         m_state_color[*i].points = 0;
         m_state_color[*i].bonus = 0;
-        for (unsigned j = 0; j < get_nu_uniq_pieces(); ++j)
+        for (Piece::IntType j = 0; j < get_nu_uniq_pieces(); ++j)
             m_state_color[*i].pieces_left.push_back(Piece(j));
         m_state_color[*i].nu_left_piece.fill(m_nu_piece_instances);
     }

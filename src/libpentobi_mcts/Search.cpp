@@ -27,7 +27,7 @@ namespace {
 void filter_min_size(const BoardConst& board_const, unsigned min_size,
                      PieceMap<bool>& is_piece_considered)
 {
-    for (unsigned i = 0; i < board_const.get_nu_pieces(); ++i)
+    for (Piece::IntType i = 0; i < board_const.get_nu_pieces(); ++i)
     {
         Piece piece(i);
         auto& piece_info = board_const.get_piece_info(piece);
@@ -184,7 +184,7 @@ void Search::on_start_search()
     ColorMap<unsigned> current(0);
     for (BoardIterator i(bd); i; ++i)
         for (unsigned j = 0; j < BoardConst::nu_adj_status; ++j)
-            for (unsigned k = 0; k < bc.get_nu_pieces(); ++k)
+            for (Piece::IntType k = 0; k < bc.get_nu_pieces(); ++k)
             {
                 Piece piece(k);
                 auto moves = bc.get_moves(piece, *i, j);
@@ -210,7 +210,7 @@ void Search::on_start_search()
         PieceMap<bool> is_piece_considered;
         set_pieces_considered(bd, i, is_piece_considered);
         bool are_all_considered = true;
-        for (unsigned j = 0; j < bc.get_nu_pieces(); ++j)
+        for (Piece::IntType j = 0; j < bc.get_nu_pieces(); ++j)
             if (! is_piece_considered[Piece(j)])
             {
                 are_all_considered = false;

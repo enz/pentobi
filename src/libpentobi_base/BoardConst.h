@@ -124,7 +124,7 @@ public:
         The instance is created the first time this function is called. */
     static const BoardConst& get(Variant variant);
 
-    unsigned get_nu_pieces() const;
+    Piece::IntType get_nu_pieces() const;
 
     unsigned get_total_piece_points() const;
 
@@ -187,7 +187,7 @@ private:
     /** See m_full_move_table */
     typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status> FullMoveTable;
 
-    unsigned m_nu_pieces;
+    Piece::IntType m_nu_pieces;
 
     unsigned m_total_piece_points;
 
@@ -318,7 +318,7 @@ inline unsigned BoardConst::get_nu_all_moves() const
     return static_cast<unsigned>(m_move_info.size());
 }
 
-inline unsigned BoardConst::get_nu_pieces() const
+inline Piece::IntType BoardConst::get_nu_pieces() const
 {
     return m_nu_pieces;
 }

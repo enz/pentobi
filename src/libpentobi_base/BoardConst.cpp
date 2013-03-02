@@ -682,7 +682,7 @@ void BoardConst::create_moves()
     m_full_move_table.reset(new FullMoveTable);
     m_moves_range.init(m_geometry);
     m_move_lists_sum_length = 0;
-    for (unsigned i = 0; i < m_nu_pieces; ++i)
+    for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << ", "
@@ -692,7 +692,7 @@ void BoardConst::create_moves()
     unsigned current = 0;
     for (GeometryIterator i(m_geometry); i; ++i)
         for (unsigned j = 0; j < nu_adj_status; ++j)
-            for (unsigned k = 0; k < m_nu_pieces; ++k)
+            for (Piece::IntType k = 0; k < m_nu_pieces; ++k)
             {
                 Piece piece(k);
                 unsigned begin = current;
@@ -824,7 +824,7 @@ const BoardConst& BoardConst::get(Variant variant)
 
 bool BoardConst::get_piece_by_name(const string& name, Piece& piece) const
 {
-    for (unsigned i = 0; i < m_nu_pieces; ++i)
+    for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         if (get_piece_info(Piece(i)).get_name() == name)
         {
             piece = Piece(i);

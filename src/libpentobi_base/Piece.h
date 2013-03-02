@@ -18,20 +18,22 @@ using namespace std;
 class Piece
 {
 public:
+    typedef unsigned IntType;
+
     /** Maximum number of unique pieces per color. */
-    static const unsigned max_pieces = 22;
+    static const IntType max_pieces = 22;
 
     /** Integer range used for unique pieces without the null piece. */
-    static const unsigned range_not_null = max_pieces;
+    static const IntType range_not_null = max_pieces;
 
     /** Integer range used for unique pieces including the null piece */
-    static const unsigned range = max_pieces + 1;
+    static const IntType range = max_pieces + 1;
 
     static Piece null();
 
     Piece();
 
-    explicit Piece(unsigned i);
+    explicit Piece(IntType i);
 
     Piece& operator=(const Piece& piece);
 
@@ -42,14 +44,14 @@ public:
     bool is_null() const;
 
     /** Return move as an integer between 0 and Piece::range */
-    unsigned to_int() const;
+    IntType to_int() const;
 
 private:
-    static const unsigned short value_null = range - 1;
+    static const IntType value_null = range - 1;
 
-    static const unsigned short value_uninitialized = range;
+    static const IntType value_uninitialized = range;
 
-    unsigned short m_i;
+    IntType m_i;
 
     bool is_initialized() const;
 };
@@ -61,10 +63,10 @@ inline Piece::Piece()
 #endif
 }
 
-inline Piece::Piece(unsigned i)
+inline Piece::Piece(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
-    m_i = static_cast<unsigned short>(i);
+    m_i = i;
 }
 
 inline Piece& Piece::operator=(const Piece& piece)
@@ -99,7 +101,7 @@ inline Piece Piece::null()
     return Piece(value_null);
 }
 
-inline unsigned Piece::to_int() const
+inline auto Piece::to_int() const -> IntType
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;

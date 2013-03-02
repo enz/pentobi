@@ -79,7 +79,7 @@ public:
     unsigned get_nu_players() const;
 
 
-    unsigned get_nu_uniq_pieces() const;
+    Piece::IntType get_nu_uniq_pieces() const;
 
     /** Get number of pieces per player in the current game variant. */
     unsigned get_nu_pieces() const;
@@ -566,7 +566,7 @@ inline Color::IntType Board::get_nu_colors() const
 
 inline unsigned Board::get_nu_left_piece(Color c, Piece piece) const
 {
-    LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_pieces());
+    LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_uniq_pieces());
     return m_state_color[c].nu_left_piece[piece];
 }
 
@@ -600,7 +600,7 @@ inline unsigned Board::get_nu_pieces() const
     return m_nu_piece_instances * m_board_const->get_nu_pieces();
 }
 
-inline unsigned Board::get_nu_uniq_pieces() const
+inline Piece::IntType Board::get_nu_uniq_pieces() const
 {
     return m_board_const->get_nu_pieces();
 }
@@ -825,7 +825,7 @@ inline bool Board::is_onboard(Point p) const
 
 inline bool Board::is_piece_left(Color c, Piece piece) const
 {
-    LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_pieces());
+    LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_uniq_pieces());
     return m_state_color[c].nu_left_piece[piece] > 0;
 }
 
