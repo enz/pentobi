@@ -98,11 +98,11 @@ private:
 
     int m_level;
 
-    array<float, Board::max_player_moves> weight_max_count_classic;
+    array<float, Board::max_player_moves> m_weight_max_count_classic;
 
-    array<float, Board::max_player_moves> weight_max_count_trigon;
+    array<float, Board::max_player_moves> m_weight_max_count_trigon;
 
-    array<float, Board::max_player_moves> weight_max_count_duo;
+    array<float, Board::max_player_moves> m_weight_max_count_duo;
 
     Float m_fixed_simulations;
 

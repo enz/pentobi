@@ -42,31 +42,31 @@ Player::Player(Variant initial_variant, const string& books_dir,
         // moves than with a fixed number of simulations (because the
         // simulations per second increase rapidly with the move number) but
         // the average time per game is roughly the same.
-        weight_max_count_duo[i] = Float(0.7 * exp(0.1 * i));
-        weight_max_count_classic[i] = weight_max_count_duo[i];
-        weight_max_count_trigon[i] = weight_max_count_duo[i];
+        m_weight_max_count_duo[i] = 0.7f * exp(0.1f * static_cast<float>(i));
+        m_weight_max_count_classic[i] = m_weight_max_count_duo[i];
+        m_weight_max_count_trigon[i] = m_weight_max_count_duo[i];
         // Less weight for the first move(s) because number of legal moves
         // is lower and the search applies some pruning rules to reduce the
         // branching factor in early moves
         if (i == 0)
         {
-            weight_max_count_classic[i] *= Float(0.2);
-            weight_max_count_trigon[i] *= Float(0.2);
-            weight_max_count_duo[i] *= Float(0.6);
+            m_weight_max_count_classic[i] *= 0.2f;
+            m_weight_max_count_trigon[i] *= 0.2f;
+            m_weight_max_count_duo[i] *= 0.6f;
         }
         else if (i == 1)
         {
-            weight_max_count_classic[i] *= Float(0.2);
-            weight_max_count_trigon[i] *= Float(0.5);
+            m_weight_max_count_classic[i] *= 0.2f;
+            m_weight_max_count_trigon[i] *= 0.5f;
         }
         else if (i == 2)
         {
-            weight_max_count_classic[i] *= Float(0.3);
-            weight_max_count_trigon[i] *= Float(0.6);
+            m_weight_max_count_classic[i] *= 0.3f;
+            m_weight_max_count_trigon[i] *= 0.6f;
         }
         else if (i == 3)
         {
-            weight_max_count_trigon[i] *= Float(0.8);
+            m_weight_max_count_trigon[i] *= 0.8f;
         }
     }
 }
@@ -177,14 +177,14 @@ Move Player::genmove(const Board& bd, Color c)
             unsigned player_move = bd.get_nu_onboard_pieces(c);
             float weight = 1;
             if (variant == Variant::duo || variant == Variant::junior)
-                weight = weight_max_count_duo[player_move];
+                weight = m_weight_max_count_duo[player_move];
             else if (variant == Variant::classic
                      || variant == Variant::classic_2)
-                weight = weight_max_count_classic[player_move];
+                weight = m_weight_max_count_classic[player_move];
             else if (variant == Variant::trigon
                      || variant == Variant::trigon_2
                      || variant == Variant::trigon_3)
-                weight = weight_max_count_trigon[player_move];
+                weight = m_weight_max_count_trigon[player_move];
             max_count = ceil(max_count * weight);
         }
     }
