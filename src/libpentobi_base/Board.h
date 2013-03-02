@@ -142,11 +142,11 @@ public:
     Move get_played_move(Point p) const;
 
     /** Is a point a potential attachment point for a color.
-        Does not check if the point is forbidden.. */
+        Does not check if the point is forbidden. */
     bool is_attach_point(Point p, Color c) const;
 
     /** Get potential attachment points for a color.
-        Does not check if the point is forbidden.. */
+        Does not check if the point is forbidden. */
     const PointList& get_attach_points(Color c) const;
 
     /** Initialize the current board for a given game variant.
@@ -335,7 +335,7 @@ private:
         Color to_play;
     };
 
-    /** Color-dependent part of the board state for fast snapshot restoration..
+    /** Color-dependent part of the board state for fast snapshot restoration.
         Must have only POD-like members such that it can quickly be copied
         with memcpy in copy_from(). */
     struct StateColor
