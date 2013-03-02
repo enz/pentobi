@@ -77,7 +77,7 @@ string to_lower(const string& s)
     string r;
     r.reserve(s.size());
     for (char c : s)
-        r.push_back(tolower(c));
+        r.push_back(static_cast<char>(tolower(c)));
     return r;
 }
 

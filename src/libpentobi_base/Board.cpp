@@ -145,7 +145,7 @@ Color Board::get_effective_to_play() const
 void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 {
     array<int,Color::range> all_scores;
-    for (unsigned i = 0; i < Color::range; ++i)
+    for (Color::IntType i = 0; i < Color::range; ++i)
         all_scores[i] = get_score(Color(i));
     int score = all_scores[c.to_int()];
     sort(all_scores.begin(), all_scores.begin() + m_nu_players, greater<int>());

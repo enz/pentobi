@@ -59,7 +59,7 @@ string Arguments::get_tolower(size_t i) const
 {
     string value = get(i);
     for (auto& c : value)
-        c = tolower(c);
+        c = static_cast<char>(tolower(c));
     return value;
 }
 

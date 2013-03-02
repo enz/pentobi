@@ -654,7 +654,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     m_move_info.push_back(info);
     m_move_info_ext.push_back(info_ext);
     m_move_info_ext_2.push_back(info_ext_2);
-    Move move(static_cast<unsigned>(m_move_info.size() - 1));
+    Move move(static_cast<Move::IntType>(m_move_info.size() - 1));
     if (log_move_creation)
     {
         Grid<char> grid(m_geometry, '.');

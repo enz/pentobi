@@ -395,7 +395,7 @@ array<Float,4> State::evaluate_terminal()
     ColorMap<Float> score;
     for (ColorIterator i(m_nu_colors); i; ++i)
         points[*i] = Float(m_bd.get_points_with_bonus(*i));
-    for (unsigned i = 0; i < nu_players; ++i)
+    for (Color::IntType i = 0; i < nu_players; ++i)
         score[Color(i)] = Float(m_bd.get_score(Color(i)));
     if (m_nu_colors > nu_players)
     {
@@ -412,7 +412,7 @@ array<Float,4> State::evaluate_terminal()
         sort(sorted_points.begin(), sorted_points.begin() + m_nu_colors);
     }
     array<Float,4> result_array;
-    for (unsigned i = 0; i < nu_players; ++i)
+    for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
         Float game_result;

@@ -148,7 +148,7 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
     Move mv;
     try
     {
-        mv = Move(args.get<unsigned>());
+        mv = Move(args.get<Move::IntType>());
     }
     catch (const Failure&)
     {

@@ -170,8 +170,8 @@ P PointTransfTrigonRot60<P>::get_transformed(const Point& p, unsigned width,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * px + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * px + 0.5f * py));
     return Point(x, y);
@@ -196,8 +196,8 @@ P PointTransfTrigonRot120<P>::get_transformed(const Point& p, unsigned width,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * px + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * px - 0.5f * py));
     return Point(x, y);
@@ -222,8 +222,8 @@ P PointTransfTrigonRot240<P>::get_transformed(const Point& p, unsigned width,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * px - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * px - 0.5f * py));
     return Point(x, y);
@@ -248,8 +248,8 @@ P PointTransfTrigonRot300<P>::get_transformed(const Point& p, unsigned width,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * px - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * px + 0.5f * py));
     return Point(x, y);
@@ -275,8 +275,8 @@ P PointTransfTrigonReflRot60<P>::get_transformed(const Point& p,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * (-px) + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * (-px) + 0.5f * py));
     return Point(x, y);
@@ -302,8 +302,8 @@ P PointTransfTrigonReflRot120<P>::get_transformed(const Point& p,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * (-px) + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * (-px) - 0.5f * py));
     return Point(x, y);
@@ -329,8 +329,8 @@ P PointTransfTrigonReflRot240<P>::get_transformed(const Point& p,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * (-px) - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * (-px) - 0.5f * py));
     return Point(x, y);
@@ -356,8 +356,8 @@ P PointTransfTrigonReflRot300<P>::get_transformed(const Point& p,
 {
     float cx = 0.5f * static_cast<float>(width - 1);
     float cy = 0.5f * static_cast<float>(height - 1);
-    float px = p.get_x() - cx;
-    float py = p.get_y() - cy;
+    float px = static_cast<float>(p.get_x()) - cx;
+    float py = static_cast<float>(p.get_y()) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * (-px) - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * (-px) + 0.5f * py));
     return Point(x, y);
