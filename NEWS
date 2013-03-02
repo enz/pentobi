@@ -3,25 +3,26 @@ Current development version
 
 * Increased playing strength at higher levels. The search algorithm used
   for move generation is now parallelized and can take advantage of
-  multi-core CPUs. There is a new playing level 8, which has a dual-core
-  CPU as the recommended system requirement.
+  multi-core CPUs (up to 4 cores). There is a new playing level 8, which
+  has a 2 GHz dual-core CPU or faster as the recommended system requirement.
 * New menu item Toolbar Text to configure the toolbar button appearance
   independent of the system settings
 * More SGF game info properties (event, round, time) were added to the
   game info dialog
 * The source code now requires at least GCC 4.7 (because a larger subset
   of C++11 features is used)
-* Thumbnailer registration for blksgf files is no longer supported for
-  Gnome 2
 * The CMake module GNUInstallDirs is now used for setting the installation
-  directories on Unix. The defaults for bindir and datadir are now
-  /usr/local/bin and /usr/local/share instead of /usr/local/games and
-  /usr/local/share/games. The defaults can be changed by setting
-  CMAKE_INSTALL_BINDIR and CMAKE_INSTALL_DATADIR. (bug #7)
+  directories on Unix. Note that the defaults for bindir and datadir are
+  now CMAKE_INSTALL_PREFIX/bin and CMAKE_INSTALL_PREFIX/share instead of
+  CMAKE_INSTALL_PREFIX/games and CMAKE_INSTALL_PREFIX/share/games.
+  They can be changed by setting CMAKE_INSTALL_BINDIR and
+  CMAKE_INSTALL_DATADIR. (bug #7)
 * The source code no longer depends on the Boost libraries. However, it
   is still possible to use Boost.Thread instead of std::thread by
   configuring with -DUSE_BOOST_THREAD=ON (e.g. needed on MinGW GCC 4.7,
   which has no functional implementation of std::thread)
+* Thumbnailer registration for blksgf files is no longer supported for
+  Gnome 2
 
 
 Version 5.0 (10 Dec 2012)
