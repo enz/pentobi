@@ -273,7 +273,7 @@ void Search::set_default_param(Variant variant)
     case Variant::classic_2:
     case Variant::classic:
         set_bias_term_constant(0.06f);
-        set_rave_max_child_count(500);
+        set_rave_max_child_count(2000);
         break;
     case Variant::trigon_2:
     case Variant::trigon_3:
