@@ -17,12 +17,10 @@
 #include "PointState.h"
 #include "Setup.h"
 #include "StartingPoints.h"
-#include "libboardgame_util/BitMarker.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
 
-using libboardgame_util::BitMarker;
 using libboardgame_util::NullTermList;
 
 //-----------------------------------------------------------------------------
@@ -344,7 +342,7 @@ private:
     {
         Grid<bool> forbidden;
 
-        BitMarker<Point> is_attach_point;
+        Grid<bool> is_attach_point;
 
         PiecesLeftList pieces_left;
 
@@ -877,7 +875,7 @@ inline void Board::place(Color c, Move mv)
     do
         if (! state_color.is_attach_point[*i])
         {
-            state_color.is_attach_point.set(*i);
+            state_color.is_attach_point[*i] = true;
             m_attach_points[c].push_back(*i);
         }
     while (++i != end);
