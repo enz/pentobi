@@ -9,7 +9,9 @@
 #include "Player.h"
 
 #include <fstream>
+#include <iomanip>
 #include "libboardgame_util/CpuTime.h"
+#include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/WallTime.h"
 
 namespace libpentobi_mcts {
@@ -17,6 +19,7 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_util::log;
 using libboardgame_util::CpuTime;
+using libboardgame_util::FmtSaver;
 using libboardgame_util::WallTime;
 using libpentobi_base::Variant;
 
@@ -189,7 +192,10 @@ Move Player::genmove(const Board& bd, Color c)
         }
     }
     if (max_count != 0)
-        log() << "MaxCnt " << max_count << '\n';
+    {
+        FmtSaver saver(log());
+        log() << "MaxCnt " << fixed << setprecision(0) << max_count << '\n';
+    }
     else
         log() << "MaxTime " << max_time << '\n';
     if (! m_search.search(mv, bd, c, max_count, 0, max_time, *m_time_source))
