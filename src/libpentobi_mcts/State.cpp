@@ -556,7 +556,6 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
                 log() << "Terminate early (no moves and negative score)\n";
             return false;
         }
-        --m_nu_playout_moves;
         ++m_nu_passes;
         m_bd.set_to_play(m_bd.get_next(to_play));
         // Don't try to handle symmetry after pass moves
