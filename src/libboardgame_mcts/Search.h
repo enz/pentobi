@@ -739,14 +739,7 @@ Search<S, M, R>::~Search() throw()
 template<class S, class M, class R>
 bool Search<S, M, R>::check_abort(const ThreadState& thread_state) const
 {
-    Float count = m_tree.get_root().get_visit_count();
-    if (count >= m_max_float_count)
-    {
-        log_thread(thread_state,
-                   "Maximum count supported by floating type reached");
-        return true;
-    }
-    if (m_max_count > 0 && count >= m_max_count)
+    if (m_max_count > 0 && m_tree.get_root().get_visit_count() >= m_max_count)
     {
         log_thread(thread_state, "Maximum count reached");
         return true;
@@ -762,8 +755,20 @@ bool Search<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
         log_thread(thread_state, "Search aborted");
         return true;
     }
-    Float count = m_tree.get_root().get_visit_count();
-    double time = m_timer();
+    auto& root = m_tree.get_root();
+    if (root.get_nu_children() == 1)
+    {
+        log_thread(thread_state, "Root has only one child");
+        return true;
+    }
+    auto count = root.get_visit_count();
+    if (count >= m_max_float_count)
+    {
+        log_thread(thread_state,
+                   "Maximum count supported by floating type reached");
+        return true;
+    }
+    auto time = m_timer();
     if (! m_deterministic && time < 0.1)
         // Simulations per second might be inaccurate for very small times
         return false;
