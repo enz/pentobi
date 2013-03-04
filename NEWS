@@ -1,5 +1,5 @@
-Current development version
-===========================
+Version 6.0 (4 Mar 2013)
+========================
 
 * Increased playing strength at higher levels. The search algorithm used
   for move generation is now parallelized and can take advantage of
@@ -16,10 +16,10 @@ Current development version
   now CMAKE_INSTALL_PREFIX/bin and CMAKE_INSTALL_PREFIX/share instead of
   CMAKE_INSTALL_PREFIX/games and CMAKE_INSTALL_PREFIX/share/games.
   They can be changed by setting CMAKE_INSTALL_BINDIR and
-  CMAKE_INSTALL_DATADIR. (bug #7)
+  CMAKE_INSTALL_DATADIR (bug #7)
 * The source code no longer depends on the Boost libraries. However, it
   is still possible to use Boost.Thread instead of std::thread by
-  configuring with -DUSE_BOOST_THREAD=ON (e.g. needed on MinGW GCC 4.7,
+  configuring with USE_BOOST_THREAD=ON (e.g. needed on MinGW GCC 4.7,
   which has no functional implementation of std::thread)
 * Thumbnailer registration for blksgf files is no longer supported for
   Gnome 2
