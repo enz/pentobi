@@ -1124,14 +1124,20 @@ void Search<S, M, R>::write_info(ostream& out) const
     }
     FmtSaver saver(out);
     out << fixed << setprecision(2) << "Val: " << root.get_value()
-        << setprecision(0) << ", Cnt: " << root.get_value_count()
-        << ", VCnt: " << root.get_visit_count()
-        << ", Sim: " << m_nu_simulations
-        << ", Nds: " << m_tree.get_nu_nodes()
-        << ", Tm: " << time_to_string(m_last_time)
-        << "\nSim/s: " << (double(m_nu_simulations) / m_last_time)
+        << setprecision(0) << ", ValCnt: " << root.get_value_count()
+        << ", VstCnt: " << root.get_visit_count()
+        << ", Sim: " << m_nu_simulations;
+    auto child = select_child_final(root);
+    if (child != nullptr && root.get_visit_count() > 0)
+        out << setprecision(1) << ", Chld: "
+            << (100 * child->get_visit_count() / root.get_visit_count())
+            << '%';
+    out << ", Nds: " << m_tree.get_nu_nodes()
+        << "\nTm: " << time_to_string(m_last_time)
+        << setprecision(0) << ", Sim/s: "
+        << (double(m_nu_simulations) / m_last_time)
         << ", Len: " << thread_state.stat_len.to_string(true, 1, true)
-        << ", Dp: " << thread_state.stat_in_tree_len.to_string(true, 1, true)
+        << "\nDp: " << thread_state.stat_in_tree_len.to_string(true, 1, true)
         << "\n";
 }
 
