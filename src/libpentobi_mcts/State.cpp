@@ -542,9 +542,9 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     {
         to_play = m_bd.get_to_play();
         if (m_is_move_list_initialized[to_play])
-            update_move_list(to_play);
+            update_moves(to_play);
         else
-            init_move_list_with_local(to_play);
+            init_moves_with_local(to_play);
         if ((m_has_moves[to_play] = ! m_moves[to_play]->empty()))
             break;
         if (m_nu_passes + 1 == m_nu_colors)
@@ -620,7 +620,7 @@ void State::gen_children(Tree::NodeExpander& expander, Float init_val)
         return;
     Color to_play = m_bd.get_to_play();
 
-    init_move_list_without_local(to_play);
+    init_moves_without_local(to_play);
 
     const auto& moves = *m_moves[to_play];
     if (moves.empty())
@@ -735,7 +735,7 @@ inline const PieceMap<bool>& State::get_pieces_considered() const
         return *m_shared_const.is_piece_considered[nu_moves];
 }
 
-void State::init_move_list_with_local(Color c)
+void State::init_moves_with_local(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
     m_local_value.init(m_bd);
@@ -755,7 +755,7 @@ void State::init_move_list_with_local(Color c)
     {
         // Using only one starting point (if game variant has more than one) not
         // only reduces the branching factor but is also necessary because
-        // update_move_list() assumes that a move stays legal if the forbidden
+        // update_moves() assumes that a move stays legal if the forbidden
         // status for all of its points does not change.
         Point p = find_best_starting_point(c);
         if (! p.is_null())
@@ -784,11 +784,11 @@ void State::init_move_list_with_local(Color c)
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
-        init_move_list_with_local(c);
+        init_moves_with_local(c);
     }
 }
 
-void State::init_move_list_without_local(Color c)
+void State::init_moves_without_local(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
     auto& marker = m_marker[c];
@@ -803,7 +803,7 @@ void State::init_move_list_without_local(Color c)
     {
         // Using only one starting point (if game variant has more than one) not
         // only reduces the branching factor but is also necessary because
-        // update_move_list() assumes that a move stays legal if the forbidden
+        // update_moves() assumes that a move stays legal if the forbidden
         // status for all of its points does not change.
         Point p = find_best_starting_point(c);
         if (! p.is_null())
@@ -842,7 +842,7 @@ void State::init_move_list_without_local(Color c)
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
-        init_move_list_without_local(c);
+        init_moves_without_local(c);
     }
 }
 
@@ -969,7 +969,7 @@ void State::start_simulation(size_t n)
     }
 }
 
-void State::update_move_list(Color c)
+void State::update_moves(Color c)
 {
     m_local_value.init(m_bd);
     m_local_moves.clear();

@@ -304,16 +304,16 @@ private:
 
     const PieceMap<bool>& get_pieces_considered() const;
 
-    void init_move_list_with_local(Color c);
+    void init_moves_with_local(Color c);
 
-    void init_move_list_without_local(Color c);
+    void init_moves_without_local(Color c);
 
     void play_playout(Move mv);
 
     bool check_move(const Grid<bool>& is_forbidden, Move mv,
                     const MoveInfo& info);
 
-    void update_move_list(Color c);
+    void update_moves(Color c);
 
     bool check_symmetry_broken();
 
