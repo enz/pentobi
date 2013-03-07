@@ -366,7 +366,6 @@ array<Float,4> State::evaluate_playout()
     {
         if (log_simulations)
             log() << "Result: 0.5 (symmetry)\n";
-        m_stat_score.add(0);
         array<Float,4> result;
         for (ColorIterator i(m_nu_colors); i; ++i)
             result[(*i).to_int()] = 0.5;
@@ -403,7 +402,6 @@ array<Float,4> State::evaluate_terminal()
         score[Color(2)] = score[Color(0)];
         score[Color(3)] = score[Color(1)];
     }
-    m_stat_score.add(score[m_shared_const.to_play]);
     array<Float,Color::range> sorted_points;
     if (nu_players > 2)
     {
@@ -900,7 +898,6 @@ void State::start_search()
     m_nu_simulations = 0;
     m_nu_playout_moves = 0;
     m_nu_last_good_reply_moves = 0;
-    m_stat_score.clear();
     auto variant = bd.get_variant();
     m_check_symmetric_draw =
         ((variant == Variant::duo || variant == Variant::junior
@@ -1068,12 +1065,10 @@ void State::update_symmetry_broken(Move mv)
 
 void State::write_info(ostream& out) const
 {
-    out << "Sco: ";
-    m_stat_score.write(out, true, 1);
     if (m_nu_playout_moves > 0)
     {
         FmtSaver saver(log());
-        out << ", LGR: " << fixed << setprecision(1)
+        out << "LGR: " << fixed << setprecision(1)
             << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
                 / static_cast<double>(m_nu_playout_moves))
             << "%";
