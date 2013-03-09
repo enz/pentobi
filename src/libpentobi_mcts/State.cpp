@@ -446,7 +446,7 @@ array<Float,4> State::evaluate_terminal()
                       + score[c] * m_score_modification_factor);
         result_array[i] = result;
         if (log_simulations)
-            log() << "Result color " << i << ": score=" << score[c]
+            log() << "Result color " << c << ": score=" << score[c]
                   << " game_result=" << game_result << " result=" << result
                   << '\n';
     }

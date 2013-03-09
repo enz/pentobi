@@ -174,11 +174,13 @@ inline Color::IntType Color::to_int() const
 
 //-----------------------------------------------------------------------------
 
+/** Output string representation of color.
+    The strings "1", "2", ... are used for the colors. */
 ostream& operator<<(ostream& out, const Color& c);
 
 /** Read color from input stream.
-    The function guaratees to support all string representations allowed by
-    @ref libboardgame_doc_gtp, so it can be used for parsing GTP arguments. */
+    Accepts the strings "1", "2", ..., as well as "b", "w" or "black", "white"
+    for the first two colors. */
 istream& operator>>(istream& in, Color& c);
 
 //-----------------------------------------------------------------------------

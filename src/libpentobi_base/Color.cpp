@@ -30,7 +30,7 @@ Color::Color(const string& s)
 
 ostream& operator<<(ostream& out, const Color& c)
 {
-    out << "Color" << (c.to_int() + 1);
+    out << (c.to_int() + 1);
     return out;
 }
 
@@ -41,22 +41,22 @@ istream& operator>>(istream& in, Color& c)
     if (in)
     {
         s = to_lower(s);
-        if (s == "color1" || s == "b" || s == "black")
+        if (s == "1" || s == "b" || s == "black")
         {
             c = Color(0);
             return in;
         }
-        else if (s == "color2" || s == "w" || s == "white")
+        else if (s == "2" || s == "w" || s == "white")
         {
             c = Color(1);
             return in;
         }
-        else if (s == "color3")
+        else if (s == "3")
         {
             c = Color(2);
             return in;
         }
-        else if (s == "color4")
+        else if (s == "4")
         {
             c = Color(3);
             return in;
