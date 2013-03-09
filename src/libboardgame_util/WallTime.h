@@ -20,7 +20,7 @@ class WallTime
 public:
     WallTime();
 
-    double operator()();
+    double operator()() override;
 
 private:
     std::chrono::system_clock::time_point m_start;

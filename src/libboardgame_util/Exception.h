@@ -22,7 +22,7 @@ public:
 
     virtual ~Exception() throw();
 
-    const char* what() const throw();
+    const char* what() const throw() override;
 
 private:
     string m_s;

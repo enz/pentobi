@@ -29,10 +29,10 @@ public:
 
     ~Engine() throw();
 
-    void interrupt();
+    void interrupt() override;
 
 protected:
-    void on_handle_cmd_begin();
+    void on_handle_cmd_begin() override;
 
 private:
     double m_cpu_time_last;

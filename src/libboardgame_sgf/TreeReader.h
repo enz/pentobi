@@ -24,15 +24,16 @@ public:
 
     ~TreeReader() throw();
 
-    void on_begin_tree(bool is_root);
+    void on_begin_tree(bool is_root) override;
 
-    void on_end_tree(bool is_root);
+    void on_end_tree(bool is_root) override;
 
-    void on_begin_node(bool is_root);
+    void on_begin_node(bool is_root) override;
 
-    void on_end_node();
+    void on_end_node() override;
 
-    void on_property(const string& identifier, const vector<string>& values);
+    void on_property(const string& identifier,
+                     const vector<string>& values) override;
 
     const Node& get_tree() const;
 

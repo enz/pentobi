@@ -47,9 +47,9 @@ signals:
     void colorClicked(Color color);
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent* event) override;
 
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
 
 private:
     const Board& m_bd;

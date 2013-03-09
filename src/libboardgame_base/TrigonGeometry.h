@@ -40,11 +40,11 @@ public:
         @param sz The edge size of the hexagon. */
     static const TrigonGeometry* get(unsigned sz);
 
-    unsigned get_point_type(int x, int y) const;
+    unsigned get_point_type(int x, int y) const override;
 
-    unsigned get_period_x() const;
+    unsigned get_period_x() const override;
 
-    unsigned get_period_y() const;
+    unsigned get_period_y() const override;
 
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;

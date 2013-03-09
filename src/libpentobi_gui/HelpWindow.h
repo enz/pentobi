@@ -39,7 +39,7 @@ public:
     QSize sizeHint() const;
 
 protected:
-    void closeEvent(QCloseEvent* event);
+    void closeEvent(QCloseEvent* event) override;
 
 private:
     QUrl m_mainPageUrl;

@@ -17,7 +17,7 @@ class CpuTime
     : public TimeSource
 {
 public:
-    double operator()();
+    double operator()() override;
 };
 //-----------------------------------------------------------------------------
 

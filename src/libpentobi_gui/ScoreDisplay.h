@@ -31,9 +31,9 @@ public:
     void updateScore(const Board& bd);
 
 protected:
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
 
-    void resizeEvent(QResizeEvent* event);
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
     int m_fontSize;

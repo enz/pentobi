@@ -393,7 +393,7 @@ private:
 
         ~AssertionHandler() throw();
 
-        void run();
+        void run() override;
 
     private:
         const Search& m_search;

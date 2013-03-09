@@ -66,11 +66,11 @@ signals:
     void gotoPosition(Variant variant, const vector<ColorMove>& moves);
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent* event) override;
 
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
 
-    void resizeEvent(QResizeEvent* event);
+    void resizeEvent(QResizeEvent* event) override;
 
 private slots:
     void showProgress(int progress);

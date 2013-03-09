@@ -44,7 +44,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -67,7 +67,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -91,7 +91,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -114,7 +114,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -138,7 +138,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -161,7 +161,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -187,7 +187,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -213,7 +213,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -239,7 +239,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -265,7 +265,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -292,7 +292,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -319,7 +319,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>
@@ -346,7 +346,7 @@ public:
     typedef P Point;
 
     Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const;
+                          unsigned height) const override;
 };
 
 template<class P>

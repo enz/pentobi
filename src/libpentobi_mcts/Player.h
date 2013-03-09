@@ -35,16 +35,9 @@ public:
 
     ~Player() throw();
 
+    Move genmove(const Board& bd, Color c) override;
 
-    /** @name Virtual functions of libpentobi_base::Player */
-    // @{
-
-    Move genmove(const Board& bd, Color c);
-
-    bool resign() const;
-
-    // @} // @name
-
+    bool resign() const override;
 
     Float get_fixed_simulations() const;
 

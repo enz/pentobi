@@ -28,7 +28,7 @@ public:
     QSize sizeHint() const;
 
 protected:
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
 
 private:
     float m_yMin;

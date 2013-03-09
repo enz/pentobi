@@ -82,15 +82,15 @@ signals:
     void pointClicked(Point p);
 
 protected:
-    void changeEvent(QEvent* event);
+    void changeEvent(QEvent* event) override;
 
-    void leaveEvent(QEvent* event);
+    void leaveEvent(QEvent* event) override;
 
-    void mouseMoveEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event) override;
 
-    void mousePressEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent* event) override;
 
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
 
 private:
     const Board& m_bd;

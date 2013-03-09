@@ -224,9 +224,9 @@ public slots:
     void setDeterministic();
 
 protected:
-    void closeEvent(QCloseEvent* event);
+    void closeEvent(QCloseEvent* event) override;
 
-    void wheelEvent(QWheelEvent* event);
+    void wheelEvent(QWheelEvent* event) override;
 
 private:
     struct GenMoveResult

@@ -50,31 +50,19 @@ public:
 
     ~Search() throw();
 
+    unique_ptr<State> create_state() override;
 
-    /** @name Pure virtual functions of libboardgame_mcts::Search */
-    // @{
+    string get_move_string(Move mv) const override;
 
-    unique_ptr<State> create_state();
+    PlayerInt get_nu_players() const override;
 
-    string get_move_string(Move mv) const;
+    PlayerInt get_player() const override;
 
-    PlayerInt get_nu_players() const;
+    Float get_tie_value() const override;
 
-    PlayerInt get_player() const;
+    bool check_followup(vector<Move>& sequence) override;
 
-    Float get_tie_value() const;
-
-    // @} // @name
-
-
-    /** @name Overriden virtual functions of libboardgame_mcts::Search */
-    // @{
-
-    bool check_followup(vector<Move>& sequence);
-
-    void write_info(ostream& out) const;
-
-    // @} // @name
+    void write_info(ostream& out) const override;
 
 
     /** @name Parameters */
@@ -118,7 +106,7 @@ public:
     void get_root_position(Variant& variant, Setup& setup) const;
 
 protected:
-    void on_start_search();
+    void on_start_search() override;
 
 private:
     typedef libboardgame_mcts::Search<State, Move, SearchParamConst>

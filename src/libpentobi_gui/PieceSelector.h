@@ -45,9 +45,9 @@ signals:
     void pieceSelected(Color color, Piece piece, const Transform* transform);
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent* event) override;
 
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
 
 private:
     static const unsigned maxColumns = 47;

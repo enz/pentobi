@@ -23,7 +23,8 @@ public:
 
     virtual ~TreeWriter();
 
-    void write_property(const string& id, const vector<string>& values);
+    void write_property(const string& id,
+                        const vector<string>& values) override;
 
 private:
     Variant m_variant;
