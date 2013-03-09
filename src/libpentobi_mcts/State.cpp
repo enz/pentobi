@@ -365,7 +365,7 @@ array<Float,4> State::evaluate_playout()
     if (! m_is_symmetry_broken && check_symmetry_min_nu_pieces(m_bd))
     {
         if (log_simulations)
-            log() << "Result: 0.5 (symmetry)\n";
+            log("Result: 0.5 (symmetry)");
         array<Float,4> result;
         for (ColorIterator i(m_nu_colors); i; ++i)
             result[(*i).to_int()] = 0.5;
@@ -513,7 +513,7 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     {
         // See also the comment in evaluate_playout()
         if (log_simulations)
-            log() << "Terminate playout. Symmetry not broken.\n";
+            log("Terminate playout. Symmetry not broken.");
         return false;
     }
 
@@ -521,7 +521,7 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     if (last_good_reply_2.is_regular() && m_bd.is_legal(last_good_reply_2))
     {
         if (log_simulations)
-            log() << "Playing last good reply 2\n";
+            log("Playing last good reply 2");
         ++m_nu_last_good_reply_moves;
         mv = last_good_reply_2;
         return true;
@@ -529,7 +529,7 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     if (last_good_reply_1.is_regular() && m_bd.is_legal(last_good_reply_1))
     {
         if (log_simulations)
-            log() << "Playing last good reply 1\n";
+            log("Playing last good reply 1");
         ++m_nu_last_good_reply_moves;
         mv = last_good_reply_1;
         return true;
@@ -551,7 +551,7 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
             && ! m_has_moves[m_bd.get_second_color(to_play)])
         {
             if (log_simulations)
-                log() << "Terminate early (no moves and negative score)\n";
+                log("Terminate early (no moves and negative score)");
             return false;
         }
         ++m_nu_passes;
@@ -572,7 +572,7 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
         moves = m_moves[to_play].get();
         max_playable_piece_size = m_max_playable_piece_size;
         if (log_simulations)
-            log() << "Moves: " << moves->size();
+            log() << "Moves: " << moves->size() << "\n";
     }
     else
     {
@@ -582,9 +582,9 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
         {
             FmtSaver saver(log());
             log() << "Moves: " << m_moves[to_play]->size() << ", local: "
-                  << m_local_moves.size() << ", local_val: "
+                  << m_local_moves.size() << ", local_val: 0x"
                   << setfill('0') << hex << setw(3) << m_max_local_value
-                  << "x";
+                  << "\n";
         }
     }
     const unsigned max_try = 3;
@@ -847,7 +847,7 @@ void State::init_moves_without_local(Color c)
 void State::play_expanded_child(Move mv)
 {
     if (log_simulations)
-        log() << "Playing expanded child\n";
+        log("Playing expanded child");
     if (! mv.is_pass())
         play_playout(mv);
     else
