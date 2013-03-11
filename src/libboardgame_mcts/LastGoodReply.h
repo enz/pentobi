@@ -34,7 +34,7 @@ using libboardgame_util::RandomGenerator;
     checked for legality in the current position anyway and the collisions are
     probably rare, no major negative effect is expected from these collisions.
     @see Search::set_last_good_reply() */
-template<class S, class M, unsigned P>
+template<class M, unsigned P>
 class LastGoodReply
 {
 public:
@@ -70,27 +70,27 @@ private:
     size_t get_index(Move last_mv, Move second_last_mv) const;
 };
 
-template<class S, class M, unsigned P>
-LastGoodReply<S,M,P>::LastGoodReply()
+template<class M, unsigned P>
+LastGoodReply<M, P>::LastGoodReply()
 {
     RandomGenerator generator;
     for (unsigned i = 0; i < Move::range; ++i)
         m_hash[i] = generator.generate();
 }
 
-template<class S, class M, unsigned P>
-inline size_t LastGoodReply<S,M,P>::get_index(Move last_mv,
-                                              Move second_last_mv) const
+template<class M, unsigned P>
+inline size_t LastGoodReply<M, P>::get_index(Move last_mv,
+                                             Move second_last_mv) const
 {
     size_t hash = (m_hash[last_mv.to_int()] ^ m_hash[second_last_mv.to_int()]);
     return hash % hash_table_size;
 }
 
-template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::get(PlayerInt player, Move last_mv,
-                                      Move second_last_mv,
-                                      Move& last_good_reply_1,
-                                      Move& last_good_reply_2) const
+template<class M, unsigned P>
+inline void LastGoodReply<M, P>::get(PlayerInt player, Move last_mv,
+                                     Move second_last_mv,
+                                     Move& last_good_reply_1,
+                                     Move& last_good_reply_2) const
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
     if (! second_last_mv.is_null())
@@ -105,8 +105,8 @@ inline void LastGoodReply<S,M,P>::get(PlayerInt player, Move last_mv,
         Move(m_reply_1[player][last_mv.to_int()].load(memory_order_relaxed));
 }
 
-template<class S, class M, unsigned P>
-void LastGoodReply<S,M,P>::init(PlayerInt nu_players)
+template<class M, unsigned P>
+void LastGoodReply<M, P>::init(PlayerInt nu_players)
 {
     for (PlayerInt i = 0; i < nu_players; ++i)
     {
@@ -121,9 +121,9 @@ void LastGoodReply<S,M,P>::init(PlayerInt nu_players)
     }
 }
 
-template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::forget(PlayerInt player, Move last_mv,
-                                         Move second_last_mv, Move reply)
+template<class M, unsigned P>
+inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
+                                        Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
     LIBBOARDGAME_ASSERT(! second_last_mv.is_null());
@@ -140,9 +140,9 @@ inline void LastGoodReply<S,M,P>::forget(PlayerInt player, Move last_mv,
         stored_reply.store(null_int, memory_order_relaxed);
 }
 
-template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::forget(PlayerInt player, Move last_mv,
-                                         Move reply)
+template<class M, unsigned P>
+inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
+                                        Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
     auto reply_int = reply.to_int();
@@ -152,9 +152,9 @@ inline void LastGoodReply<S,M,P>::forget(PlayerInt player, Move last_mv,
         stored_reply.store(null_int, memory_order_relaxed);
 }
 
-template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::store(PlayerInt player, Move last_mv,
-                                        Move second_last_mv, Move reply)
+template<class M, unsigned P>
+inline void LastGoodReply<M, P>::store(PlayerInt player, Move last_mv,
+                                       Move second_last_mv, Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
     LIBBOARDGAME_ASSERT(! second_last_mv.is_null());
@@ -166,9 +166,9 @@ inline void LastGoodReply<S,M,P>::store(PlayerInt player, Move last_mv,
     m_reply_1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
 }
 
-template<class S, class M, unsigned P>
-inline void LastGoodReply<S,M,P>::store(PlayerInt player, Move last_mv,
-                                        Move reply)
+template<class M, unsigned P>
+inline void LastGoodReply<M, P>::store(PlayerInt player, Move last_mv,
+                                       Move reply)
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
     auto reply_int = reply.to_int();

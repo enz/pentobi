@@ -561,7 +561,7 @@ private:
         of current search. */
     RootStat m_init_val;
 
-    LastGoodReply<S, M, max_players> m_last_good_reply;
+    LastGoodReply<M, max_players> m_last_good_reply;
 
     /** See get_nu_simulations(). */
     atomic<size_t> m_nu_simulations;
