@@ -1640,6 +1640,9 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
     }
     while (true)
     {
+        const auto node = nodes[i];
+        if (node->get_visit_count() > m_rave_max_parent_count)
+            break;
         auto mv = state.get_move(i);
         update_rave_values(thread_state, i, mv.player);
         if (i == 0)
@@ -1652,8 +1655,11 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
         --i;
     }
     // Reset was_played
-    for (unsigned i = 1; i < nu_moves; ++i)
+    while (true)
     {
+        ++i;
+        if (i >= nu_moves)
+            break;
         auto mv = state.get_move(i);
         was_played[mv.player].clear_word(mv.move);
     }
@@ -1667,8 +1673,6 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
     LIBBOARDGAME_ASSERT(i < nodes.size());
     const auto node = nodes[i];
     LIBBOARDGAME_ASSERT(node->has_children());
-    if (node->get_visit_count() > m_rave_max_parent_count)
-        return;
     const auto& state = *thread_state.state;
     auto& was_played = thread_state.was_played;
     auto& first_play = thread_state.first_play;
