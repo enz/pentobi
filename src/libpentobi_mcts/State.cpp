@@ -1012,14 +1012,17 @@ void State::update_moves(Color c)
         auto& is_piece_considered_new = get_pieces_considered();
         if (&is_piece_considered !=  &is_piece_considered_new)
         {
+            pieces_considered.clear();
+            for (Piece piece : m_bd.get_pieces_left(c))
+                if (! is_piece_considered[piece]
+                    && is_piece_considered_new[piece])
+                    pieces_considered.push_back(piece);
             for (Point p : m_bd.get_attach_points(c))
                 if (! is_forbidden[p])
                 {
                     unsigned adj_status = m_bd.get_adj_status(p, c);
-                    for (Piece piece : m_bd.get_pieces_left(c))
-                        if (! is_piece_considered[piece]
-                            && is_piece_considered_new[piece])
-                            add_moves(p, c, piece, adj_status);
+                    for (Piece piece : pieces_considered)
+                        add_moves(p, c, piece, adj_status);
                 }
             m_is_piece_considered[c] = &is_piece_considered_new;
         }
