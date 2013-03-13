@@ -164,7 +164,7 @@ void Search::on_start_search()
         for (BoardIterator j(bd); j; ++j)
             if (! bd.is_forbidden(*j, *i))
             {
-                unsigned adj_status = bd.get_adj_status(*j, *i);
+                auto adj_status = bd.get_adj_status(*j, *i);
                 for (Piece piece : bd.get_pieces_left(*i))
                 {
                     for (Move mv : bd.get_moves(piece, *j, adj_status))

@@ -115,7 +115,7 @@ inline void State::add_moves(Point p, Color c,
 {
     auto& moves = *m_moves[c];
     auto& marker = m_marker[c];
-    unsigned adj_status = m_bd.get_adj_status(p, c);
+    auto adj_status = m_bd.get_adj_status(p, c);
     auto& is_forbidden = m_bd.is_forbidden(c);
     for (Piece piece : pieces_considered)
     {
@@ -760,7 +760,7 @@ void State::init_moves_with_local(Color c)
         {
             for (Piece piece : pieces_considered)
             {
-                unsigned adj_status = m_bd.get_adj_status(p, c);
+                auto adj_status = m_bd.get_adj_status(p, c);
                 for (Move mv : get_moves(c, piece, p, adj_status))
                     if (! marker[mv] && ! m_bd.is_forbidden(c, mv))
                     {
@@ -808,7 +808,7 @@ void State::init_moves_without_local(Color c)
         {
             for (Piece piece : pieces_considered)
             {
-                unsigned adj_status = m_bd.get_adj_status(p, c);
+                auto adj_status = m_bd.get_adj_status(p, c);
                 for (Move mv : get_moves(c, piece, p, adj_status))
                     if (! marker[mv] && ! m_bd.is_forbidden(c, mv))
                     {
@@ -824,7 +824,7 @@ void State::init_moves_without_local(Color c)
         for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
-                unsigned adj_status = m_bd.get_adj_status(p, c);
+                auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces_considered)
                     for (Move mv : get_moves(c, piece, p, adj_status))
                         if (! marker[mv] && ! m_bd.is_forbidden(c, mv))
@@ -1020,7 +1020,7 @@ void State::update_moves(Color c)
             for (Point p : m_bd.get_attach_points(c))
                 if (! is_forbidden[p])
                 {
-                    unsigned adj_status = m_bd.get_adj_status(p, c);
+                    auto adj_status = m_bd.get_adj_status(p, c);
                     for (Piece piece : pieces_considered)
                         add_moves(p, c, piece, adj_status);
                 }
