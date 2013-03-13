@@ -660,10 +660,10 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
         Grid<char> grid(m_geometry, '.');
         for (Point p : info)
             grid[p] = 'O';
-        for (Point p : info_ext.adj_points)
-            grid[p] = '+';
-        for (Point p : info_ext.attach_points)
-            grid[p] = '*';
+        for (auto i = info_ext.begin_adj(); i != info_ext.end_adj(); ++i)
+            grid[*i] = '+';
+        for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
+            grid[*i] = '*';
         log() << "Move " << move.to_int() << ":\n" << grid << '\n';
     }
     for (Point p : info)
@@ -936,21 +936,19 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
     m_marker.clear();
     for (auto i = begin; i != end; ++i)
         m_marker.set(*i);
-    info_ext.adj_points.clear();
     for (auto i = begin; i != end; ++i)
         for (AdjIterator j(m_geometry, *i); j; ++j)
             if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
-                info_ext.adj_points.push_back(*j);
+                info_ext.add_adj_point(*j);
             }
-    info_ext.attach_points.clear();
     for (auto i = begin; i != end; ++i)
         for (DiagIterator j(m_geometry, *i); j; ++j)
             if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
-                info_ext.attach_points.push_back(*j);
+                info_ext.add_attach_point(*j);
             }
 }
 

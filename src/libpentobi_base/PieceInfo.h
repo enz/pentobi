@@ -37,6 +37,9 @@ public:
     /** Maximum number of attach points of a piece. */
     static const unsigned max_attach = 14;
 
+    /** Maximum number of attach and adjacent points of a piece. */
+    static const unsigned max_adj_attach = 22;
+
     /** Constructor.
         @param name A short unique name for the piece.
         @param points The coordinates of the fields. Must contain the point

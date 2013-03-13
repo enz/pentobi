@@ -178,8 +178,16 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         response << ' ' << p;
     response
         << "\n"
-        << "Adj:    " << info_ext.adj_points << "\n"
-        << "Attach: " << info_ext.attach_points << "\n"
+        << "Adj:    ";
+    for (auto i = info_ext.begin_adj(); i != info_ext.end_adj(); ++i)
+        response << *i << " ";
+    response
+        << "\n"
+        << "Attach: ";
+    for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
+        response << *i << " ";
+    response
+        << "\n"
         << "BrkSym: " << info_ext_2.breaks_symmetry << "\n"
         << "SymMv:  " << bd.to_string(info_ext_2.symmetric_move);
 }

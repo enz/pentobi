@@ -66,21 +66,59 @@ private:
 
 //-----------------------------------------------------------------------------
 
-typedef ArrayList<Point,PieceInfo::max_adj,unsigned short> AdjPoints;
-
-//-----------------------------------------------------------------------------
-
-typedef ArrayList<Point,PieceInfo::max_attach,unsigned short> AttachPoints;
-
-//-----------------------------------------------------------------------------
-
 /** Less frequently accessed move info.
     Stored separately from MoveInfo to improve CPU cache performance. */
 struct MoveInfoExt
 {
-    AttachPoints attach_points;
+    Point points[PieceInfo::max_adj_attach];
 
-    AdjPoints adj_points;
+    uint8_t size_attach_points;
+
+    uint8_t size_adj_points;
+
+    MoveInfoExt()
+    {
+        size_attach_points = 0;
+        size_adj_points = 0;
+    }
+
+    void add_attach_point(Point p)
+    {
+        uint8_t size = size_attach_points + size_adj_points;
+        LIBBOARDGAME_ASSERT(size < PieceInfo::max_adj_attach);
+        for (unsigned i = size; i > size_attach_points; --i)
+            points[i] = points[i - 1];
+        points[size_attach_points] = p;
+        ++size_attach_points;
+    }
+
+    void add_adj_point(Point p)
+    {
+        uint8_t size = size_attach_points + size_adj_points;
+        LIBBOARDGAME_ASSERT(size < PieceInfo::max_adj_attach);
+        points[size] = p;
+        ++size_adj_points;
+    }
+
+    const Point* begin_attach() const
+    {
+        return points;
+    }
+
+    const Point* end_attach() const
+    {
+        return points + size_attach_points;
+    }
+
+    const Point* begin_adj() const
+    {
+        return end_attach();
+    }
+
+    const Point* end_adj() const
+    {
+        return begin_adj() + size_adj_points;
+    }
 };
 
 //-----------------------------------------------------------------------------

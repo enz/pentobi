@@ -17,7 +17,6 @@ using namespace std;
 using libboardgame_base::ArrayList;
 using libboardgame_util::log;
 using libpentobi_base::AdjIterator;
-using libpentobi_base::AttachPoints;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
@@ -147,9 +146,9 @@ inline void LocalValue::init(const Board& bd)
         if (mv.is_pass())
             continue;
         auto& is_forbidden = bd.is_forbidden(c);
-        auto& attach_points = bd.get_move_info_ext(mv).attach_points;
-        auto j = attach_points.begin();
-        auto end = attach_points.end();
+        auto& info_ext = bd.get_move_info_ext(mv);
+        auto j = info_ext.begin_attach();
+        auto end = info_ext.end_attach();
         do
         {
             if (! is_forbidden[*j])

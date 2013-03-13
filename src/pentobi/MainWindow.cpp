@@ -181,8 +181,8 @@ float getMoveHeuristic(const Board& bd, Move mv)
     auto& info = bd.get_move_info(mv);
     auto& info_ext = bd.get_move_info_ext(mv);
     return static_cast<float>((1000 * info.size()
-                               + 10 * info_ext.attach_points.size()
-                               - info_ext.adj_points.size()));
+                               + 10 * info_ext.size_attach_points
+                               - info_ext.size_adj_points));
 }
 
 /** Comparison for sorting move list in Find Move. */

@@ -258,13 +258,13 @@ void State::compute_features()
                 features.heuristic += point_value[*j];
             while (++j != end);
         }
-        auto j = info_ext.attach_points.begin();
-        auto end = info_ext.attach_points.end();
+        auto j = info_ext.begin_attach();
+        auto end = info_ext.end_attach();
         do
             features.heuristic += attach_point_value[*j];
         while (++j != end);
-        j = info_ext.adj_points.begin();
-        end = info_ext.adj_points.end();
+        j = info_ext.begin_adj();
+        end = info_ext.end_adj();
         if (! check_connect)
         {
             do
@@ -995,9 +995,15 @@ void State::update_moves(Color c)
         if ((*m_is_piece_considered[c])[piece])
             pieces_considered.push_back(piece);
     for (Move mv : m_new_moves[c])
-        for (Point p : get_move_info_ext(mv).attach_points)
-            if (! is_forbidden[p] && ! m_moves_added_at[c][p])
-                add_moves(p, c, pieces_considered);
+    {
+        auto& info_ext = get_move_info_ext(mv);
+        auto i = info_ext.begin_attach();
+        auto end = info_ext.end_attach();
+        do
+            if (! is_forbidden[*i] && ! m_moves_added_at[c][*i])
+                add_moves(*i, c, pieces_considered);
+        while (++i != end);
+    }
     m_new_moves[c].clear();
 
     // Generate moves for pieces not considered in the last position
