@@ -44,11 +44,8 @@ const bool pure_random_playout = false;
 /** Return the symmetric point state for symmetry detection.
     Only used for Variant::duo. Returns the other color or empty, if the
     given point state is empty. */
-PointState get_symmetric_state(PointState s)
+PointState get_symmetric_state(Color c)
 {
-    if (s.is_empty())
-        return s;
-    Color c = s.to_color();
     if (c == Color(0))
         return Color(1);
     else if (c == Color(1))
@@ -308,11 +305,14 @@ bool State::check_symmetry_broken()
         // not symmetric.
         for (BoardIterator i(m_bd); i; ++i)
         {
-            Point symm_p = m_shared_const.symmetric_points[*i];
             PointState s1 = m_bd.get_point_state(*i);
-            PointState s2 = m_bd.get_point_state(symm_p);
-            if (s1 != get_symmetric_state(s2))
-                return true;
+            if (! s1.is_empty())
+            {
+                Point symm_p = m_shared_const.symmetric_points[*i];
+                PointState s2 = m_bd.get_point_state(symm_p);
+                if (s2 != get_symmetric_state(s1.to_color()))
+                    return true;
+            }
         }
     }
     else
@@ -334,17 +334,14 @@ bool State::check_symmetry_broken()
         auto& info = get_move_info(last_mv.move);
         for (BoardIterator i(m_bd); i; ++i)
         {
-            Point symm_p = m_shared_const.symmetric_points[*i];
             PointState s1 = m_bd.get_point_state(*i);
-            PointState s2 = m_bd.get_point_state(symm_p);
-            if (s1 != get_symmetric_state(s2))
+            if (! s1.is_empty())
             {
-                if ((info.contains(*i)
-                     && s1 == previous_color && s2.is_empty())
-                    || (info.contains(symm_p)
-                        && s1.is_empty() && s2 == previous_color))
-                    continue;
-                return true;
+                Point symm_p = m_shared_const.symmetric_points[*i];
+                PointState s2 = m_bd.get_point_state(symm_p);
+                if (s2 != get_symmetric_state(s1.to_color()))
+                    if (! (info.contains(*i) && s2.is_empty()))
+                        return true;
             }
         }
     }
