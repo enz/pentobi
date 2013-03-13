@@ -269,12 +269,27 @@ for opt, val in opts:
         nu_threads = int(val)
     elif opt in ("-w", "--white"):
         white_cmd = val
+
 if black_cmd == "":
     exit("Missing black player")
 if white_cmd == "":
     exit("Missing white player")
 if nu_threads <= 0:
     exit("Invalid number of threads")
+
+if variant == "c":
+    variant = "classic"
+elif variant == "c2":
+    variant = "classic_2"
+elif variant == "d":
+    variant = "duo"
+elif variant == "t":
+    variant = "trigon"
+elif variant == "t2":
+    variant = "trigon_2"
+elif variant == "j":
+    variant = "junior"
+
 if variant == "classic":
     game_name = "Blokus"
 elif variant == "classic_2":
@@ -289,6 +304,7 @@ elif variant == "junior":
     game_name = "Blokus Junior"
 else:
     exit("invalid game variant: " + variant)
+
 output_file = OutputFile(prefix)
 lock_filename = prefix + ".lock"
 with open(lock_filename, "w") as lock_file:

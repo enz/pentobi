@@ -81,19 +81,19 @@ bool parse_variant(const string& s, Variant& variant)
 bool parse_variant_id(const string& s, Variant& variant)
 {
     string t = to_lower(trim(s));
-    if (t == "classic")
+    if (t == "classic" || t == "c")
         variant = Variant::classic;
-    else if (t == "classic_2")
+    else if (t == "classic_2" || t == "c2")
         variant = Variant::classic_2;
-    else if (t == "trigon")
+    else if (t == "trigon" || t == "t")
         variant = Variant::trigon;
-    else if (t == "trigon_2")
+    else if (t == "trigon_2" || t == "t2")
         variant = Variant::trigon_2;
-    else if (t == "trigon_3")
+    else if (t == "trigon_3" || t == "t3")
         variant = Variant::trigon_3;
-    else if (t == "duo")
+    else if (t == "duo" || t == "d")
         variant = Variant::duo;
-    else if (t == "junior")
+    else if (t == "junior" || t == "j")
         variant = Variant::junior;
     else
         return false;
