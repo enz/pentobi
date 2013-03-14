@@ -865,11 +865,6 @@ inline void Board::place(Color c, Move mv)
         LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden[*i] = true);
     }
     while (++i != end);
-    i = info_ext.begin_adj();
-    end = info_ext.end_adj();
-    do
-        state_color.forbidden[*i] = true;
-    while (++i != end);
     i = info_ext.begin_attach();
     end = info_ext.end_attach();
     do
@@ -878,6 +873,11 @@ inline void Board::place(Color c, Move mv)
             state_color.is_attach_point[*i] = true;
             m_attach_points[c].push_back(*i);
         }
+    while (++i != end);
+    LIBBOARDGAME_ASSERT(i == info_ext.begin_adj());
+    end += info_ext.size_adj_points;
+    do
+        state_color.forbidden[*i] = true;
     while (++i != end);
 }
 
