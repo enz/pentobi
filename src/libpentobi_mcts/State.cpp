@@ -59,26 +59,6 @@ PointState get_symmetric_state(Color c)
     }
 }
 
-/** Check for a minimum number of pieces on board to perform a symmetry check.
-    Checks for 3 in Duo/Junior or 5 in Trigon because this is the earliest move
-    number to break the symmetry. The early playout termination that evaluates
-    all symmetric positions as a draw should not be used earlier because it
-    can case bad move selection in very short searches if all moves are
-    evaluated as draw and the search is not deep enough to find that the
-    symmetry can be broken a few moves later. */
-bool check_symmetry_min_nu_pieces(const Board& bd)
-{
-    auto variant = bd.get_variant();
-    unsigned nu_pieces = bd.get_nu_onboard_pieces();
-    if (variant == Variant::duo || variant == Variant::junior)
-        return nu_pieces >= 3;
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == Variant::trigon_2);
-        return nu_pieces >= 5;
-    }
-}
-
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -359,7 +339,8 @@ array<Float,4> State::evaluate_playout()
     // Always evaluate symmetric positions as a draw in the playouts. This
     // will encourage the first player to break the symmetry and the second
     // player to preserve it.
-    if (! m_is_symmetry_broken && check_symmetry_min_nu_pieces(m_bd))
+    if (! m_is_symmetry_broken
+        && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
         if (log_simulations)
             log("Result: 0.5 (symmetry)");
@@ -506,7 +487,8 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     if (m_nu_passes == m_nu_colors)
         return false;
 
-    if (! m_is_symmetry_broken && check_symmetry_min_nu_pieces(m_bd))
+    if (! m_is_symmetry_broken
+        && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
         // See also the comment in evaluate_playout()
         if (log_simulations)
@@ -904,6 +886,10 @@ void State::start_search()
                 || m_shared_const.to_play == Color(3))
                && m_shared_const.avoid_symmetric_draw)
          && ! check_symmetry_broken());
+    if (variant == Variant::trigon_2)
+        m_symmetry_min_nu_pieces = 5;
+    else
+        m_symmetry_min_nu_pieces = 3; // Only used in Duo
     for (ColorIterator i(m_nu_colors); i; ++i)
         if (! m_moves[*i])
             m_moves[*i].reset(new MoveList());

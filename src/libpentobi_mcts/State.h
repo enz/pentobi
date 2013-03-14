@@ -267,6 +267,15 @@ private:
     /** Enforce all pieces to be considered for the rest of the simulation. */
     bool m_force_consider_all_pieces;
 
+    /** Minimum number of pieces on board to perform a symmetry check.
+        3 in Duo/Junior or 5 in Trigon because this is the earliest move number
+        to break the symmetry. The early playout termination that evaluates all
+        symmetric positions as a draw should not be used earlier because it can
+        case bad move selection in very short searches if all moves are
+        evaluated as draw and the search is not deep enough to find that the
+        symmetry can be broken a few moves later. */
+    unsigned m_symmetry_min_nu_pieces;
+
     /** Remember attach points that were already used for move generation.
         Allows the incremental update of the move lists to skip attach points
         of newly played pieces that were already attach points of previously
