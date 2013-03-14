@@ -76,28 +76,18 @@ struct MoveInfoExt
 
     uint8_t size_adj_points;
 
-    MoveInfoExt()
+    void init(const ArrayList<Point, PieceInfo::max_adj>& adj_points,
+              const ArrayList<Point, PieceInfo::max_attach>& attach_points)
     {
-        size_attach_points = 0;
-        size_adj_points = 0;
-    }
-
-    void add_attach_point(Point p)
-    {
-        uint8_t size = size_attach_points + size_adj_points;
-        LIBBOARDGAME_ASSERT(size < PieceInfo::max_adj_attach);
-        for (unsigned i = size; i > size_attach_points; --i)
-            points[i] = points[i - 1];
-        points[size_attach_points] = p;
-        ++size_attach_points;
-    }
-
-    void add_adj_point(Point p)
-    {
-        uint8_t size = size_attach_points + size_adj_points;
-        LIBBOARDGAME_ASSERT(size < PieceInfo::max_adj_attach);
-        points[size] = p;
-        ++size_adj_points;
+        size_attach_points = static_cast<uint8_t>(attach_points.size());;
+        size_adj_points = static_cast<uint8_t>(adj_points.size());
+        LIBBOARDGAME_ASSERT(size_attach_points + size_adj_points
+                            <= PieceInfo::max_adj_attach);
+        Point* i = points;
+        for (Point p : attach_points)
+            *(i++) = p;
+        for (Point p : adj_points)
+            *(i++) = p;
     }
 
     const Point* begin_attach() const

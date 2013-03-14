@@ -936,20 +936,23 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
     m_marker.clear();
     for (auto i = begin; i != end; ++i)
         m_marker.set(*i);
+    ArrayList<Point, PieceInfo::max_adj> adj_points;
     for (auto i = begin; i != end; ++i)
         for (AdjIterator j(m_geometry, *i); j; ++j)
             if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
-                info_ext.add_adj_point(*j);
+                adj_points.push_back(*j);
             }
+    ArrayList<Point, PieceInfo::max_attach> attach_points;
     for (auto i = begin; i != end; ++i)
         for (DiagIterator j(m_geometry, *i); j; ++j)
             if (m_geometry.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
-                info_ext.add_attach_point(*j);
+                attach_points.push_back(*j);
             }
+    info_ext.init(adj_points, attach_points);
 }
 
 string BoardConst::to_string(Move mv, bool with_piece_name) const
