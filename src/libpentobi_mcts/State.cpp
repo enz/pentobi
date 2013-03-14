@@ -736,8 +736,8 @@ void State::init_moves_with_local(Color c)
     m_local_value.init(m_bd);
     m_local_moves.clear();
     m_max_local_value = 1;
-    m_max_playable_piece_size = 0;
-    m_max_playable_piece_size_local = 0;
+    m_max_playable_piece_size = 1;
+    m_max_playable_piece_size_local = 1;
     auto& marker = m_marker[c];
     auto& moves = *m_moves[c];
     marker.clear_all_set_known(moves);
@@ -968,8 +968,8 @@ void State::update_moves(Color c)
     m_local_value.init(m_bd);
     m_local_moves.clear();
     m_max_local_value = 1;
-    m_max_playable_piece_size = 0;
-    m_max_playable_piece_size_local = 0;
+    m_max_playable_piece_size = 1;
+    m_max_playable_piece_size_local = 1;
     auto& marker = m_marker[c];
 
     // Find old moves that are still legal
