@@ -667,41 +667,32 @@ void MainWindow::commentChanged()
 void MainWindow::computerColors()
 {
     ColorMap<bool> oldComputerColors = m_computerColors;
-    Color oldCurrentColor = m_currentColor;
     auto variant = getVariant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
-    if (variant != Variant::classic && variant != Variant::trigon
-        && variant != Variant::trigon_3)
-    {
-        bool computerNone = true;
-        for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
-            if (m_computerColors[*i])
-            {
-                computerNone = false;
-                break;
-            }
-        if (computerNone)
+    auto nu_colors = getBoard().get_nu_colors();
+
+    bool computerNone = true;
+    for (ColorIterator i(nu_colors); i; ++i)
+        if (m_computerColors[*i])
         {
-            QSettings settings;
-            settings.setValue("computer_color_none", true);
+            computerNone = false;
+            break;
         }
-    }
-    // Don't automatically start playing if color was already played by the
-    // computer, this could be irritating if the computer currently does not
-    // think (even if it is set to play the current color) and the user only
-    // opens the dialog to check the computer color settings.
-    bool isCurrentPlayedByComputer = m_computerColors[m_currentColor];
-    bool wasCurrentPlayedByComputer = oldComputerColors[m_currentColor];
-    // Current color could have changed if a move generation finished while
-    // the dialog was running.
-    bool hasCurrentColorChanged = (oldCurrentColor != m_currentColor);
-    if (! m_isGenMoveRunning && isCurrentPlayedByComputer
-        && (hasCurrentColorChanged || ! wasCurrentPlayedByComputer))
-    {
-        m_autoPlay = true;
-        checkComputerMove();
-    }
+    QSettings settings;
+    settings.setValue("computer_color_none", computerNone);
+
+    // Enable auto play only if any color has changed because that means that
+    // the user probably wants to continue playing, otherwise the user could
+    // have only opened the dialog to check the current settings
+    for (ColorIterator i(nu_colors); i; ++i)
+        if (m_computerColors[*i] != oldComputerColors[*i])
+        {
+            m_autoPlay = true;
+            break;
+        }
+
+    checkComputerMove();
 }
 
 bool MainWindow::computerPlaysAll() const
