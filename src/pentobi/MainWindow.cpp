@@ -2140,24 +2140,19 @@ void MainWindow::initGame()
 #endif
     m_game->set_date_today();
     m_game->clear_modified();
-    m_computerColors.fill(false);
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
     {
-        auto variant = getVariant();
-        if (variant == Variant::duo
-            || variant == Variant::junior)
-            m_computerColors[Color(1)] = true;
-        else if (variant == Variant::classic_2
-                 || variant == Variant::trigon_2)
-        {
-            m_computerColors[Color(1)] = true;
-            m_computerColors[Color(3)] = true;
-        }
+        auto& bd = getBoard();
+        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+            m_computerColors[*i] = ! bd.is_same_player(*i, Color(0));
         m_autoPlay = true;
     }
     else
+    {
+        m_computerColors.fill(false);
         m_autoPlay = false;
+    }
     m_currentColor = Color(0);
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
