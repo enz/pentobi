@@ -1928,10 +1928,12 @@ void MainWindow::variantTrigon3(bool checked)
 
 void MainWindow::genMove(bool playSingleMove)
 {
+    m_genMoveTime.start();
     ++m_genMoveId;
-    // Show "Computer is thinking" status only after a delay such that it is
-    // not shown for very short thinking times
-    QTimer::singleShot(500, this, SLOT(showThinking()));
+    setCursor(QCursor(Qt::BusyCursor));
+    m_actionPlay->setEnabled(false);
+    m_actionPlaySingleMove->setEnabled(false);
+    showStatus(tr("The computer is thinking..."));
     m_actionInterrupt->setEnabled(true);
     clearSelectedPiece();
     clear_abort();
@@ -1954,6 +1956,13 @@ void MainWindow::genMove(bool playSingleMove)
 
 void MainWindow::genMoveFinished()
 {
+    auto elapsed = m_genMoveTime.elapsed();
+    if (elapsed < 800)
+    {
+        // Enforce minimum thinking time
+        QTimer::singleShot(800 - elapsed, this, SLOT(genMoveFinished()));
+        return;
+    }
     GenMoveResult result = m_genMoveWatcher.future().result();
     if (result.genMoveId != m_genMoveId)
         // Callback from a move generation canceled with cancelThread()
@@ -3260,16 +3269,6 @@ void MainWindow::showStatus(const QString& text, bool temporary)
 {
     int timeout = (temporary ? 4000 : 0);
     statusBar()->showMessage(text, timeout);
-}
-
-void MainWindow::showThinking()
-{
-    if (! m_isGenMoveRunning)
-        return;
-    setCursor(QCursor(Qt::BusyCursor));
-    m_actionPlay->setEnabled(false);
-    m_actionPlaySingleMove->setEnabled(false);
-    showStatus(tr("The computer is thinking..."));
 }
 
 void MainWindow::showToolbar(bool checked)

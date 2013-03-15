@@ -10,6 +10,7 @@
 #include <config.h>
 #endif
 
+#include <QElapsedTimer>
 #include <QFutureWatcher>
 #include <QMainWindow>
 #include "RatingHistory.h"
@@ -555,6 +556,8 @@ private:
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
+    QElapsedTimer m_genMoveTime;
+
     QString m_file;
 
     unique_ptr<ArrayList<Move, Move::range>> m_legalMoves;
@@ -748,8 +751,6 @@ private slots:
     void setupMode(bool checked);
 
     void showComment(bool checked);
-
-    void showThinking();
 
     void toolBarNoText(bool checked);
 
