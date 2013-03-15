@@ -1000,16 +1000,6 @@
         <translation>G&amp;o</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1972"/>
-        <source>Computer failed to generate a move.</source>
-        <translation>Computer failed to generate a move.</translation>
-    </message>
-    <message>
-        <location filename="MainWindow.cpp" line="1978"/>
-        <source>Computer generated illegal move: %1</source>
-        <translation>Computer generated illegal move: %1</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="1996"/>
         <source>Blokus games (*.blksgf);;All files (*.*)</source>
         <translation>Blokus games (*.blksgf);;All files (*.*)</translation>

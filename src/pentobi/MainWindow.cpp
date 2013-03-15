@@ -1974,18 +1974,14 @@ void MainWindow::genMoveFinished()
     clearStatus();
     if (get_abort() && computerPlaysAll())
         m_computerColors.fill(false);
+    auto& bd = getBoard();
     Color c = result.color;
     auto mv = result.move;
-    if (mv.is_null())
+    if (mv.is_null() || ! bd.is_legal(c, mv))
     {
-        showError(tr("Computer failed to generate a move."));
-        return;
-    }
-    auto& bd = getBoard();
-    if (! bd.is_legal(c, mv))
-    {
-        showError(tr("Computer generated illegal move: %1")
-                  .arg(bd.to_string(mv).c_str()));
+        // No need to translate this message, it should never occur if the
+        // program is correct
+        showError("Computer failed to generate a move");
         return;
     }
     if (mv.is_pass())

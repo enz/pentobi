@@ -104,16 +104,6 @@
         <translation>&amp;Stellungsaufbau</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="1972"/>
-        <source>Computer failed to generate a move.</source>
-        <translation>Der Computer konnte keinen Zug generieren.</translation>
-    </message>
-    <message>
-        <location filename="MainWindow.cpp" line="1978"/>
-        <source>Computer generated illegal move: %1</source>
-        <translation>Der Computer generierte einen illegalen Zug: %1</translation>
-    </message>
-    <message>
         <location filename="MainWindow.cpp" line="2477"/>
         <source>Could not read file &apos;%1&apos;</source>
         <translation>Datei &apos;%1&apos; konnte nicht gelesen werden</translation>
