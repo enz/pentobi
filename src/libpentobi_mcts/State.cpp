@@ -127,16 +127,17 @@ inline void State::add_moves(Point p, Color c, Piece piece,
 bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
                        const MoveInfo& info)
 {
-    LocalValue::Compute compute_local;
-    auto end = info.end();
     auto i = info.begin();
-    do
+    if (is_forbidden[*i])
+        return false;
+    LocalValue::Compute compute_local(*i, m_local_value);
+    auto end = info.end();
+    while (++i != end)
     {
         if (is_forbidden[*i])
             return false;
         compute_local.add_move_point(*i, m_local_value);
     }
-    while (++i != end);
     unsigned piece_size = info.size();
     if (piece_size > m_max_playable_piece_size)
         m_max_playable_piece_size = piece_size;
@@ -157,6 +158,19 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
             m_local_moves.push_back(mv);
         }
     }
+    return true;
+}
+
+bool State::check_move_without_local(const Grid<bool>& is_forbidden, Move mv)
+{
+    auto& info = get_move_info(mv);
+    auto i = info.begin();
+    if (is_forbidden[*i])
+        return false;
+    auto end = info.end();
+    while (++i != end)
+        if (is_forbidden[*i])
+            return false;
     return true;
 }
 
@@ -776,6 +790,7 @@ void State::init_moves_without_local(Color c)
     for (Piece piece : m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             pieces_considered.push_back(piece);
+    auto& is_forbidden = m_bd.is_forbidden(c);
     if (m_bd.is_first_piece(c))
     {
         // Using only one starting point (if game variant has more than one) not
@@ -789,7 +804,8 @@ void State::init_moves_without_local(Color c)
             {
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Move mv : get_moves(c, piece, p, adj_status))
-                    if (! marker[mv] && ! m_bd.is_forbidden(c, mv))
+                    if (! marker[mv]
+                        && check_move_without_local(is_forbidden, mv))
                     {
                         marker.set(mv);
                         moves.push_back(mv);
@@ -806,7 +822,8 @@ void State::init_moves_without_local(Color c)
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces_considered)
                     for (Move mv : get_moves(c, piece, p, adj_status))
-                        if (! marker[mv] && ! m_bd.is_forbidden(c, mv))
+                        if (! marker[mv]
+                            && check_move_without_local(is_forbidden, mv))
                         {
                             marker.set(mv);
                             moves.push_back(mv);

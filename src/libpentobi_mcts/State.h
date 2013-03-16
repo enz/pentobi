@@ -320,6 +320,8 @@ private:
     bool check_move(const Grid<bool>& is_forbidden, Move mv,
                     const MoveInfo& info);
 
+    bool check_move_without_local(const Grid<bool>& is_forbidden, Move mv);
+
     void update_moves(Color c);
 
     bool check_symmetry_broken();

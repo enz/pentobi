@@ -41,7 +41,7 @@ public:
     class Compute
     {
     public:
-        Compute();
+        Compute(Point p, const LocalValue& local_value);
 
         /** Add a point of the move. */
         void add_move_point(Point p, const LocalValue& local_value);
@@ -80,9 +80,9 @@ private:
     PointList m_points;
 };
 
-inline LocalValue::Compute::Compute()
+inline LocalValue::Compute::Compute(Point p, const LocalValue& local_value)
 {
-    m_value = 0;
+    m_value = local_value.m_point_value[p];
 }
 
 inline void LocalValue::Compute::add_move_point(Point p,
