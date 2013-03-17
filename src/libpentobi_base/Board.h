@@ -474,11 +474,14 @@ inline Move Board::from_string(const string& s) const
 inline unsigned Board::get_adj_status(Point p, Color c) const
 {
     unsigned result = 0;
-    unsigned n = 0;
-    for (NullTermList<Point, 12>::Iterator i(m_geometry->get_adj_diag(p));
-         n < BoardConst::adj_status_nu_adj && i; ++i, ++n)
+    unsigned val = 1;
+    NullTermList<Point, 12>::Iterator i(m_geometry->get_adj_diag(p));
+    LIBBOARDGAME_ASSERT(i);
+    static_assert(BoardConst::adj_status_nu_adj > 0, "");
+    do
         if (is_forbidden(*i, c))
-            result |= (1 << n);
+            result |= val;
+    while ((val <<= 1) < (1 << BoardConst::adj_status_nu_adj) && ++i);
     return result;
 }
 

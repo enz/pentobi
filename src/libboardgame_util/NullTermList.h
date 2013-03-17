@@ -51,7 +51,7 @@ public:
 
         operator bool() const;
 
-        void operator++();
+        Iterator& operator++();
 
     private:
         const T* m_t;
@@ -133,10 +133,11 @@ inline NullTermList<T, M>::Iterator::operator bool() const
 }
 
 template<typename T, unsigned M>
-inline void NullTermList<T, M>::Iterator::operator++()
+inline auto NullTermList<T, M>::Iterator::operator++() -> Iterator&
 {
     LIBBOARDGAME_ASSERT(operator bool());
     ++m_t;
+    return *this;
 }
 
 template<typename T, unsigned M>
