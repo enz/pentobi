@@ -27,7 +27,7 @@ public:
 
     operator bool() const;
 
-    void operator++();
+    ChildIterator& operator++();
 
     const Node& operator*();
 
@@ -55,10 +55,11 @@ inline ChildIterator<N>::operator bool() const
 }
 
 template<typename N>
-inline void ChildIterator<N>::operator++()
+inline ChildIterator<N>& ChildIterator<N>::operator++()
 {
     LIBBOARDGAME_ASSERT(operator bool());
     ++m_current;
+    return *this;
 }
 
 template<typename N>

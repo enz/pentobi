@@ -1415,7 +1415,6 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
 template<class S, class M, class R>
 auto Search<S, M, R>::select_child(const Node& node) -> const Node*
 {
-    LIBBOARDGAME_ASSERT(node.has_children());
     auto node_count = node.get_visit_count();
     if (log_move_selection)
         log() << "Search::select_child:\n"
@@ -1424,7 +1423,9 @@ auto Search<S, M, R>::select_child(const Node& node) -> const Node*
     const Node* best_child = nullptr;
     Float best_value = -numeric_limits<Float>::max();
     m_bias_term.start_iteration(node_count);
-    for (ChildIterator i(m_tree, node); i; ++i)
+    ChildIterator i(m_tree, node);
+    LIBBOARDGAME_ASSERT(i);
+    do
     {
         auto child_count = i->get_visit_count();
         auto bias = m_bias_term.get(child_count);
@@ -1439,6 +1440,7 @@ auto Search<S, M, R>::select_child(const Node& node) -> const Node*
             best_child = &(*i);
         }
     }
+    while (++i);
     if (log_move_selection)
         log() << "Selected: " << get_move_string(best_child->get_move())
               << '\n';
@@ -1672,13 +1674,14 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
     auto& nodes = thread_state.simulation.nodes;
     LIBBOARDGAME_ASSERT(i < nodes.size());
     const auto node = nodes[i];
-    LIBBOARDGAME_ASSERT(node->has_children());
     const auto& state = *thread_state.state;
     auto& was_played = thread_state.was_played;
     auto& first_play = thread_state.first_play;
     unsigned len = state.get_nu_moves();
     Float dist_weight_factor = (1 - m_rave_dist_final) / Float(len - i);
-    for (ChildIterator it(m_tree, *node); it; ++it)
+    ChildIterator it(m_tree, *node);
+    LIBBOARDGAME_ASSERT(it);
+    do
     {
         auto mv = it->get_move();
         if (! was_played[player][mv]
@@ -1707,6 +1710,7 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
             weight *= 1 - Float(first - i) * dist_weight_factor;
         m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
     }
+    while (++it);
 }
 
 template<class S, class M, class R>
