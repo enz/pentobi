@@ -112,7 +112,11 @@ public slots:
 
     void gameInfo();
 
+    /** Abort current move generation and don't play a move. */
     void interrupt();
+
+    /** Abort current move generation and play best move found so far. */
+    void interruptPlay();
 
     void keepOnlyPosition();
 
@@ -273,6 +277,8 @@ private:
         we only need to handle edits. */
     bool m_ignoreCommentTextChanged;
 
+    bool m_interruptPlayTriggered;
+
     /** Color played by the user in a rated game.
         Only defined if m_isRated is true. In game variants with multiple
         colors per player, the user plays all colors of the player with
@@ -403,6 +409,8 @@ private:
     QAction* m_actionInterestingMove;
 
     QAction* m_actionInterrupt;
+
+    QAction* m_actionInterruptPlay;
 
     QAction* m_actionKeepOnlyPosition;
 

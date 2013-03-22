@@ -872,6 +872,10 @@ void MainWindow::createActions()
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), SLOT(interrupt()));
 
+    m_actionInterruptPlay = createAction();
+    m_actionInterruptPlay->setShortcut(QString("Shift+Esc"));
+    connect(m_actionInterruptPlay, SIGNAL(triggered()), SLOT(interruptPlay()));
+
     m_actionKeepOnlyPosition = createAction(tr("&Keep Only Position"));
     connect(m_actionKeepOnlyPosition, SIGNAL(triggered()),
             SLOT(keepOnlyPosition()));
@@ -1931,6 +1935,7 @@ void MainWindow::genMove(bool playSingleMove)
     clear_abort();
     m_lastRemainingSeconds = 0;
     m_lastRemainingMinutes = 0;
+    m_interruptPlayTriggered = false;
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
@@ -1949,7 +1954,7 @@ void MainWindow::genMove(bool playSingleMove)
 void MainWindow::genMoveFinished()
 {
     auto elapsed = m_genMoveTime.elapsed();
-    if (elapsed < 800)
+    if (elapsed < 800 && ! m_interruptPlayTriggered)
     {
         // Enforce minimum thinking time
         QTimer::singleShot(800 - elapsed, this, SLOT(genMoveFinished()));
@@ -2213,6 +2218,15 @@ void MainWindow::interestingMove(bool checked)
 void MainWindow::interrupt()
 {
     cancelThread();
+    m_autoPlay = false;
+}
+
+void MainWindow::interruptPlay()
+{
+    if (! m_isGenMoveRunning)
+        return;
+    m_interruptPlayTriggered = true;
+    set_abort();
     m_autoPlay = false;
 }
 
