@@ -771,6 +771,7 @@ void MainWindow::createActions()
             SLOT(clearSelectedPiece()));
 
     m_actionComputerColors = createAction(tr("&Computer Colors"));
+    m_actionComputerColors->setShortcut(QString("Ctrl+U"));
     m_actionComputerColors->setToolTip(
                                   tr("Set the colors played by the computer"));
     setIcon(m_actionComputerColors, "pentobi-computer-color");
