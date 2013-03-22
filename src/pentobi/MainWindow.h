@@ -277,7 +277,7 @@ private:
         we only need to handle edits. */
     bool m_ignoreCommentTextChanged;
 
-    bool m_interruptPlayTriggered;
+    bool m_genMoveInterrupted;
 
     /** Color played by the user in a rated game.
         Only defined if m_isRated is true. In game variants with multiple

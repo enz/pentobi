@@ -501,22 +501,21 @@ void MainWindow::cancelThread()
         // global menu can still trigger menu item events.
         m_analyzeGameWindow->analyzeGameWidget->cancel();
     }
-    if (m_isGenMoveRunning)
-    {
-        // After waitForFinished() returns, we can be sure that the move
-        // generation is no longer running, but we will still receive the
-        // finished event. Increasing m_genMoveId will make genMoveFinished()
-        // ignore the event.
-        ++m_genMoveId;
-        set_abort();
-        m_genMoveWatcher.waitForFinished();
-        m_isGenMoveRunning = false;
-        clearStatus();
-        setCursor(QCursor(Qt::ArrowCursor));
-        m_actionInterrupt->setEnabled(false);
-        m_actionPlay->setEnabled(true);
-        m_actionPlaySingleMove->setEnabled(true);
-    }
+    if (! m_isGenMoveRunning)
+        return;
+    // After waitForFinished() returns, we can be sure that the move generation
+    // is no longer running, but we will still receive the finished event.
+    // Increasing m_genMoveId will make genMoveFinished() ignore the event.
+    ++m_genMoveId;
+    m_genMoveInterrupted = true;
+    set_abort();
+    m_genMoveWatcher.waitForFinished();
+    m_isGenMoveRunning = false;
+    clearStatus();
+    setCursor(QCursor(Qt::ArrowCursor));
+    m_actionInterrupt->setEnabled(false);
+    m_actionPlay->setEnabled(true);
+    m_actionPlaySingleMove->setEnabled(true);
 }
 
 void MainWindow::checkComputerMove()
@@ -1935,7 +1934,7 @@ void MainWindow::genMove(bool playSingleMove)
     clear_abort();
     m_lastRemainingSeconds = 0;
     m_lastRemainingMinutes = 0;
-    m_interruptPlayTriggered = false;
+    m_genMoveInterrupted = false;
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
@@ -1954,7 +1953,7 @@ void MainWindow::genMove(bool playSingleMove)
 void MainWindow::genMoveFinished()
 {
     auto elapsed = m_genMoveTime.elapsed();
-    if (elapsed < 800 && ! m_interruptPlayTriggered)
+    if (elapsed < 800 && ! m_genMoveInterrupted)
     {
         // Enforce minimum thinking time
         QTimer::singleShot(800 - elapsed, this, SLOT(genMoveFinished()));
@@ -2225,8 +2224,8 @@ void MainWindow::interruptPlay()
 {
     if (! m_isGenMoveRunning)
         return;
-    m_interruptPlayTriggered = true;
     set_abort();
+    m_genMoveInterrupted = true;
     m_autoPlay = false;
 }
 
