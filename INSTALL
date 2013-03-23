@@ -43,9 +43,8 @@ On Linux, Pentobi can be installed after compilation with the shell command:
   sudo make install
 
 After installation, the system-wide databases should be updated to
-make Pentobi appear in the desktop menu, register it as handler for Blokus
-files (*.blksgf), and register its Gnome thumbnailer for file previews.
-The databases can be updated with the shell command:
+make Pentobi appear in the desktop menu and register it as handler for Blokus
+files (*.blksgf). The databases can be updated with the shell command:
 
   sudo make post-install
 
