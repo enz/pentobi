@@ -28,31 +28,8 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     auto layout = new QVBoxLayout();
     setLayout(layout);
     layout->addWidget(new QLabel(tr("Colors played by the computer:")));
-    if (m_variant == Variant::duo || m_variant == Variant::junior)
-    {
-        createCheckBox(layout, Color(0));
-        createCheckBox(layout, Color(1));
-    }
-    else if (m_variant == Variant::classic || m_variant == Variant::trigon)
-    {
-        createCheckBox(layout, Color(0));
-        createCheckBox(layout, Color(1));
-        createCheckBox(layout, Color(2));
-        createCheckBox(layout, Color(3));
-    }
-    else if (m_variant == Variant::trigon_3)
-    {
-        createCheckBox(layout, Color(0));
-        createCheckBox(layout, Color(1));
-        createCheckBox(layout, Color(2));
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
-                            || m_variant == Variant::trigon_2);
-        createCheckBox(layout, Color(0));
-        createCheckBox(layout, Color(1));
-    }
+    for (Color::IntType i = 0; i < get_nu_players(m_variant); ++i)
+        createCheckBox(layout, Color(i));
     auto buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
@@ -65,10 +42,8 @@ void ComputerColorDialog::accept()
 {
     unsigned nu_colors = get_nu_colors(m_variant);
     if (get_nu_players(m_variant) == nu_colors)
-    {
         for (ColorIterator i(nu_colors); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
-    }
     else
     {
         LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
