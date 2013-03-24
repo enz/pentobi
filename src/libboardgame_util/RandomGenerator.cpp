@@ -8,6 +8,7 @@
 
 #include "RandomGenerator.h"
 
+#include <ctime>
 #include <list>
 
 namespace libboardgame_util {
@@ -30,8 +31,10 @@ list<RandomGenerator*>& get_all_generators()
 
 RandomGenerator::ResultType get_nondet_seed()
 {
-    static random_device d;
-    return static_cast<RandomGenerator::ResultType>(d());
+    static RandomGenerator::Generator seed_generator;
+    auto seed = static_cast<RandomGenerator::ResultType>(time(nullptr));
+    seed ^= seed_generator();
+    return seed;
 }
 
 } // namespace
@@ -53,14 +56,14 @@ void RandomGenerator::set_global_seed(ResultType seed)
 {
     is_seed_set = true;
     the_seed = seed;
-    for (auto i : get_all_generators())
+    for (RandomGenerator* i : get_all_generators())
         i->set_seed(the_seed);
 }
 
 void RandomGenerator::set_global_seed_last()
 {
     if (is_seed_set)
-        for (auto i : get_all_generators())
+        for (RandomGenerator* i : get_all_generators())
             i->set_seed(the_seed);
 }
 
