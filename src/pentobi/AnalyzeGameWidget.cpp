@@ -131,17 +131,6 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     }
 }
 
-void AnalyzeGameWidget::progressCallback(unsigned movesAnalyzed,
-                                         unsigned totalMoves)
-{
-    if (totalMoves == 0)
-        return;
-    // This function is called from a different thread. Invoke showProgress()
-    // in the GUI thread.
-    QMetaObject::invokeMethod(this, "showProgress", Qt::QueuedConnection,
-                              Q_ARG(int, 100 * movesAnalyzed / totalMoves));
-}
-
 void AnalyzeGameWidget::resizeEvent(QResizeEvent*)
 {
     if (! m_isInitialized)
@@ -213,11 +202,19 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
 
 void AnalyzeGameWidget::threadFunction()
 {
-    m_analyzeGame.run(*m_game, *m_search, m_nuSimulations,
-                      bind(&AnalyzeGameWidget::progressCallback, this,
-                           placeholders::_1, placeholders::_2));
-    // This function is called from a different thread. Invoke showProgress()
-    // in the GUI thread.
+    // This function and the progress callback are not called from the GUI
+    // thread. So we need to invoke showProgress() with invokeMethod().
+    auto progressCallback =
+        [&](unsigned movesAnalyzed, unsigned totalMoves)
+        {
+            if (totalMoves == 0)
+                return;
+            int progress = 100 * movesAnalyzed / totalMoves;
+            QMetaObject::invokeMethod(this, "showProgress",
+                                      Qt::QueuedConnection,
+                                      Q_ARG(int, progress));
+        };
+    m_analyzeGame.run(*m_game, *m_search, m_nuSimulations, progressCallback);
     QMetaObject::invokeMethod(this, "showProgress", Qt::QueuedConnection,
                               Q_ARG(int, 100));
     m_isRunning = false;
