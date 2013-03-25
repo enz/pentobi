@@ -63,13 +63,13 @@ void redirectStdErr()
 
 int main(int argc, char* argv[])
 {
+    Q_INIT_RESOURCE(libpentobi_gui_resources);
+    QCoreApplication::setOrganizationName("Pentobi");
+    QCoreApplication::setApplicationName("Pentobi");
+    Application app(argc, argv);
+
     try
     {
-        Q_INIT_RESOURCE(libpentobi_gui_resources);
-        QCoreApplication::setOrganizationName("Pentobi");
-        QCoreApplication::setApplicationName("Pentobi");
-        Application app(argc, argv);
-
         // Allow the user to override installation paths with a config file in
         // the directory of the executable to test it without installation
         QString manualDir;
@@ -166,7 +166,6 @@ int main(int argc, char* argv[])
     }
     catch (const OptionError& e)
     {
-        QApplication app(argc, argv);
         QMessageBox::critical(nullptr, "Pentobi",
                               "Invalid command line option:\n\n"
                               + QString::fromLocal8Bit(e.what()));
@@ -174,14 +173,12 @@ int main(int argc, char* argv[])
     }
     catch (const exception& e)
     {
-        QApplication app(argc, argv);
         string detailedText = get_type_name(e) + ": " + e.what();
         showFatal(QString::fromLocal8Bit(detailedText.c_str()));
         return 1;
     }
     catch (...)
     {
-        QApplication app(argc, argv);
         showFatal("Unknown exception");
         return 1;
     }

@@ -60,7 +60,7 @@ void showFatal(const QString& detailedText)
 {
     // Don't translate these error messages. They shouldn't occur if the
     // program is correct and if it is not, they can occur in situations
-    // when the translators are not yet or no longer installed.
+    // when the translators are not yet installed.
     QMessageBox msgBox;
     msgBox.setWindowTitle("Unexpected Error");
     msgBox.setIcon(QMessageBox::Critical);
