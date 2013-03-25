@@ -56,6 +56,24 @@ void initQuestion(QMessageBox& msgBox, const QString& text,
     msgBox.setInformativeText(infoText);
 }
 
+void showFatal(const QString& detailedText)
+{
+    // Don't translate these error messages. They shouldn't occur if the
+    // program is correct and if it is not, they can occur in situations
+    // when the translators are not yet or no longer installed.
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Unexpected Error");
+    msgBox.setIcon(QMessageBox::Critical);
+    msgBox.setText("An unexpected error occurred.");
+    QString infoText =
+        "Please report this error together with any details available with"
+        " the button below and other context information at the Pentobi"
+        " <a href=\"http://sf.net/p/pentobi/bugs\">bug tracker</a>.";
+    msgBox.setInformativeText("<html>" + infoText);
+    msgBox.setDetailedText(detailedText);
+    msgBox.exec();
+}
+
 void showError(QWidget* parent, const QString& text, const QString& infoText,
                const QString& detailText)
 {

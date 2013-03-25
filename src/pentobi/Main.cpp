@@ -9,11 +9,14 @@
 #include <iostream>
 #include <QFileInfo>
 #include <QLibraryInfo>
+#include <QMessageBox>
 #include <QSettings>
 #include <QTranslator>
 #include "Application.h"
 #include "MainWindow.h"
+#include "ShowMessage.h"
 #include "libboardgame_util/Options.h"
+#include "libboardgame_sys/Compiler.h"
 
 #ifdef Q_WS_WIN
 #include <stdio.h>
@@ -23,8 +26,10 @@
 #endif
 
 using libboardgame_util::set_log_null;
+using libboardgame_util::OptionError;
 using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
+using libboardgame_sys::get_type_name;
 
 //-----------------------------------------------------------------------------
 
@@ -130,14 +135,14 @@ int main(int argc, char* argv[])
         {
             memory = opt.get<size_t>("memory");
             if (memory == 0)
-                throw Exception("Value for memory must be greater zero.");
+                throw OptionError("Value for memory must be greater zero.");
         }
         unsigned threads = 0;
         if (opt.contains("threads"))
         {
             threads = opt.get<unsigned>("threads");
             if (threads == 0)
-                throw Exception("Number of threads must be greater zero.");
+                throw OptionError("Number of threads must be greater zero.");
         }
         if (! opt.contains("verbose"))
             set_log_null();
@@ -159,14 +164,25 @@ int main(int argc, char* argv[])
         mainWindow.show();
         return app.exec();
     }
+    catch (const OptionError& e)
+    {
+        QApplication app(argc, argv);
+        QMessageBox::critical(nullptr, "Pentobi",
+                              "Invalid command line option:\n\n"
+                              + QString::fromLocal8Bit(e.what()));
+        return 1;
+    }
     catch (const exception& e)
     {
-        cerr << "Error: " << e.what() << '\n';
+        QApplication app(argc, argv);
+        string detailedText = get_type_name(e) + ": " + e.what();
+        showFatal(QString::fromLocal8Bit(detailedText.c_str()));
         return 1;
     }
     catch (...)
     {
-        cerr << "Error: unknown exception\n";
+        QApplication app(argc, argv);
+        showFatal("Unknown exception");
         return 1;
     }
 }

@@ -8,10 +8,10 @@
 
 #include "Application.h"
 
-#include <QMessageBox>
-#include "MainWindow.h"
+#include "ShowMessage.h"
 #include "libboardgame_sys/Compiler.h"
 
+using namespace std;
 using libboardgame_sys::get_type_name;
 
 //-----------------------------------------------------------------------------
@@ -30,31 +30,13 @@ bool Application::notify(QObject* receiver, QEvent* event)
     catch (const exception& e)
     {
         string detailedText = get_type_name(e) + ": " + e.what();
-        showError(detailedText.c_str());
+        showFatal(QString::fromLocal8Bit(detailedText.c_str()));
     }
     catch (...)
     {
-        showError("");
+        showFatal("Unknown exception");
     }
     return false;
-}
-
-void Application::showError(const QString& detailedText)
-{
-    QMessageBox msgBox;
-    msgBox.setWindowTitle(tr("Pentobi"));
-    msgBox.setIcon(QMessageBox::Critical);
-    msgBox.setText(tr("An unexpected error occurred."));
-    msgBox.setInformativeText("<html>" +
-                              tr("Please report this error together with any"
-                                 " details available with the button below"
-                                 " and other context information at the Pentobi"
-                                 " <a href=\"http://sf.net/p/pentobi/bugs\">bug tracker</a>."));
-    if (detailedText.isEmpty())
-        msgBox.setDetailedText(tr("No detailed information is available"));
-    else
-        msgBox.setDetailedText(detailedText);
-    msgBox.exec();
 }
 
 //-----------------------------------------------------------------------------

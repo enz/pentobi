@@ -65,7 +65,7 @@ void Options::init(int argc, const char** argv, const vector<string>& specs)
                         break;
                     }
                 if (! found)
-                    throw Exception("Unknown option " + arg);
+                    throw OptionError("Unknown option " + arg);
             }
             else
             {
@@ -94,7 +94,7 @@ void Options::init(int argc, const char** argv, const vector<string>& specs)
                         }
                     }
                     if (! found)
-                        throw Exception("Unknown option -" + string(1, c));
+                        throw OptionError("Unknown option -" + string(1, c));
                     if (needs_arg || ! value.empty())
                         break;
                     m_map.insert(make_pair(name, ""));
@@ -111,7 +111,7 @@ void Options::init(int argc, const char** argv, const vector<string>& specs)
                         value_found = true;
                 }
                 if (! value_found)
-                    throw Exception("Option --" + name + " needs value");
+                    throw OptionError("Option --" + name + " needs value");
             }
             m_map.insert(make_pair(name, value));
         }
@@ -123,7 +123,7 @@ void Options::init(int argc, const char** argv, const vector<string>& specs)
 void Options::check_name(const string& name) const
 {
     if (m_names.find(name) == m_names.end())
-        throw Exception("Internal error: invalid option name " + name);
+        throw OptionError("Internal error: invalid option name " + name);
 }
 
 string Options::get(const string& name) const
@@ -131,7 +131,7 @@ string Options::get(const string& name) const
     check_name(name);
     auto pos = m_map.find(name);
     if (pos == m_map.end())
-        throw Exception("Missing option --" + name);
+        throw OptionError("Missing option --" + name);
     return pos->second;
 }
 

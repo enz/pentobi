@@ -22,6 +22,8 @@ void showInfo(QWidget* parent, const QString& text,
               const QString& infoText = "", const QString& detailText = "",
               bool withIcon = false);
 
+void showFatal(const QString& detailedText);
+
 //-----------------------------------------------------------------------------
 
 #endif // PENTOBI_SHOW_MESSAGE_H

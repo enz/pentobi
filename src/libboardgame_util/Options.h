@@ -20,6 +20,18 @@ using libboardgame_sys::get_type_name;
 
 //----------------------------------------------------------------------------
 
+class OptionError
+    : public Exception
+{
+public:
+    OptionError(const string& s)
+        : Exception(s)
+    {
+    }
+};
+
+//----------------------------------------------------------------------------
+
 /** Parser for command line options.
     The syntax of options is similar to GNU getopt. Options start with "--"
     and an option name. Options have optional short (single-character) names
@@ -36,7 +48,7 @@ public:
         description is the long name of the option, followed by and optional
         '|' and a character for the short name of the option, followed  by an
         optional ':' if the option needs a value.
-        @throws Exception on error */
+        @throws OptionError on error */
     Options(int argc, const char** argv, const vector<string>& specs);
 
     /** Overloaded version for con-const character strings in argv.
@@ -56,7 +68,7 @@ public:
 
     /** Get option value.
         @param name The (long) option name.
-        @throws Exception If option does not exist or has the wrong type. */
+        @throws OptionError If option does not exist or has the wrong type. */
     template<typename T>
     T get(const string& name) const;
 
@@ -94,7 +106,8 @@ T Options::get(const string& name) const
 {
     T t;
     if (! from_string(get(name), t))
-        throw Exception("Option --" + name + " needs type " + get_type_name(t));
+        throw OptionError("Option --" + name + " needs type "
+                          + get_type_name(t));
     return t;
 }
 
