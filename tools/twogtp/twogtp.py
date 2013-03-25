@@ -144,7 +144,7 @@ def play_game(game_number, black, white, variant, output_file):
     if variant == "duo" or variant == "junior":
         colors = [ "b", "w" ]
     else:
-        colors = [ "blue", "yellow", "red", "green" ]
+        colors = [ "1", "2", "3", "4" ]
     color_to_play = 0
     move_number = 0
     nu_passes = 0
