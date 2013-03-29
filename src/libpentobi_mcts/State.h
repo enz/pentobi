@@ -293,6 +293,9 @@ private:
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
 
+    void add_starting_moves(Color c,
+                            const Board::PiecesLeftList& pieces_considered);
+
     void compute_features();
 
     Point find_best_starting_point(Color c) const;

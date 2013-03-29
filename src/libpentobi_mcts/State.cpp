@@ -122,6 +122,37 @@ inline void State::add_moves(Point p, Color c, Piece piece,
         }
 }
 
+void State::add_starting_moves(Color c,
+                               const Board::PiecesLeftList& pieces_considered)
+{
+    // Using only one starting point (if game variant has more than one) not
+    // only reduces the branching factor but is also necessary because
+    // update_moves() assumes that a move stays legal if the forbidden
+    // status for all of its points does not change.
+    Point p = find_best_starting_point(c);
+    if (p.is_null())
+        return;
+    auto& moves = *m_moves[c];
+    auto& marker = m_marker[c];
+    auto& is_forbidden = m_bd.is_forbidden(c);
+    // We use adj_status 0 and don't check if moves should be in the local
+    // list, which is appropriate given the starting point locations in the
+    // standard game variants and assuming normal game play with alternating
+    // moves and adj_status is only an optimization and local moves only a
+    // heuristic anyway. However, we check if all the moves are legal to avoid
+    // the generation of illegal moves in non-standard board positions.
+    for (Piece piece : pieces_considered)
+        for (Move mv : get_moves(c, piece, p, 0))
+        {
+            LIBBOARDGAME_ASSERT(! marker[mv]);
+            if (check_move_without_local(is_forbidden, mv))
+            {
+                marker.set(mv);
+                moves.push_back(mv);
+            }
+        }
+}
+
 /** Check if move is not forbidden and compute/handle its local value in the
     same loop. */
 bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
@@ -743,33 +774,11 @@ void State::init_moves_with_local(Color c)
         if ((*m_is_piece_considered[c])[piece])
             pieces_considered.push_back(piece);
     if (m_bd.is_first_piece(c))
-    {
-        // Using only one starting point (if game variant has more than one) not
-        // only reduces the branching factor but is also necessary because
-        // update_moves() assumes that a move stays legal if the forbidden
-        // status for all of its points does not change.
-        Point p = find_best_starting_point(c);
-        if (! p.is_null())
-        {
-            for (Piece piece : pieces_considered)
-            {
-                auto adj_status = m_bd.get_adj_status(p, c);
-                for (Move mv : get_moves(c, piece, p, adj_status))
-                    if (! marker[mv] && ! m_bd.is_forbidden(c, mv))
-                    {
-                        marker.set(mv);
-                        moves.push_back(mv);
-                    }
-            }
-            m_moves_added_at[c].set(p);
-        }
-    }
+        add_starting_moves(c, pieces_considered);
     else
-    {
         for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
                 add_moves(p, c, pieces_considered);
-    }
     m_is_move_list_initialized[c] = true;
     m_new_moves[c].clear();
     if (moves.empty() && ! m_force_consider_all_pieces)
@@ -792,32 +801,10 @@ void State::init_moves_without_local(Color c)
             pieces_considered.push_back(piece);
     auto& is_forbidden = m_bd.is_forbidden(c);
     if (m_bd.is_first_piece(c))
-    {
-        // Using only one starting point (if game variant has more than one) not
-        // only reduces the branching factor but is also necessary because
-        // update_moves() assumes that a move stays legal if the forbidden
-        // status for all of its points does not change.
-        Point p = find_best_starting_point(c);
-        if (! p.is_null())
-        {
-            for (Piece piece : pieces_considered)
-            {
-                auto adj_status = m_bd.get_adj_status(p, c);
-                for (Move mv : get_moves(c, piece, p, adj_status))
-                    if (! marker[mv]
-                        && check_move_without_local(is_forbidden, mv))
-                    {
-                        marker.set(mv);
-                        moves.push_back(mv);
-                    }
-            }
-            m_moves_added_at[c].set(p);
-        }
-    }
+        add_starting_moves(c, pieces_considered);
     else
-    {
         for (Point p : m_bd.get_attach_points(c))
-            if (! m_bd.is_forbidden(p, c))
+            if (! is_forbidden[p])
             {
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces_considered)
@@ -830,7 +817,6 @@ void State::init_moves_without_local(Color c)
                         }
                 m_moves_added_at[c].set(p);
             }
-    }
     m_is_move_list_initialized[c] = true;
     m_new_moves[c].clear();
     if (moves.empty() && ! m_force_consider_all_pieces)
