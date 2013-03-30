@@ -563,10 +563,10 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     while (true)
     {
         to_play = m_bd.get_to_play();
-        if (m_is_move_list_initialized[to_play])
-            update_moves(to_play);
-        else
+        if (! m_is_move_list_initialized[to_play])
             init_moves_with_local(to_play);
+        else if (m_has_moves[to_play])
+            update_moves(to_play);
         if ((m_has_moves[to_play] = ! m_moves[to_play]->empty()))
             break;
         if (m_nu_passes + 1 == m_nu_colors)
