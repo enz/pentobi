@@ -324,7 +324,7 @@ public:
     /** Run a search.
         @param[out] mv
         @param max_count Number of simulations to run. The search might return
-        earlier, if the best move cannot change anymore, or if the count of the
+        earlier if the best move cannot change anymore or if the count of the
         root node was initialized from an init tree
         @param min_simulations
         @param max_time Maximum search time. Only used if max_count is zero
@@ -333,14 +333,12 @@ public:
         subtree to reuse was aborted due to max_time or util::get_abort(). If
         true, this will call a search with the partially extracted subtree,
         and the search will return immediately (because it also checks max_time
-        and get_abort(). This flag should be true for regular searches, because
+        and get_abort()). This flag should be true for regular searches because
         even a partially extracted subtree can be used for move generation, and
-        false for pondering searches, because here we don't need a search
-        result, but want to keep the full tree for reuse in a future
-        searches.
-        @return @c false, if no move could be generated. This can happen if the
-        root node was not expanded, because the position is a terminal
-        position or because the search was immediately aborted. */
+        false for pondering searches because here we don't need a search
+        result but want to keep the full tree for reuse in a future search.
+        @return @c false if no move could be generated because the position is
+        a terminal position. */
     bool search(Move& mv, Float max_count, Float min_simulations,
                 double max_time, TimeSource& time_source,
                 bool always_search = true);
