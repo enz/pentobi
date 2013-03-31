@@ -224,6 +224,25 @@ public:
     /** @name Parameters */
     // @{
 
+    /** Interval in which the bias term is used at high parent counts.
+        Takes advantage of the fact that the bias term changes slowly with
+        high parent counts and often the child with the highest value
+        would be selected, so the bias terms of the children do not have to be
+        used always, which speeds up child selection.
+        The default value is 1, which means that the bias term is always
+        used.
+        @see set_skip_bias_term_min_count. */
+    void set_bias_term_interval(unsigned n);
+
+    /** See set_bias_term_interval(). */
+    unsigned get_bias_term_interval() const;
+
+    /** See set_bias_term_interval(). */
+    void set_skip_bias_term_min_count(Float n);
+
+    /** See set_bias_term_interval(). */
+    Float get_skip_bias_term_min_count() const;
+
     /** Minimum count of a node to be expanded. */
     void set_expand_threshold(Float n);
 
@@ -406,6 +425,8 @@ private:
 
         unique_ptr<State> state;
 
+        vector<unsigned> skip_bias_term_counter;
+
         /** Was the search in this thread terminated because the search tree
             was full? */
         bool is_out_of_mem;
@@ -422,13 +443,13 @@ private:
         /** Local variable for update_rave_values().
             Stores if a move was played for each player.
             Reused for efficiency. */
-        array<BitMarker<Move>,max_players> was_played;
+        array<BitMarker<Move>, max_players> was_played;
 
         /** Local variable for update_rave_values().
             Stores the first time a move was played for each player.
             Elements are only defined if was_played is true.
             Reused for efficiency. */
-        array<array<unsigned,Move::range>,max_players> first_play;
+        array<array<unsigned, Move::range>, max_players> first_play;
     };
 
     /** Thread in the parallel search.
@@ -481,6 +502,12 @@ private:
     };
 
     unsigned m_nu_threads;
+
+    /** See set_bias_term_interval(). */
+    unsigned m_bias_term_interval;
+
+    /** See set_bias_term_min_count(). */
+    Float m_skip_bias_term_min_count;
 
     Float m_expand_threshold;
 
@@ -583,6 +610,9 @@ private:
 
     bool check_move_cannot_change(Float count, Float remaining) const;
 
+    bool check_skip_bias_term(ThreadState& thread_state, Float node_count,
+                              unsigned depth) const;
+
     bool expand_node(unsigned thread_id, const Node& node,
                      const Node*& best_child, Float init_val);
 
@@ -599,7 +629,8 @@ private:
 
     void search_loop(ThreadState& thread_state);
 
-    const Node* select_child(const Node& node);
+    const Node* select_child(ThreadState& thread_state, const Node& node,
+                             unsigned depth);
 
     void update_last_good_reply(ThreadState& thread_state);
 
@@ -709,6 +740,8 @@ void Search<S, M, R>::AssertionHandler::run()
 template<class S, class M, class R>
 Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
+      m_bias_term_interval(1),
+      m_skip_bias_term_min_count(numeric_limits<Float>::max()),
       m_expand_threshold(0),
       m_expand_threshold_incr(0),
       m_deterministic(false),
@@ -846,6 +879,29 @@ bool Search<S, M, R>::check_move_cannot_change(Float count,
 }
 
 template<class S, class M, class R>
+inline bool Search<S, M, R>::check_skip_bias_term(ThreadState& thread_state,
+                                                  Float node_count,
+                                                  unsigned depth) const
+{
+    if (node_count <= m_skip_bias_term_min_count)
+        return false;
+    // A different counter is used for each depth for checking whether to skip
+    // the bias term. A global counter could systemtically skip nodes at a
+    // certain depth. Theoretically, there could also be a systematic effect
+    // within nodes at the same depth but that is not an issue in practice.
+    if (thread_state.skip_bias_term_counter.size() < depth + 1)
+        thread_state.skip_bias_term_counter.resize(depth + 1, 0);
+    auto& counter = thread_state.skip_bias_term_counter[depth];
+    if (counter > 0)
+    {
+        --counter;
+        return true;
+    }
+    counter = m_bias_term_interval;
+    return false;
+}
+
+template<class S, class M, class R>
 void Search<S, M, R>::create_threads()
 {
     log() << "Creating " << m_nu_threads << " threads\n";
@@ -902,6 +958,12 @@ template<class S, class M, class R>
 inline auto Search<S, M, R>::get_bias_term_constant() const -> Float
 {
     return m_bias_term.get_bias_term_constant();
+}
+
+template<class S, class M, class R>
+inline unsigned Search<S, M, R>::get_bias_term_interval() const
+{
+    return m_bias_term_interval;
 }
 
 template<class S, class M, class R>
@@ -987,6 +1049,12 @@ template<class S, class M, class R>
 inline bool Search<S, M, R>::get_reuse_tree() const
 {
     return m_reuse_tree;
+}
+
+template<class S, class M, class R>
+inline auto Search<S, M, R>::get_skip_bias_term_min_count() const -> Float
+{
+    return m_skip_bias_term_min_count;
 }
 
 template<class S, class M, class R>
@@ -1086,12 +1154,14 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
     thread_state.simulation.nodes.push_back(node);
     is_terminal = false;
     Float expand_threshold = m_expand_threshold;
+    unsigned depth = 0;
     while (node->has_children())
     {
-        node = select_child(*node);
+        node = select_child(thread_state, *node, depth);
         m_tree.inc_visit_count(*node);
         thread_state.simulation.nodes.push_back(node);
         state.play_in_tree(node->get_move());
+        ++depth;
         expand_threshold += m_expand_threshold_incr;
     }
     state.finish_in_tree();
@@ -1236,7 +1306,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
         for (PlayerInt i = 0; i < m_nu_players; ++i)
             if (m_root_val[i].get_count() > 0)
                 m_init_val[i] = m_root_val[i];
-    if (((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same)))
+    if ((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
         if (m_followup_sequence.empty())
@@ -1298,6 +1368,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
     {
         auto& thread_state = m_threads[i]->thread_state;
         thread_state.nu_simulations = 0;
+        thread_state.skip_bias_term_counter.clear();
         thread_state.stat_len.clear();
         thread_state.stat_in_tree_len.clear();
         thread_state.state->start_search();
@@ -1377,8 +1448,8 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
     while (true)
     {
         thread_state.is_out_of_mem = false;
-        Float root_count = m_tree.get_root().get_visit_count();
-        size_t nu_simulations = m_nu_simulations.fetch_add(1);
+        auto root_count = m_tree.get_root().get_visit_count();
+        auto nu_simulations = m_nu_simulations.fetch_add(1);
         if (root_count > 0 && nu_simulations > m_min_simulations
             && (check_abort(thread_state) || expensive_abort_checker()))
         {
@@ -1413,7 +1484,9 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-auto Search<S, M, R>::select_child(const Node& node) -> const Node*
+auto Search<S, M, R>::select_child(ThreadState& thread_state,
+                                   const Node& node,
+                                   unsigned depth) -> const Node*
 {
     auto node_count = node.get_visit_count();
     if (log_move_selection)
@@ -1422,25 +1495,44 @@ auto Search<S, M, R>::select_child(const Node& node) -> const Node*
               << "v=" << node.get_value() << '\n';
     const Node* best_child = nullptr;
     Float best_value = -numeric_limits<Float>::max();
-    m_bias_term.start_iteration(node_count);
     ChildIterator i(m_tree, node);
     LIBBOARDGAME_ASSERT(i);
-    do
+    if (check_skip_bias_term(thread_state, node_count, depth))
     {
-        auto child_count = i->get_visit_count();
-        auto bias = m_bias_term.get(child_count);
-        Float value = i->get_value() + bias;
-        if (log_move_selection)
-            log() << get_move_string(i->get_move())
-                  << " | vc=" << child_count << " v=" << i->get_value()
-                  << " e=" << bias << " | " << value << '\n';
-        if (value > best_value)
+        do
         {
-            best_value = value;
-            best_child = &(*i);
+            Float value = i->get_value();
+            if (log_move_selection)
+                log() << get_move_string(i->get_move())
+                      << " | " << value << "\n";
+            if (value > best_value)
+            {
+                best_value = value;
+                best_child = &(*i);
+            }
         }
+        while (++i);
     }
-    while (++i);
+    else
+    {
+        m_bias_term.start_iteration(node_count);
+        do
+        {
+            auto child_count = i->get_visit_count();
+            auto bias = m_bias_term.get(child_count);
+            Float value = i->get_value() + bias;
+            if (log_move_selection)
+                log() << get_move_string(i->get_move())
+                      << " | vc=" << child_count << " v=" << i->get_value()
+                      << " e=" << bias << " | " << value << "\n";
+            if (value > best_value)
+            {
+                best_value = value;
+                best_child = &(*i);
+            }
+        }
+        while (++i);
+    }
     if (log_move_selection)
         log() << "Selected: " << get_move_string(best_child->get_move())
               << '\n';
@@ -1491,6 +1583,12 @@ template<class S, class M, class R>
 void Search<S, M, R>::set_bias_term_constant(Float c)
 {
     m_bias_term.set_bias_term_constant(c);
+}
+
+template<class S, class M, class R>
+void Search<S, M, R>::set_bias_term_interval(unsigned n)
+{
+    m_bias_term_interval = n;
 }
 
 template<class S, class M, class R>
@@ -1563,6 +1661,12 @@ template<class S, class M, class R>
 void Search<S, M, R>::set_reuse_tree(bool enable)
 {
     m_reuse_tree = enable;
+}
+
+template<class S, class M, class R>
+void Search<S, M, R>::set_skip_bias_term_min_count(Float n)
+{
+    m_skip_bias_term_min_count = n;
 }
 
 template<class S, class M, class R>

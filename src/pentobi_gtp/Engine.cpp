@@ -120,6 +120,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
             << "auto_param " << s.get_auto_param() << '\n'
             << "bias_term_constant " << s.get_bias_term_constant() << '\n'
+            << "bias_term_interval " << s.get_bias_term_interval() << '\n'
             << "detect_symmetry " << s.get_detect_symmetry() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
@@ -130,6 +131,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "rave_weight " << s.get_rave_weight() << '\n'
             << "reuse_subtree " << s.get_reuse_subtree() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
+            << "skip_bias_term_min_count " << s.get_skip_bias_term_min_count()
+            << '\n'
             << "use_book " << p.get_use_book() << '\n';
     else
     {
@@ -141,6 +144,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_auto_param(args.get<bool>(1));
         else if (name == "bias_term_constant")
             s.set_bias_term_constant(args.get<Float>(1));
+        else if (name == "bias_term_interval")
+            s.set_bias_term_interval(args.get<unsigned>(1));
         else if (name == "detect_symmetry")
             s.set_detect_symmetry(args.get<bool>(1));
         else if (name == "expand_threshold")
@@ -161,6 +166,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_reuse_subtree(args.get<bool>(1));
         else if (name == "score_modification")
             s.set_score_modification(args.get<Float>(1));
+        else if (name == "skip_bias_term_min_count")
+            s.set_skip_bias_term_min_count(args.get<Float>(1));
         else if (name == "use_book")
             p.set_use_book(args.get<bool>(1));
         else
