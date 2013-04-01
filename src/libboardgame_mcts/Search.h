@@ -149,8 +149,6 @@ public:
 
     typedef array<StatisticsDirtyLockFree<Float>, max_players> RootStat;
 
-    static const bool log_move_selection = false;
-
     /** Constructor.
         @param nu_threads
         @param memory The memory to be used for (all) the search trees. If
@@ -1487,10 +1485,6 @@ auto Search<S, M, R>::select_child(ThreadState& thread_state,
                                    unsigned depth) -> const Node*
 {
     auto node_count = node.get_visit_count();
-    if (log_move_selection)
-        log() << "Search::select_child:\n"
-              << "vc=" << node_count << '\n'
-              << "v=" << node.get_value() << '\n';
     const Node* best_child = nullptr;
     Float best_value = -numeric_limits<Float>::max();
     ChildIterator i(m_tree, node);
@@ -1499,10 +1493,7 @@ auto Search<S, M, R>::select_child(ThreadState& thread_state,
     {
         do
         {
-            Float value = i->get_value();
-            if (log_move_selection)
-                log() << get_move_string(i->get_move())
-                      << " | " << value << "\n";
+            auto value = i->get_value();
             if (value > best_value)
             {
                 best_value = value;
@@ -1514,26 +1505,23 @@ auto Search<S, M, R>::select_child(ThreadState& thread_state,
     else
     {
         m_bias_term.start_iteration(node_count);
+        auto bias_upper_limit = m_bias_term.get(0);
+        Float limit = best_value - bias_upper_limit;
         do
         {
-            auto child_count = i->get_visit_count();
-            auto bias = m_bias_term.get(child_count);
-            Float value = i->get_value() + bias;
-            if (log_move_selection)
-                log() << get_move_string(i->get_move())
-                      << " | vc=" << child_count << " v=" << i->get_value()
-                      << " e=" << bias << " | " << value << "\n";
+            auto value = i->get_value();
+            if (value < limit)
+                continue;
+            value += m_bias_term.get(i->get_visit_count());
             if (value > best_value)
             {
                 best_value = value;
                 best_child = &(*i);
+                limit = best_value - bias_upper_limit;
             }
         }
         while (++i);
     }
-    if (log_move_selection)
-        log() << "Selected: " << get_move_string(best_child->get_move())
-              << '\n';
     return best_child;
 }
 
