@@ -3,6 +3,8 @@ Current development version
 
 * Slightly increased playing strength at higher levels (mainly in game
   variant Duo)
+* The default settings in game variants with more than two players are now
+  that the human plays the first color and the computer all other colors
 
 
 Version 6.0 (4 Mar 2013)
