@@ -162,27 +162,26 @@ void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
 string Util::convertSgfValueFromQString(const QString& value,
                                         const string& charset)
 {
+    // Is there a way in Qt to support arbitrary Ascii-compatible text
+    // encodings? Currently, we only support UTF8 (used by Pentobi) and
+    // treat everything else as ISO-8859-1/Latin1 (the default for SGF)
+    // even if the charset property specifies some other encoding.
     QString charsetToLower = QString(charset.c_str()).trimmed().toLower();
     if (charsetToLower == "utf-8" || charsetToLower == "utf8")
         return value.toUtf8().constData();
-    else if (charsetToLower == "iso-8859-1" || charsetToLower == "latin1"
-             || charsetToLower.isEmpty())
-        return value.toLatin1().constData();
     else
-        return value.toAscii().constData();
+        return value.toLatin1().constData();
 }
 
 QString Util::convertSgfValueToQString(const string& value,
                                        const string& charset)
 {
+    // See comment in convertSgfValueFromQString() about supported encodings
     QString charsetToLower = QString(charset.c_str()).trimmed().toLower();
     if (charsetToLower == "utf-8" || charsetToLower == "utf8")
         return QString::fromUtf8(value.c_str());
-    else if (charsetToLower == "iso-8859-1" || charsetToLower == "latin1"
-             || charsetToLower.isEmpty())
-        return QString::fromLatin1(value.c_str());
     else
-        return QString::fromAscii(value.c_str());
+        return QString::fromLatin1(value.c_str());
 }
 
 QColor Util::getLabelColor(Variant variant, PointState s)
