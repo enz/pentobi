@@ -13,6 +13,7 @@ option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
 option(PENTOBI_BUILD_KDE_THUMBNAILER
   "Build thumbnailer for KDE (also requires PENTOBI_BUILD_GUI)" OFF)
 option(USE_BOOST_THREAD "Use Boost.Thread instead of std::thread" OFF)
+option(USE_QT5 "Use Qt 5 instead of Qt 4" OFF)
 
 if(NOT CMAKE_BUILD_TYPE)
   message(STATUS "No build type selected, default to Release")
@@ -109,7 +110,13 @@ if(PENTOBI_BUILD_TESTS)
 endif()
 
 if(PENTOBI_BUILD_GUI)
-  find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+  if (USE_QT5)
+    find_package(Qt5Widgets REQUIRED)
+    find_package(Qt5Concurrent REQUIRED)
+    find_package(Qt5LinguistTools REQUIRED)
+  else()
+    find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+  endif()
 endif()
 
 add_custom_target(dist

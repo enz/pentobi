@@ -1,6 +1,8 @@
 set(CMAKE_AUTOMOC TRUE)
 
-include(${QT_USE_FILE})
+if (NOT USE_QT5)
+  include(${QT_USE_FILE})
+endif()
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/src
@@ -36,9 +38,13 @@ set(pentobi_TS
 
 link_directories(${Boost_LIBRARY_DIRS})
 
-qt4_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
-
-qt4_add_translation(pentobi_QM_SRCS ${pentobi_TS})
+if (USE_QT5)
+  qt5_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
+  qt5_add_translation(pentobi_QM_SRCS ${pentobi_TS})
+else()
+  qt4_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
+  qt4_add_translation(pentobi_QM_SRCS ${pentobi_TS})
+endif()
 
 if (MINGW)
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
@@ -56,6 +62,10 @@ add_executable(pentobi WIN32
   ${pentobi_QM_SRCS}
   ${pentobi_RC_SRCS}
   )
+
+if (USE_QT5)
+  qt5_use_modules(pentobi Widgets Concurrent)
+endif()
 
 target_link_libraries(pentobi
   pentobi_gui

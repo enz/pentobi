@@ -1,6 +1,8 @@
 Current development version
 ===========================
 
+* New CMake option -DUSE_QT5 to compile Pentobi with version 5 of the Qt
+  libraries (see INSTALL for details)
 * Slightly increased playing strength at higher levels (mainly in game
   variant Duo)
 * The default settings in game variants with more than two players are now

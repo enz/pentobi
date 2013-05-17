@@ -1,4 +1,6 @@
-include(${QT_USE_FILE})
+if (NOT USE_QT5)
+  include(${QT_USE_FILE})
+endif()
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/src
@@ -12,6 +14,10 @@ set(pentobi_thumbnailer_SRCS
   )
 
 add_executable(pentobi-thumbnailer ${pentobi_thumbnailer_SRCS})
+
+if (USE_QT5)
+  qt5_use_modules(pentobi-thumbnailer Widgets)
+endif()
 
 target_link_libraries(pentobi-thumbnailer
   pentobi_thumbnail

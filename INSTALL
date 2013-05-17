@@ -1,6 +1,5 @@
 This file explains how to compile and install Pentobi from the sources.
 
-
 == Requirements ==
 
 Pentobi requires the Qt libraries (>= 4.8). The C++ compiler needs to support
@@ -13,28 +12,36 @@ its package repository. The packages can be installed with the shell command:
 
   sudo apt-get install cmake g++ libqt4-dev make
 
-
 == Building ==
 
-Pentobi can be compiled with CMake using the shell commands:
+Pentobi can be compiled with cmake using the shell command:
 
-  cmake .
-  make
+  cmake . && make
+
+=== Building with Qt 5 ===
+
+To build Pentobi with Qt 5 instead of Qt 4, which is the default since
+Ubuntu 13.04, use the cmake option -DUSE_QT5=ON and make sure that the
+development packages for Qt 5 are installed (on Ubuntu 13.04: qttools5-dev,
+qttools5-dev-tools).
+
+=== Building with Boost.Thread ===
 
 Because of a non-functional C++11 threads implementation on MinGW GCC 4.7
 (and potentially other platforms), it is still possible to compile Pentobi
-using Boost.Thread instead of C++11 threads by using the CMake option
+using Boost.Thread instead of C++11 threads by using the cmake option
 -DUSE_BOOST_THREAD=ON. In this case, the Boost libraries (>= 1.49) need to
 be installed.
 
-A thumbnailer plugin for KDE can be built by using the CMake option
+=== Building the KDE thumbnailer plugin ===
+
+A thumbnailer plugin for KDE can be built by using the cmake option
 -DPENTOBI_BUILD_KDE_THUMBNAILER=ON. In this case, the KDE development files
 need to be installed (package kdelibs5-dev on Ubuntu 12.10). Note that on
 Ubuntu 12.10, the plugin will not be found if the default installation prefix
 /usr/local is used. You need to add KDEDIRS=/usr/local to /etc/environment.
 After that, you can enable previews for Blokus game file in the Dolphin file
 manager in "Configure Dolphin/General/Previews".
-
 
 == Installing ==
 

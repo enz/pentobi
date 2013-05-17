@@ -84,7 +84,11 @@ void RatedGamesList::updateContent(Variant variant,
     auto header = horizontalHeader();
     header->setDefaultAlignment(Qt::AlignLeft);
     header->setHighlightSections(false);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    header->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
     header->setResizeMode(QHeaderView::ResizeToContents);
+#endif
     header->setStretchLastSection(true);
     int nuRows = history.getGameInfos().size();
     m_model->setRowCount(nuRows);

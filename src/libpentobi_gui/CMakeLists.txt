@@ -1,6 +1,8 @@
 set(CMAKE_AUTOMOC TRUE)
 
-include(${QT_USE_FILE})
+if (NOT USE_QT5)
+  include(${QT_USE_FILE})
+endif()
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/src
@@ -34,15 +36,23 @@ set(pentobi_gui_TS
   libpentobi_gui_en_GB.ts
   )
 
-qt4_add_resources(pentobi_gui_RC_SRCS ${pentobi_gui_RCS})
-
-qt4_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
+if (USE_QT5)
+  qt5_add_resources(pentobi_gui_RC_SRCS ${pentobi_gui_RCS})
+  qt5_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
+else()
+  qt4_add_resources(pentobi_gui_RC_SRCS ${pentobi_gui_RCS})
+  qt4_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
+endif()
 
 add_library(pentobi_gui STATIC
   ${pentobi_gui_STAT_SRCS}
   ${pentobi_gui_MOC_SRCS}
   ${pentobi_gui_RC_SRCS}
   ${pentobi_gui_QM_SRCS})
+
+if (USE_QT5)
+  qt5_use_modules(pentobi_gui Widgets)
+endif()
 
 # Install translation files. If you change the destination, you need to
 # update the default for PENTOBI_TRANSLATIONS in the main CMakeLists.txt
