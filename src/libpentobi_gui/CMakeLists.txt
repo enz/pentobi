@@ -1,3 +1,5 @@
+set(CMAKE_AUTOMOC TRUE)
+
 include(${QT_USE_FILE})
 
 include_directories(
@@ -22,20 +24,6 @@ set(pentobi_gui_STAT_SRCS
   Util.cpp
   )
 
-set(pentobi_gui_MOC_HDRS
-  ComputerColorDialog.h
-  GameInfoDialog.h
-  GuiBoard.h
-  HelpWindow.h
-  InitialRatingDialog.h
-  LeaveFullscreenButton.h
-  LineEdit.h
-  OrientationDisplay.h
-  PieceSelector.h
-  SameHeightLayout.h
-  ScoreDisplay.h
-  )
-
 set(pentobi_gui_RCS
   libpentobi_gui_resources.qrc
   )
@@ -49,8 +37,6 @@ set(pentobi_gui_TS
 qt4_add_resources(pentobi_gui_RC_SRCS ${pentobi_gui_RCS})
 
 qt4_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
-
-qt4_wrap_cpp(pentobi_gui_MOC_SRCS ${pentobi_gui_MOC_HDRS})
 
 add_library(pentobi_gui STATIC
   ${pentobi_gui_STAT_SRCS}

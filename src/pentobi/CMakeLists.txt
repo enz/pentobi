@@ -1,3 +1,4 @@
+set(CMAKE_AUTOMOC TRUE)
 
 include(${QT_USE_FILE})
 
@@ -22,17 +23,6 @@ set(pentobi_SRCS
   Util.cpp
   )
 
-set(pentobi_MOC_HDRS
-  AnalyzeGameWidget.h
-  AnalyzeGameWindow.h
-  AnalyzeSpeedDialog.h
-  Application.h
-  MainWindow.h
-  RatedGamesList.h
-  RatingDialog.h
-  RatingGraph.h
-  )
-  
 set(pentobi_RCS
   resources.qrc
   )
@@ -49,8 +39,6 @@ link_directories(${Boost_LIBRARY_DIRS})
 qt4_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
 
 qt4_add_translation(pentobi_QM_SRCS ${pentobi_TS})
-
-qt4_wrap_cpp(pentobi_MOC_SRCS ${pentobi_MOC_HDRS})
 
 if (MINGW)
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
