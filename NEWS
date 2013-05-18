@@ -1,8 +1,6 @@
 Current development version
 ===========================
 
-* Fixed the broken estimated time left display during computer move
-  generation that occurred with GCC 4.7.3-1ubuntu1 on Ubuntu 13.04
 * Support for compilation with version 5 of the Qt libraries (see INSTALL
   for details)
 * Slightly increased playing strength at higher levels (mainly in game
