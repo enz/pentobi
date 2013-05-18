@@ -12,6 +12,11 @@ its package repository. The packages can be installed with the shell command:
 
   sudo apt-get install cmake g++ libqt4-dev make
 
+On Ubuntu 13.04, you also need to set the default Qt version to Qt 4 with
+the command:
+
+  sudo apt-get install qt4-default
+
 == Building ==
 
 Pentobi can be compiled with cmake using the shell command:
@@ -24,6 +29,8 @@ To build Pentobi with Qt 5 instead of Qt 4, which is the default since
 Ubuntu 13.04, use the cmake option -DUSE_QT5=ON and make sure that the
 development packages for Qt 5 are installed (on Ubuntu 13.04: qttools5-dev,
 qttools5-dev-tools).
+
+The KDE thumbnailer plugin (see below) can not be compiled with Qt 5.
 
 === Building with Boost.Thread ===
 
