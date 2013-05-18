@@ -25,12 +25,11 @@ Pentobi can be compiled with cmake using the shell command:
 
 === Building with Qt 5 ===
 
-To build Pentobi with Qt 5 instead of Qt 4, which is the default since
-Ubuntu 13.04, use the cmake option -DUSE_QT5=ON and make sure that the
-development packages for Qt 5 are installed (on Ubuntu 13.04: qttools5-dev,
-qttools5-dev-tools).
+To build Pentobi with Qt 5 instead of Qt 4, use the cmake option
+-DUSE_QT5=ON and make sure that the development packages for Qt 5 are
+installed (on Ubuntu 13.04: qttools5-dev, qttools5-dev-tools).
 
-The KDE thumbnailer plugin (see below) can not be compiled with Qt 5.
+The KDE thumbnailer plugin (see below) cannot be compiled with Qt 5.
 
 === Building with Boost.Thread ===
 
