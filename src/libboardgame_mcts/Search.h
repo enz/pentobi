@@ -1198,8 +1198,8 @@ void Search<S, M, R>::write_info(ostream& out) const
         out << setprecision(1) << ", Chld: "
             << (100 * child->get_visit_count() / root.get_visit_count())
             << '%';
-    out << ", Nds: " << m_tree.get_nu_nodes()
-        << "\nTm: " << time_to_string(m_last_time)
+    out << "\nNds: " << m_tree.get_nu_nodes()
+        << ", Tm: " << time_to_string(m_last_time)
         << setprecision(0) << ", Sim/s: "
         << (double(m_nu_simulations) / m_last_time)
         << ", Len: " << thread_state.stat_len.to_string(true, 1, true)
