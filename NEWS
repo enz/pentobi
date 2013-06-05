@@ -8,9 +8,8 @@ Current development version
 * The default settings in game variants with more than two players are now
   that the human plays the first color and the computer all other colors
 * Fixed a crash that could occur if the window was put in fullscreen mode
-  by a generic method of the window manager (e.g. the title bar menu on
-  KDE) and then fullscreen mode was left by a different method (e.g. by
-  pressing Escape).
+  by a method of the window manager (e.g. title bar menu on KDE) and then
+  returned to normal mode by a different method (e.g. pressing Escape)
 
 
 Version 6.0 (4 Mar 2013)
