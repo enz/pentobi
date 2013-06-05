@@ -2285,7 +2285,11 @@ void MainWindow::leaveFullscreen()
     auto showToolbar = settings.value("toolbar", true).toBool();
     menuBar()->show();
     m_toolBar->setVisible(showToolbar);
-    m_leaveFullscreenButton->hideButton();
+    // m_leaveFullscreenButton can be null if the window was put in fullscreen
+    // mode by a "generic" method by the window manager (e.g. the title bar
+    // menu on KDE) and not by MainWindow::fullscreen()
+    if (m_leaveFullscreenButton != nullptr)
+        m_leaveFullscreenButton->hideButton();
     showNormal();
 }
 
