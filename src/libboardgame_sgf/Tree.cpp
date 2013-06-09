@@ -73,10 +73,10 @@ string Tree::get_comment(const Node& node) const
 
 string Tree::get_date_today()
 {
-   time_t t = time(nullptr);
-   auto tmp = localtime(&t);
-   if (tmp == nullptr)
-       return "?";
+    time_t t = time(nullptr);
+    auto tmp = localtime(&t);
+    if (tmp == nullptr)
+        return "?";
     char date[128];
     strftime(date, sizeof(date), "%Y-%m-%d", tmp);
     return date;
