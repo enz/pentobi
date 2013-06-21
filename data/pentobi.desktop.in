@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=Pentobi
+GenericName=Computer opponent for Blokus
+GenericName[de]=Computer-Gegner für Blokus
 Comment=Computer opponent for the board game Blokus
 Comment[de]=Computer-Gegner für das Brettspiel Blokus
 Exec=@CMAKE_INSTALL_FULL_BINDIR@/pentobi %f
