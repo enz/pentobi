@@ -800,8 +800,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="375"/>
-        <source>Pentobi is a computer program that plays the board game Blokus.</source>
-        <translation>Pentobi ist ein Computerprogramm, welches das Brettspiel Blokus spielt.</translation>
+        <source>Pentobi is a computer opponent for the board game Blokus.</source>
+        <translation>Pentobi ist ein Computer-Gegner für das Brettspiel Blokus.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="538"/>

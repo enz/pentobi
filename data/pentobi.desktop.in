@@ -1,9 +1,7 @@
 [Desktop Entry]
 Name=Pentobi
-GenericName=Blokus Board Game
-GenericName[de]=Blokus-Brettspiel
-Comment=Play the board game Blokus
-Comment[de]=Das Brettspiel Blokus spielen
+Comment=Computer opponent for the board game Blokus
+Comment[de]=Computer-Gegner für das Brettspiel Blokus
 Exec=@CMAKE_INSTALL_FULL_BINDIR@/pentobi %f
 Icon=pentobi
 Type=Application

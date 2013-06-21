@@ -314,8 +314,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="375"/>
-        <source>Pentobi is a computer program that plays the board game Blokus.</source>
-        <translation>Pentobi is a computer program that plays the board game Blokus.</translation>
+        <source>Pentobi is a computer opponent for the board game Blokus.</source>
+        <translation>Pentobi is a computer opponent for the board game Blokus.</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="863"/>

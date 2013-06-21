@@ -1,7 +1,7 @@
 .TH PENTOBI 6 "2012-12-02" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 
 .SH NAME
-pentobi \- computer program that plays the board game Blokus
+pentobi \- computer opponent for the board game Blokus
 
 .SH SYNOPSIS
 .B pentobi

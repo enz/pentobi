@@ -377,7 +377,7 @@ void MainWindow::about()
                        "<h2>" + tr("Pentobi") + "</h2>"
                        "<p>" + tr("Version %1").arg(getVersion()) + "</p>"
                        "<p>" +
-                       tr("Pentobi is a computer program that plays the board game Blokus.")
+                       tr("Pentobi is a computer opponent for the board game Blokus.")
                        + "</p><p>" +
                        tr("Copyright &copy; 2011&ndash;2013 Markus Enzenberger") +
                        + "<br>" +
