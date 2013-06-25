@@ -1,5 +1,5 @@
-Current development version
-===========================
+Version 7.0 (25 Jun 2013)
+=========================
 
 * Support for compilation with version 5 of the Qt libraries (see INSTALL
   for details)
