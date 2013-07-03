@@ -175,11 +175,6 @@ int main(int argc, char** argv)
         log() << "Error: " << e.what() << '\n';
         return 1;
     }
-    catch (const char* s)
-    {
-        log() << "Error: " << s << '\n';
-        return 1;
-    }
     catch (...)
     {
         log("Error: unknown exception");
