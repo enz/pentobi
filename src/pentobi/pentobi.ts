@@ -4,7 +4,7 @@
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="3493"/>
+        <location filename="MainWindow.cpp" line="3502"/>
         <source>%n move(s)</source>
         <translation>
             <numerusform>%n move</numerusform>
