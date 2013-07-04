@@ -16,8 +16,8 @@ interface and computer opponent to play the board game Blokus.
 
 The command can take the name of a game file to open at startup as an optional
 argument.
-The game file is expected to be in Blokus SGF format as documented in
-doc/blksgf/Blokus-SGF.html in the Pentobi source package.
+The game file is expected to be in Pentobi's SGF format as documented in
+doc/blksgf/Pentobi-SGF.html in the Pentobi source package.
 
 .SH OPTIONS
 .TP
