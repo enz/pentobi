@@ -8,12 +8,14 @@
 #include <vector>
 #include <QString>
 #include "libboardgame_base/Rating.h"
+#include "libboardgame_util/RandomGenerator.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Tree.h"
 #include "libpentobi_base/Variant.h"
 
 using namespace std;
 using libboardgame_base::Rating;
+using libboardgame_util::RandomGenerator;
 using libpentobi_base::Color;
 using libpentobi_base::Tree;
 using libpentobi_base::Variant;
@@ -86,6 +88,8 @@ public:
     void clear();
 
 private:
+    RandomGenerator m_random;
+
     Variant m_variant;
 
     Rating m_rating;

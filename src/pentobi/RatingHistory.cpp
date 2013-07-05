@@ -100,7 +100,7 @@ QString RatingHistory::getFile(unsigned n) const
 void RatingHistory::getNextRatedGameSettings(int maxLevel, int& level,
                                              Color& userColor)
 {
-    userColor = Color(m_nuGames % get_nu_players(m_variant));
+    userColor = Color(m_random.generate() % get_nu_players(m_variant));
     float minDiff = 0; // Initialize to avoid compiler warning
     for (int i = 1; i <= maxLevel; ++i)
     {
