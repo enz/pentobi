@@ -3685,6 +3685,8 @@ void MainWindow::veryGoodMove(bool checked)
 
 void MainWindow::wheelEvent(QWheelEvent* event)
 {
+    if (m_isGenMoveRunning)
+        return;
     int delta = event->delta() / 8 / 15;
     if (delta > 0)
     {
