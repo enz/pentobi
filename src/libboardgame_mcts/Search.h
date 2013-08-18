@@ -436,12 +436,12 @@ private:
 
         StatisticsExt<> stat_in_tree_len;
 
-        /** Local variable for update_rave_values().
+        /** Local variable for update_rave().
             Stores if a move was played for each player.
             Reused for efficiency. */
         array<BitMarker<Move>, max_players> was_played;
 
-        /** Local variable for update_rave_values().
+        /** Local variable for update_rave().
             Stores the first time a move was played for each player.
             Elements are only defined if was_played is true.
             Reused for efficiency. */
@@ -630,7 +630,7 @@ private:
 
     void update_last_good_reply(ThreadState& thread_state);
 
-    void update_rave_values(ThreadState& thread_state);
+    void update_rave(ThreadState& thread_state);
 
     void update_values(ThreadState& thread_state);
 };
@@ -1115,8 +1115,8 @@ void Search<S, M, R>::playout(ThreadState& thread_state)
     state.start_playout();
     while (true)
     {
-        Move last_good_reply_1 = Move::null();
-        Move last_good_reply_2 = Move::null();
+        Move lgr1 = Move::null();
+        Move lgr2 = Move::null();
         if (SearchParamConst::use_last_good_reply)
         {
             unsigned nu_moves = state.get_nu_moves();
@@ -1127,12 +1127,10 @@ void Search<S, M, R>::playout(ThreadState& thread_state)
                 if (nu_moves > 1)
                     second_last_mv = state.get_move(nu_moves - 2).move;
                 m_last_good_reply.get(state.get_to_play(), last_mv,
-                                      second_last_mv, last_good_reply_1,
-                                      last_good_reply_2);
+                                      second_last_mv, lgr1, lgr2);
             }
         }
-        if (! state.gen_and_play_playout_move(last_good_reply_1,
-                                              last_good_reply_2))
+        if (! state.gen_and_play_playout_move(lgr1, lgr2))
             break;
     }
 }
@@ -1468,7 +1466,7 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
         thread_state.stat_len.add(double(state.get_nu_moves()));
         update_values(thread_state);
         if (SearchParamConst::rave)
-            update_rave_values(thread_state);
+            update_rave(thread_state);
         if (SearchParamConst::use_last_good_reply)
             update_last_good_reply(thread_state);
         on_search_iteration(nu_simulations, *thread_state.state,
@@ -1706,7 +1704,7 @@ void Search<S, M, R>::update_last_good_reply(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
+void Search<S, M, R>::update_rave(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
     unsigned nu_moves = state.get_nu_moves();

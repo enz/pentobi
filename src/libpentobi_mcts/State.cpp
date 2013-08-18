@@ -526,8 +526,7 @@ Point State::find_best_starting_point(Color c) const
     return best;
 }
 
-bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
-                             Move& mv)
+bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
 {
     if (m_nu_passes == m_nu_colors)
         return false;
@@ -542,20 +541,20 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     }
 
     ++m_nu_playout_moves;
-    if (last_good_reply_2.is_regular() && m_bd.is_legal(last_good_reply_2))
+    if (lgr2.is_regular() && m_bd.is_legal(lgr2))
     {
         if (log_simulations)
             log("Playing last good reply 2");
         ++m_nu_last_good_reply_moves;
-        mv = last_good_reply_2;
+        mv = lgr2;
         return true;
     }
-    if (last_good_reply_1.is_regular() && m_bd.is_legal(last_good_reply_1))
+    if (lgr1.is_regular() && m_bd.is_legal(lgr1))
     {
         if (log_simulations)
             log("Playing last good reply 1");
         ++m_nu_last_good_reply_moves;
-        mv = last_good_reply_1;
+        mv = lgr1;
         return true;
     }
 
@@ -624,11 +623,10 @@ bool State::gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
     return true;
 }
 
-bool State::gen_and_play_playout_move(Move last_good_reply_1,
-                                      Move last_good_reply_2)
+bool State::gen_and_play_playout_move(Move lgr1, Move lgr2)
 {
     Move mv;
-    if (gen_playout_move(last_good_reply_1, last_good_reply_2, mv))
+    if (gen_playout_move(lgr1, lgr2, mv))
     {
         play_playout(mv);
         return true;

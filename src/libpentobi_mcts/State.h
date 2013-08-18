@@ -153,8 +153,7 @@ public:
 
     /** Generate and play a playout move.
         @return @c false if end of game was reached, and no move was played */
-    bool gen_and_play_playout_move(Move last_good_reply_1,
-                                   Move last_good_reply_2);
+    bool gen_and_play_playout_move(Move lgr1, Move lgr2);
 
     array<Float,4> evaluate_playout();
 
@@ -300,8 +299,7 @@ private:
 
     Point find_best_starting_point(Color c) const;
 
-    bool gen_playout_move(Move last_good_reply_1, Move last_good_reply_2,
-                          Move& result);
+    bool gen_playout_move(Move lgr1, Move lgr2, Move& result);
 
     /** Equivalent to but faster than m_bd.get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
