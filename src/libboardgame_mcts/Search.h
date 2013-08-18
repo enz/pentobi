@@ -632,9 +632,6 @@ private:
 
     void update_rave_values(ThreadState& thread_state);
 
-    void update_rave_values(ThreadState& thread_state, unsigned i,
-                            PlayerInt player);
-
     void update_values(ThreadState& thread_state);
 };
 
@@ -1721,6 +1718,8 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
     unsigned i = nu_moves - 1;
     LIBBOARDGAME_ASSERT(nu_nodes > 1);
+
+    // Fill was_played and first_play with information from playout moves
     for ( ; i >= nu_nodes - 1; --i)
     {
         auto mv = state.get_move(i);
@@ -1730,22 +1729,63 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
             first_play[mv.player][mv.move.to_int()] = i;
         }
     }
+
+    // Add RAVE values to children of nodes of current simulation
     while (true)
     {
         const auto node = nodes[i];
         if (node->get_visit_count() > m_rave_max_parent_count)
             break;
         auto mv = state.get_move(i);
-        update_rave_values(thread_state, i, mv.player);
+        auto player = mv.player;
+        Float dist_weight_factor;
+        if (SearchParamConst::rave_dist_weighting)
+        {
+            auto len = state.get_nu_moves();
+            dist_weight_factor = (1 - m_rave_dist_final) / Float(len - i);
+        }
+        ChildIterator it(m_tree, *node);
+        LIBBOARDGAME_ASSERT(it);
+        do
+        {
+            auto mv = it->get_move();
+            if (! was_played[player][mv]
+                || it->get_visit_count() > m_rave_max_child_count)
+                continue;
+            auto first = first_play[player][mv.to_int()];
+            LIBBOARDGAME_ASSERT(first > i);
+            if (SearchParamConst::rave_check_same)
+            {
+                bool other_played_same = false;
+                for (PlayerInt j = 0; j < m_nu_players; ++j)
+                    if (j != player && was_played[j][mv])
+                    {
+                        auto first_other = first_play[j][mv.to_int()];
+                        if (first_other >= i && first_other <= first)
+                        {
+                            other_played_same = true;
+                            break;
+                        }
+                    }
+                if (other_played_same)
+                    continue;
+            }
+            Float weight = m_rave_weight;
+            if (SearchParamConst::rave_dist_weighting)
+                weight *= 1 - Float(first - i) * dist_weight_factor;
+            m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
+        }
+        while (++it);
         if (i == 0)
             break;
         if (! state.skip_rave(mv.move))
         {
-            was_played[mv.player].set(mv.move);
-            first_play[mv.player][mv.move.to_int()] = i;
+            was_played[player].set(mv.move);
+            first_play[player][mv.move.to_int()] = i;
         }
         --i;
     }
+
     // Reset was_played
     while (true)
     {
@@ -1755,52 +1795,6 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state)
         auto mv = state.get_move(i);
         was_played[mv.player].clear_word(mv.move);
     }
-}
-
-template<class S, class M, class R>
-void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
-                                         unsigned i, PlayerInt player)
-{
-    auto& nodes = thread_state.simulation.nodes;
-    LIBBOARDGAME_ASSERT(i < nodes.size());
-    const auto node = nodes[i];
-    const auto& state = *thread_state.state;
-    auto& was_played = thread_state.was_played;
-    auto& first_play = thread_state.first_play;
-    unsigned len = state.get_nu_moves();
-    Float dist_weight_factor = (1 - m_rave_dist_final) / Float(len - i);
-    ChildIterator it(m_tree, *node);
-    LIBBOARDGAME_ASSERT(it);
-    do
-    {
-        auto mv = it->get_move();
-        if (! was_played[player][mv]
-            || it->get_visit_count() > m_rave_max_child_count)
-            continue;
-        unsigned first = first_play[player][mv.to_int()];
-        LIBBOARDGAME_ASSERT(first > i);
-        if (SearchParamConst::rave_check_same)
-        {
-            bool other_played_same = false;
-            for (PlayerInt j = 0; j < m_nu_players; ++j)
-                if (j != player && was_played[j][mv])
-                {
-                    unsigned first_other = first_play[j][mv.to_int()];
-                    if (first_other >= i && first_other <= first)
-                    {
-                        other_played_same = true;
-                        break;
-                    }
-                }
-            if (other_played_same)
-                continue;
-        }
-        Float weight = m_rave_weight;
-        if (SearchParamConst::rave_dist_weighting)
-            weight *= 1 - Float(first - i) * dist_weight_factor;
-        m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
-    }
-    while (++it);
 }
 
 template<class S, class M, class R>
