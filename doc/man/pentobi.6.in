@@ -28,7 +28,7 @@ available on the system how much memory Pentobi will allocate (currently up
 to 768 MB).
 If the memory for the search is too low, the playing strength at higher
 playing levels will be impaired.
-This can be checked by running Pentobi with option --verbose in a game variant
+This can be checked by running Pentobi with option \-\-verbose in a game variant
 with a high number of Monte-Carlo simulations per second (e.g. Duo).
 If a message that the search tree was pruned occurs more than a few times
 during a move generation, the playing strength is likely to be affected.
