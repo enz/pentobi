@@ -4,6 +4,7 @@ GenericName=Computer Opponent for Blokus
 GenericName[de]=Computer-Gegner für Blokus
 Comment=Computer opponent for the board game Blokus
 Comment[de]=Computer-Gegner für das Brettspiel Blokus
+Keywords=Blokus;
 Exec=@CMAKE_INSTALL_FULL_BINDIR@/pentobi %f
 Icon=pentobi
 Type=Application
