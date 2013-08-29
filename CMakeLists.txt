@@ -30,18 +30,14 @@ endif()
 if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   add_definitions(-ffast-math)
 endif()
-
 if(MSVC)
-  add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
-  add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE)
-  add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+  add_definitions(-D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE
+    -D_SCL_SECURE_NO_WARNINGS)
 endif()
-
 if(MINGW)
   # -std=c++11 makes MinGW define __STRICT_ANSI__, which also hides
   # some functions that we use in some Windows-specific code, like fdopen()
-  add_definitions(-U__STRICT_ANSI__)
-  add_definitions(-DWINVER=0x0501)
+  add_definitions(-U__STRICT_ANSI__ -DWINVER=0x0501)
   set(CMAKE_EXE_LINKER_FLAGS
     "${CMAKE_EXE_LINKER_FLAGS} -Wl,--large-address-aware")
 endif()
