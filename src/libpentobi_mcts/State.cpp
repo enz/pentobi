@@ -696,22 +696,20 @@ void State::gen_children(Tree::NodeExpander& expander, Float init_val)
         // Convert the heuristic, which is so far estimated in score points,
         // into a win/loss value in [0..1] by making it relative to the
         // heuristic of the best move and let it decrease exponentially with a
-        // certain width.
-        Float heuristic = 0.6f * (m_max_heuristic - features.heuristic);
-        // Piecewise linear approximation of exp(-x) (make sure the
-        // approximation is always greater than 0 and is always monotonically
-        // decreasing)
-        if (heuristic < 0.5)
-            heuristic = 1.f - 0.9f * heuristic;
-        else if (heuristic < 2)
-            heuristic = 0.45f - 0.2f * (heuristic - 0.45f);
-        else if (heuristic < 4)
-            heuristic = 0.27f - 0.08f * (heuristic - 0.27f);
+        // certain width. We could use exp(-c*x) here, but we use (a piecewise
+        // linear approximation of) 0.1+0.9*exp(-c*x) instead to avoid that
+        // the value is too close to 0, because then it might never get
+        // explored in practice if the bias term constant is small.
+        const Float exp_width = 0.6f;
+        Float heuristic = m_max_heuristic - features.heuristic;
+        if (heuristic > 10)
+            heuristic = 0.100f;
+        else if (heuristic > 2)
+            heuristic = 0.252f - (0.015f * exp_width) * heuristic;
+        else if (heuristic > 0.5)
+            heuristic = 0.787f - (0.283f * exp_width) * heuristic;
         else
-            heuristic = 0.0248f / (heuristic - 3.0f);
-        // Rescale to [0.1..1]. If the value is too close to 0, the move might
-        // never get explored (in practice) if the bias term constant is small.
-        heuristic = 0.1f + 0.9f * heuristic;
+            heuristic = 1.000f - (0.708f * exp_width) * heuristic;
 
         // Initialize value from heuristic and init_val, each with a count
         // of 1.5
