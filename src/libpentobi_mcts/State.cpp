@@ -205,11 +205,10 @@ bool State::check_move_without_local(const Grid<bool>& is_forbidden, Move mv)
     return true;
 }
 
-void State::compute_features(bool check_connect)
+void State::compute_features(bool check_dist_to_center, bool check_connect)
 {
     auto to_play = m_bd.get_to_play();
     auto second_color = m_bd.get_second_color(to_play);
-    auto board_type = m_bc->get_board_type();
     auto& moves = *m_moves[to_play];
     auto& geometry = m_bc->get_geometry();
     auto& is_forbidden = m_bd.is_forbidden(to_play);
@@ -260,44 +259,54 @@ void State::compute_features(bool check_connect)
     m_max_heuristic = -numeric_limits<Float>::max();
     m_min_dist_to_center = numeric_limits<unsigned>::max();
     m_has_connect_move = false;
-    unsigned nu_onboard_pieces = m_bd.get_nu_onboard_pieces();
-    bool compute_dist_to_center =
-        ((board_type == BoardType::classic && nu_onboard_pieces < 13)
-         || (board_type == BoardType::trigon && nu_onboard_pieces < 5)
-         || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         auto& info = get_move_info(moves[i]);
         auto& info_ext = get_move_info_ext(moves[i]);
         auto& features = m_features[i];
-        features.heuristic = 0;
-        features.connect = false;
-        features.dist_to_center = numeric_limits<unsigned>::max();
+        Float heuristic = 0;
+        if (! check_dist_to_center)
         {
             auto j = info.begin();
             auto end = info.end();
             do
-                features.heuristic += point_value[*j];
+                heuristic += point_value[*j];
             while (++j != end);
+        }
+        else
+        {
+            features.dist_to_center = numeric_limits<unsigned>::max();
+            auto j = info.begin();
+            auto end = info.end();
+            do
+            {
+                heuristic += point_value[*j];
+                features.dist_to_center =
+                    min(features.dist_to_center, m_dist_to_center[*j]);
+            }
+            while (++j != end);
+            m_min_dist_to_center =
+                min(m_min_dist_to_center, features.dist_to_center);
         }
         auto j = info_ext.begin_attach();
         auto end = info_ext.end_attach();
         do
-            features.heuristic += attach_point_value[*j];
+            heuristic += attach_point_value[*j];
         while (++j != end);
         j = info_ext.begin_adj();
         end = info_ext.end_adj();
         if (! check_connect)
         {
             do
-                features.heuristic += adj_point_value[*j];
+                heuristic += adj_point_value[*j];
             while (++j != end);
         }
         else
         {
+            features.connect = false;
             do
             {
-                features.heuristic += adj_point_value[*j];
+                heuristic += adj_point_value[*j];
                 if (m_bd.get_point_state(*j) == second_color)
                     features.connect = true;
             }
@@ -305,16 +314,9 @@ void State::compute_features(bool check_connect)
             if (features.connect)
                 m_has_connect_move = true;
         }
-        if (compute_dist_to_center)
-        {
-            for (auto j = info.begin(); j != info.end(); ++j)
-                features.dist_to_center =
-                    min(features.dist_to_center, m_dist_to_center[*j]);
-            m_min_dist_to_center =
-                min(m_min_dist_to_center, features.dist_to_center);
-        }
-        if (features.heuristic > m_max_heuristic)
-            m_max_heuristic = features.heuristic;
+        if (heuristic > m_max_heuristic)
+            m_max_heuristic = heuristic;
+        features.heuristic = heuristic;
     }
 }
 
@@ -651,10 +653,15 @@ void State::gen_children(Tree::NodeExpander& expander, Float init_val)
             expander.add_child(mv, 0.5, 0);
         return;
     }
+    auto board_type = m_bd.get_board_type();
+    auto nu_onboard_pieces = m_bd.get_nu_onboard_pieces();
+    bool check_dist_to_center =
+        ((board_type == BoardType::classic && nu_onboard_pieces < 13)
+         || (board_type == BoardType::trigon && nu_onboard_pieces < 5)
+         || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
     bool check_connect =
-        (m_bd.get_board_type() == BoardType::classic
-         && m_bd.get_nu_onboard_pieces() < 14);
-    compute_features(check_connect);
+        (board_type == BoardType::classic && nu_onboard_pieces < 14);
+    compute_features(check_dist_to_center, check_connect);
     if (! m_has_connect_move)
         check_connect = false;
     Move symmetric_mv = Move::null();
@@ -680,8 +687,6 @@ void State::gen_children(Tree::NodeExpander& expander, Float init_val)
                     break;
                 }
     }
-    bool check_dist_to_center =
-        (m_min_dist_to_center != numeric_limits<unsigned>::max());
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const auto& features = m_features[i];
