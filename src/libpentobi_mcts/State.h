@@ -295,7 +295,7 @@ private:
     void add_starting_moves(Color c,
                             const Board::PiecesLeftList& pieces_considered);
 
-    void compute_features();
+    void compute_features(bool check_connect);
 
     Point find_best_starting_point(Color c) const;
 

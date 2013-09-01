@@ -205,7 +205,7 @@ bool State::check_move_without_local(const Grid<bool>& is_forbidden, Move mv)
     return true;
 }
 
-void State::compute_features()
+void State::compute_features(bool check_connect)
 {
     auto to_play = m_bd.get_to_play();
     auto second_color = m_bd.get_second_color(to_play);
@@ -265,9 +265,6 @@ void State::compute_features()
         ((board_type == BoardType::classic && nu_onboard_pieces < 13)
          || (board_type == BoardType::trigon && nu_onboard_pieces < 5)
          || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
-    bool check_connect =
-        (board_type == BoardType::classic
-         && m_bd.get_nu_onboard_pieces() < 14);
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         auto& info = get_move_info(moves[i]);
@@ -654,7 +651,12 @@ void State::gen_children(Tree::NodeExpander& expander, Float init_val)
             expander.add_child(mv, 0.5, 0);
         return;
     }
-    compute_features();
+    bool check_connect =
+        (m_bd.get_board_type() == BoardType::classic
+         && m_bd.get_nu_onboard_pieces() < 14);
+    compute_features(check_connect);
+    if (! m_has_connect_move)
+        check_connect = false;
     Move symmetric_mv = Move::null();
     bool has_symmetry_breaker = false;
     if (! m_is_symmetry_broken)
@@ -678,20 +680,21 @@ void State::gen_children(Tree::NodeExpander& expander, Float init_val)
                     break;
                 }
     }
+    bool check_dist_to_center =
+        (m_min_dist_to_center != numeric_limits<unsigned>::max());
     for (unsigned i = 0; i < moves.size(); ++i)
     {
-        auto mv = moves[i];
         const auto& features = m_features[i];
-        if (m_min_dist_to_center != numeric_limits<unsigned>::max()
-            && features.dist_to_center != m_min_dist_to_center)
-            // Prune early moves that don't minimize dist to center
+
+        // In variant Classic, prune early moves that don't minimize dist to
+        // center and moves that don't connect in the middle if connection is
+        // possible
+        if ((check_dist_to_center
+             && features.dist_to_center != m_min_dist_to_center)
+            || (check_connect && ! features.connect))
             continue;
-        if (m_bc->get_board_type() == BoardType::classic
-            && m_bd.get_nu_onboard_pieces() < 14 && m_has_connect_move
-            && ! features.connect)
-            // Prune moves that don't connect in the middle if connection is
-            // possible
-            continue;
+
+        auto mv = moves[i];
 
         // Convert the heuristic, which is so far estimated in score points,
         // into a win/loss value in [0..1] by making it relative to the
