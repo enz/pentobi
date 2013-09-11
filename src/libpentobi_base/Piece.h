@@ -35,8 +35,6 @@ public:
 
     explicit Piece(IntType i);
 
-    Piece& operator=(const Piece& piece);
-
     bool operator==(const Piece& piece) const;
 
     bool operator!=(const Piece& piece) const;
@@ -67,12 +65,6 @@ inline Piece::Piece(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
-}
-
-inline Piece& Piece::operator=(const Piece& piece)
-{
-    m_i = piece.m_i;
-    return *this;
 }
 
 inline bool Piece::operator==(const Piece& piece) const

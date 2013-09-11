@@ -47,8 +47,6 @@ public:
 
     explicit Move(IntType i);
 
-    Move& operator=(const Move& mv);
-
     bool operator==(const Move& mv) const;
 
     bool operator!=(const Move& mv) const;
@@ -90,12 +88,6 @@ inline Move::Move(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
-}
-
-inline Move& Move::operator=(const Move& mv)
-{
-    m_i = mv.m_i;
-    return *this;
 }
 
 inline bool Move::operator==(const Move& mv) const
