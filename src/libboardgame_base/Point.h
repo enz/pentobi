@@ -158,8 +158,6 @@ public:
 
     Point(unsigned x, unsigned y);
 
-    Point(const Point& p);
-
     explicit Point(unsigned i);
 
     explicit Point(const string& s);
@@ -361,12 +359,6 @@ inline Point<W,H,I,S,M>::Point(unsigned x, unsigned y)
 }
 
 template<unsigned W, unsigned H, typename I, class S, unsigned M>
-inline Point<W,H,I,S,M>::Point(const Point& p)
-{
-    m_i = p.m_i;
-}
-
-template<unsigned W, unsigned H, typename I, class S, unsigned M>
 inline Point<W,H,I,S,M>::Point(const string& s)
 {
     *this = from_string(s);
@@ -398,7 +390,7 @@ template<unsigned W, unsigned H, typename I, class S, unsigned M>
 Point<W,H,I,S,M> Point<W,H,I,S,M>::from_string(const string& s)
 {
     istringstream in(s);
-    Point p;
+    Point p = Point::null(); // Initialize to avoid compiler warning
     read(in, p);
     if (! in)
         throw InvalidString(s);

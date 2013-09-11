@@ -43,8 +43,6 @@ public:
 
     PointState();
 
-    PointState(const PointState& s);
-
     PointState(Color c);
 
     explicit PointState(IntType i);
@@ -103,11 +101,6 @@ inline PointState::PointState()
 #if LIBBOARDGAME_DEBUG
     m_i = value_uninitialized;
 #endif
-}
-
-inline PointState::PointState(const PointState& s)
-{
-    m_i = s.m_i;
 }
 
 inline PointState::PointState(Color c)

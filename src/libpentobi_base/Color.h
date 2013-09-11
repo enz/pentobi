@@ -53,8 +53,6 @@ public:
 
     Color();
 
-    Color(const Color& c);
-
     explicit Color(IntType i);
 
     explicit Color(const string& s);
@@ -119,11 +117,6 @@ inline Color::Color(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
-}
-
-inline Color::Color(const Color& c)
-{
-    m_i = c.m_i;
 }
 
 inline bool Color::operator==(const Color& c) const
