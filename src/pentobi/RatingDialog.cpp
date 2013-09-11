@@ -131,8 +131,8 @@ void RatingDialog::updateContent()
     }
     else
     {
-        m_labelRating->setText(QString("<b>%1").arg(rating.toInt()));
-        m_labelBestRating->setText(QString("%1").arg(bestRating.toInt()));
+        m_labelRating->setText(QString("<b>%1").arg(rating.to_int()));
+        m_labelBestRating->setText(QString("%1").arg(bestRating.to_int()));
     }
     m_graph->updateContent(m_history);
     m_list->updateContent(variant, m_history);

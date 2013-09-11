@@ -1850,7 +1850,7 @@ void MainWindow::gameOver()
     QString detailText;
     if (m_isRated)
     {
-        int oldRating = m_history->getRating().toInt();
+        int oldRating = m_history->getRating().to_int();
         unsigned place;
         bool isPlaceShared;
         bd.get_place(m_ratedGameColor, place, isPlaceShared);
@@ -1868,7 +1868,7 @@ void MainWindow::gameOver()
                            gameResult, date, m_level, m_game->get_tree());
         if (m_ratingDialog != nullptr)
             m_ratingDialog->updateContent();
-        int newRating = m_history->getRating().toInt();
+        int newRating = m_history->getRating().to_int();
         if (newRating > oldRating)
             detailText =
                 tr("Your rating has increased from %1 to %2.")

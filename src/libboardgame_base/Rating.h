@@ -49,7 +49,7 @@ public:
     float get() const;
 
     /** Get rating rounded to an interger. */
-    int toInt() const;
+    int to_int() const;
 
 private:
     float m_elo;
@@ -65,7 +65,7 @@ inline float Rating::get() const
     return m_elo;
 }
 
-inline int Rating::toInt() const
+inline int Rating::to_int() const
 {
     return static_cast<int>(libboardgame_util::math_util::round(m_elo));
 }
