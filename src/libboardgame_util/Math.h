@@ -1,14 +1,13 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_util/MathUtil.h */
+/** @file libboardgame_util/Math.h */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_UTIL_MATH_UTIL_H
-#define LIBBOARDGAME_UTIL_MATH_UTIL_H
+#ifndef LIBBOARDGAME_UTIL_MATH_H
+#define LIBBOARDGAME_UTIL_MATH_H
 
 #include <cmath>
 
 namespace libboardgame_util {
-namespace math_util {
 
 using namespace std;
 
@@ -28,7 +27,6 @@ inline double round(double val)
 
 //-----------------------------------------------------------------------------
 
-} // namespace math_util
 } // namespace libboardgame_util
 
-#endif // LIBBOARDGAME_UTIL_MATH_UTIL_H
+#endif // LIBBOARDGAME_UTIL_MATH_H

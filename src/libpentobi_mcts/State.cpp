@@ -11,7 +11,7 @@
 #include <cmath>
 #include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_util/MathUtil.h"
+#include "libboardgame_util/Math.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/Geometry.h"
 
@@ -918,8 +918,7 @@ void State::start_search()
         float dy = ratio * (y - center_y);
         // Multiply Euklidian distance by 4, so that distances that differ
         // by max. 0.25 are treated as equal
-        float d =
-            libboardgame_util::math_util::round(4 * sqrt(dx * dx + dy * dy));
+        float d = libboardgame_util::round(4 * sqrt(dx * dx + dy * dy));
         if (bd.get_board_type() == BoardType::classic)
             // Don't make a distinction between moves close enough to the center
             // in game variant Classic/Classic2

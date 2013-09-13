@@ -7,7 +7,7 @@
 
 #include <climits>
 #include <iosfwd>
-#include "libboardgame_util/MathUtil.h"
+#include "libboardgame_util/Math.h"
 
 namespace libboardgame_base {
 
@@ -67,7 +67,7 @@ inline float Rating::get() const
 
 inline int Rating::to_int() const
 {
-    return static_cast<int>(libboardgame_util::math_util::round(m_elo));
+    return static_cast<int>(libboardgame_util::round(m_elo));
 }
 
 inline void Rating::update(float game_result, Rating elo_opponent,

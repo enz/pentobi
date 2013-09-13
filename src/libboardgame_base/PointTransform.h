@@ -6,12 +6,12 @@
 #define LIBBOARDGAME_BASE_POINT_TRANSFORM_H
 
 #include "Point.h"
-#include "libboardgame_util/MathUtil.h"
+#include "libboardgame_util/Math.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libboardgame_base {
 
-using libboardgame_util::math_util::round;
+using libboardgame_util::round;
 
 //-----------------------------------------------------------------------------
 
