@@ -212,9 +212,9 @@ void State::compute_features(bool check_dist_to_center, bool check_connect)
     auto& moves = *m_moves[to_play];
     auto& geometry = m_bc->get_geometry();
     auto& is_forbidden = m_bd.is_forbidden(to_play);
-    Grid<Float> point_value(geometry);
-    Grid<Float> attach_point_value(geometry);
-    Grid<Float> adj_point_value(geometry);
+    Grid<Float> point_value;
+    Grid<Float> attach_point_value;
+    Grid<Float> adj_point_value;
     for (GeometryIterator i(geometry); i; ++i)
     {
         point_value[*i] = 1;
@@ -873,7 +873,6 @@ void State::start_search()
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
     auto& geometry = bd.get_geometry();
-    m_local_value.init_geometry(geometry);
     m_nu_moves_initial = bd.get_nu_moves();
     m_check_terminate_early =
         (m_nu_moves_initial < 10u * m_nu_colors
@@ -902,7 +901,6 @@ void State::start_search()
             m_moves[*i].reset(new MoveList());
 
     // Init m_dist_to_center
-    m_dist_to_center.init(geometry);
     float width = static_cast<float>(geometry.get_width());
     float height = static_cast<float>(geometry.get_height());
     float center_x = 0.5f * width - 0.5f;

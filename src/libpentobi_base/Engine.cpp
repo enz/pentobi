@@ -227,11 +227,12 @@ void Engine::cmd_play(const Arguments& args)
 
 void Engine::cmd_point_integers(Response& response)
 {
-    auto& geometry = get_board().get_geometry();
-    Grid<int> grid(geometry);
-    for (GeometryIterator i(geometry); i; ++i)
+    auto& geo = get_board().get_geometry();
+    Grid<int> grid;
+    for (GeometryIterator i(geo); i; ++i)
         grid[*i] = (*i).to_int();
-    response << '\n' << grid;
+    response << '\n';
+    grid.write(response, geo);
 }
 
 void Engine::cmd_reg_genmove(const Arguments& args, Response& response)

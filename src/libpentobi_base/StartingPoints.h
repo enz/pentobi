@@ -23,7 +23,7 @@ class StartingPoints
 public:
     static const unsigned max_starting_points = 6;
 
-    void init(Variant variant, const Geometry& geometry);
+    void init(Variant variant, const Geometry& geo);
 
     bool is_colored_starting_point(Point p) const;
 

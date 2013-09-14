@@ -392,7 +392,7 @@ private:
     /** Same as m_board_const->get_move_info_ext_2_array() */
     const MoveInfoExt2* m_move_info_ext_2_array;
 
-    const Geometry* m_geometry;
+    const Geometry* m_geo;
 
     StateBase m_state_base;
 
@@ -457,7 +457,7 @@ private:
 typedef Board::Iterator BoardIterator;
 
 inline Board::Iterator::Iterator(const Board& bd)
-    : GeometryIterator(*bd.m_geometry)
+    : GeometryIterator(*bd.m_geo)
 {
 }
 
@@ -475,7 +475,7 @@ inline unsigned Board::get_adj_status(Point p, Color c) const
 {
     unsigned result = 0;
     unsigned val = 1;
-    NullTermList<Point, 12>::Iterator i(m_geometry->get_adj_diag(p));
+    NullTermList<Point, 12>::Iterator i(m_geo->get_adj_diag(p));
     LIBBOARDGAME_ASSERT(i);
     static_assert(BoardConst::adj_status_nu_adj > 0, "");
     do
@@ -507,7 +507,7 @@ inline unsigned Board::get_bonus(Color c) const
 
 inline const Geometry& Board::get_geometry() const
 {
-    return *m_geometry;
+    return *m_geo;
 }
 
 inline const Board::PointStateGrid& Board::get_grid() const
@@ -823,7 +823,7 @@ inline bool Board::is_legal(Color c, Move mv) const
 
 inline bool Board::is_onboard(Point p) const
 {
-    return m_geometry->is_onboard(p);
+    return m_geo->is_onboard(p);
 }
 
 inline bool Board::is_piece_left(Color c, Piece piece) const

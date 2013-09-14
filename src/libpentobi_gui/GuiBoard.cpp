@@ -76,7 +76,7 @@ void GuiBoard::changeEvent(QEvent* event)
 
 void GuiBoard::clearMarkup()
 {
-    for (Geometry::Iterator i(m_labels.get_geometry()); i; ++i)
+    for (Geometry::Iterator i(m_bd.get_geometry()); i; ++i)
         setLabel(*i, "");
 }
 
@@ -90,13 +90,13 @@ void GuiBoard::clearSelectedPiece()
 
 void GuiBoard::copyFromBoard(const Board& bd)
 {
-    auto& geometry = bd.get_geometry();
+    auto& geo = bd.get_geometry();
     if (! m_isInitialized || m_variant != bd.get_variant())
     {
         m_variant = bd.get_variant();
         m_isInitialized = true;
         m_pointState = bd.get_grid();
-        m_labels.init(geometry, "");
+        m_labels.fill("", geo);
         setEmptyBoardDirty();
     }
     else
@@ -173,12 +173,11 @@ void GuiBoard::moveSelectedPieceDown()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geometry = m_bd.get_geometry();
+    auto& geo = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset =
-            CoordPoint(geometry.get_width() / 2, geometry.get_height() - 1);
+        newOffset = CoordPoint(geo.get_width() / 2, geo.get_height() - 1);
         setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
@@ -196,7 +195,7 @@ void GuiBoard::moveSelectedPieceDown()
         }
         else
             --newOffset.y;
-        if (geometry.is_onboard(newOffset))
+        if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
             setSelectedPiecePoints();
@@ -208,12 +207,11 @@ void GuiBoard::moveSelectedPieceLeft()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geometry = m_bd.get_geometry();
+    auto& geo = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset =
-            CoordPoint(geometry.get_width() - 1, geometry.get_height() / 2);
+        newOffset = CoordPoint(geo.get_width() - 1, geo.get_height() / 2);
         setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
@@ -225,7 +223,7 @@ void GuiBoard::moveSelectedPieceLeft()
             newOffset.x -= 2;
         else
             --newOffset.x;
-        if (geometry.is_onboard(newOffset))
+        if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
             setSelectedPiecePoints();
@@ -237,11 +235,11 @@ void GuiBoard::moveSelectedPieceRight()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geometry = m_bd.get_geometry();
+    auto& geo = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(0, geometry.get_height() / 2);
+        newOffset = CoordPoint(0, geo.get_height() / 2);
         setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
@@ -253,7 +251,7 @@ void GuiBoard::moveSelectedPieceRight()
             newOffset.x += 2;
         else
             ++newOffset.x;
-        if (geometry.is_onboard(newOffset))
+        if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
             setSelectedPiecePoints();
@@ -265,11 +263,11 @@ void GuiBoard::moveSelectedPieceUp()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geometry = m_bd.get_geometry();
+    auto& geo = m_bd.get_geometry();
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(geometry.get_width() / 2, 0);
+        newOffset = CoordPoint(geo.get_width() / 2, 0);
         setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
@@ -287,7 +285,7 @@ void GuiBoard::moveSelectedPieceUp()
         }
         else
             ++newOffset.y;
-        if (geometry.is_onboard(newOffset))
+        if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
             setSelectedPiecePoints();
@@ -319,8 +317,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
         m_emptyBoardPixmap->fill(Qt::transparent);
         QPainter painter(m_emptyBoardPixmap);
         m_boardPainter.paintEmptyBoard(painter, width(), height(),
-                                       m_variant,
-                                       m_pointState.get_geometry());
+                                       m_variant, m_bd.get_geometry());
         m_emptyBoardDirty = false;
     }
     if (m_dirty)
@@ -398,13 +395,8 @@ void GuiBoard::setFreePlacement(bool enable)
 
 void GuiBoard::setLabel(Point p, const QString& text)
 {
-    if (! m_isInitialized || ! m_labels.get_geometry().is_onboard(p))
-    {
-        // Call copyFromBoard(), which initialized the current board size,
-        // before calling setLabel()
-        LIBBOARDGAME_ASSERT(false);
+    if (! m_isInitialized)
         return;
-    }
     if (m_labels[p] != text)
     {
         m_labels[p] = text;
@@ -424,16 +416,16 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         m_selectedPieceOffset = offset;
         return;
     }
-    auto& geometry = m_bd.get_geometry();
-    unsigned old_point_type = geometry.get_point_type(offset);
+    auto& geo = m_bd.get_geometry();
+    unsigned old_point_type = geo.get_point_type(offset);
     unsigned point_type = m_selectedPieceTransform->get_new_point_type();
     CoordPoint type_matching_offset = offset;
     if (old_point_type != point_type)
     {
         if ((point_type == 0
-             && geometry.is_onboard(CoordPoint(offset.x + 1, offset.y)))
+             && geo.is_onboard(CoordPoint(offset.x + 1, offset.y)))
             || (point_type == 1
-                && ! geometry.is_onboard(CoordPoint(offset.x - 1, offset.y))))
+                && ! geo.is_onboard(CoordPoint(offset.x - 1, offset.y))))
             ++type_matching_offset.x;
         else
             --type_matching_offset.x;

@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
+#include <type_traits>
 #include "Point.h"
 #include "Geometry.h"
 
@@ -18,7 +19,8 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 /** Elements assigned to on-board points.
-    The elements must be default-constructible.
+    The elements must be default-constructible. This class is a POD if the
+    element type is a POD.
     @tparam P An instantiation of libboardgame_base::Point (or compatible class)
     @tparam T The element type. */
 template<class P, typename T>
@@ -27,143 +29,73 @@ class Grid
 public:
     typedef P Point;
 
-    Grid();
+    typedef libboardgame_base::Geometry<P> Geometry;
 
-    explicit Grid(const Geometry<P>& geometry);
-
-    Grid(const Geometry<P>& geometry, const T& val);
-
-    bool operator==(const Grid& grid) const;
-
-    void init(const Geometry<P>& geometry);
-
-    void init(const Geometry<P>& geometry, const T& val);
-
-    const Geometry<P>& get_geometry() const;
+    typedef typename libboardgame_base::Geometry<P>::Iterator Iterator;
 
     T& operator[](const Point& p);
 
     const T& operator[](const Point& p) const;
 
     /** Fill all on-board points for a given board size with a value. */
-    void fill(const T& val);
+    void fill(const T& val, const Geometry& geo);
 
-    ostream& write(ostream& out) const;
+    bool compare(const Grid& grid, const Geometry& geo) const;
+
+    ostream& write(ostream& out, const Geometry& geo) const;
 
 private:
-    const Geometry<P>* m_geometry;
-
     T m_a[Point::range_onboard_end];
-
-    bool is_initialized() const;
 };
-
-template<class P, typename T>
-inline Grid<P, T>::Grid()
-{
-#if LIBBOARDGAME_DEBUG
-    m_geometry = nullptr;
-#endif
-}
-
-template<class P, typename T>
-inline Grid<P, T>::Grid(const Geometry<P>& geometry)
-{
-    init(geometry);
-}
-
-template<class P, typename T>
-inline Grid<P, T>::Grid(const Geometry<P>& geometry, const T& val)
-{
-    init(geometry, val);
-}
-
-template<class P, typename T>
-bool Grid<P, T>::operator==(const Grid& grid) const
-{
-    LIBBOARDGAME_ASSERT(is_initialized());
-    LIBBOARDGAME_ASSERT(grid.is_initialized());
-    LIBBOARDGAME_ASSERT(m_geometry->get_width()
-                        == grid.get_geometry().get_width());
-    LIBBOARDGAME_ASSERT(m_geometry->get_height()
-                        == grid.get_geometry().get_height());
-    for (typename Geometry<P>::Iterator i(*m_geometry); i; ++i)
-        if (operator[](*i) != grid[*i])
-            return false;
-    return true;
-}
 
 template<class P, typename T>
 inline T& Grid<P, T>::operator[](const Point& p)
 {
-    LIBBOARDGAME_ASSERT(is_initialized());
-    LIBBOARDGAME_ASSERT(m_geometry->is_onboard(p));
     return m_a[p.to_int()];
 }
 
 template<class P, typename T>
 inline const T& Grid<P, T>::operator[](const Point& p) const
 {
-    LIBBOARDGAME_ASSERT(is_initialized());
-    LIBBOARDGAME_ASSERT(m_geometry->is_onboard(p));
     return m_a[p.to_int()];
 }
 
 template<class P, typename T>
-inline void Grid<P, T>::fill(const T& val)
+inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
-    LIBBOARDGAME_ASSERT(is_initialized());
-    for (typename Geometry<P>::Iterator i(*m_geometry); i; ++i)
+    for (Iterator i(geo); i; ++i)
         operator[](*i) = val;
 }
 
 template<class P, typename T>
-const Geometry<P>& Grid<P, T>::get_geometry() const
+bool Grid<P, T>::compare(const Grid& grid, const Geometry& geo) const
 {
-    LIBBOARDGAME_ASSERT(is_initialized());
-    return *m_geometry;
+    for (Iterator i(*geo); i; ++i)
+        if (operator[](*i) != grid[*i])
+            return false;
+    return true;
 }
 
 template<class P, typename T>
-void Grid<P, T>::init(const Geometry<P>& geometry)
+ostream& Grid<P, T>::write(ostream& out, const Geometry& geo) const
 {
-    m_geometry = &geometry;
-}
-
-template<class P, typename T>
-inline void Grid<P, T>::init(const Geometry<P>& geometry, const T& val)
-{
-    init(geometry);
-    fill(val);
-}
-
-template<class P, typename T>
-bool Grid<P, T>::is_initialized() const
-{
-    return m_geometry != nullptr;
-}
-
-template<class P, typename T>
-ostream& Grid<P, T>::write(ostream& out) const
-{
-    LIBBOARDGAME_ASSERT(is_initialized());
     ostringstream buffer;
     size_t max_len = 0;
-    for (typename Geometry<P>::Iterator i(*m_geometry); i; ++i)
+    for (Iterator i(geo); i; ++i)
     {
         buffer.str("");
         buffer << operator[](*i);
         max_len = max(max_len, buffer.str().length());
     }
-    unsigned width = m_geometry->get_width();
-    unsigned height = m_geometry->get_height();
+    unsigned width = geo.get_width();
+    unsigned height = geo.get_height();
     string empty(max_len, ' ');
     for (unsigned y = height - 1; ; --y)
     {
         for (unsigned x = 0; x < width; ++x)
         {
             Point p(x, y);
-            if (m_geometry->is_onboard(p))
+            if (geo.is_onboard(p))
                 out << setw(int(max_len)) << operator[](p);
             else
                 out << empty;
@@ -175,14 +107,6 @@ ostream& Grid<P, T>::write(ostream& out) const
             break;
     }
     return out;
-}
-
-//-----------------------------------------------------------------------------
-
-template<class P, typename T>
-ostream& operator<<(ostream& out, const Grid<P, T>& grid)
-{
-    return grid.write(out);
 }
 
 //-----------------------------------------------------------------------------

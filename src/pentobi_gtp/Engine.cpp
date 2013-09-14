@@ -82,7 +82,9 @@ void Engine::cmd_moves_stat(const Arguments& args, Response& response)
 {
     Color c = get_color_arg(args);
     auto& bd = get_board();
-    Grid<unsigned> nu_moves_grid(bd.get_geometry(), 0);
+    auto& geo = bd.get_geometry();
+    Grid<unsigned> nu_moves_grid;
+    nu_moves_grid.fill(0, geo);
     MoveList moves;
     MoveMarker marker;
     for (Point p : bd.get_attach_points(c))
@@ -94,7 +96,8 @@ void Engine::cmd_moves_stat(const Arguments& args, Response& response)
         marker.clear_all_set_known(moves);
         moves.clear();
     }
-    response << '\n' << nu_moves_grid;
+    response << '\n';
+    nu_moves_grid.write(response, geo);
 }
 
 void Engine::cmd_name(Response& response)

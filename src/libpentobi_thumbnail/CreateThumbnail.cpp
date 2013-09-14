@@ -31,7 +31,7 @@ namespace {
 
 /** Helper function for getFinalPosition() */
 void handleSetup(const char* id, Color c, const Node& node,
-                 const Geometry& geometry, Grid<PointState>& pointState)
+                 const Geometry& geo, Grid<PointState>& pointState)
 {
     vector<string> values = node.get_multi_property(id);
     for (const string& s : values)
@@ -44,7 +44,7 @@ void handleSetup(const char* id, Color c, const Node& node,
             try
             {
                 Point p = Point::from_string(p_str);
-                if (geometry.is_onboard(p))
+                if (geo.is_onboard(p))
                     pointState[p] = c;
             }
             catch (const Point::InvalidString&)
@@ -56,7 +56,7 @@ void handleSetup(const char* id, Color c, const Node& node,
 }
 
 /** Helper function for getFinalPosition() */
-void handleSetupEmpty(const Node& node, const Geometry& geometry,
+void handleSetupEmpty(const Node& node, const Geometry& geo,
                       Grid<PointState>& pointState)
 {
     vector<string> values = node.get_multi_property("AE");
@@ -70,7 +70,7 @@ void handleSetupEmpty(const Node& node, const Geometry& geometry,
             try
             {
                 Point p = Point::from_string(p_str);
-                if (geometry.is_onboard(p))
+                if (geo.is_onboard(p))
                     pointState[p] = PointState::empty();
             }
             catch (const Point::InvalidString&)
@@ -84,46 +84,45 @@ void handleSetupEmpty(const Node& node, const Geometry& geometry,
 /** Get the board state of the final position of the main variation.
     Avoids constructing an instance of a Tree or Game, which would do a costly
     initialization of BoardConst and slow down the thumbnailer unnecessarily. */
-bool getFinalPosition(const Node& root, Variant& variant,
+bool getFinalPosition(const Node& root, Variant& variant, const Geometry*& geo,
                       Grid<PointState>& pointState)
 {
     if (! parse_variant(root.get_property("GM", ""), variant))
         return false;
-    const Geometry* geometry;
     switch (variant)
     {
     case Variant::duo:
     case Variant::junior:
-        geometry = RectGeometry<Point>::get(14, 14);
+        geo = RectGeometry<Point>::get(14, 14);
         break;
     case Variant::classic:
     case Variant::classic_2:
-        geometry = RectGeometry<Point>::get(20, 20);
+        geo = RectGeometry<Point>::get(20, 20);
         break;
     case Variant::trigon:
     case Variant::trigon_2:
-        geometry = TrigonGeometry<Point>::get(9);
+        geo = TrigonGeometry<Point>::get(9);
         break;
     case Variant::trigon_3:
-        geometry = TrigonGeometry<Point>::get(8);
+        geo = TrigonGeometry<Point>::get(8);
         break;
     default:
         LIBBOARDGAME_ASSERT(false);
         return false;
     }
-    pointState.init(*geometry, PointState::empty());
+    pointState.fill(PointState::empty(), *geo);
     auto node = &root;
     while (node != 0)
     {
         if (libpentobi_base::node_util::has_setup(*node))
         {
-            handleSetup("AB", Color(0), *node, *geometry, pointState);
-            handleSetup("AW", Color(1), *node, *geometry, pointState);
-            handleSetup("A1", Color(0), *node, *geometry, pointState);
-            handleSetup("A2", Color(1), *node, *geometry, pointState);
-            handleSetup("A3", Color(2), *node, *geometry, pointState);
-            handleSetup("A4", Color(3), *node, *geometry, pointState);
-            handleSetupEmpty(*node, *geometry, pointState);
+            handleSetup("AB", Color(0), *node, *geo, pointState);
+            handleSetup("AW", Color(1), *node, *geo, pointState);
+            handleSetup("A1", Color(0), *node, *geo, pointState);
+            handleSetup("A2", Color(1), *node, *geo, pointState);
+            handleSetup("A3", Color(2), *node, *geo, pointState);
+            handleSetup("A4", Color(3), *node, *geo, pointState);
+            handleSetupEmpty(*node, *geo, pointState);
             if (node == &root)
                 // If the file starts with a setup (e.g. a puzzle), we use this
                 // position for the thumbnail.
@@ -134,7 +133,7 @@ bool getFinalPosition(const Node& root, Variant& variant,
         if (libpentobi_base::node_util::get_move(*node, variant, c, points))
             for (Point p : points)
             {
-                if (geometry->is_onboard(p))
+                if (geo->is_onboard(p))
                     pointState[p] = c;
             }
         node = node->get_first_child_or_null();
@@ -154,8 +153,9 @@ bool createThumbnail(const QString& path, int width, int height,
     reader.read(path.toLocal8Bit().constData());
     auto variant =
         Variant::classic; // Initialize to avoid compiler warning
+    const Geometry* geo;
     Grid<PointState> pointState;
-    if (! getFinalPosition(reader.get_tree(), variant, pointState))
+    if (! getFinalPosition(reader.get_tree(), variant, geo, pointState))
     {
         cerr << "Not a valid Blokus SGF file\n";
         return false;
@@ -164,8 +164,7 @@ bool createThumbnail(const QString& path, int width, int height,
     BoardPainter boardPainter;
     QPainter painter;
     painter.begin(&image);
-    boardPainter.paintEmptyBoard(painter, width, height, variant,
-                                 pointState.get_geometry());
+    boardPainter.paintEmptyBoard(painter, width, height, variant, *geo);
     boardPainter.paintPieces(painter, pointState);
     painter.end();
     return true;

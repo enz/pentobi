@@ -195,7 +195,7 @@ private:
 
     BoardType m_board_type;
 
-    const Geometry& m_geometry;
+    const Geometry& m_geo;
 
     vector<PieceInfo> m_pieces;
 
@@ -263,7 +263,7 @@ inline BoardType BoardConst::get_board_type() const
 
 inline const Geometry& BoardConst::get_geometry() const
 {
-    return m_geometry;
+    return m_geo;
 }
 
 inline unsigned BoardConst::get_max_piece_size() const

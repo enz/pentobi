@@ -33,11 +33,10 @@ void StartingPoints::add_colorless_starting_point(unsigned x, unsigned y)
     m_starting_points[Color(3)].push_back(p);
 }
 
-void StartingPoints::init(Variant variant, const Geometry& geometry)
+void StartingPoints::init(Variant variant, const Geometry& geo)
 {
-    m_is_colored_starting_point.init(geometry, false);
-    m_is_colorless_starting_point.init(geometry, false);
-    m_starting_point_color.init(geometry);
+    m_is_colored_starting_point.fill(false, geo);
+    m_is_colorless_starting_point.fill(false, geo);
     m_starting_points[Color(0)].clear();
     m_starting_points[Color(1)].clear();
     m_starting_points[Color(2)].clear();

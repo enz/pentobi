@@ -123,11 +123,10 @@ void BoardPainter::drawLabels(QPainter& painter,
 {
     if (labels == 0)
         return;
-    auto& geometry = pointState.get_geometry();
     bool isTrigon = (variant == Variant::trigon
                      || variant == Variant::trigon_2
                      || variant == Variant::trigon_3);
-    for (GeometryIterator i(geometry); i; ++i)
+    for (GeometryIterator i(*m_geo); i; ++i)
         if (! (*labels)[*i].isEmpty())
         {
             PointState s = pointState[*i];
@@ -138,7 +137,7 @@ void BoardPainter::drawLabels(QPainter& painter,
             qreal height = m_fieldHeight;
             if (isTrigon)
             {
-                bool isUpside = (geometry.get_point_type(*i) == 1);
+                bool isUpside = (m_geo->get_point_type(*i) == 1);
                 if (isUpside)
                     y += 0.333 * height;
                 height = 0.666 * height;
@@ -162,14 +161,14 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
 
 void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
                                    unsigned height, Variant variant,
-                                   const Geometry& geometry)
+                                   const Geometry& geo)
 {
     m_hasPainted = true;
     painter.setRenderHint(QPainter::Antialiasing, true);
     m_variant = variant;
-    m_geometry = &geometry;
-    m_width = static_cast<int>(m_geometry->get_width());
-    m_height = static_cast<int>(m_geometry->get_height());
+    m_geo = &geo;
+    m_width = static_cast<int>(m_geo->get_width());
+    m_height = static_cast<int>(m_geo->get_height());
     m_isTrigon = (variant == Variant::trigon
                   || variant == Variant::trigon_2
                   || variant == Variant::trigon_3);
@@ -220,8 +219,8 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     painter.translate(m_boardOffset);
     if (m_coordinates)
         drawCoordinates(painter, m_isTrigon);
-    m_startingPoints.init(variant, *m_geometry);
-    for (GeometryIterator i(*m_geometry); i; ++i)
+    m_startingPoints.init(variant, *m_geo);
+    for (GeometryIterator i(*m_geo); i; ++i)
     {
         int x = i->get_x();
         int y = i->get_y();
@@ -229,7 +228,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         qreal fieldY = (m_height - y - 1) * m_fieldHeight;
         if (m_isTrigon)
         {
-            bool isUpside = (m_geometry->get_point_type(x, y) == 1);
+            bool isUpside = (m_geo->get_point_type(x, y) == 1);
             if (m_startingPoints.is_colorless_starting_point(*i))
                 Util::paintEmptyTriangleStartingPoint(painter, isUpside, fieldX,
                                                       fieldY, m_fieldWidth,
@@ -261,7 +260,7 @@ void BoardPainter::paintPieces(QPainter& painter,
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
     painter.translate(m_boardOffset);
-    for (GeometryIterator i(*m_geometry); i; ++i)
+    for (GeometryIterator i(*m_geo); i; ++i)
     {
         int x = i->get_x();
         int y = i->get_y();
@@ -270,7 +269,7 @@ void BoardPainter::paintPieces(QPainter& painter,
         qreal fieldY = (m_height - y - 1) * m_fieldHeight;
         if (m_isTrigon)
         {
-            bool isUpside = (m_geometry->get_point_type(x, y) == 1);
+            bool isUpside = (m_geo->get_point_type(x, y) == 1);
             if (s.is_color())
                 Util::paintColorTriangle(painter, m_variant, s.to_color(),
                                          isUpside, fieldX, fieldY,
@@ -314,7 +313,7 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
         qreal fieldY = (m_height - p.get_y() - 1) * m_fieldHeight;
         if (m_isTrigon)
         {
-            bool isUpside = (m_geometry->get_point_type(p) == 1);
+            bool isUpside = (m_geo->get_point_type(p) == 1);
             Util::paintColorTriangle(painter, m_variant, c, isUpside,
                                      fieldX, fieldY, m_fieldWidth,
                                      m_fieldHeight, alpha, saturation, flat);

@@ -12,13 +12,12 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-void SymmetricPoints::init(const Geometry& geometry,
+void SymmetricPoints::init(const Geometry& geo,
                            const PointTransform<Point>& transform)
 {
-    m_symmetric_point.init(geometry);
-    unsigned width = geometry.get_width();
-    unsigned height = geometry.get_height();
-    for (Geometry::Iterator i(geometry); i; ++i)
+    unsigned width = geo.get_width();
+    unsigned height = geo.get_height();
+    for (Geometry::Iterator i(geo); i; ++i)
         m_symmetric_point[*i] = transform.get_transformed(*i, width, height);
 }
 

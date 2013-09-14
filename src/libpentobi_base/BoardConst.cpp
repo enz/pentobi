@@ -40,7 +40,7 @@ namespace {
 
 const bool log_move_creation = false;
 
-vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
+vector<PieceInfo> create_pieces_classic(const Geometry& geo,
                                         const PieceTransforms& transforms)
 {
     vector<PieceInfo> pieces;
@@ -55,7 +55,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(PieceInfo("X", points, geometry, transforms));
+        pieces.push_back(PieceInfo("X", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -64,7 +64,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(-1, 0));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, -1));
-        pieces.push_back(PieceInfo("F", points, geometry, transforms));
+        pieces.push_back(PieceInfo("F", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -73,7 +73,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(PieceInfo("L5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("L5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -82,7 +82,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(PieceInfo("N", points, geometry, transforms));
+        pieces.push_back(PieceInfo("N", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -91,7 +91,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("P", points, geometry, transforms));
+        pieces.push_back(PieceInfo("P", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -100,7 +100,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("T5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("T5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -109,7 +109,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("U", points, geometry, transforms));
+        pieces.push_back(PieceInfo("U", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -118,7 +118,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 2));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(PieceInfo("V5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("V5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -127,7 +127,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("W", points, geometry, transforms));
+        pieces.push_back(PieceInfo("W", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -136,7 +136,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(0, -2));
-        pieces.push_back(PieceInfo("Y", points, geometry, transforms));
+        pieces.push_back(PieceInfo("Y", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -145,7 +145,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("Z5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("Z5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -154,7 +154,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(PieceInfo("I5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -162,7 +162,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("O", points, geometry, transforms));
+        pieces.push_back(PieceInfo("O", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -170,7 +170,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(0, -1));
-        pieces.push_back(PieceInfo("T4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("T4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -178,7 +178,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("Z4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("Z4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -186,7 +186,7 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("L4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("L4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -194,37 +194,37 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(PieceInfo("I4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I4", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(PieceInfo("V3", points, geometry, transforms));
+        pieces.push_back(PieceInfo("V3", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
-        pieces.push_back(PieceInfo("I3", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I3", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(PieceInfo("2", points, geometry, transforms));
+        pieces.push_back(PieceInfo("2", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, 0));
-        pieces.push_back(PieceInfo("1", points, geometry, transforms));
+        pieces.push_back(PieceInfo("1", points, geo, transforms));
     }
     return pieces;
 }
 
-vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
+vector<PieceInfo> create_pieces_junior(const Geometry& geo,
                                        const PieceTransforms& transforms)
 {
     vector<PieceInfo> pieces;
@@ -236,7 +236,7 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(PieceInfo("L5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("L5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -245,7 +245,7 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("P", points, geometry, transforms));
+        pieces.push_back(PieceInfo("P", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -254,7 +254,7 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(PieceInfo("I5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -262,7 +262,7 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("O", points, geometry, transforms));
+        pieces.push_back(PieceInfo("O", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -270,7 +270,7 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(0, -1));
-        pieces.push_back(PieceInfo("T4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("T4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -278,7 +278,7 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("Z4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("Z4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -286,7 +286,7 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("L4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("L4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -294,37 +294,37 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(0, 2));
-        pieces.push_back(PieceInfo("I4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I4", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(PieceInfo("V3", points, geometry, transforms));
+        pieces.push_back(PieceInfo("V3", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
-        pieces.push_back(PieceInfo("I3", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I3", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(PieceInfo("2", points, geometry, transforms));
+        pieces.push_back(PieceInfo("2", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, 0));
-        pieces.push_back(PieceInfo("1", points, geometry, transforms));
+        pieces.push_back(PieceInfo("1", points, geo, transforms));
     }
     return pieces;
 }
 
-vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
+vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                                        const PieceTransforms& transforms)
 {
     vector<PieceInfo> pieces;
@@ -346,7 +346,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("I6", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I6", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -356,7 +356,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("L6", points, geometry, transforms));
+        pieces.push_back(PieceInfo("L6", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -366,7 +366,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
-        pieces.push_back(PieceInfo("W", points, geometry, transforms));
+        pieces.push_back(PieceInfo("W", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -376,7 +376,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(0, 1));
-        pieces.push_back(PieceInfo("P6", points, geometry, transforms));
+        pieces.push_back(PieceInfo("P6", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -386,7 +386,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("S", points, geometry, transforms));
+        pieces.push_back(PieceInfo("S", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -396,7 +396,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
         points.push_back(CoordPoint(2, 1));
-        pieces.push_back(PieceInfo("F", points, geometry, transforms));
+        pieces.push_back(PieceInfo("F", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -406,7 +406,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(2, 0));
         points.push_back(CoordPoint(3, 0));
-        pieces.push_back(PieceInfo("V", points, geometry, transforms));
+        pieces.push_back(PieceInfo("V", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -416,7 +416,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
         points.push_back(CoordPoint(-1, 2));
-        pieces.push_back(PieceInfo("Y", points, geometry, transforms));
+        pieces.push_back(PieceInfo("Y", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -426,7 +426,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("A6", points, geometry, transforms));
+        pieces.push_back(PieceInfo("A6", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -436,7 +436,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(-1, 0));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
-        pieces.push_back(PieceInfo("G", points, geometry, transforms));
+        pieces.push_back(PieceInfo("G", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -446,7 +446,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, -1));
-        pieces.push_back(PieceInfo("O", points, geometry, transforms));
+        pieces.push_back(PieceInfo("O", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -456,7 +456,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("X", points, geometry, transforms));
+        pieces.push_back(PieceInfo("X", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -465,7 +465,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
         points.push_back(CoordPoint(1, 2));
-        pieces.push_back(PieceInfo("I5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -474,16 +474,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(0, 1));
-        pieces.push_back(PieceInfo("P5", points, geometry, transforms));
-    }
-    {
-        PiecePoints points;
-        points.push_back(CoordPoint(-1, -1));
-        points.push_back(CoordPoint(0, -1));
-        points.push_back(CoordPoint(-1, 0));
-        points.push_back(CoordPoint(0, 0));
-        points.push_back(CoordPoint(0, 1));
-        pieces.push_back(PieceInfo("L5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("P5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -491,8 +482,17 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, -1));
         points.push_back(CoordPoint(-1, 0));
         points.push_back(CoordPoint(0, 0));
+        points.push_back(CoordPoint(0, 1));
+        pieces.push_back(PieceInfo("L5", points, geo, transforms));
+    }
+    {
+        PiecePoints points;
+        points.push_back(CoordPoint(-1, -1));
+        points.push_back(CoordPoint(0, -1));
+        points.push_back(CoordPoint(-1, 0));
+        points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(PieceInfo("C5", points, geometry, transforms));
+        pieces.push_back(PieceInfo("C5", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -500,7 +500,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("I4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -508,7 +508,7 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(1, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 1));
-        pieces.push_back(PieceInfo("C4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("C4", points, geo, transforms));
     }
     {
         PiecePoints points;
@@ -516,25 +516,25 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geometry,
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
         points.push_back(CoordPoint(1, 0));
-        pieces.push_back(PieceInfo("A4", points, geometry, transforms));
+        pieces.push_back(PieceInfo("A4", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(-1, 0));
         points.push_back(CoordPoint(0, 0));
         points.push_back(CoordPoint(0, 1));
-        pieces.push_back(PieceInfo("I3", points, geometry, transforms));
+        pieces.push_back(PieceInfo("I3", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(-1, 0));
         points.push_back(CoordPoint(0, 0));
-        pieces.push_back(PieceInfo("2", points, geometry, transforms));
+        pieces.push_back(PieceInfo("2", points, geo, transforms));
     }
     {
         PiecePoints points;
         points.push_back(CoordPoint(0, 0));
-        pieces.push_back(PieceInfo("1", points, geometry, transforms));
+        pieces.push_back(PieceInfo("1", points, geo, transforms));
     }
     return pieces;
 }
@@ -559,7 +559,7 @@ const Geometry& create_geometry(BoardType board_type)
 //-----------------------------------------------------------------------------
 
 BoardConst::BoardConst(BoardType board_type, Variant variant)
-    : m_geometry(create_geometry(board_type))
+    : m_geo(create_geometry(board_type))
 {
     // TODO: Better distinction between board type and set of pieces.
     // Currently the variant parameter is used only to distinct between
@@ -569,32 +569,32 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
     if (board_type == BoardType::trigon)
     {
         m_transforms.reset(new PieceTransformsTrigon());
-        m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
+        m_pieces = create_pieces_trigon(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_trigon);
     }
     else if (board_type == BoardType::trigon_3)
     {
         m_transforms.reset(new PieceTransformsTrigon());
-        m_pieces = create_pieces_trigon(m_geometry, *m_transforms);
+        m_pieces = create_pieces_trigon(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_trigon_3);
     }
     else if (board_type == BoardType::classic)
     {
         m_transforms.reset(new PieceTransformsClassic());
-        m_pieces = create_pieces_classic(m_geometry, *m_transforms);
+        m_pieces = create_pieces_classic(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_classic);
     }
     else if (variant == Variant::junior)
     {
         m_transforms.reset(new PieceTransformsClassic());
-        m_pieces = create_pieces_junior(m_geometry, *m_transforms);
+        m_pieces = create_pieces_junior(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_junior);
     }
     else
     {
         LIBBOARDGAME_ASSERT(variant == Variant::duo);
         m_transforms.reset(new PieceTransformsClassic());
-        m_pieces = create_pieces_classic(m_geometry, *m_transforms);
+        m_pieces = create_pieces_classic(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_duo);
     }
     m_nu_pieces = static_cast<unsigned>(m_pieces.size());
@@ -657,14 +657,17 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     Move move(static_cast<Move::IntType>(m_move_info.size() - 1));
     if (log_move_creation)
     {
-        Grid<char> grid(m_geometry, '.');
+        Grid<char> grid;
+        grid.fill('.', m_geo);
         for (Point p : info)
             grid[p] = 'O';
         for (auto i = info_ext.begin_adj(); i != info_ext.end_adj(); ++i)
             grid[*i] = '+';
         for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
             grid[*i] = '*';
-        log() << "Move " << move.to_int() << ":\n" << grid << '\n';
+        log() << "Move " << move.to_int() << ":\n";
+        grid.write(log(), m_geo);
+        log() << '\n';
     }
     for (Point p : info)
         for (unsigned i = 0; i < nu_adj_status; ++i)
@@ -680,7 +683,6 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
 void BoardConst::create_moves()
 {
     m_full_move_table.reset(new FullMoveTable);
-    m_moves_range.init(m_geometry);
     m_move_lists_sum_length = 0;
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
@@ -690,7 +692,7 @@ void BoardConst::create_moves()
     LIBBOARDGAME_ASSERT(m_move_lists_sum_length <= max_move_lists_sum_length);
     m_move_lists.reset(new Move[m_move_lists_sum_length]);
     unsigned current = 0;
-    for (GeometryIterator i(m_geometry); i; ++i)
+    for (GeometryIterator i(m_geo); i; ++i)
         for (unsigned j = 0; j < nu_adj_status; ++j)
             for (Piece::IntType k = 0; k < m_nu_pieces; ++k)
             {
@@ -709,10 +711,8 @@ void BoardConst::create_moves(Piece piece)
     auto& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
         log() << "Creating moves for piece " << piece_info.get_name() << "\n";
-    for (unsigned i = 0; i < nu_adj_status; ++i)
-        (*m_full_move_table)[i][piece].init(m_geometry);
     PiecePoints points;
-    for (GeometryIterator i(m_geometry); i; ++i)
+    for (GeometryIterator i(m_geo); i; ++i)
     {
         if (log_move_creation)
             log() << "Creating moves at " << *i << "\n";
@@ -724,7 +724,7 @@ void BoardConst::create_moves(Piece piece)
                 log() << "Transformation " << typeid(*transform).name() << "\n";
             // Pieces are defined such that (0,0) has point type 0. Check if the
             // transformed type is compatible with the location on the board.
-            unsigned point_type = m_geometry.get_point_type(x, y);
+            unsigned point_type = m_geo.get_point_type(x, y);
             LIBBOARDGAME_ASSERT(transform->get_point_type() == 0);
             if (transform->get_new_point_type() != point_type)
                 continue;
@@ -736,7 +736,7 @@ void BoardConst::create_moves(Piece piece)
             {
                 p.x += x;
                 p.y += y;
-                if (! m_geometry.is_onboard(p))
+                if (! m_geo.is_onboard(p))
                 {
                     is_onboard = false;
                     break;
@@ -840,7 +840,7 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     MovePoints sorted_points = points;
     sort(sorted_points.begin(), sorted_points.end());
     Point p = points[0];
-    if (! m_geometry.is_onboard(p))
+    if (! m_geo.is_onboard(p))
         return false;
     for (unsigned i = 0; i < m_pieces.size(); ++i)
     {
@@ -863,9 +863,8 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
 
 void BoardConst::init_adj_status()
 {
-    m_adj_status.init(m_geometry);
     array<bool, adj_status_nu_adj> forbidden;
-    for (GeometryIterator i(m_geometry); i; ++i)
+    for (GeometryIterator i(m_geo); i; ++i)
         init_adj_status(*i, forbidden, 0);
 }
 
@@ -873,14 +872,14 @@ void BoardConst::init_adj_status(Point p,
                                  array<bool, adj_status_nu_adj>& forbidden,
                                  unsigned i)
 {
-    if (i == adj_status_nu_adj || i == m_geometry.get_adj_diag(p).size())
+    if (i == adj_status_nu_adj || i == m_geo.get_adj_diag(p).size())
     {
         unsigned index = 0;
         for (unsigned j = 0; j < i; ++j)
             if (forbidden[j])
                 index |= (1 << j);
         unsigned n = 0;
-        for (AdjDiagIterator j(m_geometry, p); n < i; ++j, ++n)
+        for (AdjDiagIterator j(m_geo, p); n < i; ++j, ++n)
             if (forbidden[n])
                 m_adj_status[p][index].push_back(*j);
         return;
@@ -895,7 +894,7 @@ void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
     PointTransfRot180<Point> transform;
-    symmetric_points.init(m_geometry, transform);
+    symmetric_points.init(m_geo, transform);
     for (unsigned i = 0; i < m_move_info.size(); ++i)
     {
         const auto& info = m_move_info[i];
@@ -938,16 +937,16 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
         m_marker.set(*i);
     ArrayList<Point, PieceInfo::max_adj> adj_points;
     for (auto i = begin; i != end; ++i)
-        for (AdjIterator j(m_geometry, *i); j; ++j)
-            if (m_geometry.is_onboard(*j) && ! m_marker[*j])
+        for (AdjIterator j(m_geo, *i); j; ++j)
+            if (m_geo.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
                 adj_points.push_back(*j);
             }
     ArrayList<Point, PieceInfo::max_attach> attach_points;
     for (auto i = begin; i != end; ++i)
-        for (DiagIterator j(m_geometry, *i); j; ++j)
-            if (m_geometry.is_onboard(*j) && ! m_marker[*j])
+        for (DiagIterator j(m_geo, *i); j; ++j)
+            if (m_geo.is_onboard(*j) && ! m_marker[*j])
             {
                 m_marker.set(*j);
                 attach_points.push_back(*j);

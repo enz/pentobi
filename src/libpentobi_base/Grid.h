@@ -21,16 +21,6 @@ public:
     explicit Grid()
     {
     }
-
-    Grid(const Geometry& geometry)
-        : libboardgame_base::Grid<Point, T>(geometry)
-    {
-    }
-
-    Grid(const Geometry& geometry, const T& val)
-        : libboardgame_base::Grid<Point, T>(geometry, val)
-    {
-    }
 };
 
 //-----------------------------------------------------------------------------

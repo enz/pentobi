@@ -192,16 +192,16 @@ void Board::init(Variant variant, const Setup* setup)
 
     // If you make changes here, make sure that you also update copy_from()
 
-    m_state_base.point_state.fill(PointState::empty());
-    m_state_base.played_move.fill(Move::null());
+    m_state_base.point_state.fill(PointState::empty(), *m_geo);
+    m_state_base.played_move.fill(Move::null(), *m_geo);
     if (variant == Variant::junior)
         m_nu_piece_instances = 2;
     else
         m_nu_piece_instances = 1;
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
-        m_state_color[*i].forbidden.fill(false);
-        m_state_color[*i].is_attach_point.fill(false);
+        m_state_color[*i].forbidden.fill(false, *m_geo);
+        m_state_color[*i].is_attach_point.fill(false, *m_geo);
         m_attach_points[*i].clear();
         m_state_color[*i].pieces_left.clear();
         m_state_color[*i].nu_onboard_pieces = 0;
@@ -272,16 +272,11 @@ void Board::init_variant(Variant variant)
         m_bonus_all_pieces = 15;
         m_bonus_one_piece = 5;
     }
-    m_geometry = &m_board_const->get_geometry();
+    m_geo = &m_board_const->get_geometry();
     m_move_info_array = m_board_const->get_move_info_array();
     m_move_info_ext_array = m_board_const->get_move_info_ext_array();
     m_move_info_ext_2_array = m_board_const->get_move_info_ext_2_array();
-    m_starting_points.init(variant, *m_geometry);
-    m_state_base.point_state.init(*m_geometry);
-    m_state_base.played_move.init(*m_geometry);
-    // m_forbidden needs to be initialized even for colors not used in current
-    // game variant because it is written to in some unrolled color loops
-    LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden.init(*m_geometry));
+    m_starting_points.init(variant, *m_geo);
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         if (variant == Variant::classic_2
@@ -289,7 +284,6 @@ void Board::init_variant(Variant variant)
             m_second_color[*i] = get_next(get_next(*i));
         else
             m_second_color[*i] = *i;
-        m_state_color[*i].is_attach_point.init(*m_geometry);
     }
 }
 
@@ -362,8 +356,8 @@ void Board::write(ostream& out, bool mark_last_move) const
                 break;
         }
     }
-    unsigned width = m_geometry->get_width();
-    unsigned height = m_geometry->get_height();
+    unsigned width = m_geo->get_width();
+    unsigned height = m_geo->get_height();
     bool is_info_location_right = (width <= 20);
     auto board_type = get_board_type();
     bool is_trigon = (board_type == BoardType::trigon
@@ -409,7 +403,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 else if (is_trigon)
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geometry->get_point_type(x, y) == 0 ? '\\' : '/');
+                    out << (m_geo->get_point_type(x, y) == 0 ? '\\' : '/');
                 }
                 else
                 {
@@ -422,7 +416,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 if (is_trigon && x > 0 && is_onboard(p.get_left()))
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geometry->get_point_type(p) == 0 ? '\\' : '/');
+                    out << (m_geo->get_point_type(p) == 0 ? '\\' : '/');
                 }
                 else
                 {
@@ -465,8 +459,7 @@ void Board::write(ostream& out, bool mark_last_move) const
             if (is_onboard(Point(width - 1, y)))
             {
                 set_color(out, "\x1B[1;30;47m");
-                out << (m_geometry->get_point_type(width - 1, y) != 0 ?
-                        '\\' : '/');
+                out << (m_geo->get_point_type(width - 1, y) != 0 ? '\\' : '/');
             }
             else
             {

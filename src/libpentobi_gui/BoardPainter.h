@@ -39,7 +39,7 @@ public:
     void setCoordinateColor(const QColor& color);
 
     void paintEmptyBoard(QPainter& painter, unsigned width, unsigned height,
-                         Variant variant, const Geometry& geometry);
+                         Variant variant, const Geometry& geo);
 
     /** Paint the pieces and markup.
         This function must only be called after paintEmptyBoard() because it
@@ -70,7 +70,7 @@ private:
 
     bool m_isTrigon;
 
-    const Geometry* m_geometry;
+    const Geometry* m_geo;
 
     Variant m_variant;
 

@@ -20,7 +20,7 @@ using libboardgame_base::PointTransform;
 class SymmetricPoints
 {
 public:
-    void init(const Geometry& geometry, const PointTransform<Point>& transform);
+    void init(const Geometry& geo, const PointTransform<Point>& transform);
 
     Point operator[](Point p) const;
 

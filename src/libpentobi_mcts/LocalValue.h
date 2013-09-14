@@ -60,14 +60,8 @@ public:
 
     friend class Compute;
 
-    /** Initialize geometry.
-        Must be called before using this class and whenever the board geometry
-        changes. */
-    void init_geometry(const Geometry& geometry);
-
     /** Find the attach points of the last opponent moves in a given position.
-        @param bd The board. Must have the same geometry as in the last call
-        of init_geometry(). */
+        @param bd The board. */
     void init(const Board& bd);
 
     /** Clear the stored last opponent attach moves. */
@@ -129,7 +123,7 @@ inline void LocalValue::init(const Board& bd)
         clear();
     Color to_play = bd.get_to_play();
     Color second_color = bd.get_second_color(to_play);
-    auto& geometry = bd.get_geometry();
+    auto& geo = bd.get_geometry();
     unsigned move_number = bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-player variants)
@@ -158,7 +152,7 @@ inline void LocalValue::init(const Board& bd)
                 // Opponent attach point
                 m_point_value[*j] = 0x100u;
                 unsigned nu_adj = 0;
-                for (AdjIterator k(geometry, *j); k; ++k)
+                for (AdjIterator k(geo, *j); k; ++k)
                     if (! is_forbidden[*k])
                     {
                         ++nu_adj;
@@ -168,7 +162,7 @@ inline void LocalValue::init(const Board& bd)
                                 m_points.push_back(*k);
                             // Adjacent to opp. attach point
                             m_point_value[*k] = 0x010u;
-                            for (AdjIterator l(geometry, *k); l; ++l)
+                            for (AdjIterator l(geo, *k); l; ++l)
                                 if (! is_forbidden[*l]
                                     && m_point_value[*l] == 0)
                                 {
@@ -184,19 +178,13 @@ inline void LocalValue::init(const Board& bd)
                 // (almost) as good as occupying the attach point. (This is
                 // done only for 1-point holes that are forbidden for to_play.)
                 if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
-                    for (AdjIterator k(geometry, *j); k; ++k)
+                    for (AdjIterator k(geo, *j); k; ++k)
                         if (! is_forbidden[*k])
                             m_point_value[*k] = 0x100u;
             }
         }
         while (++j != end);
     }
-}
-
-inline void LocalValue::init_geometry(const Geometry& geometry)
-{
-    m_points.clear();
-    m_point_value.init(geometry, 0);
 }
 
 //-----------------------------------------------------------------------------
