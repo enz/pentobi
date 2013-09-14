@@ -16,7 +16,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef uint_least32_t NodeIndex;
+typedef uint_least32_t NodeIdx;
 
 //-----------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ public:
         search. */
     void copy_data_from(const Node& node);
 
-    void link_children(NodeIndex first_child, int nu_children);
+    void link_children(NodeIdx first_child, int nu_children);
 
     void unlink_children();
 
@@ -91,7 +91,7 @@ public:
 
     /** Get node index of first child.
         @pre has_children() */
-    NodeIndex get_first_child() const;
+    NodeIdx get_first_child() const;
 
 private:
     atomic<Float> m_value;
@@ -104,7 +104,7 @@ private:
 
     Move m_move;
 
-    NodeIndex m_first_child;
+    NodeIdx m_first_child;
 
     /** Not to be implemented */
     Node(const Node&);
@@ -155,7 +155,7 @@ void Node<M, F>::copy_data_from(const Node& node)
         atomic<Float> m_visit_count;
         atomic<unsigned short> m_nu_children;
         Move m_move;
-        NodeIndex m_first_child;
+        NodeIdx m_first_child;
     };
     static_assert(sizeof(Node) == sizeof(Dummy), "");
 
@@ -172,7 +172,7 @@ inline auto Node<M, F>::get_value_count() const -> Float
 }
 
 template<typename M, typename F>
-inline NodeIndex Node<M, F>::get_first_child() const
+inline NodeIdx Node<M, F>::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
     return m_first_child;
@@ -241,7 +241,7 @@ void Node<M, F>::init_value(Float value, Float count)
 }
 
 template<typename M, typename F>
-inline void Node<M, F>::link_children(NodeIndex first_child, int nu_children)
+inline void Node<M, F>::link_children(NodeIdx first_child, int nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children <= numeric_limits<unsigned short>::max());
     // first_child cannot be 0 because 0 is always used for the root node

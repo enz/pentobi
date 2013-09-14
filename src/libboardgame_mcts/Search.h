@@ -977,9 +977,9 @@ size_t Search<S, M, R>::get_max_nodes(size_t memory)
     // Memory is used for 2 trees (m_tree and m_tmp_tree)
     size_t max_nodes = memory / sizeof(Node) / 2;
     // It doesn't make sense to set max_nodes higher than what can be accessed
-    // with NodeIndex
+    // with NodeIdx
     max_nodes =
-        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIndex>::max()));
+        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
     log() << "Search tree size: 2 x " << max_nodes << " nodes\n";
     return max_nodes;
 }

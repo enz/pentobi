@@ -96,7 +96,7 @@ public:
 
     size_t get_nu_nodes() const;
 
-    const Node& get_node(NodeIndex i) const;
+    const Node& get_node(NodeIdx i) const;
 
     void link_children(const Node& node, const Node* first_child,
                        unsigned nu_children);
@@ -229,7 +229,7 @@ inline auto Tree<N>::NodeExpander::get_best_child() const -> const Node*
 }
 
 template<typename N>
-inline auto Tree<N>::get_node(NodeIndex i) const -> const Node&
+inline auto Tree<N>::get_node(NodeIdx i) const -> const Node&
 {
     return m_nodes[i];
 }
@@ -314,7 +314,7 @@ bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
         target.m_thread_storage[get_thread_storage(first_child)];
     auto target_child = thread_storage.next;
     auto target_first_child =
-        static_cast<NodeIndex>(target_child - target.m_nodes.get());
+        static_cast<NodeIdx>(target_child - target.m_nodes.get());
     target_node_non_const.link_children(target_first_child, nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
@@ -407,11 +407,10 @@ template<typename N>
 inline void Tree<N>::link_children(const Node& node, const Node* first_child,
                                    unsigned nu_children)
 {
-    NodeIndex first_child_index =
-        static_cast<NodeIndex>(first_child - m_nodes.get());
-    LIBBOARDGAME_ASSERT(first_child_index > 0);
-    LIBBOARDGAME_ASSERT(first_child_index < m_max_nodes);
-    non_const(node).link_children(first_child_index, nu_children);
+    NodeIdx first_child_idx = static_cast<NodeIdx>(first_child - m_nodes.get());
+    LIBBOARDGAME_ASSERT(first_child_idx > 0);
+    LIBBOARDGAME_ASSERT(first_child_idx < m_max_nodes);
+    non_const(node).link_children(first_child_idx, nu_children);
 }
 
 /** Convert a const reference to node from user to a non-const reference.
@@ -447,7 +446,7 @@ template<typename N>
 void Tree<N>::set_max_nodes(size_t max_nodes)
 {
     max_nodes =
-        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIndex>::max()));
+        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
     if (max_nodes == 0)
         // We need at least the root node (for useful searches we need of
         // course also children, but a root node is the minimum requirement to
