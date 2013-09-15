@@ -61,8 +61,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
         reader.get_tree_transfer_ownership();
     libpentobi_base::Tree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
-    BoardUpdater updater(tree, *bd);
-    updater.update(get_last_node(tree.get_root()));
+    BoardUpdater updater;
+    updater.update(*bd, tree, get_last_node(tree.get_root()));
     unsigned nu_threads = 1;
     size_t memory = 10000;
     unique_ptr<Search> search(new Search(bd->get_variant(), nu_threads,

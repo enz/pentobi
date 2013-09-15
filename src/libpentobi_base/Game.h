@@ -191,6 +191,8 @@ private:
     Tree m_tree;
 
     BoardUpdater m_updater;
+
+    void update(const Node& node);
 };
 
 inline void Game::clear_modified()

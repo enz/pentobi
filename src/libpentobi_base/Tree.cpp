@@ -209,8 +209,8 @@ void Tree::keep_only_subtree(const Node& node)
     if (create_new_setup)
     {
         unique_ptr<Board> bd(new Board(m_variant));
-        BoardUpdater updater(*this, *bd);
-        updater.update(node);
+        BoardUpdater updater;
+        updater.update(*bd, *this, node);
         Setup setup;
         get_current_position_as_setup(*bd, setup);
         LIBBOARDGAME_ASSERT(! node_util::has_setup(node));

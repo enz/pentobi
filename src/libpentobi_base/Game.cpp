@@ -24,16 +24,14 @@ using libpentobi_base::boardutil::get_current_position_as_setup;
 
 Game::Game(Variant variant)
   : m_bd(new Board(variant)),
-    m_tree(variant),
-    m_updater(m_tree, *m_bd)
+    m_tree(variant)
 {
     init(variant);
 }
 
 Game::Game(unique_ptr<Node>& root)
   : m_bd(new Board(m_tree.get_variant())),
-    m_tree(m_tree.get_variant()),
-    m_updater(m_tree, *m_bd)
+    m_tree(m_tree.get_variant())
 {
     init(root);
 }
@@ -55,7 +53,7 @@ void Game::goto_node(const Node& node)
     auto old = m_current;
     try
     {
-        m_updater.update(node);
+        update(node);
         m_current = &node;
     }
     catch (const InvalidTree&)
@@ -67,7 +65,7 @@ void Game::goto_node(const Node& node)
         {
             try
             {
-                m_updater.update(*old);
+                update(*old);
             }
             catch (const InvalidTree&)
             {
@@ -126,7 +124,7 @@ void Game::play(ColorMove mv, bool always_create_new_node)
 void Game::remove_player()
 {
     m_tree.remove_player(*m_current);
-    m_updater.update(*m_current);
+    update(*m_current);
 }
 
 void Game::remove_setup(Color c, Move mv)
@@ -138,7 +136,7 @@ void Game::remove_setup(Color c, Move mv)
 void Game::set_player(Color c)
 {
     m_tree.set_player(*m_current, c);
-    m_updater.update(*m_current);
+    update(*m_current);
 }
 
 void Game::set_result(int score)
@@ -157,6 +155,11 @@ void Game::undo()
     LIBBOARDGAME_ASSERT(! m_tree.get_move(*m_current).is_null());
     LIBBOARDGAME_ASSERT(m_current->has_parent());
     goto_node(m_current->get_parent());
+}
+
+void Game::update(const Node& node)
+{
+    m_updater.update(*m_bd, m_tree, node);
 }
 
 //-----------------------------------------------------------------------------

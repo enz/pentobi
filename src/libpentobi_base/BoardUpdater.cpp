@@ -124,22 +124,22 @@ void init_setup(Board& bd, const Node& node)
 
 //-----------------------------------------------------------------------------
 
-void BoardUpdater::update(const Node& node)
+void BoardUpdater::update(Board& bd, const Tree& tree, const Node& node)
 {
-    LIBBOARDGAME_ASSERT(m_tree.contains(node));
-    m_bd.init();
+    LIBBOARDGAME_ASSERT(tree.contains(node));
+    bd.init();
     get_path_from_root(node, m_path);
     for (const Node* i : m_path)
     {
         if (libpentobi_base::node_util::has_setup(*i))
-            init_setup(m_bd, *i);
-        auto mv = m_tree.get_move(*i);
+            init_setup(bd, *i);
+        auto mv = tree.get_move(*i);
         if (mv.is_regular())
         {
-            auto& info = m_bd.get_move_info(mv.move);
-            if (m_bd.get_nu_left_piece(mv.color, info.get_piece()) == 0)
+            auto& info = bd.get_move_info(mv.move);
+            if (! bd.is_piece_left(mv.color, info.get_piece()))
                 throw InvalidTree("piece played twice");
-            m_bd.play(mv);
+            bd.play(mv);
         }
     }
 }

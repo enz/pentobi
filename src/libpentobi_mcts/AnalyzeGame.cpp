@@ -34,7 +34,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     m_values.clear();
     auto& tree = game.get_tree();
     unique_ptr<Board> bd(new Board(m_variant));
-    BoardUpdater updater(tree, *bd);
+    BoardUpdater updater;
     auto& root = game.get_root();
     auto node = &root;
     unsigned total_moves = 0;
@@ -64,7 +64,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                 progress_callback(move_number, total_moves);
                 try
                 {
-                    updater.update(node->get_parent());
+                    updater.update(*bd, tree, node->get_parent());
                     log() << "Analyzing move " << bd->get_nu_moves() << "\n";
                     const Float max_count = Float(nu_simulations);
                     double max_time = 0;

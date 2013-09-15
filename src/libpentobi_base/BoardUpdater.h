@@ -16,28 +16,16 @@ namespace libpentobi_base {
 class BoardUpdater
 {
 public:
-    BoardUpdater(const Tree& tree, Board& bd);
-
     /** Update the board to a node.
         @throws Exception if tree contains invalid properties, moves that play
         the same piece twice or other conditions that prevent the updater to
         update the board to the given node. */
-    void update(const Node& node);
+    void update(Board& bd, const Tree& tree, const Node& node);
 
 private:
-    const Tree& m_tree;
-
-    Board& m_bd;
-
     /** Local variable reused for efficiency. */
     vector<const Node*> m_path;
 };
-
-inline BoardUpdater::BoardUpdater(const Tree& tree, Board& bd)
-  : m_tree(tree),
-    m_bd(bd)
-{
-}
 
 //-----------------------------------------------------------------------------
 
