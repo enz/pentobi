@@ -12,6 +12,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
+// This should become an alias template (not yet supported by MSVC)
 template<typename T>
 class FullGrid
     : public libboardgame_base::FullGrid<Point, T>
