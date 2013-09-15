@@ -56,13 +56,13 @@ bool check_consistency(const PiecePoints& points)
 
 /** Bring piece points into a normal form that is constant under translation. */
 NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
-                           const Geometry& geometry)
+                           const Geometry& geo)
 {
     if (log_piece_creation)
         log() << "Points " << points << '\n';
     NormalizedPoints normalized;
     normalized.points = points;
-    type_match_shift(geometry, normalized.points.begin(),
+    type_match_shift(geo, normalized.points.begin(),
                      normalized.points.end(), point_type);
     if (log_piece_creation)
         log() << "Point type " << point_type << ", type match shift "
@@ -73,7 +73,7 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
     CoordPoint offset;
     normalize_offset(normalized.points.begin(), normalized.points.end(),
                      width, height, offset);
-    normalized.point_type = geometry.get_point_type(offset);
+    normalized.point_type = geo.get_point_type(offset);
     // Sort the coordinates
     sort(normalized.points.begin(), normalized.points.end());
     return normalized;
@@ -84,8 +84,7 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
 //-----------------------------------------------------------------------------
 
 PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
-                     const Geometry& geometry,
-                     const PieceTransforms& transforms)
+                     const Geometry& geo, const PieceTransforms& transforms)
     : m_name(name),
       m_points(points),
       m_transforms(&transforms)
@@ -105,7 +104,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                              transformed_points.end());
         NormalizedPoints normalized = normalize(transformed_points,
                                                 transform->get_new_point_type(),
-                                                geometry);
+                                                geo);
         if (log_piece_creation)
             log() << "Normalized " << normalized.points << " point type "
                   << normalized.point_type << '\n';
@@ -155,17 +154,17 @@ bool PieceInfo::can_rotate() const
     return rotate != transform;
 }
 
-const Transform* PieceInfo::find_transform(const Geometry& geometry,
+const Transform* PieceInfo::find_transform(const Geometry& geo,
                                            const Points& points) const
 {
     NormalizedPoints normalized =
-        normalize(points, geometry.get_point_type(0, 0), geometry);
+        normalize(points, geo.get_point_type(0, 0), geo);
     for (const Transform* transform : get_transforms())
     {
         Points piece_points = get_points();
         transform->transform(piece_points.begin(), piece_points.end());
         NormalizedPoints normalized_piece =
-            normalize(piece_points, transform->get_new_point_type(), geometry);
+            normalize(piece_points, transform->get_new_point_type(), geo);
         if (normalized_piece == normalized)
             return transform;
     }

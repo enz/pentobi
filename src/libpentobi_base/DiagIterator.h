@@ -18,13 +18,13 @@ class DiagIterator
     : public NullTermList<Point, 9>::Iterator
 {
 public:
-    DiagIterator(const Geometry& geometry, Point p);
+    DiagIterator(const Geometry& geo, Point p);
 
     DiagIterator(const Board& bd, Point p);
 };
 
-inline DiagIterator::DiagIterator(const Geometry& geometry, Point p)
-    : NullTermList<Point, 9>::Iterator(geometry.get_diag(p))
+inline DiagIterator::DiagIterator(const Geometry& geo, Point p)
+    : NullTermList<Point, 9>::Iterator(geo.get_diag(p))
 {
 }
 

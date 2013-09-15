@@ -49,7 +49,7 @@ public:
         @param geometry
         @param transforms */
     PieceInfo(const string& name, const Points& points,
-              const Geometry& geometry, const PieceTransforms& transforms);
+              const Geometry& geo, const PieceTransforms& transforms);
 
     const string& get_name() const;
 
@@ -80,7 +80,7 @@ public:
 
     bool can_flip_vertically(const Transform* transform) const;
 
-    const Transform* find_transform(const Geometry& geometry,
+    const Transform* find_transform(const Geometry& geo,
                                     const Points& points) const;
 
 private:

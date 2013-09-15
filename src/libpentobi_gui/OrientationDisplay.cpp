@@ -113,15 +113,15 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
                       0.5 * (height() - displayHeight));
     PiecePoints points = m_bd.get_piece_info(m_piece).get_points();
     m_transform->transform(points.begin(), points.end());
-    auto& geometry = m_bd.get_geometry();
-    type_match_shift(geometry, points.begin(), points.end(),
+    auto& geo = m_bd.get_geometry();
+    type_match_shift(geo, points.begin(), points.end(),
                      m_transform->get_new_point_type());
     unsigned width;
     unsigned height;
     CoordPoint offset;
     normalize_offset(points.begin(), points.end(), width, height, offset);
     bool invertPointType =
-        (geometry.get_point_type(offset) != geometry.get_point_type(0, 0));
+        (geo.get_point_type(offset) != geo.get_point_type(0, 0));
     painter.save();
     painter.translate(0.5 * (displayWidth - width * fieldWidth),
                       0.5 * (displayHeight - height * fieldHeight));
@@ -132,7 +132,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
         qreal y = (height - p.y - 1) * fieldHeight;
         if (isTrigon)
         {
-            bool isUpside = (geometry.get_point_type(p) != 0);
+            bool isUpside = (geo.get_point_type(p) != 0);
             if (invertPointType)
                 isUpside = ! isUpside;
             Util::paintColorTriangle(painter, variant, m_color, isUpside,

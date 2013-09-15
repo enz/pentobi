@@ -145,7 +145,7 @@ void PieceSelector::init()
             }
             m_piece[x][y] = piece;
         }
-    auto& geometry = m_bd.get_geometry();
+    auto& geo = m_bd.get_geometry();
     for (unsigned y = 0; y < m_nuRows; ++y)
         for (unsigned x = 0; x < m_nuColumns; ++x)
         {
@@ -155,11 +155,11 @@ void PieceSelector::init()
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
             // Mirror y to match the convention of CoordPoint coordinates
-            for (CoordPoint& p : points)
+            for (auto& p : points)
                 p.y = m_nuRows - p.y - 1;
-            type_match_shift(geometry, points.begin(), points.end(), 0);
+            type_match_shift(geo, points.begin(), points.end(), 0);
             m_transform[x][y] =
-                m_bd.get_piece_info(piece).find_transform(geometry, points);
+                m_bd.get_piece_info(piece).find_transform(geo, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
         }
     setDisabledStatus(m_disabledStatus);
@@ -209,7 +209,7 @@ void PieceSelector::paintEvent(QPaintEvent*)
     painter.translate(0.5 * (width() - m_selectorWidth),
                       0.5 * (height() - m_selectorHeight));
     auto variant = m_bd.get_variant();
-    auto& geometry = m_bd.get_geometry();
+    auto& geo = m_bd.get_geometry();
     for (unsigned x = 0; x < m_nuColumns; ++x)
         for (unsigned y = 0; y < m_nuRows; ++y)
         {
@@ -219,8 +219,8 @@ void PieceSelector::paintEvent(QPaintEvent*)
                 if (isTrigon)
                 {
                     bool isUpside =
-                        (geometry.get_point_type(x, m_nuRows - y - 1)
-                         != geometry.get_point_type(0, 0));
+                        (geo.get_point_type(x, m_nuRows - y - 1)
+                         != geo.get_point_type(0, 0));
                     Util::paintColorTriangle(painter, variant, m_color,
                                              isUpside, x * m_fieldWidth,
                                              y * m_fieldHeight, m_fieldWidth,
@@ -262,7 +262,7 @@ void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
                 || ++nuInstances[piece] > m_bd.get_nu_left_piece(m_color,
                                                                  piece))
                 disabled = true;
-            for (CoordPoint p : points)
+            for (auto& p : points)
             {
                 disabledStatus[p.x][p.y] = disabled;
                 marker[p.x][p.y] = true;

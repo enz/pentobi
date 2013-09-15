@@ -210,12 +210,12 @@ void State::compute_features(bool check_dist_to_center, bool check_connect)
     auto to_play = m_bd.get_to_play();
     auto second_color = m_bd.get_second_color(to_play);
     auto& moves = *m_moves[to_play];
-    auto& geometry = m_bc->get_geometry();
+    auto& geo = m_bc->get_geometry();
     auto& is_forbidden = m_bd.is_forbidden(to_play);
     Grid<Float> point_value;
     Grid<Float> attach_point_value;
     Grid<Float> adj_point_value;
-    for (GeometryIterator i(geometry); i; ++i)
+    for (GeometryIterator i(geo); i; ++i)
     {
         point_value[*i] = 1;
         auto s = m_bd.get_point_state(*i);
@@ -250,7 +250,7 @@ void State::compute_features(bool check_dist_to_center, bool check_connect)
             if (! is_forbidden[p])
             {
                 point_value[p] = 3.2f;
-                for (AdjIterator j(geometry, p); j; ++j)
+                for (AdjIterator j(geo, p); j; ++j)
                     if (! is_forbidden[*j])
                         point_value[*j] = max(point_value[*j], Float(2.5));
             }
@@ -872,7 +872,7 @@ void State::start_search()
     m_nu_colors = bd.get_nu_colors();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
-    auto& geometry = bd.get_geometry();
+    auto& geo = bd.get_geometry();
     m_nu_moves_initial = bd.get_nu_moves();
     m_check_terminate_early =
         (m_nu_moves_initial < 10u * m_nu_colors
@@ -901,14 +901,14 @@ void State::start_search()
             m_moves[*i].reset(new MoveList());
 
     // Init m_dist_to_center
-    float width = static_cast<float>(geometry.get_width());
-    float height = static_cast<float>(geometry.get_height());
+    float width = static_cast<float>(geo.get_width());
+    float height = static_cast<float>(geo.get_height());
     float center_x = 0.5f * width - 0.5f;
     float center_y = 0.5f * height - 0.5f;
     bool is_trigon = (bd.get_board_type() == BoardType::trigon
                       || bd.get_board_type() == BoardType::trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
-    for (GeometryIterator i(geometry); i; ++i)
+    for (GeometryIterator i(geo); i; ++i)
     {
         float x = static_cast<float>(i->get_x());
         float y = static_cast<float>(i->get_y());

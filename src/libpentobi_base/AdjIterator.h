@@ -18,13 +18,13 @@ class AdjIterator
     : public NullTermList<Point, 4>::Iterator
 {
 public:
-    AdjIterator(const Geometry& geometry, Point p);
+    AdjIterator(const Geometry& geo, Point p);
 
     AdjIterator(const Board& bd, Point p);
 };
 
-inline AdjIterator::AdjIterator(const Geometry& geometry, Point p)
-    : NullTermList<Point, 4>::Iterator(geometry.get_adj(p))
+inline AdjIterator::AdjIterator(const Geometry& geo, Point p)
+    : NullTermList<Point, 4>::Iterator(geo.get_adj(p))
 {
 }
 
