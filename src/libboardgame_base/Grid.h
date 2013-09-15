@@ -70,7 +70,7 @@ inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 template<class P, typename T>
 bool Grid<P, T>::compare(const Grid& grid, const Geometry& geo) const
 {
-    for (Iterator i(*geo); i; ++i)
+    for (Iterator i(geo); i; ++i)
         if (operator[](*i) != grid[*i])
             return false;
     return true;
