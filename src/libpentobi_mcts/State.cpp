@@ -162,14 +162,14 @@ bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
     if (is_forbidden[*i])
         return false;
     LocalValue::Compute compute_local(*i, m_local_value);
-    auto end = info.end();
+    unsigned piece_size = info.size();
+    auto end = i + piece_size;
     while (++i != end)
     {
         if (is_forbidden[*i])
             return false;
         compute_local.add_move_point(*i, m_local_value);
     }
-    unsigned piece_size = info.size();
     if (piece_size > m_max_playable_piece_size)
         m_max_playable_piece_size = piece_size;
     if (compute_local.get_upper_bound() >= m_max_local_value)

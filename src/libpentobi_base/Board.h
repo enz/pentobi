@@ -860,7 +860,7 @@ inline void Board::place(Color c, Move mv)
     ++state_color.nu_onboard_pieces;
     state_color.points += piece_size;
     auto i = info.begin();
-    auto end = info.end();
+    auto end = i + piece_size;
     do
     {
         m_state_base.point_state[*i] = c;
