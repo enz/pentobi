@@ -40,8 +40,6 @@ public:
     /** Fill all on-board points for a given board size with a value. */
     void fill(const T& val, const Geometry& geo);
 
-    bool compare(const Grid& grid, const Geometry& geo) const;
-
     ostream& write(ostream& out, const Geometry& geo) const;
 
 private:
@@ -65,15 +63,6 @@ inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
     for (Iterator i(geo); i; ++i)
         operator[](*i) = val;
-}
-
-template<class P, typename T>
-bool Grid<P, T>::compare(const Grid& grid, const Geometry& geo) const
-{
-    for (Iterator i(geo); i; ++i)
-        if (operator[](*i) != grid[*i])
-            return false;
-    return true;
 }
 
 template<class P, typename T>
