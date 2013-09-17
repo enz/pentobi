@@ -164,15 +164,15 @@ private:
         Node* next;
     };
 
+    unique_ptr<Node[]> m_nodes;
+
+    unique_ptr<ThreadStorage[]> m_thread_storage;
+
     unsigned m_nu_threads;
 
     size_t m_max_nodes;
 
     size_t m_nodes_per_thread;
-
-    unique_ptr<ThreadStorage[]> m_thread_storage;
-
-    unique_ptr<Node[]> m_nodes;
 
     bool contains(const Node& node) const;
 
@@ -241,6 +241,7 @@ inline void Tree<N>::NodeExpander::link_children()
     if (m_nu_children > 0)
         m_tree.link_children(m_node, m_first_child, m_nu_children);
 }
+
 
 template<typename N>
 Tree<N>::Tree(size_t max_nodes, unsigned nu_threads)
