@@ -154,11 +154,6 @@ public:
                       Float min_count = 0, bool check_abort = false,
                       IntervalChecker* interval_checker = 0) const;
 
-    /** Remove a child.
-        This function keeps the order of the remaining children and invalidates
-        references to children. the operation is not thread-safe. */
-    bool remove_child(const Node& node, const Move& mv);
-
 private:
     struct ThreadStorage
     {
@@ -421,25 +416,6 @@ inline auto Tree<N>::non_const(const Node& node) const -> Node&
 {
     LIBBOARDGAME_ASSERT(contains(node));
     return const_cast<Node&>(node);
-}
-
-template<typename N>
-bool Tree<N>::remove_child(const Node& node, const Move& mv)
-{
-    unsigned nu_children = node.get_nu_children();
-    if (nu_children == 0)
-        return false;
-    auto& first_child = non_const(*node.get_first_child());
-    auto child = &first_child;
-    for (int i = 0; i < nu_children; ++i, ++child)
-        if (child->get_move() == mv)
-        {
-            for ( ; i < nu_children - 1; ++i, ++child)
-                *child = *(child + 1);
-            non_const(node).link_children(first_child, nu_children - 1);
-            return true;
-        }
-    return false;
 }
 
 template<typename N>
