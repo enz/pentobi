@@ -226,7 +226,7 @@ private:
 
     ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
-    ArrayList<MoveFeatures, Move::range> m_features;
+    array<MoveFeatures, Move::range> m_features;
 
     /** Moves played by a color since the last update of its move list. */
     ColorMap<ArrayList<Move, Board::max_nonpass_player_moves>> m_new_moves;

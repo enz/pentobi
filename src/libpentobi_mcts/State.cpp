@@ -255,7 +255,6 @@ void State::compute_features(bool check_dist_to_center, bool check_connect)
                         point_value[*j] = max(point_value[*j], Float(2.5));
             }
     }
-    m_features.resize(moves.size());
     m_max_heuristic = -numeric_limits<Float>::max();
     m_min_dist_to_center = numeric_limits<unsigned>::max();
     m_has_connect_move = false;
