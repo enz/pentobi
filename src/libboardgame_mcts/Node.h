@@ -79,7 +79,7 @@ public:
         search. */
     void copy_data_from(const Node& node);
 
-    void link_children(NodeIdx first_child, int nu_children);
+    void link_children(NodeIdx first_child, unsigned nu_children);
 
     void unlink_children();
 
@@ -241,14 +241,13 @@ void Node<M, F>::init_value(Float value, Float count)
 }
 
 template<typename M, typename F>
-inline void Node<M, F>::link_children(NodeIdx first_child, int nu_children)
+inline void Node<M, F>::link_children(NodeIdx first_child, unsigned nu_children)
 {
-    LIBBOARDGAME_ASSERT(nu_children <= numeric_limits<unsigned short>::max());
+    LIBBOARDGAME_ASSERT(nu_children < Move::range);
     // first_child cannot be 0 because 0 is always used for the root node
     LIBBOARDGAME_ASSERT(first_child != 0);
     m_first_child = first_child;
-    m_nu_children.store(static_cast<unsigned short>(nu_children),
-                        memory_order_release);
+    m_nu_children.store(nu_children, memory_order_release);
 }
 
 template<typename M, typename F>
