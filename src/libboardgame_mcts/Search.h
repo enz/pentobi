@@ -272,12 +272,12 @@ public:
 
     bool get_prune_full_tree() const;
 
-    /** Maximum parent count for applying RAVE. */
+    /** Maximum parent visit count for applying RAVE. */
     void set_rave_max_parent_count(Float value);
 
     Float get_rave_max_parent_count() const;
 
-    /** Maximum child count for applying RAVE. */
+    /** Maximum child value count for applying RAVE. */
     void set_rave_max_child_count(Float value);
 
     Float get_rave_max_child_count() const;
@@ -1775,7 +1775,7 @@ void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
     {
         auto mv = it->get_move();
         if (! was_played[player][mv]
-            || it->get_visit_count() > m_rave_max_child_count)
+            || it->get_value_count() > m_rave_max_child_count)
             continue;
         unsigned first = first_play[player][mv.to_int()];
         LIBBOARDGAME_ASSERT(first > i);
