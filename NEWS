@@ -1,5 +1,5 @@
-Current development version (branch v7-fixes)
-=============================================
+Version 7.1.UNKNOWN
+===================
 
 * Hyphens used as minus signs in manpage (bug #9)
 * Added keywords section to desktop entry to silence lintian
