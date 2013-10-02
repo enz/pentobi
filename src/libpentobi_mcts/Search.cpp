@@ -260,6 +260,7 @@ void Search::set_default_param(Variant variant)
     set_expand_threshold(1);
     set_expand_threshold_incr(0.5f);
     set_rave_weight(0.7f);
+    set_rave_max_child_count(2000);
     // The following parameters are currently tuned for duo, classic_2 and
     // trigon_2 and used for all other game variants with the same board type
     switch (variant)
@@ -268,20 +269,17 @@ void Search::set_default_param(Variant variant)
     case Variant::junior:
         set_bias_term_constant(0.05f);
         set_rave_max_parent_count(25000);
-        set_rave_max_child_count(700);
         break;
     case Variant::classic_2:
     case Variant::classic:
         set_bias_term_constant(0.06f);
         set_rave_max_parent_count(50000);
-        set_rave_max_child_count(2000);
         break;
     case Variant::trigon_2:
     case Variant::trigon_3:
     case Variant::trigon:
         set_bias_term_constant(0.06f);
         set_rave_max_parent_count(50000);
-        set_rave_max_child_count(2000);
         break;
     default:
         LIBBOARDGAME_ASSERT(false);

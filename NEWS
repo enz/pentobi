@@ -1,7 +1,24 @@
-Current development version
-===========================
+Version 7.UNKNOWN
+=================
 
 * 
+
+Version 7.1.UNKNOWN
+===================
+
+* Hyphens used as minus signs in manpage (bug #9)
+* Added keywords section to desktop entry to silence lintian
+  warning (bug #10)
+
+
+Version 7.1 (13 Aug 2013)
+=========================
+
+* Fixed the version string. The released file pentobi-7.0.tar.gz was
+  erroneously built from git version c5247c56 just before the version
+  tagged with v7.0 and contained the version string 6.UNKNOWN
+* The color played by the human in rated games is now randomly assigned
+* The mouse wheel is now disabled while the computer is thinking
 
 
 Version 7.0 (25 Jun 2013)
