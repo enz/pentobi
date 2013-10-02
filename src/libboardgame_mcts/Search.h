@@ -746,7 +746,7 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
       m_prune_full_tree(true),
       m_prune_count_start(16),
       m_rave_max_parent_count(50000),
-      m_rave_max_child_count(500),
+      m_rave_max_child_count(2000),
       m_rave_weight(0.3f),
       m_rave_dist_final(0),
       m_tree_memory(memory == 0 ? 256000000 : memory),
