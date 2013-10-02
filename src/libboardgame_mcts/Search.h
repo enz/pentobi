@@ -1796,55 +1796,6 @@ void Search<S, M, R>::update_rave(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-<<<<<<< HEAD
-=======
-void Search<S, M, R>::update_rave_values(ThreadState& thread_state,
-                                         unsigned i, PlayerInt player)
-{
-    auto& nodes = thread_state.simulation.nodes;
-    LIBBOARDGAME_ASSERT(i < nodes.size());
-    const auto node = nodes[i];
-    const auto& state = *thread_state.state;
-    auto& was_played = thread_state.was_played;
-    auto& first_play = thread_state.first_play;
-    unsigned len = state.get_nu_moves();
-    Float dist_weight_factor = (1 - m_rave_dist_final) / Float(len - i);
-    ChildIterator it(m_tree, *node);
-    LIBBOARDGAME_ASSERT(it);
-    do
-    {
-        auto mv = it->get_move();
-        if (! was_played[player][mv]
-            || it->get_value_count() > m_rave_max_child_count)
-            continue;
-        unsigned first = first_play[player][mv.to_int()];
-        LIBBOARDGAME_ASSERT(first > i);
-        if (SearchParamConst::rave_check_same)
-        {
-            bool other_played_same = false;
-            for (PlayerInt j = 0; j < m_nu_players; ++j)
-                if (j != player && was_played[j][mv])
-                {
-                    unsigned first_other = first_play[j][mv.to_int()];
-                    if (first_other >= i && first_other <= first)
-                    {
-                        other_played_same = true;
-                        break;
-                    }
-                }
-            if (other_played_same)
-                continue;
-        }
-        Float weight = m_rave_weight;
-        if (SearchParamConst::rave_dist_weighting)
-            weight *= 1 - Float(first - i) * dist_weight_factor;
-        m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
-    }
-    while (++it);
-}
-
-template<class S, class M, class R>
->>>>>>> v7-fixes
 void Search<S, M, R>::update_values(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
