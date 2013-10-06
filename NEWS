@@ -1,7 +1,7 @@
 Version 7.UNKNOWN (master)
 ==========================
 
-* 
+* The source code distribution uses now xz instead of gzip for compression
 
 
 Version 7.1.UNKNOWN

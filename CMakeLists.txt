@@ -117,7 +117,7 @@ endif()
 
 add_custom_target(dist
   COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD
-  | gzip --best > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.gz
+  | xz > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.xz
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 add_custom_target(post-install
