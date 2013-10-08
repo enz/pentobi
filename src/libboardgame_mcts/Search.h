@@ -1507,7 +1507,7 @@ auto Search<S, M, R>::select_child(ThreadState& thread_state,
             auto value = i->get_value();
             if (value < limit)
                 continue;
-            value += m_bias_term.get(i->get_visit_count());
+            value += m_bias_term.get(i->get_value_count());
             if (value > best_value)
             {
                 best_value = value;
