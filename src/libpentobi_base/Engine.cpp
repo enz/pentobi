@@ -349,7 +349,10 @@ void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
     Move mv;
     try
     {
-        mv = bd.from_string(args.get_remaining_line(arg_move_begin - 1));
+        if (arg_move_begin == 0)
+            mv = bd.from_string(args.get_line());
+        else
+            mv = bd.from_string(args.get_remaining_line(arg_move_begin - 1));
     }
     catch (const Exception& e)
     {
