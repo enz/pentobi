@@ -4,12 +4,14 @@ Version 7.UNKNOWN (master)
 * The source code distribution uses now xz instead of gzip for compression
 
 
-Version 7.1.UNKNOWN
-===================
+Version 7.1.UNKNOWN (v7-fixes)
+==============================
 
 * Hyphens used as minus signs in manpage (bug #9)
 * Added keywords section to desktop entry to silence lintian
   warning (bug #10)
+* Fixed wrong arguments to update-mime-database/update-desktop-database
+  when runing "make post-install"
 
 
 Version 7.1 (13 Aug 2013)

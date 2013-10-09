@@ -122,8 +122,8 @@ add_custom_target(dist
 
 add_custom_target(post-install
   COMMAND
-  update-desktop-database ${CMAKE_INSTALL_DATAROOTDIR}/applications\;
-  update-mime-database ${CMAKE_INSTALL_DATAROOTDIR}/mime\;
+  update-mime-database ${CMAKE_INSTALL_FULL_DATAROOTDIR}/mime\;
+  update-desktop-database ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications\;
   )
 
 install(FILES README NEWS COPYING doc/blksgf/Pentobi-SGF.html
