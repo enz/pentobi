@@ -7,7 +7,7 @@ certain C++11 features (only features that are already implemented by GCC 4.7
 and MSVC 2012). For creating cross-platform makefiles, CMake (>= 2.8.9) is
 required.
 
-Ubuntu 13.04 provides suitable versions of the required tools and libraries in
+Ubuntu 13.10 provides suitable versions of the required tools and libraries in
 its package repository. The packages can be installed with the shell command:
 
   sudo apt-get install cmake g++ libqt4-dev make qt4-default
@@ -22,7 +22,7 @@ Pentobi can be compiled with cmake using the shell command:
 
 To build Pentobi with Qt 5 instead of Qt 4, use the cmake option
 -DUSE_QT5=ON and make sure that the development packages for Qt 5 are
-installed (on Ubuntu 13.04: qt5-default, qttools5-dev, qttools5-dev-tools).
+installed (on Ubuntu 13.10: qt5-default, qttools5-dev, qttools5-dev-tools).
 The KDE thumbnailer plugin (see below) cannot be compiled with Qt 5.
 
 === Building with Boost.Thread ===
@@ -37,8 +37,8 @@ be installed.
 
 A thumbnailer plugin for KDE can be built by using the cmake option
 -DPENTOBI_BUILD_KDE_THUMBNAILER=ON. In this case, the KDE development files
-need to be installed (package kdelibs5-dev on Ubuntu 13.04). Note that on
-Ubuntu 13.04, the plugin will not be found if the default installation prefix
+need to be installed (package kdelibs5-dev on Ubuntu 13.10). Note that on
+Ubuntu 13.10, the plugin will not be found if the default installation prefix
 /usr/local is used. You need to add KDEDIRS=/usr/local to /etc/environment.
 After that, you can enable previews for Blokus game file in the Dolphin file
 manager in "Configure Dolphin/General/Previews".
