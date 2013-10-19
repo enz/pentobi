@@ -21,7 +21,7 @@ template<typename T>
 class ColorMap
 {
 public:
-    ColorMap();
+    ColorMap() = default;
 
     ColorMap(const T& val);
 
@@ -34,11 +34,6 @@ public:
 private:
     T m_a[Color::range];
 };
-
-template<typename T>
-inline ColorMap<T>::ColorMap()
-{
-}
 
 template<typename T>
 inline ColorMap<T>::ColorMap(const T& val)

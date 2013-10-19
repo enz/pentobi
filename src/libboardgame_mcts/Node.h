@@ -31,7 +31,11 @@ public:
 
     typedef F Float;
 
-    Node();
+    Node() = default;
+
+    Node(const Node&) = delete;
+
+    Node& operator=(const Node&) = delete;
 
     /** Initialize the node.
         This function may not be called on a node that is already part of
@@ -105,18 +109,7 @@ private:
     Move m_move;
 
     NodeIdx m_first_child;
-
-    /** Not to be implemented */
-    Node(const Node&);
-
-    /** Not to be implemented */
-    Node& operator=(const Node&);
 };
-
-template<typename M, typename F>
-inline Node<M, F>::Node()
-{
-}
 
 template<typename M, typename F>
 void Node<M, F>::add_value(Float v)

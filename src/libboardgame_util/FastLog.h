@@ -23,7 +23,11 @@ using namespace std;
 class FastLog
 {
 public:
-    FastLog(int mantissa_bits);
+    explicit FastLog(int mantissa_bits);
+
+    FastLog(const FastLog&) = delete;
+
+    FastLog& operator=(const FastLog&) = delete;
 
     /** Get natural logarithm. */
     float get_log(float val) const;
@@ -41,12 +45,6 @@ private:
     const int m_mantissa_bits_diff;
 
     unique_ptr<float[]> m_table;
-
-    /** Not implemented. */
-    FastLog(const FastLog&);
-
-    /** Not implemented. */
-    FastLog& operator=(const FastLog&);
 };
 
 inline float FastLog::get_log(float val) const

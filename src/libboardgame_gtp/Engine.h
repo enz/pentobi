@@ -61,6 +61,10 @@ public:
 
     Engine();
 
+    Engine(const Engine&) = delete;
+
+    Engine& operator=(const Engine&) const = delete;
+
     virtual ~Engine() throw();
 
     /** Execute commands from an input stream.
@@ -206,12 +210,6 @@ private:
     bool m_quit;
 
     Handlers m_handlers;
-
-    /** Not to be implemented. */
-    Engine(const Engine& engine);
-
-    /** Not to be implemented. */
-    Engine& operator=(const Engine& engine) const;
 
     bool handle_cmd(CmdLine& line, ostream& out, Response& response,
                     string& buffer);

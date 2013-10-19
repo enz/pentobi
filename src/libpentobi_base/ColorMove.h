@@ -28,7 +28,7 @@ struct ColorMove
         and then assign only the move. */
     static ColorMove null();
 
-    ColorMove();
+    ColorMove() = default;
 
     ColorMove(Color c, Move mv);
 
@@ -46,10 +46,6 @@ struct ColorMove
 
     bool is_regular() const;
 };
-
-inline ColorMove::ColorMove()
-{
-}
 
 inline ColorMove::ColorMove(Color c, Move mv)
     : color(c),

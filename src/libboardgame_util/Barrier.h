@@ -30,7 +30,7 @@ using boost::mutex;
 class Barrier
 {
 public:
-    Barrier(unsigned count);
+    explicit Barrier(unsigned count);
 
     void wait();
 

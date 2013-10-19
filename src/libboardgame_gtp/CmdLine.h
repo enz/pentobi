@@ -31,7 +31,7 @@ public:
     /** Construct empty command.
         @warning An empty command cannot be used, before init() was called.
         This constructor exists only to reuse instances. */
-    CmdLine();
+    CmdLine() = default;
 
     /** Construct with a command line.
         @see init() */
@@ -70,10 +70,6 @@ private:
 
     void parse_id();
 };
-
-inline CmdLine::CmdLine()
-{
-}
 
 inline CmdLine::CmdLine(const string& line)
 {

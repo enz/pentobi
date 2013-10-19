@@ -26,17 +26,12 @@ class PointList
 public:
     typedef P Point;
 
-    PointList();
+    PointList() = default;
 
     explicit PointList(const P& p);
 
     explicit PointList(const string& s);
 };
-
-template<class P>
-inline PointList<P>::PointList()
-{
-}
 
 template<class P>
 inline PointList<P>::PointList(const P& p)

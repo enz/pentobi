@@ -26,7 +26,7 @@ struct CoordPoint
 
     static CoordPoint null();
 
-    CoordPoint();
+    CoordPoint() = default;
 
     CoordPoint(int x, int y);
 
@@ -53,10 +53,6 @@ struct CoordPoint
     static void find_width_height(T begin, T end, unsigned& width,
                                   unsigned& height);
 };
-
-inline CoordPoint::CoordPoint()
-{
-}
 
 inline CoordPoint::CoordPoint(int x, int y)
 {

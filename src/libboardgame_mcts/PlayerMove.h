@@ -27,9 +27,7 @@ struct PlayerMove
         return m;
     }
 
-    PlayerMove()
-    {
-    }
+    PlayerMove() = default;
 
     PlayerMove(PlayerInt player, MOVE move)
     {

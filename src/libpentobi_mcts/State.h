@@ -129,6 +129,8 @@ public:
 
     ~State() throw();
 
+    State& operator=(const State&) = delete;
+
     /** Play a move in the in-tree phase of the search. */
     void play_in_tree(Move mv);
 
@@ -283,9 +285,6 @@ private:
 
     /** Distance to center heuristic. */
     Grid<unsigned> m_dist_to_center;
-
-    /** Not implemented. */
-    State& operator=(const State&);
 
     void add_moves(Point p, Color c,
                    const Board::PiecesLeftList& pieces_considered);

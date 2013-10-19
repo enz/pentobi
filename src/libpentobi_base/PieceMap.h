@@ -17,7 +17,7 @@ template<typename T>
 class PieceMap
 {
 public:
-    PieceMap();
+    PieceMap() = default;
 
     PieceMap(const T& val);
 
@@ -34,11 +34,6 @@ public:
 private:
     T m_a[Piece::range_not_null];
 };
-
-template<typename T>
-inline PieceMap<T>::PieceMap()
-{
-}
 
 template<typename T>
 inline PieceMap<T>::PieceMap(const T& val)

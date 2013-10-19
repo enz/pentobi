@@ -18,8 +18,6 @@ using namespace std;
 class Response
 {
 public:
-    Response();
-
     ~Response() throw();
 
     /** Conversion to output stream.
@@ -48,10 +46,6 @@ private:
     /** Response stream */
     ostringstream m_stream;
 };
-
-inline Response::Response()
-{
-}
 
 inline Response::operator ostream&()
 {

@@ -105,7 +105,7 @@ public:
     unsigned get_second_dist_to_edge(Point p) const;
 
 protected:
-    Geometry();
+    Geometry() = default;
 
     /** Initialize.
         Subclasses must call this function in their constructors. */
@@ -181,11 +181,6 @@ inline void Geometry<P>::Iterator::operator++()
 {
     LIBBOARDGAME_ASSERT(operator bool());
     ++m_p;
-}
-
-template<class P>
-Geometry<P>::Geometry()
-{
 }
 
 template<class P>

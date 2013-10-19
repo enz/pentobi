@@ -72,6 +72,14 @@ public:
 
     Board(Variant variant);
 
+    /** Not implemented to avoid unintended copies.
+        Use copy_from() to copy a board state. */
+    Board(const Board&) = delete;
+
+    /** Not implemented to avoid unintended copies.
+        Use copy_from() to copy a board state. */
+    Board& operator=(const Board&) = delete;
+
     Variant get_variant() const;
 
     Color::IntType get_nu_colors() const;
@@ -422,14 +430,6 @@ private:
     /** Local variable during move generation.
         Reused for efficiency. */
     mutable MoveMarker m_marker;
-
-    /** Not to be implemented.
-        Use copy_from() to copy a board state. */
-    Board(const Board&);
-
-    /** Not to be implemented.
-        Use copy_from() to copy a board state. */
-    Board& operator=(const Board&);
 
     void gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
                    ArrayList<Move,Move::range>& moves) const;
