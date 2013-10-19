@@ -6,7 +6,6 @@
 #define LIBPENTOBI_BASE_GRID_H
 
 #include "Point.h"
-#include "Geometry.h"
 #include "libboardgame_base/Grid.h"
 
 namespace libpentobi_base {

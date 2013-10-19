@@ -5,8 +5,8 @@
 #ifndef LIBPENTOBI_BASE_SYMMETRIC_POINTS_H
 #define LIBPENTOBI_BASE_SYMMETRIC_POINTS_H
 
+#include "Geometry.h"
 #include "Grid.h"
-
 #include "libboardgame_base/PointTransform.h"
 
 namespace libpentobi_base {
