@@ -12,16 +12,8 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-// This should become an alias template (not yet supported by MSVC)
 template<typename T>
-class Grid
-    : public libboardgame_base::Grid<Point, T>
-{
-public:
-    explicit Grid()
-    {
-    }
-};
+using Grid = libboardgame_base::Grid<Point, T>;
 
 //-----------------------------------------------------------------------------
 

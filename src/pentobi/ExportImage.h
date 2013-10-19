@@ -5,12 +5,13 @@
 #ifndef PENTOBI_EXPORT_IMAGE_H
 #define PENTOBI_EXPORT_IMAGE_H
 
+#include "libpentobi_base/Grid.h"
+
 class QString;
 class QWidget;
 
 namespace libpentobi_base {
 class Board;
-template<typename T> class Grid;
 }
 
 using libpentobi_base::Board;
