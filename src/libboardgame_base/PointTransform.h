@@ -5,13 +5,11 @@
 #ifndef LIBBOARDGAME_BASE_POINT_TRANSFORM_H
 #define LIBBOARDGAME_BASE_POINT_TRANSFORM_H
 
+#include <cmath>
 #include "Point.h"
-#include "libboardgame_util/Math.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libboardgame_base {
-
-using libboardgame_util::round;
 
 //-----------------------------------------------------------------------------
 

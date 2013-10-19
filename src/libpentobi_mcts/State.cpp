@@ -11,7 +11,6 @@
 #include <cmath>
 #include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_util/Math.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/Geometry.h"
 
