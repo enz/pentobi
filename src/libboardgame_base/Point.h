@@ -140,7 +140,7 @@ public:
     /** Special-purpose off-board point.
         This point is an off-board point with index 0. Among the use cases is
         an end marker for point lists or to initialize variables that carry a
-        special meaning if no point has assigned to them yet. */
+        special meaning if no point has been assigned to them yet. */
     static Point null();
 
     /** Parse a point from a string.
