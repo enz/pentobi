@@ -22,8 +22,7 @@ namespace {
 
 void mainFunction(int argc, char* argv[])
 {
-    vector<string> specs;
-    specs.push_back("size|s:");
+    vector<string> specs = { "size|s:" };
     Options opt(argc, argv, specs);
     auto size = opt.get<int>("size", 128);
     auto& files = opt.get_args();

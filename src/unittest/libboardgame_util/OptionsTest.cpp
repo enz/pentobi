@@ -16,12 +16,8 @@ using namespace libboardgame_util;
 
 LIBBOARDGAME_TEST_CASE(libboardgame_util_options_basic)
 {
-    vector<string> specs;
-    specs.push_back("first|a:");
-    specs.push_back("second|b:");
-    specs.push_back("third|c");
-    specs.push_back("fourth");
-    specs.push_back("fifth");
+    vector<string> specs =
+        { "first|a:", "second|b:", "third|c", "fourth", "fifth" };
     const char* argv[] =
         { nullptr, "--second", "secondval", "--first", "firstval",
           "--fourth", "-c", "arg1", "arg2" };
@@ -42,8 +38,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_basic)
 
 LIBBOARDGAME_TEST_CASE(libboardgame_util_options_end_options)
 {
-    vector<string> specs;
-    specs.push_back("first:");
+    vector<string> specs = { "first:" };
     const char* argv[] =
         { nullptr, "--first", "firstval", "--", "--arg1" };
     int argc = sizeof(argv) / sizeof(argv[0]);
@@ -56,9 +51,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_end_options)
 
 LIBBOARDGAME_TEST_CASE(libboardgame_util_options_nospace)
 {
-    vector<string> specs;
-    specs.push_back("first|a:");
-    specs.push_back("second|b:");
+    vector<string> specs = { "first|a:", "second|b:" };
     const char* argv[] = { nullptr, "-abc" };
     int argc = sizeof(argv) / sizeof(argv[0]);
     Options opt(argc, argv, specs);
@@ -67,9 +60,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_nospace)
 
 LIBBOARDGAME_TEST_CASE(libboardgame_util_options_multi_short_with_val)
 {
-    vector<string> specs;
-    specs.push_back("first|a");
-    specs.push_back("second|b:");
+    vector<string> specs = { "first|a", "second|b:" };
     const char* argv[] = { nullptr, "-ab", "c" };
     int argc = sizeof(argv) / sizeof(argv[0]);
     Options opt(argc, argv, specs);
@@ -79,9 +70,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_multi_short_with_val)
 
 LIBBOARDGAME_TEST_CASE(libboardgame_util_options_type)
 {
-    vector<string> specs;
-    specs.push_back("first:");
-    specs.push_back("second:");
+    vector<string> specs = { "first:", "second:" };
     const char* argv[] = { nullptr, "--first", "10", "--second", "foo" };
     int argc = sizeof(argv) / sizeof(argv[0]);
     Options opt(argc, argv, specs);

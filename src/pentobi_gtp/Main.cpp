@@ -53,22 +53,23 @@ int main(int argc, char** argv)
     string application_dir_path = get_application_dir_path(argc, argv);
     try
     {
-        vector<string> specs;
-        specs.push_back("book:");
-        specs.push_back("config|c:");
-        specs.push_back("color");
-        specs.push_back("cputime");
-        specs.push_back("game|g:");
-        specs.push_back("help|h");
-        specs.push_back("level|l:");
-        specs.push_back("memory:");
-        specs.push_back("nobook");
-        specs.push_back("noresign");
-        specs.push_back("quiet|q");
-        specs.push_back("seed|r:");
-        specs.push_back("showboard");
-        specs.push_back("threads:");
-        specs.push_back("version|v");
+        vector<string> specs = {
+            "book:",
+            "config|c:",
+            "color",
+            "cputime",
+            "game|g:",
+            "help|h",
+            "level|l:",
+            "memory:",
+            "nobook",
+            "noresign",
+            "quiet|q",
+            "seed|r:",
+            "showboard",
+            "threads:",
+            "version|v"
+        };
         Options opt(argc, argv, specs);
         if (opt.contains("help"))
         {
