@@ -7,7 +7,7 @@
 #endif
 
 #include "libboardgame_base/PointTransform.h"
-#include "libboardgame_base/SpreadsheetStringRep.h"
+#include "libboardgame_base/SpShtStrRep.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
@@ -17,7 +17,7 @@ using namespace libboardgame_base;
 
 LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
 {
-    typedef libboardgame_base::Point<19,19,unsigned short,SpreadsheetStringRep>
+    typedef libboardgame_base::Point<19, 19, unsigned short, SpShtStrRep>
         Point;
     unsigned sz = 9;
     Point p("B7");

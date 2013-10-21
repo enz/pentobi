@@ -11,7 +11,7 @@ set(unittest_libboardgame_base_STAT_SRCS
   PointTransformTest.cpp
   RatingTest.cpp
   RectGeometryTest.cpp
-  SpreadsheetStringRepTest.cpp
+  SpShtStrRepTest.cpp
   )
 
 add_executable(unittest_libboardgame_base

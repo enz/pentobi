@@ -8,17 +8,16 @@
 
 #include "libboardgame_base/PointList.h"
 #include "libboardgame_base/RectGeometry.h"
-#include "libboardgame_base/SpreadsheetStringRep.h"
+#include "libboardgame_base/SpShtStrRep.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
 using libboardgame_base::NullTermList;
-using libboardgame_base::SpreadsheetStringRep;
+using libboardgame_base::SpShtStrRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19,19,unsigned short,SpreadsheetStringRep>
-    Point;
+typedef libboardgame_base::Point<19, 19, unsigned short, SpShtStrRep> Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::RectGeometry<Point> RectGeometry;
 typedef libboardgame_base::PointList<Point> PointList;

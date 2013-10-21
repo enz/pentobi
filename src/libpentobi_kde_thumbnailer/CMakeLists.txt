@@ -26,7 +26,7 @@ set(pentobi_kde_thumbnailer_STAT_SRCS
   ../libboardgame_util/Exception.cpp
   ../libboardgame_util/Log.cpp
   ../libboardgame_util/StringUtil.cpp
-  ../libboardgame_base/SpreadsheetStringRep.cpp
+  ../libboardgame_base/SpShtStrRep.cpp
   ../libboardgame_sgf/InvalidPropertyValue.cpp
   ../libboardgame_sgf/InvalidTree.cpp
   ../libboardgame_sgf/MissingProperty.cpp

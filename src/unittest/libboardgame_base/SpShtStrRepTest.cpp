@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file SpreadsheetStringRepTest.cpp */
+/** @file SpShtStrRepTest.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
@@ -7,28 +7,28 @@
 #endif
 
 #include <sstream>
-#include "libboardgame_base/SpreadsheetStringRep.h"
+#include "libboardgame_base/SpShtStrRep.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using libboardgame_base::SpreadsheetStringRep;
+using libboardgame_base::SpShtStrRep;
 
 //-----------------------------------------------------------------------------
 
 namespace {
 
 bool read(const string& s, unsigned& x, unsigned& y,
-          unsigned width = SpreadsheetStringRep::max_width,
-          unsigned height = SpreadsheetStringRep::max_height)
+          unsigned width = SpShtStrRep::max_width,
+          unsigned height = SpShtStrRep::max_height)
 {
     istringstream in(s);
-    return SpreadsheetStringRep::read(in, width, height, x, y);
+    return SpShtStrRep::read(in, width, height, x, y);
 }
 
 string write(unsigned x, unsigned y)
 {
     ostringstream out;
-    SpreadsheetStringRep::write(out, x, y);
+    SpShtStrRep::write(out, x, y);
     return out.str();
 }
 

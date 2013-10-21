@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_base/SpreadsheetStringRep.h */
+/** @file libboardgame_base/SpShtStrRep.h */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_BASE_SPREADSHEET_STRING_REP_H
-#define LIBBOARDGAME_BASE_SPREADSHEET_STRING_REP_H
+#ifndef LIBBOARDGAME_BASE_SP_SHT_STR_REP_H
+#define LIBBOARDGAME_BASE_SP_SHT_STR_REP_H
 
 #include <climits>
 #include <iosfwd>
@@ -21,7 +21,7 @@ using namespace std;
     by numbers starting with '1'. Note that unlike in spreadsheets, row number
     1 is at the bottom to be compatible with the coordinate convention used
     in class Point. */
-struct SpreadsheetStringRep
+struct SpShtStrRep
 {
     static const unsigned max_width = UINT_MAX;
 
@@ -37,4 +37,4 @@ struct SpreadsheetStringRep
 
 } // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_BASE_SPREADSHEET_STRING_REP_H
+#endif // LIBBOARDGAME_BASE_SP_SHT_STR_REP_H

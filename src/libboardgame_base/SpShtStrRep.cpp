@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_base/SpreadsheetStringRep.cpp */
+/** @file libboardgame_base/SpShtStrRep.cpp */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include "SpreadsheetStringRep.h"
+#include "SpShtStrRep.h"
 
 #include <cstdio>
 #include <iostream>
@@ -19,7 +19,7 @@ using libboardgame_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
-bool SpreadsheetStringRep::read(istream& in, unsigned width, unsigned height,
+bool SpShtStrRep::read(istream& in, unsigned width, unsigned height,
                                 unsigned& x, unsigned& y)
 {
     int c;
@@ -68,7 +68,7 @@ bool SpreadsheetStringRep::read(istream& in, unsigned width, unsigned height,
     return false;
 }
 
-void SpreadsheetStringRep::write(ostream& out, unsigned x, unsigned y)
+void SpShtStrRep::write(ostream& out, unsigned x, unsigned y)
 {
     out << get_letter_coord(x) << (y + 1);
 }
