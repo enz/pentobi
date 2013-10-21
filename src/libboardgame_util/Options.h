@@ -91,8 +91,6 @@ private:
     map<string, string> m_map;
 
     void check_name(const string& name) const;
-
-    void init(int argc, const char** argv, const vector<string>& specs);
 };
 
 inline bool Options::contains(const string& name) const
