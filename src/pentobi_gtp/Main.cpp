@@ -80,7 +80,7 @@ int main(int argc, char** argv)
                 "--color      colorize text output of boards\n"
                 "--cputime    use CPU time\n"
                 "--game,-g    game variant (classic, classic_2, duo, trigon,\n"
-                "             trigon_2, junior)\n"
+                "             trigon_2, trigon_3, junior)\n"
                 "--help,-h    print help message and exit\n"
                 "--level,-l   set playing strength level\n"
                 "--memory     memory to allocate for search trees\n"
