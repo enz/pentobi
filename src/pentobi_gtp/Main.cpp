@@ -153,6 +153,11 @@ int main(int argc, char** argv)
             engine.exec(in, true, log());
         }
         auto& args = opt.get_args();
+        // We currently don't need the ability to interrupt commands, so we
+        // use exec_main_loop_st(), not exec_main_loop(), and remove the
+        // gogui-interrupt command, which indicates this ability to
+        // controllers.
+        engine.remove("gogui-interrupt");
         if (! args.empty())
             for (auto& file : args)
             {
