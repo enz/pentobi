@@ -64,7 +64,7 @@ void Engine::cmd_all_legal(const Arguments& args, Response& response)
     unique_ptr<MoveList> moves(new MoveList());
     bd.gen_moves(get_color_arg(args), *moves);
     for (Move mv : *moves)
-        response << bd.to_string(mv) << '\n';
+        response << bd.to_string(mv, false) << '\n';
 }
 
 void Engine::cmd_clear_board()
