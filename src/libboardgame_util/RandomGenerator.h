@@ -9,9 +9,14 @@
 #include <random>
 #include "Assert.h"
 
-// Use fast SSE-based random generator if GCC >=4.8 (non-standard GCC extension)
+// Use fast SIMD-based random generator if GCC (non-standard extension of
+// GCC >=4.8). Note: Is this random generator intended to be available on all
+// platforms GCC supports with a fallback implementation without vectorization?
+// It causes a compilation error with GCC 4.8.2 on PowerPC, so we currently use
+// it only if __SSE2__ is defined.
 #if defined __GNUC__ \
-    && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8))
+    && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)) \
+    && defined __SSE2__
 #define LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
 #endif
 
