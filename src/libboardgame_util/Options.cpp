@@ -97,7 +97,7 @@ Options::Options(int argc, const char** argv, const vector<string>& specs)
                 if (n < argc)
                 {
                     value = argv[n];
-                    if (value.find("-") != 0)
+                    if (value.empty() || value[0] != '-')
                         value_found = true;
                 }
                 if (! value_found)

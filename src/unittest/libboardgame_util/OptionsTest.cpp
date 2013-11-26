@@ -49,6 +49,14 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_end_options)
     LIBBOARDGAME_CHECK_EQUAL(args[0], "--arg1");
 }
 
+LIBBOARDGAME_TEST_CASE(libboardgame_util_options_missing_val)
+{
+    vector<string> specs = { "first:" };
+    const char* argv[] = { nullptr, "--first" };
+    int argc = sizeof(argv) / sizeof(argv[0]);
+    LIBBOARDGAME_CHECK_THROW(Options opt(argc, argv, specs), Exception);
+}
+
 LIBBOARDGAME_TEST_CASE(libboardgame_util_options_nospace)
 {
     vector<string> specs = { "first|a:", "second|b:" };
