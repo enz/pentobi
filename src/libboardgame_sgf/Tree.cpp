@@ -31,20 +31,6 @@ Tree::~Tree()
 {
 }
 
-void Tree::append_comment(const Node& node, const string& s)
-{
-    string comment = get_comment(node);
-    if (comment.empty())
-        comment = s;
-    else
-    {
-        if (comment.back() != '\n' && comment.back() != '\r')
-            comment.push_back('\n');
-        comment += s;
-    }
-    set_comment(node, s);
-}
-
 bool Tree::contains(const Node& node) const
 {
     return &find_root(node) == &get_root();
