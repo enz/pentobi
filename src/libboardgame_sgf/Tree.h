@@ -113,8 +113,6 @@ public:
 
     void set_comment(const Node& node, const string& s);
 
-    void append_comment(const Node& node, const string& s);
-
     void remove_move_annotation(const Node& node);
 
     double get_good_move(const Node& node) const;
