@@ -68,10 +68,6 @@ private:
 
     void drawScore2(QPainter& painter, Color c1, Color c2, int x);
 
-    int getMaxScoreTextWidth() const;
-
-    int getMaxScoreTextWidth2() const;
-
     QString getScoreText(unsigned points, unsigned bonus) const;
 
     int getTextWidth(QString text) const;

@@ -94,16 +94,6 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
     }
 }
 
-int ScoreDisplay::getMaxScoreTextWidth() const
-{
-    return getTextWidth(getScoreText(188, 20));
-}
-
-int ScoreDisplay::getMaxScoreTextWidth2() const
-{
-    return getTextWidth(getScoreText(88, 20));
-}
-
 QString ScoreDisplay::getScoreText(unsigned points, unsigned bonus) const
 {
     QString text;

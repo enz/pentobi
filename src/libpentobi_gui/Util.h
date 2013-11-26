@@ -23,8 +23,6 @@ namespace Util
 
 QColor getPaintColor(Variant variant, Color c);
 
-QColor getPaintColorEmpty();
-
 QColor getLabelColor(Variant variant, PointState s);
 
 void paintColorSquare(QPainter& painter, Variant variant, Color c,

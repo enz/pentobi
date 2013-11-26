@@ -213,11 +213,6 @@ QColor Util::getPaintColor(Variant variant, Color c)
     }
 }
 
-QColor Util::getPaintColorEmpty()
-{
-    return gray;
-}
-
 QString Util::getPlayerString(Variant variant, Color c)
 {
     if (variant == Variant::duo || variant == Variant::junior)
