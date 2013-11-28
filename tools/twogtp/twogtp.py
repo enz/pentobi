@@ -11,12 +11,13 @@ from subprocess import PIPE, Popen
 from sys import argv, exit, stderr
 from threading import Lock, Thread
 
+
 class GtpClient:
     def __init__(self, cmd, color):
         self.color = color
-        self.process = Popen(split(cmd), stdin = PIPE, stdout = PIPE,
-                             close_fds = True)
-        
+        self.process = Popen(split(cmd), stdin=PIPE, stdout=PIPE,
+                             close_fds=True)
+
     def send(self, cmd):
         stderr.write(self.color + ">> " + cmd + "\n")
         self.process.stdin.write(cmd + "\n")
@@ -44,9 +45,10 @@ class GtpClient:
 
     def _readline(self):
         line = self.process.stdout.readline()
-        if self.process.poll() != None:
+        if self.process.poll() is not None:
             exit(self.color + " terminated")
         return line
+
 
 class OutputFile:
     """
@@ -95,6 +97,7 @@ class OutputFile:
             with open(self.prefix + ".blksgf", "a") as f:
                 f.write(sgf)
 
+
 def invert_result(result):
     if result.find("B+") != -1:
         return result.replace("B+", "W+")
@@ -102,6 +105,7 @@ def invert_result(result):
         return result.replace("W+", "B+")
     else:
         return result
+
 
 def convert_four_player_result(result):
     """
@@ -127,7 +131,8 @@ def convert_four_player_result(result):
         return "W+1"
     else:
         return "0"
-        
+
+
 def play_game(game_number, black, white, variant, output_file):
     stderr.write("=========================================================\n")
     stderr.write("Game %i\n" % game_number)
@@ -142,9 +147,9 @@ def play_game(game_number, black, white, variant, output_file):
     to_play = black
     other = white
     if variant == "duo" or variant == "junior":
-        colors = [ "b", "w" ]
+        colors = ["b", "w"]
     else:
-        colors = [ "1", "2", "3", "4" ]
+        colors = ["1", "2", "3", "4"]
     color_to_play = 0
     move_number = 0
     nu_passes = 0
@@ -154,7 +159,7 @@ def play_game(game_number, black, white, variant, output_file):
         sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (white_cmd, black_cmd)
     else:
         sgf += "C[Player 1: %s\nPlayer 2: %s]\n" % (black_cmd, white_cmd)
-    while True:        
+    while True:
         try:
             move = strip(to_play.send("genmove " + colors[color_to_play]))
         except:
@@ -168,7 +173,7 @@ def play_game(game_number, black, white, variant, output_file):
             break
         other.send("play " + colors[color_to_play] + " " + move)
         if move != "pass":
-            nu_passes = 0            
+            nu_passes = 0
             if variant == "duo":
                 if color_to_play == 0:
                     prop_id = "B"
@@ -218,8 +223,10 @@ def play_game(game_number, black, white, variant, output_file):
     if exchange_color:
         result_black = invert_result(result_black)
         result_white = invert_result(result_white)
-    output_file.add_result(game_number, result_black, result_white, move_number,
-                           exchange_color, cpu_black, cpu_white, sgf)
+    output_file.add_result(game_number, result_black, result_white,
+                           move_number, exchange_color,
+                           cpu_black, cpu_white, sgf)
+
 
 def thread_main():
     black = GtpClient(black_cmd, "B")
@@ -243,15 +250,15 @@ variant = "duo"
 prefix = "output"
 evaluate = ""
 opts, args = getopt(argv[1:], "ab:f:g:w:n:", [
-        "alternate",
-        "black=",
-        "eval=",
-        "file=",
-        "game=",
-        "nugames=",
-        "threads=",
-        "white=",
-        ])
+    "alternate",
+    "black=",
+    "eval=",
+    "file=",
+    "game=",
+    "nugames=",
+    "threads=",
+    "white=",
+    ])
 for opt, val in opts:
     if opt in ("-a", "--alternate"):
         alternate = True

@@ -4,6 +4,7 @@ from getopt import getopt
 from math import sqrt
 from sys import argv, exit, stdin
 
+
 class Statistics:
     def __init__(self, name):
         self._name = name
@@ -43,12 +44,14 @@ def print_stat(statistics):
                statistics.get_mean(),
                statistics.get_error_mean()),
 
+
 def print_stat_percent(statistics):
     if statistics.get_count() > 0:
         print "%s: %.1f%%+-%.1f%%" \
             % (statistics.get_name(),
                100 * statistics.get_mean(),
                100 * statistics.get_error_mean()),
+
 
 def print_stat_percent_count(statistics):
     if statistics.get_count() > 0:
@@ -59,8 +62,8 @@ def print_stat_percent_count(statistics):
 
 print_result = False
 opts, args = getopt(argv[1:], "r", [
-        "result",
-        ])
+    "result",
+    ])
 for opt, val in opts:
     if opt in ("-r", "--result"):
         print_result = True
@@ -143,4 +146,3 @@ else:
         print ",",
         print_stat(len)
     print
-

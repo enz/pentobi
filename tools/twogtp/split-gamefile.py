@@ -4,6 +4,7 @@
 from re import search
 from sys import stdin
 
+
 def write_file():
     with open(filename, "a") as f:
         f.write(buffer)
