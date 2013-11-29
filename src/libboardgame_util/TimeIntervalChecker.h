@@ -11,6 +11,7 @@ namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
+/** IntervalChecker that checks if a maximum total time was reached. */
 class TimeIntervalChecker
     : public IntervalChecker
 {
@@ -26,7 +27,7 @@ public:
 private:
     double m_max_time;
 
-    double m_last_time;
+    double m_start_time;
 
     bool check_time();
 };
