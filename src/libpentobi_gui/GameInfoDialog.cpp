@@ -18,9 +18,9 @@ using libpentobi_base::Variant;
 
 GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     : QDialog(parent),
-      m_game(game)
+      m_game(game),
+      m_charset(game.get_root().get_property("CA", ""))
 {
-    m_charset = game.get_root().get_property("CA", "");
     setWindowTitle(tr("Game Info"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     auto layout = new QVBoxLayout();
