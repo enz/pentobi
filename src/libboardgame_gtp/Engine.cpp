@@ -216,7 +216,8 @@ PonderThread::~PonderThread() throw()
         m_start_ponder_flag = true;
     }
     m_start_ponder_cond.notify_one();
-    m_thread.join();
+    if (m_thread.joinable())
+        m_thread.join();
 }
 
 void PonderThread::start_ponder()
@@ -444,7 +445,8 @@ ReadThread::~ReadThread() throw()
         // User destructs ReadThread before EOF was reached, so we cannot wait
         // for the read thread to finish because it could do a blocking read.
         return;
-    m_thread.join();
+    if (m_thread.joinable())
+        m_thread.join();
 }
 
 bool ReadThread::read_cmd(CmdLine& c)
