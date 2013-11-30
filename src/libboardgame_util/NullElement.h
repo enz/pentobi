@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_util/NullElement.h */
+/** @file libboardgame_util/NullElement.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_NULL_ELEMENT_H

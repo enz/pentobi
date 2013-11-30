@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sys/Compiler.h */
+/** @file libboardgame_sys/Compiler.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_SYS_COMPILER_H

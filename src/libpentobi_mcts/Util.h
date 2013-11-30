@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_mcts/Util.h */
+/** @file libpentobi_mcts/Util.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_MCTS_UTIL_H

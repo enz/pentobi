@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/InvalidPropertyValue.h */
+/** @file libboardgame_sgf/InvalidPropertyValue.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_SGF_INVALID_PROPERTY_VALUE_H

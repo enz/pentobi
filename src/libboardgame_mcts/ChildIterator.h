@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_mcts/ChildIterator.h */
+/** @file libboardgame_mcts/ChildIterator.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_MCTS_CHILD_ITERATOR_H

@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/RatedGamesList.h */
+/** @file pentobi/RatedGamesList.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_RATED_GAMES_LIST

@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_thumbnailer/Main.cpp */
+/** @file pentobi_thumbnailer/Main.cpp
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #include <iostream>

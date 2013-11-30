@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/AnalyzeSpeedDialog.h */
+/** @file pentobi/AnalyzeSpeedDialog.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_ANALYZE_SPEED_DIALOG_H

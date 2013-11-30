@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/PointList.h */
+/** @file libpentobi_base/PointList.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_BASE_POINT_LIST_H

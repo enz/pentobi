@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_gui/HelpWindow.cpp */
+/** @file libpentobi_gui/HelpWindow.cpp
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H

@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_kde_thumbnailer/PentobiThumbCreator.cpp */
+/** @file pentobi_kde_thumbnailer/PentobiThumbCreator.cpp
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #include "PentobiThumbCreator.h"

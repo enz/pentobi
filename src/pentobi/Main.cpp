@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/Main.cpp */
+/** @file pentobi/Main.cpp
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H

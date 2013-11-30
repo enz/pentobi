@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/MainWindow.h */
+/** @file pentobi/MainWindow.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_MAIN_WINDOW_H

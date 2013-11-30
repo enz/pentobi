@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_gui/OrientationDisplay.h */
+/** @file libpentobi_gui/OrientationDisplay.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_GUI_ORIENTATION_DISPLAY_H

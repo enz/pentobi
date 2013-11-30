@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_mcts/LastGoodReply.h */
+/** @file libboardgame_mcts/LastGoodReply.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_MCTS_LAST_GOOD_REPLY_H

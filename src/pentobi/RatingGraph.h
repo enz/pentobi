@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/RatingGraph.h */
+/** @file pentobi/RatingGraph.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_RATING_GRAPH_H

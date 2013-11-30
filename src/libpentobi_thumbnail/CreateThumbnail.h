@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_thumbnail/CreateThumbnail.h */
+/** @file libpentobi_thumbnail/CreateThumbnail.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_THUMBNAIL_CREATE_THUMBNAIL_H

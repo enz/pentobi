@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/AnalyzeGameWindow.h */
+/** @file pentobi/AnalyzeGameWindow.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_ANALYZE_GAME_WINDOW_H

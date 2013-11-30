@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file TimeIntervalChecker.h */
+/** @file TimeIntervalChecker.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_TIME_INTERVAL_CHECKER_H

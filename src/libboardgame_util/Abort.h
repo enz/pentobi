@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
 /** @file libboardgame_util/Abort.h
-    Global flag to interrupt move generation or other commands. */
+    Global flag to interrupt move generation or other commands.
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_ABORT_H

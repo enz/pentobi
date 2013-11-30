@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/ExportImage.h */
+/** @file pentobi/ExportImage.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_EXPORT_IMAGE_H

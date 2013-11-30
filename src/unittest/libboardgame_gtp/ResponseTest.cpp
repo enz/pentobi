@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file ResponseTest.cpp */
+/** @file unittest/libboardgame_gtp/ResponseTest.cpp
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H

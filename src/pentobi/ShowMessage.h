@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/ShowMessage.h */
+/** @file pentobi/ShowMessage.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_SHOW_MESSAGE_H

@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_gtp/Engine.h */
+/** @file pentobi_gtp/Engine.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_GTP_ENGINE_H

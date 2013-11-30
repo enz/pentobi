@@ -1,5 +1,7 @@
 //----------------------------------------------------------------------------
-/** @file libboardgame_util/FmtSaver.h */
+/** @file libboardgame_util/FmtSaver.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_FMT_SAVER_H

@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file CmdLineTest.cpp */
+/** @file unittest/libboardgame_gtp/CmdLineTest.cpp
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H

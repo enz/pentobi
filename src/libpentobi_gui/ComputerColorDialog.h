@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_gui/ComputerColorDialog.h */
+/** @file libpentobi_gui/ComputerColorDialog.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_GUI_COMPUTER_COLOR_DIALOG_H

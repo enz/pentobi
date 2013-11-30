@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/Util.h */
+/** @file pentobi/Util.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_UTIL_H

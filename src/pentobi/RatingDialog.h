@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/RatingDialog.h */
+/** @file pentobi/RatingDialog.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_RATING_DIALOG_H

@@ -1,5 +1,7 @@
 //----------------------------------------------------------------------------
-/** @file libpentobi_base/GameStateHistory.h */
+/** @file libpentobi_base/GameStateHistory.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_BASE_GAME_STATE_HISTORY_H

@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file Transform.h */
+/** @file libboardgame_base/Transform.h
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_BASE_TRANSFORM_H

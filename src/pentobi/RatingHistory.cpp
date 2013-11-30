@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/RatingHistory.cpp */
+/** @file pentobi/RatingHistory.cpp
+    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #ifdef HAVE_CONFIG_H
