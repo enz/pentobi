@@ -183,19 +183,13 @@ void setIcon(QAction* action, const QString& name)
 /** Simple heuristic that prefers moves with more piece points, more attach
     points and less adjacent points.
     Used for sorting the list used in Find Move. */
-float getMoveHeuristic(const Board& bd, Move mv)
+float getHeuristic(const Board& bd, Move mv)
 {
     auto& info = bd.get_move_info(mv);
     auto& info_ext = bd.get_move_info_ext(mv);
     return static_cast<float>((1000 * info.size()
                                + 10 * info_ext.size_attach_points
                                - info_ext.size_adj_points));
-}
-
-/** Comparison for sorting move list in Find Move. */
-bool isMoveBetter(const Board* bd, Move mv1, Move mv2)
-{
-    return getMoveHeuristic(*bd, mv1) > getMoveHeuristic(*bd, mv2);
 }
 
 } // namespace
@@ -1635,7 +1629,9 @@ void MainWindow::findMove()
     {
         bd.gen_moves(m_currentColor, *m_legalMoves);
         sort(m_legalMoves->begin(), m_legalMoves->end(),
-             bind(&isMoveBetter, &bd, placeholders::_1, placeholders::_2));
+             [&](Move mv1, Move mv2) {
+                 return getHeuristic(bd, mv1) > getHeuristic(bd, mv2);
+             });
     }
     if (m_legalMoves->empty())
     {
