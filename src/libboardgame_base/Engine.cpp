@@ -70,7 +70,7 @@ void Engine::cmd_interrupt()
     Arguments: random seed */
 void Engine::cmd_set_random_seed(const Arguments& args)
 {
-    RandomGenerator::set_global_seed(args.get<RandomGenerator::ResultType>());
+    RandomGenerator::set_global_seed(args.parse<RandomGenerator::ResultType>());
 }
 
 void Engine::interrupt()

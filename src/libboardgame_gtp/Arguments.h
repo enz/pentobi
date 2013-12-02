@@ -55,7 +55,7 @@ public:
         @return The converted argument
         @throws Failure If no such argument, or argument cannot be converted */
     template<typename T>
-    T get(size_t i) const;
+    T parse(size_t i) const;
 
     /** Get single argument converted to a type.
         The type must implement operator<<(istream)
@@ -64,7 +64,7 @@ public:
         or command has more than one arguments
     */
     template<typename T>
-    T get() const;
+    T parse() const;
 
     /** Get argument converted to a type and check against a minum value.
         The type must implement operator<< and operator<
@@ -75,7 +75,7 @@ public:
         or smaller than the mimimum value
     */
     template<typename T>
-    T get_min(size_t i, T min) const;
+    T parse_min(size_t i, T min) const;
 
     /** Get argument converted to a type and check against a range.
         The type must implement operator<< and operator<
@@ -87,10 +87,10 @@ public:
         or not in range
     */
     template<typename T>
-    T get_min_max(size_t i, T min, T max) const;
+    T parse_min_max(size_t i, T min, T max) const;
 
     template<typename T>
-    T get_min_max(T min, T max) const;
+    T parse_min_max(T min, T max) const;
 
     /** Check that command has no arguments.
         @throws Failure If command has arguments
@@ -172,66 +172,9 @@ inline CmdLineRange Arguments::get() const
     return get(0);
 }
 
-template<typename T>
-T Arguments::get() const
-{
-    check_size(1);
-    return get<T>(0);
-}
-
-template<typename T>
-T Arguments::get(size_t i) const
-{
-    string s = get(i);
-    istringstream in(s);
-    T result;
-    in >> result;
-    if (! in)
-    {
-        ostringstream msg;
-        msg << "argument " << (i + 1) << " ('" << s
-            << "') has invalid type (expected " << get_type_name<T>() << ")";
-        throw Failure(msg.str());
-    }
-    return result;
-}
-
 inline CmdLineRange Arguments::get_line() const
 {
     return m_line.get_trimmed_line_after_elem(m_line.get_idx_name());
-}
-
-template<typename T>
-T Arguments::get_min(std::size_t i, T min) const
-{
-    T result = get<T>(i);
-    if (result < min)
-    {
-        ostringstream msg;
-        msg << "argument " << (i + 1) << " must be greater or equal " << min;
-        throw Failure(msg.str());
-    }
-    return result;
-}
-
-template<typename T>
-T Arguments::get_min_max(T min, T max) const
-{
-    check_size(1);
-    return get_min_max<T>(0, min, max);
-}
-
-template<typename T>
-T Arguments::get_min_max(std::size_t i, T min, T max) const
-{
-    T result = get_min(i, min);
-    if (max < result)
-    {
-        ostringstream msg;
-        msg << "argument " << (i + 1) << " must be less or equal " << max;
-        throw Failure(msg.str());
-    }
-    return result;
 }
 
 inline size_t Arguments::get_size() const
@@ -257,6 +200,63 @@ string Arguments::get_type_name()
 #else
     return typeid(T).name();
 #endif
+}
+
+template<typename T>
+T Arguments::parse() const
+{
+    check_size(1);
+    return parse<T>(0);
+}
+
+template<typename T>
+T Arguments::parse(size_t i) const
+{
+    string s = get(i);
+    istringstream in(s);
+    T result;
+    in >> result;
+    if (! in)
+    {
+        ostringstream msg;
+        msg << "argument " << (i + 1) << " ('" << s
+            << "') has invalid type (expected " << get_type_name<T>() << ")";
+        throw Failure(msg.str());
+    }
+    return result;
+}
+
+template<typename T>
+T Arguments::parse_min(std::size_t i, T min) const
+{
+    T result = parse<T>(i);
+    if (result < min)
+    {
+        ostringstream msg;
+        msg << "argument " << (i + 1) << " must be greater or equal " << min;
+        throw Failure(msg.str());
+    }
+    return result;
+}
+
+template<typename T>
+T Arguments::parse_min_max(T min, T max) const
+{
+    check_size(1);
+    return parse_min_max<T>(0, min, max);
+}
+
+template<typename T>
+T Arguments::parse_min_max(std::size_t i, T min, T max) const
+{
+    T result = parse_min(i, min);
+    if (max < result)
+    {
+        ostringstream msg;
+        msg << "argument " << (i + 1) << " must be less or equal " << max;
+        throw Failure(msg.str());
+    }
+    return result;
 }
 
 //-----------------------------------------------------------------------------

@@ -144,37 +144,37 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         args.check_size(2);
         string name = args.get(0);
         if (name == "avoid_symmetric_draw")
-            s.set_avoid_symmetric_draw(args.get<bool>(1));
+            s.set_avoid_symmetric_draw(args.parse<bool>(1));
         else if (name == "auto_param")
-            s.set_auto_param(args.get<bool>(1));
+            s.set_auto_param(args.parse<bool>(1));
         else if (name == "bias_term_constant")
-            s.set_bias_term_constant(args.get<Float>(1));
+            s.set_bias_term_constant(args.parse<Float>(1));
         else if (name == "bias_term_interval")
-            s.set_bias_term_interval(args.get<unsigned>(1));
+            s.set_bias_term_interval(args.parse<unsigned>(1));
         else if (name == "detect_symmetry")
-            s.set_detect_symmetry(args.get<bool>(1));
+            s.set_detect_symmetry(args.parse<bool>(1));
         else if (name == "expand_threshold")
-            s.set_expand_threshold(args.get<Float>(1));
+            s.set_expand_threshold(args.parse<Float>(1));
         else if (name == "fixed_simulations")
-            p.set_fixed_simulations(args.get<Float>(1));
+            p.set_fixed_simulations(args.parse<Float>(1));
         else if (name == "level")
-            p.set_level(args.get<int>(1));
+            p.set_level(args.parse<int>(1));
         else if (name == "rave_dist_final")
-            s.set_rave_dist_final(args.get<Float>(1));
+            s.set_rave_dist_final(args.parse<Float>(1));
         else if (name == "rave_max_child_count")
-            s.set_rave_max_child_count(args.get<Float>(1));
+            s.set_rave_max_child_count(args.parse<Float>(1));
         else if (name == "rave_max_parent_count")
-            s.set_rave_max_parent_count(args.get<Float>(1));
+            s.set_rave_max_parent_count(args.parse<Float>(1));
         else if (name == "rave_weight")
-            s.set_rave_weight(args.get<Float>(1));
+            s.set_rave_weight(args.parse<Float>(1));
         else if (name == "reuse_subtree")
-            s.set_reuse_subtree(args.get<bool>(1));
+            s.set_reuse_subtree(args.parse<bool>(1));
         else if (name == "score_modification")
-            s.set_score_modification(args.get<Float>(1));
+            s.set_score_modification(args.parse<Float>(1));
         else if (name == "skip_bias_term_min_count")
-            s.set_skip_bias_term_min_count(args.get<Float>(1));
+            s.set_skip_bias_term_min_count(args.parse<Float>(1));
         else if (name == "use_book")
-            p.set_use_book(args.get<bool>(1));
+            p.set_use_book(args.parse<bool>(1));
         else
         {
             ostringstream msg;

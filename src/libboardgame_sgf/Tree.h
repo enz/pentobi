@@ -182,7 +182,7 @@ inline void Tree::clear_modified()
 
 inline double Tree::get_bad_move(const Node& node) const
 {
-    return node.get_property<double>("BM", 0);
+    return node.parse_property<double>("BM", 0);
 }
 
 inline string Tree::get_date() const
@@ -197,7 +197,7 @@ inline string Tree::get_event() const
 
 inline double Tree::get_good_move(const Node& node) const
 {
-    return node.get_property<double>("TE", 0);
+    return node.parse_property<double>("TE", 0);
 }
 
 inline bool Tree::is_modified() const
