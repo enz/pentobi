@@ -120,7 +120,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
     string file = args.get(0);
     int move_number = -1;
     if (args.get_size() == 2)
-        move_number = args.get_min<int>(1, 1) - 1;
+        move_number = args.parse_min<int>(1, 1) - 1;
     try
     {
         TreeReader reader;
@@ -148,7 +148,7 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
     Move mv;
     try
     {
-        mv = Move(args.get<Move::IntType>());
+        mv = Move(args.parse<Move::IntType>());
     }
     catch (const Failure&)
     {
@@ -208,9 +208,9 @@ void Engine::cmd_param_base(const Arguments& args, Response& response)
         args.check_size(2);
         string name = args.get(0);
         if (name == "accept_illegal")
-            m_accept_illegal = args.get<bool>(1);
+            m_accept_illegal = args.parse<bool>(1);
         else if (name == "resign")
-            m_resign = args.get<bool>(1);
+            m_resign = args.parse<bool>(1);
         else
         {
             ostringstream msg;

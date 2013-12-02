@@ -56,12 +56,12 @@ public:
         @pre has_property(id)
         @throws InvalidPropertyValue, MissingProperty */
     template<typename T>
-    T get_property(const string& id) const;
+    T parse_property(const string& id) const;
 
     /** Get property parsed as a type with default value.
         @throws InvalidPropertyValue */
     template<typename T>
-    T get_property(const string& id, const T& default_value) const;
+    T parse_property(const string& id, const T& default_value) const;
 
     /** @return true, if property was added or changed. */
     template<typename T>
@@ -212,24 +212,6 @@ inline const Property* Node::get_first_property() const
     return m_first_property.get();
 }
 
-template<typename T>
-T Node::get_property(const string& id) const
-{
-    string value = get_property(id);
-    T result;
-    if (! from_string(value, result))
-        throw InvalidPropertyValue(id, value);
-    return result;
-}
-
-template<typename T>
-T Node::get_property(const string& id, const T& default_value) const
-{
-    if (! has_property(id))
-        return default_value;
-    return get_property<T>(id);
-}
-
 inline Node* Node::get_sibling()
 {
     return m_sibling.get();
@@ -253,6 +235,24 @@ inline bool Node::has_parent() const
 inline bool Node::has_single_child() const
 {
     return (m_first_child && ! m_first_child->m_sibling);
+}
+
+template<typename T>
+T Node::parse_property(const string& id) const
+{
+    string value = get_property(id);
+    T result;
+    if (! from_string(value, result))
+        throw InvalidPropertyValue(id, value);
+    return result;
+}
+
+template<typename T>
+T Node::parse_property(const string& id, const T& default_value) const
+{
+    if (! has_property(id))
+        return default_value;
+    return parse_property<T>(id);
 }
 
 inline unique_ptr<Node> Node::remove_children()
