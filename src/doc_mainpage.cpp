@@ -39,6 +39,8 @@
 
     - libpentobi_gui -
       GUI functionality that could be reused for other projects
+    - libpentobi_thumbnail -
+      Common functionality for file preview thumbnailers
     - pentobi -
       Main program that provides a GUI for the player in libpentobi_mcts
     - pentobi_thumbnailer -
