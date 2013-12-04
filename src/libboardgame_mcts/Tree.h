@@ -21,7 +21,7 @@ using libboardgame_util::IntervalChecker;
 
 //-----------------------------------------------------------------------------
 
-/** Tree for Monte-Carlo tree search.
+/** %Tree for Monte-Carlo tree search.
     The nodes can be modified only through member functions of this class,
     so that it can guarantee an intact tree structure. The user has access to
     all nodes, but only as const references.<p>

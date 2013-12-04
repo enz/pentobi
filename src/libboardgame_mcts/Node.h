@@ -22,7 +22,7 @@ typedef uint_least32_t NodeIdx;
 
 //-----------------------------------------------------------------------------
 
-/** Node in a MCTS tree.
+/** %Node in a MCTS tree.
     For details about how the nodes are used in lock-free multi-threaded mode,
     see @ref libboardgame_doc_enz_2009. */
 template<typename M, typename F>

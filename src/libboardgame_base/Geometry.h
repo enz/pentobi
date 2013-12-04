@@ -19,7 +19,7 @@ using libboardgame_util::NullTermList;
 
 //-----------------------------------------------------------------------------
 
-/** Geometry data of a board with a given size.
+/** %Geometry data of a board with a given size.
     This class is a base class that uses virtual functions in its constructor
     that allow to restrict the shape of the board to a subset of the rectangle
     and/or to define different definitions of adjacent and diagonal neighbors

@@ -15,7 +15,7 @@ namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
-/** Transform a point.
+/** %Transform a point.
     @tparam P An instance of class Point. */
 template<class P>
 class PointTransform

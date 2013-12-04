@@ -17,7 +17,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-/** Point stored as x,y coordinates. */
+/** %Point stored as x,y coordinates. */
 struct CoordPoint
 {
     int x;
