@@ -22,10 +22,6 @@ Used for parameters to indicate that the class will store a reference to the
 parameter. The lifetime of the parameter must exceed the lifetime of the
 constructed class.
 
-@section libboardgame_doc_takesownership Takes ownership
-Used for pointer-type parameters to indicate that the ownership of the object
-instance will be transfered to the callee.
-
 @section libboardgame_doc_threadsafe_after_construction Thread-safe after
 construction
 Used for classes that, that are thread-safe (w.r.t. different instances) after
