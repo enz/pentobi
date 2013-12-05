@@ -14,7 +14,7 @@
    height="16"
    id="svg3810"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-backward-16.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
@@ -155,6 +155,26 @@
        y1="10.035207"
        x2="7.6875153"
        y2="32.074039" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3851"
+       id="linearGradient3013"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.717946,0,0,0.717946,-0.27435102,24.96162)"
+       x1="15.589712"
+       y1="10.035207"
+       x2="7.6875153"
+       y2="32.074039" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3835"
+       id="linearGradient3015"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.717946,0,0,0.717946,-0.27435102,24.96162)"
+       x1="15.589712"
+       y1="10.035207"
+       x2="7.6875153"
+       y2="32.074039" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -192,7 +212,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -202,20 +222,24 @@
      inkscape:groupmode="layer"
      transform="translate(0,-32)">
     <g
-       id="g3790"
-       transform="matrix(-1,0,0,1,16.532063,0)">
-      <path
-         sodipodi:nodetypes="cccccccc"
-         inkscape:connector-curvature="0"
-         id="path3789"
-         d="m 9.25,35.408 0,1.842 -7.0394351,0.0057 0.050508,5.485613 L 9.25,42.75 c 0,0 3.949e-4,1.988037 0,1.991 l 4.806537,-4.717196 z"
-         style="fill:url(#linearGradient3085);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3083);stroke-width:1.50000000000000000;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
-      <path
-         sodipodi:nodetypes="cccccccc"
-         inkscape:connector-curvature="0"
-         id="rect3778"
-         d="m 8.5,33.63 0,2.87 -7,0 0,7 7,0 0,2.843 6.532063,-6.355049 z"
-         style="fill:none;stroke:#555753;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       id="g3004"
+       transform="translate(-0.5,0)">
+      <g
+         transform="matrix(-1,0,0,1,16.532063,0)"
+         id="g3790">
+        <path
+           style="fill:url(#linearGradient3013);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3015);stroke-width:1.5;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+           d="m 9.25,35.408 0,1.842 -7.0394351,0.0057 0.050508,5.485613 L 9.25,42.75 c 0,0 3.949e-4,1.988037 0,1.991 l 4.806537,-4.717196 z"
+           id="path3789"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cccccccc" />
+        <path
+           style="fill:none;stroke:#555753;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 8.5,33.63 0,2.87 -7,0 0,7 7,0 0,2.843 6.532063,-6.355049 z"
+           id="rect3778"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cccccccc" />
+      </g>
     </g>
   </g>
 </svg>
