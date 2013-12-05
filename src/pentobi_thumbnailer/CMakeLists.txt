@@ -22,7 +22,8 @@ endif()
 target_link_libraries(pentobi-thumbnailer
   pentobi_thumbnail
   pentobi_gui
-  ${QT_LIBRARIES}
+  ${QT_QTGUI_LIBRARY}
+  ${QT_QTCORE_LIBRARY}
   pentobi_base
   boardgame_base
   boardgame_sgf

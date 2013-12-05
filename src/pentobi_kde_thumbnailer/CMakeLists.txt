@@ -16,7 +16,8 @@ kde4_add_plugin(pentobi-thumbnail ${pentobi_thumbnail_SRCS})
 target_link_libraries(pentobi-thumbnail
   pentobi_kde_thumbnailer
   ${KDE4_KIO_LIBS}
-  ${QT_LIBRARIES}
+  ${QT_QTGUI_LIBRARY}
+  ${QT_QTCORE_LIBRARY}
   )
 
 install(TARGETS pentobi-thumbnail DESTINATION ${PLUGIN_INSTALL_DIR})

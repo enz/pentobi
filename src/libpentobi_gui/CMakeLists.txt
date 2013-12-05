@@ -26,9 +26,11 @@ set(pentobi_gui_STAT_SRCS
   Util.cpp
   )
 
-set(pentobi_gui_RCS
-  libpentobi_gui_resources.qrc
-  )
+set(pentobi_gui_ICNS
+  go-home.png
+  go-next.png
+  go-previous.png
+)
 
 set(pentobi_gui_TS
   libpentobi_gui_de.ts
@@ -36,11 +38,27 @@ set(pentobi_gui_TS
   libpentobi_gui_en_GB.ts
   )
 
+# Create PNG icons from SVG icons using the helper program src/svgtopng
+foreach(icon ${pentobi_gui_ICNS})
+  string(REPLACE ".png" ".svg" svgicon ${icon})
+  add_custom_command(
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}"
+    COMMAND ${CMAKE_BINARY_DIR}/src/svgtopng/svgtopng ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon} ${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+    )
+endforeach()
+
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
+configure_file(
+  libpentobi_gui_resources.qrc libpentobi_gui_resources.qrc COPYONLY)
+
 if (USE_QT5)
-  qt5_add_resources(pentobi_gui_RC_SRCS ${pentobi_gui_RCS})
+  qt5_add_resources(pentobi_gui_RC_SRCS
+    ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc)
   qt5_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
 else()
-  qt4_add_resources(pentobi_gui_RC_SRCS ${pentobi_gui_RCS})
+  qt4_add_resources(pentobi_gui_RC_SRCS
+    ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc)
   qt4_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
 endif()
 
@@ -49,6 +67,8 @@ add_library(pentobi_gui STATIC
   ${pentobi_gui_MOC_SRCS}
   ${pentobi_gui_RC_SRCS}
   ${pentobi_gui_QM_SRCS})
+
+add_dependencies(pentobi_gui svgtopng)
 
 if (USE_QT5)
   qt5_use_modules(pentobi_gui Widgets)

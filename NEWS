@@ -3,7 +3,10 @@ Version 7.UNKNOWN (master)
 
 * The source code now requires MSVC 2013 (because a larger subset of
   C++11 features is used)
-* The source code distribution uses now xz instead of gzip for compression
+* The source code distribution now uses xz instead of gzip for compression
+* The PNG versions of the icons are no longer included in the source code
+  but generated at build time from the SVG icons by a small Qt-based helper
+  program (src/svgtopng). This adds a build time dependency on QtSvg.
 
 
 Version 7.1.UNKNOWN (v7-fixes)

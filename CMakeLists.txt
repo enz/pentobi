@@ -111,7 +111,7 @@ if(PENTOBI_BUILD_GUI)
     find_package(Qt5Concurrent REQUIRED)
     find_package(Qt5LinguistTools REQUIRED)
   else()
-    find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+    find_package(Qt4 COMPONENTS QtCore QtGui QtSvg REQUIRED)
   endif()
 endif()
 

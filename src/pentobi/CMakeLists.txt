@@ -25,8 +25,39 @@ set(pentobi_SRCS
   Util.cpp
   )
 
-set(pentobi_RCS
-  resources.qrc
+set(pentobi_ICNS
+  pentobi.png
+  pentobi-16.png
+  pentobi-32.png
+  pentobi-backward.png
+  pentobi-backward-16.png
+  pentobi-backward10.png
+  pentobi-backward10-16.png
+  pentobi-beginning.png
+  pentobi-beginning-16.png
+  pentobi-computer-color.png
+  pentobi-computer-color-16.png
+  pentobi-end.png
+  pentobi-end-16.png
+  pentobi-flip-horizontal.png
+  pentobi-flip-vertical.png
+  pentobi-forward.png
+  pentobi-forward-16.png
+  pentobi-forward10.png
+  pentobi-forward10-16.png
+  pentobi-newgame.png
+  pentobi-newgame-16.png
+  pentobi-next-piece.png
+  pentobi-next-variation.png
+  pentobi-next-variation-16.png
+  pentobi-piece-clear.png
+  pentobi-play.png
+  pentobi-play-16.png
+  pentobi-previous-piece.png
+  pentobi-previous-variation.png
+  pentobi-previous-variation-16.png
+  pentobi-rotate-left.png
+  pentobi-rotate-right.png
   )
 
 set(pentobi_TS
@@ -36,13 +67,26 @@ set(pentobi_TS
   pentobi_en_GB.ts
   )
 
+# Create PNG icons from SVG icons using the helper program src/svgtopng
+foreach(icon ${pentobi_ICNS})
+  string(REPLACE ".png" ".svg" svgicon ${icon})
+  add_custom_command(
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}"
+    COMMAND ${CMAKE_BINARY_DIR}/src/svgtopng/svgtopng ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon} ${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+    )
+endforeach()
+
 link_directories(${Boost_LIBRARY_DIRS})
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
+configure_file(resources.qrc resources.qrc COPYONLY)
+
 if (USE_QT5)
-  qt5_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
+  qt5_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc)
   qt5_add_translation(pentobi_QM_SRCS ${pentobi_TS})
 else()
-  qt4_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
+  qt4_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc)
   qt4_add_translation(pentobi_QM_SRCS ${pentobi_TS})
 endif()
 
@@ -63,13 +107,16 @@ add_executable(pentobi WIN32
   ${pentobi_RC_SRCS}
   )
 
+add_dependencies(pentobi svgtopng)
+
 if (USE_QT5)
   qt5_use_modules(pentobi Widgets Concurrent)
 endif()
 
 target_link_libraries(pentobi
   pentobi_gui
-  ${QT_LIBRARIES}
+  ${QT_QTGUI_LIBRARY}
+  ${QT_QTCORE_LIBRARY}
   pentobi_mcts
   pentobi_base
   boardgame_base

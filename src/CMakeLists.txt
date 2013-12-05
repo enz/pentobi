@@ -18,6 +18,7 @@ if (PENTOBI_BUILD_TESTS)
 endif()
 
 if (PENTOBI_BUILD_GUI)
+  add_subdirectory(svgtopng)
   add_subdirectory(libpentobi_gui)
   add_subdirectory(libpentobi_thumbnail)
   add_subdirectory(pentobi_thumbnailer)
