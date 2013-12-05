@@ -19,6 +19,7 @@ Version 7.1.UNKNOWN (v7-fixes)
   with GCC 4.8.2 on PowerPC (and other big-endian systems)
 * Fixed wrong arguments to update-mime-database/update-desktop-database
   when runing "make post-install"
+* Improved a blurry menu item icon
 
 
 Version 7.1 (13 Aug 2013)
