@@ -117,6 +117,8 @@ target_link_libraries(pentobi
   pentobi_gui
   ${QT_QTGUI_LIBRARY}
   ${QT_QTCORE_LIBRARY}
+  ${QT_QTGUI_LIB_DEPENDENCIES}
+  ${QT_QTCORE_LIB_DEPENDENCIES}
   pentobi_mcts
   pentobi_base
   boardgame_base

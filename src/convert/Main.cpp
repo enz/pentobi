@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 /** @file svgtopng/Main.cpp
-    Utility program for converting SVG to PNG icons.
+    Utility program for converting icons between image formats.
     @author Markus Enzenberger <enz@users.sourceforge.net>
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,6 +8,10 @@
 #include <iostream>
 #include <QImageReader>
 #include <QImageWriter>
+
+#ifdef QT_STATICPLUGIN
+Q_IMPORT_PLUGIN(qsvg)
+#endif
 
 //-----------------------------------------------------------------------------
 

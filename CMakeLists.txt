@@ -34,7 +34,16 @@ if(MSVC)
   add_definitions(-D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE
     -D_SCL_SECURE_NO_WARNINGS)
 endif()
+
+# Note: Our build of the Windows installer with MinGW uses static linking;
+# we currently don't support dynamic linking with MinGW. You also need to
+# enable USE_BOOST_THREAD because MinGW does not support std::thread yet.
+# See also the comments in src/convert/CMakeLists.txt and note that
+# windows_installer/install.nsis will not install Qt or Boost DLLs.
 if(MINGW)
+  add_definitions(-static-libgcc)
+  add_definitions(-static-libstdc++)
+  add_definitions(-march=i686)
   # -std=c++11 makes MinGW define __STRICT_ANSI__, which also hides
   # some functions that we use in some Windows-specific code, like fdopen()
   add_definitions(-U__STRICT_ANSI__ -DWINVER=0x0501)
