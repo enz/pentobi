@@ -1,9 +1,9 @@
-# Create PNG icons from SVG icons using the helper program src/svgtopng
+# Create PNG icons from SVG icons using the helper program src/convert
 foreach(icon application-x-blokus-sgf.png application-x-blokus-sgf-16.png)
   string(REPLACE ".png" ".svg" svgicon ${icon})
   add_custom_target(
     ${icon} ALL
-    COMMAND ${CMAKE_BINARY_DIR}/src/svgtopng/svgtopng ${CMAKE_CURRENT_SOURCE_DIR}/${svgicon} ${CMAKE_CURRENT_BINARY_DIR}/${icon}
+    COMMAND ${CMAKE_BINARY_DIR}/src/convert/convert ${CMAKE_CURRENT_SOURCE_DIR}/${svgicon} ${CMAKE_CURRENT_BINARY_DIR}/${icon}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${svgicon}
     )
 endforeach()

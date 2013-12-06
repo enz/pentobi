@@ -37,6 +37,8 @@
     They have a dependency on the following
     <a href="http://qt.digia.com/">Qt</a> libraries: QtCore4, QtGui4.
 
+    - convert -
+      Small helper program to convert SVG icons to bitmaps at build time
     - libpentobi_gui -
       GUI functionality that could be reused for other projects
     - libpentobi_thumbnail -
