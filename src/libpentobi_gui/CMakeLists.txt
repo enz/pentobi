@@ -4,10 +4,7 @@ if (NOT USE_QT5)
   include(${QT_USE_FILE})
 endif()
 
-include_directories(
-  ${CMAKE_SOURCE_DIR}/src
-  ${Boost_INCLUDE_DIRS}
-)
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_gui_STAT_SRCS
   BoardPainter.cpp

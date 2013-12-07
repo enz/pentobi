@@ -10,17 +10,12 @@
 
 #include "Util.h"
 
+#include <thread>
 #include "libboardgame_sgf/Writer.h"
 #include "libboardgame_sys/Memory.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/SgfUtil.h"
-
-#ifdef USE_BOOST_THREAD
-#include <boost/thread.hpp>
-#else
-#include <thread>
-#endif
 
 namespace libpentobi_mcts {
 namespace util {
@@ -32,10 +27,6 @@ using libboardgame_sgf::Writer;
 using libboardgame_util::log;
 using libpentobi_base::boardutil::write_setup;
 using libpentobi_base::sgf_util::get_color_id;
-
-#ifdef USE_BOOST_THREAD
-using boost::thread;
-#endif
 
 //-----------------------------------------------------------------------------
 

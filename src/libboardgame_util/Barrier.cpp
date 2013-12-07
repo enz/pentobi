@@ -12,10 +12,6 @@
 
 namespace libboardgame_util {
 
-#ifdef USE_BOOST_THREAD
-using boost::unique_lock;
-#endif
-
 //----------------------------------------------------------------------------
 
 Barrier::Barrier(unsigned count)

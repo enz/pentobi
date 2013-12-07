@@ -1,7 +1,4 @@
-include_directories(
-  ${CMAKE_SOURCE_DIR}/src
-  ${Boost_INCLUDE_DIRS}
-)
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(boardgame_util_STAT_SRCS
   Abort.cpp

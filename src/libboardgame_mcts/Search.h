@@ -9,7 +9,10 @@
 
 #include <algorithm>
 #include <array>
+#include <condition_variable>
 #include <functional>
+#include <mutex>
+#include <thread>
 #include "BiasTerm.h"
 #include "LastGoodReply.h"
 #include "PlayerMove.h"
@@ -26,16 +29,6 @@
 #include "libboardgame_util/TimeIntervalChecker.h"
 #include "libboardgame_util/Timer.h"
 #include "libboardgame_util/Unused.h"
-
-#ifdef USE_BOOST_THREAD
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
-#else
-#include <condition_variable>
-#include <mutex>
-#include <thread>
-#endif
 
 namespace libboardgame_mcts {
 
@@ -55,14 +48,6 @@ using libboardgame_util::StatisticsExt;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeIntervalChecker;
 using libboardgame_util::TimeSource;
-
-#ifdef USE_BOOST_THREAD
-using boost::condition_variable;
-using boost::lock_guard;
-using boost::mutex;
-using boost::thread;
-using boost::unique_lock;
-#endif
 
 //-----------------------------------------------------------------------------
 

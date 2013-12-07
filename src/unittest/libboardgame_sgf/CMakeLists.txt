@@ -1,9 +1,4 @@
-include_directories(
-  ${CMAKE_SOURCE_DIR}/src
-  ${Boost_INCLUDE_DIRS}
-)
-
-link_directories(${Boost_LIBRARY_DIRS})
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(unittest_libboardgame_sgf_STAT_SRCS
   NodeTest.cpp

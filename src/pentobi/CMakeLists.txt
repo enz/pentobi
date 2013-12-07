@@ -4,10 +4,7 @@ if (NOT USE_QT5)
   include(${QT_USE_FILE})
 endif()
 
-include_directories(
-  ${CMAKE_SOURCE_DIR}/src
-  ${Boost_INCLUDE_DIRS}
-)
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_SRCS
   AnalyzeGameWidget.cpp
@@ -77,8 +74,6 @@ foreach(icon ${pentobi_ICNS})
     )
 endforeach()
 
-link_directories(${Boost_LIBRARY_DIRS})
-
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
 configure_file(resources.qrc resources.qrc COPYONLY)
 
@@ -91,6 +86,10 @@ else()
 endif()
 
 if (MINGW)
+  # Workaround for a compilation failure with MINGW if we let CMake 
+  # build the RC object: it would invoke windres.exe with the current
+  # CXXFLAGS but some of them are GCC-specific and not supported
+  # by windres.exe (e.g. -std=c++11).
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
     COMMAND windres.exe -I${CMAKE_CURRENT_SOURCE_DIR}
     -i${CMAKE_CURRENT_SOURCE_DIR}/icon.rc
@@ -125,16 +124,11 @@ target_link_libraries(pentobi
   boardgame_sgf
   boardgame_util
   boardgame_sys
-  ${Boost_THREAD_LIBRARY}
-  ${Boost_CHRONO_LIBRARY}
-  ${Boost_SYSTEM_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}
   )
 
 if (WIN32)
-target_link_libraries(pentobi
-  ${QT_QTMAIN_LIBRARY}
-  )
+  target_link_libraries(pentobi ${QT_QTMAIN_LIBRARY})
 endif()
 
 install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})

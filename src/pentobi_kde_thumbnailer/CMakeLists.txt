@@ -4,7 +4,6 @@ include(KDE4Defaults)
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/src
-  ${Boost_INCLUDE_DIRS}
   ${KDE4_INCLUDES}
   ${QT_INCLUDES}
   )

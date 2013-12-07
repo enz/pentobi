@@ -1,9 +1,4 @@
-include_directories(
-  ${CMAKE_SOURCE_DIR}/src
-  ${Boost_INCLUDE_DIRS}
-)
-
-link_directories(${Boost_LIBRARY_DIRS})
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_gtp_SRCS
   Engine.cpp
@@ -20,8 +15,5 @@ target_link_libraries(pentobi-gtp
   boardgame_util
   boardgame_sys
   boardgame_gtp
-  ${Boost_THREAD_LIBRARY}
-  ${Boost_CHRONO_LIBRARY}
-  ${Boost_SYSTEM_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}
   )

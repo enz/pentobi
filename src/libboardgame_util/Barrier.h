@@ -9,22 +9,12 @@
 
 #include "Assert.h"
 
-#ifdef USE_BOOST_THREAD
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/mutex.hpp>
-#else
 #include <condition_variable>
 #include <mutex>
-#endif
 
 namespace libboardgame_util {
 
 using namespace std;
-
-#ifdef USE_BOOST_THREAD
-using boost::condition_variable;
-using boost::mutex;
-#endif
 
 //-----------------------------------------------------------------------------
 

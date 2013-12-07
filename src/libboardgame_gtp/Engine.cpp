@@ -12,30 +12,15 @@
 
 #include <cassert>
 #include <cctype>
+#include <condition_variable>
 #include <fstream>
 #include <iostream>
-
-#ifdef USE_BOOST_THREAD
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
-#else
-#include <condition_variable>
 #include <mutex>
 #include <thread>
-#endif
 
 namespace libboardgame_gtp {
 
 using namespace std;
-
-#ifdef USE_BOOST_THREAD
-using boost::condition_variable;
-using boost::lock_guard;
-using boost::mutex;
-using boost::unique_lock;
-using boost::thread;
-#endif
 
 //-----------------------------------------------------------------------------
 

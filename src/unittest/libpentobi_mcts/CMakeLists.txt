@@ -1,9 +1,4 @@
-include_directories(
-  ${CMAKE_SOURCE_DIR}/src
-  ${Boost_INCLUDE_DIRS}
-)
-
-link_directories(${Boost_LIBRARY_DIRS})
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(unittest_libpentobi_mcts_STAT_SRCS
   SearchTest.cpp
@@ -21,9 +16,6 @@ target_link_libraries(unittest_libpentobi_mcts
   boardgame_test
   boardgame_util
   boardgame_sys
-  ${Boost_THREAD_LIBRARY}
-  ${Boost_CHRONO_LIBRARY}
-  ${Boost_SYSTEM_LIBRARY}
   ${CMAKE_THREAD_LIBS_INIT}
   )
 

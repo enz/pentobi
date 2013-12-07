@@ -1,5 +1,8 @@
-; Script for creating a Windows installer with NSIS
-; (http://nsis.sf.net)
+; Script for creating a Windows installer with NSIS (http://nsis.sf.net)
+; The installer assumes that Pentobi was compiled with static linking and will
+; not include Qt or C++-runtime DLLs. For example with MinGW, this requires the
+; compiler options -static, -static-libgcc and -static-libstdc++ and a static
+; version of the Qt libraries.
 
 !define PENTOBI_VERSION "@PENTOBI_VERSION@"
 !define PENTOBI_SRC_DIR "@CMAKE_SOURCE_DIR@"

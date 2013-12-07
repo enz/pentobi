@@ -25,14 +25,6 @@ To build Pentobi with Qt 5 instead of Qt 4, use the cmake option
 installed (on Ubuntu 13.10: qt5-default, qttools5-dev, qttools5-dev-tools).
 The KDE thumbnailer plugin (see below) cannot be compiled with Qt 5.
 
-=== Building with Boost.Thread ===
-
-Because of a non-functional C++11 threads implementation on MinGW GCC 4.7
-(and potentially other platforms), it is still possible to compile Pentobi
-using Boost.Thread instead of C++11 threads by using the cmake option
--DUSE_BOOST_THREAD=ON. In this case, the Boost libraries (>= 1.49) need to
-be installed.
-
 === Building the KDE thumbnailer plugin ===
 
 A thumbnailer plugin for KDE can be built by using the cmake option
