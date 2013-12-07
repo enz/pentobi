@@ -14,7 +14,7 @@
    height="22"
    id="svg2985"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="pentobi-newgame.svg"
    inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-newgame.png"
    inkscape:export-xdpi="90"
@@ -2221,10 +2221,10 @@
      inkscape:document-units="px"
      showguides="false"
      inkscape:snap-global="false"
-     inkscape:window-width="1623"
-     inkscape:window-height="1026"
-     inkscape:window-x="57"
-     inkscape:window-y="24"
+     inkscape:window-width="1680"
+     inkscape:window-height="995"
+     inkscape:window-x="-3"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -2242,7 +2242,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2367,13 +2367,13 @@
        sodipodi:cx="-9.9878826"
        sodipodi:cy="7.0623698"
        sodipodi:r1="4.9295821"
-       sodipodi:r2="3.0627271"
+       sodipodi:r2="2.744374"
        sodipodi:arg1="-1.5707963"
-       sodipodi:arg2="-0.92804929"
+       sodipodi:arg2="-0.91002536"
        inkscape:flatsided="false"
        inkscape:rounded="0.18352206"
        inkscape:randomized="0"
-       d="m -9.9878825,2.1327877 c 0.5659119,0.00817 1.377908,2.1453463 1.8357881,2.4780153 0.4453809,0.323588 2.6899749,0.4022656 2.852523,0.9282423 0.1671099,0.5407377 -1.6145485,1.9734168 -1.7894429,2.511687 -0.1701201,0.5235767 0.4486707,2.6826247 -0.00133,2.9997537 -0.4626323,0.326028 -2.3757538,-0.925708 -2.9417249,-0.925708 -0.550521,0 -2.412681,1.255688 -2.853346,0.925707 -0.453033,-0.339241 0.146252,-2.5455351 -0.02864,-3.0838052 -0.170121,-0.5235765 -1.93979,-1.9065673 -1.762133,-2.4276348 0.182643,-0.5356906 2.466143,-0.6475198 2.924023,-0.9801893 0.44538,-0.3235883 1.213825,-2.4340113 1.7642885,-2.426068 z"
+       d="m -9.9878825,2.1327877 c 0.5935211,0.019269 1.2038709,2.4137995 1.6842928,2.7628458 0.45613,0.3313972 2.8472832,0.1018282 3.0040183,0.6434118 0.1650823,0.5704265 -1.9236432,1.8908543 -2.1071474,2.455624 -0.1742256,0.5362127 0.7830145,2.7393937 0.3163717,3.0558167 -0.4914946,0.333274 -2.3927477,-1.2451877 -2.9865819,-1.2451871 -0.563807,4e-7 -2.363353,1.5912101 -2.808489,1.2451861 -0.468843,-0.364451 0.444843,-2.6604219 0.261338,-3.2251913 -0.174226,-0.5362124 -2.243647,-1.7559718 -2.052114,-2.2862487 0.201734,-0.5585176 2.667677,-0.3990441 3.148098,-0.7480913 0.456129,-0.331398 0.976703,-2.6764606 1.5402135,-2.658166 z"
        transform="matrix(1.1668794,0,0,1.0861167,27.774982,24.324613)"
        inkscape:transform-center-y="-0.47301798" />
   </g>
