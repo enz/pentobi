@@ -8,77 +8,33 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16px"
-   height="16px"
-   id="svg2985"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="pentobi-rotate-left.svg"
-   inkscape:export-filename="/home/markus/scratch/pentobi/src/pentobi/icons/pentobi-rotate-left.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   width="16"
+   height="16"
+   id="svg2985">
   <defs
      id="defs2987">
     <linearGradient
        id="linearGradient3790">
       <stop
-         style="stop-color:#c8cac6;stop-opacity:1;"
-         offset="0"
-         id="stop3792" />
+         id="stop3792"
+         style="stop-color:#c8cac6;stop-opacity:1"
+         offset="0" />
       <stop
-         style="stop-color:#a0a39d;stop-opacity:1;"
-         offset="1"
-         id="stop3794" />
+         id="stop3794"
+         style="stop-color:#a0a39d;stop-opacity:1"
+         offset="1" />
     </linearGradient>
     <linearGradient
-       id="linearGradient3782">
-      <stop
-         style="stop-color:#b4b4b4;stop-opacity:1;"
-         offset="0"
-         id="stop3784" />
-      <stop
-         style="stop-color:#282828;stop-opacity:1;"
-         offset="1"
-         id="stop3786" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3790"
-       id="linearGradient3796"
        x1="7.9999876"
        y1="0.011238591"
        x2="3.9811041"
        y2="15.009915"
+       id="linearGradient3796"
+       xlink:href="#linearGradient3790"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(-1,0,0,1,15,0)" />
   </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="29.521708"
-     inkscape:cx="-4.3122621"
-     inkscape:cy="8.839737"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:grid-bbox="true"
-     inkscape:document-units="px"
-     showguides="true"
-     inkscape:snap-global="false"
-     inkscape:window-width="1463"
-     inkscape:window-height="847"
-     inkscape:window-x="93"
-     inkscape:window-y="50"
-     inkscape:window-maximized="0">
-    <inkscape:grid
-       type="xygrid"
-       id="grid2993" />
-  </sodipodi:namedview>
   <metadata
      id="metadata2990">
     <rdf:RDF>
@@ -92,13 +48,10 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
+     id="layer1">
     <path
-       style="fill:url(#linearGradient3796);fill-opacity:1;fill-rule:evenodd;stroke:#555753;stroke-width:0.99964303000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1"
        d="m 7.5,0.46875 c 3.865993,-1.8e-7 7,3.1340068 7,7 l -3,0 c 0,-2.2091391 -1.7908609,-4 -4,-4 -2.2091391,0 -4,1.7908609 -4,4 0,1.1415025 0.48216,2.1531467 1.25,2.875 l 1.875,-1.875 0,6 -6,0 2,-2 C 1.287166,11.16742 0.5,9.382869 0.5,7.46875 c 0,-3.8659932 3.134007,-6.99999982 7,-7 z"
        id="rect2995"
-       inkscape:connector-curvature="0" />
+       style="fill:url(#linearGradient3796);fill-opacity:1;fill-rule:evenodd;stroke:#555753;stroke-width:0.99964303;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
   </g>
 </svg>
