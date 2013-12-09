@@ -1,17 +1,17 @@
 # Create bitmap icons from SVG icons using the helper program src/convert
 add_custom_target(
   pentobi.xpm ALL
-  COMMAND ${CMAKE_BINARY_DIR}/src/convert/convert ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-32.svg pentobi.xpm
+  COMMAND convert ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-32.svg pentobi.xpm
   DEPENDS ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-32.svg
   )
 add_custom_target(
   application-x-blokus-sgf.png ALL
-  COMMAND ${CMAKE_BINARY_DIR}/src/convert/convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf.svg application-x-blokus-sgf.png
+  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf.svg application-x-blokus-sgf.png
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf.svg
   )
 add_custom_target(
   application-x-blokus-sgf-16.png ALL
-  COMMAND ${CMAKE_BINARY_DIR}/src/convert/convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg application-x-blokus-sgf-16.png
+  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg application-x-blokus-sgf-16.png
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg
   )
 

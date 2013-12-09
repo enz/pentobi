@@ -69,7 +69,7 @@ foreach(icon ${pentobi_ICNS})
   string(REPLACE ".png" ".svg" svgicon ${icon})
   add_custom_command(
     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}"
-    COMMAND ${CMAKE_BINARY_DIR}/src/convert/convert ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon} ${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}
+    COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon} ${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
     )
 endforeach()
@@ -105,8 +105,6 @@ add_executable(pentobi WIN32
   ${pentobi_QM_SRCS}
   ${pentobi_RC_SRCS}
   )
-
-add_dependencies(pentobi convert)
 
 if (USE_QT5)
   qt5_use_modules(pentobi Widgets Concurrent)
