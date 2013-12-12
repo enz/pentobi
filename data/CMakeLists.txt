@@ -1,3 +1,5 @@
+if(PENTOBI_BUILD_GUI)
+
 # Create bitmap icons from SVG icons using the helper program src/convert
 add_custom_target(
   pentobi.xpm ALL
@@ -42,3 +44,5 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/thumbnailers)
 install(FILES pentobi-mime.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages)
+
+endif(PENTOBI_BUILD_GUI)
