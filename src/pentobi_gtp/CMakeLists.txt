@@ -17,3 +17,8 @@ target_link_libraries(pentobi-gtp
   boardgame_gtp
   ${CMAKE_THREAD_LIBS_INIT}
   )
+
+if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
+  set_target_properties(pentobi-gtp PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
+endif()
+

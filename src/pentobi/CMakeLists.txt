@@ -106,6 +106,11 @@ add_executable(pentobi WIN32
   ${pentobi_RC_SRCS}
   )
 
+
+if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
+  set_target_properties(pentobi PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
+endif()
+
 if (USE_QT5)
   qt5_use_modules(pentobi Widgets Concurrent)
 endif()
