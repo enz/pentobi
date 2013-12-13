@@ -98,7 +98,7 @@
     <message>
         <location filename="GameInfoDialog.cpp" line="60"/>
         <source>&amp;Event:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Event:</translation>
     </message>
     <message>
         <location filename="GameInfoDialog.cpp" line="61"/>

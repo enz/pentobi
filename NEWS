@@ -25,6 +25,8 @@ Version 7.1.UNKNOWN (v7-fixes)
 * Fixed wrong arguments to update-mime-database/update-desktop-database
   when runing "make post-install"
 * Improved a blurry menu item icon
+* Fixed a compilation warning about a missing translation in
+  libpentobi_gui_en_GB/CA.qm
 
 
 Version 7.1 (13 Aug 2013)
