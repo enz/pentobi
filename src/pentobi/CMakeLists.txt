@@ -57,7 +57,7 @@ else()
   endforeach()
 endif()
 
-if (MINGW)
+if (MINGW OR CYGWIN)
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
     COMMAND windres.exe -I${CMAKE_CURRENT_SOURCE_DIR}
     -i${CMAKE_CURRENT_SOURCE_DIR}/icon.rc
