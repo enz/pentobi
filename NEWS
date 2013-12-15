@@ -11,6 +11,7 @@ Version 7.1.UNKNOWN (v7-fixes)
 * Improved a blurry menu item icon
 * Fixed a compilation warning about a missing translation in
   libpentobi_gui_en_GB/CA.qm
+* Reduced the sizes of the generated and installed translation files.
 
 
 Version 7.1 (13 Aug 2013)
