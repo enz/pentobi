@@ -53,13 +53,6 @@ def print_stat_percent(statistics):
                100 * statistics.get_error_mean()),
 
 
-def print_stat_percent_count(statistics):
-    if statistics.get_count() > 0:
-        print "%s: %.1f%%+-%.1f%%" \
-            % (statistics.get_name(),
-               100 * statistics.get_mean(),
-               100 * statistics.get_error_mean()),
-
 print_result = False
 opts, args = getopt(argv[1:], "r", [
     "result",
@@ -134,11 +127,11 @@ else:
             print ",",
             print_stat_percent(result_color_white)
         print
-        print_stat_percent_count(win)
+        print_stat_percent(win)
         print ",",
-        print_stat_percent_count(loss)
+        print_stat_percent(loss)
         print ",",
-        print_stat_percent_count(draw)
+        print_stat_percent(draw)
         print
         print_stat(cpu_black)
         print ",",
