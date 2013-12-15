@@ -52,23 +52,28 @@ configure_file(
 if (USE_QT5)
   qt5_add_resources(pentobi_gui_RC_SRCS
     ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc)
-  qt5_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
 else()
   qt4_add_resources(pentobi_gui_RC_SRCS
     ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc)
-  # We don't use qt4_add_translation because it doesn't use option -removeidentical
-  # with lrelease, which causes larger sizes of the generated qm files
-  foreach(ts ${pentobi_gui_TS})
-    get_filename_component(qm ${ts} NAME_WE)
-    set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
-    add_custom_command(OUTPUT ${qm}
-      COMMAND ${QT_LRELEASE_EXECUTABLE}
-      ARGS -removeidentical -nounfinished ${CMAKE_CURRENT_SOURCE_DIR}/${ts} -qm ${qm}
-      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ts} VERBATIM
-      )
-    set(pentobi_gui_QM_SRCS ${pentobi_gui_QM_SRCS} ${qm})
-  endforeach()
 endif()
+
+# We don't use qt4_add_translation because it doesn't use option -removeidentical
+# with lrelease, which causes larger sizes of the generated qm files
+if (USE_QT5)
+  set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
+else()
+  set(LRELEASE_EXECUTABLE ${QT_LRELEASE_EXECUTABLE})
+endif()
+foreach(ts ${pentobi_gui_TS})
+  get_filename_component(qm ${ts} NAME_WE)
+  set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
+  add_custom_command(OUTPUT ${qm}
+    COMMAND ${LRELEASE_EXECUTABLE}
+    ARGS -removeidentical -nounfinished ${CMAKE_CURRENT_SOURCE_DIR}/${ts} -qm ${qm}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ts} VERBATIM
+    )
+  set(pentobi_gui_QM_SRCS ${pentobi_gui_QM_SRCS} ${qm})
+endforeach()
 
 add_library(pentobi_gui STATIC
   ${pentobi_gui_STAT_SRCS}
