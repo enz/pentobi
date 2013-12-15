@@ -96,7 +96,7 @@ else()
   endforeach()
 endif()
 
-if (MINGW)
+if (MINGW OR CYGWIN)
   # Workaround for a compilation failure with MINGW if we let CMake 
   # build the RC object: it would invoke windres.exe with the current
   # CXXFLAGS but some of them are GCC-specific and not supported
