@@ -6,7 +6,7 @@ from getopt import getopt
 from os import remove
 from os.path import exists
 from shlex import split
-from string import lower, strip
+from string import lower, strip, upper
 from subprocess import PIPE, Popen
 from sys import argv, exit, stderr
 from threading import Lock, Thread
@@ -174,17 +174,7 @@ def play_game(game_number, black, white, variant, output_file):
         other.send("play " + colors[color_to_play] + " " + move)
         if move != "pass":
             nu_passes = 0
-            if variant == "duo":
-                if color_to_play == 0:
-                    prop_id = "B"
-                else:
-                    prop_id = "W"
-            else:
-                prop_id = str(color_to_play + 1)
-            sgf += ";%s" % (prop_id)
-            for p in split(move):
-                sgf += "[%s]" % (p)
-            sgf += "\n"
+            sgf += ";%s[%s]\n" % (upper(colors[color_to_play]), move)
         else:
             nu_passes += 1
             if nu_passes == len(colors):
