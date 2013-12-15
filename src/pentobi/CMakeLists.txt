@@ -40,22 +40,27 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 if (USE_QT5)
   qt5_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
-  qt5_add_translation(pentobi_QM_SRCS ${pentobi_TS})
 else()
   qt4_add_resources(pentobi_RC_SRCS ${pentobi_RCS})
-  # We don't use qt4_add_translation because it doesn't use option -removeidentical
-  # with lrelease, which causes larger sizes of the generated qm files
-  foreach(ts ${pentobi_TS})
-    get_filename_component(qm ${ts} NAME_WE)
-    set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
-    add_custom_command(OUTPUT ${qm}
-      COMMAND ${QT_LRELEASE_EXECUTABLE}
-      ARGS -removeidentical -nounfinished ${CMAKE_CURRENT_SOURCE_DIR}/${ts} -qm ${qm}
-      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ts} VERBATIM
-      )
-    set(pentobi_QM_SRCS ${pentobi_QM_SRCS} ${qm})
-  endforeach()
 endif()
+
+# We don't use qt4_add_translation because it doesn't use option -removeidentical
+# with lrelease, which causes larger sizes of the generated qm files
+if (USE_QT5)
+  set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
+else()
+  set(LRELEASE_EXECUTABLE ${QT_LRELEASE_EXECUTABLE})
+endif()
+foreach(ts ${pentobi_TS})
+  get_filename_component(qm ${ts} NAME_WE)
+  set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
+  add_custom_command(OUTPUT ${qm}
+    COMMAND ${LRELEASE_EXECUTABLE}
+    ARGS -removeidentical -nounfinished ${CMAKE_CURRENT_SOURCE_DIR}/${ts} -qm ${qm}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ts} VERBATIM
+    )
+  set(pentobi_QM_SRCS ${pentobi_QM_SRCS} ${qm})
+endforeach()
 
 if (MINGW OR CYGWIN)
   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
