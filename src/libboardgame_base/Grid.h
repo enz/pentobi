@@ -39,8 +39,11 @@ public:
 
     const T& operator[](const Point& p) const;
 
-    /** Fill all on-board points for a given board size with a value. */
+    /** Fill all on-board points for a given geometry with a value. */
     void fill(const T& val, const Geometry& geo);
+
+    /** Fill points with a value. */
+    void fill_all(const T& val);
 
     ostream& write(ostream& out, const Geometry& geo) const;
 
@@ -65,6 +68,12 @@ inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
     for (Iterator i(geo); i; ++i)
         operator[](*i) = val;
+}
+
+template<class P, typename T>
+inline void Grid<P, T>::fill_all(const T& val)
+{
+    std::fill(m_a, m_a + Point::range_onboard_end, val);
 }
 
 template<class P, typename T>
