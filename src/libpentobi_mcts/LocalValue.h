@@ -62,6 +62,8 @@ public:
 
     friend class Compute;
 
+    LocalValue();
+
     /** Find the attach points of the last opponent moves in a given position.
         @param bd The board. */
     void init(const Board& bd);
@@ -110,6 +112,11 @@ inline unsigned LocalValue::Compute::get() const
 inline unsigned LocalValue::Compute::get_upper_bound() const
 {
     return m_value;
+}
+
+inline LocalValue::LocalValue()
+{
+    m_point_value.fill_all(0);
 }
 
 inline void LocalValue::clear()
