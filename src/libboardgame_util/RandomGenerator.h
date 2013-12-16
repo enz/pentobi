@@ -75,7 +75,7 @@ public:
     unsigned generate_small_uint(unsigned n);
 
     /** Generate a floating point value in [0..1]. */
-    double generate_float();
+    double generate_double();
 
     /** Set seed for all currently existing and future generators.
         If this function is never called, a non-deterministic seed is used. */
@@ -91,7 +91,7 @@ public:
 private:
     Generator m_generator;
 
-    uniform_real_distribution<float> m_float_distribution;
+    uniform_real_distribution<double> m_double_distribution;
 };
 
 inline RandomGenerator::ResultType RandomGenerator::generate()
@@ -99,9 +99,9 @@ inline RandomGenerator::ResultType RandomGenerator::generate()
     return m_generator();
 }
 
-inline double RandomGenerator::generate_float()
+inline double RandomGenerator::generate_double()
 {
-    return m_float_distribution(m_generator);
+    return m_double_distribution(m_generator);
 }
 
 inline int RandomGenerator::generate_small_int(int n)
