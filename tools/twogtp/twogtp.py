@@ -184,7 +184,6 @@ def play_game(game_number, black, white, variant, output_file):
         color_to_play = color_to_play + 1
         if color_to_play == len(colors):
             color_to_play = 0
-    sgf += ")\n"
     if exchange_color:
         black, white = white, black
     cpu_black = float(black.send("cputime")) - cpu_black
@@ -205,6 +204,8 @@ def play_game(game_number, black, white, variant, output_file):
         if variant == "classic" or variant == "trigon":
             result_black = convert_four_player_result(result_black)
             result_white = convert_four_player_result(result_white)
+    sgf += ";C[result_black=" + result_black + " result_white=" + \
+        result_white + "]\n)\n"
     if exchange_color:
         result_black = invert_result(result_black)
         result_white = invert_result(result_white)
