@@ -5,7 +5,7 @@ from re import search
 from sys import stdin
 
 def write_file():
-    with open(filename, "a") as f:
+    with open(filename, "w") as f:
         f.write(buffer)
 
 filename = ""
