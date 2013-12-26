@@ -8,8 +8,8 @@
 #define LIBBOARDGAME_MCTS_LAST_GOOD_REPLY_H
 
 #include <algorithm>
-#include <atomic>
 #include <memory>
+#include "Atomic.h"
 #include "PlayerMove.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/RandomGenerator.h"
@@ -65,9 +65,11 @@ private:
 
     size_t m_hash[Move::range];
 
-    atomic<typename Move::IntType> m_lgr1[max_players][Move::range];
+    LIBBOARDGAME_MCTS_ATOMIC(typename Move::IntType)
+        m_lgr1[max_players][Move::range];
 
-    atomic<typename Move::IntType> m_lgr2[max_players][hash_table_size];
+    LIBBOARDGAME_MCTS_ATOMIC(typename Move::IntType)
+        m_lgr2[max_players][hash_table_size];
 
     size_t get_index(Move last_mv, Move second_last_mv) const;
 };
@@ -97,11 +99,13 @@ inline void LastGoodReply<M, P>::get(PlayerInt player, Move last_mv,
     if (! second_last_mv.is_null())
     {
         auto index = get_index(last_mv, second_last_mv);
-        lgr2 = Move(m_lgr2[player][index].load(memory_order_relaxed));
+        lgr2 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_lgr2[player][index],
+                                                  memory_order_relaxed));
     }
     else
         lgr2 = Move::null();
-    lgr1 = Move(m_lgr1[player][last_mv.to_int()].load(memory_order_relaxed));
+    lgr1 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_lgr1[player][last_mv.to_int()],
+                                              memory_order_relaxed));
 }
 
 template<class M, unsigned P>
@@ -131,12 +135,16 @@ inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
     {
         auto index = get_index(last_mv, second_last_mv);
         auto& stored_reply = m_lgr2[player][index];
-        if (stored_reply.load(memory_order_relaxed) == reply_int)
-            stored_reply.store(null_int, memory_order_relaxed);
+        if (LIBBOARDGAME_MCTS_ATOMIC_LOAD(stored_reply, memory_order_relaxed)
+            == reply_int)
+            LIBBOARDGAME_MCTS_ATOMIC_STORE(stored_reply, null_int,
+                                           memory_order_relaxed);
     }
     auto& stored_reply = m_lgr1[player][last_mv.to_int()];
-    if (stored_reply.load(memory_order_relaxed) == reply_int)
-        stored_reply.store(null_int, memory_order_relaxed);
+    if (LIBBOARDGAME_MCTS_ATOMIC_LOAD(stored_reply, memory_order_relaxed)
+        == reply_int)
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(stored_reply, null_int,
+                                       memory_order_relaxed);
 }
 
 template<class M, unsigned P>
@@ -147,8 +155,10 @@ inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
     auto& stored_reply = m_lgr1[player][last_mv.to_int()];
-    if (stored_reply.load(memory_order_relaxed) == reply_int)
-        stored_reply.store(null_int, memory_order_relaxed);
+    if (LIBBOARDGAME_MCTS_ATOMIC_LOAD(stored_reply, memory_order_relaxed)
+        == reply_int)
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(stored_reply, null_int,
+                                       memory_order_relaxed);
 }
 
 template<class M, unsigned P>
@@ -160,9 +170,11 @@ inline void LastGoodReply<M, P>::store(PlayerInt player, Move last_mv,
     auto reply_int = reply.to_int();
     {
         auto index = get_index(last_mv, second_last_mv);
-        m_lgr2[player][index].store(reply_int, memory_order_relaxed);
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_lgr2[player][index], reply_int,
+                                       memory_order_relaxed);
     }
-    m_lgr1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
+    LIBBOARDGAME_MCTS_ATOMIC_STORE(m_lgr1[player][last_mv.to_int()], reply_int,
+                                   memory_order_relaxed);
 }
 
 template<class M, unsigned P>
@@ -171,7 +183,8 @@ inline void LastGoodReply<M, P>::store(PlayerInt player, Move last_mv,
 {
     LIBBOARDGAME_ASSERT(! last_mv.is_null());
     auto reply_int = reply.to_int();
-    m_lgr1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
+    LIBBOARDGAME_MCTS_ATOMIC_STORE(m_lgr1[player][last_mv.to_int()], reply_int,
+                                   memory_order_relaxed);
 }
 
 //-----------------------------------------------------------------------------

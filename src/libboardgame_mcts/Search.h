@@ -13,6 +13,7 @@
 #include <functional>
 #include <mutex>
 #include <thread>
+#include "Atomic.h"
 #include "BiasTerm.h"
 #include "LastGoodReply.h"
 #include "PlayerMove.h"
@@ -21,6 +22,7 @@
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/Barrier.h"
 #include "libboardgame_util/BitMarker.h"
+#include "libboardgame_util/Exception.h"
 #include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
@@ -40,6 +42,7 @@ using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::Barrier;
 using libboardgame_util::BitMarker;
+using libboardgame_util::Exception;
 using libboardgame_util::FmtSaver;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::StatisticsBase;
@@ -575,7 +578,7 @@ private:
     LastGoodReply<M, max_players> m_last_good_reply;
 
     /** See get_nu_simulations(). */
-    atomic<size_t> m_nu_simulations;
+    LIBBOARDGAME_MCTS_ATOMIC(size_t) m_nu_simulations;
 
     // @} // @name
 
@@ -791,7 +794,9 @@ bool Search<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
         simulations_per_sec = expected_sim_per_sec();
     else
     {
-        size_t nu_simulations = m_nu_simulations.load(memory_order_relaxed);
+        size_t nu_simulations =
+            LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_nu_simulations,
+                                          memory_order_relaxed);
         simulations_per_sec = double(nu_simulations) / time;
     }
     double remaining_time;
@@ -885,6 +890,11 @@ inline bool Search<S, M, R>::check_skip_bias_term(ThreadState& thread_state,
 template<class S, class M, class R>
 void Search<S, M, R>::create_threads()
 {
+#if LIBBOARDGAME_MCTS_SINGLE_THREAD
+    if (m_nu_threads > 1)
+        throw Exception("libboardgame_mcts::Search was compiled"
+                        " without support for multithreading");
+#endif
     log() << "Creating " << m_nu_threads << " threads\n";
     m_threads.clear();
     auto search_func =
@@ -1428,11 +1438,12 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
     {
         thread_state.is_out_of_mem = false;
         auto root_count = m_tree.get_root().get_visit_count();
-        auto nu_simulations = m_nu_simulations.fetch_add(1);
+        auto nu_simulations =
+            LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(m_nu_simulations, 1);
         if (root_count > 0 && nu_simulations > m_min_simulations
             && (check_abort(thread_state) || expensive_abort_checker()))
         {
-            m_nu_simulations.fetch_add(-1);
+            LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(m_nu_simulations, -1);
             break;
         }
         ++thread_state.nu_simulations;
