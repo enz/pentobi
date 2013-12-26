@@ -238,7 +238,8 @@ public:
 
     Float get_expand_threshold_incr() const;
 
-    /** Constant used in UCT bias term. */
+    /** Constant used in UCT bias term.
+        @see BiasTerm */
     void set_bias_term_constant(Float c);
 
     Float get_bias_term_constant() const;

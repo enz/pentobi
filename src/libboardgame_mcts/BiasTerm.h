@@ -19,7 +19,10 @@ using libboardgame_util::FastLog;
 //-----------------------------------------------------------------------------
 
 /** Computes the UCT bias term.
-    Uses a lookup table for small counts. */
+    Fractional counts are rounded to integer count (only for small counts).
+    For child counts smaller than 1, the same value is returned as as for child
+    count 1 but nodes should be initialized with prior knowledge anyway so that
+    child count 0 will not occur. */
 template<typename F>
 class BiasTerm
 {
@@ -79,7 +82,8 @@ inline auto BiasTerm<F>::get(Float child_count) const -> Float
 template<typename F>
 inline auto BiasTerm<F>::compute_child_part(Float child_count) const -> Float
 {
-    return sqrt(1 / max(child_count, Float(1)));
+    LIBBOARDGAME_ASSERT(child_count > 0);
+    return sqrt(1 / child_count);
 }
 
 template<typename F>
@@ -87,7 +91,8 @@ inline auto BiasTerm<F>::compute_parent_part(Float parent_count) const -> Float
 {
     if (m_bias_term_constant == 0 || parent_count == 0)
         return 0;
-    return m_bias_term_constant * sqrt(m_fast_log.get_log(float(parent_count)));
+    return
+        m_bias_term_constant * sqrt(m_fast_log.get_log(float(parent_count)));
 }
 
 template<typename F>
@@ -101,10 +106,9 @@ void BiasTerm<F>::set_bias_term_constant(Float value)
 {
     m_bias_term_constant = value;
     for (unsigned i = 0; i < nu_precomp; ++i)
-    {
         m_precomp_parent_part[i] = compute_parent_part(static_cast<Float>(i));
+    for (unsigned i = 1; i < nu_precomp; ++i)
         m_precomp_child_part[i] = compute_child_part(static_cast<Float>(i));
-    }
 }
 
 template<typename F>
