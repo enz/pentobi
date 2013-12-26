@@ -4,14 +4,14 @@ Version 7.1.UNKNOWN (v7-fixes)
 * Hyphens used as minus signs in manpage (bug #9)
 * Added keywords section to desktop entry to silence lintian
   warning (bug #10)
-* Fixed a compilation error in libboardgame_util/RandomGenerator.cpp
-  with GCC 4.8.2 on PowerPC (and other big-endian systems)
+* Fixed a compilation error with GCC 4.8.2 on PowerPC (and other
+  big-endian systems)
 * Fixed wrong arguments to update-mime-database/update-desktop-database
   when runing "make post-install"
 * Improved a blurry menu item icon
-* Fixed a compilation warning about a missing translation in
-  libpentobi_gui_en_GB/CA.qm
+* Fixed a compilation warning about a missing translation
 * Reduced the sizes of the generated and installed translation files.
+* Fixed a compilation error on 64-bit Linux with X32 ABI
 * Fixed a compilation error with Cygwin
 
 
