@@ -210,6 +210,7 @@ void State::compute_features(bool check_dist_to_center, bool check_connect)
 {
     auto to_play = m_bd.get_to_play();
     auto second_color = m_bd.get_second_color(to_play);
+    const bool is_classic_2 = (m_bd.get_variant() == Variant::classic_2);
     auto& moves = *m_moves[to_play];
     auto& geo = m_bc->get_geometry();
     auto& is_forbidden = m_bd.is_forbidden(to_play);
@@ -250,10 +251,26 @@ void State::compute_features(bool check_dist_to_center, bool check_connect)
         for (Point p : m_bd.get_attach_points(*i))
             if (! is_forbidden[p])
             {
+                // Occupying opponent attach points is very good
                 point_value[p] = 3.2f;
                 for (AdjIterator j(geo, p); j; ++j)
                     if (! is_forbidden[*j])
+                        // Occupying points adjacent to opponent attach points
+                        // is good
                         point_value[*j] = max(point_value[*j], Float(2.5));
+            }
+    }
+    if (is_classic_2)
+    {
+        auto& is_forbidden_second_color = m_bd.is_forbidden(second_color);
+        for (Point p : m_bd.get_attach_points(second_color))
+            if (! is_forbidden_second_color[p])
+            {
+                // Occupying attach points of second color is bad
+                point_value[p] -= 3.f;
+                if (! is_forbidden[p])
+                    // Sharing an attach point with second color is bad
+                    attach_point_value[p] -= 1.f;
             }
     }
     m_max_heuristic = -numeric_limits<Float>::max();
