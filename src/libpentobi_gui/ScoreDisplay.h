@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 /** @file libpentobi_gui/ScoreDisplay.h
-    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 

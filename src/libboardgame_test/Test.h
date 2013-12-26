@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 /** @file libboardgame_test/Test.h
     Provides functionality similar to Boost.Test.
-    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 

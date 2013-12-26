@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 /** @file unittest/libpentobi_mcts/SearchTest.cpp
-    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 

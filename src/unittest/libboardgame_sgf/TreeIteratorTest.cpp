@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 /** @file unittest/libboardgame_sgf/TreeIteratorTest.cpp
-    @author Markus Enzenberger <enz@users.sourceforge.net>
+    @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
