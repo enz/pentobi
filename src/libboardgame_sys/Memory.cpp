@@ -16,7 +16,9 @@
 #else
 #include <unistd.h>
 #endif
-#if HAVE_SYS_SYSCTL_H
+// Don't include sys/sysctl.h on Linux with X32 ABI (__x86_64__ && __ILP32__):
+// it exists but causes a compilation error (last checked on Ubuntu 13.10)
+#if HAVE_SYS_SYSCTL_H && ! (defined __x86_64__ && defined __ILP32__)
 #include <sys/sysctl.h>
 #endif
 
