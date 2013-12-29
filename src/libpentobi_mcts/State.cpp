@@ -40,8 +40,6 @@ namespace {
 
 const bool use_prior_knowledge = true;
 
-const bool pure_random_playout = false;
-
 /** Return the symmetric point state for symmetry detection.
     Only used for Variant::duo. Returns the other color or empty, if the
     given point state is empty. */
@@ -88,6 +86,13 @@ State::~State() throw()
 {
 }
 
+inline void State::add_move(MoveList& moves, Move mv, double gamma)
+{
+    m_total_gamma += gamma;
+    m_cumulative_gamma[moves.size()] = m_total_gamma;
+    moves.push_back(mv);
+}
+
 inline void State::add_moves(Point p, Color c,
                              const Board::PiecesLeftList& pieces_considered)
 {
@@ -95,14 +100,16 @@ inline void State::add_moves(Point p, Color c,
     auto& marker = m_marker[c];
     auto adj_status = m_bd.get_adj_status(p, c);
     auto& is_forbidden = m_bd.is_forbidden(c);
+    double gamma;
     for (Piece piece : pieces_considered)
     {
         auto move_candidates = get_moves(c, piece, p, adj_status);
         for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
-            if (! marker[*i] && check_move(is_forbidden, *i, get_move_info(*i)))
+            if (! marker[*i]
+                && check_move(is_forbidden, get_move_info(*i), gamma))
             {
                 marker.set(*i);
-                moves.push_back(*i);
+                add_move(moves, *i, gamma);
             }
     }
     m_moves_added_at[c].set(p);
@@ -115,16 +122,18 @@ inline void State::add_moves(Point p, Color c, Piece piece,
     auto& marker = m_marker[c];
     auto move_candidates = get_moves(c, piece, p, adj_status);
     auto& is_forbidden = m_bd.is_forbidden(c);
+    double gamma;
     for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
-        if (! marker[*i] && check_move(is_forbidden, *i, get_move_info(*i)))
+        if (! marker[*i] && check_move(is_forbidden, get_move_info(*i), gamma))
         {
             marker.set(*i);
-            moves.push_back(*i);
+            add_move(moves, *i, gamma);
         }
 }
 
 void State::add_starting_moves(Color c,
-                               const Board::PiecesLeftList& pieces_considered)
+                               const Board::PiecesLeftList& pieces_considered,
+                               bool with_gamma)
 {
     // Using only one starting point (if game variant has more than one) not
     // only reduces the branching factor but is also necessary because
@@ -143,57 +152,61 @@ void State::add_starting_moves(Color c,
     // heuristic anyway. However, we check if all the moves are legal to avoid
     // the generation of illegal moves in non-standard board positions.
     for (Piece piece : pieces_considered)
+    {
+        auto piece_size = m_bd.get_piece_info(piece).get_size();
         for (Move mv : get_moves(c, piece, p, 0))
         {
             LIBBOARDGAME_ASSERT(! marker[mv]);
-            if (check_move_without_local(is_forbidden, mv))
+            if (check_move_without_gamma(is_forbidden, mv))
             {
                 marker.set(mv);
-                moves.push_back(mv);
+                if (with_gamma)
+                    add_move(moves, mv, m_gamma_piece_size[piece_size]);
+                else
+                    moves.push_back(mv);
             }
         }
+    }
 }
 
 /** Check if move is not forbidden and compute/handle its local value in the
     same loop. */
-bool State::check_move(const Grid<bool>& is_forbidden, Move mv,
-                       const MoveInfo& info)
+bool State::check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
+                       double& gamma)
 {
     auto i = info.begin();
     if (is_forbidden[*i])
         return false;
-    LocalValue::Compute compute_local(*i, m_local_value);
+    LocalValue::Compute local(*i, m_local_value);
     unsigned piece_size = info.size();
     auto end = i + piece_size;
     while (++i != end)
     {
         if (is_forbidden[*i])
             return false;
-        compute_local.add_move_point(*i, m_local_value);
+        local.add_move_point(*i, m_local_value);
     }
-    if (piece_size > m_max_playable_piece_size)
-        m_max_playable_piece_size = piece_size;
-    if (compute_local.get_upper_bound() >= m_max_local_value)
+    gamma = m_gamma_piece_size[piece_size];
+    if (local.has_local())
     {
-        auto local_value = compute_local.get();
-        if (local_value > m_max_local_value)
+        if (local.has_no_attach_or_adj())
+            // Only 2nd-order adjacent to opponent attach point. Don't care how
+            // many
+            gamma *= 1e4;
+        else
         {
-            m_local_moves.clear();
-            m_max_local_value = local_value;
-            m_max_playable_piece_size_local = piece_size;
-            m_local_moves.push_back(mv);
-        }
-        else if (local_value == m_max_local_value)
-        {
-            if (piece_size > m_max_playable_piece_size_local)
-                m_max_playable_piece_size_local = piece_size;
-            m_local_moves.push_back(mv);
+            // Ignore 2nd-order adj. to opp. attach point if we have opp. attach
+            // points or adj. to opp. attach point. Only care if we have any
+            // adj. to opp. attach points, not how many.
+            gamma *= m_gamma_nu_attach[local.get_nu_attach()];
+            if (local.has_adj_attach())
+                gamma *= 1e5;
         }
     }
     return true;
 }
 
-bool State::check_move_without_local(const Grid<bool>& is_forbidden, Move mv)
+bool State::check_move_without_gamma(const Grid<bool>& is_forbidden, Move mv)
 {
     auto& info = get_move_info(mv);
     auto i = info.begin();
@@ -579,7 +592,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
     {
         to_play = m_bd.get_to_play();
         if (! m_is_move_list_initialized[to_play])
-            init_moves_with_local(to_play);
+            init_moves_with_gamma(to_play);
         else if (m_has_moves[to_play])
             update_moves(to_play);
         if ((m_has_moves[to_play] = ! m_moves[to_play]->empty()))
@@ -599,43 +612,16 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
         m_is_symmetry_broken = true;
     }
 
-    // Choose a random move from the list of local moves (if not empty) or
-    // the list of all moves. Try more than once if a bad move (e.g. not
-    // maximum playable piece size) is chosen to reduce the probabilty
-    // for such moves without becoming deterministic.
-
-    const MoveList* moves;
-    unsigned max_playable_piece_size;
-    if (pure_random_playout || m_local_moves.empty())
-    {
-        moves = m_moves[to_play].get();
-        max_playable_piece_size = m_max_playable_piece_size;
-        if (log_simulations)
-            log() << "Moves: " << moves->size() << "\n";
-    }
-    else
-    {
-        moves = &m_local_moves;
-        max_playable_piece_size = m_max_playable_piece_size_local;
-        if (log_simulations)
-        {
-            FmtSaver saver(log());
-            log() << "Moves: " << m_moves[to_play]->size() << ", local: "
-                  << m_local_moves.size() << ", local_val: 0x"
-                  << setfill('0') << hex << setw(3) << m_max_local_value
-                  << "\n";
-        }
-    }
-    const unsigned max_try = 3;
-    unsigned nu_try = 0;
-    do
-    {
-        ++nu_try;
-        unsigned i = m_random.generate_small_uint(moves->size());
-        mv = (*moves)[i];
-    }
-    while (get_move_info(mv).size() < max_playable_piece_size
-           && nu_try < max_try);
+    auto& moves = *m_moves[to_play];
+    if (log_simulations)
+        log() << "Moves: " << moves.size() << ", total gamma: "
+              << m_total_gamma << "\n";
+    auto begin = m_cumulative_gamma.begin();
+    auto end = begin + moves.size();
+    auto random = m_total_gamma * m_random.generate_double();
+    auto pos = lower_bound(begin, end, random);
+    LIBBOARDGAME_ASSERT(pos != end);
+    mv = moves[pos - begin];
     return true;
 }
 
@@ -656,7 +642,7 @@ void State::gen_children(Tree::NodeExpander& expander, Float init_val)
         return;
     Color to_play = m_bd.get_to_play();
 
-    init_moves_without_local(to_play);
+    init_moves_without_gamma(to_play);
 
     const auto& moves = *m_moves[to_play];
     if (moves.empty())
@@ -778,14 +764,11 @@ inline const PieceMap<bool>& State::get_pieces_considered() const
         return *m_shared_const.is_piece_considered[nu_moves];
 }
 
-void State::init_moves_with_local(Color c)
+void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
     m_local_value.init(m_bd);
-    m_local_moves.clear();
-    m_max_local_value = 1;
-    m_max_playable_piece_size = 1;
-    m_max_playable_piece_size_local = 1;
+    m_total_gamma = 0;
     auto& marker = m_marker[c];
     auto& moves = *m_moves[c];
     marker.clear_all_set_known(moves);
@@ -795,7 +778,7 @@ void State::init_moves_with_local(Color c)
         if ((*m_is_piece_considered[c])[piece])
             pieces_considered.push_back(piece);
     if (m_bd.is_first_piece(c))
-        add_starting_moves(c, pieces_considered);
+        add_starting_moves(c, pieces_considered, true);
     else
         for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
@@ -805,11 +788,11 @@ void State::init_moves_with_local(Color c)
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
-        init_moves_with_local(c);
+        init_moves_with_gamma(c);
     }
 }
 
-void State::init_moves_without_local(Color c)
+void State::init_moves_without_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
     auto& marker = m_marker[c];
@@ -822,7 +805,7 @@ void State::init_moves_without_local(Color c)
             pieces_considered.push_back(piece);
     auto& is_forbidden = m_bd.is_forbidden(c);
     if (m_bd.is_first_piece(c))
-        add_starting_moves(c, pieces_considered);
+        add_starting_moves(c, pieces_considered, false);
     else
         for (Point p : m_bd.get_attach_points(c))
             if (! is_forbidden[p])
@@ -831,7 +814,7 @@ void State::init_moves_without_local(Color c)
                 for (Piece piece : pieces_considered)
                     for (Move mv : get_moves(c, piece, p, adj_status))
                         if (! marker[mv]
-                            && check_move_without_local(is_forbidden, mv))
+                            && check_move_without_gamma(is_forbidden, mv))
                         {
                             marker.set(mv);
                             moves.push_back(mv);
@@ -843,7 +826,7 @@ void State::init_moves_without_local(Color c)
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
-        init_moves_without_local(c);
+        init_moves_without_gamma(c);
     }
 }
 
@@ -941,6 +924,14 @@ void State::start_search()
         m_dist_to_center[*i] = static_cast<unsigned>(d);
     }
     //log() << "Dist to center:\n" << m_dist_to_center;
+
+    // Init precomputed gamma values
+    double gamma = 1;
+    for (unsigned i = 1; i < PieceInfo::max_size + 1; ++i, gamma *= 3)
+        m_gamma_piece_size[i] = gamma;
+    gamma = 1;
+    for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i, gamma *= 1e6)
+        m_gamma_nu_attach[i] = gamma;
 }
 
 void State::start_simulation(size_t n)
@@ -973,10 +964,7 @@ void State::start_simulation(size_t n)
 void State::update_moves(Color c)
 {
     m_local_value.init(m_bd);
-    m_local_moves.clear();
-    m_max_local_value = 1;
-    m_max_playable_piece_size = 1;
-    m_max_playable_piece_size_local = 1;
+    m_total_gamma = 0;
     auto& marker = m_marker[c];
 
     // Find old moves that are still legal
@@ -984,13 +972,15 @@ void State::update_moves(Color c)
     for (Piece piece : m_bd.get_pieces_left(c))
         is_piece_left[piece] = true;
     auto& is_forbidden = m_bd.is_forbidden(c);
-    m_tmp_moves->clear();
+    auto& tmp_moves = *m_tmp_moves;
+    tmp_moves.clear();
+    double gamma;
     for (Move mv : *m_moves[c])
     {
         auto& info = get_move_info(mv);
         if (is_piece_left[info.get_piece()]
-            && check_move(is_forbidden, mv, info))
-            m_tmp_moves->push_back(mv);
+            && check_move(is_forbidden, info, gamma))
+            add_move(tmp_moves, mv, gamma);
         else
             marker.clear(mv);
     }

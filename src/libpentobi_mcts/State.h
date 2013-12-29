@@ -114,7 +114,11 @@ struct SharedConst
 /** A state of a simulation.
     This class contains modifiable data used in a simulation. In multi-threaded
     search (not yet implemented), each thread uses its own instance of this
-    class. */
+    class.
+    This class incrementally keeps track of the legal moves.
+    The randomization in the playouts is done by assigning a heuristically
+    tuned gamma value to each move. The gamma value determines the probabilty
+    that a move is played in the playout phase. */
 class State
 {
 public:
@@ -197,12 +201,6 @@ private:
 
     Color::IntType m_nu_passes;
 
-    unsigned m_max_local_value;
-
-    unsigned m_max_playable_piece_size;
-
-    unsigned m_max_playable_piece_size_local;
-
     /** Maximum of Features::heuristic for all moves. */
     Float m_max_heuristic;
 
@@ -232,17 +230,24 @@ private:
 
     array<MoveFeatures, Move::range> m_features;
 
+    /** The cumulative gamma value of the moves in m_moves. */
+    array<double, Move::range> m_cumulative_gamma;
+
+    /** The sum of the gamma values of all moves. */
+    double m_total_gamma;
+
+    /** Precomputed gamma value for a piece size. */
+    array<double, PieceInfo::max_size + 1> m_gamma_piece_size;
+
+    /** Precomputed gamma value for LocalValue::get_nu_attach(). */
+    array<double, PieceInfo::max_size + 1> m_gamma_nu_attach;
+
     /** Moves played by a color since the last update of its move list. */
     ColorMap<ArrayList<Move, Board::max_nonpass_player_moves>> m_new_moves;
 
     ColorMap<bool> m_is_move_list_initialized;
 
     ColorMap<bool> m_has_moves;
-
-    /** Moves that are a local response to the last move.
-        These moves occupy at least one of the corner points of the last
-        piece played. */
-    MoveList m_local_moves;
 
     /** Marks moves contained in m_moves. */
     ColorMap<MoveMarker> m_marker;
@@ -288,13 +293,16 @@ private:
     /** Distance to center heuristic. */
     Grid<unsigned> m_dist_to_center;
 
+    void add_move(MoveList& moves, Move mv, double gamma);
+
     void add_moves(Point p, Color c,
                    const Board::PiecesLeftList& pieces_considered);
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
 
     void add_starting_moves(Color c,
-                            const Board::PiecesLeftList& pieces_considered);
+                            const Board::PiecesLeftList& pieces_considered,
+                            bool with_gamma);
 
     void compute_features(bool check_dist_to_center, bool check_connect);
 
@@ -313,16 +321,16 @@ private:
 
     const PieceMap<bool>& get_pieces_considered() const;
 
-    void init_moves_with_local(Color c);
+    void init_moves_with_gamma(Color c);
 
-    void init_moves_without_local(Color c);
+    void init_moves_without_gamma(Color c);
 
     void play_playout(Move mv);
 
-    bool check_move(const Grid<bool>& is_forbidden, Move mv,
-                    const MoveInfo& info);
+    bool check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
+                    double& gamma);
 
-    bool check_move_without_local(const Grid<bool>& is_forbidden, Move mv);
+    bool check_move_without_gamma(const Grid<bool>& is_forbidden, Move mv);
 
     void update_moves(Color c);
 

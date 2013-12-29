@@ -31,11 +31,10 @@ using libpentobi_base::PointList;
 
 //-----------------------------------------------------------------------------
 
-/** Classify playout moves to prefer local response moves.
-    In the playout policy, local response moves are preferred. That is, a
-    random move is chosen from the set of moves with the highest local response
-    value. The value depends on the proximity to the last opponent moves and
-    the number of attach points of those moves occupied. */
+/** Classify moves for the playout policy to prefer local response moves.
+    A local response move is a move that occupies attach points of recent
+    opponent moves or points that are adjacent or second-order adjacent to
+    them. */
 class LocalValue
 {
 public:
@@ -43,18 +42,50 @@ public:
     class Compute
     {
     public:
-        Compute(Point p, const LocalValue& local_value);
+        Compute(Point p, const LocalValue& local_value)
+            : m_value(local_value.m_point_value[p])
+        {
+        }
 
         /** Add a point of the move. */
-        void add_move_point(Point p, const LocalValue& local_value);
+        void add_move_point(Point p, const LocalValue& local_value)
+        {
+            m_value += local_value.m_point_value[p];
+        }
 
-        /** Return the value. */
-        unsigned get() const;
+        /** Does the move occupy any local points? */
+        bool has_local() const
+        {
+            return m_value != 0;
+        }
 
-        /** Return upper bound on the value.
-            Faster than get() and often good enough to know that we
-            already have a move with a higher value. */
-        unsigned get_upper_bound() const;
+        /** Get the number of local opponent attach points occupied by this
+            move. */
+        unsigned get_nu_attach() const
+        {
+            return (m_value & 0xf00u) >> 8;
+        }
+
+        /** Does the move occupy any points adjacent to local opponent attach
+            points? */
+        bool has_adj_attach() const
+        {
+            return ((m_value & 0x0f0u) != 0);
+        }
+
+        /** Does the move occupy any points second-order adjacent to local
+            opponent attach points? */
+        bool has_adj_attach_2() const
+        {
+            return ((m_value & 0x00fu) != 0);
+        }
+
+        /** Does the move not occupy any local opponent attach points
+            or points that are (first-order) adjacant to them? */
+        bool has_no_attach_or_adj() const
+        {
+            return (m_value < 0x010u);
+        }
 
     private:
         unsigned m_value;
@@ -77,42 +108,6 @@ private:
     /** Points with point value greater zero. */
     PointList m_points;
 };
-
-inline LocalValue::Compute::Compute(Point p, const LocalValue& local_value)
-{
-    m_value = local_value.m_point_value[p];
-}
-
-inline void LocalValue::Compute::add_move_point(Point p,
-                                                const LocalValue& local_value)
-{
-    m_value += local_value.m_point_value[p];
-}
-
-inline unsigned LocalValue::Compute::get() const
-{
-    // The bit ranges used in the value work only as long as there are not more
-    // than 0x10 points covered by a piece.
-    static_assert(PieceInfo::max_size < 0x10, "");
-    if (m_value == 0)
-        return 0;
-    if (m_value < 0x010u)
-        // Only 2nd-order adjacent to opponent attach point. Don't care how
-        // many
-        return 0x001u;
-    // Ignore 2nd-order adj. to opp. attach point if we have opp. attach
-    // points or adj. to opp. attach point. Only care if we have any adj. to
-    // opp. attach points, not how many.
-    if ((m_value & 0x0f0u) != 0)
-        return (m_value & 0xf00u) + 0x010u;
-    else
-        return m_value & 0xf00u;
-}
-
-inline unsigned LocalValue::Compute::get_upper_bound() const
-{
-    return m_value;
-}
 
 inline LocalValue::LocalValue()
 {
