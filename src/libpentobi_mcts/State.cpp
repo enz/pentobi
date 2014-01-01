@@ -491,16 +491,6 @@ bool State::gen_and_play_playout_move(Move lgr1, Move lgr2)
     return false;
 }
 
-void State::gen_children(Tree::NodeExpander& expander, Float init_val)
-{
-    if (m_nu_passes == m_nu_colors)
-        return;
-    Color to_play = m_bd.get_to_play();
-    init_moves_without_gamma(to_play);
-    m_prior_knowledge.gen_children(m_bd, *m_moves[to_play],
-                                   m_is_symmetry_broken, expander, init_val);
-}
-
 inline const PieceMap<bool>& State::get_pieces_considered() const
 {
     // Use number of on-board pieces for move number to handle the case where

@@ -311,6 +311,16 @@ inline void State::finish_in_tree()
         m_is_symmetry_broken = true;
 }
 
+inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
+{
+    if (m_nu_passes == m_nu_colors)
+        return;
+    Color to_play = m_bd.get_to_play();
+    init_moves_without_gamma(to_play);
+    m_prior_knowledge.gen_children(m_bd, *m_moves[to_play],
+                                   m_is_symmetry_broken, expander, init_val);
+}
+
 inline PlayerMove<Move> State::get_move(unsigned n) const
 {
     auto mv = m_bd.get_move(m_nu_moves_initial + n);
