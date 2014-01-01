@@ -7,19 +7,11 @@
 #ifndef LIBPENTOBI_MCTS_STATE_H
 #define LIBPENTOBI_MCTS_STATE_H
 
-#include "Float.h"
 #include "LocalValue.h"
+#include "PriorKnowledge.h"
 #include "libboardgame_mcts/PlayerMove.h"
-#include "libboardgame_mcts/Tree.h"
 #include "libboardgame_util/RandomGenerator.h"
-#include "libboardgame_util/Statistics.h"
-#include "libboardgame_util/Unused.h"
 #include "libpentobi_base/Board.h"
-#include "libpentobi_base/ColorMap.h"
-#include "libpentobi_base/MoveList.h"
-#include "libpentobi_base/MoveMarker.h"
-#include "libpentobi_base/PieceMap.h"
-#include "libpentobi_base/PointList.h"
 #include "libpentobi_base/SymmetricPoints.h"
 
 namespace libpentobi_mcts {
@@ -29,27 +21,19 @@ using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
-using libboardgame_util::Statistics;
-using libboardgame_util::StatisticsBase;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
-using libpentobi_base::ColorMove;
-using libpentobi_base::Variant;
-using libpentobi_base::Grid;
-using libpentobi_base::Marker;
-using libpentobi_base::Move;
-using libpentobi_base::MoveInfo;
-using libpentobi_base::MoveInfoExt;
-using libpentobi_base::MoveList;
-using libpentobi_base::MoveMarker;
-using libpentobi_base::MovePoints;
-using libpentobi_base::Piece;
-using libpentobi_base::PieceMap;
-using libpentobi_base::Point;
-using libpentobi_base::PointList;
-using libpentobi_base::SymmetricPoints;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
+using libpentobi_base::Marker;
+using libpentobi_base::MoveInfo;
+using libpentobi_base::MoveInfoExt;
+using libpentobi_base::MoveMarker;
+using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
+using libpentobi_base::PieceMap;
+using libpentobi_base::SymmetricPoints;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -81,7 +65,7 @@ struct SharedConst
     /** Maximum value to modify the win/loss result by the score. */
     Float score_modification;
 
-    /** Lookup table for symmetric points (only used in Duo). */
+    /** Lookup table for symmetric points (only used in Duo and Trigon). */
     SymmetricPoints symmetric_points;
 
     /** Precomputed information if move is forbidden at the start position (and
@@ -181,30 +165,11 @@ public:
     void write_info(ostream& out) const;
 
 private:
-    struct MoveFeatures
-    {
-        /** Heuristic value of the move expressed in score points. */
-        Float heuristic;
-
-        /** Only used on Classic and Trigon boards. */
-        unsigned dist_to_center;
-
-        /** Does the move touch a piece of the same player? */
-        bool connect;
-    };
-
     static const bool log_simulations = false;
-
-    bool m_has_connect_move;
 
     unsigned m_nu_moves_initial;
 
     Color::IntType m_nu_passes;
-
-    /** Maximum of Features::heuristic for all moves. */
-    Float m_max_heuristic;
-
-    unsigned m_min_dist_to_center;
 
     const SharedConst& m_shared_const;
 
@@ -228,7 +193,7 @@ private:
 
     ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
-    array<MoveFeatures, Move::range> m_features;
+    PriorKnowledge m_prior_knowledge;
 
     /** The cumulative gamma value of the moves in m_moves. */
     array<double, Move::range> m_cumulative_gamma;
@@ -290,9 +255,6 @@ private:
         played pieces. */
     ColorMap<Marker> m_moves_added_at;
 
-    /** Distance to center heuristic. */
-    Grid<unsigned> m_dist_to_center;
-
     void add_move(MoveList& moves, Move mv, double gamma);
 
     void add_moves(Point p, Color c,
@@ -303,8 +265,6 @@ private:
     void add_starting_moves(Color c,
                             const Board::PiecesLeftList& pieces_considered,
                             bool with_gamma);
-
-    void compute_features(bool check_dist_to_center, bool check_connect);
 
     Point find_best_starting_point(Color c) const;
 

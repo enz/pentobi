@@ -14,7 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-typedef ArrayList<Move,Move::range> MoveList;
+typedef libboardgame_util::ArrayList<Move, Move::range> MoveList;
 
 //-----------------------------------------------------------------------------
 
