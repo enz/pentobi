@@ -192,19 +192,23 @@ void PieceSelector::paintEvent(QPaintEvent*)
     BoardType boardType = m_bd.get_board_type();
     bool isTrigon =
         (boardType == BoardType::trigon || boardType == BoardType::trigon_3);
+    qreal ratio;
     if (isTrigon)
     {
-        qreal ratio = 1.732;
+        ratio = 1.732;
         m_fieldWidth = min(qreal(width()) / (m_nuColumns + 1),
                            qreal(height()) / (ratio * m_nuRows));
-        m_fieldHeight = ratio * m_fieldWidth;
     }
     else
     {
+        ratio = 1;
         m_fieldWidth = min(qreal(width()) / m_nuColumns,
                            qreal(height()) / m_nuRows);
-        m_fieldHeight = m_fieldWidth;
     }
+    if (m_fieldWidth > 8)
+        // Prefer pixel alignment if piece is not too small
+        m_fieldWidth = floor(m_fieldWidth);
+    m_fieldHeight = ratio * m_fieldWidth;
     m_selectorWidth = m_fieldWidth * m_nuColumns;
     m_selectorHeight = m_fieldHeight * m_nuRows;
     painter.save();

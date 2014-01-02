@@ -76,27 +76,30 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     bool isTrigon =
         (board_type == BoardType::trigon
          || board_type == BoardType::trigon_3);
+    qreal ratio;
+    int columns;
+    int rows;
     if (isTrigon)
     {
-        int columns = 7;
-        int rows = 4;
-        qreal ratio = 1.732;
+        ratio = 1.732;
+        columns = 7;
+        rows = 4;
         fieldWidth = min(qreal(width()) / columns,
-                               qreal(height()) / (ratio * rows));
-        fieldHeight = ratio * fieldWidth;
-        displayWidth = fieldWidth * columns;
-        displayHeight = fieldHeight * rows;
+                         qreal(height()) / (ratio * rows));
     }
     else
     {
-        int columns = 5;
-        int rows = 5;
-        fieldWidth = min(qreal(width()) / columns,
-                               qreal(height()) / rows);
-        fieldHeight = fieldWidth;
-        displayWidth = fieldWidth * columns;
-        displayHeight = fieldHeight * rows;
+        ratio = 1;
+        columns = 5;
+        rows = 5;
+        fieldWidth = min(qreal(width()) / columns, qreal(height()) / rows);
     }
+    if (fieldWidth > 8)
+        // Prefer pixel alignment if piece is not too small
+        fieldWidth = floor(fieldWidth);
+    fieldHeight = ratio * fieldWidth;
+    displayWidth = fieldWidth * columns;
+    displayHeight = fieldHeight * rows;
     if (m_piece.is_null())
     {
         if (m_isColorSelected)

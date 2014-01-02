@@ -174,9 +174,10 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     m_isTrigon = (variant == Variant::trigon
                   || variant == Variant::trigon_2
                   || variant == Variant::trigon_3);
+    qreal ratio;
     if (m_isTrigon)
     {
-        qreal ratio = 1.732;
+        ratio = 1.732;
         if (m_coordinates)
             m_fieldWidth =
                 min(qreal(width) / (m_width + 3),
@@ -184,13 +185,10 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         else
             m_fieldWidth =
                 min(qreal(width) / (m_width + 1), height / (ratio * m_height));
-        m_fieldHeight = ratio * m_fieldWidth;
-        m_boardOffset =
-            QPointF(0.5 * (width - m_fieldWidth * m_width),
-                    0.5 * (height - m_fieldHeight * m_height));
     }
     else
     {
+        ratio = 1;
         if (m_coordinates)
             m_fieldWidth =
                 min(qreal(width) / (m_width + 2),
@@ -198,11 +196,13 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         else
             m_fieldWidth =
                 min(qreal(width) / m_width, qreal(height) / m_height);
-        m_fieldHeight = m_fieldWidth;
-        m_boardOffset =
-            QPointF(0.5 * (width - m_fieldWidth * m_width),
-                    0.5 * (height - m_fieldHeight * m_height));
     }
+    if (m_fieldWidth > 8)
+        // Prefer pixel alignment if board is not too small
+        m_fieldWidth = floor(m_fieldWidth);
+    m_fieldHeight = ratio * m_fieldWidth;
+    m_boardOffset = QPointF(0.5 * (width - m_fieldWidth * m_width),
+                            0.5 * (height - m_fieldHeight * m_height));
     if (m_isTrigon)
     {
         m_font.setPointSizeF(0.6 * m_fieldWidth);

@@ -318,8 +318,8 @@ void GuiBoard::paintEvent(QPaintEvent*)
         m_boardPainter.setCoordinateColor(coordLabelColor);
         m_emptyBoardPixmap->fill(Qt::transparent);
         QPainter painter(m_emptyBoardPixmap);
-        m_boardPainter.paintEmptyBoard(painter, width(), height(),
-                                       m_variant, m_bd.get_geometry());
+        m_boardPainter.paintEmptyBoard(painter, width(), height(), m_variant,
+                                       m_bd.get_geometry());
         m_emptyBoardDirty = false;
     }
     if (m_dirty)
