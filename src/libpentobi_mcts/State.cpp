@@ -175,19 +175,9 @@ bool State::check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
     gamma = m_gamma_piece_size[piece_size];
     if (local.has_local())
     {
-        if (local.has_no_attach_or_adj())
-            // Only 2nd-order adjacent to opponent attach point. Don't care how
-            // many
-            gamma *= 1e4;
-        else
-        {
-            // Ignore 2nd-order adj. to opp. attach point if we have opp. attach
-            // points or adj. to opp. attach point. Only care if we have any
-            // adj. to opp. attach points, not how many.
-            gamma *= m_gamma_nu_attach[local.get_nu_attach()];
-            if (local.has_adj_attach())
-                gamma *= 1e5;
-        }
+        gamma *= m_gamma_nu_attach[local.get_nu_attach()];
+        if (local.has_adj_attach())
+            gamma *= 1e5;
     }
     return true;
 }
@@ -642,10 +632,10 @@ void State::start_search()
 
     // Init precomputed gamma values
     double gamma = 1;
-    for (unsigned i = 1; i < PieceInfo::max_size + 1; ++i, gamma *= 3)
+    for (unsigned i = 1; i < PieceInfo::max_size + 1; ++i, gamma *= 5)
         m_gamma_piece_size[i] = gamma;
-    gamma = 1;
-    for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i, gamma *= 1e6)
+    gamma = 1e5;
+    for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i, gamma *= 1e10)
         m_gamma_nu_attach[i] = gamma;
 }
 

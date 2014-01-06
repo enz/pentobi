@@ -80,13 +80,6 @@ public:
             return ((m_value & 0x00fu) != 0);
         }
 
-        /** Does the move not occupy any local opponent attach points
-            or points that are (first-order) adjacant to them? */
-        bool has_no_attach_or_adj() const
-        {
-            return (m_value < 0x010u);
-        }
-
     private:
         unsigned m_value;
     };
