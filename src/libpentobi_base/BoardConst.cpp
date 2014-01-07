@@ -672,38 +672,30 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
         log() << '\n';
     }
     for (Point p : info)
-        for (unsigned i = 0; i < nu_adj_status; ++i)
-        {
+        for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
             if (is_compatible_with_adj_status(p, i, info))
-            {
                 (*m_full_move_table)[i][piece][p].push_back(move);
-                ++m_move_lists_sum_length;
-            }
-        }
 }
 
 void BoardConst::create_moves()
 {
     m_full_move_table.reset(new FullMoveTable);
-    m_move_lists_sum_length = 0;
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
     if (log_move_creation)
         log() << "Created moves: " << m_move_info.size() << ", "
-              << "precomputed: " << m_move_lists_sum_length << '\n';
-    LIBBOARDGAME_ASSERT(m_move_lists_sum_length <= max_move_lists_sum_length);
-    m_move_lists.reset(new Move[m_move_lists_sum_length]);
-    unsigned current = 0;
+              << "precomputed: " << m_precomp_moves.get_size() << '\n';
     for (GeometryIterator i(m_geo); i; ++i)
-        for (unsigned j = 0; j < nu_adj_status; ++j)
+        for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
             for (Piece::IntType k = 0; k < m_nu_pieces; ++k)
             {
                 Piece piece(k);
-                unsigned begin = current;
                 auto& list = (*m_full_move_table)[j][piece][*i];
+                auto begin = m_precomp_moves.get_size();
                 for (unsigned l = 0; l < list.size(); ++l)
-                    m_move_lists[current++] = list[l];
-                m_moves_range[*i][j][piece] = ListIndex(begin, current - begin);
+                    m_precomp_moves.push_move(list[l]);
+                auto end = m_precomp_moves.get_size() - begin;
+                m_precomp_moves.set_list_range(*i, j, piece, begin, end);
             }
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
@@ -865,16 +857,18 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
 
 void BoardConst::init_adj_status()
 {
-    array<bool, adj_status_nu_adj> forbidden;
+    array<bool, PrecompMoves::adj_status_nu_adj> forbidden;
     for (GeometryIterator i(m_geo); i; ++i)
         init_adj_status(*i, forbidden, 0);
 }
 
-void BoardConst::init_adj_status(Point p,
-                                 array<bool, adj_status_nu_adj>& forbidden,
-                                 unsigned i)
+void BoardConst::init_adj_status(
+                       Point p,
+                       array<bool, PrecompMoves::adj_status_nu_adj>& forbidden,
+                       unsigned i)
 {
-    if (i == adj_status_nu_adj || i == m_geo.get_adj_diag(p).size())
+    if (i == PrecompMoves::adj_status_nu_adj
+        || i == m_geo.get_adj_diag(p).size())
     {
         unsigned index = 0;
         for (unsigned j = 0; j < i; ++j)

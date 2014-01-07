@@ -8,6 +8,7 @@
 #define LIBPENTOBI_BASE_MOVE_INFO_H
 
 #include <algorithm>
+#include "Move.h"
 #include "MovePoints.h"
 #include "Piece.h"
 #include "PieceInfo.h"

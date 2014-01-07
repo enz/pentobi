@@ -11,14 +11,11 @@
 #include <algorithm>
 #include "Variant.h"
 #include "Geometry.h"
-#include "Grid.h"
 #include "Marker.h"
-#include "Move.h"
 #include "MoveInfo.h"
-#include "Point.h"
 #include "PieceInfo.h"
-#include "PieceMap.h"
 #include "PieceTransforms.h"
+#include "PrecompMoves.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libboardgame_util/ArrayList.h"
@@ -52,75 +49,6 @@ public:
     static const unsigned max_pieces = 22;
 
     static const unsigned max_moves_at_point = 40;
-
-    /** The maximum sum of the sizes of all precomputed move lists in any
-        game variant. */
-    static const unsigned max_move_lists_sum_length = 1425934;
-
-    /** Begin/end range for lists with local moves.
-        See get_moves(). */
-    class LocalMovesListRange
-    {
-    public:
-        LocalMovesListRange(const Move* begin, const Move* end)
-        {
-            m_begin = begin;
-            m_end = end;
-        }
-
-        const Move* begin() const
-        {
-            return m_begin;
-        }
-
-        const Move* end() const
-        {
-            return m_end;
-        }
-
-    private:
-        const Move* m_begin;
-
-        const Move* m_end;
-    };
-
-    /** Compressed begin/end range for lists with local moves.
-        This struct is used in the private implementation and will be unpacked
-        into a LocalMovesListRange as a return value for get_moves().
-        The struct is public to make it reusable for implementing similar
-        precomputed move lists outside this class. */
-    struct ListIndex
-    {
-        unsigned begin : 24;
-
-        unsigned size : 8;
-
-        ListIndex()
-        {
-        }
-
-        ListIndex(unsigned begin, unsigned size)
-        {
-            LIBBOARDGAME_ASSERT(begin < max_move_lists_sum_length);
-            LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
-            LIBBOARDGAME_ASSERT(begin < (1 << 24));
-            this->begin = begin & ((1 << 24) - 1);
-            LIBBOARDGAME_ASSERT(size < (1 << 8));
-            this->size = size & ((1 << 8) - 1);
-        }
-    };
-
-    /** The number of neighbors used for computing the adjacent status.
-        The adjacent status is a single number that encodes the forbidden
-        status of the first adj_status_nu_adj neighbors (from the list
-        Geometry::get_adj_diag()). It is used for speeding up the matching of
-        moves at a given point. Increasing this number will make the
-        precomputed lists shorter but exponentially increase the number of
-        lists and the total memory used for all lists. Therefore, the optimal
-        value for speeding up the matching depends on the CPU cache size. */
-    static const unsigned adj_status_nu_adj = 5;
-
-    static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called. */
@@ -166,8 +94,11 @@ public:
 
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
-    LocalMovesListRange get_moves(Piece piece, Point p,
-                                  unsigned adj_status = 0) const;
+    PrecompMoves::LocalMovesListRange get_moves(Piece piece, Point p,
+                                                unsigned adj_status = 0) const
+    {
+        return m_precomp_moves.get_moves(piece, p, adj_status);
+    }
 
     BoardType get_board_type() const;
 
@@ -184,10 +115,11 @@ public:
     Move from_string(const string& s) const;
 
 private:
-    typedef ArrayList<Move,max_moves_at_point> LocalMovesList;
+    typedef ArrayList<Move, max_moves_at_point> LocalMovesList;
 
     /** See m_full_move_table */
-    typedef array<PieceMap<Grid<LocalMovesList>>,nu_adj_status> FullMoveTable;
+    typedef array<PieceMap<Grid<LocalMovesList>>, PrecompMoves::nu_adj_status>
+        FullMoveTable;
 
     Piece::IntType m_nu_pieces;
 
@@ -214,25 +146,16 @@ private:
         Only used during construction of m_moves_range and m_move_lists. */
     unique_ptr<FullMoveTable> m_full_move_table;
 
-    /** See m_move_lists. */
-    Grid<array<PieceMap<ListIndex>,nu_adj_status>> m_moves_range;
-
-    /** Compact representation of lists of moves of a piece at a point
-        constrained by the forbidden status of adjacent points.
-        All lists are stored in a single array; m_moves_range contains
-        information about the actual begin/end indices. */
-    unique_ptr<Move[]> m_move_lists;
-
-    /** Sum of sizes of all lists in m_full_move_table.
-        Only used during construction of m_moves_range and m_move_lists. */
-    size_t m_move_lists_sum_length;
+    PrecompMoves m_precomp_moves;
 
     /** Local variable reused for efficiency. */
     Marker m_marker;
 
     /** Forbidden neighbors for a given adjacent status index at a given point.
         Only used during construction. */
-    Grid<array<ArrayList<Point,adj_status_nu_adj>,nu_adj_status>> m_adj_status;
+    Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
+               PrecompMoves::nu_adj_status>>
+        m_adj_status;
 
     BoardConst(BoardType board_type, Variant variant);
 
@@ -245,8 +168,10 @@ private:
 
     void init_adj_status();
 
-    void init_adj_status(Point p, array<bool, adj_status_nu_adj>& forbidden,
-                         unsigned i);
+    void init_adj_status(
+                       Point p,
+                       array<bool, PrecompMoves::adj_status_nu_adj>& forbidden,
+                       unsigned i);
 
     void init_symmetry_info();
 
@@ -255,7 +180,8 @@ private:
 
     void reserve_info(size_t nu_moves);
 
-    void set_adj_and_attach_points(const MoveInfo& info, MoveInfoExt& info_ext);
+    void set_adj_and_attach_points(const MoveInfo& info,
+                                   MoveInfoExt& info_ext);
 };
 
 inline BoardType BoardConst::get_board_type() const
@@ -304,15 +230,6 @@ inline const MoveInfoExt* BoardConst::get_move_info_ext_array() const
 inline const MoveInfoExt2* BoardConst::get_move_info_ext_2_array() const
 {
     return &m_move_info_ext_2.front();
-}
-
-inline BoardConst::LocalMovesListRange BoardConst::get_moves(
-                               Piece piece, Point p, unsigned adj_status) const
-{
-    ListIndex idx = m_moves_range[p][adj_status][piece];
-    auto begin = m_move_lists.get() + idx.begin;
-    auto end = begin + idx.size;
-    return LocalMovesListRange(begin, end);
 }
 
 inline unsigned BoardConst::get_nu_all_moves() const

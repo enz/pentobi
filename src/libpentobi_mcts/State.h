@@ -32,6 +32,7 @@ using libpentobi_base::MoveMarker;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PieceMap;
+using libpentobi_base::PrecompMoves;
 using libpentobi_base::SymmetricPoints;
 using libpentobi_base::Variant;
 
@@ -40,16 +41,9 @@ using libpentobi_base::Variant;
 /** Constant data shared between the search states. */
 struct SharedConst
 {
-    /** Like BoardConst::m_moves_range but for SharedConst::move_lists.
-        Only elements for pieces still available and non-forbidden points
-        are initialized. */
-    ColorMap<Grid<array<PieceMap<BoardConst::ListIndex>,
-                        BoardConst::nu_adj_status>>>
-        moves_range;
-
-    /** Like BoardConst::m_move_lists but moves that are forbidden at the
-        root position filtered out. */
-    ColorMap<array<Move,BoardConst::max_move_lists_sum_length>> move_lists;
+    /** Precomputed moves additionally constrained by moves that are
+        non-forbidden at root position. */
+    ColorMap<PrecompMoves> precomp_moves;
 
     /** The game board.
         Contains the current position. */
@@ -80,10 +74,10 @@ struct SharedConst
         Only initialized for move numbers less than min_move_all_considered.
         Contains pointers to unique values auch that the comparison of the
         lists can be done by comparing the pointers to the lists. */
-    array<const PieceMap<bool>*,Board::max_game_moves> is_piece_considered;
+    array<const PieceMap<bool>*, Board::max_game_moves> is_piece_considered;
 
     /** List of unique values for is_piece_considered. */
-    ArrayList<PieceMap<bool>,Board::max_game_moves> is_piece_considered_list;
+    ArrayList<PieceMap<bool>, Board::max_game_moves> is_piece_considered_list;
 
     /** Precomputed lists of considered pieces if all pieces are enforced to be
         considered (because using the restricted set of pieces would generate
@@ -276,8 +270,8 @@ private:
     /** Equivalent to but faster than m_bd.get_move_info_ext() */
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
-    BoardConst::LocalMovesListRange get_moves(Color c, Piece piece, Point p,
-                                              unsigned adj_status) const;
+    PrecompMoves::LocalMovesListRange get_moves(Color c, Piece piece, Point p,
+                                                unsigned adj_status) const;
 
     const PieceMap<bool>& get_pieces_considered() const;
 
@@ -341,14 +335,10 @@ inline const MoveInfoExt& State::get_move_info_ext(Move mv) const
     return *(m_move_info_ext_array + mv.to_int());
 }
 
-inline BoardConst::LocalMovesListRange State::get_moves(Color c, Piece piece,
-                                           Point p, unsigned adj_status) const
+inline PrecompMoves::LocalMovesListRange State::get_moves(
+                      Color c, Piece piece, Point p, unsigned adj_status) const
 {
-    BoardConst::ListIndex idx =
-        m_shared_const.moves_range[c][p][adj_status][piece];
-    auto begin = &m_shared_const.move_lists[c][idx.begin];
-    auto end = begin + idx.size;
-    return BoardConst::LocalMovesListRange(begin, end);
+    return m_shared_const.precomp_moves[c].get_moves(piece, p, adj_status);
 }
 
 inline unsigned State::get_nu_moves() const

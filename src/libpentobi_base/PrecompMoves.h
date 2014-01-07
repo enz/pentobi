@@ -1,0 +1,129 @@
+//-----------------------------------------------------------------------------
+/** @file libpentobi_base/PrecompMoves.h
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
+#ifndef LIBPENTOBI_BASE_PRECOMP_MOVES_H
+#define LIBPENTOBI_BASE_PRECOMP_MOVES_H
+
+#include "Grid.h"
+#include "Move.h"
+#include "PieceMap.h"
+#include "Point.h"
+
+namespace libpentobi_base {
+
+//-----------------------------------------------------------------------------
+
+/** Precomputed moves for fast move generation.
+    Compact storage of precomputed lists with local moves. Each list contains
+    all moves that include a given point constrained by the piece type and the
+    forbidden status of adjacant points. This drastically reduces the number of
+    moves that need to be checked for legality during move generation.
+    @see Board::get_adj_status() */
+class PrecompMoves
+{
+public:
+    /** The maximum sum of the sizes of all precomputed move lists in any
+        game variant. */
+    static const unsigned max_move_lists_sum_length = 1425934;
+
+    /** The number of neighbors used for computing the adjacent status.
+        The adjacent status is a single number that encodes the forbidden
+        status of the first adj_status_nu_adj neighbors (from the list
+        Geometry::get_adj_diag()). It is used for speeding up the matching of
+        moves at a given point. Increasing this number will make the
+        precomputed lists shorter but exponentially increase the number of
+        lists and the total memory used for all lists. Therefore, the optimal
+        value for speeding up the matching depends on the CPU cache size. */
+    static const unsigned adj_status_nu_adj = 5;
+
+    static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
+
+    /** Begin/end range for lists with moves at a given point.
+        See get_moves(). */
+    class LocalMovesListRange
+    {
+    public:
+        LocalMovesListRange(const Move* begin, const Move* end)
+        {
+            m_begin = begin;
+            m_end = end;
+        }
+
+        const Move* begin() const { return m_begin; }
+
+        const Move* end() const { return m_end; }
+
+    private:
+        const Move* m_begin;
+
+        const Move* m_end;
+    };
+
+    /** Clear storage of moves for all move lists during construction. */
+    void clear() { m_move_lists.clear(); }
+
+    /** Get number of moves in all lists. */
+    unsigned get_size() const { return m_move_lists.size(); }
+
+    /** Add move to list during construction. */
+    void push_move(Move mv) { m_move_lists.push_back(mv); }
+
+    /** Store beginning and end of a local move list duing construction. */
+    void set_list_range(Point p, unsigned adj_status, Piece piece,
+                        unsigned begin, unsigned end)
+    {
+        m_moves_range[p][adj_status][piece] = ListIndex(begin, end);
+    }
+
+    /** Get all moves of a piece at a point constrained by the forbidden
+        status of adjacent points. */
+    LocalMovesListRange get_moves(Piece piece, Point p,
+                                  unsigned adj_status = 0) const
+    {
+        ListIndex idx = m_moves_range[p][adj_status][piece];
+        auto begin = m_move_lists.begin() + idx.begin;
+        auto end = begin + idx.size;
+        return LocalMovesListRange(begin, end);
+    }
+
+private:
+    /** Compressed begin/end range for lists with moves at a given point.
+        This struct will be unpacked into a LocalMovesListRange as a return
+        value for get_moves(). */
+    struct ListIndex
+    {
+        unsigned begin : 24;
+
+        unsigned size : 8;
+
+        ListIndex() { }
+
+        ListIndex(unsigned begin, unsigned size)
+        {
+            LIBBOARDGAME_ASSERT(begin < max_move_lists_sum_length);
+            LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
+            LIBBOARDGAME_ASSERT(begin < (1 << 24));
+            this->begin = begin & ((1 << 24) - 1);
+            LIBBOARDGAME_ASSERT(size < (1 << 8));
+            this->size = size & ((1 << 8) - 1);
+        }
+    };
+
+    /** See m_move_lists. */
+    Grid<array<PieceMap<ListIndex>, nu_adj_status>> m_moves_range;
+
+    /** Compact representation of lists of moves of a piece at a point
+        constrained by the forbidden status of adjacent points.
+        All lists are stored in a single array; m_moves_range contains
+        information about the actual begin/end indices. */
+    ArrayList<Move, max_move_lists_sum_length> m_move_lists;
+};
+
+//-----------------------------------------------------------------------------
+
+} // namespace libpentobi_base
+
+#endif // LIBPENTOBI_BASE_PRECOMP_MOVES_H

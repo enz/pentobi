@@ -34,7 +34,7 @@ class Board
 public:
     typedef Grid<PointState> PointStateGrid;
 
-    typedef BoardConst::LocalMovesListRange LocalMovesListRange;
+    typedef PrecompMoves::LocalMovesListRange LocalMovesListRange;
 
     /** Iterator over all points on the board. */
     class Iterator
@@ -479,11 +479,11 @@ inline unsigned Board::get_adj_status(Point p, Color c) const
     unsigned val = 1;
     NullTermList<Point, 12>::Iterator i(m_geo->get_adj_diag(p));
     LIBBOARDGAME_ASSERT(i);
-    static_assert(BoardConst::adj_status_nu_adj > 0, "");
+    static_assert(PrecompMoves::adj_status_nu_adj > 0, "");
     do
         if (is_forbidden(*i, c))
             result |= val;
-    while ((val <<= 1) < (1 << BoardConst::adj_status_nu_adj) && ++i);
+    while ((val <<= 1) < (1 << PrecompMoves::adj_status_nu_adj) && ++i);
     return result;
 }
 

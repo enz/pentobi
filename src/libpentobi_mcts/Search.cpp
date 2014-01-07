@@ -181,9 +181,10 @@ void Search::on_start_search()
     }
 
     // Initialize m_shared_const.moves_lists/moves_range
-    ColorMap<unsigned> current(0);
+    for (ColorIterator i(nu_colors); i; ++i)
+        m_shared_const.precomp_moves[*i].clear();
     for (BoardIterator i(bd); i; ++i)
-        for (unsigned j = 0; j < BoardConst::nu_adj_status; ++j)
+        for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
             for (Piece::IntType k = 0; k < bc.get_nu_pieces(); ++k)
             {
                 Piece piece(k);
@@ -193,13 +194,13 @@ void Search::on_start_search()
                     if (! bd.is_piece_left(*l, piece)
                         || bd.is_forbidden(*i, *l))
                         continue;
-                    auto& move_lists = m_shared_const.move_lists[*l];
-                    unsigned begin = current[*l];
+                    auto& precomp_moves = m_shared_const.precomp_moves[*l];
+                    unsigned begin = precomp_moves.get_size();
                     for (Move mv : moves)
                         if (! m_shared_const.is_forbidden_at_root[*l][mv])
-                            move_lists[current[*l]++] = mv;
-                    m_shared_const.moves_range[*l][*i][j][piece] =
-                        BoardConst::ListIndex(begin, current[*l] - begin);
+                            precomp_moves.push_move(mv);
+                    auto end = precomp_moves.get_size() - begin;
+                    precomp_moves.set_list_range(*i, j, piece, begin, end);
                 }
             }
 
