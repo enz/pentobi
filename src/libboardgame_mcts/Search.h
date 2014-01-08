@@ -381,7 +381,7 @@ protected:
         array<Float, max_players> eval;
     };
 
-    virtual void on_start_search();
+    virtual void on_start_search(bool is_followup);
 
     virtual void on_search_iteration(size_t n, const State& state,
                                      const Simulation& simulation);
@@ -1101,9 +1101,10 @@ void Search<S, M, R>::on_search_iteration(size_t n, const State& state,
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::on_start_search()
+void Search<S, M, R>::on_start_search(bool is_followup)
 {
     // Default implementation does nothing
+    LIBBOARDGAME_UNUSED(is_followup);
 }
 
 template<class S, class M, class R>
@@ -1347,7 +1348,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
 
     m_timer.reset(time_source);
     m_time_source = &time_source;
-    on_start_search();
+    on_start_search(is_followup);
     m_player = get_player();
     for (PlayerInt i = 0; i < m_nu_players; ++i)
         m_root_val[i].clear();

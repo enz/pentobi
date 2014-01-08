@@ -115,7 +115,8 @@ void Board::gen_moves(Color c, Point p, MoveMarker& marker,
         }
 }
 
-void Board::gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
+void Board::gen_moves(Color c, Point p, unsigned adj_status,
+                      MoveMarker& marker,
                       ArrayList<Move,Move::range>& moves) const
 {
     for (Piece piece : m_state_color[c].pieces_left)

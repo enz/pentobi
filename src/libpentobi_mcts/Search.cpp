@@ -153,7 +153,7 @@ Float Search::get_tie_value() const
     return 0.5;
 }
 
-void Search::on_start_search()
+void Search::on_start_search(bool is_followup)
 {
     auto& bd = get_board();
     auto& bc = bd.get_board_const();
@@ -168,7 +168,6 @@ void Search::on_start_search()
             {
                 auto adj_status = bd.get_adj_status(*j, *i);
                 for (Piece piece : bd.get_pieces_left(*i))
-                {
                     for (Move mv : bd.get_moves(piece, *j, adj_status))
                     {
                         if (! is_forbidden_at_root[mv])
@@ -176,33 +175,33 @@ void Search::on_start_search()
                         if (! bd.is_forbidden(*i, mv))
                             is_forbidden_at_root.clear(mv);
                     }
-                }
             }
     }
 
-    // Initialize m_shared_const.moves_lists/moves_range
+    // Initialize m_shared_const.precomp_moves
     for (ColorIterator i(nu_colors); i; ++i)
-        m_shared_const.precomp_moves[*i].clear();
-    for (BoardIterator i(bd); i; ++i)
-        for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
-            for (Piece::IntType k = 0; k < bc.get_nu_pieces(); ++k)
-            {
-                Piece piece(k);
-                auto moves = bc.get_moves(piece, *i, j);
-                for (ColorIterator l(nu_colors); l; ++l)
+    {
+        auto& precomp_moves = m_shared_const.precomp_moves[*i];
+        precomp_moves.clear();
+        const auto& old_precomp_moves =
+            (is_followup ? precomp_moves : bc.get_precomp_moves());
+        for (BoardIterator j(bd); j; ++j)
+        {
+            if (bd.is_forbidden(*j, *i))
+                continue;
+            for (unsigned k = 0; k < PrecompMoves::nu_adj_status; ++k)
+                for (Piece piece : bd.get_pieces_left(*i))
                 {
-                    if (! bd.is_piece_left(*l, piece)
-                        || bd.is_forbidden(*i, *l))
-                        continue;
-                    auto& precomp_moves = m_shared_const.precomp_moves[*l];
                     unsigned begin = precomp_moves.get_size();
+                    auto moves = old_precomp_moves.get_moves(piece, *j, k);
                     for (Move mv : moves)
-                        if (! m_shared_const.is_forbidden_at_root[*l][mv])
+                        if (! m_shared_const.is_forbidden_at_root[*i][mv])
                             precomp_moves.push_move(mv);
                     auto end = precomp_moves.get_size() - begin;
-                    precomp_moves.set_list_range(*i, j, piece, begin, end);
+                    precomp_moves.set_list_range(*j, k, piece, begin, end);
                 }
-            }
+        }
+    }
 
     auto& is_piece_considered_list = m_shared_const.is_piece_considered_list;
     is_piece_considered_list.clear();

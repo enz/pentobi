@@ -108,7 +108,7 @@ public:
     void get_root_position(Variant& variant, Setup& setup) const;
 
 protected:
-    void on_start_search() override;
+    void on_start_search(bool is_followup) override;
 
 private:
     typedef libboardgame_mcts::Search<State, Move, SearchParamConst>
