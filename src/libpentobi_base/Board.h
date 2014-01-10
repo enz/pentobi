@@ -248,6 +248,10 @@ public:
 
     bool is_legal(Move mv) const;
 
+    bool is_legal_nonpass(Color c, Move mv) const;
+
+    bool is_legal_nonpass(Move mv) const;
+
     /** Check that point is not already occupied or adjacent to own color.
         @param c
         @param p The point. Off-board points are allowed and return true. */
@@ -792,9 +796,17 @@ inline bool Board::is_legal(Move mv) const
 
 inline bool Board::is_legal(Color c, Move mv) const
 {
-    LIBBOARDGAME_ASSERT(! mv.is_null());
-    if (mv.is_pass())
-        return true;
+    return (mv.is_pass() || is_legal_nonpass(c, mv));
+}
+
+inline bool Board::is_legal_nonpass(Move mv) const
+{
+    return is_legal_nonpass(m_state_base.to_play, mv);
+}
+
+inline bool Board::is_legal_nonpass(Color c, Move mv) const
+{
+    LIBBOARDGAME_ASSERT(mv.is_regular());
     auto& info = get_move_info(mv);
     if (! is_piece_left(c, info.get_piece()))
         return false;

@@ -415,7 +415,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
     }
 
     ++m_nu_playout_moves;
-    if (lgr2.is_regular() && m_bd.is_legal(lgr2))
+    if (lgr2.is_regular() && m_bd.is_legal_nonpass(lgr2))
     {
         if (log_simulations)
             log("Playing last good reply 2");
@@ -423,7 +423,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
         mv = lgr2;
         return true;
     }
-    if (lgr1.is_regular() && m_bd.is_legal(lgr1))
+    if (lgr1.is_regular() && m_bd.is_legal_nonpass(lgr1))
     {
         if (log_simulations)
             log("Playing last good reply 1");
@@ -581,7 +581,7 @@ void State::play_expanded_child(Move mv)
 
 void State::play_playout(Move mv)
 {
-    LIBBOARDGAME_ASSERT(m_bd.is_legal(mv));
+    LIBBOARDGAME_ASSERT(m_bd.is_legal_nonpass(mv));
     m_new_moves[m_bd.get_to_play()].push_back(mv);
     m_bd.play_nonpass(mv);
     m_nu_passes = 0;
