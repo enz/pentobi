@@ -1500,7 +1500,7 @@ auto Search<S, M, R>::select_child(ThreadState& thread_state,
     {
         m_bias_term.start_iteration(node_count);
         auto bias_upper_limit = m_bias_term.get(0);
-        Float limit = best_value - bias_upper_limit;
+        Float limit = -numeric_limits<Float>::max();
         do
         {
             auto value = i->get_value();
