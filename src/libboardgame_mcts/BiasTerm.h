@@ -69,8 +69,6 @@ template<typename F>
 inline auto BiasTerm<F>::get(Float child_count) const -> Float
 {
     LIBBOARDGAME_ASSERT(child_count >= 0);
-    if (child_count <= 1)
-        return m_parent_part;
     Float child_part;
     if (child_count < nu_precomp)
         child_part = m_precomp_child_part[static_cast<unsigned>(child_count)];
@@ -82,14 +80,16 @@ inline auto BiasTerm<F>::get(Float child_count) const -> Float
 template<typename F>
 inline auto BiasTerm<F>::compute_child_part(Float child_count) const -> Float
 {
-    LIBBOARDGAME_ASSERT(child_count > 0);
-    return sqrt(1 / child_count);
+    if (child_count < 1)
+        return 1;
+    else
+        return sqrt(1 / child_count);
 }
 
 template<typename F>
 inline auto BiasTerm<F>::compute_parent_part(Float parent_count) const -> Float
 {
-    if (m_bias_term_constant == 0 || parent_count == 0)
+    if (m_bias_term_constant == 0 || parent_count < 1)
         return 0;
     return
         m_bias_term_constant * sqrt(m_fast_log.get_log(float(parent_count)));
@@ -107,7 +107,7 @@ void BiasTerm<F>::set_bias_term_constant(Float value)
     m_bias_term_constant = value;
     for (unsigned i = 0; i < nu_precomp; ++i)
         m_precomp_parent_part[i] = compute_parent_part(static_cast<Float>(i));
-    for (unsigned i = 1; i < nu_precomp; ++i)
+    for (unsigned i = 0; i < nu_precomp; ++i)
         m_precomp_child_part[i] = compute_child_part(static_cast<Float>(i));
 }
 
