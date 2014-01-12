@@ -166,6 +166,21 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
         }
 }
 
+Move Board::get_move_at(Point p) const
+{
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        for (Move mv : m_setup.placements[*i])
+            if (get_move_info(mv).contains(p))
+                return mv;
+    for (ColorMove color_mv : m_moves)
+    {
+        Move mv = color_mv.move;
+        if (get_move_info(mv).contains(p))
+            return mv;
+    }
+    return Move::null();
+}
+
 bool Board::has_moves(Color c) const
 {
     bool is_first = is_first_piece(c);
@@ -187,6 +202,14 @@ bool Board::has_moves(Color c, Point p) const
     return false;
 }
 
+bool Board::has_setup() const
+{
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        if (! m_setup.placements[*i].empty())
+            return true;
+    return false;
+}
+
 void Board::init(Variant variant, const Setup* setup)
 {
     if (variant != m_variant)
@@ -195,7 +218,6 @@ void Board::init(Variant variant, const Setup* setup)
     // If you make changes here, make sure that you also update copy_from()
 
     m_state_base.point_state.fill(PointState::empty(), *m_geo);
-    m_state_base.played_move.fill(Move::null(), *m_geo);
     if (variant == Variant::junior)
         m_nu_piece_instances = 2;
     else
@@ -384,7 +406,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 // to mark the last piece played (the mark is not placed within
                 // the piece or off-board).
                 if (! last_mv.is_null()
-                    && get_played_move(p) == last_mv.move
+                    && get_move_info(last_mv.move).contains(p)
                     && (x == 0 || ! is_onboard(p.get_left())
                         || get_point_state(p.get_left()) != last_mv.color))
                 {
@@ -394,7 +416,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 }
                 else if (! last_mv.is_null()
                          && x > 0 && is_onboard(p.get_left())
-                         && get_played_move(p.get_left()) == last_mv.move
+                         && get_move_info(last_mv.move).contains(p.get_left())
                          && get_point_state(p) != last_mv.color
                          && get_point_state(p.get_left()) == last_mv.color)
                 {

@@ -99,7 +99,7 @@ public:
 
     unsigned get_max_nonpass_player_moves() const;
 
-    /** Maximum number of real (=non-pass) moves in the current game variant. */
+    /** Maximum number of non-pass moves in the current game variant. */
     unsigned get_max_nonpass_game_moves() const;
 
     Color get_next(Color c) const;
@@ -148,8 +148,6 @@ public:
 
     /** Equivalent to get_points(c) + get_bonus(c) */
     unsigned get_points_with_bonus(Color c) const;
-
-    Move get_played_move(Point p) const;
 
     /** Is a point a potential attachment point for a color.
         Does not check if the point is forbidden. */
@@ -326,6 +324,8 @@ public:
 
     bool is_same_player(Color c1, Color c2) const;
 
+    Move get_move_at(Point p) const;
+
     /** Remember the board state to quickly restore it later.
         A snapshot can only be restored from a position that was reached
         after playing moves from the snapshot position. */
@@ -341,8 +341,6 @@ private:
     struct StateBase
     {
         PointStateGrid point_state;
-
-        Grid<Move> played_move;
 
         unsigned nu_onboard_pieces_all;
 
@@ -425,7 +423,7 @@ private:
 
     ColorMap<const char*> m_color_name;
 
-    ArrayList<ColorMove,max_game_moves> m_moves;
+    ArrayList<ColorMove, max_game_moves> m_moves;
 
     unique_ptr<Snapshot> m_snapshot;
 
@@ -629,11 +627,6 @@ inline const Board::PiecesLeftList& Board::get_pieces_left(Color c) const
     return m_state_color[c].pieces_left;
 }
 
-inline Move Board::get_played_move(Point p) const
-{
-    return m_state_base.played_move[p];
-}
-
 inline PointState Board::get_point_state(Point p) const
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
@@ -727,14 +720,6 @@ inline const PieceTransforms& Board::get_transforms() const
 inline Variant Board::get_variant() const
 {
     return m_variant;
-}
-
-inline bool Board::has_setup() const
-{
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        if (! m_setup.placements[*i].empty())
-            return true;
-    return false;
 }
 
 inline void Board::init(const Setup* setup)
@@ -878,7 +863,6 @@ inline void Board::place(Color c, Move mv)
     do
     {
         m_state_base.point_state[*i] = c;
-        m_state_base.played_move[*i] = mv;
         LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden[*i] = true);
     }
     while (++i != end);

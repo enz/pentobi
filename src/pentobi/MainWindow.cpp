@@ -2640,7 +2640,7 @@ void MainWindow::pointClicked(Point p)
     PointState s = bd.get_point_state(p);
     if (s.is_empty())
         return;
-    m_game->remove_setup(s.to_color(), bd.get_played_move(p));
+    m_game->remove_setup(s.to_color(), bd.get_move_at(p));
     setSetupPlayer();
     updateWindow(true);
 }
