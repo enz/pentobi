@@ -168,15 +168,20 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 
 Move Board::get_move_at(Point p) const
 {
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        for (Move mv : m_setup.placements[*i])
+    auto s = get_point_state(p);
+    if (s.is_color())
+    {
+        auto c = s.to_color();
+        for (Move mv : m_setup.placements[c])
             if (get_move_info(mv).contains(p))
                 return mv;
-    for (ColorMove color_mv : m_moves)
-    {
-        Move mv = color_mv.move;
-        if (get_move_info(mv).contains(p))
-            return mv;
+        for (ColorMove color_mv : m_moves)
+            if (color_mv.color == c)
+            {
+                Move mv = color_mv.move;
+                if (! mv.is_pass() && get_move_info(mv).contains(p))
+                    return mv;
+            }
     }
     return Move::null();
 }
