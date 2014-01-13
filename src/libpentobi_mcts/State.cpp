@@ -130,12 +130,6 @@ void State::add_starting_moves(Color c,
     auto& moves = m_moves[c];
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
-    // We use adj_status 0 and don't check if moves should be in the local
-    // list, which is appropriate given the starting point locations in the
-    // standard game variants and assuming normal game play with alternating
-    // moves and adj_status is only an optimization and local moves only a
-    // heuristic anyway. However, we check if all the moves are legal to avoid
-    // the generation of illegal moves in non-standard board positions.
     for (Piece piece : pieces_considered)
     {
         auto piece_size = m_bd.get_piece_info(piece).get_size();
