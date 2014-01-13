@@ -624,7 +624,7 @@ void State::start_search()
     double gamma = 1;
     for (unsigned i = 1; i < PieceInfo::max_size + 1; ++i, gamma *= 5)
         m_gamma_piece_size[i] = gamma;
-    gamma = 1e5;
+    gamma = 1e10;
     for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i, gamma *= 1e10)
         m_gamma_nu_attach[i] = gamma;
 }
@@ -632,9 +632,9 @@ void State::start_search()
 void State::start_simulation(size_t n)
 {
     if (log_simulations)
-        log() << "==========================================================\n"
+        log() << "=========================================================\n"
               << "Simulation " << n << "\n"
-              << "==========================================================\n";
+              << "=========================================================\n";
     ++m_nu_simulations;
     m_bd.restore_snapshot();
     m_force_consider_all_pieces = false;
