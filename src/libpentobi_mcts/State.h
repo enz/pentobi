@@ -180,10 +180,7 @@ private:
     /** Incrementally updated lists of legal moves for both colors.
         Only the move list for the color to play van be used in any given
         position, the other color is not updated immediately after a move. */
-    ColorMap<unique_ptr<MoveList>> m_moves;
-
-    /** Temporary variable reused for efficiency. */
-    unique_ptr<MoveList> m_tmp_moves;
+    ColorMap<MoveList> m_moves;
 
     ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
@@ -311,7 +308,7 @@ inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
         return;
     Color to_play = m_bd.get_to_play();
     init_moves_without_gamma(to_play);
-    m_prior_knowledge.gen_children(m_bd, *m_moves[to_play],
+    m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
                                    m_is_symmetry_broken, expander, init_val);
 }
 

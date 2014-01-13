@@ -51,6 +51,12 @@ public:
 
     const T& operator[](I i) const;
 
+    /** Get an element whose index may be higher than the current size. */
+    T& get_unchecked(I i);
+
+    /** Get an element whose index may be higher than the current size. */
+    const T& get_unchecked(I i) const;
+
     bool operator==(const ArrayList& array_list) const;
 
     bool operator!=(const ArrayList& array_list) const;
@@ -224,6 +230,20 @@ template<typename T, unsigned M, typename I>
 inline auto ArrayList<T,M,I>::end() const -> const_iterator
 {
     return begin() + m_size;
+}
+
+template<typename T, unsigned M, typename I>
+inline T& ArrayList<T, M, I>::get_unchecked(I i)
+{
+    LIBBOARDGAME_ASSERT(i < max_size);
+    return m_a[i];
+}
+
+template<typename T, unsigned M, typename I>
+inline const T& ArrayList<T, M, I>::get_unchecked(I i) const
+{
+    LIBBOARDGAME_ASSERT(i < max_size);
+    return m_a[i];
 }
 
 template<typename T, unsigned M, typename I>

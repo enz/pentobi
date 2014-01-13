@@ -63,8 +63,7 @@ SharedConst::SharedConst(const Color& to_play)
 
 State::State(Variant initial_variant, const SharedConst& shared_const)
   : m_shared_const(shared_const),
-    m_bd(initial_variant),
-    m_tmp_moves(new MoveList())
+    m_bd(initial_variant)
 {
 }
 
@@ -82,7 +81,7 @@ inline void State::add_move(MoveList& moves, Move mv, double gamma)
 inline void State::add_moves(Point p, Color c,
                              const Board::PiecesLeftList& pieces_considered)
 {
-    auto& moves = *m_moves[c];
+    auto& moves = m_moves[c];
     auto& marker = m_marker[c];
     auto adj_status = m_bd.get_adj_status(p, c);
     auto& is_forbidden = m_bd.is_forbidden(c);
@@ -104,7 +103,7 @@ inline void State::add_moves(Point p, Color c,
 inline void State::add_moves(Point p, Color c, Piece piece,
                              unsigned adj_status)
 {
-    auto& moves = *m_moves[c];
+    auto& moves = m_moves[c];
     auto& marker = m_marker[c];
     auto move_candidates = get_moves(c, piece, p, adj_status);
     auto& is_forbidden = m_bd.is_forbidden(c);
@@ -128,7 +127,7 @@ void State::add_starting_moves(Color c,
     Point p = find_best_starting_point(c);
     if (p.is_null())
         return;
-    auto& moves = *m_moves[c];
+    auto& moves = m_moves[c];
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
     // We use adj_status 0 and don't check if moves should be in the local
@@ -440,7 +439,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
             init_moves_with_gamma(to_play);
         else if (m_has_moves[to_play])
             update_moves(to_play);
-        if ((m_has_moves[to_play] = ! m_moves[to_play]->empty()))
+        if ((m_has_moves[to_play] = ! m_moves[to_play].empty()))
             break;
         if (m_nu_passes + 1 == m_nu_colors)
             return false;
@@ -457,7 +456,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
         m_is_symmetry_broken = true;
     }
 
-    auto& moves = *m_moves[to_play];
+    auto& moves = m_moves[to_play];
     if (log_simulations)
         log() << "Moves: " << moves.size() << ", total gamma: "
               << m_total_gamma << "\n";
@@ -499,7 +498,7 @@ void State::init_moves_with_gamma(Color c)
     m_local_value.init(m_bd);
     m_total_gamma = 0;
     auto& marker = m_marker[c];
-    auto& moves = *m_moves[c];
+    auto& moves = m_moves[c];
     marker.clear_all_set_known(moves);
     moves.clear();
     Board::PiecesLeftList pieces_considered;
@@ -525,7 +524,7 @@ void State::init_moves_without_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
     auto& marker = m_marker[c];
-    auto& moves = *m_moves[c];
+    auto& moves = m_moves[c];
     marker.clear_all_set_known(moves);
     moves.clear();
     Board::PiecesLeftList pieces_considered;
@@ -624,9 +623,6 @@ void State::start_search()
         m_symmetry_min_nu_pieces = 5;
     else
         m_symmetry_min_nu_pieces = 3; // Only used in Duo
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        if (! m_moves[*i])
-            m_moves[*i].reset(new MoveList());
 
     m_prior_knowledge.start_search(bd);
 
@@ -656,9 +652,9 @@ void State::start_simulation(size_t n)
         m_moves_added_at[*i].clear();
     }
     m_nu_passes = 0;
-    // TODO: m_nu_passes should be initialized without assuming alternating
-    // colors in the board's move history
     for (unsigned i = m_bd.get_nu_moves(); i > 0; --i)
+    // Should m_nu_passes be initialized without assuming alternating
+    // colors in the board's move history?
     {
         if (! m_bd.get_move(i - 1).move.is_pass())
             break;
@@ -677,19 +673,21 @@ void State::update_moves(Color c)
     for (Piece piece : m_bd.get_pieces_left(c))
         is_piece_left[piece] = true;
     auto& is_forbidden = m_bd.is_forbidden(c);
-    auto& tmp_moves = *m_tmp_moves;
-    tmp_moves.clear();
+    auto& moves = m_moves[c];
+    auto old_size = moves.size();
+    moves.clear();
     double gamma;
-    for (Move mv : *m_moves[c])
+    for (unsigned i = 0; i < old_size; ++i)
     {
+        LIBBOARDGAME_ASSERT(i >= moves.size());
+        Move mv = moves.get_unchecked(i);
         auto& info = get_move_info(mv);
         if (is_piece_left[info.get_piece()]
             && check_move(is_forbidden, info, gamma))
-            add_move(tmp_moves, mv, gamma);
+            add_move(moves, mv, gamma);
         else
             marker.clear(mv);
     }
-    swap(m_tmp_moves, m_moves[c]);
 
     // Find new legal moves because of new pieces played by this color
     Board::PiecesLeftList pieces_considered;
@@ -712,7 +710,7 @@ void State::update_moves(Color c)
     auto& is_piece_considered = *m_is_piece_considered[c];
     if (&is_piece_considered != &m_shared_const.is_piece_considered_all)
     {
-        if (m_moves[c]->empty())
+        if (moves.empty())
             m_force_consider_all_pieces = true;
         auto& is_piece_considered_new = get_pieces_considered();
         if (&is_piece_considered !=  &is_piece_considered_new)
