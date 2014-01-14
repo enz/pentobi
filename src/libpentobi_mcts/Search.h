@@ -68,7 +68,7 @@ public:
 
 
     /** @name Parameters */
-    /// @{
+    /** @{ */
 
     Float get_score_modification() const;
 
@@ -90,7 +90,7 @@ public:
 
     void set_auto_param(bool enable);
 
-    // @} // @name
+    /** @} */ // @name
 
 
     bool search(Move& mv, const Board& bd, Color to_play, Float max_count,

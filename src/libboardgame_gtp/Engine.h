@@ -52,14 +52,14 @@ public:
         <dd>@copydoc cmd_version()</dd>
         </dl> */
     /** @name Command handlers */
-    /// @{
+    /** @{ */
     void cmd_known_command(const Arguments&, Response&);
     void cmd_list_commands(Response&);
     void cmd_name(Response&);
     void cmd_protocol_version(Response&);
     void cmd_quit();
     void cmd_version(Response&);
-    // @} // @name
+    /** @} */ // @name
 
     Engine();
 
