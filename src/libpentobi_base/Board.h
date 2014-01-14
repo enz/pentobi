@@ -342,6 +342,8 @@ private:
     {
         PointStateGrid point_state;
 
+        unsigned nu_onboard_pieces_all;
+
         Color to_play;
     };
 
@@ -582,10 +584,7 @@ inline unsigned Board::get_nu_moves() const
 
 inline unsigned Board::get_nu_onboard_pieces() const
 {
-    unsigned n = 0;
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        n += m_state_color[*i].nu_onboard_pieces;
-    return n;
+    return m_state_base.nu_onboard_pieces_all;
 }
 
 inline unsigned Board::get_nu_onboard_pieces(Color c) const
@@ -856,6 +855,7 @@ inline void Board::place(Color c, Move mv)
                 state_color.bonus += m_bonus_one_piece;
         }
     }
+    ++m_state_base.nu_onboard_pieces_all;
     ++state_color.nu_onboard_pieces;
     state_color.points += piece_size;
     auto i = info.begin();
