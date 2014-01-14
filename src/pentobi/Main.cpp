@@ -39,9 +39,6 @@ namespace {
 
 #ifdef Q_WS_WIN
 
-/** @todo: Move to an extra file to encapsulate the inclusion of <windows.h>,
-    which does some ugly stuff, like defining a macro named max that breaks
-    standard headers. */
 void redirectStdErr()
 {
     CONSOLE_SCREEN_BUFFER_INFO info;

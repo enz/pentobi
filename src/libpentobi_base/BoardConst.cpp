@@ -563,10 +563,6 @@ const Geometry& create_geometry(BoardType board_type)
 BoardConst::BoardConst(BoardType board_type, Variant variant)
     : m_geo(create_geometry(board_type))
 {
-    // TODO: Better distinction between board type and set of pieces.
-    // Currently the variant parameter is used only to distinct between
-    // the set of pieces in Duo and Junior, otherwise the parameter is ignored
-    // because the set of pieces is derived from the board type.
     m_board_type = board_type;
     if (board_type == BoardType::trigon)
     {
