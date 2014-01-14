@@ -30,7 +30,7 @@ public:
 
     /** @name Formatting options.
         Should be set before starting to write. */
-    // @{
+    /// @{
 
     void set_one_prop_per_line(bool enable);
 

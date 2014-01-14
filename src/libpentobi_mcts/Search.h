@@ -68,7 +68,7 @@ public:
 
 
     /** @name Parameters */
-    // @{
+    /// @{
 
     Float get_score_modification() const;
 

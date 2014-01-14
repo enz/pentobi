@@ -149,7 +149,7 @@ public:
 
 
     /** @name Pure virtual functions */
-    // @{
+    /** @{ */
 
     /** Create a new game-specific state to be used in a thread of the
         search. */
@@ -170,11 +170,11 @@ public:
     /** An evaluation value representing a 50% winning probability. */
     virtual Float get_tie_value() const = 0;
 
-    // @} // @name
+    /** @} */ // @name
 
 
     /** @name Virtual functions */
-    // @{
+    /** @{ */
 
     /** Check if the position at the root is a follow-up position of the last
         search.
@@ -206,11 +206,11 @@ public:
         @see set_deterministic() */
     virtual double expected_sim_per_sec() const;
 
-    // @} // @name
+    /** @} */ // @name
 
 
     /** @name Parameters */
-    // @{
+    /** @{ */
 
     /** Interval in which the bias term is used at high parent counts.
         Takes advantage of the fact that the bias term changes slowly with
@@ -307,7 +307,7 @@ public:
         fixed interval is used. */
     void set_deterministic();
 
-    // @} // @name
+    /** @} */ // @name
 
 
     /** Run a search.
@@ -563,7 +563,7 @@ private:
 
     /** @name Members that are used concurrently by all threads during the
         lock-free multi-threaded search */
-    // @{
+    /** @{ */
 
     Tree m_tree;
 
@@ -580,7 +580,7 @@ private:
     /** See get_nu_simulations(). */
     LIBBOARDGAME_MCTS_ATOMIC(size_t) m_nu_simulations;
 
-    // @} // @name
+    /** @} */ // @name
 
 
     function<void(double, double)> m_callback;
