@@ -39,20 +39,20 @@ void CmdLine::find_elem()
         if (c == '"' && ! escape)
         {
             if (is_in_string)
-                m_elem.push_back(CmdLineRange(begin, i));
+                m_elem.emplace_back(begin, i);
             begin = i + 1;
             is_in_string = ! is_in_string;
         }
         else if (isspace(static_cast<unsigned char>(c)) && ! is_in_string)
         {
             if (i > begin)
-                m_elem.push_back(CmdLineRange(begin, i));
+                m_elem.emplace_back(begin, i);
             begin = i + 1;
         }
         escape = (c == '\\' && ! escape);
     }
     if (i > begin)
-        m_elem.push_back(CmdLineRange(begin, m_line.end()));
+        m_elem.emplace_back(begin, m_line.end());
 }
 
 CmdLineRange CmdLine::get_trimmed_line_after_elem(size_t i) const
@@ -88,7 +88,7 @@ void CmdLine::init(const CmdLine& c)
     {
         auto begin = m_line.begin() + (i->begin() - c.m_line.begin());
         auto end = m_line.begin() + (i->end() - c.m_line.begin());
-        m_elem.push_back(CmdLineRange(begin, end));
+        m_elem.emplace_back(begin, end);
     }
 }
 
