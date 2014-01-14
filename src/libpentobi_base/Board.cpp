@@ -240,7 +240,6 @@ void Board::init(Variant variant, const Setup* setup)
             m_state_color[*i].pieces_left.push_back(Piece(j));
         m_state_color[*i].nu_left_piece.fill(m_nu_piece_instances);
     }
-    m_state_base.nu_onboard_pieces_all = 0;
     if (setup == nullptr)
     {
         m_setup.clear();

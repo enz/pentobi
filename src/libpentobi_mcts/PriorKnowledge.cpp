@@ -171,13 +171,26 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         return;
     }
     auto board_type = bd.get_board_type();
-    auto nu_onboard_pieces = bd.get_nu_onboard_pieces();
-    bool check_dist_to_center =
-        ((board_type == BoardType::classic && nu_onboard_pieces < 13)
-         || (board_type == BoardType::trigon && nu_onboard_pieces < 5)
-         || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
-    bool check_connect =
-        (board_type == BoardType::classic && nu_onboard_pieces < 14);
+    bool check_dist_to_center;
+    bool check_connect;
+    switch (board_type)
+    {
+        case BoardType::classic:
+            {
+                auto nu_onboard_pieces = bd.get_nu_onboard_pieces();
+                check_dist_to_center = (nu_onboard_pieces < 13);
+                check_connect = (nu_onboard_pieces < 14);
+            }
+            break;
+        case BoardType::trigon:
+        case BoardType::trigon_3:
+            check_dist_to_center = (bd.get_nu_onboard_pieces() < 5);
+            check_connect = false;
+            break;
+        default:
+            check_dist_to_center = false;
+            check_connect = false;
+    }
     compute_features(bd, moves, check_dist_to_center, check_connect);
     if (! m_has_connect_move)
         check_connect = false;
