@@ -87,16 +87,13 @@ inline void State::add_moves(Point p, Color c,
     auto& is_forbidden = m_bd.is_forbidden(c);
     double gamma;
     for (Piece piece : pieces_considered)
-    {
-        auto move_candidates = get_moves(c, piece, p, adj_status);
-        for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
-            if (! marker[*i]
-                && check_move(is_forbidden, get_move_info(*i), gamma))
+        for (Move mv : get_moves(c, piece, p, adj_status))
+            if (! marker[mv]
+                && check_move(is_forbidden, get_move_info(mv), gamma))
             {
-                marker.set(*i);
-                add_move(moves, *i, gamma);
+                marker.set(mv);
+                add_move(moves, mv, gamma);
             }
-    }
     m_moves_added_at[c].set(p);
 }
 
@@ -105,14 +102,13 @@ inline void State::add_moves(Point p, Color c, Piece piece,
 {
     auto& moves = m_moves[c];
     auto& marker = m_marker[c];
-    auto move_candidates = get_moves(c, piece, p, adj_status);
     auto& is_forbidden = m_bd.is_forbidden(c);
     double gamma;
-    for (auto i = move_candidates.begin(); i != move_candidates.end(); ++i)
-        if (! marker[*i] && check_move(is_forbidden, get_move_info(*i), gamma))
+    for (Move mv : get_moves(c, piece, p, adj_status))
+        if (! marker[mv] && check_move(is_forbidden, get_move_info(mv), gamma))
         {
-            marker.set(*i);
-            add_move(moves, *i, gamma);
+            marker.set(mv);
+            add_move(moves, mv, gamma);
         }
 }
 
