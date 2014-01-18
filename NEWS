@@ -1,6 +1,7 @@
 Version 7.UNKNOWN (master)
 ==========================
 
+* Increased playing strength in game variant Trigon
 * The source code now requires MSVC 2013 (because a larger subset of
   C++11 features is used).
 * The source code distribution now uses xz instead of gzip for 

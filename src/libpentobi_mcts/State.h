@@ -308,8 +308,10 @@ inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
         return;
     Color to_play = m_bd.get_to_play();
     init_moves_without_gamma(to_play);
+    m_local_value.init(m_bd);
     m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
-                                   m_is_symmetry_broken, expander, init_val);
+                                   m_is_symmetry_broken, m_local_value,
+                                   expander, init_val);
 }
 
 inline PlayerMove<Move> State::get_move(unsigned n) const

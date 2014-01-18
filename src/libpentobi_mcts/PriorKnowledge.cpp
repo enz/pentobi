@@ -27,6 +27,7 @@ using libpentobi_base::Variant;
 //-----------------------------------------------------------------------------
 
 void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
+                                      const LocalValue& local_value,
                                       bool check_dist_to_center,
                                       bool check_connect)
 {
@@ -106,12 +107,16 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         auto& info_ext = *(move_info_ext_array + moves[i].to_int());
         auto& features = m_features[i];
         Float heuristic = 0;
+        LocalValue::Compute local;
         if (! check_dist_to_center)
         {
             auto j = info.begin();
             auto end = info.end();
             do
+            {
                 heuristic += point_value[*j];
+                local.add_move_point(*j, local_value);
+            }
             while (++j != end);
         }
         else
@@ -122,6 +127,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             do
             {
                 heuristic += point_value[*j];
+                local.add_move_point(*j, local_value);
                 features.dist_to_center =
                     min(features.dist_to_center, m_dist_to_center[*j]);
             }
@@ -158,11 +164,13 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         if (heuristic > m_max_heuristic)
             m_max_heuristic = heuristic;
         features.heuristic = heuristic;
+        features.local_value = local;
     }
 }
 
 void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                                   bool is_symmetry_broken,
+                                  const LocalValue& local_value,
                                   Tree::NodeExpander& expander, Float init_val)
 {
     if (moves.empty())
@@ -178,7 +186,8 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
          || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
     bool check_connect =
         (board_type == BoardType::classic && nu_onboard_pieces < 14);
-    compute_features(bd, moves, check_dist_to_center, check_connect);
+    compute_features(bd, moves, local_value, check_dist_to_center,
+                     check_connect);
     if (! m_has_connect_move)
         check_connect = false;
     Move symmetric_mv = Move::null();
@@ -239,7 +248,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 
         // Initialize value from heuristic and init_val, each with a count
         // of 1.5
-        Float value = 0.5f * heuristic + 0.5f * init_val;
+        Float value = 1.5f * heuristic + 1.5f * init_val;
         Float count = 3;
 
         // If a symmetric draw is still possible, encourage exploring a move
@@ -249,21 +258,25 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         if (! symmetric_mv.is_null())
         {
             if (mv == symmetric_mv)
-                value = (3.f / 8) * value + (5.f / 8) * 1.0f;
-            else
-                value = (3.f / 8) * value + (5.f / 8) * 0.1f;
-            count = 8;
+                value += 5;
+            count += 5;
         }
         else if (has_symmetry_breaker)
         {
             if (bd.get_move_info_ext_2(mv).breaks_symmetry)
-                value = (3.f / 8) * value + (5.f / 8) * 1.0f;
-            else
-                value = (3.f / 8) * value + (5.f / 8) * 0.1f;
-            count = 8;
+                value += 5;
+            count += 5;
         }
 
-        expander.add_child(mv, value, count);
+        // Add 1 win for moves that are local responses to recent opponent
+        // moves
+        if (features.local_value.has_local())
+        {
+            value += 1;
+            count += 1;
+        }
+
+        expander.add_child(mv, value / count, count);
     }
 }
 

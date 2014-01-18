@@ -34,7 +34,9 @@ using libpentobi_base::PointList;
 /** Classify moves for the playout policy to prefer local response moves.
     A local response move is a move that occupies attach points of recent
     opponent moves or points that are adjacent or second-order adjacent to
-    them. */
+    them. If there is only one adjacent point to such an opponent attach
+    point missing to make it a 1-hole, the missing adjacent point counts
+    as an attach point. */
 class LocalValue
 {
 public:
@@ -42,10 +44,14 @@ public:
     class Compute
     {
     public:
+        Compute()
+            : m_value(0)
+        { }
+
+        /** Contruct and already add the first point. */
         Compute(Point p, const LocalValue& local_value)
             : m_value(local_value.m_point_value[p])
-        {
-        }
+        { }
 
         /** Add a point of the move. */
         void add_move_point(Point p, const LocalValue& local_value)
@@ -94,6 +100,21 @@ public:
 
     /** Clear the stored last opponent attach moves. */
     void clear();
+
+    /** Get local distance value.
+        0: not local, 3: attach point of recent opponent move, 2: adjacant to
+        such attach points, 1: second-order adjacant to such attach points */
+    unsigned get_local_dist(Point p) const
+    {
+        unsigned val = m_point_value[p];
+        if (val == 0)
+            return 0;
+        if ((val & 0xf00u) != 0)
+            return 3;
+        if ((val & 0x0f0u) != 0)
+            return 2;
+        return 1;
+    }
 
 private:
     Grid<unsigned> m_point_value;

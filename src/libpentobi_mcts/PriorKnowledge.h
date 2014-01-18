@@ -8,6 +8,7 @@
 #define LIBPENTOBI_MCTS_PRIOR_KNOWLEDGE_H
 
 #include "Float.h"
+#include "LocalValue.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/MoveList.h"
@@ -34,14 +35,16 @@ public:
 
     /** Generate children nodes initialized with prior knowledge. */
     void gen_children(const Board& bd, const MoveList& moves,
-                      bool is_symmetry_broken, Tree::NodeExpander& expander,
-                      Float init_val);
+                      bool is_symmetry_broken, const LocalValue& local_value,
+                      Tree::NodeExpander& expander, Float init_val);
 
 private:
     struct MoveFeatures
     {
         /** Heuristic value of the move expressed in score points. */
         Float heuristic;
+
+        LocalValue::Compute local_value;
 
         /** Only used on Classic and Trigon boards. */
         unsigned dist_to_center;
@@ -63,6 +66,7 @@ private:
     Grid<unsigned> m_dist_to_center;
 
     void compute_features(const Board& bd, const MoveList& moves,
+                          const LocalValue& local_value,
                           bool check_dist_to_center, bool check_connect);
 };
 
