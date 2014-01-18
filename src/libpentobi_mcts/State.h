@@ -52,8 +52,6 @@ struct SharedConst
     /** The color to play at the root of the search. */
     const Color& to_play;
 
-    bool detect_symmetry;
-
     bool avoid_symmetric_draw;
 
     /** Maximum value to modify the win/loss result by the score. */

@@ -74,10 +74,6 @@ public:
 
     void set_score_modification(Float value);
 
-    bool get_detect_symmetry() const;
-
-    void set_detect_symmetry(bool enable);
-
     bool get_avoid_symmetric_draw() const;
 
     void set_avoid_symmetric_draw(bool enable);
@@ -150,11 +146,6 @@ inline const Board& Search::get_board() const
     return *m_shared_const.board;
 }
 
-inline bool Search::get_detect_symmetry() const
-{
-    return m_shared_const.detect_symmetry;
-}
-
 inline const GameStateHistory& Search::get_last_state() const
 {
     return m_last_state;
@@ -188,11 +179,6 @@ inline void Search::set_auto_param(bool enable)
 inline void Search::set_avoid_symmetric_draw(bool enable)
 {
     m_shared_const.avoid_symmetric_draw = enable;
-}
-
-inline void Search::set_detect_symmetry(bool enable)
-{
-    m_shared_const.detect_symmetry = enable;
 }
 
 inline void Search::set_score_modification(Float value)

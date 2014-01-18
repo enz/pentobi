@@ -51,7 +51,6 @@ PointState get_symmetric_state(Color c)
 SharedConst::SharedConst(const Color& to_play)
     : board(nullptr),
       to_play(to_play),
-      detect_symmetry(true),
       avoid_symmetric_draw(true),
       score_modification(0.1f)
 {
@@ -604,7 +603,6 @@ void State::start_search()
     m_check_symmetric_draw =
         ((variant == Variant::duo || variant == Variant::junior
           || variant == Variant::trigon_2)
-         && m_shared_const.detect_symmetry
          && ! ((m_shared_const.to_play == Color(1)
                 || m_shared_const.to_play == Color(3))
                && m_shared_const.avoid_symmetric_draw)

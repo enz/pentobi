@@ -126,7 +126,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "auto_param " << s.get_auto_param() << '\n'
             << "bias_term_constant " << s.get_bias_term_constant() << '\n'
             << "bias_term_interval " << s.get_bias_term_interval() << '\n'
-            << "detect_symmetry " << s.get_detect_symmetry() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "level " << p.get_level() << '\n'
@@ -151,8 +150,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_bias_term_constant(args.parse<Float>(1));
         else if (name == "bias_term_interval")
             s.set_bias_term_interval(args.parse<unsigned>(1));
-        else if (name == "detect_symmetry")
-            s.set_detect_symmetry(args.parse<bool>(1));
         else if (name == "expand_threshold")
             s.set_expand_threshold(args.parse<Float>(1));
         else if (name == "fixed_simulations")
