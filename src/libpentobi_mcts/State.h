@@ -9,6 +9,7 @@
 
 #include "LocalValue.h"
 #include "PriorKnowledge.h"
+#include "BoardUtil.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_util/RandomGenerator.h"
 #include "libpentobi_base/Board.h"
@@ -35,6 +36,7 @@ using libpentobi_base::PieceMap;
 using libpentobi_base::PrecompMoves;
 using libpentobi_base::SymmetricPoints;
 using libpentobi_base::Variant;
+using libpentobi_mcts::board_util::check_symmetry_broken;
 
 //-----------------------------------------------------------------------------
 
@@ -283,8 +285,6 @@ private:
 
     void update_moves(Color c);
 
-    bool check_symmetry_broken();
-
     void update_symmetry_broken(Move mv);
 };
 
@@ -293,7 +293,8 @@ inline void State::finish_in_tree()
     if (log_simulations)
         log() << "Finish in-tree\n";
     if (m_check_symmetric_draw)
-        m_is_symmetry_broken = check_symmetry_broken();
+        m_is_symmetry_broken =
+            check_symmetry_broken(m_bd, m_shared_const.symmetric_points);
     else
         // Pretending that the symmetry is always broken is equivalent to
         // ignoring symmetric draws

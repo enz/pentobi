@@ -17,34 +17,9 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_util::FmtSaver;
-using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::PointState;
-
-//-----------------------------------------------------------------------------
-
-namespace {
-
-/** Return the symmetric point state for symmetry detection.
-    Only used for Variant::duo. Returns the other color or empty, if the
-    given point state is empty. */
-PointState get_symmetric_state(Color c)
-{
-    if (c == Color(0))
-        return Color(1);
-    else if (c == Color(1))
-        return Color(0);
-    else if (c == Color(2))
-        return Color(3);
-    else
-    {
-        LIBBOARDGAME_ASSERT(c == Color(3));
-        return Color(2);
-    }
-}
-
-} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -181,58 +156,6 @@ bool State::check_move_without_gamma(const Grid<bool>& is_forbidden, Move mv)
         if (is_forbidden[*i])
             return false;
     return true;
-}
-
-bool State::check_symmetry_broken()
-{
-    Color to_play = m_bd.get_to_play();
-    if (to_play == Color(0) || to_play == Color(2))
-    {
-        // First player to play: the symmetry is broken if the position is
-        // not symmetric.
-        for (BoardIterator i(m_bd); i; ++i)
-        {
-            PointState s1 = m_bd.get_point_state(*i);
-            if (! s1.is_empty())
-            {
-                Point symm_p = m_shared_const.symmetric_points[*i];
-                PointState s2 = m_bd.get_point_state(symm_p);
-                if (s2 != get_symmetric_state(s1.to_color()))
-                    return true;
-            }
-        }
-    }
-    else
-    {
-        // Second player to play: the symmetry is broken if the second player
-        // cannot copy the first player's last move to make the position
-        // symmetric again.
-        unsigned nu_moves = m_bd.get_nu_moves();
-        if (nu_moves == 0)
-            // Don't try to handle the case if the second player has to play as
-            // first move (e.g. in setup positions)
-            return true;
-        Color previous_color = m_bd.get_previous(to_play);
-        ColorMove last_mv = m_bd.get_move(nu_moves - 1);
-        if (last_mv.color != previous_color || last_mv.move.is_pass())
-            // Don't try to handle non-alternating moves or pass moves in
-            // board history
-            return true;
-        auto& info = get_move_info(last_mv.move);
-        for (BoardIterator i(m_bd); i; ++i)
-        {
-            PointState s1 = m_bd.get_point_state(*i);
-            if (! s1.is_empty())
-            {
-                Point symm_p = m_shared_const.symmetric_points[*i];
-                PointState s2 = m_bd.get_point_state(symm_p);
-                if (s2 != get_symmetric_state(s1.to_color()))
-                    if (! (info.contains(*i) && s2.is_empty()))
-                        return true;
-            }
-        }
-    }
-    return false;
 }
 
 void State::dump(ostream& out) const
@@ -606,7 +529,7 @@ void State::start_search()
          && ! ((m_shared_const.to_play == Color(1)
                 || m_shared_const.to_play == Color(3))
                && m_shared_const.avoid_symmetric_draw)
-         && ! check_symmetry_broken());
+         && ! check_symmetry_broken(bd, m_shared_const.symmetric_points));
     if (variant == Variant::trigon_2)
         m_symmetry_min_nu_pieces = 5;
     else

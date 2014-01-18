@@ -10,6 +10,7 @@
 
 #include "Search.h"
 
+#include "BoardUtil.h"
 #include "Util.h"
 #include "libboardgame_util/FmtSaver.h"
 
@@ -21,6 +22,7 @@ using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::Piece;
+using libpentobi_mcts::board_util::check_symmetry_broken;
 
 //-----------------------------------------------------------------------------
 
@@ -126,8 +128,21 @@ Search::~Search() throw()
 
 bool Search::check_followup(vector<Move>& sequence)
 {
-    m_state.init(get_board(), m_to_play);
+    auto& bd = get_board();
+    m_state.init(bd, m_to_play);
     bool is_followup = m_state.is_followup(m_last_state, sequence);
+
+    // If avoid_symmetric_draw is enabled, class State uses a different
+    // evaluation function depending on which player is to play in the root
+    // position (the first player knows about symmetric draws to be able to
+    // play a symmetry breaker but the second player pretends not to know about
+    // symmetric draws to avoid going for such a draw). In this case, we cannot
+    // reuse parts of the old search tree if the computer plays both colors.
+    if (m_shared_const.avoid_symmetric_draw
+        && m_to_play != m_last_state.get_to_play()
+        && ! check_symmetry_broken(bd, m_shared_const.symmetric_points))
+        is_followup = false;
+
     m_last_state = m_state;
     return is_followup;
 }
@@ -236,8 +251,8 @@ void Search::on_start_search()
     }
     m_shared_const.is_piece_considered_all.fill(true);
 
-    PointTransfRot180<Point> transform;
-    m_shared_const.symmetric_points.init(bd.get_geometry(), transform);
+    m_shared_const.symmetric_points.init(bd.get_geometry(),
+                                         PointTransfRot180<Point>());
 }
 
 bool Search::search(Move& mv, const Board& bd, Color to_play,

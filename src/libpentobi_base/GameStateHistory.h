@@ -57,6 +57,8 @@ public:
         @param[out] setup */
     void get_as_setup(Variant& variant, Setup& setup) const;
 
+    Color get_to_play() const;
+
 private:
     bool m_is_valid;
 
@@ -77,6 +79,11 @@ inline GameStateHistory::GameStateHistory()
 inline void GameStateHistory::clear()
 {
     m_is_valid = false;
+}
+
+inline Color GameStateHistory::get_to_play() const
+{
+    return m_to_play;
 }
 
 inline bool GameStateHistory::is_valid() const

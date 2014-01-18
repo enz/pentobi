@@ -1272,6 +1272,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
                              bool always_search)
 {
     check_create_threads();
+    on_start_search();
     if (max_count > 0)
         // A fixed number of simulations means that no time limit is used, but
         // max_time is still used at some places in the code, so we set it to
@@ -1314,8 +1315,9 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 if (m_deterministic)
                     interval_checker.set_deterministic(1000000);
-                bool aborted = ! m_tree.extract_subtree(m_tmp_tree, *node, true,
-                                                        &interval_checker);
+                bool aborted =
+                    ! m_tree.extract_subtree(m_tmp_tree, *node, true,
+                                             &interval_checker);
                 auto& tmp_tree_root = m_tmp_tree.get_root();
                 if (! is_same)
                     restore_root_from_children(m_tmp_tree, tmp_tree_root);
@@ -1347,7 +1349,6 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
 
     m_timer.reset(time_source);
     m_time_source = &time_source;
-    on_start_search();
     m_player = get_player();
     for (PlayerInt i = 0; i < m_nu_players; ++i)
         m_root_val[i].clear();
