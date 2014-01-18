@@ -10,6 +10,10 @@
 /* Version number of package */
 #define VERSION "@PENTOBI_VERSION@"
 
+/* Define to 1 if the MCTS search does not need to support multi-threading.
+   This makes the search slightly faster on single-threaded systems. */
+#cmakedefine01 LIBBOARDGAME_MCTS_SINGLE_THREAD
+
 /* Floating type for Monte-Carlo tree search values (float|double) */
 #define LIBPENTOBI_MCTS_FLOAT_TYPE @LIBPENTOBI_MCTS_FLOAT_TYPE@
 
@@ -21,6 +25,3 @@
 
 /** Location of the translations directory. */
 #cmakedefine PENTOBI_TRANSLATIONS "@PENTOBI_TRANSLATIONS@"
-
-/** Use Boost.Thread instead of std::thread */
-#cmakedefine USE_BOOST_THREAD
