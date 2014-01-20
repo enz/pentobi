@@ -139,7 +139,7 @@ bool Search::check_followup(vector<Move>& sequence)
     // symmetric draws to avoid going for such a draw). In this case, we cannot
     // reuse parts of the old search tree if the computer plays both colors.
     if (m_shared_const.avoid_symmetric_draw
-        && m_to_play != m_last_state.get_to_play()
+        && is_followup && m_to_play != m_last_state.get_to_play()
         && ! check_symmetry_broken(bd, m_shared_const.symmetric_points))
         is_followup = false;
 

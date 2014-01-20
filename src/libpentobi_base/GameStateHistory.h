@@ -83,6 +83,7 @@ inline void GameStateHistory::clear()
 
 inline Color GameStateHistory::get_to_play() const
 {
+    LIBBOARDGAME_ASSERT(m_is_valid);
     return m_to_play;
 }
 
