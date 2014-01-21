@@ -93,6 +93,10 @@ public:
 
     void add_value(Float v, Float weight);
 
+    void remove_value(Float v);
+
+    void remove_value(Float v, Float weight);
+
     void inc_visit_count();
 
     /** Get node index of first child.
@@ -249,6 +253,48 @@ inline void Node<M, F>::link_children(NodeIdx first_child, unsigned nu_children)
     m_first_child = first_child;
     LIBBOARDGAME_MCTS_ATOMIC_STORE(m_nu_children, nu_children,
                                    memory_order_release);
+}
+
+template<typename M, typename F>
+void Node<M, F>::remove_value(Float v)
+{
+    // Intentionally uses no synchronization and does not care about
+    // lost updates in multi-threaded mode
+    Float count =
+        LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_value_count, memory_order_relaxed);
+    if (count > 1)
+    {
+        Float value =
+            LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_value, memory_order_relaxed);
+        --count;
+        value -= (v - value) / count;
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_value, value, memory_order_relaxed);
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_value_count, count,
+                                       memory_order_relaxed);
+    }
+    else
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_value_count, 0, memory_order_relaxed);
+}
+
+template<typename M, typename F>
+void Node<M, F>::remove_value(Float v, Float weight)
+{
+    // Intentionally uses no synchronization and does not care about
+    // lost updates in multi-threaded mode
+    Float count =
+        LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_value_count, memory_order_relaxed);
+    if (count > weight)
+    {
+        Float value =
+            LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_value, memory_order_relaxed);
+        count -= weight;
+        value -= weight * (v - value) / count;
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_value, value, memory_order_relaxed);
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_value_count, count,
+                                       memory_order_relaxed);
+    }
+    else
+        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_value_count, 0, memory_order_relaxed);
 }
 
 template<typename M, typename F>

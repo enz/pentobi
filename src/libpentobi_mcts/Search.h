@@ -38,6 +38,8 @@ struct SearchParamConst
     static const bool rave_dist_weighting = true;
 
     static const bool use_last_good_reply = true;
+
+    static const bool virtual_loss = true;
 };
 
 //-----------------------------------------------------------------------------

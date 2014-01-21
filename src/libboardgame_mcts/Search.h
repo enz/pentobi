@@ -92,6 +92,10 @@ struct SearchParamConstDefault
     /** Enable Last-Good-Reply heuristic.
         @see LastGoodReply */
     static const bool use_last_good_reply = false;
+
+    /** Use virtual loss in multi-threaded mode.
+        See Chaslot et al.: Parallel Monte-Carlo Tree Search. 2008. */
+    static const bool virtual_loss = false;
 };
 
 //-----------------------------------------------------------------------------
@@ -890,7 +894,7 @@ inline bool Search<S, M, R>::check_skip_bias_term(ThreadState& thread_state,
 template<class S, class M, class R>
 void Search<S, M, R>::create_threads()
 {
-#if LIBBOARDGAME_MCTS_SINGLE_THREAD
+#ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
     if (m_nu_threads > 1)
         throw Exception("libboardgame_mcts::Search was compiled"
                         " without support for multithreading");
@@ -1148,6 +1152,10 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
     {
         node = select_child(thread_state, *node, depth);
         m_tree.inc_visit_count(*node);
+#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
+        if (SearchParamConst::virtual_loss && m_nu_threads > 0)
+            m_tree.add_value(*node, 0);
+#endif
         thread_state.simulation.nodes.push_back(node);
         state.play_in_tree(node->get_move());
         ++depth;
@@ -1808,6 +1816,10 @@ void Search<S, M, R>::update_values(ThreadState& thread_state)
         auto& node = *nodes[i];
         auto mv = state.get_move(i - 1);
         m_tree.add_value(node, eval[mv.player]);
+#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
+        if (SearchParamConst::virtual_loss && m_nu_threads > 0)
+            m_tree.remove_value(node, 0);
+#endif
     }
     for (PlayerInt i = 0; i < m_nu_players; ++i)
     {

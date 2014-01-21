@@ -114,6 +114,10 @@ public:
 
     void add_value(const Node& node, Float v, Float weight);
 
+    void remove_value(const Node& node, Float v);
+
+    void remove_value(const Node& node, Float v, Float weight);
+
     void inc_visit_count(const Node& node);
 
     /** Overwrite the root value and count. */
@@ -419,6 +423,18 @@ inline auto Tree<N>::non_const(const Node& node) const -> Node&
 {
     LIBBOARDGAME_ASSERT(contains(node));
     return const_cast<Node&>(node);
+}
+
+template<typename N>
+inline void Tree<N>::remove_value(const Node& node, Float v)
+{
+    non_const(node).remove_value(v);
+}
+
+template<typename N>
+inline void Tree<N>::remove_value(const Node& node, Float v, Float weight)
+{
+    non_const(node).remove_value(v, weight);
 }
 
 template<typename N>
