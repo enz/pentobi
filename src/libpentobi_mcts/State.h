@@ -161,6 +161,9 @@ public:
 private:
     static const bool log_simulations = false;
 
+    /** The cumulative gamma value of the moves in m_moves. */
+    array<double, Move::range> m_cumulative_gamma;
+
     unsigned m_nu_moves_initial;
 
     Color::IntType m_nu_passes;
@@ -185,9 +188,6 @@ private:
     ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
     PriorKnowledge m_prior_knowledge;
-
-    /** The cumulative gamma value of the moves in m_moves. */
-    array<double, Move::range> m_cumulative_gamma;
 
     /** The sum of the gamma values of all moves. */
     double m_total_gamma;
