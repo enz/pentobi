@@ -8,7 +8,6 @@
 #define LIBPENTOBI_MCTS_LOCAL_VALUE_H
 
 #include <algorithm>
-#include "libboardgame_util/Log.h"
 #include "libpentobi_base/AdjIterator.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/PointList.h"
@@ -17,7 +16,6 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_base::ArrayList;
-using libboardgame_util::log;
 using libpentobi_base::AdjIterator;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
@@ -98,9 +96,6 @@ public:
         @param bd The board. */
     void init(const Board& bd);
 
-    /** Clear the stored last opponent attach moves. */
-    void clear();
-
     /** Get local distance value.
         0: not local, 3: attach point of recent opponent move, 2: adjacant to
         such attach points, 1: second-order adjacant to such attach points */
@@ -125,8 +120,11 @@ private:
 
 inline void LocalValue::init(const Board& bd)
 {
-    if (! m_points.empty())
-        clear();
+    // Clear the stored last opponent attach moves
+    for (Point p: m_points)
+        m_point_value[p] = 0;
+    m_points.clear();
+
     Color to_play = bd.get_to_play();
     Color second_color = bd.get_second_color(to_play);
     auto& geo = bd.get_geometry();

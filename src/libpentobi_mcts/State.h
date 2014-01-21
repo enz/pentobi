@@ -11,6 +11,7 @@
 #include "PriorKnowledge.h"
 #include "BoardUtil.h"
 #include "libboardgame_mcts/PlayerMove.h"
+#include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/SymmetricPoints.h"
@@ -20,6 +21,7 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
+using libboardgame_util::log;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
 using libpentobi_base::Board;
