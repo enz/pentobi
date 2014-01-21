@@ -168,9 +168,9 @@ public:
     void init(const Setup* setup = nullptr);
 
     /** Copy the board state and move history from another board.
-        This is like an assignment operator but because boards are rarely copied
-        by value and copying is expensive, it is an explicit function to avoid
-        accidental copying. */
+        This is like an assignment operator but because boards are rarely
+        copied by value and copying is expensive, it is an explicit function to
+        avoid accidental copying. */
     void copy_from(const Board& bd);
 
     /** Play a move.
@@ -314,7 +314,7 @@ public:
     Color get_starting_point_color(Point p) const;
 
     const ArrayList<Point,StartingPoints::max_starting_points>&
-                                             get_starting_points(Color c) const;
+                                            get_starting_points(Color c) const;
 
     /** Get the second color in game variants in which a player plays two
         colors.
@@ -335,16 +335,17 @@ public:
     void restore_snapshot();
 
 private:
-    /** Color-independent part of the board state for fast snapshot restoration.
+    /** Color-independent part of the board state for fast snapshot
+        restoration.
         Must have only POD-like members such that it can quickly be copied
         with memcpy in copy_from(). */
     struct StateBase
     {
-        PointStateGrid point_state;
+        Color to_play;
 
         unsigned nu_onboard_pieces_all;
 
-        Color to_play;
+        PointStateGrid point_state;
     };
 
     /** Color-dependent part of the board state for fast snapshot restoration.
@@ -378,6 +379,10 @@ private:
         ColorMap<StateColor> state_color;
     };
 
+    StateBase m_state_base;
+
+    ColorMap<StateColor> m_state_color;
+
     Variant m_variant;
 
     Color::IntType m_nu_colors;
@@ -405,10 +410,6 @@ private:
     const MoveInfoExt2* m_move_info_ext_2_array;
 
     const Geometry* m_geo;
-
-    StateBase m_state_base;
-
-    ColorMap<StateColor> m_state_color;
 
     ColorMap<PointList> m_attach_points;
 
