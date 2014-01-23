@@ -937,7 +937,16 @@ inline void Board::restore_snapshot()
     // See also the comment in copy_from() and class Snapshot about the
     // following memcpy
     static_assert(offsetof(Snapshot, state_color)
-                  > offsetof(Snapshot, state_base), "");
+                  > offsetof(Snapshot, state_base),
+                  "");
+    static_assert(offsetof(Board, m_state_color)
+                  > offsetof(Board, m_state_base),
+                  "");
+    static_assert(offsetof(Snapshot, state_color)
+                  - offsetof(Snapshot, state_base)
+                  == offsetof(Board, m_state_color)
+                     - offsetof(Board, m_state_base),
+                  "");
     memcpy(&m_state_base, &m_snapshot->state_base,
            offsetof(Snapshot, state_color) + m_nu_colors * sizeof(StateColor));
 
