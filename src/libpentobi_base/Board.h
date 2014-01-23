@@ -931,13 +931,13 @@ inline void Board::restore_snapshot()
     m_moves.resize(m_snapshot->moves_size);
     // See also the comment in copy_from() about the following memcpy's.
     memcpy(&m_state_base, &m_snapshot->state_base, sizeof(StateBase));
+    memcpy(&m_state_color, &m_snapshot->state_color,
+           m_nu_colors * sizeof(StateColor));
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         LIBBOARDGAME_ASSERT(m_snapshot->attach_points_size[*i]
                             <= m_attach_points[*i].size());
         m_attach_points[*i].resize(m_snapshot->attach_points_size[*i]);
-        memcpy(&m_state_color[*i], &m_snapshot->state_color[*i],
-               sizeof(StateColor));
     }
 }
 
