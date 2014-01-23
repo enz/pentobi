@@ -67,7 +67,7 @@ public:
             move. */
         unsigned get_nu_attach() const
         {
-            return (m_value & 0xf00u) >> 8;
+            return m_value & 0x00fu;
         }
 
         /** Does the move occupy any points adjacent to local opponent attach
@@ -81,7 +81,7 @@ public:
             opponent attach points? */
         bool has_adj_attach_2() const
         {
-            return ((m_value & 0x00fu) != 0);
+            return ((m_value & 0xf00u) != 0);
         }
 
     private:
@@ -95,21 +95,6 @@ public:
     /** Find the attach points of the last opponent moves in a given position.
         @param bd The board. */
     void init(const Board& bd);
-
-    /** Get local distance value.
-        0: not local, 3: attach point of recent opponent move, 2: adjacant to
-        such attach points, 1: second-order adjacant to such attach points */
-    unsigned get_local_dist(Point p) const
-    {
-        unsigned val = m_point_value[p];
-        if (val == 0)
-            return 0;
-        if ((val & 0xf00u) != 0)
-            return 3;
-        if ((val & 0x0f0u) != 0)
-            return 2;
-        return 1;
-    }
 
 private:
     Grid<unsigned> m_point_value;
@@ -154,13 +139,13 @@ inline void LocalValue::init(const Board& bd)
                 if (m_point_value[*j] == 0)
                     m_points.push_back(*j);
                 // Opponent attach point
-                m_point_value[*j] = 0x100u;
+                m_point_value[*j] = 0x001u;
                 unsigned nu_adj = 0;
                 for (AdjIterator k(geo, *j); k; ++k)
                     if (! is_forbidden[*k])
                     {
                         ++nu_adj;
-                        if (m_point_value[*k] < 0x010u)
+                        if (m_point_value[*k] != 0x001u)
                         {
                             if (m_point_value[*k] == 0)
                                 m_points.push_back(*k);
@@ -172,7 +157,7 @@ inline void LocalValue::init(const Board& bd)
                                 {
                                     m_points.push_back(*l);
                                     // 2nd-order adj. to opp. attach point
-                                    m_point_value[*l] = 0x001u;
+                                    m_point_value[*l] = 0x100u;
                                 }
                         }
                     }
@@ -184,7 +169,7 @@ inline void LocalValue::init(const Board& bd)
                 if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
                     for (AdjIterator k(geo, *j); k; ++k)
                         if (! is_forbidden[*k])
-                            m_point_value[*k] = 0x100u;
+                            m_point_value[*k] = 0x001u;
             }
         }
         while (++j != end);
