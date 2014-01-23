@@ -7,6 +7,7 @@
 #ifndef LIBPENTOBI_BASE_BOARD_H
 #define LIBPENTOBI_BASE_BOARD_H
 
+#include <cstddef>
 #include <memory>
 #include "BoardConst.h"
 #include "ColorMap.h"
@@ -368,15 +369,18 @@ private:
         unsigned bonus;
     };
 
+    /** Snapshot for fast restoration of a previous position.
+        @note state_base and state_color are restored with a single memcpy,
+        they must be subsequent members and their order must not be changed. */
     struct Snapshot
     {
-        unsigned moves_size;
-
-        ColorMap<unsigned> attach_points_size;
-
         StateBase state_base;
 
         ColorMap<StateColor> state_color;
+
+        unsigned moves_size;
+
+        ColorMap<unsigned> attach_points_size;
     };
 
     StateBase m_state_base;
@@ -929,10 +933,14 @@ inline void Board::restore_snapshot()
     LIBBOARDGAME_ASSERT(m_snapshot);
     LIBBOARDGAME_ASSERT(m_snapshot->moves_size <= m_moves.size());
     m_moves.resize(m_snapshot->moves_size);
-    // See also the comment in copy_from() about the following memcpy's.
-    memcpy(&m_state_base, &m_snapshot->state_base, sizeof(StateBase));
-    memcpy(&m_state_color, &m_snapshot->state_color,
-           m_nu_colors * sizeof(StateColor));
+
+    // See also the comment in copy_from() and class Snapshot about the
+    // following memcpy
+    static_assert(offsetof(Snapshot, state_color)
+                  > offsetof(Snapshot, state_base), "");
+    memcpy(&m_state_base, &m_snapshot->state_base,
+           offsetof(Snapshot, state_color) + m_nu_colors * sizeof(StateColor));
+
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         LIBBOARDGAME_ASSERT(m_snapshot->attach_points_size[*i]
