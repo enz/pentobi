@@ -948,7 +948,8 @@ inline void Board::restore_snapshot()
                      - offsetof(Board, m_state_base),
                   "");
     memcpy(&m_state_base, &m_snapshot->state_base,
-           offsetof(Snapshot, state_color) + m_nu_colors * sizeof(StateColor));
+           offsetof(Snapshot, state_color) - offsetof(Snapshot, state_base)
+           + m_nu_colors * sizeof(StateColor));
 
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
