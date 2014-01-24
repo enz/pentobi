@@ -215,9 +215,9 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
 {
     Util::initDataDir();
     QSettings settings;
-    m_level = settings.value("level", 3).toInt();
+    m_level = settings.value("level", 1).toInt();
     if (m_level < 1 || m_level > maxLevel)
-        m_level = 3;
+        m_level = 1;
     auto variantString = settings.value("variant", "").toString();
     Variant variant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
