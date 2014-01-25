@@ -89,6 +89,14 @@ public:
         return LocalMovesListRange(begin, end);
     }
 
+    /** Begin of storage for move lists.
+        Only needed for special use cases like during an in-place construction
+        of PrecompMoves for follow-up positions when we need to compare the
+        index of old iterators with the current get_size() to ensure that
+        we don't overwrite any old content that we still need to read
+        during the construction. */
+    const Move* move_lists_begin() const { return m_move_lists.begin(); }
+
 private:
     /** Compressed begin/end range for lists with moves at a given point.
         This struct will be unpacked into a LocalMovesListRange as a return

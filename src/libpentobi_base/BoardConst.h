@@ -100,6 +100,8 @@ public:
         return m_precomp_moves.get_moves(piece, p, adj_status);
     }
 
+    const PrecompMoves& get_precomp_moves() const { return m_precomp_moves; }
+
     BoardType get_board_type() const;
 
     const Geometry& get_geometry() const;
