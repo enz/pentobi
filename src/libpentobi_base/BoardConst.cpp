@@ -629,9 +629,6 @@ void BoardConst::create_moves()
     m_full_move_table.reset(new FullMoveTable);
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
-    if (log_move_creation)
-        log() << "Created moves: " << m_move_info.size() << ", "
-              << "precomputed: " << m_precomp_moves.get_size() << '\n';
     for (GeometryIterator i(m_geo); i; ++i)
         for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
             for (Piece::IntType k = 0; k < m_nu_pieces; ++k)
@@ -644,6 +641,9 @@ void BoardConst::create_moves()
                 auto end = m_precomp_moves.get_size() - begin;
                 m_precomp_moves.set_list_range(*i, j, piece, begin, end);
             }
+    if (log_move_creation)
+        log() << "Created moves: " << m_move_info.size() << ", "
+              << "precomputed: " << m_precomp_moves.get_size() << '\n';
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
 
