@@ -1,21 +1,22 @@
 Version 7.UNKNOWN (master)
 ==========================
 
-* Increased playing strength in game variant Trigon
-* Previously, multi-core CPUs made the move generation much faster but
-  there was a drop in playing strength compared to a single-core CPU on
-  the same playing level. This effect is now much smaller.
-* The source code now requires MSVC 2013 (because a larger subset of
-  C++11 features is used).
-* The source code distribution now uses xz instead of gzip for 
+* Increased playing strength in game variant Trigon.
+* Improved performance on multi-core CPUs: Previously, the move
+  generation was faster on multi-core CPUs but there was a small drop
+  in playing strength compared to the same playing level on a
+  single-core CPU. This effect has been reduced.
+* The source code no longer compiles with MSVC 2012 but requires
+  MSVC 2013 because a larger subset of C++11 features is used.
+* The source code distribution now uses xz instead of gzip for
   compression.
-* The PNG versions of the icons are no longer included in the source code
-  but generated at build time from the SVG icons by a small Qt-based helper
-  program (src/convert). This adds a build time dependency on QtSvg.
+* The PNG versions of the icons are no longer included in the source
+  code but generated at build time from the SVG icons by a small
+  Qt-based helper program. This adds a build time dependency on QtSvg.
 * A XPM icon is now installed to share/pixmaps.
 * The configure option USE_BOOST_THREAD is no longer supported.
-  For building with MinGW, a version of MinGW with support for std::thread
-  is now required (e.g. from mingwbuilds.sf.net).
+  For building with MinGW, a version of MinGW with support for
+  std::thread is now required (e.g. from mingwbuilds.sf.net).
 
 
 Version 7.1.UNKNOWN (v7-fixes)
