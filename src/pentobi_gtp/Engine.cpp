@@ -127,6 +127,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "bias_term_constant " << s.get_bias_term_constant() << '\n'
             << "bias_term_interval " << s.get_bias_term_interval() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
+            << "expand_threshold_inc " << s.get_expand_threshold_inc() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "level " << p.get_level() << '\n'
             << "rave_dist_final " << s.get_rave_dist_final() << '\n'
@@ -152,6 +153,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_bias_term_interval(args.parse<unsigned>(1));
         else if (name == "expand_threshold")
             s.set_expand_threshold(args.parse<Float>(1));
+        else if (name == "expand_threshold_inc")
+            s.set_expand_threshold_inc(args.parse<Float>(1));
         else if (name == "fixed_simulations")
             p.set_fixed_simulations(args.parse<Float>(1));
         else if (name == "level")

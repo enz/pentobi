@@ -293,7 +293,7 @@ void Search::set_default_param(Variant variant)
     set_skip_bias_term_min_count(30000);
     set_bias_term_interval(20);
     set_expand_threshold(0);
-    set_expand_threshold_incr(1.5f);
+    set_expand_threshold_inc(1.5f);
     set_rave_weight(0.7f);
     set_rave_max_child_count(2000);
     // The following parameters are currently tuned for duo, classic_2 and

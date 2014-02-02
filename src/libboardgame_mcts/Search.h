@@ -241,9 +241,9 @@ public:
     Float get_expand_threshold() const;
 
     /** Increase of the expand threshold per in-tree move played. */
-    void set_expand_threshold_incr(Float n);
+    void set_expand_threshold_inc(Float n);
 
-    Float get_expand_threshold_incr() const;
+    Float get_expand_threshold_inc() const;
 
     /** Constant used in UCT bias term.
         @see BiasTerm */
@@ -502,7 +502,7 @@ private:
 
     Float m_expand_threshold;
 
-    Float m_expand_threshold_incr;
+    Float m_expand_threshold_inc;
 
     bool m_deterministic;
 
@@ -731,7 +731,7 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
       m_bias_term_interval(1),
       m_skip_bias_term_min_count(numeric_limits<Float>::max()),
       m_expand_threshold(0),
-      m_expand_threshold_incr(0),
+      m_expand_threshold_inc(0),
       m_deterministic(false),
       m_reuse_subtree(true),
       m_reuse_tree(false),
@@ -968,9 +968,9 @@ inline auto Search<S, M, R>::get_expand_threshold() const -> Float
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_expand_threshold_incr() const -> Float
+inline auto Search<S, M, R>::get_expand_threshold_inc() const -> Float
 {
-    return m_expand_threshold_incr;
+    return m_expand_threshold_inc;
 }
 
 template<class S, class M, class R>
@@ -1160,7 +1160,7 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state, bool& is_terminal)
         thread_state.simulation.nodes.push_back(node);
         state.play_in_tree(node->get_move());
         ++depth;
-        expand_threshold += m_expand_threshold_incr;
+        expand_threshold += m_expand_threshold_inc;
     }
     state.finish_in_tree();
     if (node->get_visit_count() > expand_threshold || node == &root)
@@ -1594,9 +1594,9 @@ void Search<S, M, R>::set_expand_threshold(Float n)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_expand_threshold_incr(Float n)
+void Search<S, M, R>::set_expand_threshold_inc(Float n)
 {
-    m_expand_threshold_incr = n;
+    m_expand_threshold_inc = n;
 }
 
 template<class S, class M, class R>
