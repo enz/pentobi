@@ -2859,24 +2859,15 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
                               Q_ARG(int, 0));
 }
 
-void MainWindow::selectNamedPiece(const char* name1, const char* name2,
-                                  const char* name3, const char* name4)
+void MainWindow::selectNamedPiece(initializer_list<const char*> names)
 {
     auto& bd = getBoard();
     vector<Piece> pieces;
     Piece piece;
-    if (bd.get_piece_by_name(name1, piece)
-        && bd.is_piece_left(m_currentColor, piece))
-        pieces.push_back(piece);
-    if (name2 != nullptr && bd.get_piece_by_name(name2, piece)
-        && bd.is_piece_left(m_currentColor, piece))
-        pieces.push_back(piece);
-    if (name3 != nullptr && bd.get_piece_by_name(name3, piece)
-        && bd.is_piece_left(m_currentColor, piece))
-        pieces.push_back(piece);
-    if (name4 != nullptr && bd.get_piece_by_name(name4, piece)
-        && bd.is_piece_left(m_currentColor, piece))
-        pieces.push_back(piece);
+    for (auto name : names)
+        if (bd.get_piece_by_name(name, piece)
+            && bd.is_piece_left(m_currentColor, piece))
+            pieces.push_back(piece);
     if (pieces.empty())
         return;
     piece = m_guiBoard->getSelectedPiece();
@@ -2934,97 +2925,97 @@ void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
 
 void MainWindow::selectPiece1()
 {
-    selectNamedPiece("1");
+    selectNamedPiece({"1"});
 }
 
 void MainWindow::selectPiece2()
 {
-    selectNamedPiece("2");
+    selectNamedPiece({"2"});
 }
 
 void MainWindow::selectPieceA()
 {
-    selectNamedPiece("A6", "A4");
+    selectNamedPiece({"A6", "A4"});
 }
 
 void MainWindow::selectPieceC()
 {
-    selectNamedPiece("C5", "C4");
+    selectNamedPiece({"C5", "C4"});
 }
 
 void MainWindow::selectPieceF()
 {
-    selectNamedPiece("F");
+    selectNamedPiece({"F"});
 }
 
 void MainWindow::selectPieceG()
 {
-    selectNamedPiece("G");
+    selectNamedPiece({"G"});
 }
 
 void MainWindow::selectPieceI()
 {
-    selectNamedPiece("I6", "I5", "I4", "I3");
+    selectNamedPiece({"I6", "I5", "I4", "I3"});
 }
 
 void MainWindow::selectPieceL()
 {
-    selectNamedPiece("L6", "L5", "L4");
+    selectNamedPiece({"L6", "L5", "L4"});
 }
 
 void MainWindow::selectPieceN()
 {
-    selectNamedPiece("N");
+    selectNamedPiece({"N"});
 }
 
 void MainWindow::selectPieceO()
 {
-    selectNamedPiece("O");
+    selectNamedPiece({"O"});
 }
 
 void MainWindow::selectPieceP()
 {
-    selectNamedPiece("P6", "P5", "P");
+    selectNamedPiece({"P6", "P5", "P"});
 }
 
 void MainWindow::selectPieceS()
 {
-    selectNamedPiece("S");
+    selectNamedPiece({"S"});
 }
 
 void MainWindow::selectPieceT()
 {
-    selectNamedPiece("T5", "T4");
+    selectNamedPiece({"T5", "T4"});
 }
 
 void MainWindow::selectPieceU()
 {
-    selectNamedPiece("U");
+    selectNamedPiece({"U"});
 }
 
 void MainWindow::selectPieceV()
 {
-    selectNamedPiece("V", "V5", "V3");
+    selectNamedPiece({"V", "V5", "V3"});
 }
 
 void MainWindow::selectPieceW()
 {
-    selectNamedPiece("W");
+    selectNamedPiece({"W"});
 }
 
 void MainWindow::selectPieceX()
 {
-    selectNamedPiece("X");
+    selectNamedPiece({"X"});
 }
 
 void MainWindow::selectPieceY()
 {
-    selectNamedPiece("Y");
+    selectNamedPiece({"Y"});
 }
 
 void MainWindow::selectPieceZ()
 {
-    selectNamedPiece("Z5", "Z4");
+    selectNamedPiece({"Z5", "Z4"});
 }
 
 void MainWindow::setCommentText(const QString& text)
