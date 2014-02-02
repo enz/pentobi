@@ -223,17 +223,17 @@ public:
         used always, which speeds up child selection.
         The default value is 1, which means that the bias term is always
         used.
-        @see set_skip_bias_term_min_count. */
+        @see set_skip_bias_term_min. */
     void set_bias_term_interval(unsigned n);
 
     /** See set_bias_term_interval(). */
     unsigned get_bias_term_interval() const;
 
     /** See set_bias_term_interval(). */
-    void set_skip_bias_term_min_count(Float n);
+    void set_skip_bias_term_min(Float n);
 
     /** See set_bias_term_interval(). */
-    Float get_skip_bias_term_min_count() const;
+    Float get_skip_bias_term_min() const;
 
     /** Minimum count of a node to be expanded. */
     void set_expand_threshold(Float n);
@@ -268,14 +268,14 @@ public:
     bool get_prune_full_tree() const;
 
     /** Maximum parent visit count for applying RAVE. */
-    void set_rave_max_parent_count(Float value);
+    void set_rave_parent_max(Float value);
 
-    Float get_rave_max_parent_count() const;
+    Float get_rave_parent_max() const;
 
     /** Maximum child value count for applying RAVE. */
-    void set_rave_max_child_count(Float value);
+    void set_rave_child_max(Float value);
 
-    Float get_rave_max_child_count() const;
+    Float get_rave_child_max() const;
 
     /** Weight used for adding RAVE values to the node value. */
     void set_rave_weight(Float value);
@@ -498,7 +498,7 @@ private:
     unsigned m_bias_term_interval;
 
     /** See set_bias_term_min_count(). */
-    Float m_skip_bias_term_min_count;
+    Float m_skip_bias_term_min;
 
     Float m_expand_threshold;
 
@@ -524,9 +524,9 @@ private:
 
     Float m_prune_count_start;
 
-    Float m_rave_max_parent_count;
+    Float m_rave_parent_max;
 
-    Float m_rave_max_child_count;
+    Float m_rave_child_max;
 
     Float m_rave_weight;
 
@@ -729,7 +729,7 @@ template<class S, class M, class R>
 Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
       m_bias_term_interval(1),
-      m_skip_bias_term_min_count(numeric_limits<Float>::max()),
+      m_skip_bias_term_min(numeric_limits<Float>::max()),
       m_expand_threshold(0),
       m_expand_threshold_inc(0),
       m_deterministic(false),
@@ -737,8 +737,8 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
       m_reuse_tree(false),
       m_prune_full_tree(true),
       m_prune_count_start(16),
-      m_rave_max_parent_count(50000),
-      m_rave_max_child_count(2000),
+      m_rave_parent_max(50000),
+      m_rave_child_max(2000),
       m_rave_weight(0.3f),
       m_rave_dist_final(0),
       m_tree_memory(memory == 0 ? 256000000 : memory),
@@ -873,7 +873,7 @@ inline bool Search<S, M, R>::check_skip_bias_term(ThreadState& thread_state,
                                                   Float node_count,
                                                   unsigned depth) const
 {
-    if (node_count <= m_skip_bias_term_min_count)
+    if (node_count <= m_skip_bias_term_min)
         return false;
     // A different counter is used for each depth for checking whether to skip
     // the bias term. A global counter could systemtically skip nodes at a
@@ -1017,15 +1017,15 @@ inline auto Search<S, M, R>::get_rave_dist_final() const -> Float
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_rave_max_parent_count() const -> Float
+inline auto Search<S, M, R>::get_rave_parent_max() const -> Float
 {
-    return m_rave_max_parent_count;
+    return m_rave_parent_max;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_rave_max_child_count() const -> Float
+inline auto Search<S, M, R>::get_rave_child_max() const -> Float
 {
-    return m_rave_max_child_count;
+    return m_rave_child_max;
 }
 
 template<class S, class M, class R>
@@ -1047,9 +1047,9 @@ inline bool Search<S, M, R>::get_reuse_tree() const
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_skip_bias_term_min_count() const -> Float
+inline auto Search<S, M, R>::get_skip_bias_term_min() const -> Float
 {
-    return m_skip_bias_term_min_count;
+    return m_skip_bias_term_min;
 }
 
 template<class S, class M, class R>
@@ -1624,15 +1624,15 @@ void Search<S, M, R>::set_rave_dist_final(Float v)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_rave_max_parent_count(Float n)
+void Search<S, M, R>::set_rave_parent_max(Float n)
 {
-    m_rave_max_parent_count = n;
+    m_rave_parent_max = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_rave_max_child_count(Float n)
+void Search<S, M, R>::set_rave_child_max(Float n)
 {
-    m_rave_max_child_count = n;
+    m_rave_child_max = n;
 }
 
 template<class S, class M, class R>
@@ -1654,9 +1654,9 @@ void Search<S, M, R>::set_reuse_tree(bool enable)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_skip_bias_term_min_count(Float n)
+void Search<S, M, R>::set_skip_bias_term_min(Float n)
 {
-    m_skip_bias_term_min_count = n;
+    m_skip_bias_term_min = n;
 }
 
 template<class S, class M, class R>
@@ -1741,7 +1741,7 @@ void Search<S, M, R>::update_rave(ThreadState& thread_state)
     while (true)
     {
         const auto node = nodes[i];
-        if (node->get_visit_count() > m_rave_max_parent_count)
+        if (node->get_visit_count() > m_rave_parent_max)
             break;
         auto mv = state.get_move(i);
         auto player = mv.player;
@@ -1757,7 +1757,7 @@ void Search<S, M, R>::update_rave(ThreadState& thread_state)
         {
             auto mv = it->get_move();
             if (! was_played[player][mv]
-                || it->get_value_count() > m_rave_max_child_count)
+                || it->get_value_count() > m_rave_child_max)
                 continue;
             auto first = first_play[player][mv.to_int()];
             LIBBOARDGAME_ASSERT(first > i);

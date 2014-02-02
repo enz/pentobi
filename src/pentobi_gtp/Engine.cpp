@@ -131,13 +131,12 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "level " << p.get_level() << '\n'
             << "rave_dist_final " << s.get_rave_dist_final() << '\n'
-            << "rave_max_child_count " << s.get_rave_max_child_count() << '\n'
-            << "rave_max_parent_count " << s.get_rave_max_parent_count() << '\n'
+            << "rave_child_max " << s.get_rave_child_max() << '\n'
+            << "rave_parent_max " << s.get_rave_parent_max() << '\n'
             << "rave_weight " << s.get_rave_weight() << '\n'
             << "reuse_subtree " << s.get_reuse_subtree() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
-            << "skip_bias_term_min_count " << s.get_skip_bias_term_min_count()
-            << '\n'
+            << "skip_bias_term_min " << s.get_skip_bias_term_min() << '\n'
             << "use_book " << p.get_use_book() << '\n';
     else
     {
@@ -161,18 +160,18 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             p.set_level(args.parse<int>(1));
         else if (name == "rave_dist_final")
             s.set_rave_dist_final(args.parse<Float>(1));
-        else if (name == "rave_max_child_count")
-            s.set_rave_max_child_count(args.parse<Float>(1));
-        else if (name == "rave_max_parent_count")
-            s.set_rave_max_parent_count(args.parse<Float>(1));
+        else if (name == "rave_child_max")
+            s.set_rave_child_max(args.parse<Float>(1));
+        else if (name == "rave_parent_max")
+            s.set_rave_parent_max(args.parse<Float>(1));
         else if (name == "rave_weight")
             s.set_rave_weight(args.parse<Float>(1));
         else if (name == "reuse_subtree")
             s.set_reuse_subtree(args.parse<bool>(1));
         else if (name == "score_modification")
             s.set_score_modification(args.parse<Float>(1));
-        else if (name == "skip_bias_term_min_count")
-            s.set_skip_bias_term_min_count(args.parse<Float>(1));
+        else if (name == "skip_bias_term_min")
+            s.set_skip_bias_term_min(args.parse<Float>(1));
         else if (name == "use_book")
             p.set_use_book(args.parse<bool>(1));
         else

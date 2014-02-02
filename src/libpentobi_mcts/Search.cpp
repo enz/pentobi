@@ -290,12 +290,12 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
 void Search::set_default_param(Variant variant)
 {
     log() << "Setting default parameters for " << to_string(variant) << '\n';
-    set_skip_bias_term_min_count(30000);
+    set_skip_bias_term_min(30000);
     set_bias_term_interval(20);
     set_expand_threshold(0);
     set_expand_threshold_inc(1.5f);
     set_rave_weight(0.7f);
-    set_rave_max_child_count(2000);
+    set_rave_child_max(2000);
     // The following parameters are currently tuned for duo, classic_2 and
     // trigon_2 and used for all other game variants with the same board type
     switch (variant)
@@ -303,18 +303,18 @@ void Search::set_default_param(Variant variant)
     case Variant::duo:
     case Variant::junior:
         set_bias_term_constant(0.07f);
-        set_rave_max_parent_count(25000);
+        set_rave_parent_max(25000);
         break;
     case Variant::classic_2:
     case Variant::classic:
         set_bias_term_constant(0.08f);
-        set_rave_max_parent_count(50000);
+        set_rave_parent_max(50000);
         break;
     case Variant::trigon_2:
     case Variant::trigon_3:
     case Variant::trigon:
         set_bias_term_constant(0.08f);
-        set_rave_max_parent_count(50000);
+        set_rave_parent_max(50000);
         break;
     default:
         LIBBOARDGAME_ASSERT(false);
