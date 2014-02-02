@@ -1,8 +1,11 @@
 ; Script for creating a Windows installer with NSIS (http://nsis.sf.net)
+;
 ; The installer assumes that Pentobi was compiled with static linking and will
 ; not include Qt or C++-runtime DLLs. For example with MinGW, this requires the
 ; compiler options -static, -static-libgcc and -static-libstdc++ and a static
-; version of the Qt libraries.
+; version of the Qt libraries. It also assumes that the Qt libraries were
+; compiled with -prefix "" such that it finds the translation files relative
+; to the Pentobi installation directory.
 
 !define PENTOBI_VERSION "@PENTOBI_VERSION@"
 !define PENTOBI_SRC_DIR "@CMAKE_SOURCE_DIR@"
@@ -68,7 +71,6 @@ File /r "${PENTOBI_SRC_DIR}\src\pentobi\manual"
 File /oname=COPYING.txt "${PENTOBI_SRC_DIR}\COPYING"
 File /oname=Pentobi.exe "${PENTOBI_BUILD_DIR}\src\pentobi\pentobi.exe"
 File "${PENTOBI_SRC_DIR}\src\pentobi\pentobi.ico"
-File "${PENTOBI_SRC_DIR}\windows_installer\qt.conf"
 
 WriteRegStr HKLM "Software\Pentobi" "" $INSTDIR
 
@@ -116,7 +118,6 @@ Section "Uninstall"
  
 Delete "$INSTDIR\Uninstall.exe"
 Delete "$INSTDIR\Pentobi.exe"
-Delete "$INSTDIR\qt.conf"
 Delete "$INSTDIR\COPYING.txt"
 Delete "$INSTDIR\pentobi.ico"
 Delete "$INSTDIR\blksgf.ico"
