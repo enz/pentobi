@@ -11,7 +11,6 @@ set(pentobi_SRCS
   AnalyzeGameWindow.cpp
   AnalyzeSpeedDialog.cpp
   Application.cpp
-  ExportImage.cpp
   MainWindow.cpp
   Main.cpp
   RatedGamesList.cpp

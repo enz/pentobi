@@ -18,6 +18,7 @@
 #include <QDir>
 #include <QDesktopWidget>
 #include <QFileDialog>
+#include <QImageWriter>
 #include <QInputDialog>
 #include <QLabel>
 #include <QMenu>
@@ -33,7 +34,6 @@
 #include <QtConcurrentRun>
 #include "AnalyzeGameWindow.h"
 #include "AnalyzeSpeedDialog.h"
-#include "ExportImage.h"
 #include "RatingDialog.h"
 #include "ShowMessage.h"
 #include "Util.h"
@@ -1603,10 +1603,11 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
 
 void MainWindow::exportAsciiArt()
 {
-    QString file = QFileDialog::getSaveFileName(this, "", "",
+    QString file = QFileDialog::getSaveFileName(this, "", getLastDir(),
                                                 tr("Text files (*.txt)"));
     if (file.isEmpty())
         return;
+    rememberDir(file);
     ofstream out(file.toLocal8Bit().constData());
     auto& bd = getBoard();
     bd.write(out, false);
@@ -1616,8 +1617,49 @@ void MainWindow::exportAsciiArt()
 
 void MainWindow::exportImage()
 {
-    ::exportImage(this, getBoard(), m_actionCoordinates->isChecked(),
-                  m_guiBoard->getLabels());
+    QSettings settings;
+    auto size = settings.value("export_image_size", 420).toInt();
+    QInputDialog dialog(this);
+    dialog.setWindowFlags(dialog.windowFlags()
+                          & ~Qt::WindowContextHelpButtonHint);
+    dialog.setWindowTitle(qApp->translate("ExportImage", "Export Image"));
+    dialog.setLabelText(qApp->translate("ExportImage", "Image size:"));
+    dialog.setInputMode(QInputDialog::IntInput);
+    dialog.setIntRange(0, 2147483647);
+    dialog.setIntStep(40);
+    dialog.setIntValue(size);
+    if (! dialog.exec())
+        return;
+    size = dialog.intValue();
+    settings.setValue("export_image_size", size);
+    bool coordinates = m_actionCoordinates->isChecked();
+    BoardPainter boardPainter;
+    boardPainter.setCoordinates(coordinates);
+    boardPainter.setCoordinateColor(QColor(100, 100, 100));
+    QImage image(size, size, QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter;
+    painter.begin(&image);
+    if (coordinates)
+        painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
+    auto& bd = getBoard();
+    boardPainter.paintEmptyBoard(painter, size, size, bd.get_variant(),
+                                 bd.get_geometry());
+    boardPainter.paintPieces(painter, bd.get_grid(), &m_guiBoard->getLabels());
+    painter.end();
+    QString file;
+    while (true)
+    {
+        file = QFileDialog::getSaveFileName(this, file, getLastDir());
+        if (file.isEmpty())
+            break;
+        rememberDir(file);
+        QImageWriter writer(file);
+        if (writer.write(image))
+            break;
+        else
+            showError(writer.errorString());
+    }
 }
 
 void MainWindow::findMove()
