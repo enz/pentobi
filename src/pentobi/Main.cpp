@@ -69,6 +69,10 @@ int main(int argc, char* argv[])
 
     try
     {
+        // For some reason, labels in the status bar have a border on
+        // Windows 7 with Qt 4.8. We don't want that.
+        app.setStyleSheet("QStatusBar::item { border: 0px solid black };");
+
         // Allow the user to override installation paths with a config file in
         // the directory of the executable to test it without installation
         QString manualDir;
