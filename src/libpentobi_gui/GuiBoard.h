@@ -12,12 +12,14 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <QTimer>
 #include <QWidget>
 #include "BoardPainter.h"
 #include "libboardgame_base/CoordPoint.h"
 #include "libpentobi_base/Board.h"
 
+using namespace std;
 using libpentobi_base::Color;
 using libboardgame_base::CoordPoint;
 using libpentobi_base::Board;
@@ -36,8 +38,6 @@ class GuiBoard
 
 public:
     GuiBoard(QWidget* parent, const Board& bd);
-
-    ~GuiBoard();
 
     void setCoordinates(bool enable);
 
@@ -127,9 +127,9 @@ private:
 
     BoardPainter m_boardPainter;
 
-    QPixmap* m_emptyBoardPixmap;
+    unique_ptr<QPixmap> m_emptyBoardPixmap;
 
-    QPixmap* m_boardPixmap;
+    unique_ptr<QPixmap> m_boardPixmap;
 
     bool m_isMoveShown;
 

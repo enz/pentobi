@@ -54,20 +54,12 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_dirty(true),
       m_selectedPiece(Piece::null()),
       m_selectedPieceTransform(0),
-      m_emptyBoardPixmap(0),
-      m_boardPixmap(0),
       m_isMoveShown(false)
 {
     setMinimumWidth(14 * (Point::max_width + 2));
     setMinimumHeight(14 * (Point::max_height + 2));
     connect(&m_currentMoveShownAnimationTimer, SIGNAL(timeout()),
             SLOT(showMoveAnimation()));
-}
-
-GuiBoard::~GuiBoard()
-{
-    delete m_emptyBoardPixmap;
-    delete m_boardPixmap;
 }
 
 void GuiBoard::changeEvent(QEvent* event)
@@ -301,14 +293,12 @@ void GuiBoard::paintEvent(QPaintEvent*)
         return;
     if (m_emptyBoardPixmap == nullptr || m_emptyBoardPixmap->size() != size())
     {
-        delete m_emptyBoardPixmap;
-        m_emptyBoardPixmap = new QPixmap(size());
+        m_emptyBoardPixmap.reset(new QPixmap(size()));
         m_emptyBoardDirty = true;
     }
     if (m_boardPixmap == nullptr || m_boardPixmap->size() != size())
     {
-        delete m_boardPixmap;
-        m_boardPixmap = new QPixmap(size());
+        m_boardPixmap.reset(new QPixmap(size()));
         m_dirty = true;
     }
     if (m_emptyBoardDirty)
@@ -317,7 +307,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
             QApplication::palette().color(QPalette::WindowText);
         m_boardPainter.setCoordinateColor(coordLabelColor);
         m_emptyBoardPixmap->fill(Qt::transparent);
-        QPainter painter(m_emptyBoardPixmap);
+        QPainter painter(m_emptyBoardPixmap.get());
         m_boardPainter.paintEmptyBoard(painter, width(), height(), m_variant,
                                        m_bd.get_geometry());
         m_emptyBoardDirty = false;
@@ -325,7 +315,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
     if (m_dirty)
     {
         m_boardPixmap->fill(Qt::transparent);
-        QPainter painter(m_boardPixmap);
+        QPainter painter(m_boardPixmap.get());
         painter.drawPixmap(0, 0, *m_emptyBoardPixmap);
         m_boardPainter.paintPieces(painter, m_pointState, &m_labels);
         m_dirty = false;
