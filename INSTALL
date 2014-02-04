@@ -8,7 +8,7 @@ and MSVC 2013). For creating cross-platform makefiles, CMake (>= 2.8.9) is
 required.
 
 Ubuntu 13.10 provides suitable versions of the required tools and libraries in
-its package repository. The packages can be installed with the shell command:
+its package repository. They can be installed with the shell command:
 
   sudo apt-get install cmake g++ libqt4-dev make qt4-default
 
@@ -22,7 +22,14 @@ Pentobi can be compiled with cmake using the shell command:
 
 To build Pentobi with Qt 5 instead of Qt 4, use the cmake option
 -DUSE_QT5=ON and make sure that the development packages for Qt 5 are
-installed (on Ubuntu 13.10: qt5-default, qttools5-dev, qttools5-dev-tools).
+installed.
+
+Ubuntu 13.10 provides suitable versions of the required Qt 5 tools and libraries
+in its package repository. They can be installed with the shell command:
+
+  sudo apt-get install \
+    qt5-default qttools5-dev qttools5-dev-tools libqt5svg5-dev
+
 The KDE thumbnailer plugin (see below) cannot be compiled with Qt 5.
 
 === Building the KDE thumbnailer plugin ===
