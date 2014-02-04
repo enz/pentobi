@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Version 7.UNKNOWN (master)
 ==========================
 
@@ -19,8 +20,8 @@ Version 7.UNKNOWN (master)
   std::thread is now required (e.g. from mingwbuilds.sf.net).
 
 
-Version 7.1.UNKNOWN (v7-fixes)
-==============================
+Version 7.2 (30 Jan 2014)
+=========================
 
 * Hyphens used as minus signs in manpage (bug #9)
 * Added keywords section to desktop entry to silence lintian
