@@ -342,7 +342,8 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                     settings.value("autosave_rated_color", 0).toUInt();
                 if (ratedGameColor < get_nu_colors(variant))
                 {
-                    m_ratedGameColor = Color(ratedGameColor);
+                    m_ratedGameColor =
+                        Color(static_cast<Color::IntType>(ratedGameColor));
                     m_computerColors.fill(true);
                     auto& bd = getBoard();
                     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
@@ -2001,7 +2002,8 @@ void MainWindow::genMoveFinished()
     if (elapsed < 800 && ! m_genMoveInterrupted)
     {
         // Enforce minimum thinking time
-        QTimer::singleShot(800 - elapsed, this, SLOT(genMoveFinished()));
+        QTimer::singleShot(static_cast<int>(800 - elapsed), this,
+                           SLOT(genMoveFinished()));
         return;
     }
     GenMoveResult result = m_genMoveWatcher.future().result();
@@ -2247,7 +2249,7 @@ void MainWindow::initVariantActions()
 void MainWindow::initPieceSelectors()
 {
     auto& bd = getBoard();
-    for (unsigned i = 0; i < Color::range; ++i)
+    for (Color::IntType i = 0; i < Color::range; ++i)
     {
         bool isVisible = (i < bd.get_nu_colors());
         m_pieceSelector[Color(i)]->setVisible(isVisible);
@@ -2435,7 +2437,7 @@ void MainWindow::newRatedGame()
         InitialRatingDialog dialog(this);
         if (dialog.exec() != QDialog::Accepted)
             return;
-        m_history->init(Rating(dialog.getRating()));
+        m_history->init(Rating(static_cast<float>(dialog.getRating())));
     }
     int level;
     m_history->getNextRatedGameSettings(maxLevel, level, m_ratedGameColor);

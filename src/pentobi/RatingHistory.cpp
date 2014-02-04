@@ -102,7 +102,9 @@ QString RatingHistory::getFile(unsigned n) const
 void RatingHistory::getNextRatedGameSettings(int maxLevel, int& level,
                                              Color& userColor)
 {
-    userColor = Color(m_random.generate() % get_nu_players(m_variant));
+    userColor =
+        Color(static_cast<Color::IntType>(
+                  m_random.generate() % get_nu_players(m_variant)));
     float minDiff = 0; // Initialize to avoid compiler warning
     for (int i = 1; i <= maxLevel; ++i)
     {
@@ -143,7 +145,7 @@ void RatingHistory::load(Variant variant)
     if (! file)
         return;
     string line;
-    while (getline(file, line))
+    while (getline(file, line) && m_games.size() < maxGames)
     {
         istringstream in(line);
         GameInfo info;
@@ -154,7 +156,7 @@ void RatingHistory::load(Variant variant)
         info.date = QString(date.c_str());
         if (! in || c >= get_nu_colors(variant))
             return;
-        info.color = Color(c);
+        info.color = Color(static_cast<Color::IntType>(c));
         m_games.push_back(info);
     }
     size_t nuGames = m_games.size();

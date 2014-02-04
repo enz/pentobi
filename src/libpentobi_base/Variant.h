@@ -59,7 +59,7 @@ bool parse_variant_id(const string& s, Variant& variant);
 
 Color::IntType get_nu_colors(Variant variant);
 
-unsigned get_nu_players(Variant variant);
+Color::IntType get_nu_players(Variant variant);
 
 //-----------------------------------------------------------------------------
 

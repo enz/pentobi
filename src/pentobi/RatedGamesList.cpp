@@ -92,7 +92,9 @@ void RatedGamesList::updateContent(Variant variant,
     header->setResizeMode(QHeaderView::ResizeToContents);
 #endif
     header->setStretchLastSection(true);
-    int nuRows = history.getGameInfos().size();
+    int nuRows = 0;
+    if (history.getGameInfos().size() <= numeric_limits<int>::max())
+        nuRows = static_cast<int>(history.getGameInfos().size());
     m_model->setRowCount(nuRows);
     setSortingEnabled(false);
     for (int i = 0; i < nuRows; ++i)

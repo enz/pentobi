@@ -73,7 +73,7 @@ public:
 
         bool m_is_tree_full;
 
-        int m_nu_children;
+        unsigned short m_nu_children;
 
         Float m_best_value;
 
@@ -101,7 +101,7 @@ public:
     const Node& get_node(NodeIdx i) const;
 
     void link_children(const Node& node, const Node* first_child,
-                       unsigned nu_children);
+                       unsigned short nu_children);
 
     void set_max_nodes(size_t max_nodes);
 
@@ -205,7 +205,6 @@ template<typename N>
 inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
                                              Float count)
 {
-    LIBBOARDGAME_ASSERT(m_nu_children < numeric_limits<int>::max());
     if (! (m_is_tree_full |= ! m_tree.create_node(m_thread_id, mv, value,
                                                   count)))
     {
@@ -307,7 +306,7 @@ bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
         target_node_non_const.unlink_children();
         return ! abort;
     }
-    unsigned nu_children = node.get_nu_children();
+    auto nu_children = node.get_nu_children();
     auto& first_child = get_node(node.get_first_child());
     // Create target children in the equivalent thread storage as in source.
     // This ensures that the thread storage will not overflow (because the
@@ -407,7 +406,7 @@ inline void Tree<N>::init_root_value(Float value, Float count)
 
 template<typename N>
 inline void Tree<N>::link_children(const Node& node, const Node* first_child,
-                                   unsigned nu_children)
+                                   unsigned short nu_children)
 {
     NodeIdx first_child_idx = static_cast<NodeIdx>(first_child - m_nodes.get());
     LIBBOARDGAME_ASSERT(first_child_idx > 0);

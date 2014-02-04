@@ -23,7 +23,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_basic)
     const char* argv[] =
         { nullptr, "--second", "secondval", "--first", "firstval",
           "--fourth", "-c", "arg1", "arg2" };
-    int argc = sizeof(argv) / sizeof(argv[0]);
+    int argc = static_cast<int>(sizeof(argv) / sizeof(argv[0]));
     Options opt(argc, argv, specs);
     LIBBOARDGAME_CHECK(opt.contains("first"));
     LIBBOARDGAME_CHECK_EQUAL(opt.get("first"), "firstval");
@@ -43,7 +43,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_end_options)
     vector<string> specs = { "first:" };
     const char* argv[] =
         { nullptr, "--first", "firstval", "--", "--arg1" };
-    int argc = sizeof(argv) / sizeof(argv[0]);
+    int argc = static_cast<int>(sizeof(argv) / sizeof(argv[0]));
     Options opt(argc, argv, specs);
     LIBBOARDGAME_CHECK_EQUAL(opt.get("first"), "firstval");
     auto& args = opt.get_args();
@@ -55,7 +55,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_missing_val)
 {
     vector<string> specs = { "first:" };
     const char* argv[] = { nullptr, "--first" };
-    int argc = sizeof(argv) / sizeof(argv[0]);
+    int argc = static_cast<int>(sizeof(argv) / sizeof(argv[0]));
     LIBBOARDGAME_CHECK_THROW(Options opt(argc, argv, specs), Exception);
 }
 
@@ -63,7 +63,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_nospace)
 {
     vector<string> specs = { "first|a:", "second|b:" };
     const char* argv[] = { nullptr, "-abc" };
-    int argc = sizeof(argv) / sizeof(argv[0]);
+    int argc = static_cast<int>(sizeof(argv) / sizeof(argv[0]));
     Options opt(argc, argv, specs);
     LIBBOARDGAME_CHECK_EQUAL(opt.get("first"), "bc");
 }
@@ -72,7 +72,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_multi_short_with_val)
 {
     vector<string> specs = { "first|a", "second|b:" };
     const char* argv[] = { nullptr, "-ab", "c" };
-    int argc = sizeof(argv) / sizeof(argv[0]);
+    int argc = static_cast<int>(sizeof(argv) / sizeof(argv[0]));
     Options opt(argc, argv, specs);
     LIBBOARDGAME_CHECK(opt.contains("first"));
     LIBBOARDGAME_CHECK_EQUAL(opt.get("second"), "c");
@@ -82,7 +82,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_type)
 {
     vector<string> specs = { "first:", "second:" };
     const char* argv[] = { nullptr, "--first", "10", "--second", "foo" };
-    int argc = sizeof(argv) / sizeof(argv[0]);
+    int argc = static_cast<int>(sizeof(argv) / sizeof(argv[0]));
     Options opt(argc, argv, specs);
     LIBBOARDGAME_CHECK_EQUAL(opt.get<int>("first"), 10);
     LIBBOARDGAME_CHECK_THROW(opt.get<int>("second"), Exception);

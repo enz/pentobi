@@ -42,7 +42,7 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 
 void ComputerColorDialog::accept()
 {
-    unsigned nu_colors = get_nu_colors(m_variant);
+    auto nu_colors = get_nu_colors(m_variant);
     if (get_nu_players(m_variant) == nu_colors)
         for (ColorIterator i(nu_colors); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();

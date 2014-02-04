@@ -29,17 +29,16 @@ Color::IntType get_nu_colors(Variant variant)
         return 2;
     case Variant::trigon_3:
         return 3;
-    case Variant::classic:
-    case Variant::classic_2:
-    case Variant::trigon:
-    case Variant::trigon_2:
+    default:
+        LIBBOARDGAME_ASSERT(variant == Variant::classic
+                            || variant == Variant::classic_2
+                            || variant == Variant::trigon
+                            || variant == Variant::trigon_2);
         return 4;
     }
-    LIBBOARDGAME_ASSERT(false);
-    return 0;
 }
 
-unsigned get_nu_players(Variant variant)
+Color::IntType get_nu_players(Variant variant)
 {
     switch (variant)
     {
@@ -50,12 +49,11 @@ unsigned get_nu_players(Variant variant)
         return 2;
     case Variant::trigon_3:
         return 3;
-    case Variant::classic:
-    case Variant::trigon:
+    default:
+        LIBBOARDGAME_ASSERT(variant == Variant::classic
+                            || variant == Variant::trigon);
         return 4;
     }
-    LIBBOARDGAME_ASSERT(false);
-    return 0;
 }
 
 bool parse_variant(const string& s, Variant& variant)
@@ -118,11 +116,9 @@ const char* to_string(Variant variant)
         return "Blokus Trigon";
     case Variant::trigon_2:
         return "Blokus Trigon Two-Player";
-    case Variant::trigon_3:
-        return "Blokus Trigon Three-Player";
     default:
-        LIBBOARDGAME_ASSERT(false);
-        return "?";
+        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
+        return "Blokus Trigon Three-Player";
     }
 }
 
@@ -142,11 +138,9 @@ const char* to_string_id(Variant variant)
         return "trigon";
     case Variant::trigon_2:
         return "trigon_2";
-    case Variant::trigon_3:
-        return "trigon_3";
     default:
-        LIBBOARDGAME_ASSERT(false);
-        return "?";
+        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
+        return "trigon_3";
     }
 }
 

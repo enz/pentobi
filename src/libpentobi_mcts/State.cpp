@@ -377,7 +377,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
     auto random = m_total_gamma * m_random.generate_double();
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
-    mv = moves[pos - begin];
+    mv = moves[static_cast<unsigned>(pos - begin)];
     return true;
 }
 

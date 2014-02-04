@@ -39,18 +39,20 @@ void RatingGraph::paintEvent(QPaintEvent* event)
         QFontMetrics metrics(painter.font());
         float yRange = m_yMax - m_yMin;
         float yTic = m_yMin;
-        float topMargin = ceil(1.2f * metrics.height());
-        float bottomMargin = ceil(0.3f * metrics.height());
-        float graphHeight = height - topMargin - bottomMargin;
+        float topMargin = ceil(1.2f * static_cast<float>(metrics.height()));
+        float bottomMargin = ceil(0.3f * static_cast<float>(metrics.height()));
+        float graphHeight =
+            static_cast<float>(height) - topMargin - bottomMargin;
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
         painter.setPen(pen);
         int maxLabelWidth = 0;
         while (yTic <= m_yMax)
         {
-            qreal y =
-                topMargin
-                + graphHeight - (yTic - m_yMin) / yRange * graphHeight;
+            int y =
+                static_cast<int>(round(
+                    topMargin
+                    + graphHeight - (yTic - m_yMin) / yRange * graphHeight));
             painter.drawLine(0, y, width, y);
             QString label;
             label.setNum(yTic, 'f', 0);

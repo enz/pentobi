@@ -68,7 +68,7 @@ public:
 
     bool has_children() const;
 
-    unsigned get_nu_children() const;
+    unsigned short get_nu_children() const;
 
     /** Set a new value.
         This operation is needed when reusing a subtree from a previous search
@@ -85,7 +85,7 @@ public:
         search. */
     void copy_data_from(const Node& node);
 
-    void link_children(NodeIdx first_child, unsigned nu_children);
+    void link_children(NodeIdx first_child, unsigned short nu_children);
 
     void unlink_children();
 
@@ -188,7 +188,7 @@ inline auto Node<M, F>::get_move() const -> const Move&
 }
 
 template<typename M, typename F>
-inline unsigned Node<M, F>::get_nu_children() const
+inline unsigned short Node<M, F>::get_nu_children() const
 {
     return LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_nu_children, memory_order_acquire);
 }
@@ -245,7 +245,8 @@ void Node<M, F>::init_value(Float value, Float count)
 }
 
 template<typename M, typename F>
-inline void Node<M, F>::link_children(NodeIdx first_child, unsigned nu_children)
+inline void Node<M, F>::link_children(NodeIdx first_child,
+                                      unsigned short nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children < Move::range);
     // first_child cannot be 0 because 0 is always used for the root node
