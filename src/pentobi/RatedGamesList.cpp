@@ -93,7 +93,8 @@ void RatedGamesList::updateContent(Variant variant,
 #endif
     header->setStretchLastSection(true);
     int nuRows = 0;
-    if (history.getGameInfos().size() <= numeric_limits<int>::max())
+    if (history.getGameInfos().size()
+		<= static_cast<size_t>(numeric_limits<int>::max()))
         nuRows = static_cast<int>(history.getGameInfos().size());
     m_model->setRowCount(nuRows);
     setSortingEnabled(false);
