@@ -64,6 +64,7 @@ if (USE_QT5)
 else()
   set(LRELEASE_EXECUTABLE ${QT_LRELEASE_EXECUTABLE})
 endif()
+set(pentobi_gui_QM_SRCS)
 foreach(ts ${pentobi_gui_TS})
   get_filename_component(qm ${ts} NAME_WE)
   set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
@@ -77,7 +78,6 @@ endforeach()
 
 add_library(pentobi_gui STATIC
   ${pentobi_gui_STAT_SRCS}
-  ${pentobi_gui_MOC_SRCS}
   ${pentobi_gui_RC_SRCS}
   ${pentobi_gui_QM_SRCS})
 

@@ -15,7 +15,6 @@ target_link_libraries(unittest_libboardgame_gtp
   boardgame_test
   boardgame_util
   boardgame_gtp
-  ${CMAKE_THREAD_LIBS_INIT}
   )
 
 add_test(libboardgame_gtp unittest_libboardgame_gtp)

@@ -6,10 +6,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 add_executable(convert Main.cpp)
 
-if (USE_QT5)
-  qt5_use_modules(convert Widgets)
-endif()
-
 # CMake 2.8.9 doesn't seem to support finding plugin paths yet but
 # we need to add qsvg to the linked libraries if static linking is
 # used as by our current build of the Windows installer with MinGW.
@@ -25,11 +21,14 @@ if (MINGW)
   endif()
 endif()
 
-target_link_libraries(convert
-  ${QT_QTSVG_LIBRARY}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTSVG_LIB_DEPENDENCIES}
-  ${QT_QTGUI_LIB_DEPENDENCIES}
-  ${QT_QTCORE_LIB_DEPENDENCIES}
-  )
+if (USE_QT5)
+  qt5_use_modules(convert Widgets)
+else()
+  target_link_libraries(convert
+    ${QT_QTSVG_LIBRARY}
+    ${QT_QTGUI_LIBRARY}
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTGUI_LIB_DEPENDENCIES}
+    ${QT_QTCORE_LIB_DEPENDENCIES}
+    )
+endif()

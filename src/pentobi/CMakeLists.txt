@@ -89,6 +89,7 @@ if (USE_QT5)
 else()
   set(LRELEASE_EXECUTABLE ${QT_LRELEASE_EXECUTABLE})
 endif()
+set(pentobi_QM_SRCS)
 foreach(ts ${pentobi_TS})
   get_filename_component(qm ${ts} NAME_WE)
   set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
@@ -116,7 +117,6 @@ endif()
 
 add_executable(pentobi WIN32
   ${pentobi_SRCS}
-  ${pentobi_MOC_SRCS}
   ${pentobi_QM_SRCS}
   ${pentobi_RC_SRCS}
   )
@@ -126,30 +126,38 @@ if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
   set_target_properties(pentobi PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
 endif()
 
-if (USE_QT5)
-  qt5_use_modules(pentobi Widgets Concurrent)
-endif()
-
 target_link_libraries(pentobi
   pentobi_gui
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTGUI_LIB_DEPENDENCIES}
-  ${QT_QTCORE_LIB_DEPENDENCIES}
   pentobi_mcts
   pentobi_base
   boardgame_base
   boardgame_sgf
   boardgame_util
   boardgame_sys
-  ${CMAKE_THREAD_LIBS_INIT}
   )
 
+# Remove once we require CMake 2.8.11
 if (WIN32)
-  target_link_libraries(pentobi ${QT_QTMAIN_LIBRARY})
+  if (USE_QT5)
+    target_link_libraries(pentobi Qt5::WinMain)
+  else()
+    target_link_libraries(pentobi ${QT_QTMAIN_LIBRARY})
+  endif()
 endif()
 
-install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
+if (USE_QT5)
+  qt5_use_modules(pentobi Widgets Concurrent)
+else()
+  target_link_libraries(pentobi
+    ${QT_QTGUI_LIBRARY}
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTGUI_LIB_DEPENDENCIES}
+    ${QT_QTCORE_LIB_DEPENDENCIES}
+    )
+endif()
+
+install(TARGETS pentobi 
+DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install translation files. If you change the destination, you need to
 # update the default for PENTOBI_TRANSLATIONS in the main CMakeLists.txt

@@ -15,7 +15,6 @@ target_link_libraries(pentobi-gtp
   boardgame_util
   boardgame_sys
   boardgame_gtp
-  ${CMAKE_THREAD_LIBS_INIT}
   )
 
 if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))

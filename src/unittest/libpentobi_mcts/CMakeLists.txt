@@ -16,7 +16,6 @@ target_link_libraries(unittest_libpentobi_mcts
   boardgame_test
   boardgame_util
   boardgame_sys
-  ${CMAKE_THREAD_LIBS_INIT}
   )
 
 add_test(libpentobi_mcts unittest_libpentobi_mcts)

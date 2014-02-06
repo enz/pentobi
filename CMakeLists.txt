@@ -1,8 +1,14 @@
 cmake_minimum_required(VERSION 2.8.9)
+
 # Use all lower-case for project name because it is used in
 # CMAKE_INSTALL_DOCDIR of GNUInstallDirs
 project(pentobi)
 set(PENTOBI_VERSION 7.UNKNOWN)
+
+if(POLICY CMP0020)
+  # Remove once we require CMake 2.8.11
+  cmake_policy(SET CMP0020 OLD)
+endif()
 
 include(CheckIncludeFiles)
 include(GNUInstallDirs)
@@ -37,11 +43,6 @@ endif()
 check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
-
-# -lpthread is needed on Unix but not automatically added to the compiler
-# options if std::thread/GCC 4.7 is used. We solve this by adding
-# CMAKE_THREAD_LIBS_INIT to the link libraries.
-find_package(Threads)
 
 if(NOT DEFINED LIBPENTOBI_MCTS_FLOAT_TYPE)
   set(LIBPENTOBI_MCTS_FLOAT_TYPE float)

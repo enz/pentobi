@@ -10,17 +10,9 @@ set(pentobi_thumbnailer_SRCS
 
 add_executable(pentobi-thumbnailer ${pentobi_thumbnailer_SRCS})
 
-if (USE_QT5)
-  qt5_use_modules(pentobi-thumbnailer Widgets)
-endif()
-
 target_link_libraries(pentobi-thumbnailer
   pentobi_thumbnail
   pentobi_gui
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTGUI_LIB_DEPENDENCIES}
-  ${QT_QTCORE_LIB_DEPENDENCIES}
   pentobi_base
   boardgame_base
   boardgame_sgf
@@ -28,4 +20,17 @@ target_link_libraries(pentobi-thumbnailer
   boardgame_sys
   )
 
-install(TARGETS pentobi-thumbnailer DESTINATION ${CMAKE_INSTALL_BINDIR})
+if (USE_QT5)
+  qt5_use_modules(pentobi-thumbnailer Widgets)
+else()
+  target_link_libraries(pentobi-thumbnailer
+    ${QT_QTGUI_LIBRARY}
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTGUI_LIB_DEPENDENCIES}
+    ${QT_QTCORE_LIB_DEPENDENCIES}
+    )
+endif()
+
+install(TARGETS 
+pentobi-thumbnailer DESTINATION 
+${CMAKE_INSTALL_BINDIR})
