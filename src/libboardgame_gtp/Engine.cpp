@@ -189,7 +189,7 @@ PonderThread::PonderThread(Engine& engine)
       m_ponder_finished_flag(false),
       m_engine(engine),
       m_ready(2),
-      m_ponder_finished_lock(m_ponder_finished_mutex),
+      m_ponder_finished_lock(m_ponder_finished_mutex, defer_lock),
       m_thread(Function(*this))
 {
     m_ready.wait();
@@ -210,6 +210,7 @@ PonderThread::~PonderThread() throw()
 void PonderThread::start_ponder()
 {
     m_engine.init_ponder();
+    m_ponder_finished_lock.lock();
     {
         lock_guard<mutex> lock(m_start_ponder_mutex);
         m_start_ponder_flag = true;
@@ -223,6 +224,7 @@ void PonderThread::stop_ponder()
     while (! m_ponder_finished_flag)
         m_ponder_finished_cond.wait(m_ponder_finished_lock);
     m_ponder_finished_flag = false;
+    m_ponder_finished_lock.unlock();
 }
 
 /** Thread for reading the next command line.
@@ -279,8 +281,6 @@ private:
 
         condition_variable cmd_received_cond;
 
-        unique_lock<mutex> cmd_received_lock;
-
         CmdLine cmd;
 
         /** Increment reference count.
@@ -333,8 +333,7 @@ ReadThread::Data::Data(istream& in, Engine& engine)
       cmd_received_flag(false),
       in(in),
       engine(engine),
-      ready(2),
-      cmd_received_lock(cmd_received_mutex)
+      ready(2)
 {
 }
 
@@ -439,13 +438,14 @@ ReadThread::~ReadThread() throw()
 bool ReadThread::read_cmd(CmdLine& c)
 {
     auto& data = m_data_ref.data;
+    unique_lock<mutex> cmd_received_lock(data.cmd_received_mutex);
     {
         lock_guard<mutex> lock(data.wait_cmd_mutex);
         data.wait_cmd_flag = true;
     }
     data.wait_cmd_cond.notify_one();
     while (! data.cmd_received_flag)
-        data.cmd_received_cond.wait(data.cmd_received_lock);
+        data.cmd_received_cond.wait(cmd_received_lock);
     data.cmd_received_flag = false;
     if (! data.is_stream_good)
         return false;
