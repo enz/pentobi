@@ -638,7 +638,7 @@ Search<S, M, R>::Thread::Thread(SearchFunc& search_func)
       m_start_search_flag(false),
       m_search_finished_flag(false),
       m_thread_ready(2),
-      m_search_finished_lock(m_search_finished_mutex)
+      m_search_finished_lock(m_search_finished_mutex, defer_lock)
 {
 }
 
@@ -667,6 +667,7 @@ template<class S, class M, class R>
 void Search<S, M, R>::Thread::start_search()
 {
     LIBBOARDGAME_ASSERT(m_thread.joinable());
+    m_search_finished_lock.lock();
     {
         lock_guard<mutex> lock(m_start_search_mutex);
         m_start_search_flag = true;
@@ -704,6 +705,7 @@ void Search<S, M, R>::Thread::wait_search_finished()
     while (! m_search_finished_flag)
         m_search_finished_cond.wait(m_search_finished_lock);
     m_search_finished_flag = false;
+    m_search_finished_lock.unlock();
 }
 
 
