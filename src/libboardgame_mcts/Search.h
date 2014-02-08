@@ -584,6 +584,9 @@ private:
     /** See get_nu_simulations(). */
     LIBBOARDGAME_MCTS_ATOMIC(size_t) m_nu_simulations;
 
+    /** Mutex used in log_thread() */
+    mutable mutex m_log_mutex;
+
     /** @} */ // @name
 
 
@@ -1091,6 +1094,7 @@ template<class S, class M, class R>
 void Search<S, M, R>::log_thread(const ThreadState& thread_state,
                                  const string& s) const
 {
+    lock_guard<mutex> lock(m_log_mutex);
     ostringstream o;
     o << "[" << thread_state.thread_id << "] " << s;
     log(o.str());
