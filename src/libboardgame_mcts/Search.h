@@ -1095,9 +1095,7 @@ void Search<S, M, R>::log_thread(const ThreadState& thread_state,
                                  const string& s) const
 {
     lock_guard<mutex> lock(m_log_mutex);
-    ostringstream o;
-    o << "[" << thread_state.thread_id << "] " << s;
-    log(o.str());
+    log() << "[" << thread_state.thread_id << "] " << s;
 }
 
 template<class S, class M, class R>
