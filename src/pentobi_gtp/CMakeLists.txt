@@ -17,6 +17,13 @@ target_link_libraries(pentobi-gtp
   boardgame_gtp
   )
 
+# On Ubuntu 13.10, pthreads is not automatically linked even if it required
+# by std::thread (however it is automatically linked if we link QtCore),
+# so we explicitely use FindThreads() and link it here.
+if (DEFINED CMAKE_THREAD_LIBS_INIT)
+  target_link_libraries(pentobi-gtp ${CMAKE_THREAD_LIBS_INIT})
+endif()
+
 if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
   set_target_properties(pentobi-gtp PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
 endif()

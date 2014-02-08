@@ -74,6 +74,8 @@ if(PENTOBI_BUILD_TESTS)
   enable_testing()
 endif()
 
+find_package(Threads)
+
 if(PENTOBI_BUILD_GUI)
   if (USE_QT5)
     find_package(Qt5Widgets REQUIRED)
