@@ -134,8 +134,6 @@ public slots:
 
     void newGame();
 
-    void newRatedGame();
-
     void nextVariation();
 
     void nextVariation10();
@@ -163,6 +161,8 @@ public slots:
     void previousVariation();
 
     void previousVariation10();
+
+    void ratedGame();
 
     void rotatePieceAnticlockwise();
 
@@ -460,7 +460,7 @@ private:
 
     QAction* m_actionNew;
 
-    QAction* m_actionNewRatedGame;
+    QAction* m_actionRatedGame;
 
     QAction* m_actionNoMoveAnnotation;
 

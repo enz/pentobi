@@ -972,9 +972,9 @@ void MainWindow::createActions()
     connect(m_actionNextVariation10, SIGNAL(triggered()),
             SLOT(nextVariation10()));
 
-    m_actionNewRatedGame = createAction(tr("New &Rated Game"));
-    m_actionNewRatedGame->setShortcut(QString("Ctrl+Shift+N"));
-    connect(m_actionNewRatedGame, SIGNAL(triggered()), SLOT(newRatedGame()));
+    m_actionRatedGame = createAction(tr("&Rated Game"));
+    m_actionRatedGame->setShortcut(QString("Ctrl+Shift+N"));
+    connect(m_actionRatedGame, SIGNAL(triggered()), SLOT(ratedGame()));
 
     m_actionNew = createAction(tr("&New"));
     m_actionNew->setShortcut(QKeySequence::New);
@@ -1318,7 +1318,7 @@ void MainWindow::createMenu()
 {
     auto menuGame = menuBar()->addMenu(tr("&Game"));
     menuGame->addAction(m_actionNew);
-    menuGame->addAction(m_actionNewRatedGame);
+    menuGame->addAction(m_actionRatedGame);
     menuGame->addSeparator();
     auto menuVariant = menuGame->addMenu(tr("Game &Variant"));
     menuVariant->addAction(m_actionVariantClassic);
@@ -2442,77 +2442,6 @@ void MainWindow::nextVariation10()
     gotoNode(*node);
 }
 
-void MainWindow::newRatedGame()
-{
-    if (! checkSave())
-        return;
-    cancelThread();
-    if (m_history->getNuGames() == 0)
-    {
-        InitialRatingDialog dialog(this);
-        if (dialog.exec() != QDialog::Accepted)
-            return;
-        m_history->init(Rating(static_cast<float>(dialog.getRating())));
-    }
-    int level;
-    QSettings settings;
-    unsigned random;
-    auto key = QString("next_rated_random_") + to_string_id(getVariant());
-    if (settings.contains(key))
-        random = settings.value(key).toUInt();
-    else
-    {
-        random = m_random.generate();
-        settings.setValue(key, random);
-    }
-    m_history->getNextRatedGameSettings(maxLevel, random,
-                                        level, m_ratedGameColor);
-    QMessageBox msgBox(this);
-    initQuestion(msgBox, tr("Start new rated game?"),
-                 "<html>" +
-                 tr("In the next game, you will play %1 against"
-                    " Pentobi level&nbsp;%2.")
-                 .arg(getPlayerString(getVariant(), m_ratedGameColor))
-                 .arg(level));
-    auto startGameButton =
-        msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
-    msgBox.addButton(QMessageBox::Cancel);
-    msgBox.setDefaultButton(startGameButton);
-    msgBox.exec();
-    auto result = msgBox.clickedButton();
-    if (result != startGameButton)
-        return;
-    setLevel(level);
-    initGame();
-    setFile("");
-    setRated(true);
-    auto& bd = getBoard();
-    m_computerColors.fill(true);
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        if (bd.is_same_player(*i, m_ratedGameColor))
-            m_computerColors[*i] = false;
-    m_autoPlay = true;
-    QString computerPlayerName =
-        //: The first argument is the version of Pentobi
-        tr("Pentobi %1 (level %2)").arg(getVersion()).arg(level);
-    string charset = m_game->get_root().get_property("CA", "");
-    string computerPlayerNameStdStr =
-        Util::convertSgfValueFromQString(computerPlayerName, charset);
-    string humanPlayerNameStdStr =
-        Util::convertSgfValueFromQString(tr("Human"), charset);
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        if (m_computerColors[*i])
-            m_game->set_player_name(*i, computerPlayerNameStdStr);
-        else
-            m_game->set_player_name(*i, humanPlayerNameStdStr);
-    // Setting the player names marks the game as modified but there is nothing
-    // important that would need to be saved yet
-    m_game->clear_modified();
-    deleteAutoSaveFile();
-    updateWindow(true);
-    checkComputerMove();
-}
-
 void MainWindow::newGame()
 {
     if (! checkSave())
@@ -2770,6 +2699,77 @@ void MainWindow::previousVariation10()
         node = node->get_previous_sibling();
     }
     gotoNode(*node);
+}
+
+void MainWindow::ratedGame()
+{
+    if (! checkSave())
+        return;
+    cancelThread();
+    if (m_history->getNuGames() == 0)
+    {
+        InitialRatingDialog dialog(this);
+        if (dialog.exec() != QDialog::Accepted)
+            return;
+        m_history->init(Rating(static_cast<float>(dialog.getRating())));
+    }
+    int level;
+    QSettings settings;
+    unsigned random;
+    auto key = QString("next_rated_random_") + to_string_id(getVariant());
+    if (settings.contains(key))
+        random = settings.value(key).toUInt();
+    else
+    {
+        random = m_random.generate();
+        settings.setValue(key, random);
+    }
+    m_history->getNextRatedGameSettings(maxLevel, random,
+                                        level, m_ratedGameColor);
+    QMessageBox msgBox(this);
+    initQuestion(msgBox, tr("Start new rated game?"),
+                 "<html>" +
+                 tr("In the next game, you will play %1 against"
+                    " Pentobi level&nbsp;%2.")
+                 .arg(getPlayerString(getVariant(), m_ratedGameColor))
+                 .arg(level));
+    auto startGameButton =
+        msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
+    msgBox.addButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(startGameButton);
+    msgBox.exec();
+    auto result = msgBox.clickedButton();
+    if (result != startGameButton)
+        return;
+    setLevel(level);
+    initGame();
+    setFile("");
+    setRated(true);
+    auto& bd = getBoard();
+    m_computerColors.fill(true);
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        if (bd.is_same_player(*i, m_ratedGameColor))
+            m_computerColors[*i] = false;
+    m_autoPlay = true;
+    QString computerPlayerName =
+        //: The first argument is the version of Pentobi
+        tr("Pentobi %1 (level %2)").arg(getVersion()).arg(level);
+    string charset = m_game->get_root().get_property("CA", "");
+    string computerPlayerNameStdStr =
+        Util::convertSgfValueFromQString(computerPlayerName, charset);
+    string humanPlayerNameStdStr =
+        Util::convertSgfValueFromQString(tr("Human"), charset);
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        if (m_computerColors[*i])
+            m_game->set_player_name(*i, computerPlayerNameStdStr);
+        else
+            m_game->set_player_name(*i, humanPlayerNameStdStr);
+    // Setting the player names marks the game as modified but there is nothing
+    // important that would need to be saved yet
+    m_game->clear_modified();
+    deleteAutoSaveFile();
+    updateWindow(true);
+    checkComputerMove();
 }
 
 void MainWindow::rememberDir(const QString& file)

@@ -448,8 +448,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="974"/>
-        <source>New &amp;Rated Game</source>
-        <translation>Neues ge&amp;wertetes Spiel</translation>
+        <source>&amp;Rated Game</source>
+        <translation>Ge&amp;wertetes Spiel</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="978"/>
