@@ -529,8 +529,8 @@
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1157"/>
-        <source>Your &amp;Rating</source>
-        <translation>Ihre &amp;Wertung</translation>
+        <source>&amp;Rating</source>
+        <translation>&amp;Wertung</translation>
     </message>
     <message>
         <location filename="MainWindow.cpp" line="1161"/>
@@ -1189,8 +1189,8 @@
     <name>RatingDialog</name>
     <message>
         <location filename="RatingDialog.cpp" line="31"/>
-        <source>Your Rating</source>
-        <translation>Ihre Wertung</translation>
+        <source>Rating</source>
+        <translation>Wertung</translation>
     </message>
     <message>
         <location filename="RatingDialog.cpp" line="39"/>

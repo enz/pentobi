@@ -1151,9 +1151,9 @@ void MainWindow::createActions()
     connect(m_actionShowComment, SIGNAL(triggered(bool)),
             SLOT(showComment(bool)));
 
-    m_actionShowRating = createAction(tr("Your &Rating"));
-    m_actionShowRating->setShortcut(QString("F7"));
-    connect(m_actionShowRating, SIGNAL(triggered()), SLOT(showRating()));
+    m_actionRating = createAction(tr("&Rating"));
+    m_actionRating->setShortcut(QString("F7"));
+    connect(m_actionRating, SIGNAL(triggered()), SLOT(showRating()));
 
     m_actionToolBarNoText = createAction(tr("&No Text"));
     m_actionToolBarNoText->setActionGroup(groupToolBarText);
@@ -1414,7 +1414,7 @@ void MainWindow::createMenu()
         menuLevel->addAction(m_actionLevel[i]);
 
     auto menuTools = menuBar()->addMenu(tr("&Tools"));
-    menuTools->addAction(m_actionShowRating);
+    menuTools->addAction(m_actionRating);
     menuTools->addAction(m_actionAnalyzeGame);
 
     auto menuHelp = menuBar()->addMenu(tr("&Help"));

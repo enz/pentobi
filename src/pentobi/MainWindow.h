@@ -486,7 +486,7 @@ private:
 
     QAction* m_actionShowComment;
 
-    QAction* m_actionShowRating;
+    QAction* m_actionRating;
 
     QAction* m_actionShowToolbar;
 
