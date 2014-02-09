@@ -7,6 +7,7 @@
 #ifndef LIBBOARDGAME_BASE_RECT_GEOMETRY_H
 #define LIBBOARDGAME_BASE_RECT_GEOMETRY_H
 
+#include <map>
 #include <memory>
 #include "Geometry.h"
 #include "libboardgame_util/Unused.h"
@@ -27,7 +28,7 @@ public:
     typedef P Point;
 
     /** Create or reuse an already created geometry with a given size. */
-    static const RectGeometry* get(unsigned width, unsigned height);
+    static const RectGeometry& get(unsigned width, unsigned height);
 
     RectGeometry(unsigned width, unsigned height);
 
@@ -44,13 +45,13 @@ protected:
                        NullTermList<Point, 9>& diag) const;
 
 private:
-    static unique_ptr<RectGeometry>
-                        s_geometry[Point::max_width + 1][Point::max_height + 1];
+    /** Stores already created geometries by width and height. */
+    static map<pair<unsigned, unsigned>, shared_ptr<RectGeometry>> s_geometry;
 };
 
 template<class P>
-unique_ptr<RectGeometry<P>>
-               RectGeometry<P>::s_geometry[P::max_width + 1][P::max_height + 1];
+map<pair<unsigned, unsigned>, shared_ptr<RectGeometry<P>>>
+    RectGeometry<P>::s_geometry;
 
 template<class P>
 RectGeometry<P>::RectGeometry(unsigned width, unsigned height)
@@ -59,11 +60,14 @@ RectGeometry<P>::RectGeometry(unsigned width, unsigned height)
 }
 
 template<class P>
-const RectGeometry<P>* RectGeometry<P>::get(unsigned width, unsigned height)
+const RectGeometry<P>& RectGeometry<P>::get(unsigned width, unsigned height)
 {
-    if (! s_geometry[width][height])
-        s_geometry[width][height].reset(new RectGeometry(width, height));
-    return s_geometry[width][height].get();
+    auto key = make_pair(width, height);
+    auto pos = s_geometry.find(key);
+    if (pos != s_geometry.end())
+        return *pos->second;
+    auto geometry = make_shared<RectGeometry>(width, height);
+    return *s_geometry.insert(make_pair(key, geometry)).first->second;
 }
 
 template<class P>
@@ -97,10 +101,10 @@ template<class P>
 void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
                                     NullTermList<Point, 9>& diag) const
 {
-    unsigned width = this->get_width();
-    unsigned height = this->get_height();
-    unsigned x = p.get_x();
-    unsigned y = p.get_y();
+    auto width = this->get_width();
+    auto height = this->get_height();
+    auto x = p.get_x(width);
+    auto y = p.get_y(width);
     {
         typename NullTermList<Point, 4>::Init init_adj(adj);
         if (x > 0)
@@ -108,21 +112,21 @@ void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
         if (x < width - 1)
             init_adj.push_back(p.get_right());
         if (y > 0)
-            init_adj.push_back(p.get_down());
+            init_adj.push_back(p.get_down(width));
         if (y < height - 1)
-            init_adj.push_back(p.get_up());
+            init_adj.push_back(p.get_up(width));
         init_adj.finish();
     }
     {
         typename NullTermList<Point, 9>::Init init_diag(diag);
         if (x > 0 && y < height - 1)
-            init_diag.push_back(p.get_up_left());
+            init_diag.push_back(p.get_up_left(width));
         if (x < width - 1 && y < height - 1)
-            init_diag.push_back(p.get_up_right());
+            init_diag.push_back(p.get_up_right(width));
         if (x > 0 && y > 0)
-            init_diag.push_back(p.get_down_left());
+            init_diag.push_back(p.get_down_left(width));
         if (x < width - 1 && y > 0)
-            init_diag.push_back(p.get_down_right());
+            init_diag.push_back(p.get_down_right(width));
         init_diag.finish();
     }
 }

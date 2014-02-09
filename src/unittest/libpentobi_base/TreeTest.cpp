@@ -43,11 +43,11 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(0));
         auto& info =  board_const.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("a16")));
-        LIBBOARDGAME_CHECK(info.contains(Point("a17")));
-        LIBBOARDGAME_CHECK(info.contains(Point("a18")));
-        LIBBOARDGAME_CHECK(info.contains(Point("a19")));
-        LIBBOARDGAME_CHECK(info.contains(Point("a20")));
+        LIBBOARDGAME_CHECK(info.contains(Point("a16", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("a17", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("a18", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("a19", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("a20", 20)));
     }
     node = &node->get_child();
     {
@@ -56,11 +56,11 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(1));
         auto& info =  board_const.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("s17")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t17")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t18")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t19")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t20")));
+        LIBBOARDGAME_CHECK(info.contains(Point("s17", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t17", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t18", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t19", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t20", 20)));
     }
     node = &node->get_child();
     {
@@ -69,11 +69,11 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(2));
         auto& info =  board_const.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("t1")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t2")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t3")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t4")));
-        LIBBOARDGAME_CHECK(info.contains(Point("t5")));
+        LIBBOARDGAME_CHECK(info.contains(Point("t1", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t2", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t3", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t4", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("t5", 20)));
     }
     node = &node->get_child();
     {
@@ -82,11 +82,11 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(3));
         auto& info =  board_const.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("a1")));
-        LIBBOARDGAME_CHECK(info.contains(Point("b1")));
-        LIBBOARDGAME_CHECK(info.contains(Point("c1")));
-        LIBBOARDGAME_CHECK(info.contains(Point("d1")));
-        LIBBOARDGAME_CHECK(info.contains(Point("d2")));
+        LIBBOARDGAME_CHECK(info.contains(Point("a1", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("b1", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("c1", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("d1", 20)));
+        LIBBOARDGAME_CHECK(info.contains(Point("d2", 20)));
     }
 }
 

@@ -9,6 +9,7 @@
 
 #include <string>
 #include "Color.h"
+#include "Geometry.h"
 
 namespace libpentobi_base {
 
@@ -60,6 +61,8 @@ bool parse_variant_id(const string& s, Variant& variant);
 Color::IntType get_nu_colors(Variant variant);
 
 Color::IntType get_nu_players(Variant variant);
+
+const Geometry& get_geometry(Variant variant);
 
 //-----------------------------------------------------------------------------
 

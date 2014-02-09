@@ -335,6 +335,8 @@ public:
     /** See take_snapshot() */
     void restore_snapshot();
 
+    WritePoint write(Point p) const;
+
 private:
     /** Color-independent part of the board state for fast snapshot
         restoration.
@@ -358,6 +360,9 @@ private:
 
         Grid<bool> is_attach_point;
 
+        /** @note Order dependency: This must be the first of all remaining
+            members because they are copied with memcpy in take_snapshot()
+            and restore_snapshot() */
         PiecesLeftList pieces_left;
 
         PieceMap<unsigned> nu_left_piece;
@@ -933,26 +938,22 @@ inline void Board::restore_snapshot()
     LIBBOARDGAME_ASSERT(m_snapshot);
     LIBBOARDGAME_ASSERT(m_snapshot->moves_size <= m_moves.size());
     m_moves.resize(m_snapshot->moves_size);
-
-    // See also the comment in copy_from() and class Snapshot about the
-    // following memcpy
-    static_assert(offsetof(Snapshot, state_color)
-                  > offsetof(Snapshot, state_base),
-                  "");
-    static_assert(offsetof(Board, m_state_color)
-                  > offsetof(Board, m_state_base),
-                  "");
-    static_assert(offsetof(Snapshot, state_color)
-                  - offsetof(Snapshot, state_base)
-                  == offsetof(Board, m_state_color)
-                     - offsetof(Board, m_state_base),
-                  "");
-    memcpy(&m_state_base, &m_snapshot->state_base,
-           offsetof(Snapshot, state_color) - offsetof(Snapshot, state_base)
-           + m_nu_colors * sizeof(StateColor));
-
+    m_state_base.to_play = m_snapshot->state_base.to_play;
+    m_state_base.nu_onboard_pieces_all =
+        m_snapshot->state_base.nu_onboard_pieces_all;
+    m_state_base.point_state.memcpy_from(m_snapshot->state_base.point_state,
+                                         *m_geo);
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
+        const auto& snapshot_state = m_snapshot->state_color[*i];
+        auto& state = m_state_color[*i];
+        state.forbidden.memcpy_from(snapshot_state.forbidden, *m_geo);
+        state.is_attach_point.memcpy_from(snapshot_state.is_attach_point,
+                                          *m_geo);
+        // Uncomment one is_trivially_copyable is implemented in GCC and MSVC
+        //static_assert(is_trivially_copyable<StateColor>::value, "")
+        memcpy(&state.pieces_left, &snapshot_state.pieces_left,
+               sizeof(StateColor) - offsetof(StateColor, pieces_left));
         LIBBOARDGAME_ASSERT(m_snapshot->attach_points_size[*i]
                             <= m_attach_points[*i].size());
         m_attach_points[*i].resize(m_snapshot->attach_points_size[*i]);
@@ -967,6 +968,11 @@ inline void Board::set_to_play(Color c)
 inline string Board::to_string(Move mv, bool with_piece_name) const
 {
     return m_board_const->to_string(mv, with_piece_name);
+}
+
+inline WritePoint Board::write(Point p) const
+{
+    return WritePoint(p, m_geo->get_width());
 }
 
 //-----------------------------------------------------------------------------

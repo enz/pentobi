@@ -45,9 +45,11 @@ private:
 
     ColorMap<ArrayList<Point,max_starting_points>> m_starting_points;
 
-    void add_colored_starting_point(unsigned x, unsigned y, Color c);
+    void add_colored_starting_point(const Geometry& geo, unsigned x,
+                                    unsigned y, Color c);
 
-    void add_colorless_starting_point(unsigned x, unsigned y);
+    void add_colorless_starting_point(const Geometry& geo, unsigned x,
+                                      unsigned y);
 };
 
 inline Color StartingPoints::get_starting_point_color(Point p) const

@@ -19,23 +19,24 @@ using namespace libboardgame_base;
 
 LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
 {
-    typedef libboardgame_base::Point<19, 19, unsigned short, SpShtStrRep>
+    typedef libboardgame_base::Point<19 * 19, unsigned short, SpShtStrRep>
         Point;
+
     unsigned sz = 9;
-    Point p("B7");
+    Point p("B7", sz);
     {
         PointTransfIdent<Point> transform;
-        LIBBOARDGAME_CHECK_EQUAL(transform.get_transformed(p, sz, sz), p);
+        LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz) == p);
     }
     {
         PointTransfRot180<Point> transform;
-        LIBBOARDGAME_CHECK_EQUAL(transform.get_transformed(p, sz, sz),
-                                 Point("H3"));
+        LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz)
+                           == Point("H3", sz));
     }
     {
         PointTransfRot270Refl<Point> transform;
-        LIBBOARDGAME_CHECK_EQUAL(transform.get_transformed(p, sz, sz),
-                                 Point("C8"));
+        LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz)
+                           == Point("C8", sz));
     }
 }
 

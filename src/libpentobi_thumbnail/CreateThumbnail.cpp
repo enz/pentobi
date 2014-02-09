@@ -45,7 +45,7 @@ void handleSetup(const char* id, Color c, const Node& node,
         {
             try
             {
-                Point p = Point::from_string(p_str);
+                Point p = Point::from_string(p_str, geo.get_width());
                 if (geo.is_onboard(p))
                     pointState[p] = c;
             }
@@ -71,7 +71,7 @@ void handleSetupEmpty(const Node& node, const Geometry& geo,
         {
             try
             {
-                Point p = Point::from_string(p_str);
+                Point p = Point::from_string(p_str, geo.get_width());
                 if (geo.is_onboard(p))
                     pointState[p] = PointState::empty();
             }
@@ -85,33 +85,14 @@ void handleSetupEmpty(const Node& node, const Geometry& geo,
 
 /** Get the board state of the final position of the main variation.
     Avoids constructing an instance of a Tree or Game, which would do a costly
-    initialization of BoardConst and slow down the thumbnailer unnecessarily. */
+    initialization of BoardConst and slow down the thumbnailer
+    unnecessarily. */
 bool getFinalPosition(const Node& root, Variant& variant, const Geometry*& geo,
                       Grid<PointState>& pointState)
 {
     if (! parse_variant(root.get_property("GM", ""), variant))
         return false;
-    switch (variant)
-    {
-    case Variant::duo:
-    case Variant::junior:
-        geo = RectGeometry<Point>::get(14, 14);
-        break;
-    case Variant::classic:
-    case Variant::classic_2:
-        geo = RectGeometry<Point>::get(20, 20);
-        break;
-    case Variant::trigon:
-    case Variant::trigon_2:
-        geo = TrigonGeometry<Point>::get(9);
-        break;
-    case Variant::trigon_3:
-        geo = TrigonGeometry<Point>::get(8);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(false);
-        return false;
-    }
+    geo = &get_geometry(variant);
     pointState.fill(PointState::empty(), *geo);
     auto node = &root;
     while (node != 0)

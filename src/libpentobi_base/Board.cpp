@@ -67,15 +67,10 @@ void Board::copy_from(const Board& bd)
         init_variant(bd.m_variant);
     m_moves = bd.m_moves;
     m_setup.to_play = bd.m_setup.to_play;
-    // Note: the following memcpy's are for efficiency but are dangerous
-    // because they might break if the classes change. In the future, this
-    // should be replaced by a normal assignment as soon as C++11 type_traits
-    // and defaulted functions are supported well enough by compilers that
-    // they can figure out themselves if they can use memcpy here.
-    memcpy(&m_state_base, &bd.m_state_base, sizeof(StateBase));
+    m_state_base = bd.m_state_base;
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
-        memcpy(&m_state_color[*i], &bd.m_state_color[*i], sizeof(StateColor));
+        m_state_color[*i] = bd.m_state_color[*i];
         m_setup.placements[*i] = bd.m_setup.placements[*i];
         m_attach_points[*i] = bd.m_attach_points[*i];
     }
@@ -352,13 +347,23 @@ void Board::take_snapshot()
         m_snapshot.reset(new Snapshot());
     optimize_attach_point_lists();
     m_snapshot->moves_size = m_moves.size();
-    // See also the comment in copy_from() about the following memcpy's.
-    memcpy(&m_snapshot->state_base, &m_state_base, sizeof(StateBase));
+    m_snapshot->state_base.to_play = m_state_base.to_play;
+    m_snapshot->state_base.nu_onboard_pieces_all =
+        m_state_base.nu_onboard_pieces_all;
+    m_snapshot->state_base.point_state.memcpy_from(m_state_base.point_state,
+                                                   *m_geo);
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_snapshot->attach_points_size[*i] = m_attach_points[*i].size();
-        memcpy(&m_snapshot->state_color[*i], &m_state_color[*i],
-               sizeof(StateColor));
+        const auto& state = m_state_color[*i];
+        auto& snapshot_state = m_snapshot->state_color[*i];
+        snapshot_state.forbidden.memcpy_from(state.forbidden, *m_geo);
+        snapshot_state.is_attach_point.memcpy_from(state.is_attach_point,
+                                                   *m_geo);
+        // Uncomment one is_trivially_copyable is implemented in GCC and MSVC
+        //static_assert(is_trivially_copyable<StateColor>::value, "")
+        memcpy(&snapshot_state.pieces_left, &state.pieces_left,
+               sizeof(StateColor) - offsetof(StateColor, pieces_left));
     }
 }
 
@@ -400,7 +405,7 @@ void Board::write(ostream& out, bool mark_last_move) const
         out << (y + 1) << ' ';
         for (unsigned x = 0; x < width; ++x)
         {
-            Point p(x, y);
+            Point p(x, y, width);
             bool is_offboard = ! is_onboard(p);
             if ((x > 0 || (is_trigon && x == 0 && is_onboard(p.get_right())))
                 && ! is_offboard)
@@ -408,9 +413,9 @@ void Board::write(ostream& out, bool mark_last_move) const
                 // Print a space horizontally between fields on the board. On a
                 // Trigon board, a slash or backslash is used instead of the
                 // space to indicate the orientation of the triangles. A
-                // less-than/greater-than character is used instead of the space
-                // to mark the last piece played (the mark is not placed within
-                // the piece or off-board).
+                // less-than/greater-than character is used instead of the
+                // space to mark the last piece played (the mark is not placed
+                // within the piece or off-board).
                 if (! last_mv.is_null()
                     && get_move_info(last_mv.move).contains(p)
                     && (x == 0 || ! is_onboard(p.get_left())
@@ -486,7 +491,7 @@ void Board::write(ostream& out, bool mark_last_move) const
         }
         if (is_trigon)
         {
-            if (is_onboard(Point(width - 1, y)))
+            if (is_onboard(Point(width - 1, y, width)))
             {
                 set_color(out, "\x1B[1;30;47m");
                 out << (m_geo->get_point_type(width - 1, y) != 0 ? '\\' : '/');

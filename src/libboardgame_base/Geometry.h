@@ -86,6 +86,9 @@ public:
 
     unsigned get_height() const;
 
+    /** Get range used for onboard points. */
+    unsigned get_range() const;
+
     /** Get list of on-board adjacent points. */
     const NullTermList<Point, 4>& get_adj(Point p) const;
 
@@ -227,13 +230,20 @@ inline unsigned Geometry<P>::get_height() const
 template<class P>
 inline unsigned Geometry<P>::get_point_type(Point p) const
 {
-    return get_point_type(p.get_x(), p.get_y());
+    auto width = get_width();
+    return get_point_type(p.get_x(width), p.get_y(width));
 }
 
 template<class P>
 inline unsigned Geometry<P>::get_point_type(CoordPoint p) const
 {
     return get_point_type(p.x, p.y);
+}
+
+template<class P>
+inline unsigned Geometry<P>::get_range() const
+{
+    return m_width * m_height + 1;
 }
 
 template<class P>
@@ -252,18 +262,19 @@ inline unsigned Geometry<P>::get_width() const
 template<class P>
 void Geometry<P>::init(unsigned width, unsigned height)
 {
+    LIBBOARDGAME_ASSERT(width >= 1);
+    LIBBOARDGAME_ASSERT(height >= 1);
+    LIBBOARDGAME_ASSERT(width * height <= Point::max_onboard);
     m_width = width;
     m_height = height;
     m_all_points.reset(new Point[width * height]);
-    LIBBOARDGAME_ASSERT(width >= 1 && width <= Point::max_width);
-    LIBBOARDGAME_ASSERT(height >= 1 && height <= Point::max_height);
     fill(m_is_onboard, m_is_onboard + Point::range, false);
     m_all_points_begin = m_all_points.get();
     auto all_points_end = m_all_points.get();
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)
         {
-            Point p(x, y);
+            Point p(x, y, width);
             init_is_onboard(p, m_is_onboard[p.to_int()]);
             if (is_onboard(p))
                 *(all_points_end++) = p;
@@ -279,8 +290,8 @@ void Geometry<P>::init(unsigned width, unsigned height)
         for (typename NullTermList<Point, 9>::Iterator k(m_diag[j]); k; ++k)
             adj_diag.push_back(*k);
         adj_diag.finish();
-        unsigned x = (*i).get_x();
-        unsigned y = (*i).get_y();
+        auto x = (*i).get_x(width);
+        auto y = (*i).get_y(width);
         unsigned dist_to_edge_x = min(width - x - 1, x);
         unsigned dist_to_edge_y = min(height - y - 1, y);
         m_dist_to_edge[j] = min(dist_to_edge_x, dist_to_edge_y);
@@ -297,7 +308,8 @@ inline bool Geometry<P>::is_onboard(Point p) const
 template<class P>
 bool Geometry<P>::is_onboard(CoordPoint p) const
 {
-    return p.is_onboard(m_width, m_height) && is_onboard(Point(p.x, p.y));
+    return (p.is_onboard(m_width, m_height)
+            && is_onboard(Point(p.x, p.y, m_width)));
 }
 
 //-----------------------------------------------------------------------------

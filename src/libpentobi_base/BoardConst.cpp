@@ -495,15 +495,15 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
 const Geometry& create_geometry(BoardType board_type)
 {
     if (board_type == BoardType::classic)
-        return *RectGeometry<Point>::get(20, 20);
+        return RectGeometry<Point>::get(20, 20);
     else if (board_type == BoardType::duo)
-        return *RectGeometry<Point>::get(14, 14);
+        return RectGeometry<Point>::get(14, 14);
     else if (board_type == BoardType::trigon)
-        return *TrigonGeometry<Point>::get(9);
+        return TrigonGeometry<Point>::get(9);
     else
     {
         LIBBOARDGAME_ASSERT(board_type == BoardType::trigon_3);
-        return *TrigonGeometry<Point>::get(8);
+        return TrigonGeometry<Point>::get(8);
     }
 }
 
@@ -591,8 +591,9 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
                              Point center)
 {
     MovePoints points;
+    auto width = m_geo.get_width();
     for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
-        points.push_back(Point((*i).x, (*i).y));
+        points.push_back(Point((*i).x, (*i).y, width));
     MoveInfo info(piece, points);
     MoveInfoExt info_ext;
     set_adj_and_attach_points(info, info_ext);
@@ -653,12 +654,13 @@ void BoardConst::create_moves(Piece piece)
     if (log_move_creation)
         log() << "Creating moves for piece " << piece_info.get_name() << "\n";
     PiecePoints points;
+    auto width = m_geo.get_width();
     for (GeometryIterator i(m_geo); i; ++i)
     {
         if (log_move_creation)
-            log() << "Creating moves at " << *i << "\n";
-        unsigned x = (*i).get_x();
-        unsigned y = (*i).get_y();
+            log() << "Creating moves at " << WritePoint(*i, width) << "\n";
+        auto x = (*i).get_x(width);
+        auto y = (*i).get_y(width);
         for (const Transform* transform : piece_info.get_transforms())
         {
             if (log_move_creation)
@@ -686,7 +688,7 @@ void BoardConst::create_moves(Piece piece)
             if (! is_onboard)
                 continue;
             LIBBOARDGAME_ASSERT(points.contains(CoordPoint(x, y)));
-            create_move(piece, points, Point(x, y));
+            create_move(piece, points, Point(x, y, width));
         }
     }
 }
@@ -702,8 +704,9 @@ Move BoardConst::from_string(const string& s) const
     if (v.size() > PieceInfo::max_size)
         throw Exception("illegal move (too many points)");
     MovePoints points;
+    auto width = m_geo.get_width();
     for (const string& p : v)
-        points.push_back(Point::from_string(p));
+        points.push_back(Point::from_string(p, width));
     Move mv;
     if (! find_move(points, mv))
         throw Exception("illegal move");
@@ -908,13 +911,14 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
     if (with_piece_name)
         s << '[' << get_piece_info(info.get_piece()).get_name() << "]";
     bool is_first = true;
+    auto width = m_geo.get_width();
     for (Point p : info)
     {
         if (! is_first)
             s << ',';
         else
             is_first = false;
-        s << p;
+        p.write(s, width);
     }
     return s.str();
 }

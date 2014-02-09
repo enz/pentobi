@@ -18,7 +18,7 @@ using libboardgame_base::SpShtStrRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, 19, unsigned short, SpShtStrRep> Point;
+typedef libboardgame_base::Point<19 * 19, unsigned short, SpShtStrRep> Point;
 typedef libboardgame_base::Marker<Point> Marker;
 
 //-----------------------------------------------------------------------------
@@ -26,8 +26,8 @@ typedef libboardgame_base::Marker<Point> Marker;
 LIBBOARDGAME_TEST_CASE(boardgame_marker_basic)
 {
     Marker m;
-    Point p1(0, 1);
-    Point p2(0, 0);
+    Point p1(0, 1, 19);
+    Point p2(0, 0, 19);
     LIBBOARDGAME_CHECK(! m[p1]);
     LIBBOARDGAME_CHECK(! m[p2]);
     m.set(p1);
@@ -51,8 +51,8 @@ LIBBOARDGAME_TEST_CASE(boardgame_marker_overflow)
         return;
     Marker m;
     m.setup_for_overflow_test(numeric_limits<unsigned>::max() - 5);
-    Point p1(0, 1);
-    Point p2(0, 0);
+    Point p1(0, 1, 19);
+    Point p2(0, 0, 19);
     for (int i = 0; i < 10; ++i)
     {
         LIBBOARDGAME_CHECK(! m[p1]);

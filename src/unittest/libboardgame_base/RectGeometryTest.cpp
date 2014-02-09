@@ -19,7 +19,7 @@ using libboardgame_base::SpShtStrRep;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19, 19, unsigned short, SpShtStrRep> Point;
+typedef libboardgame_base::Point<19 * 19, unsigned short, SpShtStrRep> Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::RectGeometry<Point> RectGeometry;
 typedef libboardgame_base::PointList<Point> PointList;
@@ -28,69 +28,69 @@ typedef libboardgame_base::PointList<Point> PointList;
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_get_adj_diag)
 {
-    auto g = RectGeometry::get(9, 9);
+    auto& geo = RectGeometry::get(9, 9);
     PointList l;
-    for (NullTermList<Point, 12>::Iterator i(g->get_adj_diag(Point("B9")));
+    for (NullTermList<Point, 12>::Iterator i(geo.get_adj_diag(Point("B9", 9)));
          i; ++i)
         l.push_back(*i);
     LIBBOARDGAME_CHECK_EQUAL(l.size(), 5u);
-    LIBBOARDGAME_CHECK(l.contains(Point("A9")));
-    LIBBOARDGAME_CHECK(l.contains(Point("C9")));
-    LIBBOARDGAME_CHECK(l.contains(Point("A8")));
-    LIBBOARDGAME_CHECK(l.contains(Point("B8")));
-    LIBBOARDGAME_CHECK(l.contains(Point("C8")));
+    LIBBOARDGAME_CHECK(l.contains(Point("A9", 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("C9", 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("A8", 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("B8", 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("C8", 9)));
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
 {
-    auto g = RectGeometry::get(3, 3);
-    Geometry::Iterator i(*g);
+    auto& geo = RectGeometry::get(3, 3);
+    Geometry::Iterator i(geo);
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(0, 0), *i);
+    LIBBOARDGAME_CHECK(Point(0, 0, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(1, 0), *i);
+    LIBBOARDGAME_CHECK(Point(1, 0, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(2, 0), *i);
+    LIBBOARDGAME_CHECK(Point(2, 0, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(0, 1), *i);
+    LIBBOARDGAME_CHECK(Point(0, 1, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(1, 1), *i);
+    LIBBOARDGAME_CHECK(Point(1, 1, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(2, 1), *i);
+    LIBBOARDGAME_CHECK(Point(2, 1, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(0, 2), *i);
+    LIBBOARDGAME_CHECK(Point(0, 2, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(1, 2), *i);
+    LIBBOARDGAME_CHECK(Point(1, 2, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(i);
-    LIBBOARDGAME_CHECK_EQUAL(Point(2, 2), *i);
+    LIBBOARDGAME_CHECK(Point(2, 2, 3) == *i);
     ++i;
     LIBBOARDGAME_CHECK(! i);
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_dist_to_edge)
 {
-    auto g = RectGeometry::get(9, 9);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(3, 0)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(3, 2)), 2u);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(6, 8)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_dist_to_edge(Point(6, 5)), 2u);
+    auto& geo = RectGeometry::get(9, 9);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(3, 0, 9)), 0u);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(3, 2, 9)), 2u);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(6, 8, 9)), 0u);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(6, 5, 9)), 2u);
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_second_dist_to_edge)
 {
-    auto g = RectGeometry::get(9, 9);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(3, 0)), 3u);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(3, 2)), 3u);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(6, 8)), 2u);
-    LIBBOARDGAME_CHECK_EQUAL(g->get_second_dist_to_edge(Point(6, 5)), 3u);
+    auto& geo = RectGeometry::get(9, 9);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(3, 0, 9)), 3u);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(3, 2, 9)), 3u);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(6, 8, 9)), 2u);
+    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(6, 5, 9)), 3u);
 }
 
 //-----------------------------------------------------------------------------

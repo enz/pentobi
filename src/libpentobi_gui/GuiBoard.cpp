@@ -56,8 +56,8 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_selectedPieceTransform(0),
       m_isMoveShown(false)
 {
-    setMinimumWidth(14 * (Point::max_width + 2));
-    setMinimumHeight(14 * (Point::max_height + 2));
+    setMinimumWidth(500);
+    setMinimumHeight(500);
     connect(&m_currentMoveShownAnimationTimer, SIGNAL(timeout()),
             SLOT(showMoveAnimation()));
 }
@@ -109,7 +109,8 @@ Move GuiBoard::findSelectedPieceMove()
     const PiecePoints& points =
         m_bd.get_piece_info(m_selectedPiece).get_points();
     MovePoints movePoints;
-    int width = static_cast<int>(m_bd.get_geometry().get_width());
+    auto geoWidth = m_bd.get_geometry().get_width();
+    int width = static_cast<int>(geoWidth);
     int height = static_cast<int>(m_bd.get_geometry().get_height());
     for (CoordPoint p : points)
     {
@@ -118,7 +119,7 @@ Move GuiBoard::findSelectedPieceMove()
         int y = p.y + m_selectedPieceOffset.y;
         if (x < 0 || x >= width || y < 0 || y >= height)
             return Move::null();
-        movePoints.push_back(Point(x, y));
+        movePoints.push_back(Point(x, y, geoWidth));
     }
     Move mv;
     if (! m_bd.find_move(movePoints, mv)
@@ -155,8 +156,9 @@ void GuiBoard::mousePressEvent(QMouseEvent* event)
     if (m_selectedPiece.is_null())
     {
         CoordPoint p = m_boardPainter.getCoordPoint(event->x(), event->y());
-        if (m_bd.get_geometry().is_onboard(p))
-            emit pointClicked(Point(p.x, p.y));
+        auto& geo = m_bd.get_geometry();
+        if (geo.is_onboard(p))
+            emit pointClicked(Point(p.x, p.y, geo.get_width()));
         return;
     }
     setSelectedPieceOffset(*event);
@@ -462,15 +464,16 @@ void GuiBoard::setSelectedPiecePoints()
     m_selectedPiecePoints.clear();
     if (! m_selectedPiece.is_null() && ! m_selectedPieceOffset.is_null())
     {
-        int width = static_cast<int>(m_bd.get_geometry().get_width());
-        int height = static_cast<int>(m_bd.get_geometry().get_height());
+        auto& geo = m_bd.get_geometry();
+        int width = static_cast<int>(geo.get_width());
+        int height = static_cast<int>(geo.get_height());
         for (CoordPoint p : m_bd.get_piece_info(m_selectedPiece).get_points())
         {
             p = m_selectedPieceTransform->get_transformed(p);
             int x = p.x + m_selectedPieceOffset.x;
             int y = p.y + m_selectedPieceOffset.y;
             if (x >= 0 && x < width && y >= 0 && y < height)
-                m_selectedPiecePoints.push_back(Point(x, y));
+                m_selectedPiecePoints.push_back(Point(x, y, geo.get_width()));
         }
     }
     update();

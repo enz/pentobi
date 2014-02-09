@@ -8,6 +8,7 @@
 #define LIBBOARDGAME_BASE_GRID_H
 
 #include <algorithm>
+#include <cstring>
 #include <iomanip>
 #include <sstream>
 #include <type_traits>
@@ -47,6 +48,9 @@ public:
 
     ostream& write(ostream& out, const Geometry& geo) const;
 
+    /** @pre is_trivially_copyable<T>::value */
+    void memcpy_from(const Grid& grid, const Geometry& geo);
+
 private:
     T m_a[Point::range_onboard_end];
 };
@@ -67,13 +71,21 @@ template<class P, typename T>
 inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
     for (Iterator i(geo); i; ++i)
-        operator[](*i) = val;
+        (*this)[*i] = val;
 }
 
 template<class P, typename T>
 inline void Grid<P, T>::fill_all(const T& val)
 {
     std::fill(m_a, m_a + Point::range_onboard_end, val);
+}
+
+template<class P, typename T>
+inline void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
+{
+    // Uncomment one is_trivially_copyable is implemented in GCC and MSVC
+    //static_assert(is_trivially_copyable<T>::value, "")
+    memcpy(m_a, grid.m_a, geo.get_range());
 }
 
 template<class P, typename T>
@@ -84,19 +96,19 @@ ostream& Grid<P, T>::write(ostream& out, const Geometry& geo) const
     for (Iterator i(geo); i; ++i)
     {
         buffer.str("");
-        buffer << operator[](*i);
+        buffer << (*this)[*i];
         max_len = max(max_len, buffer.str().length());
     }
-    unsigned width = geo.get_width();
-    unsigned height = geo.get_height();
+    auto width = geo.get_width();
+    auto height = geo.get_height();
     string empty(max_len, ' ');
     for (unsigned y = height - 1; ; --y)
     {
         for (unsigned x = 0; x < width; ++x)
         {
-            Point p(x, y);
+            Point p(x, y, width);
             if (geo.is_onboard(p))
-                out << setw(int(max_len)) << operator[](p);
+                out << setw(int(max_len)) << (*this)[p];
             else
                 out << empty;
             if (x < width - 1)

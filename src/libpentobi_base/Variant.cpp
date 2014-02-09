@@ -10,15 +10,38 @@
 
 #include "Variant.h"
 
+#include "libboardgame_base/RectGeometry.h"
+#include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 
+using libboardgame_base::RectGeometry;
+using libboardgame_base::TrigonGeometry;
 using libboardgame_util::trim;
 using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
+
+const Geometry& get_geometry(Variant variant)
+{
+    switch (variant)
+    {
+    case Variant::duo:
+    case Variant::junior:
+        return RectGeometry<Point>::get(14, 14);
+    case Variant::classic:
+    case Variant::classic_2:
+        return RectGeometry<Point>::get(20, 20);
+    case Variant::trigon:
+    case Variant::trigon_2:
+        return TrigonGeometry<Point>::get(9);
+    default:
+        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
+        return TrigonGeometry<Point>::get(8);
+    }
+}
 
 Color::IntType get_nu_colors(Variant variant)
 {
