@@ -243,7 +243,7 @@ inline unsigned Geometry<P>::get_point_type(CoordPoint p) const
 template<class P>
 inline unsigned Geometry<P>::get_range() const
 {
-    return m_width * m_height + 1;
+    return P::get_range(m_width, m_height);
 }
 
 template<class P>

@@ -127,6 +127,8 @@ public:
         geometries, range_onboard_end might be smaller than range. */
     static const unsigned range_onboard_end = range;
 
+    static unsigned get_range(unsigned width, unsigned height);
+
     /** Special-purpose off-board point.
         This point is an off-board point with index 0. Among the use cases is
         an end marker for point lists or to initialize variables that carry a
@@ -397,6 +399,12 @@ inline auto Point<M, I, S>::get_neighbor(Direction dir) const -> Point
 {
     LIBBOARDGAME_ASSERT(! is_null());
     return Point(m_i + dir.to_int());
+}
+
+template<unsigned M, typename I, class S>
+unsigned Point<M, I, S>::get_range(unsigned width, unsigned height)
+{
+    return width * height + 1;
 }
 
 template<unsigned M, typename I, class S>
