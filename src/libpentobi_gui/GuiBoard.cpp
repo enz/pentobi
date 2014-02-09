@@ -56,8 +56,8 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_selectedPieceTransform(0),
       m_isMoveShown(false)
 {
-    setMinimumWidth(500);
-    setMinimumHeight(500);
+    setMinimumWidth(350);
+    setMinimumHeight(350);
     connect(&m_currentMoveShownAnimationTimer, SIGNAL(timeout()),
             SLOT(showMoveAnimation()));
 }
