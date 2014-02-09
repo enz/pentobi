@@ -1922,7 +1922,18 @@ void MainWindow::gameOver()
                 .arg(oldRating).arg(newRating);
         setRated(false);
     }
-    showInfo(info, detailText, "", true);
+    QMessageBox msgBox(this);
+    Util::setNoTitle(msgBox);
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText(info);
+    msgBox.setInformativeText(detailText);
+    auto showRatingButton =
+        msgBox.addButton(tr("Show &Rating"), QMessageBox::AcceptRole);
+    msgBox.addButton(QMessageBox::Close);
+    msgBox.exec();
+    auto result = msgBox.clickedButton();
+    if (result == showRatingButton)
+        showRating();
 }
 
 void MainWindow::variantClassic(bool checked)
