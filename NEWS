@@ -6,6 +6,9 @@ Version 7.UNKNOWN (master)
   generation was faster on multi-core CPUs but there was a small drop
   in playing strength compared to the same playing level on a
   single-core CPU. This effect has been reduced.
+* New toolbar button for starting a rated game.
+* The menu item "Computer Colors" was moved from the Game to the
+  Computer menu.
 * The source code no longer compiles with MSVC 2012 but requires
   MSVC 2013 because a larger subset of C++11 features is used.
 * The source code distribution now uses xz instead of gzip for

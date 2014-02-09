@@ -31,6 +31,8 @@
     <file>icons/pentobi-previous-piece.png</file>
     <file>icons/pentobi-previous-variation.png</file>
     <file>icons/pentobi-previous-variation-16.png</file>
+    <file>icons/pentobi-rated-game.png</file>
+    <file>icons/pentobi-rated-game-16.png</file>
     <file>icons/pentobi-rotate-left.png</file>
     <file>icons/pentobi-rotate-right.png</file>
   </qresource>

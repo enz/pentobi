@@ -4,7 +4,7 @@
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="3547"/>
+        <location filename="MainWindow.cpp" line="3570"/>
         <source>%n move(s)</source>
         <translation>
             <numerusform>%n move</numerusform>
@@ -12,7 +12,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1813"/>
+        <location filename="MainWindow.cpp" line="1818"/>
         <source>Blue wins with %n point(s).</source>
         <translation>
             <numerusform>Blue wins with %n point.</numerusform>
@@ -20,7 +20,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1815"/>
+        <location filename="MainWindow.cpp" line="1820"/>
         <source>Green wins with %n point(s).</source>
         <translation>
             <numerusform>Green wins with %n point.</numerusform>
@@ -28,7 +28,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1823"/>
+        <location filename="MainWindow.cpp" line="1828"/>
         <source>Blue/Red wins with %n point(s).</source>
         <translation>
             <numerusform>Blue/Red wins with %n point.</numerusform>
@@ -36,7 +36,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="MainWindow.cpp" line="1825"/>
+        <location filename="MainWindow.cpp" line="1830"/>
         <source>Yellow/Green wins with %n point(s).</source>
         <translation>
             <numerusform>Yellow/Green wins with %n point.</numerusform>

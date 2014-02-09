@@ -52,6 +52,8 @@ set(pentobi_ICNS
   pentobi-previous-piece.png
   pentobi-previous-variation.png
   pentobi-previous-variation-16.png
+  pentobi-rated-game.png
+  pentobi-rated-game-16.png
   pentobi-rotate-left.png
   pentobi-rotate-right.png
   )

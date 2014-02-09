@@ -972,10 +972,6 @@ void MainWindow::createActions()
     connect(m_actionNextVariation10, SIGNAL(triggered()),
             SLOT(nextVariation10()));
 
-    m_actionRatedGame = createAction(tr("&Rated Game"));
-    m_actionRatedGame->setShortcut(QString("Ctrl+Shift+N"));
-    connect(m_actionRatedGame, SIGNAL(triggered()), SLOT(ratedGame()));
-
     m_actionNew = createAction(tr("&New"));
     m_actionNew->setShortcut(QKeySequence::New);
     m_actionNew->setToolTip(tr("Start a new game"));
@@ -1028,6 +1024,12 @@ void MainWindow::createActions()
     m_actionPreviousVariation10->setShortcut(QString("Ctrl+Shift+Up"));
     connect(m_actionPreviousVariation10, SIGNAL(triggered()),
             SLOT(previousVariation10()));
+
+    m_actionRatedGame = createAction(tr("&Rated Game"));
+    m_actionRatedGame->setToolTip(tr("Start a new rated game"));
+    m_actionRatedGame->setShortcut(QString("Ctrl+Shift+N"));
+    setIcon(m_actionRatedGame, "pentobi-rated-game");
+    connect(m_actionRatedGame, SIGNAL(triggered()), SLOT(ratedGame()));
 
     for (int i = 0; i < maxRecentFiles; ++i)
     {
@@ -1328,7 +1330,6 @@ void MainWindow::createMenu()
     menuVariant->addAction(m_actionVariantTrigon3);
     menuVariant->addAction(m_actionVariantTrigon2);
     menuVariant->addAction(m_actionVariantJunior);
-    menuGame->addAction(m_actionComputerColors);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
@@ -1406,7 +1407,9 @@ void MainWindow::createMenu()
     menuView->addAction(m_actionFullscreen);
 
     auto menuComputer = menuBar()->addMenu(tr("&Computer"));
+    menuComputer->addAction(m_actionComputerColors);
     menuComputer->addAction(m_actionPlay);
+    menuComputer->addSeparator();
     menuComputer->addAction(m_actionPlaySingleMove);
     menuComputer->addAction(m_actionInterrupt);
     menuComputer->addSeparator();
@@ -1529,8 +1532,10 @@ void MainWindow::createToolBar()
     m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     m_toolBar->addAction(m_actionNew);
-    m_toolBar->addAction(m_actionPlay);
+    m_toolBar->addAction(m_actionRatedGame);
+    m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionComputerColors);
+    m_toolBar->addAction(m_actionPlay);
     m_toolBar->addSeparator();
     m_toolBar->addAction(m_actionBeginning);
     m_toolBar->addAction(m_actionBackward10);
@@ -3714,7 +3719,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     if (! m_isGenMoveRunning)
     {
         m_actionPlay->setEnabled(hasMoves);
-        m_actionPlaySingleMove->setEnabled(hasMoves);
+        m_actionPlaySingleMove->setEnabled(! m_isRated && hasMoves);
     }
     m_actionPreviousVariation->setEnabled(
                                     current.get_previous_sibling() != nullptr);
