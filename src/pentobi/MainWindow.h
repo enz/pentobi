@@ -230,6 +230,8 @@ public slots:
 
     void setDeterministic();
 
+    void setNoDelay();
+
 protected:
     void closeEvent(QCloseEvent* event) override;
 
@@ -257,6 +259,8 @@ private:
     Color m_currentColor;
 
     unique_ptr<Player> m_player;
+
+    bool m_noDelay;
 
     bool m_isGenMoveRunning;
 

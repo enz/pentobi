@@ -199,7 +199,8 @@ float getHeuristic(const Board& bd, Move mv)
 MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
                        const QString& booksDir, bool noBook,
                        unsigned nu_threads, size_t memory)
-    : m_isGenMoveRunning(false),
+    : m_noDelay(false),
+      m_isGenMoveRunning(false),
       m_isAnalyzeRunning(false),
       m_autoPlay(true),
       m_ignoreCommentTextChanged(false),
@@ -2010,7 +2011,7 @@ void MainWindow::genMove(bool playSingleMove)
 void MainWindow::genMoveFinished()
 {
     auto elapsed = m_genMoveTime.elapsed();
-    if (elapsed < 800 && ! m_genMoveInterrupted)
+    if (elapsed < 800 && ! m_genMoveInterrupted && ! m_noDelay)
     {
         // Enforce minimum thinking time
         QTimer::singleShot(static_cast<int>(800 - elapsed), this,
@@ -3086,6 +3087,11 @@ void MainWindow::setCommentText(const QString& text)
 void MainWindow::setDeterministic()
 {
     m_player->get_search().set_deterministic();
+}
+
+void MainWindow::setNoDelay()
+{
+    m_noDelay = true;
 }
 
 void MainWindow::setVariant(Variant variant)

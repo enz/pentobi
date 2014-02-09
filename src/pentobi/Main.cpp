@@ -129,6 +129,7 @@ int main(int argc, char* argv[])
         vector<string> specs = {
             "memory:",
             "nobook",
+            "nodelay",
             "seed|r:",
             "threads:",
             "verbose"
@@ -170,6 +171,8 @@ int main(int argc, char* argv[])
                               threads, memory);
         if (opt.contains("seed"))
             mainWindow.setDeterministic();
+        if (opt.contains("nodelay"))
+            mainWindow.setNoDelay();
         mainWindow.show();
         return app.exec();
     }
