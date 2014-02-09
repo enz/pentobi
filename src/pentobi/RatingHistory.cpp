@@ -99,12 +99,11 @@ QString RatingHistory::getFile(unsigned n) const
     return QString("%1/%2.blksgf").arg(m_dir).arg(n);
 }
 
-void RatingHistory::getNextRatedGameSettings(int maxLevel, int& level,
-                                             Color& userColor)
+void RatingHistory::getNextRatedGameSettings(int maxLevel, unsigned random,
+                                             int& level, Color& color)
 {
-    userColor =
-        Color(static_cast<Color::IntType>(
-                  m_random.generate() % get_nu_players(m_variant)));
+    color =
+        Color(static_cast<Color::IntType>(random % get_nu_players(m_variant)));
     float minDiff = 0; // Initialize to avoid compiler warning
     for (int i = 1; i <= maxLevel; ++i)
     {

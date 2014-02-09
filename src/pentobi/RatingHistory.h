@@ -10,14 +10,12 @@
 #include <vector>
 #include <QString>
 #include "libboardgame_base/Rating.h"
-#include "libboardgame_util/RandomGenerator.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Tree.h"
 #include "libpentobi_base/Variant.h"
 
 using namespace std;
 using libboardgame_base::Rating;
-using libboardgame_util::RandomGenerator;
 using libpentobi_base::Color;
 using libpentobi_base::Tree;
 using libpentobi_base::Variant;
@@ -61,8 +59,13 @@ public:
     /** Initialize rating to a given a-priori value. */
     void init(Rating rating);
 
-    /** Get level and user color for next rated games. */
-    void getNextRatedGameSettings(int maxLevel, int& level, Color& userColor);
+    /** Get level and user color for next rated games.
+        @param maxLevel The maximum playing level.
+        @param random A random number to determine the color for the human.
+        @param[out] level The playing level for the next game.
+        @param[out] color The color for the human in the next game. */
+    void getNextRatedGameSettings(int maxLevel, unsigned random, int& level,
+                                  Color& color);
 
     /** Append a new game. */
     void addGame(float score, Rating opponentRating, unsigned nuOpponents,
@@ -90,8 +93,6 @@ public:
     void clear();
 
 private:
-    RandomGenerator m_random;
-
     Variant m_variant;
 
     Rating m_rating;

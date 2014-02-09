@@ -1922,6 +1922,9 @@ void MainWindow::gameOver()
                 tr("Your rating has decreased from %1 to %2.")
                 .arg(oldRating).arg(newRating);
         setRated(false);
+        QSettings settings;
+        auto key = QString("next_rated_random_") + to_string_id(getVariant());
+        settings.remove(key);
     }
     QMessageBox msgBox(this);
     Util::setNoTitle(msgBox);
@@ -2452,7 +2455,18 @@ void MainWindow::newRatedGame()
         m_history->init(Rating(static_cast<float>(dialog.getRating())));
     }
     int level;
-    m_history->getNextRatedGameSettings(maxLevel, level, m_ratedGameColor);
+    QSettings settings;
+    unsigned random;
+    auto key = QString("next_rated_random_") + to_string_id(getVariant());
+    if (settings.contains(key))
+        random = settings.value(key).toUInt();
+    else
+    {
+        random = m_random.generate();
+        settings.setValue(key, random);
+    }
+    m_history->getNextRatedGameSettings(maxLevel, random,
+                                        level, m_ratedGameColor);
     QMessageBox msgBox(this);
     initQuestion(msgBox, tr("Start new rated game?"),
                  "<html>" +

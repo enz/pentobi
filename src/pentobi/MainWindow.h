@@ -16,6 +16,7 @@
 #include <QFutureWatcher>
 #include <QMainWindow>
 #include "RatingHistory.h"
+#include "libboardgame_util/RandomGenerator.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libpentobi_base/Game.h"
 #include "libpentobi_mcts/Player.h"
@@ -39,6 +40,7 @@ using libboardgame_sgf::Node;
 using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
 using libboardgame_util::Exception;
+using libboardgame_util::RandomGenerator;
 using libpentobi_base::Board;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
@@ -317,6 +319,8 @@ private:
         setting a new level does not require to abort a running move
         generation. */
     int m_level;
+
+    RandomGenerator m_random;
 
     unique_ptr<RatingHistory> m_history;
 
