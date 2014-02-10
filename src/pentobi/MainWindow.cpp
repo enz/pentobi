@@ -1328,14 +1328,14 @@ void MainWindow::createMenu()
     menuGame->addAction(m_actionNew);
     menuGame->addAction(m_actionRatedGame);
     menuGame->addSeparator();
-    auto menuVariant = menuGame->addMenu(tr("Game &Variant"));
-    menuVariant->addAction(m_actionVariantClassic);
-    menuVariant->addAction(m_actionVariantClassic2);
-    menuVariant->addAction(m_actionVariantDuo);
-    menuVariant->addAction(m_actionVariantTrigon);
-    menuVariant->addAction(m_actionVariantTrigon3);
-    menuVariant->addAction(m_actionVariantTrigon2);
-    menuVariant->addAction(m_actionVariantJunior);
+    m_menuVariant = menuGame->addMenu(tr("Game &Variant"));
+    m_menuVariant->addAction(m_actionVariantClassic);
+    m_menuVariant->addAction(m_actionVariantClassic2);
+    m_menuVariant->addAction(m_actionVariantDuo);
+    m_menuVariant->addAction(m_actionVariantTrigon);
+    m_menuVariant->addAction(m_actionVariantTrigon3);
+    m_menuVariant->addAction(m_actionVariantTrigon2);
+    m_menuVariant->addAction(m_actionVariantJunior);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
@@ -1419,9 +1419,9 @@ void MainWindow::createMenu()
     menuComputer->addAction(m_actionPlaySingleMove);
     menuComputer->addAction(m_actionInterrupt);
     menuComputer->addSeparator();
-    auto menuLevel = menuComputer->addMenu(tr("&Level"));
+    m_menuLevel = menuComputer->addMenu(tr("&Level"));
     for (int i = 0; i < maxLevel; ++i)
-        menuLevel->addAction(m_actionLevel[i]);
+        m_menuLevel->addAction(m_actionLevel[i]);
 
     auto menuTools = menuBar()->addMenu(tr("&Tools"));
     menuTools->addAction(m_actionRating);
@@ -3711,21 +3711,34 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move_ignore_invalid(current);
     bool hasMoves = bd.has_moves(m_currentColor);
-    m_actionAnalyzeGame->setEnabled(tree.has_main_variation_moves());
+    m_actionAnalyzeGame->setEnabled(! m_isRated
+                                    && tree.has_main_variation_moves());
     m_actionBackToMainVariation->setEnabled(! isMain);
-    m_actionBeginning->setEnabled(hasParent);
+    m_actionBeginning->setEnabled(! m_isRated && hasParent);
     m_actionBeginningOfBranch->setEnabled(hasEarlierVariation);
-    m_actionBackward->setEnabled(hasParent);
-    m_actionBackward10->setEnabled(hasParent);
+    m_actionBackward->setEnabled(! m_isRated && hasParent);
+    m_actionBackward10->setEnabled(! m_isRated && hasParent);
     m_actionComputerColors->setEnabled(! m_isRated);
     m_actionDeleteAllVariations->setEnabled(tree.has_variations());
+    m_actionFindNextComment->setEnabled(! m_isRated);
     m_actionForward->setEnabled(hasChildren);
     m_actionForward10->setEnabled(hasChildren);
     m_actionEnd->setEnabled(hasChildren);
     m_actionFindMove->setEnabled(! isGameOver);
-    m_actionGotoMove->setEnabled(hasCurrentVariationOtherMoves(tree, current));
-    m_actionKeepOnlyPosition->setEnabled(hasParent || hasChildren);
+    m_actionGotoMove->setEnabled(! m_isRated &&
+                                 hasCurrentVariationOtherMoves(tree, current));
+    m_actionVariantClassic->setEnabled(! m_isRated);
+    m_actionVariantClassic2->setEnabled(! m_isRated);
+    m_actionVariantDuo->setEnabled(! m_isRated);
+    m_actionVariantJunior->setEnabled(! m_isRated);
+    m_actionVariantTrigon->setEnabled(! m_isRated);
+    m_actionVariantTrigon2->setEnabled(! m_isRated);
+    m_actionVariantTrigon3->setEnabled(! m_isRated);
+    m_actionKeepOnlyPosition->setEnabled(! m_isRated
+                                         && (hasParent || hasChildren));
     m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
+    for (int i = 0; i < maxLevel; ++i)
+        m_actionLevel[i]->setEnabled(! m_isRated);
     m_actionMakeMainVariation->setEnabled(! isMain);
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
@@ -3738,11 +3751,16 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     }
     m_actionPreviousVariation->setEnabled(
                                     current.get_previous_sibling() != nullptr);
+    m_actionRatedGame->setEnabled(! m_isRated);
     // See also comment in setupMode()
-    m_actionSetupMode->setEnabled(! hasParent && ! hasChildren);
-    m_actionTruncate->setEnabled(hasParent);
+    m_actionSetupMode->setEnabled(! m_isRated && ! hasParent && ! hasChildren);
+    m_actionSelectNextColor->setEnabled(! m_isRated);
+    m_actionTruncate->setEnabled(! m_isRated && hasParent);
     m_actionTruncateChildren->setEnabled(hasChildren);
-    m_actionUndo->setEnabled(hasParent && ! hasChildren && hasMove);
+    m_actionUndo->setEnabled(! m_isRated && hasParent && ! hasChildren
+                             && hasMove);
+    m_menuLevel->setEnabled(! m_isRated);
+    m_menuVariant->setEnabled(! m_isRated);
 }
 
 void MainWindow::updateWindowModified()

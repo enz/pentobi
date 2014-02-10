@@ -562,11 +562,15 @@ private:
 
     QAction* m_actionVeryBadMove;
 
+    QMenu* m_menuLevel;
+
     QMenu* m_menuMoveAnnotation;
 
     QMenu* m_menuOpenRecent;
 
     QMenu* m_menuToolBarText;
+
+    QMenu* m_menuVariant;
 
     QLabel* m_setupModeLabel;
 

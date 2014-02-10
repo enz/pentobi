@@ -7,8 +7,9 @@ Version 7.UNKNOWN (master)
   in playing strength compared to the same playing level on a
   single-core CPU. This effect has been reduced.
 * New toolbar button for starting a rated game.
-* The "Computer Colors" and "Play" toolbar buttons are now disabled
-  during a rated game.
+* The interface is now more locked down during rated game, for example
+  it is no longer possible to change the computer colors or take back a
+  move during a rated game.
 * The menu item "Computer Colors" was moved from the Game to the
   Computer menu.
 * The source code no longer compiles with MSVC 2012 but requires
