@@ -1944,6 +1944,7 @@ void MainWindow::gameOver()
         auto showRatingButton =
             msgBox.addButton(tr("Show &Rating"), QMessageBox::AcceptRole);
         msgBox.addButton(QMessageBox::Close);
+        msgBox.setDefaultButton(showRatingButton);
         msgBox.exec();
         auto result = msgBox.clickedButton();
         if (result == showRatingButton)
