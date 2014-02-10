@@ -3703,6 +3703,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionBeginningOfBranch->setEnabled(hasEarlierVariation);
     m_actionBackward->setEnabled(hasParent);
     m_actionBackward10->setEnabled(hasParent);
+    m_actionComputerColors->setEnabled(! m_isRated);
     m_actionDeleteAllVariations->setEnabled(tree.has_variations());
     m_actionForward->setEnabled(hasChildren);
     m_actionForward10->setEnabled(hasChildren);
@@ -3718,7 +3719,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionNextVariation->setEnabled(current.get_sibling() != nullptr);
     if (! m_isGenMoveRunning)
     {
-        m_actionPlay->setEnabled(hasMoves);
+        m_actionPlay->setEnabled(! m_isRated && hasMoves);
         m_actionPlaySingleMove->setEnabled(! m_isRated && hasMoves);
     }
     m_actionPreviousVariation->setEnabled(
