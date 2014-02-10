@@ -7,6 +7,7 @@
 #ifndef LIBBOARDGAME_BASE_TRIGON_GEOMETRY_H
 #define LIBBOARDGAME_BASE_TRIGON_GEOMETRY_H
 
+#include <algorithm>
 #include <map>
 #include <memory>
 #include "Geometry.h"
