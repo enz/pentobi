@@ -1899,15 +1899,15 @@ void MainWindow::gameOver()
         else
             info = tr("Green wins.");
     }
-    QString detailText;
     if (m_isRated)
     {
+        QString detailText;
         int oldRating = m_history->getRating().to_int();
         unsigned place;
         bool isPlaceShared;
         bd.get_place(m_ratedGameColor, place, isPlaceShared);
         float gameResult;
-        if (place == 0 && ! isPlaceShared)
+        if (place == 0 && !isPlaceShared)
             gameResult = 1;
         else if (place == 0 && isPlaceShared)
             gameResult = 0.5;
@@ -1917,37 +1917,39 @@ void MainWindow::gameOver()
         Rating oppRating = m_player->get_rating(variant);
         QString date = QString(Tree::get_date_today().c_str());
         m_history->addGame(gameResult, oppRating, nuOpp, m_ratedGameColor,
-                           gameResult, date, m_level, m_game->get_tree());
+            gameResult, date, m_level, m_game->get_tree());
         if (m_ratingDialog != nullptr)
             m_ratingDialog->updateContent();
         int newRating = m_history->getRating().to_int();
         if (newRating > oldRating)
             detailText =
-                tr("Your rating has increased from %1 to %2.")
-                .arg(oldRating).arg(newRating);
+            tr("Your rating has increased from %1 to %2.")
+            .arg(oldRating).arg(newRating);
         else if (newRating == oldRating)
             detailText = tr("Your rating stays at %1.").arg(oldRating);
         else
             detailText =
-                tr("Your rating has decreased from %1 to %2.")
-                .arg(oldRating).arg(newRating);
+            tr("Your rating has decreased from %1 to %2.")
+            .arg(oldRating).arg(newRating);
         setRated(false);
         QSettings settings;
         auto key = QString("next_rated_random_") + to_string_id(getVariant());
         settings.remove(key);
+        QMessageBox msgBox(this);
+        Util::setNoTitle(msgBox);
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setText(info);
+        msgBox.setInformativeText(detailText);
+        auto showRatingButton =
+            msgBox.addButton(tr("Show &Rating"), QMessageBox::AcceptRole);
+        msgBox.addButton(QMessageBox::Close);
+        msgBox.exec();
+        auto result = msgBox.clickedButton();
+        if (result == showRatingButton)
+            showRating();
     }
-    QMessageBox msgBox(this);
-    Util::setNoTitle(msgBox);
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.setText(info);
-    msgBox.setInformativeText(detailText);
-    auto showRatingButton =
-        msgBox.addButton(tr("Show &Rating"), QMessageBox::AcceptRole);
-    msgBox.addButton(QMessageBox::Close);
-    msgBox.exec();
-    auto result = msgBox.clickedButton();
-    if (result == showRatingButton)
-        showRating();
+    else
+        showInfo(info);
 }
 
 void MainWindow::variantClassic(bool checked)
