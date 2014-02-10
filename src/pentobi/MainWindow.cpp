@@ -1368,6 +1368,7 @@ void MainWindow::createMenu()
     menuGo->addAction(m_actionGotoMove);
     menuGo->addAction(m_actionBackToMainVariation);
     menuGo->addAction(m_actionBeginningOfBranch);
+    menuGo->addSeparator();
     menuGo->addAction(m_actionFindNextComment);
 
     auto menuEdit = menuBar()->addMenu(tr("&Edit"));
