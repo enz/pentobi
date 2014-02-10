@@ -233,9 +233,14 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_setupModeLabel = new QLabel(tr("Setup mode"));
     statusBar()->addWidget(m_setupModeLabel);
     m_setupModeLabel->hide();
-    m_ratedGameLabel = new QLabel(tr("Rated game"));
-    statusBar()->addWidget(m_ratedGameLabel);
-    m_ratedGameLabel->hide();
+    m_ratedGameLabelIcon = new QLabel();
+    m_ratedGameLabelIcon->setPixmap(
+                         QPixmap(":/pentobi/icons/pentobi-rated-game-16.png"));
+    m_ratedGameLabelText = new QLabel(tr("Rated game"));
+    statusBar()->addWidget(m_ratedGameLabelIcon);
+    statusBar()->addWidget(m_ratedGameLabelText);
+    m_ratedGameLabelIcon->hide();
+    m_ratedGameLabelText->hide();
     initGame();
     m_player.reset(new Player(variant, booksDir.toLocal8Bit().constData(),
                               nu_threads, memory));
@@ -3254,11 +3259,16 @@ void MainWindow::setRated(bool isRated)
     m_isRated = isRated;
     if (isRated)
     {
-        statusBar()->addWidget(m_ratedGameLabel);
-        m_ratedGameLabel->show();
+        statusBar()->addWidget(m_ratedGameLabelIcon);
+        statusBar()->addWidget(m_ratedGameLabelText);
+        m_ratedGameLabelIcon->show();
+        m_ratedGameLabelText->show();
     }
     else
-        statusBar()->removeWidget(m_ratedGameLabel);
+    {
+        statusBar()->removeWidget(m_ratedGameLabelIcon);
+        statusBar()->removeWidget(m_ratedGameLabelText);
+    }
 }
 
 void MainWindow::setSetupPlayer()

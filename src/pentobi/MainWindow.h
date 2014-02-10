@@ -570,7 +570,9 @@ private:
 
     QLabel* m_setupModeLabel;
 
-    QLabel* m_ratedGameLabel;
+    QLabel* m_ratedGameLabelIcon;
+
+    QLabel* m_ratedGameLabelText;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
