@@ -14,9 +14,10 @@ its package repository. They can be installed with the shell command:
 
 == Building ==
 
-Pentobi can be compiled with cmake using the shell command:
+Pentobi can be compiled from the source directory with the shell commands:
 
-  cmake . && make
+  cmake -DCMAKE_BUILD_TYPE=Release .
+  make
 
 === Building with Qt 5 ===
 
