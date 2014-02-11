@@ -31,17 +31,17 @@ in its package repository. They can be installed with the shell command:
   sudo apt-get install \
     qt5-default qttools5-dev qttools5-dev-tools libqt5svg5-dev
 
-The KDE thumbnailer plugin (see below) cannot be compiled with Qt 5.
-
 === Building the KDE thumbnailer plugin ===
 
-A thumbnailer plugin for KDE can be built by using the cmake option
+A thumbnailer plugin for KDE 4 can be built by using the cmake option
 -DPENTOBI_BUILD_KDE_THUMBNAILER=ON. In this case, the KDE development files
 need to be installed (package kdelibs5-dev on Ubuntu 13.10). Note that on
 Ubuntu 13.10, the plugin will not be found if the default installation prefix
 /usr/local is used. You need to add KDEDIRS=/usr/local to /etc/environment.
 After that, you can enable previews for Blokus game file in the Dolphin file
 manager in "Configure Dolphin/General/Previews".
+
+The KDE thumbnailer plugin cannot be compiled with Qt 5.
 
 == Installing ==
 
