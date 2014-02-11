@@ -1,7 +1,7 @@
 Version 7.UNKNOWN (master)
 ==========================
 
-* Increased playing strength in game variant Trigon.
+* Increased playing strength, especially in game variant Trigon.
 * Improved performance on multi-core CPUs: Previously, the move
   generation was faster on multi-core CPUs but there was a small drop
   in playing strength compared to the same playing level on a
