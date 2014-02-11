@@ -29,7 +29,7 @@ install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-16.png
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-32.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps
   RENAME pentobi.png)
-install(FILES ${CMAKE_SOURCE_DIR}//src/pentobi/icons/pentobi.svg
+install(FILES ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi.svg
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/mimetypes)
