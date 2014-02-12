@@ -1,14 +1,11 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(unittest_libboardgame_sgf_STAT_SRCS
+add_executable(unittest_libboardgame_sgf
   NodeTest.cpp
   TreeIteratorTest.cpp
   TreeReaderTest.cpp
   UtilTest.cpp
-  )
-
-add_executable(unittest_libboardgame_sgf
-  ${unittest_libboardgame_sgf_STAT_SRCS})
+)
 
 target_link_libraries(unittest_libboardgame_sgf
   boardgame_test_main

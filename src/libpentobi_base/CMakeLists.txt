@@ -1,34 +1,76 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_base_STAT_SRCS
-  Board.cpp
+  AdjDiagIterator.h
+  AdjIterator.h
   BoardConst.cpp
+  BoardConst.h
+  Board.cpp
+  Board.h
   BoardUpdater.cpp
+  BoardUpdater.h
   BoardUtil.cpp
+  BoardUtil.h
   Book.cpp
+  Book.h
   Color.cpp
+  Color.h
+  ColorMap.h
+  ColorMove.h
+  DiagIterator.h
   Game.cpp
+  Game.h
   GameStateHistory.cpp
+  GameStateHistory.h
+  Geometry.h
+  Grid.h
+  Marker.h
+  Move.h
+  MoveInfo.h
+  MoveList.h
+  MoveMarker.h
+  MovePoints.h
   NodeUtil.cpp
+  NodeUtil.h
+  Piece.h
   PieceInfo.cpp
-  Player.cpp
-  PieceTransforms.cpp
+  PieceInfo.h
+  PieceMap.h
   PieceTransformsClassic.cpp
+  PieceTransformsClassic.h
+  PieceTransforms.cpp
+  PieceTransforms.h
   PieceTransformsTrigon.cpp
+  PieceTransformsTrigon.h
+  Player.cpp
+  Player.h
+  Point.h
+  PointList.h
   PointState.cpp
+  PointState.h
+  PrecompMoves.h
+  Setup.h
   SgfUtil.cpp
+  SgfUtil.h
   StartingPoints.cpp
+  StartingPoints.h
   SymmetricPoints.cpp
+  SymmetricPoints.h
   Tree.cpp
+  Tree.h
   TreeUtil.cpp
+  TreeUtil.h
   TreeWriter.cpp
+  TreeWriter.h
   Variant.cpp
-  )
+  Variant.h
+)
 
 if (PENTOBI_BUILD_GTP)
   set(pentobi_base_STAT_SRCS ${pentobi_base_STAT_SRCS}
     Engine.cpp
-    )
+    Engine.h
+  )
 endif()
 
 add_library(pentobi_base STATIC ${pentobi_base_STAT_SRCS})

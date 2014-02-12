@@ -8,9 +8,10 @@ include_directories(
   ${QT_INCLUDES}
   )
 
-set(pentobi_thumbnail_SRCS PentobiThumbCreator.cpp)
-
-kde4_add_plugin(pentobi-thumbnail ${pentobi_thumbnail_SRCS})
+kde4_add_plugin(pentobi-thumbnail
+  PentobiThumbCreator.cpp
+  PentobiThumbCreator.h
+)
 
 target_link_libraries(pentobi-thumbnail
   pentobi_kde_thumbnailer

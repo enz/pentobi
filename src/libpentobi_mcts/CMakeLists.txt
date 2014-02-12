@@ -1,14 +1,21 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(pentobi_mcts_STAT_SRCS
+add_library(pentobi_mcts STATIC
   AnalyzeGame.cpp
+  AnalyzeGame.h
   BoardUtil.cpp
+  BoardUtil.h
+  Float.h
   LocalValue.cpp
-  PriorKnowledge.cpp
+  LocalValue.h
   Player.cpp
+  Player.h
+  PriorKnowledge.cpp
+  PriorKnowledge.h
   Search.cpp
+  Search.h
   State.cpp
+  State.h
   Util.cpp
-  )
-
-add_library(pentobi_mcts STATIC ${pentobi_mcts_STAT_SRCS})
+  Util.h
+)

@@ -1,11 +1,15 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(boardgame_gtp_STAT_SRCS
+add_library(boardgame_gtp STATIC
   Arguments.cpp
+  Arguments.h
   CmdLine.cpp
+  CmdLine.h
   CmdLineRange.cpp
+  CmdLineRange.h
   Engine.cpp
+  Engine.h
+  Failure.h
   Response.cpp
-  )
-
-add_library(boardgame_gtp STATIC ${boardgame_gtp_STAT_SRCS})
+  Response.h
+)

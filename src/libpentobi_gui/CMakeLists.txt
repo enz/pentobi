@@ -8,20 +8,34 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_gui_STAT_SRCS
   BoardPainter.cpp
+  BoardPainter.h
   ComputerColorDialog.cpp
+  ComputerColorDialog.h
   GameInfoDialog.cpp
+  GameInfoDialog.h
   GuiBoard.cpp
+  GuiBoard.h
   GuiBoardUtil.cpp
+  GuiBoardUtil.h
   HelpWindow.cpp
+  HelpWindow.h
   InitialRatingDialog.cpp
+  InitialRatingDialog.h
   LeaveFullscreenButton.cpp
+  LeaveFullscreenButton.h
   LineEdit.cpp
+  LineEdit.h
   OrientationDisplay.cpp
+  OrientationDisplay.h
   PieceSelector.cpp
+  PieceSelector.h
   SameHeightLayout.cpp
+  SameHeightLayout.h
   ScoreDisplay.cpp
+  ScoreDisplay.h
   Util.cpp
-  )
+  Util.h
+)
 
 set(pentobi_gui_ICNS
   go-home.png

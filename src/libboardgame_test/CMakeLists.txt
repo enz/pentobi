@@ -1,7 +1,6 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(boardgame_test_STAT_SRCS
+add_library(boardgame_test STATIC
   Test.cpp
-  )
-
-add_library(boardgame_test STATIC ${boardgame_test_STAT_SRCS})
+  Test.h
+)

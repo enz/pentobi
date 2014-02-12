@@ -1,21 +1,41 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(boardgame_util_STAT_SRCS
+add_library(boardgame_util STATIC
   Abort.cpp
+  Abort.h
+  ArrayList.h
   Assert.cpp
+  Assert.h
   Barrier.cpp
+  Barrier.h
+  BitMarker.h
   CpuTime.cpp
+  CpuTime.h
   Exception.cpp
+  Exception.h
   FastLog.cpp
+  FastLog.h
+  FmtSaver.h
   IntervalChecker.cpp
+  IntervalChecker.h
   Log.cpp
+  Log.h
+  NullElement.h
+  NullTermList.h
   Options.cpp
+  Options.h
   RandomGenerator.cpp
+  RandomGenerator.h
+  Statistics.h
   StringUtil.cpp
+  StringUtil.h
   TimeIntervalChecker.cpp
+  TimeIntervalChecker.h
   Timer.cpp
+  Timer.h
   TimeSource.cpp
+  TimeSource.h
+  Unused.h
   WallTime.cpp
-  )
-
-add_library(boardgame_util STATIC ${boardgame_util_STAT_SRCS})
+  WallTime.h
+)

@@ -1,11 +1,10 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(pentobi_gtp_SRCS
+add_executable(pentobi-gtp
   Engine.cpp
+  Engine.h
   Main.cpp
-  )
-
-add_executable(pentobi-gtp ${pentobi_gtp_SRCS})
+)
 
 target_link_libraries(pentobi-gtp
   pentobi_mcts

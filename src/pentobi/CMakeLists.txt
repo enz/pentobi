@@ -8,18 +8,29 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_SRCS
   AnalyzeGameWidget.cpp
+  AnalyzeGameWidget.h
   AnalyzeGameWindow.cpp
+  AnalyzeGameWindow.h
   AnalyzeSpeedDialog.cpp
+  AnalyzeSpeedDialog.h
   Application.cpp
-  MainWindow.cpp
+  Application.h
   Main.cpp
+  MainWindow.cpp
+  MainWindow.h
   RatedGamesList.cpp
+  RatedGamesList.h
   RatingDialog.cpp
-  RatingHistory.cpp
+  RatingDialog.h
   RatingGraph.cpp
+  RatingGraph.h
+  RatingHistory.cpp
+  RatingHistory.h
   ShowMessage.cpp
+  ShowMessage.h
   Util.cpp
-  )
+  Util.h
+)
 
 set(pentobi_ICNS
   pentobi.png

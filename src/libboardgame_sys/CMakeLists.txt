@@ -1,8 +1,9 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(boardgame_sys_STAT_SRCS
+add_library(boardgame_sys STATIC
+  Compiler.h
   CpuTime.cpp
+  CpuTime.h
   Memory.cpp
-  )
-
-add_library(boardgame_sys STATIC ${boardgame_sys_STAT_SRCS})
+  Memory.h
+)

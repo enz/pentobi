@@ -1,15 +1,12 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(unittest_libpentobi_base_STAT_SRCS
+add_executable(unittest_libpentobi_base
   BoardConstTest.cpp
   BoardTest.cpp
   BoardUpdaterTest.cpp
   GameTest.cpp
   TreeTest.cpp
-  )
-
-add_executable(unittest_libpentobi_base
-  ${unittest_libpentobi_base_STAT_SRCS})
+)
 
 target_link_libraries(unittest_libpentobi_base
   boardgame_test_main

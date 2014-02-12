@@ -4,12 +4,9 @@ endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(pentobi_thumbnail_STAT_SRCS
-  CreateThumbnail.cpp
-  )
-
 add_library(pentobi_thumbnail STATIC
-  ${pentobi_thumbnail_STAT_SRCS}
+  CreateThumbnail.cpp
+  CreateThumbnail.h
 )
 
 if (USE_QT5)
