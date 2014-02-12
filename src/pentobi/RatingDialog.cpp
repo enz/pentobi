@@ -37,8 +37,14 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     auto formLayout = new QFormLayout();
     layout->addLayout(formLayout);
     formLayout->setLabelAlignment(Qt::AlignLeft);
+    auto box = new QHBoxLayout();
+    auto pixmapRating = new QLabel();
+    pixmapRating->setPixmap(
+                         QPixmap(":/pentobi/icons/pentobi-rated-game-16.png"));
+    box->addWidget(pixmapRating);
     m_labelRating = new QLabel();
-    formLayout->addRow(tr("Your rating:"), m_labelRating);
+    box->addWidget(m_labelRating);
+    formLayout->addRow(tr("Your rating:"), box);
     m_labelVariant = new QLabel();
     formLayout->addRow(tr("Game variant:"), m_labelVariant);
     m_labelNuGames = new QLabel();
@@ -128,8 +134,9 @@ void RatingDialog::updateContent()
         m_labelNuGames->setText(QString("%1").arg(nuGames));
     if (nuGames == 0)
     {
-        m_labelRating->setText("");
-        m_labelBestRating->setText("");
+        QString text = tr("n/a");
+        m_labelRating->setText("<b>" + text);
+        m_labelBestRating->setText(text);
     }
     else
     {
