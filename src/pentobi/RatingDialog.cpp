@@ -135,9 +135,8 @@ void RatingDialog::updateContent()
         m_labelNuGames->setText(QString("%1").arg(nuGames));
     if (nuGames == 0)
     {
-        QString text = tr("n/a");
-        m_labelRating->setText("<b>" + text);
-        m_labelBestRating->setText(text);
+        m_labelRating->setText("<b>-");
+        m_labelBestRating->setText("-");
     }
     else
     {
