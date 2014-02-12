@@ -1,4 +1,4 @@
-if(PENTOBI_BUILD_GUI)
+if(PENTOBI_BUILD_GUI AND NOT WIN32)
 
 # Create bitmap icons from SVG icons using the helper program src/convert
 add_custom_target(
