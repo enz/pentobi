@@ -44,6 +44,7 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     box->addWidget(pixmapRating);
     m_labelRating = new QLabel();
     box->addWidget(m_labelRating);
+    box->addStretch();
     formLayout->addRow(tr("Your rating:"), box);
     m_labelVariant = new QLabel();
     formLayout->addRow(tr("Game variant:"), m_labelVariant);
