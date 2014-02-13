@@ -25,9 +25,9 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
 {
     setWindowTitle(tr("Game Info"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    auto layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout;
     setLayout(layout);
-    m_formLayout = new QFormLayout();
+    m_formLayout = new QFormLayout;
     layout->addLayout(m_formLayout);
     auto variant = game.get_variant();
     if (variant == Variant::duo || variant == Variant::junior)

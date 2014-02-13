@@ -101,14 +101,14 @@ void RatedGamesList::updateContent(Variant variant,
     for (int i = 0; i < nuRows; ++i)
     {
         auto& info = history.getGameInfos()[i];
-        auto number = new QStandardItem();
+        auto number = new QStandardItem;
         number->setData(info.number, Qt::DisplayRole);
-        auto color = new QStandardItem();
+        auto color = new QStandardItem;
         if (info.color.to_int() < get_nu_colors(variant))
             color->setText(Util::getPlayerString(variant, info.color));
         else
             log() << "Error: invalid color in rating history\n";
-        auto level = new QStandardItem();
+        auto level = new QStandardItem;
         level->setData(info.level, Qt::DisplayRole);
         QString result;
         if (info.result == 1)

@@ -27,7 +27,7 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 {
     setWindowTitle(tr("Computer Colors"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    auto layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout;
     setLayout(layout);
     layout->addWidget(new QLabel(tr("Colors played by the computer:")));
     for (Color::IntType i = 0; i < get_nu_players(m_variant); ++i)

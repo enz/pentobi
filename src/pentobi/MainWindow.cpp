@@ -97,7 +97,7 @@ namespace {
 
 QToolButton* createOBoxToolButton(QAction* action)
 {
-    auto button = new QToolButton();
+    auto button = new QToolButton;
     button->setDefaultAction(action);
     button->setAutoRaise(true);
     button->setFocusPolicy(Qt::NoFocus);
@@ -229,12 +229,12 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     createActions();
     setCentralWidget(createCentralWidget());
     initPieceSelectors();
-    m_moveNumber = new QLabel();
+    m_moveNumber = new QLabel;
     statusBar()->addPermanentWidget(m_moveNumber);
     m_setupModeLabel = new QLabel(tr("Setup mode"));
     statusBar()->addWidget(m_setupModeLabel);
     m_setupModeLabel->hide();
-    m_ratedGameLabelIcon = new QLabel();
+    m_ratedGameLabelIcon = new QLabel;
     m_ratedGameLabelIcon->setPixmap(
                          QPixmap(":/pentobi/icons/pentobi-rated-game-16.png"));
     m_ratedGameLabelText = new QLabel(tr("Rated game"));
@@ -1271,12 +1271,12 @@ void MainWindow::createActions()
 
 QWidget* MainWindow::createCentralWidget()
 {
-    auto widget = new QWidget();
+    auto widget = new QWidget;
     // We add spacing around and between the two panels using streches (such
     // that the spacing grows with the window size)
-    auto outerLayout = new QVBoxLayout();
+    auto outerLayout = new QVBoxLayout;
     widget->setLayout(outerLayout);
-    auto innerLayout = new QHBoxLayout();
+    auto innerLayout = new QHBoxLayout;
     outerLayout->addStretch(1);
     outerLayout->addLayout(innerLayout, 100);
     outerLayout->addStretch(1);
@@ -1297,7 +1297,7 @@ QWidget* MainWindow::createLeftPanel()
     m_splitter = new QSplitter(Qt::Vertical);
     m_guiBoard = new GuiBoard(0, getBoard());
     m_splitter->addWidget(m_guiBoard);
-    m_comment = new QPlainTextEdit();
+    m_comment = new QPlainTextEdit;
     m_comment->setTabChangesFocus(true);
     connect(m_comment, SIGNAL(textChanged()), SLOT(commentChanged()));
     m_splitter->addWidget(m_comment);
@@ -1435,8 +1435,8 @@ void MainWindow::createMenu()
 
 QLayout* MainWindow::createOrientationButtonBoxLeft()
 {
-    auto outerLayout = new QVBoxLayout();
-    auto layout = new QGridLayout();
+    auto outerLayout = new QVBoxLayout;
+    auto layout = new QGridLayout;
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceAnticlockwise),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionRotatePieceClockwise),
@@ -1453,8 +1453,8 @@ QLayout* MainWindow::createOrientationButtonBoxLeft()
 
 QLayout* MainWindow::createOrientationButtonBoxRight()
 {
-    auto outerLayout = new QVBoxLayout();
-    auto layout = new QGridLayout();
+    auto outerLayout = new QVBoxLayout;
+    auto layout = new QGridLayout;
     layout->addWidget(createOBoxToolButton(m_actionPreviousPiece),
                       0, 0);
     layout->addWidget(createOBoxToolButton(m_actionNextPiece),
@@ -1469,7 +1469,7 @@ QLayout* MainWindow::createOrientationButtonBoxRight()
 
 QLayout* MainWindow::createOrientationSelector()
 {
-    auto layout = new QHBoxLayout();
+    auto layout = new QHBoxLayout;
     layout->addStretch();
     layout->addLayout(createOrientationButtonBoxLeft());
     layout->addSpacing(8);
@@ -1489,9 +1489,9 @@ QLayout* MainWindow::createRightPanel()
 {
     auto layout = new QBoxLayout(QBoxLayout::TopToBottom);
     layout->addLayout(createOrientationSelector(), 20);
-    m_scoreDisplay = new ScoreDisplay();
+    m_scoreDisplay = new ScoreDisplay;
     layout->addWidget(m_scoreDisplay, 5);
-    auto pieceSelectorLayout = new SameHeightLayout();
+    auto pieceSelectorLayout = new SameHeightLayout;
     layout->addLayout(pieceSelectorLayout, 80);
     for (ColorIterator i(Color::range); i; ++i)
     {
@@ -1534,7 +1534,7 @@ void MainWindow::doubtfulMove(bool checked)
 
 void MainWindow::createToolBar()
 {
-    m_toolBar = new QToolBar();
+    m_toolBar = new QToolBar;
     m_toolBar->setMovable(false);
     m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);

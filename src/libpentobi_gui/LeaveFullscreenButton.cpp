@@ -21,7 +21,7 @@
 LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
     : QObject(parent)
 {
-    m_timer = new QTimer();
+    m_timer = new QTimer;
     m_timer->setSingleShot(true);
     m_triggerArea = new QWidget(parent);
     m_triggerArea->setMouseTracking(true);
