@@ -95,8 +95,9 @@ else()
   qt4_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc)
 endif()
 
-# We don't use qt4_add_translation because it doesn't use option -removeidentical
-# with lrelease, which causes larger sizes of the generated qm files
+# We don't use qt4_add_translation because it doesn't use option
+# -removeidentical with lrelease, which causes larger sizes of the generated qm
+# files
 if (USE_QT5)
   set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
 else()
@@ -108,8 +109,9 @@ foreach(ts ${pentobi_TS})
   set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
   add_custom_command(OUTPUT ${qm}
     COMMAND ${LRELEASE_EXECUTABLE}
-    ARGS -removeidentical -nounfinished ${CMAKE_CURRENT_SOURCE_DIR}/${ts} -qm ${qm}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ts} VERBATIM
+    ARGS -removeidentical -nounfinished
+      ${CMAKE_CURRENT_SOURCE_DIR}/translations/${ts} -qm ${qm}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/translations/${ts} VERBATIM
     )
   set(pentobi_QM_SRCS ${pentobi_QM_SRCS} ${qm})
 endforeach()
