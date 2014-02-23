@@ -540,7 +540,7 @@ void State::start_search()
 
     // Init precomputed gamma values
     double gamma = 1;
-    for (unsigned i = 1; i < PieceInfo::max_size + 1; ++i, gamma *= 5)
+    for (unsigned i = 1; i < PieceInfo::max_size + 1; ++i, gamma *= 3)
         m_gamma_piece_size[i] = gamma;
     gamma = 1e10;
     for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i, gamma *= 1e10)
