@@ -26,10 +26,10 @@ int main(int argc, char* argv[])
         QImageReader reader(in);
         QImage image = reader.read();
         if (image.isNull())
-            throw QString("'%1': %2").arg(in).arg(reader.errorString());
+            throw QString("%1: %2").arg(in).arg(reader.errorString());
         QImageWriter writer(out);
         if (! writer.write(image))
-            throw QString("'%1': %2").arg(out).arg(writer.errorString());
+            throw QString("%1: %2").arg(out).arg(writer.errorString());
     }
     catch (const QString& msg)
     {
