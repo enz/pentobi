@@ -10,6 +10,7 @@
 
 #include "Search.h"
 
+#include <cstddef>
 #include "BoardUtil.h"
 #include "Util.h"
 #include "libboardgame_util/FmtSaver.h"
@@ -227,7 +228,8 @@ void Search::on_start_search(bool is_followup)
                                 // we still need during in-place construction
                                 LIBBOARDGAME_ASSERT(
                                     m - precomp_moves.move_lists_begin()
-                                    >= precomp_moves.get_size());
+                                    >= static_cast<ptrdiff_t>(
+                                                 precomp_moves.get_size()));
                             precomp_moves.push_move(*m);
                         }
                     auto end = precomp_moves.get_size() - begin;
