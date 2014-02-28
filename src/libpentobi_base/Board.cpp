@@ -31,7 +31,7 @@ void write_x_coord(ostream& out, unsigned width, unsigned offset)
         if (x < 26)
             out << ' ';
         else
-            out << 'a';
+            out << 'A';
         if (x == 26)
             c = 'A';
         out << c;
