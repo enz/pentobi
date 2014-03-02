@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.9)
 # Use all lower-case for project name because it is used in
 # CMAKE_INSTALL_DOCDIR of GNUInstallDirs
 project(pentobi)
-set(PENTOBI_VERSION 7.UNKNOWN)
+set(PENTOBI_VERSION 8.0)
 
 if(POLICY CMP0020)
   # Remove once we require CMake 2.8.11

@@ -1,5 +1,5 @@
-Version 7.UNKNOWN (master)
-==========================
+Version 8.0 (02 Mar 2014)
+=========================
 
 * Increased playing strength, especially in game variant Trigon.
 * Improved performance on multi-core CPUs: Previously, the move
