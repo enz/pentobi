@@ -7,7 +7,7 @@ Version 8.0 (02 Mar 2014)
   in playing strength compared to the same playing level on a
   single-core CPU. This effect has been reduced.
 * New toolbar button for starting a rated game.
-* The interface is now more locked down during rated game, for example
+* The interface is now more locked down during rated games, for example
   it is no longer possible to change the computer colors or take back a
   move during a rated game.
 * The menu item "Computer Colors" was moved from the Game to the
