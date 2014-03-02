@@ -539,8 +539,10 @@ void State::start_search()
     m_prior_knowledge.start_search(bd);
 
     // Init precomputed gamma values
+    double gamma_size_factor = bd.get_board_type() == BoardType::duo ? 3 : 5;
     double gamma = 1;
-    for (unsigned i = 1; i < PieceInfo::max_size + 1; ++i, gamma *= 3)
+    for (unsigned i = 1; i < PieceInfo::max_size + 1;
+         ++i, gamma *= gamma_size_factor)
         m_gamma_piece_size[i] = gamma;
     gamma = 1e10;
     for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i, gamma *= 1e10)
