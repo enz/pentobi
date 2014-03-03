@@ -40,7 +40,7 @@
     <p>
       To use the engine from a controller program, the controller typically
       creates a child process by running <tt>pentobi-gtp</tt> and then sends
-      commands and receives responses through the input/ouput streams of the
+      commands and receives responses through the input/output streams of the
       child process.
       How this is done, depends on the platform (programming language and/or
       operating system).
@@ -48,9 +48,9 @@
       <tt>java.lang.Runtime.exec()</tt>.
     </p>
     <p>
-      Note that the input/ouput streams of child processes are often fully
+      Note that the input/output streams of child processes are often fully
       buffered.
-      You should explicitely flush the output stream after sending a command.
+      You should explicitly flush the output stream after sending a command.
       Another caveat is that <tt>pentobi-gtp</tt> writes debugging information
       to its standard error stream.
       On some platforms the standard error stream of the child process
@@ -388,7 +388,7 @@
 	      good strategy for the second player because a draw is a good
 	      result considering the first-play advantage.
 	      However, playing symmetrically could be considered bad style,
-	      so this behaviour is avoided (value <tt>1</tt>) by default.
+	      so this behavior is avoided (value <tt>1</tt>) by default.
 	    </dd>
 	    <dt>fixed_simulations <i>n</i></dt>
 	    <dd>
