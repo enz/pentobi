@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file svgtopng/Main.cpp
+/** @file convert/Main.cpp
     Utility program for converting icons between image formats.
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
