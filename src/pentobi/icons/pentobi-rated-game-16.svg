@@ -15,6 +15,17 @@
   <defs
      id="defs3004">
     <linearGradient
+       id="linearGradient3760">
+      <stop
+         id="stop3762"
+         style="stop-color:#888a85;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3764"
+         style="stop-color:#a7a9a5;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient4343">
       <stop
          id="stop4345"
@@ -34,8 +45,17 @@
        y1="13.159112"
        x2="-11.167658"
        y2="17.639507"
-       id="linearGradient5622"
+       id="linearGradient2994"
        xlink:href="#linearGradient4343"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.85568392,0,0,0.87742505,17.361172,-2.66492)" />
+    <linearGradient
+       x1="7.7053466"
+       y1="0.56215793"
+       x2="8.1787968"
+       y2="6.935039"
+       id="linearGradient3766"
+       xlink:href="#linearGradient3760"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <metadata
@@ -50,30 +70,24 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     transform="translate(0,-16)"
-     id="layer1">
-    <path
-       d="m 11.758159,25.361724 3.843675,-8.828549 -3.212625,0 -3.7289378,8.770082 z"
-       id="path4318-2"
-       style="fill:#babdb6;stroke:#888a85;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       d="m 0.8833125,16.452585 14.7954835,0.104136 -1.305485,1.978605 -12.4218754,0.03471 z"
-       id="rect4338"
-       style="fill:#babdb6;fill-opacity:1;fill-rule:evenodd;stroke:#888a85;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       d="m 4.3108361,25.445769 -3.88232289,-8.928179 3.24492659,0 3.7664319,8.869052 z"
-       id="path4318"
-       style="fill:#babdb6;stroke:#888a85;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       d="m -9.5509162,19.569059 a 3.2848182,3.2848182 0 1 1 -0.00864,-0.265201"
-       transform="matrix(1.3698084,0,0,1.3959743,25.596225,-0.27295395)"
-       id="path4316"
-       style="fill:#edd400;fill-opacity:1;fill-rule:evenodd;stroke:#c4a000;stroke-width:0.72315502;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       d="m -6.9010028,15.600216 a 4.0577164,4.0577164 0 1 1 -0.010669,-0.3276"
-       transform="matrix(0.85568392,0,0,0.87742505,17.361172,13.33508)"
-       id="path4341"
-       style="fill:url(#linearGradient5622);fill-opacity:1;fill-rule:evenodd;stroke:#fce94f;stroke-width:1.15408623;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-  </g>
+  <path
+     d="M 0.8833125,0.452585 15.678796,0.556721 14.373311,2.535326 1.9514356,2.570036 z"
+     id="rect4338"
+     style="fill:#babdb6;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3766);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  <path
+     d="m 11.758159,9.361724 3.843675,-8.828549 -3.212625,0 -3.7289378,8.770082 z"
+     id="path4318-2"
+     style="fill:#d3d7cf;stroke:#888a85;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  <path
+     d="M 4.3108361,9.445769 0.42851321,0.51759 l 3.24492659,0 3.7664319,8.869052 z"
+     id="path4318"
+     style="fill:#d3d7cf;stroke:#888a85;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  <path
+     d="M 12.5133,11.044949 A 4.4995716,4.5855218 0 1 1 12.50147,10.674736"
+     id="path4316"
+     style="fill:#edd400;fill-opacity:1;fill-rule:evenodd;stroke:#c4a000;stroke-width:1.00000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  <path
+     d="m 11.456095,11.0231 a 3.4721227,3.560342 0 1 1 -0.0091,-0.287444"
+     id="path4341"
+     style="fill:url(#linearGradient2994);fill-opacity:1;fill-rule:evenodd;stroke:#fce94f;stroke-width:0.99999988;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
 </svg>
