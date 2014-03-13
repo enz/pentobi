@@ -56,7 +56,8 @@
        y2="6.935039"
        id="linearGradient3766"
        xlink:href="#linearGradient3760"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.85210313,0,0,1,0.93365045,0)" />
   </defs>
   <metadata
      id="metadata3007">
@@ -71,15 +72,15 @@
     </rdf:RDF>
   </metadata>
   <path
-     d="M 0.8833125,0.452585 15.678796,0.556721 14.373311,2.535326 1.9514356,2.570036 z"
+     d="M 1.7264744,0.51281085 14,0.51657044 13.181194,2.535326 2.5964748,2.570036 z"
      id="rect4338"
-     style="fill:#babdb6;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3766);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+     style="fill:#babdb6;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3766);stroke-width:0.99999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   <path
-     d="m 11.758159,9.361724 3.843675,-8.828549 -3.212625,0 -3.7289378,8.770082 z"
+     d="M 11.758159,9.361724 15.203875,1.6116158 14.759097,0.49302444 12.389209,0.533175 8.6602712,9.303257 z"
      id="path4318-2"
      style="fill:#d3d7cf;stroke:#888a85;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   <path
-     d="M 4.3108361,9.445769 0.42851321,0.51759 l 3.24492659,0 3.7664319,8.869052 z"
+     d="M 4.3108361,9.445769 0.90429347,1.611742 1.2315245,0.49751472 3.6734398,0.51759 7.4398717,9.386642 z"
      id="path4318"
      style="fill:#d3d7cf;stroke:#888a85;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   <path
