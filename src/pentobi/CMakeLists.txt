@@ -180,7 +180,7 @@ install(FILES ${pentobi_QM_SRCS}
   DESTINATION ${CMAKE_INSTALL_DATADIR}/pentobi/translations)
 
 install(DIRECTORY manual DESTINATION ${CMAKE_INSTALL_DOCDIR}
-  FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png")
+  FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg")
 
 if(MSVC)
   configure_file(pentobi.conf.in Debug/pentobi.conf @ONLY)
