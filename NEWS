@@ -40,7 +40,7 @@ Version 7.2 (30 Jan 2014)
 * Fixed a compilation error with GCC 4.8.2 on PowerPC (and other
   big-endian systems)
 * Fixed wrong arguments to update-mime-database/update-desktop-database
-  when runing "make post-install"
+  when running "make post-install"
 * Improved a blurry menu item icon
 * Fixed a compilation warning about a missing translation
 * Reduced the sizes of the generated and installed translation files.
@@ -220,7 +220,7 @@ Version 0.3 (2 Dec 2011)
 * Fixed saving/opening files if file name contained non-ASCII characters and
   the system used an encoding other than Latin1
 * The score numbers now show the total player and color scores instead of
-  on-board and bonus points separatedly (feature request #3431039)
+  on-board and bonus points separately (feature request #3431039)
 * New menu item "Edit/Select Next Color" that allows to enter moves independent
   of the color to play on the board (feature request #3441299)
 * Slightly changed file format to use single-valued move properties as used in
