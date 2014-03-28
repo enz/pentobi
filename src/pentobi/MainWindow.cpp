@@ -1061,6 +1061,7 @@ void MainWindow::createActions()
     connect(m_actionSave, SIGNAL(triggered()), SLOT(save()));
 
     m_actionSaveAs = createAction(tr("Save &As..."));
+    m_actionSaveAs->setIcon(QIcon::fromTheme("document-save-as"));
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), SLOT(saveAs()));
 
@@ -1338,6 +1339,7 @@ void MainWindow::createMenu()
     menuGame->addSeparator();
     menuGame->addAction(m_actionOpen);
     m_menuOpenRecent = menuGame->addMenu(tr("Open R&ecent"));
+    m_menuOpenRecent->setIcon(QIcon::fromTheme("document-open-recent"));
     for (int i = 0; i < maxRecentFiles; ++i)
         m_menuOpenRecent->addAction(m_actionRecentFile[i]);
     menuGame->addSeparator();
