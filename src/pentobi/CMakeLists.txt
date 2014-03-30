@@ -116,18 +116,16 @@ foreach(ts ${pentobi_TS})
   set(pentobi_QM_SRCS ${pentobi_QM_SRCS} ${qm})
 endforeach()
 
-if (MINGW OR CYGWIN)
-  # Workaround for a compilation failure with MINGW if we let CMake 
-  # build the RC object: it would invoke windres.exe with the current
-  # CXXFLAGS but some of them are GCC-specific and not supported
-  # by windres.exe (e.g. -std=c++11).
-  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
+if (WIN32)
+  # Note: CMake's support of adding rc files directly to the sources is
+  # broken because it invokes windres with the current CXXFLAGS but some
+  # of them might be compiler-specific and cause windres to fail (e.g.
+  # -std=c++11 of MinGW/Cygwin GCC; last tested with CMake 2.8.12.1).
+  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/pentobi.res
     COMMAND windres.exe -I${CMAKE_CURRENT_SOURCE_DIR}
-    -i${CMAKE_CURRENT_SOURCE_DIR}/icon.rc
-    -o ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
-  set(pentobi_SRCS ${pentobi_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
-else()
-  set(pentobi_SRCS ${pentobi_SRCS} icon.rc)
+    -i${CMAKE_CURRENT_SOURCE_DIR}/pentobi.rc
+    -o ${CMAKE_CURRENT_BINARY_DIR}/pentobi.res)
+  set(pentobi_SRCS ${pentobi_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/pentobi.res)
 endif()
 
 add_executable(pentobi WIN32
