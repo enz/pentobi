@@ -625,7 +625,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="1422"/>
         <source>&amp;Tools</source>
-        <translation>&amp;Extras</translation>
+        <translation>E&amp;xtras</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1426"/>
