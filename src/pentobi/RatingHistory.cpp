@@ -156,7 +156,8 @@ void RatingHistory::load(Variant variant)
         if (! in || c >= get_nu_colors(variant))
             return;
         info.color = Color(static_cast<Color::IntType>(c));
-        m_games.push_back(info);
+        if (info.number >= 1 && info.number <= m_nuGames)
+            m_games.push_back(info);
     }
     size_t nuGames = m_games.size();
     if (nuGames > maxGames)
