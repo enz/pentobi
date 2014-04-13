@@ -546,7 +546,7 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         m_pieces = create_pieces_classic(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_duo);
     }
-    m_nu_pieces = static_cast<unsigned>(m_pieces.size());
+    m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     init_adj_status();
     create_moves();
     if (board_type == BoardType::classic)
@@ -786,7 +786,7 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     Point p = points[0];
     if (! m_geo.is_onboard(p))
         return false;
-    for (unsigned i = 0; i < m_pieces.size(); ++i)
+    for (Piece::IntType i = 0; i < m_pieces.size(); ++i)
     {
         Piece piece(i);
         if (get_piece_info(piece).get_size() == points.size())

@@ -365,7 +365,7 @@ private:
             and restore_snapshot() */
         PiecesLeftList pieces_left;
 
-        PieceMap<unsigned> nu_left_piece;
+        PieceMap<uint_fast8_t> nu_left_piece;
 
         unsigned nu_onboard_pieces;
 
@@ -407,7 +407,7 @@ private:
     unsigned m_bonus_one_piece;
 
     /** See get_nu_piece_instances() */
-    unsigned m_nu_piece_instances;
+    uint_fast8_t m_nu_piece_instances;
 
     /** Same as m_board_const->get_move_info_array() */
     const MoveInfo* m_move_info_array;
