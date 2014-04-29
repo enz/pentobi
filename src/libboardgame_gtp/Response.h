@@ -20,7 +20,7 @@ using namespace std;
 class Response
 {
 public:
-    ~Response() throw();
+    ~Response();
 
     /** Conversion to output stream.
         Returns reference to response stream. */

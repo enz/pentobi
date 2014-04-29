@@ -113,8 +113,6 @@ public:
         @param shared_const (@ref libboardgame_doc_storesref) */
     State(Variant initial_variant, const SharedConst& shared_const);
 
-    ~State() throw();
-
     State& operator=(const State&) = delete;
 
     /** Play a move in the in-tree phase of the search. */

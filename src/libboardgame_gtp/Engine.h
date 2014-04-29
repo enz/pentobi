@@ -67,7 +67,7 @@ public:
 
     Engine& operator=(const Engine&) const = delete;
 
-    virtual ~Engine() throw();
+    virtual ~Engine();
 
     /** Execute commands from an input stream.
         @param in The input stream

@@ -108,7 +108,7 @@ class PonderThread
 public:
     PonderThread(Engine& engine);
 
-    ~PonderThread() throw();
+    ~PonderThread();
 
     void start_ponder();
 
@@ -195,7 +195,7 @@ PonderThread::PonderThread(Engine& engine)
     m_ready.wait();
 }
 
-PonderThread::~PonderThread() throw()
+PonderThread::~PonderThread()
 {
     m_quit = true;
     {
@@ -236,7 +236,7 @@ class ReadThread
 public:
     ReadThread(istream& in, Engine& engine);
 
-    ~ReadThread() throw();
+    ~ReadThread();
 
     bool read_cmd(CmdLine& c);
 
@@ -365,7 +365,7 @@ ReadThread::DataRef::DataRef(const DataRef& data_ref)
     data.inc_ref_count();
 }
 
-ReadThread::DataRef::~DataRef() throw()
+ReadThread::DataRef::~DataRef()
 {
     if (data.dec_ref_count())
         delete &data;
@@ -423,7 +423,7 @@ ReadThread::ReadThread(istream& in, Engine& engine)
     m_thread.detach();
 }
 
-ReadThread::~ReadThread() throw()
+ReadThread::~ReadThread()
 {
     auto& data = m_data_ref.data;
     data.quit = true;
@@ -467,7 +467,7 @@ Engine::Engine()
     add("version", &Engine::cmd_version);
 }
 
-Engine::~Engine() throw()
+Engine::~Engine()
 {
 }
 

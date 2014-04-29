@@ -18,7 +18,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-CmdLine::~CmdLine() throw()
+CmdLine::~CmdLine()
 {
 }
 

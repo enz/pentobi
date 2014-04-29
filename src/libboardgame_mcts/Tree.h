@@ -88,8 +88,6 @@ public:
 
     Tree(size_t max_nodes, unsigned nu_threads);
 
-    ~Tree() throw();
-
     /** Remove all nodes and initialize the root node with count 0 and a given
         value. */
     void clear(Float root_value);
@@ -253,11 +251,6 @@ Tree<N>::Tree(size_t max_nodes, unsigned nu_threads)
     : m_nu_threads(nu_threads)
 {
     set_max_nodes(max_nodes);
-}
-
-template<typename N>
-Tree<N>::~Tree() throw()
-{
 }
 
 template<typename N>

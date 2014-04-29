@@ -14,7 +14,7 @@ namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-TimeSource::~TimeSource() throw()
+TimeSource::~TimeSource()
 {
 }
 

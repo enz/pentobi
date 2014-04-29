@@ -26,7 +26,7 @@ public:
         @param line The command line (@ref libboardgame_doc_storesref) */
     Arguments(const CmdLine& line);
 
-    ~Arguments() throw();
+    ~Arguments();
 
     /** Get argument.
         @param i Argument index starting with 0
@@ -157,7 +157,7 @@ inline Arguments::Arguments(const CmdLine& line)
 {
 }
 
-inline Arguments::~Arguments() throw()
+inline Arguments::~Arguments()
 {
 }
 

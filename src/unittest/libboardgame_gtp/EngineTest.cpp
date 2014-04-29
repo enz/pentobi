@@ -29,8 +29,6 @@ class InvalidResponseEngine
 public:
     InvalidResponseEngine();
 
-    ~InvalidResponseEngine() throw();
-
     void invalid_response(const Arguments&, Response&);
 
     void invalid_response_2(const Arguments&, Response&);
@@ -40,10 +38,6 @@ InvalidResponseEngine::InvalidResponseEngine()
 {
     add("invalid_response", &InvalidResponseEngine::invalid_response);
     add("invalid_response_2", &InvalidResponseEngine::invalid_response_2);
-}
-
-InvalidResponseEngine::~InvalidResponseEngine() throw()
-{
 }
 
 void InvalidResponseEngine::invalid_response(const Arguments&, Response& r)

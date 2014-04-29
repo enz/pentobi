@@ -29,8 +29,6 @@ public:
            bool use_book = true, const string& books_dir = "",
            unsigned nu_threads = 0, size_t memory = 0);
 
-    ~Engine() throw();
-
     void cmd_gen_playout_move(Response&);
     void cmd_param(const Arguments&, Response&);
     void cmd_get_value(Response&);

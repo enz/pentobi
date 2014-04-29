@@ -1,9 +1,7 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 add_library(boardgame_sgf STATIC
-  InvalidPropertyValue.cpp
   InvalidPropertyValue.h
-  InvalidTree.cpp
   InvalidTree.h
   MissingProperty.cpp
   MissingProperty.h

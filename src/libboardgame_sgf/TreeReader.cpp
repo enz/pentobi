@@ -21,10 +21,6 @@ TreeReader::TreeReader()
 {
 }
 
-TreeReader::~TreeReader() throw()
-{
-}
-
 unique_ptr<Node> TreeReader::get_tree_transfer_ownership()
 {
     return move(m_root);

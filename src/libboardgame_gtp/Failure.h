@@ -23,7 +23,7 @@ class Failure
 public:
     Failure(const string& response = "");
 
-    ~Failure() throw();
+    ~Failure();
 
     string get_response() const;
 
@@ -36,7 +36,7 @@ inline Failure::Failure(const string& response)
 {
 }
 
-inline Failure::~Failure() throw()
+inline Failure::~Failure()
 {
 }
 

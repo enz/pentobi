@@ -24,8 +24,6 @@ public:
     template<typename T>
     InvalidPropertyValue(const string& id, const T& value);
 
-    ~InvalidPropertyValue() throw();
-
 private:
     template<typename T>
     static string get_message(const string& id, const T& value);

@@ -31,7 +31,7 @@ public:
 
     Reader();
 
-    virtual ~Reader() throw();
+    virtual ~Reader();
 
     virtual void on_begin_tree(bool is_root);
 

@@ -41,10 +41,6 @@ State::State(Variant initial_variant, const SharedConst& shared_const)
 {
 }
 
-State::~State() throw()
-{
-}
-
 inline void State::add_move(MoveList& moves, Move mv, double gamma)
 {
     m_total_gamma += gamma;

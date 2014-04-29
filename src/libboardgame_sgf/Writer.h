@@ -25,8 +25,6 @@ class Writer
 public:
     Writer(ostream& out);
 
-    ~Writer() throw();
-
 
     /** @name Formatting options.
         Should be set before starting to write. */

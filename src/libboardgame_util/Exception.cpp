@@ -19,10 +19,6 @@ Exception::Exception(const string& s)
 {
 }
 
-Exception::~Exception() throw()
-{
-}
-
 const char* Exception::what() const throw()
 {
     return m_s.c_str();

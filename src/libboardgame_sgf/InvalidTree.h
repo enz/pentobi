@@ -30,8 +30,6 @@ class InvalidTree
 {
 public:
     InvalidTree(const string& s);
-
-    ~InvalidTree() throw();
 };
 
 inline InvalidTree::InvalidTree(const string& s)

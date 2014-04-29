@@ -44,7 +44,7 @@ AssertionHandler::AssertionHandler()
     get_all_handlers().push_back(this);
 }
 
-AssertionHandler::~AssertionHandler() throw()
+AssertionHandler::~AssertionHandler()
 {
     get_all_handlers().remove(this);
 }

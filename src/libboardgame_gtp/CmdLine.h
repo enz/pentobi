@@ -39,7 +39,7 @@ public:
         @see init() */
     CmdLine(const string& line);
 
-    ~CmdLine() throw();
+    ~CmdLine();
 
     void init(const string& line);
 

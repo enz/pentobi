@@ -54,10 +54,6 @@ Engine::Engine(Variant variant, int level, bool use_book,
     add("version", &Engine::cmd_version);
 }
 
-Engine::~Engine() throw()
-{
-}
-
 void Engine::cmd_get_value(Response& response)
 {
     response << get_search().get_tree().get_root().get_value();

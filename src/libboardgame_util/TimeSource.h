@@ -20,7 +20,7 @@ namespace libboardgame_util {
 class TimeSource
 {
 public:
-    virtual ~TimeSource() throw();
+    virtual ~TimeSource();
 
     /** Get the current time in seconds. */
     virtual double operator()() = 0;

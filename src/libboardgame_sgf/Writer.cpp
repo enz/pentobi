@@ -29,10 +29,6 @@ Writer::Writer(ostream& out)
 {
 }
 
-Writer::~Writer() throw()
-{
-}
-
 void Writer::begin_node()
 {
     m_is_first_prop = true;

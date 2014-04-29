@@ -20,7 +20,7 @@ using namespace std;
 
 ostringstream Response::s_dummy;
 
-Response::~Response() throw()
+Response::~Response()
 {
 }
 

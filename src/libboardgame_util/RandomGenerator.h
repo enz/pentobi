@@ -58,7 +58,7 @@ public:
         defined, otherwise with a non-deterministic seed. */
     RandomGenerator();
 
-    ~RandomGenerator() throw();
+    ~RandomGenerator();
 
     void set_seed(ResultType seed);
 

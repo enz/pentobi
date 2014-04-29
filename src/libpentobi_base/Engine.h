@@ -26,8 +26,6 @@ class Engine
 public:
     Engine(Variant variant);
 
-    ~Engine() throw();
-
     void cmd_all_legal(const Arguments&, Response&);
     void cmd_clear_board();
     void cmd_final_score(Response&);

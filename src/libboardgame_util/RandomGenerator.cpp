@@ -51,7 +51,7 @@ RandomGenerator::RandomGenerator()
     get_all_generators().push_back(this);
 }
 
-RandomGenerator::~RandomGenerator() throw()
+RandomGenerator::~RandomGenerator()
 {
     get_all_generators().remove(this);
 }

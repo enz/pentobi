@@ -47,7 +47,7 @@ Reader::Reader()
 {
 }
 
-Reader::~Reader() throw()
+Reader::~Reader()
 {
 }
 

@@ -22,8 +22,6 @@ class Exception
 public:
     Exception(const string& s);
 
-    virtual ~Exception() throw();
-
     const char* what() const throw() override;
 
 private:

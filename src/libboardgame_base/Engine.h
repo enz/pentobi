@@ -29,7 +29,7 @@ public:
 
     Engine();
 
-    ~Engine() throw();
+    ~Engine();
 
     void interrupt() override;
 

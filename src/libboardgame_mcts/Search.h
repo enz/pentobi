@@ -149,7 +149,7 @@ public:
         zero, a default value will be used. */
     Search(unsigned nu_threads, size_t memory);
 
-    virtual ~Search() throw();
+    virtual ~Search();
 
 
     /** @name Pure virtual functions */
@@ -401,7 +401,7 @@ private:
     public:
         AssertionHandler(const Search& search);
 
-        ~AssertionHandler() throw();
+        ~AssertionHandler();
 
         void run() override;
 
@@ -719,7 +719,7 @@ Search<S, M, R>::AssertionHandler::AssertionHandler(const Search& search)
 }
 
 template<class S, class M, class R>
-Search<S, M, R>::AssertionHandler::~AssertionHandler() throw()
+Search<S, M, R>::AssertionHandler::~AssertionHandler()
 {
 }
 
@@ -758,7 +758,7 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
 }
 
 template<class S, class M, class R>
-Search<S, M, R>::~Search() throw()
+Search<S, M, R>::~Search()
 {
 }
 

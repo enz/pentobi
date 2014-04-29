@@ -33,7 +33,7 @@ Engine::Engine()
     add("set_random_seed", &Engine::cmd_set_random_seed);
 }
 
-Engine::~Engine() throw()
+Engine::~Engine()
 {
 }
 

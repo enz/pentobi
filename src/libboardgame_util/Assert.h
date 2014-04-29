@@ -18,7 +18,7 @@ public:
     AssertionHandler();
 
     /** Destruct and unregister assertion handler. */
-    virtual ~AssertionHandler() throw();
+    virtual ~AssertionHandler();
 
     virtual void run() = 0;
 };
