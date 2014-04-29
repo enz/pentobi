@@ -23,8 +23,6 @@ class Failure
 public:
     Failure(const string& response = "");
 
-    ~Failure();
-
     string get_response() const;
 
 private:
@@ -33,10 +31,6 @@ private:
 
 inline Failure::Failure(const string& response)
     : m_response(response)
-{
-}
-
-inline Failure::~Failure()
 {
 }
 

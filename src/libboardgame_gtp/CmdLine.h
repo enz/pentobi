@@ -39,8 +39,6 @@ public:
         @see init() */
     CmdLine(const string& line);
 
-    ~CmdLine();
-
     void init(const string& line);
 
     void init(const CmdLine& c);

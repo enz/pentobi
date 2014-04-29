@@ -26,8 +26,6 @@ public:
         @param line The command line (@ref libboardgame_doc_storesref) */
     Arguments(const CmdLine& line);
 
-    ~Arguments();
-
     /** Get argument.
         @param i Argument index starting with 0
         @return Argument value
@@ -154,10 +152,6 @@ private:
 
 inline Arguments::Arguments(const CmdLine& line)
     : m_line(line)
-{
-}
-
-inline Arguments::~Arguments()
 {
 }
 

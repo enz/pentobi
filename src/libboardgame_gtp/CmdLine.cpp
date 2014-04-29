@@ -18,10 +18,6 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-CmdLine::~CmdLine()
-{
-}
-
 /** Find elements (ID, command name, arguments).
     Arguments are words separated by whitespaces.
     Arguments with whitespaces can be quoted with quotation marks ('"').
