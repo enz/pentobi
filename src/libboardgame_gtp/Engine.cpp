@@ -302,7 +302,7 @@ private:
 
         DataRef(const DataRef& data_ref);
 
-        ~DataRef() throw();
+        ~DataRef();
     };
 
     class Function
