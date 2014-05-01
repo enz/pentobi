@@ -8,7 +8,6 @@
 #define LIBBOARDGAME_UTIL_FMT_SAVER_H
 
 #include <iostream>
-#include <fstream>
 
 namespace libboardgame_util {
 
@@ -22,7 +21,8 @@ class FmtSaver
 {
 public:
     FmtSaver(ostream& out)
-        : m_out(out)
+      : m_out(out),
+        m_dummy(nullptr)
     {
         m_dummy.copyfmt(out);
     }
@@ -35,7 +35,7 @@ public:
 private:
     ostream& m_out;
 
-    fstream m_dummy;
+    ios m_dummy;
 };
 
 //----------------------------------------------------------------------------
