@@ -171,7 +171,8 @@ array<Float, 4> State::evaluate_playout()
         if (log_simulations)
             log("Result: 0.5 (symmetry)");
         array<Float, 4> result;
-        fill(result.begin(), result.end(), 0.5);
+        LIBBOARDGAME_ASSERT(m_nu_colors == 2);
+        result[0] = result[1] = 0.5;
         return result;
     }
 
