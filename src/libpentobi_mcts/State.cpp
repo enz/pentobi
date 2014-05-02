@@ -160,7 +160,7 @@ void State::dump(ostream& out) const
     libpentobi_base::boardutil::dump(m_bd, out);
 }
 
-array<Float,4> State::evaluate_playout()
+array<Float, 4> State::evaluate_playout()
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
     // will encourage the first player to break the symmetry and the second
@@ -170,9 +170,8 @@ array<Float,4> State::evaluate_playout()
     {
         if (log_simulations)
             log("Result: 0.5 (symmetry)");
-        array<Float,4> result;
-        for (ColorIterator i(m_nu_colors); i; ++i)
-            result[(*i).to_int()] = 0.5;
+        array<Float, 4> result;
+        fill(result.begin(), result.end(), 0.5);
         return result;
     }
 
