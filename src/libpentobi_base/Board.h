@@ -456,16 +456,20 @@ private:
 
     void place(Color c, Move mv);
 
-    void write_pieces_left(ostream& out, Color c, unsigned begin,
+    void write_pieces_left(ostream& out, Color c,
+                           const PiecesLeftList& pieces_left, unsigned begin,
                            unsigned end) const;
 
     void write_color_info_line1(ostream& out, Color c) const;
 
-    void write_color_info_line2(ostream& out, Color c) const;
+    void write_color_info_line2(ostream& out, Color c,
+                                const PiecesLeftList& pieces_left) const;
 
-    void write_color_info_line3(ostream& out, Color c) const;
+    void write_color_info_line3(ostream& out, Color c,
+                                const PiecesLeftList& pieces_left) const;
 
-    void write_info_line(ostream& out, unsigned y) const;
+    void write_info_line(ostream& out, unsigned y,
+                         const ColorMap<PiecesLeftList>& pieces_left) const;
 };
 
 typedef Board::Iterator BoardIterator;

@@ -379,6 +379,20 @@ void Board::undo()
 
 void Board::write(ostream& out, bool mark_last_move) const
 {
+    // Sort lists of left pieces by name
+    ColorMap<PiecesLeftList> pieces_left;
+    for (ColorIterator i(m_nu_colors); i; ++i)
+    {
+        pieces_left[*i] = m_state_color[*i].pieces_left;
+        sort(pieces_left[*i].begin(), pieces_left[*i].end(),
+             [&](Piece p1, Piece p2)
+             {
+                 return
+                     get_piece_info(p1).get_name()
+                         < get_piece_info(p2).get_name();
+             });
+    }
+
     ColorMove last_mv = ColorMove::null();
     if (mark_last_move)
     {
@@ -510,7 +524,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 out << "   ";
             else
                 out << "  ";
-            write_info_line(out, height - y - 1);
+            write_info_line(out, height - y - 1, pieces_left);
         }
         out << '\n';
         if (y == 0)
@@ -522,9 +536,9 @@ void Board::write(ostream& out, bool mark_last_move) const
         {
             write_color_info_line1(out, *i);
             out << ' ';
-            write_color_info_line2(out, *i);
+            write_color_info_line2(out, *i, pieces_left[*i]);
             out << ' ';
-            write_color_info_line3(out, *i);
+            write_color_info_line3(out, *i, pieces_left[*i]);
             out << '\n';
         }
 }
@@ -541,59 +555,63 @@ void Board::write_color_info_line1(ostream& out, Color c) const
     set_color(out, "\x1B[0m");
 }
 
-void Board::write_color_info_line2(ostream& out, Color c) const
+void Board::write_color_info_line2(ostream& out, Color c,
+                                   const PiecesLeftList& pieces_left) const
 {
     if (m_variant == Variant::junior)
-        write_pieces_left(out, c, 0, 6);
+        write_pieces_left(out, c, pieces_left, 0, 6);
     else
-        write_pieces_left(out, c, 0, 10);
+        write_pieces_left(out, c, pieces_left, 0, 10);
 }
 
-void Board::write_color_info_line3(ostream& out, Color c) const
+void Board::write_color_info_line3(ostream& out, Color c,
+                                   const PiecesLeftList& pieces_left) const
 {
     if (m_variant == Variant::junior)
-        write_pieces_left(out, c, 6, get_nu_uniq_pieces());
+        write_pieces_left(out, c, pieces_left, 6, get_nu_uniq_pieces());
     else
-        write_pieces_left(out, c, 10, get_nu_uniq_pieces());
+        write_pieces_left(out, c, pieces_left, 10, get_nu_uniq_pieces());
 }
 
-void Board::write_info_line(ostream& out, unsigned y) const
+void Board::write_info_line(ostream& out, unsigned y,
+                            const ColorMap<PiecesLeftList>& pieces_left) const
 {
     if (y == 0)
         write_color_info_line1(out, Color(0));
     else if (y == 1)
-        write_color_info_line2(out, Color(0));
+        write_color_info_line2(out, Color(0), pieces_left[Color(0)]);
     else if (y == 2)
-        write_color_info_line3(out, Color(0));
+        write_color_info_line3(out, Color(0), pieces_left[Color(0)]);
     else if (y == 4)
         write_color_info_line1(out, Color(1));
     else if (y == 5)
-        write_color_info_line2(out, Color(1));
+        write_color_info_line2(out, Color(1), pieces_left[Color(1)]);
     else if (y == 6)
-        write_color_info_line3(out, Color(1));
+        write_color_info_line3(out, Color(1), pieces_left[Color(1)]);
     else if (y == 8 && m_nu_colors > 2)
         write_color_info_line1(out, Color(2));
     else if (y == 9 && m_nu_colors > 2)
-        write_color_info_line2(out, Color(2));
+        write_color_info_line2(out, Color(2), pieces_left[Color(2)]);
     else if (y == 10 && m_nu_colors > 2)
-        write_color_info_line3(out, Color(2));
+        write_color_info_line3(out, Color(2), pieces_left[Color(2)]);
     else if (y == 12 && m_nu_colors > 3)
         write_color_info_line1(out, Color(3));
     else if (y == 13 && m_nu_colors > 3)
-        write_color_info_line2(out, Color(3));
+        write_color_info_line2(out, Color(3), pieces_left[Color(3)]);
     else if (y == 14 && m_nu_colors > 3)
-        write_color_info_line3(out, Color(3));
+        write_color_info_line3(out, Color(3), pieces_left[Color(3)]);
 }
 
-void Board::write_pieces_left(ostream& out, Color c, unsigned begin,
-                              unsigned end) const
+void Board::write_pieces_left(ostream& out, Color c,
+                              const PiecesLeftList& pieces_left,
+                              unsigned begin, unsigned end) const
 {
     for (unsigned i = begin; i < end; ++i)
-        if (i < m_state_color[c].pieces_left.size())
+        if (i < pieces_left.size())
         {
             if (i > begin)
                 out << ' ';
-            Piece piece = m_state_color[c].pieces_left[i];
+            Piece piece = pieces_left[i];
             auto& name = get_piece_info(piece).get_name();
             unsigned nu_left = m_state_color[c].nu_left_piece[piece];
             for (unsigned j = 0; j < nu_left; ++j)
