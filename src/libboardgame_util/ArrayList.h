@@ -113,8 +113,6 @@ public:
         @return @c true if value was removed. */
     bool remove_fast(const T& t);
 
-    bool is_permutation(const ArrayList& l) const;
-
 private:
     I m_size;
 
@@ -257,18 +255,6 @@ bool ArrayList<T,M,I>::include(const T& t)
     *i = t;
     ++m_size;
     return true;
-}
-
-template<typename T, unsigned M, typename I>
-bool ArrayList<T,M,I>::is_permutation(const ArrayList& l) const
-{
-    if (size() != l.size())
-        return false;
-    ArrayList sorted_this(*this);
-    sort(sorted_this.begin(), sorted_this.end());
-    ArrayList sorted_other(l);
-    sort(sorted_other.begin(), sorted_other.end());
-    return equal(sorted_this.begin(), sorted_this.end(), sorted_other.begin());
 }
 
 template<typename T, unsigned M, typename I>
