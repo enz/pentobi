@@ -96,7 +96,7 @@ public:
         @return @c true if element was not already in list. */
     bool include(const T& t);
 
-    /** Removal of first occurance of value.
+    /** Removal of first occurrence of value.
         Preserves the order of elements.
         @return @c true if value was removed. */
     bool remove(const T& t);
@@ -106,7 +106,7 @@ public:
         with the last element and the list size decremented. */
     void remove_fast(iterator i);
 
-    /** Fast removal of first occurance of value.
+    /** Fast removal of first occurrence of value.
         Does not preserve the order of elements. If the value is found,
         it will be replaced with the last element and the list size
         decremented.
