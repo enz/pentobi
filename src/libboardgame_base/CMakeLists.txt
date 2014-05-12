@@ -9,7 +9,6 @@ add_library(boardgame_base STATIC
   GeometryUtil.h
   Grid.h
   Marker.h
-  MarkerWithCount.h
   Point.h
   PointList.h
   PointTransform.h
