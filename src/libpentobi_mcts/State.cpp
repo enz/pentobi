@@ -663,14 +663,16 @@ void State::update_moves(Color c)
 void State::update_symmetry_broken(Move mv)
 {
     LIBBOARDGAME_ASSERT(! mv.is_pass());
-    auto& info = get_move_info(mv);
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
+    auto& info = get_move_info(mv);
+    auto i = info.begin();
+    auto end = info.end();
     if (to_play == Color(0) || to_play == Color(2))
     {
         // First player to play: Check that all symmetric points of the last
         // move of the second player are occupied by the first player
-        for (auto i = info.begin(); i != info.end(); ++i)
+        do
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
             if (m_bd.get_point_state(symm_p) != second_color)
@@ -679,13 +681,14 @@ void State::update_symmetry_broken(Move mv)
                 return;
             }
         }
+        while (++i != end);
     }
     else
     {
         // Second player to play: Check that all symmetric points of the last
         // move of the first player are empty (i.e. the second player can play
         // there to preserve the symmetry)
-        for (auto i = info.begin(); i != info.end(); ++i)
+        do
         {
             Point symm_p = m_shared_const.symmetric_points[*i];
             if (! m_bd.get_point_state(symm_p).is_empty())
@@ -694,6 +697,7 @@ void State::update_symmetry_broken(Move mv)
                 return;
             }
         }
+        while (++i != end);
     }
 }
 
