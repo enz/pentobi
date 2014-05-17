@@ -192,8 +192,8 @@ private:
     /** The sum of the gamma values of all moves. */
     double m_total_gamma;
 
-    /** Precomputed gamma value for a piece size. */
-    array<double, PieceInfo::max_size + 1> m_gamma_piece_size;
+    /** Precomputed gamma value for a piece. */
+    PieceMap<double> m_gamma_piece;
 
     /** Precomputed gamma value for LocalValue::get_nu_attach(). */
     array<double, PieceInfo::max_size + 1> m_gamma_nu_attach;

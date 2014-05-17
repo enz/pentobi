@@ -98,7 +98,6 @@ void State::add_starting_moves(Color c,
     auto& is_forbidden = m_bd.is_forbidden(c);
     for (Piece piece : pieces_considered)
     {
-        auto piece_size = m_bd.get_piece_info(piece).get_size();
         for (Move mv : get_moves(c, piece, p, 0))
         {
             LIBBOARDGAME_ASSERT(! marker[mv]);
@@ -106,7 +105,7 @@ void State::add_starting_moves(Color c,
             {
                 marker.set(mv);
                 if (with_gamma)
-                    add_move(moves, mv, m_gamma_piece_size[piece_size]);
+                    add_move(moves, mv, m_gamma_piece[piece]);
                 else
                     moves.push_back(mv);
             }
@@ -123,15 +122,14 @@ bool State::check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
     if (is_forbidden[*i])
         return false;
     LocalValue::Compute local(*i, m_local_value);
-    unsigned piece_size = info.size();
-    auto end = i + piece_size;
+    auto end = info.end();
     while (++i != end)
     {
         if (is_forbidden[*i])
             return false;
         local.add_move_point(*i, m_local_value);
     }
-    gamma = m_gamma_piece_size[piece_size];
+    gamma = m_gamma_piece[info.get_piece()];
     if (local.has_local())
     {
         gamma *= m_gamma_nu_attach[local.get_nu_attach()];
@@ -534,14 +532,35 @@ void State::start_search()
     m_prior_knowledge.start_search(bd);
 
     // Init precomputed gamma values
-    double gamma_size_factor = bd.get_board_type() == BoardType::duo ? 3 : 5;
-    double gamma = 1;
-    for (unsigned i = 1; i < PieceInfo::max_size + 1;
-         ++i, gamma *= gamma_size_factor)
-        m_gamma_piece_size[i] = gamma;
-    gamma = 1e10;
-    for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i, gamma *= 1e10)
-        m_gamma_nu_attach[i] = gamma;
+    double gamma_size_factor = 1;
+    double gamma_nu_attach_factor = 1;
+    switch (bd.get_board_type())
+    {
+    case BoardType::classic:
+        gamma_size_factor = 5;
+        break;
+    case BoardType::duo:
+        gamma_size_factor = 3;
+        gamma_nu_attach_factor = 1.8;
+        break;
+    case BoardType::trigon:
+    case BoardType::trigon_3:
+        gamma_size_factor = 5;
+        break;
+    }
+    for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
+    {
+        Piece piece(i);
+        auto piece_size = m_bc->get_piece_info(piece).get_size();
+        LIBBOARDGAME_ASSERT(piece_size > 0);
+        auto piece_nu_attach = m_bc->get_nu_attach_points(piece);
+        LIBBOARDGAME_ASSERT(piece_nu_attach > 0);
+        m_gamma_piece[piece] =
+            pow(gamma_size_factor, piece_size - 1)
+            * pow(gamma_nu_attach_factor, piece_nu_attach - 1);
+    }
+    for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i)
+        m_gamma_nu_attach[i] = pow(1e10, i);
 }
 
 void State::start_simulation(size_t n)

@@ -62,8 +62,10 @@ public:
 
     const PieceInfo& get_piece_info(Piece piece) const;
 
-    bool get_piece_by_name(const string& name, Piece& piece) const;
+    unsigned get_nu_attach_points(Piece piece) const;
 
+    bool get_piece_by_name(const string& name, Piece& piece) const;
+    
     const PieceTransforms& get_transforms() const;
 
     /** Get move info.
@@ -136,6 +138,8 @@ private:
     vector<PieceInfo> m_pieces;
 
     unique_ptr<PieceTransforms> m_transforms;
+
+    PieceMap<unsigned> m_nu_attach_points;
 
     vector<MoveInfo> m_move_info;
 
@@ -237,6 +241,11 @@ inline const MoveInfoExt2* BoardConst::get_move_info_ext_2_array() const
 inline unsigned BoardConst::get_nu_all_moves() const
 {
     return static_cast<unsigned>(m_move_info.size());
+}
+
+inline unsigned BoardConst::get_nu_attach_points(Piece piece) const
+{
+    return m_nu_attach_points[piece];
 }
 
 inline Piece::IntType BoardConst::get_nu_pieces() const

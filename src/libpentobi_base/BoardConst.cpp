@@ -512,7 +512,8 @@ const Geometry& create_geometry(BoardType board_type)
 //-----------------------------------------------------------------------------
 
 BoardConst::BoardConst(BoardType board_type, Variant variant)
-    : m_geo(create_geometry(board_type))
+    : m_geo(create_geometry(board_type)),
+      m_nu_attach_points(0)
 {
     m_board_type = board_type;
     if (board_type == BoardType::trigon)
@@ -604,7 +605,10 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
     m_move_info.push_back(info);
     m_move_info_ext.push_back(info_ext);
     m_move_info_ext_2.push_back(info_ext_2);
-    Move move(static_cast<Move::IntType>(m_move_info.size() - 1));
+    m_nu_attach_points[piece] =
+        max(m_nu_attach_points[piece],
+            static_cast<unsigned>(info_ext.size_attach_points));
+    Move mv(static_cast<Move::IntType>(m_move_info.size() - 1));
     if (log_move_creation)
     {
         Grid<char> grid;
@@ -615,14 +619,14 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
             grid[*i] = '+';
         for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
             grid[*i] = '*';
-        log() << "Move " << move.to_int() << ":\n";
+        log() << "Move " << mv.to_int() << ":\n";
         grid.write(log(), m_geo);
         log() << '\n';
     }
     for (Point p : info)
         for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
             if (is_compatible_with_adj_status(p, i, info))
-                (*m_full_move_table)[i][piece][p].push_back(move);
+                (*m_full_move_table)[i][piece][p].push_back(mv);
 }
 
 void BoardConst::create_moves()
