@@ -219,7 +219,7 @@ def thread_main():
     white = GtpClient(white_cmd, "W")
     black.send_no_err("set_game " + game_name)
     white.send_no_err("set_game " + game_name)
-    while True:
+    while not exists(sentinel_filename):
         game_number = output_file.get_next_game_number()
         if game_number >= nu_games:
             break
@@ -293,6 +293,9 @@ else:
     exit("invalid game variant: " + variant)
 
 output_file = OutputFile(prefix)
+sentinel_filename = prefix + ".stop"
+if exists(sentinel_filename):
+    remove(sentinel_filename)
 lock_filename = prefix + ".lock"
 with open(lock_filename, "w") as lock_file:
     flock(lock_file, LOCK_EX | LOCK_NB)
