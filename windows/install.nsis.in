@@ -41,7 +41,7 @@ LangString CREATE_DESKTOP_SHORTCUT ${LANG_ENGLISH} \
   "${CREATE_DESKTOP_SHORTCUT_DEFAULT}"
 LangString INSTALLER_TITLE ${LANG_ENGLISH} \
   "${INSTALLER_TITLE_DEFAULT}"
-!include "${PENTOBI_SRC_DIR}\windows_installer\German.nsh"
+!include "${PENTOBI_SRC_DIR}\windows\German.nsh"
 
 Name "Pentobi"
 Caption "$(INSTALLER_TITLE)"
@@ -68,7 +68,7 @@ File /r "${PENTOBI_SRC_DIR}\src\pentobi\manual"
 File /oname=COPYING.txt "${PENTOBI_SRC_DIR}\COPYING"
 File /oname=Pentobi.exe "${PENTOBI_BUILD_DIR}\src\pentobi\pentobi.exe"
 File "${PENTOBI_SRC_DIR}\src\pentobi\pentobi.ico"
-File "${PENTOBI_SRC_DIR}\windows_installer\qt.conf"
+File "${PENTOBI_SRC_DIR}\windows\qt.conf"
 
 WriteRegStr HKLM "Software\Pentobi" "" $INSTDIR
 
@@ -79,7 +79,7 @@ WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$INSTDIR\pentobi.ico"
 WriteRegStr HKLM "${UNINST_KEY}" "URLInfoAbout" "http://pentobi.sf.net/"
 WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
  
-File "${PENTOBI_SRC_DIR}\windows_installer\blksgf.ico"
+File "${PENTOBI_SRC_DIR}\windows\blksgf.ico"
 
 WriteRegStr HKCR ".blksgf" "" "Pentobi"
 WriteRegStr HKCR ".blksgf" "Content Type" "application/x-blokus-sgf"
