@@ -121,11 +121,11 @@ if (WIN32)
   # broken because it invokes windres with the current CXXFLAGS but some
   # of them might be compiler-specific and cause windres to fail (e.g.
   # -std=c++11 of MinGW/Cygwin GCC; last tested with CMake 2.8.12.1).
-  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/pentobi.res
+  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/pentobi_res.o
     COMMAND windres.exe -I${CMAKE_CURRENT_SOURCE_DIR}
     -i${CMAKE_CURRENT_SOURCE_DIR}/pentobi.rc
-    -o ${CMAKE_CURRENT_BINARY_DIR}/pentobi.res)
-  set(pentobi_SRCS ${pentobi_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/pentobi.res)
+    -o ${CMAKE_CURRENT_BINARY_DIR}/pentobi_res.o)
+  set(pentobi_SRCS ${pentobi_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/pentobi_res.o)
 endif()
 
 add_executable(pentobi WIN32
