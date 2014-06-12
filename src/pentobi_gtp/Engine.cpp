@@ -121,7 +121,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
             << "auto_param " << s.get_auto_param() << '\n'
             << "bias_term_constant " << s.get_bias_term_constant() << '\n'
-            << "bias_term_interval " << s.get_bias_term_interval() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "expand_threshold_inc " << s.get_expand_threshold_inc() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
@@ -132,7 +131,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "rave_weight " << s.get_rave_weight() << '\n'
             << "reuse_subtree " << s.get_reuse_subtree() << '\n'
             << "score_modification " << s.get_score_modification() << '\n'
-            << "skip_bias_term_min " << s.get_skip_bias_term_min() << '\n'
             << "use_book " << p.get_use_book() << '\n';
     else
     {
@@ -144,8 +142,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_auto_param(args.parse<bool>(1));
         else if (name == "bias_term_constant")
             s.set_bias_term_constant(args.parse<Float>(1));
-        else if (name == "bias_term_interval")
-            s.set_bias_term_interval(args.parse<unsigned>(1));
         else if (name == "expand_threshold")
             s.set_expand_threshold(args.parse<Float>(1));
         else if (name == "expand_threshold_inc")
@@ -166,8 +162,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_reuse_subtree(args.parse<bool>(1));
         else if (name == "score_modification")
             s.set_score_modification(args.parse<Float>(1));
-        else if (name == "skip_bias_term_min")
-            s.set_skip_bias_term_min(args.parse<Float>(1));
         else if (name == "use_book")
             p.set_use_book(args.parse<bool>(1));
         else

@@ -288,8 +288,8 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
 void Search::set_default_param(Variant variant)
 {
     log() << "Setting default parameters for " << to_string(variant) << '\n';
-    set_skip_bias_term_min(30000);
-    set_bias_term_interval(20);
+    set_full_select_min(10000);
+    set_full_select_interval(20);
     set_expand_threshold(1);
     set_expand_threshold_inc(0.5f);
     set_rave_weight(0.7f);
