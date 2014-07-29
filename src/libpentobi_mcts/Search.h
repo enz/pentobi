@@ -70,10 +70,6 @@ public:
     /** @name Parameters */
     /** @{ */
 
-    Float get_score_modification() const;
-
-    void set_score_modification(Float value);
-
     bool get_avoid_symmetric_draw() const;
 
     void set_avoid_symmetric_draw(bool enable);
@@ -161,11 +157,6 @@ inline PlayerInt Search::get_player() const
     return m_to_play.to_int();
 }
 
-inline Float Search::get_score_modification() const
-{
-    return m_shared_const.score_modification;
-}
-
 inline Color Search::get_to_play() const
 {
     return m_to_play;
@@ -179,11 +170,6 @@ inline void Search::set_auto_param(bool enable)
 inline void Search::set_avoid_symmetric_draw(bool enable)
 {
     m_shared_const.avoid_symmetric_draw = enable;
-}
-
-inline void Search::set_score_modification(Float value)
-{
-    m_shared_const.score_modification = value;
 }
 
 //-----------------------------------------------------------------------------

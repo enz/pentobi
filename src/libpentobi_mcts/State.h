@@ -13,6 +13,7 @@
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
+#include "libboardgame_util/Statistics.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/SymmetricPoints.h"
 
@@ -24,6 +25,7 @@ using libboardgame_mcts::PlayerMove;
 using libboardgame_util::log;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
+using libboardgame_util::Statistics;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
@@ -57,9 +59,6 @@ struct SharedConst
     const Color& to_play;
 
     bool avoid_symmetric_draw;
-
-    /** Maximum value to modify the win/loss result by the score. */
-    Float score_modification;
 
     /** Lookup table for symmetric points (only used in Duo and Trigon). */
     SymmetricPoints symmetric_points;
@@ -212,8 +211,13 @@ private:
 
     RandomGenerator m_random;
 
-    /** Precomputed State::m_score_modification / BoardConst::max_score. */
-    Float m_score_modification_factor;
+    /** Statistics of the score for each color.
+        Used for normalizing the score modification of the game result. */
+    ColorMap<Statistics<Float>> m_stat_score;
+
+    /** Statistics of the length of a simulation.
+        Used for normalizing the length modification of the game result. */
+    Statistics<Float> m_stat_len;
 
     /** Number of simulations of this state in the current search. */
     size_t m_nu_simulations;

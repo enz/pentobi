@@ -23,11 +23,17 @@ using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
 
+inline Float sigmoid(Float steepness, Float x)
+{
+    return -1.f + 2.f / (1.f + exp(-steepness * x));
+}
+
+//-----------------------------------------------------------------------------
+
 SharedConst::SharedConst(const Color& to_play)
     : board(nullptr),
       to_play(to_play),
-      avoid_symmetric_draw(true),
-      score_modification(0.1f)
+      avoid_symmetric_draw(true)
 {
     // Game variant and position dependent variables are initialized in
     // libpentobi_mcts::Search::start_search()
@@ -178,7 +184,7 @@ array<Float, 4> State::evaluate_playout()
 
 /** Get the game result for each color.
     The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there
-    are n &gt; 2 players, this is generalized in the following way: The scores
+    are n \> 2 players, this is generalized in the following way: The scores
     are sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned
     a result value of r_i/(n-1). If multiple players have the same score,
     the result value is the average of all ranks with this score. So being
@@ -186,11 +192,11 @@ array<Float, 4> State::evaluate_playout()
     gives the result 0. Being the single winner is better than sharing the
     best place, which is better than getting the second place, etc.
 
-    There is small modification applied to the result that encorages wins
-    with larger scores. */
-array<Float,4> State::evaluate_terminal()
+    Bonusses are added to the result to encorage wins with larger scores and
+    shorter game length. */
+array<Float, 4> State::evaluate_terminal()
 {
-    unsigned nu_players = m_bd.get_nu_players();
+    auto nu_players = m_bd.get_nu_players();
     ColorMap<Float> points;
     ColorMap<Float> score;
     for (ColorIterator i(m_nu_colors); i; ++i)
@@ -203,23 +209,29 @@ array<Float,4> State::evaluate_terminal()
         score[Color(2)] = score[Color(0)];
         score[Color(3)] = score[Color(1)];
     }
-    array<Float,Color::range> sorted_points;
+    array<Float, Color::range> sorted_points;
     if (nu_players > 2)
     {
         for (ColorIterator i(m_nu_colors); i; ++i)
             sorted_points[(*i).to_int()] = points[*i];
         sort(sorted_points.begin(), sorted_points.begin() + m_nu_colors);
     }
-    array<Float,4> result_array;
+    array<Float, 4> result_array;
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
+        auto s = score[c];
         Float game_result;
         if (nu_players == 2)
         {
-            if (score[c] > 0)
+            if (i == 1)
+            {
+                result_array[1] = 1.f - result_array[0];
+                break;
+            }
+            if (s > 0)
                 game_result = 1;
-            else if (score[c] < 0)
+            else if (s < 0)
                 game_result = 0;
             else
                 game_result = 0.5;
@@ -237,19 +249,31 @@ array<Float,4> State::evaluate_terminal()
             game_result /= n;
         }
 
-        Float score_modification = m_shared_const.score_modification;
-        // Apply score modification. Example: If score modification is 0.1,
-        // the game result is rescaled to [0..0.9] and the score modification
-        // is added with 0.05 as the middle (corresponding to score 0).
-        Float result =
-            (1.f - score_modification) * game_result
-            + 0.5f * (score_modification
-                      + score[c] * m_score_modification_factor);
-        result_array[i] = result;
+        Float res = game_result;
+        {
+            auto& stat = m_stat_score[c];
+            stat.add(s);
+            Float dev = stat.get_deviation();
+            if (dev > 0)
+                res += 0.2f * sigmoid(2.0f, (s - stat.get_mean()) / dev);
+        }
+        {
+            Float l = static_cast<Float>(m_bd.get_nu_moves());
+            auto& stat = m_stat_len;
+            stat.add(l);
+            Float dev = stat.get_deviation();
+            if (dev > 0)
+            {
+                if (game_result == 1)
+                    res -= 0.12f * sigmoid(2.0f, (l - stat.get_mean()) / dev);
+                else if (game_result == 0)
+                    res += 0.12f * sigmoid(2.0f, (l - stat.get_mean()) / dev);
+            }
+        }
+        result_array[i] = res;
         if (log_simulations)
-            log() << "Result color " << c << ": score=" << score[c]
-                  << " game_result=" << game_result << " result=" << result
-                  << '\n';
+            log() << "Result color " << c << ": sco=" << s << " game_res="
+                  << game_result << " res=" << res << '\n';
     }
     if (m_nu_colors > nu_players)
     {
@@ -510,9 +534,6 @@ void State::start_search()
     m_check_terminate_early =
         (m_nu_moves_initial < 10u * m_nu_colors
          && m_bd.get_nu_players() == 2);
-    Float total_piece_points = Float(m_bc->get_total_piece_points());
-    m_score_modification_factor =
-        m_shared_const.score_modification / total_piece_points;
     m_nu_simulations = 0;
     m_nu_playout_moves = 0;
     m_nu_last_good_reply_moves = 0;
@@ -530,6 +551,9 @@ void State::start_search()
         m_symmetry_min_nu_pieces = 3; // Only used in Duo
 
     m_prior_knowledge.start_search(bd);
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        m_stat_score[*i].clear();
+    m_stat_len.clear();
 
     // Init precomputed gamma values
     double gamma_size_factor = 1;
@@ -709,7 +733,12 @@ void State::write_info(ostream& out) const
         out << "LGR: " << fixed << setprecision(1)
             << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
                 / static_cast<double>(m_nu_playout_moves))
-            << "%";
+            << "%, ";
+    }
+    if (m_bd.get_nu_players() == 2)
+    {
+        out << "Sco: ";
+        m_stat_score[Color(0)].write(out, true, 1);
     }
     out << '\n';
 }
