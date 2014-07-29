@@ -192,7 +192,7 @@ array<Float, 4> State::evaluate_playout()
     gives the result 0. Being the single winner is better than sharing the
     best place, which is better than getting the second place, etc.
 
-    Bonusses are added to the result to encorage wins with larger scores and
+    Bonuses are added to the result to encorage wins with larger scores and
     shorter game length. */
 array<Float, 4> State::evaluate_terminal()
 {
