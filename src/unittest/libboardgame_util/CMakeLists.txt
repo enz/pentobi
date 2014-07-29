@@ -5,6 +5,7 @@ add_executable(unittest_libboardgame_util
   FastLogTest.cpp
   NullTermListTest.cpp
   OptionsTest.cpp
+  StatisticsTest.cpp
   StringUtilTest.cpp
 )
 
