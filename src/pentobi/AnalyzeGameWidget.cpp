@@ -124,6 +124,11 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
         if (! m_analyzeGame.has_value(i))
             continue;
         double value = m_analyzeGame.get_value(i);
+        // Values can be outside [0..1] due to score/length bonuses
+        if (value < 0)
+            value = 0;
+        else if (value > 1)
+            value = 1;
         auto color = Util::getPaintColor(m_analyzeGame.get_variant(),
                                          m_analyzeGame.get_move(i).color);
         painter.setPen(Qt::NoPen);
