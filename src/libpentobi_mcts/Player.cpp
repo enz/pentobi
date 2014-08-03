@@ -121,21 +121,18 @@ Move Player::genmove(const Board& bd, Color c)
         // 1 is too strong for absolute beginners (searches with such a small
         // number of simulations still produce reasonable moves because of
         // the prior knowledge initialization of node values.)
-        Float minimum;
-        Float factor_per_level;
+        Float minimum = 3;
+        Float factor_per_level = 10;
         switch (board_type)
         {
         case BoardType::classic:
-            minimum = 3;
             factor_per_level = 6.33f;
             break;
         case BoardType::trigon:
         case BoardType::trigon_3:
-            minimum = 3;
             factor_per_level = 5.14f;
             break;
         case BoardType::duo:
-            minimum = 3;
             factor_per_level = 7.60f;
             break;
         }
@@ -151,7 +148,7 @@ Move Player::genmove(const Board& bd, Color c)
         if (weight_max_count)
         {
             auto player_move = bd.get_nu_onboard_pieces(c);
-            float weight;
+            float weight = 1;
             switch (board_type)
             {
             case BoardType::duo:
