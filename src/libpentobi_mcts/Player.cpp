@@ -23,7 +23,7 @@ using libboardgame_util::log;
 using libboardgame_util::CpuTime;
 using libboardgame_util::FmtSaver;
 using libboardgame_util::WallTime;
-using libpentobi_base::Variant;
+using libpentobi_base::BoardType;
 
 //-----------------------------------------------------------------------------
 
@@ -87,33 +87,15 @@ Move Player::genmove(const Board& bd, Color c)
         return Move::pass();
     Move mv;
     auto variant = bd.get_variant();
+    auto board_type = bd.get_board_type();
     // Don't use more thane 2 moves per color from opening book in lower levels
     if (m_use_book
         && (m_level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
     {
         if (! m_is_book_loaded
             || m_book.get_tree().get_variant() != variant)
-        {
-            string filename;
-            if (variant == Variant::duo)
-                filename = "book_duo.blksgf";
-            else if (variant == Variant::junior)
-                filename = "book_junior.blksgf";
-            else if (variant == Variant::classic_2)
-                filename = "book_classic_2.blksgf";
-            else if (variant == Variant::classic)
-                filename = "book_classic.blksgf";
-            else if (variant == Variant::trigon_2)
-                filename = "book_trigon_2.blksgf";
-            else if (variant == Variant::trigon_3)
-                filename = "book_trigon_3.blksgf";
-            else
-            {
-                LIBBOARDGAME_ASSERT(variant == Variant::trigon);
-                filename = "book_trigon.blksgf";
-            }
-            load_book(m_books_dir + "/" + filename);
-        }
+            load_book(m_books_dir
+                      + "/book_" + to_string_id(variant) + ".blksgf");
         if (m_is_book_loaded)
         {
             mv = m_book.genmove(bd, c);
@@ -141,24 +123,21 @@ Move Player::genmove(const Board& bd, Color c)
         // the prior knowledge initialization of node values.)
         Float minimum;
         Float factor_per_level;
-        if (variant == Variant::classic || variant == Variant::classic_2)
+        switch (board_type)
         {
+        case BoardType::classic:
             minimum = 3;
             factor_per_level = 6.33f;
-        }
-        else if (variant == Variant::trigon
-                 || variant == Variant::trigon_2
-                 || variant == Variant::trigon_3)
-        {
+            break;
+        case BoardType::trigon:
+        case BoardType::trigon_3:
             minimum = 3;
             factor_per_level = 5.14f;
-        }
-        else
-        {
-            LIBBOARDGAME_ASSERT(variant == Variant::duo
-                                || variant == Variant::junior);
+            break;
+        case BoardType::duo:
             minimum = 3;
             factor_per_level = 7.60f;
+            break;
         }
         if (m_level <= 1)
             max_count = minimum;
@@ -171,17 +150,21 @@ Move Player::genmove(const Board& bd, Color c)
         bool weight_max_count = (m_level >= 4);
         if (weight_max_count)
         {
-            unsigned player_move = bd.get_nu_onboard_pieces(c);
-            float weight = 1;
-            if (variant == Variant::duo || variant == Variant::junior)
+            auto player_move = bd.get_nu_onboard_pieces(c);
+            float weight;
+            switch (board_type)
+            {
+            case BoardType::duo:
                 weight = m_weight_max_count_duo[player_move];
-            else if (variant == Variant::classic
-                     || variant == Variant::classic_2)
+                break;
+            case BoardType::classic:
                 weight = m_weight_max_count_classic[player_move];
-            else if (variant == Variant::trigon
-                     || variant == Variant::trigon_2
-                     || variant == Variant::trigon_3)
+                break;
+            case BoardType::trigon:
+            case BoardType::trigon_3:
                 weight = m_weight_max_count_trigon[player_move];
+                break;
+            }
             max_count = ceil(max_count * weight);
         }
     }
