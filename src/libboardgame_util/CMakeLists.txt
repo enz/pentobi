@@ -20,6 +20,7 @@ add_library(boardgame_util STATIC
   IntervalChecker.h
   Log.cpp
   Log.h
+  MathUtil.h
   NullElement.h
   NullTermList.h
   Options.cpp

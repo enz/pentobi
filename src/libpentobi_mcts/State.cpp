@@ -11,11 +11,13 @@
 #include "State.h"
 
 #include "libboardgame_util/FmtSaver.h"
+#include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/BoardUtil.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_util::fast_exp;
 using libboardgame_util::FmtSaver;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
@@ -23,10 +25,14 @@ using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
 inline Float sigmoid(Float steepness, Float x)
 {
-    return -1.f + 2.f / (1.f + exp(-steepness * x));
+    return -1.f + 2.f / (1.f + fast_exp(-steepness * x));
 }
+
+} // namespace
 
 //-----------------------------------------------------------------------------
 

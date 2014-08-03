@@ -10,11 +10,13 @@
 
 #include "PriorKnowledge.h"
 
+#include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/AdjIterator.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_util::fast_exp;
 using libpentobi_base::AdjIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
@@ -231,20 +233,12 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         // Convert the heuristic, which is so far estimated in score points,
         // into a win/loss value in [0..1] by making it relative to the
         // heuristic of the best move and let it decrease exponentially with a
-        // certain width. We could use exp(-c*x) here, but we use (a piecewise
-        // linear approximation of) 0.1+0.9*exp(-c*x) instead to avoid that
-        // the value is too close to 0, because then it might never get
-        // explored in practice if the bias term constant is small.
-        const Float exp_width = 0.6f;
+        // certain width. We could use exp(-c*x) here, but we use
+        // 0.1+0.9*exp(-c*x) instead to avoid that the value is too close to
+        // 0, because then it might never get explored in practice if the bias
+        // term constant is small.
         Float heuristic = m_max_heuristic - features.heuristic;
-        if (heuristic > 10)
-            heuristic = 0.100f;
-        else if (heuristic > 2)
-            heuristic = 0.252f - (0.015f * exp_width) * heuristic;
-        else if (heuristic > 0.5)
-            heuristic = 0.787f - (0.283f * exp_width) * heuristic;
-        else
-            heuristic = 1.000f - (0.708f * exp_width) * heuristic;
+        heuristic = 0.1f + 0.9f * fast_exp(-0.6f * heuristic);
 
         // Initialize value from heuristic and init_val, each with a count
         // of 1.5
