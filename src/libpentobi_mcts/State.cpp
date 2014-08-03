@@ -181,7 +181,8 @@ void State::dump(ostream& out) const
     best place, which is better than getting the second place, etc.
 
     Bonuses are added to the result to encorage wins with larger scores and
-    shorter game length. */
+    shorter game length. See also: Pepels et al.: Quality-based Rewards for
+    Monte-Carlo Tree Search Simulations. ECAI 2014. */
 array<Float, 4> State::evaluate_playout()
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
