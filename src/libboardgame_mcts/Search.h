@@ -616,7 +616,7 @@ private:
 
     void playout(ThreadState& thread_state);
 
-    void play_in_tree(ThreadState& thread_state, bool& is_terminal);
+    void play_in_tree(ThreadState& thread_state);
 
     bool prune(TimeSource& time_source, double time, double max_time,
                Float prune_min_count, Float& new_prune_min_count);
@@ -1109,8 +1109,7 @@ void Search<S, M, R>::playout(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::play_in_tree(ThreadState& thread_state,
-                                   bool& is_terminal)
+void Search<S, M, R>::play_in_tree(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
     auto& simulation = thread_state.simulation;
@@ -1118,7 +1117,6 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state,
     auto node = &root;
     m_tree.inc_visit_count(*node);
     simulation.nodes.push_back(node);
-    is_terminal = false;
     Float expand_threshold = m_expand_threshold;
     if (thread_state.full_select_counter > 0)
     {
@@ -1164,9 +1162,7 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state,
         Float init_val = m_init_val[state.get_to_play()].get_mean();
         if (! expand_node(thread_state.thread_id, *node, node, init_val))
             thread_state.is_out_of_mem = true;
-        else if (node == nullptr)
-            is_terminal = true;
-        else
+        else if (node != nullptr)
         {
             simulation.nodes.push_back(node);
             state.play_expanded_child(node->get_move());
@@ -1460,17 +1456,11 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
         ++thread_state.nu_simulations;
         simulation.nodes.clear();
         state.start_simulation(nu_simulations);
-        bool is_terminal;
-        play_in_tree(thread_state, is_terminal);
+        play_in_tree(thread_state);
         if (thread_state.is_out_of_mem)
             return;
-        if (! is_terminal)
-        {
-            playout(thread_state);
-            simulation.eval = state.evaluate_playout();
-        }
-        else
-            simulation.eval = state.evaluate_terminal();
+        playout(thread_state);
+        simulation.eval = state.evaluate_playout();
         thread_state.stat_len.add(double(state.get_nu_moves()));
         update_values(thread_state);
         if (SearchParamConst::rave)

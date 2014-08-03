@@ -164,6 +164,18 @@ void State::dump(ostream& out) const
     libpentobi_base::boardutil::dump(m_bd, out);
 }
 
+/** Get the game result for each color.
+    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there
+    are n \> 2 players, this is generalized in the following way: The scores
+    are sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned
+    a result value of r_i/(n-1). If multiple players have the same score,
+    the result value is the average of all ranks with this score. So being
+    the single winner still gives the result 1 and having the lowest score
+    gives the result 0. Being the single winner is better than sharing the
+    best place, which is better than getting the second place, etc.
+
+    Bonuses are added to the result to encorage wins with larger scores and
+    shorter game length. */
 array<Float, 4> State::evaluate_playout()
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
@@ -179,23 +191,6 @@ array<Float, 4> State::evaluate_playout()
         return result;
     }
 
-    return evaluate_terminal();
-}
-
-/** Get the game result for each color.
-    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there
-    are n \> 2 players, this is generalized in the following way: The scores
-    are sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned
-    a result value of r_i/(n-1). If multiple players have the same score,
-    the result value is the average of all ranks with this score. So being
-    the single winner still gives the result 1 and having the lowest score
-    gives the result 0. Being the single winner is better than sharing the
-    best place, which is better than getting the second place, etc.
-
-    Bonuses are added to the result to encorage wins with larger scores and
-    shorter game length. */
-array<Float, 4> State::evaluate_terminal()
-{
     auto nu_players = m_bd.get_nu_players();
     ColorMap<Float> points;
     ColorMap<Float> score;
