@@ -1,4 +1,4 @@
-.TH PENTOBI-THUMBNAILER 6 "2011-12-08" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI-THUMBNAILER 6 "2013-06-21" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 
 .SH NAME
 pentobi-thumbnailer \- thumbnailer for game records for the board game Blokus as used by the program Pentobi
