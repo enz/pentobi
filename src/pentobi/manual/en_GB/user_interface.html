@@ -1,110 +1,79 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en-GB">
-  <head>
-    <title>Pentobi User Manual</title>
-    <link rel="stylesheet" type="text/css" href="../en/stylesheet.css">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <p align="right">
-      <a href="junior_rules.html">Previous</a> |
-      <a href="become_stronger.html">Next</a>
-    </p>
-    <h3>How to Use Pentobi</h3>
-
-    <h3>Board</h3>
-    <p>
-      Pentobi's main window shows the board on the left side.
-      The played pieces on the board can have numbers on them that indicate the
-      move number in which the piece was played.
-      An letter after the move number indicates that there exists a variation
-      to this move (see below).
-    </p>
-    <p>
-      Pieces can be played by moving them to a place that corresponds to a
-      legal move with the mouse or arrow keys and pressing the left mouse button
-      or the Enter key.
-    </p>
-
-    <h3>Pieces and Score</h3>
-    <p>
-      On the right side, the remaining pieces are shown.
-      Above the remaining pieces is an orientation selector that shows the
-      currently selected piece and allows the player to change its orientation.
-      If no piece is selected and the game has not yet ended, a coloured dot
-      in the orientation selector shows the colour to play.
-    </p>
-    <p>
-      Pieces can be selected by clicking on one of the remaining pieces shown,
-      by using the left/right arrow buttons in the orientation selector
-      or by using <a href="shortcuts.html">shortcut keys</a>.
-    </p>
-    <p>
-      Below the orientation selector is a score display, which displays the
-      current points for each colour or player.
-      The points are the sum of on-board points and bonus points.
-      Points are underlined if they are final (because the colour cannot play
-      more pieces).
-    </p>
-
-    <h3>Playing Against the Computer</h3>
-    <p>
-      The board can be used for entering moves played by humans or for playing
-      games against the computer.
-      In games against the computer, the computer can play any (or several) of
-      the colours.
-    </p>
-    <p>
-      When you start a new game, the human will play the colour(s) of the
-      first player by default and the computer all other colours.
-      To change this, use <i>Computer Colours</i> from the <i>Computer</i> menu
-      or toolbar and select the colours the computer should play.
-    </p>
-    <p>
-      The exception is that the computer will play no colour by default,
-      if it played no colour in the previous game.
-      This prevents the computer from automatically starting to play if the
-      user mainly wants to use the board for entering move sequences or similar
-      editing tasks.
-      So if you want to use the board without playing against the computer,
-      you need to disable the computer colours in the <i>Computer Colours</i>
-      dialog only once and it will stay that way.
-      After loading a saved game, the computer also plays no colour by default.
-    </p>
-    <p>
-      Selecting <i>Play</i> from the <i>Computer</i> menu or the toolbar
-      always makes the computer play a move for the current colour.
-      If the computer did not already play this colour before, it will also make
-      the computer play this colour (and only this colour) from now on.
-    </p>
-
-    <h3>Move Variations and the Game Tree</h3>
-    <p>
-      When you play a game, Pentobi will store the sequence of moves and
-      it is always possible to go back to a previous position and play
-      differently.
-      If you do this, the new sequence is stored as an alternative sequence
-      (called a variation).
-      Variations can also be used by annotators for commenting on existing
-      games.
-      Variations can exist at any board position and can have subvariations
-      themselves.
-      The game can therefore become a game tree, in which each node represents
-      a board position.
-      You can navigate in the game tree with the items in the <i>Go</i> menu
-      or in the toolbar.
-    </p>
-    <p>
-      The main variation is the sequence of moves that starts at the start
-      position and always selects the first child node in each position
-      (e.g. by selecting <i>Forward</i> in the <i>Go</i> menu or toolbar).
-      The main variation is supposed to represent the real game played.
-      If you want a side variation to become the main variation, select
-      <i>Make Main Variation</i> from the <i>Edit</i> menu.
-    </p>
-    <p align="right">
-      <a href="junior_rules.html">Previous</a> |
-      <a href="become_stronger.html">Next</a>
-    </p>
-  </body>
+<head>
+<title>Pentobi User Manual</title>
+<link rel="stylesheet" type="text/css" href="../en/stylesheet.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<p align="right"><a href="junior_rules.html">Previous</a> |
+<a href="become_stronger.html">Next</a></p>
+<h3>How to Use Pentobi</h3>
+<h3>Board</h3>
+<p>Pentobi's main window shows the board on the left side. The
+played pieces on the board can have numbers on them that indicate
+the move number in which the piece was played. An letter after the
+move number indicates that there exists a variation to this move
+(see below).</p>
+<p>Pieces can be played by moving them to a place that corresponds
+to a legal move with the mouse or arrow keys and pressing the left
+mouse button or the Enter key.</p>
+<h3>Pieces and Score</h3>
+<p>On the right side, the remaining pieces are shown. Above the
+remaining pieces is an orientation selector that shows the
+currently selected piece and allows the player to change its
+orientation. If no piece is selected and the game has not yet
+ended, a coloured dot in the orientation selector shows the colour
+to play.</p>
+<p>Pieces can be selected by clicking on one of the remaining
+pieces shown, by using the left/right arrow buttons in the
+orientation selector or by using <a href="shortcuts.html">shortcut
+keys</a>.</p>
+<p>Below the orientation selector is a score display, which
+displays the current points for each colour or player. The points
+are the sum of on-board points and bonus points. Points are
+underlined if they are final (because the colour cannot play more
+pieces).</p>
+<h3>Playing Against the Computer</h3>
+<p>The board can be used for entering moves played by humans or for
+playing games against the computer. In games against the computer,
+the computer can play any (or several) of the colours.</p>
+<p>When you start a new game, the human will play the colour(s) of
+the first player by default and the computer all other colours. To
+change this, use <i>Computer Colours</i> from the <i>Computer</i>
+menu or toolbar and select the colours the computer should
+play.</p>
+<p>The exception is that the computer will play no colour by
+default, if it played no colour in the previous game. This prevents
+the computer from automatically starting to play if the user mainly
+wants to use the board for entering move sequences or similar
+editing tasks. So if you want to use the board without playing
+against the computer, you need to disable the computer colours in
+the <i>Computer Colours</i> dialog only once and it will stay that
+way. After loading a saved game, the computer also plays no colour
+by default.</p>
+<p>Selecting <i>Play</i> from the <i>Computer</i> menu or the
+toolbar always makes the computer play a move for the current
+colour. If the computer did not already play this colour before, it
+will also make the computer play this colour (and only this colour)
+from now on.</p>
+<h3>Move Variations and the Game Tree</h3>
+<p>When you play a game, Pentobi will store the sequence of moves
+and it is always possible to go back to a previous position and
+play differently. If you do this, the new sequence is stored as an
+alternative sequence (called a variation). Variations can also be
+used by annotators for commenting on existing games. Variations can
+exist at any board position and can have subvariations themselves.
+The game can therefore become a game tree, in which each node
+represents a board position. You can navigate in the game tree with
+the items in the <i>Go</i> menu or in the toolbar.</p>
+<p>The main variation is the sequence of moves that starts at the
+start position and always selects the first child node in each
+position (e.g. by selecting <i>Forward</i> in the <i>Go</i> menu or
+toolbar). The main variation is supposed to represent the real game
+played. If you want a side variation to become the main variation,
+select <i>Make Main Variation</i> from the <i>Edit</i> menu.</p>
+<p align="right"><a href="junior_rules.html">Previous</a> |
+<a href="become_stronger.html">Next</a></p>
+</body>
 </html>
