@@ -669,6 +669,8 @@ private:
 
     void play(Color c, Move mv);
 
+    void restoreLevel(Variant variant);
+
     bool save(const QString& file);
 
     void searchCallback(double elapsedSeconds, double remainingSeconds);

@@ -217,9 +217,6 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
 {
     Util::initDataDir();
     QSettings settings;
-    m_level = settings.value("level", 1).toInt();
-    if (m_level < 1 || m_level > maxLevel)
-        m_level = 1;
     auto variantString = settings.value("variant", "").toString();
     Variant variant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
@@ -227,6 +224,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     m_game.reset(new Game(variant));
     m_history.reset(new RatingHistory(variant));
     createActions();
+    restoreLevel(variant);
     setCentralWidget(createCentralWidget());
     initPieceSelectors();
     m_moveNumber = new QLabel;
@@ -2817,6 +2815,16 @@ void MainWindow::rememberFile(const QString& file)
     updateRecentFiles();
 }
 
+void MainWindow::restoreLevel(Variant variant)
+{
+    QSettings settings;
+    QString key = QString("level_") + to_string_id(variant);
+    m_level = settings.value(key, 1).toInt();
+    if (m_level < 1 || m_level > maxLevel)
+        m_level = 1;
+    m_actionLevel[m_level - 1]->setChecked(true);
+}
+
 void MainWindow::rotatePieceAnticlockwise()
 {
     Piece piece = m_guiBoard->getSelectedPiece();
@@ -3137,6 +3145,7 @@ void MainWindow::setVariant(Variant variant)
     initPieceSelectors();
     newGame();
     loadHistory();
+    restoreLevel(variant);
 }
 
 void MainWindow::setFile(const QString& file)
@@ -3156,7 +3165,7 @@ void MainWindow::setLevel(int level)
     m_level = level;
     m_actionLevel[level - 1]->setChecked(true);
     QSettings settings;
-    settings.setValue("level", m_level);
+    settings.setValue(QString("level_") + to_string_id(getVariant()), m_level);
 }
 
 void MainWindow::setLevel(bool checked)
