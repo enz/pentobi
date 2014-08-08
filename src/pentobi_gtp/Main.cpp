@@ -129,6 +129,8 @@ int main(int argc, char** argv)
         if (! parse_variant_id(variant_string, variant))
             throw Exception("invalid game variant " + variant_string);
         auto level = opt.get<int>("level", 4);
+        if (level < 1 || level > 9)
+            throw Exception("invalid level (must be 1-9)");
         auto use_book = (! opt.contains("nobook"));
         string books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,

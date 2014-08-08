@@ -902,18 +902,10 @@ void MainWindow::createActions()
     connect(m_actionMoveUpVariation, SIGNAL(triggered()),
             SLOT(moveUpVariation()));
 
-    static_assert(maxLevel == 8, "");
+    static_assert(maxLevel == 9, "");
     QString levelText[maxLevel] =
-        {
-            tr("&1"),
-            tr("&2"),
-            tr("&3"),
-            tr("&4"),
-            tr("&5"),
-            tr("&6"),
-            tr("&7"),
-            tr("&8")
-        };
+        { tr("&1"), tr("&2"), tr("&3"), tr("&4"), tr("&5"), tr("&6"),
+          tr("&7"), tr("&8"), tr("&9") };
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
     connect(m_actionFlipPieceVertically, SIGNAL(triggered()),

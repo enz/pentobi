@@ -88,9 +88,10 @@ Move Player::genmove(const Board& bd, Color c)
     Move mv;
     auto variant = bd.get_variant();
     auto board_type = bd.get_board_type();
+    int level = min(max(m_level, 1), 9);
     // Don't use more thane 2 moves per color from opening book in lower levels
     if (m_use_book
-        && (m_level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
+        && (level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
     {
         if (! m_is_book_loaded
             || m_book.get_tree().get_variant() != variant)
@@ -111,51 +112,60 @@ Move Player::genmove(const Board& bd, Color c)
         max_time = m_fixed_time;
     else
     {
-        // The minimum number of simulations and increase factor per level are
-        // chosen such that the average total time per game and player at level
-        // 7 is less than 20 min (10 min for Duo) even on somewhat outdated PC
-        // hardware.
-        // The increase factor should be no less than 3-4 to produce a
-        // noticable effect on playing strength between levels.
-        // The minimum number of simulations is very small to avoid that level
-        // 1 is too strong for absolute beginners (searches with such a small
-        // number of simulations still produce reasonable moves because of
-        // the prior knowledge initialization of node values.)
-        Float minimum = 3;
-        Float factor_per_level = 10;
-        switch (board_type)
+        // Rationale for chosing max_count:
+        // * The number at level 1 is very small to avoid that level 1 is too
+        //   strong for absolute beginners (searches with such a small number
+        //   of simulations still produce reasonable moves because of the
+        //   prior initialization of node values.)
+        // * The number at the highest level is chosen such that the average
+        //   time per game and player is 2 min in Duo, 4 min in Classic, 5 min
+        //   in Trigon on a Intel i3-4130. (This takes into account the
+        //   weighting of max_count with the move number below.)
+        // * The numbers for other levels are chosen such that they roughly
+        //   correspond to equal Elo differences in self-play experiments.
+        switch (variant)
         {
-        case BoardType::classic:
-            factor_per_level = 6.33f;
+        case Variant::classic:
+        case Variant::classic_2:
+            {
+                static float counts[] =
+                    { 3, 24, 87, 213, 667, 1989, 10780, 98438, 1249009 };
+                max_count = counts[level - 1];
+            }
             break;
-        case BoardType::trigon:
-        case BoardType::trigon_3:
-            factor_per_level = 5.14f;
+        case Variant::duo:
+        case Variant::junior:
+            {
+                static float counts[] =
+                    { 3, 17, 44, 123, 426, 1672, 6240, 51590, 5174795 };
+                max_count = counts[level - 1];
+            }
             break;
-        case BoardType::duo:
-            factor_per_level = 7.60f;
+        case Variant::trigon:
+        case Variant::trigon_2:
+        case Variant::trigon_3:
+            {
+                static float counts[] =
+                    { 20, 46, 94, 197, 338, 1440, 5095, 29610, 348842 };
+                max_count = counts[level - 1];
+            }
             break;
         }
-        if (m_level <= 1)
-            max_count = minimum;
-        else
-            max_count =
-                Float(ceil(minimum * pow(factor_per_level, m_level - 1)));
         // Don't weight max_count in low levels, otherwise it is still too
         // strong for beginners (later in the game, the weight becomes much
         // greater than 1 because the simulations become very fast)
-        bool weight_max_count = (m_level >= 4);
+        bool weight_max_count = (level >= 4);
         if (weight_max_count)
         {
             auto player_move = bd.get_nu_onboard_pieces(c);
-            float weight = 1;
+            float weight = 1; // Init to avoid compiler warning
             switch (board_type)
             {
-            case BoardType::duo:
-                weight = m_weight_max_count_duo[player_move];
-                break;
             case BoardType::classic:
                 weight = m_weight_max_count_classic[player_move];
+                break;
+            case BoardType::duo:
+                weight = m_weight_max_count_duo[player_move];
                 break;
             case BoardType::trigon:
             case BoardType::trigon_3:
@@ -187,61 +197,46 @@ Move Player::genmove(const Board& bd, Color c)
 
 Rating Player::get_rating(Variant variant, int level)
 {
-    // The initial rating estimates for version 2.0 are loosely based on
-    // earlier experiments that measured the rating differences depending on
-    // different number of simulations in Pentobi 1.0. A general factor of 0.5
-    // was applied to measured Elo differences to take into account that
-    // self-play experiments usually overestimate Elo differences when
-    // playing vs. humans. The ratings were anchored such that level 1 was
-    // at beginner level (~1000 Elo) and level 6 at lower expert level (~2000
-    // Elo), which corresponds to estimates of the performance of Pentobi 1.0
-    // vs. humans. Not all game variants were tested (for example, the ratings
-    // for Classic 2 was also used for Classic, and those of Duo for
-    // Junior). Modifications for the estimated playing strength of Pentobi
-    // 1.0 in different game variants were applied (e.g. stronger in Duo,
-    // weaker in Trigon).
-    // Ratings of future versions of Pentobi should be roughly calibrated by
-    // testing vs. Pentobi 2.0 and the same factor of 0.5 should be used to
-    // rescale Elo differences measured in self-play experiments such that
-    // they are somewhat comparable. This avoids jumps in the ratings of humans
-    // after an upgrade of Pentobi if the computer player is used to assign a
-    // rating to the human user.
-    level = max(level, 1);
+    // The ratings are based on experiments that measured the winning rates in
+    // games between subsequent playing levels of Pentobi. A scale factor less
+    // than 1 was applied to the Elo differences to take into account that
+    // self-play experiments usually overestimate the performance against
+    // humans. The scale factor and lower anchor for the Elo ratings were
+    // chosen such that the Elo range is roughly between 1000 (beginner level)
+    // and 2000 (lower expert level) taking into account that Pentobi is
+    // relatively strong against humans in Duo and relatively weak in Trigon.
+    // Only the most popular game variants were tested (Classic 2, Duo,
+    // Trigon 2) and these ratings were used for other game variants on the
+    // same board type. The ratings are not always measured again for new
+    // versions of Pentobi and not really comparable between different versions
+    // of Pentobi.
+    level = min(max(level, 1), 9);
     switch (variant)
     {
     case Variant::classic:
     case Variant::classic_2:
         {
+            // Anchor 1000, scale 0.63
             static float elo[] =
-                { 1000, 1255, 1510, 1740, 1880, 1950, 1990, 2030 };
-            if (level <= 8)
-                return Rating(elo[level - 1]);
-            else
-                // Ratings for levels greater 8 are not really tested.
-                return Rating(elo[7] + static_cast<float>(10 * (level - 8)));
+                { 1000, 1134, 1267, 1400, 1534, 1668, 1801, 1935, 2068 };
+            return Rating(elo[level - 1]);
+        }
+    case Variant::duo:
+    case Variant::junior:
+        {
+            // Anchor 1100, scale 0.80
+            static float elo[] =
+                { 1100, 1229, 1359, 1489, 1618, 1748, 1878, 2008, 2137 };
+            return Rating(elo[level - 1]);
         }
     case Variant::trigon:
     case Variant::trigon_2:
     case Variant::trigon_3:
         {
+            // Anchor 950, scale 0.40
             static float elo[] =
-                { 920, 1100, 1300, 1485, 1580, 1650, 1700, 1750 };
-            if (level <= 8)
-                return Rating(elo[level - 1]);
-            else
-                // Ratings for levels greater 8 are not really tested.
-                return Rating(elo[7] + static_cast<float>(10 * (level - 8)));
-        }
-    case Variant::duo:
-    case Variant::junior:
-        {
-            static float elo[] =
-                { 1100, 1325, 1550, 1750, 1880, 1950, 2020, 2090 };
-            if (level <= 8)
-                return Rating(elo[level - 1]);
-            else
-                // Ratings for levels greater 8 are not really tested.
-                return Rating(elo[7] + static_cast<float>(10 * (level - 8)));
+                { 950, 1062, 1175, 1287, 1400, 1512, 1624, 1737, 1849 };
+            return Rating(elo[level - 1]);
         }
     }
     LIBBOARDGAME_ASSERT(false);

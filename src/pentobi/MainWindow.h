@@ -252,7 +252,7 @@ private:
     };
 
     /** Possible values for m_level are in 1..maxLevel */
-    static const int maxLevel = 8;
+    static const int maxLevel = 9;
 
     static const int maxRecentFiles = 9;
 

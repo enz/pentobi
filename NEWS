@@ -1,7 +1,8 @@
 VERSION 8.UNKNOWN (master)
 ==========================
 
-* Increased playing strength.
+* New stronger playing level 9.
+* The playing strength now increases more evenly with the level.
 * The computer now remembers the playing level last used separately for each
   game variant and restores it when the game variant is changed.
 
