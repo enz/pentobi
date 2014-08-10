@@ -113,10 +113,10 @@ Move Player::genmove(const Board& bd, Color c)
     else
     {
         // Rationale for chosing max_count:
-        // * The number at level 1 is very small to avoid that level 1 is too
-        //   strong for absolute beginners (searches with such a small number
-        //   of simulations still produce reasonable moves because of the
-        //   prior initialization of node values.)
+        // * The number at level 1 is very small in Classic/Duo to avoid that
+        //   level 1 is too strong for absolute beginners (searches with such a
+        //   small number of simulations still produce reasonable moves because
+        //   of the prior initialization of node values.)
         // * The number at the highest level is chosen such that the average
         //   time per game and player is 2 min in Duo, 4 min in Classic, 5 min
         //   in Trigon on a Intel i3-4130. (This takes into account the
@@ -146,7 +146,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::trigon_3:
             {
                 static float counts[] =
-                    { 20, 46, 94, 197, 338, 1440, 5095, 29610, 348842 };
+                    { 228, 433, 727, 1501, 2912, 7395, 20828, 61138, 348842 };
                 max_count = counts[level - 1];
             }
             break;
@@ -198,8 +198,10 @@ Move Player::genmove(const Board& bd, Color c)
 Rating Player::get_rating(Variant variant, int level)
 {
     // The ratings are based on experiments that measured the winning rates in
-    // games between subsequent playing levels of Pentobi. A scale factor less
-    // than 1 was applied to the Elo differences to take into account that
+    // games between subsequent playing levels of Pentobi. The number of
+    // simulations per level is already chosen such that the levels have
+    // roughly equal Elo differences, see Player::genmove(). A scale factor
+    // less than 1 was applied to the Elo differences to take into account that
     // self-play experiments usually overestimate the performance against
     // humans. The scale factor and lower anchor for the Elo ratings were
     // chosen such that the Elo range is roughly between 1000 (beginner level)
@@ -233,9 +235,9 @@ Rating Player::get_rating(Variant variant, int level)
     case Variant::trigon_2:
     case Variant::trigon_3:
         {
-            // Anchor 950, scale 0.40
+            // Anchor 1000, scale 0.60
             static float elo[] =
-                { 950, 1062, 1175, 1287, 1400, 1512, 1624, 1737, 1849 };
+                { 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800 };
             return Rating(elo[level - 1]);
         }
     }
