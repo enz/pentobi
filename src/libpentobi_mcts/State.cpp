@@ -194,7 +194,7 @@ array<Float, 4> State::evaluate_playout()
         if (log_simulations)
             log("Result: 0.5 (symmetry)");
         array<Float, 4> result;
-        fill(result.begin(), result.end(), 0.5);
+        fill(result.begin(), result.end(), 0.5f);
         return result;
     }
 
