@@ -217,9 +217,6 @@ private:
         Used for normalizing the length modification of the game result. */
     Statistics<Float> m_stat_len;
 
-    /** Number of simulations of this state in the current search. */
-    size_t m_nu_simulations;
-
     size_t m_nu_playout_moves;
 
     size_t m_nu_last_good_reply_moves;

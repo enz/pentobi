@@ -536,7 +536,6 @@ void State::start_search()
     m_check_terminate_early =
         (m_nu_moves_initial < 10u * m_nu_colors
          && m_bd.get_nu_players() == 2);
-    m_nu_simulations = 0;
     m_nu_playout_moves = 0;
     m_nu_last_good_reply_moves = 0;
     auto variant = bd.get_variant();
@@ -595,7 +594,6 @@ void State::start_simulation(size_t n)
         log() << "=========================================================\n"
               << "Simulation " << n << "\n"
               << "=========================================================\n";
-    ++m_nu_simulations;
     m_bd.restore_snapshot();
     m_force_consider_all_pieces = false;
     for (ColorIterator i(m_nu_colors); i; ++i)
