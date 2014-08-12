@@ -61,21 +61,6 @@ bool is_main_variation(const Node& node);
 
 const Node& back_to_main_variation(const Node& node);
 
-/** Construct a property value as used for points in Go. */
-string get_go_point_property_value(int x, int y, int sz);
-
-/** Parse a property value as used for points in Go.
-    @param s The property value
-    @param[out] x The x coordinate or -1, if the value is a pass move encoding
-    compatible with FF[3] ("tt" for boards sizes less or equal 19).
-    @param[out] y The y coordinate or -1, if the value is a pass move encoding
-    compatible with FF[3] ("tt" for boards sizes less or equal 19).
-    @param sz The board size
-    @throws InvalidPropertyValue */
-void parse_go_move_property_value(const string& s, int& x, int& y, int sz);
-
-void parse_go_point_property_value(const string& s, int& x, int& y, int sz);
-
 bool has_comment(const Node& node);
 
 //-----------------------------------------------------------------------------

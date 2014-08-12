@@ -71,14 +71,6 @@ const Node& find_root(const Node& node)
     return *current;
 }
 
-string get_go_point_property_value(int x, int y, int sz)
-{
-    ostringstream result;
-    result << char('a' + x);
-    result << char('a' + (sz - y - 1));
-    return result.str();
-}
-
 const Node& get_last_node(const Node& node)
 {
     auto n = &node;

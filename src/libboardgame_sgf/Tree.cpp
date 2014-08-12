@@ -18,9 +18,6 @@
 namespace libboardgame_sgf {
 
 using libboardgame_sgf::util::find_root;
-using libboardgame_sgf::util::get_go_point_property_value;
-using libboardgame_sgf::util::parse_go_move_property_value;
-using libboardgame_sgf::util::parse_go_point_property_value;
 
 //-----------------------------------------------------------------------------
 
