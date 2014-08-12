@@ -61,8 +61,7 @@ void Reader::consume_char(char expected)
 
 void Reader::consume_whitespace()
 {
-    int c;
-    while (is_ascii_space(c = peek()))
+    while (is_ascii_space(peek()))
         m_in->get();
 }
 
