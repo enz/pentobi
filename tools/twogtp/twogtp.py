@@ -3,7 +3,7 @@
 
 from fcntl import flock, LOCK_EX, LOCK_NB
 from getopt import getopt
-from os import remove
+from os import devnull, remove
 from os.path import exists
 from shlex import split
 from string import lower, strip, upper
@@ -13,13 +13,19 @@ from threading import Lock, Thread
 
 
 class GtpClient:
-    def __init__(self, cmd, color):
+    def __init__(self, cmd, color, quiet):
         self.color = color
-        self.process = Popen(split(cmd), stdin=PIPE, stdout=PIPE,
-                             close_fds=True)
+        self.quiet = quiet
+        stderr_target = None
+        if quiet:
+            # Use subprocess.DEVNULL once we require Python 3.3
+            stderr_target = open(devnull, 'wb')
+        self.process = Popen(split(cmd), stdin = PIPE, stdout = PIPE,
+                             stderr = stderr_target, close_fds = True)
 
     def send(self, cmd):
-        stderr.write(self.color + ">> " + cmd + "\n")
+        if not self.quiet:
+            stderr.write(self.color + ">> " + cmd + "\n")
         self.process.stdin.write(cmd + "\n")
         self.process.stdin.flush()
         response = ""
@@ -29,7 +35,8 @@ class GtpClient:
             line = self._readline()
         if response[-1] == "\n":
             response = response[:-1]
-        stderr.write(self.color + "<< " + response + "\n")
+        if not self.quiet:
+            stderr.write(self.color + "<< " + response + "\n")
         if (response[0] == "?"):
             raise Exception(response[2:])
         if (response[0] == "="):
@@ -133,10 +140,11 @@ def convert_four_player_result(result):
         return "0"
 
 
-def play_game(game_number, black, white, variant, output_file):
-    stderr.write("=========================================================\n")
-    stderr.write("Game %i\n" % game_number)
-    stderr.write("=========================================================\n")
+def play_game(game_number, black, white, variant, output_file, quiet):
+    if not quiet:
+        stderr.write("=====================================================\n")
+        stderr.write("Game %i\n" % game_number)
+        stderr.write("=====================================================\n")
     exchange_color = (alternate and game_number % 2 != 0)
     black.send("clear_board")
     white.send("clear_board")
@@ -214,16 +222,16 @@ def play_game(game_number, black, white, variant, output_file):
                            cpu_black, cpu_white, sgf)
 
 
-def thread_main():
-    black = GtpClient(black_cmd, "B")
-    white = GtpClient(white_cmd, "W")
+def thread_main(quiet):
+    black = GtpClient(black_cmd, "B", quiet)
+    white = GtpClient(white_cmd, "W", quiet)
     black.send_no_err("set_game " + game_name)
     white.send_no_err("set_game " + game_name)
     while not exists(sentinel_filename):
         game_number = output_file.get_next_game_number()
         if game_number >= nu_games:
             break
-        play_game(game_number, black, white, variant, output_file)
+        play_game(game_number, black, white, variant, output_file, quiet)
 
 white_cmd = ""
 black_cmd = ""
@@ -301,7 +309,10 @@ with open(lock_filename, "w") as lock_file:
     flock(lock_file, LOCK_EX | LOCK_NB)
     threads = []
     for i in range(0, nu_threads):
-        t = Thread(None, thread_main)
+        # If multithreaded, show commands, responses and stderr only of the
+        # first thread
+        quiet = (i != 0)
+        t = Thread(None, thread_main, args = (quiet,))
         t.start()
         threads.append(t)
     for t in threads:
