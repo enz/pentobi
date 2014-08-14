@@ -123,6 +123,12 @@ void Options::check_name(const string& name) const
         throw OptionError("Internal error: invalid option name " + name);
 }
 
+bool Options::contains(const string& name) const
+{
+    check_name(name);
+    return m_map.find(name) != m_map.end();
+}
+
 string Options::get(const string& name) const
 {
     check_name(name);

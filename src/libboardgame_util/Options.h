@@ -95,12 +95,6 @@ private:
     void check_name(const string& name) const;
 };
 
-inline bool Options::contains(const string& name) const
-{
-    check_name(name);
-    return m_map.find(name) != m_map.end();
-}
-
 template<typename T>
 T Options::get(const string& name) const
 {
