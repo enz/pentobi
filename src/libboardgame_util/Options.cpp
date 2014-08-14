@@ -119,14 +119,14 @@ Options::Options(int argc, char** argv, const vector<string>& specs)
 
 void Options::check_name(const string& name) const
 {
-    if (m_names.find(name) == m_names.end())
+    if (m_names.count(name) == 0)
         throw OptionError("Internal error: invalid option name " + name);
 }
 
 bool Options::contains(const string& name) const
 {
     check_name(name);
-    return m_map.find(name) != m_map.end();
+    return m_map.count(name) > 0;
 }
 
 string Options::get(const string& name) const

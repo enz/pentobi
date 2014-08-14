@@ -517,8 +517,7 @@ void Engine::add(const string& name, void (*f)())
 /** Return @c true if command is known, @c false otherwise. */
 void Engine::cmd_known_command(const Arguments& args, Response& response)
 {
-    bool is_known = (m_handlers.find(args.get()) != m_handlers.end());
-    response.set(is_known ? "true" : "false");
+    response.set(contains(args.get()) ? "true" : "false");
 }
 
 /** List all known commands. */
@@ -555,7 +554,7 @@ void Engine::cmd_version(Response&)
 
 bool Engine::contains(const string& name) const
 {
-    return (m_handlers.find(name) != m_handlers.end());
+    return (m_handlers.count(name) > 0);
 }
 
 void Engine::remove(const string& name)
