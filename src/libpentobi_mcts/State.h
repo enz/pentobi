@@ -213,10 +213,6 @@ private:
         Used for normalizing the score modification of the game result. */
     ColorMap<Statistics<Float>> m_stat_score;
 
-    /** Statistics of the length of a simulation.
-        Used for normalizing the length modification of the game result. */
-    Statistics<Float> m_stat_len;
-
     size_t m_nu_playout_moves;
 
     size_t m_nu_last_good_reply_moves;

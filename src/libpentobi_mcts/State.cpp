@@ -180,9 +180,9 @@ void State::dump(ostream& out) const
     gives the result 0. Being the single winner is better than sharing the
     best place, which is better than getting the second place, etc.
 
-    Bonuses are added to the result to encorage wins with larger scores and
-    shorter game length. See also: Pepels et al.: Quality-based Rewards for
-    Monte-Carlo Tree Search Simulations. ECAI 2014. */
+    Bonuses are added to the result to encorage wins with larger scores. See
+    also: Pepels et al.: Quality-based Rewards for Monte-Carlo Tree Search
+    Simulations. ECAI 2014. */
 array<Float, 4> State::evaluate_playout()
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
@@ -252,26 +252,11 @@ array<Float, 4> State::evaluate_playout()
         }
 
         Float res = game_result;
-        {
-            auto& stat = m_stat_score[c];
-            stat.add(s);
-            Float dev = stat.get_deviation();
-            if (dev > 0)
-                res += 0.2f * sigmoid(2.0f, (s - stat.get_mean()) / dev);
-        }
-        {
-            Float l = static_cast<Float>(m_bd.get_nu_moves());
-            auto& stat = m_stat_len;
-            stat.add(l);
-            Float dev = stat.get_deviation();
-            if (dev > 0)
-            {
-                if (game_result == 1)
-                    res -= 0.12f * sigmoid(2.0f, (l - stat.get_mean()) / dev);
-                else if (game_result == 0)
-                    res += 0.12f * sigmoid(2.0f, (l - stat.get_mean()) / dev);
-            }
-        }
+        auto& stat = m_stat_score[c];
+        stat.add(s);
+        Float dev = stat.get_deviation();
+        if (dev > 0)
+            res += 0.2f * sigmoid(2.0f, (s - stat.get_mean()) / dev);
         result_array[i] = res;
         if (log_simulations)
             log() << "Result color " << c << ": sco=" << s << " game_res="
@@ -554,7 +539,6 @@ void State::start_search()
     m_prior_knowledge.start_search(bd);
     for (ColorIterator i(m_nu_colors); i; ++i)
         m_stat_score[*i].clear();
-    m_stat_len.clear();
 
     // Init precomputed gamma values
     double gamma_size_factor = 1;
