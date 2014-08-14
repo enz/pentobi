@@ -103,18 +103,10 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_classic_2)
     bd->play(Color(0), bd->from_string("j11,j12"));
     bd->play(Color(0), bd->from_string("i10"));
     LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_moves(), 37u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), 89u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), 109u);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), 7u);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(2)), 38u);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(3)), 7u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(0)), 20u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(1)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(2)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(3)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(0)), 109u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(1)), 7u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(2)), 38u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(3)), 7u);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(0)), 133);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(1)), -133);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(2)), 133);
@@ -126,14 +118,10 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_classic_2)
     // Make sure that bonus computation still works if after the 1-piece an
     // additional pass move was played
     bd->play_pass(Color(0));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(0)), 20u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(1)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(2)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_bonus(Color(3)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(0)), 109u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(1)), 7u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(2)), 38u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points_with_bonus(Color(3)), 7u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), 109u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), 7u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(2)), 38u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(3)), 7u);
 }
 
 /** Check the number of generated moves at each attach point in a known

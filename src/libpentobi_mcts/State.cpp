@@ -202,9 +202,9 @@ array<Float, 4> State::evaluate_playout()
     ColorMap<Float> points;
     ColorMap<Float> score;
     for (ColorIterator i(m_nu_colors); i; ++i)
-        points[*i] = Float(m_bd.get_points_with_bonus(*i));
+        points[*i] = static_cast<Float>(m_bd.get_points(*i));
     for (Color::IntType i = 0; i < nu_players; ++i)
-        score[Color(i)] = Float(m_bd.get_score(Color(i)));
+        score[Color(i)] = static_cast<Float>(m_bd.get_score(Color(i)));
     if (m_nu_colors > nu_players)
     {
         LIBBOARDGAME_ASSERT(m_nu_colors == 4);

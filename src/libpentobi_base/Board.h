@@ -142,13 +142,8 @@ public:
         of a unique piece per player. */
     unsigned get_nu_left_piece(Color c, Piece piece) const;
 
-    /** Get number of points on board occupied by a color. */
+    /** Get number of points by a color including the bonus. */
     unsigned get_points(Color c) const;
-
-    unsigned get_bonus(Color c) const;
-
-    /** Equivalent to get_points(c) + get_bonus(c) */
-    unsigned get_points_with_bonus(Color c) const;
 
     /** Is a point a potential attachment point for a color.
         Does not check if the point is forbidden. */
@@ -370,8 +365,6 @@ private:
         unsigned nu_onboard_pieces;
 
         unsigned points;
-
-        unsigned bonus;
     };
 
     /** Snapshot for fast restoration of a previous position.
@@ -518,11 +511,6 @@ inline BoardType Board::get_board_type() const
     return m_board_const->get_board_type();
 }
 
-inline unsigned Board::get_bonus(Color c) const
-{
-    return m_state_color[c].bonus;
-}
-
 inline const Geometry& Board::get_geometry() const
 {
     return *m_geo;
@@ -652,11 +640,6 @@ inline unsigned Board::get_points(Color c) const
     return m_state_color[c].points;
 }
 
-inline unsigned Board::get_points_with_bonus(Color c) const
-{
-    return get_points(c) + get_bonus(c);
-}
-
 inline Color Board::get_previous(Color c) const
 {
     return c.get_previous(m_nu_colors);
@@ -667,8 +650,8 @@ inline int Board::get_score(Color c) const
     if (m_nu_colors == 2)
     {
         LIBBOARDGAME_ASSERT(m_nu_players == 2);
-        unsigned points0 = get_points_with_bonus(Color(0));
-        unsigned points1 = get_points_with_bonus(Color(1));
+        unsigned points0 = get_points(Color(0));
+        unsigned points1 = get_points(Color(1));
         if (c == Color(0))
             return points0 - points1;
         else
@@ -677,10 +660,8 @@ inline int Board::get_score(Color c) const
     else if (m_nu_players == 2)
     {
         LIBBOARDGAME_ASSERT(m_nu_colors == 4);
-        unsigned points0 =
-            get_points_with_bonus(Color(0)) + get_points_with_bonus(Color(2));
-        unsigned points1 =
-            get_points_with_bonus(Color(1)) + get_points_with_bonus(Color(3));
+        unsigned points0 = get_points(Color(0)) + get_points(Color(2));
+        unsigned points1 = get_points(Color(1)) + get_points(Color(3));
         if (c == Color(0) || c == Color(2))
             return points0 - points1;
         else
@@ -692,10 +673,8 @@ inline int Board::get_score(Color c) const
         int score = 0;
         for (ColorIterator i(m_nu_colors); i; ++i)
             if (*i != c)
-                score -= get_points_with_bonus(*i);
-        score =
-            get_points_with_bonus(c)
-            + score / (static_cast<int>(m_nu_colors) - 1);
+                score -= get_points(*i);
+        score = get_points(c) + score / (static_cast<int>(m_nu_colors) - 1);
         return score;
     }
 }
@@ -864,9 +843,9 @@ inline void Board::place(Color c, Move mv)
         state_color.pieces_left.remove_fast(piece);
         if (state_color.pieces_left.empty())
         {
-            state_color.bonus = m_bonus_all_pieces;
+            state_color.points += m_bonus_all_pieces;
             if (piece_size == 1)
-                state_color.bonus += m_bonus_one_piece;
+                state_color.points += m_bonus_one_piece;
         }
     }
     ++m_state_base.nu_onboard_pieces_all;

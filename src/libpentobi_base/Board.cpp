@@ -231,7 +231,6 @@ void Board::init(Variant variant, const Setup* setup)
         m_state_color[*i].pieces_left.clear();
         m_state_color[*i].nu_onboard_pieces = 0;
         m_state_color[*i].points = 0;
-        m_state_color[*i].bonus = 0;
         for (Piece::IntType j = 0; j < get_nu_uniq_pieces(); ++j)
             m_state_color[*i].pieces_left.push_back(Piece(j));
         m_state_color[*i].nu_left_piece.fill(m_nu_piece_instances);
@@ -252,7 +251,7 @@ void Board::init(Variant variant, const Setup* setup)
         optimize_attach_point_lists();
         for (ColorIterator i(m_nu_colors); i; ++i)
             if (m_state_color[*i].pieces_left.empty())
-                m_state_color[*i].bonus = m_bonus_all_pieces;
+                m_state_color[*i].points += m_bonus_all_pieces;
     }
     m_moves.clear();
 }
@@ -549,9 +548,6 @@ void Board::write_color_info_line1(ostream& out, Color c) const
     if (get_to_play() == c)
         out << '*';
     out << m_color_name[c] << "(" << m_color_char[c] << "): " << get_points(c);
-    unsigned bonus = get_bonus(c);
-    if (bonus > 0)
-        out << " (+" << bonus << ')';
     set_color(out, "\x1B[0m");
 }
 

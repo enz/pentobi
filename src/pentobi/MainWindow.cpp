@@ -1828,10 +1828,10 @@ void MainWindow::gameOver()
     }
     else if (variant == Variant::trigon_3)
     {
-        unsigned blue = bd.get_points_with_bonus(Color(0));
-        unsigned yellow = bd.get_points_with_bonus(Color(1));
-        unsigned red = bd.get_points_with_bonus(Color(2));
-        unsigned maxPoints = max(blue, max(yellow, red));
+        auto blue = bd.get_points(Color(0));
+        auto yellow = bd.get_points(Color(1));
+        auto red = bd.get_points(Color(2));
+        auto maxPoints = max(blue, max(yellow, red));
         if (blue == yellow && yellow == red)
             info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow)
@@ -1851,11 +1851,11 @@ void MainWindow::gameOver()
     {
         LIBBOARDGAME_ASSERT(variant == Variant::classic
                             || variant == Variant::trigon);
-        unsigned blue = bd.get_points_with_bonus(Color(0));
-        unsigned yellow = bd.get_points_with_bonus(Color(1));
-        unsigned red = bd.get_points_with_bonus(Color(2));
-        unsigned green = bd.get_points_with_bonus(Color(3));
-        unsigned maxPoints = max(blue, max(yellow, max(red, green)));
+        auto blue = bd.get_points(Color(0));
+        auto yellow = bd.get_points(Color(1));
+        auto red = bd.get_points(Color(2));
+        auto green = bd.get_points(Color(3));
+        auto maxPoints = max(blue, max(yellow, max(red, green)));
         if (blue == yellow && yellow == red && red == green)
             info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow && yellow == red)

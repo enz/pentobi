@@ -48,8 +48,6 @@ private:
 
     ColorMap<unsigned> m_points;
 
-    ColorMap<unsigned> m_bonus;
-
     int m_colorDotSize;
 
     int m_colorDotSpace;
@@ -70,7 +68,7 @@ private:
 
     void drawScore2(QPainter& painter, Color c1, Color c2, int x);
 
-    QString getScoreText(unsigned points, unsigned bonus) const;
+    QString getScoreText(unsigned points) const;
 
     int getTextWidth(QString text) const;
 

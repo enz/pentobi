@@ -25,8 +25,7 @@ using libpentobi_base::ColorIterator;
 ScoreDisplay::ScoreDisplay(QWidget* parent)
     : QWidget(parent),
       m_hasMoves(false),
-      m_points(0),
-      m_bonus(0)
+      m_points(0)
 {
     m_variant = Variant::classic;
     m_font.setStyleStrategy(QFont::PreferOutline);
@@ -96,21 +95,21 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
     }
 }
 
-QString ScoreDisplay::getScoreText(unsigned points, unsigned bonus) const
+QString ScoreDisplay::getScoreText(unsigned points) const
 {
     QString text;
-    text.setNum(points + bonus);
+    text.setNum(points);
     return text;
 }
 
 QString ScoreDisplay::getScoreText(Color c)
 {
-    return getScoreText(m_points[c], m_bonus[c]);
+    return getScoreText(m_points[c]);
 }
 
 QString ScoreDisplay::getScoreText2(Color c1, Color c2)
 {
-    return getScoreText(m_points[c1] + m_points[c2], m_bonus[c1] + m_bonus[c2]);
+    return getScoreText(m_points[c1] + m_points[c2]);
 }
 
 int ScoreDisplay::getScoreTextWidth(Color c)
@@ -240,15 +239,12 @@ void ScoreDisplay::updateScore(const Board& bd)
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
     {
         bool hasMoves = bd.has_moves(*i);
-        unsigned points = bd.get_points(*i);
-        unsigned bonus = bd.get_bonus(*i);
-        if (hasMoves != m_hasMoves[*i] || m_points[*i] != points
-            || m_bonus[*i] != bonus)
+        auto points = bd.get_points(*i);
+        if (hasMoves != m_hasMoves[*i] || m_points[*i] != points)
         {
             hasChanged = true;
             m_hasMoves[*i] = hasMoves;
             m_points[*i] = points;
-            m_bonus[*i] = bonus;
         }
     }
     if (hasChanged)

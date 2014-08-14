@@ -77,7 +77,7 @@ void Engine::cmd_final_score(Response& response)
     if (get_nu_players(bd.get_variant()) > 2)
     {
         for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-            response << bd.get_points_with_bonus(*i) << ' ';
+            response << bd.get_points(*i) << ' ';
     }
     else
     {
