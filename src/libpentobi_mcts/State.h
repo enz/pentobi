@@ -230,7 +230,7 @@ private:
         3 in Duo/Junior or 5 in Trigon because this is the earliest move number
         to break the symmetry. The early playout termination that evaluates all
         symmetric positions as a draw should not be used earlier because it can
-        case bad move selection in very short searches if all moves are
+        cause bad move selection in very short searches if all moves are
         evaluated as draw and the search is not deep enough to find that the
         symmetry can be broken a few moves later. */
     unsigned m_symmetry_min_nu_pieces;
