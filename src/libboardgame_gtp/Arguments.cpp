@@ -18,7 +18,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-void Arguments::check_size(size_t n) const
+void Arguments::check_size(unsigned n) const
 {
     if (get_size() == n)
         return;
@@ -34,7 +34,7 @@ void Arguments::check_size(size_t n) const
     }
 }
 
-void Arguments::check_size_less_equal(size_t n) const
+void Arguments::check_size_less_equal(unsigned n) const
 {
     if (get_size() <= n)
         return;
@@ -48,7 +48,7 @@ void Arguments::check_size_less_equal(size_t n) const
     }
 }
 
-CmdLineRange Arguments::get(size_t i) const
+CmdLineRange Arguments::get(unsigned i) const
 {
     if (i < get_size())
         return m_line.get_element(m_line.get_idx_name() + i + 1);
@@ -57,7 +57,7 @@ CmdLineRange Arguments::get(size_t i) const
     throw Failure(msg.str());
 }
 
-string Arguments::get_tolower(size_t i) const
+string Arguments::get_tolower(unsigned i) const
 {
     string value = get(i);
     for (auto& c : value)
@@ -71,9 +71,9 @@ string Arguments::get_tolower() const
     return get_tolower(0);
 }
 
-string Arguments::get_remaining_arg(size_t i) const
+string Arguments::get_remaining_arg(unsigned i) const
 {
-    size_t size = get_size();
+    unsigned size = get_size();
     if (size == i + 1)
         return "";
     else if (size == i + 2)
@@ -82,7 +82,7 @@ string Arguments::get_remaining_arg(size_t i) const
         return get_remaining_line(i);
 }
 
-CmdLineRange Arguments::get_remaining_line(size_t i) const
+CmdLineRange Arguments::get_remaining_line(unsigned i) const
 {
     if (i < get_size())
         return m_line.get_trimmed_line_after_elem(m_line.get_idx_name() + i

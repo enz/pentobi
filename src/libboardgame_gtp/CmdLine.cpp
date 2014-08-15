@@ -11,12 +11,26 @@
 #include "CmdLine.h"
 
 #include <cassert>
+#include <limits>
 
 namespace libboardgame_gtp {
 
 using namespace std;
 
 //-----------------------------------------------------------------------------
+
+CmdLine::~CmdLine()
+{
+}
+
+void CmdLine::add_elem(string::const_iterator begin,
+                       string::const_iterator end)
+{
+    // Ignore command line elements greater UINT_MAX because we use unsigned
+    // for element indices.
+    if (m_elem.size() < numeric_limits<unsigned>::max())
+        m_elem.emplace_back(begin, end);
+}
 
 /** Find elements (ID, command name, arguments).
     Arguments are words separated by whitespaces.
@@ -35,7 +49,7 @@ void CmdLine::find_elem()
         if (c == '"' && ! escape)
         {
             if (is_in_string)
-                m_elem.emplace_back(begin, i);
+                add_elem(begin, i);
             begin = i + 1;
             is_in_string = ! is_in_string;
         }
@@ -51,7 +65,7 @@ void CmdLine::find_elem()
         m_elem.emplace_back(begin, m_line.end());
 }
 
-CmdLineRange CmdLine::get_trimmed_line_after_elem(size_t i) const
+CmdLineRange CmdLine::get_trimmed_line_after_elem(unsigned i) const
 {
     assert(i < m_elem.size());
     auto& e = m_elem[i];

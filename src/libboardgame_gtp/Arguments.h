@@ -30,7 +30,7 @@ public:
         @param i Argument index starting with 0
         @return Argument value
         @throws Failure If no such argument */
-    CmdLineRange get(size_t i) const;
+    CmdLineRange get(unsigned i) const;
 
     /** Get single argument.
         @return Argument value
@@ -42,7 +42,7 @@ public:
         @param i Argument index starting with 0
         @return Copy of argument value converted to lowercase
         @throws Failure If no such argument */
-    string get_tolower(size_t i) const;
+    string get_tolower(unsigned i) const;
 
     /** Get single argument converted to lowercase. */
     string get_tolower() const;
@@ -53,14 +53,13 @@ public:
         @return The converted argument
         @throws Failure If no such argument, or argument cannot be converted */
     template<typename T>
-    T parse(size_t i) const;
+    T parse(unsigned i) const;
 
     /** Get single argument converted to a type.
         The type must implement operator<<(istream)
         @return The converted argument
         @throws Failure If no such argument, or argument cannot be converted,
-        or command has more than one arguments
-    */
+        or command has more than one arguments */
     template<typename T>
     T parse() const;
 
@@ -70,10 +69,9 @@ public:
         @param min Minimum allowed value
         @return Argument value
         @throws Failure If no such argument, argument cannot be converted
-        or smaller than the mimimum value
-    */
+        or smaller than the mimimum value */
     template<typename T>
-    T parse_min(size_t i, T min) const;
+    T parse_min(unsigned i, T min) const;
 
     /** Get argument converted to a type and check against a range.
         The type must implement operator<< and operator<
@@ -82,10 +80,9 @@ public:
         @param max Maximum allowed value
         @return Argument value
         @throws Failure If no such argument, argument cannot be converted
-        or not in range
-    */
+        or not in range */
     template<typename T>
-    T parse_min_max(size_t i, T min, T max) const;
+    T parse_min_max(unsigned i, T min, T max) const;
 
     template<typename T>
     T parse_min_max(T min, T max) const;
@@ -97,34 +94,30 @@ public:
 
     /** Check number of arguments.
         @param n Expected number of arguments
-        @throws Failure If command has a different number of arguments
-    */
-    void check_size(size_t n) const;
+        @throws Failure If command has a different number of arguments */
+    void check_size(unsigned n) const;
 
     /** Check maximum number of arguments.
         @param n Expected maximum number of arguments
-        @throws Failure If command has more arguments
-    */
-    void check_size_less_equal(size_t n) const;
+        @throws Failure If command has more arguments */
+    void check_size_less_equal(unsigned n) const;
 
     /** Get argument line.
         Get all arguments as a line.
         No modfications to the line were made apart from trimmimg leading
-        and trailing white spaces.
-    */
+        and trailing white spaces. */
     CmdLineRange get_line() const;
 
     /** Get number of arguments. */
-    size_t get_size() const;
+    unsigned get_size() const;
 
     /** Return remaining line after argument.
         @param i Argument index starting with 0
         @return The remaining line after the given argument, unmodified apart
         from leading and trailing whitespaces, which are trimmed. Quotation
         marks are not handled.
-        @throws Failure If no such argument
-    */
-    CmdLineRange get_remaining_line(size_t i) const;
+        @throws Failure If no such argument */
+    CmdLineRange get_remaining_line(unsigned i) const;
 
     /** Return remaining line after argument as an argument.
         This function can be used for parsing string parameter values as used
@@ -139,9 +132,8 @@ public:
         and get_remaining_line(i) otherwise.
         @param i Argument index starting with 0
         @return The remaining argument.
-        @throws Failure If the number of arguments is less than i
-    */
-    string get_remaining_arg(size_t i) const;
+        @throws Failure If the number of arguments is less than i */
+    string get_remaining_arg(unsigned i) const;
 
 private:
     const CmdLine& m_line;
@@ -171,9 +163,11 @@ inline CmdLineRange Arguments::get_line() const
     return m_line.get_trimmed_line_after_elem(m_line.get_idx_name());
 }
 
-inline size_t Arguments::get_size() const
+inline unsigned Arguments::get_size() const
 {
-    return m_line.get_elements().size() - m_line.get_idx_name() - 1;
+    return
+        static_cast<unsigned>(m_line.get_elements().size())
+        - m_line.get_idx_name() - 1;
 }
 
 template<typename T>
@@ -204,7 +198,7 @@ T Arguments::parse() const
 }
 
 template<typename T>
-T Arguments::parse(size_t i) const
+T Arguments::parse(unsigned i) const
 {
     string s = get(i);
     istringstream in(s);
@@ -221,7 +215,7 @@ T Arguments::parse(size_t i) const
 }
 
 template<typename T>
-T Arguments::parse_min(std::size_t i, T min) const
+T Arguments::parse_min(unsigned i, T min) const
 {
     T result = parse<T>(i);
     if (result < min)
@@ -241,7 +235,7 @@ T Arguments::parse_min_max(T min, T max) const
 }
 
 template<typename T>
-T Arguments::parse_min_max(std::size_t i, T min, T max) const
+T Arguments::parse_min_max(unsigned i, T min, T max) const
 {
     T result = parse_min(i, min);
     if (max < result)

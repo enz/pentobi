@@ -39,6 +39,8 @@ public:
         @see init() */
     CmdLine(const string& line);
 
+    ~CmdLine();
+
     void init(const string& line);
 
     void init(const CmdLine& c);
@@ -50,11 +52,11 @@ public:
 
     void write_id(ostream& out) const;
 
-    CmdLineRange get_trimmed_line_after_elem(size_t i) const;
+    CmdLineRange get_trimmed_line_after_elem(unsigned i) const;
 
     const vector<CmdLineRange>& get_elements() const;
 
-    const CmdLineRange& get_element(size_t i) const;
+    const CmdLineRange& get_element(unsigned i) const;
 
     int get_idx_name() const;
 
@@ -65,6 +67,8 @@ private:
     string m_line;
 
     vector<CmdLineRange> m_elem;
+
+    void add_elem(string::const_iterator begin, string::const_iterator end);
 
     void find_elem();
 
@@ -81,7 +85,7 @@ inline const vector<CmdLineRange>& CmdLine::get_elements() const
     return m_elem;
 }
 
-inline const CmdLineRange& CmdLine::get_element(size_t i) const
+inline const CmdLineRange& CmdLine::get_element(unsigned i) const
 {
     assert(i < m_elem.size());
     return m_elem[i];
