@@ -31,6 +31,8 @@ class GameInfoDialog
 public:
     GameInfoDialog(QWidget* parent, Game& game);
 
+    ~GameInfoDialog();
+
 public slots:
     void accept();
 

@@ -63,6 +63,8 @@ public:
                const QString& booksDir = "", bool noBook = false,
                unsigned nu_threads = 0, size_t memory = 0);
 
+    ~MainWindow();
+
     bool eventFilter(QObject* object, QEvent* event);
 
     QSize sizeHint() const;

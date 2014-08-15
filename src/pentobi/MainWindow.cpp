@@ -365,6 +365,10 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     }
 }
 
+MainWindow::~MainWindow()
+{
+}
+
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About Pentobi"),

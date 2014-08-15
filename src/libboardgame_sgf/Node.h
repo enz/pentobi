@@ -40,6 +40,8 @@ class Node
 public:
     Node();
 
+    ~Node();
+
     /** Append a new child. */
     void append(unique_ptr<Node> node);
 

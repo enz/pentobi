@@ -52,6 +52,8 @@ class Search
 public:
     Search(Variant initial_variant, unsigned nu_threads, size_t memory);
 
+    ~Search();
+
     unique_ptr<State> create_state() override;
 
     string get_move_string(Move mv) const override;

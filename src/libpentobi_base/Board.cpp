@@ -244,9 +244,7 @@ void Board::init(Variant variant, const Setup* setup)
     else
     {
         m_setup = *setup;
-        for (ColorIterator i(m_nu_colors); i; ++i)
-            for (Move mv : setup->placements[*i])
-                place(*i, mv);
+        place_setup(m_setup);
         m_state_base.to_play = setup->to_play;
         optimize_attach_point_lists();
         for (ColorIterator i(m_nu_colors); i; ++i)
@@ -338,6 +336,17 @@ void Board::optimize_attach_point_lists()
                 continue;
             }
     }
+}
+
+/** Place setup moves on board.
+    This function is only extracted from init() because it contains the large
+    inline function place(), which will cause a failure to inline and warning
+    with -Winline with GCC 4.8.2. */
+void Board::place_setup(const Setup& setup)
+{
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        for (Move mv : setup.placements[*i])
+            place(*i, mv);
 }
 
 void Board::take_snapshot()

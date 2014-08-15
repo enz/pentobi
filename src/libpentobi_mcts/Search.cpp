@@ -123,6 +123,10 @@ Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
     create_threads();
 }
 
+Search::~Search()
+{
+}
+
 bool Search::check_followup(vector<Move>& sequence)
 {
     auto& bd = get_board();

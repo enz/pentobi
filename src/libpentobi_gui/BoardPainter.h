@@ -36,6 +36,8 @@ class BoardPainter
 public:
     BoardPainter();
 
+    ~BoardPainter();
+
     void setCoordinates(bool enable);
 
     void setCoordinateColor(const QColor& color);

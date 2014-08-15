@@ -33,6 +33,10 @@ Node::Node()
 {
 }
 
+Node::~Node()
+{
+}
+
 void Node::append(unique_ptr<Node> node)
 {
     node->m_parent = this;

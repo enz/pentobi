@@ -446,6 +446,8 @@ private:
             Elements are only defined if was_played is true.
             Reused for efficiency. */
         array<array<unsigned, Move::range>, max_players> first_play;
+
+        ~ThreadState();
     };
 
     /** Thread in the parallel search.
@@ -634,6 +636,11 @@ private:
     void update_values(ThreadState& thread_state);
 };
 
+
+template<class S, class M, class R>
+Search<S, M, R>::ThreadState::~ThreadState()
+{
+}
 
 template<class S, class M, class R>
 Search<S, M, R>::Thread::Thread(SearchFunc& search_func)

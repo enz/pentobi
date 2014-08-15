@@ -79,6 +79,10 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
+GameInfoDialog::~GameInfoDialog()
+{
+}
+
 void GameInfoDialog::accept()
 {
     auto variant = m_game.get_variant();

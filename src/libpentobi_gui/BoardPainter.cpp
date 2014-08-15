@@ -44,6 +44,10 @@ BoardPainter::BoardPainter()
     m_fontCoordLabels.setStretch(QFont::SemiCondensed);
 }
 
+BoardPainter::~BoardPainter()
+{
+}
+
 void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
 {
     painter.setPen(m_coordinateColor);

@@ -449,6 +449,8 @@ private:
 
     void place(Color c, Move mv);
 
+    void place_setup(const Setup& setup);
+
     void write_pieces_left(ostream& out, Color c,
                            const PiecesLeftList& pieces_left, unsigned begin,
                            unsigned end) const;
