@@ -223,7 +223,7 @@ array<Float, 4> State::evaluate_playout()
     {
         Color c(i);
         auto s = score[c];
-        Float game_result;
+        Float res;
         if (nu_players == 2)
         {
             if (i == 1)
@@ -232,35 +232,36 @@ array<Float, 4> State::evaluate_playout()
                 break;
             }
             if (s > 0)
-                game_result = 1;
+                res = 1;
             else if (s < 0)
-                game_result = 0;
+                res = 0;
             else
-                game_result = 0.5;
+                res = 0.5;
         }
         else
         {
-            game_result = 0;
+            res = 0;
             Float n = 0;
             for (Color::IntType j = 0; j < m_nu_colors; ++j)
                 if (sorted_points[j] == points[c])
                 {
-                    game_result += Float(j) / Float(m_nu_colors - 1);
+                    res += Float(j) / Float(m_nu_colors - 1);
                     ++n;
                 }
-            game_result /= n;
+            res /= n;
         }
+        if (log_simulations)
+            log() << "Result color " << c << ": sco=" << s
+                  << " game_res=" << res;
 
-        Float res = game_result;
         auto& stat = m_stat_score[c];
         stat.add(s);
         Float dev = stat.get_deviation();
         if (dev > 0)
-            res += 0.2f * sigmoid(2.0f, (s - stat.get_mean()) / dev);
+            res += 0.2f * sigmoid(2.f, (s - stat.get_mean()) / dev);
         result_array[i] = res;
         if (log_simulations)
-            log() << "Result color " << c << ": sco=" << s << " game_res="
-                  << game_result << " res=" << res << '\n';
+            log() << " res=" << res << '\n';
     }
     if (m_nu_colors > nu_players)
     {
