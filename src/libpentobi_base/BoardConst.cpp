@@ -50,160 +50,100 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
     // in http://blokusstrategy.com/?p=48. The default orientation is chosen
     // such that it resembles the letter in the piece name
     pieces.reserve(21);
-    PiecePoints points;
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    pieces.emplace_back("X", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, -1));
-    pieces.emplace_back("F", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    pieces.emplace_back("L5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    pieces.emplace_back("N", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("P", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 1));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("T5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(-1, 1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("U", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(2, 0));
-    pieces.emplace_back("V5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(-1, 1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("W", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, -2));
-    pieces.emplace_back("Y", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 1));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("Z5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -2));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    pieces.emplace_back("I5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("O", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(0, -1));
-    pieces.emplace_back("T4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("Z4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("L4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    pieces.emplace_back("I4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    pieces.emplace_back("V3", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    pieces.emplace_back("I3", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    pieces.emplace_back("2", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    pieces.emplace_back("1", points, geo, transforms);
-
+    pieces.emplace_back("X",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("F",
+                        PiecePoints({ CoordPoint(0, 1), CoordPoint(1, 1),
+                                      CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("L5",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(1, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(0, 2) }),
+                        geo, transforms);
+    pieces.emplace_back("N",
+                        PiecePoints({ CoordPoint(-1, -1), CoordPoint(-1, 0),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(0, 2)}),
+                        geo, transforms);
+    pieces.emplace_back("P",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 0),
+                                      CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("T5",
+                        PiecePoints({ CoordPoint(-1, 1), CoordPoint(0, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("U",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(-1, 1),
+                                      CoordPoint(0, 0), CoordPoint(1, 0),
+                                      CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("V5",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(0, 2), CoordPoint(1, 0),
+                                      CoordPoint(2, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("W",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(-1, 1),
+                                      CoordPoint(0, 0), CoordPoint(0, -1),
+                                      CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("Y",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(0, -1),
+                                      CoordPoint(0, -2) }),
+                        geo, transforms);
+    pieces.emplace_back("Z5",
+                        PiecePoints({ CoordPoint(-1, 1), CoordPoint(0, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("I5",
+                        PiecePoints({ CoordPoint(0, -2), CoordPoint(0, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(0, 2)} ),
+                        geo, transforms);
+    pieces.emplace_back("O",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 0), CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("T4",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(1, 0), CoordPoint(0, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("Z4",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, -1), CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("L4",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("I4",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(0, 2) }),
+                        geo, transforms);
+    pieces.emplace_back("V3",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("I3",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("2",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(1, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("1",
+                        PiecePoints( CoordPoint(0, 0) ),
+                        geo, transforms);
     return pieces;
 }
 
@@ -212,88 +152,55 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geo,
 {
     vector<PieceInfo> pieces;
     pieces.reserve(12);
-    PiecePoints points;
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    pieces.emplace_back("L5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("P", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -2));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    pieces.emplace_back("I5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("O", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(0, -1));
-    pieces.emplace_back("T4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("Z4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("L4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 2));
-    pieces.emplace_back("I4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    pieces.emplace_back("V3", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    pieces.emplace_back("I3", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    pieces.emplace_back("2", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    pieces.emplace_back("1", points, geo, transforms);
-
+    pieces.emplace_back("L5",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(1, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(0, 2) }),
+                        geo, transforms);
+    pieces.emplace_back("P",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 0),
+                                      CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("I5",
+                        PiecePoints({ CoordPoint(0, -2), CoordPoint(0, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(0, 2) }),
+                        geo, transforms);
+    pieces.emplace_back("O",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 0), CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("T4",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(1, 0), CoordPoint(0, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("Z4",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, -1), CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("L4",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("I4",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(0, 2) }),
+                        geo, transforms);
+    pieces.emplace_back("V3",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("I3",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(0, 0),
+                                      CoordPoint(0, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("2",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(1, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("1",
+                        PiecePoints( CoordPoint(0, 0) ),
+                        geo, transforms);
     return pieces;
 }
 
@@ -311,184 +218,110 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
     // default orientation is chosen such that it resembles the letter in the
     // piece name. The (0,0) point must have point type 0 (downside triangle).
     pieces.reserve(22);
-    PiecePoints points;
+    pieces.emplace_back("I6",
+                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, -1),
+                                     CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(0, 1), CoordPoint(1, 1) },
+                        geo, transforms);
 
-    points.clear();
-    points.push_back(CoordPoint(-2, -1));
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("I6", points, geo, transforms);
+    pieces.emplace_back("L6",
+                        PiecePoints({ CoordPoint(-1, -1), CoordPoint(0, -1),
+                                      CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 1) }),
+                        geo, transforms);
 
-    points.clear();
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("L6", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(-2, 0));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(2, 0));
-    pieces.emplace_back("W", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-2, -1));
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(0, 1));
-    pieces.emplace_back("P6", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("S", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    points.push_back(CoordPoint(2, 1));
-    pieces.emplace_back("F", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 1));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(2, 0));
-    points.push_back(CoordPoint(3, 0));
-    pieces.emplace_back("V", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(-1, 1));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    points.push_back(CoordPoint(-1, 2));
-    pieces.emplace_back("Y", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("A6", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    pieces.emplace_back("G", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, -1));
-    pieces.emplace_back("O", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(-1, 1));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("X", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    points.push_back(CoordPoint(1, 2));
-    pieces.emplace_back("I5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(0, 1));
-    pieces.emplace_back("P5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    pieces.emplace_back("L5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, -1));
-    points.push_back(CoordPoint(0, -1));
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    pieces.emplace_back("C5", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("I4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(1, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 1));
-    pieces.emplace_back("C4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    points.push_back(CoordPoint(1, 0));
-    pieces.emplace_back("A4", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    points.push_back(CoordPoint(0, 1));
-    pieces.emplace_back("I3", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(-1, 0));
-    points.push_back(CoordPoint(0, 0));
-    pieces.emplace_back("2", points, geo, transforms);
-
-    points.clear();
-    points.push_back(CoordPoint(0, 0));
-    pieces.emplace_back("1", points, geo, transforms);
-
+    pieces.emplace_back("W",
+                        PiecePoints({ CoordPoint(0, 1), CoordPoint(-2, 0),
+                                      CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(1, 0), CoordPoint(2, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("P6",
+                        PiecePoints({ CoordPoint(-2, -1), CoordPoint(-1, -1),
+                                      CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(1, 0), CoordPoint(0, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("S",
+                        PiecePoints({ CoordPoint(0, -1), CoordPoint(1, -1),
+                                      CoordPoint(0, 0), CoordPoint(1, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("F",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(1, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 1), CoordPoint(2, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("V",
+                        PiecePoints({ CoordPoint(-1, 1), CoordPoint(0, 1),
+                                      CoordPoint(0, 0), CoordPoint(1, 0),
+                                      CoordPoint(2, 0), CoordPoint(3, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("Y",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(-1, 1), CoordPoint(0, 1),
+                                      CoordPoint(1, 1), CoordPoint(-1, 2) }),
+                        geo, transforms);
+    pieces.emplace_back("A6",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(-1, -1),
+                                      CoordPoint(0, 1), CoordPoint(0, 0),
+                                      CoordPoint(1, 0), CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("G",
+                        PiecePoints({ CoordPoint(-1, -1), CoordPoint(0, -1),
+                                      CoordPoint(1, -1), CoordPoint(-1, 0),
+                                      CoordPoint(0, 0), CoordPoint(0, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("O",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(-1, -1),
+                                      CoordPoint(0, 0), CoordPoint(0, -1),
+                                      CoordPoint(1, 0), CoordPoint(1, -1) }),
+                        geo, transforms);
+    pieces.emplace_back("X",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(-1, 1),
+                                      CoordPoint(0, 0), CoordPoint(0, 1),
+                                      CoordPoint(1, 0), CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("I5",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 1),
+                                      CoordPoint(1, 2) }),
+                        geo, transforms);
+    pieces.emplace_back("P5",
+                        PiecePoints({ CoordPoint(-1, -1), CoordPoint(-1, 0),
+                                      CoordPoint(0, 0), CoordPoint(1, 0),
+                                      CoordPoint(0, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("L5",
+                        PiecePoints({ CoordPoint(-1, -1), CoordPoint(0, -1),
+                                      CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("C5",
+                        PiecePoints({ CoordPoint(-1, -1), CoordPoint(0, -1),
+                                      CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(1, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("I4",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("C4",
+                        PiecePoints({ CoordPoint(0, 0), CoordPoint(1, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("A4",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, 1), CoordPoint(1, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("I3",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                      CoordPoint(0, 1) }),
+                        geo, transforms);
+    pieces.emplace_back("2",
+                        PiecePoints({ CoordPoint(-1, 0), CoordPoint(0, 0) }),
+                        geo, transforms);
+    pieces.emplace_back("1",
+                        PiecePoints( CoordPoint(0, 0) ),
+                        geo, transforms);
     return pieces;
 }
 

@@ -9,6 +9,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <initializer_list>
 #include <iosfwd>
 #include <limits>
 #include "Assert.h"
@@ -46,6 +47,8 @@ public:
 
     /** Construct list with a single element. */
     explicit ArrayList(const T& t);
+
+    ArrayList(const initializer_list<T>& l);
 
     T& operator[](I i);
 
@@ -129,6 +132,14 @@ template<typename T, unsigned M, typename I>
 inline ArrayList<T,M,I>::ArrayList(const T& t)
 {
     assign(t);
+}
+
+template<typename T, unsigned M, typename I>
+ArrayList<T, M, I>::ArrayList(const initializer_list<T>& l)
+    : m_size(0)
+{
+    for (auto& t : l)
+        push_back(t);
 }
 
 template<typename T, unsigned M, typename I>
