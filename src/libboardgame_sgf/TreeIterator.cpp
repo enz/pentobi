@@ -16,7 +16,7 @@ namespace libboardgame_sgf {
 
 void TreeIterator::operator++()
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     auto first_child = m_current->get_first_child_or_null();
     if (first_child != nullptr)
     {

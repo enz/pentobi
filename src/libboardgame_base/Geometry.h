@@ -164,14 +164,14 @@ inline Geometry<P>::Iterator::Iterator(const Geometry& g)
 template<class P>
 inline const P& Geometry<P>::Iterator::operator*() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return *m_p;
 }
 
 template<class P>
 inline const P* Geometry<P>::Iterator::operator->() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return m_p;
 }
 
@@ -184,7 +184,7 @@ inline Geometry<P>::Iterator::operator bool() const
 template<class P>
 inline void Geometry<P>::Iterator::operator++()
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     ++m_p;
 }
 

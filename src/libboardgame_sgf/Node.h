@@ -338,19 +338,19 @@ inline PropertyIterator::operator bool() const
 
 inline void PropertyIterator::operator++()
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     m_current = m_current->next.get();
 }
 
 inline const Property& PropertyIterator::operator*() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return *m_current;
 }
 
 inline const Property* PropertyIterator::operator->() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return m_current;
 }
 
@@ -387,26 +387,26 @@ inline ChildIterator::operator bool() const
 
 inline void ChildIterator::operator++()
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     m_current = m_current->get_sibling();
 }
 
 inline void ChildIterator::operator--()
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     m_current = m_current->get_previous_sibling();
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
 }
 
 inline const Node& ChildIterator::operator*() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return *m_current;
 }
 
 inline const Node* ChildIterator::operator->() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return m_current;
 }
 

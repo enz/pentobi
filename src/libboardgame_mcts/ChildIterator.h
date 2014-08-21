@@ -59,7 +59,7 @@ inline ChildIterator<N>::operator bool() const
 template<typename N>
 inline ChildIterator<N>& ChildIterator<N>::operator++()
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     ++m_current;
     return *this;
 }
@@ -67,14 +67,14 @@ inline ChildIterator<N>& ChildIterator<N>::operator++()
 template<typename N>
 inline auto ChildIterator<N>::operator*() -> const Node&
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return *m_current;
 }
 
 template<typename N>
 inline auto ChildIterator<N>::operator->() -> const Node*
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return m_current;
 }
 

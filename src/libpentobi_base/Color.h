@@ -104,7 +104,7 @@ inline void Color::Iterator::operator++()
 
 inline Color Color::Iterator::operator*() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return Color(m_i);
 }
 

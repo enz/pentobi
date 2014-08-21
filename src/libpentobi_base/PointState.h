@@ -94,7 +94,7 @@ inline void PointState::Iterator::operator++()
 
 inline PointState PointState::Iterator::operator*() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return PointState(m_i);
 }
 

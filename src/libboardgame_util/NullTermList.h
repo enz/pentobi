@@ -124,7 +124,7 @@ inline NullTermList<T, M>::Iterator::Iterator(const NullTermList& list)
 template<typename T, unsigned M>
 inline const T& NullTermList<T, M>::Iterator::operator*() const
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     return *m_t;
 }
 
@@ -137,7 +137,7 @@ inline NullTermList<T, M>::Iterator::operator bool() const
 template<typename T, unsigned M>
 inline auto NullTermList<T, M>::Iterator::operator++() -> Iterator&
 {
-    LIBBOARDGAME_ASSERT(operator bool());
+    LIBBOARDGAME_ASSERT(*this);
     ++m_t;
     return *this;
 }
