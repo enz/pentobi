@@ -434,14 +434,14 @@ inline auto Point<M, I, S>::get_up_right(unsigned width) const -> Point
 }
 
 template<unsigned M, typename I, class S>
-inline unsigned Point<M, I, S>::get_x(unsigned width) const
+unsigned Point<M, I, S>::get_x(unsigned width) const
 {
     LIBBOARDGAME_ASSERT(! is_null());
     return (m_i - 1) - get_y(width) * width;
 }
 
 template<unsigned M, typename I, class S>
-inline unsigned Point<M, I, S>::get_y(unsigned width) const
+unsigned Point<M, I, S>::get_y(unsigned width) const
 {
     LIBBOARDGAME_ASSERT(! is_null());
     return (m_i - 1) / width;
