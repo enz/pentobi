@@ -45,21 +45,12 @@ LIBBOARDGAME_TEST_CASE(util_array_list_construct_single_element)
 
 LIBBOARDGAME_TEST_CASE(util_array_list_equals)
 {
-    ArrayList<int, 10> l1;
-    l1.push_back(1);
-    l1.push_back(2);
-    l1.push_back(3);
-    ArrayList<int, 10> l2;
-    l2.push_back(1);
-    l2.push_back(2);
-    l2.push_back(3);
+    ArrayList<int, 10> l1{ 1, 2, 3 };
+    ArrayList<int, 10> l2{ 1, 2, 3 };
     LIBBOARDGAME_CHECK(l1 == l2);
     l2.push_back(4);
     LIBBOARDGAME_CHECK(! (l1 == l2));
-    l2.clear();
-    l2.push_back(2);
-    l2.push_back(1);
-    l2.push_back(3);
+    l2 = { 2, 1, 3 };
     LIBBOARDGAME_CHECK(! (l1 == l2));
 }
 
@@ -73,11 +64,7 @@ LIBBOARDGAME_TEST_CASE(util_array_list_pop_back)
 
 LIBBOARDGAME_TEST_CASE(util_array_list_remove)
 {
-    ArrayList<int, 10> l;
-    l.push_back(1);
-    l.push_back(2);
-    l.push_back(3);
-    l.push_back(4);
+    ArrayList<int, 10> l{ 1, 2, 3, 4 };
     l.remove(2);
     LIBBOARDGAME_CHECK_EQUAL(3u, l.size());
     LIBBOARDGAME_CHECK_EQUAL(1, l[0]);
