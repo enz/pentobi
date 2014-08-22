@@ -140,7 +140,7 @@ public:
         @return @c false if end of game was reached, and no move was played */
     bool gen_and_play_playout_move(Move lgr1, Move lgr2);
 
-    array<Float, 4> evaluate_playout();
+    void evaluate_playout(array<Float, 4>& result);
 
     /** Get number of moves in the current simulation. */
     unsigned get_nu_moves() const;

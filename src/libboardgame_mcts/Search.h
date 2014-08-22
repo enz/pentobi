@@ -1467,7 +1467,7 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
         if (thread_state.is_out_of_mem)
             return;
         playout(thread_state);
-        simulation.eval = state.evaluate_playout();
+        state.evaluate_playout(simulation.eval);
         thread_state.stat_len.add(double(state.get_nu_moves()));
         update_values(thread_state);
         if (SearchParamConst::rave)

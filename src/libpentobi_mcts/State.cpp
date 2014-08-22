@@ -183,7 +183,7 @@ void State::dump(ostream& out) const
     Bonuses are added to the result to encorage wins with larger scores. See
     also: Pepels et al.: Quality-based Rewards for Monte-Carlo Tree Search
     Simulations. ECAI 2014. */
-array<Float, 4> State::evaluate_playout()
+void State::evaluate_playout(array<Float, 4>& result)
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
     // will encourage the first player to break the symmetry and the second
@@ -193,9 +193,8 @@ array<Float, 4> State::evaluate_playout()
     {
         if (log_simulations)
             log("Result: 0.5 (symmetry)");
-        array<Float, 4> result;
         fill(result.begin(), result.end(), 0.5f);
-        return result;
+        return;
     }
 
     auto nu_players = m_bd.get_nu_players();
@@ -218,7 +217,6 @@ array<Float, 4> State::evaluate_playout()
             sorted_points[(*i).to_int()] = points[*i];
         sort(sorted_points.begin(), sorted_points.begin() + m_nu_colors);
     }
-    array<Float, 4> result_array;
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
@@ -228,7 +226,7 @@ array<Float, 4> State::evaluate_playout()
         {
             if (i == 1)
             {
-                result_array[1] = 1.f - result_array[0];
+                result[1] = 1.f - result[0];
                 break;
             }
             if (s > 0)
@@ -259,17 +257,16 @@ array<Float, 4> State::evaluate_playout()
         Float dev = stat.get_deviation();
         if (dev > 0)
             res += 0.2f * sigmoid(2.f, (s - stat.get_mean()) / dev);
-        result_array[i] = res;
+        result[i] = res;
         if (log_simulations)
             log() << " res=" << res << '\n';
     }
     if (m_nu_colors > nu_players)
     {
         LIBBOARDGAME_ASSERT(m_nu_colors == 4);
-        result_array[2] = result_array[0];
-        result_array[3] = result_array[1];
+        result[2] = result[0];
+        result[3] = result[1];
     }
-    return result_array;
 }
 
 Point State::find_best_starting_point(Color c) const
