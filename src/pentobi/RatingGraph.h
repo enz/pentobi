@@ -23,7 +23,7 @@ class RatingGraph
     Q_OBJECT
 
 public:
-    RatingGraph(QWidget* parent = nullptr);
+    explicit RatingGraph(QWidget* parent = nullptr);
 
     void updateContent(const RatingHistory& history);
 

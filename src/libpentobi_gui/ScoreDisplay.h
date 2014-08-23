@@ -28,7 +28,7 @@ class ScoreDisplay
     Q_OBJECT
 
 public:
-    ScoreDisplay(QWidget* parent = nullptr);
+    explicit ScoreDisplay(QWidget* parent = nullptr);
 
     void updateScore(const Board& bd);
 
