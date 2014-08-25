@@ -180,9 +180,9 @@ void State::dump(ostream& out) const
     gives the result 0. Being the single winner is better than sharing the
     best place, which is better than getting the second place, etc.
 
-    Bonuses are added to the result to encorage wins with larger scores. See
-    also: Pepels et al.: Quality-based Rewards for Monte-Carlo Tree Search
-    Simulations. ECAI 2014. */
+    Bonuses are added to the result to encorage wins with larger scores and
+    fewer number of moves. See also: Pepels et al.: Quality-based Rewards for
+    Monte-Carlo Tree Search Simulations. ECAI 2014. */
 void State::evaluate_playout(array<Float, 4>& result)
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
@@ -251,10 +251,21 @@ void State::evaluate_playout(array<Float, 4>& result)
         if (log_simulations)
             log() << "Result color " << c << ": sco=" << s
                   << " game_res=" << res;
-
+        Float l = static_cast<Float>(m_bd.get_nu_moves());
+        m_stat_len.add(l);
+        Float dev = m_stat_len.get_deviation();
+        if (dev > 0)
+        {
+            if (res == 1)
+                res -=
+                    0.06f * sigmoid(2.f, (l - m_stat_len.get_mean()) / dev);
+            else if (res == 0)
+                res +=
+                    0.06f * sigmoid(2.f, (l - m_stat_len.get_mean()) / dev);
+        }
         auto& stat = m_stat_score[c];
         stat.add(s);
-        Float dev = stat.get_deviation();
+        dev = stat.get_deviation();
         if (dev > 0)
             res += 0.2f * sigmoid(2.f, (s - stat.get_mean()) / dev);
         result[i] = res;
@@ -535,6 +546,7 @@ void State::start_search()
         m_symmetry_min_nu_pieces = 3; // Only used in Duo
 
     m_prior_knowledge.start_search(bd);
+    m_stat_len.clear();
     for (ColorIterator i(m_nu_colors); i; ++i)
         m_stat_score[*i].clear();
 
