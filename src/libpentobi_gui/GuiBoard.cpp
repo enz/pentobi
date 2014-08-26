@@ -353,7 +353,7 @@ void GuiBoard::selectPiece(Color color, Piece piece)
     if (m_selectedPiece == piece && m_selectedPieceColor == color)
         return;
     m_selectedPieceColor = color;
-    m_selectedPieceTransform = m_bd.get_transforms().get_default();
+    m_selectedPieceTransform = m_bd.get_transforms().get_identity();
     if (m_selectedPiece.is_null())
         m_selectedPieceOffset = CoordPoint::null();
     m_selectedPiece = piece;

@@ -161,7 +161,7 @@ void OrientationDisplay::selectColor(Color c)
 
 void OrientationDisplay::setSelectedPiece(Piece piece)
 {
-    auto transform = m_bd.get_transforms().get_default();
+    auto transform = m_bd.get_transforms().get_identity();
     if (m_piece == piece && m_transform == transform)
         return;
     m_piece = piece;

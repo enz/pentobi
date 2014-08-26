@@ -25,20 +25,30 @@ public:
     virtual ~PieceTransforms();
 
     virtual const Transform* get_mirrored_horizontally(
-                                             const Transform* transf) const = 0;
+                                            const Transform* transf) const = 0;
 
     virtual const Transform* get_mirrored_vertically(
-                                             const Transform* transf) const = 0;
+                                            const Transform* transf) const = 0;
 
     virtual const Transform* get_rotated_anticlockwise(
-                                             const Transform* transf) const = 0;
+                                            const Transform* transf) const = 0;
 
     virtual const Transform* get_rotated_clockwise(
-                                             const Transform* transf) const = 0;
+                                            const Transform* transf) const = 0;
 
     const vector<const Transform*>& get_all() const;
 
-    const Transform* get_default() const;
+    /** Find the transform by its class.
+        @tparam T The class of the transform.
+        @return The pointer to the transform or null if the transforms do not
+        contain the instance of the given class. */
+    template<class T>
+    const Transform* find() const;
+
+    /** Find the identity transformation.
+        Like find<TransfIdentity>() but checks with assertion that the result
+        is not null. */
+    const Transform* get_identity() const;
 
 protected:
     /** All piece transformations.
@@ -46,15 +56,18 @@ protected:
     vector<const Transform*> m_all;
 };
 
+template<class T>
+const Transform* PieceTransforms::find() const
+{
+    for (auto t : m_all)
+        if (dynamic_cast<const T*>(t) != nullptr)
+            return t;
+    return nullptr;
+}
+
 inline const vector<const Transform*>& PieceTransforms::get_all() const
 {
     return m_all;
-}
-
-inline const Transform* PieceTransforms::get_default() const
-{
-    LIBBOARDGAME_ASSERT(m_all.size() > 0);
-    return m_all[0];
 }
 
 //-----------------------------------------------------------------------------

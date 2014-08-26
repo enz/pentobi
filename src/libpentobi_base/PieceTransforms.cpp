@@ -12,10 +12,19 @@
 
 namespace libpentobi_base {
 
+using libboardgame_base::TransfIdentity;
+
 //-----------------------------------------------------------------------------
 
 PieceTransforms::~PieceTransforms()
 {
+}
+
+const Transform* PieceTransforms::get_identity() const
+{
+    auto t = find<TransfIdentity>();
+    LIBBOARDGAME_ASSERT(t != nullptr);
+    return t;
 }
 
 //-----------------------------------------------------------------------------
