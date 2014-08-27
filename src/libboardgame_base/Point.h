@@ -148,7 +148,7 @@ public:
 
     explicit Point(unsigned i);
 
-    explicit Point(const string& s, unsigned width);
+    Point(const string& s, unsigned width);
 
     bool operator==(const Point& p) const;
 
