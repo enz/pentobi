@@ -492,20 +492,19 @@ void BoardConst::create_moves(Piece piece)
         log() << "Creating moves for piece " << piece_info.get_name() << "\n";
     PiecePoints points;
     auto width = m_geo.get_width();
+    auto height = m_geo.get_height();
     for (GeometryIterator i(m_geo); i; ++i)
     {
         if (log_move_creation)
-            log() << "Creating moves at " << WritePoint(*i, width) << "\n";
+            log() << "Creating moves at " << WritePoint(*i, width, height)
+                  << "\n";
         auto x = (*i).get_x(width);
         auto y = (*i).get_y(width);
         for (const Transform* transform : piece_info.get_transforms())
         {
             if (log_move_creation)
                 log() << "Transformation " << typeid(*transform).name() << "\n";
-            // Pieces are defined such that (0,0) has point type 0. Check if the
-            // transformed type is compatible with the location on the board.
-            unsigned point_type = m_geo.get_point_type(x, y);
-            LIBBOARDGAME_ASSERT(transform->get_point_type() == 0);
+            auto point_type = m_geo.get_point_type(x, y);
             if (transform->get_new_point_type() != point_type)
                 continue;
             points = piece_info.get_points();
@@ -542,8 +541,9 @@ Move BoardConst::from_string(const string& s) const
         throw Exception("illegal move (too many points)");
     MovePoints points;
     auto width = m_geo.get_width();
+    auto height = m_geo.get_height();
     for (const string& p : v)
-        points.push_back(Point::from_string(p, width));
+        points.push_back(Point::from_string(p, width, height));
     Move mv;
     if (! find_move(points, mv))
         throw Exception("illegal move");
@@ -749,13 +749,14 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
         s << '[' << get_piece_info(info.get_piece()).get_name() << "]";
     bool is_first = true;
     auto width = m_geo.get_width();
+    auto height = m_geo.get_height();
     for (Point p : info)
     {
         if (! is_first)
             s << ',';
         else
             is_first = false;
-        p.write(s, width);
+        p.write(s, width, height);
     }
     return s.str();
 }

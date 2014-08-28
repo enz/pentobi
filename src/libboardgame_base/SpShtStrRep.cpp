@@ -14,6 +14,7 @@
 #include <iostream>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/StringUtil.h"
+#include "libboardgame_util/Unused.h"
 
 namespace libboardgame_base {
 
@@ -22,7 +23,7 @@ using libboardgame_util::get_letter_coord;
 //-----------------------------------------------------------------------------
 
 bool SpShtStrRep::read(istream& in, unsigned width, unsigned height,
-                                unsigned& x, unsigned& y)
+                       unsigned& x, unsigned& y)
 {
     int c;
     while (true)
@@ -54,11 +55,9 @@ bool SpShtStrRep::read(istream& in, unsigned width, unsigned height,
     if (c < '0' || c > '9')
         return false;
     in >> y;
-    if (! in)
+    if (! in || y > height + 1)
         return false;
-    --y;
-    if (y >= height)
-        return false;
+    y = height - y;
     c = in.peek();
     if (c == EOF)
     {
@@ -70,9 +69,11 @@ bool SpShtStrRep::read(istream& in, unsigned width, unsigned height,
     return false;
 }
 
-void SpShtStrRep::write(ostream& out, unsigned x, unsigned y)
+void SpShtStrRep::write(ostream& out, unsigned x, unsigned y, unsigned width,
+                        unsigned height)
 {
-    out << get_letter_coord(x) << (y + 1);
+    LIBBOARDGAME_UNUSED(width);
+    out << get_letter_coord(x) << (height - y);
 }
 
 //-----------------------------------------------------------------------------

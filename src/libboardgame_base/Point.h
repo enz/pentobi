@@ -36,8 +36,8 @@ maximum board size that could hurt the performance of the CPU cache.
 Therefore, the interpretation of a point depends on the width of the current
 board and many member functions need a width argument.
 
-The integer value of the points increases from left to right and bottom to top.
-The lower left corner of the board has the coordinates (0,0).
+The integer value of the points increases from left to right and top to bottom.
+The top left corner of the board has the coordinates (0,0).
 Point::null() has the index 0. It can be used when a special marker point is
 needed (e.g. end of point list marker, or the special meaning "no point"). */
 
@@ -138,9 +138,9 @@ public:
     /** Parse a point from a string.
         @param s The string to parse
         @throws InvalidString */
-    static Point from_string(const string& s, unsigned width);
+    static Point from_string(const string& s, unsigned width, unsigned height);
 
-    static void read(istream& in, Point& p, unsigned width);
+    static void read(istream& in, Point& p, unsigned width, unsigned height);
 
     LIBBOARDGAME_FORCE_INLINE Point();
 
@@ -148,7 +148,7 @@ public:
 
     explicit Point(unsigned i);
 
-    Point(const string& s, unsigned width);
+    Point(const string& s, unsigned width, unsigned height);
 
     bool operator==(const Point& p) const;
 
@@ -199,12 +199,10 @@ public:
         @pre ! is_null() */
     unsigned to_int_not_null() const;
 
-    /** Convert to string.
-        The string representation is compatible with
-        @ref libboardgame_doc_gtp */
-    string to_string(unsigned width) const;
+    /** Convert to string. */
+    string to_string(unsigned width, unsigned height) const;
 
-    void write(ostream& out, unsigned width) const;
+    void write(ostream& out, unsigned width, unsigned height) const;
 
 private:
     static const IntType value_uninitialized = Point::range;
@@ -231,20 +229,20 @@ Point<M, I, S>::Direction::Direction(int i)
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::Direction::down(unsigned width) -> Direction
 {
-    return Direction(-static_cast<int>(width));
+    return Direction(width);
 }
 
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::Direction::down_left(unsigned width) -> Direction
 {
-    return Direction(-static_cast<int>(width) - 1);
+    return Direction(width - 1);
 }
 
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::Direction::down_right(unsigned width)
     -> Direction
 {
-    return Direction(-static_cast<int>(width) + 1);
+    return Direction(width + 1);
 }
 
 template<unsigned M, typename I, class S>
@@ -275,21 +273,21 @@ inline int Point<M, I, S>::Direction::to_int() const
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::Direction::up(unsigned width) -> Direction
 {
-    return Direction(width);
+    return Direction(-static_cast<int>(width));
 }
 
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::Direction::up_left(unsigned width)
     -> Direction
 {
-    return Direction(width - 1);
+    return Direction(-static_cast<int>(width) - 1);
 }
 
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::Direction::up_right(unsigned width)
     -> Direction
 {
-    return Direction(width + 1);
+    return Direction(-static_cast<int>(width) + 1);
 }
 
 
@@ -321,9 +319,9 @@ inline Point<M, I, S>::Point(unsigned x, unsigned y, unsigned width)
 { }
 
 template<unsigned M, typename I, class S>
-inline Point<M, I, S>::Point(const string& s, unsigned width)
+inline Point<M, I, S>::Point(const string& s, unsigned width, unsigned height)
 {
-    *this = from_string(s, width);
+    *this = from_string(s, width, height);
 }
 
 template<unsigned M, typename I, class S>
@@ -349,12 +347,12 @@ inline bool Point<M, I, S>::operator<(const Point& p) const
 }
 
 template<unsigned M, typename I, class S>
-auto Point<M, I, S>::from_string(const string& s, unsigned width)
-    -> Point
+auto Point<M, I, S>::from_string(const string& s, unsigned width,
+                                 unsigned height) -> Point
 {
     istringstream in(s);
     Point p = Point::null(); // Initialize to avoid compiler warning
-    read(in, p, width);
+    read(in, p, width, height);
     if (! in)
         throw InvalidString(s);
     // Check that no extra non-whitespace characters follow
@@ -368,23 +366,18 @@ auto Point<M, I, S>::from_string(const string& s, unsigned width)
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::get_down(unsigned width) const -> Point
 {
-    LIBBOARDGAME_ASSERT(get_y(width) > 0);
     return get_neighbor(Direction::down(width));
 }
 
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::get_down_left(unsigned width) const -> Point
 {
-    LIBBOARDGAME_ASSERT(get_y(width) > 0);
-    LIBBOARDGAME_ASSERT(get_x(width) > 0);
     return get_neighbor(Direction::down_left(width));
 }
 
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::get_down_right(unsigned width) const -> Point
 {
-    LIBBOARDGAME_ASSERT(get_y(width) > 0);
-    LIBBOARDGAME_ASSERT(get_x(width) < width - 1);
     return get_neighbor(Direction::down_right(width));
 }
 
@@ -422,14 +415,12 @@ inline auto Point<M, I, S>::get_up(unsigned width) const -> Point
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::get_up_left(unsigned width) const -> Point
 {
-    LIBBOARDGAME_ASSERT(get_x(width) > 0);
     return get_neighbor(Direction::up_left(width));
 }
 
 template<unsigned M, typename I, class S>
 inline auto Point<M, I, S>::get_up_right(unsigned width) const -> Point
 {
-    LIBBOARDGAME_ASSERT(get_x(width) < width - 1);
     return get_neighbor(Direction::up_right(width));
 }
 
@@ -492,11 +483,12 @@ inline auto Point<M, I, S>::null() -> Point
 }
 
 template<unsigned M, typename I, class S>
-void Point<M, I, S>::read(istream& in, Point& p, unsigned width)
+void Point<M, I, S>::read(istream& in, Point& p, unsigned width,
+                          unsigned height)
 {
     unsigned x;
     unsigned y;
-    if (StringRep::read(in, width, max_onboard / width, x, y))
+    if (StringRep::read(in, width, height, x, y))
         p = Point(x, y, width);
     else
         in.setstate(ios::failbit);
@@ -517,20 +509,20 @@ inline unsigned Point<M, I, S>::to_int_not_null() const
 }
 
 template<unsigned M, typename I, class S>
-inline string Point<M, I, S>::to_string(unsigned width) const
+inline string Point<M, I, S>::to_string(unsigned width, unsigned height) const
 {
     ostringstream s;
-    write(s, width);
+    write(s, width, height);
     return s.str();
 }
 
 template<unsigned M, typename I, class S>
-void Point<M, I, S>::write(ostream& out, unsigned width) const
+void Point<M, I, S>::write(ostream& out, unsigned width, unsigned height) const
 {
     if (is_null())
         out << "NULL";
     else
-        StringRep::write(out, get_x(width), get_y(width));
+        StringRep::write(out, get_x(width), get_y(width), width, height);
 }
 
 //-----------------------------------------------------------------------------

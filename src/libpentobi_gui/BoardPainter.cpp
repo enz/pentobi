@@ -138,8 +138,7 @@ void BoardPainter::drawLabels(QPainter& painter,
             PointState s = pointState[*i];
             painter.setPen(Util::getLabelColor(variant, s));
             qreal x = i->get_x(m_geo->get_width()) * m_fieldWidth;
-            qreal y =
-                (m_height - i->get_y(m_geo->get_width()) - 1) * m_fieldHeight;
+            qreal y = i->get_y(m_geo->get_width()) * m_fieldHeight;
             qreal width = m_fieldWidth;
             qreal height = m_fieldHeight;
             if (isTrigon)
@@ -159,7 +158,6 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
         return CoordPoint::null();
     x = static_cast<int>((x - m_boardOffset.x()) / m_fieldWidth);
     y = static_cast<int>((y - m_boardOffset.y()) / m_fieldHeight);
-    y = m_height - y - 1;
     if (x < 0 || x >= m_width || y < 0 || y >= m_height)
         return CoordPoint::null();
     else
@@ -233,7 +231,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         int x = i->get_x(geoWidth);
         int y = i->get_y(geoWidth);
         qreal fieldX = x * m_fieldWidth;
-        qreal fieldY = (m_height - y - 1) * m_fieldHeight;
+        qreal fieldY = y * m_fieldHeight;
         if (m_isTrigon)
         {
             bool isUpside = (m_geo->get_point_type(x, y) == 1);
@@ -275,7 +273,7 @@ void BoardPainter::paintPieces(QPainter& painter,
         int y = i->get_y(geoWidth);
         PointState s = pointState[*i];
         qreal fieldX = x * m_fieldWidth;
-        qreal fieldY = (m_height - y - 1) * m_fieldHeight;
+        qreal fieldY = y * m_fieldHeight;
         if (m_isTrigon)
         {
             bool isUpside = (m_geo->get_point_type(x, y) == 1);
@@ -320,7 +318,7 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
     for (Point p : points)
     {
         qreal fieldX = p.get_x(geoWidth) * m_fieldWidth;
-        qreal fieldY = (m_height - p.get_y(geoWidth) - 1) * m_fieldHeight;
+        qreal fieldY = p.get_y(geoWidth) * m_fieldHeight;
         if (m_isTrigon)
         {
             bool isUpside = (m_geo->get_point_type(p) == 1);

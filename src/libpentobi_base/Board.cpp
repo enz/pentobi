@@ -420,11 +420,11 @@ void Board::write(ostream& out, bool mark_last_move) const
     bool is_trigon = (board_type == BoardType::trigon
                       || board_type == BoardType::trigon_3);
     write_x_coord(out, width, is_trigon ? 3 : 2);
-    for (unsigned y = height - 1; ; --y)
+    for (unsigned y = 0; y < height; ++y)
     {
-        if (y < 9)
+        if (height - y < 10)
             out << ' ';
-        out << (y + 1) << ' ';
+        out << (height - y) << ' ';
         for (unsigned x = 0; x < width; ++x)
         {
             Point p(x, y, width);
@@ -525,18 +525,16 @@ void Board::write(ostream& out, bool mark_last_move) const
             }
         }
         set_color(out, "\x1B[0m");
-        out << ' ' << (y + 1);
+        out << ' ' << (height - y);
         if (is_info_location_right)
         {
-            if (y < 9)
+            if (height - y < 10)
                 out << "   ";
             else
                 out << "  ";
             write_info_line(out, height - y - 1, pieces_left);
         }
         out << '\n';
-        if (y == 0)
-            break;
     }
     write_x_coord(out, width, is_trigon ? 3 : 2);
     if (! is_info_location_right)

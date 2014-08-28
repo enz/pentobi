@@ -957,7 +957,7 @@ inline string Board::to_string(Move mv, bool with_piece_name) const
 
 inline WritePoint Board::write(Point p) const
 {
-    return WritePoint(p, m_geo->get_width());
+    return WritePoint(p, m_geo->get_width(), m_geo->get_height());
 }
 
 //-----------------------------------------------------------------------------

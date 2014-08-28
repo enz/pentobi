@@ -159,7 +159,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
     unique_ptr<Board> bd(new Board(Variant::classic));
     unique_ptr<MoveList> moves(new MoveList());
     unique_ptr<MoveMarker> marker(new MoveMarker());
-    bd->gen_moves(Color(0), Point("A20", 20), *marker, *moves);
+    bd->gen_moves(Color(0), Point("A20", 20, 20), *marker, *moves);
     LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u);
 }
 

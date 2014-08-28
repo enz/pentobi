@@ -55,7 +55,8 @@ const string pieceLayoutTrigon =
     " . . . . . S S S S . . . . . . . .P5P5P5P5 . . .I6I6 . .I5I5I5I5I5 . . W W W W W . . 2"
     "C5C5 . . . S . . . . V V . .P6 . . . .P5 . .A4 . .I6I6 . . . . . . . . . . W . . . . ."
     "C5C5C5 . . . . V V V V . .P6P6P6P6P6 . . .A4A4A4 . .I6I6 . .I3I3I3 . . 1 . . .I4I4I4I4";
-}
+
+} // namespace
 
 //-----------------------------------------------------------------------------
 
@@ -156,10 +157,8 @@ void PieceSelector::init()
                 continue;
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
-            // Mirror y to match the convention of CoordPoint coordinates
-            for (auto& p : points)
-                p.y = m_nuRows - p.y - 1;
-            type_match_shift(geo, points.begin(), points.end(), 0);
+            type_match_shift(geo, points.begin(), points.end(),
+                             geo.get_point_type(0, 0));
             m_transform[x][y] =
                 m_bd.get_piece_info(piece).find_transform(geo, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
@@ -225,8 +224,7 @@ void PieceSelector::paintEvent(QPaintEvent*)
                 if (isTrigon)
                 {
                     bool isUpside =
-                        (geo.get_point_type(x, m_nuRows - y - 1)
-                         != geo.get_point_type(0, 0));
+                        (geo.get_point_type(x, y) == geo.get_point_type(0, 0));
                     Util::paintColorTriangle(painter, variant, m_color,
                                              isUpside, x * m_fieldWidth,
                                              y * m_fieldHeight, m_fieldWidth,

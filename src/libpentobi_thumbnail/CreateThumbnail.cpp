@@ -36,6 +36,8 @@ void handleSetup(const char* id, Color c, const Node& node,
                  const Geometry& geo, Grid<PointState>& pointState)
 {
     vector<string> values = node.get_multi_property(id);
+    auto width = geo.get_width();
+    auto height = geo.get_height();
     for (const string& s : values)
     {
         if (trim(s).empty())
@@ -45,7 +47,7 @@ void handleSetup(const char* id, Color c, const Node& node,
         {
             try
             {
-                Point p = Point::from_string(p_str, geo.get_width());
+                Point p = Point::from_string(p_str, width, height);
                 if (geo.is_onboard(p))
                     pointState[p] = c;
             }
@@ -61,6 +63,8 @@ void handleSetup(const char* id, Color c, const Node& node,
 void handleSetupEmpty(const Node& node, const Geometry& geo,
                       Grid<PointState>& pointState)
 {
+    auto width = geo.get_width();
+    auto height = geo.get_height();
     vector<string> values = node.get_multi_property("AE");
     for (const string& s : values)
     {
@@ -71,7 +75,7 @@ void handleSetupEmpty(const Node& node, const Geometry& geo,
         {
             try
             {
-                Point p = Point::from_string(p_str, geo.get_width());
+                Point p = Point::from_string(p_str, width, height);
                 if (geo.is_onboard(p))
                     pointState[p] = PointState::empty();
             }

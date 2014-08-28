@@ -2991,7 +2991,7 @@ void MainWindow::selectNextColor()
 
 void MainWindow::selectPiece(Color c, Piece piece)
 {
-    selectPiece(c, piece, getBoard().get_transforms().get_identity());
+    selectPiece(c, piece, getBoard().get_transforms().get_default());
 }
 
 void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)

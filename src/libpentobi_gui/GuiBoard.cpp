@@ -173,7 +173,7 @@ void GuiBoard::moveSelectedPieceDown()
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(geo.get_width() / 2, geo.get_height() - 1);
+        newOffset = CoordPoint(geo.get_width() / 2, 0);
         setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
@@ -187,10 +187,10 @@ void GuiBoard::moveSelectedPieceDown()
                 ++newOffset.x;
             else
                 --newOffset.x;
-            --newOffset.y;
+            ++newOffset.y;
         }
         else
-            --newOffset.y;
+            ++newOffset.y;
         if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
@@ -263,7 +263,7 @@ void GuiBoard::moveSelectedPieceUp()
     CoordPoint newOffset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(geo.get_width() / 2, 0);
+        newOffset = CoordPoint(geo.get_width() / 2, geo.get_height() - 1);
         setSelectedPieceOffset(newOffset);
         setSelectedPiecePoints();
     }
@@ -277,10 +277,10 @@ void GuiBoard::moveSelectedPieceUp()
                 ++newOffset.x;
             else
                 --newOffset.x;
-            ++newOffset.y;
+            --newOffset.y;
         }
         else
-            ++newOffset.y;
+            --newOffset.y;
         if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
@@ -353,7 +353,7 @@ void GuiBoard::selectPiece(Color color, Piece piece)
     if (m_selectedPiece == piece && m_selectedPieceColor == color)
         return;
     m_selectedPieceColor = color;
-    m_selectedPieceTransform = m_bd.get_transforms().get_identity();
+    m_selectedPieceTransform = m_bd.get_transforms().get_default();
     if (m_selectedPiece.is_null())
         m_selectedPieceOffset = CoordPoint::null();
     m_selectedPiece = piece;

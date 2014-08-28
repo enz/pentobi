@@ -21,8 +21,8 @@ using namespace std;
     Columns are represented as letters including the letter 'J'. After 'Z',
     multi-letter combinations are used: 'AA', 'AB', etc. Rows are represented
     by numbers starting with '1'. Note that unlike in spreadsheets, row number
-    1 is at the bottom to be compatible with the coordinate convention used
-    in class Point. */
+    1 is at the bottom and increases to the top to be compatible with the
+    convention used in chess. */
 struct SpShtStrRep
 {
     static const unsigned max_width = UINT_MAX;
@@ -32,7 +32,8 @@ struct SpShtStrRep
     static bool read(istream& in, unsigned width, unsigned height,
                      unsigned& x, unsigned& y);
 
-    static void write(ostream& out, unsigned x, unsigned y);
+    static void write(ostream& out, unsigned x, unsigned y, unsigned width,
+                      unsigned height);
 };
 
 //-----------------------------------------------------------------------------

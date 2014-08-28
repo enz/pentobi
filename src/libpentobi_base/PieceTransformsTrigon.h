@@ -11,7 +11,7 @@
 
 namespace libpentobi_base {
 
-using libboardgame_base::TransfIdentity;
+using libboardgame_base::TransfTrigonIdentity;
 using libboardgame_base::TransfTrigonRefl;
 using libboardgame_base::TransfTrigonReflRot60;
 using libboardgame_base::TransfTrigonReflRot120;
@@ -41,7 +41,7 @@ public:
     const Transform* get_rotated_clockwise(const Transform* transf) const;
 
 private:
-    TransfIdentity m_identity;
+    TransfTrigonIdentity m_identity;
 
     TransfTrigonRot60 m_rot60;
 

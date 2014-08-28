@@ -30,15 +30,15 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_get_adj_diag)
 {
     auto& geo = RectGeometry::get(9, 9);
     PointList l;
-    for (NullTermList<Point, 12>::Iterator i(geo.get_adj_diag(Point("B9", 9)));
-         i; ++i)
+    Point p("B9", 9, 9);
+    for (NullTermList<Point, 12>::Iterator i(geo.get_adj_diag(p)); i; ++i)
         l.push_back(*i);
     LIBBOARDGAME_CHECK_EQUAL(l.size(), 5u);
-    LIBBOARDGAME_CHECK(l.contains(Point("A9", 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("C9", 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("A8", 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("B8", 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("C8", 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("A9", 9, 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("C9", 9, 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("A8", 9, 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("B8", 9, 9)));
+    LIBBOARDGAME_CHECK(l.contains(Point("C8", 9, 9)));
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)

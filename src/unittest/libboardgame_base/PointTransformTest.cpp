@@ -23,7 +23,7 @@ LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
         Point;
 
     unsigned sz = 9;
-    Point p("B7", sz);
+    Point p("B7", sz, sz);
     {
         PointTransfIdent<Point> transform;
         LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz) == p);
@@ -31,12 +31,12 @@ LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
     {
         PointTransfRot180<Point> transform;
         LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz)
-                           == Point("H3", sz));
+                           == Point("H3", sz, sz));
     }
     {
         PointTransfRot270Refl<Point> transform;
         LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz)
-                           == Point("C8", sz));
+                           == Point("C8", sz, sz));
     }
 }
 

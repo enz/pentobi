@@ -42,7 +42,7 @@ unsigned TransfIdentity::get_new_point_type() const
 
 CoordPoint TransfRectRot90::get_transformed(const CoordPoint& p) const
 {
-    return CoordPoint(p.y, -p.x);
+    return CoordPoint(-p.y, p.x);
 }
 
 unsigned TransfRectRot90::get_point_type() const
@@ -76,7 +76,7 @@ unsigned TransfRectRot180::get_new_point_type() const
 
 CoordPoint TransfRectRot270::get_transformed(const CoordPoint& p) const
 {
-    return CoordPoint(-p.y, p.x);
+    return CoordPoint(p.y, -p.x);
 }
 
 unsigned TransfRectRot270::get_point_type() const
@@ -110,7 +110,7 @@ unsigned TransfRectRefl::get_new_point_type() const
 
 CoordPoint TransfRectRot90Refl::get_transformed(const CoordPoint& p) const
 {
-    return CoordPoint(p.y, p.x);
+    return CoordPoint(-p.y, -p.x);
 }
 
 unsigned TransfRectRot90Refl::get_point_type() const
@@ -144,7 +144,7 @@ unsigned TransfRectRot180Refl::get_new_point_type() const
 
 CoordPoint TransfRectRot270Refl::get_transformed(const CoordPoint& p) const
 {
-    return CoordPoint(-p.y, -p.x);
+    return CoordPoint(p.y, p.x);
 }
 
 unsigned TransfRectRot270Refl::get_point_type() const
@@ -159,6 +159,23 @@ unsigned TransfRectRot270Refl::get_new_point_type() const
 
 //-----------------------------------------------------------------------------
 
+CoordPoint TransfTrigonIdentity::get_transformed(const CoordPoint& p) const
+{
+    return p;
+}
+
+unsigned TransfTrigonIdentity::get_point_type() const
+{
+    return 1;
+}
+
+unsigned TransfTrigonIdentity::get_new_point_type() const
+{
+    return 1;
+}
+
+//-----------------------------------------------------------------------------
+
 CoordPoint TransfTrigonRefl::get_transformed(const CoordPoint& p) const
 {
     return CoordPoint(-p.x, p.y);
@@ -166,12 +183,12 @@ CoordPoint TransfTrigonRefl::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRefl::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonRefl::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -180,19 +197,19 @@ CoordPoint TransfTrigonRot60::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(floor(0.5f * px + 1.5f * py));
-    int y = static_cast<int>(floor(-0.5f * px + 0.5f * py));
+    int x = static_cast<int>(ceil(0.5f * px - 1.5f * py));
+    int y = static_cast<int>(floor(0.5f * px + 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonRot60::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonRot60::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -201,19 +218,19 @@ CoordPoint TransfTrigonRot120::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(floor(-0.5f * px + 1.5f * py));
-    int y = static_cast<int>(ceil(-0.5f * px - 0.5f * py));
+    int x = static_cast<int>(ceil(-0.5f * px - 1.5f * py));
+    int y = static_cast<int>(ceil(0.5f * px - 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonRot120::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonRot120::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -225,12 +242,12 @@ CoordPoint TransfTrigonRot180::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRot180::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonRot180::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -239,19 +256,19 @@ CoordPoint TransfTrigonRot240::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(ceil(-0.5f * px - 1.5f * py));
-    int y = static_cast<int>(ceil(0.5f * px - 0.5f * py));
+    int x = static_cast<int>(floor(-0.5f * px + 1.5f * py));
+    int y = static_cast<int>(ceil(-0.5f * px - 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonRot240::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonRot240::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -260,19 +277,19 @@ CoordPoint TransfTrigonRot300::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(ceil(0.5f * px - 1.5f * py));
-    int y = static_cast<int>(floor(0.5f * px + 0.5f * py));
+    int x = static_cast<int>(floor(0.5f * px + 1.5f * py));
+    int y = static_cast<int>(floor(-0.5f * px + 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonRot300::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonRot300::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -281,19 +298,19 @@ CoordPoint TransfTrigonReflRot60::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(floor(0.5f * (-px) + 1.5f * py));
-    int y = static_cast<int>(floor(-0.5f * (-px) + 0.5f * py));
+    int x = static_cast<int>(ceil(0.5f * (-px) - 1.5f * py));
+    int y = static_cast<int>(floor(0.5f * (-px) + 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonReflRot60::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonReflRot60::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -302,19 +319,19 @@ CoordPoint TransfTrigonReflRot120::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(floor(-0.5f * (-px) + 1.5f * py));
-    int y = static_cast<int>(ceil(-0.5f * (-px) - 0.5f * py));
+    int x = static_cast<int>(ceil(-0.5f * (-px) - 1.5f * py));
+    int y = static_cast<int>(ceil(0.5f * (-px) - 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonReflRot120::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonReflRot120::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -326,12 +343,12 @@ CoordPoint TransfTrigonReflRot180::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonReflRot180::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonReflRot180::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -340,19 +357,19 @@ CoordPoint TransfTrigonReflRot240::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(ceil(-0.5f * (-px) - 1.5f * py));
-    int y = static_cast<int>(ceil(0.5f * (-px) - 0.5f * py));
+    int x = static_cast<int>(floor(-0.5f * (-px) + 1.5f * py));
+    int y = static_cast<int>(ceil(-0.5f * (-px) - 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonReflRot240::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonReflRot240::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -361,19 +378,19 @@ CoordPoint TransfTrigonReflRot300::get_transformed(const CoordPoint& p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
-    int x = static_cast<int>(ceil(0.5f * (-px) - 1.5f * py));
-    int y = static_cast<int>(floor(0.5f * (-px) + 0.5f * py));
+    int x = static_cast<int>(floor(0.5f * (-px) + 1.5f * py));
+    int y = static_cast<int>(floor(-0.5f * (-px) + 0.5f * py));
     return CoordPoint(x, y);
 }
 
 unsigned TransfTrigonReflRot300::get_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 unsigned TransfTrigonReflRot300::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------

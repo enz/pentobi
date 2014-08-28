@@ -29,14 +29,15 @@ typedef libboardgame_base::Point<35 * 18, unsigned short, SpShtStrRep> Point;
 class WritePoint
 {
 public:
-    WritePoint(Point p, unsigned width)
+    WritePoint(Point p, unsigned width, unsigned height)
       : m_p(p),
-        m_width(width)
+        m_width(width),
+        m_height(height)
     { }
 
     ostream& write(ostream& out) const
     {
-        m_p.write(out, m_width);
+        m_p.write(out, m_width, m_height);
         return out;
     }
 
@@ -44,6 +45,8 @@ private:
     Point m_p;
 
     unsigned m_width;
+
+    unsigned m_height;
 };
 
 //-----------------------------------------------------------------------------

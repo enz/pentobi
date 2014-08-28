@@ -47,15 +47,15 @@ void StartingPoints::init(Variant variant, const Geometry& geo)
     m_starting_points[Color(3)].clear();
     if (variant == Variant::classic || variant == Variant::classic_2)
     {
-        add_colored_starting_point(geo, 0, 19, Color(0));
-        add_colored_starting_point(geo, 19, 19, Color(1));
-        add_colored_starting_point(geo, 19, 0, Color(2));
-        add_colored_starting_point(geo, 0, 0, Color(3));
+        add_colored_starting_point(geo, 0, 0, Color(0));
+        add_colored_starting_point(geo, 19, 0, Color(1));
+        add_colored_starting_point(geo, 19, 19, Color(2));
+        add_colored_starting_point(geo, 0, 19, Color(3));
     }
     else if (variant == Variant::duo || variant == Variant::junior)
     {
-        add_colored_starting_point(geo, 4, 9, Color(0));
-        add_colored_starting_point(geo, 9, 4, Color(1));
+        add_colored_starting_point(geo, 4, 4, Color(0));
+        add_colored_starting_point(geo, 9, 9, Color(1));
     }
     else if (variant == Variant::trigon || variant == Variant::trigon_2)
     {

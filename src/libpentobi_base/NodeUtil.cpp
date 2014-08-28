@@ -102,7 +102,8 @@ bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points)
     // values instead of a single value as used by Pentobi <= 0.2, but it
     // is deprecated
     points.clear();
-    const auto width = get_geometry(variant).get_width();
+    auto width = get_geometry(variant).get_width();
+    auto height = get_geometry(variant).get_height();
     for (const auto& s : values)
     {
         if (trim(s).empty())
@@ -113,7 +114,7 @@ bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points)
             Point p;
             try
             {
-                p = Point::from_string(p_str, width);
+                p = Point::from_string(p_str, width, height);
             }
             catch (const Point::InvalidString&)
             {

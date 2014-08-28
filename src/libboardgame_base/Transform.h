@@ -154,6 +154,19 @@ public:
 
 //-----------------------------------------------------------------------------
 
+class TransfTrigonIdentity
+    : public Transform
+{
+public:
+    CoordPoint get_transformed(const CoordPoint& p) const override;
+
+    unsigned get_point_type() const override;
+
+    unsigned get_new_point_type() const override;
+};
+
+//-----------------------------------------------------------------------------
+
 class TransfTrigonRot60
     : public Transform
 {

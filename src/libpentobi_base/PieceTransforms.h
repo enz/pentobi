@@ -45,10 +45,7 @@ public:
     template<class T>
     const Transform* find() const;
 
-    /** Find the identity transformation.
-        Like find<TransfIdentity>() but checks with assertion that the result
-        is not null. */
-    const Transform* get_identity() const;
+    const Transform* get_default() const;
 
 protected:
     /** All piece transformations.
@@ -63,6 +60,11 @@ const Transform* PieceTransforms::find() const
         if (dynamic_cast<const T*>(t) != nullptr)
             return t;
     return nullptr;
+}
+
+inline const Transform* PieceTransforms::get_default() const
+{
+    return m_all[0];
 }
 
 inline const vector<const Transform*>& PieceTransforms::get_all() const

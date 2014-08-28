@@ -48,7 +48,7 @@ public:
         (0, 0). (0, 0) should be a field in or near the center of the
         coordinates; it is used as the center when moving the piece or for
         drawing a label on the piece.
-        @param geometry
+        @param geo
         @param transforms */
     PieceInfo(const string& name, const Points& points,
               const Geometry& geo, const PieceTransforms& transforms);

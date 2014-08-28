@@ -107,25 +107,25 @@ void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
     auto y = p.get_y(width);
     {
         typename NullTermList<Point, 4>::Init init_adj(adj);
+        if (y > 0)
+            init_adj.push_back(p.get_up(width));
         if (x > 0)
             init_adj.push_back(p.get_left());
         if (x < width - 1)
             init_adj.push_back(p.get_right());
-        if (y > 0)
-            init_adj.push_back(p.get_down(width));
         if (y < height - 1)
-            init_adj.push_back(p.get_up(width));
+            init_adj.push_back(p.get_down(width));
         init_adj.finish();
     }
     {
         typename NullTermList<Point, 9>::Init init_diag(diag);
-        if (x > 0 && y < height - 1)
-            init_diag.push_back(p.get_up_left(width));
-        if (x < width - 1 && y < height - 1)
-            init_diag.push_back(p.get_up_right(width));
         if (x > 0 && y > 0)
-            init_diag.push_back(p.get_down_left(width));
+            init_diag.push_back(p.get_up_left(width));
         if (x < width - 1 && y > 0)
+            init_diag.push_back(p.get_up_right(width));
+        if (x > 0 && y < height - 1)
+            init_diag.push_back(p.get_down_left(width));
+        if (x < width - 1 && y < height - 1)
             init_diag.push_back(p.get_down_right(width));
         init_diag.finish();
     }
