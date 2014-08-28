@@ -170,16 +170,16 @@ def play_game(game_number, black, white, variant, output_file, quiet):
     while True:
         try:
             move = strip(to_play.send("genmove " + colors[color_to_play]))
+            move = lower(move)
+            if move == "resign":
+                resign = True
+                break
+            other.send("play " + colors[color_to_play] + " " + move)
         except:
             sgf += ")\n"
             with open(prefix + ".fail.blksgf", "w") as f:
                 f.write(sgf)
             raise
-        move = lower(move)
-        if move == "resign":
-            resign = True
-            break
-        other.send("play " + colors[color_to_play] + " " + move)
         if move != "pass":
             nu_passes = 0
             sgf += ";%s[%s]\n" % (upper(colors[color_to_play]), move)
