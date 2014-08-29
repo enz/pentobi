@@ -6,6 +6,8 @@ VERSION 8.UNKNOWN (master)
   Lower levels in game variant Trigon are significantly stronger, so
   ratings in rated Trigon games are not really comparable to previous
   versions of Pentobi.
+* The computer is now better at playing moves that maximize the score
+  as long as they do not lead into riskier positions.
 * The computer now remembers the playing level last used separately for each
   game variant and restores it when the game variant is changed.
 
