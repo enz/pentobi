@@ -1,10 +1,10 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 add_library(boardgame_base STATIC
-  CoordPoint.cpp
   CoordPoint.h
-  Engine.cpp
+  CoordPoint.cpp
   Engine.h
+  Engine.cpp
   Geometry.h
   GeometryUtil.h
   Grid.h
@@ -12,13 +12,13 @@ add_library(boardgame_base STATIC
   Point.h
   PointList.h
   PointTransform.h
-  Rating.cpp
   Rating.h
+  Rating.cpp
   RectGeometry.h
-  SpShtStrRep.cpp
   SpShtStrRep.h
-  Transform.cpp
+  SpShtStrRep.cpp
   Transform.h
+  Transform.cpp
   TrigonGeometry.h
 )
-  
+

@@ -9,8 +9,8 @@ include_directories(
   )
 
 kde4_add_plugin(pentobi-thumbnail
-  PentobiThumbCreator.cpp
   PentobiThumbCreator.h
+  PentobiThumbCreator.cpp
 )
 
 target_link_libraries(pentobi-thumbnail

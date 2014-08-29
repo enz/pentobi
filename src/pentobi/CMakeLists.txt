@@ -7,29 +7,29 @@ endif()
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_SRCS
-  AnalyzeGameWidget.cpp
   AnalyzeGameWidget.h
-  AnalyzeGameWindow.cpp
+  AnalyzeGameWidget.cpp
   AnalyzeGameWindow.h
-  AnalyzeSpeedDialog.cpp
+  AnalyzeGameWindow.cpp
   AnalyzeSpeedDialog.h
-  Application.cpp
+  AnalyzeSpeedDialog.cpp
   Application.h
+  Application.cpp
   Main.cpp
-  MainWindow.cpp
   MainWindow.h
-  RatedGamesList.cpp
+  MainWindow.cpp
   RatedGamesList.h
-  RatingDialog.cpp
+  RatedGamesList.cpp
   RatingDialog.h
-  RatingGraph.cpp
+  RatingDialog.cpp
   RatingGraph.h
-  RatingHistory.cpp
+  RatingGraph.cpp
   RatingHistory.h
-  ShowMessage.cpp
+  RatingHistory.cpp
   ShowMessage.h
-  Util.cpp
+  ShowMessage.cpp
   Util.h
+  Util.cpp
 )
 
 set(pentobi_ICNS
@@ -169,7 +169,7 @@ else()
     )
 endif()
 
-install(TARGETS pentobi 
+install(TARGETS pentobi
 DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install translation files. If you change the destination, you need to

@@ -3,25 +3,25 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 set(pentobi_base_STAT_SRCS
   AdjDiagIterator.h
   AdjIterator.h
-  BoardConst.cpp
   BoardConst.h
-  Board.cpp
+  BoardConst.cpp
   Board.h
-  BoardUpdater.cpp
+  Board.cpp
   BoardUpdater.h
-  BoardUtil.cpp
+  BoardUpdater.cpp
   BoardUtil.h
-  Book.cpp
+  BoardUtil.cpp
   Book.h
-  Color.cpp
+  Book.cpp
   Color.h
+  Color.cpp
   ColorMap.h
   ColorMove.h
   DiagIterator.h
-  Game.cpp
   Game.h
-  GameStateHistory.cpp
+  Game.cpp
   GameStateHistory.h
+  GameStateHistory.cpp
   Geometry.h
   Grid.h
   Marker.h
@@ -30,40 +30,40 @@ set(pentobi_base_STAT_SRCS
   MoveList.h
   MoveMarker.h
   MovePoints.h
-  NodeUtil.cpp
   NodeUtil.h
+  NodeUtil.cpp
   Piece.h
-  PieceInfo.cpp
   PieceInfo.h
+  PieceInfo.cpp
   PieceMap.h
+  PieceTransformsClassic.h
   PieceTransformsClassic.cpp
   PieceTransformsClassic.h
   PieceTransforms.cpp
-  PieceTransforms.h
-  PieceTransformsTrigon.cpp
   PieceTransformsTrigon.h
-  Player.cpp
+  PieceTransformsTrigon.cpp
   Player.h
+  Player.cpp
   Point.h
   PointList.h
-  PointState.cpp
   PointState.h
+  PointState.cpp
   PrecompMoves.h
   Setup.h
-  SgfUtil.cpp
   SgfUtil.h
-  StartingPoints.cpp
+  SgfUtil.cpp
   StartingPoints.h
-  SymmetricPoints.cpp
+  StartingPoints.cpp
   SymmetricPoints.h
-  Tree.cpp
+  SymmetricPoints.cpp
   Tree.h
-  TreeUtil.cpp
+  Tree.cpp
   TreeUtil.h
-  TreeWriter.cpp
+  TreeUtil.cpp
   TreeWriter.h
-  Variant.cpp
+  TreeWriter.cpp
   Variant.h
+  Variant.cpp
 )
 
 if (PENTOBI_BUILD_GTP)

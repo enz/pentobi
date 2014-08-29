@@ -4,9 +4,7 @@ endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(pentobi_thumbnailer_SRCS
-  Main.cpp
-  )
+set(pentobi_thumbnailer_SRCS Main.cpp)
 
 add_executable(pentobi-thumbnailer Main.cpp)
 
@@ -31,6 +29,6 @@ else()
     )
 endif()
 
-install(TARGETS 
-pentobi-thumbnailer DESTINATION 
+install(TARGETS
+pentobi-thumbnailer DESTINATION
 ${CMAKE_INSTALL_BINDIR})
