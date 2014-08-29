@@ -532,7 +532,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 out << "   ";
             else
                 out << "  ";
-            write_info_line(out, height - y - 1, pieces_left);
+            write_info_line(out, y, pieces_left);
         }
         out << '\n';
     }
