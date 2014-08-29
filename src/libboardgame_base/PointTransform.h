@@ -82,7 +82,7 @@ P PointTransfRot180<P>::get_transformed(const Point& p, unsigned width,
 //-----------------------------------------------------------------------------
 
 /** Rotate point by 270 degrees and reflect on y axis.
-    This is equivalent to a reflection on the y=-x line. */
+    This is equivalent to a reflection on the y=x line. */
 template<class P>
 class PointTransfRot270Refl
     : public PointTransform<P>
@@ -98,9 +98,7 @@ template<class P>
 P PointTransfRot270Refl<P>::get_transformed(const Point& p, unsigned width,
                                             unsigned height) const
 {
-    unsigned x = height - p.get_y(width) - 1;
-    unsigned y = width - p.get_x(width) - 1;
-    return Point(x, y, width);
+    return Point(p.get_y(width), p.get_x(width), width);
 }
 
 //-----------------------------------------------------------------------------
