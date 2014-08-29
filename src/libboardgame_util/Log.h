@@ -18,14 +18,18 @@ using namespace std;
 
 ostream& get_log();
 
+/** Write a string to the log stream.
+    Appends a newline if the output has no newline at the end. */
 void log(const string& s);
 
+/** Helper function needed for log(const Ts&...) */
 template<typename T>
 void log_buffered(ostream& buffer, const T& t)
 {
     buffer << t;
 }
 
+/** Helper function needed for log(const Ts&...) */
 template<typename T, typename... Ts>
 void log_buffered(ostream& buffer, const T& first, const Ts&... rest)
 {
@@ -35,7 +39,7 @@ void log_buffered(ostream& buffer, const T& first, const Ts&... rest)
 
 /** Write a number of arguments to the log stream.
     Writes to a buffer first so there is only a single write to the log
-    stream. Appends a newline. */
+    stream. Appends a newline if the output has no newline at the end. */
 template<typename... Ts>
 void log(const Ts&... args)
 {

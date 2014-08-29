@@ -497,7 +497,7 @@ void State::play_expanded_child(Move mv)
         // initialization)
         m_is_symmetry_broken = true;
         if (log_simulations)
-            get_log() << m_bd;
+            log(m_bd);
     }
 }
 
@@ -510,7 +510,7 @@ void State::play_playout(Move mv)
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);
     if (log_simulations)
-        get_log() << m_bd;
+        log(m_bd);
 }
 
 void State::start_search()

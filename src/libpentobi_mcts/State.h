@@ -22,7 +22,6 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
-using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
@@ -365,7 +364,7 @@ inline void State::play_in_tree(Move mv)
         ++m_nu_passes;
     }
     if (log_simulations)
-        get_log() << m_bd;
+        log(m_bd);
 }
 
 inline void State::start_playout()

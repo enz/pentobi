@@ -37,9 +37,16 @@ ostream& get_log()
 
 void log(const string& s)
 {
-    string line = s;
-    line += '\n';
-    *log_stream << line;
+    if (s.empty())
+        *log_stream << '\n';
+    else if (s.back() == '\n')
+        *log_stream << s;
+    else
+    {
+        string line = s;
+        line += '\n';
+        *log_stream << line;
+    }
 }
 
 void set_log(ostream& out)
