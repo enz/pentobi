@@ -28,13 +28,17 @@ class PieceTransformsClassic
 public:
     PieceTransformsClassic();
 
-    const Transform* get_mirrored_horizontally(const Transform* transf) const;
+    const Transform* get_mirrored_horizontally(
+            const Transform* transf) const override;
 
-    const Transform* get_mirrored_vertically(const Transform* transf) const;
+    const Transform* get_mirrored_vertically(
+            const Transform* transf) const override;
 
-    const Transform* get_rotated_anticlockwise(const Transform* transf) const;
+    const Transform* get_rotated_anticlockwise(
+            const Transform* transf) const override;
 
-    const Transform* get_rotated_clockwise(const Transform* transf) const;
+    const Transform* get_rotated_clockwise(
+            const Transform* transf) const override;
 
 private:
     TransfIdentity m_identity;

@@ -32,15 +32,19 @@ class PieceTransformsTrigon
 public:
     PieceTransformsTrigon();
 
-    const Transform* get_mirrored_horizontally(const Transform* transf) const;
+    const Transform* get_mirrored_horizontally(
+            const Transform* transf) const override;
 
-    const Transform* get_mirrored_vertically(const Transform* transf) const;
+    const Transform* get_mirrored_vertically(
+            const Transform* transf) const override;
 
-    const Transform* get_rotated_anticlockwise(const Transform* transf) const;
+    const Transform* get_rotated_anticlockwise(
+            const Transform* transf) const override;
 
-    const Transform* get_rotated_clockwise(const Transform* transf) const;
+    const Transform* get_rotated_clockwise(
+            const Transform* transf) const override;
 
-    const Transform* get_default() const;
+    const Transform* get_default() const override;
 
 private:
     TransfTrigonIdentity m_identity;
