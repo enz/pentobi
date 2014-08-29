@@ -59,7 +59,7 @@ void add_test(const string& name, TestFunction function)
 bool run_all_tests()
 {
     unsigned nu_fail = 0;
-    log() << "Running " << get_all_tests().size() << " tests...\n";
+    log("Running ", get_all_tests().size(), " tests...");
     auto all_tests = get_all_tests();
     for (auto i = all_tests.begin(); i != all_tests.end(); ++i)
     {
@@ -69,19 +69,18 @@ bool run_all_tests()
         }
         catch (const TestFail& e)
         {
-            log() << e.what() << '\n';
+            log(e.what());
             ++nu_fail;
         }
     }
     if (nu_fail == 0)
     {
-        log() << "OK\n";
+        log("OK");
         return true;
     }
     else
     {
-        log() << nu_fail << " tests failed.\n"
-              << "FAIL\n";
+        log(nu_fail, " tests failed.\nFAIL");
         return false;
     }
 }
@@ -92,21 +91,20 @@ bool run_test(const string& name)
     for (auto i = all_tests.begin(); i != all_tests.end(); ++i)
         if (i->first == name)
         {
-            log() << "Running " << name << "...\n";
+            log("Running ", name, "...");
             try
             {
                 (i->second)();
-                log() << "OK\n";
+                log("OK");
                 return true;
             }
             catch (const TestFail& e)
             {
-                log() << e.what() << '\n'
-                      << "FAIL\n";
+                log(e.what(), "\nFAIL");
                 return false;
             }
         }
-    log() << "Test not found: " << name;
+    log("Test not found: ", name);
     return false;
 }
 

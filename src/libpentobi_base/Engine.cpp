@@ -22,6 +22,7 @@ using libboardgame_gtp::Failure;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::get_last_node;
+using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
@@ -53,7 +54,7 @@ Engine::Engine(Variant variant)
 void Engine::board_changed()
 {
     if (m_show_board)
-        log() << get_board();
+        get_log() << get_board();
 }
 
 void Engine::cmd_all_legal(const Arguments& args, Response& response)
@@ -373,7 +374,7 @@ void Engine::set_player(Player& player)
 void Engine::set_show_board(bool enable)
 {
     if (enable && ! m_show_board)
-        log() << get_board();
+        get_log() << get_board();
     m_show_board = enable;
 }
 

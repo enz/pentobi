@@ -31,6 +31,7 @@ using libboardgame_base::PointTransfRot180;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
 using libboardgame_base::TrigonGeometry;
+using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::split;
 using libboardgame_util::to_lower;
@@ -452,9 +453,9 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
             grid[*i] = '+';
         for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
             grid[*i] = '*';
-        log() << "Move " << mv.to_int() << ":\n";
-        grid.write(log(), m_geo);
-        log() << '\n';
+        log("Move ", mv.to_int(), ":");
+        grid.write(get_log(), m_geo);
+        get_log() << '\n';
     }
     for (Point p : info)
         for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
@@ -480,8 +481,8 @@ void BoardConst::create_moves()
                 m_precomp_moves.set_list_range(*i, j, piece, begin, end);
             }
     if (log_move_creation)
-        log() << "Created moves: " << m_move_info.size() << ", "
-              << "precomputed: " << m_precomp_moves.get_size() << '\n';
+        log("Created moves: ", m_move_info.size(), ", precomputed: ",
+            m_precomp_moves.get_size());
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
 
@@ -489,21 +490,20 @@ void BoardConst::create_moves(Piece piece)
 {
     auto& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
-        log() << "Creating moves for piece " << piece_info.get_name() << "\n";
+        log("Creating moves for piece ", piece_info.get_name());
     PiecePoints points;
     auto width = m_geo.get_width();
     auto height = m_geo.get_height();
     for (GeometryIterator i(m_geo); i; ++i)
     {
         if (log_move_creation)
-            log() << "Creating moves at " << WritePoint(*i, width, height)
-                  << "\n";
+            log("Creating moves at ", WritePoint(*i, width, height));
         auto x = (*i).get_x(width);
         auto y = (*i).get_y(width);
         for (const Transform* transform : piece_info.get_transforms())
         {
             if (log_move_creation)
-                log() << "Transformation " << typeid(*transform).name() << "\n";
+                log("Transformation ", typeid(*transform).name());
             auto point_type = m_geo.get_point_type(x, y);
             if (transform->get_new_point_type() != point_type)
                 continue;

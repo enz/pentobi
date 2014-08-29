@@ -13,7 +13,6 @@
 #include <fstream>
 #include <iomanip>
 #include "libboardgame_util/CpuTime.h"
-#include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/WallTime.h"
 
 namespace libpentobi_mcts {
@@ -21,7 +20,6 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_util::log;
 using libboardgame_util::CpuTime;
-using libboardgame_util::FmtSaver;
 using libboardgame_util::WallTime;
 using libpentobi_base::BoardType;
 
@@ -176,12 +174,9 @@ Move Player::genmove(const Board& bd, Color c)
         }
     }
     if (max_count != 0)
-    {
-        FmtSaver saver(log());
-        log() << "MaxCnt " << fixed << setprecision(0) << max_count << '\n';
-    }
+        log("MaxCnt ", fixed, setprecision(0), max_count);
     else
-        log() << "MaxTime " << max_time << '\n';
+        log("MaxTime ", max_time);
     if (! m_search.search(mv, bd, c, max_count, 0, max_time, *m_time_source))
         return Move::null();
     // Resign only in two-player game variants
@@ -253,16 +248,16 @@ void Player::load_book(istream& in)
 
 bool Player::load_book(const string& filepath)
 {
-    log() << "Trying to load " << filepath << "... ";
+    log("Trying to load ", filepath, "... ");
     ifstream in(filepath);
     if (! in)
     {
-        log() << "not found\n";
+        log("not found");
         return false;
     }
     m_book.load(in);
     m_is_book_loaded = true;
-    log() << "ok\n";
+    log("ok");
     return true;
 }
 

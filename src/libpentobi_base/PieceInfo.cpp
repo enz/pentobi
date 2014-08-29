@@ -61,14 +61,14 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
                            const Geometry& geo)
 {
     if (log_piece_creation)
-        log() << "Points " << points << '\n';
+        log("Points ", points);
     NormalizedPoints normalized;
     normalized.points = points;
     type_match_shift(geo, normalized.points.begin(),
                      normalized.points.end(), point_type);
     if (log_piece_creation)
-        log() << "Point type " << point_type << ", type match shift "
-              << normalized.points << '\n';
+        log("Point type ", point_type, ", type match shift ",
+            normalized.points);
     // Make the coordinates positive and minimal
     unsigned width; // unused
     unsigned height; // unused
@@ -92,15 +92,14 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
       m_transforms(&transforms)
 {
     if (log_piece_creation)
-        log() << "Creating transformations for piece " << name
-              << ' ' << points << '\n';
+        log("Creating transformations for piece ", name, ' ', points);
     LIBBOARDGAME_ASSERT(points.contains(CoordPoint(0, 0)));
     vector<NormalizedPoints> all_transformed_points;
     PiecePoints transformed_points;
     for (const Transform* transform : transforms.get_all())
     {
         if (log_piece_creation)
-            log() << "Transformation " << typeid(*transform).name() << '\n';
+            log("Transformation ", typeid(*transform).name());
         transformed_points = points;
         transform->transform(transformed_points.begin(),
                              transformed_points.end());
@@ -108,8 +107,8 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                                                 transform->get_new_point_type(),
                                                 geo);
         if (log_piece_creation)
-            log() << "Normalized " << normalized.points << " point type "
-                  << normalized.point_type << '\n';
+            log("Normalized ", normalized.points, " point type ",
+                normalized.point_type);
         LIBBOARDGAME_ASSERT(check_consistency(normalized.points));
         auto begin = all_transformed_points.begin();
         auto end = all_transformed_points.end();
@@ -117,14 +116,14 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         if (pos != end)
         {
             if (log_piece_creation)
-                log() << "Equivalent to " << (pos - begin) << '\n';
+                log("Equivalent to ", pos - begin);
             m_equivalent_transform[transform]
                 = transforms.get_all()[pos - begin];
         }
         else
         {
             if (log_piece_creation)
-                log() << "New (" << m_uniq_transforms.size() << ")\n";
+                log("New (", m_uniq_transforms.size(), ")");
             m_equivalent_transform[transform] = transform;
             m_uniq_transforms.push_back(transform);
         }

@@ -18,6 +18,7 @@
 
 using namespace std;
 using libboardgame_gtp::Failure;
+using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::set_log_null;
 using libboardgame_util::Exception;
@@ -154,7 +155,7 @@ int main(int argc, char** argv)
             ifstream in(config_file);
             if (! in)
                 throw Exception("Error opening " + config_file);
-            engine.exec(in, true, log());
+            engine.exec(in, true, get_log());
         }
         auto& args = opt.get_args();
         // We currently don't need the ability to interrupt commands, so we
@@ -176,13 +177,12 @@ int main(int argc, char** argv)
     }
     catch (const Failure& e)
     {
-        log() << "Error: command in config file failed: " << e.get_response()
-              << '\n';
+        log("Error: command in config file failed: ", e.get_response());
         return 1;
     }
     catch (const exception& e)
     {
-        log() << "Error: " << e.what() << '\n';
+        log("Error: ", e.what());
         return 1;
     }
     catch (...)

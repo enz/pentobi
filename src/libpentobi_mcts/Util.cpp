@@ -93,7 +93,7 @@ size_t get_memory()
         memory = total_mem / 2;
     if (memory > 1300000000)
         memory = 1300000000;
-    log() << "Using " << memory << " of " << total_mem << " bytes\n";
+    log("Using ", memory, " of ", total_mem, " bytes");
     return memory;
 }
 

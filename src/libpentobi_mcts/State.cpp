@@ -17,6 +17,7 @@
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_util::get_log;
 using libboardgame_util::fast_exp;
 using libboardgame_util::FmtSaver;
 using libpentobi_base::BoardType;
@@ -249,8 +250,7 @@ void State::evaluate_playout(array<Float, 4>& result)
             res /= n;
         }
         if (log_simulations)
-            log() << "Result color " << c << ": sco=" << s
-                  << " game_res=" << res;
+            log("Result color ", c, ": sco=", s, " game_res=", res);
         Float l = static_cast<Float>(m_bd.get_nu_moves());
         m_stat_len.add(l);
         Float dev = m_stat_len.get_deviation();
@@ -270,7 +270,7 @@ void State::evaluate_playout(array<Float, 4>& result)
             res += 0.2f * sigmoid(2.f, (s - stat.get_mean()) / dev);
         result[i] = res;
         if (log_simulations)
-            log() << " res=" << res << '\n';
+            log("res=", res);
     }
     if (m_nu_colors > nu_players)
     {
@@ -384,8 +384,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
 
     auto& moves = m_moves[to_play];
     if (log_simulations)
-        log() << "Moves: " << moves.size() << ", total gamma: "
-              << m_total_gamma << "\n";
+        log("Moves: ", moves.size(), ", total gamma: ", m_total_gamma);
     auto begin = m_cumulative_gamma.begin();
     auto end = begin + moves.size();
     auto random = m_total_gamma * m_random.generate_double();
@@ -500,7 +499,7 @@ void State::play_expanded_child(Move mv)
         // initialization)
         m_is_symmetry_broken = true;
         if (log_simulations)
-            log() << m_bd;
+            get_log() << m_bd;
     }
 }
 
@@ -513,7 +512,7 @@ void State::play_playout(Move mv)
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);
     if (log_simulations)
-        log() << m_bd;
+        get_log() << m_bd;
 }
 
 void State::start_search()
@@ -585,9 +584,9 @@ void State::start_search()
 void State::start_simulation(size_t n)
 {
     if (log_simulations)
-        log() << "=========================================================\n"
-              << "Simulation " << n << "\n"
-              << "=========================================================\n";
+        log("=========================================================\n",
+            "Simulation ", n, "\n",
+            "=========================================================");
     m_bd.restore_snapshot();
     m_force_consider_all_pieces = false;
     for (ColorIterator i(m_nu_colors); i; ++i)
@@ -723,7 +722,7 @@ void State::write_info(ostream& out) const
 {
     if (m_nu_playout_moves > 0)
     {
-        FmtSaver saver(log());
+        FmtSaver saver(out);
         out << "LGR: " << fixed << setprecision(1)
             << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
                 / static_cast<double>(m_nu_playout_moves))

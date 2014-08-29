@@ -30,7 +30,7 @@ ofstream null_stream;
 
 //-----------------------------------------------------------------------------
 
-ostream& log()
+ostream& get_log()
 {
     return *log_stream;
 }
@@ -39,7 +39,7 @@ void log(const string& s)
 {
     string line = s;
     line += '\n';
-    log() << line;
+    *log_stream << line;
 }
 
 void set_log(ostream& out)

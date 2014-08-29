@@ -37,6 +37,7 @@ namespace libboardgame_mcts {
 using namespace std;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
+using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
@@ -734,7 +735,7 @@ Search<S, M, R>::AssertionHandler::~AssertionHandler()
 template<class S, class M, class R>
 void Search<S, M, R>::AssertionHandler::run()
 {
-    m_search.dump(log());
+    m_search.dump(get_log());
 }
 
 
@@ -889,7 +890,7 @@ void Search<S, M, R>::create_threads()
         throw Exception("libboardgame_mcts::Search was compiled"
                         " without support for multithreading");
 #endif
-    log() << "Creating " << m_nu_threads << " threads\n";
+    log("Creating ", m_nu_threads, " threads");
     m_threads.clear();
     auto search_func =
         static_cast<typename Thread::SearchFunc>(
@@ -966,7 +967,7 @@ size_t Search<S, M, R>::get_max_nodes(size_t memory)
     // with NodeIdx
     max_nodes =
         min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
-    log() << "Search tree size: 2 x " << max_nodes << " nodes\n";
+    log("Search tree size: 2 x ", max_nodes, " nodes");
     return max_nodes;
 }
 
@@ -1068,7 +1069,7 @@ void Search<S, M, R>::log_thread(const ThreadState& thread_state,
                                  const string& s) const
 {
     lock_guard<mutex> lock(m_log_mutex);
-    log() << '[' << thread_state.thread_id << "] " << s << '\n';
+    log('[', thread_state.thread_id, "] ", s);
 }
 
 template<class S, class M, class R>
@@ -1225,7 +1226,7 @@ bool Search<S, M, R>::prune(TimeSource& time_source, double time,
     TimeIntervalChecker interval_checker(time_source, max_time);
     if (m_deterministic)
         interval_checker.set_deterministic(1000000);
-    log() << "Pruning count " << prune_min_count << " (at tm " << time << ")\n";
+    log("Pruning count ", prune_min_count, " (at tm ", time, ")");
     m_tmp_tree.clear(m_tree.get_root().get_value());
     if (! m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(),
                               m_tree.get_root(), prune_min_count, true,
@@ -1235,8 +1236,8 @@ bool Search<S, M, R>::prune(TimeSource& time_source, double time,
         return false;
     }
     int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
-    log() << "Pruned size: " << m_tmp_tree.get_nu_nodes() << " (" << percent
-          << "%, tm=" << timer() << ")\n";
+    log("Pruned size: ", m_tmp_tree.get_nu_nodes(), " (", percent, "%, tm=",
+        timer(), ")");
     m_tree.swap(m_tmp_tree);
     if (percent > 50)
     {
@@ -1312,8 +1313,8 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
         if (m_followup_sequence.empty())
         {
             if (tree_nodes > 1)
-                log() << "Reusing all " << tree_nodes << "nodes (count="
-                      << m_tree.get_root().get_visit_count() << ")\n";
+                log("Reusing all ", tree_nodes, "nodes (count=",
+                    m_tree.get_root().get_visit_count(), ")");
         }
         else
         {
@@ -1339,12 +1340,9 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
                     double time = timer();
                     double reuse = double(tmp_tree_nodes) / double(tree_nodes);
                     double percent = 100 * reuse;
-                    {
-                        FmtSaver saver(log());
-                        log() << "Reusing " << tmp_tree_nodes << " nodes ("
-                              << fixed << setprecision(1) << percent
-                              << "% tm=" << setprecision(4) << time << ")\n";
-                    }
+                    log("Reusing ", tmp_tree_nodes, " nodes (", std::fixed,
+                        setprecision(1), percent, "% tm=", setprecision(4),
+                        time, ")");
                     m_tree.swap(m_tmp_tree);
                     clear_tree = false;
                     max_time -= time;
@@ -1424,7 +1422,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
     }
 
     m_last_time = m_timer();
-    write_info(log());
+    write_info(get_log());
     bool result = select_move(mv);
     m_time_source = nullptr;
     return result;

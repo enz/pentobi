@@ -67,7 +67,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                 try
                 {
                     updater.update(*bd, tree, node->get_parent());
-                    log() << "Analyzing move " << bd->get_nu_moves() << "\n";
+                    log("Analyzing move ", bd->get_nu_moves());
                     const Float max_count = Float(nu_simulations);
                     double max_time = 0;
                     // Set min_simulations to a reasonable value because

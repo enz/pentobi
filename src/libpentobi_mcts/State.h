@@ -22,6 +22,7 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
+using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
@@ -290,7 +291,7 @@ private:
 inline void State::finish_in_tree()
 {
     if (log_simulations)
-        log() << "Finish in-tree\n";
+        log("Finish in-tree");
     if (m_check_symmetric_draw)
         m_is_symmetry_broken =
             check_symmetry_broken(m_bd, m_shared_const.symmetric_points);
@@ -364,7 +365,7 @@ inline void State::play_in_tree(Move mv)
         ++m_nu_passes;
     }
     if (log_simulations)
-        log() << m_bd;
+        get_log() << m_bd;
 }
 
 inline void State::start_playout()

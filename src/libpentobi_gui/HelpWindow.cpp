@@ -36,7 +36,7 @@ void setIcon(QAction* action, const QString& name)
 HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
     : QMainWindow(parent)
 {
-    log() << "Loading " << mainPage.toLocal8Bit().constData() << '\n';
+    log("Loading ", mainPage.toLocal8Bit().constData());
     setWindowTitle(tr("Pentobi User Manual"));
     if (QIcon::hasThemeIcon("help-browser"))
         setWindowIcon(QIcon::fromTheme("help-browser"));

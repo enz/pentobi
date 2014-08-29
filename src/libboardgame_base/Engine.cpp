@@ -19,7 +19,7 @@ namespace libboardgame_base {
 
 using libboardgame_gtp::Failure;
 using libboardgame_util::clear_abort;
-using libboardgame_util::log;
+using libboardgame_util::get_log;
 using libboardgame_util::set_abort;
 using libboardgame_util::RandomGenerator;
 
@@ -81,7 +81,7 @@ void Engine::interrupt()
 void Engine::on_handle_cmd_begin()
 {
     clear_abort();
-    log() << flush;
+    get_log() << flush;
 }
 
 //-----------------------------------------------------------------------------
