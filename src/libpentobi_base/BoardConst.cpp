@@ -215,9 +215,11 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
     // http://forum.blokus.refreshed.be/viewtopic.php?f=2&t=2539#p9867
     // apart from that the smallest pieces are named '2' and '1' like in
     // Classic to avoid to many pieces with letter 'I' and that numbers are
-    // only used if there is more than one piece with the same letter. The
-    // default orientation is chosen such that it resembles the letter in the
-    // piece name. The (0,0) point must have point type 0 (downside triangle).
+    // only used if there is more than one piece with the same letter.
+    // For historical reasons, the Trigon transformations apply to point type
+    // 1 (downside triangle), so the (0,0) point of a piece must have point
+    // type 1, and the pieces are defined such that they resemble the letter of
+    // their name when viewed flipped upside-down.
     pieces.reserve(22);
     pieces.emplace_back("I6",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, -1),

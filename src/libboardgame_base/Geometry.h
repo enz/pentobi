@@ -57,7 +57,7 @@ public:
 
     /** Return the point type if the board has different types of points.
         For example, in the geometry used in Blokus Trigon, there are two
-        point types (0=downside triangle, 1=upside trinagle); in a regular
+        point types (0=upside triangle, 1=downside triangle); in a regular
         rectangle, there is only one point type. By convention, 0 is the
         type of the point at (0,0).
         @param x The x coordinate (may be negative and/or outside the board).

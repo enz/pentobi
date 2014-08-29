@@ -30,6 +30,7 @@ using namespace std;
     5   \ / \ / \ / \ / \ /
     6     \ / \ / \ / \ /
     </tt>
+    There are two point types: 0=upside triangle, 1=downside triangle.
     @tparam P An instantiation of libboardgame_base::Point */
 template<class P>
 class TrigonGeometry

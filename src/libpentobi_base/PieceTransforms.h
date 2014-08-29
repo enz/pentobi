@@ -36,6 +36,8 @@ public:
     virtual const Transform* get_rotated_clockwise(
                                             const Transform* transf) const = 0;
 
+    virtual const Transform* get_default() const;
+
     const vector<const Transform*>& get_all() const;
 
     /** Find the transform by its class.
@@ -44,8 +46,6 @@ public:
         contain the instance of the given class. */
     template<class T>
     const Transform* find() const;
-
-    const Transform* get_default() const;
 
 protected:
     /** All piece transformations.

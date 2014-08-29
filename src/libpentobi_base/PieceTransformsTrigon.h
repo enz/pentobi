@@ -40,6 +40,8 @@ public:
 
     const Transform* get_rotated_clockwise(const Transform* transf) const;
 
+    const Transform* get_default() const;
+
 private:
     TransfTrigonIdentity m_identity;
 
