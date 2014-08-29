@@ -23,7 +23,6 @@
 #include "libboardgame_util/Barrier.h"
 #include "libboardgame_util/BitMarker.h"
 #include "libboardgame_util/Exception.h"
-#include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/Statistics.h"
@@ -44,7 +43,6 @@ using libboardgame_util::to_string;
 using libboardgame_util::Barrier;
 using libboardgame_util::BitMarker;
 using libboardgame_util::Exception;
-using libboardgame_util::FmtSaver;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::StatisticsBase;
 using libboardgame_util::StatisticsDirtyLockFree;
@@ -194,9 +192,9 @@ public:
         caches from the last search (e.g. Last-Good-Reply heuristic). */
     virtual bool check_followup(vector<Move>& sequence);
 
-    virtual void write_info(ostream& out) const;
+    virtual string get_info() const;
 
-    virtual void write_info_ext(ostream& out) const;
+    virtual string get_info_ext() const;
 
     /** Return the expected simulations per second.
         If the simulations per second vary a lot, it should return a value
@@ -1180,41 +1178,42 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::write_info(ostream& out) const
+string Search<S, M, R>::get_info() const
 {
     auto& root = m_tree.get_root();
     if (m_threads.empty())
-        return;
+        return string();
     auto& thread_state = m_threads[0]->thread_state;
+    ostringstream s;
     if (thread_state.nu_simulations == 0)
     {
-        out << "No simulations in thread 0\n";
-        return;
+        s << "No simulations in thread 0\n";
+        return s.str();
     }
-    FmtSaver saver(out);
-    out << fixed << setprecision(2) << "Val: " << root.get_value()
-        << setprecision(0) << ", ValCnt: " << root.get_value_count()
-        << ", VstCnt: " << root.get_visit_count()
-        << ", Sim: " << m_nu_simulations;
+    s << fixed << setprecision(2) << "Val: " << root.get_value()
+      << setprecision(0) << ", ValCnt: " << root.get_value_count()
+      << ", VstCnt: " << root.get_visit_count()
+      << ", Sim: " << m_nu_simulations;
     auto child = select_child_final(root);
     if (child != nullptr && root.get_visit_count() > 0)
-        out << setprecision(1) << ", Chld: "
-            << (100 * child->get_visit_count() / root.get_visit_count())
-            << '%';
-    out << "\nNds: " << m_tree.get_nu_nodes()
-        << ", Tm: " << time_to_string(m_last_time)
-        << setprecision(0) << ", Sim/s: "
-        << (double(m_nu_simulations) / m_last_time)
-        << ", Len: " << thread_state.stat_len.to_string(true, 1, true)
-        << "\nDp: " << thread_state.stat_in_tree_len.to_string(true, 1, true)
-        << ", FS: " << thread_state.stat_fs_len.to_string(true, 1, true)
-        << "\n";
+        s << setprecision(1) << ", Chld: "
+          << (100 * child->get_visit_count() / root.get_visit_count())
+          << '%';
+    s << "\nNds: " << m_tree.get_nu_nodes()
+      << ", Tm: " << time_to_string(m_last_time)
+      << setprecision(0) << ", Sim/s: "
+      << (double(m_nu_simulations) / m_last_time)
+      << ", Len: " << thread_state.stat_len.to_string(true, 1, true)
+      << "\nDp: " << thread_state.stat_in_tree_len.to_string(true, 1, true)
+      << ", FS: " << thread_state.stat_fs_len.to_string(true, 1, true)
+      << "\n";
+    return s.str();
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::write_info_ext(ostream& out) const
+string Search<S, M, R>::get_info_ext() const
 {
-    LIBBOARDGAME_UNUSED(out);
+    return string();
 }
 
 template<class S, class M, class R>
@@ -1422,7 +1421,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
     }
 
     m_last_time = m_timer();
-    write_info(get_log());
+    log(get_info());
     bool result = select_move(mv);
     m_time_source = nullptr;
     return result;

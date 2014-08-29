@@ -10,7 +10,6 @@
 
 #include "State.h"
 
-#include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/BoardUtil.h"
 
@@ -19,7 +18,6 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_util::get_log;
 using libboardgame_util::fast_exp;
-using libboardgame_util::FmtSaver;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::PointState;
@@ -718,22 +716,21 @@ void State::update_symmetry_broken(Move mv)
     }
 }
 
-void State::write_info(ostream& out) const
+string State::get_info() const
 {
+    ostringstream s;
     if (m_nu_playout_moves > 0)
-    {
-        FmtSaver saver(out);
-        out << "LGR: " << fixed << setprecision(1)
-            << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
-                / static_cast<double>(m_nu_playout_moves))
-            << "%, ";
-    }
+        s << "LGR: " << fixed << setprecision(1)
+          << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
+              / static_cast<double>(m_nu_playout_moves))
+          << "%, ";
     if (m_bd.get_nu_players() == 2)
     {
-        out << "Sco: ";
-        m_stat_score[Color(0)].write(out, true, 1);
+        s << "Sco: ";
+        m_stat_score[Color(0)].write(s, true, 1);
     }
-    out << '\n';
+    s << '\n';
+    return s.str();
 }
 
 //-----------------------------------------------------------------------------

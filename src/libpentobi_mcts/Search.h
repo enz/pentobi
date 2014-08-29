@@ -66,7 +66,7 @@ public:
 
     bool check_followup(vector<Move>& sequence) override;
 
-    void write_info(ostream& out) const override;
+    string get_info() const override;
 
 
     /** @name Parameters */

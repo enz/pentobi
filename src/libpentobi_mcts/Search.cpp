@@ -323,29 +323,30 @@ void Search::set_default_param(Variant variant)
     }
 }
 
-void Search::write_info(ostream& out) const
+string Search::get_info() const
 {
     if (get_nu_simulations() == 0)
-        return;
+        return string();
     auto& root = get_tree().get_root();
     if (! root.has_children())
-        return;
-    ParentClass::write_info(out);
-    FmtSaver saver(out);
-    out << "Mov: " << root.get_nu_children() << ", ";
+        return string();
+    ostringstream s;
+    s << ParentClass::get_info()
+      << "Mov: " << root.get_nu_children() << ", ";
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
-        out << "All:";
+        s << "All:";
         for (unsigned i = 0; i < libpentobi_base::get_nu_colors(m_variant); ++i)
         {
             if (get_root_val()[i].get_count() == 0)
-                out << " -";
+                s << " -";
             else
-                out << " " << setprecision(2) << get_root_val()[i].get_mean();
+                s << " " << setprecision(2) << get_root_val()[i].get_mean();
         }
-        out << ", ";
+        s << ", ";
     }
-    get_state(0).write_info(out);
+    s << get_state(0).get_info();
+    return s.str();
 }
 
 //-----------------------------------------------------------------------------

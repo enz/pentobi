@@ -154,7 +154,7 @@ public:
 
     void dump(ostream& out) const;
 
-    void write_info(ostream& out) const;
+    string get_info() const;
 
 private:
     static const bool log_simulations = false;
