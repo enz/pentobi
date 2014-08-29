@@ -151,7 +151,7 @@ public:
     /** Do not update RAVE values for n'th move of the current simulation. */
     bool skip_rave(Move mv) const;
 
-    void dump(ostream& out) const;
+    string dump() const;
 
     string get_info() const;
 

@@ -163,10 +163,11 @@ bool State::check_move_without_gamma(const Grid<bool>& is_forbidden, Move mv)
     return true;
 }
 
-void State::dump(ostream& out) const
+string State::dump() const
 {
-    out << "pentobi_mcts::State:\n";
-    libpentobi_base::boardutil::dump(m_bd, out);
+    ostringstream s;
+    s << "pentobi_mcts::State:\n" << libpentobi_base::boardutil::dump(m_bd);
+    return s.str();
 }
 
 /** Get the game result for each color.

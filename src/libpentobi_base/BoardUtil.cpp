@@ -10,7 +10,7 @@
 
 #include "BoardUtil.h"
 
-#include <iostream>
+#include <sstream>
 #include "SgfUtil.h"
 
 namespace libpentobi_base {
@@ -22,10 +22,11 @@ using sgf_util::get_setup_id;
 
 //-----------------------------------------------------------------------------
 
-void dump(const Board& bd, ostream& out)
+string dump(const Board& bd)
 {
+    ostringstream s;
     auto variant = bd.get_variant();
-    Writer writer(out);
+    Writer writer(s);
     writer.set_one_prop_per_line(true);
     writer.set_one_prop_value_per_line(true);
     writer.begin_tree();
@@ -45,6 +46,7 @@ void dump(const Board& bd, ostream& out)
         writer.end_node();
     }
     writer.end_tree();
+    return s.str();
 }
 
 void get_current_position_as_setup(const Board& bd, Setup& setup)

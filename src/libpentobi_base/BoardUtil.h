@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_BASE_BOARDUTIL_H
 #define LIBPENTOBI_BASE_BOARDUTIL_H
 
-#include <iosfwd>
 #include "Board.h"
 #include "libboardgame_sgf/Writer.h"
 
@@ -18,7 +17,7 @@ using libboardgame_sgf::Writer;
 
 //-----------------------------------------------------------------------------
 
-void dump(const Board& bd, ostream& out);
+string dump(const Board& bd);
 
 /** Return the current position as setup.
     Merges all placements from Board::get_setup() and played moved into a

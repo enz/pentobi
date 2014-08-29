@@ -335,7 +335,7 @@ public:
 
     const Tree& get_tree() const;
 
-    void dump(ostream& out) const;
+    string dump() const;
 
     /** Number of simulations in the current search in all threads. */
     size_t get_nu_simulations() const;
@@ -733,7 +733,7 @@ Search<S, M, R>::AssertionHandler::~AssertionHandler()
 template<class S, class M, class R>
 void Search<S, M, R>::AssertionHandler::run()
 {
-    m_search.dump(get_log());
+    log(m_search.dump());
 }
 
 
@@ -908,13 +908,15 @@ void Search<S, M, R>::create_threads()
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::dump(ostream& out) const
+string Search<S, M, R>::dump() const
 {
+    ostringstream s;
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
-        out << "Thread state " << i << ":\n";
-        get_state(i).dump(out);
+        s << "Thread state " << i << ":\n"
+          << get_state(i).dump();
     }
+    return s.str();
 }
 
 template<class S, class M, class R>

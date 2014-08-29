@@ -229,8 +229,7 @@ void Engine::cmd_point_integers(Response& response)
     Grid<int> grid;
     for (GeometryIterator i(geo); i; ++i)
         grid[*i] = (*i).to_int();
-    response << '\n';
-    grid.write(response, geo);
+    response << '\n' << grid.to_string(geo);
 }
 
 void Engine::cmd_reg_genmove(const Arguments& args, Response& response)

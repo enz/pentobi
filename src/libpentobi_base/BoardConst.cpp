@@ -453,9 +453,7 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
             grid[*i] = '+';
         for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
             grid[*i] = '*';
-        log("Move ", mv.to_int(), ":");
-        grid.write(get_log(), m_geo);
-        get_log() << '\n';
+        log("Move ", mv.to_int(), ":\n", grid.to_string(m_geo));
     }
     for (Point p : info)
         for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)

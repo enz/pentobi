@@ -98,8 +98,7 @@ void Engine::cmd_moves_stat(const Arguments& args, Response& response)
         marker.clear_all_set_known(moves);
         moves.clear();
     }
-    response << '\n';
-    nu_moves_grid.write(response, geo);
+    response << '\n' << nu_moves_grid.to_string(geo);
 }
 
 void Engine::cmd_name(Response& response)

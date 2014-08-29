@@ -46,7 +46,7 @@ public:
     /** Fill points with a value. */
     void fill_all(const T& val);
 
-    ostream& write(ostream& out, const Geometry& geo) const;
+    string to_string(const Geometry& geo) const;
 
     /** @pre is_trivially_copyable<T>::value */
     void memcpy_from(const Grid& grid, const Geometry& geo);
@@ -89,7 +89,7 @@ inline void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
 }
 
 template<class P, typename T>
-ostream& Grid<P, T>::write(ostream& out, const Geometry& geo) const
+string Grid<P, T>::to_string(const Geometry& geo) const
 {
     ostringstream buffer;
     size_t max_len = 0;
@@ -99,6 +99,7 @@ ostream& Grid<P, T>::write(ostream& out, const Geometry& geo) const
         buffer << (*this)[*i];
         max_len = max(max_len, buffer.str().length());
     }
+    buffer.str("");
     auto width = geo.get_width();
     auto height = geo.get_height();
     string empty(max_len, ' ');
@@ -108,17 +109,17 @@ ostream& Grid<P, T>::write(ostream& out, const Geometry& geo) const
         {
             Point p(x, y, width);
             if (geo.is_onboard(p))
-                out << setw(int(max_len)) << (*this)[p];
+                buffer << setw(int(max_len)) << (*this)[p];
             else
-                out << empty;
+                buffer << empty;
             if (x < width - 1)
-                out << ' ';
+                buffer << ' ';
         }
-        out << '\n';
+        buffer << '\n';
         if (y == 0)
             break;
     }
-    return out;
+    return buffer.str();
 }
 
 //-----------------------------------------------------------------------------
