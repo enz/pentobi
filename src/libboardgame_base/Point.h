@@ -189,9 +189,6 @@ public:
     /** Check if point is adjacent to another point. */
     bool is_adj(Point p, unsigned width) const;
 
-    /** Check if point is an adjacent or diagonal neighbor of another point. */
-    bool is_adj_diag(Point p, unsigned width) const;
-
     /** Return point as an integer between 0 and Point::range */
     unsigned to_int() const;
 
@@ -444,16 +441,6 @@ inline bool Point<M, I, S>::is_adj(Point p, unsigned width) const
     int d = m_i - p.m_i;
     d = abs(d);
     return (d == width || d == 1);
-}
-
-template<unsigned M, typename I, class S>
-inline bool Point<M, I, S>::is_adj_diag(Point p, unsigned width) const
-{
-    int d = m_i - p.m_i;
-    d = abs(d);
-    return ((d >= static_cast<int>(width - 1)
-             && d <= static_cast<int>(width + 1))
-            || d == 1);
 }
 
 template<unsigned M, typename I, class S>
