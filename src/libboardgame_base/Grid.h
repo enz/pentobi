@@ -103,7 +103,7 @@ string Grid<P, T>::to_string(const Geometry& geo) const
     auto width = geo.get_width();
     auto height = geo.get_height();
     string empty(max_len, ' ');
-    for (unsigned y = height - 1; ; --y)
+    for (unsigned y = 0; y < height; ++y)
     {
         for (unsigned x = 0; x < width; ++x)
         {
@@ -116,8 +116,6 @@ string Grid<P, T>::to_string(const Geometry& geo) const
                 buffer << ' ';
         }
         buffer << '\n';
-        if (y == 0)
-            break;
     }
     return buffer.str();
 }
