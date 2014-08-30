@@ -555,6 +555,8 @@ void Board::write_color_info_line1(ostream& out, Color c) const
     if (get_to_play() == c)
         out << '*';
     out << m_color_name[c] << "(" << m_color_char[c] << "): " << get_points(c);
+    if (! has_moves(c))
+        out << '!';
     set_color(out, "\x1B[0m");
 }
 
