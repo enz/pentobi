@@ -169,7 +169,7 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
     response
         << "\n"
         << "ID:     " << mv.to_int() << "\n"
-        << "Piece:  " << piece.to_int()
+        << "Piece:  " << static_cast<int>(piece.to_int())
         << " (" << bd.get_piece_info(piece).get_name() << ")\n"
         << "Points:";
     for (Point p : info)
