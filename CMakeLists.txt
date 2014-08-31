@@ -9,6 +9,10 @@ if(POLICY CMP0020)
   # Remove once we require CMake 2.8.11
   cmake_policy(SET CMP0020 OLD)
 endif()
+if (POLICY CMP0043)
+  # Avoid warning with CMake 3.0.1
+  cmake_policy(SET CMP0043 NEW)
+endif()
 
 include(CheckIncludeFiles)
 include(GNUInstallDirs)
