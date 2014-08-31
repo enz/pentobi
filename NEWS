@@ -12,12 +12,19 @@ VERSION 8.UNKNOWN (master)
   game variant and restores it when the game variant is changed.
 
 
-VERSION 8.0.UNKNOWN (v8-fixes)
+VERSION 8.1.UNKNOWN (v8-fixes)
 ==============================
+
+*
+
+
+VERSION 8.1 (31 Aug 2014)
+=========================
 
 * Fixed link error on some platforms if Pentobi is compiled with
   PENTOBI_BUILD_TESTS (Debian bug #759852)
 * Slightly improved some icons and use icons from theme for more menu items
+
 
 Version 8.0 (02 Mar 2014)
 =========================
