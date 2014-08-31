@@ -266,7 +266,7 @@ void State::evaluate_playout(array<Float, 4>& result)
         stat.add(s);
         dev = stat.get_deviation();
         if (dev > 0)
-            res += 0.2f * sigmoid(2.f, (s - stat.get_mean()) / dev);
+            res += 0.3f * sigmoid(2.f, (s - stat.get_mean()) / dev);
         result[i] = res;
         if (log_simulations)
             log("res=", res);
