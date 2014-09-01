@@ -12,7 +12,7 @@
 
 #include "BoardUtil.h"
 #include "NodeUtil.h"
-#include "libboardgame_sgf/Util.h"
+#include "libboardgame_sgf/SgfUtil.h"
 
 namespace libpentobi_base {
 
@@ -28,7 +28,7 @@ namespace {
 typedef ArrayList<Piece,2 * Piece::max_pieces> AllPiecesLeftList;
 
 /** Helper function used in init_setup. */
-void handle_setup_property(const Node& node, const char* id, Color c,
+void handle_setup_property(const SgfNode& node, const char* id, Color c,
                            const Board& bd, Setup& setup,
                            ColorMap<AllPiecesLeftList>& pieces_left)
 {
@@ -54,7 +54,7 @@ void handle_setup_property(const Node& node, const char* id, Color c,
 }
 
 /** Helper function used in init_setup. */
-void handle_setup_empty(const Node& node, const Board& bd, Setup& setup,
+void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
                         ColorMap<AllPiecesLeftList>& pieces_left)
 {
     if (! node.has_property("AE"))
@@ -90,7 +90,7 @@ void handle_setup_empty(const Node& node, const Board& bd, Setup& setup,
     support setup properties in any node, we create a new setup position from
     the current position and the setup properties from the node and initialize
     the board with it. */
-void init_setup(Board& bd, const Node& node)
+void init_setup(Board& bd, const SgfNode& node)
 {
     Setup setup;
     get_current_position_as_setup(bd, setup);
@@ -126,12 +126,13 @@ void init_setup(Board& bd, const Node& node)
 
 //-----------------------------------------------------------------------------
 
-void BoardUpdater::update(Board& bd, const Tree& tree, const Node& node)
+void BoardUpdater::update(Board& bd, const PentobiTree& tree,
+                          const SgfNode& node)
 {
     LIBBOARDGAME_ASSERT(tree.contains(node));
     bd.init();
     get_path_from_root(node, m_path);
-    for (const Node* i : m_path)
+    for (const auto i : m_path)
     {
         if (libpentobi_base::node_util::has_setup(*i))
             init_setup(bd, *i);

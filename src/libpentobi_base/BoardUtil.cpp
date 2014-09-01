@@ -11,7 +11,7 @@
 #include "BoardUtil.h"
 
 #include <sstream>
-#include "SgfUtil.h"
+#include "PentobiSgfUtil.h"
 
 namespace libpentobi_base {
 namespace boardutil {

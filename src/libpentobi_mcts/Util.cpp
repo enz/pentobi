@@ -15,7 +15,7 @@
 #include "libboardgame_sys/Memory.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/BoardUtil.h"
-#include "libpentobi_base/SgfUtil.h"
+#include "libpentobi_base/PentobiSgfUtil.h"
 
 namespace libpentobi_mcts {
 namespace util {

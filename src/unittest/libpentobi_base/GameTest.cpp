@@ -10,8 +10,8 @@
 
 #include "libpentobi_base/Game.h"
 
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/Util.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
@@ -28,7 +28,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_game_current_defined_invalid_root)
     istringstream in("(;GM[Blokus]1[a99999])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     Game game(Variant::classic);
     try
     {

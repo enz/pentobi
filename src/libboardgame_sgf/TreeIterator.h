@@ -7,7 +7,7 @@
 #ifndef LIBBOARDGAME_SGF_TREE_ITERATOR_H
 #define LIBBOARDGAME_SGF_TREE_ITERATOR_H
 
-#include "Node.h"
+#include "SgfNode.h"
 
 namespace libboardgame_sgf {
 
@@ -16,21 +16,21 @@ namespace libboardgame_sgf {
 class TreeIterator
 {
 public:
-    TreeIterator(const Node& root);
+    TreeIterator(const SgfNode& root);
 
     operator bool() const;
 
-    const Node& operator*() const;
+    const SgfNode& operator*() const;
 
     void operator++();
 
 private:
-    const Node& m_root;
+    const SgfNode& m_root;
 
-    const Node* m_current;
+    const SgfNode* m_current;
 };
 
-inline TreeIterator::TreeIterator(const Node& root)
+inline TreeIterator::TreeIterator(const SgfNode& root)
   : m_root(root),
     m_current(&root)
 {
@@ -41,7 +41,7 @@ inline TreeIterator::operator bool() const
     return m_current != nullptr;
 }
 
-inline const Node& TreeIterator::operator*() const
+inline const SgfNode& TreeIterator::operator*() const
 {
     LIBBOARDGAME_ASSERT(*this);
     return *m_current;

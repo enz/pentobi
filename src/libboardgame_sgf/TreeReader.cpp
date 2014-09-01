@@ -25,7 +25,7 @@ TreeReader::~TreeReader()
 {
 }
 
-unique_ptr<Node> TreeReader::get_tree_transfer_ownership()
+unique_ptr<SgfNode> TreeReader::get_tree_transfer_ownership()
 {
     return move(m_root);
 }
@@ -50,7 +50,7 @@ void TreeReader::on_begin_node(bool is_root)
 {
     if (is_root)
     {
-        m_root.reset(new Node());
+        m_root.reset(new SgfNode());
         m_current = m_root.get();
     }
     else

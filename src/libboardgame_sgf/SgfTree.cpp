@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/Tree.cpp
+/** @file libboardgame_sgf/SgfTree.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,12 +8,12 @@
 #include <config.h>
 #endif
 
-#include "Tree.h"
+#include "SgfTree.h"
 
 #include <ctime>
 #include <cstdio>
 #include <cstdlib>
-#include "libboardgame_sgf/Util.h"
+#include "libboardgame_sgf/SgfUtil.h"
 
 namespace libboardgame_sgf {
 
@@ -21,27 +21,27 @@ using libboardgame_sgf::util::find_root;
 
 //-----------------------------------------------------------------------------
 
-Tree::Tree()
+SgfTree::SgfTree()
 {
     init();
 }
 
-Tree::~Tree()
+SgfTree::~SgfTree()
 {
 }
 
-bool Tree::contains(const Node& node) const
+bool SgfTree::contains(const SgfNode& node) const
 {
     return &find_root(node) == &get_root();
 }
 
-const Node& Tree::create_new_child(const Node& node)
+const SgfNode& SgfTree::create_new_child(const SgfNode& node)
 {
     m_modified = true;
     return non_const(node).create_new_child();
 }
 
-void Tree::delete_all_variations()
+void SgfTree::delete_all_variations()
 {
     auto node = &get_root();
     while (node != nullptr)
@@ -51,12 +51,12 @@ void Tree::delete_all_variations()
     }
 }
 
-string Tree::get_comment(const Node& node) const
+string SgfTree::get_comment(const SgfNode& node) const
 {
     return node.get_property("C", "");
 }
 
-string Tree::get_date_today()
+string SgfTree::get_date_today()
 {
     time_t t = time(nullptr);
     auto tmp = localtime(&t);
@@ -67,12 +67,12 @@ string Tree::get_date_today()
     return date;
 }
 
-unique_ptr<Node> Tree::get_tree_transfer_ownership()
+unique_ptr<SgfNode> SgfTree::get_tree_transfer_ownership()
 {
     return move(m_root);
 }
 
-bool Tree::has_variations() const
+bool SgfTree::has_variations() const
 {
     auto node = m_root.get();
     while (node != nullptr)
@@ -84,20 +84,20 @@ bool Tree::has_variations() const
     return false;
 }
 
-void Tree::init()
+void SgfTree::init()
 {
-    unique_ptr<Node> root(new Node());
+    unique_ptr<SgfNode> root(new SgfNode());
     m_root = move(root);
     m_modified = false;
 }
 
-void Tree::init(unique_ptr<Node>& root)
+void SgfTree::init(unique_ptr<SgfNode>& root)
 {
     m_root = move(root);
     m_modified = false;
 }
 
-void Tree::make_first_child(const Node& node)
+void SgfTree::make_first_child(const SgfNode& node)
 {
     auto parent = node.get_parent_or_null();
     if (parent != nullptr && &parent->get_first_child() != &node)
@@ -107,7 +107,7 @@ void Tree::make_first_child(const Node& node)
     }
 }
 
-void Tree::make_main_variation(const Node& node)
+void SgfTree::make_main_variation(const SgfNode& node)
 {
     auto current = &non_const(node);
     while (current->has_parent())
@@ -117,18 +117,18 @@ void Tree::make_main_variation(const Node& node)
     }
 }
 
-void Tree::make_root(const Node& node)
+void SgfTree::make_root(const SgfNode& node)
 {
     if (&node == &get_root())
         return;
     LIBBOARDGAME_ASSERT(contains(node));
     auto& parent = node.get_parent();
-    unique_ptr<Node> new_root = non_const(parent).remove_child(non_const(node));
+    unique_ptr<SgfNode> new_root = non_const(parent).remove_child(non_const(node));
     m_root = move(new_root);
     m_modified = true;
 }
 
-bool Tree::move_property_to_front(const Node& node, const string& id)
+bool SgfTree::move_property_to_front(const SgfNode& node, const string& id)
 {
     PropertyIterator first(node);
     if (first && (*first).id != id && node.has_property(id))
@@ -136,7 +136,7 @@ bool Tree::move_property_to_front(const Node& node, const string& id)
     return non_const(node).move_property_to_front(id);
 }
 
-void Tree::move_down(const Node& node)
+void SgfTree::move_down(const SgfNode& node)
 {
     if (node.get_sibling())
     {
@@ -145,7 +145,7 @@ void Tree::move_down(const Node& node)
     }
 }
 
-void Tree::move_up(const Node& node)
+void SgfTree::move_up(const SgfNode& node)
 {
     auto parent = node.get_parent_or_null();
     if (parent != nullptr && &parent->get_first_child() != &node)
@@ -155,7 +155,7 @@ void Tree::move_up(const Node& node)
     }
 }
 
-void Tree::remove_move_annotation(const Node& node)
+void SgfTree::remove_move_annotation(const SgfNode& node)
 {
     remove_property(node, "BM");
     remove_property(node, "DO");
@@ -163,7 +163,7 @@ void Tree::remove_move_annotation(const Node& node)
     remove_property(node, "TE");
 }
 
-bool Tree::remove_property(const Node& node, const string& id)
+bool SgfTree::remove_property(const SgfNode& node, const string& id)
 {
     bool prop_existed = non_const(node).remove_property(id);
     if (prop_existed)
@@ -171,7 +171,7 @@ bool Tree::remove_property(const Node& node, const string& id)
     return prop_existed;
 }
 
-void Tree::set_application(const string& name, const string& version)
+void SgfTree::set_application(const string& name, const string& version)
 {
     if (version.empty())
         set_property(get_root(), "AP", name);
@@ -179,20 +179,20 @@ void Tree::set_application(const string& name, const string& version)
         set_property(get_root(), "AP", name + ":" + version);
 }
 
-void Tree::set_property(const Node& node, const string& id, const char* value)
+void SgfTree::set_property(const SgfNode& node, const string& id, const char* value)
 {
     bool was_changed = non_const(node).set_property(id, value);
     if (was_changed)
         m_modified = true;
 }
 
-void Tree::set_bad_move(const Node& node, double value)
+void SgfTree::set_bad_move(const SgfNode& node, double value)
 {
     remove_move_annotation(node);
     set_property(node, "BM", value);
 }
 
-void Tree::set_comment(const Node& node, const string& s)
+void SgfTree::set_comment(const SgfNode& node, const string& s)
 {
     string trimmed = trim(s);
     if (trimmed.empty())
@@ -201,30 +201,30 @@ void Tree::set_comment(const Node& node, const string& s)
         set_property(node, "C", s);
 }
 
-void Tree::set_date_today()
+void SgfTree::set_date_today()
 {
     set_date(get_date_today());
 }
 
-void Tree::set_doubtful_move(const Node& node)
+void SgfTree::set_doubtful_move(const SgfNode& node)
 {
     remove_move_annotation(node);
     set_property(node, "DO", "");
 }
 
-void Tree::set_good_move(const Node& node, double value)
+void SgfTree::set_good_move(const SgfNode& node, double value)
 {
     remove_move_annotation(node);
     set_property(node, "TE", value);
 }
 
-void Tree::set_interesting_move(const Node& node)
+void SgfTree::set_interesting_move(const SgfNode& node)
 {
     remove_move_annotation(node);
     set_property(node, "IT", "");
 }
 
-const Node& Tree::truncate(const Node& node)
+const SgfNode& SgfTree::truncate(const SgfNode& node)
 {
     LIBBOARDGAME_ASSERT(node.has_parent());
     auto& parent = node.get_parent();

@@ -1,29 +1,30 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/SgfUtil.h
+/** @file libpentobi_base/PlayerBase.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_BASE_SGF_UTIL_H
-#define LIBPENTOBI_BASE_SGF_UTIL_H
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
-#include "Color.h"
-#include "Variant.h"
+#include "PlayerBase.h"
 
 namespace libpentobi_base {
-namespace sgf_util {
+
+using namespace std;
 
 //-----------------------------------------------------------------------------
 
-/** Get SGF move property ID for a color in a game variant. */
-const char* get_color_id(Variant variant, Color c);
+PlayerBase::~PlayerBase()
+{
+}
 
-/** Get SGF setup property ID for a color in a game variant. */
-const char* get_setup_id(Variant variant, Color c);
+bool PlayerBase::resign() const
+{
+    return false;
+}
 
 //-----------------------------------------------------------------------------
 
-} // namespace sgf_util
 } // namespace libpentobi_base
-
-#endif // LIBPENTOBI_BASE_SGF_UTIL_H

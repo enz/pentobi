@@ -11,7 +11,7 @@
 #include "Search.h"
 
 #include <cstddef>
-#include "BoardUtil.h"
+#include "StateUtil.h"
 #include "Util.h"
 #include "libboardgame_util/FmtSaver.h"
 
@@ -23,7 +23,6 @@ using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::Piece;
-using libpentobi_mcts::board_util::check_symmetry_broken;
 
 //-----------------------------------------------------------------------------
 
@@ -113,7 +112,7 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
 //-----------------------------------------------------------------------------
 
 Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
-    : ParentClass(nu_threads == 0 ? util::get_nu_threads() : nu_threads,
+    : SearchBase(nu_threads == 0 ? util::get_nu_threads() : nu_threads,
                   memory == 0 ? util::get_memory() : memory),
       m_auto_param(true),
       m_variant(initial_variant),
@@ -284,7 +283,7 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
     if (m_auto_param && variant != m_variant)
         set_default_param(variant);
     m_variant = variant;
-    bool result = ParentClass::search(mv, max_count, min_simulations, max_time,
+    bool result = SearchBase::search(mv, max_count, min_simulations, max_time,
                                       time_source);
     return result;
 }
@@ -331,7 +330,7 @@ string Search::get_info() const
     if (! root.has_children())
         return string();
     ostringstream s;
-    s << ParentClass::get_info()
+    s << SearchBase::get_info()
       << "Mov: " << root.get_nu_children() << ", ";
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {

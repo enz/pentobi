@@ -10,7 +10,7 @@
 #include "Board.h"
 #include "BoardUpdater.h"
 #include "NodeUtil.h"
-#include "Tree.h"
+#include "PentobiTree.h"
 
 namespace libpentobi_base {
 
@@ -21,7 +21,7 @@ class Game
 public:
     Game(Variant variant);
 
-    Game(unique_ptr<Node>& root);
+    Game(unique_ptr<SgfNode>& root);
 
     void init(Variant variant);
 
@@ -34,17 +34,17 @@ public:
         to this class.
         @throws InvalidTree, if the root node contains invalid
         properties */
-    void init(unique_ptr<Node>& root);
+    void init(unique_ptr<SgfNode>& root);
 
     const Board& get_board() const;
 
     Variant get_variant() const;
 
-    const Node& get_current() const;
+    const SgfNode& get_current() const;
 
-    const Node& get_root() const;
+    const SgfNode& get_root() const;
 
-    const Tree& get_tree() const;
+    const PentobiTree& get_tree() const;
 
     /** Get the current color to play.
         This takes not into account if the current color to play still has
@@ -67,7 +67,7 @@ public:
         external SGF tree and the tree contained invalid property values
         (syntactically or sematically, like moves on occupied points). If an
         exception is thrown, the current node is not changed. */
-    void goto_node(const Node& node);
+    void goto_node(const SgfNode& node);
 
     /** Undo the current move and go to parent node.
         @pre ! get_current().get_move().is_null()
@@ -186,15 +186,15 @@ public:
     void remove_player();
 
 private:
-    const Node* m_current;
+    const SgfNode* m_current;
 
     unique_ptr<Board> m_bd;
 
-    Tree m_tree;
+    PentobiTree m_tree;
 
     BoardUpdater m_updater;
 
-    void update(const Node& node);
+    void update(const SgfNode& node);
 };
 
 inline void Game::clear_modified()
@@ -232,7 +232,7 @@ inline Color Game::get_effective_to_play() const
     return m_bd->get_effective_to_play();
 }
 
-inline const Node& Game::get_current() const
+inline const SgfNode& Game::get_current() const
 {
     return *m_current;
 }
@@ -267,7 +267,7 @@ inline string Game::get_round() const
     return m_tree.get_round();
 }
 
-inline const Node& Game::get_root() const
+inline const SgfNode& Game::get_root() const
 {
     return m_tree.get_root();
 }
@@ -277,7 +277,7 @@ inline string Game::get_time() const
     return m_tree.get_time();
 }
 
-inline const Tree& Game::get_tree() const
+inline const PentobiTree& Game::get_tree() const
 {
     return m_tree;
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_util/WallTime.cpp
+/** @file libboardgame_util/WallTimeSource.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,7 +8,7 @@
 #include <config.h>
 #endif
 
-#include "WallTime.h"
+#include "WallTimeSource.h"
 
 namespace libboardgame_util {
 
@@ -16,12 +16,12 @@ using namespace std::chrono;
 
 //-----------------------------------------------------------------------------
 
-WallTime::WallTime()
+WallTimeSource::WallTimeSource()
 {
     m_start = system_clock::now();
 }
 
-double WallTime::operator()()
+double WallTimeSource::operator()()
 {
     // Logically, there is no need to return the time since m_start, we could
     // also use time_since_epoch(), but during debugging it is nicer to

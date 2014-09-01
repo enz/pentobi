@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/Util.cpp
+/** @file libboardgame_sgf/SgfUtil.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,13 +8,12 @@
 #include <config.h>
 #endif
 
-#include "Util.h"
+#include "SgfUtil.h"
 
 #include <algorithm>
 #include <iostream>
 #include <sstream>
 #include "InvalidPropertyValue.h"
-#include "Node.h"
 #include "TreeWriter.h"
 #include "libboardgame_util/StringUtil.h"
 
@@ -26,7 +25,7 @@ using libboardgame_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
-const Node& back_to_main_variation(const Node& node)
+const SgfNode& back_to_main_variation(const SgfNode& node)
 {
     if (is_main_variation(node))
         return node;
@@ -36,7 +35,7 @@ const Node& back_to_main_variation(const Node& node)
     return current->get_first_child();
 }
 
-const Node& beginning_of_branch(const Node& node)
+const SgfNode& beginning_of_branch(const SgfNode& node)
 {
     auto current = node.get_parent_or_null();
     if (current == nullptr)
@@ -51,7 +50,7 @@ const Node& beginning_of_branch(const Node& node)
     return *current;
 }
 
-const Node* find_next_comment(const Node& node)
+const SgfNode* find_next_comment(const SgfNode& node)
 {
     auto current = get_next_node(node);
     while (current != nullptr)
@@ -63,7 +62,7 @@ const Node* find_next_comment(const Node& node)
     return nullptr;
 }
 
-const Node& find_root(const Node& node)
+const SgfNode& find_root(const SgfNode& node)
 {
     auto current = &node;
     while (current->has_parent())
@@ -71,7 +70,7 @@ const Node& find_root(const Node& node)
     return *current;
 }
 
-const Node& get_last_node(const Node& node)
+const SgfNode& get_last_node(const SgfNode& node)
 {
     auto n = &node;
     while (n->has_children())
@@ -79,7 +78,7 @@ const Node& get_last_node(const Node& node)
     return *n;
 }
 
-unsigned get_depth(const Node& node)
+unsigned get_depth(const SgfNode& node)
 {
     unsigned depth = 0;
     auto current = &node;
@@ -91,7 +90,7 @@ unsigned get_depth(const Node& node)
     return depth;
 }
 
-const Node* get_next_earlier_variation(const Node& node)
+const SgfNode* get_next_earlier_variation(const SgfNode& node)
 {
     auto child = &node;
     auto current = node.get_parent_or_null();
@@ -105,7 +104,7 @@ const Node* get_next_earlier_variation(const Node& node)
     return child->get_sibling();
 }
 
-const Node* get_next_node(const Node& node)
+const SgfNode* get_next_node(const SgfNode& node)
 {
     auto child = node.get_first_child_or_null();
     if (child != nullptr)
@@ -113,7 +112,7 @@ const Node* get_next_node(const Node& node)
     return get_next_earlier_variation(node);
 }
 
-void get_path_from_root(const Node& node, vector<const Node*>& path)
+void get_path_from_root(const SgfNode& node, vector<const SgfNode*>& path)
 {
     auto current = &node;
     path.assign(1, current);
@@ -125,7 +124,7 @@ void get_path_from_root(const Node& node, vector<const Node*>& path)
     reverse(path.begin(), path.end());
 }
 
-string get_variation_string(const Node& node)
+string get_variation_string(const SgfNode& node)
 {
     string result;
     auto current = &node;
@@ -151,12 +150,12 @@ string get_variation_string(const Node& node)
     return result;
 }
 
-bool has_comment(const Node& node)
+bool has_comment(const SgfNode& node)
 {
     return node.has_property("C");
 }
 
-bool has_earlier_variation(const Node& node)
+bool has_earlier_variation(const SgfNode& node)
 {
     auto current = node.get_parent_or_null();
     if (current == nullptr)
@@ -172,7 +171,7 @@ bool has_earlier_variation(const Node& node)
     }
 }
 
-bool is_main_variation(const Node& node)
+bool is_main_variation(const SgfNode& node)
 {
     auto current = &node;
     while (current->has_parent())

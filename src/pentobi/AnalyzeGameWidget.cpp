@@ -15,7 +15,7 @@
 #include <QProgressDialog>
 #include <QtConcurrentRun>
 #include "Util.h"
-#include "libboardgame_sgf/Util.h"
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
@@ -26,7 +26,7 @@ using libboardgame_util::log;
 using libboardgame_util::set_abort;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
-using libpentobi_base::Tree;
+using libpentobi_base::PentobiTree;
 
 //-----------------------------------------------------------------------------
 
@@ -145,7 +145,8 @@ void AnalyzeGameWidget::resizeEvent(QResizeEvent*)
     initSize();
 }
 
-void AnalyzeGameWidget::setCurrentPosition(const Game& game, const Node& node)
+void AnalyzeGameWidget::setCurrentPosition(const Game& game,
+                                           const SgfNode& node)
 {
     update();
     m_currentPosition = -1;

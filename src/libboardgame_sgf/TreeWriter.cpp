@@ -14,7 +14,7 @@ namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
 
-TreeWriter::TreeWriter(ostream& out, const Node& root)
+TreeWriter::TreeWriter(ostream& out, const SgfNode& root)
     : m_root(root),
       m_writer(out)
 {
@@ -31,7 +31,7 @@ void TreeWriter::write()
     m_writer.end_tree();
 }
 
-void TreeWriter::write_node(const Node& node)
+void TreeWriter::write_node(const SgfNode& node)
 {
     m_writer.begin_node();
     for (PropertyIterator i(node); i; ++i)

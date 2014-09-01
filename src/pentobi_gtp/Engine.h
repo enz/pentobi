@@ -15,6 +15,7 @@ namespace pentobi_gtp {
 using namespace std;
 using libboardgame_gtp::Arguments;
 using libboardgame_gtp::Response;
+using libpentobi_base::PlayerBase;
 using libpentobi_base::Variant;
 using libpentobi_mcts::Player;
 using libpentobi_mcts::Search;
@@ -49,7 +50,7 @@ public:
     void use_cpu_time(bool enable);
 
 private:
-    unique_ptr<libpentobi_base::Player> m_player;
+    unique_ptr<PlayerBase> m_player;
 
     void create_player(Variant variant, const string& books_dir,
                        unsigned nu_threads, size_t memory);

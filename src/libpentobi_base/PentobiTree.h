@@ -1,65 +1,67 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/Tree.h
+/** @file libpentobi_base/PentobiTree.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_BASE_TREE_H
-#define LIBPENTOBI_BASE_TREE_H
+#ifndef LIBPENTOBI_BASE_PENTOBI_TREE_H
+#define LIBPENTOBI_BASE_PENTOBI_TREE_H
 
 #include "ColorMove.h"
 #include "BoardConst.h"
 #include "Variant.h"
 #include "Setup.h"
-#include "SgfUtil.h"
-#include "libboardgame_sgf/Tree.h"
+#include "PentobiSgfUtil.h"
+#include "libboardgame_sgf/SgfTree.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using libboardgame_sgf::Node;
+using libboardgame_sgf::SgfNode;
+using libboardgame_sgf::SgfTree;
 
 //-----------------------------------------------------------------------------
 
 /** Blokus SGF tree.
     See also doc/blksgf/Pentobi-SGF.html in the Pentobi distribution for
     a description of the properties used. */
-class Tree
-    : public libboardgame_sgf::Tree
+class PentobiTree
+    : public SgfTree
 {
 public:
-    Tree(Variant variant);
+    PentobiTree(Variant variant);
 
-    Tree(unique_ptr<Node>& root);
+    PentobiTree(unique_ptr<SgfNode>& root);
 
-    void init(unique_ptr<Node>& root);
+    void init(unique_ptr<SgfNode>& root);
 
     void init_variant(Variant variant);
 
-    void set_move(const Node& node, ColorMove mv);
+    void set_move(const SgfNode& node, ColorMove mv);
 
-    void set_move(const Node& node, Color c, Move mv);
+    void set_move(const SgfNode& node, Color c, Move mv);
 
     /** Return move or ColorMove::null() if node has no move property.
         @throws InvalidTree if the node has a move property with an invalid
         value. */
-    ColorMove get_move(const Node& node) const;
+    ColorMove get_move(const SgfNode& node) const;
 
     /** Like get_move() but returns ColorMove::null() on invalid property
         value. */
-    ColorMove get_move_ignore_invalid(const Node& node) const;
+    ColorMove get_move_ignore_invalid(const SgfNode& node) const;
 
     /** Same as ! get_move.is_null() */
-    bool has_move(const Node& node) const;
+    bool has_move(const SgfNode& node) const;
 
     /** Same as ! get_move_ignore_invalid.is_null() */
-    bool has_move_ignore_invalid(const Node& node) const;
+    bool has_move_ignore_invalid(const SgfNode& node) const;
 
-    const Node* find_child_with_move(const Node& node, ColorMove mv) const;
+    const SgfNode* find_child_with_move(const SgfNode& node,
+                                        ColorMove mv) const;
 
-    void set_result(const Node& node, int score);
+    void set_result(const SgfNode& node, int score);
 
-    const Node* get_node_before_move_number(unsigned move_number) const;
+    const SgfNode* get_node_before_move_number(unsigned move_number) const;
 
     Variant get_variant() const;
 
@@ -73,28 +75,28 @@ public:
         Invalid move properties are ignored. */
     bool has_main_variation_moves() const;
 
-    void keep_only_subtree(const Node& node);
+    void keep_only_subtree(const SgfNode& node);
 
     /** Add a piece as setup.
         @pre mv.is_regular()
         If the node already contains a move, a new child will be created.
         @pre The piece points must be empty on the board
         @return The node or the new child if one was created. */
-    const Node& add_setup(const Node& node, Color c, Move mv);
+    const SgfNode& add_setup(const SgfNode& node, Color c, Move mv);
 
     /** Remove a piece using setup properties.
         @pre mv.is_regular()
         If the node already contains a move, a new child will be created.
         @pre The move must exist on the board
         @return The node or the new child if one was created. */
-    const Node& remove_setup(const Node& node, Color c, Move mv);
+    const SgfNode& remove_setup(const SgfNode& node, Color c, Move mv);
 
     /** Set the color to play in a setup position (PL property). */
-    void set_player(const Node& node, Color c);
+    void set_player(const SgfNode& node, Color c);
 
     /** Remove the PL property.
         @see set_player() */
-    void remove_player(const Node& node);
+    void remove_player(const SgfNode& node);
 
 private:
     Variant m_variant;
@@ -103,52 +105,52 @@ private:
 
     const char* get_color(Color c) const;
 
-    Setup::PlacementList get_setup_property(const Node& node,
+    Setup::PlacementList get_setup_property(const SgfNode& node,
                                             const char* id) const;
 
     const char* get_setup_prop_id(Color c) const;
 
-    void set_setup(const Node& node, const Setup& setup);
+    void set_setup(const SgfNode& node, const Setup& setup);
 
     void init_board_const(Variant variant);
 
     void set_game_property();
 
-    void set_setup_property(const Node& node, const char* id,
+    void set_setup_property(const SgfNode& node, const char* id,
                             const Setup::PlacementList& placements);
 };
 
-inline const BoardConst& Tree::get_board_const() const
+inline const BoardConst& PentobiTree::get_board_const() const
 {
     return *m_board_const;
 }
 
-inline const char* Tree::get_color(Color c) const
+inline const char* PentobiTree::get_color(Color c) const
 {
     return sgf_util::get_color_id(m_variant, c);
 }
 
-inline const char* Tree::get_setup_prop_id(Color c) const
+inline const char* PentobiTree::get_setup_prop_id(Color c) const
 {
     return sgf_util::get_setup_id(m_variant, c);
 }
 
-inline Variant Tree::get_variant() const
+inline Variant PentobiTree::get_variant() const
 {
     return m_variant;
 }
 
-inline bool Tree::has_move(const Node& node) const
+inline bool PentobiTree::has_move(const SgfNode& node) const
 {
     return ! get_move(node).is_null();
 }
 
-inline bool Tree::has_move_ignore_invalid(const Node& node) const
+inline bool PentobiTree::has_move_ignore_invalid(const SgfNode& node) const
 {
     return ! get_move_ignore_invalid(node).is_null();
 }
 
-inline void Tree::set_move(const Node& node, ColorMove mv)
+inline void PentobiTree::set_move(const SgfNode& node, ColorMove mv)
 {
     set_move(node, mv.color, mv.move);
 }
@@ -157,4 +159,4 @@ inline void Tree::set_move(const Node& node, ColorMove mv)
 
 } // namespace libpentobi_base
 
-#endif // LIBPENTOBI_BASE_TREE_H
+#endif // LIBPENTOBI_BASE_PENTOBI_SGF_TREE_H

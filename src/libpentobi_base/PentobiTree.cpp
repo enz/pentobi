@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/Tree.cpp
+/** @file libpentobi_base/PentobiTree.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,12 +8,12 @@
 #include <config.h>
 #endif
 
-#include "Tree.h"
+#include "PentobiTree.h"
 
 #include "BoardUpdater.h"
 #include "BoardUtil.h"
 #include "NodeUtil.h"
-#include "libboardgame_sgf/Util.h"
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
@@ -26,19 +26,19 @@ using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------
 
-Tree::Tree(Variant variant)
+PentobiTree::PentobiTree(Variant variant)
 {
     init_variant(variant);
 }
 
-Tree::Tree(unique_ptr<Node>& root)
+PentobiTree::PentobiTree(unique_ptr<SgfNode>& root)
 {
     init(root);
 }
 
-const Node& Tree::add_setup(const Node& node, Color c, Move mv)
+const SgfNode& PentobiTree::add_setup(const SgfNode& node, Color c, Move mv)
 {
-    const Node* result;
+    const SgfNode* result;
     if (has_move(node))
         result = &create_new_child(node);
     else
@@ -53,7 +53,8 @@ const Node& Tree::add_setup(const Node& node, Color c, Move mv)
     return *result;
 }
 
-const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
+const SgfNode* PentobiTree::find_child_with_move(const SgfNode& node,
+                                          ColorMove mv) const
 {
     for (ChildIterator i(node); i; ++i)
         if (get_move(*i) == mv)
@@ -61,7 +62,7 @@ const Node* Tree::find_child_with_move(const Node& node, ColorMove mv) const
     return nullptr;
 }
 
-ColorMove Tree::get_move(const Node& node) const
+ColorMove PentobiTree::get_move(const SgfNode& node) const
 {
     Color c;
     MovePoints points;
@@ -75,7 +76,7 @@ ColorMove Tree::get_move(const Node& node) const
     return ColorMove(c, mv);
 }
 
-ColorMove Tree::get_move_ignore_invalid(const Node& node) const
+ColorMove PentobiTree::get_move_ignore_invalid(const SgfNode& node) const
 {
     try
     {
@@ -87,7 +88,8 @@ ColorMove Tree::get_move_ignore_invalid(const Node& node) const
     }
 }
 
-const Node* Tree::get_node_before_move_number(unsigned move_number) const
+const SgfNode* PentobiTree::get_node_before_move_number(
+        unsigned move_number) const
 {
     auto node = &get_root();
     unsigned n = 0;
@@ -101,7 +103,7 @@ const Node* Tree::get_node_before_move_number(unsigned move_number) const
     return nullptr;
 }
 
-string Tree::get_player_name(Color c) const
+string PentobiTree::get_player_name(Color c) const
 {
     auto& root = get_root();
     switch (m_variant)
@@ -137,8 +139,8 @@ string Tree::get_player_name(Color c) const
     return "";
 }
 
-Setup::PlacementList Tree::get_setup_property(const Node& node,
-                                              const char* id) const
+Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
+                                                        const char* id) const
 {
     vector<string> values = node.get_multi_property(id);
     Setup::PlacementList result;
@@ -147,7 +149,7 @@ Setup::PlacementList Tree::get_setup_property(const Node& node,
     return result;
 }
 
-bool Tree::has_main_variation_moves() const
+bool PentobiTree::has_main_variation_moves() const
 {
     auto node = &get_root();
     while (node != nullptr)
@@ -159,32 +161,32 @@ bool Tree::has_main_variation_moves() const
     return false;
 }
 
-void Tree::init(unique_ptr<Node>& root)
+void PentobiTree::init(unique_ptr<SgfNode>& root)
 {
     string game = root->get_property("GM");
     Variant variant;
     if (! parse_variant(game, variant))
         throw InvalidPropertyValue("GM", game);
-    libboardgame_sgf::Tree::init(root);
+    SgfTree::init(root);
     m_variant = variant;
     init_board_const(variant);
 }
 
-void Tree::init_board_const(Variant variant)
+void PentobiTree::init_board_const(Variant variant)
 {
     m_board_const = &BoardConst::get(variant);
 }
 
-void Tree::init_variant(Variant variant)
+void PentobiTree::init_variant(Variant variant)
 {
-    libboardgame_sgf::Tree::init();
+    SgfTree::init();
     m_variant = variant;
     set_game_property();
     init_board_const(variant);
     clear_modified();
 }
 
-void Tree::keep_only_subtree(const Node& node)
+void PentobiTree::keep_only_subtree(const SgfNode& node)
 {
     LIBBOARDGAME_ASSERT(contains(node));
     if (&node == &get_root())
@@ -229,14 +231,15 @@ void Tree::keep_only_subtree(const Node& node)
     set_game_property();
 }
 
-void Tree::remove_player(const Node& node)
+void PentobiTree::remove_player(const SgfNode& node)
 {
     remove_property(node, "PL");
 }
 
-const Node& Tree::remove_setup(const Node& node, Color c, Move mv)
+const SgfNode& PentobiTree::remove_setup(const SgfNode& node, Color c,
+                                            Move mv)
 {
-    const Node* result;
+    const SgfNode* result;
     if (has_move(node))
         result = &create_new_child(node);
     else
@@ -254,14 +257,14 @@ const Node& Tree::remove_setup(const Node& node, Color c, Move mv)
     return *result;
 }
 
-void Tree::set_game_property()
+void PentobiTree::set_game_property()
 {
     auto& root = get_root();
     set_property(root, "GM", to_string(m_variant));
     move_property_to_front(root, "GM");
 }
 
-void Tree::set_move(const Node& node, Color c, Move mv)
+void PentobiTree::set_move(const SgfNode& node, Color c, Move mv)
 {
     auto id = get_color(c);
     if (! mv.is_pass())
@@ -270,12 +273,12 @@ void Tree::set_move(const Node& node, Color c, Move mv)
         set_property(node, id, "");
 }
 
-void Tree::set_player(const Node& node, Color c)
+void PentobiTree::set_player(const SgfNode& node, Color c)
 {
     set_property(node, "PL", get_color(c));
 }
 
-void Tree::set_player_name(Color c, const string& name)
+void PentobiTree::set_player_name(Color c, const string& name)
 {
     auto& root = get_root();
     switch (m_variant)
@@ -316,7 +319,7 @@ void Tree::set_player_name(Color c, const string& name)
     LIBBOARDGAME_ASSERT(false);
 }
 
-void Tree::set_result(const Node& node, int score)
+void PentobiTree::set_result(const SgfNode& node, int score)
 {
     if (score > 0)
     {
@@ -334,7 +337,7 @@ void Tree::set_result(const Node& node, int score)
         set_property(node, "RE", "0");
 }
 
-void Tree::set_setup(const Node& node, const Setup& setup)
+void PentobiTree::set_setup(const SgfNode& node, const Setup& setup)
 {
     remove_property(node, "B");
     remove_property(node, "W");
@@ -374,7 +377,7 @@ void Tree::set_setup(const Node& node, const Setup& setup)
     set_player(node, setup.to_play);
 }
 
-void Tree::set_setup_property(const Node& node, const char* id,
+void PentobiTree::set_setup_property(const SgfNode& node, const char* id,
                               const Setup::PlacementList& placements)
 {
     if (placements.empty())

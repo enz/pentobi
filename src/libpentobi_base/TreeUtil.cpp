@@ -17,7 +17,7 @@ namespace tree_util {
 
 //-----------------------------------------------------------------------------
 
-unsigned get_move_number(const Tree& tree, const Node& node)
+unsigned get_move_number(const PentobiTree& tree, const SgfNode& node)
 {
     unsigned move_number = 0;
     auto current = &node;
@@ -32,7 +32,7 @@ unsigned get_move_number(const Tree& tree, const Node& node)
     return move_number;
 }
 
-unsigned get_moves_left(const Tree& tree, const Node& node)
+unsigned get_moves_left(const PentobiTree& tree, const SgfNode& node)
 {
     unsigned moves_left = 0;
     auto current = node.get_first_child_or_null();

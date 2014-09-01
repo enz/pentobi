@@ -8,7 +8,7 @@
 #include <config.h>
 #endif
 
-#include "SgfUtil.h"
+#include "PentobiSgfUtil.h"
 
 #include "libboardgame_util/Assert.h"
 

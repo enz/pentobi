@@ -10,19 +10,21 @@
 
 #include "libpentobi_mcts/Search.h"
 
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/Util.h"
 #include "libboardgame_test/Test.h"
-#include "libboardgame_util/CpuTime.h"
+#include "libboardgame_util/CpuTimeSource.h"
 #include "libpentobi_base/BoardUpdater.h"
-#include "libpentobi_base/Tree.h"
+#include "libpentobi_base/PentobiTree.h"
 
 using namespace std;
 using namespace libpentobi_mcts;
+using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::get_last_node;
-using libboardgame_util::CpuTime;
+using libboardgame_util::CpuTimeSource;
 using libpentobi_base::BoardUpdater;
+using libpentobi_base::PentobiTree;
 
 //-----------------------------------------------------------------------------
 
@@ -59,9 +61,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
            );
     TreeReader reader;
     reader.read(in);
-    unique_ptr<libboardgame_sgf::Node> root =
-        reader.get_tree_transfer_ownership();
-    libpentobi_base::Tree tree(root);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater;
     updater.update(*bd, tree, get_last_node(tree.get_root()));
@@ -72,7 +73,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     Float max_count = 1;
     Float min_simulations = 1;
     double max_time = 0;
-    CpuTime time_source;
+    CpuTimeSource time_source;
     Move mv;
     bool res = search->search(mv, *bd, Color(1), max_count, min_simulations,
                               max_time, time_source);

@@ -36,7 +36,7 @@ class RatingDialog;
 class ScoreDisplay;
 
 using namespace std;
-using libboardgame_sgf::Node;
+using libboardgame_sgf::SgfNode;
 using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
 using libboardgame_util::Exception;
@@ -659,7 +659,7 @@ private:
 
     QString getVersion() const;
 
-    void gotoNode(const Node& node);
+    void gotoNode(const SgfNode& node);
 
     void initGame();
 

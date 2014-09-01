@@ -9,8 +9,8 @@
 #include <iostream>
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/TrigonGeometry.h"
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_gui/BoardPainter.h"
@@ -18,7 +18,7 @@
 using namespace std;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::TrigonGeometry;
-using libboardgame_sgf::Node;
+using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::split;
 using libboardgame_util::trim;
@@ -32,7 +32,7 @@ using libpentobi_base::PointState;
 namespace {
 
 /** Helper function for getFinalPosition() */
-void handleSetup(const char* id, Color c, const Node& node,
+void handleSetup(const char* id, Color c, const SgfNode& node,
                  const Geometry& geo, Grid<PointState>& pointState)
 {
     vector<string> values = node.get_multi_property(id);
@@ -60,7 +60,7 @@ void handleSetup(const char* id, Color c, const Node& node,
 }
 
 /** Helper function for getFinalPosition() */
-void handleSetupEmpty(const Node& node, const Geometry& geo,
+void handleSetupEmpty(const SgfNode& node, const Geometry& geo,
                       Grid<PointState>& pointState)
 {
     auto width = geo.get_width();
@@ -91,7 +91,7 @@ void handleSetupEmpty(const Node& node, const Geometry& geo,
     Avoids constructing an instance of a Tree or Game, which would do a costly
     initialization of BoardConst and slow down the thumbnailer
     unnecessarily. */
-bool getFinalPosition(const Node& root, Variant& variant, const Geometry*& geo,
+bool getFinalPosition(const SgfNode& root, Variant& variant, const Geometry*& geo,
                       Grid<PointState>& pointState)
 {
     if (! parse_variant(root.get_property("GM", ""), variant))

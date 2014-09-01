@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_util/CpuTime.cpp
+/** @file libboardgame_util/CpuTimeSource.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,7 +8,7 @@
 #include <config.h>
 #endif
 
-#include "CpuTime.h"
+#include "CpuTimeSource.h"
 
 #include "libboardgame_sys/CpuTime.h"
 
@@ -16,7 +16,7 @@ namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-double CpuTime::operator()()
+double CpuTimeSource::operator()()
 {
     return libboardgame_sys::cpu_time();
 }

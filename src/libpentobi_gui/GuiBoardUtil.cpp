@@ -16,8 +16,8 @@
 namespace gui_board_util {
 
 using libpentobi_base::ColorMove;
-using libpentobi_base::Tree;
-using libboardgame_sgf::Node;
+using libpentobi_base::PentobiTree;
+using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_util::get_letter_coord;
 using libboardgame_util::log;
@@ -27,7 +27,8 @@ using libboardgame_util::Exception;
 
 namespace {
 
-void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
+void appendMoveAnnotation(QString& label, const Game& game,
+                          const SgfNode& node)
 {
     auto& tree = game.get_tree();
     double goodMove = tree.get_good_move(node);
@@ -70,7 +71,8 @@ void appendMoveAnnotation(QString& label, const Game& game, const Node& node)
     index. (Note that this is a different convention from variation strings
     which does not use move number and child move index, but node depth and
     child node index) */
-bool getVariationIndex(const Tree& tree, const Node& node, unsigned& moveIndex)
+bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
+                       unsigned& moveIndex)
 {
     auto parent = node.get_parent_or_null();
     if (parent == nullptr || parent->has_single_child())
@@ -90,7 +92,7 @@ bool getVariationIndex(const Tree& tree, const Node& node, unsigned& moveIndex)
     return true;
 }
 
-void setMoveLabel(GuiBoard& guiBoard, const Game& game, const Node& node,
+void setMoveLabel(GuiBoard& guiBoard, const Game& game, const SgfNode& node,
                   unsigned moveNumber, ColorMove mv, bool markVariations)
 {
     if (! mv.is_regular())

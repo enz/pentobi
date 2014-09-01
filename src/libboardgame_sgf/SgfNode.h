@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/Node.h
+/** @file libboardgame_sgf/SgfNode.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_NODE_H
-#define LIBBOARDGAME_SGF_NODE_H
+#ifndef LIBBOARDGAME_SGF_SGF_NODE_H
+#define LIBBOARDGAME_SGF_SGF_NODE_H
 
 #include <memory>
 #include <string>
@@ -35,15 +35,15 @@ struct Property
 
 //-----------------------------------------------------------------------------
 
-class Node
+class SgfNode
 {
 public:
-    Node();
+    SgfNode();
 
-    ~Node();
+    ~SgfNode();
 
     /** Append a new child. */
-    void append(unique_ptr<Node> node);
+    void append(unique_ptr<SgfNode> node);
 
     bool has_property(const string& id) const;
 
@@ -85,19 +85,19 @@ public:
 
     const Property* get_first_property() const;
 
-    Node* get_sibling();
+    SgfNode* get_sibling();
 
-    Node& get_first_child();
+    SgfNode& get_first_child();
 
-    const Node& get_first_child() const;
+    const SgfNode& get_first_child() const;
 
-    Node* get_first_child_or_null();
+    SgfNode* get_first_child_or_null();
 
-    const Node* get_first_child_or_null() const;
+    const SgfNode* get_first_child_or_null() const;
 
-    const Node* get_sibling() const;
+    const SgfNode* get_sibling() const;
 
-    const Node* get_previous_sibling() const;
+    const SgfNode* get_previous_sibling() const;
 
     bool has_children() const;
 
@@ -106,35 +106,35 @@ public:
     unsigned get_nu_children() const;
 
     /** @pre i < get_nu_children() */
-    const Node& get_child(unsigned i) const;
+    const SgfNode& get_child(unsigned i) const;
 
-    unsigned get_child_index(const Node& child) const;
+    unsigned get_child_index(const SgfNode& child) const;
 
     /** Get single child.
         @pre has_single_child() */
-    const Node& get_child() const;
+    const SgfNode& get_child() const;
 
     bool has_parent() const;
 
     /** Get parent node.
         @pre has_parent() */
-    const Node& get_parent() const;
+    const SgfNode& get_parent() const;
 
     /** Get parent node or null if node has no parent. */
-    const Node* get_parent_or_null() const;
+    const SgfNode* get_parent_or_null() const;
 
-    Node& get_parent();
+    SgfNode& get_parent();
 
-    Node& create_new_child();
+    SgfNode& create_new_child();
 
     /** Remove a child.
         @return The removed child node. */
-    unique_ptr<Node> remove_child(Node& child);
+    unique_ptr<SgfNode> remove_child(SgfNode& child);
 
     /** Remove all children.
         @return A pointer to the first child (which also owns its siblings),
         which can be used to append the children to a different node. */
-    unique_ptr<Node> remove_children();
+    unique_ptr<SgfNode> remove_children();
 
     /** @pre has_parent() */
     void make_first_child();
@@ -153,96 +153,96 @@ public:
     void delete_variations();
 
 private:
-    Node* m_parent;
+    SgfNode* m_parent;
 
-    unique_ptr<Node> m_first_child;
+    unique_ptr<SgfNode> m_first_child;
 
-    unique_ptr<Node> m_sibling;
+    unique_ptr<SgfNode> m_sibling;
 
     unique_ptr<Property> m_first_property;
 
     Property* find_property(const string& id) const;
 
-    Node* get_last_child() const;
+    SgfNode* get_last_child() const;
 };
 
-inline const Node& Node::get_child() const
+inline const SgfNode& SgfNode::get_child() const
 {
     LIBBOARDGAME_ASSERT(has_single_child());
     return *m_first_child;
 }
 
-inline const Node& Node::get_parent() const
+inline const SgfNode& SgfNode::get_parent() const
 {
     LIBBOARDGAME_ASSERT(has_parent());
     return *m_parent;
 }
 
-inline Node& Node::get_parent()
+inline SgfNode& SgfNode::get_parent()
 {
     LIBBOARDGAME_ASSERT(has_parent());
     return *m_parent;
 }
 
-inline const Node* Node::get_parent_or_null() const
+inline const SgfNode* SgfNode::get_parent_or_null() const
 {
     return m_parent;
 }
 
-inline Node& Node::get_first_child()
+inline SgfNode& SgfNode::get_first_child()
 {
     LIBBOARDGAME_ASSERT(has_children());
     return *m_first_child.get();
 }
 
-inline const Node& Node::get_first_child() const
+inline const SgfNode& SgfNode::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
     return *(m_first_child.get());
 }
 
-inline Node* Node::get_first_child_or_null()
+inline SgfNode* SgfNode::get_first_child_or_null()
 {
     return m_first_child.get();
 }
 
-inline const Node* Node::get_first_child_or_null() const
+inline const SgfNode* SgfNode::get_first_child_or_null() const
 {
     return m_first_child.get();
 }
 
-inline const Property* Node::get_first_property() const
+inline const Property* SgfNode::get_first_property() const
 {
     return m_first_property.get();
 }
 
-inline Node* Node::get_sibling()
+inline SgfNode* SgfNode::get_sibling()
 {
     return m_sibling.get();
 }
 
-inline const Node* Node::get_sibling() const
+inline const SgfNode* SgfNode::get_sibling() const
 {
     return m_sibling.get();
 }
 
-inline bool Node::has_children() const
+inline bool SgfNode::has_children() const
 {
     return static_cast<bool>(m_first_child);
 }
 
-inline bool Node::has_parent() const
+inline bool SgfNode::has_parent() const
 {
     return m_parent != nullptr;
 }
 
-inline bool Node::has_single_child() const
+inline bool SgfNode::has_single_child() const
 {
     return (m_first_child && ! m_first_child->m_sibling);
 }
 
 template<typename T>
-T Node::parse_property(const string& id) const
+T SgfNode::parse_property(const string& id) const
 {
     string value = get_property(id);
     T result;
@@ -252,14 +252,14 @@ T Node::parse_property(const string& id) const
 }
 
 template<typename T>
-T Node::parse_property(const string& id, const T& default_value) const
+T SgfNode::parse_property(const string& id, const T& default_value) const
 {
     if (! has_property(id))
         return default_value;
     return parse_property<T>(id);
 }
 
-inline unique_ptr<Node> Node::remove_children()
+inline unique_ptr<SgfNode> SgfNode::remove_children()
 {
     if (m_first_child)
         m_first_child->m_parent = nullptr;
@@ -267,19 +267,19 @@ inline unique_ptr<Node> Node::remove_children()
 }
 
 template<typename T>
-bool Node::set_property(const string& id, const T& value)
+bool SgfNode::set_property(const string& id, const T& value)
 {
     vector<T> values(1, value);
     return set_property(id, values);
 }
 
-inline bool Node::set_property(const string& id, const char* value)
+inline bool SgfNode::set_property(const string& id, const char* value)
 {
     return set_property<string>(id, value);
 }
 
 template<typename T>
-bool Node::set_property(const string& id, const vector<T>& values)
+bool SgfNode::set_property(const string& id, const vector<T>& values)
 {
     vector<string> values_to_string;
     for (const T& v : values)
@@ -312,7 +312,7 @@ bool Node::set_property(const string& id, const vector<T>& values)
 class PropertyIterator
 {
 public:
-    PropertyIterator(const Node& node);
+    PropertyIterator(const SgfNode& node);
 
     operator bool() const;
 
@@ -326,7 +326,7 @@ private:
     const Property* m_current;
 };
 
-inline PropertyIterator::PropertyIterator(const Node& node)
+inline PropertyIterator::PropertyIterator(const SgfNode& node)
 {
     m_current = node.get_first_property();
 }
@@ -359,7 +359,7 @@ inline const Property* PropertyIterator::operator->() const
 class ChildIterator
 {
 public:
-    ChildIterator(const Node& node);
+    ChildIterator(const SgfNode& node);
 
     operator bool() const;
 
@@ -367,15 +367,15 @@ public:
 
     void operator--();
 
-    const Node& operator*() const;
+    const SgfNode& operator*() const;
 
-    const Node* operator->() const;
+    const SgfNode* operator->() const;
 
 private:
-    const Node* m_current;
+    const SgfNode* m_current;
 };
 
-inline ChildIterator::ChildIterator(const Node& node)
+inline ChildIterator::ChildIterator(const SgfNode& node)
 {
     m_current = node.get_first_child_or_null();
 }
@@ -398,13 +398,13 @@ inline void ChildIterator::operator--()
     LIBBOARDGAME_ASSERT(*this);
 }
 
-inline const Node& ChildIterator::operator*() const
+inline const SgfNode& ChildIterator::operator*() const
 {
     LIBBOARDGAME_ASSERT(*this);
     return *m_current;
 }
 
-inline const Node* ChildIterator::operator->() const
+inline const SgfNode* ChildIterator::operator->() const
 {
     LIBBOARDGAME_ASSERT(*this);
     return m_current;
@@ -414,4 +414,4 @@ inline const Node* ChildIterator::operator->() const
 
 } // namespace libboardgame_sgf
 
-#endif // LIBBOARDGAME_SGF_NODE_H
+#endif // LIBBOARDGAME_SGF_SGF_NODE_H

@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_mcts/Search.h
+/** @file libboardgame_mcts/SearchBase.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_MCTS_SEARCH_H
-#define LIBBOARDGAME_MCTS_SEARCH_H
+#ifndef LIBBOARDGAME_MCTS_SEARCH_BASE_H
+#define LIBBOARDGAME_MCTS_SEARCH_BASE_H
 
 #include <algorithm>
 #include <array>
@@ -119,7 +119,7 @@ struct SearchParamConstDefault
     providing M::to_int() and M::range.
     @tparam R Optional compile-time parameters, see SearchParamConstDefault */
 template<class S, class M, class R = SearchParamConstDefault>
-class Search
+class SearchBase
 {
 public:
     typedef S State;
@@ -146,9 +146,9 @@ public:
         @param nu_threads
         @param memory The memory to be used for (all) the search trees. If
         zero, a default value will be used. */
-    Search(unsigned nu_threads, size_t memory);
+    SearchBase(unsigned nu_threads, size_t memory);
 
-    virtual ~Search();
+    virtual ~SearchBase();
 
 
     /** @name Pure virtual functions */
@@ -398,14 +398,14 @@ private:
         : public libboardgame_util::AssertionHandler
     {
     public:
-        AssertionHandler(const Search& search);
+        AssertionHandler(const SearchBase& search);
 
         ~AssertionHandler();
 
         void run() override;
 
     private:
-        const Search& m_search;
+        const SearchBase& m_search;
     };
 
     /** Thread-specific search state. */
@@ -637,12 +637,12 @@ private:
 
 
 template<class S, class M, class R>
-Search<S, M, R>::ThreadState::~ThreadState()
+SearchBase<S, M, R>::ThreadState::~ThreadState()
 {
 }
 
 template<class S, class M, class R>
-Search<S, M, R>::Thread::Thread(SearchFunc& search_func)
+SearchBase<S, M, R>::Thread::Thread(SearchFunc& search_func)
     : m_search_func(search_func),
       m_quit(false),
       m_start_search_flag(false),
@@ -653,7 +653,7 @@ Search<S, M, R>::Thread::Thread(SearchFunc& search_func)
 }
 
 template<class S, class M, class R>
-Search<S, M, R>::Thread::~Thread()
+SearchBase<S, M, R>::Thread::~Thread()
 {
     if (! m_thread.joinable())
         return;
@@ -667,14 +667,14 @@ Search<S, M, R>::Thread::~Thread()
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::Thread::run()
+void SearchBase<S, M, R>::Thread::run()
 {
     m_thread = thread(bind(&Thread::thread_main, this));
     m_thread_ready.wait();
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::Thread::start_search()
+void SearchBase<S, M, R>::Thread::start_search()
 {
     LIBBOARDGAME_ASSERT(m_thread.joinable());
     m_search_finished_lock.lock();
@@ -686,7 +686,7 @@ void Search<S, M, R>::Thread::start_search()
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::Thread::thread_main()
+void SearchBase<S, M, R>::Thread::thread_main()
 {
     //log() << "Start thread " << thread_state.thread_id << '\n';
     unique_lock<mutex> lock(m_start_search_mutex);
@@ -709,7 +709,7 @@ void Search<S, M, R>::Thread::thread_main()
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::Thread::wait_search_finished()
+void SearchBase<S, M, R>::Thread::wait_search_finished()
 {
     LIBBOARDGAME_ASSERT(m_thread.joinable());
     while (! m_search_finished_flag)
@@ -720,25 +720,25 @@ void Search<S, M, R>::Thread::wait_search_finished()
 
 
 template<class S, class M, class R>
-Search<S, M, R>::AssertionHandler::AssertionHandler(const Search& search)
+SearchBase<S, M, R>::AssertionHandler::AssertionHandler(const SearchBase& search)
     : m_search(search)
 {
 }
 
 template<class S, class M, class R>
-Search<S, M, R>::AssertionHandler::~AssertionHandler()
+SearchBase<S, M, R>::AssertionHandler::~AssertionHandler()
 {
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::AssertionHandler::run()
+void SearchBase<S, M, R>::AssertionHandler::run()
 {
     log(m_search.dump());
 }
 
 
 template<class S, class M, class R>
-Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
+SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
       m_full_select_interval(1),
       m_full_select_min(numeric_limits<Float>::max()),
@@ -765,12 +765,12 @@ Search<S, M, R>::Search(unsigned nu_threads, size_t memory)
 }
 
 template<class S, class M, class R>
-Search<S, M, R>::~Search()
+SearchBase<S, M, R>::~SearchBase()
 {
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::check_abort(const ThreadState& thread_state) const
+bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const
 {
     if (m_max_count > 0 && m_tree.get_root().get_visit_count() >= m_max_count)
     {
@@ -781,7 +781,7 @@ bool Search<S, M, R>::check_abort(const ThreadState& thread_state) const
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
+bool SearchBase<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
 {
     if (get_abort())
     {
@@ -847,21 +847,21 @@ bool Search<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::check_create_threads()
+void SearchBase<S, M, R>::check_create_threads()
 {
     if (m_nu_threads != m_threads.size())
         create_threads();
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::check_followup(vector<Move>& sequence)
+bool SearchBase<S, M, R>::check_followup(vector<Move>& sequence)
 {
     LIBBOARDGAME_UNUSED(sequence);
     return false;
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::check_move_cannot_change(Float count,
+bool SearchBase<S, M, R>::check_move_cannot_change(Float count,
                                                Float remaining) const
 {
     if (remaining > count)
@@ -881,7 +881,7 @@ bool Search<S, M, R>::check_move_cannot_change(Float count,
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::create_threads()
+void SearchBase<S, M, R>::create_threads()
 {
 #ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
     if (m_nu_threads > 1)
@@ -892,7 +892,7 @@ void Search<S, M, R>::create_threads()
     m_threads.clear();
     auto search_func =
         static_cast<typename Thread::SearchFunc>(
-                          bind(&Search::search_loop, this, placeholders::_1));
+                          bind(&SearchBase::search_loop, this, placeholders::_1));
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
         unique_ptr<Thread> t(new Thread(search_func));
@@ -908,7 +908,7 @@ void Search<S, M, R>::create_threads()
 }
 
 template<class S, class M, class R>
-string Search<S, M, R>::dump() const
+string SearchBase<S, M, R>::dump() const
 {
     ostringstream s;
     for (unsigned i = 0; i < m_nu_threads; ++i)
@@ -920,7 +920,7 @@ string Search<S, M, R>::dump() const
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::expand_node(unsigned thread_id, const Node& node,
+bool SearchBase<S, M, R>::expand_node(unsigned thread_id, const Node& node,
                                   const Node*& best_child, Float init_val)
 {
     typename Tree::NodeExpander expander(thread_id, m_tree, node);
@@ -935,31 +935,31 @@ bool Search<S, M, R>::expand_node(unsigned thread_id, const Node& node,
 }
 
 template<class S, class M, class R>
-double Search<S, M, R>::expected_sim_per_sec() const
+double SearchBase<S, M, R>::expected_sim_per_sec() const
 {
     return 100.0;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_bias_term_constant() const -> Float
+inline auto SearchBase<S, M, R>::get_bias_term_constant() const -> Float
 {
     return m_bias_term.get_bias_term_constant();
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_expand_threshold() const -> Float
+inline auto SearchBase<S, M, R>::get_expand_threshold() const -> Float
 {
     return m_expand_threshold;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_expand_threshold_inc() const -> Float
+inline auto SearchBase<S, M, R>::get_expand_threshold_inc() const -> Float
 {
     return m_expand_threshold_inc;
 }
 
 template<class S, class M, class R>
-size_t Search<S, M, R>::get_max_nodes(size_t memory)
+size_t SearchBase<S, M, R>::get_max_nodes(size_t memory)
 {
     // Memory is used for 2 trees (m_tree and m_tmp_tree)
     size_t max_nodes = memory / sizeof(Node) / 2;
@@ -972,100 +972,100 @@ size_t Search<S, M, R>::get_max_nodes(size_t memory)
 }
 
 template<class S, class M, class R>
-inline size_t Search<S, M, R>::get_nu_simulations() const
+inline size_t SearchBase<S, M, R>::get_nu_simulations() const
 {
     return m_nu_simulations;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_root_val() const -> const RootStat&
+inline auto SearchBase<S, M, R>::get_root_val() const -> const RootStat&
 {
     return m_root_val;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_prune_count_start() const -> Float
+inline auto SearchBase<S, M, R>::get_prune_count_start() const -> Float
 {
     return m_prune_count_start;
 }
 
 template<class S, class M, class R>
-inline bool Search<S, M, R>::get_prune_full_tree() const
+inline bool SearchBase<S, M, R>::get_prune_full_tree() const
 {
     return m_prune_full_tree;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_rave_dist_final() const -> Float
+inline auto SearchBase<S, M, R>::get_rave_dist_final() const -> Float
 {
     return m_rave_dist_final;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_rave_parent_max() const -> Float
+inline auto SearchBase<S, M, R>::get_rave_parent_max() const -> Float
 {
     return m_rave_parent_max;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_rave_child_max() const -> Float
+inline auto SearchBase<S, M, R>::get_rave_child_max() const -> Float
 {
     return m_rave_child_max;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_rave_weight() const -> Float
+inline auto SearchBase<S, M, R>::get_rave_weight() const -> Float
 {
     return m_rave_weight;
 }
 
 template<class S, class M, class R>
-inline bool Search<S, M, R>::get_reuse_subtree() const
+inline bool SearchBase<S, M, R>::get_reuse_subtree() const
 {
     return m_reuse_subtree;
 }
 
 template<class S, class M, class R>
-inline bool Search<S, M, R>::get_reuse_tree() const
+inline bool SearchBase<S, M, R>::get_reuse_tree() const
 {
     return m_reuse_tree;
 }
 
 template<class S, class M, class R>
-inline S& Search<S, M, R>::get_state(unsigned thread_id)
+inline S& SearchBase<S, M, R>::get_state(unsigned thread_id)
 {
     LIBBOARDGAME_ASSERT(thread_id < m_threads.size());
     return *m_threads[thread_id]->thread_state.state;
 }
 
 template<class S, class M, class R>
-inline const S& Search<S, M, R>::get_state(unsigned thread_id) const
+inline const S& SearchBase<S, M, R>::get_state(unsigned thread_id) const
 {
     LIBBOARDGAME_ASSERT(thread_id < m_threads.size());
     return *m_threads[thread_id]->thread_state.state;
 }
 
 template<class S, class M, class R>
-inline TimeSource& Search<S, M, R>::get_time_source()
+inline TimeSource& SearchBase<S, M, R>::get_time_source()
 {
     LIBBOARDGAME_ASSERT(m_time_source != 0);
     return *m_time_source;
 }
 
 template<class S, class M, class R>
-size_t Search<S, M, R>::get_tree_memory() const
+size_t SearchBase<S, M, R>::get_tree_memory() const
 {
     return m_tree_memory;
 }
 
 template<class S, class M, class R>
-inline auto Search<S, M, R>::get_tree() const -> const Tree&
+inline auto SearchBase<S, M, R>::get_tree() const -> const Tree&
 {
     return m_tree;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::log_thread(const ThreadState& thread_state,
+void SearchBase<S, M, R>::log_thread(const ThreadState& thread_state,
                                  const string& s) const
 {
     lock_guard<mutex> lock(m_log_mutex);
@@ -1073,7 +1073,7 @@ void Search<S, M, R>::log_thread(const ThreadState& thread_state,
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::on_search_iteration(size_t n, const State& state,
+void SearchBase<S, M, R>::on_search_iteration(size_t n, const State& state,
                                           const Simulation& simulation)
 {
     LIBBOARDGAME_UNUSED(n);
@@ -1083,14 +1083,14 @@ void Search<S, M, R>::on_search_iteration(size_t n, const State& state,
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::on_start_search(bool is_followup)
+void SearchBase<S, M, R>::on_start_search(bool is_followup)
 {
     // Default implementation does nothing
     LIBBOARDGAME_UNUSED(is_followup);
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::playout(ThreadState& thread_state)
+void SearchBase<S, M, R>::playout(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
     state.start_playout();
@@ -1117,7 +1117,7 @@ void Search<S, M, R>::playout(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::play_in_tree(ThreadState& thread_state)
+void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
     auto& simulation = thread_state.simulation;
@@ -1180,7 +1180,7 @@ void Search<S, M, R>::play_in_tree(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-string Search<S, M, R>::get_info() const
+string SearchBase<S, M, R>::get_info() const
 {
     auto& root = m_tree.get_root();
     if (m_threads.empty())
@@ -1213,13 +1213,13 @@ string Search<S, M, R>::get_info() const
 }
 
 template<class S, class M, class R>
-string Search<S, M, R>::get_info_ext() const
+string SearchBase<S, M, R>::get_info_ext() const
 {
     return string();
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::prune(TimeSource& time_source, double time,
+bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
                             double max_time, Float prune_min_count,
                             Float& new_prune_min_count)
 {
@@ -1261,7 +1261,7 @@ bool Search<S, M, R>::prune(TimeSource& time_source, double time,
     to avoid backing up many values of unvisited children that have only a
     value and count from prior knowledge initialization. */
 template<class S, class M, class R>
-void Search<S, M, R>::restore_root_from_children(Tree& tree, const Node& root)
+void SearchBase<S, M, R>::restore_root_from_children(Tree& tree, const Node& root)
 {
     const Node* best_child = nullptr;
     Float max_count = 0;
@@ -1279,7 +1279,7 @@ void Search<S, M, R>::restore_root_from_children(Tree& tree, const Node& root)
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
+bool SearchBase<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
                              double max_time, TimeSource& time_source,
                              bool always_search)
 {
@@ -1430,7 +1430,7 @@ bool Search<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::search_loop(ThreadState& thread_state)
+void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
     auto& simulation = thread_state.simulation;
@@ -1439,7 +1439,7 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
     if (m_max_count == 0 && m_max_time < 1)
         time_interval = 0.1 * m_max_time;
     IntervalChecker expensive_abort_checker(*m_time_source, time_interval,
-                                           bind(&Search::check_abort_expensive,
+                                           bind(&SearchBase::check_abort_expensive,
                                                 this, ref(thread_state)));
     if (m_deterministic)
     {
@@ -1479,7 +1479,7 @@ void Search<S, M, R>::search_loop(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-auto Search<S, M, R>::select_child(const Node& node) -> const Node*
+auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
     const Node* best_child = nullptr;
     Float best_value = -numeric_limits<Float>::max();
@@ -1506,7 +1506,7 @@ auto Search<S, M, R>::select_child(const Node& node) -> const Node*
 }
 
 template<class S, class M, class R>
-auto Search<S, M, R>::select_child_final(const Node& node,
+auto SearchBase<S, M, R>::select_child_final(const Node& node,
                        const vector<Move>* exclude_moves) const -> const Node*
 {
     // Select the child with the highest visit count, use value as tie breaker
@@ -1532,7 +1532,7 @@ auto Search<S, M, R>::select_child_final(const Node& node,
 }
 
 template<class S, class M, class R>
-bool Search<S, M, R>::select_move(Move& mv, const vector<Move>* exclude_moves)
+bool SearchBase<S, M, R>::select_move(Move& mv, const vector<Move>* exclude_moves)
     const
 {
     auto child = select_child_final(m_tree.get_root(), exclude_moves);
@@ -1546,97 +1546,97 @@ bool Search<S, M, R>::select_move(Move& mv, const vector<Move>* exclude_moves)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_bias_term_constant(Float c)
+void SearchBase<S, M, R>::set_bias_term_constant(Float c)
 {
     m_bias_term.set_bias_term_constant(c);
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_callback(function<void(double, double)> callback)
+void SearchBase<S, M, R>::set_callback(function<void(double, double)> callback)
 {
     m_callback = callback;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_deterministic()
+void SearchBase<S, M, R>::set_deterministic()
 {
     m_deterministic = true;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_expand_threshold(Float n)
+void SearchBase<S, M, R>::set_expand_threshold(Float n)
 {
     m_expand_threshold = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_expand_threshold_inc(Float n)
+void SearchBase<S, M, R>::set_expand_threshold_inc(Float n)
 {
     m_expand_threshold_inc = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_full_select_interval(unsigned n)
+void SearchBase<S, M, R>::set_full_select_interval(unsigned n)
 {
     m_full_select_interval = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_full_select_min(Float n)
+void SearchBase<S, M, R>::set_full_select_min(Float n)
 {
     m_full_select_min = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_prune_count_start(Float n)
+void SearchBase<S, M, R>::set_prune_count_start(Float n)
 {
     m_prune_count_start = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_prune_full_tree(bool enable)
+void SearchBase<S, M, R>::set_prune_full_tree(bool enable)
 {
     m_prune_full_tree = enable;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_rave_dist_final(Float v)
+void SearchBase<S, M, R>::set_rave_dist_final(Float v)
 {
     m_rave_dist_final = v;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_rave_parent_max(Float n)
+void SearchBase<S, M, R>::set_rave_parent_max(Float n)
 {
     m_rave_parent_max = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_rave_child_max(Float n)
+void SearchBase<S, M, R>::set_rave_child_max(Float n)
 {
     m_rave_child_max = n;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_rave_weight(Float v)
+void SearchBase<S, M, R>::set_rave_weight(Float v)
 {
     m_rave_weight = v;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_reuse_subtree(bool enable)
+void SearchBase<S, M, R>::set_reuse_subtree(bool enable)
 {
     m_reuse_subtree = enable;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_reuse_tree(bool enable)
+void SearchBase<S, M, R>::set_reuse_tree(bool enable)
 {
     m_reuse_tree = enable;
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::set_tree_memory(size_t memory)
+void SearchBase<S, M, R>::set_tree_memory(size_t memory)
 {
     m_tree_memory = memory;
     m_max_nodes = get_max_nodes(memory);
@@ -1645,7 +1645,7 @@ void Search<S, M, R>::set_tree_memory(size_t memory)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::update_last_good_reply(ThreadState& thread_state)
+void SearchBase<S, M, R>::update_last_good_reply(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
     const auto& eval = thread_state.simulation.eval;
@@ -1689,7 +1689,7 @@ void Search<S, M, R>::update_last_good_reply(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::update_rave(ThreadState& thread_state)
+void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
     unsigned nu_moves = state.get_nu_moves();
@@ -1781,7 +1781,7 @@ void Search<S, M, R>::update_rave(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-void Search<S, M, R>::update_values(ThreadState& thread_state)
+void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
 {
     const auto& state = *thread_state.state;
     auto& nodes = thread_state.simulation.nodes;
@@ -1809,4 +1809,4 @@ void Search<S, M, R>::update_values(ThreadState& thread_state)
 
 } // namespace libboardgame_mcts
 
-#endif // LIBBOARDGAME_MCTS_SEARCH_H
+#endif // LIBBOARDGAME_MCTS_SEARCH_BASE_H

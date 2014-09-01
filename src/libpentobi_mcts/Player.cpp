@@ -12,15 +12,15 @@
 
 #include <fstream>
 #include <iomanip>
-#include "libboardgame_util/CpuTime.h"
-#include "libboardgame_util/WallTime.h"
+#include "libboardgame_util/CpuTimeSource.h"
+#include "libboardgame_util/WallTimeSource.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_util::log;
-using libboardgame_util::CpuTime;
-using libboardgame_util::WallTime;
+using libboardgame_util::CpuTimeSource;
+using libboardgame_util::WallTimeSource;
 using libpentobi_base::BoardType;
 
 //-----------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Player::Player(Variant initial_variant, const string& books_dir,
       m_resign_min_simulations(500),
       m_search(initial_variant, nu_threads, memory),
       m_book(initial_variant),
-      m_time_source(new WallTime())
+      m_time_source(new WallTimeSource())
 {
     for (unsigned i = 0; i < Board::max_player_moves; ++i)
     {
@@ -269,9 +269,9 @@ bool Player::resign() const
 void Player::use_cpu_time(bool enable)
 {
     if (enable)
-        m_time_source.reset(new CpuTime());
+        m_time_source.reset(new CpuTimeSource());
     else
-        m_time_source.reset(new WallTime());
+        m_time_source.reset(new WallTimeSource());
 }
 
 //-----------------------------------------------------------------------------

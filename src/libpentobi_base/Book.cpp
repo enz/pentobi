@@ -159,19 +159,18 @@ void Book::load(istream& in)
     {
         throw Exception(string("could not read book: ") + e.what());
     }
-    unique_ptr<libboardgame_sgf::Node> root
-        = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     m_tree.init(root);
 }
 
-const Node* Book::select_child(const Board& bd, Color c, const Tree& tree,
-                               const Node& node,
-                               const PointTransform& inv_transform)
+const SgfNode* Book::select_child(const Board& bd, Color c,
+                                  const PentobiTree& tree, const SgfNode& node,
+                                  const PointTransform& inv_transform)
 {
     unsigned nu_children = node.get_nu_children();
     if (nu_children == 0)
         return nullptr;
-    vector<const Node*> good_moves;
+    vector<const SgfNode*> good_moves;
     for (unsigned i = 0; i < nu_children; ++i)
     {
         auto& child = node.get_child(i);

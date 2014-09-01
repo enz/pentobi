@@ -8,7 +8,7 @@
 #define LIBPENTOBI_BASE_ENGINE_H
 
 #include "libpentobi_base/Game.h"
-#include "libpentobi_base/Player.h"
+#include "libpentobi_base/PlayerBase.h"
 #include "libboardgame_base/Engine.h"
 
 namespace libpentobi_base {
@@ -45,7 +45,7 @@ public:
 
     /** Set the player.
         @param player The player (@ref libboardgame_doc_storesref) */
-    void set_player(Player& player);
+    void set_player(PlayerBase& player);
 
     void set_accept_illegal(bool enable);
 
@@ -70,13 +70,13 @@ private:
 
     Game m_game;
 
-    Player* m_player;
+    PlayerBase* m_player;
 
     void board_changed();
 
     void genmove(Color c, Response& response);
 
-    Player& get_player() const;
+    PlayerBase& get_player() const;
 
     void play(Color c, const Arguments& args, unsigned arg_move_begin);
 };

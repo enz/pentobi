@@ -10,18 +10,19 @@
 #include "Search.h"
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Book.h"
-#include "libpentobi_base/Player.h"
+#include "libpentobi_base/PlayerBase.h"
 
 namespace libpentobi_mcts {
 
 using libboardgame_base::Rating;
 using libpentobi_base::Book;
+using libpentobi_base::PlayerBase;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
 class Player
-    : public libpentobi_base::Player
+    : public PlayerBase
 {
 public:
     /** Constructor.

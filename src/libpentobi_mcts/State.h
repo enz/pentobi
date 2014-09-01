@@ -9,7 +9,7 @@
 
 #include "LocalValue.h"
 #include "PriorKnowledge.h"
-#include "BoardUtil.h"
+#include "StateUtil.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
@@ -40,7 +40,6 @@ using libpentobi_base::PieceMap;
 using libpentobi_base::PrecompMoves;
 using libpentobi_base::SymmetricPoints;
 using libpentobi_base::Variant;
-using libpentobi_mcts::board_util::check_symmetry_broken;
 
 //-----------------------------------------------------------------------------
 

@@ -12,7 +12,6 @@
 
 #include <fstream>
 #include "libboardgame_sgf/TreeReader.h"
-#include "libpentobi_base/Tree.h"
 #include "libpentobi_mcts/Util.h"
 
 namespace pentobi_gtp {
@@ -30,7 +29,6 @@ using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
-using libpentobi_base::Tree;
 using libpentobi_mcts::Float;
 using libpentobi_mcts::Move;
 using libpentobi_mcts::State;

@@ -20,10 +20,10 @@
 class QProgressDialog;
 
 using namespace std;
+using libboardgame_sgf::SgfNode;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
 using libpentobi_base::Variant;
-using libpentobi_base::Node;
 using libpentobi_mcts::AnalyzeGame;
 using libpentobi_mcts::Search;
 
@@ -57,7 +57,7 @@ public:
         Will clear the current position if the target node is not in the
         main variation or does not correspond to a move in the move
         sequence when the analysis was done. */
-    void setCurrentPosition(const Game& game, const Node& node);
+    void setCurrentPosition(const Game& game, const SgfNode& node);
 
     QSize sizeHint() const;
 

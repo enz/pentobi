@@ -23,7 +23,8 @@ using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------
 
-bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points)
+bool get_move(const SgfNode& node, Variant variant, Color& c,
+              MovePoints& points)
 {
     string id;
     if (variant == Variant::duo || variant == Variant::junior)
@@ -126,7 +127,7 @@ bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points)
     return true;
 }
 
-bool get_player(const Node& node, Color& c)
+bool get_player(const SgfNode& node, Color& c)
 {
     if (! node.has_property("PL"))
         return false;
@@ -144,7 +145,7 @@ bool get_player(const Node& node, Color& c)
     return true;
 }
 
-bool has_setup(const Node& node)
+bool has_setup(const SgfNode& node)
 {
     for (PropertyIterator i(node); i; ++i)
         if (i->id == "AB" || i->id == "AW" || i->id == "A1" || i->id == "A2"

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/TreeWriter.cpp
+/** @file libpentobi_base/PentobiTreeWriter.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,23 +8,24 @@
 #include <config.h>
 #endif
 
-#include "TreeWriter.h"
+#include "PentobiTreeWriter.h"
 
 namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-TreeWriter::TreeWriter(ostream& out, const Tree& tree)
+PentobiTreeWriter::PentobiTreeWriter(ostream& out, const PentobiTree& tree)
     : libboardgame_sgf::TreeWriter(out, tree.get_root()),
       m_variant(tree.get_variant())
 {
 }
 
-TreeWriter::~TreeWriter()
+PentobiTreeWriter::~PentobiTreeWriter()
 {
 }
 
-void TreeWriter::write_property(const string& id, const vector<string>& values)
+void PentobiTreeWriter::write_property(const string& id,
+                                       const vector<string>& values)
 {
     // Replace obsolete move property IDs or multi-valued move properties
     // as used by early versions of Pentobi

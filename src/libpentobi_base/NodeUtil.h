@@ -10,12 +10,12 @@
 #include "Color.h"
 #include "MovePoints.h"
 #include "Variant.h"
-#include "libboardgame_sgf/Node.h"
+#include "libboardgame_sgf/SgfNode.h"
 
 namespace libpentobi_base {
 namespace node_util {
 
-using libboardgame_sgf::Node;
+using libboardgame_sgf::SgfNode;
 
 //-----------------------------------------------------------------------------
 
@@ -27,13 +27,14 @@ using libboardgame_sgf::Node;
     true)
     @return true if the node has a move property and the move is not a pass
     move. */
-bool get_move(const Node& node, Variant variant, Color& c, MovePoints& points);
+bool get_move(const SgfNode& node, Variant variant, Color& c,
+              MovePoints& points);
 
 /** Check if a node has setup properties (not including the PL property). */
-bool has_setup(const Node& node);
+bool has_setup(const SgfNode& node);
 
 /** Get the color to play in a setup position (PL property). */
-bool get_player(const Node& node, Color& c);
+bool get_player(const SgfNode& node, Color& c);
 
 //-----------------------------------------------------------------------------
 

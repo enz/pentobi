@@ -17,11 +17,11 @@
 #include <QSettings>
 #include <QString>
 #include "Util.h"
-#include "libpentobi_base/TreeWriter.h"
+#include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_mcts/Player.h"
 
 using libpentobi_base::to_string_id;
-using libpentobi_base::TreeWriter;
+using libpentobi_base::PentobiTreeWriter;
 using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------
@@ -49,7 +49,7 @@ RatingHistory::RatingHistory(Variant variant)
 void RatingHistory::addGame(float score, Rating opponentRating,
                             unsigned nuOpponents, Color color,
                             float result, const QString& date, int level,
-                            const Tree& tree)
+                            const PentobiTree& tree)
 {
     m_rating.update_multiplayer(score, opponentRating, nuOpponents, 32);
     if (m_rating.get() > m_bestRating.get())
@@ -68,7 +68,7 @@ void RatingHistory::addGame(float score, Rating opponentRating,
         m_games.erase(m_games.begin(), m_games.begin() + nuGames - maxGames);
     save();
     ofstream out(getFile(m_nuGames).toLocal8Bit().constData());
-    TreeWriter writer(out, tree);
+    PentobiTreeWriter writer(out, tree);
     writer.set_one_prop_per_line(true);
     writer.set_one_prop_value_per_line(true);
     writer.set_indent(2);

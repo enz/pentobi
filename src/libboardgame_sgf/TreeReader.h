@@ -10,7 +10,7 @@
 #include <memory>
 #include <stack>
 #include "Reader.h"
-#include "Node.h"
+#include "SgfNode.h"
 
 namespace libboardgame_sgf {
 
@@ -37,20 +37,20 @@ public:
     void on_property(const string& identifier,
                      const vector<string>& values) override;
 
-    const Node& get_tree() const;
+    const SgfNode& get_tree() const;
 
     /** Get the tree and transfer the ownership to the caller. */
-    unique_ptr<Node> get_tree_transfer_ownership();
+    unique_ptr<SgfNode> get_tree_transfer_ownership();
 
 private:
-    Node* m_current;
+    SgfNode* m_current;
 
-    unique_ptr<Node> m_root;
+    unique_ptr<SgfNode> m_root;
 
-    stack<Node*> m_stack;
+    stack<SgfNode*> m_stack;
 };
 
-inline const Node& TreeReader::get_tree() const
+inline const SgfNode& TreeReader::get_tree() const
 {
     return *m_root.get();
 }

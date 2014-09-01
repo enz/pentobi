@@ -1,17 +1,16 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_mcts/BoardUtil.h
+/** @file libpentobi_mcts/StateUtil.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_MCTS_BOARD_UTIL_H
-#define LIBPENTOBI_MCTS_BOARD_UTIL_H
+#ifndef LIBPENTOBI_MCTS_STATE_UTIL_H
+#define LIBPENTOBI_MCTS_STATE_UTIL_H
 
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/SymmetricPoints.h"
 
 namespace libpentobi_mcts {
-namespace board_util {
 
 using namespace std;
 using libpentobi_base::Board;
@@ -24,7 +23,6 @@ bool check_symmetry_broken(const Board& bd,
 
 //-----------------------------------------------------------------------------
 
-} // namespace board_util
 } // namespace libpentobi_mcts
 
-#endif // LIBPENTOBI_MCTS_BOARD_UTIL_H
+#endif // LIBPENTOBI_MCTS_STATE_UTIL_H

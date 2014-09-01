@@ -37,11 +37,11 @@
 #include "RatingDialog.h"
 #include "ShowMessage.h"
 #include "Util.h"
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/Util.h"
 #include "libboardgame_util/Assert.h"
 #include "libpentobi_base/TreeUtil.h"
-#include "libpentobi_base/TreeWriter.h"
+#include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_gui/ComputerColorDialog.h"
 #include "libpentobi_gui/GameInfoDialog.h"
 #include "libpentobi_gui/GuiBoard.h"
@@ -85,8 +85,8 @@ using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::MoveList;
 using libpentobi_base::PieceInfo;
-using libpentobi_base::Tree;
-using libpentobi_base::TreeWriter;
+using libpentobi_base::PentobiTree;
+using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::tree_util::get_move_number;
 using libpentobi_base::tree_util::get_moves_left;
 using libpentobi_mcts::Search;
@@ -152,7 +152,8 @@ Color getCurrentColor(const Game& game)
     return game.get_effective_to_play();
 }
 
-bool hasCurrentVariationOtherMoves(const Tree& tree, const Node& current)
+bool hasCurrentVariationOtherMoves(const PentobiTree& tree,
+                                   const SgfNode& current)
 {
     auto node = current.get_parent_or_null();
     while (node != nullptr)
@@ -1908,7 +1909,7 @@ void MainWindow::gameOver()
             gameResult = 0;
         unsigned nuOpp = get_nu_players(variant) - 1;
         Rating oppRating = m_player->get_rating(variant);
-        QString date = QString(Tree::get_date_today().c_str());
+        QString date = QString(PentobiTree::get_date_today().c_str());
         m_history->addGame(gameResult, oppRating, nuOpp, m_ratedGameColor,
             gameResult, date, m_level, m_game->get_tree());
         if (m_ratingDialog != nullptr)
@@ -2102,7 +2103,7 @@ void MainWindow::goodMove(bool checked)
 void MainWindow::gotoMove()
 {
     QSettings settings;
-    vector<const Node*> nodes;
+    vector<const SgfNode*> nodes;
     auto& tree = m_game->get_tree();
     auto node = &m_game->get_current();
     do
@@ -2139,7 +2140,7 @@ void MainWindow::gotoMove()
     gotoNode(*nodes[dialog.intValue() - 1]);
 }
 
-void MainWindow::gotoNode(const Node& node)
+void MainWindow::gotoNode(const SgfNode& node)
 {
     cancelThread();
     leaveSetupMode();
@@ -3812,7 +3813,7 @@ void MainWindow::wheelEvent(QWheelEvent* event)
 bool MainWindow::writeGame(const string& file)
 {
     ofstream out(file);
-    TreeWriter writer(out, m_game->get_tree());
+    PentobiTreeWriter writer(out, m_game->get_tree());
     writer.set_one_prop_per_line(true);
     writer.set_one_prop_value_per_line(true);
     writer.set_indent(2);

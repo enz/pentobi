@@ -11,13 +11,13 @@
 #include <QString>
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Color.h"
-#include "libpentobi_base/Tree.h"
+#include "libpentobi_base/PentobiTree.h"
 #include "libpentobi_base/Variant.h"
 
 using namespace std;
 using libboardgame_base::Rating;
 using libpentobi_base::Color;
-using libpentobi_base::Tree;
+using libpentobi_base::PentobiTree;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -70,7 +70,7 @@ public:
     /** Append a new game. */
     void addGame(float score, Rating opponentRating, unsigned nuOpponents,
                  Color color, float result, const QString& date, int level,
-                 const Tree& tree);
+                 const PentobiTree& tree);
 
     /** Get file name of the n'th rated game. */
     QString getFile(unsigned n) const;

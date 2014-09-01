@@ -12,7 +12,7 @@
 
 #include "MoveList.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/Util.h"
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
 
@@ -125,7 +125,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
         reader.read(file);
         auto tree = reader.get_tree_transfer_ownership();
         m_game.init(tree);
-        const Node* node = nullptr;
+        const SgfNode* node = nullptr;
         if (move_number != -1)
             node = m_game.get_tree().get_node_before_move_number(move_number);
         if (node == nullptr)
@@ -331,7 +331,7 @@ Color Engine::get_color_arg(const Arguments& args, unsigned i) const
     throw Failure(msg.str());
 }
 
-Player& Engine::get_player() const
+PlayerBase& Engine::get_player() const
 {
     if (m_player == nullptr)
         throw Failure("no player set");
@@ -361,7 +361,7 @@ void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
     board_changed();
 }
 
-void Engine::set_player(Player& player)
+void Engine::set_player(PlayerBase& player)
 {
     m_player = &player;
     add("genmove", &Engine::cmd_genmove);

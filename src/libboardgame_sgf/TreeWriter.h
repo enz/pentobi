@@ -7,7 +7,7 @@
 #ifndef LIBBOARDGAME_SGF_TREE_WRITER_H
 #define LIBBOARDGAME_SGF_TREE_WRITER_H
 
-#include "Node.h"
+#include "SgfNode.h"
 #include "Writer.h"
 
 namespace libboardgame_sgf {
@@ -17,7 +17,7 @@ namespace libboardgame_sgf {
 class TreeWriter
 {
 public:
-    TreeWriter(ostream& out, const Node& root);
+    TreeWriter(ostream& out, const SgfNode& root);
 
     virtual ~TreeWriter();
 
@@ -44,11 +44,11 @@ public:
     void write();
 
 private:
-    const Node& m_root;
+    const SgfNode& m_root;
 
     Writer m_writer;
 
-    void write_node(const Node& node);
+    void write_node(const SgfNode& node);
 };
 
 inline void TreeWriter::set_one_prop_per_line(bool enable)

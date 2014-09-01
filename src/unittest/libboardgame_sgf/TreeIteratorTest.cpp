@@ -8,7 +8,7 @@
 #include <config.h>
 #endif
 
-#include "libboardgame_sgf/Tree.h"
+#include "libboardgame_sgf/SgfTree.h"
 #include "libboardgame_sgf/TreeIterator.h"
 #include "libboardgame_test/Test.h"
 
@@ -18,7 +18,7 @@ using namespace libboardgame_sgf;
 
 LIBBOARDGAME_TEST_CASE(boardgamesgf_tree_iterator_1)
 {
-    Tree tree;
+    SgfTree tree;
     auto& root = tree.get_root();
     TreeIterator i(root);
     LIBBOARDGAME_CHECK(i);
@@ -29,7 +29,7 @@ LIBBOARDGAME_TEST_CASE(boardgamesgf_tree_iterator_1)
 
 LIBBOARDGAME_TEST_CASE(boardgamesgf_tree_iterator_2)
 {
-    Tree tree;
+    SgfTree tree;
     auto& root = tree.get_root();
     auto& child1 = tree.create_new_child(root);
     auto& child2 = tree.create_new_child(root);

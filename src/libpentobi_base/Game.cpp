@@ -12,7 +12,7 @@
 
 #include "BoardUtil.h"
 #include "libboardgame_sgf/InvalidTree.h"
-#include "libboardgame_sgf/Util.h"
+#include "libboardgame_sgf/SgfUtil.h"
 
 namespace libpentobi_base {
 
@@ -31,7 +31,7 @@ Game::Game(Variant variant)
     init(variant);
 }
 
-Game::Game(unique_ptr<Node>& root)
+Game::Game(unique_ptr<SgfNode>& root)
   : m_bd(new Board(m_tree.get_variant())),
     m_tree(m_tree.get_variant())
 {
@@ -50,7 +50,7 @@ void Game::delete_all_variations()
     m_tree.delete_all_variations();
 }
 
-void Game::goto_node(const Node& node)
+void Game::goto_node(const SgfNode& node)
 {
     auto old = m_current;
     try
@@ -85,7 +85,7 @@ void Game::init(Variant variant)
     m_current = &m_tree.get_root();
 }
 
-void Game::init(unique_ptr<Node>& root)
+void Game::init(unique_ptr<SgfNode>& root)
 {
     m_tree.init(root);
     m_bd->init(m_tree.get_variant());
@@ -111,7 +111,7 @@ void Game::keep_only_subtree()
 void Game::play(ColorMove mv, bool always_create_new_node)
 {
     m_bd->play(mv);
-    const Node* child = nullptr;
+    const SgfNode* child = nullptr;
     if (! always_create_new_node)
         child = m_tree.find_child_with_move(*m_current, mv);
     if (child != nullptr)
@@ -159,7 +159,7 @@ void Game::undo()
     goto_node(m_current->get_parent());
 }
 
-void Game::update(const Node& node)
+void Game::update(const SgfNode& node)
 {
     m_updater.update(*m_bd, m_tree, node);
 }

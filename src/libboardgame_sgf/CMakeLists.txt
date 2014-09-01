@@ -5,20 +5,20 @@ add_library(boardgame_sgf STATIC
   InvalidTree.h
   MissingProperty.h
   MissingProperty.cpp
-  Node.h
-  Node.cpp
   Reader.h
   Reader.cpp
-  Tree.h
-  Tree.cpp
+  SgfNode.h
+  SgfNode.cpp
+  SgfTree.h
+  SgfTree.cpp
+  SgfUtil.h
+  SgfUtil.cpp
   TreeIterator.h
   TreeIterator.cpp
   TreeReader.h
   TreeReader.cpp
   TreeWriter.h
   TreeWriter.cpp
-  Util.h
-  Util.cpp
   Writer.h
   Writer.cpp
 )

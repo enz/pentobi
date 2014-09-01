@@ -10,7 +10,7 @@
 #include <iosfwd>
 #include "Board.h"
 #include "Game.h"
-#include "Tree.h"
+#include "PentobiTree.h"
 #include "libboardgame_base/PointTransform.h"
 #include "libboardgame_util/RandomGenerator.h"
 
@@ -34,12 +34,12 @@ public:
 
     Move genmove(const Board& bd, Color c);
 
-    const Tree& get_tree() const;
+    const PentobiTree& get_tree() const;
 
 private:
     typedef libboardgame_base::PointTransform<Point> PointTransform;
 
-    Tree m_tree;
+    PentobiTree m_tree;
 
     RandomGenerator m_random;
 
@@ -50,12 +50,12 @@ private:
     Move get_transformed(const Board& bd, Move mv,
                          const PointTransform& transform) const;
 
-    const Node* select_child(const Board& bd, Color c, const Tree& tree,
-                             const Node& node,
-                             const PointTransform& inv_transform);
+    const SgfNode* select_child(const Board& bd, Color c,
+                                const PentobiTree& tree, const SgfNode& node,
+                                const PointTransform& inv_transform);
 };
 
-inline const Tree& Book::get_tree() const
+inline const PentobiTree& Book::get_tree() const
 {
     return m_tree;
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_mcts/BoardUtil.cpp
+/** @file libpentobi_mcts/StateUtil.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,10 +8,9 @@
 #include <config.h>
 #endif
 
-#include "BoardUtil.h"
+#include "StateUtil.h"
 
 namespace libpentobi_mcts {
-namespace board_util {
 
 using libpentobi_base::BoardIterator;
 using libpentobi_base::Color;
@@ -100,5 +99,4 @@ bool check_symmetry_broken(const Board& bd,
 
 //-----------------------------------------------------------------------------
 
-} // namespace board_util
 } // namespace libpentobi_mcts

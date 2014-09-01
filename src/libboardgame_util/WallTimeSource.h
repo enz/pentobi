@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_util/WallTime.h
+/** @file libboardgame_util/WallTimeSource.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_UTIL_WALL_TIME_H
-#define LIBBOARDGAME_UTIL_WALL_TIME_H
+#ifndef LIBBOARDGAME_UTIL_WALL_TIME_SOURCE_H
+#define LIBBOARDGAME_UTIL_WALL_TIME_SOURCE_H
 
 #include <chrono>
 #include "TimeSource.h"
@@ -16,11 +16,11 @@ namespace libboardgame_util {
 
 /** Wall time.
     @ref libboardgame_doc_threadsafe_after_construction */
-class WallTime
+class WallTimeSource
     : public TimeSource
 {
 public:
-    WallTime();
+    WallTimeSource();
 
     double operator()() override;
 
@@ -31,4 +31,4 @@ private:
 
 } // namespace libboardgame_util
 
-#endif // LIBBOARDGAME_UTIL_WALL_TIME_H
+#endif // LIBBOARDGAME_UTIL_WALL_TIME_SOURCE_H

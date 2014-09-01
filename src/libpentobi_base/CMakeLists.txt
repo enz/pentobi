@@ -32,6 +32,12 @@ set(pentobi_base_STAT_SRCS
   MovePoints.h
   NodeUtil.h
   NodeUtil.cpp
+  PentobiSgfUtil.h
+  PentobiSgfUtil.cpp
+  PentobiTree.h
+  PentobiTree.cpp
+  PentobiTreeWriter.h
+  PentobiTreeWriter.cpp
   Piece.h
   PieceInfo.h
   PieceInfo.cpp
@@ -42,26 +48,20 @@ set(pentobi_base_STAT_SRCS
   PieceTransforms.cpp
   PieceTransformsTrigon.h
   PieceTransformsTrigon.cpp
-  Player.h
-  Player.cpp
+  PlayerBase.h
+  PlayerBase.cpp
   Point.h
   PointList.h
   PointState.h
   PointState.cpp
   PrecompMoves.h
   Setup.h
-  SgfUtil.h
-  SgfUtil.cpp
   StartingPoints.h
   StartingPoints.cpp
   SymmetricPoints.h
   SymmetricPoints.cpp
-  Tree.h
-  Tree.cpp
   TreeUtil.h
   TreeUtil.cpp
-  TreeWriter.h
-  TreeWriter.cpp
   Variant.h
   Variant.cpp
 )

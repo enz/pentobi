@@ -10,8 +10,8 @@
 
 #include "libpentobi_base/BoardUpdater.h"
 
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/Util.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
@@ -31,8 +31,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_piece_played_twice)
     istringstream in("(;GM[Blokus];1[a1];1[a3])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Tree tree(root);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater;
     auto& node = get_last_node(tree.get_root());
@@ -47,8 +47,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup)
                      "AW[i4,h5,i5,j5,i6][j7,j8,j9,k9,j10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Tree tree(root);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater;
     updater.update(*bd, tree, tree.get_root());
@@ -66,8 +66,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_inner_node)
                      " ;W[j7,j8,j9,k9,j10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Tree tree(root);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater;
     auto& node = get_last_node(tree.get_root());
@@ -88,8 +88,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty)
                      " ;AE[e8,e9,f9,d10,e10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Tree tree(root);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater;
     auto& node = get_last_node(tree.get_root());

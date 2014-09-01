@@ -8,7 +8,7 @@
 #include <config.h>
 #endif
 
-#include "Node.h"
+#include "SgfNode.h"
 
 #include "MissingProperty.h"
 #include "libboardgame_util/Assert.h"
@@ -28,16 +28,16 @@ Property::Property(const string& id, const vector<string>& values)
 
 //-----------------------------------------------------------------------------
 
-Node::Node()
+SgfNode::SgfNode()
     : m_parent(nullptr)
 {
 }
 
-Node::~Node()
+SgfNode::~SgfNode()
 {
 }
 
-void Node::append(unique_ptr<Node> node)
+void SgfNode::append(unique_ptr<SgfNode> node)
 {
     node->m_parent = this;
     if (! m_first_child)
@@ -46,11 +46,11 @@ void Node::append(unique_ptr<Node> node)
         get_last_child()->m_sibling = move(node);
 }
 
-Node& Node::create_new_child()
+SgfNode& SgfNode::create_new_child()
 {
-    unique_ptr<Node> node(new Node());
+    unique_ptr<SgfNode> node(new SgfNode());
     node->m_parent = this;
-    Node& result = *(node.get());
+    SgfNode& result = *(node.get());
     auto last_child = get_last_child();
     if (last_child == nullptr)
         m_first_child = move(node);
@@ -59,13 +59,13 @@ Node& Node::create_new_child()
     return result;
 }
 
-void Node::delete_variations()
+void SgfNode::delete_variations()
 {
     if (m_first_child)
         m_first_child->m_sibling.reset(nullptr);
 }
 
-Property* Node::find_property(const string& id) const
+Property* SgfNode::find_property(const string& id) const
 {
     auto property = m_first_property.get();
     while (property != nullptr)
@@ -77,7 +77,7 @@ Property* Node::find_property(const string& id) const
     return property;
 }
 
-const vector<string> Node::get_multi_property(const string& id) const
+const vector<string> SgfNode::get_multi_property(const string& id) const
 {
     auto property = find_property(id);
     if (property == nullptr)
@@ -86,12 +86,12 @@ const vector<string> Node::get_multi_property(const string& id) const
         return property->values;
 }
 
-bool Node::has_property(const string& id) const
+bool SgfNode::has_property(const string& id) const
 {
     return find_property(id) != nullptr;
 }
 
-const Node& Node::get_child(unsigned i) const
+const SgfNode& SgfNode::get_child(unsigned i) const
 {
     LIBBOARDGAME_ASSERT(i < get_nu_children());
     auto child = m_first_child.get();
@@ -103,7 +103,7 @@ const Node& Node::get_child(unsigned i) const
     return *child;
 }
 
-unsigned Node::get_child_index(const Node& child) const
+unsigned SgfNode::get_child_index(const SgfNode& child) const
 {
     auto current = m_first_child.get();
     unsigned i = 0;
@@ -117,7 +117,7 @@ unsigned Node::get_child_index(const Node& child) const
     }
 }
 
-Node* Node::get_last_child() const
+SgfNode* SgfNode::get_last_child() const
 {
     auto node = m_first_child.get();
     if (node == nullptr)
@@ -127,7 +127,7 @@ Node* Node::get_last_child() const
     return node;
 }
 
-unsigned Node::get_nu_children() const
+unsigned SgfNode::get_nu_children() const
 {
     unsigned n = 0;
     auto child = m_first_child.get();
@@ -139,7 +139,7 @@ unsigned Node::get_nu_children() const
     return n;
 }
 
-const Node* Node::get_previous_sibling() const
+const SgfNode* SgfNode::get_previous_sibling() const
 {
     if (m_parent == nullptr)
         return nullptr;
@@ -157,7 +157,7 @@ const Node* Node::get_previous_sibling() const
     return nullptr;
 }
 
-const string& Node::get_property(const string& id) const
+const string& SgfNode::get_property(const string& id) const
 {
     auto property = find_property(id);
     if (property == nullptr)
@@ -165,7 +165,7 @@ const string& Node::get_property(const string& id) const
     return property->values[0];
 }
 
-const string& Node::get_property(const string& id,
+const string& SgfNode::get_property(const string& id,
                                  const string& default_value) const
 {
     auto property = find_property(id);
@@ -175,7 +175,7 @@ const string& Node::get_property(const string& id,
         return property->values[0];
 }
 
-void Node::make_first_child()
+void SgfNode::make_first_child()
 {
     LIBBOARDGAME_ASSERT(has_parent());
     auto current_child = m_parent->m_first_child.get();
@@ -186,7 +186,7 @@ void Node::make_first_child()
         auto sibling = current_child->m_sibling.get();
         if (sibling == this)
         {
-            unique_ptr<Node> tmp = move(m_parent->m_first_child);
+            unique_ptr<SgfNode> tmp = move(m_parent->m_first_child);
             m_parent->m_first_child = move(current_child->m_sibling);
             current_child->m_sibling = move(m_sibling);
             m_sibling = move(tmp);
@@ -196,7 +196,7 @@ void Node::make_first_child()
     }
 }
 
-bool Node::move_property_to_front(const string& id)
+bool SgfNode::move_property_to_front(const string& id)
 {
     auto current = m_first_property.get();
     Property* last = nullptr;
@@ -220,13 +220,13 @@ bool Node::move_property_to_front(const string& id)
     }
 }
 
-void Node::move_down()
+void SgfNode::move_down()
 {
     LIBBOARDGAME_ASSERT(has_parent());
     auto current = m_parent->m_first_child.get();
     if (current == this)
     {
-        unique_ptr<Node> tmp = move(m_parent->m_first_child);
+        unique_ptr<SgfNode> tmp = move(m_parent->m_first_child);
         m_parent->m_first_child = move(m_sibling);
         m_sibling = move(m_parent->m_first_child->m_sibling);
         m_parent->m_first_child->m_sibling = move(tmp);
@@ -239,7 +239,7 @@ void Node::move_down()
         {
             if (! m_sibling)
                 return;
-            unique_ptr<Node> tmp = move(current->m_sibling);
+            unique_ptr<SgfNode> tmp = move(current->m_sibling);
             current->m_sibling = move(m_sibling);
             m_sibling = move(current->m_sibling->m_sibling);
             current->m_sibling->m_sibling = move(tmp);
@@ -249,13 +249,13 @@ void Node::move_down()
     }
 }
 
-void Node::move_up()
+void SgfNode::move_up()
 {
     LIBBOARDGAME_ASSERT(has_parent());
     auto current = m_parent->m_first_child.get();
     if (current == this)
         return;
-    Node* prev = nullptr;
+    SgfNode* prev = nullptr;
     while (true)
     {
         auto sibling = current->m_sibling.get();
@@ -266,7 +266,7 @@ void Node::move_up()
                 make_first_child();
                 return;
             }
-            unique_ptr<Node> tmp = move(prev->m_sibling);
+            unique_ptr<SgfNode> tmp = move(prev->m_sibling);
             prev->m_sibling = move(current->m_sibling);
             current->m_sibling = move(m_sibling);
             m_sibling = move(tmp);
@@ -277,7 +277,7 @@ void Node::move_up()
     }
 }
 
-bool Node::remove_property(const string& id)
+bool SgfNode::remove_property(const string& id)
 {
     auto property = m_first_property.get();
     Property* last = nullptr;
@@ -297,15 +297,15 @@ bool Node::remove_property(const string& id)
     return true;
 }
 
-unique_ptr<Node> Node::remove_child(Node& child)
+unique_ptr<SgfNode> SgfNode::remove_child(SgfNode& child)
 {
     auto node = &m_first_child;
-    unique_ptr<Node>* previous = nullptr;
+    unique_ptr<SgfNode>* previous = nullptr;
     while (true)
     {
         if (node->get() == &child)
         {
-            unique_ptr<Node> result = move(*node);
+            unique_ptr<SgfNode> result = move(*node);
             if (previous == nullptr)
                 m_first_child = move(child.m_sibling);
             else

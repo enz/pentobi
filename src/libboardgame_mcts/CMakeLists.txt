@@ -7,7 +7,7 @@ add_custom_target(boardgame_mcts SOURCES
   LastGoodReply.h
   Node.h
   PlayerMove.h
-  Search.h
+  SearchBase.h
   Tree.h
   TreeUtil.h
 )

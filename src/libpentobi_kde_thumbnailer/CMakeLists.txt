@@ -25,9 +25,9 @@ set(pentobi_kde_thumbnailer_STAT_SRCS
   ../libboardgame_util/StringUtil.cpp
   ../libboardgame_base/SpShtStrRep.cpp
   ../libboardgame_sgf/MissingProperty.cpp
-  ../libboardgame_sgf/Node.cpp
   ../libboardgame_sgf/Reader.cpp
-  ../libboardgame_sgf/Tree.cpp
+  ../libboardgame_sgf/SgfNode.cpp
+  ../libboardgame_sgf/SgfTree.cpp
   ../libboardgame_sgf/TreeReader.cpp
   ../libpentobi_base/NodeUtil.cpp
   ../libpentobi_base/StartingPoints.cpp

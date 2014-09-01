@@ -9,8 +9,8 @@ add_library(boardgame_util STATIC
   Barrier.h
   Barrier.cpp
   BitMarker.h
-  CpuTime.h
-  CpuTime.cpp
+  CpuTimeSource.h
+  CpuTimeSource.cpp
   Exception.h
   Exception.cpp
   FastLog.h
@@ -37,6 +37,6 @@ add_library(boardgame_util STATIC
   TimeSource.h
   TimeSource.cpp
   Unused.h
-  WallTime.h
-  WallTime.cpp
+  WallTimeSource.h
+  WallTimeSource.cpp
 )

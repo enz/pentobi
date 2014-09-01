@@ -11,7 +11,7 @@
 #include "libboardgame_sgf/MissingProperty.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_test/Test.h"
-#include "libpentobi_base/Tree.h"
+#include "libpentobi_base/PentobiTree.h"
 
 using namespace std;
 using namespace libpentobi_base;
@@ -32,8 +32,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
                      ";GREEN[a1][b1][c1][d1][d2])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Tree tree(root);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
     auto& board_const = tree.get_board_const();
     auto node = &tree.get_root();
     node = &node->get_child();
@@ -99,8 +99,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_get_move_pass)
     istringstream in("(;GM[Blokus Duo];B[])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    Tree tree(root);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
     auto node = &tree.get_root();
     node = &node->get_child();
     auto mv = tree.get_move(*node);
@@ -114,8 +114,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_invalid_game)
     istringstream in("(;GM[1])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    LIBBOARDGAME_CHECK_THROW(Tree tree(root), InvalidPropertyValue);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    LIBBOARDGAME_CHECK_THROW(PentobiTree tree(root), InvalidPropertyValue);
 }
 
 /** Check that Tree constructor throws MissingProperty on missing GM
@@ -125,8 +125,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_missing_game_property)
     istringstream in("(;)");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<Node> root = reader.get_tree_transfer_ownership();
-    LIBBOARDGAME_CHECK_THROW(Tree tree(root), MissingProperty);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    LIBBOARDGAME_CHECK_THROW(PentobiTree tree(root), MissingProperty);
 }
 
 //-----------------------------------------------------------------------------

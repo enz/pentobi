@@ -8,7 +8,7 @@
 #define LIBPENTOBI_BASE_BOARD_UPDATER_H
 
 #include "Board.h"
-#include "Tree.h"
+#include "PentobiTree.h"
 
 namespace libpentobi_base {
 
@@ -22,11 +22,11 @@ public:
         @throws Exception if tree contains invalid properties, moves that play
         the same piece twice or other conditions that prevent the updater to
         update the board to the given node. */
-    void update(Board& bd, const Tree& tree, const Node& node);
+    void update(Board& bd, const PentobiTree& tree, const SgfNode& node);
 
 private:
     /** Local variable reused for efficiency. */
-    vector<const Node*> m_path;
+    vector<const SgfNode*> m_path;
 };
 
 //-----------------------------------------------------------------------------

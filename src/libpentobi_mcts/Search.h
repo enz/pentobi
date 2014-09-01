@@ -8,13 +8,14 @@
 #define LIBPENTOBI_MCTS_SEARCH_H
 
 #include "State.h"
-#include "libboardgame_mcts/Search.h"
+#include "libboardgame_mcts/SearchBase.h"
 #include "libpentobi_base/GameStateHistory.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_mcts::PlayerInt;
+using libboardgame_mcts::SearchBase;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
 using libpentobi_base::GameStateHistory;
@@ -47,7 +48,7 @@ struct SearchParamConst
 /** Monte-Carlo tree search implementation for Blokus.
     @note @ref libboardgame_avoid_stack_allocation */
 class Search
-    : public libboardgame_mcts::Search<State, Move, SearchParamConst>
+    : public SearchBase<State, Move, SearchParamConst>
 {
 public:
     Search(Variant initial_variant, unsigned nu_threads, size_t memory);
@@ -105,9 +106,6 @@ protected:
     void on_start_search(bool is_followup) override;
 
 private:
-    typedef libboardgame_mcts::Search<State, Move, SearchParamConst>
-                                                                   ParentClass;
-
     /** Automatically set default parameters for the game variant if
         the game variant changes. */
     bool m_auto_param;

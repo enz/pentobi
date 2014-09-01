@@ -12,18 +12,17 @@
 
 #include "Search.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_util/WallTime.h"
+#include "libboardgame_util/WallTimeSource.h"
 
 namespace libpentobi_mcts {
 
-using libboardgame_sgf::Node;
+using libboardgame_sgf::SgfNode;
 using libboardgame_util::log;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
 using libboardgame_util::Exception;
-using libboardgame_util::WallTime;
+using libboardgame_util::WallTimeSource;
 using libpentobi_base::BoardUpdater;
-using libpentobi_base::Tree;
 
 //-----------------------------------------------------------------------------
 
@@ -46,7 +45,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
             ++total_moves;
         node = node->get_first_child_or_null();
     }
-    WallTime time_source;
+    WallTimeSource time_source;
     clear_abort();
     node = &root;
     unsigned move_number = 0;
