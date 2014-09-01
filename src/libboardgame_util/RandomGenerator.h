@@ -11,16 +11,21 @@
 #include <random>
 #include "Assert.h"
 
-// Use fast SIMD-based random generator if GCC.
-// This is a non-standard extension of GCC >=4.8 and so far only available on
-// little-endian systems (last checked with GCC 4.8.2)
+#ifndef LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
+// Use fast SIMD-based random generator if GCC. This is a non-standard
+// extension of GCC >=4.8 and so far only available on little-endian systems
+// (last checked with GCC 4.8.2). It also cannot be used on Android because
+// ext/random tries to include ext/opt_random.h, which is missing in the
+// Android NDK (last checked with android-ndk32-r10-linux-x86_64).
 #if defined __GNUC__ \
     && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)) \
-    && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-#define LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
+    && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ \
+    && ! defined(ANDROID) && ! defined(__ANDROID__)
+#define LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER 1
+#endif
 #endif
 
-#ifdef LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
+#if LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
 #include <ext/random>
 #endif
 
@@ -43,7 +48,7 @@ public:
         According to the documentation of Boost 1.52, this generator is a bit
         faster and uses less memory than mt19937. (The typedef mt11213b does
         not exist in C++11.) */
-#ifdef LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
+#if LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
     typedef __gnu_cxx::sfmt11213 Generator;
 #else
     typedef mersenne_twister_engine<uint32_t, 32, 351, 175, 19, 0xccab8ee7, 11,
