@@ -248,16 +248,15 @@ void Player::load_book(istream& in)
 
 bool Player::load_book(const string& filepath)
 {
-    log("Trying to load ", filepath, "... ");
     ifstream in(filepath);
     if (! in)
     {
-        log("not found");
+        log("Could not load book ", filepath);
         return false;
     }
     m_book.load(in);
     m_is_book_loaded = true;
-    log("ok");
+    log("Loaded book ", filepath);
     return true;
 }
 
