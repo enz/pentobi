@@ -28,6 +28,7 @@
 #endif
 
 using libboardgame_util::set_log_null;
+using libboardgame_util::LogInitializer;
 using libboardgame_util::OptionError;
 using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
@@ -62,6 +63,7 @@ void redirectStdErr()
 
 int main(int argc, char* argv[])
 {
+    LogInitializer log_initializer;
     Q_INIT_RESOURCE(libpentobi_gui_resources);
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");

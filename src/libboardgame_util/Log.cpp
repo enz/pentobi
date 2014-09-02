@@ -13,6 +13,10 @@
 #include <fstream>
 #include <iostream>
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#include <android/log.h>
+#endif
+
 namespace libboardgame_util {
 
 using namespace std;
@@ -20,6 +24,57 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 namespace {
+
+#if defined(ANDROID) || defined(__ANDROID__)
+
+class AndroidBuf
+    : public streambuf
+{
+public:
+    AndroidBuf();
+
+protected:
+    int overflow(int c);
+
+    int sync();
+
+private:
+    static const unsigned buffer_size = 4096;
+
+    char m_buffer[buffer_size];
+};
+
+AndroidBuf::AndroidBuf()
+{
+    setp(m_buffer, m_buffer + buffer_size - 1);
+}
+
+int AndroidBuf::overflow(int c)
+{
+    if (c == traits_type::eof())
+    {
+        *pptr() = traits_type::to_char_type(c);
+        sbumpc();
+    }
+    return sync() ? traits_type::eof(): traits_type::not_eof(c);
+}
+
+int AndroidBuf::sync()
+{
+    int n = 0;
+    if (pbase() != pptr())
+    {
+        __android_log_print(ANDROID_LOG_INFO, "Native", "%s",
+                            string(pbase(), pptr() - pbase()).c_str());
+        n = 0;
+        setp(m_buffer, m_buffer + buffer_size - 1);
+    }
+    return n;
+}
+
+AndroidBuf android_buffer;
+
+#endif // defined(ANDROID) || defined(__ANDROID__)
 
 ostream* log_stream = &cerr;
 
@@ -47,6 +102,20 @@ void log(const string& s)
         line += '\n';
         *log_stream << line;
     }
+}
+
+void log_close()
+{
+#if defined(ANDROID) || defined(__ANDROID__)
+    cerr.rdbuf(nullptr);
+#endif
+}
+
+void log_init()
+{
+#if defined(ANDROID) || defined(__ANDROID__)
+    cerr.rdbuf(&android_buffer);
+#endif
 }
 
 void set_log(ostream& out)
