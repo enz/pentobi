@@ -28,7 +28,8 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
       m_points(0)
 {
     m_variant = Variant::classic;
-    m_font.setStyleStrategy(QFont::PreferOutline);
+    m_font.setStyleStrategy(QFont::StyleStrategy(QFont::PreferOutline
+                                                 | QFont::PreferQuality));
     setMinimumWidth(300);
     setMinimumHeight(20);
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
