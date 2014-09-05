@@ -14,4 +14,8 @@ target_link_libraries(unittest_libboardgame_gtp
   boardgame_gtp
   )
 
+if (DEFINED CMAKE_THREAD_LIBS_INIT)
+  target_link_libraries(unittest_libboardgame_gtp ${CMAKE_THREAD_LIBS_INIT})
+endif()
+
 add_test(libboardgame_gtp unittest_libboardgame_gtp)

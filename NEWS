@@ -12,10 +12,16 @@ VERSION 8.UNKNOWN (master)
   game variant and restores it when the game variant is changed.
 
 
-VERSION 8.1.UNKNOWN (v8-fixes)
+VERSION 8.2.UNKNOWN (v8-fixes)
 ==============================
 
 *
+
+
+VERSION 8.2 (05 Sep 2014)
+=========================
+
+* Fixed remaining link errors on some platforms (Debian bug #759852)
 
 
 VERSION 8.1 (31 Aug 2014)

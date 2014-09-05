@@ -169,7 +169,11 @@ else()
     )
 endif()
 
-install(TARGETS pentobi
+if (DEFINED CMAKE_THREAD_LIBS_INIT)
+  target_link_libraries(pentobi ${CMAKE_THREAD_LIBS_INIT})
+endif()
+
+install(TARGETS pentobi 
 DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install translation files. If you change the destination, you need to
