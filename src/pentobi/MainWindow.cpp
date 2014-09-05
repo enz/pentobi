@@ -442,11 +442,21 @@ void MainWindow::analyzeGameFinished()
 MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId,
                                                    bool playSingleMove)
 {
+    QElapsedTimer timer;
+    timer.start();
     GenMoveResult result;
     result.playSingleMove = playSingleMove;
     result.color = c;
     result.genMoveId = genMoveId;
     result.move = m_player->genmove(getBoard(), c);
+    auto elapsed = timer.elapsed();
+    // Enforce minimum thinking time of 0.8 sec
+    if (elapsed < 800 && ! m_noDelay)
+    {
+        // Use std::thread because QThread::sleep() is protected in Qt4
+        chrono::milliseconds duration(800 - elapsed);
+        this_thread::sleep_for(duration);
+    }
     return result;
 }
 
@@ -514,7 +524,6 @@ void MainWindow::cancelThread()
     // is no longer running, but we will still receive the finished event.
     // Increasing m_genMoveId will make genMoveFinished() ignore the event.
     ++m_genMoveId;
-    m_genMoveInterrupted = true;
     set_abort();
     m_genMoveWatcher.waitForFinished();
     m_isGenMoveRunning = false;
@@ -1991,7 +2000,6 @@ void MainWindow::variantTrigon3(bool checked)
 
 void MainWindow::genMove(bool playSingleMove)
 {
-    m_genMoveTime.start();
     ++m_genMoveId;
     setCursor(QCursor(Qt::BusyCursor));
     m_actionPlay->setEnabled(false);
@@ -2002,7 +2010,6 @@ void MainWindow::genMove(bool playSingleMove)
     clear_abort();
     m_lastRemainingSeconds = 0;
     m_lastRemainingMinutes = 0;
-    m_genMoveInterrupted = false;
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
@@ -2020,14 +2027,6 @@ void MainWindow::genMove(bool playSingleMove)
 
 void MainWindow::genMoveFinished()
 {
-    auto elapsed = m_genMoveTime.elapsed();
-    if (elapsed < 800 && ! m_genMoveInterrupted && ! m_noDelay)
-    {
-        // Enforce minimum thinking time
-        QTimer::singleShot(static_cast<int>(800 - elapsed), this,
-                           SLOT(genMoveFinished()));
-        return;
-    }
     GenMoveResult result = m_genMoveWatcher.future().result();
     if (result.genMoveId != m_genMoveId)
         // Callback from a move generation canceled with cancelThread()
@@ -2299,7 +2298,6 @@ void MainWindow::interruptPlay()
     if (! m_isGenMoveRunning)
         return;
     set_abort();
-    m_genMoveInterrupted = true;
     m_autoPlay = false;
 }
 

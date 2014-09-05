@@ -287,8 +287,6 @@ private:
         we only need to handle edits. */
     bool m_ignoreCommentTextChanged;
 
-    bool m_genMoveInterrupted;
-
     /** Color played by the user in a rated game.
         Only defined if m_isRated is true. In game variants with multiple
         colors per player, the user plays all colors of the player with
@@ -579,8 +577,6 @@ private:
     QLabel* m_ratedGameLabelText;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
-
-    QElapsedTimer m_genMoveTime;
 
     QString m_file;
 
