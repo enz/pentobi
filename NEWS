@@ -1,11 +1,11 @@
 VERSION 8.UNKNOWN (master)
 ==========================
 
-* New stronger playing level 9.
-* The playing strength now increases more evenly with the level.
-  Lower levels in game variant Trigon are significantly stronger, so
-  ratings in rated Trigon games are not really comparable to previous
-  versions of Pentobi.
+* Increased playing strength mainly in game variant Trigon.
+* There are now 9 levels and the playing strength increases more evenly
+  with the level. Ratings in rated Trigon games at lower levels are not
+  comparable with previous versions of Pentobi because Trigon starts now
+  with a higher playing strength at level 1.
 * The computer is now better at playing moves that maximize the score
   as long as they do not lead into riskier positions.
 * The computer now remembers the playing level last used separately for each
@@ -164,7 +164,7 @@ Version 3.0 (1 Aug 2012)
   rated games against the computer
 * Different options for speed of game analysis
 * New menu item "Play Single Move" to make the computer play a move
-  without changing the colors played by the computer 
+  without changing the colors played by the computer
 * The mouse wheel can now be used to navigate in the current variation
   if no piece is selected
 * Files written by older versions of Pentobi that use a deprecated format
