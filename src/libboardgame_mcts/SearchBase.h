@@ -883,7 +883,7 @@ bool SearchBase<S, M, R>::check_move_cannot_change(Float count,
 template<class S, class M, class R>
 void SearchBase<S, M, R>::create_threads()
 {
-#if LIBBOARDGAME_MCTS_SINGLE_THREAD
+#ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
     if (m_nu_threads > 1)
         throw Exception("libboardgame_mcts::Search was compiled"
                         " without support for multithreading");
@@ -1139,7 +1139,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
                 break;
             node = simulation.last_nodes[depth + 1];
             m_tree.inc_visit_count(*node);
-#if ! LIBBOARDGAME_MCTS_SINGLE_THREAD
+#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
             if (SearchParamConst::virtual_loss && m_nu_threads > 0)
                 m_tree.add_value(*node, 0);
 #endif
@@ -1156,7 +1156,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     {
         node = select_child(*node);
         m_tree.inc_visit_count(*node);
-#if ! LIBBOARDGAME_MCTS_SINGLE_THREAD
+#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
         if (SearchParamConst::virtual_loss && m_nu_threads > 0)
             m_tree.add_value(*node, 0);
 #endif
@@ -1793,7 +1793,7 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
         auto& node = *nodes[i];
         auto mv = state.get_move(i - 1);
         m_tree.add_value(node, eval[mv.player]);
-#if ! LIBBOARDGAME_MCTS_SINGLE_THREAD
+#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
         if (SearchParamConst::virtual_loss && m_nu_threads > 0)
             m_tree.remove_value(node, 0);
 #endif

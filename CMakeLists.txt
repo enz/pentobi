@@ -56,9 +56,6 @@ check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 if(NOT DEFINED LIBPENTOBI_MCTS_FLOAT_TYPE)
   set(LIBPENTOBI_MCTS_FLOAT_TYPE float)
 endif()
-if(NOT DEFINED LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER)
-  set(LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER 1)
-endif()
 
 # Don't set the Pentobi data dirs on Windows. This is currently needed for
 # building a version of Pentobi for the NSIS installer on Windows (see
