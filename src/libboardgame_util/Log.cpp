@@ -39,7 +39,7 @@ protected:
     int sync();
 
 private:
-    static const unsigned buffer_size = 4096;
+    static const unsigned buffer_size = 8192;
 
     char m_buffer[buffer_size];
 };
