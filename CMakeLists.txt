@@ -24,6 +24,14 @@ option(PENTOBI_BUILD_KDE_THUMBNAILER
   "Build thumbnailer for KDE (also requires PENTOBI_BUILD_GUI)" OFF)
 option(USE_QT5 "Use Qt 5 instead of Qt 4" OFF)
 
+if (PENTOBI_BUILD_KDE_THUMBNAILER AND USE_QT5)
+  message(FATAL_ERROR "PENTOBI_BUILD_KDE_THUMBNAILER requires USE_QT5=0")
+endif()
+if (PENTOBI_BUILD_KDE_THUMBNAILER AND NOT PENTOBI_BUILD_GUI)
+  message(FATAL_ERROR
+    "PENTOBI_BUILD_KDE_THUMBNAILER requires PENTOBI_BUILD_GUI=1")
+endif()
+
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Release")
   set(CMAKE_BUILD_TYPE "Release")
