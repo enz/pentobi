@@ -20,8 +20,7 @@ include(GNUInstallDirs)
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
-option(PENTOBI_BUILD_KDE_THUMBNAILER
-  "Build thumbnailer for KDE (also requires PENTOBI_BUILD_GUI)" OFF)
+option(PENTOBI_BUILD_KDE_THUMBNAILER "Build thumbnailer for KDE" OFF)
 option(USE_QT5 "Use Qt 5 instead of Qt 4" OFF)
 
 if (PENTOBI_BUILD_KDE_THUMBNAILER AND USE_QT5)
