@@ -12,7 +12,11 @@
 
 /* Define if the MCTS search does not need to support multi-threading.
    This makes the search slightly faster on single-threaded systems. */
-#cmakedefine LIBBOARDGAME_MCTS_SINGLE_THREAD
+#cmakedefine01 LIBBOARDGAME_MCTS_SINGLE_THREAD
+
+/* Use fast SIMD-based random generator if the compiler is a suitable version
+   of GCC that supports this non-standard functionality. */
+#cmakedefine01 LIBBOARDGAME_USE_SIMD_MERSENNE_TWISTER
 
 /* Floating type for Monte-Carlo tree search values (float|double) */
 #define LIBPENTOBI_MCTS_FLOAT_TYPE @LIBPENTOBI_MCTS_FLOAT_TYPE@

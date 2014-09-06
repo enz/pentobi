@@ -12,7 +12,7 @@
 // If no support for multi-threaded search is needed, defining
 // LIBBOARDGAME_MCTS_SINGLE_THREAD will use normal instead of atomic variables,
 // which can speed up the search by a small amount.
-#ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
+#if LIBBOARDGAME_MCTS_SINGLE_THREAD
 
 
 namespace libboardgame_mcts {

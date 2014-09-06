@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
             threads = opt.get<unsigned>("threads");
             if (threads == 0)
                 throw OptionError("Number of threads must be greater zero.");
-#ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
+#if LIBBOARDGAME_MCTS_SINGLE_THREAD
             if (threads > 1)
                 throw OptionError("This version of Pentobi was compiled"
                                   " without support for multi-threading.");
