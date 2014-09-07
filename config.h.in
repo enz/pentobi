@@ -17,6 +17,9 @@
 /* Floating type for Monte-Carlo tree search values (float|double) */
 #define LIBPENTOBI_MCTS_FLOAT_TYPE @LIBPENTOBI_MCTS_FLOAT_TYPE@
 
+/* Built for systems with low memory and slow CPU. */
+#cmakedefine01 PENTOBI_LOW_RESOURCES
+
 /* Directory containing opening books. */
 #cmakedefine PENTOBI_BOOKS_DIR "@PENTOBI_BOOKS_DIR@"
 

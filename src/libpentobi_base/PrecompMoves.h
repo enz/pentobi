@@ -27,7 +27,11 @@ class PrecompMoves
 public:
     /** The maximum sum of the sizes of all precomputed move lists in any
         game variant. */
+#if PENTOBI_LOW_RESOURCES
     static const unsigned max_move_lists_sum_length = 1425934;
+#else
+    static const unsigned max_move_lists_sum_length = 832444;
+#endif
 
     /** The number of neighbors used for computing the adjacent status.
         The adjacent status is a single number that encodes the forbidden
@@ -37,7 +41,11 @@ public:
         precomputed lists shorter but exponentially increase the number of
         lists and the total memory used for all lists. Therefore, the optimal
         value for speeding up the matching depends on the CPU cache size. */
+#if PENTOBI_LOW_RESOURCES
+    static const unsigned adj_status_nu_adj = 4;
+#else
     static const unsigned adj_status_nu_adj = 5;
+#endif
 
     static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
 

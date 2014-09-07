@@ -90,7 +90,11 @@ size_t get_memory()
         memory = 512000000;
     }
     else
+#if PENTOBI_LOW_RESOURCES
+        memory = total_mem / 3;
+#else
         memory = total_mem / 2;
+#endif
     if (memory > 1300000000)
         memory = 1300000000;
     log("Using ", memory, " of ", total_mem, " bytes");
