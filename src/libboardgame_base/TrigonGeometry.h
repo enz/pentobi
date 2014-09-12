@@ -22,15 +22,15 @@ using namespace std;
     The board is a hexagon consisting of triangles. The coordinates are like
     in this example of a hexagon with edge size 3:
     <tt>
-       1 2 3 4 5 6 7 8 9 10 11
-    1     / \ / \ / \ / \
-    2   / \ / \ / \ / \ / \
-    3 / \ / \ / \ / \ / \ / \
-    4 \ / \ / \ / \ / \ / \ /
-    5   \ / \ / \ / \ / \ /
-    6     \ / \ / \ / \ /
+       0 1 2 3 4 5 6 7 8 9 10
+    0     / \ / \ / \ / \
+    1   / \ / \ / \ / \ / \
+    2 / \ / \ / \ / \ / \ / \
+    3 \ / \ / \ / \ / \ / \ /
+    4   \ / \ / \ / \ / \ /
+    5     \ / \ / \ / \ /
     </tt>
-    There are two point types: 0=upside triangle, 1=downside triangle.
+    There are two point types: 0=upward triangle, 1=downward triangle.
     @tparam P An instantiation of libboardgame_base::Point */
 template<class P>
 class TrigonGeometry
