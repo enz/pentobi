@@ -419,7 +419,6 @@ void Board::write(ostream& out, bool mark_last_move) const
     auto board_type = get_board_type();
     bool is_trigon = (board_type == BoardType::trigon
                       || board_type == BoardType::trigon_3);
-    write_x_coord(out, width, is_trigon ? 3 : 2);
     for (unsigned y = 0; y < height; ++y)
     {
         if (height - y < 10)
@@ -525,15 +524,8 @@ void Board::write(ostream& out, bool mark_last_move) const
             }
         }
         set_color(out, "\x1B[0m");
-        out << ' ' << (height - y);
         if (is_info_location_right)
-        {
-            if (height - y < 10)
-                out << "   ";
-            else
-                out << "  ";
             write_info_line(out, y, pieces_left);
-        }
         out << '\n';
     }
     write_x_coord(out, width, is_trigon ? 3 : 2);
@@ -582,29 +574,65 @@ void Board::write_info_line(ostream& out, unsigned y,
                             const ColorMap<PiecesLeftList>& pieces_left) const
 {
     if (y == 0)
+    {
+        out << "  ";
         write_color_info_line1(out, Color(0));
+    }
     else if (y == 1)
+    {
+        out << "  ";
         write_color_info_line2(out, Color(0), pieces_left[Color(0)]);
+    }
     else if (y == 2)
+    {
+        out << "  ";
         write_color_info_line3(out, Color(0), pieces_left[Color(0)]);
+    }
     else if (y == 4)
+    {
+        out << "  ";
         write_color_info_line1(out, Color(1));
+    }
     else if (y == 5)
+    {
+        out << "  ";
         write_color_info_line2(out, Color(1), pieces_left[Color(1)]);
+    }
     else if (y == 6)
+    {
+        out << "  ";
         write_color_info_line3(out, Color(1), pieces_left[Color(1)]);
+    }
     else if (y == 8 && m_nu_colors > 2)
+    {
+        out << "  ";
         write_color_info_line1(out, Color(2));
+    }
     else if (y == 9 && m_nu_colors > 2)
+    {
+        out << "  ";
         write_color_info_line2(out, Color(2), pieces_left[Color(2)]);
+    }
     else if (y == 10 && m_nu_colors > 2)
+    {
+        out << "  ";
         write_color_info_line3(out, Color(2), pieces_left[Color(2)]);
+    }
     else if (y == 12 && m_nu_colors > 3)
+    {
+        out << "  ";
         write_color_info_line1(out, Color(3));
+    }
     else if (y == 13 && m_nu_colors > 3)
+    {
+        out << "  ";
         write_color_info_line2(out, Color(3), pieces_left[Color(3)]);
+    }
     else if (y == 14 && m_nu_colors > 3)
+    {
+        out << "  ";
         write_color_info_line3(out, Color(3), pieces_left[Color(3)]);
+    }
 }
 
 void Board::write_pieces_left(ostream& out, Color c,
