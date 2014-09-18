@@ -7,11 +7,11 @@
 #include "PlayerModel.h"
 
 #include <QElapsedTimer>
+#include <QFile>
 #include <QtConcurrentRun>
 
 using namespace std;
 using libboardgame_util::set_abort;
-using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -93,6 +93,21 @@ int PlayerModel::level() const
     return m_level;
 }
 
+void PlayerModel::loadBook(Variant variant)
+{
+    QFile file(QString(":/pentobi_books/book_%1.blksgf")
+               .arg(to_string_id(variant)));
+    if (! file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "PlayerModel: could not open " << file.fileName();
+        return;
+    }
+    QTextStream stream(&file);
+    QString text = stream.readAll();
+    istringstream in(text.toLocal8Bit().constData());
+    m_player.load_book(in);
+}
+
 void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
 {
     if (m_isGenMoveRunning == isGenMoveRunning)
@@ -111,6 +126,9 @@ void PlayerModel::startGenMove(QVariant boardModel)
         return;
     }
     m_player.set_level(m_level);
+    auto variant = bm->getBoard().get_variant();
+    if (! m_player.is_book_loaded(variant))
+        loadBook(variant);
     ++m_genMoveId;
     QFuture<GenMoveResult> future =
         QtConcurrent::run(this, &PlayerModel::asyncGenMove, bm, m_genMoveId);

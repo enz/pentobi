@@ -12,7 +12,10 @@ set(pentobi_qml_SRCS
   PlayerModel.cpp
 )
 
-qt5_add_resources(pentobi_qml_RC_SRCS resources.qrc)
+qt5_add_resources(pentobi_qml_RC_SRCS
+  resources.qrc
+  ../books/pentobi_books.qrc
+)
 
 add_executable(pentobi_qml WIN32
   ${pentobi_qml_SRCS}

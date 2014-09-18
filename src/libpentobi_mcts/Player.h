@@ -72,6 +72,9 @@ public:
 
     void load_book(istream& in);
 
+    /** Is a book loaded and compatible with a given game variant? */
+    bool is_book_loaded(Variant variant) const;
+
     /** Get an estimated Elo-rating of a level.
         This rating is an estimated rating when playing vs. humans. Although
         it is based on computer vs. computer experiments, the ratings were

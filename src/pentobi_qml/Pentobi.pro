@@ -79,7 +79,9 @@ SOURCES += \
     ../libboardgame_sgf/SgfUtil.cpp \
     ../libboardgame_sys/CpuTime.cpp
 
-RESOURCES += resources.qrc
+RESOURCES += \
+    resources.qrc \
+    ../books/pentobi_books.qrc
 
 # Default rules for deployment.
 include(deployment.pri)

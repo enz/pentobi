@@ -91,8 +91,7 @@ Move Player::genmove(const Board& bd, Color c)
     if (m_use_book
         && (level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
     {
-        if (! m_is_book_loaded
-            || m_book.get_tree().get_variant() != variant)
+        if (! is_book_loaded(variant))
             load_book(m_books_dir
                       + "/book_" + to_string_id(variant) + ".blksgf");
         if (m_is_book_loaded)
@@ -238,6 +237,11 @@ Rating Player::get_rating(Variant variant, int level)
     }
     LIBBOARDGAME_ASSERT(false);
     return Rating(0);
+}
+
+bool Player::is_book_loaded(Variant variant) const
+{
+    return (m_is_book_loaded && m_book.get_tree().get_variant() == variant);
 }
 
 void Player::load_book(istream& in)

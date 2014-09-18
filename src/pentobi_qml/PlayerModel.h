@@ -12,6 +12,7 @@
 #include "libpentobi_mcts/Player.h"
 
 using libpentobi_mcts::Player;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -72,6 +73,8 @@ private:
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
     GenMoveResult asyncGenMove(BoardModel* bm, unsigned genMoveId);
+
+    void loadBook(Variant variant);
 
     void setIsGenMoveRunning(bool isGenMoveRunning);
 
