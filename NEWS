@@ -1,15 +1,18 @@
 VERSION 8.UNKNOWN (master)
 ==========================
 
-* Increased playing strength mainly in game variant Trigon.
+* Increased playing strength in game variant Trigon.
 * There are now 9 levels and the playing strength increases more evenly
   with the level. Ratings in rated Trigon games at lower levels are not
   comparable with previous versions of Pentobi because Trigon starts now
   with a higher playing strength at level 1.
 * The computer is now better at playing moves that maximize the score
   as long as they do not lead into riskier positions.
-* The computer now remembers the playing level last used separately for each
-  game variant and restores it when the game variant is changed.
+* The computer now remembers the playing level last used separately for
+  each game variant and restores it when the game variant is changed.
+* Initial support for Android. The Android version supports only a subset
+  of the features of the desktop version and only playing levels 1-7
+  because mobile devices usually have lower CPU and memory resources.
 
 
 VERSION 8.2.UNKNOWN (v8-fixes)

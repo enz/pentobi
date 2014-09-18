@@ -29,3 +29,7 @@ if (PENTOBI_BUILD_GUI)
     add_subdirectory(pentobi_kde_thumbnailer)
   endif()
 endif()
+
+if (PENTOBI_BUILD_QML)
+  add_subdirectory(pentobi_qml)
+endif()
