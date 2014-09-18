@@ -87,7 +87,7 @@ Move Player::genmove(const Board& bd, Color c)
     auto variant = bd.get_variant();
     auto board_type = bd.get_board_type();
     int level = min(max(m_level, 1), 9);
-    // Don't use more thane 2 moves per color from opening book in lower levels
+    // Don't use more than 2 moves per color from opening book in lower levels
     if (m_use_book
         && (level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
     {
