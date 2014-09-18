@@ -20,7 +20,14 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
 
-    contentItem { implicitWidth: 240; implicitHeight: 320 }
+    // For a desktop window, we should use a smaller initial size and remember
+    // the last size in the settings, but for now we use pentobi_qml only for
+    // Android and on Android, initializing the window size with the available
+    // screen size avoids flickering and delay due to multiple changes of the
+    // window size at start-up (last tested with Qt 5.3.2).
+    //contentItem { implicitWidth: 240; implicitHeight: 320 }
+    width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight
+
     visible: true
     title: qsTr("Pentobi")
     menuBar: Pentobi.Menu { }
