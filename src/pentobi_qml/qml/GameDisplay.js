@@ -42,10 +42,8 @@ function destroyPieces(pieces) {
 }
 
 function pickPiece(piece) {
-    if (piece.pieceModel.color != boardModel.toPlay) {
-        clearPieceSelectorForcedColor()
+    if (piece.pieceModel.color != boardModel.toPlay)
         return
-    }
     if (! pieceManipulator.visible) {
         // Position pieceManipulator at center of piece if possible, but
         // make sure it is completely visible

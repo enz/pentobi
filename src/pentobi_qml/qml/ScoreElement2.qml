@@ -34,7 +34,7 @@ Item {
     }
     Text {
         text: value
-        color: "#50494C"
+        color: "#6D6367"
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right

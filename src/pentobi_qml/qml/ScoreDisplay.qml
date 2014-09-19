@@ -12,6 +12,7 @@ Row {
 
     /** Size of the colored points indicating a game color. */
     property real pointSize
+    property int toPlay
 
     property string gameVariant
     property int points0
@@ -53,6 +54,7 @@ Row {
     ScoreElement {
         value: points0
         isFinal: ! hasMoves0
+        isToPlay: toPlay == 0
         pointSize: root.pointSize
         height: root.height
         width: 4.3 * pointSize
@@ -63,6 +65,7 @@ Row {
     ScoreElement {
         value: points1
         isFinal: ! hasMoves1
+        isToPlay: toPlay == 1
         pointSize: root.pointSize
         height: root.height
         width: 4.3 * pointSize
@@ -74,6 +77,7 @@ Row {
         visible: gameVariant != "duo"
         value: points2
         isFinal: ! hasMoves2
+        isToPlay: toPlay == 2
         pointSize: root.pointSize
         height: root.height
         width: 4.3 * pointSize
@@ -85,6 +89,7 @@ Row {
         visible: gameVariant != "duo"
         value: points3
         isFinal: ! hasMoves3
+        isToPlay: toPlay == 3
         pointSize: root.pointSize
         height: root.height
         width: 4.3 * pointSize

@@ -10,7 +10,8 @@ Item {
     id: root
 
     property alias color: point.color
-    property bool isFinal: false
+    property bool isFinal
+    property bool isToPlay
     property int value
     property real pointSize
 
@@ -25,7 +26,12 @@ Item {
     Rectangle {
         id: point
 
-        width: pointSize
+        z: 1
+        width: (isToPlay ? 1.3 : 1) * pointSize
+        border {
+            color: "#6D6367"
+            width: isToPlay ? Math.max(0.15 * pointSize, 1) : 0
+        }
         height: width
         radius: width / 2
         anchors.verticalCenter: root.verticalCenter
@@ -34,15 +40,15 @@ Item {
         id: scoreText
 
         text: value
-        color: "#50494C"
+        color: "#6D6367"
         anchors {
             left: point.right
-            leftMargin: 0.3 * point.width
+            leftMargin: (isToPlay ? 0.2 : 0.5) * point.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
         font.underline: isFinal
-        font.pixelSize: 1.7 * point.width
+        font.pixelSize: 1.7 * pointSize
     }
 }

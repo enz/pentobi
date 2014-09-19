@@ -73,6 +73,7 @@ Item
             hasMoves1: boardModel.hasMoves1
             hasMoves2: boardModel.hasMoves2
             hasMoves3: boardModel.hasMoves3
+            toPlay: boardModel.isGameOver ? -1 : boardModel.toPlay
             height: 0.1 * board.width
             pointSize: 0.03 * board.width
             anchors.horizontalCenter: scorePiecePanel.horizontalCenter
