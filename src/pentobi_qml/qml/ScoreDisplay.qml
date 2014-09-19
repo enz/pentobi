@@ -10,8 +10,9 @@ import pentobi 1.0
 Row {
     id: root
 
-    property real elementWidth
-    property real elementWidth2
+    /** Size of the colored points indicating a game color. */
+    property real pointSize
+
     property string gameVariant
     property int points0
     property int points1
@@ -22,12 +23,18 @@ Row {
     property bool hasMoves2
     property bool hasMoves3
 
+    signal colorClicked0
+    signal colorClicked1
+    signal colorClicked2
+    signal colorClicked3
+
     ScoreElement2 {
         visible: gameVariant == "classic_2" || gameVariant == "trigon_2"
         value: points0 + points2
         isFinal: ! hasMoves0 && ! hasMoves2
+        pointSize: root.pointSize
         height: root.height
-        width: elementWidth2
+        width: 6.2 * pointSize
         color1: "#0073CF"
         color2: "#E63E2C"
     }
@@ -36,8 +43,9 @@ Row {
         visible: gameVariant == "classic_2" || gameVariant == "trigon_2"
         value: points1 + points3
         isFinal: ! hasMoves1 && ! hasMoves3
+        pointSize: root.pointSize
         height: root.height
-        width: elementWidth2
+        width: 6.2 * pointSize
         color1: "#EBCD23"
         color2: "#00C000"
     }
@@ -45,34 +53,42 @@ Row {
     ScoreElement {
         value: points0
         isFinal: ! hasMoves0
+        pointSize: root.pointSize
         height: root.height
-        width: elementWidth
+        width: 4.3 * pointSize
         color: boardModel.gameVariant == "duo" ? "#0073CF" : "#0073CF"
+        onClicked: colorClicked0()
     }
 
     ScoreElement {
         value: points1
         isFinal: ! hasMoves1
+        pointSize: root.pointSize
         height: root.height
-        width: elementWidth
+        width: 4.3 * pointSize
         color: boardModel.gameVariant == "duo" ? "#00C000" : "#EBCD23"
+        onClicked: colorClicked1()
     }
 
     ScoreElement {
         visible: gameVariant != "duo"
         value: points2
         isFinal: ! hasMoves2
+        pointSize: root.pointSize
         height: root.height
-        width: elementWidth
+        width: 4.3 * pointSize
         color: "#E63E2C"
+        onClicked: colorClicked2()
     }
 
     ScoreElement {
         visible: gameVariant != "duo"
         value: points3
         isFinal: ! hasMoves3
+        pointSize: root.pointSize
         height: root.height
-        width: elementWidth
+        width: 4.3 * pointSize
         color: "#00C000"
+        onClicked: colorClicked3()
     }
 }

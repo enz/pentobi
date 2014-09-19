@@ -12,11 +12,20 @@ Item {
     property alias color: point.color
     property bool isFinal: false
     property int value
+    property real pointSize
 
+    signal clicked
+
+    width: 5 * pointSize
+
+    MouseArea {
+        anchors.fill: root
+        onClicked: root.clicked()
+    }
     Rectangle {
         id: point
 
-        width: root.height / 2
+        width: pointSize
         height: width
         radius: width / 2
         anchors.verticalCenter: root.verticalCenter
@@ -26,13 +35,14 @@ Item {
 
         text: value
         color: "#50494C"
-        width: root.width - point.width
-        height: root.height
-        anchors.left: point.right
-        anchors.leftMargin: 0.3 * point.width
+        anchors {
+            left: point.right
+            leftMargin: 0.3 * point.width
+            verticalCenter: root.verticalCenter
+        }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
         font.underline: isFinal
-        font.pixelSize: height
+        font.pixelSize: 1.7 * point.width
     }
 }

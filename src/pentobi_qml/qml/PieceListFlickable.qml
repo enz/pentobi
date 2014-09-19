@@ -11,22 +11,24 @@ Row {
 
     property real pieceAreaSize
     property int color
-    property bool isToPlay
+    property bool isShown
+
+    /** Delay changes to opacity a bit such that the pieces of the new color
+        are only visible after the movement animation of the piece view. */
+    property bool delayOpacityChange
+
     property var pieces
     property int rows: 1
 
     signal piecePicked(var piece)
 
-    z: isToPlay ? 1 : 0
-    opacity: isToPlay ? 1 : 0
+    z: isShown ? 1 : 0
+    opacity: isShown ? 1 : 0
 
     Behavior on opacity {
         SequentialAnimation {
-            // Delay a bit such that the pieces of the new color
-            // are only visible after the movement animation of the
-            // piece view
-            PauseAnimation { duration: 300 }
-            PropertyAnimation { duration: 200; easing.type: Easing.InOutQuart }
+            PauseAnimation { duration: delayOpacityChange ? 300 : 0 }
+            PropertyAnimation { duration: 150 }
         }
     }
 
@@ -43,7 +45,7 @@ Row {
 
         width: 0.9 * root.width
         height: parent.height
-        contentWidth: pieceList.width
+        contentWidth: pieceList.columns * root.pieceAreaSize
         clip: true
         boundsBehavior: Flickable.StopAtBounds
 

@@ -145,6 +145,7 @@ function newGame()
 {
     cancelGenMove()
     gameDisplay.pickedPiece = null
+    gameDisplay.clearPieceSelectorForcedColor()
     showTemporaryMessage("New game")
     boardModel.newGame()
     initComputerColors()
@@ -152,11 +153,13 @@ function newGame()
 
 function onComputerPlayed() {
     busyIndicator.running = false
+    gameDisplay.clearPieceSelectorForcedColor()
     checkComputerMoveTimer.start()
 }
 
 function play(pieceModel, gameCoord) {
     cancelGenMove()
+    gameDisplay.clearPieceSelectorForcedColor()
     boardModel.play(pieceModel, gameCoord)
     checkComputerMove()
 }

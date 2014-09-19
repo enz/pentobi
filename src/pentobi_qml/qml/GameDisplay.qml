@@ -38,6 +38,7 @@ Item
         _pieces2 = Logic.createPieces(boardModel.pieceModels2)
         _pieces3 = Logic.createPieces(boardModel.pieceModels3)
     }
+    function clearPieceSelectorForcedColor() { pieceSelector.forceColor = -1 }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
@@ -72,10 +73,13 @@ Item
             hasMoves1: boardModel.hasMoves1
             hasMoves2: boardModel.hasMoves2
             hasMoves3: boardModel.hasMoves3
-            height: 0.06 * board.width
-            elementWidth: 0.145 * board.width
-            elementWidth2: 0.2 * board.width
+            height: 0.1 * board.width
+            pointSize: 0.03 * board.width
             anchors.horizontalCenter: scorePiecePanel.horizontalCenter
+            onColorClicked0: pieceSelector.forceColor = 0
+            onColorClicked1: pieceSelector.forceColor = 1
+            onColorClicked2: pieceSelector.forceColor = 2
+            onColorClicked3: pieceSelector.forceColor = 3
         }
 
         PieceSelector {

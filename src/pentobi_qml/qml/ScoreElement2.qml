@@ -12,12 +12,13 @@ Item {
     property alias color1: point1.color
     property alias color2: point2.color
     property bool isFinal: false
-    property int value: 0
+    property int value
+    property real pointSize
 
     Rectangle {
         id: point1
 
-        width: root.height / 2
+        width: pointSize
         height: width
         radius: width / 2
         anchors.verticalCenter: root.verticalCenter
@@ -25,22 +26,24 @@ Item {
     Rectangle {
         id: point2
 
-        width: point1.width
-        height: point1.height
-        radius: point1.radius
+        width: pointSize
+        height: width
+        radius: width / 2
         anchors.left: point1.right
         anchors.verticalCenter: root.verticalCenter
     }
     Text {
         text: value
         color: "#50494C"
-        width: root.width - point1.width - point2.width
-        height: root.height
-        anchors.left: point2.right
-        anchors.leftMargin: 0.3 * point1.width
+        width: root.width - point1.width - point2.width - anchors.leftMargin
+        anchors {
+            left: point2.right
+            leftMargin: 0.3 * point1.width
+            verticalCenter: root.verticalCenter
+        }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
         font.underline: isFinal
-        font.pixelSize: height
+        font.pixelSize: 1.7 * point1.width
     }
 }

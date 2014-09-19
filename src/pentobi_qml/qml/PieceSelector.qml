@@ -17,13 +17,19 @@ Item {
     property var pieces3
     property int rows: 1
 
+    /** Enforce that the pieces of a color are shown even if the color is
+        not to play.
+        Setting to -1 means that there is no such enforcement active. */
+    property int forceColor: -1
+
     signal piecePicked(var piece)
 
     PieceListFlickable {
         anchors.fill: root
         rows: root.rows
         pieces: root.pieces0
-        isToPlay: root.toPlay == 0
+        isShown: (forceColor < 0 && root.toPlay == 0) || forceColor == 0
+        delayOpacityChange: forceColor >= 0
         pieceAreaSize: root.pieceAreaSize
         onPiecePicked: root.piecePicked(piece)
     }
@@ -31,7 +37,8 @@ Item {
         anchors.fill: root
         rows: root.rows
         pieces: root.pieces1
-        isToPlay: root.toPlay == 1
+        isShown: (forceColor < 0 && root.toPlay == 1) || forceColor == 1
+        delayOpacityChange: forceColor >= 0
         pieceAreaSize: root.pieceAreaSize
         onPiecePicked: root.piecePicked(piece)
     }
@@ -39,7 +46,8 @@ Item {
         anchors.fill: root
         rows: root.rows
         pieces: root.pieces2
-        isToPlay: root.toPlay == 2
+        isShown: (forceColor < 0 && root.toPlay == 2) || forceColor == 2
+        delayOpacityChange: forceColor >= 0
         pieceAreaSize: root.pieceAreaSize
         onPiecePicked: root.piecePicked(piece)
     }
@@ -47,7 +55,8 @@ Item {
         anchors.fill: root
         rows: root.rows
         pieces: root.pieces3
-        isToPlay: root.toPlay == 3
+        isShown: (forceColor < 0 && root.toPlay == 3) || forceColor == 3
+        delayOpacityChange: forceColor >= 0
         pieceAreaSize: root.pieceAreaSize
         onPiecePicked: root.piecePicked(piece)
     }
