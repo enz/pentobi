@@ -13,10 +13,12 @@
 
 using namespace std;
 using libboardgame_util::log;
+using libboardgame_util::Exception;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::ColorIterator;
+using libpentobi_base::ColorMove;
 using libpentobi_base::CoordPoint;
 using libpentobi_base::MovePoints;
 using libpentobi_base::PiecePoints;
@@ -44,6 +46,24 @@ BoardModel::BoardModel(QObject* parent)
 {
     createPieceModels();
     updateProperties();
+}
+
+void BoardModel::autoSave()
+{
+    QString s;
+    if (! m_bd.is_game_over())
+    {
+        s = to_string_id(m_bd.get_variant());
+        for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
+        {
+            ColorMove mv = m_bd.get_move(i);
+            s.append(QString(";%1;%2")
+                     .arg(mv.color.to_int())
+                     .arg(m_bd.to_string(mv.move, false).c_str()));
+        }
+    }
+    QSettings settings;
+    settings.setValue("autosave", s);
 }
 
 void BoardModel::createPieceModels()
@@ -151,6 +171,42 @@ bool BoardModel::isLegalPos(PieceModel* pieceModel, QPointF coord) const
     Color c(pieceModel->color());
     bool result = m_bd.is_legal(c, mv);
     return result;
+}
+
+void BoardModel::loadAutoSave()
+{
+    QSettings settings;
+    QString s = settings.value("autosave", "").toString();
+    if (s.isEmpty())
+        return;
+    QStringList l = s.split(';');
+    if (l[0] != to_string_id(m_bd.get_variant()))
+    {
+        qDebug() << "BoardModel: autosave has wrong game variant";
+        return;
+    }
+    m_bd.init();
+    try
+    {
+        for (int i = 1; i < l.length(); i += 2)
+        {
+            unsigned colorInt = l[i].toUInt();
+            if (colorInt >= m_bd.get_nu_colors())
+                throw Exception("invalid color");
+            Color c(colorInt);
+            if (i + 1 >= l.length())
+                throw Exception("color without move");
+            Move mv = m_bd.from_string(l[i + 1].toLocal8Bit().constData());
+            if (! m_bd.is_legal(c, mv))
+                throw Exception("illegal move");
+            m_bd.play(c, mv);
+        }
+    }
+    catch (const Exception &e)
+    {
+        qDebug() << "BoardModel: autosave has illegal move: " << e.what();
+    }
+    updateProperties();
 }
 
 void BoardModel::newGame()

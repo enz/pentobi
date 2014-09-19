@@ -56,6 +56,10 @@ public:
 
     Q_INVOKABLE void initGameVariant(QString gameVariant);
 
+    Q_INVOKABLE void autoSave();
+
+    Q_INVOKABLE void loadAutoSave();
+
     QQmlListProperty<PieceModel> pieceModels0();
 
     QQmlListProperty<PieceModel> pieceModels1();
