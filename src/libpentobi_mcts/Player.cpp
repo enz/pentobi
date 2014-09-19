@@ -126,7 +126,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::classic_2:
             {
                 static float counts[] =
-                    { 3, 24, 87, 213, 667, 1989, 10780, 98438, 1249009 };
+                    { 3, 24, 87, 213, 667, 1989, 10780, 98438, 1250508 };
                 max_count = counts[level - 1];
             }
             break;
@@ -134,7 +134,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::junior:
             {
                 static float counts[] =
-                    { 3, 17, 44, 123, 426, 1672, 6240, 51590, 5174795 };
+                    { 3, 17, 44, 123, 426, 1672, 6240, 51590, 4952279 };
                 max_count = counts[level - 1];
             }
             break;
@@ -143,7 +143,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::trigon_3:
             {
                 static float counts[] =
-                    { 228, 433, 727, 1501, 2912, 7395, 20828, 61138, 348842 };
+                    { 228, 433, 727, 1501, 2912, 7395, 20828, 61138, 357912 };
                 max_count = counts[level - 1];
             }
             break;
