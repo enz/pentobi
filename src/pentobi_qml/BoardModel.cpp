@@ -143,18 +143,12 @@ void BoardModel::initGameVariant(QString gameVariant)
     settings.setValue("variant", gameVariant);
 }
 
-bool BoardModel::isLegalPos(QVariant piece, QPointF coord) const
+bool BoardModel::isLegalPos(PieceModel* pieceModel, QPointF coord) const
 {
-    PieceModel* p = qvariant_cast<PieceModel*>(piece);
-    if (! p)
-    {
-        qDebug() << "BoardModel::isLegalPos: invalid argument";
-        return false;
-    }
     Move mv;
-    if (! findMove(*p, coord, mv))
+    if (! findMove(*pieceModel, coord, mv))
         return false;
-    Color c(p->color());
+    Color c(pieceModel->color());
     bool result = m_bd.is_legal(c, mv);
     return result;
 }
@@ -197,17 +191,11 @@ QQmlListProperty<PieceModel> BoardModel::pieceModels3()
     return QQmlListProperty<PieceModel>(this, m_pieceModels3);
 }
 
-void BoardModel::play(QVariant piece, QPointF coord)
+void BoardModel::play(PieceModel* pieceModel, QPointF coord)
 {
-    PieceModel* p = qvariant_cast<PieceModel*>(piece);
-    if (! p)
-    {
-        qDebug() << "BoardModel::play: invalid argument";
-        return;
-    }
-    Color c(p->color());
+    Color c(pieceModel->color());
     Move mv;
-    if (! findMove(*p, coord, mv))
+    if (! findMove(*pieceModel, coord, mv))
     {
         qDebug() << "BoardModel::play: illegal move";
         return;

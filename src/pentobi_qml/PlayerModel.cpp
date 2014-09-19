@@ -116,22 +116,17 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
     emit isGenMoveRunningChanged(isGenMoveRunning);
 }
 
-void PlayerModel::startGenMove(QVariant boardModel)
+void PlayerModel::startGenMove(BoardModel* boardModel)
 {
     cancelGenMove();
-    auto bm = qvariant_cast<BoardModel*>(boardModel);
-    if (! bm)
-    {
-        qDebug() << "PlayerModel::play: invalid argument";
-        return;
-    }
     m_player.set_level(m_level);
-    auto variant = bm->getBoard().get_variant();
+    auto variant = boardModel->getBoard().get_variant();
     if (! m_player.is_book_loaded(variant))
         loadBook(variant);
     ++m_genMoveId;
     QFuture<GenMoveResult> future =
-        QtConcurrent::run(this, &PlayerModel::asyncGenMove, bm, m_genMoveId);
+            QtConcurrent::run(this, &PlayerModel::asyncGenMove, boardModel,
+                              m_genMoveId);
     m_genMoveWatcher.setFuture(future);
     setIsGenMoveRunning(true);
 }

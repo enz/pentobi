@@ -33,7 +33,7 @@ public:
         The state of the board model may not be changed until the move
         generation was finished (computerPlayed signal) or aborted
         with cancelGenMove() */
-    Q_INVOKABLE void startGenMove(QVariant boardModel);
+    Q_INVOKABLE void startGenMove(BoardModel* boardModel);
 
     /** Cancel the move generation in the background thread if one is
         running. */

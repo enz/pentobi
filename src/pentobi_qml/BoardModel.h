@@ -46,9 +46,9 @@ public:
 
     explicit BoardModel(QObject* parent = nullptr);
 
-    Q_INVOKABLE bool isLegalPos(QVariant piece, QPointF coord) const;
+    Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, QPointF coord) const;
 
-    Q_INVOKABLE void play(QVariant piece, QPointF coord);
+    Q_INVOKABLE void play(PieceModel* pieceModel, QPointF coord);
 
     Q_INVOKABLE void newGame();
 
