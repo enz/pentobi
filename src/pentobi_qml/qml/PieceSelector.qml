@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.1
-import QtQml.Models 2.1
 
 Item {
     id: root
@@ -21,57 +20,69 @@ Item {
 
     signal piecePicked(var piece)
 
-    ObjectModel {
-        id: objectModel
+    onToPlayChanged: flickable.showToPlay(80)
 
-        PieceListFlickable {
-            width: root.width
-            height: root.height
-            rows: root.rows
-            pieces: root.pieces0
-            pieceAreaSize: root.pieceAreaSize
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceListFlickable {
-            width: root.width
-            height: root.height
-            rows: root.rows
-            pieces: root.pieces1
-            pieceAreaSize: root.pieceAreaSize
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceListFlickable {
-            visible: nuColors >= 3
-            width: root.width
-            height: visible ? root.height : 0
-            rows: root.rows
-            pieces: root.pieces2
-            pieceAreaSize: visible ? root.pieceAreaSize : 0
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceListFlickable {
-            visible: nuColors >= 4
-            width: root.width
-            height: visible ? root.height : 0
-            rows: root.rows
-            pieces: root.pieces3
-            pieceAreaSize: visible ? root.pieceAreaSize : 0
-            onPiecePicked: root.piecePicked(piece)
-        }
-    }
+    Flickable {
+        id: flickable
 
-    ListView {
-        id: listView
-
-        model: objectModel
         anchors.fill: root
+        contentHeight: nuColors * height
+        flickableDirection: Flickable.VerticalFlick
         clip: true
-        snapMode: ListView.SnapToItem
-        currentIndex: toPlay
-        highlightFollowsCurrentItem: true
-        highlightMoveDuration: 100
-        preferredHighlightBegin: 0
-        preferredHighlightEnd: height
-        highlightRangeMode: ListView.StrictlyEnforceRange
+        onMovementEnded:
+            showColor(Math.min(Math.round(contentY / height), nuColors - 1), 200)
+        onWidthChanged: showToPlay(0)
+        onHeightChanged: showToPlay(0)
+        Component.onCompleted: showToPlay(0)
+
+        function showColor(color, duration) {
+            snapAnimation.duration = duration
+            snapAnimation.to = height * color
+            snapAnimation.restart()
+        }
+        function showToPlay(duration) { showColor(toPlay, duration) }
+
+        NumberAnimation {
+            id: snapAnimation
+
+            target: flickable
+            property: "contentY"
+        }
+        Column {
+            PieceListFlickable {
+                width: root.width
+                height: root.height
+                rows: root.rows
+                pieces: root.pieces0
+                pieceAreaSize: root.pieceAreaSize
+                onPiecePicked: root.piecePicked(piece)
+            }
+            PieceListFlickable {
+                width: root.width
+                height: root.height
+                rows: root.rows
+                pieces: root.pieces1
+                pieceAreaSize: root.pieceAreaSize
+                onPiecePicked: root.piecePicked(piece)
+            }
+            PieceListFlickable {
+                visible: nuColors >= 3
+                width: root.width
+                height: root.height
+                rows: root.rows
+                pieces: root.pieces2
+                pieceAreaSize: root.pieceAreaSize
+                onPiecePicked: root.piecePicked(piece)
+            }
+            PieceListFlickable {
+                visible: nuColors >= 4
+                width: root.width
+                height: root.height
+                rows: root.rows
+                pieces: root.pieces3
+                pieceAreaSize: root.pieceAreaSize
+                onPiecePicked: root.piecePicked(piece)
+            }
+        }
     }
 }
