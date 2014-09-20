@@ -31,10 +31,13 @@ ApplicationWindow {
     visible: true
     title: qsTr("Pentobi")
     menuBar: Pentobi.Menu { }
+    onWidthChanged: gameDisplay.showPiecesToPlay()
+    onHeightChanged: gameDisplay.showPiecesToPlay()
     onClosing: Logic.quit()
     Component.onCompleted: {
         Logic.initGameVariant(boardModel.gameVariant)
         boardModel.loadAutoSave()
+        gameDisplay.showPiecesToPlay()
     }
     Component.onDestruction: {
         boardModel.autoSave()

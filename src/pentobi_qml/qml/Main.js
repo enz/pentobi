@@ -109,6 +109,7 @@ function computerPlay() {
 function genMove() {
     cancelGenMove()
     gameDisplay.pickedPiece = null
+    gameDisplay.showPiecesToPlay()
     busyIndicator.running = true
     playerModel.startGenMove(boardModel)
 }
@@ -129,6 +130,7 @@ function initGameVariant(gameVariant) {
     message.clear()
     boardModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
+    gameDisplay.showPiecesToPlay()
     initComputerColors()
 }
 
@@ -145,21 +147,21 @@ function newGame()
 {
     cancelGenMove()
     gameDisplay.pickedPiece = null
-    gameDisplay.clearPieceSelectorForcedColor()
     showTemporaryMessage("New game")
     boardModel.newGame()
+    gameDisplay.showPiecesToPlay()
     initComputerColors()
 }
 
 function onComputerPlayed() {
     busyIndicator.running = false
-    gameDisplay.clearPieceSelectorForcedColor()
+    gameDisplay.showPiecesToPlay()
     checkComputerMoveTimer.start()
 }
 
 function play(pieceModel, gameCoord) {
     cancelGenMove()
-    gameDisplay.clearPieceSelectorForcedColor()
+    gameDisplay.showPiecesToPlay()
     boardModel.play(pieceModel, gameCoord)
     checkComputerMove()
 }
@@ -184,6 +186,7 @@ function undo() {
     cancelGenMove()
     boardModel.undo()
     gameDisplay.pickedPiece = null
+    gameDisplay.showPiecesToPlay()
 }
 
 function quit() {

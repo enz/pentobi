@@ -15,14 +15,8 @@ Item {
     property int value
     property real pointSize
 
-    signal clicked
-
     width: 5 * pointSize
 
-    MouseArea {
-        anchors.fill: root
-        onClicked: root.clicked()
-    }
     Rectangle {
         id: point
 

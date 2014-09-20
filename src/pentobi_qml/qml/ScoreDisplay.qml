@@ -24,11 +24,6 @@ Row {
     property bool hasMoves2
     property bool hasMoves3
 
-    signal colorClicked0
-    signal colorClicked1
-    signal colorClicked2
-    signal colorClicked3
-
     ScoreElement2 {
         visible: gameVariant == "classic_2" || gameVariant == "trigon_2"
         value: points0 + points2
@@ -59,7 +54,6 @@ Row {
         height: root.height
         width: 4.3 * pointSize
         color: boardModel.gameVariant == "duo" ? "#0073CF" : "#0073CF"
-        onClicked: colorClicked0()
     }
 
     ScoreElement {
@@ -70,7 +64,6 @@ Row {
         height: root.height
         width: 4.3 * pointSize
         color: boardModel.gameVariant == "duo" ? "#00C000" : "#EBCD23"
-        onClicked: colorClicked1()
     }
 
     ScoreElement {
@@ -82,7 +75,6 @@ Row {
         height: root.height
         width: 4.3 * pointSize
         color: "#E63E2C"
-        onClicked: colorClicked2()
     }
 
     ScoreElement {
@@ -94,6 +86,5 @@ Row {
         height: root.height
         width: 4.3 * pointSize
         color: "#00C000"
-        onClicked: colorClicked3()
     }
 }

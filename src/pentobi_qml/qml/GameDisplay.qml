@@ -38,7 +38,7 @@ Item
         _pieces2 = Logic.createPieces(boardModel.pieceModels2)
         _pieces3 = Logic.createPieces(boardModel.pieceModels3)
     }
-    function clearPieceSelectorForcedColor() { pieceSelector.forceColor = -1 }
+    function showPiecesToPlay() { pieceSelector.showColor(boardModel.toPlay) }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
@@ -77,10 +77,6 @@ Item
             height: 0.1 * board.width
             pointSize: 0.03 * board.width
             anchors.horizontalCenter: scorePiecePanel.horizontalCenter
-            onColorClicked0: pieceSelector.forceColor = 0
-            onColorClicked1: pieceSelector.forceColor = 1
-            onColorClicked2: pieceSelector.forceColor = 2
-            onColorClicked3: pieceSelector.forceColor = 3
         }
 
         PieceSelector {
@@ -90,6 +86,7 @@ Item
             pieces1: _pieces1
             pieces2: _pieces2
             pieces3: _pieces3
+            nuColors: boardModel.nuColors
             width: board.width
 
             // Make piece size such that 7 pieces are visible below the board,

@@ -11,26 +11,10 @@ Row {
 
     property real pieceAreaSize
     property int color
-    property bool isShown
-
-    /** Delay changes to opacity a bit such that the pieces of the new color
-        are only visible after the movement animation of the piece view. */
-    property bool delayOpacityChange
-
     property var pieces
     property int rows: 1
 
     signal piecePicked(var piece)
-
-    z: isShown ? 1 : 0
-    opacity: isShown ? 1 : 0
-
-    Behavior on opacity {
-        SequentialAnimation {
-            PauseAnimation { duration: delayOpacityChange ? 300 : 0 }
-            PropertyAnimation { duration: 150 }
-        }
-    }
 
     Image {
         width: 0.05 * root.width; height: root.height

@@ -36,9 +36,7 @@ Item {
                 Component.onCompleted: piece.parentPieceSelectorArea = pieceArea
 
                 MouseArea {
-                    width: 0.7 * pieceArea.width
-                    height: 0.7 * pieceArea.height
-                    anchors.centerIn: pieceArea
+                    anchors.fill: pieceArea
                     onClicked: piecePicked(piece)
                 }
 
