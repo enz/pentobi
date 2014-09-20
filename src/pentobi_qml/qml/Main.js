@@ -26,7 +26,8 @@ function checkGameFinsihed() {
     if (! boardModel.isGameOver)
         return
     var msg, points0, points1, points2, points3
-    if (boardModel.nuColors == 2) {
+    switch (boardModel.gameVariant) {
+    case "duo":
         points0 = boardModel.points0
         points1 = boardModel.points1
         if (points0 > points1)
@@ -35,8 +36,38 @@ function checkGameFinsihed() {
             msg = "Green wins"
         else
             msg = "Game ends in a tie"
-    }
-    else if (boardModel.nuPlayers == 4) {
+        break
+    case "classic_2":
+    case "trigon_2":
+        points0 = boardModel.points0 + boardModel.points2
+        points1 = boardModel.points1 + boardModel.points3
+        if (points0 > points1)
+            msg = "Blue/Red wins"
+        else if (points0 < points1)
+            msg = "Yellow/Green wins"
+        else
+            msg = "Game ends in a tie"
+        break
+    case "trigon_3":
+        break
+        points0 = boardModel.points0
+        points1 = boardModel.points1
+        points2 = boardModel.points2
+        var maxPoints = Math.max(points0, points1, points2)
+        var nuWinners = 0
+        if (points0 == maxPoints) ++nuWinners
+        if (points1 == maxPoints) ++nuWinners
+        if (points2 == maxPoints) ++nuWinners
+        if (nuWinners > 1)
+            msg = "Game ends in a tie"
+        else if (points0 == maxPoints)
+            msg = "Blue wins"
+        else if (points1 == maxPoints)
+            msg = "Yellow wins"
+        else if (points2 == maxPoints)
+            msg = "Red wins"
+        break
+    default:
         points0 = boardModel.points0
         points1 = boardModel.points1
         points2 = boardModel.points2
@@ -57,16 +88,6 @@ function checkGameFinsihed() {
             msg = "Red wins"
         else if (points3 == maxPoints)
             msg = "Green wins"
-    }
-    else {
-        points0 = boardModel.points0 + boardModel.points2
-        points1 = boardModel.points1 + boardModel.points3
-        if (points0 > points1)
-            msg = "Blue/Red wins"
-        else if (points0 < points1)
-            msg = "Yellow/Green wins"
-        else
-            msg = "Game ends in a tie"
     }
     showMessage(msg)
 }
