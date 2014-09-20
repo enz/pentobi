@@ -33,8 +33,8 @@ ApplicationWindow {
     menuBar: Pentobi.Menu { }
     onClosing: Logic.quit()
     Component.onCompleted: {
-        Logic.initGameVariant(boardModel.gameVariant)
         boardModel.loadAutoSave()
+        Logic.initGameVariant(boardModel.gameVariant)
     }
     Component.onDestruction: {
         boardModel.autoSave()
