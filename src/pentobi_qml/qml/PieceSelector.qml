@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.0
+import QtQuick 2.1
 import QtQml.Models 2.1
 
 Item {
@@ -70,5 +70,8 @@ Item {
         currentIndex: toPlay
         highlightFollowsCurrentItem: true
         highlightMoveDuration: 100
+        preferredHighlightBegin: 0
+        preferredHighlightEnd: height
+        highlightRangeMode: ListView.StrictlyEnforceRange
     }
 }
