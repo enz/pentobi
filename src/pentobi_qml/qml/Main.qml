@@ -19,6 +19,7 @@ ApplicationWindow {
     property bool computerPlays1
     property bool computerPlays2
     property bool computerPlays3
+    property bool isMoveHintRunning
 
     // For a desktop window, we should use a smaller initial size and remember
     // the last size in the settings, but for now we use pentobi_qml only for
@@ -51,7 +52,7 @@ ApplicationWindow {
     PlayerModel {
         id: playerModel
 
-        onComputerPlayed: Logic.onComputerPlayed()
+        onMoveGenerated: Logic.moveGenerated(move)
     }
 
     GameDisplay {

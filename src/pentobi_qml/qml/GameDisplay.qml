@@ -38,6 +38,7 @@ Item
         _pieces2 = Logic.createPieces(boardModel.pieceModels2)
         _pieces3 = Logic.createPieces(boardModel.pieceModels3)
     }
+    function showMoveHint(move) { Logic.showMoveHint(move) }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null

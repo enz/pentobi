@@ -60,6 +60,11 @@ MenuBar {
             onTriggered: Logic.undo()
         }
         MenuItem {
+            text: "Move Hint"
+            enabled: ! boardModel.isGameOver
+            onTriggered: Logic.moveHint()
+        }
+        MenuItem {
             text: "Computer Colors"
             onTriggered: Logic.showComputerColorDialog()
         }

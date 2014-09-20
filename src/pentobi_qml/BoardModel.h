@@ -50,6 +50,8 @@ public:
 
     Q_INVOKABLE void play(PieceModel* pieceModel, QPointF coord);
 
+    Q_INVOKABLE void playMove(int move);
+
     Q_INVOKABLE void newGame();
 
     Q_INVOKABLE void undo();
@@ -60,6 +62,10 @@ public:
 
     Q_INVOKABLE void loadAutoSave();
 
+    /** Find the piece model for a given move and set its transform and game
+        coordinates accordingly but do not set its status to played yet. */
+    Q_INVOKABLE PieceModel* preparePiece(int color, int move);
+
     QQmlListProperty<PieceModel> pieceModels0();
 
     QQmlListProperty<PieceModel> pieceModels1();
@@ -69,8 +75,6 @@ public:
     QQmlListProperty<PieceModel> pieceModels3();
 
     const Board& getBoard() const;
-
-    void play(Color c, Move mv);
 
 signals:
     void toPlayChanged(int);
@@ -147,8 +151,6 @@ private:
     bool findMove(const PieceModel& piece, QPointF coord, Move& mv) const;
 
     QList<PieceModel*>& pieceModels(Color c);
-
-    void updatePiece(Color c, Move mv);
 
     void updateProperties();
 };

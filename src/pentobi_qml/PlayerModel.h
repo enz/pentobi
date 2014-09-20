@@ -35,6 +35,8 @@ public:
         with cancelGenMove() */
     Q_INVOKABLE void startGenMove(BoardModel* boardModel);
 
+    Q_INVOKABLE void startGenMoveAtLevel(BoardModel* boardModel, int level);
+
     /** Cancel the move generation in the background thread if one is
         running. */
     Q_INVOKABLE void cancelGenMove();
@@ -50,11 +52,13 @@ signals:
 
     void isGenMoveRunningChanged(bool);
 
-    void computerPlayed();
+    void moveGenerated(int move);
 
 private:
     struct GenMoveResult
     {
+        Color color;
+
         Move move;
 
         unsigned genMoveId;

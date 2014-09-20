@@ -256,21 +256,25 @@ void BoardModel::play(PieceModel* pieceModel, QPointF coord)
         qWarning() << "BoardModel::play: illegal move";
         return;
     }
-    play(c, mv);
-}
-
-void BoardModel::play(Color c, Move mv)
-{
     m_bd.play(c, mv);
     updateProperties();
 }
 
-void BoardModel::updatePiece(Color c, Move mv)
+void BoardModel::playMove(int move)
 {
+    Color c = m_bd.get_effective_to_play();
+    Move mv(move);
+    m_bd.play(c, mv);
+    updateProperties();
+}
+
+PieceModel* BoardModel::preparePiece(int color, int move)
+{
+    Move mv(move);
     auto& info = m_bd.get_move_info(mv);
     auto& geo = m_bd.get_geometry();
     auto width = geo.get_width();
-    for (auto pieceModel : pieceModels(c))
+    for (auto pieceModel : pieceModels(Color(color)))
         if (pieceModel->getPiece() == info.get_piece())
         {
             PiecePoints movePoints;
@@ -284,9 +288,9 @@ void BoardModel::updatePiece(Color c, Move mv)
                 pieceModel->setTransform(transform);
             QPointF center = PieceModel::findCenter(m_bd, movePoints);
             pieceModel->setGameCoord(center);
-            pieceModel->setIsPlayed(true);
-            return;
+            return pieceModel;
         }
+    return nullptr;
 }
 
 void BoardModel::undo()
@@ -394,7 +398,11 @@ void BoardModel::updateProperties()
     {
         auto mv = m_bd.get_move(i);
         if (! mv.is_pass())
-            updatePiece(mv.color, mv.move);
+        {
+            auto pieceModel =
+                    preparePiece(mv.color.to_int(), mv.move.to_int());
+            pieceModel->setIsPlayed(true);
+        }
     }
     int toPlay = m_bd.get_effective_to_play().to_int();
     if (m_toPlay != toPlay)

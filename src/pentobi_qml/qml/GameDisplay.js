@@ -41,6 +41,25 @@ function destroyPieces(pieces) {
             pieces[i].destroy()
 }
 
+function findPiece(pieceModel) {
+    var i
+    for (i = 0; i < _pieces0.length; ++i)
+        if (_pieces0[i].pieceModel === pieceModel)
+            return _pieces0[i]
+    for (i = 0; i < _pieces1.length; ++i)
+        if (_pieces1[i].pieceModel === pieceModel)
+            return _pieces1[i]
+    if (nuColors > 2)
+        for (i = 0; i < _pieces2.length; ++i)
+            if (_pieces2[i].pieceModel === pieceModel)
+                return _pieces2[i]
+    if (nuColors > 3)
+        for (i = 0; i < _pieces3.length; ++i)
+            if (_pieces3[i].pieceModel === pieceModel)
+                return _pieces3[i]
+    return null
+}
+
 function pickPiece(piece) {
     if (piece.pieceModel.color != boardModel.toPlay)
         return
@@ -55,5 +74,18 @@ function pickPiece(piece) {
         pieceManipulator.x = x
         pieceManipulator.y = y
     }
+    pickedPiece = piece
+}
+
+function showMoveHint(move) {
+    var pieceModel = boardModel.preparePiece(boardModel.toPlay, move)
+    var piece = findPiece(pieceModel)
+    pieceManipulator.x =
+            board.x + board.mapFromGameX(pieceModel.gameCoord.x) -
+            pieceManipulator.width / 2
+    pieceManipulator.y =
+            board.y + board.mapFromGameY(pieceModel.gameCoord.y) -
+            pieceManipulator.height / 2
+    pieceManipulator.legal = true
     pickedPiece = piece
 }

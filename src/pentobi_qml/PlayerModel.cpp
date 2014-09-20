@@ -79,8 +79,13 @@ void PlayerModel::genMoveFinished()
         qWarning() << "PlayerModel: failed to generate move";
         return;
     }
-    result.boardModel->play(bd.get_effective_to_play(), mv);
-    emit computerPlayed();
+    Color c = bd.get_effective_to_play();
+    if (! bd.is_legal(c, mv))
+    {
+        qWarning() << "PlayerModel: player generated illegal move";
+        return;
+    }
+    emit moveGenerated(mv.to_int());
 }
 
 int PlayerModel::isGenMoveRunning() const
@@ -118,8 +123,13 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
 
 void PlayerModel::startGenMove(BoardModel* boardModel)
 {
+    startGenMoveAtLevel(boardModel, m_level);
+}
+
+void PlayerModel::startGenMoveAtLevel(BoardModel* boardModel, int level)
+{
     cancelGenMove();
-    m_player.set_level(m_level);
+    m_player.set_level(level);
     auto variant = boardModel->getBoard().get_variant();
     if (! m_player.is_book_loaded(variant))
         loadBook(variant);

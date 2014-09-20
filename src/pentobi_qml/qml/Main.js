@@ -111,6 +111,7 @@ function genMove() {
     cancelGenMove()
     gameDisplay.pickedPiece = null
     busyIndicator.running = true
+    isMoveHintRunning = false
     playerModel.startGenMove(boardModel)
 }
 
@@ -143,6 +144,24 @@ function isComputerToPlay() {
     }
 }
 
+function moveGenerated(move) {
+    if (isMoveHintRunning) {
+        gameDisplay.showMoveHint(move)
+        isMoveHintRunning = false
+    }
+    else {
+        busyIndicator.running = false
+        boardModel.playMove(move)
+        checkComputerMoveTimer.start()
+    }
+}
+
+function moveHint() {
+    cancelGenMove()
+    isMoveHintRunning = true
+    playerModel.startGenMoveAtLevel(boardModel, 1)
+}
+
 function newGame()
 {
     cancelGenMove()
@@ -151,11 +170,6 @@ function newGame()
     computerColorDialog.visible = false
     boardModel.newGame()
     initComputerColors()
-}
-
-function onComputerPlayed() {
-    busyIndicator.running = false
-    checkComputerMoveTimer.start()
 }
 
 function play(pieceModel, gameCoord) {
