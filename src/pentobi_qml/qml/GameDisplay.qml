@@ -74,7 +74,7 @@ Item
             hasMoves2: boardModel.hasMoves2
             hasMoves3: boardModel.hasMoves3
             toPlay: boardModel.isGameOver ? -1 : boardModel.toPlay
-            height: 0.1 * board.width
+            height: 0.06 * board.width
             pointSize: 0.03 * board.width
             anchors.horizontalCenter: scorePiecePanel.horizontalCenter
         }
@@ -93,9 +93,10 @@ Item
             // so that they are smaller than the pieces on the board but not too
             // small. Take into account that the effective visible width of the
             // piece list is only 90% of the piece selector width because of the
-            // images indicating that the list is flickable. If this would result
-            // in a piece size smaller than 10 mm, show only 6 pieces.
-            pieceAreaSize: (0.9 * board.width) / (0.9 * board.width >= 70 * Screen.pixelDensity ? 7 : 6)
+            // images indicating that the list is flickable. Ensure a minimum
+            // piece size of 9 mm
+            pieceAreaSize: Math.floor(Math.max(0.9 * board.width / 7,
+                                      9 * Screen.pixelDensity))
 
             rows: {
                 if (pieceAreaSize == 0)
