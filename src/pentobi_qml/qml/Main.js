@@ -77,6 +77,7 @@ function checkGameFinsihed() {
 function computerPlay() {
     if (playerModel.isGenMoveRunning)
         return
+    computerColorDialog.visible = false
     if (! isComputerToPlay()) {
         var isMultiColor = (boardModel.gameVariant == "classic_2"
                             || boardModel.gameVariant == "trigon_2")
@@ -126,6 +127,7 @@ function initComputerColors() {
 
 function initGameVariant(gameVariant) {
     cancelGenMove()
+    computerColorDialog.visible = false
     message.clear()
     boardModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
@@ -146,6 +148,7 @@ function newGame()
     cancelGenMove()
     gameDisplay.pickedPiece = null
     message.clear()
+    computerColorDialog.visible = false
     boardModel.newGame()
     initComputerColors()
 }
