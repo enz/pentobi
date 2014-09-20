@@ -63,7 +63,7 @@ Item {
                 verticalCenter: parent.verticalCenter
             }
             width: 0.2 * root.width; height: 0.2 * root.height
-            onClicked: pieceModel.rotateLeft()
+            onClicked: pieceModel.flipAcrossX()
         }
         MouseArea {
             anchors {
@@ -79,7 +79,7 @@ Item {
                 verticalCenter: parent.verticalCenter
             }
             width: 0.2 * root.width; height: 0.2 * root.height
-            onClicked: pieceModel.flipAcrossX()
+            onClicked: pieceModel.rotateLeft()
         }
     }
 }
