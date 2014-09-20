@@ -71,12 +71,12 @@ void PlayerModel::genMoveFinished()
     auto mv = result.move;
     if (mv.is_pass())
     {
-        qDebug() << "PlayerModel: no more moves";
+        qWarning() << "PlayerModel: no more moves";
         return;
     }
     if (mv.is_null())
     {
-        qDebug() << "PlayerModel: failed to generate move";
+        qWarning() << "PlayerModel: failed to generate move";
         return;
     }
     result.boardModel->play(bd.get_effective_to_play(), mv);
@@ -99,7 +99,7 @@ void PlayerModel::loadBook(Variant variant)
                .arg(to_string_id(variant)));
     if (! file.open(QIODevice::ReadOnly))
     {
-        qDebug() << "PlayerModel: could not open " << file.fileName();
+        qWarning() << "PlayerModel: could not open " << file.fileName();
         return;
     }
     QTextStream stream(&file);

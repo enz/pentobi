@@ -184,7 +184,7 @@ void PieceModel::setTransform(const Transform* transform)
         state = "rot300Flip";
     else
     {
-        qDebug() << "Invalid Transform " << typeid(*transform).name();
+        qWarning() << "Invalid Transform " << typeid(*transform).name();
         return;
     }
     setState(state);
@@ -249,7 +249,7 @@ void PieceModel::updateTransformFromState()
         m_transform = transforms.find<TransfTrigonReflRot240>();
     else
     {
-        qDebug() << "PieceModel: unknown state " << m_state;
+        qWarning() << "PieceModel: unknown state " << m_state;
         m_transform = transforms.find<TransfIdentity>();
     }
 }
