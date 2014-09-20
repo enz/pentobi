@@ -71,18 +71,18 @@ void PlayerModel::genMoveFinished()
     auto mv = result.move;
     if (mv.is_pass())
     {
-        qWarning() << "PlayerModel: no more moves";
+        qWarning("PlayerModel: no more moves");
         return;
     }
     if (mv.is_null())
     {
-        qWarning() << "PlayerModel: failed to generate move";
+        qWarning("PlayerModel: failed to generate move");
         return;
     }
     Color c = bd.get_effective_to_play();
     if (! bd.is_legal(c, mv))
     {
-        qWarning() << "PlayerModel: player generated illegal move";
+        qWarning("PlayerModel: player generated illegal move");
         return;
     }
     emit moveGenerated(mv.to_int());

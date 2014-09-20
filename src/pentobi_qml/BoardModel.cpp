@@ -140,7 +140,7 @@ void BoardModel::initGameVariant(QString gameVariant)
         m_bd.init(Variant::trigon_2);
     else
     {
-        qWarning() << "BoardModel: invalid/unsupported game variant";
+        qWarning("BoardModel: invalid/unsupported game variant");
         return;
     }
     int nuColors = m_bd.get_nu_colors();
@@ -182,7 +182,7 @@ void BoardModel::loadAutoSave()
     QStringList l = s.split(';');
     if (l[0] != to_string_id(m_bd.get_variant()))
     {
-        qWarning() << "BoardModel: autosave has wrong game variant";
+        qWarning("BoardModel: autosave has wrong game variant");
         return;
     }
     m_bd.init();
@@ -253,7 +253,7 @@ void BoardModel::play(PieceModel* pieceModel, QPointF coord)
     Move mv;
     if (! findMove(*pieceModel, coord, mv))
     {
-        qWarning() << "BoardModel::play: illegal move";
+        qWarning("BoardModel::play: illegal move");
         return;
     }
     m_bd.play(c, mv);
