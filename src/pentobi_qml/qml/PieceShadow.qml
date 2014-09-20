@@ -23,10 +23,7 @@ Transformable {
     Repeater {
         model: elements
         Image {
-            // TODO:  Only correct for Trigon boards with even size, negate for
-            // odd size
             property bool isDownward: (modelData.x % 2 != 0) ? (modelData.y % 2 == 0) : (modelData.y % 2 != 0)
-
             width: _isTrigon ? 2 * gridElementWidth : gridElementWidth
             height: gridElementHeight
             source: _isTrigon ? "images/triangle-shadow.svg" : "images/square-shadow.svg"

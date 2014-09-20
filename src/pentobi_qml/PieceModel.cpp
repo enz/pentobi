@@ -46,7 +46,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
     auto& info = bd.get_piece_info(piece);
     for (auto& p : info.get_points())
         m_elements.append(QVariant(QPointF(p.x, p.y)));
-    m_center = findCenter(bd, info.get_points());
+    m_center = findCenter(bd, info.get_points(), false);
     updateTransformFromState();
 }
 
@@ -80,11 +80,10 @@ QPointF PieceModel::gameCoord() const
     return m_gameCoord;
 }
 
-QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points)
+QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
+                               bool isOriginDownward)
 {
     auto boardType = bd.get_board_type();
-    bool isTrigon = (boardType == BoardType::trigon
-                     || boardType == BoardType::trigon_3);
     auto& geo = bd.get_geometry();
     qreal sumX = 0;
     qreal sumY = 0;
@@ -92,9 +91,10 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points)
     {
         qreal centerX = p.x + 0.5;
         qreal centerY;
-        if (isTrigon)
+        if (boardType == BoardType::trigon || boardType == BoardType::trigon_3)
         {
-            bool isDownward = (geo.get_point_type(p.x, p.y) == 0);
+            auto pointType = geo.get_point_type(p.x, p.y);
+            bool isDownward = (pointType == (isOriginDownward ? 0 : 1));
             if (isDownward)
                 centerY = p.y + 1.f / 3;
             else

@@ -29,11 +29,7 @@ Transformable {
             imageSourceHeight: root.imageSourceHeight
             x: _isTrigon ? (modelData.x - center.x - 0.5) * gridElementWidth : (modelData.x - center.x) * gridElementWidth
             y: (modelData.y - center.y) * gridElementHeight
-
-            // TODO:  Only correct for Trigon boards with even size, negate for
-            // odd size
             isDownward: _isTrigon && ((modelData.x % 2 != 0) ? (modelData.y % 2 == 0) : (modelData.y % 2 != 0))
-
             gameVariant: root.gameVariant
             color: root.color
             angle: root.rotation

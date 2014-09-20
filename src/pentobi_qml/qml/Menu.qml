@@ -40,6 +40,13 @@ MenuBar {
                 onTriggered: Logic.initGameVariant("trigon")
             }
             MenuItem {
+                text: "Trigon (Three Players)"
+                checkable: true
+                checked: boardModel.gameVariant == "trigon_3"
+                exclusiveGroup: groupGameVariant
+                onTriggered: Logic.initGameVariant("trigon_3")
+            }
+            MenuItem {
                 text: "Trigon (Two Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "trigon_2"

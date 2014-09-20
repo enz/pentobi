@@ -86,7 +86,9 @@ Rectangle {
             }
             CheckBox {
                 text: "Red"
-                visible: gameVariant == "classic" || gameVariant == "trigon"
+                visible: gameVariant == "classic" ||
+                         gameVariant == "trigon" ||
+                         gameVariant == "trigon_3"
                 checked: computerPlays3
                 onClicked: computerPlays3 = checked
             }

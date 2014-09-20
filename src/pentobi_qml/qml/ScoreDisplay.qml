@@ -78,7 +78,7 @@ Row {
     }
 
     ScoreElement {
-        visible: gameVariant != "duo"
+        visible: gameVariant != "duo" && gameVariant != "trigon_3"
         value: points3
         isFinal: ! hasMoves3
         isToPlay: toPlay == 3

@@ -19,6 +19,8 @@ Item {
         case "trigon":
         case "trigon_2":
             return 35
+        case "trigon_3":
+            return 31
         default:
             return 20
         }
@@ -31,6 +33,8 @@ Item {
         case "trigon":
         case "trigon_2":
             return 18
+        case "trigon_3":
+            return 16
         default:
             return 20
         }
@@ -68,6 +72,8 @@ Item {
             case "trigon":
             case "trigon_2":
                 return "images/board-trigon.svg"
+            case "trigon_3":
+                return "images/board-trigon-3.svg"
             case "duo":
                 return "images/board-duo.svg"
             default:

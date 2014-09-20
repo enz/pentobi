@@ -33,7 +33,8 @@ class PieceModel
     Q_PROPERTY(QPointF gameCoord READ gameCoord NOTIFY gameCoordChanged)
 
 public:
-    static QPointF findCenter(const Board& bd, const PiecePoints& points);
+    static QPointF findCenter(const Board& bd, const PiecePoints& points,
+                              bool isOriginDownward);
 
     PieceModel(QObject* parent, const Board& bd, libpentobi_base::Piece piece,
                Color c);

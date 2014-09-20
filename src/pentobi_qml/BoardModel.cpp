@@ -94,7 +94,7 @@ bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
     auto& info = m_bd.get_piece_info(piece.getPiece());
     PiecePoints piecePoints = info.get_points();
     piece.getTransform()->transform(piecePoints.begin(), piecePoints.end());
-    QPointF center(PieceModel::findCenter(m_bd, piecePoints));
+    QPointF center(PieceModel::findCenter(m_bd, piecePoints, false));
     auto& geo = m_bd.get_geometry();
     MovePoints points;
     for (auto& p : piecePoints)
@@ -138,6 +138,8 @@ void BoardModel::initGameVariant(QString gameVariant)
         m_bd.init(Variant::trigon);
     else if (gameVariant == "trigon_2")
         m_bd.init(Variant::trigon_2);
+    else if (gameVariant == "trigon_3")
+        m_bd.init(Variant::trigon_3);
     else
     {
         qWarning("BoardModel: invalid/unsupported game variant");
@@ -274,6 +276,7 @@ PieceModel* BoardModel::preparePiece(int color, int move)
     auto& info = m_bd.get_move_info(mv);
     auto& geo = m_bd.get_geometry();
     auto width = geo.get_width();
+    bool isOriginDownward = (m_bd.get_variant() == Variant::trigon_3);
     for (auto pieceModel : pieceModels(Color(color)))
         if (pieceModel->getPiece() == info.get_piece())
         {
@@ -286,7 +289,8 @@ PieceModel* BoardModel::preparePiece(int color, int move)
             auto oldTransform = pieceModel->getTransform();
             if (transform != pieceInfo.get_equivalent_transform(oldTransform))
                 pieceModel->setTransform(transform);
-            QPointF center = PieceModel::findCenter(m_bd, movePoints);
+            QPointF center =
+                    PieceModel::findCenter(m_bd, movePoints, isOriginDownward);
             pieceModel->setGameCoord(center);
             return pieceModel;
         }

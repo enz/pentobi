@@ -60,5 +60,6 @@
         <file>qml/images/triangle-red.svg</file>
         <file>qml/images/triangle-shadow.svg</file>
         <file>qml/images/triangle-yellow.svg</file>
+        <file>qml/images/board-trigon-3.svg</file>
     </qresource>
 </RCC>
