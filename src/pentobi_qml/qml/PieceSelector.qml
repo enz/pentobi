@@ -21,10 +21,6 @@ Item {
 
     signal piecePicked(var piece)
 
-    function showColor(color) {
-        listView.positionViewAtIndex(color, ListView.Beginning)
-    }
-
     ObjectModel {
         id: objectModel
 
@@ -71,5 +67,8 @@ Item {
         anchors.fill: root
         clip: true
         snapMode: ListView.SnapToItem
+        currentIndex: toPlay
+        highlightFollowsCurrentItem: true
+        highlightMoveDuration: 100
     }
 }

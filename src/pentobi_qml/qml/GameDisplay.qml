@@ -38,7 +38,6 @@ Item
         _pieces2 = Logic.createPieces(boardModel.pieceModels2)
         _pieces3 = Logic.createPieces(boardModel.pieceModels3)
     }
-    function showPiecesToPlay() { pieceSelector.showColor(boardModel.toPlay) }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
@@ -86,6 +85,7 @@ Item
             pieces1: _pieces1
             pieces2: _pieces2
             pieces3: _pieces3
+            toPlay: boardModel.toPlay
             nuColors: boardModel.nuColors
             width: board.width
 
@@ -112,7 +112,6 @@ Item
             }
 
             height: rows * pieceAreaSize
-            toPlay: boardModel.toPlay
             onPiecePicked: Logic.pickPiece(piece)
             visible: ! boardModel.isGameOver
         }
