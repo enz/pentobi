@@ -28,7 +28,6 @@ SOURCES += \
     ../libboardgame_sgf/Reader.cpp \
     ../libboardgame_sgf/TreeIterator.cpp \
     ../libboardgame_sgf/TreeReader.cpp \
-    ../libboardgame_sgf/TreeWriter.cpp \
     ../libboardgame_sgf/Writer.cpp \
     ../libboardgame_util/Abort.cpp \
     ../libboardgame_util/Assert.cpp \
@@ -43,7 +42,6 @@ SOURCES += \
     ../libboardgame_util/TimeIntervalChecker.cpp \
     ../libboardgame_util/Timer.cpp \
     ../libboardgame_util/TimeSource.cpp \
-    ../libpentobi_mcts/AnalyzeGame.cpp \
     ../libpentobi_mcts/LocalValue.cpp \
     ../libpentobi_mcts/PriorKnowledge.cpp \
     ../libpentobi_mcts/Search.cpp \
@@ -55,7 +53,6 @@ SOURCES += \
     ../libpentobi_base/BoardUtil.cpp \
     ../libpentobi_base/Book.cpp \
     ../libpentobi_base/Color.cpp \
-    ../libpentobi_base/Game.cpp \
     ../libpentobi_base/GameStateHistory.cpp \
     ../libpentobi_base/NodeUtil.cpp \
     ../libpentobi_base/PieceInfo.cpp \
@@ -72,7 +69,6 @@ SOURCES += \
     ../libboardgame_sgf/SgfNode.cpp \
     ../libboardgame_sgf/SgfTree.cpp \
     ../libpentobi_base/PentobiTree.cpp \
-    ../libpentobi_base/PentobiTreeWriter.cpp \
     ../libboardgame_util/WallTimeSource.cpp \
     ../libboardgame_util/CpuTimeSource.cpp \
     ../libpentobi_mcts/StateUtil.cpp \
@@ -93,7 +89,6 @@ HEADERS += \
     PlayerModel.h \
     ../libboardgame_sys/Compiler.h \
     ../libboardgame_sys/Memory.h \
-    ../libpentobi_mcts/AnalyzeGame.h \
     ../libpentobi_mcts/Float.h \
     ../libpentobi_mcts/LocalValue.h \
     ../libpentobi_mcts/PriorKnowledge.h \
@@ -106,7 +101,6 @@ HEADERS += \
     ../libboardgame_sgf/Reader.h \
     ../libboardgame_sgf/TreeIterator.h \
     ../libboardgame_sgf/TreeReader.h \
-    ../libboardgame_sgf/TreeWriter.h \
     ../libboardgame_sgf/Writer.h \
     ../libboardgame_util/Abort.h \
     ../libboardgame_util/ArrayList.h \
@@ -140,7 +134,6 @@ HEADERS += \
     ../libpentobi_base/ColorMap.h \
     ../libpentobi_base/ColorMove.h \
     ../libpentobi_base/DiagIterator.h \
-    ../libpentobi_base/Game.h \
     ../libpentobi_base/GameStateHistory.h \
     ../libpentobi_base/Geometry.h \
     ../libpentobi_base/Grid.h \
@@ -193,7 +186,6 @@ HEADERS += \
     ../libboardgame_sgf/SgfNode.h \
     ../libboardgame_sgf/SgfTree.h \
     ../libpentobi_base/PentobiTree.h \
-    ../libpentobi_base/PentobiTreeWriter.h \
     ../libboardgame_util/WallTimeSource.h \
     ../libboardgame_util/CpuTimeSource.h \
     ../libpentobi_mcts/StateUtil.h \
