@@ -52,7 +52,7 @@ Row {
         isToPlay: toPlay == 0
         pointSize: root.pointSize
         height: root.height
-        width: 4.3 * pointSize
+        width: 5 * pointSize
         color: boardModel.gameVariant == "duo" ? "#0073CF" : "#0073CF"
     }
 
@@ -62,7 +62,7 @@ Row {
         isToPlay: toPlay == 1
         pointSize: root.pointSize
         height: root.height
-        width: 4.3 * pointSize
+        width: 5 * pointSize
         color: boardModel.gameVariant == "duo" ? "#00C000" : "#EBCD23"
     }
 
@@ -73,7 +73,7 @@ Row {
         isToPlay: toPlay == 2
         pointSize: root.pointSize
         height: root.height
-        width: 4.3 * pointSize
+        width: 5 * pointSize
         color: "#E63E2C"
     }
 
@@ -84,7 +84,7 @@ Row {
         isToPlay: toPlay == 3
         pointSize: root.pointSize
         height: root.height
-        width: 4.3 * pointSize
+        width: 5 * pointSize
         color: "#00C000"
     }
 }

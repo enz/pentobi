@@ -15,8 +15,6 @@ Item {
     property int value
     property real pointSize
 
-    width: 5 * pointSize
-
     Rectangle {
         id: point
 
