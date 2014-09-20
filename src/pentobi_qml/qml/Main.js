@@ -145,7 +145,7 @@ function newGame()
 {
     cancelGenMove()
     gameDisplay.pickedPiece = null
-    showTemporaryMessage("New game")
+    message.clear()
     boardModel.newGame()
     initComputerColors()
 }
@@ -179,6 +179,7 @@ function showTemporaryMessage(text) {
 
 function undo() {
     cancelGenMove()
+    message.clear()
     boardModel.undo()
     gameDisplay.pickedPiece = null
 }
