@@ -269,7 +269,7 @@ PieceModel* BoardModel::preparePiece(int color, int move)
     auto& info = m_bd.get_move_info(mv);
     auto& geo = m_bd.get_geometry();
     auto width = geo.get_width();
-    bool isOriginDownward = (m_bd.get_variant() == Variant::trigon_3);
+    bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
     for (auto pieceModel : pieceModels(Color(color)))
         if (pieceModel->getPiece() == info.get_piece())
         {
