@@ -25,15 +25,16 @@ Transformable {
             property bool isDownward: (modelData.x % 2 != 0) ? (modelData.y % 2 == 0) : (modelData.y % 2 != 0)
             width: _isTrigon ? 2 * gridElementWidth : gridElementWidth
             height: gridElementHeight
-            source: _isTrigon ? "images/triangle-shadow.svg" : "images/square-shadow.svg"
+            source: {
+                if (_isTrigon) {
+                    if (isDownward) return "images/triangle-down-shadow.svg"
+                    else return "images/triangle-shadow.svg"
+                }
+                else return "images/square-shadow.svg"
+            }
             sourceSize { width: imageSourceWidth; height: imageSourceHeight }
             x: _isTrigon ? (modelData.x - center.x - 0.5) * gridElementWidth : (modelData.x - center.x) * gridElementWidth
             y: (modelData.y - center.y) * gridElementHeight
-            transform: Rotation {
-                axis { x: 1; y: 0; z: 0 }
-                origin { x: width / 2; y: height / 2 }
-                angle: (_isTrigon && isDownward) ? 180 : 0
-            }
         }
     }
 }
