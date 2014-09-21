@@ -231,5 +231,5 @@ function undo() {
 
 function quit() {
     cancelGenMove()
-    Qt.quit()
+    boardModel.autoSave()
 }

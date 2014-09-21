@@ -32,7 +32,7 @@ ApplicationWindow {
     visible: true
     title: qsTr("Pentobi")
     menuBar: Pentobi.Menu { }
-    onClosing: Logic.quit()
+    onClosing: Qt.quit()
     Component.onCompleted: {
         busyIndicator.running = false
         var autoSaveLoaded = boardModel.loadAutoSave()
@@ -44,9 +44,7 @@ ApplicationWindow {
         else
             Logic.checkComputerMove()
     }
-    Component.onDestruction: {
-        boardModel.autoSave()
-    }
+    Component.onDestruction: Logic.quit()
 
     Settings {
         property alias level: playerModel.level

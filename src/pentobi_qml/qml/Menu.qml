@@ -142,7 +142,7 @@ MenuBar {
         }
         MenuItem {
             text: "Quit"
-            onTriggered: Logic.quit()
+            onTriggered: Qt.quit()
         }
     }
 }
