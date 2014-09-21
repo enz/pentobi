@@ -11,10 +11,10 @@ Rectangle {
     id: root
 
     property string gameVariant
-    property bool computerPlays0
-    property bool computerPlays1
-    property bool computerPlays2
-    property bool computerPlays3
+    property alias computerPlays0: checkBox0.checked
+    property alias computerPlays1: checkBox1.checked
+    property alias computerPlays2: checkBox2.checked
+    property alias computerPlays3: checkBox3.checked
 
     property real _margin: label.height
 
@@ -43,6 +43,8 @@ Rectangle {
         Column {
             anchors.horizontalCenter: column.horizontalCenter
             CheckBox {
+                id: checkBox0
+
                 text: {
                     switch (gameVariant) {
                     case "classic_2":
@@ -52,14 +54,15 @@ Rectangle {
                         "Blue"
                     }
                 }
-                checked: computerPlays0
                 onClicked: {
-                    computerPlays0 = checked
-                    if (gameVariant == "classic_2" || gameVariant == "trigon_2")
+                    if (gameVariant == "classic_2"
+                            || gameVariant == "trigon_2")
                         computerPlays2 = checked
                 }
             }
             CheckBox {
+                id: checkBox1
+
                 text: {
                     switch (gameVariant) {
                     case "classic_2":
@@ -71,26 +74,25 @@ Rectangle {
                         "Yellow"
                     }
                 }
-                checked: computerPlays1
                 onClicked: {
-                    computerPlays1 = checked
-                    if (gameVariant == "classic_2" || gameVariant == "trigon_2")
+                    if (gameVariant == "classic_2" ||
+                            gameVariant == "trigon_2")
                         computerPlays3 = checked
                 }
             }
             CheckBox {
-                text: "Green"
-                visible: gameVariant == "classic" || gameVariant == "trigon"
-                checked: computerPlays2
-                onClicked: computerPlays2 = checked
-            }
-            CheckBox {
+                id: checkBox2
+
                 text: "Red"
                 visible: gameVariant == "classic" ||
                          gameVariant == "trigon" ||
                          gameVariant == "trigon_3"
-                checked: computerPlays3
-                onClicked: computerPlays3 = checked
+            }
+            CheckBox {
+                id: checkBox3
+
+                text: "Green"
+                visible: gameVariant == "classic" || gameVariant == "trigon"
             }
         }
 

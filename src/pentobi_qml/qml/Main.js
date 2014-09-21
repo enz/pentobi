@@ -199,10 +199,10 @@ function play(pieceModel, gameCoord) {
 }
 
 function showComputerColorDialog() {
-    computerColorDialog.computerPlays0 = root.computerPlays0
-    computerColorDialog.computerPlays1 = root.computerPlays1
-    computerColorDialog.computerPlays2 = root.computerPlays2
-    computerColorDialog.computerPlays3 = root.computerPlays3
+    computerColorDialog.computerPlays0 = computerPlays0
+    computerColorDialog.computerPlays1 = computerPlays1
+    computerColorDialog.computerPlays2 = computerPlays2
+    computerColorDialog.computerPlays3 = computerPlays3
     computerColorDialog.visible = true
 }
 
