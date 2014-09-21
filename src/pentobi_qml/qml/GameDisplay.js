@@ -19,6 +19,8 @@ function createPieces() {
 }
 
 function createColorPieces(component, pieceModels) {
+    if (pieceModels.length == 0)
+        return []
     var pieces = []
     var gameVariant = boardModel.gameVariant
     var colorName

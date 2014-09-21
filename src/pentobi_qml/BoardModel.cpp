@@ -51,13 +51,17 @@ BoardModel::BoardModel(QObject* parent)
 
 void BoardModel::autoSave()
 {
-    QString s = to_string_id(m_bd.get_variant());
-    for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
+    QString s;
+    if (m_bd.get_nu_moves() > 0)
     {
-        ColorMove mv = m_bd.get_move(i);
-        s.append(QString(";%1;%2")
-                 .arg(mv.color.to_int())
-                 .arg(m_bd.to_string(mv.move, false).c_str()));
+        s  = to_string_id(m_bd.get_variant());
+        for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
+        {
+            ColorMove mv = m_bd.get_move(i);
+            s.append(QString(";%1;%2")
+                     .arg(mv.color.to_int())
+                     .arg(m_bd.to_string(mv.move, false).c_str()));
+        }
     }
     QSettings settings;
     settings.setValue("autosave", s);
@@ -204,6 +208,11 @@ bool BoardModel::loadAutoSave()
     if (l[0] != to_string_id(m_bd.get_variant()))
     {
         qWarning("BoardModel: autosave has wrong game variant");
+        return false;
+    }
+    if (l.length() == 1)
+    {
+        qWarning("BoardModel: autosave has no moves");
         return false;
     }
     m_bd.init();
