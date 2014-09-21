@@ -49,7 +49,6 @@ function checkGameFinsihed() {
             msg = "Game ends in a tie"
         break
     case "trigon_3":
-        break
         points0 = boardModel.points0
         points1 = boardModel.points1
         points2 = boardModel.points2
