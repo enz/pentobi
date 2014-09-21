@@ -34,6 +34,7 @@ ApplicationWindow {
     menuBar: Pentobi.Menu { }
     onClosing: Logic.quit()
     Component.onCompleted: {
+        busyIndicator.running = false
         var autoSaveLoaded = boardModel.loadAutoSave()
         Logic.initGameVariant(boardModel.gameVariant)
         if (! autoSaveLoaded)
@@ -85,7 +86,7 @@ ApplicationWindow {
     BusyIndicator {
         id: busyIndicator
 
-        running: false
+        running: true
         height: message.height
         anchors.centerIn: message
         z: 2
