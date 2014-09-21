@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
 #if QT_NO_DEBUG
     set_log_null();
 #endif
+    QCoreApplication::setOrganizationName("Pentobi");
+    QCoreApplication::setApplicationName("Pentobi");
     qmlRegisterType<BoardModel>("pentobi", 1, 0, "BoardModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterInterface<PieceModel>("PieceModel");
