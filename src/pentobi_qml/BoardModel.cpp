@@ -91,17 +91,28 @@ bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
                           Move& mv) const
 {
     auto& info = m_bd.get_piece_info(piece.getPiece());
+    auto transform = piece.getTransform();
     PiecePoints piecePoints = info.get_points();
-    piece.getTransform()->transform(piecePoints.begin(), piecePoints.end());
+    transform->transform(piecePoints.begin(), piecePoints.end());
+    auto boardType = m_bd.get_board_type();
+    auto newPointType = transform->get_new_point_type();
+    bool pointTypeChanged =
+            ((boardType == BoardType::trigon && newPointType == 0)
+             || (boardType == BoardType::trigon_3 && newPointType == 1));
     QPointF center(PieceModel::findCenter(m_bd, piecePoints, false));
     auto& geo = m_bd.get_geometry();
     MovePoints points;
     for (auto& p : piecePoints)
     {
-        qreal x = round(p.x - center.x() + coord.x());
-        qreal y = round(p.y - center.y() + coord.y());
-        if (! geo.is_onboard(CoordPoint(static_cast<int>(x),
-                                        static_cast<int>(y))))
+        qreal x = static_cast<int>(round(p.x - center.x() + coord.x()));
+        qreal y = static_cast<int>(round(p.y - center.y() + coord.y()));
+        if (! geo.is_onboard(CoordPoint(x, y)))
+            return false;
+        auto pointType = geo.get_point_type(p.x, p.y);
+        auto boardPointType = geo.get_point_type(x, y);
+        if (! pointTypeChanged && pointType != boardPointType)
+            return false;
+        if (pointTypeChanged && pointType == boardPointType)
             return false;
         points.push_back(Point(static_cast<unsigned>(x),
                                static_cast<unsigned>(y),
@@ -269,7 +280,6 @@ PieceModel* BoardModel::preparePiece(int color, int move)
     auto& info = m_bd.get_move_info(mv);
     auto& geo = m_bd.get_geometry();
     auto width = geo.get_width();
-    bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
     for (auto pieceModel : pieceModels(Color(color)))
         if (pieceModel->getPiece() == info.get_piece())
         {
@@ -283,7 +293,7 @@ PieceModel* BoardModel::preparePiece(int color, int move)
             if (transform != pieceInfo.get_equivalent_transform(oldTransform))
                 pieceModel->setTransform(transform);
             QPointF center =
-                    PieceModel::findCenter(m_bd, movePoints, isOriginDownward);
+                    PieceModel::findCenter(m_bd, movePoints, false);
             pieceModel->setGameCoord(center);
             return pieceModel;
         }

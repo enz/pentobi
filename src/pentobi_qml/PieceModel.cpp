@@ -46,7 +46,8 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
     auto& info = bd.get_piece_info(piece);
     for (auto& p : info.get_points())
         m_elements.append(QVariant(QPointF(p.x, p.y)));
-    m_center = findCenter(bd, info.get_points(), false);
+    bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
+    m_center = findCenter(bd, info.get_points(), isOriginDownward);
     updateTransformFromState();
 }
 
