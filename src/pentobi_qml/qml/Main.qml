@@ -116,4 +116,23 @@ ApplicationWindow {
         interval: 700
         onTriggered: Logic.checkComputerMove()
     }
+    // Call Logic.changeGameVariant with a small delay, such that the
+    // running busy cursor is visible first
+    Timer {
+        id: changeGameVariantTimer
+
+        property string _gameVariant
+
+        function change(gameVariant) {
+            _gameVariant = gameVariant
+            busyIndicator.running = true
+            start()
+        }
+
+        interval: 10
+        onTriggered: {
+            busyIndicator.running = false
+            Logic.changeGameVariant(_gameVariant)
+        }
+    }
 }
