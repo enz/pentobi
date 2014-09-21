@@ -28,16 +28,7 @@ Item
 
     signal play(var pieceModel, point gameCoord)
 
-    function createPieces() {
-        Logic.destroyPieces(_pieces0)
-        Logic.destroyPieces(_pieces1)
-        Logic.destroyPieces(_pieces2)
-        Logic.destroyPieces(_pieces3)
-        _pieces0 = Logic.createPieces(boardModel.pieceModels0)
-        _pieces1 = Logic.createPieces(boardModel.pieceModels1)
-        _pieces2 = Logic.createPieces(boardModel.pieceModels2)
-        _pieces3 = Logic.createPieces(boardModel.pieceModels3)
-    }
+    function createPieces() { Logic.createPieces() }
     function showMoveHint(move) { Logic.showMoveHint(move) }
 
     onWidthChanged: pickedPiece = null

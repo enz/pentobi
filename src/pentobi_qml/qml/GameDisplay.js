@@ -4,17 +4,23 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-function createPieces(pieceModels) {
-    if (pieceModels.length == 0)
-        return
-    var comp = Qt.createComponent("Piece.qml")
-    if (comp.status != Component.Ready)
+function createPieces() {
+    Logic.destroyPieces(_pieces0)
+    Logic.destroyPieces(_pieces1)
+    Logic.destroyPieces(_pieces2)
+    Logic.destroyPieces(_pieces3)
+    var component = Qt.createComponent("Piece.qml")
+    if (component.status != Component.Ready)
         throw "Could not create component Piece.qml"
+    _pieces0 = Logic.createColorPieces(component, boardModel.pieceModels0)
+    _pieces1 = Logic.createColorPieces(component, boardModel.pieceModels1)
+    _pieces2 = Logic.createColorPieces(component, boardModel.pieceModels2)
+    _pieces3 = Logic.createColorPieces(component, boardModel.pieceModels3)
+}
+
+function createColorPieces(component, pieceModels) {
     var pieces = []
-    var imageSourceWidth = board.gridElementWidth
-    var imageSourceHeight = board.gridElementHeight
     var gameVariant = boardModel.gameVariant
-    var isTrigon = (gameVariant.indexOf("trigon") >= 0)
     var colorName
     if (gameVariant == "duo" || gameVariant == "junior")
         switch (pieceModels[0].color) {
@@ -28,24 +34,21 @@ function createPieces(pieceModels) {
         case 2: colorName = "red"; break
         default: colorName = "green"; break
         }
+    var properties = {
+        "isTrigon": (gameVariant.indexOf("trigon") >= 0),
+        "colorName": colorName,
+        "gridElementWidth": 0,
+        "gridElementHeight": 0,
+        "imageSourceWidth": board.gridElementWidth,
+        "imageSourceHeight": board.gridElementHeight,
+        "isPicked": Qt.binding(function() { return (this == pickedPiece) }),
+        "parentPieceManipulator": pieceManipulator,
+        "parentBoard": board,
+        "parentAnimationVia": contentItem
+    }
     for (var i = 0; i < pieceModels.length; ++i) {
-        var piece =
-                comp.createObject(root,
-                                  {
-                                      "pieceModel": pieceModels[i],
-                                      "isTrigon": isTrigon,
-                                      "colorName": colorName,
-                                      "gridElementWidth": 0,
-                                      "gridElementHeight": 0,
-                                      "imageSourceWidth":  imageSourceWidth,
-                                      "imageSourceHeight": imageSourceHeight,
-                                      "isPicked": Qt.binding(function() {
-                                          return (this == pickedPiece) }),
-                                      "parentPieceManipulator":
-                                      pieceManipulator,
-                                      "parentBoard": board,
-                                      "parentAnimationVia": contentItem
-                                  })
+        properties["pieceModel"] = pieceModels[i]
+        var piece = component.createObject(root, properties)
         if (piece == null)
             throw "Could not create object Piece"
         pieces.push(piece)
