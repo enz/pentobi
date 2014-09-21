@@ -13,12 +13,10 @@ import QtQuick 2.3
 Item {
     id: root
 
-    property string gameVariant
-    property int color
-
+    property bool isTrigon
     // Only used in Trigon to determine if triangle is upside-down.
     property bool isDownward
-
+    property string colorName
     property real gridElementWidth
     property real gridElementHeight
     property real imageSourceWidth
@@ -29,23 +27,7 @@ Item {
     property bool flipX: false // Flip lighting around x axis
     property bool flipY: false // Flip lighting around y axis
 
-    property bool _isTrigon: gameVariant.indexOf("trigon") >= 0
-    property string _colorName: {
-        if (gameVariant == "duo" || gameVariant == "junior")
-            switch (color) {
-            case 0: return "blue"
-            default: return "green"
-            }
-        else
-            switch (color) {
-            case 0: return "blue"
-            case 1: return "yellow"
-            case 2: return "red"
-            default: return "green"
-            }
-    }
-
-    width: _isTrigon ? 2 * gridElementWidth : gridElementWidth
+    width: isTrigon ? 2 * gridElementWidth : gridElementWidth
     height: gridElementHeight
 
     // Image of the piece element without border
@@ -54,11 +36,11 @@ Item {
         height: root.height
         source: {
             if (isDownward)
-                return "images/triangle-down-" + _colorName + ".svg"
-            else if (_isTrigon)
-                return "images/triangle-" + _colorName + ".svg"
+                return "images/triangle-down-" + colorName + ".svg"
+            else if (isTrigon)
+                return "images/triangle-" + colorName + ".svg"
             else
-                return "images/square-" + _colorName + ".svg"
+                return "images/square-" + colorName + ".svg"
         }
         sourceSize { width: imageSourceWidth; height: imageSourceHeight }
     }
@@ -66,25 +48,25 @@ Item {
     // Border images
     Repeater {
         // Image rotation
-        model: _isTrigon ? [ 0, 60, 120, 180, 240, 300 ] : [ 0, 90, 180, 270 ]
+        model: isTrigon ? [ 0, 60, 120, 180, 240, 300 ] : [ 0, 90, 180, 270 ]
 
         Image {
             z: 1
             source: {
                 if (isDownward)
                     return "images/triangle-down-border-" + modelData + ".svg"
-                else if (_isTrigon)
+                else if (isTrigon)
                     return "images/triangle-border-" + modelData + ".svg"
                 else
                     return "images/square-border-" + modelData + ".svg"
             }
-            width: _isTrigon ? 2 * gridElementWidth : gridElementWidth
+            width: isTrigon ? 2 * gridElementWidth : gridElementWidth
             height: gridElementHeight
             sourceSize { width: imageSourceWidth; height: imageSourceHeight }
             opacity: {
                 var imgAngle = angle - modelData
                 var opacity
-                if (_isTrigon) {
+                if (isTrigon) {
                     if (flipX && flipY) imgAngle += 180
                     else if (flipX) imgAngle += 60
                     else if (flipY) imgAngle += 240

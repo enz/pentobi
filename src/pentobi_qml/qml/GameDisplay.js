@@ -5,22 +5,40 @@
 //-----------------------------------------------------------------------------
 
 function createPieces(pieceModels) {
+    if (pieceModels.length == 0)
+        return
     var comp = Qt.createComponent("Piece.qml")
     if (comp.status != Component.Ready)
         throw "Could not create component Piece.qml"
     var pieces = []
     var imageSourceWidth = board.gridElementWidth
     var imageSourceHeight = board.gridElementHeight
+    var gameVariant = boardModel.gameVariant
+    var isTrigon = (gameVariant.indexOf("trigon") >= 0)
+    var colorName
+    if (gameVariant == "duo" || gameVariant == "junior")
+        switch (pieceModels[0].color) {
+        case 0: colorName = "blue"; break
+        default: colorName = "green"; break
+        }
+    else
+        switch (pieceModels[0].color) {
+        case 0: colorName = "blue"; break
+        case 1: colorName = "yellow"; break
+        case 2: colorName = "red"; break
+        default: colorName = "green"; break
+        }
     for (var i = 0; i < pieceModels.length; ++i) {
         var piece =
                 comp.createObject(root,
                                   {
                                       "pieceModel": pieceModels[i],
+                                      "isTrigon": isTrigon,
+                                      "colorName": colorName,
                                       "gridElementWidth": 0,
                                       "gridElementHeight": 0,
                                       "imageSourceWidth":  imageSourceWidth,
                                       "imageSourceHeight": imageSourceHeight,
-                                      "gameVariant": boardModel.gameVariant,
                                       "isPicked": Qt.binding(function() {
                                           return (this == pickedPiece) }),
                                       "parentPieceManipulator":

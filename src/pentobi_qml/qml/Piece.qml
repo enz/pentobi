@@ -11,27 +11,17 @@ Item
     id: root
 
     property var pieceModel
-
-    property string gameVariant
-
-    property int color: pieceModel.color
-
+    property bool isTrigon
+    property string colorName
     property bool isPicked
-
     property Item parentPieceSelectorArea
-
     property Item parentPieceManipulator
-
     property Item parentBoard
-
     property Item parentAnimationVia
-
     property real gridElementWidth
     property real gridElementHeight
     property real imageSourceWidth
     property real imageSourceHeight
-
-    property bool _isTrigon: gameVariant.indexOf("trigon") >= 0
 
     state: {
         if (isPicked) return "picked"
@@ -42,7 +32,7 @@ Item
 
     PieceShadow {
         id: pieceShadow
-        gameVariant: root.gameVariant
+        isTrigon: root.isTrigon
         elements: pieceModel.elements
         center: pieceModel.center
         state: pieceModel.state
@@ -57,8 +47,8 @@ Item
 
     PieceShape {
         z: 1
-        gameVariant: root.gameVariant
-        color: root.color
+        isTrigon: root.isTrigon
+        colorName: root.colorName
         elements: pieceModel.elements
         center: pieceModel.center
         state: pieceModel.state
