@@ -103,6 +103,7 @@ ApplicationWindow {
             root.computerPlays1 = this.computerPlays1
             root.computerPlays2 = this.computerPlays2
             root.computerPlays3 = this.computerPlays3
+            Logic.cancelGenMove()
             Logic.checkComputerMove()
         }
     }
