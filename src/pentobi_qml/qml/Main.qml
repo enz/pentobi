@@ -34,8 +34,14 @@ ApplicationWindow {
     menuBar: Pentobi.Menu { }
     onClosing: Logic.quit()
     Component.onCompleted: {
-        boardModel.loadAutoSave()
+        var autoSaveLoaded = boardModel.loadAutoSave()
         Logic.initGameVariant(boardModel.gameVariant)
+        if (! autoSaveLoaded)
+            Logic.initComputerColors()
+        else if (boardModel.isGameOver)
+            Logic.showEndOfGameMessage()
+        else
+            Logic.checkComputerMove()
     }
     Component.onDestruction: {
         boardModel.autoSave()
@@ -43,6 +49,10 @@ ApplicationWindow {
 
     Settings {
         property alias level: playerModel.level
+        property alias computerPlays0: root.computerPlays0
+        property alias computerPlays1: root.computerPlays1
+        property alias computerPlays2: root.computerPlays2
+        property alias computerPlays3: root.computerPlays3
     }
 
     BoardModel {

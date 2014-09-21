@@ -9,8 +9,16 @@ function cancelGenMove() {
     busyIndicator.running = false
 }
 
+function changeGameVariant(gameVariant) {
+    initGameVariant(gameVariant)
+    initComputerColors()
+}
+
 function checkComputerMove() {
-    checkGameFinsihed()
+    if (boardModel.isGameOver) {
+        showEndOfGameMessage()
+        return
+    }
     if (! isComputerToPlay())
         return
     switch (boardModel.toPlay) {
@@ -22,7 +30,121 @@ function checkComputerMove() {
     genMove();
 }
 
-function checkGameFinsihed() {
+/** If the computer already plays the current color to play, start generating
+    a move; if he doesn't, make him play the current color (and only the
+    current color). */
+function computerPlay() {
+    if (playerModel.isGenMoveRunning)
+        return
+    computerColorDialog.visible = false
+    if (! isComputerToPlay()) {
+        var isMultiColor = (boardModel.gameVariant == "classic_2"
+                            || boardModel.gameVariant == "trigon_2")
+        computerPlays0 = false
+        computerPlays1 = false
+        computerPlays2 = false
+        computerPlays3 = false
+        switch (boardModel.toPlay) {
+        case 0:
+            computerPlays0 = true
+            if (isMultiColor) computerPlays2 = true
+            break;
+        case 1:
+            computerPlays1 = true
+            if (isMultiColor) computerPlays3 = true
+            break;
+        case 2:
+            computerPlays2 = true
+            if (isMultiColor) computerPlays0 = true
+            break;
+        case 3:
+            computerPlays3 = true
+            if (isMultiColor) computerPlays1 = true
+            break;
+        }
+    }
+    checkComputerMove()
+}
+
+function genMove() {
+    cancelGenMove()
+    gameDisplay.pickedPiece = null
+    busyIndicator.running = true
+    isMoveHintRunning = false
+    playerModel.startGenMove(boardModel)
+}
+
+function initComputerColors() {
+    // Default setting is that the computer plays all colors but the first
+    computerPlays0 = false
+    computerPlays1 = true
+    computerPlays2 = true
+    computerPlays3 = true
+    if (boardModel.gameVariant == "classic_2"
+            || boardModel.gameVariant == "trigon_2")
+        computerPlays2 = false
+}
+
+function initGameVariant(gameVariant) {
+    cancelGenMove()
+    computerColorDialog.visible = false
+    message.clear()
+    boardModel.initGameVariant(gameVariant)
+    gameDisplay.createPieces()
+}
+
+function isComputerToPlay() {
+    switch (boardModel.toPlay) {
+    case 0: return computerPlays0
+    case 1: return computerPlays1
+    case 2: return computerPlays2
+    case 3: return computerPlays3
+    }
+}
+
+function moveGenerated(move) {
+    if (isMoveHintRunning) {
+        gameDisplay.showMoveHint(move)
+        isMoveHintRunning = false
+    }
+    else {
+        busyIndicator.running = false
+        boardModel.playMove(move)
+        checkComputerMoveTimer.start()
+    }
+}
+
+function moveHint() {
+    cancelGenMove()
+    isMoveHintRunning = true
+    playerModel.startGenMoveAtLevel(boardModel, 1)
+}
+
+function newGame()
+{
+    cancelGenMove()
+    gameDisplay.pickedPiece = null
+    message.clear()
+    computerColorDialog.visible = false
+    boardModel.newGame()
+    initComputerColors()
+}
+
+function play(pieceModel, gameCoord) {
+    cancelGenMove()
+    boardModel.play(pieceModel, gameCoord)
+    checkComputerMove()
+}
+
+function showComputerColorDialog() {
+    computerColorDialog.computerPlays0 = computerPlays0
+    computerColorDialog.computerPlays1 = computerPlays1
+    computerColorDialog.computerPlays2 = computerPlays2
+    computerColorDialog.computerPlays3 = computerPlays3
+    computerColorDialog.visible = true
+}
+
+function showEndOfGameMessage() {
     if (! boardModel.isGameOver)
         return
     var msg, points0, points1, points2, points3
@@ -89,121 +211,6 @@ function checkGameFinsihed() {
             msg = "Green wins"
     }
     showMessage(msg)
-}
-
-/** If the computer already plays the current color to play, start generating
-    a move; if he doesn't, make him play the current color (and only the
-    current color). */
-function computerPlay() {
-    if (playerModel.isGenMoveRunning)
-        return
-    computerColorDialog.visible = false
-    if (! isComputerToPlay()) {
-        var isMultiColor = (boardModel.gameVariant == "classic_2"
-                            || boardModel.gameVariant == "trigon_2")
-        computerPlays0 = false
-        computerPlays1 = false
-        computerPlays2 = false
-        computerPlays3 = false
-        switch (boardModel.toPlay) {
-        case 0:
-            computerPlays0 = true
-            if (isMultiColor) computerPlays2 = true
-            break;
-        case 1:
-            computerPlays1 = true
-            if (isMultiColor) computerPlays3 = true
-            break;
-        case 2:
-            computerPlays2 = true
-            if (isMultiColor) computerPlays0 = true
-            break;
-        case 3:
-            computerPlays3 = true
-            if (isMultiColor) computerPlays1 = true
-            break;
-        }
-    }
-    checkComputerMove()
-}
-
-function genMove() {
-    cancelGenMove()
-    gameDisplay.pickedPiece = null
-    busyIndicator.running = true
-    isMoveHintRunning = false
-    playerModel.startGenMove(boardModel)
-}
-
-function initComputerColors() {
-    // Default setting is that the computer plays all colors but the first
-    computerPlays0 = false
-    computerPlays1 = true
-    computerPlays2 = true
-    computerPlays3 = true
-    if (boardModel.gameVariant == "classic_2"
-            || boardModel.gameVariant == "trigon_2")
-        computerPlays2 = false
-}
-
-function initGameVariant(gameVariant) {
-    cancelGenMove()
-    computerColorDialog.visible = false
-    message.clear()
-    boardModel.initGameVariant(gameVariant)
-    gameDisplay.createPieces()
-    initComputerColors()
-}
-
-function isComputerToPlay() {
-    switch (boardModel.toPlay) {
-    case 0: return computerPlays0
-    case 1: return computerPlays1
-    case 2: return computerPlays2
-    case 3: return computerPlays3
-    }
-}
-
-function moveGenerated(move) {
-    if (isMoveHintRunning) {
-        gameDisplay.showMoveHint(move)
-        isMoveHintRunning = false
-    }
-    else {
-        busyIndicator.running = false
-        boardModel.playMove(move)
-        checkComputerMoveTimer.start()
-    }
-}
-
-function moveHint() {
-    cancelGenMove()
-    isMoveHintRunning = true
-    playerModel.startGenMoveAtLevel(boardModel, 1)
-}
-
-function newGame()
-{
-    cancelGenMove()
-    gameDisplay.pickedPiece = null
-    message.clear()
-    computerColorDialog.visible = false
-    boardModel.newGame()
-    initComputerColors()
-}
-
-function play(pieceModel, gameCoord) {
-    cancelGenMove()
-    boardModel.play(pieceModel, gameCoord)
-    checkComputerMove()
-}
-
-function showComputerColorDialog() {
-    computerColorDialog.computerPlays0 = computerPlays0
-    computerColorDialog.computerPlays1 = computerPlays1
-    computerColorDialog.computerPlays2 = computerPlays2
-    computerColorDialog.computerPlays3 = computerPlays3
-    computerColorDialog.visible = true
 }
 
 function showMessage(text) {

@@ -59,7 +59,7 @@ public:
 
     Q_INVOKABLE void autoSave();
 
-    Q_INVOKABLE void loadAutoSave();
+    Q_INVOKABLE bool loadAutoSave();
 
     /** Find the piece model for a given move and set its transform and game
         coordinates accordingly but do not set its status to played yet. */

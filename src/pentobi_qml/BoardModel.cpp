@@ -49,17 +49,13 @@ BoardModel::BoardModel(QObject* parent)
 
 void BoardModel::autoSave()
 {
-    QString s;
-    if (! m_bd.is_game_over())
+    QString s = to_string_id(m_bd.get_variant());
+    for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
     {
-        s = to_string_id(m_bd.get_variant());
-        for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
-        {
-            ColorMove mv = m_bd.get_move(i);
-            s.append(QString(";%1;%2")
-                     .arg(mv.color.to_int())
-                     .arg(m_bd.to_string(mv.move, false).c_str()));
-        }
+        ColorMove mv = m_bd.get_move(i);
+        s.append(QString(";%1;%2")
+                 .arg(mv.color.to_int())
+                 .arg(m_bd.to_string(mv.move, false).c_str()));
     }
     QSettings settings;
     settings.setValue("autosave", s);
@@ -179,17 +175,17 @@ bool BoardModel::isLegalPos(PieceModel* pieceModel, QPointF coord) const
     return result;
 }
 
-void BoardModel::loadAutoSave()
+bool BoardModel::loadAutoSave()
 {
     QSettings settings;
     QString s = settings.value("autosave", "").toString();
     if (s.isEmpty())
-        return;
+        return false;
     QStringList l = s.split(';');
     if (l[0] != to_string_id(m_bd.get_variant()))
     {
         qWarning("BoardModel: autosave has wrong game variant");
-        return;
+        return false;
     }
     m_bd.init();
     try
@@ -213,6 +209,7 @@ void BoardModel::loadAutoSave()
         qWarning() << "BoardModel: autosave has illegal move: " << e.what();
     }
     updateProperties();
+    return true;
 }
 
 void BoardModel::newGame()

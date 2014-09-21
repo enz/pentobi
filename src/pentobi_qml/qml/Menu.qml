@@ -23,42 +23,42 @@ MenuBar {
                 checkable: true
                 checked: boardModel.gameVariant == "classic"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.initGameVariant("classic")
+                onTriggered: Logic.changeGameVariant("classic")
             }
             MenuItem {
                 text: "Classic (Two Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "classic_2"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.initGameVariant("classic_2")
+                onTriggered: Logic.changeGameVariant("classic_2")
             }
             MenuItem {
                 text: "Trigon (Four Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "trigon"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.initGameVariant("trigon")
+                onTriggered: Logic.changeGameVariant("trigon")
             }
             MenuItem {
                 text: "Trigon (Three Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "trigon_3"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.initGameVariant("trigon_3")
+                onTriggered: Logic.changeGameVariant("trigon_3")
             }
             MenuItem {
                 text: "Trigon (Two Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "trigon_2"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.initGameVariant("trigon_2")
+                onTriggered: Logic.changeGameVariant("trigon_2")
             }
             MenuItem {
                 text: "Duo"
                 checkable: true
                 checked: boardModel.gameVariant == "duo"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.initGameVariant("duo")
+                onTriggered: Logic.changeGameVariant("duo")
             }
         }
         MenuItem {
