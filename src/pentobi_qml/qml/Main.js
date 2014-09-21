@@ -194,8 +194,8 @@ function showEndOfGameMessage() {
         points1 = boardModel.points1
         points2 = boardModel.points2
         points3 = boardModel.points3
-        var maxPoints = Math.max(points0, points1, points2, points3)
-        var nuWinners = 0
+        maxPoints = Math.max(points0, points1, points2, points3)
+        nuWinners = 0
         if (points0 == maxPoints) ++nuWinners
         if (points1 == maxPoints) ++nuWinners
         if (points2 == maxPoints) ++nuWinners
