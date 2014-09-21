@@ -31,7 +31,7 @@ Item {
 
     property bool _isTrigon: gameVariant.indexOf("trigon") >= 0
     property string _colorName: {
-        if (gameVariant == "duo")
+        if (gameVariant == "duo" || gameVariant == "junior")
             switch (color) {
             case 0: return "blue"
             default: return "green"

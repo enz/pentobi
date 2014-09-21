@@ -14,6 +14,7 @@ Item {
     property int _elementsPerRow: {
         switch (gameVariant) {
         case "duo":
+        case "junior":
             return 14
         case "trigon":
         case "trigon_2":
@@ -28,6 +29,7 @@ Item {
     property int _elementsPerColumn: {
         switch (gameVariant) {
         case "duo":
+        case "junior":
             return 14
         case "trigon":
         case "trigon_2":
@@ -74,6 +76,7 @@ Item {
             case "trigon_3":
                 return "images/board-trigon-3.svg"
             case "duo":
+            case "junior":
                 return "images/board-duo.svg"
             default:
                 return "images/board-classic.svg"

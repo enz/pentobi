@@ -145,7 +145,9 @@ private:
 
     bool findMove(const PieceModel& piece, QPointF coord, Move& mv) const;
 
-    QList<PieceModel*>& pieceModels(Color c);
+    QList<PieceModel*>& getPieceModels(Color c);
+
+    void preparePiece(PieceModel* pieceModel, Move mv);
 
     void updateProperties();
 };

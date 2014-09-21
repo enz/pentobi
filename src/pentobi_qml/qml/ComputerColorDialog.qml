@@ -69,6 +69,7 @@ Rectangle {
                     case "trigon_2":
                         return "Yellow/Green"
                     case "duo":
+                    case "junior":
                         return "Green"
                     default:
                         "Yellow"

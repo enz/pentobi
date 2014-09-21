@@ -18,9 +18,11 @@ using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::ColorIterator;
+using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::CoordPoint;
 using libpentobi_base::MovePoints;
+using libpentobi_base::Piece;
 using libpentobi_base::PiecePoints;
 using libpentobi_base::Point;
 
@@ -78,9 +80,12 @@ void BoardModel::createPieceModels()
 void BoardModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
 {
     pieceModels.clear();
-    for (unsigned i = 0; i < m_bd.get_nu_pieces(); ++i)
-        pieceModels.append(new PieceModel(this, m_bd,
-                                          libpentobi_base::Piece(i), c));
+    for (unsigned i = 0; i < m_bd.get_nu_uniq_pieces(); ++i)
+    {
+        Piece piece(i);
+        for (unsigned j = 0; j < m_bd.get_nu_piece_instances(); ++j)
+            pieceModels.append(new PieceModel(this, m_bd, piece, c));
+    }
 }
 
 bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
@@ -130,6 +135,18 @@ Variant BoardModel::getInitialGameVariant()
     return gameVariant;
 }
 
+QList<PieceModel*>& BoardModel::getPieceModels(Color c)
+{
+    if (c == Color(0))
+        return m_pieceModels0;
+    else if (c == Color(1))
+        return m_pieceModels1;
+    else if (c == Color(2))
+        return m_pieceModels2;
+    else
+        return  m_pieceModels3;
+}
+
 void BoardModel::initGameVariant(QString gameVariant)
 {
     if (m_gameVariant == gameVariant)
@@ -140,6 +157,8 @@ void BoardModel::initGameVariant(QString gameVariant)
         m_bd.init(Variant::classic_2);
     else if (gameVariant == "duo")
         m_bd.init(Variant::duo);
+    else if (gameVariant == "junior")
+        m_bd.init(Variant::junior);
     else if (gameVariant == "trigon")
         m_bd.init(Variant::trigon);
     else if (gameVariant == "trigon_2")
@@ -148,7 +167,7 @@ void BoardModel::initGameVariant(QString gameVariant)
         m_bd.init(Variant::trigon_3);
     else
     {
-        qWarning("BoardModel: invalid/unsupported game variant");
+        qWarning("BoardModel: invalid game variant");
         return;
     }
     int nuColors = m_bd.get_nu_colors();
@@ -218,17 +237,6 @@ void BoardModel::newGame()
     updateProperties();
 }
 
-QList<PieceModel*>& BoardModel::pieceModels(Color c)
-{
-    if (c == Color(0))
-        return m_pieceModels0;
-    else if (c == Color(1))
-        return m_pieceModels1;
-    else if (c == Color(2))
-        return m_pieceModels2;
-    else
-        return  m_pieceModels3;
-}
 
 QQmlListProperty<PieceModel> BoardModel::pieceModels0()
 {
@@ -274,27 +282,31 @@ void BoardModel::playMove(int move)
 PieceModel* BoardModel::preparePiece(int color, int move)
 {
     Move mv(move);
-    auto& info = m_bd.get_move_info(mv);
-    auto& geo = m_bd.get_geometry();
-    auto width = geo.get_width();
-    for (auto pieceModel : pieceModels(Color(color)))
-        if (pieceModel->getPiece() == info.get_piece())
+    Piece piece = m_bd.get_move_info(mv).get_piece();
+    for (auto pieceModel : getPieceModels(Color(color)))
+        if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
         {
-            PiecePoints movePoints;
-            for (auto& p : info)
-                movePoints.push_back(CoordPoint(p.get_x(width),
-                                                p.get_y(width)));
-            auto& pieceInfo = m_bd.get_piece_info(info.get_piece());
-            auto transform = pieceInfo.find_transform(geo, movePoints);
-            auto oldTransform = pieceModel->getTransform();
-            if (transform != pieceInfo.get_equivalent_transform(oldTransform))
-                pieceModel->setTransform(transform);
-            QPointF center =
-                    PieceModel::findCenter(m_bd, movePoints, false);
-            pieceModel->setGameCoord(center);
+            preparePiece(pieceModel, mv);
             return pieceModel;
         }
     return nullptr;
+}
+
+void BoardModel::preparePiece(PieceModel* pieceModel, Move mv)
+{
+    auto& geo = m_bd.get_geometry();
+    auto width = geo.get_width();
+    auto moveInfo = m_bd.get_move_info(mv);
+    PiecePoints movePoints;
+    for (Point p : moveInfo)
+        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
+    auto& pieceInfo = m_bd.get_piece_info(moveInfo.get_piece());
+    auto transform = pieceInfo.find_transform(geo, movePoints);
+    auto oldTransform = pieceModel->getTransform();
+    if (transform != pieceInfo.get_equivalent_transform(oldTransform))
+        pieceModel->setTransform(transform);
+    QPointF center = PieceModel::findCenter(m_bd, movePoints, false);
+    pieceModel->setGameCoord(center);
 }
 
 void BoardModel::undo()
@@ -386,28 +398,36 @@ void BoardModel::updateProperties()
         emit isGameOverChanged(isGameOver);
     }
 
+    ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (ColorIterator i(m_nuColors); i; ++i)
-    {
-        // Does not handle game variant Junior yet (multiple instances of a
-        // piece)
-        LIBBOARDGAME_ASSERT(m_bd.get_nu_piece_instances() == 1);
-        for (auto p : pieceModels(*i))
-            if (m_bd.is_piece_left(*i, p->getPiece()))
-                p->setIsPlayed(false);
-    }
+        isPlayed[*i].fill(false);
     // Does not handle setup yet
     for (ColorIterator i(m_nuColors); i; ++i)
         LIBBOARDGAME_ASSERT(m_bd.get_setup().placements[*i].empty());
     for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
     {
         auto mv = m_bd.get_move(i);
-        if (! mv.is_pass())
-        {
-            auto pieceModel =
-                    preparePiece(mv.color.to_int(), mv.move.to_int());
-            pieceModel->setIsPlayed(true);
-        }
+        if (mv.is_pass())
+            continue;
+        Piece piece = m_bd.get_move_info(mv.move).get_piece();
+        auto& pieceModels = getPieceModels(mv.color);
+        PieceModel* pieceModel = nullptr;
+        for (int j = 0; j < pieceModels.length(); ++j)
+            if (pieceModels[j]->getPiece() == piece && ! isPlayed[mv.color][j])
+            {
+                pieceModel = pieceModels[j];
+                isPlayed[mv.color][j] = true;
+                break;
+            }
+        preparePiece(pieceModel, mv.move);
     }
+    for (ColorIterator i(m_nuColors); i; ++i)
+    {
+        auto& pieceModels = getPieceModels(*i);
+        for (int j = 0; j < pieceModels.length(); ++j)
+            pieceModels[j]->setIsPlayed(isPlayed[*i][j]);
+    }
+
     int toPlay = m_bd.get_effective_to_play().to_int();
     if (m_toPlay != toPlay)
     {

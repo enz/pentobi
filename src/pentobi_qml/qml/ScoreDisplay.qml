@@ -52,7 +52,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: boardModel.gameVariant == "duo" ? "#0073CF" : "#0073CF"
+        color: boardModel.gameVariant == "duo" ||
+               boardModel.gameVariant == "junior" ? "#0073CF" : "#0073CF"
     }
 
     ScoreElement {
@@ -62,11 +63,12 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: boardModel.gameVariant == "duo" ? "#00C000" : "#EBCD23"
+        color: boardModel.gameVariant == "duo"
+               || boardModel.gameVariant == "junior" ? "#00C000" : "#EBCD23"
     }
 
     ScoreElement {
-        visible: gameVariant != "duo"
+        visible: gameVariant != "duo" && gameVariant != "junior"
         value: points2
         isFinal: ! hasMoves2
         isToPlay: toPlay == 2
@@ -77,7 +79,8 @@ Row {
     }
 
     ScoreElement {
-        visible: gameVariant != "duo" && gameVariant != "trigon_3"
+        visible: gameVariant != "duo" && gameVariant != "junior" &&
+                 gameVariant != "trigon_3"
         value: points3
         isFinal: ! hasMoves3
         isToPlay: toPlay == 3

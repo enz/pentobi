@@ -150,6 +150,7 @@ function showEndOfGameMessage() {
     var msg, points0, points1, points2, points3
     switch (boardModel.gameVariant) {
     case "duo":
+    case "junior":
         points0 = boardModel.points0
         points1 = boardModel.points1
         if (points0 > points1)
