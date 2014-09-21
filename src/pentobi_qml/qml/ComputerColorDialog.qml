@@ -24,7 +24,7 @@ Rectangle {
     color: palette.window
     width: column.implicitWidth + 2 * _margin
     height: column.implicitHeight + 2 * _margin
-    radius: _margin / 2
+    radius: 0.2 * _margin
 
     SystemPalette { id: palette }
 
