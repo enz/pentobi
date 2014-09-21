@@ -64,8 +64,8 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridElementWidth: _isTrigon ? parentPieceSelectorArea.width / 7 : Math.floor(parentPieceSelectorArea.width / 5)
-                gridElementHeight: _isTrigon ? Math.sqrt(3) * gridElementWidth : gridElementWidth
+                gridElementWidth: isTrigon ? parentPieceSelectorArea.width / 7 : Math.floor(parentPieceSelectorArea.width / 5)
+                gridElementHeight: isTrigon ? Math.sqrt(3) * gridElementWidth : gridElementWidth
                 opacity: 0.9
             }
             PropertyChanges { target: pieceShadow; opacity: 0 }
