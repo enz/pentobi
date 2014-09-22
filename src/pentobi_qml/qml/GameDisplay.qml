@@ -41,7 +41,7 @@ Item
         id: board
 
         gameVariant: boardModel.gameVariant
-        width: Math.min(root.width, 0.65 * root.height)
+        width: Math.min(root.width, 0.8 * root.height)
         height: width
         anchors.top: root.top
         anchors.horizontalCenter: root.horizontalCenter
