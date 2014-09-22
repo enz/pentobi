@@ -147,7 +147,6 @@ function showComputerColorDialog() {
 function showGameOver() {
     if (! boardModel.isGameOver)
         return
-    gameDisplay.showPieces(0)
     var msg, points0, points1, points2, points3
     switch (boardModel.gameVariant) {
     case "duo":

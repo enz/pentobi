@@ -483,7 +483,7 @@ void BoardModel::updateProperties()
             pieceModels[j]->setIsPlayed(isPlayed[*i][j]);
     }
 
-    int toPlay = m_bd.get_effective_to_play().to_int();
+    int toPlay = m_isGameOver ? 0 : m_bd.get_effective_to_play().to_int();
     if (m_toPlay != toPlay)
     {
         m_toPlay = toPlay;
