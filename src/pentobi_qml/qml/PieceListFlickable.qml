@@ -28,7 +28,9 @@ Row {
     Flickable {
         id: flickable
 
-        property int _visibleColumns: Math.floor(width / root.pieceAreaSize)
+        property int _visibleColumns: root.pieceAreaSize == 0 ?
+                                          0 :
+                                          Math.floor(width / root.pieceAreaSize)
         property bool _allPiecesFitInVisible:
             nuPiecesLeft <= rows * _visibleColumns
 
@@ -42,10 +44,13 @@ Row {
             id: pieceList
 
             rows: root.rows
-            columns: flickable._allPiecesFitInVisible ? flickable._visibleColumns : Math.ceil(nuPiecesLeft / rows)
+            columns: flickable._allPiecesFitInVisible || rows == 0 ?
+                         flickable._visibleColumns :
+                         Math.ceil(nuPiecesLeft / rows)
             pieceAreaSize: root.pieceAreaSize
             pieces: root.pieces
             onPiecePicked: root.piecePicked(piece)
+            onColumnsChanged: flickable.contentX = 0
         }
 
     }

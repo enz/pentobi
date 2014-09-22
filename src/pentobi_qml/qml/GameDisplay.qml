@@ -87,23 +87,22 @@ Item
             width: board.width
 
             // Make piece size such that 7 pieces are visible below the board,
-            // so that they are smaller than the pieces on the board but not too
-            // small. Take into account that the effective visible width of the
-            // piece list is only 90% of the piece selector width because of the
-            // images indicating that the list is flickable. Ensure a minimum
-            // piece size of 9 mm
-            pieceAreaSize: Math.floor(Math.max(0.9 * board.width / 7,
-                                      9 * Screen.pixelDensity))
+            // so that they are smaller than the pieces on the board but not
+            // too small. Take into account that the effective visible width of
+            // the piece list is only 90% of the piece selector width because
+            // of the images indicating that the list is flickable. Ensure a
+            // minimum piece size of 9 mm
+            pieceAreaSize: Math.max(0.9 * board.width / 7,
+                                    9 * Screen.pixelDensity)
 
             rows: {
                 if (pieceAreaSize == 0)
                     return 1
-                var rows = Math.floor((root.height - board.height - scoreDisplay.height) / pieceAreaSize)
+                var height = root.height - board.height - scoreDisplay.height
+                var rows = Math.floor(height / pieceAreaSize)
                 if (rows == 0)
                     return 1
-                if (_isTrigon && rows >= 4)
-                    return 4
-                if (rows >= 3)
+                if (rows > 3)
                     return 3
                 return rows
             }
