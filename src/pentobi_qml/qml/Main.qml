@@ -47,11 +47,27 @@ ApplicationWindow {
     Component.onDestruction: Logic.quit()
 
     Settings {
-        property alias level: playerModel.level
+        property alias levelClassic: playerModel.levelClassic
+        property alias levelClassic2: playerModel.levelClassic2
+        property alias levelDuo: playerModel.levelDuo
+        property alias levelTrigon: playerModel.levelTrigon
+        property alias levelTrigon2: playerModel.levelTrigon2
+        property alias levelTrigon3: playerModel.levelTrigon3
+        property alias levelJunior: playerModel.levelJunior
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
+
+        // Settings may contain higher levels from desktop pentobi or later
+        // versions of pentobi_qml
+        onLevelClassicChanged: if (levelClassic > 7) levelClassic = 7
+        onLevelClassic2Changed: if (levelClassic2 > 7) levelClassic2 = 7
+        onLevelDuoChanged: if (levelDuo > 7) levelDuo = 7
+        onLevelTrigonChanged: if (levelTrigon > 7) levelTrigon = 7
+        onLevelTrigon2Changed: if (levelTrigon2 > 7) levelTrigon2 = 7
+        onLevelTrigon3Changed: if (levelTrigon3 > 7) levelTrigon3 = 7
+        onLevelJuniorChanged: if (levelJunior > 7) levelJunior = 7
     }
 
     BoardModel {

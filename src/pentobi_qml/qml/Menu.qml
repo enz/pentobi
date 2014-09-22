@@ -90,55 +90,13 @@ MenuBar {
         Menu {
             title: "Level"
             ExclusiveGroup { id: levelGroup }
-            MenuItem {
-                text: "1"
-                checkable: true
-                checked: playerModel.level == 1
-                exclusiveGroup: levelGroup
-                onTriggered: playerModel.level = 1
-            }
-            MenuItem {
-                text: "2"
-                checkable: true
-                checked: playerModel.level == 2
-                exclusiveGroup: levelGroup
-                onTriggered: playerModel.level = 2
-            }
-            MenuItem {
-                text: "3"
-                checkable: true
-                checked: playerModel.level == 3
-                exclusiveGroup: levelGroup
-                onTriggered: playerModel.level = 3
-            }
-            MenuItem {
-                text: "4"
-                checkable: true
-                checked: playerModel.level == 4
-                exclusiveGroup: levelGroup
-                onTriggered: playerModel.level = 4
-            }
-            MenuItem {
-                text: "5"
-                checkable: true
-                checked: playerModel.level == 5
-                exclusiveGroup: levelGroup
-                onTriggered: playerModel.level = 5
-            }
-            MenuItem {
-                text: "6"
-                checkable: true
-                checked: playerModel.level == 6
-                exclusiveGroup: levelGroup
-                onTriggered: playerModel.level = 6
-            }
-            MenuItem {
-                text: "7"
-                checkable: true
-                checked: playerModel.level == 7
-                exclusiveGroup: levelGroup
-                onTriggered: playerModel.level = 7
-            }
+            MenuItemLevel { level: 1 }
+            MenuItemLevel { level: 2 }
+            MenuItemLevel { level: 3 }
+            MenuItemLevel { level: 4 }
+            MenuItemLevel { level: 5 }
+            MenuItemLevel { level: 6 }
+            MenuItemLevel { level: 7 }
         }
         MenuItem {
             text: "Quit"

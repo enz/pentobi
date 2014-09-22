@@ -18,7 +18,13 @@ using libboardgame_util::set_abort;
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent),
       m_isGenMoveRunning(false),
-      m_level(1),
+      m_levelClassic(1),
+      m_levelClassic2(1),
+      m_levelDuo(1),
+      m_levelTrigon(1),
+      m_levelTrigon2(1),
+      m_levelTrigon3(1),
+      m_levelJunior(1),
       m_genMoveId(0),
       m_player(BoardModel::getInitialGameVariant(), "")
 {
@@ -93,11 +99,6 @@ int PlayerModel::isGenMoveRunning() const
     return m_isGenMoveRunning;
 }
 
-int PlayerModel::level() const
-{
-    return m_level;
-}
-
 void PlayerModel::loadBook(Variant variant)
 {
     QFile file(QString(":/pentobi_books/book_%1.blksgf")
@@ -123,7 +124,28 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
 
 void PlayerModel::startGenMove(BoardModel* boardModel)
 {
-    startGenMoveAtLevel(boardModel, m_level);
+    int level;
+    switch (boardModel->getBoard().get_variant())
+    {
+    case Variant::classic_2:
+        level = m_levelClassic2;
+        break;
+    case Variant::duo:
+        level = m_levelDuo;
+        break;
+    case Variant::trigon:
+        level = m_levelTrigon;
+        break;
+    case Variant::trigon_2:
+        level = m_levelTrigon2;
+        break;
+    case Variant::trigon_3:
+        level = m_levelTrigon3;
+        break;
+    default:
+        level = m_levelClassic;
+    }
+    startGenMoveAtLevel(boardModel, level);
 }
 
 void PlayerModel::startGenMoveAtLevel(BoardModel* boardModel, int level)
@@ -139,14 +161,6 @@ void PlayerModel::startGenMoveAtLevel(BoardModel* boardModel, int level)
                               m_genMoveId);
     m_genMoveWatcher.setFuture(future);
     setIsGenMoveRunning(true);
-}
-
-void PlayerModel::setLevel(int level)
-{
-    if (m_level == level)
-        return;
-    m_level = level;
-    levelChanged(m_level);
 }
 
 //-----------------------------------------------------------------------------
