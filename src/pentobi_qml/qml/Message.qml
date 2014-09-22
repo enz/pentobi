@@ -11,17 +11,17 @@ Rectangle {
 
     property real fontSize
 
-    property real _margin: 0.3 * fontSize
+    property real _margin: 0.7 * fontSize
+
+    signal clicked()
 
     function clear() {
         opacity = 0
     }
-
     function show(text) {
         messageText.text = text
         opacity = 0.8
     }
-
     function showTemporary(text, duration) {
         messageText.text = text
         opacity = 0.8
@@ -42,11 +42,13 @@ Rectangle {
         renderType: Text.NativeRendering
         anchors.centerIn: parent
     }
-
+    MouseArea {
+        anchors.fill: root
+        onClicked: root.clicked()
+    }
     Timer {
         id: messageTimer
         onTriggered: root.opacity = 0
     }
-
     Behavior on opacity { NumberAnimation { duration: 400 } }
 }

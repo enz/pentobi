@@ -79,6 +79,7 @@ ApplicationWindow {
         x: (root.width - width) / 2
         y: gameDisplay.y + gameDisplay.pieceSelectorY + (gameDisplay.pieceSelectorHeight - height) / 2
         z: 1
+        onClicked: clear()
     }
 
     BusyIndicator {
