@@ -28,9 +28,9 @@ public:
     /** The maximum sum of the sizes of all precomputed move lists in any
         game variant. */
 #if PENTOBI_LOW_RESOURCES
-    static const unsigned max_move_lists_sum_length = 1425934;
-#else
     static const unsigned max_move_lists_sum_length = 832444;
+#else
+    static const unsigned max_move_lists_sum_length = 1425934;
 #endif
 
     /** The number of neighbors used for computing the adjacent status.
