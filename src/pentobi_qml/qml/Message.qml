@@ -44,6 +44,7 @@ Rectangle {
     }
     MouseArea {
         anchors.fill: root
+        enabled: root.opacity > 0
         onClicked: root.clicked()
     }
     Timer {
