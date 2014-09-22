@@ -5,34 +5,58 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Transformable {
     id: root
 
-    property bool isTrigon
-    property var elements // ListElement of points with coordinates of piece elements
+    /** List of points with coordinates of piece elements */
+    property var elements
+
+    /** Center of the piece elements */
     property point center
+
+    property bool isTrigon
     property real gridElementWidth
     property real gridElementHeight
     property real imageSourceWidth
     property real imageSourceHeight
 
-    Repeater {
-        model: elements
-        Image {
-            property bool isDownward: (modelData.x % 2 != 0) ? (modelData.y % 2 == 0) : (modelData.y % 2 != 0)
-            width: isTrigon ? 2 * gridElementWidth : gridElementWidth
-            height: gridElementHeight
-            source: {
-                if (isTrigon) {
-                    if (isDownward) return "images/triangle-down-shadow.svg"
-                    else return "images/triangle-shadow.svg"
-                }
-                else return "images/square-shadow.svg"
+    Item {
+        id: shadowImages
+
+        width: 10 * gridElementWidth
+        height: 10 * gridElementHeight
+        x: -width / 2
+        y: -height / 2
+        visible: false
+
+        Repeater {
+            model: elements
+            Image {
+                property bool isDownward: (modelData.x % 2 != 0) ?
+                                              (modelData.y % 2 == 0) :
+                                              (modelData.y % 2 != 0)
+
+                width: isTrigon ? 2 * gridElementWidth : gridElementWidth
+                height: gridElementHeight
+                source: isTrigon ?
+                            (isDownward ? "images/triangle-down-shadow.svg" :
+                                          "images/triangle-shadow.svg") :
+                            "images/square-shadow.svg"
+                sourceSize { width: imageSourceWidth; height: imageSourceHeight }
+                x: (isTrigon ?
+                        (modelData.x - center.x - 0.5) * gridElementWidth :
+                        (modelData.x - center.x) * gridElementWidth) +
+                   shadowImages.width / 2
+                y: (modelData.y - center.y) * gridElementHeight +
+                   shadowImages.height / 2
             }
-            sourceSize { width: imageSourceWidth; height: imageSourceHeight }
-            x: isTrigon ? (modelData.x - center.x - 0.5) * gridElementWidth : (modelData.x - center.x) * gridElementWidth
-            y: (modelData.y - center.y) * gridElementHeight
         }
+    }
+    FastBlur {
+        anchors.fill: shadowImages
+        source: shadowImages
+        radius: 32
     }
 }

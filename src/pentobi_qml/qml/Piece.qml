@@ -49,8 +49,9 @@ Item
             gridElementHeight: root.gridElementHeight
             imageSourceWidth: root.imageSourceWidth
             imageSourceHeight: root.imageSourceHeight
-            x: 0.1 * gridElementWidth; y: 0.1 * gridElementHeight
-            opacity: _isShadowVisible ? 0.15 : 0
+            x: 0.12 * gridElementWidth
+            y: 0.12 * gridElementHeight
+            opacity: _isShadowVisible ? 0.3 : 0
             Behavior on opacity { NumberAnimation { duration: 100 } }
         }
     }
