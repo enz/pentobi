@@ -32,7 +32,7 @@ Rectangle {
         id: column
 
         anchors.centerIn: root
-        spacing: label.height / 2
+        spacing: 0.5 * label.height
 
         Label {
             id: label
@@ -42,6 +42,8 @@ Rectangle {
 
         Column {
             anchors.horizontalCenter: column.horizontalCenter
+            spacing: 0.3 * label.height
+
             CheckBox {
                 id: checkBox0
 
