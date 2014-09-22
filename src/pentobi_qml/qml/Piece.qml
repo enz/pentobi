@@ -23,26 +23,36 @@ Item
     property real imageSourceWidth
     property real imageSourceHeight
 
+    property bool _isShadowVisible
+
     state: {
         if (isPicked) return "picked"
         else if (pieceModel.isPlayed) return "played"
         else if (parentPieceSelectorArea != null) return "unplayed"
         else return ""
     }
+    on_IsShadowVisibleChanged:
+        if (_isShadowVisible && shadowLoader.status == Loader.Null)
+            shadowLoader.sourceComponent = shadowComponent
 
-    PieceShadow {
-        id: pieceShadow
-        isTrigon: root.isTrigon
-        elements: pieceModel.elements
-        center: pieceModel.center
-        state: pieceModel.state
-        gridElementWidth: root.gridElementWidth
-        gridElementHeight: root.gridElementHeight
-        imageSourceWidth: root.imageSourceWidth
-        imageSourceHeight: root.imageSourceHeight
-        x: 0.1 * gridElementWidth; y: 0.1 * gridElementHeight
-        opacity: 0
-        Behavior on opacity { NumberAnimation { duration: 100 } }
+    // Shadow creation is delayed until it is needed
+    Loader { id: shadowLoader }
+    Component {
+        id: shadowComponent
+
+        PieceShadow {
+            isTrigon: root.isTrigon
+            elements: pieceModel.elements
+            center: pieceModel.center
+            state: pieceModel.state
+            gridElementWidth: root.gridElementWidth
+            gridElementHeight: root.gridElementHeight
+            imageSourceWidth: root.imageSourceWidth
+            imageSourceHeight: root.imageSourceHeight
+            x: 0.1 * gridElementWidth; y: 0.1 * gridElementHeight
+            opacity: _isShadowVisible ? 0.15 : 0
+            Behavior on opacity { NumberAnimation { duration: 100 } }
+        }
     }
 
     PieceShape {
@@ -68,7 +78,7 @@ Item
                 gridElementHeight: isTrigon ? Math.sqrt(3) * gridElementWidth : gridElementWidth
                 opacity: 0.9
             }
-            PropertyChanges { target: pieceShadow; opacity: 0 }
+            PropertyChanges { target: root; _isShadowVisible: false }
             ParentChange {
                 target: root
                 parent: parentPieceSelectorArea
@@ -84,7 +94,7 @@ Item
                 gridElementHeight: parentBoard.gridElementHeight
                 opacity: 1
             }
-            PropertyChanges { target: pieceShadow; opacity :0.15 }
+            PropertyChanges { target: root; _isShadowVisible: true }
             ParentChange {
                 target: root
                 parent: parentPieceManipulator
@@ -100,7 +110,7 @@ Item
                 gridElementHeight: parentBoard.gridElementHeight
                 opacity: 1
             }
-            PropertyChanges { target: pieceShadow; opacity :0 }
+            PropertyChanges { target: root; _isShadowVisible: false }
             ParentChange {
                 target: root
                 parent: parentBoard
@@ -117,13 +127,13 @@ Item
                 // Temporarily set z to 3 such that it is above the pieces
                 // on the board and above the piece manipulator
                 PropertyAction { target: root; property: "z"; value: 3 }
-                PropertyAction { target: pieceShadow; property: "opacity"; value: 0.15 }
+                PropertyAction { target: root; property: "_isShadowVisible"; value: true }
                 ParentAnimation {
                     via: parentAnimationVia
                     NumberAnimation { properties: "x,y,gridElementWidth,gridElementHeight"; duration: 300 }
                 }
                 PropertyAction { target: root; property: "z"; value: 0 }
-                PropertyAction { target: pieceShadow; property: "opacity" }
+                PropertyAction { target: root; property: "_isShadowVisible" }
             }
         }
 }
