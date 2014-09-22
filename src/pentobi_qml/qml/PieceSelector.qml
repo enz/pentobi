@@ -20,6 +20,8 @@ Item {
 
     signal piecePicked(var piece)
 
+    function showColor(color) { flickable.showColor(color, 80) }
+
     onToPlayChanged: flickable.showToPlay(80)
 
     Flickable {

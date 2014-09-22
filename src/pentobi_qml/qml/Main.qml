@@ -40,7 +40,7 @@ ApplicationWindow {
         if (! autoSaveLoaded)
             Logic.initComputerColors()
         else if (boardModel.isGameOver)
-            Logic.showEndOfGameMessage()
+            Logic.showGameOver()
         else
             Logic.checkComputerMove()
     }

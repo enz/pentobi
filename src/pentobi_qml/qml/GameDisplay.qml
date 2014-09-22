@@ -29,6 +29,7 @@ Item
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
+    function showPieces(color) { pieceSelector.showColor(color) }
     function showMoveHint(move) { Logic.showMoveHint(move) }
 
     onWidthChanged: pickedPiece = null
@@ -105,7 +106,6 @@ Item
 
             height: rows * pieceAreaSize
             onPiecePicked: Logic.pickPiece(piece)
-            visible: ! boardModel.isGameOver
         }
     }
 

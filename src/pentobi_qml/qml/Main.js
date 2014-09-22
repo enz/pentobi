@@ -16,7 +16,7 @@ function changeGameVariant(gameVariant) {
 
 function checkComputerMove() {
     if (boardModel.isGameOver) {
-        showEndOfGameMessage()
+        showGameOver()
         return
     }
     if (! isComputerToPlay())
@@ -144,9 +144,10 @@ function showComputerColorDialog() {
     computerColorDialog.visible = true
 }
 
-function showEndOfGameMessage() {
+function showGameOver() {
     if (! boardModel.isGameOver)
         return
+    gameDisplay.showPieces(0)
     var msg, points0, points1, points2, points3
     switch (boardModel.gameVariant) {
     case "duo":
