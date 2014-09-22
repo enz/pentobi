@@ -39,16 +39,6 @@ Item {
                     anchors.fill: pieceArea
                     onClicked: piecePicked(piece)
                 }
-
-                Behavior on visible {
-                    SequentialAnimation {
-                        // Delay a bit such that the empty area disappers only
-                        // after the movement animation of the piece view
-                        PropertyAction { target: pieceArea; property: "visible"; value: 1 }
-                        PauseAnimation { duration: 300 }
-                        PropertyAction { target: pieceArea; property: "visible" }
-                    }
-                }
             }
         }
     }
