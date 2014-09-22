@@ -29,10 +29,10 @@ class BoardModel
     Q_PROPERTY(int points1 MEMBER m_points1 NOTIFY points1Changed)
     Q_PROPERTY(int points2 MEMBER m_points2 NOTIFY points2Changed)
     Q_PROPERTY(int points3 MEMBER m_points3 NOTIFY points3Changed)
-    Q_PROPERTY(int hasMoves0 MEMBER m_hasMoves0 NOTIFY hasMoves0Changed)
-    Q_PROPERTY(int hasMoves1 MEMBER m_hasMoves1 NOTIFY hasMoves1Changed)
-    Q_PROPERTY(int hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
-    Q_PROPERTY(int hasMoves3 MEMBER m_hasMoves3 NOTIFY hasMoves3Changed)
+    Q_PROPERTY(bool hasMoves0 MEMBER m_hasMoves0 NOTIFY hasMoves0Changed)
+    Q_PROPERTY(bool hasMoves1 MEMBER m_hasMoves1 NOTIFY hasMoves1Changed)
+    Q_PROPERTY(bool hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
+    Q_PROPERTY(bool hasMoves3 MEMBER m_hasMoves3 NOTIFY hasMoves3Changed)
     Q_PROPERTY(bool isGameOver MEMBER m_isGameOver NOTIFY isGameOverChanged)
     Q_PROPERTY(bool canUndo MEMBER m_canUndo NOTIFY canUndoChanged)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
@@ -119,13 +119,13 @@ private:
 
     int m_points3;
 
-    int m_hasMoves0;
+    bool m_hasMoves0;
 
-    int m_hasMoves1;
+    bool m_hasMoves1;
 
-    int m_hasMoves2;
+    bool m_hasMoves2;
 
-    int m_hasMoves3;
+    bool m_hasMoves3;
 
     bool m_isGameOver;
 
