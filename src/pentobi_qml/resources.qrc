@@ -6,6 +6,7 @@
         <file>qml/GameDisplay.qml</file>
         <file>qml/Main.qml</file>
         <file>qml/Menu.qml</file>
+        <file>qml/MenuItemLevel.qml</file>
         <file>qml/Message.qml</file>
         <file>qml/Piece.qml</file>
         <file>qml/PieceElement.qml</file>
@@ -98,9 +99,5 @@
         <file>qml/images/triangle-yellow-180.svg</file>
         <file>qml/images/triangle-yellow-240.svg</file>
         <file>qml/images/triangle-yellow-300.svg</file>
-        <file>qml/MenuItemLevel.qml</file>
-    </qresource>
-    <qresource prefix="/">
-        <file>qml/MenuItemLevel.qml</file>
     </qresource>
 </RCC>
