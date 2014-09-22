@@ -84,7 +84,8 @@ function findPiece(pieceModel) {
 }
 
 function pickPiece(piece) {
-    if (piece.pieceModel.color != boardModel.toPlay)
+    if (piece.pieceModel.color != boardModel.toPlay
+            || boardModel.isGameOver)
         return
     if (! pieceManipulator.visible) {
         // Position pieceManipulator at center of piece if possible, but
