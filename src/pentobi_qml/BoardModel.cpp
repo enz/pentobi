@@ -28,6 +28,20 @@ using libpentobi_base::Point;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+int getNuPiecesLeft(const Board& bd, Color c)
+{
+    unsigned n = 0;
+    for (auto piece : bd.get_pieces_left(c))
+        n += bd.get_nu_left_piece(c, piece);
+    return static_cast<int>(n);
+}
+
+} //namespace
+
+//-----------------------------------------------------------------------------
+
 BoardModel::BoardModel(QObject* parent)
     : QObject(parent),
       m_bd(getInitialGameVariant()),
@@ -38,6 +52,10 @@ BoardModel::BoardModel(QObject* parent)
       m_points1(0),
       m_points2(0),
       m_points3(0),
+      m_nuPiecesLeft0(0),
+      m_nuPiecesLeft1(0),
+      m_nuPiecesLeft2(0),
+      m_nuPiecesLeft3(0),
       m_hasMoves0(true),
       m_hasMoves1(true),
       m_hasMoves2(true),
@@ -342,6 +360,20 @@ void BoardModel::updateProperties()
         emit points1Changed(points1);
     }
 
+    int nuPiecesLeft0 = getNuPiecesLeft(m_bd, Color(0));
+    if (m_nuPiecesLeft0 != nuPiecesLeft0)
+    {
+        m_nuPiecesLeft0 = nuPiecesLeft0;
+        emit nuPiecesLeft0Changed(nuPiecesLeft0);
+    }
+
+    int nuPiecesLeft1 = getNuPiecesLeft(m_bd, Color(1));
+    if (m_nuPiecesLeft1 != nuPiecesLeft1)
+    {
+        m_nuPiecesLeft1 = nuPiecesLeft1;
+        emit nuPiecesLeft1Changed(nuPiecesLeft1);
+    }
+
     bool hasMoves0 = m_bd.has_moves(Color(0));
     if (m_hasMoves0 != hasMoves0)
     {
@@ -371,6 +403,13 @@ void BoardModel::updateProperties()
             m_hasMoves2 = hasMoves2;
             emit hasMoves2Changed(hasMoves2);
         }
+
+        int nuPiecesLeft2 = getNuPiecesLeft(m_bd, Color(2));
+        if (m_nuPiecesLeft2 != nuPiecesLeft2)
+        {
+            m_nuPiecesLeft2 = nuPiecesLeft2;
+            emit nuPiecesLeft2Changed(nuPiecesLeft2);
+        }
     }
 
     if (m_nuColors > 3)
@@ -387,6 +426,13 @@ void BoardModel::updateProperties()
         {
             m_hasMoves3 = hasMoves3;
             emit hasMoves3Changed(hasMoves3);
+        }
+
+        int nuPiecesLeft3 = getNuPiecesLeft(m_bd, Color(3));
+        if (m_nuPiecesLeft3 != nuPiecesLeft3)
+        {
+            m_nuPiecesLeft3 = nuPiecesLeft3;
+            emit nuPiecesLeft3Changed(nuPiecesLeft3);
         }
     }
 

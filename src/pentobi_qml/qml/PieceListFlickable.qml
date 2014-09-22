@@ -12,6 +12,7 @@ Row {
     property real pieceAreaSize
     property int color
     property var pieces
+    property int nuPiecesLeft
     property int rows: 1
 
     signal piecePicked(var piece)
@@ -27,6 +28,10 @@ Row {
     Flickable {
         id: flickable
 
+        property int _visibleColumns: Math.floor(width / root.pieceAreaSize)
+        property bool _allPiecesFitInVisible:
+            nuPiecesLeft <= rows * _visibleColumns
+
         width: 0.9 * root.width
         height: parent.height
         contentWidth: pieceList.columns * root.pieceAreaSize
@@ -37,7 +42,7 @@ Row {
             id: pieceList
 
             rows: root.rows
-            columns: Math.ceil(pieces.length / root.rows)
+            columns: flickable._allPiecesFitInVisible ? flickable._visibleColumns : Math.ceil(nuPiecesLeft / rows)
             pieceAreaSize: root.pieceAreaSize
             pieces: root.pieces
             onPiecePicked: root.piecePicked(piece)

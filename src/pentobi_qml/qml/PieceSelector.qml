@@ -15,6 +15,10 @@ Item {
     property var pieces1
     property var pieces2
     property var pieces3
+    property int nuPiecesLeft0
+    property int nuPiecesLeft1
+    property int nuPiecesLeft2
+    property int nuPiecesLeft3
     property int nuColors
     property int rows: 1
 
@@ -56,6 +60,7 @@ Item {
                 height: root.height
                 rows: root.rows
                 pieces: root.pieces0
+                nuPiecesLeft: root.nuPiecesLeft0
                 pieceAreaSize: root.pieceAreaSize
                 onPiecePicked: root.piecePicked(piece)
             }
@@ -64,6 +69,7 @@ Item {
                 height: root.height
                 rows: root.rows
                 pieces: root.pieces1
+                nuPiecesLeft: root.nuPiecesLeft1
                 pieceAreaSize: root.pieceAreaSize
                 onPiecePicked: root.piecePicked(piece)
             }
@@ -73,6 +79,7 @@ Item {
                 height: root.height
                 rows: root.rows
                 pieces: root.pieces2
+                nuPiecesLeft: root.nuPiecesLeft2
                 pieceAreaSize: root.pieceAreaSize
                 onPiecePicked: root.piecePicked(piece)
             }
@@ -82,6 +89,7 @@ Item {
                 height: root.height
                 rows: root.rows
                 pieces: root.pieces3
+                nuPiecesLeft: root.nuPiecesLeft3
                 pieceAreaSize: root.pieceAreaSize
                 onPiecePicked: root.piecePicked(piece)
             }

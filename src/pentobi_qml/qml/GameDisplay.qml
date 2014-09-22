@@ -78,6 +78,10 @@ Item
             pieces1: _pieces1
             pieces2: _pieces2
             pieces3: _pieces3
+            nuPiecesLeft0: boardModel.nuPiecesLeft0
+            nuPiecesLeft1: boardModel.nuPiecesLeft1
+            nuPiecesLeft2: boardModel.nuPiecesLeft2
+            nuPiecesLeft3: boardModel.nuPiecesLeft3
             toPlay: boardModel.toPlay
             nuColors: boardModel.nuColors
             width: board.width

@@ -29,6 +29,10 @@ class BoardModel
     Q_PROPERTY(int points1 MEMBER m_points1 NOTIFY points1Changed)
     Q_PROPERTY(int points2 MEMBER m_points2 NOTIFY points2Changed)
     Q_PROPERTY(int points3 MEMBER m_points3 NOTIFY points3Changed)
+    Q_PROPERTY(int nuPiecesLeft0 MEMBER m_nuPiecesLeft0 NOTIFY nuPiecesLeft0Changed)
+    Q_PROPERTY(int nuPiecesLeft1 MEMBER m_nuPiecesLeft1 NOTIFY nuPiecesLeft1Changed)
+    Q_PROPERTY(int nuPiecesLeft2 MEMBER m_nuPiecesLeft2 NOTIFY nuPiecesLeft2Changed)
+    Q_PROPERTY(int nuPiecesLeft3 MEMBER m_nuPiecesLeft3 NOTIFY nuPiecesLeft3Changed)
     Q_PROPERTY(bool hasMoves0 MEMBER m_hasMoves0 NOTIFY hasMoves0Changed)
     Q_PROPERTY(bool hasMoves1 MEMBER m_hasMoves1 NOTIFY hasMoves1Changed)
     Q_PROPERTY(bool hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
@@ -86,6 +90,14 @@ signals:
 
     void points3Changed(int);
 
+    void nuPiecesLeft0Changed(int);
+
+    void nuPiecesLeft1Changed(int);
+
+    void nuPiecesLeft2Changed(int);
+
+    void nuPiecesLeft3Changed(int);
+
     void hasMoves0Changed(int);
 
     void hasMoves1Changed(int);
@@ -118,6 +130,14 @@ private:
     int m_points2;
 
     int m_points3;
+
+    int m_nuPiecesLeft0;
+
+    int m_nuPiecesLeft1;
+
+    int m_nuPiecesLeft2;
+
+    int m_nuPiecesLeft3;
 
     bool m_hasMoves0;
 

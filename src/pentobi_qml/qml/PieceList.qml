@@ -19,7 +19,7 @@ Item {
     Grid {
         columns: root.columns
         rows: root.rows
-        flow: Grid.TopToBottom
+        flow: Grid.LeftToRight
 
         Repeater {
             model: pieces
