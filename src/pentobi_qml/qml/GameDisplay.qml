@@ -89,9 +89,9 @@ Item
             // Make piece size such that 7 pieces are visible below the board,
             // so that they are smaller than the pieces on the board but not
             // too small. Take into account that the effective visible width of
-            // the piece list is only 90% of the piece selector width because
+            // the piece list is only 94% of the piece selector width because
             // of the images indicating that the list is flickable.
-            pieceAreaSize: 0.9 * board.width / 7
+            pieceAreaSize: 0.94 * board.width / 7
 
             rows: {
                 if (pieceAreaSize == 0)

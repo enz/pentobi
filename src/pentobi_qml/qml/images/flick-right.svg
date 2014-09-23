@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    version="1.1"
    width="10"
-   height="50"
+   height="30"
    id="svg2">
   <defs
      id="defs4" />
@@ -26,7 +26,7 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(0,-1002.3622)"
+     transform="translate(2.2612358,-1012.1515)"
      id="layer1">
     <path
        d="m 0.97099721,1030.8977 2.09e-5,0 -2.09e-5,-7.071 3.53553389,3.5355 z"

@@ -18,7 +18,7 @@ Row {
     signal piecePicked(var piece)
 
     Image {
-        width: 0.05 * root.width; height: root.height
+        width: 0.03 * root.width; height: root.height
         source: "images/flick-left.svg"
         sourceSize { width: width; height: height }
         fillMode: Image.PreserveAspectFit
@@ -34,7 +34,7 @@ Row {
         property bool _allPiecesFitInVisible:
             nuPiecesLeft <= rows * _visibleColumns
 
-        width: 0.9 * root.width
+        width: 0.94 * root.width
         height: parent.height
         contentWidth: pieceList.columns * root.pieceAreaSize
         clip: true
@@ -55,7 +55,7 @@ Row {
     }
 
     Image {
-        width: 0.05 * root.width; height: root.height
+        width: 0.03 * root.width; height: root.height
         source: "images/flick-right.svg"
         sourceSize { width: width; height: height }
         fillMode: Image.PreserveAspectFit
