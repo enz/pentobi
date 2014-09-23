@@ -78,7 +78,8 @@ Item
             // Piece area size if no flickable indicators are needed
             property real _maxPieceAreaSize: board.width / nuVisibleColumns
 
-            property int _maxRows: _isTrigon ? 4 : 3
+            property int _maxRows:
+                _isTrigon || boardModel.gameVariant == "junior" ? 4 : 3
 
             allPiecesFitInVisible:
                 boardModel.nuPieces <= nuVisibleColumns * rows
