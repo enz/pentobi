@@ -91,10 +91,8 @@ Item
             // so that they are smaller than the pieces on the board but not
             // too small. Take into account that the effective visible width of
             // the piece list is only 90% of the piece selector width because
-            // of the images indicating that the list is flickable. Ensure a
-            // minimum piece size of 9 mm
-            pieceAreaSize: Math.max(0.9 * board.width / 7,
-                                    9 * Screen.pixelDensity)
+            // of the images indicating that the list is flickable.
+            pieceAreaSize: 0.9 * board.width / 7
 
             rows: {
                 if (pieceAreaSize == 0)
