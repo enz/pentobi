@@ -115,6 +115,8 @@ function moveGenerated(move) {
 }
 
 function moveHint() {
+    if (boardModel.isGameOver)
+        return
     cancelGenMove()
     isMoveHintRunning = true
     playerModel.startGenMoveAtLevel(boardModel, 1)
@@ -225,6 +227,8 @@ function showTemporaryMessage(text) {
 }
 
 function undo() {
+    if (! boardModel.canUndo())
+        return
     cancelGenMove()
     message.clear()
     boardModel.undo()

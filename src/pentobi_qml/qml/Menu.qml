@@ -9,6 +9,14 @@ import QtQuick.Controls 1.1
 import "Main.js" as Logic
 
 MenuBar {
+    /** Don't disable menu items that are not applicable.
+        This is currently set to true because it doesn't reliably work on
+        Android: if the menu is open, the enabled status will not change until
+        the menu is closed and opened again. It is less confusing to the user
+        to always enable them even if selecting them does nothing than to
+        have inconsistent behavior (last tested with Qt 5.3.2) */
+    property bool alwaysEnableAll: true
+
     Menu {
         title: "Game"
         MenuItem {
@@ -70,12 +78,12 @@ MenuBar {
         }
         MenuItem {
             text: "Undo Move"
-            enabled: boardModel.canUndo
+            enabled: alwaysEnableAll || boardModel.canUndo
             onTriggered: Logic.undo()
         }
         MenuItem {
             text: "Move Hint"
-            enabled: ! boardModel.isGameOver
+            enabled: alwaysEnableAll || ! boardModel.isGameOver
             onTriggered: Logic.moveHint()
         }
         MenuItem {
@@ -84,7 +92,7 @@ MenuBar {
         }
         MenuItem {
             text: "Computer Play"
-            enabled: ! playerModel.isGenMoveRunning
+            enabled: alwaysEnableAll || ! playerModel.isGenMoveRunning
             onTriggered: Logic.computerPlay()
         }
         Menu {
