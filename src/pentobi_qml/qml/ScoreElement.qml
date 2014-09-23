@@ -31,7 +31,7 @@ Item {
         id: scoreText
 
         text: value
-        color: "#5A5255"
+        color: "#6D6367"
         anchors {
             left: point.right
             leftMargin: (isToPlay ? 0.2 : 0.5) * point.width

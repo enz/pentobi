@@ -37,6 +37,7 @@ Item
     onHeightChanged: pickedPiece = null
 
     Rectangle {
+        anchors.fill: parent
         gradient: Gradient {
             GradientStop { position: 0; color: "#D8D0D6" }
             GradientStop { position: 1; color: "#C2BBC0" }
