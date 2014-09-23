@@ -47,8 +47,9 @@ Item
             id: board
 
             gameVariant: boardModel.gameVariant
-            width: Math.min(parent.width, 0.8 * root.height)
-            height: width
+            width: Math.min(parent.width,
+                            (_isTrigon ? 0.9 : 0.8) * root.height)
+            height: _isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
         ScoreDisplay {
