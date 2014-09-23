@@ -38,7 +38,6 @@ Row {
         height: parent.height
         contentWidth: pieceList.columns * root.pieceAreaSize
         clip: true
-        boundsBehavior: Flickable.StopAtBounds
 
         PieceList {
             id: pieceList
