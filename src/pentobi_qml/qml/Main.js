@@ -110,7 +110,7 @@ function moveGenerated(move) {
     else {
         busyIndicator.running = false
         boardModel.playMove(move)
-        checkComputerMoveTimer.start()
+        delayedCheckComputerMove.start()
     }
 }
 
@@ -135,7 +135,7 @@ function newGame()
 function play(pieceModel, gameCoord) {
     cancelGenMove()
     boardModel.play(pieceModel, gameCoord)
-    checkComputerMove()
+    delayedCheckComputerMove.start()
 }
 
 function showComputerColorDialog() {

@@ -123,11 +123,11 @@ ApplicationWindow {
         }
     }
 
-    // Used to delay calls to Logic.checkComputerMove such that if the
-    // computer playes several moves in a row, it only starts thinking on the
-    // next move when the current move placement animation has finished
+    // Used to delay calls to Logic.checkComputerMove such that the computer
+    // starts thinking and the busy indicator is visible after the current move
+    // placement animation has finished
     Timer {
-        id: checkComputerMoveTimer
+        id: delayedCheckComputerMove
 
         interval: 700
         onTriggered: Logic.checkComputerMove()

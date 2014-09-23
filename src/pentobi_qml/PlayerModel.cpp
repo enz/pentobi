@@ -47,9 +47,9 @@ PlayerModel::GenMoveResult PlayerModel::asyncGenMove(BoardModel* bm,
     result.boardModel = bm;
     result.move = m_player.genmove(bd, bd.get_effective_to_play());
     auto elapsed = timer.elapsed();
-    // Enforce minimum thinking time of 0.8 sec
-    if (elapsed < 800)
-        QThread::msleep(800 - elapsed);
+    // Enforce minimum thinking time of 1 sec
+    if (elapsed < 1000)
+        QThread::msleep(1000 - elapsed);
     return result;
 }
 
