@@ -73,6 +73,14 @@ Item
         PieceSelector {
             id: pieceSelector
 
+            property int nuVisibleColumns: 7
+
+            // Piece area size if no flickable indicators are needed
+            property real _maxPieceAreaSize: board.width / nuVisibleColumns
+
+            property int _maxRows: _isTrigon ? 4 : 3
+
+            allPiecesFitInVisible: _pieces0.length <= nuVisibleColumns * rows
             pieces0: _pieces0
             pieces1: _pieces1
             pieces2: _pieces2
@@ -86,24 +94,21 @@ Item
             width: board.width
             anchors.horizontalCenter: board.horizontalCenter
 
-            // Make piece size such that 7 pieces are visible below the board,
-            // so that they are smaller than the pieces on the board but not
-            // too small. Take into account that the effective visible width of
-            // the piece list is only 94% of the piece selector width because
-            // of the images indicating that the list is flickable.
-            pieceAreaSize: 0.94 * board.width / 7
+            // Take into account that the effective visible width of the piece
+            // list is only 94% of the piece selector width because of the
+            // images indicating that the list is flickable.
+            pieceAreaSize: (allPiecesFitInVisible ? 1 : 0.94) *
+                           board.width / nuVisibleColumns
 
             rows: {
-                if (pieceAreaSize == 0)
+                if (_maxPieceAreaSize == 0)
                     return 1
                 var height = root.height - board.height - scoreDisplay.height
-                var rows = Math.floor(height / pieceAreaSize)
+                var rows = Math.floor(height / _maxPieceAreaSize)
                 if (rows == 0)
                     return 1
-                if (_isTrigon && rows >= 4)
-                    return 4
-                if (rows > 3)
-                    return 3
+                if (rows >= _maxRows)
+                    return _maxRows
                 return rows
             }
 

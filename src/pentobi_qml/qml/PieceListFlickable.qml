@@ -14,10 +14,12 @@ Row {
     property var pieces
     property int nuPiecesLeft
     property int rows: 1
+    property bool allPiecesFitInVisible
 
     signal piecePicked(var piece)
 
     Image {
+        visible: ! allPiecesFitInVisible
         width: 0.03 * root.width; height: root.height
         source: "images/flick-left.svg"
         sourceSize { width: width; height: height }
@@ -31,10 +33,10 @@ Row {
         property int _visibleColumns: root.pieceAreaSize == 0 ?
                                           0 :
                                           Math.floor(width / root.pieceAreaSize)
-        property bool _allPiecesFitInVisible:
+        property bool _allPiecesLeftFitInVisible:
             nuPiecesLeft <= rows * _visibleColumns
 
-        width: 0.94 * root.width
+        width: (allPiecesFitInVisible ? 1 : 0.94) * root.width
         height: parent.height
         contentWidth: pieceList.columns * root.pieceAreaSize
         clip: true
@@ -43,7 +45,7 @@ Row {
             id: pieceList
 
             rows: root.rows
-            columns: flickable._allPiecesFitInVisible || rows == 0 ?
+            columns: flickable._allPiecesLeftFitInVisible || rows == 0 ?
                          flickable._visibleColumns :
                          Math.ceil(nuPiecesLeft / rows)
             pieceAreaSize: root.pieceAreaSize
@@ -55,6 +57,7 @@ Row {
     }
 
     Image {
+        visible: ! allPiecesFitInVisible
         width: 0.03 * root.width; height: root.height
         source: "images/flick-right.svg"
         sourceSize { width: width; height: height }
