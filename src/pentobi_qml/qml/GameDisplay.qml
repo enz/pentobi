@@ -131,7 +131,6 @@ Item
         }
 
         width: 0.6 * board.width
-        z: 1
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         drag {

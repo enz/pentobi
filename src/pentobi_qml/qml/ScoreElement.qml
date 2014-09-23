@@ -18,7 +18,6 @@ Item {
     Rectangle {
         id: point
 
-        z: 1
         width: (isToPlay ? 1.3 : 1) * pointSize
         border {
             color: Qt.darker(color)
@@ -31,7 +30,6 @@ Item {
     Text {
         id: scoreText
 
-        z: 1
         text: value
         color: "#5A5255"
         anchors {

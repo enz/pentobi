@@ -94,7 +94,6 @@ ApplicationWindow {
         fontSize: 0.4 * gameDisplay.pieceAreaSize
         x: (root.width - width) / 2
         y: gameDisplay.y + gameDisplay.pieceSelectorY + (gameDisplay.pieceSelectorHeight - height) / 2
-        z: 1
         onClicked: clear()
     }
 
@@ -104,7 +103,6 @@ ApplicationWindow {
         running: true
         height: message.height
         anchors.centerIn: message
-        z: 2
     }
 
     ComputerColorDialog {
@@ -112,7 +110,6 @@ ApplicationWindow {
 
         gameVariant: boardModel.gameVariant
         anchors.centerIn: contentItem
-        z: 3
         onOkClicked: {
             root.computerPlays0 = this.computerPlays0
             root.computerPlays1 = this.computerPlays1

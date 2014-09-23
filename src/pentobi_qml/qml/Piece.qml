@@ -59,7 +59,6 @@ Item
     }
 
     PieceShape {
-        z: 1
         isTrigon: root.isTrigon
         colorName: root.colorName
         elements: pieceModel.elements
