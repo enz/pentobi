@@ -42,6 +42,7 @@ Item
 
         width: root.width
         anchors.centerIn: root
+        spacing: 0.01 * board.width
 
         Board {
             id: board
@@ -99,6 +100,8 @@ Item
                 var rows = Math.floor(height / pieceAreaSize)
                 if (rows == 0)
                     return 1
+                if (_isTrigon && rows >= 4)
+                    return 4
                 if (rows > 3)
                     return 3
                 return rows

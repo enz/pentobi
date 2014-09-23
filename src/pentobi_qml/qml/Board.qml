@@ -41,7 +41,9 @@ Item {
         }
     }
 
-    property real _sideLength: Math.min(width, height)
+    property real _sideLength: _isTrigon ?
+                                   Math.min(width, Math.sqrt(3) * height) :
+                                   Math.min(width, height)
 
     property bool _isTrigon: gameVariant.indexOf("trigon") >= 0
 
