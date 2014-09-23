@@ -83,10 +83,9 @@ MenuBar {
             onTriggered: Logic.showComputerColorDialog()
         }
         MenuItem {
-            text: playerModel.isGenMoveRunning ?
-                      "Computer Stop" : "Computer Play"
-            onTriggered: playerModel.isGenMoveRunning ?
-                             Logic.cancelGenMove() : Logic.computerPlay()
+            text: "Computer Play"
+            enabled: ! playerModel.isGenMoveRunning
+            onTriggered: Logic.computerPlay()
         }
         Menu {
             title: "Level"
