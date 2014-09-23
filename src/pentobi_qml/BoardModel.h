@@ -167,7 +167,9 @@ private:
 
     QList<PieceModel*>& getPieceModels(Color c);
 
-    void preparePiece(PieceModel* pieceModel, Move mv);
+    void preparePieceGameCoord(PieceModel* pieceModel, Move mv);
+
+    void preparePieceTransform(PieceModel* pieceModel, Move mv);
 
     void updateProperties();
 };

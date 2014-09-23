@@ -313,13 +313,26 @@ PieceModel* BoardModel::preparePiece(int color, int move)
     for (auto pieceModel : getPieceModels(Color(color)))
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
         {
-            preparePiece(pieceModel, mv);
+            preparePieceTransform(pieceModel, mv);
+            preparePieceGameCoord(pieceModel, mv);
             return pieceModel;
         }
     return nullptr;
 }
 
-void BoardModel::preparePiece(PieceModel* pieceModel, Move mv)
+void BoardModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv)
+{
+    auto& geo = m_bd.get_geometry();
+    auto width = geo.get_width();
+    auto moveInfo = m_bd.get_move_info(mv);
+    PiecePoints movePoints;
+    for (Point p : moveInfo)
+        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
+    QPointF center = PieceModel::findCenter(m_bd, movePoints, false);
+    pieceModel->setGameCoord(center);
+}
+
+void BoardModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 {
     auto& geo = m_bd.get_geometry();
     auto width = geo.get_width();
@@ -332,8 +345,6 @@ void BoardModel::preparePiece(PieceModel* pieceModel, Move mv)
     auto oldTransform = pieceModel->getTransform();
     if (transform != pieceInfo.get_equivalent_transform(oldTransform))
         pieceModel->setTransform(transform);
-    QPointF center = PieceModel::findCenter(m_bd, movePoints, false);
-    pieceModel->setGameCoord(center);
 }
 
 void BoardModel::undo()
@@ -453,6 +464,13 @@ void BoardModel::updateProperties()
         emit isGameOverChanged(isGameOver);
     }
 
+    // The order of setting the piece properties is important:
+    // * Set transform after isPlayed because Piece.qml creates the piece
+    //   shadow when it becomes visible first and uses an animation to
+    //   change the piece transform, so the shadow needs to be created
+    //   while the transform still has the old value
+    // * Set isPlayed after gameCoord have been set because it will trigger an
+    //   animation in Piece.qml to move the piece to the new position.
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (ColorIterator i(m_nuColors); i; ++i)
         isPlayed[*i].fill(false);
@@ -474,13 +492,16 @@ void BoardModel::updateProperties()
                 isPlayed[mv.color][j] = true;
                 break;
             }
-        preparePiece(pieceModel, mv.move);
+        preparePieceGameCoord(pieceModel, mv.move);
+        pieceModel->setIsPlayed(true);
+        preparePieceTransform(pieceModel, mv.move);
     }
     for (ColorIterator i(m_nuColors); i; ++i)
     {
         auto& pieceModels = getPieceModels(*i);
         for (int j = 0; j < pieceModels.length(); ++j)
-            pieceModels[j]->setIsPlayed(isPlayed[*i][j]);
+            if (! isPlayed[*i][j])
+                pieceModels[j]->setIsPlayed(false);
     }
 
     int toPlay = m_isGameOver ? 0 : m_bd.get_effective_to_play().to_int();

@@ -58,5 +58,6 @@ Transformable {
         anchors.fill: shadowImages
         source: shadowImages
         radius: 32
+        cached: true
     }
 }
