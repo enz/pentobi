@@ -78,7 +78,10 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridElementWidth: isTrigon ? parentPieceSelectorArea.width / 7 : Math.floor(parentPieceSelectorArea.width / 5)
+                gridElementWidth:
+                    isTrigon ?
+                        0.13 * parentPieceSelectorArea.width :
+                        Math.floor(0.2 * parentPieceSelectorArea.width)
                 gridElementHeight: isTrigon ? Math.sqrt(3) * gridElementWidth : gridElementWidth
                 opacity: 0.9
             }
