@@ -13,6 +13,7 @@ Item
     id: root
 
     property var pickedPiece: null
+    property bool transitionsEnabled: true
 
     // Location of the piece selector (for centering items like the busy cursor
     // on it)

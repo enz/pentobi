@@ -126,7 +126,9 @@ function newGame()
     gameDisplay.pickedPiece = null
     message.clear()
     computerColorDialog.visible = false
+    gameDisplay.transitionsEnabled = false
     boardModel.newGame()
+    gameDisplay.transitionsEnabled = true
     initComputerColors()
 }
 

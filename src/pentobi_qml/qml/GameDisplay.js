@@ -46,7 +46,9 @@ function createColorPieces(component, pieceModels) {
         "isPicked": Qt.binding(function() { return (this == pickedPiece) }),
         "parentPieceManipulator": pieceManipulator,
         "parentBoard": board,
-        "parentAnimationVia": contentItem
+        "parentAnimationVia": contentItem,
+        "transitionsEnabled": Qt.binding(function() {
+            return root.transitionsEnabled })
     }
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]

@@ -22,6 +22,7 @@ Item
     property real gridElementHeight
     property real imageSourceWidth
     property real imageSourceHeight
+    property bool transitionsEnabled: true
 
     property bool _isShadowVisible
 
@@ -49,6 +50,7 @@ Item
             gridElementHeight: root.gridElementHeight
             imageSourceWidth: root.imageSourceWidth
             imageSourceHeight: root.imageSourceHeight
+            transitionsEnabled: root.transitionsEnabled
             x: 0.15 * gridElementWidth
             y: 0.15 * gridElementHeight
             opacity: _isShadowVisible ? 0.3 : 0
@@ -67,6 +69,7 @@ Item
         gridElementHeight: root.gridElementHeight
         imageSourceWidth: root.imageSourceWidth
         imageSourceHeight: root.imageSourceHeight
+        transitionsEnabled: root.transitionsEnabled
     }
 
     states: [
@@ -124,6 +127,8 @@ Item
     transitions:
         Transition {
             from: "unplayed,picked,played"; to: from
+            enabled: root.transitionsEnabled
+
             SequentialAnimation {
                 // Temporarily set z to 3 such that it is above the pieces
                 // on the board and above the piece manipulator
