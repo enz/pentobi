@@ -11,7 +11,7 @@ Rectangle {
 
     property real fontSize
 
-    property real _margin: 0.7 * fontSize
+    property real _margin: 0.5 * fontSize
 
     signal clicked()
 
