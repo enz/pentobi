@@ -80,7 +80,8 @@ Item
 
             property int _maxRows: _isTrigon ? 4 : 3
 
-            allPiecesFitInVisible: _pieces0.length <= nuVisibleColumns * rows
+            allPiecesFitInVisible:
+                boardModel.nuPieces <= nuVisibleColumns * rows
             pieces0: _pieces0
             pieces1: _pieces1
             pieces2: _pieces2

@@ -47,6 +47,7 @@ BoardModel::BoardModel(QObject* parent)
       m_bd(getInitialGameVariant()),
       m_gameVariant(to_string_id(m_bd.get_variant())),
       m_nuColors(m_bd.get_nu_colors()),
+      m_nuPieces(m_bd.get_nu_pieces()),
       m_toPlay(0),
       m_points0(0),
       m_points1(0),
@@ -198,7 +199,13 @@ void BoardModel::initGameVariant(QString gameVariant)
         m_nuColors = nuColors;
         emit nuColorsChanged(nuColors);
     }
+    int nuPieces = m_bd.get_nu_pieces();
     createPieceModels();
+    if (nuPieces != m_nuPieces)
+    {
+        m_nuPieces = nuPieces;
+        emit nuPiecesChanged(nuPieces);
+    }
     m_gameVariant = gameVariant;
     emit gameVariantChanged(gameVariant);
     updateProperties();

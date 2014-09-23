@@ -82,7 +82,9 @@ Item
                     isTrigon ?
                         0.13 * parentPieceSelectorArea.width :
                         Math.floor(0.2 * parentPieceSelectorArea.width)
-                gridElementHeight: isTrigon ? Math.sqrt(3) * gridElementWidth : gridElementWidth
+                gridElementHeight: isTrigon ?
+                                       Math.sqrt(3) * gridElementWidth :
+                                       gridElementWidth
                 opacity: 0.9
             }
             PropertyChanges { target: root; _isShadowVisible: false }
