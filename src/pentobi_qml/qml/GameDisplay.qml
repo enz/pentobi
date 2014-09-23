@@ -36,7 +36,12 @@ Item
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
 
-    Background { anchors.fill: root }
+    Rectangle {
+        gradient: Gradient {
+            GradientStop { position: 0; color: "#D8D0D6" }
+            GradientStop { position: 1; color: "#C2BBC0" }
+        }
+    }
     Column {
         id: column
 

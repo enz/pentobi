@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/pentobi_qml">
-        <file>qml/Background.qml</file>
         <file>qml/Board.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
         <file>qml/GameDisplay.qml</file>
