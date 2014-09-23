@@ -18,7 +18,7 @@ Item
     // Location of the piece selector (for centering items like the busy cursor
     // on it)
     readonly property real pieceAreaSize: pieceSelector.pieceAreaSize
-    readonly property real pieceSelectorY: scorePiecePanel.y + pieceSelector.y
+    readonly property real pieceSelectorY: column.y + pieceSelector.y
     readonly property real pieceSelectorHeight: pieceSelector.height
 
     property var _pieces0
@@ -37,23 +37,20 @@ Item
     onHeightChanged: pickedPiece = null
 
     Background { anchors.fill: root }
-
-    Board {
-        id: board
-
-        gameVariant: boardModel.gameVariant
-        width: Math.min(root.width, 0.8 * root.height)
-        height: width
-        anchors.top: root.top
-        anchors.horizontalCenter: root.horizontalCenter
-    }
-
     Column {
-        id: scorePiecePanel
+        id: column
 
-        anchors.top: board.bottom
-        anchors.horizontalCenter: root.horizontalCenter
+        width: root.width
+        anchors.centerIn: root
 
+        Board {
+            id: board
+
+            gameVariant: boardModel.gameVariant
+            width: Math.min(parent.width, 0.8 * root.height)
+            height: width
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
         ScoreDisplay {
             id: scoreDisplay
 
@@ -69,9 +66,8 @@ Item
             toPlay: boardModel.isGameOver ? -1 : boardModel.toPlay
             height: 0.06 * board.width
             pointSize: 0.03 * board.width
-            anchors.horizontalCenter: scorePiecePanel.horizontalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
         }
-
         PieceSelector {
             id: pieceSelector
 
@@ -86,6 +82,7 @@ Item
             toPlay: boardModel.toPlay
             nuColors: boardModel.nuColors
             width: board.width
+            anchors.horizontalCenter: board.horizontalCenter
 
             // Make piece size such that 7 pieces are visible below the board,
             // so that they are smaller than the pieces on the board but not
