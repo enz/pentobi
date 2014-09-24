@@ -84,7 +84,6 @@ Item
                 gridElementHeight: isTrigon ?
                                        Math.sqrt(3) * gridElementWidth :
                                        gridElementWidth
-                opacity: 0.9
             }
             PropertyChanges { target: root; _isShadowVisible: false }
             ParentChange {
@@ -100,7 +99,6 @@ Item
                 target: root
                 gridElementWidth: parentBoard.gridElementWidth
                 gridElementHeight: parentBoard.gridElementHeight
-                opacity: 1
             }
             PropertyChanges { target: root; _isShadowVisible: true }
             ParentChange {
@@ -116,7 +114,6 @@ Item
                 target: root
                 gridElementWidth: parentBoard.gridElementWidth
                 gridElementHeight: parentBoard.gridElementHeight
-                opacity: 1
             }
             PropertyChanges { target: root; _isShadowVisible: false }
             ParentChange {
