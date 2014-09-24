@@ -152,9 +152,7 @@ Variant BoardModel::getInitialGameVariant()
     Variant gameVariant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(),
                            gameVariant))
-        // Use Duo on the first invocation because it is a better
-        // default for mobile devices than Classic.
-        gameVariant = Variant::duo;
+        gameVariant = Variant::classic;
     return gameVariant;
 }
 

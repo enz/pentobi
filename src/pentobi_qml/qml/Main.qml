@@ -20,7 +20,7 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
     property bool isMoveHintRunning
-    property string themeName: "light"
+    property string themeName: "dark"
     property QtObject theme: Logic.createTheme(themeName)
 
     // For a desktop window, we should use a smaller initial size and remember
