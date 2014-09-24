@@ -123,7 +123,6 @@ Item
             onPiecePicked: Logic.pickPiece(piece)
         }
     }
-
     PieceManipulator {
         id: pieceManipulator
 
@@ -159,5 +158,6 @@ Item
         }
         onXChanged: legal = isLegal()
         onYChanged: legal = isLegal()
+        onOrientationChanged: legal = isLegal()
     }
 }

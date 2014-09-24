@@ -17,8 +17,7 @@ Item {
     property bool legal: false
 
     signal piecePlayed
-
-    signal positionChanged
+    signal orientationChanged
 
     height: width
 
@@ -29,7 +28,6 @@ Item {
         opacity: legal ? 0 : 0.4
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
-
     Image {
         source: theme.getImage("piece-manipulator-legal")
         sourceSize { width: root.width; height: root.height }
@@ -37,7 +35,6 @@ Item {
         opacity: legal ? 0.4 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
-
     MouseArea {
         id: dragMouseArea
 
@@ -55,7 +52,7 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
             width: 0.2 * root.width; height: 0.2 * root.height
-            onClicked: pieceModel.rotateRight()
+            onClicked: { pieceModel.rotateRight(); orientationChanged() }
         }
         MouseArea {
             anchors {
@@ -63,7 +60,7 @@ Item {
                 verticalCenter: parent.verticalCenter
             }
             width: 0.2 * root.width; height: 0.2 * root.height
-            onClicked: pieceModel.flipAcrossX()
+            onClicked: { pieceModel.flipAcrossX(); orientationChanged() }
         }
         MouseArea {
             anchors {
@@ -71,7 +68,7 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
             width: 0.2 * root.width; height: 0.2 * root.height
-            onClicked: pieceModel.flipAcrossY()
+            onClicked: { pieceModel.flipAcrossY(); orientationChanged() }
         }
         MouseArea {
             anchors {
@@ -79,7 +76,7 @@ Item {
                 verticalCenter: parent.verticalCenter
             }
             width: 0.2 * root.width; height: 0.2 * root.height
-            onClicked: pieceModel.rotateLeft()
+            onClicked: { pieceModel.rotateLeft(); orientationChanged() }
         }
     }
 }
