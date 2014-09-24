@@ -235,7 +235,7 @@ function showTemporaryMessage(text) {
 }
 
 function undo() {
-    if (! boardModel.canUndo())
+    if (! boardModel.canUndo)
         return
     cancelGenMove()
     message.clear()
