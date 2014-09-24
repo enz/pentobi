@@ -74,14 +74,14 @@ Item {
             switch (gameVariant) {
             case "trigon":
             case "trigon_2":
-                return "images/board-trigon.svg"
+                return theme.getImage("board-trigon")
             case "trigon_3":
-                return "images/board-trigon-3.svg"
+                return theme.getImage("board-trigon-3")
             case "duo":
             case "junior":
-                return "images/board-duo.svg"
+                return theme.getImage("board-duo")
             default:
-                return "images/board-classic.svg"
+                return theme.getImage("board-classic")
             }
         }
         sourceSize { width: _boardWidth; height: _boardHeight }

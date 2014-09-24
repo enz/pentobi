@@ -32,13 +32,13 @@ Rectangle {
     width: messageText.contentWidth + 2 * _margin
     height: messageText.contentHeight + 2 * _margin
     radius: _margin
-    color: "#494245"
+    color: theme.backgroundColorMessage
     opacity: 0
 
     Text {
         id: messageText
         font.pixelSize: root.fontSize
-        color: "white"
+        color: theme.fontColorMessage
         renderType: Text.NativeRendering
         anchors.centerIn: parent
     }

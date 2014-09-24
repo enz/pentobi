@@ -23,7 +23,7 @@ Item {
     height: width
 
     Image {
-        source: "images/piece-manipulator.svg"
+        source: theme.getImage("piece-manipulator")
         sourceSize { width: root.width; height: root.height }
         anchors.centerIn: root
         opacity: legal ? 0 : 0.4
@@ -31,7 +31,7 @@ Item {
     }
 
     Image {
-        source: "images/piece-manipulator-legal.svg"
+        source: theme.getImage("piece-manipulator-legal")
         sourceSize { width: root.width; height: root.height }
         anchors.centerIn: root
         opacity: legal ? 0.4 : 0

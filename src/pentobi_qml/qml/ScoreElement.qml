@@ -20,7 +20,7 @@ Item {
 
         width: (isToPlay ? 1.3 : 1) * pointSize
         border {
-            color: Qt.darker(color)
+            color: Qt.lighter(color, theme.toPlayColorLighter)
             width: isToPlay ? Math.max(0.15 * pointSize, 1) : 0
         }
         height: width
@@ -31,7 +31,7 @@ Item {
         id: scoreText
 
         text: value
-        color: "#6D6367"
+        color: theme.fontColorScore
         anchors {
             left: point.right
             leftMargin: (isToPlay ? 0.2 : 0.5) * point.width

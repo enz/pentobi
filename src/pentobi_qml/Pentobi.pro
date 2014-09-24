@@ -77,8 +77,10 @@ SOURCES += \
     ../libboardgame_sys/CpuTime.cpp
 
 RESOURCES += \
+    ../books/pentobi_books.qrc \
     resources.qrc \
-    ../books/pentobi_books.qrc
+    qml/themes/light/theme_light.qrc \
+    qml/themes/dark/theme_dark.qrc
 
 # Default rules for deployment.
 include(deployment.pri)

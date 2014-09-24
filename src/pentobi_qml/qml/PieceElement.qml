@@ -63,12 +63,12 @@ Item {
                     source: {
                         var prefix
                         if (isDownward)
-                            prefix = "images/triangle-down-"
+                            prefix = "triangle-down-"
                         else if (isTrigon)
-                            prefix = "images/triangle-"
+                            prefix = "triangle-"
                         else
-                            prefix = "images/square-"
-                        return prefix + colorName + "-" + modelData + ".svg"
+                            prefix = "square-"
+                        return theme.getImage(prefix + colorName + "-" + modelData)
                     }
                     width: isTrigon ? 2 * gridElementWidth : gridElementWidth
                     height: gridElementHeight

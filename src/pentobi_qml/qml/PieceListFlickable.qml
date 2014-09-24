@@ -21,7 +21,7 @@ Row {
     Image {
         visible: ! allPiecesFitInVisible
         width: 0.03 * root.width; height: root.height
-        source: "images/flick-left.svg"
+        source: theme.getImage("flick-left")
         sourceSize { width: width; height: height }
         fillMode: Image.PreserveAspectFit
         opacity: flickable.atXBeginning ? 0 : 1
@@ -59,7 +59,7 @@ Row {
     Image {
         visible: ! allPiecesFitInVisible
         width: 0.03 * root.width; height: root.height
-        source: "images/flick-right.svg"
+        source: theme.getImage("flick-right")
         sourceSize { width: width; height: height }
         fillMode: Image.PreserveAspectFit
         opacity: flickable.atXEnd ? 0 : 1

@@ -26,7 +26,6 @@ Item
     property var _pieces2
     property var _pieces3
     property bool _isTrigon: boardModel.gameVariant.indexOf("trigon") >= 0
-
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
@@ -39,8 +38,8 @@ Item
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0; color: "#D8D0D6" }
-            GradientStop { position: 1; color: "#C2BBC0" }
+            GradientStop { position: 0; color: theme.backgroundGradientColor1 }
+            GradientStop { position: 1; color: theme.backgroundGradientColor2 }
         }
     }
     Column {

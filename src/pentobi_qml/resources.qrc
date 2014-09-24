@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/pentobi_qml">
+    <qresource prefix="/">
         <file>qml/Board.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
         <file>qml/GameDisplay.qml</file>
@@ -23,80 +23,5 @@
         <file>qml/Transformable.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>
-        <file>qml/images/board-classic.svg</file>
-        <file>qml/images/board-duo.svg</file>
-        <file>qml/images/board-trigon.svg</file>
-        <file>qml/images/flick-left.svg</file>
-        <file>qml/images/flick-right.svg</file>
-        <file>qml/images/piece-manipulator-legal.svg</file>
-        <file>qml/images/piece-manipulator.svg</file>
-        <file>qml/images/square-shadow.svg</file>
-        <file>qml/images/triangle-shadow.svg</file>
-        <file>qml/images/board-trigon-3.svg</file>
-        <file>qml/images/triangle-down-shadow.svg</file>
-        <file>qml/images/square-blue-0.svg</file>
-        <file>qml/images/square-blue-90.svg</file>
-        <file>qml/images/square-blue-180.svg</file>
-        <file>qml/images/square-blue-270.svg</file>
-        <file>qml/images/square-green-0.svg</file>
-        <file>qml/images/square-green-90.svg</file>
-        <file>qml/images/square-green-180.svg</file>
-        <file>qml/images/square-green-270.svg</file>
-        <file>qml/images/square-red-0.svg</file>
-        <file>qml/images/square-red-90.svg</file>
-        <file>qml/images/square-red-180.svg</file>
-        <file>qml/images/square-red-270.svg</file>
-        <file>qml/images/square-yellow-0.svg</file>
-        <file>qml/images/square-yellow-90.svg</file>
-        <file>qml/images/square-yellow-180.svg</file>
-        <file>qml/images/square-yellow-270.svg</file>
-        <file>qml/images/triangle-blue-0.svg</file>
-        <file>qml/images/triangle-blue-60.svg</file>
-        <file>qml/images/triangle-blue-120.svg</file>
-        <file>qml/images/triangle-blue-180.svg</file>
-        <file>qml/images/triangle-blue-240.svg</file>
-        <file>qml/images/triangle-blue-300.svg</file>
-        <file>qml/images/triangle-down-blue-0.svg</file>
-        <file>qml/images/triangle-down-blue-60.svg</file>
-        <file>qml/images/triangle-down-blue-120.svg</file>
-        <file>qml/images/triangle-down-blue-180.svg</file>
-        <file>qml/images/triangle-down-blue-240.svg</file>
-        <file>qml/images/triangle-down-blue-300.svg</file>
-        <file>qml/images/triangle-down-green-0.svg</file>
-        <file>qml/images/triangle-down-green-60.svg</file>
-        <file>qml/images/triangle-down-green-180.svg</file>
-        <file>qml/images/triangle-down-green-120.svg</file>
-        <file>qml/images/triangle-down-green-240.svg</file>
-        <file>qml/images/triangle-down-green-300.svg</file>
-        <file>qml/images/triangle-down-red-0.svg</file>
-        <file>qml/images/triangle-down-red-60.svg</file>
-        <file>qml/images/triangle-down-red-120.svg</file>
-        <file>qml/images/triangle-down-red-180.svg</file>
-        <file>qml/images/triangle-down-red-240.svg</file>
-        <file>qml/images/triangle-down-red-300.svg</file>
-        <file>qml/images/triangle-down-yellow-0.svg</file>
-        <file>qml/images/triangle-down-yellow-60.svg</file>
-        <file>qml/images/triangle-down-yellow-120.svg</file>
-        <file>qml/images/triangle-down-yellow-180.svg</file>
-        <file>qml/images/triangle-down-yellow-240.svg</file>
-        <file>qml/images/triangle-down-yellow-300.svg</file>
-        <file>qml/images/triangle-green-0.svg</file>
-        <file>qml/images/triangle-green-60.svg</file>
-        <file>qml/images/triangle-green-120.svg</file>
-        <file>qml/images/triangle-green-180.svg</file>
-        <file>qml/images/triangle-green-240.svg</file>
-        <file>qml/images/triangle-green-300.svg</file>
-        <file>qml/images/triangle-red-0.svg</file>
-        <file>qml/images/triangle-red-60.svg</file>
-        <file>qml/images/triangle-red-120.svg</file>
-        <file>qml/images/triangle-red-180.svg</file>
-        <file>qml/images/triangle-red-240.svg</file>
-        <file>qml/images/triangle-red-300.svg</file>
-        <file>qml/images/triangle-yellow-0.svg</file>
-        <file>qml/images/triangle-yellow-60.svg</file>
-        <file>qml/images/triangle-yellow-120.svg</file>
-        <file>qml/images/triangle-yellow-180.svg</file>
-        <file>qml/images/triangle-yellow-240.svg</file>
-        <file>qml/images/triangle-yellow-300.svg</file>
     </qresource>
 </RCC>

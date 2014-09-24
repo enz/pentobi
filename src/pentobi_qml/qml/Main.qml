@@ -20,6 +20,8 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
     property bool isMoveHintRunning
+    property string themeName: "light"
+    property QtObject theme: Logic.createTheme(themeName)
 
     // For a desktop window, we should use a smaller initial size and remember
     // the last size in the settings, but for now we use pentobi_qml only for
@@ -46,7 +48,22 @@ ApplicationWindow {
     }
     Component.onDestruction: Logic.quit()
 
+    // Ensure sane values in case the values in the settings are unusable
+    onThemeNameChanged: {
+        switch (themeName) {
+        case "light":
+        case "dark":
+            return
+        default:
+            console.log("fixing invalid theme name ", themeName)
+            themeName = "light"
+        }
+    }
+
     Settings {
+        id: settings
+
+        property alias themeName: root.themeName
         property alias levelClassic: playerModel.levelClassic
         property alias levelClassic2: playerModel.levelClassic2
         property alias levelDuo: playerModel.levelDuo
@@ -58,16 +75,6 @@ ApplicationWindow {
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
-
-        // Settings may contain higher levels from desktop pentobi or later
-        // versions of pentobi_qml
-        onLevelClassicChanged: if (levelClassic > 7) levelClassic = 7
-        onLevelClassic2Changed: if (levelClassic2 > 7) levelClassic2 = 7
-        onLevelDuoChanged: if (levelDuo > 7) levelDuo = 7
-        onLevelTrigonChanged: if (levelTrigon > 7) levelTrigon = 7
-        onLevelTrigon2Changed: if (levelTrigon2 > 7) levelTrigon2 = 7
-        onLevelTrigon3Changed: if (levelTrigon3 > 7) levelTrigon3 = 7
-        onLevelJuniorChanged: if (levelJunior > 7) levelJunior = 7
     }
 
     BoardModel {

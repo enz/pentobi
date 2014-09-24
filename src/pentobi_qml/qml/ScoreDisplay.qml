@@ -30,8 +30,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 6.2 * pointSize
-        color1: "#0073CF"
-        color2: "#E63E2C"
+        color1: theme.colorBlue
+        color2: theme.colorRed
     }
 
     ScoreElement2 {
@@ -41,8 +41,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 6.2 * pointSize
-        color1: "#EBCD23"
-        color2: "#00C000"
+        color1: theme.colorYellow
+        color2: theme.colorGreen
     }
 
     ScoreElement {
@@ -52,8 +52,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: boardModel.gameVariant == "duo" ||
-               boardModel.gameVariant == "junior" ? "#0073CF" : "#0073CF"
+        color: theme.colorBlue
     }
 
     ScoreElement {
@@ -64,7 +63,8 @@ Row {
         height: root.height
         width: 5 * pointSize
         color: boardModel.gameVariant == "duo"
-               || boardModel.gameVariant == "junior" ? "#00C000" : "#EBCD23"
+               || boardModel.gameVariant == "junior" ?
+                   theme.colorGreen : theme.colorYellow
     }
 
     ScoreElement {
@@ -75,7 +75,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: "#E63E2C"
+        color: theme.colorRed
     }
 
     ScoreElement {
@@ -87,6 +87,6 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: "#00C000"
+        color: theme.colorGreen
     }
 }

@@ -106,6 +106,24 @@ MenuBar {
             MenuItemLevel { level: 6 }
             MenuItemLevel { level: 7 }
         }
+        Menu {
+            title: "Appearance"
+            ExclusiveGroup { id: groupTheme }
+            MenuItem {
+                text: "Light"
+                checkable: true
+                checked: themeName == "light"
+                exclusiveGroup: groupTheme
+                onTriggered: themeName = "light"
+            }
+            MenuItem {
+                text: "Dark"
+                checkable: true
+                checked: themeName == "dark"
+                exclusiveGroup: groupTheme
+                onTriggered: themeName = "dark"
+            }
+        }
         MenuItem {
             text: "Quit"
             onTriggered: Qt.quit()

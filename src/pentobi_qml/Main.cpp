@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<PieceModel>("PieceModel");
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:///pentobi_qml/qml/Main.qml")));
+    engine.load(QUrl("qrc:///qml/Main.qml"));
     return app.exec();
 }
 
