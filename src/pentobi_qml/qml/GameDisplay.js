@@ -5,17 +5,17 @@
 //-----------------------------------------------------------------------------
 
 function createPieces() {
-    Logic.destroyPieces(_pieces0)
-    Logic.destroyPieces(_pieces1)
-    Logic.destroyPieces(_pieces2)
-    Logic.destroyPieces(_pieces3)
+    destroyPieces(_pieces0)
+    destroyPieces(_pieces1)
+    destroyPieces(_pieces2)
+    destroyPieces(_pieces3)
     var component = Qt.createComponent("Piece.qml")
     if (component.status != Component.Ready)
         throw "Could not create component Piece.qml"
-    _pieces0 = Logic.createColorPieces(component, boardModel.pieceModels0)
-    _pieces1 = Logic.createColorPieces(component, boardModel.pieceModels1)
-    _pieces2 = Logic.createColorPieces(component, boardModel.pieceModels2)
-    _pieces3 = Logic.createColorPieces(component, boardModel.pieceModels3)
+    _pieces0 = createColorPieces(component, boardModel.pieceModels0)
+    _pieces1 = createColorPieces(component, boardModel.pieceModels1)
+    _pieces2 = createColorPieces(component, boardModel.pieceModels2)
+    _pieces3 = createColorPieces(component, boardModel.pieceModels3)
 }
 
 function createColorPieces(component, pieceModels) {
