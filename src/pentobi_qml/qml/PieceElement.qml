@@ -21,6 +21,7 @@ Item {
     property real gridElementHeight
     property real imageSourceWidth
     property real imageSourceHeight
+    property bool smooth: true
 
     // Lighting transformations applied in this order:
     property real angle: 0     // Rotate lighting around z axis
@@ -52,6 +53,8 @@ Item {
                 if (opacity < 0.1) opacity = 0
                 return opacity
             }
+
+            smooth: root.smooth
             on_ImageOpacityChanged:
                 if (_imageOpacity > 0 && loader.status == Loader.Null)
                     loader.sourceComponent = component

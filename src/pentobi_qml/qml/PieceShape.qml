@@ -17,6 +17,7 @@ Transformable {
     property real gridElementHeight
     property real imageSourceWidth
     property real imageSourceHeight
+    property bool smooth: true
 
     Repeater {
         model: elements
@@ -28,6 +29,7 @@ Transformable {
             gridElementHeight: root.gridElementHeight
             imageSourceWidth: root.imageSourceWidth
             imageSourceHeight: root.imageSourceHeight
+            smooth: root.smooth
             x: _isTrigon ? (modelData.x - center.x - 0.5) * gridElementWidth : (modelData.x - center.x) * gridElementWidth
             y: (modelData.y - center.y) * gridElementHeight
             angle: root.rotation

@@ -59,6 +59,8 @@ Item
     }
 
     PieceShape {
+        id: pieceShape
+
         isTrigon: root.isTrigon
         colorName: root.colorName
         elements: pieceModel.elements
@@ -134,13 +136,15 @@ Item
                 // Temporarily set z to 3 such that it is above the pieces
                 // on the board and above the piece manipulator
                 PropertyAction { target: root; property: "z"; value: 3 }
-                PropertyAction { target: root; property: "_isShadowVisible"; value: true }
+                PropertyAction { target: root; property: "_isShadowVisible"; value: false }
+                PropertyAction { target: pieceShape; property: "smooth"; value: false }
                 ParentAnimation {
                     via: parentAnimationVia
                     NumberAnimation { properties: "x,y,gridElementWidth,gridElementHeight"; duration: 300 }
                 }
                 PropertyAction { target: root; property: "z"; value: 0 }
                 PropertyAction { target: root; property: "_isShadowVisible" }
+                PropertyAction { target: pieceShape; property: "smooth"; value: true }
             }
         }
 }
