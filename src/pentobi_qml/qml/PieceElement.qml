@@ -21,6 +21,11 @@ Item {
     property real gridElementHeight
     property real imageSourceWidth
     property real imageSourceHeight
+
+    // If set to false, disable the lighting effect (always use only the first
+    // image with lighting not rotated) and set smooth rendering of the image
+    // to false. This will speed up animations that are too fast for the user
+    // to notice visual details anyway.
     property bool smooth: true
 
     // Lighting transformations applied in this order:
@@ -78,7 +83,7 @@ Item {
                     width: isTrigon ? 2 * gridElementWidth : gridElementWidth
                     height: gridElementHeight
                     sourceSize { width: imageSourceWidth; height: imageSourceHeight }
-                    opacity: _imageOpacity
+                    opacity: smooth ? _imageOpacity : (modelData == 0 ? 1 : 0)
                     transform: [
                         Rotation {
                             angle: _switchUpDownImage ? 360 - modelData: -modelData
