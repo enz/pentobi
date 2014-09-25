@@ -60,20 +60,47 @@ Item {
             Component {
                 id: component
                 Image {
+                    property bool _switchUpDownImage:
+                        isTrigon && modelData % 120 != 0
+                    property bool _isImageDownward:
+                        isTrigon && (isDownward != _switchUpDownImage)
+
                     source: {
-                        var prefix
-                        if (isDownward)
-                            prefix = "triangle-down-"
-                        else if (isTrigon)
-                            prefix = "triangle-"
-                        else
-                            prefix = "square-"
-                        return theme.getImage(prefix + colorName + "-" + modelData)
+                        if (_isImageDownward)
+                            return theme.getImage("triangle-down-" + colorName)
+                        if (isTrigon)
+                            return theme.getImage("triangle-" + colorName)
+                        return theme.getImage("square-" + colorName)
                     }
                     width: isTrigon ? 2 * gridElementWidth : gridElementWidth
                     height: gridElementHeight
                     sourceSize { width: imageSourceWidth; height: imageSourceHeight }
                     opacity: _imageOpacity
+                    transform: [
+                        Rotation {
+                            angle: _switchUpDownImage ? 360 - modelData: -modelData
+                            origin {
+                                x: width / 2
+                                y: {
+                                    if (_isImageDownward)
+                                        return height / 3
+                                    else if (isTrigon)
+                                        return 2 * height / 3
+                                    else
+                                        return height / 2
+                                }
+                            }
+                        },
+                        Translate {
+                            y: {
+                                if (! isDownward && _isImageDownward)
+                                    return height / 3
+                                if (isDownward && ! _isImageDownward)
+                                    return -height / 3
+                                return 0
+                            }
+                        }
+                    ]
                 }
             }
         }
