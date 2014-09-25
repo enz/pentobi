@@ -115,9 +115,10 @@ ApplicationWindow {
     ComputerColorDialog {
         id: computerColorDialog
 
+        visible: false
         gameVariant: boardModel.gameVariant
-        anchors.centerIn: contentItem
-        onOkClicked: {
+        onAccepted: {
+            visible = false
             root.computerPlays0 = this.computerPlays0
             root.computerPlays1 = this.computerPlays1
             root.computerPlays2 = this.computerPlays2
@@ -125,6 +126,7 @@ ApplicationWindow {
             Logic.cancelGenMove()
             Logic.checkComputerMove()
         }
+        onRejected: visible = false
     }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
