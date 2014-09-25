@@ -94,11 +94,6 @@ void PlayerModel::genMoveFinished()
     emit moveGenerated(mv.to_int());
 }
 
-int PlayerModel::isGenMoveRunning() const
-{
-    return m_isGenMoveRunning;
-}
-
 void PlayerModel::loadBook(Variant variant)
 {
     QFile file(QString(":/pentobi_books/book_%1.blksgf")

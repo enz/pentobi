@@ -52,8 +52,6 @@ public:
         running. */
     Q_INVOKABLE void cancelGenMove();
 
-    int isGenMoveRunning() const;
-
 signals:
     void levelClassicChanged(int);
 
