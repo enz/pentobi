@@ -141,8 +141,11 @@ ApplicationWindow {
     Timer {
         id: delayedCheckComputerMove
 
-        interval: 700
-        onTriggered: Logic.checkComputerMove()
+        interval: 450
+        onTriggered: {
+            Logic.playSound()
+            Logic.checkComputerMove()
+        }
     }
     // Call Logic.changeGameVariant with a small delay, such that the
     // running busy cursor is visible first

@@ -129,7 +129,6 @@ function moveGenerated(move) {
     else {
         busyIndicator.running = false
         boardModel.playMove(move)
-        playSound();
         delayedCheckComputerMove.start()
     }
 }

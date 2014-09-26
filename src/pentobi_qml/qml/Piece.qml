@@ -140,7 +140,11 @@ Item
                 PropertyAction { target: pieceShape; property: "smooth"; value: false }
                 ParentAnimation {
                     via: parentAnimationVia
-                    NumberAnimation { properties: "x,y,gridElementWidth,gridElementHeight"; duration: 300 }
+                    NumberAnimation {
+                        properties: "x,y,gridElementWidth,gridElementHeight"
+                        duration: 300
+                        easing.type: Easing.OutQuad
+                    }
                 }
                 PropertyAction { target: root; property: "z"; value: 0 }
                 PropertyAction { target: root; property: "_isShadowVisible" }
