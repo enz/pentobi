@@ -27,7 +27,7 @@ MenuItem {
     }
     onTriggered: {
         switch (boardModel.gameVariant) {
-        case "classic_2": playerModel.levelClassic2 == level; break
+        case "classic_2": playerModel.levelClassic2 = level; break
         case "duo": playerModel.levelDuo = level; break
         case "trigon": playerModel.levelTrigon = level; break
         case "trigon_2": playerModel.levelTrigon2 = level; break
