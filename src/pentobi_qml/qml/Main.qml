@@ -107,7 +107,6 @@ ApplicationWindow {
         id: busyIndicator
 
         running: true
-        height: 0.1 * board.width
         x: (root.width - width) / 2
         y: gameDisplay.y + gameDisplay.pieceSelectorY +
            (gameDisplay.pieceSelectorHeight - height) / 2
