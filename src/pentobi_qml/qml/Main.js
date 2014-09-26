@@ -10,8 +10,10 @@ function cancelGenMove() {
 }
 
 function changeGameVariant(gameVariant) {
-    initGameVariant(gameVariant)
-    initComputerColors()
+    callDelayTimer.call(function() {
+        initGameVariant(gameVariant)
+        initComputerColors()
+    })
 }
 
 function checkComputerMove() {
@@ -91,6 +93,19 @@ function hideComputerColorDialog()
 {
     if (computerColorDialogLoader.status == Loader.Ready)
         computerColorDialogLoader.item.visible = false
+}
+
+function init() {
+    callDelayTimer.call(function() {
+        var autoSaveLoaded = boardModel.loadAutoSave()
+        initGameVariant(boardModel.gameVariant)
+        if (! autoSaveLoaded)
+            initComputerColors()
+        else if (boardModel.isGameOver)
+            showGameOver()
+        else
+            checkComputerMove()
+    })
 }
 
 function initComputerColors() {

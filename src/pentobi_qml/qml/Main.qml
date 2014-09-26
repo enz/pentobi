@@ -37,17 +37,7 @@ ApplicationWindow {
     title: qsTr("Pentobi")
     menuBar: Pentobi.Menu { }
     onClosing: Qt.quit()
-    Component.onCompleted: {
-        busyIndicator.running = false
-        var autoSaveLoaded = boardModel.loadAutoSave()
-        Logic.initGameVariant(boardModel.gameVariant)
-        if (! autoSaveLoaded)
-            Logic.initComputerColors()
-        else if (boardModel.isGameOver)
-            Logic.showGameOver()
-        else
-            Logic.checkComputerMove()
-    }
+    Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.quit()
 
     // Ensure sane values in case the values in the settings are unusable
@@ -109,7 +99,6 @@ ApplicationWindow {
     BusyIndicator {
         id: busyIndicator
 
-        running: true
         x: (root.width - width) / 2
         y: gameDisplay.y + gameDisplay.pieceSelectorY +
            (gameDisplay.pieceSelectorHeight - height) / 2
@@ -147,23 +136,28 @@ ApplicationWindow {
             Logic.checkComputerMove()
         }
     }
-    // Call Logic.changeGameVariant with a small delay, such that the
-    // running busy cursor is visible first
+    // Call a function that might block the GUI thread (e.g. initializing or
+    // changing the game variant and the creation of the new pieces takes
+    // several seconds on a ~1GHz ARM CPU). The call() function sets the
+    // busy cursor to true and then calls the actual function with a small
+    // delay to ensure that the running busy cursor is visible first.
+    // In the future, we could create the pieces with incubateObject() instead,
+    // but this is currently buggy (see for example QTBUG-35587)
     Timer {
-        id: changeGameVariantTimer
+        id: callDelayTimer
 
-        property string _gameVariant
+        property var _func
 
-        function change(gameVariant) {
-            _gameVariant = gameVariant
+        function call(func) {
             busyIndicator.running = true
+            _func = func
             start()
         }
 
         interval: 10
         onTriggered: {
             busyIndicator.running = false
-            Logic.changeGameVariant(_gameVariant)
+            _func()
         }
     }
 
