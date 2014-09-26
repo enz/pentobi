@@ -19,12 +19,14 @@ MenuBar {
 
     Menu {
         title: "Game"
+
         MenuItem {
             text: "New Game"
             onTriggered: Logic.newGame()
         }
         Menu {
             title: "Game Variant"
+
             ExclusiveGroup { id: groupGameVariant }
             MenuItem {
                 text: "Classic (Four Players)"
@@ -97,6 +99,7 @@ MenuBar {
         }
         Menu {
             title: "Level"
+
             ExclusiveGroup { id: levelGroup }
             MenuItemLevel { level: 1 }
             MenuItemLevel { level: 2 }
@@ -107,22 +110,33 @@ MenuBar {
             MenuItemLevel { level: 7 }
         }
         Menu {
-            title: "Appearance"
-            ExclusiveGroup { id: groupTheme }
-            MenuItem {
-                text: "Light"
-                checkable: true
-                checked: themeName == "light"
-                exclusiveGroup: groupTheme
-                onTriggered: themeName = "light"
+            title: "Settings"
+
+            Menu {
+                title: "Appearance"
+                ExclusiveGroup { id: groupTheme }
+                MenuItem {
+                    text: "Light"
+                    checkable: true
+                    checked: themeName == "light"
+                    exclusiveGroup: groupTheme
+                    onTriggered: themeName = "light"
+                }
+                MenuItem {
+                    text: "Dark"
+                    checkable: true
+                    checked: themeName == "dark"
+                    exclusiveGroup: groupTheme
+                    onTriggered: themeName = "dark"
+                }
             }
             MenuItem {
-                text: "Dark"
+                text: "Sound"
                 checkable: true
-                checked: themeName == "dark"
-                exclusiveGroup: groupTheme
-                onTriggered: themeName = "dark"
+                checked: isSoundEnabled
+                onTriggered: isSoundEnabled = checked
             }
+
         }
         MenuItem {
             text: "Quit"

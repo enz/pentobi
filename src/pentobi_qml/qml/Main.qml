@@ -8,6 +8,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Window 2.0
 import Qt.labs.settings 1.0
+import QtMultimedia 5.0
 import pentobi 1.0
 import "." as Pentobi
 import "Main.js" as Logic
@@ -20,6 +21,7 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
     property bool isMoveHintRunning
+    property bool isSoundEnabled: true
     property string themeName: "dark"
     property QtObject theme: Logic.createTheme(themeName)
 
@@ -64,6 +66,7 @@ ApplicationWindow {
         id: settings
 
         property alias themeName: root.themeName
+        property alias isSoundEnabled: root.isSoundEnabled
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
@@ -159,5 +162,12 @@ ApplicationWindow {
             busyIndicator.running = false
             Logic.changeGameVariant(_gameVariant)
         }
+    }
+
+    Loader { id: soundEffectLoader }
+    Component {
+        id: soundEffectComponent
+
+        SoundEffect { source: "sounds/play.wav"; volume: 0.7 }
     }
 }

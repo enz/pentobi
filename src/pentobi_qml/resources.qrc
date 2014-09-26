@@ -23,5 +23,6 @@
         <file>qml/Transformable.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>
+        <file>qml/sounds/play.wav</file>
     </qresource>
 </RCC>
