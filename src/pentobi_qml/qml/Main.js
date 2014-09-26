@@ -36,7 +36,7 @@ function checkComputerMove() {
 function computerPlay() {
     if (playerModel.isGenMoveRunning)
         return
-    computerColorDialog.visible = false
+    hideComputerColorDialog()
     if (! isComputerToPlay()) {
         var isMultiColor = (boardModel.gameVariant == "classic_2"
                             || boardModel.gameVariant == "trigon_2")
@@ -82,6 +82,12 @@ function genMove() {
     playerModel.startGenMove(boardModel)
 }
 
+function hideComputerColorDialog()
+{
+    if (computerColorDialogLoader.status == Loader.Ready)
+        computerColorDialogLoader.item.visible = false
+}
+
 function initComputerColors() {
     // Default setting is that the computer plays all colors but the first
     computerPlays0 = false
@@ -95,7 +101,7 @@ function initComputerColors() {
 
 function initGameVariant(gameVariant) {
     cancelGenMove()
-    computerColorDialog.visible = false
+    hideComputerColorDialog()
     message.clear()
     boardModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
@@ -135,7 +141,7 @@ function newGame()
     cancelGenMove()
     gameDisplay.pickedPiece = null
     message.clear()
-    computerColorDialog.visible = false
+    hideComputerColorDialog()
     gameDisplay.transitionsEnabled = false
     boardModel.newGame()
     gameDisplay.transitionsEnabled = true
@@ -149,11 +155,15 @@ function play(pieceModel, gameCoord) {
 }
 
 function showComputerColorDialog() {
-    computerColorDialog.computerPlays0 = computerPlays0
-    computerColorDialog.computerPlays1 = computerPlays1
-    computerColorDialog.computerPlays2 = computerPlays2
-    computerColorDialog.computerPlays3 = computerPlays3
-    computerColorDialog.visible = true
+    if (computerColorDialogLoader.status == Loader.Null)
+        computerColorDialogLoader.sourceComponent =
+                computerColorDialogComponent
+    var dialog = computerColorDialogLoader.item
+    dialog.computerPlays0 = computerPlays0
+    dialog.computerPlays1 = computerPlays1
+    dialog.computerPlays2 = computerPlays2
+    dialog.computerPlays3 = computerPlays3
+    dialog.visible = true
 }
 
 function showGameOver() {

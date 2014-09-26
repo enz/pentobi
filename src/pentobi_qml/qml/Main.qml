@@ -55,7 +55,7 @@ ApplicationWindow {
         case "dark":
             return
         default:
-            console.log("fixing invalid theme name ", themeName)
+            console.log("fixing invalid theme name", themeName)
             themeName = "light"
         }
     }
@@ -105,21 +105,24 @@ ApplicationWindow {
         anchors.centerIn: message
     }
 
-    ComputerColorDialog {
-        id: computerColorDialog
+    Loader { id: computerColorDialogLoader }
+    Component {
+        id: computerColorDialogComponent
 
-        visible: false
-        gameVariant: boardModel.gameVariant
-        onAccepted: {
-            visible = false
-            root.computerPlays0 = this.computerPlays0
-            root.computerPlays1 = this.computerPlays1
-            root.computerPlays2 = this.computerPlays2
-            root.computerPlays3 = this.computerPlays3
-            Logic.cancelGenMove()
-            Logic.checkComputerMove()
+        ComputerColorDialog {
+            visible: false
+            gameVariant: boardModel.gameVariant
+            onAccepted: {
+                visible = false
+                root.computerPlays0 = this.computerPlays0
+                root.computerPlays1 = this.computerPlays1
+                root.computerPlays2 = this.computerPlays2
+                root.computerPlays3 = this.computerPlays3
+                Logic.cancelGenMove()
+                Logic.checkComputerMove()
+            }
+            onRejected: visible = false
         }
-        onRejected: visible = false
     }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
