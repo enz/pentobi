@@ -30,6 +30,11 @@ function checkComputerMove() {
     genMove();
 }
 
+function clearMessage() {
+    if (messageLoader.status == Loader.Ready)
+        messageLoader.item.visible = false
+}
+
 /** If the computer already plays the current color to play, start generating
     a move; if he doesn't, make him play the current color (and only the
     current color). */
@@ -102,7 +107,7 @@ function initComputerColors() {
 function initGameVariant(gameVariant) {
     cancelGenMove()
     hideComputerColorDialog()
-    message.clear()
+    clearMessage()
     boardModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
 }
@@ -140,7 +145,7 @@ function newGame()
 {
     cancelGenMove()
     gameDisplay.pickedPiece = null
-    message.clear()
+    clearMessage()
     hideComputerColorDialog()
     gameDisplay.transitionsEnabled = false
     boardModel.newGame()
@@ -237,18 +242,22 @@ function showGameOver() {
 }
 
 function showMessage(text) {
-    message.show(text)
+    if (messageLoader.status == Loader.Null)
+        messageLoader.sourceComponent = messageComponent
+    messageLoader.item.show(text)
 }
 
 function showTemporaryMessage(text) {
-    message.showTemporary(text, 1800)
+    if (messageLoader.status == Loader.Null)
+        messageLoader.sourceComponent = messageComponent
+    messageLoader.item.showTemporary(text, 1800)
 }
 
 function undo() {
     if (! boardModel.canUndo)
         return
     cancelGenMove()
-    message.clear()
+    clearMessage()
     boardModel.undo()
     gameDisplay.pickedPiece = null
 }

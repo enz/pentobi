@@ -88,21 +88,29 @@ ApplicationWindow {
         onPlay: Logic.play(pieceModel, gameCoord)
     }
 
-    Pentobi.Message {
-        id: message
+    Loader { id: messageLoader }
+    Component {
+        id: messageComponent
 
-        fontSize: 0.4 * gameDisplay.pieceAreaSize
-        x: (root.width - width) / 2
-        y: gameDisplay.y + gameDisplay.pieceSelectorY + (gameDisplay.pieceSelectorHeight - height) / 2
-        onClicked: clear()
+        Pentobi.Message {
+            id: message
+
+            fontSize: 0.4 * gameDisplay.pieceAreaSize
+            x: (root.width - width) / 2
+            y: gameDisplay.y + gameDisplay.pieceSelectorY +
+               (gameDisplay.pieceSelectorHeight - height) / 2
+            onClicked: clear()
+        }
     }
 
     BusyIndicator {
         id: busyIndicator
 
         running: true
-        height: message.height
-        anchors.centerIn: message
+        height: 0.1 * board.width
+        x: (root.width - width) / 2
+        y: gameDisplay.y + gameDisplay.pieceSelectorY +
+           (gameDisplay.pieceSelectorHeight - height) / 2
     }
 
     Loader { id: computerColorDialogLoader }
