@@ -64,13 +64,6 @@ ApplicationWindow {
         id: settings
 
         property alias themeName: root.themeName
-        property alias levelClassic: playerModel.levelClassic
-        property alias levelClassic2: playerModel.levelClassic2
-        property alias levelDuo: playerModel.levelDuo
-        property alias levelTrigon: playerModel.levelTrigon
-        property alias levelTrigon2: playerModel.levelTrigon2
-        property alias levelTrigon3: playerModel.levelTrigon3
-        property alias levelJunior: playerModel.levelJunior
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2

@@ -9,31 +9,62 @@
 #include <QElapsedTimer>
 #include <QFile>
 #include <QtConcurrentRun>
+#include <QSettings>
 
 using namespace std;
 using libboardgame_util::set_abort;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+void getLevel(QSettings& settings, const char* key, int& level)
+{
+    level = settings.value(key, 1).toInt();
+    if (level < 1)
+    {
+        qDebug() << "PlayerModel: invalid level in settings: " << level;
+        level = 1;
+    }
+    else if (level > 7)
+    {
+        qDebug() << "PlayerModel: level in settings too high, using level 7";
+        level = 7;
+    }
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent),
       m_isGenMoveRunning(false),
-      m_levelClassic(1),
-      m_levelClassic2(1),
-      m_levelDuo(1),
-      m_levelTrigon(1),
-      m_levelTrigon2(1),
-      m_levelTrigon3(1),
-      m_levelJunior(1),
       m_genMoveId(0),
       m_player(BoardModel::getInitialGameVariant(), "")
 {
+    QSettings settings;
+    getLevel(settings, "level_classic", m_levelClassic);
+    getLevel(settings, "level_classic_2", m_levelClassic2);
+    getLevel(settings, "level_duo", m_levelDuo);
+    getLevel(settings, "level_trigon", m_levelTrigon);
+    getLevel(settings, "level_trigon_2", m_levelTrigon2);
+    getLevel(settings, "level_trigon_3", m_levelTrigon3);
+    getLevel(settings, "level_junior", m_levelJunior);
     connect(&m_genMoveWatcher, SIGNAL(finished()), SLOT(genMoveFinished()));
 }
 
 PlayerModel::~PlayerModel()
 {
     cancelGenMove();
+    QSettings settings;
+    settings.setValue("level_classic", m_levelClassic);
+    settings.setValue("level_classic_2", m_levelClassic2);
+    settings.setValue("level_duo", m_levelDuo);
+    settings.setValue("level_trigon", m_levelTrigon);
+    settings.setValue("level_trigon_2", m_levelTrigon2);
+    settings.setValue("level_trigon_3", m_levelTrigon3);
+    settings.setValue("level_junior", m_levelJunior);
 }
 
 PlayerModel::GenMoveResult PlayerModel::asyncGenMove(BoardModel* bm,
