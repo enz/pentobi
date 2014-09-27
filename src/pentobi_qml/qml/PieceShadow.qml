@@ -40,7 +40,11 @@ Transformable {
                 height: gridElementHeight
                 source: theme.getImage(isTrigon ? "triangle-shadow" :
                                                   "square-shadow")
-                sourceSize { width: imageSourceWidth; height: imageSourceHeight }
+                sourceSize {
+                    width: isTrigon ? 2 * imageSourceWidth :
+                                      imageSourceWidth
+                    height: imageSourceHeight
+                }
                 smooth: false
                 x: (isTrigon ?
                         (modelData.x - center.x - 0.5) * gridElementWidth :

@@ -80,7 +80,11 @@ Item {
                     }
                     width: isTrigon ? 2 * gridElementWidth : gridElementWidth
                     height: gridElementHeight
-                    sourceSize { width: imageSourceWidth; height: imageSourceHeight }
+                    sourceSize {
+                        width: isTrigon ? 2 * imageSourceWidth :
+                                          imageSourceWidth
+                        height: imageSourceHeight
+                    }
                     opacity: fastRendering ?
                                  (modelData == 0 ? 1 : 0) : _imageOpacity
                     transform: [
