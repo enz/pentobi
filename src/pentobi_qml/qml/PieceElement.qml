@@ -19,8 +19,6 @@ Item {
     property string colorName
     property real gridElementWidth
     property real gridElementHeight
-    property real imageSourceWidth
-    property real imageSourceHeight
 
     // If set to false, disable the lighting effect (always use only the first
     // image with lighting not rotated) and set smooth rendering of the image

@@ -97,14 +97,14 @@ function hideComputerColorDialog()
 
 function init() {
     callDelayTimer.call(function() {
-        var autoSaveLoaded = boardModel.loadAutoSave()
-        initGameVariant(boardModel.gameVariant)
-        if (! autoSaveLoaded)
+        gameDisplay.createPieces()
+        if (! boardModel.loadAutoSave())
             initComputerColors()
         else if (boardModel.isGameOver)
             showGameOver()
         else
             checkComputerMove()
+        gameDisplay.transitionsEnabled = true
     })
 }
 
@@ -282,6 +282,10 @@ function undo() {
         return
     cancelGenMove()
     clearMessage()
+    // Immediately show the last color to move, otherwise the piece movement
+    // animation will target a part of the piece selector that is currently not
+    // visible
+    gameDisplay.showPiecesImmediately(boardModel.getLastMoveColor())
     boardModel.undo()
     gameDisplay.pickedPiece = null
 }

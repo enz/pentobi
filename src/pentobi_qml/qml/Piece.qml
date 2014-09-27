@@ -20,9 +20,6 @@ Item
     property Item parentAnimationVia
     property real gridElementWidth
     property real gridElementHeight
-    property real imageSourceWidth
-    property real imageSourceHeight
-    property bool transitionsEnabled: true
 
     property bool _isShadowVisible
 
@@ -48,9 +45,6 @@ Item
             state: pieceModel.state
             gridElementWidth: root.gridElementWidth
             gridElementHeight: root.gridElementHeight
-            imageSourceWidth: root.imageSourceWidth
-            imageSourceHeight: root.imageSourceHeight
-            transitionsEnabled: root.transitionsEnabled
             x: 0.15 * gridElementWidth
             y: 0.15 * gridElementHeight
             opacity: _isShadowVisible ? 0.3 : 0
@@ -68,9 +62,6 @@ Item
         state: pieceModel.state
         gridElementWidth: root.gridElementWidth
         gridElementHeight: root.gridElementHeight
-        imageSourceWidth: root.imageSourceWidth
-        imageSourceHeight: root.imageSourceHeight
-        transitionsEnabled: root.transitionsEnabled
     }
 
     states: [
@@ -88,6 +79,7 @@ Item
                                        gridElementWidth
             }
             PropertyChanges { target: root; _isShadowVisible: false }
+            PropertyChanges { target: parentPieceSelectorArea; visible: true }
             ParentChange {
                 target: root
                 parent: parentPieceSelectorArea
@@ -103,6 +95,7 @@ Item
                 gridElementHeight: parentBoard.gridElementHeight
             }
             PropertyChanges { target: root; _isShadowVisible: true }
+            PropertyChanges { target: parentPieceSelectorArea; visible: true }
             ParentChange {
                 target: root
                 parent: parentPieceManipulator
@@ -118,6 +111,7 @@ Item
                 gridElementHeight: parentBoard.gridElementHeight
             }
             PropertyChanges { target: root; _isShadowVisible: false }
+            PropertyChanges { target: parentPieceSelectorArea; visible: false }
             ParentChange {
                 target: root
                 parent: parentBoard
@@ -130,7 +124,7 @@ Item
     transitions:
         Transition {
             from: "unplayed,picked,played"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
 
             SequentialAnimation {
                 // Temporarily set z to 3 such that it is above the pieces
@@ -138,6 +132,10 @@ Item
                 PropertyAction { target: root; property: "z"; value: 3 }
                 PropertyAction { target: root; property: "_isShadowVisible"; value: false }
                 PropertyAction { target: pieceShape; property: "smooth"; value: false }
+                PropertyAction {
+                    target: parentPieceSelectorArea
+                    property: "visible"; value: true
+                }
                 ParentAnimation {
                     via: parentAnimationVia
                     NumberAnimation {
@@ -149,6 +147,10 @@ Item
                 PropertyAction { target: root; property: "z"; value: 0 }
                 PropertyAction { target: root; property: "_isShadowVisible" }
                 PropertyAction { target: pieceShape; property: "smooth"; value: true }
+                PropertyAction {
+                    target: parentPieceSelectorArea
+                    property: "visible"
+                }
             }
         }
 }

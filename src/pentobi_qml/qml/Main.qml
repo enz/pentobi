@@ -130,7 +130,7 @@ ApplicationWindow {
     Timer {
         id: delayedCheckComputerMove
 
-        interval: 450
+        interval: 300
         onTriggered: {
             Logic.playSound()
             Logic.checkComputerMove()

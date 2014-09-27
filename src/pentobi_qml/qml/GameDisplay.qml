@@ -13,13 +13,15 @@ Item
     id: root
 
     property var pickedPiece: null
-    property bool transitionsEnabled: true
+    property bool transitionsEnabled
 
     // Location of the piece selector (for centering items like the busy cursor
     // on it)
     readonly property real pieceAreaSize: pieceSelector.pieceAreaSize
     readonly property real pieceSelectorY: column.y + pieceSelector.y
     readonly property real pieceSelectorHeight: pieceSelector.height
+    property alias imageSourceWidth: board.gridElementWidth
+    property alias imageSourceHeight: board.gridElementHeight
 
     property var _pieces0
     property var _pieces1
@@ -29,8 +31,11 @@ Item
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
-    function showPieces(color) { pieceSelector.showColor(color) }
     function showMoveHint(move) { Logic.showMoveHint(move) }
+    function showPiecesImmediately(color) {
+        pieceSelector.showColorImmediately(color)
+    }
+    function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null

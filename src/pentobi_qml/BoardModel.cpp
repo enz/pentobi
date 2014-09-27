@@ -156,6 +156,14 @@ Variant BoardModel::getInitialGameVariant()
     return gameVariant;
 }
 
+int BoardModel::getLastMoveColor()
+{
+    auto nuMoves = m_bd.get_nu_moves();
+    if (nuMoves == 0)
+        return 0;
+    return m_bd.get_move(nuMoves - 1).color.to_int();
+}
+
 QList<PieceModel*>& BoardModel::getPieceModels(Color c)
 {
     if (c == Color(0))

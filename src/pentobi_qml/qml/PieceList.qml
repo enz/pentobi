@@ -29,10 +29,8 @@ Item {
                 property var piece: modelData
                 property var pieceModel: modelData.pieceModel
 
-                visible: ! pieceModel.isPlayed
                 width: pieceAreaSize
                 height: pieceAreaSize
-
                 Component.onCompleted: piece.parentPieceSelectorArea = pieceArea
 
                 MouseArea {

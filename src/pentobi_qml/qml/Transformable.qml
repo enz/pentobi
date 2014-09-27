@@ -9,7 +9,6 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property bool transitionsEnabled: true
     property alias flipXAngle: flipX.angle
     property alias flipYAngle: flipY.angle
 
@@ -94,57 +93,57 @@ Item {
     transitions: [
         Transition {
             from: ",rot60,rot90,rot120,rot180,rot240,rot270,rot300"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceRotationAnimation { }
         },
         Transition {
             from: "flip,rot60Flip,rot90Flip,rot120Flip,rot180Flip,rot240Flip,rot270Flip,rot300Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceRotationAnimation { }
         },
         Transition {
             from: ",flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: "rot60,rot60Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: "rot90,rot90Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: "rot120,rot120Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: "rot180,rot180Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: "rot240,rot240Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: "rot270,rot270Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: "rot300,rot300Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
         Transition {
             from: ",rot180Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {
@@ -156,7 +155,7 @@ Item {
         },
         Transition {
             from: "rot60,rot240Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {
@@ -168,7 +167,7 @@ Item {
         },
         Transition {
             from: "rot90,rot270Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {
@@ -180,7 +179,7 @@ Item {
         },
         Transition {
             from: "rot120,rot300Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {
@@ -192,7 +191,7 @@ Item {
         },
         Transition {
             from: "rot180,flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {
@@ -204,7 +203,7 @@ Item {
         },
         Transition {
             from: "rot240,rot60Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {
@@ -216,7 +215,7 @@ Item {
         },
         Transition {
             from: "rot270,rot90Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {
@@ -228,7 +227,7 @@ Item {
         },
         Transition {
             from: "rot300,rot120Flip"; to: from
-            enabled: root.transitionsEnabled
+            enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
                 PropertyAction {

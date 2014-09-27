@@ -66,6 +66,8 @@ public:
 
     Q_INVOKABLE bool loadAutoSave();
 
+    Q_INVOKABLE int getLastMoveColor();
+
     /** Find the piece model for a given move and set its transform and game
         coordinates accordingly but do not set its status to played yet. */
     Q_INVOKABLE PieceModel* preparePiece(int color, int move);

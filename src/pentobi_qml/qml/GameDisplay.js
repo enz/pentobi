@@ -41,14 +41,10 @@ function createColorPieces(component, pieceModels) {
         "colorName": colorName,
         "gridElementWidth": 0,
         "gridElementHeight": 0,
-        "imageSourceWidth": board.gridElementWidth,
-        "imageSourceHeight": board.gridElementHeight,
         "isPicked": Qt.binding(function() { return (this == pickedPiece) }),
         "parentPieceManipulator": pieceManipulator,
         "parentBoard": board,
-        "parentAnimationVia": contentItem,
-        "transitionsEnabled": Qt.binding(function() {
-            return root.transitionsEnabled })
+        "parentAnimationVia": contentItem
     }
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
@@ -74,11 +70,11 @@ function findPiece(pieceModel) {
     for (i = 0; i < _pieces1.length; ++i)
         if (_pieces1[i].pieceModel === pieceModel)
             return _pieces1[i]
-    if (nuColors > 2)
+    if (boardModel.nuColors > 2)
         for (i = 0; i < _pieces2.length; ++i)
             if (_pieces2[i].pieceModel === pieceModel)
                 return _pieces2[i]
-    if (nuColors > 3)
+    if (boardModel.nuColors > 3)
         for (i = 0; i < _pieces3.length; ++i)
             if (_pieces3[i].pieceModel === pieceModel)
                 return _pieces3[i]

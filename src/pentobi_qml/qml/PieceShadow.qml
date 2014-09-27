@@ -19,8 +19,6 @@ Transformable {
     property bool isTrigon
     property real gridElementWidth
     property real gridElementHeight
-    property real imageSourceWidth
-    property real imageSourceHeight
 
     Item {
         id: shadowImages

@@ -25,9 +25,27 @@ Item {
 
     signal piecePicked(var piece)
 
-    function showColor(color) { flickable.showColor(color, 80) }
+    function showColor(color, delay, duration, velocity) {
+        if (! transitionsEnabled) {
+            showColorImmediately(color)
+            return
+        }
+        showColorDelayAnimation.duration = delay
+        showColorMoveAnimation.velocity = duration
+        //showColorMoveAnimation.velocity = velocity
+        showColorMoveAnimation.to = height * color
+        showColorAnimation.restart()
+    }
+    function showColorImmediately(color) {
+        flickable.contentY = height * color
+    }
 
-    onToPlayChanged: flickable.showToPlay(80)
+    onToPlayChanged: {
+        showColorMoveAnimation.to = toPlay * height
+        snapAnimation.stop()
+        showColorAnimation.restart()
+    }
+
 
     Flickable {
         id: flickable
@@ -36,24 +54,34 @@ Item {
         contentHeight: nuColors * height
         flickableDirection: Flickable.VerticalFlick
         clip: true
-        onMovementEnded:
-            showColor(Math.min(Math.round(contentY / height), nuColors - 1), 200)
-        onWidthChanged: showToPlay(0)
-        onHeightChanged: showToPlay(0)
-        Component.onCompleted: showToPlay(0)
-
-        function showColor(color, duration) {
-            snapAnimation.duration = duration
+        onMovementEnded: {
+            var color = Math.min(Math.round(contentY / height), nuColors - 1)
             snapAnimation.to = height * color
+            showColorAnimation.stop()
             snapAnimation.restart()
         }
-        function showToPlay(duration) { showColor(toPlay, duration) }
+        onWidthChanged: showColorImmediately(toPlay)
+        onHeightChanged: showColorImmediately(toPlay)
+        Component.onCompleted: showColorImmediately(toPlay)
 
-        NumberAnimation {
+        SmoothedAnimation {
             id: snapAnimation
 
             target: flickable
             property: "contentY"
+            velocity: 200
+        }
+        SequentialAnimation {
+            id: showColorAnimation
+
+            PauseAnimation { duration: 300 }
+            NumberAnimation {
+                id: showColorMoveAnimation
+
+                target: flickable
+                property: "contentY"
+                duration: 80
+            }
         }
         Column {
             PieceListFlickable {
