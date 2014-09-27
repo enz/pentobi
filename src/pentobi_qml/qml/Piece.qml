@@ -131,7 +131,7 @@ Item
                 // on the board and above the piece manipulator
                 PropertyAction { target: root; property: "z"; value: 3 }
                 PropertyAction { target: root; property: "_isShadowVisible"; value: false }
-                PropertyAction { target: pieceShape; property: "smooth"; value: false }
+                PropertyAction { target: pieceShape; property: "fastRendering"; value: true }
                 PropertyAction {
                     target: parentPieceSelectorArea
                     property: "visible"; value: true
@@ -146,7 +146,7 @@ Item
                 }
                 PropertyAction { target: root; property: "z"; value: 0 }
                 PropertyAction { target: root; property: "_isShadowVisible" }
-                PropertyAction { target: pieceShape; property: "smooth"; value: true }
+                PropertyAction { target: pieceShape; property: "fastRendering"; value: false }
                 PropertyAction {
                     target: parentPieceSelectorArea
                     property: "visible"

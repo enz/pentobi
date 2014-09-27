@@ -20,11 +20,11 @@ Item {
     property real gridElementWidth
     property real gridElementHeight
 
-    // If set to false, disable the lighting effect (always use only the first
-    // image with lighting not rotated) and set smooth rendering of the image
-    // to false. This will speed up animations that are too fast for the user
-    // to notice visual details anyway.
-    property bool smooth: true
+    // Disable the lighting effect (always use only the first image with
+    // lighting not rotated) and set smooth rendering of the image to false.
+    // This will speed up animations that are too fast for the user to notice
+    // visual details anyway.
+    property bool fastRendering
 
     // Lighting transformations applied in this order:
     property real angle: 0     // Rotate lighting around z axis
@@ -57,7 +57,7 @@ Item {
                 return opacity
             }
 
-            smooth: root.smooth
+            smooth: ! fastRendering
             on_ImageOpacityChanged:
                 if (_imageOpacity > 0 && loader.status == Loader.Null)
                     loader.sourceComponent = component
@@ -81,7 +81,8 @@ Item {
                     width: isTrigon ? 2 * gridElementWidth : gridElementWidth
                     height: gridElementHeight
                     sourceSize { width: imageSourceWidth; height: imageSourceHeight }
-                    opacity: smooth ? _imageOpacity : (modelData == 0 ? 1 : 0)
+                    opacity: fastRendering ?
+                                 (modelData == 0 ? 1 : 0) : _imageOpacity
                     transform: [
                         Rotation {
                             angle: _switchUpDownImage ? 360 - modelData: -modelData

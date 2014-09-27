@@ -15,7 +15,7 @@ Transformable {
     property point center
     property real gridElementWidth
     property real gridElementHeight
-    property bool smooth: true
+    property bool fastRendering
 
     Repeater {
         model: elements
@@ -25,7 +25,7 @@ Transformable {
             isDownward: isTrigon && ((modelData.x % 2 != 0) ? (modelData.y % 2 == 0) : (modelData.y % 2 != 0))
             gridElementWidth: root.gridElementWidth
             gridElementHeight: root.gridElementHeight
-            smooth: root.smooth
+            fastRendering: root.fastRendering
             x: _isTrigon ? (modelData.x - center.x - 0.5) * gridElementWidth : (modelData.x - center.x) * gridElementWidth
             y: (modelData.y - center.y) * gridElementHeight
             angle: root.rotation
