@@ -57,16 +57,20 @@ Transformable {
     Component {
         id: glowComponent
 
+        // The glow is only used in the played state of the piece, so we
+        // can assume that gridElementWidth/Height is imageSourceWidth/Height
+        // and allow the glow to be cached.
         Glow {
             opacity: glowOpacity
-            width: 10 * gridElementWidth
-            height: 10 * gridElementHeight
+            width: 10 * imageSourceWidth
+            height: 10 * imageSourceHeight
             x: -width / 2
             y: -height / 2
             source: pieceElements
             radius: 16
             fast: true
             color: "white"
+            cached: true
         }
     }
 }
