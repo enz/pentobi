@@ -41,6 +41,10 @@ Item {
     }
 
     onToPlayChanged: {
+        if (! transitionsEnabled) {
+            showColorImmediately(toPlay)
+            return
+        }
         showColorMoveAnimation.to = toPlay * height
         snapAnimation.stop()
         showColorAnimation.restart()
