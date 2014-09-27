@@ -130,8 +130,12 @@ Item
                 // Temporarily set z to 3 such that it is above the pieces
                 // on the board and above the piece manipulator
                 PropertyAction { target: root; property: "z"; value: 3 }
-                PropertyAction { target: root; property: "_isShadowVisible"; value: false }
-                PropertyAction { target: pieceShape; property: "fastRendering"; value: true }
+                PropertyAction {
+                    target: root; property: "_isShadowVisible"; value: false
+                }
+                PropertyAction {
+                    target: pieceShape; property: "fastRendering"; value: true
+                }
                 PropertyAction {
                     target: parentPieceSelectorArea
                     property: "visible"; value: true
@@ -144,13 +148,31 @@ Item
                         easing.type: Easing.OutQuad
                     }
                 }
-                PropertyAction { target: root; property: "z"; value: 0 }
                 PropertyAction { target: root; property: "_isShadowVisible" }
-                PropertyAction { target: pieceShape; property: "fastRendering"; value: false }
                 PropertyAction {
-                    target: parentPieceSelectorArea
-                    property: "visible"
+                    target: pieceShape; property: "fastRendering"; value: false
                 }
+                PropertyAction {
+                    target: parentPieceSelectorArea; property: "visible"
+                }
+                NumberAnimation {
+                    target: pieceShape
+                    property: "glowOpacity"
+                    to: state == "played" ? 1 : 0
+                    duration: state == "played" ? 20 : 0
+                    easing.type: Easing.OutExpo
+                }
+                PauseAnimation {
+                    duration: state == "played" ? 750 : 0
+                }
+                NumberAnimation {
+                    target: pieceShape
+                    property: "glowOpacity"
+                    to: 0
+                    duration: state == "played" ? 230 : 0
+                    easing.type: Easing.OutExpo
+                }
+                PropertyAction { target: root; property: "z"; value: 0 }
             }
         }
 }
