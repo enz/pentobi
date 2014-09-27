@@ -131,11 +131,16 @@ ApplicationWindow {
         id: delayedCheckComputerMove
 
         interval: 300
-        onTriggered: {
-            Logic.playSound()
-            Logic.checkComputerMove()
-        }
+        onTriggered: Logic.checkComputerMove()
     }
+
+    Timer {
+        id: delayedPlaySound
+
+        interval: 300
+        onTriggered: Logic.playSound()
+    }
+
     // Call a function that might block the GUI thread (e.g. initializing or
     // changing the game variant and the creation of the new pieces takes
     // several seconds on a ~1GHz ARM CPU). The call() function sets the

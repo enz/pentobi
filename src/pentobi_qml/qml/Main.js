@@ -145,6 +145,7 @@ function moveGenerated(move) {
         busyIndicator.running = false
         boardModel.playMove(move)
         delayedCheckComputerMove.start()
+        delayedPlaySound.start()
     }
 }
 
