@@ -145,7 +145,6 @@ function moveGenerated(move) {
         busyIndicator.running = false
         boardModel.playMove(move)
         delayedCheckComputerMove.start()
-        delayedPlaySound.start()
     }
 }
 
@@ -172,16 +171,7 @@ function newGame()
 function play(pieceModel, gameCoord) {
     cancelGenMove()
     boardModel.play(pieceModel, gameCoord)
-    playSound();
     delayedCheckComputerMove.start()
-}
-
-function playSound() {
-    if (! isSoundEnabled)
-        return
-    if (soundEffectLoader.status == Loader.Null)
-        soundEffectLoader.sourceComponent = soundEffectComponent
-    soundEffectLoader.item.play()
 }
 
 function showComputerColorDialog() {

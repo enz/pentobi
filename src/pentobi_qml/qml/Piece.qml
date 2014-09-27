@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.0
+import "GameDisplay.js" as Logic
 
 Item
 {
@@ -140,12 +141,20 @@ Item
                     target: parentPieceSelectorArea
                     property: "visible"; value: true
                 }
-                ParentAnimation {
-                    via: parentAnimationVia
-                    NumberAnimation {
-                        properties: "x,y,gridElementWidth,gridElementHeight"
-                        duration: 300
-                        easing.type: Easing.OutQuad
+                ParallelAnimation {
+                    ParentAnimation {
+                        via: parentAnimationVia
+                        NumberAnimation {
+                            properties: "x,y,gridElementWidth,gridElementHeight"
+                            duration: 300
+                            easing.type: Easing.OutQuad
+                        }
+                    }
+                    SequentialAnimation {
+                        PauseAnimation { duration: 250 }
+                        ScriptAction {
+                            script: if (state == "played") Logic.playSound()
+                        }
                     }
                 }
                 PropertyAction { target: root; property: "_isShadowVisible" }

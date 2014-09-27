@@ -99,6 +99,14 @@ function pickPiece(piece) {
     pickedPiece = piece
 }
 
+function playSound() {
+    if (! isSoundEnabled)
+        return
+    if (soundEffectLoader.status == Loader.Null)
+        soundEffectLoader.sourceComponent = soundEffectComponent
+    soundEffectLoader.item.play()
+}
+
 function showMoveHint(move) {
     var pieceModel = boardModel.preparePiece(boardModel.toPlay, move)
     var piece = findPiece(pieceModel)

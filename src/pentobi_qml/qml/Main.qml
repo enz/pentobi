@@ -8,7 +8,6 @@ import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Window 2.0
 import Qt.labs.settings 1.0
-import QtMultimedia 5.0
 import pentobi 1.0
 import "." as Pentobi
 import "Main.js" as Logic
@@ -134,13 +133,6 @@ ApplicationWindow {
         onTriggered: Logic.checkComputerMove()
     }
 
-    Timer {
-        id: delayedPlaySound
-
-        interval: 300
-        onTriggered: Logic.playSound()
-    }
-
     // Call a function that might block the GUI thread (e.g. initializing or
     // changing the game variant and the creation of the new pieces takes
     // several seconds on a ~1GHz ARM CPU). The call() function sets the
@@ -164,12 +156,5 @@ ApplicationWindow {
             busyIndicator.running = false
             _func()
         }
-    }
-
-    Loader { id: soundEffectLoader }
-    Component {
-        id: soundEffectComponent
-
-        SoundEffect { source: "sounds/play.wav"; volume: 0.7 }
     }
 }
