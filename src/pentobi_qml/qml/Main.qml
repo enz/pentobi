@@ -6,6 +6,7 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.1
+import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.0
 import Qt.labs.settings 1.0
 import pentobi 1.0
@@ -117,6 +118,19 @@ ApplicationWindow {
                 Logic.cancelGenMove()
                 Logic.checkComputerMove()
             }
+            onRejected: visible = false
+        }
+    }
+
+    Loader { id: messageDialogLoader }
+    Component {
+        id: messageDialogComponent
+
+        MessageDialog {
+            property var acceptedFunc
+
+            standardButtons: StandardButton.Ok | StandardButton.Cancel
+            onAccepted: acceptedFunc()
             onRejected: visible = false
         }
     }

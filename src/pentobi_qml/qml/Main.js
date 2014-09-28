@@ -9,11 +9,19 @@ function cancelGenMove() {
     busyIndicator.running = false
 }
 
-function changeGameVariant(gameVariant) {
-    callDelayTimer.call(function() {
-        initGameVariant(gameVariant)
-        initComputerColors()
-    })
+function changeGameVariant(gameVariant, verifyAbortGame) {
+    cancelGenMove()
+    if (boardModel.isBoardEmpty || boardModel.isGameOver ||
+            ! verifyAbortGame) {
+        callDelayTimer.call(function() {
+            initGameVariant(gameVariant)
+            initComputerColors()
+        })
+        return
+    }
+    showMessageDialog("New game?",
+                      function() {
+                          changeGameVariant(gameVariant, false) })
 }
 
 function checkComputerMove() {
@@ -156,16 +164,21 @@ function moveHint() {
     playerModel.startGenMoveAtLevel(boardModel, 1)
 }
 
-function newGame()
+function newGame(verifyAbortGame)
 {
     cancelGenMove()
-    gameDisplay.pickedPiece = null
-    clearMessage()
-    hideComputerColorDialog()
-    gameDisplay.transitionsEnabled = false
-    boardModel.newGame()
-    gameDisplay.transitionsEnabled = true
-    initComputerColors()
+    if (boardModel.isBoardEmpty || boardModel.isGameOver
+            || ! verifyAbortGame) {
+        gameDisplay.pickedPiece = null
+        clearMessage()
+        hideComputerColorDialog()
+        gameDisplay.transitionsEnabled = false
+        boardModel.newGame()
+        gameDisplay.transitionsEnabled = true
+        initComputerColors()
+        return
+    }
+    showMessageDialog("New game?", function() { newGame(false) })
 }
 
 function play(pieceModel, gameCoord) {
@@ -260,6 +273,15 @@ function showMessage(text) {
     if (messageLoader.status == Loader.Null)
         messageLoader.sourceComponent = messageComponent
     messageLoader.item.show(text)
+}
+
+function showMessageDialog(text, acceptedFunc) {
+    if (messageDialogLoader.status == Loader.Null)
+        messageDialogLoader.sourceComponent = messageDialogComponent
+    var dialog = messageDialogLoader.item
+    dialog.text = text
+    dialog.acceptedFunc = acceptedFunc
+    dialog.visible = true
 }
 
 function showTemporaryMessage(text) {

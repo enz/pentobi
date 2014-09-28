@@ -30,15 +30,21 @@ class BoardModel
     Q_PROPERTY(int points1 MEMBER m_points1 NOTIFY points1Changed)
     Q_PROPERTY(int points2 MEMBER m_points2 NOTIFY points2Changed)
     Q_PROPERTY(int points3 MEMBER m_points3 NOTIFY points3Changed)
-    Q_PROPERTY(int nuPiecesLeft0 MEMBER m_nuPiecesLeft0 NOTIFY nuPiecesLeft0Changed)
-    Q_PROPERTY(int nuPiecesLeft1 MEMBER m_nuPiecesLeft1 NOTIFY nuPiecesLeft1Changed)
-    Q_PROPERTY(int nuPiecesLeft2 MEMBER m_nuPiecesLeft2 NOTIFY nuPiecesLeft2Changed)
-    Q_PROPERTY(int nuPiecesLeft3 MEMBER m_nuPiecesLeft3 NOTIFY nuPiecesLeft3Changed)
+    Q_PROPERTY(int nuPiecesLeft0 MEMBER m_nuPiecesLeft0
+               NOTIFY nuPiecesLeft0Changed)
+    Q_PROPERTY(int nuPiecesLeft1 MEMBER m_nuPiecesLeft1
+               NOTIFY nuPiecesLeft1Changed)
+    Q_PROPERTY(int nuPiecesLeft2 MEMBER m_nuPiecesLeft2
+               NOTIFY nuPiecesLeft2Changed)
+    Q_PROPERTY(int nuPiecesLeft3 MEMBER m_nuPiecesLeft3
+               NOTIFY nuPiecesLeft3Changed)
     Q_PROPERTY(bool hasMoves0 MEMBER m_hasMoves0 NOTIFY hasMoves0Changed)
     Q_PROPERTY(bool hasMoves1 MEMBER m_hasMoves1 NOTIFY hasMoves1Changed)
     Q_PROPERTY(bool hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
     Q_PROPERTY(bool hasMoves3 MEMBER m_hasMoves3 NOTIFY hasMoves3Changed)
     Q_PROPERTY(bool isGameOver MEMBER m_isGameOver NOTIFY isGameOverChanged)
+    Q_PROPERTY(bool isBoardEmpty MEMBER m_isBoardEmpty
+               NOTIFY isBoardEmptyChanged)
     Q_PROPERTY(bool canUndo MEMBER m_canUndo NOTIFY canUndoChanged)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
@@ -111,6 +117,8 @@ signals:
 
     void isGameOverChanged(bool);
 
+    void isBoardEmptyChanged(bool);
+
     void canUndoChanged(bool);
 
     void gameVariantChanged(QString);
@@ -155,6 +163,8 @@ private:
     bool m_hasMoves3;
 
     bool m_isGameOver;
+
+    bool m_isBoardEmpty;
 
     bool m_canUndo;
 

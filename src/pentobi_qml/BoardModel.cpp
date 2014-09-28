@@ -62,6 +62,7 @@ BoardModel::BoardModel(QObject* parent)
       m_hasMoves2(true),
       m_hasMoves3(true),
       m_isGameOver(false),
+      m_isBoardEmpty(true),
       m_canUndo(false)
 {
     createPieceModels();
@@ -475,6 +476,13 @@ void BoardModel::updateProperties()
     {
         m_isGameOver = isGameOver;
         emit isGameOverChanged(isGameOver);
+    }
+
+    bool isBoardEmpty = (m_bd.get_nu_onboard_pieces() == 0);
+    if (m_isBoardEmpty != isBoardEmpty)
+    {
+        m_isBoardEmpty = isBoardEmpty;
+        emit isBoardEmptyChanged(isBoardEmpty);
     }
 
     // The order of setting the piece properties is important:

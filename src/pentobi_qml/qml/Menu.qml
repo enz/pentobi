@@ -22,7 +22,7 @@ MenuBar {
 
         MenuItem {
             text: "New Game"
-            onTriggered: Logic.newGame()
+            onTriggered: Logic.newGame(true)
         }
         Menu {
             title: "Game Variant"
@@ -33,49 +33,49 @@ MenuBar {
                 checkable: true
                 checked: boardModel.gameVariant == "classic"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("classic")
+                onTriggered: Logic.changeGameVariant("classic", true)
             }
             MenuItem {
                 text: "Classic (Two Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "classic_2"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("classic_2")
+                onTriggered: Logic.changeGameVariant("classic_2", true)
             }
             MenuItem {
                 text: "Duo"
                 checkable: true
                 checked: boardModel.gameVariant == "duo"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("duo")
+                onTriggered: Logic.changeGameVariant("duo", true)
             }
             MenuItem {
                 text: "Trigon (Four Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "trigon"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("trigon")
+                onTriggered: Logic.changeGameVariant("trigon", true)
             }
             MenuItem {
                 text: "Trigon (Three Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "trigon_3"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("trigon_3")
+                onTriggered: Logic.changeGameVariant("trigon_3", true)
             }
             MenuItem {
                 text: "Trigon (Two Players)"
                 checkable: true
                 checked: boardModel.gameVariant == "trigon_2"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("trigon_2")
+                onTriggered: Logic.changeGameVariant("trigon_2", true)
             }
             MenuItem {
                 text: "Junior"
                 checkable: true
                 checked: boardModel.gameVariant == "junior"
                 exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("junior")
+                onTriggered: Logic.changeGameVariant("junior", true)
             }
         }
         MenuItem {
