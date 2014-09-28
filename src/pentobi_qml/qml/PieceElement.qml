@@ -19,6 +19,7 @@ Item {
     property string colorName
     property real gridElementWidth
     property real gridElementHeight
+    property bool isMarked
 
     // Disable the lighting effect (always use only the first image with
     // lighting not rotated) and set smooth rendering of the image to false.
@@ -114,5 +115,17 @@ Item {
                 }
             }
         }
+    }
+    Rectangle {
+        id: marker
+
+        visible: isMarked
+        opacity: 0.5
+        color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
+        width: 0.3 * gridElementWidth
+        height: width
+        radius: width / 2
+        x: gridElementWidth / 2 - width / 2
+        y: gridElementHeight / 2 - height / 2
     }
 }

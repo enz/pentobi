@@ -165,6 +165,22 @@ int BoardModel::getLastMoveColor()
     return m_bd.get_move(nuMoves - 1).color.to_int();
 }
 
+PieceModel* BoardModel::getLastMovePieceModel()
+{
+    auto nuMoves = m_bd.get_nu_moves();
+    if (nuMoves == 0)
+        return nullptr;
+    ColorMove mv = m_bd.get_move(nuMoves - 1);
+    Piece piece = m_bd.get_move_info(mv.move).get_piece();
+    auto& pieceModels = getPieceModels(mv.color);
+    // Iterate backwards because updateProperties() uses the first unplayed
+    // PieceModel in case there are multiple instances of the same piece.
+    for (int i = pieceModels.length() - 1; i >= 0; --i)
+        if (pieceModels[i]->getPiece() == piece && pieceModels[i]->isPlayed())
+            return pieceModels[i];
+    return nullptr;
+}
+
 QList<PieceModel*>& BoardModel::getPieceModels(Color c)
 {
     if (c == Color(0))

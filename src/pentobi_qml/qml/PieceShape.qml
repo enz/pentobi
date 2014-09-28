@@ -13,9 +13,11 @@ Transformable {
     property bool isTrigon
     property var elements // List of points with coordinates of piece elements
     property point center
+    property point markPos
     property real gridElementWidth
     property real gridElementHeight
     property bool fastRendering
+    property bool isMarked
 
     Item {
         id: pieceElements
@@ -44,6 +46,8 @@ Transformable {
                 angle: root.rotation
                 flipX: Math.abs(flipXAngle % 360 - 180) < 90
                 flipY: Math.abs(flipYAngle % 360 - 180) < 90
+                isMarked: modelData.x == 0 && modelData.y == 0 &&
+                          root.isMarked
             }
         }
     }

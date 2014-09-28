@@ -11,17 +11,17 @@ function cancelGenMove() {
 
 function changeGameVariant(gameVariant, verifyAbortGame) {
     cancelGenMove()
-    if (boardModel.isBoardEmpty || boardModel.isGameOver ||
-            ! verifyAbortGame) {
-        callDelayTimer.call(function() {
-            initGameVariant(gameVariant)
-            initComputerColors()
-        })
+    if (! boardModel.isBoardEmpty && ! boardModel.isGameOver &&
+            verifyAbortGame) {
+        showMessageDialog("New game?",
+                          function() {
+                              changeGameVariant(gameVariant, false) })
         return
     }
-    showMessageDialog("New game?",
-                      function() {
-                          changeGameVariant(gameVariant, false) })
+    callDelayTimer.call(function() {
+        initGameVariant(gameVariant)
+        initComputerColors()
+    })
 }
 
 function checkComputerMove() {
@@ -38,6 +38,44 @@ function checkComputerMove() {
     case 3: if (! boardModel.hasMoves3) return; break
     }
     genMove();
+}
+
+function clearMarks() {
+    if (_pieceMarked0 != null) {
+        _pieceMarked0.isMarked = false
+        _pieceMarked0 = null
+    }
+    if (_pieceMarked1 != null) {
+        _pieceMarked1.isMarked = false
+        _pieceMarked1 = null
+    }
+    if (_pieceMarked2 != null) {
+        _pieceMarked2.isMarked = false
+        _pieceMarked2 = null
+    }
+    if (_pieceMarked3 != null) {
+        _pieceMarked3.isMarked = false
+        _pieceMarked3 = null
+    }
+}
+
+function clearMarksNotComputer() {
+    if (! computerPlays0 && _pieceMarked0 != null) {
+        _pieceMarked0.isMarked = false
+        _pieceMarked0 = null
+    }
+    if (! computerPlays1 && _pieceMarked1 != null) {
+        _pieceMarked1.isMarked = false
+        _pieceMarked1 = null
+    }
+    if (! computerPlays2 && _pieceMarked2 != null) {
+        _pieceMarked2.isMarked = false
+        _pieceMarked2 = null
+    }
+    if (! computerPlays3 && _pieceMarked3 != null) {
+        _pieceMarked3.isMarked = false
+        _pieceMarked3 = null
+    }
 }
 
 function clearMessage() {
@@ -146,6 +184,7 @@ function initGameVariant(gameVariant) {
     cancelGenMove()
     hideComputerColorDialog()
     clearMessage()
+    clearMarks()
     boardModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
 }
@@ -159,16 +198,47 @@ function isComputerToPlay() {
     }
 }
 
+function markLastMove() {
+    if (! root.markLastMove)
+        return
+    var piece = gameDisplay.findPiece(boardModel.getLastMovePieceModel())
+    if (piece == null)
+        return
+    switch (boardModel.getLastMoveColor()) {
+    case 0:
+        if (_pieceMarked0 != null) _pieceMarked0.isMarked = false
+        _pieceMarked0 = piece
+        break
+    case 1:
+        if (_pieceMarked1 != null) _pieceMarked1.isMarked = false
+        _pieceMarked1 = piece
+        break
+    case 2:
+        if (_pieceMarked2 != null) _pieceMarked2.isMarked = false
+        _pieceMarked2 = piece
+        break
+    case 3:
+        if (_pieceMarked3 != null) _pieceMarked3.isMarked = false
+        _pieceMarked3 = piece
+        break
+    }
+    piece.isMarked = true
+}
+
 function moveGenerated(move) {
     if (isMoveHintRunning) {
         gameDisplay.showMoveHint(move)
         isMoveHintRunning = false
+        return
     }
-    else {
-        busyIndicator.running = false
-        boardModel.playMove(move)
-        delayedCheckComputerMove.start()
-    }
+    busyIndicator.running = false
+    boardModel.playMove(move)
+    if (computerPlaysAll())
+        clearMarks()
+    else
+        clearMarksNotComputer()
+    markLastMove()
+    delayedCheckComputerMove.start()
 }
 
 function moveHint() {
@@ -182,23 +252,26 @@ function moveHint() {
 function newGame(verifyAbortGame)
 {
     cancelGenMove()
-    if (boardModel.isBoardEmpty || boardModel.isGameOver
-            || ! verifyAbortGame) {
-        gameDisplay.pickedPiece = null
-        clearMessage()
-        hideComputerColorDialog()
-        gameDisplay.transitionsEnabled = false
-        boardModel.newGame()
-        gameDisplay.transitionsEnabled = true
-        initComputerColors()
+    if (! boardModel.isBoardEmpty &&  ! boardModel.isGameOver &&
+            verifyAbortGame) {
+        showMessageDialog("New game?", function() { newGame(false) })
         return
     }
-    showMessageDialog("New game?", function() { newGame(false) })
+    gameDisplay.pickedPiece = null
+    clearMessage()
+    clearMarks()
+    hideComputerColorDialog()
+    gameDisplay.transitionsEnabled = false
+    boardModel.newGame()
+    gameDisplay.transitionsEnabled = true
+    initComputerColors()
 }
 
 function play(pieceModel, gameCoord) {
     cancelGenMove()
     boardModel.play(pieceModel, gameCoord)
+    clearMarks()
+    markLastMove()
     delayedCheckComputerMove.start()
 }
 
@@ -315,6 +388,7 @@ function undo() {
     // visible
     gameDisplay.showPiecesImmediately(boardModel.getLastMoveColor())
     boardModel.undo()
+    markLastMove()
     gameDisplay.pickedPiece = null
 }
 

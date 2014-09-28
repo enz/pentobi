@@ -21,6 +21,7 @@ Item
     property Item parentAnimationVia
     property real gridElementWidth
     property real gridElementHeight
+    property bool isMarked
 
     state: {
         if (isPicked) return "picked"
@@ -39,6 +40,7 @@ Item
         state: pieceModel.state
         gridElementWidth: root.gridElementWidth
         gridElementHeight: root.gridElementHeight
+        isMarked: root.isMarked
     }
 
     states: [

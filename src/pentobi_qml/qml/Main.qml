@@ -22,7 +22,13 @@ ApplicationWindow {
     property bool computerPlays3
     property bool isMoveHintRunning
     property string themeName: "dark"
+    property bool markLastMove: true
     property QtObject theme: Logic.createTheme(themeName)
+
+    property var _pieceMarked0
+    property var _pieceMarked1
+    property var _pieceMarked2
+    property var _pieceMarked3
 
     // For a desktop window, we should use a smaller initial size and remember
     // the last size in the settings, but for now we use pentobi_qml only for
@@ -55,6 +61,7 @@ ApplicationWindow {
         id: settings
 
         property alias themeName: root.themeName
+        property alias markLastMove: root.markLastMove
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2

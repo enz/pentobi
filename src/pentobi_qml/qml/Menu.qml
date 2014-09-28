@@ -98,33 +98,48 @@ MenuBar {
             onTriggered: Logic.computerPlay()
         }
         Menu {
-            title: "Level"
+            title: "Settings"
 
-            ExclusiveGroup { id: levelGroup }
-            MenuItemLevel { level: 1 }
-            MenuItemLevel { level: 2 }
-            MenuItemLevel { level: 3 }
-            MenuItemLevel { level: 4 }
-            MenuItemLevel { level: 5 }
-            MenuItemLevel { level: 6 }
-            MenuItemLevel { level: 7 }
-        }
-        Menu {
-            title: "Appearance"
-            ExclusiveGroup { id: groupTheme }
-            MenuItem {
-                text: "Light"
-                checkable: true
-                checked: themeName == "light"
-                exclusiveGroup: groupTheme
-                onTriggered: themeName = "light"
+            Menu {
+                title: "Level"
+
+                ExclusiveGroup { id: levelGroup }
+                MenuItemLevel { level: 1 }
+                MenuItemLevel { level: 2 }
+                MenuItemLevel { level: 3 }
+                MenuItemLevel { level: 4 }
+                MenuItemLevel { level: 5 }
+                MenuItemLevel { level: 6 }
+                MenuItemLevel { level: 7 }
             }
             MenuItem {
-                text: "Dark"
+                text: "Mark Last Move"
                 checkable: true
-                checked: themeName == "dark"
-                exclusiveGroup: groupTheme
-                onTriggered: themeName = "dark"
+                checked: markLastMove
+                onTriggered: {
+                    if (markLastMove == checked) return
+                    markLastMove = checked
+                    Logic.clearMarks()
+                    Logic.markLastMove()
+                }
+            }
+            Menu {
+                title: "Appearance"
+                ExclusiveGroup { id: groupTheme }
+                MenuItem {
+                    text: "Dark"
+                    checkable: true
+                    checked: themeName == "dark"
+                    exclusiveGroup: groupTheme
+                    onTriggered: themeName = "dark"
+                }
+                MenuItem {
+                    text: "Light"
+                    checkable: true
+                    checked: themeName == "light"
+                    exclusiveGroup: groupTheme
+                    onTriggered: themeName = "light"
+                }
             }
         }
         MenuItem {
