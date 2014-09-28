@@ -229,12 +229,12 @@ function markLastMove() {
 }
 
 function moveGenerated(move) {
+    busyIndicator.running = false
     if (isMoveHintRunning) {
         gameDisplay.showMoveHint(move)
         isMoveHintRunning = false
         return
     }
-    busyIndicator.running = false
     boardModel.playMove(move)
     if (computerPlaysAll())
         clearMarks()
@@ -249,6 +249,7 @@ function moveHint() {
         return
     cancelGenMove()
     isMoveHintRunning = true
+    busyIndicator.running = true
     playerModel.startGenMoveAtLevel(boardModel, 1)
 }
 
