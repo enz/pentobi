@@ -163,8 +163,11 @@ function init() {
             initComputerColors()
         else if (boardModel.isGameOver)
             showGameOver()
-        else if (! computerPlaysAll())
-            checkComputerMove()
+        else {
+            markLastMove()
+            if (! computerPlaysAll())
+                checkComputerMove()
+        }
         gameDisplay.transitionsEnabled = true
     })
 }
