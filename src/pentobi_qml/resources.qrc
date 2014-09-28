@@ -15,7 +15,6 @@
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
         <file>qml/PieceSelector.qml</file>
-        <file>qml/PieceShadow.qml</file>
         <file>qml/PieceShape.qml</file>
         <file>qml/ScoreDisplay.qml</file>
         <file>qml/ScoreElement.qml</file>
@@ -23,6 +22,5 @@
         <file>qml/Transformable.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>
-        <file>qml/sounds/play.wav</file>
     </qresource>
 </RCC>

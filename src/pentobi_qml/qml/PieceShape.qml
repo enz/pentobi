@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.0
-import QtGraphicalEffects 1.0
 
 Transformable {
     id: root
@@ -17,11 +16,6 @@ Transformable {
     property real gridElementWidth
     property real gridElementHeight
     property bool fastRendering
-    property real glowOpacity
-
-    onGlowOpacityChanged:
-        if (glowOpacity > 0 && glowLoader.status == Loader.Null)
-            glowLoader.sourceComponent = glowComponent
 
     Item {
         id: pieceElements
@@ -51,26 +45,6 @@ Transformable {
                 flipX: Math.abs(flipXAngle % 360 - 180) < 90
                 flipY: Math.abs(flipYAngle % 360 - 180) < 90
             }
-        }
-    }
-    Loader { id: glowLoader }
-    Component {
-        id: glowComponent
-
-        // The glow is only used in the played state of the piece, so we
-        // can assume that gridElementWidth/Height is imageSourceWidth/Height
-        // and allow the glow to be cached.
-        Glow {
-            opacity: glowOpacity
-            width: 10 * imageSourceWidth
-            height: 10 * imageSourceHeight
-            x: -width / 2
-            y: -height / 2
-            source: pieceElements
-            radius: 16
-            fast: true
-            color: "white"
-            cached: true
         }
     }
 }

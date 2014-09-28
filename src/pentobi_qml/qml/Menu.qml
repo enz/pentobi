@@ -110,33 +110,22 @@ MenuBar {
             MenuItemLevel { level: 7 }
         }
         Menu {
-            title: "Settings"
-
-            Menu {
-                title: "Appearance"
-                ExclusiveGroup { id: groupTheme }
-                MenuItem {
-                    text: "Light"
-                    checkable: true
-                    checked: themeName == "light"
-                    exclusiveGroup: groupTheme
-                    onTriggered: themeName = "light"
-                }
-                MenuItem {
-                    text: "Dark"
-                    checkable: true
-                    checked: themeName == "dark"
-                    exclusiveGroup: groupTheme
-                    onTriggered: themeName = "dark"
-                }
+            title: "Appearance"
+            ExclusiveGroup { id: groupTheme }
+            MenuItem {
+                text: "Light"
+                checkable: true
+                checked: themeName == "light"
+                exclusiveGroup: groupTheme
+                onTriggered: themeName = "light"
             }
             MenuItem {
-                text: "Sound"
+                text: "Dark"
                 checkable: true
-                checked: isSoundEnabled
-                onTriggered: isSoundEnabled = checked
+                checked: themeName == "dark"
+                exclusiveGroup: groupTheme
+                onTriggered: themeName = "dark"
             }
-
         }
         MenuItem {
             text: "Quit"

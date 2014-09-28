@@ -6,7 +6,6 @@
 
 import QtQuick 2.1
 import QtQuick.Window 2.1
-import QtMultimedia 5.0
 import "GameDisplay.js" as Logic
 
 Item
@@ -165,11 +164,5 @@ Item
         onXChanged: legal = isLegal()
         onYChanged: legal = isLegal()
         onOrientationChanged: legal = isLegal()
-    }
-    Loader { id: soundEffectLoader }
-    Component {
-        id: soundEffectComponent
-
-        SoundEffect { source: "sounds/play.wav"; volume: 0.7 }
     }
 }

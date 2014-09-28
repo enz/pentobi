@@ -22,35 +22,11 @@ Item
     property real gridElementWidth
     property real gridElementHeight
 
-    property bool _isShadowVisible
-
     state: {
         if (isPicked) return "picked"
         else if (pieceModel.isPlayed) return "played"
         else if (parentPieceSelectorArea != null) return "unplayed"
         else return ""
-    }
-    on_IsShadowVisibleChanged:
-        if (_isShadowVisible && shadowLoader.status == Loader.Null)
-            shadowLoader.sourceComponent = shadowComponent
-
-    // Shadow creation is delayed until it is needed
-    Loader { id: shadowLoader }
-    Component {
-        id: shadowComponent
-
-        PieceShadow {
-            isTrigon: root.isTrigon
-            elements: pieceModel.elements
-            center: pieceModel.center
-            state: pieceModel.state
-            gridElementWidth: root.gridElementWidth
-            gridElementHeight: root.gridElementHeight
-            x: 0.15 * gridElementWidth
-            y: 0.15 * gridElementHeight
-            opacity: _isShadowVisible ? 0.3 : 0
-            Behavior on opacity { NumberAnimation { duration: 100 } }
-        }
     }
 
     PieceShape {
@@ -79,7 +55,6 @@ Item
                                        Math.sqrt(3) * gridElementWidth :
                                        gridElementWidth
             }
-            PropertyChanges { target: root; _isShadowVisible: false }
             PropertyChanges { target: parentPieceSelectorArea; visible: true }
             ParentChange {
                 target: root
@@ -95,7 +70,6 @@ Item
                 gridElementWidth: parentBoard.gridElementWidth
                 gridElementHeight: parentBoard.gridElementHeight
             }
-            PropertyChanges { target: root; _isShadowVisible: true }
             PropertyChanges { target: parentPieceSelectorArea; visible: true }
             ParentChange {
                 target: root
@@ -111,7 +85,6 @@ Item
                 gridElementWidth: parentBoard.gridElementWidth
                 gridElementHeight: parentBoard.gridElementHeight
             }
-            PropertyChanges { target: root; _isShadowVisible: false }
             PropertyChanges { target: parentPieceSelectorArea; visible: false }
             ParentChange {
                 target: root
@@ -132,54 +105,25 @@ Item
                 // on the board and above the piece manipulator
                 PropertyAction { target: root; property: "z"; value: 3 }
                 PropertyAction {
-                    target: root; property: "_isShadowVisible"; value: false
-                }
-                PropertyAction {
                     target: pieceShape; property: "fastRendering"; value: true
                 }
                 PropertyAction {
                     target: parentPieceSelectorArea
                     property: "visible"; value: true
                 }
-                ParallelAnimation {
-                    ParentAnimation {
-                        via: parentAnimationVia
-                        NumberAnimation {
-                            properties: "x,y,gridElementWidth,gridElementHeight"
-                            duration: 300
-                            easing.type: Easing.OutQuad
-                        }
-                    }
-                    SequentialAnimation {
-                        PauseAnimation { duration: 250 }
-                        ScriptAction {
-                            script: if (state == "played") Logic.playSound()
-                        }
+                ParentAnimation {
+                    via: parentAnimationVia
+                    NumberAnimation {
+                        properties: "x,y,gridElementWidth,gridElementHeight"
+                        duration: 300
+                        easing.type: Easing.OutQuad
                     }
                 }
-                PropertyAction { target: root; property: "_isShadowVisible" }
                 PropertyAction {
                     target: pieceShape; property: "fastRendering"; value: false
                 }
                 PropertyAction {
                     target: parentPieceSelectorArea; property: "visible"
-                }
-                NumberAnimation {
-                    target: pieceShape
-                    property: "glowOpacity"
-                    to: state == "played" ? 1 : 0
-                    duration: state == "played" ? 20 : 0
-                    easing.type: Easing.OutExpo
-                }
-                PauseAnimation {
-                    duration: state == "played" ? 750 : 0
-                }
-                NumberAnimation {
-                    target: pieceShape
-                    property: "glowOpacity"
-                    to: 0
-                    duration: state == "played" ? 230 : 0
-                    easing.type: Easing.OutExpo
                 }
                 PropertyAction { target: root; property: "z"; value: 0 }
             }

@@ -85,8 +85,7 @@ Item {
                                           imageSourceWidth
                         height: imageSourceHeight
                     }
-                    opacity: fastRendering ?
-                                 (modelData == 0 ? 1 : 0) : _imageOpacity
+                    opacity: _imageOpacity
                     transform: [
                         Rotation {
                             angle: _switchUpDownImage ? 360 - modelData: -modelData

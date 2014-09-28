@@ -25,17 +25,6 @@ Item {
 
     signal piecePicked(var piece)
 
-    function showColor(color, delay, duration, velocity) {
-        if (! transitionsEnabled) {
-            showColorImmediately(color)
-            return
-        }
-        showColorDelayAnimation.duration = delay
-        showColorMoveAnimation.velocity = duration
-        //showColorMoveAnimation.velocity = velocity
-        showColorMoveAnimation.to = height * color
-        showColorAnimation.restart()
-    }
     function showColorImmediately(color) {
         flickable.contentY = height * color
     }
@@ -78,7 +67,7 @@ Item {
         SequentialAnimation {
             id: showColorAnimation
 
-            PauseAnimation { duration: 300 }
+            PauseAnimation { duration: 350 }
             NumberAnimation {
                 id: showColorMoveAnimation
 
