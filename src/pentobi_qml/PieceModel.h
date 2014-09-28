@@ -64,6 +64,8 @@ public:
 
     void setGameCoord(QPointF gameCoord);
 
+    QString getDefaultState() const;
+
     Q_INVOKABLE void rotateLeft();
 
     Q_INVOKABLE void rotateRight();
