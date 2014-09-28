@@ -79,8 +79,8 @@ Item {
                             return theme.getImage("triangle-" + colorName)
                         return theme.getImage("square-" + colorName)
                     }
-                    width: isTrigon ? 2 * gridElementWidth : gridElementWidth
-                    height: gridElementHeight
+                    width: root.width
+                    height: root.height
                     sourceSize {
                         width: isTrigon ? 2 * imageSourceWidth :
                                           imageSourceWidth
@@ -122,10 +122,19 @@ Item {
         visible: isMarked
         opacity: 0.5
         color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
-        width: 0.3 * gridElementWidth
+        width: 0.3 * gridElementHeight
         height: width
         radius: width / 2
-        x: gridElementWidth / 2 - width / 2
-        y: gridElementHeight / 2 - height / 2
+        x: root.width / 2 - width / 2
+        y: {
+            if (isTrigon) {
+                if (isDownward)
+                    return root.height / 3 - height / 2
+                else
+                    return 2 * root.height / 3 - height / 2
+            }
+            else
+                return gridElementHeight / 2 - height / 2
+        }
     }
 }
