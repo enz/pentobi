@@ -164,6 +164,7 @@ function init() {
         else if (boardModel.isGameOver)
             showGameOver()
         else {
+            clearMarks()
             markLastMove()
             if (! computerPlaysAll())
                 checkComputerMove()
@@ -392,6 +393,7 @@ function undo() {
     // visible
     gameDisplay.showPiecesImmediately(boardModel.getLastMoveColor())
     boardModel.undo()
+    clearMarks()
     markLastMove()
     gameDisplay.pickedPiece = null
 }
