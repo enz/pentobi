@@ -14,7 +14,7 @@ set(pentobi_qml_SRCS
 
 qt5_add_resources(pentobi_qml_RC_SRCS
   resources.qrc
-  qml/themes/light/theme_dark.qrc
+  qml/themes/dark/theme_dark.qrc
   qml/themes/light/theme_light.qrc
   ../books/pentobi_books.qrc
 )

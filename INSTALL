@@ -63,4 +63,4 @@ update-mime-database exist.
 Since CMake does not support Android yet, there is a QtCreator project file in
 src/pentobi_qml/Pentobi.pro for building the Android app. For testing purposes,
 the GUI that is used for Android can also be built as a desktop application by
-running CMake with -DPENTOBI_BUILD_QML=1. It requires at least Qt 5.4.
+running CMake with -DPENTOBI_BUILD_QML=1. It requires at least Qt 5.3.
