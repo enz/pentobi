@@ -81,6 +81,21 @@ function computerPlay() {
     checkComputerMove()
 }
 
+function computerPlaysAll() {
+    switch (boardModel.gameVariant) {
+    case "duo":
+    case "junior":
+    case "classic_2":
+    case "trigon_2":
+        return computerPlays0 && computerPlays1
+    case "trigon_3":
+        return computerPlays0 && computerPlays1 && computerPlays2
+    default:
+        return computerPlays0 && computerPlays1 && computerPlays2 &&
+                computerPlays3
+    }
+}
+
 function createTheme(themeName) {
     var source = "qrc:///qml/themes/" + themeName + "/Theme.qml"
     var component = Qt.createComponent(source)
@@ -110,7 +125,7 @@ function init() {
             initComputerColors()
         else if (boardModel.isGameOver)
             showGameOver()
-        else
+        else if (! computerPlaysAll())
             checkComputerMove()
         gameDisplay.transitionsEnabled = true
     })
