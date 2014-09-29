@@ -46,9 +46,21 @@ Transformable {
                 angle: root.rotation
                 flipX: Math.abs(flipXAngle % 360 - 180) < 90
                 flipY: Math.abs(flipYAngle % 360 - 180) < 90
-                isMarked: modelData.x == 0 && modelData.y == 0 &&
-                          root.isMarked
             }
+        }
+        Rectangle {
+            opacity: isMarked ? 0.5 : 0
+            color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
+            width: 0.3 * gridElementHeight
+            height: width
+            radius: width / 2
+            x: (-center.x + 0.5) * gridElementWidth +
+               pieceElements.width / 2 - width / 2
+            y: (isTrigon ?
+                    (-center.y + 2 / 3) * gridElementHeight :
+                    (-center.y + 0.5) * gridElementHeight) +
+               pieceElements.height / 2 - height / 2
+            Behavior on opacity { NumberAnimation { duration: 80 } }
         }
     }
 }

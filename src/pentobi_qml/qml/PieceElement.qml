@@ -19,7 +19,6 @@ Item {
     property string colorName
     property real gridElementWidth
     property real gridElementHeight
-    property bool isMarked
 
     // Disable the lighting effect (always use only the first image with
     // lighting not rotated) and set smooth rendering of the image to false.
@@ -115,26 +114,5 @@ Item {
                 }
             }
         }
-    }
-    Rectangle {
-        id: marker
-
-        opacity: isMarked ? 0.5 : 0
-        color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
-        width: 0.3 * gridElementHeight
-        height: width
-        radius: width / 2
-        x: root.width / 2 - width / 2
-        y: {
-            if (isTrigon) {
-                if (isDownward)
-                    return root.height / 3 - height / 2
-                else
-                    return 2 * root.height / 3 - height / 2
-            }
-            else
-                return gridElementHeight / 2 - height / 2
-        }
-        Behavior on opacity { NumberAnimation { duration: 80 } }
     }
 }
