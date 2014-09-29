@@ -19,6 +19,7 @@ Rectangle {
         opacity = 0
     }
     function show(text) {
+        messageTimer.stop()
         messageText.text = text
         opacity = 0.8
     }
