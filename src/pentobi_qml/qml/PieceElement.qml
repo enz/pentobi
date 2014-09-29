@@ -119,8 +119,7 @@ Item {
     Rectangle {
         id: marker
 
-        visible: isMarked
-        opacity: 0.5
+        opacity: isMarked ? 0.5 : 0
         color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
         width: 0.3 * gridElementHeight
         height: width
@@ -136,5 +135,6 @@ Item {
             else
                 return gridElementHeight / 2 - height / 2
         }
+        Behavior on opacity { NumberAnimation { duration: 80 } }
     }
 }
