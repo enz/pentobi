@@ -80,7 +80,7 @@ function clearMarksNotComputer() {
 
 function clearMessage() {
     if (messageLoader.status == Loader.Ready)
-        messageLoader.item.visible = false
+        messageLoader.item.clear()
 }
 
 /** If the computer already plays the current color to play, start generating
