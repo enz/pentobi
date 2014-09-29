@@ -70,6 +70,8 @@ public:
 
     Q_INVOKABLE void autoSave();
 
+    Q_INVOKABLE void clearAutoSave();
+
     Q_INVOKABLE bool loadAutoSave();
 
     Q_INVOKABLE int getLastMoveColor();

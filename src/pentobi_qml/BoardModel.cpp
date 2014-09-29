@@ -87,6 +87,12 @@ void BoardModel::autoSave()
     settings.setValue("autosave", s);
 }
 
+void BoardModel::clearAutoSave()
+{
+    QSettings settings;
+    settings.remove("autosave");
+}
+
 void BoardModel::createPieceModels()
 {
     m_pieceModels0.clear();

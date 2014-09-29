@@ -161,8 +161,6 @@ function init() {
         gameDisplay.createPieces()
         if (! boardModel.loadAutoSave())
             initComputerColors()
-        else if (boardModel.isGameOver)
-            showGameOver()
         else {
             clearMarks()
             markLastMove()
@@ -400,5 +398,8 @@ function undo() {
 
 function quit() {
     cancelGenMove()
-    boardModel.autoSave()
+    if (boardModel.isGameOver)
+        boardModel.clearAutoSave()
+    else
+        boardModel.autoSave()
 }
