@@ -13,7 +13,7 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
     cancelGenMove()
     if (! boardModel.isBoardEmpty && ! boardModel.isGameOver &&
             verifyAbortGame) {
-        showMessageDialog("New game?",
+        showMessageDialog(qsTr("New game?"),
                           function() {
                               changeGameVariant(gameVariant, false) })
         return
@@ -257,7 +257,8 @@ function newGame(verifyAbortGame)
     cancelGenMove()
     if (! boardModel.isBoardEmpty &&  ! boardModel.isGameOver &&
             verifyAbortGame) {
-        showMessageDialog("New game?", function() { newGame(false) })
+        showMessageDialog(qsTr("New game?"),
+                          function() { newGame(false) })
         return
     }
     gameDisplay.pickedPiece = null
@@ -300,22 +301,22 @@ function showGameOver() {
         points0 = boardModel.points0
         points1 = boardModel.points1
         if (points0 > points1)
-            msg = "Blue wins"
+            msg = qsTr("Blue wins.")
         else if (points0 < points1)
-            msg = "Green wins"
+            msg = qsTr("Green wins.")
         else
-            msg = "Game ends in a tie"
+            msg = qsTr("Game ends in a tie.")
         break
     case "classic_2":
     case "trigon_2":
         points0 = boardModel.points0 + boardModel.points2
         points1 = boardModel.points1 + boardModel.points3
         if (points0 > points1)
-            msg = "Blue/Red wins"
+            msg = qsTr("Blue/Red wins.")
         else if (points0 < points1)
-            msg = "Yellow/Green wins"
+            msg = qsTr("Yellow/Green wins.")
         else
-            msg = "Game ends in a tie"
+            msg = qsTr("Game ends in a tie.")
         break
     case "trigon_3":
         points0 = boardModel.points0
@@ -327,13 +328,13 @@ function showGameOver() {
         if (points1 == maxPoints) ++nuWinners
         if (points2 == maxPoints) ++nuWinners
         if (nuWinners > 1)
-            msg = "Game ends in a tie"
+            msg = qsTr("Game ends in a tie.")
         else if (points0 == maxPoints)
-            msg = "Blue wins"
+            msg = qsTr("Blue wins.")
         else if (points1 == maxPoints)
-            msg = "Yellow wins"
+            msg = qsTr("Yellow wins.")
         else if (points2 == maxPoints)
-            msg = "Red wins"
+            msg = qsTr("Red wins.")
         break
     default:
         points0 = boardModel.points0
@@ -347,15 +348,15 @@ function showGameOver() {
         if (points2 == maxPoints) ++nuWinners
         if (points3 == maxPoints) ++nuWinners
         if (nuWinners > 1)
-            msg = "Game ends in a tie"
+            msg = qsTr("Game ends in a tie.")
         else if (points0 == maxPoints)
-            msg = "Blue wins"
+            msg = qsTr("Blue wins.")
         else if (points1 == maxPoints)
-            msg = "Yellow wins"
+            msg = qsTr("Yellow wins.")
         else if (points2 == maxPoints)
-            msg = "Red wins"
+            msg = qsTr("Red wins.")
         else if (points3 == maxPoints)
-            msg = "Green wins"
+            msg = qsTr("Green wins.")
     }
     showMessage(msg)
 }

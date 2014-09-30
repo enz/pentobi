@@ -21,57 +21,57 @@ MenuBar {
         title: "Game"
 
         MenuItem {
-            text: "New Game"
+            text: qsTr("New Game")
             onTriggered: Logic.newGame(true)
         }
         Menu {
-            title: "Game Variant"
+            title: qsTr("Game Variant")
 
             ExclusiveGroup { id: groupGameVariant }
             MenuItem {
-                text: "Classic (Four Players)"
+                text: qsTr("Classic (4 Players)")
                 checkable: true
                 checked: boardModel.gameVariant == "classic"
                 exclusiveGroup: groupGameVariant
                 onTriggered: Logic.changeGameVariant("classic", true)
             }
             MenuItem {
-                text: "Classic (Two Players)"
+                text: qsTr("Classic (2 Players)")
                 checkable: true
                 checked: boardModel.gameVariant == "classic_2"
                 exclusiveGroup: groupGameVariant
                 onTriggered: Logic.changeGameVariant("classic_2", true)
             }
             MenuItem {
-                text: "Duo"
+                text: qsTr("Duo")
                 checkable: true
                 checked: boardModel.gameVariant == "duo"
                 exclusiveGroup: groupGameVariant
                 onTriggered: Logic.changeGameVariant("duo", true)
             }
             MenuItem {
-                text: "Trigon (Four Players)"
+                text: qsTr("Trigon (4 Players)")
                 checkable: true
                 checked: boardModel.gameVariant == "trigon"
                 exclusiveGroup: groupGameVariant
                 onTriggered: Logic.changeGameVariant("trigon", true)
             }
             MenuItem {
-                text: "Trigon (Three Players)"
+                text: qsTr("Trigon (3 Players)")
                 checkable: true
                 checked: boardModel.gameVariant == "trigon_3"
                 exclusiveGroup: groupGameVariant
                 onTriggered: Logic.changeGameVariant("trigon_3", true)
             }
             MenuItem {
-                text: "Trigon (Two Players)"
+                text: qsTr("Trigon (2 Players)")
                 checkable: true
                 checked: boardModel.gameVariant == "trigon_2"
                 exclusiveGroup: groupGameVariant
                 onTriggered: Logic.changeGameVariant("trigon_2", true)
             }
             MenuItem {
-                text: "Junior"
+                text: qsTr("Junior")
                 checkable: true
                 checked: boardModel.gameVariant == "junior"
                 exclusiveGroup: groupGameVariant
@@ -79,29 +79,29 @@ MenuBar {
             }
         }
         MenuItem {
-            text: "Undo Move"
+            text: qsTr("Undo Move")
             enabled: alwaysEnableAll || boardModel.canUndo
             onTriggered: Logic.undo()
         }
         MenuItem {
-            text: "Move Hint"
+            text: qsTr("Move Hint")
             enabled: alwaysEnableAll || ! boardModel.isGameOver
             onTriggered: Logic.moveHint()
         }
         MenuItem {
-            text: "Computer Colors"
+            text: qsTr("Computer Colors")
             onTriggered: Logic.showComputerColorDialog()
         }
         MenuItem {
-            text: "Computer Play"
+            text: qsTr("Computer Play")
             enabled: alwaysEnableAll || ! playerModel.isGenMoveRunning
             onTriggered: Logic.computerPlay()
         }
         Menu {
-            title: "Settings"
+            title: qsTr("Settings")
 
             Menu {
-                title: "Level"
+                title: qsTr("Level")
 
                 ExclusiveGroup { id: levelGroup }
                 MenuItemLevel { level: 1 }
@@ -113,7 +113,7 @@ MenuBar {
                 MenuItemLevel { level: 7 }
             }
             MenuItem {
-                text: "Mark Last Move"
+                text: qsTr("Mark Last Move")
                 checkable: true
                 checked: markLastMove
                 onTriggered: {
@@ -124,17 +124,17 @@ MenuBar {
                 }
             }
             Menu {
-                title: "Appearance"
+                title: qsTr("Appearance")
                 ExclusiveGroup { id: groupTheme }
                 MenuItem {
-                    text: "Dark"
+                    text: qsTr("Dark")
                     checkable: true
                     checked: themeName == "dark"
                     exclusiveGroup: groupTheme
                     onTriggered: themeName = "dark"
                 }
                 MenuItem {
-                    text: "Light"
+                    text: qsTr("Light")
                     checkable: true
                     checked: themeName == "light"
                     exclusiveGroup: groupTheme
@@ -143,7 +143,7 @@ MenuBar {
             }
         }
         MenuItem {
-            text: "Quit"
+            text: qsTr("Quit")
             onTriggered: Qt.quit()
         }
     }
