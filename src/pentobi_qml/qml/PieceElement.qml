@@ -34,6 +34,11 @@ Item {
     width: isTrigon ? 2 * gridElementWidth : gridElementWidth
     height: gridElementHeight
 
+    property string _imageName:
+        theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
+    property string _imageNameDownward:
+        theme.getImage("triangle-down-" + colorName)
+
     Repeater {
         // Image rotation
         model: isTrigon ? [ 0, 60, 120, 180, 240, 300 ] : [ 0, 90, 180, 270 ]
@@ -71,13 +76,7 @@ Item {
                     property bool _isImageDownward:
                         isTrigon && (isDownward != _switchUpDownImage)
 
-                    source: {
-                        if (_isImageDownward)
-                            return theme.getImage("triangle-down-" + colorName)
-                        if (isTrigon)
-                            return theme.getImage("triangle-" + colorName)
-                        return theme.getImage("square-" + colorName)
-                    }
+                    source: _isImageDownward ? _imageNameDownward : _imageName
                     width: root.width
                     height: root.height
                     sourceSize {
