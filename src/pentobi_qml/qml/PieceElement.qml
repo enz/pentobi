@@ -62,7 +62,6 @@ Item {
                 return opacity
             }
 
-            smooth: ! fastRendering
             on_ImageOpacityChanged:
                 if (_imageOpacity > 0 && loader.status == Loader.Null)
                     loader.sourceComponent = component
@@ -84,6 +83,7 @@ Item {
                                           imageSourceWidth
                         height: imageSourceHeight
                     }
+                    smooth: ! fastRendering
                     opacity: _imageOpacity
                     transform: [
                         Rotation {
