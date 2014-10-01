@@ -31,6 +31,7 @@ Item
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
+    function destroyPieces() { Logic.destroyPieces() }
     function showMoveHint(move) { Logic.showMoveHint(move) }
     function showPiecesImmediately(color) {
         pieceSelector.showColorImmediately(color)

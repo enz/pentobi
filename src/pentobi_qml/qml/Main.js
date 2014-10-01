@@ -187,6 +187,7 @@ function initGameVariant(gameVariant) {
     hideComputerColorDialog()
     clearMessage()
     clearMarks()
+    gameDisplay.destroyPieces()
     boardModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
 }

@@ -57,9 +57,12 @@ function createColorPieces(component, pieceModels) {
 }
 
 function destroyPieces(pieces) {
-    if (pieces != null)
-        for (var i = 0; i < pieces.length; ++i)
-            pieces[i].destroy()
+    if (pieces == null)
+        return
+    for (var i = 0; i < pieces.length; ++i)
+        pieces[i].visible = false
+    for (i = 0; i < pieces.length; ++i)
+        pieces[i].destroy()
 }
 
 function findPiece(pieceModel) {
