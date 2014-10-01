@@ -45,21 +45,26 @@ Item {
 
         Item {
             property real _imageOpacity: {
-                var imgAngle = angle - modelData
-                var opacity
+                var imgAngle = Math.round(root.angle - modelData)
                 if (isTrigon) {
-                    if (flipX && flipY) imgAngle += 180
-                    else if (flipX) imgAngle += 60
+                    if (flipX) {
+                        if (flipY) imgAngle += 180
+                        else imgAngle += 120
+                    }
                     else if (flipY) imgAngle += 240
-                    opacity = 2 * Math.cos(imgAngle * Math.PI / 180) - 1
+                    imgAngle = ((imgAngle % 360) + 360) % 360 // JS modulo bug
+                    if (imgAngle >= 60 && imgAngle <= 300) return 0
+                    return 2 * Math.cos(imgAngle * Math.PI / 180) - 1
                 } else {
-                    if (flipX && flipY) imgAngle += 180
-                    else if (flipX) imgAngle += 90
+                    if (flipX) {
+                        if (flipY) imgAngle += 180
+                        else imgAngle += 90
+                    }
                     else if (flipY) imgAngle += 270
-                    opacity = Math.cos(imgAngle * Math.PI / 180)
+                    imgAngle = ((imgAngle % 360) + 360) % 360
+                    if (imgAngle >= 90 && imgAngle <= 270) return 0
+                    return Math.cos(imgAngle * Math.PI / 180)
                 }
-                if (opacity < 0.1) opacity = 0
-                return opacity
             }
 
             on_ImageOpacityChanged:
@@ -87,7 +92,7 @@ Item {
                     opacity: _imageOpacity
                     transform: [
                         Rotation {
-                            angle: _switchUpDownImage ? 360 - modelData: -modelData
+                            angle: -modelData
                             origin {
                                 x: width / 2
                                 y: {
