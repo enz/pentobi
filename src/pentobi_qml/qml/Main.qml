@@ -134,10 +134,7 @@ ApplicationWindow {
         id: messageDialogComponent
 
         MessageDialog {
-            property var acceptedFunc
-
             standardButtons: StandardButton.Ok | StandardButton.Cancel
-            onAccepted: acceptedFunc()
             onRejected: visible = false
         }
     }

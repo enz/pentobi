@@ -373,7 +373,7 @@ function showMessageDialog(text, acceptedFunc) {
         messageDialogLoader.sourceComponent = messageDialogComponent
     var dialog = messageDialogLoader.item
     dialog.text = text
-    dialog.acceptedFunc = acceptedFunc
+    dialog.accepted.connect(acceptedFunc)
     dialog.visible = true
 }
 
