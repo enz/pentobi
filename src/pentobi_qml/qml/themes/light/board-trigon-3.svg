@@ -32,15 +32,15 @@
     <path
        d="m 175,159.99999 -20,0 c 10,-20 0,0 10,-20 z"
        id="rect2984"
-       style="fill:#aea7ac;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+       style="fill:#a49ca2;fill-opacity:1;fill-rule:evenodd;stroke:none" />
     <path
        d="m 165,140 0,2 8.27,16.84533 -16.5379,0 L 155,160 l 20,0 z"
        id="path3759"
-       style="fill:#cac6c9;fill-opacity:1;stroke:none" />
+       style="fill:#ffffff;fill-opacity:0.15686275;stroke:none" />
     <path
        d="m 155,159.99999 1.7321,-1.15466 8.2679,-16.84545 0,-1.99989 z"
        id="path3247"
-       style="fill:#82777e;fill-opacity:1;stroke:none" />
+       style="fill:#000000;fill-opacity:0.15686275;stroke:none" />
   </g>
   <g
      transform="translate(-53.73,-140.15484)"
@@ -48,19 +48,19 @@
     <path
        d="m 133.73,140.15467 20,0 c -10,20 0,0 -10,20 z"
        id="rect2984-3"
-       style="fill:#aea7ac;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+       style="fill:#a49ca2;fill-opacity:1;fill-rule:evenodd;stroke:none" />
     <g
        transform="matrix(-1,0,0,-0.99999996,308.73,300.15466)"
        id="g4017-0">
       <path
          d="m 165,140 0,2 8.27,16.84533 -16.5379,0 L 155,160 l 20,0 z"
          id="path3759-8"
-         style="fill:#82777e;fill-opacity:1;stroke:none" />
+         style="fill:#000000;fill-opacity:0.15686275;stroke:none" />
     </g>
     <path
        d="m 153.73,140.15467 -1.7321,1.15467 -8.2679,16.84544 0,1.99989 z"
        id="path3247-0"
-       style="fill:#cac6c9;fill-opacity:1;stroke:none" />
+       style="fill:#ffffff;fill-opacity:0.15686275;stroke:none" />
   </g>
   <use
      transform="translate(-80,160.00004)"

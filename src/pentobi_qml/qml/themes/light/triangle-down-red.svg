@@ -7,12 +7,35 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    version="1.1"
    width="20"
    height="20"
    id="svg2">
   <defs
-     id="defs4" />
+     id="defs4">
+    <linearGradient
+       id="linearGradient11445">
+      <stop
+         id="stop11447"
+         style="stop-color:#e84e3e;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop11449"
+         style="stop-color:#e53623;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <radialGradient
+       cx="9.9780693"
+       cy="6.9439521"
+       r="10"
+       fx="9.9780693"
+       fy="6.9439521"
+       id="radialGradient11451"
+       xlink:href="#linearGradient11445"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.5,-4.9624602e-8,4.2005789e-8,1.2,-4.967104,-1.3327421)" />
+  </defs>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -28,7 +51,7 @@
   <path
      d="M 10,20.0001 20,0 0,0 z"
      id="rect2984"
-     style="fill:#e63e2c;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+     style="fill:url(#radialGradient11451);fill-opacity:1;fill-rule:evenodd;stroke:none" />
   <path
      d="m 10,19.99999 0,-2 8.27,-16.84533 C 20,-1e-5 18.269333,1.155139 20,-1e-5 z"
      id="path3759"
