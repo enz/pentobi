@@ -27,7 +27,6 @@ Item {
                 id: pieceArea
 
                 property var piece: modelData
-                property var pieceModel: modelData.pieceModel
 
                 width: pieceAreaSize
                 height: pieceAreaSize
