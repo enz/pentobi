@@ -15,7 +15,6 @@
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
         <file>qml/PieceSelector.qml</file>
-        <file>qml/PieceShape.qml</file>
         <file>qml/ScoreDisplay.qml</file>
         <file>qml/ScoreElement.qml</file>
         <file>qml/ScoreElement2.qml</file>

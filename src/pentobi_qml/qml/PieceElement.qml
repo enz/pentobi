@@ -4,40 +4,25 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.3
+import QtQuick 2.0
 
-/* Piece element (square or triangle) with pseudo-3D border.
-   Simulates a 3D border with a fixed light source by using different images
-   for the lighting at different rotations and interpolating between them with
-   an opacity animation. */
+// Piece element (square or triangle) with pseudo-3D effect.
+// Simulates lighting by using different images for the lighting at different
+// rotations and interpolating between them with an opacity animation.
 Item {
     id: root
 
     property bool isTrigon
-    // Only used in Trigon to determine if triangle is upside-down.
     property bool isDownward
-    property string colorName
+    property string imageName
+    property string imageNameDownward
     property real gridElementWidth
     property real gridElementHeight
-
-    // Disable the lighting effect (always use only the first image with
-    // lighting not rotated) and set smooth rendering of the image to false.
-    // This will speed up animations that are too fast for the user to notice
-    // visual details anyway.
+    property real angle
     property bool fastRendering
-
-    // Lighting transformations applied in this order:
-    property real angle: 0     // Rotate lighting around z axis
-    property bool flipX: false // Flip lighting around x axis
-    property bool flipY: false // Flip lighting around y axis
 
     width: isTrigon ? 2 * gridElementWidth : gridElementWidth
     height: gridElementHeight
-
-    property string _imageName:
-        theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
-    property string _imageNameDownward:
-        theme.getImage("triangle-down-" + colorName)
 
     Repeater {
         // Image rotation
@@ -45,25 +30,14 @@ Item {
 
         Item {
             property real _imageOpacity: {
-                var imgAngle = Math.round(root.angle - modelData)
+                var angle = Math.round(root.angle - modelData)
+                angle = ((angle % 360) + 360) % 360 // JS modulo bug
                 if (isTrigon) {
-                    if (flipX) {
-                        if (flipY) imgAngle += 180
-                        else imgAngle += 120
-                    }
-                    else if (flipY) imgAngle += 240
-                    imgAngle = ((imgAngle % 360) + 360) % 360 // JS modulo bug
-                    if (imgAngle >= 60 && imgAngle <= 300) return 0
-                    return 2 * Math.cos(imgAngle * Math.PI / 180) - 1
+                    if (angle >= 60 && angle <= 300) return 0
+                    return 2 * Math.cos(angle * Math.PI / 180) - 1
                 } else {
-                    if (flipX) {
-                        if (flipY) imgAngle += 180
-                        else imgAngle += 90
-                    }
-                    else if (flipY) imgAngle += 270
-                    imgAngle = ((imgAngle % 360) + 360) % 360
-                    if (imgAngle >= 90 && imgAngle <= 270) return 0
-                    return Math.cos(imgAngle * Math.PI / 180)
+                    if (angle >= 90 && angle <= 270) return 0
+                    return Math.cos(angle * Math.PI / 180)
                 }
             }
 
@@ -88,8 +62,8 @@ Item {
                                           imageSourceWidth
                         height: imageSourceHeight
                     }
-                    smooth: ! fastRendering
                     opacity: _imageOpacity
+                    smooth: ! fastRendering
                     transform: [
                         Rotation {
                             angle: -modelData

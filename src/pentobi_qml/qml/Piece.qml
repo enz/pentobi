@@ -23,6 +23,12 @@ Item
     property real gridElementHeight
     property bool isMarked
 
+    property string _imageName:
+        theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
+    property string _imageNameDownward:
+        theme.getImage("triangle-down-" + colorName)
+    property bool _fastRendering
+
     state: {
         if (isPicked) return "picked"
         else if (pieceModel.isPlayed) return "played"
@@ -30,17 +36,72 @@ Item
         else return ""
     }
 
-    PieceShape {
+    Transformable {
         id: pieceShape
 
-        isTrigon: root.isTrigon
-        colorName: root.colorName
-        elements: pieceModel.elements
-        center: pieceModel.center
         state: pieceModel.state
-        gridElementWidth: root.gridElementWidth
-        gridElementHeight: root.gridElementHeight
-        isMarked: root.isMarked
+
+        Item {
+            id: pieceElements
+
+            width: 10 * gridElementWidth
+            height: 10 * gridElementHeight
+            x: -width / 2
+            y: -height / 2
+
+            Repeater {
+                model: pieceModel.elements
+
+                PieceElement {
+                    imageName: root._imageName
+                    imageNameDownward: root._imageNameDownward
+                    fastRendering: root._fastRendering
+                    isTrigon: root.isTrigon
+                    isDownward: isTrigon && (modelData.x % 2 != 0 ?
+                                                 (modelData.y % 2 == 0) :
+                                                 (modelData.y % 2 != 0))
+                    gridElementWidth: root.gridElementWidth
+                    gridElementHeight: root.gridElementHeight
+                    x: (isTrigon ?
+                            modelData.x - pieceModel.center.x - 0.5 :
+                            modelData.x - pieceModel.center.x)
+                       * gridElementWidth + pieceElements.width / 2
+                    y: (modelData.y - pieceModel.center.y)
+                       * gridElementHeight + pieceElements.height / 2
+                    angle: {
+                        var flipX = Math.abs(pieceShape.flipXAngle % 360 - 180) < 90
+                        var flipY = Math.abs(pieceShape.flipYAngle % 360 - 180) < 90
+                        var angle = pieceShape.rotation
+                        if (isTrigon) {
+                            if (flipX && flipY) angle += 180
+                            else if (flipX) angle += 120
+                            else if (flipY) angle += 240
+                        }
+                        else {
+                            if (flipX && flipY) angle += 180
+                            else if (flipX) angle += 90
+                            else if (flipY) angle += 270
+                        }
+                        return angle
+                    }
+                }
+            }
+            Rectangle {
+                opacity: isMarked ? 0.5 : 0
+                color: colorName == "blue" || colorName == "red" ?
+                           "white" : "#333333"
+                width: 0.3 * gridElementHeight
+                height: width
+                radius: width / 2
+                x: (-pieceModel.center.x + 0.5) * gridElementWidth +
+                   pieceElements.width / 2 - width / 2
+                y: (isTrigon ?
+                        (-pieceModel.center.y + 2 / 3) * gridElementHeight :
+                        (-pieceModel.center.y + 0.5) * gridElementHeight) +
+                   pieceElements.height / 2 - height / 2
+                Behavior on opacity { NumberAnimation { duration: 80 } }
+            }
+        }
     }
 
     states: [
@@ -103,12 +164,11 @@ Item
             enabled: transitionsEnabled
 
             SequentialAnimation {
+                PropertyAction {
+                    target: root; property: "fastRendering"; value: true }
                 // Temporarily set z to 3 such that it is above the pieces
                 // on the board and above the piece manipulator
                 PropertyAction { target: root; property: "z"; value: 3 }
-                PropertyAction {
-                    target: pieceShape; property: "fastRendering"; value: true
-                }
                 PropertyAction {
                     target: parentPieceSelectorArea
                     property: "visible"; value: true
@@ -122,12 +182,11 @@ Item
                     }
                 }
                 PropertyAction {
-                    target: pieceShape; property: "fastRendering"; value: false
-                }
-                PropertyAction {
                     target: parentPieceSelectorArea; property: "visible"
                 }
                 PropertyAction { target: root; property: "z"; value: 0 }
+                PropertyAction {
+                    target: root; property: "fastRendering"; value: false }
             }
         }
 }
