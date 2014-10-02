@@ -103,12 +103,12 @@ MenuBar {
             Menu {
                 title: {
                     switch (boardModel.gameVariant) {
-                    case "classic":   return qsTr("Level (Classic, 4 players)")
-                    case "classic_2": return qsTr("Level (Classic, 2 players)")
+                    case "classic":   return qsTr("Level (Classic, 4 Players)")
+                    case "classic_2": return qsTr("Level (Classic, 2 Players)")
                     case "duo":       return qsTr("Level (Duo)")
-                    case "trigon":    return qsTr("Level (Trigon, 4 players)")
-                    case "trigon_2":  return qsTr("Level (Trigon, 2 players)")
-                    case "trigon_3":  return qsTr("Level (Trigon, 3 players)")
+                    case "trigon":    return qsTr("Level (Trigon, 4 Players)")
+                    case "trigon_2":  return qsTr("Level (Trigon, 2 Players)")
+                    case "trigon_3":  return qsTr("Level (Trigon, 3 Players)")
                     case "junior":    return qsTr("Level (Junior)")
                     }
                 }
