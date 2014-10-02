@@ -165,7 +165,7 @@ Item
 
             SequentialAnimation {
                 PropertyAction {
-                    target: root; property: "fastRendering"; value: true }
+                    target: root; property: "_fastRendering"; value: true }
                 // Temporarily set z to 3 such that it is above the pieces
                 // on the board and above the piece manipulator
                 PropertyAction { target: root; property: "z"; value: 3 }
@@ -186,7 +186,7 @@ Item
                 }
                 PropertyAction { target: root; property: "z"; value: 0 }
                 PropertyAction {
-                    target: root; property: "fastRendering"; value: false }
+                    target: root; property: "_fastRendering"; value: false }
             }
         }
 }
