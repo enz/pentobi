@@ -101,7 +101,17 @@ MenuBar {
             title: qsTr("Settings")
 
             Menu {
-                title: qsTr("Level")
+                title: {
+                    switch (boardModel.gameVariant) {
+                    case "classic":   return qsTr("Level (Classic, 4 players)")
+                    case "classic_2": return qsTr("Level (Classic, 2 players)")
+                    case "duo":       return qsTr("Level (Duo)")
+                    case "trigon":    return qsTr("Level (Trigon, 4 players)")
+                    case "trigon_2":  return qsTr("Level (Trigon, 2 players)")
+                    case "trigon_3":  return qsTr("Level (Trigon, 3 players)")
+                    case "junior":    return qsTr("Level (Junior)")
+                    }
+                }
 
                 ExclusiveGroup { id: levelGroup }
                 MenuItemLevel { level: 1 }
