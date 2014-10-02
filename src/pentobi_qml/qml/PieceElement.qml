@@ -16,13 +16,8 @@ Item {
     property bool isDownward
     property string imageName
     property string imageNameDownward
-    property real gridElementWidth
-    property real gridElementHeight
     property real angle
     property bool fastRendering
-
-    width: isTrigon ? 2 * gridElementWidth : gridElementWidth
-    height: gridElementHeight
 
     Repeater {
         // Image rotation

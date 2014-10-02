@@ -57,6 +57,8 @@ Item
             }
             return angle
         }
+        property real _elementWidth:
+            isTrigon ? 2 * gridElementWidth : gridElementWidth
 
         Item {
             id: pieceElements
@@ -77,8 +79,8 @@ Item
                     isDownward: isTrigon && (modelData.x % 2 != 0 ?
                                                  (modelData.y % 2 == 0) :
                                                  (modelData.y % 2 != 0))
-                    gridElementWidth: root.gridElementWidth
-                    gridElementHeight: root.gridElementHeight
+                    width: pieceShape._elementWidth
+                    height: root.gridElementHeight
                     x: (isTrigon ?
                             modelData.x - pieceModel.center.x - 0.5 :
                             modelData.x - pieceModel.center.x)
