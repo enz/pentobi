@@ -17,62 +17,67 @@ Dialog {
     property alias computerPlays2: checkBox2.checked
     property alias computerPlays3: checkBox3.checked
 
+    title: qsTr("Computer Colors")
     standardButtons: StandardButton.Ok | StandardButton.Cancel
 
-    Column {
-        Label { text: "Computer plays:" }
-        CheckBox {
-            id: checkBox0
+    GroupBox {
+        title: qsTr("Computer plays:")
+        flat: true
 
-            text: {
-                switch (gameVariant) {
-                case "classic_2":
-                case "trigon_2":
-                    return "Blue/Red"
-                default:
-                    "Blue"
+        Column {
+            CheckBox {
+                id: checkBox0
+
+                text: {
+                    switch (gameVariant) {
+                    case "classic_2":
+                    case "trigon_2":
+                        return qsTr("Blue/Red")
+                    default:
+                        qsTr("Blue")
+                    }
+                }
+                onClicked: {
+                    if (gameVariant == "classic_2"
+                            || gameVariant == "trigon_2")
+                        computerPlays2 = checked
                 }
             }
-            onClicked: {
-                if (gameVariant == "classic_2"
-                        || gameVariant == "trigon_2")
-                    computerPlays2 = checked
-            }
-        }
-        CheckBox {
-            id: checkBox1
+            CheckBox {
+                id: checkBox1
 
-            text: {
-                switch (gameVariant) {
-                case "classic_2":
-                case "trigon_2":
-                    return "Yellow/Green"
-                case "duo":
-                case "junior":
-                    return "Green"
-                default:
-                    "Yellow"
+                text: {
+                    switch (gameVariant) {
+                    case "classic_2":
+                    case "trigon_2":
+                        return qsTr("Yellow/Green")
+                    case "duo":
+                    case "junior":
+                        return qsTr("Green")
+                    default:
+                        qsTr("Yellow")
+                    }
+                }
+                onClicked: {
+                    if (gameVariant == "classic_2" ||
+                            gameVariant == "trigon_2")
+                        computerPlays3 = checked
                 }
             }
-            onClicked: {
-                if (gameVariant == "classic_2" ||
-                        gameVariant == "trigon_2")
-                    computerPlays3 = checked
+            CheckBox {
+                id: checkBox2
+
+                text: qsTr("Red")
+                visible: gameVariant == "classic" ||
+                         gameVariant == "trigon" ||
+                         gameVariant == "trigon_3"
             }
-        }
-        CheckBox {
-            id: checkBox2
+            CheckBox {
+                id: checkBox3
 
-            text: "Red"
-            visible: gameVariant == "classic" ||
-                     gameVariant == "trigon" ||
-                     gameVariant == "trigon_3"
-        }
-        CheckBox {
-            id: checkBox3
-
-            text: "Green"
-            visible: gameVariant == "classic" || gameVariant == "trigon"
+                text: qsTr("Green")
+                visible: gameVariant == "classic" || gameVariant == "trigon"
+            }
         }
     }
 }
