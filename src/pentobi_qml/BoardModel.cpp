@@ -298,13 +298,13 @@ void BoardModel::newGame()
 {
     m_bd.init();
     for (auto pieceModel : m_pieceModels0)
-        pieceModel->setState(pieceModel->getDefaultState());
+        pieceModel->setState("");
     for (auto pieceModel : m_pieceModels1)
-        pieceModel->setState(pieceModel->getDefaultState());
+        pieceModel->setState("");
     for (auto pieceModel : m_pieceModels2)
-        pieceModel->setState(pieceModel->getDefaultState());
+        pieceModel->setState("");
     for (auto pieceModel : m_pieceModels3)
-        pieceModel->setState(pieceModel->getDefaultState());
+        pieceModel->setState("");
     updateProperties();
 }
 

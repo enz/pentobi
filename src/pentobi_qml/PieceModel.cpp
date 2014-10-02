@@ -48,7 +48,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
         m_elements.append(QVariant(QPointF(p.x, p.y)));
     bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
     m_center = findCenter(bd, info.get_points(), isOriginDownward);
-    m_state = getDefaultState();
+    m_state = "";
     updateTransformFromState();
 }
 
@@ -131,17 +131,6 @@ void PieceModel::setGameCoord(QPointF gameCoord)
         return;
     m_gameCoord = gameCoord;
     emit gameCoordChanged(gameCoord);
-}
-
-QString PieceModel::getDefaultState() const
-{
-    // For historic reasons, Trigon pieces are defined such that they
-    // resemble the letter of the piece name when flipped upside down
-    auto boardType = m_bd.get_board_type();
-    if (boardType == BoardType::trigon || boardType == BoardType::trigon_3)
-        return "flip";
-    else
-        return "";
 }
 
 void PieceModel::setState(QString state)
