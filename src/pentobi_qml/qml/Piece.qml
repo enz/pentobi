@@ -41,6 +41,23 @@ Item
 
         state: pieceModel.state
 
+        property real _angle: {
+            var flipX = Math.abs(pieceShape.flipXAngle % 360 - 180) < 90
+            var flipY = Math.abs(pieceShape.flipYAngle % 360 - 180) < 90
+            var angle = pieceShape.rotation
+            if (isTrigon) {
+                if (flipX && flipY) angle += 180
+                else if (flipX) angle += 120
+                else if (flipY) angle += 300
+            }
+            else {
+                if (flipX && flipY) angle += 180
+                else if (flipX) angle += 90
+                else if (flipY) angle += 270
+            }
+            return angle
+        }
+
         Item {
             id: pieceElements
 
@@ -68,22 +85,7 @@ Item
                        * gridElementWidth + pieceElements.width / 2
                     y: (modelData.y - pieceModel.center.y)
                        * gridElementHeight + pieceElements.height / 2
-                    angle: {
-                        var flipX = Math.abs(pieceShape.flipXAngle % 360 - 180) < 90
-                        var flipY = Math.abs((pieceShape.flipYAngle % 360 + 360) % 360 - 180) < 90
-                        var angle = pieceShape.rotation
-                        if (isTrigon) {
-                            if (flipX && flipY) angle += 180
-                            else if (flipX) angle += 120
-                            else if (flipY) angle += 300
-                        }
-                        else {
-                            if (flipX && flipY) angle += 180
-                            else if (flipX) angle += 90
-                            else if (flipY) angle += 270
-                        }
-                        return angle
-                    }
+                    angle: pieceShape._angle
                 }
             }
             Rectangle {
