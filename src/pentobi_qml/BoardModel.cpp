@@ -515,13 +515,9 @@ void BoardModel::updateProperties()
         emit isBoardEmptyChanged(isBoardEmpty);
     }
 
-    // The order of setting the piece properties is important:
-    // * Set transform after isPlayed because Piece.qml creates the piece
-    //   shadow when it becomes visible first and uses an animation to
-    //   change the piece transform, so the shadow needs to be created
-    //   while the transform still has the old value
-    // * Set isPlayed after gameCoord have been set because it will trigger an
-    //   animation in Piece.qml to move the piece to the new position.
+    // The order of setting the piece properties is important: isPlayed is set
+    // after gameCoord because it will trigger an animation in Piece.qml to
+    // move the piece to the new position.
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (ColorIterator i(m_nuColors); i; ++i)
         isPlayed[*i].fill(false);
