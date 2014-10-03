@@ -128,8 +128,8 @@ bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
     auto boardType = m_bd.get_board_type();
     auto newPointType = transform->get_new_point_type();
     bool pointTypeChanged =
-            ((boardType == BoardType::trigon && newPointType == 0)
-             || (boardType == BoardType::trigon_3 && newPointType == 1));
+            ((boardType == BoardType::trigon && newPointType == 1)
+             || (boardType == BoardType::trigon_3 && newPointType == 0));
     QPointF center(PieceModel::findCenter(m_bd, piecePoints, false));
     auto& geo = m_bd.get_geometry();
     MovePoints points;

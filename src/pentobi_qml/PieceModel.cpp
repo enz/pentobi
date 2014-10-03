@@ -96,7 +96,7 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
         if (boardType == BoardType::trigon || boardType == BoardType::trigon_3)
         {
             auto pointType = geo.get_point_type(p.x, p.y);
-            bool isDownward = (pointType == (isOriginDownward ? 1 : 0));
+            bool isDownward = (pointType == (isOriginDownward ? 0 : 1));
             if (isDownward)
                 centerY = p.y + 1.f / 3;
             else

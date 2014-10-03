@@ -166,12 +166,12 @@ CoordPoint TransfTrigonIdentity::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonIdentity::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonIdentity::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -183,12 +183,12 @@ CoordPoint TransfTrigonRefl::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRefl::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonRefl::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -204,12 +204,12 @@ CoordPoint TransfTrigonRot60::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRot60::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonRot60::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -225,12 +225,12 @@ CoordPoint TransfTrigonRot120::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRot120::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonRot120::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -242,12 +242,12 @@ CoordPoint TransfTrigonRot180::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRot180::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonRot180::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -263,12 +263,12 @@ CoordPoint TransfTrigonRot240::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRot240::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonRot240::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -284,12 +284,12 @@ CoordPoint TransfTrigonRot300::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonRot300::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonRot300::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -305,12 +305,12 @@ CoordPoint TransfTrigonReflRot60::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonReflRot60::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonReflRot60::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -326,12 +326,12 @@ CoordPoint TransfTrigonReflRot120::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonReflRot120::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonReflRot120::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -343,12 +343,12 @@ CoordPoint TransfTrigonReflRot180::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonReflRot180::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonReflRot180::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -364,12 +364,12 @@ CoordPoint TransfTrigonReflRot240::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonReflRot240::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonReflRot240::get_new_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -385,12 +385,12 @@ CoordPoint TransfTrigonReflRot300::get_transformed(const CoordPoint& p) const
 
 unsigned TransfTrigonReflRot300::get_point_type() const
 {
-    return 1;
+    return 0;
 }
 
 unsigned TransfTrigonReflRot300::get_new_point_type() const
 {
-    return 0;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------

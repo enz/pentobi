@@ -143,8 +143,8 @@ void BoardPainter::drawLabels(QPainter& painter,
             qreal height = m_fieldHeight;
             if (isTrigon)
             {
-                bool isUpside = (m_geo->get_point_type(*i) == 1);
-                if (isUpside)
+                bool isUpward = (m_geo->get_point_type(*i) == 0);
+                if (isUpward)
                     y += 0.333 * height;
                 height = 0.666 * height;
             }
@@ -234,13 +234,13 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         qreal fieldY = y * m_fieldHeight;
         if (m_isTrigon)
         {
-            bool isUpside = (m_geo->get_point_type(x, y) == 1);
+            bool isUpward = (m_geo->get_point_type(x, y) == 0);
             if (m_startingPoints.is_colorless_starting_point(*i))
-                Util::paintEmptyTriangleStartingPoint(painter, isUpside, fieldX,
+                Util::paintEmptyTriangleStartingPoint(painter, isUpward, fieldX,
                                                       fieldY, m_fieldWidth,
                                                       m_fieldHeight);
             else
-                Util::paintEmptyTriangle(painter, isUpside, fieldX, fieldY,
+                Util::paintEmptyTriangle(painter, isUpward, fieldX, fieldY,
                                          m_fieldWidth, m_fieldHeight);
         }
         else
@@ -276,10 +276,10 @@ void BoardPainter::paintPieces(QPainter& painter,
         qreal fieldY = y * m_fieldHeight;
         if (m_isTrigon)
         {
-            bool isUpside = (m_geo->get_point_type(x, y) == 1);
+            bool isUpward = (m_geo->get_point_type(x, y) == 0);
             if (s.is_color())
                 Util::paintColorTriangle(painter, m_variant, s.to_color(),
-                                         isUpside, fieldX, fieldY,
+                                         isUpward, fieldX, fieldY,
                                          m_fieldWidth, m_fieldHeight);
         }
         else
@@ -321,8 +321,8 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
         qreal fieldY = p.get_y(geoWidth) * m_fieldHeight;
         if (m_isTrigon)
         {
-            bool isUpside = (m_geo->get_point_type(p) == 1);
-            Util::paintColorTriangle(painter, m_variant, c, isUpside,
+            bool isUpward = (m_geo->get_point_type(p) == 0);
+            Util::paintColorTriangle(painter, m_variant, c, isUpward,
                                      fieldX, fieldY, m_fieldWidth,
                                      m_fieldHeight, alpha, saturation, flat);
         }

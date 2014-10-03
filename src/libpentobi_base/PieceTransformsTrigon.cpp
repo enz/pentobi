@@ -38,11 +38,7 @@ PieceTransformsTrigon::PieceTransformsTrigon()
 
 const Transform* PieceTransformsTrigon::get_default() const
 {
-    // For historical reasons, the Trigon transformations apply to point type 1
-    // and the pieces in libpentobi_base::BoardConst are defined such that they
-    // resemble the letter of their name when viewed upside down, so we use
-    // an upside-down flip as the standard orientation.
-    return &m_refl_rot180;
+    return &m_identity;
 }
 
 const Transform* PieceTransformsTrigon::get_mirrored_horizontally(

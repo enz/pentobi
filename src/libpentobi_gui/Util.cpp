@@ -71,7 +71,7 @@ void paintSquare(QPainter& painter, qreal x, qreal y, qreal size,
     painter.restore();
 }
 
-void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
+void paintTriangle(QPainter& painter, bool isUpward, qreal x, qreal y,
                    qreal width, qreal height, const QColor& color,
                    const QColor& upLeftColor, const QColor& downRightColor)
 {
@@ -79,7 +79,7 @@ void paintTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
     painter.translate(x, y);
     qreal left = -0.5 * width;
     qreal right = 1.5 * width;
-    if (isUpside)
+    if (isUpward)
     {
         const QPointF polygon[3] =
             {
@@ -279,7 +279,7 @@ void Util::paintColorSquare(QPainter& painter, Variant variant,
 }
 
 void Util::paintColorTriangle(QPainter& painter, Variant variant,
-                              Color c, bool isUpside, qreal x, qreal y,
+                              Color c, bool isUpward, qreal x, qreal y,
                               qreal width, qreal height, qreal alpha,
                               qreal saturation, bool flat)
 {
@@ -299,7 +299,7 @@ void Util::paintColorTriangle(QPainter& painter, Variant variant,
     setAlphaSaturation(color, alpha, saturation);
     setAlphaSaturation(upLeftColor, alpha, saturation);
     setAlphaSaturation(downRightColor, alpha, saturation);
-    paintTriangle(painter, isUpside, x, y, width, height, color, upLeftColor,
+    paintTriangle(painter, isUpward, x, y, width, height, color, upLeftColor,
                   downRightColor);
 }
 
@@ -308,19 +308,19 @@ void Util::paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size)
     paintSquare(painter, x, y, size, gray, gray.darker(130), gray.lighter(115));
 }
 
-void Util::paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x,
+void Util::paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x,
                               qreal y, qreal width, qreal height)
 {
-    paintTriangle(painter, isUpside, x, y, width, height, gray,
+    paintTriangle(painter, isUpward, x, y, width, height, gray,
                   gray.darker(130), gray.lighter(115));
 }
 
-void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside,
+void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpward,
                                            qreal x, qreal y, qreal width,
                                            qreal height)
 {
-    paintEmptyTriangle(painter, isUpside, x, y, width, height);
-    if (isUpside)
+    paintEmptyTriangle(painter, isUpward, x, y, width, height);
+    if (isUpward)
         y += 0.333 * height;
     height = 0.666 * height;
     paintDot(painter, gray.darker(130), x, y, width, height, 0.17 * width);

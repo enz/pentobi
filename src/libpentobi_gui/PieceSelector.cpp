@@ -223,10 +223,10 @@ void PieceSelector::paintEvent(QPaintEvent*)
             {
                 if (isTrigon)
                 {
-                    bool isUpside =
+                    bool isUpward =
                         (geo.get_point_type(x, y) == geo.get_point_type(0, 0));
                     Util::paintColorTriangle(painter, variant, m_color,
-                                             isUpside, x * m_fieldWidth,
+                                             isUpward, x * m_fieldWidth,
                                              y * m_fieldHeight, m_fieldWidth,
                                              m_fieldHeight);
                 }

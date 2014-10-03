@@ -216,32 +216,26 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
     // apart from that the smallest pieces are named '2' and '1' like in
     // Classic to avoid to many pieces with letter 'I' and that numbers are
     // only used if there is more than one piece with the same letter.
-    // For historical reasons, the Trigon transformations apply to point type
-    // 1 (upward triangle), so the (0,0) point of a piece must have point
-    // type 1, and the pieces are defined such that they resemble the letter of
-    // their name when viewed flipped upside-down.
     pieces.reserve(22);
     pieces.emplace_back("I6",
-                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, -1),
-                                     CoordPoint(-1, 0), CoordPoint(0, 0),
-                                     CoordPoint(0, 1), CoordPoint(1, 1) },
+                        PiecePoints{ CoordPoint(1, -1), CoordPoint(2, -1),
+                                     CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(-1, 1), CoordPoint(0, 1) },
                         geo, transforms);
-
     pieces.emplace_back("L6",
-                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, -1),
-                                     CoordPoint(-1, 0), CoordPoint(0, 0),
-                                     CoordPoint(0, 1), CoordPoint(1, 1) },
+                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1) },
                         geo, transforms);
-
     pieces.emplace_back("W",
-                        PiecePoints{ CoordPoint(0, 1), CoordPoint(-2, 0),
-                                     CoordPoint(-1, 0), CoordPoint(0, 0),
-                                     CoordPoint(1, 0), CoordPoint(2, 0) },
+                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(0, 1), CoordPoint(1, 1) },
                         geo, transforms);
     pieces.emplace_back("P6",
-                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, -1),
-                                     CoordPoint(-1, 0), CoordPoint(0, 0),
-                                     CoordPoint(1, 0), CoordPoint(0, 1) },
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 1), CoordPoint(1, 2) },
                         geo, transforms);
     pieces.emplace_back("S",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, -1),
@@ -249,39 +243,39 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
                         geo, transforms);
     pieces.emplace_back("F",
-                        PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
-                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(2, 0), CoordPoint(-1, 1),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
                         geo, transforms);
     pieces.emplace_back("V",
-                        PiecePoints{ CoordPoint(-1, 1), CoordPoint(0, 1),
-                                     CoordPoint(0, 0), CoordPoint(1, 0),
-                                     CoordPoint(2, 0), CoordPoint(3, 0) },
-                        geo, transforms);
-    pieces.emplace_back("Y",
-                        PiecePoints{ CoordPoint(1, -1), CoordPoint(-2, 0),
-                                     CoordPoint(-1, 0), CoordPoint(0, 0),
-                                     CoordPoint(1, 0), CoordPoint(0, 1) },
-                        geo, transforms);
-    pieces.emplace_back("A6",
-                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
-                                     CoordPoint(0, 1), CoordPoint(0, 0),
-                                     CoordPoint(1, 0), CoordPoint(1, -1) },
-                        geo, transforms);
-    pieces.emplace_back("G",
-                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, -1),
+                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, -1),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0) },
                         geo, transforms);
+    pieces.emplace_back("Y",
+                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(-1, 1), CoordPoint(0, 1) },
+                        geo, transforms);
+    pieces.emplace_back("A6",
+                        PiecePoints{ CoordPoint(-2, 0), CoordPoint(-1, 0),
+                                     CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(-1, 1), CoordPoint(0, 1) },
+                        geo, transforms);
+    pieces.emplace_back("G",
+                        PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1) },
+                        geo, transforms);
     pieces.emplace_back("O",
-                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
-                                     CoordPoint(0, 0), CoordPoint(0, -1),
-                                     CoordPoint(1, 0), CoordPoint(1, -1) },
+                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 0), CoordPoint(1, 0) },
                         geo, transforms);
     pieces.emplace_back("X",
-                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, 1),
-                                     CoordPoint(0, 0), CoordPoint(0, 1),
-                                     CoordPoint(1, 0), CoordPoint(1, 1) },
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(-1, 1),
+                                     CoordPoint(0, 1), CoordPoint(1, 1) },
                         geo, transforms);
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
@@ -289,14 +283,14 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                                      CoordPoint(0, 1) },
                         geo, transforms);
     pieces.emplace_back("P5",
-                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(-1, 0),
-                                     CoordPoint(0, 0), CoordPoint(1, 0),
-                                     CoordPoint(0, 1) },
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 1) },
                         geo, transforms);
     pieces.emplace_back("L5",
-                        PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
-                                     CoordPoint(2, 0), CoordPoint(-1, 1),
-                                     CoordPoint(0, 1) },
+                        PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 1) },
                         geo, transforms);
     pieces.emplace_back("C5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
@@ -304,8 +298,8 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                                      CoordPoint(1, 1) },
                         geo, transforms);
     pieces.emplace_back("I4",
-                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
-                                     CoordPoint(0, 1), CoordPoint(1, 1) },
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(-1, 1), CoordPoint(0, 1) },
                         geo, transforms);
     pieces.emplace_back("C4",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
@@ -313,14 +307,14 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                         geo, transforms);
     pieces.emplace_back("A4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
-                                     CoordPoint(0, 1), CoordPoint(1, 0) },
+                                     CoordPoint(1, 0), CoordPoint(0, 1) },
                         geo, transforms);
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
                         geo, transforms);
     pieces.emplace_back("2",
-                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0) },
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
                         geo, transforms);
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },

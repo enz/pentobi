@@ -32,16 +32,16 @@ void paintColorSquare(QPainter& painter, Variant variant, Color c,
                       qreal saturation = 1, bool flat = false);
 
 void paintColorTriangle(QPainter& painter, Variant variant,
-                        Color c, bool isUpside, qreal x, qreal y, qreal width,
+                        Color c, bool isUpward, qreal x, qreal y, qreal width,
                         qreal height, qreal alpha = 1, qreal saturation = 1,
                         bool flat = false);
 
 void paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size);
 
-void paintEmptyTriangle(QPainter& painter, bool isUpside, qreal x, qreal y,
+void paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x, qreal y,
                         qreal width, qreal height);
 
-void paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpside, qreal x,
+void paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpward, qreal x,
                                      qreal y, qreal width, qreal height);
 
 void paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
