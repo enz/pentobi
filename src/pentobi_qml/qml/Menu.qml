@@ -24,6 +24,25 @@ MenuBar {
             text: qsTr("New Game")
             onTriggered: Logic.newGame(true)
         }
+        MenuItem {
+            text: qsTr("Computer Colors")
+            onTriggered: Logic.showComputerColorDialog()
+        }
+        MenuItem {
+            text: qsTr("Play")
+            enabled: alwaysEnableAll || ! playerModel.isGenMoveRunning
+            onTriggered: Logic.computerPlay()
+        }
+        MenuItem {
+            text: qsTr("Undo Move")
+            enabled: alwaysEnableAll || boardModel.canUndo
+            onTriggered: Logic.undo()
+        }
+        MenuItem {
+            text: qsTr("Move Hint")
+            enabled: alwaysEnableAll || ! boardModel.isGameOver
+            onTriggered: Logic.moveHint()
+        }
         Menu {
             title: qsTr("Game Variant")
 
@@ -78,50 +97,21 @@ MenuBar {
                 onTriggered: Logic.changeGameVariant("junior", true)
             }
         }
-        MenuItem {
-            text: qsTr("Undo Move")
-            enabled: alwaysEnableAll || boardModel.canUndo
-            onTriggered: Logic.undo()
-        }
-        MenuItem {
-            text: qsTr("Move Hint")
-            enabled: alwaysEnableAll || ! boardModel.isGameOver
-            onTriggered: Logic.moveHint()
-        }
-        MenuItem {
-            text: qsTr("Computer Colors")
-            onTriggered: Logic.showComputerColorDialog()
-        }
-        MenuItem {
-            text: qsTr("Computer Play")
-            enabled: alwaysEnableAll || ! playerModel.isGenMoveRunning
-            onTriggered: Logic.computerPlay()
+        Menu {
+            title: qsTr("Level")
+
+            ExclusiveGroup { id: levelGroup }
+            MenuItemLevel { level: 1 }
+            MenuItemLevel { level: 2 }
+            MenuItemLevel { level: 3 }
+            MenuItemLevel { level: 4 }
+            MenuItemLevel { level: 5 }
+            MenuItemLevel { level: 6 }
+            MenuItemLevel { level: 7 }
         }
         Menu {
             title: qsTr("Settings")
 
-            Menu {
-                title: {
-                    switch (boardModel.gameVariant) {
-                    case "classic":   return qsTr("Level (Classic, 4 Players)")
-                    case "classic_2": return qsTr("Level (Classic, 2 Players)")
-                    case "duo":       return qsTr("Level (Duo)")
-                    case "trigon":    return qsTr("Level (Trigon, 4 Players)")
-                    case "trigon_2":  return qsTr("Level (Trigon, 2 Players)")
-                    case "trigon_3":  return qsTr("Level (Trigon, 3 Players)")
-                    case "junior":    return qsTr("Level (Junior)")
-                    }
-                }
-
-                ExclusiveGroup { id: levelGroup }
-                MenuItemLevel { level: 1 }
-                MenuItemLevel { level: 2 }
-                MenuItemLevel { level: 3 }
-                MenuItemLevel { level: 4 }
-                MenuItemLevel { level: 5 }
-                MenuItemLevel { level: 6 }
-                MenuItemLevel { level: 7 }
-            }
             MenuItem {
                 text: qsTr("Mark Last Move")
                 checkable: true
