@@ -23,6 +23,7 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::CoordPoint;
 using libpentobi_base::MovePoints;
 using libpentobi_base::Piece;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::PiecePoints;
 using libpentobi_base::Point;
 
@@ -30,12 +31,51 @@ using libpentobi_base::Point;
 
 namespace {
 
+// Game coordinates are fractional because they refer to the center of a piece.
+// This function is used to compare game coordinates of moves with the same
+// piece, so we could even compare the rounded values (?), but comparing
+// against epsilon is also safe.
+bool compareGameCoord(const QPointF& p1, const QPointF& p2)
+{
+    return (p1 - p2).manhattanLength() < 0.01f;
+}
+
+bool compareTransform(const PieceInfo& pieceInfo, const Transform* t1,
+                      const Transform* t2)
+{
+    return pieceInfo.get_equivalent_transform(t1) ==
+            pieceInfo.get_equivalent_transform(t2);
+}
+
 int getNuPiecesLeft(const Board& bd, Color c)
 {
     unsigned n = 0;
     for (auto piece : bd.get_pieces_left(c))
         n += bd.get_nu_left_piece(c, piece);
     return static_cast<int>(n);
+}
+
+QPointF getGameCoord(const Board& bd, Move mv)
+{
+    auto& geo = bd.get_geometry();
+    auto width = geo.get_width();
+    auto moveInfo = bd.get_move_info(mv);
+    PiecePoints movePoints;
+    for (Point p : moveInfo)
+        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
+    return PieceModel::findCenter(bd, movePoints, false);
+}
+
+const Transform* getTransform(const Board& bd, Move mv)
+{
+    auto& geo = bd.get_geometry();
+    auto width = geo.get_width();
+    auto moveInfo = bd.get_move_info(mv);
+    PiecePoints movePoints;
+    for (Point p : moveInfo)
+        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
+    auto& pieceInfo = bd.get_piece_info(moveInfo.get_piece());
+    return pieceInfo.find_transform(geo, movePoints);
 }
 
 } //namespace
@@ -173,18 +213,7 @@ int BoardModel::getLastMoveColor()
 
 PieceModel* BoardModel::getLastMovePieceModel()
 {
-    auto nuMoves = m_bd.get_nu_moves();
-    if (nuMoves == 0)
-        return nullptr;
-    ColorMove mv = m_bd.get_move(nuMoves - 1);
-    Piece piece = m_bd.get_move_info(mv.move).get_piece();
-    auto& pieceModels = getPieceModels(mv.color);
-    // Iterate backwards because updateProperties() uses the first unplayed
-    // PieceModel in case there are multiple instances of the same piece.
-    for (int i = pieceModels.length() - 1; i >= 0; --i)
-        if (pieceModels[i]->getPiece() == piece && pieceModels[i]->isPlayed())
-            return pieceModels[i];
-    return nullptr;
+    return m_lastMovePieceModel;
 }
 
 QList<PieceModel*>& BoardModel::getPieceModels(Color c)
@@ -338,6 +367,9 @@ void BoardModel::play(PieceModel* pieceModel, QPointF coord)
         qWarning("BoardModel::play: illegal move");
         return;
     }
+    preparePieceGameCoord(pieceModel, mv);
+    pieceModel->setIsPlayed(true);
+    preparePieceTransform(pieceModel, mv);
     m_bd.play(c, mv);
     updateProperties();
 }
@@ -366,28 +398,15 @@ PieceModel* BoardModel::preparePiece(int color, int move)
 
 void BoardModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv)
 {
-    auto& geo = m_bd.get_geometry();
-    auto width = geo.get_width();
-    auto moveInfo = m_bd.get_move_info(mv);
-    PiecePoints movePoints;
-    for (Point p : moveInfo)
-        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
-    QPointF center = PieceModel::findCenter(m_bd, movePoints, false);
-    pieceModel->setGameCoord(center);
+    pieceModel->setGameCoord(getGameCoord(m_bd, mv));
 }
 
 void BoardModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 {
-    auto& geo = m_bd.get_geometry();
-    auto width = geo.get_width();
-    auto moveInfo = m_bd.get_move_info(mv);
-    PiecePoints movePoints;
-    for (Point p : moveInfo)
-        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
-    auto& pieceInfo = m_bd.get_piece_info(moveInfo.get_piece());
-    auto transform = pieceInfo.find_transform(geo, movePoints);
-    auto oldTransform = pieceModel->getTransform();
-    if (transform != pieceInfo.get_equivalent_transform(oldTransform))
+    auto transform = getTransform(m_bd, mv);
+    Piece piece = m_bd.get_move_info(mv).get_piece();
+    auto& pieceInfo = m_bd.get_piece_info(piece);
+    if (! compareTransform(pieceInfo, pieceModel->getTransform(), transform))
         pieceModel->setTransform(transform);
 }
 
@@ -515,33 +534,58 @@ void BoardModel::updateProperties()
         emit isBoardEmptyChanged(isBoardEmpty);
     }
 
-    // The order of setting the piece properties is important: isPlayed is set
-    // after gameCoord because it will trigger an animation in Piece.qml to
-    // move the piece to the new position.
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (ColorIterator i(m_nuColors); i; ++i)
         isPlayed[*i].fill(false);
     // Does not handle setup yet
     for (ColorIterator i(m_nuColors); i; ++i)
         LIBBOARDGAME_ASSERT(m_bd.get_setup().placements[*i].empty());
+    m_lastMovePieceModel = nullptr;
     for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
     {
         auto mv = m_bd.get_move(i);
         if (mv.is_pass())
             continue;
         Piece piece = m_bd.get_move_info(mv.move).get_piece();
+        auto& pieceInfo = m_bd.get_piece_info(piece);
+        auto gameCoord = getGameCoord(m_bd, mv.move);
+        auto transform = getTransform(m_bd, mv.move);
         auto& pieceModels = getPieceModels(mv.color);
         PieceModel* pieceModel = nullptr;
+        // Prefer piece models already played with the given gameCoord and
+        // transform because class Board doesn't make a distinction between
+        // instances of the same piece (in Junior) and we want to avoid
+        // unwanted piece movement animations to switch instances.
         for (int j = 0; j < pieceModels.length(); ++j)
-            if (pieceModels[j]->getPiece() == piece && ! isPlayed[mv.color][j])
+            if (pieceModels[j]->getPiece() == piece
+                    && pieceModels[j]->isPlayed()
+                    && compareGameCoord(pieceModels[j]->gameCoord(), gameCoord)
+                    && compareTransform(pieceInfo,
+                                        pieceModels[j]->getTransform(),
+                                        transform))
             {
                 pieceModel = pieceModels[j];
                 isPlayed[mv.color][j] = true;
                 break;
             }
-        preparePieceGameCoord(pieceModel, mv.move);
-        pieceModel->setIsPlayed(true);
-        preparePieceTransform(pieceModel, mv.move);
+        if (pieceModel == nullptr)
+        {
+            for (int j = 0; j < pieceModels.length(); ++j)
+                if (pieceModels[j]->getPiece() == piece
+                        && ! isPlayed[mv.color][j])
+                {
+                    pieceModel = pieceModels[j];
+                    isPlayed[mv.color][j] = true;
+                    break;
+                }
+            // Order is important: isPlayed will trigger an animation to move
+            // the piece, so it needs to be set after gameCoord.
+            pieceModel->setGameCoord(gameCoord);
+            pieceModel->setIsPlayed(true);
+            pieceModel->setTransform(transform);
+        }
+        if (i == m_bd.get_nu_moves() - 1)
+            m_lastMovePieceModel = pieceModel;
     }
     for (ColorIterator i(m_nuColors); i; ++i)
     {

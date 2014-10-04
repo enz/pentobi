@@ -180,6 +180,8 @@ private:
 
     QList<PieceModel*> m_pieceModels3;
 
+    PieceModel* m_lastMovePieceModel;
+
     void createPieceModels();
 
     void createPieceModels(Color c, QList<PieceModel*>& pieceModels);
