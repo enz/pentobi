@@ -133,7 +133,7 @@ struct MoveInfoExt2
         comment at breaks_symmetry. */
     Move symmetric_move;
 
-    Point center;
+    Point label_pos;
 };
 
 //-----------------------------------------------------------------------------

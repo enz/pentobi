@@ -36,6 +36,10 @@ Item
         else return ""
     }
 
+    function _isDownward(x, y) {
+        return x % 2 != 0 ? (y % 2 == 0) : (y % 2 != 0)
+    }
+
     Transformable {
         id: pieceShape
 
@@ -76,9 +80,8 @@ Item
                     imageNameDownward: root._imageNameDownward
                     fastRendering: root._fastRendering
                     isTrigon: root.isTrigon
-                    isDownward: isTrigon && (modelData.x % 2 != 0 ?
-                                                 (modelData.y % 2 == 0) :
-                                                 (modelData.y % 2 != 0))
+                    isDownward:
+                        isTrigon && _isDownward(modelData.x, modelData.y)
                     width: pieceShape._elementWidth
                     height: root.gridElementHeight
                     x: (isTrigon ?
@@ -97,12 +100,15 @@ Item
                 width: 0.3 * gridElementHeight
                 height: width
                 radius: width / 2
-                x: (-pieceModel.center.x + 0.5) * gridElementWidth +
-                   pieceElements.width / 2 - width / 2
-                y: (isTrigon ?
-                        (-pieceModel.center.y + 2 / 3) * gridElementHeight :
-                        (-pieceModel.center.y + 0.5) * gridElementHeight) +
-                   pieceElements.height / 2 - height / 2
+                x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
+                   * gridElementWidth + pieceElements.width / 2 - width / 2
+                y: (pieceModel.labelPos.y - pieceModel.center.y
+                    + (isTrigon ?
+                           (root._isDownward(pieceModel.labelPos.x,
+                                             pieceModel.labelPos.y) ?
+                                1 / 3 : 2 / 3)
+                         : 0.5))
+                   * gridElementHeight + pieceElements.height / 2 - height / 2
                 Behavior on opacity { NumberAnimation { duration: 80 } }
             }
         }

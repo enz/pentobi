@@ -48,6 +48,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
         m_elements.append(QVariant(QPointF(p.x, p.y)));
     bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
     m_center = findCenter(bd, info.get_points(), isOriginDownward);
+    m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);
     m_state = "";
     updateTransformFromState();
 }
@@ -113,6 +114,11 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
 bool PieceModel::isPlayed() const
 {
     return m_isPlayed;
+}
+
+QPointF PieceModel::labelPos() const
+{
+    return m_labelPos;
 }
 
 void PieceModel::rotateLeft()

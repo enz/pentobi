@@ -86,9 +86,11 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
 //-----------------------------------------------------------------------------
 
 PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
-                     const Geometry& geo, const PieceTransforms& transforms)
+                     const Geometry& geo, const PieceTransforms& transforms,
+                     const CoordPoint& label_pos)
     : m_name(name),
       m_points(points),
+      m_label_pos(label_pos),
       m_transforms(&transforms)
 {
     if (log_piece_creation)

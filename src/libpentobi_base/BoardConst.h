@@ -65,7 +65,7 @@ public:
     unsigned get_nu_attach_points(Piece piece) const;
 
     bool get_piece_by_name(const string& name, Piece& piece) const;
-    
+
     const PieceTransforms& get_transforms() const;
 
     /** Get move info.
@@ -166,7 +166,7 @@ private:
     BoardConst(BoardType board_type, Variant variant);
 
     void create_move(Piece piece, const PiecePoints& coord_points,
-                     Point center);
+                     Point label_pos);
 
     void create_moves();
 

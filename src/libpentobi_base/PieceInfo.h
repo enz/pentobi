@@ -44,18 +44,19 @@ public:
 
     /** Constructor.
         @param name A short unique name for the piece.
-        @param points The coordinates of the fields. Must contain the point
-        (0, 0). (0, 0) should be a field in or near the center of the
-        coordinates; it is used as the center when moving the piece or for
-        drawing a label on the piece.
+        @param points The coordinates of the piece elements.
         @param geo
-        @param transforms */
+        @param transforms
+        @param labelPos The coordinates for drawing a label on the piece. */
     PieceInfo(const string& name, const Points& points,
-              const Geometry& geo, const PieceTransforms& transforms);
+              const Geometry& geo, const PieceTransforms& transforms,
+              const CoordPoint& label_pos);
 
     const string& get_name() const;
 
     const Points& get_points() const;
+
+    const CoordPoint& get_label_pos() const;
 
     /** Return the number of fields of the piece. */
     unsigned get_size() const;
@@ -90,12 +91,19 @@ private:
 
     Points m_points;
 
+    CoordPoint m_label_pos;
+
     vector<const Transform*> m_uniq_transforms;
 
     map<const Transform*,const Transform*> m_equivalent_transform;
 
     const PieceTransforms* m_transforms;
 };
+
+inline const CoordPoint& PieceInfo::get_label_pos() const
+{
+    return m_label_pos;
+}
 
 inline const string& PieceInfo::get_name() const
 {
