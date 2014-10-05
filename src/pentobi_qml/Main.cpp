@@ -23,16 +23,28 @@ int main(int argc, char *argv[])
 #endif
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");
+
     qmlRegisterType<BoardModel>("pentobi", 1, 0, "BoardModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterInterface<PieceModel>("PieceModel");
+
     QApplication app(argc, argv);
-    QTranslator translator;
+
     QString locale = QLocale::system().name();
-    translator.load("pentobi_qml_" + locale, ":qml/translations");
-    app.installTranslator(&translator);
+    QTranslator translatorPentobi;
+    translatorPentobi.load("pentobi_qml_" + locale, ":qml/translations");
+    app.installTranslator(&translatorPentobi);
+    // androiddeployqt does not install Qt translations (or we haven't figured
+    // out how to do it; last tested with Qt 5.4-alpha), but we need only very
+    // few translations anyway (some standard buttons of MessageDialog), so we
+    // created our own translation files as a replacement for qt_base_*.ts
+    QTranslator translatorQt;
+    translatorQt.load("replace_qtbase_" + locale, ":qml/translations");
+    app.installTranslator(&translatorQt);
+
     QQmlApplicationEngine engine;
     engine.load(QUrl("qrc:///qml/Main.qml"));
+
     return app.exec();
 }
 

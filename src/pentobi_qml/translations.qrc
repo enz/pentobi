@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/translations/pentobi_qml_de.qm</file>
+        <file>qml/translations/replace_qtbase_de.qm</file>
     </qresource>
 </RCC>
