@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/translations/pentobi_qml_de.qm</file>
+    </qresource>
+</RCC>

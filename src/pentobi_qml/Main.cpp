@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include <QApplication>
+#include <QTranslator>
 #include <QtQml>
 #include "BoardModel.h"
 #include "PlayerModel.h"
@@ -26,6 +27,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterInterface<PieceModel>("PieceModel");
     QApplication app(argc, argv);
+    QTranslator translator;
+    QString locale = QLocale::system().name();
+    translator.load("pentobi_qml_" + locale, ":qml/translations");
+    app.installTranslator(&translator);
     QQmlApplicationEngine engine;
     engine.load(QUrl("qrc:///qml/Main.qml"));
     return app.exec();

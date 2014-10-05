@@ -79,6 +79,7 @@ SOURCES += \
 RESOURCES += \
     ../books/pentobi_books.qrc \
     resources.qrc \
+    translations.qrc \
     qml/themes/light/theme_light.qrc \
     qml/themes/dark/theme_dark.qrc
 
@@ -194,6 +195,15 @@ HEADERS += \
     ../libpentobi_mcts/Player.h \
     ../libboardgame_sgf/SgfUtil.h \
     ../libboardgame_sys/CpuTime.h
+
+lupdate_only {
+SOURCES += \
+    qml/*.qml \
+    qml/*.js
+}
+
+TRANSLATIONS += \
+    qml/translations/pentobi_qml_de.ts
 
 OTHER_FILES += \
     android/AndroidManifest.xml

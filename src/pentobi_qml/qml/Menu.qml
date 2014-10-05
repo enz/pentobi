@@ -18,7 +18,7 @@ MenuBar {
     property bool alwaysEnableAll: true
 
     Menu {
-        title: "Game"
+        title: qsTr("Game")
 
         MenuItem {
             text: qsTr("New Game")
