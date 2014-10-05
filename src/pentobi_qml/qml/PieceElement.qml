@@ -15,25 +15,35 @@ Item {
     property bool isTrigon
     property bool isDownward
     property string imageName
-    property string imageNameDownward
     property real angle
     property bool fastRendering
 
     Repeater {
         // Image rotation
-        model: isTrigon ? [ 0, 60, 120, 180, 240, 300 ] : [ 0, 90, 180, 270 ]
+        model: isTrigon ? [ 0, 120, 240 ] : [ 0, 90, 180, 270 ]
 
         Item {
             property real _imageOpacity: {
                 var angle = Math.round(root.angle - modelData)
                 angle = ((angle % 360) + 360) % 360 // JS modulo bug
-                if (isTrigon) {
-                    if (angle >= 60 && angle <= 300) return 0
-                    return 2 * Math.cos(angle * Math.PI / 180) - 1
-                } else {
-                    if (angle >= 90 && angle <= 270) return 0
-                    return Math.cos(angle * Math.PI / 180)
+                if (isDownward) {
+                    if (angle >= 300) return 1
+                    if (angle >= 60 && angle <= 240) return 0
+                    if (angle > 240)
+                        return 2 * Math.cos((angle + 60) * Math.PI / 180) - 1
+                    else
+                        return 2 * Math.cos(angle * Math.PI / 180) - 1
                 }
+                if (isTrigon) {
+                    if (angle <= 60) return 1
+                    if (angle >= 120 && angle <= 300) return 0
+                    if (angle < 120)
+                        return 2 * Math.cos((angle - 60) * Math.PI / 180) - 1
+                    else
+                        return 2 * Math.cos(angle * Math.PI / 180) - 1
+                }
+                if (angle >= 90 && angle <= 270) return 0
+                return Math.cos(angle * Math.PI / 180)
             }
 
             on_ImageOpacityChanged:
@@ -44,12 +54,7 @@ Item {
             Component {
                 id: component
                 Image {
-                    property bool _switchUpDownImage:
-                        isTrigon && modelData % 120 != 0
-                    property bool _isImageDownward:
-                        isTrigon && (isDownward != _switchUpDownImage)
-
-                    source: _isImageDownward ? _imageNameDownward : _imageName
+                    source: _imageName
                     width: root.width
                     height: root.height
                     sourceSize {
@@ -61,13 +66,11 @@ Item {
                     smooth: ! fastRendering
                     transform: [
                         Rotation {
-                            angle: -modelData
+                            angle: isDownward ? -modelData + 60 : -modelData
                             origin {
                                 x: width / 2
                                 y: {
-                                    if (_isImageDownward)
-                                        return height / 3
-                                    else if (isTrigon)
+                                    if (isTrigon)
                                         return 2 * height / 3
                                     else
                                         return height / 2
@@ -76,9 +79,7 @@ Item {
                         },
                         Translate {
                             y: {
-                                if (! isDownward && _isImageDownward)
-                                    return height / 3
-                                if (isDownward && ! _isImageDownward)
+                                if (isDownward)
                                     return -height / 3
                                 return 0
                             }

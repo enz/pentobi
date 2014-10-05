@@ -25,8 +25,6 @@ Item
 
     property string _imageName:
         theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
-    property string _imageNameDownward:
-        theme.getImage("triangle-down-" + colorName)
     property bool _fastRendering
 
     state: {
@@ -77,7 +75,6 @@ Item
 
                 PieceElement {
                     imageName: root._imageName
-                    imageNameDownward: root._imageNameDownward
                     fastRendering: root._fastRendering
                     isTrigon: root.isTrigon
                     isDownward:
