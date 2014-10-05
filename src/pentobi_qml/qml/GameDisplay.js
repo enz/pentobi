@@ -86,6 +86,7 @@ function findPiece(pieceModel) {
 
 function pickPiece(piece) {
     if (piece.pieceModel.color != boardModel.toPlay
+            || playerModel.isGenMoveRunning
             || boardModel.isGameOver)
         return
     if (! pieceManipulator.visible) {
