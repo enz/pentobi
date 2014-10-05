@@ -199,7 +199,7 @@ Variant BoardModel::getInitialGameVariant()
     Variant gameVariant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(),
                            gameVariant))
-        gameVariant = Variant::classic;
+        gameVariant = Variant::duo;
     return gameVariant;
 }
 
