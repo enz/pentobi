@@ -39,8 +39,6 @@ function createColorPieces(component, pieceModels) {
     var properties = {
         "isTrigon": (gameVariant.indexOf("trigon") >= 0),
         "colorName": colorName,
-        "gridElementWidth": 0,
-        "gridElementHeight": 0,
         "isPicked": Qt.binding(function() { return (this == pickedPiece) }),
         "parentPieceManipulator": pieceManipulator,
         "parentBoard": board,
