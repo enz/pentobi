@@ -31,16 +31,14 @@ Item {
                     if (angle >= 60 && angle <= 240) return 0
                     if (angle > 240)
                         return 2 * Math.cos((angle + 60) * Math.PI / 180) - 1
-                    else
-                        return 2 * Math.cos(angle * Math.PI / 180) - 1
+                    return 2 * Math.cos(angle * Math.PI / 180) - 1
                 }
                 if (isTrigon) {
                     if (angle <= 60) return 1
                     if (angle >= 120 && angle <= 300) return 0
                     if (angle < 120)
                         return 2 * Math.cos((angle - 60) * Math.PI / 180) - 1
-                    else
-                        return 2 * Math.cos(angle * Math.PI / 180) - 1
+                    return 2 * Math.cos(angle * Math.PI / 180) - 1
                 }
                 if (angle >= 90 && angle <= 270) return 0
                 return Math.cos(angle * Math.PI / 180)
@@ -69,21 +67,10 @@ Item {
                             angle: isDownward ? -modelData + 60 : -modelData
                             origin {
                                 x: width / 2
-                                y: {
-                                    if (isTrigon)
-                                        return 2 * height / 3
-                                    else
-                                        return height / 2
-                                }
+                                y: isTrigon ? 2 * height / 3 : height / 2
                             }
                         },
-                        Translate {
-                            y: {
-                                if (isDownward)
-                                    return -height / 3
-                                return 0
-                            }
-                        }
+                        Translate { y: isDownward ? -height / 3 : 0 }
                     ]
                 }
             }
