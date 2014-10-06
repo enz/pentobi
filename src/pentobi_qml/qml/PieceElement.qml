@@ -56,8 +56,7 @@ Item {
                     width: root.width
                     height: root.height
                     sourceSize {
-                        width: isTrigon ? 2 * imageSourceWidth :
-                                          imageSourceWidth
+                        width: imageSourceWidth
                         height: imageSourceHeight
                     }
                     opacity: _imageOpacity

@@ -20,7 +20,8 @@ Item
     readonly property real pieceAreaSize: pieceSelector.pieceAreaSize
     readonly property real pieceSelectorY: column.y + pieceSelector.y
     readonly property real pieceSelectorHeight: pieceSelector.height
-    property alias imageSourceWidth: board.gridElementWidth
+    property real imageSourceWidth:
+        _isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
     property alias imageSourceHeight: board.gridElementHeight
 
     property var _pieces0
