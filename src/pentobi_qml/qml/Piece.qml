@@ -26,6 +26,24 @@ Item
     property string _imageName:
         theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
     property bool _fastRendering
+    property real _angle: {
+        var flipX = Math.abs(pieceElements.flipXAngle % 360 - 180) < 90
+        var flipY = Math.abs(pieceElements.flipYAngle % 360 - 180) < 90
+        var angle = pieceElements.rotation
+        if (isTrigon) {
+            if (flipX && flipY) angle += 180
+            else if (flipX) angle += 120
+            else if (flipY) angle += 300
+        }
+        else {
+            if (flipX && flipY) angle += 180
+            else if (flipX) angle += 90
+            else if (flipY) angle += 270
+        }
+        return angle
+    }
+    property real _elementWidth:
+        isTrigon ? 2 * gridElementWidth : gridElementWidth
 
     state: {
         if (isPicked) return "picked"
@@ -39,75 +57,51 @@ Item
     }
 
     Transformable {
-        id: pieceShape
+        id: pieceElements
 
+        width: 10 * gridElementWidth
+        height: 10 * gridElementHeight
+        x: -width / 2
+        y: -height / 2
         state: pieceModel.state
 
-        property real _angle: {
-            var flipX = Math.abs(pieceShape.flipXAngle % 360 - 180) < 90
-            var flipY = Math.abs(pieceShape.flipYAngle % 360 - 180) < 90
-            var angle = pieceShape.rotation
-            if (isTrigon) {
-                if (flipX && flipY) angle += 180
-                else if (flipX) angle += 120
-                else if (flipY) angle += 300
+        Repeater {
+            model: pieceModel.elements
+
+            PieceElement {
+                imageName: root._imageName
+                fastRendering: root._fastRendering
+                isTrigon: root.isTrigon
+                isDownward:
+                    isTrigon && _isDownward(modelData.x, modelData.y)
+                width: root._elementWidth
+                height: root.gridElementHeight
+                x: (isTrigon ?
+                        modelData.x - pieceModel.center.x - 0.5 :
+                        modelData.x - pieceModel.center.x)
+                   * gridElementWidth + pieceElements.width / 2
+                y: (modelData.y - pieceModel.center.y)
+                   * gridElementHeight + pieceElements.height / 2
+                angle: root._angle
             }
-            else {
-                if (flipX && flipY) angle += 180
-                else if (flipX) angle += 90
-                else if (flipY) angle += 270
-            }
-            return angle
         }
-        property real _elementWidth:
-            isTrigon ? 2 * gridElementWidth : gridElementWidth
-
-        Item {
-            id: pieceElements
-
-            width: 10 * gridElementWidth
-            height: 10 * gridElementHeight
-            x: -width / 2
-            y: -height / 2
-
-            Repeater {
-                model: pieceModel.elements
-
-                PieceElement {
-                    imageName: root._imageName
-                    fastRendering: root._fastRendering
-                    isTrigon: root.isTrigon
-                    isDownward:
-                        isTrigon && _isDownward(modelData.x, modelData.y)
-                    width: pieceShape._elementWidth
-                    height: root.gridElementHeight
-                    x: (isTrigon ?
-                            modelData.x - pieceModel.center.x - 0.5 :
-                            modelData.x - pieceModel.center.x)
-                       * gridElementWidth + pieceElements.width / 2
-                    y: (modelData.y - pieceModel.center.y)
-                       * gridElementHeight + pieceElements.height / 2
-                    angle: pieceShape._angle
-                }
-            }
-            Rectangle {
-                opacity: isMarked ? 0.5 : 0
-                color: colorName == "blue" || colorName == "red" ?
-                           "white" : "#333333"
-                width: 0.3 * gridElementHeight
-                height: width
-                radius: width / 2
-                x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-                   * gridElementWidth + pieceElements.width / 2 - width / 2
-                y: (pieceModel.labelPos.y - pieceModel.center.y
-                    + (isTrigon ?
-                           (root._isDownward(pieceModel.labelPos.x,
-                                             pieceModel.labelPos.y) ?
-                                1 / 3 : 2 / 3)
-                         : 0.5))
-                   * gridElementHeight + pieceElements.height / 2 - height / 2
-                Behavior on opacity { NumberAnimation { duration: 80 } }
-            }
+        Rectangle {
+            opacity: isMarked ? 0.5 : 0
+            color: colorName == "blue" || colorName == "red" ?
+                       "white" : "#333333"
+            width: 0.3 * gridElementHeight
+            height: width
+            radius: width / 2
+            x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
+               * gridElementWidth + pieceElements.width / 2 - width / 2
+            y: (pieceModel.labelPos.y - pieceModel.center.y
+                + (isTrigon ?
+                       (root._isDownward(pieceModel.labelPos.x,
+                                         pieceModel.labelPos.y) ?
+                            1 / 3 : 2 / 3)
+                     : 0.5))
+               * gridElementHeight + pieceElements.height / 2 - height / 2
+            Behavior on opacity { NumberAnimation { duration: 80 } }
         }
     }
 
