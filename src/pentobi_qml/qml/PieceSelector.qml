@@ -26,6 +26,8 @@ Item {
     signal piecePicked(var piece)
 
     function showColorImmediately(color) {
+        snapAnimation.stop()
+        showColorAnimation.stop()
         flickable.contentY = height * color
     }
 
@@ -34,8 +36,9 @@ Item {
             showColorImmediately(toPlay)
             return
         }
-        showColorMoveAnimation.to = toPlay * height
         snapAnimation.stop()
+        showColorAnimation.stop()
+        showColorMoveAnimation.to = toPlay * height
         showColorAnimation.restart()
     }
 
@@ -49,8 +52,8 @@ Item {
         clip: true
         onMovementEnded: {
             var color = Math.min(Math.round(contentY / height), nuColors - 1)
-            snapAnimation.to = height * color
             showColorAnimation.stop()
+            snapAnimation.to = height * color
             snapAnimation.restart()
         }
         onWidthChanged: showColorImmediately(toPlay)
