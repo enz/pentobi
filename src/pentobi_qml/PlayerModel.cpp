@@ -12,6 +12,7 @@
 #include <QSettings>
 
 using namespace std;
+using libboardgame_util::clear_abort;
 using libboardgame_util::set_abort;
 
 //-----------------------------------------------------------------------------
@@ -181,6 +182,7 @@ void PlayerModel::startGenMoveAtLevel(BoardModel* boardModel, int level)
     auto variant = boardModel->getBoard().get_variant();
     if (! m_player.is_book_loaded(variant))
         loadBook(variant);
+    clear_abort();
     ++m_genMoveId;
     QFuture<GenMoveResult> future =
             QtConcurrent::run(this, &PlayerModel::asyncGenMove, boardModel,
