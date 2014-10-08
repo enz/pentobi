@@ -28,16 +28,16 @@ Item {
                 angle = ((angle % 360) + 360) % 360 // JS modulo bug
                 if (isDownward) {
                     if (angle >= 300) return 1
-                    if (angle >= 60 && angle <= 240) return 0
                     if (angle > 240)
                         return 2 * Math.cos((angle + 60) * Math.PI / 180) - 1
+                    if (angle >= 60) return 0
                     return 2 * Math.cos(angle * Math.PI / 180) - 1
                 }
                 if (isTrigon) {
                     if (angle <= 60) return 1
-                    if (angle >= 120 && angle <= 300) return 0
                     if (angle < 120)
                         return 2 * Math.cos((angle - 60) * Math.PI / 180) - 1
+                    if (angle <= 300) return 0
                     return 2 * Math.cos(angle * Math.PI / 180) - 1
                 }
                 if (angle >= 90 && angle <= 270) return 0
