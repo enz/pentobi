@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.0
+import QtQuick.Controls 1.1
 
 import "GameDisplay.js" as Logic
 
@@ -12,14 +13,10 @@ Item
 {
     id: root
 
-    property var pickedPiece: null
+    property var pickedPiece
     property bool transitionsEnabled
-
-    // Location of the piece selector (for centering items like the busy cursor
-    // on it)
-    readonly property real pieceAreaSize: pieceSelector.pieceAreaSize
-    readonly property real pieceSelectorY: column.y + pieceSelector.y
-    readonly property real pieceSelectorHeight: pieceSelector.height
+    property alias busyIndicatorRunning: busyIndicator.running
+    property alias pieceAreaSize: pieceSelector.pieceAreaSize
     property real imageSourceWidth:
         _isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
     property alias imageSourceHeight: board.gridElementHeight
@@ -128,6 +125,12 @@ Item
 
             height: rows * pieceAreaSize
             onPiecePicked: Logic.pickPiece(piece)
+
+            BusyIndicator {
+                id: busyIndicator
+
+                anchors.centerIn: parent
+            }
         }
     }
     PieceManipulator {

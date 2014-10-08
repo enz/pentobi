@@ -6,7 +6,7 @@
 
 function cancelGenMove() {
     playerModel.cancelGenMove()
-    busyIndicator.running = false
+    gameDisplay.busyIndicatorRunning = false
 }
 
 function changeGameVariant(gameVariant, verifyAbortGame) {
@@ -145,7 +145,7 @@ function createTheme(themeName) {
 function genMove() {
     cancelGenMove()
     gameDisplay.pickedPiece = null
-    busyIndicator.running = true
+    gameDisplay.busyIndicatorRunning = true
     isMoveHintRunning = false
     playerModel.startGenMove(boardModel)
 }
@@ -229,7 +229,7 @@ function markLastMove() {
 }
 
 function moveGenerated(move) {
-    busyIndicator.running = false
+    gameDisplay.busyIndicatorRunning = false
     if (isMoveHintRunning) {
         gameDisplay.showMoveHint(move)
         isMoveHintRunning = false
@@ -249,7 +249,7 @@ function moveHint() {
         return
     cancelGenMove()
     isMoveHintRunning = true
-    busyIndicator.running = true
+    gameDisplay.busyIndicatorRunning = true
     playerModel.startGenMoveAtLevel(boardModel, 1)
 }
 

@@ -101,14 +101,6 @@ ApplicationWindow {
         }
     }
 
-    BusyIndicator {
-        id: busyIndicator
-
-        x: (root.width - width) / 2
-        y: gameDisplay.y + gameDisplay.pieceSelectorY +
-           (gameDisplay.pieceSelectorHeight - height) / 2
-    }
-
     Loader { id: computerColorDialogLoader }
     Component {
         id: computerColorDialogComponent
@@ -162,14 +154,14 @@ ApplicationWindow {
         property var _func
 
         function call(func) {
-            busyIndicator.running = true
+            gameDisplay.busyIndicatorRunning = true
             _func = func
             start()
         }
 
         interval: 10
         onTriggered: {
-            busyIndicator.running = false
+            gameDisplay.busyIndicatorRunning = false
             _func()
         }
     }
