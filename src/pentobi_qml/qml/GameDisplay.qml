@@ -13,7 +13,7 @@ Item
 {
     id: root
 
-    property var pickedPiece
+    property var pickedPiece: null
     property bool transitionsEnabled
     property alias busyIndicatorRunning: busyIndicator.running
     property alias pieceAreaSize: pieceSelector.pieceAreaSize
