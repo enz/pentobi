@@ -23,10 +23,10 @@ Item
     property real gridElementHeight
     property bool isMarked
 
-    property string _imageName:
+    property string imageName:
         theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
-    property bool _fastRendering
-    property real _angle: {
+    property bool fastRendering
+    property real pieceAngle: {
         var flipX = Math.abs(pieceElements.flipXAngle % 360 - 180) < 90
         var flipY = Math.abs(pieceElements.flipYAngle % 360 - 180) < 90
         var angle = pieceElements.rotation
@@ -65,9 +65,6 @@ Item
             model: pieceModel.elements
 
             PieceElement {
-                imageName: root._imageName
-                fastRendering: root._fastRendering
-                isTrigon: root.isTrigon
                 isDownward:
                     isTrigon && _isDownward(modelData.x, modelData.y)
                 width: root._elementWidth
@@ -78,7 +75,6 @@ Item
                    * gridElementWidth
                 y: (modelData.y - pieceModel.center.y)
                    * gridElementHeight
-                angle: root._angle
             }
         }
         Rectangle {

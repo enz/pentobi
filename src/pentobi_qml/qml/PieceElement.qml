@@ -12,11 +12,7 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property bool isTrigon
     property bool isDownward
-    property string imageName
-    property real angle
-    property bool fastRendering
 
     Repeater {
         // Image rotation
@@ -24,7 +20,7 @@ Item {
 
         Item {
             property real _imageOpacity: {
-                var angle = Math.round(root.angle - modelData)
+                var angle = Math.round(pieceAngle - modelData)
                 angle = ((angle % 360) + 360) % 360 // JS modulo bug
                 if (isDownward) {
                     if (angle >= 300) return 1
@@ -52,7 +48,7 @@ Item {
             Component {
                 id: component
                 Image {
-                    source: _imageName
+                    source: imageName
                     width: root.width
                     height: root.height
                     sourceSize {
