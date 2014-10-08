@@ -51,6 +51,9 @@ Item
         else if (parentPieceSelectorArea != null) return "unplayed"
         else return ""
     }
+    // Make sure piece is above board during piece transition when its parent
+    // is GameDisplay
+    z: 1
 
     function _isDownward(x, y) {
         return x % 2 != 0 ? (y % 2 == 0) : (y % 2 != 0)
@@ -159,9 +162,6 @@ Item
             SequentialAnimation {
                 PropertyAction {
                     target: root; property: "fastRendering"; value: true }
-                // Temporarily set z to 3 such that it is above the pieces
-                // on the board and above the piece manipulator
-                PropertyAction { target: root; property: "z"; value: 3 }
                 PropertyAction {
                     target: parentPieceSelectorArea
                     property: "visible"; value: true
@@ -177,7 +177,6 @@ Item
                 PropertyAction {
                     target: parentPieceSelectorArea; property: "visible"
                 }
-                PropertyAction { target: root; property: "z"; value: 0 }
                 PropertyAction {
                     target: root; property: "fastRendering"; value: false }
             }
