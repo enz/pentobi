@@ -19,15 +19,8 @@ Rectangle {
         opacity = 0
     }
     function show(text) {
-        messageTimer.stop()
         messageText.text = text
         opacity = 0.8
-    }
-    function showTemporary(text, duration) {
-        messageText.text = text
-        opacity = 0.8
-        messageTimer.interval = duration
-        messageTimer.restart()
     }
 
     width: messageText.contentWidth + 2 * _margin
@@ -47,10 +40,6 @@ Rectangle {
         anchors.fill: root
         enabled: root.opacity > 0
         onClicked: root.clicked()
-    }
-    Timer {
-        id: messageTimer
-        onTriggered: root.opacity = 0
     }
     Behavior on opacity { NumberAnimation { duration: 400 } }
 }
