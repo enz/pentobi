@@ -59,10 +59,6 @@ Item
     Transformable {
         id: pieceElements
 
-        width: 10 * gridElementWidth
-        height: 10 * gridElementHeight
-        x: -width / 2
-        y: -height / 2
         state: pieceModel.state
 
         Repeater {
@@ -79,9 +75,9 @@ Item
                 x: (isTrigon ?
                         modelData.x - pieceModel.center.x - 0.5 :
                         modelData.x - pieceModel.center.x)
-                   * gridElementWidth + pieceElements.width / 2
+                   * gridElementWidth
                 y: (modelData.y - pieceModel.center.y)
-                   * gridElementHeight + pieceElements.height / 2
+                   * gridElementHeight
                 angle: root._angle
             }
         }
@@ -93,14 +89,14 @@ Item
             height: width
             radius: width / 2
             x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-               * gridElementWidth + pieceElements.width / 2 - width / 2
+               * gridElementWidth + - width / 2
             y: (pieceModel.labelPos.y - pieceModel.center.y
                 + (isTrigon ?
                        (root._isDownward(pieceModel.labelPos.x,
                                          pieceModel.labelPos.y) ?
                             1 / 3 : 2 / 3)
                      : 0.5))
-               * gridElementHeight + pieceElements.height / 2 - height / 2
+               * gridElementHeight - height / 2
             Behavior on opacity { NumberAnimation { duration: 80 } }
         }
     }
