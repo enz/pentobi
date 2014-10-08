@@ -86,21 +86,6 @@ ApplicationWindow {
         onPlay: Logic.play(pieceModel, gameCoord)
     }
 
-    Loader { id: messageLoader }
-    Component {
-        id: messageComponent
-
-        Pentobi.Message {
-            id: message
-
-            fontSize: 0.4 * gameDisplay.pieceAreaSize
-            x: (root.width - width) / 2
-            y: gameDisplay.y + gameDisplay.pieceSelectorY +
-               (gameDisplay.pieceSelectorHeight - height) / 2
-            onClicked: clear()
-        }
-    }
-
     Loader { id: computerColorDialogLoader }
     Component {
         id: computerColorDialogComponent

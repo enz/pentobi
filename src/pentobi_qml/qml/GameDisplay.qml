@@ -6,7 +6,7 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.1
-
+import "." as Pentobi
 import "GameDisplay.js" as Logic
 
 Item
@@ -35,6 +35,15 @@ Item
         pieceSelector.showColorImmediately(color)
     }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
+    function showMessage(text) {
+        if (messageLoader.status == Loader.Null)
+            messageLoader.sourceComponent = messageComponent
+        messageLoader.item.show(text)
+    }
+    function clearMessage() {
+        if (messageLoader.status == Loader.Ready)
+            messageLoader.item.clear()
+    }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
@@ -126,6 +135,21 @@ Item
             height: rows * pieceAreaSize
             onPiecePicked: Logic.pickPiece(piece)
 
+            Loader {
+                id: messageLoader
+
+                anchors.centerIn: parent
+            }
+            Component {
+                id: messageComponent
+
+                Pentobi.Message {
+                    id: message
+
+                    fontSize: 0.4 * pieceAreaSize
+                    onClicked: clear()
+                }
+            }
             BusyIndicator {
                 id: busyIndicator
 

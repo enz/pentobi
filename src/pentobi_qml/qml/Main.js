@@ -78,11 +78,6 @@ function clearMarksNotComputer() {
     }
 }
 
-function clearMessage() {
-    if (messageLoader.status == Loader.Ready)
-        messageLoader.item.clear()
-}
-
 /** If the computer already plays the current color to play, start generating
     a move; if he doesn't, make him play the current color (and only the
     current color). */
@@ -185,7 +180,7 @@ function initComputerColors() {
 function initGameVariant(gameVariant) {
     cancelGenMove()
     hideComputerColorDialog()
-    clearMessage()
+    gameDisplay.clearMessage()
     clearMarks()
     gameDisplay.destroyPieces()
     boardModel.initGameVariant(gameVariant)
@@ -263,7 +258,7 @@ function newGame(verifyAbortGame)
         return
     }
     gameDisplay.pickedPiece = null
-    clearMessage()
+    gameDisplay.clearMessage()
     clearMarks()
     hideComputerColorDialog()
     gameDisplay.transitionsEnabled = false
@@ -359,13 +354,7 @@ function showGameOver() {
         else if (points3 == maxPoints)
             msg = qsTr("Green wins.")
     }
-    showMessage(msg)
-}
-
-function showMessage(text) {
-    if (messageLoader.status == Loader.Null)
-        messageLoader.sourceComponent = messageComponent
-    messageLoader.item.show(text)
+    gameDisplay.showMessage(msg)
 }
 
 function showMessageDialog(text, acceptedFunc) {
@@ -377,17 +366,11 @@ function showMessageDialog(text, acceptedFunc) {
     dialog.visible = true
 }
 
-function showTemporaryMessage(text) {
-    if (messageLoader.status == Loader.Null)
-        messageLoader.sourceComponent = messageComponent
-    messageLoader.item.showTemporary(text, 1800)
-}
-
 function undo() {
     if (! boardModel.canUndo)
         return
     cancelGenMove()
-    clearMessage()
+    gameDisplay.clearMessage()
     // Immediately show the last color to move, otherwise the piece movement
     // animation will target a part of the piece selector that is currently not
     // visible
