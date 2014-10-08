@@ -20,7 +20,7 @@ Item {
 
         Item {
             property real _imageOpacity: {
-                var angle = Math.round(pieceAngle - modelData)
+                var angle = pieceAngle - modelData
                 angle = ((angle % 360) + 360) % 360 // JS modulo bug
                 if (isDownward) {
                     if (angle >= 300) return 1
