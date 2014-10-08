@@ -1,254 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.1"
-   width="16"
-   height="16"
-   id="svg2985">
-  <defs
-     id="defs2987">
-    <linearGradient
-       id="linearGradient5924">
-      <stop
-         id="stop5926"
-         style="stop-color:#3d6ca8;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop5928"
-         style="stop-color:#315686;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient5916">
-      <stop
-         id="stop5918"
-         style="stop-color:#e8d31d;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop5920"
-         style="stop-color:#c4b214;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient5908">
-      <stop
-         id="stop5910"
-         style="stop-color:#80e021;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop5912"
-         style="stop-color:#62ac18;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient5900">
-      <stop
-         id="stop5902"
-         style="stop-color:#da4d4d;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop5904"
-         style="stop-color:#c32828;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient3964">
-      <stop
-         id="stop3966"
-         style="stop-color:#676a64;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3968"
-         style="stop-color:#1b1c1b;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient3796">
-      <stop
-         id="stop3798"
-         style="stop-color:#dddfe2;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3800"
-         style="stop-color:#000000;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient3780">
-      <stop
-         id="stop3782"
-         style="stop-color:#000000;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3784"
-         style="stop-color:#8c8f89;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient3772">
-      <stop
-         id="stop3774"
-         style="stop-color:#f0f1ef;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3776"
-         style="stop-color:#aab2a2;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       x1="18"
-       y1="26"
-       x2="20"
-       y2="31"
-       id="linearGradient3082"
-       xlink:href="#linearGradient5924"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.79999993,0,0,0.79999996,-1.7999985,6.2000017)" />
-    <linearGradient
-       x1="13"
-       y1="26"
-       x2="15"
-       y2="31"
-       id="linearGradient3085"
-       xlink:href="#linearGradient5916"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.79999998,0,0,0.79999991,-1.8,6.2000027)" />
-    <linearGradient
-       x1="18"
-       y1="21"
-       x2="20"
-       y2="26"
-       id="linearGradient3088"
-       xlink:href="#linearGradient5908"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.79999998,0,0,0.7999999,-1.7999994,6.2000033)" />
-    <linearGradient
-       x1="13"
-       y1="21"
-       x2="14"
-       y2="26"
-       id="linearGradient3091"
-       xlink:href="#linearGradient5900"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.79999998,0,0,0.79999996,-1.8,6.2000018)" />
-    <linearGradient
-       x1="9.99967"
-       y1="10.072811"
-       x2="15.309628"
-       y2="29.889841"
-       id="linearGradient3097"
-       xlink:href="#linearGradient3796"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.73332672,0,0,0.66665833,-4.0671326e-4,9.4959319)" />
-    <linearGradient
-       x1="9.99967"
-       y1="10.072811"
-       x2="15.309628"
-       y2="29.889841"
-       id="linearGradient3099"
-       xlink:href="#linearGradient3780"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.73332672,0,0,0.66665833,-4.0671326e-4,9.4959319)" />
-    <linearGradient
-       x1="9.9528265"
-       y1="10.128091"
-       x2="15.807238"
-       y2="31.977051"
-       id="linearGradient3102"
-       xlink:href="#linearGradient3772"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.71429431,0,0,0.73685192,0.15111782,8.789794)" />
-    <linearGradient
-       x1="9.9528265"
-       y1="10.128091"
-       x2="15.807238"
-       y2="31.977051"
-       id="linearGradient3104"
-       xlink:href="#linearGradient3964"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.71429431,0,0,0.73685192,0.15111782,8.789794)" />
-  </defs>
-  <metadata
-     id="metadata2990">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="translate(0,-16)"
-     id="layer1">
-    <rect
-       width="15.000124"
-       height="14.000124"
-       ry="1.7039698"
-       x="0.50829399"
-       y="16.526764"
-       id="rect2995"
-       style="fill:url(#linearGradient3102);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3104);stroke-width:0.9998759;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <rect
-       width="10.999871"
-       height="7.9998708"
-       ry="0.33861884"
-       x="2.5664916"
-       y="18.495617"
-       id="rect3765"
-       style="fill:url(#linearGradient3097);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3099);stroke-width:1.00012934;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       d="m 2.0006353,28.500054 c 11.9987297,0 11.9987297,0 11.9987297,0"
-       id="path3767"
-       style="fill:none;stroke:#6e706c;stroke-width:1.00058103;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       d="m 12.999951,20 0,6 -10.0000002,0 c 0,0 0,-1.822606 0,-2.678855 C 5.8020568,22.018097 9.4697053,20.569312 12.999951,20 z"
-       id="rect3769"
-       style="fill:#000000;fill-opacity:0.22629969;stroke:none" />
-    <rect
-       width="8.9998322"
-       height="8.9998312"
-       ry="0"
-       x="6.5"
-       y="22.500168"
-       id="rect3810"
-       style="fill:none;stroke:#2b2d2b;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <rect
-       width="4"
-       height="4"
-       x="7"
-       y="23"
-       id="rect3834"
-       style="fill:url(#linearGradient3091);fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    <rect
-       width="4"
-       height="4"
-       x="11"
-       y="23"
-       id="rect3836"
-       style="fill:url(#linearGradient3088);fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    <rect
-       width="4"
-       height="4"
-       x="7"
-       y="27"
-       id="rect3838"
-       style="fill:url(#linearGradient3085);fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    <rect
-       width="4"
-       height="4"
-       x="11"
-       y="27"
-       id="rect3840"
-       style="fill:url(#linearGradient3082);fill-opacity:1;fill-rule:evenodd;stroke:none" />
-  </g>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<defs>
+<linearGradient id="linearGradient3082" x1="18" gradientUnits="userSpaceOnUse" y1="26" gradientTransform="matrix(0.79999993,0,0,0.79999996,-1.7999985,6.2000017)" x2="20" y2="31">
+<stop stop-color="#3d6ca8" offset="0"/>
+<stop stop-color="#315686" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3085" x1="13" gradientUnits="userSpaceOnUse" y1="26" gradientTransform="matrix(0.79999998,0,0,0.79999991,-1.8,6.2000027)" x2="15" y2="31">
+<stop stop-color="#e8d31d" offset="0"/>
+<stop stop-color="#c4b214" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3088" x1="18" gradientUnits="userSpaceOnUse" y1="21" gradientTransform="matrix(0.79999998,0,0,0.7999999,-1.7999994,6.2000033)" x2="20" y2="26">
+<stop stop-color="#80e021" offset="0"/>
+<stop stop-color="#62ac18" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3091" x1="13" gradientUnits="userSpaceOnUse" y1="21" gradientTransform="matrix(0.79999998,0,0,0.79999996,-1.8,6.2000018)" x2="14" y2="26">
+<stop stop-color="#da4d4d" offset="0"/>
+<stop stop-color="#c32828" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3097" x1="9.9997" gradientUnits="userSpaceOnUse" y1="10.073" gradientTransform="matrix(0.73332672,0,0,0.66665833,-4.0671326e-4,9.4959319)" x2="15.31" y2="29.89">
+<stop stop-color="#dddfe2" offset="0"/>
+<stop stop-color="#000" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3099" x1="9.9997" gradientUnits="userSpaceOnUse" y1="10.073" gradientTransform="matrix(0.73332672,0,0,0.66665833,-4.0671326e-4,9.4959319)" x2="15.31" y2="29.89">
+<stop stop-color="#000" offset="0"/>
+<stop stop-color="#8c8f89" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3102" x1="9.9528" gradientUnits="userSpaceOnUse" y1="10.128" gradientTransform="matrix(0.71429431,0,0,0.73685192,0.15111782,8.789794)" x2="15.807" y2="31.977">
+<stop stop-color="#f0f1ef" offset="0"/>
+<stop stop-color="#aab2a2" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3104" x1="9.9528" gradientUnits="userSpaceOnUse" y1="10.128" gradientTransform="matrix(0.71429431,0,0,0.73685192,0.15111782,8.789794)" x2="15.807" y2="31.977">
+<stop stop-color="#676a64" offset="0"/>
+<stop stop-color="#1b1c1b" offset="1"/>
+</linearGradient>
+</defs>
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<g transform="translate(0,-16)">
+<rect stroke-linejoin="round" fill-rule="evenodd" ry="1.704" height="14" width="15" stroke="url(#linearGradient3104)" stroke-linecap="round" stroke-dasharray="none" x="0.50829" y="16.527" stroke-miterlimit="4" stroke-width="0.99988" fill="url(#linearGradient3102)"/>
+<rect stroke-linejoin="round" fill-rule="evenodd" ry="0.33862" height="7.9999" width="11" stroke="url(#linearGradient3099)" stroke-linecap="round" stroke-dasharray="none" x="2.5665" y="18.496" stroke-miterlimit="4" stroke-width="1.0001" fill="url(#linearGradient3097)"/>
+<path d="m2.0006,28.5h11.999" stroke="#6e706c" stroke-dasharray="none" stroke-miterlimit="4" stroke-width="1.00058103" fill="none"/>
+<path d="m13,20,0,6-10,0v-2.6789c2.8021-1.303,6.4697-2.752,10-3.321z" fill="#000" fill-opacity="0.22629969"/>
+<rect stroke-linejoin="round" ry="0" height="8.9998" width="8.9998" stroke="#2b2d2b" stroke-linecap="round" stroke-dasharray="none" x="6.5" y="22.5" stroke-miterlimit="4" stroke-width="1" fill="none"/>
+<rect fill-rule="evenodd" height="4" width="4" y="23" x="7" fill="url(#linearGradient3091)"/>
+<rect fill-rule="evenodd" height="4" width="4" y="23" x="11" fill="url(#linearGradient3088)"/>
+<rect fill-rule="evenodd" height="4" width="4" y="27" x="7" fill="url(#linearGradient3085)"/>
+<rect fill-rule="evenodd" height="4" width="4" y="27" x="11" fill="url(#linearGradient3082)"/>
+</g>
 </svg>

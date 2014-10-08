@@ -1,88 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.1"
-   width="22"
-   height="22"
-   id="svg2985">
-  <defs
-     id="defs2987">
-    <linearGradient
-       id="linearGradient3851">
-      <stop
-         id="stop3853"
-         style="stop-color:#b4b6b2;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3855"
-         style="stop-color:#464844;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient3835">
-      <stop
-         id="stop3837"
-         style="stop-color:#c8c9c7;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3839"
-         style="stop-color:#a0a39d;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       x1="11.977068"
-       y1="10.250451"
-       x2="6.1041079"
-       y2="32.168636"
-       id="linearGradient3239"
-       xlink:href="#linearGradient3835"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-0.06566604,-10.13628)" />
-    <linearGradient
-       x1="11.977068"
-       y1="10.250451"
-       x2="6.1041079"
-       y2="32.168636"
-       id="linearGradient3241"
-       xlink:href="#linearGradient3851"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-0.06566604,-10.13628)" />
-  </defs>
-  <metadata
-     id="metadata2990">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="translate(0,-10)"
-     id="layer1">
-    <g
-       transform="matrix(-1,0,0,1,22.000037,0)"
-       id="g3219">
-      <path
-         d="m 9.3325714,4.3695172 -0.04434,2.8599484 -8.1742663,-1.25e-4 0.073072,7.6103234 8.0355489,-0.07322 c 0,0 -0.072916,2.745873 -0.073466,2.75 l 4.075113,-3.888717 c 0,0 -0.03618,3.774392 -0.03673,3.778519 l 6.5,-6.5 -6.5,-6.5 0.03673,3.6866869 z"
-         transform="translate(0,10)"
-         id="path3789"
-         style="fill:url(#linearGradient3241);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3239);stroke-width:1.50019085;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
-      <path
-         d="m 8.5,2.53125 0,3.96875 -7.999963,0 0,9 7.999963,0 c 0,0 7.803e-4,3.994001 0,4 l 4,-4 c 0,0 7.78e-4,3.994001 0,4 L 21,11 12.5,2.53125 c 0,0 -2.34e-4,3.9807 0,3.96875 l -0.03125,0 z"
-         transform="translate(0,10)"
-         id="rect3778"
-         style="fill:none;stroke:#555753;stroke-width:1.00007391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
-    </g>
-  </g>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="22" width="22" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<defs>
+<linearGradient id="linearGradient3239" x1="11.977" gradientUnits="userSpaceOnUse" y1="10.25" gradientTransform="translate(-0.06566604,-10.13628)" x2="6.1041" y2="32.169">
+<stop stop-color="#c8c9c7" offset="0"/>
+<stop stop-color="#a0a39d" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3241" x1="11.977" gradientUnits="userSpaceOnUse" y1="10.25" gradientTransform="translate(-0.06566604,-10.13628)" x2="6.1041" y2="32.169">
+<stop stop-color="#b4b6b2" offset="0"/>
+<stop stop-color="#464844" offset="1"/>
+</linearGradient>
+</defs>
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<g transform="translate(0,-10)">
+<g stroke-miterlimit="4" transform="matrix(-1,0,0,1,22.000037,0)">
+<path stroke-linejoin="miter" d="m9.3326,4.3695-0.04434,2.8599-8.1743-0.000125,0.073072,7.6103,8.0355-0.07322s-0.072916,2.7459-0.073466,2.75l4.0751-3.8887s-0.03618,3.7744-0.03673,3.7785l6.5-6.5-6.5-6.5,0.03673,3.6867z" fill-rule="evenodd" transform="translate(0,10)" stroke="url(#linearGradient3239)" stroke-dasharray="none" stroke-width="1.50019085" fill="url(#linearGradient3241)"/>
+<path stroke-linejoin="round" d="m8.5,2.5312,0,3.9688-8,0,0,9,8,0s0.0007803,3.994,0,4l4-4s0.000778,3.994,0,4l8.5-8.5-8.5-8.4688s-0.000234,3.9807,0,3.9688h-0.03125z" transform="translate(0,10)" stroke="#555753" stroke-linecap="round" stroke-width="1.00007391" fill="none"/>
+</g>
+</g>
 </svg>

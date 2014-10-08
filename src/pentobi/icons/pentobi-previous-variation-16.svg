@@ -1,86 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.1"
-   width="16"
-   height="16"
-   id="svg3810">
-  <defs
-     id="defs3812">
-    <linearGradient
-       id="linearGradient3851-8">
-      <stop
-         id="stop3853-7"
-         style="stop-color:#b4b6b2;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3855-5"
-         style="stop-color:#464844;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient3835-5">
-      <stop
-         id="stop3837-8"
-         style="stop-color:#c8c9c7;stop-opacity:1"
-         offset="0" />
-      <stop
-         id="stop3839-9"
-         style="stop-color:#a0a39d;stop-opacity:1"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       x1="22.602985"
-       y1="17.865791"
-       x2="0.58242929"
-       y2="24.015335"
-       id="linearGradient3016"
-       xlink:href="#linearGradient3835-5"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.717946,0,0,0.717946,-0.27435102,24.96162)" />
-    <linearGradient
-       x1="22.602985"
-       y1="17.865791"
-       x2="0.58242929"
-       y2="24.015335"
-       id="linearGradient3019"
-       xlink:href="#linearGradient3851-8"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.717946,0,0,0.717946,-0.27435102,24.96162)" />
-  </defs>
-  <metadata
-     id="metadata3815">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="translate(0,-32)"
-     id="layer1">
-    <g
-       transform="matrix(0,-1,1,0,-31.934754,48)"
-       id="g3790">
-      <path
-         d="m 9.25,35.408 0,1.842 -7.0394351,0.0057 0.050508,5.485613 L 9.25,42.75 c 0,0 3.949e-4,1.988037 0,1.991 l 4.806537,-4.717196 z"
-         id="path3789"
-         style="fill:url(#linearGradient3019);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3016);stroke-width:1.5;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
-      <path
-         d="m 8.5,33.63 0,2.87 -7,0 0,7 7,0 0,2.843 6.532063,-6.355049 z"
-         id="rect3778"
-         style="fill:none;stroke:#555753;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    </g>
-  </g>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<defs>
+<linearGradient id="linearGradient3016" x1="22.603" gradientUnits="userSpaceOnUse" y1="17.866" gradientTransform="matrix(0.717946,0,0,0.717946,-0.27435102,24.96162)" x2="0.58243" y2="24.015">
+<stop stop-color="#c8c9c7" offset="0"/>
+<stop stop-color="#a0a39d" offset="1"/>
+</linearGradient>
+<linearGradient id="linearGradient3019" x1="22.603" gradientUnits="userSpaceOnUse" y1="17.866" gradientTransform="matrix(0.717946,0,0,0.717946,-0.27435102,24.96162)" x2="0.58243" y2="24.015">
+<stop stop-color="#b4b6b2" offset="0"/>
+<stop stop-color="#464844" offset="1"/>
+</linearGradient>
+</defs>
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<g transform="translate(0,-32)">
+<g stroke-dasharray="none" stroke-miterlimit="4" transform="matrix(0,-1,1,0,-31.934754,48)">
+<path stroke-linejoin="miter" d="m9.25,35.408,0,1.842-7.0394,0.0057,0.050508,5.4856l6.9889,0.008s0.0003949,1.988,0,1.991l4.8065-4.7172z" fill-rule="evenodd" stroke="url(#linearGradient3016)" stroke-width="1.5" fill="url(#linearGradient3019)"/>
+<path stroke-linejoin="round" d="m8.5,33.63,0,2.87-7,0,0,7,7,0,0,2.843,6.5321-6.355z" stroke="#555753" stroke-linecap="round" stroke-width="1" fill="none"/>
+</g>
+</g>
 </svg>
