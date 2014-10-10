@@ -57,6 +57,7 @@ Item {
                     }
                     opacity: _imageOpacity
                     smooth: ! fastRendering
+                    antialiasing: isTrigon && ! fastRendering
                     transform: [
                         Rotation {
                             angle: isDownward ? -modelData + 60 : -modelData
