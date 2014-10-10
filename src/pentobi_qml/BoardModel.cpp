@@ -173,10 +173,12 @@ bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
     QPointF center(PieceModel::findCenter(m_bd, piecePoints, false));
     auto& geo = m_bd.get_geometry();
     MovePoints points;
+    int offX = static_cast<int>(round(coord.x() - center.x()));
+    int offY = static_cast<int>(round(coord.y() - center.y()));
     for (auto& p : piecePoints)
     {
-        qreal x = static_cast<int>(round(p.x - center.x() + coord.x()));
-        qreal y = static_cast<int>(round(p.y - center.y() + coord.y()));
+        int x = p.x + offX;
+        int y = p.y + offY;
         if (! geo.is_onboard(CoordPoint(x, y)))
             return false;
         auto pointType = geo.get_point_type(p.x, p.y);
