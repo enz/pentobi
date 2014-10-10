@@ -171,10 +171,12 @@ bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
             ((boardType == BoardType::trigon && newPointType == 1)
              || (boardType == BoardType::trigon_3 && newPointType == 0));
     QPointF center(PieceModel::findCenter(m_bd, piecePoints, false));
-    auto& geo = m_bd.get_geometry();
-    MovePoints points;
+    // Round y of center to a multiple of 0.5, works better in Trigon
+    center.setY(round(2 * center.y()) / 2);
     int offX = static_cast<int>(round(coord.x() - center.x()));
     int offY = static_cast<int>(round(coord.y() - center.y()));
+    auto& geo = m_bd.get_geometry();
+    MovePoints points;
     for (auto& p : piecePoints)
     {
         int x = p.x + offX;
