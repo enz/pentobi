@@ -59,8 +59,9 @@ Row {
     Image {
         visible: ! allPiecesFitInVisible
         width: 0.03 * root.width; height: root.height
-        source: theme.getImage("flick-right")
+        source: theme.getImage("flick-left")
         sourceSize { width: width; height: height }
+        mirror: true
         fillMode: Image.PreserveAspectFit
         opacity: flickable.atXEnd ? 0 : 1
     }

@@ -5,7 +5,6 @@
         <file>board-trigon.svg</file>
         <file>board-trigon-3.svg</file>
         <file>flick-left.svg</file>
-        <file>flick-right.svg</file>
         <file>Theme.qml</file>
     </qresource>
 </RCC>
