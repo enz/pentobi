@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import "GameDisplay.js" as Logic
 
-Item
+TransformableClassic
 {
     id: root
 
@@ -18,9 +18,9 @@ Item
 
     property string imageName: theme.getImage("square-" + colorName)
     property real pieceAngle: {
-        var flipX = Math.abs(pieceElements.flipXAngle % 360 - 180) < 90
-        var flipY = Math.abs(pieceElements.flipYAngle % 360 - 180) < 90
-        var angle = pieceElements.rotation
+        var flipX = Math.abs(flipXAngle % 360 - 180) < 90
+        var flipY = Math.abs(flipYAngle % 360 - 180) < 90
+        var angle = rotation
         if (flipX && flipY) angle += 180
         else if (flipX) angle += 90
         else if (flipY) angle += 270
@@ -36,37 +36,32 @@ Item
     // Make sure piece is above board during piece transition when its parent
     // is GameDisplay
     z: 1
+    transformState: pieceModel.state
 
-    TransformableClassic {
-        id: pieceElements
+    Repeater {
+        model: pieceModel.elements
 
-        state: pieceModel.state
-
-        Repeater {
-            model: pieceModel.elements
-
-            PieceElementClassic {
-                width: root.gridElementWidth
-                height: root.gridElementHeight
-                x: (modelData.x - pieceModel.center.x)
-                   * gridElementWidth
-                y: (modelData.y - pieceModel.center.y)
-                   * gridElementHeight
-            }
+        PieceElementClassic {
+            width: root.gridElementWidth
+            height: root.gridElementHeight
+            x: (modelData.x - pieceModel.center.x)
+               * gridElementWidth
+            y: (modelData.y - pieceModel.center.y)
+               * gridElementHeight
         }
-        Rectangle {
-            opacity: isMarked ? 0.5 : 0
-            color: colorName == "blue" || colorName == "red" ?
-                       "white" : "#333333"
-            width: 0.3 * gridElementHeight
-            height: width
-            radius: width / 2
-            x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-               * gridElementWidth + - width / 2
-            y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
-               * gridElementHeight - height / 2
-            Behavior on opacity { NumberAnimation { duration: 80 } }
-        }
+    }
+    Rectangle {
+        opacity: isMarked ? 0.5 : 0
+        color: colorName == "blue" || colorName == "red" ?
+                   "white" : "#333333"
+        width: 0.3 * gridElementHeight
+        height: width
+        radius: width / 2
+        x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
+           * gridElementWidth + - width / 2
+        y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
+           * gridElementHeight - height / 2
+        Behavior on opacity { NumberAnimation { duration: 80 } }
     }
 
     states: [

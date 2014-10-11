@@ -2,7 +2,7 @@ import QtQuick 2.0
 import "GameDisplay.js" as Logic
 
 // See PieceClassic.qml for comments
-Item
+TransformableTrigon
 {
     id: root
 
@@ -19,9 +19,9 @@ Item
 
     property string imageName: theme.getImage("triangle-" + colorName)
     property real pieceAngle: {
-        var flipX = Math.abs(pieceElements.flipXAngle % 360 - 180) < 90
-        var flipY = Math.abs(pieceElements.flipYAngle % 360 - 180) < 90
-        var angle = pieceElements.rotation
+        var flipX = Math.abs(flipXAngle % 360 - 180) < 90
+        var flipY = Math.abs(flipYAngle % 360 - 180) < 90
+        var angle = rotation
         if (flipX && flipY) angle += 180
         else if (flipX) angle += 120
         else if (flipY) angle += 300
@@ -36,45 +36,40 @@ Item
         else return ""
     }
     z: 1
+    transformState: pieceModel.state
 
     function _isDownward(x, y) {
         return x % 2 != 0 ? (y % 2 == 0) : (y % 2 != 0)
     }
 
-    TransformableTrigon {
-        id: pieceElements
+    Repeater {
+        model: pieceModel.elements
 
-        state: pieceModel.state
-
-        Repeater {
-            model: pieceModel.elements
-
-            PieceElementTrigon {
-                isDownward: _isDownward(modelData.x, modelData.y)
-                width: root._elementWidth
-                height: root.gridElementHeight
-                x: (modelData.x - pieceModel.center.x - 0.5)
-                   * gridElementWidth
-                y: (modelData.y - pieceModel.center.y)
-                   * gridElementHeight
-            }
+        PieceElementTrigon {
+            isDownward: _isDownward(modelData.x, modelData.y)
+            width: root._elementWidth
+            height: root.gridElementHeight
+            x: (modelData.x - pieceModel.center.x - 0.5)
+               * gridElementWidth
+            y: (modelData.y - pieceModel.center.y)
+               * gridElementHeight
         }
-        Rectangle {
-            opacity: isMarked ? 0.5 : 0
-            color: colorName == "blue" || colorName == "red" ?
-                       "white" : "#333333"
-            width: 0.3 * gridElementHeight
-            height: width
-            radius: width / 2
-            x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-               * gridElementWidth + - width / 2
-            y: (pieceModel.labelPos.y - pieceModel.center.y
-                + (root._isDownward(pieceModel.labelPos.x,
-                                    pieceModel.labelPos.y) ?
-                       1 / 3 : 2 / 3))
-               * gridElementHeight - height / 2
-            Behavior on opacity { NumberAnimation { duration: 80 } }
-        }
+    }
+    Rectangle {
+        opacity: isMarked ? 0.5 : 0
+        color: colorName == "blue" || colorName == "red" ?
+                   "white" : "#333333"
+        width: 0.3 * gridElementHeight
+        height: width
+        radius: width / 2
+        x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
+           * gridElementWidth + - width / 2
+        y: (pieceModel.labelPos.y - pieceModel.center.y
+            + (root._isDownward(pieceModel.labelPos.x,
+                                pieceModel.labelPos.y) ?
+                   1 / 3 : 2 / 3))
+           * gridElementHeight - height / 2
+        Behavior on opacity { NumberAnimation { duration: 80 } }
     }
 
     states: [
