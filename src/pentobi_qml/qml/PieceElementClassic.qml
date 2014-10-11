@@ -40,13 +40,7 @@ Item {
                         height: imageSourceHeight
                     }
                     opacity: _imageOpacity
-                    transform: Rotation {
-                        angle: -modelData
-                        origin {
-                            x: width / 2
-                            y: height / 2
-                        }
-                    }
+                    rotation: -modelData
                 }
             }
         }
