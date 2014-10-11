@@ -39,7 +39,7 @@ Row {
         width: (allPiecesFitInVisible ? 1 : 0.94) * root.width
         height: parent.height
         contentWidth: pieceList.columns * root.pieceAreaSize
-        clip: true
+        clip: ! allPiecesFitInVisible
 
         PieceList {
             id: pieceList
