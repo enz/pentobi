@@ -51,6 +51,7 @@ Item {
                         width: imageSourceWidth
                         height: imageSourceHeight
                     }
+                    asynchronous: true
                     opacity: _imageOpacity
                     antialiasing: true
                     transform: [

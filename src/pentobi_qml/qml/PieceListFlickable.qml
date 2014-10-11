@@ -23,6 +23,7 @@ Row {
         width: 0.03 * root.width; height: root.height
         source: theme.getImage("flick-left")
         sourceSize { width: width; height: height }
+        asynchronous: true
         fillMode: Image.PreserveAspectFit
         opacity: flickable.atXBeginning ? 0 : 1
     }
@@ -61,6 +62,7 @@ Row {
         width: 0.03 * root.width; height: root.height
         source: theme.getImage("flick-left")
         sourceSize { width: width; height: height }
+        asynchronous: true
         mirror: true
         fillMode: Image.PreserveAspectFit
         opacity: flickable.atXEnd ? 0 : 1

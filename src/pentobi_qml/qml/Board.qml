@@ -85,5 +85,6 @@ Item {
             }
         }
         sourceSize { width: _boardWidth; height: _boardHeight }
+        asynchronous: true
     }
 }
