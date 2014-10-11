@@ -56,8 +56,7 @@ Item {
                         height: imageSourceHeight
                     }
                     opacity: _imageOpacity
-                    smooth: ! fastRendering
-                    antialiasing: isTrigon && ! fastRendering
+                    antialiasing: isTrigon
                     transform: [
                         Rotation {
                             angle: isDownward ? -modelData + 60 : -modelData

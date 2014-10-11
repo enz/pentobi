@@ -25,7 +25,6 @@ Item
 
     property string imageName:
         theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
-    property bool fastRendering
     property real pieceAngle: {
         var flipX = Math.abs(pieceElements.flipXAngle % 360 - 180) < 90
         var flipY = Math.abs(pieceElements.flipYAngle % 360 - 180) < 90
@@ -161,8 +160,6 @@ Item
 
             SequentialAnimation {
                 PropertyAction {
-                    target: root; property: "fastRendering"; value: true }
-                PropertyAction {
                     target: parentPieceSelectorArea
                     property: "visible"; value: true
                 }
@@ -177,8 +174,6 @@ Item
                 PropertyAction {
                     target: parentPieceSelectorArea; property: "visible"
                 }
-                PropertyAction {
-                    target: root; property: "fastRendering"; value: false }
             }
         }
 }
