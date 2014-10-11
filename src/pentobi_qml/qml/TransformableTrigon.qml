@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+// See TransformableClassic.qml for comments
 Item {
     id: root
 
@@ -25,10 +26,6 @@ Item {
             PropertyChanges { target: root; rotation: 60 }
         },
         State {
-            name: "rot90"
-            PropertyChanges { target: root; rotation: 90 }
-        },
-        State {
             name: "rot120"
             PropertyChanges { target: root; rotation: 120 }
         },
@@ -41,10 +38,6 @@ Item {
             PropertyChanges { target: root; rotation: 240 }
         },
         State {
-            name: "rot270"
-            PropertyChanges { target: root; rotation: 270 }
-        },
-        State {
             name: "rot300"
             PropertyChanges { target: root; rotation: 300 }
         },
@@ -55,11 +48,6 @@ Item {
         State {
             name: "rot60Flip"
             PropertyChanges { target: root; rotation: 60 }
-            PropertyChanges { target: flipX; angle: 180 }
-        },
-        State {
-            name: "rot90Flip"
-            PropertyChanges { target: root; rotation: 90 }
             PropertyChanges { target: flipX; angle: 180 }
         },
         State {
@@ -78,28 +66,20 @@ Item {
             PropertyChanges { target: flipX; angle: 180 }
         },
         State {
-            name: "rot270Flip"
-            PropertyChanges { target: root; rotation: 270 }
-            PropertyChanges { target: flipX; angle: 180 }
-        },
-        State {
             name: "rot300Flip"
             PropertyChanges { target: root; rotation: 300 }
             PropertyChanges { target: flipX; angle: 180 }
         }
     ]
 
-    // Unique states are defined by rotating and flipping around the x axis
-    // but for some transitions, the shortest visual animation is flipping
-    // around the y axis.
     transitions: [
         Transition {
-            from: ",rot60,rot90,rot120,rot180,rot240,rot270,rot300"; to: from
+            from: ",rot60,rot120,rot180,rot240,rot300"; to: from
             enabled: transitionsEnabled
             PieceRotationAnimation { }
         },
         Transition {
-            from: "flip,rot60Flip,rot90Flip,rot120Flip,rot180Flip,rot240Flip,rot270Flip,rot300Flip"; to: from
+            from: "flip,rot60Flip,rot120Flip,rot180Flip,rot240Flip,rot300Flip"; to: from
             enabled: transitionsEnabled
             PieceRotationAnimation { }
         },
@@ -110,11 +90,6 @@ Item {
         },
         Transition {
             from: "rot60,rot60Flip"; to: from
-            enabled: transitionsEnabled
-            PieceFlipAnimation { target: flipX }
-        },
-        Transition {
-            from: "rot90,rot90Flip"; to: from
             enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
@@ -130,11 +105,6 @@ Item {
         },
         Transition {
             from: "rot240,rot240Flip"; to: from
-            enabled: transitionsEnabled
-            PieceFlipAnimation { target: flipX }
-        },
-        Transition {
-            from: "rot270,rot270Flip"; to: from
             enabled: transitionsEnabled
             PieceFlipAnimation { target: flipX }
         },
@@ -157,18 +127,6 @@ Item {
         },
         Transition {
             from: "rot60,rot240Flip"; to: from
-            enabled: transitionsEnabled
-            SequentialAnimation {
-                PropertyAction { property: "rotation"; value: rotation }
-                PropertyAction {
-                    target: flipX; property: "angle"; value: flipX.angle
-                }
-                PieceFlipAnimation { target: flipY; to: 180 }
-                PropertyAction { target: flipY; property: "angle"; value: 0 }
-            }
-        },
-        Transition {
-            from: "rot90,rot270Flip"; to: from
             enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }
@@ -205,18 +163,6 @@ Item {
         },
         Transition {
             from: "rot240,rot60Flip"; to: from
-            enabled: transitionsEnabled
-            SequentialAnimation {
-                PropertyAction { property: "rotation"; value: rotation }
-                PropertyAction {
-                    target: flipX; property: "angle"; value: flipX.angle
-                }
-                PieceFlipAnimation { target: flipY; to: 180 }
-                PropertyAction { target: flipY; property: "angle"; value: 0 }
-            }
-        },
-        Transition {
-            from: "rot270,rot90Flip"; to: from
             enabled: transitionsEnabled
             SequentialAnimation {
                 PropertyAction { property: "rotation"; value: rotation }

@@ -1,21 +1,18 @@
 import QtQuick 2.0
 
-// Piece element (triangle) with pseudo-3D effect.
-// Simulates lighting by using different images for the lighting at different
-// rotations and interpolating between them with an opacity animation.
+// See PieceElementClassic.qml for comments
 Item {
     id: root
 
     property bool isDownward
 
     Repeater {
-        // Image rotation
         model: [ 0, 120, 240 ]
 
         Item {
             property real _imageOpacity: {
                 var angle = pieceAngle - modelData
-                angle = ((angle % 360) + 360) % 360 // JS modulo bug
+                angle = ((angle % 360) + 360) % 360
                 if (isDownward) {
                     if (angle >= 300) return 1
                     if (angle > 240)

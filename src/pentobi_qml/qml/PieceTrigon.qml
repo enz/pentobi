@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import "GameDisplay.js" as Logic
 
+// See PieceClassic.qml for comments
 Item
 {
     id: root
@@ -34,15 +35,13 @@ Item
         else if (parentPieceSelectorArea != null) return "unplayed"
         else return ""
     }
-    // Make sure piece is above board during piece transition when its parent
-    // is GameDisplay
     z: 1
 
     function _isDownward(x, y) {
         return x % 2 != 0 ? (y % 2 == 0) : (y % 2 != 0)
     }
 
-    Transformable {
+    TransformableTrigon {
         id: pieceElements
 
         state: pieceModel.state

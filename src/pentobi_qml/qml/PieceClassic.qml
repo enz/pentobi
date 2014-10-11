@@ -37,7 +37,7 @@ Item
     // is GameDisplay
     z: 1
 
-    Transformable {
+    TransformableClassic {
         id: pieceElements
 
         state: pieceModel.state
