@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_qml/qml/Piece.qml
+/** @file pentobi_qml/qml/PieceTrigon.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -12,7 +12,6 @@ Item
     id: root
 
     property var pieceModel
-    property bool isTrigon
     property string colorName
     property bool isPicked
     property Item parentPieceSelectorArea
@@ -23,26 +22,17 @@ Item
     property real gridElementHeight
     property bool isMarked
 
-    property string imageName:
-        theme.getImage((isTrigon ? "triangle-" : "square-") + colorName)
+    property string imageName: theme.getImage("triangle-" + colorName)
     property real pieceAngle: {
         var flipX = Math.abs(pieceElements.flipXAngle % 360 - 180) < 90
         var flipY = Math.abs(pieceElements.flipYAngle % 360 - 180) < 90
         var angle = pieceElements.rotation
-        if (isTrigon) {
-            if (flipX && flipY) angle += 180
-            else if (flipX) angle += 120
-            else if (flipY) angle += 300
-        }
-        else {
-            if (flipX && flipY) angle += 180
-            else if (flipX) angle += 90
-            else if (flipY) angle += 270
-        }
+        if (flipX && flipY) angle += 180
+        else if (flipX) angle += 120
+        else if (flipY) angle += 300
         return angle
     }
-    property real _elementWidth:
-        isTrigon ? 2 * gridElementWidth : gridElementWidth
+    property real _elementWidth: 2 * gridElementWidth
 
     state: {
         if (isPicked) return "picked"
@@ -66,14 +56,11 @@ Item
         Repeater {
             model: pieceModel.elements
 
-            PieceElement {
-                isDownward:
-                    isTrigon && _isDownward(modelData.x, modelData.y)
+            PieceElementTrigon {
+                isDownward: _isDownward(modelData.x, modelData.y)
                 width: root._elementWidth
                 height: root.gridElementHeight
-                x: (isTrigon ?
-                        modelData.x - pieceModel.center.x - 0.5 :
-                        modelData.x - pieceModel.center.x)
+                x: (modelData.x - pieceModel.center.x - 0.5)
                    * gridElementWidth
                 y: (modelData.y - pieceModel.center.y)
                    * gridElementHeight
@@ -89,11 +76,9 @@ Item
             x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
                * gridElementWidth + - width / 2
             y: (pieceModel.labelPos.y - pieceModel.center.y
-                + (isTrigon ?
-                       (root._isDownward(pieceModel.labelPos.x,
-                                         pieceModel.labelPos.y) ?
-                            1 / 3 : 2 / 3)
-                     : 0.5))
+                + (root._isDownward(pieceModel.labelPos.x,
+                                    pieceModel.labelPos.y) ?
+                       1 / 3 : 2 / 3))
                * gridElementHeight - height / 2
             Behavior on opacity { NumberAnimation { duration: 80 } }
         }
@@ -104,14 +89,8 @@ Item
             name: "unplayed"
             PropertyChanges {
                 target: root
-                // Avoid fractional sizes for square piece elements
-                gridElementWidth:
-                    isTrigon ?
-                        0.13 * parentPieceSelectorArea.width :
-                        Math.floor(0.2 * parentPieceSelectorArea.width)
-                gridElementHeight: isTrigon ?
-                                       Math.sqrt(3) * gridElementWidth :
-                                       gridElementWidth
+                gridElementWidth: 0.13 * parentPieceSelectorArea.width
+                gridElementHeight: Math.sqrt(3) * gridElementWidth
             }
             PropertyChanges { target: parentPieceSelectorArea; visible: true }
             ParentChange {

@@ -9,9 +9,11 @@ function createPieces() {
     destroyPieces(_pieces1)
     destroyPieces(_pieces2)
     destroyPieces(_pieces3)
-    var component = Qt.createComponent("Piece.qml")
+    var file = (boardModel.gameVariant.indexOf("trigon") >= 0) ?
+                "PieceTrigon.qml" : "PieceClassic.qml"
+    var component = Qt.createComponent(file)
     if (component.status != Component.Ready)
-        throw "Could not create component Piece.qml"
+        throw "Could not create component " + file
     _pieces0 = createColorPieces(component, boardModel.pieceModels0)
     _pieces1 = createColorPieces(component, boardModel.pieceModels1)
     _pieces2 = createColorPieces(component, boardModel.pieceModels2)
@@ -37,7 +39,6 @@ function createColorPieces(component, pieceModels) {
         default: colorName = "green"; break
         }
     var properties = {
-        "isTrigon": (gameVariant.indexOf("trigon") >= 0),
         "colorName": colorName,
         "isPicked": Qt.binding(function() { return (this == pickedPiece) }),
         "parentPieceManipulator": pieceManipulator,

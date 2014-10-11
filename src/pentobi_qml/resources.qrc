@@ -7,14 +7,16 @@
         <file>qml/Menu.qml</file>
         <file>qml/MenuItemLevel.qml</file>
         <file>qml/Message.qml</file>
-        <file>qml/Piece.qml</file>
-        <file>qml/PieceElement.qml</file>
+        <file>qml/PieceClassic.qml</file>
+        <file>qml/PieceElementClassic.qml</file>
+        <file>qml/PieceElementTrigon.qml</file>
         <file>qml/PieceFlipAnimation.qml</file>
         <file>qml/PieceList.qml</file>
         <file>qml/PieceListFlickable.qml</file>
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
         <file>qml/PieceSelector.qml</file>
+        <file>qml/PieceTrigon.qml</file>
         <file>qml/ScoreDisplay.qml</file>
         <file>qml/ScoreElement.qml</file>
         <file>qml/ScoreElement2.qml</file>
