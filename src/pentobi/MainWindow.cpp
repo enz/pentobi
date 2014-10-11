@@ -3268,7 +3268,7 @@ void MainWindow::setRated(bool isRated)
         statusBar()->addWidget(m_ratedGameLabelText);
         m_ratedGameLabelText->show();
     }
-    else
+    else if (m_ratedGameLabelText->isVisible())
         statusBar()->removeWidget(m_ratedGameLabelText);
 }
 
@@ -3597,7 +3597,10 @@ void MainWindow::updateMoveNumber()
             .arg(move).arg(totalMoves).arg(variation.c_str());
     }
     if (text.isEmpty())
-        statusBar()->removeWidget(m_moveNumber);
+    {
+        if (m_moveNumber->isVisible())
+            statusBar()->removeWidget(m_moveNumber);
+    }
     else
     {
         m_moveNumber->setText(text);
