@@ -1,9 +1,3 @@
-//-----------------------------------------------------------------------------
-/** @file pentobi_qml/qml/GameDisplay.js
-    @author Markus Enzenberger
-    @copyright GNU General Public License version 3 or later */
-//-----------------------------------------------------------------------------
-
 function createPieces() {
     destroyPieces(_pieces0)
     destroyPieces(_pieces1)

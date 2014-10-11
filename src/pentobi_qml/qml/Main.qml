@@ -1,9 +1,3 @@
-//-----------------------------------------------------------------------------
-/** @file pentobi_qml/qml/Main.qml
-    @author Markus Enzenberger
-    @copyright GNU General Public License version 3 or later */
-//-----------------------------------------------------------------------------
-
 import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Dialogs 1.2

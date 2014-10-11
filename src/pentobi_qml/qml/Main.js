@@ -1,9 +1,3 @@
-//-----------------------------------------------------------------------------
-/** @file pentobi_qml/qml/Main.js
-    @author Markus Enzenberger
-    @copyright GNU General Public License version 3 or later */
-//-----------------------------------------------------------------------------
-
 function cancelGenMove() {
     playerModel.cancelGenMove()
     gameDisplay.busyIndicatorRunning = false

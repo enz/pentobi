@@ -1,9 +1,3 @@
-//-----------------------------------------------------------------------------
-/** @file pentobi_qml/qml/PieceElementTrigon.qml
-    @author Markus Enzenberger
-    @copyright GNU General Public License version 3 or later */
-//-----------------------------------------------------------------------------
-
 import QtQuick 2.0
 
 // Piece element (triangle) with pseudo-3D effect.

@@ -1,9 +1,3 @@
-//-----------------------------------------------------------------------------
-/** @file pentobi_qml/qml/PieceFlipAnimation.qml
-    @author Markus Enzenberger
-    @copyright GNU General Public License version 3 or later */
-//-----------------------------------------------------------------------------
-
 import QtQuick 2.0
 
 /* Note: This type could be unified with PieceRotationAnimation if we use
