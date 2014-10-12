@@ -10,10 +10,10 @@
 </cc:Work>
 </rdf:RDF>
 </metadata>
-<path d="m0,0,280,0,0,280-280,0z" fill="#aea7ac"/>
-<g id="g3956" transform="translate(85.871994,-902.9029)">
-<path d="m-65.9,903-20,0,0,20,1-1,0-18,18,0z" fill="#82777e"/>
-<path d="m-65.9,903-1,1,0,18-18,0-1,1,20,0z" fill="#cac6c9"/>
+<path d="m0,0,280,0,0,280-280,0z" fill="#aaa3a8"/>
+<g id="g3956" fill-opacity="0.23529412" transform="translate(85.871994,-902.9029)">
+<path d="m-65.9,903-20,0,0,20,1-1,0-18,18,0z" fill="#000"/>
+<path d="m-65.9,903-1,1,0,18-18,0-1,1,20,0z" fill="#FFF"/>
 </g>
 <use xlink:href="#g3956" transform="translate(-1.8554687e-8,20.00009)" height="280" width="280" y="0" x="0"/>
 <use xlink:href="#g3956" transform="translate(-1.8554687e-8,40.000175)" height="280" width="280" y="0" x="0"/>
@@ -210,6 +210,6 @@
 <use xlink:href="#g3956" transform="translate(260.00005,220.00096)" height="280" width="280" y="0" x="0"/>
 <use xlink:href="#g3956" transform="translate(260.00005,240.00105)" height="280" width="280" y="0" x="0"/>
 <use xlink:href="#g3956" transform="translate(260.00005,260.00114)" height="280" width="280" y="0" x="0"/>
-<path d="m94,90a4,4,0,0,1,-8,0,4,4,0,1,1,8,0z" fill="#0073cf" fill-rule="evenodd"/>
-<path d="m194,190a4,4,0,0,1,-8,0,4,4,0,1,1,8,0z" fill="#00c000" fill-rule="evenodd"/>
+<path fill-rule="evenodd" d="m94,90a4,4,0,0,1,-8,0,4,4,0,1,1,8,0z" fill="#0073cf"/>
+<path fill-rule="evenodd" d="m194,190a4,4,0,0,1,-8,0,4,4,0,1,1,8,0z" fill="#00c000"/>
 </svg>

@@ -7,8 +7,8 @@
 import QtQuick 2.0
 
 QtObject {
-    property color backgroundGradientColor1: "#DBD7D5"
-    property color backgroundGradientColor2: "#C2BBB8"
+    property color backgroundGradientColor1: "#CCCDD2"
+    property color backgroundGradientColor2: "#9B9BA0"
     property color fontColorScore: "#5A5755"
     property color fontColorMessage: "#F5F1EF"
     property color backgroundColorMessage: "#64605F"

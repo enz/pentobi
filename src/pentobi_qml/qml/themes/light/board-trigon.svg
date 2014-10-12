@@ -10,15 +10,16 @@
 </cc:Work>
 </rdf:RDF>
 </metadata>
-<path d="M90,0,270,0,360,180,270,360,90,360,0,180z" fill="#aea7ac"/>
-<g id="g5421" transform="translate(-75,-140)">
-<path d="m165,140,0,2,8.27,16.845-16.538,0l-1.73,1.16h20z" fill="#cac6c9"/>
-<path d="m155,160,1.7321-1.1547,8.2679-16.845,0-1.9999z" fill="#82777e"/>
+<path d="M90,0,0,180,90,360,270,360,360,180,270,0z" fill="#aaa3a8"/>
+<g id="g5421" fill-opacity="0.23529412" transform="translate(-75,-140)">
+<path d="m165,140,0,2,8.27,16.845-16.538,0l-1.73,1.16h20z" fill="#FFF"/>
+<path d="m155,160,1.7321-1.1547,8.2679-16.845,0-1.9999z" fill="#000"/>
 </g>
 <g id="g4065" transform="translate(-43.73,-140.15467)">
 <g transform="matrix(-1,0,0,-0.99999996,308.73,300.15466)">
-<path d="m165,140,0,2,8.27,16.845-16.538,0l-1.73,1.16h20z" fill="#82777e"/>
+<path fill-opacity="0.23529412" d="m165,140,0,2,8.27,16.845-16.538,0l-1.73,1.16h20z" fill="#000"/>
 </g>
+<path fill-opacity="0.23529412" d="m153.73,140.15-1.7321,1.1547-8.2679,16.845,0,1.9999z" fill="#FFF"/>
 </g>
 <use xlink:href="#g4065" transform="translate(-90,180.00004)" height="360" width="360" y="0" x="0"/>
 <use xlink:href="#g4065" transform="translate(-80,200.00004)" height="360" width="360" y="0" x="0"/>
@@ -504,7 +505,7 @@
 <use xlink:href="#g5421" transform="translate(240,160.00009)" height="360" width="360" y="0" x="0"/>
 <use xlink:href="#g5421" transform="translate(250,180.0001)" height="360" width="360" y="0" x="0"/>
 <use xlink:href="#g5421" transform="translate(260,160.00009)" height="360" width="360" y="0" x="0"/>
-<path id="path3184-9-0" d="m182.65,73.29a2.6517,3.0458,0,0,1,-5.3034,0,2.6517,3.0458,0,1,1,5.3034,0z" fill="#82777e" fill-rule="evenodd"/>
+<path id="path3184-9-0" d="m182.65,73.29a2.6517,3.0458,0,0,1,-5.3034,0,2.6517,3.0458,0,1,1,5.3034,0z" fill-opacity="0.23529412" fill-rule="evenodd" fill="#000"/>
 <use xlink:href="#path3184-9-0" transform="translate(-80,53.900156)" height="360" width="360" y="0" x="0"/>
 <use xlink:href="#path3184-9-0" transform="translate(80,53.900194)" height="360" width="360" y="0" x="0"/>
 <use xlink:href="#path3184-9-0" transform="translate(-80,159.85521)" height="360" width="360" y="0" x="0"/>
