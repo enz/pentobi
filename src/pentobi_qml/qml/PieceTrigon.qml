@@ -38,15 +38,13 @@ TransformableTrigon
     z: 1
     transformState: pieceModel.state
 
-    function _isDownward(x, y) {
-        return x % 2 != 0 ? (y % 2 == 0) : (y % 2 != 0)
-    }
+    function _isDownward(pos) { return (pos.x % 2 == 0) != (pos.y % 2 == 0) }
 
     Repeater {
         model: pieceModel.elements
 
         PieceElementTrigon {
-            isDownward: _isDownward(modelData.x, modelData.y)
+            isDownward: _isDownward(modelData)
             width: root._elementWidth
             height: root.gridElementHeight
             x: (modelData.x - pieceModel.center.x - 0.5)
@@ -65,9 +63,7 @@ TransformableTrigon
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
            * gridElementWidth + - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y
-            + (root._isDownward(pieceModel.labelPos.x,
-                                pieceModel.labelPos.y) ?
-                   1 / 3 : 2 / 3))
+            + (root._isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
            * gridElementHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
     }
