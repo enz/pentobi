@@ -47,10 +47,8 @@ TransformableTrigon
             isDownward: _isDownward(modelData)
             width: root._elementWidth
             height: root.gridElementHeight
-            x: (modelData.x - pieceModel.center.x - 0.5)
-               * gridElementWidth
-            y: (modelData.y - pieceModel.center.y)
-               * gridElementHeight
+            x: (modelData.x - pieceModel.center.x - 0.5) * gridElementWidth
+            y: (modelData.y - pieceModel.center.y) * gridElementHeight
         }
     }
     Rectangle {

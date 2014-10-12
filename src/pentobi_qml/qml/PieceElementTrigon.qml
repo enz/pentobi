@@ -48,10 +48,7 @@ Item {
                     transform: [
                         Rotation {
                             angle: isDownward ? -modelData + 60 : -modelData
-                            origin {
-                                x: width / 2
-                                y: 2 * height / 3
-                            }
+                            origin { x: width / 2; y: 2 * height / 3 }
                         },
                         Translate { y: isDownward ? -height / 3 : 0 }
                     ]
