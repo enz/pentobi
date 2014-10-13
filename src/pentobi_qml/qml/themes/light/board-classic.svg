@@ -10,8 +10,8 @@
 </cc:Work>
 </rdf:RDF>
 </metadata>
-<path d="m0,0,280,0,0,280-280,0z" fill="#aaa3a8"/>
-<g id="x" fill-opacity="0.23529412" transform="matrix(0.69999986,0,0,0.69999693,60.110384,-632.0284)">
+<path d="m0,0,280,0,0,280-280,0z" fill="#9a9298"/>
+<g id="x" transform="matrix(0.69999986,0,0,0.69999693,60.110384,-632.0284)" fill-opacity="0.23529412">
 <path d="m-65.9,903-20,0,0,20,1-1,0-18,18,0z" fill="#000"/>
 <path d="m-65.9,903-1,1,0,18-18,0-1,1,20,0z" fill="#FFF"/>
 </g>
@@ -414,8 +414,8 @@
 <use xlink:href="#x" transform="translate(266,238)"/>
 <use xlink:href="#x" transform="translate(266,252)"/>
 <use xlink:href="#x" transform="translate(266,266)"/>
-<path fill-rule="evenodd" d="m10,273a3,3,0,0,1,-6,0,3,3,0,1,1,6,0z" fill="#00c000"/>
-<path fill-rule="evenodd" d="m6.78,4a3,3,0,0,0,-2.78,3,3,3,0,0,0,6,0,3,3,0,0,0,-3.22,-3z" fill="#0073cf"/>
-<path fill-rule="evenodd" d="m276,7a3,3,0,0,1,-6,0,3,3,0,1,1,6,0z" fill="#ebcd23"/>
-<path fill-rule="evenodd" d="m276,273a3,3,0,0,1,-6,0,3,3,0,1,1,6,0z" fill="#e63e2c"/>
+<path fill="#00c000" d="m10,273a3,3,0,0,1,-6,0,3,3,0,1,1,6,0z" fill-rule="evenodd"/>
+<path fill="#0073cf" d="m6.78,4a3,3,0,0,0,-2.78,3,3,3,0,0,0,6,0,3,3,0,0,0,-3.22,-3z" fill-rule="evenodd"/>
+<path fill="#ebcd23" d="m276,7a3,3,0,0,1,-6,0,3,3,0,1,1,6,0z" fill-rule="evenodd"/>
+<path fill="#e63e2c" d="m276,273a3,3,0,0,1,-6,0,3,3,0,1,1,6,0z" fill-rule="evenodd"/>
 </svg>

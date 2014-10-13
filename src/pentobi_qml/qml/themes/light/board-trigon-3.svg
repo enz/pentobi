@@ -10,16 +10,16 @@
 </cc:Work>
 </rdf:RDF>
 </metadata>
-<path d="M0,160,80,0,240,0,320,160,240,320,80,320z" fill="#aaa3a8"/>
-<g id="g5421" fill-opacity="0.23529412" transform="translate(-85,-140)">
+<path d="M0,160,80,0,240,0,320,160,240,320,80,320z" fill="#9a9298"/>
+<g id="g5421" transform="translate(-85,-140)" fill-opacity="0.23529412">
 <path d="m165,140,0,2,8.27,16.845-16.538,0l-1.73,1.16h20z" fill="#FFF"/>
 <path d="m155,160,1.7321-1.1547,8.2679-16.845,0-1.9999z" fill="#000"/>
 </g>
 <g id="x" transform="translate(-53.73,-140.15484)">
 <g transform="matrix(-1,0,0,-0.99999996,308.73,300.15466)">
-<path fill-opacity="0.23529412" d="m165,140,0,2,8.27,16.845-16.538,0l-1.73,1.16h20z" fill="#000"/>
+<path fill="#000" d="m165,140,0,2,8.27,16.845-16.538,0l-1.73,1.16h20z" fill-opacity="0.23529412"/>
 </g>
-<path fill-opacity="0.23529412" d="m153.73,140.15-1.7321,1.1547-8.2679,16.845,0,1.9999z" fill="#FFF"/>
+<path fill="#FFF" d="m153.73,140.15-1.7321,1.1547-8.2679,16.845,0,1.9999z" fill-opacity="0.23529412"/>
 </g>
 <use xlink:href="#x" transform="translate(-80,160)"/>
 <use xlink:href="#x" transform="translate(-70,180)"/>
@@ -403,7 +403,7 @@
 <use xlink:href="#g5421" transform="translate(210,140)"/>
 <use xlink:href="#g5421" transform="translate(220,160)"/>
 <use xlink:href="#g5421" transform="translate(230,140)"/>
-<path id="path3184-9-0" d="m162.65,53.29a2.6517,3.0458,0,0,1,-5.3034,0,2.6517,3.0458,0,1,1,5.3034,0z" fill-opacity="0.23529412" fill-rule="evenodd" fill="#000"/>
+<path id="path3184-9-0" fill-rule="evenodd" fill-opacity="0.23529412" fill="#000" d="m162.65,53.29a2.6517,3.0458,0,0,1,-5.3034,0,2.6517,3.0458,0,1,1,5.3034,0z"/>
 <use xlink:href="#path3184-9-0" transform="translate(-80,53.900156)"/>
 <use xlink:href="#path3184-9-0" transform="translate(80,53.900194)"/>
 <use xlink:href="#path3184-9-0" transform="translate(-80,159.85521)"/>
