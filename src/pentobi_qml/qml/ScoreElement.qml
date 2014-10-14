@@ -34,6 +34,6 @@ Item {
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
         font.underline: isFinal
-        font.pixelSize: 1.7 * pointSize
+        font.pixelSize: 1.9 * pointSize
     }
 }
