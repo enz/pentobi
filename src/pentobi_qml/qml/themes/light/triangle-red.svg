@@ -10,8 +10,8 @@
 </rdf:RDF>
 </metadata>
 <g transform="translate(0,-1032.3622)">
-<path d="m10,1032.4,10,20-20,0z" fill-rule="evenodd" fill="#e63e2c"/>
+<path fill="#e63e2c" d="m10,1032.4,10,20-20,0z" fill-rule="evenodd"/>
 </g>
-<path d="M0,20,1.7321,18.845,10,1.9999,10-0.00001z" fill-opacity="0.19607843" fill="#FFF"/>
-<path d="m0,20,1.7228-1.155,16.5472,0l-8.27-16.845v-2l10,20z" fill-opacity="0.09803922" fill="#000"/>
+<path fill="#FFF" d="M0,20,1.7321,18.845,10,1.9999,10-0.00001z" fill-opacity="0.19607843"/>
+<path fill="#000" d="m0,20,1.7228-1.155,16.5472,0l-8.27-16.845v-2l10,20z" fill-opacity="0.09803922"/>
 </svg>
