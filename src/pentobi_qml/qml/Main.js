@@ -4,6 +4,8 @@ function cancelGenMove() {
 }
 
 function changeGameVariant(gameVariant, verifyAbortGame) {
+    if (boardModel.gameVariant === gameVariant)
+        return
     cancelGenMove()
     if (! boardModel.isBoardEmpty && ! boardModel.isGameOver &&
             verifyAbortGame) {
