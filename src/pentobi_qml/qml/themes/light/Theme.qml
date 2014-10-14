@@ -7,12 +7,12 @@
 import QtQuick 2.0
 
 QtObject {
-    property color backgroundGradientColor1: "#BEBBBB"
-    property color backgroundGradientColor2: "#8C8A89"
+    property color backgroundGradientColor1: "#F0ECEF"
+    property color backgroundGradientColor2: "#DCD8DB"
     property color fontColorScore: "#5A5755"
     property color fontColorMessage: "#F5F1EF"
     property color backgroundColorMessage: "#64605F"
-    property color colorBlue: "#0073CF"
+    property color colorBlue: "#0077D2"
     property color colorYellow: "#EBCD23"
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
