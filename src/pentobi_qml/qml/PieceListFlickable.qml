@@ -22,7 +22,7 @@ Row {
         id: flickLeftComponent
 
         Image {
-            source: theme.getImage("flick-left")
+            source: theme.getImage("flick")
             sourceSize { width: width; height: height }
             asynchronous: true
             fillMode: Image.PreserveAspectFit
@@ -77,7 +77,7 @@ Row {
         Image {
             visible: ! allPiecesFitInVisible
             width: 0.03 * root.width; height: root.height
-            source: theme.getImage("flick-left")
+            source: theme.getImage("flick")
             mirror: true
             sourceSize { width: width; height: height }
             asynchronous: true
