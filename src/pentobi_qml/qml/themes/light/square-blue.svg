@@ -12,6 +12,6 @@
 <g transform="translate(0,-1032.3623)">
 <rect fill-rule="evenodd" height="20" width="20" y="1032.4" x="0" fill="#0077d2"/>
 </g>
-<path fill="#000" d="M0,20,20,20,20,0,19,1,19,19,1,19z" fill-opacity="0.15686275"/>
-<path fill="#FFF" d="M0,20,1,19,1,1,19,1,20,0,0,0z" fill-opacity="0.23529412"/>
+<path fill-opacity="0.09803922" d="M0,20,20,20,20,0,19,1,19,19,1,19z" fill="#000"/>
+<path fill-opacity="0.15686275" d="M0,20,1,19,1,1,19,1,20,0,0,0z" fill="#FFF"/>
 </svg>
