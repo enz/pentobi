@@ -16,7 +16,10 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
     }
     callDelayTimer.call(function() {
         initGameVariant(gameVariant)
+        gameDisplay.transitionsEnabled = false
         initComputerColors()
+        gameDisplay.showToPlay()
+        gameDisplay.transitionsEnabled = true
     })
 }
 
@@ -259,6 +262,7 @@ function newGame(verifyAbortGame)
     hideComputerColorDialog()
     gameDisplay.transitionsEnabled = false
     boardModel.newGame()
+    gameDisplay.showToPlay()
     gameDisplay.transitionsEnabled = true
     initComputerColors()
 }

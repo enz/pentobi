@@ -25,6 +25,7 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function showMoveHint(move) { Logic.showMoveHint(move) }
+    function showToPlay() { pieceSelector.showToPlay() }
     function showPiecesImmediately(color) {
         pieceSelector.showColorImmediately(color)
     }

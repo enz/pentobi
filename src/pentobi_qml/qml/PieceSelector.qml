@@ -24,8 +24,7 @@ Item {
         showColorAnimation.stop()
         flickable.contentY = height * color
     }
-
-    onToPlayChanged: {
+    function showToPlay() {
         if (! transitionsEnabled) {
             showColorImmediately(toPlay)
             return
@@ -36,6 +35,7 @@ Item {
         showColorAnimation.restart()
     }
 
+    onToPlayChanged: showToPlay()
 
     Flickable {
         id: flickable
