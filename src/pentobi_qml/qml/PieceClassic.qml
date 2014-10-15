@@ -41,7 +41,7 @@ TransformableClassic
     Repeater {
         model: pieceModel.elements
 
-        PieceElementClassic {
+        Square {
             width: root.gridElementWidth
             height: root.gridElementHeight
             x: (modelData.x - pieceModel.center.x)

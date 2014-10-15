@@ -43,7 +43,7 @@ TransformableTrigon
     Repeater {
         model: pieceModel.elements
 
-        PieceElementTrigon {
+        Triangle {
             isDownward: _isDownward(modelData)
             width: root._elementWidth
             height: root.gridElementHeight
