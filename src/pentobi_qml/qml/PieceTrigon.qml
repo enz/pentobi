@@ -18,6 +18,8 @@ TransformableTrigon
     property bool isMarked
 
     property string imageName: theme.getImage("triangle-" + colorName)
+    property string imageNameDownward:
+        theme.getImage("triangle-down-" + colorName)
     property real pieceAngle: {
         var flipX = Math.abs(flipXAngle % 360 - 180) < 90
         var flipY = Math.abs(flipYAngle % 360 - 180) < 90
