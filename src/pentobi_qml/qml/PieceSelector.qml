@@ -70,7 +70,7 @@ Item {
 
                 target: flickable
                 property: "contentY"
-                duration: 80
+                duration: 50
             }
         }
         Column {
