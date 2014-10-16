@@ -270,10 +270,14 @@ function newGame(verifyAbortGame)
 
 function play(pieceModel, gameCoord) {
     cancelGenMove()
+    var wasComputerToPlay = isComputerToPlay()
     boardModel.play(pieceModel, gameCoord)
     clearMarks()
     markLastMove()
-    delayedCheckComputerMove.start()
+    // If a move was entered but the computer plays this color (e.g. after
+    // undo move) we don't automatically continue playing.
+    if (! wasComputerToPlay)
+        delayedCheckComputerMove.start()
 }
 
 function showComputerColorDialog() {
