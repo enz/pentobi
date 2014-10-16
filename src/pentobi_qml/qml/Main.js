@@ -140,6 +140,7 @@ function genMove() {
     cancelGenMove()
     gameDisplay.pickedPiece = null
     gameDisplay.busyIndicatorRunning = true
+    gameDisplay.showToPlay()
     isMoveHintRunning = false
     playerModel.startGenMove(boardModel)
 }
