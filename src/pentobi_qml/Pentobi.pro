@@ -237,8 +237,11 @@ qml/QtQuick/Controls/Styles/Android/CheckBoxStyle.qml \
 qml/QtQuick/Controls/Styles/Android/GroupBoxStyle.qml \
 qml/QtQuick/Controls/Styles/Android/LabelStyle.qml \
 qml/QtQuick/Controls/Styles/Android/MenuBarStyle.qml \
+qml/QtQuick/Controls/Styles/Android/ToolBarStyle.qml \
+qml/QtQuick/Controls/Styles/Android/drawables/ColorDrawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/Drawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/DrawableLoader.qml \
+qml/QtQuick/Controls/Styles/Android/drawables/GradientDrawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/ImageDrawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/LayerDrawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/NinePatchDrawable.qml \
