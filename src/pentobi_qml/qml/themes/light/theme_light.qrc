@@ -21,7 +21,4 @@
         <file>triangle-yellow.svg</file>
         <file>Theme.qml</file>
     </qresource>
-    <qresource prefix="/">
-        <file>triangle-down-blue.svg</file>
-    </qresource>
 </RCC>
