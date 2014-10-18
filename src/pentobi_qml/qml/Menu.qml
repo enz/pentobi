@@ -15,27 +15,8 @@ MenuBar {
         title: qsTr("Game")
 
         MenuItem {
-            text: qsTr("New Game")
+            text: qsTr("New")
             onTriggered: Logic.newGame(true)
-        }
-        MenuItem {
-            text: qsTr("Computer Colors")
-            onTriggered: Logic.showComputerColorDialog()
-        }
-        MenuItem {
-            text: qsTr("Play")
-            enabled: alwaysEnableAll || ! playerModel.isGenMoveRunning
-            onTriggered: Logic.computerPlay()
-        }
-        MenuItem {
-            text: qsTr("Undo Move")
-            enabled: alwaysEnableAll || boardModel.canUndo
-            onTriggered: Logic.undo()
-        }
-        MenuItem {
-            text: qsTr("Move Hint")
-            enabled: alwaysEnableAll || ! boardModel.isGameOver
-            onTriggered: Logic.moveHint()
         }
         Menu {
             title: qsTr("Game Variant")
@@ -91,6 +72,33 @@ MenuBar {
                 onTriggered: Logic.changeGameVariant("junior", true)
             }
         }
+        MenuItem {
+            text: qsTr("Undo Move")
+            enabled: alwaysEnableAll || boardModel.canUndo
+            onTriggered: Logic.undo()
+        }
+        MenuItem {
+            text: qsTr("Find Move")
+            enabled: alwaysEnableAll || ! boardModel.isGameOver
+            onTriggered: Logic.moveHint()
+        }
+        MenuItem {
+            text: qsTr("Quit")
+            onTriggered: Qt.quit()
+        }
+    }
+    Menu {
+        title: qsTr("Computer")
+
+        MenuItem {
+            text: qsTr("Computer Colors")
+            onTriggered: Logic.showComputerColorDialog()
+        }
+        MenuItem {
+            text: qsTr("Play")
+            enabled: alwaysEnableAll || ! playerModel.isGenMoveRunning
+            onTriggered: Logic.computerPlay()
+        }
         Menu {
             title: qsTr("Level")
 
@@ -103,42 +111,39 @@ MenuBar {
             MenuItemLevel { level: 6 }
             MenuItemLevel { level: 7 }
         }
-        Menu {
-            title: qsTr("Settings")
+    }
 
-            MenuItem {
-                text: qsTr("Mark Last Move")
-                checkable: true
-                checked: markLastMove
-                onTriggered: {
-                    if (markLastMove == checked) return
-                    markLastMove = checked
-                    Logic.clearMarks()
-                    Logic.markLastMove()
-                }
-            }
-            Menu {
-                title: qsTr("Appearance")
-                ExclusiveGroup { id: groupTheme }
-                MenuItem {
-                    text: qsTr("Dark")
-                    checkable: true
-                    checked: themeName == "dark"
-                    exclusiveGroup: groupTheme
-                    onTriggered: themeName = "dark"
-                }
-                MenuItem {
-                    text: qsTr("Light")
-                    checkable: true
-                    checked: themeName == "light"
-                    exclusiveGroup: groupTheme
-                    onTriggered: themeName = "light"
-                }
+    Menu {
+        title: qsTr("View")
+
+        MenuItem {
+            text: qsTr("Mark Last Move")
+            checkable: true
+            checked: markLastMove
+            onTriggered: {
+                if (markLastMove == checked) return
+                markLastMove = checked
+                Logic.clearMarks()
+                Logic.markLastMove()
             }
         }
-        MenuItem {
-            text: qsTr("Quit")
-            onTriggered: Qt.quit()
+        Menu {
+            title: qsTr("Appearance")
+            ExclusiveGroup { id: groupTheme }
+            MenuItem {
+                text: qsTr("Dark")
+                checkable: true
+                checked: themeName == "dark"
+                exclusiveGroup: groupTheme
+                onTriggered: themeName = "dark"
+            }
+            MenuItem {
+                text: qsTr("Light")
+                checkable: true
+                checked: themeName == "light"
+                exclusiveGroup: groupTheme
+                onTriggered: themeName = "light"
+            }
         }
     }
 }
