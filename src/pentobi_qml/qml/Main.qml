@@ -29,7 +29,7 @@ ApplicationWindow {
     // Android and on Android, initializing the window size with the available
     // screen size avoids flickering and delay due to multiple changes of the
     // window size at start-up (last tested with Qt 5.3.2).
-    contentItem { minimumWidth: 240; minimumHeight: 300 }
+    contentItem { minimumWidth: 240; minimumHeight: 252 }
     width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight
 
     visible: true
