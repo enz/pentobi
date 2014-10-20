@@ -78,10 +78,12 @@ function findPiece(pieceModel) {
 }
 
 function pickPiece(piece) {
-    if (piece.pieceModel.color != boardModel.toPlay
-            || playerModel.isGenMoveRunning
-            || boardModel.isGameOver)
+    if (playerModel.isGenMoveRunning || boardModel.isGameOver)
         return
+    if (piece.pieceModel.color !== boardModel.toPlay) {
+        showToPlay()
+        return
+    }
     if (! pieceManipulator.visible) {
         // Position pieceManipulator at center of piece if possible, but
         // make sure it is completely visible
