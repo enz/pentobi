@@ -19,10 +19,15 @@
         <file>qml/ScoreElement.qml</file>
         <file>qml/ScoreElement2.qml</file>
         <file>qml/Square.qml</file>
+        <file>qml/ToolBar.qml</file>
+        <file>qml/ToolButton.qml</file>
         <file>qml/TransformableClassic.qml</file>
         <file>qml/TransformableTrigon.qml</file>
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>
+        <file>qml/icons/pentobi-newgame.svg</file>
+        <file>qml/icons/pentobi-computer-colors.svg</file>
+        <file>qml/icons/pentobi-play.svg</file>
     </qresource>
 </RCC>

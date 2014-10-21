@@ -35,6 +35,7 @@ ApplicationWindow {
     visible: true
     title: qsTr("Pentobi")
     menuBar: Pentobi.Menu { }
+    toolBar: Pentobi.ToolBar { }
     onClosing: Qt.quit()
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.quit()
