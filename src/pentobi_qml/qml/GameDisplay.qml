@@ -45,10 +45,7 @@ Item
 
     Rectangle {
         anchors.fill: parent
-        gradient: Gradient {
-            GradientStop { position: 0; color: theme.backgroundGradientColor1 }
-            GradientStop { position: 1; color: theme.backgroundGradientColor2 }
-        }
+        color: theme.backgroundColor
     }
     Column {
         id: column
