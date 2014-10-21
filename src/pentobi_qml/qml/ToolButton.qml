@@ -18,6 +18,6 @@ ToolButton {
         sourceSize.width: width
         anchors.centerIn: parent
         source: imageSource
-        opacity: 0.8
+        opacity: 0.7
     }
 }
