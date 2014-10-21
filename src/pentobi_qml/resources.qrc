@@ -26,8 +26,5 @@
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>
-        <file>qml/icons/pentobi-newgame.svg</file>
-        <file>qml/icons/pentobi-computer-colors.svg</file>
-        <file>qml/icons/pentobi-play.svg</file>
     </qresource>
 </RCC>

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/icons/pentobi-newgame.svg</file>
+        <file>qml/icons/pentobi-computer-colors.svg</file>
+        <file>qml/icons/pentobi-play.svg</file>
+    </qresource>
+</RCC>

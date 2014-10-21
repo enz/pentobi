@@ -42,8 +42,8 @@ set(pentobi_ICNS
   pentobi-backward10-16.png
   pentobi-beginning.png
   pentobi-beginning-16.png
-  pentobi-computer-color.png
-  pentobi-computer-color-16.png
+  pentobi-computer-colors.png
+  pentobi-computer-colors-16.png
   pentobi-end.png
   pentobi-end-16.png
   pentobi-flip-horizontal.png

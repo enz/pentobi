@@ -84,6 +84,12 @@ RESOURCES += \
     qml/themes/light/theme_light.qrc \
     qml/themes/dark/theme_dark.qrc
 
+android {
+    RESOURCES += icons_android.qrc
+} else {
+    RESOURCES += ../pentobi/icons_base.qrc \
+}
+
 # Default rules for deployment.
 include(deployment.pri)
 

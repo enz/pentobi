@@ -789,7 +789,7 @@ void MainWindow::createActions()
     m_actionComputerColors->setShortcut(QString("Ctrl+U"));
     m_actionComputerColors->setToolTip(
                                   tr("Set the colors played by the computer"));
-    setIcon(m_actionComputerColors, "pentobi-computer-color");
+    setIcon(m_actionComputerColors, "pentobi-computer-colors");
     connect(m_actionComputerColors, SIGNAL(triggered()),
             SLOT(computerColors()));
 
