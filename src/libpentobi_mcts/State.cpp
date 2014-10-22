@@ -613,24 +613,43 @@ void State::update_moves(Color c)
     auto& marker = m_marker[c];
 
     // Find old moves that are still legal
-    PieceMap<bool> is_piece_left(false);
-    for (Piece piece : m_bd.get_pieces_left(c))
-        is_piece_left[piece] = true;
     auto& is_forbidden = m_bd.is_forbidden(c);
+    auto& new_moves = m_new_moves[c];
     auto& moves = m_moves[c];
     auto old_size = moves.size();
     moves.clear();
     double gamma;
-    for (unsigned i = 0; i < old_size; ++i)
+    if (new_moves.size() == 1 && m_bd.get_nu_piece_instances() == 1)
     {
-        LIBBOARDGAME_ASSERT(i >= moves.size());
-        Move mv = moves.get_unchecked(i);
-        auto& info = get_move_info(mv);
-        if (is_piece_left[info.get_piece()]
-            && check_move(is_forbidden, info, gamma))
-            add_move(moves, mv, gamma);
-        else
-            marker.clear(mv);
+        Piece piece = get_move_info(new_moves[0]).get_piece();
+        for (unsigned i = 0; i < old_size; ++i)
+        {
+            LIBBOARDGAME_ASSERT(i >= moves.size());
+            Move mv = moves.get_unchecked(i);
+            auto& info = get_move_info(mv);
+            if (info.get_piece() != piece
+                    && check_move(is_forbidden, info, gamma))
+                add_move(moves, mv, gamma);
+            else
+                marker.clear(mv);
+        }
+    }
+    else
+    {
+        PieceMap<bool> is_piece_left(false);
+        for (Piece piece : m_bd.get_pieces_left(c))
+            is_piece_left[piece] = true;
+        for (unsigned i = 0; i < old_size; ++i)
+        {
+            LIBBOARDGAME_ASSERT(i >= moves.size());
+            Move mv = moves.get_unchecked(i);
+            auto& info = get_move_info(mv);
+            if (is_piece_left[info.get_piece()]
+                    && check_move(is_forbidden, info, gamma))
+                add_move(moves, mv, gamma);
+            else
+                marker.clear(mv);
+        }
     }
 
     // Find new legal moves because of new pieces played by this color
@@ -638,7 +657,7 @@ void State::update_moves(Color c)
     for (Piece piece : m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             pieces_considered.push_back(piece);
-    for (Move mv : m_new_moves[c])
+    for (Move mv : new_moves)
     {
         auto& info_ext = get_move_info_ext(mv);
         auto i = info_ext.begin_attach();
@@ -648,7 +667,7 @@ void State::update_moves(Color c)
                 add_moves(*i, c, pieces_considered);
         while (++i != end);
     }
-    m_new_moves[c].clear();
+    new_moves.clear();
 
     // Generate moves for pieces not considered in the last position
     auto& is_piece_considered = *m_is_piece_considered[c];
