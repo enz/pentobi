@@ -15,7 +15,7 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
     property bool isMoveHintRunning
-    property string themeName: "dark"
+    property string themeName: Qt.platform.os === "android" ? "dark" : "light"
     property bool markLastMove: true
     property QtObject theme: Logic.createTheme(themeName)
 
