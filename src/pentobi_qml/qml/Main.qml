@@ -145,4 +145,11 @@ ApplicationWindow {
             _func()
         }
     }
+
+    Connections {
+        target: Qt.application
+        onStateChanged:
+            if (Qt.application.state === Qt.ApplicationSuspended)
+                Logic.autosave()
+    }
 }

@@ -1,3 +1,10 @@
+function autosave() {
+    if (boardModel.isGameOver)
+        boardModel.clearAutoSave()
+    else
+        boardModel.autoSave()
+}
+
 function cancelGenMove() {
     playerModel.cancelGenMove()
     gameDisplay.busyIndicatorRunning = false
@@ -388,8 +395,5 @@ function undo() {
 
 function quit() {
     cancelGenMove()
-    if (boardModel.isGameOver)
-        boardModel.clearAutoSave()
-    else
-        boardModel.autoSave()
+    autosave()
 }
