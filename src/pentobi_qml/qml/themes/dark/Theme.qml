@@ -7,7 +7,7 @@
 import QtQuick 2.0
 
 QtObject {
-    property color backgroundColor: "#504D4C"
+    property color backgroundColor: "#141313"
     property color fontColorScore: "#C8C1BE"
     property color fontColorMessage: "#E6DFDC"
     property color backgroundColorMessage: "#282626"
