@@ -21,7 +21,7 @@ ToolBar {
             width: height
             sourceSize.height: height
             sourceSize.width: width
-            source: _isAndroid ? "icons/pentobi.svg" : null
+            source: _isAndroid ? "icons/pentobi.svg" : ""
 
         }
         Item { Layout.fillWidth: _isAndroid }
