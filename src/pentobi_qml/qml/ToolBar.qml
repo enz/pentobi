@@ -10,6 +10,7 @@ ToolBar {
     RowLayout {
         anchors.fill: parent
 
+        Item { Layout.preferredWidth: _isAndroid ? 0.1 * parent.height : 0 }
         // App icon (only on Android)
         Image {
             property real size: parent.height

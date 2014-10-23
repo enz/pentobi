@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="48" width="48" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<defs></defs>
 <metadata>
 <rdf:RDF>
 <cc:Work rdf:about="">
@@ -9,36 +10,37 @@
 </cc:Work>
 </rdf:RDF>
 </metadata>
-<g id="g4092" transform="matrix(1.2,0,0,1.2,18,-21.6)">
-<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#b40000"/>
-<path d="m-15,28,0.83333-0.83333,8.3333,0,0-8.3333l0.8337-0.834v10z" fill="#000" fill-opacity="0.15686275"/>
-<path d="m-15,28,0-10,10,0-0.83333,0.83333-8.3333,0,0,8.3333z" fill="#FFF" fill-opacity="0.15686275"/>
+<rect rx="1.5303" ry="1.5102" height="44" width="44" y="2" x="2" fill="#6b6d68"/>
+<g id="g4092" transform="translate(19,-14)">
+<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#C00"/>
+<path d="m-15,28,1-1,8,0,0-8,1-1,0,10z" fill-opacity="0.15686275" fill="#000"/>
+<path fill-opacity="0.15686275" d="m-15,28,0-10,10,0-1,1-8,0,0,8z" fill="#FFF"/>
 </g>
-<use xlink:href="#g4092" transform="translate(12,0)" height="48" width="48" y="0" x="0"/>
-<use xlink:href="#g4092" transform="translate(12,12)" height="48" width="48" y="0" x="0"/>
-<use xlink:href="#g4092" transform="translate(24,12)" height="48" width="48" y="0" x="0"/>
-<g id="g4092-7" transform="matrix(1.2,0,0,1.2,18,-9.6)">
-<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#d2bc00"/>
-<path d="m-15,28,0.83333-0.83333,8.3333,0,0-8.3333l0.8337-0.834v10z" fill="#000" fill-opacity="0.15686275"/>
-<path d="m-15,28,0-10,10,0-0.83333,0.83333-8.3333,0,0,8.3333z" fill="#FFF" fill-opacity="0.15686275"/>
+<use xlink:href="#g4092" transform="translate(10,0)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4092" transform="translate(10,10)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4092" transform="translate(20,10)" height="48" width="48" y="0" x="0"/>
+<g id="g4147" transform="translate(29,3)">
+<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="11" x="-25" fill="#d2bc00"/>
+<path d="m-25,21,1-1,8,0,0-8,1-1,0,10z" fill-opacity="0.15686275" fill="#000"/>
+<path fill-opacity="0.15686275" d="m-25,21,0-10,10,0-1,1-8,0,0,8z" fill="#FFF"/>
 </g>
-<use xlink:href="#g4092-7" transform="translate(-1.3333332e-8,12)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g4092-7" transform="translate(-1.3333332e-8,24)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g4092-7" transform="translate(12,24)" height="72" width="72" y="0" x="0"/>
-<g id="g4092-7-3" transform="matrix(1.2,0,0,1.2,30,2.4)">
-<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#2d5991"/>
-<path d="m-15,28,0.83333-0.83333,8.3333,0,0-8.3333l0.8337-0.834v10z" fill="#000" fill-opacity="0.15686275"/>
-<path d="m-15,28,0-10,10,0-0.83333,0.83333-8.3333,0,0,8.3333z" fill="#FFF" fill-opacity="0.15686275"/>
+<use xlink:href="#g4147" transform="translate(0,10)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4147" transform="translate(0,20)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4147" transform="translate(10,20)" height="48" width="48" y="0" x="0"/>
+<g id="g4231" transform="translate(33,11)">
+<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="13" x="-19" fill="#2d5991"/>
+<path d="m-19,23,1-1,8,0,0-8,1-1,0,10z" fill-opacity="0.15686275" fill="#000"/>
+<path fill-opacity="0.15686275" d="m-19,23,0-10,10,0-1,1-8,0,0,8z" fill="#FFF"/>
 </g>
-<use xlink:href="#g4092-7-3" transform="translate(12,12)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g4092-7-3" transform="translate(12,0)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g4092-7-3" transform="translate(24,12)" height="72" width="72" y="0" x="0"/>
-<g id="g4092-7-3-9" transform="matrix(1.2,0,0,1.2,42,-21.6)">
-<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#5eac12"/>
-<path d="m-15,28,0.83333-0.83333,8.3333,0,0-8.3333l0.8337-0.834v10z" fill="#000" fill-opacity="0.15686275"/>
-<path d="m-15,28,0-10,10,0-0.83333,0.83333-8.3333,0,0,8.3333z" fill="#FFF" fill-opacity="0.15686275"/>
+<use xlink:href="#g4231" transform="translate(10,0)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4231" transform="translate(10,10)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4231" transform="translate(20,10)" height="48" width="48" y="0" x="0"/>
+<g id="g4272" transform="translate(44,-4)">
+<rect opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="8" x="-20" fill="#5eac12"/>
+<path d="m-20,18,1-1,8,0,0-8,1-1,0,10z" fill-opacity="0.15686275" fill="#000"/>
+<path fill-opacity="0.15686275" d="m-20,18,0-10,10,0-1,1-8,0,0,8z" fill="#FFF"/>
 </g>
-<use xlink:href="#g4092-7-3-9" transform="translate(12,0)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g4092-7-3-9" transform="translate(12,12)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g4092-7-3-9" transform="translate(12,24)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#g4272" transform="translate(10,10)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4272" transform="translate(10,20)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#g4272" transform="translate(10,0)" height="48" width="48" y="0" x="0"/>
 </svg>
