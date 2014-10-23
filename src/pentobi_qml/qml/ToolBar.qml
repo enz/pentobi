@@ -5,9 +5,26 @@ import "." as Pentobi
 import "Main.js" as Logic
 
 ToolBar {
-    RowLayout {
-        height: parent.height
+    property bool _isAndroid: Qt.platform.os === "android"
 
+    RowLayout {
+        anchors.fill: parent
+
+        // App icon (only on Android)
+        Image {
+            property real size: parent.height
+
+            visible: _isAndroid
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            // Similar as in Pentobi.ToolButton but pentobi.svg is 48x48
+            height: size < 26 || size > 100 ? 0.76 * size : size < 50 ? 24 : 48
+            width: height
+            sourceSize.height: height
+            sourceSize.width: width
+            source: _isAndroid ? "icons/pentobi.svg" : null
+
+        }
+        Item { Layout.fillWidth: _isAndroid }
         Pentobi.ToolButton {
             size: parent.height
             imageSource: "icons/pentobi-newgame.svg"
@@ -23,5 +40,6 @@ ToolBar {
             imageSource: "icons/pentobi-play.svg"
             onClicked: Logic.computerPlay()
         }
+        Item { Layout.fillWidth: ! _isAndroid }
     }
 }
