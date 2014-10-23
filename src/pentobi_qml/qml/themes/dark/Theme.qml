@@ -17,16 +17,5 @@ QtObject {
     property color colorGreen: "#00C000"
     property real toPlayColorLighter: 1.6
 
-    function getImage(name) {
-        switch (name) {
-        case "board-classic":
-        case "board-duo":
-        case "board-trigon-3":
-        case "board-trigon":
-        case "flick":
-            return "themes/dark/" + name + ".svg"
-        default:
-            return "themes/light/" + name + ".svg"
-        }
-    }
+    function getImage(name) { return "themes/dark/" + name + ".svg" }
 }

@@ -9,10 +9,9 @@
 </cc:Work>
 </rdf:RDF>
 </metadata>
-<g transform="matrix(1,0,0,-1,0,1052.4)">
-<path fill="#0073cf" d="m10,1032.4,10,20-20,0z" fill-rule="evenodd"/>
+<g transform="translate(0,-1032.3623)">
+<rect fill-rule="evenodd" height="20" width="20" y="1032.4" x="0" fill="#0077d2"/>
 </g>
-<path fill="#000" d="m0,0.03779,2,1.391128,8,16.30201,0,2.306876z" fill-opacity="0.03921569"/>
-<path fill="#FFF" d="M0,0.03779,2,1.405305,18,1.358075c1.70132-1.155529,0.2793-0.169385,2-1.320285z" fill-opacity="0.15686275"/>
-<path fill="#000" d="m20,0.03779-10,20,0-2.330578,8-16.32552z" fill-opacity="0.09803922"/>
+<path fill-opacity="0.09803922" d="M0,20,20,20,20,0,19,1,19,19,1,19z" fill="#000"/>
+<path fill-opacity="0.15686275" d="M0,20,1,19,1,1,19,1,20,0,0,0z" fill="#FFF"/>
 </svg>

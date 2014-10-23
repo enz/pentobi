@@ -40,22 +40,9 @@ ApplicationWindow {
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.quit()
 
-    // Ensure sane values in case the values in the settings are unusable
-    onThemeNameChanged: {
-        switch (themeName) {
-        case "light":
-        case "dark":
-            return
-        default:
-            console.log("fixing invalid theme name", themeName)
-            themeName = "light"
-        }
-    }
-
     Settings {
         id: settings
 
-        property alias themeName: root.themeName
         property alias markLastMove: root.markLastMove
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1

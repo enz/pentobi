@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="200" width="200" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<path d="M200,100a100,100,0,0,1,-200,0,100,100,0,1,1,200,0z" fill="#70716d"/>
+<path d="m160,100a60,59.987,0,1,1,-120,0,60,59.987,0,1,1,120,0z" fill="#9c9c90"/>
+<path opacity="0.98999999" d="m-30,80a15,15,0,1,1,-30,0,15,15,0,1,1,30,0z" fill-rule="evenodd" transform="matrix(1.3333332,0,0,1.3333332,159.99999,-86.666657)" fill="#fafafa"/>
+<path opacity="0.98999999" d="m-30,80a15,15,0,1,1,-30,0,15,15,0,1,1,30,0z" fill-rule="evenodd" transform="matrix(1.3333332,0,0,1.3333332,160,73.333344)" fill="#fafafa"/>
+<path opacity="0.98999999" d="M200,100a20,20,0,0,1,-40,0,20,20,0,1,1,40,0z" fill-rule="evenodd" fill="#fafafa"/>
+<path opacity="0.98999999" d="m-30,80a15,15,0,1,1,-30,0,15,15,0,1,1,30,0z" fill-rule="evenodd" transform="matrix(1.3333332,0,0,1.3333332,79.999994,-6.666654)" fill="#fafafa"/>
+<path fill-rule="evenodd" d="m100,7.5c-6.9036,0-12.5,5.5964-12.5,12.5h5.3571c0-3.9449,3.198-7.1429,7.1429-7.1429s7.1429,3.198,7.1429,7.1429c0,2.0384-0.861,3.8449-2.2322,5.1339l-3.3482-3.3482v10.714h10.714l-3.5714-3.5714c2.389-2.3238,3.7946-5.5105,3.7946-8.9286,0-6.9036-5.5964-12.5-12.5-12.5z" fill="#555753"/>
+<path fill-rule="evenodd" d="m20,87.5c6.9035,0,12.5,5.5964,12.5,12.5h-5.3571c0-3.9449-3.198-7.1428-7.1428-7.1428-3.9449,0-7.1429,3.198-7.1429,7.1428,0,2.0384,0.86101,3.8449,2.2322,5.1339l3.3482-3.3482v10.714h-10.714l3.5714-3.5714c-2.389-2.3238-3.7946-5.5105-3.7946-8.9286,0-6.9036,5.5964-12.5,12.5-12.5z" fill="#555753"/>
+<path fill-rule="evenodd" d="m190,95-10-10-9.9375,10,6.9375,0,0,10-7,0,10,10,9.9375-10-6.9375,0,0-10z" fill="#555753"/>
+<path fill-rule="evenodd" d="m95,170-10,10,10,9.9375,0-6.9375,10,0,0,7,10-10-10-9.9375,0,6.9375-10,0z" fill="#555753"/>
+</svg>

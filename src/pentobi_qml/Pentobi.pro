@@ -80,14 +80,16 @@ SOURCES += \
 RESOURCES += \
     ../books/pentobi_books.qrc \
     resources.qrc \
-    translations.qrc \
-    qml/themes/light/theme_light.qrc \
-    qml/themes/dark/theme_dark.qrc
+    translations.qrc
 
 android {
-    RESOURCES += icons_android.qrc
+    RESOURCES += \
+        icons_android.qrc \
+        qml/themes/dark/theme_dark.qrc
 } else {
-    RESOURCES += ../pentobi/icons_base.qrc \
+    RESOURCES += \
+        ../pentobi/icons_base.qrc \
+        qml/themes/light/theme_light.qrc
 }
 
 # Default rules for deployment.

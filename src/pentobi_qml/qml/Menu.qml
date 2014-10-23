@@ -116,23 +116,5 @@ MenuBar {
                 Logic.markLastMove()
             }
         }
-        Menu {
-            title: qsTr("Appearance")
-            ExclusiveGroup { id: groupTheme }
-            MenuItem {
-                text: qsTr("Dark")
-                checkable: true
-                checked: themeName == "dark"
-                exclusiveGroup: groupTheme
-                onTriggered: themeName = "dark"
-            }
-            MenuItem {
-                text: qsTr("Light")
-                checkable: true
-                checked: themeName == "light"
-                exclusiveGroup: groupTheme
-                onTriggered: themeName = "light"
-            }
-        }
     }
 }
