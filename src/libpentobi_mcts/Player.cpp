@@ -113,7 +113,8 @@ Move Player::genmove(const Board& bd, Color c)
         // * The number at level 1 is very small in Classic/Duo to avoid that
         //   level 1 is too strong for absolute beginners (searches with such a
         //   small number of simulations still produce reasonable moves because
-        //   of the prior initialization of node values.)
+        //   of the prior initialization of node values.) In Trigon, it starts
+        //   with a higher number because the playing strength is weaker there.
         // * The number at the highest level is chosen such that the average
         //   time per game and player is 2 min in Duo, 4 min in Classic, 5 min
         //   in Trigon on a Intel i3-4130. (This takes into account the
@@ -126,7 +127,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::classic_2:
             {
                 static float counts[] =
-                    { 3, 24, 87, 213, 667, 1989, 10780, 98438, 1250508 };
+                    { 3, 24, 87, 213, 667, 1989, 10780, 98438, 1257912 };
                 max_count = counts[level - 1];
             }
             break;
@@ -134,7 +135,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::junior:
             {
                 static float counts[] =
-                    { 3, 17, 44, 123, 426, 1672, 6240, 51590, 4952279 };
+                    { 3, 17, 44, 123, 426, 1672, 6240, 51590, 4979425 };
                 max_count = counts[level - 1];
             }
             break;
@@ -143,7 +144,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::trigon_3:
             {
                 static float counts[] =
-                    { 228, 433, 727, 1501, 2912, 7395, 20828, 61138, 357912 };
+                    { 228, 433, 727, 1501, 2912, 7395, 20828, 61138, 360207 };
                 max_count = counts[level - 1];
             }
             break;
