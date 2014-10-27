@@ -1661,30 +1661,21 @@ void SearchBase<S, M, R>::update_last_good_reply(ThreadState& thread_state)
         // as a loss for both.
         is_winner[i] = (eval[i] == max_eval);
     unsigned nu_moves = state.get_nu_moves();
-    if (nu_moves >= 2)
+    if (nu_moves < 2)
+        return;
+    Move last_mv = state.get_move(0).move;
+    Move second_last_mv = Move::null();
+    for (unsigned i = 1; i < nu_moves; ++i)
     {
-        // Iterate backwards to store first reply if move was played more than
-        // once
-        PlayerMove reply = state.get_move(nu_moves - 1);
-        PlayerMove last = state.get_move(nu_moves - 2);
-        PlayerMove second_last;
-        if (nu_moves >= 3)
-            for (unsigned i = nu_moves - 1; i >= 2; --i)
-            {
-                second_last = state.get_move(i - 2);
-                if (is_winner[reply.player])
-                    m_last_good_reply.store(reply.player, last.move,
-                                            second_last.move, reply.move);
-                else
-                    m_last_good_reply.forget(reply.player, last.move,
-                                             second_last.move, reply.move);
-                reply = last;
-                last = second_last;
-            }
-        if (is_winner[reply.player])
-            m_last_good_reply.store(reply.player, last.move, reply.move);
+        PlayerMove reply = state.get_move(i);
+        PlayerInt player = reply.player;
+        Move mv = reply.move;
+        if (is_winner[player])
+            m_last_good_reply.store(player, last_mv, second_last_mv, mv);
         else
-            m_last_good_reply.forget(reply.player, last.move, reply.move);
+            m_last_good_reply.forget(player, last_mv, second_last_mv, mv);
+        second_last_mv = last_mv;
+        last_mv = mv;
     }
 }
 
