@@ -210,7 +210,7 @@ inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
     {
         if (m_nu_children == 0)
             m_best_value = value;
-        else if (count > 0 && value > m_best_value)
+        else if (value > m_best_value)
         {
             m_best_child = m_first_child + m_nu_children;
             m_best_value = value;
