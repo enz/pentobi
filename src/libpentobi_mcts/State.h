@@ -216,10 +216,6 @@ private:
         Used for normalizing the length modification of the game result. */
     Statistics<Float> m_stat_len;
 
-    size_t m_nu_playout_moves;
-
-    size_t m_nu_last_good_reply_moves;
-
     bool m_check_symmetric_draw;
 
     bool m_check_terminate_early;

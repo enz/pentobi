@@ -338,12 +338,10 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
         return false;
     }
 
-    ++m_nu_playout_moves;
     if (lgr2.is_regular() && m_bd.is_legal_nonpass(lgr2))
     {
         if (log_simulations)
             log("Playing last good reply 2");
-        ++m_nu_last_good_reply_moves;
         mv = lgr2;
         return true;
     }
@@ -351,7 +349,6 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
     {
         if (log_simulations)
             log("Playing last good reply 1");
-        ++m_nu_last_good_reply_moves;
         mv = lgr1;
         return true;
     }
@@ -528,8 +525,6 @@ void State::start_search()
     m_check_terminate_early =
         (m_nu_moves_initial < 10u * m_nu_colors
          && m_bd.get_nu_players() == 2);
-    m_nu_playout_moves = 0;
-    m_nu_last_good_reply_moves = 0;
     auto variant = bd.get_variant();
     m_check_symmetric_draw =
         ((variant == Variant::duo || variant == Variant::junior
@@ -739,11 +734,6 @@ void State::update_symmetry_broken(Move mv)
 string State::get_info() const
 {
     ostringstream s;
-    if (m_nu_playout_moves > 0)
-        s << "LGR: " << fixed << setprecision(1)
-          << (100.0 * static_cast<double>(m_nu_last_good_reply_moves)
-              / static_cast<double>(m_nu_playout_moves))
-          << "%, ";
     if (m_bd.get_nu_players() == 2)
     {
         s << "Sco: ";
