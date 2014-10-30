@@ -16,7 +16,7 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 /** Iterate over all children of a node in the MCTS tree.
-    @tparam M The type of the move stored in the nodes. */
+    @tparam N The node type of the tree. */
 template<typename N>
 class ChildIterator
 {
