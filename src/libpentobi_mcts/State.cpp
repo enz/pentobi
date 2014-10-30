@@ -16,7 +16,6 @@
 namespace libpentobi_mcts {
 
 using namespace std;
-using libboardgame_util::get_log;
 using libboardgame_util::fast_exp;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
