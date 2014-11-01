@@ -135,17 +135,14 @@ public:
 
     void start_playout();
 
-    /** Generate and play a playout move.
-        @return @c false if end of game was reached, and no move was played */
-    bool gen_and_play_playout_move(Move lgr1, Move lgr2);
+    /** Generate a playout move.
+        @return @c false if end of game was reached, and no move was
+        generated. */
+    bool gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& move);
+
+    void play_playout(Move mv);
 
     void evaluate_playout(array<Float, 4>& result);
-
-    /** Get number of moves in the current simulation. */
-    unsigned get_nu_moves() const;
-
-    /** Get move in the current simulation. */
-    PlayerMove<Move> get_move(unsigned n) const;
 
     /** Do not update RAVE values for n'th move of the current simulation. */
     bool skip_rave(Move mv) const;
@@ -159,8 +156,6 @@ private:
 
     /** The cumulative gamma value of the moves in m_moves. */
     array<double, Move::range> m_cumulative_gamma;
-
-    unsigned m_nu_moves_initial;
 
     Color::IntType m_nu_passes;
 
@@ -253,8 +248,6 @@ private:
 
     Point find_best_starting_point(Color c) const;
 
-    bool gen_playout_move(Move lgr1, Move lgr2, Move& result);
-
     /** Equivalent to but faster than m_bd.get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
 
@@ -269,8 +262,6 @@ private:
     void init_moves_with_gamma(Color c);
 
     void init_moves_without_gamma(Color c);
-
-    void play_playout(Move mv);
 
     bool check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
                     double& gamma);
@@ -307,12 +298,6 @@ inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
                                    expander, init_val);
 }
 
-inline PlayerMove<Move> State::get_move(unsigned n) const
-{
-    auto mv = m_bd.get_move(m_nu_moves_initial + n);
-    return PlayerMove<Move>(mv.color.to_int(), mv.move);
-}
-
 inline const MoveInfo& State::get_move_info(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
@@ -331,12 +316,6 @@ inline PrecompMoves::LocalMovesListRange State::get_moves(
                       Color c, Piece piece, Point p, unsigned adj_status) const
 {
     return m_shared_const.precomp_moves[c].get_moves(piece, p, adj_status);
-}
-
-inline unsigned State::get_nu_moves() const
-{
-    LIBBOARDGAME_ASSERT(m_bd.get_nu_moves() >= m_nu_moves_initial);
-    return m_bd.get_nu_moves() - m_nu_moves_initial;
 }
 
 inline PlayerInt State::get_to_play() const
@@ -358,6 +337,18 @@ inline void State::play_in_tree(Move mv)
         m_bd.play_pass(to_play);
         ++m_nu_passes;
     }
+    if (log_simulations)
+        log(m_bd);
+}
+
+inline void State::play_playout(Move mv)
+{
+    LIBBOARDGAME_ASSERT(m_bd.is_legal_nonpass(mv));
+    m_new_moves[m_bd.get_to_play()].push_back(mv);
+    m_bd.play_nonpass(mv);
+    m_nu_passes = 0;
+    if (! m_is_symmetry_broken)
+        update_symmetry_broken(mv);
     if (log_simulations)
         log(m_bd);
 }

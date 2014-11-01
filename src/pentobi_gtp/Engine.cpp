@@ -18,6 +18,7 @@ namespace pentobi_gtp {
 
 using libboardgame_gtp::Failure;
 using libboardgame_mcts::ChildIterator;
+using libboardgame_mcts::PlayerMove;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::log;
 using libboardgame_util::ArrayList;
@@ -207,10 +208,11 @@ void Engine::cmd_gen_playout_move(Response& response)
     state.start_search();
     state.start_simulation(0);
     state.finish_in_tree();
-    if (! state.gen_and_play_playout_move(Move::null(), Move::null()))
+    PlayerMove<Move> mv;
+    if (! state.gen_playout_move(Move::null(), Move::null(), mv))
         throw Failure("terminal playout position");
     auto& bd = get_board();
-    response << bd.to_string(state.get_move(state.get_nu_moves() - 1).move);
+    response << bd.to_string(mv.move);
 }
 
 Player& Engine::get_mcts_player()

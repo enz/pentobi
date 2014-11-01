@@ -323,13 +323,13 @@ Point State::find_best_starting_point(Color c) const
     return best;
 }
 
-bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
+bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
 {
     if (m_nu_passes == m_nu_colors)
         return false;
 
     if (! m_is_symmetry_broken
-        && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
+            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
         // See also the comment in evaluate_playout()
         if (log_simulations)
@@ -337,25 +337,24 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
         return false;
     }
 
+    Color to_play = m_bd.get_to_play();
     if (lgr2.is_regular() && m_bd.is_legal_nonpass(lgr2))
     {
         if (log_simulations)
             log("Playing last good reply 2");
-        mv = lgr2;
+        mv = PlayerMove<Move>(to_play.to_int(), lgr2);
         return true;
     }
     if (lgr1.is_regular() && m_bd.is_legal_nonpass(lgr1))
     {
         if (log_simulations)
             log("Playing last good reply 1");
-        mv = lgr1;
+        mv = PlayerMove<Move>(to_play.to_int(), lgr1);
         return true;
     }
 
-    Color to_play;
     while (true)
     {
-        to_play = m_bd.get_to_play();
         if (! m_is_move_list_initialized[to_play])
             init_moves_with_gamma(to_play);
         else if (m_has_moves[to_play])
@@ -372,7 +371,8 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
             return false;
         }
         ++m_nu_passes;
-        m_bd.set_to_play(m_bd.get_next(to_play));
+        to_play = m_bd.get_next(to_play);
+        m_bd.set_to_play(to_play);
         // Don't try to handle symmetry after pass moves
         m_is_symmetry_broken = true;
     }
@@ -385,19 +385,9 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, Move& mv)
     auto random = m_total_gamma * m_random.generate_double();
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
-    mv = moves[static_cast<unsigned>(pos - begin)];
+    mv = PlayerMove<Move>(to_play.to_int(),
+                          moves[static_cast<unsigned>(pos - begin)]);
     return true;
-}
-
-bool State::gen_and_play_playout_move(Move lgr1, Move lgr2)
-{
-    Move mv;
-    if (gen_playout_move(lgr1, lgr2, mv))
-    {
-        play_playout(mv);
-        return true;
-    }
-    return false;
 }
 
 inline const PieceMap<bool>& State::get_pieces_considered() const
@@ -498,18 +488,6 @@ void State::play_expanded_child(Move mv)
     }
 }
 
-void State::play_playout(Move mv)
-{
-    LIBBOARDGAME_ASSERT(m_bd.is_legal_nonpass(mv));
-    m_new_moves[m_bd.get_to_play()].push_back(mv);
-    m_bd.play_nonpass(mv);
-    m_nu_passes = 0;
-    if (! m_is_symmetry_broken)
-        update_symmetry_broken(mv);
-    if (log_simulations)
-        log(m_bd);
-}
-
 void State::start_search()
 {
     auto& bd = *m_shared_const.board;
@@ -520,10 +498,9 @@ void State::start_search()
     m_nu_colors = bd.get_nu_colors();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
-    m_nu_moves_initial = bd.get_nu_moves();
     m_check_terminate_early =
-        (m_nu_moves_initial < 10u * m_nu_colors
-         && m_bd.get_nu_players() == 2);
+            (bd.get_nu_moves() < 10u * m_nu_colors
+             && m_bd.get_nu_players() == 2);
     auto variant = bd.get_variant();
     m_check_symmetric_draw =
         ((variant == Variant::duo || variant == Variant::junior
