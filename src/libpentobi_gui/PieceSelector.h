@@ -38,7 +38,7 @@ public:
         game variant. */
     void init();
 
-    int heightForWidth(int width) const;
+    int heightForWidth(int width) const override;
 
     /** Call update() if pieces left have changed since last paint. */
     void checkUpdate();
