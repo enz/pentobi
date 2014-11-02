@@ -612,8 +612,8 @@ private:
 
     bool check_move_cannot_change(Float count, Float remaining) const;
 
-    bool expand_node(unsigned thread_id, const Node& node,
-                     const Node*& best_child, Float init_val);
+    bool expand_node(ThreadState& thread_state, const Node& node,
+                     const Node*& best_child);
 
     void log_thread(const ThreadState& thread_state, const string& s) const;
 
@@ -922,11 +922,13 @@ string SearchBase<S, M, R>::dump() const
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::expand_node(unsigned thread_id, const Node& node,
-                                  const Node*& best_child, Float init_val)
+bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
+                                      const Node& node,
+                                      const Node*& best_child)
 {
-    typename Tree::NodeExpander expander(thread_id, m_tree, node);
-    get_state(thread_id).gen_children(expander, init_val);
+    auto& state = *thread_state.state;
+    typename Tree::NodeExpander expander(thread_state.thread_id, m_tree, node);
+    state.gen_children(expander, m_init_val[state.get_to_play()].get_mean());
     if (! expander.is_tree_full())
     {
         expander.link_children();
@@ -1176,10 +1178,9 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         expand_threshold += m_expand_threshold_inc;
     }
     state.finish_in_tree();
-    if (node->get_visit_count() > expand_threshold || node == &root)
+    if (node->get_visit_count() > expand_threshold)
     {
-        Float init_val = m_init_val[state.get_to_play()].get_mean();
-        if (! expand_node(thread_state.thread_id, *node, node, init_val))
+        if (! expand_node(thread_state, *node, node))
             thread_state.is_out_of_mem = true;
         else if (node != nullptr)
         {
@@ -1292,9 +1293,9 @@ void SearchBase<S, M, R>::restore_root_from_children(Tree& tree, const Node& roo
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::search(Move& mv, Float max_count, Float min_simulations,
-                             double max_time, TimeSource& time_source,
-                             bool always_search)
+bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
+                                 Float min_simulations, double max_time,
+                                 TimeSource& time_source, bool always_search)
 {
     check_create_threads();
     bool is_followup = check_followup(m_followup_sequence);
@@ -1405,11 +1406,20 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count, Float min_simulation
         nu_threads = 1;
     }
 
+    auto& thread_state_0 = m_threads[0]->thread_state;
+    auto& root = m_tree.get_root();
+    if (! root.has_children())
+    {
+        const Node* best_child;
+        thread_state_0.state->start_simulation(0);
+        expand_node(thread_state_0, root, best_child);
+    }
+
     while (true)
     {
         for (unsigned i = 1; i < nu_threads; ++i)
             m_threads[i]->start_search();
-        search_loop(m_threads[0]->thread_state);
+        search_loop(thread_state_0);
         for (unsigned i = 1; i < nu_threads; ++i)
             m_threads[i]->wait_search_finished();
         bool is_out_of_mem = false;
