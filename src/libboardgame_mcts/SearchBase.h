@@ -1661,8 +1661,7 @@ void SearchBase<S, M, R>::set_tree_memory(size_t memory)
 template<class S, class M, class R>
 void SearchBase<S, M, R>::update_last_good_reply(ThreadState& thread_state)
 {
-    const auto& state = *thread_state.state;
-    auto& simulation = thread_state.simulation;
+    const auto& simulation = thread_state.simulation;
     auto& eval = simulation.eval;
     auto max_eval = eval[0];
     for (PlayerInt i = 1; i < m_nu_players; ++i)
@@ -1788,7 +1787,6 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
 template<class S, class M, class R>
 void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
 {
-    const auto& state = *thread_state.state;
     const auto& simulation = thread_state.simulation;
     auto& nodes = simulation.nodes;
     auto& eval = simulation.eval;
