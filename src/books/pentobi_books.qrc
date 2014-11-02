@@ -2,6 +2,7 @@
     <qresource prefix="/pentobi_books">
         <file>book_classic.blksgf</file>
         <file>book_classic_2.blksgf</file>
+        <file>book_classic_3.blksgf</file>
         <file>book_duo.blksgf</file>
         <file>book_junior.blksgf</file>
         <file>book_trigon.blksgf</file>
