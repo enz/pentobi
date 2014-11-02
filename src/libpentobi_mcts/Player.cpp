@@ -125,6 +125,7 @@ Move Player::genmove(const Board& bd, Color c)
         {
         case Variant::classic:
         case Variant::classic_2:
+        case Variant::classic_3:
             {
                 static float counts[] =
                     { 3, 24, 87, 213, 667, 1989, 10780, 98438, 1257912 };
@@ -212,6 +213,7 @@ Rating Player::get_rating(Variant variant, int level)
     {
     case Variant::classic:
     case Variant::classic_2:
+    case Variant::classic_3:
         {
             // Anchor 1000, scale 0.63
             static float elo[] =

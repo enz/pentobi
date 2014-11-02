@@ -536,8 +536,7 @@ void MainWindow::cancelThread()
 
 void MainWindow::checkComputerMove()
 {
-    if (! m_autoPlay || ! m_computerColors[m_currentColor]
-        || getBoard().is_game_over())
+    if (! m_autoPlay || ! isComputerToPlay() || getBoard().is_game_over())
         m_lastComputerMovesBegin = 0;
     else
         genMove();
@@ -685,7 +684,7 @@ void MainWindow::computerColors()
     auto variant = getVariant();
     ComputerColorDialog dialog(this, variant, m_computerColors);
     dialog.exec();
-    auto nu_colors = getBoard().get_nu_colors();
+    auto nu_colors = getBoard().get_nu_nonalt_colors();
 
     bool computerNone = true;
     for (ColorIterator i(nu_colors); i; ++i)
@@ -712,7 +711,7 @@ void MainWindow::computerColors()
 
 bool MainWindow::computerPlaysAll() const
 {
-    for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
+    for (ColorIterator i(getBoard().get_nu_nonalt_colors()); i; ++i)
         if (! m_computerColors[*i])
             return false;
     return true;
@@ -1220,6 +1219,12 @@ void MainWindow::createActions()
     connect(m_actionVariantClassic, SIGNAL(triggered(bool)),
             SLOT(variantClassic(bool)));
 
+    m_actionVariantClassic3 = createAction(tr("Classic (&3 Players)"));
+    m_actionVariantClassic3->setActionGroup(groupVariant);
+    m_actionVariantClassic3->setCheckable(true);
+    connect(m_actionVariantClassic3, SIGNAL(triggered(bool)),
+            SLOT(variantClassic3(bool)));
+
     m_actionVariantClassic2 = createAction(tr("Classic (&2 Players)"));
     m_actionVariantClassic2->setActionGroup(groupVariant);
     m_actionVariantClassic2->setCheckable(true);
@@ -1250,7 +1255,7 @@ void MainWindow::createActions()
     connect(m_actionVariantTrigon2, SIGNAL(triggered(bool)),
             SLOT(variantTrigon2(bool)));
 
-    m_actionVariantTrigon3 = createAction(tr("Trigon (&3 Players)"));
+    m_actionVariantTrigon3 = createAction(tr("Trigo&n (3 Players)"));
     m_actionVariantTrigon3->setActionGroup(groupVariant);
     m_actionVariantTrigon3->setCheckable(true);
     connect(m_actionVariantTrigon3, SIGNAL(triggered(bool)),
@@ -1330,6 +1335,7 @@ void MainWindow::createMenu()
     menuGame->addSeparator();
     m_menuVariant = menuGame->addMenu(tr("Game &Variant"));
     m_menuVariant->addAction(m_actionVariantClassic);
+    m_menuVariant->addAction(m_actionVariantClassic3);
     m_menuVariant->addAction(m_actionVariantClassic2);
     m_menuVariant->addAction(m_actionVariantDuo);
     m_menuVariant->addAction(m_actionVariantTrigon);
@@ -1840,7 +1846,7 @@ void MainWindow::gameOver()
         else
             info = tr("The game ends in a tie.");
     }
-    else if (variant == Variant::trigon_3)
+    else if (variant == Variant::classic_3 || variant == Variant::trigon_3)
     {
         auto blue = bd.get_points(Color(0));
         auto yellow = bd.get_points(Color(1));
@@ -1966,6 +1972,12 @@ void MainWindow::variantClassic2(bool checked)
 {
     if (checked)
         setVariant(Variant::classic_2);
+}
+
+void MainWindow::variantClassic3(bool checked)
+{
+    if (checked)
+        setVariant(Variant::classic_3);
 }
 
 void MainWindow::variantDuo(bool checked)
@@ -2222,7 +2234,7 @@ void MainWindow::initGame()
     if (! settings.value("computer_color_none").toBool())
     {
         auto& bd = getBoard();
-        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        for (ColorIterator i(bd.get_nu_nonalt_colors()); i; ++i)
             m_computerColors[*i] = ! bd.is_same_player(*i, Color(0));
         m_autoPlay = true;
     }
@@ -2248,6 +2260,9 @@ void MainWindow::initVariantActions()
         break;
     case Variant::classic_2:
         m_actionVariantClassic2->setChecked(true);
+        break;
+    case Variant::classic_3:
+        m_actionVariantClassic3->setChecked(true);
         break;
     case Variant::duo:
         m_actionVariantDuo->setChecked(true);
@@ -2299,6 +2314,15 @@ void MainWindow::interruptPlay()
         return;
     set_abort();
     m_autoPlay = false;
+}
+
+bool MainWindow::isComputerToPlay() const
+{
+    if (m_game->get_variant() != Variant::classic_3
+            || m_currentColor != Color(3))
+        return m_computerColors[m_currentColor];
+    auto& bd = m_game->get_board();
+    return m_computerColors[Color(bd.get_alt_player())];
 }
 
 void MainWindow::keepOnlyPosition()
@@ -2558,8 +2582,13 @@ void MainWindow::orientationDisplayColorClicked(Color)
 void MainWindow::placePiece(Color c, Move mv)
 {
     cancelThread();
+    auto& bd = m_game->get_board();
     bool isSetupMode = m_actionSetupMode->isChecked();
-    if (m_computerColors[c] || isSetupMode)
+    bool isAltColor =
+            (bd.get_variant() == Variant::classic_3 && c.to_int() == 3);
+    if ((! isAltColor && m_computerColors[c])
+            || (isAltColor && m_computerColors[Color(bd.get_alt_player())])
+            || isSetupMode)
         // If the user enters a move previously played by the computer (e.g.
         // after undoing moves) then it is unlikely that the user wants to keep
         // the computer color settings.
@@ -2584,23 +2613,23 @@ void MainWindow::play()
     leaveSetupMode();
     auto variant = getVariant();
     if (variant != Variant::classic && variant != Variant::trigon
-         && variant != Variant::trigon_3)
+            && variant != Variant::trigon_3)
     {
         QSettings settings;
         settings.setValue("computer_color_none", false);
     }
-    if (! m_computerColors[m_currentColor])
+    if (! isComputerToPlay())
     {
         m_computerColors.fill(false);
-        m_computerColors[m_currentColor] = true;
-        if (variant == Variant::classic_2
-            || variant == Variant::trigon_2)
+        if (variant == Variant::classic_2 || variant == Variant::trigon_2)
         {
             if (m_currentColor == Color(0) || m_currentColor == Color(2))
                 m_computerColors[Color(0)] = m_computerColors[Color(2)] = true;
             else
                 m_computerColors[Color(1)] = m_computerColors[Color(3)] = true;
         }
+        else if (variant == Variant::classic_3 && m_currentColor.to_int() == 3)
+            m_computerColors[Color(getBoard().get_alt_player())] = true;
         else
             m_computerColors[m_currentColor] = true;
     }
@@ -2752,7 +2781,7 @@ void MainWindow::ratedGame()
     setRated(true);
     auto& bd = getBoard();
     m_computerColors.fill(true);
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    for (ColorIterator i(bd.get_nu_nonalt_colors()); i; ++i)
         if (bd.is_same_player(*i, m_ratedGameColor))
             m_computerColors[*i] = false;
     m_autoPlay = true;
@@ -2764,7 +2793,7 @@ void MainWindow::ratedGame()
         Util::convertSgfValueFromQString(computerPlayerName, charset);
     string humanPlayerNameStdStr =
         Util::convertSgfValueFromQString(tr("Human"), charset);
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    for (ColorIterator i(bd.get_nu_nonalt_colors()); i; ++i)
         if (m_computerColors[*i])
             m_game->set_player_name(*i, computerPlayerNameStdStr);
         else

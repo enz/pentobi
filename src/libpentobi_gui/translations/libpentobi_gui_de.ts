@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>ComputerColorDialog</name>
     <message>
@@ -15,36 +15,33 @@
     </message>
     <message>
         <location filename="../ComputerColorDialog.cpp" line="74"/>
-        <location filename="../ComputerColorDialog.cpp" line="81"/>
-        <location filename="../ComputerColorDialog.cpp" line="92"/>
+        <location filename="../ComputerColorDialog.cpp" line="78"/>
         <source>&amp;Blue</source>
         <translation>&amp;Blau</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.cpp" line="76"/>
-        <location filename="../ComputerColorDialog.cpp" line="87"/>
+        <location filename="../ComputerColorDialog.cpp" line="74"/>
+        <location filename="../ComputerColorDialog.cpp" line="83"/>
         <source>&amp;Green</source>
         <translation>&amp;Grün</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.cpp" line="83"/>
-        <location filename="../ComputerColorDialog.cpp" line="94"/>
+        <location filename="../ComputerColorDialog.cpp" line="80"/>
         <source>&amp;Yellow</source>
         <translation>G&amp;elb</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.cpp" line="85"/>
-        <location filename="../ComputerColorDialog.cpp" line="96"/>
+        <location filename="../ComputerColorDialog.cpp" line="82"/>
         <source>&amp;Red</source>
         <translation>&amp;Rot</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.cpp" line="101"/>
+        <location filename="../ComputerColorDialog.cpp" line="76"/>
         <source>&amp;Blue/Red</source>
         <translation>&amp;Blau/Rot</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.cpp" line="103"/>
+        <location filename="../ComputerColorDialog.cpp" line="76"/>
         <source>&amp;Yellow/Green</source>
         <translation>&amp;Gelb/Grün</translation>
     </message>
@@ -58,63 +55,63 @@
     </message>
     <message>
         <location filename="../GameInfoDialog.cpp" line="35"/>
-        <location filename="../GameInfoDialog.cpp" line="41"/>
-        <location filename="../GameInfoDialog.cpp" line="48"/>
+        <location filename="../GameInfoDialog.cpp" line="40"/>
+        <location filename="../GameInfoDialog.cpp" line="47"/>
         <source>Player &amp;Blue:</source>
         <oldsource>Player Blue:</oldsource>
         <translation>Spieler &amp;Blau:</translation>
     </message>
     <message>
         <location filename="../GameInfoDialog.cpp" line="36"/>
-        <location filename="../GameInfoDialog.cpp" line="44"/>
+        <location filename="../GameInfoDialog.cpp" line="43"/>
         <source>Player &amp;Green:</source>
         <oldsource>Player Green:</oldsource>
         <translation>Spieler &amp;Grün:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="42"/>
-        <location filename="../GameInfoDialog.cpp" line="49"/>
+        <location filename="../GameInfoDialog.cpp" line="41"/>
+        <location filename="../GameInfoDialog.cpp" line="48"/>
         <source>Player &amp;Yellow:</source>
         <oldsource>Player Yellow:</oldsource>
         <translation>Spieler G&amp;elb:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="43"/>
-        <location filename="../GameInfoDialog.cpp" line="50"/>
+        <location filename="../GameInfoDialog.cpp" line="42"/>
+        <location filename="../GameInfoDialog.cpp" line="49"/>
         <source>Player &amp;Red:</source>
         <oldsource>Player Red:</oldsource>
         <translation>Spieler &amp;Rot:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="56"/>
+        <location filename="../GameInfoDialog.cpp" line="55"/>
         <source>Player &amp;Blue/Red:</source>
         <oldsource>Player Blue/Red:</oldsource>
         <translation>Spieler &amp;Blau/Rot:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="58"/>
+        <location filename="../GameInfoDialog.cpp" line="57"/>
         <source>Player &amp;Yellow/Green:</source>
         <oldsource>Player Yellow/Green:</oldsource>
         <translation>Spieler &amp;Gelb/Grün:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="60"/>
+        <location filename="../GameInfoDialog.cpp" line="59"/>
         <source>&amp;Date:</source>
         <oldsource>Date:</oldsource>
         <translation>&amp;Datum:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="61"/>
+        <location filename="../GameInfoDialog.cpp" line="60"/>
         <source>&amp;Time limits:</source>
         <translation>Bedenk&amp;zeit:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="62"/>
+        <location filename="../GameInfoDialog.cpp" line="61"/>
         <source>&amp;Event:</source>
         <translation>&amp;Veranstaltung:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.cpp" line="63"/>
+        <location filename="../GameInfoDialog.cpp" line="62"/>
         <source>R&amp;ound:</source>
         <translation>R&amp;unde:</translation>
     </message>
@@ -188,37 +185,34 @@
 <context>
     <name>Util</name>
     <message>
-        <location filename="../Util.cpp" line="223"/>
-        <location filename="../Util.cpp" line="230"/>
-        <location filename="../Util.cpp" line="241"/>
+        <location filename="../Util.cpp" line="222"/>
+        <location filename="../Util.cpp" line="228"/>
         <source>Blue</source>
         <translation>Blau</translation>
     </message>
     <message>
-        <location filename="../Util.cpp" line="225"/>
-        <location filename="../Util.cpp" line="236"/>
+        <location filename="../Util.cpp" line="223"/>
+        <location filename="../Util.cpp" line="233"/>
         <source>Green</source>
         <translation>Grün</translation>
     </message>
     <message>
-        <location filename="../Util.cpp" line="232"/>
-        <location filename="../Util.cpp" line="243"/>
+        <location filename="../Util.cpp" line="230"/>
         <source>Yellow</source>
         <translation>Gelb</translation>
     </message>
     <message>
-        <location filename="../Util.cpp" line="234"/>
-        <location filename="../Util.cpp" line="245"/>
+        <location filename="../Util.cpp" line="232"/>
         <source>Red</source>
         <translation>Rot</translation>
     </message>
     <message>
-        <location filename="../Util.cpp" line="250"/>
+        <location filename="../Util.cpp" line="225"/>
         <source>Blue/Red</source>
         <translation>Blau/Rot</translation>
     </message>
     <message>
-        <location filename="../Util.cpp" line="252"/>
+        <location filename="../Util.cpp" line="226"/>
         <source>Yellow/Green</source>
         <translation>Gelb/Grün</translation>
     </message>

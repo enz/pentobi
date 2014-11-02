@@ -182,13 +182,13 @@ string State::dump() const
     Bonuses are added to the result to encorage wins with larger scores and
     fewer number of moves. See also: Pepels et al.: Quality-based Rewards for
     Monte-Carlo Tree Search Simulations. ECAI 2014. */
-void State::evaluate_playout(array<Float, 4>& result)
+void State::evaluate_playout(array<Float, 6>& result)
 {
     // Always evaluate symmetric positions as a draw in the playouts. This
     // will encourage the first player to break the symmetry and the second
     // player to preserve it.
     if (! m_is_symmetry_broken
-        && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
+            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
         if (log_simulations)
             log("Result: 0.5 (symmetry)");
@@ -197,24 +197,24 @@ void State::evaluate_playout(array<Float, 4>& result)
     }
 
     auto nu_players = m_bd.get_nu_players();
+    auto variant = m_bd.get_variant();
     ColorMap<Float> points;
     ColorMap<Float> score;
     for (ColorIterator i(m_nu_colors); i; ++i)
         points[*i] = static_cast<Float>(m_bd.get_points(*i));
     for (Color::IntType i = 0; i < nu_players; ++i)
         score[Color(i)] = static_cast<Float>(m_bd.get_score(Color(i)));
-    if (m_nu_colors > nu_players)
+    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
-        LIBBOARDGAME_ASSERT(m_nu_colors == 4);
         score[Color(2)] = score[Color(0)];
         score[Color(3)] = score[Color(1)];
     }
     array<Float, Color::range> sorted_points;
     if (nu_players > 2)
     {
-        for (ColorIterator i(m_nu_colors); i; ++i)
+        for (ColorIterator i(static_cast<Color::IntType>(nu_players)); i; ++i)
             sorted_points[(*i).to_int()] = points[*i];
-        sort(sorted_points.begin(), sorted_points.begin() + m_nu_colors);
+        sort(sorted_points.begin(), sorted_points.begin() + nu_players);
     }
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
@@ -239,10 +239,10 @@ void State::evaluate_playout(array<Float, 4>& result)
         {
             res = 0;
             Float n = 0;
-            for (Color::IntType j = 0; j < m_nu_colors; ++j)
+            for (Color::IntType j = 0; j < nu_players; ++j)
                 if (sorted_points[j] == points[c])
                 {
-                    res += Float(j) / Float(m_nu_colors - 1);
+                    res += Float(j) / Float(nu_players - 1);
                     ++n;
                 }
             res /= n;
@@ -270,11 +270,16 @@ void State::evaluate_playout(array<Float, 4>& result)
         if (log_simulations)
             log("res=", res);
     }
-    if (m_nu_colors > nu_players)
+    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
-        LIBBOARDGAME_ASSERT(m_nu_colors == 4);
         result[2] = result[0];
         result[3] = result[1];
+    }
+    else if (variant == Variant::classic_3)
+    {
+        result[3] = result[0];
+        result[4] = result[1];
+        result[5] = result[2];
     }
 }
 

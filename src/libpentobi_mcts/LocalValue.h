@@ -26,6 +26,7 @@ using libpentobi_base::Move;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -111,7 +112,11 @@ inline void LocalValue::init(const Board& bd)
     m_points.clear();
 
     Color to_play = bd.get_to_play();
-    Color second_color = bd.get_second_color(to_play);
+    Color second_color;
+    if (bd.get_variant() == Variant::classic_3 && to_play.to_int() == 3)
+        second_color = Color(bd.get_alt_player());
+    else
+        second_color = bd.get_second_color(to_play);
     auto& geo = bd.get_geometry();
     unsigned move_number = bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in

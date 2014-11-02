@@ -34,7 +34,23 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                                       bool check_connect)
 {
     auto to_play = bd.get_to_play();
-    auto second_color = bd.get_second_color(to_play);
+    Color second_color;
+    // connect_color is the 2nd color of the player in game variants with 2
+    // colors per player (connecting to_play and connect_color is good) and
+    // to_play in other game variants (which disables the bonus without
+    // needing an extra check below because adj_point_value is not used for
+    // pieces of to_play because it is illegal for to_play to play there).
+    Color connect_color;
+    if (bd.get_variant() == Variant::classic_3 && to_play.to_int() == 3)
+    {
+        second_color = Color(bd.get_alt_player());
+        connect_color = to_play;
+    }
+    else
+    {
+        second_color = bd.get_second_color(to_play);
+        connect_color = second_color;
+    }
     const bool is_classic_2 = (bd.get_variant() == Variant::classic_2);
     auto& bc = bd.get_board_const();
     auto& geo = bc.get_geometry();
@@ -61,11 +77,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                 // Creating new forbidden points is a bad thing
                 adj_point_value[*i] = -0.1f;
         }
-        else if (s == second_color)
-            // Connecting 2 player colors in 2-colors-per-player game variants
-            // is good (in other variants second_color is the same as to_play
-            // but there it doesn't matter what adj_point_value[*i] is because
-            // moves adjacent to to_play are not legal anyway).
+        else if (s == connect_color)
             adj_point_value[*i] = 1;
         else
             adj_point_value[*i] = 0;

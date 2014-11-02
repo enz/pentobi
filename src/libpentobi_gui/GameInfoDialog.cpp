@@ -35,15 +35,14 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerGreen = createPlayerName(tr("Player &Green:"), Color(1));
     }
-    else if (variant == Variant::classic
-             || variant == Variant::trigon)
+    else if (variant == Variant::classic || variant == Variant::trigon)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
         m_playerRed = createPlayerName(tr("Player &Red:"), Color(2));
         m_playerGreen = createPlayerName(tr("Player &Green:"), Color(3));
     }
-    else if (variant == Variant::trigon_3)
+    else if (variant == Variant::classic_3 || variant == Variant::trigon_3)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
@@ -105,7 +104,7 @@ void GameInfoDialog::accept()
         if (acceptLine(m_playerGreen, value))
             m_game.set_player_name(Color(3), value);
     }
-    else if (variant == Variant::trigon_3)
+    else if (variant == Variant::classic_3 || variant == Variant::trigon_3)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);

@@ -400,6 +400,8 @@ private:
 
     QAction* m_actionVariantClassic2;
 
+    QAction* m_actionVariantClassic3;
+
     QAction* m_actionVariantDuo;
 
     QAction* m_actionVariantJunior;
@@ -663,6 +665,8 @@ private:
 
     void initPieceSelectors();
 
+    bool isComputerToPlay() const;
+
     void leaveSetupMode();
 
     void play(Color c, Move mv);
@@ -727,6 +731,8 @@ private slots:
     void variantClassic(bool checked);
 
     void variantClassic2(bool checked);
+
+    void variantClassic3(bool checked);
 
     void variantDuo(bool checked);
 

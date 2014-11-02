@@ -140,9 +140,9 @@ public:
         generated. */
     bool gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& move);
 
-    void play_playout(Move mv);
+    void evaluate_playout(array<Float, 6>& result);
 
-    void evaluate_playout(array<Float, 4>& result);
+    void play_playout(Move mv);
 
     /** Do not update RAVE values for n'th move of the current simulation. */
     bool skip_rave(Move mv) const;
@@ -320,7 +320,10 @@ inline PrecompMoves::LocalMovesListRange State::get_moves(
 
 inline PlayerInt State::get_to_play() const
 {
-    return m_bd.get_to_play().to_int();
+    unsigned player = m_bd.get_to_play().to_int();
+    if ( m_bd.get_variant() == Variant::classic_3 && player == 3)
+        player += m_bd.get_alt_player();
+    return static_cast<PlayerInt>(player);
 }
 
 inline void State::play_in_tree(Move mv)

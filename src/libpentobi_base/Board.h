@@ -87,6 +87,10 @@ public:
 
     Color::IntType get_nu_colors() const;
 
+    /** Number of colors that are not played alternately.
+        This is equal to get_nu_colors() apart from Variant::classic_3. */
+    Color::IntType get_nu_nonalt_colors() const;
+
     unsigned get_nu_players() const;
 
 
@@ -123,6 +127,10 @@ public:
         played even if it has no more moves to play (apart from a pass
         move). */
     Color get_to_play() const;
+
+    /** Get the player who plays the next move for the 4th color in
+        Variant::classic_3. */
+    Color::IntType get_alt_player() const;
 
     /** Get next color to play that still has moves.
         Colors are tried in their playing order starting with get_to_play().
@@ -315,7 +323,8 @@ public:
     /** Get the second color in game variants in which a player plays two
         colors.
         @return The second color of the player that plays color c, or c if
-        the player plays only one color in the current game variant. */
+        the player plays only one color in the current game variant or
+        if the game variant is classic_3. */
     Color get_second_color(Color c) const;
 
     bool is_same_player(Color c1, Color c2) const;
@@ -498,6 +507,12 @@ inline unsigned Board::get_adj_status(Point p, Color c) const
     return result;
 }
 
+inline Color::IntType Board::get_alt_player() const
+{
+    LIBBOARDGAME_ASSERT(m_variant == Variant::classic_3);
+    return static_cast<Color::IntType>(get_nu_onboard_pieces(Color(3)) % 3);
+}
+
 inline const PointList&  Board::get_attach_points(Color c) const
 {
     return m_attach_points[c];
@@ -586,6 +601,11 @@ inline unsigned Board::get_nu_moves() const
     return m_moves.size();
 }
 
+inline Color::IntType Board::get_nu_nonalt_colors() const
+{
+    return m_variant != Variant::classic_3 ? m_nu_colors : 3;
+}
+
 inline unsigned Board::get_nu_onboard_pieces() const
 {
     return m_state_base.nu_onboard_pieces_all;
@@ -671,12 +691,12 @@ inline int Board::get_score(Color c) const
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_nu_colors == m_nu_players);
         int score = 0;
-        for (ColorIterator i(m_nu_colors); i; ++i)
+        auto nu_players = static_cast<Color::IntType>(m_nu_players);
+        for (ColorIterator i(nu_players); i; ++i)
             if (*i != c)
                 score -= get_points(*i);
-        score = get_points(c) + score / (static_cast<int>(m_nu_colors) - 1);
+        score = get_points(c) + score / (static_cast<int>(nu_players) - 1);
         return score;
     }
 }

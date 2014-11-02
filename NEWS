@@ -1,11 +1,13 @@
 VERSION 8.UNKNOWN (master)
 ==========================
 
+* Newly supported game variant Classic for 3 players, in which the
+  players take turns playing the fourth color.
 * Increased playing strength in game variant Trigon.
 * There are now 9 levels and the playing strength increases more evenly
-  with the level. Ratings in rated Trigon games at lower levels are not
-  comparable with previous versions of Pentobi because Trigon starts now
-  with a higher playing strength at level 1.
+  with the level. Ratings in rated games are still comparable to previous
+  versions of Pentobi apart from Trigon at lower levels because Trigon
+  starts now with a higher playing strength at level 1.
 * The computer is now better at playing moves that maximize the score
   as long as they do not lead into riskier positions.
 * The computer now remembers the playing level last used separately for

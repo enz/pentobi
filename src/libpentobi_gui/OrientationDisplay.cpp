@@ -68,14 +68,14 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
+    auto variant = m_bd.get_variant();
     auto board_type = m_bd.get_board_type();
     qreal fieldWidth;
     qreal fieldHeight;
     qreal displayWidth;
     qreal displayHeight;
-    bool isTrigon =
-        (board_type == BoardType::trigon
-         || board_type == BoardType::trigon_3);
+    bool isTrigon = (board_type == BoardType::trigon
+                     || board_type == BoardType::trigon_3);
     qreal ratio;
     int columns;
     int rows;
@@ -105,9 +105,9 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
         if (m_isColorSelected)
         {
             qreal dotSize = 0.06 * height();
-            auto color = Util::getPaintColor(m_bd.get_variant(), m_color);
-            painter.setPen(Qt::NoPen);
+            QColor color = Util::getPaintColor(variant, m_color);
             painter.setBrush(color);
+            painter.setPen(Qt::NoPen);
             painter.drawEllipse(QPointF(0.5 * width(), 0.5 * height()),
                                 dotSize, dotSize);
         }
@@ -130,7 +130,6 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     painter.save();
     painter.translate(0.5 * (displayWidth - width * fieldWidth),
                       0.5 * (displayHeight - height * fieldHeight));
-    auto variant = m_bd.get_variant();
     for (CoordPoint p : points)
     {
         qreal x = p.x * fieldWidth;

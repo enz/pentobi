@@ -24,6 +24,8 @@ enum class Variant
 
     classic_2,
 
+    classic_3,
+
     duo,
 
     junior,

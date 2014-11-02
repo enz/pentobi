@@ -307,6 +307,7 @@ void Search::set_default_param(Variant variant)
         set_rave_parent_max(25000);
         break;
     case Variant::classic_2:
+    case Variant::classic_3:
     case Variant::classic:
         set_bias_term_constant(0.06f);
         set_rave_parent_max(50000);

@@ -33,6 +33,7 @@ const Geometry& get_geometry(Variant variant)
         return RectGeometry<Point>::get(14, 14);
     case Variant::classic:
     case Variant::classic_2:
+    case Variant::classic_3:
         return RectGeometry<Point>::get(20, 20);
     case Variant::trigon:
     case Variant::trigon_2:
@@ -55,6 +56,7 @@ Color::IntType get_nu_colors(Variant variant)
     default:
         LIBBOARDGAME_ASSERT(variant == Variant::classic
                             || variant == Variant::classic_2
+                            || variant == Variant::classic_3
                             || variant == Variant::trigon
                             || variant == Variant::trigon_2);
         return 4;
@@ -70,6 +72,7 @@ Color::IntType get_nu_players(Variant variant)
     case Variant::classic_2:
     case Variant::trigon_2:
         return 2;
+    case Variant::classic_3:
     case Variant::trigon_3:
         return 3;
     default:
@@ -86,6 +89,8 @@ bool parse_variant(const string& s, Variant& variant)
         variant = Variant::classic;
     else if (t == "blokus two-player")
         variant = Variant::classic_2;
+    else if (t == "blokus three-player")
+        variant = Variant::classic_3;
     else if (t == "blokus trigon")
         variant = Variant::trigon;
     else if (t == "blokus trigon two-player")
@@ -108,6 +113,8 @@ bool parse_variant_id(const string& s, Variant& variant)
         variant = Variant::classic;
     else if (t == "classic_2" || t == "c2")
         variant = Variant::classic_2;
+    else if (t == "classic_3" || t == "c3")
+        variant = Variant::classic_3;
     else if (t == "trigon" || t == "t")
         variant = Variant::trigon;
     else if (t == "trigon_2" || t == "t2")
@@ -131,6 +138,8 @@ const char* to_string(Variant variant)
         return "Blokus";
     case Variant::classic_2:
         return "Blokus Two-Player";
+    case Variant::classic_3:
+        return "Blokus Three-Player";
     case Variant::duo:
         return "Blokus Duo";
     case Variant::junior:
@@ -153,6 +162,8 @@ const char* to_string_id(Variant variant)
         return "classic";
     case Variant::classic_2:
         return "classic_2";
+    case Variant::classic_3:
+        return "classic_3";
     case Variant::duo:
         return "duo";
     case Variant::junior:

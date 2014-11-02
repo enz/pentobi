@@ -42,9 +42,10 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 
 void ComputerColorDialog::accept()
 {
+    auto nu_players = get_nu_players(m_variant);
     auto nu_colors = get_nu_colors(m_variant);
-    if (get_nu_players(m_variant) == nu_colors)
-        for (ColorIterator i(nu_colors); i; ++i)
+    if (nu_players == nu_colors || m_variant == Variant::classic_3)
+        for (ColorIterator i(nu_players); i; ++i)
             m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
     else
     {
@@ -68,42 +69,18 @@ void ComputerColorDialog::createCheckBox(QLayout* layout, Color c)
 
 QString ComputerColorDialog::getPlayerString(Variant variant, Color c)
 {
+    auto i = c.to_int();
     if (variant == Variant::duo || variant == Variant::junior)
-    {
-        if (c == Color(0))
-            return tr("&Blue");
-        if (c == Color(1))
-            return tr("&Green");
-    }
-    else if (variant == Variant::classic || variant == Variant::trigon)
-    {
-        if (c == Color(0))
-            return tr("&Blue");
-        if (c == Color(1))
-            return tr("&Yellow");
-        if (c == Color(2))
-            return tr("&Red");
-        if (c == Color(3))
-            return tr("&Green");
-    }
-    else if (variant == Variant::trigon_3)
-    {
-        if (c == Color(0))
-            return tr("&Blue");
-        if (c == Color(1))
-            return tr("&Yellow");
-        if (c == Color(2))
-            return tr("&Red");
-    }
-    else if (variant == Variant::classic_2 || variant == Variant::trigon_2)
-    {
-        if (c == Color(0) || c == Color(2))
-            return tr("&Blue/Red");
-        if (c == Color(1) || c == Color(3))
-            return tr("&Yellow/Green");
-    }
-    LIBBOARDGAME_ASSERT(false);
-    return "";
+        return i == 0 ? tr("&Blue") : tr("&Green");
+    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
+        return i == 0 || i == 2 ? tr("&Blue/Red") : tr("&Yellow/Green");
+    if (i == 0)
+        return tr("&Blue");
+    if (i == 1)
+        return tr("&Yellow");
+    if (i == 2)
+        return tr("&Red");
+    return tr("&Green");
 }
 
 //-----------------------------------------------------------------------------

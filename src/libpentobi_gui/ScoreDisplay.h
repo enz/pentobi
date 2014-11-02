@@ -48,6 +48,9 @@ private:
 
     ColorMap<unsigned> m_points;
 
+    /** Current player of 4th color in Variant::classic_3. */
+    QColor m_altPlayerColor;
+
     int m_colorDotSize;
 
     int m_colorDotSpace;
@@ -73,7 +76,7 @@ private:
     int getTextWidth(QString text) const;
 
     void drawText(QPainter& painter, const QString& text, int x, int y,
-                  bool underline);
+                  bool underline, bool transparent);
 };
 
 //-----------------------------------------------------------------------------

@@ -115,6 +115,9 @@ void RatingDialog::updateContent()
     case Variant::classic_2:
         variantStr = tr("Classic (2 players)");
         break;
+    case Variant::classic_3:
+        variantStr = tr("Classic (3 players)");
+        break;
     case Variant::duo:
         variantStr = tr("Duo");
         break;

@@ -45,7 +45,8 @@ void StartingPoints::init(Variant variant, const Geometry& geo)
     m_starting_points[Color(1)].clear();
     m_starting_points[Color(2)].clear();
     m_starting_points[Color(3)].clear();
-    if (variant == Variant::classic || variant == Variant::classic_2)
+    if (variant == Variant::classic || variant == Variant::classic_2
+            || variant == Variant::classic_3)
     {
         add_colored_starting_point(geo, 0, 0, Color(0));
         add_colored_starting_point(geo, 19, 0, Color(1));

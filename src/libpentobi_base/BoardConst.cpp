@@ -555,7 +555,8 @@ const BoardConst& BoardConst::get(Variant variant)
     static unique_ptr<BoardConst> board_const_trigon;
     static unique_ptr<BoardConst> board_const_trigon_2;
     static unique_ptr<BoardConst> board_const_trigon_3;
-    if (variant == Variant::classic || variant == Variant::classic_2)
+    if (variant == Variant::classic || variant == Variant::classic_2
+             || variant == Variant::classic_3)
     {
         if (! board_const_classic)
             board_const_classic.reset(new BoardConst(BoardType::classic,

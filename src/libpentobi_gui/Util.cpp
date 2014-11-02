@@ -217,42 +217,20 @@ QColor Util::getPaintColor(Variant variant, Color c)
 
 QString Util::getPlayerString(Variant variant, Color c)
 {
+    auto i = c.to_int();
     if (variant == Variant::duo || variant == Variant::junior)
-    {
-        if (c == Color(0))
-            return qApp->translate("Util", "Blue");
-        if (c == Color(1))
-            return qApp->translate("Util", "Green");
-    }
-    else if (variant == Variant::classic || variant == Variant::trigon)
-    {
-        if (c == Color(0))
-            return qApp->translate("Util", "Blue");
-        if (c == Color(1))
-            return qApp->translate("Util", "Yellow");
-        if (c == Color(2))
-            return qApp->translate("Util", "Red");
-        if (c == Color(3))
-            return qApp->translate("Util", "Green");
-    }
-    else if (variant == Variant::trigon_3)
-    {
-        if (c == Color(0))
-            return qApp->translate("Util", "Blue");
-        if (c == Color(1))
-            return qApp->translate("Util", "Yellow");
-        if (c == Color(2))
-            return qApp->translate("Util", "Red");
-    }
-    else if (variant == Variant::classic_2 || variant == Variant::trigon_2)
-    {
-        if (c == Color(0) || c == Color(2))
-            return qApp->translate("Util", "Blue/Red");
-        if (c == Color(1) || c == Color(3))
-            return qApp->translate("Util", "Yellow/Green");
-    }
-    LIBBOARDGAME_ASSERT(false);
-    return "";
+        return i == 0 ? qApp->translate("Util", "Blue")
+                      : qApp->translate("Util", "Green");
+    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
+        return i == 0 || i == 2 ? qApp->translate("Util", "Blue/Red")
+                                : qApp->translate("Util", "Yellow/Green");
+    if (i == 0)
+        return qApp->translate("Util", "Blue");
+    if (i == 1)
+        return qApp->translate("Util", "Yellow");
+    if (i == 2)
+        return qApp->translate("Util", "Red");
+    return qApp->translate("Util", "Green");
 }
 
 void Util::paintColorSquare(QPainter& painter, Variant variant,

@@ -30,7 +30,7 @@ struct SearchParamConst
 {
     typedef libpentobi_mcts::Float Float;
 
-    static const PlayerInt max_players = 4;
+    static const PlayerInt max_players = 6;
 
     static const bool rave = true;
 
@@ -46,6 +46,13 @@ struct SearchParamConst
 //-----------------------------------------------------------------------------
 
 /** Monte-Carlo tree search implementation for Blokus.
+    Multiple colors per player (e.g. in Classic 2) are handled by using the
+    same game result for each color of a player.
+    Multiple players of a color (the 4th color in Classic 3) are handled by
+    adding additional players for each player of this color that share the
+    game result with the main color of the player.
+    The maximum number of players is 6, which occurs in Classic 3 with 3
+    real players and 3 pseudo-players for the 4th color.
     @note @ref libboardgame_avoid_stack_allocation */
 class Search
     : public SearchBase<State, Move, SearchParamConst>
@@ -149,12 +156,16 @@ inline const GameStateHistory& Search::get_last_state() const
 
 inline PlayerInt Search::get_nu_players() const
 {
-    return get_board().get_nu_colors();
+    return m_variant != Variant::classic_3 ? get_board().get_nu_colors() : 6;
 }
 
 inline PlayerInt Search::get_player() const
 {
-    return m_to_play.to_int();
+    auto to_play = m_to_play.to_int();
+    if ( m_variant == Variant::classic_3 && to_play == 3)
+        return static_cast<PlayerInt>(to_play + get_board().get_alt_player());
+    else
+        return to_play;
 }
 
 inline Color Search::get_to_play() const

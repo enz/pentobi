@@ -37,7 +37,7 @@ ScoreDisplay::ScoreDisplay(QWidget* parent)
 
 void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
 {
-    auto color = Util::getPaintColor(m_variant, c);
+    QColor color = Util::getPaintColor(m_variant, c);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
     QFontMetrics metrics(m_font);
@@ -45,10 +45,20 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
     // y is baseline
     int y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.drawEllipse(x,  y - m_colorDotSize, m_colorDotSize, m_colorDotSize);
+    painter.drawEllipse(x,  y - m_colorDotSize, m_colorDotSize,
+                        m_colorDotSize);
+    if (m_altPlayerColor.isValid() && c.to_int() == 3)
+    {
+        painter.setBrush(m_altPlayerColor);
+        int margin = m_colorDotSize / 3;
+        painter.drawEllipse(x + margin,  y - m_colorDotSize + margin,
+                            m_colorDotSize - 2 * margin,
+                            m_colorDotSize - 2 * margin);
+    }
     QString text = getScoreText(c);
     bool underline = ! m_hasMoves[c];
-    drawText(painter, text, x + m_colorDotWidth, y, underline);
+    bool transparent = (m_variant == Variant::classic_3 && c.to_int() == 3);
+    drawText(painter, text, x + m_colorDotWidth, y, underline, transparent);
 }
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
@@ -68,15 +78,17 @@ void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
                         m_colorDotSize);
     QString text = getScoreText2(c1, c2);
     bool underline = (! m_hasMoves[c1] && ! m_hasMoves[c2]);
-    drawText(painter, text, x + m_twoColorDotWidth, y, underline);
+    drawText(painter, text, x + m_twoColorDotWidth, y, underline, false);
 }
 
 void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
-                            int y, bool underline)
+                            int y, bool underline, bool transparent)
 {
     painter.setFont(m_font);
     QFontMetrics metrics(m_font);
     auto color = QApplication::palette().color(QPalette::WindowText);
+    if (transparent)
+        color.setAlphaF(0.55);
     painter.setPen(color);
     painter.setRenderHint(QPainter::Antialiasing, false);
     painter.drawText(x, y, text);
@@ -146,7 +158,7 @@ int ScoreDisplay::getTextWidth(QString text) const
 void ScoreDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
-    m_colorDotSize = static_cast<int>(0.8 * m_fontSize);
+    m_colorDotSize = static_cast<int>(0.7 * m_fontSize);
     m_colorDotSpace = static_cast<int>(0.3 * m_fontSize);
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
@@ -161,7 +173,8 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
         x += m_colorDotWidth + textWidthBlue + pad;
         drawScore(painter, Color(1), static_cast<int>(x));
     }
-    else if (m_variant == Variant::classic || m_variant == Variant::trigon)
+    else if (m_variant == Variant::classic || m_variant == Variant::classic_3
+             || m_variant == Variant::trigon)
     {
         int textWidthBlue = getScoreTextWidth(Color(0));
         int textWidthYellow = getScoreTextWidth(Color(1));
@@ -248,6 +261,11 @@ void ScoreDisplay::updateScore(const Board& bd)
             m_points[*i] = points;
         }
     }
+    if (variant == Variant::classic_3)
+        m_altPlayerColor = Util::getPaintColor(variant,
+                                               Color(bd.get_alt_player()));
+    else
+        m_altPlayerColor = QColor();
     if (hasChanged)
         update();
 }

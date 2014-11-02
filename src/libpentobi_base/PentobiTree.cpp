@@ -109,6 +109,7 @@ string PentobiTree::get_player_name(Color c) const
     switch (m_variant)
     {
     case Variant::classic:
+    case Variant::classic_3:
     case Variant::trigon:
     case Variant::trigon_3:
         if (c == Color(0))
@@ -284,6 +285,7 @@ void PentobiTree::set_player_name(Color c, const string& name)
     switch (m_variant)
     {
     case Variant::classic:
+    case Variant::classic_3:
     case Variant::trigon:
     case Variant::trigon_3:
         if (c == Color(0))
@@ -356,6 +358,7 @@ void PentobiTree::set_setup(const SgfNode& node, const Setup& setup)
     {
     case Variant::classic:
     case Variant::classic_2:
+    case Variant::classic_3:
     case Variant::trigon:
     case Variant::trigon_2:
         set_setup_property(node, "A1", setup.placements[Color(0)]);
