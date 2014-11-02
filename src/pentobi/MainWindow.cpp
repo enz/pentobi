@@ -2417,27 +2417,24 @@ void MainWindow::moveUpVariation()
 void MainWindow::nextPiece()
 {
     auto& bd = getBoard();
-    const Board::PiecesLeftList& piecesLeft =
-        bd.get_pieces_left(m_currentColor);
-    unsigned nuPiecesLeft = piecesLeft.size();
-    if (nuPiecesLeft == 0)
+    if ( bd.get_pieces_left(m_currentColor).empty())
         return;
-    Piece piece = m_guiBoard->getSelectedPiece();
-    if (piece.is_null())
-        piece = piecesLeft[0];
+    auto nuUniqPieces = bd.get_nu_uniq_pieces();
+    Piece::IntType i;
+    Piece selectedPiece = m_guiBoard->getSelectedPiece();
+    if (! selectedPiece.is_null())
+        i = static_cast<Piece::IntType>(selectedPiece.to_int() + 1);
     else
+        i = 0;
+    while (true)
     {
-        for (unsigned i = 0; i < nuPiecesLeft; ++i)
-            if (piecesLeft[i] == piece)
-            {
-                if (i + 1 >= nuPiecesLeft)
-                    piece = piecesLeft[0];
-                else
-                    piece = piecesLeft[i + 1];
-                break;
-            }
+        if (i >= nuUniqPieces)
+            i = 0;
+        if (bd.is_piece_left(m_currentColor, Piece(i)))
+            break;
+        ++i;
     }
-    selectPiece(m_currentColor, piece);
+    selectPiece(m_currentColor, Piece(i));
 }
 
 void MainWindow::nextTransform()
@@ -2681,26 +2678,25 @@ void MainWindow::pointClicked(Point p)
 void MainWindow::previousPiece()
 {
     auto& bd = getBoard();
-    auto& piecesLeft = bd.get_pieces_left(m_currentColor);
-    unsigned nuPiecesLeft = piecesLeft.size();
-    if (nuPiecesLeft == 0)
+    if (bd.get_pieces_left(m_currentColor).empty())
         return;
-    Piece piece = m_guiBoard->getSelectedPiece();
-    if (piece.is_null())
-        piece = piecesLeft[nuPiecesLeft - 1];
+    auto nuUniqPieces = bd.get_nu_uniq_pieces();
+    Piece::IntType i;
+    Piece selectedPiece = m_guiBoard->getSelectedPiece();
+    if (! selectedPiece.is_null())
+        i = selectedPiece.to_int();
     else
+        i = 0;
+    while (true)
     {
-        for (unsigned i = 0; i < nuPiecesLeft; ++i)
-            if (piecesLeft[i] == piece)
-            {
-                if (i == 0)
-                    piece = piecesLeft[nuPiecesLeft - 1];
-                else
-                    piece = piecesLeft[i - 1];
-                break;
-            }
+        if (i == 0)
+            i = static_cast<Piece::IntType>(nuUniqPieces - 1);
+        else
+            --i;
+        if (bd.is_piece_left(m_currentColor, Piece(i)))
+            break;
     }
-    selectPiece(m_currentColor, piece);
+    selectPiece(m_currentColor, Piece(i));
 }
 
 void MainWindow::previousTransform()
