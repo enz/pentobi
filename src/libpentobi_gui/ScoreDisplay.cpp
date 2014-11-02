@@ -158,7 +158,7 @@ int ScoreDisplay::getTextWidth(QString text) const
 void ScoreDisplay::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
-    m_colorDotSize = static_cast<int>(0.7 * m_fontSize);
+    m_colorDotSize = static_cast<int>(0.8 * m_fontSize);
     m_colorDotSpace = static_cast<int>(0.3 * m_fontSize);
     m_colorDotWidth = m_colorDotSize + m_colorDotSpace;
     m_twoColorDotWidth = 2 * m_colorDotSize + m_colorDotSpace;
