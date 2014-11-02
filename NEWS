@@ -10,11 +10,10 @@ VERSION 8.UNKNOWN (master)
   starts now with a higher playing strength at level 1.
 * The computer is now better at playing moves that maximize the score
   as long as they do not lead into riskier positions.
-* The computer now remembers the playing level last used separately for
-  each game variant and restores it when the game variant is changed.
+* The computer now remembers the playing level separately for each game
+  variant and restores it when the game variant is changed.
 * Initial support for Android. The Android version supports only a subset
-  of the features of the desktop version and only playing levels 1-7
-  because mobile devices usually have lower CPU and memory resources.
+  of the features of the desktop version and only playing levels 1-7.
 
 
 VERSION 8.2.UNKNOWN (v8-fixes)
