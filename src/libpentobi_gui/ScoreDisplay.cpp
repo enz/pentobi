@@ -50,7 +50,7 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
     if (m_altPlayerColor.isValid() && c.to_int() == 3)
     {
         painter.setBrush(m_altPlayerColor);
-        int margin = m_colorDotSize / 3;
+        int margin = m_colorDotSize / 4;
         painter.drawEllipse(x + margin,  y - m_colorDotSize + margin,
                             m_colorDotSize - 2 * margin,
                             m_colorDotSize - 2 * margin);
