@@ -237,6 +237,22 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
         x += m_colorDotWidth + textWidthRed + pad;
         drawScore3(painter, static_cast<int>(x));
     }
+    else if (m_variant == Variant::trigon_3)
+    {
+        int textWidthBlue = getScoreTextWidth(Color(0));
+        int textWidthYellow = getScoreTextWidth(Color(1));
+        int textWidthRed = getScoreTextWidth(Color(2));
+        int totalWidth =
+                textWidthBlue + textWidthRed + textWidthYellow
+                + 3 * m_colorDotWidth;
+        qreal pad = qreal(width() - totalWidth) / 4.f;
+        qreal x = pad;
+        drawScore(painter, Color(0), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthBlue + pad;
+        drawScore(painter, Color(1), static_cast<int>(x));
+        x += m_colorDotWidth + textWidthYellow + pad;
+        drawScore(painter, Color(2), static_cast<int>(x));
+    }
     else
     {
         LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
