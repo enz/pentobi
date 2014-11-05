@@ -36,7 +36,12 @@ Item {
         anchors.verticalCenter: root.verticalCenter
     }
     Text {
-        text: isAltColor ? "(" + value + ")" : value
+        text: {
+            if (isAltColor)
+                return isFinal ? "(<u>" + value + "</u>)" : "(" + value + ")"
+            else
+                return isFinal ? "<u>" + value + "</u>" : value
+        }
         color: theme.fontColorScore
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
@@ -46,7 +51,6 @@ Item {
         }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
-        font.underline: isFinal
         font.pixelSize: 1.5 * pointSize
     }
 }
