@@ -41,7 +41,7 @@ Item {
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right
-            leftMargin: (isToPlay ? 0.1 : 0.4) * point1.width
+            leftMargin: (isToPlay ? 0.2 : 0.5) * point1.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
