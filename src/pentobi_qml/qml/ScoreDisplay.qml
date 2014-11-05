@@ -22,7 +22,7 @@ Row {
         isFinal: ! hasMoves0 && ! hasMoves2
         pointSize: root.pointSize
         height: root.height
-        width: 6.2 * pointSize
+        width: 5.8 * pointSize
         color1: theme.colorBlue
         color2: theme.colorRed
     }
@@ -32,7 +32,7 @@ Row {
         isFinal: ! hasMoves1 && ! hasMoves3
         pointSize: root.pointSize
         height: root.height
-        width: 6.2 * pointSize
+        width: 5.8 * pointSize
         color1: theme.colorYellow
         color2: theme.colorGreen
     }
@@ -42,7 +42,7 @@ Row {
         isToPlay: toPlay == 0
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 4.8 * pointSize
         color: theme.colorBlue
     }
     ScoreElement {
@@ -51,7 +51,7 @@ Row {
         isToPlay: toPlay == 1
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 4.8 * pointSize
         color: boardModel.gameVariant == "duo"
                || boardModel.gameVariant == "junior" ?
                    theme.colorGreen : theme.colorYellow
@@ -63,7 +63,7 @@ Row {
         isToPlay: toPlay == 2
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 4.8 * pointSize
         color: theme.colorRed
     }
     ScoreElement {
@@ -74,7 +74,7 @@ Row {
         isToPlay: toPlay == 3
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 4.8 * pointSize
         color: theme.colorGreen
     }
     ScoreElement2 {
@@ -85,7 +85,7 @@ Row {
         isFinal: ! hasMoves3
         pointSize: root.pointSize
         height: root.height
-        width: 6.2 * pointSize
+        width: 5.8 * pointSize
         color1: theme.colorGreen
         color2:
             switch (altPlayer) {

@@ -78,7 +78,7 @@ Item
             toPlay: boardModel.isGameOver ? -1 : boardModel.toPlay
             altPlayer: boardModel.altPlayer
             height: board.gridElementHeight
-            pointSize: 0.5 * height
+            pointSize: 0.6 * height
             anchors.horizontalCenter: parent.horizontalCenter
         }
         PieceSelector {
