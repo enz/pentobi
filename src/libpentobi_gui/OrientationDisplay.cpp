@@ -104,7 +104,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     {
         if (m_isColorSelected)
         {
-            qreal dotSize = 0.08 * height();
+            qreal dotSize = 0.07 * height();
             QColor color = Util::getPaintColor(variant, m_color);
             painter.setBrush(color);
             painter.setPen(Qt::NoPen);

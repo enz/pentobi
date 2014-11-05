@@ -49,7 +49,7 @@ private:
     ColorMap<unsigned> m_points;
 
     /** Current player of 4th color in Variant::classic_3. */
-    QColor m_altPlayerColor;
+    Color m_altPlayer;
 
     int m_colorDotSize;
 
@@ -63,20 +63,26 @@ private:
 
     QString getScoreText2(Color c1, Color c2);
 
+    QString getScoreText3();
+
     int getScoreTextWidth(Color c);
 
     int getScoreTextWidth2(Color c1, Color c2);
 
+    int getScoreTextWidth3();
+
     void drawScore(QPainter& painter, Color c, int x);
 
     void drawScore2(QPainter& painter, Color c1, Color c2, int x);
+
+    void drawScore3(QPainter& painter, int x);
 
     QString getScoreText(unsigned points) const;
 
     int getTextWidth(QString text) const;
 
     void drawText(QPainter& painter, const QString& text, int x, int y,
-                  bool underline, bool transparent);
+                  bool underline);
 };
 
 //-----------------------------------------------------------------------------
