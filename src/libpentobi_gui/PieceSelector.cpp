@@ -157,8 +157,7 @@ void PieceSelector::init()
                 continue;
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
-            type_match_shift(geo, points.begin(), points.end(),
-                             geo.get_point_type(0, 0));
+            type_match_shift(geo, points.begin(), points.end(), 0);
             m_transform[x][y] =
                 m_bd.get_piece_info(piece).find_transform(geo, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
