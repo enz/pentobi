@@ -22,6 +22,13 @@ MenuBar {
                 onTriggered: Logic.changeGameVariant("classic", true)
             }
             MenuItem {
+                text: qsTr("Classic (3 Players)")
+                checkable: true
+                checked: boardModel.gameVariant == "classic_3"
+                exclusiveGroup: groupGameVariant
+                onTriggered: Logic.changeGameVariant("classic_3", true)
+            }
+            MenuItem {
                 text: qsTr("Classic (2 Players)")
                 checkable: true
                 checked: boardModel.gameVariant == "classic_2"

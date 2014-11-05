@@ -76,6 +76,7 @@ Item
             hasMoves2: boardModel.hasMoves2
             hasMoves3: boardModel.hasMoves3
             toPlay: boardModel.isGameOver ? -1 : boardModel.toPlay
+            altPlayer: boardModel.altPlayer
             height: board.gridElementHeight
             pointSize: 0.5 * height
             anchors.horizontalCenter: parent.horizontalCenter

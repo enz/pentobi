@@ -89,6 +89,7 @@ BoardModel::BoardModel(QObject* parent)
       m_nuColors(m_bd.get_nu_colors()),
       m_nuPieces(m_bd.get_nu_pieces()),
       m_toPlay(0),
+      m_altPlayer(0),
       m_points0(0),
       m_points1(0),
       m_points2(0),
@@ -240,6 +241,8 @@ void BoardModel::initGameVariant(QString gameVariant)
         m_bd.init(Variant::classic);
     else if (gameVariant == "classic_2")
         m_bd.init(Variant::classic_2);
+    else if (gameVariant == "classic_3")
+        m_bd.init(Variant::classic_3);
     else if (gameVariant == "duo")
         m_bd.init(Variant::duo);
     else if (gameVariant == "junior")
@@ -604,6 +607,14 @@ void BoardModel::updateProperties()
     {
         m_toPlay = toPlay;
         emit toPlayChanged(toPlay);
+    }
+
+    int altPlayer = (m_bd.get_variant() == Variant::classic_3 ?
+                         m_bd.get_alt_player() : 0);
+    if (m_altPlayer != altPlayer)
+    {
+        m_altPlayer = altPlayer;
+        emit altPlayerChanged(altPlayer);
     }
 }
 

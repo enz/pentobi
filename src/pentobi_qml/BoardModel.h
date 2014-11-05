@@ -26,6 +26,7 @@ class BoardModel
     Q_PROPERTY(int nuColors MEMBER m_nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int nuPieces MEMBER m_nuPieces NOTIFY nuPiecesChanged)
     Q_PROPERTY(int toPlay MEMBER m_toPlay NOTIFY toPlayChanged)
+    Q_PROPERTY(int altPlayer MEMBER m_altPlayer NOTIFY altPlayerChanged)
     Q_PROPERTY(int points0 MEMBER m_points0 NOTIFY points0Changed)
     Q_PROPERTY(int points1 MEMBER m_points1 NOTIFY points1Changed)
     Q_PROPERTY(int points2 MEMBER m_points2 NOTIFY points2Changed)
@@ -95,6 +96,8 @@ public:
 signals:
     void toPlayChanged(int);
 
+    void altPlayerChanged(int);
+
     void points0Changed(int);
 
     void points1Changed(int);
@@ -141,6 +144,8 @@ private:
     int m_nuPieces;
 
     int m_toPlay;
+
+    int m_altPlayer;
 
     int m_points0;
 

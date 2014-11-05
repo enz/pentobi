@@ -5,14 +5,20 @@ Item {
 
     property alias color1: point1.color
     property alias color2: point2.color
-    property bool isFinal: false
+    property bool isFinal
+    property bool isToPlay
+    property bool isAltColor
     property int value
     property real pointSize
 
     Rectangle {
         id: point1
 
-        width: pointSize
+        width: (isToPlay ? 1.3 : 1) * pointSize
+        border {
+            color: Qt.lighter(color1, theme.toPlayColorLighter)
+            width: isToPlay ? Math.max(0.15 * pointSize, 1) : 0
+        }
         height: width
         radius: width / 2
         anchors.verticalCenter: root.verticalCenter
@@ -27,12 +33,12 @@ Item {
         anchors.verticalCenter: root.verticalCenter
     }
     Text {
-        text: value
+        text: isAltColor ? "(" + value + ")" : value
         color: theme.fontColorScore
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right
-            leftMargin: 0.3 * point1.width
+            leftMargin: (isToPlay ? 0.1 : 0.4) * point1.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter

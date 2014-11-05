@@ -92,32 +92,52 @@ function computerPlay() {
         return
     hideComputerColorDialog()
     if (! isComputerToPlay()) {
-        var isMultiColor = (boardModel.gameVariant == "classic_2"
-                            || boardModel.gameVariant == "trigon_2")
         computerPlays0 = false
         computerPlays1 = false
         computerPlays2 = false
         computerPlays3 = false
-        switch (boardModel.toPlay) {
-        case 0:
-            computerPlays0 = true
-            if (isMultiColor) computerPlays2 = true
-            break;
-        case 1:
-            computerPlays1 = true
-            if (isMultiColor) computerPlays3 = true
-            break;
-        case 2:
-            computerPlays2 = true
-            if (isMultiColor) computerPlays0 = true
-            break;
-        case 3:
-            computerPlays3 = true
-            if (isMultiColor) computerPlays1 = true
-            break;
+        var variant = boardModel.gameVariant
+        if (variant == "classic_3" && boardModel.toPlay == 3) {
+            switch (boardModel.altPlayer) {
+            case 0: computerPlays0 = true; break
+            case 1: computerPlays1 = true; break
+            case 2: computerPlays2 = true; break
+            }
+        }
+        else
+        {
+            var isMultiColor =
+                    (variant == "classic_2" || variant == "trigon_2")
+            switch (boardModel.toPlay) {
+            case 0:
+                computerPlays0 = true
+                if (isMultiColor) computerPlays2 = true
+                break;
+            case 1:
+                computerPlays1 = true
+                if (isMultiColor) computerPlays3 = true
+                break;
+            case 2:
+                computerPlays2 = true
+                if (isMultiColor) computerPlays0 = true
+                break;
+            case 3:
+                computerPlays3 = true
+                if (isMultiColor) computerPlays1 = true
+                break;
+            }
         }
     }
     checkComputerMove()
+}
+
+function computerPlays(color) {
+    switch (color) {
+    case 0: return computerPlays0
+    case 1: return computerPlays1
+    case 2: return computerPlays2
+    case 3: return computerPlays3
+    }
 }
 
 function computerPlaysAll() {
@@ -195,12 +215,9 @@ function initGameVariant(gameVariant) {
 }
 
 function isComputerToPlay() {
-    switch (boardModel.toPlay) {
-    case 0: return computerPlays0
-    case 1: return computerPlays1
-    case 2: return computerPlays2
-    case 3: return computerPlays3
-    }
+    if (boardModel.gameVariant == "classic_3" && boardModel.toPlay == 3)
+        return computerPlays(boardModel.altPlayer)
+    return computerPlays(boardModel.toPlay)
 }
 
 function markLastMove() {
@@ -326,22 +343,23 @@ function showGameOver() {
         else
             msg = qsTr("Game ends in a tie.")
         break
+    case "classic_3":
     case "trigon_3":
         points0 = boardModel.points0
         points1 = boardModel.points1
         points2 = boardModel.points2
         var maxPoints = Math.max(points0, points1, points2)
         var nuWinners = 0
-        if (points0 == maxPoints) ++nuWinners
-        if (points1 == maxPoints) ++nuWinners
-        if (points2 == maxPoints) ++nuWinners
+        if (points0 === maxPoints) ++nuWinners
+        if (points1 === maxPoints) ++nuWinners
+        if (points2 === maxPoints) ++nuWinners
         if (nuWinners > 1)
             msg = qsTr("Game ends in a tie.")
-        else if (points0 == maxPoints)
+        else if (points0 === maxPoints)
             msg = qsTr("Blue wins.")
-        else if (points1 == maxPoints)
+        else if (points1 === maxPoints)
             msg = qsTr("Yellow wins.")
-        else if (points2 == maxPoints)
+        else if (points2 === maxPoints)
             msg = qsTr("Red wins.")
         break
     default:
@@ -351,19 +369,19 @@ function showGameOver() {
         points3 = boardModel.points3
         maxPoints = Math.max(points0, points1, points2, points3)
         nuWinners = 0
-        if (points0 == maxPoints) ++nuWinners
-        if (points1 == maxPoints) ++nuWinners
-        if (points2 == maxPoints) ++nuWinners
-        if (points3 == maxPoints) ++nuWinners
+        if (points0 === maxPoints) ++nuWinners
+        if (points1 === maxPoints) ++nuWinners
+        if (points2 === maxPoints) ++nuWinners
+        if (points3 === maxPoints) ++nuWinners
         if (nuWinners > 1)
             msg = qsTr("Game ends in a tie.")
-        else if (points0 == maxPoints)
+        else if (points0 === maxPoints)
             msg = qsTr("Blue wins.")
-        else if (points1 == maxPoints)
+        else if (points1 === maxPoints)
             msg = qsTr("Yellow wins.")
-        else if (points2 == maxPoints)
+        else if (points2 === maxPoints)
             msg = qsTr("Red wins.")
-        else if (points3 == maxPoints)
+        else if (points3 === maxPoints)
             msg = qsTr("Green wins.")
     }
     gameDisplay.showMessage(msg)

@@ -110,7 +110,7 @@
         <translation>Spielvariante</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="32"/>
+        <location filename="../Menu.qml" line="39"/>
         <source>Duo</source>
         <translation>Duo</translation>
     </message>
@@ -125,22 +125,22 @@
         <translation>Spiel</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="72"/>
+        <location filename="../Menu.qml" line="79"/>
         <source>Find Move</source>
         <translation>Zug finden</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="81"/>
+        <location filename="../Menu.qml" line="88"/>
         <source>Computer</source>
         <translation>Computer</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="88"/>
+        <location filename="../Menu.qml" line="95"/>
         <source>Play</source>
         <translation>Spielen</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="25"/>
+        <location filename="../Menu.qml" line="32"/>
         <source>Classic (2 Players)</source>
         <translation>Klassisch (2 Spieler)</translation>
     </message>
@@ -150,52 +150,57 @@
         <translation>Neu</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="39"/>
+        <location filename="../Menu.qml" line="25"/>
+        <source>Classic (3 Players)</source>
+        <translation>Klassisch (3 Spieler)</translation>
+    </message>
+    <message>
+        <location filename="../Menu.qml" line="46"/>
         <source>Trigon (4 Players)</source>
         <translation>Trigon (4 Spieler)</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="46"/>
+        <location filename="../Menu.qml" line="53"/>
         <source>Trigon (3 Players)</source>
         <translation>Trigon (3 Spieler)</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="53"/>
+        <location filename="../Menu.qml" line="60"/>
         <source>Trigon (2 Players)</source>
         <translation>Trigon (2 Spieler)</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="60"/>
+        <location filename="../Menu.qml" line="67"/>
         <source>Junior</source>
         <translation>Junior</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="68"/>
+        <location filename="../Menu.qml" line="75"/>
         <source>Undo Move</source>
         <translation>Zug rückgängig</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="84"/>
+        <location filename="../Menu.qml" line="91"/>
         <source>Computer Colors</source>
         <translation>Computer-Farben</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="92"/>
+        <location filename="../Menu.qml" line="99"/>
         <source>Level</source>
         <translation>Spielstufe</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="106"/>
+        <location filename="../Menu.qml" line="113"/>
         <source>View</source>
         <translation>Ansicht</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="109"/>
+        <location filename="../Menu.qml" line="116"/>
         <source>Mark Last Move</source>
         <translation>Letzten Zug markieren</translation>
     </message>
     <message>
-        <location filename="../Menu.qml" line="76"/>
+        <location filename="../Menu.qml" line="83"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>

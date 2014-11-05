@@ -64,7 +64,8 @@ Dialog {
                 text: qsTr("Red")
                 visible: gameVariant == "classic" ||
                          gameVariant == "trigon" ||
-                         gameVariant == "trigon_3"
+                         gameVariant == "trigon_3" ||
+                         gameVariant == "classic_3"
             }
             CheckBox {
                 id: checkBox3
