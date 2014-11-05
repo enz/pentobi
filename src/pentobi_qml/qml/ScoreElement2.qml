@@ -3,8 +3,8 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property alias color1: point1.color
-    property alias color2: point2.color
+    property color color1
+    property color color2
     property bool isFinal
     property bool isToPlay
     property bool isAltColor
@@ -14,6 +14,8 @@ Item {
     Rectangle {
         id: point1
 
+        color: color1
+        opacity: isFinal ? 0 : 1
         width: (isToPlay ? 1.3 : 1) * pointSize
         border {
             color: Qt.lighter(color1, theme.toPlayColorLighter)
@@ -26,6 +28,7 @@ Item {
     Rectangle {
         id: point2
 
+        color: isFinal ? color1 : color2
         width: pointSize
         height: width
         radius: width / 2

@@ -82,11 +82,18 @@ void ScoreDisplay::drawScore3(QPainter& painter, int x)
     // y is baseline
     int y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.drawEllipse(x, y - m_colorDotSize, m_colorDotSize, m_colorDotSize);
-    color = Util::getPaintColor(m_variant, m_altPlayer);
-    painter.setBrush(color);
-    painter.drawEllipse(x + m_colorDotSize, y - m_colorDotSize, m_colorDotSize,
-                        m_colorDotSize);
+    if (m_hasMoves[Color(3)])
+    {
+        painter.drawEllipse(x, y - m_colorDotSize,
+                            m_colorDotSize, m_colorDotSize);
+        color = Util::getPaintColor(m_variant, m_altPlayer);
+        painter.setBrush(color);
+        painter.drawEllipse(x + m_colorDotSize, y - m_colorDotSize,
+                            m_colorDotSize, m_colorDotSize);
+    }
+    else
+        painter.drawEllipse(x + m_colorDotSize, y - m_colorDotSize,
+                            m_colorDotSize, m_colorDotSize);
     QString text = getScoreText3();
     bool underline = ! m_hasMoves[Color(3)];
     drawText(painter, text, x + m_twoColorDotWidth, y, underline);
