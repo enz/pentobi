@@ -1962,54 +1962,6 @@ void MainWindow::gameOver()
         showInfo(info);
 }
 
-void MainWindow::variantClassic(bool checked)
-{
-    if (checked)
-        setVariant(Variant::classic);
-}
-
-void MainWindow::variantClassic2(bool checked)
-{
-    if (checked)
-        setVariant(Variant::classic_2);
-}
-
-void MainWindow::variantClassic3(bool checked)
-{
-    if (checked)
-        setVariant(Variant::classic_3);
-}
-
-void MainWindow::variantDuo(bool checked)
-{
-    if (checked)
-        setVariant(Variant::duo);
-}
-
-void MainWindow::variantJunior(bool checked)
-{
-    if (checked)
-        setVariant(Variant::junior);
-}
-
-void MainWindow::variantTrigon(bool checked)
-{
-    if (checked)
-        setVariant(Variant::trigon);
-}
-
-void MainWindow::variantTrigon2(bool checked)
-{
-    if (checked)
-        setVariant(Variant::trigon_2);
-}
-
-void MainWindow::variantTrigon3(bool checked)
-{
-    if (checked)
-        setVariant(Variant::trigon_3);
-}
-
 void MainWindow::genMove(bool playSingleMove)
 {
     ++m_genMoveId;
@@ -3792,6 +3744,54 @@ void MainWindow::updateWindowModified()
 {
     if (! m_file.isEmpty())
         setWindowModified(m_game->is_modified());
+}
+
+void MainWindow::variantClassic(bool checked)
+{
+    if (checked)
+        setVariant(Variant::classic);
+}
+
+void MainWindow::variantClassic2(bool checked)
+{
+    if (checked)
+        setVariant(Variant::classic_2);
+}
+
+void MainWindow::variantClassic3(bool checked)
+{
+    if (checked)
+        setVariant(Variant::classic_3);
+}
+
+void MainWindow::variantDuo(bool checked)
+{
+    if (checked)
+        setVariant(Variant::duo);
+}
+
+void MainWindow::variantJunior(bool checked)
+{
+    if (checked)
+        setVariant(Variant::junior);
+}
+
+void MainWindow::variantTrigon(bool checked)
+{
+    if (checked)
+        setVariant(Variant::trigon);
+}
+
+void MainWindow::variantTrigon2(bool checked)
+{
+    if (checked)
+        setVariant(Variant::trigon_2);
+}
+
+void MainWindow::variantTrigon3(bool checked)
+{
+    if (checked)
+        setVariant(Variant::trigon_3);
 }
 
 void MainWindow::veryBadMove(bool checked)
