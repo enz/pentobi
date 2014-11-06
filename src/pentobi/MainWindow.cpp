@@ -3284,7 +3284,9 @@ void MainWindow::setupMode(bool enable)
     {
         setSetupPlayer();
         m_setupModeLabel->hide();
+        m_currentColor = m_game->get_effective_to_play();
         enablePieceSelector(m_currentColor);
+        updateWindow(false);
     }
 }
 
