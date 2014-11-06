@@ -27,6 +27,14 @@ using namespace std;
 #define LIBBOARDGAME_FORCE_INLINE inline
 #endif
 
+#ifdef __GNUC__
+#define LIBBOARDGAME_NOINLINE __attribute__((noinline))
+#elif defined _MSC_VER
+#define LIBBOARDGAME_NOINLINE __declspec(noinline)
+#else
+#define LIBBOARDGAME_NOINLINE
+#endif
+
 #if defined __GNUC__ && ! defined __ICC &&  ! defined __clang__ && \
     (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1))
 #define LIBBOARDGAME_FLATTEN __attribute__((flatten))
