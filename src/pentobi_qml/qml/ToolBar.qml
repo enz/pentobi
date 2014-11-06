@@ -27,17 +27,14 @@ ToolBar {
         }
         Item { Layout.fillWidth: _isAndroid }
         Pentobi.ToolButton {
-            size: parent.height
             imageSource: "icons/pentobi-newgame.svg"
             onClicked: Logic.newGame(true)
         }
         Pentobi.ToolButton {
-            size: parent.height
             imageSource: "icons/pentobi-computer-colors.svg"
             onClicked: Logic.showComputerColorDialog()
         }
         Pentobi.ToolButton {
-            size: parent.height
             imageSource: "icons/pentobi-play.svg"
             onClicked: Logic.computerPlay()
         }
