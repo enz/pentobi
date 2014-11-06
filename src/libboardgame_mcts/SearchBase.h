@@ -790,13 +790,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
         log_thread(thread_state, "Search aborted");
         return true;
     }
-    auto& root = m_tree.get_root();
-    if (root.get_nu_children() == 1)
-    {
-        log_thread(thread_state, "Root has only one child");
-        return true;
-    }
-    auto count = root.get_visit_count();
+    auto count = m_tree.get_root().get_visit_count();
     if (count >= m_max_float_count)
     {
         log_thread(thread_state,
@@ -1415,35 +1409,40 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         expand_node(thread_state_0, root, best_child);
     }
 
-    while (true)
-    {
-        for (unsigned i = 1; i < nu_threads; ++i)
-            m_threads[i]->start_search();
-        search_loop(thread_state_0);
-        for (unsigned i = 1; i < nu_threads; ++i)
-            m_threads[i]->wait_search_finished();
-        bool is_out_of_mem = false;
-        for (unsigned i = 0; i < nu_threads; ++i)
-            if (m_threads[i]->thread_state.is_out_of_mem)
+    if (root.get_nu_children() == 0)
+        log("No legal moves at root");
+    else if (root.get_nu_children() == 1)
+        log("Root has only one child");
+    else
+        while (true)
+        {
+            for (unsigned i = 1; i < nu_threads; ++i)
+                m_threads[i]->start_search();
+            search_loop(thread_state_0);
+            for (unsigned i = 1; i < nu_threads; ++i)
+                m_threads[i]->wait_search_finished();
+            bool is_out_of_mem = false;
+            for (unsigned i = 0; i < nu_threads; ++i)
+                if (m_threads[i]->thread_state.is_out_of_mem)
+                {
+                    is_out_of_mem = true;
+                    break;
+                }
+            if (! is_out_of_mem)
+                break;
+            if (! m_prune_full_tree)
             {
-                is_out_of_mem = true;
+                log("Maximum tree size reached");
                 break;
             }
-        if (! is_out_of_mem)
-            break;
-        if (! m_prune_full_tree)
-        {
-            log("Maximum tree size reached");
-            break;
+            double time = m_timer();
+            if (! prune(time_source, time, max_time - time, prune_min_count,
+                        prune_min_count))
+            {
+                log("Aborting search because pruning failed.");
+                break;
+            }
         }
-        double time = m_timer();
-        if (! prune(time_source, time, max_time - time, prune_min_count,
-                    prune_min_count))
-        {
-            log("Aborting search because pruning failed.");
-            break;
-        }
-    }
 
     m_last_time = m_timer();
     log(get_info());
@@ -1717,6 +1716,8 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
     auto& nodes = thread_state.simulation.nodes;
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
     unsigned i = nu_moves - 1;
+    // nu_nodes is at least 2 (including root) because the case of no legal
+    // moves at the root is already handled before running any simulations.
     LIBBOARDGAME_ASSERT(nu_nodes > 1);
 
     // Fill was_played and first_play with information from playout moves
