@@ -24,6 +24,7 @@ using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::Point;
+using libpentobi_base::PointState;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -192,14 +193,13 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         expander.add_child(Move::pass(), 0.5, 0);
         return;
     }
-    auto board_type = bd.get_board_type();
+    auto to_play = bd.get_to_play();
     auto nu_onboard_pieces = bd.get_nu_onboard_pieces();
     bool check_dist_to_center =
-        ((board_type == BoardType::classic && nu_onboard_pieces < 13)
-         || (board_type == BoardType::trigon && nu_onboard_pieces < 5)
-         || (board_type == BoardType::trigon_3 && nu_onboard_pieces < 5));
+            (m_check_dist_to_center[to_play]
+             && nu_onboard_pieces <= m_dist_to_center_max_pieces);
     bool check_connect =
-        (board_type == BoardType::classic && nu_onboard_pieces < 14);
+        (bd.get_board_type() == BoardType::classic && nu_onboard_pieces < 14);
     compute_features(bd, moves, local_value, check_dist_to_center,
                      check_connect);
     if (! m_has_connect_move)
@@ -209,7 +209,6 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
     if (! is_symmetry_broken)
     {
         unsigned nu_moves = bd.get_nu_moves();
-        auto to_play = bd.get_to_play();
         if (to_play == Color(1) || to_play == Color(3))
         {
             if (nu_moves > 0)
@@ -289,14 +288,15 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 void PriorKnowledge::start_search(const Board& bd)
 {
     auto& geo = bd.get_geometry();
+    auto board_type = bd.get_board_type();
 
     // Init m_dist_to_center
     float width = static_cast<float>(geo.get_width());
     float height = static_cast<float>(geo.get_height());
     float center_x = 0.5f * width - 0.5f;
     float center_y = 0.5f * height - 0.5f;
-    bool is_trigon = (bd.get_board_type() == BoardType::trigon
-                      || bd.get_board_type() == BoardType::trigon_3);
+    bool is_trigon = (board_type == BoardType::trigon
+                      || board_type == BoardType::trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
     for (GeometryIterator i(geo); i; ++i)
     {
@@ -307,14 +307,47 @@ void PriorKnowledge::start_search(const Board& bd)
         // Multiply Euklidian distance by 4, so that distances that differ
         // by max. 0.25 are treated as equal
         float d = round(4 * sqrt(dx * dx + dy * dy));
-        if (bd.get_board_type() == BoardType::classic)
+        if (board_type == BoardType::classic)
             // Don't make a distinction between moves close enough to the center
             // in game variant Classic/Classic2
             d = max(d, 10.f);
         m_dist_to_center[*i] = static_cast<unsigned>(d);
     }
-    //log() << "Dist to center:\n" << m_dist_to_center;
 
+    // Init m_check_dist_to_center
+    switch(board_type)
+    {
+    case BoardType::classic:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 12;
+        break;
+    case BoardType::trigon:
+    case BoardType::trigon_3:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 4;
+        break;
+    default:
+        m_check_dist_to_center.fill(false);
+    }
+    // Don't check dist to center if the position was setup in a way that
+    // placed pieces but did not cover the starting point(s), otherwise the
+    // search might not generate any moves (if no moves meet the dist-to-center
+    // condition). Even if such positions cannot occur in legal games, we still
+    // don't want the move generation to fail.
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    {
+        if (bd.get_nu_onboard_pieces(*i) == 0)
+            continue;
+        bool is_starting_point_covered = false;
+        for (Point p : bd.get_starting_points(*i))
+            if (bd.get_point_state(p) == PointState(*i))
+            {
+                is_starting_point_covered = true;
+                break;
+            }
+        if (! is_starting_point_covered)
+            m_check_dist_to_center[*i] = false;
+    }
 }
 
 //-----------------------------------------------------------------------------

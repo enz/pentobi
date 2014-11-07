@@ -17,6 +17,7 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libpentobi_base::Board;
+using libpentobi_base::ColorMap;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
@@ -59,6 +60,10 @@ private:
     Float m_max_heuristic;
 
     bool m_has_connect_move;
+
+    ColorMap<bool> m_check_dist_to_center;
+
+    unsigned m_dist_to_center_max_pieces;
 
     unsigned m_min_dist_to_center;
 
