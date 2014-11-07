@@ -3610,21 +3610,10 @@ void MainWindow::updateRecentFiles()
     {
         QFileInfo info = QFileInfo(files[i]);
         QString name = info.absoluteFilePath();
-        QString text;
-#ifdef Q_WS_MAC
-        const bool isMac = true;
-#else
-        const bool isMac = false;
-#endif
-        if (! isMac && i + 1 <= 9)
-            text =
-                /*: Label in Recent Files menu. The first 10 items
-                  are numbered to provide a mnemonic. %1 is replaced
-                  by the number, %2 by the file name. */
-                tr("&%1: %2").arg(i + 1).arg(name);
-        else
-            text = QString("%1").arg(name);
-        m_actionRecentFile[i]->setText(text);
+        // Don't prepend the filename by a number for a shortcut key
+        // because the file name may contain underscores and Ubuntu Unity does
+        // not handle this correctly (Unity bug #1390373)
+        m_actionRecentFile[i]->setText(name);
         m_actionRecentFile[i]->setData(files[i]);
         m_actionRecentFile[i]->setVisible(true);
     }
