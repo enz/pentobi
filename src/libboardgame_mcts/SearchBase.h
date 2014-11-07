@@ -1406,6 +1406,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     {
         const Node* best_child;
         thread_state_0.state->start_simulation(0);
+        thread_state_0.state->finish_in_tree();
         expand_node(thread_state_0, root, best_child);
     }
 
