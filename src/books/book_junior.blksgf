@@ -1,12 +1,9 @@
 (
 ;GM[Blokus Junior]
- CA[UTF-8]
 (
-  ;B[f9,e10,f10,e11,f11]
-   TE[1]
+ ;B[f9,e10,f10,e11,f11]TE[1]
 )
 (
-  ;B[g9,d10,e10,f10,g10]
-   TE[1]
+ ;B[g9,d10,e10,f10,g10]TE[1]
 )
 )

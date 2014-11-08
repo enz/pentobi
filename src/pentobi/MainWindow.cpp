@@ -3831,9 +3831,7 @@ bool MainWindow::writeGame(const string& file)
 {
     ofstream out(file);
     PentobiTreeWriter writer(out, m_game->get_tree());
-    writer.set_one_prop_per_line(true);
-    writer.set_one_prop_value_per_line(true);
-    writer.set_indent(2);
+    writer.set_indent(1);
     writer.write();
     return static_cast<bool>(out);
 }
