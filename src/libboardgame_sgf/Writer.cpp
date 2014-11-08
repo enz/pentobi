@@ -44,13 +44,12 @@ void Writer::begin_tree()
     if (m_level > 0)
         m_current_indent += m_indent;
     ++m_level;
-    if (m_one_prop_per_line)
-        m_out << '\n';
+    m_out << '\n';
 }
 
 void Writer::end_node()
 {
-    if (m_one_prop_per_line && m_is_first_prop)
+    if (! m_one_prop_per_line)
         m_out << '\n';
 }
 
