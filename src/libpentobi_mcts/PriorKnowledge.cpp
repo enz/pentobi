@@ -266,12 +266,9 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                 value += 5;
             count += 5;
         }
-        else if (has_symmetry_breaker)
-        {
-            if (bd.get_move_info_ext_2(mv).breaks_symmetry)
-                value += 5;
-            count += 5;
-        }
+        else if (has_symmetry_breaker
+                 && ! bd.get_move_info_ext_2(mv).breaks_symmetry)
+            continue;
 
         // Add 1 win for moves that are local responses to recent opponent
         // moves
