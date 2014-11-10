@@ -246,7 +246,15 @@ private:
                             const Board::PiecesLeftList& pieces_considered,
                             bool with_gamma);
 
+    void evaluate_duo(array<Float, 6>& result);
+
+    void evaluate_multicolor(array<Float, 6>& result);
+
+    void evaluate_multiplayer(array<Float, 6>& result);
+
     Point find_best_starting_point(Color c) const;
+
+    Float get_eval_bonus(Color c, Float result, Float score);
 
     /** Equivalent to but faster than m_bd.get_move_info() */
     const MoveInfo& get_move_info(Move move) const;
@@ -272,6 +280,20 @@ private:
 
     void update_symmetry_broken(Move mv);
 };
+
+inline void State::evaluate_playout(array<Float, 6>& result)
+{
+    auto nu_players = m_bd.get_nu_players();
+    if (nu_players == 2)
+    {
+        if (m_nu_colors == 2)
+            evaluate_duo(result);
+        else
+            evaluate_multicolor(result);
+    }
+    else
+        evaluate_multiplayer(result);
+}
 
 inline void State::finish_in_tree()
 {

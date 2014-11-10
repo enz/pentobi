@@ -169,113 +169,115 @@ string State::dump() const
     return s.str();
 }
 
-/** Get the game result for each color.
-    The result is 0,0.5,1 for loss/tie/win in 2-player variants. If there
-    are n \> 2 players, this is generalized in the following way: The scores
-    are sorted in ascending order. Each rank r_i (i in 0..n-1) is assigned
-    a result value of r_i/(n-1). If multiple players have the same score,
-    the result value is the average of all ranks with this score. So being
-    the single winner still gives the result 1 and having the lowest score
-    gives the result 0. Being the single winner is better than sharing the
-    best place, which is better than getting the second place, etc.
-
-    Bonuses are added to the result to encorage wins with larger scores and
-    fewer number of moves. See also: Pepels et al.: Quality-based Rewards for
-    Monte-Carlo Tree Search Simulations. ECAI 2014. */
-void State::evaluate_playout(array<Float, 6>& result)
+/** Evaluation function for game variants with 2 players and 1 color per
+    player. */
+void State::evaluate_duo(array<Float, 6>& result)
 {
-    // Always evaluate symmetric positions as a draw in the playouts. This
-    // will encourage the first player to break the symmetry and the second
-    // player to preserve it.
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 2);
     if (! m_is_symmetry_broken
             && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
         if (log_simulations)
             log("Result: 0.5 (symmetry)");
-        fill(result.begin(), result.end(), 0.5f);
+        result[0] = result[1] = 0.5;
+        return;
+    }
+    Color c(0);
+    auto s = static_cast<Float>(m_bd.get_score(c));
+    Float res;
+    if (s > 0)
+        res = 1;
+    else if (s < 0)
+        res = 0;
+    else
+        res = 0.5;
+    if (log_simulations)
+        log("Result color ", c, ": sco=", s, " game_res=", res);
+    res += get_eval_bonus(c, res, s);
+    if (log_simulations)
+        log("res=", res);
+    result[0] = res;
+    result[1] = 1.f - res;
+}
+
+/** Evaluation function for game variants with 2 players and 2 colors per
+    player. */
+void State::evaluate_multicolor(array<Float, 6>& result)
+{
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 4);
+    // Always evaluate symmetric positions in trigon_2 as a draw in the
+    // playouts. See comment in evaluate_playout_duo.
+    // m_is_symmetry_broken is always true in classic_2, no need to check for
+    // game variant.
+    if (! m_is_symmetry_broken
+            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
+    {
+        if (log_simulations)
+            log("Result: 0.5 (symmetry)");
+        result[0] = result[1] = result[2] = result[3] = 0.5;
         return;
     }
 
+    Color c(0);
+    auto s = static_cast<Float>(m_bd.get_score(c));
+    Float res;
+    if (s > 0)
+        res = 1;
+    else if (s < 0)
+        res = 0;
+    else
+        res = 0.5;
+    if (log_simulations)
+        log("Result color ", c, ": sco=", s, " game_res=", res);
+    res += get_eval_bonus(c, res, s);
+    if (log_simulations)
+        log("res=", res);
+    result[0] = result[2] = res;
+    result[1] = result[3] = 1.f - res;
+}
+
+/** Evaluation function for game variants with more than 2 players.
+    The result is 0,0.5,1 for loss/tie/win in 2-player variants. For n \> 2
+    players, this is generalized in the following way: The scores are sorted in
+    ascending order. Each rank r_i (i in 0..n-1) is assigned a result value of
+    r_i/(n-1). If multiple players have the same score, the result value is the
+    average of all ranks with this score. So being the single winner still
+    gives the result 1 and having the lowest score gives the result 0. Being
+    the single winner is better than sharing the best place, which is better
+    than getting the second place, etc. */
+void State::evaluate_multiplayer(array<Float, 6>& result)
+{
     auto nu_players = m_bd.get_nu_players();
-    auto variant = m_bd.get_variant();
-    ColorMap<Float> points;
-    ColorMap<Float> score;
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        points[*i] = static_cast<Float>(m_bd.get_points(*i));
-    for (Color::IntType i = 0; i < nu_players; ++i)
-        score[Color(i)] = static_cast<Float>(m_bd.get_score(Color(i)));
-    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
-    {
-        score[Color(2)] = score[Color(0)];
-        score[Color(3)] = score[Color(1)];
-    }
+    LIBBOARDGAME_ASSERT(nu_players > 2);
+    array<Float, Color::range> points;
     array<Float, Color::range> sorted_points;
-    if (nu_players > 2)
-    {
-        for (ColorIterator i(static_cast<Color::IntType>(nu_players)); i; ++i)
-            sorted_points[(*i).to_int()] = points[*i];
-        sort(sorted_points.begin(), sorted_points.begin() + nu_players);
-    }
+    for (Color::IntType i = 0; i < nu_players; ++i)
+        sorted_points[i] = points[i] =
+                static_cast<Float>(m_bd.get_points(Color(i)));;
+    sort(sorted_points.begin(), sorted_points.begin() + nu_players);
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
-        auto s = score[c];
-        Float res;
-        if (nu_players == 2)
-        {
-            if (i == 1)
+        Float res = 0;
+        Float n = 0;
+        for (Color::IntType j = 0; j < nu_players; ++j)
+            if (sorted_points[j] == points[i])
             {
-                result[1] = 1.f - result[0];
-                break;
+                res += Float(j) / Float(nu_players - 1);
+                ++n;
             }
-            if (s > 0)
-                res = 1;
-            else if (s < 0)
-                res = 0;
-            else
-                res = 0.5;
-        }
-        else
-        {
-            res = 0;
-            Float n = 0;
-            for (Color::IntType j = 0; j < nu_players; ++j)
-                if (sorted_points[j] == points[c])
-                {
-                    res += Float(j) / Float(nu_players - 1);
-                    ++n;
-                }
-            res /= n;
-        }
+        res /= n;
+        auto s = static_cast<Float>(m_bd.get_score(c));
         if (log_simulations)
             log("Result color ", c, ": sco=", s, " game_res=", res);
-        Float l = static_cast<Float>(m_bd.get_nu_moves());
-        m_stat_len.add(l);
-        Float dev = m_stat_len.get_deviation();
-        if (dev > 0)
-        {
-            if (res == 1)
-                res -=
-                    0.06f * sigmoid(2.f, (l - m_stat_len.get_mean()) / dev);
-            else if (res == 0)
-                res +=
-                    0.06f * sigmoid(2.f, (l - m_stat_len.get_mean()) / dev);
-        }
-        auto& stat = m_stat_score[c];
-        stat.add(s);
-        dev = stat.get_deviation();
-        if (dev > 0)
-            res += 0.3f * sigmoid(2.f, (s - stat.get_mean()) / dev);
+        res += get_eval_bonus(c, res, s);
         result[i] = res;
         if (log_simulations)
             log("res=", res);
     }
-    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
-    {
-        result[2] = result[0];
-        result[3] = result[1];
-    }
-    else if (variant == Variant::classic_3)
+    if (m_bd.get_variant() == Variant::classic_3)
     {
         result[3] = result[0];
         result[4] = result[1];
@@ -393,6 +395,28 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
     mv = PlayerMove<Move>(to_play.to_int(),
                           moves[static_cast<unsigned>(pos - begin)]);
     return true;
+}
+
+/** Bonus added to the result to encorage wins with larger scores and
+    fewer number of moves.
+    See also: Pepels et al.: Quality-based Rewards for Monte-Carlo Tree Search
+    Simulations. ECAI 2014. */
+inline Float State::get_eval_bonus(Color c, Float result, Float score)
+{
+    Float bonus = 0;
+    Float l = static_cast<Float>(m_bd.get_nu_moves());
+    m_stat_len.add(l);
+    Float dev = m_stat_len.get_deviation();
+    if (dev > 0)
+        bonus +=
+                (result == 1 ? -0.06f : 0.06f)
+                * sigmoid(2.f, (l - m_stat_len.get_mean()) / dev);
+    auto& stat = m_stat_score[c];
+    stat.add(score);
+    dev = stat.get_deviation();
+    if (dev > 0)
+        bonus += 0.3f * sigmoid(2.f, (score - stat.get_mean()) / dev);
+    return bonus;
 }
 
 inline const PieceMap<bool>& State::get_pieces_considered() const
