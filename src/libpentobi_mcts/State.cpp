@@ -538,6 +538,10 @@ void State::start_search()
                 || m_shared_const.to_play == Color(3))
                && m_shared_const.avoid_symmetric_draw)
          && ! check_symmetry_broken(bd, m_shared_const.symmetric_points));
+    if (! m_check_symmetric_draw)
+        // Pretending that the symmetry is always broken is equivalent to
+        // ignoring symmetric draws
+        m_is_symmetry_broken = true;
     if (variant == Variant::trigon_2)
         m_symmetry_min_nu_pieces = 5;
     else

@@ -302,10 +302,6 @@ inline void State::finish_in_tree()
     if (m_check_symmetric_draw)
         m_is_symmetry_broken =
             check_symmetry_broken(m_bd, m_shared_const.symmetric_points);
-    else
-        // Pretending that the symmetry is always broken is equivalent to
-        // ignoring symmetric draws
-        m_is_symmetry_broken = true;
 }
 
 inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
