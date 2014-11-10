@@ -40,6 +40,7 @@ using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
+using libboardgame_util::ArrayList;
 using libboardgame_util::Barrier;
 using libboardgame_util::BitMarker;
 using libboardgame_util::Exception;
@@ -69,6 +70,9 @@ struct SearchParamConstDefault
 
     /** The maximum number of players. */
     static const PlayerInt max_players = 2;
+
+    /** The maximum length of a game. */
+    static const unsigned max_moves = 1000;
 
     /** Use RAVE. */
     static const bool rave = false;
@@ -139,6 +143,8 @@ public:
     typedef libboardgame_mcts::PlayerMove<M> PlayerMove;
 
     static const PlayerInt max_players = SearchParamConst::max_players;
+
+    static const unsigned max_moves = SearchParamConst::max_moves;
 
     typedef array<StatisticsDirtyLockFree<Float>, max_players> RootStat;
 
@@ -377,11 +383,11 @@ public:
 protected:
     struct Simulation
     {
-        vector<const Node*> nodes;
+        ArrayList<const Node*, max_moves> nodes;
 
-        vector<const Node*> last_nodes;
+        ArrayList<const Node*, max_moves> last_nodes;
 
-        vector<PlayerMove> moves;
+        ArrayList<PlayerMove, max_moves> moves;
 
         array<Float, max_players> eval;
     };
@@ -1690,7 +1696,7 @@ void SearchBase<S, M, R>::update_last_good_reply(ThreadState& thread_state)
         return;
     Move last_mv = moves[0].move;
     Move second_last_mv = Move::null();
-    for (size_t i = 1; i < nu_moves; ++i)
+    for (unsigned i = 1; i < nu_moves; ++i)
     {
         PlayerMove reply = moves[i];
         PlayerInt player = reply.player;

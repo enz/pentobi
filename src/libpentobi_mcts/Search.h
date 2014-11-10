@@ -32,6 +32,8 @@ struct SearchParamConst
 
     static const PlayerInt max_players = 6;
 
+    static const unsigned max_moves = Board::max_game_moves;
+
     static const bool rave = true;
 
     static const bool rave_check_same = false;
