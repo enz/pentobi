@@ -348,15 +348,13 @@ public:
 
     /** Select the move to play.
         Uses select_child_final() on the root node. */
-    bool select_move(Move& mv,
-                     const vector<Move>* exclude_moves = nullptr) const;
+    bool select_move(Move& mv) const;
 
     /** Select the best child of a node after the search.
         Selects child with highest visit count; the value is used as a
         tie-breaker for equal counts (important at very low number of
         simulations, e.g. all children have count 1 or 0). */
-    const Node* select_child_final(const Node& node,
-                            const vector<Move>* exclude_moves = nullptr) const;
+    const Node* select_child_final(const Node& node) const;
 
     State& get_state(unsigned thread_id);
 
@@ -1536,8 +1534,8 @@ auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 }
 
 template<class S, class M, class R>
-auto SearchBase<S, M, R>::select_child_final(const Node& node,
-                       const vector<Move>* exclude_moves) const -> const Node*
+auto SearchBase<S, M, R>::select_child_final(
+        const Node& node) const-> const Node*
 {
     // Select the child with the highest visit count, use value as tie breaker
     const Node* result = nullptr;
@@ -1549,10 +1547,6 @@ auto SearchBase<S, M, R>::select_child_final(const Node& node,
         if (count > max_count
             || (count == max_count && i->get_value() > max_count_value))
         {
-            if (exclude_moves != nullptr
-                && find(exclude_moves->begin(), exclude_moves->end(),
-                        i->get_move()) != exclude_moves->end())
-                continue;
             max_count = count;
             max_count_value = i->get_value();
             result = &(*i);
@@ -1562,10 +1556,9 @@ auto SearchBase<S, M, R>::select_child_final(const Node& node,
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::select_move(Move& mv, const vector<Move>* exclude_moves)
-    const
+bool SearchBase<S, M, R>::select_move(Move& mv) const
 {
-    auto child = select_child_final(m_tree.get_root(), exclude_moves);
+    auto child = select_child_final(m_tree.get_root());
     if (child != nullptr)
     {
         mv = child->get_move();
