@@ -378,7 +378,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
             return false;
         }
         ++m_nu_passes;
-        to_play = m_bd.get_next(to_play);
+        to_play = to_play.get_next(m_nu_colors);
         m_bd.set_to_play(to_play);
         // Don't try to handle symmetry after pass moves
         m_is_symmetry_broken = true;
@@ -505,11 +505,11 @@ void State::play_expanded_child(Move mv)
         play_playout(mv);
     else
     {
-        m_bd.play_pass();
         ++m_nu_passes;
+        m_bd.set_to_play(m_bd.get_to_play().get_next(m_nu_colors));
         // Don't try to handle pass moves: a pass move either breaks symmetry
         // or both players have passed and it's the end of the game and we need
-        // symmetry detection only as a heuristic ((playouts and move value
+        // symmetry detection only as a heuristic (playouts and move value
         // initialization)
         m_is_symmetry_broken = true;
         if (log_simulations)
