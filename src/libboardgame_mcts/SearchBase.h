@@ -890,6 +890,7 @@ void SearchBase<S, M, R>::create_threads()
 #endif
     log("Creating ", m_nu_threads, " threads");
     m_threads.clear();
+    m_threads.reserve(m_nu_threads);
     auto search_func =
         static_cast<typename Thread::SearchFunc>(
                           bind(&SearchBase::search_loop, this, placeholders::_1));
