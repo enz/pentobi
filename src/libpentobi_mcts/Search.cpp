@@ -126,7 +126,7 @@ Search::~Search()
 {
 }
 
-bool Search::check_followup(vector<Move>& sequence)
+bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
 {
     auto& bd = get_board();
     m_state.init(bd, m_to_play);

@@ -74,7 +74,7 @@ public:
 
     Float get_tie_value() const override;
 
-    bool check_followup(vector<Move>& sequence) override;
+    bool check_followup(ArrayList<Move, max_moves>& sequence) override;
 
     string get_info() const override;
 

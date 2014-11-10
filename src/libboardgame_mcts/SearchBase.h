@@ -196,7 +196,7 @@ public:
         search. The default implementation returns false.
         The information is also used for deciding whether to clear other
         caches from the last search (e.g. Last-Good-Reply heuristic). */
-    virtual bool check_followup(vector<Move>& sequence);
+    virtual bool check_followup(ArrayList<Move, max_moves>& sequence);
 
     virtual string get_info() const;
 
@@ -604,7 +604,7 @@ private:
 
     function<void(double, double)> m_callback;
 
-    vector<Move> m_followup_sequence;
+    ArrayList<Move, max_moves> m_followup_sequence;
 
     static size_t get_max_nodes(size_t memory);
 
@@ -854,7 +854,7 @@ void SearchBase<S, M, R>::check_create_threads()
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_followup(vector<Move>& sequence)
+bool SearchBase<S, M, R>::check_followup(ArrayList<Move, max_moves>& sequence)
 {
     LIBBOARDGAME_UNUSED(sequence);
     return false;

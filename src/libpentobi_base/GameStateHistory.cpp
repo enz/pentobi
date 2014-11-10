@@ -46,7 +46,8 @@ void GameStateHistory::init(const Board& bd, Color to_play)
 }
 
 bool GameStateHistory::is_followup(const GameStateHistory& other,
-                                   vector<Move>& sequence) const
+                                   ArrayList<Move, Board::max_game_moves>&
+                                   sequence) const
 {
     if (! m_is_valid || ! other.m_is_valid
         || m_variant != other.m_variant
@@ -57,7 +58,7 @@ bool GameStateHistory::is_followup(const GameStateHistory& other,
             return false;
     sequence.clear();
     Color to_play = other.m_to_play;
-    for (size_t i = other.m_moves.size(); i < m_moves.size(); ++i)
+    for (unsigned i = other.m_moves.size(); i < m_moves.size(); ++i)
     {
         auto mv = m_moves[i];
         if (mv.color != to_play)

@@ -49,7 +49,7 @@ public:
         @return @c true If the position is a followup
     */
     bool is_followup(const GameStateHistory& other,
-                     vector<Move>& sequence) const;
+                     ArrayList<Move, Board::max_game_moves>& sequence) const;
 
     /** Get the position of the board state as setup.
         @pre is_valid()
@@ -66,7 +66,7 @@ private:
 
     Variant m_variant;
 
-    vector<ColorMove> m_moves;
+    ArrayList<ColorMove, Board::max_game_moves> m_moves;
 
     Color m_to_play;
 };
