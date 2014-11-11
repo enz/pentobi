@@ -368,7 +368,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
             update_moves(to_play);
         if ((m_has_moves[to_play] = ! m_moves[to_play].empty()))
             break;
-        if (m_nu_passes + 1 == m_nu_colors)
+        if (++m_nu_passes == m_nu_colors)
             return false;
         if (m_check_terminate_early && m_bd.get_score(to_play) < 0
             && ! m_has_moves[m_bd.get_second_color(to_play)])
@@ -377,7 +377,6 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
                 log("Terminate early (no moves and negative score)");
             return false;
         }
-        ++m_nu_passes;
         to_play = to_play.get_next(m_nu_colors);
         m_bd.set_to_play(to_play);
         // Don't try to handle symmetry after pass moves
