@@ -121,58 +121,49 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         auto& info = *(move_info_array + moves[i].to_int());
         auto& info_ext = *(move_info_ext_array + moves[i].to_int());
         auto& features = m_features[i];
-        Float heuristic = 0;
-        LocalValue::Compute local;
+        auto j = info.begin();
+        auto end = info.end();
+        Float heuristic = point_value[*j];
+        LocalValue::Compute local(*j, local_value);
         if (! check_dist_to_center)
-        {
-            auto j = info.begin();
-            auto end = info.end();
-            do
+            while (++j != end)
             {
                 heuristic += point_value[*j];
                 local.add_move_point(*j, local_value);
             }
-            while (++j != end);
-        }
         else
         {
-            features.dist_to_center = numeric_limits<unsigned>::max();
-            auto j = info.begin();
-            auto end = info.end();
-            do
+            features.dist_to_center = m_dist_to_center[*j];
+            while (++j != end)
             {
                 heuristic += point_value[*j];
                 local.add_move_point(*j, local_value);
                 features.dist_to_center =
                     min(features.dist_to_center, m_dist_to_center[*j]);
             }
-            while (++j != end);
             m_min_dist_to_center =
                 min(m_min_dist_to_center, features.dist_to_center);
         }
-        auto j = info_ext.begin_attach();
-        auto end = info_ext.end_attach();
-        do
+        j = info_ext.begin_attach();
+        end = info_ext.end_attach();
+        heuristic += attach_point_value[*j];
+        while (++j != end)
             heuristic += attach_point_value[*j];
-        while (++j != end);
         j = info_ext.begin_adj();
         end = info_ext.end_adj();
+        heuristic += adj_point_value[*j];
         if (! check_connect)
-        {
-            do
+            while (++j != end)
                 heuristic += adj_point_value[*j];
-            while (++j != end);
-        }
         else
         {
-            features.connect = false;
-            do
+            features.connect = (bd.get_point_state(*j) == second_color);
+            while (++j != end)
             {
                 heuristic += adj_point_value[*j];
                 if (bd.get_point_state(*j) == second_color)
                     features.connect = true;
             }
-            while (++j != end);
             if (features.connect)
                 m_has_connect_move = true;
         }
