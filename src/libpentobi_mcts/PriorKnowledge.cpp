@@ -192,7 +192,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
             (m_check_dist_to_center[to_play]
              && nu_onboard_pieces <= m_dist_to_center_max_pieces);
     bool check_connect =
-        (bd.get_board_type() == BoardType::classic && nu_onboard_pieces < 14);
+        (bd.get_variant() == Variant::classic_2 && nu_onboard_pieces < 14);
     compute_features(bd, moves, local_value, check_dist_to_center,
                      check_connect);
     if (! m_has_connect_move)
@@ -298,21 +298,27 @@ void PriorKnowledge::start_search(const Board& bd)
         // by max. 0.25 are treated as equal
         float d = round(4 * sqrt(dx * dx + dy * dy));
         if (board_type == BoardType::classic)
-            // Don't make a distinction between moves close enough to the center
-            // in game variant Classic/Classic2
+            // Don't make a distinction between moves close enough to the
+            // center in game variant Classic/Classic2
             d = max(d, 10.f);
         m_dist_to_center[*i] = static_cast<unsigned>(d);
     }
 
     // Init m_check_dist_to_center
-    switch(board_type)
+    switch(bd.get_variant())
     {
-    case BoardType::classic:
+    case Variant::classic:
+    case Variant::classic_2:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 12;
         break;
-    case BoardType::trigon:
-    case BoardType::trigon_3:
+    case Variant::classic_3:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 10;
+        break;
+    case Variant::trigon:
+    case Variant::trigon_2:
+    case Variant::trigon_3:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 4;
         break;
