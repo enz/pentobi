@@ -35,6 +35,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                                       bool check_connect)
 {
     auto to_play = bd.get_to_play();
+    auto variant = bd.get_variant();
     Color second_color;
     // connect_color is the 2nd color of the player in game variants with 2
     // colors per player (connecting to_play and connect_color is good) and
@@ -42,7 +43,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     // needing an extra check below because adj_point_value is not used for
     // pieces of to_play because it is illegal for to_play to play there).
     Color connect_color;
-    if (bd.get_variant() == Variant::classic_3 && to_play.to_int() == 3)
+    if (variant == Variant::classic_3 && to_play.to_int() == 3)
     {
         second_color = Color(bd.get_alt_player());
         connect_color = to_play;
@@ -52,7 +53,6 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         second_color = bd.get_second_color(to_play);
         connect_color = second_color;
     }
-    const bool is_classic_2 = (bd.get_variant() == Variant::classic_2);
     auto& bc = bd.get_board_const();
     auto& geo = bc.get_geometry();
     auto move_info_array = bc.get_move_info_array();
@@ -100,7 +100,8 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                         point_value[*j] = max(point_value[*j], Float(2.5));
             }
     }
-    if (is_classic_2)
+    if (variant == Variant::classic_2
+            || (variant == Variant::classic_3 && second_color != to_play))
     {
         auto& is_forbidden_second_color = bd.is_forbidden(second_color);
         for (Point p : bd.get_attach_points(second_color))
@@ -118,8 +119,9 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     m_has_connect_move = false;
     for (unsigned i = 0; i < moves.size(); ++i)
     {
-        auto& info = *(move_info_array + moves[i].to_int());
-        auto& info_ext = *(move_info_ext_array + moves[i].to_int());
+        auto mv_int = moves[i].to_int();
+        auto& info = *(move_info_array + mv_int);
+        auto& info_ext = *(move_info_ext_array + mv_int);
         auto& features = m_features[i];
         auto j = info.begin();
         auto end = info.end();
