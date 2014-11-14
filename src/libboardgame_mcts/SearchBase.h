@@ -1515,7 +1515,7 @@ auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
     ChildIterator i(m_tree, node);
     LIBBOARDGAME_ASSERT(i);
     m_bias_term.start_iteration(node.get_visit_count());
-    auto bias_upper_limit = m_bias_term.get(0);
+    auto bias_upper_limit = m_bias_term.get_upper_limit();
     Float limit = -numeric_limits<Float>::max();
     do
     {

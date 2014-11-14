@@ -39,6 +39,9 @@ public:
 
     Float get(Float child_count) const;
 
+    /** Equivalent to get(n) with n less or equal 1 but faster. */
+    Float get_upper_limit() const;
+
 private:
     static const unsigned nu_precomp = 50;
 
@@ -75,6 +78,12 @@ inline auto BiasTerm<F>::get(Float child_count) const -> Float
     else
         child_part = compute_child_part(child_count);
     return m_parent_part * child_part;
+}
+
+template<typename F>
+inline auto BiasTerm<F>::get_upper_limit() const -> Float
+{
+    return m_parent_part;
 }
 
 template<typename F>
