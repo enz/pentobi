@@ -49,6 +49,8 @@ State::State(Variant initial_variant, const SharedConst& shared_const)
   : m_shared_const(shared_const),
     m_bd(initial_variant)
 {
+    for (Color::IntType i = 0; i < Color::range; ++i)
+        m_marker[Color(i)].fill(false);
 }
 
 inline void State::add_move(MoveList& moves, Move mv, double gamma)
