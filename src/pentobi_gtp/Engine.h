@@ -37,7 +37,6 @@ public:
     void cmd_get_value(Response&);
     void cmd_move_values(Response&);
     void cmd_name(Response&);
-    void cmd_moves_stat(const Arguments&, Response&);
     void cmd_save_tree(const Arguments&);
     void cmd_version(Response&);
 

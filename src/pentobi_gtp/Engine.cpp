@@ -27,7 +27,6 @@ using libpentobi_base::Color;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
-using libpentobi_base::MoveMarker;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_mcts::Float;
@@ -48,7 +47,6 @@ Engine::Engine(Variant variant, int level, bool use_book,
     add("name", &Engine::cmd_name);
     add("param", &Engine::cmd_param);
     add("move_values", &Engine::cmd_move_values);
-    add("moves_stat", &Engine::cmd_moves_stat);
     add("save_tree", &Engine::cmd_save_tree);
     add("version", &Engine::cmd_version);
 }
@@ -77,27 +75,6 @@ void Engine::cmd_move_values(Response& response)
                  << setprecision(1) << node->get_value_count() << ' '
                  << setprecision(3) << node->get_value() << ' '
                  << bd.to_string(node->get_move()) << '\n';
-}
-
-void Engine::cmd_moves_stat(const Arguments& args, Response& response)
-{
-    Color c = get_color_arg(args);
-    auto& bd = get_board();
-    auto& geo = bd.get_geometry();
-    Grid<unsigned> nu_moves_grid;
-    nu_moves_grid.fill(0, geo);
-    MoveList moves;
-    MoveMarker marker;
-    for (Point p : bd.get_attach_points(c))
-    {
-        bd.gen_moves(c, p, marker, moves);
-        for (Move mv : moves)
-            for (Point p : bd.get_move_info(mv))
-                ++nu_moves_grid[p];
-        marker.clear_all_set_known(moves);
-        moves.clear();
-    }
-    response << '\n' << nu_moves_grid.to_string(geo);
 }
 
 void Engine::cmd_name(Response& response)
