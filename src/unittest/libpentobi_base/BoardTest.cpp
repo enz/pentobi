@@ -12,7 +12,6 @@
 
 #include "libboardgame_test/Test.h"
 #include "libpentobi_base/MoveList.h"
-#include "libpentobi_base/MoveMarker.h"
 
 using namespace std;
 using namespace libpentobi_base;
@@ -143,12 +142,10 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
     Color c(0);
     play(*bd, c, "i11,j11,k11,l11");
     unique_ptr<MoveList> moves(new MoveList());
-    unique_ptr<MoveMarker> marker(new MoveMarker());
     for (Point p : bd->get_attach_points(c))
     {
-        bd->gen_moves(c, p, *marker, *moves);
+        bd->gen_moves(c, p, *moves);
         LIBBOARDGAME_CHECK_EQUAL(moves->size(), 124u);
-        marker->clear_all_set_known(*moves);
         moves->clear();
     }
 }
@@ -158,8 +155,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
 {
     unique_ptr<Board> bd(new Board(Variant::classic));
     unique_ptr<MoveList> moves(new MoveList());
-    unique_ptr<MoveMarker> marker(new MoveMarker());
-    bd->gen_moves(Color(0), Point("A20", 20, 20), *marker, *moves);
+    bd->gen_moves(Color(0), Point("A20", 20, 20), *moves);
     LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u);
 }
 

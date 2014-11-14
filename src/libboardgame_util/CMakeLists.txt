@@ -8,7 +8,6 @@ add_library(boardgame_util STATIC
   Assert.cpp
   Barrier.h
   Barrier.cpp
-  BitMarker.h
   CpuTimeSource.h
   CpuTimeSource.cpp
   Exception.h

@@ -57,6 +57,7 @@ Board::Board(Variant variant)
     m_color_char[Color(1)] = 'O';
     m_color_char[Color(2)] = '#';
     m_color_char[Color(3)] = '@';
+    m_marker.fill(false);
     init_variant(variant);
     init();
 }
@@ -91,38 +92,48 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
             if (is_attach_point(*i, c) && ! m_state_color[c].forbidden[*i])
                 gen_moves(c, *i, get_adj_status(*i, c), m_marker, moves);
     }
-    m_marker.clear_all_set_known(moves);
+    for (Move mv : moves)
+        m_marker[mv.to_int()] = false;
 }
 
-void Board::gen_moves(Color c, Point p, MoveMarker& marker,
+void Board::gen_moves(Color c, Point p,
+                      ArrayList<Move, Move::range>& moves) const
+{
+    moves.clear();
+    gen_moves(c, p, m_marker, moves);
+    for (Move mv : moves)
+        m_marker[mv.to_int()] = false;
+}
+
+void Board::gen_moves(Color c, Point p, array<bool, Move::range>& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
     for (Piece piece : m_state_color[c].pieces_left)
         for (Move mv : m_board_const->get_moves(piece, p))
         {
-            if (marker[mv])
+            if (marker[mv.to_int()])
                 continue;
             if (! is_forbidden(c, mv))
             {
                 moves.push_back(mv);
-                marker.set(mv);
+                marker[mv.to_int()] = true;
             }
         }
 }
 
 void Board::gen_moves(Color c, Point p, unsigned adj_status,
-                      MoveMarker& marker,
+                      array<bool, Move::range>& marker,
                       ArrayList<Move,Move::range>& moves) const
 {
     for (Piece piece : m_state_color[c].pieces_left)
         for (Move mv : m_board_const->get_moves(piece, p, adj_status))
         {
-            if (marker[mv])
+            if (marker[mv.to_int()])
                 continue;
             if (! is_forbidden(c, mv))
             {
                 moves.push_back(mv);
-                marker.set(mv);
+                marker[mv.to_int()] = true;
             }
         }
 }

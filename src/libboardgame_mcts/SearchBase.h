@@ -21,7 +21,6 @@
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/Barrier.h"
-#include "libboardgame_util/BitMarker.h"
 #include "libboardgame_util/Exception.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
@@ -42,7 +41,6 @@ using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::ArrayList;
 using libboardgame_util::Barrier;
-using libboardgame_util::BitMarker;
 using libboardgame_util::Exception;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::StatisticsBase;
@@ -444,7 +442,7 @@ private:
         /** Local variable for update_rave().
             Stores if a move was played for each player.
             Reused for efficiency. */
-        array<BitMarker<Move>, max_players> was_played;
+        array<array<bool, Move::range>, max_players> was_played;
 
         /** Local variable for update_rave().
             Stores the first time a move was played for each player.
@@ -901,7 +899,7 @@ void SearchBase<S, M, R>::create_threads()
         thread_state.thread_id = i;
         thread_state.state = create_state();
         for (PlayerInt j = 0; j < max_players; ++j)
-            thread_state.was_played[j].clear();
+            thread_state.was_played[j].fill(false);
         if (i > 0)
             t->run();
         m_threads.push_back(move(t));
@@ -1727,7 +1725,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         auto mv = moves[i];
         if (! state.skip_rave(mv.move))
         {
-            was_played[mv.player].set(mv.move);
+            was_played[mv.player][mv.move.to_int()] = true;
             first_play[mv.player][mv.move.to_int()] = i;
         }
     }
@@ -1748,7 +1746,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         do
         {
             auto mv = it->get_move();
-            if (! was_played[player][mv]
+            if (! was_played[player][mv.to_int()]
                     || it->get_value_count() > m_rave_child_max)
                 continue;
             auto first = first_play[player][mv.to_int()];
@@ -1757,7 +1755,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
             {
                 bool other_played_same = false;
                 for (PlayerInt j = 0; j < m_nu_players; ++j)
-                    if (j != player && was_played[j][mv])
+                    if (j != player && was_played[j][mv.to_int()])
                     {
                         auto first_other = first_play[j][mv.to_int()];
                         if (first_other >= i && first_other <= first)
@@ -1779,7 +1777,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
             break;
         if (! state.skip_rave(mv.move))
         {
-            was_played[player].set(mv.move);
+            was_played[player][mv.move.to_int()] = true;
             first_play[player][mv.move.to_int()] = i;
         }
         --i;
@@ -1792,7 +1790,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         if (i >= nu_moves)
             break;
         auto mv = moves[i];
-        was_played[mv.player].clear_word(mv.move);
+        was_played[mv.player][mv.move.to_int()] = false;
     }
 }
 

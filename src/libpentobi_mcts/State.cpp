@@ -68,10 +68,10 @@ inline void State::add_moves(Point p, Color c,
     double gamma;
     for (Piece piece : pieces_considered)
         for (Move mv : get_moves(c, piece, p, adj_status))
-            if (! marker[mv]
-                && check_move(is_forbidden, get_move_info(mv), gamma))
+            if (! marker[mv.to_int()]
+                    && check_move(is_forbidden, get_move_info(mv), gamma))
             {
-                marker.set(mv);
+                marker[mv.to_int()] = true;
                 add_move(moves, mv, gamma);
             }
     m_moves_added_at[c].set(p);
@@ -85,9 +85,10 @@ inline void State::add_moves(Point p, Color c, Piece piece,
     auto& is_forbidden = m_bd.is_forbidden(c);
     double gamma;
     for (Move mv : get_moves(c, piece, p, adj_status))
-        if (! marker[mv] && check_move(is_forbidden, get_move_info(mv), gamma))
+        if (! marker[mv.to_int()]
+                && check_move(is_forbidden, get_move_info(mv), gamma))
         {
-            marker.set(mv);
+            marker[mv.to_int()] = true;
             add_move(moves, mv, gamma);
         }
 }
@@ -110,10 +111,10 @@ void State::add_starting_moves(Color c,
     {
         for (Move mv : get_moves(c, piece, p, 0))
         {
-            LIBBOARDGAME_ASSERT(! marker[mv]);
+            LIBBOARDGAME_ASSERT(! marker[mv.to_int()]);
             if (check_move_without_gamma(is_forbidden, mv))
             {
-                marker.set(mv);
+                marker[mv.to_int()] = true;
                 if (with_gamma)
                     add_move(moves, mv, m_gamma_piece[piece]);
                 else
@@ -437,7 +438,8 @@ void State::init_moves_with_gamma(Color c)
     m_total_gamma = 0;
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
-    marker.clear_all_set_known(moves);
+    for (Move mv : moves)
+        marker[mv.to_int()] = false;
     moves.clear();
     Board::PiecesLeftList pieces_considered;
     for (Piece piece : m_bd.get_pieces_left(c))
@@ -463,7 +465,8 @@ void State::init_moves_without_gamma(Color c)
     m_is_piece_considered[c] = &get_pieces_considered();
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
-    marker.clear_all_set_known(moves);
+    for (Move mv : moves)
+        marker[mv.to_int()] = false;
     moves.clear();
     Board::PiecesLeftList pieces_considered;
     for (Piece piece : m_bd.get_pieces_left(c))
@@ -479,10 +482,10 @@ void State::init_moves_without_gamma(Color c)
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces_considered)
                     for (Move mv : get_moves(c, piece, p, adj_status))
-                        if (! marker[mv]
-                            && check_move_without_gamma(is_forbidden, mv))
+                        if (! marker[mv.to_int()]
+                                && check_move_without_gamma(is_forbidden, mv))
                         {
-                            marker.set(mv);
+                            marker[mv.to_int()] = true;
                             moves.push_back(mv);
                         }
                 m_moves_added_at[c].set(p);
@@ -634,7 +637,7 @@ void State::update_moves(Color c)
                     && check_move(is_forbidden, info, gamma))
                 add_move(moves, mv, gamma);
             else
-                marker.clear(mv);
+                marker[mv.to_int()] = false;
         }
     }
     else
@@ -651,7 +654,7 @@ void State::update_moves(Color c)
                     && check_move(is_forbidden, info, gamma))
                 add_move(moves, mv, gamma);
             else
-                marker.clear(mv);
+                marker[mv.to_int()] = false;
         }
     }
 
