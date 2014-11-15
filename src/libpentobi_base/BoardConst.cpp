@@ -471,8 +471,8 @@ void BoardConst::create_moves()
                 auto begin = m_precomp_moves.get_size();
                 for (unsigned l = 0; l < list.size(); ++l)
                     m_precomp_moves.push_move(list[l]);
-                auto end = m_precomp_moves.get_size() - begin;
-                m_precomp_moves.set_list_range(*i, j, piece, begin, end);
+                auto size = m_precomp_moves.get_size() - begin;
+                m_precomp_moves.set_list_range(*i, j, piece, begin, size);
             }
     if (log_move_creation)
         log("Created moves: ", m_move_info.size(), ", precomputed: ",

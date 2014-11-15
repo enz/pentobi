@@ -231,8 +231,8 @@ void Search::on_start_search(bool is_followup)
                                                  precomp_moves.get_size()));
                             precomp_moves.push_move(*m);
                         }
-                    auto end = precomp_moves.get_size() - begin;
-                    precomp_moves.set_list_range(*j, k, piece, begin, end);
+                    auto size = precomp_moves.get_size() - begin;
+                    precomp_moves.set_list_range(*j, k, piece, begin, size);
                 }
         }
     }

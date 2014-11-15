@@ -81,9 +81,9 @@ public:
 
     /** Store beginning and end of a local move list duing construction. */
     void set_list_range(Point p, unsigned adj_status, Piece piece,
-                        unsigned begin, unsigned end)
+                        unsigned begin, unsigned size)
     {
-        m_moves_range[p][adj_status][piece] = ListIndex(begin, end);
+        m_moves_range[p][adj_status][piece] = ListIndex(begin, size);
     }
 
     /** Get all moves of a piece at a point constrained by the forbidden
