@@ -301,7 +301,9 @@ bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
     bool abort =
         (check_abort && get_abort())
         || (interval_checker != nullptr && (*interval_checker)());
-    if (! node.has_children() || node.get_visit_count() < min_count || abort)
+    if (! node.has_children()
+            || (node.get_visit_count() < min_count && &node != &get_root())
+            || abort)
     {
         target_node_non_const.unlink_children();
         return ! abort;
