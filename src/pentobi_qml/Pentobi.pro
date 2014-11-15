@@ -118,7 +118,6 @@ HEADERS += \
     ../libboardgame_util/ArrayList.h \
     ../libboardgame_util/Assert.h \
     ../libboardgame_util/Barrier.h \
-    ../libboardgame_util/BitMarker.h \
     ../libboardgame_util/Exception.h \
     ../libboardgame_util/FastLog.h \
     ../libboardgame_util/FmtSaver.h \
