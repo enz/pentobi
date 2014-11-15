@@ -1395,9 +1395,12 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     // expand the root node and only the children of the last thread are used)
     auto reused_count = m_tree.get_root().get_visit_count();
     unsigned nu_threads = m_nu_threads;
-    if (max_time < 0.5
-        || (max_count > 0
-            && (max_count - reused_count) / expected_sim_per_sec() < 0.5))
+    double expected_time;
+    if (max_count > 0)
+        expected_time = (max_count - reused_count) / expected_sim_per_sec();
+    else
+        expected_time = max_time;
+    if (nu_threads > 1 && expected_time < 0.5)
     {
         log("Using single-threading for very short search");
         nu_threads = 1;
