@@ -28,6 +28,7 @@ set(pentobi_base_STAT_SRCS
   Move.h
   MoveInfo.h
   MoveList.h
+  MoveMarker.h
   MovePoints.h
   NodeUtil.h
   NodeUtil.cpp

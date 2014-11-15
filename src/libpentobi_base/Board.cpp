@@ -57,7 +57,6 @@ Board::Board(Variant variant)
     m_color_char[Color(1)] = 'O';
     m_color_char[Color(2)] = '#';
     m_color_char[Color(3)] = '@';
-    m_marker.fill(false);
     init_variant(variant);
     init();
 }
@@ -92,8 +91,7 @@ void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
             if (is_attach_point(*i, c) && ! m_state_color[c].forbidden[*i])
                 gen_moves(c, *i, get_adj_status(*i, c), m_marker, moves);
     }
-    for (Move mv : moves)
-        m_marker[mv.to_int()] = false;
+    m_marker.clear(moves);
 }
 
 void Board::gen_moves(Color c, Point p,
@@ -101,39 +99,38 @@ void Board::gen_moves(Color c, Point p,
 {
     moves.clear();
     gen_moves(c, p, m_marker, moves);
-    for (Move mv : moves)
-        m_marker[mv.to_int()] = false;
+    m_marker.clear(moves);
 }
 
-void Board::gen_moves(Color c, Point p, array<bool, Move::range>& marker,
+void Board::gen_moves(Color c, Point p, MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
     for (Piece piece : m_state_color[c].pieces_left)
         for (Move mv : m_board_const->get_moves(piece, p))
         {
-            if (marker[mv.to_int()])
+            if (marker[mv])
                 continue;
             if (! is_forbidden(c, mv))
             {
                 moves.push_back(mv);
-                marker[mv.to_int()] = true;
+                marker.set(mv);
             }
         }
 }
 
 void Board::gen_moves(Color c, Point p, unsigned adj_status,
-                      array<bool, Move::range>& marker,
+                      MoveMarker& marker,
                       ArrayList<Move,Move::range>& moves) const
 {
     for (Piece piece : m_state_color[c].pieces_left)
         for (Move mv : m_board_const->get_moves(piece, p, adj_status))
         {
-            if (marker[mv.to_int()])
+            if (marker[mv])
                 continue;
             if (! is_forbidden(c, mv))
             {
                 moves.push_back(mv);
-                marker[mv.to_int()] = true;
+                marker.set(mv);
             }
         }
 }

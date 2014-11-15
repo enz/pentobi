@@ -33,6 +33,7 @@ using libpentobi_base::ColorMap;
 using libpentobi_base::Marker;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
+using libpentobi_base::MoveMarker;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PieceMap;
@@ -63,7 +64,7 @@ struct SharedConst
 
     /** Precomputed information if move is forbidden at the start position (and
         therefore in all positions in the search). */
-    ColorMap<array<bool, Move::range>> is_forbidden_at_root;
+    ColorMap<MoveMarker> is_forbidden_at_root;
 
     /** Minimum move number where all pieces are considered until the rest
         of the simulation. */
@@ -196,7 +197,7 @@ private:
     ColorMap<bool> m_has_moves;
 
     /** Marks moves contained in m_moves. */
-    ColorMap<array<bool, Move::range>> m_marker;
+    ColorMap<MoveMarker> m_marker;
 
     LocalValue m_local_value;
 

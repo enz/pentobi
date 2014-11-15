@@ -15,6 +15,7 @@
 #include "Variant.h"
 #include "Geometry.h"
 #include "Grid.h"
+#include "MoveMarker.h"
 #include "PointList.h"
 #include "PointState.h"
 #include "Setup.h"
@@ -240,7 +241,7 @@ public:
     void gen_moves(Color c, Point p,
                    ArrayList<Move, Move::range>& moves) const;
 
-    void gen_moves(Color c, Point p, array<bool, Move::range>& marker,
+    void gen_moves(Color c, Point p, MoveMarker& marker,
                    ArrayList<Move, Move::range>& moves) const;
 
     bool has_moves(Color c) const;
@@ -447,10 +448,9 @@ private:
 
     /** Local variable during move generation.
         Reused for efficiency. */
-    mutable array<bool, Move::range> m_marker;
+    mutable MoveMarker m_marker;
 
-    void gen_moves(Color c, Point p, unsigned adj_status,
-                   array<bool, Move::range>& marker,
+    void gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
                    ArrayList<Move,Move::range>& moves) const;
 
     bool has_moves(Color c, Point p) const;

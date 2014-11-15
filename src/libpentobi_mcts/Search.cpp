@@ -177,7 +177,7 @@ void Search::on_start_search(bool is_followup)
     for (ColorIterator i(nu_colors); i; ++i)
     {
         auto& is_forbidden_at_root = m_shared_const.is_forbidden_at_root[*i];
-        is_forbidden_at_root.fill(true);
+        is_forbidden_at_root.set();
         for (BoardIterator j(bd); j; ++j)
             if (! bd.is_forbidden(*j, *i))
             {
@@ -185,10 +185,10 @@ void Search::on_start_search(bool is_followup)
                 for (Piece piece : bd.get_pieces_left(*i))
                     for (Move mv : bd.get_moves(piece, *j, adj_status))
                     {
-                        if (! is_forbidden_at_root[mv.to_int()])
+                        if (! is_forbidden_at_root[mv])
                             continue;
                         if (! bd.is_forbidden(*i, mv))
-                            is_forbidden_at_root[mv.to_int()] = false;
+                            is_forbidden_at_root.clear(mv);
                     }
             }
     }
@@ -220,7 +220,7 @@ void Search::on_start_search(bool is_followup)
                     auto begin = precomp_moves.get_size();
                     auto moves = old_precomp_moves.get_moves(piece, *j, k);
                     for (auto m = moves.begin(); m != moves.end(); ++m)
-                        if (! m_shared_const.is_forbidden_at_root[*i][m->to_int()])
+                        if (! m_shared_const.is_forbidden_at_root[*i][*m])
                         {
                             if (is_followup)
                                 // Assert that we don't overwrite old content
