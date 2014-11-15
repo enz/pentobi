@@ -146,7 +146,6 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
     {
         bd->gen_moves(c, p, *moves);
         LIBBOARDGAME_CHECK_EQUAL(moves->size(), 124u);
-        moves->clear();
     }
 }
 
