@@ -156,8 +156,10 @@ def play_game(game_number, black, white, variant, output_file, quiet):
     other = white
     if variant == "duo" or variant == "junior":
         colors = ["b", "w"]
+        has_moves = [True, True]
     else:
         colors = ["1", "2", "3", "4"]
+        has_moves = [True, True, True, True]
     color_to_play = 0
     move_number = 0
     nu_passes = 0
@@ -174,24 +176,27 @@ def play_game(game_number, black, white, variant, output_file, quiet):
             if move == "resign":
                 resign = True
                 break
-            other.send("play " + colors[color_to_play] + " " + move)
+            if move != "pass":
+                sgf += ";%s[%s]\n" % (upper(colors[color_to_play]), move)
+                other.send("play " + colors[color_to_play] + " " + move)
+            else:
+                has_moves[color_to_play] = False
+                nu_passes += 1
+                if nu_passes == len(colors):
+                    break
         except:
             sgf += ")\n"
             with open(prefix + ".fail.blksgf", "w") as f:
                 f.write(sgf)
             raise
-        if move != "pass":
-            nu_passes = 0
-            sgf += ";%s[%s]\n" % (upper(colors[color_to_play]), move)
-        else:
-            nu_passes += 1
-            if nu_passes == len(colors):
-                break
         move_number += 1
         to_play, other = other, to_play
-        color_to_play = color_to_play + 1
-        if color_to_play == len(colors):
-            color_to_play = 0
+        while True:
+            color_to_play = color_to_play + 1
+            if color_to_play == len(colors):
+                color_to_play = 0
+            if has_moves[color_to_play]:
+                break
     if exchange_color:
         black, white = white, black
     cpu_black = float(black.send("cputime")) - cpu_black
