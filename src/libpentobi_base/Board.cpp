@@ -541,7 +541,7 @@ void Board::write(ostream& out, bool mark_last_move) const
         for (ColorIterator i(m_nu_colors); i; ++i)
         {
             write_color_info_line1(out, *i);
-            out << ' ';
+            out << "  ";
             write_color_info_line2(out, *i, pieces_left[*i]);
             out << ' ';
             write_color_info_line3(out, *i, pieces_left[*i]);
@@ -552,8 +552,8 @@ void Board::write(ostream& out, bool mark_last_move) const
 void Board::write_color_info_line1(ostream& out, Color c) const
 {
     set_color(out, m_color_esc_sequence_text[c]);
-    if (get_to_play() == c)
-        out << '*';
+    if (! is_game_over() && get_effective_to_play() == c)
+        out << '(' << (get_nu_moves() + 1) << ") ";
     out << m_color_name[c] << "(" << m_color_char[c] << "): " << get_points(c);
     if (! has_moves(c))
         out << '!';
