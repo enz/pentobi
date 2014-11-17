@@ -29,11 +29,6 @@ void GameStateHistory::get_as_setup(Variant& variant, Setup& setup) const
     get_current_position_as_setup(*bd, setup);
 }
 
-void GameStateHistory::init(const Board& bd)
-{
-    init(bd, bd.get_to_play());
-}
-
 void GameStateHistory::init(const Board& bd, Color to_play)
 {
     m_is_valid = true;
@@ -45,29 +40,35 @@ void GameStateHistory::init(const Board& bd, Color to_play)
     m_to_play = to_play;
 }
 
-bool GameStateHistory::is_followup(const GameStateHistory& other,
-                                   ArrayList<Move, Board::max_game_moves>&
-                                   sequence) const
+bool GameStateHistory::is_followup(
+        const GameStateHistory& other,
+        ArrayList<Move, Board::max_game_moves>& sequence) const
 {
-    if (! m_is_valid || ! other.m_is_valid
-        || m_variant != other.m_variant
-        || m_moves.size() < other.m_moves.size())
+    if (! m_is_valid || ! other.m_is_valid || m_variant != other.m_variant
+            || m_moves.size() < other.m_moves.size())
         return false;
-    for (unsigned i = 0; i < other.m_moves.size(); ++i)
+    unsigned i = 0;
+    for ( ; i < other.m_moves.size(); ++i)
         if (m_moves[i] != other.m_moves[i])
             return false;
     sequence.clear();
     Color to_play = other.m_to_play;
-    for (unsigned i = other.m_moves.size(); i < m_moves.size(); ++i)
+    for ( ; i < m_moves.size(); ++i)
     {
         auto mv = m_moves[i];
-        if (mv.color != to_play)
-            return false;
+        while (mv.color != to_play)
+        {
+            sequence.push_back(Move::pass());
+            to_play = to_play.get_next(m_nu_colors);
+        }
         sequence.push_back(mv.move);
         to_play = to_play.get_next(m_nu_colors);
     }
-    if (to_play != m_to_play)
-        return false;
+    while (m_to_play != to_play)
+    {
+        sequence.push_back(Move::pass());
+        to_play = to_play.get_next(m_nu_colors);
+    }
     return true;
 }
 

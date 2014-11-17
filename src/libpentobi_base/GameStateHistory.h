@@ -29,9 +29,6 @@ public:
         valid position. */
     GameStateHistory();
 
-    /** Initialize from a current board position. */
-    void init(const Board& bd);
-
     /** Initialize from a current board position and explicit color to play. */
     void init(const Board& bd, Color to_play);
 
@@ -45,7 +42,11 @@ public:
     /** Check if this position is a alternate-play followup to another one.
         @param other The other position
         @param[out] sequence The sequence leading from the other position to
-        this one
+        this one. Pass moves are inserted to ensure alternating colors (as
+        required by libpentobi_mcts::Search, which uses Board::to_play() at
+        node expansion, not Board::get_effective_to_play(), to avoid storing
+        the effective color to_play in every node or calling the costly
+        get_effective_to_play() at aech visit of a node.)
         @return @c true If the position is a followup
     */
     bool is_followup(const GameStateHistory& other,
