@@ -177,6 +177,7 @@ def play_game(game_number, black, white, variant, output_file, quiet):
                 resign = True
                 break
             if move != "pass":
+                move_number += 1
                 sgf += ";%s[%s]\n" % (upper(colors[color_to_play]), move)
                 other.send("play " + colors[color_to_play] + " " + move)
             else:
@@ -189,7 +190,6 @@ def play_game(game_number, black, white, variant, output_file, quiet):
             with open(prefix + ".fail.blksgf", "w") as f:
                 f.write(sgf)
             raise
-        move_number += 1
         to_play, other = other, to_play
         while True:
             color_to_play = color_to_play + 1
