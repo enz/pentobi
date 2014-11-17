@@ -291,7 +291,8 @@ void Engine::genmove(Color c, Response& response)
     }
     m_game.play(c, mv, true);
     response << bd.to_string(mv, false);
-    board_changed();
+    if (! mv.is_pass())
+        board_changed();
 }
 
 Color Engine::get_color_arg(const Arguments& args) const
@@ -359,7 +360,8 @@ void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
     if (! m_accept_illegal && ! bd.is_legal(c, mv))
         throw Failure("illegal move");
     m_game.play(c, mv, true);
-    board_changed();
+    if (! mv.is_pass())
+        board_changed();
 }
 
 void Engine::set_player(PlayerBase& player)
