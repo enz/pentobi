@@ -13,6 +13,8 @@
 #include "libpentobi_base/Variant.h"
 #include "libpentobi_base/PointState.h"
 
+#include <cmath>
+
 using namespace std;
 using libpentobi_base::Color;
 using libpentobi_base::Variant;
