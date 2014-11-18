@@ -190,11 +190,11 @@ def play_game(game_number, black, white, variant, output_file, quiet):
             with open(prefix + ".fail.blksgf", "w") as f:
                 f.write(sgf)
             raise
-        to_play, other = other, to_play
         while True:
             color_to_play = color_to_play + 1
             if color_to_play == len(colors):
                 color_to_play = 0
+            to_play, other = other, to_play
             if has_moves[color_to_play]:
                 break
     if exchange_color:
