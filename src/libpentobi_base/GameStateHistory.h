@@ -43,10 +43,7 @@ public:
         @param other The other position
         @param[out] sequence The sequence leading from the other position to
         this one. Pass moves are inserted to ensure alternating colors (as
-        required by libpentobi_mcts::Search, which uses Board::to_play() at
-        node expansion, not Board::get_effective_to_play(), to avoid storing
-        the effective color to_play in every node or calling the costly
-        get_effective_to_play() at aech visit of a node.)
+        required by libpentobi_mcts::Search.)
         @return @c true If the position is a followup
     */
     bool is_followup(const GameStateHistory& other,
