@@ -13,6 +13,8 @@
 #include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/AdjIterator.h"
 
+#include <cmath>
+
 namespace libpentobi_mcts {
 
 using namespace std;
