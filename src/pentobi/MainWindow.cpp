@@ -290,14 +290,10 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
     QRect screenGeometry = QApplication::desktop()->screenGeometry();
     if (restoreGeometry(settings.value("geometry").toByteArray()))
     {
-        // We don't save the geometry anymore if it is fullscreen, but this can
-        // happen if the geometry was saved by a previous version of Pentobi
-        if (isFullScreen())
-            showNormal();
         if (! screenGeometry.contains(geometry()))
         {
             if (width() > screenGeometry.width()
-                || height() > screenGeometry.height())
+                    || height() > screenGeometry.height())
                 adjustSize();
             centerOnScreen = true;
         }
