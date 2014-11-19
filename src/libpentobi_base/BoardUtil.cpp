@@ -27,8 +27,6 @@ string dump(const Board& bd)
     ostringstream s;
     auto variant = bd.get_variant();
     Writer writer(s);
-    writer.set_one_prop_per_line(true);
-    writer.set_one_prop_value_per_line(true);
     writer.begin_tree();
     writer.begin_node();
     writer.write_property("GM", to_string(variant));
