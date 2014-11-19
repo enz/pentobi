@@ -69,9 +69,7 @@ void RatingHistory::addGame(float score, Rating opponentRating,
     save();
     ofstream out(getFile(m_nuGames).toLocal8Bit().constData());
     PentobiTreeWriter writer(out, tree);
-    writer.set_one_prop_per_line(true);
-    writer.set_one_prop_value_per_line(true);
-    writer.set_indent(2);
+    writer.set_indent(1);
     writer.write();
     // Only save the last RatingHistory::maxGames games
     if (m_nuGames > maxGames)
