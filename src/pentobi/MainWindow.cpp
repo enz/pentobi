@@ -628,13 +628,6 @@ void MainWindow::closeEvent(QCloseEvent* event)
         event->ignore();
 }
 
-void MainWindow::coordinates(bool checked)
-{
-    m_guiBoard->setCoordinates(checked);
-    QSettings settings;
-    settings.setValue("coordinates", checked);
-}
-
 void MainWindow::commentChanged()
 {
     if (m_ignoreCommentTextChanged)
@@ -712,6 +705,13 @@ void MainWindow::continueRatedGame()
              .arg(getPlayerString(bd.get_variant(), m_ratedGameColor)));
     m_autoPlay = true;
     checkComputerMove();
+}
+
+void MainWindow::coordinates(bool checked)
+{
+    m_guiBoard->setCoordinates(checked);
+    QSettings settings;
+    settings.setValue("coordinates", checked);
 }
 
 QAction* MainWindow::createAction(const QString& text)
