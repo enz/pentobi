@@ -332,32 +332,10 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
             m_isAutoSaveLoaded = true;
             deleteAutoSaveFile();
             m_gameFinished = getBoard().is_game_over();
+            updateWindow(true);
             if (settings.value("autosave_rated", false).toBool())
-            {
-                auto variant = getVariant();
-                unsigned ratedGameColor =
-                    settings.value("autosave_rated_color", 0).toUInt();
-                if (ratedGameColor < get_nu_colors(variant))
-                {
-                    m_ratedGameColor =
-                        Color(static_cast<Color::IntType>(ratedGameColor));
-                    m_computerColors.fill(true);
-                    auto& bd = getBoard();
-                    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-                        if (bd.is_same_player(*i, m_ratedGameColor))
-                            m_computerColors[*i] = false;
-                    setRated(true);
-                    updateWindow(true);
-                    show();
-                    showInfo(tr("Continuing unfinished rated game."),
-                             tr("You play %1 in this game.")
-                             .arg(getPlayerString(variant, m_ratedGameColor)));
-                    m_autoPlay = true;
-                    checkComputerMove();
-                }
-            }
-            else
-                updateWindow(true);
+                QMetaObject::invokeMethod(this, "continueRatedGame",
+                                          Qt::QueuedConnection);
         }
     }
 }
@@ -711,6 +689,28 @@ bool MainWindow::computerPlaysAll() const
         if (! m_computerColors[*i])
             return false;
     return true;
+}
+
+void MainWindow::continueRatedGame()
+{
+    QSettings settings;
+    auto variant = getVariant();
+    unsigned ratedGameColor =
+            settings.value("autosave_rated_color", 0).toUInt();
+    if (ratedGameColor >= get_nu_colors(variant))
+        return;
+    m_ratedGameColor = Color(static_cast<Color::IntType>(ratedGameColor));
+    m_computerColors.fill(true);
+    auto& bd = getBoard();
+    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        if (bd.is_same_player(*i, m_ratedGameColor))
+            m_computerColors[*i] = false;
+    setRated(true);
+    showInfo(tr("Continuing unfinished rated game."),
+             tr("You play %1 in this game.")
+             .arg(getPlayerString(variant, m_ratedGameColor)));
+    m_autoPlay = true;
+    checkComputerMove();
 }
 
 QAction* MainWindow::createAction(const QString& text)

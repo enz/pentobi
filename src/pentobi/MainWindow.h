@@ -722,6 +722,8 @@ private slots:
 
     void commentChanged();
 
+    void continueRatedGame();
+
     void coordinates(bool checked);
 
     void doubtfulMove(bool checked);
