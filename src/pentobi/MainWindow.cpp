@@ -693,22 +693,23 @@ bool MainWindow::computerPlaysAll() const
 
 void MainWindow::continueRatedGame()
 {
-    QSettings settings;
-    auto variant = getVariant();
-    unsigned ratedGameColor =
-            settings.value("autosave_rated_color", 0).toUInt();
-    if (ratedGameColor >= get_nu_colors(variant))
-        return;
-    m_ratedGameColor = Color(static_cast<Color::IntType>(ratedGameColor));
-    m_computerColors.fill(true);
     auto& bd = getBoard();
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    auto nuColors = bd.get_nu_colors();
+    QSettings settings;
+    auto color =
+            static_cast<Color::IntType>(
+                settings.value("autosave_rated_color", 0).toUInt());
+    if (color >= nuColors)
+        return;
+    m_ratedGameColor = Color(color);
+    m_computerColors.fill(true);
+    for (ColorIterator i(nuColors); i; ++i)
         if (bd.is_same_player(*i, m_ratedGameColor))
             m_computerColors[*i] = false;
     setRated(true);
     showInfo(tr("Continuing unfinished rated game."),
              tr("You play %1 in this game.")
-             .arg(getPlayerString(variant, m_ratedGameColor)));
+             .arg(getPlayerString(bd.get_variant(), m_ratedGameColor)));
     m_autoPlay = true;
     checkComputerMove();
 }
