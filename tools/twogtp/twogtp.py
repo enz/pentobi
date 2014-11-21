@@ -21,7 +21,7 @@ class GtpClient:
             # Use subprocess.DEVNULL once we require Python 3.3
             stderr_target = open(devnull, 'wb')
         self.process = Popen(split(cmd), stdin = PIPE, stdout = PIPE,
-                             stderr = stderr_target, close_fds = True)
+                             stderr = stderr_target)
 
     def send(self, cmd):
         if not self.quiet:
