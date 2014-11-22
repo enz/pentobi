@@ -3,7 +3,7 @@ VERSION 8.UNKNOWN (master)
 
 * Newly supported game variant Classic for 3 players, in which the
   players take turns playing the fourth color.
-* Increased playing strength in game variant Trigon.
+* Increased playing strength, mainly in game variant Trigon.
 * There are now 9 levels and the playing strength increases more evenly
   with the level. Ratings in rated games are still comparable to previous
   versions of Pentobi apart from Trigon at lower levels because Trigon
@@ -13,7 +13,7 @@ VERSION 8.UNKNOWN (master)
 * The computer now remembers the playing level separately for each game
   variant and restores it when the game variant is changed.
 * Initial support for Android. The Android version supports only a subset
-  of the features of the desktop version and only playing levels 1-7.
+  of the features of the desktop version and only playing levels 1 to 7.
 
 
 VERSION 8.2.UNKNOWN (v8-fixes)
