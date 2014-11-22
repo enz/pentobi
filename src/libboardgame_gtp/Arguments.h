@@ -7,7 +7,7 @@
 #ifndef LIBBOARDGAME_GTP_ARGUMENTS_H
 #define LIBBOARDGAME_GTP_ARGUMENTS_H
 
-#if defined __GNUC__
+#ifdef __GNUC__
 #include <cxxabi.h>
 #endif
 #include "CmdLine.h"

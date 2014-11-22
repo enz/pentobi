@@ -13,7 +13,7 @@
 #include <fstream>
 #include <iostream>
 
-#if defined(ANDROID) || defined(__ANDROID__)
+#if defined ANDROID || defined __ANDROID__
 #include <android/log.h>
 #endif
 
@@ -25,7 +25,7 @@ using namespace std;
 
 namespace {
 
-#if defined(ANDROID) || defined(__ANDROID__)
+#if defined ANDROID || defined __ANDROID__
 
 class AndroidBuf
     : public streambuf
@@ -106,14 +106,14 @@ void log(const string& s)
 
 void log_close()
 {
-#if defined(ANDROID) || defined(__ANDROID__)
+#if defined ANDROID || defined __ANDROID__
     cerr.rdbuf(nullptr);
 #endif
 }
 
 void log_init()
 {
-#if defined(ANDROID) || defined(__ANDROID__)
+#if defined ANDROID || defined __ANDROID__
     cerr.rdbuf(&android_buffer);
 #endif
 }
