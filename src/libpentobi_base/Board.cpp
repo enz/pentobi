@@ -467,7 +467,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 else if (is_trigon)
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geo->get_point_type(x, y) == 0 ? '\\' : '/');
+                    out << (m_geo->get_point_type(x, y) == 1 ? '\\' : '/');
                 }
                 else
                 {
@@ -480,7 +480,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 if (is_trigon && x > 0 && is_onboard(p.get_left()))
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geo->get_point_type(p) == 0 ? '\\' : '/');
+                    out << (m_geo->get_point_type(p) == 1 ? '\\' : '/');
                 }
                 else
                 {
@@ -523,7 +523,7 @@ void Board::write(ostream& out, bool mark_last_move) const
             if (is_onboard(Point(width - 1, y, width)))
             {
                 set_color(out, "\x1B[1;30;47m");
-                out << (m_geo->get_point_type(width - 1, y) != 0 ? '\\' : '/');
+                out << (m_geo->get_point_type(width - 1, y) != 1 ? '\\' : '/');
             }
             else
             {
