@@ -10,7 +10,6 @@
 
 #include "RandomGenerator.h"
 
-#include <ctime>
 #include <list>
 
 namespace libboardgame_util {
@@ -33,12 +32,8 @@ list<RandomGenerator*>& get_all_generators()
 
 RandomGenerator::ResultType get_nondet_seed()
 {
-    // std::random_device should be used instead of std::time() in the future
-    // but random_device is still broken on MinGW GCC 4.7.2 (it always throws)
-    static RandomGenerator::Generator seed_generator;
-    auto seed = static_cast<RandomGenerator::ResultType>(time(nullptr));
-    seed ^= seed_generator();
-    return seed;
+    random_device generator;
+    return generator();
 }
 
 } // namespace
