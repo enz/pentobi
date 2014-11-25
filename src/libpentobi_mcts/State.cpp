@@ -12,11 +12,13 @@
 
 #include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/BoardUtil.h"
+#include "libpentobi_base/ScoreUtil.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_util::fast_exp;
+using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::PointState;
@@ -251,31 +253,19 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
 {
     auto nu_players = m_bd.get_nu_players();
     LIBBOARDGAME_ASSERT(nu_players > 2);
-    array<Float, Color::range> points;
-    array<Float, Color::range> sorted_points;
+    array<unsigned, Color::range> points;
     for (Color::IntType i = 0; i < nu_players; ++i)
-        sorted_points[i] = points[i] =
-                static_cast<Float>(m_bd.get_points(Color(i)));
-    sort(sorted_points.begin(), sorted_points.begin() + nu_players);
+        points[i] = m_bd.get_points(Color(i));
+    array<Float, Color::range> game_result;
+    get_multiplayer_result(nu_players, points, game_result);
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
-        Float res = 0;
-        Float n = 0;
-        for (Color::IntType j = 0; j < nu_players; ++j)
-            if (sorted_points[j] == points[i])
-            {
-                res += Float(j) / Float(nu_players - 1);
-                ++n;
-            }
-        res /= n;
         auto s = static_cast<Float>(m_bd.get_score(c));
+        result[i] = game_result[i] + get_eval_bonus(c, game_result[i], s);
         if (log_simulations)
-            log("Result color ", c, ": sco=", s, " game_res=", res);
-        res += get_eval_bonus(c, res, s);
-        result[i] = res;
-        if (log_simulations)
-            log("res=", res);
+            log("Result color ", c, ": sco=", s, " game_res=", game_result[i],
+                " res=", result[i]);
     }
     if (m_bd.get_variant() == Variant::classic_3)
     {

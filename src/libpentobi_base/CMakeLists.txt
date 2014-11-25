@@ -55,6 +55,7 @@ set(pentobi_base_STAT_SRCS
   PointState.h
   PointState.cpp
   PrecompMoves.h
+  ScoreUtil.h
   Setup.h
   StartingPoints.h
   StartingPoints.cpp
