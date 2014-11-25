@@ -34,10 +34,6 @@ bool Application::notify(QObject* receiver, QEvent* event)
         string detailedText = get_type_name(e) + ": " + e.what();
         showFatal(QString::fromLocal8Bit(detailedText.c_str()));
     }
-    catch (...)
-    {
-        showFatal("Unknown exception");
-    }
     return false;
 }
 

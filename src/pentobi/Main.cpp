@@ -191,11 +191,6 @@ int main(int argc, char* argv[])
         showFatal(QString::fromLocal8Bit(detailedText.c_str()));
         return 1;
     }
-    catch (...)
-    {
-        showFatal("Unknown exception");
-        return 1;
-    }
 }
 
 //-----------------------------------------------------------------------------

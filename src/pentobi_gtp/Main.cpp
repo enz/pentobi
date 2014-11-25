@@ -185,11 +185,6 @@ int main(int argc, char** argv)
         log("Error: ", e.what());
         return 1;
     }
-    catch (...)
-    {
-        log("Error: unknown exception");
-        return 1;
-    }
 }
 
 //-----------------------------------------------------------------------------
