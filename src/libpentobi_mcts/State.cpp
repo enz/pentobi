@@ -255,7 +255,7 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
     array<Float, Color::range> sorted_points;
     for (Color::IntType i = 0; i < nu_players; ++i)
         sorted_points[i] = points[i] =
-                static_cast<Float>(m_bd.get_points(Color(i)));;
+                static_cast<Float>(m_bd.get_points(Color(i)));
     sort(sorted_points.begin(), sorted_points.begin() + nu_players);
     for (Color::IntType i = 0; i < nu_players; ++i)
     {

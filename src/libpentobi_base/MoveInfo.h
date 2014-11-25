@@ -82,7 +82,7 @@ struct MoveInfoExt
     void init(const ArrayList<Point, PieceInfo::max_adj>& adj_points,
               const ArrayList<Point, PieceInfo::max_attach>& attach_points)
     {
-        size_attach_points = static_cast<uint8_t>(attach_points.size());;
+        size_attach_points = static_cast<uint8_t>(attach_points.size());
         size_adj_points = static_cast<uint8_t>(adj_points.size());
         LIBBOARDGAME_ASSERT(size_attach_points + size_adj_points
                             <= PieceInfo::max_adj_attach);
