@@ -7,10 +7,6 @@
 #ifndef TWOGTP_GTP_CONNECTION_H
 #define TWOGTP_GTP_CONNECTION_H
 
-#if ! defined __GNUC__ || defined __clang__ || ! HAVE_UNISTD_H
-#error "GtpConnection currently only implemented for Posix/GCC"
-#endif
-
 #include <iosfwd>
 #include <memory>
 #include <string>
