@@ -34,9 +34,9 @@ public:
     AndroidBuf();
 
 protected:
-    int overflow(int c);
+    int overflow(int c) override;
 
-    int sync();
+    int sync() override;
 
 private:
     static const unsigned buffer_size = 8192;

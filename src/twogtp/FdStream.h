@@ -24,7 +24,7 @@ public:
     ~FdInBuf();
 
 protected:
-    virtual int_type underflow() override;
+    int_type underflow() override;
 
 private:
     int m_fd;
@@ -59,9 +59,9 @@ public:
     ~FdOutBuf();
 
 protected:
-    virtual int_type overflow(int_type c) override;
+    int_type overflow(int_type c) override;
 
-    virtual streamsize xsputn(const char_type* s, streamsize count) override;
+    streamsize xsputn(const char_type* s, streamsize count) override;
 
 private:
     int m_fd;
