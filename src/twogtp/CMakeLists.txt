@@ -1,0 +1,25 @@
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
+add_executable(twogtp
+  Analyze.h
+  Analyze.cpp
+  GtpConnection.h
+  GtpConnection.cpp
+  Main.cpp
+  OutputFile.h
+  OutputFile.cpp
+  TwoGtp.h
+  TwoGtp.cpp
+)
+
+target_link_libraries(twogtp
+  pentobi_base
+  boardgame_base
+  boardgame_util
+  boardgame_sys
+)
+
+if (DEFINED CMAKE_THREAD_LIBS_INIT)
+  target_link_libraries(twogtp ${CMAKE_THREAD_LIBS_INIT})
+endif()
+

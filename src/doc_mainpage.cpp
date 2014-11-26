@@ -6,7 +6,7 @@
     game Blokus and could be reused for other projects:
 
     - libboardgame_gtp -
-      Implementation of the Go Text Protocol (@ref libboardgame_doc_gtp)
+      Implementation of the Go Text Protocol GTP (@ref libboardgame_doc_gtp)
     - libboardgame_sys -
       Platform-dependent functionality
     - libboardgame_util -
@@ -29,7 +29,10 @@
     - libpentobi_mcts -
       Blokus player based on Monte-Carlo tree search
     - pentobi_gtp -
-      @ref libboardgame_doc_gtp interface to the player in libpentobi_mcts
+      GTP interface to the player in libpentobi_mcts
+    - twogtp -
+      Tool for playing games between two GTP engines
+      (currently only supported on Linux/GCC)
 
     @section mainpage_gui Pentobi GUI Modules
 

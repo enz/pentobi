@@ -49,9 +49,12 @@ buffer for its standard error stream is full. Alternatively, you
 can disable debugging output of <tt>pentobi-gtp</tt> with the
 command line option <tt>--quiet</tt>, but it is generally better to
 assume that a GTP engine writes text to standard error.</p>
-<p>An example for a controller written in Python is
-<tt>tools/twogtp/twogtp.py</tt>, which starts two GTP engines and
-plays a number of Blokus games between them.</p>
+<p>An example for a controller written in C++ for Linux/GCC is
+included in Pentobi since version 9.0 in <tt>src/twogtp</tt>.
+The controller starts two GTP engines and plays a number of Blokus
+games between them. Older versions of Pentobi included a Python
+script with a similar functionality in
+<tt>tools/twogtp/twogtp.py</tt>.</p>
 <h2>Building</h2>
 <p>Since the GTP engine is a developer tool, building it is not
 enabled by default. To enable it, run <tt>cmake</tt> with the
@@ -329,36 +332,36 @@ in normal text.</p>
 = 7.1
 
 <b>set_game Blokus Duo</b>
-= 
+=
 
 <b>play b e8,d9,e9,f9,e10</b>
-= 
+=
 
 <b>genmove w</b>
 = i4,h5,i5,j5,i6
 
 <b>showboard</b>
-= 
+=
    A B C D E F G H I J K L M N
 14 . . . . . . . . . . . . . . 14  *Blue(X): 5
 13 . . . . . . . . . . . . . . 13  1 F L5 N P T5 U V5 W Y
 12 . . . . . . . . . . . . . . 12  Z5 I5 O T4 Z4 L4 I4 V3 I3 2
-11 . . . . . . . . . . . . . . 11  
+11 . . . . . . . . . . . . . . 11
 10 . . . . X . . . . . . . . . 10  Green(O): 5
  9 . . . X X X . . . . . . . . 9   1 F L5 N P T5 U V5 W Y
  8 . . . . X . . . . . . . . . 8   Z5 I5 O T4 Z4 L4 I4 V3 I3 2
- 7 . . . . . . . . . . . . . . 7   
- 6 . . . . . . . .&gt;O . . . . . 6   
- 5 . . . . . . . O O O . . . . 5   
- 4 . . . . . . . . O . . . . . 4   
- 3 . . . . . . . . . . . . . . 3   
- 2 . . . . . . . . . . . . . . 2   
- 1 . . . . . . . . . . . . . . 1   
+ 7 . . . . . . . . . . . . . . 7
+ 6 . . . . . . . .&gt;O . . . . . 6
+ 5 . . . . . . . O O O . . . . 5
+ 4 . . . . . . . . O . . . . . 4
+ 3 . . . . . . . . . . . . . . 3
+ 2 . . . . . . . . . . . . . . 2
+ 1 . . . . . . . . . . . . . . 1
    A B C D E F G H I J K L M N
 
 <b>quit</b>
-= 
-      
+=
+
 </pre>
 </body>
 </html>
