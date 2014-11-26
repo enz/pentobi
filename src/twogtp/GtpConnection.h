@@ -14,7 +14,6 @@
 #include <iosfwd>
 #include <memory>
 #include <string>
-#include <ext/stdio_filebuf.h> // GCC
 #include "libboardgame_util/Exception.h"
 
 using namespace std;
@@ -51,10 +50,6 @@ private:
     bool m_quiet;
 
     string m_prefix;
-
-    unique_ptr<__gnu_cxx::stdio_filebuf<char>> m_buf_in;
-
-    unique_ptr<__gnu_cxx::stdio_filebuf<char>> m_buf_out;
 
     unique_ptr<istream> m_in;
 

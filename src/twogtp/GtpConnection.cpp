@@ -14,6 +14,7 @@
 #include <cstring>
 #include <vector>
 #include <unistd.h>
+#include "FdStream.h"
 #include "libboardgame_util/Log.h"
 
 using libboardgame_util::log;
@@ -90,10 +91,8 @@ GtpConnection::GtpConnection(const string& command)
     {
         close(fd1[0]);
         close(fd2[1]);
-        m_buf_out.reset(new __gnu_cxx::stdio_filebuf<char>(fd1[1], ios::out));
-        m_out.reset(new ostream(m_buf_out.get()));
-        m_buf_in.reset(new __gnu_cxx::stdio_filebuf<char>(fd2[0], ios::in));
-        m_in.reset(new istream(m_buf_in.get()));
+        m_in.reset(new FdInStream(fd2[0]));
+        m_out.reset(new FdOutStream(fd1[1]));
         return;
     }
     else // Child
