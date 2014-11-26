@@ -29,7 +29,7 @@ protected:
 private:
     int m_fd;
 
-    vector<char> m_buf;
+    vector<char_type> m_buf;
 };
 
 //-----------------------------------------------------------------------------

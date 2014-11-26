@@ -34,7 +34,7 @@ public:
     AndroidBuf();
 
 protected:
-    int overflow(int c) override;
+    int_type overflow(int_type c) override;
 
     int sync() override;
 
@@ -49,7 +49,7 @@ AndroidBuf::AndroidBuf()
     setp(m_buffer, m_buffer + buffer_size - 1);
 }
 
-int AndroidBuf::overflow(int c)
+auto AndroidBuf::overflow(int_type c) -> int_type
 {
     if (c == traits_type::eof())
     {
