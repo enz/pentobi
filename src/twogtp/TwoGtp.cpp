@@ -38,9 +38,17 @@ TwoGtp::TwoGtp(const string& black, const string& white, Variant variant,
         m_white.enable_log(log_prefix + "W");
     }
     if (get_nu_colors(m_variant) == 2)
-        m_colors = { "b", "w" };
+    {
+        m_colors[0] = "b";
+        m_colors[1] = "w";
+    }
     else
-        m_colors = { "1", "2", "3", "4" };
+    {
+        m_colors[0] = "1";
+        m_colors[1] = "2";
+        m_colors[2] = "3";
+        m_colors[3] = "4";
+    }
 }
 
 float TwoGtp::get_result(unsigned player_black, const string& final_score)

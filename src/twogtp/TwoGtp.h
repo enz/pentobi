@@ -7,11 +7,13 @@
 #ifndef TWOGTP_TWOGTP_H
 #define TWOGTP_TWOGTP_H
 
+#include <array>
 #include "GtpConnection.h"
 #include "OutputFile.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Variant.h"
 
+using namespace std;
 using libpentobi_base::Color;
 using libpentobi_base::Variant;
 
