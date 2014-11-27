@@ -12,6 +12,8 @@ VERSION 8.UNKNOWN (master)
   as long as they do not lead into riskier positions.
 * The computer now remembers the playing level separately for each game
   variant and restores it when the game variant is changed.
+* Player ratings now change faster if less than 30 rated games have been
+  played, and slower afterwards.
 * Initial support for Android. The Android version supports only a subset
   of the features of the desktop version and only playing levels 1 to 7.
 
