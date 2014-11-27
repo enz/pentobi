@@ -135,9 +135,9 @@ move property values but they are deprecated and should no longer
 be used.</p>
 <h2>Setup Properties</h2>
 <p>The setup properties <tt>AB</tt>, <tt>AW</tt>, <tt>A1</tt>,
-<tt>A2</tt>, <tt>A3</tt>, <tt>A4</tt> can be used to place pieces
-in one step on the board. The setup property <tt>AE</tt> can be
-used to remove a piece from the board. All these properties can
+<tt>A2</tt>, <tt>A3</tt>, <tt>A4</tt> can be used to place several
+pieces simultaneously on the board. The setup property <tt>AE</tt>
+can be used to remove pieces from the board. All these properties can
 have multiple values, each value represents a piece by its
 coordinates as in the move properties. The <tt>PL</tt> can be used
 to set the color to play in a setup position.</p>
@@ -148,6 +148,7 @@ PL[B]</tt></p>
 <p style="font-size:small"><b>Note</b><br>
 Older versions of Pentobi (before version 2.0) did not support
 setup properties, you need a newer version of Pentobi to read such
-files.</p>
+files. Currently, Pentobi is able to read files with setup properties
+in any node, but can create only files with setup in the root node.</p>
 </body>
 </html>
