@@ -129,17 +129,21 @@ void splitsgf(const string& file)
     string line;
     while (getline(in, line))
     {
-        smatch match;
-        regex_search(line, match, pattern);
-        if (! match.empty())
+        if (trim(line) == "(")
         {
             if (! filename.empty())
             {
                 ofstream out(filename);
                 out << buffer;
             }
-            filename = string(match[1]) + ".blksgf";
             buffer.clear();
+        }
+        else
+        {
+            smatch match;
+            regex_search(line, match, pattern);
+            if (! match.empty())
+                filename = string(match[1]) + ".blksgf";
         }
         buffer.append(line);
         buffer.append("\n");

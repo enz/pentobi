@@ -10,11 +10,13 @@
 
 #include "TwoGtp.h"
 
+#include "libboardgame_sgf/Writer.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libboardgame_util/Unused.h"
 #include "libpentobi_base/ScoreUtil.h"
 
+using libboardgame_sgf::Writer;
 using libboardgame_util::log;
 using libboardgame_util::trim;
 using libpentobi_base::get_multiplayer_result;
@@ -105,8 +107,14 @@ void TwoGtp::play_game(unsigned game_number)
     bool resign = false;
     unsigned color_to_play = 0;
     unsigned player;
-    ostringstream sgf;
-    sgf << "(;GM[" << to_string(m_variant) << "]GN[" << game_number << "]\n";
+    ostringstream sgf_string;
+    Writer sgf(sgf_string);
+    sgf.set_indent(0);
+    sgf.begin_tree();
+    sgf.begin_node();
+    sgf.write_property("GM", to_string(m_variant));
+    sgf.write_property("GN", game_number);
+    sgf.end_node();
     while (true)
     {
         if (m_variant == Variant::classic_3 && color_to_play == 3)
@@ -130,8 +138,9 @@ void TwoGtp::play_game(unsigned game_number)
         }
         else
         {
-            sgf << ";" << static_cast<char>(toupper(color[0]))
-                    << "[" << move << "]\n";
+            sgf.begin_node();
+            sgf.write_property(string(1, toupper(color[0])), move);
+            sgf.end_node();
             other_connection.send(string("play ") + color + " " + move);
             ++nu_moves;
         }
@@ -153,9 +162,9 @@ void TwoGtp::play_game(unsigned game_number)
         string final_score = m_black.send("final_score");
         result = get_result(player_black, final_score);
     }
-    sgf << ")\n";
+    sgf.end_tree();
     m_output.add_result(game_number, result, nu_moves, player_black, cpu_black,
-                        cpu_white, sgf.str());
+                        cpu_white, sgf_string.str());
 }
 
 void TwoGtp::run()

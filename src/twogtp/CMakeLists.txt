@@ -16,6 +16,7 @@ add_executable(twogtp
 
 target_link_libraries(twogtp
   pentobi_base
+  boardgame_sgf
   boardgame_base
   boardgame_util
   boardgame_sys
