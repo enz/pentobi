@@ -17,6 +17,17 @@ using namespace libpentobi_base;
 
 //-----------------------------------------------------------------------------
 
+/** Test that points in move strings are ordered.
+    As specified in doc/blksgf/Pentobi-SGF.html, the order should be
+    (a1, b1, ..., a2, b2, ...). There is no restriction on the order when
+    parsing move strings in from_string(). */
+LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_move_string)
+{
+    auto& bc = BoardConst::get(Variant::duo);
+    Move mv = bc.from_string("h7,i7,i6,j6,j5");
+    LIBBOARDGAME_CHECK_EQUAL(bc.to_string(mv), "j5,i6,j6,h7,i7");
+}
+
 /** Check symmetry information in MoveInfoExt for some moves. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_symmetry_info)
 {

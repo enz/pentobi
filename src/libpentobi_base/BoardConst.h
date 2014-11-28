@@ -114,7 +114,7 @@ public:
         it is prepended by the piece name in square brackets (also without any
         spaces). The representation without the piece name is used by the SGF
         files and GTP interface used by Pentobi (version >= 0.2). */
-    string to_string(Move mv, bool with_piece_name) const;
+    string to_string(Move mv, bool with_piece_name = false) const;
 
     Move from_string(const string& s) const;
 

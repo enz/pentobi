@@ -11,6 +11,7 @@
 #include "BoardConst.h"
 
 #include <algorithm>
+#include <functional>
 #include "AdjIterator.h"
 #include "AdjDiagIterator.h"
 #include "DiagIterator.h"
@@ -42,6 +43,28 @@ using libboardgame_util::trim;
 namespace {
 
 const bool log_move_creation = false;
+
+/** Compare two points using the ordering used in blksgf files.
+    As specified in doc/blksgf/Pentobi-SGF.html, the order should be
+    (a1, b1, ..., a2, b2, ...) with y going upwards whereas the convention
+    for Point is that y goes downwards. */
+bool compare_points(unsigned width, Point p1, Point p2)
+{
+    auto y1 = p1.get_y(width);
+    auto y2 = p2.get_y(width);
+    if (y1 != y2)
+        return y1 > y2;
+    return p1.get_x(width) < p2.get_x(width);
+}
+
+/** Compare two coordinate points using the ordering used in blksgf files.
+    See compare_points() */
+bool compare_coord_points(const CoordPoint& p1, const CoordPoint& p2)
+{
+    if (p1.y != p2.y)
+        return p1.y > p2.y;
+    return p1.x < p2.x;
+}
 
 vector<PieceInfo> create_pieces_classic(const Geometry& geo,
                                         const PieceTransforms& transforms)
@@ -503,7 +526,6 @@ void BoardConst::create_moves(Piece piece)
                 continue;
             points = piece_info.get_points();
             transform->transform(points.begin(), points.end());
-            sort(points.begin(), points.end());
             bool is_onboard = true;
             for (CoordPoint& p : points)
             {
@@ -517,6 +539,7 @@ void BoardConst::create_moves(Piece piece)
             }
             if (! is_onboard)
                 continue;
+            sort(points.begin(), points.end(), compare_coord_points);
             CoordPoint label_pos = piece_info.get_label_pos();
             label_pos = transform->get_transformed(label_pos);
             label_pos.x += x;
@@ -617,7 +640,9 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     if (points.size() == 0)
         return false;
     MovePoints sorted_points = points;
-    sort(sorted_points.begin(), sorted_points.end());
+    sort(sorted_points.begin(), sorted_points.end(),
+         bind(compare_points, m_geo.get_width(), placeholders::_1,
+              placeholders::_2));
     Point p = points[0];
     if (! m_geo.is_onboard(p))
         return false;
