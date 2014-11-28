@@ -246,6 +246,7 @@ qml/QtQuick/Controls/Styles/Android/LabelStyle.qml \
 qml/QtQuick/Controls/Styles/Android/MenuBarStyle.qml \
 qml/QtQuick/Controls/Styles/Android/ToolBarStyle.qml \
 qml/QtQuick/Controls/Styles/Android/ToolButtonStyle.qml \
+qml/QtQuick/Controls/Styles/Android/drawables/AnimationDrawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/ColorDrawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/Drawable.qml \
 qml/QtQuick/Controls/Styles/Android/drawables/DrawableLoader.qml \
