@@ -78,6 +78,7 @@ public:
 
     /** Get option value or default value.
         @param name The (long) option name.
+        @param default_value A default value.
         @return The option value or the default value if the option does not
         exist. */
     template<typename T>

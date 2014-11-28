@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_sgf/NodeTest.cpp
+/** @file unittest/libboardgame_sgf/SgfNodeTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

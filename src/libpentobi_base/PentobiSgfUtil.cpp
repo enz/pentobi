@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/SgfUtil.cpp
+/** @file libpentobi_base/PentobiSgfUtil.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

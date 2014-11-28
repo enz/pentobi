@@ -55,7 +55,7 @@
       Plugin for file preview thumbnails for the
       <a href="http://www.kde.org/">KDE</a> desktop
 
-    @section mainpage_gui Pentobi Mobile GUI Modules
+    @section mainpage_gui_qml Pentobi Mobile GUI Modules
 
     The Pentobi Mobile GUI modules implement a user interface targeted
     at mobile devices based on Qt Quick / QML.
