@@ -34,11 +34,15 @@
       Tool for playing games between two GTP engines
       (currently only supported on Linux/GCC)
 
-    @section mainpage_gui Pentobi GUI Modules
+    @section mainpage_gui Pentobi QWidgets GUI Modules
 
-    The Pentobi GUI modules implement the user interface.
+    The Pentobi QWidgets GUI modules implement a user interface based on
+    Qt/QWidgets and targeted at desktops.
     They have a dependency on the following
     <a href="http://qt.digia.com/">Qt</a> libraries: QtCore4, QtGui4.
+    They are currently used for the desktop versions of Pentobi.
+    They may become obsolete in the future, once the QML GUI Modules
+    (@ref mainpage_gui_qml) provide the same functionality.
 
     - convert -
       Small helper program to convert SVG icons to bitmaps at build time
@@ -55,10 +59,13 @@
       Plugin for file preview thumbnails for the
       <a href="http://www.kde.org/">KDE</a> desktop
 
-    @section mainpage_gui_qml Pentobi Mobile GUI Modules
+    @section mainpage_gui_qml Pentobi QML GUI Modules
 
-    The Pentobi Mobile GUI modules implement a user interface targeted
-    at mobile devices based on Qt Quick / QML.
+    The Pentobi QML GUI modules implement a user interface based on
+    Qt Quick / QML. They currently support only a subset of the features
+    of the QWidgets-based GUI (@ref mainpage_gui) but provide fluid
+    animations and are usable on touch-screens. They are currently
+    used for the Android version of Pentobi.
 
     - pentobi_qml -
       Main program that provides a GUI for the player in libpentobi_mcts
