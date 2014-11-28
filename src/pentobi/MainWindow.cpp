@@ -3806,8 +3806,11 @@ void MainWindow::wheelEvent(QWheelEvent* event)
     if (delta > 0)
     {
         if (m_guiBoard->getSelectedPiece().is_null())
-            for (int i = 0; i < delta; ++i)
-                backward();
+        {
+            if (! m_isRated)
+                for (int i = 0; i < delta; ++i)
+                    backward();
+        }
         else
             for (int i = 0; i < delta; ++i)
                 nextTransform();
@@ -3815,8 +3818,11 @@ void MainWindow::wheelEvent(QWheelEvent* event)
     else if (delta < 0)
     {
         if (m_guiBoard->getSelectedPiece().is_null())
-            for (int i = 0; i < -delta; ++i)
-                forward();
+        {
+            if (! m_isRated)
+                for (int i = 0; i < -delta; ++i)
+                    forward();
+        }
         else
             for (int i = 0; i < -delta; ++i)
                 previousTransform();
