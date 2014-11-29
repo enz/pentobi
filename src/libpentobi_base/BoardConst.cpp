@@ -508,26 +508,26 @@ void BoardConst::create_moves(Piece piece)
     auto& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
         log("Creating moves for piece ", piece_info.get_name());
+    PiecePoints points;
     auto width = m_geo.get_width();
-    for (auto transform : piece_info.get_transforms())
+    auto height = m_geo.get_height();
+    for (GeometryIterator i(m_geo); i; ++i)
     {
         if (log_move_creation)
-            log("Transformation ", typeid(*transform).name());
-        PiecePoints transformed_points = piece_info.get_points();
-        transform->transform(transformed_points.begin(),
-                             transformed_points.end());
-        CoordPoint transformed_label_pos =
-                transform->get_transformed(piece_info.get_label_pos());
-        for (GeometryIterator i(m_geo); i; ++i)
+            log("Creating moves at ", WritePoint(*i, width, height));
+        auto x = (*i).get_x(width);
+        auto y = (*i).get_y(width);
+        for (const Transform* transform : piece_info.get_transforms())
         {
-            auto x = (*i).get_x(width);
-            auto y = (*i).get_y(width);
+            if (log_move_creation)
+                log("Transformation ", typeid(*transform).name());
             auto point_type = m_geo.get_point_type(x, y);
             if (transform->get_new_point_type() != point_type)
                 continue;
-            PiecePoints points = transformed_points;
+            points = piece_info.get_points();
+            transform->transform(points.begin(), points.end());
             bool is_onboard = true;
-            for (auto& p : points)
+            for (CoordPoint& p : points)
             {
                 p.x += x;
                 p.y += y;
@@ -540,7 +540,8 @@ void BoardConst::create_moves(Piece piece)
             if (! is_onboard)
                 continue;
             sort(points.begin(), points.end(), compare_coord_points);
-            CoordPoint label_pos = transformed_label_pos;
+            CoordPoint label_pos = piece_info.get_label_pos();
+            label_pos = transform->get_transformed(label_pos);
             label_pos.x += x;
             label_pos.y += y;
             create_move(piece, points, Point(label_pos.x, label_pos.y, width));
