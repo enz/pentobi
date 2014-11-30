@@ -152,11 +152,6 @@ unique_ptr<State> Search::create_state()
     return unique_ptr<State>(new State(m_variant, m_shared_const));
 }
 
-string Search::get_move_string(Move mv) const
-{
-    return get_board().to_string(mv);
-}
-
 void Search::get_root_position(Variant& variant, Setup& setup) const
 {
     m_last_state.get_as_setup(variant, setup);

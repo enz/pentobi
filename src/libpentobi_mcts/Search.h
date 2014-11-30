@@ -66,8 +66,6 @@ public:
 
     unique_ptr<State> create_state() override;
 
-    string get_move_string(Move mv) const override;
-
     PlayerInt get_nu_players() const override;
 
     PlayerInt get_player() const override;

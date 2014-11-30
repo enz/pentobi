@@ -162,12 +162,6 @@ public:
         search. */
     virtual unique_ptr<State> create_state() = 0;
 
-    /** Get string representation of a move.
-        This function is not a member function of the move type M because
-        the move type may be a lightweight class that needs a context to
-        be converted to a string. */
-    virtual string get_move_string(Move mv) const = 0;
-
     /** Get the current number of players. */
     virtual PlayerInt get_nu_players() const = 0;
 
