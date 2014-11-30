@@ -127,7 +127,7 @@ public:
         parsed by the engine. This can cause problems if the argument value is
         an unquoted filename containing spaces. This function can be used to
         handle this situation. It uses the arguments that were detected with
-        supports for quoting and returns en empty string if the number of
+        support for quoting and returns en empty string if the number of
         arguments is i, the argument i + 1 if the number of arguments is i + 1,
         and get_remaining_line(i) otherwise.
         @param i Argument index starting with 0
