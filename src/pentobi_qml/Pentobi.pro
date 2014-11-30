@@ -37,7 +37,6 @@ SOURCES += \
     ../libboardgame_util/FastLog.cpp \
     ../libboardgame_util/IntervalChecker.cpp \
     ../libboardgame_util/Log.cpp \
-    ../libboardgame_util/Options.cpp \
     ../libboardgame_util/RandomGenerator.cpp \
     ../libboardgame_util/StringUtil.cpp \
     ../libboardgame_util/TimeIntervalChecker.cpp \
