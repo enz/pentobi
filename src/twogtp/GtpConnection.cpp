@@ -23,7 +23,7 @@ using libboardgame_util::log;
 
 namespace {
 
-void terminate_child(const char* message)
+void terminate_child(const string& message)
 {
     log(message);
     exit(1);
@@ -119,7 +119,7 @@ GtpConnection::GtpConnection(const string& command)
         }
         argv[args.size()] = 0;
         if (execvp(args[0].c_str(), argv) == -1)
-            terminate_child("GtpConnection: execvp failed");
+            terminate_child("Could not execute '" + command + "'");
     }
 }
 
