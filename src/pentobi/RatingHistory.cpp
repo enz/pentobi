@@ -29,7 +29,7 @@ using libpentobi_mcts::Player;
 namespace {
 
 /** 1000 Elo represents a beginner level. */
-const double startRating = 1000;
+const float startRating = 1000;
 
 QString getRatedGamesDir(Variant variant)
 {
