@@ -62,7 +62,7 @@ int main(int argc, char** argv)
         OutputFile output_file(prefix);
         vector<thread> threads;
         for (unsigned i = 0; i < nu_threads; ++i)
-            threads.push_back(thread([i, nu_threads, black, white, variant,
+            threads.push_back(thread([i, nu_threads, &black, &white, variant,
                                      nu_games, &output_file, &result]()
             {
                 try
