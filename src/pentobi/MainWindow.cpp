@@ -700,6 +700,7 @@ void MainWindow::continueRatedGame()
         if (bd.is_same_player(*i, m_ratedGameColor))
             m_computerColors[*i] = false;
     setRated(true);
+    updateWindow(false);
     showInfo(tr("Continuing unfinished rated game."),
              tr("You play %1 in this game.")
              .arg(getPlayerString(bd.get_variant(), m_ratedGameColor)));
