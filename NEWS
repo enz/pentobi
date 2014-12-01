@@ -14,6 +14,9 @@ VERSION 8.UNKNOWN (master)
   variant and restores it when the game variant is changed.
 * Player ratings now change faster if less than 30 rated games have been
   played, and slower afterwards.
+* Bugfix: game navigation with mouse wheel was not disabled in rated
+  games (and the game cannot be continued after that because the play
+  button is disabled in rated games).
 * Initial support for Android. The Android version supports only a subset
   of the features of the desktop version and only playing levels 1 to 7.
 
