@@ -3724,7 +3724,11 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionTruncateChildren->setEnabled(hasChildren);
     m_actionUndo->setEnabled(! m_isRated && hasParent && ! hasChildren
                              && hasMove);
-    m_menuLevel->setEnabled(! m_isRated);
+    // Don't disable m_menuLevel but all level items such that it is still
+    // possible to see what the current level is even if it cannot be changed
+    // in rated games.
+    for (int i = 0; i < maxLevel; ++i)
+        m_actionLevel[i]->setEnabled(! m_isRated);
     m_menuVariant->setEnabled(! m_isRated);
 }
 
