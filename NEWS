@@ -153,6 +153,35 @@ Version 5.0 (10 Dec 2012)
 * Avoided some window flickering at startup
 
 
+Version 4.3 (2 Nov 2012)
+========================
+
+* Setting the computer color for Red with the computer colors dialog did
+  not work for game variant Trigon Three-Player
+* Disable Undo menu item when it is not applicable
+* Fixed an assertion at end of move generation in Trigon Three-Player if
+  Pentobi was compiled in debug mode
+
+
+Version 4.2 (7 Oct 2012)
+========================
+
+* Fixed crash when opening game info dialog in game variants Classic
+  Two-Player or Trigon Two-Player
+
+
+Version 4.1 (5 Oct 2012)
+========================
+
+* Result of rated game was counted wrongly in four-color/two-player game
+  variants if the first player had a higher score than the second player
+  but the first color a lower score than the second color.
+* Fixed potential crash if Undo, Truncate or Truncate Children is selected
+  while the computer is thinking.
+* Automatic continuing of computer play did not work in some cases if the
+  computer was thinking while the Computer Color dialog was used.
+
+
 Version 4.0 (4 Oct 2012)
 ========================
 
@@ -164,6 +193,13 @@ Version 4.0 (4 Oct 2012)
 * Replaced the icons with less colorful ones. All icons are now licensed
   under the GPLv3+ and include SVG sources. No icons from the Tango icon
   set are used anymore.
+
+
+Version 3.1 (2 Aug 2012)
+========================
+
+* Fixed a bug in version 3.0 in the replacement of obsolete move properties
+  in old files that corrupted files in game variants with 3 or 4 colors. 
 
 
 Version 3.0 (1 Aug 2012)
@@ -179,6 +215,21 @@ Version 3.0 (1 Aug 2012)
 * Files written by older versions of Pentobi that use a deprecated format
   for move properties are now automatically converted to the current format
   on write
+
+
+Version 2.1 (1 Jul 2012)
+========================
+
+* Bugfix: File was erroneously marked as modified if a multiline comment
+  was shown and the platform that was used to create the file had
+  Windows-style end of line convention and the platform on which the file
+  was shown had Unix-style.
+* Fixed the corruption of non-ASCII characters in game files on some
+  platforms.
+* Fixed a case where the program froze instead of showing an error on
+  certain syntax errors in the SGF file.
+* Fixed duplicate menu shortcut in German translation
+* Fixed too high floating point tolerance in unit tests.
 
 
 Version 2.0 (22 May 2012)
@@ -211,6 +262,54 @@ Version 2.0 (22 May 2012)
 * New option --memory to make Pentobi run on systems with low
   memory at the cost of reduced playing strength.
 * Use standard icons from theme
+
+
+Version 1.2 (17 Apr 2012)
+=========================
+
+* Bugfix: program sometimes hung or crashed when generating a
+  move in early game Trigon positions especially when there
+  were no legal moves with any of the large pieces
+* Bugfix: file modified marker was not set on certain changes
+  (Make Main Variation, comment changed)
+* Bugfix: game info dialog showed wrong player labels in Trigon
+  and Trigon Three-Player * Minor other bugfixes in the code
+* Reverted the change that used the SVG icon for setting the
+  window icon because it created an unwanted dependency on the
+  Qt SVG plugin.
+* Made Save menu item and tool button active if game is modified
+  even if no file name is associated with the current game
+* Made the code compile without warnings with GCC -Wunused
+* Made "make post-install" continue even if some commands fail.
+
+
+Version 1.1 (10 Mar 2012)
+=========================
+
+* File is now immediately visible in Recent Files menu after
+  saving under a new name.
+* Fixed several cases where the program crashed instead of showing
+  an error message if the opened file was invalid. The error
+  message now also has a Show Details button to show the reason
+  why the file could not be loaded.
+* Fixed a bug that distorted the position values reported with
+  --verbose if a subtree from a previous search was reused
+* Fixed exception in tools/twogtp/analyze.py if option -r was used
+* Minor fixes in computer player engine
+* Added explaining label to computer color dialog because window
+  title is not visible in all L&F's
+* Accept pass moves (empty value) in files. Although the current
+  Blokus SGF documentation does not specify if they should be
+  allowed, they might be used in the future and are used in files
+  written by early (unreleased) versions of Pentobi
+* Extended the file format documentation by a hint how to put
+  blksgf files on web servers
+* Smaller icons for piece manipulation buttons
+* Fixed computation of the font bounding box in the score display
+* Set option -std=c++0x in CMakeLists.txt if compiler is CLang
+* Removed duplicate pentobi.png in directories data and src/pentobi;
+  The file pentobi.svg was moved from data to src/pentobi and is
+  now used for setting the window icon of Pentobi
 
 
 Version 1.0 (1 Jan 2012)
