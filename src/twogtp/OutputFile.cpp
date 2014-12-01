@@ -92,7 +92,7 @@ void OutputFile::add_result(unsigned n, float result, unsigned len,
 
 bool OutputFile::check_sentinel()
 {
-    return ifstream(m_prefix + ".stop");
+    return ! ifstream(m_prefix + ".stop").fail();
 }
 
 unsigned OutputFile::get_next()
