@@ -114,7 +114,7 @@ void analyze(const string& file)
     cout << "\nCpuW: ";
     stat_cpu_w.write(cout, true, 3, false, true);
     cout << "\nLen: ";
-    stat_cpu_w.write(cout, true, 1, true, true);
+    stat_length.write(cout, true, 1, true, true);
     cout << '\n';
 }
 
