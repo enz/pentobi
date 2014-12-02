@@ -106,18 +106,16 @@ void analyze(const string& file)
             FmtSaver saver(cout);
             auto fraction = i.second / count;
             cout << fixed << setprecision(1) << fraction * 100
-                 << "%+-" << sqrt(fraction * (1 - fraction) / count) * 100
-                 << '%';
+                 << "+-" << sqrt(fraction * (1 - fraction) / count) * 100;
         }
     }
     cout << "\nCpuB: ";
-    stat_cpu_b.write(cout, true, 3);
+    stat_cpu_b.write(cout, true, 3, false, true);
     cout << "\nCpuW: ";
-    stat_cpu_w.write(cout, true, 3);
-    cout << "\nLen: " << fixed << setprecision(1) << stat_length.get_mean()
-         << " dev=" << stat_length.get_deviation() << " min="
-         << setprecision(0) << stat_length.get_min() << " max="
-         << stat_length.get_max() << '\n';
+    stat_cpu_w.write(cout, true, 3, false, true);
+    cout << "\nLen: ";
+    stat_cpu_w.write(cout, true, 1, true, true);
+    cout << '\n';
 }
 
 void splitsgf(const string& file)

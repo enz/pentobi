@@ -215,6 +215,8 @@ public:
 
     FLOAT get_mean() const;
 
+    FLOAT get_error() const;
+
     FLOAT get_count() const;
 
     FLOAT get_max() const;
@@ -226,10 +228,11 @@ public:
     FLOAT get_variance() const;
 
     void write(ostream& out, bool fixed = false, unsigned precision = 6,
-               bool integer_values = false) const;
+               bool integer_values = false, bool with_error = false) const;
 
     string to_string(bool fixed = false, unsigned precision = 6,
-                     bool integer_values = false) const;
+                     bool integer_values = false,
+                     bool with_error = false) const;
 
 private:
     Statistics<FLOAT> m_statistics;
@@ -276,6 +279,12 @@ inline FLOAT StatisticsExt<FLOAT>::get_deviation() const
 }
 
 template<typename FLOAT>
+inline FLOAT StatisticsExt<FLOAT>::get_error() const
+{
+    return m_statistics.get_error();
+}
+
+template<typename FLOAT>
 inline FLOAT StatisticsExt<FLOAT>::get_max() const
 {
     return m_max;
@@ -301,25 +310,28 @@ inline FLOAT StatisticsExt<FLOAT>::get_variance() const
 
 template<typename FLOAT>
 string StatisticsExt<FLOAT>::to_string(bool fixed, unsigned precision,
-                                       bool integer_values) const
+                                       bool integer_values,
+                                       bool with_error) const
 {
     ostringstream s;
-    write(s, fixed, precision, integer_values);
+    write(s, fixed, precision, integer_values, with_error);
     return s.str();
 }
 
 template<typename FLOAT>
 void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned precision,
-                                 bool integer_values) const
+                                 bool integer_values, bool with_error) const
 {
-    m_statistics.write(out, fixed, precision);
     FmtSaver saver(out);
+    out << setprecision(precision);
     if (fixed)
         out << std::fixed;
+    out << get_mean();
+    if (with_error)
+        out << "+-" << get_error();
+    out << " dev=" << get_deviation();
     if (integer_values)
         out << setprecision(0);
-    else
-        out << setprecision(precision);
     out << " min=" << m_min << " max=" << m_max;
 }
 
