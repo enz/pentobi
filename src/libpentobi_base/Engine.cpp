@@ -323,12 +323,14 @@ Color Engine::get_color_arg(const Arguments& args, unsigned i) const
             return Color(2);
         if (s == "4" || s == "green")
             return Color(3);
+        break;
     case Variant::duo:
     case Variant::junior:
         if (s == "blue" || s == "black" || s == "b")
             return Color(0);
         if (s == "green" || s == "white" || s == "w")
             return Color(1);
+        break;
     }
     throw Failure("invalid color argument '" + s + "'");
 }
