@@ -31,7 +31,7 @@ bool SpShtStrRep::read(istream& in, unsigned width, unsigned height,
         c = in.peek();
         if (c == EOF || ! isspace(c))
             break;
-        c = in.get();
+        in.get();
     }
     bool read_x = false;
     x = 0;
