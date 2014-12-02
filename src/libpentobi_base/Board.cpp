@@ -376,7 +376,7 @@ void Board::take_snapshot()
         snapshot_state.forbidden.memcpy_from(state.forbidden, *m_geo);
         snapshot_state.is_attach_point.memcpy_from(state.is_attach_point,
                                                    *m_geo);
-        // Uncomment one is_trivially_copyable is implemented in GCC and MSVC
+        // Uncomment once is_trivially_copyable is implemented in GCC and MSVC
         //static_assert(is_trivially_copyable<StateColor>::value, "")
         memcpy(&snapshot_state.pieces_left, &state.pieces_left,
                sizeof(StateColor) - offsetof(StateColor, pieces_left));
