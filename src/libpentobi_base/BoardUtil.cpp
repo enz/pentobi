@@ -22,6 +22,7 @@ using sgf_util::get_setup_id;
 
 //-----------------------------------------------------------------------------
 
+#if LIBBOARDGAME_DEBUG
 string dump(const Board& bd)
 {
     ostringstream s;
@@ -46,6 +47,7 @@ string dump(const Board& bd)
     writer.end_tree();
     return s.str();
 }
+#endif
 
 void get_current_position_as_setup(const Board& bd, Setup& setup)
 {

@@ -164,12 +164,14 @@ bool State::check_move_without_gamma(const Grid<bool>& is_forbidden, Move mv)
     return true;
 }
 
+#if LIBBOARDGAME_DEBUG
 string State::dump() const
 {
     ostringstream s;
     s << "pentobi_mcts::State:\n" << libpentobi_base::boardutil::dump(m_bd);
     return s.str();
 }
+#endif
 
 /** Evaluation function for game variants with 2 players and 1 color per
     player. */

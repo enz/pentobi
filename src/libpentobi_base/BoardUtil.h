@@ -17,7 +17,9 @@ using libboardgame_sgf::Writer;
 
 //-----------------------------------------------------------------------------
 
+#if LIBBOARDGAME_DEBUG
 string dump(const Board& bd);
+#endif
 
 /** Return the current position as setup.
     Merges all placements from Board::get_setup() and played moved into a

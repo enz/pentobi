@@ -333,7 +333,9 @@ public:
 
     const Tree& get_tree() const;
 
+#if LIBBOARDGAME_DEBUG
     string dump() const;
+#endif
 
     /** Number of simulations in the current search in all threads. */
     size_t get_nu_simulations() const;
@@ -392,6 +394,7 @@ protected:
     TimeSource& get_time_source();
 
 private:
+#if LIBBOARDGAME_DEBUG
     class AssertionHandler
         : public libboardgame_util::AssertionHandler
     {
@@ -405,6 +408,7 @@ private:
     private:
         const SearchBase& m_search;
     };
+#endif
 
     /** Thread-specific search state. */
     struct ThreadState
@@ -566,7 +570,9 @@ private:
 
     Tree m_tmp_tree;
 
+#if LIBBOARDGAME_DEBUG
     AssertionHandler m_assertion_handler;
+#endif
 
 
     /** @name Members that are used concurrently by all threads during the
@@ -717,6 +723,7 @@ void SearchBase<S, M, R>::Thread::wait_search_finished()
 }
 
 
+#if LIBBOARDGAME_DEBUG
 template<class S, class M, class R>
 SearchBase<S, M, R>::AssertionHandler::AssertionHandler(const SearchBase& search)
     : m_search(search)
@@ -733,6 +740,7 @@ void SearchBase<S, M, R>::AssertionHandler::run()
 {
     log(m_search.dump());
 }
+#endif // LIBBOARDGAME_DEBUG
 
 
 template<class S, class M, class R>
@@ -755,7 +763,9 @@ SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
       m_max_nodes(get_max_nodes(m_tree_memory)),
       m_bias_term(0),
       m_tmp_tree(m_max_nodes, m_nu_threads),
+#if LIBBOARDGAME_DEBUG
       m_assertion_handler(*this),
+#endif
       m_tree(m_max_nodes, m_nu_threads)
 {
     static_assert(numeric_limits<Float>::radix == 2, "");
@@ -900,6 +910,7 @@ void SearchBase<S, M, R>::create_threads()
     }
 }
 
+#if LIBBOARDGAME_DEBUG
 template<class S, class M, class R>
 string SearchBase<S, M, R>::dump() const
 {
@@ -911,6 +922,7 @@ string SearchBase<S, M, R>::dump() const
     }
     return s.str();
 }
+#endif
 
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,

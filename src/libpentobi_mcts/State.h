@@ -147,7 +147,9 @@ public:
     /** Do not update RAVE values for n'th move of the current simulation. */
     bool skip_rave(Move mv) const;
 
+#if LIBBOARDGAME_DEBUG
     string dump() const;
+#endif
 
     string get_info() const;
 
