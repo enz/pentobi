@@ -55,10 +55,15 @@ AssertionHandler::~AssertionHandler()
 
 void handle_assertion(const char* expression, const char* file, int line)
 {
+    static bool is_during_handle_assertion = false;
     log(file, ":", line, ": Assertion '", expression, "' failed");
     get_log() << flush;
-    for_each(get_all_handlers().begin(), get_all_handlers().end(),
-             mem_fun(&AssertionHandler::run));
+    if (! is_during_handle_assertion)
+    {
+        is_during_handle_assertion = true;
+        for_each(get_all_handlers().begin(), get_all_handlers().end(),
+                 mem_fun(&AssertionHandler::run));
+    }
     abort();
 }
 
