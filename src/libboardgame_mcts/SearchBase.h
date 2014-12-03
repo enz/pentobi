@@ -692,7 +692,6 @@ void SearchBase<S, M, R>::Thread::start_search()
 template<class S, class M, class R>
 void SearchBase<S, M, R>::Thread::thread_main()
 {
-    //log() << "Start thread " << thread_state.thread_id << '\n';
     unique_lock<mutex> lock(m_start_search_mutex);
     m_thread_ready.wait();
     while (true)
@@ -709,7 +708,6 @@ void SearchBase<S, M, R>::Thread::thread_main()
         }
         m_search_finished_cond.notify_one();
     }
-    //log() << "Finish thread " << thread_state.thread_id << '\n';
 }
 
 template<class S, class M, class R>
