@@ -512,7 +512,7 @@ void MainWindow::checkComputerMove()
 {
     if (! m_autoPlay || ! isComputerToPlay() || getBoard().is_game_over())
         m_lastComputerMovesBegin = 0;
-    else
+    else if (! m_isGenMoveRunning)
         genMove();
 }
 
@@ -1962,6 +1962,7 @@ void MainWindow::gameOver()
 
 void MainWindow::genMove(bool playSingleMove)
 {
+    cancelThread();
     ++m_genMoveId;
     setCursor(QCursor(Qt::BusyCursor));
     m_actionPlay->setEnabled(false);
