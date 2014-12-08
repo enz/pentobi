@@ -3803,6 +3803,24 @@ void MainWindow::veryGoodMove(bool checked)
     updateWindow(false);
 }
 
+void MainWindow::wheelEvent(QWheelEvent* event)
+{
+    int delta = event->delta() / 8 / 15;
+    if (delta > 0)
+    {
+        if (! m_guiBoard->getSelectedPiece().is_null())
+            for (int i = 0; i < delta; ++i)
+                nextTransform();
+    }
+    else if (delta < 0)
+    {
+        if (! m_guiBoard->getSelectedPiece().is_null())
+            for (int i = 0; i < -delta; ++i)
+                previousTransform();
+    }
+    event->accept();
+}
+
 bool MainWindow::writeGame(const string& file)
 {
     ofstream out(file);

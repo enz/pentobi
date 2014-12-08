@@ -14,8 +14,8 @@ VERSION 8.UNKNOWN (master)
   variant and restores it when the game variant is changed.
 * Player ratings now change faster if less than 30 rated games have been
   played, and slower afterwards.
-* The mouse wheel can no longer be used for game navigation or piece
-  orientation because it was too easy to trigger accidentally. This also
+* The mouse wheel can no longer be used for game navigation because it
+  was too easy to trigger accidentally while playing a game. This also
   fixes the bug that the game navigation with the mouse wheel was not
   disabled in rated games and the game could not be continued after that
   because the play button is disabled in rated games.
