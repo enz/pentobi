@@ -2977,7 +2977,7 @@ void MainWindow::selectPiece(Color c, Piece piece)
 
 void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
 {
-    if (m_isGenMoveRunning)
+    if (m_isGenMoveRunning || getBoard().is_game_over())
         return;
     m_currentColor = c;
     m_guiBoard->selectPiece(c, piece);
@@ -3714,8 +3714,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionNextVariation->setEnabled(current.get_sibling() != nullptr);
     if (! m_isGenMoveRunning)
     {
-        m_actionNextPiece->setEnabled(true);
-        m_actionPreviousPiece->setEnabled(true);
+        m_actionNextPiece->setEnabled(! isGameOver);
+        m_actionPreviousPiece->setEnabled(! isGameOver);
         m_actionPlay->setEnabled(! m_isRated && hasMoves);
         m_actionPlaySingleMove->setEnabled(! m_isRated && hasMoves);
     }
