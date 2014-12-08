@@ -1994,8 +1994,6 @@ void MainWindow::genMove(bool playSingleMove)
 
 void MainWindow::genMoveFinished()
 {
-    m_actionNextPiece->setEnabled(true);
-    m_actionPreviousPiece->setEnabled(true);
     m_actionInterrupt->setEnabled(false);
     clearStatus();
     GenMoveResult result = m_genMoveWatcher.future().result();
@@ -3716,6 +3714,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionNextVariation->setEnabled(current.get_sibling() != nullptr);
     if (! m_isGenMoveRunning)
     {
+        m_actionNextPiece->setEnabled(true);
+        m_actionPreviousPiece->setEnabled(true);
         m_actionPlay->setEnabled(! m_isRated && hasMoves);
         m_actionPlaySingleMove->setEnabled(! m_isRated && hasMoves);
     }
