@@ -2971,6 +2971,8 @@ void MainWindow::selectPiece(Color c, Piece piece)
 
 void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
 {
+    if (m_isGenMoveRunning)
+        return;
     m_currentColor = c;
     m_guiBoard->selectPiece(c, piece);
     m_guiBoard->setSelectedPieceTransform(transform);
