@@ -504,8 +504,10 @@ void MainWindow::cancelThread()
     clearStatus();
     setCursor(QCursor(Qt::ArrowCursor));
     m_actionInterrupt->setEnabled(false);
+    m_actionNextPiece->setEnabled(true);
     m_actionPlay->setEnabled(true);
     m_actionPlaySingleMove->setEnabled(true);
+    m_actionPreviousPiece->setEnabled(true);
 }
 
 void MainWindow::checkComputerMove()
@@ -1965,10 +1967,12 @@ void MainWindow::genMove(bool playSingleMove)
     cancelThread();
     ++m_genMoveId;
     setCursor(QCursor(Qt::BusyCursor));
+    m_actionNextPiece->setEnabled(false);
+    m_actionPreviousPiece->setEnabled(false);
     m_actionPlay->setEnabled(false);
     m_actionPlaySingleMove->setEnabled(false);
-    showStatus(tr("The computer is thinking..."));
     m_actionInterrupt->setEnabled(true);
+    showStatus(tr("The computer is thinking..."));
     clearSelectedPiece();
     clear_abort();
     m_lastRemainingSeconds = 0;
@@ -1990,15 +1994,19 @@ void MainWindow::genMove(bool playSingleMove)
 
 void MainWindow::genMoveFinished()
 {
+    m_actionNextPiece->setEnabled(true);
+    m_actionPreviousPiece->setEnabled(true);
+    m_actionInterrupt->setEnabled(false);
+    clearStatus();
     GenMoveResult result = m_genMoveWatcher.future().result();
     if (result.genMoveId != m_genMoveId)
+    {
         // Callback from a move generation canceled with cancelThread()
         return;
+    }
     LIBBOARDGAME_ASSERT(m_isGenMoveRunning);
     m_isGenMoveRunning = false;
     setCursor(QCursor(Qt::ArrowCursor));
-    m_actionInterrupt->setEnabled(false);
-    clearStatus();
     if (get_abort() && computerPlaysAll())
         m_computerColors.fill(false);
     auto& bd = getBoard();
@@ -3696,13 +3704,6 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionFindMove->setEnabled(! isGameOver);
     m_actionGotoMove->setEnabled(! m_isRated &&
                                  hasCurrentVariationOtherMoves(tree, current));
-    m_actionVariantClassic->setEnabled(! m_isRated);
-    m_actionVariantClassic2->setEnabled(! m_isRated);
-    m_actionVariantDuo->setEnabled(! m_isRated);
-    m_actionVariantJunior->setEnabled(! m_isRated);
-    m_actionVariantTrigon->setEnabled(! m_isRated);
-    m_actionVariantTrigon2->setEnabled(! m_isRated);
-    m_actionVariantTrigon3->setEnabled(! m_isRated);
     m_actionKeepOnlyPosition->setEnabled(! m_isRated
                                          && (hasParent || hasChildren));
     m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
@@ -3728,6 +3729,14 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionTruncateChildren->setEnabled(hasChildren);
     m_actionUndo->setEnabled(! m_isRated && hasParent && ! hasChildren
                              && hasMove);
+    m_actionVariantClassic->setEnabled(! m_isRated);
+    m_actionVariantClassic2->setEnabled(! m_isRated);
+    m_actionVariantClassic3->setEnabled(! m_isRated);
+    m_actionVariantDuo->setEnabled(! m_isRated);
+    m_actionVariantJunior->setEnabled(! m_isRated);
+    m_actionVariantTrigon->setEnabled(! m_isRated);
+    m_actionVariantTrigon2->setEnabled(! m_isRated);
+    m_actionVariantTrigon3->setEnabled(! m_isRated);
     // Don't disable m_menuLevel but all level items such that it is still
     // possible to see what the current level is even if it cannot be changed
     // in rated games.
