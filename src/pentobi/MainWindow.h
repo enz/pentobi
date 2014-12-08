@@ -239,8 +239,6 @@ public slots:
 protected:
     void closeEvent(QCloseEvent* event) override;
 
-    void wheelEvent(QWheelEvent* event) override;
-
 private:
     struct GenMoveResult
     {

@@ -3803,38 +3803,6 @@ void MainWindow::veryGoodMove(bool checked)
     updateWindow(false);
 }
 
-void MainWindow::wheelEvent(QWheelEvent* event)
-{
-    if (m_isGenMoveRunning)
-        return;
-    int delta = event->delta() / 8 / 15;
-    if (delta > 0)
-    {
-        if (m_guiBoard->getSelectedPiece().is_null())
-        {
-            if (! m_isRated)
-                for (int i = 0; i < delta; ++i)
-                    backward();
-        }
-        else
-            for (int i = 0; i < delta; ++i)
-                nextTransform();
-    }
-    else if (delta < 0)
-    {
-        if (m_guiBoard->getSelectedPiece().is_null())
-        {
-            if (! m_isRated)
-                for (int i = 0; i < -delta; ++i)
-                    forward();
-        }
-        else
-            for (int i = 0; i < -delta; ++i)
-                previousTransform();
-    }
-    event->accept();
-}
-
 bool MainWindow::writeGame(const string& file)
 {
     ofstream out(file);
