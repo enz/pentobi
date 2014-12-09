@@ -50,6 +50,7 @@ SOURCES += \
     ../libpentobi_base/Board.cpp \
     ../libpentobi_base/BoardConst.cpp \
     ../libpentobi_base/BoardUpdater.cpp \
+    ../libpentobi_base/BoardUtil.cpp \
     ../libpentobi_base/Book.cpp \
     ../libpentobi_base/Color.cpp \
     ../libpentobi_base/GameStateHistory.cpp \
