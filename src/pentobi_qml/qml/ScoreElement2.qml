@@ -15,7 +15,7 @@ Item {
         id: point1
 
         color: color1
-        opacity: isFinal ? 0 : 1
+        opacity: isAltColor && isFinal ? 0 : 1
         width: (isToPlay ? 1.3 : 1) * pointSize
         border {
             color: Qt.lighter(color1, theme.toPlayColorLighter)
@@ -28,7 +28,7 @@ Item {
     Rectangle {
         id: point2
 
-        color: isFinal ? color1 : color2
+        color: isAltColor && isFinal ? color1 : color2
         width: pointSize
         height: width
         radius: width / 2
