@@ -1,5 +1,5 @@
-VERSION 8.UNKNOWN (master)
-==========================
+Version 9.0 (10 Dec 2014)
+=========================
 
 * Newly supported game variant Classic for 3 players, in which the
   players take turns playing the fourth color.
@@ -31,19 +31,13 @@ VERSION 8.UNKNOWN (master)
   of http://pentobi.sourceforge.net
 
 
-VERSION 8.2.UNKNOWN (v8-fixes)
-==============================
-
-*
-
-
-VERSION 8.2 (05 Sep 2014)
+Version 8.2 (05 Sep 2014)
 =========================
 
 * Fixed remaining link errors on some platforms (Debian bug #759852)
 
 
-VERSION 8.1 (31 Aug 2014)
+Version 8.1 (31 Aug 2014)
 =========================
 
 * Fixed link error on some platforms if Pentobi is compiled with
