@@ -23,8 +23,12 @@ VERSION 8.UNKNOWN (master)
   is thinking, the thinking must be aborted first with Computer/Stop.
 * Bugfix: program crashed if computer colors dialog was opened and closed
   with OK while computer was thinking.
-* Initial support for Android. The Android version supports only a subset
-  of the features of the desktop version and only playing levels 1 to 7.
+* Experimental support for Android. The Android version supports only a
+  subset of the features of the desktop version and only playing levels
+  1 to 7. There are still known issues with the user interface due to
+  bugs in Qt for Android. The Android version is currently only available
+  as an APK file for devices with an ARMv7 CPU from the download section
+  of http://pentobi.sourceforge.net
 
 
 VERSION 8.2.UNKNOWN (v8-fixes)
