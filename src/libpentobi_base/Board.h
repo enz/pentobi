@@ -887,7 +887,7 @@ inline void Board::place(Color c, Move mv)
     i = info_ext.begin_attach();
     end = info_ext.end_attach();
     do
-        if (! state_color.is_attach_point[*i] && ! state_color.forbidden[*i])
+        if (! state_color.forbidden[*i] && ! state_color.is_attach_point[*i])
         {
             state_color.is_attach_point[*i] = true;
             m_attach_points[c].push_back(*i);
