@@ -192,20 +192,28 @@ Move Board::get_move_at(Point p) const
 
 bool Board::has_moves(Color c) const
 {
-    bool is_first = is_first_piece(c);
-    for (Iterator i(*this); i; ++i)
-        if (! m_state_color[c].forbidden[*i]
-            && (is_attach_point(*i, c)
-                || (is_first && get_starting_points(c).contains(*i))))
-            if (has_moves(c, *i))
+    if (is_first_piece(c))
+    {
+        for (auto p : get_starting_points(c))
+            if (has_moves(c, p))
                 return true;
+    }
+    else
+    {
+        for (auto p : get_attach_points(c))
+            if (has_moves(c, p))
+                return true;
+    }
     return false;
 }
 
 bool Board::has_moves(Color c, Point p) const
 {
-    for (Piece piece : m_state_color[c].pieces_left)
-        for (Move mv : m_board_const->get_moves(piece, p))
+    if (is_forbidden(p, c))
+        return false;
+    auto adj_status = get_adj_status(p, c);
+    for (auto piece : m_state_color[c].pieces_left)
+        for (auto mv : m_board_const->get_moves(piece, p, adj_status))
             if (! is_forbidden(c, mv))
                 return true;
     return false;
