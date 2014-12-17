@@ -177,6 +177,7 @@ void TwoGtp::run()
             break;
         play_game(n);
     }
+    send_both("quit");
 }
 
 void TwoGtp::send_both(const string& cmd)
