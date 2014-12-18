@@ -46,7 +46,7 @@ auto FdInBuf::underflow() -> int_type
         start += put_back;
     }
     auto n = read(m_fd, start, m_buf.size() - (start - base));
-    if (n == 0)
+    if (n <= 0)
         return traits_type::eof();
     setg(base, start, start + n);
     return traits_type::to_int_type(*gptr());
