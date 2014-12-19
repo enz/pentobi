@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 
 #include <iostream>
+#include <QCoreApplication>
 #include <QImageReader>
 #include <QImageWriter>
 
@@ -17,6 +18,7 @@ Q_IMPORT_PLUGIN(qsvg)
 
 int main(int argc, char* argv[])
 {
+    QCoreApplication app(argc, argv); // Initializes the locale subsystem
     try
     {
         if (argc != 3)
