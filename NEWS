@@ -5,8 +5,12 @@ Version 9.UNKNOWN (master)
 
 Version 9.0.UNKNOWN (v9-fixes)
 ==============================
+
 * Fixed a build failure when generating the PNG icons from the SVG sources
-  if the path contained non-Latin characters.
+  if the path contained non-ASCII characters.
+* Fixed failure to open a file given as a command line argument to pentobi
+  (including the case when Pentobi is used as a handler for blksgf files
+  in file browsers) if the path contained non-ASCII characters
 
 
 Version 9.0 (10 Dec 2014)
