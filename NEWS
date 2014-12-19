@@ -1,6 +1,7 @@
 Version 9.0.UNKNOWN (v9-fixes)
 ==============================
- *
+* Fixed a build failure when generating the PNG icons from the SVG sources
+  if the path contained non-Latin characters.
 
 
 Version 9.0 (10 Dec 2014)
