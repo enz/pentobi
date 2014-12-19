@@ -168,7 +168,7 @@ int main(int argc, char* argv[])
         QString initialFile;
         auto& args = opt.get_args();
         if (! args.empty())
-            initialFile = args[0].c_str();
+            initialFile = QString::fromLocal8Bit(args[0].c_str());
         MainWindow mainWindow(initialFile, manualDir, booksDir, noBook,
                               threads, memory);
         if (opt.contains("seed"))
