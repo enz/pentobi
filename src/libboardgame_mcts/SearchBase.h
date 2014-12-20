@@ -97,6 +97,12 @@ struct SearchParamConstDefault
     /** Use virtual loss in multi-threaded mode.
         See Chaslot et al.: Parallel Monte-Carlo Tree Search. 2008. */
     static const bool virtual_loss = false;
+
+    /** The minimum count used in prior knowledge initialization of
+        the children of an expanded node.
+        This should use constexpr Float in the future (not yet supported by
+        MSVC 2013). */
+    static const unsigned child_min_count = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -928,7 +934,8 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
                                       const Node*& best_child)
 {
     auto& state = *thread_state.state;
-    typename Tree::NodeExpander expander(thread_state.thread_id, m_tree, node);
+    typename Tree::NodeExpander expander(thread_state.thread_id, m_tree, node,
+                                         SearchParamConst::child_min_count);
     state.gen_children(expander, m_init_val[state.get_to_play()].get_mean());
     if (! expander.is_tree_full())
     {
@@ -1519,7 +1526,7 @@ auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
     ChildIterator i(m_tree, node);
     LIBBOARDGAME_ASSERT(i);
     m_bias_term.start_iteration(node.get_visit_count());
-    auto bias_upper_limit = m_bias_term.get_upper_limit();
+    auto bias_upper_limit = m_bias_term.get(SearchParamConst::child_min_count);
     Float limit = -numeric_limits<Float>::max();
     do
     {

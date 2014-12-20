@@ -49,7 +49,16 @@ public:
     class NodeExpander
     {
     public:
-        NodeExpander(unsigned thread_id, Tree& tree, const Node& node);
+        /** Constructor.
+            @param thread_id
+            @param tree
+            @param node
+            @param child_min_count The minimum count used for initializing
+            children. Used only in debug mode to assert that the children
+            are really initialized with a minimum count as declared with
+            SearchParamConst::child_min_count. */
+        NodeExpander(unsigned thread_id, Tree& tree, const Node& node,
+                     Float child_min_count);
 
         /** Add new child.
             The child will only be added if the tree is not full. */
@@ -84,6 +93,10 @@ public:
         const Node* m_first_child;
 
         const Node* m_best_child;
+
+#if LIBBOARDGAME_DEBUG
+        Float m_child_min_count;
+#endif
     };
 
     Tree(size_t max_nodes, unsigned nu_threads);
@@ -189,7 +202,8 @@ private:
 
 template<typename N>
 inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
-                                           const Node& node)
+                                           const Node& node,
+                                           Float child_min_count)
     : m_thread_id(thread_id),
       m_is_tree_full(false),
       m_nu_children(0),
@@ -199,12 +213,18 @@ inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
       m_first_child(m_tree.m_thread_storage[thread_id].next),
       m_best_child(m_first_child)
 {
+#if LIBBOARDGAME_DEBUG
+    m_child_min_count = child_min_count;
+#else
+    LIBBOARDGAME_UNUSED(child_min_count);
+#endif
 }
 
 template<typename N>
 inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
                                              Float count)
 {
+    LIBBOARDGAME_ASSERT(count >= m_child_min_count);
     if (! (m_is_tree_full |= ! m_tree.create_node(m_thread_id, mv, value,
                                                   count)))
     {

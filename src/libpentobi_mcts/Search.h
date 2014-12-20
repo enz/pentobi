@@ -43,6 +43,8 @@ struct SearchParamConst
     static const bool use_last_good_reply = true;
 
     static const bool virtual_loss = true;
+
+    static const unsigned child_min_count = 3;
 };
 
 //-----------------------------------------------------------------------------
