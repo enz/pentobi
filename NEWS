@@ -6,6 +6,8 @@ Version 9.0.UNKNOWN (v9-fixes)
 * Fixed failure to open a file given as a command line argument to pentobi
   (including the case when Pentobi is used as a handler for blksgf files
   in file browsers) if the path contained non-ASCII characters
+* Changed the file dialog filter for "All files" from *.* to * such that
+  really all files are shown even if they have no file ending.
 
 
 Version 9.0 (10 Dec 2014)

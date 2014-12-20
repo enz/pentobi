@@ -2031,7 +2031,7 @@ void MainWindow::genMoveFinished()
 
 QString MainWindow::getFilter() const
 {
-    return tr("Blokus games (*.blksgf);;All files (*.*)");
+    return tr("Blokus games (*.blksgf);;All files (*)");
 }
 
 QString MainWindow::getLastDir()

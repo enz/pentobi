@@ -674,8 +674,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2034"/>
-        <source>Blokus games (*.blksgf);;All files (*.*)</source>
-        <translation>Blokus-Partien (*.blksgf);;Alle Dateien (*.*)</translation>
+        <source>Blokus games (*.blksgf);;All files (*)</source>
+        <translation>Blokus-Partien (*.blksgf);;Alle Dateien (*)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2101"/>
