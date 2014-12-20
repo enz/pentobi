@@ -997,8 +997,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2034"/>
-        <source>Blokus games (*.blksgf);;All files (*.*)</source>
-        <translation>Blokus games (*.blksgf);;All files (*.*)</translation>
+        <source>Blokus games (*.blksgf);;All files (*)</source>
+        <translation>Blokus games (*.blksgf);;All files (*)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2100"/>
