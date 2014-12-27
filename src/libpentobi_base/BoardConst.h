@@ -118,6 +118,9 @@ public:
 
     Move from_string(const string& s) const;
 
+    /** Sort move points using the ordering used in blksgf files. */
+    void sort(MovePoints& points) const;
+
 private:
     typedef ArrayList<Move, max_moves_at_point> LocalMovesList;
 
@@ -162,6 +165,12 @@ private:
     Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
                PrecompMoves::nu_adj_status>>
         m_adj_status;
+
+    /** Value for comparing points using the ordering used in blksgf files.
+        As specified in doc/blksgf/Pentobi-SGF.html, the order should be
+        (a1, b1, ..., a2, b2, ...) with y going upwards whereas the convention
+        for Point is that y goes downwards. */
+    Grid<unsigned> m_compare_val;
 
     BoardConst(BoardType board_type, Variant variant);
 

@@ -44,26 +44,67 @@ namespace {
 
 const bool log_move_creation = false;
 
-/** Compare two points using the ordering used in blksgf files.
-    As specified in doc/blksgf/Pentobi-SGF.html, the order should be
-    (a1, b1, ..., a2, b2, ...) with y going upwards whereas the convention
-    for Point is that y goes downwards. */
-bool compare_points(unsigned width, Point p1, Point p2)
+// Sort points using the ordering used in blksgf files (switches the direction
+// of the y axis!)
+inline void sort_piece_points(PiecePoints& points)
 {
-    auto y1 = p1.get_y(width);
-    auto y2 = p2.get_y(width);
-    if (y1 != y2)
-        return y1 > y2;
-    return p1.get_x(width) < p2.get_x(width);
-}
-
-/** Compare two coordinate points using the ordering used in blksgf files.
-    See compare_points() */
-bool compare_coord_points(const CoordPoint& p1, const CoordPoint& p2)
-{
-    if (p1.y != p2.y)
-        return p1.y > p2.y;
-    return p1.x < p2.x;
+    auto check = [&](unsigned short a, unsigned short b)
+    {
+        if ((points[a].y == points[b].y && points[a].x > points[b].x)
+                || points[a].y < points[b].y)
+            swap(points[a], points[b]);
+    };
+    // Minimal number of necessary comparisons with sorting networks
+    auto size = points.size();
+    if (size == 6)
+    {
+        check(1, 2);
+        check(4, 5);
+        check(0, 2);
+        check(3, 5);
+        check(0, 1);
+        check(3, 4);
+        check(2, 5);
+        check(0, 3);
+        check(1, 4);
+        check(2, 4);
+        check(1, 3);
+        check(2, 3);
+    }
+    else if (size == 5)
+    {
+        check(0, 1);
+        check(3, 4);
+        check(2, 4);
+        check(2, 3);
+        check(1, 4);
+        check(0, 3);
+        check(0, 2);
+        check(1, 3);
+        check(1, 2);
+    }
+    else if (size == 4)
+    {
+        check(0, 1);
+        check(2, 3);
+        check(0, 2);
+        check(1, 3);
+        check(1, 2);
+    }
+    else if (size == 3)
+    {
+        check(1, 2);
+        check(0, 2);
+        check(0, 1);
+    }
+    else if (size == 2)
+    {
+        check(0, 1);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(size == 1);
+    }
 }
 
 vector<PieceInfo> create_pieces_classic(const Geometry& geo,
@@ -402,6 +443,11 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
     }
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     init_adj_status();
+    auto width = m_geo.get_width();
+    auto height = m_geo.get_height();
+    for (GeometryIterator i(m_geo); i; ++i)
+        m_compare_val[*i] =
+                (height - i->get_y(width) - 1) * width + i->get_x(width);
     create_moves();
     if (board_type == BoardType::classic)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_classic);
@@ -508,26 +554,40 @@ void BoardConst::create_moves(Piece piece)
     auto& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
         log("Creating moves for piece ", piece_info.get_name());
-    PiecePoints points;
+    auto& transforms = piece_info.get_transforms();
+    auto nu_transforms = transforms.size();
+    vector<PiecePoints> transformed_points(nu_transforms);
+    vector<CoordPoint> transformed_label_pos(nu_transforms);
+    for (size_t i = 0; i < nu_transforms; ++i)
+    {
+        auto transform = transforms[i];
+        transformed_points[i] = piece_info.get_points();
+        transform->transform(transformed_points[i].begin(),
+                             transformed_points[i].end());
+        sort_piece_points(transformed_points[i]);
+        transformed_label_pos[i] =
+                transform->get_transformed(piece_info.get_label_pos());
+    }
     auto width = m_geo.get_width();
     auto height = m_geo.get_height();
+    PiecePoints points;
+    // Make outer loop iterator over geometry for better memory locality
     for (GeometryIterator i(m_geo); i; ++i)
     {
         if (log_move_creation)
             log("Creating moves at ", WritePoint(*i, width, height));
-        auto x = (*i).get_x(width);
-        auto y = (*i).get_y(width);
-        for (const Transform* transform : piece_info.get_transforms())
+        auto x = i->get_x(width);
+        auto y = i->get_y(width);
+        for (size_t j = 0; j < nu_transforms; ++j)
         {
             if (log_move_creation)
-                log("Transformation ", typeid(*transform).name());
+                log("Transformation ", typeid(*transforms[j]).name());
             auto point_type = m_geo.get_point_type(x, y);
-            if (transform->get_new_point_type() != point_type)
+            if (transforms[j]->get_new_point_type() != point_type)
                 continue;
-            points = piece_info.get_points();
-            transform->transform(points.begin(), points.end());
+            points = transformed_points[j];
             bool is_onboard = true;
-            for (CoordPoint& p : points)
+            for (auto& p : points)
             {
                 p.x += x;
                 p.y += y;
@@ -539,9 +599,7 @@ void BoardConst::create_moves(Piece piece)
             }
             if (! is_onboard)
                 continue;
-            sort(points.begin(), points.end(), compare_coord_points);
-            CoordPoint label_pos = piece_info.get_label_pos();
-            label_pos = transform->get_transformed(label_pos);
+            CoordPoint label_pos = transformed_label_pos[j];
             label_pos.x += x;
             label_pos.y += y;
             create_move(piece, points, Point(label_pos.x, label_pos.y, width));
@@ -640,9 +698,7 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     if (points.size() == 0)
         return false;
     MovePoints sorted_points = points;
-    sort(sorted_points.begin(), sorted_points.end(),
-         bind(compare_points, m_geo.get_width(), placeholders::_1,
-              placeholders::_2));
+    sort(sorted_points);
     Point p = points[0];
     if (! m_geo.is_onboard(p))
         return false;
@@ -758,6 +814,64 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
                 attach_points.push_back(*j);
             }
     info_ext.init(adj_points, attach_points);
+}
+
+inline void BoardConst::sort(MovePoints& points) const
+{
+    auto check = [&](unsigned short a, unsigned short b)
+    {
+        if (m_compare_val[points[a]] > m_compare_val[points[b]])
+            swap(points[a], points[b]);
+    };
+    // Minimal number of necessary comparisons with sorting networks
+    auto size = points.size();
+    if (size == 6)
+    {
+        check(1, 2);
+        check(4, 5);
+        check(0, 2);
+        check(3, 5);
+        check(0, 1);
+        check(3, 4);
+        check(2, 5);
+        check(0, 3);
+        check(1, 4);
+        check(2, 4);
+        check(1, 3);
+        check(2, 3);
+    }
+    else if (size == 5)
+    {
+        check(0, 1);
+        check(3, 4);
+        check(2, 4);
+        check(2, 3);
+        check(1, 4);
+        check(0, 3);
+        check(0, 2);
+        check(1, 3);
+        check(1, 2);
+    }
+    else if (size == 4)
+    {
+        check(0, 1);
+        check(2, 3);
+        check(0, 2);
+        check(1, 3);
+        check(1, 2);
+    }
+    else if (size == 3)
+    {
+        check(1, 2);
+        check(0, 2);
+        check(0, 1);
+    }
+    else if (size == 2)
+    {
+        check(0, 1);
+    }
+    else
+        LIBBOARDGAME_ASSERT(size == 1);
 }
 
 string BoardConst::to_string(Move mv, bool with_piece_name) const
