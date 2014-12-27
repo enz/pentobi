@@ -30,8 +30,12 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
+PriorKnowledge::PriorKnowledge()
+{
+    m_local_value.fill_all(0);
+}
+
 void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
-                                      const LocalValue& local_value,
                                       bool check_dist_to_center,
                                       bool check_connect)
 {
@@ -127,12 +131,12 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         auto j = info.begin();
         auto end = info.end();
         Float heuristic = point_value[*j];
-        LocalValue::Compute local(*j, local_value);
+        unsigned local = m_local_value[*j];
         if (! check_dist_to_center)
             while (++j != end)
             {
                 heuristic += point_value[*j];
-                local.add_move_point(*j, local_value);
+                local += m_local_value[*j];
             }
         else
         {
@@ -140,7 +144,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             while (++j != end)
             {
                 heuristic += point_value[*j];
-                local.add_move_point(*j, local_value);
+                local += m_local_value[*j];
                 features.dist_to_center =
                     min(features.dist_to_center, m_dist_to_center[*j]);
             }
@@ -173,13 +177,12 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         if (heuristic > m_max_heuristic)
             m_max_heuristic = heuristic;
         features.heuristic = heuristic;
-        features.local_value = local;
+        features.is_local = (local != 0);
     }
 }
 
 void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                                   bool is_symmetry_broken,
-                                  const LocalValue& local_value,
                                   Tree::NodeExpander& expander, Float init_val)
 {
     if (moves.empty())
@@ -187,6 +190,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         expander.add_child(Move::pass(), 0.5, 0);
         return;
     }
+    init_local(bd);
     auto to_play = bd.get_to_play();
     auto nu_onboard_pieces = bd.get_nu_onboard_pieces();
     bool check_dist_to_center =
@@ -194,8 +198,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
              && nu_onboard_pieces <= m_dist_to_center_max_pieces);
     bool check_connect =
         (bd.get_variant() == Variant::classic_2 && nu_onboard_pieces < 14);
-    compute_features(bd, moves, local_value, check_dist_to_center,
-                     check_connect);
+    compute_features(bd, moves, check_dist_to_center, check_connect);
     if (! m_has_connect_move)
         check_connect = false;
     Move symmetric_mv = Move::null();
@@ -266,13 +269,72 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 
         // Add 1 win for moves that are local responses to recent opponent
         // moves
-        if (features.local_value.has_local())
+        if (features.is_local)
         {
             value += 1;
             count += 1;
         }
 
         expander.add_child(mv, value / count, count);
+    }
+}
+
+void PriorKnowledge::init_local(const Board& bd)
+{
+    for (Point p: m_local_points)
+        m_local_value[p] = 0;
+    m_local_points.clear();
+
+    Color to_play = bd.get_to_play();
+    Color second_color;
+    if (bd.get_variant() == Variant::classic_3 && to_play.to_int() == 3)
+        second_color = Color(bd.get_alt_player());
+    else
+        second_color = bd.get_second_color(to_play);
+    auto& geo = bd.get_geometry();
+    unsigned move_number = bd.get_nu_moves();
+    // Consider last 3 moves for local points (i.e. last 2 opponent moves in
+    // two-player variants)
+    for (unsigned i = 0; i < 3; ++i)
+    {
+        if (move_number == 0)
+            return;
+        --move_number;
+        ColorMove move = bd.get_move(move_number);
+        Color c = move.color;
+        if (c == to_play || c == second_color)
+            continue;
+        auto mv = move.move;
+        if (mv.is_pass())
+            continue;
+        auto& is_forbidden = bd.is_forbidden(c);
+        auto& info_ext = bd.get_move_info_ext(mv);
+        auto j = info_ext.begin_attach();
+        auto end = info_ext.end_attach();
+        do
+        {
+            if (is_forbidden[*j])
+                continue;
+            if (m_local_value[*j] == 0)
+                m_local_points.push_back(*j);
+            m_local_value[*j] = 1;
+            for (AdjIterator k(geo, *j); k; ++k)
+                if (! is_forbidden[*k])
+                {
+                    if (m_local_value[*k] == 0)
+                        m_local_points.push_back(*k);
+                    else if (m_local_value[*k] != 3)
+                        continue;
+                    m_local_value[*k] = 2;
+                    for (AdjIterator l(geo, *k); l; ++l)
+                        if (! is_forbidden[*l] && m_local_value[*l] == 0)
+                        {
+                            m_local_points.push_back(*l);
+                            m_local_value[*l] = 3;
+                        }
+                }
+        }
+        while (++j != end);
     }
 }
 

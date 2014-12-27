@@ -314,8 +314,7 @@ inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
     init_moves_without_gamma(to_play);
     m_local_value.init(m_bd);
     m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
-                                   m_is_symmetry_broken, m_local_value,
-                                   expander, init_val);
+                                   m_is_symmetry_broken, expander, init_val);
 }
 
 inline const MoveInfo& State::get_move_info(Move mv) const

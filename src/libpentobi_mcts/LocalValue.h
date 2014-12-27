@@ -32,10 +32,9 @@ using libpentobi_base::Variant;
 
 /** Classify moves for the playout policy to prefer local response moves.
     A local response move is a move that occupies attach points of recent
-    opponent moves or points that are adjacent or second-order adjacent to
-    them. If there is only one adjacent point to such an opponent attach
-    point missing to make it a 1-hole, the missing adjacent point counts
-    as an attach point. */
+    opponent moves or points that are adjacent to them. If there is only one
+    adjacent point to such an opponent attach point missing to make it a
+    1-hole, the missing adjacent point counts as an attach point. */
 class LocalValue
 {
 public:
@@ -76,13 +75,6 @@ public:
         bool has_adj_attach() const
         {
             return ((m_value & 0x0f0u) != 0);
-        }
-
-        /** Does the move occupy any points second-order adjacent to local
-            opponent attach points? */
-        bool has_adj_attach_2() const
-        {
-            return ((m_value & 0xf00u) != 0);
         }
 
     private:
@@ -156,14 +148,6 @@ inline void LocalValue::init(const Board& bd)
                                 m_points.push_back(*k);
                             // Adjacent to opp. attach point
                             m_point_value[*k] = 0x010u;
-                            for (AdjIterator l(geo, *k); l; ++l)
-                                if (! is_forbidden[*l]
-                                    && m_point_value[*l] == 0)
-                                {
-                                    m_points.push_back(*l);
-                                    // 2nd-order adj. to opp. attach point
-                                    m_point_value[*l] = 0x100u;
-                                }
                         }
                     }
                 // If occupying the attach point is forbidden for us but there

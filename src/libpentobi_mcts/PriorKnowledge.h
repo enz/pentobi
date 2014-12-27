@@ -32,12 +32,14 @@ public:
 
     typedef libboardgame_mcts::Tree<Node> Tree;
 
+    PriorKnowledge();
+
     void start_search(const Board& bd);
 
     /** Generate children nodes initialized with prior knowledge. */
     void gen_children(const Board& bd, const MoveList& moves,
-                      bool is_symmetry_broken, const LocalValue& local_value,
-                      Tree::NodeExpander& expander, Float init_val);
+                      bool is_symmetry_broken, Tree::NodeExpander& expander,
+                      Float init_val);
 
 private:
     struct MoveFeatures
@@ -45,13 +47,13 @@ private:
         /** Heuristic value of the move expressed in score points. */
         Float heuristic;
 
-        LocalValue::Compute local_value;
-
-        /** Only used on Classic and Trigon boards. */
-        unsigned dist_to_center;
+        bool is_local;
 
         /** Does the move touch a piece of the same player? */
         bool connect;
+
+        /** Only used on Classic and Trigon boards. */
+        unsigned dist_to_center;
     };
 
     array<MoveFeatures, Move::range> m_features;
@@ -67,12 +69,21 @@ private:
 
     unsigned m_min_dist_to_center;
 
+    /** Marker for points close to attach points of recent opponent moves.
+        0: point is not local, 1: (non-forbidden) oppponent attach point,
+        2: adj. to attach point, 3: 2nd order adj. to attach point. */
+    Grid<uint_fast8_t> m_local_value;
+
+    /** Points in m_local_value with value greater zero. */
+    PointList m_local_points;
+
     /** Distance to center heuristic. */
     Grid<unsigned> m_dist_to_center;
 
     void compute_features(const Board& bd, const MoveList& moves,
-                          const LocalValue& local_value,
                           bool check_dist_to_center, bool check_connect);
+
+    void init_local(const Board& bd);
 };
 
 //-----------------------------------------------------------------------------
