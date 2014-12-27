@@ -120,7 +120,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             }
     }
     m_max_heuristic = -numeric_limits<Float>::max();
-    m_min_dist_to_center = numeric_limits<unsigned>::max();
+    m_min_dist_to_center = numeric_limits<unsigned short>::max();
     m_has_connect_move = false;
     for (unsigned i = 0; i < moves.size(); ++i)
     {
@@ -364,7 +364,7 @@ void PriorKnowledge::start_search(const Board& bd)
             // Don't make a distinction between moves close enough to the
             // center in game variant Classic/Classic2
             d = max(d, 10.f);
-        m_dist_to_center[*i] = static_cast<unsigned>(d);
+        m_dist_to_center[*i] = static_cast<unsigned short>(d);
     }
 
     // Init m_check_dist_to_center
