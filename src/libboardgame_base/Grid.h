@@ -85,7 +85,7 @@ inline void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
 {
     // Uncomment once is_trivially_copyable is implemented in GCC and MSVC
     //static_assert(is_trivially_copyable<T>::value, "")
-    memcpy(m_a, grid.m_a, geo.get_range());
+    memcpy(m_a, grid.m_a, sizeof(T) * geo.get_range());
 }
 
 template<class P, typename T>
