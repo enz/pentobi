@@ -131,35 +131,38 @@ inline void LocalValue::init(const Board& bd)
         auto end = info_ext.end_attach();
         do
         {
-            if (! is_forbidden[*j])
-            {
-                if (m_point_value[*j] == 0)
-                    m_points.push_back(*j);
-                // Opponent attach point
-                m_point_value[*j] = 0x001u;
-                unsigned nu_adj = 0;
+            if (is_forbidden[*j])
+                continue;
+            // Don't check if m_point_value[*j] == 0x001u, it's faster to
+            // handle this rare case twice than to check for it.
+            if (m_point_value[*j] == 0)
+                m_points.push_back(*j);
+            // Opponent attach point
+            m_point_value[*j] = 0x001u;
+            unsigned nu_adj = 0;
+            for (AdjIterator k(geo, *j); k; ++k)
+                if (! is_forbidden[*k])
+                {
+                    ++nu_adj;
+                    if (m_point_value[*k] == 0)
+                    {
+                        m_points.push_back(*k);
+                        // Adjacent to opp. attach point
+                        m_point_value[*k] = 0x010u;
+                    }
+                }
+            // If occupying the attach point is forbidden for us but there is
+            // only 1 adj. point missing to make it a 1-point hole for the
+            // opponent, then occupying this adj. point is (almost) as good as
+            // occupying the attach point. (This is done only for 1-point holes
+            // that are forbidden for to_play.)
+            if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
                 for (AdjIterator k(geo, *j); k; ++k)
                     if (! is_forbidden[*k])
                     {
-                        ++nu_adj;
-                        if (m_point_value[*k] != 0x001u)
-                        {
-                            if (m_point_value[*k] == 0)
-                                m_points.push_back(*k);
-                            // Adjacent to opp. attach point
-                            m_point_value[*k] = 0x010u;
-                        }
+                        m_point_value[*k] = 0x001u;
+                        break;
                     }
-                // If occupying the attach point is forbidden for us but there
-                // is only one adjacent point missing to make it a 1-point hole
-                // for the opponent, then occupying this adjacent point is
-                // (almost) as good as occupying the attach point. (This is
-                // done only for 1-point holes that are forbidden for to_play.)
-                if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
-                    for (AdjIterator k(geo, *j); k; ++k)
-                        if (! is_forbidden[*k])
-                            m_point_value[*k] = 0x001u;
-            }
         }
         while (++j != end);
     }
