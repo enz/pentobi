@@ -1521,16 +1521,18 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 template<class S, class M, class R>
 auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
-    const Node* best_child = nullptr;
-    Float best_value = -numeric_limits<Float>::max();
-    ChildIterator i(m_tree, node);
-    LIBBOARDGAME_ASSERT(i);
     m_bias_term.start_iteration(node.get_visit_count());
     auto bias_upper_limit = m_bias_term.get(SearchParamConst::child_min_count);
-    Float limit = -numeric_limits<Float>::max();
-    do
+    ChildIterator i(m_tree, node);
+    LIBBOARDGAME_ASSERT(i);
+    auto value = i->get_value();
+    value += m_bias_term.get(i->get_value_count());
+    Float best_value = value;
+    const Node* best_child = &(*i);
+    Float limit = best_value - bias_upper_limit;
+    while (++i)
     {
-        auto value = i->get_value();
+        value = i->get_value();
         if (value < limit)
             continue;
         value += m_bias_term.get(i->get_value_count());
@@ -1541,7 +1543,6 @@ auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
             limit = best_value - bias_upper_limit;
         }
     }
-    while (++i);
     return best_child;
 }
 
