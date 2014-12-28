@@ -187,7 +187,10 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 {
     if (moves.empty())
     {
-        expander.add_child(Move::pass(), 0.5, 0);
+        // The initialization value does not matter for a single child, but we
+        // need to use SearchParamConst::child_min_count for the count to
+        // avoid an assertion.
+        expander.add_child(Move::pass(), init_val, 3);
         return;
     }
     init_local(bd);
@@ -249,7 +252,8 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         heuristic = 0.1f + 0.9f * fast_exp(-0.6f * heuristic);
 
         // Initialize value from heuristic and init_val, each with a count
-        // of 1.5
+        // of 1.5. If this is changed, SearchParamConst::child_min_count
+        // should be updated.
         Float value = 1.5f * heuristic + 1.5f * init_val;
         Float count = 3;
 
