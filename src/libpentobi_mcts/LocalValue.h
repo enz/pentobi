@@ -160,6 +160,7 @@ inline void LocalValue::init(const Board& bd)
                 for (AdjIterator k(geo, *j); k; ++k)
                     if (! is_forbidden[*k])
                     {
+                        LIBBOARDGAME_ASSERT(m_points.contains(*k));
                         m_point_value[*k] = 0x001u;
                         break;
                     }
