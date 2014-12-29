@@ -10,8 +10,8 @@
     </message>
     <message>
         <location filename="../ComputerColorDialog.cpp" line="32"/>
-        <source>Colors played by the computer:</source>
-        <translation>Colours played by the computer:</translation>
+        <source>Computer plays:</source>
+        <translation>Computer plays:</translation>
     </message>
     <message>
         <location filename="../ComputerColorDialog.cpp" line="74"/>
