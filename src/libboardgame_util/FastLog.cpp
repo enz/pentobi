@@ -23,7 +23,7 @@ static_assert(numeric_limits<float>::is_iec559, "");
 
 FastLog::FastLog(int mantissa_bits)
     : m_mantissa_bits_diff(max_mantissa_bits - mantissa_bits),
-      m_table(new float[1 << mantissa_bits])
+      m_table(new float[static_cast<size_t>(1) << mantissa_bits])
 {
     IntFloat x;
     x.m_int = 0x3F800000;
