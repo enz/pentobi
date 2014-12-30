@@ -25,7 +25,7 @@ using namespace std;
 class FastLog
 {
 public:
-    explicit FastLog(int mantissa_bits);
+    explicit FastLog(unsigned mantissa_bits);
 
     FastLog(const FastLog&) = delete;
 
@@ -42,9 +42,9 @@ private:
         float m_float;
     };
 
-    static const int max_mantissa_bits = 23;
+    static const unsigned max_mantissa_bits = 23;
 
-    const int m_mantissa_bits_diff;
+    const unsigned m_mantissa_bits_diff;
 
     unique_ptr<float[]> m_table;
 };
@@ -54,9 +54,9 @@ inline float FastLog::get_log(float val) const
     IntFloat x;
     x.m_float = val;
     int32_t log_2 = ((x.m_int >> max_mantissa_bits) & 255) - 127;
-    x.m_int &= 0x7FFFFF;
+    x.m_int &= 0x7fffff;
     x.m_int >>= m_mantissa_bits_diff;
-    return ((m_table[x.m_int] + float(log_2)) * 0.69314718f);
+    return ((m_table[x.m_int] + static_cast<float>(log_2)) * 0.69314718f);
 }
 
 //-----------------------------------------------------------------------------
