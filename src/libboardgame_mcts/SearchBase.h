@@ -934,8 +934,11 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
                                       const Node*& best_child)
 {
     auto& state = *thread_state.state;
+    // SearchParamConst::child_min_count is currently declared as unsigned int
+    // because MSVC does not support constexpr Float yet
+    Float min_count = static_cast<Float>(SearchParamConst::child_min_count);
     typename Tree::NodeExpander expander(thread_state.thread_id, m_tree, node,
-                                         SearchParamConst::child_min_count);
+                                         min_count);
     state.gen_children(expander, m_init_val[state.get_to_play()].get_mean());
     if (! expander.is_tree_full())
     {
@@ -1522,7 +1525,10 @@ template<class S, class M, class R>
 auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
     m_bias_term.start_iteration(node.get_visit_count());
-    auto bias_upper_limit = m_bias_term.get(SearchParamConst::child_min_count);
+    // SearchParamConst::child_min_count is currently declared as unsigned int
+    // because MSVC does not support constexpr Float yet
+    Float min_count = static_cast<Float>(SearchParamConst::child_min_count);
+    auto bias_upper_limit = m_bias_term.get(min_count);
     ChildIterator i(m_tree, node);
     LIBBOARDGAME_ASSERT(i);
     auto value = i->get_value();
