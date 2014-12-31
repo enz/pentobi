@@ -355,7 +355,7 @@ void MainWindow::about()
                        "<p>" +
                        tr("Pentobi is a computer opponent for the board game Blokus.")
                        + "<br>" +
-                       tr("Copyright &copy; 2011&ndash;2014 Markus Enzenberger") +
+                       tr("Copyright &copy; 2011&ndash;%1 Markus Enzenberger").arg(2015) +
                        + "<br>" +
                        "<a href=\"http://pentobi.sourceforge.net\">http://pentobi.sourceforge.net</a>"
                        "</p>");
