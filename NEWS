@@ -5,9 +5,11 @@ Version 9.0.UNKNOWN (v9-fixes)
   if the path contained non-ASCII characters.
 * Fixed failure to open a file given as a command line argument to pentobi
   (including the case when Pentobi is used as a handler for blksgf files
-  in file browsers) if the path contained non-ASCII characters
+  in file browsers) if the path contained non-ASCII characters.
 * Changed the file dialog filter for "All files" from *.* to * such that
   really all files are shown even if they have no file ending.
+* Remembering the playing level separately for each game variant did not
+  work if the game variant was implicitely changed by opening a file.
 
 
 Version 9.0 (10 Dec 2014)

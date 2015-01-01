@@ -2512,6 +2512,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     initVariantActions();
+    restoreLevel(getVariant());
     updateWindow(true);
     loadHistory();
     return true;
