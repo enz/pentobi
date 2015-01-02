@@ -84,7 +84,12 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                 adj_point_value[*i] = -0.1f;
         }
         else if (s == connect_color)
+            // Connecting own colors is good
             adj_point_value[*i] = 1;
+        else if (! s.is_empty())
+            // Touching opponent is better than playing elsewhere (no need to
+            // check if s == to_play, such moves are illegal)
+            adj_point_value[*i] = 0.4f;
         else
             adj_point_value[*i] = 0;
     }
