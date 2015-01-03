@@ -41,7 +41,7 @@ inline Setup::Setup()
 inline void Setup::clear()
 {
     to_play = Color(0);
-    LIBPENTOBI_FOREACH_COLOR(c, placements[c].clear());
+    for_each_color([&](Color c) { placements[c].clear(); });
 }
 
 //-----------------------------------------------------------------------------

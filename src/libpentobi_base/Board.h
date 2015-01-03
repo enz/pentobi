@@ -881,7 +881,9 @@ inline void Board::place(Color c, Move mv)
     do
     {
         m_state_base.point_state[*i] = c;
-        LIBPENTOBI_FOREACH_COLOR(c, m_state_color[c].forbidden[*i] = true);
+        for_each_color([&](Color c) {
+            m_state_color[c].forbidden[*i] = true;
+        });
     }
     while (++i != end);
     i = info_ext.begin_attach();
