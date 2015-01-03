@@ -161,7 +161,6 @@ inline void LocalValue::init(const Board& bd)
                     {
                         LIBBOARDGAME_ASSERT(m_points.contains(k));
                         m_point_value[k] = 0x001u;
-                        return;
                     }
                 });
         }
