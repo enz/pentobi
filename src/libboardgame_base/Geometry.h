@@ -115,12 +115,21 @@ public:
     /** Get second closest distance to first line. */
     unsigned get_second_dist_to_edge(Point p) const;
 
+    /** Iterate over adjacent points.
+        Slightly faster than for(Point : get_adj()) because it knows that the
+        list is not empty. */
     template<class FUNCTION>
     void for_each_adj(Point p, FUNCTION f) const;
 
+    /** Iterate over diagonal points.
+        Slightly faster than for(Point : get_diag()) because it knows that the
+        list is not empty. */
     template<class FUNCTION>
     void for_each_diag(Point p, FUNCTION f) const;
 
+    /** Iterate over adjacentr and diagonal points.
+        Slightly faster than for(Point : get_adj_diag()) because it knows that
+        the list is not empty. */
     template<class FUNCTION>
     void for_each_adj_diag(Point p, FUNCTION f) const;
 
