@@ -14,14 +14,9 @@
 #include <cmath>
 #include "Util.h"
 #include "libboardgame_util/Log.h"
-#include "libpentobi_base/AdjIterator.h"
-#include "libpentobi_base/DiagIterator.h"
 
 using namespace std;
 using libboardgame_util::log;
-using libpentobi_base::AdjIterator;
-using libpentobi_base::BoardIterator;
-using libpentobi_base::DiagIterator;
 using libpentobi_base::GeometryIterator;
 using libpentobi_base::Move;
 using libpentobi_base::PointState;
