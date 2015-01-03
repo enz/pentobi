@@ -1,8 +1,6 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_base_STAT_SRCS
-  AdjDiagIterator.h
-  AdjIterator.h
   BoardConst.h
   BoardConst.cpp
   Board.h
@@ -17,7 +15,6 @@ set(pentobi_base_STAT_SRCS
   Color.cpp
   ColorMap.h
   ColorMove.h
-  DiagIterator.h
   Game.h
   Game.cpp
   GameStateHistory.h

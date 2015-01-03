@@ -96,8 +96,8 @@ void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
         return;
     points.push_back(p);
     // This assumes that no Trigon pieces touch at the corners, otherwise
-    // we would need to iterate over neighboring CoordPoint's like AdjIterator
-    // iterates over neighboring Point's
+    // we would need to iterate over neighboring CoordPoint's corresponding to
+    // Geometry::get_adj()
     findPiecePoints(piece, x + 1, y, points);
     findPiecePoints(piece, x - 1, y, points);
     findPiecePoints(piece, x, y + 1, points);

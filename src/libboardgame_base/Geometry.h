@@ -109,6 +109,15 @@ public:
     /** Get second closest distance to first line. */
     unsigned get_second_dist_to_edge(Point p) const;
 
+    template<class FUNCTION>
+    void for_each_adj(Point p, FUNCTION f) const;
+
+    template<class FUNCTION>
+    void for_each_diag(Point p, FUNCTION f) const;
+
+    template<class FUNCTION>
+    void for_each_adj_diag(Point p, FUNCTION f) const;
+
 protected:
     Geometry();
 
@@ -196,6 +205,48 @@ Geometry<P>::Geometry()
 template<class P>
 Geometry<P>::~Geometry()
 {
+}
+
+template<class P>
+template<class FUNCTION>
+inline void Geometry<P>::for_each_adj(Point p, FUNCTION f) const
+{
+    typename NullTermList<Point, 4>::Iterator i(get_adj(p));
+    LIBBOARDGAME_ASSERT(i);
+    do
+    {
+        f(*i);
+        ++i;
+    }
+    while (i);
+}
+
+template<class P>
+template<class FUNCTION>
+inline void Geometry<P>::for_each_diag(Point p, FUNCTION f) const
+{
+    typename NullTermList<Point, 9>::Iterator i(get_diag(p));
+    LIBBOARDGAME_ASSERT(i);
+    do
+    {
+        f(*i);
+        ++i;
+    }
+    while (i);
+}
+
+template<class P>
+template<class FUNCTION>
+inline void Geometry<P>::for_each_adj_diag(Point p, FUNCTION f) const
+{
+    typename NullTermList<Point, 12>::Iterator i(get_adj_diag(p));
+    LIBBOARDGAME_ASSERT(i);
+    do
+    {
+        f(*i);
+        ++i;
+    }
+    while (i);
 }
 
 template<class P>

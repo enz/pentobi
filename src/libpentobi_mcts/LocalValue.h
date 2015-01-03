@@ -8,7 +8,6 @@
 #define LIBPENTOBI_MCTS_LOCAL_VALUE_H
 
 #include <algorithm>
-#include "libpentobi_base/AdjIterator.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/PointList.h"
 
@@ -16,7 +15,6 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_base::ArrayList;
-using libpentobi_base::AdjIterator;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
@@ -140,30 +138,32 @@ inline void LocalValue::init(const Board& bd)
             // Opponent attach point
             m_point_value[*j] = 0x001u;
             unsigned nu_adj = 0;
-            for (AdjIterator k(geo, *j); k; ++k)
-                if (! is_forbidden[*k])
+            geo.for_each_adj(*j, [&](Point k) {
+                if (! is_forbidden[k])
                 {
                     ++nu_adj;
-                    if (m_point_value[*k] == 0)
+                    if (m_point_value[k] == 0)
                     {
-                        m_points.push_back(*k);
+                        m_points.push_back(k);
                         // Adjacent to opp. attach point
-                        m_point_value[*k] = 0x010u;
+                        m_point_value[k] = 0x010u;
                     }
                 }
+            });
             // If occupying the attach point is forbidden for us but there is
             // only 1 adj. point missing to make it a 1-point hole for the
             // opponent, then occupying this adj. point is (almost) as good as
             // occupying the attach point. (This is done only for 1-point holes
             // that are forbidden for to_play.)
             if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
-                for (AdjIterator k(geo, *j); k; ++k)
-                    if (! is_forbidden[*k])
+                geo.for_each_adj(*j, [&](Point k) {
+                    if (! is_forbidden[k])
                     {
-                        LIBBOARDGAME_ASSERT(m_points.contains(*k));
-                        m_point_value[*k] = 0x001u;
-                        break;
+                        LIBBOARDGAME_ASSERT(m_points.contains(k));
+                        m_point_value[k] = 0x001u;
+                        return;
                     }
+                });
         }
         while (++j != end);
     }

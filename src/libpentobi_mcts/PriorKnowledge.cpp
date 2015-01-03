@@ -12,13 +12,11 @@
 
 #include <cmath>
 #include "libboardgame_util/MathUtil.h"
-#include "libpentobi_base/AdjIterator.h"
 
 namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_util::fast_exp;
-using libpentobi_base::AdjIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::ColorIterator;
@@ -103,11 +101,12 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             {
                 // Occupying opponent attach points is very good
                 point_value[p] = 3.2f;
-                for (AdjIterator j(geo, p); j; ++j)
-                    if (! is_forbidden[*j])
+                geo.for_each_adj(p, [&](Point j) {
+                    if (! is_forbidden[j])
                         // Occupying points adjacent to opponent attach points
                         // is good
-                        point_value[*j] = max(point_value[*j], Float(2.5));
+                        point_value[j] = max(point_value[j], Float(2.5));
+                });
             }
     }
     if (variant == Variant::classic_2
@@ -327,22 +326,24 @@ void PriorKnowledge::init_local(const Board& bd)
             if (m_local_value[*j] == 0)
                 m_local_points.push_back(*j);
             m_local_value[*j] = 1;
-            for (AdjIterator k(geo, *j); k; ++k)
-                if (! is_forbidden[*k])
+            geo.for_each_adj(*j, [&](Point k) {
+                if (! is_forbidden[k])
                 {
-                    if (m_local_value[*k] == 0)
-                        m_local_points.push_back(*k);
-                    if (m_local_value[*k] == 0 || m_local_value[*k] == 3)
+                    if (m_local_value[k] == 0)
+                        m_local_points.push_back(k);
+                    if (m_local_value[k] == 0 || m_local_value[k] == 3)
                     {
-                        m_local_value[*k] = 2;
-                        for (AdjIterator l(geo, *k); l; ++l)
-                            if (! is_forbidden[*l] && m_local_value[*l] == 0)
+                        m_local_value[k] = 2;
+                        geo.for_each_adj(k, [&](Point l) {
+                            if (! is_forbidden[l] && m_local_value[l] == 0)
                             {
-                                m_local_points.push_back(*l);
-                                m_local_value[*l] = 3;
+                                m_local_points.push_back(l);
+                                m_local_value[l] = 3;
                             }
+                        });
                     }
                 }
+            });
         }
         while (++j != end);
     }

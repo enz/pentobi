@@ -12,9 +12,6 @@
 
 #include <algorithm>
 #include <functional>
-#include "AdjIterator.h"
-#include "AdjDiagIterator.h"
-#include "DiagIterator.h"
 #include "Grid.h"
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsTrigon.h"
@@ -707,7 +704,7 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
         Piece piece(i);
         if (get_piece_info(piece).get_size() == points.size())
         {
-            Board::LocalMovesListRange moves = get_moves(piece, p);
+            auto moves = get_moves(piece, p);
             for (auto j = moves.begin(); j != moves.end(); ++j)
                 if (equal(sorted_points.begin(),
                           sorted_points.end(),
@@ -734,16 +731,20 @@ void BoardConst::init_adj_status(
                        unsigned i)
 {
     if (i == PrecompMoves::adj_status_nu_adj
-        || i == m_geo.get_adj_diag(p).size())
+            || i == m_geo.get_adj_diag(p).size())
     {
         unsigned index = 0;
         for (unsigned j = 0; j < i; ++j)
             if (forbidden[j])
                 index |= (1 << j);
         unsigned n = 0;
-        for (AdjDiagIterator j(m_geo, p); n < i; ++j, ++n)
+        m_geo.for_each_adj_diag(p, [&](Point j) {
+            if (n >= i)
+                return;
             if (forbidden[n])
-                m_adj_status[p][index].push_back(*j);
+                m_adj_status[p][index].push_back(j);
+            ++n;
+        });
         return;
     }
     forbidden[i] = false;
@@ -799,20 +800,22 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
         m_marker.set(*i);
     ArrayList<Point, PieceInfo::max_adj> adj_points;
     for (auto i = begin; i != end; ++i)
-        for (AdjIterator j(m_geo, *i); j; ++j)
-            if (m_geo.is_onboard(*j) && ! m_marker[*j])
+        m_geo.for_each_adj(*i, [&](Point j) {
+            if (m_geo.is_onboard(j) && ! m_marker[j])
             {
-                m_marker.set(*j);
-                adj_points.push_back(*j);
+                m_marker.set(j);
+                adj_points.push_back(j);
             }
+        });
     ArrayList<Point, PieceInfo::max_attach> attach_points;
     for (auto i = begin; i != end; ++i)
-        for (DiagIterator j(m_geo, *i); j; ++j)
-            if (m_geo.is_onboard(*j) && ! m_marker[*j])
+        m_geo.for_each_diag(*i, [&](Point j) {
+            if (m_geo.is_onboard(j) && ! m_marker[j])
             {
-                m_marker.set(*j);
-                attach_points.push_back(*j);
+                m_marker.set(j);
+                attach_points.push_back(j);
             }
+        });
     info_ext.init(adj_points, attach_points);
 }
 
