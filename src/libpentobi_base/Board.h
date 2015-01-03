@@ -24,8 +24,6 @@
 
 namespace libpentobi_base {
 
-using libboardgame_util::NullTermList;
-
 //-----------------------------------------------------------------------------
 
 /** Blokus board.
@@ -498,15 +496,23 @@ inline Move Board::from_string(const string& s) const
 
 inline unsigned Board::get_adj_status(Point p, Color c) const
 {
+    auto& adj_diag = m_geo->get_adj_diag(p);
+    const Point* i = adj_diag.begin();
+    const Point* end;
+    if (adj_diag.size() >= PrecompMoves::adj_status_nu_adj)
+        end = i + PrecompMoves::adj_status_nu_adj;
+    else
+        end = i + adj_diag.size();
     unsigned result = 0;
     unsigned val = 1;
-    NullTermList<Point, 12>::Iterator i(m_geo->get_adj_diag(p));
-    LIBBOARDGAME_ASSERT(i);
     static_assert(PrecompMoves::adj_status_nu_adj > 0, "");
     do
+    {
         if (is_forbidden(*i, c))
             result |= val;
-    while ((val <<= 1) < (1 << PrecompMoves::adj_status_nu_adj) && ++i);
+        val <<= 1;
+    }
+    while (++i != end);
     return result;
 }
 

@@ -3,7 +3,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 add_executable(unittest_libboardgame_util
   ArrayListTest.cpp
   FastLogTest.cpp
-  NullTermListTest.cpp
   OptionsTest.cpp
   StatisticsTest.cpp
   StringUtilTest.cpp

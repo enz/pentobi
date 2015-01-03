@@ -10,12 +10,12 @@
 #include <memory>
 #include "CoordPoint.h"
 #include "Point.h"
-#include "libboardgame_util/NullTermList.h"
+#include "libboardgame_util/ArrayList.h"
 
 namespace libboardgame_base {
 
 using namespace std;
-using libboardgame_util::NullTermList;
+using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
@@ -31,6 +31,12 @@ class Geometry
 {
 public:
     typedef P Point;
+
+    typedef ArrayList<Point, 4, unsigned short> AdjList;
+
+    typedef ArrayList<Point, 9, unsigned short> DiagList;
+
+    typedef ArrayList<Point, 12, unsigned short> AdjDiagList;
 
     class Iterator
     {
@@ -90,18 +96,18 @@ public:
     unsigned get_range() const;
 
     /** Get list of on-board adjacent points. */
-    const NullTermList<Point, 4>& get_adj(Point p) const;
+    const AdjList& get_adj(Point p) const;
 
     /** Get list of on-board diagonal points.
         Currently supports up to nine diagonal points as used on boards
         for Blokus Trigon. */
-    const NullTermList<Point, 9>& get_diag(Point p) const;
+    const DiagList& get_diag(Point p) const;
 
     /** Get list of on-board adjacent and diagonal points.
         The adjacent points are first, diagobal points later in the list.
         Currently supports up to twelve diagonal points as used on boards
         for Blokus Trigon. */
-    const NullTermList<Point, 12>& get_adj_diag(Point p) const;
+    const AdjDiagList& get_adj_diag(Point p) const;
 
     /** Get closest distance to first line. */
     unsigned get_dist_to_edge(Point p) const;
@@ -136,8 +142,8 @@ protected:
         neighborhood relationships than the one of a regular rectangular grid
         (e.g. triangles or hexagonal fields). This function is used after
         the on-board status of all points has been initialized. */
-    virtual void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                               NullTermList<Point, 9>& diag) const = 0;
+    virtual void init_adj_diag(Point p, AdjList& adj,
+                               DiagList& diag) const = 0;
 
 private:
     unsigned m_width;
@@ -156,11 +162,11 @@ private:
 
     unique_ptr<Point[]> m_all_points;
 
-    NullTermList<Point, 4> m_adj[Point::range];
+    AdjList m_adj[Point::range];
 
-    NullTermList<Point, 9> m_diag[Point::range];
+    DiagList m_diag[Point::range];
 
-    NullTermList<Point, 12> m_adj_diag[Point::range];
+    AdjDiagList m_adj_diag[Point::range];
 };
 
 template<class P>
@@ -211,60 +217,57 @@ template<class P>
 template<class FUNCTION>
 inline void Geometry<P>::for_each_adj(Point p, FUNCTION f) const
 {
-    typename NullTermList<Point, 4>::Iterator i(get_adj(p));
-    LIBBOARDGAME_ASSERT(i);
+    auto& l = get_adj(p);
+    auto i = l.begin();
+    auto end = l.end();
+    LIBBOARDGAME_ASSERT(i != end);
     do
-    {
         f(*i);
-        ++i;
-    }
-    while (i);
+    while (++i != end);
 }
 
 template<class P>
 template<class FUNCTION>
 inline void Geometry<P>::for_each_diag(Point p, FUNCTION f) const
 {
-    typename NullTermList<Point, 9>::Iterator i(get_diag(p));
-    LIBBOARDGAME_ASSERT(i);
+    auto& l = get_diag(p);
+    auto i = l.begin();
+    auto end = l.end();
+    LIBBOARDGAME_ASSERT(i != end);
     do
-    {
         f(*i);
-        ++i;
-    }
-    while (i);
+    while (++i != end);
 }
 
 template<class P>
 template<class FUNCTION>
 inline void Geometry<P>::for_each_adj_diag(Point p, FUNCTION f) const
 {
-    typename NullTermList<Point, 12>::Iterator i(get_adj_diag(p));
-    LIBBOARDGAME_ASSERT(i);
+    auto& l = get_adj_diag(p);
+    auto i = l.begin();
+    auto end = l.end();
+    LIBBOARDGAME_ASSERT(i != end);
     do
-    {
         f(*i);
-        ++i;
-    }
-    while (i);
+    while (++i != end);
 }
 
 template<class P>
-inline const NullTermList<P, 4>& Geometry<P>::get_adj(Point p) const
+inline auto Geometry<P>::get_adj(Point p) const -> const AdjList&
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_adj[p.to_int()];
 }
 
 template<class P>
-inline const NullTermList<P, 12>& Geometry<P>::get_adj_diag(Point p) const
+inline auto Geometry<P>::get_adj_diag(Point p) const  -> const AdjDiagList&
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_adj_diag[p.to_int()];
 }
 
 template<class P>
-inline const NullTermList<P, 9>& Geometry<P>::get_diag(Point p) const
+inline auto Geometry<P>::get_diag(Point p) const -> const DiagList&
 {
     LIBBOARDGAME_ASSERT(is_onboard(p));
     return m_diag[p.to_int()];
@@ -340,12 +343,11 @@ void Geometry<P>::init(unsigned width, unsigned height)
     {
         unsigned j = (*i).to_int();
         init_adj_diag(*i, m_adj[j], m_diag[j]);
-        typename NullTermList<Point, 12>::Init adj_diag(m_adj_diag[j]);
-        for (typename NullTermList<Point, 4>::Iterator k(m_adj[j]); k; ++k)
-            adj_diag.push_back(*k);
-        for (typename NullTermList<Point, 9>::Iterator k(m_diag[j]); k; ++k)
-            adj_diag.push_back(*k);
-        adj_diag.finish();
+        auto& adj_diag = m_adj_diag[j];
+        for (Point k : m_adj[j])
+            adj_diag.push_back(k);
+        for (Point k : m_diag[j])
+            adj_diag.push_back(k);
         auto x = (*i).get_x(width);
         auto y = (*i).get_y(width);
         unsigned dist_to_edge_x = min(width - x - 1, x);

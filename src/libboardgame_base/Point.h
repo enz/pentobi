@@ -13,7 +13,6 @@
 #include <string>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Exception.h"
-#include "libboardgame_util/NullElement.h"
 #include "libboardgame_sys/Compiler.h"
 
 namespace libboardgame_base {
@@ -515,41 +514,5 @@ void Point<M, I, S>::write(ostream& out, unsigned width, unsigned height) const
 //-----------------------------------------------------------------------------
 
 } // namespace boardgame_libboardgame
-
-//-----------------------------------------------------------------------------
-
-namespace std {
-
-template<unsigned M, typename I, class S>
-struct hash<libboardgame_base::Point<M, I, S>>
-    : public unary_function<libboardgame_base::Point<M, I, S>, size_t>
-{
-    size_t operator()(const libboardgame_base::Point<M, I, S>& p) const
-    {
-        return p.to_int();
-    }
-};
-
-} // namespace std
-
-//-----------------------------------------------------------------------------
-
-namespace libboardgame_util {
-
-template<unsigned M, typename I, class S>
-inline bool is_null(const libboardgame_base::Point<M, I, S>& p)
-{
-    return p.is_null();
-}
-
-template<unsigned M, typename I, class S>
-inline void set_null(libboardgame_base::Point<M, I, S>& p)
-{
-    p = libboardgame_base::Point<M, I, S>::null();
-}
-
-} // namespace libboardgame_util
-
-//-----------------------------------------------------------------------------
 
 #endif // LIBBOARDGAME_BASE_POINT_H

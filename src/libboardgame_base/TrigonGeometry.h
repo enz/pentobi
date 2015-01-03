@@ -39,6 +39,10 @@ class TrigonGeometry
 public:
     typedef P Point;
 
+    using AdjList = typename Geometry<P>::AdjList;
+
+    using DiagList = typename Geometry<P>::DiagList;
+
     /** Create or reuse an already created geometry with a given size.
         @param sz The edge size of the hexagon. */
     static const TrigonGeometry& get(unsigned sz);
@@ -52,8 +56,7 @@ public:
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
-    void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                       NullTermList<Point, 9>& diag) const;
+    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const;
 
 private:
     /** Stores already created geometries by size. */
@@ -129,8 +132,8 @@ void TrigonGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
 }
 
 template<class P>
-void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                                      NullTermList<Point, 9>& diag) const
+void TrigonGeometry<P>::init_adj_diag(Point p, AdjList& adj,
+                                      DiagList& diag) const
 {
     auto width = this->get_width();
     auto height = this->get_height();
@@ -138,29 +141,26 @@ void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
     auto y = p.get_y(width);
     auto type = Geometry<P>::get_point_type(p);
     {
-        typename NullTermList<Point, 4>::Init init_adj(adj);
         if (type == 0)
         {
             if (x > 0 && this->is_onboard(p.get_left()))
-                init_adj.push_back(p.get_left());
+                adj.push_back(p.get_left());
             if (x < width - 1 && this->is_onboard(p.get_right()))
-                init_adj.push_back(p.get_right());
+                adj.push_back(p.get_right());
             if (y < height - 1 && this->is_onboard(p.get_down(width)))
-                init_adj.push_back(p.get_down(width));
+                adj.push_back(p.get_down(width));
         }
         else
         {
             if (y > 0 && this->is_onboard(p.get_up(width)))
-                init_adj.push_back(p.get_up(width));
+                adj.push_back(p.get_up(width));
             if (x > 0 && this->is_onboard(p.get_left()))
-                init_adj.push_back(p.get_left());
+                adj.push_back(p.get_left());
             if (x < width - 1 && this->is_onboard(p.get_right()))
-                init_adj.push_back(p.get_right());
+                adj.push_back(p.get_right());
         }
-        init_adj.finish();
     }
     {
-        typename NullTermList<Point, 9>::Init init_diag(diag);
         if (type == 0)
         {
             // The order does not matter logically but it is better to put
@@ -169,61 +169,59 @@ void TrigonGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
             // uses the forbidden status of the first few points from this list
             // during move generation and those points can reject more moves.
             if (x > 1 && this->is_onboard(p.get_left().get_left()))
-                init_diag.push_back(p.get_left().get_left());
+                diag.push_back(p.get_left().get_left());
             if (x < width - 2 && this->is_onboard(p.get_right().get_right()))
-                init_diag.push_back(p.get_right().get_right());
+                diag.push_back(p.get_right().get_right());
             if (x > 0 && y > 0
                     && this->is_onboard(p.get_up_left(width)))
-                init_diag.push_back(p.get_up_left(width));
+                diag.push_back(p.get_up_left(width));
             if (x < width - 1 && y > 0
                     && this->is_onboard(p.get_up_right(width)))
-                init_diag.push_back(p.get_up_right(width));
+                diag.push_back(p.get_up_right(width));
             if (x < width - 1 && y < height - 1
                     && this->is_onboard(p.get_down_right(width)))
-                init_diag.push_back(p.get_down_right(width));
+                diag.push_back(p.get_down_right(width));
             if (x > 0 && y < height - 1
                     && this->is_onboard(p.get_down_left(width)))
-                init_diag.push_back(p.get_down_left(width));
+                diag.push_back(p.get_down_left(width));
             if (y > 0 && this->is_onboard(p.get_up(width)))
-                init_diag.push_back(p.get_up(width));
+                diag.push_back(p.get_up(width));
             if (x > 1 && y < height - 1
                     && this->is_onboard(p.get_down_left(width).get_left()))
-                init_diag.push_back(p.get_down_left(width).get_left());
+                diag.push_back(p.get_down_left(width).get_left());
             if (x < width - 2 && y < height - 1
                     && this->is_onboard(p.get_down_right(width).get_right()))
-                init_diag.push_back(p.get_down_right(width).get_right());
+                diag.push_back(p.get_down_right(width).get_right());
         }
         else
         {
             // See comment at type == 0 for the order of moves.
             if (x > 1 && this->is_onboard(p.get_left().get_left()))
-                init_diag.push_back(p.get_left().get_left());
+                diag.push_back(p.get_left().get_left());
             if (x < width - 2 && this->is_onboard(p.get_right().get_right()))
-                init_diag.push_back(p.get_right().get_right());
+                diag.push_back(p.get_right().get_right());
             if (x > 0 && y < height - 1
                     && this->is_onboard(p.get_down_left(width)))
-                init_diag.push_back(p.get_down_left(width));
+                diag.push_back(p.get_down_left(width));
             if (x < width - 1 && y < height - 1
                     && this->is_onboard(p.get_down_right(width)))
-                init_diag.push_back(p.get_down_right(width));
+                diag.push_back(p.get_down_right(width));
             if (x < width - 1 && y > 0
                     && this->is_onboard(p.get_up_right(width)))
-                init_diag.push_back(p.get_up_right(width));
+                diag.push_back(p.get_up_right(width));
             if (x > 0 && y > 0
                     && this->is_onboard(p.get_up_left(width)))
-                init_diag.push_back(p.get_up_left(width));
+                diag.push_back(p.get_up_left(width));
             if (y < height - 1 && this->is_onboard(p.get_down(width)))
-                init_diag.push_back(p.get_down(width));
+                diag.push_back(p.get_down(width));
             if (x > 1 && y > 0
                     && this->is_onboard(p.get_up_left(width).get_left()))
-                init_diag.push_back(p.get_up_left(width).get_left());
+                diag.push_back(p.get_up_left(width).get_left());
             if (x < width - 2 && y > 0
                     && this->is_onboard(p.get_up_right(width).get_right()))
-                init_diag.push_back(p.get_up_right(width).get_right());
+                diag.push_back(p.get_up_right(width).get_right());
         }
-        init_diag.finish();
     }
-
 }
 
 //-----------------------------------------------------------------------------

@@ -14,7 +14,6 @@
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using libboardgame_base::NullTermList;
 using libboardgame_base::SpShtStrRep;
 
 //-----------------------------------------------------------------------------
@@ -29,10 +28,8 @@ typedef libboardgame_base::PointList<Point> PointList;
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_get_adj_diag)
 {
     auto& geo = RectGeometry::get(9, 9);
-    PointList l;
     Point p("B9", 9, 9);
-    for (NullTermList<Point, 12>::Iterator i(geo.get_adj_diag(p)); i; ++i)
-        l.push_back(*i);
+    auto& l = geo.get_adj_diag(p);
     LIBBOARDGAME_CHECK_EQUAL(l.size(), 5u);
     LIBBOARDGAME_CHECK(l.contains(Point("A9", 9, 9)));
     LIBBOARDGAME_CHECK(l.contains(Point("C9", 9, 9)));

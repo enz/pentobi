@@ -27,6 +27,10 @@ class RectGeometry
 public:
     typedef P Point;
 
+    using AdjList = typename Geometry<P>::AdjList;
+
+    using DiagList = typename Geometry<P>::DiagList;
+
     /** Create or reuse an already created geometry with a given size. */
     static const RectGeometry& get(unsigned width, unsigned height);
 
@@ -41,8 +45,7 @@ public:
 protected:
     void init_is_onboard(Point p, bool& is_onboard) const;
 
-    void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                       NullTermList<Point, 9>& diag) const;
+    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const;
 
 private:
     /** Stores already created geometries by width and height. */
@@ -98,36 +101,32 @@ void RectGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
 }
 
 template<class P>
-void RectGeometry<P>::init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                                    NullTermList<Point, 9>& diag) const
+void RectGeometry<P>::init_adj_diag(Point p, AdjList& adj,
+                                    DiagList& diag) const
 {
     auto width = this->get_width();
     auto height = this->get_height();
     auto x = p.get_x(width);
     auto y = p.get_y(width);
     {
-        typename NullTermList<Point, 4>::Init init_adj(adj);
         if (y > 0)
-            init_adj.push_back(p.get_up(width));
+            adj.push_back(p.get_up(width));
         if (x > 0)
-            init_adj.push_back(p.get_left());
+            adj.push_back(p.get_left());
         if (x < width - 1)
-            init_adj.push_back(p.get_right());
+            adj.push_back(p.get_right());
         if (y < height - 1)
-            init_adj.push_back(p.get_down(width));
-        init_adj.finish();
+            adj.push_back(p.get_down(width));
     }
     {
-        typename NullTermList<Point, 9>::Init init_diag(diag);
         if (x > 0 && y > 0)
-            init_diag.push_back(p.get_up_left(width));
+            diag.push_back(p.get_up_left(width));
         if (x < width - 1 && y > 0)
-            init_diag.push_back(p.get_up_right(width));
+            diag.push_back(p.get_up_right(width));
         if (x > 0 && y < height - 1)
-            init_diag.push_back(p.get_down_left(width));
+            diag.push_back(p.get_down_left(width));
         if (x < width - 1 && y < height - 1)
-            init_diag.push_back(p.get_down_right(width));
-        init_diag.finish();
+            diag.push_back(p.get_down_right(width));
     }
 }
 

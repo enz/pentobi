@@ -20,8 +20,6 @@ add_library(boardgame_util STATIC
   Log.h
   Log.cpp
   MathUtil.h
-  NullElement.h
-  NullTermList.h
   Options.h
   Options.cpp
   RandomGenerator.h
