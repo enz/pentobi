@@ -156,13 +156,13 @@ inline void LocalValue::init(const Board& bd)
             // occupying the attach point. (This is done only for 1-point holes
             // that are forbidden for to_play.)
             if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
-                geo.for_each_adj(*j, [&](Point k) {
+                for (Point k : geo.get_adj(*j))
                     if (! is_forbidden[k])
                     {
                         LIBBOARDGAME_ASSERT(m_points.contains(k));
                         m_point_value[k] = 0x001u;
+                        break;
                     }
-                });
         }
         while (++j != end);
     }
