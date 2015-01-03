@@ -45,6 +45,11 @@ enum class BoardType
 class BoardConst
 {
 public:
+    /** See get_adj_status_list() */
+    typedef
+    ArrayList<Point, PrecompMoves::adj_status_nu_adj, unsigned short>
+    AdjStatusList;
+
     /** Maximum number of unique pieces per color. */
     static const unsigned max_pieces = 22;
 
@@ -108,6 +113,15 @@ public:
 
     const Geometry& get_geometry() const;
 
+    /** List containing the points used for the adjacent status.
+        Contains the first PrecompMoves::adj_status_nu_adj points of
+        Geometry::get_adj() concatenated with Geometry::get_diag(). */
+    const AdjStatusList& get_adj_status_list(Point p) const
+    {
+        LIBBOARDGAME_ASSERT(m_geo.is_onboard(p));
+        return m_adj_status_list[p];
+    }
+
     /** Convert a move to its string representation.
         The string representation is a comma-separated list of points (without
         spaces between the commas or points). If with_piece_name is true,
@@ -139,6 +153,8 @@ private:
     const Geometry& m_geo;
 
     vector<PieceInfo> m_pieces;
+
+    Grid<AdjStatusList> m_adj_status_list;
 
     unique_ptr<PieceTransforms> m_transforms;
 

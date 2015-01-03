@@ -496,16 +496,12 @@ inline Move Board::from_string(const string& s) const
 
 inline unsigned Board::get_adj_status(Point p, Color c) const
 {
-    auto& adj_diag = m_geo->get_adj_diag(p);
-    const Point* i = adj_diag.begin();
-    const Point* end;
-    if (adj_diag.size() >= PrecompMoves::adj_status_nu_adj)
-        end = i + PrecompMoves::adj_status_nu_adj;
-    else
-        end = i + adj_diag.size();
     unsigned result = 0;
     unsigned val = 1;
-    static_assert(PrecompMoves::adj_status_nu_adj > 0, "");
+    auto& adj_status_list = m_board_const->get_adj_status_list(p);
+    auto i = adj_status_list.begin();
+    auto end = adj_status_list.end();
+    LIBBOARDGAME_ASSERT(i != end);
     do
     {
         if (is_forbidden(*i, c))

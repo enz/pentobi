@@ -25,19 +25,6 @@ typedef libboardgame_base::PointList<Point> PointList;
 
 //-----------------------------------------------------------------------------
 
-LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_get_adj_diag)
-{
-    auto& geo = RectGeometry::get(9, 9);
-    Point p("B9", 9, 9);
-    auto& l = geo.get_adj_diag(p);
-    LIBBOARDGAME_CHECK_EQUAL(l.size(), 5u);
-    LIBBOARDGAME_CHECK(l.contains(Point("A9", 9, 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("C9", 9, 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("A8", 9, 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("B8", 9, 9)));
-    LIBBOARDGAME_CHECK(l.contains(Point("C8", 9, 9)));
-}
-
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
 {
     auto& geo = RectGeometry::get(3, 3);

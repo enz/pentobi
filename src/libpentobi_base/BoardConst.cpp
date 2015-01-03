@@ -720,6 +720,22 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
 
 void BoardConst::init_adj_status()
 {
+    for (GeometryIterator i(m_geo); i; ++i)
+    {
+        auto& adj_status_list = m_adj_status_list[*i];
+        for (Point p : m_geo.get_adj(*i))
+        {
+            if (adj_status_list.size() == PrecompMoves::adj_status_nu_adj)
+                break;
+            adj_status_list.push_back(p);
+        }
+        for (Point p : m_geo.get_diag(*i))
+        {
+            if (adj_status_list.size() == PrecompMoves::adj_status_nu_adj)
+                break;
+            adj_status_list.push_back(p);
+        }
+    }
     array<bool, PrecompMoves::adj_status_nu_adj> forbidden;
     for (GeometryIterator i(m_geo); i; ++i)
         init_adj_status(*i, forbidden, 0);
@@ -730,21 +746,22 @@ void BoardConst::init_adj_status(
                        array<bool, PrecompMoves::adj_status_nu_adj>& forbidden,
                        unsigned i)
 {
-    if (i == PrecompMoves::adj_status_nu_adj
-            || i == m_geo.get_adj_diag(p).size())
+    auto& adj_status_list = m_adj_status_list[p];
+    if (i == adj_status_list.size())
     {
         unsigned index = 0;
         for (unsigned j = 0; j < i; ++j)
             if (forbidden[j])
                 index |= (1 << j);
         unsigned n = 0;
-        m_geo.for_each_adj_diag(p, [&](Point j) {
+        for (Point j : adj_status_list)
+        {
             if (n >= i)
                 return;
             if (forbidden[n])
                 m_adj_status[p][index].push_back(j);
             ++n;
-        });
+        }
         return;
     }
     forbidden[i] = false;
