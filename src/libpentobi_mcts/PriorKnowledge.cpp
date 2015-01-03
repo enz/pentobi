@@ -332,15 +332,16 @@ void PriorKnowledge::init_local(const Board& bd)
                 {
                     if (m_local_value[*k] == 0)
                         m_local_points.push_back(*k);
-                    else if (m_local_value[*k] != 3)
-                        continue;
-                    m_local_value[*k] = 2;
-                    for (AdjIterator l(geo, *k); l; ++l)
-                        if (! is_forbidden[*l] && m_local_value[*l] == 0)
-                        {
-                            m_local_points.push_back(*l);
-                            m_local_value[*l] = 3;
-                        }
+                    if (m_local_value[*k] == 0 || m_local_value[*k] == 3)
+                    {
+                        m_local_value[*k] = 2;
+                        for (AdjIterator l(geo, *k); l; ++l)
+                            if (! is_forbidden[*l] && m_local_value[*l] == 0)
+                            {
+                                m_local_points.push_back(*l);
+                                m_local_value[*l] = 3;
+                            }
+                    }
                 }
         }
         while (++j != end);
