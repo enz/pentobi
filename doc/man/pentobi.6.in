@@ -25,7 +25,7 @@ doc/blksgf/Pentobi-SGF.html in the Pentobi source package.
 The amount of memory in bytes to be used by the search.
 If this option is not used, it depends on the amount of physical memory
 available on the system how much memory Pentobi will allocate (currently up
-to 1.3 GB).
+to 1.4 GB).
 If the memory for the search is too low, the playing strength at higher
 playing levels will be impaired.
 This can be checked by running Pentobi with option \-\-verbose in a game variant
