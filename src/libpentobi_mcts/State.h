@@ -244,6 +244,7 @@ private:
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
 
+    LIBBOARDGAME_NOINLINE
     void add_starting_moves(Color c,
                             const Board::PiecesLeftList& pieces_considered,
                             bool with_gamma);
