@@ -273,10 +273,10 @@ private:
 
     void init_moves_without_gamma(Color c);
 
-    bool check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
-                    double& gamma);
+    bool check_forbidden(const Grid<bool>& is_forbidden, Move mv);
 
-    bool check_move_without_gamma(const Grid<bool>& is_forbidden, Move mv);
+    bool check_move(Move mv, const MoveInfo& info,
+                    const Grid<bool>& is_forbidden, MoveList& moves);
 
     void update_moves(Color c);
 

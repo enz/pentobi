@@ -67,15 +67,11 @@ inline void State::add_moves(Point p, Color c,
     auto& marker = m_marker[c];
     auto adj_status = m_bd.get_adj_status(p, c);
     auto& is_forbidden = m_bd.is_forbidden(c);
-    double gamma;
     for (Piece piece : pieces_considered)
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
-                    && check_move(is_forbidden, get_move_info(mv), gamma))
-            {
+                    && check_move(mv, get_move_info(mv), is_forbidden, moves))
                 marker.set(mv);
-                add_move(moves, mv, gamma);
-            }
     m_moves_added_at[c].set(p);
 }
 
@@ -85,13 +81,10 @@ inline void State::add_moves(Point p, Color c, Piece piece,
     auto& moves = m_moves[c];
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
-    double gamma;
     for (Move mv : get_moves(c, piece, p, adj_status))
-        if (! marker[mv] && check_move(is_forbidden, get_move_info(mv), gamma))
-        {
+        if (! marker[mv]
+                && check_move(mv, get_move_info(mv), is_forbidden, moves))
             marker.set(mv);
-            add_move(moves, mv, gamma);
-        }
 }
 
 void State::add_starting_moves(Color c,
@@ -113,7 +106,7 @@ void State::add_starting_moves(Color c,
         for (Move mv : get_moves(c, piece, p, 0))
         {
             LIBBOARDGAME_ASSERT(! marker[mv]);
-            if (check_move_without_gamma(is_forbidden, mv))
+            if (check_forbidden(is_forbidden, mv))
             {
                 marker.set(mv);
                 if (with_gamma)
@@ -125,10 +118,23 @@ void State::add_starting_moves(Color c,
     }
 }
 
+bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv)
+{
+    auto& info = get_move_info(mv);
+    auto i = info.begin();
+    if (is_forbidden[*i])
+        return false;
+    auto end = info.end();
+    while (++i != end)
+        if (is_forbidden[*i])
+            return false;
+    return true;
+}
+
 /** Check if move is not forbidden and compute/handle its local value in the
     same loop. */
-bool State::check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
-                       double& gamma)
+bool State::check_move(Move mv, const MoveInfo& info,
+                       const Grid<bool>& is_forbidden, MoveList& moves)
 {
     auto i = info.begin();
     if (is_forbidden[*i])
@@ -141,26 +147,14 @@ bool State::check_move(const Grid<bool>& is_forbidden, const MoveInfo& info,
             return false;
         local.add_move_point(*i, m_local_value);
     }
-    gamma = m_gamma_piece[info.get_piece()];
+    double gamma = m_gamma_piece[info.get_piece()];
     if (local.has_local())
     {
         gamma *= m_gamma_nu_attach[local.get_nu_attach()];
         if (local.has_adj_attach())
             gamma *= 1e5;
     }
-    return true;
-}
-
-bool State::check_move_without_gamma(const Grid<bool>& is_forbidden, Move mv)
-{
-    auto& info = get_move_info(mv);
-    auto i = info.begin();
-    if (is_forbidden[*i])
-        return false;
-    auto end = info.end();
-    while (++i != end)
-        if (is_forbidden[*i])
-            return false;
+    add_move(moves, mv, gamma);
     return true;
 }
 
@@ -471,8 +465,7 @@ void State::init_moves_without_gamma(Color c)
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces_considered)
                     for (Move mv : get_moves(c, piece, p, adj_status))
-                        if (! marker[mv]
-                                && check_move_without_gamma(is_forbidden, mv))
+                        if (! marker[mv] && check_forbidden(is_forbidden, mv))
                         {
                             marker.set(mv);
                             moves.push_back(mv);
@@ -613,7 +606,6 @@ void State::update_moves(Color c)
     auto& moves = m_moves[c];
     auto old_size = moves.size();
     moves.clear();
-    double gamma;
     if (new_moves.size() == 1 && m_bd.get_nu_piece_instances() == 1)
     {
         Piece piece = get_move_info(new_moves[0]).get_piece();
@@ -622,10 +614,8 @@ void State::update_moves(Color c)
             LIBBOARDGAME_ASSERT(i >= moves.size());
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
-            if (info.get_piece() != piece
-                    && check_move(is_forbidden, info, gamma))
-                add_move(moves, mv, gamma);
-            else
+            if (info.get_piece() == piece
+                    || ! check_move(mv, info, is_forbidden, moves))
                 marker.clear(mv);
         }
     }
@@ -639,10 +629,8 @@ void State::update_moves(Color c)
             LIBBOARDGAME_ASSERT(i >= moves.size());
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
-            if (is_piece_left[info.get_piece()]
-                    && check_move(is_forbidden, info, gamma))
-                add_move(moves, mv, gamma);
-            else
+            if (! is_piece_left[info.get_piece()]
+                    || ! check_move(mv, info, is_forbidden, moves))
                 marker.clear(mv);
         }
     }
