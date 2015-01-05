@@ -203,7 +203,7 @@ const SgfNode* Book::select_child(const Board& bd, Color c,
         return nullptr;
     log("Book moves: ", good_moves.size());
     unsigned nu_good_moves = static_cast<unsigned>(good_moves.size());
-    return good_moves[m_random.generate_small_int(nu_good_moves)];
+    return good_moves[m_random.generate() % nu_good_moves];
 }
 
 //-----------------------------------------------------------------------------
