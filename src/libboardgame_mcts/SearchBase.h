@@ -383,8 +383,6 @@ protected:
     {
         ArrayList<const Node*, max_moves> nodes;
 
-        ArrayList<const Node*, max_moves> last_nodes;
-
         ArrayList<PlayerMove, max_moves> moves;
 
         array<Float, max_players> eval;
@@ -1144,7 +1142,6 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     auto& root = m_tree.get_root();
     auto node = &root;
     m_tree.inc_visit_count(*node);
-    simulation.nodes.push_back(node);
     Float expand_threshold = m_expand_threshold;
     if (thread_state.full_select_counter > 0)
     {
@@ -1155,24 +1152,27 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         while (node->has_children())
         {
             if (node->get_visit_count() <= m_full_select_min
-                    || depth + 1 >= simulation.last_nodes.size())
+                    || depth + 1 >= simulation.nodes.size())
                 break;
-            node = simulation.last_nodes[depth + 1];
+            node = simulation.nodes[depth + 1];
             m_tree.inc_visit_count(*node);
 #ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
             if (SearchParamConst::virtual_loss && m_nu_threads > 0)
                 m_tree.add_value(*node, 0);
 #endif
-            simulation.nodes.push_back(node);
-            Move mv = node->get_move();
-            simulation.moves.push_back(PlayerMove(state.get_to_play(), mv));
-            state.play_in_tree(mv);
+            state.play_in_tree(node->get_move());
             ++depth;
             expand_threshold += m_expand_threshold_inc;
         }
+        simulation.nodes.resize(depth + 1);
+        simulation.moves.resize(depth);
     }
     else
+    {
+        simulation.nodes.assign(node);
+        simulation.moves.clear();
         thread_state.full_select_counter = m_full_select_interval;
+    }
     thread_state.stat_fs_len.add(double(simulation.moves.size()));
     while (node->has_children())
     {
@@ -1476,7 +1476,8 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
     auto& simulation = thread_state.simulation;
-    simulation.last_nodes.clear();
+    simulation.nodes.clear();
+    simulation.moves.clear();
     double time_interval = 0.1;
     if (m_max_count == 0 && m_max_time < 1)
         time_interval = 0.1 * m_max_time;
@@ -1502,8 +1503,6 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
             break;
         }
         ++thread_state.nu_simulations;
-        simulation.nodes.clear();
-        simulation.moves.clear();
         state.start_simulation(nu_simulations);
         play_in_tree(thread_state);
         if (thread_state.is_out_of_mem)
@@ -1517,7 +1516,6 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
         if (SearchParamConst::use_last_good_reply)
             update_last_good_reply(thread_state);
         on_simulation_finished(nu_simulations, state, simulation);
-        simulation.last_nodes.copy_from(simulation.nodes);
     }
 }
 
