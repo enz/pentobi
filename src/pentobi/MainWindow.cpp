@@ -2709,7 +2709,8 @@ void MainWindow::ratedGame()
         random = settings.value(key).toUInt();
     else
     {
-        random = m_random.generate();
+        // RandomGenerator::ResultType may be larger than unsigned
+        random = static_cast<unsigned>(m_random.generate() % 1000);
         settings.setValue(key, random);
     }
     m_history->getNextRatedGameSettings(maxLevel, random,

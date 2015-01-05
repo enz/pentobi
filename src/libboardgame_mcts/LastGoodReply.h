@@ -9,15 +9,14 @@
 
 #include <algorithm>
 #include <memory>
+#include <random>
 #include "Atomic.h"
 #include "PlayerMove.h"
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/RandomGenerator.h"
 
 namespace libboardgame_mcts {
 
 using namespace std;
-using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 
@@ -74,9 +73,9 @@ private:
 template<class M, unsigned P>
 LastGoodReply<M, P>::LastGoodReply()
 {
-    RandomGenerator generator;
-    for (unsigned i = 0; i < Move::range; ++i)
-        m_hash[i] = generator.generate();
+    mt19937 generator;
+    for (auto& hash : m_hash)
+        hash = generator();
 }
 
 template<class M, unsigned P>
