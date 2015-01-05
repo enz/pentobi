@@ -23,7 +23,8 @@ using namespace std;
 /** Array-based list with maximum number of elements.
     The user is responsible for not inserting more than the maximum number of
     elements. The elements must be default-constructible. If the size of the
-    list shrinks, the destructor of elements will be not be called immediately.
+    list shrinks, the destructor of elements will be not be called and the
+    elements above the current size are still usable with get_unchecked().
     The list contains iterator definitions that are compatible with STL
     containers.
     @tparam T The type of the elements
@@ -87,6 +88,11 @@ public:
     void clear();
 
     void assign(const T& t);
+
+    /** Copy elements from another list.
+        Copies only the elements in the range given by the size of the
+        source. */
+    void copy_from(const ArrayList& l);
 
     /** Change the size of the list.
         Does not call constructors on new elements if the size grows or
@@ -221,6 +227,13 @@ bool ArrayList<T,M,I>::contains(const T& t) const
         if (*i == t)
             return true;
     return false;
+}
+
+template<typename T, unsigned M, typename I>
+void ArrayList<T, M, I>::copy_from(const ArrayList& l)
+{
+    m_size = l.size();
+    copy(l.begin(), l.end(), begin());
 }
 
 template<typename T, unsigned M, typename I>

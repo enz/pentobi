@@ -1517,7 +1517,7 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
         if (SearchParamConst::use_last_good_reply)
             update_last_good_reply(thread_state);
         on_simulation_finished(nu_simulations, state, simulation);
-        simulation.last_nodes = simulation.nodes;
+        simulation.last_nodes.copy_from(simulation.nodes);
     }
 }
 
