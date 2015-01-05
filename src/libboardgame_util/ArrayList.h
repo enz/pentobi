@@ -129,13 +129,13 @@ private:
 };
 
 template<typename T, unsigned M, typename I>
-inline ArrayList<T,M,I>::ArrayList()
+inline ArrayList<T, M, I>::ArrayList()
     : m_size(0)
 {
 }
 
 template<typename T, unsigned M, typename I>
-inline ArrayList<T,M,I>::ArrayList(const T& t)
+inline ArrayList<T, M, I>::ArrayList(const T& t)
 {
     assign(t);
 }
@@ -149,21 +149,21 @@ ArrayList<T, M, I>::ArrayList(const initializer_list<T>& l)
 }
 
 template<typename T, unsigned M, typename I>
-inline T& ArrayList<T,M,I>::operator[](I i)
+inline T& ArrayList<T, M, I>::operator[](I i)
 {
     LIBBOARDGAME_ASSERT(i < m_size);
     return m_a[i];
 }
 
 template<typename T, unsigned M, typename I>
-inline const T& ArrayList<T,M,I>::operator[](I i) const
+inline const T& ArrayList<T, M, I>::operator[](I i) const
 {
     LIBBOARDGAME_ASSERT(i < m_size);
     return m_a[i];
 }
 
 template<typename T, unsigned M, typename I>
-bool ArrayList<T,M,I>::operator==(const ArrayList& array_list) const
+bool ArrayList<T, M, I>::operator==(const ArrayList& array_list) const
 {
     if (m_size != array_list.m_size)
         return false;
@@ -176,52 +176,52 @@ bool ArrayList<T,M,I>::operator==(const ArrayList& array_list) const
 }
 
 template<typename T, unsigned M, typename I>
-bool ArrayList<T,M,I>::operator!=(const ArrayList& array_list) const
+bool ArrayList<T, M, I>::operator!=(const ArrayList& array_list) const
 {
     return ! operator==(array_list);
 }
 
 template<typename T, unsigned M, typename I>
-inline void ArrayList<T,M,I>::assign(const T& t)
+inline void ArrayList<T, M, I>::assign(const T& t)
 {
     m_size = 1;
     m_a[0] = t;
 }
 
 template<typename T, unsigned M, typename I>
-inline T& ArrayList<T,M,I>::back()
+inline T& ArrayList<T, M, I>::back()
 {
     LIBBOARDGAME_ASSERT(m_size > 0);
     return m_a[m_size - 1];
 }
 
 template<typename T, unsigned M, typename I>
-inline const T& ArrayList<T,M,I>::back() const
+inline const T& ArrayList<T, M, I>::back() const
 {
     LIBBOARDGAME_ASSERT(m_size > 0);
     return m_a[m_size - 1];
 }
 
 template<typename T, unsigned M, typename I>
-inline auto ArrayList<T,M,I>::begin() -> iterator
+inline auto ArrayList<T, M, I>::begin() -> iterator
 {
     return m_a;
 }
 
 template<typename T, unsigned M, typename I>
-inline auto ArrayList<T,M,I>::begin() const -> const_iterator
+inline auto ArrayList<T, M, I>::begin() const -> const_iterator
 {
     return m_a;
 }
 
 template<typename T, unsigned M, typename I>
-inline void ArrayList<T,M,I>::clear()
+inline void ArrayList<T, M, I>::clear()
 {
     m_size = 0;
 }
 
 template<typename T, unsigned M, typename I>
-bool ArrayList<T,M,I>::contains(const T& t) const
+bool ArrayList<T, M, I>::contains(const T& t) const
 {
     for (const_iterator i = begin(); i != end(); ++i)
         if (*i == t)
@@ -237,19 +237,19 @@ void ArrayList<T, M, I>::copy_from(const ArrayList& l)
 }
 
 template<typename T, unsigned M, typename I>
-inline bool ArrayList<T,M,I>::empty() const
+inline bool ArrayList<T, M, I>::empty() const
 {
     return m_size == 0;
 }
 
 template<typename T, unsigned M, typename I>
-inline auto ArrayList<T,M,I>::end() -> iterator
+inline auto ArrayList<T, M, I>::end() -> iterator
 {
     return begin() + m_size;
 }
 
 template<typename T, unsigned M, typename I>
-inline auto ArrayList<T,M,I>::end() const -> const_iterator
+inline auto ArrayList<T, M, I>::end() const -> const_iterator
 {
     return begin() + m_size;
 }
@@ -269,7 +269,7 @@ inline const T& ArrayList<T, M, I>::get_unchecked(I i) const
 }
 
 template<typename T, unsigned M, typename I>
-bool ArrayList<T,M,I>::include(const T& t)
+bool ArrayList<T, M, I>::include(const T& t)
 {
     iterator i;
     for (i = begin(); i != end(); ++i)
@@ -282,21 +282,21 @@ bool ArrayList<T,M,I>::include(const T& t)
 }
 
 template<typename T, unsigned M, typename I>
-inline const T& ArrayList<T,M,I>::pop_back()
+inline const T& ArrayList<T, M, I>::pop_back()
 {
     LIBBOARDGAME_ASSERT(m_size > 0);
     return m_a[--m_size];
 }
 
 template<typename T, unsigned M, typename I>
-inline void ArrayList<T,M,I>::push_back(const T& t)
+inline void ArrayList<T, M, I>::push_back(const T& t)
 {
     LIBBOARDGAME_ASSERT(m_size < max_size);
     m_a[m_size++] = t;
 }
 
 template<typename T, unsigned M, typename I>
-inline bool ArrayList<T,M,I>::remove(const T& t)
+inline bool ArrayList<T, M, I>::remove(const T& t)
 {
     T* end = this->end();
     for (T* i = m_a; i != end; ++i)
@@ -312,7 +312,7 @@ inline bool ArrayList<T,M,I>::remove(const T& t)
 }
 
 template<typename T, unsigned M, typename I>
-inline bool ArrayList<T,M,I>::remove_fast(const T& t)
+inline bool ArrayList<T, M, I>::remove_fast(const T& t)
 {
     T* end = this->end();
     for (T* i = m_a; i != end; ++i)
@@ -325,7 +325,7 @@ inline bool ArrayList<T,M,I>::remove_fast(const T& t)
 }
 
 template<typename T, unsigned M, typename I>
-inline void ArrayList<T,M,I>::remove_fast(iterator i)
+inline void ArrayList<T, M, I>::remove_fast(iterator i)
 {
     LIBBOARDGAME_ASSERT(i >= begin());
     LIBBOARDGAME_ASSERT(i < end());
@@ -334,14 +334,14 @@ inline void ArrayList<T,M,I>::remove_fast(iterator i)
 }
 
 template<typename T, unsigned M, typename I>
-inline void ArrayList<T,M,I>::resize(I size)
+inline void ArrayList<T, M, I>::resize(I size)
 {
     LIBBOARDGAME_ASSERT(size <= max_size);
     m_size = size;
 }
 
 template<typename T, unsigned M, typename I>
-inline I ArrayList<T,M,I>::size() const
+inline I ArrayList<T, M, I>::size() const
 {
     return m_size;
 }
@@ -349,7 +349,7 @@ inline I ArrayList<T,M,I>::size() const
 //-----------------------------------------------------------------------------
 
 template<typename T, unsigned M, typename I>
-ostream& operator<<(ostream& out, const ArrayList<T,M,I>& l)
+ostream& operator<<(ostream& out, const ArrayList<T, M, I>& l)
 {
     auto begin = l.begin();
     auto end = l.end();
