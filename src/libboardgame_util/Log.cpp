@@ -90,8 +90,15 @@ ostream& get_log()
     return *log_stream;
 }
 
+bool is_log_null()
+{
+    return log_stream == &null_stream;
+}
+
 void log(const string& s)
 {
+    if (is_log_null())
+        return;
     if (s.empty())
         *log_stream << '\n';
     else if (s.back() == '\n')

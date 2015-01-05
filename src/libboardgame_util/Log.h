@@ -18,20 +18,26 @@ using namespace std;
 
 ostream& get_log();
 
-/** Write a string to the log stream.
-    Appends a newline if the output has no newline at the end. */
-void log(const string& s);
+/** Initializes the logging functionality.
+    This is necessary to call on some platforms at the start of the program
+    before any calls to log().
+    @see LogInitializer */
+void log_init();
 
 /** Closes the logging functionality.
     This is necessary to call on some platforms before the program exits.
     @see LogInitializer */
 void log_close();
 
-/** Initializes the logging functionality.
-    This is necessary to call on some platforms at the start of the program
-    before any calls to log().
-    @see LogInitializer */
-void log_init();
+void set_log(ostream& out);
+
+void set_log_null();
+
+bool is_log_null();
+
+/** Write a string to the log stream.
+    Appends a newline if the output has no newline at the end. */
+void log(const string& s);
 
 /** Helper function needed for log(const Ts&...) */
 template<typename T>
@@ -54,14 +60,12 @@ void log_buffered(ostream& buffer, const T& first, const Ts&... rest)
 template<typename... Ts>
 void log(const Ts&... args)
 {
+    if (is_log_null())
+        return;
     ostringstream buffer;
     log_buffered(buffer, args...);
     log(buffer.str());
 }
-
-void set_log(ostream& out);
-
-void set_log_null();
 
 //-----------------------------------------------------------------------------
 
