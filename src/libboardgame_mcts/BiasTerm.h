@@ -9,20 +9,22 @@
 
 #include <cmath>
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/FastLog.h"
 
 namespace libboardgame_mcts {
 
 using namespace std;
-using libboardgame_util::FastLog;
 
 //-----------------------------------------------------------------------------
 
 /** Computes the UCT bias term.
-    Fractional counts are rounded to integer count (only for small counts).
+    For better speed, log_2 of the parent count is used and rounded to integers
+    because then computing the logarithm of a floating point is simply taking
+    the exponent. This does not affect convergence guarantees of UCT but
+    changes the meaning of the bias term constant by a constant factor.
+    Fractional child counts are rounded to integer count (for small counts).
     For child counts smaller than 1, the same value is returned as as for child
     count 1 but nodes should be initialized with prior knowledge anyway so that
-    child count 0 will not occur. */
+    child count 0 will not occur in practice. */
 template<typename F>
 class BiasTerm
 {
@@ -40,27 +42,28 @@ public:
     Float get(Float child_count) const;
 
 private:
-    static const unsigned nu_precomp = 50;
+    static const unsigned nu_precomp_parent = 30;
+
+    static const unsigned nu_precomp_child = 50;
+
+    static int get_rounded_log_2(Float x);
 
     /** The part of the bias term that does not depend on the child count. */
     Float m_parent_part;
 
     Float m_bias_term_constant;
 
-    Float m_precomp_parent_part[nu_precomp];
+    Float m_precomp_parent_part[nu_precomp_parent];
 
-    Float m_precomp_child_part[nu_precomp];
+    Float m_precomp_child_part[nu_precomp_child];
 
-    FastLog m_fast_log;
-
-    Float compute_parent_part(Float parent_count) const;
+    Float compute_parent_part(int log_parent_count) const;
 
     Float compute_child_part(Float child_count) const;
 };
 
 template<typename F>
 BiasTerm<F>::BiasTerm(Float bias_term_constant)
-    : m_fast_log(10)
 {
     set_bias_term_constant(bias_term_constant);
 }
@@ -70,7 +73,7 @@ inline auto BiasTerm<F>::get(Float child_count) const -> Float
 {
     LIBBOARDGAME_ASSERT(child_count >= 0);
     Float child_part;
-    if (child_count < nu_precomp)
+    if (child_count < nu_precomp_child)
         child_part = m_precomp_child_part[static_cast<unsigned>(child_count)];
     else
         child_part = compute_child_part(child_count);
@@ -85,12 +88,10 @@ inline auto BiasTerm<F>::compute_child_part(Float child_count) const -> Float
 }
 
 template<typename F>
-inline auto BiasTerm<F>::compute_parent_part(Float parent_count) const -> Float
+inline auto BiasTerm<F>::compute_parent_part(
+        int log_parent_count) const -> Float
 {
-    if (m_bias_term_constant == 0 || parent_count < 1)
-        return 0;
-    return
-        m_bias_term_constant * sqrt(m_fast_log.get_log(float(parent_count)));
+    return m_bias_term_constant * sqrt(static_cast<Float>(log_parent_count));
 }
 
 template<typename F>
@@ -100,12 +101,37 @@ inline auto BiasTerm<F>::get_bias_term_constant() const -> Float
 }
 
 template<typename F>
+inline int BiasTerm<F>::get_rounded_log_2(Float x)
+{
+    // Optimized implementation for IEEE-754
+    if (numeric_limits<Float>::is_iec559 && sizeof(Float) == 4)
+    {
+        union
+        {
+            int32_t i;
+            float f;
+        } convert;
+        convert.f = x;
+        // The last added 1 is to be compatible with frexp()
+        return ((convert.i >> 23) & 0xff) - 127 + 1;
+    }
+    else
+    {
+        // Portable fallback. Slower because frexp is not inline and computes
+        // the significant, which we don't need.
+        int exponent;
+        frexp(x, &exponent);
+        return exponent;
+    }
+}
+
+template<typename F>
 void BiasTerm<F>::set_bias_term_constant(Float value)
 {
     m_bias_term_constant = value;
-    for (unsigned i = 0; i < nu_precomp; ++i)
-        m_precomp_parent_part[i] = compute_parent_part(static_cast<Float>(i));
-    for (unsigned i = 0; i < nu_precomp; ++i)
+    for (unsigned i = 1; i < nu_precomp_parent; ++i)
+        m_precomp_parent_part[i] = compute_parent_part(i);
+    for (unsigned i = 0; i < nu_precomp_child; ++i)
         m_precomp_child_part[i] =
             compute_child_part(static_cast<Float>(max(i, 1u)));
 }
@@ -114,11 +140,16 @@ template<typename F>
 inline void BiasTerm<F>::start_iteration(Float parent_count)
 {
     LIBBOARDGAME_ASSERT(parent_count >= 0);
-    if (parent_count < nu_precomp)
-        m_parent_part =
-            m_precomp_parent_part[static_cast<unsigned>(parent_count)];
+    if (m_bias_term_constant == 0 || parent_count < 1)
+        m_parent_part = 0;
     else
-        m_parent_part = compute_parent_part(parent_count);
+    {
+        int log_2 = get_rounded_log_2(parent_count);
+        if (static_cast<unsigned>(log_2) < nu_precomp_parent)
+            m_parent_part = m_precomp_parent_part[log_2];
+        else
+            m_parent_part = compute_parent_part(log_2);
+    }
 }
 
 //-----------------------------------------------------------------------------

@@ -12,8 +12,6 @@ add_library(boardgame_util STATIC
   CpuTimeSource.cpp
   Exception.h
   Exception.cpp
-  FastLog.h
-  FastLog.cpp
   FmtSaver.h
   IntervalChecker.h
   IntervalChecker.cpp
