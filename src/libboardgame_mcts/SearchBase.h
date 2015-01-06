@@ -1520,7 +1520,7 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 }
 
 template<class S, class M, class R>
-auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
+inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
     m_bias_term.start_iteration(node.get_visit_count());
     // SearchParamConst::child_min_count is currently declared as unsigned int
