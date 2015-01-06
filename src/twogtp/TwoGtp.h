@@ -24,12 +24,14 @@ class TwoGtp
 public:
     TwoGtp(const string& black, const string& white, Variant variant,
            unsigned nu_games, OutputFile& output, bool quiet,
-           const string& log_prefix);
+           const string& log_prefix, const string& image_prefix);
 
     void run();
 
 private:
     bool m_quiet;
+
+    string m_image_prefix;
 
     Variant m_variant;
 
@@ -52,6 +54,8 @@ private:
     void send_both(const string& cmd);
 
     double send_cputime(GtpConnection& gtp_connection);
+
+    void write_image(const string& sgf_string) const;
 };
 
 //-----------------------------------------------------------------------------

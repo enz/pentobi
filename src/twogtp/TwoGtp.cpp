@@ -10,6 +10,7 @@
 
 #include "TwoGtp.h"
 
+#include <fstream>
 #include "libboardgame_sgf/Writer.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/StringUtil.h"
@@ -26,8 +27,9 @@ using libpentobi_base::get_nu_players;
 
 TwoGtp::TwoGtp(const string& black, const string& white, Variant variant,
                unsigned nu_games, OutputFile& output, bool quiet,
-               const string& log_prefix)
+               const string& log_prefix, const string& image_prefix)
     : m_quiet(quiet),
+      m_image_prefix(image_prefix),
       m_variant(variant),
       m_nu_games(nu_games),
       m_output(output),
@@ -141,6 +143,8 @@ void TwoGtp::play_game(unsigned game_number)
             sgf.begin_node();
             sgf.write_property(string(1, toupper(color[0])), move);
             sgf.end_node();
+            if (! m_image_prefix.empty())
+                write_image(sgf_string.str());
             other_connection.send(string("play ") + color + " " + move);
             ++nu_moves;
         }
@@ -195,6 +199,19 @@ double TwoGtp::send_cputime(GtpConnection& gtp_connection)
     if (! in)
         throw Exception("invalid response to cputime: " + response);
     return cputime;
+}
+
+void TwoGtp::write_image(const string& sgf_string) const
+{
+    {
+        ofstream out(m_image_prefix + ".blksgf");
+        out << sgf_string << ")";
+    }
+    string command =
+            "pentobi-thumbnailer --size 512 " + m_image_prefix + ".blksgf "
+            + m_image_prefix + ".png";
+    if (system(command.c_str()) < 0)
+        log("Command failed: ", command);
 }
 
 //-----------------------------------------------------------------------------
