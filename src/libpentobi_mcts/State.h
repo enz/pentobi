@@ -7,7 +7,7 @@
 #ifndef LIBPENTOBI_MCTS_STATE_H
 #define LIBPENTOBI_MCTS_STATE_H
 
-#include "LocalValue.h"
+#include "PlayoutFeatures.h"
 #include "PriorKnowledge.h"
 #include "StateUtil.h"
 #include "libboardgame_mcts/PlayerMove.h"
@@ -201,7 +201,7 @@ private:
     /** Marks moves contained in m_moves. */
     ColorMap<MoveMarker> m_marker;
 
-    LocalValue m_local_value;
+    PlayoutFeatures m_playout_features;
 
     RandomGenerator m_random;
 
@@ -313,7 +313,6 @@ inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
         return;
     Color to_play = m_bd.get_to_play();
     init_moves_without_gamma(to_play);
-    m_local_value.init(m_bd);
     m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
                                    m_is_symmetry_broken, expander, init_val);
 }

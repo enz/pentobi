@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_mcts/LocalValue.h
+/** @file libpentobi_mcts/PlayoutFeatures.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_MCTS_LOCAL_VALUE_H
-#define LIBPENTOBI_MCTS_LOCAL_VALUE_H
+#ifndef LIBPENTOBI_MCTS_PLAYOUT_FEATURES_H
+#define LIBPENTOBI_MCTS_PLAYOUT_FEATURES_H
 
 #include <algorithm>
 #include "libpentobi_base/Board.h"
@@ -28,12 +28,12 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-/** Classify moves for the playout policy to prefer local response moves.
-    A local response move is a move that occupies attach points of recent
-    opponent moves or points that are adjacent to them. If there is only one
-    adjacent point to such an opponent attach point missing to make it a
-    1-hole, the missing adjacent point counts as an attach point. */
-class LocalValue
+/** Compute move features for the playout policy.
+    A local move is a move that occupies attach points of recent opponent moves
+    or points that are adjacent to them. If there is only one adjacent point to
+    such an opponent attach point missing to make it a 1-hole, the missing
+    adjacent point counts as an attach point. */
+class PlayoutFeatures
 {
 public:
     /** Compute the local response value for a move. */
@@ -45,12 +45,12 @@ public:
         { }
 
         /** Contruct and already add the first point. */
-        Compute(Point p, const LocalValue& local_value)
+        Compute(Point p, const PlayoutFeatures& local_value)
             : m_value(local_value.m_point_value[p])
         { }
 
         /** Add a point of the move. */
-        void add_move_point(Point p, const LocalValue& local_value)
+        void add_move_point(Point p, const PlayoutFeatures& local_value)
         {
             m_value += local_value.m_point_value[p];
         }
@@ -81,7 +81,7 @@ public:
 
     friend class Compute;
 
-    LocalValue();
+    PlayoutFeatures();
 
     /** Find the attach points of the last opponent moves in a given position.
         @param bd The board. */
@@ -94,7 +94,7 @@ private:
     PointList m_points;
 };
 
-inline void LocalValue::init(const Board& bd)
+inline void PlayoutFeatures::init(const Board& bd)
 {
     // Clear the stored last opponent attach moves
     for (Point p: m_points)
@@ -172,4 +172,4 @@ inline void LocalValue::init(const Board& bd)
 
 } // namespace libpentobi_mcts
 
-#endif // LIBPENTOBI_MCTS_LOCAL_VALUE_H
+#endif // LIBPENTOBI_MCTS_PLAYOUT_FEATURES_H

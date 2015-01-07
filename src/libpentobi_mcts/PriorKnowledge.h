@@ -8,7 +8,6 @@
 #define LIBPENTOBI_MCTS_PRIOR_KNOWLEDGE_H
 
 #include "Float.h"
-#include "LocalValue.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/MoveList.h"
@@ -21,6 +20,7 @@ using libpentobi_base::ColorMap;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
+using libpentobi_base::PointList;
 
 //-----------------------------------------------------------------------------
 

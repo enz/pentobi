@@ -139,19 +139,19 @@ bool State::check_move(Move mv, const MoveInfo& info,
     auto i = info.begin();
     if (is_forbidden[*i])
         return false;
-    LocalValue::Compute local(*i, m_local_value);
+    PlayoutFeatures::Compute features(*i, m_playout_features);
     auto end = info.end();
     while (++i != end)
     {
         if (is_forbidden[*i])
             return false;
-        local.add_move_point(*i, m_local_value);
+        features.add_move_point(*i, m_playout_features);
     }
     double gamma = m_gamma_piece[info.get_piece()];
-    if (local.has_local())
+    if (features.has_local())
     {
-        gamma *= m_gamma_nu_attach[local.get_nu_attach()];
-        if (local.has_adj_attach())
+        gamma *= m_gamma_nu_attach[features.get_nu_attach()];
+        if (features.has_adj_attach())
             gamma *= 1e5;
     }
     add_move(moves, mv, gamma);
@@ -419,7 +419,7 @@ inline const PieceMap<bool>& State::get_pieces_considered() const
 void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
-    m_local_value.init(m_bd);
+    m_playout_features.init(m_bd);
     m_total_gamma = 0;
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
@@ -596,7 +596,7 @@ void State::start_simulation(size_t n)
 
 void State::update_moves(Color c)
 {
-    m_local_value.init(m_bd);
+    m_playout_features.init(m_bd);
     m_total_gamma = 0;
     auto& marker = m_marker[c];
 

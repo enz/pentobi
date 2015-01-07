@@ -6,10 +6,10 @@ add_library(pentobi_mcts STATIC
   StateUtil.h
   StateUtil.cpp
   Float.h
-  LocalValue.h
-  LocalValue.cpp
   Player.h
   Player.cpp
+  PlayoutFeatures.h
+  PlayoutFeatures.cpp
   PriorKnowledge.h
   PriorKnowledge.cpp
   Search.h
