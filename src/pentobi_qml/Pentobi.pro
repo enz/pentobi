@@ -34,7 +34,6 @@ SOURCES += \
     ../libboardgame_util/Assert.cpp \
     ../libboardgame_util/Barrier.cpp \
     ../libboardgame_util/Exception.cpp \
-    ../libboardgame_util/FastLog.cpp \
     ../libboardgame_util/IntervalChecker.cpp \
     ../libboardgame_util/Log.cpp \
     ../libboardgame_util/RandomGenerator.cpp \
@@ -42,7 +41,7 @@ SOURCES += \
     ../libboardgame_util/TimeIntervalChecker.cpp \
     ../libboardgame_util/Timer.cpp \
     ../libboardgame_util/TimeSource.cpp \
-    ../libpentobi_mcts/LocalValue.cpp \
+    ../libpentobi_mcts/PlayoutFeatures.cpp \
     ../libpentobi_mcts/PriorKnowledge.cpp \
     ../libpentobi_mcts/Search.cpp \
     ../libpentobi_mcts/State.cpp \
