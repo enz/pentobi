@@ -373,11 +373,12 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
     }
 
     auto& moves = m_moves[to_play];
+    double total_gamma =  m_cumulative_gamma[moves.size() - 1];
     if (log_simulations)
-        log("Moves: ", moves.size());
+        log("Moves: ", moves.size(), "total_gamma: ", total_gamma);
     auto begin = m_cumulative_gamma.begin();
     auto end = begin + moves.size();
-    auto random = m_cumulative_gamma[moves.size() - 1] * m_random.generate_double();
+    auto random = m_random.generate_double(0, total_gamma);
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
     mv = PlayerMove<Move>(to_play.to_int(),

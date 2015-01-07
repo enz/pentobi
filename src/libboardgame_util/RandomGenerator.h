@@ -41,8 +41,8 @@ public:
 
     ResultType generate();
 
-    /** Generate a floating point value in [0..1]. */
-    double generate_double();
+    /** Generate a floating point value in [a..b]. */
+    double generate_double(double a, double b);
 
     /** Set seed for all currently existing and future generators.
         If this function is never called, a non-deterministic seed is used. */
@@ -64,9 +64,9 @@ inline RandomGenerator::ResultType RandomGenerator::generate()
     return m_generator();
 }
 
-inline double RandomGenerator::generate_double()
+inline double RandomGenerator::generate_double(double a, double b)
 {
-    uniform_real_distribution<double> distribution;
+    uniform_real_distribution<double> distribution(a, b);
     return distribution(m_generator);
 }
 
