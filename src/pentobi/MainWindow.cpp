@@ -1300,7 +1300,7 @@ QWidget* MainWindow::createCentralWidget()
 QWidget* MainWindow::createLeftPanel()
 {
     m_splitter = new QSplitter(Qt::Vertical);
-    m_guiBoard = new GuiBoard(0, getBoard());
+    m_guiBoard = new GuiBoard(nullptr, getBoard());
     m_splitter->addWidget(m_guiBoard);
     m_comment = new QPlainTextEdit;
     m_comment->setTabChangesFocus(true);
@@ -1480,7 +1480,7 @@ QLayout* MainWindow::createOrientationSelector()
     layout->addStretch();
     layout->addLayout(createOrientationButtonBoxLeft());
     layout->addSpacing(8);
-    m_orientationDisplay = new OrientationDisplay(0, getBoard());
+    m_orientationDisplay = new OrientationDisplay(nullptr, getBoard());
     connect(m_orientationDisplay, SIGNAL(colorClicked(Color)),
             SLOT(orientationDisplayColorClicked(Color)));
     m_orientationDisplay->setSizePolicy(QSizePolicy::MinimumExpanding,
@@ -1502,7 +1502,7 @@ QLayout* MainWindow::createRightPanel()
     layout->addLayout(pieceSelectorLayout, 80);
     for (ColorIterator i(Color::range); i; ++i)
     {
-        m_pieceSelector[*i] = new PieceSelector(0, getBoard(), *i);
+        m_pieceSelector[*i] = new PieceSelector(nullptr, getBoard(), *i);
         connect(m_pieceSelector[*i],
                 SIGNAL(pieceSelected(Color,Piece,const Transform*)),
                 SLOT(selectPiece(Color,Piece,const Transform*)));
@@ -2123,7 +2123,7 @@ void MainWindow::gotoNode(const SgfNode& node)
     }
     m_currentColor = getCurrentColor(*m_game);
     m_lastComputerMovesBegin = 0;
-    if (m_analyzeGameWindow != 0 && m_analyzeGameWindow->isVisible())
+    if (m_analyzeGameWindow && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
             ->setCurrentPosition(*m_game, node);
     m_autoPlay = false;
@@ -2166,7 +2166,7 @@ void MainWindow::help()
     }
     QString path = HelpWindow::findMainPage(m_manualDir, "index.html",
                                             QLocale::system().name());
-    m_helpWindow = new HelpWindow(0, path);
+    m_helpWindow = new HelpWindow(nullptr, path);
     m_helpWindow->show();
 }
 

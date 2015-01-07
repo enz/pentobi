@@ -99,7 +99,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant, const Geometry*& ge
     geo = &get_geometry(variant);
     pointState.fill(PointState::empty(), *geo);
     auto node = &root;
-    while (node != 0)
+    while (node)
     {
         if (libpentobi_base::node_util::has_setup(*node))
         {

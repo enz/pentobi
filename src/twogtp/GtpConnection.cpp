@@ -117,7 +117,7 @@ GtpConnection::GtpConnection(const string& command)
             argv[i] = new char[args[i].size()];
             strcpy(argv[i], args[i].c_str());
         }
-        argv[args.size()] = 0;
+        argv[args.size()] = nullptr;
         if (execvp(args[0].c_str(), argv) == -1)
             terminate_child("Could not execute '" + command + "'");
     }

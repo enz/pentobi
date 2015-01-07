@@ -29,7 +29,7 @@ OrientationDisplay::OrientationDisplay(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd),
       m_piece(Piece::null()),
-      m_transform(0),
+      m_transform(nullptr),
       m_isColorSelected(false)
 {
     setMinimumWidth(30);

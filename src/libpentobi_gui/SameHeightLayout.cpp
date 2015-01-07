@@ -76,7 +76,7 @@ int SameHeightLayout::getSpacing() const
     // spacing is inherited from the parent layout, or from the style settings
     // for the parent widget."
     int result = spacing();
-    if (result < 0 && parentWidget() != 0)
+    if (result < 0 && parentWidget())
         result = parentWidget()->style()->layoutSpacing(QSizePolicy::Frame,
                                                         QSizePolicy::Frame,
                                                         Qt::Vertical);
@@ -92,7 +92,7 @@ QLayoutItem* SameHeightLayout::itemAt(int i) const
 
 QLayoutItem* SameHeightLayout::takeAt(int i)
 {
-    return i >= 0 && i < m_list.size() ? m_list.takeAt(i) : 0;
+    return i >= 0 && i < m_list.size() ? m_list.takeAt(i) : nullptr;
 }
 
 void SameHeightLayout::setGeometry(const QRect& rect)

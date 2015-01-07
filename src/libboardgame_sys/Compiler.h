@@ -53,7 +53,8 @@ string get_type_name(const T& t)
 {
 #ifdef __GNUC__
     int status;
-    char* name_ptr = abi::__cxa_demangle(typeid(t).name(), 0, 0, &status);
+    char* name_ptr = abi::__cxa_demangle(typeid(t).name(), nullptr, nullptr,
+                                         &status);
     if (status == 0)
     {
         string result(name_ptr);

@@ -155,7 +155,7 @@ void AnalyzeGameWidget::setCurrentPosition(const Game& game,
         ArrayList<ColorMove,Board::max_game_moves> moves;
         auto& tree = game.get_tree();
         auto current = &find_root(node);
-        while (current != 0)
+        while (current)
         {
             auto mv = tree.get_move(*current);
             if (! mv.is_null() && moves.size() < Board::max_game_moves)

@@ -53,7 +53,7 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_emptyBoardDirty(true),
       m_dirty(true),
       m_selectedPiece(Piece::null()),
-      m_selectedPieceTransform(0),
+      m_selectedPieceTransform(nullptr),
       m_isMoveShown(false)
 {
     setMinimumWidth(350);

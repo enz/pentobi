@@ -122,7 +122,7 @@ void BoardPainter::drawLabels(QPainter& painter,
                               Variant variant,
                               const Grid<QString>* labels)
 {
-    if (labels == 0)
+    if (! labels)
         return;
     bool isTrigon = (variant == Variant::trigon
                      || variant == Variant::trigon_2

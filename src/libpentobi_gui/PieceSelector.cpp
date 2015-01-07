@@ -160,7 +160,7 @@ void PieceSelector::init()
             type_match_shift(geo, points.begin(), points.end(), 0);
             m_transform[x][y] =
                 m_bd.get_piece_info(piece).find_transform(geo, points);
-            LIBBOARDGAME_ASSERT(m_transform[x][y] != 0);
+            LIBBOARDGAME_ASSERT(m_transform[x][y]);
         }
     setDisabledStatus(m_disabledStatus);
     update();

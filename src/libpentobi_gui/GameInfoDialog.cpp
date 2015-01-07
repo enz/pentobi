@@ -146,7 +146,7 @@ bool GameInfoDialog::acceptLine(QLineEdit* lineEdit, string& value)
 
 QLineEdit* GameInfoDialog::createLine(const QString& label, const string& text)
 {
-    auto lineEdit = new LineEdit(0, 30);
+    auto lineEdit = new LineEdit(nullptr, 30);
     if (! text.empty())
     {
         lineEdit->setText(Util::convertSgfValueToQString(text, m_charset));

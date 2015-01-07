@@ -55,7 +55,7 @@ auto FdInBuf::underflow() -> int_type
 //-----------------------------------------------------------------------------
 
 FdInStream::FdInStream(int fd)
-    : istream(0),
+    : istream(nullptr),
       m_buf(fd)
 {
     rdbuf(&m_buf);
