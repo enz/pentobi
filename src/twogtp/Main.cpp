@@ -34,7 +34,6 @@ int main(int argc, char** argv)
             "black|b:",
             "file|f:",
             "game|g:",
-            "image",
             "nugames|n:",
             "splitsgf:",
             "threads:",
@@ -55,7 +54,6 @@ int main(int argc, char** argv)
         auto white = opt.get("white");
         auto prefix = opt.get("file", "output");
         auto nu_games = opt.get<unsigned>("nugames", 1);
-        bool write_image = opt.contains("image");
         auto nu_threads = opt.get<unsigned>("threads", 1);
         auto variant_string = opt.get("game", "classic");
         Variant variant;
@@ -65,24 +63,15 @@ int main(int argc, char** argv)
         vector<thread> threads;
         for (unsigned i = 0; i < nu_threads; ++i)
             threads.push_back(thread([i, nu_threads, &black, &white, variant,
-                                     nu_games, write_image, prefix,
-                                     &output_file, &result]()
+                                     nu_games, &output_file, &result]()
             {
                 try
                 {
                     string log_prefix;
                     if (nu_threads > 1)
                         log_prefix = to_string(i + 1);
-                    string image_prefix;
-                    if (write_image)
-                    {
-                        if (nu_threads == 1)
-                            image_prefix = prefix + "-img";
-                        else
-                            image_prefix = prefix + "-img-" + to_string(i + 1);
-                    }
                     TwoGtp twogtp(black, white, variant, nu_games, output_file,
-                                  false, log_prefix, image_prefix);
+                                  false, log_prefix);
                     twogtp.run();
                 }
                 catch (const exception& e)
