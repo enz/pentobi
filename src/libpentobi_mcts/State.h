@@ -182,9 +182,6 @@ private:
 
     PriorKnowledge m_prior_knowledge;
 
-    /** The sum of the gamma values of all moves. */
-    double m_total_gamma;
-
     /** Precomputed gamma value for a piece. */
     PieceMap<double> m_gamma_piece;
 
@@ -237,12 +234,11 @@ private:
         played pieces. */
     ColorMap<Marker> m_moves_added_at;
 
-    void add_move(MoveList& moves, Move mv, double gamma);
-
     void add_moves(Point p, Color c,
                    const Board::PiecesLeftList& pieces_considered);
 
-    void add_moves(Point p, Color c, Piece piece, unsigned adj_status);
+    void add_moves(Point p, Color c, Piece piece, unsigned adj_status,
+                   double& total_gamma);
 
     LIBBOARDGAME_NOINLINE
     void add_starting_moves(Color c,
@@ -277,7 +273,8 @@ private:
     bool check_forbidden(const Grid<bool>& is_forbidden, Move mv);
 
     bool check_move(Move mv, const MoveInfo& info,
-                    const Grid<bool>& is_forbidden, MoveList& moves);
+                    const Grid<bool>& is_forbidden, MoveList& moves,
+                    double& total_gamma);
 
     void update_moves(Color c);
 

@@ -53,13 +53,6 @@ State::State(Variant initial_variant, const SharedConst& shared_const)
 {
 }
 
-inline void State::add_move(MoveList& moves, Move mv, double gamma)
-{
-    m_total_gamma += gamma;
-    m_cumulative_gamma[moves.size()] = m_total_gamma;
-    moves.push_back(mv);
-}
-
 inline void State::add_moves(Point p, Color c,
                              const Board::PiecesLeftList& pieces_considered)
 {
@@ -67,23 +60,27 @@ inline void State::add_moves(Point p, Color c,
     auto& marker = m_marker[c];
     auto adj_status = m_bd.get_adj_status(p, c);
     auto& is_forbidden = m_bd.is_forbidden(c);
+    double total_gamma =
+            moves.empty() ? 0 : m_cumulative_gamma[moves.size() - 1];
     for (Piece piece : pieces_considered)
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
-                    && check_move(mv, get_move_info(mv), is_forbidden, moves))
+                    && check_move(mv, get_move_info(mv), is_forbidden, moves,
+                                  total_gamma))
                 marker.set(mv);
     m_moves_added_at[c].set(p);
 }
 
 inline void State::add_moves(Point p, Color c, Piece piece,
-                             unsigned adj_status)
+                             unsigned adj_status, double& total_gamma)
 {
     auto& moves = m_moves[c];
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
     for (Move mv : get_moves(c, piece, p, adj_status))
         if (! marker[mv]
-                && check_move(mv, get_move_info(mv), is_forbidden, moves))
+                && check_move(mv, get_move_info(mv), is_forbidden, moves,
+                              total_gamma))
             marker.set(mv);
 }
 
@@ -101,6 +98,7 @@ void State::add_starting_moves(Color c,
     auto& moves = m_moves[c];
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
+    double total_gamma = 0;
     for (Piece piece : pieces_considered)
     {
         for (Move mv : get_moves(c, piece, p, 0))
@@ -110,7 +108,11 @@ void State::add_starting_moves(Color c,
             {
                 marker.set(mv);
                 if (with_gamma)
-                    add_move(moves, mv, m_gamma_piece[piece]);
+                {
+                    total_gamma += m_gamma_piece[piece];
+                    m_cumulative_gamma[moves.size()] = total_gamma;
+                    moves.push_back(mv);
+                }
                 else
                     moves.push_back(mv);
             }
@@ -131,10 +133,9 @@ bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv)
     return true;
 }
 
-/** Check if move is not forbidden and compute/handle its local value in the
-    same loop. */
 bool State::check_move(Move mv, const MoveInfo& info,
-                       const Grid<bool>& is_forbidden, MoveList& moves)
+                       const Grid<bool>& is_forbidden, MoveList& moves,
+                       double& total_gamma)
 {
     auto i = info.begin();
     if (is_forbidden[*i])
@@ -154,7 +155,9 @@ bool State::check_move(Move mv, const MoveInfo& info,
         if (features.has_adj_attach())
             gamma *= 1e5;
     }
-    add_move(moves, mv, gamma);
+    total_gamma += gamma;
+    m_cumulative_gamma[moves.size()] = total_gamma;
+    moves.push_back(mv);
     return true;
 }
 
@@ -371,10 +374,10 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
 
     auto& moves = m_moves[to_play];
     if (log_simulations)
-        log("Moves: ", moves.size(), ", total gamma: ", m_total_gamma);
+        log("Moves: ", moves.size());
     auto begin = m_cumulative_gamma.begin();
     auto end = begin + moves.size();
-    auto random = m_total_gamma * m_random.generate_double();
+    auto random = m_cumulative_gamma[moves.size() - 1] * m_random.generate_double();
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
     mv = PlayerMove<Move>(to_play.to_int(),
@@ -420,7 +423,6 @@ void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
     m_playout_features.init(m_bd);
-    m_total_gamma = 0;
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
@@ -597,7 +599,6 @@ void State::start_simulation(size_t n)
 void State::update_moves(Color c)
 {
     m_playout_features.init(m_bd);
-    m_total_gamma = 0;
     auto& marker = m_marker[c];
 
     // Find old moves that are still legal
@@ -606,6 +607,7 @@ void State::update_moves(Color c)
     auto& moves = m_moves[c];
     auto old_size = moves.size();
     moves.clear();
+    double total_gamma = 0;
     if (new_moves.size() == 1 && m_bd.get_nu_piece_instances() == 1)
     {
         Piece piece = get_move_info(new_moves[0]).get_piece();
@@ -615,7 +617,8 @@ void State::update_moves(Color c)
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
             if (info.get_piece() == piece
-                    || ! check_move(mv, info, is_forbidden, moves))
+                    || ! check_move(mv, info, is_forbidden, moves,
+                                    total_gamma))
                 marker.clear(mv);
         }
     }
@@ -630,7 +633,8 @@ void State::update_moves(Color c)
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
             if (! is_piece_left[info.get_piece()]
-                    || ! check_move(mv, info, is_forbidden, moves))
+                    || ! check_move(mv, info, is_forbidden, moves,
+                                    total_gamma))
                 marker.clear(mv);
         }
     }
@@ -666,12 +670,14 @@ void State::update_moves(Color c)
                 if (! is_piece_considered[piece]
                     && is_piece_considered_new[piece])
                     pieces_considered.push_back(piece);
+            double total_gamma =
+                    moves.empty() ? 0 : m_cumulative_gamma[moves.size() - 1];
             for (Point p : m_bd.get_attach_points(c))
                 if (! is_forbidden[p])
                 {
                     auto adj_status = m_bd.get_adj_status(p, c);
                     for (Piece piece : pieces_considered)
-                        add_moves(p, c, piece, adj_status);
+                        add_moves(p, c, piece, adj_status, total_gamma);
                 }
             m_is_piece_considered[c] = &is_piece_considered_new;
         }
