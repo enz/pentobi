@@ -57,8 +57,6 @@ public:
 
 private:
     Generator m_generator;
-
-    uniform_real_distribution<double> m_double_distribution;
 };
 
 inline RandomGenerator::ResultType RandomGenerator::generate()
@@ -68,7 +66,8 @@ inline RandomGenerator::ResultType RandomGenerator::generate()
 
 inline double RandomGenerator::generate_double()
 {
-    return m_double_distribution(m_generator);
+    uniform_real_distribution<double> distribution;
+    return distribution(m_generator);
 }
 
 inline void RandomGenerator::set_seed(ResultType seed)
