@@ -123,11 +123,11 @@ bool Book::genmove(const Board& bd, Color c, Move& mv,
         ColorMove color_mv = bd.get_move(i);
         color_mv.move = get_transformed(bd, color_mv.move, transform);
         node = m_tree.find_child_with_move(*node, color_mv);
-        if (node == nullptr)
+        if (! node)
             return false;
     }
     node = select_child(bd, c, m_tree, *node, inv_transform);
-    if (node == nullptr)
+    if (! node)
         return false;
     mv = get_transformed(bd, m_tree.get_move(*node).move, inv_transform);
     return true;

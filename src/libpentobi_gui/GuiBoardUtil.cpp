@@ -75,7 +75,7 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
                        unsigned& moveIndex)
 {
     auto parent = node.get_parent_or_null();
-    if (parent == nullptr || parent->has_single_child())
+    if (! parent || parent->has_single_child())
         return false;
     unsigned nuSiblingMoves = 0;
     moveIndex = 0;
@@ -132,7 +132,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
                 ++displayedMoveNumber;
             node = node->get_parent_or_null();
         }
-        while (node != nullptr);
+        while (node);
         unsigned moveNumber = bd.get_nu_moves();
         node = &game.get_current();
         do
@@ -152,7 +152,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
             }
             node = node->get_parent_or_null();
         }
-        while (node != nullptr);
+        while (node);
     }
 }
 

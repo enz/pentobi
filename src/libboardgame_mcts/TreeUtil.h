@@ -29,7 +29,7 @@ const N* find_node(const Tree<N>& tree, const S& sequence)
 {
     auto node = &tree.get_root();
     for (auto mv : sequence)
-        if ((node = find_child(tree, *node, mv)) == nullptr)
+        if (! ((node = find_child(tree, *node, mv))))
             break;
     return node;
 }

@@ -115,7 +115,7 @@ void Reader::read(istream& in, bool check_single_tree,
         int c = m_in->peek();
         if (c == EOF)
         {
-            if (more_game_trees_left != nullptr)
+            if (more_game_trees_left)
                 *more_game_trees_left = false;
             return;
         }
@@ -125,7 +125,7 @@ void Reader::read(istream& in, bool check_single_tree,
                 throw ReadError("Input has multiple game trees");
             else
             {
-                if (more_game_trees_left != nullptr)
+                if (more_game_trees_left)
                     *more_game_trees_left = true;
                 return;
             }

@@ -153,7 +153,7 @@ Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
 bool PentobiTree::has_main_variation_moves() const
 {
     auto node = &get_root();
-    while (node != nullptr)
+    while (node)
     {
         if (has_move_ignore_invalid(*node))
             return true;
@@ -198,7 +198,7 @@ void PentobiTree::keep_only_subtree(const SgfNode& node)
     if (! create_new_setup)
     {
         auto current = node.get_parent_or_null();
-        while (current != nullptr)
+        while (current)
         {
             if (has_move(*current) || node_util::has_setup(*current))
             {

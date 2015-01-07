@@ -1193,7 +1193,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     {
         if (! expand_node(thread_state, *node, node))
             thread_state.is_out_of_mem = true;
-        else if (node != nullptr)
+        else if (node)
         {
             simulation.nodes.push_back(node);
             Move mv = node->get_move();
@@ -1222,7 +1222,7 @@ string SearchBase<S, M, R>::get_info() const
       << ", VstCnt: " << root.get_visit_count()
       << ", Sim: " << m_nu_simulations;
     auto child = select_child_final(root);
-    if (child != nullptr && root.get_visit_count() > 0)
+    if (child && root.get_visit_count() > 0)
         s << setprecision(1) << ", Chld: "
           << (100 * child->get_visit_count() / root.get_visit_count())
           << '%';
@@ -1295,7 +1295,7 @@ void SearchBase<S, M, R>::restore_root_from_children(Tree& tree, const Node& roo
             best_child = &(*i);
             max_count = i->get_visit_count();
         }
-    if (best_child == nullptr)
+    if (! best_child)
         tree.init_root_value(get_tie_value(), 0);
     else
         tree.init_root_value(best_child->get_value(),
@@ -1346,7 +1346,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
             Timer timer(time_source);
             m_tmp_tree.clear(get_tie_value());
             auto node = find_node(m_tree, m_followup_sequence);
-            if (node != nullptr)
+            if (node)
             {
                 TimeIntervalChecker interval_checker(time_source, max_time);
                 if (m_deterministic)
@@ -1576,7 +1576,7 @@ template<class S, class M, class R>
 bool SearchBase<S, M, R>::select_move(Move& mv) const
 {
     auto child = select_child_final(m_tree.get_root());
-    if (child != nullptr)
+    if (child)
     {
         mv = child->get_move();
         return true;

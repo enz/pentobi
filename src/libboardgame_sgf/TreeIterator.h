@@ -38,7 +38,7 @@ inline TreeIterator::TreeIterator(const SgfNode& root)
 
 inline TreeIterator::operator bool() const
 {
-    return m_current != nullptr;
+    return m_current;
 }
 
 inline const SgfNode& TreeIterator::operator*() const

@@ -293,12 +293,12 @@ void GuiBoard::paintEvent(QPaintEvent*)
 {
     if (! m_isInitialized)
         return;
-    if (m_emptyBoardPixmap == nullptr || m_emptyBoardPixmap->size() != size())
+    if (! m_emptyBoardPixmap || m_emptyBoardPixmap->size() != size())
     {
         m_emptyBoardPixmap.reset(new QPixmap(size()));
         m_emptyBoardDirty = true;
     }
-    if (m_boardPixmap == nullptr || m_boardPixmap->size() != size())
+    if (! m_boardPixmap || m_boardPixmap->size() != size())
     {
         m_boardPixmap.reset(new QPixmap(size()));
         m_dirty = true;

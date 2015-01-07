@@ -57,7 +57,7 @@ template<class T>
 const Transform* PieceTransforms::find() const
 {
     for (auto t : m_all)
-        if (dynamic_cast<const T*>(t) != nullptr)
+        if (dynamic_cast<const T*>(t))
             return t;
     return nullptr;
 }

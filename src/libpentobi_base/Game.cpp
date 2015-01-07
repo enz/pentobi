@@ -61,7 +61,7 @@ void Game::goto_node(const SgfNode& node)
     catch (const InvalidTree&)
     {
         // Try to restore the old state.
-        if (old == nullptr)
+        if (! old)
             m_current = &node;
         else
         {
@@ -114,7 +114,7 @@ void Game::play(ColorMove mv, bool always_create_new_node)
     const SgfNode* child = nullptr;
     if (! always_create_new_node)
         child = m_tree.find_child_with_move(*m_current, mv);
-    if (child != nullptr)
+    if (child)
         m_current = child;
     else
     {

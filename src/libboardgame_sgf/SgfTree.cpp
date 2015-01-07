@@ -44,7 +44,7 @@ const SgfNode& SgfTree::create_new_child(const SgfNode& node)
 void SgfTree::delete_all_variations()
 {
     auto node = &get_root();
-    while (node != nullptr)
+    while (node)
     {
         non_const(*node).delete_variations();
         node = node->get_first_child_or_null();
@@ -60,7 +60,7 @@ string SgfTree::get_date_today()
 {
     time_t t = time(nullptr);
     auto tmp = localtime(&t);
-    if (tmp == nullptr)
+    if (! tmp)
         return "?";
     char date[128];
     strftime(date, sizeof(date), "%Y-%m-%d", tmp);
@@ -75,9 +75,9 @@ unique_ptr<SgfNode> SgfTree::get_tree_transfer_ownership()
 bool SgfTree::has_variations() const
 {
     auto node = m_root.get();
-    while (node != nullptr)
+    while (node)
     {
-        if (node->get_sibling() != nullptr)
+        if (node->get_sibling())
             return true;
         node = node->get_first_child_or_null();
     }
@@ -100,7 +100,7 @@ void SgfTree::init(unique_ptr<SgfNode>& root)
 void SgfTree::make_first_child(const SgfNode& node)
 {
     auto parent = node.get_parent_or_null();
-    if (parent != nullptr && &parent->get_first_child() != &node)
+    if (parent && &parent->get_first_child() != &node)
     {
         non_const(node).make_first_child();
         m_modified = true;
@@ -148,7 +148,7 @@ void SgfTree::move_down(const SgfNode& node)
 void SgfTree::move_up(const SgfNode& node)
 {
     auto parent = node.get_parent_or_null();
-    if (parent != nullptr && &parent->get_first_child() != &node)
+    if (parent && &parent->get_first_child() != &node)
     {
         non_const(node).move_up();
         m_modified = true;

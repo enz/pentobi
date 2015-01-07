@@ -52,7 +52,7 @@ SgfNode& SgfNode::create_new_child()
     node->m_parent = this;
     SgfNode& result = *(node.get());
     auto last_child = get_last_child();
-    if (last_child == nullptr)
+    if (! last_child)
         m_first_child = move(node);
     else
         last_child->m_sibling = move(node);
@@ -68,7 +68,7 @@ void SgfNode::delete_variations()
 Property* SgfNode::find_property(const string& id) const
 {
     auto property = m_first_property.get();
-    while (property != nullptr)
+    while (property)
     {
         if (property->id == id)
             break;
@@ -80,7 +80,7 @@ Property* SgfNode::find_property(const string& id) const
 const vector<string> SgfNode::get_multi_property(const string& id) const
 {
     auto property = find_property(id);
-    if (property == nullptr)
+    if (! property)
         return vector<string>();
     else
         return property->values;
@@ -88,7 +88,7 @@ const vector<string> SgfNode::get_multi_property(const string& id) const
 
 bool SgfNode::has_property(const string& id) const
 {
-    return find_property(id) != nullptr;
+    return find_property(id);
 }
 
 const SgfNode& SgfNode::get_child(unsigned i) const
@@ -112,7 +112,7 @@ unsigned SgfNode::get_child_index(const SgfNode& child) const
         if (current == &child)
             return i;
         current = current->m_sibling.get();
-        LIBBOARDGAME_ASSERT(current != nullptr);
+        LIBBOARDGAME_ASSERT(current);
         ++i;
     }
 }
@@ -120,7 +120,7 @@ unsigned SgfNode::get_child_index(const SgfNode& child) const
 SgfNode* SgfNode::get_last_child() const
 {
     auto node = m_first_child.get();
-    if (node == nullptr)
+    if (! node)
         return nullptr;
     while (node->m_sibling)
         node = node->m_sibling.get();
@@ -131,7 +131,7 @@ unsigned SgfNode::get_nu_children() const
 {
     unsigned n = 0;
     auto child = m_first_child.get();
-    while (child != nullptr)
+    while (child)
     {
         ++n;
         child = child->m_sibling.get();
@@ -141,7 +141,7 @@ unsigned SgfNode::get_nu_children() const
 
 const SgfNode* SgfNode::get_previous_sibling() const
 {
-    if (m_parent == nullptr)
+    if (! m_parent)
         return nullptr;
     auto child = &m_parent->get_first_child();
     if (child == this)
@@ -152,7 +152,7 @@ const SgfNode* SgfNode::get_previous_sibling() const
             return child;
         child = child->get_sibling();
     }
-    while (child != nullptr);
+    while (child);
     LIBBOARDGAME_ASSERT(false);
     return nullptr;
 }
@@ -160,7 +160,7 @@ const SgfNode* SgfNode::get_previous_sibling() const
 const string& SgfNode::get_property(const string& id) const
 {
     auto property = find_property(id);
-    if (property == nullptr)
+    if (! property)
         throw MissingProperty(id);
     return property->values[0];
 }
@@ -169,7 +169,7 @@ const string& SgfNode::get_property(const string& id,
                                  const string& default_value) const
 {
     auto property = find_property(id);
-    if (property == nullptr)
+    if (! property)
         return default_value;
     else
         return property->values[0];
@@ -202,11 +202,11 @@ bool SgfNode::move_property_to_front(const string& id)
     Property* last = nullptr;
     while (true)
     {
-        if (current == nullptr)
+        if (! current)
             return false;
         if (current->id == id)
         {
-            if (last != nullptr)
+            if (last)
             {
                 unique_ptr<Property> tmp = move(last->next);
                 last->next = move(current->next);
@@ -261,7 +261,7 @@ void SgfNode::move_up()
         auto sibling = current->m_sibling.get();
         if (sibling == this)
         {
-            if (prev == nullptr)
+            if (! prev)
             {
                 make_first_child();
                 return;
@@ -281,16 +281,16 @@ bool SgfNode::remove_property(const string& id)
 {
     auto property = m_first_property.get();
     Property* last = nullptr;
-    while (property != nullptr)
+    while (property)
     {
         if (property->id == id)
             break;
         last = property;
         property = property->next.get();
     }
-    if (property == nullptr)
+    if (! property)
         return false;
-    if (last != nullptr)
+    if (last)
         last->next = move(property->next);
     else
         m_first_property = move(property->next);
@@ -306,7 +306,7 @@ unique_ptr<SgfNode> SgfNode::remove_child(SgfNode& child)
         if (node->get() == &child)
         {
             unique_ptr<SgfNode> result = move(*node);
-            if (previous == nullptr)
+            if (! previous)
                 m_first_child = move(child.m_sibling);
             else
                 (*previous)->m_sibling = move(child.m_sibling);

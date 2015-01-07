@@ -233,7 +233,7 @@ inline bool SgfNode::has_children() const
 
 inline bool SgfNode::has_parent() const
 {
-    return m_parent != nullptr;
+    return m_parent;
 }
 
 inline bool SgfNode::has_single_child() const
@@ -285,7 +285,7 @@ bool SgfNode::set_property(const string& id, const vector<T>& values)
     for (const T& v : values)
         values_to_string.push_back(to_string(v));
     auto property = m_first_property.get();
-    if (property == nullptr)
+    if (! property)
     {
         m_first_property.reset(new Property(id, values_to_string));
         return true;
@@ -333,7 +333,7 @@ inline PropertyIterator::PropertyIterator(const SgfNode& node)
 
 inline PropertyIterator::operator bool() const
 {
-    return m_current != nullptr;
+    return m_current;
 }
 
 inline void PropertyIterator::operator++()
@@ -382,7 +382,7 @@ inline ChildIterator::ChildIterator(const SgfNode& node)
 
 inline ChildIterator::operator bool() const
 {
-    return m_current != nullptr;
+    return m_current;
 }
 
 inline void ChildIterator::operator++()

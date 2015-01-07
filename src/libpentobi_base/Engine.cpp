@@ -128,7 +128,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
         const SgfNode* node = nullptr;
         if (move_number != -1)
             node = m_game.get_tree().get_node_before_move_number(move_number);
-        if (node == nullptr)
+        if (! node)
             node = &get_last_node(m_game.get_root());
         m_game.goto_node(*node);
         board_changed();
@@ -337,7 +337,7 @@ Color Engine::get_color_arg(const Arguments& args, unsigned i) const
 
 PlayerBase& Engine::get_player() const
 {
-    if (m_player == nullptr)
+    if (! m_player)
         throw Failure("no player set");
     return *m_player;
 }

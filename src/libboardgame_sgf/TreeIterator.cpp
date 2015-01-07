@@ -18,7 +18,7 @@ void TreeIterator::operator++()
 {
     LIBBOARDGAME_ASSERT(*this);
     auto first_child = m_current->get_first_child_or_null();
-    if (first_child != nullptr)
+    if (first_child)
     {
         m_current = first_child;
         return;
@@ -28,7 +28,7 @@ void TreeIterator::operator++()
         m_current = nullptr;
         return;
     }
-    while (m_current->get_sibling() == nullptr)
+    while (! m_current->get_sibling())
     {
         m_current = &m_current->get_parent();
         if (m_current == &m_root)

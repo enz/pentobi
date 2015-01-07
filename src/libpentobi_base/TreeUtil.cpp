@@ -21,7 +21,7 @@ unsigned get_move_number(const PentobiTree& tree, const SgfNode& node)
 {
     unsigned move_number = 0;
     auto current = &node;
-    while (current != nullptr)
+    while (current)
     {
         if (tree.get_move_ignore_invalid(*current).is_regular())
             ++move_number;
@@ -36,7 +36,7 @@ unsigned get_moves_left(const PentobiTree& tree, const SgfNode& node)
 {
     unsigned moves_left = 0;
     auto current = node.get_first_child_or_null();
-    while (current != nullptr)
+    while (current)
     {
         if (libpentobi_base::node_util::has_setup(*current))
             break;
