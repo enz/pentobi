@@ -486,6 +486,6 @@ void Point<M, I, S>::write(ostream& out, unsigned width, unsigned height) const
 
 //-----------------------------------------------------------------------------
 
-} // namespace boardgame_libboardgame
+} // namespace libboardgame_base
 
 #endif // LIBBOARDGAME_BASE_POINT_H
