@@ -27,8 +27,6 @@ using namespace libboardgame_util;
 For efficiency, points are represented using a one-dimensional value. Class
 Point is a lightweight wrapper around an integer.
 
-Many games can be played on different board sizes. Point::max_size defines the
-maximum board size.
 On a given board size with rectangular geometry, points are layed out in a
 continuous range to avoid unused gaps if the board size is smaller than the
 maximum board size that could hurt the performance of the CPU cache.
