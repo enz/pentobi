@@ -112,20 +112,6 @@ public:
         Width times height on-board points and the null point. */
     static const unsigned range = max_onboard + 1;
 
-    /** Start of integer indices representing on-board points.
-        All points with lower indices are off-board (but not all points
-        between range_onboard_begin and range_onboard_end - 1 are on-board). */
-    static const unsigned range_onboard_begin = 1;
-
-    /** End (exclusive) of integer indices representing on-board points.
-        Users should not assume that range_onboard_end and range are equal to
-        allow this class to be changed in the future or to replace this
-        class by a different one in template classes that take the point class
-        as a parameter. In different point representations (e.g. with an extra
-        border of off-board points for loop unrolling in rectangular board
-        geometries, range_onboard_end might be smaller than range. */
-    static const unsigned range_onboard_end = range;
-
     static unsigned get_range(unsigned width, unsigned height);
 
     /** Special-purpose off-board point.

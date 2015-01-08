@@ -52,7 +52,7 @@ public:
     void memcpy_from(const Grid& grid, const Geometry& geo);
 
 private:
-    T m_a[Point::range_onboard_end];
+    T m_a[Point::range];
 };
 
 template<class P, typename T>
@@ -77,7 +77,7 @@ inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 template<class P, typename T>
 inline void Grid<P, T>::fill_all(const T& val)
 {
-    std::fill(m_a, m_a + Point::range_onboard_end, val);
+    std::fill(m_a, m_a + Point::range, val);
 }
 
 template<class P, typename T>
