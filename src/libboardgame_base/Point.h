@@ -171,9 +171,6 @@ public:
 
     Point get_down_right(unsigned width) const;
 
-    /** Check if point is adjacent to another point. */
-    bool is_adj(Point p, unsigned width) const;
-
     /** Return point as an integer between 0 and Point::range */
     unsigned to_int() const;
 
@@ -418,14 +415,6 @@ unsigned Point<M, I, S>::get_y(unsigned width) const
 {
     LIBBOARDGAME_ASSERT(! is_null());
     return (m_i - 1) / width;
-}
-
-template<unsigned M, typename I, class S>
-inline bool Point<M, I, S>::is_adj(Point p, unsigned width) const
-{
-    int d = m_i - p.m_i;
-    d = abs(d);
-    return (d == width || d == 1);
 }
 
 template<unsigned M, typename I, class S>
