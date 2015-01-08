@@ -59,22 +59,4 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
     LIBBOARDGAME_CHECK(! i);
 }
 
-LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_dist_to_edge)
-{
-    auto& geo = RectGeometry::get(9, 9);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(3, 0, 9)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(3, 2, 9)), 2u);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(6, 8, 9)), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_dist_to_edge(Point(6, 5, 9)), 2u);
-}
-
-LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_second_dist_to_edge)
-{
-    auto& geo = RectGeometry::get(9, 9);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(3, 0, 9)), 3u);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(3, 2, 9)), 3u);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(6, 8, 9)), 2u);
-    LIBBOARDGAME_CHECK_EQUAL(geo.get_second_dist_to_edge(Point(6, 5, 9)), 3u);
-}
-
 //-----------------------------------------------------------------------------

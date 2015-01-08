@@ -101,12 +101,6 @@ public:
         for Blokus Trigon. */
     const DiagList& get_diag(Point p) const;
 
-    /** Get closest distance to first line. */
-    unsigned get_dist_to_edge(Point p) const;
-
-    /** Get second closest distance to first line. */
-    unsigned get_second_dist_to_edge(Point p) const;
-
     /** Iterate over adjacent points.
         Slightly faster than for(Point : get_adj()) because it knows that the
         list is not empty. */
@@ -146,10 +140,6 @@ private:
     unsigned m_height;
 
     bool m_is_onboard[Point::range];
-
-    unsigned m_dist_to_edge[Point::range];
-
-    unsigned m_second_dist_to_edge[Point::range];
 
     const Point* m_all_points_begin;
 
@@ -247,13 +237,6 @@ inline auto Geometry<P>::get_diag(Point p) const -> const DiagList&
 }
 
 template<class P>
-inline unsigned Geometry<P>::get_dist_to_edge(Point p) const
-{
-    LIBBOARDGAME_ASSERT(is_onboard(p));
-    return m_dist_to_edge[p.to_int()];
-}
-
-template<class P>
 inline unsigned Geometry<P>::get_height() const
 {
     return m_height;
@@ -276,13 +259,6 @@ template<class P>
 inline unsigned Geometry<P>::get_range() const
 {
     return P::get_range(m_width, m_height);
-}
-
-template<class P>
-inline unsigned Geometry<P>::get_second_dist_to_edge(Point p) const
-{
-    LIBBOARDGAME_ASSERT(is_onboard(p));
-    return m_second_dist_to_edge[p.to_int()];
 }
 
 template<class P>
@@ -316,12 +292,6 @@ void Geometry<P>::init(unsigned width, unsigned height)
     {
         unsigned j = (*i).to_int();
         init_adj_diag(*i, m_adj[j], m_diag[j]);
-        auto x = (*i).get_x(width);
-        auto y = (*i).get_y(width);
-        unsigned dist_to_edge_x = min(width - x - 1, x);
-        unsigned dist_to_edge_y = min(height - y - 1, y);
-        m_dist_to_edge[j] = min(dist_to_edge_x, dist_to_edge_y);
-        m_second_dist_to_edge[j] = max(dist_to_edge_x, dist_to_edge_y);
     }
 }
 
