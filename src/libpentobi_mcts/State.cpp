@@ -371,7 +371,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
     auto& moves = m_moves[to_play];
     double total_gamma =  m_cumulative_gamma[moves.size() - 1];
     if (log_simulations)
-        log("Moves: ", moves.size(), "total_gamma: ", total_gamma);
+        log("Moves: ", moves.size(), ", total_gamma: ", total_gamma);
     auto begin = m_cumulative_gamma.begin();
     auto end = begin + moves.size();
     auto random = m_random.generate_double(0, total_gamma);
