@@ -29,6 +29,7 @@ using libboardgame_util::Statistics;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
+using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMap;
 using libpentobi_base::Marker;
 using libpentobi_base::MoveInfo;
@@ -198,7 +199,7 @@ private:
     /** Marks moves contained in m_moves. */
     ColorMap<MoveMarker> m_marker;
 
-    PlayoutFeatures m_playout_features;
+    ColorMap<PlayoutFeatures> m_playout_features;
 
     RandomGenerator m_random;
 
@@ -272,11 +273,13 @@ private:
 
     bool check_forbidden(const Grid<bool>& is_forbidden, Move mv);
 
-    bool check_move(Move mv, const MoveInfo& info,
-                    const Grid<bool>& is_forbidden, MoveList& moves,
+    bool check_move(Move mv, const MoveInfo& info, MoveList& moves,
+                    const PlayoutFeatures& playout_features,
                     double& total_gamma);
 
     void update_moves(Color c);
+
+    void update_playout_features(Color c, Move mv);
 
     void update_symmetry_broken(Move mv);
 };
@@ -350,6 +353,7 @@ inline void State::play_in_tree(Move mv)
         LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
         m_bd.play_nonpass(to_play, mv);
         m_nu_passes = 0;
+        update_playout_features(to_play, mv);
     }
     else
     {
@@ -363,13 +367,15 @@ inline void State::play_in_tree(Move mv)
 inline void State::play_playout(Move mv)
 {
     LIBBOARDGAME_ASSERT(m_bd.is_legal_nonpass(mv));
-    m_new_moves[m_bd.get_to_play()].push_back(mv);
+    auto to_play = m_bd.get_to_play();
+    m_new_moves[to_play].push_back(mv);
     m_bd.play_nonpass(mv);
     m_nu_passes = 0;
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);
     if (log_simulations)
         log(m_bd);
+    update_playout_features(to_play, mv);
 }
 
 inline void State::start_playout()
@@ -380,6 +386,14 @@ inline bool State::skip_rave(Move mv) const
 {
     LIBBOARDGAME_UNUSED(mv);
     return false;
+}
+
+inline void State::update_playout_features(Color c, Move mv)
+{
+    auto& info = get_move_info(mv);
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        m_playout_features[*i].set_forbidden(info);
+    m_playout_features[c].set_forbidden(get_move_info_ext(mv));
 }
 
 //-----------------------------------------------------------------------------

@@ -20,7 +20,6 @@ using namespace std;
 using libboardgame_util::fast_exp;
 using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::BoardType;
-using libpentobi_base::ColorIterator;
 using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
@@ -58,15 +57,15 @@ inline void State::add_moves(Point p, Color c,
 {
     auto& moves = m_moves[c];
     auto& marker = m_marker[c];
+    auto& playout_features = m_playout_features[c];
     auto adj_status = m_bd.get_adj_status(p, c);
-    auto& is_forbidden = m_bd.is_forbidden(c);
     double total_gamma =
             moves.empty() ? 0 : m_cumulative_gamma[moves.size() - 1];
     for (Piece piece : pieces_considered)
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
-                    && check_move(mv, get_move_info(mv), is_forbidden, moves,
-                                  total_gamma))
+                    && check_move(mv, get_move_info(mv), moves,
+                                  playout_features, total_gamma))
                 marker.set(mv);
     m_moves_added_at[c].set(p);
 }
@@ -76,10 +75,10 @@ inline void State::add_moves(Point p, Color c, Piece piece,
 {
     auto& moves = m_moves[c];
     auto& marker = m_marker[c];
-    auto& is_forbidden = m_bd.is_forbidden(c);
+    auto& playout_features = m_playout_features[c];
     for (Move mv : get_moves(c, piece, p, adj_status))
         if (! marker[mv]
-                && check_move(mv, get_move_info(mv), is_forbidden, moves,
+                && check_move(mv, get_move_info(mv), moves, playout_features,
                               total_gamma))
             marker.set(mv);
 }
@@ -133,21 +132,18 @@ bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv)
     return true;
 }
 
-bool State::check_move(Move mv, const MoveInfo& info,
-                       const Grid<bool>& is_forbidden, MoveList& moves,
+bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
+                       const PlayoutFeatures& playout_features,
                        double& total_gamma)
 {
     auto i = info.begin();
-    if (is_forbidden[*i])
+    PlayoutFeatures::Compute features(*i, playout_features);
+    if (features.is_forbidden())
         return false;
-    PlayoutFeatures::Compute features(*i, m_playout_features);
     auto end = info.end();
     while (++i != end)
-    {
-        if (is_forbidden[*i])
+        if (! features.add(*i, playout_features))
             return false;
-        features.add_move_point(*i, m_playout_features);
-    }
     double gamma = m_gamma_piece[info.get_piece()];
     if (features.has_local())
     {
@@ -423,7 +419,7 @@ inline const PieceMap<bool>& State::get_pieces_considered() const
 void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
-    m_playout_features.init(m_bd);
+    m_playout_features[c].set_local(m_bd);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
@@ -510,6 +506,8 @@ void State::start_search()
     m_bd.copy_from(bd);
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
+    for (ColorIterator i(m_nu_colors); i; ++i)
+        m_playout_features[*i].init_snapshot(m_bd, *i);
     m_bc = &m_bd.get_board_const();
     m_nu_colors = bd.get_nu_colors();
     m_move_info_array = m_bc->get_move_info_array();
@@ -583,6 +581,7 @@ void State::start_simulation(size_t n)
     {
         m_has_moves[*i] = true;
         m_is_move_list_initialized[*i] = false;
+        m_playout_features[*i].restore_snapshot(m_bd);
         m_new_moves[*i].clear();
         m_moves_added_at[*i].clear();
     }
@@ -599,7 +598,9 @@ void State::start_simulation(size_t n)
 
 void State::update_moves(Color c)
 {
-    m_playout_features.init(m_bd);
+    auto& playout_features = m_playout_features[c];
+    playout_features.set_local(m_bd);
+
     auto& marker = m_marker[c];
 
     // Find old moves that are still legal
@@ -618,7 +619,7 @@ void State::update_moves(Color c)
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
             if (info.get_piece() == piece
-                    || ! check_move(mv, info, is_forbidden, moves,
+                    || ! check_move(mv, info, moves, playout_features,
                                     total_gamma))
                 marker.clear(mv);
         }
@@ -634,7 +635,7 @@ void State::update_moves(Color c)
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
             if (! is_piece_left[info.get_piece()]
-                    || ! check_move(mv, info, is_forbidden, moves,
+                    || ! check_move(mv, info, moves, playout_features,
                                     total_gamma))
                 marker.clear(mv);
         }

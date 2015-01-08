@@ -16,11 +16,14 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_base::ArrayList;
 using libpentobi_base::Board;
+using libpentobi_base::BoardIterator;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
+using libpentobi_base::MoveInfo;
+using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
@@ -32,7 +35,10 @@ using libpentobi_base::Variant;
     A local move is a move that occupies attach points of recent opponent moves
     or points that are adjacent to them. If there is only one adjacent point to
     such an opponent attach point missing to make it a 1-hole, the missing
-    adjacent point counts as an attach point. */
+    adjacent point counts as an attach point.
+    The features also include if a point is forbidden, such that the legality
+    of a move can be quickly checked in the playouts. The forbidden status
+    is updated incrementally. */
 class PlayoutFeatures
 {
 public:
@@ -40,39 +46,48 @@ public:
     class Compute
     {
     public:
-        Compute()
-            : m_value(0)
+        /** Constructor.
+            @param p The first point of the move */
+        Compute(Point p, const PlayoutFeatures& playout_features)
+            : m_value(playout_features.m_point_value[p])
         { }
 
-        /** Contruct and already add the first point. */
-        Compute(Point p, const PlayoutFeatures& local_value)
-            : m_value(local_value.m_point_value[p])
-        { }
-
-        /** Add a point of the move. */
-        void add_move_point(Point p, const PlayoutFeatures& local_value)
+        /** Add a point of the move.
+            @return false if point is forbidden */
+        bool add(Point p, const PlayoutFeatures& playout_features)
         {
-            m_value += local_value.m_point_value[p];
+            auto value = playout_features.m_point_value[p];
+            if ((value & 0xf000u) != 0)
+                return false;
+            m_value += value;
+            return true;
         }
 
-        /** Does the move occupy any local points? */
+        bool is_forbidden() const
+        {
+            return (m_value & 0xf000u) != 0;
+        }
+
+        /** Does the move occupy any local points?
+            @pre ! is_forbidden() */
         bool has_local() const
         {
-            return m_value != 0;
+            LIBBOARDGAME_ASSERT(! is_forbidden());
+            return (m_value != 0);
         }
 
         /** Get the number of local opponent attach points occupied by this
             move. */
         unsigned get_nu_attach() const
         {
-            return m_value & 0x00fu;
+            return m_value & 0x000fu;
         }
 
         /** Does the move occupy any points adjacent to local opponent attach
             points? */
         bool has_adj_attach() const
         {
-            return ((m_value & 0x0f0u) != 0);
+            return ((m_value & 0x00f0u) != 0);
         }
 
     private:
@@ -83,23 +98,64 @@ public:
 
     PlayoutFeatures();
 
-    /** Find the attach points of the last opponent moves in a given position.
-        @param bd The board. */
-    void init(const Board& bd);
+    /** Initialize snapshot with forbidden stae. */
+    void init_snapshot(const Board& bd, Color c);
+
+    void restore_snapshot(const Board& bd);
+
+    /** Set points of move to forbidden. */
+    void set_forbidden(const MoveInfo& info);
+
+    /** Set adjacent points of move to forbidden. */
+    void set_forbidden(const MoveInfoExt& info_ext);
+
+    void set_local(const Board& bd);
 
 private:
     Grid<unsigned> m_point_value;
 
+    Grid<unsigned> m_snapshot;
+
     /** Points with point value greater zero. */
-    PointList m_points;
+    PointList m_local_points;
 };
 
-inline void PlayoutFeatures::init(const Board& bd)
+inline void PlayoutFeatures::init_snapshot(const Board& bd, Color c)
 {
-    // Clear the stored last opponent attach moves
-    for (Point p: m_points)
-        m_point_value[p] = 0;
-    m_points.clear();
+    auto& is_forbidden = bd.is_forbidden(c);
+    for (BoardIterator i(bd); i; ++i)
+        m_snapshot[*i] = (is_forbidden[*i] ? 0x1000u : 0);
+}
+
+
+inline void PlayoutFeatures::restore_snapshot(const Board& bd)
+{
+    m_point_value.memcpy_from(m_snapshot, bd.get_geometry());
+}
+
+inline void PlayoutFeatures::set_forbidden(const MoveInfo& info)
+{
+    auto i = info.begin();
+    auto end = info.end();
+    do
+        m_point_value[*i] = 0x1000u;
+    while (++i != end);
+}
+
+inline void PlayoutFeatures::set_forbidden(const MoveInfoExt& info_ext)
+{
+    auto i = info_ext.begin_adj();
+    auto end = info_ext.end_adj();
+    do
+        m_point_value[*i] = 0x1000u;
+    while (++i != end);
+}
+inline void PlayoutFeatures::set_local(const Board& bd)
+{
+    // Clear old info about local points
+    for (Point p : m_local_points)
+        m_point_value[p] &= 0xf000u;
+    m_local_points.clear();
 
     Color to_play = bd.get_to_play();
     Color second_color;
@@ -129,24 +185,23 @@ inline void PlayoutFeatures::init(const Board& bd)
         auto end = info_ext.end_attach();
         do
         {
-            if (is_forbidden[*j])
+            if (is_forbidden[*j] || (m_point_value[*j] & 0x0fff) == 0x0001u)
                 continue;
-            // Don't check if m_point_value[*j] == 0x001u, it's faster to
-            // handle this rare case twice than to check for it.
-            if (m_point_value[*j] == 0)
-                m_points.push_back(*j);
+            if ((m_point_value[*j] & 0x0fff) == 0)
+                m_local_points.push_back(*j);
             // Opponent attach point
-            m_point_value[*j] = 0x001u;
+            m_point_value[*j] = (m_point_value[*j] & 0xf000) | 0x0001u;
             unsigned nu_adj = 0;
             geo.for_each_adj(*j, [&](Point k) {
                 if (! is_forbidden[k])
                 {
                     ++nu_adj;
-                    if (m_point_value[k] == 0)
+                    if ((m_point_value[k] & 0x0fff) == 0)
                     {
-                        m_points.push_back(k);
+                        m_local_points.push_back(k);
                         // Adjacent to opp. attach point
-                        m_point_value[k] = 0x010u;
+                        m_point_value[k] =
+                                (m_point_value[k] & 0xf000) | 0x0010u;
                     }
                 }
             });
@@ -159,8 +214,9 @@ inline void PlayoutFeatures::init(const Board& bd)
                 for (Point k : geo.get_adj(*j))
                     if (! is_forbidden[k])
                     {
-                        LIBBOARDGAME_ASSERT(m_points.contains(k));
-                        m_point_value[k] = 0x001u;
+                        LIBBOARDGAME_ASSERT(m_local_points.contains(k));
+                        m_point_value[k] =
+                                (m_point_value[k] & 0xf000) | 0x0001u;
                         break;
                     }
         }

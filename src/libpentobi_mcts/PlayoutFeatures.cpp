@@ -16,7 +16,6 @@ namespace libpentobi_mcts {
 
 PlayoutFeatures::PlayoutFeatures()
 {
-    m_point_value.fill_all(0);
 }
 
 //-----------------------------------------------------------------------------
