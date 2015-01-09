@@ -818,7 +818,7 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
     ArrayList<Point, PieceInfo::max_adj> adj_points;
     for (auto i = begin; i != end; ++i)
         m_geo.for_each_adj(*i, [&](Point j) {
-            if (m_geo.is_onboard(j) && ! m_marker[j])
+            if (! m_marker[j])
             {
                 m_marker.set(j);
                 adj_points.push_back(j);
@@ -827,7 +827,7 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
     ArrayList<Point, PieceInfo::max_attach> attach_points;
     for (auto i = begin; i != end; ++i)
         m_geo.for_each_diag(*i, [&](Point j) {
-            if (m_geo.is_onboard(j) && ! m_marker[j])
+            if (! m_marker[j])
             {
                 m_marker.set(j);
                 attach_points.push_back(j);
