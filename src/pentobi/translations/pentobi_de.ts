@@ -659,8 +659,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1628"/>
-        <source>Text files (*.txt)</source>
-        <translation>Textdateien (*.txt)</translation>
+        <source>Text files (*.txt);;All files (*)</source>
+        <translation>Textdateien (*.txt);;Alle Dateien (*)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1740"/>
