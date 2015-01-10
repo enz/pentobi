@@ -1625,7 +1625,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
 void MainWindow::exportAsciiArt()
 {
     QString file = QFileDialog::getSaveFileName(this, "", getLastDir(),
-                                                tr("Text files (*.txt)"));
+                                      tr("Text files (*.txt);;All files (*)"));
     if (file.isEmpty())
         return;
     rememberDir(file);

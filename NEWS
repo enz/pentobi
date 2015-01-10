@@ -13,6 +13,7 @@ Version 9.0.UNKNOWN (v9-fixes)
   in file browsers) if the path contained non-ASCII characters.
 * Changed the file dialog filter for "All files" from *.* to * such that
   really all files are shown even if they have no file ending.
+  Added an "All files" filter to the Export/ASCII Art file dialog.
 * Remembering the playing level separately for each game variant did not
   work if the game variant was implicitely changed by opening a file.
 
