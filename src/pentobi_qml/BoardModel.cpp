@@ -58,22 +58,20 @@ int getNuPiecesLeft(const Board& bd, Color c)
 QPointF getGameCoord(const Board& bd, Move mv)
 {
     auto& geo = bd.get_geometry();
-    auto width = geo.get_width();
     auto moveInfo = bd.get_move_info(mv);
     PiecePoints movePoints;
     for (Point p : moveInfo)
-        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
+        movePoints.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
     return PieceModel::findCenter(bd, movePoints, false);
 }
 
 const Transform* getTransform(const Board& bd, Move mv)
 {
     auto& geo = bd.get_geometry();
-    auto width = geo.get_width();
     auto moveInfo = bd.get_move_info(mv);
     PiecePoints movePoints;
     for (Point p : moveInfo)
-        movePoints.push_back(CoordPoint(p.get_x(width), p.get_y(width)));
+        movePoints.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
     auto& pieceInfo = bd.get_piece_info(moveInfo.get_piece());
     return pieceInfo.find_transform(geo, movePoints);
 }
@@ -190,9 +188,7 @@ bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
             return false;
         if (pointTypeChanged && pointType == boardPointType)
             return false;
-        points.push_back(Point(static_cast<unsigned>(x),
-                               static_cast<unsigned>(y),
-                               geo.get_width()));
+        points.push_back(geo.get_point(x, y));
     }
     return m_bd.find_move(points, mv);
 }

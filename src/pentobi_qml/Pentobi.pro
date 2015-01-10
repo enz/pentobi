@@ -100,7 +100,7 @@ HEADERS += \
     ../libboardgame_sys/Compiler.h \
     ../libboardgame_sys/Memory.h \
     ../libpentobi_mcts/Float.h \
-    ../libpentobi_mcts/LocalValue.h \
+    ../libpentobi_mcts/PlayoutFeatures.h \
     ../libpentobi_mcts/PriorKnowledge.h \
     ../libpentobi_mcts/Search.h \
     ../libpentobi_mcts/State.h \
@@ -117,13 +117,10 @@ HEADERS += \
     ../libboardgame_util/Assert.h \
     ../libboardgame_util/Barrier.h \
     ../libboardgame_util/Exception.h \
-    ../libboardgame_util/FastLog.h \
     ../libboardgame_util/FmtSaver.h \
     ../libboardgame_util/IntervalChecker.h \
     ../libboardgame_util/Log.h \
     ../libboardgame_util/MathUtil.h \
-    ../libboardgame_util/NullElement.h \
-    ../libboardgame_util/NullTermList.h \
     ../libboardgame_util/Options.h \
     ../libboardgame_util/RandomGenerator.h \
     ../libboardgame_util/Statistics.h \
@@ -132,8 +129,6 @@ HEADERS += \
     ../libboardgame_util/Timer.h \
     ../libboardgame_util/TimeSource.h \
     ../libboardgame_util/Unused.h \
-    ../libpentobi_base/AdjDiagIterator.h \
-    ../libpentobi_base/AdjIterator.h \
     ../libpentobi_base/Board.h \
     ../libpentobi_base/BoardConst.h \
     ../libpentobi_base/BoardUpdater.h \
@@ -142,7 +137,6 @@ HEADERS += \
     ../libpentobi_base/Color.h \
     ../libpentobi_base/ColorMap.h \
     ../libpentobi_base/ColorMove.h \
-    ../libpentobi_base/DiagIterator.h \
     ../libpentobi_base/GameStateHistory.h \
     ../libpentobi_base/Geometry.h \
     ../libpentobi_base/Grid.h \
