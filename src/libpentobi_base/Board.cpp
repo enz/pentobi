@@ -442,10 +442,10 @@ void Board::write(ostream& out, bool mark_last_move) const
         out << (height - y) << ' ';
         for (unsigned x = 0; x < width; ++x)
         {
-            Point p(x, y, width);
-            bool is_offboard = ! is_onboard(p);
-            if ((x > 0 || (is_trigon && x == 0 && is_onboard(p.get_right())))
-                && ! is_offboard)
+            Point p = m_geo->get_point(x, y);
+            bool is_offboard = p.is_null();
+            if ((x > 0 || (is_trigon && x == 0 && m_geo->is_onboard(x + 1, y)))
+                    && ! is_offboard)
             {
                 // Print a space horizontally between fields on the board. On a
                 // Trigon board, a slash or backslash is used instead of the
@@ -454,19 +454,20 @@ void Board::write(ostream& out, bool mark_last_move) const
                 // space to mark the last piece played (the mark is not placed
                 // within the piece or off-board).
                 if (! last_mv.is_null()
-                    && get_move_info(last_mv.move).contains(p)
-                    && (x == 0 || ! is_onboard(p.get_left())
-                        || get_point_state(p.get_left()) != last_mv.color))
+                        && get_move_info(last_mv.move).contains(p)
+                        && (x == 0 || ! m_geo->is_onboard(x - 1, y)
+                            || get_point_state(m_geo->get_point(x - 1, y))
+                               != last_mv.color))
                 {
                     set_color(out, "\x1B[1;37;47m");
                     out << '>';
                     last_mv = ColorMove::null();
                 }
                 else if (! last_mv.is_null()
-                         && x > 0 && is_onboard(p.get_left())
-                         && get_move_info(last_mv.move).contains(p.get_left())
+                         && x > 0 && m_geo->is_onboard(x - 1, y)
+                         && get_move_info(last_mv.move).contains(m_geo->get_point(x - 1, y))
                          && get_point_state(p) != last_mv.color
-                         && get_point_state(p.get_left()) == last_mv.color)
+                         && get_point_state(m_geo->get_point(x - 1, y)) == last_mv.color)
                 {
                     set_color(out, "\x1B[1;37;47m");
                     out << '<';
@@ -485,10 +486,10 @@ void Board::write(ostream& out, bool mark_last_move) const
             }
             if (is_offboard)
             {
-                if (is_trigon && x > 0 && is_onboard(p.get_left()))
+                if (is_trigon && x > 0 && m_geo->is_onboard(x - 1, y))
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geo->get_point_type(p) == 1 ? '\\' : '/');
+                    out << (m_geo->get_point_type(x, y) == 1 ? '\\' : '/');
                 }
                 else
                 {
@@ -528,7 +529,7 @@ void Board::write(ostream& out, bool mark_last_move) const
         }
         if (is_trigon)
         {
-            if (is_onboard(Point(width - 1, y, width)))
+            if (m_geo->is_onboard(width - 1, y))
             {
                 set_color(out, "\x1B[1;30;47m");
                 out << (m_geo->get_point_type(width - 1, y) != 1 ? '\\' : '/');

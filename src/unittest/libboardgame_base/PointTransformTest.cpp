@@ -9,34 +9,39 @@
 #endif
 
 #include "libboardgame_base/PointTransform.h"
+#include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/SpShtStrRep.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using namespace libboardgame_base;
+using libboardgame_base::SpShtStrRep;
+
+//-----------------------------------------------------------------------------
+
+typedef
+libboardgame_base::Point<19 * 19, 19, 19, unsigned short, SpShtStrRep> Point;
+typedef libboardgame_base::RectGeometry<Point> RectGeometry;
 
 //-----------------------------------------------------------------------------
 
 LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
 {
-    typedef libboardgame_base::Point<19 * 19, unsigned short, SpShtStrRep>
-        Point;
-
     unsigned sz = 9;
-    Point p("B7", sz, sz);
+    auto& geo = RectGeometry::get(sz, sz);
+    Point p = geo.get_point(1, 2);
     {
-        PointTransfIdent<Point> transform;
-        LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz) == p);
+        libboardgame_base::PointTransfIdent<Point> transform;
+        LIBBOARDGAME_CHECK(transform.get_transformed(p, geo) == p);
     }
     {
-        PointTransfRot180<Point> transform;
-        LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz)
-                           == Point("H3", sz, sz));
+        libboardgame_base::PointTransfRot180<Point> transform;
+        LIBBOARDGAME_CHECK(transform.get_transformed(p, geo)
+                           == geo.get_point(7, 6));
     }
     {
-        PointTransfRot270Refl<Point> transform;
-        LIBBOARDGAME_CHECK(transform.get_transformed(p, sz, sz)
-                           == Point("C8", sz, sz));
+        libboardgame_base::PointTransfRot270Refl<Point> transform;
+        LIBBOARDGAME_CHECK(transform.get_transformed(p, geo)
+                           == geo.get_point(2, 1));
     }
 }
 

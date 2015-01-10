@@ -54,9 +54,9 @@ public:
     unsigned get_period_y() const override;
 
 protected:
-    void init_is_onboard(Point p, bool& is_onboard) const;
+    bool init_is_onboard(unsigned x, unsigned y) const override;
 
-    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const;
+    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const override;
 
 private:
     /** Stores already created geometries by size. */
@@ -119,16 +119,14 @@ unsigned TrigonGeometry<P>::get_point_type(int x, int y) const
 }
 
 template<class P>
-void TrigonGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
+bool TrigonGeometry<P>::init_is_onboard(unsigned x, unsigned y) const
 {
     auto width = this->get_width();
     auto height = this->get_height();
-    auto x = p.get_x(width);
-    auto y = p.get_y(width);
     unsigned dy = min(y, height - y - 1);
     unsigned min_x = m_sz - dy - 1;
     unsigned max_x = width - min_x - 1;
-    is_onboard = (x >= min_x && x <= max_x);
+    return x >= min_x && x <= max_x;
 }
 
 template<class P>
@@ -137,27 +135,27 @@ void TrigonGeometry<P>::init_adj_diag(Point p, AdjList& adj,
 {
     auto width = this->get_width();
     auto height = this->get_height();
-    auto x = p.get_x(width);
-    auto y = p.get_y(width);
+    auto x = this->get_x(p);
+    auto y = this->get_y(p);
     auto type = Geometry<P>::get_point_type(p);
     {
         if (type == 0)
         {
-            if (x > 0 && this->is_onboard(p.get_left()))
-                adj.push_back(p.get_left());
-            if (x < width - 1 && this->is_onboard(p.get_right()))
-                adj.push_back(p.get_right());
-            if (y < height - 1 && this->is_onboard(p.get_down(width)))
-                adj.push_back(p.get_down(width));
+            if (x > 0 && this->is_onboard(x - 1, y))
+                adj.push_back(this->get_point(x - 1, y));
+            if (x < width - 1 && this->is_onboard(x + 1, y))
+                adj.push_back(this->get_point(x + 1, y));
+            if (y < height - 1 && this->is_onboard(x, y + 1))
+                adj.push_back(this->get_point(x, y + 1));
         }
         else
         {
-            if (y > 0 && this->is_onboard(p.get_up(width)))
-                adj.push_back(p.get_up(width));
-            if (x > 0 && this->is_onboard(p.get_left()))
-                adj.push_back(p.get_left());
-            if (x < width - 1 && this->is_onboard(p.get_right()))
-                adj.push_back(p.get_right());
+            if (y > 0 && this->is_onboard(x, y - 1))
+                adj.push_back(this->get_point(x, y - 1));
+            if (x > 0 && this->is_onboard(x - 1, y))
+                adj.push_back(this->get_point(x - 1, y));
+            if (x < width - 1 && this->is_onboard(x + 1, y))
+                adj.push_back(this->get_point(x + 1, y));
         }
     }
     {
@@ -168,58 +166,50 @@ void TrigonGeometry<P>::init_adj_diag(Point p, AdjList& adj,
             // increases the efficiency of libpentobi_base::BoardConst, which
             // uses the forbidden status of the first few points from this list
             // during move generation and those points can reject more moves.
-            if (x > 1 && this->is_onboard(p.get_left().get_left()))
-                diag.push_back(p.get_left().get_left());
-            if (x < width - 2 && this->is_onboard(p.get_right().get_right()))
-                diag.push_back(p.get_right().get_right());
+            if (x > 1 && this->is_onboard(x - 2, y))
+                diag.push_back(this->get_point(x - 2, y));
+            if (x < width - 2 && this->is_onboard(x + 2, y))
+                diag.push_back(this->get_point(x + 2, y));
             if (x > 0 && y > 0
-                    && this->is_onboard(p.get_up_left(width)))
-                diag.push_back(p.get_up_left(width));
-            if (x < width - 1 && y > 0
-                    && this->is_onboard(p.get_up_right(width)))
-                diag.push_back(p.get_up_right(width));
+                    && this->is_onboard(x - 1, y - 1))
+                diag.push_back(this->get_point(x - 1, y - 1));
+            if (x < width - 1 && y > 0 && this->is_onboard(x + 1, y - 1))
+                diag.push_back(this->get_point(x + 1, y - 1));
             if (x < width - 1 && y < height - 1
-                    && this->is_onboard(p.get_down_right(width)))
-                diag.push_back(p.get_down_right(width));
-            if (x > 0 && y < height - 1
-                    && this->is_onboard(p.get_down_left(width)))
-                diag.push_back(p.get_down_left(width));
-            if (y > 0 && this->is_onboard(p.get_up(width)))
-                diag.push_back(p.get_up(width));
-            if (x > 1 && y < height - 1
-                    && this->is_onboard(p.get_down_left(width).get_left()))
-                diag.push_back(p.get_down_left(width).get_left());
+                    && this->is_onboard(x + 1, y + 1))
+                diag.push_back(this->get_point(x + 1, y + 1));
+            if (x > 0 && y < height - 1 && this->is_onboard(x - 1, y + 1))
+                diag.push_back(this->get_point(x - 1, y + 1));
+            if (y > 0 && this->is_onboard(x, y - 1))
+                diag.push_back(this->get_point(x, y - 1));
+            if (x > 1 && y < height - 1 && this->is_onboard(x - 2, y + 1))
+                diag.push_back(this->get_point(x - 2, y + 1));
             if (x < width - 2 && y < height - 1
-                    && this->is_onboard(p.get_down_right(width).get_right()))
-                diag.push_back(p.get_down_right(width).get_right());
+                    && this->is_onboard(x + 2, y + 1))
+                diag.push_back(this->get_point(x + 2, y + 1));
         }
         else
         {
             // See comment at type == 0 for the order of moves.
-            if (x > 1 && this->is_onboard(p.get_left().get_left()))
-                diag.push_back(p.get_left().get_left());
-            if (x < width - 2 && this->is_onboard(p.get_right().get_right()))
-                diag.push_back(p.get_right().get_right());
-            if (x > 0 && y < height - 1
-                    && this->is_onboard(p.get_down_left(width)))
-                diag.push_back(p.get_down_left(width));
+            if (x > 1 && this->is_onboard(x - 2, y))
+                diag.push_back(this->get_point(x - 2, y));
+            if (x < width - 2 && this->is_onboard(x + 2, y))
+                diag.push_back(this->get_point(x + 2, y));
+            if (x > 0 && y < height - 1 && this->is_onboard(x - 1, y + 1))
+                diag.push_back(this->get_point(x - 1, y + 1));
             if (x < width - 1 && y < height - 1
-                    && this->is_onboard(p.get_down_right(width)))
-                diag.push_back(p.get_down_right(width));
-            if (x < width - 1 && y > 0
-                    && this->is_onboard(p.get_up_right(width)))
-                diag.push_back(p.get_up_right(width));
-            if (x > 0 && y > 0
-                    && this->is_onboard(p.get_up_left(width)))
-                diag.push_back(p.get_up_left(width));
-            if (y < height - 1 && this->is_onboard(p.get_down(width)))
-                diag.push_back(p.get_down(width));
-            if (x > 1 && y > 0
-                    && this->is_onboard(p.get_up_left(width).get_left()))
-                diag.push_back(p.get_up_left(width).get_left());
-            if (x < width - 2 && y > 0
-                    && this->is_onboard(p.get_up_right(width).get_right()))
-                diag.push_back(p.get_up_right(width).get_right());
+                    && this->is_onboard(x + 1, y + 1))
+                diag.push_back(this->get_point(x + 1, y + 1));
+            if (x < width - 1 && y > 0 && this->is_onboard(x + 1, y - 1))
+                diag.push_back(this->get_point(x + 1, y - 1));
+            if (x > 0 && y > 0 && this->is_onboard(x - 1, y - 1))
+                diag.push_back(this->get_point(x - 1, y - 1));
+            if (y < height - 1 && this->is_onboard(x, y + 1))
+                diag.push_back(this->get_point(x, y + 1));
+            if (x > 1 && y > 0 && this->is_onboard(x - 2, y - 1))
+                diag.push_back(this->get_point(x - 2, y - 1));
+            if (x < width - 2 && y > 0 && this->is_onboard(x + 2, y - 1))
+                diag.push_back(this->get_point(x + 2, y - 1));
         }
     }
 }

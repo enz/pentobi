@@ -8,7 +8,7 @@
 #define LIBBOARDGAME_BASE_POINT_TRANSFORM_H
 
 #include <cmath>
-#include "Point.h"
+#include "Geometry.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libboardgame_base {
@@ -25,8 +25,8 @@ public:
 
     virtual ~PointTransform();
 
-    virtual Point get_transformed(const Point& p, unsigned width,
-                                  unsigned height) const = 0;
+    virtual Point get_transformed(const Point& p,
+                                  const Geometry<P>& geo) const = 0;
 };
 
 template<class P>
@@ -43,16 +43,15 @@ class PointTransfIdent
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfIdent<P>::get_transformed(const Point& p, unsigned width,
-                                       unsigned height) const
+P PointTransfIdent<P>::get_transformed(const Point& p,
+                                       const Geometry<P>& geo) const
 {
-    LIBBOARDGAME_UNUSED(width);
-    LIBBOARDGAME_UNUSED(height);
+    LIBBOARDGAME_UNUSED(geo);
     return p;
 }
 
@@ -66,17 +65,17 @@ class PointTransfRot180
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfRot180<P>::get_transformed(const Point& p, unsigned width,
-                                        unsigned height) const
+P PointTransfRot180<P>::get_transformed(const Point& p,
+                                        const Geometry<P>& geo) const
 {
-    unsigned x = width - p.get_x(width) - 1;
-    unsigned y = height - p.get_y(width) - 1;
-    return Point(x, y, width);
+    unsigned x = geo.get_width() - geo.get_x(p) - 1;
+    unsigned y = geo.get_height() - geo.get_y(p) - 1;
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -90,16 +89,16 @@ class PointTransfRot270Refl
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfRot270Refl<P>::get_transformed(const Point& p, unsigned width,
-                                            unsigned height) const
+P PointTransfRot270Refl<P>::get_transformed(const Point& p,
+                                            const Geometry<P>& geo) const
 {
-    LIBBOARDGAME_UNUSED(height);
-    return Point(p.get_y(width), p.get_x(width), width);
+    LIBBOARDGAME_UNUSED(geo.get_height());
+    return geo.get_point(geo.get_y(p), geo.get_x(p));
 }
 
 //-----------------------------------------------------------------------------
@@ -112,18 +111,18 @@ class PointTransfRefl
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfRefl<P>::get_transformed(const Point& p, unsigned width,
-                                      unsigned height) const
+P PointTransfRefl<P>::get_transformed(const Point& p,
+                                      const Geometry<P>& geo) const
 {
-    LIBBOARDGAME_UNUSED(height);
-    unsigned x = width - p.get_x(width) - 1;
-    unsigned y = p.get_y(width);
-    return Point(x, y, width);
+    LIBBOARDGAME_UNUSED(geo.get_height());
+    unsigned x = geo.get_width() - geo.get_x(p) - 1;
+    unsigned y = geo.get_y(p);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -136,17 +135,17 @@ class PointTransfReflRot180
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfReflRot180<P>::get_transformed(const Point& p, unsigned width,
-                                            unsigned height) const
+P PointTransfReflRot180<P>::get_transformed(const Point& p,
+                                            const Geometry<P>& geo) const
 {
-    unsigned x = p.get_x(width);
-    unsigned y = height - p.get_y(width) - 1;
-    return Point(x, y, width);
+    unsigned x = geo.get_x(p);
+    unsigned y = geo.get_height() - geo.get_y(p) - 1;
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -158,21 +157,21 @@ class PointTransfTrigonRot60
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfTrigonRot60<P>::get_transformed(const Point& p, unsigned width,
-                                             unsigned height) const
+P PointTransfTrigonRot60<P>::get_transformed(const Point& p,
+                                             const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * px + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * px + 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -184,21 +183,21 @@ class PointTransfTrigonRot120
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfTrigonRot120<P>::get_transformed(const Point& p, unsigned width,
-                                              unsigned height) const
+P PointTransfTrigonRot120<P>::get_transformed(const Point& p,
+                                              const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * px + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * px - 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -210,21 +209,21 @@ class PointTransfTrigonRot240
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfTrigonRot240<P>::get_transformed(const Point& p, unsigned width,
-                                              unsigned height) const
+P PointTransfTrigonRot240<P>::get_transformed(const Point& p,
+                                              const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * px - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * px - 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -236,21 +235,21 @@ class PointTransfTrigonRot300
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
-P PointTransfTrigonRot300<P>::get_transformed(const Point& p, unsigned width,
-                                              unsigned height) const
+P PointTransfTrigonRot300<P>::get_transformed(const Point& p,
+                                              const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * px - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * px + 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -262,22 +261,21 @@ class PointTransfTrigonReflRot60
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
 P PointTransfTrigonReflRot60<P>::get_transformed(const Point& p,
-                                                 unsigned width,
-                                                 unsigned height) const
+                                                 const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * (-px) + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * (-px) + 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -289,22 +287,21 @@ class PointTransfTrigonReflRot120
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
 P PointTransfTrigonReflRot120<P>::get_transformed(const Point& p,
-                                                  unsigned width,
-                                                  unsigned height) const
+                                                  const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * (-px) + 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy - 0.5f * (-px) - 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -316,22 +313,21 @@ class PointTransfTrigonReflRot240
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
 P PointTransfTrigonReflRot240<P>::get_transformed(const Point& p,
-                                                  unsigned width,
-                                                  unsigned height) const
+                                                  const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx - 0.5f * (-px) - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * (-px) - 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -343,22 +339,21 @@ class PointTransfTrigonReflRot300
 public:
     typedef P Point;
 
-    Point get_transformed(const Point& p, unsigned width,
-                          unsigned height) const override;
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
 };
 
 template<class P>
 P PointTransfTrigonReflRot300<P>::get_transformed(const Point& p,
-                                                  unsigned width,
-                                                  unsigned height) const
+                                                  const Geometry<P>& geo) const
 {
-    float cx = 0.5f * static_cast<float>(width - 1);
-    float cy = 0.5f * static_cast<float>(height - 1);
-    float px = static_cast<float>(p.get_x(width)) - cx;
-    float py = static_cast<float>(p.get_y(width)) - cy;
+    float cx = 0.5f * static_cast<float>(geo.get_width() - 1);
+    float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
+    float px = static_cast<float>(geo.get_x(p)) - cx;
+    float py = static_cast<float>(geo.get_y(p)) - cy;
     unsigned x = static_cast<unsigned>(round(cx + 0.5f * (-px) - 1.5f * py));
     unsigned y = static_cast<unsigned>(round(cy + 0.5f * (-px) + 0.5f * py));
-    return Point(x, y, width);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------

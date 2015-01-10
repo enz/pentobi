@@ -36,8 +36,6 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
                  const Geometry& geo, Grid<PointState>& pointState)
 {
     vector<string> values = node.get_multi_property(id);
-    auto width = geo.get_width();
-    auto height = geo.get_height();
     for (const string& s : values)
     {
         if (trim(s).empty())
@@ -45,16 +43,9 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
         vector<string> v = split(s, ',');
         for (const string& p_str : v)
         {
-            try
-            {
-                Point p = Point::from_string(p_str, width, height);
-                if (geo.is_onboard(p))
-                    pointState[p] = c;
-            }
-            catch (const Point::InvalidString&)
-            {
-                continue;
-            }
+            Point p;
+            if (geo.from_string(p_str, p))
+                pointState[p] = c;
         }
     }
 }
@@ -63,26 +54,17 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
 void handleSetupEmpty(const SgfNode& node, const Geometry& geo,
                       Grid<PointState>& pointState)
 {
-    auto width = geo.get_width();
-    auto height = geo.get_height();
     vector<string> values = node.get_multi_property("AE");
-    for (const string& s : values)
+    for (const auto& s : values)
     {
         if (trim(s).empty())
             continue;
         vector<string> v = split(s, ',');
-        for (const string& p_str : v)
+        for (const auto& p_str : v)
         {
-            try
-            {
-                Point p = Point::from_string(p_str, width, height);
-                if (geo.is_onboard(p))
-                    pointState[p] = PointState::empty();
-            }
-            catch (const Point::InvalidString&)
-            {
-                continue;
-            }
+            Point p;
+            if (geo.from_string(p_str, p))
+                pointState[p] = PointState::empty();
         }
     }
 }
@@ -119,10 +101,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant, const Geometry*& ge
         MovePoints points;
         if (libpentobi_base::node_util::get_move(*node, variant, c, points))
             for (Point p : points)
-            {
-                if (geo->is_onboard(p))
                     pointState[p] = c;
-            }
         node = node->get_first_child_or_null();
     }
     return true;

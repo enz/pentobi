@@ -364,8 +364,8 @@ void PriorKnowledge::start_search(const Board& bd)
     float ratio = (is_trigon ? 1.732f : 1);
     for (GeometryIterator i(geo); i; ++i)
     {
-        float x = static_cast<float>(i->get_x(geo.get_width()));
-        float y = static_cast<float>(i->get_y(geo.get_width()));
+        float x = static_cast<float>(geo.get_x(*i));
+        float y = static_cast<float>(geo.get_y(*i));
         float dx = x - center_x;
         float dy = ratio * (y - center_y);
         // Multiply Euklidian distance by 4, so that distances that differ

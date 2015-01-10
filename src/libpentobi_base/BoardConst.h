@@ -118,7 +118,6 @@ public:
         Geometry::get_adj() concatenated with Geometry::get_diag(). */
     const AdjStatusList& get_adj_status_list(Point p) const
     {
-        LIBBOARDGAME_ASSERT(m_geo.is_onboard(p));
         return m_adj_status_list[p];
     }
 

@@ -2,7 +2,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 add_executable(unittest_libboardgame_base
   MarkerTest.cpp
-  PointTest.cpp
   PointTransformTest.cpp
   RatingTest.cpp
   RectGeometryTest.cpp

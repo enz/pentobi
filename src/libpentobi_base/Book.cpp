@@ -138,11 +138,10 @@ Move Book::get_transformed(const Board& bd, Move mv,
 {
     if (mv.is_pass())
         return mv;
-    unsigned width = bd.get_geometry().get_width();
-    unsigned height = bd.get_geometry().get_height();
+    auto& geo = bd.get_geometry();
     MovePoints points;
     for (Point p : bd.get_move_info(mv))
-        points.push_back(transform.get_transformed(p, width, height));
+        points.push_back(transform.get_transformed(p, geo));
     Move transformed_mv;
     bd.find_move(points, transformed_mv);
     return transformed_mv;

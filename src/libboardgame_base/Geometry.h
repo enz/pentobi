@@ -41,20 +41,18 @@ public:
         friend class Geometry;
 
     public:
-        Iterator(const Geometry& g);
+        Iterator(const Geometry& geo);
 
-        const Point& operator*() const;
-
-        const Point* operator->() const;
+        Point operator*() const;
 
         operator bool() const;
 
         void operator++();
 
     private:
-        const Point* m_p;
+        typename Point::IntType m_p;
 
-        const Point* m_end;
+        typename Point::IntType m_end;
     };
 
     virtual ~Geometry();
@@ -82,16 +80,31 @@ public:
 
     unsigned get_point_type(Point p) const;
 
-    bool is_onboard(Point p) const;
+    bool is_onboard(unsigned x, unsigned y) const;
 
     bool is_onboard(CoordPoint p) const;
+
+    /** Return the point at a given coordinate.
+        @pre x < get_width()
+        @pre y < get_height()
+        @return The point or Point::null() if this coordinates are
+        off-board. */
+    Point get_point(unsigned x, unsigned y) const;
 
     unsigned get_width() const;
 
     unsigned get_height() const;
 
     /** Get range used for onboard points. */
-    unsigned get_range() const;
+    typename Point::IntType get_range() const;
+
+    unsigned get_x(Point p) const;
+
+    unsigned get_y(Point p) const;
+
+    bool from_string(const string& s, Point& p) const;
+
+    const string& to_string(Point p) const;
 
     /** Get list of on-board adjacent points. */
     const AdjList& get_adj(Point p) const;
@@ -123,8 +136,9 @@ protected:
     /** Initialize on-board points.
         This function is used in init() and allows the subclass to restrict the
         on-board points to a subset of the on-board points of a rectangle to
-        support different board shapes. */
-    virtual void init_is_onboard(Point p, bool& is_onboard) const = 0;
+        support different board shapes. It will only be called with x and
+        y within the width and height of the geometry. */
+    virtual bool init_is_onboard(unsigned x, unsigned y) const = 0;
 
     /** Initialize adjacent and diagonal neighbors of an on-board point.
         This function is used in init() and allows the subclass to define other
@@ -139,38 +153,35 @@ private:
 
     unsigned m_height;
 
-    bool m_is_onboard[Point::range];
+    typename Point::IntType m_range;
 
-    const Point* m_all_points_begin;
+    Point m_points[Point::max_width][Point::max_height];
 
-    const Point* m_all_points_end;
+    unsigned m_x[Point::range];
 
-    unique_ptr<Point[]> m_all_points;
+    unsigned m_y[Point::range];
+
+    string m_string[Point::range];
 
     AdjList m_adj[Point::range];
 
     DiagList m_diag[Point::range];
+
+    bool is_valid(Point p) const;
 };
 
 template<class P>
-inline Geometry<P>::Iterator::Iterator(const Geometry& g)
-    : m_p(g.m_all_points_begin),
-      m_end(g.m_all_points_end)
+inline Geometry<P>::Iterator::Iterator(const Geometry& geo)
+    : m_p(1),
+      m_end(geo.get_range())
 {
 }
 
 template<class P>
-inline const P& Geometry<P>::Iterator::operator*() const
+inline auto Geometry<P>::Iterator::operator*() const -> Point
 {
     LIBBOARDGAME_ASSERT(*this);
-    return *m_p;
-}
-
-template<class P>
-inline const P* Geometry<P>::Iterator::operator->() const
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return m_p;
+    return Point(m_p);
 }
 
 template<class P>
@@ -223,16 +234,31 @@ inline void Geometry<P>::for_each_diag(Point p, FUNCTION f) const
 }
 
 template<class P>
+bool Geometry<P>::from_string(const string& s, Point& p) const
+{
+    istringstream in(s);
+    unsigned x;
+    unsigned y;
+    if (Point::StringRep::read(in, m_width, m_height, x, y)
+            && is_onboard(CoordPoint(x, y)))
+    {
+        p = get_point(x, y);
+        return true;
+    }
+    return false;
+}
+
+template<class P>
 inline auto Geometry<P>::get_adj(Point p) const -> const AdjList&
 {
-    LIBBOARDGAME_ASSERT(is_onboard(p));
+    LIBBOARDGAME_ASSERT(is_valid(p));
     return m_adj[p.to_int()];
 }
 
 template<class P>
 inline auto Geometry<P>::get_diag(Point p) const -> const DiagList&
 {
-    LIBBOARDGAME_ASSERT(is_onboard(p));
+    LIBBOARDGAME_ASSERT(is_valid(p));
     return m_diag[p.to_int()];
 }
 
@@ -243,10 +269,17 @@ inline unsigned Geometry<P>::get_height() const
 }
 
 template<class P>
+inline auto Geometry<P>::get_point(unsigned x, unsigned y) const -> Point
+{
+    LIBBOARDGAME_ASSERT(x < m_width);
+    LIBBOARDGAME_ASSERT(y < m_height);
+    return m_points[x][y];
+}
+
+template<class P>
 inline unsigned Geometry<P>::get_point_type(Point p) const
 {
-    auto width = get_width();
-    return get_point_type(p.get_x(width), p.get_y(width));
+    return get_point_type(get_x(p), get_y(p));
 }
 
 template<class P>
@@ -256,9 +289,9 @@ inline unsigned Geometry<P>::get_point_type(CoordPoint p) const
 }
 
 template<class P>
-inline unsigned Geometry<P>::get_range() const
+inline auto Geometry<P>::get_range() const -> typename Point::IntType
 {
-    return P::get_range(m_width, m_height);
+    return m_range;
 }
 
 template<class P>
@@ -268,26 +301,45 @@ inline unsigned Geometry<P>::get_width() const
 }
 
 template<class P>
+inline unsigned Geometry<P>::get_x(Point p) const
+{
+    LIBBOARDGAME_ASSERT(is_valid(p));
+    return m_x[p.to_int()];
+}
+
+template<class P>
+inline unsigned Geometry<P>::get_y(Point p) const
+{
+    LIBBOARDGAME_ASSERT(is_valid(p));
+    return m_y[p.to_int()];
+}
+
+template<class P>
 void Geometry<P>::init(unsigned width, unsigned height)
 {
     LIBBOARDGAME_ASSERT(width >= 1);
     LIBBOARDGAME_ASSERT(height >= 1);
-    LIBBOARDGAME_ASSERT(width * height <= Point::max_onboard);
+    LIBBOARDGAME_ASSERT(width <= Point::max_width);
+    LIBBOARDGAME_ASSERT(height <= Point::max_height);
     m_width = width;
     m_height = height;
-    m_all_points.reset(new Point[width * height]);
-    fill(m_is_onboard, m_is_onboard + Point::range, false);
-    m_all_points_begin = m_all_points.get();
-    auto all_points_end = m_all_points.get();
+    m_string[Point::null().to_int()] = "null";
+    typename Point::IntType n = 0;
+    ostringstream ostr;
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)
-        {
-            Point p(x, y, width);
-            init_is_onboard(p, m_is_onboard[p.to_int()]);
-            if (is_onboard(p))
-                *(all_points_end++) = p;
-        }
-    m_all_points_end = all_points_end;
+            if (init_is_onboard(x, y))
+            {
+                m_points[x][y] = Point(++n);
+                m_x[n] = x;
+                m_y[n] = y;
+                ostr.str("");
+                Point::StringRep::write(ostr, x, y, width, height);
+                m_string[n] = ostr.str();
+            }
+            else
+                m_points[x][y] = Point::null();
+    m_range = ++n;
     for (Iterator i(*this); i; ++i)
     {
         unsigned j = (*i).to_int();
@@ -296,16 +348,28 @@ void Geometry<P>::init(unsigned width, unsigned height)
 }
 
 template<class P>
-inline bool Geometry<P>::is_onboard(Point p) const
+inline bool Geometry<P>::is_onboard(unsigned x, unsigned y) const
 {
-    return m_is_onboard[p.to_int()];
+    return ! get_point(x, y).is_null();
 }
 
 template<class P>
 bool Geometry<P>::is_onboard(CoordPoint p) const
 {
-    return (p.is_onboard(m_width, m_height)
-            && is_onboard(Point(p.x, p.y, m_width)));
+    return (p.is_onboard(m_width, m_height) && is_onboard(p.x, p.y));
+}
+
+template<class P>
+inline bool Geometry<P>::is_valid(Point p) const
+{
+    return ! p.is_null() && p.to_int() < get_range();
+}
+
+template<class P>
+inline const string& Geometry<P>::to_string(Point p) const
+{
+    LIBBOARDGAME_ASSERT(p.to_int() < get_range());
+    return m_string[p.to_int()];
 }
 
 //-----------------------------------------------------------------------------

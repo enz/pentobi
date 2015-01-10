@@ -444,7 +444,7 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
     auto height = m_geo.get_height();
     for (GeometryIterator i(m_geo); i; ++i)
         m_compare_val[*i] =
-                (height - i->get_y(width) - 1) * width + i->get_x(width);
+                (height - m_geo.get_y(*i) - 1) * width + m_geo.get_x(*i);
     create_moves();
     if (board_type == BoardType::classic)
         LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_classic);
@@ -488,9 +488,8 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
                              Point label_pos)
 {
     MovePoints points;
-    auto width = m_geo.get_width();
     for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
-        points.push_back(Point((*i).x, (*i).y, width));
+        points.push_back(m_geo.get_point((*i).x, (*i).y));
     MoveInfo info(piece, points);
     MoveInfoExt info_ext;
     set_adj_and_attach_points(info, info_ext);
@@ -565,16 +564,14 @@ void BoardConst::create_moves(Piece piece)
         transformed_label_pos[i] =
                 transform->get_transformed(piece_info.get_label_pos());
     }
-    auto width = m_geo.get_width();
-    auto height = m_geo.get_height();
     PiecePoints points;
     // Make outer loop iterator over geometry for better memory locality
     for (GeometryIterator i(m_geo); i; ++i)
     {
         if (log_move_creation)
-            log("Creating moves at ", WritePoint(*i, width, height));
-        auto x = i->get_x(width);
-        auto y = i->get_y(width);
+            log("Creating moves at ", m_geo.to_string(*i));
+        auto x = m_geo.get_x(*i);
+        auto y = m_geo.get_y(*i);
         for (size_t j = 0; j < nu_transforms; ++j)
         {
             if (log_move_creation)
@@ -599,7 +596,8 @@ void BoardConst::create_moves(Piece piece)
             CoordPoint label_pos = transformed_label_pos[j];
             label_pos.x += x;
             label_pos.y += y;
-            create_move(piece, points, Point(label_pos.x, label_pos.y, width));
+            create_move(piece, points,
+                        m_geo.get_point(label_pos.x, label_pos.y));
         }
     }
 }
@@ -615,10 +613,13 @@ Move BoardConst::from_string(const string& s) const
     if (v.size() > PieceInfo::max_size)
         throw Exception("illegal move (too many points)");
     MovePoints points;
-    auto width = m_geo.get_width();
-    auto height = m_geo.get_height();
-    for (const string& p : v)
-        points.push_back(Point::from_string(p, width, height));
+    for (const auto& s : v)
+    {
+        Point p;
+        if (! m_geo.from_string(s, p))
+            throw Exception("illegal move (invalid point)");
+        points.push_back(p);
+    }
     Move mv;
     if (! find_move(points, mv))
         throw Exception("illegal move");
@@ -697,8 +698,6 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     MovePoints sorted_points = points;
     sort(sorted_points);
     Point p = points[0];
-    if (! m_geo.is_onboard(p))
-        return false;
     for (Piece::IntType i = 0; i < m_pieces.size(); ++i)
     {
         Piece piece(i);
@@ -905,15 +904,13 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
     if (with_piece_name)
         s << '[' << get_piece_info(info.get_piece()).get_name() << "]";
     bool is_first = true;
-    auto width = m_geo.get_width();
-    auto height = m_geo.get_height();
     for (Point p : info)
     {
         if (! is_first)
             s << ',';
         else
             is_first = false;
-        p.write(s, width, height);
+        s << m_geo.to_string(p);
     }
     return s.str();
 }

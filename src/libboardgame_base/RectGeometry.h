@@ -43,9 +43,9 @@ public:
     unsigned get_period_y() const override;
 
 protected:
-    void init_is_onboard(Point p, bool& is_onboard) const;
+    bool init_is_onboard(unsigned x, unsigned y) const override;
 
-    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const;
+    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const override;
 
 private:
     /** Stores already created geometries by width and height. */
@@ -94,10 +94,11 @@ unsigned RectGeometry<P>::get_point_type(int x, int y) const
 }
 
 template<class P>
-void RectGeometry<P>::init_is_onboard(Point p, bool& is_onboard) const
+bool RectGeometry<P>::init_is_onboard(unsigned x, unsigned y) const
 {
-    LIBBOARDGAME_UNUSED(p);
-    is_onboard = true;
+    LIBBOARDGAME_UNUSED(x);
+    LIBBOARDGAME_UNUSED(y);
+    return true;
 }
 
 template<class P>
@@ -106,27 +107,27 @@ void RectGeometry<P>::init_adj_diag(Point p, AdjList& adj,
 {
     auto width = this->get_width();
     auto height = this->get_height();
-    auto x = p.get_x(width);
-    auto y = p.get_y(width);
+    auto x = this->get_x(p);
+    auto y = this->get_y(p);
     {
         if (y > 0)
-            adj.push_back(p.get_up(width));
+            adj.push_back(this->get_point(x, y - 1));
         if (x > 0)
-            adj.push_back(p.get_left());
+            adj.push_back(this->get_point(x - 1, y));
         if (x < width - 1)
-            adj.push_back(p.get_right());
+            adj.push_back(this->get_point(x + 1, y));
         if (y < height - 1)
-            adj.push_back(p.get_down(width));
+            adj.push_back(this->get_point(x, y + 1));
     }
     {
         if (x > 0 && y > 0)
-            diag.push_back(p.get_up_left(width));
+            diag.push_back(this->get_point(x - 1, y - 1));
         if (x < width - 1 && y > 0)
-            diag.push_back(p.get_up_right(width));
+            diag.push_back(this->get_point(x + 1, y - 1));
         if (x > 0 && y < height - 1)
-            diag.push_back(p.get_down_left(width));
+            diag.push_back(this->get_point(x - 1, y + 1));
         if (x < width - 1 && y < height - 1)
-            diag.push_back(p.get_down_right(width));
+            diag.push_back(this->get_point(x + 1, y + 1));
     }
 }
 

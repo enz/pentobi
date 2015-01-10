@@ -20,7 +20,7 @@ void StartingPoints::add_colored_starting_point(const Geometry& geo,
                                                 unsigned x, unsigned y,
                                                 Color c)
 {
-    Point p(x, y, geo.get_width());
+    Point p = geo.get_point(x, y);
     m_is_colored_starting_point[p] = true;
     m_starting_point_color[p] = c;
     m_starting_points[c].push_back(p);
@@ -29,7 +29,7 @@ void StartingPoints::add_colored_starting_point(const Geometry& geo,
 void StartingPoints::add_colorless_starting_point(const Geometry& geo,
                                                   unsigned x, unsigned y)
 {
-    Point p(x, y, geo.get_width());
+    Point p = geo.get_point(x, y);
     m_is_colorless_starting_point[p] = true;
     m_starting_points[Color(0)].push_back(p);
     m_starting_points[Color(1)].push_back(p);

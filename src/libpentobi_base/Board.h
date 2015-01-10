@@ -116,8 +116,6 @@ public:
 
     bool is_empty(Point p) const;
 
-    bool is_onboard(Point p) const;
-
     const PointStateGrid& get_grid() const;
 
     /** Get next color to play.
@@ -339,8 +337,6 @@ public:
 
     /** See take_snapshot() */
     void restore_snapshot();
-
-    WritePoint write(Point p) const;
 
 private:
     /** Color-independent part of the board state for fast snapshot
@@ -658,7 +654,6 @@ inline const Board::PiecesLeftList& Board::get_pieces_left(Color c) const
 
 inline PointState Board::get_point_state(Point p) const
 {
-    LIBBOARDGAME_ASSERT(is_onboard(p));
     return PointState(m_state_base.point_state[p].to_int());
 }
 
@@ -840,11 +835,6 @@ inline bool Board::is_legal_nonpass(Color c, Move mv) const
     return false;
 }
 
-inline bool Board::is_onboard(Point p) const
-{
-    return m_geo->is_onboard(p);
-}
-
 inline bool Board::is_piece_left(Color c, Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_uniq_pieces());
@@ -980,11 +970,6 @@ inline void Board::set_to_play(Color c)
 inline string Board::to_string(Move mv, bool with_piece_name) const
 {
     return m_board_const->to_string(mv, with_piece_name);
-}
-
-inline WritePoint Board::write(Point p) const
-{
-    return WritePoint(p, m_geo->get_width(), m_geo->get_height());
 }
 
 //-----------------------------------------------------------------------------

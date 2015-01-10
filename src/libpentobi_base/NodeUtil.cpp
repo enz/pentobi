@@ -103,8 +103,7 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
     // values instead of a single value as used by Pentobi <= 0.2, but it
     // is deprecated
     points.clear();
-    auto width = get_geometry(variant).get_width();
-    auto height = get_geometry(variant).get_height();
+    auto& geo = get_geometry(variant);
     for (const auto& s : values)
     {
         if (trim(s).empty())
@@ -113,14 +112,8 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
         for (const auto& p_str : v)
         {
             Point p;
-            try
-            {
-                p = Point::from_string(p_str, width, height);
-            }
-            catch (const Point::InvalidString&)
-            {
+            if (! geo.from_string(p_str, p))
                 throw InvalidPropertyValue(id, p_str);
-            }
             points.push_back(p);
         }
     }

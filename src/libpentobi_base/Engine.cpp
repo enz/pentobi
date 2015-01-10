@@ -162,6 +162,7 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
             throw Failure(msg.str());
         }
     }
+    auto& geo = bd.get_geometry();
     auto& info = bd.get_move_info(mv);
     Piece piece = info.get_piece();
     auto& info_ext = bd.get_move_info_ext(mv);
@@ -173,17 +174,17 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         << " (" << bd.get_piece_info(piece).get_name() << ")\n"
         << "Points:";
     for (Point p : info)
-        response << ' ' << bd.write(p);
+        response << ' ' << geo.to_string(p);
     response
         << "\n"
         << "Adj:    ";
     for (auto i = info_ext.begin_adj(); i != info_ext.end_adj(); ++i)
-        response << bd.write(*i) << " ";
+        response << geo.to_string(*i) << " ";
     response
         << "\n"
         << "Attach: ";
     for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
-        response << bd.write(*i) << " ";
+        response << geo.to_string(*i) << " ";
     response
         << "\n"
         << "BrkSym: " << info_ext_2.breaks_symmetry << "\n"

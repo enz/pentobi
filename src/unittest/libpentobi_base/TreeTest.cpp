@@ -34,59 +34,60 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     PentobiTree tree(root);
-    auto& board_const = tree.get_board_const();
+    auto& bc = tree.get_board_const();
+    auto& geo = bc.get_geometry();
     auto node = &tree.get_root();
     node = &node->get_child();
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(0));
-        auto& info =  board_const.get_move_info(mv.move);
+        auto& info = bc.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("a16", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("a17", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("a18", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("a19", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("a20", 20, 20)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 4)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 3)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 2)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 1)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 0)));
     }
     node = &node->get_child();
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(1));
-        auto& info =  board_const.get_move_info(mv.move);
+        auto& info = bc.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("s17", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t17", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t18", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t19", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t20", 20, 20)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(18, 3)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 3)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 2)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 1)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 0)));
     }
     node = &node->get_child();
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(2));
-        auto& info =  board_const.get_move_info(mv.move);
+        auto& info = bc.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("t1", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t2", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t3", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t4", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("t5", 20, 20)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 19)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 18)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 17)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 16)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 15)));
     }
     node = &node->get_child();
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(3));
-        auto& info =  board_const.get_move_info(mv.move);
+        auto& info = bc.get_move_info(mv.move);
         LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(Point("a1", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("b1", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("c1", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("d1", 20, 20)));
-        LIBBOARDGAME_CHECK(info.contains(Point("d2", 20, 20)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 19)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(1, 19)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(2, 19)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(3, 19)));
+        LIBBOARDGAME_CHECK(info.contains(geo.get_point(3, 18)));
     }
 }
 

@@ -132,8 +132,8 @@ void BoardPainter::drawLabels(QPainter& painter,
         {
             PointState s = pointState[*i];
             painter.setPen(Util::getLabelColor(variant, s));
-            qreal x = i->get_x(m_geo->get_width()) * m_fieldWidth;
-            qreal y = i->get_y(m_geo->get_width()) * m_fieldHeight;
+            qreal x = m_geo->get_x(*i) * m_fieldWidth;
+            qreal y = m_geo->get_y(*i) * m_fieldHeight;
             qreal width = m_fieldWidth;
             qreal height = m_fieldHeight;
             if (isTrigon)
@@ -220,11 +220,10 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     if (m_coordinates)
         drawCoordinates(painter, m_isTrigon);
     m_startingPoints.init(variant, *m_geo);
-    auto geoWidth = m_geo->get_width();
     for (GeometryIterator i(*m_geo); i; ++i)
     {
-        int x = i->get_x(geoWidth);
-        int y = i->get_y(geoWidth);
+        int x = m_geo->get_x(*i);
+        int y = m_geo->get_y(*i);
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = y * m_fieldHeight;
         if (m_isTrigon)
@@ -261,11 +260,10 @@ void BoardPainter::paintPieces(QPainter& painter,
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
     painter.translate(m_boardOffset);
-    auto geoWidth = m_geo->get_width();
     for (GeometryIterator i(*m_geo); i; ++i)
     {
-        int x = i->get_x(geoWidth);
-        int y = i->get_y(geoWidth);
+        int x = m_geo->get_x(*i);
+        int y = m_geo->get_y(*i);
         PointState s = pointState[*i];
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = y * m_fieldHeight;
@@ -309,11 +307,10 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
         saturation = 0.5;
         flat = true;
     }
-    auto geoWidth = m_geo->get_width();
     for (Point p : points)
     {
-        qreal fieldX = p.get_x(geoWidth) * m_fieldWidth;
-        qreal fieldY = p.get_y(geoWidth) * m_fieldHeight;
+        qreal fieldX = m_geo->get_x(p) * m_fieldWidth;
+        qreal fieldY = m_geo->get_y(p) * m_fieldHeight;
         if (m_isTrigon)
         {
             bool isUpward = (m_geo->get_point_type(p) == 0);

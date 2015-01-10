@@ -107,8 +107,8 @@ string Grid<P, T>::to_string(const Geometry& geo) const
     {
         for (unsigned x = 0; x < width; ++x)
         {
-            Point p(x, y, width);
-            if (geo.is_onboard(p))
+            Point p = geo.get_point(x, y);
+            if (! p.is_null())
                 buffer << setw(int(max_len)) << (*this)[p];
             else
                 buffer << empty;

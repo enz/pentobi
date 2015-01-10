@@ -108,10 +108,10 @@ Move GuiBoard::findSelectedPieceMove()
         return Move::null();
     const PiecePoints& points =
         m_bd.get_piece_info(m_selectedPiece).get_points();
+    auto& geo = m_bd.get_geometry();
+    int width = static_cast<int>(geo.get_width());
+    int height = static_cast<int>(geo.get_height());
     MovePoints movePoints;
-    auto geoWidth = m_bd.get_geometry().get_width();
-    int width = static_cast<int>(geoWidth);
-    int height = static_cast<int>(m_bd.get_geometry().get_height());
     for (CoordPoint p : points)
     {
         p = m_selectedPieceTransform->get_transformed(p);
@@ -119,7 +119,7 @@ Move GuiBoard::findSelectedPieceMove()
         int y = p.y + m_selectedPieceOffset.y;
         if (x < 0 || x >= width || y < 0 || y >= height)
             return Move::null();
-        movePoints.push_back(Point(x, y, geoWidth));
+        movePoints.push_back(geo.get_point(x, y));
     }
     Move mv;
     if (! m_bd.find_move(movePoints, mv)
@@ -158,7 +158,7 @@ void GuiBoard::mousePressEvent(QMouseEvent* event)
         CoordPoint p = m_boardPainter.getCoordPoint(event->x(), event->y());
         auto& geo = m_bd.get_geometry();
         if (geo.is_onboard(p))
-            emit pointClicked(Point(p.x, p.y, geo.get_width()));
+            emit pointClicked(geo.get_point(p.x, p.y));
         return;
     }
     setSelectedPieceOffset(*event);
@@ -473,7 +473,7 @@ void GuiBoard::setSelectedPiecePoints()
             int x = p.x + m_selectedPieceOffset.x;
             int y = p.y + m_selectedPieceOffset.y;
             if (x >= 0 && x < width && y >= 0 && y < height)
-                m_selectedPiecePoints.push_back(Point(x, y, geo.get_width()));
+                m_selectedPiecePoints.push_back(geo.get_point(x, y));
         }
     }
     update();

@@ -280,23 +280,22 @@ Point State::find_best_starting_point(Color c) const
     bool is_trigon = (m_bd.get_board_type() == BoardType::trigon
                       || m_bd.get_board_type() == BoardType::trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
-    auto width = m_bd.get_geometry().get_width();
+    auto& geo = m_bd.get_geometry();
     for (Point p : m_bd.get_starting_points(c))
     {
         if (m_bd.is_forbidden(p, c))
             continue;
-        float px = static_cast<float>(p.get_x(width));
-        float py = static_cast<float>(p.get_y(width));
+        float px = static_cast<float>(geo.get_x(p));
+        float py = static_cast<float>(geo.get_y(p));
         float d = 0;
         for (ColorIterator i(m_nu_colors); i; ++i)
-        {
             for (Point pp : m_bd.get_starting_points(*i))
             {
                 PointState s = m_bd.get_point_state(pp);
                 if (! s.is_empty())
                 {
-                    float ppx = static_cast<float>(pp.get_x(width));
-                    float ppy = static_cast<float>(pp.get_y(width));
+                    float ppx = static_cast<float>(geo.get_x(pp));
+                    float ppy = static_cast<float>(geo.get_y(pp));
                     float dx = ppx - px;
                     float dy = ratio * (ppy - py);
                     float weight = 1;
@@ -305,7 +304,6 @@ Point State::find_best_starting_point(Color c) const
                     d += weight * sqrt(dx * dx + dy * dy);
                 }
             }
-        }
         if (d > max_distance)
         {
             best = p;
