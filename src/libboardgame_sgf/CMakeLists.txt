@@ -13,8 +13,6 @@ add_library(boardgame_sgf STATIC
   SgfTree.cpp
   SgfUtil.h
   SgfUtil.cpp
-  TreeIterator.h
-  TreeIterator.cpp
   TreeReader.h
   TreeReader.cpp
   TreeWriter.h

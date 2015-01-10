@@ -27,7 +27,6 @@ SOURCES += \
     ../libboardgame_sys/Memory.cpp \
     ../libboardgame_sgf/MissingProperty.cpp \
     ../libboardgame_sgf/Reader.cpp \
-    ../libboardgame_sgf/TreeIterator.cpp \
     ../libboardgame_sgf/TreeReader.cpp \
     ../libboardgame_sgf/Writer.cpp \
     ../libboardgame_util/Abort.cpp \
@@ -109,7 +108,6 @@ HEADERS += \
     ../libboardgame_sgf/InvalidTree.h \
     ../libboardgame_sgf/MissingProperty.h \
     ../libboardgame_sgf/Reader.h \
-    ../libboardgame_sgf/TreeIterator.h \
     ../libboardgame_sgf/TreeReader.h \
     ../libboardgame_sgf/Writer.h \
     ../libboardgame_util/Abort.h \
