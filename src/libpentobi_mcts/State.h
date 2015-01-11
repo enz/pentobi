@@ -183,10 +183,10 @@ private:
 
     PriorKnowledge m_prior_knowledge;
 
-    /** Precomputed gamma value for a piece. */
+    /** Gamma value for a piece. */
     PieceMap<double> m_gamma_piece;
 
-    /** Precomputed gamma value for LocalValue::get_nu_attach(). */
+    /** Gamma value for PlayoutFeatures::get_nu_attach(). */
     array<double, PieceInfo::max_size + 1> m_gamma_nu_attach;
 
     /** Moves played by a color since the last update of its move list. */

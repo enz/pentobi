@@ -535,7 +535,7 @@ void State::start_search()
     for (ColorIterator i(m_nu_colors); i; ++i)
         m_stat_score[*i].clear();
 
-    // Init precomputed gamma values
+    // Init gamma values
     double gamma_size_factor = 1;
     double gamma_nu_attach_factor = 1;
     switch (bd.get_board_type())
