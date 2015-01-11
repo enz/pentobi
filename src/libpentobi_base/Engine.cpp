@@ -279,6 +279,11 @@ void Engine::genmove(Color c, Response& response)
     auto mv = player.genmove(bd, c);
     if (mv.is_null())
         throw Failure("player failed to generate a move");
+    if (mv.is_pass())
+    {
+        response << "pass";
+        return;
+    }
     if (! bd.is_legal(c, mv))
     {
         ostringstream msg;
@@ -292,8 +297,7 @@ void Engine::genmove(Color c, Response& response)
     }
     m_game.play(c, mv, true);
     response << bd.to_string(mv, false);
-    if (! mv.is_pass())
-        board_changed();
+    board_changed();
 }
 
 Color Engine::get_color_arg(const Arguments& args) const
