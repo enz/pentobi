@@ -357,7 +357,7 @@ inline void State::play_in_tree(Move mv)
     }
     else
     {
-        m_bd.play_pass(to_play);
+        m_bd.set_to_play(to_play.get_next(m_nu_colors));
         ++m_nu_passes;
     }
     if (log_simulations)

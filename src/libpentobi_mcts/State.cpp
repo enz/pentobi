@@ -584,14 +584,6 @@ void State::start_simulation(size_t n)
         m_moves_added_at[*i].clear();
     }
     m_nu_passes = 0;
-    for (unsigned i = m_bd.get_nu_moves(); i > 0; --i)
-    // Should m_nu_passes be initialized without assuming alternating
-    // colors in the board's move history?
-    {
-        if (! m_bd.get_move(i - 1).move.is_pass())
-            break;
-        ++m_nu_passes;
-    }
 }
 
 void State::update_moves(Color c)
