@@ -328,14 +328,14 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
     }
 
     Color to_play = m_bd.get_to_play();
-    if (lgr2.is_regular() && m_bd.is_legal_nonpass(lgr2))
+    if (lgr2.is_regular() && m_bd.is_legal(lgr2))
     {
         if (log_simulations)
             log("Playing last good reply 2");
         mv = PlayerMove<Move>(to_play.to_int(), lgr2);
         return true;
     }
-    if (lgr1.is_regular() && m_bd.is_legal_nonpass(lgr1))
+    if (lgr1.is_regular() && m_bd.is_legal(lgr1))
     {
         if (log_simulations)
             log("Playing last good reply 1");

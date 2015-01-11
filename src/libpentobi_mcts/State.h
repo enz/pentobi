@@ -190,7 +190,7 @@ private:
     array<double, PieceInfo::max_size + 1> m_gamma_nu_attach;
 
     /** Moves played by a color since the last update of its move list. */
-    ColorMap<ArrayList<Move, Board::max_nonpass_player_moves>> m_new_moves;
+    ColorMap<ArrayList<Move, Board::max_player_moves>> m_new_moves;
 
     ColorMap<bool> m_is_move_list_initialized;
 
@@ -351,7 +351,7 @@ inline void State::play_in_tree(Move mv)
     if (! mv.is_pass())
     {
         LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
-        m_bd.play_nonpass(to_play, mv);
+        m_bd.play(to_play, mv);
         m_nu_passes = 0;
         update_playout_features(to_play, mv);
     }
@@ -366,10 +366,10 @@ inline void State::play_in_tree(Move mv)
 
 inline void State::play_playout(Move mv)
 {
-    LIBBOARDGAME_ASSERT(m_bd.is_legal_nonpass(mv));
+    LIBBOARDGAME_ASSERT(m_bd.is_legal(mv));
     auto to_play = m_bd.get_to_play();
     m_new_moves[to_play].push_back(mv);
-    m_bd.play_nonpass(mv);
+    m_bd.play(mv);
     m_nu_passes = 0;
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);

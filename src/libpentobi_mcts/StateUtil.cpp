@@ -76,9 +76,9 @@ bool check_symmetry_broken(const Board& bd,
             return true;
         Color previous_color = bd.get_previous(to_play);
         ColorMove last_mv = bd.get_move(nu_moves - 1);
-        if (last_mv.color != previous_color || last_mv.move.is_pass())
-            // Don't try to handle non-alternating moves or pass moves in
-            // board history
+        LIBBOARDGAME_ASSERT(last_mv.move.is_regular());
+        if (last_mv.color != previous_color)
+            // Don't try to handle non-alternating moves in board history
             return true;
         auto& info = bd.get_move_info(last_mv.move);
         for (BoardIterator i(bd); i; ++i)

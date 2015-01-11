@@ -48,25 +48,12 @@ public:
     /** Maximum number of pieces per player in any game variant. */
     static const unsigned max_pieces = Setup::max_pieces;
 
-    typedef ArrayList<Piece,BoardConst::max_pieces> PiecesLeftList;
+    typedef ArrayList<Piece, BoardConst::max_pieces> PiecesLeftList;
 
-    /** Maximum number of moves for a player in a game.
-        Non-alternating moves and alternating pass moves are allowed but the
-        game must end after all colors have passed in a row. Therefore, the
-        maximum number of moves is reached in case that a piece move is
-        followed by (Color::range-1) pass moves and an extra Color::range pass
-        moves at the end. */
-    static const unsigned max_player_moves = Color::range * max_pieces + 1;
+    static const unsigned max_player_moves = max_pieces;
 
-    static const unsigned max_nonpass_player_moves = max_pieces;
-
-    /** Maximum number of moves in any game variant.
-        Includes an extra pass move per color at the end of the game. */
+    /** Maximum number of moves in any game variant. */
     static const unsigned max_game_moves = Color::range * max_player_moves;
-
-    /** Maximum number of real (=non-pass) moves in any game variant. */
-    static const unsigned max_nonpass_game_moves =
-        Color::range * max_nonpass_player_moves;
 
     /** Use ANSI escape sequences for colored text output in operator>> */
     static bool color_output;
@@ -100,10 +87,10 @@ public:
     /** Number of instances of each unique piece per color. */
     unsigned get_nu_piece_instances() const;
 
-    unsigned get_max_nonpass_player_moves() const;
+    unsigned get_max_player_moves() const;
 
     /** Maximum number of non-pass moves in the current game variant. */
-    unsigned get_max_nonpass_game_moves() const;
+    unsigned get_max_game_moves() const;
 
     Color get_next(Color c) const;
 
@@ -174,33 +161,19 @@ public:
     void copy_from(const Board& bd);
 
     /** Play a move.
+        @pre mv.is_regular()
         @pre get_nu_moves() < max_game_moves */
-    void play(Color c, Move move);
+    void play(Color c, Move mv);
 
-    /** Play a pass move.
+    /** Play a move for the current color to play.
+        @pre mv.is_regular()
         @pre get_nu_moves() < max_game_moves */
-    void play_pass(Color c);
-
-    /** Play a pass move for the current color to play.
-        @pre get_nu_moves() < max_game_moves */
-    void play_pass();
-
-    /** Play a move that is known to be not a pass move.
-        Slightly faster than play(Color,Move)
-        @pre get_nu_moves() < max_game_moves */
-    void play_nonpass(Color c, Move move);
-
-    /** Play a move that is known to be not a pass move for the current color
-        to play.
-        Slightly faster than play(Move)
-        @pre get_nu_moves() < max_game_moves */
-    void play_nonpass(Move move);
-
-    /** See play(Color,Move) */
-    void play(ColorMove move);
-
-    /** Calls play(Color,Move) with the current color to play. */
     void play(Move mv);
+
+    /** Play a move.
+        @pre mv.move.is_regular()
+        @pre get_nu_moves() < max_game_moves */
+    void play(ColorMove mv);
 
     void undo();
 
@@ -245,13 +218,13 @@ public:
     /** Check that no color has any moves left. */
     bool is_game_over() const;
 
+    /** Check if a move is legal.
+        @pre mv.is_regular() */
     bool is_legal(Color c, Move mv) const;
 
+    /** Check if a move is legal for the current color to play.
+        @pre mv.is_regular() */
     bool is_legal(Move mv) const;
-
-    bool is_legal_nonpass(Color c, Move mv) const;
-
-    bool is_legal_nonpass(Move mv) const;
 
     /** Check that point is not already occupied or adjacent to own color.
         @param c
@@ -539,12 +512,12 @@ inline const Board::PointStateGrid& Board::get_grid() const
     return m_state_base.point_state;
 }
 
-inline unsigned Board::get_max_nonpass_game_moves() const
+inline unsigned Board::get_max_game_moves() const
 {
-    return m_nu_colors * get_max_nonpass_player_moves();
+    return m_nu_colors * get_max_player_moves();
 }
 
-inline unsigned Board::get_max_nonpass_player_moves() const
+inline unsigned Board::get_max_player_moves() const
 {
     return get_nu_pieces();
 }
@@ -796,16 +769,6 @@ inline bool Board::is_legal(Move mv) const
 
 inline bool Board::is_legal(Color c, Move mv) const
 {
-    return (mv.is_pass() || is_legal_nonpass(c, mv));
-}
-
-inline bool Board::is_legal_nonpass(Move mv) const
-{
-    return is_legal_nonpass(m_state_base.to_play, mv);
-}
-
-inline bool Board::is_legal_nonpass(Color c, Move mv) const
-{
     LIBBOARDGAME_ASSERT(mv.is_regular());
     auto& info = get_move_info(mv);
     if (! is_piece_left(c, info.get_piece()))
@@ -894,45 +857,21 @@ inline void Board::place(Color c, Move mv)
     while (++i != end);
 }
 
-inline void Board::play(ColorMove move)
-{
-    play(move.color, move.move);
-}
-
 inline void Board::play(Color c, Move mv)
-{
-    if (! mv.is_pass())
-        play_nonpass(c, mv);
-    else
-        play_pass(c);
-}
-
-inline void Board::play_nonpass(Color c, Move mv)
 {
     place(c, mv);
     m_moves.push_back(ColorMove(c, mv));
     m_state_base.to_play = get_next(c);
 }
 
-inline void Board::play_nonpass(Move mv)
+inline void Board::play(Move mv)
 {
-    play_nonpass(m_state_base.to_play, mv);
+    play(m_state_base.to_play, mv);
 }
 
-inline void Board::play_pass(Color c)
+inline void Board::play(ColorMove mv)
 {
-    m_moves.push_back(ColorMove(c, Move::pass()));
-    m_state_base.to_play = get_next(c);
-}
-
-inline void Board::play_pass()
-{
-    play_pass(m_state_base.to_play);
-}
-
-inline void Board::play(Move move)
-{
-    play(m_state_base.to_play, move);
+    play(mv.color, mv.move);
 }
 
 inline void Board::restore_snapshot()

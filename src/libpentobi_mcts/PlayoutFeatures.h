@@ -177,8 +177,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
         if (c == to_play || c == second_color)
             continue;
         auto mv = move.move;
-        if (mv.is_pass())
-            continue;
+        LIBBOARDGAME_ASSERT(mv.is_regular());
         auto& is_forbidden = bd.is_forbidden(c);
         auto& info_ext = bd.get_move_info_ext(mv);
         auto j = info_ext.begin_attach();

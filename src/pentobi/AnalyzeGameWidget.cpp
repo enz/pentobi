@@ -51,14 +51,7 @@ void AnalyzeGameWidget::initSize()
     m_borderX = width() / 50;
     m_borderY = height() / 20;
     m_maxX = width() - 2 * m_borderX;
-    // Assume max. Board::max_nonpass_game_moves. This is not really true
-    // because the tree may contain pass moves but such trees are only written
-    // in search state dumps and cannot be created by the user. Using
-    // max_game_moves would result in too small m_dX (size of the color dots)
-    // and adapting m_dX to the number of moves in this game would result in
-    // color dots of different sizes for different analyses, which also looks
-    // bad.
-    m_dX = qreal(m_maxX) / Board::max_nonpass_game_moves;
+    m_dX = qreal(m_maxX) / Board::max_game_moves;
     m_maxY = height() - 2 * m_borderY;
 }
 

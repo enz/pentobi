@@ -125,13 +125,6 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_classic_2)
     LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(1)), 3u);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(2)), 10u);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(3)), 3u);
-    // Make sure that bonus computation still works if after the 1-piece an
-    // additional pass move was played
-    bd->play_pass(Color(0));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), 109u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), 7u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(2)), 38u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(3)), 7u);
 }
 
 /** Check the number of generated moves at each attach point in a known

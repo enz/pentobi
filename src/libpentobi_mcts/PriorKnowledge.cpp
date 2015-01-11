@@ -218,8 +218,8 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
             if (nu_moves > 0)
             {
                 ColorMove last = bd.get_move(nu_moves - 1);
-                if (! last.is_pass())
-                    symmetric_mv =
+                LIBBOARDGAME_ASSERT(last.is_regular());
+                symmetric_mv =
                         bd.get_move_info_ext_2(last.move).symmetric_move;
             }
         }
@@ -313,8 +313,7 @@ void PriorKnowledge::init_local(const Board& bd)
         if (c == to_play || c == second_color)
             continue;
         auto mv = move.move;
-        if (mv.is_pass())
-            continue;
+        LIBBOARDGAME_ASSERT(mv.is_regular());
         auto& is_forbidden = bd.is_forbidden(c);
         auto& info_ext = bd.get_move_info_ext(mv);
         auto j = info_ext.begin_attach();

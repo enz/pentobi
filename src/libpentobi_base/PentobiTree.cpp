@@ -68,8 +68,11 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
     MovePoints points;
     if (! libpentobi_base::node_util::get_move(node, m_variant, c, points))
         return ColorMove::null();
-    if (points.size() == 0)
-        return ColorMove(c, Move::pass());
+    if ( points.size() == 0)
+        // Older (unreleased?) versiions of Pentobi used empty move values
+        // to encode pass moves in search tree dumps but we don't support
+        // playing pass moves in class Board anymore.
+        return ColorMove::null();
     Move mv;
     if (! m_board_const->find_move(points, mv))
         throw InvalidTree("Tree contains illegal move");

@@ -58,8 +58,6 @@ void dump_tree_recurse(Writer& writer, Variant variant,
             auto id = get_color_id(variant, to_play);
             if (! mv.is_pass())
                 writer.write_property(id, board_const.to_string(mv, false));
-            else
-                writer.write_property(id, "");
         }
         dump_tree_recurse(writer, variant, tree, *i, next_to_play);
         writer.end_tree();
