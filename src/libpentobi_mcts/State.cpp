@@ -313,36 +313,9 @@ Point State::find_best_starting_point(Color c) const
     return best;
 }
 
-bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
+bool State::gen_playout_move_full(PlayerMove<Move>& mv)
 {
-    if (m_nu_passes == m_nu_colors)
-        return false;
-
-    if (! m_is_symmetry_broken
-            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
-    {
-        // See also the comment in evaluate_playout()
-        if (log_simulations)
-            log("Terminate playout. Symmetry not broken.");
-        return false;
-    }
-
     Color to_play = m_bd.get_to_play();
-    if (! lgr2.is_null() && m_bd.is_legal(lgr2))
-    {
-        if (log_simulations)
-            log("Playing last good reply 2");
-        mv = PlayerMove<Move>(to_play.to_int(), lgr2);
-        return true;
-    }
-    if (! lgr1.is_null() && m_bd.is_legal(lgr1))
-    {
-        if (log_simulations)
-            log("Playing last good reply 1");
-        mv = PlayerMove<Move>(to_play.to_int(), lgr1);
-        return true;
-    }
-
     while (true)
     {
         if (! m_is_move_list_initialized[to_play])
