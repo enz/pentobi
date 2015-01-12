@@ -59,8 +59,6 @@ public:
     IntType to_int() const;
 
 private:
-    static const IntType value_null = range - 1;
-
     static const IntType value_uninitialized = range;
 
     IntType m_i;
@@ -108,12 +106,12 @@ inline bool Move::is_initialized() const
 inline bool Move::is_null() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    return m_i == value_null;
+    return m_i == 0;
 }
 
 inline Move Move::null()
 {
-    return Move(value_null);
+    return Move(0);
 }
 
 inline Move::IntType Move::to_int() const

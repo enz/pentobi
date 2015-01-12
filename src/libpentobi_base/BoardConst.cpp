@@ -447,15 +447,20 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
                 (height - m_geo.get_y(*i) - 1) * width + m_geo.get_x(*i);
     create_moves();
     if (board_type == BoardType::classic)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_classic);
+        LIBBOARDGAME_ASSERT(m_move_info.size()
+                            == Move::onboard_moves_classic + 1);
     else if (board_type == BoardType::trigon)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon);
+        LIBBOARDGAME_ASSERT(m_move_info.size()
+                            == Move::onboard_moves_trigon + 1);
     else if (board_type == BoardType::trigon_3)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_trigon_3);
+        LIBBOARDGAME_ASSERT(m_move_info.size()
+                            == Move::onboard_moves_trigon_3 + 1);
     else if (variant == Variant::duo)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_duo);
+        LIBBOARDGAME_ASSERT(m_move_info.size()
+                            == Move::onboard_moves_duo + 1);
     else if (variant == Variant::junior)
-        LIBBOARDGAME_ASSERT(m_move_info.size() == Move::onboard_moves_junior);
+        LIBBOARDGAME_ASSERT(m_move_info.size()
+                            == Move::onboard_moves_junior + 1);
     m_total_piece_points = 0;
     m_max_piece_size = 0;
     for (const PieceInfo& piece : m_pieces)
@@ -524,6 +529,11 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
 
 void BoardConst::create_moves()
 {
+    // Unused move infos for Move::null()
+    m_move_info.push_back(MoveInfo());
+    m_move_info_ext.push_back(MoveInfoExt());
+    m_move_info_ext_2.push_back(MoveInfoExt2());
+
     m_full_move_table.reset(new FullMoveTable);
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
@@ -772,7 +782,7 @@ void BoardConst::init_symmetry_info()
     SymmetricPoints symmetric_points;
     PointTransfRot180<Point> transform;
     symmetric_points.init(m_geo, transform);
-    for (unsigned i = 0; i < m_move_info.size(); ++i)
+    for (unsigned i = 1; i < m_move_info.size(); ++i)
     {
         const auto& info = m_move_info[i];
         auto& info_ext_2 = m_move_info_ext_2[i];
