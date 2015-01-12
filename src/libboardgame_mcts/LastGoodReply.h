@@ -92,10 +92,10 @@ inline void LastGoodReply<M, P>::get(PlayerInt player, Move last_mv,
                                      Move& lgr1, Move& lgr2) const
 {
     auto index = get_index(last_mv, second_last_mv);
-    lgr2 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_lgr2[player][index],
-                                              memory_order_relaxed));
-    lgr1 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_lgr1[player][last_mv.to_int()],
-                                              memory_order_relaxed));
+    lgr2 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(
+                    m_lgr2[player][index]));
+    lgr1 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(
+                    m_lgr1[player][last_mv.to_int()]));
 }
 
 template<class M, unsigned P>
@@ -118,16 +118,12 @@ inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
     {
         auto index = get_index(last_mv, second_last_mv);
         auto& stored_reply = m_lgr2[player][index];
-        if (LIBBOARDGAME_MCTS_ATOMIC_LOAD(stored_reply, memory_order_relaxed)
-            == reply_int)
-            LIBBOARDGAME_MCTS_ATOMIC_STORE(stored_reply, null_int,
-                                           memory_order_relaxed);
+        if (LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(stored_reply) == reply_int)
+            LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(stored_reply, null_int);
     }
     auto& stored_reply = m_lgr1[player][last_mv.to_int()];
-    if (LIBBOARDGAME_MCTS_ATOMIC_LOAD(stored_reply, memory_order_relaxed)
-        == reply_int)
-        LIBBOARDGAME_MCTS_ATOMIC_STORE(stored_reply, null_int,
-                                       memory_order_relaxed);
+    if (LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(stored_reply) == reply_int)
+        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(stored_reply, null_int);
 }
 
 template<class M, unsigned P>
@@ -137,11 +133,11 @@ inline void LastGoodReply<M, P>::store(PlayerInt player, Move last_mv,
     auto reply_int = reply.to_int();
     {
         auto index = get_index(last_mv, second_last_mv);
-        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_lgr2[player][index], reply_int,
-                                       memory_order_relaxed);
+        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_lgr2[player][index],
+                                               reply_int);
     }
-    LIBBOARDGAME_MCTS_ATOMIC_STORE(m_lgr1[player][last_mv.to_int()], reply_int,
-                                   memory_order_relaxed);
+    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_lgr1[player][last_mv.to_int()],
+                                           reply_int);
 }
 
 //-----------------------------------------------------------------------------

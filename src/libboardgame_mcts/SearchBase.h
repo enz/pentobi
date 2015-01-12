@@ -815,8 +815,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
     else
     {
         size_t nu_simulations =
-            LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_nu_simulations,
-                                          memory_order_relaxed);
+            LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_nu_simulations);
         simulations_per_sec = double(nu_simulations) / time;
     }
     double remaining_time;

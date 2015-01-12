@@ -33,6 +33,10 @@ inline T fetch_add_single_thread(T& x, const V& val)
 
 #define LIBBOARDGAME_MCTS_ATOMIC_STORE(x, v, mem_order) x = v
 
+#define LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(x) x
+
+#define LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(x, v) x = v
+
 #define LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(x, v) fetch_add_single_thread(x, v)
 
 
@@ -46,6 +50,11 @@ inline T fetch_add_single_thread(T& x, const V& val)
 #define LIBBOARDGAME_MCTS_ATOMIC_LOAD(x, mem_order) x.load(mem_order)
 
 #define LIBBOARDGAME_MCTS_ATOMIC_STORE(x, v, mem_order) x.store(v, mem_order)
+
+#define LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(x) x.load(memory_order_relaxed)
+
+#define LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(x, v) \
+    x.store(v, memory_order_relaxed)
 
 #define LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(x, v) x.fetch_add(v)
 
