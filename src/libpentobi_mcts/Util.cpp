@@ -56,7 +56,7 @@ void dump_tree_recurse(Writer& writer, Variant variant,
         {
             auto& board_const = BoardConst::get(variant);
             auto id = get_color_id(variant, to_play);
-            if (! mv.is_pass())
+            if (! mv.is_null())
                 writer.write_property(id, board_const.to_string(mv, false));
         }
         dump_tree_recurse(writer, variant, tree, *i, next_to_play);

@@ -769,7 +769,6 @@ inline bool Board::is_legal(Move mv) const
 
 inline bool Board::is_legal(Color c, Move mv) const
 {
-    LIBBOARDGAME_ASSERT(mv.is_regular());
     auto& info = get_move_info(mv);
     if (! is_piece_left(c, info.get_piece()))
         return false;
@@ -811,7 +810,6 @@ inline bool Board::is_same_player(Color c1, Color c2) const
 
 inline void Board::place(Color c, Move mv)
 {
-    LIBBOARDGAME_ASSERT(mv.is_regular());
     auto& info = get_move_info(mv);
     auto& info_ext = get_move_info_ext(mv);
     auto piece = info.get_piece();

@@ -105,7 +105,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_get_move_pass)
     auto node = &tree.get_root();
     node = &node->get_child();
     auto mv = tree.get_move(*node);
-    LIBBOARDGAME_CHECK(mv.move.is_pass());
+    LIBBOARDGAME_CHECK(mv.move.is_null());
 }
 
 /** Check that Tree constructor throws InvalidPropertyValue on unknown GM

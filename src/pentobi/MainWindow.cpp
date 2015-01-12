@@ -2017,8 +2017,6 @@ void MainWindow::genMoveFinished()
         showError("Computer failed to generate a move");
         return;
     }
-    if (mv.is_pass())
-        return;
     m_lastComputerMovesEnd = bd.get_nu_moves() + 1;
     play(c, mv);
     // Call updateWindow() before checkComputerMove() because checkComputerMove

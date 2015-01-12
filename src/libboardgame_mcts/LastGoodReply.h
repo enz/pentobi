@@ -91,7 +91,6 @@ inline void LastGoodReply<M, P>::get(PlayerInt player, Move last_mv,
                                      Move second_last_mv,
                                      Move& lgr1, Move& lgr2) const
 {
-    LIBBOARDGAME_ASSERT(! last_mv.is_null());
     auto index = get_index(last_mv, second_last_mv);
     lgr2 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_lgr2[player][index],
                                               memory_order_relaxed));
@@ -114,7 +113,6 @@ template<class M, unsigned P>
 inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
                                         Move second_last_mv, Move reply)
 {
-    LIBBOARDGAME_ASSERT(! last_mv.is_null());
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
     {
@@ -136,7 +134,6 @@ template<class M, unsigned P>
 inline void LastGoodReply<M, P>::store(PlayerInt player, Move last_mv,
                                        Move second_last_mv, Move reply)
 {
-    LIBBOARDGAME_ASSERT(! last_mv.is_null());
     auto reply_int = reply.to_int();
     {
         auto index = get_index(last_mv, second_last_mv);

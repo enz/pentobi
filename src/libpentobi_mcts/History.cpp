@@ -58,7 +58,7 @@ bool History::is_followup(
         auto mv = m_moves[i];
         while (mv.color != to_play)
         {
-            sequence.push_back(Move::pass());
+            sequence.push_back(Move::null());
             to_play = to_play.get_next(m_nu_colors);
         }
         sequence.push_back(mv.move);
@@ -66,7 +66,7 @@ bool History::is_followup(
     }
     while (m_to_play != to_play)
     {
-        sequence.push_back(Move::pass());
+        sequence.push_back(Move::null());
         to_play = to_play.get_next(m_nu_colors);
     }
     return true;

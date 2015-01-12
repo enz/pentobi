@@ -38,10 +38,8 @@ public:
 
     /** Integer range of moves.
         The maximum is given by the number of on-board moves in game variant
-        Trigon, plus a pass and a null move. */
-    static const IntType range = onboard_moves_trigon + 1 + 1;
-
-    static Move pass();
+        Trigon, plus a null move. */
+    static const IntType range = onboard_moves_trigon + 1;
 
     static Move null();
 
@@ -55,21 +53,12 @@ public:
 
     bool operator<(const Move& mv) const;
 
-    bool is_pass() const;
-
     bool is_null() const;
-
-    /** Test if move is a regular move (not a null or pass move) */
-    bool is_regular() const;
 
     /** Return move as an integer between 0 and Move::range */
     IntType to_int() const;
 
 private:
-    static const IntType max_regular_value = range - 3;
-
-    static const IntType value_pass = range - 2;
-
     static const IntType value_null = range - 1;
 
     static const IntType value_uninitialized = range;
@@ -122,26 +111,9 @@ inline bool Move::is_null() const
     return m_i == value_null;
 }
 
-inline bool Move::is_pass() const
-{
-    LIBBOARDGAME_ASSERT(is_initialized());
-    return m_i == value_pass;
-}
-
-inline bool Move::is_regular() const
-{
-    LIBBOARDGAME_ASSERT(is_initialized());
-    return m_i <= max_regular_value;
-}
-
 inline Move Move::null()
 {
     return Move(value_null);
-}
-
-inline Move Move::pass()
-{
-    return Move(value_pass);
 }
 
 inline Move::IntType Move::to_int() const

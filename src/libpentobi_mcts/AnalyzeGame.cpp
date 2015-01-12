@@ -52,7 +52,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     while (node)
     {
         auto mv = tree.get_move(*node);
-        if (mv.is_regular())
+        if (! mv.is_null())
         {
             if (! node->has_parent())
             {

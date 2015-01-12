@@ -348,7 +348,7 @@ inline PlayerInt State::get_to_play() const
 inline void State::play_in_tree(Move mv)
 {
     Color to_play = m_bd.get_to_play();
-    if (! mv.is_pass())
+    if (! mv.is_null())
     {
         LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
         m_bd.play(to_play, mv);

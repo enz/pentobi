@@ -107,11 +107,6 @@ void PlayerModel::genMoveFinished()
     setIsGenMoveRunning(false);
     auto& bd = result.boardModel->getBoard();
     auto mv = result.move;
-    if (mv.is_pass())
-    {
-        qWarning("PlayerModel: no more moves");
-        return;
-    }
     if (mv.is_null())
     {
         qWarning("PlayerModel: failed to generate move");

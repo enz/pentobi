@@ -38,10 +38,8 @@ string dump(const Board& bd)
         writer.begin_node();
         auto mv = bd.get_move(i);
         auto id = get_color_id(variant, mv.color);
-        if (! mv.is_pass())
+        if (! mv.is_null())
             writer.write_property(id, bd.to_string(mv.move, false));
-        else
-            writer.write_property(id, "");
         writer.end_node();
     }
     writer.end_tree();
@@ -55,8 +53,7 @@ void get_current_position_as_setup(const Board& bd, Setup& setup)
     for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         auto mv = bd.get_move(i);
-        if (! mv.is_pass())
-            setup.placements[mv.color].push_back(mv.move);
+        setup.placements[mv.color].push_back(mv.move);
     }
     setup.to_play = bd.get_to_play();
 }

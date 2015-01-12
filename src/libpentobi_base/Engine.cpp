@@ -278,8 +278,6 @@ void Engine::genmove(Color c, Response& response)
     auto& player = get_player();
     auto mv = player.genmove(bd, c);
     if (mv.is_null())
-        throw Failure("player failed to generate a move");
-    if (mv.is_pass())
     {
         response << "pass";
         return;
@@ -364,11 +362,12 @@ void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
     {
         throw Failure(e.what());
     }
+    if (mv.is_null())
+        throw Failure("play pass not supported (anymore)");
     if (! m_accept_illegal && ! bd.is_legal(c, mv))
         throw Failure("illegal move");
     m_game.play(c, mv, true);
-    if (! mv.is_pass())
-        board_changed();
+    board_changed();
 }
 
 void Engine::set_player(PlayerBase& player)

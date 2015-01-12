@@ -191,10 +191,10 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 {
     if (moves.empty())
     {
-        // The initialization value does not matter for a single child, but we
-        // need to use SearchParamConst::child_min_count for the count to
-        // avoid an assertion.
-        expander.add_child(Move::pass(), init_val, 3);
+        // Add a pass move. The initialization value does not matter for a
+        // single child, but we need to use SearchParamConst::child_min_count
+        // for the count to avoid an assertion.
+        expander.add_child(Move::null(), init_val, 3);
         return;
     }
     init_local(bd);
@@ -218,7 +218,6 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
             if (nu_moves > 0)
             {
                 ColorMove last = bd.get_move(nu_moves - 1);
-                LIBBOARDGAME_ASSERT(last.is_regular());
                 symmetric_mv =
                         bd.get_move_info_ext_2(last.move).symmetric_move;
             }
@@ -313,7 +312,6 @@ void PriorKnowledge::init_local(const Board& bd)
         if (c == to_play || c == second_color)
             continue;
         auto mv = move.move;
-        LIBBOARDGAME_ASSERT(mv.is_regular());
         auto& is_forbidden = bd.is_forbidden(c);
         auto& info_ext = bd.get_move_info_ext(mv);
         auto j = info_ext.begin_attach();

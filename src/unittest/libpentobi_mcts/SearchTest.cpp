@@ -79,7 +79,6 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
                               max_time, time_source);
     LIBBOARDGAME_CHECK(res);
     LIBBOARDGAME_CHECK(! mv.is_null());
-    LIBBOARDGAME_CHECK(! mv.is_pass());
 }
 
 //-----------------------------------------------------------------------------

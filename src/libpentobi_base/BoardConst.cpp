@@ -605,9 +605,7 @@ void BoardConst::create_moves(Piece piece)
 Move BoardConst::from_string(const string& s) const
 {
     string trimmed = to_lower(trim(s));
-    if (trimmed == "pass")
-        return Move::pass();
-    else if (trimmed == "null")
+    if (trimmed == "pass" || trimmed == "null")
         return Move::null();
     vector<string> v = split(trimmed, ',');
     if (v.size() > PieceInfo::max_size)
@@ -896,8 +894,6 @@ inline void BoardConst::sort(MovePoints& points) const
 string BoardConst::to_string(Move mv, bool with_piece_name) const
 {
     if (mv.is_null())
-        return "null";
-    if (mv.is_pass())
         return "pass";
     auto& info = get_move_info(mv);
     ostringstream s;

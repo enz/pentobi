@@ -137,7 +137,7 @@ void BoardUpdater::update(Board& bd, const PentobiTree& tree,
         if (libpentobi_base::node_util::has_setup(*i))
             init_setup(bd, *i);
         auto mv = tree.get_move(*i);
-        if (mv.is_regular())
+        if (! mv.is_null())
         {
             auto& info = bd.get_move_info(mv.move);
             if (! bd.is_piece_left(mv.color, info.get_piece()))

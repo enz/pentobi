@@ -136,8 +136,6 @@ bool Book::genmove(const Board& bd, Color c, Move& mv,
 Move Book::get_transformed(const Board& bd, Move mv,
                            const PointTransform& transform) const
 {
-    if (mv.is_pass())
-        return mv;
     auto& geo = bd.get_geometry();
     MovePoints points;
     for (Point p : bd.get_move_info(mv))

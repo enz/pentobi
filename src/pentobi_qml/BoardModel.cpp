@@ -547,8 +547,6 @@ void BoardModel::updateProperties()
     for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
     {
         auto mv = m_bd.get_move(i);
-        if (mv.is_pass())
-            continue;
         Piece piece = m_bd.get_move_info(mv.move).get_piece();
         auto& pieceInfo = m_bd.get_piece_info(piece);
         auto gameCoord = getGameCoord(m_bd, mv.move);

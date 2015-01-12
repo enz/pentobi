@@ -95,7 +95,7 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
 void setMoveLabel(GuiBoard& guiBoard, const Game& game, const SgfNode& node,
                   unsigned moveNumber, ColorMove mv, bool markVariations)
 {
-    if (! mv.is_regular())
+    if (mv.is_null())
         return;
     auto& bd = game.get_board();
     Point p = bd.get_move_info_ext_2(mv.move).label_pos;
@@ -119,41 +119,25 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
                unsigned markMovesEnd, bool markVariations)
 {
     guiBoard.clearMarkup();
-    if (markMovesBegin > 0)
-    {
+    if (markMovesBegin == 0)
+        return;
         auto& tree = game.get_tree();
         auto& bd = game.get_board();
-        unsigned displayedMoveNumber = 0; // pass moves have no number
-        auto node = &game.get_current();
-        do
-        {
-            auto mv = tree.get_move_ignore_invalid(*node);
-            if (mv.is_regular())
-                ++displayedMoveNumber;
-            node = node->get_parent_or_null();
-        }
-        while (node);
         unsigned moveNumber = bd.get_nu_moves();
-        node = &game.get_current();
+        auto node = &game.get_current();
         do
         {
             auto mv = tree.get_move_ignore_invalid(*node);
             if (! mv.is_null())
             {
-                if (! mv.move.is_pass())
-                {
-                    if (moveNumber >= markMovesBegin
-                        && moveNumber <= markMovesEnd)
-                        setMoveLabel(guiBoard, game, *node, moveNumber, mv,
-                                     markVariations);
-                    --displayedMoveNumber;
-                }
+                if (moveNumber >= markMovesBegin && moveNumber <= markMovesEnd)
+                    setMoveLabel(guiBoard, game, *node, moveNumber, mv,
+                                 markVariations);
                 --moveNumber;
             }
             node = node->get_parent_or_null();
         }
         while (node);
-    }
 }
 
 //-----------------------------------------------------------------------------

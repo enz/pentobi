@@ -270,11 +270,9 @@ void PentobiTree::set_game_property()
 
 void PentobiTree::set_move(const SgfNode& node, Color c, Move mv)
 {
+    LIBBOARDGAME_ASSERT(! mv.is_null());
     auto id = get_color(c);
-    if (! mv.is_pass())
-        set_property(node, id, m_board_const->to_string(mv, false));
-    else
-        set_property(node, id, "");
+    set_property(node, id, m_board_const->to_string(mv, false));
 }
 
 void PentobiTree::set_player(const SgfNode& node, Color c)

@@ -82,7 +82,7 @@ Move Player::genmove(const Board& bd, Color c)
 {
     m_resign = false;
     if (! bd.has_moves(c))
-        return Move::pass();
+        return Move::null();
     Move mv;
     auto variant = bd.get_variant();
     auto board_type = bd.get_board_type();

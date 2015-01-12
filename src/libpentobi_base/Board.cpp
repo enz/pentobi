@@ -183,7 +183,7 @@ Move Board::get_move_at(Point p) const
             if (color_mv.color == c)
             {
                 Move mv = color_mv.move;
-                if (! mv.is_pass() && get_move_info(mv).contains(p))
+                if (get_move_info(mv).contains(p))
                     return mv;
             }
     }
@@ -421,13 +421,8 @@ void Board::write(ostream& out, bool mark_last_move) const
     if (mark_last_move)
     {
         unsigned n = get_nu_moves();
-        while (n > 0)
-        {
-            --n;
-            last_mv = get_move(n);
-            if (! last_mv.move.is_pass())
-                break;
-        }
+        if (n > 0)
+            last_mv = get_move(n - 1);
     }
     unsigned width = m_geo->get_width();
     unsigned height = m_geo->get_height();
