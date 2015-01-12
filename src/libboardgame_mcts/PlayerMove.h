@@ -7,6 +7,8 @@
 #ifndef LIBBOARDGAME_MCTS_PLAYER_MOVE_H
 #define LIBBOARDGAME_MCTS_PLAYER_MOVE_H
 
+#include <cstdint>
+
 namespace libboardgame_mcts {
 
 //-----------------------------------------------------------------------------

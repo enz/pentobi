@@ -1,17 +1,24 @@
 //----------------------------------------------------------------------------
-/** @file libpentobi_base/GameStateHistory.h
+/** @file libpentobi_mcts/History.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_BASE_GAME_STATE_HISTORY_H
-#define LIBPENTOBI_BASE_GAME_STATE_HISTORY_H
+#ifndef LIBPENTOBI_MCTS_HISTORY_H
+#define LIBPENTOBI_MCTS_HISTORY_H
 
-#include "Board.h"
+#include "SearchParamConst.h"
+#include "libpentobi_base/Board.h"
 
-namespace libpentobi_base {
+namespace libpentobi_mcts {
 
-using namespace std;
+using libboardgame_util::ArrayList;
+using libpentobi_base::Board;
+using libpentobi_base::Color;
+using libpentobi_base::ColorMove;
+using libpentobi_base::Move;
+using libpentobi_base::Setup;
+using libpentobi_base::Variant;
 
 //----------------------------------------------------------------------------
 
@@ -21,13 +28,13 @@ using namespace std;
     - the game variant
     - the history of moves
     - the color to play */
-class GameStateHistory
+class History
 {
 public:
     /** Constructor.
         The initial state is that the history does not correspond to any
         valid position. */
-    GameStateHistory();
+    History();
 
     /** Initialize from a current board position and explicit color to play. */
     void init(const Board& bd, Color to_play);
@@ -46,8 +53,9 @@ public:
         required by libpentobi_mcts::Search.)
         @return @c true If the position is a followup
     */
-    bool is_followup(const GameStateHistory& other,
-                     ArrayList<Move, Board::max_game_moves>& sequence) const;
+    bool is_followup(
+            const History& other,
+            ArrayList<Move, SearchParamConst::max_moves>& sequence) const;
 
     /** Get the position of the board state as setup.
         @pre is_valid()
@@ -69,29 +77,29 @@ private:
     Color m_to_play;
 };
 
-inline GameStateHistory::GameStateHistory()
+inline History::History()
 {
     clear();
 }
 
-inline void GameStateHistory::clear()
+inline void History::clear()
 {
     m_is_valid = false;
 }
 
-inline Color GameStateHistory::get_to_play() const
+inline Color History::get_to_play() const
 {
     LIBBOARDGAME_ASSERT(m_is_valid);
     return m_to_play;
 }
 
-inline bool GameStateHistory::is_valid() const
+inline bool History::is_valid() const
 {
     return m_is_valid;
 }
 
 //----------------------------------------------------------------------------
 
-} // namespace libpentobi_base
+} // namespace libpentobi_mcts
 
-#endif // LIBPENTOBI_BASE_GAME_STATE_HISTORY_H
+#endif // LIBPENTOBI_MCTS_HISTORY_H

@@ -17,8 +17,6 @@ set(pentobi_base_STAT_SRCS
   ColorMove.h
   Game.h
   Game.cpp
-  GameStateHistory.h
-  GameStateHistory.cpp
   Geometry.h
   Grid.h
   Marker.h

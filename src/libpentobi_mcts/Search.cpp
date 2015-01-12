@@ -129,8 +129,8 @@ Search::~Search()
 bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
 {
     auto& bd = get_board();
-    m_state.init(bd, m_to_play);
-    bool is_followup = m_state.is_followup(m_last_state, sequence);
+    m_history.init(bd, m_to_play);
+    bool is_followup = m_history.is_followup(m_last_history, sequence);
 
     // If avoid_symmetric_draw is enabled, class State uses a different
     // evaluation function depending on which player is to play in the root
@@ -139,11 +139,11 @@ bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
     // symmetric draws to avoid going for such a draw). In this case, we cannot
     // reuse parts of the old search tree if the computer plays both colors.
     if (m_shared_const.avoid_symmetric_draw
-        && is_followup && m_to_play != m_last_state.get_to_play()
-        && ! check_symmetry_broken(bd, m_shared_const.symmetric_points))
+            && is_followup && m_to_play != m_last_history.get_to_play()
+            && ! check_symmetry_broken(bd, m_shared_const.symmetric_points))
         is_followup = false;
 
-    m_last_state = m_state;
+    m_last_history = m_history;
     return is_followup;
 }
 
@@ -154,7 +154,7 @@ unique_ptr<State> Search::create_state()
 
 void Search::get_root_position(Variant& variant, Setup& setup) const
 {
-    m_last_state.get_as_setup(variant, setup);
+    m_last_history.get_as_setup(variant, setup);
     setup.to_play = m_to_play;
 }
 

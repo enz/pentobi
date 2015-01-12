@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------
-/** @file libpentobi_base/GameStateHistory.cpp
+/** @file libpentobi_mcts/History.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //----------------------------------------------------------------------------
@@ -8,18 +8,18 @@
 #include <config.h>
 #endif
 
-#include "GameStateHistory.h"
+#include "History.h"
 
-#include "BoardUtil.h"
+#include "libpentobi_base/BoardUtil.h"
 
-namespace libpentobi_base {
+namespace libpentobi_mcts {
 
 using namespace std;
-using boardutil::get_current_position_as_setup;
+using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //----------------------------------------------------------------------------
 
-void GameStateHistory::get_as_setup(Variant& variant, Setup& setup) const
+void History::get_as_setup(Variant& variant, Setup& setup) const
 {
     LIBBOARDGAME_ASSERT(is_valid());
     variant = m_variant;
@@ -29,7 +29,7 @@ void GameStateHistory::get_as_setup(Variant& variant, Setup& setup) const
     get_current_position_as_setup(*bd, setup);
 }
 
-void GameStateHistory::init(const Board& bd, Color to_play)
+void History::init(const Board& bd, Color to_play)
 {
     m_is_valid = true;
     m_variant = bd.get_variant();
@@ -40,9 +40,9 @@ void GameStateHistory::init(const Board& bd, Color to_play)
     m_to_play = to_play;
 }
 
-bool GameStateHistory::is_followup(
-        const GameStateHistory& other,
-        ArrayList<Move, Board::max_game_moves>& sequence) const
+bool History::is_followup(
+        const History& other,
+        ArrayList<Move, SearchParamConst::max_moves>& sequence) const
 {
     if (! m_is_valid || ! other.m_is_valid || m_variant != other.m_variant
             || m_moves.size() < other.m_moves.size())
@@ -74,4 +74,4 @@ bool GameStateHistory::is_followup(
 
 //----------------------------------------------------------------------------
 
-} // namespace libpentobi_base
+} // namespace libpentobi_mcts

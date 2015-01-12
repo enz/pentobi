@@ -7,9 +7,10 @@
 #ifndef LIBPENTOBI_MCTS_SEARCH_H
 #define LIBPENTOBI_MCTS_SEARCH_H
 
+#include "History.h"
+#include "SearchParamConst.h"
 #include "State.h"
 #include "libboardgame_mcts/SearchBase.h"
-#include "libpentobi_base/GameStateHistory.h"
 
 namespace libpentobi_mcts {
 
@@ -18,34 +19,7 @@ using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::SearchBase;
 using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
-using libpentobi_base::GameStateHistory;
 using libpentobi_base::Setup;
-
-//-----------------------------------------------------------------------------
-
-/** Optional compile-time parameters for libboardgame_mcts::Search.
-    See libboardgame_mcts::SearchParamConstDefault for the meaning of the
-    members. */
-struct SearchParamConst
-{
-    typedef libpentobi_mcts::Float Float;
-
-    static const PlayerInt max_players = 6;
-
-    static const unsigned max_moves = Board::max_game_moves;
-
-    static const bool rave = true;
-
-    static const bool rave_check_same = false;
-
-    static const bool rave_dist_weighting = true;
-
-    static const bool use_last_good_reply = true;
-
-    static const bool virtual_loss = true;
-
-    static const unsigned child_min_count = 3;
-};
 
 //-----------------------------------------------------------------------------
 
@@ -104,7 +78,7 @@ public:
     /** Get color to play at root node of the last search. */
     Color get_to_play() const;
 
-    const GameStateHistory& get_last_state() const;
+    const History& get_last_history() const;
 
     /** Get board position of last search at root node as setup.
         @param[out] variant
@@ -127,9 +101,9 @@ private:
     SharedConst m_shared_const;
 
     /** Local variable reused for efficiency. */
-    GameStateHistory m_state;
+    History m_history;
 
-    GameStateHistory m_last_state;
+    History m_last_history;
 
     const Board& get_board() const;
 
@@ -151,9 +125,9 @@ inline const Board& Search::get_board() const
     return *m_shared_const.board;
 }
 
-inline const GameStateHistory& Search::get_last_state() const
+inline const History& Search::get_last_history() const
 {
-    return m_last_state;
+    return m_last_history;
 }
 
 inline PlayerInt Search::get_nu_players() const
