@@ -465,19 +465,18 @@ inline Move Board::from_string(const string& s) const
 
 inline unsigned Board::get_adj_status(Point p, Color c) const
 {
-    unsigned result = 0;
-    unsigned val = 1;
     auto& adj_status_list = m_board_const->get_adj_status_list(p);
     auto i = adj_status_list.begin();
     auto end = adj_status_list.end();
     LIBBOARDGAME_ASSERT(i != end);
-    do
+    unsigned val = 1;
+    unsigned result = is_forbidden(*i, c) ? val : 0;
+    while (++i != end)
     {
+        val <<= 1;
         if (is_forbidden(*i, c))
             result |= val;
-        val <<= 1;
     }
-    while (++i != end);
     return result;
 }
 
