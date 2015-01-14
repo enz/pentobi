@@ -50,7 +50,7 @@ void TreeReader::on_begin_node(bool is_root)
 {
     if (is_root)
     {
-        m_root.reset(new SgfNode());
+        m_root.reset(new SgfNode);
         m_current = m_root.get();
     }
     else

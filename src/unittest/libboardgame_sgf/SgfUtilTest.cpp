@@ -20,7 +20,7 @@ using namespace libboardgame_sgf::util;
 
 LIBBOARDGAME_TEST_CASE(sgf_util_get_path_from_root)
 {
-    unique_ptr<SgfNode> root(new SgfNode());
+    unique_ptr<SgfNode> root(new SgfNode);
     auto& child = root->create_new_child();
     vector<const SgfNode*> path;
     get_path_from_root(child, path);

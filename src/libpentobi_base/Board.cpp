@@ -368,7 +368,7 @@ void Board::place_setup(const Setup& setup)
 void Board::take_snapshot()
 {
     if (! m_snapshot)
-        m_snapshot.reset(new Snapshot());
+        m_snapshot.reset(new Snapshot);
     optimize_attach_point_lists();
     m_snapshot->moves_size = m_moves.size();
     m_snapshot->state_base.to_play = m_state_base.to_play;

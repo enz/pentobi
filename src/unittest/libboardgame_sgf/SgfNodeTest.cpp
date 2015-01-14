@@ -19,7 +19,7 @@ using namespace libboardgame_sgf;
 
 LIBBOARDGAME_TEST_CASE(sgf_node_create_new_child)
 {
-    unique_ptr<SgfNode> parent(new SgfNode());
+    unique_ptr<SgfNode> parent(new SgfNode);
     auto& child = parent->create_new_child();
     LIBBOARDGAME_CHECK_EQUAL(&parent->get_child(), &child);
     LIBBOARDGAME_CHECK_EQUAL(&child.get_parent(), parent.get());
@@ -28,7 +28,7 @@ LIBBOARDGAME_TEST_CASE(sgf_node_create_new_child)
 LIBBOARDGAME_TEST_CASE(sgf_node_remove_property)
 {
     string id = "B";
-    unique_ptr<SgfNode> node(new SgfNode());
+    unique_ptr<SgfNode> node(new SgfNode);
     LIBBOARDGAME_CHECK(! node->has_property(id));
     node->set_property(id, "foo");
     LIBBOARDGAME_CHECK(node->has_property(id));

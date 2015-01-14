@@ -134,7 +134,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
     unique_ptr<Board> bd(new Board(Variant::classic));
     Color c(0);
     play(*bd, c, "i11,j11,k11,l11");
-    unique_ptr<MoveList> moves(new MoveList());
+    unique_ptr<MoveList> moves(new MoveList);
     for (Point p : bd->get_attach_points(c))
     {
         bd->gen_moves(c, p, *moves);
@@ -146,7 +146,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
 {
     unique_ptr<Board> bd(new Board(Variant::classic));
-    unique_ptr<MoveList> moves(new MoveList());
+    unique_ptr<MoveList> moves(new MoveList);
     bd->gen_moves(Color(0), bd->get_geometry().get_point(0, 19), *moves);
     LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u);
 }

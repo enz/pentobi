@@ -213,7 +213,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
       m_helpWindow(nullptr),
       m_ratingDialog(nullptr),
       m_analyzeGameWindow(nullptr),
-      m_legalMoves(new MoveList()),
+      m_legalMoves(new MoveList),
       m_leaveFullscreenButton(nullptr)
 {
     Util::initDataDir();

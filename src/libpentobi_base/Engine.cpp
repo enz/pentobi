@@ -59,7 +59,7 @@ void Engine::board_changed()
 void Engine::cmd_all_legal(const Arguments& args, Response& response)
 {
     auto& bd = get_board();
-    unique_ptr<MoveList> moves(new MoveList());
+    unique_ptr<MoveList> moves(new MoveList);
     bd.gen_moves(get_color_arg(args), *moves);
     for (Move mv : *moves)
         response << bd.to_string(mv, false) << '\n';

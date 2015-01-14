@@ -37,7 +37,7 @@ Player::Player(Variant initial_variant, const string& books_dir,
       m_resign_min_simulations(500),
       m_search(initial_variant, nu_threads, memory),
       m_book(initial_variant),
-      m_time_source(new WallTimeSource())
+      m_time_source(new WallTimeSource)
 {
     for (unsigned i = 0; i < Board::max_player_moves; ++i)
     {
@@ -275,9 +275,9 @@ bool Player::resign() const
 void Player::use_cpu_time(bool enable)
 {
     if (enable)
-        m_time_source.reset(new CpuTimeSource());
+        m_time_source.reset(new CpuTimeSource);
     else
-        m_time_source.reset(new WallTimeSource());
+        m_time_source.reset(new WallTimeSource);
 }
 
 //-----------------------------------------------------------------------------
