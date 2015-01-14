@@ -73,7 +73,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_command)
     istringstream in("version\n");
     ostringstream out;
     Engine engine;
-    engine.exec_main_loop_st(in, out);
+    engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK_EQUAL(string("= \n\n"), out.str());
 }
 
@@ -82,7 +82,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_command_with_id)
     istringstream in("10 version\n");
     ostringstream out;
     Engine engine;
-    engine.exec_main_loop_st(in, out);
+    engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK_EQUAL(string("=10 \n\n"), out.str());
 }
 
@@ -92,7 +92,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_empty_lines)
     istringstream in("invalid_response\n");
     ostringstream out;
     InvalidResponseEngine engine;
-    engine.exec_main_loop_st(in, out);
+    engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK_EQUAL(string("= This response is invalid\n"
                              " \n"
                              "because it contains an empty line\n"
@@ -106,7 +106,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_empty_lines_2)
     istringstream in("invalid_response_2\n");
     ostringstream out;
     InvalidResponseEngine engine;
-    engine.exec_main_loop_st(in, out);
+    engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK_EQUAL(string("= This response is invalid\n"
                              " \n"
                              " \n"
@@ -128,7 +128,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_unknown_command)
     istringstream in("unknowncommand\n");
     ostringstream out;
     Engine engine;
-    engine.exec_main_loop_st(in, out);
+    engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK(out.str().size() >= 2);
     LIBBOARDGAME_CHECK_EQUAL(string("? "), out.str().substr(0, 2));
 }

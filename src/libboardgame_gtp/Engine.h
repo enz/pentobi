@@ -89,17 +89,8 @@ public:
         Reads lines from input stream, calls the corresponding command handler
         and writes the response to the output stream. Empty lines in the
         command responses will be replaced by a line containing a single space,
-        because empty lines are not allowed in GTP responses.
-        @note If a command handler throws an exception other than Failure, the
-        input stream can no longer be used, because it might not be possible to
-        terminate the read thread if it is currently doing a blocking read on
-        the input stream. */
+        because empty lines are not allowed in GTP responses. */
     void exec_main_loop(istream& in, ostream& out);
-
-    /** Single-threaded version of exec_main_loop().
-        Does not start threads for supporting pondering or interruption.
-        This function can be used if pondering or interruption is not needed. */
-    void exec_main_loop_st(istream& in, ostream& out);
 
     /** Register command handler.
         If a command was already registered with the same name, it will be
@@ -141,39 +132,6 @@ public:
 
     /** Unregister a command. */
     void remove(const string& name);
-
-    /** Ponder.
-        This function will be called in main_loop() while the engine is waiting
-        for the next command.
-        It will be called after init_ponder() from a different thread than the
-        command thread, but only while waiting for the next command, so no
-        concurrent execution of this function and other engine functions is
-        possible. The function should return immediately when stop_ponder() is
-        called. init_ponder() and stop_ponder() are called from the command
-        thread. In a typical implementation, init_ponder() will clear an abort
-        flag and stop_ponder() will set it. ponder() will poll the abort flag
-        and return when it is set (or it has nothing to do; or some maximum
-        time limit for pondering was exceeded).
-        The default implementation does nothing and returns immediately. */
-    virtual void ponder();
-
-    /** Prepare for pondering.
-        @see ponder()
-        The default implementation does nothing. */
-    virtual void init_ponder();
-
-    /** Stop pondering.
-        @see ponder()
-        The default implementation does nothing. */
-    virtual void stop_ponder();
-
-    /** Interrupt the current command.
-        This function implements interrupt functionality as used by
-        @ref libboardgame_doc_gogui. It will be called from a different thread
-        that the command thread when the special command line
-        <tt># interrupt</tt> is received.
-        The default implementation does nothing. */
-    virtual void interrupt();
 
 protected:
     /** Hook function to be executed before each command.

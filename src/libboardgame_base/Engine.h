@@ -24,14 +24,11 @@ class Engine
 public:
     void cmd_cputime(Response&);
     void cmd_cputime_diff(Response&);
-    void cmd_interrupt();
     void cmd_set_random_seed(const Arguments&);
 
     Engine();
 
     ~Engine();
-
-    void interrupt() override;
 
 protected:
     void on_handle_cmd_begin() override;

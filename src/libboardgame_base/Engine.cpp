@@ -29,7 +29,6 @@ Engine::Engine()
 {
     add("cputime", &Engine::cmd_cputime);
     add("cputime_diff", &Engine::cmd_cputime_diff);
-    add("gogui-interrupt", &Engine::cmd_interrupt);
     add("set_random_seed", &Engine::cmd_set_random_seed);
 }
 
@@ -59,23 +58,12 @@ void Engine::cmd_cputime_diff(Response& response)
     response << diff;
 }
 
-/** Indicate that commands can be interrupted using the GoGui convention.
-    See the documentation of GoGui, chapter "Interrupting commands" */
-void Engine::cmd_interrupt()
-{
-}
-
 /** Set global random seed.
     Compatible with @ref libboardgame_doc_gnugo <br>
     Arguments: random seed */
 void Engine::cmd_set_random_seed(const Arguments& args)
 {
     RandomGenerator::set_global_seed(args.parse<RandomGenerator::ResultType>());
-}
-
-void Engine::interrupt()
-{
-    set_abort();
 }
 
 void Engine::on_handle_cmd_begin()

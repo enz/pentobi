@@ -158,21 +158,16 @@ int main(int argc, char** argv)
             engine.exec(in, true, get_log());
         }
         auto& args = opt.get_args();
-        // We currently don't need the ability to interrupt commands, so we
-        // use exec_main_loop_st(), not exec_main_loop(), and remove the
-        // gogui-interrupt command, which indicates this ability to
-        // controllers.
-        engine.remove("gogui-interrupt");
         if (! args.empty())
             for (auto& file : args)
             {
                 ifstream in(file);
                 if (! in)
                     throw Exception("Error opening " + file);
-                engine.exec_main_loop_st(in, cout);
+                engine.exec_main_loop(in, cout);
             }
         else
-            engine.exec_main_loop_st(cin, cout);
+            engine.exec_main_loop(cin, cout);
         return 0;
     }
     catch (const Failure& e)
