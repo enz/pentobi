@@ -202,7 +202,6 @@ bool Engine::exec(istream& in, bool throw_on_fail, ostream& log)
 
 void Engine::exec_main_loop(istream& in, ostream& out)
 {
-    in.tie(nullptr); // See comment in exec_main_loop()
     m_quit = false;
     CmdLine cmd;
     Response response;
