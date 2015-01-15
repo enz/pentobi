@@ -56,6 +56,7 @@ inline void State::add_moves(Point p, Color c,
                              const Board::PiecesLeftList& pieces_considered)
 {
     auto& moves = m_moves[c];
+    auto nu_moves = moves.size();
     auto& marker = m_marker[c];
     auto& playout_features = m_playout_features[c];
     auto adj_status = m_bd.get_adj_status(p, c);
@@ -64,9 +65,10 @@ inline void State::add_moves(Point p, Color c,
     for (Piece piece : pieces_considered)
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
-                    && check_move(mv, get_move_info(mv), moves,
+                    && check_move(mv, get_move_info(mv), moves, nu_moves,
                                   playout_features, total_gamma))
                 marker.set(mv);
+    moves.resize(nu_moves);
     m_moves_added_at[c].set(p);
 }
 
@@ -74,13 +76,15 @@ inline void State::add_moves(Point p, Color c, Piece piece,
                              unsigned adj_status, double& total_gamma)
 {
     auto& moves = m_moves[c];
+    auto nu_moves = moves.size();
     auto& marker = m_marker[c];
     auto& playout_features = m_playout_features[c];
     for (Move mv : get_moves(c, piece, p, adj_status))
         if (! marker[mv]
-                && check_move(mv, get_move_info(mv), moves, playout_features,
-                              total_gamma))
+                && check_move(mv, get_move_info(mv), moves, nu_moves,
+                              playout_features, total_gamma))
             marker.set(mv);
+    moves.resize(nu_moves);
 }
 
 void State::add_starting_moves(Color c,
@@ -95,31 +99,30 @@ void State::add_starting_moves(Color c,
     if (p.is_null())
         return;
     auto& moves = m_moves[c];
+    LIBBOARDGAME_ASSERT(moves.empty());
+    unsigned nu_moves = 0;
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
     double total_gamma = 0;
     for (Piece piece : pieces_considered)
-    {
         for (Move mv : get_moves(c, piece, p, 0))
         {
             LIBBOARDGAME_ASSERT(! marker[mv]);
-            if (check_forbidden(is_forbidden, mv))
+            if (check_forbidden(is_forbidden, mv, moves, nu_moves))
             {
                 marker.set(mv);
                 if (with_gamma)
                 {
                     total_gamma += m_gamma_piece[piece];
-                    m_cumulative_gamma[moves.size()] = total_gamma;
-                    moves.push_back(mv);
+                    m_cumulative_gamma[nu_moves - 1] = total_gamma;
                 }
-                else
-                    moves.push_back(mv);
             }
         }
-    }
+    moves.resize(nu_moves);
 }
 
-bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv)
+bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv,
+                            MoveList& moves, unsigned& nu_moves)
 {
     auto& info = get_move_info(mv);
     auto p = info.begin();
@@ -133,10 +136,14 @@ bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv)
         if (is_forbidden[*p])
             return false;
     }
+    LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
+    moves.get_unchecked(nu_moves) = mv;
+    ++nu_moves;
     return true;
 }
 
 bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
+                       unsigned& nu_moves,
                        const PlayoutFeatures& playout_features,
                        double& total_gamma)
 {
@@ -160,8 +167,10 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
             gamma *= 1e5;
     }
     total_gamma += gamma;
-    m_cumulative_gamma[moves.size()] = total_gamma;
-    moves.push_back(mv);
+    m_cumulative_gamma[nu_moves] = total_gamma;
+    LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
+    moves.get_unchecked(nu_moves) = mv;
+    ++nu_moves;
     return true;
 }
 
@@ -437,19 +446,22 @@ void State::init_moves_without_gamma(Color c)
     if (m_bd.is_first_piece(c))
         add_starting_moves(c, pieces_considered, false);
     else
+    {
+        unsigned nu_moves = 0;
         for (Point p : m_bd.get_attach_points(c))
             if (! is_forbidden[p])
             {
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces_considered)
                     for (Move mv : get_moves(c, piece, p, adj_status))
-                        if (! marker[mv] && check_forbidden(is_forbidden, mv))
-                        {
+                        if (! marker[mv]
+                                && check_forbidden(is_forbidden, mv, moves,
+                                                   nu_moves))
                             marker.set(mv);
-                            moves.push_back(mv);
-                        }
                 m_moves_added_at[c].set(p);
             }
+        moves.resize(nu_moves);
+    }
     m_is_move_list_initialized[c] = true;
     m_new_moves[c].clear();
     if (moves.empty() && ! m_force_consider_all_pieces)
@@ -580,6 +592,7 @@ void State::update_moves(Color c)
     auto& moves = m_moves[c];
     auto old_size = moves.size();
     moves.clear();
+    unsigned nu_moves = 0;
     double total_gamma = 0;
     if (new_moves.size() == 1 && m_bd.get_nu_piece_instances() == 1)
     {
@@ -590,8 +603,8 @@ void State::update_moves(Color c)
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
             if (info.get_piece() == piece
-                    || ! check_move(mv, info, moves, playout_features,
-                                    total_gamma))
+                    || ! check_move(mv, info, moves, nu_moves,
+                                    playout_features, total_gamma))
                 marker.clear(mv);
         }
     }
@@ -606,11 +619,12 @@ void State::update_moves(Color c)
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
             if (! is_piece_left[info.get_piece()]
-                    || ! check_move(mv, info, moves, playout_features,
-                                    total_gamma))
+                    || ! check_move(mv, info, moves,  nu_moves,
+                                    playout_features, total_gamma))
                 marker.clear(mv);
         }
     }
+    moves.resize(nu_moves);
 
     // Find new legal moves because of new pieces played by this color
     Board::PiecesLeftList pieces_considered;
