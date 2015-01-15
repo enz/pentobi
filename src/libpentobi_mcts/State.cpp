@@ -122,13 +122,17 @@ void State::add_starting_moves(Color c,
 bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv)
 {
     auto& info = get_move_info(mv);
-    auto i = info.begin();
-    if (is_forbidden[*i])
+    auto p = info.begin();
+    if (is_forbidden[*p])
         return false;
     auto end = info.end();
-    while (++i != end)
-        if (is_forbidden[*i])
+    for (unsigned i = 1; i < PieceInfo::max_size; ++i)
+    {
+        if (++p == end)
+            break;
+        if (is_forbidden[*p])
             return false;
+    }
     return true;
 }
 
@@ -136,14 +140,18 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
                        const PlayoutFeatures& playout_features,
                        double& total_gamma)
 {
-    auto i = info.begin();
-    PlayoutFeatures::Compute features(*i, playout_features);
+    auto p = info.begin();
+    PlayoutFeatures::Compute features(*p, playout_features);
     if (features.is_forbidden())
         return false;
     auto end = info.end();
-    while (++i != end)
-        if (! features.add(*i, playout_features))
+    for (unsigned i = 1; i < PieceInfo::max_size; ++i)
+    {
+        if (++p == end)
+            break;
+        if (! features.add(*p, playout_features))
             return false;
+    }
     double gamma = m_gamma_piece[info.get_piece()];
     if (features.has_local())
     {
