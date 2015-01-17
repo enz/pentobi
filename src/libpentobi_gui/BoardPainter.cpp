@@ -309,6 +309,8 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
     }
     for (Point p : points)
     {
+        if (p.is_null())
+            continue;
         qreal fieldX = m_geo->get_x(p) * m_fieldWidth;
         qreal fieldY = m_geo->get_y(p) * m_fieldHeight;
         if (m_isTrigon)
