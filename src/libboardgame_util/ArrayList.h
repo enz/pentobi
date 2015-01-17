@@ -34,7 +34,9 @@ template<typename T, unsigned M, typename I = unsigned>
 class ArrayList
 {
 public:
-    static_assert(numeric_limits<I>::is_integer, "");
+    typedef I IntType;
+
+    static_assert(numeric_limits<IntType>::is_integer, "");
 
     typedef T* iterator;
 
@@ -42,7 +44,7 @@ public:
 
     typedef T value_type;
 
-    static const I max_size = M;
+    static const IntType max_size = M;
 
     ArrayList();
 
