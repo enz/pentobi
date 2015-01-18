@@ -16,6 +16,8 @@ Version 9.0.UNKNOWN (v9-fixes)
   Added an "All files" filter to the Export/ASCII Art file dialog.
 * Remembering the playing level separately for each game variant did not
   work if the game variant was implicitely changed by opening a file.
+* "View/Move Numbers/Last" did not behave correctly after all colors were
+  enabled in the Computer Colors dialog while a move generation was running.
 
 
 Version 9.0 (10 Dec 2014)
