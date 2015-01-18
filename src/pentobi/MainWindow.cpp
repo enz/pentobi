@@ -2019,8 +2019,10 @@ void MainWindow::genMoveFinished()
     }
     if (mv.is_pass())
         return;
-    m_lastComputerMovesEnd = bd.get_nu_moves() + 1;
     play(c, mv);
+    m_lastComputerMovesEnd = bd.get_nu_moves();
+    if (computerPlaysAll())
+        m_lastComputerMovesBegin = m_lastComputerMovesEnd;
     // Call updateWindow() before checkComputerMove() because checkComputerMove
     // resets m_lastComputerMovesBegin if computer doesn't play current color
     // and updateWindow needs m_lastComputerMovesBegin
