@@ -135,11 +135,15 @@ inline void PlayoutFeatures::restore_snapshot(const Board& bd)
 
 inline void PlayoutFeatures::set_forbidden(const MoveInfo& info)
 {
-    auto i = info.begin();
+    auto p = info.begin();
     auto end = info.end();
-    do
-        m_point_value[*i] = 0x1000u;
-    while (++i != end);
+    m_point_value[*p] = 0x1000u;
+    for (unsigned i = 1; i < PieceInfo::max_size; ++i)
+    {
+        if (++p == end)
+            return;
+        m_point_value[*p] = 0x1000u;
+    }
 }
 
 inline void PlayoutFeatures::set_forbidden(const MoveInfoExt& info_ext)
