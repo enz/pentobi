@@ -86,7 +86,7 @@ streamsize FdOutBuf::xsputn(const char_type* s, streamsize count)
 //-----------------------------------------------------------------------------
 
 FdOutStream::FdOutStream(int fd)
-    : ostream(0),
+    : ostream(nullptr),
       m_buf(fd)
 {
     rdbuf(&m_buf);
