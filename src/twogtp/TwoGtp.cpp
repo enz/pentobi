@@ -20,7 +20,8 @@ using libboardgame_sgf::Writer;
 using libboardgame_util::log;
 using libboardgame_util::trim;
 using libpentobi_base::get_multiplayer_result;
-using libpentobi_base::get_nu_players;
+using libpentobi_base::ColorIterator;
+using libpentobi_base::Move;
 
 //-----------------------------------------------------------------------------
 
@@ -30,6 +31,7 @@ TwoGtp::TwoGtp(const string& black, const string& white, Variant variant,
     : m_quiet(quiet),
       m_variant(variant),
       m_nu_games(nu_games),
+      m_bd(variant),
       m_output(output),
       m_black(black),
       m_white(white)
@@ -53,33 +55,27 @@ TwoGtp::TwoGtp(const string& black, const string& white, Variant variant,
     }
 }
 
-float TwoGtp::get_result(unsigned player_black, const string& final_score)
+float TwoGtp::get_result(unsigned player_black)
 {
-    unsigned nu_players = get_nu_players(m_variant);
     float result;
+    auto nu_players = m_bd.get_nu_players();
     if (nu_players == 2)
     {
-        if (final_score.find("B+") != string::npos)
+        int score = m_bd.get_score(Color(0));
+        if (score > 0)
             result = 1;
-        else if (final_score.find("W+") != string::npos)
+        else if (score < 0)
             result = 0;
-        else if (trim(final_score) == "0")
-            result = 0.5;
         else
-            throw Exception("invalid final_score: " + final_score);
+            result = 0.5;
         if (player_black != 0)
             result = 1 - result;
     }
     else
     {
         array<unsigned, Color::range> points;
-        istringstream in(final_score);
-        for (unsigned i = 0; i < nu_players; ++i)
-        {
-            in >> points[i];
-            if (! in)
-                throw Exception("invalid final_score: " + final_score);
-        }
+        for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+            points[i] = m_bd.get_points(Color(i));
         array<float, Color::range> player_result;
         get_multiplayer_result(nu_players, points, player_result);
         result = player_result[player_black];
@@ -95,17 +91,13 @@ void TwoGtp::play_game(unsigned game_number)
         log("Game ", game_number);
         log("=====================================================");
     }
+    m_bd.init();
     send_both("clear_board");
     auto cpu_black = send_cputime(m_black);
     auto cpu_white = send_cputime(m_white);
-    unsigned nu_players = get_nu_players(m_variant);
-    unsigned nu_colors = get_nu_colors(m_variant);
+    unsigned nu_players = m_bd.get_nu_players();
     unsigned player_black = game_number % nu_players;
-    m_has_moves.fill(true);
-    unsigned nu_moves = 0;
-    unsigned nu_passes = 0;
     bool resign = false;
-    unsigned color_to_play = 0;
     unsigned player;
     ostringstream sgf_string;
     Writer sgf(sgf_string);
@@ -115,38 +107,30 @@ void TwoGtp::play_game(unsigned game_number)
     sgf.write_property("GM", to_string(m_variant));
     sgf.write_property("GN", game_number);
     sgf.end_node();
-    while (true)
+    while (! m_bd.is_game_over())
     {
-        if (m_variant == Variant::classic_3 && color_to_play == 3)
-            player = nu_moves % 3;
+        auto to_play = m_bd.get_effective_to_play();
+        if (m_variant == Variant::classic_3 && to_play == Color(3))
+            player = m_bd.get_alt_player();
         else
-            player = color_to_play % nu_players;
+            player = to_play.to_int() % nu_players;
         auto& player_connection = (player == player_black ? m_black : m_white);
         auto& other_connection = (player == player_black ? m_white : m_black);
-        auto color = m_colors[color_to_play];
-        auto move = player_connection.send(string("genmove ") + color);
-        if (move == "resign")
+        auto color = m_colors[to_play.to_int()];
+        auto response = player_connection.send(string("genmove ") + color);
+        if (response == "resign")
         {
             resign = true;
             break;
         }
-        if (move == "pass")
-        {
-            m_has_moves[color_to_play] = false;
-            if (++nu_passes == nu_colors)
-                break;
-        }
-        else
-        {
-            sgf.begin_node();
-            sgf.write_property(string(1, toupper(color[0])), move);
-            sgf.end_node();
-            other_connection.send(string("play ") + color + " " + move);
-            ++nu_moves;
-        }
-        do
-            color_to_play = (color_to_play + 1) % nu_colors;
-        while (! m_has_moves[color_to_play]);
+        sgf.begin_node();
+        sgf.write_property(string(1, toupper(color[0])), response);
+        sgf.end_node();
+        Move mv = m_bd.from_string(response);
+        if (mv.is_null() || ! m_bd.is_legal(to_play, mv))
+            throw Exception("invalid move: " + response);
+        m_bd.play(to_play, mv);
+        other_connection.send(string("play ") + color + " " + response);
     }
     cpu_black = send_cputime(m_black) - cpu_black;
     cpu_white = send_cputime(m_white) - cpu_white;
@@ -158,13 +142,10 @@ void TwoGtp::play_game(unsigned game_number)
         result = (player == player_black ? 0 : 1);
     }
     else
-    {
-        string final_score = m_black.send("final_score");
-        result = get_result(player_black, final_score);
-    }
+        result = get_result(player_black);
     sgf.end_tree();
-    m_output.add_result(game_number, result, nu_moves, player_black, cpu_black,
-                        cpu_white, sgf_string.str());
+    m_output.add_result(game_number, result, m_bd.get_nu_moves(), player_black,
+                        cpu_black, cpu_white, sgf_string.str());
 }
 
 void TwoGtp::run()

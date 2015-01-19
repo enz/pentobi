@@ -10,10 +10,10 @@
 #include <array>
 #include "GtpConnection.h"
 #include "OutputFile.h"
-#include "libpentobi_base/Color.h"
-#include "libpentobi_base/Variant.h"
+#include "libpentobi_base/Board.h"
 
 using namespace std;
+using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::Variant;
 
@@ -35,17 +35,17 @@ private:
 
     unsigned m_nu_games;
 
+    Board m_bd;
+
     OutputFile& m_output;
 
     GtpConnection m_black;
 
     GtpConnection m_white;
 
-    array<bool, Color::range> m_has_moves;
-
     array<const char*, Color::range> m_colors;
 
-    float get_result(unsigned player_black, const string& final_score);
+    float get_result(unsigned player_black);
 
     void play_game(unsigned game_number);
 
