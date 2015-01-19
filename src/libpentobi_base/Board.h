@@ -471,8 +471,10 @@ inline unsigned Board::get_adj_status(Point p, Color c) const
     LIBBOARDGAME_ASSERT(i != end);
     unsigned val = 1;
     unsigned result = is_forbidden(*i, c) ? val : 0;
-    while (++i != end)
+    for (unsigned j = 1; j < PrecompMoves::adj_status_nu_adj; ++j)
     {
+        if (++i == end)
+            break;
         val <<= 1;
         if (is_forbidden(*i, c))
             result |= val;
