@@ -60,19 +60,23 @@ int main(int argc, char** argv)
         if (! parse_variant_id(variant_string, variant))
             throw Exception("invalid game variant " + variant_string);
         OutputFile output_file(prefix);
-        vector<thread> threads;
+        vector<shared_ptr<TwoGtp>> twogtp;
         for (unsigned i = 0; i < nu_threads; ++i)
-            threads.push_back(thread([i, nu_threads, &black, &white, variant,
-                                     nu_games, &output_file, &result]()
+        {
+            string log_prefix;
+            if (nu_threads > 1)
+                log_prefix = to_string(i + 1);
+            twogtp.push_back(make_shared<TwoGtp>(black, white, variant,
+                                                 nu_games, output_file,
+                                                 false, log_prefix));
+        }
+        vector<thread> threads;
+        for (auto& i : twogtp)
+            threads.push_back(thread([&i, &result]()
             {
                 try
                 {
-                    string log_prefix;
-                    if (nu_threads > 1)
-                        log_prefix = to_string(i + 1);
-                    TwoGtp twogtp(black, white, variant, nu_games, output_file,
-                                  false, log_prefix);
-                    twogtp.run();
+                    i->run();
                 }
                 catch (const exception& e)
                 {
