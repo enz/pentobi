@@ -45,7 +45,11 @@ struct SearchParamConst
 
     static const bool use_lgr = true;
 
+#if PENTOBI_LOW_RESOURCES
+    static const size_t lgr_hash_table_size = (1 << 20);
+#else
     static const size_t lgr_hash_table_size = (1 << 21);
+#endif
 
     static const bool virtual_loss = true;
 
