@@ -43,7 +43,9 @@ struct SearchParamConst
 
     static const bool rave_dist_weighting = true;
 
-    static const bool use_last_good_reply = true;
+    static const bool use_lgr = true;
+
+    static const size_t lgr_hash_table_size = (1 << 21);
 
     static const bool virtual_loss = true;
 

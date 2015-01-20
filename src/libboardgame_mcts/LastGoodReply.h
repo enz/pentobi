@@ -34,14 +34,18 @@ using namespace std;
     in a hash table without collision check. But since the replies have to be
     checked for legality in the current position anyway and the collisions are
     probably rare, no major negative effect is expected from these collisions.
-    @see Search::set_last_good_reply() */
-template<class M, unsigned P>
+    @tparam M The move type.
+    @tparam P The (maximum) number of players.
+    @tparam S The number of entries in the LGR2 has table (per player). */
+template<class M, unsigned P, size_t S>
 class LastGoodReply
 {
 public:
     typedef M Move;
 
     static const unsigned max_players = P;
+
+    static const size_t hash_table_size = S;
 
     LastGoodReply();
 
@@ -57,8 +61,6 @@ public:
              Move& lgr1, Move& lgr2) const;
 
 private:
-    static const size_t hash_table_size = (1 << 21);
-
     size_t m_hash[Move::range];
 
     LIBBOARDGAME_MCTS_ATOMIC(typename Move::IntType)
@@ -70,26 +72,26 @@ private:
     size_t get_index(Move last_mv, Move second_last_mv) const;
 };
 
-template<class M, unsigned P>
-LastGoodReply<M, P>::LastGoodReply()
+template<class M, unsigned P, size_t S>
+LastGoodReply<M, P, S>::LastGoodReply()
 {
     mt19937 generator;
     for (auto& hash : m_hash)
         hash = generator();
 }
 
-template<class M, unsigned P>
-inline size_t LastGoodReply<M, P>::get_index(Move last_mv,
-                                             Move second_last_mv) const
+template<class M, unsigned P, size_t S>
+inline size_t LastGoodReply<M, P, S>::get_index(Move last_mv,
+                                                Move second_last_mv) const
 {
     size_t hash = (m_hash[last_mv.to_int()] ^ m_hash[second_last_mv.to_int()]);
     return hash % hash_table_size;
 }
 
-template<class M, unsigned P>
-inline void LastGoodReply<M, P>::get(PlayerInt player, Move last_mv,
-                                     Move second_last_mv,
-                                     Move& lgr1, Move& lgr2) const
+template<class M, unsigned P, size_t S>
+inline void LastGoodReply<M, P, S>::get(PlayerInt player, Move last_mv,
+                                        Move second_last_mv,
+                                        Move& lgr1, Move& lgr2) const
 {
     auto index = get_index(last_mv, second_last_mv);
     lgr2 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(
@@ -98,8 +100,8 @@ inline void LastGoodReply<M, P>::get(PlayerInt player, Move last_mv,
                     m_lgr1[player][last_mv.to_int()]));
 }
 
-template<class M, unsigned P>
-void LastGoodReply<M, P>::init(PlayerInt nu_players)
+template<class M, unsigned P, size_t S>
+void LastGoodReply<M, P, S>::init(PlayerInt nu_players)
 {
     for (PlayerInt i = 0; i < nu_players; ++i)
     {
@@ -109,9 +111,9 @@ void LastGoodReply<M, P>::init(PlayerInt nu_players)
     }
 }
 
-template<class M, unsigned P>
-inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
-                                        Move second_last_mv, Move reply)
+template<class M, unsigned P, size_t S>
+inline void LastGoodReply<M, P, S>::forget(PlayerInt player, Move last_mv,
+                                           Move second_last_mv, Move reply)
 {
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
@@ -126,9 +128,9 @@ inline void LastGoodReply<M, P>::forget(PlayerInt player, Move last_mv,
         LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(stored_reply, null_int);
 }
 
-template<class M, unsigned P>
-inline void LastGoodReply<M, P>::store(PlayerInt player, Move last_mv,
-                                       Move second_last_mv, Move reply)
+template<class M, unsigned P, size_t S>
+inline void LastGoodReply<M, P, S>::store(PlayerInt player, Move last_mv,
+                                          Move second_last_mv, Move reply)
 {
     auto reply_int = reply.to_int();
     {

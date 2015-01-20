@@ -92,7 +92,11 @@ struct SearchParamConstDefault
 
     /** Enable Last-Good-Reply heuristic.
         @see LastGoodReply */
-    static const bool use_last_good_reply = false;
+    static const bool use_lgr = false;
+
+    /** See LastGoodReply::hash_table_size.
+        Must be greater 0 if use_lgr is true. */
+    static const size_t lgr_hash_table_size = 0;
 
     /** Use virtual loss in multi-threaded mode.
         See Chaslot et al.: Parallel Monte-Carlo Tree Search. 2008. */
@@ -149,6 +153,11 @@ public:
     static const PlayerInt max_players = SearchParamConst::max_players;
 
     static const unsigned max_moves = SearchParamConst::max_moves;
+
+    static const size_t lgr_hash_table_size =
+            SearchParamConst::lgr_hash_table_size;
+
+    static_assert(! SearchParamConst::use_lgr || lgr_hash_table_size > 0, "");
 
     typedef array<StatisticsDirtyLockFree<Float>, max_players> RootStat;
 
@@ -593,7 +602,7 @@ private:
         of current search. */
     RootStat m_init_val;
 
-    LastGoodReply<M, max_players> m_last_good_reply;
+    LastGoodReply<Move, max_players, lgr_hash_table_size> m_lgr;
 
     /** See get_nu_simulations(). */
     LIBBOARDGAME_MCTS_ATOMIC(size_t) m_nu_simulations;
@@ -636,7 +645,7 @@ private:
 
     const Node* select_child(const Node& node);
 
-    void update_last_good_reply(ThreadState& thread_state);
+    void update_lgr(ThreadState& thread_state);
 
     void update_rave(ThreadState& thread_state);
 
@@ -1111,7 +1120,7 @@ void SearchBase<S, M, R>::playout(ThreadState& thread_state)
     {
         Move lgr1 = Move::null();
         Move lgr2 = Move::null();
-        if (SearchParamConst::use_last_good_reply)
+        if (SearchParamConst::use_lgr)
         {
             auto& moves = simulation.moves;
             auto nu_moves = moves.size();
@@ -1121,8 +1130,8 @@ void SearchBase<S, M, R>::playout(ThreadState& thread_state)
                 Move second_last_mv = Move::null();
                 if (nu_moves > 1)
                     second_last_mv = moves[nu_moves - 2].move;
-                m_last_good_reply.get(state.get_to_play(), last_mv,
-                                      second_last_mv, lgr1, lgr2);
+                m_lgr.get(state.get_to_play(), last_mv, second_last_mv, lgr1,
+                          lgr2);
             }
         }
         PlayerMove move;
@@ -1384,8 +1393,8 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     m_player = get_player();
     for (PlayerInt i = 0; i < m_nu_players; ++i)
         m_root_val[i].clear();
-    if (SearchParamConst::use_last_good_reply && ! is_followup)
-        m_last_good_reply.init(m_nu_players);
+    if (SearchParamConst::use_lgr && ! is_followup)
+        m_lgr.init(m_nu_players);
     for (unsigned i = 0; i < m_threads.size(); ++i)
     {
         auto& thread_state = m_threads[i]->thread_state;
@@ -1512,8 +1521,8 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
         update_values(thread_state);
         if (SearchParamConst::rave)
             update_rave(thread_state);
-        if (SearchParamConst::use_last_good_reply)
-            update_last_good_reply(thread_state);
+        if (SearchParamConst::use_lgr)
+            update_lgr(thread_state);
         on_simulation_finished(nu_simulations, state, simulation);
     }
 }
@@ -1684,7 +1693,7 @@ void SearchBase<S, M, R>::set_tree_memory(size_t memory)
 }
 
 template<class S, class M, class R>
-void SearchBase<S, M, R>::update_last_good_reply(ThreadState& thread_state)
+void SearchBase<S, M, R>::update_lgr(ThreadState& thread_state)
 {
     const auto& simulation = thread_state.simulation;
     auto& eval = simulation.eval;
@@ -1711,9 +1720,9 @@ void SearchBase<S, M, R>::update_last_good_reply(ThreadState& thread_state)
         PlayerInt player = reply.player;
         Move mv = reply.move;
         if (is_winner[player])
-            m_last_good_reply.store(player, last_mv, second_last_mv, mv);
+            m_lgr.store(player, last_mv, second_last_mv, mv);
         else
-            m_last_good_reply.forget(player, last_mv, second_last_mv, mv);
+            m_lgr.forget(player, last_mv, second_last_mv, mv);
         second_last_mv = last_mv;
         last_mv = mv;
     }
