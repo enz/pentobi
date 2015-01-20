@@ -104,11 +104,19 @@ template<class M, unsigned P, size_t S>
 void LastGoodReply<M, P, S>::init(PlayerInt nu_players)
 {
     for (PlayerInt i = 0; i < nu_players; ++i)
-    {
-        auto null_int = Move::null().to_int();
-        fill(m_lgr1[i], m_lgr1[i] + Move::range, null_int);
-        fill(m_lgr2[i], m_lgr2[i] + hash_table_size, null_int);
-    }
+        if (Move::null().to_int() == 0)
+        {
+            // Using memset is ok even if the elements are atomic because
+            // init() is used before the multi-threaded search starts.
+            memset(m_lgr1[i], 0, Move::range * sizeof(m_lgr1[i][0]));
+            memset(m_lgr2[i], 0, hash_table_size * sizeof(m_lgr2[i][0]));
+        }
+        else
+        {
+            fill(m_lgr1[i], m_lgr1[i] + Move::range, Move::null().to_int());
+            fill(m_lgr2[i], m_lgr2[i] + hash_table_size,
+                 Move::null().to_int());
+        }
 }
 
 template<class M, unsigned P, size_t S>
