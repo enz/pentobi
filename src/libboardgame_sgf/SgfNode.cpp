@@ -88,7 +88,7 @@ const vector<string> SgfNode::get_multi_property(const string& id) const
 
 bool SgfNode::has_property(const string& id) const
 {
-    return find_property(id);
+	return find_property(id) != nullptr;
 }
 
 const SgfNode& SgfNode::get_child(unsigned i) const

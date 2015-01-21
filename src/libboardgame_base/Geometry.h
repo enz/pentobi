@@ -32,6 +32,8 @@ class Geometry
 public:
     typedef P Point;
 
+	typedef typename Point::IntType IntType;
+
     typedef ArrayList<Point, 4, unsigned short> AdjList;
 
     typedef ArrayList<Point, 9, unsigned short> DiagList;
@@ -50,9 +52,9 @@ public:
         void operator++();
 
     private:
-        typename Point::IntType m_p;
+        IntType m_p;
 
-        typename Point::IntType m_end;
+        IntType m_end;
     };
 
     virtual ~Geometry();
@@ -96,7 +98,7 @@ public:
     unsigned get_height() const;
 
     /** Get range used for onboard points. */
-    typename Point::IntType get_range() const;
+    IntType get_range() const;
 
     unsigned get_x(Point p) const;
 
@@ -153,7 +155,7 @@ private:
 
     unsigned m_height;
 
-    typename Point::IntType m_range;
+    IntType m_range;
 
     Point m_points[Point::max_width][Point::max_height];
 
@@ -289,7 +291,7 @@ inline unsigned Geometry<P>::get_point_type(CoordPoint p) const
 }
 
 template<class P>
-inline auto Geometry<P>::get_range() const -> typename Point::IntType
+inline auto Geometry<P>::get_range() const -> IntType
 {
     return m_range;
 }
@@ -324,7 +326,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
     m_width = width;
     m_height = height;
     m_string[Point::null().to_int()] = "null";
-    typename Point::IntType n = 0;
+    IntType n = 0;
     ostringstream ostr;
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)

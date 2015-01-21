@@ -233,7 +233,7 @@ inline bool SgfNode::has_children() const
 
 inline bool SgfNode::has_parent() const
 {
-    return m_parent;
+    return m_parent != nullptr;
 }
 
 inline bool SgfNode::has_single_child() const
@@ -333,7 +333,7 @@ inline PropertyIterator::PropertyIterator(const SgfNode& node)
 
 inline PropertyIterator::operator bool() const
 {
-    return m_current;
+	return m_current != nullptr;
 }
 
 inline void PropertyIterator::operator++()
@@ -382,7 +382,7 @@ inline ChildIterator::ChildIterator(const SgfNode& node)
 
 inline ChildIterator::operator bool() const
 {
-    return m_current;
+	return m_current != nullptr;
 }
 
 inline void ChildIterator::operator++()
