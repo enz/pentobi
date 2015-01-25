@@ -32,7 +32,7 @@ class Geometry
 public:
     typedef P Point;
 
-	typedef typename Point::IntType IntType;
+    typedef typename Point::IntType IntType;
 
     typedef ArrayList<Point, 4, unsigned short> AdjList;
 
@@ -47,7 +47,7 @@ public:
 
         Point operator*() const;
 
-        operator bool() const;
+        explicit operator bool() const;
 
         void operator++();
 

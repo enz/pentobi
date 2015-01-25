@@ -29,7 +29,7 @@ public:
     public:
         Iterator();
 
-        operator bool() const;
+        explicit operator bool() const;
 
         void operator++();
 

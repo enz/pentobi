@@ -27,7 +27,7 @@ public:
 
     ChildIterator(const Tree& tree, const Node& node);
 
-    operator bool() const;
+    explicit operator bool() const;
 
     ChildIterator& operator++();
 

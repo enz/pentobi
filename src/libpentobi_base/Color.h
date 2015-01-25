@@ -39,7 +39,7 @@ public:
     public:
         Iterator(IntType nu_colors);
 
-        operator bool() const;
+        explicit operator bool() const;
 
         void operator++();
 

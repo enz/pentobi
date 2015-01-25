@@ -314,7 +314,7 @@ class PropertyIterator
 public:
     PropertyIterator(const SgfNode& node);
 
-    operator bool() const;
+    explicit operator bool() const;
 
     void operator++();
 
@@ -333,7 +333,7 @@ inline PropertyIterator::PropertyIterator(const SgfNode& node)
 
 inline PropertyIterator::operator bool() const
 {
-	return m_current != nullptr;
+    return m_current != nullptr;
 }
 
 inline void PropertyIterator::operator++()
@@ -361,7 +361,7 @@ class ChildIterator
 public:
     ChildIterator(const SgfNode& node);
 
-    operator bool() const;
+    explicit operator bool() const;
 
     void operator++();
 
@@ -382,7 +382,7 @@ inline ChildIterator::ChildIterator(const SgfNode& node)
 
 inline ChildIterator::operator bool() const
 {
-	return m_current != nullptr;
+    return m_current != nullptr;
 }
 
 inline void ChildIterator::operator++()
