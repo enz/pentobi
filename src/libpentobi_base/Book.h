@@ -43,12 +43,13 @@ private:
 
     RandomGenerator m_random;
 
+    vector<unique_ptr<PointTransform>> m_transforms;
+
+    vector<unique_ptr<PointTransform>> m_inv_transforms;
+
     bool genmove(const Board& bd, Color c, Move& mv,
                  const PointTransform& transform,
                  const PointTransform& inv_transform);
-
-    Move get_transformed(const Board& bd, Move mv,
-                         const PointTransform& transform) const;
 
     const SgfNode* select_child(const Board& bd, Color c,
                                 const PentobiTree& tree, const SgfNode& node,

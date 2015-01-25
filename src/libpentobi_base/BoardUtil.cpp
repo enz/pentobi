@@ -58,6 +58,18 @@ void get_current_position_as_setup(const Board& bd, Setup& setup)
     setup.to_play = bd.get_to_play();
 }
 
+Move get_transformed(const Board& bd, Move mv,
+                     const PointTransform<Point>& transform)
+{
+    auto& geo = bd.get_geometry();
+    MovePoints points;
+    for (auto p : bd.get_move_info(mv))
+        points.push_back(transform.get_transformed(p, geo));
+    Move transformed_mv;
+    bd.find_move(points, transformed_mv);
+    return transformed_mv;
+}
+
 void write_setup(Writer& writer, Variant variant, const Setup& setup)
 {
     auto& board_const = BoardConst::get(variant);

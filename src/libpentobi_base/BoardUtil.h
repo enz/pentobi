@@ -29,6 +29,9 @@ void get_current_position_as_setup(const Board& bd, Setup& setup);
 
 void write_setup(Writer& writer, Variant variant, const Setup& setup);
 
+Move get_transformed(const Board& bd, Move mv,
+                     const PointTransform<Point>& transform);
+
 //-----------------------------------------------------------------------------
 
 } // namespace boardutil

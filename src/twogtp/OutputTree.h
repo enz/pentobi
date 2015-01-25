@@ -8,7 +8,6 @@
 #define TWOGTP_OUTPUT_TREE_H
 
 #include <random>
-#include "libboardgame_base/PointTransform.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/PentobiTree.h"
 
@@ -59,17 +58,19 @@ public:
                   array<bool, Board::max_game_moves>& is_real_move);
 
 private:
+    typedef libboardgame_base::PointTransform<Point> PointTransform;
+
     PentobiTree m_tree;
 
-    vector<unique_ptr<PointTransform<Point>>> m_transforms;
+    vector<unique_ptr<PointTransform>> m_transforms;
 
-    vector<unique_ptr<PointTransform<Point>>> m_inv_transforms;
+    vector<unique_ptr<PointTransform>> m_inv_transforms;
 
     mt19937 m_random;
 
     bool generate_move(bool is_player_black, const Board& bd, Color to_play,
-                       const PointTransform<Point>& transform,
-                       const PointTransform<Point>& inv_transform, Move& mv);
+                       const PointTransform& transform,
+                       const PointTransform& inv_transform, Move& mv);
 };
 
 //-----------------------------------------------------------------------------

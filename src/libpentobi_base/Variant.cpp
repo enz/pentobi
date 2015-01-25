@@ -17,6 +17,19 @@
 
 namespace libpentobi_base {
 
+using libboardgame_base::PointTransfIdent;
+using libboardgame_base::PointTransfRefl;
+using libboardgame_base::PointTransfReflRot180;
+using libboardgame_base::PointTransfRot180;
+using libboardgame_base::PointTransfRot270Refl;
+using libboardgame_base::PointTransfTrigonReflRot60;
+using libboardgame_base::PointTransfTrigonReflRot120;
+using libboardgame_base::PointTransfTrigonReflRot240;
+using libboardgame_base::PointTransfTrigonReflRot300;
+using libboardgame_base::PointTransfTrigonRot60;
+using libboardgame_base::PointTransfTrigonRot120;
+using libboardgame_base::PointTransfTrigonRot240;
+using libboardgame_base::PointTransfTrigonRot300;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::TrigonGeometry;
 using libboardgame_util::trim;
@@ -79,6 +92,55 @@ Color::IntType get_nu_players(Variant variant)
         LIBBOARDGAME_ASSERT(variant == Variant::classic
                             || variant == Variant::trigon);
         return 4;
+    }
+}
+
+void get_transforms(Variant variant,
+                    vector<unique_ptr<PointTransform<Point>>>& transforms,
+                    vector<unique_ptr<PointTransform<Point>>>& inv_transforms)
+{
+    transforms.clear();
+    inv_transforms.clear();
+    switch (variant)
+    {
+    case Variant::duo:
+    case Variant::junior:
+        transforms.emplace_back(new PointTransfIdent<Point>);
+        inv_transforms.emplace_back(new PointTransfIdent<Point>);
+        transforms.emplace_back(new PointTransfRot270Refl<Point>);
+        inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
+        break;
+    case Variant::trigon:
+    case Variant::trigon_2:
+    case Variant::trigon_3:
+        transforms.emplace_back(new PointTransfIdent<Point>);
+        inv_transforms.emplace_back(new PointTransfIdent<Point>);
+        transforms.emplace_back(new PointTransfTrigonRot60<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonRot300<Point>);
+        transforms.emplace_back(new PointTransfTrigonRot120<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonRot240<Point>);
+        transforms.emplace_back(new PointTransfRot180<Point>);
+        inv_transforms.emplace_back(new PointTransfRot180<Point>);
+        transforms.emplace_back(new PointTransfTrigonRot240<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonRot120<Point>);
+        transforms.emplace_back(new PointTransfTrigonRot300<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonRot60<Point>);
+        transforms.emplace_back(new PointTransfRefl<Point>);
+        inv_transforms.emplace_back(new PointTransfRefl<Point>);
+        transforms.emplace_back(new PointTransfTrigonReflRot60<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonReflRot60<Point>);
+        transforms.emplace_back(new PointTransfTrigonReflRot120<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonReflRot120<Point>);
+        transforms.emplace_back(new PointTransfReflRot180<Point>);
+        inv_transforms.emplace_back(new PointTransfReflRot180<Point>);
+        transforms.emplace_back(new PointTransfTrigonReflRot240<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonReflRot240<Point>);
+        transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
+        inv_transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
+        break;
+    default:
+        transforms.emplace_back(new PointTransfIdent<Point>);
+        inv_transforms.emplace_back(new PointTransfIdent<Point>);
     }
 }
 

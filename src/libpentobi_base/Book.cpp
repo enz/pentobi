@@ -13,6 +13,7 @@
 #include "libboardgame_sgf/MissingProperty.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_util/Log.h"
+#include "libpentobi_base/BoardUtil.h"
 
 //-----------------------------------------------------------------------------
 
@@ -37,12 +38,14 @@ using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::log;
+using boardutil::get_transformed;
 
 //-----------------------------------------------------------------------------
 
 Book::Book(Variant variant)
     : m_tree(variant)
 {
+    get_transforms(variant, m_transforms, m_inv_transforms);
 }
 
 Move Book::genmove(const Board& bd, Color c)
@@ -51,64 +54,9 @@ Move Book::genmove(const Board& bd, Color c)
         // Book cannot handle setup positions
         return Move::null();
     Move mv;
-    if (genmove(bd, c, mv,
-                PointTransfIdent<Point>(),
-                PointTransfIdent<Point>()))
-        return mv;
-    auto board_type = bd.get_board_type();
-    if (board_type == BoardType::duo)
-        if (genmove(bd, c, mv,
-                    PointTransfRot270Refl<Point>(),
-                    PointTransfRot270Refl<Point>()))
+    for (unsigned i = 0; i < m_transforms.size(); ++i)
+        if (genmove(bd, c, mv, *m_transforms[i], *m_inv_transforms[i]))
             return mv;
-    if (board_type == BoardType::trigon
-        || board_type == BoardType::trigon_3)
-    {
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonRot60<Point>(),
-                    PointTransfTrigonRot300<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonRot120<Point>(),
-                    PointTransfTrigonRot240<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfRot180<Point>(),
-                    PointTransfRot180<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonRot240<Point>(),
-                    PointTransfTrigonRot120<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonRot300<Point>(),
-                    PointTransfTrigonRot60<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfRefl<Point>(),
-                    PointTransfRefl<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonReflRot60<Point>(),
-                    PointTransfTrigonReflRot60<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonReflRot120<Point>(),
-                    PointTransfTrigonReflRot120<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfReflRot180<Point>(),
-                    PointTransfReflRot180<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonReflRot240<Point>(),
-                    PointTransfTrigonReflRot240<Point>()))
-            return mv;
-        if (genmove(bd, c, mv,
-                    PointTransfTrigonReflRot300<Point>(),
-                    PointTransfTrigonReflRot300<Point>()))
-            return mv;
-    }
     return Move::null();
 }
 
@@ -133,18 +81,6 @@ bool Book::genmove(const Board& bd, Color c, Move& mv,
     return true;
 }
 
-Move Book::get_transformed(const Board& bd, Move mv,
-                           const PointTransform& transform) const
-{
-    auto& geo = bd.get_geometry();
-    MovePoints points;
-    for (Point p : bd.get_move_info(mv))
-        points.push_back(transform.get_transformed(p, geo));
-    Move transformed_mv;
-    bd.find_move(points, transformed_mv);
-    return transformed_mv;
-}
-
 void Book::load(istream& in)
 {
     TreeReader reader;
@@ -158,6 +94,7 @@ void Book::load(istream& in)
     }
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     m_tree.init(root);
+    get_transforms(m_tree.get_variant(), m_transforms, m_inv_transforms);
 }
 
 const SgfNode* Book::select_child(const Board& bd, Color c,

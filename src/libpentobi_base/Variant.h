@@ -10,10 +10,11 @@
 #include <string>
 #include "Color.h"
 #include "Geometry.h"
+#include "libboardgame_base/PointTransform.h"
 
 namespace libpentobi_base {
 
-using namespace std;
+using libboardgame_base::PointTransform;
 
 //-----------------------------------------------------------------------------
 
@@ -65,6 +66,17 @@ Color::IntType get_nu_colors(Variant variant);
 Color::IntType get_nu_players(Variant variant);
 
 const Geometry& get_geometry(Variant variant);
+
+/** Get invariance transformations for a game variant.
+    The invariance transformations depend on the symmetry of the board type and
+    the starting points.
+    @param variant The game variant.
+    @param[out] transforms The invariance transformations.
+    @param[out] inv_transforms The inverse transformations of the elements in
+    transforms. */
+void get_transforms(Variant variant,
+                    vector<unique_ptr<PointTransform<Point>>>& transforms,
+                    vector<unique_ptr<PointTransform<Point>>>& inv_transforms);
 
 //-----------------------------------------------------------------------------
 

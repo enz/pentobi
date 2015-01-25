@@ -13,27 +13,17 @@
 #include <fstream>
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/TreeWriter.h"
+#include "libpentobi_base/BoardUtil.h"
 
-using libboardgame_base::PointTransfIdent;
-using libboardgame_base::PointTransfRefl;
-using libboardgame_base::PointTransfReflRot180;
-using libboardgame_base::PointTransfRot180;
-using libboardgame_base::PointTransfRot270Refl;
-using libboardgame_base::PointTransfTrigonReflRot60;
-using libboardgame_base::PointTransfTrigonReflRot120;
-using libboardgame_base::PointTransfTrigonReflRot240;
-using libboardgame_base::PointTransfTrigonReflRot300;
-using libboardgame_base::PointTransfTrigonRot60;
-using libboardgame_base::PointTransfTrigonRot120;
-using libboardgame_base::PointTransfTrigonRot240;
-using libboardgame_base::PointTransfTrigonRot300;
 using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::TreeWriter;
 using libboardgame_util::Exception;
+using libpentobi_base::get_transforms;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MovePoints;
+using libpentobi_base::boardutil::get_transformed;
 
 //-----------------------------------------------------------------------------
 
@@ -105,18 +95,6 @@ unsigned get_real_count(PentobiTree& tree, const SgfNode& node,
     return real_count[index];
 }
 
-Move get_transformed(const Board& bd, Move mv,
-                     const PointTransform<Point>& transform)
-{
-    auto& geo = bd.get_geometry();
-    MovePoints points;
-    for (auto p : bd.get_move_info(mv))
-        points.push_back(transform.get_transformed(p, geo));
-    Move transformed_mv;
-    bd.find_move(points, transformed_mv);
-    return transformed_mv;
-}
-
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -124,47 +102,7 @@ Move get_transformed(const Board& bd, Move mv,
 OutputTree::OutputTree(Variant variant)
     : m_tree(variant)
 {
-    switch (variant)
-    {
-    case Variant::duo:
-    case Variant::junior:
-        m_transforms.emplace_back(new PointTransfIdent<Point>);
-        m_inv_transforms.emplace_back(new PointTransfIdent<Point>);
-        m_transforms.emplace_back(new PointTransfRot270Refl<Point>);
-        m_inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
-        break;
-    case Variant::trigon:
-    case Variant::trigon_2:
-    case Variant::trigon_3:
-        m_transforms.emplace_back(new PointTransfIdent<Point>);
-        m_inv_transforms.emplace_back(new PointTransfIdent<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonRot60<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonRot300<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonRot120<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonRot240<Point>);
-        m_transforms.emplace_back(new PointTransfRot180<Point>);
-        m_inv_transforms.emplace_back(new PointTransfRot180<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonRot240<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonRot120<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonRot300<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonRot60<Point>);
-        m_transforms.emplace_back(new PointTransfRefl<Point>);
-        m_inv_transforms.emplace_back(new PointTransfRefl<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonReflRot60<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot60<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonReflRot120<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot120<Point>);
-        m_transforms.emplace_back(new PointTransfReflRot180<Point>);
-        m_inv_transforms.emplace_back(new PointTransfReflRot180<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonReflRot240<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot240<Point>);
-        m_transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
-        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
-        break;
-    default:
-        m_transforms.emplace_back(new PointTransfIdent<Point>);
-        m_inv_transforms.emplace_back(new PointTransfIdent<Point>);
-    }
+    get_transforms(variant, m_transforms, m_inv_transforms);
 }
 
 void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
@@ -227,10 +165,8 @@ bool OutputTree::generate_move(bool is_player_black, const Board& bd,
 }
 
 bool OutputTree::generate_move(bool is_player_black, const Board& bd,
-                               Color to_play,
-                               const PointTransform<Point>& transform,
-                               const PointTransform<Point>& inv_transform,
-                               Move& mv)
+                               Color to_play, const PointTransform& transform,
+                               const PointTransform& inv_transform, Move& mv)
 {
     if (bd.has_setup())
         throw Exception("OutputTree: setup not supported");
