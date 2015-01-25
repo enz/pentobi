@@ -74,7 +74,7 @@ float TwoGtp::get_result(unsigned player_black)
     else
     {
         array<unsigned, Color::range> points;
-        for (ColorIterator i(m_bd.get_nu_colors()); i; ++i)
+        for (Color::IntType i = 0; i < m_bd.get_nu_colors(); ++i)
             points[i] = m_bd.get_points(Color(i));
         array<float, Color::range> player_result;
         get_multiplayer_result(nu_players, points, player_result);
