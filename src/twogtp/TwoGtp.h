@@ -9,7 +9,7 @@
 
 #include <array>
 #include "GtpConnection.h"
-#include "OutputFile.h"
+#include "Output.h"
 #include "libpentobi_base/Board.h"
 
 using namespace std;
@@ -23,13 +23,15 @@ class TwoGtp
 {
 public:
     TwoGtp(const string& black, const string& white, Variant variant,
-           unsigned nu_games, OutputFile& output, bool quiet,
-           const string& log_prefix);
+           unsigned nu_games, Output& output, bool quiet,
+           const string& log_prefix, bool fast_open);
 
     void run();
 
 private:
     bool m_quiet;
+
+    bool m_fast_open;
 
     Variant m_variant;
 
@@ -37,13 +39,13 @@ private:
 
     Board m_bd;
 
-    OutputFile& m_output;
+    Output& m_output;
 
     GtpConnection m_black;
 
     GtpConnection m_white;
 
-    array<const char*, Color::range> m_colors;
+    array<string, Color::range> m_colors;
 
     float get_result(unsigned player_black);
 

@@ -32,11 +32,13 @@ int main(int argc, char** argv)
         vector<string> specs = {
             "analyze:",
             "black|b:",
+            "fastopen",
             "file|f:",
             "game|g:",
             "nugames|n:",
             "splitsgf:",
             "threads:",
+            "tree",
             "white|w:",
         };
         Options opt(argc, argv, specs);
@@ -56,10 +58,12 @@ int main(int argc, char** argv)
         auto nu_games = opt.get<unsigned>("nugames", 1);
         auto nu_threads = opt.get<unsigned>("threads", 1);
         auto variant_string = opt.get("game", "classic");
+        bool fast_open = opt.contains("fastopen");
+        bool create_tree = opt.contains("tree") || fast_open;
         Variant variant;
         if (! parse_variant_id(variant_string, variant))
             throw Exception("invalid game variant " + variant_string);
-        OutputFile output_file(prefix);
+        Output output(variant, prefix, create_tree);
         vector<shared_ptr<TwoGtp>> twogtp;
         for (unsigned i = 0; i < nu_threads; ++i)
         {
@@ -67,8 +71,8 @@ int main(int argc, char** argv)
             if (nu_threads > 1)
                 log_prefix = to_string(i + 1);
             twogtp.push_back(make_shared<TwoGtp>(black, white, variant,
-                                                 nu_games, output_file,
-                                                 false, log_prefix));
+                                                 nu_games, output, false,
+                                                 log_prefix, fast_open));
         }
         vector<thread> threads;
         for (auto& i : twogtp)

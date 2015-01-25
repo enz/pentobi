@@ -26,9 +26,10 @@ using libpentobi_base::Move;
 //-----------------------------------------------------------------------------
 
 TwoGtp::TwoGtp(const string& black, const string& white, Variant variant,
-               unsigned nu_games, OutputFile& output, bool quiet,
-               const string& log_prefix)
+               unsigned nu_games, Output& output, bool quiet,
+               const string& log_prefix, bool fast_open)
     : m_quiet(quiet),
+      m_fast_open(fast_open),
       m_variant(variant),
       m_nu_games(nu_games),
       m_bd(variant),
@@ -98,7 +99,6 @@ void TwoGtp::play_game(unsigned game_number)
     unsigned nu_players = m_bd.get_nu_players();
     unsigned player_black = game_number % nu_players;
     bool resign = false;
-    unsigned player;
     ostringstream sgf_string;
     Writer sgf(sgf_string);
     sgf.set_indent(0);
@@ -107,6 +107,8 @@ void TwoGtp::play_game(unsigned game_number)
     sgf.write_property("GM", to_string(m_variant));
     sgf.write_property("GN", game_number);
     sgf.end_node();
+    array<bool, Board::max_game_moves> is_real_move;
+    unsigned player;
     while (! m_bd.is_game_over())
     {
         auto to_play = m_bd.get_effective_to_play();
@@ -117,20 +119,33 @@ void TwoGtp::play_game(unsigned game_number)
         auto& player_connection = (player == player_black ? m_black : m_white);
         auto& other_connection = (player == player_black ? m_white : m_black);
         auto color = m_colors[to_play.to_int()];
-        auto response = player_connection.send(string("genmove ") + color);
-        if (response == "resign")
+        Move mv;
+        if (m_fast_open
+                && m_output.generate_fast_open_move(player == player_black,
+                                                    m_bd, to_play, mv))
         {
-            resign = true;
-            break;
+            is_real_move[m_bd.get_nu_moves()] = false;
+            log("Playing fast opening move");
+            player_connection.send("play " + color + " " + m_bd.to_string(mv));
+        }
+        else
+        {
+            is_real_move[m_bd.get_nu_moves()] = true;
+            auto response = player_connection.send("genmove " + color);
+            if (response == "resign")
+            {
+                resign = true;
+                break;
+            }
+            mv = m_bd.from_string(response);
         }
         sgf.begin_node();
-        sgf.write_property(string(1, toupper(color[0])), response);
+        sgf.write_property(string(1, toupper(color[0])), m_bd.to_string(mv));
         sgf.end_node();
-        Move mv = m_bd.from_string(response);
         if (mv.is_null() || ! m_bd.is_legal(to_play, mv))
-            throw Exception("invalid move: " + response);
+            throw Exception("invalid move: " + m_bd.to_string(mv));
         m_bd.play(to_play, mv);
-        other_connection.send(string("play ") + color + " " + response);
+        other_connection.send("play " + color + " " + m_bd.to_string(mv));
     }
     cpu_black = send_cputime(m_black) - cpu_black;
     cpu_white = send_cputime(m_white) - cpu_white;
@@ -144,8 +159,8 @@ void TwoGtp::play_game(unsigned game_number)
     else
         result = get_result(player_black);
     sgf.end_tree();
-    m_output.add_result(game_number, result, m_bd.get_nu_moves(), player_black,
-                        cpu_black, cpu_white, sgf_string.str());
+    m_output.add_result(game_number, result, m_bd, player_black, cpu_black,
+                        cpu_white, sgf_string.str(), is_real_move);
 }
 
 void TwoGtp::run()

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file twogtp/OutputFile.cpp
+/** @file twogtp/Output.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,7 +8,7 @@
 #include <config.h>
 #endif
 
-#include "OutputFile.h"
+#include "Output.h"
 
 #include <cstdio>
 #include <fstream>
@@ -26,16 +26,18 @@ using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
-OutputFile::OutputFile(const string& prefix)
-    : m_next(0),
-      m_prefix(prefix)
+Output::Output(Variant variant, const string& prefix, bool create_tree)
+    : m_create_tree(create_tree),
+      m_next(0),
+      m_prefix(prefix),
+      m_output_tree(variant)
 {
-    m_lock_fd = creat((m_prefix + ".lock").c_str(), 0644);
+    m_lock_fd = creat((prefix + ".lock").c_str(), 0644);
     if (m_lock_fd == -1)
-        throw Exception("OutputFile: could not create lock file");
+        throw Exception("Output: could not create lock file");
     if (flock(m_lock_fd, LOCK_EX | LOCK_NB) == -1)
-        throw Exception("OutputFile: twogtp already running");
-    ifstream in(m_prefix + ".dat");
+        throw Exception("Output: twogtp already running");
+    ifstream in(prefix + ".dat");
     if (! in)
         return;
     string line;
@@ -49,38 +51,46 @@ OutputFile::OutputFile(const string& prefix)
             continue;
         unsigned game_number;
         if (! from_string(columns[0], game_number))
-            throw Exception("OutputFile: expected game number");
+            throw Exception("Output: expected game number");
         m_games.insert(make_pair(game_number, line));
     }
     while (m_games.count(m_next) != 0)
         ++m_next;
     if (check_sentinel())
-        remove((m_prefix + ".stop").c_str());
+        remove((prefix + ".stop").c_str());
+    if (m_create_tree && m_next > 0)
+        m_output_tree.load(prefix + "-tree.blksgf");
 }
 
-OutputFile::~OutputFile()
+Output::~Output()
 {
     flock(m_lock_fd, LOCK_UN);
     close(m_lock_fd);
     remove((m_prefix + ".lock").c_str());
 }
 
-void OutputFile::add_result(unsigned n, float result, unsigned len,
-                            unsigned player_black, double cpu_black,
-                            double cpu_white, const string& sgf)
+void Output::add_result(unsigned n, float result, const Board& bd,
+                        unsigned player_black, double cpu_black,
+                        double cpu_white, const string& sgf,
+                        array<bool, Board::max_game_moves>& is_real_move)
 {
     lock_guard<mutex> lock(m_mutex);
+    unsigned nu_fast_open = 0;
+    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
+        if (! is_real_move[i])
+            ++nu_fast_open;
     ostringstream line;
     line << n << '\t'
          << setprecision(4) << result << '\t'
-         << len << '\t'
+         << bd.get_nu_moves() << '\t'
          << player_black << '\t'
          << setprecision(5) << cpu_black << '\t'
-         << cpu_white;
+         << cpu_white << '\t'
+         << nu_fast_open;
     m_games.insert(make_pair(n, line.str()));
     {
         ofstream out(m_prefix + ".dat");
-        out << "# Game\tResult\tLength\tPlayerB\tCpuB\tCpuW\n";
+        out << "# Game\tResult\tLength\tPlayerB\tCpuB\tCpuW\tFast\n";
         for (auto& i : m_games)
             out << i.second << '\n';
     }
@@ -88,14 +98,26 @@ void OutputFile::add_result(unsigned n, float result, unsigned len,
         ofstream out(m_prefix + ".blksgf", ios::app);
         out << sgf;
     }
+    if (m_create_tree)
+    {
+        m_output_tree.add_game(bd, player_black, result, is_real_move);
+        m_output_tree.save(m_prefix + "-tree.blksgf");
+    }
 }
 
-bool OutputFile::check_sentinel()
+bool Output::check_sentinel()
 {
     return ! ifstream(m_prefix + ".stop").fail();
 }
 
-unsigned OutputFile::get_next()
+bool Output::generate_fast_open_move(bool is_player_black, const Board& bd,
+                                     Color to_play, Move& mv)
+{
+    lock_guard<mutex> lock(m_mutex);
+    return m_output_tree.generate_move(is_player_black, bd, to_play, mv);
+}
+
+unsigned Output::get_next()
 {
     lock_guard<mutex> lock(m_mutex);
     unsigned n = m_next;

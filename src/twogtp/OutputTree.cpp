@@ -1,0 +1,293 @@
+//-----------------------------------------------------------------------------
+/** @file twogtp/OutputTree.cpp
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "OutputTree.h"
+
+#include <fstream>
+#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_sgf/TreeWriter.h"
+
+using libboardgame_base::PointTransfIdent;
+using libboardgame_base::PointTransfRefl;
+using libboardgame_base::PointTransfReflRot180;
+using libboardgame_base::PointTransfRot180;
+using libboardgame_base::PointTransfRot270Refl;
+using libboardgame_base::PointTransfTrigonReflRot60;
+using libboardgame_base::PointTransfTrigonReflRot120;
+using libboardgame_base::PointTransfTrigonReflRot240;
+using libboardgame_base::PointTransfTrigonReflRot300;
+using libboardgame_base::PointTransfTrigonRot60;
+using libboardgame_base::PointTransfTrigonRot120;
+using libboardgame_base::PointTransfTrigonRot240;
+using libboardgame_base::PointTransfTrigonRot300;
+using libboardgame_sgf::ChildIterator;
+using libboardgame_sgf::SgfNode;
+using libboardgame_sgf::TreeReader;
+using libboardgame_sgf::TreeWriter;
+using libboardgame_util::Exception;
+using libpentobi_base::ColorMove;
+using libpentobi_base::MovePoints;
+
+//-----------------------------------------------------------------------------
+
+namespace {
+
+void add(PentobiTree& tree, const SgfNode& node, bool is_player_black,
+         bool is_real_move, float result)
+{
+    unsigned index = is_player_black ? 0 : 1;
+    array<unsigned, 2> count;
+    array<double, 2> avg_result;
+    array<unsigned, 2> real_count;
+    auto comment = tree.get_comment(node);
+    if (comment.empty())
+    {
+        count.fill(0);
+        avg_result.fill(0);
+        real_count.fill(0);
+        count[index] = 1;
+        avg_result[index] = result;
+    }
+    else
+    {
+        istringstream in(comment);
+        in >> count[0] >> real_count[0] >> avg_result[0]
+           >> count[1] >> real_count[1] >> avg_result[1];
+        if (! in)
+            throw Exception("OutputTree: invalid comment: " + comment);
+        ++count[index];
+        avg_result[index] += (result - avg_result[index]) / count[index];
+        if (is_real_move)
+            ++real_count[index];
+    }
+    ostringstream out;
+    out.precision(numeric_limits<double>::digits10);
+    out << count[0] << ' ' << real_count[0] << ' ' << avg_result[0] << '\n'
+        << count[1] << ' ' << real_count[1] << ' ' << avg_result[1];
+    tree.set_comment(node, out.str());
+}
+
+bool compare_sequence(ArrayList<ColorMove, Board::max_game_moves>& s1,
+                      ArrayList<ColorMove, Board::max_game_moves>& s2)
+{
+    LIBBOARDGAME_ASSERT(s1.size() == s2.size());
+    for (unsigned i = 0; i < s1.size(); ++i)
+    {
+        LIBBOARDGAME_ASSERT(s1[i].color == s2[i].color);
+        if (s1[i].move.to_int() < s2[i].move.to_int())
+            return true;
+        else if (s1[i].move.to_int() > s2[i].move.to_int())
+            return false;
+    }
+    return false;
+}
+
+unsigned get_real_count(PentobiTree& tree, const SgfNode& node,
+                        bool is_player_black)
+{
+    unsigned index = is_player_black ? 0 : 1;
+    array<unsigned, 2> count;
+    array<double, 2> avg_result;
+    array<unsigned, 2> real_count;
+    auto comment = tree.get_comment(node);
+    istringstream in(comment);
+    in >> count[0] >> real_count[0] >> avg_result[0]
+       >> count[1] >> real_count[1] >> avg_result[1];
+    if (! in)
+        throw Exception("OutputTree: invalid comment: " + comment);
+    return real_count[index];
+}
+
+Move get_transformed(const Board& bd, Move mv,
+                     const PointTransform<Point>& transform)
+{
+    auto& geo = bd.get_geometry();
+    MovePoints points;
+    for (auto p : bd.get_move_info(mv))
+        points.push_back(transform.get_transformed(p, geo));
+    Move transformed_mv;
+    bd.find_move(points, transformed_mv);
+    return transformed_mv;
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
+OutputTree::OutputTree(Variant variant)
+    : m_tree(variant)
+{
+    switch (variant)
+    {
+    case Variant::duo:
+    case Variant::junior:
+        m_transforms.emplace_back(new PointTransfIdent<Point>);
+        m_inv_transforms.emplace_back(new PointTransfIdent<Point>);
+        m_transforms.emplace_back(new PointTransfRot270Refl<Point>);
+        m_inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
+        break;
+    case Variant::trigon:
+    case Variant::trigon_2:
+    case Variant::trigon_3:
+        m_transforms.emplace_back(new PointTransfIdent<Point>);
+        m_inv_transforms.emplace_back(new PointTransfIdent<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonRot60<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonRot300<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonRot120<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonRot240<Point>);
+        m_transforms.emplace_back(new PointTransfRot180<Point>);
+        m_inv_transforms.emplace_back(new PointTransfRot180<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonRot240<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonRot120<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonRot300<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonRot60<Point>);
+        m_transforms.emplace_back(new PointTransfRefl<Point>);
+        m_inv_transforms.emplace_back(new PointTransfRefl<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonReflRot60<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot60<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonReflRot120<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot120<Point>);
+        m_transforms.emplace_back(new PointTransfReflRot180<Point>);
+        m_inv_transforms.emplace_back(new PointTransfReflRot180<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonReflRot240<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot240<Point>);
+        m_transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
+        m_inv_transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
+        break;
+    default:
+        m_transforms.emplace_back(new PointTransfIdent<Point>);
+        m_inv_transforms.emplace_back(new PointTransfIdent<Point>);
+    }
+}
+
+void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
+                          array<bool, Board::max_game_moves>& is_real_move)
+{
+    if (bd.has_setup())
+        throw Exception("OutputTree: setup not supported");
+
+    // Find the canonical representation
+    ArrayList<ColorMove, Board::max_game_moves> sequence;
+    for (auto& transform : m_transforms)
+    {
+        ArrayList<ColorMove, Board::max_game_moves> s;
+        for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
+        {
+            auto mv = bd.get_move(i);
+            s.push_back(ColorMove(mv.color,
+                                  get_transformed(bd, mv.move, *transform)));
+        }
+        if (sequence.empty() || compare_sequence(s, sequence))
+            sequence.copy_from(s);
+    }
+
+    auto node = &m_tree.get_root();
+    add(m_tree, *node, player_black == 0, true, result);
+    unsigned nu_moves_3 = 0;
+    for (unsigned i = 0; i < sequence.size(); ++i)
+    {
+        unsigned player;
+        auto mv = sequence[i];
+        Color c = mv.color;
+        if (bd.get_variant() == Variant::classic_3 && c == Color(3))
+        {
+            player = nu_moves_3 % 3;
+            ++nu_moves_3;
+        }
+        else
+            player = c.to_int() % bd.get_nu_players();
+        auto child = m_tree.find_child_with_move(*node, mv);
+        if (! child)
+        {
+            child = &m_tree.create_new_child(*node);
+            m_tree.set_move(*child, mv);
+            add(m_tree, *child, player == player_black, true, result);
+            return;
+        }
+        add(m_tree, *child, player == player_black, is_real_move[i], result);
+        node = child;
+    }
+}
+
+bool OutputTree::generate_move(bool is_player_black, const Board& bd,
+                               Color to_play, Move& mv)
+{
+    for (unsigned i = 0; i < m_transforms.size(); ++i)
+        if (generate_move(is_player_black, bd, to_play, *m_transforms[i],
+                          *m_inv_transforms[i], mv))
+            return true;
+    return false;
+}
+
+bool OutputTree::generate_move(bool is_player_black, const Board& bd,
+                               Color to_play,
+                               const PointTransform<Point>& transform,
+                               const PointTransform<Point>& inv_transform,
+                               Move& mv)
+{
+    if (bd.has_setup())
+        throw Exception("OutputTree: setup not supported");
+    auto node = &m_tree.get_root();
+    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
+    {
+        auto mv = bd.get_move(i);
+        ColorMove transformed_mv(mv.color,
+                                 get_transformed(bd, mv.move, transform));
+        auto child = m_tree.find_child_with_move(*node, transformed_mv);
+        if (! child)
+            return false;
+        node = child;
+    }
+    unsigned sum = 0;
+    for (ChildIterator i(*node); i; ++i)
+        sum += get_real_count(m_tree, *i, is_player_black);
+    if (sum == 0)
+        // We haven't played a move in this position yet.
+        return false;
+    uniform_real_distribution<double> distribution(0, 1);
+    if (distribution(m_random) < 1.0 / sum)
+        // Time to generate a real move
+        return false;
+    unsigned random = static_cast<unsigned>(distribution(m_random) * sum);
+    sum = 0;
+    for (ChildIterator i(*node); i; ++i)
+    {
+        sum += get_real_count(m_tree, *i, is_player_black);
+        if (sum > random)
+        {
+            auto color_mv = m_tree.get_move(*i);
+            if (color_mv.is_null())
+                throw Exception("OutputTree: tree has node without move");
+            if (color_mv.color != to_play)
+                throw Exception("OutputTree: tree has node wrong move color");
+            mv = get_transformed(bd, color_mv.move, inv_transform);
+            return true;
+        }
+    }
+    LIBBOARDGAME_ASSERT(false);
+    return false;
+}
+
+void OutputTree::load(const string& file)
+{
+    TreeReader reader;
+    reader.read(file);
+    auto tree = reader.get_tree_transfer_ownership();
+    m_tree.init(tree);
+}
+
+void OutputTree::save(const string& file)
+{
+    ofstream out(file);
+    TreeWriter writer(out, m_tree.get_root());
+    writer.write();
+}
+
+//-----------------------------------------------------------------------------

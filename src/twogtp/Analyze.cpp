@@ -50,6 +50,7 @@ void analyze(const string& file)
     StatisticsExt<> stat_length;
     StatisticsExt<> stat_cpu_b;
     StatisticsExt<> stat_cpu_w;
+    StatisticsExt<> stat_fast_open;
     string line;
     while (getline(in, line))
     {
@@ -64,12 +65,14 @@ void analyze(const string& file)
         unsigned player;
         float cpu_b;
         float cpu_w;
-        if (columns.size() != 6
+        unsigned fast_open;
+        if (columns.size() != 7
                 || ! from_string(columns[1], result)
                 || ! from_string(columns[2], length)
                 || ! from_string(columns[3], player)
                 || ! from_string(columns[4], cpu_b)
-                || ! from_string(columns[5], cpu_w))
+                || ! from_string(columns[5], cpu_w)
+                || ! from_string(columns[6], fast_open))
             throw Exception("invalid format");
         stat_result.add(result);
         stat_result_player[player].add(result);
@@ -77,6 +80,7 @@ void analyze(const string& file)
         stat_length.add(length);
         stat_cpu_b.add(cpu_b);
         stat_cpu_w.add(cpu_w);
+        stat_fast_open.add(fast_open);
     }
     auto count = stat_result.get_count();
     cout << "Gam: " << count;
@@ -115,6 +119,11 @@ void analyze(const string& file)
     stat_cpu_w.write(cout, true, 3, false, true);
     cout << "\nLen: ";
     stat_length.write(cout, true, 1, true, true);
+    if (stat_fast_open.get_mean() > 0)
+    {
+        cout << ", Fast: ";
+        stat_fast_open.write(cout, true, 1, true, true);
+    }
     cout << '\n';
 }
 

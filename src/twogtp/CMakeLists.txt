@@ -8,8 +8,10 @@ add_executable(twogtp
   GtpConnection.h
   GtpConnection.cpp
   Main.cpp
-  OutputFile.h
-  OutputFile.cpp
+  Output.h
+  Output.cpp
+  OutputTree.h
+  OutputTree.cpp
   TwoGtp.h
   TwoGtp.cpp
 )
