@@ -48,6 +48,10 @@ Book::Book(Variant variant)
     get_transforms(variant, m_transforms, m_inv_transforms);
 }
 
+Book::~Book()
+{
+}
+
 Move Book::genmove(const Board& bd, Color c)
 {
     if (bd.has_setup())

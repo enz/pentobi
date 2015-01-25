@@ -30,6 +30,8 @@ class Book
 public:
     Book(Variant variant);
 
+    ~Book();
+
     void load(istream& in);
 
     Move genmove(const Board& bd, Color c);

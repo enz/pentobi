@@ -40,6 +40,8 @@ class OutputTree
 public:
     OutputTree(Variant variant);
 
+    ~OutputTree();
+
     void load(const string& file);
 
     void save(const string& file);
