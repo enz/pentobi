@@ -383,27 +383,12 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
     return pieces;
 }
 
-const Geometry& create_geometry(BoardType board_type)
-{
-    if (board_type == BoardType::classic)
-        return RectGeometry<Point>::get(20, 20);
-    else if (board_type == BoardType::duo)
-        return RectGeometry<Point>::get(14, 14);
-    else if (board_type == BoardType::trigon)
-        return TrigonGeometry<Point>::get(9);
-    else
-    {
-        LIBBOARDGAME_ASSERT(board_type == BoardType::trigon_3);
-        return TrigonGeometry<Point>::get(8);
-    }
-}
-
 } // namespace
 
 //-----------------------------------------------------------------------------
 
 BoardConst::BoardConst(BoardType board_type, Variant variant)
-    : m_geo(create_geometry(board_type)),
+    : m_geo(libpentobi_base::get_geometry(variant)),
       m_nu_attach_points(0)
 {
     m_board_type = board_type;
