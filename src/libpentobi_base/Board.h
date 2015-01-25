@@ -266,7 +266,7 @@ public:
     const Geometry& get_geometry() const;
 
     /** See BoardConst::to_string() */
-    string to_string(Move mv, bool with_piece_name = true) const;
+    string to_string(Move mv, bool with_piece_name = false) const;
 
     /** See BoardConst::from_string() */
     Move from_string(const string& s) const;
