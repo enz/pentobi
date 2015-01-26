@@ -24,10 +24,6 @@ public:
 
     virtual CoordPoint get_transformed(const CoordPoint& p) const = 0;
 
-    /** Get the point type of the (0,0) coordinates.
-        The transformation can only applied to this point type at (0,0). */
-    virtual unsigned get_point_type() const = 0;
-
     /** Get the new point type of the (0,0) coordinates.
         The transformation may change the point type of the (0,0) coordinates.
         For example, in the Blokus Trigon board, a reflection at the y axis
@@ -55,8 +51,6 @@ class TransfIdentity
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -67,8 +61,6 @@ class TransfRectRot90
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -81,8 +73,6 @@ class TransfRectRot180
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -93,8 +83,6 @@ class TransfRectRot270
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -107,8 +95,6 @@ class TransfRectRefl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -119,8 +105,6 @@ class TransfRectRot90Refl
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -133,8 +117,6 @@ class TransfRectRot180Refl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -145,8 +127,6 @@ class TransfRectRot270Refl
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -159,8 +139,6 @@ class TransfTrigonIdentity
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -171,8 +149,6 @@ class TransfTrigonRot60
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -185,8 +161,6 @@ class TransfTrigonRot120
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -197,8 +171,6 @@ class TransfTrigonRot180
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -211,8 +183,6 @@ class TransfTrigonRot240
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -223,8 +193,6 @@ class TransfTrigonRot300
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -237,8 +205,6 @@ class TransfTrigonRefl
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -249,8 +215,6 @@ class TransfTrigonReflRot60
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -263,8 +227,6 @@ class TransfTrigonReflRot120
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -275,8 +237,6 @@ class TransfTrigonReflRot180
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
@@ -289,8 +249,6 @@ class TransfTrigonReflRot240
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
 
-    unsigned get_point_type() const override;
-
     unsigned get_new_point_type() const override;
 };
 
@@ -301,8 +259,6 @@ class TransfTrigonReflRot300
 {
 public:
     CoordPoint get_transformed(const CoordPoint& p) const override;
-
-    unsigned get_point_type() const override;
 
     unsigned get_new_point_type() const override;
 };
