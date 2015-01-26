@@ -36,6 +36,7 @@ int main(int argc, char** argv)
             "file|f:",
             "game|g:",
             "nugames|n:",
+            "quiet",
             "splitsgf:",
             "threads:",
             "tree",
@@ -58,6 +59,9 @@ int main(int argc, char** argv)
         auto nu_games = opt.get<unsigned>("nugames", 1);
         auto nu_threads = opt.get<unsigned>("threads", 1);
         auto variant_string = opt.get("game", "classic");
+        bool quiet = opt.contains("quiet");
+        if (quiet)
+            libboardgame_util::set_log_null();
         bool fast_open = opt.contains("fastopen");
         bool create_tree = opt.contains("tree") || fast_open;
         Variant variant;
@@ -71,7 +75,7 @@ int main(int argc, char** argv)
             if (nu_threads > 1)
                 log_prefix = to_string(i + 1);
             twogtp.push_back(make_shared<TwoGtp>(black, white, variant,
-                                                 nu_games, output, false,
+                                                 nu_games, output, quiet,
                                                  log_prefix, fast_open));
         }
         vector<thread> threads;
