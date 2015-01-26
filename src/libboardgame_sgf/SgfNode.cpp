@@ -48,7 +48,7 @@ void SgfNode::append(unique_ptr<SgfNode> node)
 
 SgfNode& SgfNode::create_new_child()
 {
-    unique_ptr<SgfNode> node(new SgfNode());
+    unique_ptr<SgfNode> node(new SgfNode);
     node->m_parent = this;
     SgfNode& result = *(node.get());
     auto last_child = get_last_child();
@@ -88,7 +88,7 @@ const vector<string> SgfNode::get_multi_property(const string& id) const
 
 bool SgfNode::has_property(const string& id) const
 {
-	return find_property(id) != nullptr;
+    return find_property(id) != nullptr;
 }
 
 const SgfNode& SgfNode::get_child(unsigned i) const
