@@ -37,19 +37,35 @@ using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
 
-const Geometry& get_geometry(Variant variant)
+BoardType get_board_type(Variant variant)
 {
     switch (variant)
     {
     case Variant::duo:
     case Variant::junior:
-        return RectGeometry<Point>::get(14, 14);
+        return BoardType::duo;
     case Variant::classic:
     case Variant::classic_2:
     case Variant::classic_3:
-        return RectGeometry<Point>::get(20, 20);
+        return BoardType::classic;
     case Variant::trigon:
     case Variant::trigon_2:
+        return BoardType::trigon;
+    default:
+        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
+        return BoardType::trigon_3;
+    }
+}
+
+const Geometry& get_geometry(Variant variant)
+{
+    switch (get_board_type(variant))
+    {
+    case BoardType::duo:
+        return RectGeometry<Point>::get(14, 14);
+    case BoardType::classic:
+        return RectGeometry<Point>::get(20, 20);
+    case BoardType::trigon:
         return TrigonGeometry<Point>::get(9);
     default:
         LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
@@ -101,18 +117,15 @@ void get_transforms(Variant variant,
 {
     transforms.clear();
     inv_transforms.clear();
-    switch (variant)
+    switch (get_board_type(variant))
     {
-    case Variant::duo:
-    case Variant::junior:
+    case BoardType::duo:
         transforms.emplace_back(new PointTransfIdent<Point>);
         inv_transforms.emplace_back(new PointTransfIdent<Point>);
         transforms.emplace_back(new PointTransfRot270Refl<Point>);
         inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
         break;
-    case Variant::trigon:
-    case Variant::trigon_2:
-    case Variant::trigon_3:
+    case BoardType::trigon:
         transforms.emplace_back(new PointTransfIdent<Point>);
         inv_transforms.emplace_back(new PointTransfIdent<Point>);
         transforms.emplace_back(new PointTransfTrigonRot60<Point>);

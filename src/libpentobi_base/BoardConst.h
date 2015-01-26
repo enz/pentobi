@@ -9,13 +9,13 @@
 
 #include <array>
 #include <algorithm>
-#include "Variant.h"
 #include "Geometry.h"
 #include "Marker.h"
 #include "MoveInfo.h"
 #include "PieceInfo.h"
 #include "PieceTransforms.h"
 #include "PrecompMoves.h"
+#include "Variant.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/ColorMap.h"
 #include "libboardgame_util/ArrayList.h"
@@ -24,19 +24,6 @@ namespace libpentobi_base {
 
 using namespace std;
 using libboardgame_util::ArrayList;
-
-//-----------------------------------------------------------------------------
-
-enum class BoardType
-{
-    classic,
-
-    duo,
-
-    trigon,
-
-    trigon_3
-};
 
 //-----------------------------------------------------------------------------
 

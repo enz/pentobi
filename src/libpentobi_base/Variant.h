@@ -18,6 +18,19 @@ using libboardgame_base::PointTransform;
 
 //-----------------------------------------------------------------------------
 
+enum class BoardType
+{
+    classic,
+
+    duo,
+
+    trigon,
+
+    trigon_3
+};
+
+//-----------------------------------------------------------------------------
+
 /** Game variant. */
 enum class Variant
 {
@@ -37,6 +50,8 @@ enum class Variant
 
     trigon_3
 };
+
+//-----------------------------------------------------------------------------
 
 /** Get name of game variant as in the GM property in Blokus SGF files. */
 const char* to_string(Variant variant);
@@ -66,6 +81,8 @@ Color::IntType get_nu_colors(Variant variant);
 Color::IntType get_nu_players(Variant variant);
 
 const Geometry& get_geometry(Variant variant);
+
+BoardType get_board_type(Variant variant);
 
 /** Get invariance transformations for a game variant.
     The invariance transformations depend on the symmetry of the board type and
