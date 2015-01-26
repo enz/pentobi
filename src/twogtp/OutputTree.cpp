@@ -43,6 +43,7 @@ void add(PentobiTree& tree, const SgfNode& node, bool is_player_black,
         avg_result.fill(0);
         real_count.fill(0);
         count[index] = 1;
+        real_count[index] = 1;
         avg_result[index] = result;
     }
     else
@@ -199,8 +200,11 @@ bool OutputTree::generate_move(bool is_player_black, const Board& bd,
     sum = 0;
     for (ChildIterator i(*node); i; ++i)
     {
-        sum += get_real_count(m_tree, *i, is_player_black);
-        if (sum > random)
+        auto real_count = get_real_count(m_tree, *i, is_player_black);
+        if (real_count == 0)
+            continue;
+        sum += real_count;
+        if (sum >= random)
         {
             auto color_mv = m_tree.get_move(*i);
             if (color_mv.is_null())
