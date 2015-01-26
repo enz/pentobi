@@ -51,6 +51,11 @@ public:
     /** @pre is_trivially_copyable<T>::value */
     void memcpy_from(const Grid& grid, const Geometry& geo);
 
+    /** Set all elements to zero.
+        @pre T is a type, in which setting all bytes to zero is a valid
+        value. */
+    void memset_zero(const Geometry& geo);
+
 private:
     T m_a[Point::range];
 };
@@ -86,6 +91,12 @@ inline void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
     // Uncomment once is_trivially_copyable is implemented in GCC and MSVC
     //static_assert(is_trivially_copyable<T>::value, "")
     memcpy(m_a, grid.m_a, sizeof(T) * geo.get_range());
+}
+
+template<class P, typename T>
+inline void Grid<P, T>::memset_zero(const Geometry& geo)
+{
+    memset(m_a, 0, sizeof(T) * geo.get_range());
 }
 
 template<class P, typename T>

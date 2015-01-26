@@ -69,7 +69,7 @@ inline void State::add_moves(Point p, Color c,
                                   playout_features, total_gamma))
                 marker.set(mv);
     moves.resize(nu_moves);
-    m_moves_added_at[c].set(p);
+    m_moves_added_at[c][p] = true;
 }
 
 inline void State::add_moves(Point p, Color c, Piece piece,
@@ -458,7 +458,7 @@ void State::init_moves_without_gamma(Color c)
                                 && check_forbidden(is_forbidden, mv, moves,
                                                    nu_moves))
                             marker.set(mv);
-                m_moves_added_at[c].set(p);
+                m_moves_added_at[c][p] = true;
             }
         moves.resize(nu_moves);
     }
@@ -568,13 +568,19 @@ void State::start_simulation(size_t n)
             "=========================================================");
     m_bd.restore_snapshot();
     m_force_consider_all_pieces = false;
+    auto& geo = m_bd.get_geometry();
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_has_moves[*i] = true;
         m_is_move_list_initialized[*i] = false;
         m_playout_features[*i].restore_snapshot(m_bd);
         m_new_moves[*i].clear();
-        m_moves_added_at[*i].clear();
+#if defined(__x86_64__) || defined(__i386__)
+        m_moves_added_at[*i].memset_zero(geo);
+#else
+        // Binary representation of bool is not standardized
+        m_moves_added_at[*i].fill(false, geo);
+#endif
     }
     m_nu_passes = 0;
 }

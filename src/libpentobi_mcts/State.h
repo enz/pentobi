@@ -31,7 +31,6 @@ using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMap;
-using libpentobi_base::Marker;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::MoveMarker;
@@ -233,7 +232,7 @@ private:
         Allows the incremental update of the move lists to skip attach points
         of newly played pieces that were already attach points of previously
         played pieces. */
-    ColorMap<Marker> m_moves_added_at;
+    ColorMap<Grid<bool>> m_moves_added_at;
 
     void add_moves(Point p, Color c,
                    const Board::PiecesLeftList& pieces_considered);
