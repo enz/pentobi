@@ -622,48 +622,13 @@ Move BoardConst::from_string(const string& s) const
 
 const BoardConst& BoardConst::get(Variant variant)
 {
-    static unique_ptr<BoardConst> board_const_classic;
-    static unique_ptr<BoardConst> board_const_duo;
-    static unique_ptr<BoardConst> board_const_junior;
-    static unique_ptr<BoardConst> board_const_trigon;
-    static unique_ptr<BoardConst> board_const_trigon_3;
-    if (variant == Variant::classic || variant == Variant::classic_2
-             || variant == Variant::classic_3)
-    {
-        if (! board_const_classic)
-            board_const_classic.reset(
-                        new BoardConst(BoardType::classic, PieceSet::classic));
-        return *board_const_classic;
-    }
-    else if (variant == Variant::duo)
-    {
-        if (! board_const_duo)
-            board_const_duo.reset(
-                        new BoardConst(BoardType::duo, PieceSet::classic));
-        return *board_const_duo;
-    }
-    else if (variant == Variant::junior)
-    {
-        if (! board_const_junior)
-            board_const_junior.reset(
-                        new BoardConst(BoardType::duo, PieceSet::junior));
-        return *board_const_junior;
-    }
-    else if (variant == Variant::trigon || variant == Variant::trigon_2)
-    {
-        if (! board_const_trigon)
-            board_const_trigon.reset(
-                        new BoardConst(BoardType::trigon, PieceSet::trigon));
-        return *board_const_trigon;
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
-        if (! board_const_trigon_3)
-            board_const_trigon_3.reset(
-                        new BoardConst(BoardType::trigon_3, PieceSet::trigon));
-        return *board_const_trigon_3;
-    }
+    static map<BoardType, map<PieceSet, unique_ptr<BoardConst>>> board_const;
+    auto board_type = libpentobi_base::get_board_type(variant);
+    auto piece_set = get_piece_set(variant);
+    auto& bc = board_const[board_type][piece_set];
+    if (! bc)
+        bc.reset(new BoardConst(board_type, piece_set));
+    return *bc;
 }
 
 bool BoardConst::get_piece_by_name(const string& name, Piece& piece) const
