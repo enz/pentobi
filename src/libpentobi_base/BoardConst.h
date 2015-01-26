@@ -128,6 +128,12 @@ private:
     typedef array<PieceMap<Grid<LocalMovesList>>, PrecompMoves::nu_adj_status>
         FullMoveTable;
 
+    /** Local variable reused for efficiency.
+        This variable is only used during construction. It can be static
+        because construction is done with BoardConst::get(), which is not
+        thread-safe anyway. */
+    static Marker s_marker;
+
     Piece::IntType m_nu_pieces;
 
     unsigned m_total_piece_points;
@@ -158,9 +164,6 @@ private:
     unique_ptr<FullMoveTable> m_full_move_table;
 
     PrecompMoves m_precomp_moves;
-
-    /** Local variable reused for efficiency. */
-    Marker m_marker;
 
     /** Forbidden neighbors for a given adjacent status index at a given point.
         Only used during construction. */

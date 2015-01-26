@@ -387,6 +387,8 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
 
 //-----------------------------------------------------------------------------
 
+Marker BoardConst::s_marker;
+
 BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     : m_geo(libpentobi_base::get_geometry(board_type)),
       m_nu_attach_points(0)
@@ -762,24 +764,24 @@ void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
 {
     auto begin = info.begin();
     auto end = info.end();
-    m_marker.clear();
+    s_marker.clear();
     for (auto i = begin; i != end; ++i)
-        m_marker.set(*i);
+        s_marker.set(*i);
     ArrayList<Point, PieceInfo::max_adj> adj_points;
     for (auto i = begin; i != end; ++i)
         m_geo.for_each_adj(*i, [&](Point j) {
-            if (! m_marker[j])
+            if (! s_marker[j])
             {
-                m_marker.set(j);
+                s_marker.set(j);
                 adj_points.push_back(j);
             }
         });
     ArrayList<Point, PieceInfo::max_attach> attach_points;
     for (auto i = begin; i != end; ++i)
         m_geo.for_each_diag(*i, [&](Point j) {
-            if (! m_marker[j])
+            if (! s_marker[j])
             {
-                m_marker.set(j);
+                s_marker.set(j);
                 attach_points.push_back(j);
             }
         });
