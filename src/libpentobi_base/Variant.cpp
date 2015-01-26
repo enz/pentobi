@@ -57,9 +57,9 @@ BoardType get_board_type(Variant variant)
     }
 }
 
-const Geometry& get_geometry(Variant variant)
+const Geometry& get_geometry(BoardType board_type)
 {
-    switch (get_board_type(variant))
+    switch (board_type)
     {
     case BoardType::duo:
         return RectGeometry<Point>::get(14, 14);
@@ -68,9 +68,14 @@ const Geometry& get_geometry(Variant variant)
     case BoardType::trigon:
         return TrigonGeometry<Point>::get(9);
     default:
-        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
+        LIBBOARDGAME_ASSERT(board_type == BoardType::trigon_3);
         return TrigonGeometry<Point>::get(8);
     }
+}
+
+const Geometry& get_geometry(Variant variant)
+{
+    return get_geometry(get_board_type(variant));
 }
 
 Color::IntType get_nu_colors(Variant variant)
@@ -108,6 +113,25 @@ Color::IntType get_nu_players(Variant variant)
         LIBBOARDGAME_ASSERT(variant == Variant::classic
                             || variant == Variant::trigon);
         return 4;
+    }
+}
+
+PieceSet get_piece_set(Variant variant)
+{
+    switch (variant)
+    {
+    case Variant::classic:
+    case Variant::classic_2:
+    case Variant::classic_3:
+    case Variant::duo:
+        return PieceSet::classic;
+    case Variant::trigon:
+    case Variant::trigon_2:
+    case Variant::trigon_3:
+        return PieceSet::trigon;
+    default:
+        LIBBOARDGAME_ASSERT(variant == Variant::junior);
+        return PieceSet::junior;
     }
 }
 

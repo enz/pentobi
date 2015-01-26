@@ -174,7 +174,7 @@ private:
         for Point is that y goes downwards. */
     Grid<unsigned> m_compare_val;
 
-    BoardConst(BoardType board_type, Variant variant);
+    BoardConst(BoardType board_type, PieceSet piece_set);
 
     void create_move(Piece piece, const PiecePoints& coord_points,
                      Point label_pos);

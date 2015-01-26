@@ -18,6 +18,17 @@ using libboardgame_base::PointTransform;
 
 //-----------------------------------------------------------------------------
 
+enum class PieceSet
+{
+    classic,
+
+    junior,
+
+    trigon
+};
+
+//-----------------------------------------------------------------------------
+
 enum class BoardType
 {
     classic,
@@ -80,9 +91,13 @@ Color::IntType get_nu_colors(Variant variant);
 
 Color::IntType get_nu_players(Variant variant);
 
+const Geometry& get_geometry(BoardType board_type);
+
 const Geometry& get_geometry(Variant variant);
 
 BoardType get_board_type(Variant variant);
+
+PieceSet get_piece_set(Variant variant);
 
 /** Get invariance transformations for a game variant.
     The invariance transformations depend on the symmetry of the board type and

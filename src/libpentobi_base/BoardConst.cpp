@@ -387,42 +387,45 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
 
 //-----------------------------------------------------------------------------
 
-BoardConst::BoardConst(BoardType board_type, Variant variant)
-    : m_geo(libpentobi_base::get_geometry(variant)),
+BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
+    : m_geo(libpentobi_base::get_geometry(board_type)),
       m_nu_attach_points(0)
 {
     m_board_type = board_type;
-    if (board_type == BoardType::trigon)
+    if (board_type == BoardType::trigon && piece_set == PieceSet::trigon)
     {
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_trigon);
     }
-    else if (board_type == BoardType::trigon_3)
+    else if (board_type == BoardType::trigon_3
+             && piece_set == PieceSet::trigon)
     {
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_trigon_3);
     }
-    else if (board_type == BoardType::classic)
+    else if (board_type == BoardType::classic
+             && piece_set == PieceSet::classic)
     {
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_classic(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_classic);
     }
-    else if (variant == Variant::junior)
+    else if (board_type == BoardType::duo && piece_set == PieceSet::junior)
     {
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_junior(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_junior);
     }
-    else
+    else if (board_type == BoardType::duo && piece_set == PieceSet::classic)
     {
-        LIBBOARDGAME_ASSERT(variant == Variant::duo);
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_classic(m_geo, *m_transforms);
         reserve_info(Move::onboard_moves_duo);
     }
+    else
+        LIBBOARDGAME_ASSERT(false);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     init_adj_status();
     auto width = m_geo.get_width();
@@ -431,21 +434,21 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         m_compare_val[*i] =
                 (height - m_geo.get_y(*i) - 1) * width + m_geo.get_x(*i);
     create_moves();
-    if (board_type == BoardType::classic)
-        LIBBOARDGAME_ASSERT(m_move_info.size()
-                            == Move::onboard_moves_classic + 1);
-    else if (board_type == BoardType::trigon)
-        LIBBOARDGAME_ASSERT(m_move_info.size()
-                            == Move::onboard_moves_trigon + 1);
-    else if (board_type == BoardType::trigon_3)
-        LIBBOARDGAME_ASSERT(m_move_info.size()
-                            == Move::onboard_moves_trigon_3 + 1);
-    else if (variant == Variant::duo)
-        LIBBOARDGAME_ASSERT(m_move_info.size()
-                            == Move::onboard_moves_duo + 1);
-    else if (variant == Variant::junior)
-        LIBBOARDGAME_ASSERT(m_move_info.size()
-                            == Move::onboard_moves_junior + 1);
+    auto nu_moves = m_move_info.size();
+    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(nu_moves);
+    if (board_type == BoardType::classic && piece_set == PieceSet::classic)
+        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_classic + 1);
+    else if (board_type == BoardType::trigon && piece_set == PieceSet::trigon)
+        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_trigon + 1);
+    else if (board_type == BoardType::trigon_3
+             && piece_set == PieceSet::trigon)
+        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_trigon_3 + 1);
+    else if (board_type == BoardType::duo && piece_set == PieceSet::classic)
+        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_duo + 1);
+    else if (board_type == BoardType::duo && piece_set == PieceSet::junior)
+        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_junior + 1);
+    else
+        LIBBOARDGAME_ASSERT(false);
     m_total_piece_points = 0;
     m_max_piece_size = 0;
     for (const PieceInfo& piece : m_pieces)
@@ -453,24 +456,22 @@ BoardConst::BoardConst(BoardType board_type, Variant variant)
         m_max_piece_size = max(m_max_piece_size, piece.get_size());
         m_total_piece_points += piece.get_size();
     }
-    if (board_type == BoardType::classic || variant == Variant::duo)
+    if (piece_set == PieceSet::classic)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 89);
     }
-    else if (variant == Variant::junior)
+    else if (piece_set == PieceSet::junior)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 12);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 44);
     }
-    else if (board_type == BoardType::trigon
-             || board_type == BoardType::trigon_3)
+    else if (piece_set == PieceSet::trigon)
     {
         LIBBOARDGAME_ASSERT(m_nu_pieces == 22);
         LIBBOARDGAME_ASSERT(m_total_piece_points == 110);
     }
-    if (variant == Variant::duo || variant == Variant::junior
-        || variant == Variant::trigon_2)
+    if (board_type == BoardType::duo || board_type == BoardType::trigon)
         init_symmetry_info();
 }
 
@@ -630,37 +631,37 @@ const BoardConst& BoardConst::get(Variant variant)
              || variant == Variant::classic_3)
     {
         if (! board_const_classic)
-            board_const_classic.reset(new BoardConst(BoardType::classic,
-                                                     Variant::classic));
+            board_const_classic.reset(
+                        new BoardConst(BoardType::classic, PieceSet::classic));
         return *board_const_classic;
     }
     else if (variant == Variant::duo)
     {
         if (! board_const_duo)
-            board_const_duo.reset(new BoardConst(BoardType::duo,
-                                                 Variant::duo));
+            board_const_duo.reset(
+                        new BoardConst(BoardType::duo, PieceSet::classic));
         return *board_const_duo;
     }
     else if (variant == Variant::junior)
     {
         if (! board_const_junior)
-            board_const_junior.reset(new BoardConst(BoardType::duo,
-                                                    Variant::junior));
+            board_const_junior.reset(
+                        new BoardConst(BoardType::duo, PieceSet::junior));
         return *board_const_junior;
     }
     else if (variant == Variant::trigon || variant == Variant::trigon_2)
     {
         if (! board_const_trigon)
-            board_const_trigon.reset(new BoardConst(BoardType::trigon,
-                                                    Variant::trigon));
+            board_const_trigon.reset(
+                        new BoardConst(BoardType::trigon, PieceSet::trigon));
         return *board_const_trigon;
     }
     else
     {
         LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
         if (! board_const_trigon_3)
-            board_const_trigon_3.reset(new BoardConst(BoardType::trigon_3,
-                                                      Variant::trigon_3));
+            board_const_trigon_3.reset(
+                        new BoardConst(BoardType::trigon_3, PieceSet::trigon));
         return *board_const_trigon_3;
     }
 }
