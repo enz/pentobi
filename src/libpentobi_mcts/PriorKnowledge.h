@@ -8,6 +8,7 @@
 #define LIBPENTOBI_MCTS_PRIOR_KNOWLEDGE_H
 
 #include "Float.h"
+#include "SearchParamConst.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/MoveList.h"
@@ -28,7 +29,8 @@ using libpentobi_base::PointList;
 class PriorKnowledge
 {
 public:
-    typedef libboardgame_mcts::Node<Move, Float> Node;
+    typedef libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>
+    Node;
 
     typedef libboardgame_mcts::Tree<Node> Tree;
 

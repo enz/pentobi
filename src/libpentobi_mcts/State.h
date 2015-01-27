@@ -100,7 +100,8 @@ struct SharedConst
 class State
 {
 public:
-    typedef libboardgame_mcts::Node<Move, Float> Node;
+    typedef libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>
+    Node;
 
     typedef libboardgame_mcts::Tree<Node> Tree;
 

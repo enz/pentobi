@@ -37,6 +37,12 @@ struct SearchParamConst
     static const unsigned max_moves =
             Color::range * (Color::range * Board::max_pieces + 1);
 
+#ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
+    static const bool multithread = false;
+#else
+    static const bool multithread = true;
+#endif
+
     static const bool rave = true;
 
     static const bool rave_check_same = false;

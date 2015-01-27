@@ -72,6 +72,11 @@ struct SearchParamConstDefault
     /** The maximum length of a game. */
     static const unsigned max_moves = 1000;
 
+    /** Compile with support for multi-threaded search.
+        Disabling this slightly increases the performance if support for a
+        multi-threaded search is not needed. */
+    static const bool multithread = true;
+
     /** Use RAVE. */
     static const bool rave = false;
 
@@ -140,9 +145,11 @@ public:
 
     typedef R SearchParamConst;
 
+    static const bool multithread = SearchParamConst::multithread;
+
     typedef typename SearchParamConst::Float Float;
 
-    typedef libboardgame_mcts::Node<M, Float> Node;
+    typedef libboardgame_mcts::Node<M, Float, multithread> Node;
 
     typedef libboardgame_mcts::ChildIterator<Node> ChildIterator;
 
@@ -602,10 +609,10 @@ private:
         of current search. */
     RootStat m_init_val;
 
-    LastGoodReply<Move, max_players, lgr_hash_table_size> m_lgr;
+    LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
 
     /** See get_nu_simulations(). */
-    LIBBOARDGAME_MCTS_ATOMIC(size_t) m_nu_simulations;
+    Atomic<size_t, multithread> m_nu_simulations;
 
     /** Mutex used in log_thread() */
     mutable mutex m_log_mutex;
@@ -823,8 +830,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
         simulations_per_sec = expected_sim_per_sec();
     else
     {
-        size_t nu_simulations =
-            LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_nu_simulations);
+        size_t nu_simulations = m_nu_simulations.load(memory_order_relaxed);
         simulations_per_sec = double(nu_simulations) / time;
     }
     double remaining_time;
@@ -895,11 +901,9 @@ bool SearchBase<S, M, R>::check_move_cannot_change(Float count,
 template<class S, class M, class R>
 void SearchBase<S, M, R>::create_threads()
 {
-#ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
-    if (m_nu_threads > 1)
+    if (! multithread && m_nu_threads > 1)
         throw Exception("libboardgame_mcts::Search was compiled"
                         " without support for multithreading");
-#endif
     log("Creating ", m_nu_threads, " threads");
     m_threads.clear();
     m_threads.reserve(m_nu_threads);
@@ -1164,10 +1168,9 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
                 break;
             node = simulation.nodes[depth + 1];
             m_tree.inc_visit_count(*node);
-#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
-            if (SearchParamConst::virtual_loss && m_nu_threads > 0)
+            if (multithread && SearchParamConst::virtual_loss
+                    && m_nu_threads > 0)
                 m_tree.add_value(*node, 0);
-#endif
             state.play_in_tree(node->get_move());
             ++depth;
             expand_threshold += m_expand_threshold_inc;
@@ -1186,10 +1189,8 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     {
         node = select_child(*node);
         m_tree.inc_visit_count(*node);
-#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
-        if (SearchParamConst::virtual_loss && m_nu_threads > 0)
+        if (multithread && SearchParamConst::virtual_loss && m_nu_threads > 0)
             m_tree.add_value(*node, 0);
-#endif
         simulation.nodes.push_back(node);
         Move mv = node->get_move();
         simulation.moves.push_back(PlayerMove(state.get_to_play(), mv));
@@ -1408,7 +1409,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     m_max_count = max_count;
     m_min_simulations = min_simulations;
     m_max_time = max_time;
-    m_nu_simulations = 0;
+    m_nu_simulations.store(0);
     Float prune_min_count = get_prune_count_start();
 
     // Don't use multi-threading for very short searches (less than 0.5s).
@@ -1489,9 +1490,10 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
     double time_interval = 0.1;
     if (m_max_count == 0 && m_max_time < 1)
         time_interval = 0.1 * m_max_time;
-    IntervalChecker expensive_abort_checker(*m_time_source, time_interval,
-                                           bind(&SearchBase::check_abort_expensive,
-                                                this, ref(thread_state)));
+    IntervalChecker expensive_abort_checker(
+                *m_time_source, time_interval,
+                bind(&SearchBase::check_abort_expensive, this,
+                     ref(thread_state)));
     if (m_deterministic)
     {
         unsigned interval =
@@ -1502,12 +1504,11 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
     {
         thread_state.is_out_of_mem = false;
         auto root_count = m_tree.get_root().get_visit_count();
-        auto nu_simulations =
-            LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(m_nu_simulations, 1);
+        auto nu_simulations = m_nu_simulations.fetch_add(1);
         if (root_count > 0 && nu_simulations > m_min_simulations
-            && (check_abort(thread_state) || expensive_abort_checker()))
+                && (check_abort(thread_state) || expensive_abort_checker()))
         {
-            LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(m_nu_simulations, -1);
+            m_nu_simulations.fetch_add(-1);
             break;
         }
         ++thread_state.nu_simulations;
@@ -1833,10 +1834,8 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
         auto& node = *nodes[i];
         auto mv = simulation.moves[i - 1];
         m_tree.add_value(node, eval[mv.player]);
-#ifndef LIBBOARDGAME_MCTS_SINGLE_THREAD
-        if (SearchParamConst::virtual_loss && m_nu_threads > 0)
+        if (multithread && SearchParamConst::virtual_loss && m_nu_threads > 0)
             m_tree.remove_value(node, 0);
-#endif
     }
     for (PlayerInt i = 0; i < m_nu_players; ++i)
     {

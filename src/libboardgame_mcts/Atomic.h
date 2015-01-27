@@ -7,60 +7,95 @@
 #ifndef LIBBOARDGAME_MCTS_ATOMIC_H
 #define LIBBOARDGAME_MCTS_ATOMIC_H
 
-//-----------------------------------------------------------------------------
-
-// If no support for multi-threaded search is needed, defining
-// LIBBOARDGAME_MCTS_SINGLE_THREAD will use normal instead of atomic variables,
-// which can speed up the search by a small amount.
-#ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
-
+#include <atomic>
+#include "libboardgame_util/Unused.h"
 
 namespace libboardgame_mcts {
 
-template<typename T, typename V>
-inline T fetch_add_single_thread(T& x, const V& val)
-{
-    auto tmp = x;
-    x += val;
-    return tmp;
-}
-
-} // namespace libboardgame_mcts
-
-#define LIBBOARDGAME_MCTS_ATOMIC(X) X
-
-#define LIBBOARDGAME_MCTS_ATOMIC_LOAD(x, mem_order) x
-
-#define LIBBOARDGAME_MCTS_ATOMIC_STORE(x, v, mem_order) x = v
-
-#define LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(x) x
-
-#define LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(x, v) x = v
-
-#define LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(x, v) fetch_add_single_thread(x, v)
-
-
-#else // LIBBOARDGAME_MCTS_SINGLE_THREAD
-
-
-#include <atomic>
-
-#define LIBBOARDGAME_MCTS_ATOMIC(X) std::atomic<X>
-
-#define LIBBOARDGAME_MCTS_ATOMIC_LOAD(x, mem_order) (x).load(mem_order)
-
-#define LIBBOARDGAME_MCTS_ATOMIC_STORE(x, v, mem_order) (x).store(v, mem_order)
-
-#define LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(x) (x).load(memory_order_relaxed)
-
-#define LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(x, v) \
-    (x).store(v, memory_order_relaxed)
-
-#define LIBBOARDGAME_MCTS_ATOMIC_FETCH_ADD(x, v) (x).fetch_add(v)
-
-
-#endif // LIBBOARDGAME_MCTS_SINGLE_THREAD
+using namespace std;
 
 //-----------------------------------------------------------------------------
+
+/** Data that may be atomic.
+    This struct is used for sharing the same code for a single-threaded and
+    a multi-threaded implementation depending on a template argument.
+    In the multi-threaded implementation, the variable is atomic, which
+    usually causes a small performance penalty, in the single-threaded
+    implementation, it is simply a regular variable.
+    @param T The type of the variable.
+    @param MT true, if the variable should be atomic. */
+template<typename T, bool MT> struct Atomic;
+
+template<typename T>
+struct Atomic<T, false>
+{
+    T val;
+
+    T operator=(T t)
+    {
+        val = t;
+        return val;
+    }
+
+    T load(memory_order order = memory_order_seq_cst) const
+    {
+        LIBBOARDGAME_UNUSED(order);
+        return val;
+    }
+
+    void store(T t, memory_order order = memory_order_seq_cst)
+    {
+        LIBBOARDGAME_UNUSED(order);
+        val = t;
+    }
+
+    operator T() const
+    {
+        return val;
+    }
+
+    T fetch_add(T t)
+    {
+        T tmp = val;
+        val += t;
+        return tmp;
+    }
+};
+
+template<typename T>
+struct Atomic<T, true>
+{
+    atomic<T> val;
+
+    T operator=(T t)
+    {
+        val.store(t);
+        return val;
+    }
+
+    T load(memory_order order = memory_order_seq_cst) const
+    {
+        return val.load(order);
+    }
+
+    void store(T t, memory_order order = memory_order_seq_cst)
+    {
+        val.store(t, order);
+    }
+
+    operator T() const
+    {
+        return load();
+    }
+
+    T fetch_add(T t)
+    {
+        return val.fetch_add(t);
+    }
+};
+
+//-----------------------------------------------------------------------------
+
+} // namespace libboardgame_mcts
 
 #endif // LIBBOARDGAME_MCTS_ATOMIC_H

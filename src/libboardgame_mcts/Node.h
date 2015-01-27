@@ -25,7 +25,7 @@ typedef uint_least32_t NodeIdx;
 /** %Node in a MCTS tree.
     For details about how the nodes are used in lock-free multi-threaded mode,
     see @ref libboardgame_doc_enz_2009. */
-template<typename M, typename F>
+template<typename M, typename F, bool MT>
 class Node
 {
 public:
@@ -104,123 +104,121 @@ public:
     NodeIdx get_first_child() const;
 
 private:
-    LIBBOARDGAME_MCTS_ATOMIC(Float) m_value;
+    Atomic<Float, MT> m_value;
 
-    LIBBOARDGAME_MCTS_ATOMIC(Float) m_value_count;
+    Atomic<Float, MT> m_value_count;
 
-    LIBBOARDGAME_MCTS_ATOMIC(Float) m_visit_count;
+    Atomic<Float, MT> m_visit_count;
 
-    LIBBOARDGAME_MCTS_ATOMIC(unsigned short) m_nu_children;
+    Atomic<unsigned short, MT> m_nu_children;
 
     Move m_move;
 
     NodeIdx m_first_child;
 };
 
-template<typename M, typename F>
-void Node<M, F>::add_value(Float v)
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::add_value(Float v)
 {
     // Intentionally uses no synchronization and does not care about
     // lost updates in multi-threaded mode
-    Float count = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value_count);
-    Float value = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value);
+    Float count = m_value_count.load(memory_order_relaxed);
+    Float value = m_value.load(memory_order_relaxed);
     ++count;
     value += (v - value) / count;
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value, value);
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value_count, count);
+    m_value.store(value, memory_order_relaxed);
+    m_value_count.store(count, memory_order_relaxed);
 }
 
-template<typename M, typename F>
-void Node<M, F>::add_value(Float v, Float weight)
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::add_value(Float v, Float weight)
 {
     // Intentionally uses no synchronization and does not care about
     // lost updates in multi-threaded mode
-    Float count = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value_count);
-    Float value = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value);
+    Float count = m_value_count.load(memory_order_relaxed);
+    Float value = m_value.load(memory_order_relaxed);
     count += weight;
     value += weight * (v - value) / count;
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value, value);
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value_count, count);
+    m_value.store(value, memory_order_relaxed);
+    m_value_count.store(count, memory_order_relaxed);
 }
 
-template<typename M, typename F>
-void Node<M, F>::copy_data_from(const Node& node)
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::copy_data_from(const Node& node)
 {
     // Reminder to update this function when the class gets additional members
     struct Dummy
     {
-        LIBBOARDGAME_MCTS_ATOMIC(Float) m_value;
-        LIBBOARDGAME_MCTS_ATOMIC(Float) m_value_count;
-        LIBBOARDGAME_MCTS_ATOMIC(Float) m_visit_count;
-        LIBBOARDGAME_MCTS_ATOMIC(unsigned short) m_nu_children;
+        Atomic<Float, MT> m_value;
+        Atomic<Float, MT> m_value_count;
+        Atomic<Float, MT> m_visit_count;
+        Atomic<unsigned short, MT> m_nu_children;
         Move m_move;
         NodeIdx m_first_child;
     };
     static_assert(sizeof(Node) == sizeof(Dummy), "");
 
     m_move = node.m_move;
-    m_value_count = LIBBOARDGAME_MCTS_ATOMIC_LOAD(node.m_value_count,
-                                                  memory_order_seq_cst);
-    m_value = LIBBOARDGAME_MCTS_ATOMIC_LOAD(node.m_value, memory_order_seq_cst);
-    m_visit_count = LIBBOARDGAME_MCTS_ATOMIC_LOAD(node.m_visit_count,
-                                                  memory_order_seq_cst);
+    m_value_count = node.m_value_count.load();
+    m_value = node.m_value.load();
+    m_visit_count = node.m_visit_count.load();
 }
 
-template<typename M, typename F>
-inline auto Node<M, F>::get_value_count() const -> Float
+template<typename M, typename F, bool MT>
+inline auto Node<M, F, MT>::get_value_count() const -> Float
 {
-    return LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value_count);
+    return m_value_count.load(memory_order_relaxed);
 }
 
-template<typename M, typename F>
-inline NodeIdx Node<M, F>::get_first_child() const
+template<typename M, typename F, bool MT>
+inline NodeIdx Node<M, F, MT>::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
     return m_first_child;
 }
 
-template<typename M, typename F>
-inline auto Node<M, F>::get_move() const -> const Move&
+template<typename M, typename F, bool MT>
+inline auto Node<M, F, MT>::get_move() const -> const Move&
 {
     return m_move;
 }
 
-template<typename M, typename F>
-inline unsigned short Node<M, F>::get_nu_children() const
+template<typename M, typename F, bool MT>
+inline unsigned short Node<M, F, MT>::get_nu_children() const
 {
-    return LIBBOARDGAME_MCTS_ATOMIC_LOAD(m_nu_children, memory_order_acquire);
+    return m_nu_children.load(memory_order_acquire);
 }
 
-template<typename M, typename F>
-inline auto Node<M, F>::get_value() const -> Float
+template<typename M, typename F, bool MT>
+inline auto Node<M, F, MT>::get_value() const -> Float
 {
-    return LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value);
+    return m_value.load(memory_order_relaxed);
 }
 
-template<typename M, typename F>
-inline auto Node<M, F>::get_visit_count() const -> Float
+template<typename M, typename F, bool MT>
+inline auto Node<M, F, MT>::get_visit_count() const -> Float
 {
-    return LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_visit_count);
+    return m_visit_count.load(memory_order_relaxed);
 }
 
-template<typename M, typename F>
-inline bool Node<M, F>::has_children() const
+template<typename M, typename F, bool MT>
+inline bool Node<M, F, MT>::has_children() const
 {
     return get_nu_children() > 0;
 }
 
-template<typename M, typename F>
-inline void Node<M, F>::inc_visit_count()
+template<typename M, typename F, bool MT>
+inline void Node<M, F, MT>::inc_visit_count()
 {
     // We don't care about the unlikely case that updates are lost because
     // incrementing is not atomic
-    Float count = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_visit_count);
+    Float count = m_visit_count.load(memory_order_relaxed);
     ++count;
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_visit_count, count);
+    m_visit_count.store(count, memory_order_relaxed);
 }
 
-template<typename M, typename F>
-void Node<M, F>::init(const Move& mv, Float value, Float count)
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::init(const Move& mv, Float value, Float count)
 {
     // The node is not yet visible to other threads because init() is called
     // before the children are linked to its parent with link_children()
@@ -228,71 +226,70 @@ void Node<M, F>::init(const Move& mv, Float value, Float count)
     // Therefore, the most efficient way here is to initialize all values with
     // memory_order_relaxed.
     m_move = mv;
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value_count, count);
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value, value);
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_visit_count, 0);
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_nu_children, 0);
+    m_value_count.store(count, memory_order_relaxed);
+    m_value.store(value, memory_order_relaxed);
+    m_visit_count.store(0, memory_order_relaxed);
+    m_nu_children.store(0, memory_order_relaxed);
 }
 
-template<typename M, typename F>
-void Node<M, F>::init_value(Float value, Float count)
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::init_value(Float value, Float count)
 {
     m_value_count = count;
     m_value = value;
 }
 
-template<typename M, typename F>
-inline void Node<M, F>::link_children(NodeIdx first_child,
-                                      unsigned short nu_children)
+template<typename M, typename F, bool MT>
+inline void Node<M, F, MT>::link_children(NodeIdx first_child,
+                                          unsigned short nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children < Move::range);
     // first_child cannot be 0 because 0 is always used for the root node
     LIBBOARDGAME_ASSERT(first_child != 0);
     m_first_child = first_child;
-    LIBBOARDGAME_MCTS_ATOMIC_STORE(m_nu_children, nu_children,
-                                   memory_order_release);
+    m_nu_children.store(nu_children, memory_order_release);
 }
 
-template<typename M, typename F>
-void Node<M, F>::remove_value(Float v)
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::remove_value(Float v)
 {
     // Intentionally uses no synchronization and does not care about
     // lost updates in multi-threaded mode
-    Float count = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value_count);
+    Float count = m_value_count.load(memory_order_relaxed);
     if (count > 1)
     {
-        Float value = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value);
+        Float value = m_value.load(memory_order_relaxed);
         --count;
         value -= (v - value) / count;
-        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value, value);
-        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value_count, count);
+        m_value.store(value, memory_order_relaxed);
+        m_value_count.store(count, memory_order_relaxed);
     }
     else
-        LIBBOARDGAME_MCTS_ATOMIC_STORE(m_value_count, 0, memory_order_relaxed);
+        m_value_count.store(0, memory_order_relaxed);
 }
 
-template<typename M, typename F>
-void Node<M, F>::remove_value(Float v, Float weight)
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::remove_value(Float v, Float weight)
 {
     // Intentionally uses no synchronization and does not care about
     // lost updates in multi-threaded mode
-    Float count = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value_count);
+    Float count = m_value_count.load(memory_order_relaxed);
     if (count > weight)
     {
-        Float value = LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(m_value);
+        Float value = m_value.load(memory_order_relaxed);
         count -= weight;
         value -= weight * (v - value) / count;
-        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value, value);
-        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value_count, count);
+        m_value.store(value, memory_order_relaxed);
+        m_value_count.store(count, memory_order_relaxed);
     }
     else
-        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_value_count, 0);
+        m_value_count.store(0, memory_order_relaxed);
 }
 
-template<typename M, typename F>
-inline void Node<M, F>::unlink_children()
+template<typename M, typename F, bool MT>
+inline void Node<M, F, MT>::unlink_children()
 {
-    LIBBOARDGAME_MCTS_ATOMIC_STORE(m_nu_children, 0, memory_order_release);
+    m_nu_children.store(0, memory_order_release);
 }
 
 //-----------------------------------------------------------------------------

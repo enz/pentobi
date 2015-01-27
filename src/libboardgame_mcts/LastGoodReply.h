@@ -36,8 +36,9 @@ using namespace std;
     probably rare, no major negative effect is expected from these collisions.
     @tparam M The move type.
     @tparam P The (maximum) number of players.
-    @tparam S The number of entries in the LGR2 has table (per player). */
-template<class M, unsigned P, size_t S>
+    @tparam S The number of entries in the LGR2 has table (per player).
+    @tparam MT Whether the LGR table is used in a multi-threaded search. */
+template<class M, unsigned P, size_t S, bool MT>
 class LastGoodReply
 {
 public:
@@ -63,45 +64,41 @@ public:
 private:
     size_t m_hash[Move::range];
 
-    LIBBOARDGAME_MCTS_ATOMIC(typename Move::IntType)
-        m_lgr1[max_players][Move::range];
+    Atomic<typename Move::IntType, MT> m_lgr1[max_players][Move::range];
 
-    LIBBOARDGAME_MCTS_ATOMIC(typename Move::IntType)
-        m_lgr2[max_players][hash_table_size];
+    Atomic<typename Move::IntType, MT> m_lgr2[max_players][hash_table_size];
 
     size_t get_index(Move last_mv, Move second_last_mv) const;
 };
 
-template<class M, unsigned P, size_t S>
-LastGoodReply<M, P, S>::LastGoodReply()
+template<class M, unsigned P, size_t S, bool MT>
+LastGoodReply<M, P, S, MT>::LastGoodReply()
 {
     mt19937 generator;
     for (auto& hash : m_hash)
         hash = generator();
 }
 
-template<class M, unsigned P, size_t S>
-inline size_t LastGoodReply<M, P, S>::get_index(Move last_mv,
-                                                Move second_last_mv) const
+template<class M, unsigned P, size_t S, bool MT>
+inline size_t LastGoodReply<M, P, S, MT>::get_index(Move last_mv,
+                                                    Move second_last_mv) const
 {
     size_t hash = (m_hash[last_mv.to_int()] ^ m_hash[second_last_mv.to_int()]);
     return hash % hash_table_size;
 }
 
-template<class M, unsigned P, size_t S>
-inline void LastGoodReply<M, P, S>::get(PlayerInt player, Move last_mv,
-                                        Move second_last_mv,
-                                        Move& lgr1, Move& lgr2) const
+template<class M, unsigned P, size_t S, bool MT>
+inline void LastGoodReply<M, P, S, MT>::get(PlayerInt player, Move last_mv,
+                                            Move second_last_mv,
+                                            Move& lgr1, Move& lgr2) const
 {
     auto index = get_index(last_mv, second_last_mv);
-    lgr2 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(
-                    m_lgr2[player][index]));
-    lgr1 = Move(LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(
-                    m_lgr1[player][last_mv.to_int()]));
+    lgr2 = Move(m_lgr2[player][index].load(memory_order_relaxed));
+    lgr1 = Move(m_lgr1[player][last_mv.to_int()].load(memory_order_relaxed));
 }
 
-template<class M, unsigned P, size_t S>
-void LastGoodReply<M, P, S>::init(PlayerInt nu_players)
+template<class M, unsigned P, size_t S, bool MT>
+void LastGoodReply<M, P, S, MT>::init(PlayerInt nu_players)
 {
     for (PlayerInt i = 0; i < nu_players; ++i)
         if (Move::null().to_int() == 0)
@@ -119,35 +116,33 @@ void LastGoodReply<M, P, S>::init(PlayerInt nu_players)
         }
 }
 
-template<class M, unsigned P, size_t S>
-inline void LastGoodReply<M, P, S>::forget(PlayerInt player, Move last_mv,
-                                           Move second_last_mv, Move reply)
+template<class M, unsigned P, size_t S, bool MT>
+inline void LastGoodReply<M, P, S, MT>::forget(PlayerInt player, Move last_mv,
+                                               Move second_last_mv, Move reply)
 {
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
     {
         auto index = get_index(last_mv, second_last_mv);
         auto& stored_reply = m_lgr2[player][index];
-        if (LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(stored_reply) == reply_int)
-            LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(stored_reply, null_int);
+        if (stored_reply.load(memory_order_relaxed) == reply_int)
+            stored_reply.store(null_int, memory_order_relaxed);
     }
     auto& stored_reply = m_lgr1[player][last_mv.to_int()];
-    if (LIBBOARDGAME_MCTS_ATOMIC_LOAD_RELAXED(stored_reply) == reply_int)
-        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(stored_reply, null_int);
+    if (stored_reply.load(memory_order_relaxed) == reply_int)
+        stored_reply.store(null_int, memory_order_relaxed);
 }
 
-template<class M, unsigned P, size_t S>
-inline void LastGoodReply<M, P, S>::store(PlayerInt player, Move last_mv,
-                                          Move second_last_mv, Move reply)
+template<class M, unsigned P, size_t S, bool MT>
+inline void LastGoodReply<M, P, S, MT>::store(PlayerInt player, Move last_mv,
+                                              Move second_last_mv, Move reply)
 {
     auto reply_int = reply.to_int();
     {
         auto index = get_index(last_mv, second_last_mv);
-        LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_lgr2[player][index],
-                                               reply_int);
+        m_lgr2[player][index].store(reply_int, memory_order_relaxed);
     }
-    LIBBOARDGAME_MCTS_ATOMIC_STORE_RELAXED(m_lgr1[player][last_mv.to_int()],
-                                           reply_int);
+    m_lgr1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
 }
 
 //-----------------------------------------------------------------------------
