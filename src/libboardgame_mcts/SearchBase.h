@@ -1835,6 +1835,14 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
         auto mv = simulation.moves[i - 1];
         m_tree.add_value(node, eval[mv.player]);
         if (multithread && SearchParamConst::virtual_loss && m_nu_threads > 0)
+            // Note that this could become problematic if the number of threads
+            // is large. The lock-free algorithm intentionally ignores lost or
+            // partial updates to run faster. But the probability that adding
+            // a virtual loss is lost is not the same as the one that its
+            // removal is lost because the removal is done in this function
+            // with many calls to add_value() but the adding is done in
+            // play_in_tree(). This could introduce a systematic error unlike
+            // the effect of lost or partial add_value() updates.
             m_tree.remove_value(node, 0);
     }
     for (PlayerInt i = 0; i < m_nu_players; ++i)
