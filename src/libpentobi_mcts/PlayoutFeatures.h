@@ -130,7 +130,7 @@ inline void PlayoutFeatures::init_snapshot(const Board& bd, Color c)
 
 inline void PlayoutFeatures::restore_snapshot(const Board& bd)
 {
-    m_point_value.memcpy_from(m_snapshot, bd.get_geometry());
+    m_point_value.copy_from(m_snapshot, bd.get_geometry());
 }
 
 inline void PlayoutFeatures::set_forbidden(const MoveInfo& info)

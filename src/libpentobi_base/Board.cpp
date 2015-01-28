@@ -374,16 +374,16 @@ void Board::take_snapshot()
     m_snapshot->state_base.to_play = m_state_base.to_play;
     m_snapshot->state_base.nu_onboard_pieces_all =
         m_state_base.nu_onboard_pieces_all;
-    m_snapshot->state_base.point_state.memcpy_from(m_state_base.point_state,
-                                                   *m_geo);
+    m_snapshot->state_base.point_state.copy_from(m_state_base.point_state,
+                                                 *m_geo);
     for (ColorIterator i(m_nu_colors); i; ++i)
     {
         m_snapshot->attach_points_size[*i] = m_attach_points[*i].size();
         const auto& state = m_state_color[*i];
         auto& snapshot_state = m_snapshot->state_color[*i];
-        snapshot_state.forbidden.memcpy_from(state.forbidden, *m_geo);
-        snapshot_state.is_attach_point.memcpy_from(state.is_attach_point,
-                                                   *m_geo);
+        snapshot_state.forbidden.copy_from(state.forbidden, *m_geo);
+        snapshot_state.is_attach_point.copy_from(state.is_attach_point,
+                                                 *m_geo);
         // Uncomment once is_trivially_copyable is implemented in GCC and MSVC
         //static_assert(is_trivially_copyable<StateColor>::value, "")
         memcpy(&snapshot_state.pieces_left, &state.pieces_left,

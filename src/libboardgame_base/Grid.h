@@ -24,7 +24,8 @@ using namespace std;
 /** Elements assigned to on-board points.
     The elements must be default-constructible. This class is a POD if the
     element type is a POD.
-    @tparam P An instantiation of libboardgame_base::Point (or compatible class)
+    @tparam P An instantiation of libboardgame_base::Point (or compatible
+    class)
     @tparam T The element type. */
 template<class P, typename T>
 class Grid
@@ -48,13 +49,7 @@ public:
 
     string to_string(const Geometry& geo) const;
 
-    /** @pre is_trivially_copyable<T>::value */
-    void memcpy_from(const Grid& grid, const Geometry& geo);
-
-    /** Set all elements to zero.
-        @pre T is a type, in which setting all bytes to zero is a valid
-        value. */
-    void memset_zero(const Geometry& geo);
+    void copy_from(const Grid& grid, const Geometry& geo);
 
 private:
     T m_a[Point::range];
@@ -75,8 +70,7 @@ inline const T& Grid<P, T>::operator[](const Point& p) const
 template<class P, typename T>
 inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
-    for (Iterator i(geo); i; ++i)
-        (*this)[*i] = val;
+    std::fill(m_a, m_a + geo.get_range(), val);
 }
 
 template<class P, typename T>
@@ -86,17 +80,9 @@ inline void Grid<P, T>::fill_all(const T& val)
 }
 
 template<class P, typename T>
-inline void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
+inline void Grid<P, T>::copy_from(const Grid& grid, const Geometry& geo)
 {
-    // Uncomment once is_trivially_copyable is implemented in GCC and MSVC
-    //static_assert(is_trivially_copyable<T>::value, "")
-    memcpy(m_a, grid.m_a, sizeof(T) * geo.get_range());
-}
-
-template<class P, typename T>
-inline void Grid<P, T>::memset_zero(const Geometry& geo)
-{
-    memset(m_a, 0, sizeof(T) * geo.get_range());
+    copy(grid.m_a, grid.m_a + geo.get_range(), m_a);
 }
 
 template<class P, typename T>

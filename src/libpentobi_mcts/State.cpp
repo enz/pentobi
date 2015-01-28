@@ -575,12 +575,7 @@ void State::start_simulation(size_t n)
         m_is_move_list_initialized[*i] = false;
         m_playout_features[*i].restore_snapshot(m_bd);
         m_new_moves[*i].clear();
-#if defined(__x86_64__) || defined(__i386__)
-        m_moves_added_at[*i].memset_zero(geo);
-#else
-        // Binary representation of bool is not standardized
         m_moves_added_at[*i].fill(false, geo);
-#endif
     }
     m_nu_passes = 0;
 }
