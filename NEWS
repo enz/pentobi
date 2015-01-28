@@ -1,6 +1,7 @@
 Version 9.UNKNOWN (master)
 ==========================
- *
+
+* The compilation now requires at least GCC 4.9.
 
 
 Version 9.0.UNKNOWN (v9-fixes)
