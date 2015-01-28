@@ -32,6 +32,8 @@ using libboardgame_util::IntervalChecker;
 template<typename N>
 class Tree
 {
+    struct ThreadStorage;
+
     friend class NodeExpander;
 
 public:
@@ -52,20 +54,18 @@ public:
         /** Constructor.
             @param thread_id
             @param tree
-            @param node
             @param child_min_count The minimum count used for initializing
             children. Used only in debug mode to assert that the children
             are really initialized with a minimum count as declared with
             SearchParamConst::child_min_count. */
-        NodeExpander(unsigned thread_id, Tree& tree, const Node& node,
-                     Float child_min_count);
+        NodeExpander(unsigned thread_id, Tree& tree, Float child_min_count);
 
         /** Add new child.
             The child will only be added if the tree is not full. */
         void add_child(const Move& mv, Float value, Float count);
 
         /** Link the children to the parent node. */
-        void link_children();
+        void link_children(Tree& tree, const Node& node);
 
         /** Return if the tree capacity was reached during an add_child(). */
         bool is_tree_full() const;
@@ -78,17 +78,11 @@ public:
         const Node* get_best_child() const;
 
     private:
-        unsigned m_thread_id;
-
-        bool m_is_tree_full;
+        ThreadStorage& m_thread_storage;
 
         unsigned short m_nu_children;
 
         Float m_best_value;
-
-        Tree& m_tree;
-
-        const Node& m_node;
 
         const Node* m_first_child;
 
@@ -119,9 +113,6 @@ public:
     void set_max_nodes(size_t max_nodes);
 
     size_t get_max_nodes() const;
-
-    bool create_node(unsigned thread_id, const Move& mv, Float value,
-                     Float count);
 
     void add_value(const Node& node, Float v);
 
@@ -202,17 +193,14 @@ private:
 
 template<typename N>
 inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
-                                           const Node& node,
                                            Float child_min_count)
-    : m_thread_id(thread_id),
-      m_is_tree_full(false),
+    : m_thread_storage(tree.m_thread_storage[thread_id]),
       m_nu_children(0),
       m_best_value(0),
-      m_tree(tree),
-      m_node(node),
-      m_first_child(m_tree.m_thread_storage[thread_id].next),
+      m_first_child(m_thread_storage.next),
       m_best_child(m_first_child)
 {
+    LIBBOARDGAME_ASSERT(thread_id < tree.m_nu_threads);
 #if LIBBOARDGAME_DEBUG
     m_child_min_count = child_min_count;
 #else
@@ -225,18 +213,18 @@ inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
                                              Float count)
 {
     LIBBOARDGAME_ASSERT(count >= m_child_min_count);
-    if (! (m_is_tree_full |= ! m_tree.create_node(m_thread_id, mv, value,
-                                                  count)))
+    if (m_thread_storage.next == m_thread_storage.end)
+        return;
+    m_thread_storage.next->init(mv, value, count);
+    ++m_thread_storage.next;
+    if (m_nu_children == 0)
+        m_best_value = value;
+    else if (value > m_best_value)
     {
-        if (m_nu_children == 0)
-            m_best_value = value;
-        else if (value > m_best_value)
-        {
-            m_best_child = m_first_child + m_nu_children;
-            m_best_value = value;
-        }
-        ++m_nu_children;
+        m_best_child = m_first_child + m_nu_children;
+        m_best_value = value;
     }
+    ++m_nu_children;
 }
 
 template<typename N>
@@ -257,14 +245,14 @@ inline auto Tree<N>::get_node(NodeIdx i) const -> const Node&
 template<typename N>
 inline bool Tree<N>::NodeExpander::is_tree_full() const
 {
-    return m_is_tree_full;
+    return (m_thread_storage.next == m_thread_storage.end);
 }
 
 template<typename N>
-inline void Tree<N>::NodeExpander::link_children()
+inline void Tree<N>::NodeExpander::link_children(Tree& tree, const Node& node)
 {
     if (m_nu_children > 0)
-        m_tree.link_children(m_node, m_first_child, m_nu_children);
+        tree.link_children(node, m_first_child, m_nu_children);
 }
 
 
@@ -352,21 +340,6 @@ bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
             // node data is copied
             abort = true;
     return ! abort;
-}
-
-template<typename N>
-bool Tree<N>::create_node(unsigned thread_id, const Move& mv,
-                          Float value, Float count)
-{
-    LIBBOARDGAME_ASSERT(thread_id < m_nu_threads);
-    auto& thread_storage = m_thread_storage[thread_id];
-    if (thread_storage.next != thread_storage.end)
-    {
-        thread_storage.next->init(mv, value, count);
-        ++thread_storage.next;
-        return true;
-    }
-    return false;
 }
 
 template<typename N>

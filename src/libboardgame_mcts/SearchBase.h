@@ -947,12 +947,12 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
     // SearchParamConst::child_min_count is currently declared as unsigned int
     // because MSVC does not support constexpr Float yet
     Float min_count = static_cast<Float>(SearchParamConst::child_min_count);
-    typename Tree::NodeExpander expander(thread_state.thread_id, m_tree, node,
-                                         min_count);
+    auto thread_id = thread_state.thread_id;
+    typename Tree::NodeExpander expander(thread_id, m_tree, min_count);
     state.gen_children(expander, m_init_val[state.get_to_play()].get_mean());
     if (! expander.is_tree_full())
     {
-        expander.link_children();
+        expander.link_children(m_tree, node);
         best_child = expander.get_best_child();
         return true;
     }
