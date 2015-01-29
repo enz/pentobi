@@ -298,7 +298,6 @@ void PriorKnowledge::init_local(const Board& bd)
         second_color = Color(bd.get_alt_player());
     else
         second_color = bd.get_second_color(to_play);
-    auto& geo = bd.get_geometry();
     unsigned move_number = bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-player variants)
