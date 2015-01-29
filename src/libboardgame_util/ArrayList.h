@@ -8,10 +8,9 @@
 #define LIBBOARDGAME_UTIL_ARRAY_LIST_H
 
 #include <algorithm>
-#include <cstddef>
+#include <array>
 #include <initializer_list>
 #include <iosfwd>
-#include <limits>
 #include "Assert.h"
 
 namespace libboardgame_util {
@@ -127,7 +126,7 @@ public:
 private:
     I m_size;
 
-    T m_a[max_size];
+    array<T, max_size> m_a;
 };
 
 template<typename T, unsigned M, typename I>
@@ -169,12 +168,7 @@ bool ArrayList<T, M, I>::operator==(const ArrayList& array_list) const
 {
     if (m_size != array_list.m_size)
         return false;
-    const T* elem_this = m_a;
-    const T* elem_other = array_list.m_a;
-    for (I i = 0; i < m_size; ++i, ++elem_this, ++elem_other)
-        if (*elem_this != *elem_other)
-            return false;
-    return true;
+    return equal(begin(), end(), array_list.begin());
 }
 
 template<typename T, unsigned M, typename I>
@@ -207,13 +201,13 @@ inline const T& ArrayList<T, M, I>::back() const
 template<typename T, unsigned M, typename I>
 inline auto ArrayList<T, M, I>::begin() -> iterator
 {
-    return m_a;
+    return m_a.begin();
 }
 
 template<typename T, unsigned M, typename I>
 inline auto ArrayList<T, M, I>::begin() const -> const_iterator
 {
-    return m_a;
+    return m_a.begin();
 }
 
 template<typename T, unsigned M, typename I>
@@ -225,10 +219,7 @@ inline void ArrayList<T, M, I>::clear()
 template<typename T, unsigned M, typename I>
 bool ArrayList<T, M, I>::contains(const T& t) const
 {
-    for (const_iterator i = begin(); i != end(); ++i)
-        if (*i == t)
-            return true;
-    return false;
+    return find(begin(), end(), t) != end();
 }
 
 template<typename T, unsigned M, typename I>
@@ -273,13 +264,9 @@ inline const T& ArrayList<T, M, I>::get_unchecked(I i) const
 template<typename T, unsigned M, typename I>
 bool ArrayList<T, M, I>::include(const T& t)
 {
-    iterator i;
-    for (i = begin(); i != end(); ++i)
-        if (*i == t)
-            return false;
-    LIBBOARDGAME_ASSERT(m_size < max_size);
-    *i = t;
-    ++m_size;
+    if (contains(t))
+        return false;
+    push_back(t);
     return true;
 }
 
@@ -301,7 +288,7 @@ template<typename T, unsigned M, typename I>
 inline bool ArrayList<T, M, I>::remove(const T& t)
 {
     T* end = this->end();
-    for (T* i = m_a; i != end; ++i)
+    for (T* i = begin(); i != end; ++i)
         if (*i == t)
         {
             --end;
@@ -317,7 +304,7 @@ template<typename T, unsigned M, typename I>
 inline bool ArrayList<T, M, I>::remove_fast(const T& t)
 {
     T* end = this->end();
-    for (T* i = m_a; i != end; ++i)
+    for (T* i = this->begin(); i != end; ++i)
         if (*i == t)
         {
             remove_fast(i);
@@ -332,7 +319,7 @@ inline void ArrayList<T, M, I>::remove_fast(iterator i)
     LIBBOARDGAME_ASSERT(i >= begin());
     LIBBOARDGAME_ASSERT(i < end());
     --m_size;
-    *i = *(m_a + m_size);
+    *i = *(begin() + m_size);
 }
 
 template<typename T, unsigned M, typename I>
