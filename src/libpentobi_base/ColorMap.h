@@ -7,6 +7,8 @@
 #ifndef LIBPENTOBI_BASE_COLOR_MAP_H
 #define LIBPENTOBI_BASE_COLOR_MAP_H
 
+#include <array>
+#include <algorithm>
 #include "Color.h"
 
 namespace libpentobi_base {
@@ -34,7 +36,7 @@ public:
     void fill(const T& val);
 
 private:
-    T m_a[Color::range];
+    array<T, Color::range> m_a;
 };
 
 template<typename T>
@@ -58,8 +60,7 @@ inline const T& ColorMap<T>::operator[](Color c) const
 template<typename T>
 void ColorMap<T>::fill(const T& val)
 {
-    for (unsigned i = 0; i < Color::range; ++i)
-        m_a[i] = val;
+    m_a.fill(val);
 }
 
 //-----------------------------------------------------------------------------

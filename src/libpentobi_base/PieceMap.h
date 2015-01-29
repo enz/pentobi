@@ -7,6 +7,8 @@
 #ifndef LIBPENTOBI_BASE_PIECE_MAP_H
 #define LIBPENTOBI_BASE_PIECE_MAP_H
 
+#include <array>
+#include <algorithm>
 #include "Piece.h"
 
 namespace libpentobi_base {
@@ -34,7 +36,7 @@ public:
     void fill(const T& val);
 
 private:
-    T m_a[Piece::range_not_null];
+    array<T, Piece::range_not_null> m_a;
 };
 
 template<typename T>
@@ -46,18 +48,14 @@ inline PieceMap<T>::PieceMap(const T& val)
 template<typename T>
 PieceMap<T>& PieceMap<T>::operator=(const PieceMap& piece_map)
 {
-    for (unsigned i = 0; i < Piece::range_not_null; ++i)
-        m_a[i] = piece_map.m_a[i];
+    copy(piece_map.m_a.begin(), piece_map.m_a.end(), m_a.begin());
     return *this;
 }
 
 template<typename T>
 bool PieceMap<T>::operator==(const PieceMap& piece_map) const
 {
-    for (unsigned i = 0; i < Piece::range_not_null; ++i)
-        if (m_a[i] != piece_map.m_a[i])
-            return false;
-    return true;
+    return equal(m_a.begin(), m_a.end(), piece_map.m_a.begin());
 }
 
 template<typename T>
@@ -77,8 +75,7 @@ inline const T& PieceMap<T>::operator[](Piece piece) const
 template<typename T>
 void PieceMap<T>::fill(const T& val)
 {
-    for (unsigned i = 0; i < Piece::range_not_null; ++i)
-        m_a[i] = val;
+    m_a.fill(val);
 }
 
 //-----------------------------------------------------------------------------
