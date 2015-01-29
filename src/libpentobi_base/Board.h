@@ -312,10 +312,7 @@ public:
     void restore_snapshot();
 
 private:
-    /** Color-independent part of the board state for fast snapshot
-        restoration.
-        Must have only POD-like members such that it can quickly be copied
-        with memcpy in copy_from(). */
+    /** Color-independent part of the board state. */
     struct StateBase
     {
         Color to_play;
@@ -325,18 +322,13 @@ private:
         PointStateGrid point_state;
     };
 
-    /** Color-dependent part of the board state for fast snapshot restoration.
-        Must have only POD-like members such that it can quickly be copied
-        with memcpy in copy_from(). */
+    /** Color-dependent part of the board state. */
     struct StateColor
     {
         Grid<bool> forbidden;
 
         Grid<bool> is_attach_point;
 
-        /** @note Order dependency: This must be the first of all remaining
-            members because they are copied with memcpy in take_snapshot()
-            and restore_snapshot() */
         PiecesLeftList pieces_left;
 
         PieceMap<uint_fast8_t> nu_left_piece;
@@ -346,9 +338,7 @@ private:
         unsigned points;
     };
 
-    /** Snapshot for fast restoration of a previous position.
-        @note state_base and state_color are restored with a single memcpy,
-        they must be subsequent members and their order must not be changed. */
+    /** Snapshot for fast restoration of a previous position. */
     struct Snapshot
     {
         StateBase state_base;
@@ -890,12 +880,10 @@ inline void Board::restore_snapshot()
         state.forbidden.copy_from(snapshot_state.forbidden, *m_geo);
         state.is_attach_point.copy_from(snapshot_state.is_attach_point,
                                         *m_geo);
-        // Uncomment once is_trivially_copyable is implemented in GCC and MSVC
-        //static_assert(is_trivially_copyable<StateColor>::value, "")
-        memcpy(&state.pieces_left, &snapshot_state.pieces_left,
-               sizeof(StateColor) - offsetof(StateColor, pieces_left));
-        LIBBOARDGAME_ASSERT(m_snapshot->attach_points_size[*i]
-                            <= m_attach_points[*i].size());
+        state.pieces_left.copy_from(snapshot_state.pieces_left);
+        state.nu_left_piece = snapshot_state.nu_left_piece;
+        state.nu_onboard_pieces = snapshot_state.nu_onboard_pieces;
+        state.points = snapshot_state.points;
         m_attach_points[*i].resize(m_snapshot->attach_points_size[*i]);
     }
 }
