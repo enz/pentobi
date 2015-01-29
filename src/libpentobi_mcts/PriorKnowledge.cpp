@@ -30,7 +30,7 @@ using libpentobi_base::Variant;
 
 PriorKnowledge::PriorKnowledge()
 {
-    m_local_value.fill_all(0);
+    m_is_local.fill_all(false);
 }
 
 void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
@@ -135,12 +135,12 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         auto j = info.begin();
         auto end = info.end();
         Float heuristic = point_value[*j];
-        unsigned local = m_local_value[*j];
+        bool local = m_is_local[*j];
         if (! check_dist_to_center)
             while (++j != end)
             {
                 heuristic += point_value[*j];
-                local += m_local_value[*j];
+                local |= m_is_local[*j];
             }
         else
         {
@@ -148,7 +148,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             while (++j != end)
             {
                 heuristic += point_value[*j];
-                local += m_local_value[*j];
+                local |= m_is_local[*j];
                 features.dist_to_center =
                     min(features.dist_to_center, m_dist_to_center[*j]);
             }
@@ -181,7 +181,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         if (heuristic > m_max_heuristic)
             m_max_heuristic = heuristic;
         features.heuristic = heuristic;
-        features.is_local = (local != 0);
+        features.is_local = local;
     }
 }
 
@@ -288,8 +288,8 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 
 void PriorKnowledge::init_local(const Board& bd)
 {
-    for (Point p: m_local_points)
-        m_local_value[p] = 0;
+    for (Point p : m_local_points)
+        m_is_local[p] = false;
     m_local_points.clear();
 
     Color to_play = bd.get_to_play();
@@ -320,27 +320,9 @@ void PriorKnowledge::init_local(const Board& bd)
         {
             if (is_forbidden[*j])
                 continue;
-            if (m_local_value[*j] == 0)
+            if (! m_is_local[*j])
                 m_local_points.push_back(*j);
-            m_local_value[*j] = 1;
-            geo.for_each_adj(*j, [&](Point k) {
-                if (! is_forbidden[k])
-                {
-                    if (m_local_value[k] == 0)
-                        m_local_points.push_back(k);
-                    if (m_local_value[k] == 0 || m_local_value[k] == 3)
-                    {
-                        m_local_value[k] = 2;
-                        geo.for_each_adj(k, [&](Point l) {
-                            if (! is_forbidden[l] && m_local_value[l] == 0)
-                            {
-                                m_local_points.push_back(l);
-                                m_local_value[l] = 3;
-                            }
-                        });
-                    }
-                }
-            });
+            m_is_local[*j] = true;
         }
         while (++j != end);
     }

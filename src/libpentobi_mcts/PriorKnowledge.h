@@ -71,12 +71,10 @@ private:
 
     unsigned short m_min_dist_to_center;
 
-    /** Marker for points close to attach points of recent opponent moves.
-        0: point is not local, 1: (non-forbidden) oppponent attach point,
-        2: adj. to attach point, 3: 2nd order adj. to attach point. */
-    Grid<uint_fast8_t> m_local_value;
+    /** Marker for attach points of recent opponent moves. */
+    Grid<bool> m_is_local;
 
-    /** Points in m_local_value with value greater zero. */
+    /** Points in m_is_local with value greater zero. */
     PointList m_local_points;
 
     /** Distance to center heuristic. */
