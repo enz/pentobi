@@ -35,8 +35,6 @@ public:
 
     typedef libboardgame_base::Geometry<P> Geometry;
 
-    typedef typename libboardgame_base::Geometry<P>::Iterator Iterator;
-
     T& operator[](const Point& p);
 
     const T& operator[](const Point& p) const;
@@ -90,10 +88,10 @@ string Grid<P, T>::to_string(const Geometry& geo) const
 {
     ostringstream buffer;
     size_t max_len = 0;
-    for (Iterator i(geo); i; ++i)
+    for (Point p : geo)
     {
         buffer.str("");
-        buffer << (*this)[*i];
+        buffer << (*this)[p];
         max_len = max(max_len, buffer.str().length());
     }
     buffer.str("");

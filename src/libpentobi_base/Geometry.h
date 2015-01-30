@@ -16,8 +16,6 @@ namespace libpentobi_base {
 
 typedef libboardgame_base::Geometry<libpentobi_base::Point> Geometry;
 
-typedef Geometry::Iterator GeometryIterator;
-
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_base

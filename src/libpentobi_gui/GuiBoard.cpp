@@ -21,7 +21,6 @@
 using namespace std;
 using libboardgame_base::Transform;
 using libboardgame_util::log;
-using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
@@ -70,8 +69,8 @@ void GuiBoard::changeEvent(QEvent* event)
 
 void GuiBoard::clearMarkup()
 {
-    for (Geometry::Iterator i(m_bd.get_geometry()); i; ++i)
-        setLabel(*i, "");
+    for (Point p : m_bd)
+        setLabel(p, "");
 }
 
 void GuiBoard::clearSelectedPiece()
@@ -89,15 +88,13 @@ void GuiBoard::copyFromBoard(const Board& bd)
     {
         m_variant = bd.get_variant();
         m_isInitialized = true;
-        m_pointState = bd.get_grid();
+        m_pointState.copy_from(bd.get_grid(), geo);
         m_labels.fill("", geo);
         setEmptyBoardDirty();
     }
     else
     {
-        for (BoardIterator i(bd); i; ++i)
-            if (m_pointState[*i] != bd.get_point_state(*i))
-                m_pointState[*i] = bd.get_point_state(*i);
+        m_pointState.copy_from(bd.get_grid(), geo);
         setDirty();
     }
 }

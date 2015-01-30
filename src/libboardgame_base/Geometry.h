@@ -38,26 +38,49 @@ public:
 
     typedef ArrayList<Point, 9, unsigned short> DiagList;
 
-    class Iterator
+    class const_iterator
     {
-        friend class Geometry;
-
     public:
-        Iterator(const Geometry& geo);
+        const_iterator(IntType i)
+        {
+            m_i = i;
+        }
 
-        Point operator*() const;
+        bool operator==(const_iterator it) const
+        {
+            return m_i == it.m_i;
+        }
 
-        explicit operator bool() const;
+        bool operator!=(const_iterator it) const
+        {
+            return m_i != it.m_i;
+        }
 
-        void operator++();
+        void operator++()
+        {
+            ++m_i;
+        }
+
+        Point operator*() const
+        {
+            return Point(m_i);
+        }
 
     private:
-        IntType m_p;
-
-        IntType m_end;
+        IntType m_i;
     };
 
     virtual ~Geometry();
+
+    const_iterator begin() const
+    {
+        return const_iterator(1);
+    }
+
+    const_iterator end() const
+    {
+        return const_iterator(get_range());
+    }
 
     /** Return the point type if the board has different types of points.
         For example, in the geometry used in Blokus Trigon, there are two
@@ -172,32 +195,6 @@ private:
     bool is_valid(Point p) const;
 };
 
-template<class P>
-inline Geometry<P>::Iterator::Iterator(const Geometry& geo)
-    : m_p(1),
-      m_end(geo.get_range())
-{
-}
-
-template<class P>
-inline auto Geometry<P>::Iterator::operator*() const -> Point
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return Point(m_p);
-}
-
-template<class P>
-inline Geometry<P>::Iterator::operator bool() const
-{
-    return m_p != m_end;
-}
-
-template<class P>
-inline void Geometry<P>::Iterator::operator++()
-{
-    LIBBOARDGAME_ASSERT(*this);
-    ++m_p;
-}
 
 template<class P>
 Geometry<P>::Geometry()
@@ -342,11 +339,8 @@ void Geometry<P>::init(unsigned width, unsigned height)
             else
                 m_points[x][y] = Point::null();
     m_range = ++n;
-    for (Iterator i(*this); i; ++i)
-    {
-        unsigned j = (*i).to_int();
-        init_adj_diag(*i, m_adj[j], m_diag[j]);
-    }
+    for (IntType i = 1; i < m_range; ++i)
+        init_adj_diag(Point(i), m_adj[i], m_diag[i]);
 }
 
 template<class P>

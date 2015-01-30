@@ -29,35 +29,36 @@ typedef libboardgame_base::PointList<Point> PointList;
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
 {
     auto& geo = RectGeometry::get(3, 3);
-    Geometry::Iterator i(geo);
-    LIBBOARDGAME_CHECK(i);
+    auto i = geo.begin();
+    auto end = geo.end();
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(0, 0) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(1, 0) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(2, 0) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(0, 1) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(1, 1) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(2, 1) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(0, 2) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(1, 2) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(i);
+    LIBBOARDGAME_CHECK(i != end);
     LIBBOARDGAME_CHECK(geo.get_point(2, 2) == *i);
     ++i;
-    LIBBOARDGAME_CHECK(! i);
+    LIBBOARDGAME_CHECK(i == end);
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_from_string)

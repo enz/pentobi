@@ -228,8 +228,8 @@ void Engine::cmd_point_integers(Response& response)
 {
     auto& geo = get_board().get_geometry();
     Grid<int> grid;
-    for (GeometryIterator i(geo); i; ++i)
-        grid[*i] = (*i).to_int();
+    for (Point p : geo)
+        grid[p] = p.to_int();
     response << '\n' << grid.to_string(geo);
 }
 

@@ -16,7 +16,6 @@ namespace libpentobi_mcts {
 using namespace std;
 using libboardgame_base::ArrayList;
 using libpentobi_base::Board;
-using libpentobi_base::BoardIterator;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Geometry;
@@ -123,8 +122,8 @@ private:
 inline void PlayoutFeatures::init_snapshot(const Board& bd, Color c)
 {
     auto& is_forbidden = bd.is_forbidden(c);
-    for (BoardIterator i(bd); i; ++i)
-        m_snapshot[*i] = (is_forbidden[*i] ? 0x1000u : 0);
+    for (Point p : bd)
+        m_snapshot[p] = (is_forbidden[p] ? 0x1000u : 0);
 }
 
 

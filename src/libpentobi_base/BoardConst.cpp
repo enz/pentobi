@@ -432,9 +432,9 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     init_adj_status();
     auto width = m_geo.get_width();
     auto height = m_geo.get_height();
-    for (GeometryIterator i(m_geo); i; ++i)
-        m_compare_val[*i] =
-                (height - m_geo.get_y(*i) - 1) * width + m_geo.get_x(*i);
+    for (Point p : m_geo)
+        m_compare_val[p] =
+                (height - m_geo.get_y(p) - 1) * width + m_geo.get_x(p);
     create_moves();
     auto nu_moves = m_move_info.size();
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(nu_moves);
@@ -525,17 +525,17 @@ void BoardConst::create_moves()
     m_full_move_table.reset(new FullMoveTable);
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(Piece(i));
-    for (GeometryIterator i(m_geo); i; ++i)
-        for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
-            for (Piece::IntType k = 0; k < m_nu_pieces; ++k)
+    for (Point p : m_geo)
+        for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
+            for (Piece::IntType j = 0; j < m_nu_pieces; ++j)
             {
-                Piece piece(k);
-                auto& list = (*m_full_move_table)[j][piece][*i];
+                Piece piece(j);
+                auto& list = (*m_full_move_table)[i][piece][p];
                 auto begin = m_precomp_moves.get_size();
-                for (unsigned l = 0; l < list.size(); ++l)
-                    m_precomp_moves.push_move(list[l]);
+                for (unsigned k = 0; k < list.size(); ++k)
+                    m_precomp_moves.push_move(list[k]);
                 auto size = m_precomp_moves.get_size() - begin;
-                m_precomp_moves.set_list_range(*i, j, piece, begin, size);
+                m_precomp_moves.set_list_range(p, i, piece, begin, size);
             }
     if (log_move_creation)
         log("Created moves: ", m_move_info.size(), ", precomputed: ",
@@ -564,26 +564,26 @@ void BoardConst::create_moves(Piece piece)
     }
     PiecePoints points;
     // Make outer loop iterator over geometry for better memory locality
-    for (GeometryIterator i(m_geo); i; ++i)
+    for (Point p : m_geo)
     {
         if (log_move_creation)
-            log("Creating moves at ", m_geo.to_string(*i));
-        auto x = m_geo.get_x(*i);
-        auto y = m_geo.get_y(*i);
-        for (size_t j = 0; j < nu_transforms; ++j)
+            log("Creating moves at ", m_geo.to_string(p));
+        auto x = m_geo.get_x(p);
+        auto y = m_geo.get_y(p);
+        for (size_t i = 0; i < nu_transforms; ++i)
         {
             if (log_move_creation)
-                log("Transformation ", typeid(*transforms[j]).name());
+                log("Transformation ", typeid(*transforms[i]).name());
             auto point_type = m_geo.get_point_type(x, y);
-            if (transforms[j]->get_new_point_type() != point_type)
+            if (transforms[i]->get_new_point_type() != point_type)
                 continue;
-            points = transformed_points[j];
+            points = transformed_points[i];
             bool is_onboard = true;
-            for (auto& p : points)
+            for (auto& pp : points)
             {
-                p.x += x;
-                p.y += y;
-                if (! m_geo.is_onboard(p))
+                pp.x += x;
+                pp.y += y;
+                if (! m_geo.is_onboard(pp))
                 {
                     is_onboard = false;
                     break;
@@ -591,7 +591,7 @@ void BoardConst::create_moves(Piece piece)
             }
             if (! is_onboard)
                 continue;
-            CoordPoint label_pos = transformed_label_pos[j];
+            CoordPoint label_pos = transformed_label_pos[i];
             label_pos.x += x;
             label_pos.y += y;
             create_move(piece, points,
@@ -672,25 +672,25 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
 
 void BoardConst::init_adj_status()
 {
-    for (GeometryIterator i(m_geo); i; ++i)
+    for (Point p : m_geo)
     {
-        auto& adj_status_list = m_adj_status_list[*i];
-        for (Point p : m_geo.get_adj(*i))
+        auto& adj_status_list = m_adj_status_list[p];
+        for (Point pp : m_geo.get_adj(p))
         {
             if (adj_status_list.size() == PrecompMoves::adj_status_nu_adj)
                 break;
-            adj_status_list.push_back(p);
+            adj_status_list.push_back(pp);
         }
-        for (Point p : m_geo.get_diag(*i))
+        for (Point pp : m_geo.get_diag(p))
         {
             if (adj_status_list.size() == PrecompMoves::adj_status_nu_adj)
                 break;
-            adj_status_list.push_back(p);
+            adj_status_list.push_back(pp);
         }
     }
     array<bool, PrecompMoves::adj_status_nu_adj> forbidden;
-    for (GeometryIterator i(m_geo); i; ++i)
-        init_adj_status(*i, forbidden, 0);
+    for (Point p : m_geo)
+        init_adj_status(p, forbidden, 0);
 }
 
 void BoardConst::init_adj_status(

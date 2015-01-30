@@ -17,8 +17,8 @@ namespace libpentobi_base {
 void SymmetricPoints::init(const Geometry& geo,
                            const PointTransform<Point>& transform)
 {
-    for (Geometry::Iterator i(geo); i; ++i)
-        m_symmetric_point[*i] = transform.get_transformed(*i, geo);
+    for (Point p : geo)
+        m_symmetric_point[p] = transform.get_transformed(p, geo);
 }
 
 //-----------------------------------------------------------------------------

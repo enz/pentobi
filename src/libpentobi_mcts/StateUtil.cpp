@@ -12,7 +12,6 @@
 
 namespace libpentobi_mcts {
 
-using libpentobi_base::BoardIterator;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Point;
@@ -52,12 +51,12 @@ bool check_symmetry_broken(const Board& bd,
     {
         // First player to play: the symmetry is broken if the position is
         // not symmetric.
-        for (BoardIterator i(bd); i; ++i)
+        for (Point p : bd)
         {
-            PointState s1 = bd.get_point_state(*i);
+            PointState s1 = bd.get_point_state(p);
             if (! s1.is_empty())
             {
-                Point symm_p = symmetric_points[*i];
+                Point symm_p = symmetric_points[p];
                 PointState s2 = bd.get_point_state(symm_p);
                 if (s2 != get_symmetric_state(s1.to_color()))
                     return true;
@@ -80,15 +79,15 @@ bool check_symmetry_broken(const Board& bd,
             // Don't try to handle non-alternating moves in board history
             return true;
         auto& info = bd.get_move_info(last_mv.move);
-        for (BoardIterator i(bd); i; ++i)
+        for (Point p : bd)
         {
-            PointState s1 = bd.get_point_state(*i);
+            PointState s1 = bd.get_point_state(p);
             if (! s1.is_empty())
             {
-                Point symm_p = symmetric_points[*i];
+                Point symm_p = symmetric_points[p];
                 PointState s2 = bd.get_point_state(symm_p);
                 if (s2 != get_symmetric_state(s1.to_color()))
-                    if (! (info.contains(*i) && s2.is_empty()))
+                    if (! (info.contains(p) && s2.is_empty()))
                         return true;
             }
         }

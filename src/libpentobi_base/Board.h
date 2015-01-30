@@ -35,16 +35,6 @@ public:
 
     typedef PrecompMoves::LocalMovesListRange LocalMovesListRange;
 
-    /** Iterator over all points on the board. */
-    class Iterator
-        : public GeometryIterator
-    {
-        friend class Board;
-
-    public:
-        Iterator(const Board& bd);
-    };
-
     /** Maximum number of pieces per player in any game variant. */
     static const unsigned max_pieces = Setup::max_pieces;
 
@@ -67,6 +57,16 @@ public:
     /** Not implemented to avoid unintended copies.
         Use copy_from() to copy a board state. */
     Board& operator=(const Board&) = delete;
+
+    Geometry::const_iterator begin() const
+    {
+        return m_geo->begin();
+    }
+
+    Geometry::const_iterator end() const
+    {
+        return m_geo->end();
+    }
 
     Variant get_variant() const;
 
@@ -436,12 +436,6 @@ private:
                          const ColorMap<PiecesLeftList>& pieces_left) const;
 };
 
-typedef Board::Iterator BoardIterator;
-
-inline Board::Iterator::Iterator(const Board& bd)
-    : GeometryIterator(*bd.m_geo)
-{
-}
 
 inline bool Board::find_move(const MovePoints& points, Move& move) const
 {

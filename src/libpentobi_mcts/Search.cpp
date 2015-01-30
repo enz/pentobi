@@ -19,7 +19,6 @@ namespace libpentobi_mcts {
 
 using libboardgame_base::PointTransfRot180;
 using libboardgame_util::FmtSaver;
-using libpentobi_base::BoardIterator;
 using libpentobi_base::BoardType;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::Piece;
@@ -173,12 +172,12 @@ void Search::on_start_search(bool is_followup)
     {
         auto& is_forbidden_at_root = m_shared_const.is_forbidden_at_root[*i];
         is_forbidden_at_root.set();
-        for (BoardIterator j(bd); j; ++j)
-            if (! bd.is_forbidden(*j, *i))
+        for (Point p : bd)
+            if (! bd.is_forbidden(p, *i))
             {
-                auto adj_status = bd.get_adj_status(*j, *i);
+                auto adj_status = bd.get_adj_status(p, *i);
                 for (Piece piece : bd.get_pieces_left(*i))
-                    for (Move mv : bd.get_moves(piece, *j, adj_status))
+                    for (Move mv : bd.get_moves(piece, p, adj_status))
                     {
                         if (! is_forbidden_at_root[mv])
                             continue;
@@ -196,24 +195,24 @@ void Search::on_start_search(bool is_followup)
         // Construct new lists in-place from old if it is a follow-up position
         const auto& old_precomp_moves =
             (is_followup ? precomp_moves : bc.get_precomp_moves());
-        for (BoardIterator j(bd); j; ++j)
+        for (Point p : bd)
         {
-            if (bd.is_forbidden(*j, *i))
+            if (bd.is_forbidden(p, *i))
                 continue;
-            for (unsigned k = 0; k < PrecompMoves::nu_adj_status; ++k)
+            for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
                 // Don't iterate over bd.get_pieces_left(*i) because its
                 // ordering is not preserved if a piece is removed and the
                 // in-place construction requires that the iteration in these
                 // loops is in the same order as during the last construction
                 // such that it will never overwrite any old content it still
                 // needs to read during the construction.
-                for (Piece::IntType l = 0; l < bc.get_nu_pieces(); ++l)
+                for (Piece::IntType k = 0; k < bc.get_nu_pieces(); ++k)
                 {
-                    Piece piece(l);
+                    Piece piece(k);
                     if (! bd.is_piece_left(*i, piece))
                         continue;
                     auto begin = precomp_moves.get_size();
-                    auto moves = old_precomp_moves.get_moves(piece, *j, k);
+                    auto moves = old_precomp_moves.get_moves(piece, p, j);
                     for (auto m = moves.begin(); m != moves.end(); ++m)
                         if (! m_shared_const.is_forbidden_at_root[*i][*m])
                         {
@@ -227,7 +226,7 @@ void Search::on_start_search(bool is_followup)
                             precomp_moves.push_move(*m);
                         }
                     auto size = precomp_moves.get_size() - begin;
-                    precomp_moves.set_list_range(*j, k, piece, begin, size);
+                    precomp_moves.set_list_range(p, j, piece, begin, size);
                 }
         }
     }

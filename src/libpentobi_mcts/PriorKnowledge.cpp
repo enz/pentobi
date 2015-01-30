@@ -21,7 +21,6 @@ using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
-using libpentobi_base::GeometryIterator;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 using libpentobi_base::Variant;
@@ -64,32 +63,32 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     Grid<Float> point_value;
     Grid<Float> attach_point_value;
     Grid<Float> adj_point_value;
-    for (GeometryIterator i(geo); i; ++i)
+    for (Point p : geo)
     {
-        point_value[*i] = 1;
-        auto s = bd.get_point_state(*i);
-        if (is_forbidden[*i] && s != to_play)
-            attach_point_value[*i] = -2.5;
+        point_value[p] = 1;
+        auto s = bd.get_point_state(p);
+        if (is_forbidden[p] && s != to_play)
+            attach_point_value[p] = -2.5;
         else
-            attach_point_value[*i] = 0.5;
-        if (! is_forbidden[*i])
+            attach_point_value[p] = 0.5;
+        if (! is_forbidden[p])
         {
-            if (bd.is_attach_point(*i, to_play))
+            if (bd.is_attach_point(p, to_play))
                 // Making own attach point forbidden is especially bad
-                adj_point_value[*i] = -1;
+                adj_point_value[p] = -1;
             else
                 // Creating new forbidden points is a bad thing
-                adj_point_value[*i] = -0.1f;
+                adj_point_value[p] = -0.1f;
         }
         else if (s == connect_color)
             // Connecting own colors is good
-            adj_point_value[*i] = 1;
+            adj_point_value[p] = 1;
         else if (! s.is_empty())
             // Touching opponent is better than playing elsewhere (no need to
             // check if s == to_play, such moves are illegal)
-            adj_point_value[*i] = 0.4f;
+            adj_point_value[p] = 0.4f;
         else
-            adj_point_value[*i] = 0;
+            adj_point_value[p] = 0;
     }
     for (ColorIterator i(bd.get_nu_colors()); i; ++i)
     {
@@ -340,10 +339,10 @@ void PriorKnowledge::start_search(const Board& bd)
     bool is_trigon = (board_type == BoardType::trigon
                       || board_type == BoardType::trigon_3);
     float ratio = (is_trigon ? 1.732f : 1);
-    for (GeometryIterator i(geo); i; ++i)
+    for (Point p : geo)
     {
-        float x = static_cast<float>(geo.get_x(*i));
-        float y = static_cast<float>(geo.get_y(*i));
+        float x = static_cast<float>(geo.get_x(p));
+        float y = static_cast<float>(geo.get_y(p));
         float dx = x - center_x;
         float dy = ratio * (y - center_y);
         // Multiply Euklidian distance by 4, so that distances that differ
@@ -353,7 +352,7 @@ void PriorKnowledge::start_search(const Board& bd)
             // Don't make a distinction between moves close enough to the
             // center in game variant Classic/Classic2
             d = max(d, 10.f);
-        m_dist_to_center[*i] = static_cast<unsigned short>(d);
+        m_dist_to_center[p] = static_cast<unsigned short>(d);
     }
 
     // Init m_check_dist_to_center

@@ -17,7 +17,6 @@
 
 using namespace std;
 using libboardgame_util::log;
-using libpentobi_base::GeometryIterator;
 using libpentobi_base::Move;
 using libpentobi_base::PointState;
 
@@ -127,23 +126,23 @@ void BoardPainter::drawLabels(QPainter& painter,
     bool isTrigon = (variant == Variant::trigon
                      || variant == Variant::trigon_2
                      || variant == Variant::trigon_3);
-    for (GeometryIterator i(*m_geo); i; ++i)
-        if (! (*labels)[*i].isEmpty())
+    for (Point p : *m_geo)
+        if (! (*labels)[p].isEmpty())
         {
-            PointState s = pointState[*i];
+            PointState s = pointState[p];
             painter.setPen(Util::getLabelColor(variant, s));
-            qreal x = m_geo->get_x(*i) * m_fieldWidth;
-            qreal y = m_geo->get_y(*i) * m_fieldHeight;
+            qreal x = m_geo->get_x(p) * m_fieldWidth;
+            qreal y = m_geo->get_y(p) * m_fieldHeight;
             qreal width = m_fieldWidth;
             qreal height = m_fieldHeight;
             if (isTrigon)
             {
-                bool isUpward = (m_geo->get_point_type(*i) == 0);
+                bool isUpward = (m_geo->get_point_type(p) == 0);
                 if (isUpward)
                     y += 0.333 * height;
                 height = 0.666 * height;
             }
-            drawLabel(painter, x, y, width, height, (*labels)[*i], false);
+            drawLabel(painter, x, y, width, height, (*labels)[p], false);
         }
 }
 
@@ -220,16 +219,16 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     if (m_coordinates)
         drawCoordinates(painter, m_isTrigon);
     m_startingPoints.init(variant, *m_geo);
-    for (GeometryIterator i(*m_geo); i; ++i)
+    for (Point p : *m_geo)
     {
-        int x = m_geo->get_x(*i);
-        int y = m_geo->get_y(*i);
+        int x = m_geo->get_x(p);
+        int y = m_geo->get_y(p);
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = y * m_fieldHeight;
         if (m_isTrigon)
         {
             bool isUpward = (m_geo->get_point_type(x, y) == 0);
-            if (m_startingPoints.is_colorless_starting_point(*i))
+            if (m_startingPoints.is_colorless_starting_point(p))
                 Util::paintEmptyTriangleStartingPoint(painter, isUpward, fieldX,
                                                       fieldY, m_fieldWidth,
                                                       m_fieldHeight);
@@ -239,9 +238,9 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         }
         else
         {
-            if (m_startingPoints.is_colored_starting_point(*i))
+            if (m_startingPoints.is_colored_starting_point(p))
             {
-                Color color = m_startingPoints.get_starting_point_color(*i);
+                Color color = m_startingPoints.get_starting_point_color(p);
                 Util::paintEmptySquareStartingPoint(painter, variant,
                                                     color, fieldX, fieldY,
                                                     m_fieldWidth);
@@ -260,11 +259,11 @@ void BoardPainter::paintPieces(QPainter& painter,
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
     painter.translate(m_boardOffset);
-    for (GeometryIterator i(*m_geo); i; ++i)
+    for (Point p : *m_geo)
     {
-        int x = m_geo->get_x(*i);
-        int y = m_geo->get_y(*i);
-        PointState s = pointState[*i];
+        int x = m_geo->get_x(p);
+        int y = m_geo->get_y(p);
+        PointState s = pointState[p];
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = y * m_fieldHeight;
         if (m_isTrigon)
