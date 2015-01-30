@@ -58,12 +58,12 @@ public:
         Use copy_from() to copy a board state. */
     Board& operator=(const Board&) = delete;
 
-    Geometry::const_iterator begin() const
+    Geometry::Iterator begin() const
     {
         return m_geo->begin();
     }
 
-    Geometry::const_iterator end() const
+    Geometry::Iterator end() const
     {
         return m_geo->end();
     }

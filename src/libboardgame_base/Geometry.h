@@ -38,20 +38,20 @@ public:
 
     typedef ArrayList<Point, 9, unsigned short> DiagList;
 
-    class const_iterator
+    class Iterator
     {
     public:
-        const_iterator(IntType i)
+        Iterator(IntType i)
         {
             m_i = i;
         }
 
-        bool operator==(const_iterator it) const
+        bool operator==(Iterator it) const
         {
             return m_i == it.m_i;
         }
 
-        bool operator!=(const_iterator it) const
+        bool operator!=(Iterator it) const
         {
             return m_i != it.m_i;
         }
@@ -72,14 +72,14 @@ public:
 
     virtual ~Geometry();
 
-    const_iterator begin() const
+    Iterator begin() const
     {
-        return const_iterator(1);
+        return Iterator(1);
     }
 
-    const_iterator end() const
+    Iterator end() const
     {
-        return const_iterator(get_range());
+        return Iterator(get_range());
     }
 
     /** Return the point type if the board has different types of points.
