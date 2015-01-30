@@ -19,7 +19,6 @@ using namespace std;
 using libboardgame_util::fast_exp;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
-using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
@@ -90,12 +89,12 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         else
             adj_point_value[p] = 0;
     }
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    for (Color c : bd.get_colors())
     {
-        if (*i == to_play || *i == second_color)
+        if (c == to_play || c == second_color)
             continue;
-        auto& is_forbidden = bd.is_forbidden(*i);
-        for (Point p : bd.get_attach_points(*i))
+        auto& is_forbidden = bd.is_forbidden(c);
+        for (Point p : bd.get_attach_points(c))
             if (! is_forbidden[p])
             {
                 // Occupying opponent attach points is very good
@@ -381,19 +380,19 @@ void PriorKnowledge::start_search(const Board& bd)
     // search might not generate any moves (if no moves meet the dist-to-center
     // condition). Even if such positions cannot occur in legal games, we still
     // don't want the move generation to fail.
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    for (Color c : bd.get_colors())
     {
-        if (bd.get_nu_onboard_pieces(*i) == 0)
+        if (bd.get_nu_onboard_pieces(c) == 0)
             continue;
         bool is_starting_point_covered = false;
-        for (Point p : bd.get_starting_points(*i))
-            if (bd.get_point_state(p) == PointState(*i))
+        for (Point p : bd.get_starting_points(c))
+            if (bd.get_point_state(p) == PointState(c))
             {
                 is_starting_point_covered = true;
                 break;
             }
         if (! is_starting_point_covered)
-            m_check_dist_to_center[*i] = false;
+            m_check_dist_to_center[c] = false;
     }
 }
 

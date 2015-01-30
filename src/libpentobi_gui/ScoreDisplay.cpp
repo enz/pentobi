@@ -18,7 +18,6 @@
 
 using namespace std;
 using libboardgame_util::log;
-using libpentobi_base::ColorIterator;
 
 //-----------------------------------------------------------------------------
 
@@ -294,15 +293,15 @@ void ScoreDisplay::updateScore(const Board& bd)
     auto variant = bd.get_variant();
     bool hasChanged = (m_variant != variant);
     m_variant = variant;
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+    for (Color c : bd.get_colors())
     {
-        bool hasMoves = bd.has_moves(*i);
-        auto points = bd.get_points(*i);
-        if (hasMoves != m_hasMoves[*i] || m_points[*i] != points)
+        bool hasMoves = bd.has_moves(c);
+        auto points = bd.get_points(c);
+        if (hasMoves != m_hasMoves[c] || m_points[c] != points)
         {
             hasChanged = true;
-            m_hasMoves[*i] = hasMoves;
-            m_points[*i] = points;
+            m_hasMoves[c] = hasMoves;
+            m_points[c] = points;
         }
     }
     if (variant == Variant::classic_3)

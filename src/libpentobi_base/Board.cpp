@@ -68,11 +68,11 @@ void Board::copy_from(const Board& bd)
     m_moves = bd.m_moves;
     m_setup.to_play = bd.m_setup.to_play;
     m_state_base = bd.m_state_base;
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : get_colors())
     {
-        m_state_color[*i] = bd.m_state_color[*i];
-        m_setup.placements[*i] = bd.m_setup.placements[*i];
-        m_attach_points[*i] = bd.m_attach_points[*i];
+        m_state_color[c] = bd.m_state_color[c];
+        m_setup.placements[c] = bd.m_setup.placements[c];
+        m_attach_points[c] = bd.m_attach_points[c];
     }
 }
 
@@ -221,8 +221,8 @@ bool Board::has_moves(Color c, Point p) const
 
 bool Board::has_setup() const
 {
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        if (! m_setup.placements[*i].empty())
+    for (Color c : get_colors())
+        if (! m_setup.placements[c].empty())
             return true;
     return false;
 }
@@ -239,17 +239,17 @@ void Board::init(Variant variant, const Setup* setup)
         m_nu_piece_instances = 2;
     else
         m_nu_piece_instances = 1;
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : get_colors())
     {
-        m_state_color[*i].forbidden.fill(false, *m_geo);
-        m_state_color[*i].is_attach_point.fill(false, *m_geo);
-        m_attach_points[*i].clear();
-        m_state_color[*i].pieces_left.clear();
-        m_state_color[*i].nu_onboard_pieces = 0;
-        m_state_color[*i].points = 0;
+        m_state_color[c].forbidden.fill(false, *m_geo);
+        m_state_color[c].is_attach_point.fill(false, *m_geo);
+        m_attach_points[c].clear();
+        m_state_color[c].pieces_left.clear();
+        m_state_color[c].nu_onboard_pieces = 0;
+        m_state_color[c].points = 0;
         for (Piece::IntType j = 0; j < get_nu_uniq_pieces(); ++j)
-            m_state_color[*i].pieces_left.push_back(Piece(j));
-        m_state_color[*i].nu_left_piece.fill(m_nu_piece_instances);
+            m_state_color[c].pieces_left.push_back(Piece(j));
+        m_state_color[c].nu_left_piece.fill(m_nu_piece_instances);
     }
     m_state_base.nu_onboard_pieces_all = 0;
     if (! setup)
@@ -263,9 +263,9 @@ void Board::init(Variant variant, const Setup* setup)
         place_setup(m_setup);
         m_state_base.to_play = setup->to_play;
         optimize_attach_point_lists();
-        for (ColorIterator i(m_nu_colors); i; ++i)
-            if (m_state_color[*i].pieces_left.empty())
-                m_state_color[*i].points += m_bonus_all_pieces;
+        for (Color c : get_colors())
+            if (m_state_color[c].pieces_left.empty())
+                m_state_color[c].points += m_bonus_all_pieces;
     }
     m_moves.clear();
 }
@@ -315,20 +315,20 @@ void Board::init_variant(Variant variant)
     m_move_info_ext_array = m_board_const->get_move_info_ext_array();
     m_move_info_ext_2_array = m_board_const->get_move_info_ext_2_array();
     m_starting_points.init(variant, *m_geo);
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : get_colors())
     {
         if (variant == Variant::classic_2
             || variant == Variant::trigon_2)
-            m_second_color[*i] = get_next(get_next(*i));
+            m_second_color[c] = get_next(get_next(c));
         else
-            m_second_color[*i] = *i;
+            m_second_color[c] = c;
     }
 }
 
 bool Board::is_game_over() const
 {
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        if (has_moves(*i))
+    for (Color c : get_colors())
+        if (has_moves(c))
             return false;
     return true;
 }
@@ -340,15 +340,15 @@ bool Board::is_game_over() const
     critical (e.g. before taking a snapshot), we can remove them. */
 void Board::optimize_attach_point_lists()
 {
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : get_colors())
     {
-        auto& attach_points = m_attach_points[*i];
-        for (auto j = attach_points.begin(); j != attach_points.end(); ++j)
-            if (is_forbidden(*j, *i))
+        auto& attach_points = m_attach_points[c];
+        for (auto i = attach_points.begin(); i != attach_points.end(); ++i)
+            if (is_forbidden(*i, c))
             {
-                m_state_color[*i].is_attach_point[*j] = false;
-                attach_points.remove_fast(j);
-                --j;
+                m_state_color[c].is_attach_point[*i] = false;
+                attach_points.remove_fast(i);
+                --i;
                 continue;
             }
     }
@@ -360,9 +360,9 @@ void Board::optimize_attach_point_lists()
     with -Winline with GCC 4.8.2. */
 void Board::place_setup(const Setup& setup)
 {
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        for (Move mv : setup.placements[*i])
-            place(*i, mv);
+    for (Color c : get_colors())
+        for (Move mv : setup.placements[c])
+            place(c, mv);
 }
 
 void Board::take_snapshot()
@@ -376,11 +376,11 @@ void Board::take_snapshot()
         m_state_base.nu_onboard_pieces_all;
     m_snapshot->state_base.point_state.copy_from(m_state_base.point_state,
                                                  *m_geo);
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : get_colors())
     {
-        m_snapshot->attach_points_size[*i] = m_attach_points[*i].size();
-        const auto& state = m_state_color[*i];
-        auto& snapshot_state = m_snapshot->state_color[*i];
+        m_snapshot->attach_points_size[c] = m_attach_points[c].size();
+        const auto& state = m_state_color[c];
+        auto& snapshot_state = m_snapshot->state_color[c];
         snapshot_state.forbidden.copy_from(state.forbidden, *m_geo);
         snapshot_state.is_attach_point.copy_from(state.is_attach_point,
                                                  *m_geo);
@@ -405,10 +405,10 @@ void Board::write(ostream& out, bool mark_last_move) const
 {
     // Sort lists of left pieces by name
     ColorMap<PiecesLeftList> pieces_left;
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : get_colors())
     {
-        pieces_left[*i] = m_state_color[*i].pieces_left;
-        sort(pieces_left[*i].begin(), pieces_left[*i].end(),
+        pieces_left[c] = m_state_color[c].pieces_left;
+        sort(pieces_left[c].begin(), pieces_left[c].end(),
              [&](Piece p1, Piece p2)
              {
                  return
@@ -542,13 +542,13 @@ void Board::write(ostream& out, bool mark_last_move) const
     }
     write_x_coord(out, width, is_trigon ? 3 : 2);
     if (! is_info_location_right)
-        for (ColorIterator i(m_nu_colors); i; ++i)
+        for (Color c : get_colors())
         {
-            write_color_info_line1(out, *i);
+            write_color_info_line1(out, c);
             out << "  ";
-            write_color_info_line2(out, *i, pieces_left[*i]);
+            write_color_info_line2(out, c, pieces_left[c]);
             out << ' ';
-            write_color_info_line3(out, *i, pieces_left[*i]);
+            write_color_info_line3(out, c, pieces_left[c]);
             out << '\n';
         }
 }

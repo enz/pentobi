@@ -34,21 +34,55 @@ public:
 
     class Iterator
     {
-        friend class Color;
-
     public:
-        Iterator(IntType nu_colors);
+        Iterator(IntType i)
+        {
+            m_i = i;
+        }
 
-        explicit operator bool() const;
+        bool operator==(Iterator it) const
+        {
+            return m_i == it.m_i;
+        }
 
-        void operator++();
+        bool operator!=(Iterator it) const
+        {
+            return m_i != it.m_i;
+        }
 
-        Color operator*() const;
+        void operator++()
+        {
+            ++m_i;
+        }
+
+        Color operator*() const
+        {
+            return Color(m_i);
+        }
 
     private:
-        const IntType m_nu_colors;
-
         IntType m_i;
+    };
+
+    class Range
+    {
+    public:
+        Range(IntType nu_colors)
+            : m_nu_colors(nu_colors)
+        { }
+
+        Iterator begin() const
+        {
+            return 0;
+        }
+
+        Iterator end() const
+        {
+            return m_nu_colors;
+        }
+
+    private:
+        IntType m_nu_colors;
     };
 
     static const IntType range = 4;
@@ -79,34 +113,12 @@ private:
     bool is_initialized() const;
 };
 
-typedef Color::Iterator ColorIterator;
 
 inline Color::InvalidString::InvalidString(const string& s)
     : Exception(s)
 {
 }
 
-inline Color::Iterator::Iterator(IntType nu_colors)
-    : m_nu_colors(nu_colors),
-      m_i(0)
-{
-}
-
-inline Color::Iterator::operator bool() const
-{
-    return m_i < m_nu_colors;
-}
-
-inline void Color::Iterator::operator++()
-{
-    ++m_i;
-}
-
-inline Color Color::Iterator::operator*() const
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return Color(m_i);
-}
 
 inline Color::Color()
 {

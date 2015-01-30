@@ -80,7 +80,6 @@ using libboardgame_util::log;
 using libboardgame_util::set_abort;
 using libboardgame_util::trim_right;
 using libboardgame_util::ArrayList;
-using libpentobi_base::ColorIterator;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::MoveList;
@@ -656,8 +655,8 @@ void MainWindow::computerColors()
     auto nu_colors = getBoard().get_nu_nonalt_colors();
 
     bool computerNone = true;
-    for (ColorIterator i(nu_colors); i; ++i)
-        if (m_computerColors[*i])
+    for (Color c : Color::Range(nu_colors))
+        if (m_computerColors[c])
         {
             computerNone = false;
             break;
@@ -668,8 +667,8 @@ void MainWindow::computerColors()
     // Enable auto play only if any color has changed because that means that
     // the user probably wants to continue playing, otherwise the user could
     // have only opened the dialog to check the current settings
-    for (ColorIterator i(nu_colors); i; ++i)
-        if (m_computerColors[*i] != oldComputerColors[*i])
+    for (Color c : Color::Range(nu_colors))
+        if (m_computerColors[c] != oldComputerColors[c])
         {
             m_autoPlay = true;
             break;
@@ -680,8 +679,8 @@ void MainWindow::computerColors()
 
 bool MainWindow::computerPlaysAll() const
 {
-    for (ColorIterator i(getBoard().get_nu_nonalt_colors()); i; ++i)
-        if (! m_computerColors[*i])
+    for (Color c : Color::Range(getBoard().get_nu_nonalt_colors()))
+        if (! m_computerColors[c])
             return false;
     return true;
 }
@@ -698,9 +697,9 @@ void MainWindow::continueRatedGame()
         return;
     m_ratedGameColor = Color(color);
     m_computerColors.fill(true);
-    for (ColorIterator i(nuColors); i; ++i)
-        if (bd.is_same_player(*i, m_ratedGameColor))
-            m_computerColors[*i] = false;
+    for (Color c : Color::Range(nuColors))
+        if (bd.is_same_player(c, m_ratedGameColor))
+            m_computerColors[c] = false;
     setRated(true);
     updateWindow(false);
     showInfo(tr("Continuing unfinished rated game."),
@@ -1500,13 +1499,13 @@ QLayout* MainWindow::createRightPanel()
     layout->addWidget(m_scoreDisplay, 6);
     auto pieceSelectorLayout = new SameHeightLayout;
     layout->addLayout(pieceSelectorLayout, 80);
-    for (ColorIterator i(Color::range); i; ++i)
+    for (Color c : Color::Range(Color::range))
     {
-        m_pieceSelector[*i] = new PieceSelector(nullptr, getBoard(), *i);
-        connect(m_pieceSelector[*i],
+        m_pieceSelector[c] = new PieceSelector(nullptr, getBoard(), c);
+        connect(m_pieceSelector[c],
                 SIGNAL(pieceSelected(Color,Piece,const Transform*)),
                 SLOT(selectPiece(Color,Piece,const Transform*)));
-        pieceSelectorLayout->addWidget(m_pieceSelector[*i]);
+        pieceSelectorLayout->addWidget(m_pieceSelector[c]);
     }
     return layout;
 }
@@ -1600,10 +1599,10 @@ void MainWindow::deleteAutoSaveFile()
 
 void MainWindow::enablePieceSelector(Color c)
 {
-    for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
+    for (Color i : getBoard().get_colors())
     {
-        m_pieceSelector[*i]->checkUpdate();
-        m_pieceSelector[*i]->setEnabled(*i == c);
+        m_pieceSelector[i]->checkUpdate();
+        m_pieceSelector[i]->setEnabled(i == c);
     }
 }
 
@@ -2191,8 +2190,8 @@ void MainWindow::initGame()
     if (! settings.value("computer_color_none").toBool())
     {
         auto& bd = getBoard();
-        for (ColorIterator i(bd.get_nu_nonalt_colors()); i; ++i)
-            m_computerColors[*i] = ! bd.is_same_player(*i, Color(0));
+        for (Color c : Color::Range(bd.get_nu_nonalt_colors()))
+            m_computerColors[c] = ! bd.is_same_player(c, Color(0));
         m_autoPlay = true;
     }
     else
@@ -2736,9 +2735,9 @@ void MainWindow::ratedGame()
     setRated(true);
     auto& bd = getBoard();
     m_computerColors.fill(true);
-    for (ColorIterator i(bd.get_nu_nonalt_colors()); i; ++i)
-        if (bd.is_same_player(*i, m_ratedGameColor))
-            m_computerColors[*i] = false;
+    for (Color c : Color::Range(bd.get_nu_nonalt_colors()))
+        if (bd.is_same_player(c, m_ratedGameColor))
+            m_computerColors[c] = false;
     m_autoPlay = true;
     QString computerPlayerName =
         //: The first argument is the version of Pentobi
@@ -2748,11 +2747,11 @@ void MainWindow::ratedGame()
         Util::convertSgfValueFromQString(computerPlayerName, charset);
     string humanPlayerNameStdStr =
         Util::convertSgfValueFromQString(tr("Human"), charset);
-    for (ColorIterator i(bd.get_nu_nonalt_colors()); i; ++i)
-        if (m_computerColors[*i])
-            m_game->set_player_name(*i, computerPlayerNameStdStr);
+    for (Color c : Color::Range(bd.get_nu_nonalt_colors()))
+        if (m_computerColors[c])
+            m_game->set_player_name(c, computerPlayerNameStdStr);
         else
-            m_game->set_player_name(*i, humanPlayerNameStdStr);
+            m_game->set_player_name(c, humanPlayerNameStdStr);
     // Setting the player names marks the game as modified but there is nothing
     // important that would need to be saved yet
     m_game->clear_modified();
@@ -2965,8 +2964,8 @@ void MainWindow::selectNextColor()
     m_currentColor = bd.get_next(m_currentColor);
     m_orientationDisplay->selectColor(m_currentColor);
     clearSelectedPiece();
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        m_pieceSelector[*i]->setEnabled(m_currentColor == *i);
+    for (Color c : bd.get_colors())
+        m_pieceSelector[c]->setEnabled(m_currentColor == c);
     if (m_actionSetupMode->isChecked())
         setSetupPlayer();
     updateWindow(false);
@@ -3285,8 +3284,8 @@ void MainWindow::setupMode(bool enable)
     if (enable)
     {
         m_setupModeLabel->show();
-        for (ColorIterator i(getBoard().get_nu_colors()); i; ++i)
-            m_pieceSelector[*i]->setEnabled(true);
+        for (Color c : getBoard().get_colors())
+            m_pieceSelector[c]->setEnabled(true);
         m_computerColors.fill(false);
     }
     else
@@ -3671,8 +3670,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     if (currentNodeChanged)
     {
         clearSelectedPiece();
-        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-            m_pieceSelector[*i]->checkUpdate();
+        for (Color c : bd.get_colors())
+            m_pieceSelector[c]->checkUpdate();
         if (! m_actionSetupMode->isChecked())
             enablePieceSelector(m_currentColor);
         updateComment();

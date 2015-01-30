@@ -20,7 +20,6 @@ using libboardgame_sgf::Writer;
 using libboardgame_util::log;
 using libboardgame_util::trim;
 using libpentobi_base::get_multiplayer_result;
-using libpentobi_base::ColorIterator;
 using libpentobi_base::Move;
 
 //-----------------------------------------------------------------------------

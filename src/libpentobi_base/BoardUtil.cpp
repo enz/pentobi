@@ -73,13 +73,13 @@ Move get_transformed(const Board& bd, Move mv,
 void write_setup(Writer& writer, Variant variant, const Setup& setup)
 {
     auto& board_const = BoardConst::get(variant);
-    for (ColorIterator i(get_nu_colors(variant)); i; ++i)
-        if (! setup.placements[*i].empty())
+    for (Color c : get_colors(variant))
+        if (! setup.placements[c].empty())
         {
             vector<string> values;
-            for (Move mv : setup.placements[*i])
+            for (Move mv : setup.placements[c])
                 values.push_back(board_const.to_string(mv, false));
-            writer.write_property(get_setup_id(variant, *i), values);
+            writer.write_property(get_setup_id(variant, c), values);
         }
 }
 

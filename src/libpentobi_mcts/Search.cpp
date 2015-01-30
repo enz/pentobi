@@ -20,7 +20,6 @@ namespace libpentobi_mcts {
 using libboardgame_base::PointTransfRot180;
 using libboardgame_util::FmtSaver;
 using libpentobi_base::BoardType;
-using libpentobi_base::ColorIterator;
 using libpentobi_base::Piece;
 
 //-----------------------------------------------------------------------------
@@ -166,55 +165,53 @@ void Search::on_start_search(bool is_followup)
 {
     auto& bd = get_board();
     auto& bc = bd.get_board_const();
-    auto nu_colors = bd.get_nu_colors();
-
-    for (ColorIterator i(nu_colors); i; ++i)
+    for (Color c : bd.get_colors())
     {
-        auto& is_forbidden_at_root = m_shared_const.is_forbidden_at_root[*i];
+        auto& is_forbidden_at_root = m_shared_const.is_forbidden_at_root[c];
         is_forbidden_at_root.set();
         for (Point p : bd)
-            if (! bd.is_forbidden(p, *i))
+            if (! bd.is_forbidden(p, c))
             {
-                auto adj_status = bd.get_adj_status(p, *i);
-                for (Piece piece : bd.get_pieces_left(*i))
+                auto adj_status = bd.get_adj_status(p, c);
+                for (Piece piece : bd.get_pieces_left(c))
                     for (Move mv : bd.get_moves(piece, p, adj_status))
                     {
                         if (! is_forbidden_at_root[mv])
                             continue;
-                        if (! bd.is_forbidden(*i, mv))
+                        if (! bd.is_forbidden(c, mv))
                             is_forbidden_at_root.clear(mv);
                     }
             }
     }
 
     // Initialize m_shared_const.precomp_moves
-    for (ColorIterator i(nu_colors); i; ++i)
+    for (Color c : bd.get_colors())
     {
-        auto& precomp_moves = m_shared_const.precomp_moves[*i];
+        auto& precomp_moves = m_shared_const.precomp_moves[c];
         precomp_moves.clear();
         // Construct new lists in-place from old if it is a follow-up position
         const auto& old_precomp_moves =
             (is_followup ? precomp_moves : bc.get_precomp_moves());
         for (Point p : bd)
         {
-            if (bd.is_forbidden(p, *i))
+            if (bd.is_forbidden(p, c))
                 continue;
-            for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
+            for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
                 // Don't iterate over bd.get_pieces_left(*i) because its
                 // ordering is not preserved if a piece is removed and the
                 // in-place construction requires that the iteration in these
                 // loops is in the same order as during the last construction
                 // such that it will never overwrite any old content it still
                 // needs to read during the construction.
-                for (Piece::IntType k = 0; k < bc.get_nu_pieces(); ++k)
+                for (Piece::IntType j = 0; j < bc.get_nu_pieces(); ++j)
                 {
-                    Piece piece(k);
-                    if (! bd.is_piece_left(*i, piece))
+                    Piece piece(j);
+                    if (! bd.is_piece_left(c, piece))
                         continue;
                     auto begin = precomp_moves.get_size();
-                    auto moves = old_precomp_moves.get_moves(piece, p, j);
+                    auto moves = old_precomp_moves.get_moves(piece, p, i);
                     for (auto m = moves.begin(); m != moves.end(); ++m)
-                        if (! m_shared_const.is_forbidden_at_root[*i][*m])
+                        if (! m_shared_const.is_forbidden_at_root[c][*m])
                         {
                             if (is_followup)
                                 // Assert that we don't overwrite old content
@@ -226,7 +223,7 @@ void Search::on_start_search(bool is_followup)
                             precomp_moves.push_move(*m);
                         }
                     auto size = precomp_moves.get_size() - begin;
-                    precomp_moves.set_list_range(p, j, piece, begin, size);
+                    precomp_moves.set_list_range(p, i, piece, begin, size);
                 }
         }
     }

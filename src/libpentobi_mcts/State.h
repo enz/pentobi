@@ -29,7 +29,6 @@ using libboardgame_util::Statistics;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
-using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMap;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
@@ -425,8 +424,8 @@ inline bool State::skip_rave(Move mv) const
 inline void State::update_playout_features(Color c, Move mv)
 {
     auto& info = get_move_info(mv);
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        m_playout_features[*i].set_forbidden(info);
+    for (Color i : Color::Range(m_nu_colors))
+        m_playout_features[i].set_forbidden(info);
     m_playout_features[c].set_forbidden(get_move_info_ext(mv));
 }
 

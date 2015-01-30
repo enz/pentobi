@@ -14,8 +14,6 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-using libpentobi_base::ColorIterator;
-
 //-----------------------------------------------------------------------------
 
 ComputerColorDialog::ComputerColorDialog(QWidget* parent,
@@ -45,8 +43,8 @@ void ComputerColorDialog::accept()
     auto nu_players = get_nu_players(m_variant);
     auto nu_colors = get_nu_colors(m_variant);
     if (nu_players == nu_colors || m_variant == Variant::classic_3)
-        for (ColorIterator i(nu_players); i; ++i)
-            m_computerColor[*i] = m_checkBox[(*i).to_int()]->isChecked();
+        for (Color c : Color::Range(nu_players))
+            m_computerColor[c] = m_checkBox[c.to_int()]->isChecked();
     else
     {
         LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2

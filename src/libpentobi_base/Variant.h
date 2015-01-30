@@ -89,6 +89,11 @@ bool parse_variant_id(const string& s, Variant& variant);
 
 Color::IntType get_nu_colors(Variant variant);
 
+inline Color::Range get_colors(Variant variant)
+{
+    return Color::Range(get_nu_colors(variant));
+}
+
 Color::IntType get_nu_players(Variant variant);
 
 const Geometry& get_geometry(BoardType board_type);

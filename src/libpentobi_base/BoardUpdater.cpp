@@ -71,13 +71,13 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
         {
             throw InvalidTree(e.what());
         }
-        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
+        for (Color c : bd.get_colors())
         {
-            if (setup.placements[*i].remove(mv))
+            if (setup.placements[c].remove(mv))
             {
                 Piece piece = bd.get_move_info(mv).get_piece();
-                LIBBOARDGAME_ASSERT(! pieces_left[*i].contains(piece));
-                pieces_left[*i].push_back(piece);
+                LIBBOARDGAME_ASSERT(! pieces_left[c].contains(piece));
+                pieces_left[c].push_back(piece);
                 break;
             }
             throw InvalidTree("invalid value for AE property");
@@ -95,10 +95,10 @@ void init_setup(Board& bd, const SgfNode& node)
     Setup setup;
     get_current_position_as_setup(bd, setup);
     ColorMap<AllPiecesLeftList> all_pieces_left;
-    for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-        for (Piece piece : bd.get_pieces_left(*i))
-            for (unsigned j = 0; j < bd.get_nu_piece_instances(); ++j)
-                all_pieces_left[*i].push_back(piece);
+    for (Color c : bd.get_colors())
+        for (Piece piece : bd.get_pieces_left(c))
+            for (unsigned i = 0; i < bd.get_nu_piece_instances(); ++i)
+                all_pieces_left[c].push_back(piece);
     handle_setup_property(node, "A1", Color(0), bd, setup, all_pieces_left);
     handle_setup_property(node, "A2", Color(1), bd, setup, all_pieces_left);
     handle_setup_property(node, "A3", Color(2), bd, setup, all_pieces_left);
@@ -112,10 +112,10 @@ void init_setup(Board& bd, const SgfNode& node)
     {
         // Try to guess who should be to play based on the setup pieces.
         setup.to_play = Color(0);
-        for (ColorIterator i(bd.get_nu_colors()); i; ++i)
-            if (setup.placements[*i].size() < setup.placements[Color(0)].size())
+        for (Color c : bd.get_colors())
+            if (setup.placements[c].size() < setup.placements[Color(0)].size())
             {
-                setup.to_play = *i;
+                setup.to_play = c;
                 break;
             }
     }

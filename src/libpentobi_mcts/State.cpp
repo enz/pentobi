@@ -305,8 +305,8 @@ Point State::find_best_starting_point(Color c) const
         float px = static_cast<float>(geo.get_x(p));
         float py = static_cast<float>(geo.get_y(p));
         float d = 0;
-        for (ColorIterator i(m_nu_colors); i; ++i)
-            for (Point pp : m_bd.get_starting_points(*i))
+        for (Color i : Color::Range(m_nu_colors))
+            for (Point pp : m_bd.get_starting_points(i))
             {
                 PointState s = m_bd.get_point_state(pp);
                 if (! s.is_empty())
@@ -497,10 +497,10 @@ void State::start_search()
     m_bd.copy_from(bd);
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        m_playout_features[*i].init_snapshot(m_bd, *i);
-    m_bc = &m_bd.get_board_const();
     m_nu_colors = bd.get_nu_colors();
+    for (Color c : Color::Range(m_nu_colors))
+        m_playout_features[c].init_snapshot(m_bd, c);
+    m_bc = &m_bd.get_board_const();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
     m_check_terminate_early =
@@ -525,8 +525,8 @@ void State::start_search()
 
     m_prior_knowledge.start_search(bd);
     m_stat_len.clear();
-    for (ColorIterator i(m_nu_colors); i; ++i)
-        m_stat_score[*i].clear();
+    for (Color c : Color::Range(m_nu_colors))
+        m_stat_score[c].clear();
 
     // Init gamma values
     double gamma_size_factor = 1;
@@ -569,13 +569,13 @@ void State::start_simulation(size_t n)
     m_bd.restore_snapshot();
     m_force_consider_all_pieces = false;
     auto& geo = m_bd.get_geometry();
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : Color::Range(m_nu_colors))
     {
-        m_has_moves[*i] = true;
-        m_is_move_list_initialized[*i] = false;
-        m_playout_features[*i].restore_snapshot(m_bd);
-        m_new_moves[*i].clear();
-        m_moves_added_at[*i].fill(false, geo);
+        m_has_moves[c] = true;
+        m_is_move_list_initialized[c] = false;
+        m_playout_features[c].restore_snapshot(m_bd);
+        m_new_moves[c].clear();
+        m_moves_added_at[c].fill(false, geo);
     }
     m_nu_passes = 0;
 }

@@ -72,6 +72,11 @@ public:
 
     Color::IntType get_nu_colors() const;
 
+    Color::Range get_colors() const
+    {
+        return Color::Range(m_nu_colors);
+    }
+
     /** Number of colors that are not played alternately.
         This is equal to get_nu_colors() apart from Variant::classic_3. */
     Color::IntType get_nu_nonalt_colors() const;
@@ -651,9 +656,9 @@ inline int Board::get_score(Color c) const
     {
         int score = 0;
         auto nu_players = static_cast<Color::IntType>(m_nu_players);
-        for (ColorIterator i(nu_players); i; ++i)
-            if (*i != c)
-                score -= get_points(*i);
+        for (Color i : get_colors())
+            if (i != c)
+                score -= get_points(i);
         score = get_points(c) + score / (static_cast<int>(nu_players) - 1);
         return score;
     }
@@ -867,10 +872,10 @@ inline void Board::restore_snapshot()
         m_snapshot->state_base.nu_onboard_pieces_all;
     m_state_base.point_state.copy_from(m_snapshot->state_base.point_state,
                                        *m_geo);
-    for (ColorIterator i(m_nu_colors); i; ++i)
+    for (Color c : get_colors())
     {
-        const auto& snapshot_state = m_snapshot->state_color[*i];
-        auto& state = m_state_color[*i];
+        const auto& snapshot_state = m_snapshot->state_color[c];
+        auto& state = m_state_color[c];
         state.forbidden.copy_from(snapshot_state.forbidden, *m_geo);
         state.is_attach_point.copy_from(snapshot_state.is_attach_point,
                                         *m_geo);
@@ -878,7 +883,7 @@ inline void Board::restore_snapshot()
         state.nu_left_piece = snapshot_state.nu_left_piece;
         state.nu_onboard_pieces = snapshot_state.nu_onboard_pieces;
         state.points = snapshot_state.points;
-        m_attach_points[*i].resize(m_snapshot->attach_points_size[*i]);
+        m_attach_points[c].resize(m_snapshot->attach_points_size[c]);
     }
 }
 
