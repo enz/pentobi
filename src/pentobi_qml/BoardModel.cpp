@@ -17,7 +17,6 @@ using libboardgame_util::Exception;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
-using libpentobi_base::ColorIterator;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::CoordPoint;
@@ -521,8 +520,8 @@ void BoardModel::updateProperties()
     }
 
     bool isGameOver = true;
-    for (ColorIterator i(m_nuColors); i; ++i)
-        if (m_bd.has_moves(*i))
+    for (Color c : m_bd.get_colors())
+        if (m_bd.has_moves(c))
             isGameOver = false;
     if (m_isGameOver != isGameOver)
     {
@@ -538,11 +537,13 @@ void BoardModel::updateProperties()
     }
 
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
-    for (ColorIterator i(m_nuColors); i; ++i)
-        isPlayed[*i].fill(false);
+    for (Color c : m_bd.get_colors())
+        isPlayed[c].fill(false);
+#if LIBBOARDGAME_DEBUG
     // Does not handle setup yet
-    for (ColorIterator i(m_nuColors); i; ++i)
-        LIBBOARDGAME_ASSERT(m_bd.get_setup().placements[*i].empty());
+    for (Color c : m_bd.get_colors())
+        LIBBOARDGAME_ASSERT(m_bd.get_setup().placements[c].empty());
+#endif
     m_lastMovePieceModel = nullptr;
     for (unsigned i = 0; i < m_bd.get_nu_moves(); ++i)
     {
@@ -588,12 +589,12 @@ void BoardModel::updateProperties()
         if (i == m_bd.get_nu_moves() - 1)
             m_lastMovePieceModel = pieceModel;
     }
-    for (ColorIterator i(m_nuColors); i; ++i)
+    for (Color c : m_bd.get_colors())
     {
-        auto& pieceModels = getPieceModels(*i);
-        for (int j = 0; j < pieceModels.length(); ++j)
-            if (! isPlayed[*i][j])
-                pieceModels[j]->setIsPlayed(false);
+        auto& pieceModels = getPieceModels(c);
+        for (int i = 0; i < pieceModels.length(); ++i)
+            if (! isPlayed[c][i])
+                pieceModels[i]->setIsPlayed(false);
     }
 
     int toPlay = m_isGameOver ? 0 : m_bd.get_effective_to_play().to_int();
