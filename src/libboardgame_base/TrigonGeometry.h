@@ -138,79 +138,71 @@ void TrigonGeometry<P>::init_adj_diag(Point p, AdjList& adj,
     auto x = this->get_x(p);
     auto y = this->get_y(p);
     auto type = Geometry<P>::get_point_type(p);
+    if (type == 0)
     {
-        if (type == 0)
-        {
-            if (x > 0 && this->is_onboard(x - 1, y))
-                adj.push_back(this->get_point(x - 1, y));
-            if (x < width - 1 && this->is_onboard(x + 1, y))
-                adj.push_back(this->get_point(x + 1, y));
-            if (y < height - 1 && this->is_onboard(x, y + 1))
-                adj.push_back(this->get_point(x, y + 1));
-        }
-        else
-        {
-            if (y > 0 && this->is_onboard(x, y - 1))
-                adj.push_back(this->get_point(x, y - 1));
-            if (x > 0 && this->is_onboard(x - 1, y))
-                adj.push_back(this->get_point(x - 1, y));
-            if (x < width - 1 && this->is_onboard(x + 1, y))
-                adj.push_back(this->get_point(x + 1, y));
-        }
+        if (x > 0 && this->is_onboard(x - 1, y))
+            adj.push_back(this->get_point(x - 1, y));
+        if (x < width - 1 && this->is_onboard(x + 1, y))
+            adj.push_back(this->get_point(x + 1, y));
+        if (y < height - 1 && this->is_onboard(x, y + 1))
+            adj.push_back(this->get_point(x, y + 1));
+
+        // The order does not matter logically but it is better to put far away
+        // 2nd order adjacent points first because it slightly increases the
+        // efficiency of libpentobi_base::BoardConst, which uses tge forbidden
+        // status of the first few points from this list during move generation
+        // and those points can reject more moves.
+        if (x > 1 && this->is_onboard(x - 2, y))
+            diag.push_back(this->get_point(x - 2, y));
+        if (x < width - 2 && this->is_onboard(x + 2, y))
+            diag.push_back(this->get_point(x + 2, y));
+        if (x > 0 && y > 0
+                && this->is_onboard(x - 1, y - 1))
+            diag.push_back(this->get_point(x - 1, y - 1));
+        if (x < width - 1 && y > 0 && this->is_onboard(x + 1, y - 1))
+            diag.push_back(this->get_point(x + 1, y - 1));
+        if (x < width - 1 && y < height - 1
+                && this->is_onboard(x + 1, y + 1))
+            diag.push_back(this->get_point(x + 1, y + 1));
+        if (x > 0 && y < height - 1 && this->is_onboard(x - 1, y + 1))
+            diag.push_back(this->get_point(x - 1, y + 1));
+        if (y > 0 && this->is_onboard(x, y - 1))
+            diag.push_back(this->get_point(x, y - 1));
+        if (x > 1 && y < height - 1 && this->is_onboard(x - 2, y + 1))
+            diag.push_back(this->get_point(x - 2, y + 1));
+        if (x < width - 2 && y < height - 1
+                && this->is_onboard(x + 2, y + 1))
+            diag.push_back(this->get_point(x + 2, y + 1));
     }
+    else
     {
-        if (type == 0)
-        {
-            // The order does not matter logically but it is better to put
-            // far away 2nd order adjacent points first because it slightly
-            // increases the efficiency of libpentobi_base::BoardConst, which
-            // uses the forbidden status of the first few points from this list
-            // during move generation and those points can reject more moves.
-            if (x > 1 && this->is_onboard(x - 2, y))
-                diag.push_back(this->get_point(x - 2, y));
-            if (x < width - 2 && this->is_onboard(x + 2, y))
-                diag.push_back(this->get_point(x + 2, y));
-            if (x > 0 && y > 0
-                    && this->is_onboard(x - 1, y - 1))
-                diag.push_back(this->get_point(x - 1, y - 1));
-            if (x < width - 1 && y > 0 && this->is_onboard(x + 1, y - 1))
-                diag.push_back(this->get_point(x + 1, y - 1));
-            if (x < width - 1 && y < height - 1
-                    && this->is_onboard(x + 1, y + 1))
-                diag.push_back(this->get_point(x + 1, y + 1));
-            if (x > 0 && y < height - 1 && this->is_onboard(x - 1, y + 1))
-                diag.push_back(this->get_point(x - 1, y + 1));
-            if (y > 0 && this->is_onboard(x, y - 1))
-                diag.push_back(this->get_point(x, y - 1));
-            if (x > 1 && y < height - 1 && this->is_onboard(x - 2, y + 1))
-                diag.push_back(this->get_point(x - 2, y + 1));
-            if (x < width - 2 && y < height - 1
-                    && this->is_onboard(x + 2, y + 1))
-                diag.push_back(this->get_point(x + 2, y + 1));
-        }
-        else
-        {
-            // See comment at type == 0 for the order of moves.
-            if (x > 1 && this->is_onboard(x - 2, y))
-                diag.push_back(this->get_point(x - 2, y));
-            if (x < width - 2 && this->is_onboard(x + 2, y))
-                diag.push_back(this->get_point(x + 2, y));
-            if (x > 0 && y < height - 1 && this->is_onboard(x - 1, y + 1))
-                diag.push_back(this->get_point(x - 1, y + 1));
-            if (x < width - 1 && y < height - 1
-                    && this->is_onboard(x + 1, y + 1))
-                diag.push_back(this->get_point(x + 1, y + 1));
-            if (x < width - 1 && y > 0 && this->is_onboard(x + 1, y - 1))
-                diag.push_back(this->get_point(x + 1, y - 1));
-            if (x > 0 && y > 0 && this->is_onboard(x - 1, y - 1))
-                diag.push_back(this->get_point(x - 1, y - 1));
-            if (y < height - 1 && this->is_onboard(x, y + 1))
-                diag.push_back(this->get_point(x, y + 1));
-            if (x > 1 && y > 0 && this->is_onboard(x - 2, y - 1))
-                diag.push_back(this->get_point(x - 2, y - 1));
-            if (x < width - 2 && y > 0 && this->is_onboard(x + 2, y - 1))
-                diag.push_back(this->get_point(x + 2, y - 1));
-        }
+        if (y > 0 && this->is_onboard(x, y - 1))
+            adj.push_back(this->get_point(x, y - 1));
+        if (x > 0 && this->is_onboard(x - 1, y))
+            adj.push_back(this->get_point(x - 1, y));
+        if (x < width - 1 && this->is_onboard(x + 1, y))
+            adj.push_back(this->get_point(x + 1, y));
+
+        // See comment at type == 0 for the order of moves.
+        if (x > 1 && this->is_onboard(x - 2, y))
+            diag.push_back(this->get_point(x - 2, y));
+        if (x < width - 2 && this->is_onboard(x + 2, y))
+            diag.push_back(this->get_point(x + 2, y));
+        if (x > 0 && y < height - 1 && this->is_onboard(x - 1, y + 1))
+            diag.push_back(this->get_point(x - 1, y + 1));
+        if (x < width - 1 && y < height - 1
+                && this->is_onboard(x + 1, y + 1))
+            diag.push_back(this->get_point(x + 1, y + 1));
+        if (x < width - 1 && y > 0 && this->is_onboard(x + 1, y - 1))
+            diag.push_back(this->get_point(x + 1, y - 1));
+        if (x > 0 && y > 0 && this->is_onboard(x - 1, y - 1))
+            diag.push_back(this->get_point(x - 1, y - 1));
+        if (y < height - 1 && this->is_onboard(x, y + 1))
+            diag.push_back(this->get_point(x, y + 1));
+        if (x > 1 && y > 0 && this->is_onboard(x - 2, y - 1))
+            diag.push_back(this->get_point(x - 2, y - 1));
+        if (x < width - 2 && y > 0 && this->is_onboard(x + 2, y - 1))
+            diag.push_back(this->get_point(x + 2, y - 1));
     }
 }
 

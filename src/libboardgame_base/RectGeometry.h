@@ -109,26 +109,24 @@ void RectGeometry<P>::init_adj_diag(Point p, AdjList& adj,
     auto height = this->get_height();
     auto x = this->get_x(p);
     auto y = this->get_y(p);
-    {
-        if (y > 0)
-            adj.push_back(this->get_point(x, y - 1));
-        if (x > 0)
-            adj.push_back(this->get_point(x - 1, y));
-        if (x < width - 1)
-            adj.push_back(this->get_point(x + 1, y));
-        if (y < height - 1)
-            adj.push_back(this->get_point(x, y + 1));
-    }
-    {
-        if (x > 0 && y > 0)
-            diag.push_back(this->get_point(x - 1, y - 1));
-        if (x < width - 1 && y > 0)
-            diag.push_back(this->get_point(x + 1, y - 1));
-        if (x > 0 && y < height - 1)
-            diag.push_back(this->get_point(x - 1, y + 1));
-        if (x < width - 1 && y < height - 1)
-            diag.push_back(this->get_point(x + 1, y + 1));
-    }
+
+    if (y > 0)
+        adj.push_back(this->get_point(x, y - 1));
+    if (x > 0)
+        adj.push_back(this->get_point(x - 1, y));
+    if (x < width - 1)
+        adj.push_back(this->get_point(x + 1, y));
+    if (y < height - 1)
+        adj.push_back(this->get_point(x, y + 1));
+
+    if (x > 0 && y > 0)
+        diag.push_back(this->get_point(x - 1, y - 1));
+    if (x < width - 1 && y > 0)
+        diag.push_back(this->get_point(x + 1, y - 1));
+    if (x > 0 && y < height - 1)
+        diag.push_back(this->get_point(x - 1, y + 1));
+    if (x < width - 1 && y < height - 1)
+        diag.push_back(this->get_point(x + 1, y + 1));
 }
 
 //-----------------------------------------------------------------------------
