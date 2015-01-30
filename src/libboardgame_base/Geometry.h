@@ -174,23 +174,23 @@ protected:
                                DiagList& diag) const = 0;
 
 private:
-    unsigned m_width;
+    AdjList m_adj[Point::range];
 
-    unsigned m_height;
+    DiagList m_diag[Point::range];
 
     IntType m_range;
 
     Point m_points[Point::max_width][Point::max_height];
+
+    unsigned m_width;
+
+    unsigned m_height;
 
     unsigned m_x[Point::range];
 
     unsigned m_y[Point::range];
 
     string m_string[Point::range];
-
-    AdjList m_adj[Point::range];
-
-    DiagList m_diag[Point::range];
 
     bool is_valid(Point p) const;
 };
