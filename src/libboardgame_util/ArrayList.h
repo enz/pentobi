@@ -123,9 +123,9 @@ public:
     bool remove_fast(const T& t);
 
 private:
-    I m_size;
-
     array<T, max_size> m_a;
+
+    I m_size;
 };
 
 template<typename T, unsigned M, typename I>
