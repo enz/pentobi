@@ -52,6 +52,10 @@ public:
 
     ArrayList(const initializer_list<T>& l);
 
+    /** Assignment operator.
+        Copies only elements with index below the current size. */
+    ArrayList& operator=(const ArrayList& l);
+
     T& operator[](I i);
 
     const T& operator[](I i) const;
@@ -89,11 +93,6 @@ public:
     void clear();
 
     void assign(const T& t);
-
-    /** Copy elements from another list.
-        Copies only the elements in the range given by the size of the
-        source. */
-    void copy_from(const ArrayList& l);
 
     /** Change the size of the list.
         Does not call constructors on new elements if the size grows or
@@ -147,6 +146,14 @@ ArrayList<T, M, I>::ArrayList(const initializer_list<T>& l)
 {
     for (auto& t : l)
         push_back(t);
+}
+
+template<typename T, unsigned M, typename I>
+auto ArrayList<T, M, I>::operator=(const ArrayList& l) -> ArrayList&
+{
+    m_size = l.size();
+    copy(l.begin(), l.end(), begin());
+    return *this;
 }
 
 template<typename T, unsigned M, typename I>
@@ -220,13 +227,6 @@ template<typename T, unsigned M, typename I>
 bool ArrayList<T, M, I>::contains(const T& t) const
 {
     return find(begin(), end(), t) != end();
-}
-
-template<typename T, unsigned M, typename I>
-void ArrayList<T, M, I>::copy_from(const ArrayList& l)
-{
-    m_size = l.size();
-    copy(l.begin(), l.end(), begin());
 }
 
 template<typename T, unsigned M, typename I>

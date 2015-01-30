@@ -128,7 +128,7 @@ void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
                                   get_transformed(bd, mv.move, *transform)));
         }
         if (sequence.empty() || compare_sequence(s, sequence))
-            sequence.copy_from(s);
+            sequence = s;
     }
 
     auto node = &m_tree.get_root();

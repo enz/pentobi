@@ -384,7 +384,7 @@ void Board::take_snapshot()
         snapshot_state.forbidden.copy_from(state.forbidden, *m_geo);
         snapshot_state.is_attach_point.copy_from(state.is_attach_point,
                                                  *m_geo);
-        snapshot_state.pieces_left.copy_from(state.pieces_left);
+        snapshot_state.pieces_left = state.pieces_left;
         snapshot_state.nu_left_piece = state.nu_left_piece;
         snapshot_state.nu_onboard_pieces = state.nu_onboard_pieces;
         snapshot_state.points = state.points;
