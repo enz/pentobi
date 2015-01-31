@@ -59,6 +59,10 @@ Board::Board(Variant variant)
     m_color_char[Color(3)] = '@';
     init_variant(variant);
     init();
+#if LIBBOARDGAME_DEBUG
+    m_snapshot.moves_size =
+            numeric_limits<decltype(m_snapshot.moves_size)>::max();
+#endif
 }
 
 void Board::copy_from(const Board& bd)
@@ -367,20 +371,18 @@ void Board::place_setup(const Setup& setup)
 
 void Board::take_snapshot()
 {
-    if (! m_snapshot)
-        m_snapshot.reset(new Snapshot);
     optimize_attach_point_lists();
-    m_snapshot->moves_size = m_moves.size();
-    m_snapshot->state_base.to_play = m_state_base.to_play;
-    m_snapshot->state_base.nu_onboard_pieces_all =
+    m_snapshot.moves_size = m_moves.size();
+    m_snapshot.state_base.to_play = m_state_base.to_play;
+    m_snapshot.state_base.nu_onboard_pieces_all =
         m_state_base.nu_onboard_pieces_all;
-    m_snapshot->state_base.point_state.copy_from(m_state_base.point_state,
-                                                 *m_geo);
+    m_snapshot.state_base.point_state.copy_from(m_state_base.point_state,
+                                                *m_geo);
     for (Color c : get_colors())
     {
-        m_snapshot->attach_points_size[c] = m_attach_points[c].size();
+        m_snapshot.attach_points_size[c] = m_attach_points[c].size();
         const auto& state = m_state_color[c];
-        auto& snapshot_state = m_snapshot->state_color[c];
+        auto& snapshot_state = m_snapshot.state_color[c];
         snapshot_state.forbidden.copy_from(state.forbidden, *m_geo);
         snapshot_state.is_attach_point.copy_from(state.is_attach_point,
                                                  *m_geo);

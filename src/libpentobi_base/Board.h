@@ -8,7 +8,6 @@
 #define LIBPENTOBI_BASE_BOARD_H
 
 #include <cstddef>
-#include <memory>
 #include "BoardConst.h"
 #include "ColorMap.h"
 #include "ColorMove.h"
@@ -402,7 +401,7 @@ private:
 
     ArrayList<ColorMove, max_game_moves> m_moves;
 
-    unique_ptr<Snapshot> m_snapshot;
+    Snapshot m_snapshot;
 
     Setup m_setup;
 
@@ -864,26 +863,24 @@ inline void Board::play(ColorMove mv)
 
 inline void Board::restore_snapshot()
 {
-    LIBBOARDGAME_ASSERT(m_snapshot);
-    LIBBOARDGAME_ASSERT(m_snapshot->moves_size <= m_moves.size());
-    m_moves.resize(m_snapshot->moves_size);
-    m_state_base.to_play = m_snapshot->state_base.to_play;
+    LIBBOARDGAME_ASSERT(m_snapshot.moves_size <= m_moves.size());
+    auto& geo = get_geometry();
+    m_moves.resize(m_snapshot.moves_size);
+    m_state_base.to_play = m_snapshot.state_base.to_play;
     m_state_base.nu_onboard_pieces_all =
-        m_snapshot->state_base.nu_onboard_pieces_all;
-    m_state_base.point_state.copy_from(m_snapshot->state_base.point_state,
-                                       *m_geo);
+        m_snapshot.state_base.nu_onboard_pieces_all;
+    m_state_base.point_state.copy_from(m_snapshot.state_base.point_state, geo);
     for (Color c : get_colors())
     {
-        const auto& snapshot_state = m_snapshot->state_color[c];
+        const auto& snapshot_state = m_snapshot.state_color[c];
         auto& state = m_state_color[c];
-        state.forbidden.copy_from(snapshot_state.forbidden, *m_geo);
-        state.is_attach_point.copy_from(snapshot_state.is_attach_point,
-                                        *m_geo);
+        state.forbidden.copy_from(snapshot_state.forbidden, geo);
+        state.is_attach_point.copy_from(snapshot_state.is_attach_point, geo);
         state.pieces_left = snapshot_state.pieces_left;
         state.nu_left_piece = snapshot_state.nu_left_piece;
         state.nu_onboard_pieces = snapshot_state.nu_onboard_pieces;
         state.points = snapshot_state.points;
-        m_attach_points[c].resize(m_snapshot->attach_points_size[c]);
+        m_attach_points[c].resize(m_snapshot.attach_points_size[c]);
     }
 }
 
