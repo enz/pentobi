@@ -8,7 +8,6 @@
 #include <config.h>
 #endif
 
-#include "libboardgame_base/PointList.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/SpShtStrRep.h"
 #include "libboardgame_test/Test.h"
@@ -22,7 +21,7 @@ typedef
 libboardgame_base::Point<19 * 19, 19, 19, unsigned short, SpShtStrRep> Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::RectGeometry<Point> RectGeometry;
-typedef libboardgame_base::PointList<Point> PointList;
+typedef libboardgame_base::ArrayList<Point, Point::max_onboard> PointList;
 
 //-----------------------------------------------------------------------------
 

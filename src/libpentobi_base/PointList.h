@@ -8,13 +8,13 @@
 #define LIBPENTOBI_BASE_POINT_LIST_H
 
 #include "Point.h"
-#include "libboardgame_base/PointList.h"
+#include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::PointList<Point> PointList;
+typedef ArrayList<Point, Point::max_onboard> PointList;
 
 //-----------------------------------------------------------------------------
 

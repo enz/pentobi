@@ -10,7 +10,6 @@ add_library(boardgame_base STATIC
   Grid.h
   Marker.h
   Point.h
-  PointList.h
   PointTransform.h
   Rating.h
   Rating.cpp
