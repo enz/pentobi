@@ -389,6 +389,10 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
 
 Marker BoardConst::s_marker;
 
+Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
+                 PrecompMoves::nu_adj_status>>
+    BoardConst::s_adj_status;
+
 BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     : m_geo(libpentobi_base::get_geometry(board_type)),
       m_nu_attach_points(0)
@@ -705,13 +709,14 @@ void BoardConst::init_adj_status(
         for (unsigned j = 0; j < i; ++j)
             if (forbidden[j])
                 index |= (1 << j);
+        s_adj_status[p][index].clear();
         unsigned n = 0;
         for (Point j : adj_status_list)
         {
             if (n >= i)
                 return;
             if (forbidden[n])
-                m_adj_status[p][index].push_back(j);
+                s_adj_status[p][index].push_back(j);
             ++n;
         }
         return;
@@ -746,7 +751,7 @@ void BoardConst::init_symmetry_info()
 bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
                                                const MoveInfo& info) const
 {
-    for (Point p_adj : m_adj_status[p][adj_status])
+    for (Point p_adj : s_adj_status[p][adj_status])
         if (info.contains(p_adj))
             return false;
     return true;

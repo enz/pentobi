@@ -128,11 +128,13 @@ private:
     typedef array<PieceMap<Grid<LocalMovesList>>, PrecompMoves::nu_adj_status>
         FullMoveTable;
 
-    /** Local variable reused for efficiency.
-        This variable is only used during construction. It can be static
-        because construction is done with BoardConst::get(), which is not
-        thread-safe anyway. */
+    /** Local variable used during construction. */
     static Marker s_marker;
+
+    /** Local variable used during construction. */
+    static Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
+                     PrecompMoves::nu_adj_status>>
+        s_adj_status;
 
     Piece::IntType m_nu_pieces;
 
@@ -164,12 +166,6 @@ private:
     unique_ptr<FullMoveTable> m_full_move_table;
 
     PrecompMoves m_precomp_moves;
-
-    /** Forbidden neighbors for a given adjacent status index at a given point.
-        Only used during construction. */
-    Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
-               PrecompMoves::nu_adj_status>>
-        m_adj_status;
 
     /** Value for comparing points using the ordering used in blksgf files.
         As specified in doc/blksgf/Pentobi-SGF.html, the order should be
