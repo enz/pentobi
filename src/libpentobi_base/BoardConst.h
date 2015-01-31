@@ -43,7 +43,8 @@ public:
     static const unsigned max_moves_at_point = 40;
 
     /** Get the single instance for a given board size.
-        The instance is created the first time this function is called. */
+        The instance is created the first time this function is called.
+        This function is not thread-safe. */
     static const BoardConst& get(Variant variant);
 
     Piece::IntType get_nu_pieces() const;
@@ -128,10 +129,13 @@ private:
     typedef array<PieceMap<Grid<LocalMovesList>>, PrecompMoves::nu_adj_status>
         FullMoveTable;
 
-    /** Local variable used during construction. */
+    /** Local variable used during construction.
+        Making this variable static slightly speeds up construction and
+        a thread-safe construction is not needed. */
     static Marker s_marker;
 
-    /** Local variable used during construction. */
+    /** Local variable used during construction.
+        See s_marker why this variable is static. */
     static Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
                      PrecompMoves::nu_adj_status>>
         s_adj_status;
