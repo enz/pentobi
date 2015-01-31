@@ -202,13 +202,14 @@ private:
 
     RandomGenerator m_random;
 
-    /** Statistics of the score for each color.
-        Used for normalizing the score modification of the game result. */
+    /** Used in get_quality_bonus(). */
     ColorMap<Statistics<Float>> m_stat_score;
 
-    /** Statistics of the length of a simulation.
-        Used for normalizing the length modification of the game result. */
+    /** Used in get_quality_bonus(). */
     Statistics<Float> m_stat_len;
+
+    /** Used in get_quality_bonus(). */
+    Statistics<Float> m_stat_attach;
 
     bool m_check_symmetric_draw;
 
@@ -253,7 +254,8 @@ private:
 
     Point find_best_starting_point(Color c) const;
 
-    Float get_eval_bonus(Color c, Float result, Float score);
+    Float get_quality_bonus(Color c, Float result, Float score,
+                            bool use_nu_attach);
 
     /** Equivalent to but faster than m_bd.get_move_info() */
     const MoveInfo& get_move_info(Move move) const;

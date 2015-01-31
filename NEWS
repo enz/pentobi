@@ -1,6 +1,7 @@
 Version 9.UNKNOWN (master)
 ==========================
 
+* Increased playing strength, mainly in game variant Trigon.
 * The compilation now requires at least GCC 4.9.
 
 
