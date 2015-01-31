@@ -37,13 +37,13 @@ public:
 
     static_assert(numeric_limits<IntType>::is_integer, "");
 
-    typedef T* iterator;
+    static const IntType max_size = M;
 
-    typedef const T* const_iterator;
+    typedef typename array<T, max_size>::iterator iterator;
+
+    typedef typename array<T, max_size>::const_iterator const_iterator;
 
     typedef T value_type;
-
-    static const IntType max_size = M;
 
     ArrayList();
 
@@ -287,8 +287,8 @@ inline void ArrayList<T, M, I>::push_back(const T& t)
 template<typename T, unsigned M, typename I>
 inline bool ArrayList<T, M, I>::remove(const T& t)
 {
-    T* end = this->end();
-    for (T* i = begin(); i != end; ++i)
+    auto end = this->end();
+    for (auto i = begin(); i != end; ++i)
         if (*i == t)
         {
             --end;
@@ -303,8 +303,8 @@ inline bool ArrayList<T, M, I>::remove(const T& t)
 template<typename T, unsigned M, typename I>
 inline bool ArrayList<T, M, I>::remove_fast(const T& t)
 {
-    T* end = this->end();
-    for (T* i = this->begin(); i != end; ++i)
+    auto end = this->end();
+    for (auto i = this->begin(); i != end; ++i)
         if (*i == t)
         {
             remove_fast(i);

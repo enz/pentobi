@@ -93,7 +93,7 @@ public:
                                   unsigned adj_status = 0) const
     {
         ListIndex idx = m_moves_range[p][adj_status][piece];
-        auto begin = m_move_lists.begin() + idx.begin;
+        auto begin = move_lists_begin() + idx.begin;
         auto end = begin + idx.size;
         return LocalMovesListRange(begin, end);
     }
@@ -104,7 +104,7 @@ public:
         index of old iterators with the current get_size() to ensure that
         we don't overwrite any old content that we still need to read
         during the construction. */
-    const Move* move_lists_begin() const { return m_move_lists.begin(); }
+    const Move* move_lists_begin() const { return &(*m_move_lists.begin()); }
 
 private:
     /** Compressed begin/end range for lists with moves at a given point.

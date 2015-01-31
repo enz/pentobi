@@ -250,7 +250,7 @@ void Search::on_start_search(bool is_followup)
                         is_piece_considered_list.end(),
                         is_piece_considered);
         if (pos != is_piece_considered_list.end())
-            m_shared_const.is_piece_considered[i] = pos;
+            m_shared_const.is_piece_considered[i] = &(*pos);
         else
         {
             is_piece_considered_list.push_back(is_piece_considered);
