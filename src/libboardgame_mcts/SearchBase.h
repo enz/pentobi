@@ -632,7 +632,7 @@ private:
 
     void check_create_threads();
 
-    bool check_move_cannot_change(Float count, Float remaining) const;
+    bool check_move_cannot_change(Float remaining) const;
 
     bool expand_node(ThreadState& thread_state, const Node& node,
                      const Node*& best_child);
@@ -856,7 +856,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
         m_callback(time, remaining_time);
     if (count + remaining_simulations > m_max_float_count)
         remaining_simulations = m_max_float_count - count;
-    if (check_move_cannot_change(count, remaining_simulations))
+    if (check_move_cannot_change(remaining_simulations))
     {
         log_thread(thread_state, "Move cannot change anymore");
         return true;
@@ -879,23 +879,22 @@ bool SearchBase<S, M, R>::check_followup(ArrayList<Move, max_moves>& sequence)
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_move_cannot_change(Float count,
-                                               Float remaining) const
+bool SearchBase<S, M, R>::check_move_cannot_change(Float remaining) const
 {
-    if (remaining > count)
-        return false;
-    Float max_count = 0;
-    Float second_max_count = 0;
+    // select_child_final() selects move with highest number of wins. Assume
+    // that all remaining simulations are wins for second best move.
+    Float max_wins = 0;
+    Float second_max_wins = 0;
     for (ChildIterator i(m_tree, m_tree.get_root()); i; ++i)
     {
-        Float count = i->get_visit_count();
-        if (count > max_count)
+        Float wins = i->get_value() * i->get_value_count();
+        if (wins > max_wins)
         {
-            second_max_count = max_count;
-            max_count = count;
+            second_max_wins = max_wins;
+            max_wins = wins;
         }
     }
-    return (max_count > second_max_count + remaining);
+    return (max_wins >= second_max_wins + remaining);
 }
 
 template<class S, class M, class R>
@@ -1563,22 +1562,22 @@ template<class S, class M, class R>
 auto SearchBase<S, M, R>::select_child_final(
         const Node& node) const-> const Node*
 {
-    // Select the child with the highest visit count, use value as tie breaker
-    const Node* result = nullptr;
-    Float max_count = -1;
-    Float max_count_value = -numeric_limits<Float>::max();
-    for (ChildIterator i(m_tree, node); i; ++i)
+    // Select the child with the highest number of wins
+    ChildIterator i(m_tree, node);
+    if (! i)
+        return nullptr;
+    const Node* best_child = &(*i);
+    auto max_wins = i->get_value_count() * i->get_value();
+    while (++i)
     {
-        Float count = i->get_visit_count();
-        if (count > max_count
-            || (count == max_count && i->get_value() > max_count_value))
+        Float wins = i->get_value_count() * i->get_value();
+        if (wins > max_wins)
         {
-            max_count = count;
-            max_count_value = i->get_value();
-            result = &(*i);
+            max_wins = wins;
+            best_child = &(*i);
         }
     }
-    return result;
+    return best_child;
 }
 
 template<class S, class M, class R>
