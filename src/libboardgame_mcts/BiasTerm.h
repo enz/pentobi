@@ -140,7 +140,7 @@ template<typename F>
 inline void BiasTerm<F>::start_iteration(Float parent_count)
 {
     LIBBOARDGAME_ASSERT(parent_count >= 0);
-    if (m_bias_term_constant == 0 || parent_count < 1)
+    if (parent_count < 1)
         m_parent_part = 0;
     else
     {
