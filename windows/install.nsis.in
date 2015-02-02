@@ -30,7 +30,7 @@ SetCompressor /SOLID lzma
 
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "German"
-!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS 
+!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
 
 !define ADD_START_MENU_ENTRY_DEFAULT "Add start menu entry"
 !define CREATE_DESKTOP_SHORTCUT_DEFAULT "Create desktop shortcut"
@@ -64,7 +64,7 @@ File "${QT_TRANSLATIONS_DIR}\qt_de.qm"
 SetOutPath "$INSTDIR\books"
 File "${PENTOBI_SRC_DIR}\src\books\book_*.blksgf"
 SetOutPath "$INSTDIR"
-File /r "${PENTOBI_SRC_DIR}\src\pentobi\manual"
+File /r "${PENTOBI_SRC_DIR}\src\pentobi\help"
 File /oname=COPYING.txt "${PENTOBI_SRC_DIR}\COPYING"
 File /oname=Pentobi.exe "${PENTOBI_BUILD_DIR}\src\pentobi\pentobi.exe"
 File "${PENTOBI_SRC_DIR}\src\pentobi\pentobi.ico"
@@ -78,7 +78,7 @@ WriteRegStr HKLM "${UNINST_KEY}" "DisplayVersion" "${PENTOBI_VERSION}"
 WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$INSTDIR\pentobi.ico"
 WriteRegStr HKLM "${UNINST_KEY}" "URLInfoAbout" "http://pentobi.sf.net/"
 WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
- 
+
 File "${PENTOBI_SRC_DIR}\windows\blksgf.ico"
 
 WriteRegStr HKCR ".blksgf" "" "Pentobi"
@@ -113,7 +113,7 @@ CreateShortCut "$DESKTOP\Pentobi.lnk" "$INSTDIR\Pentobi.exe"
 SectionEnd
 
 Section "Uninstall"
- 
+
 Delete "$INSTDIR\Uninstall.exe"
 Delete "$INSTDIR\Pentobi.exe"
 Delete "$INSTDIR\qt.conf"
@@ -122,7 +122,7 @@ Delete "$INSTDIR\pentobi.ico"
 Delete "$INSTDIR\blksgf.ico"
 RmDir /r "$INSTDIR\books"
 RmDir /r "$INSTDIR\translations"
-RmDir /r "$INSTDIR\manual"
+RmDir /r "$INSTDIR\help"
 RmDir "$INSTDIR"
 
 SetShellVarContext all

@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
 
-# Use all lower-case for project name because it is used in
-# CMAKE_INSTALL_DOCDIR of GNUInstallDirs
-project(pentobi)
+project(Pentobi)
 set(PENTOBI_VERSION 9.UNKNOWN)
 
 if(POLICY CMP0020)
@@ -70,8 +68,8 @@ if(UNIX)
   if(NOT DEFINED PENTOBI_BOOKS_DIR)
     set(PENTOBI_BOOKS_DIR "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/books")
   endif()
-  if(NOT DEFINED PENTOBI_MANUAL_DIR)
-    set(PENTOBI_MANUAL_DIR "${CMAKE_INSTALL_FULL_DOCDIR}/manual")
+  if(NOT DEFINED PENTOBI_HELP_DIR)
+    set(PENTOBI_HELP_DIR "${CMAKE_INSTALL_FULL_DATADIR}/help")
   endif()
   if(NOT DEFINED PENTOBI_TRANSLATIONS)
     set(PENTOBI_TRANSLATIONS
@@ -117,9 +115,6 @@ if(UNIX)
     update-desktop-database ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications\;
     )
 endif()
-
-install(FILES README NEWS COPYING doc/blksgf/Pentobi-SGF.html
-  DESTINATION ${CMAKE_INSTALL_DOCDIR})
 
 add_subdirectory(doc)
 add_subdirectory(src)

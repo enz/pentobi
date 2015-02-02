@@ -173,7 +173,7 @@ if (DEFINED CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(pentobi ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
-install(TARGETS pentobi 
+install(TARGETS pentobi
 DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install translation files. If you change the destination, you need to
@@ -181,7 +181,7 @@ DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES ${pentobi_QM_SRCS}
   DESTINATION ${CMAKE_INSTALL_DATADIR}/pentobi/translations)
 
-install(DIRECTORY manual DESTINATION ${CMAKE_INSTALL_DOCDIR}
+install(DIRECTORY help DESTINATION ${CMAKE_INSTALL_DATADIR}
   FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg")
 
 if(MSVC)

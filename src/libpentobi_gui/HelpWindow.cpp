@@ -12,6 +12,7 @@
 
 #include <QAction>
 #include <QFile>
+#include <QLocale>
 #include <QSettings>
 #include <QTextBrowser>
 #include <QToolBar>
@@ -82,17 +83,18 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& mainPage)
         adjustSize();
 }
 
-QString HelpWindow::findMainPage(QString dir, QString file, QString locale)
+QString HelpWindow::findMainPage(QString helpDir, QString appName)
 {
-    QString path;
-    path = dir + "/" + locale + "/" + file;
+    auto locale = QLocale::system().name();
+    auto path = QString("%1/%2/%3/index.html")
+            .arg(helpDir).arg(locale).arg(appName);
     if (QFile(path).exists())
         return path;
-    QStringList list = locale.split("_");
-    path = dir + "/" + list[0] + "/" + file;
+    path = QString("%1/%2/%3/index.html")
+            .arg(helpDir).arg(locale.split("_")[0]).arg(appName);
     if (QFile(path).exists())
         return path;
-    return dir + "/en/" + file;
+    return QString("%1/C/%3/index.html").arg(helpDir).arg(appName);
 }
 
 void HelpWindow::closeEvent(QCloseEvent* event)

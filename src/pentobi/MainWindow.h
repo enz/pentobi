@@ -59,7 +59,7 @@ class MainWindow
     Q_OBJECT
 
 public:
-    MainWindow(const QString& initialFile = "", const QString& manualDir = "",
+    MainWindow(const QString& initialFile = "", const QString& helpDir = "",
                const QString& booksDir = "", bool noBook = false,
                unsigned nu_threads = 0, size_t memory = 0);
 
@@ -328,7 +328,7 @@ private:
 
     GuiBoard* m_guiBoard;
 
-    QString m_manualDir;
+    QString m_helpDir;
 
     ColorMap<bool> m_computerColors;
 

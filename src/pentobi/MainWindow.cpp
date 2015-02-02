@@ -196,7 +196,7 @@ float getHeuristic(const Board& bd, Move mv)
 
 //-----------------------------------------------------------------------------
 
-MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
+MainWindow::MainWindow(const QString& initialFile, const QString& helpDir,
                        const QString& booksDir, bool noBook,
                        unsigned nu_threads, size_t memory)
     : m_noDelay(false),
@@ -208,7 +208,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& manualDir,
       m_genMoveId(0),
       m_lastComputerMovesBegin(0),
       m_lastComputerMovesEnd(0),
-      m_manualDir(manualDir),
+      m_helpDir(helpDir),
       m_helpWindow(nullptr),
       m_ratingDialog(nullptr),
       m_analyzeGameWindow(nullptr),
@@ -2163,8 +2163,7 @@ void MainWindow::help()
         m_helpWindow->raise();
         return;
     }
-    QString path = HelpWindow::findMainPage(m_manualDir, "index.html",
-                                            QLocale::system().name());
+    QString path = HelpWindow::findMainPage(m_helpDir, "pentobi");
     m_helpWindow = new HelpWindow(nullptr, path);
     m_helpWindow->show();
 }

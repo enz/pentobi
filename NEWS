@@ -3,6 +3,8 @@ Version 9.UNKNOWN (master)
 
 * Increased playing strength, mainly in game variant Trigon.
 * The compilation now requires at least GCC 4.9.
+* On Linux, the manual is now installed in $PREFIX/share/help according
+  to the freedesktop.org help specification.
 
 
 Version 9.0.UNKNOWN (v9-fixes)

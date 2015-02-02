@@ -24,17 +24,12 @@ class HelpWindow
 
 public:
     /** Find the main page for a given language.
-        Assumes that the translations are in subdirectories of a given
-        directory. The subdirectories use either the language code as the name
-        (e.g. "en") or the language code followed by the country code separated
-        by an underscore (e.g. "en_US"). "en" must always exist and is returned
-        as the default if no translation for a given language exists.
-        @param dir The directory
-        @param file The file name of the main page
-        @param locale The language code followed by the country code separated
-        by an underscore (as returned by QLocale::system().name())
-        @return The full path of the main page. */
-    static QString findMainPage(QString dir, QString file, QString locale);
+        Assumes that the layout of the help directory is according to
+        http://www.freedesktop.org/wiki/Specifications/help-spec/
+        @param helpDir The help directory.
+        @param appName The subdirectory name for the application.
+        @return The full path of index.html. */
+    static QString findMainPage(QString helpDir, QString appName);
 
     HelpWindow(QWidget* parent, const QString& mainPage);
 
