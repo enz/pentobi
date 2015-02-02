@@ -18,7 +18,6 @@
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_util::to_string;
@@ -56,9 +55,9 @@ const SgfNode& PentobiTree::add_setup(const SgfNode& node, Color c, Move mv)
 const SgfNode* PentobiTree::find_child_with_move(const SgfNode& node,
                                           ColorMove mv) const
 {
-    for (ChildIterator i(node); i; ++i)
-        if (get_move(*i) == mv)
-            return &(*i);
+    for (auto& i : node.get_children())
+        if (get_move(i) == mv)
+            return &i;
     return nullptr;
 }
 

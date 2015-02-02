@@ -15,7 +15,6 @@
 #include "libboardgame_sgf/TreeWriter.h"
 #include "libpentobi_base/BoardUtil.h"
 
-using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::TreeWriter;
@@ -187,8 +186,8 @@ bool OutputTree::generate_move(bool is_player_black, const Board& bd,
         node = child;
     }
     unsigned sum = 0;
-    for (ChildIterator i(*node); i; ++i)
-        sum += get_real_count(m_tree, *i, is_player_black);
+    for (auto& i : node->get_children())
+        sum += get_real_count(m_tree, i, is_player_black);
     if (sum == 0)
         // We haven't played a move in this position yet.
         return false;
@@ -198,15 +197,15 @@ bool OutputTree::generate_move(bool is_player_black, const Board& bd,
         return false;
     unsigned random = static_cast<unsigned>(distribution(m_random) * sum);
     sum = 0;
-    for (ChildIterator i(*node); i; ++i)
+    for (auto& i : node->get_children())
     {
-        auto real_count = get_real_count(m_tree, *i, is_player_black);
+        auto real_count = get_real_count(m_tree, i, is_player_black);
         if (real_count == 0)
             continue;
         sum += real_count;
         if (sum >= random)
         {
-            auto color_mv = m_tree.get_move(*i);
+            auto color_mv = m_tree.get_move(i);
             if (color_mv.is_null())
                 throw Exception("OutputTree: tree has node without move");
             if (color_mv.color != to_play)

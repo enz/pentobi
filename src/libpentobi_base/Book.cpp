@@ -33,7 +33,6 @@ using libboardgame_base::PointTransfTrigonRot60;
 using libboardgame_base::PointTransfTrigonRot120;
 using libboardgame_base::PointTransfTrigonRot240;
 using libboardgame_base::PointTransfTrigonRot300;
-using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeReader;

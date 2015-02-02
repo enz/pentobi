@@ -63,7 +63,6 @@
 
 using namespace std;
 using Util::getPlayerString;
-using libboardgame_sgf::ChildIterator;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
@@ -130,17 +129,17 @@ Color getCurrentColor(const Game& game)
     }
     bool all_same_color = true;
     bool is_first = true;
-    for (ChildIterator i(game.get_current()); i; ++i)
+    for (auto& i : game.get_current().get_children())
     {
-        if (! tree.has_move(*i))
+        if (! tree.has_move(i))
             continue;
         if (is_first)
         {
-            c = tree.get_move(*i).color;
+            c = tree.get_move(i).color;
             is_first = false;
             continue;
         }
-        if (tree.get_move(*i).color != c)
+        if (tree.get_move(i).color != c)
         {
             all_same_color = false;
             break;
@@ -2142,11 +2141,11 @@ void MainWindow::gotoPosition(Variant variant,
     for (ColorMove mv : moves)
     {
         bool found = false;
-        for (ChildIterator i(*node); i; ++i)
-            if (tree.get_move(*i) == mv)
+        for (auto& i : node->get_children())
+            if (tree.get_move(i) == mv)
             {
                 found = true;
-                node = &(*i);
+                node = &i;
                 break;
             }
         if (! found)

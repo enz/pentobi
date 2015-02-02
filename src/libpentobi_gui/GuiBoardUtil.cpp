@@ -18,7 +18,6 @@ namespace gui_board_util {
 using libpentobi_base::ColorMove;
 using libpentobi_base::PentobiTree;
 using libboardgame_sgf::SgfNode;
-using libboardgame_sgf::ChildIterator;
 using libboardgame_util::get_letter_coord;
 using libboardgame_util::log;
 using libboardgame_util::Exception;
@@ -79,11 +78,11 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
         return false;
     unsigned nuSiblingMoves = 0;
     moveIndex = 0;
-    for (ChildIterator i(*parent); i; ++i)
+    for (auto& i : parent->get_children())
     {
-        if (! tree.has_move(*i))
+        if (! tree.has_move(i))
             continue;
-        if (&(*i) == &node)
+        if (&i == &node)
             moveIndex = nuSiblingMoves;
         ++nuSiblingMoves;
     }

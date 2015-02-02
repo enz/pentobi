@@ -38,6 +38,80 @@ struct Property
 class SgfNode
 {
 public:
+    /** Iterates over siblings. */
+    class Iterator
+    {
+    public:
+        Iterator(const SgfNode* node)
+        {
+            m_node = node;
+        }
+
+        bool operator==(Iterator it) const
+        {
+            return m_node == it.m_node;
+        }
+
+        bool operator!=(Iterator it) const
+        {
+            return m_node != it.m_node;
+        }
+
+        Iterator& operator++()
+        {
+            m_node = m_node->get_sibling();
+            return *this;
+        }
+
+        const SgfNode& operator*() const
+        {
+            return *m_node;
+        }
+
+        const SgfNode* operator->() const
+        {
+            return m_node;
+        }
+
+        bool is_null() const
+        {
+            return m_node == nullptr;
+        }
+
+    private:
+        const SgfNode* m_node;
+    };
+
+    /** Range for iterating over the children of a node. */
+    class Children
+    {
+    public:
+        Children(const SgfNode& node)
+            : m_begin(node.get_first_child_or_null()),
+              m_end(nullptr)
+        { }
+
+        Iterator begin() const
+        {
+            return m_begin;
+        }
+
+        Iterator end() const
+        {
+            return m_end;
+        }
+
+        bool empty() const
+        {
+            return m_begin.is_null();
+        }
+
+    private:
+        Iterator m_begin;
+
+        Iterator m_end;
+    };
+
     SgfNode();
 
     ~SgfNode();
@@ -84,6 +158,11 @@ public:
     bool move_property_to_front(const string& id);
 
     const Property* get_first_property() const;
+
+    Children get_children() const
+    {
+        return Children(*this);
+    }
 
     SgfNode* get_sibling();
 
@@ -349,62 +428,6 @@ inline const Property& PropertyIterator::operator*() const
 }
 
 inline const Property* PropertyIterator::operator->() const
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return m_current;
-}
-
-//-----------------------------------------------------------------------------
-
-class ChildIterator
-{
-public:
-    ChildIterator(const SgfNode& node);
-
-    explicit operator bool() const;
-
-    void operator++();
-
-    void operator--();
-
-    const SgfNode& operator*() const;
-
-    const SgfNode* operator->() const;
-
-private:
-    const SgfNode* m_current;
-};
-
-inline ChildIterator::ChildIterator(const SgfNode& node)
-{
-    m_current = node.get_first_child_or_null();
-}
-
-inline ChildIterator::operator bool() const
-{
-    return m_current != nullptr;
-}
-
-inline void ChildIterator::operator++()
-{
-    LIBBOARDGAME_ASSERT(*this);
-    m_current = m_current->get_sibling();
-}
-
-inline void ChildIterator::operator--()
-{
-    LIBBOARDGAME_ASSERT(*this);
-    m_current = m_current->get_previous_sibling();
-    LIBBOARDGAME_ASSERT(*this);
-}
-
-inline const SgfNode& ChildIterator::operator*() const
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return *m_current;
-}
-
-inline const SgfNode* ChildIterator::operator->() const
 {
     LIBBOARDGAME_ASSERT(*this);
     return m_current;

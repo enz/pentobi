@@ -42,10 +42,10 @@ void TreeWriter::write_node(const SgfNode& node)
     else if (node.has_single_child())
         write_node(node.get_child());
     else
-        for (ChildIterator i(node); i; ++i)
+        for (auto& i : node.get_children())
         {
             m_writer.begin_tree();
-            write_node(*i);
+            write_node(i);
             m_writer.end_tree();
         }
 }
