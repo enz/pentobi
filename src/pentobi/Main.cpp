@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
         helpDir = PENTOBI_HELP_DIR;
 #endif
         if (helpDir.isEmpty())
-            helpDir = appDir + "/manual";
+            helpDir = appDir + "/help";
 #ifdef PENTOBI_BOOKS_DIR
         booksDir = PENTOBI_BOOKS_DIR;
 #endif
