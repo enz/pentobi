@@ -43,6 +43,8 @@ struct Property
         LIBBOARDGAME_ASSERT(! id.empty());
         LIBBOARDGAME_ASSERT(! values.empty());
     }
+
+    ~Property();
 };
 
 //-----------------------------------------------------------------------------
