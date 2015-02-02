@@ -101,7 +101,7 @@ public:
 
     bool remove_property(const SgfNode& node, const string& id);
 
-    bool move_property_to_front(const SgfNode& node, const string& id);
+    void move_property_to_front(const SgfNode& node, const string& id);
 
     /** See Node::remove_children() */
     unique_ptr<SgfNode> remove_children(const SgfNode& node);

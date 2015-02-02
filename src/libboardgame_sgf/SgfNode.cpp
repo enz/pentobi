@@ -10,21 +10,13 @@
 
 #include "SgfNode.h"
 
+#include <algorithm>
 #include "MissingProperty.h"
 #include "libboardgame_util/Assert.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
-
-//-----------------------------------------------------------------------------
-
-Property::Property(const string& id, const vector<string>& values)
-    : id(id),
-      values(values)
-{
-    LIBBOARDGAME_ASSERT(! values.empty());
-}
 
 //-----------------------------------------------------------------------------
 
@@ -65,22 +57,17 @@ void SgfNode::delete_variations()
         m_first_child->m_sibling.reset(nullptr);
 }
 
-Property* SgfNode::find_property(const string& id) const
+forward_list<Property>::const_iterator SgfNode::find_property(
+        const string& id) const
 {
-    auto property = m_first_property.get();
-    while (property)
-    {
-        if (property->id == id)
-            break;
-        property = property->next.get();
-    }
-    return property;
+    return find_if(m_properties.begin(), m_properties.end(),
+                   [&](const Property& p) { return p.id == id; });
 }
 
 const vector<string> SgfNode::get_multi_property(const string& id) const
 {
     auto property = find_property(id);
-    if (! property)
+    if (property == m_properties.end())
         return vector<string>();
     else
         return property->values;
@@ -88,7 +75,7 @@ const vector<string> SgfNode::get_multi_property(const string& id) const
 
 bool SgfNode::has_property(const string& id) const
 {
-    return find_property(id) != nullptr;
+    return find_property(id) != m_properties.end();
 }
 
 const SgfNode& SgfNode::get_child(unsigned i) const
@@ -160,7 +147,7 @@ const SgfNode* SgfNode::get_previous_sibling() const
 const string& SgfNode::get_property(const string& id) const
 {
     auto property = find_property(id);
-    if (! property)
+    if (property == m_properties.end())
         throw MissingProperty(id);
     return property->values[0];
 }
@@ -169,7 +156,7 @@ const string& SgfNode::get_property(const string& id,
                                  const string& default_value) const
 {
     auto property = find_property(id);
-    if (! property)
+    if (property == m_properties.end())
         return default_value;
     else
         return property->values[0];
@@ -198,26 +185,19 @@ void SgfNode::make_first_child()
 
 bool SgfNode::move_property_to_front(const string& id)
 {
-    auto current = m_first_property.get();
-    Property* last = nullptr;
-    while (true)
-    {
-        if (! current)
-            return false;
-        if (current->id == id)
-        {
-            if (last)
-            {
-                unique_ptr<Property> tmp = move(last->next);
-                last->next = move(current->next);
-                current->next = move(m_first_property);
-                m_first_property = move(tmp);
-            }
-            return true;
-        }
-        last = current;
-        current = current->next.get();
-    }
+    auto i = m_properties.begin();
+    forward_list<Property>::const_iterator previous = m_properties.end();
+    for ( ; i != m_properties.end(); ++i)
+        if (i->id == id)
+            break;
+        else
+            previous = i;
+    if (i == m_properties.begin() || i == m_properties.end())
+        return false;
+    auto property = *i;
+    m_properties.erase_after(previous);
+    m_properties.push_front(property);
+    return true;
 }
 
 void SgfNode::move_down()
@@ -279,22 +259,19 @@ void SgfNode::move_up()
 
 bool SgfNode::remove_property(const string& id)
 {
-    auto property = m_first_property.get();
-    Property* last = nullptr;
-    while (property)
-    {
-        if (property->id == id)
-            break;
-        last = property;
-        property = property->next.get();
-    }
-    if (! property)
-        return false;
-    if (last)
-        last->next = move(property->next);
-    else
-        m_first_property = move(property->next);
-    return true;
+    forward_list<Property>::const_iterator previous = m_properties.end();
+    for (auto i = m_properties.begin() ; i != m_properties.end(); ++i)
+        if (i->id == id)
+        {
+            if (previous == m_properties.end())
+                m_properties.pop_front();
+            else
+                m_properties.erase_after(previous);
+            return true;
+        }
+        else
+            previous = i;
+    return false;
 }
 
 unique_ptr<SgfNode> SgfNode::remove_child(SgfNode& child)

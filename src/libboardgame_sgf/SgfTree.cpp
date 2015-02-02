@@ -128,12 +128,10 @@ void SgfTree::make_root(const SgfNode& node)
     m_modified = true;
 }
 
-bool SgfTree::move_property_to_front(const SgfNode& node, const string& id)
+void SgfTree::move_property_to_front(const SgfNode& node, const string& id)
 {
-    auto first = node.get_first_property();
-    if (first && (*first).id != id && node.has_property(id))
+    if (non_const(node).move_property_to_front(id))
         m_modified = true;
-    return non_const(node).move_property_to_front(id);
 }
 
 void SgfTree::move_down(const SgfNode& node)

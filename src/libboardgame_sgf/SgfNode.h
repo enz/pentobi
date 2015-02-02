@@ -7,6 +7,7 @@
 #ifndef LIBBOARDGAME_SGF_SGF_NODE_H
 #define LIBBOARDGAME_SGF_SGF_NODE_H
 
+#include <forward_list>
 #include <memory>
 #include <string>
 #include <vector>
@@ -30,7 +31,18 @@ struct Property
 
     unique_ptr<Property> next;
 
-    Property(const string& id, const vector<string>& values);
+    Property(const Property& p)
+        : id(p.id),
+          values(p.values)
+    { }
+
+    Property(const string& id, const vector<string>& values)
+        : id(id),
+          values(values)
+    {
+        LIBBOARDGAME_ASSERT(! id.empty());
+        LIBBOARDGAME_ASSERT(! values.empty());
+    }
 };
 
 //-----------------------------------------------------------------------------
@@ -109,77 +121,6 @@ public:
         Iterator m_begin;
     };
 
-    /** Iterates over properties of a node. */
-    class PropertyIterator
-    {
-    public:
-        PropertyIterator(const Property* prop)
-        {
-            m_prop = prop;
-        }
-
-        bool operator==(PropertyIterator it) const
-        {
-            return m_prop == it.m_prop;
-        }
-
-        bool operator!=(PropertyIterator it) const
-        {
-            return m_prop != it.m_prop;
-        }
-
-        PropertyIterator& operator++()
-        {
-            m_prop = m_prop->next.get();
-            return *this;
-        }
-
-        const Property& operator*() const
-        {
-            return *m_prop;
-        }
-
-        const Property* operator->() const
-        {
-            return m_prop;
-        }
-
-        bool is_null() const
-        {
-            return m_prop == nullptr;
-        }
-
-    private:
-        const Property* m_prop;
-    };
-
-    /** Range for iterating over the properties of a node. */
-    class Properties
-    {
-    public:
-        Properties(const SgfNode& node)
-            : m_begin(node.get_first_property())
-        { }
-
-        PropertyIterator begin() const
-        {
-            return m_begin;
-        }
-
-        PropertyIterator end() const
-        {
-            return nullptr;
-        }
-
-        bool empty() const
-        {
-            return m_begin.is_null();
-        }
-
-    private:
-        PropertyIterator m_begin;
-    };
-
     SgfNode();
 
     ~SgfNode();
@@ -223,13 +164,13 @@ public:
     /** @return true, if node contained the property. */
     bool remove_property(const string& id);
 
+    /** @return true, if the property was found and not already at the
+        front. */
     bool move_property_to_front(const string& id);
 
-    const Property* get_first_property() const;
-
-    Properties get_properties() const
+    const forward_list<Property>& get_properties() const
     {
-        return Properties(*this);
+        return m_properties;
     }
 
     Children get_children() const
@@ -311,9 +252,13 @@ private:
 
     unique_ptr<SgfNode> m_sibling;
 
-    unique_ptr<Property> m_first_property;
+    /** The properties.
+        Often a node has only one property (the move), so it saves memory
+        to use a forward_list instead of a vector. */
+    forward_list<Property> m_properties;
 
-    Property* find_property(const string& id) const;
+    forward_list<Property>::const_iterator find_property(
+            const string& id) const;
 
     SgfNode* get_last_child() const;
 };
@@ -361,11 +306,6 @@ inline SgfNode* SgfNode::get_first_child_or_null()
 inline const SgfNode* SgfNode::get_first_child_or_null() const
 {
     return m_first_child.get();
-}
-
-inline const Property* SgfNode::get_first_property() const
-{
-    return m_first_property.get();
 }
 
 inline SgfNode* SgfNode::get_sibling()
@@ -436,27 +376,21 @@ bool SgfNode::set_property(const string& id, const vector<T>& values)
     vector<string> values_to_string;
     for (const T& v : values)
         values_to_string.push_back(to_string(v));
-    auto property = m_first_property.get();
-    if (! property)
-    {
-        m_first_property.reset(new Property(id, values_to_string));
-        return true;
-    }
-    while (true)
-    {
-        if (property->id == id)
+    forward_list<Property>::const_iterator last = m_properties.end();
+    for (auto i = m_properties.begin(); i != m_properties.end(); ++i)
+        if (i->id == id)
         {
-            bool was_changed = (property->values != values_to_string);
-            property->values = values_to_string;
+            bool was_changed = (i->values != values_to_string);
+            i->values = values_to_string;
             return was_changed;
         }
-        if (! property->next)
-        {
-            property->next.reset(new Property(id, values_to_string));
-            return true;
-        }
-        property = property->next.get();
-    }
+        else
+            last = i;
+    if (last == m_properties.end())
+        m_properties.emplace_front(id, values_to_string);
+    else
+        m_properties.emplace_after(last, id, values_to_string);
+    return true;
 }
 
 //-----------------------------------------------------------------------------
