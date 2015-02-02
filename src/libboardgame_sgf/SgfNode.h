@@ -87,8 +87,7 @@ public:
     {
     public:
         Children(const SgfNode& node)
-            : m_begin(node.get_first_child_or_null()),
-              m_end(nullptr)
+            : m_begin(node.get_first_child_or_null())
         { }
 
         Iterator begin() const
@@ -98,7 +97,7 @@ public:
 
         Iterator end() const
         {
-            return m_end;
+            return nullptr;
         }
 
         bool empty() const
@@ -108,8 +107,77 @@ public:
 
     private:
         Iterator m_begin;
+    };
 
-        Iterator m_end;
+    /** Iterates over properties of a node. */
+    class PropertyIterator
+    {
+    public:
+        PropertyIterator(const Property* prop)
+        {
+            m_prop = prop;
+        }
+
+        bool operator==(PropertyIterator it) const
+        {
+            return m_prop == it.m_prop;
+        }
+
+        bool operator!=(PropertyIterator it) const
+        {
+            return m_prop != it.m_prop;
+        }
+
+        PropertyIterator& operator++()
+        {
+            m_prop = m_prop->next.get();
+            return *this;
+        }
+
+        const Property& operator*() const
+        {
+            return *m_prop;
+        }
+
+        const Property* operator->() const
+        {
+            return m_prop;
+        }
+
+        bool is_null() const
+        {
+            return m_prop == nullptr;
+        }
+
+    private:
+        const Property* m_prop;
+    };
+
+    /** Range for iterating over the properties of a node. */
+    class Properties
+    {
+    public:
+        Properties(const SgfNode& node)
+            : m_begin(node.get_first_property())
+        { }
+
+        PropertyIterator begin() const
+        {
+            return m_begin;
+        }
+
+        PropertyIterator end() const
+        {
+            return nullptr;
+        }
+
+        bool empty() const
+        {
+            return m_begin.is_null();
+        }
+
+    private:
+        PropertyIterator m_begin;
     };
 
     SgfNode();
@@ -158,6 +226,11 @@ public:
     bool move_property_to_front(const string& id);
 
     const Property* get_first_property() const;
+
+    Properties get_properties() const
+    {
+        return Properties(*this);
+    }
 
     Children get_children() const
     {
@@ -384,53 +457,6 @@ bool SgfNode::set_property(const string& id, const vector<T>& values)
         }
         property = property->next.get();
     }
-}
-
-//-----------------------------------------------------------------------------
-
-class PropertyIterator
-{
-public:
-    PropertyIterator(const SgfNode& node);
-
-    explicit operator bool() const;
-
-    void operator++();
-
-    const Property& operator*() const;
-
-    const Property* operator->() const;
-
-private:
-    const Property* m_current;
-};
-
-inline PropertyIterator::PropertyIterator(const SgfNode& node)
-{
-    m_current = node.get_first_property();
-}
-
-inline PropertyIterator::operator bool() const
-{
-    return m_current != nullptr;
-}
-
-inline void PropertyIterator::operator++()
-{
-    LIBBOARDGAME_ASSERT(*this);
-    m_current = m_current->next.get();
-}
-
-inline const Property& PropertyIterator::operator*() const
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return *m_current;
-}
-
-inline const Property* PropertyIterator::operator->() const
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return m_current;
 }
 
 //-----------------------------------------------------------------------------

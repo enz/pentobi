@@ -17,7 +17,6 @@ namespace node_util {
 
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::InvalidTree;
-using libboardgame_sgf::PropertyIterator;
 using libboardgame_util::split;
 using libboardgame_util::trim;
 
@@ -140,9 +139,9 @@ bool get_player(const SgfNode& node, Color& c)
 
 bool has_setup(const SgfNode& node)
 {
-    for (PropertyIterator i(node); i; ++i)
-        if (i->id == "AB" || i->id == "AW" || i->id == "A1" || i->id == "A2"
-            || i->id == "A3" || i->id == "A4" || i->id == "AE")
+    for (auto& i : node.get_properties())
+        if (i.id == "AB" || i.id == "AW" || i.id == "A1" || i.id == "A2"
+                || i.id == "A3" || i.id == "A4" || i.id == "AE")
             return true;
     return false;
 }

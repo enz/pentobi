@@ -130,7 +130,7 @@ void SgfTree::make_root(const SgfNode& node)
 
 bool SgfTree::move_property_to_front(const SgfNode& node, const string& id)
 {
-    PropertyIterator first(node);
+    auto first = node.get_first_property();
     if (first && (*first).id != id && node.has_property(id))
         m_modified = true;
     return non_const(node).move_property_to_front(id);

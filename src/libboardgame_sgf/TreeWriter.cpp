@@ -34,8 +34,8 @@ void TreeWriter::write()
 void TreeWriter::write_node(const SgfNode& node)
 {
     m_writer.begin_node();
-    for (PropertyIterator i(node); i; ++i)
-        write_property(i->id, i->values);
+    for (auto& i : node.get_properties())
+        write_property(i.id, i.values);
     m_writer.end_node();
     if (! node.has_children())
         return;
