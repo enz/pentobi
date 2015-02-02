@@ -72,7 +72,7 @@ Output::~Output()
 void Output::add_result(unsigned n, float result, const Board& bd,
                         unsigned player_black, double cpu_black,
                         double cpu_white, const string& sgf,
-                        array<bool, Board::max_game_moves>& is_real_move)
+                        const array<bool, Board::max_game_moves>& is_real_move)
 {
     lock_guard<mutex> lock(m_mutex);
     unsigned nu_fast_open = 0;
@@ -114,7 +114,8 @@ bool Output::generate_fast_open_move(bool is_player_black, const Board& bd,
                                      Color to_play, Move& mv)
 {
     lock_guard<mutex> lock(m_mutex);
-    return m_output_tree.generate_move(is_player_black, bd, to_play, mv);
+    m_output_tree.generate_move(is_player_black, bd, to_play, mv);
+    return ! mv.is_null();
 }
 
 unsigned Output::get_next()

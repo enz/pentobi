@@ -110,7 +110,7 @@ OutputTree::~OutputTree()
 }
 
 void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
-                          array<bool, Board::max_game_moves>& is_real_move)
+                        const array<bool, Board::max_game_moves>& is_real_move)
 {
     if (bd.has_setup())
         throw Exception("OutputTree: setup not supported");
@@ -158,22 +158,28 @@ void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
     }
 }
 
-bool OutputTree::generate_move(bool is_player_black, const Board& bd,
+void OutputTree::generate_move(bool is_player_black, const Board& bd,
                                Color to_play, Move& mv)
 {
+    bool play_real;
     for (unsigned i = 0; i < m_transforms.size(); ++i)
-        if (generate_move(is_player_black, bd, to_play, *m_transforms[i],
-                          *m_inv_transforms[i], mv))
-            return true;
-    return false;
+    {
+        generate_move(is_player_black, bd, to_play, *m_transforms[i],
+                      *m_inv_transforms[i], mv, play_real);
+        if (play_real || ! mv.is_null())
+            break;
+    }
 }
 
-bool OutputTree::generate_move(bool is_player_black, const Board& bd,
+void OutputTree::generate_move(bool is_player_black, const Board& bd,
                                Color to_play, const PointTransform& transform,
-                               const PointTransform& inv_transform, Move& mv)
+                               const PointTransform& inv_transform, Move& mv,
+                               bool& play_real)
 {
     if (bd.has_setup())
         throw Exception("OutputTree: setup not supported");
+    play_real = false;
+    mv = Move::null();
     auto node = &m_tree.get_root();
     for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
@@ -182,19 +188,20 @@ bool OutputTree::generate_move(bool is_player_black, const Board& bd,
                                  get_transformed(bd, mv.move, transform));
         auto child = m_tree.find_child_with_move(*node, transformed_mv);
         if (! child)
-            return false;
+            return;
         node = child;
     }
     unsigned sum = 0;
     for (auto& i : node->get_children())
         sum += get_real_count(m_tree, i, is_player_black);
     if (sum == 0)
-        // We haven't played a move in this position yet.
-        return false;
+        return;
     uniform_real_distribution<double> distribution(0, 1);
     if (distribution(m_random) < 1.0 / sum)
-        // Time to generate a real move
-        return false;
+    {
+        play_real = true;
+        return;
+    }
     unsigned random = static_cast<unsigned>(distribution(m_random) * sum);
     sum = 0;
     for (auto& i : node->get_children())
@@ -211,11 +218,10 @@ bool OutputTree::generate_move(bool is_player_black, const Board& bd,
             if (color_mv.color != to_play)
                 throw Exception("OutputTree: tree has node wrong move color");
             mv = get_transformed(bd, color_mv.move, inv_transform);
-            return true;
+            return;
         }
     }
     LIBBOARDGAME_ASSERT(false);
-    return false;
 }
 
 void OutputTree::load(const string& file)

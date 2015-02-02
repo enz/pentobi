@@ -49,15 +49,15 @@ public:
     /** Generate a move for a player from the tree.
         @param is_player_black
         @param bd The board with the current position and color to play.
-        @param mv[out] The generated move or undefined if the result is false.
-        @return false, if no move for this position and player is in the tree
-        or if the player should generate a real move now. */
-    bool generate_move(bool is_player_black, const Board& bd, Color to_play,
+        @param mv[out] The generated move, or Move::null() if no move is in the
+        tree for this position or if the player should generate a real move
+        now. */
+    void generate_move(bool is_player_black, const Board& bd, Color to_play,
                        Move& mv);
 
     /** Add the moves of a game to the tree and update the move counters. */
     void add_game(const Board& bd, unsigned player_black, float result,
-                  array<bool, Board::max_game_moves>& is_real_move);
+                  const array<bool, Board::max_game_moves>& is_real_move);
 
 private:
     typedef libboardgame_base::PointTransform<Point> PointTransform;
@@ -70,9 +70,10 @@ private:
 
     mt19937 m_random;
 
-    bool generate_move(bool is_player_black, const Board& bd, Color to_play,
+    void generate_move(bool is_player_black, const Board& bd, Color to_play,
                        const PointTransform& transform,
-                       const PointTransform& inv_transform, Move& mv);
+                       const PointTransform& inv_transform, Move& mv,
+                       bool& play_real);
 };
 
 //-----------------------------------------------------------------------------
