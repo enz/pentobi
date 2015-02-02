@@ -17,7 +17,6 @@
 namespace pentobi_gtp {
 
 using libboardgame_gtp::Failure;
-using libboardgame_mcts::ChildIterator;
 using libboardgame_mcts::PlayerMove;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::log;
@@ -66,8 +65,8 @@ void Engine::cmd_move_values(Response& response)
     auto& tree = search.get_tree();
     auto& bd = get_board();
     vector<const Search::Node*> children;
-    for (Search::ChildIterator i(tree, tree.get_root()); i; ++i)
-        children.push_back(&(*i));
+    for (auto& i : tree.get_root_children())
+        children.push_back(&i);
     sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);
     response << fixed;
     for (const auto node : children)

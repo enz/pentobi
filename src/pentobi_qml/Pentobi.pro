@@ -110,7 +110,6 @@ HEADERS += \
     ../libboardgame_base/TrigonGeometry.h \
     ../libboardgame_mcts/Atomic.h \
     ../libboardgame_mcts/BiasTerm.h \
-    ../libboardgame_mcts/ChildIterator.h \
     ../libboardgame_mcts/LastGoodReply.h \
     ../libboardgame_mcts/Node.h \
     ../libboardgame_mcts/PlayerMove.h \

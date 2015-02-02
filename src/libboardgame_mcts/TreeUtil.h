@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_MCTS_TREE_UTIL_H
 #define LIBBOARDGAME_MCTS_TREE_UTIL_H
 
-#include "ChildIterator.h"
 #include "Tree.h"
 
 namespace libboardgame_mcts {
@@ -18,9 +17,9 @@ namespace tree_util {
 template<typename N>
 const N* find_child(const Tree<N>& tree, const N& node, typename N::Move mv)
 {
-    for (ChildIterator<N> i(tree, node); i; ++i)
-        if (i->get_move() == mv)
-            return &(*i);
+    for (auto& i : tree.get_children(node))
+        if (i.get_move() == mv)
+            return &i;
     return nullptr;
 }
 

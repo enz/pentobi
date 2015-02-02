@@ -3,7 +3,6 @@
 add_custom_target(boardgame_mcts SOURCES
   Atomic.h
   BiasTerm.h
-  ChildIterator.h
   LastGoodReply.h
   Node.h
   PlayerMove.h

@@ -151,8 +151,6 @@ public:
 
     typedef libboardgame_mcts::Node<M, Float, multithread> Node;
 
-    typedef libboardgame_mcts::ChildIterator<Node> ChildIterator;
-
     typedef libboardgame_mcts::Tree<Node> Tree;
 
     typedef libboardgame_mcts::PlayerMove<M> PlayerMove;
@@ -885,9 +883,9 @@ bool SearchBase<S, M, R>::check_move_cannot_change(Float remaining) const
     // that all remaining simulations are wins for second best move.
     Float max_wins = 0;
     Float second_max_wins = 0;
-    for (ChildIterator i(m_tree, m_tree.get_root()); i; ++i)
+    for (auto& i : m_tree.get_root_children())
     {
-        Float wins = i->get_value() * i->get_value_count();
+        Float wins = i.get_value() * i.get_value_count();
         if (wins > max_wins)
         {
             second_max_wins = max_wins;
@@ -1297,11 +1295,11 @@ void SearchBase<S, M, R>::restore_root_from_children(Tree& tree, const Node& roo
 {
     const Node* best_child = nullptr;
     Float max_count = 0;
-    for (ChildIterator i(tree, root); i; ++i)
-        if (i->get_visit_count() > max_count)
+    for (auto& i : m_tree.get_children(root))
+        if (i.get_visit_count() > max_count)
         {
-            best_child = &(*i);
-            max_count = i->get_visit_count();
+            best_child = &i;
+            max_count = i.get_visit_count();
         }
     if (! best_child)
         tree.init_root_value(get_tie_value(), 0);
@@ -1530,19 +1528,20 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
+    auto children = m_tree.get_children(node);
+    LIBBOARDGAME_ASSERT(! children.empty());
     m_bias_term.start_iteration(node.get_visit_count());
     // SearchParamConst::child_min_count is currently declared as unsigned int
     // because MSVC does not support constexpr Float yet
-    Float min_count = static_cast<Float>(SearchParamConst::child_min_count);
+    auto min_count = static_cast<Float>(SearchParamConst::child_min_count);
     auto bias_upper_limit = m_bias_term.get(min_count);
-    ChildIterator i(m_tree, node);
-    LIBBOARDGAME_ASSERT(i);
+    auto i = children.begin();
     auto value = i->get_value();
     value += m_bias_term.get(i->get_value_count());
-    Float best_value = value;
-    const Node* best_child = &(*i);
-    Float limit = best_value - bias_upper_limit;
-    while (++i)
+    auto best_value = value;
+    auto best_child = i;
+    auto limit = best_value - bias_upper_limit;
+    while (++i != children.end())
     {
         value = i->get_value();
         if (value < limit)
@@ -1551,7 +1550,7 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
         if (value > best_value)
         {
             best_value = value;
-            best_child = &(*i);
+            best_child = i;
             limit = best_value - bias_upper_limit;
         }
     }
@@ -1563,18 +1562,19 @@ auto SearchBase<S, M, R>::select_child_final(
         const Node& node) const-> const Node*
 {
     // Select the child with the highest number of wins
-    ChildIterator i(m_tree, node);
-    if (! i)
+    auto children = m_tree.get_children(node);
+    if (children.empty())
         return nullptr;
-    const Node* best_child = &(*i);
+    auto i = children.begin();
+    auto best_child = i;
     auto max_wins = i->get_value_count() * i->get_value();
-    while (++i)
+    while (++i != children.end())
     {
-        Float wins = i->get_value_count() * i->get_value();
+        auto wins = i->get_value_count() * i->get_value();
         if (wins > max_wins)
         {
             max_wins = wins;
-            best_child = &(*i);
+            best_child = i;
         }
     }
     return best_child;
@@ -1767,8 +1767,9 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         Float dist_weight_factor;
         if (SearchParamConst::rave_dist_weighting)
             dist_weight_factor = (1 - m_rave_dist_final) / Float(nu_moves - i);
-        ChildIterator it(m_tree, *node);
-        LIBBOARDGAME_ASSERT(it);
+        auto children = m_tree.get_children(*node);
+        LIBBOARDGAME_ASSERT(! children.empty());
+        auto it = children.begin();
         do
         {
             auto mv = it->get_move();
@@ -1798,7 +1799,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
                 weight *= 1 - Float(first - i) * dist_weight_factor;
             m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
         }
-        while (++it);
+        while (++it != children.end());
         if (i == 0)
             break;
         if (! state.skip_rave(mv.move))

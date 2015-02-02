@@ -43,6 +43,40 @@ public:
 
     typedef typename Node::Float Float;
 
+    /** Range for iterating over the children of a node. */
+    class Children
+    {
+    public:
+        Children(const Tree& tree, const Node& node)
+        {
+            auto nu_children = node.get_nu_children();
+            m_begin = (nu_children != 0 ?
+                        &tree.get_node(node.get_first_child()) : nullptr);
+            m_end = m_begin + nu_children;
+        }
+
+        const Node* begin() const
+        {
+            return m_begin;
+        }
+
+        const Node* end() const
+        {
+            return m_end;
+        }
+
+        bool empty() const
+        {
+            return m_begin == nullptr;
+        }
+
+    private:
+        const Node* m_begin;
+
+        const Node* m_end;
+    };
+
+
     /** Helper class that is passed to the search state during node expansion.
         This class allows the search state to directly create children of a
         node at the node expansion, so that copying to a temporary move list
@@ -102,6 +136,16 @@ public:
     void clear(Float root_value);
 
     const Node& get_root() const;
+
+    Children get_children(const Node& node) const
+    {
+        return Children(*this, node);
+    }
+
+    Children get_root_children() const
+    {
+        return get_children(get_root());
+    }
 
     size_t get_nu_nodes() const;
 

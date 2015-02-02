@@ -20,7 +20,6 @@
 namespace libpentobi_mcts {
 namespace util {
 
-using libboardgame_mcts::ChildIterator;
 using libboardgame_mcts::Node;
 using libboardgame_mcts::Tree;
 using libboardgame_sgf::Writer;
@@ -44,8 +43,8 @@ void dump_tree_recurse(Writer& writer, Variant variant,
     writer.end_node();
     Color next_to_play = to_play.get_next(get_nu_colors(variant));
     vector<const Search::Node*> children;
-    for (Search::ChildIterator i(tree, node); i; ++i)
-        children.push_back(&(*i));
+    for (auto& i : tree.get_children(node))
+        children.push_back(&i);
     sort(children.begin(), children.end(), compare_node);
     for (const auto i : children)
     {
