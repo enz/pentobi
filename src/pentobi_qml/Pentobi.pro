@@ -102,7 +102,6 @@ HEADERS += \
     ../libboardgame_base/Grid.h \
     ../libboardgame_base/Marker.h \
     ../libboardgame_base/Point.h \
-    ../libboardgame_base/PointList.h \
     ../libboardgame_base/PointTransform.h \
     ../libboardgame_base/Rating.h \
     ../libboardgame_base/RectGeometry.h \
