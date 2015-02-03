@@ -55,7 +55,7 @@ private:
         bool connect;
 
         /** Only used on Classic and Trigon boards. */
-        unsigned short dist_to_center;
+        float dist_to_center;
     };
 
     array<MoveFeatures, Move::range> m_features;
@@ -69,7 +69,7 @@ private:
 
     unsigned m_dist_to_center_max_pieces;
 
-    unsigned short m_min_dist_to_center;
+    float m_min_dist_to_center;
 
     /** Marker for attach points of recent opponent moves. */
     Grid<bool> m_is_local;
@@ -78,7 +78,7 @@ private:
     PointList m_local_points;
 
     /** Distance to center heuristic. */
-    Grid<unsigned short> m_dist_to_center;
+    Grid<float> m_dist_to_center;
 
     void compute_features(const Board& bd, const MoveList& moves,
                           bool check_dist_to_center, bool check_connect);

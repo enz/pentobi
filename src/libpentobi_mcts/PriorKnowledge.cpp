@@ -231,7 +231,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
     auto board_type = bd.get_board_type();
     bool is_trigon = (board_type == BoardType::trigon
                       || board_type == BoardType::trigon_3);
-    float max_dist_diff = (is_trigon ? 0.3f : 0.25f);
+    float max_dist_diff = (is_trigon ? 0.5f : 0.3f);
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const auto& features = m_features[i];
@@ -353,7 +353,7 @@ void PriorKnowledge::start_search(const Board& bd)
             // Don't make a distinction between moves close enough to the
             // center in game variant Classic/Classic2
             d = max(d, 10.f);
-        m_dist_to_center[p] = static_cast<unsigned short>(d);
+        m_dist_to_center[p] = d;
     }
 
     // Init m_check_dist_to_center
