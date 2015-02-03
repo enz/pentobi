@@ -302,8 +302,8 @@ Point State::find_best_starting_point(Color c) const
     {
         if (m_bd.is_forbidden(p, c))
             continue;
-        auto px = static_cast<float>(geo.get_x(p));
-        auto py = static_cast<float>(geo.get_y(p));
+        float px = static_cast<float>(geo.get_x(p));
+        float py = static_cast<float>(geo.get_y(p));
         float d = 0;
         for (Color i : Color::Range(m_nu_colors))
             for (Point pp : m_bd.get_starting_points(i))
@@ -311,12 +311,14 @@ Point State::find_best_starting_point(Color c) const
                 PointState s = m_bd.get_point_state(pp);
                 if (! s.is_empty())
                 {
-                    auto ppx = static_cast<float>(geo.get_x(pp));
-                    auto ppy = static_cast<float>(geo.get_y(pp));
+                    float ppx = static_cast<float>(geo.get_x(pp));
+                    float ppy = static_cast<float>(geo.get_y(pp));
+                    float dx = ppx - px;
+                    float dy = ratio * (ppy - py);
                     float weight = 1;
                     if (s == c || s == m_bd.get_second_color(c))
                         weight = 2;
-                    d += weight * hypot(ppx - px, ratio * (ppy - py));
+                    d += weight * sqrt(dx * dx + dy * dy);
                 }
             }
         if (d > max_distance)
