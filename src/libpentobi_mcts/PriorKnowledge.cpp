@@ -370,7 +370,7 @@ void PriorKnowledge::start_search(const Board& bd)
     case Variant::trigon_2:
     case Variant::trigon_3:
         m_check_dist_to_center.fill(true);
-        m_dist_to_center_max_pieces = 4;
+        m_dist_to_center_max_pieces = 3;
         break;
     default:
         m_check_dist_to_center.fill(false);
