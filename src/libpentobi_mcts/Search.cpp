@@ -67,7 +67,7 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
     }
     else if (board_type == BoardType::classic)
     {
-        if (nu_moves < 1 * nu_colors)
+        if (nu_moves < nu_colors)
         {
             is_piece_considered.fill(false);
             set_piece_considered(board_const, "V5", is_piece_considered);
@@ -83,12 +83,11 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
     else if (board_type == BoardType::trigon
              || board_type == BoardType::trigon_3)
     {
-        if (nu_moves < 1 * nu_colors)
+        if (nu_moves < nu_colors)
         {
             is_piece_considered.fill(false);
             set_piece_considered(board_const, "V", is_piece_considered);
-            // I5 would also be good but the distance to center pruning in
-            // State would prune them anyway
+            set_piece_considered(board_const, "I6", is_piece_considered);
         }
         if (nu_moves < 4 * nu_colors)
         {

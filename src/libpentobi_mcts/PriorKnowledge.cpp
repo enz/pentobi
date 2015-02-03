@@ -228,6 +228,10 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                     break;
                 }
     }
+    auto board_type = bd.get_board_type();
+    bool is_trigon = (board_type == BoardType::trigon
+                      || board_type == BoardType::trigon_3);
+    float max_dist_diff = (is_trigon ? 0.3f : 0.25f);
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const auto& features = m_features[i];
@@ -236,8 +240,8 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         // center and moves that don't connect in the middle if connection is
         // possible
         if ((check_dist_to_center
-             && features.dist_to_center != m_min_dist_to_center)
-            || (check_connect && ! features.connect))
+             && features.dist_to_center > m_min_dist_to_center + max_dist_diff)
+                || (check_connect && ! features.connect))
             continue;
 
         auto mv = moves[i];
@@ -344,9 +348,7 @@ void PriorKnowledge::start_search(const Board& bd)
         float y = static_cast<float>(geo.get_y(p));
         float dx = x - center_x;
         float dy = ratio * (y - center_y);
-        // Multiply Euklidian distance by 4, so that distances that differ
-        // by max. 0.25 are treated as equal
-        float d = round(4 * sqrt(dx * dx + dy * dy));
+        float d = sqrt(dx * dx + dy * dy);
         if (board_type == BoardType::classic)
             // Don't make a distinction between moves close enough to the
             // center in game variant Classic/Classic2
