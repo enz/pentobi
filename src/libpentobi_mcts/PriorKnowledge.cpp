@@ -340,13 +340,11 @@ void PriorKnowledge::start_search(const Board& bd)
     float ratio = (is_trigon ? 1.732f : 1);
     for (Point p : geo)
     {
-        float x = static_cast<float>(geo.get_x(p));
-        float y = static_cast<float>(geo.get_y(p));
-        float dx = x - center_x;
-        float dy = ratio * (y - center_y);
+        auto x = static_cast<float>(geo.get_x(p));
+        auto y = static_cast<float>(geo.get_y(p));
         // Multiply Euklidian distance by 4, so that distances that differ
         // by max. 0.25 are treated as equal
-        float d = round(4 * sqrt(dx * dx + dy * dy));
+        auto d = round(4 * hypot(x - center_x, ratio * (y - center_y)));
         if (board_type == BoardType::classic)
             // Don't make a distinction between moves close enough to the
             // center in game variant Classic/Classic2
