@@ -1,4 +1,9 @@
 (
 ;GM[Blokus Trigon Three-Player]
-;1[p11,o12,p12,o13,p13,p14]TE[1]
+(
+ ;1[p11,o12,p12,o13,p13,p14]TE[1]
+)
+(
+ ;1[r11,q12,r12,p13,q13,p14]TE[1]
+)
 )
