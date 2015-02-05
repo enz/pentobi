@@ -149,15 +149,6 @@ target_link_libraries(pentobi
   boardgame_sys
   )
 
-# Remove once we require CMake 2.8.11
-if (WIN32)
-  if (USE_QT5)
-    target_link_libraries(pentobi Qt5::WinMain)
-  else()
-    target_link_libraries(pentobi ${QT_QTMAIN_LIBRARY})
-  endif()
-endif()
-
 if (USE_QT5)
   qt5_use_modules(pentobi Widgets Concurrent)
 else()

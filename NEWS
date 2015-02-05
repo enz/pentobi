@@ -3,7 +3,7 @@ Version 9.UNKNOWN (master)
 
 * Increased playing strength, mainly in game variant Trigon.
 * More variety in Trigon opening moves.
-* The compilation now requires at least GCC 4.9.
+* The compilation now requires at least GCC 4.9 and CMake 2.8.11.
 * On Linux, the manual is now installed in $PREFIX/share/help according
   to the freedesktop.org help specification.
 
