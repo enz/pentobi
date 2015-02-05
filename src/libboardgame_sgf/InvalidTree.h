@@ -29,13 +29,10 @@ class InvalidTree
     : public Exception
 {
 public:
-    InvalidTree(const string& s);
+    InvalidTree(string s)
+        : Exception(move(s))
+    { }
 };
-
-inline InvalidTree::InvalidTree(const string& s)
-    : Exception(s)
-{
-}
 
 //-----------------------------------------------------------------------------
 

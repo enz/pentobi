@@ -29,7 +29,9 @@ public:
         : public Exception
     {
     public:
-        InvalidString(const string& s);
+        InvalidString(string s)
+            : Exception(move(s))
+        { }
     };
 
     class Iterator
@@ -112,12 +114,6 @@ private:
 
     bool is_initialized() const;
 };
-
-
-inline Color::InvalidString::InvalidString(const string& s)
-    : Exception(s)
-{
-}
 
 
 inline Color::Color()
