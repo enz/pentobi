@@ -20,7 +20,7 @@ class Exception
     : public exception
 {
 public:
-    Exception(const string& s);
+    Exception(string s);
 
     const char* what() const throw() override;
 

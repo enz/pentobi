@@ -10,6 +10,7 @@
 #include <iosfwd>
 #include <algorithm>
 #include <string>
+#include <utility>
 
 namespace libboardgame_gtp {
 
@@ -50,8 +51,8 @@ private:
 
 inline CmdLineRange::CmdLineRange(string::const_iterator begin,
                                   string::const_iterator end)
-    : m_begin(begin),
-      m_end(end)
+    : m_begin(move(begin)),
+      m_end(move(end))
 {
 }
 

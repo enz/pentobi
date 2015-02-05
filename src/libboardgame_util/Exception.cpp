@@ -10,12 +10,14 @@
 
 #include "Exception.h"
 
+#include <utility>
+
 namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-Exception::Exception(const string& s)
-    : m_s(s)
+Exception::Exception(string s)
+    : m_s(move(s))
 {
 }
 

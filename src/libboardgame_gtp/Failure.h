@@ -8,6 +8,7 @@
 #define LIBBOARDGAME_GTP_FAILURE_H
 
 #include <string>
+#include <utility>
 
 namespace libboardgame_gtp {
 
@@ -21,23 +22,18 @@ using namespace std;
 class Failure
 {
 public:
-    Failure(const string& response = "");
+    Failure(string response = "")
+        : m_response(move(response))
+    { }
 
-    string get_response() const;
+    string get_response() const
+    {
+        return m_response;
+    }
 
 private:
     string m_response;
 };
-
-inline Failure::Failure(const string& response)
-    : m_response(response)
-{
-}
-
-inline string Failure::get_response() const
-{
-    return m_response;
-}
 
 //-----------------------------------------------------------------------------
 

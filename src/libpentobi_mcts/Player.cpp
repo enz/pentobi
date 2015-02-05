@@ -25,12 +25,12 @@ using libpentobi_base::BoardType;
 
 //-----------------------------------------------------------------------------
 
-Player::Player(Variant initial_variant, const string& books_dir,
-               unsigned nu_threads, size_t memory)
+Player::Player(Variant initial_variant, string  books_dir, unsigned nu_threads,
+               size_t memory)
     : m_is_book_loaded(false),
       m_use_book(true),
       m_resign(false),
-      m_books_dir(books_dir),
+      m_books_dir(move(books_dir)),
       m_level(4),
       m_fixed_simulations(0),
       m_resign_threshold(0.09f),

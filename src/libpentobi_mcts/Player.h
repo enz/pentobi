@@ -33,8 +33,8 @@ public:
         @param nu_threads The number of threads to use in the search (0 means
         to select a reasonable default value)
         @param memory The memory to be used for (all) the search trees. */
-    Player(Variant initial_variant, const string& books_dir,
-           unsigned nu_threads = 0, size_t memory = 0);
+    Player(Variant initial_variant, string books_dir, unsigned nu_threads = 0,
+           size_t memory = 0);
 
     ~Player() throw();
 

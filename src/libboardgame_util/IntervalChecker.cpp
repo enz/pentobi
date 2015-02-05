@@ -37,7 +37,7 @@ IntervalChecker::IntervalChecker(TimeSource& time_source, double time_interval,
       m_count(1),
       m_count_interval(1),
       m_time_interval(time_interval),
-      m_function(f)
+      m_function(move(f))
 {
 #if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
     log(format("IntervalChecker::IntervalChecker: time_interval=%1%")
