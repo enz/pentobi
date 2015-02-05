@@ -30,19 +30,19 @@ public:
 
     ~SameHeightLayout();
 
-    void addItem(QLayoutItem* item);
+    void addItem(QLayoutItem* item) override;
 
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
-    QSize minimumSize() const;
+    QSize minimumSize() const override;
 
-    int count() const;
+    int count() const override;
 
-    QLayoutItem* itemAt(int i) const;
+    QLayoutItem* itemAt(int i) const override;
 
-    QLayoutItem* takeAt(int i);
+    QLayoutItem* takeAt(int i) override;
 
-    void setGeometry(const QRect& rect);
+    void setGeometry(const QRect& rect) override;
 
 private:
     QList<QLayoutItem*> m_list;

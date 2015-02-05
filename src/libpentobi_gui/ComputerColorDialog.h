@@ -35,7 +35,7 @@ public:
                         ColorMap<bool>& computerColor);
 
 public slots:
-    void accept();
+    void accept() override;
 
 private:
     ColorMap<bool>& m_computerColor;

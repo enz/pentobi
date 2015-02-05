@@ -34,7 +34,7 @@ public:
     ~GameInfoDialog();
 
 public slots:
-    void accept();
+    void accept() override;
 
 private:
     Game& m_game;

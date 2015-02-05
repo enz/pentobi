@@ -33,7 +33,7 @@ public:
 
     HelpWindow(QWidget* parent, const QString& mainPage);
 
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
 protected:
     void closeEvent(QCloseEvent* event) override;

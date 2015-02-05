@@ -32,7 +32,7 @@ public:
     }
 
 public slots:
-    void accept();
+    void accept() override;
 
 private:
     int m_speedValue;

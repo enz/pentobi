@@ -33,7 +33,7 @@ public:
 
     PentobiTree(unique_ptr<SgfNode>& root);
 
-    void init(unique_ptr<SgfNode>& root);
+    void init(unique_ptr<SgfNode>& root) override;
 
     void init_variant(Variant variant);
 

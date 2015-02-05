@@ -26,7 +26,7 @@ class LineEdit
 public:
     LineEdit(QWidget* parent, int nuCharactersHint);
 
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
 private:
     int m_nuCharactersHint;

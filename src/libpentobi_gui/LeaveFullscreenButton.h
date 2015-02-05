@@ -42,7 +42,7 @@ public:
         the button */
     LeaveFullscreenButton(QWidget* parent, QAction* action);
 
-    bool eventFilter(QObject* watched, QEvent* event);
+    bool eventFilter(QObject* watched, QEvent* event) override;
 
     void showButton();
 

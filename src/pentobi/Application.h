@@ -26,7 +26,7 @@ public:
 
     /** Reimplemented from QApplication::notify().
         Catches exceptions and shows an error message. */
-    bool notify(QObject* receiver, QEvent* event);
+    bool notify(QObject* receiver, QEvent* event) override;
 };
 
 //-----------------------------------------------------------------------------
