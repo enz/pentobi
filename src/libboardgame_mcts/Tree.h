@@ -189,7 +189,7 @@ public:
         @return @c false if the extraction was aborted. */
     bool extract_subtree(Tree& target, const Node& node,
                          bool check_abort = false,
-                         IntervalChecker* interval_checker = 0) const;
+                         IntervalChecker* interval_checker = nullptr) const;
 
     /** Copy a subtree.
         This operation can be lengthy and can be aborted by providing an abort
@@ -206,7 +206,7 @@ public:
         @return @c false if the copying was aborted. */
     bool copy_subtree(Tree& target, const Node& target_node, const Node& node,
                       Float min_count = 0, bool check_abort = false,
-                      IntervalChecker* interval_checker = 0) const;
+                      IntervalChecker* interval_checker = nullptr) const;
 
 private:
     struct ThreadStorage
