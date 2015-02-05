@@ -485,8 +485,8 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
                              Point label_pos)
 {
     MovePoints points;
-    for (auto i = coord_points.begin(); i != coord_points.end(); ++i)
-        points.push_back(m_geo.get_point((*i).x, (*i).y));
+    for (auto& i : coord_points)
+        points.push_back(m_geo.get_point(i.x, i.y));
     MoveInfo info(piece, points);
     MoveInfoExt info_ext;
     set_adj_and_attach_points(info, info_ext);
@@ -536,8 +536,8 @@ void BoardConst::create_moves()
                 Piece piece(j);
                 auto& list = (*m_full_move_table)[i][piece][p];
                 auto begin = m_precomp_moves.get_size();
-                for (unsigned k = 0; k < list.size(); ++k)
-                    m_precomp_moves.push_move(list[k]);
+                for (auto mv : list)
+                    m_precomp_moves.push_move(mv);
                 auto size = m_precomp_moves.get_size() - begin;
                 m_precomp_moves.set_list_range(p, i, piece, begin, size);
             }
@@ -661,12 +661,12 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
         if (get_piece_info(piece).get_size() == points.size())
         {
             auto moves = get_moves(piece, p);
-            for (auto j = moves.begin(); j != moves.end(); ++j)
+            for (auto mv : moves)
                 if (equal(sorted_points.begin(),
                           sorted_points.end(),
-                          m_move_info[j->to_int()].begin()))
+                          m_move_info[mv.to_int()].begin()))
                 {
-                    move = *j;
+                    move = mv;
                     return true;
                 }
         }

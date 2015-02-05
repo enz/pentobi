@@ -35,9 +35,8 @@ vector<string> split_args(string s)
     bool escape = false;
     bool is_in_string = false;
     ostringstream token;
-    for (size_t i = 0; i < s.size(); ++i)
+    for (auto c : s)
     {
-        char c = s[i];
         if (c == '"' && ! escape)
         {
             if (is_in_string)

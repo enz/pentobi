@@ -28,12 +28,12 @@ void Response::write(ostream& out, string& buffer) const
 {
     buffer = m_stream.str();
     bool was_newline = false;
-    for (auto i = buffer.begin(); i != buffer.end(); ++i)
+    for (auto c : buffer)
     {
-        bool is_newline =(*i == '\n');
+        bool is_newline = (c == '\n');
         if (is_newline && was_newline)
             out << ' ';
-        out << *i;
+        out << c;
         was_newline = is_newline;
     }
     if (! was_newline)

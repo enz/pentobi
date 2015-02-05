@@ -1393,9 +1393,9 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         m_root_val[i].clear();
     if (SearchParamConst::use_lgr && ! is_followup)
         m_lgr.init(m_nu_players);
-    for (unsigned i = 0; i < m_threads.size(); ++i)
+    for (auto& i : m_threads)
     {
-        auto& thread_state = m_threads[i]->thread_state;
+        auto& thread_state = i->thread_state;
         thread_state.nu_simulations = 0;
         thread_state.full_select_counter = 0;
         thread_state.stat_len.clear();

@@ -184,14 +184,11 @@ void RatingHistory::save() const
     QDir dir("");
     dir.mkpath(m_dir);
     ofstream out(m_file.toLocal8Bit().constData());
-    for (size_t i = 0; i < m_games.size(); ++i)
-    {
-        auto& info = m_games[i];
+    for (auto& info : m_games)
         out << info.number << ' ' << static_cast<unsigned>(info.color.to_int())
             << ' ' << info.result << ' '
             << info.date.toLocal8Bit().constData() << ' ' << info.level
             << ' ' << info.rating << '\n';
-    }
 }
 
 //-----------------------------------------------------------------------------

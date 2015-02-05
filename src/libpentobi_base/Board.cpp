@@ -399,8 +399,8 @@ void Board::undo()
     ArrayList<ColorMove, max_game_moves> moves = m_moves;
     moves.pop_back();
     init();
-    for (unsigned i = 0; i < moves.size(); ++i)
-        play(moves[i]);
+    for (auto& mv : moves)
+        play(mv);
 }
 
 void Board::write(ostream& out, bool mark_last_move) const

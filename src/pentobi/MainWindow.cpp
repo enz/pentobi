@@ -1033,13 +1033,12 @@ void MainWindow::createActions()
     setIcon(m_actionRatedGame, "pentobi-rated-game");
     connect(m_actionRatedGame, SIGNAL(triggered()), SLOT(ratedGame()));
 
-    for (int i = 0; i < maxRecentFiles; ++i)
+    for (auto& action : m_actionRecentFile)
     {
-         m_actionRecentFile[i] = createAction();
-         m_actionRecentFile[i]->setVisible(false);
-         connect(m_actionRecentFile[i], SIGNAL(triggered()),
-                 SLOT(openRecentFile()));
-     }
+         action = createAction();
+         action->setVisible(false);
+         connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
+    }
 
     m_actionRotatePieceAnticlockwise = createAction(tr("Rotate Anticlockwise"));
     setIcon(m_actionRotatePieceAnticlockwise, "pentobi-rotate-left");
@@ -1348,8 +1347,8 @@ void MainWindow::createMenu()
     menuGame->addAction(m_actionOpen);
     m_menuOpenRecent = menuGame->addMenu(tr("Open R&ecent"));
     m_menuOpenRecent->setIcon(QIcon::fromTheme("document-open-recent"));
-    for (int i = 0; i < maxRecentFiles; ++i)
-        m_menuOpenRecent->addAction(m_actionRecentFile[i]);
+    for (auto& action : m_actionRecentFile)
+        m_menuOpenRecent->addAction(action);
     menuGame->addSeparator();
     menuGame->addAction(m_actionSave);
     menuGame->addAction(m_actionSaveAs);
@@ -1426,8 +1425,8 @@ void MainWindow::createMenu()
     menuComputer->addAction(m_actionInterrupt);
     menuComputer->addSeparator();
     m_menuLevel = menuComputer->addMenu(tr("&Level"));
-    for (int i = 0; i < maxLevel; ++i)
-        m_menuLevel->addAction(m_actionLevel[i]);
+    for (auto& action : m_actionLevel)
+        m_menuLevel->addAction(action);
 
     auto menuTools = menuBar()->addMenu(tr("&Tools"));
     menuTools->addAction(m_actionRating);
@@ -3704,8 +3703,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionKeepOnlyPosition->setEnabled(! m_isRated
                                          && (hasParent || hasChildren));
     m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
-    for (int i = 0; i < maxLevel; ++i)
-        m_actionLevel[i]->setEnabled(! m_isRated);
+    for (auto& action : m_actionLevel)
+        action->setEnabled(! m_isRated);
     m_actionMakeMainVariation->setEnabled(! isMain);
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
@@ -3738,8 +3737,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     // Don't disable m_menuLevel but all level items such that it is still
     // possible to see what the current level is even if it cannot be changed
     // in rated games.
-    for (int i = 0; i < maxLevel; ++i)
-        m_actionLevel[i]->setEnabled(! m_isRated);
+    for (auto& action : m_actionLevel)
+        action->setEnabled(! m_isRated);
     m_menuVariant->setEnabled(! m_isRated);
 }
 

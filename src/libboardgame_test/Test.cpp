@@ -60,12 +60,11 @@ bool run_all_tests()
 {
     unsigned nu_fail = 0;
     log("Running ", get_all_tests().size(), " tests...");
-    auto all_tests = get_all_tests();
-    for (auto i = all_tests.begin(); i != all_tests.end(); ++i)
+    for (auto& i : get_all_tests())
     {
         try
         {
-            (i->second)();
+            (i.second)();
         }
         catch (const TestFail& e)
         {
@@ -87,14 +86,13 @@ bool run_all_tests()
 
 bool run_test(const string& name)
 {
-    auto all_tests = get_all_tests();
-    for (auto i = all_tests.begin(); i != all_tests.end(); ++i)
-        if (i->first == name)
+    for (auto& i : get_all_tests())
+        if (i.first == name)
         {
             log("Running ", name, "...");
             try
             {
-                (i->second)();
+                (i.second)();
                 log("OK");
                 return true;
             }
