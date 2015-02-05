@@ -110,7 +110,7 @@ GtpConnection::GtpConnection(const string& command)
                 close(fd2[1]);
                 terminate_child("GtpConnection: dup2 to stdout failed");
             }
-        char** const argv = new char*[args.size() + 1];
+        auto const argv = new char*[args.size() + 1];
         for (size_t i = 0; i < args.size(); ++i)
         {
             argv[i] = new char[args[i].size()];
