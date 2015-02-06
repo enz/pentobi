@@ -45,10 +45,11 @@ using libpentobi_base::Board;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
+using libpentobi_base::Move;
+using libpentobi_base::MoveMarker;
 using libpentobi_base::Piece;
 using libpentobi_base::Point;
 using libpentobi_base::Variant;
-using libpentobi_base::Move;
 using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------
@@ -323,6 +324,10 @@ private:
     RandomGenerator m_random;
 
     unique_ptr<RatingHistory> m_history;
+
+    /** Local variable in findMove().
+        Reused for efficiency. */
+    unique_ptr<MoveMarker> m_marker;
 
     QToolBar* m_toolBar;
 

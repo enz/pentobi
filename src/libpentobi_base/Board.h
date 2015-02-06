@@ -207,11 +207,7 @@ public:
 
     ColorMove get_move(unsigned n) const;
 
-    /** Generate all moves for one player.
-        The generated moves do not include the pass move. */
-    void gen_moves(Color c, ArrayList<Move, Move::range>& moves) const;
-
-    void gen_moves(Color c, Point p,
+    void gen_moves(Color c, MoveMarker& marker,
                    ArrayList<Move, Move::range>& moves) const;
 
     void gen_moves(Color c, Point p, MoveMarker& marker,
@@ -406,10 +402,6 @@ private:
     Setup m_setup;
 
     StartingPoints m_starting_points;
-
-    /** Local variable during move generation.
-        Reused for efficiency. */
-    mutable MoveMarker m_marker;
 
     void gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
                    ArrayList<Move,Move::range>& moves) const;

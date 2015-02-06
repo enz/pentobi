@@ -60,7 +60,8 @@ void Engine::cmd_all_legal(const Arguments& args, Response& response)
 {
     auto& bd = get_board();
     unique_ptr<MoveList> moves(new MoveList);
-    bd.gen_moves(get_color_arg(args), *moves);
+    unique_ptr<MoveMarker> marker(new MoveMarker);
+    bd.gen_moves(get_color_arg(args), *marker, *moves);
     for (Move mv : *moves)
         response << bd.to_string(mv, false) << '\n';
 }

@@ -1687,7 +1687,10 @@ void MainWindow::findMove()
         return;
     if (m_legalMoves->empty())
     {
-        bd.gen_moves(m_currentColor, *m_legalMoves);
+        if (! m_marker)
+            m_marker.reset(new MoveMarker);
+        bd.gen_moves(m_currentColor, *m_marker, *m_legalMoves);
+        m_marker->clear(*m_legalMoves);
         sort(m_legalMoves->begin(), m_legalMoves->end(),
              [&](Move mv1, Move mv2) {
                  return getHeuristic(bd, mv1) > getHeuristic(bd, mv2);

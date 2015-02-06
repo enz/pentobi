@@ -80,30 +80,22 @@ void Board::copy_from(const Board& bd)
     }
 }
 
-void Board::gen_moves(Color c, ArrayList<Move, Move::range>& moves) const
+void Board::gen_moves(Color c, MoveMarker& marker,
+                      ArrayList<Move, Move::range>& moves) const
 {
     moves.clear();
     if (is_first_piece(c))
     {
         for (Point p : get_starting_points(c))
             if (! m_state_color[c].forbidden[p])
-                gen_moves(c, p, m_marker, moves);
+                gen_moves(c, p, marker, moves);
     }
     else
     {
         for (Point p : get_attach_points(c))
             if (! m_state_color[c].forbidden[p])
-                gen_moves(c, p, get_adj_status(p, c), m_marker, moves);
+                gen_moves(c, p, get_adj_status(p, c), marker, moves);
     }
-    m_marker.clear(moves);
-}
-
-void Board::gen_moves(Color c, Point p,
-                      ArrayList<Move, Move::range>& moves) const
-{
-    moves.clear();
-    gen_moves(c, p, m_marker, moves);
-    m_marker.clear(moves);
 }
 
 void Board::gen_moves(Color c, Point p, MoveMarker& marker,
