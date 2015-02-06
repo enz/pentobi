@@ -105,7 +105,7 @@ public:
     /** Get the state of an on-board point. */
     PointState get_point_state(Point p) const;
 
-    const PointStateGrid& get_grid() const;
+    const PointStateGrid& get_point_state() const;
 
     /** Get next color to play.
         The next color to play is the next color of the color of the last move
@@ -487,11 +487,6 @@ inline const Geometry& Board::get_geometry() const
     return *m_geo;
 }
 
-inline const Board::PointStateGrid& Board::get_grid() const
-{
-    return m_state_base.point_state;
-}
-
 inline unsigned Board::get_max_game_moves() const
 {
     return m_nu_colors * get_max_player_moves();
@@ -608,6 +603,11 @@ inline const Board::PiecesLeftList& Board::get_pieces_left(Color c) const
 inline PointState Board::get_point_state(Point p) const
 {
     return PointState(m_state_base.point_state[p].to_int());
+}
+
+inline const Board::PointStateGrid& Board::get_point_state() const
+{
+    return m_state_base.point_state;
 }
 
 inline unsigned Board::get_points(Color c) const

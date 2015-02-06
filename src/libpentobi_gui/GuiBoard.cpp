@@ -88,13 +88,13 @@ void GuiBoard::copyFromBoard(const Board& bd)
     {
         m_variant = bd.get_variant();
         m_isInitialized = true;
-        m_pointState.copy_from(bd.get_grid(), geo);
+        m_pointState.copy_from(bd.get_point_state(), geo);
         m_labels.fill("", geo);
         setEmptyBoardDirty();
     }
     else
     {
-        m_pointState.copy_from(bd.get_grid(), geo);
+        m_pointState.copy_from(bd.get_point_state(), geo);
         setDirty();
     }
 }

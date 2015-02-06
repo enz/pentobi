@@ -1663,7 +1663,8 @@ void MainWindow::exportImage()
     auto& bd = getBoard();
     boardPainter.paintEmptyBoard(painter, size, size, bd.get_variant(),
                                  bd.get_geometry());
-    boardPainter.paintPieces(painter, bd.get_grid(), &m_guiBoard->getLabels());
+    boardPainter.paintPieces(painter, bd.get_point_state(),
+                             &m_guiBoard->getLabels());
     painter.end();
     QString file;
     while (true)
