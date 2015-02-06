@@ -295,8 +295,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="356"/>
-        <source>Pentobi is a computer opponent for the board game Blokus.</source>
-        <translation>Pentobi is a computer opponent for the board game Blokus.</translation>
+        <source>Computer opponent for the board game Blokus.</source>
+        <translation>Computer opponent for the board game Blokus.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="869"/>
