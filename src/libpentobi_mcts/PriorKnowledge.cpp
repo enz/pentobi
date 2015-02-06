@@ -352,7 +352,7 @@ void PriorKnowledge::start_search(const Board& bd)
         if (board_type == BoardType::classic)
             // Don't make a distinction between moves close enough to the
             // center in game variant Classic/Classic2
-            d = max(d, 10.f);
+            d = max(d, 2.f);
         m_dist_to_center[p] = d;
     }
 
