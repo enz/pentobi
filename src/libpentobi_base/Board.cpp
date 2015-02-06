@@ -101,6 +101,7 @@ void Board::gen_moves(Color c, MoveMarker& marker,
 void Board::gen_moves(Color c, Point p, MoveMarker& marker,
                       ArrayList<Move, Move::range>& moves) const
 {
+    moves.clear();
     for (Piece piece : m_state_color[c].pieces_left)
         for (Move mv : m_board_const->get_moves(piece, p))
         {
