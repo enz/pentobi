@@ -88,7 +88,7 @@ void Board::gen_moves(Color c, MoveMarker& marker,
     {
         for (Point p : get_starting_points(c))
             if (! m_state_color[c].forbidden[p])
-                gen_moves(c, p, marker, moves);
+                gen_moves(c, p, get_adj_status(p, c), marker, moves);
     }
     else
     {
@@ -96,23 +96,6 @@ void Board::gen_moves(Color c, MoveMarker& marker,
             if (! m_state_color[c].forbidden[p])
                 gen_moves(c, p, get_adj_status(p, c), marker, moves);
     }
-}
-
-void Board::gen_moves(Color c, Point p, MoveMarker& marker,
-                      ArrayList<Move, Move::range>& moves) const
-{
-    moves.clear();
-    for (Piece piece : m_state_color[c].pieces_left)
-        for (Move mv : m_board_const->get_moves(piece, p))
-        {
-            if (marker[mv])
-                continue;
-            if (! is_forbidden(c, mv))
-            {
-                moves.push_back(mv);
-                marker.set(mv);
-            }
-        }
 }
 
 void Board::gen_moves(Color c, Point p, unsigned adj_status,

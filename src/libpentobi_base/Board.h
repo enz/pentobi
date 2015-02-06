@@ -207,10 +207,11 @@ public:
 
     ColorMove get_move(unsigned n) const;
 
+    /** Generate all legal moves for a color.
+        @param c The color
+        @param marker A move marker reused for efficiency (needs to be clear)
+        @param[out] moves The list of moves. */
     void gen_moves(Color c, MoveMarker& marker,
-                   ArrayList<Move, Move::range>& moves) const;
-
-    void gen_moves(Color c, Point p, MoveMarker& marker,
                    ArrayList<Move, Move::range>& moves) const;
 
     bool has_moves(Color c) const;

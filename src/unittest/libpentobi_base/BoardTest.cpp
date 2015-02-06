@@ -127,31 +127,12 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_classic_2)
     LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(3)), 3u);
 }
 
-/** Check the number of generated moves at each attach point in a known
-    case. */
-LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves)
-{
-    unique_ptr<Board> bd(new Board(Variant::classic));
-    Color c(0);
-    play(*bd, c, "i11,j11,k11,l11");
-    unique_ptr<MoveList> moves(new MoveList);
-    unique_ptr<MoveMarker> marker(new MoveMarker);
-    for (Point p : bd->get_attach_points(c))
-    {
-        bd->gen_moves(c, p, *marker, *moves);
-        LIBBOARDGAME_CHECK_EQUAL(moves->size(), 124u);
-        marker->clear(*moves);
-    }
-}
-
-/** Check the number of generated moves at a starting point. */
-LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_2)
+LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_classic_initial)
 {
     unique_ptr<Board> bd(new Board(Variant::classic));
     unique_ptr<MoveList> moves(new MoveList);
     unique_ptr<MoveMarker> marker(new MoveMarker);
-    bd->gen_moves(Color(0), bd->get_geometry().get_point(0, 19), *marker,
-                  *moves);
+    bd->gen_moves(Color(0), *marker, *moves);
     LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u);
 }
 
