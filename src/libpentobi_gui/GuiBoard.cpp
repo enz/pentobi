@@ -35,7 +35,7 @@ namespace {
 bool allPointEmpty(const Board& bd, Move mv)
 {
     for (Point p : bd.get_move_info(mv))
-        if (! bd.is_empty(p))
+        if (! bd.get_point_state(p).is_empty())
             return false;
     return true;
 }

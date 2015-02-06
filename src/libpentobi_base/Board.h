@@ -105,8 +105,6 @@ public:
     /** Get the state of an on-board point. */
     PointState get_point_state(Point p) const;
 
-    bool is_empty(Point p) const;
-
     const PointStateGrid& get_grid() const;
 
     /** Get next color to play.
@@ -710,11 +708,6 @@ inline bool Board::is_colored_starting_point(Point p) const
 inline bool Board::is_colorless_starting_point(Point p) const
 {
     return m_starting_points.is_colorless_starting_point(p);
-}
-
-inline bool Board::is_empty(Point p) const
-{
-    return get_point_state(p).is_empty();
 }
 
 inline bool Board::is_first_piece(Color c) const
