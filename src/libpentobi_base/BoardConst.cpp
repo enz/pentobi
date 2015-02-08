@@ -402,36 +402,39 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     {
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, *m_transforms);
-        reserve_info(Move::onboard_moves_trigon);
+        m_nu_moves = Move::onboard_moves_trigon;
     }
     else if (board_type == BoardType::trigon_3
              && piece_set == PieceSet::trigon)
     {
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, *m_transforms);
-        reserve_info(Move::onboard_moves_trigon_3);
+        m_nu_moves = Move::onboard_moves_trigon_3 + 1;
     }
     else if (board_type == BoardType::classic
              && piece_set == PieceSet::classic)
     {
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_classic(m_geo, *m_transforms);
-        reserve_info(Move::onboard_moves_classic);
+        m_nu_moves = Move::onboard_moves_classic + 1;
     }
     else if (board_type == BoardType::duo && piece_set == PieceSet::junior)
     {
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_junior(m_geo, *m_transforms);
-        reserve_info(Move::onboard_moves_junior);
+        m_nu_moves = Move::onboard_moves_junior + 1;
     }
     else if (board_type == BoardType::duo && piece_set == PieceSet::classic)
     {
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_classic(m_geo, *m_transforms);
-        reserve_info(Move::onboard_moves_duo);
+        m_nu_moves = Move::onboard_moves_duo + 1;
     }
     else
         LIBBOARDGAME_ASSERT(false);
+    m_move_info.reset(new MoveInfo[m_nu_moves]);
+    m_move_info_ext.reset(new MoveInfoExt[m_nu_moves]);
+    m_move_info_ext_2.reset(new MoveInfoExt2[m_nu_moves]);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     init_adj_status();
     auto width = m_geo.get_width();
@@ -440,21 +443,6 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_compare_val[p] =
                 (height - m_geo.get_y(p) - 1) * width + m_geo.get_x(p);
     create_moves();
-    auto nu_moves = m_move_info.size();
-    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(nu_moves);
-    if (board_type == BoardType::classic && piece_set == PieceSet::classic)
-        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_classic + 1);
-    else if (board_type == BoardType::trigon && piece_set == PieceSet::trigon)
-        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_trigon + 1);
-    else if (board_type == BoardType::trigon_3
-             && piece_set == PieceSet::trigon)
-        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_trigon_3 + 1);
-    else if (board_type == BoardType::duo && piece_set == PieceSet::classic)
-        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_duo + 1);
-    else if (board_type == BoardType::duo && piece_set == PieceSet::junior)
-        LIBBOARDGAME_ASSERT(nu_moves == Move::onboard_moves_junior + 1);
-    else
-        LIBBOARDGAME_ASSERT(false);
     m_total_piece_points = 0;
     m_max_piece_size = 0;
     for (const PieceInfo& piece : m_pieces)
@@ -481,26 +469,25 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         init_symmetry_info();
 }
 
-void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
-                             Point label_pos)
+void BoardConst::create_move(unsigned& moves_created, Piece piece,
+                             const PiecePoints& coord_points, Point label_pos)
 {
     MovePoints points;
     for (auto& i : coord_points)
         points.push_back(m_geo.get_point(i.x, i.y));
-    MoveInfo info(piece, points);
-    MoveInfoExt info_ext;
+    auto& info = m_move_info[moves_created];
+    auto& info_ext = m_move_info_ext[moves_created];
+    auto& info_ext_2 = m_move_info_ext_2[moves_created];
+    info = MoveInfo(piece, points);
     set_adj_and_attach_points(info, info_ext);
-    MoveInfoExt2 info_ext_2;
     info_ext_2.label_pos = label_pos;
     info_ext_2.breaks_symmetry = false;
     info_ext_2.symmetric_move = Move::null();
-    m_move_info.push_back(info);
-    m_move_info_ext.push_back(info_ext);
-    m_move_info_ext_2.push_back(info_ext_2);
     m_nu_attach_points[piece] =
         max(m_nu_attach_points[piece],
             static_cast<unsigned>(info_ext.size_attach_points));
-    Move mv(static_cast<Move::IntType>(m_move_info.size() - 1));
+    Move mv(static_cast<Move::IntType>(moves_created));
+    ++moves_created;
     if (log_move_creation)
     {
         Grid<char> grid;
@@ -521,14 +508,10 @@ void BoardConst::create_move(Piece piece, const PiecePoints& coord_points,
 
 void BoardConst::create_moves()
 {
-    // Unused move infos for Move::null()
-    m_move_info.push_back(MoveInfo());
-    m_move_info_ext.push_back(MoveInfoExt());
-    m_move_info_ext_2.push_back(MoveInfoExt2());
-
+    unsigned moves_created = 1; // Unused move infos for Move::null()
     m_full_move_table.reset(new FullMoveTable);
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
-        create_moves(Piece(i));
+        create_moves(moves_created, Piece(i));
     for (Point p : m_geo)
         for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
             for (Piece::IntType j = 0; j < m_nu_pieces; ++j)
@@ -542,12 +525,13 @@ void BoardConst::create_moves()
                 m_precomp_moves.set_list_range(p, i, piece, begin, size);
             }
     if (log_move_creation)
-        log("Created moves: ", m_move_info.size(), ", precomputed: ",
+        log("Created moves: ", moves_created, ", precomputed: ",
             m_precomp_moves.get_size());
+    LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
 
-void BoardConst::create_moves(Piece piece)
+void BoardConst::create_moves(unsigned& moves_created, Piece piece)
 {
     auto& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
@@ -598,7 +582,7 @@ void BoardConst::create_moves(Piece piece)
             CoordPoint label_pos = transformed_label_pos[i];
             label_pos.x += x;
             label_pos.y += y;
-            create_move(piece, points,
+            create_move(moves_created, piece, points,
                         m_geo.get_point(label_pos.x, label_pos.y));
         }
     }
@@ -732,7 +716,7 @@ void BoardConst::init_symmetry_info()
     SymmetricPoints symmetric_points;
     PointTransfRot180<Point> transform;
     symmetric_points.init(m_geo, transform);
-    for (unsigned i = 1; i < m_move_info.size(); ++i)
+    for (unsigned i = 1; i < m_nu_moves; ++i)
     {
         const auto& info = m_move_info[i];
         auto& info_ext_2 = m_move_info_ext_2[i];
@@ -755,13 +739,6 @@ bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
         if (info.contains(p_adj))
             return false;
     return true;
-}
-
-void BoardConst::reserve_info(size_t nu_moves)
-{
-    m_move_info.reserve(nu_moves);
-    m_move_info_ext.reserve(nu_moves);
-    m_move_info_ext_2.reserve(nu_moves);
 }
 
 void BoardConst::set_adj_and_attach_points(const MoveInfo& info,

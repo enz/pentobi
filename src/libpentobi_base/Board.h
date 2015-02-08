@@ -505,21 +505,21 @@ inline ColorMove Board::get_move(unsigned n) const
 inline const MoveInfo& Board::get_move_info(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_all_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_moves());
     return *(m_move_info_array + mv.to_int());
 }
 
 inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_all_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_moves());
     return *(m_move_info_ext_array + mv.to_int());
 }
 
 inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_all_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_moves());
     return *(m_move_info_ext_2_array + mv.to_int());
 }
 

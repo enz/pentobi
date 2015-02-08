@@ -355,14 +355,14 @@ inline bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
 inline const MoveInfo& State::get_move_info(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_all_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return *(m_move_info_array + mv.to_int());
 }
 
 inline const MoveInfoExt& State::get_move_info_ext(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_all_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return *(m_move_info_ext_array + mv.to_int());
 }
 

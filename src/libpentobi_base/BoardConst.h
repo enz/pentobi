@@ -63,7 +63,7 @@ public:
 
     /** Get move info.
         @pre move.is_regular() */
-    const MoveInfo& get_move_info(Move move) const;
+    const MoveInfo& get_move_info(Move mv) const;
 
     /** Get pointer to move info array.
         Can be used to speed up the access to the move info by avoiding the
@@ -77,13 +77,13 @@ public:
 
     /** Get extended move info.
         @pre move.is_regular() */
-    const MoveInfoExt& get_move_info_ext(Move move) const;
+    const MoveInfoExt& get_move_info_ext(Move mv) const;
 
     const MoveInfoExt2& get_move_info_ext_2(Move mv) const;
 
     const MoveInfoExt2* get_move_info_ext_2_array() const;
 
-    unsigned get_nu_all_moves() const;
+    unsigned get_nu_moves() const;
 
     bool find_move(const MovePoints& points, Move& move) const;
 
@@ -146,6 +146,8 @@ private:
 
     unsigned m_max_piece_size;
 
+    unsigned m_nu_moves;
+
     BoardType m_board_type;
 
     const Geometry& m_geo;
@@ -158,11 +160,11 @@ private:
 
     PieceMap<unsigned> m_nu_attach_points;
 
-    vector<MoveInfo> m_move_info;
+    unique_ptr<MoveInfo[]> m_move_info;
 
-    vector<MoveInfoExt> m_move_info_ext;
+    unique_ptr<MoveInfoExt[]> m_move_info_ext;
 
-    vector<MoveInfoExt2> m_move_info_ext_2;
+    unique_ptr<MoveInfoExt2[]> m_move_info_ext_2;
 
     /** Non-compact representation of lists of moves of a piece at a point
         constrained by the forbidden status of adjacent points.
@@ -179,12 +181,12 @@ private:
 
     BoardConst(BoardType board_type, PieceSet piece_set);
 
-    void create_move(Piece piece, const PiecePoints& coord_points,
-                     Point label_pos);
+    void create_move(unsigned& moves_created, Piece piece,
+                     const PiecePoints& coord_points, Point label_pos);
 
     void create_moves();
 
-    void create_moves(Piece piece);
+    void create_moves(unsigned& moves_created, Piece piece);
 
     void init_adj_status();
 
@@ -197,8 +199,6 @@ private:
 
     bool is_compatible_with_adj_status(Point p, unsigned adj_status,
                                        const MoveInfo& info) const;
-
-    void reserve_info(size_t nu_moves);
 
     void set_adj_and_attach_points(const MoveInfo& info,
                                    MoveInfoExt& info_ext);
@@ -219,42 +219,42 @@ inline unsigned BoardConst::get_max_piece_size() const
     return m_max_piece_size;
 }
 
-inline const MoveInfo& BoardConst::get_move_info(Move move) const
+inline const MoveInfo& BoardConst::get_move_info(Move mv) const
 {
-    LIBBOARDGAME_ASSERT(move.to_int() < m_move_info.size());
-    return m_move_info[move.to_int()];
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_nu_moves);
+    return m_move_info[mv.to_int()];
 }
 
 inline const MoveInfo* BoardConst::get_move_info_array() const
 {
-    return &m_move_info.front();
+    return m_move_info.get();
 }
 
-inline const MoveInfoExt& BoardConst::get_move_info_ext(Move move) const
+inline const MoveInfoExt& BoardConst::get_move_info_ext(Move mv) const
 {
-    LIBBOARDGAME_ASSERT(move.to_int() < m_move_info_ext.size());
-    return m_move_info_ext[move.to_int()];
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_nu_moves);
+    return m_move_info_ext[mv.to_int()];
 }
 
 inline const MoveInfoExt2& BoardConst::get_move_info_ext_2(Move mv) const
 {
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_move_info_ext_2.size());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_nu_moves);
     return m_move_info_ext_2[mv.to_int()];
 }
 
 inline const MoveInfoExt* BoardConst::get_move_info_ext_array() const
 {
-    return &m_move_info_ext.front();
+    return m_move_info_ext.get();
 }
 
 inline const MoveInfoExt2* BoardConst::get_move_info_ext_2_array() const
 {
-    return &m_move_info_ext_2.front();
+    return m_move_info_ext_2.get();
 }
 
-inline unsigned BoardConst::get_nu_all_moves() const
+inline unsigned BoardConst::get_nu_moves() const
 {
-    return static_cast<unsigned>(m_move_info.size());
+    return m_nu_moves;
 }
 
 inline unsigned BoardConst::get_nu_attach_points(Piece piece) const
