@@ -91,23 +91,6 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     }
 }
 
-/** Check that Tree::get_move() can handle pass moves.
-    The current Blokus SGF documentation included in Pentobi does not specify
-    if pass moves are allowed, but they may be used in the future and early
-    (unreleased) versions of Pentobi use them. */
-LIBBOARDGAME_TEST_CASE(pentobi_base_tree_get_move_pass)
-{
-    istringstream in("(;GM[Blokus Duo];B[])");
-    TreeReader reader;
-    reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
-    PentobiTree tree(root);
-    auto node = &tree.get_root();
-    node = &node->get_child();
-    auto mv = tree.get_move(*node);
-    LIBBOARDGAME_CHECK(mv.move.is_null());
-}
-
 /** Check that Tree constructor throws InvalidPropertyValue on unknown GM
     property value. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_tree_invalid_game)

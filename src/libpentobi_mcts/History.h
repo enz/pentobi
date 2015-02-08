@@ -49,8 +49,8 @@ public:
     /** Check if this position is a alternate-play followup to another one.
         @param other The other position
         @param[out] sequence The sequence leading from the other position to
-        this one. Pass moves are inserted to ensure alternating colors (as
-        required by libpentobi_mcts::Search.)
+        this one. Pass (=null) moves are inserted to ensure alternating colors
+        (as required by libpentobi_mcts::Search.)
         @return @c true If the position is a followup
     */
     bool is_followup(

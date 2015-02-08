@@ -32,10 +32,8 @@ using libpentobi_base::PentobiTree;
     playable early in the game.
     This tests for a bug that occurred in Pentobi 1.1 with game variant Trigon:
     Because moves that are below a certain piece size are not generated early
-    in the game, it could happen in rare cases that no moves were generated,
-    which could even cause crashes, because the maximum game length was set
-    with the assumption that pass moves are only played if a color has no more
-    legal moves. */
+    in the game, it could happen in rare cases that no moves were generated
+    at all. */
 LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
 {
     istringstream

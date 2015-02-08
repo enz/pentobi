@@ -93,7 +93,7 @@ public:
 
     unsigned get_max_player_moves() const;
 
-    /** Maximum number of non-pass moves in the current game variant. */
+    /** Maximum number of moves in the current game variant. */
     unsigned get_max_game_moves() const;
 
     Color get_next(Color c) const;
@@ -109,8 +109,7 @@ public:
 
     /** Get next color to play.
         The next color to play is the next color of the color of the last move
-        played even if it has no more moves to play (apart from a pass
-        move). */
+        played even if it has no more moves to play. */
     Color get_to_play() const;
 
     /** Get the player who plays the next move for the 4th color in

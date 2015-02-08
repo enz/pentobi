@@ -25,8 +25,7 @@ using libboardgame_sgf::SgfNode;
     @param[out] c The move color (only defined if return value is true)
     @param[out] points The move points (only defined if return value is
     true)
-    @return true if the node has a move property and the move is not a pass
-    move. */
+    @return true if the node has a move property. */
 bool get_move(const SgfNode& node, Variant variant, Color& c,
               MovePoints& points);
 

@@ -70,7 +70,7 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
     if ( points.size() == 0)
         // Older (unreleased?) versiions of Pentobi used empty move values
         // to encode pass moves in search tree dumps but we don't support
-        // playing pass moves in class Board anymore.
+        // pass moves Board anymore.
         return ColorMove::null();
     Move mv;
     if (! m_bc->find_move(points, mv))
