@@ -402,7 +402,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     {
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, *m_transforms);
-        m_nu_moves = Move::onboard_moves_trigon;
+        m_nu_moves = Move::onboard_moves_trigon + 1;
     }
     else if (board_type == BoardType::trigon_3
              && piece_set == PieceSet::trigon)
