@@ -359,8 +359,6 @@ private:
 
     unsigned m_nu_players;
 
-    const BoardConst* m_board_const;
-
     /** Bonus for playing all pieces. */
     unsigned m_bonus_all_pieces;
 
@@ -370,13 +368,15 @@ private:
     /** See get_nu_piece_instances() */
     uint_fast8_t m_nu_piece_instances;
 
-    /** Same as m_board_const->get_move_info_array() */
+    const BoardConst* m_bc;
+
+    /** Same as m_bc->get_move_info_array() */
     const MoveInfo* m_move_info_array;
 
-    /** Same as m_board_const->get_move_info_ext_array() */
+    /** Same as m_bc->get_move_info_ext_array() */
     const MoveInfoExt* m_move_info_ext_array;
 
-    /** Same as m_board_const->get_move_info_ext_2_array() */
+    /** Same as m_bc->get_move_info_ext_2_array() */
     const MoveInfoExt2* m_move_info_ext_2_array;
 
     const Geometry* m_geo;
@@ -434,17 +434,17 @@ private:
 
 inline bool Board::find_move(const MovePoints& points, Move& move) const
 {
-    return m_board_const->find_move(points, move);
+    return m_bc->find_move(points, move);
 }
 
 inline Move Board::from_string(const string& s) const
 {
-    return m_board_const->from_string(s);
+    return m_bc->from_string(s);
 }
 
 inline unsigned Board::get_adj_status(Point p, Color c) const
 {
-    auto& adj_status_list = m_board_const->get_adj_status_list(p);
+    auto& adj_status_list = m_bc->get_adj_status_list(p);
     auto i = adj_status_list.begin();
     auto end = adj_status_list.end();
     LIBBOARDGAME_ASSERT(i != end);
@@ -474,12 +474,12 @@ inline const PointList&  Board::get_attach_points(Color c) const
 
 inline const BoardConst& Board::get_board_const() const
 {
-    return *m_board_const;
+    return *m_bc;
 }
 
 inline BoardType Board::get_board_type() const
 {
-    return m_board_const->get_board_type();
+    return m_bc->get_board_type();
 }
 
 inline const Geometry& Board::get_geometry() const
@@ -505,28 +505,28 @@ inline ColorMove Board::get_move(unsigned n) const
 inline const MoveInfo& Board::get_move_info(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return *(m_move_info_array + mv.to_int());
 }
 
 inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return *(m_move_info_ext_array + mv.to_int());
 }
 
 inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_board_const->get_nu_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return *(m_move_info_ext_2_array + mv.to_int());
 }
 
 inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
                                                    unsigned adj_status) const
 {
-    return m_board_const->get_moves(piece, p, adj_status);
+    return m_bc->get_moves(piece, p, adj_status);
 }
 
 inline Color Board::get_next(Color c) const
@@ -577,22 +577,22 @@ inline unsigned Board::get_nu_piece_instances() const
 
 inline unsigned Board::get_nu_pieces() const
 {
-    return m_nu_piece_instances * m_board_const->get_nu_pieces();
+    return m_nu_piece_instances * m_bc->get_nu_pieces();
 }
 
 inline Piece::IntType Board::get_nu_uniq_pieces() const
 {
-    return m_board_const->get_nu_pieces();
+    return m_bc->get_nu_pieces();
 }
 
 inline const PieceInfo& Board::get_piece_info(Piece piece) const
 {
-    return m_board_const->get_piece_info(piece);
+    return m_bc->get_piece_info(piece);
 }
 
 inline bool Board::get_piece_by_name(const string& name, Piece& piece) const
 {
-    return m_board_const->get_piece_by_name(name, piece);
+    return m_bc->get_piece_by_name(name, piece);
 }
 
 inline const Board::PiecesLeftList& Board::get_pieces_left(Color c) const
@@ -682,7 +682,7 @@ inline Color Board::get_to_play() const
 
 inline const PieceTransforms& Board::get_transforms() const
 {
-    return m_board_const->get_transforms();
+    return m_bc->get_transforms();
 }
 
 inline Variant Board::get_variant() const
@@ -877,7 +877,7 @@ inline void Board::set_to_play(Color c)
 
 inline string Board::to_string(Move mv, bool with_piece_name) const
 {
-    return m_board_const->to_string(mv, with_piece_name);
+    return m_bc->to_string(mv, with_piece_name);
 }
 
 //-----------------------------------------------------------------------------

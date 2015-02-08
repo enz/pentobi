@@ -73,7 +73,7 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
         // playing pass moves in class Board anymore.
         return ColorMove::null();
     Move mv;
-    if (! m_board_const->find_move(points, mv))
+    if (! m_bc->find_move(points, mv))
         throw InvalidTree("Tree contains illegal move");
     return ColorMove(c, mv);
 }
@@ -148,7 +148,7 @@ Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
     vector<string> values = node.get_multi_property(id);
     Setup::PlacementList result;
     for (const string& s : values)
-        result.push_back(m_board_const->from_string(s));
+        result.push_back(m_bc->from_string(s));
     return result;
 }
 
@@ -177,7 +177,7 @@ void PentobiTree::init(unique_ptr<SgfNode>& root)
 
 void PentobiTree::init_board_const(Variant variant)
 {
-    m_board_const = &BoardConst::get(variant);
+    m_bc = &BoardConst::get(variant);
 }
 
 void PentobiTree::init_variant(Variant variant)
@@ -271,7 +271,7 @@ void PentobiTree::set_move(const SgfNode& node, Color c, Move mv)
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
     auto id = get_color(c);
-    set_property(node, id, m_board_const->to_string(mv, false));
+    set_property(node, id, m_bc->to_string(mv, false));
 }
 
 void PentobiTree::set_player(const SgfNode& node, Color c)
@@ -390,7 +390,7 @@ void PentobiTree::set_setup_property(const SgfNode& node, const char* id,
     }
     vector<string> values;
     for (Move mv : placements)
-        values.push_back(m_board_const->to_string(mv, false));
+        values.push_back(m_bc->to_string(mv, false));
     set_property(node, id, values);
 }
 

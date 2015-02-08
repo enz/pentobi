@@ -103,7 +103,7 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status,
                       ArrayList<Move,Move::range>& moves) const
 {
     for (Piece piece : m_state_color[c].pieces_left)
-        for (Move mv : m_board_const->get_moves(piece, p, adj_status))
+        for (Move mv : m_bc->get_moves(piece, p, adj_status))
         {
             if (marker[mv])
                 continue;
@@ -193,7 +193,7 @@ bool Board::has_moves(Color c, Point p) const
         return false;
     auto adj_status = get_adj_status(p, c);
     for (auto piece : m_state_color[c].pieces_left)
-        for (auto mv : m_board_const->get_moves(piece, p, adj_status))
+        for (auto mv : m_bc->get_moves(piece, p, adj_status))
             if (! is_forbidden(c, mv))
                 return true;
     return false;
@@ -279,7 +279,7 @@ void Board::init_variant(Variant variant)
         m_color_esc_sequence_text[Color(3)] = "\x1B[1;32m";
     }
     m_nu_players = libpentobi_base::get_nu_players(variant);
-    m_board_const = &BoardConst::get(variant);
+    m_bc = &BoardConst::get(variant);
     if (m_variant == Variant::junior)
     {
         m_bonus_all_pieces = 0;
@@ -290,10 +290,10 @@ void Board::init_variant(Variant variant)
         m_bonus_all_pieces = 15;
         m_bonus_one_piece = 5;
     }
-    m_geo = &m_board_const->get_geometry();
-    m_move_info_array = m_board_const->get_move_info_array();
-    m_move_info_ext_array = m_board_const->get_move_info_ext_array();
-    m_move_info_ext_2_array = m_board_const->get_move_info_ext_2_array();
+    m_geo = &m_bc->get_geometry();
+    m_move_info_array = m_bc->get_move_info_array();
+    m_move_info_ext_array = m_bc->get_move_info_ext_array();
+    m_move_info_ext_2_array = m_bc->get_move_info_ext_2_array();
     m_starting_points.init(variant, *m_geo);
     for (Color c : get_colors())
     {

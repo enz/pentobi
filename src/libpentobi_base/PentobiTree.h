@@ -101,7 +101,7 @@ public:
 private:
     Variant m_variant;
 
-    const BoardConst* m_board_const;
+    const BoardConst* m_bc;
 
     const char* get_color(Color c) const;
 
@@ -122,7 +122,7 @@ private:
 
 inline const BoardConst& PentobiTree::get_board_const() const
 {
-    return *m_board_const;
+    return *m_bc;
 }
 
 inline const char* PentobiTree::get_color(Color c) const
