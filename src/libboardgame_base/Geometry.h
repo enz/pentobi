@@ -74,7 +74,7 @@ public:
 
     Iterator begin() const
     {
-        return Iterator(1);
+        return Iterator(Point::begin_onboard);
     }
 
     Iterator end() const
@@ -174,9 +174,9 @@ protected:
                                DiagList& diag) const = 0;
 
 private:
-    AdjList m_adj[Point::range];
+    AdjList m_adj[Point::range_onboard];
 
-    DiagList m_diag[Point::range];
+    DiagList m_diag[Point::range_onboard];
 
     IntType m_range;
 
@@ -186,13 +186,15 @@ private:
 
     unsigned m_height;
 
-    unsigned m_x[Point::range];
+    unsigned m_x[Point::range_onboard];
 
-    unsigned m_y[Point::range];
+    unsigned m_y[Point::range_onboard];
 
     string m_string[Point::range];
 
+#if LIBBOARDGAME_DEBUG
     bool is_valid(Point p) const;
+#endif
 };
 
 
@@ -323,23 +325,24 @@ void Geometry<P>::init(unsigned width, unsigned height)
     m_width = width;
     m_height = height;
     m_string[Point::null().to_int()] = "null";
-    IntType n = 0;
+    IntType n = Point::begin_onboard;
     ostringstream ostr;
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)
             if (init_is_onboard(x, y))
             {
-                m_points[x][y] = Point(++n);
+                m_points[x][y] = Point(n);
                 m_x[n] = x;
                 m_y[n] = y;
                 ostr.str("");
                 Point::StringRep::write(ostr, x, y, width, height);
                 m_string[n] = ostr.str();
+                ++n;
             }
             else
                 m_points[x][y] = Point::null();
-    m_range = ++n;
-    for (IntType i = 1; i < m_range; ++i)
+    m_range = n;
+    for (IntType i = Point::begin_onboard; i < m_range; ++i)
         init_adj_diag(Point(i), m_adj[i], m_diag[i]);
 }
 
@@ -355,11 +358,15 @@ bool Geometry<P>::is_onboard(CoordPoint p) const
     return (p.is_onboard(m_width, m_height) && is_onboard(p.x, p.y));
 }
 
+#if LIBBOARDGAME_DEBUG
+
 template<class P>
 inline bool Geometry<P>::is_valid(Point p) const
 {
     return ! p.is_null() && p.to_int() < get_range();
 }
+
+#endif
 
 template<class P>
 inline const string& Geometry<P>::to_string(Point p) const

@@ -27,8 +27,8 @@ using namespace libboardgame_util;
     on the board. The class is a lightweight wrapper around an integer. All
     information about points including the coordinates are contained in
     Geometry. The convention for the coordinates is that the top left corner of
-    the board has the coordinates (0,0). Point::null() has the index 0 and has
-    meaning "no point".
+    the board has the coordinates (0,0). Point::null() has the meaning
+    "no point".
     @tparam M The maximum number of on-board points of the geometries this point
     is used in (excluding the null point).
     @tparam W The maximum width of the geometries this point is used in.
@@ -56,6 +56,10 @@ public:
 
     static_assert(max_onboard <= max_width * max_height, "");
 
+    static const unsigned begin_onboard = 0;
+
+    static const unsigned range_onboard = max_onboard;
+
     static const unsigned range = max_onboard + 1;
 
     static Point null();
@@ -75,14 +79,14 @@ public:
     /** Return point as an integer between 0 and Point::range */
     unsigned to_int() const;
 
-    /** Return point as an integer between 0 and Point::range.
+    /** Return point as an integer between 0 and Point::range_onboard.
         @pre ! is_null() */
     unsigned to_int_not_null() const;
 
 private:
-    static const IntType value_uninitialized = Point::range;
+    static const IntType value_uninitialized = range;
 
-    static const IntType value_null = 0;
+    static const IntType value_null = range - 1;
 
     IntType m_i;
 

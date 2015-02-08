@@ -50,37 +50,40 @@ public:
     void copy_from(const Grid& grid, const Geometry& geo);
 
 private:
-    T m_a[Point::range];
+    T m_a[Point::range_onboard];
 };
 
 template<class P, typename T>
 inline T& Grid<P, T>::operator[](const Point& p)
 {
+    LIBBOARDGAME_ASSERT(! p.is_null());
     return m_a[p.to_int()];
 }
 
 template<class P, typename T>
 inline const T& Grid<P, T>::operator[](const Point& p) const
 {
+    LIBBOARDGAME_ASSERT(! p.is_null());
     return m_a[p.to_int()];
 }
 
 template<class P, typename T>
 inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
-    std::fill(m_a, m_a + geo.get_range(), val);
+    std::fill(m_a + Point::begin_onboard, m_a + geo.get_range(), val);
 }
 
 template<class P, typename T>
 inline void Grid<P, T>::fill_all(const T& val)
 {
-    std::fill(m_a, m_a + Point::range, val);
+    std::fill(m_a + Point::begin_onboard, m_a + Point::range_onboard, val);
 }
 
 template<class P, typename T>
 inline void Grid<P, T>::copy_from(const Grid& grid, const Geometry& geo)
 {
-    copy(grid.m_a, grid.m_a + geo.get_range(), m_a);
+    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
+         m_a + Point::begin_onboard);
 }
 
 template<class P, typename T>
