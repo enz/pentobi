@@ -22,16 +22,15 @@ using namespace std;
 class MoveInfo
 {
 public:
-    MoveInfo()
-    {
-    }
+    MoveInfo() { }
 
     MoveInfo(Piece piece, const MovePoints& points)
     {
         m_piece = static_cast<uint8_t>(piece.to_int());
-        m_size = 0;
-        for (auto p : points)
-            m_points[m_size++] = p;
+        m_size = static_cast<uint8_t>(points.size());
+        // Copy max_size elements (faster because compiler can unroll the loop)
+        for (MovePoints::IntType i = 0; i < MovePoints::max_size; ++i)
+            m_points[i] = points.get_unchecked(i);
     }
 
     const Point* begin() const
