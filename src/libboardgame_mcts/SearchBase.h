@@ -112,6 +112,10 @@ struct SearchParamConstDefault
         This should use constexpr Float in the future (not yet supported by
         MSVC 2013). */
     static const unsigned child_min_count = 0;
+
+    /** Terminate search early if move is unlikely to change.
+        See implementation of check_cannot_change(). */
+    static const bool use_unlikely_change = true;
 };
 
 //-----------------------------------------------------------------------------
@@ -630,7 +634,7 @@ private:
 
     void check_create_threads();
 
-    bool check_move_cannot_change(Float remaining) const;
+    bool check_cannot_change(ThreadState& thread_state, Float remaining) const;
 
     bool expand_node(ThreadState& thread_state, const Node& node,
                      const Node*& best_child);
@@ -805,7 +809,8 @@ bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
+bool SearchBase<S, M, R>::check_abort_expensive(
+        ThreadState& thread_state) const
 {
     if (get_abort())
     {
@@ -854,10 +859,48 @@ bool SearchBase<S, M, R>::check_abort_expensive(ThreadState& thread_state) const
         m_callback(time, remaining_time);
     if (count + remaining_simulations > m_max_float_count)
         remaining_simulations = m_max_float_count - count;
-    if (check_move_cannot_change(remaining_simulations))
-    {
-        log_thread(thread_state, "Move cannot change anymore");
+    if (check_cannot_change(thread_state, remaining_simulations))
         return true;
+    return false;
+}
+
+template<class S, class M, class R>
+bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
+                                              Float remaining) const
+{
+    // select_child_final() selects move with highest number of wins.
+    Float max_wins = 0;
+    Float second_max = 0;
+    for (auto& i : m_tree.get_root_children())
+    {
+        Float wins = i.get_value() * i.get_value_count();
+        if (wins > max_wins)
+        {
+            second_max = max_wins;
+            max_wins = wins;
+        }
+    }
+    Float diff = max_wins - second_max;
+    if (diff >= remaining)
+    {
+        log_thread(thread_state, "Move cannot change");
+        return true;
+    }
+    if (SearchParamConst::use_unlikely_change)
+    {
+        // Weight remaining number of simulations with current global win rate,
+        // but not less than 10%
+        auto& init_val = m_init_val[m_player];
+        if (init_val.get_count() < 100)
+            return false; // Not enough statistics
+        auto win_rate = init_val.get_mean();
+        if (win_rate < 0.1f)
+            win_rate = 0.1f;
+        if (diff >= win_rate * remaining)
+        {
+            log_thread(thread_state, "Move change unlikely");
+            return true;
+        }
     }
     return false;
 }
@@ -874,25 +917,6 @@ bool SearchBase<S, M, R>::check_followup(ArrayList<Move, max_moves>& sequence)
 {
     LIBBOARDGAME_UNUSED(sequence);
     return false;
-}
-
-template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_move_cannot_change(Float remaining) const
-{
-    // select_child_final() selects move with highest number of wins. Assume
-    // that all remaining simulations are wins for second best move.
-    Float max_wins = 0;
-    Float second_max_wins = 0;
-    for (auto& i : m_tree.get_root_children())
-    {
-        Float wins = i.get_value() * i.get_value_count();
-        if (wins > max_wins)
-        {
-            second_max_wins = max_wins;
-            max_wins = wins;
-        }
-    }
-    return (max_wins >= second_max_wins + remaining);
 }
 
 template<class S, class M, class R>

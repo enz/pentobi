@@ -60,6 +60,8 @@ struct SearchParamConst
     static const bool virtual_loss = true;
 
     static const unsigned child_min_count = 3;
+
+    static const bool use_unlikely_change = true;
 };
 
 //-----------------------------------------------------------------------------
