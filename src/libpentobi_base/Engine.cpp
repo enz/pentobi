@@ -94,7 +94,7 @@ void Engine::cmd_final_score(Response& response)
 
 void Engine::cmd_g(Response& response)
 {
-    genmove(get_board().get_to_play(), response);
+    genmove(get_board().get_effective_to_play(), response);
 }
 
 void Engine::cmd_genmove(const Arguments& args, Response& response)
