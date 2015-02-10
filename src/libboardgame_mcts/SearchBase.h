@@ -1325,7 +1325,7 @@ void SearchBase<S, M, R>::restore_root_from_children(Tree& tree, const Node& roo
 {
     const Node* best_child = nullptr;
     Float max_count = 0;
-    for (auto& i : m_tree.get_children(root))
+    for (auto& i : tree.get_children(root))
         if (i.get_visit_count() > max_count)
         {
             best_child = &i;
