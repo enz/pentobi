@@ -817,7 +817,13 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         log_thread(thread_state, "Search aborted");
         return true;
     }
-    auto count = m_tree.get_root().get_visit_count();
+    auto& root = m_tree.get_root();
+    if (root.get_nu_children() == 1)
+    {
+        log("Root has only one child");
+        return true;
+    }
+    auto count = root.get_visit_count();
     if (count >= m_max_float_count)
     {
         log_thread(thread_state,
@@ -1461,7 +1467,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
 
     if (root.get_nu_children() == 0)
         log("No legal moves at root");
-    else if (root.get_nu_children() == 1)
+    else if (root.get_nu_children() == 1 && min_simulations == 0)
         log("Root has only one child");
     else
         while (true)
