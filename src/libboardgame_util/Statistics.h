@@ -357,6 +357,8 @@ public:
 
     void clear(FLOAT init_val = 0);
 
+    void init(FLOAT mean, FLOAT count);
+
     FLOAT get_count() const;
 
     FLOAT get_mean() const;
@@ -399,8 +401,7 @@ void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val)
 template<typename FLOAT>
 inline void StatisticsDirtyLockFree<FLOAT>::clear(FLOAT init_val)
 {
-    m_count = 0;
-    m_mean = init_val;
+    init(init_val, 0);
 }
 
 template<typename FLOAT>
@@ -413,6 +414,13 @@ template<typename FLOAT>
 inline FLOAT StatisticsDirtyLockFree<FLOAT>::get_mean() const
 {
     return m_mean.load(memory_order_relaxed);
+}
+
+template<typename FLOAT>
+inline void StatisticsDirtyLockFree<FLOAT>::init(FLOAT mean, FLOAT count)
+{
+    m_count = count;
+    m_mean = mean;
 }
 
 template<typename FLOAT>

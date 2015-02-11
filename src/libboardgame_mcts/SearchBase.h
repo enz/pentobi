@@ -606,11 +606,6 @@ private:
     /** See get_root_val(). */
     RootStat m_root_val;
 
-    /** Current position value estimate for prior knowledge initialization.
-        Derived form root values of last search and updated with root values
-        of current search. */
-    RootStat m_init_val;
-
     LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
 
     /** See get_nu_simulations(). */
@@ -896,10 +891,10 @@ bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
     {
         // Weight remaining number of simulations with current global win rate,
         // but not less than 10%
-        auto& init_val = m_init_val[m_player];
-        if (init_val.get_count() < 100)
+        auto& root_val = m_root_val[m_player];
+        if (root_val.get_count() < 100)
             return false; // Not enough statistics
-        auto win_rate = init_val.get_mean();
+        auto win_rate = root_val.get_mean();
         if (win_rate < 0.1f)
             win_rate = 0.1f;
         if (diff >= win_rate * remaining)
@@ -976,7 +971,7 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
     Float min_count = static_cast<Float>(SearchParamConst::child_min_count);
     auto thread_id = thread_state.thread_id;
     typename Tree::NodeExpander expander(thread_id, m_tree, min_count);
-    state.gen_children(expander, m_init_val[state.get_to_play()].get_mean());
+    state.gen_children(expander, m_root_val[state.get_to_play()].get_mean());
     if (! expander.is_tree_full())
     {
         expander.link_children(m_tree, node);
@@ -1359,15 +1354,16 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         is_same = true;
         is_followup = false;
     }
-    for (PlayerInt i = 0; i < m_nu_players; ++i)
-    {
-        m_init_val[i].clear();
-        m_init_val[i].add(get_tie_value());
-    }
     if (is_same || (is_followup && m_followup_sequence.size() <= m_nu_players))
+    {
+        // Use root_val from last search but with a count of max. 100
         for (PlayerInt i = 0; i < m_nu_players; ++i)
-            if (m_root_val[i].get_count() > 0)
-                m_init_val[i] = m_root_val[i];
+            if (m_root_val[i].get_count() > 100)
+                m_root_val[i].init(m_root_val[i].get_mean(), 100);
+    }
+    else
+        for (PlayerInt i = 0; i < m_nu_players; ++i)
+            m_root_val[i].init(get_tie_value(), 1);
     if ((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
@@ -1419,8 +1415,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     m_timer.reset(time_source);
     m_time_source = &time_source;
     m_player = get_player();
-    for (PlayerInt i = 0; i < m_nu_players; ++i)
-        m_root_val[i].clear();
     if (SearchParamConst::use_lgr && ! is_followup)
         m_lgr.init(m_nu_players);
     for (auto& i : m_threads)
@@ -1876,10 +1870,7 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
             m_tree.remove_value(node, 0);
     }
     for (PlayerInt i = 0; i < m_nu_players; ++i)
-    {
         m_root_val[i].add(eval[i]);
-        m_init_val[i].add(eval[i]);
-    }
 }
 
 //-----------------------------------------------------------------------------
