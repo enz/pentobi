@@ -1346,6 +1346,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         // max_time is still used at some places in the code, so we set it to
         // infinity
         max_time = numeric_limits<double>::max();
+    m_player = get_player();
     m_nu_players = get_nu_players();
     bool clear_tree = true;
     bool is_same = false;
@@ -1388,7 +1389,13 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                                              &interval_checker);
                 auto& tmp_tree_root = m_tmp_tree.get_root();
                 if (! is_same)
+                {
                     restore_root_from_children(m_tmp_tree, tmp_tree_root);
+                    auto count = tmp_tree_root.get_value_count();
+                    if (count > 0)
+                        m_root_val[m_player].add(tmp_tree_root.get_value(),
+                                                 count);
+                }
                 if (aborted && ! always_search)
                     return false;
                 size_t tmp_tree_nodes = m_tmp_tree.get_nu_nodes();
@@ -1414,7 +1421,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
 
     m_timer.reset(time_source);
     m_time_source = &time_source;
-    m_player = get_player();
     if (SearchParamConst::use_lgr && ! is_followup)
         m_lgr.init(m_nu_players);
     for (auto& i : m_threads)

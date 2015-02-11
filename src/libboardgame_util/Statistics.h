@@ -355,6 +355,8 @@ public:
 
     void add(FLOAT val);
 
+    void add(FLOAT val, FLOAT cnt);
+
     void clear(FLOAT init_val = 0);
 
     void init(FLOAT mean, FLOAT count);
@@ -394,6 +396,17 @@ void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val)
     FLOAT mean = m_mean.load(memory_order_relaxed);
     ++count;
     mean +=  (val - mean) / count;
+    m_mean.store(mean, memory_order_relaxed);
+    m_count.store(count, memory_order_relaxed);
+}
+
+template<typename FLOAT>
+void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val, FLOAT cnt)
+{
+    FLOAT count = m_count.load(memory_order_relaxed);
+    FLOAT mean = m_mean.load(memory_order_relaxed);
+    count += cnt;
+    mean +=  cnt * (val - mean) / count;
     m_mean.store(mean, memory_order_relaxed);
     m_count.store(count, memory_order_relaxed);
 }
