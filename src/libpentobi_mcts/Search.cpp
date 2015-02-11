@@ -326,12 +326,13 @@ string Search::get_info() const
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
         s << "All:";
-        for (unsigned i = 0; i < libpentobi_base::get_nu_colors(m_variant); ++i)
+        for (PlayerInt i = 0; i < libpentobi_base::get_nu_colors(m_variant);
+             ++i)
         {
-            if (get_root_val()[i].get_count() == 0)
+            if (get_root_val(i).get_count() == 0)
                 s << " -";
             else
-                s << " " << setprecision(2) << get_root_val()[i].get_mean();
+                s << " " << setprecision(2) << get_root_val(i).get_mean();
         }
         s << ", ";
     }

@@ -168,7 +168,6 @@ public:
 
     static_assert(! SearchParamConst::use_lgr || lgr_hash_table_size > 0, "");
 
-    typedef array<StatisticsDirtyLockFree<Float>, max_players> RootStat;
 
     /** Constructor.
         @param nu_threads
@@ -384,8 +383,16 @@ public:
         of the callback function are: elapsed time, estimated remaining time. */
     void set_callback(function<void(double, double)> callback);
 
-    /** Get mean evaluation for all players at root node. */
-    const RootStat& get_root_val() const;
+    /** Get evaluation for a player at root node. */
+    const StatisticsDirtyLockFree<Float>& get_root_val(PlayerInt player) const;
+
+    /** Get evaluation for get_player() at root node. */
+    const StatisticsDirtyLockFree<Float>& get_root_val() const;
+
+    /** The number of times the root node was visited.
+        This is equal to the number of simulations plus the visit count
+        of a subtree reused from the previous search. */
+    Float get_root_visit_count() const;
 
     /** Create the threads used in the search.
         This cannot be done in the constructor because it uses the virtual
@@ -604,7 +611,7 @@ private:
     Tree m_tree;
 
     /** See get_root_val(). */
-    RootStat m_root_val;
+    array<StatisticsDirtyLockFree<Float>, max_players> m_root_val;
 
     LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
 
@@ -631,6 +638,9 @@ private:
 
     bool check_cannot_change(ThreadState& thread_state, Float remaining) const;
 
+    bool estimate_reused_root_val(Tree& tree, const Node& root, Float& value,
+                                  Float& count);
+
     bool expand_node(ThreadState& thread_state, const Node& node,
                      const Node*& best_child);
 
@@ -642,8 +652,6 @@ private:
 
     bool prune(TimeSource& time_source, double time, double max_time,
                Float prune_min_count, Float& new_prune_min_count);
-
-    void restore_root_from_children(Tree& tree, const Node& root);
 
     void search_loop(ThreadState& thread_state);
 
@@ -1025,9 +1033,24 @@ inline size_t SearchBase<S, M, R>::get_nu_simulations() const
 }
 
 template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::get_root_val() const -> const RootStat&
+inline auto SearchBase<S, M, R>::get_root_val(PlayerInt player) const
+-> const StatisticsDirtyLockFree<Float>&
 {
-    return m_root_val;
+    LIBBOARDGAME_ASSERT(player < m_nu_players);
+    return m_root_val[player];
+}
+
+template<class S, class M, class R>
+inline auto SearchBase<S, M, R>::get_root_val() const
+-> const StatisticsDirtyLockFree<Float>&
+{
+    return get_root_val(get_player());
+}
+
+template<class S, class M, class R>
+inline auto SearchBase<S, M, R>::get_root_visit_count() const -> Float
+{
+    return m_tree.get_root().get_visit_count();
 }
 
 template<class S, class M, class R>
@@ -1248,9 +1271,9 @@ string SearchBase<S, M, R>::get_info() const
         s << "No simulations in thread 0\n";
         return s.str();
     }
-    s << fixed << setprecision(2) << "Val: " << root.get_value()
-      << setprecision(0) << ", ValCnt: " << root.get_value_count()
-      << ", VstCnt: " << root.get_visit_count()
+    s << fixed << setprecision(2) << "Val: " << get_root_val().get_mean()
+      << setprecision(0) << ", ValCnt: " << get_root_val().get_count()
+      << ", VstCnt: " << get_root_visit_count()
       << ", Sim: " << m_nu_simulations;
     auto child = select_child_final(root);
     if (child && root.get_visit_count() > 0)
@@ -1309,28 +1332,28 @@ bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
     }
 }
 
-/** Restore the value and count of a root node from its children.
-    The value of a root node has a different meaning than than values of inner
-    nodes (position vs. move value) so after reusing a subtree, we need to
-    restore it from the children. We use only the child with the highest count
-    to avoid backing up many values of unvisited children that have only a
-    value and count from prior knowledge initialization. */
+/** Estimate the value and count of a root node from its children.
+    After reusing a subtree, we don't know the value of the root because nodes
+    only store the value of moves. To estimate the root value, we use the child
+    with the highest visit count. */
 template<class S, class M, class R>
-void SearchBase<S, M, R>::restore_root_from_children(Tree& tree, const Node& root)
+bool SearchBase<S, M, R>::estimate_reused_root_val(Tree& tree,
+                                                   const Node& root,
+                                                   Float& value, Float& count)
 {
-    const Node* best_child = nullptr;
+    const Node* best = nullptr;
     Float max_count = 0;
     for (auto& i : tree.get_children(root))
         if (i.get_visit_count() > max_count)
         {
-            best_child = &i;
+            best = &i;
             max_count = i.get_visit_count();
         }
-    if (! best_child)
-        tree.init_root_value(get_tie_value(), 0);
-    else
-        tree.init_root_value(best_child->get_value(),
-                             best_child->get_value_count());
+    if (! best)
+        return false;
+    value = best->get_value();
+    count = best->get_value_count();
+    return count > 0;
 }
 
 template<class S, class M, class R>
@@ -1390,11 +1413,10 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                 auto& tmp_tree_root = m_tmp_tree.get_root();
                 if (! is_same)
                 {
-                    restore_root_from_children(m_tmp_tree, tmp_tree_root);
-                    auto count = tmp_tree_root.get_value_count();
-                    if (count > 0)
-                        m_root_val[m_player].add(tmp_tree_root.get_value(),
-                                                 count);
+                    Float value, count;
+                    if (estimate_reused_root_val(m_tmp_tree, tmp_tree_root,
+                                                 value, count))
+                        m_root_val[m_player].add(value, count);
                 }
                 if (aborted && ! always_search)
                     return false;
@@ -1857,7 +1879,6 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
     const auto& simulation = thread_state.simulation;
     auto& nodes = simulation.nodes;
     auto& eval = simulation.eval;
-    m_tree.add_value(m_tree.get_root(), eval[m_player]);
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
     for (unsigned i = 1; i < nu_nodes; ++i)
     {

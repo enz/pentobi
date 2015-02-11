@@ -182,12 +182,9 @@ Move Player::genmove(const Board& bd, Color c)
         return Move::null();
     // Resign only in two-player game variants
     if (get_nu_players(variant) == 2)
-    {
-        auto& root = m_search.get_tree().get_root();
-        if (root.get_visit_count() > m_resign_min_simulations
-            && root.get_value() < m_resign_threshold)
+        if (m_search.get_root_visit_count() > m_resign_min_simulations
+                && m_search.get_root_val().get_mean() < m_resign_threshold)
             m_resign = true;
-    }
     return mv;
 }
 

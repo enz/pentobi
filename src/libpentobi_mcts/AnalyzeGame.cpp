@@ -81,8 +81,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                                   min_simulations, max_time, time_source);
                     if (get_abort())
                         break;
-                    auto& search_root = search.get_tree().get_root();
-                    if (search_root.get_visit_count() == 0)
+                    if (search.get_root_visit_count() == 0)
                     {
                         m_moves.push_back(mv);
                         m_has_value.push_back(false);
@@ -92,7 +91,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     {
                         m_moves.push_back(mv);
                         m_has_value.push_back(true);
-                        m_values.push_back(search_root.get_value());
+                        m_values.push_back(search.get_root_val().get_mean());
                     }
                 }
                 catch (const Exception&)
