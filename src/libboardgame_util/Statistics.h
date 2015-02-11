@@ -353,9 +353,7 @@ public:
 
     StatisticsDirtyLockFree& operator=(const StatisticsDirtyLockFree& s);
 
-    void add(FLOAT val);
-
-    void add(FLOAT val, FLOAT cnt);
+    void add(FLOAT val, FLOAT weight = 1);
 
     void clear(FLOAT init_val = 0);
 
@@ -390,23 +388,12 @@ StatisticsDirtyLockFree<FLOAT>::operator=(const StatisticsDirtyLockFree& s)
 }
 
 template<typename FLOAT>
-void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val)
+void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val, FLOAT weight)
 {
     FLOAT count = m_count.load(memory_order_relaxed);
     FLOAT mean = m_mean.load(memory_order_relaxed);
-    ++count;
-    mean +=  (val - mean) / count;
-    m_mean.store(mean, memory_order_relaxed);
-    m_count.store(count, memory_order_relaxed);
-}
-
-template<typename FLOAT>
-void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val, FLOAT cnt)
-{
-    FLOAT count = m_count.load(memory_order_relaxed);
-    FLOAT mean = m_mean.load(memory_order_relaxed);
-    count += cnt;
-    mean +=  cnt * (val - mean) / count;
+    count += weight;
+    mean +=  weight * (val - mean) / count;
     m_mean.store(mean, memory_order_relaxed);
     m_count.store(count, memory_order_relaxed);
 }

@@ -89,13 +89,9 @@ public:
 
     void unlink_children();
 
-    void add_value(Float v);
+    void add_value(Float v, Float weight = 1);
 
-    void add_value(Float v, Float weight);
-
-    void remove_value(Float v);
-
-    void remove_value(Float v, Float weight);
+    void remove_value(Float v, Float weight = 1);
 
     void inc_visit_count();
 
@@ -116,19 +112,6 @@ private:
 
     NodeIdx m_first_child;
 };
-
-template<typename M, typename F, bool MT>
-void Node<M, F, MT>::add_value(Float v)
-{
-    // Intentionally uses no synchronization and does not care about
-    // lost updates in multi-threaded mode
-    Float count = m_value_count.load(memory_order_relaxed);
-    Float value = m_value.load(memory_order_relaxed);
-    ++count;
-    value += (v - value) / count;
-    m_value.store(value, memory_order_relaxed);
-    m_value_count.store(count, memory_order_relaxed);
-}
 
 template<typename M, typename F, bool MT>
 void Node<M, F, MT>::add_value(Float v, Float weight)
@@ -248,24 +231,6 @@ inline void Node<M, F, MT>::link_children(NodeIdx first_child,
     LIBBOARDGAME_ASSERT(first_child != 0);
     m_first_child = first_child;
     m_nu_children.store(nu_children, memory_order_release);
-}
-
-template<typename M, typename F, bool MT>
-void Node<M, F, MT>::remove_value(Float v)
-{
-    // Intentionally uses no synchronization and does not care about
-    // lost updates in multi-threaded mode
-    Float count = m_value_count.load(memory_order_relaxed);
-    if (count > 1)
-    {
-        Float value = m_value.load(memory_order_relaxed);
-        --count;
-        value -= (v - value) / count;
-        m_value.store(value, memory_order_relaxed);
-        m_value_count.store(count, memory_order_relaxed);
-    }
-    else
-        m_value_count.store(0, memory_order_relaxed);
 }
 
 template<typename M, typename F, bool MT>
