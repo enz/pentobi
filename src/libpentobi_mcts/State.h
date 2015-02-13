@@ -263,8 +263,8 @@ private:
     /** Equivalent to but faster than m_bd.get_move_info_ext() */
     const MoveInfoExt& get_move_info_ext(Move move) const;
 
-    PrecompMoves::LocalMovesListRange get_moves(Color c, Piece piece, Point p,
-                                                unsigned adj_status) const;
+    PrecompMoves::Range get_moves(Color c, Piece piece, Point p,
+                                  unsigned adj_status) const;
 
     const PieceMap<bool>& get_pieces_considered() const;
 
@@ -366,8 +366,8 @@ inline const MoveInfoExt& State::get_move_info_ext(Move mv) const
     return *(m_move_info_ext_array + mv.to_int());
 }
 
-inline PrecompMoves::LocalMovesListRange State::get_moves(
-                      Color c, Piece piece, Point p, unsigned adj_status) const
+inline PrecompMoves::Range State::get_moves(Color c, Piece piece, Point p,
+                                            unsigned adj_status) const
 {
     return m_shared_const.precomp_moves[c].get_moves(piece, p, adj_status);
 }

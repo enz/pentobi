@@ -52,10 +52,10 @@ public:
 
     /** Begin/end range for lists with moves at a given point.
         See get_moves(). */
-    class LocalMovesListRange
+    class Range
     {
     public:
-        LocalMovesListRange(const Move* begin, const Move* end)
+        Range(const Move* begin, const Move* end)
         {
             m_begin = begin;
             m_end = end;
@@ -84,18 +84,17 @@ public:
     void set_list_range(Point p, unsigned adj_status, Piece piece,
                         unsigned begin, unsigned size)
     {
-        m_moves_range[p][adj_status][piece] = ListIndex(begin, size);
+        m_moves_range[p][adj_status][piece] = CompressedRange(begin, size);
     }
 
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
-    LocalMovesListRange get_moves(Piece piece, Point p,
-                                  unsigned adj_status = 0) const
+    Range get_moves(Piece piece, Point p, unsigned adj_status = 0) const
     {
-        ListIndex idx = m_moves_range[p][adj_status][piece];
-        auto begin = move_lists_begin() + idx.begin;
-        auto end = begin + idx.size;
-        return LocalMovesListRange(begin, end);
+        auto& range = m_moves_range[p][adj_status][piece];
+        auto begin = move_lists_begin() + range.begin;
+        auto end = begin + range.size;
+        return Range(begin, end);
     }
 
     /** Begin of storage for move lists.
@@ -107,18 +106,15 @@ public:
     const Move* move_lists_begin() const { return &(*m_move_lists.begin()); }
 
 private:
-    /** Compressed begin/end range for lists with moves at a given point.
-        This struct will be unpacked into a LocalMovesListRange as a return
-        value for get_moves(). */
-    struct ListIndex
+    struct CompressedRange
     {
         unsigned begin : 24;
 
         unsigned size : 8;
 
-        ListIndex() { }
+        CompressedRange() { }
 
-        ListIndex(unsigned begin, unsigned size)
+        CompressedRange(unsigned begin, unsigned size)
         {
             LIBBOARDGAME_ASSERT(begin < max_move_lists_sum_length);
             LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
@@ -130,7 +126,7 @@ private:
     };
 
     /** See m_move_lists. */
-    Grid<array<PieceMap<ListIndex>, nu_adj_status>> m_moves_range;
+    Grid<array<PieceMap<CompressedRange>, nu_adj_status>> m_moves_range;
 
     /** Compact representation of lists of moves of a piece at a point
         constrained by the forbidden status of adjacent points.

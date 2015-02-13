@@ -89,8 +89,8 @@ public:
 
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
-    PrecompMoves::LocalMovesListRange get_moves(Piece piece, Point p,
-                                                unsigned adj_status = 0) const
+    PrecompMoves::Range get_moves(Piece piece, Point p,
+                                  unsigned adj_status = 0) const
     {
         return m_precomp_moves.get_moves(piece, p, adj_status);
     }

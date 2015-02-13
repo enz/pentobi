@@ -32,8 +32,6 @@ class Board
 public:
     typedef Grid<PointState> PointStateGrid;
 
-    typedef PrecompMoves::LocalMovesListRange LocalMovesListRange;
-
     /** Maximum number of pieces per player in any game variant. */
     static const unsigned max_pieces = Setup::max_pieces;
 
@@ -243,7 +241,7 @@ public:
 
     unsigned get_adj_status(Point p, Color c) const;
 
-    LocalMovesListRange get_moves(Piece piece, Point p,
+    PrecompMoves::Range get_moves(Piece piece, Point p,
                                   unsigned adj_status) const;
 
     /** Get score.
@@ -522,8 +520,8 @@ inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
     return *(m_move_info_ext_2_array + mv.to_int());
 }
 
-inline Board::LocalMovesListRange Board::get_moves(Piece piece, Point p,
-                                                   unsigned adj_status) const
+inline PrecompMoves::Range Board::get_moves(Piece piece, Point p,
+                                            unsigned adj_status) const
 {
     return m_bc->get_moves(piece, p, adj_status);
 }
