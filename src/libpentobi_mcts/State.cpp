@@ -341,14 +341,14 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
     {
         if (log_simulations)
             log("Playing last good reply 2");
-        mv = PlayerMove<Move>(to_play.to_int(), lgr2);
+        mv = PlayerMove<Move>(get_to_play(), lgr2);
         return true;
     }
     if (lgr1.is_regular() && m_bd.is_legal_nonpass(lgr1))
     {
         if (log_simulations)
             log("Playing last good reply 1");
-        mv = PlayerMove<Move>(to_play.to_int(), lgr1);
+        mv = PlayerMove<Move>(get_to_play(), lgr1);
         return true;
     }
 
@@ -383,7 +383,7 @@ bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
     auto random = m_total_gamma * m_random.generate_double();
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
-    mv = PlayerMove<Move>(to_play.to_int(),
+    mv = PlayerMove<Move>(get_to_play(),
                           moves[static_cast<unsigned>(pos - begin)]);
     return true;
 }
