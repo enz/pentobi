@@ -41,7 +41,6 @@ Engine::Engine(Variant variant, int level, bool use_book,
     create_player(variant, books_dir, nu_threads, memory);
     get_mcts_player().set_use_book(use_book);
     get_mcts_player().set_level(level);
-    add("gen_playout_move", &Engine::cmd_gen_playout_move);
     add("get_value", &Engine::cmd_get_value);
     add("name", &Engine::cmd_name);
     add("param", &Engine::cmd_param);
@@ -176,19 +175,6 @@ void Engine::create_player(Variant variant, const string& books_dir,
 {
     m_player.reset(new Player(variant, books_dir, nu_threads, memory));
     set_player(*m_player);
-}
-
-void Engine::cmd_gen_playout_move(Response& response)
-{
-    auto& state = get_mcts_player().get_search().get_state(0);
-    state.start_search();
-    state.start_simulation(0);
-    state.finish_in_tree();
-    PlayerMove<Move> mv;
-    if (! state.gen_playout_move(Move::null(), Move::null(), mv))
-        throw Failure("terminal playout position");
-    auto& bd = get_board();
-    response << bd.to_string(mv.move);
 }
 
 Player& Engine::get_mcts_player()

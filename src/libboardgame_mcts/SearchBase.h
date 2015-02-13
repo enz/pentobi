@@ -1163,31 +1163,23 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::playout(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
-    auto& simulation = thread_state.simulation;
     state.start_playout();
+    auto& simulation = thread_state.simulation;
+    auto& moves = simulation.moves;
+    auto nu_moves = moves.size();
+    Move last = nu_moves > 0 ? moves[nu_moves - 1].move : Move::null();
+    Move second_last = nu_moves > 1 ? moves[nu_moves - 2].move : Move::null();
     while (true)
     {
         Move lgr1 = Move::null();
         Move lgr2 = Move::null();
-        if (SearchParamConst::use_lgr)
-        {
-            auto& moves = simulation.moves;
-            auto nu_moves = moves.size();
-            if (nu_moves > 0)
-            {
-                Move last_mv = moves[nu_moves - 1].move;
-                Move second_last_mv = Move::null();
-                if (nu_moves > 1)
-                    second_last_mv = moves[nu_moves - 2].move;
-                m_lgr.get(state.get_to_play(), last_mv, second_last_mv, lgr1,
-                          lgr2);
-            }
-        }
-        PlayerMove move;
-        if (! state.gen_playout_move(lgr1, lgr2, move))
+        PlayerMove mv;
+        if (! state.gen_playout_move(m_lgr, last, second_last, mv))
             break;
-        simulation.moves.push_back(move);
-        state.play_playout(move.move);
+        simulation.moves.push_back(mv);
+        state.play_playout(mv.move);
+        second_last = last;
+        last = mv.move;
     }
 }
 
@@ -1764,19 +1756,19 @@ void SearchBase<S, M, R>::update_lgr(ThreadState& thread_state)
     auto nu_moves = moves.size();
     if (nu_moves < 2)
         return;
-    Move last_mv = moves[0].move;
-    Move second_last_mv = Move::null();
+    Move last = moves[0].move;
+    Move second_last = Move::null();
     for (unsigned i = 1; i < nu_moves; ++i)
     {
         PlayerMove reply = moves[i];
         PlayerInt player = reply.player;
         Move mv = reply.move;
         if (is_winner[player])
-            m_lgr.store(player, last_mv, second_last_mv, mv);
+            m_lgr.store(player, last, second_last, mv);
         else
-            m_lgr.forget(player, last_mv, second_last_mv, mv);
-        second_last_mv = last_mv;
-        last_mv = mv;
+            m_lgr.forget(player, last, second_last, mv);
+        second_last = last;
+        last = mv;
     }
 }
 

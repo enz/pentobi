@@ -52,14 +52,13 @@ public:
 
     void init(PlayerInt nu_players);
 
-    void store(PlayerInt player, Move last_mv, Move second_last_mv,
-               Move reply);
+    void store(PlayerInt player, Move last, Move second_last, Move reply);
 
-    void forget(PlayerInt player, Move last_mv, Move second_last_mv,
-                Move reply);
+    void forget(PlayerInt player, Move last, Move second_last, Move reply);
 
-    void get(PlayerInt player, Move last_mv, Move second_last_mv,
-             Move& lgr1, Move& lgr2) const;
+    Move get_lgr1(PlayerInt player, Move last) const;
+
+    Move get_lgr2(PlayerInt player, Move last, Move second_last) const;
 
 private:
     size_t m_hash[Move::range];
@@ -68,7 +67,7 @@ private:
 
     Atomic<typename Move::IntType, MT> m_lgr2[max_players][hash_table_size];
 
-    size_t get_index(Move last_mv, Move second_last_mv) const;
+    size_t get_index(Move last, Move second_last) const;
 };
 
 template<class M, unsigned P, size_t S, bool MT>
@@ -80,21 +79,26 @@ LastGoodReply<M, P, S, MT>::LastGoodReply()
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline size_t LastGoodReply<M, P, S, MT>::get_index(Move last_mv,
-                                                    Move second_last_mv) const
+inline size_t LastGoodReply<M, P, S, MT>::get_index(Move last,
+                                                    Move second_last) const
 {
-    size_t hash = (m_hash[last_mv.to_int()] ^ m_hash[second_last_mv.to_int()]);
+    size_t hash = (m_hash[last.to_int()] ^ m_hash[second_last.to_int()]);
     return hash % hash_table_size;
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline void LastGoodReply<M, P, S, MT>::get(PlayerInt player, Move last_mv,
-                                            Move second_last_mv,
-                                            Move& lgr1, Move& lgr2) const
+inline auto LastGoodReply<M, P, S, MT>::get_lgr1(PlayerInt player,
+                                                 Move last) const -> Move
 {
-    auto index = get_index(last_mv, second_last_mv);
-    lgr2 = Move(m_lgr2[player][index].load(memory_order_relaxed));
-    lgr1 = Move(m_lgr1[player][last_mv.to_int()].load(memory_order_relaxed));
+    return Move(m_lgr1[player][last.to_int()].load(memory_order_relaxed));
+}
+
+template<class M, unsigned P, size_t S, bool MT>
+inline auto LastGoodReply<M, P, S, MT>::get_lgr2(
+        PlayerInt player, Move last, Move second_last) const -> Move
+{
+    auto index = get_index(last, second_last);
+    return Move(m_lgr2[player][index].load(memory_order_relaxed));
 }
 
 template<class M, unsigned P, size_t S, bool MT>
@@ -117,32 +121,32 @@ void LastGoodReply<M, P, S, MT>::init(PlayerInt nu_players)
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline void LastGoodReply<M, P, S, MT>::forget(PlayerInt player, Move last_mv,
-                                               Move second_last_mv, Move reply)
+inline void LastGoodReply<M, P, S, MT>::forget(PlayerInt player, Move last,
+                                               Move second_last, Move reply)
 {
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
     {
-        auto index = get_index(last_mv, second_last_mv);
+        auto index = get_index(last, second_last);
         auto& stored_reply = m_lgr2[player][index];
         if (stored_reply.load(memory_order_relaxed) == reply_int)
             stored_reply.store(null_int, memory_order_relaxed);
     }
-    auto& stored_reply = m_lgr1[player][last_mv.to_int()];
+    auto& stored_reply = m_lgr1[player][last.to_int()];
     if (stored_reply.load(memory_order_relaxed) == reply_int)
         stored_reply.store(null_int, memory_order_relaxed);
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline void LastGoodReply<M, P, S, MT>::store(PlayerInt player, Move last_mv,
-                                              Move second_last_mv, Move reply)
+inline void LastGoodReply<M, P, S, MT>::store(PlayerInt player, Move last,
+                                              Move second_last, Move reply)
 {
     auto reply_int = reply.to_int();
     {
-        auto index = get_index(last_mv, second_last_mv);
+        auto index = get_index(last, second_last);
         m_lgr2[player][index].store(reply_int, memory_order_relaxed);
     }
-    m_lgr1[player][last_mv.to_int()].store(reply_int, memory_order_relaxed);
+    m_lgr1[player][last.to_int()].store(reply_int, memory_order_relaxed);
 }
 
 //-----------------------------------------------------------------------------

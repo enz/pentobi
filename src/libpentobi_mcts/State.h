@@ -10,6 +10,7 @@
 #include "PlayoutFeatures.h"
 #include "PriorKnowledge.h"
 #include "StateUtil.h"
+#include "libboardgame_mcts/LastGoodReply.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
@@ -20,6 +21,7 @@
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_mcts::LastGoodReply;
 using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
 using libboardgame_util::log;
@@ -100,9 +102,15 @@ class State
 {
 public:
     typedef libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>
-    Node;
+        Node;
 
     typedef libboardgame_mcts::Tree<Node> Tree;
+
+    typedef libboardgame_mcts::LastGoodReply<Move,
+                                             SearchParamConst::max_players,
+                                             SearchParamConst::lgr_hash_table_size,
+                                             SearchParamConst::multithread>
+        LastGoodReply;
 
     /** Constructor.
         @param initial_variant Game variant to initialize the internal
@@ -138,7 +146,8 @@ public:
     /** Generate a playout move.
         @return @c false if end of game was reached, and no move was
         generated. */
-    bool gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& move);
+    bool gen_playout_move(const LastGoodReply& lgr, Move last,
+                          Move second_last, PlayerMove<Move>& move);
 
     void evaluate_playout(array<Float, 6>& result);
 
@@ -322,7 +331,8 @@ inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
                                    m_is_symmetry_broken, expander, init_val);
 }
 
-inline bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
+inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
+                                    Move second_last, PlayerMove<Move>& mv)
 {
     if (m_nu_passes == m_nu_colors)
         return false;
@@ -334,18 +344,21 @@ inline bool State::gen_playout_move(Move lgr1, Move lgr2, PlayerMove<Move>& mv)
             log("Terminate playout. Symmetry not broken.");
         return false;
     }
+    PlayerInt player = get_to_play();
+    Move lgr2 = lgr.get_lgr2(player, last, second_last);
     if (! lgr2.is_null() && m_bd.is_legal(lgr2))
     {
         if (log_simulations)
             log("Playing last good reply 2");
-        mv = PlayerMove<Move>(get_to_play(), lgr2);
+        mv = PlayerMove<Move>(player, lgr2);
         return true;
     }
+    Move lgr1 = lgr.get_lgr1(player, last);
     if (! lgr1.is_null() && m_bd.is_legal(lgr1))
     {
         if (log_simulations)
             log("Playing last good reply 1");
-        mv = PlayerMove<Move>(get_to_play(), lgr1);
+        mv = PlayerMove<Move>(player, lgr1);
         return true;
     }
     return gen_playout_move_full(mv);

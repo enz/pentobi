@@ -32,7 +32,6 @@ public:
 
     ~Engine();
 
-    void cmd_gen_playout_move(Response&);
     void cmd_param(const Arguments&, Response&);
     void cmd_get_value(Response&);
     void cmd_move_values(Response&);
