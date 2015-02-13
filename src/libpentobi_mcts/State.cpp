@@ -357,7 +357,7 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     }
 
     auto& moves = m_moves[to_play];
-    double total_gamma =  m_cumulative_gamma[moves.size() - 1];
+    double total_gamma = m_cumulative_gamma[moves.size() - 1];
     if (log_simulations)
         log("Moves: ", moves.size(), ", total_gamma: ", total_gamma);
     auto begin = m_cumulative_gamma.begin();
@@ -365,7 +365,7 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     auto random = m_random.generate_double(0, total_gamma);
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
-    mv = PlayerMove<Move>(to_play.to_int(),
+    mv = PlayerMove<Move>(get_to_play(),
                           moves[static_cast<unsigned>(pos - begin)]);
     return true;
 }
