@@ -782,8 +782,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="356"/>
-        <source>Pentobi is a computer opponent for the board game Blokus.</source>
-        <translation>Pentobi ist ein Computer-Gegner für das Brettspiel Blokus.</translation>
+        <source>Computer opponent for the board game Blokus.</source>
+        <translation>Computer-Gegner für das Brettspiel Blokus.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="528"/>
