@@ -13,10 +13,6 @@ Version 9.0.UNKNOWN (v9-fixes)
   work if the game variant was implicitly changed by opening a file.
 * "View/Move Numbers/Last" did not behave correctly after all colors were
   enabled in the Computer Colors dialog while a move generation was running.
-* Game analysis sometimes produced outlier values for positions with only
-  one legal move.
-* Fixed a bug that could have affected the playing strength in game variant
-  Classic for 3 players.
 
 
 Version 9.0 (10 Dec 2014)
