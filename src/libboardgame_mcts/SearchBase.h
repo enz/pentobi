@@ -979,7 +979,7 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
     Float min_count = static_cast<Float>(SearchParamConst::child_min_count);
     auto thread_id = thread_state.thread_id;
     typename Tree::NodeExpander expander(thread_id, m_tree, min_count);
-    state.gen_children(expander, m_root_val[state.get_to_play()].get_mean());
+    state.gen_children(expander, m_root_val[state.get_player()].get_mean());
     if (! expander.is_tree_full())
     {
         expander.link_children(m_tree, node);
@@ -1230,7 +1230,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
             m_tree.add_value(*node, 0);
         simulation.nodes.push_back(node);
         Move mv = node->get_move();
-        simulation.moves.push_back(PlayerMove(state.get_to_play(), mv));
+        simulation.moves.push_back(PlayerMove(state.get_player(), mv));
         state.play_in_tree(mv);
         expand_threshold += m_expand_threshold_inc;
     }
@@ -1243,7 +1243,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         {
             simulation.nodes.push_back(node);
             Move mv = node->get_move();
-            simulation.moves.push_back(PlayerMove(state.get_to_play(), mv));
+            simulation.moves.push_back(PlayerMove(state.get_player(), mv));
             state.play_expanded_child(mv);
         }
     }

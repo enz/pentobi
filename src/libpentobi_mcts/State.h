@@ -133,7 +133,8 @@ public:
     /** Finish in-tree phase without expanding a node. */
     void finish_in_tree_no_expansion();
 
-    PlayerInt get_to_play() const;
+    /** Get current player to play. */
+    PlayerInt get_player() const;
 
     void start_search();
 
@@ -344,7 +345,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
             log("Terminate playout. Symmetry not broken.");
         return false;
     }
-    PlayerInt player = get_to_play();
+    PlayerInt player = get_player();
     Move lgr2 = lgr.get_lgr2(player, last, second_last);
     if (! lgr2.is_null() && m_bd.is_legal(lgr2))
     {
@@ -384,7 +385,7 @@ inline PrecompMoves::Range State::get_moves(Color c, Piece piece, Point p,
     return m_shared_const.precomp_moves[c].get_moves(piece, p, adj_status);
 }
 
-inline PlayerInt State::get_to_play() const
+inline PlayerInt State::get_player() const
 {
     unsigned player = m_bd.get_to_play().to_int();
     if ( m_bd.get_variant() == Variant::classic_3 && player == 3)
