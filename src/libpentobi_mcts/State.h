@@ -414,10 +414,10 @@ inline void State::play_in_tree(Move mv)
 
 inline void State::play_playout(Move mv)
 {
-    LIBBOARDGAME_ASSERT(m_bd.is_legal(mv));
     auto to_play = m_bd.get_to_play();
+    LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
     m_new_moves[to_play].push_back(mv);
-    m_bd.play(mv);
+    m_bd.play(to_play, mv);
     m_nu_passes = 0;
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);
