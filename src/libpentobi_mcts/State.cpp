@@ -455,7 +455,8 @@ void State::init_moves_with_gamma(Color c)
             if (! m_bd.is_forbidden(p, c))
                 add_moves(p, c, pieces_considered);
     m_is_move_list_initialized[c] = true;
-    m_new_moves[c].clear();
+    m_nu_new_moves[c] = 0;
+    m_last_attach_points_end[c] = m_bd.get_attach_points(c).end();
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
@@ -495,7 +496,8 @@ void State::init_moves_without_gamma(Color c)
         moves.resize(nu_moves);
     }
     m_is_move_list_initialized[c] = true;
-    m_new_moves[c].clear();
+    m_nu_new_moves[c] = 0;
+    m_last_attach_points_end[c] = m_bd.get_attach_points(c).end();
     if (moves.empty() && ! m_force_consider_all_pieces)
     {
         m_force_consider_all_pieces = true;
@@ -607,7 +609,6 @@ void State::start_simulation(size_t n)
         m_has_moves[c] = true;
         m_is_move_list_initialized[c] = false;
         m_playout_features[c].restore_snapshot(m_bd);
-        m_new_moves[c].clear();
         m_moves_added_at[c].fill(false, geo);
     }
     m_nu_passes = 0;
@@ -622,15 +623,15 @@ void State::update_moves(Color c)
 
     // Find old moves that are still legal
     auto& is_forbidden = m_bd.is_forbidden(c);
-    auto& new_moves = m_new_moves[c];
     auto& moves = m_moves[c];
     auto old_size = moves.size();
     moves.clear();
     unsigned nu_moves = 0;
     double total_gamma = 0;
-    if (new_moves.size() == 1 && m_bd.get_nu_piece_instances() == 1)
+    LIBBOARDGAME_ASSERT(m_nu_new_moves[c] > 0);
+    if (m_nu_new_moves[c] == 1 && m_bd.get_nu_piece_instances() == 1)
     {
-        Piece piece = get_move_info(new_moves[0]).get_piece();
+        Piece piece = m_last_piece[c];
         for (unsigned i = 0; i < old_size; ++i)
         {
             LIBBOARDGAME_ASSERT(i >= moves.size());
@@ -665,17 +666,14 @@ void State::update_moves(Color c)
     for (Piece piece : m_bd.get_pieces_left(c))
         if ((*m_is_piece_considered[c])[piece])
             pieces_considered.push_back(piece);
-    for (Move mv : new_moves)
-    {
-        auto& info_ext = get_move_info_ext(mv);
-        auto i = info_ext.begin_attach();
-        auto end = info_ext.end_attach();
-        do
-            if (! is_forbidden[*i] && ! m_moves_added_at[c][*i])
-                add_moves(*i, c, pieces_considered);
-        while (++i != end);
-    }
-    new_moves.clear();
+    auto& attach_points = m_bd.get_attach_points(c);
+    auto begin = m_last_attach_points_end[c];
+    auto end = attach_points.end();
+    for (auto i = begin; i != end; ++i)
+        if (! is_forbidden[*i] && ! m_moves_added_at[c][*i])
+            add_moves(*i, c, pieces_considered);
+    m_nu_new_moves[c] = 0;
+    m_last_attach_points_end[c] = end;
 
     // Generate moves for pieces not considered in the last position
     auto& is_piece_considered = *m_is_piece_considered[c];

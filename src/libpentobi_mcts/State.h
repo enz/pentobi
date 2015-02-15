@@ -198,8 +198,16 @@ private:
     /** Gamma value for PlayoutFeatures::get_nu_attach(). */
     array<double, PieceInfo::max_size + 1> m_gamma_nu_attach;
 
-    /** Moves played by a color since the last update of its move list. */
-    ColorMap<ArrayList<Move, Board::max_player_moves>> m_new_moves;
+    /** Number of moves played by a color since the last update of its move
+        list. */
+    ColorMap<unsigned> m_nu_new_moves;
+
+    /** Board::get_attach_points().end() for a color at the last update of
+        its move list. */
+    ColorMap<PointList::const_iterator> m_last_attach_points_end;
+
+    /** Last piece played by a color since the last update of its move list. */
+    ColorMap<Piece> m_last_piece;
 
     ColorMap<bool> m_is_move_list_initialized;
 
@@ -416,8 +424,9 @@ inline void State::play_playout(Move mv)
 {
     auto to_play = m_bd.get_to_play();
     LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
-    m_new_moves[to_play].push_back(mv);
     m_bd.play(to_play, mv);
+    ++m_nu_new_moves[to_play];
+    m_last_piece[to_play] = get_move_info(mv).get_piece();
     m_nu_passes = 0;
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);
