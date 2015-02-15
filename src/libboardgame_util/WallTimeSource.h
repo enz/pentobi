@@ -20,12 +20,7 @@ class WallTimeSource
     : public TimeSource
 {
 public:
-    WallTimeSource();
-
     double operator()() override;
-
-private:
-    std::chrono::system_clock::time_point m_start;
 };
 //-----------------------------------------------------------------------------
 
