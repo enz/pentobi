@@ -16,13 +16,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/file.h>
-#include "libboardgame_util/Exception.h"
 #include "libboardgame_util/StringUtil.h"
 
 using libboardgame_util::from_string;
 using libboardgame_util::split;
 using libboardgame_util::trim;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
@@ -34,9 +32,9 @@ Output::Output(Variant variant, const string& prefix, bool create_tree)
 {
     m_lock_fd = creat((prefix + ".lock").c_str(), 0644);
     if (m_lock_fd == -1)
-        throw Exception("Output: could not create lock file");
+        throw runtime_error("Output: could not create lock file");
     if (flock(m_lock_fd, LOCK_EX | LOCK_NB) == -1)
-        throw Exception("Output: twogtp already running");
+        throw runtime_error("Output: twogtp already running");
     ifstream in(prefix + ".dat");
     if (! in)
         return;
@@ -51,7 +49,7 @@ Output::Output(Variant variant, const string& prefix, bool create_tree)
             continue;
         unsigned game_number;
         if (! from_string(columns[0], game_number))
-            throw Exception("Output: expected game number");
+            throw runtime_error("Output: expected game number");
         m_games.insert(make_pair(game_number, line));
     }
     while (m_games.count(m_next) != 0)

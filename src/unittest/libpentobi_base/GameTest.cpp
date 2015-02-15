@@ -34,7 +34,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_game_current_defined_invalid_root)
     {
         game.init(root);
     }
-    catch (const Exception&)
+    catch (const runtime_error&)
     {
         // ignore
     }

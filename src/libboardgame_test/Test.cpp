@@ -43,7 +43,7 @@ string get_fail_msg(const char* file, int line, const string& s)
 //-----------------------------------------------------------------------------
 
 TestFail::TestFail(const char* file, int line, const string& s)
-    : Exception(get_fail_msg(file, line, s))
+    : logic_error(get_fail_msg(file, line, s))
 {
 }
 

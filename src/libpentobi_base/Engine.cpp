@@ -134,7 +134,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
         m_game.goto_node(*node);
         board_changed();
     }
-    catch (const Exception& e)
+    catch (const runtime_error& e)
     {
         throw Failure(e.what());
     }
@@ -155,7 +155,7 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         {
             mv = bd.from_string(args.get());
         }
-        catch (Exception&)
+        catch (const runtime_error&)
         {
             ostringstream msg;
             msg << "invalid argument '" << args.get()
@@ -359,7 +359,7 @@ void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
         else
             mv = bd.from_string(args.get_remaining_line(arg_move_begin - 1));
     }
-    catch (const Exception& e)
+    catch (const runtime_error& e)
     {
         throw Failure(e.what());
     }

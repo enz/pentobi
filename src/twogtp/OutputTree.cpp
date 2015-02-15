@@ -18,7 +18,6 @@
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::TreeWriter;
-using libboardgame_util::Exception;
 using libpentobi_base::get_transforms;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MovePoints;
@@ -51,7 +50,7 @@ void add(PentobiTree& tree, const SgfNode& node, bool is_player_black,
         in >> count[0] >> real_count[0] >> avg_result[0]
            >> count[1] >> real_count[1] >> avg_result[1];
         if (! in)
-            throw Exception("OutputTree: invalid comment: " + comment);
+            throw runtime_error("OutputTree: invalid comment: " + comment);
         ++count[index];
         avg_result[index] += (result - avg_result[index]) / count[index];
         if (is_real_move)
@@ -91,7 +90,7 @@ unsigned get_real_count(PentobiTree& tree, const SgfNode& node,
     in >> count[0] >> real_count[0] >> avg_result[0]
        >> count[1] >> real_count[1] >> avg_result[1];
     if (! in)
-        throw Exception("OutputTree: invalid comment: " + comment);
+        throw runtime_error("OutputTree: invalid comment: " + comment);
     return real_count[index];
 }
 
@@ -113,7 +112,7 @@ void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
                         const array<bool, Board::max_game_moves>& is_real_move)
 {
     if (bd.has_setup())
-        throw Exception("OutputTree: setup not supported");
+        throw runtime_error("OutputTree: setup not supported");
 
     // Find the canonical representation
     ArrayList<ColorMove, Board::max_game_moves> sequence;
@@ -177,7 +176,7 @@ void OutputTree::generate_move(bool is_player_black, const Board& bd,
                                bool& play_real)
 {
     if (bd.has_setup())
-        throw Exception("OutputTree: setup not supported");
+        throw runtime_error("OutputTree: setup not supported");
     play_real = false;
     mv = Move::null();
     auto node = &m_tree.get_root();
@@ -214,9 +213,9 @@ void OutputTree::generate_move(bool is_player_black, const Board& bd,
         {
             auto color_mv = m_tree.get_move(i);
             if (color_mv.is_null())
-                throw Exception("OutputTree: tree has node without move");
+                throw runtime_error("OutputTree: tree has node without move");
             if (color_mv.color != to_play)
-                throw Exception("OutputTree: tree has node wrong move color");
+                throw runtime_error("OutputTree: tree has node wrong move color");
             mv = get_transformed(bd, color_mv.move, inv_transform);
             return;
         }

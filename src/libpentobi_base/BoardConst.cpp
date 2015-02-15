@@ -595,18 +595,18 @@ Move BoardConst::from_string(const string& s) const
         return Move::null();
     vector<string> v = split(trimmed, ',');
     if (v.size() > PieceInfo::max_size)
-        throw Exception("illegal move (too many points)");
+        throw runtime_error("illegal move (too many points)");
     MovePoints points;
     for (const auto& s : v)
     {
         Point p;
         if (! m_geo.from_string(s, p))
-            throw Exception("illegal move (invalid point)");
+            throw runtime_error("illegal move (invalid point)");
         points.push_back(p);
     }
     Move mv;
     if (! find_move(points, mv))
-        throw Exception("illegal move");
+        throw runtime_error("illegal move");
     return mv;
 }
 

@@ -28,7 +28,6 @@ SOURCES += \
     ../libboardgame_util/Assert.cpp \
     ../libboardgame_util/Barrier.cpp \
     ../libboardgame_util/CpuTimeSource.cpp \
-    ../libboardgame_util/Exception.cpp \
     ../libboardgame_util/IntervalChecker.cpp \
     ../libboardgame_util/Log.cpp \
     ../libboardgame_util/RandomGenerator.cpp \

@@ -10,6 +10,7 @@
 
 #include "BoardUpdater.h"
 
+#include <stdexcept>
 #include "BoardUtil.h"
 #include "NodeUtil.h"
 #include "libboardgame_sgf/SgfUtil.h"
@@ -42,7 +43,7 @@ void handle_setup_property(const SgfNode& node, const char* id, Color c,
         {
             mv = bd.from_string(s);
         }
-        catch (Exception& e)
+        catch (const runtime_error& e)
         {
             throw InvalidTree(e.what());
         }
@@ -67,7 +68,7 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
         {
             mv = bd.from_string(s);
         }
-        catch (Exception& e)
+        catch (const runtime_error& e)
         {
             throw InvalidTree(e.what());
         }

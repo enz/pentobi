@@ -10,13 +10,12 @@
 
 #include <cmath>
 #include <sstream>
+#include <stdexcept>
 #include <string>
-#include "libboardgame_util/Exception.h"
 
 namespace libboardgame_test {
 
 using namespace std;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
@@ -25,7 +24,7 @@ typedef void (*TestFunction)();
 //-----------------------------------------------------------------------------
 
 class TestFail
-    : public Exception
+    : public logic_error
 {
 public:
     TestFail(const char* file, int line, const string& s);

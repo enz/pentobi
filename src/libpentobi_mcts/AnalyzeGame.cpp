@@ -20,7 +20,6 @@ using libboardgame_sgf::SgfNode;
 using libboardgame_util::log;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
-using libboardgame_util::Exception;
 using libboardgame_util::WallTimeSource;
 using libpentobi_base::BoardUpdater;
 
@@ -94,7 +93,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                         m_values.push_back(search.get_root_val().get_mean());
                     }
                 }
-                catch (const Exception&)
+                catch (const runtime_error&)
                 {
                     // BoardUpdater::update() can throw on invalid SGF tree
                     // read from external file. We simply abort the analysis.

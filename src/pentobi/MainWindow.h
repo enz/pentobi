@@ -39,7 +39,6 @@ using namespace std;
 using libboardgame_sgf::SgfNode;
 using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
-using libboardgame_util::Exception;
 using libboardgame_util::RandomGenerator;
 using libpentobi_base::Board;
 using libpentobi_base::ColorMap;
@@ -698,7 +697,7 @@ private:
     void showInfo(const QString& message, const QString& infoText = "",
                   const QString& detailText = "", bool withIcon = false);
 
-    void showInvalidFile(QString file, const Exception& e);
+    void showInvalidFile(QString file, const exception& e);
 
     void showStatus(const QString& text, bool temporary = false);
 

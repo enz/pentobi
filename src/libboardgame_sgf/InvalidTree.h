@@ -7,12 +7,11 @@
 #ifndef LIBBOARDGAME_SGF_INVALID_TREE_H
 #define LIBBOARDGAME_SGF_INVALID_TREE_H
 
-#include "libboardgame_util/Exception.h"
+#include <stdexcept>
 
 namespace libboardgame_sgf {
 
 using namespace std;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
@@ -26,11 +25,11 @@ using libboardgame_util::Exception;
     errors later (e.g. when trying to update the game state to a node in the
     tree). In this case, they should throw InvalidTree. */
 class InvalidTree
-    : public Exception
+    : public runtime_error
 {
 public:
-    InvalidTree(string s)
-        : Exception(move(s))
+    InvalidTree(const string& s)
+        : runtime_error(s)
     { }
 };
 

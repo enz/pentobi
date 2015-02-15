@@ -21,7 +21,6 @@
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
 #include "libboardgame_util/Barrier.h"
-#include "libboardgame_util/Exception.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/Statistics.h"
@@ -41,7 +40,6 @@ using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::ArrayList;
 using libboardgame_util::Barrier;
-using libboardgame_util::Exception;
 using libboardgame_util::IntervalChecker;
 using libboardgame_util::StatisticsBase;
 using libboardgame_util::StatisticsDirtyLockFree;
@@ -932,8 +930,8 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::create_threads()
 {
     if (! multithread && m_nu_threads > 1)
-        throw Exception("libboardgame_mcts::Search was compiled"
-                        " without support for multithreading");
+        throw runtime_error("libboardgame_mcts::Search was compiled"
+                            " without support for multithreading");
     log("Creating ", m_nu_threads, " threads");
     m_threads.clear();
     m_threads.reserve(m_nu_threads);

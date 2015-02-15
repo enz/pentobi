@@ -12,7 +12,6 @@
 #include <sstream>
 #include <string>
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/Exception.h"
 #include "libboardgame_sys/Compiler.h"
 
 namespace libboardgame_base {

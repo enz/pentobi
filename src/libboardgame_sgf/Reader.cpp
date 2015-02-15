@@ -35,13 +35,6 @@ bool is_ascii_space(int c)
 
 //-----------------------------------------------------------------------------
 
-Reader::ReadError::ReadError(const string& s)
-    : Exception(s)
-{
-}
-
-//-----------------------------------------------------------------------------
-
 Reader::Reader()
   : m_read_only_main_variation(false)
 {

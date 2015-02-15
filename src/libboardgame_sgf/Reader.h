@@ -8,14 +8,13 @@
 #define LIBBOARDGAME_SGF_READER_H
 
 #include <iosfwd>
+#include <stdexcept>
 #include <string>
 #include <vector>
-#include "libboardgame_util/Exception.h"
 
 namespace libboardgame_sgf {
 
 using namespace std;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
@@ -23,10 +22,12 @@ class Reader
 {
 public:
     class ReadError
-        : public Exception
+        : public runtime_error
     {
     public:
-        ReadError(const string& s);
+        ReadError(const string& s)
+            : runtime_error(s)
+        { }
     };
 
     Reader();

@@ -13,7 +13,6 @@
 #include <fstream>
 #include <map>
 #include <regex>
-#include "libboardgame_util/Exception.h"
 #include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/StringUtil.h"
@@ -21,7 +20,6 @@
 using libboardgame_util::from_string;
 using libboardgame_util::split;
 using libboardgame_util::trim;
-using libboardgame_util::Exception;
 using libboardgame_util::FmtSaver;
 using libboardgame_util::Statistics;
 using libboardgame_util::StatisticsExt;
@@ -73,7 +71,7 @@ void analyze(const string& file)
                 || ! from_string(columns[4], cpu_b)
                 || ! from_string(columns[5], cpu_w)
                 || ! from_string(columns[6], fast_open))
-            throw Exception("invalid format");
+            throw runtime_error("invalid format");
         stat_result.add(result);
         stat_result_player[player].add(result);
         ++result_count[result];

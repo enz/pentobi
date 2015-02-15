@@ -10,8 +10,6 @@ add_library(boardgame_util STATIC
   Barrier.cpp
   CpuTimeSource.h
   CpuTimeSource.cpp
-  Exception.h
-  Exception.cpp
   FmtSaver.h
   IntervalChecker.h
   IntervalChecker.cpp

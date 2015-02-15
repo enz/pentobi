@@ -20,7 +20,6 @@ using libpentobi_base::PentobiTree;
 using libboardgame_sgf::SgfNode;
 using libboardgame_util::get_letter_coord;
 using libboardgame_util::log;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 

@@ -20,7 +20,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_kde_thumbnailer_STAT_SRCS
   ../libboardgame_util/Assert.cpp
-  ../libboardgame_util/Exception.cpp
   ../libboardgame_util/Log.cpp
   ../libboardgame_util/StringUtil.cpp
   ../libboardgame_base/SpShtStrRep.cpp

@@ -36,7 +36,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_piece_played_twice)
     unique_ptr<Board> bd(new Board(tree.get_variant()));
     BoardUpdater updater;
     auto& node = get_last_node(tree.get_root());
-    LIBBOARDGAME_CHECK_THROW(updater.update(*bd, tree, node), Exception);
+    LIBBOARDGAME_CHECK_THROW(updater.update(*bd, tree, node), runtime_error);
 }
 
 /** Test BoardUpdater with setup properties in root node. */

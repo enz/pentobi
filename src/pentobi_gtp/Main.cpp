@@ -11,7 +11,6 @@
 #include <fstream>
 #include <iostream>
 #include "Engine.h"
-#include "libboardgame_util/Exception.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/Options.h"
 #include "libboardgame_util/RandomGenerator.h"
@@ -21,7 +20,6 @@ using libboardgame_gtp::Failure;
 using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::set_log_null;
-using libboardgame_util::Exception;
 using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
 using libpentobi_base::parse_variant_id;
@@ -111,14 +109,14 @@ int main(int argc, char** argv)
         {
             memory = opt.get<size_t>("memory");
             if (memory == 0)
-                throw Exception("Value for memory must be greater zero.");
+                throw runtime_error("Value for memory must be greater zero.");
         }
         unsigned threads = 1;
         if (opt.contains("threads"))
         {
             threads = opt.get<unsigned>("threads");
             if (threads == 0)
-                throw Exception("Number of threads must be greater zero.");
+                throw runtime_error("Number of threads must be greater zero.");
         }
         Board::color_output = opt.contains("color");
         if (opt.contains("quiet"))
@@ -128,10 +126,10 @@ int main(int argc, char** argv)
         string variant_string = opt.get("game", "classic");
         Variant variant;
         if (! parse_variant_id(variant_string, variant))
-            throw Exception("invalid game variant " + variant_string);
+            throw runtime_error("invalid game variant " + variant_string);
         auto level = opt.get<int>("level", 4);
         if (level < 1 || level > 9)
-            throw Exception("invalid level (must be 1-9)");
+            throw runtime_error("invalid level (must be 1-9)");
         auto use_book = (! opt.contains("nobook"));
         string books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
@@ -154,7 +152,7 @@ int main(int argc, char** argv)
         {
             ifstream in(config_file);
             if (! in)
-                throw Exception("Error opening " + config_file);
+                throw runtime_error("Error opening " + config_file);
             engine.exec(in, true, get_log());
         }
         auto& args = opt.get_args();
@@ -163,7 +161,7 @@ int main(int argc, char** argv)
             {
                 ifstream in(file);
                 if (! in)
-                    throw Exception("Error opening " + file);
+                    throw runtime_error("Error opening " + file);
                 engine.exec_main_loop(in, cout);
             }
         else

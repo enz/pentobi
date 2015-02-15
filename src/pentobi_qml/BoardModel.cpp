@@ -13,7 +13,6 @@
 
 using namespace std;
 using libboardgame_util::log;
-using libboardgame_util::Exception;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
@@ -307,17 +306,17 @@ bool BoardModel::loadAutoSave()
         {
             unsigned colorInt = l[i].toUInt();
             if (colorInt >= m_bd.get_nu_colors())
-                throw Exception("invalid color");
+                throw runtime_error("invalid color");
             Color c(colorInt);
             if (i + 1 >= l.length())
-                throw Exception("color without move");
+                throw runtime_error("color without move");
             Move mv = m_bd.from_string(l[i + 1].toLocal8Bit().constData());
             if (! m_bd.is_legal(c, mv))
-                throw Exception("illegal move");
+                throw runtime_error("illegal move");
             m_bd.play(c, mv);
         }
     }
-    catch (const Exception &e)
+    catch (const exception &e)
     {
         qWarning() << "BoardModel: autosave has illegal move: " << e.what();
     }

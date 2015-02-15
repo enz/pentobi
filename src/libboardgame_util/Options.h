@@ -9,9 +9,9 @@
 
 #include <map>
 #include <set>
+#include <stdexcept>
 #include <string>
 #include <vector>
-#include "Exception.h"
 #include "StringUtil.h"
 #include "libboardgame_sys/Compiler.h"
 
@@ -23,11 +23,11 @@ using libboardgame_sys::get_type_name;
 //----------------------------------------------------------------------------
 
 class OptionError
-    : public Exception
+    : public runtime_error
 {
 public:
     OptionError(const string& s)
-        : Exception(s)
+        : runtime_error(s)
     {
     }
 };

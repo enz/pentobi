@@ -9,14 +9,13 @@
 
 #include <cstdint>
 #include <iosfwd>
+#include <stdexcept>
 #include <string>
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/Exception.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
@@ -26,11 +25,11 @@ public:
     typedef uint_fast8_t IntType;
 
     class InvalidString
-        : public Exception
+        : public runtime_error
     {
     public:
-        InvalidString(string s)
-            : Exception(move(s))
+        InvalidString(const string& s)
+            : runtime_error(s)
         { }
     };
 

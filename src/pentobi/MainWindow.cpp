@@ -3325,7 +3325,7 @@ void MainWindow::showInfo(const QString& text, const QString& infoText,
     ::showInfo(this, text, infoText, detailText, withIcon);
 }
 
-void MainWindow::showInvalidFile(QString file, const Exception& e)
+void MainWindow::showInvalidFile(QString file, const exception& e)
 {
     showError(tr("Error in file '%1'").arg(QFileInfo(file).fileName()),
               tr("The file is not a valid Blokus SGF file."), e.what());

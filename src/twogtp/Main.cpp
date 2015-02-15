@@ -66,7 +66,7 @@ int main(int argc, char** argv)
         bool create_tree = opt.contains("tree") || fast_open;
         Variant variant;
         if (! parse_variant_id(variant_string, variant))
-            throw Exception("invalid game variant " + variant_string);
+            throw runtime_error("invalid game variant " + variant_string);
         Output output(variant, prefix, create_tree);
         vector<shared_ptr<TwoGtp>> twogtp;
         for (unsigned i = 0; i < nu_threads; ++i)

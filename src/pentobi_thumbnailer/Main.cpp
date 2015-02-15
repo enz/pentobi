@@ -10,12 +10,10 @@
 #include <QImage>
 #include <QImageWriter>
 #include <QString>
-#include "libboardgame_util/Exception.h"
 #include "libboardgame_util/Options.h"
 #include "libpentobi_thumbnail/CreateThumbnail.h"
 
 using namespace std;
-using libboardgame_util::Exception;
 using libboardgame_util::Options;
 
 //-----------------------------------------------------------------------------
@@ -29,19 +27,19 @@ void mainFunction(int argc, char* argv[])
     auto size = opt.get<int>("size", 128);
     auto& files = opt.get_args();
     if (size <= 0)
-        throw Exception("Invalid image size");
+        throw runtime_error("Invalid image size");
     if (files.size() > 2)
-        throw Exception("Too many file arguments");
+        throw runtime_error("Too many file arguments");
     if (files.size() < 2)
-        throw Exception("Need input and output file argument");
+        throw runtime_error("Need input and output file argument");
     QImage image(size, size, QImage::Format_ARGB32);
     image.fill(Qt::transparent);
     if (! createThumbnail(QString::fromLocal8Bit(files[0].c_str()), size, size,
                           image))
-        throw Exception("Thumbnail generation failed");
+        throw runtime_error("Thumbnail generation failed");
     QImageWriter writer(QString::fromLocal8Bit(files[1].c_str()), "png");
     if (! writer.write(image))
-        throw Exception(writer.errorString().toLocal8Bit().constData());
+        throw runtime_error(writer.errorString().toLocal8Bit().constData());
 }
 
 } //namespace

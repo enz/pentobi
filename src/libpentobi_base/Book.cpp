@@ -93,7 +93,7 @@ void Book::load(istream& in)
     }
     catch (const TreeReader::ReadError& e)
     {
-        throw Exception(string("could not read book: ") + e.what());
+        throw runtime_error(string("could not read book: ") + e.what());
     }
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     m_tree.init(root);

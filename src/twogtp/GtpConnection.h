@@ -10,10 +10,8 @@
 #include <iosfwd>
 #include <memory>
 #include <string>
-#include "libboardgame_util/Exception.h"
 
 using namespace std;
-using libboardgame_util::Exception;
 
 //-----------------------------------------------------------------------------
 
@@ -22,11 +20,11 @@ class GtpConnection
 {
 public:
     class Failure
-        : public Exception
+        : public runtime_error
     {
     public:
         Failure(const string& message)
-            : Exception(message)
+            : runtime_error(message)
         { }
     };
 

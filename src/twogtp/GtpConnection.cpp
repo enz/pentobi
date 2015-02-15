@@ -72,20 +72,20 @@ GtpConnection::GtpConnection(const string& command)
 {
     vector<string> args = split_args(command);
     if (args.size() == 0)
-        throw Exception("GtpConnection: empty command line");
+        throw runtime_error("GtpConnection: empty command line");
     int fd1[2];
     if (pipe(fd1) < 0)
-        throw Exception("GtpConnection: pipe creation failed");
+        throw runtime_error("GtpConnection: pipe creation failed");
     int fd2[2];
     if (pipe(fd2) < 0)
     {
         close(fd1[0]);
         close(fd1[1]);
-        throw Exception("GtpConnection: pipe creation failed");
+        throw runtime_error("GtpConnection: pipe creation failed");
     }
     pid_t pid;
     if ((pid = fork()) < 0)
-        throw Exception("GtpConnection: fork failed");
+        throw runtime_error("GtpConnection: fork failed");
     else if (pid > 0) // Parent
     {
         close(fd1[0]);

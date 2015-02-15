@@ -142,7 +142,7 @@ void TwoGtp::play_game(unsigned game_number)
         sgf.write_property(string(1, toupper(color[0])), m_bd.to_string(mv));
         sgf.end_node();
         if (mv.is_null() || ! m_bd.is_legal(to_play, mv))
-            throw Exception("invalid move: " + m_bd.to_string(mv));
+            throw runtime_error("invalid move: " + m_bd.to_string(mv));
         m_bd.play(to_play, mv);
         other_connection.send("play " + color + " " + m_bd.to_string(mv));
     }
@@ -152,7 +152,7 @@ void TwoGtp::play_game(unsigned game_number)
     if (resign)
     {
         if (nu_players > 2)
-            throw Exception("resign only allowed in two-player game variants");
+            throw runtime_error("resign only allowed in two-player variants");
         result = (player == player_black ? 0 : 1);
     }
     else
@@ -188,7 +188,7 @@ double TwoGtp::send_cputime(GtpConnection& gtp_connection)
     double cputime;
     in >> cputime;
     if (! in)
-        throw Exception("invalid response to cputime: " + response);
+        throw runtime_error("invalid response to cputime: " + response);
     return cputime;
 }
 
