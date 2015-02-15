@@ -200,7 +200,7 @@ void Engine::set_deterministic()
     {
         get_search().set_deterministic();
     }
-    catch (Failure&)
+    catch (const Failure&)
     {
         // Ignore if player is not MCTS player
     }
