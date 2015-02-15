@@ -45,7 +45,7 @@ string to_string(const T& t)
     return buffer.str();
 }
 
-string to_lower(const string& s);
+string to_lower(string s);
 
 string trim(const string& s);
 

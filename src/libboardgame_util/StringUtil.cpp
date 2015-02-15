@@ -74,13 +74,11 @@ string time_to_string(double seconds, bool with_seconds_as_double)
     return s.str();
 }
 
-string to_lower(const string& s)
+string to_lower(string s)
 {
-    string r;
-    r.reserve(s.size());
-    for (char c : s)
-        r.push_back(static_cast<char>(tolower(c)));
-    return r;
+    for (auto& c : s)
+        c = static_cast<char>(tolower(c));
+    return s;
 }
 
 string trim(const string& s)
