@@ -206,8 +206,8 @@ private:
         its move list. */
     ColorMap<PointList::const_iterator> m_last_attach_points_end;
 
-    /** Last piece played by a color since the last update of its move list. */
-    ColorMap<Piece> m_last_piece;
+    /** Last move played by a color since the last update of its move list. */
+    ColorMap<Move> m_last_move;
 
     ColorMap<bool> m_is_move_list_initialized;
 
@@ -426,7 +426,7 @@ inline void State::play_playout(Move mv)
     LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
     m_bd.play(to_play, mv);
     ++m_nu_new_moves[to_play];
-    m_last_piece[to_play] = get_move_info(mv).get_piece();
+    m_last_move[to_play] = mv;
     m_nu_passes = 0;
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);

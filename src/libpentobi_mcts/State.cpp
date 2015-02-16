@@ -628,10 +628,9 @@ void State::update_moves(Color c)
     moves.clear();
     unsigned nu_moves = 0;
     double total_gamma = 0;
-    LIBBOARDGAME_ASSERT(m_nu_new_moves[c] > 0);
     if (m_nu_new_moves[c] == 1 && m_bd.get_nu_piece_instances() == 1)
     {
-        Piece piece = m_last_piece[c];
+        Piece piece = get_move_info(m_last_move[c]).get_piece();
         for (unsigned i = 0; i < old_size; ++i)
         {
             LIBBOARDGAME_ASSERT(i >= moves.size());
