@@ -35,17 +35,6 @@ inline Float sigmoid(Float steepness, Float x)
 
 //-----------------------------------------------------------------------------
 
-SharedConst::SharedConst(const Color& to_play)
-    : board(nullptr),
-      to_play(to_play),
-      avoid_symmetric_draw(true)
-{
-    // Game variant and position dependent variables are initialized in
-    // libpentobi_mcts::Search::start_search()
-}
-
-//-----------------------------------------------------------------------------
-
 State::State(Variant initial_variant, const SharedConst& shared_const)
   : m_shared_const(shared_const),
     m_bd(initial_variant)

@@ -13,6 +13,8 @@ add_library(pentobi_mcts STATIC
   PriorKnowledge.h
   PriorKnowledge.cpp
   SearchParamConst.h
+  SharedConst.h
+  SharedConst.cpp
   Search.h
   Search.cpp
   State.h

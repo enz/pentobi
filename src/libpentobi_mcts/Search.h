@@ -16,8 +16,6 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_mcts::PlayerInt;
-using libboardgame_mcts::SearchBase;
-using libboardgame_util::Timer;
 using libboardgame_util::TimeSource;
 using libpentobi_base::Setup;
 
@@ -33,7 +31,7 @@ using libpentobi_base::Setup;
     real players and 3 pseudo-players for the 4th color.
     @note @ref libboardgame_avoid_stack_allocation */
 class Search
-    : public SearchBase<State, Move, SearchParamConst>
+    : public libboardgame_mcts::SearchBase<State, Move, SearchParamConst>
 {
 public:
     Search(Variant initial_variant, unsigned nu_threads, size_t memory);
