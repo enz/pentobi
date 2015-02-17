@@ -97,7 +97,7 @@ public:
 
     PlayoutFeatures();
 
-    /** Initialize snapshot with forbidden stae. */
+    /** Initialize snapshot with forbidden state. */
     void init_snapshot(const Board& bd, Color c);
 
     void restore_snapshot(const Board& bd);
@@ -115,7 +115,7 @@ private:
 
     Grid<unsigned> m_snapshot;
 
-    /** Points with point value greater zero. */
+    /** Points with non-zero local value. */
     PointList m_local_points;
 };
 
@@ -158,7 +158,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
     // Clear old info about local points
     for (Point p : m_local_points)
         m_point_value[p] &= 0xf000u;
-    m_local_points.clear();
+    unsigned nu_local = 0;
 
     Color to_play = bd.get_to_play();
     Color second_color;
@@ -169,11 +169,11 @@ inline void PlayoutFeatures::set_local(const Board& bd)
     auto& geo = bd.get_geometry();
     unsigned move_number = bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
-    // two-player variants)
+    // two-color variants)
     for (unsigned i = 0; i < 3; ++i)
     {
         if (move_number == 0)
-            return;
+            break;
         --move_number;
         ColorMove move = bd.get_move(move_number);
         Color c = move.color;
@@ -189,7 +189,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
             if (is_forbidden[*j] || (m_point_value[*j] & 0x0fff) == 0x0001u)
                 continue;
             if ((m_point_value[*j] & 0x0fff) == 0)
-                m_local_points.push_back(*j);
+                m_local_points.get_unchecked(nu_local++) = *j;
             // Opponent attach point
             m_point_value[*j] = (m_point_value[*j] & 0xf000) | 0x0001u;
             unsigned nu_adj = 0;
@@ -199,7 +199,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
                     ++nu_adj;
                     if ((m_point_value[k] & 0x0fff) == 0)
                     {
-                        m_local_points.push_back(k);
+                        m_local_points.get_unchecked(nu_local++) = k;
                         // Adjacent to opp. attach point
                         m_point_value[k] =
                                 (m_point_value[k] & 0xf000) | 0x0010u;
@@ -215,7 +215,6 @@ inline void PlayoutFeatures::set_local(const Board& bd)
                 for (Point k : geo.get_adj(*j))
                     if (! is_forbidden[k])
                     {
-                        LIBBOARDGAME_ASSERT(m_local_points.contains(k));
                         m_point_value[k] =
                                 (m_point_value[k] & 0xf000) | 0x0001u;
                         break;
@@ -223,6 +222,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
         }
         while (++j != end);
     }
+    m_local_points.resize(nu_local);
 }
 
 //-----------------------------------------------------------------------------
