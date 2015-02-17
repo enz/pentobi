@@ -7,8 +7,7 @@
 #ifndef LIBBOARDGAME_GTP_FAILURE_H
 #define LIBBOARDGAME_GTP_FAILURE_H
 
-#include <string>
-#include <utility>
+#include <stdexcept>
 
 namespace libboardgame_gtp {
 
@@ -20,19 +19,12 @@ using namespace std;
     Command handlers generate a GTP error response by throwing an instance
     of Failure. */
 class Failure
+    : public runtime_error
 {
 public:
-    Failure(string response = "")
-        : m_response(move(response))
+    Failure(const string& response)
+        : runtime_error(response)
     { }
-
-    string get_response() const
-    {
-        return m_response;
-    }
-
-private:
-    string m_response;
 };
 
 //-----------------------------------------------------------------------------

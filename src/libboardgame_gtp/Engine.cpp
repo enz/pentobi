@@ -245,7 +245,7 @@ bool Engine::handle_cmd(CmdLine& line, ostream& out, Response& response,
     catch (const Failure& failure)
     {
         status = false;
-        response.set(failure.get_response());
+        response.set(failure.what());
     }
     // Keep output to cerr in sync, because out will be explicitely flushed by
     // this function after the response was written, but cerr could be buffered

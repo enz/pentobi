@@ -170,7 +170,7 @@ int main(int argc, char** argv)
     }
     catch (const Failure& e)
     {
-        log("Error: command in config file failed: ", e.get_response());
+        log("Error: command in config file failed: ", e.what());
         return 1;
     }
     catch (const exception& e)
