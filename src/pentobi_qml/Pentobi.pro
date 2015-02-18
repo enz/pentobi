@@ -69,6 +69,7 @@ SOURCES += \
     ../libpentobi_mcts/PlayoutFeatures.cpp \
     ../libpentobi_mcts/PriorKnowledge.cpp \
     ../libpentobi_mcts/Search.cpp \
+    ../libpentobi_mcts/SharedConst.cpp \
     ../libpentobi_mcts/State.cpp \
     ../libpentobi_mcts/Util.cpp \
     ../libpentobi_mcts/StateUtil.cpp
@@ -120,7 +121,6 @@ HEADERS += \
     ../libboardgame_util/Assert.h \
     ../libboardgame_util/Barrier.h \
     ../libboardgame_util/CpuTimeSource.h \
-    ../libboardgame_util/Exception.h \
     ../libboardgame_util/FmtSaver.h \
     ../libboardgame_util/IntervalChecker.h \
     ../libboardgame_util/Log.h \
@@ -188,6 +188,7 @@ HEADERS += \
     ../libpentobi_mcts/PriorKnowledge.h \
     ../libpentobi_mcts/Search.h \
     ../libpentobi_mcts/SearchParamConst.h \
+    ../libpentobi_mcts/SharedConst.h \
     ../libpentobi_mcts/State.h \
     ../libpentobi_mcts/StateUtil.h \
     ../libpentobi_mcts/Util.h
