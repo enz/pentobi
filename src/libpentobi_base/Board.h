@@ -777,7 +777,7 @@ inline bool Board::is_piece_left(Color c, Piece piece) const
 
 inline bool Board::is_same_player(Color c1, Color c2) const
 {
-    return (c1 == c2 || c1 == m_second_color[c2]);
+    return c1 == c2 || c1 == m_second_color[c2];
 }
 
 inline void Board::place(Color c, Move mv)

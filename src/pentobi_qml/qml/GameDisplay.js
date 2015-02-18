@@ -34,7 +34,7 @@ function createColorPieces(component, pieceModels) {
         }
     var properties = {
         "colorName": colorName,
-        "isPicked": Qt.binding(function() { return (this == pickedPiece) }),
+        "isPicked": Qt.binding(function() { return this == pickedPiece }),
         "parentPieceManipulator": pieceManipulator,
         "parentBoard": board,
         "parentAnimationVia": root

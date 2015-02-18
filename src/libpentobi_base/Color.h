@@ -132,7 +132,7 @@ inline bool Color::operator==(const Color& c) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(c.is_initialized());
-    return (m_i == c.m_i);
+    return m_i == c.m_i;
 }
 
 inline bool Color::operator!=(const Color& c) const
@@ -144,7 +144,7 @@ inline bool Color::operator<(const Color& c) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(c.is_initialized());
-    return (m_i < c.m_i);
+    return m_i < c.m_i;
 }
 
 inline Color Color::get_next(IntType nu_colors) const

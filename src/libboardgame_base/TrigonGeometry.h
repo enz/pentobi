@@ -105,16 +105,16 @@ unsigned TrigonGeometry<P>::get_point_type(int x, int y) const
     if (m_sz % 2 == 0)
     {
         if (x % 2 == 0)
-            return (y % 2 == 0 ? 1 : 0);
+            return y % 2 == 0 ? 1 : 0;
         else
-            return (y % 2 != 0 ? 1 : 0);
+            return y % 2 != 0 ? 1 : 0;
     }
     else
     {
         if (x % 2 != 0)
-            return (y % 2 == 0 ? 1 : 0);
+            return y % 2 == 0 ? 1 : 0;
         else
-            return (y % 2 != 0 ? 1 : 0);
+            return y % 2 != 0 ? 1 : 0;
     }
 }
 

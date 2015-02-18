@@ -20,7 +20,7 @@ namespace sgf_util {
 const char* get_color_id(Variant variant, Color c)
 {
     if (variant == Variant::duo || variant == Variant::junior)
-        return (c == Color(0) ? "B" : "W");
+        return c == Color(0) ? "B" : "W";
     if (c == Color(0))
         return "1";
     if (c == Color(1))
@@ -34,7 +34,7 @@ const char* get_color_id(Variant variant, Color c)
 const char* get_setup_id(Variant variant, Color c)
 {
     if (variant == Variant::duo || variant == Variant::junior)
-        return (c == Color(0) ? "AB" : "AW");
+        return c == Color(0) ? "AB" : "AW";
     if (c == Color(0))
         return "A1";
     if (c == Color(1))

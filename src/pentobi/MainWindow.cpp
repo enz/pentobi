@@ -540,7 +540,7 @@ bool MainWindow::checkSave()
             save();
             return true;
         }
-        return (result == discardButton);
+        return result == discardButton;
     }
     // Don't ask if game should be saved if it was finished because the user
     // might only want to play and never save games.
@@ -579,7 +579,7 @@ bool MainWindow::checkQuit()
             save();
             return true;
         }
-        return (result == discardButton);
+        return result == discardButton;
     }
     cancelThread();
     QSettings settings;

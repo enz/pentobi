@@ -168,7 +168,7 @@ template<typename FLOAT>
 inline FLOAT Statistics<FLOAT>::get_deviation() const
 {
     // m_variance can become negative (due to rounding errors?)
-    return (m_variance < 0 ? 0 : sqrt(m_variance));
+    return m_variance < 0 ? 0 : sqrt(m_variance);
 }
 
 template<typename FLOAT>

@@ -72,7 +72,7 @@ public:
         bool has_local() const
         {
             LIBBOARDGAME_ASSERT(! is_forbidden());
-            return (m_value != 0);
+            return m_value != 0;
         }
 
         /** Get the number of local opponent attach points occupied by this
@@ -86,7 +86,7 @@ public:
             points? */
         bool has_adj_attach() const
         {
-            return ((m_value & 0x00f0u) != 0);
+            return (m_value & 0x00f0u) != 0;
         }
 
     private:

@@ -332,7 +332,7 @@ inline bool SgfNode::has_parent() const
 
 inline bool SgfNode::has_single_child() const
 {
-    return (m_first_child && ! m_first_child->m_sibling);
+    return m_first_child && ! m_first_child->m_sibling;
 }
 
 template<typename T>

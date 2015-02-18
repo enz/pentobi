@@ -65,8 +65,8 @@ inline bool CoordPoint::operator==(const CoordPoint& p) const
 inline bool CoordPoint::operator<(const CoordPoint& p) const
 {
     if (y != p.y)
-        return (y < p.y);
-    return (x < p.x);
+        return y < p.y;
+    return x < p.x;
 }
 
 inline bool CoordPoint::operator!=(const CoordPoint& p) const
@@ -104,8 +104,8 @@ inline CoordPoint CoordPoint::null()
 inline bool CoordPoint::is_onboard(int x, int y, unsigned width,
                                    unsigned height)
 {
-    return (x >= 0 && x < static_cast<int>(width)
-            && y >= 0 && y < static_cast<int>(height));
+    return x >= 0 && x < static_cast<int>(width)
+            && y >= 0 && y < static_cast<int>(height);
 }
 
 inline bool CoordPoint::is_onboard(unsigned width, unsigned height) const

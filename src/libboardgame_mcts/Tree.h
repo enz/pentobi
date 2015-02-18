@@ -289,7 +289,7 @@ inline auto Tree<N>::get_node(NodeIdx i) const -> const Node&
 template<typename N>
 inline bool Tree<N>::NodeExpander::is_tree_full() const
 {
-    return (m_thread_storage.next == m_thread_storage.end);
+    return m_thread_storage.next == m_thread_storage.end;
 }
 
 template<typename N>
@@ -336,7 +336,7 @@ void Tree<N>::clear(Float root_value)
 template<typename N>
 bool Tree<N>::contains(const Node& node) const
 {
-    return (&node >= m_nodes.get() && &node < m_nodes.get() + m_max_nodes);
+    return &node >= m_nodes.get() && &node < m_nodes.get() + m_max_nodes;
 }
 
 template<typename N>

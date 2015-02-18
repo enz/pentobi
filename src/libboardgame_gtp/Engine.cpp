@@ -153,7 +153,7 @@ void Engine::cmd_version(Response&)
 
 bool Engine::contains(const string& name) const
 {
-    return (m_handlers.count(name) > 0);
+    return m_handlers.count(name) > 0;
 }
 
 void Engine::remove(const string& name)

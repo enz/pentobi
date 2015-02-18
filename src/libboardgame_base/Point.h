@@ -112,7 +112,7 @@ inline bool Point<M, W, H, I, S>::operator==(const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(p.is_initialized());
-    return (m_i == p.m_i);
+    return m_i == p.m_i;
 }
 
 template<unsigned M, unsigned W, unsigned H, typename I, class S>
@@ -126,7 +126,7 @@ inline bool Point<M, W, H, I, S>::operator<(const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(p.is_initialized());
-    return (m_i < p.m_i);
+    return m_i < p.m_i;
 }
 
 template<unsigned M, unsigned W, unsigned H, typename I, class S>

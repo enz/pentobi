@@ -241,7 +241,7 @@ Rating Player::get_rating(Variant variant, int level)
 
 bool Player::is_book_loaded(Variant variant) const
 {
-    return (m_is_book_loaded && m_book.get_tree().get_variant() == variant);
+    return m_is_book_loaded && m_book.get_tree().get_variant() == variant;
 }
 
 void Player::load_book(istream& in)

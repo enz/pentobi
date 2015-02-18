@@ -355,7 +355,7 @@ inline bool Geometry<P>::is_onboard(unsigned x, unsigned y) const
 template<class P>
 bool Geometry<P>::is_onboard(CoordPoint p) const
 {
-    return (p.is_onboard(m_width, m_height) && is_onboard(p.x, p.y));
+    return p.is_onboard(m_width, m_height) && is_onboard(p.x, p.y);
 }
 
 #if LIBBOARDGAME_DEBUG
