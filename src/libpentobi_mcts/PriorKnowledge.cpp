@@ -292,8 +292,7 @@ void PriorKnowledge::init_local(const Board& bd)
 {
     for (Point p : m_local_points)
         m_is_local[p] = false;
-    m_local_points.clear();
-
+    unsigned nu_local = 0;
     Color to_play = bd.get_to_play();
     Color second_color;
     if (bd.get_variant() == Variant::classic_3 && to_play.to_int() == 3)
@@ -302,11 +301,11 @@ void PriorKnowledge::init_local(const Board& bd)
         second_color = bd.get_second_color(to_play);
     unsigned move_number = bd.get_nu_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
-    // two-player variants)
+    // two-color variants)
     for (unsigned i = 0; i < 3; ++i)
     {
         if (move_number == 0)
-            return;
+            break;
         --move_number;
         ColorMove move = bd.get_move(move_number);
         Color c = move.color;
@@ -322,11 +321,12 @@ void PriorKnowledge::init_local(const Board& bd)
             if (is_forbidden[*j])
                 continue;
             if (! m_is_local[*j])
-                m_local_points.push_back(*j);
+                m_local_points.get_unchecked(nu_local++) = *j;
             m_is_local[*j] = true;
         }
         while (++j != end);
     }
+    m_local_points.resize(nu_local);
 }
 
 void PriorKnowledge::start_search(const Board& bd)
