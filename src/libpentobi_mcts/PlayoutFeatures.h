@@ -186,7 +186,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
         auto end = info_ext.end_attach();
         do
         {
-            if (is_forbidden[*j] || (m_point_value[*j] & 0x0fff) == 0x0001u)
+            if (is_forbidden[*j])
                 continue;
             if ((m_point_value[*j] & 0x0fff) == 0)
                 m_local_points.get_unchecked(nu_local++) = *j;
