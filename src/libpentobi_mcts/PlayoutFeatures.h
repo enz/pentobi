@@ -167,19 +167,19 @@ inline void PlayoutFeatures::set_local(const Board& bd)
     else
         second_color = bd.get_second_color(to_play);
     auto& geo = bd.get_geometry();
-    unsigned move_number = bd.get_nu_moves();
+    auto& moves = bd.get_moves();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-color variants)
-    for (unsigned i = 0; i < 3; ++i)
+    auto end = moves.end();
+    auto begin = end - 3;
+    if (begin < moves.begin())
+        begin = moves.begin();
+    for (auto i = begin; i != end; ++i)
     {
-        if (move_number == 0)
-            break;
-        --move_number;
-        ColorMove move = bd.get_move(move_number);
-        Color c = move.color;
+        Color c = i->color;
         if (c == to_play || c == second_color)
             continue;
-        auto mv = move.move;
+        Move mv = i->move;
         auto& is_forbidden = bd.is_forbidden(c);
         auto& info_ext = bd.get_move_info_ext(mv);
         auto j = info_ext.begin_attach();

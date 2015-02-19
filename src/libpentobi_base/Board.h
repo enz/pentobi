@@ -202,6 +202,8 @@ public:
 
     ColorMove get_move(unsigned n) const;
 
+    const ArrayList<ColorMove, max_game_moves>& get_moves() const;
+
     /** Generate all legal moves for a color.
         @param c The color
         @param marker A move marker reused for efficiency (needs to be clear)
@@ -518,6 +520,12 @@ inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
     LIBBOARDGAME_ASSERT(! mv.is_null());
     LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return *(m_move_info_ext_2_array + mv.to_int());
+}
+
+inline auto Board::get_moves() const
+-> const ArrayList<ColorMove, max_game_moves>&
+{
+    return m_moves;
 }
 
 inline PrecompMoves::Range Board::get_moves(Piece piece, Point p,
