@@ -149,12 +149,9 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
             return false;
     }
     double gamma = m_gamma_piece[info.get_piece()];
-    if (features.has_local())
-    {
-        gamma *= m_gamma_nu_attach[features.get_nu_attach()];
-        if (features.has_adj_attach())
-            gamma *= 1e5;
-    }
+    auto nu_local = features.get_nu_local();
+    if (nu_local > 0)
+        gamma *= m_gamma_nu_attach[nu_local];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);

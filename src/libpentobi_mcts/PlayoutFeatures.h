@@ -31,17 +31,18 @@ using libpentobi_base::Variant;
 //-----------------------------------------------------------------------------
 
 /** Compute move features for the playout policy.
-    A local move is a move that occupies attach points of recent opponent moves
-    or points that are adjacent to them. If there is only one adjacent point to
-    such an opponent attach point missing to make it a 1-hole, the missing
-    adjacent point counts as an attach point.
-    The features also include if a point is forbidden, such that the legality
-    of a move can be quickly checked in the playouts. The forbidden status
-    is updated incrementally. */
+    This class encodes features that correspond to points on the board in bit
+    ranges of an integer, such that the sum of the features values for all
+    points of a move can be quickly computed in the playout move generation.
+    Currently, there are only two features: the forbidden status and whether
+    the point is a local point. Local points are attach points of recent
+    opponent moves or points that are adjacent to them.
+    During a simulation, some of the features are updated incrementally
+    (forbidden status) and some non-incrementally (local points). */
 class PlayoutFeatures
 {
 public:
-    /** Compute the local response value for a move. */
+    /** Compute the sum of the feature values for a move. */
     class Compute
     {
     public:
@@ -67,26 +68,12 @@ public:
             return (m_value & 0xf000u) != 0;
         }
 
-        /** Does the move occupy any local points?
+        /** Get the number of local points occupied by this move.
             @pre ! is_forbidden() */
-        bool has_local() const
+        unsigned get_nu_local() const
         {
             LIBBOARDGAME_ASSERT(! is_forbidden());
-            return m_value != 0;
-        }
-
-        /** Get the number of local opponent attach points occupied by this
-            move. */
-        unsigned get_nu_attach() const
-        {
-            return m_value & 0x000fu;
-        }
-
-        /** Does the move occupy any points adjacent to local opponent attach
-            points? */
-        bool has_adj_attach() const
-        {
-            return (m_value & 0x00f0u) != 0;
+            return m_value;
         }
 
     private:
@@ -153,6 +140,7 @@ inline void PlayoutFeatures::set_forbidden(const MoveInfoExt& info_ext)
         m_point_value[*i] = 0x1000u;
     while (++i != end);
 }
+
 inline void PlayoutFeatures::set_local(const Board& bd)
 {
     // Clear old info about local points
@@ -189,36 +177,17 @@ inline void PlayoutFeatures::set_local(const Board& bd)
             if (is_forbidden[*j])
                 continue;
             if ((m_point_value[*j] & 0x0fff) == 0)
+            {
                 m_local_points.get_unchecked(nu_local++) = *j;
-            // Opponent attach point
-            m_point_value[*j] = (m_point_value[*j] & 0xf000) | 0x0001u;
-            unsigned nu_adj = 0;
+                m_point_value[*j] |= 0x0001u;
+            }
             geo.for_each_adj(*j, [&](Point k) {
-                if (! is_forbidden[k])
+                if (! is_forbidden[k] && (m_point_value[k] & 0x0fff) == 0)
                 {
-                    ++nu_adj;
-                    if ((m_point_value[k] & 0x0fff) == 0)
-                    {
-                        m_local_points.get_unchecked(nu_local++) = k;
-                        // Adjacent to opp. attach point
-                        m_point_value[k] =
-                                (m_point_value[k] & 0xf000) | 0x0010u;
-                    }
+                    m_local_points.get_unchecked(nu_local++) = k;
+                    m_point_value[k] |= 0x0001u;
                 }
             });
-            // If occupying the attach point is forbidden for us but there is
-            // only 1 adj. point missing to make it a 1-point hole for the
-            // opponent, then occupying this adj. point is (almost) as good as
-            // occupying the attach point. (This is done only for 1-point holes
-            // that are forbidden for to_play.)
-            if (nu_adj == 1 && bd.is_forbidden(*j, to_play))
-                for (Point k : geo.get_adj(*j))
-                    if (! is_forbidden[k])
-                    {
-                        m_point_value[k] =
-                                (m_point_value[k] & 0xf000) | 0x0001u;
-                        break;
-                    }
         }
         while (++j != end);
     }
