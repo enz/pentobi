@@ -24,62 +24,53 @@ using namespace std;
     line object. Command handlers, which access the command line through the
     instance of Arguments given as a function argument, should not store
     references to CmdLineRange objects. */
-class CmdLineRange
+struct CmdLineRange
 {
-public:
-    CmdLineRange(string::const_iterator begin, string::const_iterator end);
-
-    bool operator==(const string& s) const;
-
-    bool operator!=(const string& s) const;
-
-    operator string() const;
-
-    string::const_iterator begin() const;
-
-    string::const_iterator end() const;
-
-    string::size_type size() const;
-
-    void write(ostream& o) const;
-
-private:
     string::const_iterator m_begin;
 
     string::const_iterator m_end;
+
+
+    CmdLineRange(string::const_iterator begin, string::const_iterator end)
+        : m_begin(begin),
+          m_end(end)
+    { }
+
+    bool operator==(const string& s) const
+    {
+        return size() == s.size() && equal(m_begin, m_end, s.begin());
+    }
+
+    bool operator!=(const string& s) const
+    {
+        return ! operator==(s);
+    }
+
+    operator string() const
+    {
+        return string(m_begin, m_end);
+    }
+
+    string::const_iterator begin() const
+    {
+        return m_begin;
+    }
+
+    string::const_iterator end() const
+    {
+        return m_end;
+    }
+
+    string::size_type size() const
+    {
+        return m_end - m_begin;
+    }
+
+    void write(ostream& o) const
+    {
+        o << string(*this);
+    }
 };
-
-inline CmdLineRange::CmdLineRange(string::const_iterator begin,
-                                  string::const_iterator end)
-    : m_begin(move(begin)),
-      m_end(move(end))
-{
-}
-
-inline bool CmdLineRange::operator==(const string& s) const
-{
-    return size() == s.size() && equal(m_begin, m_end, s.begin());
-}
-
-inline bool CmdLineRange::operator!=(const string& s) const
-{
-    return ! operator==(s);
-}
-
-inline string::const_iterator CmdLineRange::begin() const
-{
-    return m_begin;
-}
-
-inline string::const_iterator CmdLineRange::end() const
-{
-    return m_end;
-}
-
-inline string::size_type CmdLineRange::size() const
-{
-    return m_end - m_begin;
-}
 
 //-----------------------------------------------------------------------------
 

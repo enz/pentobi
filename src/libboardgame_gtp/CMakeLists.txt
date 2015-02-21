@@ -6,7 +6,6 @@ add_library(boardgame_gtp STATIC
   CmdLine.h
   CmdLine.cpp
   CmdLineRange.h
-  CmdLineRange.cpp
   Engine.h
   Engine.cpp
   Failure.h

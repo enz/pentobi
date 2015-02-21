@@ -52,23 +52,15 @@ public:
 
     /** Begin/end range for lists with moves at a given point.
         See get_moves(). */
-    class Range
+    struct Range
     {
-    public:
-        Range(const Move* begin, const Move* end)
-        {
-            m_begin = begin;
-            m_end = end;
-        }
+        const Move* m_begin;
+
+        const Move* m_end;
 
         const Move* begin() const { return m_begin; }
 
         const Move* end() const { return m_end; }
-
-    private:
-        const Move* m_begin;
-
-        const Move* m_end;
     };
 
     /** Clear storage of moves for all move lists during construction. */
@@ -94,7 +86,7 @@ public:
         auto& range = m_moves_range[p][adj_status][piece];
         auto begin = move_lists_begin() + range.begin;
         auto end = begin + range.size;
-        return Range(begin, end);
+        return Range{begin, end};
     }
 
     /** Begin of storage for move lists.
