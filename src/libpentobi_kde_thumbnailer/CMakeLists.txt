@@ -14,7 +14,7 @@
 
 include(${QT_USE_FILE})
 
-add_definitions(${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 

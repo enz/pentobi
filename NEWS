@@ -13,6 +13,8 @@ Version 9.0.UNKNOWN (v9-fixes)
   work if the game variant was implicitly changed by opening a file.
 * "View/Move Numbers/Last" did not behave correctly after all colors were
   enabled in the Computer Colors dialog while a move generation was running.
+* Fixed build failure with MSVC is MinGW was not also installed (because
+  windres.exe was used)
 
 
 Version 9.0 (10 Dec 2014)
