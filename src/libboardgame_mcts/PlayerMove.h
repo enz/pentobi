@@ -24,13 +24,6 @@ struct PlayerMove
 
     MOVE move;
 
-    static PlayerMove null()
-    {
-        PlayerMove m;
-        m.move = MOVE::null();
-        return m;
-    }
-
     PlayerMove() = default;
 
     PlayerMove(PlayerInt player, MOVE move)
