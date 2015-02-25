@@ -72,8 +72,7 @@ else()
 endif()
 
 # We don't use qt4_add_translation because it doesn't use option
-# -removeidentical with lrelease, which causes larger sizes of the generated qm
-# files
+# -removeidentical (see QTBUG-44323)
 if (USE_QT5)
   set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
 else()
@@ -98,7 +97,7 @@ add_library(pentobi_gui STATIC
   ${pentobi_gui_QM_SRCS})
 
 if (USE_QT5)
-  qt5_use_modules(pentobi_gui Widgets)
+  target_link_libraries(pentobi_gui Qt5::Widgets)
 endif()
 
 # Install translation files. If you change the destination, you need to

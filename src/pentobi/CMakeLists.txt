@@ -97,8 +97,7 @@ else()
 endif()
 
 # We don't use qt4_add_translation because it doesn't use option
-# -removeidentical with lrelease, which causes larger sizes of the generated qm
-# files
+# -removeidentical (see QTBUG-44323)
 if (USE_QT5)
   set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
 else()
@@ -139,7 +138,7 @@ target_link_libraries(pentobi
   )
 
 if (USE_QT5)
-  qt5_use_modules(pentobi Widgets Concurrent)
+  target_link_libraries(pentobi Qt5::Widgets Qt5::Concurrent)
 else()
   target_link_libraries(pentobi
     ${QT_QTGUI_LIBRARY}

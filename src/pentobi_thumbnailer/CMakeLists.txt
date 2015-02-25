@@ -19,7 +19,7 @@ target_link_libraries(pentobi-thumbnailer
   )
 
 if (USE_QT5)
-  qt5_use_modules(pentobi-thumbnailer Widgets)
+  target_link_libraries(pentobi-thumbnailer Qt5::Widgets)
 else()
   target_link_libraries(pentobi-thumbnailer
     ${QT_QTGUI_LIBRARY}

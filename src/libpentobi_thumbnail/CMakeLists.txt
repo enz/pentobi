@@ -10,5 +10,5 @@ add_library(pentobi_thumbnail STATIC
 )
 
 if (USE_QT5)
-  qt5_use_modules(pentobi_thumbnail Widgets)
+  target_link_libraries(pentobi_thumbnail Qt5::Widgets)
 endif()

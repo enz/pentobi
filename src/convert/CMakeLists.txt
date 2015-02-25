@@ -22,7 +22,7 @@ if (MINGW)
 endif()
 
 if (USE_QT5)
-  qt5_use_modules(convert Widgets)
+  target_link_libraries(convert Qt5::Widgets)
 else()
   target_link_libraries(convert
     ${QT_QTSVG_LIBRARY}
