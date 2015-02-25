@@ -109,7 +109,7 @@ Move Player::genmove(const Board& bd, Color c)
         max_time = m_fixed_time;
     else
     {
-        // Rationale for chosing max_count:
+        // Rationale for choosing max_count:
         // * The number at level 1 is very small in Classic/Duo to avoid that
         //   level 1 is too strong for absolute beginners (searches with such a
         //   small number of simulations still produce reasonable moves because
@@ -117,8 +117,7 @@ Move Player::genmove(const Board& bd, Color c)
         //   with a higher number because the playing strength is weaker there.
         // * The number at the highest level is chosen such that the average
         //   time per game and player is 2 min in Duo, 4 min in Classic, 5 min
-        //   in Trigon on a Intel i3-4130. (This takes into account the
-        //   weighting of max_count with the move number below.)
+        //   in Trigon on an Intel i3-4130.
         // * The numbers for other levels are chosen such that they roughly
         //   correspond to equal Elo differences in self-play experiments.
         switch (variant)
@@ -128,7 +127,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::classic_3:
             {
                 static float counts[] =
-                    { 3, 24, 87, 213, 667, 1989, 10780, 98438, 1321164 };
+                    { 3, 24, 87, 213, 667, 1989, 11319, 101391, 1339615 };
                 max_count = counts[level - 1];
             }
             break;
@@ -136,7 +135,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::junior:
             {
                 static float counts[] =
-                    { 3, 17, 44, 123, 426, 1672, 6240, 51590, 5093330 };
+                    { 3, 17, 44, 123, 426, 1672, 6739, 54169, 5476857 };
                 max_count = counts[level - 1];
             }
             break;
@@ -145,7 +144,7 @@ Move Player::genmove(const Board& bd, Color c)
         case Variant::trigon_3:
             {
                 static float counts[] =
-                    { 228, 433, 727, 1501, 2912, 7395, 20828, 61138, 370066 };
+                    { 228, 433, 727, 1501, 2912, 7395, 22494, 66029, 412757 };
                 max_count = counts[level - 1];
             }
             break;
