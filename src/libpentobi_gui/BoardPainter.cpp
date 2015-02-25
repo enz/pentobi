@@ -23,9 +23,6 @@ using libpentobi_base::PointState;
 //-----------------------------------------------------------------------------
 
 BoardPainter::BoardPainter()
-    : m_hasPainted(false),
-      m_coordinates(false),
-      m_coordinateColor(Qt::black)
 {
     m_font.setFamily("Helvetica");
     m_font.setStyleHint(QFont::SansSerif);
@@ -39,8 +36,7 @@ BoardPainter::BoardPainter()
 }
 
 BoardPainter::~BoardPainter()
-{
-}
+{ }
 
 void BoardPainter::drawCoordinates(QPainter& painter, bool isTrigon)
 {

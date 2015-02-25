@@ -125,14 +125,12 @@ public:
 private:
     array<T, max_size> m_a;
 
-    I m_size;
+    I m_size = 0;
 };
 
 template<typename T, unsigned M, typename I>
 inline ArrayList<T, M, I>::ArrayList()
-    : m_size(0)
-{
-}
+{ }
 
 template<typename T, unsigned M, typename I>
 inline ArrayList<T, M, I>::ArrayList(const T& t)

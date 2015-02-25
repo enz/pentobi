@@ -26,7 +26,6 @@ using libboardgame_util::trim;
 
 Output::Output(Variant variant, const string& prefix, bool create_tree)
     : m_create_tree(create_tree),
-      m_next(0),
       m_prefix(prefix),
       m_output_tree(variant)
 {

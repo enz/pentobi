@@ -31,11 +31,6 @@ using namespace std;
 IntervalChecker::IntervalChecker(TimeSource& time_source, double time_interval,
                                  function<bool()> f)
     : m_time_source(time_source),
-      m_is_first_check(true),
-      m_is_deterministic(false),
-      m_result(false),
-      m_count(1),
-      m_count_interval(1),
       m_time_interval(time_interval),
       m_function(move(f))
 {

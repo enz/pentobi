@@ -26,13 +26,10 @@ Property::~Property()
 //-----------------------------------------------------------------------------
 
 SgfNode::SgfNode()
-    : m_parent(nullptr)
-{
-}
+{ }
 
 SgfNode::~SgfNode()
-{
-}
+{ }
 
 void SgfNode::append(unique_ptr<SgfNode> node)
 {

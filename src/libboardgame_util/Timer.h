@@ -33,7 +33,7 @@ public:
 private:
     double m_start;
 
-    TimeSource* m_time_source;
+    TimeSource* m_time_source = nullptr;
 };
 
 inline double Timer::operator()() const

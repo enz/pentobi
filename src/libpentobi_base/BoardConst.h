@@ -158,7 +158,7 @@ private:
 
     unique_ptr<PieceTransforms> m_transforms;
 
-    PieceMap<unsigned> m_nu_attach_points;
+    PieceMap<unsigned> m_nu_attach_points{0};
 
     unique_ptr<MoveInfo[]> m_move_info;
 

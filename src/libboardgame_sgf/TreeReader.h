@@ -43,7 +43,7 @@ public:
     unique_ptr<SgfNode> get_tree_transfer_ownership();
 
 private:
-    SgfNode* m_current;
+    SgfNode* m_current = nullptr;
 
     unique_ptr<SgfNode> m_root;
 

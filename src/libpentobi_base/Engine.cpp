@@ -29,11 +29,7 @@ using libboardgame_util::RandomGenerator;
 //-----------------------------------------------------------------------------
 
 Engine::Engine(Variant variant)
-    : m_accept_illegal(false),
-      m_show_board(false),
-      m_resign(true),
-      m_game(variant),
-      m_player(nullptr)
+    : m_game(variant)
 {
     add("all_legal", &Engine::cmd_all_legal);
     add("clear_board", &Engine::cmd_clear_board);

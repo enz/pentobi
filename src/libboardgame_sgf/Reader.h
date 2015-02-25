@@ -66,7 +66,7 @@ public:
     void read(const string& file);
 
 private:
-    bool m_read_only_main_variation;
+    bool m_read_only_main_variation = false;
 
     bool m_is_in_main_variation;
 

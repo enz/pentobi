@@ -17,13 +17,10 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 TreeReader::TreeReader()
-    : m_current(nullptr)
-{
-}
+{ }
 
 TreeReader::~TreeReader()
-{
-}
+{ }
 
 unique_ptr<SgfNode> TreeReader::get_tree_transfer_ownership()
 {

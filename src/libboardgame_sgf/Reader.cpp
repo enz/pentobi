@@ -36,13 +36,10 @@ bool is_ascii_space(int c)
 //-----------------------------------------------------------------------------
 
 Reader::Reader()
-  : m_read_only_main_variation(false)
-{
-}
+{ }
 
 Reader::~Reader()
-{
-}
+{ }
 
 void Reader::consume_char(char expected)
 {

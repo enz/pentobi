@@ -27,10 +27,7 @@ using libpentobi_base::PiecePoints;
 
 OrientationDisplay::OrientationDisplay(QWidget* parent, const Board& bd)
     : QWidget(parent),
-      m_bd(bd),
-      m_piece(Piece::null()),
-      m_transform(nullptr),
-      m_isColorSelected(false)
+      m_bd(bd)
 {
     setMinimumWidth(30);
     setMinimumHeight(30);

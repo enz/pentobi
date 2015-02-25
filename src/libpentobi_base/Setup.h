@@ -24,19 +24,12 @@ struct Setup
 
     typedef ArrayList<Move,max_pieces> PlacementList;
 
-    Color to_play;
+    Color to_play = Color(0);
 
     ColorMap<PlacementList> placements;
 
-    Setup();
-
     void clear();
 };
-
-inline Setup::Setup()
-    : to_play(Color(0))
-{
-}
 
 inline void Setup::clear()
 {

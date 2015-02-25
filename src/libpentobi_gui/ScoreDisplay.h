@@ -44,9 +44,9 @@ private:
 
     Variant m_variant;
 
-    ColorMap<bool> m_hasMoves;
+    ColorMap<bool> m_hasMoves{false};
 
-    ColorMap<unsigned> m_points;
+    ColorMap<unsigned> m_points{0};
 
     /** Current player of 4th color in Variant::classic_3. */
     Color m_altPlayer;

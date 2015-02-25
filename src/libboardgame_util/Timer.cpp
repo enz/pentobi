@@ -15,15 +15,12 @@ namespace libboardgame_util {
 //-----------------------------------------------------------------------------
 
 Timer::Timer()
-    : m_time_source(nullptr)
-{
-}
+{ }
 
 Timer::Timer(TimeSource& time_source)
     : m_start(time_source()),
       m_time_source(&time_source)
-{
-}
+{ }
 
 void Timer::reset()
 {

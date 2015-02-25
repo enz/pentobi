@@ -504,13 +504,13 @@ private:
     private:
         SearchFunc m_search_func;
 
-        bool m_quit;
+        bool m_quit = false;
 
-        bool m_start_search_flag;
+        bool m_start_search_flag = false;
 
-        bool m_search_finished_flag;
+        bool m_search_finished_flag = false;
 
-        Barrier m_thread_ready;
+        Barrier m_thread_ready{2};
 
         mutex m_start_search_mutex;
 
@@ -520,7 +520,8 @@ private:
 
         condition_variable m_search_finished_cond;
 
-        unique_lock<mutex> m_search_finished_lock;
+        unique_lock<mutex> m_search_finished_lock{m_search_finished_mutex,
+                                                  defer_lock};
 
         thread m_thread;
 
@@ -530,22 +531,22 @@ private:
     unsigned m_nu_threads;
 
     /** See set_full_select_interval(). */
-    unsigned m_full_select_interval;
+    unsigned m_full_select_interval = 1;
 
     /** See set_full_select_min(). */
-    Float m_full_select_min;
+    Float m_full_select_min = numeric_limits<Float>::max();
 
-    Float m_expand_threshold;
+    Float m_expand_threshold = 0;
 
-    Float m_expand_threshold_inc;
+    Float m_expand_threshold_inc = 0;
 
-    bool m_deterministic;
+    bool m_deterministic = false;
 
-    bool m_reuse_subtree;
+    bool m_reuse_subtree = true;
 
-    bool m_reuse_tree;
+    bool m_reuse_tree = false;
 
-    bool m_prune_full_tree;
+    bool m_prune_full_tree = true;
 
     /** Player to play at the root node of the search. */
     PlayerInt m_player;
@@ -557,15 +558,15 @@ private:
     /** Time of last search. */
     double m_last_time;
 
-    Float m_prune_count_start;
+    Float m_prune_count_start = 16;
 
-    Float m_rave_parent_max;
+    Float m_rave_parent_max = 50000;
 
-    Float m_rave_child_max;
+    Float m_rave_child_max = 2000;
 
-    Float m_rave_weight;
+    Float m_rave_weight = 0.3f;
 
-    Float m_rave_dist_final;
+    Float m_rave_dist_final = 0;
 
     /** Minimum simulations to perform in the current search.
         This does not include the count of simulations reused from a subtree of
@@ -670,14 +671,8 @@ SearchBase<S, M, R>::ThreadState::~ThreadState()
 
 template<class S, class M, class R>
 SearchBase<S, M, R>::Thread::Thread(SearchFunc& search_func)
-    : m_search_func(search_func),
-      m_quit(false),
-      m_start_search_flag(false),
-      m_search_finished_flag(false),
-      m_thread_ready(2),
-      m_search_finished_lock(m_search_finished_mutex, defer_lock)
-{
-}
+    : m_search_func(search_func)
+{ }
 
 template<class S, class M, class R>
 SearchBase<S, M, R>::Thread::~Thread()
@@ -767,19 +762,6 @@ void SearchBase<S, M, R>::AssertionHandler::run()
 template<class S, class M, class R>
 SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
-      m_full_select_interval(1),
-      m_full_select_min(numeric_limits<Float>::max()),
-      m_expand_threshold(0),
-      m_expand_threshold_inc(0),
-      m_deterministic(false),
-      m_reuse_subtree(true),
-      m_reuse_tree(false),
-      m_prune_full_tree(true),
-      m_prune_count_start(16),
-      m_rave_parent_max(50000),
-      m_rave_child_max(2000),
-      m_rave_weight(0.3f),
-      m_rave_dist_final(0),
       m_tree_memory(memory == 0 ? 256000000 : memory),
       m_max_nodes(get_max_nodes(m_tree_memory)),
       m_bias_term(0),

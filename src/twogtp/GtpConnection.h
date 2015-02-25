@@ -41,7 +41,7 @@ public:
     string send(const string& command);
 
 private:
-    bool m_quiet;
+    bool m_quiet = true;
 
     string m_prefix;
 

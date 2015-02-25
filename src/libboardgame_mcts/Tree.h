@@ -114,9 +114,9 @@ public:
     private:
         ThreadStorage& m_thread_storage;
 
-        unsigned short m_nu_children;
+        unsigned short m_nu_children = 0;
 
-        Float m_best_value;
+        Float m_best_value = 0;
 
         const Node* m_first_child;
 
@@ -239,8 +239,6 @@ template<typename N>
 inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
                                            Float child_min_count)
     : m_thread_storage(tree.m_thread_storage[thread_id]),
-      m_nu_children(0),
-      m_best_value(0),
       m_first_child(m_thread_storage.next),
       m_best_child(m_first_child)
 {

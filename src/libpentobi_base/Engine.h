@@ -62,15 +62,15 @@ protected:
     Color get_color_arg(const Arguments& args) const;
 
 private:
-    bool m_accept_illegal;
+    bool m_accept_illegal = false;
 
-    bool m_show_board;
+    bool m_show_board = false;
 
-    bool m_resign;
+    bool m_resign = true;
 
     Game m_game;
 
-    PlayerBase* m_player;
+    PlayerBase* m_player = nullptr;
 
     void board_changed();
 

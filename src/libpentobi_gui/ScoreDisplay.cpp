@@ -22,9 +22,7 @@ using libboardgame_util::log;
 //-----------------------------------------------------------------------------
 
 ScoreDisplay::ScoreDisplay(QWidget* parent)
-    : QWidget(parent),
-      m_hasMoves(false),
-      m_points(0)
+    : QWidget(parent)
 {
     m_variant = Variant::classic;
     m_font.setStyleStrategy(QFont::StyleStrategy(QFont::PreferOutline

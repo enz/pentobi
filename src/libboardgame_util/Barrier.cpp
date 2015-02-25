@@ -16,8 +16,7 @@ namespace libboardgame_util {
 
 Barrier::Barrier(unsigned count)
   : m_threshold(count),
-    m_count(count),
-    m_current(0)
+    m_count(count)
 {
     LIBBOARDGAME_ASSERT(count > 0);
 }

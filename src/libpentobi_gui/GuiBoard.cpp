@@ -46,14 +46,7 @@ bool allPointEmpty(const Board& bd, Move mv)
 
 GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
     : QWidget(parent),
-      m_bd(bd),
-      m_isInitialized(false),
-      m_freePlacement(false),
-      m_emptyBoardDirty(true),
-      m_dirty(true),
-      m_selectedPiece(Piece::null()),
-      m_selectedPieceTransform(nullptr),
-      m_isMoveShown(false)
+      m_bd(bd)
 {
     setMinimumWidth(350);
     setMinimumHeight(350);

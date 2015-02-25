@@ -68,9 +68,9 @@ public:
     bool hasPainted() const;
 
 private:
-    bool m_hasPainted;
+    bool m_hasPainted = false;
 
-    bool m_coordinates;
+    bool m_coordinates = false;
 
     bool m_isTrigon;
 
@@ -84,7 +84,7 @@ private:
     /** The height of the last board painted. */
     int m_height;
 
-    QColor m_coordinateColor;
+    QColor m_coordinateColor = Qt::black;
 
     qreal m_fieldWidth;
 

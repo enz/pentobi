@@ -58,17 +58,18 @@ public:
 private:
     ostream& m_out;
 
-    bool m_one_prop_per_line;
+    bool m_one_prop_per_line = false;
 
-    bool m_one_prop_value_per_line;
+    bool m_one_prop_value_per_line = false;
 
     bool m_is_first_prop;
 
-    unsigned m_indent;
+    unsigned m_indent = 0;
 
-    unsigned m_current_indent;
+    unsigned m_current_indent = 0;
 
-    unsigned m_level;
+    unsigned m_level = 0;
+
 
     static string get_escaped(const string& s);
 

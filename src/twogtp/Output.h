@@ -37,7 +37,7 @@ public:
 private:
     bool m_create_tree;
 
-    unsigned m_next;
+    unsigned m_next = 0;
 
     int m_lock_fd;
 

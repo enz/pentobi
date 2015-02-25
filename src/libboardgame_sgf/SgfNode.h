@@ -248,7 +248,7 @@ public:
     void delete_variations();
 
 private:
-    SgfNode* m_parent;
+    SgfNode* m_parent = nullptr;
 
     unique_ptr<SgfNode> m_first_child;
 

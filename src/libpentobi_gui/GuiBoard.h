@@ -97,27 +97,29 @@ protected:
 private:
     const Board& m_bd;
 
-    bool m_isInitialized;
+    bool m_isInitialized = false;
 
-    bool m_freePlacement;
+    bool m_freePlacement = false;
 
     /** Does the empty board need redrawing? */
-    bool m_emptyBoardDirty;
+    bool m_emptyBoardDirty = true;
 
     /** Do the pieces and markup on the board need redrawing?
         If true, the cached board pixmap needs to be repainted. This does not
         include the selected piece (the selected piece is always painted). */
-    bool m_dirty;
+    bool m_dirty = true;
+
+    bool m_isMoveShown = false;
 
     Variant m_variant;
 
     Board::PointStateGrid m_pointState;
 
-    Piece m_selectedPiece;
+    Piece m_selectedPiece = Piece::null();
 
     Color m_selectedPieceColor;
 
-    const Transform* m_selectedPieceTransform;
+    const Transform* m_selectedPieceTransform = nullptr;
 
     CoordPoint m_selectedPieceOffset;
 
@@ -130,8 +132,6 @@ private:
     unique_ptr<QPixmap> m_emptyBoardPixmap;
 
     unique_ptr<QPixmap> m_boardPixmap;
-
-    bool m_isMoveShown;
 
     Color m_currentMoveShownColor;
 

@@ -45,15 +45,15 @@ protected:
     TimeSource& m_time_source;
 
 private:
-    bool m_is_first_check;
+    bool m_is_first_check = true;
 
-    bool m_is_deterministic;
+    bool m_is_deterministic = false;
 
-    bool m_result;
+    bool m_result = false;
 
-    unsigned m_count;
+    unsigned m_count = 1;
 
-    unsigned m_count_interval;
+    unsigned m_count_interval = 1;
 
     double m_time_interval;
 

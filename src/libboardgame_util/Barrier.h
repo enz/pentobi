@@ -35,7 +35,7 @@ private:
 
     unsigned m_count;
 
-    unsigned m_current;
+    unsigned m_current = 0;
 };
 
 //-----------------------------------------------------------------------------

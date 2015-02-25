@@ -394,8 +394,7 @@ Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
     BoardConst::s_adj_status;
 
 BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
-    : m_geo(libpentobi_base::get_geometry(board_type)),
-      m_nu_attach_points(0)
+    : m_geo(libpentobi_base::get_geometry(board_type))
 {
     m_board_type = board_type;
     if (board_type == BoardType::trigon && piece_set == PieceSet::trigon)

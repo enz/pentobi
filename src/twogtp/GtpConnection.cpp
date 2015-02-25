@@ -68,7 +68,6 @@ vector<string> split_args(string s)
 //-----------------------------------------------------------------------------
 
 GtpConnection::GtpConnection(const string& command)
-    : m_quiet(true)
 {
     vector<string> args = split_args(command);
     if (args.size() == 0)

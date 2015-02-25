@@ -21,8 +21,7 @@ class FmtSaver
 {
 public:
     FmtSaver(ostream& out)
-      : m_out(out),
-        m_dummy(nullptr)
+        : m_out(out)
     {
         m_dummy.copyfmt(out);
     }
@@ -35,7 +34,7 @@ public:
 private:
     ostream& m_out;
 
-    ios m_dummy;
+    ios m_dummy{nullptr};
 };
 
 //----------------------------------------------------------------------------

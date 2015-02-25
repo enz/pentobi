@@ -20,14 +20,8 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 Writer::Writer(ostream& out)
-    : m_out(out),
-      m_one_prop_per_line(false),
-      m_one_prop_value_per_line(false),
-      m_indent(0),
-      m_current_indent(0),
-      m_level(0)
-{
-}
+    : m_out(out)
+{ }
 
 void Writer::begin_node()
 {

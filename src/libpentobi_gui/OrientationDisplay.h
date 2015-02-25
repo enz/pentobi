@@ -56,11 +56,11 @@ protected:
 private:
     const Board& m_bd;
 
-    Piece m_piece;
+    Piece m_piece = Piece::null();
 
-    const Transform* m_transform;
+    const Transform* m_transform = nullptr;
 
-    bool m_isColorSelected;
+    bool m_isColorSelected = false;
 
     Color m_color;
 };
