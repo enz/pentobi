@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <defs>
-<linearGradient id="linearGradient4300" x1="-4.3189" gradientUnits="userSpaceOnUse" y1="34.895" gradientTransform="translate(8.6612036,-6.8786814)" x2="-4.5616" y2="32.951">
+<linearGradient id="linearGradient4300" x1="-4.3189" gradientUnits="userSpaceOnUse" y1="34.895" gradientTransform="translate(8.661204 -6.878681)" x2="-4.5616" y2="32.951">
 <stop stop-color="#ddc600" offset="0"/>
-<stop stop-color="#ffec46" stop-opacity="0.98095238" offset="1"/>
+<stop stop-color="#ffec46" stop-opacity=".9809524" offset="1"/>
 </linearGradient>
-<linearGradient id="linearGradient4302" x1="-9.9692" gradientUnits="userSpaceOnUse" y1="39.718" gradientTransform="matrix(0.2710454,0,0,0.27104514,7.1031417,17.312825)" x2="-12.044" y2="31.497">
+<linearGradient id="linearGradient4302" x1="-9.9692" gradientUnits="userSpaceOnUse" y1="39.718" gradientTransform="matrix(.2710454 0 0 .2710451 7.103142 17.31282)" x2="-12.044" y2="31.497">
 <stop stop-color="#e4cc00" offset="0"/>
 <stop stop-color="#fff283" offset="1"/>
 </linearGradient>
-<linearGradient id="linearGradient6049" x1="7.7452" gradientUnits="userSpaceOnUse" y1="35.359" gradientTransform="translate(-4.0658641,-11.889087)" x2="8.74" y2="37.038">
-<stop stop-color="#FFF" stop-opacity="0.38289964" offset="0"/>
+<linearGradient id="linearGradient6049" x1="7.7452" gradientUnits="userSpaceOnUse" y1="35.359" gradientTransform="translate(-4.065864 -11.88909)" x2="8.74" y2="37.038">
+<stop stop-color="#FFF" stop-opacity=".3828996" offset="0"/>
 <stop stop-color="#FFF" stop-opacity="0" offset="1"/>
 </linearGradient>
 <linearGradient id="linearGradient6141" y2="25.149" gradientUnits="userSpaceOnUse" y1="23.735" x2="4.5858" x1="3.6794">
-<stop stop-color="#FFF" stop-opacity="0.49070632" offset="0"/>
+<stop stop-color="#FFF" stop-opacity=".4907063" offset="0"/>
 <stop stop-color="#FFF" stop-opacity="0" offset="1"/>
 </linearGradient>
 </defs>
@@ -27,33 +27,32 @@
 </cc:Work>
 </rdf:RDF>
 </metadata>
-<g id="g4110" transform="translate(-2,-20.999998)">
-<rect rx="0.34433" ry="0" height="4" width="4" y="25" x="2" fill="url(#linearGradient4300)"/>
-<path stroke-linejoin="miter" d="m2.5002,28.5,0-2.9996,2.9996,0" stroke="url(#linearGradient4302)" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="1.00036561" fill="none"/>
+<g id="g4110" transform="translate(-2 -21)">
+<rect rx="0" ry="0" height="4" width="4" y="25" x="2" fill="url(#linearGradient4300)"/>
+<path d="m2.5002 28.5v-2.9996h2.9996" stroke="url(#linearGradient4302)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
 </g>
-<g id="g6043" transform="translate(-2,-21.999998)">
-<rect rx="0.34433" ry="0" height="4" width="4" y="22" x="2" fill="#ef2929"/>
-<path stroke-linejoin="miter" d="m2.5002,25.5,0-2.9996,2.9996,0" stroke="url(#linearGradient6049)" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="1.00036561" fill="none"/>
+<g id="g6043" transform="translate(-2 -22)">
+<rect rx="0" ry="0" height="4" width="4" y="22" x="2" fill="#ef2929"/>
+<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#linearGradient6049)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
 </g>
-<g id="g6135" transform="translate(6,-21.999998)">
-<rect rx="0.34433" ry="0" height="4" width="4" y="22" x="2" fill="#73d216"/>
-<path stroke-linejoin="miter" d="m2.5002,25.5,0-2.9996,2.9996,0" stroke="url(#linearGradient6141)" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="1.00036561" fill="none"/>
+<g id="g6135" transform="translate(6 -22)">
+<rect rx="0" ry="0" height="4" width="4" y="22" x="2" fill="#73d216"/>
+<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#linearGradient6141)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
 </g>
-<g id="g6167" transform="translate(2,-13.999998)" fill="#3465a4">
-<rect rx="0.34433" ry="0" height="4" width="4" y="22" x="2"/>
-<path stroke-linejoin="miter" d="m2.5002,25.5,0-2.9996,2.9996,0" stroke="url(#linearGradient6049)" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="1.00036561"/>
+<g id="g6167" transform="translate(2 -14)" fill="#3465a4">
+<rect rx="0" ry="0" height="4" width="4" y="22" x="2"/>
+<path stroke-width="1.000366" stroke="url(#linearGradient6049)" stroke-linecap="square" d="m2.5002 25.5v-2.9996h2.9996"/>
 </g>
-<use xlink:href="#g6043" transform="translate(4,-9.2651362e-8)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g6043" transform="translate(4,3.9999999)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g6043" transform="translate(4 -9.265136e-8)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g6043" transform="translate(4 4)" height="16" width="16" y="0" x="0"/>
 <use xlink:href="#g6043" transform="translate(8,4)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g6135" transform="translate(4,-9.2651362e-8)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g6135" transform="translate(4,3.9999999)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g6135" transform="translate(4.0000001,7.9999999)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g4110" transform="translate(0,3.9999999)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g4110" transform="translate(0,7.9999999)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g6135" transform="translate(4 -9.265136e-8)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g6135" transform="translate(4 4)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g6135" transform="translate(4 8)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g4110" transform="translate(0 4)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g4110" transform="translate(0 8)" height="16" width="16" y="0" x="0"/>
 <use xlink:href="#g4110" transform="translate(4,8)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g6167" transform="translate(4,-9.2651366e-8)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g6167" transform="translate(4,3.9999999)" height="16" width="16" y="0" x="0"/>
-<use xlink:href="#g6167" transform="translate(8,3.9999999)" height="16" width="16" y="0" x="0"/>
-<rect stroke-linejoin="miter" stroke-opacity="0.19231" rx="0" height="15" width="15" stroke="#000" stroke-linecap="round" stroke-dasharray="none" x="0.50005" y="0.50005" stroke-miterlimit="4" stroke-width="1.0001" fill="none"/>
+<use xlink:href="#g6167" transform="translate(4 -9.265137e-8)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g6167" transform="translate(4 4)" height="16" width="16" y="0" x="0"/>
+<use xlink:href="#g6167" transform="translate(8 4)" height="16" width="16" y="0" x="0"/>
 </svg>
