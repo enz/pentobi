@@ -736,7 +736,6 @@ void MainWindow::createActions()
     auto groupToolBarText = new QActionGroup(this);
 
     m_actionAbout = createAction(tr("&About"));
-    m_actionAbout->setIcon(QIcon::fromTheme("help-about"));
     connect(m_actionAbout, SIGNAL(triggered()), SLOT(about()));
 
     m_actionAnalyzeGame = createAction(tr("&Analyze Game..."));
@@ -853,7 +852,6 @@ void MainWindow::createActions()
     connect(m_actionForward10, SIGNAL(triggered()), SLOT(forward10()));
 
     m_actionFullscreen = createAction(tr("&Fullscreen"));
-    m_actionFullscreen->setIcon(QIcon::fromTheme("view-fullscreen"));
     m_actionFullscreen->setShortcut(QString("F11"));
     connect(m_actionFullscreen, SIGNAL(triggered()), SLOT(fullscreen()));
 
@@ -871,7 +869,6 @@ void MainWindow::createActions()
     connect(m_actionGotoMove, SIGNAL(triggered()), SLOT(gotoMove()));
 
     m_actionHelp = createAction(tr("&Contents"));
-    m_actionHelp->setIcon(QIcon::fromTheme("help-contents"));
     m_actionHelp->setShortcut(QKeySequence::HelpContents);
     connect(m_actionHelp, SIGNAL(triggered()), SLOT(help()));
 
@@ -882,7 +879,6 @@ void MainWindow::createActions()
             SLOT(interestingMove(bool)));
 
     m_actionInterrupt = createAction(tr("St&op"));
-    m_actionInterrupt->setIcon(QIcon::fromTheme("process-stop"));
     m_actionInterrupt->setEnabled(false);
     connect(m_actionInterrupt, SIGNAL(triggered()), SLOT(interrupt()));
 
@@ -989,7 +985,6 @@ void MainWindow::createActions()
             SLOT(noMoveAnnotation(bool)));
 
     m_actionOpen = createAction(tr("&Open..."));
-    m_actionOpen->setIcon(QIcon::fromTheme("document-open"));
     m_actionOpen->setShortcut(QKeySequence::Open);
     connect(m_actionOpen, SIGNAL(triggered()), SLOT(open()));
     m_actionPlaceSelectedPiece = createAction();
@@ -1054,17 +1049,14 @@ void MainWindow::createActions()
             SLOT(rotatePieceClockwise()));
 
     m_actionQuit = createAction(tr("&Quit"));
-    m_actionQuit->setIcon(QIcon::fromTheme("application-exit"));
     m_actionQuit->setShortcut(QKeySequence::Quit);
     connect(m_actionQuit, SIGNAL(triggered()), SLOT(close()));
 
     m_actionSave = createAction(tr("&Save"));
-    m_actionSave->setIcon(QIcon::fromTheme("document-save"));
     m_actionSave->setShortcut(QKeySequence::Save);
     connect(m_actionSave, SIGNAL(triggered()), SLOT(save()));
 
     m_actionSaveAs = createAction(tr("Save &As..."));
-    m_actionSaveAs->setIcon(QIcon::fromTheme("document-save-as"));
     m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), SLOT(saveAs()));
 
@@ -1349,7 +1341,6 @@ void MainWindow::createMenu()
     menuGame->addSeparator();
     menuGame->addAction(m_actionOpen);
     m_menuOpenRecent = menuGame->addMenu(tr("Open R&ecent"));
-    m_menuOpenRecent->setIcon(QIcon::fromTheme("document-open-recent"));
     for (int i = 0; i < maxRecentFiles; ++i)
         m_menuOpenRecent->addAction(m_actionRecentFile[i]);
     menuGame->addSeparator();
