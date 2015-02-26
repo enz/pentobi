@@ -560,7 +560,10 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
         for (size_t i = 0; i < nu_transforms; ++i)
         {
             if (log_move_creation)
-                log("Transformation ", typeid(*transforms[i]).name());
+            {
+                auto& transform = *transforms[i];
+                log("Transformation ", typeid(transform).name());
+            }
             auto point_type = m_geo.get_point_type(x, y);
             if (transforms[i]->get_new_point_type() != point_type)
                 continue;
