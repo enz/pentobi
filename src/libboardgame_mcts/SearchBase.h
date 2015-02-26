@@ -1151,8 +1151,6 @@ void SearchBase<S, M, R>::playout(ThreadState& thread_state)
     Move second_last = nu_moves > 1 ? moves[nu_moves - 2].move : Move::null();
     while (true)
     {
-        Move lgr1 = Move::null();
-        Move lgr2 = Move::null();
         PlayerMove mv;
         if (! state.gen_playout_move(m_lgr, last, second_last, mv))
             break;
