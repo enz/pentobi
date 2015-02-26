@@ -31,13 +31,6 @@ Game::Game(Variant variant)
     init(variant);
 }
 
-Game::Game(unique_ptr<SgfNode>& root)
-  : m_bd(new Board(m_tree.get_variant())),
-    m_tree(m_tree.get_variant())
-{
-    init(root);
-}
-
 void Game::add_setup(Color c, Move mv)
 {
     auto& node = m_tree.add_setup(*m_current, c, mv);
