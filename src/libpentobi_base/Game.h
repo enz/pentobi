@@ -21,8 +21,6 @@ class Game
 public:
     Game(Variant variant);
 
-    Game(unique_ptr<SgfNode>& root);
-
     void init(Variant variant);
 
     void init();
