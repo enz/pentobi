@@ -2,8 +2,6 @@ if (NOT USE_QT5)
   include(${QT_USE_FILE})
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 add_executable(convert Main.cpp)
 
 # CMake 2.8.9 doesn't seem to support finding plugin paths yet but

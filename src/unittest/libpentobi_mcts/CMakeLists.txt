@@ -1,5 +1,3 @@
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 add_executable(unittest_libpentobi_mcts
   SearchTest.cpp
 )

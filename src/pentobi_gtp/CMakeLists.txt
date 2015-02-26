@@ -1,5 +1,3 @@
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 add_executable(pentobi-gtp
   Engine.h
   Engine.cpp

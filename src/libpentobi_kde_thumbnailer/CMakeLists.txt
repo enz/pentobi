@@ -16,8 +16,6 @@ include(${QT_USE_FILE})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 set(pentobi_kde_thumbnailer_STAT_SRCS
   ../libboardgame_util/Assert.cpp
   ../libboardgame_util/Log.cpp

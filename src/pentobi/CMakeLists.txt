@@ -4,8 +4,6 @@ if (NOT USE_QT5)
   include(${QT_USE_FILE})
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 set(pentobi_SRCS
   AnalyzeGameWidget.h
   AnalyzeGameWidget.cpp

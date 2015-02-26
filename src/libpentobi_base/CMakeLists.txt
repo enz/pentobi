@@ -1,5 +1,3 @@
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 set(pentobi_base_STAT_SRCS
   BoardConst.h
   BoardConst.cpp

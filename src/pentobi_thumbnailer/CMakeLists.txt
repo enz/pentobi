@@ -2,8 +2,6 @@ if (NOT USE_QT5)
   include(${QT_USE_FILE})
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 set(pentobi_thumbnailer_SRCS Main.cpp)
 
 add_executable(pentobi-thumbnailer Main.cpp)
