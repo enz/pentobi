@@ -84,7 +84,7 @@ void RatedGamesList::updateContent(Variant variant,
             << tr("Date");
     m_model->setHorizontalHeaderLabels(headers);
     auto header = horizontalHeader();
-    header->setDefaultAlignment(Qt::AlignLeft);
+    header->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     header->setHighlightSections(false);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     header->setSectionResizeMode(QHeaderView::ResizeToContents);
