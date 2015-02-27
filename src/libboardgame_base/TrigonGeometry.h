@@ -50,10 +50,10 @@ public:
     unsigned get_period_y() const override;
 
 protected:
-    void init_is_onboard(Point p, bool& is_onboard) const;
+    void init_is_onboard(Point p, bool& is_onboard) const override;
 
     void init_adj_diag(Point p, NullTermList<Point, 4>& adj,
-                       NullTermList<Point, 9>& diag) const;
+                       NullTermList<Point, 9>& diag) const override;
 
 private:
     /** Stores already created geometries by size. */

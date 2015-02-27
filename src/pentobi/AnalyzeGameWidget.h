@@ -59,7 +59,7 @@ public:
         sequence when the analysis was done. */
     void setCurrentPosition(const Game& game, const SgfNode& node);
 
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
 signals:
     /** Tells that the analysis has finished. */

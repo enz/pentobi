@@ -27,7 +27,7 @@ public:
 
     void updateContent(const RatingHistory& history);
 
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
 protected:
     void paintEvent(QPaintEvent* event) override;
