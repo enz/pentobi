@@ -11,7 +11,6 @@
 #include "SearchParamConst.h"
 #include "libboardgame_mcts/Tree.h"
 #include "libpentobi_base/Board.h"
-#include "libpentobi_base/MoveList.h"
 
 namespace libpentobi_mcts {
 

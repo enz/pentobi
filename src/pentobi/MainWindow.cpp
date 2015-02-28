@@ -81,7 +81,6 @@ using libboardgame_util::trim_right;
 using libboardgame_util::ArrayList;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
-using libpentobi_base::MoveList;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;

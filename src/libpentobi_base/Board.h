@@ -14,6 +14,7 @@
 #include "Variant.h"
 #include "Geometry.h"
 #include "Grid.h"
+#include "MoveList.h"
 #include "MoveMarker.h"
 #include "PointList.h"
 #include "PointState.h"
@@ -208,8 +209,7 @@ public:
         @param c The color
         @param marker A move marker reused for efficiency (needs to be clear)
         @param[out] moves The list of moves. */
-    void gen_moves(Color c, MoveMarker& marker,
-                   ArrayList<Move, Move::range>& moves) const;
+    void gen_moves(Color c, MoveMarker& marker, MoveList& moves) const;
 
     bool has_moves(Color c) const;
 

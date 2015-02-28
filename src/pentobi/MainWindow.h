@@ -45,6 +45,7 @@ using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Game;
 using libpentobi_base::Move;
+using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::Piece;
 using libpentobi_base::Point;
@@ -586,7 +587,7 @@ private:
 
     QString m_file;
 
-    unique_ptr<ArrayList<Move, Move::range>> m_legalMoves;
+    unique_ptr<MoveList> m_legalMoves;
 
     unsigned m_legalMoveIndex;
 

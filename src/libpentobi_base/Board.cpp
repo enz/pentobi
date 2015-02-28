@@ -80,8 +80,7 @@ void Board::copy_from(const Board& bd)
     }
 }
 
-void Board::gen_moves(Color c, MoveMarker& marker,
-                      ArrayList<Move, Move::range>& moves) const
+void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
 {
     moves.clear();
     if (is_first_piece(c))
