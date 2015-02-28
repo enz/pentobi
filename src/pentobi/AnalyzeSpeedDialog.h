@@ -35,7 +35,7 @@ public slots:
     void accept() override;
 
 private:
-    int m_speedValue;
+    int m_speedValue = 0;
 
     QStringList m_items;
 };

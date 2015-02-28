@@ -13,8 +13,7 @@
 //-----------------------------------------------------------------------------
 
 AnalyzeSpeedDialog::AnalyzeSpeedDialog(QWidget* parent, const QString& title)
-    : QInputDialog(parent),
-      m_speedValue(0)
+    : QInputDialog(parent)
 {
     m_items << tr("Fast") << tr("Normal") << tr("Slow");
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
