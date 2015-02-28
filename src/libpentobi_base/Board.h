@@ -402,7 +402,7 @@ private:
     StartingPoints m_starting_points;
 
     void gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
-                   ArrayList<Move,Move::range>& moves) const;
+                   MoveList& moves) const;
 
     bool has_moves(Color c, Point p) const;
 
