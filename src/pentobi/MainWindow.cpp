@@ -198,21 +198,7 @@ float getHeuristic(const Board& bd, Move mv)
 MainWindow::MainWindow(const QString& initialFile, const QString& helpDir,
                        const QString& booksDir, bool noBook,
                        unsigned nu_threads, size_t memory)
-    : m_noDelay(false),
-      m_isGenMoveRunning(false),
-      m_isAnalyzeRunning(false),
-      m_autoPlay(true),
-      m_isRated(false),
-      m_ignoreCommentTextChanged(false),
-      m_genMoveId(0),
-      m_lastComputerMovesBegin(0),
-      m_lastComputerMovesEnd(0),
-      m_helpDir(helpDir),
-      m_helpWindow(nullptr),
-      m_ratingDialog(nullptr),
-      m_analyzeGameWindow(nullptr),
-      m_legalMoves(new MoveList),
-      m_leaveFullscreenButton(nullptr)
+    : m_helpDir(helpDir)
 {
     Util::initDataDir();
     QSettings settings;
@@ -1677,6 +1663,8 @@ void MainWindow::findMove()
     auto& bd = getBoard();
     if (bd.is_game_over())
         return;
+    if (! m_legalMoves)
+        m_legalMoves.reset(new MoveList);
     if (m_legalMoves->empty())
     {
         if (! m_marker)
@@ -3652,7 +3640,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     gui_board_util::setMarkup(*m_guiBoard, *m_game, markMovesBegin,
                               markMovesEnd, markVariations);
     m_scoreDisplay->updateScore(bd);
-    m_legalMoves->clear();
+    if (m_legalMoves)
+        m_legalMoves->clear();
     m_legalMoveIndex = 0;
     bool isGameOver = bd.is_game_over();
     if (isGameOver && ! m_actionSetupMode->isChecked())

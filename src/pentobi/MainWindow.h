@@ -264,28 +264,28 @@ private:
 
     unique_ptr<Player> m_player;
 
-    bool m_noDelay;
+    bool m_noDelay = false;
 
-    bool m_isGenMoveRunning;
+    bool m_isGenMoveRunning = false;
 
-    bool m_isAnalyzeRunning;
+    bool m_isAnalyzeRunning = false;
 
     /** Should the computer generate a move if it is its turn?
         Enabled on game start (if the computer plays at least one color)
         or after selecting Play. Disabled when navigating in the game. */
-    bool m_autoPlay;
+    bool m_autoPlay = false;
 
     /** Flag indicating that the position after the last move played was
         a terminal position. */
     bool m_gameFinished;
 
-    bool m_isRated;
+    bool m_isRated = false;
 
     /** Flag set while setting the text in m_comment for fast return in the
         textChanged() handler.
         Used because QPlainTextEdit does not have a textEdited() signal and
         we only need to handle edits. */
-    bool m_ignoreCommentTextChanged;
+    bool m_ignoreCommentTextChanged = false;
 
     /** Color played by the user in a rated game.
         Only defined if m_isRated is true. In game variants with multiple
@@ -295,7 +295,7 @@ private:
 
     /** Integer ID assigned to the currently running move generation.
         Used to ignore finished events from canceled move generations. */
-    unsigned m_genMoveId;
+    unsigned m_genMoveId = 0;
 
     /** Beginning of move number range of last moves played by the computer
         without pause.
@@ -304,13 +304,13 @@ private:
         it would be hard to see what the last moves were if the computer plays
         quickly. A value of 0 means that there are no last moves played by
         the computer to be marked. */
-    unsigned m_lastComputerMovesBegin;
+    unsigned m_lastComputerMovesBegin = 0;
 
     /** End (inclusive) of move number range of last moves played by the
         computer without pause.
         Only defined if m_lastComputerMovesBegin is not 0.
         @see m_lastComputerMovesBegin */
-    unsigned m_lastComputerMovesEnd;
+    unsigned m_lastComputerMovesEnd = 0;
 
     /** Current playing level of m_player.
         Only use if m_useTimeLimit is false. Possible values for m_level are in
@@ -346,11 +346,11 @@ private:
 
     QPlainTextEdit* m_comment;
 
-    HelpWindow* m_helpWindow;
+    HelpWindow* m_helpWindow = nullptr;
 
-    RatingDialog* m_ratingDialog;
+    RatingDialog* m_ratingDialog = nullptr;
 
-    AnalyzeGameWindow* m_analyzeGameWindow;
+    AnalyzeGameWindow* m_analyzeGameWindow = nullptr;
 
     QAction* m_actionAbout;
 
@@ -592,7 +592,7 @@ private:
 
     QLabel* m_moveNumber;
 
-    LeaveFullscreenButton* m_leaveFullscreenButton;
+    LeaveFullscreenButton* m_leaveFullscreenButton = nullptr;
 
     int m_lastRemainingSeconds;
 
