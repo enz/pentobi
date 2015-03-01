@@ -115,7 +115,17 @@ void analyze(const string& file)
     stat_cpu_b.write(cout, true, 3, false, true);
     cout << "\nCpuW: ";
     stat_cpu_w.write(cout, true, 3, false, true);
-    cout << "\nLen: ";
+    auto cpu_b = stat_cpu_b.get_mean();
+    auto cpu_w = stat_cpu_w.get_mean();
+    auto err_cpu_b = stat_cpu_b.get_error();
+    auto err_cpu_w = stat_cpu_w.get_error();
+    cout << "\nCpuB/CpuW: ";
+    if (cpu_b > 0 && cpu_w > 0)
+        cout << setprecision(3) << cpu_b / cpu_w << "+-"
+             << cpu_b / cpu_w * hypot(err_cpu_b / cpu_b, err_cpu_w / cpu_w);
+    else
+        cout << "-";
+    cout << ", Len: ";
     stat_length.write(cout, true, 1, true, true);
     if (stat_fast_open.get_mean() > 0)
     {
