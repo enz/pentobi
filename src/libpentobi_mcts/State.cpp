@@ -425,6 +425,7 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
 void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
+    const auto& is_piece_considered = *m_is_piece_considered[c];
     m_playout_features[c].set_local(m_bd);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
@@ -443,7 +444,8 @@ void State::init_moves_with_gamma(Color c)
     m_is_move_list_initialized[c] = true;
     m_nu_new_moves[c] = 0;
     m_last_attach_points_end[c] = m_bd.get_attach_points(c).end();
-    if (moves.empty() && ! m_force_consider_all_pieces)
+    if (moves.empty()
+            && &is_piece_considered != &m_shared_const.is_piece_considered_all)
     {
         m_force_consider_all_pieces = true;
         init_moves_with_gamma(c);
@@ -453,13 +455,14 @@ void State::init_moves_with_gamma(Color c)
 void State::init_moves_without_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
+    const auto& is_piece_considered = *m_is_piece_considered[c];
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
     moves.clear();
     Board::PiecesLeftList pieces_considered;
     for (Piece piece : m_bd.get_pieces_left(c))
-        if ((*m_is_piece_considered[c])[piece])
+        if (is_piece_considered[piece])
             pieces_considered.push_back(piece);
     auto& is_forbidden = m_bd.is_forbidden(c);
     if (m_bd.is_first_piece(c))
@@ -484,7 +487,8 @@ void State::init_moves_without_gamma(Color c)
     m_is_move_list_initialized[c] = true;
     m_nu_new_moves[c] = 0;
     m_last_attach_points_end[c] = m_bd.get_attach_points(c).end();
-    if (moves.empty() && ! m_force_consider_all_pieces)
+    if (moves.empty()
+            && &is_piece_considered != &m_shared_const.is_piece_considered_all)
     {
         m_force_consider_all_pieces = true;
         init_moves_without_gamma(c);
