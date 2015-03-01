@@ -121,7 +121,7 @@ void analyze(const string& file)
     auto err_cpu_w = stat_cpu_w.get_error();
     cout << "\nCpuB/CpuW: ";
     if (cpu_b > 0 && cpu_w > 0)
-        cout << setprecision(3) << cpu_b / cpu_w << "+-"
+        cout << fixed << setprecision(3) << cpu_b / cpu_w << "+-"
              << cpu_b / cpu_w * hypot(err_cpu_b / cpu_b, err_cpu_w / cpu_w);
     else
         cout << "-";
