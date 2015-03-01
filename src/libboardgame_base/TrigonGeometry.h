@@ -149,7 +149,7 @@ void TrigonGeometry<P>::init_adj_diag(Point p, AdjList& adj,
 
         // The order does not matter logically but it is better to put far away
         // 2nd order adjacent points first because it slightly increases the
-        // efficiency of libpentobi_base::BoardConst, which uses tge forbidden
+        // efficiency of libpentobi_base::BoardConst, which uses the forbidden
         // status of the first few points from this list during move generation
         // and those points can reject more moves.
         if (x > 1 && this->is_onboard(x - 2, y))
