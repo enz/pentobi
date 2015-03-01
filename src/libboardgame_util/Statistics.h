@@ -172,7 +172,7 @@ inline FLOAT Statistics<FLOAT>::get_deviation() const
 }
 
 template<typename FLOAT>
-inline FLOAT Statistics<FLOAT>::get_error() const
+FLOAT Statistics<FLOAT>::get_error() const
 {
     auto count = get_count();
     return count == 0 ? 0 : get_deviation() / sqrt(count);
