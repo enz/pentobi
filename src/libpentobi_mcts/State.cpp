@@ -425,7 +425,7 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
 void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
-    const auto& is_piece_considered = *m_is_piece_considered[c];
+    auto& is_piece_considered = *m_is_piece_considered[c];
     m_playout_features[c].set_local(m_bd);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
@@ -455,7 +455,7 @@ void State::init_moves_with_gamma(Color c)
 void State::init_moves_without_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_pieces_considered();
-    const auto& is_piece_considered = *m_is_piece_considered[c];
+    auto& is_piece_considered = *m_is_piece_considered[c];
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
