@@ -17,8 +17,6 @@
 
 namespace libboardgame_gtp {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Utility functions. */
@@ -67,8 +65,7 @@ Engine::Engine()
 }
 
 Engine::~Engine()
-{
-}
+{ }
 
 void Engine::add(const string& name, Handler f)
 {

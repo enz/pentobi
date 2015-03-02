@@ -16,8 +16,6 @@
 
 namespace libboardgame_sgf {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 Property::~Property()

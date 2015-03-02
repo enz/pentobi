@@ -17,7 +17,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::util::get_path_from_root;
 using libpentobi_base::boardutil::get_current_position_as_setup;

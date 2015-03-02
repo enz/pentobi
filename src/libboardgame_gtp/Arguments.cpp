@@ -14,8 +14,6 @@
 
 namespace libboardgame_gtp {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 void Arguments::check_size(unsigned n) const

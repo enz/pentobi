@@ -16,7 +16,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::is_main_variation;

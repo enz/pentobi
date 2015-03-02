@@ -19,8 +19,6 @@ using libboardgame_util::log;
 
 namespace libboardgame_test {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 namespace {

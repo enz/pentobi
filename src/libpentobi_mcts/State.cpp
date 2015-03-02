@@ -16,7 +16,6 @@
 
 namespace libpentobi_mcts {
 
-using namespace std;
 using libboardgame_util::fast_exp;
 using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::BoardType;

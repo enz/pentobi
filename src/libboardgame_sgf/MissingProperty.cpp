@@ -12,8 +12,6 @@
 
 namespace libboardgame_sgf {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 MissingProperty::MissingProperty(const string& message)

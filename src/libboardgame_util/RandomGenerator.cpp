@@ -14,8 +14,6 @@
 
 namespace libboardgame_util {
 
-using namespace std;
-
 //----------------------------------------------------------------------------
 
 namespace {

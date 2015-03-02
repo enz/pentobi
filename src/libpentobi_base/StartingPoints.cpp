@@ -12,8 +12,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 void StartingPoints::add_colored_starting_point(const Geometry& geo,

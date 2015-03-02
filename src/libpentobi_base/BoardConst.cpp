@@ -24,7 +24,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
 using libboardgame_base::PointTransfRot180;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;

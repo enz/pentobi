@@ -19,7 +19,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
 using libboardgame_base::PointTransfIdent;
 using libboardgame_base::PointTransfRefl;
 using libboardgame_base::PointTransfReflRot180;

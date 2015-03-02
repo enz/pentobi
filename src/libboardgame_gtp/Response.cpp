@@ -14,15 +14,12 @@
 
 namespace libboardgame_gtp {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 ostringstream Response::s_dummy;
 
 Response::~Response()
-{
-}
+{ }
 
 void Response::write(ostream& out, string& buffer) const
 {

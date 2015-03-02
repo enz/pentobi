@@ -18,8 +18,6 @@
 
 namespace libboardgame_util {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG

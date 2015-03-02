@@ -15,8 +15,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 namespace {

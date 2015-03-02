@@ -12,8 +12,6 @@
 
 namespace libboardgame_sgf {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 TreeReader::TreeReader()

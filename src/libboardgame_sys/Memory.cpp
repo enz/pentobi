@@ -23,8 +23,6 @@
 
 namespace libboardgame_sys {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 size_t get_memory()

@@ -61,7 +61,6 @@
 #include <QDesktopServices>
 #endif
 
-using namespace std;
 using Util::getPlayerString;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;

@@ -22,8 +22,6 @@
 #include <QVBoxLayout>
 #include "Util.h"
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)

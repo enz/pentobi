@@ -15,13 +15,10 @@
 
 namespace libboardgame_gtp {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 CmdLine::~CmdLine()
-{
-}
+{ }
 
 void CmdLine::add_elem(string::const_iterator begin,
                        string::const_iterator end)

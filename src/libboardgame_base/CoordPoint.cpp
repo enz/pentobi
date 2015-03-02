@@ -14,8 +14,6 @@
 
 namespace libboardgame_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 ostream& operator<<(ostream& out, const CoordPoint& p)

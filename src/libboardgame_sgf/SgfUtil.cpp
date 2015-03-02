@@ -20,7 +20,6 @@
 namespace libboardgame_sgf {
 namespace util {
 
-using namespace std;
 using libboardgame_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
