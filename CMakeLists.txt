@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.8.12)
 
 project(Pentobi)
 set(PENTOBI_VERSION 9.UNKNOWN)
@@ -18,9 +18,6 @@ option(PENTOBI_BUILD_QML "Build QtQuick-based GUI" OFF)
 option(PENTOBI_BUILD_KDE_THUMBNAILER "Build thumbnailer for KDE" OFF)
 option(USE_QT5 "Use Qt 5 instead of Qt 4" OFF)
 
-if (PENTOBI_BUILD_KDE_THUMBNAILER AND USE_QT5)
-  message(FATAL_ERROR "PENTOBI_BUILD_KDE_THUMBNAILER requires USE_QT5=0")
-endif()
 if (PENTOBI_BUILD_KDE_THUMBNAILER AND NOT PENTOBI_BUILD_GUI)
   message(FATAL_ERROR
     "PENTOBI_BUILD_KDE_THUMBNAILER requires PENTOBI_BUILD_GUI=1")

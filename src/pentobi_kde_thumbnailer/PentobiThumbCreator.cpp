@@ -9,23 +9,17 @@
 #include <QImage>
 #include "libpentobi_thumbnail/CreateThumbnail.h"
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
-extern "C"
-{
-    KDE_EXPORT ThumbCreator* new_creator()
-    {
-        return new PentobiThumbCreator;
-    }
+extern "C" {
+
+Q_DECL_EXPORT ThumbCreator* new_creator() { return new PentobiThumbCreator; }
+
 }
 
 //-----------------------------------------------------------------------------
 
-PentobiThumbCreator::~PentobiThumbCreator()
-{
-}
+PentobiThumbCreator::~PentobiThumbCreator() { }
 
 bool PentobiThumbCreator::create(const QString& path, int width, int height,
                                  QImage& image)

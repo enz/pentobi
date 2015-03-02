@@ -12,11 +12,13 @@
 # exceptions (which should be fine as long as no exceptions are thrown
 # from the thumbnailer plugin functions).
 
-include(${QT_USE_FILE})
+if (NOT USE_QT5)
+  include(${QT_USE_FILE})
+endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
 
-set(pentobi_kde_thumbnailer_STAT_SRCS
+add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_util/Assert.cpp
   ../libboardgame_util/Log.cpp
   ../libboardgame_util/StringUtil.cpp
@@ -32,8 +34,8 @@ set(pentobi_kde_thumbnailer_STAT_SRCS
   ../libpentobi_gui/BoardPainter.cpp
   ../libpentobi_gui/Util.cpp
   ../libpentobi_thumbnail/CreateThumbnail.cpp
-  )
-
-add_library(pentobi_kde_thumbnailer STATIC
-  ${pentobi_kde_thumbnailer_STAT_SRCS}
 )
+
+if (USE_QT5)
+  target_link_libraries(pentobi_kde_thumbnailer Qt5::Widgets)
+endif()

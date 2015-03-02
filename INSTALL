@@ -1,5 +1,6 @@
 This file explains how to compile and install Pentobi from the sources.
 
+
 == Requirements ==
 
 Pentobi requires the Qt libraries (>= 4.8). The C++ compiler needs to support
@@ -12,12 +13,14 @@ its package repository. They can be installed with the shell command:
 
   sudo apt-get install cmake g++ libqt4-dev make qt4-default
 
+
 == Building ==
 
 Pentobi can be compiled from the source directory with the shell commands:
 
   cmake -DCMAKE_BUILD_TYPE=Release .
   make
+
 
 === Building with Qt 5 ===
 
@@ -31,6 +34,7 @@ in its package repository. They can be installed with the shell command:
   sudo apt-get install \
     qt5-default qttools5-dev qttools5-dev-tools libqt5svg5-dev
 
+
 === Building the KDE thumbnailer plugin ===
 
 A thumbnailer plugin for KDE 4 can be built by using the cmake option
@@ -41,7 +45,9 @@ Ubuntu 13.10, the plugin will not be found if the default installation prefix
 After that, you can enable previews for Blokus game file in the Dolphin file
 manager in "Configure Dolphin/General/Previews".
 
-The KDE thumbnailer plugin cannot be compiled with Qt 5.
+Using USE_QT5=1 means that the KDE thumbnailer plugin will be compiled for KDE
+Frameworks 5 (needs packages kio-dev and extra-cmake-modules on Ubuntu 15.04).
+
 
 == Installing ==
 
@@ -57,6 +63,7 @@ files (*.blksgf). The databases can be updated with the shell command:
 
 This make target assumes that the commands update-desktop-database and
 update-mime-database exist.
+
 
 == Building the Android version ==
 
