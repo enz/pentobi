@@ -302,9 +302,7 @@ void PriorKnowledge::init_local(const Board& bd)
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-color variants)
     auto end = moves.end();
-    auto begin = end - 3;
-    if (begin < moves.begin())
-        begin = moves.begin();
+    auto begin = (end - moves.begin() < 3 ? moves.begin() : end - 3);
     for (auto i = begin; i != end; ++i)
     {
         Color c = i->color;
