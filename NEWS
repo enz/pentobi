@@ -15,6 +15,7 @@ Version 9.0.UNKNOWN (v9-fixes)
   enabled in the Computer Colors dialog while a move generation was running.
 * Fixed build failure with MSVC if MinGW was not also installed (because
   windres.exe was used)
+* The Pentobi help browser now uses a larger font on Windows
 
 
 Version 9.0 (10 Dec 2014)
