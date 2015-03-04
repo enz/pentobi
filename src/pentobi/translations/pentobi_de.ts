@@ -68,7 +68,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="349"/>
         <source>About Pentobi</source>
-        <translation>Info über Pentobi</translation>
+        <translation>Über Pentobi</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1071"/>
@@ -152,8 +152,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="738"/>
-        <source>&amp;About</source>
-        <translation>Inf&amp;o</translation>
+        <source>&amp;About Pentobi</source>
+        <translation>Über &amp;Pentobi</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="742"/>
@@ -337,8 +337,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="873"/>
-        <source>&amp;Contents</source>
-        <translation>I&amp;nhalt</translation>
+        <source>Pentobi &amp;Help</source>
+        <translation>Pentobi-&amp;Hilfe</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="878"/>

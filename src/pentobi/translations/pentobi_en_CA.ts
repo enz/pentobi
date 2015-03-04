@@ -145,8 +145,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="738"/>
-        <source>&amp;About</source>
-        <translation>&amp;About</translation>
+        <source>&amp;About Pentobi</source>
+        <translation>&amp;About Pentobi</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="742"/>
@@ -305,8 +305,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="873"/>
-        <source>&amp;Contents</source>
-        <translation>&amp;Contents</translation>
+        <source>Pentobi &amp;Help</source>
+        <translation>Pentobi &amp;Help</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="878"/>

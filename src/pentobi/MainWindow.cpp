@@ -717,7 +717,7 @@ void MainWindow::createActions()
     auto groupMoveAnnotation = new QActionGroup(this);
     auto groupToolBarText = new QActionGroup(this);
 
-    m_actionAbout = createAction(tr("&About"));
+    m_actionAbout = createAction(tr("&About Pentobi"));
     connect(m_actionAbout, SIGNAL(triggered()), SLOT(about()));
 
     m_actionAnalyzeGame = createAction(tr("&Analyze Game..."));
@@ -850,7 +850,7 @@ void MainWindow::createActions()
     m_actionGotoMove->setShortcut(QString("Ctrl+G"));
     connect(m_actionGotoMove, SIGNAL(triggered()), SLOT(gotoMove()));
 
-    m_actionHelp = createAction(tr("&Contents"));
+    m_actionHelp = createAction(tr("Pentobi &Help"));
     m_actionHelp->setShortcut(QKeySequence::HelpContents);
     connect(m_actionHelp, SIGNAL(triggered()), SLOT(help()));
 
