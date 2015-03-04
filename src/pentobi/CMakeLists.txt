@@ -80,14 +80,13 @@ foreach(icon ${pentobi_ICNS})
   string(REPLACE ".png" ".svg" svgicon ${icon})
   add_custom_command(
     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}"
-    COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon} ${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}
+    COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+      ${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
-    )
+  )
 endforeach()
-
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
-configure_file(resources.qrc resources.qrc COPYONLY)
-
+file(COPY resources.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 if (USE_QT5)
   qt5_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc)
 else()
