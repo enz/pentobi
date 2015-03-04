@@ -2143,7 +2143,7 @@ void MainWindow::help()
         return;
     }
     QString path = HelpWindow::findMainPage(m_helpDir, "pentobi");
-    m_helpWindow = new HelpWindow(nullptr, path);
+    m_helpWindow = new HelpWindow(nullptr, tr("Pentobi Help"), path);
     m_helpWindow->show();
 }
 

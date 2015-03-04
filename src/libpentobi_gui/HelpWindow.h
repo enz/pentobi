@@ -31,7 +31,7 @@ public:
         @return The full path of index.html. */
     static QString findMainPage(QString helpDir, QString appName);
 
-    HelpWindow(QWidget* parent, const QString& mainPage);
+    HelpWindow(QWidget* parent, const QString& title, const QString& mainPage);
 
     QSize sizeHint() const override;
 

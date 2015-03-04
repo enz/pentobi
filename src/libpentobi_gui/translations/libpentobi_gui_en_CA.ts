@@ -112,11 +112,6 @@
 <context>
     <name>HelpWindow</name>
     <message>
-        <location filename="../HelpWindow.cpp" line="40"/>
-        <source>Pentobi User Manual</source>
-        <translation>Pentobi User Manual</translation>
-    </message>
-    <message>
         <location filename="../HelpWindow.cpp" line="48"/>
         <source>Back</source>
         <translation>Back</translation>
