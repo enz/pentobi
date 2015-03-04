@@ -1,12 +1,9 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0.2)
 
 project(Pentobi)
 set(PENTOBI_VERSION 9.UNKNOWN)
 
-if (POLICY CMP0043)
-  # Avoid warning with CMake 3.0.1
-  cmake_policy(SET CMP0043 NEW)
-endif()
+cmake_policy(SET CMP0043 NEW)
 
 include(CheckIncludeFiles)
 include(GNUInstallDirs)
