@@ -168,6 +168,22 @@ bool hasCurrentVariationOtherMoves(const PentobiTree& tree,
     return false;
 }
 
+void initToolBarText(QToolBar* toolBar)
+{
+    QSettings settings;
+    auto toolBarText = settings.value("toolbar_text", "system").toString();
+    if (toolBarText == "no_text")
+        toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    else if (toolBarText == "beside_icons")
+        toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    else if (toolBarText == "below_icons")
+        toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    else if (toolBarText == "text_only")
+        toolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
+    else
+        toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+}
+
 void setIcon(QAction* action, const QString& name)
 {
     QIcon icon(QString(":/pentobi/icons/%1.png").arg(name));
@@ -1533,33 +1549,19 @@ void MainWindow::createToolBar()
     m_toolBar->addAction(m_actionNextVariation);
     m_toolBar->addAction(m_actionPreviousVariation);
     addToolBar(m_toolBar);
+    initToolBarText(m_toolBar);
     QSettings settings;
     auto toolBarText = settings.value("toolbar_text", "system").toString();
     if (toolBarText == "no_text")
-    {
-        m_toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
         m_actionToolBarNoText->setChecked(true);
-    }
     else if (toolBarText == "beside_icons")
-    {
-        m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
         m_actionToolBarTextBesideIcons->setChecked(true);
-    }
     else if (toolBarText == "below_icons")
-    {
-        m_toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
         m_actionToolBarTextBelowIcons->setChecked(true);
-    }
     else if (toolBarText == "text_only")
-    {
-        m_toolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
         m_actionToolBarTextOnly->setChecked(true);
-    }
     else
-    {
-        m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
         m_actionToolBarTextSystem->setChecked(true);
-    }
 }
 
 void MainWindow::deleteAutoSaveFile()
@@ -2144,6 +2146,7 @@ void MainWindow::help()
     }
     QString path = HelpWindow::findMainPage(m_helpDir, "pentobi");
     m_helpWindow = new HelpWindow(nullptr, tr("Pentobi Help"), path);
+    initToolBarText(m_helpWindow->findChild<QToolBar*>());
     m_helpWindow->show();
 }
 
@@ -3341,47 +3344,41 @@ QSize MainWindow::sizeHint() const
 
 void MainWindow::toolBarNoText(bool checked)
 {
-    if (! checked)
-        return;
+    if (checked)
+        toolBarText("no_text", Qt::ToolButtonIconOnly);
+}
+
+void MainWindow::toolBarText(const QString& key, Qt::ToolButtonStyle style)
+{
     QSettings settings;
-    settings.setValue("toolbar_text", "no_text");
-    m_toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    settings.setValue("toolbar_text", key);
+    m_toolBar->setToolButtonStyle(style);
+    if (m_helpWindow)
+        m_helpWindow->findChild<QToolBar*>()->setToolButtonStyle(style);
 }
 
 void MainWindow::toolBarTextBesideIcons(bool checked)
 {
-    if (! checked)
-        return;
-    QSettings settings;
-    settings.setValue("toolbar_text", "beside_icons");
-    m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    if (checked)
+        toolBarText("beside_icons", Qt::ToolButtonTextBesideIcon);
 }
 
 void MainWindow::toolBarTextBelowIcons(bool checked)
 {
-    if (! checked)
-        return;
-    QSettings settings;
-    settings.setValue("toolbar_text", "below_icons");
-    m_toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    if (checked)
+        toolBarText("below_icons", Qt::ToolButtonTextUnderIcon);
 }
 
 void MainWindow::toolBarTextOnly(bool checked)
 {
-    if (! checked)
-        return;
-    QSettings settings;
-    settings.setValue("toolbar_text", "text_only");
-    m_toolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
+    if (checked)
+        toolBarText("text_only", Qt::ToolButtonTextOnly);
 }
 
 void MainWindow::toolBarTextSystem(bool checked)
 {
-    if (! checked)
-        return;
-    QSettings settings;
-    settings.setValue("toolbar_text", "system");
-    m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+    if (checked)
+        toolBarText("system", Qt::ToolButtonFollowStyle);
 }
 
 void MainWindow::truncate()

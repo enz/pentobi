@@ -787,6 +787,8 @@ private slots:
 
     void toolBarNoText(bool checked);
 
+    void toolBarText(const QString& key, Qt::ToolButtonStyle style);
+
     void toolBarTextBesideIcons(bool checked);
 
     void toolBarTextBelowIcons(bool checked);
