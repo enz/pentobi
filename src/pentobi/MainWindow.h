@@ -329,8 +329,6 @@ private:
         Reused for efficiency. */
     unique_ptr<MoveMarker> m_marker;
 
-    QToolBar* m_toolBar;
-
     GuiBoard* m_guiBoard;
 
     QString m_helpDir;

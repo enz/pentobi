@@ -272,7 +272,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& helpDir,
     m_guiBoard->setCoordinates(coordinates);
     m_actionCoordinates->setChecked(coordinates);
     auto showToolbar = settings.value("toolbar", true).toBool();
-    m_toolBar->setVisible(showToolbar);
+    findChild<QToolBar*>()->setVisible(showToolbar);
     m_menuToolBarText->setEnabled(showToolbar);
     m_actionShowToolbar->setChecked(showToolbar);
     auto showVariations = settings.value("show_variations", true).toBool();
@@ -1529,27 +1529,27 @@ void MainWindow::doubtfulMove(bool checked)
 
 void MainWindow::createToolBar()
 {
-    m_toolBar = new QToolBar;
-    m_toolBar->setMovable(false);
-    m_toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    m_toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
-    m_toolBar->addAction(m_actionNew);
-    m_toolBar->addAction(m_actionRatedGame);
-    m_toolBar->addSeparator();
-    m_toolBar->addAction(m_actionComputerColors);
-    m_toolBar->addAction(m_actionPlay);
-    m_toolBar->addSeparator();
-    m_toolBar->addAction(m_actionBeginning);
-    m_toolBar->addAction(m_actionBackward10);
-    m_toolBar->addAction(m_actionBackward);
-    m_toolBar->addAction(m_actionForward);
-    m_toolBar->addAction(m_actionForward10);
-    m_toolBar->addAction(m_actionEnd);
-    m_toolBar->addSeparator();
-    m_toolBar->addAction(m_actionNextVariation);
-    m_toolBar->addAction(m_actionPreviousVariation);
-    addToolBar(m_toolBar);
-    initToolBarText(m_toolBar);
+    auto toolBar = new QToolBar;
+    toolBar->setMovable(false);
+    toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+    toolBar->addAction(m_actionNew);
+    toolBar->addAction(m_actionRatedGame);
+    toolBar->addSeparator();
+    toolBar->addAction(m_actionComputerColors);
+    toolBar->addAction(m_actionPlay);
+    toolBar->addSeparator();
+    toolBar->addAction(m_actionBeginning);
+    toolBar->addAction(m_actionBackward10);
+    toolBar->addAction(m_actionBackward);
+    toolBar->addAction(m_actionForward);
+    toolBar->addAction(m_actionForward10);
+    toolBar->addAction(m_actionEnd);
+    toolBar->addSeparator();
+    toolBar->addAction(m_actionNextVariation);
+    toolBar->addAction(m_actionPreviousVariation);
+    addToolBar(toolBar);
+    initToolBarText(toolBar);
     QSettings settings;
     auto toolBarText = settings.value("toolbar_text", "system").toString();
     if (toolBarText == "no_text")
@@ -1785,7 +1785,7 @@ void MainWindow::fullscreen()
     }
     QSettings settings;
     menuBar()->hide();
-    m_toolBar->hide();
+    findChild<QToolBar*>()->hide();
     settings.setValue("geometry", saveGeometry());
     showFullScreen();
     if (! m_leaveFullscreenButton)
@@ -2307,7 +2307,7 @@ void MainWindow::leaveFullscreen()
     QSettings settings;
     auto showToolbar = settings.value("toolbar", true).toBool();
     menuBar()->show();
-    m_toolBar->setVisible(showToolbar);
+    findChild<QToolBar*>()->setVisible(showToolbar);
     // m_leaveFullscreenButton can be null if the window was put in fullscreen
     // mode by a "generic" method by the window manager (e.g. the title bar
     // menu on KDE) and not by MainWindow::fullscreen()
@@ -3333,7 +3333,7 @@ void MainWindow::showToolbar(bool checked)
 {
     QSettings settings;
     settings.setValue("toolbar", checked);
-    m_toolBar->setVisible(checked);
+    findChild<QToolBar*>()->setVisible(checked);
     m_menuToolBarText->setEnabled(checked);
 }
 
@@ -3352,7 +3352,7 @@ void MainWindow::toolBarText(const QString& key, Qt::ToolButtonStyle style)
 {
     QSettings settings;
     settings.setValue("toolbar_text", key);
-    m_toolBar->setToolButtonStyle(style);
+    findChild<QToolBar*>()->setToolButtonStyle(style);
     if (m_helpWindow)
         m_helpWindow->findChild<QToolBar*>()->setToolButtonStyle(style);
 }
