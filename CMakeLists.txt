@@ -101,11 +101,6 @@ if(UNIX)
     COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD
     | xz -e > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.xz
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-  add_custom_target(post-install
-    COMMAND
-    update-mime-database ${CMAKE_INSTALL_FULL_DATAROOTDIR}/mime\;
-    update-desktop-database ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications\;
-    )
 endif()
 
 add_subdirectory(doc)
