@@ -1,45 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg id="svg2985" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="36" width="36" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<defs id="defs2987"></defs>
-<metadata id="metadata2990">
-<rdf:RDF>
-<cc:Work rdf:about="">
-<dc:format>image/svg+xml</dc:format>
-<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-<dc:title/>
-</cc:Work>
-</rdf:RDF>
-</metadata>
-<g id="g4092" transform="matrix(0.9,0,0,0.9,13.5,-16.2)">
-<rect id="rect3318" opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#C00"/>
-<path id="path4088" fill-opacity="0.15686275" fill="#000" d="m-15,28,1.1111-1.1111,7.7778,0,0-7.7778l1.1112-1.111v10z"/>
-<path id="path4090" fill-opacity="0.15686275" fill="#FFF" d="m-15,28,0-10,10,0-1.1111,1.1111-7.7778,0,0,7.7778z"/>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="36" width="36" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<g id="d" transform="matrix(.9 0 0 .9 13.5 -16.2)">
+<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
+<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
+<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
 </g>
-<use id="use4097" xlink:href="#g4092" transform="translate(9,0)" height="48" width="48" y="0" x="0"/>
-<use id="use4099" xlink:href="#g4092" transform="translate(9,9)" height="48" width="48" y="0" x="0"/>
-<use id="use4101" xlink:href="#g4092" transform="translate(18,9)" height="48" width="48" y="0" x="0"/>
-<g id="g4092-7" transform="matrix(0.9,0,0,0.9,13.5,-7.2)">
-<rect id="rect3318-3" opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#edd400"/>
-<path id="path4088-4" fill-opacity="0.15686275" fill="#000" d="m-15,28,1.1111-1.1111,7.7778,0,0-7.7778l1.1112-1.111v10z"/>
-<path id="path4090-1" fill-opacity="0.15686275" fill="#FFF" d="m-15,28,0-10,10,0-1.1111,1.1111-7.7778,0,0,7.7778z"/>
+<use xlink:href="#d" transform="translate(9)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#d" transform="translate(9,9)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#d" transform="translate(18,9)" height="48" width="48" y="0" x="0"/>
+<g id="c" transform="matrix(.9 0 0 .9 13.5 -7.2)">
+<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#edd400"/>
+<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
+<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
 </g>
-<use id="use3873" xlink:href="#g4092-7" transform="translate(-1.0000002e-8,9)" height="72" width="72" y="0" x="0"/>
-<use id="use3875" xlink:href="#g4092-7" transform="translate(-1.0000002e-8,18)" height="72" width="72" y="0" x="0"/>
-<use id="use3877" xlink:href="#g4092-7" transform="translate(9,18)" height="72" width="72" y="0" x="0"/>
-<g id="g4092-7-3" transform="matrix(0.9,0,0,0.9,22.5,1.8)">
-<rect id="rect3318-3-8" opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#3465a4"/>
-<path id="path4088-4-0" fill-opacity="0.15686275" fill="#000" d="m-15,28,1.1111-1.1111,7.7778,0,0-7.7778l1.1112-1.111v10z"/>
-<path id="path4090-1-2" fill-opacity="0.15686275" fill="#FFF" d="m-15,28,0-10,10,0-1.1111,1.1111-7.7778,0,0,7.7778z"/>
+<use xlink:href="#c" transform="translate(-1e-8 9)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#c" transform="translate(-1e-8 18)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#c" transform="translate(9,18)" height="72" width="72" y="0" x="0"/>
+<g id="b" transform="matrix(.9 0 0 .9 22.5 1.8)">
+<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#3465a4"/>
+<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
+<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
 </g>
-<use id="use3914" xlink:href="#g4092-7-3" transform="translate(9,9)" height="72" width="72" y="0" x="0"/>
-<use id="use3916" xlink:href="#g4092-7-3" transform="translate(9,0)" height="72" width="72" y="0" x="0"/>
-<use id="use3918" xlink:href="#g4092-7-3" transform="translate(18,9)" height="72" width="72" y="0" x="0"/>
-<g id="g4092-7-3-9" transform="matrix(0.9,0,0,0.9,31.5,-16.2)">
-<rect id="rect3318-3-8-4" opacity="0.99" fill-rule="evenodd" rx="1.328" ry="0" height="10" width="10" y="18" x="-15" fill="#73d216"/>
-<path id="path4088-4-0-5" fill-opacity="0.15686275" fill="#000" d="m-15,28,1.1111-1.1111,7.7778,0,0-7.7778l1.1112-1.111v10z"/>
-<path id="path4090-1-2-2" fill-opacity="0.15686275" fill="#FFF" d="m-15,28,0-10,10,0-1.1111,1.1111-7.7778,0,0,7.7778z"/>
+<use xlink:href="#b" transform="translate(9,9)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#b" transform="translate(9)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#b" transform="translate(18,9)" height="72" width="72" y="0" x="0"/>
+<g id="a" transform="matrix(.9 0 0 .9 31.5 -16.2)">
+<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#73d216"/>
+<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
+<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
 </g>
-<use id="use3947" xlink:href="#g4092-7-3-9" transform="translate(9,0)" height="72" width="72" y="0" x="0"/>
-<use id="use3949" xlink:href="#g4092-7-3-9" transform="translate(9,9)" height="72" width="72" y="0" x="0"/>
-<use id="use3951" xlink:href="#g4092-7-3-9" transform="translate(9,18)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#a" transform="translate(9)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#a" transform="translate(9,9)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#a" transform="translate(9,18)" height="72" width="72" y="0" x="0"/>
 </svg>

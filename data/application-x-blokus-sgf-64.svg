@@ -1,140 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="64" width="64" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <defs>
-<radialGradient id="radialGradient4367" gradientUnits="userSpaceOnUse" cy="24.107" cx="24.041" gradientTransform="matrix(1.4069123,0,0,1.6296117,-1.7722922,-7.2181052)" r="17.938">
+<radialGradient id="b" gradientUnits="userSpaceOnUse" cy="24.107" cx="24.041" gradientTransform="matrix(1.406912 0 0 1.629612 -1.772292 -7.218105)" r="17.938">
 <stop stop-color="#fbfbfb" offset="0"/>
 <stop stop-color="#edeeeb" offset="1"/>
 </radialGradient>
 </defs>
-<metadata>
-<rdf:RDF>
-<cc:Work rdf:about="">
-<dc:format>image/svg+xml</dc:format>
-<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-<dc:title/>
-<dc:subject>
-<rdf:Bag>
-<rdf:li>text</rdf:li>
-<rdf:li>plaintext</rdf:li>
-<rdf:li>regular</rdf:li>
-<rdf:li>script</rdf:li>
-<rdf:li>shell</rdf:li>
-<rdf:li>bash</rdf:li>
-<rdf:li>python</rdf:li>
-<rdf:li>perl</rdf:li>
-<rdf:li>php</rdf:li>
-<rdf:li>ruby</rdf:li>
-</rdf:Bag>
-</dc:subject>
-<cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
-<dc:creator>
-<cc:Agent>
-<dc:title>Jakub Steiner</dc:title>
-</cc:Agent>
-</dc:creator>
-<dc:source>http://jimmac.musichall.cz</dc:source>
-</cc:Work>
-<cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
-<cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
-<cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
-<cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
-</cc:License>
-</rdf:RDF>
-</metadata>
-<rect stroke-linejoin="round" ry="1.6025" style="color:#000000;" stroke-width="1.0001" fill-rule="nonzero" stroke-dashoffset="0" display="block" width="49.066" stroke="#555753" stroke-linecap="round" stroke-dasharray="none" x="7.5183" y="3.5326" stroke-miterlimit="4" height="57.068" fill="url(#radialGradient4367)"/>
-<rect stroke-linejoin="round" ry="0.20746" style="color:#000000;" stroke-width="1" rx="0.20895" stroke-dashoffset="0" display="block" width="45.948" stroke="#FFF" stroke-linecap="round" stroke-miterlimit="4" y="5.0432" x="9.1511" height="54.209" fill="none"/>
-<g transform="translate(16.067796,16.101695)">
-<g id="g3626" transform="translate(17,-13)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="15" x="-15" fill="#C00"/>
-<path d="m-15,22,0-1,6,0,0-6,1,0,0,7z" fill="#a40000"/>
-<path d="m-15,22,0-7,7,0-1,1-5,0,0,5z" fill="#ef2929"/>
+<rect stroke-linejoin="round" style="color:#000000" ry="1.6025" height="57.068" width="49.066" stroke="#555753" stroke-linecap="round" y="3.5326" x="7.5183" stroke-width="1.0001" display="block" fill="url(#b)"/>
+<rect stroke-linejoin="round" style="color:#000000" rx=".20895" ry=".20746" height="54.209" width="45.948" stroke="#FFF" stroke-linecap="round" y="5.0432" x="9.1511" display="block" fill="none"/>
+<g transform="translate(16.0678 16.1017)">
+<g id="a" transform="translate(17,-13)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="15" x="-15" fill="#C00"/>
+<path d="m-15 22v-1h6v-6h1v7z" fill="#a40000"/>
+<path d="m-15 22v-7h7l-1 1h-5v5z" fill="#ef2929"/>
 </g>
-<use xlink:href="#g3626" transform="translate(14,7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#g3626" transform="translate(7.0000008,7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#g3626" transform="translate(7,0)" height="32" width="32" y="0" x="0"/>
+<use xlink:href="#a" transform="translate(14,7)" height="32" width="32" y="0" x="0"/>
+<use xlink:href="#a" transform="translate(7.000001 7)" height="32" width="32" y="0" x="0"/>
+<use xlink:href="#a" transform="translate(7)" height="32" width="32" y="0" x="0"/>
 <g transform="translate(17,2)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
-<path d="m-15,14,0-1,6,0,0-6,1,0,0,7z" fill="#c4a000"/>
-<path d="m-15,14,0-7,7,0-1,1-5,0,0,5z" fill="#fce94f"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
+<path d="m-15 14v-1h6v-6h1v7z" fill="#c4a000"/>
+<path d="m-15 14v-7h7l-1 1h-5v5z" fill="#fce94f"/>
 </g>
 <g transform="translate(17,9)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
-<path d="m-15,14,0-1,6,0,0-6,1,0,0,7z" fill="#c4a000"/>
-<path d="m-15,14,0-7,7,0-1,1-5,0,0,5z" fill="#fce94f"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
+<path d="m-15 14v-1h6v-6h1v7z" fill="#c4a000"/>
+<path d="m-15 14v-7h7l-1 1h-5v5z" fill="#fce94f"/>
 </g>
 <g transform="translate(24,16)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
-<path d="m-15,14,0-1,6,0,0-6,1,0,0,7z" fill="#c4a000"/>
-<path d="m-15,14,0-7,7,0-1,1-5,0,0,5z" fill="#fce94f"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
+<path d="m-15 14v-1h6v-6h1v7z" fill="#c4a000"/>
+<path d="m-15 14v-7h7l-1 1h-5v5z" fill="#fce94f"/>
 </g>
 <g transform="translate(17,16)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
-<path d="m-15,14,0-1,6,0,0-6,1,0,0,7z" fill="#c4a000"/>
-<path d="m-15,14,0-7,7,0-1,1-5,0,0,5z" fill="#fce94f"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
+<path d="m-15 14v-1h6v-6h1v7z" fill="#c4a000"/>
+<path d="m-15 14v-7h7l-1 1h-5v5z" fill="#fce94f"/>
 </g>
-<g transform="translate(30.949153,-5.050848)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
+<g transform="translate(30.94915 -5.050848)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
 </g>
-<g transform="translate(37.949153,1.949152)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
+<g transform="translate(37.94915 1.949152)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
 </g>
-<g transform="translate(37.949153,8.949152)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
+<g transform="translate(37.94915 8.949152)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
 </g>
-<g transform="translate(37.949153,-5.050848)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949,14.051,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-14.949,14.051,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
+<g transform="translate(37.94915 -5.050848)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
 </g>
-<g transform="translate(24.016949,8.966102)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#204a87"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#558bc5"/>
+<g transform="translate(24.01695 8.966102)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#204a87"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#558bc5"/>
 </g>
-<g transform="translate(31.016949,8.966102)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#204a87"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#558bc5"/>
+<g transform="translate(31.01695 8.966102)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#204a87"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#558bc5"/>
 </g>
-<g transform="translate(31.016949,15.966102)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#204a87"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#558bc5"/>
+<g transform="translate(31.01695 15.9661)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#204a87"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#558bc5"/>
 </g>
-<g transform="translate(38.016948,15.966102)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#4e9a06"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
-<path d="m-15.017,14.034,0-1,6,0,0-6,1,0,0,7z" fill="#204a87"/>
-<path d="m-15.017,14.034,0-7,7,0-1,1-5,0,0,5z" fill="#558bc5"/>
+<g transform="translate(38.01695 15.9661)">
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#4e9a06"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
+<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#204a87"/>
+<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#558bc5"/>
 </g>
 </g>
 </svg>

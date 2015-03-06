@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <defs>
-<linearGradient id="linearGradient3857" x1="0.11683" gradientUnits="userSpaceOnUse" y1="9.1" gradientTransform="matrix(0,1,-1,0,16,0)" x2="15.921" y2="4.8654">
+<linearGradient id="a" y2="4.8654" gradientUnits="userSpaceOnUse" x2="15.921" gradientTransform="matrix(0,1,-1,0,16,0)" y1="9.1" x1=".11683">
 <stop stop-color="#c8cac6" offset="0"/>
 <stop stop-color="#a0a39d" offset="1"/>
 </linearGradient>
 </defs>
-<metadata>
-<rdf:RDF>
-<cc:Work rdf:about="">
-<dc:format>image/svg+xml</dc:format>
-<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-<dc:title/>
-</cc:Work>
-</rdf:RDF>
-</metadata>
-<path stroke-linejoin="round" d="m13,5.5-5-5-4.9688,5,3.4688,0,0,5-3.5,0,5,5,4.9688-5-3.4688,0,0-5z" fill-rule="evenodd" stroke="#555753" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="1.00015032" fill="url(#linearGradient3857)"/>
+<path stroke-linejoin="round" d="m13 5.5-5-5-4.9688 5h3.4688v5h-3.5l5 5 4.9688-5h-3.4688v-5z" fill-rule="evenodd" stroke="#555753" stroke-width="1.00015" fill="url(#a)"/>
 </svg>

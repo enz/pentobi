@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="22" width="22" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <defs>
-<linearGradient id="linearGradient3967" x1="21.996" gradientUnits="userSpaceOnUse" y1="21.963" gradientTransform="matrix(0,-1,-1,0,32,48.073466)" x2="0.15412" y2="16.11">
+<linearGradient id="b" y2="16.11" gradientUnits="userSpaceOnUse" x2=".15412" gradientTransform="matrix(0 -1 -1 0 32 48.07347)" y1="21.963" x1="21.996">
 <stop stop-color="#b4b6b2" offset="0"/>
 <stop stop-color="#464844" offset="1"/>
 </linearGradient>
-<linearGradient id="linearGradient3969" x1="21.996" gradientUnits="userSpaceOnUse" y1="21.963" gradientTransform="matrix(0,-1,-1,0,32,48.073466)" x2="0.15412" y2="16.11">
+<linearGradient id="a" y2="16.11" gradientUnits="userSpaceOnUse" x2=".15412" gradientTransform="matrix(0 -1 -1 0 32 48.07347)" y1="21.963" x1="21.996">
 <stop stop-color="#c8c9c7" offset="0"/>
 <stop stop-color="#a0a39d" offset="1"/>
 </linearGradient>
 </defs>
-<metadata>
-<rdf:RDF>
-<cc:Work rdf:about="">
-<dc:format>image/svg+xml</dc:format>
-<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-<dc:title/>
-</cc:Work>
-</rdf:RDF>
-</metadata>
-<g stroke-miterlimit="4" transform="translate(0,-26)">
-<path stroke-linejoin="miter" d="m17.45,34.823s-1.8331,0.000159-2.75,0v9.9999h-7.5v-9.9999c-0.91927,0.000158-2.7459-0.00055-2.75,0l6.5-6.4999,6.5,6.4999z" fill-rule="evenodd" stroke="url(#linearGradient3969)" stroke-dasharray="none" stroke-width="1.50019085" fill="url(#linearGradient3967)"/>
-<path stroke-linejoin="round" d="m19.469,35.5s-2.5481,0.000234-3.9688,0v10h-9v-10c-1.4428,0.000174-3.994-0.000778-4,0l8.5-8.5,8.4688,8.5z" stroke="#555753" stroke-linecap="round" stroke-width="1.00007391" fill="none"/>
+<g transform="translate(0,-26)">
+<path d="m17.45 34.823s-1.8331 0.000159-2.75 0v9.9999h-7.5v-9.9999c-0.91927 0.000158-2.7459-0.00055-2.75 0l6.5-6.4999 6.5 6.4999z" fill-rule="evenodd" stroke="url(#a)" stroke-width="1.500191" fill="url(#b)"/>
+<path stroke-linejoin="round" d="m19.469 35.5s-2.5481 0.000234-3.9688 0v10h-9v-10c-1.4428 0.000174-3.994-0.000778-4 0l8.5-8.5 8.4688 8.5z" stroke="#555753" stroke-linecap="round" stroke-width="1.000074" fill="none"/>
 </g>
 </svg>
