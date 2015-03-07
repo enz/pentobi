@@ -24,6 +24,7 @@ InitialRatingDialog::InitialRatingDialog(QWidget* parent)
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     auto layout = new QVBoxLayout;
     setLayout(layout);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
     auto label =
         new QLabel(tr("You have not yet played rated games in this game"
                       " variant. Estimate your playing strength to"

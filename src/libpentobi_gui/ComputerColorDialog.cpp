@@ -27,6 +27,7 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     auto layout = new QVBoxLayout;
     setLayout(layout);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
     layout->addWidget(new QLabel(tr("Computer plays:")));
     for (Color::IntType i = 0; i < get_nu_players(m_variant); ++i)
         createCheckBox(layout, Color(i));
