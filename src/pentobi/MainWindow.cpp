@@ -1327,10 +1327,10 @@ void MainWindow::createMenu()
     m_menuVariant->addAction(m_actionVariantClassic3);
     m_menuVariant->addAction(m_actionVariantClassic2);
     m_menuVariant->addAction(m_actionVariantDuo);
+    m_menuVariant->addAction(m_actionVariantJunior);
     m_menuVariant->addAction(m_actionVariantTrigon);
     m_menuVariant->addAction(m_actionVariantTrigon3);
     m_menuVariant->addAction(m_actionVariantTrigon2);
-    m_menuVariant->addAction(m_actionVariantJunior);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);

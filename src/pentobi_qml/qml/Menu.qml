@@ -43,6 +43,13 @@ MenuBar {
                 onTriggered: Logic.changeGameVariant("duo", true)
             }
             MenuItem {
+                text: qsTr("Junior")
+                checkable: true
+                checked: boardModel.gameVariant == "junior"
+                exclusiveGroup: groupGameVariant
+                onTriggered: Logic.changeGameVariant("junior", true)
+            }
+            MenuItem {
                 text: qsTr("Trigon (4 Players)")
                 checkable: true
                 checked: boardModel.gameVariant == "trigon"
@@ -62,13 +69,6 @@ MenuBar {
                 checked: boardModel.gameVariant == "trigon_2"
                 exclusiveGroup: groupGameVariant
                 onTriggered: Logic.changeGameVariant("trigon_2", true)
-            }
-            MenuItem {
-                text: qsTr("Junior")
-                checkable: true
-                checked: boardModel.gameVariant == "junior"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("junior", true)
             }
         }
         MenuItem {
