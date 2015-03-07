@@ -13,6 +13,7 @@
 #include <QLibraryInfo>
 #include <QMessageBox>
 #include <QSettings>
+#include <QStyle>
 #include <QTranslator>
 #include "Application.h"
 #include "MainWindow.h"
@@ -71,6 +72,12 @@ int main(int argc, char* argv[])
 
     try
     {
+        // Our icon style doesn't fit very well with the flat menu item
+        // check boxes in KDE5
+        QString style = QApplication::style()->metaObject()->className();
+        if (style == "Breeze::Style")
+            QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+
         // For some reason, labels in the status bar have a border on
         // Windows 7 with Qt 4.8. We don't want that.
         app.setStyleSheet("QStatusBar::item { border: 0px solid black }");
