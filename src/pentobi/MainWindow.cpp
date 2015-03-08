@@ -594,10 +594,10 @@ void MainWindow::clearFile()
 
 void MainWindow::clearSelectedPiece()
 {
-    m_actionRotatePieceClockwise->setEnabled(false);
-    m_actionRotatePieceAnticlockwise->setEnabled(false);
-    m_actionFlipPieceHorizontally->setEnabled(false);
-    m_actionFlipPieceVertically->setEnabled(false);
+    m_actionRotateClockwise->setEnabled(false);
+    m_actionRotateAnticlockwise->setEnabled(false);
+    m_actionFlipHorizontally->setEnabled(false);
+    m_actionFlipVertically->setEnabled(false);
     m_actionClearSelectedPiece->setEnabled(false);
     m_guiBoard->clearSelectedPiece();
     m_orientationDisplay->clearSelectedPiece();
@@ -808,13 +808,13 @@ void MainWindow::createActions()
     connect(m_actionFindNextComment, SIGNAL(triggered()),
             SLOT(findNextComment()));
 
-    m_actionFlipPieceHorizontally = createAction(tr("Flip Horizontally"));
-    setIcon(m_actionFlipPieceHorizontally, "pentobi-flip-horizontal");
-    connect(m_actionFlipPieceHorizontally, SIGNAL(triggered()),
-            SLOT(flipPieceHorizontally()));
+    m_actionFlipHorizontally = createAction(tr("Flip Horizontally"));
+    setIcon(m_actionFlipHorizontally, "pentobi-flip-horizontal");
+    connect(m_actionFlipHorizontally, SIGNAL(triggered()),
+            SLOT(flipHorizontally()));
 
-    m_actionFlipPieceVertically = createAction(tr("Flip Vertically"));
-    setIcon(m_actionFlipPieceVertically, "pentobi-flip-vertical");
+    m_actionFlipVertically = createAction(tr("Flip Vertically"));
+    setIcon(m_actionFlipVertically, "pentobi-flip-vertical");
 
     m_actionForward = createAction(tr("&Forward"));
     m_actionForward->setToolTip(tr("Go one move forward"));
@@ -889,8 +889,8 @@ void MainWindow::createActions()
           tr("&7"), tr("&8"), tr("&9") };
     for (int i = 0; i < maxLevel; ++i)
         m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
-    connect(m_actionFlipPieceVertically, SIGNAL(triggered()),
-            SLOT(flipPieceVertically()));
+    connect(m_actionFlipVertically, SIGNAL(triggered()),
+            SLOT(flipVertically()));
 
     m_actionMoveNumbersAll = createAction(tr("&All"));
     m_actionMoveNumbersAll->setActionGroup(groupMoveNumbers);
@@ -999,15 +999,15 @@ void MainWindow::createActions()
          connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
     }
 
-    m_actionRotatePieceAnticlockwise = createAction(tr("Rotate Anticlockwise"));
-    setIcon(m_actionRotatePieceAnticlockwise, "pentobi-rotate-left");
-    connect(m_actionRotatePieceAnticlockwise, SIGNAL(triggered()),
-            SLOT(rotatePieceAnticlockwise()));
+    m_actionRotateAnticlockwise = createAction(tr("Rotate Anticlockwise"));
+    setIcon(m_actionRotateAnticlockwise, "pentobi-rotate-left");
+    connect(m_actionRotateAnticlockwise, SIGNAL(triggered()),
+            SLOT(rotateAnticlockwise()));
 
-    m_actionRotatePieceClockwise = createAction(tr("Rotate Clockwise"));
-    setIcon(m_actionRotatePieceClockwise, "pentobi-rotate-right");
-    connect(m_actionRotatePieceClockwise, SIGNAL(triggered()),
-            SLOT(rotatePieceClockwise()));
+    m_actionRotateClockwise = createAction(tr("Rotate Clockwise"));
+    setIcon(m_actionRotateClockwise, "pentobi-rotate-right");
+    connect(m_actionRotateClockwise, SIGNAL(triggered()),
+            SLOT(rotateClockwise()));
 
     m_actionQuit = createAction(tr("&Quit"));
     m_actionQuit->setShortcut(QKeySequence::Quit);
@@ -1394,15 +1394,13 @@ QLayout* MainWindow::createOrientationButtonBoxLeft()
 {
     auto outerLayout = new QVBoxLayout;
     auto layout = new QGridLayout;
-    layout->addWidget(createOBoxToolButton(m_actionRotatePieceAnticlockwise,
-                                           true),
+    layout->addWidget(createOBoxToolButton(m_actionRotateAnticlockwise, true),
                       0, 0);
-    layout->addWidget(createOBoxToolButton(m_actionRotatePieceClockwise,
-                                           true),
+    layout->addWidget(createOBoxToolButton(m_actionRotateClockwise, true),
                       0, 1);
-    layout->addWidget(createOBoxToolButton(m_actionFlipPieceHorizontally),
+    layout->addWidget(createOBoxToolButton(m_actionFlipHorizontally),
                       1, 0);
-    layout->addWidget(createOBoxToolButton(m_actionFlipPieceVertically),
+    layout->addWidget(createOBoxToolButton(m_actionFlipVertically),
                       1, 1);
     outerLayout->addStretch();
     outerLayout->addLayout(layout);
@@ -1696,7 +1694,7 @@ void MainWindow::findNextComment()
     gotoNode(*node);
 }
 
-void MainWindow::flipPieceHorizontally()
+void MainWindow::flipHorizontally()
 {
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
@@ -1709,7 +1707,7 @@ void MainWindow::flipPieceHorizontally()
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
 
-void MainWindow::flipPieceVertically()
+void MainWindow::flipVertically()
 {
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
@@ -2715,7 +2713,7 @@ void MainWindow::restoreLevel(Variant variant)
     m_actionLevel[m_level - 1]->setChecked(true);
 }
 
-void MainWindow::rotatePieceAnticlockwise()
+void MainWindow::rotateAnticlockwise()
 {
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
@@ -2729,7 +2727,7 @@ void MainWindow::rotatePieceAnticlockwise()
     updateFlipActions();
 }
 
-void MainWindow::rotatePieceClockwise()
+void MainWindow::rotateClockwise()
 {
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
@@ -2899,8 +2897,8 @@ void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
     m_orientationDisplay->setSelectedPiece(piece);
     m_orientationDisplay->setSelectedPieceTransform(transform);
     bool can_rotate = getBoard().get_piece_info(piece).can_rotate();
-    m_actionRotatePieceClockwise->setEnabled(can_rotate);
-    m_actionRotatePieceAnticlockwise->setEnabled(can_rotate);
+    m_actionRotateClockwise->setEnabled(can_rotate);
+    m_actionRotateAnticlockwise->setEnabled(can_rotate);
     updateFlipActions();
     m_actionClearSelectedPiece->setEnabled(true);
 }
@@ -3397,10 +3395,10 @@ void MainWindow::updateFlipActions()
     auto transform = m_guiBoard->getSelectedPieceTransform();
     bool can_flip_horizontally =
         getBoard().get_piece_info(piece).can_flip_horizontally(transform);
-    m_actionFlipPieceHorizontally->setEnabled(can_flip_horizontally);
+    m_actionFlipHorizontally->setEnabled(can_flip_horizontally);
     bool can_flip_vertically =
         getBoard().get_piece_info(piece).can_flip_vertically(transform);
-    m_actionFlipPieceVertically->setEnabled(can_flip_vertically);
+    m_actionFlipVertically->setEnabled(can_flip_vertically);
 }
 
 void MainWindow::updateMoveAnnotationActions()

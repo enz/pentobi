@@ -99,9 +99,9 @@ public slots:
 
     void findNextComment();
 
-    void flipPieceHorizontally();
+    void flipHorizontally();
 
-    void flipPieceVertically();
+    void flipVertically();
 
     void forward();
 
@@ -159,9 +159,9 @@ public slots:
 
     void ratedGame();
 
-    void rotatePieceAnticlockwise();
+    void rotateAnticlockwise();
 
-    void rotatePieceClockwise();
+    void rotateClockwise();
 
     void save();
 
@@ -377,9 +377,9 @@ private:
 
     QAction* m_actionFindNextComment;
 
-    QAction* m_actionFlipPieceHorizontally;
+    QAction* m_actionFlipHorizontally;
 
-    QAction* m_actionFlipPieceVertically;
+    QAction* m_actionFlipVertically;
 
     QAction* m_actionForward;
 
@@ -473,9 +473,9 @@ private:
 
     QAction* m_actionRecentFile[maxRecentFiles];
 
-    QAction* m_actionRotatePieceAnticlockwise;
+    QAction* m_actionRotateAnticlockwise;
 
-    QAction* m_actionRotatePieceClockwise;
+    QAction* m_actionRotateClockwise;
 
     QAction* m_actionSave;
 
