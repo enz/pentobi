@@ -91,17 +91,12 @@ using libpentobi_mcts::Search;
 
 namespace {
 
-QToolButton* createOBoxToolButton(QAction* action, bool autoRepeat = false)
+QToolButton* createOBoxToolButton(QAction* action)
 {
     auto button = new QToolButton;
     button->setDefaultAction(action);
     button->setAutoRaise(true);
     button->setFocusPolicy(Qt::NoFocus);
-    if (autoRepeat)
-    {
-        button->setAutoRepeat(true);
-        button->setAutoRepeatInterval(300);
-    }
     return button;
 }
 
@@ -1394,14 +1389,10 @@ QLayout* MainWindow::createOrientationButtonBoxLeft()
 {
     auto outerLayout = new QVBoxLayout;
     auto layout = new QGridLayout;
-    layout->addWidget(createOBoxToolButton(m_actionRotateAnticlockwise, true),
-                      0, 0);
-    layout->addWidget(createOBoxToolButton(m_actionRotateClockwise, true),
-                      0, 1);
-    layout->addWidget(createOBoxToolButton(m_actionFlipHorizontally),
-                      1, 0);
-    layout->addWidget(createOBoxToolButton(m_actionFlipVertically),
-                      1, 1);
+    layout->addWidget(createOBoxToolButton(m_actionRotateAnticlockwise), 0, 0);
+    layout->addWidget(createOBoxToolButton(m_actionRotateClockwise), 0, 1);
+    layout->addWidget(createOBoxToolButton(m_actionFlipHorizontally), 1, 0);
+    layout->addWidget(createOBoxToolButton(m_actionFlipVertically), 1, 1);
     outerLayout->addStretch();
     outerLayout->addLayout(layout);
     outerLayout->addStretch();
@@ -1412,12 +1403,10 @@ QLayout* MainWindow::createOrientationButtonBoxRight()
 {
     auto outerLayout = new QVBoxLayout;
     auto layout = new QGridLayout;
-    layout->addWidget(createOBoxToolButton(m_actionPreviousPiece, true),
-                      0, 0);
-    layout->addWidget(createOBoxToolButton(m_actionNextPiece, true),
-                      0, 1);
-    layout->addWidget(createOBoxToolButton(m_actionClearSelectedPiece),
-                      1, 0, 1, 2, Qt::AlignHCenter);
+    layout->addWidget(createOBoxToolButton(m_actionPreviousPiece), 0, 0);
+    layout->addWidget(createOBoxToolButton(m_actionNextPiece), 0, 1);
+    layout->addWidget(createOBoxToolButton(m_actionClearSelectedPiece), 1, 0,
+                      1, 2, Qt::AlignHCenter);
     outerLayout->addStretch();
     outerLayout->addLayout(layout);
     outerLayout->addStretch();
