@@ -253,12 +253,12 @@
     <message>
         <location filename="../MainWindow.cpp" line="814"/>
         <source>Flip Horizontally</source>
-        <translation>Horizontal umdrehen</translation>
+        <translation>Waagrecht umdrehen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="819"/>
         <source>Flip Vertically</source>
-        <translation>Vertikal umdrehen</translation>
+        <translation>Senkrecht umdrehen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="822"/>
