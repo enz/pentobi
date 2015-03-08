@@ -448,23 +448,6 @@ void MainWindow::backward()
     gotoNode(node.get_parent());
 }
 
-void MainWindow::backward10()
-{
-    auto& tree = m_game->get_tree();
-    auto node = &m_game->get_current();
-    unsigned n = 0;
-    while (n < 10)
-    {
-        if (tree.has_move(*node))
-            ++n;
-        auto parent = node->get_parent_or_null();
-        if (! parent)
-            break;
-        node = parent;
-    }
-    gotoNode(*node);
-}
-
 void MainWindow::backToMainVariation()
 {
     gotoNode(back_to_main_variation(m_game->get_current()));
@@ -746,13 +729,6 @@ void MainWindow::createActions()
     m_actionBackward->setShortcut(QString("Ctrl+Left"));
     connect(m_actionBackward, SIGNAL(triggered()), SLOT(backward()));
 
-    m_actionBackward10 = createAction(tr("10 Back&ward"));
-    m_actionBackward10->setToolTip(tr("Go ten moves backward"));
-    m_actionBackward10->setPriority(QAction::LowPriority);
-    setIcon(m_actionBackward10, "pentobi-backward10");
-    m_actionBackward10->setShortcut(QString("Ctrl+Shift+Left"));
-    connect(m_actionBackward10, SIGNAL(triggered()), SLOT(backward10()));
-
     m_actionBackToMainVariation = createAction(tr("Back to &Main Variation"));
     m_actionBackToMainVariation->setShortcut(QString("Ctrl+M"));
     connect(m_actionBackToMainVariation, SIGNAL(triggered()),
@@ -841,13 +817,6 @@ void MainWindow::createActions()
     m_actionForward->setShortcut(QString("Ctrl+Right"));
     setIcon(m_actionForward, "pentobi-forward");
     connect(m_actionForward, SIGNAL(triggered()), SLOT(forward()));
-
-    m_actionForward10 = createAction(tr("10 F&orward"));
-    m_actionForward10->setToolTip(tr("Go ten moves forward"));
-    m_actionForward10->setPriority(QAction::LowPriority);
-    m_actionForward10->setShortcut(QString("Ctrl+Shift+Right"));
-    setIcon(m_actionForward10, "pentobi-forward10");
-    connect(m_actionForward10, SIGNAL(triggered()), SLOT(forward10()));
 
     m_actionFullscreen = createAction(tr("&Fullscreen"));
     m_actionFullscreen->setShortcut(QString("F11"));
@@ -965,11 +934,6 @@ void MainWindow::createActions()
     setIcon(m_actionNextVariation, "pentobi-next-variation");
     connect(m_actionNextVariation, SIGNAL(triggered()), SLOT(nextVariation()));
 
-    m_actionNextVariation10 = createAction();
-    m_actionNextVariation10->setShortcut(QString("Ctrl+Shift+Down"));
-    connect(m_actionNextVariation10, SIGNAL(triggered()),
-            SLOT(nextVariation10()));
-
     m_actionNew = createAction(tr("&New"));
     m_actionNew->setShortcut(QKeySequence::New);
     m_actionNew->setToolTip(tr("Start a new game"));
@@ -1016,11 +980,6 @@ void MainWindow::createActions()
     setIcon(m_actionPreviousVariation, "pentobi-previous-variation");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             SLOT(previousVariation()));
-
-    m_actionPreviousVariation10 = createAction();
-    m_actionPreviousVariation10->setShortcut(QString("Ctrl+Shift+Up"));
-    connect(m_actionPreviousVariation10, SIGNAL(triggered()),
-            SLOT(previousVariation10()));
 
     m_actionRatedGame = createAction(tr("&Rated Game"));
     m_actionRatedGame->setToolTip(tr("Start a new rated game"));
@@ -1351,10 +1310,8 @@ void MainWindow::createMenu()
 
     auto menuGo = menuBar()->addMenu(tr("G&o"));
     menuGo->addAction(m_actionBeginning);
-    menuGo->addAction(m_actionBackward10);
     menuGo->addAction(m_actionBackward);
     menuGo->addAction(m_actionForward);
-    menuGo->addAction(m_actionForward10);
     menuGo->addAction(m_actionEnd);
     menuGo->addSeparator();
     menuGo->addAction(m_actionNextVariation);
@@ -1540,14 +1497,22 @@ void MainWindow::createToolBar()
     toolBar->addAction(m_actionPlay);
     toolBar->addSeparator();
     toolBar->addAction(m_actionBeginning);
-    toolBar->addAction(m_actionBackward10);
     toolBar->addAction(m_actionBackward);
     toolBar->addAction(m_actionForward);
-    toolBar->addAction(m_actionForward10);
     toolBar->addAction(m_actionEnd);
     toolBar->addSeparator();
     toolBar->addAction(m_actionNextVariation);
     toolBar->addAction(m_actionPreviousVariation);
+    // Is this the right way to enable autorepeat buttons? Using
+    // QAction::autoRepeat applies only to keyboard and adding a QToolButton
+    // with QToolBar::addWidget() makes the tool button not respect the
+    // toolButtonStyle.
+    for (auto button : toolBar->findChildren<QToolButton*>())
+    {
+        auto action = button->defaultAction();
+        if (action == m_actionBackward || action == m_actionForward)
+            button->setAutoRepeat(true);
+    }
     addToolBar(toolBar);
     initToolBarText(toolBar);
     QSettings settings;
@@ -1755,23 +1720,6 @@ void MainWindow::forward()
     auto node = m_game->get_current().get_first_child_or_null();
     if (! node)
         return;
-    gotoNode(*node);
-}
-
-void MainWindow::forward10()
-{
-    auto& tree = m_game->get_tree();
-    auto node = &m_game->get_current();
-    unsigned n = 0;
-    while (n < 10)
-    {
-        if (tree.has_move(*node))
-            ++n;
-        auto child = node->get_first_child_or_null();
-        if (! child)
-            break;
-        node = child;
-    }
     gotoNode(*node);
 }
 
@@ -2393,18 +2341,6 @@ void MainWindow::nextVariation()
     gotoNode(*node);
 }
 
-void MainWindow::nextVariation10()
-{
-    auto node = &m_game->get_current();
-    for (unsigned i = 0; i < 10; ++i)
-    {
-        if (! node->get_sibling())
-            break;
-        node = node->get_sibling();
-    }
-    gotoNode(*node);
-}
-
 void MainWindow::newGame()
 {
     if (! checkSave())
@@ -2654,18 +2590,6 @@ void MainWindow::previousVariation()
     auto node = m_game->get_current().get_previous_sibling();
     if (! node)
         return;
-    gotoNode(*node);
-}
-
-void MainWindow::previousVariation10()
-{
-    auto node = &m_game->get_current();
-    for (unsigned i = 0; i < 10; ++i)
-    {
-        if (! node->get_previous_sibling())
-            break;
-        node = node->get_previous_sibling();
-    }
     gotoNode(*node);
 }
 
@@ -3669,12 +3593,10 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionBeginning->setEnabled(! m_isRated && hasParent);
     m_actionBeginningOfBranch->setEnabled(hasEarlierVariation);
     m_actionBackward->setEnabled(! m_isRated && hasParent);
-    m_actionBackward10->setEnabled(! m_isRated && hasParent);
     m_actionComputerColors->setEnabled(! m_isRated);
     m_actionDeleteAllVariations->setEnabled(tree.has_variations());
     m_actionFindNextComment->setEnabled(! m_isRated);
     m_actionForward->setEnabled(hasChildren);
-    m_actionForward10->setEnabled(hasChildren);
     m_actionEnd->setEnabled(hasChildren);
     m_actionFindMove->setEnabled(! isGameOver);
     m_actionGotoMove->setEnabled(! m_isRated &&

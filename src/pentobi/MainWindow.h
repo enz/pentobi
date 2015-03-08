@@ -77,8 +77,6 @@ public slots:
 
     void backward();
 
-    void backward10();
-
     void backToMainVariation();
 
     void beginning();
@@ -106,8 +104,6 @@ public slots:
     void flipPieceVertically();
 
     void forward();
-
-    void forward10();
 
     void gotoMove();
 
@@ -139,8 +135,6 @@ public slots:
 
     void nextVariation();
 
-    void nextVariation10();
-
     void nextPiece();
 
     void nextTransform();
@@ -162,8 +156,6 @@ public slots:
     void previousTransform();
 
     void previousVariation();
-
-    void previousVariation10();
 
     void ratedGame();
 
@@ -357,8 +349,6 @@ private:
 
     QAction* m_actionBackward;
 
-    QAction* m_actionBackward10;
-
     QAction* m_actionBackToMainVariation;
 
     QAction* m_actionBadMove;
@@ -392,8 +382,6 @@ private:
     QAction* m_actionFlipPieceVertically;
 
     QAction* m_actionForward;
-
-    QAction* m_actionForward10;
 
     QAction* m_actionFullscreen;
 
@@ -461,8 +449,6 @@ private:
 
     QAction* m_actionNextVariation;
 
-    QAction* m_actionNextVariation10;
-
     QAction* m_actionNew;
 
     QAction* m_actionRatedGame;
@@ -482,8 +468,6 @@ private:
     QAction* m_actionPreviousTransform;
 
     QAction* m_actionPreviousVariation;
-
-    QAction* m_actionPreviousVariation10;
 
     QAction* m_actionQuit;
 

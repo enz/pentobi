@@ -171,16 +171,6 @@
         <translation>Einen Zug zurück gehen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="733"/>
-        <source>10 Back&amp;ward</source>
-        <translation>10 z&amp;urück</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="734"/>
-        <source>Go ten moves backward</source>
-        <translation>Zehn Züge zurück gehen</translation>
-    </message>
-    <message>
         <location filename="../MainWindow.cpp" line="740"/>
         <source>Back to &amp;Main Variation</source>
         <translation>Zurück zu Hau&amp;ptvariante</translation>
@@ -279,16 +269,6 @@
         <location filename="../MainWindow.cpp" line="823"/>
         <source>Go one move forward</source>
         <translation>Einen Zug vorwärts gehen</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="829"/>
-        <source>10 F&amp;orward</source>
-        <translation>10 v&amp;orwärts</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="830"/>
-        <source>Go ten moves forward</source>
-        <translation>Zehn Züge vorwärts gehen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="836"/>

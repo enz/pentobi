@@ -3,11 +3,12 @@ Version 9.UNKNOWN (master)
 
 * Increased playing strength in Trigon.
 * More variety in Trigon opening moves.
+* The Backward10/Forward10 toolbar buttons were replaced by autorepeat
+  functionality of the Backward/Forward buttons.
 * The compilation now requires at least GCC 4.9 and CMake 3.0.2.
 * On Linux, the manual is now installed in $PREFIX/share/help according
   to the freedesktop.org help specification.
-* The KDE thumbnailer plugin can now be compiled with KDE Frameworks 5
-  (see INSTALL for details)
+* The KDE thumbnailer plugin can now be compiled with KDE Frameworks 5.
 
 
 Version 9.0.UNKNOWN (v9-fixes)

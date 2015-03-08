@@ -37,8 +37,6 @@ set(pentobi_ICNS
   pentobi-32.png
   pentobi-backward.png
   pentobi-backward-16.png
-  pentobi-backward10.png
-  pentobi-backward10-16.png
   pentobi-beginning.png
   pentobi-beginning-16.png
   pentobi-computer-colors.png
@@ -49,8 +47,6 @@ set(pentobi_ICNS
   pentobi-flip-vertical.png
   pentobi-forward.png
   pentobi-forward-16.png
-  pentobi-forward10.png
-  pentobi-forward10-16.png
   pentobi-newgame.png
   pentobi-newgame-16.png
   pentobi-next-piece.png

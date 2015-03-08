@@ -911,16 +911,6 @@
         <translation>Game analysis is only possible in the main variation.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="733"/>
-        <source>10 Back&amp;ward</source>
-        <translation>10 Back&amp;ward</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="734"/>
-        <source>Go ten moves backward</source>
-        <translation>Go ten moves backward</translation>
-    </message>
-    <message>
         <location filename="../MainWindow.cpp" line="751"/>
         <source>Go to beginning of game</source>
         <translation>Go to beginning of game</translation>
@@ -944,16 +934,6 @@
         <location filename="../MainWindow.cpp" line="823"/>
         <source>Go one move forward</source>
         <translation>Go one move forward</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="829"/>
-        <source>10 F&amp;orward</source>
-        <translation>10 F&amp;orward</translation>
-    </message>
-    <message>
-        <location filename="../MainWindow.cpp" line="830"/>
-        <source>Go ten moves forward</source>
-        <translation>Go ten moves forward</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="863"/>
