@@ -91,12 +91,17 @@ using libpentobi_mcts::Search;
 
 namespace {
 
-QToolButton* createOBoxToolButton(QAction* action)
+QToolButton* createOBoxToolButton(QAction* action, bool autoRepeat = false)
 {
     auto button = new QToolButton;
     button->setDefaultAction(action);
     button->setAutoRaise(true);
     button->setFocusPolicy(Qt::NoFocus);
+    if (autoRepeat)
+    {
+        button->setAutoRepeat(true);
+        button->setAutoRepeatInterval(300);
+    }
     return button;
 }
 
@@ -1389,9 +1394,11 @@ QLayout* MainWindow::createOrientationButtonBoxLeft()
 {
     auto outerLayout = new QVBoxLayout;
     auto layout = new QGridLayout;
-    layout->addWidget(createOBoxToolButton(m_actionRotatePieceAnticlockwise),
+    layout->addWidget(createOBoxToolButton(m_actionRotatePieceAnticlockwise,
+                                           true),
                       0, 0);
-    layout->addWidget(createOBoxToolButton(m_actionRotatePieceClockwise),
+    layout->addWidget(createOBoxToolButton(m_actionRotatePieceClockwise,
+                                           true),
                       0, 1);
     layout->addWidget(createOBoxToolButton(m_actionFlipPieceHorizontally),
                       1, 0);
@@ -1407,9 +1414,9 @@ QLayout* MainWindow::createOrientationButtonBoxRight()
 {
     auto outerLayout = new QVBoxLayout;
     auto layout = new QGridLayout;
-    layout->addWidget(createOBoxToolButton(m_actionPreviousPiece),
+    layout->addWidget(createOBoxToolButton(m_actionPreviousPiece, true),
                       0, 0);
-    layout->addWidget(createOBoxToolButton(m_actionNextPiece),
+    layout->addWidget(createOBoxToolButton(m_actionNextPiece, true),
                       0, 1);
     layout->addWidget(createOBoxToolButton(m_actionClearSelectedPiece),
                       1, 0, 1, 2, Qt::AlignHCenter);
