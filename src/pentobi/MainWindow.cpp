@@ -1576,8 +1576,8 @@ void MainWindow::exportImage()
     QInputDialog dialog(this);
     dialog.setWindowFlags(dialog.windowFlags()
                           & ~Qt::WindowContextHelpButtonHint);
-    dialog.setWindowTitle(qApp->translate("ExportImage", "Export Image"));
-    dialog.setLabelText(qApp->translate("ExportImage", "Image size:"));
+    dialog.setWindowTitle(tr("Export Image"));
+    dialog.setLabelText(tr("Image size:"));
     dialog.setInputMode(QInputDialog::IntInput);
     dialog.setIntRange(0, 2147483647);
     dialog.setIntStep(40);
