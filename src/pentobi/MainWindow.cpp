@@ -1433,7 +1433,7 @@ QLayout* MainWindow::createOrientationSelector()
 
 QLayout* MainWindow::createRightPanel()
 {
-    auto layout = new QBoxLayout(QBoxLayout::TopToBottom);
+    auto layout = new QVBoxLayout;
     layout->addLayout(createOrientationSelector(), 20);
     m_scoreDisplay = new ScoreDisplay;
     layout->addWidget(m_scoreDisplay, 6);
