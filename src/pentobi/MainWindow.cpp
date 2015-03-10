@@ -587,15 +587,15 @@ void MainWindow::clearFile()
     setFile("");
 }
 
-void MainWindow::clearSelectedPiece()
+void MainWindow::clearPiece()
 {
     m_actionRotateClockwise->setEnabled(false);
     m_actionRotateAnticlockwise->setEnabled(false);
     m_actionFlipHorizontally->setEnabled(false);
     m_actionFlipVertically->setEnabled(false);
-    m_actionClearSelectedPiece->setEnabled(false);
-    m_guiBoard->clearSelectedPiece();
-    m_orientationDisplay->clearSelectedPiece();
+    m_actionClearPiece->setEnabled(false);
+    m_guiBoard->clearPiece();
+    m_orientationDisplay->clearPiece();
 }
 
 void MainWindow::clearStatus()
@@ -751,11 +751,10 @@ void MainWindow::createActions()
     connect(m_actionBeginningOfBranch, SIGNAL(triggered()),
             SLOT(beginningOfBranch()));
 
-    m_actionClearSelectedPiece = createAction(tr("Clear Piece"));
-    setIcon(m_actionClearSelectedPiece, "pentobi-piece-clear");
-    m_actionClearSelectedPiece->setShortcut(QString("0"));
-    connect(m_actionClearSelectedPiece, SIGNAL(triggered()),
-            SLOT(clearSelectedPiece()));
+    m_actionClearPiece = createAction(tr("Clear Piece"));
+    setIcon(m_actionClearPiece, "pentobi-piece-clear");
+    m_actionClearPiece->setShortcut(QString("0"));
+    connect(m_actionClearPiece, SIGNAL(triggered()), SLOT(clearPiece()));
 
     m_actionComputerColors = createAction(tr("&Computer Colors"));
     m_actionComputerColors->setShortcut(QString("Ctrl+U"));
@@ -1405,7 +1404,7 @@ QLayout* MainWindow::createOrientationButtonBoxRight()
     auto layout = new QGridLayout;
     layout->addWidget(createOBoxToolButton(m_actionPreviousPiece), 0, 0);
     layout->addWidget(createOBoxToolButton(m_actionNextPiece), 0, 1);
-    layout->addWidget(createOBoxToolButton(m_actionClearSelectedPiece), 1, 0,
+    layout->addWidget(createOBoxToolButton(m_actionClearPiece), 1, 0,
                       1, 2, Qt::AlignHCenter);
     outerLayout->addStretch();
     outerLayout->addLayout(layout);
@@ -1895,7 +1894,7 @@ void MainWindow::genMove(bool playSingleMove)
     m_actionPlaySingleMove->setEnabled(false);
     m_actionInterrupt->setEnabled(true);
     showStatus(tr("The computer is thinking..."));
-    clearSelectedPiece();
+    clearPiece();
     clear_abort();
     m_lastRemainingSeconds = 0;
     m_lastRemainingMinutes = 0;
@@ -2862,7 +2861,7 @@ void MainWindow::selectNextColor()
     auto& bd = getBoard();
     m_currentColor = bd.get_next(m_currentColor);
     m_orientationDisplay->selectColor(m_currentColor);
-    clearSelectedPiece();
+    clearPiece();
     for (Color c : bd.get_colors())
         m_pieceSelector[c]->setEnabled(m_currentColor == c);
     if (m_actionSetupMode->isChecked())
@@ -2889,7 +2888,7 @@ void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
     m_actionRotateClockwise->setEnabled(can_rotate);
     m_actionRotateAnticlockwise->setEnabled(can_rotate);
     updateFlipActions();
-    m_actionClearSelectedPiece->setEnabled(true);
+    m_actionClearPiece->setEnabled(true);
 }
 
 void MainWindow::selectPiece1()
@@ -3019,7 +3018,7 @@ void MainWindow::setVariant(Variant variant)
     cancelThread();
     QSettings settings;
     settings.setValue("variant", to_string_id(variant));
-    clearSelectedPiece();
+    clearPiece();
     m_game->init(variant);
     initPieceSelectors();
     newGame();
@@ -3563,7 +3562,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         m_orientationDisplay->selectColor(m_currentColor);
     if (currentNodeChanged)
     {
-        clearSelectedPiece();
+        clearPiece();
         for (Color c : bd.get_colors())
             m_pieceSelector[c]->checkUpdate();
         if (! m_actionSetupMode->isChecked())

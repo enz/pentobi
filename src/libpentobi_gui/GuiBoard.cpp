@@ -66,7 +66,7 @@ void GuiBoard::clearMarkup()
         setLabel(p, "");
 }
 
-void GuiBoard::clearSelectedPiece()
+void GuiBoard::clearPiece()
 {
     m_selectedPiece = Piece::null();
     m_selectedPieceTransform = nullptr;

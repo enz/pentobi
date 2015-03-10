@@ -42,7 +42,7 @@ void OrientationDisplay::clearSelectedColor()
     }
 }
 
-void OrientationDisplay::clearSelectedPiece()
+void OrientationDisplay::clearPiece()
 {
     if (m_piece.is_null())
         return;

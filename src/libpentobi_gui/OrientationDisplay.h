@@ -37,7 +37,7 @@ public:
 
     void clearSelectedColor();
 
-    void clearSelectedPiece();
+    void clearPiece();
 
     void setSelectedPiece(Piece piece);
 

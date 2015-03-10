@@ -64,7 +64,7 @@ public:
     void setFreePlacement(bool enable);
 
 public slots:
-    void clearSelectedPiece();
+    void clearPiece();
 
     void selectPiece(Color color, Piece piece);
 
