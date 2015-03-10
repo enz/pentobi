@@ -68,15 +68,15 @@ public slots:
 
     void selectPiece(Color color, Piece piece);
 
-    void moveSelectedPieceLeft();
+    void movePieceLeft();
 
-    void moveSelectedPieceRight();
+    void movePieceRight();
 
-    void moveSelectedPieceUp();
+    void movePieceUp();
 
-    void moveSelectedPieceDown();
+    void movePieceDown();
 
-    void placeSelectedPiece();
+    void placePiece();
 
 signals:
     void play(Color color, Move mv);

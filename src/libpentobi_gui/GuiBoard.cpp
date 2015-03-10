@@ -152,10 +152,10 @@ void GuiBoard::mousePressEvent(QMouseEvent* event)
         return;
     }
     setSelectedPieceOffset(*event);
-    placeSelectedPiece();
+    placePiece();
 }
 
-void GuiBoard::moveSelectedPieceDown()
+void GuiBoard::movePieceDown()
 {
     if (m_selectedPiece.is_null())
         return;
@@ -189,7 +189,7 @@ void GuiBoard::moveSelectedPieceDown()
     }
 }
 
-void GuiBoard::moveSelectedPieceLeft()
+void GuiBoard::movePieceLeft()
 {
     if (m_selectedPiece.is_null())
         return;
@@ -217,7 +217,7 @@ void GuiBoard::moveSelectedPieceLeft()
     }
 }
 
-void GuiBoard::moveSelectedPieceRight()
+void GuiBoard::movePieceRight()
 {
     if (m_selectedPiece.is_null())
         return;
@@ -245,7 +245,7 @@ void GuiBoard::moveSelectedPieceRight()
     }
 }
 
-void GuiBoard::moveSelectedPieceUp()
+void GuiBoard::movePieceUp()
 {
     if (m_selectedPiece.is_null())
         return;
@@ -331,7 +331,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
     }
 }
 
-void GuiBoard::placeSelectedPiece()
+void GuiBoard::placePiece()
 {
     auto mv = findSelectedPieceMove();
     if (! mv.is_null())

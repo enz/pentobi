@@ -248,16 +248,16 @@ MainWindow::MainWindow(const QString& initialFile, const QString& helpDir,
             SLOT(placePiece(Color, Move)));
     connect(m_guiBoard, SIGNAL(pointClicked(Point)),
             SLOT(pointClicked(Point)));
-    connect(m_actionMoveSelectedPieceLeft, SIGNAL(triggered()),
-            m_guiBoard, SLOT(moveSelectedPieceLeft()));
-    connect(m_actionMoveSelectedPieceRight, SIGNAL(triggered()),
-            m_guiBoard, SLOT(moveSelectedPieceRight()));
-    connect(m_actionMoveSelectedPieceUp, SIGNAL(triggered()),
-            m_guiBoard, SLOT(moveSelectedPieceUp()));
-    connect(m_actionMoveSelectedPieceDown, SIGNAL(triggered()),
-            m_guiBoard, SLOT(moveSelectedPieceDown()));
-    connect(m_actionPlaceSelectedPiece, SIGNAL(triggered()),
-            m_guiBoard, SLOT(placeSelectedPiece()));
+    connect(m_actionMovePieceLeft, SIGNAL(triggered()),
+            m_guiBoard, SLOT(movePieceLeft()));
+    connect(m_actionMovePieceRight, SIGNAL(triggered()),
+            m_guiBoard, SLOT(movePieceRight()));
+    connect(m_actionMovePieceUp, SIGNAL(triggered()),
+            m_guiBoard, SLOT(movePieceUp()));
+    connect(m_actionMovePieceDown, SIGNAL(triggered()),
+            m_guiBoard, SLOT(movePieceDown()));
+    connect(m_actionPlacePiece, SIGNAL(triggered()),
+            m_guiBoard, SLOT(placePiece()));
     createMenu();
     qApp->installEventFilter(this);
     updateRecentFiles();
@@ -905,17 +905,17 @@ void MainWindow::createActions()
     connect(m_actionMoveNumbersNone, SIGNAL(triggered(bool)),
             SLOT(setMoveNumbersNone(bool)));
 
-    m_actionMoveSelectedPieceLeft = createAction();
-    m_actionMoveSelectedPieceLeft->setShortcut(QString("Left"));
+    m_actionMovePieceLeft = createAction();
+    m_actionMovePieceLeft->setShortcut(QString("Left"));
 
-    m_actionMoveSelectedPieceRight = createAction();
-    m_actionMoveSelectedPieceRight->setShortcut(QString("Right"));
+    m_actionMovePieceRight = createAction();
+    m_actionMovePieceRight->setShortcut(QString("Right"));
 
-    m_actionMoveSelectedPieceUp = createAction();
-    m_actionMoveSelectedPieceUp->setShortcut(QString("Up"));
+    m_actionMovePieceUp = createAction();
+    m_actionMovePieceUp->setShortcut(QString("Up"));
 
-    m_actionMoveSelectedPieceDown = createAction();
-    m_actionMoveSelectedPieceDown->setShortcut(QString("Down"));
+    m_actionMovePieceDown = createAction();
+    m_actionMovePieceDown->setShortcut(QString("Down"));
 
     m_actionNextPiece = createAction(tr("Next Piece"));
     setIcon(m_actionNextPiece, "pentobi-next-piece");
@@ -948,8 +948,8 @@ void MainWindow::createActions()
     m_actionOpen = createAction(tr("&Open..."));
     m_actionOpen->setShortcut(QKeySequence::Open);
     connect(m_actionOpen, SIGNAL(triggered()), SLOT(open()));
-    m_actionPlaceSelectedPiece = createAction();
-    m_actionPlaceSelectedPiece->setShortcut(QString("Return"));
+    m_actionPlacePiece = createAction();
+    m_actionPlacePiece->setShortcut(QString("Return"));
 
     m_actionPlay = createAction(tr("&Play"));
     m_actionPlay->setShortcut(QString("Ctrl+L"));

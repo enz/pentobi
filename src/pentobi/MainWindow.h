@@ -435,13 +435,13 @@ private:
 
     QAction* m_actionMoveUpVariation;
 
-    QAction* m_actionMoveSelectedPieceLeft;
+    QAction* m_actionMovePieceLeft;
 
-    QAction* m_actionMoveSelectedPieceRight;
+    QAction* m_actionMovePieceRight;
 
-    QAction* m_actionMoveSelectedPieceUp;
+    QAction* m_actionMovePieceUp;
 
-    QAction* m_actionMoveSelectedPieceDown;
+    QAction* m_actionMovePieceDown;
 
     QAction* m_actionNextPiece;
 
@@ -457,7 +457,7 @@ private:
 
     QAction* m_actionOpen;
 
-    QAction* m_actionPlaceSelectedPiece;
+    QAction* m_actionPlacePiece;
 
     QAction* m_actionPlay;
 
