@@ -726,7 +726,7 @@ void MainWindow::createActions()
     m_actionBackward->setToolTip(tr("Go one move backward"));
     m_actionBackward->setPriority(QAction::LowPriority);
     setIcon(m_actionBackward, "pentobi-backward");
-    m_actionBackward->setShortcut(QString("Ctrl+Left"));
+    m_actionBackward->setShortcut(QKeySequence::MoveToPreviousWord);
     connect(m_actionBackward, SIGNAL(triggered()), SLOT(backward()));
 
     m_actionBackToMainVariation = createAction(tr("Back to &Main Variation"));
@@ -743,7 +743,7 @@ void MainWindow::createActions()
     m_actionBeginning->setToolTip(tr("Go to beginning of game"));
     m_actionBeginning->setPriority(QAction::LowPriority);
     setIcon(m_actionBeginning, "pentobi-beginning");
-    m_actionBeginning->setShortcut(QString("Ctrl+Home"));
+    m_actionBeginning->setShortcut(QKeySequence::MoveToStartOfDocument);
     connect(m_actionBeginning, SIGNAL(triggered()), SLOT(beginning()));
 
     m_actionBeginningOfBranch = createAction(tr("Beginning of Bran&ch"));
@@ -782,7 +782,7 @@ void MainWindow::createActions()
     m_actionEnd = createAction(tr("&End"));
     m_actionEnd->setToolTip(tr("Go to end of moves"));
     m_actionEnd->setPriority(QAction::LowPriority);
-    m_actionEnd->setShortcut(QString("Ctrl+End"));
+    m_actionEnd->setShortcut(QKeySequence::MoveToEndOfDocument);
     setIcon(m_actionEnd, "pentobi-end");
     connect(m_actionEnd, SIGNAL(triggered()), SLOT(end()));
 
@@ -798,7 +798,7 @@ void MainWindow::createActions()
     connect(m_actionFindMove, SIGNAL(triggered()), SLOT(findMove()));
 
     m_actionFindNextComment = createAction(tr("Find Next &Comment"));
-    m_actionFindNextComment->setShortcut(QString("F3"));
+    m_actionFindNextComment->setShortcut(QKeySequence::FindNext);
     connect(m_actionFindNextComment, SIGNAL(triggered()),
             SLOT(findNextComment()));
 
@@ -813,7 +813,7 @@ void MainWindow::createActions()
     m_actionForward = createAction(tr("&Forward"));
     m_actionForward->setToolTip(tr("Go one move forward"));
     m_actionForward->setPriority(QAction::LowPriority);
-    m_actionForward->setShortcut(QString("Ctrl+Right"));
+    m_actionForward->setShortcut(QKeySequence::MoveToNextWord);
     setIcon(m_actionForward, "pentobi-forward");
     connect(m_actionForward, SIGNAL(triggered()), SLOT(forward()));
 
@@ -906,16 +906,16 @@ void MainWindow::createActions()
             SLOT(setMoveNumbersNone(bool)));
 
     m_actionMovePieceLeft = createAction();
-    m_actionMovePieceLeft->setShortcut(QString("Left"));
+    m_actionMovePieceLeft->setShortcut(QKeySequence::MoveToPreviousChar);
 
     m_actionMovePieceRight = createAction();
-    m_actionMovePieceRight->setShortcut(QString("Right"));
+    m_actionMovePieceRight->setShortcut(QKeySequence::MoveToNextChar);
 
     m_actionMovePieceUp = createAction();
-    m_actionMovePieceUp->setShortcut(QString("Up"));
+    m_actionMovePieceUp->setShortcut(QKeySequence::MoveToPreviousLine);
 
     m_actionMovePieceDown = createAction();
-    m_actionMovePieceDown->setShortcut(QString("Down"));
+    m_actionMovePieceDown->setShortcut(QKeySequence::MoveToNextLine);
 
     m_actionNextPiece = createAction(tr("Next Piece"));
     setIcon(m_actionNextPiece, "pentobi-next-piece");
@@ -929,7 +929,7 @@ void MainWindow::createActions()
     m_actionNextVariation = createAction(tr("&Next Variation"));
     m_actionNextVariation->setToolTip(tr("Go to next variation"));
     m_actionNextVariation->setPriority(QAction::LowPriority);
-    m_actionNextVariation->setShortcut(QString("Ctrl+Down"));
+    m_actionNextVariation->setShortcut(QKeySequence::MoveToNextPage);
     setIcon(m_actionNextVariation, "pentobi-next-variation");
     connect(m_actionNextVariation, SIGNAL(triggered()), SLOT(nextVariation()));
 
@@ -975,7 +975,7 @@ void MainWindow::createActions()
     m_actionPreviousVariation = createAction(tr("&Previous Variation"));
     m_actionPreviousVariation->setToolTip(tr("Go to previous variation"));
     m_actionPreviousVariation->setPriority(QAction::LowPriority);
-    m_actionPreviousVariation->setShortcut(QString("Ctrl+Up"));
+    m_actionPreviousVariation->setShortcut(QKeySequence::MoveToPreviousPage);
     setIcon(m_actionPreviousVariation, "pentobi-previous-variation");
     connect(m_actionPreviousVariation, SIGNAL(triggered()),
             SLOT(previousVariation()));
