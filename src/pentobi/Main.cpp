@@ -175,7 +175,13 @@ int main(int argc, char* argv[])
         auto& args = opt.get_args();
         if (! args.empty())
             initialFile = QString::fromLocal8Bit(args[0].c_str());
-        MainWindow mainWindow(initialFile, helpDir, booksDir, noBook,
+        QSettings settings;
+        auto variantString = settings.value("variant", "").toString();
+        Variant variant;
+        if (! parse_variant_id(variantString.toLocal8Bit().constData(),
+                               variant))
+            variant = Variant::classic;
+        MainWindow mainWindow(variant, initialFile, helpDir, booksDir, noBook,
                               threads, memory);
         if (opt.contains("seed"))
             mainWindow.setDeterministic();

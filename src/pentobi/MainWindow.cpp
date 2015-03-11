@@ -209,18 +209,15 @@ float getHeuristic(const Board& bd, Move mv)
 
 //-----------------------------------------------------------------------------
 
-MainWindow::MainWindow(const QString& initialFile, const QString& helpDir,
-                       const QString& booksDir, bool noBook,
-                       unsigned nu_threads, size_t memory)
-    : m_helpDir(helpDir)
+MainWindow::MainWindow(Variant variant, const QString& initialFile,
+                       const QString& helpDir, const QString& booksDir,
+                       bool noBook, unsigned nu_threads, size_t memory)
+    : m_game(variant),
+      m_bd(m_game.get_board()),
+      m_helpDir(helpDir)
 {
     Util::initDataDir();
     QSettings settings;
-    auto variantString = settings.value("variant", "").toString();
-    Variant variant;
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
-        variant = Variant::classic;
-    m_game.reset(new Game(variant));
     m_history.reset(new RatingHistory(variant));
     createActions();
     restoreLevel(variant);
@@ -329,7 +326,7 @@ MainWindow::MainWindow(const QString& initialFile, const QString& helpDir,
             open(autoSaveFile, true);
             m_isAutoSaveLoaded = true;
             deleteAutoSaveFile();
-            m_gameFinished = getBoard().is_game_over();
+            m_gameFinished = m_bd.is_game_over();
             updateWindow(true);
             if (settings.value("autosave_rated", false).toBool())
                 QMetaObject::invokeMethod(this, "continueRatedGame",
@@ -361,7 +358,7 @@ void MainWindow::about()
 
 void MainWindow::analyzeGame()
 {
-    if (! is_main_variation(m_game->get_current()))
+    if (! is_main_variation(m_game.get_current()))
     {
         showInfo(tr("Game analysis is only possible in the main variation."));
         return;
@@ -398,15 +395,14 @@ void MainWindow::analyzeGame()
     default:
         nuSimulations = 80000;
     }
-    m_analyzeGameWindow->analyzeGameWidget->start(*m_game,
-                                                  m_player->get_search(),
-                                                  nuSimulations);
+    m_analyzeGameWindow->analyzeGameWidget->start(
+                m_game, m_player->get_search(), nuSimulations);
 }
 
 void MainWindow::analyzeGameFinished()
 {
-    m_analyzeGameWindow->analyzeGameWidget
-        ->setCurrentPosition(*m_game, m_game->get_current());
+    m_analyzeGameWindow->analyzeGameWidget->setCurrentPosition(
+                m_game, m_game.get_current());
     m_isAnalyzeRunning = false;
 }
 
@@ -420,7 +416,7 @@ MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId,
     result.playSingleMove = playSingleMove;
     result.color = c;
     result.genMoveId = genMoveId;
-    result.move = m_player->genmove(getBoard(), c);
+    result.move = m_player->genmove(m_bd, c);
     auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 0.8 sec
     if (elapsed < 800 && ! m_noDelay)
@@ -436,13 +432,13 @@ void MainWindow::badMove(bool checked)
 {
     if (! checked)
         return;
-    m_game->set_bad_move();
+    m_game.set_bad_move();
     updateWindow(false);
 }
 
 void MainWindow::backward()
 {
-    auto& node = m_game->get_current();
+    auto& node = m_game.get_current();
     if (! node.has_parent())
         return;
     gotoNode(node.get_parent());
@@ -450,17 +446,17 @@ void MainWindow::backward()
 
 void MainWindow::backToMainVariation()
 {
-    gotoNode(back_to_main_variation(m_game->get_current()));
+    gotoNode(back_to_main_variation(m_game.get_current()));
 }
 
 void MainWindow::beginning()
 {
-    gotoNode(m_game->get_root());
+    gotoNode(m_game.get_root());
 }
 
 void MainWindow::beginningOfBranch()
 {
-    gotoNode(beginning_of_branch(m_game->get_current()));
+    gotoNode(beginning_of_branch(m_game.get_current()));
 }
 
 void MainWindow::cancelThread()
@@ -493,7 +489,7 @@ void MainWindow::cancelThread()
 
 void MainWindow::checkComputerMove()
 {
-    if (! m_autoPlay || ! isComputerToPlay() || getBoard().is_game_over())
+    if (! m_autoPlay || ! isComputerToPlay() || m_bd.is_game_over())
         m_lastComputerMovesBegin = 0;
     else if (! m_isGenMoveRunning)
         genMove();
@@ -503,7 +499,7 @@ bool MainWindow::checkSave()
 {
     if (! m_file.isEmpty())
     {
-        if (! m_game->is_modified())
+        if (! m_game.is_modified())
             return true;
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The file has been modified."),
@@ -527,7 +523,7 @@ bool MainWindow::checkSave()
     }
     // Don't ask if game should be saved if it was finished because the user
     // might only want to play and never save games.
-    if (m_game->get_tree().get_root().has_children() && ! m_gameFinished)
+    if (m_game.get_tree().get_root().has_children() && ! m_gameFinished)
     {
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The current game is not finished."),
@@ -546,7 +542,7 @@ bool MainWindow::checkSave()
 
 bool MainWindow::checkQuit()
 {
-    if (! m_file.isEmpty() && m_game->is_modified())
+    if (! m_file.isEmpty() && m_game.is_modified())
     {
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The file has been modified."),
@@ -567,7 +563,7 @@ bool MainWindow::checkQuit()
     cancelThread();
     QSettings settings;
     if (m_file.isEmpty() && ! m_gameFinished
-        && (m_game->is_modified() || m_isAutoSaveLoaded))
+            && (m_game.is_modified() || m_isAutoSaveLoaded))
     {
         writeGame(getAutoSaveFile().toLocal8Bit().constData());
         settings.setValue("autosave_rated", m_isRated);
@@ -617,13 +613,13 @@ void MainWindow::commentChanged()
         return;
     QString comment = m_comment->toPlainText();
     if (comment.isEmpty())
-        m_game->set_comment("");
+        m_game.set_comment("");
     else
     {
-        string charset = m_game->get_root().get_property("CA", "");
+        string charset = m_game.get_root().get_property("CA", "");
         string value = Util::convertSgfValueFromQString(comment, charset);
         trim_right(value);
-        m_game->set_comment(value);
+        m_game.set_comment(value);
     }
     updateWindowModified();
 }
@@ -631,10 +627,9 @@ void MainWindow::commentChanged()
 void MainWindow::computerColors()
 {
     ColorMap<bool> oldComputerColors = m_computerColors;
-    auto variant = getVariant();
-    ComputerColorDialog dialog(this, variant, m_computerColors);
+    ComputerColorDialog dialog(this, m_bd.get_variant(), m_computerColors);
     dialog.exec();
-    auto nu_colors = getBoard().get_nu_nonalt_colors();
+    auto nu_colors = m_bd.get_nu_nonalt_colors();
 
     bool computerNone = true;
     for (Color c : Color::Range(nu_colors))
@@ -661,7 +656,7 @@ void MainWindow::computerColors()
 
 bool MainWindow::computerPlaysAll() const
 {
-    for (Color c : Color::Range(getBoard().get_nu_nonalt_colors()))
+    for (Color c : Color::Range(m_bd.get_nu_nonalt_colors()))
         if (! m_computerColors[c])
             return false;
     return true;
@@ -669,8 +664,7 @@ bool MainWindow::computerPlaysAll() const
 
 void MainWindow::continueRatedGame()
 {
-    auto& bd = getBoard();
-    auto nuColors = bd.get_nu_colors();
+    auto nuColors = m_bd.get_nu_colors();
     QSettings settings;
     auto color =
             static_cast<Color::IntType>(
@@ -680,13 +674,13 @@ void MainWindow::continueRatedGame()
     m_ratedGameColor = Color(color);
     m_computerColors.fill(true);
     for (Color c : Color::Range(nuColors))
-        if (bd.is_same_player(c, m_ratedGameColor))
+        if (m_bd.is_same_player(c, m_ratedGameColor))
             m_computerColors[c] = false;
     setRated(true);
     updateWindow(false);
     showInfo(tr("Continuing unfinished rated game."),
              tr("You play %1 in this game.")
-             .arg(getPlayerString(bd.get_variant(), m_ratedGameColor)));
+             .arg(getPlayerString(m_bd.get_variant(), m_ratedGameColor)));
     m_autoPlay = true;
     checkComputerMove();
 }
@@ -1247,7 +1241,7 @@ QWidget* MainWindow::createCentralWidget()
 QWidget* MainWindow::createLeftPanel()
 {
     m_splitter = new QSplitter(Qt::Vertical);
-    m_guiBoard = new GuiBoard(nullptr, getBoard());
+    m_guiBoard = new GuiBoard(nullptr, m_bd);
     m_splitter->addWidget(m_guiBoard);
     m_comment = new QPlainTextEdit;
     m_comment->setTabChangesFocus(true);
@@ -1418,7 +1412,7 @@ QLayout* MainWindow::createOrientationSelector()
     layout->addStretch();
     layout->addLayout(createOrientationButtonBoxLeft());
     layout->addSpacing(8);
-    m_orientationDisplay = new OrientationDisplay(nullptr, getBoard());
+    m_orientationDisplay = new OrientationDisplay(nullptr, m_bd);
     connect(m_orientationDisplay, SIGNAL(colorClicked(Color)),
             SLOT(orientationDisplayColorClicked(Color)));
     m_orientationDisplay->setSizePolicy(QSizePolicy::MinimumExpanding,
@@ -1440,7 +1434,7 @@ QLayout* MainWindow::createRightPanel()
     layout->addLayout(pieceSelectorLayout, 80);
     for (Color c : Color::Range(Color::range))
     {
-        m_pieceSelector[c] = new PieceSelector(nullptr, getBoard(), c);
+        m_pieceSelector[c] = new PieceSelector(nullptr, m_bd, c);
         connect(m_pieceSelector[c],
                 SIGNAL(pieceSelected(Color,Piece,const Transform*)),
                 SLOT(selectPiece(Color,Piece,const Transform*)));
@@ -1462,10 +1456,10 @@ void MainWindow::deleteAllVariations()
     msgBox.exec();
     if (msgBox.clickedButton() != deleteButton)
         return;
-    bool currentNodeChanges = ! is_main_variation(m_game->get_current());
+    bool currentNodeChanges = ! is_main_variation(m_game.get_current());
     if (currentNodeChanges)
         cancelThread();
-    m_game->delete_all_variations();
+    m_game.delete_all_variations();
     updateWindow(currentNodeChanges);
 }
 
@@ -1473,7 +1467,7 @@ void MainWindow::doubtfulMove(bool checked)
 {
     if (! checked)
         return;
-    m_game->set_doubtful_move();
+    m_game.set_doubtful_move();
     updateWindow(false);
 }
 
@@ -1532,7 +1526,7 @@ void MainWindow::deleteAutoSaveFile()
 
 void MainWindow::enablePieceSelector(Color c)
 {
-    for (Color i : getBoard().get_colors())
+    for (Color i : m_bd.get_colors())
     {
         m_pieceSelector[i]->checkUpdate();
         m_pieceSelector[i]->setEnabled(i == c);
@@ -1541,7 +1535,7 @@ void MainWindow::enablePieceSelector(Color c)
 
 void MainWindow::end()
 {
-    gotoNode(get_last_node(m_game->get_current()));
+    gotoNode(get_last_node(m_game.get_current()));
 }
 
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
@@ -1562,8 +1556,7 @@ void MainWindow::exportAsciiArt()
         return;
     rememberDir(file);
     ofstream out(file.toLocal8Bit().constData());
-    auto& bd = getBoard();
-    bd.write(out, false);
+    m_bd.write(out, false);
     if (! out)
         showError(strerror(errno));
 }
@@ -1595,10 +1588,9 @@ void MainWindow::exportImage()
     painter.begin(&image);
     if (coordinates)
         painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
-    auto& bd = getBoard();
-    boardPainter.paintEmptyBoard(painter, size, size, bd.get_variant(),
-                                 bd.get_geometry());
-    boardPainter.paintPieces(painter, bd.get_point_state(),
+    boardPainter.paintEmptyBoard(painter, size, size, m_bd.get_variant(),
+                                 m_bd.get_geometry());
+    boardPainter.paintPieces(painter, m_bd.get_point_state(),
                              &m_guiBoard->getLabels());
     painter.end();
     QString file;
@@ -1618,8 +1610,7 @@ void MainWindow::exportImage()
 
 void MainWindow::findMove()
 {
-    auto& bd = getBoard();
-    if (bd.is_game_over())
+    if (m_bd.is_game_over())
         return;
     if (! m_legalMoves)
         m_legalMoves.reset(new MoveList);
@@ -1627,11 +1618,11 @@ void MainWindow::findMove()
     {
         if (! m_marker)
             m_marker.reset(new MoveMarker);
-        bd.gen_moves(m_currentColor, *m_marker, *m_legalMoves);
+        m_bd.gen_moves(m_currentColor, *m_marker, *m_legalMoves);
         m_marker->clear(*m_legalMoves);
         sort(m_legalMoves->begin(), m_legalMoves->end(),
              [&](Move mv1, Move mv2) {
-                 return getHeuristic(bd, mv1) > getHeuristic(bd, mv2);
+                 return getHeuristic(m_bd, mv1) > getHeuristic(m_bd, mv2);
              });
     }
     if (m_legalMoves->empty())
@@ -1643,15 +1634,15 @@ void MainWindow::findMove()
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
     auto mv = (*m_legalMoves)[m_legalMoveIndex];
-    selectPiece(m_currentColor, bd.get_move_info(mv).get_piece());
+    selectPiece(m_currentColor, m_bd.get_move_info(mv).get_piece());
     m_guiBoard->showMove(m_currentColor, mv);
     ++m_legalMoveIndex;
 }
 
 void MainWindow::findNextComment()
 {
-    auto& root = m_game->get_root();
-    auto& current = m_game->get_current();
+    auto& root = m_game.get_root();
+    auto& current = m_game.get_current();
     auto node = find_next_comment(current);
     if (! node && &current != &root)
     {
@@ -1687,10 +1678,9 @@ void MainWindow::flipHorizontally()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    auto& bd = getBoard();
     auto transform = m_guiBoard->getSelectedPieceTransform();
-    transform = bd.get_transforms().get_mirrored_horizontally(transform);
-    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
+    transform = m_bd.get_transforms().get_mirrored_horizontally(transform);
+    transform = m_bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
@@ -1701,16 +1691,15 @@ void MainWindow::flipVertically()
     if (piece.is_null())
         return;
     auto transform = m_guiBoard->getSelectedPieceTransform();
-    auto& bd = getBoard();
-    transform = bd.get_transforms().get_mirrored_vertically(transform);
-    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
+    transform = m_bd.get_transforms().get_mirrored_vertically(transform);
+    transform = m_bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
 
 void MainWindow::forward()
 {
-    auto node = m_game->get_current().get_first_child_or_null();
+    auto node = m_game.get_current().get_first_child_or_null();
     if (! node)
         return;
     gotoNode(*node);
@@ -1737,19 +1726,18 @@ void MainWindow::fullscreen()
 
 void MainWindow::gameInfo()
 {
-    GameInfoDialog dialog(this, *m_game);
+    GameInfoDialog dialog(this, m_game);
     dialog.exec();
     updateWindow(false);
 }
 
 void MainWindow::gameOver()
 {
-    auto variant = getVariant();
-    auto& bd = getBoard();
+    auto variant = m_bd.get_variant();
     QString info;
     if (variant == Variant::duo || variant == Variant::junior)
     {
-        int score = bd.get_score(Color(0));
+        int score = m_bd.get_score(Color(0));
         if (score > 0)
             info = tr("Blue wins with %n point(s).", "", score);
         else if (score < 0)
@@ -1759,7 +1747,7 @@ void MainWindow::gameOver()
     }
     else if (variant == Variant::classic_2 || variant == Variant::trigon_2)
     {
-        int score = bd.get_score(Color(0));
+        int score = m_bd.get_score(Color(0));
         if (score > 0)
             info = tr("Blue/Red wins with %n point(s).", "", score);
         else if (score < 0)
@@ -1769,9 +1757,9 @@ void MainWindow::gameOver()
     }
     else if (variant == Variant::classic_3 || variant == Variant::trigon_3)
     {
-        auto blue = bd.get_points(Color(0));
-        auto yellow = bd.get_points(Color(1));
-        auto red = bd.get_points(Color(2));
+        auto blue = m_bd.get_points(Color(0));
+        auto yellow = m_bd.get_points(Color(1));
+        auto red = m_bd.get_points(Color(2));
         auto maxPoints = max(blue, max(yellow, red));
         if (blue == yellow && yellow == red)
             info = tr("The game ends in a tie between all colors.");
@@ -1792,10 +1780,10 @@ void MainWindow::gameOver()
     {
         LIBBOARDGAME_ASSERT(variant == Variant::classic
                             || variant == Variant::trigon);
-        auto blue = bd.get_points(Color(0));
-        auto yellow = bd.get_points(Color(1));
-        auto red = bd.get_points(Color(2));
-        auto green = bd.get_points(Color(3));
+        auto blue = m_bd.get_points(Color(0));
+        auto yellow = m_bd.get_points(Color(1));
+        auto red = m_bd.get_points(Color(2));
+        auto green = m_bd.get_points(Color(3));
         auto maxPoints = max(blue, max(yellow, max(red, green)));
         if (blue == yellow && yellow == red && red == green)
             info = tr("The game ends in a tie between all colors.");
@@ -1835,7 +1823,7 @@ void MainWindow::gameOver()
         int oldRating = m_history->getRating().to_int();
         unsigned place;
         bool isPlaceShared;
-        bd.get_place(m_ratedGameColor, place, isPlaceShared);
+        m_bd.get_place(m_ratedGameColor, place, isPlaceShared);
         float gameResult;
         if (place == 0 && !isPlaceShared)
             gameResult = 1;
@@ -1847,7 +1835,7 @@ void MainWindow::gameOver()
         Rating oppRating = m_player->get_rating(variant);
         QString date = QString(PentobiTree::get_date_today().c_str());
         m_history->addGame(gameResult, oppRating, nuOpp, m_ratedGameColor,
-            gameResult, date, m_level, m_game->get_tree());
+                           gameResult, date, m_level, m_game.get_tree());
         if (m_ratingDialog)
             m_ratingDialog->updateContent();
         int newRating = m_history->getRating().to_int();
@@ -1863,7 +1851,7 @@ void MainWindow::gameOver()
             .arg(oldRating).arg(newRating);
         setRated(false);
         QSettings settings;
-        auto key = QString("next_rated_random_") + to_string_id(getVariant());
+        auto key = QString("next_rated_random_") + to_string_id(variant);
         settings.remove(key);
         QMessageBox msgBox(this);
         Util::setNoTitle(msgBox);
@@ -1904,8 +1892,7 @@ void MainWindow::genMove(bool playSingleMove)
                           m_genMoveId, playSingleMove);
     m_genMoveWatcher.setFuture(future);
     m_isGenMoveRunning = true;
-    auto& bd = getBoard();
-    unsigned nuMoves = bd.get_nu_moves();
+    unsigned nuMoves = m_bd.get_nu_moves();
     if (m_lastComputerMovesBegin == 0 && ! computerPlaysAll())
     {
         m_lastComputerMovesBegin = nuMoves + 1;
@@ -1928,10 +1915,9 @@ void MainWindow::genMoveFinished()
     setCursor(QCursor(Qt::ArrowCursor));
     if (get_abort() && computerPlaysAll())
         m_computerColors.fill(false);
-    auto& bd = getBoard();
     Color c = result.color;
     auto mv = result.move;
-    if (mv.is_null() || ! bd.is_legal(c, mv))
+    if (mv.is_null() || ! m_bd.is_legal(c, mv))
     {
         // No need to translate this message, it should never occur if the
         // program is correct
@@ -1939,7 +1925,7 @@ void MainWindow::genMoveFinished()
         return;
     }
     play(c, mv);
-    m_lastComputerMovesEnd = bd.get_nu_moves();
+    m_lastComputerMovesEnd = m_bd.get_nu_moves();
     if (computerPlaysAll())
         m_lastComputerMovesBegin = m_lastComputerMovesEnd;
     // Call updateWindow() before checkComputerMove() because checkComputerMove
@@ -1985,7 +1971,7 @@ void MainWindow::goodMove(bool checked)
 {
     if (! checked)
         return;
-    m_game->set_good_move();
+    m_game.set_good_move();
     updateWindow(false);
 }
 
@@ -1993,8 +1979,8 @@ void MainWindow::gotoMove()
 {
     QSettings settings;
     vector<const SgfNode*> nodes;
-    auto& tree = m_game->get_tree();
-    auto node = &m_game->get_current();
+    auto& tree = m_game.get_tree();
+    auto node = &m_game.get_current();
     do
     {
         if (! tree.get_move(*node).is_null())
@@ -2002,7 +1988,7 @@ void MainWindow::gotoMove()
         node = node->get_parent_or_null();
     }
     while (node);
-    node = m_game->get_current().get_first_child_or_null();
+    node = m_game.get_current().get_first_child_or_null();
     while (node)
     {
         if (! tree.get_move(*node).is_null())
@@ -2012,7 +1998,7 @@ void MainWindow::gotoMove()
     int maxMoves = int(nodes.size());
     if (maxMoves == 0)
         return;
-    int defaultValue = getBoard().get_nu_moves();
+    int defaultValue = m_bd.get_nu_moves();
     if (defaultValue == 0)
         defaultValue = maxMoves;
     QInputDialog dialog(this);
@@ -2035,18 +2021,18 @@ void MainWindow::gotoNode(const SgfNode& node)
     leaveSetupMode();
     try
     {
-        m_game->goto_node(node);
+        m_game.goto_node(node);
     }
     catch (const InvalidTree& e)
     {
         showInvalidFile(m_file, e);
         return;
     }
-    m_currentColor = getCurrentColor(*m_game);
+    m_currentColor = getCurrentColor(m_game);
     m_lastComputerMovesBegin = 0;
     if (m_analyzeGameWindow && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
-            ->setCurrentPosition(*m_game, node);
+            ->setCurrentPosition(m_game, node);
     m_autoPlay = false;
     updateWindow(true);
 }
@@ -2054,9 +2040,9 @@ void MainWindow::gotoNode(const SgfNode& node)
 void MainWindow::gotoPosition(Variant variant,
                               const vector<ColorMove>& moves)
 {
-    if (getVariant() != variant)
+    if (m_bd.get_variant() != variant)
         return;
-    auto& tree = m_game->get_tree();
+    auto& tree = m_game.get_tree();
     auto node = &tree.get_root();
     if (tree.has_move_ignore_invalid(*node))
         // Move in root node not supported.
@@ -2099,21 +2085,20 @@ void MainWindow::initGame()
         delete m_analyzeGameWindow;
         m_analyzeGameWindow = nullptr;
     }
-    m_game->init();
-    m_game->set_charset("UTF-8");
+    m_game.init();
+    m_game.set_charset("UTF-8");
 #ifdef VERSION
-    m_game->set_application("Pentobi", VERSION);
+    m_game.set_application("Pentobi", VERSION);
 #else
-    m_game->set_application("Pentobi");
+    m_game.set_application("Pentobi");
 #endif
-    m_game->set_date_today();
-    m_game->clear_modified();
+    m_game.set_date_today();
+    m_game.clear_modified();
     QSettings settings;
     if (! settings.value("computer_color_none").toBool())
     {
-        auto& bd = getBoard();
-        for (Color c : Color::Range(bd.get_nu_nonalt_colors()))
-            m_computerColors[c] = ! bd.is_same_player(c, Color(0));
+        for (Color c : Color::Range(m_bd.get_nu_nonalt_colors()))
+            m_computerColors[c] = ! m_bd.is_same_player(c, Color(0));
         m_autoPlay = true;
     }
     else
@@ -2131,7 +2116,7 @@ void MainWindow::initGame()
 
 void MainWindow::initVariantActions()
 {
-    switch (getVariant())
+    switch (m_bd.get_variant())
     {
     case Variant::classic:
         m_actionVariantClassic->setChecked(true);
@@ -2162,10 +2147,9 @@ void MainWindow::initVariantActions()
 
 void MainWindow::initPieceSelectors()
 {
-    auto& bd = getBoard();
     for (Color::IntType i = 0; i < Color::range; ++i)
     {
-        bool isVisible = (i < bd.get_nu_colors());
+        bool isVisible = (i < m_bd.get_nu_colors());
         m_pieceSelector[Color(i)]->setVisible(isVisible);
         if (isVisible)
             m_pieceSelector[Color(i)]->init();
@@ -2176,7 +2160,7 @@ void MainWindow::interestingMove(bool checked)
 {
     if (! checked)
         return;
-    m_game->set_interesting_move();
+    m_game.set_interesting_move();
     updateWindow(false);
 }
 
@@ -2196,11 +2180,10 @@ void MainWindow::interruptPlay()
 
 bool MainWindow::isComputerToPlay() const
 {
-    if (m_game->get_variant() != Variant::classic_3
+    if (m_game.get_variant() != Variant::classic_3
             || m_currentColor != Color(3))
         return m_computerColors[m_currentColor];
-    auto& bd = m_game->get_board();
-    return m_computerColors[Color(bd.get_alt_player())];
+    return m_computerColors[Color(m_bd.get_alt_player())];
 }
 
 void MainWindow::keepOnlyPosition()
@@ -2218,7 +2201,7 @@ void MainWindow::keepOnlyPosition()
     if (msgBox.clickedButton() != keepOnlyPositionButton)
         return;
     cancelThread();
-    m_game->keep_only_position();
+    m_game.keep_only_position();
     updateWindow(true);
 }
 
@@ -2237,7 +2220,7 @@ void MainWindow::keepOnlySubtree()
     if (msgBox.clickedButton() != keepOnlySubtreeButton)
         return;
     cancelThread();
-    m_game->keep_only_subtree();
+    m_game.keep_only_subtree();
     updateWindow(true);
 }
 
@@ -2266,7 +2249,7 @@ void MainWindow::leaveSetupMode()
 
 void MainWindow::loadHistory()
 {
-    auto variant = m_game->get_variant();
+    auto variant = m_game.get_variant();
     if (m_history->getVariant() == variant)
         return;
     m_history->load(variant);
@@ -2276,28 +2259,27 @@ void MainWindow::loadHistory()
 
 void MainWindow::makeMainVariation()
 {
-    m_game->make_main_variation();
+    m_game.make_main_variation();
     updateWindow(false);
 }
 
 void MainWindow::moveDownVariation()
 {
-    m_game->move_down_variation();
+    m_game.move_down_variation();
     updateWindow(false);
 }
 
 void MainWindow::moveUpVariation()
 {
-    m_game->move_up_variation();
+    m_game.move_up_variation();
     updateWindow(false);
 }
 
 void MainWindow::nextPiece()
 {
-    auto& bd = getBoard();
-    if ( bd.get_pieces_left(m_currentColor).empty())
+    if (m_bd.get_pieces_left(m_currentColor).empty())
         return;
-    auto nuUniqPieces = bd.get_nu_uniq_pieces();
+    auto nuUniqPieces = m_bd.get_nu_uniq_pieces();
     Piece::IntType i;
     Piece selectedPiece = m_guiBoard->getSelectedPiece();
     if (! selectedPiece.is_null())
@@ -2308,7 +2290,7 @@ void MainWindow::nextPiece()
     {
         if (i >= nuUniqPieces)
             i = 0;
-        if (bd.is_piece_left(m_currentColor, Piece(i)))
+        if (m_bd.is_piece_left(m_currentColor, Piece(i)))
             break;
         ++i;
     }
@@ -2321,14 +2303,14 @@ void MainWindow::nextTransform()
     if (piece.is_null())
         return;
     auto transform = m_guiBoard->getSelectedPieceTransform();
-    transform = getBoard().get_piece_info(piece).get_next_transform(transform);
+    transform = m_bd.get_piece_info(piece).get_next_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
 
 void MainWindow::nextVariation()
 {
-    auto node = m_game->get_current().get_sibling();
+    auto node = m_game.get_current().get_sibling();
     if (! node)
         return;
     gotoNode(*node);
@@ -2348,7 +2330,7 @@ void MainWindow::noMoveAnnotation(bool checked)
 {
     if (! checked)
         return;
-    m_game->remove_move_annotation();
+    m_game.remove_move_annotation();
     updateWindow(false);
 }
 
@@ -2406,10 +2388,10 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     try
     {
         auto tree = reader.get_tree_transfer_ownership();
-        m_game->init(tree);
-        if (! libpentobi_base::node_util::has_setup(m_game->get_root()))
-            m_game->goto_node(get_last_node(m_game->get_root()));
-        m_currentColor = getCurrentColor(*m_game);
+        m_game.init(tree);
+        if (! libpentobi_base::node_util::has_setup(m_game.get_root()))
+            m_game.goto_node(get_last_node(m_game.get_root()));
+        m_currentColor = getCurrentColor(m_game);
         initPieceSelectors();
     }
     catch (const InvalidTree& e)
@@ -2421,7 +2403,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     initVariantActions();
-    restoreLevel(getVariant());
+    restoreLevel(m_bd.get_variant());
     updateWindow(true);
     loadHistory();
     return true;
@@ -2446,12 +2428,11 @@ void MainWindow::orientationDisplayColorClicked(Color)
 void MainWindow::placePiece(Color c, Move mv)
 {
     cancelThread();
-    auto& bd = m_game->get_board();
     bool isSetupMode = m_actionSetupMode->isChecked();
     bool isAltColor =
-            (bd.get_variant() == Variant::classic_3 && c.to_int() == 3);
+            (m_bd.get_variant() == Variant::classic_3 && c.to_int() == 3);
     if ((! isAltColor && m_computerColors[c])
-            || (isAltColor && m_computerColors[Color(bd.get_alt_player())])
+            || (isAltColor && m_computerColors[Color(m_bd.get_alt_player())])
             || isSetupMode)
         // If the user enters a move previously played by the computer (e.g.
         // after undoing moves) then it is unlikely that the user wants to keep
@@ -2459,7 +2440,7 @@ void MainWindow::placePiece(Color c, Move mv)
         m_computerColors.fill(false);
     if (isSetupMode)
     {
-        m_game->add_setup(c, mv);
+        m_game.add_setup(c, mv);
         setSetupPlayer();
         updateWindow(true);
     }
@@ -2475,7 +2456,7 @@ void MainWindow::play()
 {
     cancelThread();
     leaveSetupMode();
-    auto variant = getVariant();
+    auto variant = m_bd.get_variant();
     if (variant != Variant::classic && variant != Variant::trigon
             && variant != Variant::trigon_3)
     {
@@ -2493,7 +2474,7 @@ void MainWindow::play()
                 m_computerColors[Color(1)] = m_computerColors[Color(3)] = true;
         }
         else if (variant == Variant::classic_3 && m_currentColor.to_int() == 3)
-            m_computerColors[Color(getBoard().get_alt_player())] = true;
+            m_computerColors[Color(m_bd.get_alt_player())] = true;
         else
             m_computerColors[m_currentColor] = true;
     }
@@ -2504,11 +2485,9 @@ void MainWindow::play()
 
 void MainWindow::play(Color c, Move mv)
 {
-    auto& bd = getBoard();
-    m_game->play(c, mv, false);
-    c = m_game->get_to_play();
+    m_game.play(c, mv, false);
     m_gameFinished = false;
-    if (bd.is_game_over())
+    if (m_bd.is_game_over())
     {
         updateWindow(true);
         repaint();
@@ -2517,7 +2496,7 @@ void MainWindow::play(Color c, Move mv)
         deleteAutoSaveFile();
         return;
     }
-    m_currentColor = m_game->get_effective_to_play();
+    m_currentColor = m_bd.get_effective_to_play();
 }
 
 void MainWindow::playSingleMove()
@@ -2533,21 +2512,19 @@ void MainWindow::pointClicked(Point p)
 {
     if (! m_actionSetupMode->isChecked())
         return;
-    auto& bd = getBoard();
-    PointState s = bd.get_point_state(p);
+    PointState s = m_bd.get_point_state(p);
     if (s.is_empty())
         return;
-    m_game->remove_setup(s.to_color(), bd.get_move_at(p));
+    m_game.remove_setup(s.to_color(), m_bd.get_move_at(p));
     setSetupPlayer();
     updateWindow(true);
 }
 
 void MainWindow::previousPiece()
 {
-    auto& bd = getBoard();
-    if (bd.get_pieces_left(m_currentColor).empty())
+    if (m_bd.get_pieces_left(m_currentColor).empty())
         return;
-    auto nuUniqPieces = bd.get_nu_uniq_pieces();
+    auto nuUniqPieces = m_bd.get_nu_uniq_pieces();
     Piece::IntType i;
     Piece selectedPiece = m_guiBoard->getSelectedPiece();
     if (! selectedPiece.is_null())
@@ -2560,7 +2537,7 @@ void MainWindow::previousPiece()
             i = static_cast<Piece::IntType>(nuUniqPieces - 1);
         else
             --i;
-        if (bd.is_piece_left(m_currentColor, Piece(i)))
+        if (m_bd.is_piece_left(m_currentColor, Piece(i)))
             break;
     }
     selectPiece(m_currentColor, Piece(i));
@@ -2573,14 +2550,14 @@ void MainWindow::previousTransform()
         return;
     auto transform = m_guiBoard->getSelectedPieceTransform();
     transform =
-        getBoard().get_piece_info(piece).get_previous_transform(transform);
+        m_bd.get_piece_info(piece).get_previous_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
 }
 
 void MainWindow::previousVariation()
 {
-    auto node = m_game->get_current().get_previous_sibling();
+    auto node = m_game.get_current().get_previous_sibling();
     if (! node)
         return;
     gotoNode(*node);
@@ -2601,7 +2578,8 @@ void MainWindow::ratedGame()
     int level;
     QSettings settings;
     unsigned random;
-    auto key = QString("next_rated_random_") + to_string_id(getVariant());
+    auto variant = m_bd.get_variant();
+    auto key = QString("next_rated_random_") + to_string_id(variant);
     if (settings.contains(key))
         random = settings.value(key).toUInt();
     else
@@ -2617,8 +2595,7 @@ void MainWindow::ratedGame()
                  "<html>" +
                  tr("In the next game, you will play %1 against"
                     " Pentobi level&nbsp;%2.")
-                 .arg(getPlayerString(getVariant(), m_ratedGameColor))
-                 .arg(level));
+                 .arg(getPlayerString(variant, m_ratedGameColor)).arg(level));
     auto startGameButton =
         msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
     msgBox.addButton(QMessageBox::Cancel);
@@ -2631,28 +2608,27 @@ void MainWindow::ratedGame()
     initGame();
     setFile("");
     setRated(true);
-    auto& bd = getBoard();
     m_computerColors.fill(true);
-    for (Color c : Color::Range(bd.get_nu_nonalt_colors()))
-        if (bd.is_same_player(c, m_ratedGameColor))
+    for (Color c : Color::Range(m_bd.get_nu_nonalt_colors()))
+        if (m_bd.is_same_player(c, m_ratedGameColor))
             m_computerColors[c] = false;
     m_autoPlay = true;
     QString computerPlayerName =
         //: The first argument is the version of Pentobi
         tr("Pentobi %1 (level %2)").arg(getVersion()).arg(level);
-    string charset = m_game->get_root().get_property("CA", "");
+    string charset = m_game.get_root().get_property("CA", "");
     string computerPlayerNameStdStr =
         Util::convertSgfValueFromQString(computerPlayerName, charset);
     string humanPlayerNameStdStr =
         Util::convertSgfValueFromQString(tr("Human"), charset);
-    for (Color c : Color::Range(bd.get_nu_nonalt_colors()))
+    for (Color c : Color::Range(m_bd.get_nu_nonalt_colors()))
         if (m_computerColors[c])
-            m_game->set_player_name(c, computerPlayerNameStdStr);
+            m_game.set_player_name(c, computerPlayerNameStdStr);
         else
-            m_game->set_player_name(c, humanPlayerNameStdStr);
+            m_game.set_player_name(c, humanPlayerNameStdStr);
     // Setting the player names marks the game as modified but there is nothing
     // important that would need to be saved yet
-    m_game->clear_modified();
+    m_game.clear_modified();
     deleteAutoSaveFile();
     updateWindow(true);
     checkComputerMove();
@@ -2706,10 +2682,9 @@ void MainWindow::rotateAnticlockwise()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    auto& bd = getBoard();
     auto transform = m_guiBoard->getSelectedPieceTransform();
-    transform = bd.get_transforms().get_rotated_anticlockwise(transform);
-    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
+    transform = m_bd.get_transforms().get_rotated_anticlockwise(transform);
+    transform = m_bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
     updateFlipActions();
@@ -2720,10 +2695,9 @@ void MainWindow::rotateClockwise()
     Piece piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         return;
-    auto& bd = getBoard();
     auto transform = m_guiBoard->getSelectedPieceTransform();
-    transform = bd.get_transforms().get_rotated_clockwise(transform);
-    transform = bd.get_piece_info(piece).get_equivalent_transform(transform);
+    transform = m_bd.get_transforms().get_rotated_clockwise(transform);
+    transform = m_bd.get_piece_info(piece).get_equivalent_transform(transform);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->setSelectedPieceTransform(transform);
     updateFlipActions();
@@ -2738,7 +2712,7 @@ void MainWindow::save()
     }
     if (save(m_file))
     {
-        m_game->clear_modified();
+        m_game.clear_modified();
         updateWindow(false);
     }
 }
@@ -2785,7 +2759,7 @@ void MainWindow::saveAs()
     {
         if (save(file))
         {
-            m_game->clear_modified();
+            m_game.clear_modified();
             updateWindow(false);
         }
         setFile(file);
@@ -2827,12 +2801,11 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
 
 void MainWindow::selectNamedPiece(initializer_list<const char*> names)
 {
-    auto& bd = getBoard();
     vector<Piece> pieces;
     Piece piece;
     for (auto name : names)
-        if (bd.get_piece_by_name(name, piece)
-            && bd.is_piece_left(m_currentColor, piece))
+        if (m_bd.get_piece_by_name(name, piece)
+                && m_bd.is_piece_left(m_currentColor, piece))
             pieces.push_back(piece);
     if (pieces.empty())
         return;
@@ -2858,11 +2831,10 @@ void MainWindow::selectNamedPiece(initializer_list<const char*> names)
 
 void MainWindow::selectNextColor()
 {
-    auto& bd = getBoard();
-    m_currentColor = bd.get_next(m_currentColor);
+    m_currentColor = m_bd.get_next(m_currentColor);
     m_orientationDisplay->selectColor(m_currentColor);
     clearPiece();
-    for (Color c : bd.get_colors())
+    for (Color c : m_bd.get_colors())
         m_pieceSelector[c]->setEnabled(m_currentColor == c);
     if (m_actionSetupMode->isChecked())
         setSetupPlayer();
@@ -2871,12 +2843,12 @@ void MainWindow::selectNextColor()
 
 void MainWindow::selectPiece(Color c, Piece piece)
 {
-    selectPiece(c, piece, getBoard().get_transforms().get_default());
+    selectPiece(c, piece, m_bd.get_transforms().get_default());
 }
 
 void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
 {
-    if (m_isGenMoveRunning || getBoard().is_game_over())
+    if (m_isGenMoveRunning || m_bd.is_game_over())
         return;
     m_currentColor = c;
     m_guiBoard->selectPiece(c, piece);
@@ -2884,7 +2856,7 @@ void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
     m_orientationDisplay->selectColor(c);
     m_orientationDisplay->setSelectedPiece(piece);
     m_orientationDisplay->setSelectedPieceTransform(transform);
-    bool can_rotate = getBoard().get_piece_info(piece).can_rotate();
+    bool can_rotate = m_bd.get_piece_info(piece).can_rotate();
     m_actionRotateClockwise->setEnabled(can_rotate);
     m_actionRotateAnticlockwise->setEnabled(can_rotate);
     updateFlipActions();
@@ -3008,7 +2980,7 @@ void MainWindow::setNoDelay()
 
 void MainWindow::setVariant(Variant variant)
 {
-    if (getVariant() == variant)
+    if (m_bd.get_variant() == variant)
         return;
     if (! checkSave())
     {
@@ -3019,7 +2991,7 @@ void MainWindow::setVariant(Variant variant)
     QSettings settings;
     settings.setValue("variant", to_string_id(variant));
     clearPiece();
-    m_game->init(variant);
+    m_game.init(variant);
     initPieceSelectors();
     newGame();
     loadHistory();
@@ -3043,7 +3015,8 @@ void MainWindow::setLevel(int level)
     m_level = level;
     m_actionLevel[level - 1]->setChecked(true);
     QSettings settings;
-    settings.setValue(QString("level_") + to_string_id(getVariant()), m_level);
+    settings.setValue(QString("level_") + to_string_id(m_bd.get_variant()),
+                      m_level);
 }
 
 void MainWindow::setLevel(bool checked)
@@ -3086,7 +3059,7 @@ void MainWindow::setMoveNumbersNone(bool checked)
 void MainWindow::setPlayToolTip()
 {
     QString s;
-    auto variant = getVariant();
+    auto variant = m_bd.get_variant();
     Color c = m_currentColor;
     bool isComputerColor = m_computerColors[m_currentColor];
     if (variant == Variant::classic_2 || variant == Variant::trigon_2)
@@ -3157,10 +3130,10 @@ void MainWindow::setRated(bool isRated)
 
 void MainWindow::setSetupPlayer()
 {
-    if (! m_game->has_setup())
-        m_game->remove_player();
+    if (! m_game.has_setup())
+        m_game.remove_player();
     else
-        m_game->set_player(m_currentColor);
+        m_game.set_player(m_currentColor);
 }
 
 void MainWindow::setupMode(bool enable)
@@ -3172,7 +3145,7 @@ void MainWindow::setupMode(bool enable)
     // root node has children, but we still need to check for it here because
     // due to bugs in the Unitiy interface in Ubuntu 11.10, menu items are
     // not always disabled if the corresponding action is disabled.
-    if (enable && m_game->get_root().has_children())
+    if (enable && m_game.get_root().has_children())
     {
         showInfo(tr("Setup mode cannot be used if moves have been played."));
         enable = false;
@@ -3182,7 +3155,7 @@ void MainWindow::setupMode(bool enable)
     if (enable)
     {
         m_setupModeLabel->show();
-        for (Color c : getBoard().get_colors())
+        for (Color c : m_bd.get_colors())
             m_pieceSelector[c]->setEnabled(true);
         m_computerColors.fill(false);
     }
@@ -3190,7 +3163,7 @@ void MainWindow::setupMode(bool enable)
     {
         setSetupPlayer();
         m_setupModeLabel->hide();
-        m_currentColor = m_game->get_effective_to_play();
+        m_currentColor = m_game.get_effective_to_play();
         enablePieceSelector(m_currentColor);
         updateWindow(false);
     }
@@ -3300,7 +3273,7 @@ void MainWindow::toolBarTextSystem(bool checked)
 
 void MainWindow::truncate()
 {
-    auto& current = m_game->get_current();
+    auto& current = m_game.get_current();
     if (! current.has_parent())
         return;
     cancelThread();
@@ -3319,14 +3292,14 @@ void MainWindow::truncate()
         if (msgBox.clickedButton() != truncateButton)
             return;
     }
-    m_game->truncate();
-    m_currentColor = getCurrentColor(*m_game);
+    m_game.truncate();
+    m_currentColor = getCurrentColor(m_game);
     updateWindow(true);
 }
 
 void MainWindow::truncateChildren()
 {
-    if (! m_game->get_current().has_children())
+    if (! m_game.get_current().has_children())
         return;
     cancelThread();
     QMessageBox msgBox(this);
@@ -3341,7 +3314,7 @@ void MainWindow::truncateChildren()
     msgBox.exec();
     if (msgBox.clickedButton() != truncateButton)
         return;
-    m_game->truncate_children();
+    m_game.truncate_children();
     updateWindow(false);
 }
 
@@ -3356,22 +3329,22 @@ void MainWindow::showVariations(bool checked)
 
 void MainWindow::undo()
 {
-    auto& current = m_game->get_current();
+    auto& current = m_game.get_current();
     if (current.has_children()
-        || ! m_game->get_tree().has_move_ignore_invalid(current))
+            || ! m_game.get_tree().has_move_ignore_invalid(current))
         return;
     truncate();
 }
 
 void MainWindow::updateComment()
 {
-    string comment = m_game->get_comment();
+    string comment = m_game.get_comment();
     if (comment.empty())
     {
         setCommentText("");
         return;
     }
-    string charset = m_game->get_root().get_property("CA", "");
+    string charset = m_game.get_root().get_property("CA", "");
     setCommentText(Util::convertSgfValueToQString(comment, charset));
 }
 
@@ -3382,22 +3355,22 @@ void MainWindow::updateFlipActions()
         return;
     auto transform = m_guiBoard->getSelectedPieceTransform();
     bool can_flip_horizontally =
-        getBoard().get_piece_info(piece).can_flip_horizontally(transform);
+        m_bd.get_piece_info(piece).can_flip_horizontally(transform);
     m_actionFlipHorizontally->setEnabled(can_flip_horizontally);
     bool can_flip_vertically =
-        getBoard().get_piece_info(piece).can_flip_vertically(transform);
+        m_bd.get_piece_info(piece).can_flip_vertically(transform);
     m_actionFlipVertically->setEnabled(can_flip_vertically);
 }
 
 void MainWindow::updateMoveAnnotationActions()
 {
-    if (m_game->get_move_ignore_invalid().is_null())
+    if (m_game.get_move_ignore_invalid().is_null())
     {
         m_menuMoveAnnotation->setEnabled(false);
         return;
     }
     m_menuMoveAnnotation->setEnabled(true);
-    double goodMove = m_game->get_good_move();
+    double goodMove = m_game.get_good_move();
     if (goodMove > 1)
     {
         m_actionVeryGoodMove->setChecked(true);
@@ -3408,7 +3381,7 @@ void MainWindow::updateMoveAnnotationActions()
         m_actionGoodMove->setChecked(true);
         return;
     }
-    double badMove = m_game->get_bad_move();
+    double badMove = m_game.get_bad_move();
     if (badMove > 1)
     {
         m_actionVeryBadMove->setChecked(true);
@@ -3419,12 +3392,12 @@ void MainWindow::updateMoveAnnotationActions()
         m_actionBadMove->setChecked(true);
         return;
     }
-    if (m_game->is_interesting_move())
+    if (m_game.is_interesting_move())
     {
         m_actionInterestingMove->setChecked(true);
         return;
     }
-    if (m_game->is_doubtful_move())
+    if (m_game.is_doubtful_move())
     {
         m_actionDoubtfulMove->setChecked(true);
         return;
@@ -3434,8 +3407,8 @@ void MainWindow::updateMoveAnnotationActions()
 
 void MainWindow::updateMoveNumber()
 {
-    auto& tree = m_game->get_tree();
-    auto& current = m_game->get_current();
+    auto& tree = m_game.get_tree();
+    auto& current = m_game.get_current();
     unsigned move = get_move_number(tree, current);
     unsigned movesLeft = get_moves_left(tree, current);
     unsigned totalMoves = move + movesLeft;
@@ -3523,12 +3496,11 @@ void MainWindow::updateRecentFiles()
 
 void MainWindow::updateWindow(bool currentNodeChanged)
 {
-    auto& bd = getBoard();
     updateWindowModified();
-    m_guiBoard->copyFromBoard(bd);
+    m_guiBoard->copyFromBoard(m_bd);
     QSettings settings;
     auto markVariations = settings.value("show_variations", true).toBool();
-    unsigned nuMoves = bd.get_nu_moves();
+    unsigned nuMoves = m_bd.get_nu_moves();
     unsigned markMovesBegin = 0;
     unsigned markMovesEnd = 0;
     if (m_actionMoveNumbersAll->isChecked())
@@ -3549,13 +3521,13 @@ void MainWindow::updateWindow(bool currentNodeChanged)
             markMovesEnd = nuMoves;
         }
     }
-    gui_board_util::setMarkup(*m_guiBoard, *m_game, markMovesBegin,
+    gui_board_util::setMarkup(*m_guiBoard, m_game, markMovesBegin,
                               markMovesEnd, markVariations);
-    m_scoreDisplay->updateScore(bd);
+    m_scoreDisplay->updateScore(m_bd);
     if (m_legalMoves)
         m_legalMoves->clear();
     m_legalMoveIndex = 0;
-    bool isGameOver = bd.is_game_over();
+    bool isGameOver = m_bd.is_game_over();
     if (isGameOver && ! m_actionSetupMode->isChecked())
         m_orientationDisplay->clearSelectedColor();
     else
@@ -3563,7 +3535,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     if (currentNodeChanged)
     {
         clearPiece();
-        for (Color c : bd.get_colors())
+        for (Color c : m_bd.get_colors())
             m_pieceSelector[c]->checkUpdate();
         if (! m_actionSetupMode->isChecked())
             enablePieceSelector(m_currentColor);
@@ -3572,14 +3544,14 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     }
     updateMoveNumber();
     setPlayToolTip();
-    auto& tree = m_game->get_tree();
-    auto& current = m_game->get_current();
+    auto& tree = m_game.get_tree();
+    auto& current = m_game.get_current();
     bool isMain = is_main_variation(current);
     bool hasEarlierVariation = has_earlier_variation(current);
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move_ignore_invalid(current);
-    bool hasMoves = bd.has_moves(m_currentColor);
+    bool hasMoves = m_bd.has_moves(m_currentColor);
     m_actionAnalyzeGame->setEnabled(! m_isRated
                                     && tree.has_main_variation_moves());
     m_actionBackToMainVariation->setEnabled(! isMain);
@@ -3639,7 +3611,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
 void MainWindow::updateWindowModified()
 {
     if (! m_file.isEmpty())
-        setWindowModified(m_game->is_modified());
+        setWindowModified(m_game.is_modified());
 }
 
 void MainWindow::variantClassic(bool checked)
@@ -3694,7 +3666,7 @@ void MainWindow::veryBadMove(bool checked)
 {
     if (! checked)
         return;
-    m_game->set_bad_move(2);
+    m_game.set_bad_move(2);
     updateWindow(false);
 }
 
@@ -3702,7 +3674,7 @@ void MainWindow::veryGoodMove(bool checked)
 {
     if (! checked)
         return;
-    m_game->set_good_move(2);
+    m_game.set_good_move(2);
     updateWindow(false);
 }
 
@@ -3727,7 +3699,7 @@ void MainWindow::wheelEvent(QWheelEvent* event)
 bool MainWindow::writeGame(const string& file)
 {
     ofstream out(file);
-    PentobiTreeWriter writer(out, m_game->get_tree());
+    PentobiTreeWriter writer(out, m_game.get_tree());
     writer.set_indent(1);
     writer.write();
     return static_cast<bool>(out);

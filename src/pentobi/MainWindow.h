@@ -60,9 +60,10 @@ class MainWindow
     Q_OBJECT
 
 public:
-    MainWindow(const QString& initialFile = "", const QString& helpDir = "",
-               const QString& booksDir = "", bool noBook = false,
-               unsigned nu_threads = 0, size_t memory = 0);
+    MainWindow(Variant variant, const QString& initialFile = "",
+               const QString& helpDir = "", const QString& booksDir = "",
+               bool noBook = false, unsigned nu_threads = 0,
+               size_t memory = 0);
 
     ~MainWindow();
 
@@ -251,7 +252,9 @@ private:
 
     static const int maxRecentFiles = 9;
 
-    unique_ptr<Game> m_game;
+    Game m_game;
+
+    const Board& m_bd;
 
     Color m_currentColor;
 
@@ -634,10 +637,6 @@ private:
 
     void genMove(bool playSingleMove = false);
 
-    const Board& getBoard() const;
-
-    Variant getVariant() const;
-
     QString getFilter() const;
 
     QString getLastDir();
@@ -783,16 +782,6 @@ private slots:
 
     void veryGoodMove(bool checked);
 };
-
-inline const Board& MainWindow::getBoard() const
-{
-    return m_game->get_board();
-}
-
-inline Variant MainWindow::getVariant() const
-{
-    return m_game->get_variant();
-}
 
 //-----------------------------------------------------------------------------
 
