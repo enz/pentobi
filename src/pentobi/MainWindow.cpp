@@ -523,7 +523,7 @@ bool MainWindow::checkSave()
     }
     // Don't ask if game should be saved if it was finished because the user
     // might only want to play and never save games.
-    if (m_game.get_tree().get_root().has_children() && ! m_gameFinished)
+    if (m_game.get_root().has_children() && ! m_gameFinished)
     {
         QMessageBox msgBox(this);
         initQuestion(msgBox, tr("The current game is not finished."),
