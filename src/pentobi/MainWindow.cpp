@@ -2731,7 +2731,6 @@ bool MainWindow::save(const QString& file)
     else
     {
         Util::removeThumbnail(file);
-        showStatus(tr("Game saved: %1").arg(file), true);
         return true;
     }
 }

@@ -873,11 +873,6 @@
         <translation>Your rating has decreased from %1 to %2.</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2761"/>
-        <source>Game saved: %1</source>
-        <translation>Game saved: %1</translation>
-    </message>
-    <message>
         <location filename="../MainWindow.cpp" line="2812"/>
         <source>The computer is thinking... (max. %1 seconds remaining)</source>
         <translation>The computer is thinking... (max. %1 seconds remaining)</translation>

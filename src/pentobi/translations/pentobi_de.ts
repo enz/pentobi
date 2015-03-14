@@ -717,11 +717,6 @@
         <translation>%1: %2</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="2761"/>
-        <source>Game saved: %1</source>
-        <translation>Spiel gespeichert: %1</translation>
-    </message>
-    <message>
         <location filename="../MainWindow.cpp" line="2773"/>
         <source>Untitled Game.blksgf</source>
         <translation>Unbenanntes Spiel.blksgf</translation>
