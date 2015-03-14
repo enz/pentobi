@@ -1,39 +1,35 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-  <qresource prefix="/pentobi">
-    <file>icons/pentobi.png</file>
-    <file>icons/pentobi-16.png</file>
-    <file>icons/pentobi-32.png</file>
-    <file>icons/pentobi-backward.png</file>
-    <file>icons/pentobi-backward-16.png</file>
-    <file>icons/pentobi-backward10.png</file>
-    <file>icons/pentobi-backward10-16.png</file>
-    <file>icons/pentobi-beginning.png</file>
-    <file>icons/pentobi-beginning-16.png</file>
-    <file>icons/pentobi-computer-colors.png</file>
-    <file>icons/pentobi-computer-colors-16.png</file>
-    <file>icons/pentobi-end.png</file>
-    <file>icons/pentobi-end-16.png</file>
-    <file>icons/pentobi-flip-horizontal.png</file>
-    <file>icons/pentobi-flip-vertical.png</file>
-    <file>icons/pentobi-forward.png</file>
-    <file>icons/pentobi-forward-16.png</file>
-    <file>icons/pentobi-forward10.png</file>
-    <file>icons/pentobi-forward10-16.png</file>
-    <file>icons/pentobi-newgame.png</file>
-    <file>icons/pentobi-newgame-16.png</file>
-    <file>icons/pentobi-next-piece.png</file>
-    <file>icons/pentobi-next-variation.png</file>
-    <file>icons/pentobi-next-variation-16.png</file>
-    <file>icons/pentobi-piece-clear.png</file>
-    <file>icons/pentobi-play.png</file>
-    <file>icons/pentobi-play-16.png</file>
-    <file>icons/pentobi-previous-piece.png</file>
-    <file>icons/pentobi-previous-variation.png</file>
-    <file>icons/pentobi-previous-variation-16.png</file>
-    <file>icons/pentobi-rated-game.png</file>
-    <file>icons/pentobi-rated-game-16.png</file>
-    <file>icons/pentobi-rotate-left.png</file>
-    <file>icons/pentobi-rotate-right.png</file>
-  </qresource>
+<qresource prefix="/pentobi">
+<file>icons/pentobi.png</file>
+<file>icons/pentobi-16.png</file>
+<file>icons/pentobi-32.png</file>
+<file>icons/pentobi-backward.png</file>
+<file>icons/pentobi-backward-16.png</file>
+<file>icons/pentobi-beginning.png</file>
+<file>icons/pentobi-beginning-16.png</file>
+<file>icons/pentobi-computer-colors.png</file>
+<file>icons/pentobi-computer-colors-16.png</file>
+<file>icons/pentobi-end.png</file>
+<file>icons/pentobi-end-16.png</file>
+<file>icons/pentobi-flip-horizontal.png</file>
+<file>icons/pentobi-flip-vertical.png</file>
+<file>icons/pentobi-forward.png</file>
+<file>icons/pentobi-forward-16.png</file>
+<file>icons/pentobi-newgame.png</file>
+<file>icons/pentobi-newgame-16.png</file>
+<file>icons/pentobi-next-piece.png</file>
+<file>icons/pentobi-next-variation.png</file>
+<file>icons/pentobi-next-variation-16.png</file>
+<file>icons/pentobi-piece-clear.png</file>
+<file>icons/pentobi-play.png</file>
+<file>icons/pentobi-play-16.png</file>
+<file>icons/pentobi-previous-piece.png</file>
+<file>icons/pentobi-previous-variation.png</file>
+<file>icons/pentobi-previous-variation-16.png</file>
+<file>icons/pentobi-rated-game.png</file>
+<file>icons/pentobi-rated-game-16.png</file>
+<file>icons/pentobi-rotate-left.png</file>
+<file>icons/pentobi-rotate-right.png</file>
+</qresource>
 </RCC>
