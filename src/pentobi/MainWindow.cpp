@@ -3584,6 +3584,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     }
     m_actionPreviousVariation->setEnabled(current.get_previous_sibling());
     m_actionRatedGame->setEnabled(! m_isRated);
+    m_actionSave->setEnabled(m_game.is_modified());
     // See also comment in setupMode()
     m_actionSetupMode->setEnabled(! m_isRated && ! hasParent && ! hasChildren);
     m_actionSelectNextColor->setEnabled(! m_isRated);
