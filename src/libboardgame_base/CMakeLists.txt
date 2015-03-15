@@ -12,6 +12,8 @@ add_library(boardgame_base STATIC
   Rating.h
   Rating.cpp
   RectGeometry.h
+  RectTransform.h
+  RectTransform.cpp
   SpShtStrRep.h
   SpShtStrRep.cpp
   Transform.h

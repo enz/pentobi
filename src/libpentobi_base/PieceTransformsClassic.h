@@ -8,6 +8,7 @@
 #define LIBPENTOBI_PIECE_TRANSFORMS_CLASSIC_H
 
 #include "PieceTransforms.h"
+#include "libboardgame_base/RectTransform.h"
 
 namespace libpentobi_base {
 

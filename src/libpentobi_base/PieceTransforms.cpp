@@ -12,13 +12,10 @@
 
 namespace libpentobi_base {
 
-using libboardgame_base::TransfIdentity;
-
 //-----------------------------------------------------------------------------
 
 PieceTransforms::~PieceTransforms()
-{
-}
+{ }
 
 //-----------------------------------------------------------------------------
 

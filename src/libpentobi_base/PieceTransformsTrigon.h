@@ -8,21 +8,9 @@
 #define LIBPENTOBI_PIECE_TRANSFORMS_TRIGON_H
 
 #include "PieceTransforms.h"
+#include "TrigonTransform.h"
 
 namespace libpentobi_base {
-
-using libboardgame_base::TransfTrigonIdentity;
-using libboardgame_base::TransfTrigonRefl;
-using libboardgame_base::TransfTrigonReflRot60;
-using libboardgame_base::TransfTrigonReflRot120;
-using libboardgame_base::TransfTrigonReflRot180;
-using libboardgame_base::TransfTrigonReflRot240;
-using libboardgame_base::TransfTrigonReflRot300;
-using libboardgame_base::TransfTrigonRot60;
-using libboardgame_base::TransfTrigonRot120;
-using libboardgame_base::TransfTrigonRot180;
-using libboardgame_base::TransfTrigonRot240;
-using libboardgame_base::TransfTrigonRot300;
 
 //-----------------------------------------------------------------------------
 

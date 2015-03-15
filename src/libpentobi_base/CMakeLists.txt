@@ -58,6 +58,8 @@ set(pentobi_base_STAT_SRCS
   TreeUtil.cpp
   TrigonGeometry.h
   TrigonGeometry.cpp
+  TrigonTransform.h
+  TrigonTransform.cpp
   Variant.h
   Variant.cpp
 )
