@@ -8,9 +8,7 @@
 #define LIBPENTOBI_PIECE_TRANSFORMS_H
 
 #include <vector>
-#include "libboardgame_base/Geometry.h"
 #include "libboardgame_base/Transform.h"
-#include "libboardgame_util/Assert.h"
 
 namespace libpentobi_base {
 
