@@ -812,6 +812,8 @@ void MainWindow::createActions()
     connect(m_actionForward, SIGNAL(triggered()), SLOT(forward()));
 
     m_actionFullscreen = createAction(tr("&Fullscreen"));
+    // Don't use QKeySequence::Fullscreen, it is Ctrl-F11 on Linux but that
+    // doesn't work in Xfce
     m_actionFullscreen->setShortcut(QString("F11"));
     connect(m_actionFullscreen, SIGNAL(triggered()), SLOT(fullscreen()));
 
@@ -3000,7 +3002,7 @@ void MainWindow::setVariant(Variant variant)
 void MainWindow::setFile(const QString& file)
 {
     m_file = file;
-    // Don't use setWindowFilePath(), it is buggy in Qt 4.6.
+    // Don't use setWindowFilePath() because of QTBUG-16507
     if (m_file.isEmpty())
         setWindowTitle(tr("Pentobi"));
     else
