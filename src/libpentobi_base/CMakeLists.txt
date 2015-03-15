@@ -53,9 +53,11 @@ set(pentobi_base_STAT_SRCS
   StartingPoints.h
   StartingPoints.cpp
   SymmetricPoints.h
-  SymmetricPoints.cpp
+  SymmetricPoints.cpp  
   TreeUtil.h
   TreeUtil.cpp
+  TrigonGeometry.h
+  TrigonGeometry.cpp
   Variant.h
   Variant.cpp
 )

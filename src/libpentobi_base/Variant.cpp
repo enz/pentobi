@@ -10,8 +10,8 @@
 
 #include "Variant.h"
 
+#include "TrigonGeometry.h"
 #include "libboardgame_base/RectGeometry.h"
-#include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/StringUtil.h"
 
@@ -31,7 +31,6 @@ using libboardgame_base::PointTransfTrigonRot120;
 using libboardgame_base::PointTransfTrigonRot240;
 using libboardgame_base::PointTransfTrigonRot300;
 using libboardgame_base::RectGeometry;
-using libboardgame_base::TrigonGeometry;
 using libboardgame_util::trim;
 using libboardgame_util::to_lower;
 
@@ -66,10 +65,10 @@ const Geometry& get_geometry(BoardType board_type)
     case BoardType::classic:
         return RectGeometry<Point>::get(20, 20);
     case BoardType::trigon:
-        return TrigonGeometry<Point>::get(9);
+        return TrigonGeometry::get(9);
     default:
         LIBBOARDGAME_ASSERT(board_type == BoardType::trigon_3);
-        return TrigonGeometry<Point>::get(8);
+        return TrigonGeometry::get(8);
     }
 }
 

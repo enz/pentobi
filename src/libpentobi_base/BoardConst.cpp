@@ -16,9 +16,9 @@
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsTrigon.h"
 #include "SymmetricPoints.h"
+#include "TrigonGeometry.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/Transform.h"
-#include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/StringUtil.h"
 
@@ -27,7 +27,6 @@ namespace libpentobi_base {
 using libboardgame_base::PointTransfRot180;
 using libboardgame_base::RectGeometry;
 using libboardgame_base::Transform;
-using libboardgame_base::TrigonGeometry;
 using libboardgame_util::get_log;
 using libboardgame_util::log;
 using libboardgame_util::split;

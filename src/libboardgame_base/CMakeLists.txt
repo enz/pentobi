@@ -16,6 +16,5 @@ add_library(boardgame_base STATIC
   SpShtStrRep.cpp
   Transform.h
   Transform.cpp
-  TrigonGeometry.h
 )
 

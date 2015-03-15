@@ -8,16 +8,15 @@
 
 #include <iostream>
 #include "libboardgame_base/RectGeometry.h"
-#include "libboardgame_base/TrigonGeometry.h"
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libpentobi_base/NodeUtil.h"
+#include "libpentobi_base/TrigonGeometry.h"
 #include "libpentobi_gui/BoardPainter.h"
 
 using namespace std;
 using libboardgame_base::RectGeometry;
-using libboardgame_base::TrigonGeometry;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::split;
@@ -26,6 +25,7 @@ using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::PointState;
+using libpentobi_base::TrigonGeometry;
 
 //-----------------------------------------------------------------------------
 
