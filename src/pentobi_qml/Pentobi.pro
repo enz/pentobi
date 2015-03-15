@@ -22,6 +22,7 @@ SOURCES += \
     PlayerModel.cpp \
     ../libboardgame_base/CoordPoint.cpp \
     ../libboardgame_base/Rating.cpp \
+    ../libboardgame_base/RectTransform.cpp \
     ../libboardgame_base/SpShtStrRep.cpp \
     ../libboardgame_base/Transform.cpp \
     ../libboardgame_util/Abort.cpp \
@@ -61,6 +62,8 @@ SOURCES += \
     ../libpentobi_base/StartingPoints.cpp \
     ../libpentobi_base/SymmetricPoints.cpp \
     ../libpentobi_base/TreeUtil.cpp \
+    ../libpentobi_base/TrigonGeometry.cpp \
+    ../libpentobi_base/TrigonTransform.cpp \
     ../libpentobi_base/Variant.cpp \
     ../libpentobi_base/PlayerBase.cpp \
     ../libpentobi_base/PentobiTree.cpp \
@@ -105,9 +108,9 @@ HEADERS += \
     ../libboardgame_base/PointTransform.h \
     ../libboardgame_base/Rating.h \
     ../libboardgame_base/RectGeometry.h \
+    ../libboardgame_base/RectTransform.h \
     ../libboardgame_base/SpShtStrRep.h \
     ../libboardgame_base/Transform.h \
-    ../libboardgame_base/TrigonGeometry.h \
     ../libboardgame_mcts/Atomic.h \
     ../libboardgame_mcts/BiasTerm.h \
     ../libboardgame_mcts/LastGoodReply.h \
@@ -180,6 +183,8 @@ HEADERS += \
     ../libpentobi_base/StartingPoints.h \
     ../libpentobi_base/SymmetricPoints.h \
     ../libpentobi_base/TreeUtil.h \
+    ../libpentobi_base/TrigonGeometry.h \
+    ../libpentobi_base/TrigonTransform.h \
     ../libpentobi_base/Variant.h \
     ../libpentobi_mcts/Float.h \
     ../libpentobi_mcts/History.h \

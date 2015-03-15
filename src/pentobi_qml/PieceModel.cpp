@@ -8,6 +8,8 @@
 
 #include <limits>
 #include <QDebug>
+#include "libboardgame_base/RectTransform.h"
+#include "libpentobi_base/TrigonTransform.h"
 
 using namespace std;
 using libboardgame_base::TransfIdentity;
@@ -18,19 +20,19 @@ using libboardgame_base::TransfRectRefl;
 using libboardgame_base::TransfRectRot90Refl;
 using libboardgame_base::TransfRectRot180Refl;
 using libboardgame_base::TransfRectRot270Refl;
-using libboardgame_base::TransfTrigonIdentity;
-using libboardgame_base::TransfTrigonRefl;
-using libboardgame_base::TransfTrigonReflRot60;
-using libboardgame_base::TransfTrigonReflRot120;
-using libboardgame_base::TransfTrigonReflRot180;
-using libboardgame_base::TransfTrigonReflRot240;
-using libboardgame_base::TransfTrigonReflRot300;
-using libboardgame_base::TransfTrigonRot60;
-using libboardgame_base::TransfTrigonRot120;
-using libboardgame_base::TransfTrigonRot180;
-using libboardgame_base::TransfTrigonRot240;
-using libboardgame_base::TransfTrigonRot300;
 using libpentobi_base::BoardType;
+using libpentobi_base::TransfTrigonIdentity;
+using libpentobi_base::TransfTrigonRefl;
+using libpentobi_base::TransfTrigonReflRot60;
+using libpentobi_base::TransfTrigonReflRot120;
+using libpentobi_base::TransfTrigonReflRot180;
+using libpentobi_base::TransfTrigonReflRot240;
+using libpentobi_base::TransfTrigonReflRot300;
+using libpentobi_base::TransfTrigonRot60;
+using libpentobi_base::TransfTrigonRot120;
+using libpentobi_base::TransfTrigonRot180;
+using libpentobi_base::TransfTrigonRot240;
+using libpentobi_base::TransfTrigonRot300;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
