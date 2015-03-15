@@ -8,10 +8,8 @@
 #define LIBBOARDGAME_BASE_GRID_H
 
 #include <algorithm>
-#include <cstring>
 #include <iomanip>
 #include <sstream>
-#include <type_traits>
 #include "Point.h"
 #include "Geometry.h"
 

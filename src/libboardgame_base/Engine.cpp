@@ -17,6 +17,7 @@
 
 namespace libboardgame_base {
 
+using namespace std;
 using libboardgame_gtp::Failure;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_log;

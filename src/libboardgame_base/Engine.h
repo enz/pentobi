@@ -7,12 +7,10 @@
 #ifndef LIBBOARDGAME_BASE_ENGINE_H
 #define LIBBOARDGAME_BASE_ENGINE_H
 
-#include <memory>
 #include "libboardgame_gtp/Engine.h"
 
 namespace libboardgame_base {
 
-using namespace std;
 using libboardgame_gtp::Arguments;
 using libboardgame_gtp::Response;
 

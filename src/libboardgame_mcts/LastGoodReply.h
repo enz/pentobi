@@ -8,6 +8,7 @@
 #define LIBBOARDGAME_MCTS_LAST_GOOD_REPLY_H
 
 #include <algorithm>
+#include <cstring>
 #include <memory>
 #include <random>
 #include "Atomic.h"

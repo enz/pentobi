@@ -9,12 +9,8 @@
 
 #include "Geometry.h"
 
-#include "libboardgame_util/Log.h"
-
 namespace libboardgame_base {
 namespace geometry_util {
-
-using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 

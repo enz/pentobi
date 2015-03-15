@@ -7,10 +7,7 @@
 #ifndef LIBBOARDGAME_BASE_POINT_H
 #define LIBBOARDGAME_BASE_POINT_H
 
-#include <iosfwd>
 #include <limits>
-#include <sstream>
-#include <string>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_sys/Compiler.h"
 

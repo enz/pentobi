@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <array>
 #include <initializer_list>
-#include <iosfwd>
+#include <iostream>
 #include "Assert.h"
 
 namespace libboardgame_util {

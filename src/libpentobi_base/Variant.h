@@ -7,6 +7,7 @@
 #ifndef LIBPENTOBI_BASE_VARIANT_H
 #define LIBPENTOBI_BASE_VARIANT_H
 
+#include <memory>
 #include <string>
 #include "Color.h"
 #include "Geometry.h"
