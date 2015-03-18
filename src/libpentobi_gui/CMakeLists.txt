@@ -79,8 +79,7 @@ foreach(ts ${pentobi_gui_TS})
   get_filename_component(qm ${ts} NAME_WE)
   set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
   add_custom_command(OUTPUT ${qm}
-    COMMAND ${LRELEASE_EXECUTABLE}
-    ARGS -removeidentical -nounfinished
+    COMMAND ${LRELEASE_EXECUTABLE} -removeidentical -nounfinished
       ${CMAKE_CURRENT_SOURCE_DIR}/translations/${ts} -qm ${qm}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/translations/${ts} VERBATIM
     )
