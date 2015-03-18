@@ -61,10 +61,12 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
 file(COPY libpentobi_gui_resources.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 if (USE_QT5)
   qt5_add_resources(pentobi_gui_RC_SRCS
-    ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc)
+      ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc
+      OPTIONS -no-compress)
 else()
   qt4_add_resources(pentobi_gui_RC_SRCS
-    ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc)
+      ${CMAKE_CURRENT_BINARY_DIR}/libpentobi_gui_resources.qrc
+      OPTIONS -no-compress)
 endif()
 
 # We don't use qt4_add_translation because it doesn't use option

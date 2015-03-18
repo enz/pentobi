@@ -84,9 +84,11 @@ endforeach()
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
 file(COPY resources.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 if (USE_QT5)
-  qt5_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc)
+  qt5_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc
+      OPTIONS -no-compress)
 else()
-  qt4_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc)
+  qt4_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc
+      OPTIONS -no-compress)
 endif()
 
 # We don't use qt4_add_translation because it doesn't use option
@@ -144,8 +146,7 @@ if (DEFINED CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(pentobi ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
-install(TARGETS pentobi
-DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install translation files. If you change the destination, you need to
 # update the default for PENTOBI_TRANSLATIONS in the main CMakeLists.txt
