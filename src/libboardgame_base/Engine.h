@@ -21,7 +21,6 @@ class Engine
 {
 public:
     void cmd_cputime(Response&);
-    void cmd_cputime_diff(Response&);
     void cmd_set_random_seed(const Arguments&);
 
     Engine();
@@ -30,9 +29,6 @@ public:
 
 protected:
     void on_handle_cmd_begin() override;
-
-private:
-    double m_cpu_time_last;
 };
 
 //-----------------------------------------------------------------------------
