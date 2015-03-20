@@ -119,22 +119,6 @@ public:
         @throws Failure If no such argument */
     CmdLineRange get_remaining_line(unsigned i) const;
 
-    /** Return remaining line after argument as an argument.
-        This function can be used for parsing string parameter values as used
-        by analyze commands of type 'param' by GoGui (http://gogui.sf.net).
-        GoGui never quotes string parameter values, because it does not know if
-        the parameter value is a single argument or a list that will be further
-        parsed by the engine. This can cause problems if the argument value is
-        an unquoted filename containing spaces. This function can be used to
-        handle this situation. It uses the arguments that were detected with
-        support for quoting and returns en empty string if the number of
-        arguments is i, the argument i + 1 if the number of arguments is i + 1,
-        and get_remaining_line(i) otherwise.
-        @param i Argument index starting with 0
-        @return The remaining argument.
-        @throws Failure If the number of arguments is less than i */
-    string get_remaining_arg(unsigned i) const;
-
 private:
     const CmdLine& m_line;
 

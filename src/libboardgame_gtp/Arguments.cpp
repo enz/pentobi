@@ -69,17 +69,6 @@ string Arguments::get_tolower() const
     return get_tolower(0);
 }
 
-string Arguments::get_remaining_arg(unsigned i) const
-{
-    unsigned size = get_size();
-    if (size == i + 1)
-        return "";
-    else if (size == i + 2)
-        return get(i + 1);
-    else
-        return get_remaining_line(i);
-}
-
 CmdLineRange Arguments::get_remaining_line(unsigned i) const
 {
     if (i < get_size())
