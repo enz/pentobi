@@ -9,7 +9,6 @@
 
 #include <sstream>
 #include "CoordPoint.h"
-#include "Point.h"
 #include "libboardgame_util/ArrayList.h"
 
 namespace libboardgame_base {

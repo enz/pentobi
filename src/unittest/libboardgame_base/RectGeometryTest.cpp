@@ -8,6 +8,7 @@
 #include <config.h>
 #endif
 
+#include "libboardgame_base/Point.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_base/SpShtStrRep.h"
 #include "libboardgame_test/Test.h"
