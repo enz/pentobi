@@ -109,12 +109,16 @@ Move GuiBoard::findSelectedPieceMove()
         int y = p.y + m_selectedPieceOffset.y;
         if (x < 0 || x >= width || y < 0 || y >= height)
             return Move::null();
-        movePoints.push_back(geo.get_point(x, y));
+        Point pp = geo.get_point(x, y);
+        if (pp.is_null())
+            return Move::null();
+        movePoints.push_back(pp);
     }
     Move mv;
     if (! m_bd.find_move(movePoints, mv)
-        || (m_freePlacement && ! allPointEmpty(m_bd, mv))
-        || (! m_freePlacement && ! m_bd.is_legal(m_selectedPieceColor, mv)))
+            || (m_freePlacement && ! allPointEmpty(m_bd, mv))
+            || (! m_freePlacement
+                && ! m_bd.is_legal(m_selectedPieceColor, mv)))
         return Move::null();
     else
         return mv;
