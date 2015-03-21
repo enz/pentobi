@@ -2250,6 +2250,8 @@ void MainWindow::leaveFullscreen()
     // menu on KDE) and not by MainWindow::fullscreen()
     if (m_leaveFullscreenButton)
         m_leaveFullscreenButton->hideButton();
+    // Call showNormal() even if m_wasMaximized otherwise restoring the
+    // maximized window state does not work correctly on Xfce
     showNormal();
     if (m_wasMaximized)
         showMaximized();
