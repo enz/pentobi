@@ -206,20 +206,11 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     m_fieldHeight = ratio * m_fieldWidth;
     m_boardOffset = QPointF(0.5 * (width - m_fieldWidth * m_width),
                             0.5 * (height - m_fieldHeight * m_height));
-    if (m_isTrigon)
-    {
-        m_font.setPointSizeF(0.6 * m_fieldWidth);
-        m_fontSemiCondensed.setPointSizeF(0.6 * m_fieldWidth);
-        m_fontCondensed.setPointSizeF(0.6 * m_fieldWidth);
-        m_fontCoordLabels.setPointSizeF(0.6 * m_fieldWidth);
-    }
-    else
-    {
-        m_font.setPointSizeF(0.4 * m_fieldWidth);
-        m_fontSemiCondensed.setPointSizeF(0.4 * m_fieldWidth);
-        m_fontCondensed.setPointSizeF(0.4 * m_fieldWidth);
-        m_fontCoordLabels.setPointSizeF(0.36 * m_fieldWidth);
-    }
+    int fontSize = static_cast<int>((m_isTrigon ? 0.7 : 0.5) * m_fieldWidth);
+    m_font.setPixelSize(fontSize);
+    m_fontSemiCondensed.setPixelSize(fontSize);
+    m_fontCondensed.setPixelSize(fontSize);
+    m_fontCoordLabels.setPixelSize(fontSize);
     painter.save();
     painter.translate(m_boardOffset);
     if (m_coordinates)
