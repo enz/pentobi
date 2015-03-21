@@ -1729,6 +1729,7 @@ void MainWindow::fullscreen()
     menuBar()->hide();
     findChild<QToolBar*>()->hide();
     settings.setValue("geometry", saveGeometry());
+    m_wasMaximized = isMaximized();
     showFullScreen();
     if (! m_leaveFullscreenButton)
         m_leaveFullscreenButton =
@@ -2250,6 +2251,8 @@ void MainWindow::leaveFullscreen()
     if (m_leaveFullscreenButton)
         m_leaveFullscreenButton->hideButton();
     showNormal();
+    if (m_wasMaximized)
+        showMaximized();
 }
 
 void MainWindow::leaveSetupMode()
