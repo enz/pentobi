@@ -83,7 +83,7 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     QPainter painter(this);
     QFont font;
     font.setStyleStrategy(QFont::PreferOutline);
-    font.setPointSizeF(0.05 * height());
+    font.setPixelSize(static_cast<int>(0.06 * height()));
     QFontMetrics metrics(font);
     painter.translate(m_borderX, m_borderY);
     painter.setPen(Qt::NoPen);
