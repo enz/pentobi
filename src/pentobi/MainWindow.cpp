@@ -258,13 +258,15 @@ MainWindow::MainWindow(Variant variant, const QString& initialFile,
     createMenu();
     qApp->installEventFilter(this);
     updateRecentFiles();
-    auto moveNumbers = settings.value("move_numbers", "last").toString();
-    if (moveNumbers == "last")
-        m_actionMoveNumbersLast->setChecked(true);
-    else if (moveNumbers == "all")
-        m_actionMoveNumbersAll->setChecked(true);
+    auto marking = settings.value("move_marking", "last_dot").toString();
+    if (marking == "all_number")
+        m_actionMoveMarkingAllNumber->setChecked(true);
+    else if (marking == "last_dot")
+        m_actionMoveMarkingLastDot->setChecked(true);
+    else if (marking == "last_number")
+        m_actionMoveMarkingLastNumber->setChecked(true);
     else
-        m_actionMoveNumbersNone->setChecked(true);
+        m_actionMoveMarkingNone->setChecked(true);
     auto coordinates = settings.value("coordinates", false).toBool();
     m_guiBoard->setCoordinates(coordinates);
     m_actionCoordinates->setChecked(coordinates);
@@ -706,7 +708,7 @@ void MainWindow::createActions()
 {
     auto groupVariant = new QActionGroup(this);
     auto groupLevel = new QActionGroup(this);
-    auto groupMoveNumbers = new QActionGroup(this);
+    auto groupMoveMarking = new QActionGroup(this);
     auto groupMoveAnnotation = new QActionGroup(this);
     auto groupToolBarText = new QActionGroup(this);
 
@@ -882,24 +884,31 @@ void MainWindow::createActions()
     connect(m_actionFlipVertically, SIGNAL(triggered()),
             SLOT(flipVertically()));
 
-    m_actionMoveNumbersAll = createAction(tr("&All"));
-    m_actionMoveNumbersAll->setActionGroup(groupMoveNumbers);
-    m_actionMoveNumbersAll->setCheckable(true);
-    connect(m_actionMoveNumbersAll, SIGNAL(triggered(bool)),
-            SLOT(setMoveNumbersAll(bool)));
+    m_actionMoveMarkingAllNumber = createAction(tr("&All with Number"));
+    m_actionMoveMarkingAllNumber->setActionGroup(groupMoveMarking);
+    m_actionMoveMarkingAllNumber->setCheckable(true);
+    connect(m_actionMoveMarkingAllNumber, SIGNAL(triggered(bool)),
+            SLOT(setMoveMarkingAllNumber(bool)));
 
-    m_actionMoveNumbersLast = createAction(tr("&Last"));
-    m_actionMoveNumbersLast->setActionGroup(groupMoveNumbers);
-    m_actionMoveNumbersLast->setCheckable(true);
-    m_actionMoveNumbersLast->setChecked(true);
-    connect(m_actionMoveNumbersLast, SIGNAL(triggered(bool)),
-            SLOT(setMoveNumbersLast(bool)));
+    m_actionMoveMarkingLastDot = createAction(tr("Last with &Dot"));
+    m_actionMoveMarkingLastDot->setActionGroup(groupMoveMarking);
+    m_actionMoveMarkingLastDot->setCheckable(true);
+    m_actionMoveMarkingLastDot->setChecked(true);
+    connect(m_actionMoveMarkingLastDot, SIGNAL(triggered(bool)),
+            SLOT(setMoveMarkingLastDot(bool)));
 
-    m_actionMoveNumbersNone = createAction(tr("&None", "move numbers"));
-    m_actionMoveNumbersNone->setActionGroup(groupMoveNumbers);
-    m_actionMoveNumbersNone->setCheckable(true);
-    connect(m_actionMoveNumbersNone, SIGNAL(triggered(bool)),
-            SLOT(setMoveNumbersNone(bool)));
+    m_actionMoveMarkingLastNumber = createAction(tr("&Last with Number"));
+    m_actionMoveMarkingLastNumber->setActionGroup(groupMoveMarking);
+    m_actionMoveMarkingLastNumber->setCheckable(true);
+    m_actionMoveMarkingLastNumber->setChecked(true);
+    connect(m_actionMoveMarkingLastNumber, SIGNAL(triggered(bool)),
+            SLOT(setMoveMarkingLastNumber(bool)));
+
+    m_actionMoveMarkingNone = createAction(tr("&None", "move numbers"));
+    m_actionMoveMarkingNone->setActionGroup(groupMoveMarking);
+    m_actionMoveMarkingNone->setCheckable(true);
+    connect(m_actionMoveMarkingNone, SIGNAL(triggered(bool)),
+            SLOT(setMoveMarkingNone(bool)));
 
     m_actionMovePieceLeft = createAction();
     m_actionMovePieceLeft->setShortcut(QKeySequence::MoveToPreviousChar);
@@ -1351,10 +1360,11 @@ void MainWindow::createMenu()
     m_menuToolBarText->addAction(m_actionToolBarTextSystem);
     menuView->addAction(m_actionShowComment);
     menuView->addSeparator();
-    auto menuMoveNumbers = menuView->addMenu(tr("&Move Numbers"));
-    menuMoveNumbers->addAction(m_actionMoveNumbersLast);
-    menuMoveNumbers->addAction(m_actionMoveNumbersAll);
-    menuMoveNumbers->addAction(m_actionMoveNumbersNone);
+    auto menuMoveNumbers = menuView->addMenu(tr("&Move Marking"));
+    menuMoveNumbers->addAction(m_actionMoveMarkingLastDot);
+    menuMoveNumbers->addAction(m_actionMoveMarkingLastNumber);
+    menuMoveNumbers->addAction(m_actionMoveMarkingAllNumber);
+    menuMoveNumbers->addAction(m_actionMoveMarkingNone);
     menuView->addAction(m_actionCoordinates);
     menuView->addAction(m_actionShowVariations);
     menuView->addSeparator();
@@ -3027,34 +3037,40 @@ void MainWindow::setLevel(bool checked)
     setLevel(qobject_cast<QAction*>(sender())->data().toInt());
 }
 
-void MainWindow::setMoveNumbersAll(bool checked)
+void MainWindow::setMoveMarkingAllNumber(bool checked)
 {
-    if (checked)
-    {
-        QSettings settings;
-        settings.setValue("move_numbers", "all");
-        updateWindow(false);
-    }
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("move_marking", "all_number");
+    updateWindow(false);
 }
 
-void MainWindow::setMoveNumbersLast(bool checked)
+void MainWindow::setMoveMarkingLastDot(bool checked)
 {
-    if (checked)
-    {
-        QSettings settings;
-        settings.setValue("move_numbers", "last");
-        updateWindow(false);
-    }
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("move_marking", "last_dot");
+    updateWindow(false);
 }
 
-void MainWindow::setMoveNumbersNone(bool checked)
+void MainWindow::setMoveMarkingLastNumber(bool checked)
 {
-    if (checked)
-    {
-        QSettings settings;
-        settings.setValue("move_numbers", "none");
-        updateWindow(false);
-    }
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("move_marking", "last_number");
+    updateWindow(false);
+}
+
+void MainWindow::setMoveMarkingNone(bool checked)
+{
+    if (! checked)
+        return;
+    QSettings settings;
+    settings.setValue("move_marking", "none");
+    updateWindow(false);
 }
 
 void MainWindow::setPlayToolTip()
@@ -3420,13 +3436,8 @@ void MainWindow::updateMoveNumber()
     {
         if (movesLeft == 0)
         {
-            // If last move in main variation, show the number only if it is
-            // not already displayed on the board.
-            if (! m_actionMoveNumbersLast->isChecked())
-            {
-                text = QString("%1").arg(move);
-                toolTip = tr("Move %1").arg(move);
-            }
+            text = QString("%1").arg(move);
+            toolTip = tr("Move %1").arg(move);
         }
         else
         {
@@ -3504,12 +3515,13 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     unsigned nuMoves = m_bd.get_nu_moves();
     unsigned markMovesBegin = 0;
     unsigned markMovesEnd = 0;
-    if (m_actionMoveNumbersAll->isChecked())
+    if (m_actionMoveMarkingAllNumber->isChecked())
     {
         markMovesBegin = 1;
         markMovesEnd = nuMoves;
     }
-    else if (m_actionMoveNumbersLast->isChecked())
+    else if (m_actionMoveMarkingLastNumber->isChecked()
+             || m_actionMoveMarkingLastDot->isChecked())
     {
         if (m_lastComputerMovesBegin != 0)
         {
@@ -3523,7 +3535,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         }
     }
     gui_board_util::setMarkup(*m_guiBoard, m_game, markMovesBegin,
-                              markMovesEnd, markVariations);
+                              markMovesEnd, markVariations,
+                              m_actionMoveMarkingLastDot->isChecked());
     m_scoreDisplay->updateScore(m_bd);
     if (m_legalMoves)
         m_legalMoves->clear();

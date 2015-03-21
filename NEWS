@@ -5,6 +5,7 @@ Version 9.UNKNOWN (master)
 * More variety in Trigon opening moves.
 * The Backward10/Forward10 toolbar buttons were replaced by autorepeat
   functionality of the Backward/Forward buttons.
+* The last move is now by default marked with a dot instead of a number.
 * The compilation now requires at least GCC 4.9 and CMake 3.0.2.
 * On Linux, the manual is now installed in $PREFIX/share/help according
   to the freedesktop.org help specification.

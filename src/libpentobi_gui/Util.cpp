@@ -198,6 +198,18 @@ QColor Util::getLabelColor(Variant variant, PointState s)
         return Qt::white;
 }
 
+QColor Util::getMarkColor(Variant variant, PointState s)
+{
+    if (s.is_empty())
+        return Qt::white;
+    Color c = s.to_color();
+    QColor paintColor = getPaintColor(variant, c);
+    if (paintColor == yellow || paintColor == green)
+        return QColor("#333333");
+    else
+        return Qt::white;
+}
+
 QColor Util::getPaintColor(Variant variant, Color c)
 {
     if (variant == Variant::duo || variant == Variant::junior)

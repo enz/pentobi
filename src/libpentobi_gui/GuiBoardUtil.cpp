@@ -90,13 +90,19 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
     return true;
 }
 
-void setMoveLabel(GuiBoard& guiBoard, const Game& game, const SgfNode& node,
-                  unsigned moveNumber, ColorMove mv, bool markVariations)
+void markMove(GuiBoard& guiBoard, const Game& game, const SgfNode& node,
+              unsigned moveNumber, ColorMove mv, bool markVariations,
+              bool markWithDot)
 {
     if (mv.is_null())
         return;
     auto& bd = game.get_board();
     Point p = bd.get_move_info_ext_2(mv.move).label_pos;
+    if (markWithDot)
+    {
+        guiBoard.setMark(p, true);
+        return;
+    }
     QString label;
     label.setNum(moveNumber);
     if (markVariations)
@@ -114,7 +120,7 @@ void setMoveLabel(GuiBoard& guiBoard, const Game& game, const SgfNode& node,
 //-----------------------------------------------------------------------------
 
 void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
-               unsigned markMovesEnd, bool markVariations)
+               unsigned markMovesEnd, bool markVariations, bool markWithDot)
 {
     guiBoard.clearMarkup();
     if (markMovesBegin == 0)
@@ -129,8 +135,8 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
             if (! mv.is_null())
             {
                 if (moveNumber >= markMovesBegin && moveNumber <= markMovesEnd)
-                    setMoveLabel(guiBoard, game, *node, moveNumber, mv,
-                                 markVariations);
+                    markMove(guiBoard, game, *node, moveNumber, mv,
+                             markVariations, markWithDot);
                 --moveNumber;
             }
             node = node->get_parent_or_null();

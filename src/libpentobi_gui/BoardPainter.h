@@ -50,7 +50,8 @@ public:
         uses the arguments from the paintEmptyBoard() function to determine the
         board properties. */
     void paintPieces(QPainter& painter, const Grid<PointState>& pointState,
-                     const Grid<QString>* labels = nullptr);
+                     const Grid<QString>* labels = nullptr,
+                     const Grid<bool>* marks = nullptr);
 
     /** Paint the selected piece.
         Paints the selected piece either transparent (if not legal) or opaque
@@ -108,7 +109,10 @@ private:
                    qreal height, const QString& label, bool isCoordLabel);
 
     void drawLabels(QPainter& painter, const Grid<PointState>& pointState,
-                    Variant variant, const Grid<QString>* labels);
+                    Variant variant, const Grid<QString>& labels);
+
+    void drawMarks(QPainter& painter, const Grid<PointState>& pointState,
+                   Variant variant, const Grid<bool>& marks);
 };
 
 inline void BoardPainter::setCoordinateColor(const QColor& color)

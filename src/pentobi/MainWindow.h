@@ -430,11 +430,13 @@ private:
 
     QAction* m_actionMoveDownVariation;
 
-    QAction* m_actionMoveNumbersAll;
+    QAction* m_actionMoveMarkingAllNumber;
 
-    QAction* m_actionMoveNumbersLast;
+    QAction* m_actionMoveMarkingLastDot;
 
-    QAction* m_actionMoveNumbersNone;
+    QAction* m_actionMoveMarkingLastNumber;
+
+    QAction* m_actionMoveMarkingNone;
 
     QAction* m_actionMoveUpVariation;
 
@@ -754,11 +756,13 @@ private slots:
 
     void setLevel(bool checked);
 
-    void setMoveNumbersAll(bool checked);
+    void setMoveMarkingAllNumber(bool checked);
 
-    void setMoveNumbersLast(bool checked);
+    void setMoveMarkingLastNumber(bool checked);
 
-    void setMoveNumbersNone(bool checked);
+    void setMoveMarkingLastDot(bool checked);
+
+    void setMoveMarkingNone(bool checked);
 
     void setSetupPlayer();
 

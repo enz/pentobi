@@ -114,19 +114,15 @@ void BoardPainter::drawLabel(QPainter& painter, qreal x, qreal y,
 
 void BoardPainter::drawLabels(QPainter& painter,
                               const Grid<PointState>& pointState,
-                              Variant variant,
-                              const Grid<QString>* labels)
+                              Variant variant, const Grid<QString>& labels)
 {
-    if (! labels)
-        return;
     bool isTrigon = (variant == Variant::trigon
                      || variant == Variant::trigon_2
                      || variant == Variant::trigon_3);
     for (Point p : *m_geo)
-        if (! (*labels)[p].isEmpty())
+        if (! labels[p].isEmpty())
         {
-            PointState s = pointState[p];
-            painter.setPen(Util::getLabelColor(variant, s));
+            painter.setPen(Util::getLabelColor(variant, pointState[p]));
             qreal x = m_geo->get_x(p) * m_fieldWidth;
             qreal y = m_geo->get_y(p) * m_fieldHeight;
             qreal width = m_fieldWidth;
@@ -138,7 +134,41 @@ void BoardPainter::drawLabels(QPainter& painter,
                     y += 0.333 * height;
                 height = 0.666 * height;
             }
-            drawLabel(painter, x, y, width, height, (*labels)[p], false);
+            drawLabel(painter, x, y, width, height, labels[p], false);
+        }
+}
+
+void BoardPainter::drawMarks(QPainter& painter,
+                             const Grid<PointState>& pointState,
+                             Variant variant, const Grid<bool>& marks)
+{
+    bool isTrigon = (variant == Variant::trigon
+                     || variant == Variant::trigon_2
+                     || variant == Variant::trigon_3);
+    for (Point p : *m_geo)
+        if (marks[p])
+        {
+            painter.setPen(Qt::NoPen);
+            QColor color = Util::getMarkColor(variant, pointState[p]);
+            color.setAlphaF(0.5);
+            painter.setBrush(color);
+            qreal x = (static_cast<float>(m_geo->get_x(p)) + 0.5f)
+                    * m_fieldWidth;
+            qreal y = (static_cast<float>(m_geo->get_y(p)) + 0.5f)
+                    * m_fieldHeight;
+            qreal size;
+            if (isTrigon)
+            {
+                bool isUpward = (m_geo->get_point_type(p) == 0);
+                if (isUpward)
+                    y += 0.167 * m_fieldHeight;
+                else
+                    y -= 0.167 * m_fieldHeight;
+                size = 0.11 * m_fieldHeight;
+            }
+            else
+                size = 0.13 * m_fieldHeight;
+            painter.drawEllipse(QPointF(x, y), size, size);
         }
 }
 
@@ -241,7 +271,8 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
 
 void BoardPainter::paintPieces(QPainter& painter,
                                const Grid<PointState>& pointState,
-                               const Grid<QString>* labels)
+                               const Grid<QString>* labels,
+                               const Grid<bool>* marks)
 {
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
@@ -268,7 +299,10 @@ void BoardPainter::paintPieces(QPainter& painter,
                                        fieldX, fieldY, m_fieldWidth);
         }
     }
-    drawLabels(painter, pointState, m_variant, labels);
+    if (marks)
+        drawMarks(painter, pointState, m_variant, *marks);
+    if (labels)
+        drawLabels(painter, pointState, m_variant, *labels);
     painter.restore();
 }
 

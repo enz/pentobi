@@ -28,6 +28,8 @@ QColor getPaintColor(Variant variant, Color c);
 
 QColor getLabelColor(Variant variant, PointState s);
 
+QColor getMarkColor(Variant variant, PointState s);
+
 void paintColorSquare(QPainter& painter, Variant variant, Color c,
                       qreal x, qreal y, qreal size, qreal alpha = 1,
                       qreal saturation = 1, bool flat = false);

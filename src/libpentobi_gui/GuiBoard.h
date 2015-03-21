@@ -59,6 +59,8 @@ public:
 
     void setLabel(Point p, const QString& text);
 
+    void setMark(Point p, bool enable);
+
     void clearMarkup();
 
     void setFreePlacement(bool enable);
@@ -126,6 +128,8 @@ private:
     MovePoints m_selectedPiecePoints;
 
     Grid<QString> m_labels;
+
+    Grid<bool> m_marks;
 
     BoardPainter m_boardPainter;
 

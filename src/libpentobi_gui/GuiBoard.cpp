@@ -63,7 +63,10 @@ void GuiBoard::changeEvent(QEvent* event)
 void GuiBoard::clearMarkup()
 {
     for (Point p : m_bd)
+    {
+        setMark(p, false);
         setLabel(p, "");
+    }
 }
 
 void GuiBoard::clearPiece()
@@ -83,6 +86,7 @@ void GuiBoard::copyFromBoard(const Board& bd)
         m_isInitialized = true;
         m_pointState.copy_from(bd.get_point_state(), geo);
         m_labels.fill("", geo);
+        m_marks.fill(false, geo);
         setEmptyBoardDirty();
     }
     else
@@ -313,7 +317,7 @@ void GuiBoard::paintEvent(QPaintEvent*)
         m_boardPixmap->fill(Qt::transparent);
         QPainter painter(m_boardPixmap.get());
         painter.drawPixmap(0, 0, *m_emptyBoardPixmap);
-        m_boardPainter.paintPieces(painter, m_pointState, &m_labels);
+        m_boardPainter.paintPieces(painter, m_pointState, &m_labels, &m_marks);
         m_dirty = false;
     }
     QPainter painter(this);
@@ -388,6 +392,17 @@ void GuiBoard::setLabel(Point p, const QString& text)
     if (m_labels[p] != text)
     {
         m_labels[p] = text;
+        setDirty();
+    }
+}
+
+void GuiBoard::setMark(Point p, bool enable)
+{
+    if (! m_isInitialized)
+        return;
+    if (m_marks[p] != enable)
+    {
+        m_marks[p] = enable;
         setDirty();
     }
 }
