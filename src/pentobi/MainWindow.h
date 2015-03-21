@@ -262,7 +262,7 @@ private:
 
     bool m_noDelay = false;
 
-    /** Was window maximized before enterung fullscreen. */
+    /** Was window maximized before entering fullscreen. */
     bool m_wasMaximized = false;
 
     bool m_isGenMoveRunning = false;
