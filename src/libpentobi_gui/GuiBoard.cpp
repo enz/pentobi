@@ -40,6 +40,19 @@ bool allPointEmpty(const Board& bd, Move mv)
     return true;
 }
 
+QPixmap* createPixmap(const QPainter& painter, const QSize& size)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+    auto devicePixelRatio = painter.device()->devicePixelRatio();
+    auto pixmap = new QPixmap(devicePixelRatio * size);
+    pixmap->setDevicePixelRatio(devicePixelRatio);
+#else
+    LIBBOARDGAME_UNUSED(painter);
+    auto pixmap = new QPixmap(size);
+#endif
+    return pixmap;
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -291,14 +304,15 @@ void GuiBoard::paintEvent(QPaintEvent*)
 {
     if (! m_isInitialized)
         return;
+    QPainter painter(this);
     if (! m_emptyBoardPixmap || m_emptyBoardPixmap->size() != size())
     {
-        m_emptyBoardPixmap.reset(new QPixmap(size()));
+        m_emptyBoardPixmap.reset(createPixmap(painter, size()));
         m_emptyBoardDirty = true;
     }
     if (! m_boardPixmap || m_boardPixmap->size() != size())
     {
-        m_boardPixmap.reset(new QPixmap(size()));
+        m_boardPixmap.reset(createPixmap(painter, size()));
         m_dirty = true;
     }
     if (m_emptyBoardDirty)
@@ -320,7 +334,6 @@ void GuiBoard::paintEvent(QPaintEvent*)
         m_boardPainter.paintPieces(painter, m_pointState, &m_labels, &m_marks);
         m_dirty = false;
     }
-    QPainter painter(this);
     painter.drawPixmap(0, 0, *m_boardPixmap);
     if (m_isMoveShown)
     {
