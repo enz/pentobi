@@ -36,10 +36,6 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     layout->addLayout(formLayout);
     formLayout->setLabelAlignment(Qt::AlignLeft);
     auto box = new QHBoxLayout;
-    auto pixmapRating = new QLabel;
-    pixmapRating->setPixmap(
-                         QPixmap(":/pentobi/icons/pentobi-rated-game-16.png"));
-    box->addWidget(pixmapRating);
     m_labelRating = new QLabel;
     box->addWidget(m_labelRating);
     box->addStretch();
