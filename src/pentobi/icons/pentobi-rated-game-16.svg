@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <defs>
-<linearGradient id="b" y2="17.64" gradientUnits="userSpaceOnUse" x2="-11.168" gradientTransform="matrix(.8556839 0 0 .8774250 17.36117 -2.66492)" y1="13.159" x1="-11.088">
+<linearGradient id="a" x1="-11.088" gradientUnits="userSpaceOnUse" y1="13.159" gradientTransform="matrix(.8556839 0 0 .8774250 17.36117 -2.66492)" x2="-11.168" y2="17.64">
 <stop stop-color="#fce94f" offset="0"/>
 <stop stop-color="#fefad8" offset=".5"/>
 <stop stop-color="#fce94f" offset="1"/>
 </linearGradient>
-<linearGradient id="a" y2="6.935" gradientUnits="userSpaceOnUse" x2="8.1788" gradientTransform="matrix(.8521031 0 0 1 .9336504 0)" y1=".56216" x1="7.7053">
-<stop stop-color="#888a85" offset="0"/>
-<stop stop-color="#a7a9a5" offset="1"/>
-</linearGradient>
 </defs>
-<g>
 <g stroke-linejoin="round">
-<path d="m1.7265 0.51281 12.2735 0.00376-0.819 2.01873-10.5845 0.0347z" fill-rule="evenodd" stroke="url(#a)" stroke-linecap="round" stroke-width=".9999999" fill="#babdb6"/>
-<path d="m11.758 9.3617 3.446-7.7501-0.445-1.11858-2.37 0.04016-3.7287 8.77012z" stroke="#888a85" fill="#d3d7cf"/>
-<path d="m4.3108 9.4458-3.40651-7.8341 0.32721-1.11419 2.4419 0.02008 3.7665 8.86901z" stroke="#888a85" fill="#d3d7cf"/>
-<path d="m12.513 11.045a4.4996 4.5855 0 1 1 -0.012 -0.37" fill-rule="evenodd" stroke="#c4a000" stroke-linecap="round" fill="#edd400"/>
+<g stroke="#555753">
+<path d="m1.7265 0.51281 12.2735 0.00376-0.819 2.01873-10.5845 0.0347z" fill-rule="evenodd" stroke-linecap="round" stroke-width=".9999999" fill="#babdb6"/>
+<path d="m11.758 9.3617 3.446-7.7501-0.445-1.11858-2.37 0.04016-3.7287 8.77012z" fill="#d3d7cf"/>
+<path d="m4.3108 9.4458-3.40651-7.8341 0.32721-1.11419 2.4419 0.02008 3.7665 8.86901z" fill="#d3d7cf"/>
 </g>
-<path d="m11.456 11.023a3.4721 3.5603 0 1 1 -0.0091 -0.28744" fill-rule="evenodd" stroke="#fce94f" stroke-linecap="round" stroke-width=".9999999" fill="url(#b)"/>
+<path d="m12.513 11.045a4.4996 4.5855 0 1 1 -0.012 -0.37" fill-rule="evenodd" stroke="#a08300" stroke-linecap="round" fill="#c7b200"/>
 </g>
+<path d="m11.456 11.023a3.4721 3.5603 0 1 1 -0.0091 -0.28744" fill-rule="evenodd" stroke="#fce94f" stroke-linecap="round" stroke-width=".9999999" fill="url(#a)"/>
 </svg>
