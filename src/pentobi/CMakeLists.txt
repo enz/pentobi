@@ -72,28 +72,43 @@ set(pentobi_TS
   )
 
 # Create PNG icons from SVG icons using the helper program src/convert
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
+file(COPY resources.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 foreach(icon ${pentobi_ICNS})
   string(REPLACE ".png" ".svg" svgicon ${icon})
   add_custom_command(
     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}"
-    COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+    COMMAND convert  ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
       ${CMAKE_CURRENT_BINARY_DIR}/icons/${icon}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
   )
 endforeach()
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/icons)
-file(COPY resources.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-if (USE_QT5)
+if(USE_QT5)
   qt5_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc
       OPTIONS -no-compress)
 else()
   qt4_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc
       OPTIONS -no-compress)
 endif()
+if(PENTOBI_HDPI)
+  file(COPY resources_2x.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+  foreach(icon ${pentobi_ICNS})
+    string(REPLACE ".png" ".svg" svgicon ${icon})
+    string(REPLACE ".png" "@2x.png" hdpiicon ${icon})
+    add_custom_command(
+      OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${hdpiicon}"
+      COMMAND convert --hdpi ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+        ${CMAKE_CURRENT_BINARY_DIR}/icons/${hdpiicon}
+      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+  )
+  endforeach()
+  qt5_add_resources(pentobi_RC_SRCS
+      ${CMAKE_CURRENT_BINARY_DIR}/resources_2x.qrc OPTIONS -no-compress)
+endif()
 
 # We don't use qt4_add_translation because it doesn't use option
 # -removeidentical (see QTBUG-44323)
-if (USE_QT5)
+if(USE_QT5)
   set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
 else()
   set(LRELEASE_EXECUTABLE ${QT_LRELEASE_EXECUTABLE})

@@ -69,7 +69,10 @@ int main(int argc, char* argv[])
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");
     Application app(argc, argv);
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+    app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+    Q_INIT_RESOURCE(libpentobi_gui_resources_2x);
+#endif
     try
     {
         // Our icon style doesn't fit very well with the flat menu item

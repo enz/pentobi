@@ -21,17 +21,50 @@ int main(int argc, char* argv[])
     QCoreApplication app(argc, argv); // Initializes the locale subsystem
     try
     {
-        if (argc != 3)
+        QString in, out;
+        bool createHdpi = false;
+        int nuArg = 0;
+        for (int i = 1; i < argc; ++i)
+        {
+            QString arg = QString::fromLocal8Bit(argv[i]);
+            if (arg == "--hdpi")
+            {
+                createHdpi = true;
+                continue;
+            }
+            else if (arg.startsWith('-'))
+                throw QString("Unknown option %1").arg(arg);
+            if (nuArg == 0)
+                in = arg;
+            else if (nuArg == 1)
+                out = arg;
+            ++nuArg;
+        }
+        if (nuArg != 2)
             throw QString("Need two arguments");
-        QString in = QString::fromLocal8Bit(argv[1]);
-        QString out = QString::fromLocal8Bit(argv[2]);
+
         QImageReader reader(in);
         QImage image = reader.read();
         if (image.isNull())
             throw QString("%1: %2").arg(in).arg(reader.errorString());
-        QImageWriter writer(out);
-        if (! writer.write(image))
-            throw QString("%1: %2").arg(out).arg(writer.errorString());
+        QSize size = image.size();
+        if (createHdpi)
+        {
+            QImageReader reader(in);
+            reader.setScaledSize(2 * size);
+            QImage image = reader.read();
+            if (image.isNull())
+                throw QString("%1: %2").arg(in).arg(reader.errorString());
+            QImageWriter writer(out);
+            if (! writer.write(image))
+                throw QString("%1: %2").arg(out).arg(writer.errorString());
+        }
+        else
+        {
+            QImageWriter writer(out);
+            if (! writer.write(image))
+                throw QString("%1: %2").arg(out).arg(writer.errorString());
+        }
     }
     catch (const QString& msg)
     {

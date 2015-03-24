@@ -10,6 +10,8 @@ Version 9.UNKNOWN (master)
 * On Linux, the manual is now installed in $PREFIX/share/help according
   to the freedesktop.org help specification.
 * The KDE thumbnailer plugin can now be compiled with KDE Frameworks 5.
+* Better support for high resolution displays if compiled with Qt 5.1
+  or newer and environment variable QT_DEVICE_PIXEL_RATIO is used.
 
 
 Version 9.0.UNKNOWN (v9-fixes)
@@ -29,8 +31,6 @@ Version 9.0.UNKNOWN (v9-fixes)
   enabled in the Computer Colors dialog while a move generation was running.
 * Fixed build failure with MSVC if MinGW was not also installed (because
   windres.exe was used)
-* Fixed too small move number labels if Pentobi is used with Qt 5 and
-  environment variable QT_DEVICE_PIXEL_RATIO on high resolution displays.
 * The Pentobi help browser now uses a larger font on Windows
 
 

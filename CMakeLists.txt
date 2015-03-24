@@ -95,6 +95,15 @@ if(PENTOBI_BUILD_QML)
   find_package(Qt5Gui 5.3 REQUIRED)
   find_package(Qt5Svg 5.3 REQUIRED)
 endif()
+# Enable support for high dpi images if Qt version is at least 5.1
+set(PENTOBI_HDPI 0)
+if(USE_QT5)
+  string(REGEX REPLACE "^[0-9]+\\.([0-9]+).*$" "\\1" QT_VERSION_MINOR
+      "${Qt5Widgets_VERSION}")
+  if(${QT_VERSION_MINOR} GREATER 0)
+    set(PENTOBI_HDPI 1)
+  endif()
+endif()
 
 if(UNIX)
   add_custom_target(dist
