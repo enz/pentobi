@@ -60,8 +60,8 @@ make Pentobi appear in the desktop menu and register it as handler for Blokus
 files (*.blksgf). On Ubuntu 15.04 with install prefix /usr/local, this can be
 done by running:
 
-  update-mime-database /usr/local/share/mime
-  update-desktop-database /usr/local/share/applications
+  sudo update-mime-database /usr/local/share/mime
+  sudo update-desktop-database /usr/local/share/applications
 
 
 == Building the Android version ==
