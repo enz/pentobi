@@ -986,7 +986,7 @@ void MainWindow::createActions()
             SLOT(previousVariation()));
 
     m_actionRatedGame = createAction(tr("&Rated Game"));
-    m_actionRatedGame->setToolTip(tr("Start a new rated game"));
+    m_actionRatedGame->setToolTip(tr("Start a rated game"));
     m_actionRatedGame->setShortcut(QString("Ctrl+Shift+N"));
     setIcon(m_actionRatedGame, "pentobi-rated-game");
     connect(m_actionRatedGame, SIGNAL(triggered()), SLOT(ratedGame()));

@@ -786,8 +786,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="989"/>
-        <source>Start a new rated game</source>
-        <translation>Ein neues gewertetes Spiel beginnen</translation>
+        <source>Start a rated game</source>
+        <translation>Ein gewertetes Spiel beginnen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1168"/>

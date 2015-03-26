@@ -242,8 +242,8 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="985"/>
-        <source>Start a new rated game</source>
-        <translation>Start a new rated game</translation>
+        <source>Start a rated game</source>
+        <translation>Start a rated game</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="1164"/>
