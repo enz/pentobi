@@ -15,7 +15,7 @@ add_library(pentobi-thumbnail MODULE
   PentobiThumbCreator.cpp
 )
 
-target_link_libraries(pentobi-thumbnail PRIVATE
+target_link_libraries(pentobi-thumbnail
   pentobi_kde_thumbnailer
   KF5::KIOWidgets
 )
