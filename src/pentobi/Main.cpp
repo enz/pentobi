@@ -75,10 +75,6 @@ int main(int argc, char* argv[])
 #endif
     try
     {
-        // Our icon style doesn't fit very well with the look of the menu item
-        // check boxes in some newer styles (e.g. Breeze in KDE5)
-        QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
-
         // For some reason, labels in the status bar have a border on
         // Windows 7 with Qt 4.8. We don't want that.
         app.setStyleSheet("QStatusBar::item { border: 0px solid black }");
