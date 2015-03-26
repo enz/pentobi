@@ -2616,10 +2616,9 @@ void MainWindow::ratedGame()
     m_history->getNextRatedGameSettings(maxLevel, random,
                                         level, m_ratedGameColor);
     QMessageBox msgBox(this);
-    initQuestion(msgBox, tr("Start new rated game?"),
+    initQuestion(msgBox, tr("Start rated game?"),
                  "<html>" +
-                 tr("In the next game, you will play %1 against"
-                    " Pentobi level&nbsp;%2.")
+                 tr("In this game, you play %1 against Pentobi level&nbsp;%2.")
                  .arg(getPlayerString(variant, m_ratedGameColor)).arg(level));
     auto startGameButton =
         msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);

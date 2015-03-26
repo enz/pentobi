@@ -661,13 +661,13 @@
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2606"/>
-        <source>Start new rated game?</source>
-        <translation>Neues gewertetes Spiel beginnen?</translation>
+        <source>Start rated game?</source>
+        <translation>Gewertetes Spiel beginnen?</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2608"/>
-        <source>In the next game, you will play %1 against Pentobi level&amp;nbsp;%2.</source>
-        <translation>Im nächsten Spiel spielen Sie %1 gegen Pentobi Spielstufe&amp;nbsp;%2.</translation>
+        <source>In this game, you play %1 against Pentobi level&amp;nbsp;%2.</source>
+        <translation>In diesem Spiel spielen Sie %1 gegen Pentobi Spielstufe&amp;nbsp;%2.</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="2612"/>
