@@ -3087,62 +3087,10 @@ void MainWindow::setMoveMarkingNone(bool checked)
 
 void MainWindow::setPlayToolTip()
 {
-    QString s;
-    auto variant = m_bd.get_variant();
-    Color c = m_currentColor;
-    bool isComputerColor = m_computerColors[m_currentColor];
-    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
-    {
-        if (c == Color(0) || c == Color(2))
-        {
-            if (isComputerColor)
-                s = tr("Make the computer continue to play Blue/Red");
-            else
-                s = tr("Make the computer play Blue/Red");
-        }
-        else
-        {
-            if (isComputerColor)
-                s = tr("Make the computer continue to play Yellow/Green");
-            else
-                s = tr("Make the computer play Yellow/Green");
-        }
-    }
-    else
-    {
-        bool isTwoColorVariant =
-            (variant == Variant::duo || variant == Variant::junior);
-        if (c == Color(0))
-        {
-            if (isComputerColor)
-                s = tr("Make the computer continue to play Blue");
-            else
-                s = tr("Make the computer play Blue");
-        }
-        else if (c == Color(1) && ! isTwoColorVariant)
-        {
-            if (isComputerColor)
-                s = tr("Make the computer continue to play Yellow");
-            else
-                s = tr("Make the computer play Yellow");
-        }
-        else if ((c == Color(1) && isTwoColorVariant)
-                 || (c == Color(3) && ! isTwoColorVariant))
-        {
-            if (isComputerColor)
-                s = tr("Make the computer continue to play Green");
-            else
-                s = tr("Make the computer play Green");
-        }
-        else
-        {
-            if (isComputerColor)
-                s = tr("Make the computer continue to play Red");
-            else
-                s = tr("Make the computer play Red");
-        }
-    }
-    m_actionPlay->setToolTip(s);
+    m_actionPlay->setToolTip(
+                m_computerColors[m_currentColor] ?
+                    tr("Make the computer continue to play the current color") :
+                    tr("Make the computer play the current color"));
 }
 
 void MainWindow::setRated(bool isRated)

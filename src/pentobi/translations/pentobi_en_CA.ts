@@ -530,54 +530,6 @@
         <source>No comment found</source>
         <translation>No comment found</translation>
     </message>
-    <message>
-        <source>Make the computer continue to play Blue/Red</source>
-        <translation>Make the computer continue to play Blue/Red</translation>
-    </message>
-    <message>
-        <source>Make the computer play Blue/Red</source>
-        <translation>Make the computer play Blue/Red</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play Yellow/Green</source>
-        <translation>Make the computer continue to play Yellow/Green</translation>
-    </message>
-    <message>
-        <source>Make the computer play Yellow/Green</source>
-        <translation>Make the computer play Yellow/Green</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play Blue</source>
-        <translation>Make the computer continue to play Blue</translation>
-    </message>
-    <message>
-        <source>Make the computer play Blue</source>
-        <translation>Make the computer play Blue</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play Yellow</source>
-        <translation>Make the computer continue to play Yellow</translation>
-    </message>
-    <message>
-        <source>Make the computer play Yellow</source>
-        <translation>Make the computer play Yellow</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play Green</source>
-        <translation>Make the computer continue to play Green</translation>
-    </message>
-    <message>
-        <source>Make the computer play Green</source>
-        <translation>Make the computer play Green</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play Red</source>
-        <translation>Make the computer continue to play Red</translation>
-    </message>
-    <message>
-        <source>Make the computer play Red</source>
-        <translation>Make the computer play Red</translation>
-    </message>
     <message numerus="yes">
         <source>Blue wins with %n point(s).</source>
         <translation>
@@ -906,6 +858,14 @@
     <message>
         <source>In this game, you play %1 against Pentobi level&amp;nbsp;%2.</source>
         <translation>In this game, you play %1 against Pentobi level&amp;nbsp;%2.</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Make the computer continue to play the current colour</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Make the computer play the current colour</translation>
     </message>
 </context>
 <context>
