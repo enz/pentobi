@@ -47,7 +47,8 @@ public:
     {
     public:
         /** Constructor.
-            @param p The first point of the move */
+            @param p The first point of the move
+            @param playout_features */
         Compute(Point p, const PlayoutFeatures& playout_features)
             : m_value(playout_features.m_point_value[p])
         { }

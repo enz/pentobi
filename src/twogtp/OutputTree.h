@@ -48,8 +48,9 @@ public:
 
     /** Generate a move for a player from the tree.
         @param is_player_black
-        @param bd The board with the current position and color to play.
-        @param mv[out] The generated move, or Move::null() if no move is in the
+        @param bd The board with the current position.
+        @param to_play The color to generate the move for..
+        @param[out] mv The generated move, or Move::null() if no move is in the
         tree for this position or if the player should generate a real move
         now. */
     void generate_move(bool is_player_black, const Board& bd, Color to_play,
