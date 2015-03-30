@@ -279,10 +279,6 @@ public:
 
     bool get_reuse_tree() const;
 
-    void set_prune_full_tree(bool enable);
-
-    bool get_prune_full_tree() const;
-
     /** Maximum parent visit count for applying RAVE. */
     void set_rave_parent_max(Float value);
 
@@ -545,8 +541,6 @@ private:
     bool m_reuse_subtree = true;
 
     bool m_reuse_tree = false;
-
-    bool m_prune_full_tree = true;
 
     /** Player to play at the root node of the search. */
     PlayerInt m_player;
@@ -1040,12 +1034,6 @@ inline auto SearchBase<S, M, R>::get_prune_count_start() const -> Float
 }
 
 template<class S, class M, class R>
-inline bool SearchBase<S, M, R>::get_prune_full_tree() const
-{
-    return m_prune_full_tree;
-}
-
-template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_rave_dist_final() const -> Float
 {
     return m_rave_dist_final;
@@ -1478,11 +1466,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                 }
             if (! is_out_of_mem)
                 break;
-            if (! m_prune_full_tree)
-            {
-                log("Maximum tree size reached");
-                break;
-            }
             double time = m_timer();
             if (! prune(time_source, time, max_time - time, prune_min_count,
                         prune_min_count))
@@ -1661,12 +1644,6 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::set_prune_count_start(Float n)
 {
     m_prune_count_start = n;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_prune_full_tree(bool enable)
-{
-    m_prune_full_tree = enable;
 }
 
 template<class S, class M, class R>
