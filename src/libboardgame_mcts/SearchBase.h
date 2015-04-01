@@ -358,14 +358,14 @@ public:
     size_t get_nu_simulations() const;
 
     /** Select the move to play.
-        Uses select_child_final() on the root node. */
+        Uses select_final(). */
     bool select_move(Move& mv) const;
 
-    /** Select the best child of a node after the search.
-        Selects child with highest visit count; the value is used as a
+    /** Select the best child of the root node after the search.
+        Selects child with highest number of wins; the value is used as a
         tie-breaker for equal counts (important at very low number of
         simulations, e.g. all children have count 1 or 0). */
-    const Node* select_child_final(const Node& node) const;
+    const Node* select_final() const;
 
     State& get_state(unsigned thread_id);
 
@@ -851,7 +851,7 @@ template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
                                               Float remaining) const
 {
-    // select_child_final() selects move with highest number of wins.
+    // select_final() selects move with highest number of wins.
     Float max_wins = 0;
     Float second_max = 0;
     for (auto& i : m_tree.get_root_children())
@@ -1233,7 +1233,7 @@ string SearchBase<S, M, R>::get_info() const
       << setprecision(0) << ", ValCnt: " << get_root_val().get_count()
       << ", VstCnt: " << get_root_visit_count()
       << ", Sim: " << m_nu_simulations;
-    auto child = select_child_final(root);
+    auto child = select_final();
     if (child && root.get_visit_count() > 0)
         s << setprecision(1) << ", Chld: "
           << (100 * child->get_visit_count() / root.get_visit_count())
@@ -1563,11 +1563,10 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 }
 
 template<class S, class M, class R>
-auto SearchBase<S, M, R>::select_child_final(
-        const Node& node) const-> const Node*
+auto SearchBase<S, M, R>::select_final() const-> const Node*
 {
     // Select the child with the highest number of wins
-    auto children = m_tree.get_children(node);
+    auto children = m_tree.get_children(m_tree.get_root());
     if (children.empty())
         return nullptr;
     auto i = children.begin();
@@ -1588,7 +1587,7 @@ auto SearchBase<S, M, R>::select_child_final(
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::select_move(Move& mv) const
 {
-    auto child = select_child_final(m_tree.get_root());
+    auto child = select_final();
     if (child)
     {
         mv = child->get_move();
