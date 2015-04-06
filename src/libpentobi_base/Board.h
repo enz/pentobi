@@ -821,13 +821,17 @@ inline void Board::place(Color c, Move mv)
     while (++i != end);
     i = info_ext.begin_attach();
     end = info_ext.end_attach();
+    auto& attach_points = m_attach_points[c];
+    auto n = attach_points.size();
     do
         if (! state_color.forbidden[*i] && ! state_color.is_attach_point[*i])
         {
             state_color.is_attach_point[*i] = true;
-            m_attach_points[c].push_back(*i);
+            attach_points.get_unchecked(n) = *i;
+            ++n;
         }
     while (++i != end);
+    attach_points.resize(n);
     LIBBOARDGAME_ASSERT(i == info_ext.begin_adj());
     end += info_ext.size_adj_points;
     do
