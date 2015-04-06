@@ -161,17 +161,17 @@ void SharedConst::init(bool is_followup)
                         continue;
                     auto begin = precomp_moves.get_size();
                     auto moves = old_precomp_moves.get_moves(piece, p, i);
-                    for (auto m = moves.begin(); m != moves.end(); ++m)
-                        if (! is_forbidden_at_root[c][*m])
+                    for (auto& mv : moves)
+                        if (! is_forbidden_at_root[c][mv])
                         {
                             if (is_followup)
                                 // Assert that we don't overwrite old content
                                 // we still need during in-place construction
                                 LIBBOARDGAME_ASSERT(
-                                    m - precomp_moves.move_lists_begin()
-                                    >= static_cast<ptrdiff_t>(
-                                                 precomp_moves.get_size()));
-                            precomp_moves.push_move(*m);
+                                    &mv - precomp_moves.move_lists_begin()
+                                            >= static_cast<ptrdiff_t>(
+                                                precomp_moves.get_size()));
+                            precomp_moves.push_move(mv);
                         }
                     auto size = precomp_moves.get_size() - begin;
                     precomp_moves.set_list_range(p, i, piece, begin, size);

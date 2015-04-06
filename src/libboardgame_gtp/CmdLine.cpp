@@ -91,10 +91,10 @@ void CmdLine::init(const CmdLine& c)
     m_idx_name = c.m_idx_name;
     m_line = c.m_line;
     m_elem.clear();
-    for (auto i = c.m_elem.begin(); i != c.m_elem.end(); ++i)
+    for (auto& i : c.m_elem)
     {
-        auto begin = m_line.begin() + (i->begin() - c.m_line.begin());
-        auto end = m_line.begin() + (i->end() - c.m_line.begin());
+        auto begin = m_line.begin() + (i.begin() - c.m_line.begin());
+        auto end = m_line.begin() + (i.end() - c.m_line.begin());
         m_elem.emplace_back(begin, end);
     }
 }
