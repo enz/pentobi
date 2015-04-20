@@ -15,7 +15,7 @@ namespace geometry_util {
 //-----------------------------------------------------------------------------
 
 /** Shift a list of points as close to the (0,0) point as possible.
-    This will minimize the minumum x and y coordinates. The function also
+    This will minimize the minimum x and y coordinates. The function also
     returns the width and height of the bounding box and the offset that was
     subtracted from the points for the shifting.
     @note This transformation does not preserve point types. If the original

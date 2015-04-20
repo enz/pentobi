@@ -33,7 +33,7 @@ public:
     virtual void init();
 
     /** Initialize from an existing SGF tree.
-        @param root The root node of the SGF tree; the ownership is transfered
+        @param root The root node of the SGF tree; the ownership is transferred
         to this class. */
     virtual void init(unique_ptr<SgfNode>& root);
 

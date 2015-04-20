@@ -36,9 +36,9 @@ public:
     void clear();
 
     /** Write response to output stream.
-        Also sanitizes reponses containing empty lines ("\n\n" cannot occur
-        in a reponse, because it means end of response; it will be replaced by
-        "\n \n") and adds "\n\n" add the end of the reponse. */
+        Also sanitizes responses containing empty lines ("\n\n" cannot occur
+        in a response, because it means end of response; it will be replaced by
+        "\n \n") and adds "\n\n" add the end of the response. */
     void write(ostream& out, string& buffer) const;
 
 private:

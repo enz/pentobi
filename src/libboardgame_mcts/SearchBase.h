@@ -1703,7 +1703,7 @@ void SearchBase<S, M, R>::update_lgr(ThreadState& thread_state)
         // Note: this handles a draw as a win. Without additional information
         // we cannot make a good decision how to handle draws and some
         // experiments in Blokus Duo showed (with low confidence) that treating
-        // them as a win for both players is slighly better than treating them
+        // them as a win for both players is slightly better than treating them
         // as a loss for both.
         is_winner[i] = (eval[i] == max_eval);
     auto& moves = simulation.moves;

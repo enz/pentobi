@@ -50,7 +50,7 @@ public:
 
     float get() const;
 
-    /** Get rating rounded to an interger. */
+    /** Get rating rounded to an integer. */
     int to_int() const;
 
 private:

@@ -28,7 +28,7 @@ public:
     /** Initialize game from a SGF tree.
         @note If the tree contains invalid properties, future calls to
         goto_node() might throw an exception.
-        @param root The root node of the SGF tree; the ownership is transfered
+        @param root The root node of the SGF tree; the ownership is transferred
         to this class.
         @throws InvalidTree, if the root node contains invalid
         properties */

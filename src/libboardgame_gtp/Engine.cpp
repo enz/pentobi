@@ -142,7 +142,7 @@ void Engine::cmd_quit()
 }
 
 /** Return empty version string.
-    The GTP standard says to return empty string, if no meaningful reponse
+    The GTP standard says to return empty string, if no meaningful response
     is available. */
 void Engine::cmd_version(Response&)
 {
