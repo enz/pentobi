@@ -10,6 +10,8 @@
 
 #include "WallTimeSource.h"
 
+#include <chrono>
+
 namespace libboardgame_util {
 
 using namespace std::chrono;

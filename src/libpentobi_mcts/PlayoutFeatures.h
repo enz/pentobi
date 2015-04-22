@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_MCTS_PLAYOUT_FEATURES_H
 #define LIBPENTOBI_MCTS_PLAYOUT_FEATURES_H
 
-#include <algorithm>
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/PointList.h"
 

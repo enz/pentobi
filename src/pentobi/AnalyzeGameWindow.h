@@ -12,7 +12,6 @@
 #include <config.h>
 #endif
 
-#include <vector>
 #include <QDialog>
 #include "AnalyzeGameWidget.h"
 

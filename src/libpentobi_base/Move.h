@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_BASE_MOVE_H
 #define LIBPENTOBI_BASE_MOVE_H
 
-#include <climits>
 #include <cstdint>
 #include "libboardgame_util/Assert.h"
 

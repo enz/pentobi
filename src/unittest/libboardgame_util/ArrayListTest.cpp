@@ -8,7 +8,6 @@
 #include <config.h>
 #endif
 
-#include <sstream>
 #include "libboardgame_util/ArrayList.h"
 #include "libboardgame_test/Test.h"
 

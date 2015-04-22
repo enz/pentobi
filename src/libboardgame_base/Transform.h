@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_BASE_TRANSFORM_H
 #define LIBBOARDGAME_BASE_TRANSFORM_H
 
-#include <vector>
 #include "CoordPoint.h"
 
 namespace libboardgame_base {

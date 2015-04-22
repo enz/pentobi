@@ -6,7 +6,6 @@
 
 #include "PieceModel.h"
 
-#include <limits>
 #include <QDebug>
 #include "libboardgame_base/RectTransform.h"
 #include "libpentobi_base/TrigonTransform.h"

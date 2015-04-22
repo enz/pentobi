@@ -10,6 +10,8 @@
 
 #include "Barrier.h"
 
+#include "Assert.h"
+
 namespace libboardgame_util {
 
 //----------------------------------------------------------------------------

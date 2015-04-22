@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_BASE_BOARD_H
 #define LIBPENTOBI_BASE_BOARD_H
 
-#include <cstddef>
 #include "BoardConst.h"
 #include "ColorMap.h"
 #include "ColorMove.h"
@@ -20,7 +19,6 @@
 #include "PointState.h"
 #include "Setup.h"
 #include "StartingPoints.h"
-#include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
 

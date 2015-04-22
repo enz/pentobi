@@ -9,7 +9,6 @@
 
 #include <limits>
 #include <iosfwd>
-#include <vector>
 
 namespace libboardgame_base {
 

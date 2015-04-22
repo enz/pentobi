@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_UTIL_WALL_TIME_SOURCE_H
 #define LIBBOARDGAME_UTIL_WALL_TIME_SOURCE_H
 
-#include <chrono>
 #include "TimeSource.h"
 
 namespace libboardgame_util {

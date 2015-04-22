@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_MCTS_NODE_H
 #define LIBBOARDGAME_MCTS_NODE_H
 
-#include <limits>
 #include <cstdint>
 #include "Atomic.h"
 #include "libboardgame_util/Assert.h"

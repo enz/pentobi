@@ -10,8 +10,8 @@
 
 #include "Memory.h"
 
-#include <algorithm>
 #ifdef _WIN32
+#include <algorithm>
 #include <windows.h>
 #else
 #include <unistd.h>

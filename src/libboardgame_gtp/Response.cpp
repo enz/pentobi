@@ -10,8 +10,6 @@
 
 #include "Response.h"
 
-#include <iostream>
-
 namespace libboardgame_gtp {
 
 //-----------------------------------------------------------------------------

@@ -10,7 +10,6 @@
 
 #include "Writer.h"
 
-#include <cctype>
 #include <sstream>
 
 namespace libboardgame_sgf {

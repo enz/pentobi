@@ -10,7 +10,6 @@
 
 #include "Transform.h"
 
-#include <cmath>
 #include "libboardgame_util/Assert.h"
 
 namespace libboardgame_base {

@@ -8,7 +8,6 @@
 #include <config.h>
 #endif
 
-#include <cmath>
 #include "libboardgame_gtp/Arguments.h"
 #include "libboardgame_test/Test.h"
 

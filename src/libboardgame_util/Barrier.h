@@ -7,8 +7,6 @@
 #ifndef LIBBOARDGAME_UTIL_BARRIER_H
 #define LIBBOARDGAME_UTIL_BARRIER_H
 
-#include "Assert.h"
-
 #include <condition_variable>
 #include <mutex>
 

@@ -10,8 +10,6 @@
 
 #include "libboardgame_mcts/Node.h"
 
-#include <cmath>
-#include <cstring>
 #include "libboardgame_test/Test.h"
 
 using namespace std;

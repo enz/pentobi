@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_GTP_RESPONSE_H
 #define LIBBOARDGAME_GTP_RESPONSE_H
 
-#include <iosfwd>
 #include <sstream>
 #include <string>
 

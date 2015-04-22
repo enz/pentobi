@@ -7,7 +7,7 @@
 #ifndef LIBBOARDGAME_SYS_MEMORY_H
 #define LIBBOARDGAME_SYS_MEMORY_H
 
-#include <cstring>
+#include <cstddef>
 
 namespace libboardgame_sys {
 

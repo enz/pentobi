@@ -11,7 +11,6 @@
 #include "TrigonTransform.h"
 
 #include <cmath>
-#include "libboardgame_util/Assert.h"
 
 namespace libpentobi_base {
 
