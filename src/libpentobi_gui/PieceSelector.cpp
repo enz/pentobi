@@ -74,17 +74,14 @@ void PieceSelector::checkUpdate()
 {
     bool disabledStatus[maxColumns][maxRows];
     setDisabledStatus(disabledStatus);
-    bool changed = false;
     for (unsigned x = 0; x < m_nuColumns; ++x)
         for (unsigned y = 0; y < m_nuRows; ++y)
             if (! m_piece[x][y].is_null()
-                && disabledStatus[x][y] != m_disabledStatus[x][y])
+                    && disabledStatus[x][y] != m_disabledStatus[x][y])
             {
-                changed = true;
-                break;
+                update();
+                return;
             }
-    if (changed)
-        update();
 }
 
 void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
