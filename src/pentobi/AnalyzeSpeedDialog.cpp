@@ -24,6 +24,10 @@ AnalyzeSpeedDialog::AnalyzeSpeedDialog(QWidget* parent, const QString& title)
     setComboBoxEditable(false);
 }
 
+AnalyzeSpeedDialog::~AnalyzeSpeedDialog()
+{
+}
+
 void AnalyzeSpeedDialog::accept()
 {
     m_speedValue = m_items.indexOf(textValue());
