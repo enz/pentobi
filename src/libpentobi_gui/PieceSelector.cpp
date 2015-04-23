@@ -135,6 +135,8 @@ void PieceSelector::init()
         m_nuColumns = 33;
         m_nuRows = 6;
     }
+    LIBBOARDGAME_ASSERT(m_nuColumns <= maxColumns);
+    LIBBOARDGAME_ASSERT(m_nuRows <= maxRows);
     for (unsigned y = 0; y < m_nuRows; ++y)
         for (unsigned x = 0; x < m_nuColumns; ++x)
         {
