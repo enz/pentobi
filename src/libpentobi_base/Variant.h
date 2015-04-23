@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include "Color.h"
 #include "Geometry.h"
 #include "libboardgame_base/PointTransform.h"
