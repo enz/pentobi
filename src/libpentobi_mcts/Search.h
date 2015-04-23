@@ -30,7 +30,7 @@ using libpentobi_base::Setup;
     The maximum number of players is 6, which occurs in Classic 3 with 3
     real players and 3 pseudo-players for the 4th color.
     @note @ref libboardgame_avoid_stack_allocation */
-class Search
+class Search final
     : public libboardgame_mcts::SearchBase<State, Move, SearchParamConst>
 {
 public:

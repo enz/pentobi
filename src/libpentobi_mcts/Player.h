@@ -21,7 +21,7 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-class Player
+class Player final
     : public PlayerBase
 {
 public:

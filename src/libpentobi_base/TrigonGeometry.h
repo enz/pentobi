@@ -31,7 +31,7 @@ using namespace std;
     </tt>
     There are two point types: 0=upward triangle, 1=downward triangle.
     @tparam P An instantiation of libboardgame_base::Point */
-class TrigonGeometry
+class TrigonGeometry final
     : public Geometry
 {
 public:
