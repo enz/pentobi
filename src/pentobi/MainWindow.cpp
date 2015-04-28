@@ -1279,8 +1279,6 @@ QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
     LIBBOARDGAME_ASSERT(level >= 1 && level <= maxLevel);
     auto action = createAction(text);
     action->setCheckable(true);
-    if (level == m_level)
-        action->setChecked(true);
     action->setActionGroup(group);
     action->setData(level);
     connect(action, SIGNAL(triggered(bool)), SLOT(setLevel(bool)));
