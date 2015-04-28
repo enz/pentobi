@@ -421,14 +421,14 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_pieces = create_pieces_junior(m_geo, *m_transforms);
         m_nu_moves = Move::onboard_moves_junior + 1;
     }
-    else if (board_type == BoardType::duo && piece_set == PieceSet::classic)
+    else
     {
+        LIBBOARDGAME_ASSERT(board_type == BoardType::duo);
+        LIBBOARDGAME_ASSERT(piece_set == PieceSet::classic);
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_classic(m_geo, *m_transforms);
         m_nu_moves = Move::onboard_moves_duo + 1;
     }
-    else
-        LIBBOARDGAME_ASSERT(false);
     m_move_info.reset(new MoveInfo[m_nu_moves]);
     m_move_info_ext.reset(new MoveInfoExt[m_nu_moves]);
     m_move_info_ext_2.reset(new MoveInfoExt2[m_nu_moves]);
