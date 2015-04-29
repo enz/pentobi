@@ -33,11 +33,6 @@ target_link_libraries(pentobi_qml
   boardgame_sys
 )
 
-# Remove once we require CMake 2.8.11
-if (WIN32)
-  target_link_libraries(pentobi_qml Qt5::WinMain)
-endif()
-
 qt5_use_modules(pentobi_qml Concurrent Gui Qml Svg)
 
 if (DEFINED CMAKE_THREAD_LIBS_INIT)
