@@ -205,7 +205,8 @@ SOURCES += \
 }
 
 TRANSLATIONS += \
-    qml/translations/pentobi_qml_de.ts
+    qml/translations/pentobi_qml_de.ts \
+    qml/translations/replace_qtbase_de.ts
 
 OTHER_FILES += \
     android/AndroidManifest.xml
