@@ -97,7 +97,7 @@ if(PENTOBI_BUILD_QML)
 endif()
 # Enable support for high dpi images if Qt version is at least 5.1
 set(PENTOBI_HDPI 0)
-if(USE_QT5)
+if(PENTOBI_BUILD_GUI AND USE_QT5)
   string(REGEX REPLACE "^[0-9]+\\.([0-9]+).*$" "\\1" QT_VERSION_MINOR
       "${Qt5Widgets_VERSION}")
   if(${QT_VERSION_MINOR} GREATER 0)
@@ -115,7 +115,7 @@ endif()
 add_subdirectory(doc)
 add_subdirectory(src)
 add_subdirectory(data)
-if(WIN32)
+if(WIN32 AND PENTOBI_BUILD_GUI)
   add_subdirectory(windows)
 endif()
 
