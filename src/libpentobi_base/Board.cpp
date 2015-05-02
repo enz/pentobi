@@ -312,21 +312,18 @@ bool Board::is_game_over() const
 /** Remove forbidden points from attach point lists.
     The attach point lists do not guarantee that they contain only
     non-forbidden attach points because that would be too expensive to
-    incrementally update but at certain points that are not performance
+    update incrementally but at certain times that are not performance
     critical (e.g. before taking a snapshot), we can remove them. */
 void Board::optimize_attach_point_lists()
 {
+    PointList l;
     for (Color c : get_colors())
     {
-        auto& attach_points = m_attach_points[c];
-        for (auto i = attach_points.begin(); i != attach_points.end(); ++i)
-            if (is_forbidden(*i, c))
-            {
-                m_state_color[c].is_attach_point[*i] = false;
-                attach_points.remove_fast(i);
-                --i;
-                continue;
-            }
+        l.clear();
+        for (Point p : m_attach_points[c])
+            if (! is_forbidden(p, c))
+                l.push_back(p);
+        m_attach_points[c] = l;
     }
 }
 
