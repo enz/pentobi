@@ -157,7 +157,7 @@ void BoardPainter::drawMarks(QPainter& painter,
             }
             else
             {
-                color.setAlphaF(0.7);
+                color.setAlphaF(0.6);
                 QPen pen(color);
                 pen.setWidthF(0.05 * m_fieldHeight);
                 painter.setPen(pen);
