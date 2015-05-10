@@ -10,6 +10,7 @@
 
 #include "GuiBoardUtil.h"
 
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/StringUtil.h"
 
@@ -18,6 +19,7 @@ namespace gui_board_util {
 using libpentobi_base::ColorMove;
 using libpentobi_base::PentobiTree;
 using libboardgame_sgf::SgfNode;
+using libboardgame_sgf::util::is_main_variation;
 using libboardgame_util::get_letter_coord;
 using libboardgame_util::log;
 
@@ -100,7 +102,10 @@ void markMove(GuiBoard& guiBoard, const Game& game, const SgfNode& node,
     Point p = bd.get_move_info_ext_2(mv.move).label_pos;
     if (markWithDot)
     {
-        guiBoard.setMark(p, true);
+        if (markVariations && ! is_main_variation(game.get_current()))
+            guiBoard.setMark(p, BoardPainter::circle);
+        else
+            guiBoard.setMark(p, BoardPainter::dot);
         return;
     }
     QString label;

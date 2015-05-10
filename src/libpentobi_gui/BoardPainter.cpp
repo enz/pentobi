@@ -140,18 +140,29 @@ void BoardPainter::drawLabels(QPainter& painter,
 
 void BoardPainter::drawMarks(QPainter& painter,
                              const Grid<PointState>& pointState,
-                             Variant variant, const Grid<bool>& marks)
+                             Variant variant, const Grid<int>& marks)
 {
     bool isTrigon = (variant == Variant::trigon
                      || variant == Variant::trigon_2
                      || variant == Variant::trigon_3);
     for (Point p : *m_geo)
-        if (marks[p])
+        if (marks[p] & (dot | circle))
         {
-            painter.setPen(Qt::NoPen);
             QColor color = Util::getMarkColor(variant, pointState[p]);
-            color.setAlphaF(0.5);
-            painter.setBrush(color);
+            if (marks[p] & dot)
+            {
+                color.setAlphaF(0.5);
+                painter.setPen(color);
+                painter.setBrush(color);
+            }
+            else
+            {
+                color.setAlphaF(0.7);
+                QPen pen(color);
+                pen.setWidthF(0.05 * m_fieldHeight);
+                painter.setPen(pen);
+                painter.setBrush(Qt::NoBrush);
+            }
             qreal x = (static_cast<float>(m_geo->get_x(p)) + 0.5f)
                     * m_fieldWidth;
             qreal y = (static_cast<float>(m_geo->get_y(p)) + 0.5f)
@@ -164,10 +175,10 @@ void BoardPainter::drawMarks(QPainter& painter,
                     y += 0.167 * m_fieldHeight;
                 else
                     y -= 0.167 * m_fieldHeight;
-                size = 0.11 * m_fieldHeight;
+                size = 0.1 * m_fieldHeight;
             }
             else
-                size = 0.13 * m_fieldHeight;
+                size = 0.12 * m_fieldHeight;
             painter.drawEllipse(QPointF(x, y), size, size);
         }
 }
@@ -272,7 +283,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
 void BoardPainter::paintPieces(QPainter& painter,
                                const Grid<PointState>& pointState,
                                const Grid<QString>* labels,
-                               const Grid<bool>* marks)
+                               const Grid<int>* marks)
 {
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();

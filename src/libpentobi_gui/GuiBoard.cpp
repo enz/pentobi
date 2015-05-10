@@ -77,7 +77,7 @@ void GuiBoard::clearMarkup()
 {
     for (Point p : m_bd)
     {
-        setMark(p, false);
+        m_marks[p] = 0;
         setLabel(p, "");
     }
 }
@@ -99,7 +99,7 @@ void GuiBoard::copyFromBoard(const Board& bd)
         m_isInitialized = true;
         m_pointState.copy_from(bd.get_point_state(), geo);
         m_labels.fill("", geo);
-        m_marks.fill(false, geo);
+        m_marks.fill(0, geo);
         setEmptyBoardDirty();
     }
     else
@@ -409,13 +409,13 @@ void GuiBoard::setLabel(Point p, const QString& text)
     }
 }
 
-void GuiBoard::setMark(Point p, bool enable)
+void GuiBoard::setMark(Point p, int mark, bool enable)
 {
     if (! m_isInitialized)
         return;
-    if (m_marks[p] != enable)
+    if ((m_marks[p] & mark) != enable)
     {
-        m_marks[p] = enable;
+        m_marks[p] ^= mark;
         setDirty();
     }
 }

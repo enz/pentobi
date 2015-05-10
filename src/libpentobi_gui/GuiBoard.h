@@ -59,7 +59,7 @@ public:
 
     void setLabel(Point p, const QString& text);
 
-    void setMark(Point p, bool enable);
+    void setMark(Point p, int mark, bool enable = true);
 
     void clearMarkup();
 
@@ -129,7 +129,7 @@ private:
 
     Grid<QString> m_labels;
 
-    Grid<bool> m_marks;
+    Grid<int> m_marks;
 
     BoardPainter m_boardPainter;
 
