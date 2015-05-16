@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.0
 import "." as Pentobi
 import "Main.js" as Logic
 
@@ -13,12 +14,10 @@ ToolBar {
         Item { Layout.preferredWidth: _isAndroid ? 0.1 * parent.height : 0 }
         // App icon (only on Android)
         Image {
-            property real size: parent.height
-
             visible: _isAndroid
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            // Similar as in Pentobi.ToolButton but pentobi.svg is 48x48
-            height: size < 26 || size > 100 ? 0.76 * size : size < 50 ? 24 : 48
+            // pentobi.svg is 48x48
+            height: Screen.pixelDensity < 5 ? 24 : 48
             width: height
             sourceSize.height: height
             sourceSize.width: width
