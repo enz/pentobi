@@ -287,7 +287,7 @@ inline auto Tree<N>::get_node(NodeIdx i) const -> const Node&
 template<typename N>
 inline bool Tree<N>::NodeExpander::is_tree_full() const
 {
-    return m_thread_storage.next == m_thread_storage.end;
+    return m_thread_storage.next >= m_thread_storage.end;
 }
 
 template<typename N>
