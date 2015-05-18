@@ -73,8 +73,8 @@
         <translation>Version %1</translation>
     </message>
     <message>
-        <source>Copyright &amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
-        <translation>Copyright &amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</translation>
+        <source>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
+        <translation>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</translation>
     </message>
     <message>
         <source>Analyze Game</source>
