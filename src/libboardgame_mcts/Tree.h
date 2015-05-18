@@ -255,7 +255,7 @@ inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
                                              Float count)
 {
     LIBBOARDGAME_ASSERT(count >= m_child_min_count);
-    if (m_thread_storage.next == m_thread_storage.end)
+    if (m_thread_storage.next >= m_thread_storage.end)
         return;
     m_thread_storage.next->init(mv, value, count);
     ++m_thread_storage.next;
