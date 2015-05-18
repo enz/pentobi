@@ -413,7 +413,7 @@ void GuiBoard::setMark(Point p, int mark, bool enable)
 {
     if (! m_isInitialized)
         return;
-    if ((m_marks[p] & mark) != enable)
+    if (((m_marks[p] & mark) != 0) != enable)
     {
         m_marks[p] ^= mark;
         setDirty();
