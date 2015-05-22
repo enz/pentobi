@@ -39,7 +39,7 @@ in its package repository. They can be installed with the shell command:
 
 A thumbnailer plugin for KDE 4 can be built by using the cmake option
 -DPENTOBI_BUILD_KDE_THUMBNAILER=1. In this case, the KDE development files
-need to be installed (package kdelibs5-dev on Ubuntu 13.10). Note that on
+need to be installed (package kdelibs5-dev on Ubuntu 15.04). Note that on
 Ubuntu 15.04, the plugin will not be found if the default installation prefix
 /usr/local is used. You need to add KDEDIRS=/usr/local to /etc/environment.
 After that, you can enable previews for Blokus game file in the Dolphin file
