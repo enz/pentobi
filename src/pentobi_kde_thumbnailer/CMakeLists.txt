@@ -10,6 +10,8 @@ include(KDECMakeSettings)
 
 find_package(KF5 REQUIRED COMPONENTS KIO)
 
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
 add_library(pentobi-thumbnail MODULE
   PentobiThumbCreator.h
   PentobiThumbCreator.cpp
