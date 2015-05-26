@@ -46,7 +46,9 @@ After that, you can enable previews for Blokus game file in the Dolphin file
 manager in "Configure Dolphin/General/Previews".
 
 Using USE_QT5=1 means that the KDE thumbnailer plugin will be compiled for KDE
-Frameworks 5 (needs packages kio-dev and extra-cmake-modules on Ubuntu 15.04).
+Frameworks 5 (needs packages kio-dev and extra-cmake-modules on Ubuntu 15.04;
+note that Dolphin in Ubuntu 15.04 is not yet able to use thumbnailers built
+for KDE Frameworks 5).
 
 
 == Installing ==
