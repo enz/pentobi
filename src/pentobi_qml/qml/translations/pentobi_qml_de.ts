@@ -42,6 +42,38 @@
         <source>Pentobi</source>
         <translation>Pentobi</translation>
     </message>
+    <message>
+        <source>New game?</source>
+        <translation>Neues Spiel?</translation>
+    </message>
+    <message>
+        <source>Blue wins.</source>
+        <translation>Blau gewinnt.</translation>
+    </message>
+    <message>
+        <source>Green wins.</source>
+        <translation>Grün gewinnt.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie.</source>
+        <translation>Spiel endet unentschieden.</translation>
+    </message>
+    <message>
+        <source>Blue/Red wins.</source>
+        <translation>Blau/Rot gewinnt.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins.</source>
+        <translation>Gelb/Grün gewinnt.</translation>
+    </message>
+    <message>
+        <source>Yellow wins.</source>
+        <translation>Gelb gewinnt.</translation>
+    </message>
+    <message>
+        <source>Red wins.</source>
+        <translation>Rot gewinnt.</translation>
+    </message>
 </context>
 <context>
     <name>Menu</name>
