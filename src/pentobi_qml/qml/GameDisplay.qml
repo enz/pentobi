@@ -88,8 +88,6 @@ Item
             property int _maxRows:
                 _isTrigon || boardModel.gameVariant == "junior" ? 4 : 3
 
-            allPiecesFitInVisible:
-                boardModel.nuPieces <= nuVisibleColumns * rows
             pieces0: _pieces0
             pieces1: _pieces1
             pieces2: _pieces2

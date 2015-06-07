@@ -15,7 +15,6 @@ Item {
     property int nuPiecesLeft3
     property int nuColors
     property int rows: 1
-    property bool allPiecesFitInVisible
 
     signal piecePicked(var piece)
 
@@ -78,7 +77,6 @@ Item {
                 width: root.width
                 height: root.height
                 rows: root.rows
-                allPiecesFitInVisible: root.allPiecesFitInVisible
                 pieces: root.pieces0
                 nuPiecesLeft: root.nuPiecesLeft0
                 pieceAreaSize: root.pieceAreaSize
@@ -88,7 +86,6 @@ Item {
                 width: root.width
                 height: root.height
                 rows: root.rows
-                allPiecesFitInVisible: root.allPiecesFitInVisible
                 pieces: root.pieces1
                 nuPiecesLeft: root.nuPiecesLeft1
                 pieceAreaSize: root.pieceAreaSize
@@ -99,7 +96,6 @@ Item {
                 width: root.width
                 height: root.height
                 rows: root.rows
-                allPiecesFitInVisible: root.allPiecesFitInVisible
                 pieces: root.pieces2
                 nuPiecesLeft: root.nuPiecesLeft2
                 pieceAreaSize: root.pieceAreaSize
@@ -110,7 +106,6 @@ Item {
                 width: root.width
                 height: root.height
                 rows: root.rows
-                allPiecesFitInVisible: root.allPiecesFitInVisible
                 pieces: root.pieces3
                 nuPiecesLeft: root.nuPiecesLeft3
                 pieceAreaSize: root.pieceAreaSize

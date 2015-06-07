@@ -8,26 +8,15 @@ Row {
     property var pieces
     property int nuPiecesLeft
     property int rows: 1
-    property bool allPiecesFitInVisible
 
     signal piecePicked(var piece)
 
-    Loader {
-        id: flickLeftLoader
-
-        visible: ! allPiecesFitInVisible
+    Image {
+        source: theme.getImage("flick")
+        sourceSize { width: width; height: height }
+        fillMode: Image.PreserveAspectFit
+        opacity: flickable.atXBeginning ? 0 : 1
         width: 0.03 * root.width; height: root.height
-    }
-    Component {
-        id: flickLeftComponent
-
-        Image {
-            source: theme.getImage("flick")
-            sourceSize { width: width; height: height }
-            asynchronous: true
-            fillMode: Image.PreserveAspectFit
-            opacity: flickable.atXBeginning ? 0 : 1
-        }
     }
     Flickable {
         id: flickable
@@ -38,18 +27,10 @@ Row {
         property bool _allPiecesLeftFitInVisible:
             nuPiecesLeft <= rows * _visibleColumns
 
-        width: (allPiecesFitInVisible ? 1 : 0.94) * root.width
+        width: 0.94 * root.width
         height: parent.height
         contentWidth: pieceList.columns * root.pieceAreaSize
-        clip: ! allPiecesFitInVisible
-        onAtXBeginningChanged:
-            if (! allPiecesFitInVisible && ! atXBeginning
-                    && flickLeftLoader.status == Loader.Null)
-                flickLeftLoader.sourceComponent = flickLeftComponent
-        onAtXEndChanged:
-            if (! allPiecesFitInVisible && ! atXEnd
-                    && flickRightLoader.status == Loader.Null)
-                flickRightLoader.sourceComponent = flickRightComponent
+        clip: true
 
         PieceList {
             id: pieceList
@@ -64,25 +45,12 @@ Row {
             onColumnsChanged: flickable.contentX = 0
         }
     }
-
-    Loader {
-        id: flickRightLoader
-
-        visible: ! allPiecesFitInVisible
+    Image {
         width: 0.03 * root.width; height: root.height
-    }
-    Component {
-        id: flickRightComponent
-
-        Image {
-            visible: ! allPiecesFitInVisible
-            width: 0.03 * root.width; height: root.height
-            source: theme.getImage("flick")
-            mirror: true
-            sourceSize { width: width; height: height }
-            asynchronous: true
-            fillMode: Image.PreserveAspectFit
-            opacity: flickable.atXEnd ? 0 : 1
-        }
+        source: theme.getImage("flick")
+        mirror: true
+        sourceSize { width: width; height: height }
+        fillMode: Image.PreserveAspectFit
+        opacity: flickable.atXEnd ? 0 : 1
     }
 }
