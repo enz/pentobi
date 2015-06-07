@@ -85,10 +85,6 @@ Item
             id: pieceSelector
 
             property int nuVisibleColumns: 7
-
-            // Piece area size if no flickable indicators are needed
-            property real _maxPieceAreaSize: board.width / nuVisibleColumns
-
             property int _maxRows:
                 _isTrigon || boardModel.gameVariant == "junior" ? 4 : 3
 
@@ -110,14 +106,13 @@ Item
             // Take into account that the effective visible width of the piece
             // list is only 94% of the piece selector width because of the
             // images indicating that the list is flickable.
-            pieceAreaSize: (allPiecesFitInVisible ? 1 : 0.94) *
-                           board.width / nuVisibleColumns
+            pieceAreaSize: 0.94 * board.width / nuVisibleColumns
 
             rows: {
-                if (_maxPieceAreaSize == 0)
+                if (pieceAreaSize == 0)
                     return 1
                 var height = root.height - board.height - scoreDisplay.height
-                var rows = Math.floor(height / _maxPieceAreaSize)
+                var rows = Math.floor(height / pieceAreaSize)
                 if (rows == 0)
                     return 1
                 if (rows >= _maxRows)
