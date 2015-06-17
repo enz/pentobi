@@ -148,21 +148,6 @@ void BoardPainter::drawMarks(QPainter& painter,
     for (Point p : *m_geo)
         if (marks[p] & (dot | circle))
         {
-            QColor color = Util::getMarkColor(variant, pointState[p]);
-            if (marks[p] & dot)
-            {
-                color.setAlphaF(0.5);
-                painter.setPen(color);
-                painter.setBrush(color);
-            }
-            else
-            {
-                color.setAlphaF(0.6);
-                QPen pen(color);
-                pen.setWidthF(0.05 * m_fieldHeight);
-                painter.setPen(pen);
-                painter.setBrush(Qt::NoBrush);
-            }
             qreal x = (static_cast<float>(m_geo->get_x(p)) + 0.5f)
                     * m_fieldWidth;
             qreal y = (static_cast<float>(m_geo->get_y(p)) + 0.5f)
@@ -179,6 +164,23 @@ void BoardPainter::drawMarks(QPainter& painter,
             }
             else
                 size = 0.12 * m_fieldHeight;
+            QColor color = Util::getMarkColor(variant, pointState[p]);
+            qreal penWidth = 0.05 * m_fieldHeight;
+            if (marks[p] & dot)
+            {
+                color.setAlphaF(0.5);
+                painter.setPen(Qt::NoPen);
+                painter.setBrush(color);
+                size *= (1 + 0.25 * penWidth);
+            }
+            else
+            {
+                color.setAlphaF(0.6);
+                QPen pen(color);
+                pen.setWidthF(penWidth);
+                painter.setPen(pen);
+                painter.setBrush(Qt::NoBrush);
+            }
             painter.drawEllipse(QPointF(x, y), size, size);
         }
 }
