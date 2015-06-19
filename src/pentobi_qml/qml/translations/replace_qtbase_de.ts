@@ -4,10 +4,6 @@
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
