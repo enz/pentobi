@@ -43,8 +43,6 @@ set(pentobi_gui_ICNS
 
 set(pentobi_gui_TS
   libpentobi_gui_de.ts
-  libpentobi_gui_en_CA.ts
-  libpentobi_gui_en_GB.ts
   )
 
 # Create PNG icons from SVG icons using the helper program src/convert

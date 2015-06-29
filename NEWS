@@ -12,6 +12,7 @@ Version 9.UNKNOWN (master)
 * The KDE thumbnailer plugin can now be compiled with KDE Frameworks 5.
 * Better support for high resolution displays if compiled with Qt 5.1
   or newer and environment variable QT_DEVICE_PIXEL_RATIO is used.
+* Regional language subvariants en_GB, en_CA are no longer supported.
 
 
 Version 9.0.UNKNOWN (v9-fixes)

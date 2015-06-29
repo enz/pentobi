@@ -67,8 +67,6 @@ set(pentobi_ICNS
 set(pentobi_TS
   pentobi.ts
   pentobi_de.ts
-  pentobi_en_CA.ts
-  pentobi_en_GB.ts
   )
 
 # Create PNG icons from SVG icons using the helper program src/convert
