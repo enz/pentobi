@@ -1,8 +1,7 @@
-Version 9.UNKNOWN (master)
+Version 10.0 (01 Jul 2015)
 ==========================
 
-* Increased playing strength in Trigon.
-* More variety in Trigon opening moves.
+* Increased playing strength and more opening variety in Trigon.
 * The Backward10/Forward10 toolbar buttons were replaced by autorepeat
   functionality of the Backward/Forward buttons.
 * The last move is now by default marked with a dot instead of a number.
@@ -12,11 +11,10 @@ Version 9.UNKNOWN (master)
 * The KDE thumbnailer plugin can now be compiled with KDE Frameworks 5.
 * Better support for high resolution displays if compiled with Qt 5.1
   or newer and environment variable QT_DEVICE_PIXEL_RATIO is used.
+* The Pentobi help browser now uses a larger font on Windows
 * Regional language subvariants en_GB, en_CA are no longer supported.
 
-
-Version 9.0.UNKNOWN (v9-fixes)
-==============================
+Bug fixes:
 
 * Fixed a build failure when generating the PNG icons from the SVG sources
   if the path contained non-ASCII characters.
@@ -32,7 +30,6 @@ Version 9.0.UNKNOWN (v9-fixes)
   enabled in the Computer Colors dialog while a move generation was running.
 * Fixed build failure with MSVC if MinGW was not also installed (because
   windres.exe was used)
-* The Pentobi help browser now uses a larger font on Windows
 
 
 Version 9.0 (10 Dec 2014)
