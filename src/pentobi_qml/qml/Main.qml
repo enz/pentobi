@@ -49,17 +49,14 @@ ApplicationWindow {
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
     }
-
     BoardModel {
         id: boardModel
     }
-
     PlayerModel {
         id: playerModel
 
         onMoveGenerated: Logic.moveGenerated(move)
     }
-
     GameDisplay {
         id: gameDisplay
 
@@ -67,7 +64,6 @@ ApplicationWindow {
         anchors.fill: contentItem
         onPlay: Logic.play(pieceModel, gameCoord)
     }
-
     Loader { id: computerColorDialogLoader }
     Component {
         id: computerColorDialogComponent
@@ -84,16 +80,20 @@ ApplicationWindow {
             }
         }
     }
-
-    Loader { id: messageDialogLoader }
+    Loader { id: infoMessageLoader }
     Component {
-        id: messageDialogComponent
+        id: infoMessageComponent
+
+        MessageDialog { }
+    }
+    Loader { id: questionMessageLoader }
+    Component {
+        id: questionMessageComponent
 
         MessageDialog {
             standardButtons: StandardButton.Ok | StandardButton.Cancel
         }
     }
-
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move
     // placement animation has finished
@@ -103,7 +103,6 @@ ApplicationWindow {
         interval: 400
         onTriggered: Logic.checkComputerMove()
     }
-
     // Call a function that might block the GUI thread (e.g. initializing or
     // changing the game variant and the creation of the new pieces takes
     // several seconds on a ~1GHz ARM CPU). The call() function sets the
@@ -128,7 +127,6 @@ ApplicationWindow {
             _func()
         }
     }
-
     Connections {
         target: Qt.application
         onStateChanged:

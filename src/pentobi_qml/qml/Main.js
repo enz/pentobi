@@ -16,9 +16,8 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
     cancelGenMove()
     if (! boardModel.isBoardEmpty && ! boardModel.isGameOver &&
             verifyAbortGame) {
-        showMessageDialog(qsTr("New game?"),
-                          function() {
-                              changeGameVariant(gameVariant, false) })
+        showQuestion(qsTr("New game?"),
+                     function() { changeGameVariant(gameVariant, false) })
         return
     }
     callDelayTimer.call(function() {
@@ -207,7 +206,6 @@ function initComputerColors() {
 function initGameVariant(gameVariant) {
     cancelGenMove()
     hideComputerColorDialog()
-    gameDisplay.clearMessage()
     clearMarks()
     gameDisplay.destroyPieces()
     boardModel.initGameVariant(gameVariant)
@@ -277,12 +275,10 @@ function newGame(verifyAbortGame)
     cancelGenMove()
     if (! boardModel.isBoardEmpty &&  ! boardModel.isGameOver &&
             verifyAbortGame) {
-        showMessageDialog(qsTr("New game?"),
-                          function() { newGame(false) })
+        showQuestion(qsTr("New game?"), function() { newGame(false) })
         return
     }
     gameDisplay.pickedPiece = null
-    gameDisplay.clearMessage()
     clearMarks()
     hideComputerColorDialog()
     gameDisplay.transitionsEnabled = false
@@ -384,13 +380,21 @@ function showGameOver() {
         else if (points3 === maxPoints)
             msg = qsTr("Green wins.")
     }
-    gameDisplay.showMessage(msg)
+    showInfo(msg)
 }
 
-function showMessageDialog(text, acceptedFunc) {
-    if (messageDialogLoader.status == Loader.Null)
-        messageDialogLoader.sourceComponent = messageDialogComponent
-    var dialog = messageDialogLoader.item
+function showInfo(text) {
+    if (infoMessageLoader.status == Loader.Null)
+        infoMessageLoader.sourceComponent = infoMessageComponent
+    var dialog = infoMessageLoader.item
+    dialog.text = text
+    dialog.visible = true
+}
+
+function showQuestion(text, acceptedFunc) {
+    if (questionMessageLoader.status == Loader.Null)
+        questionMessageLoader.sourceComponent = questionMessageComponent
+    var dialog = questionMessageLoader.item
     dialog.text = text
     dialog.accepted.connect(acceptedFunc)
     dialog.visible = true
@@ -400,7 +404,6 @@ function undo() {
     if (! boardModel.canUndo)
         return
     cancelGenMove()
-    gameDisplay.clearMessage()
     // Immediately show the last color to move, otherwise the piece movement
     // animation will target a part of the piece selector that is currently not
     // visible
