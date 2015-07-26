@@ -73,10 +73,8 @@ ApplicationWindow {
         id: computerColorDialogComponent
 
         ComputerColorDialog {
-            visible: false
             gameVariant: boardModel.gameVariant
             onAccepted: {
-                visible = false
                 root.computerPlays0 = this.computerPlays0
                 root.computerPlays1 = this.computerPlays1
                 root.computerPlays2 = this.computerPlays2
@@ -84,7 +82,6 @@ ApplicationWindow {
                 Logic.cancelGenMove()
                 Logic.checkComputerMove()
             }
-            onRejected: visible = false
         }
     }
 
@@ -94,7 +91,6 @@ ApplicationWindow {
 
         MessageDialog {
             standardButtons: StandardButton.Ok | StandardButton.Cancel
-            onRejected: visible = false
         }
     }
 
