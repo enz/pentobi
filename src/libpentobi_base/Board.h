@@ -187,6 +187,9 @@ public:
 
     bool has_setup() const;
 
+    /** Get the total number of moves played by all colors.
+        Does not include setup pieces.
+        @see get_nu_onboard_pieces() */
     unsigned get_nu_moves() const;
 
     /** Get the number of pieces on board.
