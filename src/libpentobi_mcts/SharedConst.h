@@ -47,12 +47,14 @@ struct SharedConst
         therefore in all positions in the search). */
     ColorMap<MoveMarker> is_forbidden_at_root;
 
-    /** Minimum move number where all pieces are considered until the rest
-        of the simulation. */
+    /** Minimum total number of pieces on the board where all pieces are
+        considered until the rest of the simulation. */
     unsigned min_move_all_considered;
 
-    /** Precomputed lists of considered pieces depending on the move number.
-        Only initialized for move numbers less than min_move_all_considered.
+    /** Precomputed lists of considered pieces depending on the total number
+        of pieces on the board.
+        Only initialized for numbers greater than or equal to the number in the
+        root position and less than min_move_all_considered.
         Contains pointers to unique values such that the comparison of the
         lists can be done by comparing the pointers to the lists. */
     array<const PieceMap<bool>*, Board::max_game_moves> is_piece_considered;

@@ -180,7 +180,7 @@ void SharedConst::init(bool is_followup)
     }
 
     is_piece_considered_list.clear();
-    for (unsigned i = 0; i < Board::max_game_moves; ++i)
+    for (auto i = bd.get_nu_onboard_pieces(); i < Board::max_game_moves; ++i)
     {
         PieceMap<bool> is_piece_considered;
         set_pieces_considered(bd, i, is_piece_considered);
