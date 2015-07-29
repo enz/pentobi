@@ -179,6 +179,16 @@ void SharedConst::init(bool is_followup)
         }
     }
 
+    if (! is_followup)
+        init_pieces_considered();
+
+    symmetric_points.init(bd.get_geometry(), PointTransfRot180<Point>());
+}
+
+void SharedConst::init_pieces_considered()
+{
+    auto& bd = *board;
+    auto& bc = bd.get_board_const();
     is_piece_considered_list.clear();
     for (auto i = bd.get_nu_onboard_pieces(); i < Board::max_game_moves; ++i)
     {
@@ -208,8 +218,6 @@ void SharedConst::init(bool is_followup)
         }
     }
     is_piece_considered_all.fill(true);
-
-    symmetric_points.init(bd.get_geometry(), PointTransfRot180<Point>());
 }
 
 //-----------------------------------------------------------------------------

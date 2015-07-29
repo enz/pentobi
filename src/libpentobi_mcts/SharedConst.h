@@ -25,8 +25,9 @@ using libpentobi_base::SymmetricPoints;
 //-----------------------------------------------------------------------------
 
 /** Constant data shared between the search states. */
-struct SharedConst
+class SharedConst
 {
+public:
     /** Precomputed moves additionally constrained by moves that are
         non-forbidden at root position. */
     ColorMap<PrecompMoves> precomp_moves;
@@ -71,6 +72,9 @@ struct SharedConst
     SharedConst(const Color& to_play);
 
     void init(bool is_followup);
+
+private:
+    void init_pieces_considered();
 };
 
 //-----------------------------------------------------------------------------
