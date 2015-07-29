@@ -53,7 +53,7 @@ struct SharedConst
 
     /** Precomputed lists of considered pieces depending on the move number.
         Only initialized for move numbers less than min_move_all_considered.
-        Contains pointers to unique values auch that the comparison of the
+        Contains pointers to unique values such that the comparison of the
         lists can be done by comparing the pointers to the lists. */
     array<const PieceMap<bool>*, Board::max_game_moves> is_piece_considered;
 
