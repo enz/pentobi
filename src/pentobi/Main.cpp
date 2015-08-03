@@ -177,7 +177,7 @@ int main(int argc, char* argv[])
         Variant variant;
         if (! parse_variant_id(variantString.toLocal8Bit().constData(),
                                variant))
-            variant = Variant::classic;
+            variant = Variant::duo;
         MainWindow mainWindow(variant, initialFile, helpDir, booksDir, noBook,
                               threads, memory);
         if (opt.contains("seed"))
