@@ -35,6 +35,13 @@ void filter_min_size(const BoardConst& board_const, unsigned min_size,
     }
 }
 
+/** Check if an adjacent status is a possible follow-up status for another
+    one. */
+inline bool is_followup_adj_status(unsigned status_new, unsigned status_old)
+{
+    return (status_new & status_old) == status_old;
+}
+
 void set_piece_considered(const BoardConst& board_const, const char* name,
                           PieceMap<bool>& is_piece_considered,
                           bool is_considered = true)
@@ -147,7 +154,11 @@ void SharedConst::init(bool is_followup)
         {
             if (bd.is_forbidden(p, c))
                 continue;
+            auto adj_status = bd.get_adj_status(p, c);
             for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
+            {
+                if (is_followup && ! is_followup_adj_status(i, adj_status))
+                    continue;
                 // Don't iterate over bd.get_pieces_left(*i) because its
                 // ordering is not preserved if a piece is removed and the
                 // in-place construction requires that the iteration in these
@@ -176,6 +187,7 @@ void SharedConst::init(bool is_followup)
                     auto size = precomp_moves.get_size() - begin;
                     precomp_moves.set_list_range(p, i, piece, begin, size);
                 }
+            }
         }
     }
 
