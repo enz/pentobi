@@ -80,7 +80,9 @@ size_t get_memory()
 {
     size_t memory;
     size_t total_mem = libboardgame_sys::get_memory();
-    // Use half of the system memory but not more than 1.4 GB
+    // Use half of the system memory (a quarter if compiled for low resources)
+    // but not more than 1.4 GB (128 MB on Android because we support only low
+    // playing levels with short searches there)
     if (total_mem == 0)
     {
         log("WARNING: could not determine system memory (assuming 512 MB)");
@@ -88,12 +90,17 @@ size_t get_memory()
     }
     else
 #if PENTOBI_LOW_RESOURCES
-        memory = total_mem / 3;
+        memory = total_mem / 4;
 #else
         memory = total_mem / 2;
 #endif
+#ifdef ANDROID
+    if (memory > 128000000)
+        memory = 128000000;
+#else
     if (memory > 1400000000)
         memory = 1400000000;
+#endif
     log("Using ", memory, " of ", total_mem, " bytes");
     return memory;
 }

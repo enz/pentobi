@@ -7,7 +7,9 @@ Version 10.UNKNOWN (master)
 Version 10.0.UNKNOWN (v10-fixes)
 ================================
 
-*
+* Allocate only up to 128 MB for the search on Android because more is
+  not needed for the low playing levels there and the allocation of more
+  sometimes failed causing Pentobi to crash at startup.
 
 
 Version 10.0 (01 Jul 2015)
