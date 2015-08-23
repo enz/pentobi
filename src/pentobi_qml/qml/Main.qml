@@ -58,6 +58,7 @@ ApplicationWindow {
         id: playerModel
 
         onMoveGenerated: Logic.moveGenerated(move)
+        Component.onCompleted: if (initFailed()) Logic.playerInitFail()
     }
 
     GameDisplay {
@@ -92,6 +93,13 @@ ApplicationWindow {
         MessageDialog {
             standardButtons: StandardButton.Ok | StandardButton.Cancel
         }
+    }
+
+    Loader { id: errorDialogLoader }
+    Component {
+        id: errorDialogComponent
+
+        MessageDialog { }
     }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer

@@ -304,6 +304,10 @@ function play(pieceModel, gameCoord) {
         delayedCheckComputerMove.start()
 }
 
+function playerInitFail() {
+    showErrorDialog(qsTr("Not enough memory."), function() { Qt.quit() })
+}
+
 function showComputerColorDialog() {
     if (computerColorDialogLoader.status == Loader.Null)
         computerColorDialogLoader.sourceComponent =
@@ -385,6 +389,15 @@ function showGameOver() {
             msg = qsTr("Green wins.")
     }
     gameDisplay.showMessage(msg)
+}
+
+function showErrorDialog(text, acceptedFunc) {
+    if (errorDialogLoader.status == Loader.Null)
+        errorDialogLoader.sourceComponent = errorDialogComponent
+    var dialog = errorDialogLoader.item
+    dialog.text = text
+    dialog.accepted.connect(acceptedFunc)
+    dialog.visible = true
 }
 
 function showMessageDialog(text, acceptedFunc) {

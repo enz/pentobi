@@ -1,9 +1,10 @@
 Version 10.0.UNKNOWN (v10-fixes)
 ================================
 
-* Allocate only up to 128 MB for the search on Android because more is
-  not needed for the low playing levels there and the allocation of more
-  sometimes failed causing Pentobi to crash at startup.
+* Avoid a crash on Android at startup if not enough memory is available.
+  The amount of memory is now reduced on Android because playing levels
+  1-7 do not need as much and if the allocation fails, an error message
+  is shown.
 
 
 Version 10.0 (01 Jul 2015)
