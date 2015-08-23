@@ -11,6 +11,7 @@
 #include "BoardModel.h"
 #include "libpentobi_mcts/Player.h"
 
+using namespace std;
 using libpentobi_mcts::Player;
 using libpentobi_base::Variant;
 
@@ -51,6 +52,10 @@ public:
     /** Cancel the move generation in the background thread if one is
         running. */
     Q_INVOKABLE void cancelGenMove();
+
+    /** Initialization of the player failed because it could not allocate
+        enough memory. */
+    Q_INVOKABLE bool initFailed();
 
 signals:
     void levelClassicChanged(int);
@@ -101,7 +106,7 @@ private:
 
     unsigned m_genMoveId;
 
-    Player m_player;
+    unique_ptr<Player> m_player;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 

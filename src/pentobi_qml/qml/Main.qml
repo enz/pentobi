@@ -56,6 +56,7 @@ ApplicationWindow {
         id: playerModel
 
         onMoveGenerated: Logic.moveGenerated(move)
+        Component.onCompleted: if (initFailed()) Logic.playerInitFail()
     }
     GameDisplay {
         id: gameDisplay

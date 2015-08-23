@@ -74,6 +74,10 @@
         <source>Red wins.</source>
         <translation>Rot gewinnt.</translation>
     </message>
+    <message>
+        <source>Not enough memory.</source>
+        <translation>Nicht genügend Speicher.</translation>
+    </message>
 </context>
 <context>
     <name>Menu</name>
