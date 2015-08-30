@@ -108,7 +108,7 @@ int test_main(int argc, char* argv[])
 {
     if (argc < 2)
     {
-        if (libboardgame_test::run_all_tests())
+        if (run_all_tests())
             return 0;
         else
             return 1;
@@ -117,7 +117,7 @@ int test_main(int argc, char* argv[])
     {
         int result = 0;
         for (int i = 1; i < argc; ++i)
-            if (! libboardgame_test::run_test(argv[i]))
+            if (! run_test(argv[i]))
                 result = 1;
         return result;
     }
