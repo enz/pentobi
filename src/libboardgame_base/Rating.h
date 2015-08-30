@@ -33,20 +33,14 @@ public:
     float get_expected_result(Rating elo_opponent,
                               unsigned nu_opponents = 1) const;
 
-    /** Update a rating after a two-player game.
-        @param game_result The outcome of the game (0=loss, 0.5=tie, 1=win)
-        @param elo_opponent Elo-rating of the opponent.
-        @param k_value The K-value */
-    void update(float game_result, Rating elo_opponent, float k_value = 32);
-
-    /** Update a rating after a multi-player game.
+    /** Update a rating after a game.
         @param game_result The outcome of the game (0=loss, 0.5=tie, 1=win)
         @param elo_opponent Elo-rating of the opponent.
         @param k_value The K-value
         @param nu_opponents The number of opponents (all with the same rating
         elo_opponent) */
-    void update_multiplayer(float game_result, Rating elo_opponent,
-                            unsigned nu_opponents, float k_value = 32);
+    void update(float game_result, Rating elo_opponent, float k_value = 32,
+                unsigned nu_opponents = 1);
 
     float get() const;
 
@@ -70,12 +64,6 @@ inline float Rating::get() const
 inline int Rating::to_int() const
 {
     return static_cast<int>(round(m_elo));
-}
-
-inline void Rating::update(float game_result, Rating elo_opponent,
-                           float k_value)
-{
-    update_multiplayer(game_result, elo_opponent, 1, k_value);
 }
 
 //-----------------------------------------------------------------------------

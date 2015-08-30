@@ -51,8 +51,8 @@ void RatingHistory::addGame(float score, Rating opponentRating,
                             float result, const QString& date, int level,
                             const PentobiTree& tree)
 {
-    float k_value = (m_nuGames < 30 ? 40.f : 20.f);
-    m_rating.update_multiplayer(score, opponentRating, nuOpponents, k_value);
+    float kValue = (m_nuGames < 30 ? 40.f : 20.f);
+    m_rating.update(score, opponentRating, kValue, nuOpponents);
     if (m_rating.get() > m_bestRating.get())
         m_bestRating = m_rating;
     ++m_nuGames;

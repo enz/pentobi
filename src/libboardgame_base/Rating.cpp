@@ -39,8 +39,8 @@ float Rating::get_expected_result(Rating elo_opponent,
         / (1.f + static_cast<float>(nu_opponents) * pow(10.f, diff / 400.f));
 }
 
-void Rating::update_multiplayer(float game_result, Rating elo_opponent,
-                    unsigned nu_opponents, float k_value)
+void Rating::update(float game_result, Rating elo_opponent, float k_value,
+                    unsigned nu_opponents)
 {
     LIBBOARDGAME_ASSERT(k_value > 0);
     float diff = game_result - get_expected_result(elo_opponent, nu_opponents);
