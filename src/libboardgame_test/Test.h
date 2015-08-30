@@ -44,7 +44,8 @@ int test_main(int argc, char* argv[]);
 
 //-----------------------------------------------------------------------------
 
-/** Helper class that automatically adds a test when and instance isdeclared. */
+/** Helper class that automatically adds a test when an instance is
+    declared. */
 struct TestRegistrar
 {
     TestRegistrar(const string& name, TestFunction function)
