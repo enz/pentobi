@@ -35,8 +35,6 @@ public:
 
     void set(Point p);
 
-    bool toggle(Point p);
-
     /** Set up for overflow test (for testing purposes only).
         The function is equivalent to calling reset() and then clear()
         nu_clear times. It allows a faster implementation of a unit test case
@@ -92,23 +90,6 @@ inline void Marker<P>::set(Point p)
 {
     LIBBOARDGAME_ASSERT(! p.is_null());
     m_a[p.to_int()] = m_current;
-}
-
-template<class P>
-inline bool Marker<P>::toggle(Point p)
-{
-    LIBBOARDGAME_ASSERT(! p.is_null());
-    auto& ref = m_a[p.to_int()];
-    if (ref == m_current)
-    {
-        ++ref;
-        return false;
-    }
-    else
-    {
-        ref = m_current;
-        return true;
-    }
 }
 
 //-----------------------------------------------------------------------------
