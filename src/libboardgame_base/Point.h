@@ -75,10 +75,6 @@ public:
     /** Return point as an integer between 0 and Point::range */
     unsigned to_int() const;
 
-    /** Return point as an integer between 0 and Point::range_onboard.
-        @pre ! is_null() */
-    unsigned to_int_not_null() const;
-
 private:
     static const IntType value_uninitialized = range;
 
@@ -149,13 +145,6 @@ template<unsigned M, unsigned W, unsigned H, typename I, class S>
 inline unsigned Point<M, W, H, I, S>::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
-    return m_i;
-}
-
-template<unsigned M, unsigned W, unsigned H, typename I, class S>
-inline unsigned Point<M, W, H, I, S>::to_int_not_null() const
-{
-    LIBBOARDGAME_ASSERT(! is_null());
     return m_i;
 }
 
