@@ -29,11 +29,11 @@ public:
 
     Marker();
 
-    bool operator[](Point p) const;
-
     void clear();
 
-    void set(Point p);
+    /** Mark a point.
+        @return true if the point was already marked. */
+    bool set(Point p);
 
     /** Set up for overflow test (for testing purposes only).
         The function is equivalent to calling reset() and then clear()
@@ -54,13 +54,6 @@ template<class P>
 inline Marker<P>::Marker()
 {
     reset();
-}
-
-template<class P>
-inline bool Marker<P>::operator[](Point p) const
-{
-    LIBBOARDGAME_ASSERT(! p.is_null());
-    return m_a[p.to_int()] == m_current;
 }
 
 template<class P>
@@ -86,10 +79,14 @@ inline void Marker<P>::reset()
 }
 
 template<class P>
-inline void Marker<P>::set(Point p)
+inline bool Marker<P>::set(Point p)
 {
     LIBBOARDGAME_ASSERT(! p.is_null());
-    m_a[p.to_int()] = m_current;
+    auto& a = m_a[p.to_int()];
+    if (a == m_current)
+        return true;
+    a = m_current;
+    return false;
 }
 
 //-----------------------------------------------------------------------------
