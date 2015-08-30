@@ -107,20 +107,12 @@ bool run_test(const string& name)
 int test_main(int argc, char* argv[])
 {
     if (argc < 2)
-    {
-        if (run_all_tests())
-            return 0;
-        else
-            return 1;
-    }
-    else
-    {
-        int result = 0;
-        for (int i = 1; i < argc; ++i)
-            if (! run_test(argv[i]))
-                result = 1;
-        return result;
-    }
+        return run_all_tests() ? 0 : 1;
+    int result = 0;
+    for (int i = 1; i < argc; ++i)
+        if (! run_test(argv[i]))
+            result = 1;
+    return result;
 }
 
 //-----------------------------------------------------------------------------
