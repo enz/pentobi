@@ -138,7 +138,8 @@ void TwoGtp::play_game(unsigned game_number)
             mv = m_bd.from_string(response);
         }
         sgf.begin_node();
-        sgf.write_property(string(1, toupper(color[0])), m_bd.to_string(mv));
+        sgf.write_property(string(1, static_cast<char>(toupper(color[0]))),
+                           m_bd.to_string(mv));
         sgf.end_node();
         if (mv.is_null() || ! m_bd.is_legal(to_play, mv))
             throw runtime_error("invalid move: " + m_bd.to_string(mv));
