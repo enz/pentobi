@@ -129,7 +129,8 @@ bool createThumbnail(const QString& path, int width, int height,
 
     BoardPainter boardPainter;
     QPainter painter;
-    painter.begin(&image);
+    if (! painter.begin(&image))
+        return false;
     boardPainter.paintEmptyBoard(painter, width, height, variant, *geo);
     boardPainter.paintPieces(painter, pointState);
     painter.end();
