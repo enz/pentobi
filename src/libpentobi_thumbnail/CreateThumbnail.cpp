@@ -126,11 +126,10 @@ bool createThumbnail(const QString& path, int width, int height,
         cerr << "Not a valid Blokus SGF file\n";
         return false;
     }
-
-    BoardPainter boardPainter;
     QPainter painter;
     if (! painter.begin(&image))
         return false;
+    BoardPainter boardPainter;
     boardPainter.paintEmptyBoard(painter, width, height, variant, *geo);
     boardPainter.paintPieces(painter, pointState);
     painter.end();
