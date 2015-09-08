@@ -4,13 +4,10 @@ endif()
 
 add_executable(convert Main.cpp)
 
-# CMake 2.8.9 doesn't seem to support finding plugin paths yet but
-# we need to add qsvg to the linked libraries if static linking is
-# used as by our current build of the Windows installer with MinGW.
-# This should be fixed once CMake properly supports plugins because it
-# breaks the build with dynamic libraries on MinGW and doesn't solve
-# the problem with static libraries on other platforms.
-if (MINGW)
+# We currently assume static linking with MinGW/Qt4 because this is how we
+# build the binaries for the Windows installer. Unfortunately, the following
+# lines will break the compilation with dynamic linking and MinGW/Qt4.
+if (NOT USE_QT5 AND MINGW)
   add_definitions(-DQT_STATICPLUGIN)
   if(QT_DEBUG)
     target_link_libraries(convert "${QT_PLUGINS_DIR}/imageformats/libqsvgd.a")
