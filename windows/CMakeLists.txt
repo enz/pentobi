@@ -9,16 +9,10 @@ if(USE_QT5)
   execute_process(COMMAND ${QMAKE} -query QT_INSTALL_TRANSLATIONS
     OUTPUT_VARIABLE QT_TRANSLATIONS_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
   find_program(WINDEPLOYQT windeployqt.exe HINTS "${QMAKE}")
-  if(NOT WINDEPLOYQT)
-    message(FATAL_ERROR "windeployqt not found")
-  endif()
 
   set(X86 "(x86)")
   find_program(MAKENSIS makensis
     PATHS "$ENV{ProgramFiles}\\NSIS" "$ENV{ProgramFiles${X86}}\\NSIS")
-  if(NOT MAKENSIS)
-    message(FATAL_ERROR "makensis not found")
-  endif()
 
   set(INCLUDE_RUNTIME_QT
     "!include \"${CMAKE_SOURCE_DIR}\\windows\\RuntimeQt.nsh\"")
