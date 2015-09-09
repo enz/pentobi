@@ -68,7 +68,7 @@ File /r "${PENTOBI_SRC_DIR}\src\pentobi\help"
 File /oname=COPYING.txt "${PENTOBI_SRC_DIR}\COPYING"
 File /oname=Pentobi.exe "${PENTOBI_BUILD_DIR}\src\pentobi\pentobi.exe"
 File "${PENTOBI_SRC_DIR}\src\pentobi\pentobi.ico"
-File "${PENTOBI_SRC_DIR}\windows\qt.conf"
+@INCLUDE_RUNTIME_QT@
 
 WriteRegStr HKLM "Software\Pentobi" "" $INSTDIR
 
@@ -79,6 +79,7 @@ WriteRegStr HKLM "${UNINST_KEY}" "DisplayIcon" "$INSTDIR\pentobi.ico"
 WriteRegStr HKLM "${UNINST_KEY}" "URLInfoAbout" "http://pentobi.sf.net/"
 WriteRegStr HKLM "${UNINST_KEY}" "UninstallString" "$INSTDIR\Uninstall.exe"
 
+SetOutPath "$INSTDIR"
 File "${PENTOBI_SRC_DIR}\windows\blksgf.ico"
 
 WriteRegStr HKCR ".blksgf" "" "Pentobi"
@@ -116,13 +117,16 @@ Section "Uninstall"
 
 Delete "$INSTDIR\Uninstall.exe"
 Delete "$INSTDIR\Pentobi.exe"
-Delete "$INSTDIR\qt.conf"
 Delete "$INSTDIR\COPYING.txt"
 Delete "$INSTDIR\pentobi.ico"
 Delete "$INSTDIR\blksgf.ico"
+Delete "$INSTDIR\*.dll"
 RmDir /r "$INSTDIR\books"
 RmDir /r "$INSTDIR\translations"
 RmDir /r "$INSTDIR\help"
+RmDir /r "$INSTDIR\platforms"
+RmDir /r "$INSTDIR\imageformats"
+RmDir /r "$INSTDIR\plugins"
 RmDir "$INSTDIR"
 
 SetShellVarContext all
