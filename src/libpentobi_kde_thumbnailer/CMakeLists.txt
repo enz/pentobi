@@ -12,10 +12,6 @@
 # exceptions (which should be fine as long as no exceptions are thrown
 # from the thumbnailer plugin functions).
 
-if (NOT USE_QT5)
-  include(${QT_USE_FILE})
-endif()
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
 
 add_library(pentobi_kde_thumbnailer STATIC
@@ -37,6 +33,4 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libpentobi_thumbnail/CreateThumbnail.cpp
 )
 
-if (USE_QT5)
-  target_link_libraries(pentobi_kde_thumbnailer Qt5::Widgets)
-endif()
+target_link_libraries(pentobi_kde_thumbnailer Qt5::Widgets)

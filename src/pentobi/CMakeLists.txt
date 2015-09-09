@@ -1,9 +1,5 @@
 set(CMAKE_AUTOMOC TRUE)
 
-if (NOT USE_QT5)
-  include(${QT_USE_FILE})
-endif()
-
 set(pentobi_SRCS
   AnalyzeGameWidget.h
   AnalyzeGameWidget.cpp
@@ -81,36 +77,25 @@ foreach(icon ${pentobi_ICNS})
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
   )
 endforeach()
-if(USE_QT5)
-  qt5_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc
-      OPTIONS -no-compress)
-else()
-  qt4_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc
-      OPTIONS -no-compress)
-endif()
-if(PENTOBI_HDPI)
-  file(COPY resources_2x.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-  foreach(icon ${pentobi_ICNS})
-    string(REPLACE ".png" ".svg" svgicon ${icon})
-    string(REPLACE ".png" "@2x.png" hdpiicon ${icon})
-    add_custom_command(
-      OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${hdpiicon}"
-      COMMAND convert --hdpi ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
-        ${CMAKE_CURRENT_BINARY_DIR}/icons/${hdpiicon}
-      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
-  )
-  endforeach()
-  qt5_add_resources(pentobi_RC_SRCS
-      ${CMAKE_CURRENT_BINARY_DIR}/resources_2x.qrc OPTIONS -no-compress)
-endif()
+qt5_add_resources(pentobi_RC_SRCS ${CMAKE_CURRENT_BINARY_DIR}/resources.qrc
+    OPTIONS -no-compress)
+file(COPY resources_2x.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+foreach(icon ${pentobi_ICNS})
+string(REPLACE ".png" ".svg" svgicon ${icon})
+string(REPLACE ".png" "@2x.png" hdpiicon ${icon})
+add_custom_command(
+  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/icons/${hdpiicon}"
+  COMMAND convert --hdpi ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+    ${CMAKE_CURRENT_BINARY_DIR}/icons/${hdpiicon}
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/icons/${svgicon}
+)
+endforeach()
+qt5_add_resources(pentobi_RC_SRCS
+  ${CMAKE_CURRENT_BINARY_DIR}/resources_2x.qrc OPTIONS -no-compress)
 
-# We don't use qt4_add_translation because it doesn't use option
+# We don't use qt_add_translation because it doesn't use option
 # -removeidentical (see QTBUG-44323)
-if(USE_QT5)
-  set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
-else()
-  set(LRELEASE_EXECUTABLE ${QT_LRELEASE_EXECUTABLE})
-endif()
+set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
 set(pentobi_QM_SRCS)
 foreach(ts ${pentobi_TS})
   get_filename_component(qm ${ts} NAME_WE)
@@ -144,16 +129,7 @@ target_link_libraries(pentobi
   boardgame_sys
   )
 
-if (USE_QT5)
-  target_link_libraries(pentobi Qt5::Widgets Qt5::Concurrent)
-else()
-  target_link_libraries(pentobi
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIB_DEPENDENCIES}
-    ${QT_QTCORE_LIB_DEPENDENCIES}
-    )
-endif()
+target_link_libraries(pentobi Qt5::Widgets Qt5::Concurrent)
 
 if (DEFINED CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(pentobi ${CMAKE_THREAD_LIBS_INIT})

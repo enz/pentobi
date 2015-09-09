@@ -1,7 +1,3 @@
-if (NOT USE_QT5)
-  include(${QT_USE_FILE})
-endif()
-
 set(pentobi_thumbnailer_SRCS Main.cpp)
 
 add_executable(pentobi-thumbnailer Main.cpp)
@@ -16,17 +12,6 @@ target_link_libraries(pentobi-thumbnailer
   boardgame_sys
   )
 
-if (USE_QT5)
-  target_link_libraries(pentobi-thumbnailer Qt5::Widgets)
-else()
-  target_link_libraries(pentobi-thumbnailer
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIB_DEPENDENCIES}
-    ${QT_QTCORE_LIB_DEPENDENCIES}
-    )
-endif()
+target_link_libraries(pentobi-thumbnailer Qt5::Widgets)
 
-install(TARGETS
-pentobi-thumbnailer DESTINATION
-${CMAKE_INSTALL_BINDIR})
+install(TARGETS pentobi-thumbnailer DESTINATION ${CMAKE_INSTALL_BINDIR})

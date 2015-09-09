@@ -14,15 +14,10 @@
 #include <QDialog>
 #include <QDir>
 #include <QFileInfo>
+#include <QStandardPaths>
 #include <QString>
 #include <QUrl>
 #include "libpentobi_mcts/Player.h"
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-#include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
 
 using libpentobi_mcts::Player;
 
@@ -33,11 +28,7 @@ namespace Util
 
 QString getDataDir()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     return QStandardPaths::writableLocation(QStandardPaths::DataLocation);
-#else
-    return QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-#endif
 }
 
 void initDataDir()

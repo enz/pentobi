@@ -1,6 +1,0 @@
-SetOutPath "$INSTDIR"
-File "deploy\*.dll"
-SetOutPath "$INSTDIR\imageformats"
-File "deploy\imageformats\*.dll"
-SetOutPath "$INSTDIR\platforms"
-File "deploy\platforms\*.dll"

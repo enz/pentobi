@@ -7,7 +7,6 @@
 !define PENTOBI_VERSION "@PENTOBI_VERSION@"
 !define PENTOBI_SRC_DIR "@CMAKE_SOURCE_DIR@"
 !define PENTOBI_BUILD_DIR "@CMAKE_BINARY_DIR@"
-!define QT_TRANSLATIONS_DIR "@QT_TRANSLATIONS_DIR@"
 
 !define UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pentobi"
 
@@ -60,7 +59,6 @@ ExecWait '"$INSTDIR\Uninstall.exe" /S _?=$INSTDIR'
 SetOutPath "$INSTDIR\translations"
 File "${PENTOBI_BUILD_DIR}\src\libpentobi_gui\*.qm"
 File "${PENTOBI_BUILD_DIR}\src\pentobi\*.qm"
-File "${QT_TRANSLATIONS_DIR}\qt_de.qm"
 SetOutPath "$INSTDIR\books"
 File "${PENTOBI_SRC_DIR}\src\books\book_*.blksgf"
 SetOutPath "$INSTDIR"
@@ -68,7 +66,14 @@ File /r "${PENTOBI_SRC_DIR}\src\pentobi\help"
 File /oname=COPYING.txt "${PENTOBI_SRC_DIR}\COPYING"
 File /oname=Pentobi.exe "${PENTOBI_BUILD_DIR}\src\pentobi\pentobi.exe"
 File "${PENTOBI_SRC_DIR}\src\pentobi\pentobi.ico"
-@INCLUDE_RUNTIME_QT@
+SetOutPath "$INSTDIR"
+File "${PENTOBI_BUILD_DIR}\windows\deploy\*.dll"
+SetOutPath "$INSTDIR\imageformats"
+File "${PENTOBI_BUILD_DIR}\windows\deploy\imageformats\*.dll"
+SetOutPath "$INSTDIR\platforms"
+File "${PENTOBI_BUILD_DIR}\windows\deploy\platforms\*.dll"
+SetOutPath "$INSTDIR\translations"
+File "${PENTOBI_BUILD_DIR}\windows\deploy\translations\qt_de.qm"
 
 WriteRegStr HKLM "Software\Pentobi" "" $INSTDIR
 

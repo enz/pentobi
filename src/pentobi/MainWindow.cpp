@@ -28,6 +28,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSplitter>
+#include <QStandardPaths>
 #include <QStatusBar>
 #include <QToolBar>
 #include <QToolButton>
@@ -54,12 +55,6 @@
 #include "libpentobi_gui/SameHeightLayout.h"
 #include "libpentobi_gui/ScoreDisplay.h"
 #include "libpentobi_gui/Util.h"
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-#include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
 
 using Util::getPlayerString;
 using libboardgame_sgf::InvalidTree;
@@ -1965,13 +1960,8 @@ QString MainWindow::getLastDir()
     QSettings settings;
     auto dir = settings.value("last_dir", "").toString();
     if (dir.isEmpty() || ! QFileInfo(dir).exists())
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         dir = QStandardPaths::writableLocation(
                                           QStandardPaths::DocumentsLocation);
-#else
-        dir = QDesktopServices::storageLocation(
-                                          QDesktopServices::DocumentsLocation);
-#endif
     return dir;
 }
 

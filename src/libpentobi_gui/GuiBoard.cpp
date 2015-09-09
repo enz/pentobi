@@ -42,14 +42,9 @@ bool allPointEmpty(const Board& bd, Move mv)
 
 QPixmap* createPixmap(const QPainter& painter, const QSize& size)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     auto devicePixelRatio = painter.device()->devicePixelRatio();
     auto pixmap = new QPixmap(devicePixelRatio * size);
     pixmap->setDevicePixelRatio(devicePixelRatio);
-#else
-    LIBBOARDGAME_UNUSED(painter);
-    auto pixmap = new QPixmap(size);
-#endif
     return pixmap;
 }
 
