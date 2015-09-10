@@ -129,7 +129,7 @@ void RatingDialog::updateContent()
         break;
     }
     m_labelVariant->setText(variantStr);
-        m_labelNuGames->setText(QString("%1").arg(nuGames));
+        m_labelNuGames->setText(QString::number(nuGames));
     if (nuGames == 0)
     {
         m_labelRating->setText("<b>--");
@@ -138,7 +138,7 @@ void RatingDialog::updateContent()
     else
     {
         m_labelRating->setText(QString("<b>%1").arg(rating.to_int()));
-        m_labelBestRating->setText(QString("%1").arg(bestRating.to_int()));
+        m_labelBestRating->setText(QString::number(bestRating.to_int()));
     }
     m_graph->updateContent(m_history);
     m_list->updateContent(variant, m_history);

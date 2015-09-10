@@ -3386,7 +3386,7 @@ void MainWindow::updateMoveNumber()
         {
             if (move > 0)
             {
-                text = QString("%1").arg(move);
+                text.setNum(move);
                 toolTip = tr("Move %1").arg(move);
             }
         }
