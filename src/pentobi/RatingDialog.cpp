@@ -24,6 +24,15 @@
 
 //-----------------------------------------------------------------------------
 
+QLabel* createSelectableLabel()
+{
+    auto label = new QLabel;
+    label->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    return label;
+}
+
+//-----------------------------------------------------------------------------
+
 RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     : QDialog(parent),
       m_history(history)
@@ -36,15 +45,15 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     layout->addLayout(formLayout);
     formLayout->setLabelAlignment(Qt::AlignLeft);
     auto box = new QHBoxLayout;
-    m_labelRating = new QLabel;
+    m_labelRating = createSelectableLabel();
     box->addWidget(m_labelRating);
     box->addStretch();
     formLayout->addRow(tr("Your rating:"), box);
-    m_labelVariant = new QLabel;
+    m_labelVariant = createSelectableLabel();
     formLayout->addRow(tr("Game variant:"), m_labelVariant);
-    m_labelNuGames = new QLabel;
+    m_labelNuGames = createSelectableLabel();
     formLayout->addRow(tr("Number rated games:"), m_labelNuGames);
-    m_labelBestRating = new QLabel;
+    m_labelBestRating = createSelectableLabel();
     formLayout->addRow(tr("Best previous rating:"), m_labelBestRating);
     layout->addSpacing(layout->margin());
     layout->addWidget(new QLabel(tr("Recent development:")));
