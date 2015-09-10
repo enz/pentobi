@@ -9,10 +9,11 @@ set(X86 "(x86)")
 find_program(MAKENSIS makensis
   PATHS "$ENV{ProgramFiles}\\NSIS" "$ENV{ProgramFiles${X86}}\\NSIS")
 
-file(MAKE_DIRECTORY deploy)
 add_custom_target(nsis
-  COMMAND del /s /q deploy
-  COMMAND ${WINDEPLOYQT} --dir deploy --release --no-svg $<TARGET_FILE:pentobi>
+  COMMAND ${CMAKE_COMMAND} -E remove_directory deploy
+  COMMAND ${CMAKE_COMMAND} -E make_directory deploy
+  COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:pentobi>" deploy
+  COMMAND ${WINDEPLOYQT} --dir deploy --release --no-svg "deploy/pentobi.exe"
   COMMAND ${MAKENSIS} install.nsis
 )
 
