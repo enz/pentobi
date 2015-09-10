@@ -3384,8 +3384,11 @@ void MainWindow::updateMoveNumber()
     {
         if (movesLeft == 0)
         {
-            text = QString("%1").arg(move);
-            toolTip = tr("Move %1").arg(move);
+            if (move > 0)
+            {
+                text = QString("%1").arg(move);
+                toolTip = tr("Move %1").arg(move);
+            }
         }
         else
         {
