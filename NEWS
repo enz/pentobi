@@ -1,10 +1,8 @@
 Version 10.0.UNKNOWN (v10-fixes)
 ================================
 
-* Avoid a crash on Android at startup if not enough memory is available.
-  The amount of memory is now reduced on Android because playing levels
-  1-7 do not need as much and if the allocation fails, an error message
-  is shown.
+* Reduced memory requirements on Android. Also, a meaningful error
+  message is now shown if the startup fails due to low memory.
 * The Windows installer is now built with Qt 5 and dynamic libraries.
 
 
