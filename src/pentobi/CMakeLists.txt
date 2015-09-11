@@ -61,8 +61,8 @@ set(pentobi_ICNS
   )
 
 set(pentobi_TS
-  pentobi.ts
-  pentobi_de.ts
+  translations/pentobi.ts
+  translations/pentobi_de.ts
   )
 
 # Create PNG icons from SVG icons using the helper program src/convert
@@ -93,20 +93,7 @@ endforeach()
 qt5_add_resources(pentobi_RC_SRCS
   ${CMAKE_CURRENT_BINARY_DIR}/resources_2x.qrc OPTIONS -no-compress)
 
-# We don't use qt_add_translation because it doesn't use option
-# -removeidentical (see QTBUG-44323)
-set(LRELEASE_EXECUTABLE ${Qt5_LRELEASE_EXECUTABLE})
-set(pentobi_QM_SRCS)
-foreach(ts ${pentobi_TS})
-  get_filename_component(qm ${ts} NAME_WE)
-  set(qm "${CMAKE_CURRENT_BINARY_DIR}/${qm}.qm")
-  add_custom_command(OUTPUT ${qm}
-    COMMAND ${LRELEASE_EXECUTABLE} -removeidentical -nounfinished
-      ${CMAKE_CURRENT_SOURCE_DIR}/translations/${ts} -qm ${qm}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/translations/${ts} VERBATIM
-    )
-  set(pentobi_QM_SRCS ${pentobi_QM_SRCS} ${qm})
-endforeach()
+qt5_add_translation(pentobi_QM_SRCS ${pentobi_TS})
 
 add_executable(pentobi WIN32
   ${pentobi_SRCS}
