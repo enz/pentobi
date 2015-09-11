@@ -31,14 +31,17 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QString locale = QLocale::system().name();
+    // The documentation of QQmlApplicationEngine says it loads translations
+    // from directory i18n automatically but that does not seem to work yet
+    // if the QML file is in the resources (tested with Qt 5.5).
     QTranslator translatorPentobi;
-    translatorPentobi.load("pentobi_qml_" + locale, ":qml/translations");
+    translatorPentobi.load("qml_" + locale, ":qml/i18n");
     app.installTranslator(&translatorPentobi);
     // The translation of standard buttons in QtQuick.Dialogs.MessageDialog is
     // broken on Android (tested with Qt 5.5; QTBUG-43353), so we created our
     // own file, which contains the translations we need.
     QTranslator translatorQt;
-    translatorQt.load("replace_qtbase_" + locale, ":qml/translations");
+    translatorQt.load("replace_qtbase_" + locale, ":qml/i18n");
     app.installTranslator(&translatorQt);
 
     QQmlApplicationEngine engine(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
