@@ -205,7 +205,7 @@ SOURCES += \
 }
 
 TRANSLATIONS += \
-    qml/i18n/pentobi_qml_de.ts \
+    qml/i18n/qml_de.ts \
     qml/i18n/replace_qtbase_de.ts
 
 OTHER_FILES += \
