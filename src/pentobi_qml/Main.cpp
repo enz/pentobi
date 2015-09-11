@@ -42,8 +42,7 @@ int main(int argc, char *argv[])
     translatorQt.load("replace_qtbase_" + locale, ":qml/translations");
     app.installTranslator(&translatorQt);
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl("qrc:///qml/Main.qml"));
+    QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
 
     return app.exec();
 }
