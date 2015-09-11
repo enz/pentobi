@@ -34,10 +34,9 @@ int main(int argc, char *argv[])
     QTranslator translatorPentobi;
     translatorPentobi.load("pentobi_qml_" + locale, ":qml/translations");
     app.installTranslator(&translatorPentobi);
-    // androiddeployqt does not install Qt translations (or we haven't figured
-    // out how to do it; last tested with Qt 5.4-alpha), but we need only very
-    // few translations anyway (some standard buttons of MessageDialog), so we
-    // created our own translation files as a replacement for qt_base_*.ts
+    // The translation of standard buttons in QtQuick.Dialogs.MessageDialog is
+    // broken on Android (tested with Qt 5.5; QTBUG-43353), so we created our
+    // own file, which contains the translations we need.
     QTranslator translatorQt;
     translatorQt.load("replace_qtbase_" + locale, ":qml/translations");
     app.installTranslator(&translatorQt);
