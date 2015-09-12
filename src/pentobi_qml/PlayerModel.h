@@ -88,7 +88,7 @@ private:
         GameModel* gameModel;
     };
 
-    bool m_isGenMoveRunning;
+    bool m_isGenMoveRunning = false;
 
     int m_levelClassic;
 
@@ -104,7 +104,7 @@ private:
 
     int m_levelJunior;
 
-    unsigned m_genMoveId;
+    unsigned m_genMoveId = 0;
 
     unique_ptr<Player> m_player;
 

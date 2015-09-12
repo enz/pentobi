@@ -83,24 +83,7 @@ GameModel::GameModel(QObject* parent)
       m_game(getInitialGameVariant()),
       m_gameVariant(to_string_id(m_game.get_variant())),
       m_nuColors(getBoard().get_nu_colors()),
-      m_nuPieces(getBoard().get_nu_pieces()),
-      m_toPlay(0),
-      m_altPlayer(0),
-      m_points0(0),
-      m_points1(0),
-      m_points2(0),
-      m_points3(0),
-      m_nuPiecesLeft0(0),
-      m_nuPiecesLeft1(0),
-      m_nuPiecesLeft2(0),
-      m_nuPiecesLeft3(0),
-      m_hasMoves0(true),
-      m_hasMoves1(true),
-      m_hasMoves2(true),
-      m_hasMoves3(true),
-      m_isGameOver(false),
-      m_isBoardEmpty(true),
-      m_canUndo(false)
+      m_nuPieces(getBoard().get_nu_pieces())
 {
     createPieceModels();
     updateProperties();

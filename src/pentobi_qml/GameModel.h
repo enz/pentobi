@@ -144,39 +144,39 @@ private:
 
     int m_nuPieces;
 
-    int m_toPlay;
+    int m_toPlay = 0;
 
-    int m_altPlayer;
+    int m_altPlayer = 0;
 
-    int m_points0;
+    int m_points0 = 0;
 
-    int m_points1;
+    int m_points1 = 0;
 
-    int m_points2;
+    int m_points2 = 0;
 
-    int m_points3;
+    int m_points3 = 0;
 
-    int m_nuPiecesLeft0;
+    int m_nuPiecesLeft0 = 0;
 
-    int m_nuPiecesLeft1;
+    int m_nuPiecesLeft1 = 0;
 
-    int m_nuPiecesLeft2;
+    int m_nuPiecesLeft2 = 0;
 
-    int m_nuPiecesLeft3;
+    int m_nuPiecesLeft3 = 0;
 
-    bool m_hasMoves0;
+    bool m_hasMoves0 = true;
 
-    bool m_hasMoves1;
+    bool m_hasMoves1 = true;
 
-    bool m_hasMoves2;
+    bool m_hasMoves2 = true;
 
-    bool m_hasMoves3;
+    bool m_hasMoves3 = true;
 
-    bool m_isGameOver;
+    bool m_isGameOver = false;
 
-    bool m_isBoardEmpty;
+    bool m_isBoardEmpty = true;
 
-    bool m_canUndo;
+    bool m_canUndo = false;
 
     QList<PieceModel*> m_pieceModels0;
 

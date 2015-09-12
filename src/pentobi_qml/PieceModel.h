@@ -89,7 +89,7 @@ private:
 
     Piece m_piece;
 
-    bool m_isPlayed;
+    bool m_isPlayed = false;
 
     QPointF m_gameCoord;
 

@@ -41,8 +41,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
     : QObject(parent),
       m_bd(bd),
       m_color(c),
-      m_piece(piece),
-      m_isPlayed(false)
+      m_piece(piece)
 {
     auto& info = bd.get_piece_info(piece);
     for (auto& p : info.get_points())
