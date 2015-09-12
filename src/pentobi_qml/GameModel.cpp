@@ -302,8 +302,7 @@ bool GameModel::loadAutoSave()
             Move mv = bd.from_string(l[i + 1].toLocal8Bit().constData());
             if (! bd.is_legal(c, mv))
                 throw runtime_error("illegal move");
-            m_game.play(c, mv, true
-                        );
+            m_game.play(c, mv, true);
         }
     }
     catch (const exception &e)
