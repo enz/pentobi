@@ -1,23 +1,24 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_qml/BoardModel.h
+/** @file pentobi_qml/GameModel.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef PENTOBI_QML_BOARD_MODEL_H
-#define PENTOBI_QML_BOARD_MODEL_H
+#ifndef PENTOBI_QML_GAME_MODEL_H
+#define PENTOBI_QML_GAME_MODEL_H
 
 #include <QQmlListProperty>
 #include "PieceModel.h"
-#include "libpentobi_base/Board.h"
+#include "libpentobi_base/Game.h"
 
 using libpentobi_base::Board;
+using libpentobi_base::Game;
 using libpentobi_base::Move;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-class BoardModel
+class GameModel
     : public QObject
 {
     Q_OBJECT
@@ -55,7 +56,7 @@ class BoardModel
 public:
     static Variant getInitialGameVariant();
 
-    explicit BoardModel(QObject* parent = nullptr);
+    explicit GameModel(QObject* parent = nullptr);
 
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, QPointF coord) const;
 
@@ -135,7 +136,7 @@ signals:
     void nuPiecesChanged(int);
 
 private:
-    Board m_bd;
+    Game m_game;
 
     QString m_gameVariant;
 
@@ -202,11 +203,11 @@ private:
     void updateProperties();
 };
 
-inline const Board& BoardModel::getBoard() const
+inline const Board& GameModel::getBoard() const
 {
-    return m_bd;
+    return m_game.get_board();
 }
 
 //-----------------------------------------------------------------------------
 
-#endif // PENTOBI_QML_BOARD_MODEL_H
+#endif // PENTOBI_QML_GAME_MODEL_H

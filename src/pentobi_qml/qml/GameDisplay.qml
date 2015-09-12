@@ -18,7 +18,7 @@ Item
     property var _pieces1
     property var _pieces2
     property var _pieces3
-    property bool _isTrigon: boardModel.gameVariant.indexOf("trigon") >= 0
+    property bool _isTrigon: gameModel.gameVariant.indexOf("trigon") >= 0
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
@@ -47,7 +47,7 @@ Item
         Board {
             id: board
 
-            gameVariant: boardModel.gameVariant
+            gameVariant: gameModel.gameVariant
             width: Math.min(parent.width,
                             (_isTrigon ? 0.9 : 0.8) * root.height)
             height: _isTrigon ? Math.sqrt(3) / 2 * width : width
@@ -56,17 +56,17 @@ Item
         ScoreDisplay {
             id: scoreDisplay
 
-            gameVariant: boardModel.gameVariant
-            points0: boardModel.points0
-            points1: boardModel.points1
-            points2: boardModel.points2
-            points3: boardModel.points3
-            hasMoves0: boardModel.hasMoves0
-            hasMoves1: boardModel.hasMoves1
-            hasMoves2: boardModel.hasMoves2
-            hasMoves3: boardModel.hasMoves3
-            toPlay: boardModel.isGameOver ? -1 : boardModel.toPlay
-            altPlayer: boardModel.altPlayer
+            gameVariant: gameModel.gameVariant
+            points0: gameModel.points0
+            points1: gameModel.points1
+            points2: gameModel.points2
+            points3: gameModel.points3
+            hasMoves0: gameModel.hasMoves0
+            hasMoves1: gameModel.hasMoves1
+            hasMoves2: gameModel.hasMoves2
+            hasMoves3: gameModel.hasMoves3
+            toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
+            altPlayer: gameModel.altPlayer
             height: board.gridElementHeight
             pointSize: 0.6 * height
             anchors.horizontalCenter: parent.horizontalCenter
@@ -76,18 +76,18 @@ Item
 
             property int nuVisibleColumns: 7
             property int _maxRows:
-                _isTrigon || boardModel.gameVariant == "junior" ? 4 : 3
+                _isTrigon || gameModel.gameVariant == "junior" ? 4 : 3
 
             pieces0: _pieces0
             pieces1: _pieces1
             pieces2: _pieces2
             pieces3: _pieces3
-            nuPiecesLeft0: boardModel.nuPiecesLeft0
-            nuPiecesLeft1: boardModel.nuPiecesLeft1
-            nuPiecesLeft2: boardModel.nuPiecesLeft2
-            nuPiecesLeft3: boardModel.nuPiecesLeft3
-            toPlay: boardModel.toPlay
-            nuColors: boardModel.nuColors
+            nuPiecesLeft0: gameModel.nuPiecesLeft0
+            nuPiecesLeft1: gameModel.nuPiecesLeft1
+            nuPiecesLeft2: gameModel.nuPiecesLeft2
+            nuPiecesLeft3: gameModel.nuPiecesLeft3
+            toPlay: gameModel.toPlay
+            nuColors: gameModel.nuColors
             width: board.width
             anchors.horizontalCenter: board.horizontalCenter
 
@@ -127,7 +127,7 @@ Item
             var boardCoord = parent.mapToItem(board,
                                               x + width / 2, y + height / 2)
             var coord = board.mapToGame(boardCoord.x, boardCoord.y)
-            return boardModel.isLegalPos(pickedPiece.pieceModel, coord)
+            return gameModel.isLegalPos(pickedPiece.pieceModel, coord)
         }
 
         width: 0.6 * board.width

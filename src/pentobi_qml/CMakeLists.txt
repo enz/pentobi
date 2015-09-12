@@ -3,8 +3,8 @@ set(CMAKE_AUTOMOC TRUE)
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_qml_SRCS
-  BoardModel.h
-  BoardModel.cpp
+  GameModel.h
+  GameModel.cpp
   Main.cpp
   PieceModel.h
   PieceModel.cpp

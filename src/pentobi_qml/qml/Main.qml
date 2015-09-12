@@ -49,8 +49,8 @@ ApplicationWindow {
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
     }
-    BoardModel {
-        id: boardModel
+    GameModel {
+        id: gameModel
     }
     PlayerModel {
         id: playerModel
@@ -70,7 +70,7 @@ ApplicationWindow {
         id: computerColorDialogComponent
 
         ComputerColorDialog {
-            gameVariant: boardModel.gameVariant
+            gameVariant: gameModel.gameVariant
             onAccepted: {
                 root.computerPlays0 = this.computerPlays0
                 root.computerPlays1 = this.computerPlays1

@@ -16,7 +16,7 @@ gcc {
 }
 
 SOURCES += \
-    BoardModel.cpp \
+    GameModel.cpp \
     Main.cpp \
     PieceModel.cpp \
     PlayerModel.cpp \
@@ -52,6 +52,7 @@ SOURCES += \
     ../libpentobi_base/BoardUtil.cpp \
     ../libpentobi_base/Book.cpp \
     ../libpentobi_base/Color.cpp \
+    ../libpentobi_base/Game.cpp \
     ../libpentobi_base/NodeUtil.cpp \
     ../libpentobi_base/PieceInfo.cpp \
     ../libpentobi_base/PieceTransforms.cpp \
@@ -96,7 +97,7 @@ android {
 include(deployment.pri)
 
 HEADERS += \
-    BoardModel.h \
+    GameModel.h \
     PieceModel.h \
     PlayerModel.h \
     ../libboardgame_base/CoordPoint.h \
@@ -157,6 +158,7 @@ HEADERS += \
     ../libpentobi_base/Color.h \
     ../libpentobi_base/ColorMap.h \
     ../libpentobi_base/ColorMove.h \
+    ../libpentobi_base/Game.h \
     ../libpentobi_base/Geometry.h \
     ../libpentobi_base/Grid.h \
     ../libpentobi_base/Marker.h \

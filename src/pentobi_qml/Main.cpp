@@ -7,7 +7,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QtQml>
-#include "BoardModel.h"
+#include "GameModel.h"
 #include "PlayerModel.h"
 #include "libboardgame_util/Log.h"
 
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");
 
-    qmlRegisterType<BoardModel>("pentobi", 1, 0, "BoardModel");
+    qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterInterface<PieceModel>("PieceModel");
 

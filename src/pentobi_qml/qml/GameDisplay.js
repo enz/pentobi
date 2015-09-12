@@ -3,22 +3,22 @@ function createPieces() {
     destroyPieces(_pieces1)
     destroyPieces(_pieces2)
     destroyPieces(_pieces3)
-    var file = (boardModel.gameVariant.indexOf("trigon") >= 0) ?
+    var file = (gameModel.gameVariant.indexOf("trigon") >= 0) ?
                 "PieceTrigon.qml" : "PieceClassic.qml"
     var component = Qt.createComponent(file)
     if (component.status != Component.Ready)
         throw "Could not create component " + file
-    _pieces0 = createColorPieces(component, boardModel.pieceModels0)
-    _pieces1 = createColorPieces(component, boardModel.pieceModels1)
-    _pieces2 = createColorPieces(component, boardModel.pieceModels2)
-    _pieces3 = createColorPieces(component, boardModel.pieceModels3)
+    _pieces0 = createColorPieces(component, gameModel.pieceModels0)
+    _pieces1 = createColorPieces(component, gameModel.pieceModels1)
+    _pieces2 = createColorPieces(component, gameModel.pieceModels2)
+    _pieces3 = createColorPieces(component, gameModel.pieceModels3)
 }
 
 function createColorPieces(component, pieceModels) {
     if (pieceModels.length == 0)
         return []
     var pieces = []
-    var gameVariant = boardModel.gameVariant
+    var gameVariant = gameModel.gameVariant
     var colorName
     if (gameVariant == "duo" || gameVariant == "junior")
         switch (pieceModels[0].color) {
@@ -66,11 +66,11 @@ function findPiece(pieceModel) {
     for (i = 0; i < _pieces1.length; ++i)
         if (_pieces1[i].pieceModel === pieceModel)
             return _pieces1[i]
-    if (boardModel.nuColors > 2)
+    if (gameModel.nuColors > 2)
         for (i = 0; i < _pieces2.length; ++i)
             if (_pieces2[i].pieceModel === pieceModel)
                 return _pieces2[i]
-    if (boardModel.nuColors > 3)
+    if (gameModel.nuColors > 3)
         for (i = 0; i < _pieces3.length; ++i)
             if (_pieces3[i].pieceModel === pieceModel)
                 return _pieces3[i]
@@ -78,9 +78,9 @@ function findPiece(pieceModel) {
 }
 
 function pickPiece(piece) {
-    if (playerModel.isGenMoveRunning || boardModel.isGameOver)
+    if (playerModel.isGenMoveRunning || gameModel.isGameOver)
         return
-    if (piece.pieceModel.color !== boardModel.toPlay) {
+    if (piece.pieceModel.color !== gameModel.toPlay) {
         showToPlay()
         return
     }
@@ -99,7 +99,7 @@ function pickPiece(piece) {
 }
 
 function showMoveHint(move) {
-    var pieceModel = boardModel.preparePiece(boardModel.toPlay, move)
+    var pieceModel = gameModel.preparePiece(gameModel.toPlay, move)
     var piece = findPiece(pieceModel)
     var pos = board.mapToItem(pieceManipulator.parent,
                               board.mapFromGameX(pieceModel.gameCoord.x),

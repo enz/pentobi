@@ -45,7 +45,7 @@ PlayerModel::PlayerModel(QObject* parent)
 {
     try
     {
-        m_player.reset(new Player(BoardModel::getInitialGameVariant(), ""));
+        m_player.reset(new Player(GameModel::getInitialGameVariant(), ""));
     }
     catch (const bad_alloc&)
     {
@@ -76,15 +76,15 @@ PlayerModel::~PlayerModel()
     settings.setValue("level_junior", m_levelJunior);
 }
 
-PlayerModel::GenMoveResult PlayerModel::asyncGenMove(BoardModel* bm,
+PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm,
                                                      unsigned genMoveId)
 {
     QElapsedTimer timer;
     timer.start();
-    auto& bd = bm->getBoard();
+    auto& bd = gm->getBoard();
     GenMoveResult result;
     result.genMoveId = genMoveId;
-    result.boardModel = bm;
+    result.gameModel = gm;
     result.move = m_player->genmove(bd, bd.get_effective_to_play());
     auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 1 sec
@@ -113,7 +113,7 @@ void PlayerModel::genMoveFinished()
         // Callback from a canceled move generation
         return;
     setIsGenMoveRunning(false);
-    auto& bd = result.boardModel->getBoard();
+    auto& bd = result.gameModel->getBoard();
     auto mv = result.move;
     if (mv.is_null())
     {
@@ -157,10 +157,10 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
     emit isGenMoveRunningChanged(isGenMoveRunning);
 }
 
-void PlayerModel::startGenMove(BoardModel* boardModel)
+void PlayerModel::startGenMove(GameModel* gm)
 {
     int level;
-    switch (boardModel->getBoard().get_variant())
+    switch (gm->getBoard().get_variant())
     {
     case Variant::classic_2:
         level = m_levelClassic2;
@@ -180,20 +180,20 @@ void PlayerModel::startGenMove(BoardModel* boardModel)
     default:
         level = m_levelClassic;
     }
-    startGenMoveAtLevel(boardModel, level);
+    startGenMoveAtLevel(gm, level);
 }
 
-void PlayerModel::startGenMoveAtLevel(BoardModel* boardModel, int level)
+void PlayerModel::startGenMoveAtLevel(GameModel* gm, int level)
 {
     cancelGenMove();
     m_player->set_level(level);
-    auto variant = boardModel->getBoard().get_variant();
+    auto variant = gm->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
     clear_abort();
     ++m_genMoveId;
     QFuture<GenMoveResult> future =
-            QtConcurrent::run(this, &PlayerModel::asyncGenMove, boardModel,
+            QtConcurrent::run(this, &PlayerModel::asyncGenMove, gm,
                               m_genMoveId);
     m_genMoveWatcher.setFuture(future);
     setIsGenMoveRunning(true);

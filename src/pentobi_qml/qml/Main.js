@@ -1,8 +1,8 @@
 function autosave() {
-    if (boardModel.isGameOver)
-        boardModel.clearAutoSave()
+    if (gameModel.isGameOver)
+        gameModel.clearAutoSave()
     else
-        boardModel.autoSave()
+        gameModel.autoSave()
 }
 
 function cancelGenMove() {
@@ -11,10 +11,10 @@ function cancelGenMove() {
 }
 
 function changeGameVariant(gameVariant, verifyAbortGame) {
-    if (boardModel.gameVariant === gameVariant)
+    if (gameModel.gameVariant === gameVariant)
         return
     cancelGenMove()
-    if (! boardModel.isBoardEmpty && ! boardModel.isGameOver &&
+    if (! gameModel.isBoardEmpty && ! gameModel.isGameOver &&
             verifyAbortGame) {
         showQuestion(qsTr("New game?"),
                      function() { changeGameVariant(gameVariant, false) })
@@ -30,17 +30,17 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
 }
 
 function checkComputerMove() {
-    if (boardModel.isGameOver) {
+    if (gameModel.isGameOver) {
         showGameOver()
         return
     }
     if (! isComputerToPlay())
         return
-    switch (boardModel.toPlay) {
-    case 0: if (! boardModel.hasMoves0) return; break
-    case 1: if (! boardModel.hasMoves1) return; break
-    case 2: if (! boardModel.hasMoves2) return; break
-    case 3: if (! boardModel.hasMoves3) return; break
+    switch (gameModel.toPlay) {
+    case 0: if (! gameModel.hasMoves0) return; break
+    case 1: if (! gameModel.hasMoves1) return; break
+    case 2: if (! gameModel.hasMoves2) return; break
+    case 3: if (! gameModel.hasMoves3) return; break
     }
     genMove();
 }
@@ -95,9 +95,9 @@ function computerPlay() {
         computerPlays1 = false
         computerPlays2 = false
         computerPlays3 = false
-        var variant = boardModel.gameVariant
-        if (variant == "classic_3" && boardModel.toPlay == 3) {
-            switch (boardModel.altPlayer) {
+        var variant = gameModel.gameVariant
+        if (variant == "classic_3" && gameModel.toPlay == 3) {
+            switch (gameModel.altPlayer) {
             case 0: computerPlays0 = true; break
             case 1: computerPlays1 = true; break
             case 2: computerPlays2 = true; break
@@ -107,7 +107,7 @@ function computerPlay() {
         {
             var isMultiColor =
                     (variant == "classic_2" || variant == "trigon_2")
-            switch (boardModel.toPlay) {
+            switch (gameModel.toPlay) {
             case 0:
                 computerPlays0 = true
                 if (isMultiColor) computerPlays2 = true
@@ -140,7 +140,7 @@ function computerPlays(color) {
 }
 
 function computerPlaysAll() {
-    switch (boardModel.gameVariant) {
+    switch (gameModel.gameVariant) {
     case "duo":
     case "junior":
     case "classic_2":
@@ -168,7 +168,7 @@ function genMove() {
     gameDisplay.busyIndicatorRunning = true
     gameDisplay.showToPlay()
     isMoveHintRunning = false
-    playerModel.startGenMove(boardModel)
+    playerModel.startGenMove(gameModel)
 }
 
 function hideComputerColorDialog()
@@ -180,7 +180,7 @@ function hideComputerColorDialog()
 function init() {
     callDelayTimer.call(function() {
         gameDisplay.createPieces()
-        if (! boardModel.loadAutoSave())
+        if (! gameModel.loadAutoSave())
             initComputerColors()
         else {
             clearMarks()
@@ -198,8 +198,8 @@ function initComputerColors() {
     computerPlays1 = true
     computerPlays2 = true
     computerPlays3 = true
-    if (boardModel.gameVariant == "classic_2"
-            || boardModel.gameVariant == "trigon_2")
+    if (gameModel.gameVariant == "classic_2"
+            || gameModel.gameVariant == "trigon_2")
         computerPlays2 = false
 }
 
@@ -208,23 +208,23 @@ function initGameVariant(gameVariant) {
     hideComputerColorDialog()
     clearMarks()
     gameDisplay.destroyPieces()
-    boardModel.initGameVariant(gameVariant)
+    gameModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
 }
 
 function isComputerToPlay() {
-    if (boardModel.gameVariant == "classic_3" && boardModel.toPlay == 3)
-        return computerPlays(boardModel.altPlayer)
-    return computerPlays(boardModel.toPlay)
+    if (gameModel.gameVariant == "classic_3" && gameModel.toPlay == 3)
+        return computerPlays(gameModel.altPlayer)
+    return computerPlays(gameModel.toPlay)
 }
 
 function markLastMove() {
     if (! root.markLastMove)
         return
-    var piece = gameDisplay.findPiece(boardModel.getLastMovePieceModel())
+    var piece = gameDisplay.findPiece(gameModel.getLastMovePieceModel())
     if (piece == null)
         return
-    switch (boardModel.getLastMoveColor()) {
+    switch (gameModel.getLastMoveColor()) {
     case 0:
         if (_pieceMarked0 != null) _pieceMarked0.isMarked = false
         _pieceMarked0 = piece
@@ -252,7 +252,7 @@ function moveGenerated(move) {
         isMoveHintRunning = false
         return
     }
-    boardModel.playMove(move)
+    gameModel.playMove(move)
     if (computerPlaysAll())
         clearMarks()
     else
@@ -262,18 +262,18 @@ function moveGenerated(move) {
 }
 
 function moveHint() {
-    if (boardModel.isGameOver)
+    if (gameModel.isGameOver)
         return
     cancelGenMove()
     isMoveHintRunning = true
     gameDisplay.busyIndicatorRunning = true
-    playerModel.startGenMoveAtLevel(boardModel, 1)
+    playerModel.startGenMoveAtLevel(gameModel, 1)
 }
 
 function newGame(verifyAbortGame)
 {
     cancelGenMove()
-    if (! boardModel.isBoardEmpty &&  ! boardModel.isGameOver &&
+    if (! gameModel.isBoardEmpty &&  ! gameModel.isGameOver &&
             verifyAbortGame) {
         showQuestion(qsTr("New game?"), function() { newGame(false) })
         return
@@ -282,7 +282,7 @@ function newGame(verifyAbortGame)
     clearMarks()
     hideComputerColorDialog()
     gameDisplay.transitionsEnabled = false
-    boardModel.newGame()
+    gameModel.newGame()
     gameDisplay.showToPlay()
     gameDisplay.transitionsEnabled = true
     initComputerColors()
@@ -291,7 +291,7 @@ function newGame(verifyAbortGame)
 function play(pieceModel, gameCoord) {
     cancelGenMove()
     var wasComputerToPlay = isComputerToPlay()
-    boardModel.play(pieceModel, gameCoord)
+    gameModel.play(pieceModel, gameCoord)
     clearMarks()
     markLastMove()
     // If a move was entered but the computer plays this color (e.g. after
@@ -317,14 +317,14 @@ function showComputerColorDialog() {
 }
 
 function showGameOver() {
-    if (! boardModel.isGameOver)
+    if (! gameModel.isGameOver)
         return
     var msg, points0, points1, points2, points3
-    switch (boardModel.gameVariant) {
+    switch (gameModel.gameVariant) {
     case "duo":
     case "junior":
-        points0 = boardModel.points0
-        points1 = boardModel.points1
+        points0 = gameModel.points0
+        points1 = gameModel.points1
         if (points0 > points1)
             msg = qsTr("Blue wins.")
         else if (points0 < points1)
@@ -334,8 +334,8 @@ function showGameOver() {
         break
     case "classic_2":
     case "trigon_2":
-        points0 = boardModel.points0 + boardModel.points2
-        points1 = boardModel.points1 + boardModel.points3
+        points0 = gameModel.points0 + gameModel.points2
+        points1 = gameModel.points1 + gameModel.points3
         if (points0 > points1)
             msg = qsTr("Blue/Red wins.")
         else if (points0 < points1)
@@ -345,9 +345,9 @@ function showGameOver() {
         break
     case "classic_3":
     case "trigon_3":
-        points0 = boardModel.points0
-        points1 = boardModel.points1
-        points2 = boardModel.points2
+        points0 = gameModel.points0
+        points1 = gameModel.points1
+        points2 = gameModel.points2
         var maxPoints = Math.max(points0, points1, points2)
         var nuWinners = 0
         if (points0 === maxPoints) ++nuWinners
@@ -363,10 +363,10 @@ function showGameOver() {
             msg = qsTr("Red wins.")
         break
     default:
-        points0 = boardModel.points0
-        points1 = boardModel.points1
-        points2 = boardModel.points2
-        points3 = boardModel.points3
+        points0 = gameModel.points0
+        points1 = gameModel.points1
+        points2 = gameModel.points2
+        points3 = gameModel.points3
         maxPoints = Math.max(points0, points1, points2, points3)
         nuWinners = 0
         if (points0 === maxPoints) ++nuWinners
@@ -405,14 +405,14 @@ function showQuestion(text, acceptedFunc) {
 }
 
 function undo() {
-    if (! boardModel.canUndo)
+    if (! gameModel.canUndo)
         return
     cancelGenMove()
     // Immediately show the last color to move, otherwise the piece movement
     // animation will target a part of the piece selector that is currently not
     // visible
-    gameDisplay.showPiecesImmediately(boardModel.getLastMoveColor())
-    boardModel.undo()
+    gameDisplay.showPiecesImmediately(gameModel.getLastMoveColor())
+    gameModel.undo()
     clearMarks()
     markLastMove()
     gameDisplay.pickedPiece = null

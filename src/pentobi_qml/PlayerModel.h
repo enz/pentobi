@@ -8,7 +8,7 @@
 #define PENTOBI_QML_PLAYER_MODEL_H
 
 #include <QFutureWatcher>
-#include "BoardModel.h"
+#include "GameModel.h"
 #include "libpentobi_mcts/Player.h"
 
 using namespace std;
@@ -45,9 +45,9 @@ public:
         The state of the board model may not be changed until the move
         generation was finished (computerPlayed signal) or aborted
         with cancelGenMove() */
-    Q_INVOKABLE void startGenMove(BoardModel* boardModel);
+    Q_INVOKABLE void startGenMove(GameModel* gameModel);
 
-    Q_INVOKABLE void startGenMoveAtLevel(BoardModel* boardModel, int level);
+    Q_INVOKABLE void startGenMoveAtLevel(GameModel* gameModel, int level);
 
     /** Cancel the move generation in the background thread if one is
         running. */
@@ -85,7 +85,7 @@ private:
 
         unsigned genMoveId;
 
-        BoardModel* boardModel;
+        GameModel* gameModel;
     };
 
     bool m_isGenMoveRunning;
@@ -110,7 +110,7 @@ private:
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
-    GenMoveResult asyncGenMove(BoardModel* bm, unsigned genMoveId);
+    GenMoveResult asyncGenMove(GameModel* gm, unsigned genMoveId);
 
     void loadBook(Variant variant);
 

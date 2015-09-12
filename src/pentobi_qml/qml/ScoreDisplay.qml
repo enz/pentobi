@@ -52,8 +52,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 4.8 * pointSize
-        color: boardModel.gameVariant == "duo"
-               || boardModel.gameVariant == "junior" ?
+        color: gameModel.gameVariant == "duo"
+                   || gameModel.gameVariant == "junior" ?
                    theme.colorGreen : theme.colorYellow
     }
     ScoreElement {
