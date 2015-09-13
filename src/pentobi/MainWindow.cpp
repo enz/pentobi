@@ -436,9 +436,8 @@ void MainWindow::badMove(bool checked)
 void MainWindow::backward()
 {
     auto& node = m_game.get_current();
-    if (! node.has_parent())
-        return;
-    gotoNode(node.get_parent());
+    if (node.has_parent())
+        gotoNode(node.get_parent());
 }
 
 void MainWindow::backToMainVariation()
@@ -1713,9 +1712,8 @@ void MainWindow::flipVertically()
 void MainWindow::forward()
 {
     auto node = m_game.get_current().get_first_child_or_null();
-    if (! node)
-        return;
-    gotoNode(*node);
+    if (node)
+        gotoNode(*node);
 }
 
 void MainWindow::fullscreen()
@@ -2019,9 +2017,8 @@ void MainWindow::gotoMove()
     dialog.setIntRange(1, static_cast<int>(nodes.size()));
     dialog.setIntStep(1);
     dialog.setIntValue(defaultValue);
-    if (! dialog.exec())
-        return;
-    gotoNode(*nodes[dialog.intValue() - 1]);
+    if (dialog.exec())
+        gotoNode(*nodes[dialog.intValue() - 1]);
 }
 
 void MainWindow::gotoNode(const SgfNode& node)
@@ -2324,9 +2321,8 @@ void MainWindow::nextTransform()
 void MainWindow::nextVariation()
 {
     auto node = m_game.get_current().get_sibling();
-    if (! node)
-        return;
-    gotoNode(*node);
+    if (node)
+        gotoNode(*node);
 }
 
 void MainWindow::newGame()
@@ -2571,9 +2567,8 @@ void MainWindow::previousTransform()
 void MainWindow::previousVariation()
 {
     auto node = m_game.get_current().get_previous_sibling();
-    if (! node)
-        return;
-    gotoNode(*node);
+    if (node)
+        gotoNode(*node);
 }
 
 void MainWindow::ratedGame()
@@ -2718,11 +2713,8 @@ void MainWindow::rotateClockwise()
 void MainWindow::save()
 {
     if (m_file.isEmpty())
-    {
         saveAs();
-        return;
-    }
-    if (save(m_file))
+    else if (save(m_file))
     {
         m_game.clear_modified();
         updateWindow(false);
@@ -3032,9 +3024,8 @@ void MainWindow::setLevel(int level)
 
 void MainWindow::setLevel(bool checked)
 {
-    if (! checked)
-        return;
-    setLevel(qobject_cast<QAction*>(sender())->data().toInt());
+    if (checked)
+        setLevel(qobject_cast<QAction*>(sender())->data().toInt());
 }
 
 void MainWindow::setMoveMarkingAllNumber(bool checked)
