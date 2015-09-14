@@ -435,9 +435,7 @@ void MainWindow::badMove(bool checked)
 
 void MainWindow::backward()
 {
-    auto& node = m_game.get_current();
-    if (node.has_parent())
-        gotoNode(node.get_parent());
+    gotoNode(m_game.get_current().get_parent_or_null());
 }
 
 void MainWindow::backToMainVariation()
@@ -1711,9 +1709,7 @@ void MainWindow::flipVertically()
 
 void MainWindow::forward()
 {
-    auto node = m_game.get_current().get_first_child_or_null();
-    if (node)
-        gotoNode(*node);
+    gotoNode(m_game.get_current().get_first_child_or_null());
 }
 
 void MainWindow::fullscreen()
@@ -2043,6 +2039,12 @@ void MainWindow::gotoNode(const SgfNode& node)
     updateWindow(true);
 }
 
+void MainWindow::gotoNode(const SgfNode* node)
+{
+    if (node)
+        gotoNode(*node);
+}
+
 void MainWindow::gotoPosition(Variant variant,
                               const vector<ColorMove>& moves)
 {
@@ -2320,9 +2322,7 @@ void MainWindow::nextTransform()
 
 void MainWindow::nextVariation()
 {
-    auto node = m_game.get_current().get_sibling();
-    if (node)
-        gotoNode(*node);
+    gotoNode(m_game.get_current().get_sibling());
 }
 
 void MainWindow::newGame()
@@ -2566,9 +2566,7 @@ void MainWindow::previousTransform()
 
 void MainWindow::previousVariation()
 {
-    auto node = m_game.get_current().get_previous_sibling();
-    if (node)
-        gotoNode(*node);
+    gotoNode(m_game.get_current().get_previous_sibling());
 }
 
 void MainWindow::ratedGame()

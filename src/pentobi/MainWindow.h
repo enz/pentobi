@@ -650,6 +650,8 @@ private:
 
     void gotoNode(const SgfNode& node);
 
+    void gotoNode(const SgfNode* node);
+
     void initGame();
 
     void initVariantActions();
