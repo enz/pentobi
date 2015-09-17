@@ -3,6 +3,9 @@ Version 10.0.UNKNOWN (v10-fixes)
 
 * Reduced memory requirements on Android. Also, a meaningful error
   message is now shown if the startup fails due to low memory.
+* Android: Changed the snapping behavior of the flickable area with
+  the unplayed pieces to make it easier to flick with multiple movements
+  on small screens.
 * The Windows installer is now built with Qt 5 and dynamic libraries.
 
 

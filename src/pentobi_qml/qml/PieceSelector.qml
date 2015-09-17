@@ -43,8 +43,13 @@ Item {
         contentHeight: nuColors * height
         flickableDirection: Flickable.VerticalFlick
         clip: true
+        // Snap to beginning of pieces if close to it
         onMovementEnded: {
-            var color = Math.min(Math.round(contentY / height), nuColors - 1)
+            var normalizedY = contentY / height
+            var remainderY = normalizedY - Math.floor(normalizedY)
+            if (remainderY > 0.1 && remainderY < 0.9)
+                return
+            var color = Math.min(Math.round(normalizedY), nuColors - 1)
             showColorAnimation.stop()
             snapAnimation.to = height * color
             snapAnimation.restart()
