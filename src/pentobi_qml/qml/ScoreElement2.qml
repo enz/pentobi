@@ -32,8 +32,10 @@ Item {
         width: pointSize
         height: width
         radius: width / 2
-        anchors.left: point1.right
-        anchors.verticalCenter: root.verticalCenter
+        anchors {
+            left: point1.right
+            verticalCenter: root.verticalCenter
+        }
     }
     Text {
         text: {
