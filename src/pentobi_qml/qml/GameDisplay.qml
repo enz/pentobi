@@ -117,22 +117,22 @@ Rectangle
 
             height: rows * pieceAreaSize
             onPiecePicked: Logic.pickPiece(piece)
+        }
+    }
+    Loader {
+        id: messageLoader
 
-            Loader {
-                id: messageLoader
+        x: (root.width - width) / 2
+        y: column.y + pieceSelector.y + (pieceSelector.height - height) / 2
+    }
+    Component {
+        id: messageComponent
 
-                anchors.centerIn: parent
-            }
-            Component {
-                id: messageComponent
+        Pentobi.Message {
+            id: message
 
-                Pentobi.Message {
-                    id: message
-
-                    fontSize: 0.4 * pieceAreaSize
-                    onClicked: clear()
-                }
-            }
+            fontSize: 0.4 * pieceAreaSize
+            onClicked: clear()
         }
     }
     BusyIndicator {
