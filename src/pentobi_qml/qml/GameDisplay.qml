@@ -107,12 +107,6 @@ Rectangle
 
             height: rows * pieceAreaSize
             onPiecePicked: Logic.pickPiece(piece)
-
-            Loader {
-                id: messageLoader
-
-                anchors.centerIn: parent
-            }
         }
     }
     BusyIndicator {
