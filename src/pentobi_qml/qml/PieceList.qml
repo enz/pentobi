@@ -11,7 +11,7 @@ Grid {
     Repeater {
         model: pieces
 
-        Item {
+        MouseArea {
             id: pieceArea
 
             property var piece: modelData
@@ -19,11 +19,7 @@ Grid {
             width: pieceAreaSize
             height: pieceAreaSize
             Component.onCompleted: piece.parentPieceSelectorArea = pieceArea
-
-            MouseArea {
-                anchors.fill: pieceArea
-                onClicked: piecePicked(piece)
-            }
+            onClicked: piecePicked(piece)
         }
     }
 }
