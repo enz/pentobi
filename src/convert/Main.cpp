@@ -10,10 +10,6 @@
 #include <QImageReader>
 #include <QImageWriter>
 
-#ifdef QT_STATICPLUGIN
-Q_IMPORT_PLUGIN(qsvg)
-#endif
-
 //-----------------------------------------------------------------------------
 
 int main(int argc, char* argv[])
