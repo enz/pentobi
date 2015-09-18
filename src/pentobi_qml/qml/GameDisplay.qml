@@ -136,12 +136,13 @@ Item
                     onClicked: clear()
                 }
             }
-            BusyIndicator {
-                id: busyIndicator
-
-                anchors.centerIn: parent
-            }
         }
+    }
+    BusyIndicator {
+        id: busyIndicator
+
+        x: (root.width - width) / 2
+        y: column.y + pieceSelector.y + (pieceSelector.height - height) / 2
     }
     PieceManipulator {
         id: pieceManipulator
