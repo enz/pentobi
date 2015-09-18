@@ -3,8 +3,6 @@ import QtQuick.Controls 1.1
 import QtQuick.Dialogs 1.2
 
 Dialog {
-    id: root
-
     property string gameVariant
     property alias computerPlays0: checkBox0.checked
     property alias computerPlays1: checkBox1.checked
