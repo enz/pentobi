@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.1
 import "GameDisplay.js" as Logic
 
-Item
+Rectangle
 {
     id: root
 
@@ -30,13 +30,10 @@ Item
     }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
 
+    color: theme.backgroundColor
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
 
-    Rectangle {
-        anchors.fill: parent
-        color: theme.backgroundColor
-    }
     Column {
         id: column
 
@@ -111,12 +108,18 @@ Item
             height: rows * pieceAreaSize
             onPiecePicked: Logic.pickPiece(piece)
 
-            BusyIndicator {
-                id: busyIndicator
+            Loader {
+                id: messageLoader
 
                 anchors.centerIn: parent
             }
         }
+    }
+    BusyIndicator {
+        id: busyIndicator
+
+        x: (root.width - width) / 2
+        y: column.y + pieceSelector.y + (pieceSelector.height - height) / 2
     }
     PieceManipulator {
         id: pieceManipulator

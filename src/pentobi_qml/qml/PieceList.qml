@@ -1,8 +1,6 @@
 import QtQuick 2.0
 
 Grid {
-    id: root
-
     property real pieceAreaSize
     property var pieces
 
@@ -12,7 +10,8 @@ Grid {
 
     Repeater {
         model: pieces
-        Item {
+
+        MouseArea {
             id: pieceArea
 
             property var piece: modelData
@@ -20,11 +19,7 @@ Grid {
             width: pieceAreaSize
             height: pieceAreaSize
             Component.onCompleted: piece.parentPieceSelectorArea = pieceArea
-
-            MouseArea {
-                anchors.fill: pieceArea
-                onClicked: piecePicked(piece)
-            }
+            onClicked: piecePicked(piece)
         }
     }
 }
