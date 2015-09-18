@@ -1,8 +1,6 @@
 import QtQuick 2.0
 
 Grid {
-    id: root
-
     property real pieceAreaSize
     property var pieces
 
@@ -12,6 +10,7 @@ Grid {
 
     Repeater {
         model: pieces
+
         Item {
             id: pieceArea
 
