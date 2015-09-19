@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.1
 import "GameDisplay.js" as Logic
 
-Rectangle
+Item
 {
     id: root
 
@@ -30,7 +30,6 @@ Rectangle
     }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
 
-    color: theme.backgroundColor
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
 

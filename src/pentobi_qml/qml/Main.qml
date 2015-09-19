@@ -33,6 +33,7 @@ ApplicationWindow {
     width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight
 
     visible: true
+    color: theme.backgroundColor
     title: qsTr("Pentobi")
     menuBar: Pentobi.Menu { }
     toolBar: Pentobi.ToolBar { }
