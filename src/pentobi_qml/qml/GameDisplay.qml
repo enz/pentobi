@@ -3,7 +3,7 @@ import QtQuick.Controls 1.1
 import "." as Pentobi
 import "GameDisplay.js" as Logic
 
-Rectangle
+Item
 {
     id: root
 
@@ -40,7 +40,6 @@ Rectangle
             messageLoader.item.clear()
     }
 
-    color: theme.backgroundColor
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
 
