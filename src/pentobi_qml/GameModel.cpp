@@ -74,6 +74,16 @@ const Transform* getTransform(const Board& bd, Move mv)
     return pieceInfo.find_transform(geo, movePoints);
 }
 
+/** Set a variable to a value and return if it has changed. */
+template<typename T>
+bool set(T& target, const T& value)
+{
+    if (target == value)
+        return false;
+    target = value;
+    return true;
+}
+
 } //namespace
 
 //-----------------------------------------------------------------------------
@@ -240,19 +250,11 @@ void GameModel::initGameVariant(QString gameVariant)
         return;
     }
     auto& bd = getBoard();
-    int nuColors = bd.get_nu_colors();
-    if (nuColors != m_nuColors)
-    {
-        m_nuColors = nuColors;
-        emit nuColorsChanged(nuColors);
-    }
-    int nuPieces = bd.get_nu_pieces();
+    if (set(m_nuColors, static_cast<int>(bd.get_nu_colors())))
+        emit nuColorsChanged(m_nuColors);
     createPieceModels();
-    if (nuPieces != m_nuPieces)
-    {
-        m_nuPieces = nuPieces;
-        emit nuPiecesChanged(nuPieces);
-    }
+    if (set(m_nuPieces, static_cast<int>(bd.get_nu_pieces())))
+        emit nuPiecesChanged(m_nuPieces);
     m_gameVariant = gameVariant;
     emit gameVariantChanged(gameVariant);
     updateProperties();
@@ -412,103 +414,38 @@ void GameModel::undo()
 void GameModel::updateProperties()
 {
     auto& bd = getBoard();
-    int points0 = bd.get_points(Color(0));
-    if (m_points0 != points0)
-    {
-        m_points0 = points0;
-        emit points0Changed(points0);
-    }
-
-    int points1 = bd.get_points(Color(1));
-    if (m_points1 != points1)
-    {
-        m_points1 = points1;
-        emit points1Changed(points1);
-    }
-
-    int nuPiecesLeft0 = getNuPiecesLeft(bd, Color(0));
-    if (m_nuPiecesLeft0 != nuPiecesLeft0)
-    {
-        m_nuPiecesLeft0 = nuPiecesLeft0;
-        emit nuPiecesLeft0Changed(nuPiecesLeft0);
-    }
-
-    int nuPiecesLeft1 = getNuPiecesLeft(bd, Color(1));
-    if (m_nuPiecesLeft1 != nuPiecesLeft1)
-    {
-        m_nuPiecesLeft1 = nuPiecesLeft1;
-        emit nuPiecesLeft1Changed(nuPiecesLeft1);
-    }
-
-    bool hasMoves0 = bd.has_moves(Color(0));
-    if (m_hasMoves0 != hasMoves0)
-    {
-        m_hasMoves0 = hasMoves0;
-        emit hasMoves0Changed(hasMoves0);
-    }
-
-    bool hasMoves1 = bd.has_moves(Color(1));
-    if (m_hasMoves1 != hasMoves1)
-    {
-        m_hasMoves1 = hasMoves1;
-        emit hasMoves1Changed(hasMoves1);
-    }
-
+    if (set(m_points0, static_cast<int>(bd.get_points(Color(0)))))
+        emit points0Changed(m_points0);
+    if (set(m_points1, static_cast<int>(bd.get_points(Color(1)))))
+        emit points1Changed(m_points1);
+    if (set(m_nuPiecesLeft0, getNuPiecesLeft(bd, Color(0))))
+        emit nuPiecesLeft0Changed(m_nuPiecesLeft0);
+    if (set(m_nuPiecesLeft1, getNuPiecesLeft(bd, Color(1))))
+        emit nuPiecesLeft1Changed(m_nuPiecesLeft1);
+    if (set(m_hasMoves0, bd.has_moves(Color(0))))
+        emit hasMoves0Changed(m_hasMoves0);
+    if (set(m_hasMoves1, bd.has_moves(Color(1))))
+        emit hasMoves1Changed(m_hasMoves1);
     if (m_nuColors > 2)
     {
-        int points2 = bd.get_points(Color(2));
-        if (m_points2 != points2)
-        {
-            m_points2 = points2;
-            emit points2Changed(points2);
-        }
-
-        bool hasMoves2 = bd.has_moves(Color(2));
-        if (m_hasMoves2 != hasMoves2)
-        {
-            m_hasMoves2 = hasMoves2;
-            emit hasMoves2Changed(hasMoves2);
-        }
-
-        int nuPiecesLeft2 = getNuPiecesLeft(bd, Color(2));
-        if (m_nuPiecesLeft2 != nuPiecesLeft2)
-        {
-            m_nuPiecesLeft2 = nuPiecesLeft2;
-            emit nuPiecesLeft2Changed(nuPiecesLeft2);
-        }
+        if (set(m_points2, static_cast<int>(bd.get_points(Color(2)))))
+            emit points2Changed(m_points2);
+        if (set(m_hasMoves2, bd.has_moves(Color(2))))
+            emit hasMoves2Changed(m_hasMoves2);
+        if (set(m_nuPiecesLeft2, getNuPiecesLeft(bd, Color(2))))
+            emit nuPiecesLeft2Changed(m_nuPiecesLeft2);
     }
-
     if (m_nuColors > 3)
     {
-        int points3 = bd.get_points(Color(3));
-        if (m_points3 != points3)
-        {
-            m_points3 = points3;
-            emit points3Changed(points3);
-        }
-
-        bool hasMoves3 = bd.has_moves(Color(3));
-        if (m_hasMoves3 != hasMoves3)
-        {
-            m_hasMoves3 = hasMoves3;
-            emit hasMoves3Changed(hasMoves3);
-        }
-
-        int nuPiecesLeft3 = getNuPiecesLeft(bd, Color(3));
-        if (m_nuPiecesLeft3 != nuPiecesLeft3)
-        {
-            m_nuPiecesLeft3 = nuPiecesLeft3;
-            emit nuPiecesLeft3Changed(nuPiecesLeft3);
-        }
+        if (set(m_points3, static_cast<int>(bd.get_points(Color(3)))))
+            emit points3Changed(m_points3);
+        if (set(m_hasMoves3, bd.has_moves(Color(3))))
+            emit hasMoves3Changed(m_hasMoves3);
+        if (set(m_nuPiecesLeft3, getNuPiecesLeft(bd, Color(3))))
+            emit nuPiecesLeft3Changed(m_nuPiecesLeft3);
     }
-
-    bool canUndo = (bd.get_nu_moves() > 0);
-    if (m_canUndo != canUndo)
-    {
-        m_canUndo = canUndo;
-        emit canUndoChanged(canUndo);
-    }
-
+    if (set(m_canUndo, (bd.get_nu_moves() > 0)))
+        emit canUndoChanged(m_canUndo);
     bool isGameOver = true;
     for (Color c : bd.get_colors())
         if (bd.has_moves(c))
@@ -516,18 +453,10 @@ void GameModel::updateProperties()
             isGameOver = false;
             break;
         }
-    if (m_isGameOver != isGameOver)
-    {
-        m_isGameOver = isGameOver;
-        emit isGameOverChanged(isGameOver);
-    }
-
-    bool isBoardEmpty = (bd.get_nu_onboard_pieces() == 0);
-    if (m_isBoardEmpty != isBoardEmpty)
-    {
-        m_isBoardEmpty = isBoardEmpty;
-        emit isBoardEmptyChanged(isBoardEmpty);
-    }
+    if (set(m_isGameOver, isGameOver))
+        emit isGameOverChanged(m_isGameOver);
+    if (set(m_isBoardEmpty, (bd.get_nu_onboard_pieces() == 0)))
+        emit isBoardEmptyChanged(m_isBoardEmpty);
 
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (Color c : bd.get_colors())
@@ -590,20 +519,11 @@ void GameModel::updateProperties()
                 pieceModels[i]->setIsPlayed(false);
     }
 
-    int toPlay = m_isGameOver ? 0 : bd.get_effective_to_play().to_int();
-    if (m_toPlay != toPlay)
-    {
-        m_toPlay = toPlay;
-        emit toPlayChanged(toPlay);
-    }
-
-    int altPlayer = (bd.get_variant() == Variant::classic_3 ?
-                         bd.get_alt_player() : 0);
-    if (m_altPlayer != altPlayer)
-    {
-        m_altPlayer = altPlayer;
-        emit altPlayerChanged(altPlayer);
-    }
+    if (set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int()))
+        emit toPlayChanged(m_toPlay);
+    if (set(m_altPlayer, (bd.get_variant() == Variant::classic_3 ?
+                          bd.get_alt_player() : 0)))
+        emit altPlayerChanged(m_altPlayer);
 }
 
 //-----------------------------------------------------------------------------
