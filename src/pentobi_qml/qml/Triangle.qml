@@ -10,8 +10,6 @@ Item {
         model: [ 0, 60, 120, 180, 240, 300 ]
 
         Loader {
-            id: loader
-
             property real _imageOpacity: {
                 var angle = pieceAngle - modelData
                 angle = ((angle % 360) + 360) % 360
@@ -20,8 +18,8 @@ Item {
             }
 
             on_ImageOpacityChanged:
-                if (_imageOpacity > 0 && loader.status == Loader.Null)
-                    loader.sourceComponent = component
+                if (_imageOpacity > 0 && status == Loader.Null)
+                    sourceComponent = component
 
             Component {
                 id: component
