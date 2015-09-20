@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-// See PieceElementClassic.qml for comments
+// See Square.qml for comments
 Item {
     id: root
 

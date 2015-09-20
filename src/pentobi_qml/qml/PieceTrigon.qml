@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import "GameDisplay.js" as Logic
 
 // See PieceClassic.qml for comments
 TransformableTrigon

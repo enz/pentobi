@@ -7,11 +7,17 @@ Version 10.UNKNOWN (master)
 Version 10.0.UNKNOWN (v10-fixes)
 ================================
 
-* Reduced memory requirements on Android. A meaningful error message is
-  now shown if the startup fails due to low memory.
-* Android: Changed the snapping behavior of the flickable area with the
-  unplayed pieces to make it easier to flick vertically between the
-  pieces of different colors with multiple movements on small screens.
+Android version:
+
+* Reduced memory requirements. A meaningful error message is now shown
+  if the startup fails due to low memory.
+* Slightly faster startup.
+* Changed snapping behavior of the flickable area with the unplayed
+  pieces to make it easier to flick vertically between different colors
+  with multiple movements on small screens.
+
+Desktop version:
+
 * Don't show move number in status line if no moves have been played.
 * The Windows installer is now built with Qt 5 and dynamic libraries.
 
