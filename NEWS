@@ -6,8 +6,7 @@ Version 10.0.UNKNOWN (v10-fixes)
 * Android: Changed the snapping behavior of the flickable area with the
   unplayed pieces to make it easier to flick vertically between the
   pieces of different colors with multiple movements on small screens.
-* Don't show move number info in status line if no moves have been
-  played.
+* Don't show move number in status line if no moves have been played.
 * The Windows installer is now built with Qt 5 and dynamic libraries.
 
 
