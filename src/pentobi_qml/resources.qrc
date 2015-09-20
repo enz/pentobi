@@ -21,8 +21,6 @@
         <file>qml/Square.qml</file>
         <file>qml/ToolBar.qml</file>
         <file>qml/ToolButton.qml</file>
-        <file>qml/TransformableClassic.qml</file>
-        <file>qml/TransformableTrigon.qml</file>
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>
