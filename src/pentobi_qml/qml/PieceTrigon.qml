@@ -42,13 +42,13 @@ Item
             id: flipX
 
             axis { x: 1; y: 0; z: 0 }
-            origin { x: root.width / 2; y: root.height / 2 }
+            origin { x: width / 2; y: height / 2 }
         },
         Rotation {
             id: flipY
 
             axis { x: 0; y: 1; z: 0 }
-            origin { x: root.width / 2; y: root.height / 2 }
+            origin { x: width / 2; y: height / 2 }
         }
     ]
 
@@ -59,8 +59,8 @@ Item
 
         Triangle {
             isDownward: _isDownward(modelData)
-            width: root._elementWidth
-            height: root.gridElementHeight
+            width: _elementWidth
+            height: gridElementHeight
             x: (modelData.x - pieceModel.center.x - 0.5) * gridElementWidth
             y: (modelData.y - pieceModel.center.y) * gridElementHeight
         }
@@ -75,7 +75,7 @@ Item
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
            * gridElementWidth + - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y
-            + (root._isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
+            + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
            * gridElementHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
     }

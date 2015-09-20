@@ -40,13 +40,13 @@ Item
             id: flipX
 
             axis { x: 1; y: 0; z: 0 }
-            origin { x: root.width / 2; y: root.height / 2 }
+            origin { x: width / 2; y: height / 2 }
         },
         Rotation {
             id: flipY
 
             axis { x: 0; y: 1; z: 0 }
-            origin { x: root.width / 2; y: root.height / 2 }
+            origin { x: width / 2; y: height / 2 }
         }
     ]
 
@@ -54,8 +54,8 @@ Item
         model: pieceModel.elements
 
         Square {
-            width: root.gridElementWidth
-            height: root.gridElementHeight
+            width: gridElementWidth
+            height: gridElementHeight
             x: (modelData.x - pieceModel.center.x)
                * gridElementWidth
             y: (modelData.y - pieceModel.center.y)
