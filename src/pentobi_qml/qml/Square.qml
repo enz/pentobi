@@ -10,7 +10,9 @@ Item {
         // Image rotation
         model: [ 0, 90, 180, 270 ]
 
-        Item {
+        Loader {
+            id: loader
+
             property real _imageOpacity: {
                 var angle = pieceAngle - modelData
                 angle = ((angle % 360) + 360) % 360 // JS modulo bug
@@ -22,9 +24,9 @@ Item {
                 if (_imageOpacity > 0 && loader.status == Loader.Null)
                     loader.sourceComponent = component
 
-            Loader { id: loader }
             Component {
                 id: component
+
                 Image {
                     source: imageName
                     width: root.width
