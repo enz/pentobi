@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 // See PieceClassic.qml for comments
-TransformableTrigon
+Item
 {
     id: root
 
@@ -20,12 +20,12 @@ TransformableTrigon
     property string imageNameDownward:
         theme.getImage("triangle-down-" + colorName)
     property real pieceAngle: {
-        var flipX = Math.abs(flipXAngle % 360 - 180) < 90
-        var flipY = Math.abs(flipYAngle % 360 - 180) < 90
+        var flX = Math.abs(flipX.angle % 360 - 180) < 90
+        var flY = Math.abs(flipY.angle % 360 - 180) < 90
         var angle = rotation
-        if (flipX && flipY) angle += 180
-        else if (flipX) angle += 120
-        else if (flipY) angle += 300
+        if (flX && flY) angle += 180
+        else if (flX) angle += 120
+        else if (flY) angle += 300
         return angle
     }
     property real _elementWidth: 2 * gridElementWidth
@@ -37,7 +37,20 @@ TransformableTrigon
         else return ""
     }
     z: 1
-    transformState: pieceModel.state
+    transform: [
+        Rotation {
+            id: flipX
+
+            axis { x: 1; y: 0; z: 0 }
+            origin { x: root.width / 2; y: root.height / 2 }
+        },
+        Rotation {
+            id: flipY
+
+            axis { x: 0; y: 1; z: 0 }
+            origin { x: root.width / 2; y: root.height / 2 }
+        }
+    ]
 
     function _isDownward(pos) { return (pos.x % 2 == 0) != (pos.y % 2 == 0) }
 
@@ -65,6 +78,176 @@ TransformableTrigon
             + (root._isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
            * gridElementHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
+    }
+    StateGroup {
+        state: pieceModel.state
+
+        states: [
+            State {
+                name: "rot60"
+                PropertyChanges { target: root; rotation: 60 }
+            },
+            State {
+                name: "rot120"
+                PropertyChanges { target: root; rotation: 120 }
+            },
+            State {
+                name: "rot180"
+                PropertyChanges { target: root; rotation: 180 }
+            },
+            State {
+                name: "rot240"
+                PropertyChanges { target: root; rotation: 240 }
+            },
+            State {
+                name: "rot300"
+                PropertyChanges { target: root; rotation: 300 }
+            },
+            State {
+                name: "flip"
+                PropertyChanges { target: flipX; angle: 180 }
+            },
+            State {
+                name: "rot60Flip"
+                PropertyChanges { target: root; rotation: 60 }
+                PropertyChanges { target: flipX; angle: 180 }
+            },
+            State {
+                name: "rot120Flip"
+                PropertyChanges { target: root; rotation: 120 }
+                PropertyChanges { target: flipX; angle: 180 }
+            },
+            State {
+                name: "rot180Flip"
+                PropertyChanges { target: root; rotation: 180 }
+                PropertyChanges { target: flipX; angle: 180 }
+            },
+            State {
+                name: "rot240Flip"
+                PropertyChanges { target: root; rotation: 240 }
+                PropertyChanges { target: flipX; angle: 180 }
+            },
+            State {
+                name: "rot300Flip"
+                PropertyChanges { target: root; rotation: 300 }
+                PropertyChanges { target: flipX; angle: 180 }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                from: ",rot60,rot120,rot180,rot240,rot300"; to: from
+                enabled: transitionsEnabled
+                PieceRotationAnimation { }
+            },
+            Transition {
+                from: "flip,rot60Flip,rot120Flip,rot180Flip,rot240Flip,rot300Flip"; to: from
+                enabled: transitionsEnabled
+                PieceRotationAnimation { }
+            },
+            Transition {
+                from: ",flip"; to: from
+                enabled: transitionsEnabled
+                PieceFlipAnimation { target: flipX }
+            },
+            Transition {
+                from: "rot60,rot60Flip"; to: from
+                enabled: transitionsEnabled
+                PieceFlipAnimation { target: flipX }
+            },
+            Transition {
+                from: "rot120,rot120Flip"; to: from
+                enabled: transitionsEnabled
+                PieceFlipAnimation { target: flipX }
+            },
+            Transition {
+                from: "rot180,rot180Flip"; to: from
+                enabled: transitionsEnabled
+                PieceFlipAnimation { target: flipX }
+            },
+            Transition {
+                from: "rot240,rot240Flip"; to: from
+                enabled: transitionsEnabled
+                PieceFlipAnimation { target: flipX }
+            },
+            Transition {
+                from: "rot300,rot300Flip"; to: from
+                enabled: transitionsEnabled
+                PieceFlipAnimation { target: flipX }
+            },
+            Transition {
+                from: ",rot180Flip"; to: from
+                enabled: transitionsEnabled
+                SequentialAnimation {
+                    PropertyAction { property: "rotation"; value: rotation }
+                    PropertyAction {
+                        target: flipX; property: "angle"; value: flipX.angle
+                    }
+                    PieceFlipAnimation { target: flipY; to: 180 }
+                    PropertyAction { target: flipY; property: "angle"; value: 0 }
+                }
+            },
+            Transition {
+                from: "rot60,rot240Flip"; to: from
+                enabled: transitionsEnabled
+                SequentialAnimation {
+                    PropertyAction { property: "rotation"; value: rotation }
+                    PropertyAction {
+                        target: flipX; property: "angle"; value: flipX.angle
+                    }
+                    PieceFlipAnimation { target: flipY; to: 180 }
+                    PropertyAction { target: flipY; property: "angle"; value: 0 }
+                }
+            },
+            Transition {
+                from: "rot120,rot300Flip"; to: from
+                enabled: transitionsEnabled
+                SequentialAnimation {
+                    PropertyAction { property: "rotation"; value: rotation }
+                    PropertyAction {
+                        target: flipX; property: "angle"; value: flipX.angle
+                    }
+                    PieceFlipAnimation { target: flipY; to: 180 }
+                    PropertyAction { target: flipY; property: "angle"; value: 0 }
+                }
+            },
+            Transition {
+                from: "rot180,flip"; to: from
+                enabled: transitionsEnabled
+                SequentialAnimation {
+                    PropertyAction { property: "rotation"; value: rotation }
+                    PropertyAction {
+                        target: flipX; property: "angle"; value: flipX.angle
+                    }
+                    PieceFlipAnimation { target: flipY; to: 180 }
+                    PropertyAction { target: flipY; property: "angle"; value: 0 }
+                }
+            },
+            Transition {
+                from: "rot240,rot60Flip"; to: from
+                enabled: transitionsEnabled
+                SequentialAnimation {
+                    PropertyAction { property: "rotation"; value: rotation }
+                    PropertyAction {
+                        target: flipX; property: "angle"; value: flipX.angle
+                    }
+                    PieceFlipAnimation { target: flipY; to: 180 }
+                    PropertyAction { target: flipY; property: "angle"; value: 0 }
+                }
+            },
+            Transition {
+                from: "rot300,rot120Flip"; to: from
+                enabled: transitionsEnabled
+                SequentialAnimation {
+                    PropertyAction { property: "rotation"; value: rotation }
+                    PropertyAction {
+                        target: flipX; property: "angle"; value: flipX.angle
+                    }
+                    PieceFlipAnimation { target: flipY; to: 180 }
+                    PropertyAction { target: flipY; property: "angle"; value: 0 }
+                }
+            }
+        ]
     }
 
     states: [
