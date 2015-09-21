@@ -5,6 +5,7 @@
         <file>qml/GameDisplay.qml</file>
         <file>qml/Main.qml</file>
         <file>qml/Menu.qml</file>
+        <file>qml/MenuItemGameVariant.qml</file>
         <file>qml/MenuItemLevel.qml</file>
         <file>qml/Message.qml</file>
         <file>qml/PieceClassic.qml</file>

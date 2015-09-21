@@ -1,3 +1,4 @@
+import QtQuick 2.0
 import QtQuick.Controls 1.1
 import "Main.js" as Logic
 
@@ -13,61 +14,37 @@ MenuBar {
             title: qsTr("Game Variant")
 
             ExclusiveGroup { id: groupGameVariant }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "classic"
                 text: qsTr("Classic (4 Players)")
-                checkable: true
-                checked: boardModel.gameVariant == "classic"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("classic", true)
             }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "classic_3"
                 text: qsTr("Classic (3 Players)")
-                checkable: true
-                checked: boardModel.gameVariant == "classic_3"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("classic_3", true)
             }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "classic_2"
                 text: qsTr("Classic (2 Players)")
-                checkable: true
-                checked: boardModel.gameVariant == "classic_2"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("classic_2", true)
             }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "duo"
                 text: qsTr("Duo")
-                checkable: true
-                checked: boardModel.gameVariant == "duo"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("duo", true)
             }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "junior"
                 text: qsTr("Junior")
-                checkable: true
-                checked: boardModel.gameVariant == "junior"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("junior", true)
             }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "trigon"
                 text: qsTr("Trigon (4 Players)")
-                checkable: true
-                checked: boardModel.gameVariant == "trigon"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("trigon", true)
             }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "trigon_3"
                 text: qsTr("Trigon (3 Players)")
-                checkable: true
-                checked: boardModel.gameVariant == "trigon_3"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("trigon_3", true)
             }
-            MenuItem {
+            MenuItemGameVariant {
+                gameVariant: "trigon_2"
                 text: qsTr("Trigon (2 Players)")
-                checkable: true
-                checked: boardModel.gameVariant == "trigon_2"
-                exclusiveGroup: groupGameVariant
-                onTriggered: Logic.changeGameVariant("trigon_2", true)
             }
         }
         MenuItem {
