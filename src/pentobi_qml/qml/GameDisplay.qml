@@ -5,7 +5,7 @@ import "GameDisplay.js" as Logic
 
 Item
 {
-    id: root
+    id: gameDisplay
 
     property var pickedPiece: null
     property bool transitionsEnabled
@@ -46,8 +46,8 @@ Item
     Column {
         id: column
 
-        width: root.width
-        anchors.centerIn: root
+        width: gameDisplay.width
+        anchors.centerIn: gameDisplay
         spacing: 0.01 * board.width
 
         Board {
@@ -55,7 +55,7 @@ Item
 
             gameVariant: boardModel.gameVariant
             width: Math.min(parent.width,
-                            (_isTrigon ? 0.9 : 0.8) * root.height)
+                            (_isTrigon ? 0.9 : 0.8) * gameDisplay.height)
             height: _isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -105,7 +105,7 @@ Item
             rows: {
                 if (pieceAreaSize == 0)
                     return 1
-                var height = root.height - board.height - scoreDisplay.height
+                var height = gameDisplay.height - board.height - scoreDisplay.height
                 var rows = Math.floor(height / pieceAreaSize)
                 if (rows == 0)
                     return 1
@@ -121,7 +121,7 @@ Item
     Loader {
         id: messageLoader
 
-        x: (root.width - width) / 2
+        x: (gameDisplay.width - width) / 2
         y: column.y + pieceSelector.y + (pieceSelector.height - height) / 2
     }
     Component {
@@ -137,7 +137,7 @@ Item
     BusyIndicator {
         id: busyIndicator
 
-        x: (root.width - width) / 2
+        x: (gameDisplay.width - width) / 2
         y: column.y + pieceSelector.y + (pieceSelector.height - height) / 2
     }
     PieceManipulator {
@@ -156,8 +156,8 @@ Item
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         drag {
-            minimumX: -width / 2; maximumX: root.width - width / 2
-            minimumY: -height / 2; maximumY: root.height - height / 2
+            minimumX: -width / 2; maximumX: gameDisplay.width - width / 2
+            minimumY: -height / 2; maximumY: gameDisplay.height - height / 2
         }
         onPiecePlayed: {
             var pos = mapToItem(board, width / 2, height / 2)

@@ -8,9 +8,6 @@ Item
     property string colorName
     property bool isPicked
     property Item parentPieceArea
-    property Item parentPieceManipulator
-    property Item parentBoard
-    property Item parentAnimationVia
     property real gridElementWidth
     property real gridElementHeight
     property bool isMarked
@@ -219,30 +216,30 @@ Item
             name: "picked"
             PropertyChanges {
                 target: root
-                gridElementWidth: parentBoard.gridElementWidth
-                gridElementHeight: parentBoard.gridElementHeight
+                gridElementWidth: board.gridElementWidth
+                gridElementHeight: board.gridElementHeight
             }
             PropertyChanges { target: parentPieceArea; visible: true }
             ParentChange {
                 target: root
-                parent: parentPieceManipulator
-                x: parentPieceManipulator.width / 2
-                y: parentPieceManipulator.height / 2
+                parent: pieceManipulator
+                x: pieceManipulator.width / 2
+                y: pieceManipulator.height / 2
             }
         },
         State {
             name: "played"
             PropertyChanges {
                 target: root
-                gridElementWidth: parentBoard.gridElementWidth
-                gridElementHeight: parentBoard.gridElementHeight
+                gridElementWidth: board.gridElementWidth
+                gridElementHeight: board.gridElementHeight
             }
             PropertyChanges { target: parentPieceArea; visible: false }
             ParentChange {
                 target: root
-                parent: parentBoard
-                x: parentBoard.mapFromGameX(pieceModel.gameCoord.x)
-                y: parentBoard.mapFromGameY(pieceModel.gameCoord.y)
+                parent: board
+                x: board.mapFromGameX(pieceModel.gameCoord.x)
+                y: board.mapFromGameY(pieceModel.gameCoord.y)
             }
         }
     ]
@@ -257,7 +254,7 @@ Item
                     property: "visible"; value: true
                 }
                 ParentAnimation {
-                    via: parentAnimationVia
+                    via: gameDisplay
                     NumberAnimation {
                         properties: "x,y,gridElementWidth,gridElementHeight"
                         duration: 300
