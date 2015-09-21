@@ -5,7 +5,7 @@ import "GameDisplay.js" as Logic
 
 Item
 {
-    id: gameDisplay
+    id: gameDisplay // Referenced by Piece*.qml
 
     property var pickedPiece: null
     property bool transitionsEnabled
