@@ -34,14 +34,11 @@ function createColorPieces(component, pieceModels) {
         }
     var properties = {
         "colorName": colorName,
-        "isPicked": Qt.binding(function() { return this == pickedPiece }),
-        "parentPieceManipulator": pieceManipulator,
-        "parentBoard": board,
-        "parentAnimationVia": root
+        "isPicked": Qt.binding(function() { return this == pickedPiece })
     }
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
-        var piece = component.createObject(root, properties)
+        var piece = component.createObject(this, properties)
         if (piece == null)
             throw "Could not create object Piece"
         pieces.push(piece)
@@ -87,11 +84,11 @@ function pickPiece(piece) {
     if (! pieceManipulator.visible) {
         // Position pieceManipulator at center of piece if possible, but
         // make sure it is completely visible
-        var newCoord = root.mapFromItem(piece, 0, 0)
+        var newCoord = mapFromItem(piece, 0, 0)
         var x = newCoord.x - pieceManipulator.width / 2
         var y = newCoord.y - pieceManipulator.height / 2
-        x = Math.max(Math.min(x, root.width - pieceManipulator.width), 0)
-        y = Math.max(Math.min(y, root.height - pieceManipulator.height), 0)
+        x = Math.max(Math.min(x, width - pieceManipulator.width), 0)
+        y = Math.max(Math.min(y, height - pieceManipulator.height), 0)
         pieceManipulator.x = x
         pieceManipulator.y = y
     }

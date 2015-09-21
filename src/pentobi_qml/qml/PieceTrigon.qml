@@ -8,10 +8,7 @@ Item
     property var pieceModel
     property string colorName
     property bool isPicked
-    property Item parentPieceSelectorArea
-    property Item parentPieceManipulator
-    property Item parentBoard
-    property Item parentAnimationVia
+    property Item parentPieceArea
     property real gridElementWidth
     property real gridElementHeight
     property bool isMarked
@@ -33,7 +30,7 @@ Item
     state: {
         if (isPicked) return "picked"
         else if (pieceModel.isPlayed) return "played"
-        else if (parentPieceSelectorArea != null) return "unplayed"
+        else if (parentPieceArea != null) return "unplayed"
         else return ""
     }
     z: 1
@@ -42,13 +39,13 @@ Item
             id: flipX
 
             axis { x: 1; y: 0; z: 0 }
-            origin { x: root.width / 2; y: root.height / 2 }
+            origin { x: width / 2; y: height / 2 }
         },
         Rotation {
             id: flipY
 
             axis { x: 0; y: 1; z: 0 }
-            origin { x: root.width / 2; y: root.height / 2 }
+            origin { x: width / 2; y: height / 2 }
         }
     ]
 
@@ -59,8 +56,8 @@ Item
 
         Triangle {
             isDownward: _isDownward(modelData)
-            width: root._elementWidth
-            height: root.gridElementHeight
+            width: _elementWidth
+            height: gridElementHeight
             x: (modelData.x - pieceModel.center.x - 0.5) * gridElementWidth
             y: (modelData.y - pieceModel.center.y) * gridElementHeight
         }
@@ -75,7 +72,7 @@ Item
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
            * gridElementWidth + - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y
-            + (root._isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
+            + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
            * gridElementHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
     }
@@ -255,45 +252,45 @@ Item
             name: "unplayed"
             PropertyChanges {
                 target: root
-                gridElementWidth: 0.13 * parentPieceSelectorArea.width
+                gridElementWidth: 0.13 * parentPieceArea.width
                 gridElementHeight: Math.sqrt(3) * gridElementWidth
             }
-            PropertyChanges { target: parentPieceSelectorArea; visible: true }
+            PropertyChanges { target: parentPieceArea; visible: true }
             ParentChange {
                 target: root
-                parent: parentPieceSelectorArea
-                x: parentPieceSelectorArea.width / 2
-                y: parentPieceSelectorArea.height / 2
+                parent: parentPieceArea
+                x: parentPieceArea.width / 2
+                y: parentPieceArea.height / 2
             }
         },
         State {
             name: "picked"
             PropertyChanges {
                 target: root
-                gridElementWidth: parentBoard.gridElementWidth
-                gridElementHeight: parentBoard.gridElementHeight
+                gridElementWidth: board.gridElementWidth
+                gridElementHeight: board.gridElementHeight
             }
-            PropertyChanges { target: parentPieceSelectorArea; visible: true }
+            PropertyChanges { target: parentPieceArea; visible: true }
             ParentChange {
                 target: root
-                parent: parentPieceManipulator
-                x: parentPieceManipulator.width / 2
-                y: parentPieceManipulator.height / 2
+                parent: pieceManipulator
+                x: pieceManipulator.width / 2
+                y: pieceManipulator.height / 2
             }
         },
         State {
             name: "played"
             PropertyChanges {
                 target: root
-                gridElementWidth: parentBoard.gridElementWidth
-                gridElementHeight: parentBoard.gridElementHeight
+                gridElementWidth: board.gridElementWidth
+                gridElementHeight: board.gridElementHeight
             }
-            PropertyChanges { target: parentPieceSelectorArea; visible: false }
+            PropertyChanges { target: parentPieceArea; visible: false }
             ParentChange {
                 target: root
-                parent: parentBoard
-                x: parentBoard.mapFromGameX(pieceModel.gameCoord.x)
-                y: parentBoard.mapFromGameY(pieceModel.gameCoord.y)
+                parent: board
+                x: board.mapFromGameX(pieceModel.gameCoord.x)
+                y: board.mapFromGameY(pieceModel.gameCoord.y)
             }
         }
     ]
@@ -305,11 +302,11 @@ Item
 
             SequentialAnimation {
                 PropertyAction {
-                    target: parentPieceSelectorArea
+                    target: parentPieceArea
                     property: "visible"; value: true
                 }
                 ParentAnimation {
-                    via: parentAnimationVia
+                    via: gameDisplay
                     NumberAnimation {
                         properties: "x,y,gridElementWidth,gridElementHeight"
                         duration: 300
@@ -317,7 +314,7 @@ Item
                     }
                 }
                 PropertyAction {
-                    target: parentPieceSelectorArea; property: "visible"
+                    target: parentPieceArea; property: "visible"
                 }
             }
         }
