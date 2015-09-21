@@ -18,7 +18,7 @@ Grid {
 
             width: pieceAreaSize
             height: pieceAreaSize
-            Component.onCompleted: piece.parentPieceSelectorArea = pieceArea
+            Component.onCompleted: piece.parentPieceArea = pieceArea
             onClicked: piecePicked(piece)
         }
     }

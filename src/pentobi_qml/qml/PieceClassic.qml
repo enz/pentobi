@@ -7,7 +7,7 @@ Item
     property var pieceModel
     property string colorName
     property bool isPicked
-    property Item parentPieceSelectorArea
+    property Item parentPieceArea
     property Item parentPieceManipulator
     property Item parentBoard
     property Item parentAnimationVia
@@ -29,7 +29,7 @@ Item
     state: {
         if (isPicked) return "picked"
         else if (pieceModel.isPlayed) return "played"
-        else if (parentPieceSelectorArea != null) return "unplayed"
+        else if (parentPieceArea != null) return "unplayed"
         else return ""
     }
     // Make sure piece is above board during piece transition when its parent
@@ -204,15 +204,15 @@ Item
                 target: root
                 // Avoid fractional sizes for square piece elements
                 gridElementWidth:
-                    Math.floor(0.2 * parentPieceSelectorArea.width)
+                    Math.floor(0.2 * parentPieceArea.width)
                 gridElementHeight: gridElementWidth
             }
-            PropertyChanges { target: parentPieceSelectorArea; visible: true }
+            PropertyChanges { target: parentPieceArea; visible: true }
             ParentChange {
                 target: root
-                parent: parentPieceSelectorArea
-                x: parentPieceSelectorArea.width / 2
-                y: parentPieceSelectorArea.height / 2
+                parent: parentPieceArea
+                x: parentPieceArea.width / 2
+                y: parentPieceArea.height / 2
             }
         },
         State {
@@ -222,7 +222,7 @@ Item
                 gridElementWidth: parentBoard.gridElementWidth
                 gridElementHeight: parentBoard.gridElementHeight
             }
-            PropertyChanges { target: parentPieceSelectorArea; visible: true }
+            PropertyChanges { target: parentPieceArea; visible: true }
             ParentChange {
                 target: root
                 parent: parentPieceManipulator
@@ -237,7 +237,7 @@ Item
                 gridElementWidth: parentBoard.gridElementWidth
                 gridElementHeight: parentBoard.gridElementHeight
             }
-            PropertyChanges { target: parentPieceSelectorArea; visible: false }
+            PropertyChanges { target: parentPieceArea; visible: false }
             ParentChange {
                 target: root
                 parent: parentBoard
@@ -253,7 +253,7 @@ Item
 
             SequentialAnimation {
                 PropertyAction {
-                    target: parentPieceSelectorArea
+                    target: parentPieceArea
                     property: "visible"; value: true
                 }
                 ParentAnimation {
@@ -265,7 +265,7 @@ Item
                     }
                 }
                 PropertyAction {
-                    target: parentPieceSelectorArea; property: "visible"
+                    target: parentPieceArea; property: "visible"
                 }
             }
         }
