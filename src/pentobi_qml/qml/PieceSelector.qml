@@ -73,7 +73,7 @@ Flickable {
         }
     }
     Column {
-        PieceListFlickable {
+        PieceList {
             width: root.width
             height: root.height
             rows: root.rows
@@ -82,7 +82,7 @@ Flickable {
             pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
-        PieceListFlickable {
+        PieceList {
             width: root.width
             height: root.height
             rows: root.rows
@@ -91,7 +91,7 @@ Flickable {
             pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
-        PieceListFlickable {
+        PieceList {
             visible: nuColors >= 3
             width: root.width
             height: root.height
@@ -101,7 +101,7 @@ Flickable {
             pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
-        PieceListFlickable {
+        PieceList {
             visible: nuColors >= 4
             width: root.width
             height: root.height
