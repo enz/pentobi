@@ -25,7 +25,7 @@ Rectangle {
 
     Text {
         id: messageText
-        font.pixelSize: root.fontSize
+        font.pixelSize: fontSize
         color: theme.fontColorMessage
         renderType: Text.NativeRendering
         anchors.centerIn: parent
