@@ -11,7 +11,6 @@
         <file>qml/PieceClassic.qml</file>
         <file>qml/PieceFlipAnimation.qml</file>
         <file>qml/PieceList.qml</file>
-        <file>qml/PieceListFlickable.qml</file>
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
         <file>qml/PieceSelector.qml</file>
