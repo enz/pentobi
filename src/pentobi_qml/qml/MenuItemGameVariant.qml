@@ -6,7 +6,7 @@ MenuItem {
     property string gameVariant
 
     checkable: true
-    checked: boardModel.gameVariant == gameVariant
+    checked: gameModel.gameVariant == gameVariant
     exclusiveGroup: groupGameVariant
     onTriggered: Logic.changeGameVariant(gameVariant, true)
 }
