@@ -77,8 +77,8 @@ Flickable {
             width: root.width
             height: root.height
             rows: root.rows
-            pieces: root.pieces0
-            nuPiecesLeft: root.nuPiecesLeft0
+            pieces: pieces0
+            nuPiecesLeft: nuPiecesLeft0
             pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
@@ -86,8 +86,8 @@ Flickable {
             width: root.width
             height: root.height
             rows: root.rows
-            pieces: root.pieces1
-            nuPiecesLeft: root.nuPiecesLeft1
+            pieces: pieces1
+            nuPiecesLeft: nuPiecesLeft1
             pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
@@ -96,8 +96,8 @@ Flickable {
             width: root.width
             height: root.height
             rows: root.rows
-            pieces: root.pieces2
-            nuPiecesLeft: root.nuPiecesLeft2
+            pieces: pieces2
+            nuPiecesLeft: nuPiecesLeft2
             pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
@@ -106,8 +106,8 @@ Flickable {
             width: root.width
             height: root.height
             rows: root.rows
-            pieces: root.pieces3
-            nuPiecesLeft: root.nuPiecesLeft3
+            pieces: pieces3
+            nuPiecesLeft: nuPiecesLeft3
             pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }

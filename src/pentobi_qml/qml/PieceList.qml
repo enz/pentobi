@@ -20,15 +20,14 @@ Row {
     Flickable {
         id: flickable
 
-        property int _visibleColumns: root.pieceAreaSize == 0 ?
-                                          0 :
-                                          Math.floor(width / root.pieceAreaSize)
+        property int _visibleColumns:
+            pieceAreaSize == 0 ? 0 : Math.floor(width / pieceAreaSize)
         property bool _allPiecesLeftFitInVisible:
             nuPiecesLeft <= rows * _visibleColumns
 
         width: 0.94 * root.width
         height: parent.height
-        contentWidth: grid.columns * root.pieceAreaSize
+        contentWidth: grid.columns * pieceAreaSize
         clip: true
 
         Grid {
