@@ -12,10 +12,8 @@ Item {
 
         Loader {
             property real _imageOpacity: {
-                var angle = pieceAngle - modelData
-                angle = ((angle % 360) + 360) % 360 // JS modulo bug
-                if (angle >= 90 && angle <= 270) return 0
-                return Math.cos(angle * Math.PI / 180)
+                var angle = (((pieceAngle - modelData) % 360) + 360) % 360 // JS modulo bug
+                return (angle >= 90 && angle <= 270 ? 0 : Math.cos(angle * Math.PI / 180))
             }
 
             on_ImageOpacityChanged:
