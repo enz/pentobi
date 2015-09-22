@@ -5,7 +5,7 @@ Row {
 
     property real pieceAreaSize
     property int color
-    property var pieces
+    property alias pieces: pieceList.pieces
     property int nuPiecesLeft
     property int rows: 1
 
@@ -40,7 +40,6 @@ Row {
                          flickable._visibleColumns :
                          Math.ceil(nuPiecesLeft / rows)
             pieceAreaSize: root.pieceAreaSize
-            pieces: root.pieces
             onPiecePicked: root.piecePicked(piece)
             onColumnsChanged: flickable.contentX = 0
         }
