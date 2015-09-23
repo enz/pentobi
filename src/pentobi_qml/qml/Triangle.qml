@@ -24,9 +24,8 @@ Item {
                 id: component
 
                 Image {
-                    property bool _switchUpDownImage: modelData % 120 != 0
                     property bool _isImageDownward:
-                        (isDownward != _switchUpDownImage)
+                        (isDownward != (modelData % 120 != 0))
 
                     source: _isImageDownward ? imageNameDownward : imageName
                     width: root.width
