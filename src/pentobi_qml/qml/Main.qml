@@ -79,7 +79,9 @@ ApplicationWindow {
                 root.computerPlays3 = this.computerPlays3
                 Logic.cancelGenMove()
                 Logic.checkComputerMove()
+                gameDisplay.forceActiveFocus() // Workaround for QTBUG-48456
             }
+            onRejected: gameDisplay.forceActiveFocus()
         }
     }
     Loader { id: infoMessageLoader }
