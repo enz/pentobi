@@ -12,14 +12,13 @@ Item
     property alias busyIndicatorRunning: busyIndicator.running
     property alias pieceAreaSize: pieceSelector.pieceAreaSize
     property real imageSourceWidth:
-        _isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
+        board.isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
     property alias imageSourceHeight: board.gridElementHeight
 
     property var _pieces0
     property var _pieces1
     property var _pieces2
     property var _pieces3
-    property bool _isTrigon: boardModel.gameVariant.indexOf("trigon") >= 0
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
@@ -55,8 +54,8 @@ Item
 
             gameVariant: boardModel.gameVariant
             width: Math.min(parent.width,
-                            (_isTrigon ? 0.9 : 0.8) * gameDisplay.height)
-            height: _isTrigon ? Math.sqrt(3) / 2 * width : width
+                            (isTrigon ? 0.9 : 0.8) * gameDisplay.height)
+            height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
         ScoreDisplay {
@@ -82,7 +81,7 @@ Item
 
             property int nuVisibleColumns: 7
             property int _maxRows:
-                _isTrigon || boardModel.gameVariant == "junior" ? 4 : 3
+                board.isTrigon || boardModel.gameVariant == "junior" ? 4 : 3
 
             pieces0: _pieces0
             pieces1: _pieces1

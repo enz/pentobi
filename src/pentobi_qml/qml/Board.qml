@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Item {
     property string gameVariant
-
+    property bool isTrigon: gameVariant.indexOf("trigon") >= 0
     property int _elementsPerRow: {
         switch (gameVariant) {
         case "duo":
@@ -17,7 +17,6 @@ Item {
             return 20
         }
     }
-
     property int _elementsPerColumn: {
         switch (gameVariant) {
         case "duo":
@@ -32,27 +31,21 @@ Item {
             return 20
         }
     }
-
-    property real _sideLength: _isTrigon ?
+    property real _sideLength: isTrigon ?
                                    Math.min(width, Math.sqrt(3) * height) :
                                    Math.min(width, height)
-
-    property bool _isTrigon: gameVariant.indexOf("trigon") >= 0
-
     // Avoid fractional piece element sizes if the piece elements are squares
-    property real gridElementWidth: _isTrigon ? _sideLength / (_elementsPerRow + 1): Math.floor(_sideLength / _elementsPerRow)
-    property real gridElementHeight: _isTrigon ?  Math.sqrt(3) * gridElementWidth : gridElementWidth
-    property real _boardWidth: _isTrigon ? gridElementWidth * (_elementsPerRow + 1) : gridElementWidth * _elementsPerRow
+    property real gridElementWidth: isTrigon ? _sideLength / (_elementsPerRow + 1): Math.floor(_sideLength / _elementsPerRow)
+    property real gridElementHeight: isTrigon ?  Math.sqrt(3) * gridElementWidth : gridElementWidth
+    property real _boardWidth: isTrigon ? gridElementWidth * (_elementsPerRow + 1) : gridElementWidth * _elementsPerRow
     property real _boardHeight: gridElementHeight * _elementsPerColumn
     property real _boardOffsetX: Math.floor((width - _boardWidth) / 2)
     property real _boardOffsetY: Math.floor((height - _boardHeight) / 2)
 
-    function mapFromGameX(x) { return _isTrigon ? _boardOffsetX + (x + 0.5) * gridElementWidth : _boardOffsetX + x * gridElementWidth}
-
+    function mapFromGameX(x) { return isTrigon ? _boardOffsetX + (x + 0.5) * gridElementWidth : _boardOffsetX + x * gridElementWidth}
     function mapFromGameY(y) { return _boardOffsetY + y * gridElementHeight }
-
     function mapToGame(x, y) {
-        return _isTrigon ?
+        return isTrigon ?
                     Qt.point((x - _boardOffsetX - 0.5 * gridElementWidth) / gridElementWidth,
                              (y - _boardOffsetY) / gridElementHeight)
                   : Qt.point((x - _boardOffsetX) / gridElementWidth,
