@@ -70,8 +70,6 @@ Item
             id: pieceSelector
 
             property int nuVisibleColumns: 7
-            property int _maxRows:
-                board.isTrigon || gameModel.gameVariant == "junior" ? 4 : 3
 
             pieces0: _pieces0
             pieces1: _pieces1
@@ -98,9 +96,7 @@ Item
                 var rows = Math.floor(height / pieceAreaSize)
                 if (rows == 0)
                     return 1
-                if (rows >= _maxRows)
-                    return _maxRows
-                return rows
+                return Math.min(Math.ceil(gameModel.nuPieces / nuVisibleColumns), rows)
             }
 
             height: rows * pieceAreaSize
