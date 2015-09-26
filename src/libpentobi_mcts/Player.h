@@ -36,7 +36,7 @@ public:
     Player(Variant initial_variant, string books_dir, unsigned nu_threads = 0,
            size_t memory = 0);
 
-    ~Player() throw();
+    ~Player();
 
     Move genmove(const Board& bd, Color c) override;
 

@@ -73,7 +73,7 @@ Player::Player(Variant initial_variant, string  books_dir, unsigned nu_threads,
     }
 }
 
-Player::~Player() throw()
+Player::~Player()
 {
 }
 
