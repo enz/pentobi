@@ -33,7 +33,6 @@ Row {
         Grid {
             id: grid
 
-            flow: Grid.LeftToRight
             columns: flickable._allPiecesLeftFitInVisible || rows == 0 ?
                          flickable._visibleColumns :
                          Math.ceil(nuPiecesLeft / rows)
