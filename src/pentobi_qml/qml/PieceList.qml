@@ -20,8 +20,7 @@ Row {
     Flickable {
         id: flickable
 
-        width: 0.94 * root.width
-        height: parent.height
+        width: 0.94 * root.width; height: root.height
         contentWidth: grid.columns * pieceAreaSize
         clip: true
 
