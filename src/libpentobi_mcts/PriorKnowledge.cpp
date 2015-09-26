@@ -227,10 +227,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                     break;
                 }
     }
-    auto board_type = bd.get_board_type();
-    bool is_trigon = (board_type == BoardType::trigon
-                      || board_type == BoardType::trigon_3);
-    float max_dist_diff = (is_trigon ? 0.5f : 0.3f);
+    m_min_dist_to_center += m_max_dist_diff;
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const auto& features = m_features[i];
@@ -239,7 +236,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         // dist to center and moves that don't connect in the middle if
         // connection is possible
         if ((check_dist_to_center
-             && features.dist_to_center > m_min_dist_to_center + max_dist_diff)
+             && features.dist_to_center > m_min_dist_to_center)
                 || (check_connect && ! features.connect))
             continue;
 
@@ -360,20 +357,24 @@ void PriorKnowledge::start_search(const Board& bd)
     case Variant::classic_2:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 12;
+        m_max_dist_diff = 0.3f;
         break;
     case Variant::classic_3:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 10;
+        m_max_dist_diff = 0.3f;
         break;
     case Variant::trigon:
     case Variant::trigon_2:
     case Variant::trigon_3:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 3;
+        m_max_dist_diff = 0.5f;
         break;
     default:
         m_check_dist_to_center.fill(false);
     }
+
     // Don't check dist to center if the position was setup in a way that
     // placed pieces but did not cover the starting point(s), otherwise the
     // search might not generate any moves (if no moves meet the dist-to-center

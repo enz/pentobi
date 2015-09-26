@@ -70,6 +70,8 @@ private:
 
     float m_min_dist_to_center;
 
+    float m_max_dist_diff;
+
     /** Marker for attach points of recent opponent moves. */
     Grid<bool> m_is_local;
 
