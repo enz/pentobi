@@ -235,9 +235,9 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
     {
         const auto& features = m_features[i];
 
-        // In variant Classic, prune early moves that don't minimize dist to
-        // center and moves that don't connect in the middle if connection is
-        // possible
+        // Depending on the game variant, prune early moves that don't minimize
+        // dist to center and moves that don't connect in the middle if
+        // connection is possible
         if ((check_dist_to_center
              && features.dist_to_center > m_min_dist_to_center + max_dist_diff)
                 || (check_connect && ! features.connect))
