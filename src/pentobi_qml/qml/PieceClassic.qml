@@ -23,12 +23,6 @@ Item
         return angle
     }
 
-    state: {
-        if (isPicked) return "picked"
-        else if (pieceModel.isPlayed) return "played"
-        else if (parentPieceArea != null) return "unplayed"
-        else return ""
-    }
     // Make sure piece is above board during piece transition when its parent
     // is GameDisplay
     z: 1
@@ -196,24 +190,9 @@ Item
 
     states: [
         State {
-            name: "unplayed"
-            PropertyChanges {
-                target: root
-                // Avoid fractional sizes for square piece elements
-                gridElementWidth:
-                    Math.floor(0.2 * parentPieceArea.width)
-                gridElementHeight: gridElementWidth
-            }
-            PropertyChanges { target: parentPieceArea; visible: true }
-            ParentChange {
-                target: root
-                parent: parentPieceArea
-                x: parentPieceArea.width / 2
-                y: parentPieceArea.height / 2
-            }
-        },
-        State {
             name: "picked"
+            when: isPicked
+
             PropertyChanges {
                 target: root
                 gridElementWidth: board.gridElementWidth
@@ -229,6 +208,8 @@ Item
         },
         State {
             name: "played"
+            when: pieceModel.isPlayed
+
             PropertyChanges {
                 target: root
                 gridElementWidth: board.gridElementWidth
@@ -240,6 +221,25 @@ Item
                 parent: board
                 x: board.mapFromGameX(pieceModel.gameCoord.x)
                 y: board.mapFromGameY(pieceModel.gameCoord.y)
+            }
+        },
+        State {
+            name: "unplayed"
+            when: parentPieceArea != null
+
+            PropertyChanges {
+                target: root
+                // Avoid fractional sizes for square piece elements
+                gridElementWidth:
+                    Math.floor(0.2 * parentPieceArea.width)
+                gridElementHeight: gridElementWidth
+            }
+            PropertyChanges { target: parentPieceArea; visible: true }
+            ParentChange {
+                target: root
+                parent: parentPieceArea
+                x: parentPieceArea.width / 2
+                y: parentPieceArea.height / 2
             }
         }
     ]

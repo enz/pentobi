@@ -20,23 +20,19 @@ Row {
     Flickable {
         id: flickable
 
-        property int _visibleColumns:
-            pieceAreaSize == 0 ? 0 : Math.floor(width / pieceAreaSize)
-        property bool _allPiecesLeftFitInVisible:
-            nuPiecesLeft <= rows * _visibleColumns
-
-        width: 0.94 * root.width
-        height: parent.height
-        contentWidth: grid.columns * pieceAreaSize
+        width: 0.94 * root.width; height: root.height
+        contentWidth: grid.width
         clip: true
 
         Grid {
             id: grid
 
-            flow: Grid.LeftToRight
-            columns: flickable._allPiecesLeftFitInVisible || rows == 0 ?
-                         flickable._visibleColumns :
-                         Math.ceil(nuPiecesLeft / rows)
+            columns: {
+                var visibleColumns = pieceAreaSize == 0 ?
+                            0 : Math.floor(flickable.width / pieceAreaSize)
+                return (nuPiecesLeft <= rows * visibleColumns || rows == 0) ?
+                            visibleColumns : Math.ceil(nuPiecesLeft / rows)
+            }
             onColumnsChanged: flickable.contentX = 0
 
             Repeater {
