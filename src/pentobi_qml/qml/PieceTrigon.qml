@@ -27,12 +27,6 @@ Item
     }
     property real _elementWidth: 2 * gridElementWidth
 
-    state: {
-        if (isPicked) return "picked"
-        else if (pieceModel.isPlayed) return "played"
-        else if (parentPieceArea != null) return "unplayed"
-        else return ""
-    }
     z: 1
     transform: [
         Rotation {
@@ -249,22 +243,9 @@ Item
 
     states: [
         State {
-            name: "unplayed"
-            PropertyChanges {
-                target: root
-                gridElementWidth: 0.13 * parentPieceArea.width
-                gridElementHeight: Math.sqrt(3) * gridElementWidth
-            }
-            PropertyChanges { target: parentPieceArea; visible: true }
-            ParentChange {
-                target: root
-                parent: parentPieceArea
-                x: parentPieceArea.width / 2
-                y: parentPieceArea.height / 2
-            }
-        },
-        State {
             name: "picked"
+            when: isPicked
+
             PropertyChanges {
                 target: root
                 gridElementWidth: board.gridElementWidth
@@ -280,6 +261,8 @@ Item
         },
         State {
             name: "played"
+            when: pieceModel.isPlayed
+
             PropertyChanges {
                 target: root
                 gridElementWidth: board.gridElementWidth
@@ -291,6 +274,23 @@ Item
                 parent: board
                 x: board.mapFromGameX(pieceModel.gameCoord.x)
                 y: board.mapFromGameY(pieceModel.gameCoord.y)
+            }
+        },
+        State {
+            name: "unplayed"
+            when: parentPieceArea != null
+
+            PropertyChanges {
+                target: root
+                gridElementWidth: 0.13 * parentPieceArea.width
+                gridElementHeight: Math.sqrt(3) * gridElementWidth
+            }
+            PropertyChanges { target: parentPieceArea; visible: true }
+            ParentChange {
+                target: root
+                parent: parentPieceArea
+                x: parentPieceArea.width / 2
+                y: parentPieceArea.height / 2
             }
         }
     ]
