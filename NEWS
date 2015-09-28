@@ -5,8 +5,8 @@ Android version:
 
 * Reduced memory requirements. A meaningful error message is now shown
   if the startup fails due to low memory.
-* Added a workaround for a bug that made the back button no longer exit
-  the app after the computer color dialog was shown.
+* Workaround for a bug that made the back button no longer exit the app
+  after the computer color dialog was shown (QTBUG-48456).
 * Slightly faster startup.
 * Changed snapping behavior of the flickable area with the unplayed
   pieces to make it easier to flick vertically between different colors
