@@ -61,7 +61,7 @@ Item
         height: width
         radius: width / 2
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * gridElementWidth + - width / 2
+           * gridElementWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
            * gridElementHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
