@@ -47,10 +47,8 @@ Item
         Square {
             width: gridElementWidth
             height: gridElementHeight
-            x: (modelData.x - pieceModel.center.x)
-               * gridElementWidth
-            y: (modelData.y - pieceModel.center.y)
-               * gridElementHeight
+            x: (modelData.x - pieceModel.center.x) * gridElementWidth
+            y: (modelData.y - pieceModel.center.y) * gridElementHeight
         }
     }
     Rectangle {
@@ -230,8 +228,7 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridElementWidth:
-                    Math.floor(0.2 * parentPieceArea.width)
+                gridElementWidth: Math.floor(0.2 * parentPieceArea.width)
                 gridElementHeight: gridElementWidth
             }
             PropertyChanges { target: parentPieceArea; visible: true }
