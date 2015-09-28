@@ -64,7 +64,7 @@ Item
         height: width
         radius: width / 2
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * gridElementWidth + - width / 2
+           * gridElementWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y
             + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
            * gridElementHeight - height / 2

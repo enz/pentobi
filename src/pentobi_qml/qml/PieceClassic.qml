@@ -47,10 +47,8 @@ Item
         Square {
             width: gridElementWidth
             height: gridElementHeight
-            x: (modelData.x - pieceModel.center.x)
-               * gridElementWidth
-            y: (modelData.y - pieceModel.center.y)
-               * gridElementHeight
+            x: (modelData.x - pieceModel.center.x) * gridElementWidth
+            y: (modelData.y - pieceModel.center.y) * gridElementHeight
         }
     }
     Rectangle {
@@ -61,7 +59,7 @@ Item
         height: width
         radius: width / 2
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * gridElementWidth + - width / 2
+           * gridElementWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
            * gridElementHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
@@ -230,8 +228,7 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridElementWidth:
-                    Math.floor(0.2 * parentPieceArea.width)
+                gridElementWidth: Math.floor(0.2 * parentPieceArea.width)
                 gridElementHeight: gridElementWidth
             }
             PropertyChanges { target: parentPieceArea; visible: true }
