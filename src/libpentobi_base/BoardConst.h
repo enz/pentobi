@@ -182,7 +182,7 @@ private:
     BoardConst(BoardType board_type, PieceSet piece_set);
 
     void create_move(unsigned& moves_created, Piece piece,
-                     const PiecePoints& coord_points, Point label_pos);
+                     const MovePoints& points, Point label_pos);
 
     void create_moves();
 

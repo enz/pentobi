@@ -467,11 +467,8 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
 }
 
 void BoardConst::create_move(unsigned& moves_created, Piece piece,
-                             const PiecePoints& coord_points, Point label_pos)
+                             const MovePoints& points, Point label_pos)
 {
-    MovePoints points;
-    for (auto& i : coord_points)
-        points.push_back(m_geo.get_point(i.x, i.y));
     auto& info = m_move_info[moves_created];
     auto& info_ext = m_move_info_ext[moves_created];
     auto& info_ext_2 = m_move_info_ext_2[moves_created];
@@ -547,7 +544,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
         transformed_label_pos[i] =
                 transform->get_transformed(piece_info.get_label_pos());
     }
-    PiecePoints points;
+    MovePoints points;
     // Make outer loop iterator over geometry for better memory locality
     for (Point p : m_geo)
     {
@@ -565,17 +562,18 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
             auto point_type = m_geo.get_point_type(x, y);
             if (transforms[i]->get_new_point_type() != point_type)
                 continue;
-            points = transformed_points[i];
             bool is_onboard = true;
-            for (auto& pp : points)
+            points.clear();
+            for (auto& pp : transformed_points[i])
             {
-                pp.x += x;
-                pp.y += y;
-                if (! m_geo.is_onboard(pp))
+                int xx = pp.x + x;
+                int yy = pp.y + y;
+                if (! m_geo.is_onboard(CoordPoint(xx, yy)))
                 {
                     is_onboard = false;
                     break;
                 }
+                points.push_back(m_geo.get_point(xx, yy));
             }
             if (! is_onboard)
                 continue;
