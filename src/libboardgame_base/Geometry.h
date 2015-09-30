@@ -33,9 +33,19 @@ public:
 
     typedef typename Point::IntType IntType;
 
+    /** On-board adjacent neighbors of a point. */
     typedef ArrayList<Point, 4, unsigned short> AdjList;
 
+    /** On-board diagonal neighbors of a point
+        Currently supports up to nine diagonal points as used on boards
+        for Blokus Trigon. */
     typedef ArrayList<Point, 9, unsigned short> DiagList;
+
+    /** Adjacent neighbors of a coordinate (on-board or off-board). */
+    typedef ArrayList<CoordPoint, 4> AdjCoordList;
+
+    /** Diagonal neighbors of a coordinate (on-board or off-board). */
+    typedef ArrayList<CoordPoint, 9> DiagCoordList;
 
     class Iterator
     {
@@ -71,15 +81,9 @@ public:
 
     virtual ~Geometry();
 
-    Iterator begin() const
-    {
-        return Iterator(Point::begin_onboard);
-    }
+    virtual AdjCoordList get_adj_coord(int x, int y) const = 0;
 
-    Iterator end() const
-    {
-        return Iterator(get_range());
-    }
+    virtual DiagCoordList get_diag_coord(int x, int y) const = 0;
 
     /** Return the point type if the board has different types of points.
         For example, in the geometry used in Blokus Trigon, there are two
@@ -99,6 +103,10 @@ public:
     /** Get repeat interval for point types along the y axis.
         @see get_period_x(). */
     virtual unsigned get_period_y() const = 0;
+
+    Iterator begin() const { return Iterator(Point::begin_onboard); }
+
+    Iterator end() const { return Iterator(get_range()); }
 
     unsigned get_point_type(CoordPoint p) const;
 
@@ -130,12 +138,8 @@ public:
 
     const string& to_string(Point p) const;
 
-    /** Get list of on-board adjacent points. */
     const AdjList& get_adj(Point p) const;
 
-    /** Get list of on-board diagonal points.
-        Currently supports up to nine diagonal points as used on boards
-        for Blokus Trigon. */
     const DiagList& get_diag(Point p) const;
 
     /** Iterate over adjacent points.
@@ -163,14 +167,6 @@ protected:
         support different board shapes. It will only be called with x and
         y within the width and height of the geometry. */
     virtual bool init_is_onboard(unsigned x, unsigned y) const = 0;
-
-    /** Initialize adjacent and diagonal neighbors of an on-board point.
-        This function is used in init() and allows the subclass to define other
-        neighborhood relationships than the one of a regular rectangular grid
-        (e.g. triangles or hexagonal fields). This function is used after
-        the on-board status of all points has been initialized. */
-    virtual void init_adj_diag(Point p, AdjList& adj,
-                               DiagList& diag) const = 0;
 
 private:
     AdjList m_adj[Point::range_onboard];
@@ -342,7 +338,17 @@ void Geometry<P>::init(unsigned width, unsigned height)
                 m_points[x][y] = Point::null();
     m_range = n;
     for (IntType i = Point::begin_onboard; i < m_range; ++i)
-        init_adj_diag(Point(i), m_adj[i], m_diag[i]);
+    {
+        Point p(i);
+        auto x = get_x(p);
+        auto y = get_y(p);
+        for (auto& p : get_adj_coord(x, y))
+            if (is_onboard(p))
+                m_adj[i].push_back(get_point(p.x, p.y));
+        for (auto& p : get_diag_coord(x, y))
+            if (is_onboard(p))
+                m_diag[i].push_back(get_point(p.x, p.y));
+    }
 }
 
 template<class P>
