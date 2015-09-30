@@ -35,13 +35,13 @@ class TrigonGeometry final
     : public Geometry
 {
 public:
-    using AdjList = Geometry::AdjList;
-
-    using DiagList = Geometry::DiagList;
-
     /** Create or reuse an already created geometry with a given size.
         @param sz The edge size of the hexagon. */
     static const TrigonGeometry& get(unsigned sz);
+
+    AdjCoordList get_adj_coord(int x, int y) const override;
+
+    DiagCoordList get_diag_coord(int x, int y) const override;
 
     unsigned get_point_type(int x, int y) const override;
 
@@ -51,8 +51,6 @@ public:
 
 protected:
     bool init_is_onboard(unsigned x, unsigned y) const override;
-
-    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const override;
 
 private:
     /** Stores already created geometries by size. */

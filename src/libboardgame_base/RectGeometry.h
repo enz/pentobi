@@ -27,14 +27,19 @@ class RectGeometry final
 public:
     typedef P Point;
 
+    using AdjCoordList = typename Geometry<P>::AdjCoordList;
+    using DiagCoordList = typename Geometry<P>::DiagCoordList;
     using AdjList = typename Geometry<P>::AdjList;
-
     using DiagList = typename Geometry<P>::DiagList;
 
     /** Create or reuse an already created geometry with a given size. */
     static const RectGeometry& get(unsigned width, unsigned height);
 
     RectGeometry(unsigned width, unsigned height);
+
+    AdjCoordList get_adj_coord(int x, int y) const override;
+
+    DiagCoordList get_diag_coord(int x, int y) const override;
 
     unsigned get_point_type(int x, int y) const override;
 
@@ -44,8 +49,6 @@ public:
 
 protected:
     bool init_is_onboard(unsigned x, unsigned y) const override;
-
-    void init_adj_diag(Point p, AdjList& adj, DiagList& diag) const override;
 
 private:
     /** Stores already created geometries by width and height. */
@@ -74,6 +77,28 @@ const RectGeometry<P>& RectGeometry<P>::get(unsigned width, unsigned height)
 }
 
 template<class P>
+auto RectGeometry<P>::get_adj_coord(int x, int y) const -> AdjCoordList
+{
+    AdjCoordList l;
+    l.push_back(CoordPoint(x, y - 1));
+    l.push_back(CoordPoint(x - 1, y));
+    l.push_back(CoordPoint(x + 1, y));
+    l.push_back(CoordPoint(x, y + 1));
+    return l;
+}
+
+template<class P>
+auto RectGeometry<P>::get_diag_coord(int x, int y) const -> DiagCoordList
+{
+    DiagCoordList l;
+    l.push_back(CoordPoint(x - 1, y - 1));
+    l.push_back(CoordPoint(x + 1, y - 1));
+    l.push_back(CoordPoint(x - 1, y + 1));
+    l.push_back(CoordPoint(x + 1, y + 1));
+    return l;
+}
+
+template<class P>
 unsigned RectGeometry<P>::get_period_x() const
 {
     return 1;
@@ -99,34 +124,6 @@ bool RectGeometry<P>::init_is_onboard(unsigned x, unsigned y) const
     LIBBOARDGAME_UNUSED(x);
     LIBBOARDGAME_UNUSED(y);
     return true;
-}
-
-template<class P>
-void RectGeometry<P>::init_adj_diag(Point p, AdjList& adj,
-                                    DiagList& diag) const
-{
-    auto width = this->get_width();
-    auto height = this->get_height();
-    auto x = this->get_x(p);
-    auto y = this->get_y(p);
-
-    if (y > 0)
-        adj.push_back(this->get_point(x, y - 1));
-    if (x > 0)
-        adj.push_back(this->get_point(x - 1, y));
-    if (x < width - 1)
-        adj.push_back(this->get_point(x + 1, y));
-    if (y < height - 1)
-        adj.push_back(this->get_point(x, y + 1));
-
-    if (x > 0 && y > 0)
-        diag.push_back(this->get_point(x - 1, y - 1));
-    if (x < width - 1 && y > 0)
-        diag.push_back(this->get_point(x + 1, y - 1));
-    if (x > 0 && y < height - 1)
-        diag.push_back(this->get_point(x - 1, y + 1));
-    if (x < width - 1 && y < height - 1)
-        diag.push_back(this->get_point(x + 1, y + 1));
 }
 
 //-----------------------------------------------------------------------------
