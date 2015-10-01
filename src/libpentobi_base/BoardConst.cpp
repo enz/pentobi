@@ -552,6 +552,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
             log("Creating moves at ", m_geo.to_string(p));
         auto x = m_geo.get_x(p);
         auto y = m_geo.get_y(p);
+        auto point_type = m_geo.get_point_type(x, y);
         for (size_t i = 0; i < nu_transforms; ++i)
         {
             if (log_move_creation)
@@ -559,7 +560,6 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
                 auto& transform = *transforms[i];
                 log("Transformation ", typeid(transform).name());
             }
-            auto point_type = m_geo.get_point_type(x, y);
             if (transforms[i]->get_new_point_type() != point_type)
                 continue;
             bool is_onboard = true;
