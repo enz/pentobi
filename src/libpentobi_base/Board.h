@@ -817,8 +817,13 @@ inline void Board::place(Color c, Move mv)
         });
     }
     while (++i != end);
-    i = info_ext.begin_attach();
-    end = info_ext.end_attach();
+    i = info_ext.begin_adj();
+    end = info_ext.end_adj();
+    do
+        state_color.forbidden[*i] = true;
+    while (++i != end);
+    LIBBOARDGAME_ASSERT(i == info_ext.begin_attach());
+    end += info_ext.size_attach_points;
     auto& attach_points = m_attach_points[c];
     auto n = attach_points.size();
     do
@@ -830,11 +835,6 @@ inline void Board::place(Color c, Move mv)
         }
     while (++i != end);
     attach_points.resize(n);
-    LIBBOARDGAME_ASSERT(i == info_ext.begin_adj());
-    end += info_ext.size_adj_points;
-    do
-        state_color.forbidden[*i] = true;
-    while (++i != end);
 }
 
 inline void Board::play(Color c, Move mv)
