@@ -270,7 +270,9 @@ public:
     /** See BoardConst::from_string() */
     Move from_string(const string& s) const;
 
-    bool find_move(const MovePoints& points, Move& move) const;
+    bool find_move(const MovePoints& points, Move& mv) const;
+
+    bool find_move(const MovePoints& points, Piece piece, Move& mv) const;
 
     const PieceInfo& get_piece_info(Piece piece) const;
 
@@ -432,9 +434,15 @@ private:
 };
 
 
-inline bool Board::find_move(const MovePoints& points, Move& move) const
+inline bool Board::find_move(const MovePoints& points, Move& mv) const
 {
-    return m_bc->find_move(points, move);
+    return m_bc->find_move(points, mv);
+}
+
+inline bool Board::find_move(const MovePoints& points, Piece piece,
+                             Move& mv) const
+{
+    return m_bc->find_move(points, piece, mv);
 }
 
 inline Move Board::from_string(const string& s) const

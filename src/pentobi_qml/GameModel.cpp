@@ -184,7 +184,7 @@ bool GameModel::findMove(const PieceModel& piece, QPointF coord,
             return false;
         points.push_back(geo.get_point(x, y));
     }
-    return bd.find_move(points, mv);
+    return bd.find_move(points, piece.getPiece(), mv);
 }
 
 Variant GameModel::getInitialGameVariant()

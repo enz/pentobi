@@ -666,27 +666,36 @@ bool BoardConst::get_piece_by_name(const string& name, Piece& piece) const
 
 bool BoardConst::find_move(const MovePoints& points, Move& move) const
 {
-    if (points.size() == 0)
-        return false;
     MovePoints sorted_points = points;
     sort(sorted_points);
-    Point p = points[0];
     for (Piece::IntType i = 0; i < m_pieces.size(); ++i)
     {
         Piece piece(i);
-        if (get_piece_info(piece).get_size() == points.size())
-        {
-            auto moves = get_moves(piece, p);
-            for (auto mv : moves)
-                if (equal(sorted_points.begin(),
-                          sorted_points.end(),
-                          m_move_info[mv.to_int()].begin()))
-                {
-                    move = mv;
-                    return true;
-                }
-        }
+        if (get_piece_info(piece).get_size() != points.size())
+            continue;
+        for (auto mv : get_moves(piece, points[0]))
+            if (equal(sorted_points.begin(), sorted_points.end(),
+                      m_move_info[mv.to_int()].begin()))
+            {
+                move = mv;
+                return true;
+            }
     }
+    return false;
+}
+
+bool BoardConst::find_move(const MovePoints& points, Piece piece,
+                           Move& move) const
+{
+    MovePoints sorted_points = points;
+    sort(sorted_points);
+    for (auto mv : get_moves(piece, points[0]))
+        if (equal(sorted_points.begin(), sorted_points.end(),
+                  m_move_info[mv.to_int()].begin()))
+        {
+            move = mv;
+            return true;
+        }
     return false;
 }
 
@@ -760,7 +769,7 @@ void BoardConst::init_symmetry_info()
                 info_ext_2.breaks_symmetry = true;
             sym_points.push_back(symmetric_points[p]);
         }
-        find_move(sym_points, info_ext_2.symmetric_move);
+        find_move(sym_points, info.get_piece(), info_ext_2.symmetric_move);
     }
 }
 
@@ -819,7 +828,7 @@ inline void BoardConst::sort(MovePoints& points) const
         check(0, 1);
     }
     else
-        LIBBOARDGAME_ASSERT(size == 1);
+        LIBBOARDGAME_ASSERT(size <= 1);
 }
 
 string BoardConst::to_string(Move mv, bool with_piece_name) const

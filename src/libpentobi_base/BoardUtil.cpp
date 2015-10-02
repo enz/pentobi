@@ -62,11 +62,12 @@ Move get_transformed(const Board& bd, Move mv,
                      const PointTransform<Point>& transform)
 {
     auto& geo = bd.get_geometry();
+    auto& info = bd.get_move_info(mv);
     MovePoints points;
-    for (auto p : bd.get_move_info(mv))
+    for (auto p : info)
         points.push_back(transform.get_transformed(p, geo));
     Move transformed_mv;
-    bd.find_move(points, transformed_mv);
+    bd.find_move(points, info.get_piece(), transformed_mv);
     return transformed_mv;
 }
 
