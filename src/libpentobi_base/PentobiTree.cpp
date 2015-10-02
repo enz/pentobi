@@ -67,8 +67,8 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
     MovePoints points;
     if (! libpentobi_base::node_util::get_move(node, m_variant, c, points))
         return ColorMove::null();
-    if ( points.size() == 0)
-        // Older (unreleased?) versiions of Pentobi used empty move values
+    if (points.size() == 0)
+        // Older (unreleased?) versions of Pentobi used empty move values
         // to encode pass moves in search tree dumps but we don't support
         // pass moves Board anymore.
         return ColorMove::null();
