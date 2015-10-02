@@ -132,7 +132,7 @@ Move GuiBoard::findSelectedPieceMove()
         movePoints.push_back(pp);
     }
     Move mv;
-    if (! m_bd.find_move(movePoints, mv)
+    if (! m_bd.find_move(movePoints, m_selectedPiece, mv)
             || (m_freePlacement && ! allPointEmpty(m_bd, mv))
             || (! m_freePlacement
                 && ! m_bd.is_legal(m_selectedPieceColor, mv)))

@@ -188,7 +188,7 @@ bool BoardModel::findMove(const PieceModel& piece, QPointF coord,
             return false;
         points.push_back(geo.get_point(x, y));
     }
-    return m_bd.find_move(points, mv);
+    return m_bd.find_move(points, piece.getPiece(), mv);
 }
 
 Variant BoardModel::getInitialGameVariant()

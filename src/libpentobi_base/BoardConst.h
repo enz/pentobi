@@ -87,6 +87,8 @@ public:
 
     bool find_move(const MovePoints& points, Move& move) const;
 
+    bool find_move(const MovePoints& points, Piece piece, Move& move) const;
+
     /** Get all moves of a piece at a point constrained by the forbidden
         status of adjacent points. */
     PrecompMoves::Range get_moves(Piece piece, Point p,
