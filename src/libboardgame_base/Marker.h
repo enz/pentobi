@@ -35,6 +35,8 @@ public:
         @return true if the point was already marked. */
     bool set(Point p);
 
+    bool operator[](Point p) const;
+
     /** Set up for overflow test (for testing purposes only).
         The function is equivalent to calling reset() and then clear()
         nu_clear times. It allows a faster implementation of a unit test case
@@ -54,6 +56,13 @@ template<class P>
 inline Marker<P>::Marker()
 {
     reset();
+}
+
+template<class P>
+bool Marker<P>::operator[](Point p) const
+{
+    LIBBOARDGAME_ASSERT(! p.is_null());
+    return m_a[p.to_int()] == m_current;
 }
 
 template<class P>
