@@ -469,19 +469,55 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
 void BoardConst::create_move(unsigned& moves_created, Piece piece,
                              const MovePoints& points, Point label_pos)
 {
+    Move mv(static_cast<Move::IntType>(moves_created));
     auto& info = m_move_info[moves_created];
     auto& info_ext = m_move_info_ext[moves_created];
     auto& info_ext_2 = m_move_info_ext_2[moves_created];
+    ++moves_created;
     info = MoveInfo(piece, points);
-    set_adj_and_attach_points(info, info_ext);
+    auto begin = info.begin();
+    auto end = info.end();
+    s_marker.clear();
+    for (auto i = begin; i != end; ++i)
+        s_marker.set(*i);
+    for (auto i = begin; i != end; ++i)
+        for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
+        {
+            bool is_compatible_with_adj_status = true;
+            for (Point p_adj : s_adj_status[*i][j])
+                if (s_marker[p_adj])
+                {
+                    is_compatible_with_adj_status = false;
+                    break;
+                }
+            if (is_compatible_with_adj_status)
+                (*m_full_move_table)[j][piece][*i].push_back(mv);
+        }
+    ArrayList<Point, PieceInfo::max_adj> adj_points;
+    for (auto i = begin; i != end; ++i)
+        m_geo.for_each_adj(*i, [&](Point j) {
+            if (! s_marker[j])
+            {
+                s_marker.set(j);
+                adj_points.push_back(j);
+            }
+        });
+    ArrayList<Point, PieceInfo::max_attach> attach_points;
+    for (auto i = begin; i != end; ++i)
+        m_geo.for_each_diag(*i, [&](Point j) {
+            if (! s_marker[j])
+            {
+                s_marker.set(j);
+                attach_points.push_back(j);
+            }
+        });
+    info_ext.init(adj_points, attach_points);
     info_ext_2.label_pos = label_pos;
     info_ext_2.breaks_symmetry = false;
     info_ext_2.symmetric_move = Move::null();
     m_nu_attach_points[piece] =
         max(m_nu_attach_points[piece],
             static_cast<unsigned>(info_ext.size_attach_points));
-    Move mv(static_cast<Move::IntType>(moves_created));
-    ++moves_created;
     if (log_move_creation)
     {
         Grid<char> grid;
@@ -494,15 +530,13 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
             grid[*i] = '*';
         log("Move ", mv.to_int(), ":\n", grid.to_string(m_geo));
     }
-    for (Point p : info)
-        for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
-            if (is_compatible_with_adj_status(p, i, info))
-                (*m_full_move_table)[i][piece][p].push_back(mv);
 }
 
 void BoardConst::create_moves()
 {
-    unsigned moves_created = 1; // Unused move infos for Move::null()
+    // Unused move infos for Move::null()
+    LIBBOARDGAME_ASSERT(Move::null().to_int() == 0);
+    unsigned moves_created = 1;
     m_full_move_table.reset(new FullMoveTable);
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(moves_created, Piece(i));
@@ -728,44 +762,6 @@ void BoardConst::init_symmetry_info()
         }
         find_move(sym_points, info_ext_2.symmetric_move);
     }
-}
-
-bool BoardConst::is_compatible_with_adj_status(Point p, unsigned adj_status,
-                                               const MoveInfo& info) const
-{
-    for (Point p_adj : s_adj_status[p][adj_status])
-        if (info.contains(p_adj))
-            return false;
-    return true;
-}
-
-void BoardConst::set_adj_and_attach_points(const MoveInfo& info,
-                                           MoveInfoExt& info_ext)
-{
-    auto begin = info.begin();
-    auto end = info.end();
-    s_marker.clear();
-    for (auto i = begin; i != end; ++i)
-        s_marker.set(*i);
-    ArrayList<Point, PieceInfo::max_adj> adj_points;
-    for (auto i = begin; i != end; ++i)
-        m_geo.for_each_adj(*i, [&](Point j) {
-            if (! s_marker[j])
-            {
-                s_marker.set(j);
-                adj_points.push_back(j);
-            }
-        });
-    ArrayList<Point, PieceInfo::max_attach> attach_points;
-    for (auto i = begin; i != end; ++i)
-        m_geo.for_each_diag(*i, [&](Point j) {
-            if (! s_marker[j])
-            {
-                s_marker.set(j);
-                attach_points.push_back(j);
-            }
-        });
-    info_ext.init(adj_points, attach_points);
 }
 
 inline void BoardConst::sort(MovePoints& points) const

@@ -196,12 +196,6 @@ private:
                        unsigned i);
 
     void init_symmetry_info();
-
-    bool is_compatible_with_adj_status(Point p, unsigned adj_status,
-                                       const MoveInfo& info) const;
-
-    void set_adj_and_attach_points(const MoveInfo& info,
-                                   MoveInfoExt& info_ext);
 };
 
 inline BoardType BoardConst::get_board_type() const
