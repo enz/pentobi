@@ -72,45 +72,33 @@ private:
     Stored separately from MoveInfo to improve CPU cache performance. */
 struct MoveInfoExt
 {
+    /** Concatenated list of adjacent and attach points. */
     Point points[PieceInfo::max_adj_attach];
 
     uint8_t size_attach_points;
 
     uint8_t size_adj_points;
 
-    void init(const ArrayList<Point, PieceInfo::max_adj>& adj_points,
-              const ArrayList<Point, PieceInfo::max_attach>& attach_points)
-    {
-        size_attach_points = static_cast<uint8_t>(attach_points.size());
-        size_adj_points = static_cast<uint8_t>(adj_points.size());
-        LIBBOARDGAME_ASSERT(size_attach_points + size_adj_points
-                            <= PieceInfo::max_adj_attach);
-        Point* i = points;
-        for (Point p : attach_points)
-            *(i++) = p;
-        for (Point p : adj_points)
-            *(i++) = p;
-    }
-
-    const Point* begin_attach() const
+    const Point* begin_adj() const
     {
         return points;
     }
 
-    const Point* end_attach() const
-    {
-        return points + size_attach_points;
-    }
-
-    const Point* begin_adj() const
-    {
-        return end_attach();
-    }
-
     const Point* end_adj() const
     {
-        return begin_adj() + size_adj_points;
+        return points + size_adj_points;
     }
+
+    const Point* begin_attach() const
+    {
+        return end_adj();
+    }
+
+    const Point* end_attach() const
+    {
+        return begin_attach() + size_attach_points;
+    }
+
 };
 
 //-----------------------------------------------------------------------------

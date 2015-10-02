@@ -493,25 +493,25 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
             if (is_compatible_with_adj_status)
                 (*m_full_move_table)[j][piece][*i].push_back(mv);
         }
-    ArrayList<Point, PieceInfo::max_adj> adj_points;
+    Point* p = info_ext.points;
     for (auto i = begin; i != end; ++i)
         m_geo.for_each_adj(*i, [&](Point j) {
             if (! s_marker[j])
             {
                 s_marker.set(j);
-                adj_points.push_back(j);
+                *(p++) = j;
             }
         });
-    ArrayList<Point, PieceInfo::max_attach> attach_points;
+    info_ext.size_adj_points = static_cast<uint8_t>(p - info_ext.points);
     for (auto i = begin; i != end; ++i)
         m_geo.for_each_diag(*i, [&](Point j) {
             if (! s_marker[j])
             {
                 s_marker.set(j);
-                attach_points.push_back(j);
+                *(p++) = j;
             }
         });
-    info_ext.init(adj_points, attach_points);
+    info_ext.size_attach_points = static_cast<uint8_t>(p - info_ext.end_adj());
     info_ext_2.label_pos = label_pos;
     info_ext_2.breaks_symmetry = false;
     info_ext_2.symmetric_move = Move::null();
