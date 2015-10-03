@@ -17,9 +17,9 @@ class TransfIdentity
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfIdentity() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -28,9 +28,9 @@ class TransfRectRot90
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfRectRot90() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -39,9 +39,9 @@ class TransfRectRot180
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfRectRot180() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -50,9 +50,9 @@ class TransfRectRot270
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfRectRot270() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -61,9 +61,9 @@ class TransfRectRefl
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfRectRefl() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -72,9 +72,9 @@ class TransfRectRot90Refl
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfRectRot90Refl() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -83,9 +83,9 @@ class TransfRectRot180Refl
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfRectRot180Refl() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -94,9 +94,9 @@ class TransfRectRot270Refl
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfRectRot270Refl() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------

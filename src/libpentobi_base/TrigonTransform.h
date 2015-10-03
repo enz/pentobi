@@ -20,9 +20,9 @@ class TransfTrigonIdentity
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonIdentity() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -31,9 +31,9 @@ class TransfTrigonRot60
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonRot60() : Transform(1) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -42,9 +42,9 @@ class TransfTrigonRot120
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonRot120() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -53,9 +53,9 @@ class TransfTrigonRot180
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonRot180() : Transform(1) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -64,9 +64,9 @@ class TransfTrigonRot240
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonRot240() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -75,9 +75,9 @@ class TransfTrigonRot300
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonRot300() : Transform(1) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -86,9 +86,9 @@ class TransfTrigonRefl
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonRefl() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -97,9 +97,9 @@ class TransfTrigonReflRot60
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonReflRot60() : Transform(1) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -108,9 +108,9 @@ class TransfTrigonReflRot120
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonReflRot120() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -119,9 +119,9 @@ class TransfTrigonReflRot180
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonReflRot180() : Transform(1) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -130,9 +130,9 @@ class TransfTrigonReflRot240
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonReflRot240() : Transform(0) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -141,9 +141,9 @@ class TransfTrigonReflRot300
     : public Transform
 {
 public:
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    TransfTrigonReflRot300() : Transform(1) {}
 
-    unsigned get_new_point_type() const override;
+    CoordPoint get_transformed(const CoordPoint& p) const override;
 };
 
 //-----------------------------------------------------------------------------
