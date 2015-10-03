@@ -14,7 +14,6 @@
 #include <limits>
 #include <sstream>
 #include <string>
-#include "Assert.h"
 #include "FmtSaver.h"
 
 namespace libboardgame_util {

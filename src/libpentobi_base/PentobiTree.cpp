@@ -13,7 +13,6 @@
 #include "BoardUpdater.h"
 #include "BoardUtil.h"
 #include "NodeUtil.h"
-#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {

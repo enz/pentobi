@@ -9,7 +9,6 @@
 #endif
 
 #include <fstream>
-#include <iostream>
 #include "Engine.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/Options.h"

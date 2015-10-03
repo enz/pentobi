@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_BASE_RATING_H
 #define LIBBOARDGAME_BASE_RATING_H
 
-#include <climits>
 #include <cmath>
 #include <iosfwd>
 

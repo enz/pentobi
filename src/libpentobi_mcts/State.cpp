@@ -11,8 +11,10 @@
 #include "State.h"
 
 #include "libboardgame_util/MathUtil.h"
-#include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/ScoreUtil.h"
+#if LIBBOARDGAME_DEBUG
+#include "libpentobi_base/BoardUtil.h"
+#endif
 
 namespace libpentobi_mcts {
 

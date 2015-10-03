@@ -6,7 +6,6 @@
 
 #include "BoardModel.h"
 
-#include <limits>
 #include <QDebug>
 #include <QSettings>
 #include "libboardgame_util/Log.h"

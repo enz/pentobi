@@ -16,8 +16,6 @@
 #include "PieceTransforms.h"
 #include "PrecompMoves.h"
 #include "Variant.h"
-#include "libpentobi_base/Color.h"
-#include "libpentobi_base/ColorMap.h"
 #include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {

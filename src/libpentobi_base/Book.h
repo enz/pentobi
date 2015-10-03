@@ -9,7 +9,6 @@
 
 #include <iosfwd>
 #include "Board.h"
-#include "Game.h"
 #include "PentobiTree.h"
 #include "libboardgame_base/PointTransform.h"
 #include "libboardgame_util/RandomGenerator.h"
