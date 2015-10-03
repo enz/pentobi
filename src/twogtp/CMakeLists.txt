@@ -22,7 +22,7 @@ target_link_libraries(twogtp
   boardgame_sys
 )
 
-if (DEFINED CMAKE_THREAD_LIBS_INIT)
+if(CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(twogtp ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
