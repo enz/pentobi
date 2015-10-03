@@ -155,7 +155,7 @@ else()
     )
 endif()
 
-if (DEFINED CMAKE_THREAD_LIBS_INIT)
+if(CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(pentobi ${CMAKE_THREAD_LIBS_INIT})
 endif()
 

@@ -35,6 +35,6 @@ target_link_libraries(pentobi_qml
 
 qt5_use_modules(pentobi_qml Concurrent Gui Qml Svg)
 
-if (DEFINED CMAKE_THREAD_LIBS_INIT)
+if(CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(pentobi_qml ${CMAKE_THREAD_LIBS_INIT})
 endif()
