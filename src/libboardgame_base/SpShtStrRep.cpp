@@ -12,7 +12,6 @@
 
 #include <cstdio>
 #include <iostream>
-#include "libboardgame_util/Assert.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libboardgame_util/Unused.h"
 

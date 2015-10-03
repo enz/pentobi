@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
-#include "Point.h"
 #include "Geometry.h"
 
 namespace libboardgame_base {

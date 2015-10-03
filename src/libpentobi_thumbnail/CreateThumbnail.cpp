@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include "libboardgame_base/RectGeometry.h"
-#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libpentobi_base/NodeUtil.h"

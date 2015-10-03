@@ -10,7 +10,6 @@
 #include <functional>
 #include <iosfwd>
 #include <map>
-#include <memory>
 #include "Arguments.h"
 #include "CmdLine.h"
 #include "Response.h"

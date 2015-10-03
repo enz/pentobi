@@ -11,7 +11,6 @@
 #include "MainWindow.h"
 
 #include <algorithm>
-#include <cstdlib>
 #include <fstream>
 #include <QAction>
 #include <QApplication>

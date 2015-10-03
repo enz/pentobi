@@ -15,7 +15,6 @@
 #include <iterator>
 #include <vector>
 #include "CmdLineRange.h"
-#include "Failure.h"
 
 namespace libboardgame_gtp {
 

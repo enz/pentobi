@@ -11,6 +11,7 @@
 #include <cxxabi.h>
 #endif
 #include "CmdLine.h"
+#include "Failure.h"
 
 namespace libboardgame_gtp {
 

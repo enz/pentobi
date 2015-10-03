@@ -10,8 +10,10 @@
 
 #include "BoardUtil.h"
 
-#include <sstream>
 #include "PentobiSgfUtil.h"
+#if LIBBOARDGAME_DEBUG
+#include <sstream>
+#endif
 
 namespace libpentobi_base {
 namespace boardutil {
