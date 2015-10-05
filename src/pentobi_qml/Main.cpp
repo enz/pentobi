@@ -12,7 +12,6 @@
 #include "PlayerModel.h"
 #include "libboardgame_util/Log.h"
 
-using libboardgame_util::log;
 using libboardgame_util::set_log_null;
 
 //-----------------------------------------------------------------------------
