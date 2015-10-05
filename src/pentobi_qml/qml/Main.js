@@ -300,10 +300,6 @@ function play(pieceModel, gameCoord) {
         delayedCheckComputerMove.start()
 }
 
-function playerInitFail() {
-    showInfo(qsTr("Not enough memory."), function() { Qt.quit() })
-}
-
 function showComputerColorDialog() {
     if (computerColorDialogLoader.status == Loader.Null)
         computerColorDialogLoader.sourceComponent =

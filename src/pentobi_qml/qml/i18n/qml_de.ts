@@ -74,10 +74,6 @@
         <source>Red wins.</source>
         <translation>Rot gewinnt.</translation>
     </message>
-    <message>
-        <source>Not enough memory.</source>
-        <translation>Nicht genügend Speicher.</translation>
-    </message>
 </context>
 <context>
     <name>Menu</name>
@@ -160,6 +156,17 @@
     <message>
         <source>Quit</source>
         <translation>Beenden</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <source>Not enough memory.</source>
+        <translation>Nicht genügend Speicher.</translation>
     </message>
 </context>
 </TS>

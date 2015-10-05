@@ -31,7 +31,6 @@ ApplicationWindow {
     // window size at start-up (last tested with Qt 5.3.2).
     contentItem { minimumWidth: 240; minimumHeight: 252 }
     width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight
-
     visible: true
     color: theme.backgroundColor
     title: qsTr("Pentobi")
@@ -57,7 +56,6 @@ ApplicationWindow {
         id: playerModel
 
         onMoveGenerated: Logic.moveGenerated(move)
-        Component.onCompleted: if (initFailed()) Logic.playerInitFail()
     }
     GameDisplay {
         id: gameDisplay

@@ -53,10 +53,6 @@ public:
         running. */
     Q_INVOKABLE void cancelGenMove();
 
-    /** Initialization of the player failed because it could not allocate
-        enough memory. */
-    Q_INVOKABLE bool initFailed();
-
 signals:
     void levelClassicChanged(int);
 
@@ -106,7 +102,7 @@ private:
 
     unsigned m_genMoveId = 0;
 
-    unique_ptr<Player> m_player;
+    Player m_player;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
