@@ -41,17 +41,9 @@ void getLevel(QSettings& settings, const char* key, int& level)
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent),
       m_isGenMoveRunning(false),
-      m_genMoveId(0)
+      m_genMoveId(0),
+      m_player(BoardModel::getInitialGameVariant(), "")
 {
-    try
-    {
-        m_player.reset(new Player(BoardModel::getInitialGameVariant(), ""));
-    }
-    catch (const bad_alloc&)
-    {
-        // This is a possible failure state if the player could not allocate
-        // enough memory. Check initFailed() before using the player.
-    }
     QSettings settings;
     getLevel(settings, "level_classic", m_levelClassic);
     getLevel(settings, "level_classic_2", m_levelClassic2);
@@ -85,7 +77,7 @@ PlayerModel::GenMoveResult PlayerModel::asyncGenMove(BoardModel* bm,
     GenMoveResult result;
     result.genMoveId = genMoveId;
     result.boardModel = bm;
-    result.move = m_player->genmove(bd, bd.get_effective_to_play());
+    result.move = m_player.genmove(bd, bd.get_effective_to_play());
     auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 1 sec
     if (elapsed < 1000)
@@ -129,11 +121,6 @@ void PlayerModel::genMoveFinished()
     emit moveGenerated(mv.to_int());
 }
 
-bool PlayerModel::initFailed()
-{
-    return ! m_player;
-}
-
 void PlayerModel::loadBook(Variant variant)
 {
     QFile file(QString(":/pentobi_books/book_%1.blksgf")
@@ -146,7 +133,7 @@ void PlayerModel::loadBook(Variant variant)
     QTextStream stream(&file);
     QString text = stream.readAll();
     istringstream in(text.toLocal8Bit().constData());
-    m_player->load_book(in);
+    m_player.load_book(in);
 }
 
 void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
@@ -186,9 +173,9 @@ void PlayerModel::startGenMove(BoardModel* boardModel)
 void PlayerModel::startGenMoveAtLevel(BoardModel* boardModel, int level)
 {
     cancelGenMove();
-    m_player->set_level(level);
+    m_player.set_level(level);
     auto variant = boardModel->getBoard().get_variant();
-    if (! m_player->is_book_loaded(variant))
+    if (! m_player.is_book_loaded(variant))
         loadBook(variant);
     clear_abort();
     ++m_genMoveId;
