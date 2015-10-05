@@ -18,52 +18,41 @@ using libboardgame_util::set_log_null;
 
 int main(int argc, char *argv[])
 {
+    libboardgame_util::LogInitializer log_initializer;
+#if QT_NO_DEBUG
+    set_log_null();
+#endif
+    QCoreApplication::setOrganizationName("Pentobi");
+    QCoreApplication::setApplicationName("Pentobi");
+    qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
+    qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
+    qmlRegisterInterface<PieceModel>("PieceModel");
+    QApplication app(argc, argv);
+    QString locale = QLocale::system().name();
+    QTranslator translatorPentobi;
+    translatorPentobi.load("pentobi_qml_" + locale, ":qml/translations");
+    app.installTranslator(&translatorPentobi);
+    // The translation of standard buttons in QtQuick.Dialogs.MessageDialog
+    // is broken on Android (tested with Qt 5.5; QTBUG-43353), so we
+    // created our own file, which contains the translations we need.
+    QTranslator translatorQt;
+    translatorQt.load("replace_qtbase_" + locale, ":qml/translations");
+    app.installTranslator(&translatorQt);
     try
     {
-        libboardgame_util::LogInitializer log_initializer;
-#if QT_NO_DEBUG
-        set_log_null();
-#endif
-        QCoreApplication::setOrganizationName("Pentobi");
-        QCoreApplication::setApplicationName("Pentobi");
-        qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
-        qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
-        qmlRegisterInterface<PieceModel>("PieceModel");
-        QApplication app(argc, argv);
-        QString locale = QLocale::system().name();
-        QTranslator translatorPentobi;
-        translatorPentobi.load("pentobi_qml_" + locale, ":qml/translations");
-        app.installTranslator(&translatorPentobi);
-        // The translation of standard buttons in QtQuick.Dialogs.MessageDialog
-        // is broken on Android (tested with Qt 5.5; QTBUG-43353), so we
-        // created our own file, which contains the translations we need.
-        QTranslator translatorQt;
-        translatorQt.load("replace_qtbase_" + locale, ":qml/translations");
-        app.installTranslator(&translatorQt);
-        try
-        {
-            QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
-            return app.exec();
-        }
-        catch (const bad_alloc& e)
-        {
-            // bad_alloc can happen because the player requires a larger
-            // amount of memory (e.g. it happened with Pentobi 10.0 on some
-            // Android devices).
-            auto title = QCoreApplication::translate("main", "Error");
-            auto text =
-                    QCoreApplication::translate("main", "Not enough memory.");
-            QMessageBox::critical(nullptr, title, text);
-            return 1;
-        }
+        QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
+        return app.exec();
     }
-    catch (const exception& e)
+    catch (const bad_alloc& e)
     {
-        // Don't translate messages, translation system is not available here.
-        QMessageBox::critical(nullptr, "Error", e.what());
-        // This is an unexpected failure, we want a core dump or Android crash
-        // report.
-        abort();
+        // bad_alloc can happen because the player requires a larger
+        // amount of memory (e.g. it happened with Pentobi 10.0 on some
+        // Android devices).
+        auto title = QCoreApplication::translate("main", "Error");
+        auto text =
+                QCoreApplication::translate("main", "Not enough memory.");
+        QMessageBox::critical(nullptr, title, text);
+        return 1;
     }
 }
 
