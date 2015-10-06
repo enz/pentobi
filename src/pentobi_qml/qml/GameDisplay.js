@@ -52,22 +52,17 @@ function destroyPieces(pieces) {
         pieces[i].destroy()
 }
 
-function findPiece(pieceModel) {
-    var i
-    for (i = 0; i < _pieces0.length; ++i)
-        if (_pieces0[i].pieceModel === pieceModel)
-            return _pieces0[i]
-    for (i = 0; i < _pieces1.length; ++i)
-        if (_pieces1[i].pieceModel === pieceModel)
-            return _pieces1[i]
-    if (boardModel.nuColors > 2)
-        for (i = 0; i < _pieces2.length; ++i)
-            if (_pieces2[i].pieceModel === pieceModel)
-                return _pieces2[i]
-    if (boardModel.nuColors > 3)
-        for (i = 0; i < _pieces3.length; ++i)
-            if (_pieces3[i].pieceModel === pieceModel)
-                return _pieces3[i]
+function findPiece(pieceModel, color) {
+    var pieces
+    switch (color) {
+    case 0: pieces = _pieces0; break
+    case 1: pieces = _pieces1; break
+    case 2: pieces = _pieces2; break
+    case 3: pieces = _pieces3; break
+    }
+    for (var i = 0; i < pieces.length; ++i)
+        if (pieces[i].pieceModel === pieceModel)
+            return pieces[i]
     return null
 }
 

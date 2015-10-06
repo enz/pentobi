@@ -28,7 +28,9 @@ Item
     function showPiecesImmediately(color) {
         pieceSelector.showColorImmediately(color)
     }
-    function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
+    function findPiece(pieceModel, color) {
+        return Logic.findPiece(pieceModel, color)
+    }
     function showMessage(text) {
         if (messageLoader.status == Loader.Null)
             messageLoader.sourceComponent = messageComponent
