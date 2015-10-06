@@ -221,10 +221,11 @@ function isComputerToPlay() {
 function markLastMove() {
     if (! root.markLastMove)
         return
-    var piece = gameDisplay.findPiece(gameModel.getLastMovePieceModel())
-    if (piece == null)
+    var color = gameModel.getLastMoveColor()
+    var piece = gameDisplay.findPiece(gameModel.getLastMovePieceModel(), color)
+    if (piece === null)
         return
-    switch (gameModel.getLastMoveColor()) {
+    switch (color) {
     case 0:
         if (_pieceMarked0 != null) _pieceMarked0.isMarked = false
         _pieceMarked0 = piece

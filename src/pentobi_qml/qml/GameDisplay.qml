@@ -27,7 +27,9 @@ Item
     function showPiecesImmediately(color) {
         pieceSelector.showColorImmediately(color)
     }
-    function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
+    function findPiece(pieceModel, color) {
+        return Logic.findPiece(pieceModel, color)
+    }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
