@@ -38,10 +38,7 @@ function createColorPieces(component, pieceModels) {
     }
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
-        var piece = component.createObject(this, properties)
-        if (piece == null)
-            throw "Could not create object Piece"
-        pieces.push(piece)
+        pieces.push(component.createObject(this, properties))
     }
     return pieces
 }
