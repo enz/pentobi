@@ -119,6 +119,7 @@ bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv,
     if (is_forbidden[*p])
         return false;
     auto end = info.end();
+    // Loop over fixed size to help compiler unroll
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
     {
         if (++p == end)
@@ -142,6 +143,7 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
     if (features.is_forbidden())
         return false;
     auto end = info.end();
+    // Loop over fixed size to help compiler unroll
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
     {
         if (++p == end)
