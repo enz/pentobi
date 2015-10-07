@@ -90,12 +90,6 @@ ApplicationWindow {
             standardButtons: StandardButton.Ok | StandardButton.Cancel
         }
     }
-    Loader { id: errorDialogLoader }
-    Component {
-        id: errorDialogComponent
-
-        MessageDialog { }
-    }
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move
     // placement animation has finished

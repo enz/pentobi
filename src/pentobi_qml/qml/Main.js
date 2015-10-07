@@ -158,7 +158,7 @@ function computerPlaysAll() {
 function createTheme(themeName) {
     var source = "qrc:///qml/themes/" + themeName + "/Theme.qml"
     var component = Qt.createComponent(source)
-    if (component.status != Component.Ready)
+    if (component.status !== Component.Ready)
         throw "Could not load " + source
     return component.createObject(root)
 }
@@ -386,15 +386,6 @@ function showGameOver() {
             msg = qsTr("Green wins.")
     }
     gameDisplay.showMessage(msg)
-}
-
-function showErrorDialog(text, acceptedFunc) {
-    if (errorDialogLoader.status == Loader.Null)
-        errorDialogLoader.sourceComponent = errorDialogComponent
-    var dialog = errorDialogLoader.item
-    dialog.text = text
-    dialog.accepted.connect(acceptedFunc)
-    dialog.visible = true
 }
 
 function showMessageDialog(text, acceptedFunc) {

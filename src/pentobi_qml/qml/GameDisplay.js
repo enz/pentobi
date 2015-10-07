@@ -6,7 +6,7 @@ function createPieces() {
     var file = (boardModel.gameVariant.indexOf("trigon") >= 0) ?
                 "PieceTrigon.qml" : "PieceClassic.qml"
     var component = Qt.createComponent(file)
-    if (component.status != Component.Ready)
+    if (component.status !== Component.Ready)
         throw "Could not create component " + file
     _pieces0 = createColorPieces(component, boardModel.pieceModels0)
     _pieces1 = createColorPieces(component, boardModel.pieceModels1)
