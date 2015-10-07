@@ -15,27 +15,21 @@ function createPieces() {
 }
 
 function createColorPieces(component, pieceModels) {
-    if (pieceModels.length == 0)
+    if (pieceModels.length === 0)
         return []
-    var pieces = []
-    var gameVariant = boardModel.gameVariant
     var colorName
-    if (gameVariant == "duo" || gameVariant == "junior")
-        switch (pieceModels[0].color) {
-        case 0: colorName = "blue"; break
-        default: colorName = "green"; break
-        }
-    else
-        switch (pieceModels[0].color) {
-        case 0: colorName = "blue"; break
-        case 1: colorName = "yellow"; break
-        case 2: colorName = "red"; break
-        default: colorName = "green"; break
-        }
+    switch (pieceModels[0].color) {
+    case 0: colorName = "blue"; break
+    case 1:
+        colorName = boardModel.gameVariant == "duo" ||
+                boardModel.gameVariant == "junior" ? "green" : "yellow"; break
+    case 2: colorName = "red"; break
+    case 3: colorName = "green"; break
+    }
     var properties = {
         "colorName": colorName,
-        "isPicked": Qt.binding(function() { return this == pickedPiece })
-    }
+        "isPicked": Qt.binding(function() { return this === pickedPiece }) }
+    var pieces = []
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
         pieces.push(component.createObject(this, properties))
