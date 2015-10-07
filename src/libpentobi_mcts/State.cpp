@@ -119,6 +119,7 @@ bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv,
     if (is_forbidden[*p])
         return false;
     auto end = info.end();
+    // Loop over fixed size to help compiler unroll
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
     {
         if (++p == end)
@@ -142,6 +143,7 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
     if (features.is_forbidden())
         return false;
     auto end = info.end();
+    // Loop over fixed size to help compiler unroll
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
     {
         if (++p == end)
@@ -152,7 +154,7 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
     double gamma = m_gamma_piece[info.get_piece()];
     auto nu_local = features.get_nu_local();
     if (nu_local > 0)
-        gamma *= m_gamma_nu_attach[nu_local];
+        gamma *= m_gamma_nu_local[nu_local];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
@@ -583,7 +585,7 @@ void State::start_search()
             * pow(gamma_nu_attach_factor, piece_nu_attach - 1);
     }
     for (unsigned i = 0; i < PieceInfo::max_size + 1; ++i)
-        m_gamma_nu_attach[i] = pow(1e10, i);
+        m_gamma_nu_local[i] = pow(1e10, i);
 }
 
 void State::start_simulation(size_t n)

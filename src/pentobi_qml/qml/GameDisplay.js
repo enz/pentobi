@@ -6,7 +6,7 @@ function createPieces() {
     var file = (gameModel.gameVariant.indexOf("trigon") >= 0) ?
                 "PieceTrigon.qml" : "PieceClassic.qml"
     var component = Qt.createComponent(file)
-    if (component.status != Component.Ready)
+    if (component.status !== Component.Ready)
         throw "Could not create component " + file
     _pieces0 = createColorPieces(component, gameModel.pieceModels0)
     _pieces1 = createColorPieces(component, gameModel.pieceModels1)
@@ -15,27 +15,21 @@ function createPieces() {
 }
 
 function createColorPieces(component, pieceModels) {
-    if (pieceModels.length == 0)
+    if (pieceModels.length === 0)
         return []
-    var pieces = []
-    var gameVariant = gameModel.gameVariant
     var colorName
-    if (gameVariant == "duo" || gameVariant == "junior")
-        switch (pieceModels[0].color) {
-        case 0: colorName = "blue"; break
-        default: colorName = "green"; break
-        }
-    else
-        switch (pieceModels[0].color) {
-        case 0: colorName = "blue"; break
-        case 1: colorName = "yellow"; break
-        case 2: colorName = "red"; break
-        default: colorName = "green"; break
-        }
+    switch (pieceModels[0].color) {
+    case 0: colorName = "blue"; break
+    case 1:
+        colorName = gameModel.gameVariant == "duo" ||
+                gameModel.gameVariant == "junior" ? "green" : "yellow"; break
+    case 2: colorName = "red"; break
+    case 3: colorName = "green"; break
+    }
     var properties = {
         "colorName": colorName,
-        "isPicked": Qt.binding(function() { return this == pickedPiece })
-    }
+        "isPicked": Qt.binding(function() { return this === pickedPiece }) }
+    var pieces = []
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
         pieces.push(component.createObject(this, properties))
@@ -47,8 +41,6 @@ function destroyPieces(pieces) {
     if (pieces == null)
         return
     for (var i = 0; i < pieces.length; ++i)
-        pieces[i].visible = false
-    for (i = 0; i < pieces.length; ++i)
         pieces[i].destroy()
 }
 

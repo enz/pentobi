@@ -157,7 +157,7 @@ function computerPlaysAll() {
 function createTheme(themeName) {
     var source = "qrc:///qml/themes/" + themeName + "/Theme.qml"
     var component = Qt.createComponent(source)
-    if (component.status != Component.Ready)
+    if (component.status !== Component.Ready)
         throw "Could not load " + source
     return component.createObject(root)
 }
@@ -385,7 +385,7 @@ function showGameOver() {
 }
 
 function showInfo(text) {
-    if (infoMessageLoader.status == Loader.Null)
+    if (infoMessageLoader.status === Loader.Null)
         infoMessageLoader.sourceComponent = infoMessageComponent
     var dialog = infoMessageLoader.item
     dialog.text = text
@@ -393,7 +393,7 @@ function showInfo(text) {
 }
 
 function showQuestion(text, acceptedFunc) {
-    if (questionMessageLoader.status == Loader.Null)
+    if (questionMessageLoader.status === Loader.Null)
         questionMessageLoader.sourceComponent = questionMessageComponent
     var dialog = questionMessageLoader.item
     dialog.text = text

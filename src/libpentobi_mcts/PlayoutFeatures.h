@@ -124,6 +124,7 @@ inline void PlayoutFeatures::set_forbidden(const MoveInfo& info)
     auto p = info.begin();
     auto end = info.end();
     m_point_value[*p] = 0x1000u;
+    // Loop over fixed size to help compiler unroll
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
     {
         if (++p == end)
