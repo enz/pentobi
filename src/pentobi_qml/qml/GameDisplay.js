@@ -81,7 +81,7 @@ function pickPiece(piece) {
 
 function showMoveHint(move) {
     var pieceModel = gameModel.preparePiece(gameModel.toPlay, move)
-    var piece = findPiece(pieceModel)
+    var piece = findPiece(pieceModel, gameModel.toPlay)
     var pos = board.mapToItem(pieceManipulator.parent,
                               board.mapFromGameX(pieceModel.gameCoord.x),
                               board.mapFromGameY(pieceModel.gameCoord.y))
