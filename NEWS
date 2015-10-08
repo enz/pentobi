@@ -7,7 +7,7 @@ Android version:
   if the startup fails due to low memory.
 * Workaround for a bug that made the back button no longer exit the app
   after the computer color dialog was shown (QTBUG-48456).
-* Slightly faster startup.
+* Faster startup.
 * Changed snapping behavior of the piece area to make it easier to flick
   vertically between colors with multiple movements on small screens.
 
