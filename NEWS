@@ -9,6 +9,7 @@ Version 10.0.UNKNOWN (v10-fixes)
 
 Android version:
 
+* New action bar button for undoing moves.
 * Reduced memory requirements. A meaningful error message is now shown
   if the startup fails due to low memory.
 * Workaround for a bug that made the back button no longer exit the app
