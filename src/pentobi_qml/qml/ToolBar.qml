@@ -7,6 +7,7 @@ import "Main.js" as Logic
 
 ToolBar {
     RowLayout {
+        anchors.fill: parent
         spacing: 0
 
         // App icon
@@ -21,6 +22,7 @@ ToolBar {
             source: "icons/pentobi.svg"
 
         }
+        Item { Layout.fillWidth: true }
         Pentobi.ToolButton {
             imageSource: "icons/pentobi-newgame.svg"
             onClicked: Logic.newGame(true)
