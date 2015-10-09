@@ -50,8 +50,6 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
     bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
     m_center = findCenter(bd, info.get_points(), isOriginDownward);
     m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);
-    m_state = "";
-    updateTransformFromState();
 }
 
 QPointF PieceModel::center() const
@@ -71,17 +69,65 @@ QVariantList PieceModel::elements()
 
 void PieceModel::flipAcrossX()
 {
-    setTransform(m_bd.get_transforms().get_mirrored_vertically(m_transform));
+    setTransform(m_bd.get_transforms().get_mirrored_vertically(getTransform()));
 }
 
 void PieceModel::flipAcrossY()
 {
-    setTransform(m_bd.get_transforms().get_mirrored_horizontally(m_transform));
+    setTransform(m_bd.get_transforms().get_mirrored_horizontally(getTransform()));
 }
 
 QPointF PieceModel::gameCoord() const
 {
     return m_gameCoord;
+}
+
+const Transform* PieceModel::getTransform(QString state) const
+{
+    auto variant = m_bd.get_variant();
+    bool isTrigon = (variant == Variant::trigon || variant == Variant::trigon_2
+                     || variant == Variant::trigon_3);
+    auto& transforms = m_bd.get_transforms();
+    // See comment in getTransform() about the mapping between states and
+    // transform classes.
+    if (state == "")
+        return isTrigon ? transforms.find<TransfTrigonIdentity>()
+                        : transforms.find<TransfIdentity>();
+    if (state == "rot60")
+        return transforms.find<TransfTrigonRot60>();
+    if (state == "rot90")
+        return transforms.find<TransfRectRot90>();
+    if (state == "rot120")
+        return transforms.find<TransfTrigonRot120>();
+    if (state == "rot180")
+        return isTrigon ? transforms.find<TransfTrigonRot180>()
+                        : transforms.find<TransfRectRot180>();
+    if (state == "rot240")
+        return transforms.find<TransfTrigonRot240>();
+    if (state == "rot270")
+        return transforms.find<TransfRectRot270>();
+    if (state == "rot300")
+        return transforms.find<TransfTrigonRot300>();
+    if (state == "flip")
+        return isTrigon ? transforms.find<TransfTrigonReflRot180>()
+                        : transforms.find<TransfRectRot180Refl>();
+    if (state == "rot60Flip")
+        return transforms.find<TransfTrigonReflRot120>();
+    if (state == "rot90Flip")
+        return transforms.find<TransfRectRot90Refl>();
+    if (state == "rot120Flip")
+        return transforms.find<TransfTrigonReflRot60>();
+    if (state == "rot180Flip")
+        return isTrigon ? transforms.find<TransfTrigonRefl>()
+                        : transforms.find<TransfRectRefl>();
+    if (state == "rot240Flip")
+        return transforms.find<TransfTrigonReflRot300>();
+    if (state == "rot270Flip")
+        return transforms.find<TransfRectRot270Refl>();
+    if (state == "rot300Flip")
+        return transforms.find<TransfTrigonReflRot240>();
+    qWarning() << "PieceModel: unknown state " << m_state;
+    return transforms.find<TransfIdentity>();
 }
 
 QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
@@ -124,12 +170,12 @@ QPointF PieceModel::labelPos() const
 
 void PieceModel::rotateLeft()
 {
-    setTransform(m_bd.get_transforms().get_rotated_anticlockwise(m_transform));
+    setTransform(m_bd.get_transforms().get_rotated_anticlockwise(getTransform()));
 }
 
 void PieceModel::rotateRight()
 {
-    setTransform(m_bd.get_transforms().get_rotated_clockwise(m_transform));
+    setTransform(m_bd.get_transforms().get_rotated_clockwise(getTransform()));
 }
 
 void PieceModel::setGameCoord(QPointF gameCoord)
@@ -145,7 +191,6 @@ void PieceModel::setState(QString state)
     if (m_state == state)
         return;
     m_state = state;
-    updateTransformFromState();
     emit stateChanged(state);
 }
 
@@ -210,57 +255,6 @@ void PieceModel::setIsPlayed(bool isPlayed)
 QString PieceModel::state() const
 {
     return m_state;
-}
-
-void PieceModel::updateTransformFromState()
-{
-    auto variant = m_bd.get_variant();
-    bool isTrigon = (variant == Variant::trigon || variant == Variant::trigon_2
-                     || variant == Variant::trigon_3);
-    auto& transforms = m_bd.get_transforms();
-    // See comment in getTransform() about the mapping between states and
-    // transform classes.
-    if (m_state == "")
-        m_transform = isTrigon ? transforms.find<TransfTrigonIdentity>()
-                               : transforms.find<TransfIdentity>();
-    else if (m_state == "rot60")
-        m_transform = transforms.find<TransfTrigonRot60>();
-    else if (m_state == "rot90")
-        m_transform = transforms.find<TransfRectRot90>();
-    else if (m_state == "rot120")
-        m_transform = transforms.find<TransfTrigonRot120>();
-    else if (m_state == "rot180")
-        m_transform = isTrigon ? transforms.find<TransfTrigonRot180>()
-                               : transforms.find<TransfRectRot180>();
-    else if (m_state == "rot240")
-        m_transform = transforms.find<TransfTrigonRot240>();
-    else if (m_state == "rot270")
-        m_transform = transforms.find<TransfRectRot270>();
-    else if (m_state == "rot300")
-        m_transform = transforms.find<TransfTrigonRot300>();
-    else if (m_state == "flip")
-        m_transform = isTrigon ? transforms.find<TransfTrigonReflRot180>()
-                               : transforms.find<TransfRectRot180Refl>();
-    else if (m_state == "rot60Flip")
-        m_transform = transforms.find<TransfTrigonReflRot120>();
-    else if (m_state == "rot90Flip")
-        m_transform = transforms.find<TransfRectRot90Refl>();
-    else if (m_state == "rot120Flip")
-        m_transform = transforms.find<TransfTrigonReflRot60>();
-    else if (m_state == "rot180Flip")
-        m_transform = isTrigon ? transforms.find<TransfTrigonRefl>()
-                               : transforms.find<TransfRectRefl>();
-    else if (m_state == "rot240Flip")
-        m_transform = transforms.find<TransfTrigonReflRot300>();
-    else if (m_state == "rot270Flip")
-        m_transform = transforms.find<TransfRectRot270Refl>();
-    else if (m_state == "rot300Flip")
-        m_transform = transforms.find<TransfTrigonReflRot240>();
-    else
-    {
-        qWarning() << "PieceModel: unknown state " << m_state;
-        m_transform = transforms.find<TransfIdentity>();
-    }
 }
 
 //-----------------------------------------------------------------------------

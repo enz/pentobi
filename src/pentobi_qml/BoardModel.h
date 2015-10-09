@@ -57,7 +57,8 @@ public:
 
     explicit BoardModel(QObject* parent = nullptr);
 
-    Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, QPointF coord) const;
+    Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, QString state,
+                                QPointF coord) const;
 
     Q_INVOKABLE void play(PieceModel* pieceModel, QPointF coord);
 
@@ -191,7 +192,8 @@ private:
 
     void createPieceModels(Color c, QList<PieceModel*>& pieceModels);
 
-    bool findMove(const PieceModel& piece, QPointF coord, Move& mv) const;
+    bool findMove(const PieceModel& piece, QString state, QPointF coord,
+                  Move& mv) const;
 
     QList<PieceModel*>& getPieceModels(Color c);
 

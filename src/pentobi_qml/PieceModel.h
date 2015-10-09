@@ -55,9 +55,11 @@ public:
 
     QPointF gameCoord() const;
 
-    Piece getPiece() const;
+    Piece getPiece() const { return m_piece; }
 
-    const Transform* getTransform() const;
+    const Transform* getTransform(QString state) const;
+
+    const Transform* getTransform() const { return getTransform(m_state); }
 
     void setState(QString state);
 
@@ -100,21 +102,7 @@ private:
     QVariantList m_elements;
 
     QString m_state;
-
-    const Transform* m_transform;
-
-    void updateTransformFromState();
 };
-
-inline libpentobi_base::Piece PieceModel::getPiece() const
-{
-    return m_piece;
-}
-
-inline const Transform* PieceModel::getTransform() const
-{
-    return m_transform;
-}
 
 //-----------------------------------------------------------------------------
 

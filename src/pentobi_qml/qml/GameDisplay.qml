@@ -140,15 +140,15 @@ Item
     PieceManipulator {
         id: pieceManipulator
 
-        function isLegal() {
+        legal: {
             if (pickedPiece === null)
                 return false
             var boardCoord = parent.mapToItem(board,
                                               x + width / 2, y + height / 2)
             var coord = board.mapToGame(boardCoord.x, boardCoord.y)
-            return boardModel.isLegalPos(pickedPiece.pieceModel, coord)
+            return boardModel.isLegalPos(pickedPiece.pieceModel,
+                                         pickedPiece.pieceModel.state, coord)
         }
-
         width: 0.6 * board.width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
@@ -159,19 +159,16 @@ Item
         onPiecePlayed: {
             var pos = mapToItem(board, width / 2, height / 2)
             if (board.contains(Qt.point(pos.x, pos.y))) {
-                if (isLegal()) {
+                if (legal) {
                     var boardCoord =
                             pieceManipulator.mapToItem(board, pickedPiece.x, pickedPiece.y)
                     var coord = board.mapToGame(boardCoord.x, boardCoord.y)
-                    play(pickedPiece.pieceModel, coord)
+                    play(pieceModel, coord)
                     pickedPiece = null
                 }
             }
             else
                 pickedPiece = null
         }
-        onXChanged: legal = isLegal()
-        onYChanged: legal = isLegal()
-        onOrientationChanged: legal = isLegal()
     }
 }
