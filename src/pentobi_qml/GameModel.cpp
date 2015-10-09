@@ -149,12 +149,12 @@ void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
     }
 }
 
-bool GameModel::findMove(const PieceModel& piece, QPointF coord,
-                          Move& mv) const
+bool GameModel::findMove(const PieceModel& piece, QString state,
+                         QPointF coord, Move& mv) const
 {
     auto& bd = getBoard();
     auto& info = bd.get_piece_info(piece.getPiece());
-    auto transform = piece.getTransform();
+    auto transform = piece.getTransform(state);
     PiecePoints piecePoints = info.get_points();
     transform->transform(piecePoints.begin(), piecePoints.end());
     auto boardType = bd.get_board_type();
@@ -261,10 +261,11 @@ void GameModel::initGameVariant(QString gameVariant)
     settings.setValue("variant", gameVariant);
 }
 
-bool GameModel::isLegalPos(PieceModel* pieceModel, QPointF coord) const
+bool GameModel::isLegalPos(PieceModel* pieceModel, QString state,
+                            QPointF coord) const
 {
     Move mv;
-    if (! findMove(*pieceModel, coord, mv))
+    if (! findMove(*pieceModel, state, coord, mv))
         return false;
     Color c(pieceModel->color());
     bool result = getBoard().is_legal(c, mv);
@@ -353,7 +354,7 @@ void GameModel::play(PieceModel* pieceModel, QPointF coord)
 {
     Color c(pieceModel->color());
     Move mv;
-    if (! findMove(*pieceModel, coord, mv))
+    if (! findMove(*pieceModel, pieceModel->state(), coord, mv))
     {
         qWarning("GameModel::play: illegal move");
         return;

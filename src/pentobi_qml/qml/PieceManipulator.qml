@@ -8,7 +8,6 @@ MouseArea {
     property bool legal
 
     signal piecePlayed
-    signal orientationChanged
 
     drag { target: root; filterChildren: true }
     height: width
@@ -43,21 +42,21 @@ MouseArea {
     MouseArea {
         anchors { top: root.top; horizontalCenter: root.horizontalCenter }
         width: 0.2 * root.width; height: 0.2 * root.height
-        onClicked: { pieceModel.rotateRight(); orientationChanged() }
+        onClicked: pieceModel.rotateRight()
     }
     MouseArea {
         anchors { right: root.right; verticalCenter: root.verticalCenter }
         width: 0.2 * root.width; height: 0.2 * root.height
-        onClicked: { pieceModel.flipAcrossX(); orientationChanged() }
+        onClicked: pieceModel.flipAcrossX()
     }
     MouseArea {
         anchors { bottom: root.bottom; horizontalCenter: root.horizontalCenter }
         width: 0.2 * root.width; height: 0.2 * root.height
-        onClicked: { pieceModel.flipAcrossY(); orientationChanged() }
+        onClicked: pieceModel.flipAcrossY()
     }
     MouseArea {
         anchors { left: root.left; verticalCenter: root.verticalCenter }
         width: 0.2 * root.width; height: 0.2 * root.height
-        onClicked: { pieceModel.rotateLeft(); orientationChanged() }
+        onClicked: pieceModel.rotateLeft()
     }
 }
