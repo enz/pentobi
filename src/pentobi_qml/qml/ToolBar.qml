@@ -12,6 +12,8 @@ ToolBar {
 
         // App icon
         Image {
+            visible: Qt.platform.os === "android"
+
             Layout.leftMargin: 0.05 * width
             Layout.rightMargin: 0.35 * width
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -19,7 +21,7 @@ ToolBar {
             width: height
             sourceSize.height: height
             sourceSize.width: width
-            source: "icons/pentobi.svg"
+            source: visible ? "icons/pentobi.svg" : ""
 
         }
         Item { Layout.fillWidth: true }
