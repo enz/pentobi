@@ -19,8 +19,7 @@ ToolBar {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             height: Screen.pixelDensity < 5 ? 24 : 48 // pentobi.svg is 48x48
             width: height
-            sourceSize.height: height
-            sourceSize.width: width
+            sourceSize { width: width; height: height }
             source: visible ? "icons/pentobi.svg" : ""
 
         }

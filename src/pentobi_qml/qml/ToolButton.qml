@@ -10,9 +10,7 @@ ToolButton {
 
     Image {
         height: Screen.pixelDensity < 5 ? 22 : 44
-        width: height
-        sourceSize.height: height
-        sourceSize.width: width
+        sourceSize { width: width; height: height }
         anchors.centerIn: parent
         source: imageSource
     }
