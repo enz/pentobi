@@ -87,6 +87,5 @@ function showMoveHint(move) {
                               board.mapFromGameY(pieceModel.gameCoord.y))
     pieceManipulator.x = pos.x - pieceManipulator.width / 2
     pieceManipulator.y = pos.y - pieceManipulator.height / 2
-    pieceManipulator.legal = true
     pickedPiece = piece
 }
