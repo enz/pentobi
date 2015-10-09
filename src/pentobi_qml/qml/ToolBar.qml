@@ -7,8 +7,20 @@ import "Main.js" as Logic
 
 ToolBar {
     RowLayout {
-        anchors.fill: parent
+        spacing: 0
 
+        // App icon
+        Image {
+            Layout.leftMargin: 0.05 * width
+            Layout.rightMargin: 0.35 * width
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            height: Screen.pixelDensity < 5 ? 24 : 48 // pentobi.svg is 48x48
+            width: height
+            sourceSize.height: height
+            sourceSize.width: width
+            source: "icons/pentobi.svg"
+
+        }
         Pentobi.ToolButton {
             imageSource: "icons/pentobi-newgame.svg"
             onClicked: Logic.newGame(true)
