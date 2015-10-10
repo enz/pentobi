@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<defs>
+<linearGradient id="b">
+<stop stop-color="#cdcdcb" offset="0"/>
+<stop stop-color="#babab7" offset="1"/>
+</linearGradient>
+<linearGradient id="a">
+<stop stop-color="#bebfbc" offset="0"/>
+<stop stop-color="#888b84" offset="1"/>
+</linearGradient>
+<linearGradient id="n" x1="24.114" gradientUnits="userSpaceOnUse" y1="41.951" gradientTransform="matrix(.3567615 0 0 .3567616 -.5622784 31.43772)" x2="21.794" y2="6.7733">
+<stop stop-color="#474845" offset="0"/>
+<stop stop-color="#7b7e78" offset="1"/>
+</linearGradient>
+<linearGradient id="v" x1="-8.1452" xlink:href="#a" gradientUnits="userSpaceOnUse" y1="11.728" gradientTransform="matrix(.6545711 0 0 .654082 11.03916 31.04031)" x2="-11.191" y2="4.9662"/>
+<linearGradient id="o" x1="-8.9502" xlink:href="#b" gradientUnits="userSpaceOnUse" y1="11.809" gradientTransform="matrix(.654572 0 0 .6540722 11.03921 -.9596)" x2="-9.5003" y2="4.7247"/>
+<linearGradient id="p" x1="-8.9502" xlink:href="#b" gradientUnits="userSpaceOnUse" y1="11.809" gradientTransform="matrix(.654572 0 0 .6540722 11.03921 38.0404)" x2="-9.5003" y2="4.7247"/>
+<linearGradient id="q" x1="-8.9502" xlink:href="#b" gradientUnits="userSpaceOnUse" y1="11.809" gradientTransform="matrix(.654572 0 0 .6540722 18.03921 38.0404)" x2="-9.5003" y2="4.7247"/>
+<linearGradient id="r" x1="-8.9502" xlink:href="#b" gradientUnits="userSpaceOnUse" y1="11.809" gradientTransform="matrix(.654572 0 0 .6540722 18.03921 31.0404)" x2="-9.5003" y2="4.7247"/>
+<linearGradient id="s" x1="-8.1452" xlink:href="#a" gradientUnits="userSpaceOnUse" y1="11.728" gradientTransform="matrix(.6545711 0 0 .654082 11.03916 38.04031)" x2="-11.191" y2="4.9662"/>
+<linearGradient id="t" x1="-8.1452" xlink:href="#a" gradientUnits="userSpaceOnUse" y1="11.728" gradientTransform="matrix(.6545711 0 0 .654082 18.03916 38.04031)" x2="-11.191" y2="4.9662"/>
+<linearGradient id="u" x1="-8.1452" xlink:href="#a" gradientUnits="userSpaceOnUse" y1="11.728" gradientTransform="matrix(.6545711 0 0 .654082 18.03916 31.04031)" x2="-11.191" y2="4.9662"/>
+<linearGradient id="m" y2="4.9662" xlink:href="#a" gradientUnits="userSpaceOnUse" x2="-11.191" gradientTransform="matrix(.6545711 0 0 .654082 11.03916 -.95969)" y1="11.728" x1="-8.1452"/>
+</defs>
+<rect rx=".60258" ry="0" height="7" width="7" y="1" x="1" fill="#babdb6"/>
+<path d="m1.4999 7.5h6.0002v-6.0001" stroke="url(#o)" stroke-linecap="square" stroke-width=".9998931" fill="none"/>
+<path d="m1.4999 7.5v-6.0002h6.0002" stroke="url(#m)" stroke-linecap="square" stroke-width=".9998004" fill="none"/>
+<g transform="translate(0,-32)" fill="#babdb6">
+<rect rx=".60258" ry="0" height="7" width="7" y="40" x="1"/>
+<rect rx=".60258" ry="0" height="7" width="7" y="40" x="8"/>
+<rect rx=".60258" ry="0" height="7" width="7" y="33" x="8"/>
+</g>
+<g transform="translate(0,-32)" fill="none">
+<g stroke-linecap="square">
+<path stroke="url(#v)" stroke-width=".9998004" d="m1.4999 39.5v-6.0002h6.0002"/>
+<g stroke-width=".9998931">
+<path stroke="url(#p)" d="m1.4999 46.5h6.0002v-6.0001"/>
+<path stroke="url(#q)" d="m8.4999 46.5h6.0002v-6.0001"/>
+<path stroke="url(#r)" d="m8.4999 39.5h6.0002v-6.0001"/>
+</g>
+<g stroke-width=".9998004">
+<path stroke="url(#s)" d="m1.4999 46.5v-6.0002h6.0002"/>
+<path stroke="url(#t)" d="m8.4999 46.5v-6.0002h6.0002"/>
+<path stroke="url(#u)" d="m8.4999 39.5v-6.0002h6.0002"/>
+</g>
+</g>
+<rect stroke-linejoin="round" ry="1.0913" height="15.001" width="15.001" stroke="url(#n)" y="32.5" x=".49959"/>
+</g>
+<path d="m1.5 9 5-5v3.571429s2.142857 0 3.474576 1.398304c1.052324 1.104947 1.525424 4.315977 1.525424 4.315977s-1.422275-1.641214-2.324455-2.218523c-1.204965-0.77106-2.675545-0.63862-2.675545-0.63862v3.57143z" fill-rule="evenodd" stroke="#204a87" stroke-width="1px" fill="#729fcf"/>
+</svg>

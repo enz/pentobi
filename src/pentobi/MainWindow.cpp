@@ -1170,6 +1170,7 @@ void MainWindow::createActions()
             SLOT(showVariations(bool)));
 
     m_actionUndo = createAction(tr("&Undo Move"));
+    setIcon(m_actionUndo, "pentobi-undo");
     connect(m_actionUndo, SIGNAL(triggered()), SLOT(undo()));
 
     m_actionVariantClassic = createAction(tr("&Classic (4 Players)"));
@@ -1496,6 +1497,7 @@ void MainWindow::createToolBar()
     toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     toolBar->addAction(m_actionNew);
     toolBar->addAction(m_actionRatedGame);
+    toolBar->addAction(m_actionUndo);
     toolBar->addSeparator();
     toolBar->addAction(m_actionComputerColors);
     toolBar->addAction(m_actionPlay);

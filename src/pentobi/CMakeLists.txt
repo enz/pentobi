@@ -62,6 +62,8 @@ set(pentobi_ICNS
   pentobi-rated-game-16.png
   pentobi-rotate-left.png
   pentobi-rotate-right.png
+  pentobi-undo.png
+  pentobi-undo-16.png
   )
 
 set(pentobi_TS
