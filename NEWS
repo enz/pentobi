@@ -9,7 +9,7 @@ Version 10.0.UNKNOWN (v10-fixes)
 
 Android version:
 
-* New action bar button for undoing moves.
+* New action bar button for Undo Move.
 * Reduced memory requirements. A meaningful error message is now shown
   if the startup fails due to low memory.
 * Workaround for a bug that made the back button no longer exit the app
@@ -20,6 +20,7 @@ Android version:
 
 Desktop version:
 
+* New toolbar button for Undo Move.
 * Don't show move number in status line if no moves have been played.
 * The Windows installer is now built with Qt 5 and dynamic libraries.
 
