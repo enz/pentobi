@@ -142,7 +142,7 @@ void SharedConst::init(bool is_followup)
             }
     }
 
-    // Initialize m_shared_const.precomp_moves
+    // Initialize precomp_moves
     for (Color c : bd.get_colors())
     {
         auto& precomp_moves = this->precomp_moves[c];

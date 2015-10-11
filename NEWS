@@ -7,6 +7,14 @@ Version 10.UNKNOWN (master)
 Version 10.0.UNKNOWN (v10-fixes)
 ================================
 
+Desktop version:
+
+* New toolbar button for Undo Move.
+* Don't show move number in status line if no moves have been played.
+* Show an error message instead of the crash dialog if the startup
+  fails due to low memory.
+* The Windows installer is now built with Qt 5 and dynamic libraries.
+
 Android version:
 
 * New action bar button for Undo Move.
@@ -17,12 +25,6 @@ Android version:
 * Faster startup.
 * Changed snapping behavior of the piece area to make it easier to flick
   vertically between colors with multiple movements on small screens.
-
-Desktop version:
-
-* New toolbar button for Undo Move.
-* Don't show move number in status line if no moves have been played.
-* The Windows installer is now built with Qt 5 and dynamic libraries.
 
 
 Version 10.0 (01 Jul 2015)

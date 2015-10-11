@@ -978,4 +978,11 @@
         <translation>Aktuelle Entwicklung:</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Not enough memory.</source>
+        <translation>Nicht genügend Speicher.</translation>
+    </message>
+</context>
 </TS>
