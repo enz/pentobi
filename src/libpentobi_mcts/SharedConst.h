@@ -44,10 +44,6 @@ public:
     /** Lookup table for symmetric points (only used in Duo and Trigon). */
     SymmetricPoints symmetric_points;
 
-    /** Precomputed information if move is forbidden at the start position (and
-        therefore in all positions in the search). */
-    ColorMap<MoveMarker> is_forbidden_at_root;
-
     /** Minimum total number of pieces on the board where all pieces are
         considered until the rest of the simulation. */
     unsigned min_move_all_considered;
@@ -74,6 +70,10 @@ public:
     void init(bool is_followup);
 
 private:
+    /** Temporary variable used in init().
+        Reused for efficiency. */
+    MoveMarker m_is_forbidden;
+
     void init_pieces_considered();
 };
 
