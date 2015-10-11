@@ -178,14 +178,27 @@ int main(int argc, char* argv[])
         if (! parse_variant_id(variantString.toLocal8Bit().constData(),
                                variant))
             variant = Variant::duo;
-        MainWindow mainWindow(variant, initialFile, helpDir, booksDir, noBook,
-                              threads, memory);
-        if (opt.contains("seed"))
-            mainWindow.setDeterministic();
-        if (opt.contains("nodelay"))
-            mainWindow.setNoDelay();
-        mainWindow.show();
-        return app.exec();
+        try
+        {
+            MainWindow mainWindow(variant, initialFile, helpDir, booksDir,
+                                  noBook, threads, memory);
+            if (opt.contains("seed"))
+                mainWindow.setDeterministic();
+            if (opt.contains("nodelay"))
+                mainWindow.setNoDelay();
+            mainWindow.show();
+            return app.exec();
+        }
+        catch (bad_alloc&)
+        {
+            // Handle bad_alloc here because it is an expected error condition
+            // (libpentobi_mcts::Player in MainWindow requires a larger amount
+            // of memory) and here, the translators are installed, so we can
+            // show a translated error message.
+            showError(nullptr,
+                      QCoreApplication::translate("main",
+                                                  "Not enough memory."));
+        }
     }
     catch (const OptionError& e)
     {
