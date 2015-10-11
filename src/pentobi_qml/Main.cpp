@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
         // bad_alloc can happen because the player requires a larger
         // amount of memory (e.g. it happened with Pentobi 10.0 on some
         // Android devices).
-        auto title = QCoreApplication::translate("main", "Error");
+        auto title = QCoreApplication::translate("main", "Pentobi");
         auto text =
                 QCoreApplication::translate("main", "Not enough memory.");
         QMessageBox::critical(nullptr, title, text);
