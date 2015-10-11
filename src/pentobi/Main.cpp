@@ -195,9 +195,9 @@ int main(int argc, char* argv[])
             // (libpentobi_mcts::Player in MainWindow requires a larger amount
             // of memory) and here, the translators are installed, so we can
             // show a translated error message.
-            showError(nullptr,
-                      QCoreApplication::translate("main",
-                                                  "Not enough memory."));
+            QMessageBox::critical(nullptr,
+                QCoreApplication::translate("main", "Pentobi"),
+                QCoreApplication::translate("main", "Not enough memory."));
         }
     }
     catch (const OptionError& e)

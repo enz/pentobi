@@ -64,7 +64,7 @@ void showFatal(const QString& detailedText)
     // program is correct and if it is not, they can occur in situations
     // when the translators are not yet installed.
     QMessageBox msgBox;
-    msgBox.setWindowTitle("Unexpected Error");
+    msgBox.setWindowTitle("Pentobi");
     msgBox.setIcon(QMessageBox::Critical);
     msgBox.setText("An unexpected error occurred.");
     QString infoText =
