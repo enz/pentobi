@@ -25,8 +25,9 @@ using libpentobi_base::SymmetricPoints;
 //-----------------------------------------------------------------------------
 
 /** Constant data shared between the search states. */
-struct SharedConst
+class SharedConst
 {
+public:
     /** Precomputed moves additionally constrained by moves that are
         non-forbidden at root position. */
     ColorMap<PrecompMoves> precomp_moves;
@@ -42,10 +43,6 @@ struct SharedConst
 
     /** Lookup table for symmetric points (only used in Duo and Trigon). */
     SymmetricPoints symmetric_points;
-
-    /** Precomputed information if move is forbidden at the start position (and
-        therefore in all positions in the search). */
-    ColorMap<MoveMarker> is_forbidden_at_root;
 
     /** Minimum move number where all pieces are considered until the rest
         of the simulation. */
@@ -69,6 +66,12 @@ struct SharedConst
     SharedConst(const Color& to_play);
 
     void init(bool is_followup);
+
+private:
+    /** Temporary variable used in init().
+        Reused for efficiency. */
+    MoveMarker m_is_forbidden;
+
 };
 
 //-----------------------------------------------------------------------------

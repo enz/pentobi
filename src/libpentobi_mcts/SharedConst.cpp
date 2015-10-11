@@ -116,10 +116,11 @@ void SharedConst::init(bool is_followup)
 {
     auto& bd = *board;
     auto& bc = bd.get_board_const();
+
+    // Initialize precomp_moves
     for (Color c : bd.get_colors())
     {
-        auto& is_forbidden_at_root = this->is_forbidden_at_root[c];
-        is_forbidden_at_root.set();
+        m_is_forbidden.set();
         for (Point p : bd)
             if (! bd.is_forbidden(p, c))
             {
@@ -127,17 +128,13 @@ void SharedConst::init(bool is_followup)
                 for (Piece piece : bd.get_pieces_left(c))
                     for (Move mv : bd.get_moves(piece, p, adj_status))
                     {
-                        if (! is_forbidden_at_root[mv])
+                        if (! m_is_forbidden[mv])
                             continue;
                         if (! bd.is_forbidden(c, mv))
-                            is_forbidden_at_root.clear(mv);
+                            m_is_forbidden.clear(mv);
                     }
             }
-    }
 
-    // Initialize precomp_moves
-    for (Color c : bd.get_colors())
-    {
         auto& precomp_moves = this->precomp_moves[c];
         precomp_moves.clear();
         // Construct new lists in-place from old if it is a follow-up position
@@ -162,7 +159,7 @@ void SharedConst::init(bool is_followup)
                     auto begin = precomp_moves.get_size();
                     auto moves = old_precomp_moves.get_moves(piece, p, i);
                     for (auto& mv : moves)
-                        if (! is_forbidden_at_root[c][mv])
+                        if (! m_is_forbidden[mv])
                         {
                             if (is_followup)
                                 // Assert that we don't overwrite old content
