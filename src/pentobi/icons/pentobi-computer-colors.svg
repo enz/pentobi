@@ -17,36 +17,18 @@
 <stop stop-color="#676a64" offset="0"/>
 <stop stop-color="#1b1c1b" offset="1"/>
 </linearGradient>
-<linearGradient id="d" y2="26" gradientUnits="userSpaceOnUse" x2="14" y1="21" x1="13">
-<stop stop-color="#da4d4d" offset="0"/>
-<stop stop-color="#c32828" offset="1"/>
-</linearGradient>
-<linearGradient id="c" y2="26" gradientUnits="userSpaceOnUse" x2="20" y1="21" x1="18">
-<stop stop-color="#80e021" offset="0"/>
-<stop stop-color="#62ac18" offset="1"/>
-</linearGradient>
-<linearGradient id="b" y2="31" gradientUnits="userSpaceOnUse" x2="15" y1="26" x1="13">
-<stop stop-color="#e8d31d" offset="0"/>
-<stop stop-color="#c4b214" offset="1"/>
-</linearGradient>
-<linearGradient id="a" y2="31" gradientUnits="userSpaceOnUse" x2="20" y1="26" x1="18">
-<stop stop-color="#3d6ca8" offset="0"/>
-<stop stop-color="#315686" offset="1"/>
-</linearGradient>
 </defs>
 <g transform="translate(0,-10)">
-<g>
 <rect stroke-linejoin="round" fill-rule="evenodd" ry="2.3125" height="19" width="21" stroke="url(#e)" stroke-linecap="round" y="10.5" x=".50004" stroke-width="1.0001" fill="url(#f)"/>
 <rect stroke-linejoin="round" fill-rule="evenodd" ry=".50793" height="12" width="15" stroke="url(#g)" stroke-linecap="round" y="13.5" x="3.5003" fill="url(#h)"/>
-<path d="m3.0001 27.5h16" stroke="#6e706c" stroke-width="1.00021" fill="none"/>
+<path stroke="#6e706c" stroke-width="1.00021" d="m3.0001 27.5h16" fill="none"/>
 </g>
-<path fill-opacity=".2262997" d="m18 16.42v8.58h-14v-3.8306c3.9229-1.8633 9.0577-3.9349 14-4.749z"/>
-<rect stroke-linejoin="round" ry="0" height="11" width="11" stroke="#2b2d2b" stroke-linecap="round" y="20.5" x="10.5" stroke-width=".99995" fill="none"/>
+<path d="m18 6.42v8.58h-14v-3.8306c3.9229-1.8633 9.0577-3.9349 14-4.749z" fill-opacity=".2262997"/>
+<rect stroke-linejoin="round" ry="0" height="11" width="11" stroke="#2b2d2b" stroke-linecap="round" y="10.5" x="10.5" stroke-width=".99995" fill="none"/>
 <g fill-rule="evenodd">
-<rect height="5" width="5" y="21" x="11" fill="url(#d)"/>
-<rect height="5" width="5" y="21" x="16" fill="url(#c)"/>
-<rect height="5" width="5" y="26" x="11" fill="url(#b)"/>
-<rect height="5" width="5" y="26" x="16" fill="url(#a)"/>
-</g>
+<rect height="5" width="5" y="11" x="11" fill="#e63232"/>
+<rect height="5" width="5" y="11" x="16" fill="#8ad83e"/>
+<rect height="5" width="5" y="16" x="11" fill="#e3cc09"/>
+<rect height="5" width="5" y="16" x="16" fill="#4b7bb9"/>
 </g>
 </svg>

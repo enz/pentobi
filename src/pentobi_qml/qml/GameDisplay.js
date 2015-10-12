@@ -76,6 +76,7 @@ function pickPiece(piece) {
         pieceManipulator.x = x
         pieceManipulator.y = y
     }
+    gameDisplay.transitionsEnabled = true
     pickedPiece = piece
 }
 

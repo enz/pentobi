@@ -161,12 +161,12 @@
 <context>
     <name>main</name>
     <message>
-        <source>Error</source>
-        <translation>Fehler</translation>
-    </message>
-    <message>
         <source>Not enough memory.</source>
         <translation>Nicht genügend Speicher.</translation>
+    </message>
+    <message>
+        <source>Pentobi</source>
+        <translation>Pentobi</translation>
     </message>
 </context>
 </TS>

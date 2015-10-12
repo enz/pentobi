@@ -97,7 +97,6 @@ template<class P>
 P PointTransfRot270Refl<P>::get_transformed(const Point& p,
                                             const Geometry<P>& geo) const
 {
-    LIBBOARDGAME_UNUSED(geo.get_height());
     return geo.get_point(geo.get_y(p), geo.get_x(p));
 }
 
@@ -119,7 +118,6 @@ template<class P>
 P PointTransfRefl<P>::get_transformed(const Point& p,
                                       const Geometry<P>& geo) const
 {
-    LIBBOARDGAME_UNUSED(geo.get_height());
     unsigned x = geo.get_width() - geo.get_x(p) - 1;
     unsigned y = geo.get_y(p);
     return geo.get_point(x, y);

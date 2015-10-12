@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <defs>
-<linearGradient id="h" y2="31" gradientUnits="userSpaceOnUse" x2="20" gradientTransform="matrix(.7999999 0 0 0.8 -1.799998 6.200002)" y1="26" x1="18">
-<stop stop-color="#3d6ca8" offset="0"/>
-<stop stop-color="#315686" offset="1"/>
-</linearGradient>
-<linearGradient id="g" y2="31" gradientUnits="userSpaceOnUse" x2="15" gradientTransform="matrix(0.8 0 0 .7999999 -1.8 6.200003)" y1="26" x1="13">
-<stop stop-color="#e8d31d" offset="0"/>
-<stop stop-color="#c4b214" offset="1"/>
-</linearGradient>
-<linearGradient id="f" y2="26" gradientUnits="userSpaceOnUse" x2="20" gradientTransform="matrix(0.8 0 0 .7999999 -1.799999 6.200003)" y1="21" x1="18">
-<stop stop-color="#80e021" offset="0"/>
-<stop stop-color="#62ac18" offset="1"/>
-</linearGradient>
-<linearGradient id="e" y2="26" gradientUnits="userSpaceOnUse" x2="14" gradientTransform="matrix(0.8 0 0 0.8 -1.8 6.200002)" y1="21" x1="13">
-<stop stop-color="#da4d4d" offset="0"/>
-<stop stop-color="#c32828" offset="1"/>
-</linearGradient>
 <linearGradient id="d" y2="29.89" gradientUnits="userSpaceOnUse" x2="15.31" gradientTransform="matrix(.7333267 0 0 .6666583 -.0004067133 9.495932)" y1="10.073" x1="9.9997">
 <stop stop-color="#dddfe2" offset="0"/>
 <stop offset="1"/>
@@ -35,18 +19,16 @@
 </linearGradient>
 </defs>
 <g transform="translate(0,-16)">
-<g>
 <rect stroke-linejoin="round" fill-rule="evenodd" ry="1.704" height="14" width="15" stroke="url(#a)" stroke-linecap="round" y="16.527" x=".50829" stroke-width=".99988" fill="url(#b)"/>
 <rect stroke-linejoin="round" fill-rule="evenodd" ry=".33862" height="7.9999" width="11" stroke="url(#c)" stroke-linecap="round" y="18.496" x="2.5665" stroke-width="1.0001" fill="url(#d)"/>
-<path d="m2.0006 28.5h11.999" stroke="#6e706c" stroke-width="1.000581" fill="none"/>
+<path stroke="#6e706c" stroke-width="1.000581" d="m2.0006 28.5h11.999" fill="none"/>
 </g>
-<path fill-opacity=".2262997" d="m13 20v6h-10v-2.6789c2.8021-1.303 6.4697-2.752 10-3.321z"/>
-<rect stroke-linejoin="round" ry="0" height="8.9998" width="8.9998" stroke="#2b2d2b" stroke-linecap="round" y="22.5" x="6.5" fill="none"/>
+<path d="m13 4v6h-10v-2.6789c2.8021-1.303 6.4697-2.752 10-3.321z" fill-opacity=".2262997"/>
+<rect stroke-linejoin="round" ry="0" height="8.9998" width="8.9998" stroke="#2b2d2b" stroke-linecap="round" y="6.5" x="6.5" fill="none"/>
 <g fill-rule="evenodd">
-<rect height="4" width="4" y="23" x="7" fill="url(#e)"/>
-<rect height="4" width="4" y="23" x="11" fill="url(#f)"/>
-<rect height="4" width="4" y="27" x="7" fill="url(#g)"/>
-<rect height="4" width="4" y="27" x="11" fill="url(#h)"/>
-</g>
+<rect height="4" width="4" y="7" x="7" fill="#e63232"/>
+<rect height="4" width="4" y="7" x="11" fill="#8ad83e"/>
+<rect height="4" width="4" y="11" x="7" fill="#e3cc09"/>
+<rect height="4" width="4" y="11" x="11" fill="#4b7bb9"/>
 </g>
 </svg>

@@ -984,5 +984,9 @@
         <source>Not enough memory.</source>
         <translation>Nicht genügend Speicher.</translation>
     </message>
+    <message>
+        <source>Pentobi</source>
+        <translation>Pentobi</translation>
+    </message>
 </context>
 </TS>
