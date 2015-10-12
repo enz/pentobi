@@ -26,7 +26,6 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
         gameDisplay.transitionsEnabled = false
         initComputerColors()
         gameDisplay.showToPlay()
-        gameDisplay.transitionsEnabled = true
     })
 }
 
@@ -189,7 +188,6 @@ function init() {
             if (! computerPlaysAll())
                 checkComputerMove()
         }
-        gameDisplay.transitionsEnabled = true
     })
 }
 
@@ -255,6 +253,7 @@ function moveGenerated(move) {
         isMoveHintRunning = false
         return
     }
+    gameDisplay.transitionsEnabled = true
     boardModel.playMove(move)
     if (computerPlaysAll())
         clearMarks()
@@ -289,13 +288,13 @@ function newGame(verifyAbortGame)
     gameDisplay.transitionsEnabled = false
     boardModel.newGame()
     gameDisplay.showToPlay()
-    gameDisplay.transitionsEnabled = true
     initComputerColors()
 }
 
 function play(pieceModel, gameCoord) {
     cancelGenMove()
     var wasComputerToPlay = isComputerToPlay()
+    gameDisplay.transitionsEnabled = true
     boardModel.play(pieceModel, gameCoord)
     clearMarks()
     markLastMove()
@@ -406,6 +405,7 @@ function undo() {
     // animation will target a part of the piece selector that is currently not
     // visible
     gameDisplay.showPiecesImmediately(boardModel.getLastMoveColor())
+    gameDisplay.transitionsEnabled = true
     boardModel.undo()
     clearMarks()
     markLastMove()
