@@ -38,7 +38,7 @@ function createColorPieces(component, pieceModels) {
 }
 
 function destroyPieces(pieces) {
-    if (pieces == null)
+    if (pieces === undefined)
         return
     for (var i = 0; i < pieces.length; ++i)
         pieces[i].destroy()
