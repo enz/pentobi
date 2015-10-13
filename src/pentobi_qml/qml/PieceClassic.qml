@@ -11,7 +11,6 @@ Item
     property real gridElementWidth
     property real gridElementHeight
     property bool isMarked
-
     property string imageName: theme.getImage("square-" + colorName)
     property real pieceAngle: {
         var flX = Math.abs(flipX.angle % 360 - 180) < 90
@@ -22,6 +21,10 @@ Item
         else if (flY) angle += 270
         return angle
     }
+    property real imageOpacity0: imageOpacity(pieceAngle, 0)
+    property real imageOpacity90: imageOpacity(pieceAngle, 90)
+    property real imageOpacity180: imageOpacity(pieceAngle, 180)
+    property real imageOpacity270: imageOpacity(pieceAngle, 270)
 
     // Make sure piece is above board during piece transition when its parent
     // is GameDisplay
@@ -40,6 +43,11 @@ Item
             origin { x: width / 2; y: height / 2 }
         }
     ]
+
+    function imageOpacity(pieceAngle, imgAngle) {
+        var angle = (((pieceAngle - imgAngle) % 360) + 360) % 360 // JS modulo bug
+        return (angle >= 90 && angle <= 270 ? 0 : Math.cos(angle * Math.PI / 180))
+    }
 
     Repeater {
         model: pieceModel.elements

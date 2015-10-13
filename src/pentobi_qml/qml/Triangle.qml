@@ -6,57 +6,191 @@ Item {
 
     property bool isDownward
 
-    Repeater {
-        model: [ 0, 60, 120, 180, 240, 300 ]
+    Loader {
+        property real imageOpacity: imageOpacity0
 
-        Loader {
-            property real _imageOpacity: {
-                if (pieceAngle == 0) return modelData == 0 ? 1 : 0
-                var angle = (((pieceAngle - modelData) % 360) + 360) % 360
-                return (angle >= 60 && angle <= 300 ? 0 : 2 * Math.cos(angle * Math.PI / 180) - 1)
-            }
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component0
 
-            on_ImageOpacityChanged:
-                if (_imageOpacity > 0 && status == Loader.Null)
-                    sourceComponent = component
+        Component {
+            id: component0
 
-            Component {
-                id: component
-
-                Image {
-                    property bool _isImageDownward:
-                        (isDownward != (modelData % 120 != 0))
-
-                    source: _isImageDownward ? imageNameDownward : imageName
-                    width: root.width
-                    height: root.height
-                    sourceSize {
-                        width: imageSourceWidth
-                        height: imageSourceHeight
-                    }
-                    asynchronous: true
-                    opacity: _imageOpacity
-                    antialiasing: true
-                    transform: [
-                        Rotation {
-                            angle: -modelData
-                            origin {
-                                x: width / 2
-                                y: _isImageDownward ?
-                                       height / 3 : 2 * height / 3
-                            }
-                        },
-                        Translate {
-                            y: {
-                                if (! isDownward && _isImageDownward)
-                                    return height / 3
-                                if (isDownward && ! _isImageDownward)
-                                    return -height / 3
-                                return 0
-                            }
-                        }
-                    ]
+            Image {
+                source: isDownward ? imageNameDownward : imageName
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
                 }
+                asynchronous: true
+                opacity: imageOpacity
+                antialiasing: true
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity60
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component60
+
+        Component {
+            id: component60
+
+            Image {
+                source: isDownward ? imageName : imageNameDownward
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                antialiasing: true
+                transform: [
+                    Rotation {
+                        angle: -60
+                        origin {
+                            x: width / 2
+                            y: isDownward ? 2 * height / 3 : height / 3
+                        }
+                    },
+                    Translate { y:  isDownward ? -height / 3 : height / 3 }
+                ]
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity120
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component120
+
+        Component {
+            id: component120
+
+            Image {
+                source: isDownward ? imageNameDownward : imageName
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                antialiasing: true
+                transform: Rotation {
+                    angle: -120
+                    origin {
+                        x: width / 2
+                        y: isDownward ? height / 3 : 2 * height / 3
+                    }
+                }
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity180
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component180
+
+        Component {
+            id: component180
+
+            Image {
+                source: isDownward ? imageName : imageNameDownward
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                antialiasing: true
+                transform: [
+                    Rotation {
+                        angle: -180
+                        origin {
+                            x: width / 2
+                            y: isDownward ? 2 * height / 3 : height / 3
+                        }
+                    },
+                    Translate { y:  isDownward ? -height / 3 : height / 3 }
+                ]
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity240
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component240
+
+        Component {
+            id: component240
+
+            Image {
+                source: isDownward ? imageNameDownward : imageName
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                antialiasing: true
+                transform: Rotation {
+                    angle: -240
+                    origin {
+                        x: width / 2
+                        y: isDownward ? height / 3 : 2 * height / 3
+                    }
+                }
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity300
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component300
+
+        Component {
+            id: component300
+
+            Image {
+                source: isDownward ? imageName : imageNameDownward
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                antialiasing: true
+                transform: [
+                    Rotation {
+                        angle: -300
+                        origin {
+                            x: width / 2
+                            y: isDownward ? 2 * height / 3 : height / 3
+                        }
+                    },
+                    Translate { y:  isDownward ? -height / 3 : height / 3 }
+                ]
             }
         }
     }
