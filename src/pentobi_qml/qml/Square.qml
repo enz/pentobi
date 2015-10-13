@@ -6,36 +6,98 @@ import QtQuick 2.0
 Item {
     id: root
 
-    Repeater {
-        // Image rotation
-        model: [ 0, 90, 180, 270 ]
+    Loader {
+        property real imageOpacity: imageOpacity0
 
-        Loader {
-            property real _imageOpacity: {
-                if (pieceAngle == 0) return modelData == 0 ? 1 : 0
-                var angle = (((pieceAngle - modelData) % 360) + 360) % 360 // JS modulo bug
-                return (angle >= 90 && angle <= 270 ? 0 : Math.cos(angle * Math.PI / 180))
-            }
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component0
 
-            on_ImageOpacityChanged:
-                if (_imageOpacity > 0 && status == Loader.Null)
-                    sourceComponent = component
+        Component {
+            id: component0
 
-            Component {
-                id: component
-
-                Image {
-                    source: imageName
-                    width: root.width
-                    height: root.height
-                    sourceSize {
-                        width: imageSourceWidth
-                        height: imageSourceHeight
-                    }
-                    asynchronous: true
-                    opacity: _imageOpacity
-                    rotation: -modelData
+            Image {
+                source: imageName
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
                 }
+                asynchronous: true
+                opacity: imageOpacity
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity90
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component90
+
+        Component {
+            id: component90
+
+            Image {
+                source: imageName
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                rotation: -90
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity180
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component180
+
+        Component {
+            id: component180
+
+            Image {
+                source: imageName
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                rotation: -180
+            }
+        }
+    }
+    Loader {
+        property real imageOpacity: imageOpacity270
+
+        onImageOpacityChanged:
+            if (imageOpacity > 0 && status === Loader.Null)
+                sourceComponent = component270
+
+        Component {
+            id: component270
+
+            Image {
+                source: imageName
+                width: root.width
+                height: root.height
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
+                }
+                asynchronous: true
+                opacity: imageOpacity
+                rotation: -270
             }
         }
     }

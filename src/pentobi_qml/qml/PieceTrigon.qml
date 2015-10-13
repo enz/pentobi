@@ -12,7 +12,6 @@ Item
     property real gridElementWidth
     property real gridElementHeight
     property bool isMarked
-
     property string imageName: theme.getImage("triangle-" + colorName)
     property string imageNameDownward:
         theme.getImage("triangle-down-" + colorName)
@@ -25,7 +24,12 @@ Item
         else if (flY) angle += 300
         return angle
     }
-    property real _elementWidth: 2 * gridElementWidth
+    property real imageOpacity0: imageOpacity(pieceAngle, 0)
+    property real imageOpacity60: imageOpacity(pieceAngle, 60)
+    property real imageOpacity120: imageOpacity(pieceAngle, 120)
+    property real imageOpacity180: imageOpacity(pieceAngle, 180)
+    property real imageOpacity240: imageOpacity(pieceAngle, 240)
+    property real imageOpacity300: imageOpacity(pieceAngle, 300)
 
     z: 1
     transform: [
@@ -44,13 +48,17 @@ Item
     ]
 
     function _isDownward(pos) { return (pos.x % 2 == 0) != (pos.y % 2 == 0) }
+    function imageOpacity(pieceAngle, imgAngle) {
+        var angle = (((pieceAngle - imgAngle) % 360) + 360) % 360
+        return (angle >= 60 && angle <= 300 ? 0 : 2 * Math.cos(angle * Math.PI / 180) - 1)
+    }
 
     Repeater {
         model: pieceModel.elements
 
         Triangle {
             isDownward: _isDownward(modelData)
-            width: _elementWidth
+            width: 2 * gridElementWidth
             height: gridElementHeight
             x: (modelData.x - pieceModel.center.x - 0.5) * gridElementWidth
             y: (modelData.y - pieceModel.center.y) * gridElementHeight
