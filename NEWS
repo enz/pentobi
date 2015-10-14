@@ -4,6 +4,7 @@ Version 10.0.UNKNOWN (v10-fixes)
 Desktop version:
 
 * New toolbar button for Undo Move.
+* Annotations are now also appended to the move number in the status line.
 * Don't show move number in status line if no moves have been played.
 * Show an error message instead of the crash dialog if the startup
   fails due to low memory.
