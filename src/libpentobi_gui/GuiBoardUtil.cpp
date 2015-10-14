@@ -20,50 +20,13 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::PentobiTree;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::util::is_main_variation;
+using libboardgame_sgf::util::get_move_annotation;
 using libboardgame_util::get_letter_coord;
 using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 
 namespace {
-
-void appendMoveAnnotation(QString& label, const Game& game,
-                          const SgfNode& node)
-{
-    auto& tree = game.get_tree();
-    double goodMove = tree.get_good_move(node);
-    if (goodMove > 1)
-    {
-        label.append("!!");
-        return;
-    }
-    if (goodMove > 0)
-    {
-        label.append("!");
-        return;
-    }
-    double badMove = tree.get_bad_move(node);
-    if (badMove > 1)
-    {
-        label.append("??");
-        return;
-    }
-    if (badMove > 0)
-    {
-        label.append("?");
-        return;
-    }
-    if (tree.is_interesting_move(node))
-    {
-        label.append("!?");
-        return;
-    }
-    if (tree.is_doubtful_move(node))
-    {
-        label.append("?!");
-        return;
-    }
-}
 
 /** Get the index of a variation.
     This ignores child nodes without moves so that the moves are still labeled
@@ -116,7 +79,7 @@ void markMove(GuiBoard& guiBoard, const Game& game, const SgfNode& node,
         if (getVariationIndex(game.get_tree(), node, moveIndex))
             label.append(get_letter_coord(moveIndex).c_str());
     }
-    appendMoveAnnotation(label, game, node);
+    label.append(get_move_annotation(game.get_tree(), node));
     guiBoard.setLabel(p, label);
 }
 

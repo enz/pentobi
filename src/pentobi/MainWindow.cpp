@@ -62,6 +62,7 @@ using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::beginning_of_branch;
 using libboardgame_sgf::util::find_next_comment;
 using libboardgame_sgf::util::get_last_node;
+using libboardgame_sgf::util::get_move_annotation;
 using libboardgame_sgf::util::get_variation_string;
 using libboardgame_sgf::util::has_comment;
 using libboardgame_sgf::util::has_earlier_variation;
@@ -3368,6 +3369,7 @@ void MainWindow::updateMoveNumber()
     unsigned movesLeft = get_moves_left(tree, current);
     unsigned totalMoves = move + movesLeft;
     string variation = get_variation_string(current);
+    auto annotation = get_move_annotation(tree, current);
     QString text;
     QString toolTip;
     if (variation.empty())
@@ -3376,13 +3378,13 @@ void MainWindow::updateMoveNumber()
         {
             if (move > 0)
             {
-                text.setNum(move);
+                text = QString("%1%2").arg(move).arg(annotation);
                 toolTip = tr("Move %1").arg(move);
             }
         }
         else
         {
-            text = QString("%1/%2").arg(move).arg(totalMoves);
+            text = QString("%1%2/%3").arg(move).arg(annotation).arg(totalMoves);
             if (move == 0)
                 toolTip = tr("%n move(s)", "", totalMoves);
             else
@@ -3392,14 +3394,15 @@ void MainWindow::updateMoveNumber()
     else
     {
         if (movesLeft == 0)
-            text = QString("%1 (%2)").arg(move).arg(variation.c_str());
+            text = QString("%1%2 (%3)")
+                    .arg(move).arg(annotation)
+                    .arg(variation.c_str());
         else
-            text =
-                QString("%1/%2 (%3)")
-                .arg(move).arg(totalMoves).arg(variation.c_str());
-        toolTip =
-            tr("Move %1 of %2 in variation %3")
-            .arg(move).arg(totalMoves).arg(variation.c_str());
+            text = QString("%1%2/%3 (%4)")
+                    .arg(move).arg(annotation).arg(totalMoves)
+                    .arg(variation.c_str());
+        toolTip = tr("Move %1 of %2 in variation %3")
+                    .arg(move).arg(totalMoves).arg(variation.c_str());
     }
     if (text.isEmpty())
     {
