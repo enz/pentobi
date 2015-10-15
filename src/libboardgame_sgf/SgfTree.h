@@ -117,19 +117,19 @@ public:
 
     void remove_move_annotation(const SgfNode& node);
 
-    double get_good_move(const SgfNode& node) const;
+    static double get_good_move(const SgfNode& node);
 
     void set_good_move(const SgfNode& node, double value = 1);
 
-    double get_bad_move(const SgfNode& node) const;
+    static double get_bad_move(const SgfNode& node);
 
     void set_bad_move(const SgfNode& node, double value = 1);
 
-    bool is_doubtful_move(const SgfNode& node) const;
+    static bool is_doubtful_move(const SgfNode& node);
 
     void set_doubtful_move(const SgfNode& node);
 
-    bool is_interesting_move(const SgfNode& node) const;
+    static bool is_interesting_move(const SgfNode& node);
 
     void set_interesting_move(const SgfNode& node);
 
@@ -180,7 +180,7 @@ inline void SgfTree::clear_modified()
     m_modified = false;
 }
 
-inline double SgfTree::get_bad_move(const SgfNode& node) const
+inline double SgfTree::get_bad_move(const SgfNode& node)
 {
     return node.parse_property<double>("BM", 0);
 }
@@ -195,7 +195,7 @@ inline string SgfTree::get_event() const
     return m_root->get_property("EV", "");
 }
 
-inline double SgfTree::get_good_move(const SgfNode& node) const
+inline double SgfTree::get_good_move(const SgfNode& node)
 {
     return node.parse_property<double>("TE", 0);
 }
@@ -220,12 +220,12 @@ inline string SgfTree::get_time() const
     return m_root->get_property("TM", "");
 }
 
-inline bool SgfTree::is_doubtful_move(const SgfNode& node) const
+inline bool SgfTree::is_doubtful_move(const SgfNode& node)
 {
     return node.has_property("DO");
 }
 
-inline bool SgfTree::is_interesting_move(const SgfNode& node) const
+inline bool SgfTree::is_interesting_move(const SgfNode& node)
 {
     return node.has_property("IT");
 }
