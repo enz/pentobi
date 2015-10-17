@@ -117,6 +117,8 @@ Item
         legal: {
             if (pickedPiece === null)
                 return false
+            // Don't use mapToItem(board, width / 2, height / 2), we want a
+            // dependency on x, y.
             var pos = parent.mapToItem(board, x + width / 2, y + height / 2)
             return gameModel.isLegalPos(pickedPiece.pieceModel,
                                         pickedPiece.pieceModel.state,
