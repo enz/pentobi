@@ -35,12 +35,18 @@ using libpentobi_base::Variant;
     points of a move can be quickly computed in the playout move generation.
     Currently, there are only two features: the forbidden status and whether
     the point is a local point. Local points are attach points of recent
-    opponent moves or points that are adjacent to them.
+    opponent moves or points that are adjacent to them. Local points that
+    are attach points of the color to play count double.
     During a simulation, some of the features are updated incrementally
     (forbidden status) and some non-incrementally (local points). */
 class PlayoutFeatures
 {
 public:
+    /** The maximum number of local points for a move.
+        The number can be higher than PieceInfo::max_size (see class
+        description). */
+    static const unsigned max_local = 2 * PieceInfo::max_size;
+
     /** Compute the sum of the feature values for a move. */
     class Compute
     {
@@ -68,8 +74,9 @@ public:
             return (m_value & 0xf000u) != 0;
         }
 
-        /** Get the number of local points occupied by this move.
-            @pre ! is_forbidden() */
+        /** Get the number of local points for this move.
+            @pre ! is_forbidden()
+            @return The number of local points in [0..max_local] */
         unsigned get_nu_local() const
         {
             LIBBOARDGAME_ASSERT(! is_forbidden());
@@ -178,13 +185,15 @@ inline void PlayoutFeatures::set_local(const Board& bd)
             if ((m_point_value[*j] & 0x0fff) == 0)
             {
                 m_local_points.get_unchecked(nu_local++) = *j;
-                m_point_value[*j] |= 0x0001u;
+                m_point_value[*j] |=
+                        bd.is_attach_point(*j, to_play) ? 0x0002u : 0x0001u;
             }
             geo.for_each_adj(*j, [&](Point k) {
                 if (! is_forbidden[k] && (m_point_value[k] & 0x0fff) == 0)
                 {
                     m_local_points.get_unchecked(nu_local++) = k;
-                    m_point_value[k] |= 0x0001u;
+                    m_point_value[k] |=
+                            bd.is_attach_point(k, to_play) ? 0x0002u : 0x0001u;
                 }
             });
         }
