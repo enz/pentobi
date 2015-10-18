@@ -40,8 +40,6 @@ void getLevel(QSettings& settings, const char* key, int& level)
 
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent),
-      m_isGenMoveRunning(false),
-      m_genMoveId(0),
       m_player(GameModel::getInitialGameVariant(), "")
 {
     QSettings settings;
