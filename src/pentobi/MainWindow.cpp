@@ -3271,6 +3271,8 @@ void MainWindow::truncate()
     }
     m_game.truncate();
     m_currentColor = getCurrentColor(m_game);
+    m_lastComputerMovesBegin = 0;
+    m_autoPlay = false;
     updateWindow(true);
 }
 
