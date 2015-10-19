@@ -3273,6 +3273,7 @@ void MainWindow::truncate()
     m_currentColor = getCurrentColor(m_game);
     m_lastComputerMovesBegin = 0;
     m_autoPlay = false;
+    m_gameFinished = false;
     updateWindow(true);
 }
 
@@ -3294,6 +3295,7 @@ void MainWindow::truncateChildren()
     if (msgBox.clickedButton() != truncateButton)
         return;
     m_game.truncate_children();
+    m_gameFinished = false;
     updateWindow(false);
 }
 
