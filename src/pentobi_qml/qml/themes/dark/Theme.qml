@@ -18,11 +18,10 @@ QtObject {
     property real toPlayColorLighter: 1.6
 
     function getImage(name) {
-        if (name.indexOf("piece-manipulator") === 0
-                || name.indexOf("triangle-") === 0
-                || name.indexOf("square-") === 0)
+        if (name.lastIndexOf("piece-manipulator", 0) === 0
+                || name.lastIndexOf("triangle-", 0) === 0
+                || name.lastIndexOf("square-", 0) === 0)
             return "themes/light/" + name + ".svg"
-        else
-            return "themes/dark/" + name + ".svg"
+        return "themes/dark/" + name + ".svg"
     }
 }
