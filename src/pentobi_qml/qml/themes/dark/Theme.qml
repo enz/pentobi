@@ -11,5 +11,12 @@ QtObject {
     property color colorGreen: "#00C000"
     property real toPlayColorLighter: 1.6
 
-    function getImage(name) { return "themes/dark/" + name + ".svg" }
+    function getImage(name) {
+        if (name.indexOf("piece-manipulator") === 0
+                || name.indexOf("triangle-") === 0
+                || name.indexOf("square-") === 0)
+            return "themes/light/" + name + ".svg"
+        else
+            return "themes/dark/" + name + ".svg"
+    }
 }
