@@ -1171,8 +1171,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
                 break;
             node = simulation.nodes[depth + 1];
             m_tree.inc_visit_count(*node);
-            if (multithread && SearchParamConst::virtual_loss
-                    && m_nu_threads > 0)
+            if (multithread && SearchParamConst::virtual_loss)
                 m_tree.add_value(*node, 0);
             state.play_in_tree(node->get_move());
             ++depth;
@@ -1192,7 +1191,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     {
         node = select_child(*node);
         m_tree.inc_visit_count(*node);
-        if (multithread && SearchParamConst::virtual_loss && m_nu_threads > 0)
+        if (multithread && SearchParamConst::virtual_loss)
             m_tree.add_value(*node, 0);
         simulation.nodes.push_back(node);
         Move mv = node->get_move();
@@ -1708,9 +1707,7 @@ void SearchBase<S, M, R>::update_lgr(ThreadState& thread_state)
         is_winner[i] = (eval[i] == max_eval);
     auto& moves = simulation.moves;
     auto nu_moves = moves.size();
-    if (nu_moves < 2)
-        return;
-    Move last = moves[0].move;
+    Move last = moves.get_unchecked(0).move;
     Move second_last = Move::null();
     for (unsigned i = 1; i < nu_moves; ++i)
     {
@@ -1830,17 +1827,17 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
     {
         auto& node = *nodes[i];
         auto mv = simulation.moves[i - 1];
-        m_tree.add_value(node, eval[mv.player]);
-        if (multithread && SearchParamConst::virtual_loss && m_nu_threads > 0)
+        if (multithread && SearchParamConst::virtual_loss)
             // Note that this could become problematic if the number of threads
             // is large. The lock-free algorithm intentionally ignores lost or
             // partial updates to run faster. But the probability that adding
-            // a virtual loss is lost is not the same as the one that its
-            // removal is lost because the removal is done in this function
-            // with many calls to add_value() but the adding is done in
-            // play_in_tree(). This could introduce a systematic error unlike
-            // the effect of lost or partial add_value() updates.
-            m_tree.remove_value(node, 0);
+            // a virtual loss is lost is not the same as that its removal is
+            // lost because the removal is done in this function with many
+            // calls to add_value() but the adding is done in play_in_tree().
+            // This could introduce a systematic error.
+            m_tree.add_value_remove_loss(node, eval[mv.player]);
+        else
+            m_tree.add_value(node, eval[mv.player]);
     }
     for (PlayerInt i = 0; i < m_nu_players; ++i)
         m_root_val[i].add(eval[i]);

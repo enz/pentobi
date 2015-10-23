@@ -90,7 +90,10 @@ public:
 
     void add_value(Float v, Float weight = 1);
 
-    void remove_value(Float v, Float weight = 1);
+    /** Add a value with weight 1 and remove a previously added loss.
+        Needed for the implementation of virtual losses in multi-threaded
+        MCTS and more efficient that a separate add and remove call. */
+    void add_value_remove_loss(Float v);
 
     void inc_visit_count();
 
@@ -123,6 +126,19 @@ void Node<M, F, MT>::add_value(Float v, Float weight)
     value += weight * (v - value) / count;
     m_value.store(value, memory_order_relaxed);
     m_value_count.store(count, memory_order_relaxed);
+}
+
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::add_value_remove_loss(Float v)
+{
+    // Intentionally uses no synchronization and does not care about
+    // lost updates in multi-threaded mode
+    Float count = m_value_count.load(memory_order_relaxed);
+    if (count == 0)
+        return; // Adding the virtual loss was a lost update
+    Float value = m_value.load(memory_order_relaxed);
+    value += v / count;
+    m_value.store(value, memory_order_relaxed);
 }
 
 template<typename M, typename F, bool MT>
@@ -230,24 +246,6 @@ inline void Node<M, F, MT>::link_children(NodeIdx first_child,
     LIBBOARDGAME_ASSERT(first_child != 0);
     m_first_child = first_child;
     m_nu_children.store(nu_children, memory_order_release);
-}
-
-template<typename M, typename F, bool MT>
-void Node<M, F, MT>::remove_value(Float v, Float weight)
-{
-    // Intentionally uses no synchronization and does not care about
-    // lost updates in multi-threaded mode
-    Float count = m_value_count.load(memory_order_relaxed);
-    if (count > weight)
-    {
-        Float value = m_value.load(memory_order_relaxed);
-        count -= weight;
-        value -= weight * (v - value) / count;
-        m_value.store(value, memory_order_relaxed);
-        m_value_count.store(count, memory_order_relaxed);
-    }
-    else
-        m_value_count.store(0, memory_order_relaxed);
 }
 
 template<typename M, typename F, bool MT>

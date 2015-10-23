@@ -162,9 +162,7 @@ public:
 
     void add_value(const Node& node, Float v, Float weight);
 
-    void remove_value(const Node& node, Float v);
-
-    void remove_value(const Node& node, Float v, Float weight);
+    void add_value_remove_loss(const Node& node, Float v);
 
     void inc_visit_count(const Node& node);
 
@@ -462,15 +460,9 @@ inline auto Tree<N>::non_const(const Node& node) const -> Node&
 }
 
 template<typename N>
-inline void Tree<N>::remove_value(const Node& node, Float v)
+inline void Tree<N>::add_value_remove_loss(const Node& node, Float v)
 {
-    non_const(node).remove_value(v);
-}
-
-template<typename N>
-inline void Tree<N>::remove_value(const Node& node, Float v, Float weight)
-{
-    non_const(node).remove_value(v, weight);
+    non_const(node).add_value_remove_loss(v);
 }
 
 template<typename N>
