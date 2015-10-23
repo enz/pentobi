@@ -382,18 +382,18 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
     // Game length
     Float l = static_cast<Float>(m_bd.get_nu_moves());
     m_stat_len.add(l);
-    Float dev = m_stat_len.get_deviation();
-    if (dev > 0)
+    Float var = m_stat_len.get_variance();
+    if (var > 0)
         bonus +=
                 (result == 1 ? -0.06f : 0.06f)
-                * sigmoid(2.f, (l - m_stat_len.get_mean()) / dev);
+                * sigmoid(2.f, (l - m_stat_len.get_mean()) / sqrt(var));
 
     // Game score
     auto& stat = m_stat_score[c];
     stat.add(score);
-    dev = stat.get_deviation();
-    if (dev > 0)
-        bonus += 0.3f * sigmoid(2.f, (score - stat.get_mean()) / dev);
+    var = stat.get_variance();
+    if (var > 0)
+        bonus += 0.3f * sigmoid(2.f, (score - stat.get_mean()) / sqrt(var));
 
     // Number of non-forbidden attach points is another feature of a superior
     // final position. Not used in Duo/Junior, mainly helps in Trigon.
@@ -418,10 +418,10 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
             attach -= opp_weight * n;
         }
     m_stat_attach.add(attach);
-    dev = m_stat_attach.get_deviation();
-    if (dev > 0)
-        bonus += 0.1f
-                * sigmoid(2.f, (attach - m_stat_attach.get_mean()) / dev);
+    var = m_stat_attach.get_variance();
+    if (var > 0)
+        bonus +=
+          0.1f * sigmoid(2.f, (attach - m_stat_attach.get_mean()) / sqrt(var));
     return bonus;
 }
 
