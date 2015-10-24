@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="72" width="72" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<g id="d" transform="matrix(1.8,0,0,1.8,27,-32.4)">
+<g id="e" transform="matrix(1.699996 0 0 1.699996 27.49994 -28.59993)">
 <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
-<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
-<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
+<path fill-opacity=".1568628" d="m-15 28 1.176473-1.176448h7.647078v-7.647078l1.176549-1.176374v10z"/>
+<path d="m-15 28v-10h10l-1.176449 1.176474h-7.647078v7.647078z" fill-opacity=".1568628" fill="#fff"/>
 </g>
-<use xlink:href="#d" transform="translate(18,2e-7)" height="48" width="48" y="0" x="0"/>
-<use xlink:href="#d" transform="translate(18,18)" height="48" width="48" y="0" x="0"/>
-<use xlink:href="#d" transform="translate(36,18)" height="48" width="48" y="0" x="0"/>
-<g id="c" transform="matrix(1.8,0,0,1.8,27,-14.4)">
+<use xlink:href="#e" transform="translate(16.99996 2.0042e-7)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#e" transform="translate(16.99996 16.99996)" height="48" width="48" y="0" x="0"/>
+<use xlink:href="#e" transform="translate(33.99992 16.99996)" height="48" width="48" y="0" x="0"/>
+<g id="f" transform="matrix(1.699996 0 0 1.699996 27.49994 -11.59997)">
 <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#edd400"/>
-<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
-<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
+<path fill-opacity=".1568628" d="m-15 28 1.176473-1.176423h7.647078v-7.647078l1.176549-1.176399v10z"/>
+<path d="m-15 28v-10h10l-1.176449 1.176499h-7.647078v7.647078z" fill-opacity=".1568628" fill="#fff"/>
 </g>
-<use xlink:href="#c" transform="translate(-2e-8 18)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#c" transform="translate(-2e-8 36)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#c" transform="translate(18,36)" height="72" width="72" y="0" x="0"/>
-<g id="b" transform="matrix(1.8 0 0 1.8 45 3.6)">
+<use xlink:href="#f" transform="translate(1.888884e-8 16.99996)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#f" transform="translate(1.888884e-8 33.99992)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#f" transform="translate(16.99996 33.99992)" height="72" width="72" y="0" x="0"/>
+<g id="g" transform="matrix(1.699996 0 0 1.699996 44.49989 5.39999)">
 <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#3465a4"/>
-<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
-<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
+<path fill-opacity=".1568628" d="m-15 28 1.176498-1.176398h7.647078v-7.647078l1.176524-1.176424v10z"/>
+<path d="m-15 28v-10h10l-1.176424 1.176524h-7.647078v7.647078z" fill-opacity=".1568628" fill="#fff"/>
 </g>
-<use xlink:href="#b" transform="translate(18,18)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(18 4e-7)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(36,18)" height="72" width="72" y="0" x="0"/>
-<g id="a" transform="matrix(1.8,0,0,1.8,63,-32.4)">
+<use xlink:href="#g" transform="translate(16.99996 16.99996)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#g" transform="translate(16.99996 4.0042e-7)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#g" transform="translate(33.99992 16.99996)" height="72" width="72" y="0" x="0"/>
+<g id="h" transform="matrix(1.699996 0 0 1.699996 61.49985 -28.59993)">
 <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#73d216"/>
-<path d="m-15 28 1.1111-1.1111h7.7778v-7.7778l1.1112-1.111v10z" fill-opacity=".1568628"/>
-<path d="m-15 28v-10h10l-1.1111 1.1111h-7.7778v7.7778z" fill="#FFF" fill-opacity=".1568628"/>
+<path fill-opacity=".1568628" d="m-15 28 1.176523-1.176448h7.647078v-7.647078l1.176499-1.176374v10z"/>
+<path d="m-15 28v-10h10l-1.176399 1.176474h-7.647078v7.647078z" fill-opacity=".1568628" fill="#fff"/>
 </g>
-<use xlink:href="#a" transform="translate(18,2e-7)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(18,18)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(18,36)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#h" transform="translate(16.99996 2.0042e-7)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#h" transform="translate(16.99996 16.99996)" height="72" width="72" y="0" x="0"/>
+<use xlink:href="#h" transform="translate(16.99996 33.99992)" height="72" width="72" y="0" x="0"/>
 </svg>
