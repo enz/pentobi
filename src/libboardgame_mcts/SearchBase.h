@@ -794,13 +794,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         log_thread(thread_state, "Search aborted");
         return true;
     }
-    auto& root = m_tree.get_root();
-    if (root.get_nu_children() == 1)
-    {
-        log("Root has only one child");
-        return true;
-    }
-    auto count = root.get_visit_count();
+    auto count = m_tree.get_root().get_visit_count();
     if (count >= m_max_float_count)
     {
         log_thread(thread_state,
