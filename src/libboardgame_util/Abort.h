@@ -8,15 +8,30 @@
 #ifndef LIBBOARDGAME_UTIL_ABORT_H
 #define LIBBOARDGAME_UTIL_ABORT_H
 
+#include <atomic>
+
 namespace libboardgame_util {
+
+using namespace std;
 
 //-----------------------------------------------------------------------------
 
-void set_abort();
+extern atomic<bool> abort;
 
-void clear_abort();
+inline void clear_abort()
+{
+    abort.store(false, memory_order_seq_cst);
+}
 
-bool get_abort();
+inline bool get_abort()
+{
+    return abort.load(memory_order_relaxed);
+}
+
+inline void set_abort()
+{
+    abort.store(true, memory_order_seq_cst);
+}
 
 //-----------------------------------------------------------------------------
 
