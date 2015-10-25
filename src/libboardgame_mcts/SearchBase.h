@@ -834,8 +834,6 @@ bool SearchBase<S, M, R>::check_abort_expensive(
     }
     if (thread_state.thread_id == 0 && m_callback)
         m_callback(time, remaining_time);
-    if (count + remaining_simulations > m_max_float_count)
-        remaining_simulations = m_max_float_count - count;
     if (check_cannot_change(thread_state, remaining_simulations))
         return true;
     return false;
@@ -858,28 +856,27 @@ bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
         }
     }
     Float diff = max_wins - second_max;
-    if (diff >= remaining)
-    {
-        log_thread(thread_state, "Move cannot change");
-        return true;
-    }
     if (SearchParamConst::use_unlikely_change)
     {
         // Weight remaining number of simulations with current global win rate,
         // but not less than 10%
         auto& root_val = m_root_val[m_player];
-        if (root_val.get_count() < 100)
-            return false; // Not enough statistics
-        auto win_rate = root_val.get_mean();
-        if (win_rate < 0.1f)
-            win_rate = 0.1f;
-        if (diff >= win_rate * remaining)
+        Float win_rate;
+        if (root_val.get_count() > 100)
         {
-            log_thread(thread_state, "Move change unlikely");
-            return true;
+            win_rate = root_val.get_mean();
+            if (win_rate < 0.1f)
+                win_rate = 0.1f;
         }
+        else
+            win_rate = 1; // Not enough statistics
+        if (diff < win_rate * remaining)
+            return false;
     }
-    return false;
+    else if (diff < remaining)
+        return false;
+    log_thread(thread_state, "Move will not change");
+    return true;
 }
 
 template<class S, class M, class R>
