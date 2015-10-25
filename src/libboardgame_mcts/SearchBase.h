@@ -572,9 +572,6 @@ private:
         previous search. */
     Float m_max_count;
 
-    /** Maximum count that can be exactly expressed in floating point type. */
-    Float m_max_float_count;
-
     size_t m_tree_memory;
 
     size_t m_max_nodes;
@@ -765,8 +762,6 @@ SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
 #endif
       m_tree(m_max_nodes, m_nu_threads)
 {
-    static_assert(numeric_limits<Float>::radix == 2, "");
-    m_max_float_count = (size_t(1) << numeric_limits<Float>::digits) - 1;
 }
 
 template<class S, class M, class R>
@@ -792,13 +787,6 @@ bool SearchBase<S, M, R>::check_abort_expensive(
     if (get_abort())
     {
         log_thread(thread_state, "Search aborted");
-        return true;
-    }
-    auto count = m_tree.get_root().get_visit_count();
-    if (count >= m_max_float_count)
-    {
-        log_thread(thread_state,
-                   "Maximum count supported by floating type reached");
         return true;
     }
     auto time = m_timer();
@@ -829,6 +817,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
     else
     {
         // Search uses count limit
+        auto count = m_tree.get_root().get_visit_count();
         remaining_simulations = m_max_count - count;
         remaining_time = remaining_simulations / simulations_per_sec;
     }
@@ -1464,6 +1453,13 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                 break;
             }
         }
+    static_assert(numeric_limits<Float>::radix == 2, "");
+    if (m_tree.get_root().get_visit_count()
+            >= (size_t(1) << numeric_limits<Float>::digits) - 1)
+    {
+        log("Warning: Maximum count supported by floating type exceeded");
+        return true;
+    }
 
     m_last_time = m_timer();
     log(get_info());
