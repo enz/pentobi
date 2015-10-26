@@ -620,7 +620,7 @@ private:
 
     static size_t get_max_nodes(size_t memory);
 
-    bool check_abort(const ThreadState& thread_state) const;
+    bool check_abort(const ThreadState& thread_state, Float root_count) const;
 
     bool check_abort_expensive(ThreadState& thread_state) const;
 
@@ -770,9 +770,10 @@ SearchBase<S, M, R>::~SearchBase()
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const
+bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state,
+                                      Float root_count) const
 {
-    if (m_max_count > 0 && m_tree.get_root().get_visit_count() >= m_max_count)
+    if (m_max_count > 0 && root_count >= m_max_count)
     {
         log_thread(thread_state, "Maximum count reached");
         return true;
@@ -1491,19 +1492,16 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
     while (true)
     {
         thread_state.is_out_of_mem = false;
-        auto root_count = m_tree.get_root().get_visit_count();
-        auto nu_simulations = m_nu_simulations.fetch_add(1);
-        if (root_count > 0 && nu_simulations > m_min_simulations
-                && (check_abort(thread_state) || expensive_abort_checker()))
-        {
-            m_nu_simulations.fetch_add(-1);
+        auto count = m_tree.get_root().get_visit_count();
+        if ((check_abort(thread_state, count) || expensive_abort_checker())
+                && m_nu_simulations >= m_min_simulations)
             break;
-        }
+        auto nu_simulations = m_nu_simulations.fetch_add(1);
         ++thread_state.nu_simulations;
         state.start_simulation(nu_simulations);
         play_in_tree(thread_state);
         if (thread_state.is_out_of_mem)
-            return;
+            break;
         playout(thread_state);
         state.evaluate_playout(simulation.eval);
         thread_state.stat_len.add(double(simulation.moves.size()));
