@@ -20,7 +20,7 @@ namespace libboardgame_base {
 using namespace std;
 using libboardgame_gtp::Failure;
 using libboardgame_util::clear_abort;
-using libboardgame_util::get_log;
+using libboardgame_util::flush_log;
 using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
@@ -53,7 +53,7 @@ void Engine::cmd_set_random_seed(const Arguments& args)
 void Engine::on_handle_cmd_begin()
 {
     clear_abort();
-    get_log() << flush;
+    flush_log();
 }
 
 //-----------------------------------------------------------------------------

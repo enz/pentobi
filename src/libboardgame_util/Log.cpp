@@ -10,7 +10,6 @@
 
 #include "Log.h"
 
-#include <fstream>
 #include <iostream>
 
 #if defined ANDROID || defined __ANDROID__
@@ -74,28 +73,17 @@ AndroidBuf android_buffer;
 
 #endif // defined(ANDROID) || defined(__ANDROID__)
 
-ostream* log_stream = &cerr;
-
-/** Unopened file stream serves as null stream. */
-ofstream null_stream;
-
 } // namespace
 
 //-----------------------------------------------------------------------------
 
-ostream& get_log()
-{
-    return *log_stream;
-}
+ostream* log_stream = &cerr;
 
-bool is_log_null()
-{
-    return log_stream == &null_stream;
-}
+//-----------------------------------------------------------------------------
 
 void log(const string& s)
 {
-    if (is_log_null())
+    if (! log_stream)
         return;
     if (s.empty())
         *log_stream << '\n';
@@ -121,16 +109,6 @@ void log_init()
 #if defined ANDROID || defined __ANDROID__
     cerr.rdbuf(&android_buffer);
 #endif
-}
-
-void set_log(ostream& out)
-{
-    log_stream = &out;
-}
-
-void set_log_null()
-{
-    set_log(null_stream);
 }
 
 //-----------------------------------------------------------------------------

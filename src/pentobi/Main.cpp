@@ -28,7 +28,6 @@
 #include <fcntl.h>
 #endif
 
-using libboardgame_util::set_log_null;
 using libboardgame_util::LogInitializer;
 using libboardgame_util::OptionError;
 using libboardgame_util::Options;
@@ -158,7 +157,7 @@ int main(int argc, char* argv[])
                                   " without support for multi-threading.");
         }
         if (! opt.contains("verbose"))
-            set_log_null();
+            libboardgame_util::log_stream = nullptr;
 #ifdef Q_WS_WIN
         if (opt.contains("verbose"))
             redirectStdErr();

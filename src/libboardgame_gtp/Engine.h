@@ -75,7 +75,7 @@ public:
         @param log Stream for logging the commands and responses to.
         @return The stream state as a bool
         @throws Failure If a command fails, and @c throw_on_fail is @c true */
-    bool exec(istream& in, bool throw_on_fail, ostream& log);
+    bool exec(istream& in, bool throw_on_fail, ostream* log);
 
     /** Execute a single command line.
         @param line The command line (must contain a valid command, comment
@@ -170,7 +170,7 @@ private:
 
     Handlers m_handlers;
 
-    bool handle_cmd(CmdLine& line, ostream& out, Response& response,
+    bool handle_cmd(CmdLine& line, ostream* out, Response& response,
                     string& buffer);
 
     static void no_args_wrapper(HandlerNoArgs h,

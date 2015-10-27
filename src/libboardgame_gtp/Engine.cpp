@@ -12,7 +12,6 @@
 
 #include <cassert>
 #include <cctype>
-#include <fstream>
 #include <iostream>
 
 namespace libboardgame_gtp {
@@ -167,14 +166,13 @@ string Engine::exec(const string& line)
     string buffer;
     CmdLine cmd;
     cmd.init(line);
-    ofstream null_stream;
-    bool status = handle_cmd(cmd, null_stream, response, buffer);
+    bool status = handle_cmd(cmd, nullptr, response, buffer);
     if (! status)
         throw Failure(response.to_string());
     return response.to_string();
 }
 
-bool Engine::exec(istream& in, bool throw_on_fail, ostream& log)
+bool Engine::exec(istream& in, bool throw_on_fail, ostream* log)
 {
     string line;
     Response response;
@@ -185,7 +183,8 @@ bool Engine::exec(istream& in, bool throw_on_fail, ostream& log)
         if (! is_cmd_line(line))
             continue;
         cmd.init(line);
-        log << cmd.get_line() << '\n';
+        if (log)
+            *log << cmd.get_line() << '\n';
         bool status = handle_cmd(cmd, log, response, buffer);
         if (! status && throw_on_fail)
         {
@@ -206,7 +205,7 @@ void Engine::exec_main_loop(istream& in, ostream& out)
     while (! m_quit)
     {
         if (read_cmd(cmd, in))
-            handle_cmd(cmd, out, response, buffer);
+            handle_cmd(cmd, &out, response, buffer);
         else
             break;
     }
@@ -219,7 +218,7 @@ void Engine::exec_main_loop(istream& in, ostream& out)
     each function call
     @param buffer A reusable string instance to avoid memory allocation in each
     function call */
-bool Engine::handle_cmd(CmdLine& line, ostream& out, Response& response,
+bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
                         string& buffer)
 {
     on_handle_cmd_begin();
@@ -247,11 +246,14 @@ bool Engine::handle_cmd(CmdLine& line, ostream& out, Response& response,
     // Keep output to cerr in sync, because out will be explicitely flushed by
     // this function after the response was written, but cerr could be buffered
     cerr.flush();
-    out << (status ? '=' : '?');
-    line.write_id(out);
-    out << ' ';
-    response.write(out, buffer);
-    out << flush;
+    if (out)
+    {
+        *out << (status ? '=' : '?');
+        line.write_id(*out);
+        *out << ' ';
+        response.write(*out, buffer);
+        out->flush();
+    }
     return status;
 }
 

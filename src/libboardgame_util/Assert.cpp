@@ -57,7 +57,7 @@ void handle_assertion(const char* expression, const char* file, int line)
 {
     static bool is_during_handle_assertion = false;
     log(file, ":", line, ": Assertion '", expression, "' failed");
-    get_log() << flush;
+    flush_log();
     if (! is_during_handle_assertion)
     {
         is_during_handle_assertion = true;

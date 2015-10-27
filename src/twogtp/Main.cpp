@@ -61,7 +61,7 @@ int main(int argc, char** argv)
         auto variant_string = opt.get("game", "classic");
         bool quiet = opt.contains("quiet");
         if (quiet)
-            libboardgame_util::set_log_null();
+            libboardgame_util::log_stream = nullptr;
         bool fast_open = opt.contains("fastopen");
         bool create_tree = opt.contains("tree") || fast_open;
         Variant variant;

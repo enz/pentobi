@@ -16,7 +16,16 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-ostream& get_log();
+/** The log stream.
+    Initialized with a platform-dependent default value. Set to nullptr to
+    disable logging. */
+extern ostream* log_stream;
+
+inline void flush_log()
+{
+    if (log_stream)
+        log_stream->flush();
+}
 
 /** Initializes the logging functionality.
     This is necessary to call on some platforms at the start of the program
@@ -28,12 +37,6 @@ void log_init();
     This is necessary to call on some platforms before the program exits.
     @see LogInitializer */
 void log_close();
-
-void set_log(ostream& out);
-
-void set_log_null();
-
-bool is_log_null();
 
 /** Write a string to the log stream.
     Appends a newline if the output has no newline at the end. */
@@ -60,7 +63,7 @@ void log_buffered(ostream& buffer, const T& first, const Ts&... rest)
 template<typename... Ts>
 void log(const Ts&... args)
 {
-    if (is_log_null())
+    if (! log_stream)
         return;
     ostringstream buffer;
     log_buffered(buffer, args...);

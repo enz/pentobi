@@ -12,15 +12,13 @@
 #include "PlayerModel.h"
 #include "libboardgame_util/Log.h"
 
-using libboardgame_util::set_log_null;
-
 //-----------------------------------------------------------------------------
 
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
 #if QT_NO_DEBUG
-    set_log_null();
+    libboardgame_util::log_stream = nullptr;
 #endif
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");

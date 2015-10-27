@@ -16,9 +16,8 @@
 
 using namespace std;
 using libboardgame_gtp::Failure;
-using libboardgame_util::get_log;
 using libboardgame_util::log;
-using libboardgame_util::set_log_null;
+using libboardgame_util::log_stream;
 using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
 using libpentobi_base::parse_variant_id;
@@ -119,7 +118,7 @@ int main(int argc, char** argv)
         }
         Board::color_output = opt.contains("color");
         if (opt.contains("quiet"))
-            set_log_null();
+            log_stream = nullptr;
         if (opt.contains("seed"))
             RandomGenerator::set_global_seed(opt.get<uint32_t>("seed"));
         string variant_string = opt.get("game", "classic");
@@ -152,7 +151,7 @@ int main(int argc, char** argv)
             ifstream in(config_file);
             if (! in)
                 throw runtime_error("Error opening " + config_file);
-            engine.exec(in, true, get_log());
+            engine.exec(in, true, log_stream);
         }
         auto& args = opt.get_args();
         if (! args.empty())
