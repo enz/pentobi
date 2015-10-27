@@ -182,17 +182,17 @@ inline void PlayoutFeatures::set_local(const Board& bd)
         {
             if (is_forbidden[*j])
                 continue;
-            if ((m_point_value[*j] & 0x0fff) == 0)
+            if (m_point_value[*j] == 0)
             {
                 m_local_points.get_unchecked(nu_local++) = *j;
-                m_point_value[*j] |=
+                m_point_value[*j] =
                         bd.is_attach_point(*j, to_play) ? 0x0002u : 0x0001u;
             }
             geo.for_each_adj(*j, [&](Point k) {
-                if (! is_forbidden[k] && (m_point_value[k] & 0x0fff) == 0)
+                if (! is_forbidden[k] && m_point_value[k] == 0)
                 {
                     m_local_points.get_unchecked(nu_local++) = k;
-                    m_point_value[k] |=
+                    m_point_value[k] =
                             bd.is_attach_point(k, to_play) ? 0x0002u : 0x0001u;
                 }
             });
