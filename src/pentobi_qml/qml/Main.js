@@ -407,7 +407,7 @@ function undo() {
     // Immediately show the last color to move, otherwise the piece movement
     // animation will target a part of the piece selector that is currently not
     // visible
-    gameDisplay.showPiecesImmediately(boardModel.getLastMoveColor())
+    gameDisplay.showPiecesImmediately(gameModel.getLastMoveColor())
     gameDisplay.transitionsEnabled = true
     gameModel.undo()
     clearMarks()
