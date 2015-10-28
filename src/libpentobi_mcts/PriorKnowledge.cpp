@@ -260,8 +260,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 
         // If a symmetric draw is still possible, encourage exploring a move
         // that keeps or breaks the symmetry by adding 5 wins or 5 losses
-        // (use 0.1 for a loss to avoid values too close to 0). See also the
-        // comment in evaluate_playout()
+        // See also the comment in evaluate_playout()
         if (! symmetric_mv.is_null())
         {
             if (mv == symmetric_mv)
