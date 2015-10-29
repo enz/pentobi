@@ -198,15 +198,16 @@ private:
     ColorMap<Grid<bool>> m_moves_added_at;
 
     void add_moves(Point p, Color c,
-                   const Board::PiecesLeftList& pieces_considered);
+                   const Board::PiecesLeftList& pieces_considered,
+                   double& total_gamma, MoveList& moves, unsigned& nu_moves);
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status,
-                   double& total_gamma);
+                   double& total_gamma, MoveList& moves, unsigned& nu_moves);
 
     LIBBOARDGAME_NOINLINE
     void add_starting_moves(Color c,
                             const Board::PiecesLeftList& pieces_considered,
-                            bool with_gamma);
+                            bool with_gamma, MoveList& moves);
 
     void evaluate_duo(array<Float, 6>& result);
 
