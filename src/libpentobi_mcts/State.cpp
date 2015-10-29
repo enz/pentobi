@@ -462,7 +462,6 @@ void State::init_moves_without_gamma(Color c)
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
-    moves.clear();
     Board::PiecesLeftList pieces_considered;
     for (Piece piece : m_bd.get_pieces_left(c))
         if (is_piece_considered[piece])
@@ -625,7 +624,6 @@ void State::update_moves(Color c)
     auto& is_forbidden = m_bd.is_forbidden(c);
     auto& moves = m_moves[c];
     auto old_size = moves.size();
-    moves.clear();
     unsigned nu_moves = 0;
     double total_gamma = 0;
     if (m_nu_new_moves[c] == 1 && m_bd.get_nu_piece_instances() == 1)
@@ -633,7 +631,7 @@ void State::update_moves(Color c)
         Piece piece = get_move_info(m_last_move[c]).get_piece();
         for (unsigned i = 0; i < old_size; ++i)
         {
-            LIBBOARDGAME_ASSERT(i >= moves.size());
+            LIBBOARDGAME_ASSERT(i >= nu_moves);
             Move mv = moves.get_unchecked(i);
             auto& info = get_move_info(mv);
             if (info.get_piece() == piece
