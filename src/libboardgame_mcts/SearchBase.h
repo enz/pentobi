@@ -104,15 +104,13 @@ struct SearchParamConstDefault
         See Chaslot et al.: Parallel Monte-Carlo Tree Search. 2008. */
     static const bool virtual_loss = false;
 
-    /** The minimum count used in prior knowledge initialization of
-        the children of an expanded node.
-        This should use constexpr Float in the future (not yet supported by
-        MSVC 2013). */
-    static const unsigned child_min_count = 0;
-
     /** Terminate search early if move is unlikely to change.
         See implementation of check_cannot_change(). */
     static const bool use_unlikely_change = true;
+
+    /** The minimum count used in prior knowledge initialization of
+        the children of an expanded node. */
+    static constexpr Float child_min_count = 0;
 };
 
 //-----------------------------------------------------------------------------
