@@ -45,7 +45,8 @@ public:
 
     typedef T value_type;
 
-    ArrayList();
+
+    ArrayList() = default;
 
     /** Construct list with a single element. */
     explicit ArrayList(const T& t);
@@ -127,10 +128,6 @@ private:
 
     I m_size = 0;
 };
-
-template<typename T, unsigned M, typename I>
-inline ArrayList<T, M, I>::ArrayList()
-{ }
 
 template<typename T, unsigned M, typename I>
 inline ArrayList<T, M, I>::ArrayList(const T& t)

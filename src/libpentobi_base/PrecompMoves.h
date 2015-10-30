@@ -104,7 +104,7 @@ private:
 
         unsigned size : 8;
 
-        CompressedRange() { }
+        CompressedRange() = default;
 
         CompressedRange(unsigned begin, unsigned size)
         {

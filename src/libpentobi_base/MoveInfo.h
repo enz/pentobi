@@ -22,7 +22,7 @@ using namespace std;
 class MoveInfo
 {
 public:
-    MoveInfo() { }
+    MoveInfo() = default;
 
     MoveInfo(Piece piece, const MovePoints& points)
     {
