@@ -3183,7 +3183,7 @@ void MainWindow::showRating()
     if (! m_ratingDialog)
     {
         m_ratingDialog = new RatingDialog(this, *m_history);
-        connect(m_ratingDialog, SIGNAL(open(const QString&)),
+        connect(m_ratingDialog, SIGNAL(openRecentFile(const QString&)),
                 SLOT(open(const QString&)));
     }
     loadHistory();
