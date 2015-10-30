@@ -28,12 +28,9 @@ public:
 #if LIBBOARDGAME_DEBUG
 
 /** Function used by the LIBBOARDGAME_ASSERT macro to run all assertion
-    handlers.
-    This function is marked with LIBBOARDGAME_NORETURN because it calls abort()
-    and otherwise some versions of GCC generate lots of bogus warnings (GCC
-    bug #45180). */
-void handle_assertion(const char* expression, const char* file,
-                      int line) LIBBOARDGAME_NORETURN;
+    handlers. */
+[[noreturn]] void handle_assertion(const char* expression, const char* file,
+                                   int line);
 
 #endif
 

@@ -41,12 +41,6 @@ using namespace std;
 #define LIBBOARDGAME_FLATTEN
 #endif
 
-#ifdef __GNUC__
-#define LIBBOARDGAME_NORETURN __attribute__((noreturn))
-#else
-#define LIBBOARDGAME_NORETURN
-#endif
-
 template<typename T>
 string get_type_name(const T& t)
 {
