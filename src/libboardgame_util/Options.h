@@ -25,11 +25,7 @@ using libboardgame_sys::get_type_name;
 class OptionError
     : public runtime_error
 {
-public:
-    OptionError(const string& s)
-        : runtime_error(s)
-    {
-    }
+    using runtime_error::runtime_error;
 };
 
 //----------------------------------------------------------------------------

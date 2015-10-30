@@ -27,10 +27,7 @@ public:
     class InvalidString
         : public runtime_error
     {
-    public:
-        InvalidString(const string& s)
-            : runtime_error(s)
-        { }
+        using runtime_error::runtime_error;
     };
 
     class Iterator

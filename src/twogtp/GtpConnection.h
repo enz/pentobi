@@ -22,10 +22,7 @@ public:
     class Failure
         : public runtime_error
     {
-    public:
-        Failure(const string& message)
-            : runtime_error(message)
-        { }
+        using runtime_error::runtime_error;
     };
 
     GtpConnection(const string& command);

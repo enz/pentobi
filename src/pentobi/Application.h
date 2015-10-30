@@ -22,7 +22,7 @@ class Application
     Q_OBJECT
 
 public:
-    Application(int& argc, char** argv);
+    using QApplication::QApplication;
 
     /** Reimplemented from QApplication::notify().
         Catches exceptions and shows an error message. */

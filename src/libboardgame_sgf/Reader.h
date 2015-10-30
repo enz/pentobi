@@ -24,10 +24,7 @@ public:
     class ReadError
         : public runtime_error
     {
-    public:
-        ReadError(const string& s)
-            : runtime_error(s)
-        { }
+        using runtime_error::runtime_error;
     };
 
     Reader();

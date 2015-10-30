@@ -21,10 +21,7 @@ using namespace std;
 class Failure
     : public runtime_error
 {
-public:
-    Failure(const string& response)
-        : runtime_error(response)
-    { }
+    using runtime_error::runtime_error;
 };
 
 //-----------------------------------------------------------------------------

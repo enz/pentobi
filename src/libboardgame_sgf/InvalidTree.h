@@ -27,10 +27,7 @@ using namespace std;
 class InvalidTree
     : public runtime_error
 {
-public:
-    InvalidTree(const string& s)
-        : runtime_error(s)
-    { }
+    using runtime_error::runtime_error;
 };
 
 //-----------------------------------------------------------------------------

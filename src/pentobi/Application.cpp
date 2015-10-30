@@ -18,11 +18,6 @@ using libboardgame_sys::get_type_name;
 
 //-----------------------------------------------------------------------------
 
-Application::Application(int& argc, char** argv)
-    : QApplication(argc, argv)
-{
-}
-
 bool Application::notify(QObject* receiver, QEvent* event)
 {
     try
