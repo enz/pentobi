@@ -80,7 +80,7 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
 
 void RatingDialog::activateGame(unsigned n)
 {
-    emit open(m_history.getFile(n));
+    emit openRecentFile(m_history.getFile(n));
 }
 
 void RatingDialog::buttonClicked(QAbstractButton* button)

@@ -39,7 +39,7 @@ public:
     void updateContent();
 
 signals:
-    void open(const QString& file);
+    void openRecentFile(const QString& file);
 
 private:
     RatingHistory& m_history;
