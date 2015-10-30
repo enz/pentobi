@@ -62,6 +62,10 @@ struct SearchParamConst
     static const bool use_unlikely_change = true;
 
     static constexpr Float child_min_count = 3;
+
+    static constexpr Float tie_value = 0.5f;
+
+    static constexpr double expected_sim_per_sec = 100;
 };
 
 //-----------------------------------------------------------------------------

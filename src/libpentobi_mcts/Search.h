@@ -44,8 +44,6 @@ public:
 
     PlayerInt get_player() const override;
 
-    Float get_tie_value() const override;
-
     bool check_followup(ArrayList<Move, max_moves>& sequence) override;
 
     string get_info() const override;

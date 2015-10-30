@@ -63,11 +63,6 @@ void Search::get_root_position(Variant& variant, Setup& setup) const
     setup.to_play = m_to_play;
 }
 
-Float Search::get_tie_value() const
-{
-    return 0.5;
-}
-
 void Search::on_start_search(bool is_followup)
 {
     m_shared_const.init(is_followup);

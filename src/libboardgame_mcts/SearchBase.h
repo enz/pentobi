@@ -111,6 +111,20 @@ struct SearchParamConstDefault
     /** The minimum count used in prior knowledge initialization of
         the children of an expanded node. */
     static constexpr Float child_min_count = 0;
+
+    /** An evaluation value representing a 50% winning probability. */
+    static constexpr Float tie_value = 0.5f;
+
+    /** Expected simulations per second.
+        If the simulations per second vary a lot, it should be a value closer
+        to the lower values. This value is used, for example, to determine an
+        interval for checking expensive abort conditions in deterministic mode
+        (in regular mode, the simulations per second will be measured and the
+        interval will be adjusted automatically). That means that in
+        deterministic mode, a pessimistic low value will cause more calls to
+        the expensive function but an optimistic high value will delay aborting
+        the search. */
+    static constexpr double expected_sim_per_sec = 100;
 };
 
 //-----------------------------------------------------------------------------
@@ -186,9 +200,6 @@ public:
     /** Get player to play at root node of the search. */
     virtual PlayerInt get_player() const = 0;
 
-    /** An evaluation value representing a 50% winning probability. */
-    virtual Float get_tie_value() const = 0;
-
     /** @} */ // @name
 
 
@@ -211,19 +222,6 @@ public:
     virtual string get_info() const;
 
     virtual string get_info_ext() const;
-
-    /** Return the expected simulations per second.
-        If the simulations per second vary a lot, it should return a value
-        closer to the lower values. This value is used, for example, to
-        determine an interval for checking expensive abort conditions in
-        deterministic mode (in regular mode, the simulations per second will be
-        measured and the interval will be adjusted automatically). That means
-        that in deterministic mode, a pessimistic low value will cause more
-        calls to the expensive function but an optimistic high value will
-        delay aborting the search.
-        The default implementation returns 100.
-        @see set_deterministic() */
-    virtual double expected_sim_per_sec() const;
 
     /** @} */ // @name
 
@@ -793,7 +791,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         return false;
     double simulations_per_sec;
     if (time == 0)
-        simulations_per_sec = expected_sim_per_sec();
+        simulations_per_sec = SearchParamConst::expected_sim_per_sec;
     else
     {
         size_t nu_simulations = m_nu_simulations.load(memory_order_relaxed);
@@ -939,12 +937,6 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
         return true;
     }
     return false;
-}
-
-template<class S, class M, class R>
-double SearchBase<S, M, R>::expected_sim_per_sec() const
-{
-    return 100.0;
 }
 
 template<class S, class M, class R>
@@ -1322,7 +1314,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     }
     else
         for (PlayerInt i = 0; i < m_nu_players; ++i)
-            m_root_val[i].init(get_tie_value(), 1);
+            m_root_val[i].init(SearchParamConst::tie_value, 1);
     if ((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
@@ -1335,7 +1327,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         else
         {
             Timer timer(time_source);
-            m_tmp_tree.clear(get_tie_value());
+            m_tmp_tree.clear(SearchParamConst::tie_value);
             auto node = find_node(m_tree, m_followup_sequence);
             if (node)
             {
@@ -1374,7 +1366,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         }
     }
     if (clear_tree)
-        m_tree.clear(get_tie_value());
+        m_tree.clear(SearchParamConst::tie_value);
 
     m_timer.reset(time_source);
     m_time_source = &time_source;
@@ -1403,7 +1395,9 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     unsigned nu_threads = m_nu_threads;
     double expected_time;
     if (max_count > 0)
-        expected_time = (max_count - reused_count) / expected_sim_per_sec();
+        expected_time =
+                (max_count - reused_count)
+                / SearchParamConst::expected_sim_per_sec;
     else
         expected_time = max_time;
     if (nu_threads > 1 && expected_time < 0.5)
@@ -1483,7 +1477,8 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
     if (m_deterministic)
     {
         unsigned interval =
-            static_cast<unsigned>(max(1.0, expected_sim_per_sec() / 5.0));
+            static_cast<unsigned>(
+                    max(1.0, SearchParamConst::expected_sim_per_sec / 5.0));
         expensive_abort_checker.set_deterministic(interval);
     }
     while (true)
