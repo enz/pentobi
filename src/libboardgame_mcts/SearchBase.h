@@ -303,11 +303,6 @@ public:
 
     Float get_rave_dist_final() const;
 
-    /** Total size of the trees in bytes. */
-    void set_tree_memory(size_t memory);
-
-    size_t get_tree_memory() const;
-
     /** Set deterministic mode.
         Note that using a fixed number of simulations instead of a time limit
         is not enough to make the search fully deterministic because the
@@ -564,8 +559,6 @@ private:
         previous search. */
     Float m_max_count;
 
-    size_t m_tree_memory;
-
     size_t m_max_nodes;
 
     /** Maximum time of current search. */
@@ -745,8 +738,7 @@ void SearchBase<S, M, R>::AssertionHandler::run()
 template<class S, class M, class R>
 SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
-      m_tree_memory(memory == 0 ? 256000000 : memory),
-      m_max_nodes(get_max_nodes(m_tree_memory)),
+      m_max_nodes(get_max_nodes(memory == 0 ? 256000000 : memory)),
       m_bias_term(0),
       m_tmp_tree(m_max_nodes, m_nu_threads),
 #if LIBBOARDGAME_DEBUG
@@ -1049,12 +1041,6 @@ inline TimeSource& SearchBase<S, M, R>::get_time_source()
 {
     LIBBOARDGAME_ASSERT(m_time_source != 0);
     return *m_time_source;
-}
-
-template<class S, class M, class R>
-size_t SearchBase<S, M, R>::get_tree_memory() const
-{
-    return m_tree_memory;
 }
 
 template<class S, class M, class R>
@@ -1640,15 +1626,6 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::set_reuse_tree(bool enable)
 {
     m_reuse_tree = enable;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_tree_memory(size_t memory)
-{
-    m_tree_memory = memory;
-    m_max_nodes = get_max_nodes(memory);
-    m_tree.set_max_nodes(m_max_nodes);
-    m_tmp_tree.set_max_nodes(m_max_nodes);
 }
 
 template<class S, class M, class R>
