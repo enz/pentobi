@@ -71,7 +71,7 @@ Item
         PieceSelector {
             id: pieceSelector
 
-            property int nuVisibleColumns: 7
+            property int nuVisibleColumns: 8
 
             pieces0: _pieces0
             pieces1: _pieces1
