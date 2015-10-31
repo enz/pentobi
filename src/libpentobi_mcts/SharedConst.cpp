@@ -77,8 +77,21 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
             set_piece_considered(board_const, "V5", is_piece_considered);
             set_piece_considered(board_const, "Z5", is_piece_considered);
         }
-        else if (nu_moves < 3 * nu_colors)
+        else if (nu_moves < 2 * nu_colors)
+        {
             filter_min_size(board_const, 5, is_piece_considered);
+            set_piece_considered(board_const, "F", is_piece_considered, false);
+            set_piece_considered(board_const, "P", is_piece_considered, false);
+            set_piece_considered(board_const, "T", is_piece_considered, false);
+            set_piece_considered(board_const, "U", is_piece_considered, false);
+            set_piece_considered(board_const, "X", is_piece_considered, false);
+        }
+        else if (nu_moves < 3 * nu_colors)
+        {
+            filter_min_size(board_const, 5, is_piece_considered);
+            set_piece_considered(board_const, "P", is_piece_considered, false);
+            set_piece_considered(board_const, "U", is_piece_considered, false);
+        }
         else if (nu_moves < 5 * nu_colors)
             filter_min_size(board_const, 4, is_piece_considered);
         else if (nu_moves < 7 * nu_colors)
