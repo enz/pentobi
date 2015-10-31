@@ -134,6 +134,8 @@ private:
 
     ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
+    Board::PiecesLeftList m_pieces_considered;
+
     PriorKnowledge m_prior_knowledge;
 
     /** Gamma value for a piece. */
@@ -197,16 +199,15 @@ private:
         played pieces. */
     ColorMap<Grid<bool>> m_moves_added_at;
 
-    void add_moves(Point p, Color c,
-                   const Board::PiecesLeftList& pieces_considered,
+
+    void add_moves(Point p, Color c, const Board::PiecesLeftList& pieces,
                    double& total_gamma, MoveList& moves, unsigned& nu_moves);
 
     void add_moves(Point p, Color c, Piece piece, unsigned adj_status,
                    double& total_gamma, MoveList& moves, unsigned& nu_moves);
 
     LIBBOARDGAME_NOINLINE
-    void add_starting_moves(Color c,
-                            const Board::PiecesLeftList& pieces_considered,
+    void add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                             bool with_gamma, MoveList& moves);
 
     void evaluate_duo(array<Float, 6>& result);
@@ -229,7 +230,9 @@ private:
     PrecompMoves::Range get_moves(Color c, Piece piece, Point p,
                                   unsigned adj_status) const;
 
-    const PieceMap<bool>& get_pieces_considered() const;
+    const PieceMap<bool>& get_is_piece_considered() const;
+
+    const Board::PiecesLeftList& get_pieces_considered(Color c);
 
     void init_moves_with_gamma(Color c);
 
