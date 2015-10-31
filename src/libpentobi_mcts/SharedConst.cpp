@@ -82,7 +82,7 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
             filter_min_size(board_const, 5, is_piece_considered);
             set_piece_considered(board_const, "F", is_piece_considered, false);
             set_piece_considered(board_const, "P", is_piece_considered, false);
-            set_piece_considered(board_const, "T", is_piece_considered, false);
+            set_piece_considered(board_const, "T5", is_piece_considered, false);
             set_piece_considered(board_const, "U", is_piece_considered, false);
             set_piece_considered(board_const, "X", is_piece_considered, false);
         }
