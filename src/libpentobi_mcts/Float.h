@@ -7,11 +7,9 @@
 #ifndef LIBPENTOBI_MCTS_FLOAT_H
 #define LIBPENTOBI_MCTS_FLOAT_H
 
-#include <limits>
+#include <type_traits>
 
 namespace libpentobi_mcts {
-
-using namespace std;
 
 //-----------------------------------------------------------------------------
 
@@ -21,7 +19,7 @@ typedef LIBPENTOBI_MCTS_FLOAT_TYPE Float;
 typedef float Float;
 #endif
 
-static_assert(! numeric_limits<Float>::is_exact, "");
+static_assert(std::is_floating_point<Float>::value, "");
 
 //-----------------------------------------------------------------------------
 

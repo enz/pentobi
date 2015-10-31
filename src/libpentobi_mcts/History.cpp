@@ -14,6 +14,7 @@
 
 namespace libpentobi_mcts {
 
+using namespace std;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //----------------------------------------------------------------------------
