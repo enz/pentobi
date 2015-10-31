@@ -45,8 +45,10 @@ Item
             id: board
 
             gameVariant: gameModel.gameVariant
+            // Enforce a geometry that shows at least 2 rows in piece selector
+            // (otherwise vertical flicking becomes too difficult)
             width: Math.min(parent.width,
-                            (isTrigon ? 0.9 : 0.8) * gameDisplay.height)
+                            (isTrigon ? 0.86 : 0.76) * gameDisplay.height)
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
