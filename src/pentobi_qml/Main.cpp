@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
         return app.exec();
     }
-    catch (const bad_alloc& e)
+    catch (const bad_alloc&)
     {
         // bad_alloc can happen because the player requires a larger
         // amount of memory (e.g. it happened with Pentobi 10.0 on some
