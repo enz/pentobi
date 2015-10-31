@@ -65,6 +65,8 @@ struct SearchParamConst
 
     static constexpr Float tie_value = 0.5f;
 
+    static constexpr Float prune_count_start = 16;
+
     static constexpr double expected_sim_per_sec = 100;
 };
 

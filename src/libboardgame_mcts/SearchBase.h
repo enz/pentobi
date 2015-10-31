@@ -20,6 +20,7 @@
 #include "Tree.h"
 #include "TreeUtil.h"
 #include "libboardgame_util/Abort.h"
+#include "libboardgame_util/ArrayList.h"
 #include "libboardgame_util/Barrier.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
@@ -114,6 +115,11 @@ struct SearchParamConstDefault
 
     /** An evaluation value representing a 50% winning probability. */
     static constexpr Float tie_value = 0.5f;
+
+    /** Value to start the tree pruning with.
+        This value should be above typical count initializations if prior
+        knowledge initialization is used. */
+    static constexpr Float prune_count_start = 16;
 
     /** Expected simulations per second.
         If the simulations per second vary a lot, it should be a value closer
@@ -296,13 +302,6 @@ public:
     void set_rave_dist_final(Float value);
 
     Float get_rave_dist_final() const;
-
-    /** Value to start the tree pruning with.
-        This value should be above typical count initializations if prior
-        knowledge initialization is used. */
-    void set_prune_count_start(Float n);
-
-    Float get_prune_count_start() const;
 
     /** Total size of the trees in bytes. */
     void set_tree_memory(size_t memory);
@@ -546,8 +545,6 @@ private:
 
     /** Time of last search. */
     double m_last_time;
-
-    Float m_prune_count_start = 16;
 
     Float m_rave_parent_max = 50000;
 
@@ -998,12 +995,6 @@ inline auto SearchBase<S, M, R>::get_root_visit_count() const -> Float
 }
 
 template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::get_prune_count_start() const -> Float
-{
-    return m_prune_count_start;
-}
-
-template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_rave_dist_final() const -> Float
 {
     return m_rave_dist_final;
@@ -1386,7 +1377,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     m_min_simulations = min_simulations;
     m_max_time = max_time;
     m_nu_simulations.store(0);
-    Float prune_min_count = get_prune_count_start();
+    Float prune_min_count = SearchParamConst::prune_count_start;
 
     // Don't use multi-threading for very short searches (less than 0.5s).
     // There are too many lost updates at the beginning (e.g. if all threads
@@ -1613,12 +1604,6 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::set_full_select_min(Float n)
 {
     m_full_select_min = n;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_prune_count_start(Float n)
-{
-    m_prune_count_start = n;
 }
 
 template<class S, class M, class R>
