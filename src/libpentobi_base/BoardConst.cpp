@@ -102,17 +102,17 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
     vector<PieceInfo> pieces;
     // Define the 21 standard pieces. The piece names are the standard names as
     // in http://blokusstrategy.com/?p=48. The default orientation is chosen
-    // such that it resembles the letter in the piece name
+    // such that it resembles the letter.
     pieces.reserve(21);
-    pieces.emplace_back("L5",
-                        PiecePoints{ CoordPoint(0, 1), CoordPoint(1, 1),
-                                     CoordPoint(0, 0), CoordPoint(0, -1),
-                                     CoordPoint(0, -2) },
-                        geo, transforms, CoordPoint(0, 0));
     pieces.emplace_back("V5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2), CoordPoint(1, 0),
                                      CoordPoint(2, 0) },
+                        geo, transforms, CoordPoint(0, 0));
+    pieces.emplace_back("L5",
+                        PiecePoints{ CoordPoint(0, 1), CoordPoint(1, 1),
+                                     CoordPoint(0, 0), CoordPoint(0, -1),
+                                     CoordPoint(0, -2) },
                         geo, transforms, CoordPoint(0, 0));
     pieces.emplace_back("Z5",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
@@ -139,15 +139,15 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
                         geo, transforms, CoordPoint(0, 0));
-    pieces.emplace_back("T5",
-                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
-                                     CoordPoint(0, 0), CoordPoint(0, -1),
-                                     CoordPoint(1, -1) },
-                        geo, transforms, CoordPoint(0, 0));
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(0, 2), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
+                        geo, transforms, CoordPoint(0, 0));
+    pieces.emplace_back("T5",
+                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
+                                     CoordPoint(0, 0), CoordPoint(0, -1),
+                                     CoordPoint(1, -1) },
                         geo, transforms, CoordPoint(0, 0));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
@@ -168,6 +168,10 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 1) },
                         geo, transforms, CoordPoint(0, 0));
+    pieces.emplace_back("I4",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
+                                     CoordPoint(0, 1), CoordPoint(0, 2) },
+                        geo, transforms, CoordPoint(0, 0));
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1) },
@@ -175,10 +179,6 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
     pieces.emplace_back("Z4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, CoordPoint(0, 0));
-    pieces.emplace_back("I4",
-                        PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
-                                     CoordPoint(0, 1), CoordPoint(0, 2) },
                         geo, transforms, CoordPoint(0, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
