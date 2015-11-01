@@ -689,17 +689,18 @@ void State::update_moves(Color c)
         auto& is_piece_considered_new = get_is_piece_considered();
         if (&is_piece_considered !=  &is_piece_considered_new)
         {
+            Board::PiecesLeftList new_pieces;
             unsigned n = 0;
             for (Piece piece : m_bd.get_pieces_left(c))
                 if (! is_piece_considered[piece]
                         && is_piece_considered_new[piece])
-                    m_pieces_considered.get_unchecked(n++) = piece;
-            m_pieces_considered.resize(n);
+                    new_pieces.get_unchecked(n++) = piece;
+            new_pieces.resize(n);
             for (Point p : m_bd.get_attach_points(c))
                 if (! is_forbidden[p])
                 {
                     auto adj_status = m_bd.get_adj_status(p, c);
-                    for (Piece piece : m_pieces_considered)
+                    for (Piece piece : new_pieces)
                         add_moves(p, c, piece, adj_status, total_gamma,
                                   moves, nu_moves);
                 }
