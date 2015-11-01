@@ -48,7 +48,7 @@ Item
             // Enforce a geometry that shows at least 2 rows in piece selector
             // (otherwise vertical flicking becomes too difficult)
             width: Math.min(parent.width,
-                            (isTrigon ? 0.86 : board.rows <= 14 ? 0.74 : 0.76)
+                            (isTrigon ? 0.86 : board.rows <= 14 ? 0.67 : 0.76)
                             * gameDisplay.height)
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
