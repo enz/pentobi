@@ -48,7 +48,8 @@ Item
             // Enforce a geometry that shows at least 2 rows in piece selector
             // (otherwise vertical flicking becomes too difficult)
             width: Math.min(parent.width,
-                            (isTrigon ? 0.86 : 0.76) * gameDisplay.height)
+                            (isTrigon ? 0.86 : board.rows <= 14 ? 0.74 : 0.76)
+                            * gameDisplay.height)
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -73,7 +74,9 @@ Item
         PieceSelector {
             id: pieceSelector
 
-            property int nuVisibleColumns: 8
+            // Show less pieces in Duo/Junior such that they are not too small
+            // compared to the pieces on the board
+            property int nuVisibleColumns: board.rows <= 14 ? 7 : 8
 
             pieces0: _pieces0
             pieces1: _pieces1

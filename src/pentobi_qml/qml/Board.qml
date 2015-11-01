@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     property string gameVariant
     property bool isTrigon: gameVariant.indexOf("trigon") >= 0
-    property int _elementsPerRow: {
+    property int columns: {
         switch (gameVariant) {
         case "duo":
         case "junior":
@@ -17,7 +17,7 @@ Item {
             return 20
         }
     }
-    property int _elementsPerColumn: {
+    property int rows: {
         switch (gameVariant) {
         case "duo":
         case "junior":
@@ -35,10 +35,10 @@ Item {
                                    Math.min(width, Math.sqrt(3) * height) :
                                    Math.min(width, height)
     // Avoid fractional piece element sizes if the piece elements are squares
-    property real gridElementWidth: isTrigon ? _sideLength / (_elementsPerRow + 1): Math.floor(_sideLength / _elementsPerRow)
+    property real gridElementWidth: isTrigon ? _sideLength / (columns + 1): Math.floor(_sideLength / columns)
     property real gridElementHeight: isTrigon ?  Math.sqrt(3) * gridElementWidth : gridElementWidth
-    property real _boardWidth: isTrigon ? gridElementWidth * (_elementsPerRow + 1) : gridElementWidth * _elementsPerRow
-    property real _boardHeight: gridElementHeight * _elementsPerColumn
+    property real _boardWidth: isTrigon ? gridElementWidth * (columns + 1) : gridElementWidth * columns
+    property real _boardHeight: gridElementHeight * rows
     property real _boardOffsetX: Math.floor((width - _boardWidth) / 2)
     property real _boardOffsetY: Math.floor((height - _boardHeight) / 2)
 
