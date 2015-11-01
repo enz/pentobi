@@ -241,6 +241,11 @@ private:
     bool check_forbidden(const Grid<bool>& is_forbidden, Move mv,
                          MoveList& moves, unsigned& nu_moves);
 
+    bool check_move(Move mv, const MoveInfo& info, double gamma_piece,
+                    MoveList& moves, unsigned& nu_moves,
+                    const PlayoutFeatures& playout_features,
+                    double& total_gamma);
+
     bool check_move(Move mv, const MoveInfo& info, MoveList& moves,
                     unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,

@@ -51,11 +51,14 @@ inline void State::add_moves(Point p, Color c,
     auto& playout_features = m_playout_features[c];
     auto adj_status = m_bd.get_adj_status(p, c);
     for (Piece piece : pieces)
+    {
+        auto gamma_piece = m_gamma_piece[piece];
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
-                    && check_move(mv, get_move_info(mv), moves, nu_moves,
-                                  playout_features, total_gamma))
+                    && check_move(mv, get_move_info(mv), gamma_piece, moves,
+                                  nu_moves, playout_features, total_gamma))
                 marker.set(mv);
+    }
     m_moves_added_at[c][p] = true;
 }
 
@@ -65,10 +68,11 @@ inline void State::add_moves(Point p, Color c, Piece piece,
 {
     auto& marker = m_marker[c];
     auto& playout_features = m_playout_features[c];
+    auto gamma_piece = m_gamma_piece[piece];
     for (Move mv : get_moves(c, piece, p, adj_status))
         if (! marker[mv]
-                && check_move(mv, get_move_info(mv), moves, nu_moves,
-                              playout_features, total_gamma))
+                && check_move(mv, get_move_info(mv), gamma_piece, moves,
+                              nu_moves, playout_features, total_gamma))
             marker.set(mv);
 }
 
@@ -125,8 +129,8 @@ bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv,
     return true;
 }
 
-bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
-                       unsigned& nu_moves,
+bool State::check_move(Move mv, const MoveInfo& info, double gamma_piece,
+                       MoveList& moves, unsigned& nu_moves,
                        const PlayoutFeatures& playout_features,
                        double& total_gamma)
 {
@@ -143,7 +147,7 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
         if (! features.add(*p, playout_features))
             return false;
     }
-    double gamma = m_gamma_piece[info.get_piece()];
+    double gamma = gamma_piece;
     auto nu_local = features.get_nu_local();
     if (nu_local > 0)
         gamma *= m_gamma_local[nu_local];
@@ -153,6 +157,15 @@ bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
     moves.get_unchecked(nu_moves) = mv;
     ++nu_moves;
     return true;
+}
+
+inline bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
+                              unsigned& nu_moves,
+                              const PlayoutFeatures& playout_features,
+                              double& total_gamma)
+{
+    return check_move(mv, info, m_gamma_piece[info.get_piece()], moves,
+                      nu_moves, playout_features, total_gamma);
 }
 
 #if LIBBOARDGAME_DEBUG
