@@ -61,7 +61,7 @@ int main(int argc, char** argv)
         auto variant_string = opt.get("game", "classic");
         bool quiet = opt.contains("quiet");
         if (quiet)
-            libboardgame_util::log_stream = nullptr;
+            libboardgame_util::disable_logging();
         bool fast_open = opt.contains("fastopen");
         bool create_tree = opt.contains("tree") || fast_open;
         Variant variant;
@@ -88,7 +88,7 @@ int main(int argc, char** argv)
                 }
                 catch (const exception& e)
                 {
-                    log("Error: ", e.what());
+                    LIBBOARDGAME_LOG("Error: ", e.what());
                     result = 1;
                 }
             }));
@@ -97,7 +97,7 @@ int main(int argc, char** argv)
     }
     catch (const exception& e)
     {
-        log("Error: ", e.what());
+        LIBBOARDGAME_LOG("Error: ", e.what());
         result = 1;
     }
     return result;

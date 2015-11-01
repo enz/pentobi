@@ -4,6 +4,10 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+#if ! LIBBOARDGAME_DISABLE_LOG
+
+//-----------------------------------------------------------------------------
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -77,34 +81,34 @@ AndroidBuf android_buffer;
 
 //-----------------------------------------------------------------------------
 
-ostream* log_stream = &cerr;
+ostream* _log_stream = &cerr;
 
 //-----------------------------------------------------------------------------
 
-void log(const string& s)
+void _log(const string& s)
 {
-    if (! log_stream)
+    if (! _log_stream)
         return;
     if (s.empty())
-        *log_stream << '\n';
+        *_log_stream << '\n';
     else if (s.back() == '\n')
-        *log_stream << s;
+        *_log_stream << s;
     else
     {
         string line = s;
         line += '\n';
-        *log_stream << line;
+        *_log_stream << line;
     }
 }
 
-void log_close()
+void _log_close()
 {
 #if defined ANDROID || defined __ANDROID__
     cerr.rdbuf(nullptr);
 #endif
 }
 
-void log_init()
+void _log_init()
 {
 #if defined ANDROID || defined __ANDROID__
     cerr.rdbuf(&android_buffer);
@@ -114,3 +118,7 @@ void log_init()
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_util
+
+//-----------------------------------------------------------------------------
+
+#endif // ! LIBBOARDGAME_DISABLE_LOG

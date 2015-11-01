@@ -173,7 +173,7 @@ void State::evaluate_duo(array<Float, 6>& result)
             && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
         if (log_simulations)
-            log("Result: 0.5 (symmetry)");
+            LIBBOARDGAME_LOG("Result: 0.5 (symmetry)");
         result[0] = result[1] = 0.5;
         return;
     }
@@ -187,10 +187,10 @@ void State::evaluate_duo(array<Float, 6>& result)
     else
         res = 0.5;
     if (log_simulations)
-        log("Result color ", c, ": sco=", s, " game_res=", res);
+        LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=", res);
     res += get_quality_bonus(c, res, s, false);
     if (log_simulations)
-        log("res=", res);
+        LIBBOARDGAME_LOG("res=", res);
     result[0] = res;
     result[1] = 1.f - res;
 }
@@ -209,7 +209,7 @@ void State::evaluate_multicolor(array<Float, 6>& result)
             && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
         if (log_simulations)
-            log("Result: 0.5 (symmetry)");
+            LIBBOARDGAME_LOG("Result: 0.5 (symmetry)");
         result[0] = result[1] = result[2] = result[3] = 0.5;
         return;
     }
@@ -224,10 +224,10 @@ void State::evaluate_multicolor(array<Float, 6>& result)
     else
         res = 0.5;
     if (log_simulations)
-        log("Result color ", c, ": sco=", s, " game_res=", res);
+        LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=", res);
     res += get_quality_bonus(c, res, s, true);
     if (log_simulations)
-        log("res=", res);
+        LIBBOARDGAME_LOG("res=", res);
     result[0] = result[2] = res;
     result[1] = result[3] = 1.f - res;
 }
@@ -257,8 +257,8 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
         result[i] =
                 game_result[i] + get_quality_bonus(c, game_result[i], s, true);
         if (log_simulations)
-            log("Result color ", c, ": sco=", s, " game_res=", game_result[i],
-                " res=", result[i]);
+            LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=",
+                             game_result[i], " res=", result[i]);
     }
     if (m_bd.get_variant() == Variant::classic_3)
     {
@@ -328,7 +328,7 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
             && ! m_has_moves[m_bd.get_second_color(to_play)])
         {
             if (log_simulations)
-                log("Terminate early (no moves and negative score)");
+                LIBBOARDGAME_LOG("Terminate early (no moves and neg. score)");
             return false;
         }
         to_play = to_play.get_next(m_nu_colors);
@@ -340,7 +340,8 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     auto& moves = m_moves[to_play];
     double total_gamma = m_cumulative_gamma[moves.size() - 1];
     if (log_simulations)
-        log("Moves: ", moves.size(), ", total_gamma: ", total_gamma);
+        LIBBOARDGAME_LOG("Moves: ", moves.size(), ", total_gamma: ",
+                         total_gamma);
     auto begin = m_cumulative_gamma.begin();
     auto end = begin + moves.size();
     auto random = m_random.generate_double(0, total_gamma);
@@ -512,7 +513,7 @@ void State::init_moves_without_gamma(Color c)
 void State::play_expanded_child(Move mv)
 {
     if (log_simulations)
-        log("Playing expanded child");
+        LIBBOARDGAME_LOG("Playing expanded child");
     if (! mv.is_null())
         play_playout(mv);
     else
@@ -525,7 +526,7 @@ void State::play_expanded_child(Move mv)
         // initialization)
         m_is_symmetry_broken = true;
         if (log_simulations)
-            log(m_bd);
+            LIBBOARDGAME_LOG(m_bd);
     }
 }
 
@@ -608,10 +609,13 @@ void State::start_search()
 
 void State::start_simulation(size_t n)
 {
+#if LIBBOARDGAME_DISABLE_LOG
+    LIBBOARDGAME_UNUSED(n);
+#endif
     if (log_simulations)
-        log("=========================================================\n",
-            "Simulation ", n, "\n",
-            "=========================================================");
+        LIBBOARDGAME_LOG("=================================================\n",
+                         "Simulation ", n, "\n",
+                         "=================================================");
     m_bd.restore_snapshot();
     m_force_consider_all_pieces = false;
     auto& geo = m_bd.get_geometry();

@@ -522,7 +522,7 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
             grid[*i] = '+';
         for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
             grid[*i] = '*';
-        log("Move ", mv.to_int(), ":\n", grid.to_string(m_geo));
+        LIBBOARDGAME_LOG("Move ", mv.to_int(), ":\n", grid.to_string(m_geo));
     }
 }
 
@@ -547,8 +547,8 @@ void BoardConst::create_moves()
                 m_precomp_moves.set_list_range(p, i, piece, begin, size);
             }
     if (log_move_creation)
-        log("Created moves: ", moves_created, ", precomputed: ",
-            m_precomp_moves.get_size());
+        LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomputed: ",
+                         m_precomp_moves.get_size());
     LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
@@ -557,7 +557,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
 {
     auto& piece_info = m_pieces[piece.to_int()];
     if (log_move_creation)
-        log("Creating moves for piece ", piece_info.get_name());
+        LIBBOARDGAME_LOG("Creating moves for piece ", piece_info.get_name());
     auto& transforms = piece_info.get_transforms();
     auto nu_transforms = transforms.size();
     vector<PiecePoints> transformed_points(nu_transforms);
@@ -577,7 +577,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
     for (Point p : m_geo)
     {
         if (log_move_creation)
-            log("Creating moves at ", m_geo.to_string(p));
+            LIBBOARDGAME_LOG("Creating moves at ", m_geo.to_string(p));
         auto x = m_geo.get_x(p);
         auto y = m_geo.get_y(p);
         auto point_type = m_geo.get_point_type(x, y);
@@ -585,8 +585,10 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
         {
             if (log_move_creation)
             {
+#if ! LIBBOARDGAME_DISABLE_LOG
                 auto& transform = *transforms[i];
-                log("Transformation ", typeid(transform).name());
+                LIBBOARDGAME_LOG("Transformation ", typeid(transform).name());
+#endif
             }
             if (transforms[i]->get_new_point_type() != point_type)
                 continue;

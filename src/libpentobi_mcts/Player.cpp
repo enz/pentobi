@@ -173,9 +173,9 @@ Move Player::genmove(const Board& bd, Color c)
         }
     }
     if (max_count != 0)
-        log("MaxCnt ", fixed, setprecision(0), max_count);
+        LIBBOARDGAME_LOG("MaxCnt ", fixed, setprecision(0), max_count);
     else
-        log("MaxTime ", max_time);
+        LIBBOARDGAME_LOG("MaxTime ", max_time);
     if (! m_search.search(mv, bd, c, max_count, 0, max_time, *m_time_source))
         return Move::null();
     // Resign only in two-player game variants
@@ -253,12 +253,12 @@ bool Player::load_book(const string& filepath)
     ifstream in(filepath);
     if (! in)
     {
-        log("Could not load book ", filepath);
+        LIBBOARDGAME_LOG("Could not load book ", filepath);
         return false;
     }
     m_book.load(in);
     m_is_book_loaded = true;
-    log("Loaded book ", filepath);
+    LIBBOARDGAME_LOG("Loaded book ", filepath);
     return true;
 }
 

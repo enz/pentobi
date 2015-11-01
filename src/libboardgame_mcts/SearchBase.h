@@ -50,6 +50,11 @@ using libboardgame_util::TimeSource;
 
 //-----------------------------------------------------------------------------
 
+#define LIBBOARDGAME_LOG_THREAD(thread_state, ...) \
+    LIBBOARDGAME_LOG('[', thread_state.thread_id, "] ", __VA_ARGS__)
+
+//-----------------------------------------------------------------------------
+
 /** Default optional compile-time parameters for Search.
     See description of class Search for more information. */
 struct SearchParamConstDefault
@@ -593,9 +598,6 @@ private:
     /** See get_nu_simulations(). */
     Atomic<size_t, multithread> m_nu_simulations;
 
-    /** Mutex used in log_thread() */
-    mutable mutex m_log_mutex;
-
     /** @} */ // @name
 
 
@@ -618,8 +620,6 @@ private:
 
     bool expand_node(ThreadState& thread_state, const Node& node,
                      const Node*& best_child);
-
-    void log_thread(const ThreadState& thread_state, const string& s) const;
 
     void playout(ThreadState& thread_state);
 
@@ -730,7 +730,7 @@ SearchBase<S, M, R>::AssertionHandler::~AssertionHandler()
 template<class S, class M, class R>
 void SearchBase<S, M, R>::AssertionHandler::run()
 {
-    log(m_search.dump());
+    LIBBOARDGAME_LOG(m_search.dump());
 }
 #endif // LIBBOARDGAME_DEBUG
 
@@ -757,9 +757,12 @@ template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state,
                                       Float root_count) const
 {
+#if LIBBOARDGAME_DISABLE_LOG
+    LIBBOARDGAME_UNUSED(thread_state);
+#endif
     if (m_max_count > 0 && root_count >= m_max_count)
     {
-        log_thread(thread_state, "Maximum count reached");
+        LIBBOARDGAME_LOG_THREAD(thread_state, "Maximum count reached");
         return true;
     }
     return false;
@@ -771,7 +774,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
 {
     if (get_abort())
     {
-        log_thread(thread_state, "Search aborted");
+        LIBBOARDGAME_LOG_THREAD(thread_state, "Search aborted");
         return true;
     }
     auto time = m_timer();
@@ -793,7 +796,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         // Search uses time limit
         if (time > m_max_time)
         {
-            log_thread(thread_state, "Maximum time reached");
+            LIBBOARDGAME_LOG_THREAD(thread_state, "Maximum time reached");
             return true;
         }
         remaining_time = m_max_time - time;
@@ -817,6 +820,9 @@ template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
                                               Float remaining) const
 {
+#if LIBBOARDGAME_DISABLE_LOG
+    LIBBOARDGAME_UNUSED(thread_state);
+#endif
     // select_final() selects move with highest number of wins.
     Float max_wins = 0;
     Float second_max = 0;
@@ -849,7 +855,7 @@ bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
     }
     else if (diff < remaining)
         return false;
-    log_thread(thread_state, "Move will not change");
+    LIBBOARDGAME_LOG_THREAD(thread_state, "Move will not change");
     return true;
 }
 
@@ -873,7 +879,7 @@ void SearchBase<S, M, R>::create_threads()
     if (! multithread && m_nu_threads > 1)
         throw runtime_error("libboardgame_mcts::Search was compiled"
                             " without support for multithreading");
-    log("Creating ", m_nu_threads, " threads");
+    LIBBOARDGAME_LOG("Creating ", m_nu_threads, " threads");
     m_threads.clear();
     m_threads.reserve(m_nu_threads);
     auto search_func =
@@ -955,7 +961,7 @@ size_t SearchBase<S, M, R>::get_max_nodes(size_t memory)
     // with NodeIdx
     max_nodes =
         min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
-    log("Search tree size: 2 x ", max_nodes, " nodes");
+    LIBBOARDGAME_LOG("Search tree size: 2 x ", max_nodes, " nodes");
     return max_nodes;
 }
 
@@ -1047,14 +1053,6 @@ template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_tree() const -> const Tree&
 {
     return m_tree;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::log_thread(const ThreadState& thread_state,
-                                 const string& s) const
-{
-    lock_guard<mutex> lock(m_log_mutex);
-    log('[', thread_state.thread_id, "] ", s);
 }
 
 template<class S, class M, class R>
@@ -1206,6 +1204,9 @@ bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
                             double max_time, Float prune_min_count,
                             Float& new_prune_min_count)
 {
+#if LIBBOARDGAME_DISABLE_LOG
+    LIBBOARDGAME_UNUSED(time);
+#endif
     Timer timer(time_source);
     TimeIntervalChecker interval_checker(time_source, max_time);
     if (m_deterministic)
@@ -1215,12 +1216,13 @@ bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
                               m_tree.get_root(), prune_min_count, true,
                               &interval_checker))
     {
-        log("Pruning aborted");
+        LIBBOARDGAME_LOG("Pruning aborted");
         return false;
     }
     int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
-    log("Pruning MinCnt: ", prune_min_count, ", AtTm: ", time, ", Nds: ",
-        m_tmp_tree.get_nu_nodes(), " (", percent, "%), Tm: ", timer());
+    LIBBOARDGAME_LOG("Pruning MinCnt: ", prune_min_count, ", AtTm: ", time,
+                     ", Nds: ", m_tmp_tree.get_nu_nodes(), " (", percent,
+                     "%), Tm: ", timer());
     m_tree.swap(m_tmp_tree);
     if (percent > 50)
     {
@@ -1298,8 +1300,8 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         if (m_followup_sequence.empty())
         {
             if (tree_nodes > 1)
-                log("Reusing all ", tree_nodes, "nodes (count=",
-                    m_tree.get_root().get_visit_count(), ")");
+                LIBBOARDGAME_LOG("Reusing all ", tree_nodes, "nodes (count=",
+                                 m_tree.get_root().get_visit_count(), ")");
         }
         else
         {
@@ -1328,11 +1330,11 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                 if (tree_nodes > 1 && tmp_tree_nodes > 1)
                 {
                     double time = timer();
-                    double reuse = double(tmp_tree_nodes) / double(tree_nodes);
-                    double percent = 100 * reuse;
-                    log("Reusing ", tmp_tree_nodes, " nodes (", std::fixed,
-                        setprecision(1), percent, "% tm=", setprecision(4),
-                        time, ")");
+                    LIBBOARDGAME_LOG("Reusing ", tmp_tree_nodes, " nodes (",
+                                     std::fixed, setprecision(1),
+                                     100 * double(tmp_tree_nodes)
+                                     / double(tree_nodes),
+                                     "% tm=", setprecision(4), time, ")");
                     m_tree.swap(m_tmp_tree);
                     clear_tree = false;
                     max_time -= time;
@@ -1379,7 +1381,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         expected_time = max_time;
     if (nu_threads > 1 && expected_time < 0.5)
     {
-        log("Using single-threading for very short search");
+        LIBBOARDGAME_LOG("Using single-threading for short search");
         nu_threads = 1;
     }
 
@@ -1394,9 +1396,9 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     }
 
     if (root.get_nu_children() == 0)
-        log("No legal moves at root");
+        LIBBOARDGAME_LOG("No legal moves at root");
     else if (root.get_nu_children() == 1 && min_simulations == 0)
-        log("Root has only one child");
+        LIBBOARDGAME_LOG("Root has only one child");
     else
         while (true)
         {
@@ -1418,7 +1420,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
             if (! prune(time_source, time, max_time - time, prune_min_count,
                         prune_min_count))
             {
-                log("Aborting search because pruning failed.");
+                LIBBOARDGAME_LOG("Aborting search because pruning failed.");
                 break;
             }
         }
@@ -1426,12 +1428,12 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     if (m_tree.get_root().get_visit_count()
             >= (size_t(1) << numeric_limits<Float>::digits) - 1)
     {
-        log("Warning: Maximum count supported by floating type exceeded");
+        LIBBOARDGAME_LOG("WARNING: max count supported by float exceeded");
         return true;
     }
 
     m_last_time = m_timer();
-    log(get_info());
+    LIBBOARDGAME_LOG(get_info());
     bool result = select_move(mv);
     m_time_source = nullptr;
     return result;

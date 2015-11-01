@@ -48,7 +48,7 @@ Engine::Engine(Variant variant)
 void Engine::board_changed()
 {
     if (m_show_board)
-        log(get_board());
+        LIBBOARDGAME_LOG(get_board());
 }
 
 void Engine::cmd_all_legal(const Arguments& args, Response& response)
@@ -377,7 +377,7 @@ void Engine::set_player(PlayerBase& player)
 void Engine::set_show_board(bool enable)
 {
     if (enable && ! m_show_board)
-        log(get_board());
+        LIBBOARDGAME_LOG(get_board());
     m_show_board = enable;
 }
 

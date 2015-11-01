@@ -157,7 +157,7 @@ int main(int argc, char* argv[])
                                   " without support for multi-threading.");
         }
         if (! opt.contains("verbose"))
-            libboardgame_util::log_stream = nullptr;
+            libboardgame_util::disable_logging();
 #ifdef Q_WS_WIN
         if (opt.contains("verbose"))
             redirectStdErr();

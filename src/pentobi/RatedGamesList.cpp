@@ -103,7 +103,7 @@ void RatedGamesList::updateContent(Variant variant,
         if (info.color.to_int() < get_nu_colors(variant))
             color->setText(Util::getPlayerString(variant, info.color));
         else
-            log("Error: invalid color in rating history");
+            LIBBOARDGAME_LOG("Error: invalid color in rating history");
         auto level = new QStandardItem;
         level->setData(info.level, Qt::DisplayRole);
         QString result;

@@ -85,11 +85,9 @@ float TwoGtp::get_result(unsigned player_black)
 void TwoGtp::play_game(unsigned game_number)
 {
     if (! m_quiet)
-    {
-        log("=====================================================");
-        log("Game ", game_number);
-        log("=====================================================");
-    }
+        LIBBOARDGAME_LOG("================================================\n"
+                         "Game ", game_number, "\n"
+                         "================================================");
     m_bd.init();
     send_both("clear_board");
     auto cpu_black = send_cputime(m_black);
@@ -123,7 +121,7 @@ void TwoGtp::play_game(unsigned game_number)
                                                     m_bd, to_play, mv))
         {
             is_real_move[m_bd.get_nu_moves()] = false;
-            log("Playing fast opening move");
+            LIBBOARDGAME_LOG("Playing fast opening move");
             player_connection.send("play " + color + " " + m_bd.to_string(mv));
         }
         else

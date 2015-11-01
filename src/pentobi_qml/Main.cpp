@@ -17,9 +17,6 @@
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
-#if QT_NO_DEBUG
-    libboardgame_util::log_stream = nullptr;
-#endif
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");

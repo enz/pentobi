@@ -17,15 +17,13 @@
 #include "FdStream.h"
 #include "libboardgame_util/Log.h"
 
-using libboardgame_util::log;
-
 //-----------------------------------------------------------------------------
 
 namespace {
 
 void terminate_child(const string& message)
 {
-    log(message);
+    LIBBOARDGAME_LOG(message);
     exit(1);
 }
 
@@ -134,7 +132,7 @@ void GtpConnection::enable_log(const string& prefix)
 string GtpConnection::send(const string& command)
 {
     if (! m_quiet)
-        log(m_prefix, ">> ", command);
+        LIBBOARDGAME_LOG(m_prefix, ">> ", command);
     *m_out << command << '\n';
     m_out->flush();
     if (! *m_out)
@@ -150,7 +148,7 @@ string GtpConnection::send(const string& command)
         if (! *m_in)
             throw Failure("GtpConnection: read failure");
         if (! m_quiet && ! line.empty())
-            log(m_prefix, "<< ", line);
+            LIBBOARDGAME_LOG(m_prefix, "<< ", line);
         if (is_first)
         {
             if (line.size() < 2 || (line[0] != '=' && line[0] != '?')

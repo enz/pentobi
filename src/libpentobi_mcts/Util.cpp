@@ -85,7 +85,7 @@ size_t get_memory()
     // playing levels with short searches there)
     if (total_mem == 0)
     {
-        log("WARNING: could not determine system memory (assuming 512 MB)");
+        LIBBOARDGAME_LOG("WARNING: could not determine system memory (assuming 512 MB)");
         memory = 512000000;
     }
     else
@@ -101,7 +101,7 @@ size_t get_memory()
     if (memory > 1400000000)
         memory = 1400000000;
 #endif
-    log("Using ", memory, " of ", total_mem, " bytes");
+    LIBBOARDGAME_LOG("Using ", memory, " of ", total_mem, " bytes");
     return memory;
 }
 
@@ -110,7 +110,7 @@ unsigned get_nu_threads()
     unsigned nu_threads = thread::hardware_concurrency();
     if (nu_threads == 0)
     {
-        log("Could not determine the number of hardware threads");
+        LIBBOARDGAME_LOG("Could not determine the number of hardware threads");
         nu_threads = 1;
     }
     // The lock-free search probably scales up to 16-32 threads, but we

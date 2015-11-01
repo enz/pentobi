@@ -113,31 +113,31 @@ const SgfNode* Book::select_child(const Board& bd, Color c,
         ColorMove color_mv = tree.get_move(child);
         if (color_mv.is_null())
         {
-            log("WARNING: Book contains nodes without moves");
+            LIBBOARDGAME_LOG("WARNING: Book contains nodes without moves");
             continue;
         }
         if (color_mv.color != c)
         {
-            log("WARNING: Book contains non-alternating move sequences");
+            LIBBOARDGAME_LOG("WARNING: Book contains non-alternating move sequences");
             continue;
         }
         auto mv = get_transformed(bd, color_mv.move, inv_transform);
         if (! bd.is_legal(color_mv.color, mv))
         {
-            log("WARNING: Book contains illegal move");
+            LIBBOARDGAME_LOG("WARNING: Book contains illegal move");
             continue;
         }
         if (m_tree.get_good_move(child) > 0)
         {
-            log(bd.to_string(mv), " !");
+            LIBBOARDGAME_LOG(bd.to_string(mv), " !");
             good_moves.push_back(&child);
         }
         else
-            log(bd.to_string(mv));
+            LIBBOARDGAME_LOG(bd.to_string(mv));
     }
     if (good_moves.empty())
         return nullptr;
-    log("Book moves: ", good_moves.size());
+    LIBBOARDGAME_LOG("Book moves: ", good_moves.size());
     unsigned nu_good_moves = static_cast<unsigned>(good_moves.size());
     return good_moves[m_random.generate() % nu_good_moves];
 }

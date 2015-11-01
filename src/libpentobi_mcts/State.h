@@ -272,7 +272,7 @@ inline void State::evaluate_playout(array<Float, 6>& result)
 inline void State::finish_in_tree()
 {
     if (log_simulations)
-        log("Finish in-tree");
+        LIBBOARDGAME_LOG("Finish in-tree");
     if (m_check_symmetric_draw)
         m_is_symmetry_broken =
             check_symmetry_broken(m_bd, m_shared_const.symmetric_points);
@@ -298,7 +298,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     {
         // See also the comment in evaluate_playout()
         if (log_simulations)
-            log("Terminate playout. Symmetry not broken.");
+            LIBBOARDGAME_LOG("Terminate playout. Symmetry not broken.");
         return false;
     }
     PlayerInt player = get_player();
@@ -306,7 +306,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     if (! lgr2.is_null() && m_bd.is_legal(lgr2))
     {
         if (log_simulations)
-            log("Playing last good reply 2");
+            LIBBOARDGAME_LOG("Playing last good reply 2");
         mv = PlayerMove<Move>(player, lgr2);
         return true;
     }
@@ -314,7 +314,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     if (! lgr1.is_null() && m_bd.is_legal(lgr1))
     {
         if (log_simulations)
-            log("Playing last good reply 1");
+            LIBBOARDGAME_LOG("Playing last good reply 1");
         mv = PlayerMove<Move>(player, lgr1);
         return true;
     }
@@ -365,7 +365,7 @@ inline void State::play_in_tree(Move mv)
         ++m_nu_passes;
     }
     if (log_simulations)
-        log(m_bd);
+        LIBBOARDGAME_LOG(m_bd);
 }
 
 inline void State::play_playout(Move mv)
@@ -379,7 +379,7 @@ inline void State::play_playout(Move mv)
     if (! m_is_symmetry_broken)
         update_symmetry_broken(mv);
     if (log_simulations)
-        log(m_bd);
+        LIBBOARDGAME_LOG(m_bd);
     update_playout_features(to_play, mv);
 }
 

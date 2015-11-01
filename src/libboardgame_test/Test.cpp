@@ -57,7 +57,7 @@ void add_test(const string& name, TestFunction function)
 bool run_all_tests()
 {
     unsigned nu_fail = 0;
-    log("Running ", get_all_tests().size(), " tests...");
+    LIBBOARDGAME_LOG("Running ", get_all_tests().size(), " tests...");
     for (auto& i : get_all_tests())
     {
         try
@@ -66,18 +66,18 @@ bool run_all_tests()
         }
         catch (const TestFail& e)
         {
-            log(e.what());
+            LIBBOARDGAME_LOG(e.what());
             ++nu_fail;
         }
     }
     if (nu_fail == 0)
     {
-        log("OK");
+        LIBBOARDGAME_LOG("OK");
         return true;
     }
     else
     {
-        log(nu_fail, " tests failed.\nFAIL");
+        LIBBOARDGAME_LOG(nu_fail, " tests failed.\nFAIL");
         return false;
     }
 }
@@ -87,20 +87,20 @@ bool run_test(const string& name)
     for (auto& i : get_all_tests())
         if (i.first == name)
         {
-            log("Running ", name, "...");
+            LIBBOARDGAME_LOG("Running ", name, "...");
             try
             {
                 (i.second)();
-                log("OK");
+                LIBBOARDGAME_LOG("OK");
                 return true;
             }
             catch (const TestFail& e)
             {
-                log(e.what(), "\nFAIL");
+                LIBBOARDGAME_LOG(e.what(), "\nFAIL");
                 return false;
             }
         }
-    log("Test not found: ", name);
+    LIBBOARDGAME_LOG("Test not found: ", name);
     return false;
 }
 

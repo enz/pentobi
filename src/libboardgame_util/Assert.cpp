@@ -56,7 +56,7 @@ AssertionHandler::~AssertionHandler()
 void handle_assertion(const char* expression, const char* file, int line)
 {
     static bool is_during_handle_assertion = false;
-    log(file, ":", line, ": Assertion '", expression, "' failed");
+    LIBBOARDGAME_LOG(file, ":", line, ": Assertion '", expression, "' failed");
     flush_log();
     if (! is_during_handle_assertion)
     {

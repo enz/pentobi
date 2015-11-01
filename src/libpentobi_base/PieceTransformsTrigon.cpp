@@ -15,8 +15,6 @@
 
 namespace libpentobi_base {
 
-using libboardgame_util::log;
-
 //-----------------------------------------------------------------------------
 
 PieceTransformsTrigon::PieceTransformsTrigon()
