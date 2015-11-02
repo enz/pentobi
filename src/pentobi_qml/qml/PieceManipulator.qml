@@ -15,14 +15,12 @@ MouseArea {
     Image {
         source: theme.getImage("piece-manipulator")
         sourceSize { width: root.width; height: root.height }
-        anchors.centerIn: root
         opacity: legal ? 0 : 0.4
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     Image {
         source: theme.getImage("piece-manipulator-legal")
         sourceSize { width: root.width; height: root.height }
-        anchors.centerIn: root
         opacity: legal ? 0.4 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
