@@ -31,7 +31,7 @@ Flickable {
     }
 
     onToPlayChanged: showToPlay()
-    contentHeight: nuColors * height
+    contentHeight: column.height
     flickableDirection: Flickable.VerticalFlick
     clip: true
     onMovementEnded: {
