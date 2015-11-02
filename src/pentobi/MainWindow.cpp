@@ -620,7 +620,7 @@ void MainWindow::commentChanged()
     {
         string charset = m_game.get_root().get_property("CA", "");
         string value = Util::convertSgfValueFromQString(comment, charset);
-        trim_right(value);
+        value = trim_right(value);
         m_game.set_comment(value);
     }
     updateWindowModified();
