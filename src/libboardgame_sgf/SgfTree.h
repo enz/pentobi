@@ -13,7 +13,6 @@
 namespace libboardgame_sgf {
 
 using namespace std;
-using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------
 
