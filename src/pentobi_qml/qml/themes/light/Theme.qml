@@ -3,8 +3,6 @@ import QtQuick 2.0
 QtObject {
     property color backgroundColor: "#CDCACC"
     property color fontColorScore: "#5A5755"
-    property color fontColorMessage: "#F5F1EF"
-    property color backgroundColorMessage: "#64605F"
     property color colorBlue: "#0077D2"
     property color colorYellow: "#EBCD23"
     property color colorRed: "#E63E2C"
