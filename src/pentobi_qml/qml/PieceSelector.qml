@@ -17,7 +17,7 @@ Flickable {
     function showColorImmediately(color) {
         snapAnimation.stop()
         showColorAnimation.stop()
-        contentY = height * color
+        contentY = column.children[color].y
     }
     function showToPlay() {
         if (! transitionsEnabled) {
@@ -26,7 +26,7 @@ Flickable {
         }
         snapAnimation.stop()
         showColorAnimation.stop()
-        showColorMoveAnimation.to = toPlay * height
+        showColorMoveAnimation.to = column.children[toPlay].y
         showColorAnimation.restart()
     }
 
@@ -34,16 +34,17 @@ Flickable {
     contentHeight: nuColors * height
     flickableDirection: Flickable.VerticalFlick
     clip: true
-    // Snap to beginning of pieces if close to it
     onMovementEnded: {
-        var normalizedY = contentY / height
-        var remainderY = normalizedY - Math.floor(normalizedY)
-        if (remainderY > 0.1 && remainderY < 0.9)
-            return
-        var color = Math.min(Math.round(normalizedY), nuColors - 1)
-        showColorAnimation.stop()
-        snapAnimation.to = height * color
-        snapAnimation.restart()
+        var d = 0.5 * width / columns
+        for (var i = 0; i < nuColors; ++i) {
+            var y = column.children[i].y
+            if (Math.abs(contentY - y) < d) {
+                showColorAnimation.stop()
+                snapAnimation.to = y
+                snapAnimation.restart()
+                break
+            }
+        }
     }
     onWidthChanged: showColorImmediately(toPlay)
     onHeightChanged: showColorImmediately(toPlay)
@@ -69,29 +70,31 @@ Flickable {
         }
     }
     Column {
+        id: column
+
         PieceList {
-            width: root.width; height: root.height
-            columns: root.columns; rows: root.rows
+            width: root.width
+            columns: root.columns
             pieces: pieces0
             onPiecePicked: root.piecePicked(piece)
         }
         PieceList {
-            width: root.width; height: root.height
-            columns: root.columns; rows: root.rows
+            width: root.width
+            columns: root.columns
             pieces: pieces1
             onPiecePicked: root.piecePicked(piece)
         }
         PieceList {
             visible: nuColors >= 3
-            width: root.width; height: root.height
-            columns: root.columns; rows: root.rows
+            width: root.width
+            columns: root.columns
             pieces: pieces2
             onPiecePicked: root.piecePicked(piece)
         }
         PieceList {
             visible: nuColors >= 4
-            width: root.width; height: root.height
-            columns: root.columns; rows: root.rows
+            width: root.width
+            columns: root.columns
             pieces: pieces3
             onPiecePicked: root.piecePicked(piece)
         }

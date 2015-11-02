@@ -12,7 +12,7 @@ Grid {
 
         MouseArea {
             width: root.width / columns
-            height: root.height / rows
+            height: width
             onClicked: piecePicked(modelData)
             Component.onCompleted: modelData.parentPieceArea = this
         }

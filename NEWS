@@ -5,7 +5,9 @@ Version 10.UNKNOWN (master)
 
 Android version:
 
-* The piece area now always shows all remaining pieces.
+* The piece area now has enough room to show all pieces of a color. It
+  also removes rows that become empty during the game such that pieces
+  of several colors are visible.
 
 
 Version 10.1.UNKNOWN (v10-fixes)
