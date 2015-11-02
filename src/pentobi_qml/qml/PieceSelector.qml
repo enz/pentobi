@@ -48,7 +48,6 @@ Flickable {
     }
     onWidthChanged: showColorImmediately(toPlay)
     onHeightChanged: showColorImmediately(toPlay)
-    Component.onCompleted: showColorImmediately(toPlay)
 
     SmoothedAnimation {
         id: snapAnimation
@@ -71,6 +70,8 @@ Flickable {
     }
     Column {
         id: column
+
+        onHeightChanged: showColorImmediately(toPlay)
 
         PieceList {
             width: root.width
