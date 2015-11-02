@@ -5,8 +5,7 @@ Version 10.UNKNOWN (master)
 
 Android version:
 
-* The piece area now always shows at least to rows to make it easier
-  to flick vertically between colors.
+* The piece area now always shows all remaining pieces.
 
 
 Version 10.1.UNKNOWN (v10-fixes)

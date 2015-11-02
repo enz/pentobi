@@ -44,14 +44,6 @@ bool compareTransform(const PieceInfo& pieceInfo, const Transform* t1,
             pieceInfo.get_equivalent_transform(t2);
 }
 
-int getNuPiecesLeft(const Board& bd, Color c)
-{
-    unsigned n = 0;
-    for (auto piece : bd.get_pieces_left(c))
-        n += bd.get_nu_left_piece(c, piece);
-    return static_cast<int>(n);
-}
-
 QPointF getGameCoord(const Board& bd, Move mv)
 {
     auto& geo = bd.get_geometry();
@@ -418,10 +410,6 @@ void GameModel::updateProperties()
         emit points0Changed(m_points0);
     if (set(m_points1, static_cast<int>(bd.get_points(Color(1)))))
         emit points1Changed(m_points1);
-    if (set(m_nuPiecesLeft0, getNuPiecesLeft(bd, Color(0))))
-        emit nuPiecesLeft0Changed(m_nuPiecesLeft0);
-    if (set(m_nuPiecesLeft1, getNuPiecesLeft(bd, Color(1))))
-        emit nuPiecesLeft1Changed(m_nuPiecesLeft1);
     if (set(m_hasMoves0, bd.has_moves(Color(0))))
         emit hasMoves0Changed(m_hasMoves0);
     if (set(m_hasMoves1, bd.has_moves(Color(1))))
@@ -432,8 +420,6 @@ void GameModel::updateProperties()
             emit points2Changed(m_points2);
         if (set(m_hasMoves2, bd.has_moves(Color(2))))
             emit hasMoves2Changed(m_hasMoves2);
-        if (set(m_nuPiecesLeft2, getNuPiecesLeft(bd, Color(2))))
-            emit nuPiecesLeft2Changed(m_nuPiecesLeft2);
     }
     if (m_nuColors > 3)
     {
@@ -441,8 +427,6 @@ void GameModel::updateProperties()
             emit points3Changed(m_points3);
         if (set(m_hasMoves3, bd.has_moves(Color(3))))
             emit hasMoves3Changed(m_hasMoves3);
-        if (set(m_nuPiecesLeft3, getNuPiecesLeft(bd, Color(3))))
-            emit nuPiecesLeft3Changed(m_nuPiecesLeft3);
     }
     if (set(m_canUndo, (bd.get_nu_moves() > 0)))
         emit canUndoChanged(m_canUndo);

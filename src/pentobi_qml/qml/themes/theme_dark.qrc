@@ -4,7 +4,6 @@
 <file>dark/board-duo.svg</file>
 <file>dark/board-trigon.svg</file>
 <file>dark/board-trigon-3.svg</file>
-<file>dark/flick.svg</file>
 <file>dark/Theme.qml</file>
 </qresource>
 </RCC>

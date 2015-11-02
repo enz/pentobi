@@ -3,18 +3,14 @@ import QtQuick 2.0
 Flickable {
     id: root
 
-    property real pieceAreaSize
     property int toPlay
     property var pieces0
     property var pieces1
     property var pieces2
     property var pieces3
-    property int nuPiecesLeft0
-    property int nuPiecesLeft1
-    property int nuPiecesLeft2
-    property int nuPiecesLeft3
     property int nuColors
-    property int rows: 1
+    property int columns
+    property int rows
 
     signal piecePicked(var piece)
 
@@ -74,41 +70,29 @@ Flickable {
     }
     Column {
         PieceList {
-            width: root.width
-            height: root.height
-            rows: root.rows
+            width: root.width; height: root.height
+            columns: root.columns; rows: root.rows
             pieces: pieces0
-            nuPiecesLeft: nuPiecesLeft0
-            pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
         PieceList {
-            width: root.width
-            height: root.height
-            rows: root.rows
+            width: root.width; height: root.height
+            columns: root.columns; rows: root.rows
             pieces: pieces1
-            nuPiecesLeft: nuPiecesLeft1
-            pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
         PieceList {
             visible: nuColors >= 3
-            width: root.width
-            height: root.height
-            rows: root.rows
+            width: root.width; height: root.height
+            columns: root.columns; rows: root.rows
             pieces: pieces2
-            nuPiecesLeft: nuPiecesLeft2
-            pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
         PieceList {
             visible: nuColors >= 4
-            width: root.width
-            height: root.height
-            rows: root.rows
+            width: root.width; height: root.height
+            columns: root.columns; rows: root.rows
             pieces: pieces3
-            nuPiecesLeft: nuPiecesLeft3
-            pieceAreaSize: root.pieceAreaSize
             onPiecePicked: root.piecePicked(piece)
         }
     }

@@ -9,7 +9,6 @@ Item
     property var pickedPiece: null
     property bool transitionsEnabled
     property alias busyIndicatorRunning: busyIndicator.running
-    property alias pieceAreaSize: pieceSelector.pieceAreaSize
     property real imageSourceWidth:
         board.isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
     property alias imageSourceHeight: board.gridElementHeight
@@ -45,11 +44,10 @@ Item
             id: board
 
             gameVariant: gameModel.gameVariant
-            // Enforce a geometry that shows at least 2 rows in piece selector
-            // (otherwise vertical flicking becomes too difficult)
             width: Math.min(parent.width,
-                            (isTrigon ? 0.86 : board.rows <= 14 ? 0.67 : 0.76)
-                            * gameDisplay.height)
+                            gameDisplay.height
+                            / (1 + 1 / board.rows
+                               + pieceSelector.rows / pieceSelector.columns))
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -74,39 +72,17 @@ Item
         PieceSelector {
             id: pieceSelector
 
-            // Show less pieces in Duo/Junior such that they are not too small
-            // compared to the pieces on the board
-            property int nuVisibleColumns: board.rows <= 14 ? 7 : 8
-
+            columns: board.rows <= 14 ? 7 : 8
+            rows: 3
             pieces0: _pieces0
             pieces1: _pieces1
             pieces2: _pieces2
             pieces3: _pieces3
-            nuPiecesLeft0: gameModel.nuPiecesLeft0
-            nuPiecesLeft1: gameModel.nuPiecesLeft1
-            nuPiecesLeft2: gameModel.nuPiecesLeft2
-            nuPiecesLeft3: gameModel.nuPiecesLeft3
             toPlay: gameModel.toPlay
             nuColors: gameModel.nuColors
             width: board.width
+            height: width / columns * rows
             anchors.horizontalCenter: board.horizontalCenter
-
-            // Take into account that the effective visible width of the piece
-            // list is only 94% of the piece selector width because of the
-            // images indicating that the list is flickable.
-            pieceAreaSize: 0.94 * board.width / nuVisibleColumns
-
-            rows: {
-                if (pieceAreaSize == 0)
-                    return 1
-                var height = gameDisplay.height - board.height - scoreDisplay.height
-                var rows = Math.floor(height / pieceAreaSize)
-                if (rows == 0)
-                    return 1
-                return Math.min(Math.ceil(gameModel.nuPieces / nuVisibleColumns), rows)
-            }
-
-            height: rows * pieceAreaSize
             onPiecePicked: Logic.pickPiece(piece)
         }
     }

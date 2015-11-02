@@ -4,7 +4,6 @@
 <file>light/board-duo.svg</file>
 <file>light/board-trigon.svg</file>
 <file>light/board-trigon-3.svg</file>
-<file>light/flick.svg</file>
 <file>light/Theme.qml</file>
 </qresource>
 </RCC>
