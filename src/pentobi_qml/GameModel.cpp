@@ -407,6 +407,10 @@ void GameModel::updateProperties()
         emit points0Changed(m_points0);
     if (set(m_points1, static_cast<int>(bd.get_points(Color(1)))))
         emit points1Changed(m_points1);
+    if (set(m_bonus0, static_cast<int>(bd.get_bonus(Color(0)))))
+        emit bonus0Changed(m_bonus0);
+    if (set(m_bonus1, static_cast<int>(bd.get_bonus(Color(1)))))
+        emit bonus1Changed(m_bonus1);
     if (set(m_hasMoves0, bd.has_moves(Color(0))))
         emit hasMoves0Changed(m_hasMoves0);
     if (set(m_hasMoves1, bd.has_moves(Color(1))))
@@ -415,6 +419,8 @@ void GameModel::updateProperties()
     {
         if (set(m_points2, static_cast<int>(bd.get_points(Color(2)))))
             emit points2Changed(m_points2);
+        if (set(m_bonus2, static_cast<int>(bd.get_bonus(Color(2)))))
+            emit bonus2Changed(m_bonus2);
         if (set(m_hasMoves2, bd.has_moves(Color(2))))
             emit hasMoves2Changed(m_hasMoves2);
     }
@@ -422,6 +428,8 @@ void GameModel::updateProperties()
     {
         if (set(m_points3, static_cast<int>(bd.get_points(Color(3)))))
             emit points3Changed(m_points3);
+        if (set(m_bonus3, static_cast<int>(bd.get_bonus(Color(3)))))
+            emit bonus3Changed(m_bonus3);
         if (set(m_hasMoves3, bd.has_moves(Color(3))))
             emit hasMoves3Changed(m_hasMoves3);
     }

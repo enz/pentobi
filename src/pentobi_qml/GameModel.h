@@ -31,6 +31,10 @@ class GameModel
     Q_PROPERTY(int points1 MEMBER m_points1 NOTIFY points1Changed)
     Q_PROPERTY(int points2 MEMBER m_points2 NOTIFY points2Changed)
     Q_PROPERTY(int points3 MEMBER m_points3 NOTIFY points3Changed)
+    Q_PROPERTY(int bonus0 MEMBER m_bonus0 NOTIFY bonus0Changed)
+    Q_PROPERTY(int bonus1 MEMBER m_bonus1 NOTIFY bonus1Changed)
+    Q_PROPERTY(int bonus2 MEMBER m_bonus2 NOTIFY bonus2Changed)
+    Q_PROPERTY(int bonus3 MEMBER m_bonus3 NOTIFY bonus3Changed)
     Q_PROPERTY(bool hasMoves0 MEMBER m_hasMoves0 NOTIFY hasMoves0Changed)
     Q_PROPERTY(bool hasMoves1 MEMBER m_hasMoves1 NOTIFY hasMoves1Changed)
     Q_PROPERTY(bool hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
@@ -99,6 +103,14 @@ signals:
 
     void points3Changed(int);
 
+    void bonus0Changed(int);
+
+    void bonus1Changed(int);
+
+    void bonus2Changed(int);
+
+    void bonus3Changed(int);
+
     void hasMoves0Changed(int);
 
     void hasMoves1Changed(int);
@@ -135,6 +147,14 @@ private:
     int m_points2 = 0;
 
     int m_points3 = 0;
+
+    int m_bonus0 = 0;
+
+    int m_bonus1 = 0;
+
+    int m_bonus2 = 0;
+
+    int m_bonus3 = 0;
 
     bool m_hasMoves0 = true;
 

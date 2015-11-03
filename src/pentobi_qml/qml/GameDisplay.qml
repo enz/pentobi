@@ -57,6 +57,10 @@ Item
             points1: gameModel.points1
             points2: gameModel.points2
             points3: gameModel.points3
+            bonus0: gameModel.bonus0
+            bonus1: gameModel.bonus1
+            bonus2: gameModel.bonus2
+            bonus3: gameModel.bonus3
             hasMoves0: gameModel.hasMoves0
             hasMoves1: gameModel.hasMoves1
             hasMoves2: gameModel.hasMoves2

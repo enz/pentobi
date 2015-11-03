@@ -9,6 +9,8 @@ Android version:
   also removes rows that become empty during the game such that pieces
   of several colors are visible, and orders the colors such that the
   color to play is always on top.
+* The score display now indicates a bonus by appending a single/double
+  quote to the number.
 
 
 Version 10.1.UNKNOWN (v10-fixes)

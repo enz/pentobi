@@ -110,6 +110,25 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status,
         }
 }
 
+unsigned Board::get_bonus(Color c) const
+{
+    if (get_pieces_left(c).size() > 0)
+        return 0;
+    unsigned bonus = m_bonus_all_pieces;
+    unsigned i = m_moves.size();
+    while (i > 0)
+    {
+        --i;
+        if (m_moves[i].color == c)
+        {
+            if (get_move_info(m_moves[i].move).size() == 1)
+                bonus += m_bonus_one_piece;
+            break;
+        }
+    }
+    return bonus;
+}
+
 Color Board::get_effective_to_play() const
 {
     Color c = m_state_base.to_play;

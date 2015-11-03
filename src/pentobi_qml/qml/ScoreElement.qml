@@ -7,6 +7,7 @@ Item {
     property bool isFinal
     property bool isToPlay
     property int value
+    property int bonus
     property real pointSize
 
     Rectangle {
@@ -24,7 +25,8 @@ Item {
     Text {
         id: scoreText
 
-        text: value
+        text: (isFinal ? "<u>" + value + "</u>" : value)
+              + (bonus == 15 ? "'"  : bonus == 20 ? "\"" : "")
         color: theme.fontColorScore
         anchors {
             left: point.right
@@ -33,7 +35,6 @@ Item {
         }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
-        font.underline: isFinal
         font.pixelSize: 1.5 * pointSize
     }
 }

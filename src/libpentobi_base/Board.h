@@ -131,8 +131,11 @@ public:
         of a unique piece per player. */
     unsigned get_nu_left_piece(Color c, Piece piece) const;
 
-    /** Get number of points by a color including the bonus. */
+    /** Get number of points of a color including the bonus. */
     unsigned get_points(Color c) const;
+
+    /** Get number of bonus points of a color. */
+    unsigned get_bonus(Color c) const;
 
     /** Is a point a potential attachment point for a color.
         Does not check if the point is forbidden. */
