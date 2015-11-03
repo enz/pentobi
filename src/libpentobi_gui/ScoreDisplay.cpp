@@ -118,22 +118,17 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
         y += 2 * lineWidth;
         if (y > height() - 1)
             y = height() - 1;
-        painter.drawLine(x, y,
-                         x + metrics.width(hasBonus ?
-                                               text.left(text.length() - 1) :
-                                               text),
-                         y);
+        painter.drawLine(x + (hasBonus ? metrics.width(text.left(1)) : 0), y,
+                         x + metrics.width(text), y);
     }
 }
 
 QString ScoreDisplay::getScoreText(unsigned points, unsigned bonus) const
 {
-    QString text;
-    text.setNum(points);
-    if (bonus == 15)
-        text.append("\u00B9");
-    else if (bonus == 20)
-        text.append("\u00B2");
+    QString text =
+            QString("%1%2")
+            .arg(bonus == 15 ? "\u2b52" : bonus == 20 ?"\u2b51" : "")
+            .arg(points);
     return text;
 }
 

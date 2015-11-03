@@ -27,8 +27,8 @@ Item {
 
         text: ! isFinal ?
                   value :
-                  "<u>" + value + "</u>"
-                  + (bonus == 15 ? "\u00B9"  : bonus == 20 ? "\u00B2" : "")
+                  (bonus == 15 ? "\u2b52"  : bonus == 20 ? "\u2b51" : "")
+                  + "<u>" + value + "</u>"
         color: theme.fontColorScore
         anchors {
             left: point.right
