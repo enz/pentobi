@@ -7,7 +7,7 @@ QtObject {
     property color colorYellow: "#EBCD23"
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
-    property real toPlayColorLighter: 4
+    property real toPlayColorLighter: 1.7
 
     function getImage(name) {
         if (name.lastIndexOf("piece-manipulator", 0) === 0
