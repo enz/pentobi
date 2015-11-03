@@ -2,6 +2,8 @@ Version 10.UNKNOWN (master)
 ===========================
 
 * The compilation requires now at least Qt 5.1 and GCC 4.9 or MSVC 2015.
+* The score display now indicates bonuses by appending a superscript
+  1 or 2 to the value.
 
 Android version:
 
@@ -9,8 +11,6 @@ Android version:
   also removes rows that become empty during the game such that pieces
   of several colors are visible, and orders the colors such that the
   color to play is always on top.
-* The score display now indicates bonuses by appending a superscript
-  1 or 2 to the value.
 
 
 Version 10.1.UNKNOWN (v10-fixes)

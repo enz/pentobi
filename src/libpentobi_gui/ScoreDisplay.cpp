@@ -46,7 +46,8 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
                         m_colorDotSize);
     QString text = getScoreText(c);
     bool underline = ! m_hasMoves[c];
-    drawText(painter, text, x + m_colorDotWidth, y, underline);
+    bool hasBonus = m_bonus[c] != 0;
+    drawText(painter, text, x + m_colorDotWidth, y, underline, hasBonus);
 }
 
 void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
@@ -66,7 +67,7 @@ void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
                         m_colorDotSize);
     QString text = getScoreText2(c1, c2);
     bool underline = (! m_hasMoves[c1] && ! m_hasMoves[c2]);
-    drawText(painter, text, x + m_twoColorDotWidth, y, underline);
+    drawText(painter, text, x + m_twoColorDotWidth, y, underline, false);
 }
 
 void ScoreDisplay::drawScore3(QPainter& painter, int x)
@@ -93,11 +94,11 @@ void ScoreDisplay::drawScore3(QPainter& painter, int x)
                             m_colorDotSize, m_colorDotSize);
     QString text = getScoreText3();
     bool underline = ! m_hasMoves[Color(3)];
-    drawText(painter, text, x + m_twoColorDotWidth, y, underline);
+    drawText(painter, text, x + m_twoColorDotWidth, y, underline, false);
 }
 
 void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
-                            int y, bool underline)
+                            int y, bool underline, bool hasBonus)
 {
     painter.setFont(m_font);
     QFontMetrics metrics(m_font);
@@ -117,25 +118,33 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
         y += 2 * lineWidth;
         if (y > height() - 1)
             y = height() - 1;
-        painter.drawLine(x, y, x + metrics.width(text), y);
+        painter.drawLine(x, y,
+                         x + metrics.width(hasBonus ?
+                                               text.left(text.length() - 1) :
+                                               text),
+                         y);
     }
 }
 
-QString ScoreDisplay::getScoreText(unsigned points) const
+QString ScoreDisplay::getScoreText(unsigned points, unsigned bonus) const
 {
     QString text;
     text.setNum(points);
+    if (bonus == 15)
+        text.append("\u00B9");
+    else if (bonus == 20)
+        text.append("\u00B2");
     return text;
 }
 
 QString ScoreDisplay::getScoreText(Color c)
 {
-    return getScoreText(m_points[c]);
+    return getScoreText(m_points[c], m_bonus[c]);
 }
 
 QString ScoreDisplay::getScoreText2(Color c1, Color c2)
 {
-    return getScoreText(m_points[c1] + m_points[c2]);
+    return getScoreText(m_points[c1] + m_points[c2], 0);
 }
 
 QString ScoreDisplay::getScoreText3()
@@ -295,11 +304,14 @@ void ScoreDisplay::updateScore(const Board& bd)
     {
         bool hasMoves = bd.has_moves(c);
         auto points = bd.get_points(c);
-        if (hasMoves != m_hasMoves[c] || m_points[c] != points)
+        auto bonus = bd.get_bonus(c);
+        if (hasMoves != m_hasMoves[c] || m_points[c] != points
+                || m_bonus[c] != points)
         {
             hasChanged = true;
             m_hasMoves[c] = hasMoves;
             m_points[c] = points;
+            m_bonus[c] = bonus;
         }
     }
     if (variant == Variant::classic_3)
