@@ -26,9 +26,7 @@ Item {
         id: scoreText
 
         text: ! isFinal ?
-                  value :
-                  (bonus == 15 ? "\u2b52"  : bonus == 20 ? "\u2b51" : "")
-                  + "<u>" + value + "</u>"
+                  value : (bonus > 0 ? "*" : "") + "<u>" + value + "</u>"
         color: theme.fontColorScore
         anchors {
             left: point.right

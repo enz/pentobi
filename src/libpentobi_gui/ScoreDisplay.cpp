@@ -127,7 +127,7 @@ QString ScoreDisplay::getScoreText(unsigned points, unsigned bonus) const
 {
     QString text =
             QString("%1%2")
-            .arg(bonus == 15 ? "\u2b52" : bonus == 20 ?"\u2b51" : "")
+            .arg(bonus > 0 ? "*" : "")
             .arg(points);
     return text;
 }
