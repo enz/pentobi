@@ -14,90 +14,158 @@ Flickable {
 
     signal piecePicked(var piece)
 
-    function showColorImmediately(color) {
-        snapAnimation.stop()
-        showColorAnimation.stop()
-        contentY = column.children[color].y
-    }
-    function showToPlay() {
-        if (! transitionsEnabled) {
-            showColorImmediately(toPlay)
-            return
-        }
-        snapAnimation.stop()
-        showColorAnimation.stop()
-        showColorMoveAnimation.to = column.children[toPlay].y
-        showColorAnimation.restart()
-    }
-
-    onToPlayChanged: showToPlay()
-    contentHeight: column.height
+    contentHeight: pieceList0.height + pieceList1.height
+                   + pieceList2.height + pieceList3.height
     flickableDirection: Flickable.VerticalFlick
     clip: true
-    onMovementEnded: {
-        var d = 0.5 * width / columns
-        for (var i = 0; i < nuColors; ++i) {
-            var y = column.children[i].y
-            if (Math.abs(contentY - y) < d) {
-                showColorAnimation.stop()
-                snapAnimation.to = y
-                snapAnimation.restart()
-                break
+
+    PieceList {
+        id: pieceList0
+
+        width: root.width
+        columns: root.columns
+        pieces: pieces0
+        onPiecePicked: root.piecePicked(piece)
+    }
+    PieceList {
+        id: pieceList1
+
+        width: root.width
+        columns: root.columns
+        pieces: pieces1
+        onPiecePicked: root.piecePicked(piece)
+    }
+    PieceList {
+        id: pieceList2
+
+        visible: nuColors >= 3
+        width: root.width
+        columns: root.columns
+        pieces: pieces2
+        onPiecePicked: root.piecePicked(piece)
+    }
+    PieceList {
+        id: pieceList3
+
+        visible: nuColors >= 4
+        width: root.width
+        columns: root.columns
+        pieces: pieces3
+        onPiecePicked: root.piecePicked(piece)
+    }
+
+    states: [
+        State {
+            name: "toPlay0"
+            when: toPlay === 0
+
+            PropertyChanges {
+                target: pieceList0
+                y: 0
+            }
+            PropertyChanges {
+                target: pieceList1
+                y: pieceList0.height
+            }
+            PropertyChanges {
+                target: pieceList2
+                y: pieceList0.height + pieceList1.height
+            }
+            PropertyChanges {
+                target: pieceList3
+                y: pieceList0.height + pieceList1.height + pieceList2.height
+            }
+        },
+        State {
+            name: "toPlay1"
+            when: toPlay === 1
+
+            PropertyChanges {
+                target: pieceList1
+                y: 0
+            }
+            PropertyChanges {
+                target: pieceList2
+                y: pieceList1.height
+            }
+            PropertyChanges {
+                target: pieceList3
+                y: pieceList1.height + pieceList2.height
+            }
+            PropertyChanges {
+                target: pieceList0
+                y: pieceList1.height + pieceList2.height + pieceList3.height
+            }
+        },
+        State {
+            name: "toPlay2"
+            when: toPlay === 2
+
+            PropertyChanges {
+                target: pieceList2
+                y: 0
+            }
+            PropertyChanges {
+                target: pieceList3
+                y: pieceList2.height
+            }
+            PropertyChanges {
+                target: pieceList0
+                y: pieceList2.height + pieceList3.height
+            }
+            PropertyChanges {
+                target: pieceList1
+                y: pieceList2.height + pieceList3.height + pieceList0.height
+            }
+        },
+        State {
+            name: "toPlay3"
+            when: toPlay === 3
+
+            PropertyChanges {
+                target: pieceList3
+                y: 0
+            }
+            PropertyChanges {
+                target: pieceList0
+                y: pieceList3.height
+            }
+            PropertyChanges {
+                target: pieceList1
+                y: pieceList3.height + pieceList0.height
+            }
+            PropertyChanges {
+                target: pieceList2
+                y: pieceList3.height + pieceList0.height + pieceList1.height
             }
         }
-    }
-    onWidthChanged: showColorImmediately(toPlay)
-    onHeightChanged: showColorImmediately(toPlay)
+    ]
+    transitions:
+        Transition {
+            enabled: pieceSelectorTransitionsEnabled
 
-    SmoothedAnimation {
-        id: snapAnimation
-
-        target: root
-        property: "contentY"
-        velocity: 200
-    }
-    SequentialAnimation {
-        id: showColorAnimation
-
-        PauseAnimation { duration: 350 }
-        NumberAnimation {
-            id: showColorMoveAnimation
-
-            target: root
-            property: "contentY"
-            duration: 50
+            SequentialAnimation {
+                PropertyAction {
+                    target: pieceList0; property: "y"; value: pieceList0.y }
+                PropertyAction {
+                    target: pieceList1; property: "y"; value: pieceList1.y }
+                PropertyAction {
+                    target: pieceList2; property: "y"; value: pieceList2.y }
+                PropertyAction {
+                    target: pieceList3; property: "y"; value: pieceList3.y }
+                // Delay showing new color because of piece placement animation
+                PauseAnimation { duration: pieceTransitionsEnabled ? 200 : 0 }
+                NumberAnimation {
+                    target: root; property: "opacity"; to: 0; duration: 100
+                }
+                PropertyAction { target: pieceList0; property: "y" }
+                PropertyAction { target: pieceList1; property: "y" }
+                PropertyAction { target: pieceList2; property: "y" }
+                PropertyAction { target: pieceList3; property: "y" }
+                PropertyAction { target: root; property: "contentY"; value: 0 }
+                NumberAnimation {
+                    target: root; property: "opacity"; to: 1; duration: 100
+                }
+            }
         }
-    }
-    Column {
-        id: column
-
-        onHeightChanged: showColorImmediately(toPlay)
-
-        PieceList {
-            width: root.width
-            columns: root.columns
-            pieces: pieces0
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceList {
-            width: root.width
-            columns: root.columns
-            pieces: pieces1
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceList {
-            visible: nuColors >= 3
-            width: root.width
-            columns: root.columns
-            pieces: pieces2
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceList {
-            visible: nuColors >= 4
-            width: root.width
-            columns: root.columns
-            pieces: pieces3
-            onPiecePicked: root.piecePicked(piece)
-        }
-    }
 }

@@ -22,9 +22,9 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
     }
     callDelayTimer.call(function() {
         initGameVariant(gameVariant)
-        gameDisplay.transitionsEnabled = false
+        gameDisplay.pieceTransitionsEnabled = false
+        gameDisplay.pieceSelectorTransitionsEnabled = false
         initComputerColors()
-        gameDisplay.showToPlay()
     })
 }
 
@@ -165,7 +165,6 @@ function genMove() {
     cancelGenMove()
     gameDisplay.pickedPiece = null
     gameDisplay.busyIndicatorRunning = true
-    gameDisplay.showToPlay()
     isMoveHintRunning = false
     playerModel.startGenMove(gameModel)
 }
@@ -187,6 +186,8 @@ function init() {
             if (! computerPlaysAll())
                 checkComputerMove()
         }
+        gameDisplay.pieceTransitionsEnabled = true
+        gameDisplay.pieceSelectorTransitionsEnabled = true
     })
 }
 
@@ -205,9 +206,12 @@ function initGameVariant(gameVariant) {
     cancelGenMove()
     hideComputerColorDialog()
     clearMarks()
+    gameDisplay.pieceTransitionsEnabled = false
+    gameDisplay.pieceSelectorTransitionsEnabled = false
     gameDisplay.destroyPieces()
     gameModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
+    gameDisplay.showToPlay()
 }
 
 function isComputerToPlay() {
@@ -251,7 +255,8 @@ function moveGenerated(move) {
         isMoveHintRunning = false
         return
     }
-    gameDisplay.transitionsEnabled = true
+    gameDisplay.pieceTransitionsEnabled = true
+    gameDisplay.pieceSelectorTransitionsEnabled = true
     gameModel.playMove(move)
     if (computerPlaysAll())
         clearMarks()
@@ -281,7 +286,8 @@ function newGame(verifyAbortGame)
     gameDisplay.pickedPiece = null
     clearMarks()
     hideComputerColorDialog()
-    gameDisplay.transitionsEnabled = false
+    gameDisplay.pieceTransitionsEnabled = false
+    gameDisplay.pieceSelectorTransitionsEnabled = false
     gameModel.newGame()
     gameDisplay.showToPlay()
     initComputerColors()
@@ -290,7 +296,8 @@ function newGame(verifyAbortGame)
 function play(pieceModel, gameCoord) {
     cancelGenMove()
     var wasComputerToPlay = isComputerToPlay()
-    gameDisplay.transitionsEnabled = true
+    gameDisplay.pieceTransitionsEnabled = true
+    gameDisplay.pieceSelectorTransitionsEnabled = true
     gameModel.play(pieceModel, gameCoord)
     clearMarks()
     markLastMove()
@@ -404,11 +411,8 @@ function undo() {
     if (! gameModel.canUndo)
         return
     cancelGenMove()
-    // Immediately show the last color to move, otherwise the piece movement
-    // animation will target a part of the piece selector that is currently not
-    // visible
-    gameDisplay.showPiecesImmediately(gameModel.getLastMoveColor())
-    gameDisplay.transitionsEnabled = true
+    gameDisplay.pieceTransitionsEnabled = true
+    gameDisplay.pieceSelectorTransitionsEnabled = true
     gameModel.undo()
     clearMarks()
     markLastMove()

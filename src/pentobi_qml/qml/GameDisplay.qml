@@ -7,7 +7,8 @@ Item
     id: gameDisplay // Referenced by Piece*.qml
 
     property var pickedPiece: null
-    property bool transitionsEnabled
+    property bool pieceTransitionsEnabled
+    property bool pieceSelectorTransitionsEnabled
     property alias busyIndicatorRunning: busyIndicator.running
     property real imageSourceWidth:
         board.isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
@@ -21,11 +22,8 @@ Item
 
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
+    function showToPlay() { pieceSelector.contentY = 0 }
     function showMoveHint(move) { Logic.showMoveHint(move) }
-    function showToPlay() { pieceSelector.showToPlay() }
-    function showPiecesImmediately(color) {
-        pieceSelector.showColorImmediately(color)
-    }
     function findPiece(pieceModel, color) {
         return Logic.findPiece(pieceModel, color)
     }

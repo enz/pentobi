@@ -60,6 +60,8 @@ ApplicationWindow {
     GameDisplay {
         id: gameDisplay
 
+        pieceTransitionsEnabled: false
+        pieceSelectorTransitionsEnabled: false
         focus: true
         anchors.fill: contentItem
         onPlay: Logic.play(pieceModel, gameCoord)

@@ -59,12 +59,9 @@ function findPiece(pieceModel, color) {
 }
 
 function pickPiece(piece) {
-    if (playerModel.isGenMoveRunning || gameModel.isGameOver)
+    if (playerModel.isGenMoveRunning || gameModel.isGameOver
+            || piece.pieceModel.color !== gameModel.toPlay)
         return
-    if (piece.pieceModel.color !== gameModel.toPlay) {
-        showToPlay()
-        return
-    }
     if (! pieceManipulator.visible) {
         // Position pieceManipulator at center of piece if possible, but
         // make sure it is completely visible
@@ -76,7 +73,7 @@ function pickPiece(piece) {
         pieceManipulator.x = x
         pieceManipulator.y = y
     }
-    transitionsEnabled = true
+    pieceTransitionsEnabled = true
     pickedPiece = piece
 }
 
