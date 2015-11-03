@@ -3,6 +3,7 @@ import QtQuick 2.0
 Flickable {
     id: root
 
+    property string gameVariant
     property int toPlay
     property var pieces0
     property var pieces1
@@ -65,11 +66,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList1
-                y: pieceList0.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList0.height :
+                       pieceList0.height + pieceList2.height
             }
             PropertyChanges {
                 target: pieceList2
-                y: pieceList0.height + pieceList1.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList0.height + pieceList1.height :
+                       pieceList0.height
             }
             PropertyChanges {
                 target: pieceList3
@@ -86,11 +91,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList2
-                y: pieceList1.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList1.height :
+                       pieceList1.height + pieceList3.height
             }
             PropertyChanges {
                 target: pieceList3
-                y: pieceList1.height + pieceList2.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList1.height + pieceList2.height :
+                       pieceList1.height
             }
             PropertyChanges {
                 target: pieceList0
@@ -107,11 +116,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList3
-                y: pieceList2.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList2.height :
+                       pieceList2.height + pieceList0.height
             }
             PropertyChanges {
                 target: pieceList0
-                y: pieceList2.height + pieceList3.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList2.height + pieceList3.height :
+                       pieceList2.height
             }
             PropertyChanges {
                 target: pieceList1
@@ -128,11 +141,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList0
-                y: pieceList3.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList3.height :
+                       pieceList3.height + pieceList1.height
             }
             PropertyChanges {
                 target: pieceList1
-                y: pieceList3.height + pieceList0.height
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                       pieceList3.height + pieceList0.height :
+                       pieceList3.height
             }
             PropertyChanges {
                 target: pieceList2

@@ -76,6 +76,7 @@ Item
 
             columns: board.rows <= 14 ? 7 : 8
             rows: 3
+            gameVariant: gameModel.gameVariant
             pieces0: _pieces0
             pieces1: _pieces1
             pieces2: _pieces2
