@@ -83,8 +83,7 @@ GameModel::GameModel(QObject* parent)
     : QObject(parent),
       m_game(getInitialGameVariant()),
       m_gameVariant(to_string_id(m_game.get_variant())),
-      m_nuColors(getBoard().get_nu_colors()),
-      m_nuPieces(getBoard().get_nu_pieces())
+      m_nuColors(getBoard().get_nu_colors())
 {
     createPieceModels();
     updateProperties();
@@ -244,8 +243,6 @@ void GameModel::initGameVariant(QString gameVariant)
     if (set(m_nuColors, static_cast<int>(bd.get_nu_colors())))
         emit nuColorsChanged(m_nuColors);
     createPieceModels();
-    if (set(m_nuPieces, static_cast<int>(bd.get_nu_pieces())))
-        emit nuPiecesChanged(m_nuPieces);
     m_gameVariant = gameVariant;
     emit gameVariantChanged(gameVariant);
     updateProperties();

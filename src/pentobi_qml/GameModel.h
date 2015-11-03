@@ -25,7 +25,6 @@ class GameModel
     Q_PROPERTY(QString gameVariant MEMBER m_gameVariant
                NOTIFY gameVariantChanged)
     Q_PROPERTY(int nuColors MEMBER m_nuColors NOTIFY nuColorsChanged)
-    Q_PROPERTY(int nuPieces MEMBER m_nuPieces NOTIFY nuPiecesChanged)
     Q_PROPERTY(int toPlay MEMBER m_toPlay NOTIFY toPlayChanged)
     Q_PROPERTY(int altPlayer MEMBER m_altPlayer NOTIFY altPlayerChanged)
     Q_PROPERTY(int points0 MEMBER m_points0 NOTIFY points0Changed)
@@ -118,16 +117,12 @@ signals:
 
     void nuColorsChanged(int);
 
-    void nuPiecesChanged(int);
-
 private:
     Game m_game;
 
     QString m_gameVariant;
 
     int m_nuColors;
-
-    int m_nuPieces;
 
     int m_toPlay = 0;
 
