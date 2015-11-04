@@ -11,8 +11,11 @@
 #include "Move.h"
 #include "PieceMap.h"
 #include "Point.h"
+#include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
+
+using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
