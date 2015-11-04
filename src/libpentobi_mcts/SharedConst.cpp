@@ -140,26 +140,23 @@ void SharedConst::init(bool is_followup)
     // Initialize precomp_moves
     for (Color c : bd.get_colors())
     {
+        auto& precomp_moves = this->precomp_moves[c];
+        const auto& old_precomp_moves =
+            (is_followup ? precomp_moves : bc.get_precomp_moves());
+
         m_is_forbidden.set();
         for (Point p : bd)
             if (! bd.is_forbidden(p, c))
             {
                 auto adj_status = bd.get_adj_status(p, c);
                 for (Piece piece : bd.get_pieces_left(c))
-                    for (Move mv : bd.get_moves(piece, p, adj_status))
-                    {
-                        if (! m_is_forbidden[mv])
-                            continue;
-                        if (! bd.is_forbidden(c, mv))
+                    for (Move mv : old_precomp_moves.get_moves(piece, p,
+                                                               adj_status))
+                        if (m_is_forbidden[mv] && ! bd.is_forbidden(c, mv))
                             m_is_forbidden.clear(mv);
-                    }
             }
 
-        auto& precomp_moves = this->precomp_moves[c];
         precomp_moves.clear();
-        // Construct new lists in-place from old if it is a follow-up position
-        const auto& old_precomp_moves =
-            (is_followup ? precomp_moves : bc.get_precomp_moves());
         for (Point p : bd)
         {
             if (bd.is_forbidden(p, c))
