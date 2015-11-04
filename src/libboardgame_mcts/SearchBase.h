@@ -403,9 +403,6 @@ protected:
 
     virtual void on_start_search(bool is_followup);
 
-    virtual void on_simulation_finished(size_t n, const State& state,
-                                        const Simulation& simulation);
-
     /** Time source for current search.
         Only valid during a search. */
     TimeSource& get_time_source();
@@ -1056,16 +1053,6 @@ inline auto SearchBase<S, M, R>::get_tree() const -> const Tree&
 }
 
 template<class S, class M, class R>
-void SearchBase<S, M, R>::on_simulation_finished(size_t n, const State& state,
-                                                 const Simulation& simulation)
-{
-    LIBBOARDGAME_UNUSED(n);
-    LIBBOARDGAME_UNUSED(state);
-    LIBBOARDGAME_UNUSED(simulation);
-    // Default implementation does nothing
-}
-
-template<class S, class M, class R>
 void SearchBase<S, M, R>::on_start_search(bool is_followup)
 {
     // Default implementation does nothing
@@ -1481,7 +1468,6 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
             update_rave(thread_state);
         if (SearchParamConst::use_lgr)
             update_lgr(thread_state);
-        on_simulation_finished(nu_simulations, state, simulation);
     }
 }
 
