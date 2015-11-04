@@ -230,6 +230,8 @@ private:
     PrecompMoves::Range get_moves(Color c, Piece piece, Point p,
                                   unsigned adj_status) const;
 
+    bool has_moves(Color c, Piece piece, Point p, unsigned adj_status) const;
+
     const PieceMap<bool>& get_is_piece_considered() const;
 
     const Board::PiecesLeftList& get_pieces_considered(Color c);
@@ -352,6 +354,12 @@ inline PlayerInt State::get_player() const
     if ( m_bd.get_variant() == Variant::classic_3 && player == 3)
         player += m_bd.get_alt_player();
     return static_cast<PlayerInt>(player);
+}
+
+inline bool State::has_moves(Color c, Piece piece, Point p,
+                             unsigned adj_status) const
+{
+    return m_shared_const.precomp_moves[c].has_moves(piece, p, adj_status);
 }
 
 inline void State::play_in_tree(Move mv)

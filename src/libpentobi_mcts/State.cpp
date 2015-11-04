@@ -52,6 +52,8 @@ inline void State::add_moves(Point p, Color c,
     auto adj_status = m_bd.get_adj_status(p, c);
     for (Piece piece : pieces)
     {
+        if (! has_moves(c, piece, p, adj_status))
+            continue;
         auto gamma_piece = m_gamma_piece[piece];
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
@@ -66,6 +68,8 @@ inline void State::add_moves(Point p, Color c, Piece piece,
                              unsigned adj_status, double& total_gamma,
                              MoveList& moves, unsigned& nu_moves)
 {
+    if (! has_moves(c, piece, p, adj_status))
+        return;
     auto& marker = m_marker[c];
     auto& playout_features = m_playout_features[c];
     auto gamma_piece = m_gamma_piece[piece];
@@ -504,11 +508,15 @@ void State::init_moves_without_gamma(Color c)
             {
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces)
+                {
+                    if (! has_moves(c, piece, p, adj_status))
+                        continue;
                     for (Move mv : get_moves(c, piece, p, adj_status))
                         if (! marker[mv]
                                 && check_forbidden(is_forbidden, mv, moves,
                                                    nu_moves))
                             marker.set(mv);
+                }
                 m_moves_added_at[c][p] = true;
             }
         moves.resize(nu_moves);

@@ -87,9 +87,14 @@ public:
     Range get_moves(Piece piece, Point p, unsigned adj_status = 0) const
     {
         auto& range = m_moves_range[p][adj_status][piece];
-        auto begin = move_lists_begin() + range.begin;
-        auto end = begin + range.size;
+        auto begin = move_lists_begin() + range.begin();
+        auto end = begin + range.size();
         return Range{begin, end};
+    }
+
+    bool has_moves(Piece piece, Point p, unsigned adj_status) const
+    {
+        return ! m_moves_range[p][adj_status][piece].empty();
     }
 
     /** Begin of storage for move lists.
@@ -101,23 +106,28 @@ public:
     const Move* move_lists_begin() const { return &(*m_move_lists.begin()); }
 
 private:
-    struct CompressedRange
+    class CompressedRange
     {
-        unsigned begin : 24;
-
-        unsigned size : 8;
-
+    public:
         CompressedRange() = default;
 
         CompressedRange(unsigned begin, unsigned size)
         {
             LIBBOARDGAME_ASSERT(begin < max_move_lists_sum_length);
             LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
-            LIBBOARDGAME_ASSERT(begin < (1 << 24));
-            this->begin = begin & ((1 << 24) - 1);
+            static_assert(max_move_lists_sum_length < (1 << 24), "");
             LIBBOARDGAME_ASSERT(size < (1 << 8));
-            this->size = size & ((1 << 8) - 1);
+            m_val = size == 0 ? 0 : (begin << 8) | size;
         }
+
+        bool empty() const { return m_val == 0; }
+
+        unsigned begin() const { return m_val >> 8; }
+
+        unsigned size() const { return m_val & 0xff; }
+
+    private:
+        uint32_t m_val;
     };
 
     /** See m_move_lists. */
