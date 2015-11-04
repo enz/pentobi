@@ -606,6 +606,7 @@ private:
 
     bool check_abort(const ThreadState& thread_state, Float root_count) const;
 
+    LIBBOARDGAME_NOINLINE
     bool check_abort_expensive(ThreadState& thread_state) const;
 
     void check_create_threads();
