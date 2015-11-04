@@ -774,6 +774,14 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         LIBBOARDGAME_LOG_THREAD(thread_state, "Search aborted");
         return true;
     }
+    static_assert(numeric_limits<Float>::radix == 2, "");
+    auto count = m_tree.get_root().get_visit_count();
+    if (count >= (size_t(1) << numeric_limits<Float>::digits) - 1)
+    {
+        LIBBOARDGAME_LOG_THREAD(thread_state,
+                                "Max count supported by float exceeded");
+        return true;
+    }
     auto time = m_timer();
     if (! m_deterministic && time < 0.1)
         // Simulations per second might be inaccurate for very small times
@@ -802,7 +810,6 @@ bool SearchBase<S, M, R>::check_abort_expensive(
     else
     {
         // Search uses count limit
-        auto count = m_tree.get_root().get_visit_count();
         remaining_simulations = m_max_count - count;
         remaining_time = remaining_simulations / simulations_per_sec;
     }
@@ -1411,13 +1418,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                 break;
             }
         }
-    static_assert(numeric_limits<Float>::radix == 2, "");
-    if (m_tree.get_root().get_visit_count()
-            >= (size_t(1) << numeric_limits<Float>::digits) - 1)
-    {
-        LIBBOARDGAME_LOG("WARNING: max count supported by float exceeded");
-        return true;
-    }
 
     m_last_time = m_timer();
     LIBBOARDGAME_LOG(get_info());
