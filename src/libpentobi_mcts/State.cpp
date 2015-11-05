@@ -393,6 +393,8 @@ inline const PieceMap<bool>& State::get_is_piece_considered() const
         return *m_shared_const.is_piece_considered[nu_moves];
 }
 
+/** Initializes and returns m_pieces_considered if not all pieces are
+    considered, otherwise m_bd.get_pieces_left(c) is returned. */
 inline const Board::PiecesLeftList& State::get_pieces_considered(Color c)
 {
     auto is_piece_considered = m_is_piece_considered[c];
