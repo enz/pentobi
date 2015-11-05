@@ -706,9 +706,9 @@ void State::update_moves(Color c)
     m_last_attach_points_end[c] = end;
 
     // Generate moves for pieces not considered in the last position
-    auto& is_piece_considered = *m_is_piece_considered[c];
-    if (&is_piece_considered != &m_shared_const.is_piece_considered_all)
+    if (&pieces == &m_pieces_considered)
     {
+        auto& is_piece_considered = *m_is_piece_considered[c];
         if (nu_moves == 0)
             m_force_consider_all_pieces = true;
         auto& is_piece_considered_new = get_is_piece_considered();

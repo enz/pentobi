@@ -134,6 +134,8 @@ private:
 
     ColorMap<const PieceMap<bool>*> m_is_piece_considered;
 
+    /** The list of pieces considered in the current move if not all pieces
+        are considered. */
     Board::PiecesLeftList m_pieces_considered;
 
     PriorKnowledge m_prior_knowledge;
