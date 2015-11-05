@@ -183,7 +183,11 @@ private:
 
     bool m_is_symmetry_broken;
 
-    /** Enforce all pieces to be considered for the rest of the simulation. */
+    /** Enforce all pieces to be considered for the rest of the simulation.
+        This applies to all colors, because it is only used if no moves were
+        generated because not all pieces were considered and this case is so
+        rare that it is not worth the cost of setting such a flag for each
+        color individually. */
     bool m_force_consider_all_pieces;
 
     /** Minimum number of pieces on board to perform a symmetry check.
