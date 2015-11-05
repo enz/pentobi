@@ -150,10 +150,11 @@ void SharedConst::init(bool is_followup)
             {
                 auto adj_status = bd.get_adj_status(p, c);
                 for (Piece piece : bd.get_pieces_left(c))
-                    for (Move mv : old_precomp_moves.get_moves(piece, p,
-                                                               adj_status))
-                        if (m_is_forbidden[mv] && ! bd.is_forbidden(c, mv))
-                            m_is_forbidden.clear(mv);
+                    if (old_precomp_moves.has_moves(piece, p, adj_status))
+                        for (Move mv :
+                             old_precomp_moves.get_moves(piece, p, adj_status))
+                            if (m_is_forbidden[mv] && ! bd.is_forbidden(c, mv))
+                                m_is_forbidden.clear(mv);
             }
 
         precomp_moves.clear();
@@ -178,19 +179,11 @@ void SharedConst::init(bool is_followup)
                     if (! bd.is_piece_left(c, piece))
                         continue;
                     auto begin = precomp_moves.get_size();
-                    auto moves = old_precomp_moves.get_moves(piece, p, i);
-                    for (auto& mv : moves)
-                        if (! m_is_forbidden[mv])
-                        {
-                            if (is_followup)
-                                // Assert that we don't overwrite old content
-                                // we still need during in-place construction
-                                LIBBOARDGAME_ASSERT(
-                                    &mv - precomp_moves.move_lists_begin()
-                                            >= static_cast<ptrdiff_t>(
-                                                precomp_moves.get_size()));
-                            precomp_moves.push_move(mv);
-                        }
+                    if (old_precomp_moves.has_moves(piece, p, i))
+                        for (auto& mv :
+                             old_precomp_moves.get_moves(piece, p, i))
+                            if (! m_is_forbidden[mv])
+                                precomp_moves.push_move(mv);
                     auto size = precomp_moves.get_size() - begin;
                     precomp_moves.set_list_range(p, i, piece, begin, size);
                 }
