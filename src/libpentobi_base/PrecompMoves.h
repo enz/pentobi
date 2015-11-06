@@ -28,14 +28,6 @@ using libboardgame_util::ArrayList;
 class PrecompMoves
 {
 public:
-    /** The maximum sum of the sizes of all precomputed move lists in any
-        game variant. */
-#if PENTOBI_LOW_RESOURCES
-    static const unsigned max_move_lists_sum_length = 832444;
-#else
-    static const unsigned max_move_lists_sum_length = 1425934;
-#endif
-
     /** The number of neighbors used for computing the adjacent status.
         The adjacent status is a single number that encodes the forbidden
         status of the first adj_status_nu_adj neighbors (from the list
@@ -46,15 +38,22 @@ public:
         Therefore, the optimal value for speeding up the matching depends on
         the CPU cache size. */
 #if PENTOBI_LOW_RESOURCES
-    static const unsigned adj_status_nu_adj = 4;
-#else
     static const unsigned adj_status_nu_adj = 5;
+#else
+    static const unsigned adj_status_nu_adj = 6;
 #endif
 
+    /** The maximum sum of the sizes of all precomputed move lists in any
+        game variant. */
+    static const unsigned max_move_lists_sum_length =
+            adj_status_nu_adj == 4 ?
+                832444 : adj_status_nu_adj == 5 ? 1425934 : 2459136;
+    static_assert(adj_status_nu_adj >= 4 && adj_status_nu_adj <= 6, "");
+
+    /** The range of values for the adjacent status. */
     static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
 
-    /** Begin/end range for lists with moves at a given point.
-        See get_moves(). */
+    /** Begin/end range for lists with moves at a given point. */
     struct Range
     {
         const Move* m_begin;

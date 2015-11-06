@@ -90,11 +90,15 @@ auto RectGeometry<P>::get_adj_coord(int x, int y) const -> AdjCoordList
 template<class P>
 auto RectGeometry<P>::get_diag_coord(int x, int y) const -> DiagCoordList
 {
+    // The order does not matter logically but it is better to put far away
+    // points first because in Blokus, libpentobi::BoardConst uses the
+    // forbidden status of the first points during move generation and far away
+    // points can reject more moves.
     DiagCoordList l;
     l.push_back(CoordPoint(x - 1, y - 1));
+    l.push_back(CoordPoint(x + 1, y + 1));
     l.push_back(CoordPoint(x + 1, y - 1));
     l.push_back(CoordPoint(x - 1, y + 1));
-    l.push_back(CoordPoint(x + 1, y + 1));
     return l;
 }
 
