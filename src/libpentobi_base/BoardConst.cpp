@@ -572,7 +572,9 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
         transformed_label_pos[i] =
                 transform->get_transformed(piece_info.get_label_pos());
     }
+    auto piece_size = static_cast<MovePoints::IntType>(piece_info.get_size());
     MovePoints points;
+    points.resize(piece_size);
     // Make outer loop iterator over geometry for better memory locality
     for (Point p : m_geo)
     {
@@ -593,9 +595,9 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
             if (transforms[i]->get_new_point_type() != point_type)
                 continue;
             bool is_onboard = true;
-            points.clear();
-            for (auto& pp : transformed_points[i])
+            for (MovePoints::IntType j = 0; j < piece_size; ++j)
             {
+                auto& pp = transformed_points[i][j];
                 int xx = pp.x + x;
                 int yy = pp.y + y;
                 if (! m_geo.is_onboard(CoordPoint(xx, yy)))
@@ -603,7 +605,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
                     is_onboard = false;
                     break;
                 }
-                points.push_back(m_geo.get_point(xx, yy));
+                points[j] = m_geo.get_point(xx, yy);
             }
             if (! is_onboard)
                 continue;
