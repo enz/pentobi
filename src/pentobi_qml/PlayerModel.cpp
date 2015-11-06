@@ -19,18 +19,21 @@ using libboardgame_util::set_abort;
 
 namespace {
 
-void getLevel(QSettings& settings, const char* key, int& level)
+unsigned maxLevel = 7;
+
+void getLevel(QSettings& settings, const char* key, unsigned& level)
 {
-    level = settings.value(key, 1).toInt();
+    level = settings.value(key, 1).toUInt();
     if (level < 1)
     {
-        qDebug() << "PlayerModel: invalid level in settings: " << level;
+        qDebug() << "PlayerModel: invalid level in settings:" << level;
         level = 1;
     }
-    else if (level > 7)
+    else if (level > maxLevel)
     {
-        qDebug() << "PlayerModel: level in settings too high, using level 7";
-        level = 7;
+        qDebug() << "PlayerModel: level in settings too high, using level"
+                 << maxLevel;
+        level = maxLevel;
     }
 }
 
@@ -40,7 +43,7 @@ void getLevel(QSettings& settings, const char* key, int& level)
 
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent),
-      m_player(GameModel::getInitialGameVariant(), "")
+      m_player(GameModel::getInitialGameVariant(), maxLevel, "")
 {
     QSettings settings;
     getLevel(settings, "level_classic", m_levelClassic);
@@ -144,7 +147,7 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
 
 void PlayerModel::startGenMove(GameModel* gm)
 {
-    int level;
+    unsigned level;
     switch (gm->getBoard().get_variant())
     {
     case Variant::classic_2:
@@ -168,7 +171,7 @@ void PlayerModel::startGenMove(GameModel* gm)
     startGenMoveAtLevel(gm, level);
 }
 
-void PlayerModel::startGenMoveAtLevel(GameModel* gm, int level)
+void PlayerModel::startGenMoveAtLevel(GameModel* gm, unsigned level)
 {
     cancelGenMove();
     m_player.set_level(level);

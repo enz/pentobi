@@ -26,9 +26,9 @@ class Engine
     : public libpentobi_base::Engine
 {
 public:
-    Engine(Variant variant, int level = 5,
+    Engine(Variant variant, unsigned level = 5,
            bool use_book = true, const string& books_dir = "",
-           unsigned nu_threads = 0, size_t memory = 0);
+           unsigned nu_threads = 0);
 
     ~Engine();
 
@@ -50,8 +50,8 @@ public:
 private:
     unique_ptr<PlayerBase> m_player;
 
-    void create_player(Variant variant, const string& books_dir,
-                       unsigned nu_threads, size_t memory);
+    void create_player(Variant variant, unsigned level,
+                       const string& books_dir, unsigned nu_threads);
 
     Search& get_search();
 };

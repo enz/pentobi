@@ -21,17 +21,14 @@ doc/blksgf/Pentobi-SGF.html in the Pentobi source package.
 
 .SH OPTIONS
 .TP
-.B \-\-memory
-The amount of memory in bytes to be used by the search.
-If this option is not used, it depends on the amount of physical memory
-available on the system how much memory Pentobi will allocate (currently up
-to 1.4 GB).
-If the memory for the search is too low, the playing strength at higher
-playing levels will be impaired.
-This can be checked by running Pentobi with option \-\-verbose in a game variant
-with a high number of Monte-Carlo simulations per second (e.g. Duo).
-If a message that the search tree was pruned occurs more than a few times
-during a move generation, the playing strength is likely to be affected.
+.B \-\-maxlevel
+Set the maximum playing level. Reducing this value reduces the amount
+of memory used by the search, which can be useful to run Pentobi on systems
+that have low memory or are too slow to use the highest levels.
+By default, Pentobi currently allocates up to 2 GB (but not more than a third
+of the physical memory available on the system).
+Reducing the maximum level to 8 currently reduces this amount by a factor
+of 6 and lower maximum levels even more.
 .TP
 .B \-\-threads
 The number of threads to use in the search. By default, up to 4 threads are

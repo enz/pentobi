@@ -4,6 +4,12 @@ Version 10.UNKNOWN (master)
 * The compilation requires now at least Qt 5.1 and GCC 4.9 or MSVC 2015.
 * The score display now shows stars at scores that contain bonuses.
 
+Desktop version:
+
+* The command line option --memory was replaced by --maxlevel, which
+  reduces the needed memory according to the maximum level and also
+  removes higher levels from the Computer menu.
+
 Android version:
 
 * The piece area now has enough room to show all pieces of a color. It

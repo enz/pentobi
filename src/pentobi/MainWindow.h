@@ -61,9 +61,10 @@ class MainWindow
 
 public:
     MainWindow(Variant variant, const QString& initialFile = "",
-               const QString& helpDir = "", const QString& booksDir = "",
-               bool noBook = false, unsigned nu_threads = 0,
-               size_t memory = 0);
+               const QString& helpDir = "",
+               unsigned maxLevel = Player::max_supported_level,
+               const QString& booksDir = "", bool noBook = false,
+               unsigned nuThreads = 0);
 
     ~MainWindow();
 
@@ -212,7 +213,7 @@ public slots:
 
     void selectPiece(Color c, Piece piece, const Transform* transform);
 
-    void setLevel(int level);
+    void setLevel(unsigned level);
 
     void truncate();
 
@@ -246,9 +247,6 @@ private:
 
         unsigned genMoveId;
     };
-
-    /** Possible values for m_level are in 1..maxLevel */
-    static const int maxLevel = 9;
 
     static const int maxRecentFiles = 9;
 
@@ -311,13 +309,15 @@ private:
         @see m_lastComputerMovesBegin */
     unsigned m_lastComputerMovesEnd = 0;
 
+    unsigned m_maxLevel;
+
     /** Current playing level of m_player.
         Only use if m_useTimeLimit is false. Possible values for m_level are in
         1..maxLevel. Only used if m_timeLimit is zero. Stored independently of
         the player and set at the player before each move generation, such that
         setting a new level does not require to abort a running move
         generation. */
-    int m_level;
+    unsigned m_level;
 
     RandomGenerator m_random;
 
@@ -427,7 +427,7 @@ private:
 
     QAction* m_actionLeaveFullscreen;
 
-    QAction* m_actionLevel[maxLevel];
+    vector<QAction*> m_actionLevel;
 
     QAction* m_actionMakeMainVariation;
 
@@ -611,7 +611,7 @@ private:
 
     QWidget* createLeftPanel();
 
-    QAction* createLevelAction(QActionGroup* group, int level,
+    QAction* createLevelAction(QActionGroup* group, unsigned level,
                                const QString& text);
 
     void createMenu();
@@ -747,6 +747,8 @@ private slots:
 
     void leaveFullscreen();
 
+    void levelTriggered(bool checked);
+
     void noMoveAnnotation(bool checked);
 
     void openRecentFile();
@@ -758,8 +760,6 @@ private slots:
     void rememberDir(const QString& file);
 
     void selectNamedPiece(initializer_list<const char*> names);
-
-    void setLevel(bool checked);
 
     void setMoveMarkingAllNumber(bool checked);
 

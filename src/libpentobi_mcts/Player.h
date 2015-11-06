@@ -25,16 +25,17 @@ class Player final
     : public PlayerBase
 {
 public:
+    static const unsigned max_supported_level = 9;
+
     /** Constructor.
         @param initial_variant Game variant to initialize the internal
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
+        @param max_level The maximum level used
         @param books_dir Directory containing opening books.
         @param nu_threads The number of threads to use in the search (0 means
-        to select a reasonable default value)
-        @param memory The memory to be used for (all) the search trees. */
-    Player(Variant initial_variant, string books_dir, unsigned nu_threads = 0,
-           size_t memory = 0);
+        to select a reasonable default value) */
+    Player(Variant initial_variant, unsigned max_level, string books_dir, unsigned nu_threads = 0);
 
     ~Player();
 
@@ -61,9 +62,9 @@ public:
 
     void set_use_book(bool enable);
 
-    int get_level() const;
+    unsigned get_level() const;
 
-    void set_level(int level);
+    void set_level(unsigned level);
 
     /** Use CPU time instead of Wall time to measure time. */
     void use_cpu_time(bool enable);
@@ -81,7 +82,7 @@ public:
         modified and rescaled to take into account that self-play experiments
         usually overestimate the rating differences when playing against
         humans. */
-    static Rating get_rating(Variant variant, int level);
+    static Rating get_rating(Variant variant, unsigned level);
 
     /** Get an estimated Elo-rating of the current level. */
     Rating get_rating(Variant variant) const;
@@ -95,7 +96,9 @@ private:
 
     string m_books_dir;
 
-    int m_level;
+    unsigned m_max_level;
+
+    unsigned m_level;
 
     array<float, Board::max_player_moves> m_weight_max_count_classic;
 
@@ -117,6 +120,9 @@ private:
 
     unique_ptr<TimeSource> m_time_source;
 
+
+    size_t get_memory();
+
     void init_settings();
 
     bool load_book(const string& filepath);
@@ -132,7 +138,7 @@ inline double Player::get_fixed_time() const
     return m_fixed_time;
 }
 
-inline int Player::get_level() const
+inline unsigned Player::get_level() const
 {
     return m_level;
 }
@@ -164,7 +170,7 @@ inline void Player::set_fixed_time(double seconds)
     m_fixed_simulations = 0;
 }
 
-inline void Player::set_level(int level)
+inline void Player::set_level(unsigned level)
 {
     m_level = level;
     m_fixed_simulations = 0;

@@ -205,12 +205,18 @@ float getHeuristic(const Board& bd, Move mv)
 //-----------------------------------------------------------------------------
 
 MainWindow::MainWindow(Variant variant, const QString& initialFile,
-                       const QString& helpDir, const QString& booksDir,
-                       bool noBook, unsigned nu_threads, size_t memory)
+                       const QString& helpDir, unsigned maxLevel,
+                       const QString& booksDir, bool noBook,
+                       unsigned nuThreads)
     : m_game(variant),
       m_bd(m_game.get_board()),
       m_helpDir(helpDir)
 {
+    if (maxLevel > Player::max_supported_level)
+        maxLevel = Player::max_supported_level;
+    if (maxLevel < 1)
+        maxLevel = 1;
+    m_maxLevel = maxLevel;
     Util::initDataDir();
     QSettings settings;
     m_history.reset(new RatingHistory(variant));
@@ -227,8 +233,8 @@ MainWindow::MainWindow(Variant variant, const QString& initialFile,
     statusBar()->addWidget(m_ratedGameLabelText);
     m_ratedGameLabelText->hide();
     initGame();
-    m_player.reset(new Player(variant, booksDir.toLocal8Bit().constData(),
-                              nu_threads, memory));
+    m_player.reset(new Player(variant, maxLevel,
+                              booksDir.toLocal8Bit().constData(), nuThreads));
     m_player->get_search().set_callback(bind(&MainWindow::searchCallback,
                                              this, placeholders::_1,
                                              placeholders::_2));
@@ -867,12 +873,14 @@ void MainWindow::createActions()
     connect(m_actionMoveUpVariation, SIGNAL(triggered()),
             SLOT(moveUpVariation()));
 
-    static_assert(maxLevel == 9, "");
-    QString levelText[maxLevel] =
+    static_assert(Player::max_supported_level <= 9, "");
+    QString levelText[Player::max_supported_level] =
         { tr("&1"), tr("&2"), tr("&3"), tr("&4"), tr("&5"), tr("&6"),
           tr("&7"), tr("&8"), tr("&9") };
-    for (int i = 0; i < maxLevel; ++i)
-        m_actionLevel[i] = createLevelAction(groupLevel, i + 1, levelText[i]);
+    m_actionLevel.reserve(m_maxLevel);
+    for (unsigned i = 0; i < m_maxLevel; ++i)
+        m_actionLevel.push_back(createLevelAction(groupLevel, i + 1,
+                                                  levelText[i]));
     connect(m_actionFlipVertically, SIGNAL(triggered()),
             SLOT(flipVertically()));
 
@@ -1266,15 +1274,14 @@ QWidget* MainWindow::createLeftPanel()
     return m_splitter;
 }
 
-QAction* MainWindow::createLevelAction(QActionGroup* group, int level,
+QAction* MainWindow::createLevelAction(QActionGroup* group, unsigned level,
                                        const QString& text)
 {
-    LIBBOARDGAME_ASSERT(level >= 1 && level <= maxLevel);
     auto action = createAction(text);
     action->setCheckable(true);
     action->setActionGroup(group);
     action->setData(level);
-    connect(action, SIGNAL(triggered(bool)), SLOT(setLevel(bool)));
+    connect(action, SIGNAL(triggered(bool)), SLOT(levelTriggered(bool)));
     return action;
 }
 
@@ -2261,6 +2268,12 @@ void MainWindow::leaveSetupMode()
     setupMode(false);
 }
 
+void MainWindow::levelTriggered(bool checked)
+{
+    if (checked)
+        setLevel(qobject_cast<QAction*>(sender())->data().toUInt());
+}
+
 void MainWindow::loadHistory()
 {
     auto variant = m_game.get_variant();
@@ -2596,7 +2609,7 @@ void MainWindow::ratedGame()
         random = static_cast<unsigned>(m_random.generate() % 1000);
         settings.setValue(key, random);
     }
-    m_history->getNextRatedGameSettings(maxLevel, random,
+    m_history->getNextRatedGameSettings(m_maxLevel, random,
                                         level, m_ratedGameColor);
     QMessageBox msgBox(this);
     initQuestion(msgBox, tr("Start rated game?"),
@@ -2679,8 +2692,10 @@ void MainWindow::restoreLevel(Variant variant)
     QSettings settings;
     QString key = QString("level_") + to_string_id(variant);
     m_level = settings.value(key, 1).toInt();
-    if (m_level < 1 || m_level > maxLevel)
+    if (m_level < 1)
         m_level = 1;
+    if (m_level > m_maxLevel)
+        m_level = m_maxLevel;
     m_actionLevel[m_level - 1]->setChecked(true);
 }
 
@@ -3011,21 +3026,15 @@ void MainWindow::setFile(const QString& file)
         setWindowTitle(tr("[*]%1").arg(QFileInfo(m_file).fileName()));
 }
 
-void MainWindow::setLevel(int level)
+void MainWindow::setLevel(unsigned level)
 {
-    if (level <= 0 || level > maxLevel)
+    if (level < 1 || level > m_maxLevel)
         return;
     m_level = level;
     m_actionLevel[level - 1]->setChecked(true);
     QSettings settings;
     settings.setValue(QString("level_") + to_string_id(m_bd.get_variant()),
                       m_level);
-}
-
-void MainWindow::setLevel(bool checked)
-{
-    if (checked)
-        setLevel(qobject_cast<QAction*>(sender())->data().toInt());
 }
 
 void MainWindow::setMoveMarkingAllNumber(bool checked)

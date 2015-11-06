@@ -34,13 +34,12 @@ using libpentobi_mcts::State;
 
 //-----------------------------------------------------------------------------
 
-Engine::Engine(Variant variant, int level, bool use_book,
-               const string& books_dir, unsigned nu_threads, size_t memory)
+Engine::Engine(Variant variant, unsigned level, bool use_book,
+               const string& books_dir, unsigned nu_threads)
     : libpentobi_base::Engine(variant)
 {
-    create_player(variant, books_dir, nu_threads, memory);
+    create_player(variant, level, books_dir, nu_threads);
     get_mcts_player().set_use_book(use_book);
-    get_mcts_player().set_level(level);
     add("get_value", &Engine::cmd_get_value);
     add("name", &Engine::cmd_name);
     add("param", &Engine::cmd_param);
@@ -101,7 +100,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "expand_threshold_inc " << s.get_expand_threshold_inc() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
-            << "level " << p.get_level() << '\n'
             << "rave_dist_final " << s.get_rave_dist_final() << '\n'
             << "rave_child_max " << s.get_rave_child_max() << '\n'
             << "rave_parent_max " << s.get_rave_parent_max() << '\n'
@@ -124,8 +122,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_expand_threshold_inc(args.parse<Float>(1));
         else if (name == "fixed_simulations")
             p.set_fixed_simulations(args.parse<Float>(1));
-        else if (name == "level")
-            p.set_level(args.parse<int>(1));
         else if (name == "rave_dist_final")
             s.set_rave_dist_final(args.parse<Float>(1));
         else if (name == "rave_child_max")
@@ -170,10 +166,12 @@ void Engine::cmd_version(Response& response)
     response.set(version);
 }
 
-void Engine::create_player(Variant variant, const string& books_dir,
-                           unsigned nu_threads, size_t memory)
+void Engine::create_player(Variant variant, unsigned level,
+                           const string& books_dir, unsigned nu_threads)
 {
-    m_player.reset(new Player(variant, books_dir, nu_threads, memory));
+    auto max_level = level;
+    m_player.reset(new Player(variant, max_level, books_dir, nu_threads));
+    get_mcts_player().set_level(level);
     set_player(*m_player);
 }
 

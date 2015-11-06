@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
         app.installTranslator(&pentobiTranslator);
 
         vector<string> specs = {
-            "memory:",
+            "maxlevel:",
             "nobook",
             "nodelay",
             "seed|r:",
@@ -138,19 +138,17 @@ int main(int argc, char* argv[])
             "verbose"
         };
         Options opt(argc, argv, specs);
-        size_t memory = 0;
-        if (opt.contains("memory"))
-        {
-            memory = opt.get<size_t>("memory");
-            if (memory == 0)
-                throw OptionError("Value for memory must be greater zero.");
-        }
+        auto max_supported_level = Player::max_supported_level;
+        auto maxLevel = opt.get<unsigned>("maxlevel", max_supported_level);
+        if (maxLevel < 1 || maxLevel > max_supported_level)
+            throw OptionError("--maxlevel must be between 1 and "
+                              + to_string(max_supported_level));
         unsigned threads = 0;
         if (opt.contains("threads"))
         {
             threads = opt.get<unsigned>("threads");
             if (threads == 0)
-                throw OptionError("Number of threads must be greater zero.");
+                throw OptionError("--threads must be greater zero.");
             if (! libpentobi_mcts::SearchParamConst::multithread
                     && threads > 1)
                 throw OptionError("This version of Pentobi was compiled"
@@ -177,8 +175,8 @@ int main(int argc, char* argv[])
             variant = Variant::duo;
         try
         {
-            MainWindow mainWindow(variant, initialFile, helpDir, booksDir,
-                                  noBook, threads, memory);
+            MainWindow mainWindow(variant, initialFile, helpDir, maxLevel,
+                                  booksDir, noBook, threads);
             if (opt.contains("seed"))
                 mainWindow.setDeterministic();
             if (opt.contains("nodelay"))

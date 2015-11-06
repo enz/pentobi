@@ -23,10 +23,6 @@ bool compare_node(const Search::Node* n1, const Search::Node* n2);
 /** Dump the search tree in SGF format. */
 void dump_tree(ostream& out, const Search& search);
 
-/** Suggest how much memory to use for the trees depending on the total
-    physical memory available on the system. */
-size_t get_memory();
-
 /** Suggest how many threads to use in the search depending on the current
     system. */
 unsigned get_nu_threads();

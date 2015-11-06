@@ -12,7 +12,6 @@
 
 #include <thread>
 #include "libboardgame_sgf/Writer.h"
-#include "libboardgame_sys/Memory.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/PentobiSgfUtil.h"
@@ -76,33 +75,20 @@ bool compare_node(const Search::Node* n1, const Search::Node* n2)
     return n1->get_value() > n2->get_value();
 }
 
-size_t get_memory()
+void dump_tree(ostream& out, const Search& search)
 {
-    size_t memory;
-    size_t total_mem = libboardgame_sys::get_memory();
-    // Use half of the system memory (a quarter if compiled for low resources)
-    // but not more than 1.4 GB (128 MB on Android because we support only low
-    // playing levels with short searches there)
-    if (total_mem == 0)
-    {
-        LIBBOARDGAME_LOG("WARNING: could not determine system memory (assuming 512 MB)");
-        memory = 512000000;
-    }
-    else
-#if PENTOBI_LOW_RESOURCES
-        memory = total_mem / 4;
-#else
-        memory = total_mem / 2;
-#endif
-#ifdef ANDROID
-    if (memory > 128000000)
-        memory = 128000000;
-#else
-    if (memory > 1400000000)
-        memory = 1400000000;
-#endif
-    LIBBOARDGAME_LOG("Using ", memory, " of ", total_mem, " bytes");
-    return memory;
+    Variant variant;
+    Setup setup;
+    search.get_root_position(variant, setup);
+    Writer writer(out);
+    writer.begin_tree();
+    writer.begin_node();
+    writer.write_property("GM", to_string(variant));
+    write_setup(writer, variant, setup);
+    writer.write_property("PL", get_color_id(variant, setup.to_play));
+    auto& tree = search.get_tree();
+    dump_tree_recurse(writer, variant, tree, tree.get_root(), setup.to_play);
+    writer.end_tree();
 }
 
 unsigned get_nu_threads()
@@ -125,22 +111,6 @@ unsigned get_nu_threads()
     if (nu_threads > 4)
         nu_threads = 4;
     return nu_threads;
-}
-
-void dump_tree(ostream& out, const Search& search)
-{
-    Variant variant;
-    Setup setup;
-    search.get_root_position(variant, setup);
-    Writer writer(out);
-    writer.begin_tree();
-    writer.begin_node();
-    writer.write_property("GM", to_string(variant));
-    write_setup(writer, variant, setup);
-    writer.write_property("PL", get_color_id(variant, setup.to_play));
-    auto& tree = search.get_tree();
-    dump_tree_recurse(writer, variant, tree, tree.get_root(), setup.to_play);
-    writer.end_tree();
 }
 
 //-----------------------------------------------------------------------------

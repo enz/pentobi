@@ -21,18 +21,18 @@ class PlayerModel
     : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int levelClassic MEMBER m_levelClassic
+    Q_PROPERTY(unsigned levelClassic MEMBER m_levelClassic
                NOTIFY levelClassicChanged)
-    Q_PROPERTY(int levelClassic2 MEMBER m_levelClassic2
+    Q_PROPERTY(unsigned levelClassic2 MEMBER m_levelClassic2
                NOTIFY levelClassic2Changed)
-    Q_PROPERTY(int levelDuo MEMBER m_levelDuo NOTIFY levelDuoChanged)
-    Q_PROPERTY(int levelTrigon MEMBER m_levelTrigon
+    Q_PROPERTY(unsigned levelDuo MEMBER m_levelDuo NOTIFY levelDuoChanged)
+    Q_PROPERTY(unsigned levelTrigon MEMBER m_levelTrigon
                NOTIFY levelTrigonChanged)
-    Q_PROPERTY(int levelTrigon2 MEMBER m_levelTrigon2
+    Q_PROPERTY(unsigned levelTrigon2 MEMBER m_levelTrigon2
                NOTIFY levelTrigon2Changed)
-    Q_PROPERTY(int levelTrigon3 MEMBER m_levelTrigon3
+    Q_PROPERTY(unsigned levelTrigon3 MEMBER m_levelTrigon3
                NOTIFY levelTrigon3Changed)
-    Q_PROPERTY(int levelJunior MEMBER m_levelJunior NOTIFY levelJuniorChanged)
+    Q_PROPERTY(unsigned levelJunior MEMBER m_levelJunior NOTIFY levelJuniorChanged)
     Q_PROPERTY(bool isGenMoveRunning MEMBER m_isGenMoveRunning
                NOTIFY isGenMoveRunningChanged)
 
@@ -47,26 +47,26 @@ public:
         with cancelGenMove() */
     Q_INVOKABLE void startGenMove(GameModel* gameModel);
 
-    Q_INVOKABLE void startGenMoveAtLevel(GameModel* gameModel, int level);
+    Q_INVOKABLE void startGenMoveAtLevel(GameModel* gameModel, unsigned level);
 
     /** Cancel the move generation in the background thread if one is
         running. */
     Q_INVOKABLE void cancelGenMove();
 
 signals:
-    void levelClassicChanged(int);
+    void levelClassicChanged(unsigned);
 
-    void levelClassic2Changed(int);
+    void levelClassic2Changed(unsigned);
 
-    void levelDuoChanged(int);
+    void levelDuoChanged(unsigned);
 
-    void levelTrigonChanged(int);
+    void levelTrigonChanged(unsigned);
 
-    void levelTrigon2Changed(int);
+    void levelTrigon2Changed(unsigned);
 
-    void levelTrigon3Changed(int);
+    void levelTrigon3Changed(unsigned);
 
-    void levelJuniorChanged(int);
+    void levelJuniorChanged(unsigned);
 
     void isGenMoveRunningChanged(bool);
 
@@ -86,19 +86,19 @@ private:
 
     bool m_isGenMoveRunning = false;
 
-    int m_levelClassic;
+    unsigned m_levelClassic;
 
-    int m_levelClassic2;
+    unsigned m_levelClassic2;
 
-    int m_levelDuo;
+    unsigned m_levelDuo;
 
-    int m_levelTrigon;
+    unsigned m_levelTrigon;
 
-    int m_levelTrigon2;
+    unsigned m_levelTrigon2;
 
-    int m_levelTrigon3;
+    unsigned m_levelTrigon3;
 
-    int m_levelJunior;
+    unsigned m_levelJunior;
 
     unsigned m_genMoveId = 0;
 

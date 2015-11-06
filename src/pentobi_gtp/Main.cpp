@@ -22,6 +22,7 @@ using libboardgame_util::RandomGenerator;
 using libpentobi_base::parse_variant_id;
 using libpentobi_base::Board;
 using libpentobi_base::Variant;
+using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------
 
@@ -59,7 +60,6 @@ int main(int argc, char** argv)
             "game|g:",
             "help|h",
             "level|l:",
-            "memory:",
             "nobook",
             "noresign",
             "quiet|q",
@@ -81,7 +81,6 @@ int main(int argc, char** argv)
                 "             duo, trigon, trigon_2, trigon_3, junior)\n"
                 "--help,-h    print help message and exit\n"
                 "--level,-l   set playing strength level\n"
-                "--memory     memory to allocate for search trees\n"
                 "--seed,-r    set random seed\n"
                 "--showboard  automatically write board to stderr after\n"
                 "             changes\n"
@@ -101,13 +100,6 @@ int main(int argc, char** argv)
 #endif
             return 0;
         }
-        size_t memory = 0;
-        if (opt.contains("memory"))
-        {
-            memory = opt.get<size_t>("memory");
-            if (memory == 0)
-                throw runtime_error("Value for memory must be greater zero.");
-        }
         unsigned threads = 1;
         if (opt.contains("threads"))
         {
@@ -124,13 +116,13 @@ int main(int argc, char** argv)
         Variant variant;
         if (! parse_variant_id(variant_string, variant))
             throw runtime_error("invalid game variant " + variant_string);
-        auto level = opt.get<int>("level", 4);
-        if (level < 1 || level > 9)
-            throw runtime_error("invalid level (must be 1-9)");
+        auto level = opt.get<unsigned>("level", 4);
+        if (level < 1 || level > Player::max_supported_level)
+            throw runtime_error("invalid level");
         auto use_book = (! opt.contains("nobook"));
         string books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
-                                   threads, memory);
+                                   threads);
         engine.set_resign(! opt.contains("noresign"));
         if (opt.contains("showboard"))
             engine.set_show_board(true);

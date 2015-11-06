@@ -14,6 +14,7 @@
 #include <iomanip>
 #include "libboardgame_util/CpuTimeSource.h"
 #include "libboardgame_util/WallTimeSource.h"
+#include "libboardgame_sys/Memory.h"
 
 namespace libpentobi_mcts {
 
@@ -24,17 +25,46 @@ using libpentobi_base::BoardType;
 
 //-----------------------------------------------------------------------------
 
-Player::Player(Variant initial_variant, string  books_dir, unsigned nu_threads,
-               size_t memory)
+namespace {
+
+// Rationale for choosing the number of simulations:
+// * The number at level 1 is very small in Classic/Duo to avoid that
+//   level 1 is too strong for absolute beginners (searches with such a
+//   small number of simulations still produce reasonable moves because
+//   of the prior initialization of node values.) In Trigon, it starts
+//   with a higher number because the playing strength is weaker there.
+// * The number at the highest level is chosen such that the average
+//   time per game and player is 2 min in Duo, 4 min in Classic, 5 min
+//   in Trigon on an Intel i3-4130.
+// * The numbers for other levels are chosen such that they roughly
+//   correspond to equal Elo differences in self-play experiments.
+// * [Note that the numbers will be multiplied with a weight factor in
+//    Player::genmove() that depends on the move number]
+
+static const float counts_classic[Player::max_supported_level] =
+    { 3, 24, 87, 213, 667, 1989, 11319, 101391, 1339615 };
+
+static const float counts_duo[Player::max_supported_level] =
+    { 3, 17, 44, 123, 426, 1672, 6739, 54169, 5476857 };
+
+static const float counts_trigon[Player::max_supported_level] =
+    { 228, 433, 727, 1501, 2912, 7395, 22494, 66029, 412757 };
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
+Player::Player(Variant initial_variant, unsigned max_level, string  books_dir, unsigned nu_threads)
     : m_is_book_loaded(false),
       m_use_book(true),
       m_resign(false),
       m_books_dir(move(books_dir)),
+      m_max_level(max_level),
       m_level(4),
       m_fixed_simulations(0),
       m_resign_threshold(0.09f),
       m_resign_min_simulations(500),
-      m_search(initial_variant, nu_threads, memory),
+      m_search(initial_variant, nu_threads, get_memory()),
       m_book(initial_variant),
       m_time_source(new WallTimeSource)
 {
@@ -85,7 +115,7 @@ Move Player::genmove(const Board& bd, Color c)
     Move mv;
     auto variant = bd.get_variant();
     auto board_type = bd.get_board_type();
-    int level = min(max(m_level, 1), 9);
+    auto level = min(max(m_level, 1u), m_max_level);
     // Don't use more than 2 moves per color from opening book in lower levels
     if (m_use_book
         && (level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
@@ -108,44 +138,21 @@ Move Player::genmove(const Board& bd, Color c)
         max_time = m_fixed_time;
     else
     {
-        // Rationale for choosing max_count:
-        // * The number at level 1 is very small in Classic/Duo to avoid that
-        //   level 1 is too strong for absolute beginners (searches with such a
-        //   small number of simulations still produce reasonable moves because
-        //   of the prior initialization of node values.) In Trigon, it starts
-        //   with a higher number because the playing strength is weaker there.
-        // * The number at the highest level is chosen such that the average
-        //   time per game and player is 2 min in Duo, 4 min in Classic, 5 min
-        //   in Trigon on an Intel i3-4130.
-        // * The numbers for other levels are chosen such that they roughly
-        //   correspond to equal Elo differences in self-play experiments.
         switch (variant)
         {
         case Variant::classic:
         case Variant::classic_2:
         case Variant::classic_3:
-            {
-                static float counts[] =
-                    { 3, 24, 87, 213, 667, 1989, 11319, 101391, 1339615 };
-                max_count = counts[level - 1];
-            }
+            max_count = counts_classic[level - 1];
             break;
         case Variant::duo:
         case Variant::junior:
-            {
-                static float counts[] =
-                    { 3, 17, 44, 123, 426, 1672, 6739, 54169, 5476857 };
-                max_count = counts[level - 1];
-            }
+            max_count = counts_duo[level - 1];
             break;
         case Variant::trigon:
         case Variant::trigon_2:
         case Variant::trigon_3:
-            {
-                static float counts[] =
-                    { 228, 433, 727, 1501, 2912, 7395, 22494, 66029, 412757 };
-                max_count = counts[level - 1];
-            }
+            max_count = counts_trigon[level - 1];
             break;
         }
         // Don't weight max_count in low levels, otherwise it is still too
@@ -186,7 +193,40 @@ Move Player::genmove(const Board& bd, Color c)
     return mv;
 }
 
-Rating Player::get_rating(Variant variant, int level)
+/** Suggest how much memory to use for the trees depending on the maximum
+    level used. */
+size_t Player::get_memory()
+{
+    size_t available = libboardgame_sys::get_memory();
+    if (available == 0)
+    {
+        LIBBOARDGAME_LOG("WARNING: could not determine system memory"
+                         " (assuming 512MB)");
+        available = 512000000;
+    }
+    // Don't use all of the available memory
+#if PENTOBI_LOW_RESOURCES
+    size_t reasonable = available / 4;
+#else
+    size_t reasonable = available / 3;
+#endif
+    size_t wanted = 2000000000;
+    if (m_max_level < max_supported_level)
+    {
+        // Trigon has the lowest relative number of simulations on lower levels
+        // compared to the highest level. We approximate the memory used in a
+        // search as being proportional to the number of simulations.
+        float factor =
+                counts_trigon[max_supported_level - 1]
+                / counts_trigon[m_max_level - 1];
+        wanted /= static_cast<size_t>(factor);
+    }
+    size_t memory = min(wanted, reasonable);
+    LIBBOARDGAME_LOG("Using ", memory, " of ", available, " bytes");
+    return memory;
+}
+
+Rating Player::get_rating(Variant variant, unsigned level)
 {
     // The ratings are based on experiments that measured the winning rates in
     // games between subsequent playing levels of Pentobi. The number of
@@ -203,7 +243,8 @@ Rating Player::get_rating(Variant variant, int level)
     // same board type. The ratings are not always measured again for new
     // versions of Pentobi and not really comparable between different versions
     // of Pentobi.
-    level = min(max(level, 1), 9);
+    auto max_supported_level = Player::max_supported_level;
+    level = min(max(level, 1u), max_supported_level);
     switch (variant)
     {
     case Variant::classic:
@@ -211,7 +252,7 @@ Rating Player::get_rating(Variant variant, int level)
     case Variant::classic_3:
         {
             // Anchor 1000, scale 0.63
-            static float elo[] =
+            static float elo[Player::max_supported_level] =
                 { 1000, 1134, 1267, 1400, 1534, 1668, 1801, 1935, 2068 };
             return Rating(elo[level - 1]);
         }
@@ -219,7 +260,7 @@ Rating Player::get_rating(Variant variant, int level)
     case Variant::junior:
         {
             // Anchor 1100, scale 0.80
-            static float elo[] =
+            static float elo[Player::max_supported_level] =
                 { 1100, 1229, 1359, 1489, 1618, 1748, 1878, 2008, 2137 };
             return Rating(elo[level - 1]);
         }
@@ -228,7 +269,7 @@ Rating Player::get_rating(Variant variant, int level)
     case Variant::trigon_3:
         {
             // Anchor 1000, scale 0.60
-            static float elo[] =
+            static float elo[Player::max_supported_level] =
                 { 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800 };
             return Rating(elo[level - 1]);
         }
