@@ -165,7 +165,7 @@ void SharedConst::init(bool is_followup)
             auto adj_status = bd.get_adj_status(p, c);
             for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
             {
-                if (is_followup && ! is_followup_adj_status(i, adj_status))
+                if (! is_followup_adj_status(i, adj_status))
                     continue;
                 // Don't iterate over bd.get_pieces_left(*i) because its
                 // ordering is not preserved if a piece is removed and the
