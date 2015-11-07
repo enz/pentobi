@@ -222,9 +222,7 @@ public:
         @pre mv.is_regular() */
     bool is_legal(Move mv) const;
 
-    /** Check that point is not already occupied or adjacent to own color.
-        @param c
-        @param p The point. Off-board points are allowed and return true. */
+    /** Check that point is not already occupied or adjacent to own color. */
     bool is_forbidden(Point p, Color c) const;
 
     const Grid<bool>& is_forbidden(Color c) const;
