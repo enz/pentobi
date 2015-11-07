@@ -47,7 +47,7 @@ public:
         game variant. */
     static const unsigned max_move_lists_sum_length =
             adj_status_nu_adj == 4 ?
-                832444 : adj_status_nu_adj == 5 ? 1425934 : 2591379;
+                832444 : adj_status_nu_adj == 5 ? 1425934 : 2769060;
     static_assert(adj_status_nu_adj >= 4 && adj_status_nu_adj <= 6, "");
 
     /** The range of values for the adjacent status. */
