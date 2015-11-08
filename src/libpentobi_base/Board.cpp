@@ -416,8 +416,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 // Trigon board, a slash or backslash is used instead of the
                 // space to indicate the orientation of the triangles. A
                 // less-than/greater-than character is used instead of the
-                // space to mark the last piece played (the mark is not placed
-                // within the piece or off-board).
+                // space to mark the last piece played.
                 if (! last_mv.is_null()
                         && get_move_info(last_mv.move).contains(p)
                         && (x == 0 || ! m_geo->is_onboard(x - 1, y)
