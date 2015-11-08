@@ -41,10 +41,10 @@ public:
         for Blokus Trigon. */
     typedef ArrayList<Point, 9, unsigned short> DiagList;
 
-    /** Adjacent neighbors of a coordinate (on-board or off-board). */
+    /** Adjacent neighbors of a coordinate. */
     typedef ArrayList<CoordPoint, 4> AdjCoordList;
 
-    /** Diagonal neighbors of a coordinate (on-board or off-board). */
+    /** Diagonal neighbors of a coordinate. */
     typedef ArrayList<CoordPoint, 9> DiagCoordList;
 
     class Iterator
