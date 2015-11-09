@@ -20,7 +20,6 @@
 using namespace std;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::geometry_util::type_match_shift;
-using libboardgame_util::log;
 using libboardgame_util::trim;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;

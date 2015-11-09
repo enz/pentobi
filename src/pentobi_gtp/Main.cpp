@@ -16,7 +16,6 @@
 
 using namespace std;
 using libboardgame_gtp::Failure;
-using libboardgame_util::log;
 using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
 using libpentobi_base::parse_variant_id;

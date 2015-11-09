@@ -35,7 +35,6 @@ using libboardgame_base::PointTransfTrigonRot300;
 using libboardgame_sgf::InvalidPropertyValue;
 using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeReader;
-using libboardgame_util::log;
 using boardutil::get_transformed;
 
 //-----------------------------------------------------------------------------

@@ -17,7 +17,6 @@
 #include "libpentobi_base/Variant.h"
 
 using namespace std;
-using libboardgame_util::log;
 using libboardgame_util::to_string;
 using libboardgame_util::Options;
 using libpentobi_base::Variant;

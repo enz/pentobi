@@ -35,7 +35,6 @@ namespace libboardgame_mcts {
 using namespace std;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
-using libboardgame_util::log;
 using libboardgame_util::rounded_log_2;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;

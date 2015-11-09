@@ -15,8 +15,6 @@
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Log.h"
 
-using libboardgame_util::log;
-
 namespace libboardgame_test {
 
 //-----------------------------------------------------------------------------

@@ -11,7 +11,6 @@
 #include "libboardgame_util/Log.h"
 
 using namespace std;
-using libboardgame_util::log;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;

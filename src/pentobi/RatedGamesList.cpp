@@ -16,8 +16,6 @@
 #include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 
-using libboardgame_util::log;
-
 //-----------------------------------------------------------------------------
 
 RatedGamesList::RatedGamesList(QWidget* parent)

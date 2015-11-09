@@ -17,7 +17,6 @@
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
-using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 

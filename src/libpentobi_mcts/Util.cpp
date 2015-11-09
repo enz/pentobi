@@ -22,7 +22,6 @@ namespace util {
 using libboardgame_mcts::Node;
 using libboardgame_mcts::Tree;
 using libboardgame_sgf::Writer;
-using libboardgame_util::log;
 using libpentobi_base::boardutil::write_setup;
 using libpentobi_base::sgf_util::get_color_id;
 

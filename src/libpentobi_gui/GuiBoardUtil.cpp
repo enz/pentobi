@@ -22,7 +22,6 @@ using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::util::is_main_variation;
 using libboardgame_sgf::util::get_move_annotation;
 using libboardgame_util::get_letter_coord;
-using libboardgame_util::log;
 
 //-----------------------------------------------------------------------------
 

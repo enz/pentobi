@@ -16,7 +16,6 @@
 #include "libboardgame_util/Log.h"
 
 using namespace std;
-using libboardgame_util::log;
 using libpentobi_base::Move;
 using libpentobi_base::PointState;
 

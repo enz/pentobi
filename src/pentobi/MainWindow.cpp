@@ -69,7 +69,6 @@ using libboardgame_sgf::util::has_earlier_variation;
 using libboardgame_sgf::util::is_main_variation;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
-using libboardgame_util::log;
 using libboardgame_util::set_abort;
 using libboardgame_util::trim_right;
 using libboardgame_util::ArrayList;

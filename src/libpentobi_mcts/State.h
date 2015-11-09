@@ -22,7 +22,6 @@ namespace libpentobi_mcts {
 using libboardgame_mcts::LastGoodReply;
 using libboardgame_mcts::PlayerInt;
 using libboardgame_mcts::PlayerMove;
-using libboardgame_util::log;
 using libboardgame_util::RandomGenerator;
 using libboardgame_util::Statistics;
 using libpentobi_base::BoardConst;

@@ -18,8 +18,6 @@
 #include <QToolBar>
 #include "libboardgame_util/Log.h"
 
-using libboardgame_util::log;
-
 //-----------------------------------------------------------------------------
 
 namespace {

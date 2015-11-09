@@ -22,7 +22,6 @@ namespace libpentobi_base {
 
 using libboardgame_base::PointTransfRot180;
 using libboardgame_base::Transform;
-using libboardgame_util::log;
 using libboardgame_util::split;
 using libboardgame_util::to_lower;
 using libboardgame_util::trim;

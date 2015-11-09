@@ -20,7 +20,6 @@
 
 using namespace std;
 using libboardgame_base::Transform;
-using libboardgame_util::log;
 using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
