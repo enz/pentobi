@@ -2,7 +2,6 @@
 # exists only to add the headers to IDE project files.
 add_custom_target(boardgame_mcts SOURCES
   Atomic.h
-  BiasTerm.h
   LastGoodReply.h
   Node.h
   PlayerMove.h

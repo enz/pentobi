@@ -115,7 +115,6 @@ HEADERS += \
     ../libboardgame_base/SpShtStrRep.h \
     ../libboardgame_base/Transform.h \
     ../libboardgame_mcts/Atomic.h \
-    ../libboardgame_mcts/BiasTerm.h \
     ../libboardgame_mcts/LastGoodReply.h \
     ../libboardgame_mcts/Node.h \
     ../libboardgame_mcts/PlayerMove.h \

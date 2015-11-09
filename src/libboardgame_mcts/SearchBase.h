@@ -14,7 +14,6 @@
 #include <mutex>
 #include <thread>
 #include "Atomic.h"
-#include "BiasTerm.h"
 #include "LastGoodReply.h"
 #include "PlayerMove.h"
 #include "Tree.h"
@@ -24,6 +23,7 @@
 #include "libboardgame_util/Barrier.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
+#include "libboardgame_util/MathUtil.h"
 #include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libboardgame_util/TimeIntervalChecker.h"
@@ -36,6 +36,7 @@ using namespace std;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
 using libboardgame_util::log;
+using libboardgame_util::rounded_log_2;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::ArrayList;
@@ -115,7 +116,10 @@ struct SearchParamConstDefault
     static const bool use_unlikely_change = true;
 
     /** The minimum count used in prior knowledge initialization of
-        the children of an expanded node. */
+        the children of an expanded node.
+        The value must be greater 0 (it may be a positive epsilon) because
+        otherwise the search would need to handle a special case in the bias
+        term computation. */
     static constexpr Float child_min_count = 0;
 
     /** An evaluation value representing a 50% winning probability. */
@@ -267,8 +271,12 @@ public:
 
     Float get_expand_threshold_inc() const;
 
-    /** Constant used in UCT bias term.
-        @see BiasTerm */
+    /** Constant factor used in UCT bias term.
+        For better speed, the bias term log_2 of the parent count is used and
+        rounded to integers because then computing the logarithm of a floating
+        point is simply taking the exponent. This doesn't affect convergence
+        guarantees of UCT but changes the meaning of the bias term constant by
+        a constant factor. */
     void set_bias_term_constant(Float c);
 
     Float get_bias_term_constant() const;
@@ -568,7 +576,7 @@ private:
 
     TimeSource* m_time_source;
 
-    BiasTerm<Float> m_bias_term;
+    Float m_bias_term_constant;
 
     Timer m_timer;
 
@@ -737,7 +745,7 @@ template<class S, class M, class R>
 SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
     : m_nu_threads(nu_threads),
       m_max_nodes(get_max_nodes(memory == 0 ? 256000000 : memory)),
-      m_bias_term(0),
+      m_bias_term_constant(0),
       m_tmp_tree(m_max_nodes, m_nu_threads),
 #if LIBBOARDGAME_DEBUG
       m_assertion_handler(*this),
@@ -940,7 +948,7 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_bias_term_constant() const -> Float
 {
-    return m_bias_term.get_bias_term_constant();
+    return m_bias_term_constant;
 }
 
 template<class S, class M, class R>
@@ -1475,25 +1483,29 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
     auto children = m_tree.get_children(node);
     LIBBOARDGAME_ASSERT(! children.empty());
-    m_bias_term.start_iteration(node.get_visit_count());
-    auto bias_upper_limit = m_bias_term.get(SearchParamConst::child_min_count);
+    auto parent_count = node.get_visit_count();
+    Float bias_factor =
+            parent_count <= 1 ? 0 :
+                m_bias_term_constant
+                * sqrt(static_cast<Float>(rounded_log_2(parent_count)));
+    static_assert(SearchParamConst::child_min_count > 0, "");
+    auto bias_limit = bias_factor / sqrt(SearchParamConst::child_min_count);
     auto i = children.begin();
-    auto value = i->get_value();
-    value += m_bias_term.get(i->get_value_count());
+    auto value = i->get_value() + bias_factor / sqrt(i->get_value_count());
     auto best_value = value;
     auto best_child = i;
-    auto limit = best_value - bias_upper_limit;
+    auto limit = best_value - bias_limit;
     while (++i != children.end())
     {
         value = i->get_value();
         if (value < limit)
             continue;
-        value += m_bias_term.get(i->get_value_count());
+        value += bias_factor / sqrt(i->get_value_count());
         if (value > best_value)
         {
             best_value = value;
             best_child = i;
-            limit = best_value - bias_upper_limit;
+            limit = best_value - bias_limit;
         }
     }
     return best_child;
@@ -1537,7 +1549,7 @@ bool SearchBase<S, M, R>::select_move(Move& mv) const
 template<class S, class M, class R>
 void SearchBase<S, M, R>::set_bias_term_constant(Float c)
 {
-    m_bias_term.set_bias_term_constant(c);
+    m_bias_term_constant = c;
 }
 
 template<class S, class M, class R>
