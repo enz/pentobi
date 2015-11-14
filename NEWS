@@ -8,6 +8,7 @@ Desktop version:
 
 * The command line option --memory was replaced by --maxlevel, which
   reduces the needed memory according to the maximum level and also
+  removes higher levels from the menu.
 * The memory requirements are now 1 GB minimum, 4 GB recommended for
   playing level 9.
 
