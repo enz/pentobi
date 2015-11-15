@@ -302,14 +302,6 @@ public:
 
     Float get_rave_weight() const;
 
-    /** The RAVE distance weight at the end of a simulation.
-        If RAVE distance weighting is used, the RAVE distance weight decreases
-        linearly from 1 at the current position to this value at the end of a
-        simulation. */
-    void set_rave_dist_final(Float value);
-
-    Float get_rave_dist_final() const;
-
     /** Set deterministic mode.
         Note that using a fixed number of simulations instead of a time limit
         is not enough to make the search fully deterministic because the
@@ -548,8 +540,6 @@ private:
     Float m_rave_child_max = 2000;
 
     Float m_rave_weight = 0.3f;
-
-    Float m_rave_dist_final = 0;
 
     /** Minimum simulations to perform in the current search.
         This does not include the count of simulations reused from a subtree of
@@ -993,12 +983,6 @@ template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_root_visit_count() const -> Float
 {
     return m_tree.get_root().get_visit_count();
-}
-
-template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::get_rave_dist_final() const -> Float
-{
-    return m_rave_dist_final;
 }
 
 template<class S, class M, class R>
@@ -1581,12 +1565,6 @@ void SearchBase<S, M, R>::set_full_select_min(Float n)
 }
 
 template<class S, class M, class R>
-void SearchBase<S, M, R>::set_rave_dist_final(Float v)
-{
-    m_rave_dist_final = v;
-}
-
-template<class S, class M, class R>
 void SearchBase<S, M, R>::set_rave_parent_max(Float n)
 {
     m_rave_parent_max = n;
@@ -1690,7 +1668,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         auto player = mv.player;
         Float dist_factor;
         if (SearchParamConst::rave_dist_weighting)
-            dist_factor = (1 - m_rave_dist_final) / Float(nu_moves - i);
+            dist_factor = 1 / static_cast<Float>(nu_moves - i);
         auto children = m_tree.get_children(*node);
         LIBBOARDGAME_ASSERT(! children.empty());
         auto it = children.begin();

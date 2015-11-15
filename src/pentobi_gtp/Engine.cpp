@@ -98,7 +98,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "expand_threshold_inc " << s.get_expand_threshold_inc() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
-            << "rave_dist_final " << s.get_rave_dist_final() << '\n'
             << "rave_child_max " << s.get_rave_child_max() << '\n'
             << "rave_parent_max " << s.get_rave_parent_max() << '\n'
             << "rave_weight " << s.get_rave_weight() << '\n'
@@ -120,8 +119,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_expand_threshold_inc(args.parse<Float>(1));
         else if (name == "fixed_simulations")
             p.set_fixed_simulations(args.parse<Float>(1));
-        else if (name == "rave_dist_final")
-            s.set_rave_dist_final(args.parse<Float>(1));
         else if (name == "rave_child_max")
             s.set_rave_child_max(args.parse<Float>(1));
         else if (name == "rave_parent_max")
