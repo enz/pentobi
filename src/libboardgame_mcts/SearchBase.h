@@ -83,14 +83,9 @@ struct SearchParamConstDefault
     /** Use RAVE. */
     static const bool rave = false;
 
-    /** Do not update RAVE values if the same move was played first by the
-        other player.
-        This improves RAVE performance in Go, where moves at the same point
-        indicate that something was captured there, so the position has
-        changed so significantly that the RAVE value of this move should not be
-        updated to earlier positions. Setting it to true causes a slight
-        slow-down in the update of the RAVE values. */
-    static const bool rave_check_same = false;
+    /** Can the same move occur multiple times (by the same or other players)
+        in the game? */
+    static const bool repeated_moves = true;
 
     /** Enable distance weighting of RAVE updates.
         The weight decreases linearly from the start to the end of a
@@ -464,10 +459,8 @@ private:
         array<array<bool, Move::range>, max_players> was_played;
 
         /** Local variable for update_rave().
-            Stores the first time a move was played for each player.
-            Elements are only defined if was_played is true.
             Reused for efficiency. */
-        array<array<unsigned, Move::range>, max_players> first_play;
+        array<unsigned, Move::range> first_play;
 
         ~ThreadState();
     };
@@ -1678,11 +1671,13 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
     for ( ; i >= nu_nodes - 1; --i)
     {
         auto mv = moves[i];
-        if (! state.skip_rave(mv.move))
-        {
-            was_played[mv.player][mv.move.to_int()] = true;
-            first_play[mv.player][mv.move.to_int()] = i;
-        }
+        if (state.skip_rave(mv.move))
+            continue;
+        if (SearchParamConst::repeated_moves)
+            for (PlayerInt j = 0; j < m_nu_players; ++j)
+                was_played[j][mv.move.to_int()] = false;
+        was_played[mv.player][mv.move.to_int()] = true;
+        first_play[mv.move.to_int()] = i;
     }
 
     // Add RAVE values to children of nodes of current simulation
@@ -1693,9 +1688,9 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
             break;
         auto mv = moves[i];
         auto player = mv.player;
-        Float dist_weight_factor;
+        Float dist_factor;
         if (SearchParamConst::rave_dist_weighting)
-            dist_weight_factor = (1 - m_rave_dist_final) / Float(nu_moves - i);
+            dist_factor = (1 - m_rave_dist_final) / Float(nu_moves - i);
         auto children = m_tree.get_children(*node);
         LIBBOARDGAME_ASSERT(! children.empty());
         auto it = children.begin();
@@ -1705,24 +1700,11 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
             if (! was_played[player][mv.to_int()]
                     || it->get_value_count() > m_rave_child_max)
                 continue;
-            auto first = first_play[player][mv.to_int()];
+            auto first = first_play[mv.to_int()];
             LIBBOARDGAME_ASSERT(first > i);
-            if (SearchParamConst::rave_check_same)
-            {
-                bool other_played_same = false;
-                for (PlayerInt j = 0; j < m_nu_players; ++j)
-                    if (j != player && was_played[j][mv.to_int()])
-                        if (first_play[j][mv.to_int()] < first)
-                        {
-                            other_played_same = true;
-                            break;
-                        }
-                if (other_played_same)
-                    continue;
-            }
             Float weight = m_rave_weight;
             if (SearchParamConst::rave_dist_weighting)
-                weight *= 1 - Float(first - i) * dist_weight_factor;
+                weight *= 1 - static_cast<Float>(first - i) * dist_factor;
             m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
         }
         while (++it != children.end());
@@ -1730,8 +1712,11 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
             break;
         if (! state.skip_rave(mv.move))
         {
+            if (SearchParamConst::repeated_moves)
+                for (PlayerInt j = 0; j < m_nu_players; ++j)
+                    was_played[j][mv.move.to_int()] = false;
             was_played[player][mv.move.to_int()] = true;
-            first_play[player][mv.move.to_int()] = i;
+            first_play[mv.move.to_int()] = i;
         }
         --i;
     }
