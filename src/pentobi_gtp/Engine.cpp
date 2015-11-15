@@ -17,7 +17,6 @@
 namespace pentobi_gtp {
 
 using libboardgame_gtp::Failure;
-using libboardgame_mcts::PlayerMove;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
