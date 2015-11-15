@@ -1712,14 +1712,11 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
                 bool other_played_same = false;
                 for (PlayerInt j = 0; j < m_nu_players; ++j)
                     if (j != player && was_played[j][mv.to_int()])
-                    {
-                        auto first_other = first_play[j][mv.to_int()];
-                        if (first_other >= i && first_other <= first)
+                        if (first_play[j][mv.to_int()] < first)
                         {
                             other_played_same = true;
                             break;
                         }
-                    }
                 if (other_played_same)
                     continue;
             }
