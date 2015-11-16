@@ -589,8 +589,6 @@ private:
 
     ArrayList<Move, max_moves> m_followup_sequence;
 
-    static size_t get_max_nodes(size_t memory);
-
     bool check_abort(const ThreadState& thread_state) const;
 
     LIBBOARDGAME_NOINLINE
@@ -722,10 +720,10 @@ void SearchBase<S, M, R>::AssertionHandler::run()
 
 template<class S, class M, class R>
 SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
-    : m_tree(get_max_nodes(memory), nu_threads),
+    : m_tree(memory / 2, nu_threads),
       m_nu_threads(nu_threads),
       m_bias_term_constant(0),
-      m_tmp_tree(m_tree.get_max_nodes(), m_nu_threads)
+      m_tmp_tree(memory / 2, m_nu_threads)
 #if LIBBOARDGAME_DEBUG
       , m_assertion_handler(*this)
 #endif
@@ -936,15 +934,6 @@ template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_expand_threshold_inc() const -> Float
 {
     return m_expand_threshold_inc;
-}
-
-template<class S, class M, class R>
-size_t SearchBase<S, M, R>::get_max_nodes(size_t memory)
-{
-    // Memory is used for 2 trees (m_tree and m_tmp_tree)
-    size_t max_nodes = memory / sizeof(Node) / 2;
-    LIBBOARDGAME_LOG("Search tree size: 2 x ", max_nodes, " nodes");
-    return max_nodes;
 }
 
 template<class S, class M, class R>

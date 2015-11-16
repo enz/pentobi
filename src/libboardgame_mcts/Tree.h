@@ -127,7 +127,7 @@ public:
 #endif
     };
 
-    Tree(size_t max_nodes, unsigned nu_threads);
+    Tree(size_t memory, unsigned nu_threads);
 
     ~Tree();
 
@@ -153,8 +153,6 @@ public:
 
     void link_children(const Node& node, const Node* first_child,
                        unsigned short nu_children);
-
-    size_t get_max_nodes() const;
 
     void add_value(const Node& node, Float v);
 
@@ -295,9 +293,10 @@ inline void Tree<N>::NodeExpander::link_children(Tree& tree, const Node& node)
 
 
 template<typename N>
-Tree<N>::Tree(size_t max_nodes, unsigned nu_threads)
+Tree<N>::Tree(size_t memory, unsigned nu_threads)
     : m_nu_threads(nu_threads)
 {
+    size_t max_nodes = memory / sizeof(Node);
     // It doesn't make sense to set max_nodes higher than what can be accessed
     // with NodeIdx
     max_nodes =
@@ -405,16 +404,10 @@ bool Tree<N>::extract_subtree(Tree& target, const Node& node,
 {
     LIBBOARDGAME_ASSERT(contains(node));
     LIBBOARDGAME_ASSERT(&target != this);
-    LIBBOARDGAME_ASSERT(target.get_max_nodes() == get_max_nodes());
+    LIBBOARDGAME_ASSERT(target.m_max_nodes == m_max_nodes);
     LIBBOARDGAME_ASSERT(! target.get_root().has_children());
     return copy_subtree(target, target.m_nodes[0], node, 0, check_abort,
                         interval_checker);
-}
-
-template<typename N>
-size_t Tree<N>::get_max_nodes() const
-{
-    return m_max_nodes;
 }
 
 template<typename N>
