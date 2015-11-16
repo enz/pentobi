@@ -221,7 +221,8 @@ size_t Player::get_memory()
         wanted /= static_cast<size_t>(factor);
     }
     size_t memory = min(wanted, reasonable);
-    LIBBOARDGAME_LOG("Using ", memory, " of ", available, " bytes");
+    LIBBOARDGAME_LOG("Using ", memory / 1000000, " MB of ",
+                     available / 1000000, " MB");
     return memory;
 }
 
