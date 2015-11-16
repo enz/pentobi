@@ -154,8 +154,6 @@ public:
     void link_children(const Node& node, const Node* first_child,
                        unsigned short nu_children);
 
-    void set_max_nodes(size_t max_nodes);
-
     size_t get_max_nodes() const;
 
     void add_value(const Node& node, Float v);
@@ -300,13 +298,31 @@ template<typename N>
 Tree<N>::Tree(size_t max_nodes, unsigned nu_threads)
     : m_nu_threads(nu_threads)
 {
-    set_max_nodes(max_nodes);
+    // It doesn't make sense to set max_nodes higher than what can be accessed
+    // with NodeIdx
+    max_nodes =
+        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
+    if (max_nodes == 0)
+        // We need at least the root node (for useful searches we need of
+        // course also children, but a root node is the minimum requirement to
+        // avoid crashing).
+        max_nodes = 1;
+    m_max_nodes = max_nodes;
+    m_nodes.reset(new Node[max_nodes]);
+    m_thread_storage.reset(new ThreadStorage[m_nu_threads]);
+    m_nodes_per_thread = max_nodes / m_nu_threads;
+    for (unsigned i = 0; i < m_nu_threads; ++i)
+    {
+        auto& thread_storage = m_thread_storage[i];
+        thread_storage.begin = m_nodes.get() + i * m_nodes_per_thread;
+        thread_storage.end = thread_storage.begin + m_nodes_per_thread;
+    }
+    clear(0);
 }
 
 template<typename N>
 Tree<N>::~Tree()
-{
-}
+{ }
 
 template<typename N>
 inline void Tree<N>::add_value(const Node& node, Float v)
@@ -463,29 +479,6 @@ template<typename N>
 inline void Tree<N>::add_value_remove_loss(const Node& node, Float v)
 {
     non_const(node).add_value_remove_loss(v);
-}
-
-template<typename N>
-void Tree<N>::set_max_nodes(size_t max_nodes)
-{
-    max_nodes =
-        min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
-    if (max_nodes == 0)
-        // We need at least the root node (for useful searches we need of
-        // course also children, but a root node is the minimum requirement to
-        // avoid crashing).
-        max_nodes = 1;
-    m_max_nodes = max_nodes;
-    m_nodes.reset(new Node[max_nodes]);
-    m_thread_storage.reset(new ThreadStorage[m_nu_threads]);
-    m_nodes_per_thread = max_nodes / m_nu_threads;
-    for (unsigned i = 0; i < m_nu_threads; ++i)
-    {
-        auto& thread_storage = m_thread_storage[i];
-        thread_storage.begin = m_nodes.get() + i * m_nodes_per_thread;
-        thread_storage.end = thread_storage.begin + m_nodes_per_thread;
-    }
-    clear(0);
 }
 
 template<typename N>
