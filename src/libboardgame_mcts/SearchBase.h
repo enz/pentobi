@@ -440,7 +440,7 @@ private:
 
         /** Statistics about in-tree length where the full child select was
             skipped.
-            @see Search::set_full_select_interval() */
+            @see SearchBase::set_full_select_interval() */
         StatisticsExt<> stat_fs_len;
 
         StatisticsExt<> stat_in_tree_len;
@@ -458,11 +458,10 @@ private:
     };
 
     /** Thread in the parallel search.
-        The thread waits for a call to start_search(), then runs the given
-        search loop function (see Search::search_loop()) with the
-        thread-specific search state. After start_search(),
-        wait_search_finished() needs to called before calling start_search()
-        again or destructing this object. */
+        The thread waits for a call to start_search(), then runs
+        SearchBase::search_loop()) with the thread-specific search state.
+        After start_search(), wait_search_finished() needs to called before
+        calling start_search() again or destructing this object. */
     class Thread
     {
     public:
@@ -594,7 +593,7 @@ private:
 
     static size_t get_max_nodes(size_t memory);
 
-    bool check_abort(const ThreadState& thread_state, Float root_count) const;
+    bool check_abort(const ThreadState& thread_state) const;
 
     LIBBOARDGAME_NOINLINE
     bool check_abort_expensive(ThreadState& thread_state) const;
@@ -742,13 +741,12 @@ SearchBase<S, M, R>::~SearchBase()
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state,
-                                      Float root_count) const
+bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const
 {
 #if LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(thread_state);
 #endif
-    if (m_max_count > 0 && root_count >= m_max_count)
+    if (m_max_count > 0 && m_tree.get_root().get_visit_count() >= m_max_count)
     {
         LIBBOARDGAME_LOG_THREAD(thread_state, "Maximum count reached");
         return true;
@@ -1104,7 +1102,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     }
     else
     {
-        simulation.nodes.assign(node);
+        simulation.nodes.resize(1);
         simulation.moves.clear();
         thread_state.full_select_counter = m_full_select_interval;
     }
@@ -1414,7 +1412,7 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
     auto& simulation = thread_state.simulation;
-    simulation.nodes.clear();
+    simulation.nodes.assign(&m_tree.get_root());
     simulation.moves.clear();
     double time_interval = 0.1;
     if (m_max_count == 0 && m_max_time < 1)
@@ -1433,8 +1431,7 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
     while (true)
     {
         thread_state.is_out_of_mem = false;
-        auto count = m_tree.get_root().get_visit_count();
-        if ((check_abort(thread_state, count) || expensive_abort_checker())
+        if ((check_abort(thread_state) || expensive_abort_checker())
                 && m_nu_simulations >= m_min_simulations)
             break;
         auto nu_simulations = m_nu_simulations.fetch_add(1);
