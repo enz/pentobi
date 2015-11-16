@@ -189,8 +189,7 @@ public:
 
     /** Constructor.
         @param nu_threads
-        @param memory The memory to be used for (all) the search trees. If
-        zero, a default value will be used. */
+        @param memory The memory to be used for (all) the search trees. */
     SearchBase(unsigned nu_threads, size_t memory);
 
     virtual ~SearchBase();
@@ -506,6 +505,24 @@ private:
         void thread_main();
     };
 
+
+    /** @name Members that are used concurrently by all threads during the
+        lock-free multi-threaded search */
+    /** @{ */
+
+    Tree m_tree;
+
+    /** See get_root_val(). */
+    array<StatisticsDirtyLockFree<Float>, max_players> m_root_val;
+
+    LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
+
+    /** See get_nu_simulations(). */
+    Atomic<size_t, multithread> m_nu_simulations;
+
+    /** @} */ // @name
+
+
     unsigned m_nu_threads;
 
     /** See set_full_select_interval(). */
@@ -550,8 +567,6 @@ private:
         previous search. */
     Float m_max_count;
 
-    size_t m_max_nodes;
-
     /** Maximum time of current search. */
     double m_max_time;
 
@@ -568,23 +583,6 @@ private:
 #if LIBBOARDGAME_DEBUG
     AssertionHandler m_assertion_handler;
 #endif
-
-
-    /** @name Members that are used concurrently by all threads during the
-        lock-free multi-threaded search */
-    /** @{ */
-
-    Tree m_tree;
-
-    /** See get_root_val(). */
-    array<StatisticsDirtyLockFree<Float>, max_players> m_root_val;
-
-    LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
-
-    /** See get_nu_simulations(). */
-    Atomic<size_t, multithread> m_nu_simulations;
-
-    /** @} */ // @name
 
 
     function<void(double, double)> m_callback;
@@ -724,21 +722,18 @@ void SearchBase<S, M, R>::AssertionHandler::run()
 
 template<class S, class M, class R>
 SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
-    : m_nu_threads(nu_threads),
-      m_max_nodes(get_max_nodes(memory == 0 ? 256000000 : memory)),
+    : m_tree(get_max_nodes(memory), nu_threads),
+      m_nu_threads(nu_threads),
       m_bias_term_constant(0),
-      m_tmp_tree(m_max_nodes, m_nu_threads),
+      m_tmp_tree(m_tree.get_max_nodes(), m_nu_threads)
 #if LIBBOARDGAME_DEBUG
-      m_assertion_handler(*this),
+      , m_assertion_handler(*this)
 #endif
-      m_tree(m_max_nodes, m_nu_threads)
-{
-}
+{ }
 
 template<class S, class M, class R>
 SearchBase<S, M, R>::~SearchBase()
-{
-}
+{ }
 
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const
