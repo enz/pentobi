@@ -264,12 +264,16 @@ public:
 
     Float get_expand_threshold_inc() const;
 
-    /** Constant factor used in UCT bias term.
-        For better speed, the bias term log_2 of the parent count is used and
-        rounded to integers because then computing the logarithm of a floating
-        point is simply taking the exponent. This doesn't affect convergence
-        guarantees of UCT but changes the meaning of the bias term constant by
-        a constant factor. */
+    /** Constant factor used in bias term.
+        The bias term is defined differently from standard UCT, but it only
+        makes a difference at small counts and doesn't affect convergence:
+        - log_2 is used for faster computation,
+        - +1 is added to the parent count (visit_count is incremented before
+          select_child()) to avoid handling the special case 0,
+        - The child uses the value count, which includes prior knowledge
+          initialization (which must be greater 0) and (our version of) RAVE.
+          This avoids having to select each child once at the beginning, which
+          is costly at large branching factors. */
     void set_bias_term_constant(Float c);
 
     Float get_bias_term_constant() const;
@@ -1434,13 +1438,15 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
+    // See comments at set_bias_term_constant() for differences of bias term
+    // to standard UCT
     auto children = m_tree.get_children(node);
     LIBBOARDGAME_ASSERT(! children.empty());
     auto parent_count = node.get_visit_count();
+    LIBBOARDGAME_ASSERT(parent_count > 0);
     Float bias_factor =
-            parent_count <= 1 ? 0 :
-                m_bias_term_constant
-                * sqrt(static_cast<Float>(rounded_log_2(parent_count)));
+            m_bias_term_constant
+            * sqrt(static_cast<Float>(rounded_log_2(parent_count)));
     static_assert(SearchParamConst::child_min_count > 0, "");
     auto bias_limit = bias_factor / sqrt(SearchParamConst::child_min_count);
     auto i = children.begin();

@@ -35,12 +35,10 @@ inline T fast_exp(T x)
     return x;
 }
 
-template<typename F>
-inline int rounded_log_2(F x)
+inline int rounded_log_2(float x)
 {
-    static_assert(is_floating_point<F>::value, "");
-    // Optimized implementation for IEEE-754
-    if (numeric_limits<F>::is_iec559 && sizeof(F) == 4)
+    if (numeric_limits<float>::is_iec559 && numeric_limits<float>::radix == 2
+            && numeric_limits<float>::max_exponent == 128)
     {
         union
         {
@@ -48,16 +46,34 @@ inline int rounded_log_2(F x)
             float f;
         } convert;
         convert.f = x;
-        // The last added 1 is to be compatible with frexp()
-        return ((convert.i >> 23) & 0xff) - 127 + 1;
+        return ((convert.i >> 23) & 0xff) - 127;
     }
     else
     {
-        // Portable fallback. Slower because frexp is not inline and computes
-        // the significant, which we don't need.
         int exponent;
         frexp(x, &exponent);
-        return exponent;
+        return exponent - 1;
+    }
+}
+
+inline int rounded_log_2(double x)
+{
+    if (numeric_limits<double>::is_iec559 && numeric_limits<double>::radix == 2
+            && numeric_limits<double>::max_exponent == 1024)
+    {
+        union
+        {
+            int64_t i;
+            double f;
+        } convert;
+        convert.f = x;
+        return static_cast<int>(((convert.i >> 52) & 0x7ff) - 1023);
+    }
+    else
+    {
+        int exponent;
+        frexp(x, &exponent);
+        return exponent - 1;
     }
 }
 
