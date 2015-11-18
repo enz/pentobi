@@ -24,7 +24,7 @@ MouseArea {
 
             Image {
                 source: theme.getImage("piece-manipulator")
-                sourceSize { width: root.width; height: root.height }
+                sourceSize { width: root.width; height: width }
                 opacity: imageOpacity
                 Behavior on opacity { NumberAnimation { duration: 100 } }
             }
@@ -42,7 +42,7 @@ MouseArea {
 
             Image {
                 source: theme.getImage("piece-manipulator-legal")
-                sourceSize { width: root.width; height: root.height }
+                sourceSize { width: root.width; height: width }
                 opacity: imageOpacity
                 Behavior on opacity { NumberAnimation { duration: 100 } }
             }
@@ -54,31 +54,31 @@ MouseArea {
         // a piece when he wants to click on one of the rotation/flip mouse
         // areas and the piece manipulator is above the piece selector.
         anchors.centerIn: root
-        width: 1.1 * root.width; height: 1.1 * root.height
+        width: 1.1 * root.width; height: width
     }
     MouseArea {
         anchors.centerIn: root
-        width: 0.5 * root.width; height: 0.5 * root.height
+        width: 0.5 * root.width; height: width
         onClicked: piecePlayed()
     }
     MouseArea {
         anchors { top: root.top; horizontalCenter: root.horizontalCenter }
-        width: 0.2 * root.width; height: 0.2 * root.height
+        width: 0.2 * root.width; height: width
         onClicked: pieceModel.rotateRight()
     }
     MouseArea {
         anchors { right: root.right; verticalCenter: root.verticalCenter }
-        width: 0.2 * root.width; height: 0.2 * root.height
+        width: 0.2 * root.width; height: width
         onClicked: pieceModel.flipAcrossX()
     }
     MouseArea {
         anchors { bottom: root.bottom; horizontalCenter: root.horizontalCenter }
-        width: 0.2 * root.width; height: 0.2 * root.height
+        width: 0.2 * root.width; height: width
         onClicked: pieceModel.flipAcrossY()
     }
     MouseArea {
         anchors { left: root.left; verticalCenter: root.verticalCenter }
-        width: 0.2 * root.width; height: 0.2 * root.height
+        width: 0.2 * root.width; height: width
         onClicked: pieceModel.rotateLeft()
     }
 }
