@@ -434,9 +434,6 @@ private:
             was full? */
         bool is_out_of_mem;
 
-        /** Number of simulations in the current search in this thread. */
-        size_t nu_simulations;
-
         Simulation simulation;
 
         StatisticsExt<> stat_len;
@@ -1118,11 +1115,6 @@ string SearchBase<S, M, R>::get_info() const
         return string();
     auto& thread_state = m_threads[0]->thread_state;
     ostringstream s;
-    if (thread_state.nu_simulations == 0)
-    {
-        s << "No simulations in thread 0\n";
-        return s.str();
-    }
     s << fixed << setprecision(2) << "Val: " << get_root_val().get_mean()
       << setprecision(0) << ", ValCnt: " << get_root_val().get_count()
       << ", VstCnt: " << get_root_visit_count()
@@ -1305,7 +1297,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     for (auto& i : m_threads)
     {
         auto& thread_state = i->thread_state;
-        thread_state.nu_simulations = 0;
         thread_state.full_select_counter = 0;
         thread_state.stat_len.clear();
         thread_state.stat_in_tree_len.clear();
@@ -1410,9 +1401,7 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
         if ((check_abort(thread_state) || expensive_abort_checker())
                 && m_nu_simulations >= m_min_simulations)
             break;
-        auto nu_simulations = m_nu_simulations.fetch_add(1);
-        ++thread_state.nu_simulations;
-        state.start_simulation(nu_simulations);
+        state.start_simulation(m_nu_simulations.fetch_add(1));
         play_in_tree(thread_state);
         if (thread_state.is_out_of_mem)
             break;
