@@ -598,8 +598,6 @@ private:
     LIBBOARDGAME_NOINLINE
     bool check_abort_expensive(ThreadState& thread_state) const;
 
-    void check_create_threads();
-
     bool check_cannot_change(ThreadState& thread_state, Float remaining) const;
 
     bool estimate_reused_root_val(Tree& tree, const Node& root, Float& value,
@@ -847,13 +845,6 @@ bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
         return false;
     LIBBOARDGAME_LOG_THREAD(thread_state, "Move will not change");
     return true;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::check_create_threads()
-{
-    if (m_nu_threads != m_threads.size())
-        create_threads();
 }
 
 template<class S, class M, class R>
@@ -1226,7 +1217,8 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                                  Float min_simulations, double max_time,
                                  TimeSource& time_source, bool always_search)
 {
-    check_create_threads();
+    if (m_nu_threads != m_threads.size())
+        create_threads();
     bool is_followup = check_followup(m_followup_sequence);
     on_start_search(is_followup);
     if (max_count > 0)
