@@ -83,7 +83,7 @@ public:
 
     void start_simulation(size_t n);
 
-    void gen_children(Tree::NodeExpander& expander, Float init_val);
+    bool gen_children(Tree::NodeExpander& expander, Float init_val);
 
     void start_playout();
 
@@ -290,14 +290,15 @@ inline void State::finish_in_tree()
             check_symmetry_broken(m_bd, m_shared_const.symmetric_points);
 }
 
-inline void State::gen_children(Tree::NodeExpander& expander, Float init_val)
+inline bool State::gen_children(Tree::NodeExpander& expander, Float init_val)
 {
     if (m_nu_passes == m_nu_colors)
-        return;
+        return true;
     Color to_play = m_bd.get_to_play();
     init_moves_without_gamma(to_play);
-    m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
-                                   m_is_symmetry_broken, expander, init_val);
+    return m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
+                                          m_is_symmetry_broken, expander,
+                                          init_val);
 }
 
 inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,

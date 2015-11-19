@@ -37,8 +37,9 @@ public:
 
     void start_search(const Board& bd);
 
-    /** Generate children nodes initialized with prior knowledge. */
-    void gen_children(const Board& bd, const MoveList& moves,
+    /** Generate children nodes initialized with prior knowledge.
+        @return false If the tree has not enough capacity for the children. */
+    bool gen_children(const Board& bd, const MoveList& moves,
                       bool is_symmetry_broken, Tree::NodeExpander& expander,
                       Float init_val);
 

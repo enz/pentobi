@@ -182,7 +182,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     }
 }
 
-void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
+bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                                   bool is_symmetry_broken,
                                   Tree::NodeExpander& expander, Float init_val)
 {
@@ -191,8 +191,10 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         // Add a pass move. The initialization value does not matter for a
         // single child, but we need to use SearchParamConst::child_min_count
         // for the count to avoid an assertion.
+        if (! expander.check_capacity(1))
+            return false;
         expander.add_child(Move::null(), init_val, 3);
-        return;
+        return true;
     }
     init_local(bd);
     auto to_play = bd.get_to_play();
@@ -228,6 +230,8 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                 }
     }
     m_min_dist_to_center += m_max_dist_diff;
+    if (! expander.check_capacity(static_cast<unsigned short>(moves.size())))
+        return false;
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const auto& features = m_features[i];
@@ -281,6 +285,7 @@ void PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
 
         expander.add_child(mv, value / count, count);
     }
+    return true;
 }
 
 void PriorKnowledge::init_local(const Board& bd)

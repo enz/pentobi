@@ -94,15 +94,17 @@ public:
             SearchParamConst::child_min_count. */
         NodeExpander(unsigned thread_id, Tree& tree, Float child_min_count);
 
+        /** Check if the tree still has the capacity for a given number
+            of children. */
+        bool check_capacity(unsigned short nu_children) const;
+
         /** Add new child.
-            The child will only be added if the tree is not full. */
+            It needs to be checked first with check_capacity() that the tree
+            has enough capacity. */
         void add_child(const Move& mv, Float value, Float count);
 
         /** Link the children to the parent node. */
         void link_children(Tree& tree, const Node& node);
-
-        /** Return if the tree capacity was reached during an add_child(). */
-        bool is_tree_full() const;
 
         /** Return the node to play after the node expansion.
             This returns the child with the highest value if prior knowledge
@@ -114,9 +116,7 @@ public:
     private:
         ThreadStorage& m_thread_storage;
 
-        unsigned short m_nu_children = 0;
-
-        Float m_best_value = 0;
+        Float m_best_value = -numeric_limits<Float>::max();
 
         const Node* m_first_child;
 
@@ -234,7 +234,7 @@ inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
                                            Float child_min_count)
     : m_thread_storage(tree.m_thread_storage[thread_id]),
       m_first_child(m_thread_storage.next),
-      m_best_child(m_first_child)
+      m_best_child(nullptr)
 {
     LIBBOARDGAME_ASSERT(thread_id < tree.m_nu_threads);
 #if LIBBOARDGAME_DEBUG
@@ -248,28 +248,31 @@ template<typename N>
 inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
                                              Float count)
 {
+    // -numeric_limits<Float>::max() ist init value for m_best_value
+    LIBBOARDGAME_ASSERT(value > -numeric_limits<Float>::max());
     LIBBOARDGAME_ASSERT(count >= m_child_min_count);
-    if (m_thread_storage.next >= m_thread_storage.end)
-        return;
-    m_thread_storage.next->init(mv, value, count);
-    ++m_thread_storage.next;
-    if (m_nu_children == 0)
-        m_best_value = value;
-    else if (value > m_best_value)
+    auto& next = m_thread_storage.next;
+    LIBBOARDGAME_ASSERT(next < m_thread_storage.end);
+    next->init(mv, value, count);
+    if (value > m_best_value)
     {
-        m_best_child = m_first_child + m_nu_children;
+        m_best_child = next;
         m_best_value = value;
     }
-    ++m_nu_children;
+    ++next;
+}
+
+template<typename N>
+inline bool Tree<N>::NodeExpander::check_capacity(
+        unsigned short nu_children) const
+{
+    return m_thread_storage.end - m_thread_storage.next  >= nu_children;
 }
 
 template<typename N>
 inline auto Tree<N>::NodeExpander::get_best_child() const -> const Node*
 {
-    if (m_nu_children > 0)
-        return m_best_child;
-    else
-        return nullptr;
+    return m_best_child;
 }
 
 template<typename N>
@@ -279,16 +282,11 @@ inline auto Tree<N>::get_node(NodeIdx i) const -> const Node&
 }
 
 template<typename N>
-inline bool Tree<N>::NodeExpander::is_tree_full() const
-{
-    return m_thread_storage.next >= m_thread_storage.end;
-}
-
-template<typename N>
 inline void Tree<N>::NodeExpander::link_children(Tree& tree, const Node& node)
 {
-    if (m_nu_children > 0)
-        tree.link_children(node, m_first_child, m_nu_children);
+    auto nu_children =
+            static_cast<unsigned short>(m_thread_storage.next - m_first_child);
+    tree.link_children(node, m_first_child, nu_children);
 }
 
 
