@@ -424,9 +424,9 @@ private:
     /** Thread-specific search state. */
     struct ThreadState
     {
-        unsigned thread_id;
-
         unique_ptr<State> state;
+
+        unsigned thread_id;
 
         unsigned full_select_counter;
 
