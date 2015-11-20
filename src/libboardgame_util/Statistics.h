@@ -331,7 +331,16 @@ void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned precision,
     out << " dev=" << get_deviation();
     if (integer_values)
         out << setprecision(0);
-    out << " min=" << m_min << " max=" << m_max;
+    out << " min=";
+    if (m_min == numeric_limits<FLOAT>::max())
+        out << "-";
+    else
+        out << m_min;
+    out << " max=";
+    if (m_max == -numeric_limits<FLOAT>::max())
+        out << "-";
+    else
+        out << m_max;
 }
 
 //----------------------------------------------------------------------------
