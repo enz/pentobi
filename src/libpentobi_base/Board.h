@@ -159,17 +159,17 @@ public:
     void copy_from(const Board& bd);
 
     /** Play a move.
-        @pre mv.is_regular()
+        @pre ! mv.is_null()
         @pre get_nu_moves() < max_game_moves */
     void play(Color c, Move mv);
 
     /** Play a move for the current color to play.
-        @pre mv.is_regular()
+        @pre ! mv.is_null()
         @pre get_nu_moves() < max_game_moves */
     void play(Move mv);
 
     /** Play a move.
-        @pre mv.move.is_regular()
+        @pre ! mv.move.is_null()
         @pre get_nu_moves() < max_game_moves */
     void play(ColorMove mv);
 
@@ -215,11 +215,11 @@ public:
     bool is_game_over() const;
 
     /** Check if a move is legal.
-        @pre mv.is_regular() */
+        @pre ! mv.is_null() */
     bool is_legal(Color c, Move mv) const;
 
     /** Check if a move is legal for the current color to play.
-        @pre mv.is_regular() */
+        @pre ! mv.is_null() */
     bool is_legal(Move mv) const;
 
     /** Check that point is not already occupied or adjacent to own color. */
