@@ -78,14 +78,14 @@ public:
     void keep_only_subtree(const SgfNode& node);
 
     /** Add a piece as setup.
-        @pre mv.is_regular()
+        @pre ! mv.is_null()
         If the node already contains a move, a new child will be created.
         @pre The piece points must be empty on the board
         @return The node or the new child if one was created. */
     const SgfNode& add_setup(const SgfNode& node, Color c, Move mv);
 
     /** Remove a piece using setup properties.
-        @pre mv.is_regular()
+        @pre ! mv.is_null()
         If the node already contains a move, a new child will be created.
         @pre The move must exist on the board
         @return The node or the new child if one was created. */

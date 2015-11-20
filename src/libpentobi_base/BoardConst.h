@@ -60,7 +60,7 @@ public:
     const PieceTransforms& get_transforms() const;
 
     /** Get move info.
-        @pre move.is_regular() */
+        @pre ! mv.is_null() */
     const MoveInfo& get_move_info(Move mv) const;
 
     /** Get pointer to move info array.
@@ -74,7 +74,7 @@ public:
     const MoveInfoExt* get_move_info_ext_array() const;
 
     /** Get extended move info.
-        @pre move.is_regular() */
+        @pre ! mv.is_null() */
     const MoveInfoExt& get_move_info_ext(Move mv) const;
 
     const MoveInfoExt2& get_move_info_ext_2(Move mv) const;
