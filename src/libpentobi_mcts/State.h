@@ -313,7 +313,9 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     }
     PlayerInt player = get_player();
     Move lgr2 = lgr.get_lgr2(player, last, second_last);
-    if (! lgr2.is_null() && m_bd.is_legal(lgr2))
+    // We use Board::is_legal_nonfirst() because it is faster and smaller
+    // and the cases that the lgr move is the first move of a color is rare.
+    if (! lgr2.is_null() && m_bd.is_legal_nonfirst(m_bd.get_to_play(), lgr2))
     {
         if (log_simulations)
             LIBBOARDGAME_LOG("Playing last good reply 2");
@@ -321,7 +323,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
         return true;
     }
     Move lgr1 = lgr.get_lgr1(player, last);
-    if (! lgr1.is_null() && m_bd.is_legal(lgr1))
+    if (! lgr1.is_null() && m_bd.is_legal_nonfirst(m_bd.get_to_play(), lgr1))
     {
         if (log_simulations)
             LIBBOARDGAME_LOG("Playing last good reply 1");

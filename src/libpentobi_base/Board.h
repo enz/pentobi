@@ -224,6 +224,10 @@ public:
         @pre ! mv.is_null() */
     bool is_legal(Color c, Move mv) const;
 
+    /** Check if a move is legal that is not a starting move.
+        @pre ! mv.is_null() */
+    bool is_legal_nonfirst(Color c, Move mv) const;
+
     /** Check if a move is legal for the current color to play.
         @pre ! mv.is_null() */
     bool is_legal(Move mv) const;
@@ -785,6 +789,25 @@ inline bool Board::is_legal(Color c, Move mv) const
             return true;
     while (++i != end);
     return false;
+}
+
+inline bool Board::is_legal_nonfirst(Color c, Move mv) const
+{
+    auto& info = get_move_info(mv);
+    if (! is_piece_left(c, info.get_piece()))
+        return false;
+    bool has_attach_point = false;
+    auto i = info.begin();
+    auto end = info.end();
+    do
+    {
+        if (m_state_color[c].forbidden[*i])
+            return false;
+        if (is_attach_point(*i, c))
+            has_attach_point = true;
+    }
+    while (++i != end);
+    return has_attach_point;
 }
 
 inline bool Board::is_piece_left(Color c, Piece piece) const
