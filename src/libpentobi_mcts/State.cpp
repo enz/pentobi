@@ -27,6 +27,12 @@ using libpentobi_base::PointState;
 
 namespace {
 
+/** Gamma value for PlayoutFeatures::get_nu_local().
+    The value of nu_local dominates all other features, so we use a high
+    gamma. Above some limit, we don't care about the exact value. */
+const array<double, PlayoutFeatures::max_local + 1> gamma_local =
+  { 1, 1e6, 1e12, 1e18, 1e24, 1e30, 1e30, 1e30, 1e30, 1e30, 1e30, 1e30, 1e30 };
+
 inline Float sigmoid(Float steepness, Float x)
 {
     return -1.f + 2.f / (1.f + fast_exp(-steepness * x));
@@ -151,10 +157,7 @@ bool State::check_move(Move mv, const MoveInfo& info, double gamma_piece,
         if (! features.add(*p, playout_features))
             return false;
     }
-    double gamma = gamma_piece;
-    auto nu_local = features.get_nu_local();
-    if (nu_local > 0)
-        gamma *= m_gamma_local[nu_local];
+    double gamma = gamma_piece * gamma_local[features.get_nu_local()];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
@@ -618,15 +621,6 @@ void State::start_search()
         m_gamma_piece[piece] =
             pow(gamma_size_factor, piece_size - 1)
             * pow(gamma_nu_attach_factor, piece_nu_attach - 1);
-    }
-    // The value of nu_local dominates all other features, so we use a high
-    // gamma. Above some limit, we don't care about the exact value.
-    double gamma = 1;
-    for (unsigned i = 0; i < PlayoutFeatures::max_local + 1; ++i)
-    {
-        m_gamma_local[i] = gamma;
-        if (i < 5)
-            gamma *= 1e6;
     }
 }
 

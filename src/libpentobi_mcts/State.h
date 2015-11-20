@@ -142,9 +142,6 @@ private:
     /** Gamma value for a piece. */
     PieceMap<double> m_gamma_piece;
 
-    /** Gamma value for PlayoutFeatures::get_nu_local(). */
-    array<double, PlayoutFeatures::max_local + 1> m_gamma_local;
-
     /** Number of moves played by a color since the last update of its move
         list. */
     ColorMap<unsigned> m_nu_new_moves;
