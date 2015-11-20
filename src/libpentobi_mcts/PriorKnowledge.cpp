@@ -259,7 +259,7 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         // Initialize value from heuristic and init_val, each with a count
         // of 1.5. If this is changed, SearchParamConst::child_min_count
         // should be updated.
-        Float value = 1.5f * heuristic + 1.5f * init_val;
+        Float value = 1.5f * (heuristic + init_val);
         Float count = 3;
 
         // If a symmetric draw is still possible, encourage exploring a move
