@@ -83,10 +83,6 @@ struct SearchParamConstDefault
     /** Use RAVE. */
     static const bool rave = false;
 
-    /** Can the same move occur multiple times (by the same or other players)
-        in the game? */
-    static const bool repeated_moves = true;
-
     /** Enable distance weighting of RAVE updates.
         The weight decreases linearly from the start to the end of a
         simulation. The distance weight is applied in addition to the normal
@@ -446,9 +442,8 @@ private:
         StatisticsExt<> stat_in_tree_len;
 
         /** Local variable for update_rave().
-            Stores if a move was played for each player.
             Reused for efficiency. */
-        array<array<bool, Move::range>, max_players> was_played;
+        array<PlayerInt, Move::range> was_played;
 
         /** Local variable for update_rave().
             Reused for efficiency. */
@@ -869,8 +864,7 @@ void SearchBase<S, M, R>::create_threads()
         auto& thread_state = t->thread_state;
         thread_state.thread_id = i;
         thread_state.state = create_state();
-        for (PlayerInt j = 0; j < max_players; ++j)
-            thread_state.was_played[j].fill(false);
+        thread_state.was_played.fill(max_players);
         if (i > 0)
             t->run();
         m_threads.push_back(move(t));
@@ -1615,10 +1609,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         auto mv = moves[i];
         if (state.skip_rave(mv.move))
             continue;
-        if (SearchParamConst::repeated_moves)
-            for (PlayerInt j = 0; j < m_nu_players; ++j)
-                was_played[j][mv.move.to_int()] = false;
-        was_played[mv.player][mv.move.to_int()] = true;
+        was_played[mv.move.to_int()] = mv.player;
         first_play[mv.move.to_int()] = i;
     }
 
@@ -1639,7 +1630,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         do
         {
             auto mv = it->get_move();
-            if (! was_played[player][mv.to_int()]
+            if (was_played[mv.to_int()] != player
                     || it->get_value_count() > m_rave_child_max)
                 continue;
             auto first = first_play[mv.to_int()];
@@ -1654,10 +1645,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
             break;
         if (! state.skip_rave(mv.move))
         {
-            if (SearchParamConst::repeated_moves)
-                for (PlayerInt j = 0; j < m_nu_players; ++j)
-                    was_played[j][mv.move.to_int()] = false;
-            was_played[player][mv.move.to_int()] = true;
+            was_played[mv.move.to_int()] = player;
             first_play[mv.move.to_int()] = i;
         }
         --i;
@@ -1669,8 +1657,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         ++i;
         if (i >= nu_moves)
             break;
-        auto mv = moves[i];
-        was_played[mv.player][mv.move.to_int()] = false;
+        was_played[moves[i].move.to_int()] = max_players;
     }
 }
 

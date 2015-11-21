@@ -45,8 +45,6 @@ struct SearchParamConst
 
     static const bool rave = true;
 
-    static const bool repeated_moves = false;
-
     static const bool rave_dist_weighting = true;
 
     static const bool use_lgr = true;
