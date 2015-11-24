@@ -9,7 +9,7 @@ ToolButton {
     property string imageSource
 
     Image {
-        height: Screen.pixelDensity < 5 ? 22 : 44
+        width: Screen.pixelDensity < 5 ? 22 : 44; height: width
         sourceSize { width: width; height: height }
         anchors.centerIn: parent
         source: imageSource
