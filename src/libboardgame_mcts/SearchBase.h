@@ -864,7 +864,8 @@ void SearchBase<S, M, R>::create_threads()
         auto& thread_state = t->thread_state;
         thread_state.thread_id = i;
         thread_state.state = create_state();
-        thread_state.was_played.fill(max_players);
+        for (auto& was_played : thread_state.was_played)
+            was_played = max_players;
         if (i > 0)
             t->run();
         m_threads.push_back(move(t));
