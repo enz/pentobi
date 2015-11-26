@@ -458,20 +458,10 @@ inline Move Board::from_string(const string& s) const
 
 inline unsigned Board::get_adj_status(Point p, Color c) const
 {
-    auto& adj_status_list = m_bc->get_adj_status_list(p);
-    auto i = adj_status_list.begin();
-    auto end = adj_status_list.end();
-    LIBBOARDGAME_ASSERT(i != end);
-    unsigned val = 1;
-    unsigned result = is_forbidden(*i, c) ? val : 0;
+    auto i = m_bc->get_adj_status_list(p).begin();
+    unsigned result = is_forbidden(*i, c); // bool converted to integer is 1
     for (unsigned j = 1; j < PrecompMoves::adj_status_nu_adj; ++j)
-    {
-        if (++i == end)
-            break;
-        val <<= 1;
-        if (is_forbidden(*i, c))
-            result |= val;
-    }
+        result |= (is_forbidden(*(++i), c) << j);
     return result;
 }
 
