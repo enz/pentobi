@@ -41,19 +41,20 @@ namespace {
 //    Player::genmove() that depends on the move number]
 
 static const float counts_classic[Player::max_supported_level] =
-    { 3, 24, 87, 213, 667, 1989, 11319, 101391, 1339615 };
+    { 3, 24, 87, 213, 667, 1989, 11884, 105446, 1393199 };
 
 static const float counts_duo[Player::max_supported_level] =
-    { 3, 17, 44, 123, 426, 1672, 6739, 54169, 5476857 };
+    { 3, 17, 44, 123, 426, 1672, 7008, 55794, 5586394 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 433, 727, 1501, 2912, 7395, 22494, 66029, 412757 };
+    { 228, 433, 727, 1501, 2912, 7395, 24068, 69990, 437522 };
 
 } // namespace
 
 //-----------------------------------------------------------------------------
 
-Player::Player(Variant initial_variant, unsigned max_level, string  books_dir, unsigned nu_threads)
+Player::Player(Variant initial_variant, unsigned max_level, string  books_dir,
+               unsigned nu_threads)
     : m_is_book_loaded(false),
       m_use_book(true),
       m_resign(false),

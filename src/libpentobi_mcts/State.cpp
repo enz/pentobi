@@ -100,22 +100,16 @@ void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
     moves.resize(nu_moves);
 }
 
-bool State::check_forbidden(const Grid<bool>& is_forbidden, Move mv,
+bool State::check_forbidden(const GridWithNull<bool>& is_forbidden, Move mv,
                             MoveList& moves, unsigned& nu_moves)
 {
     auto& info = get_move_info(mv);
     auto p = info.begin();
     if (is_forbidden[*p])
         return false;
-    auto end = info.end();
-    // Loop over fixed size to help compiler unroll
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
-    {
-        if (++p == end)
-            break;
-        if (is_forbidden[*p])
+        if (is_forbidden[*(++p)])
             return false;
-    }
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
     moves.get_unchecked(nu_moves) = mv;
     ++nu_moves;
@@ -131,15 +125,9 @@ bool State::check_move(Move mv, const MoveInfo& info, double gamma_piece,
     PlayoutFeatures::Compute features(*p, playout_features);
     if (features.is_forbidden())
         return false;
-    auto end = info.end();
-    // Loop over fixed size to help compiler unroll
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
-    {
-        if (++p == end)
-            break;
-        if (! features.add(*p, playout_features))
+        if (! features.add(*(++p), playout_features))
             return false;
-    }
     double gamma = gamma_piece * gamma_local[features.get_nu_local()];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;

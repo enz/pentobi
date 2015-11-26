@@ -54,6 +54,8 @@ Board::Board(Variant variant)
     m_color_char[Color(1)] = 'O';
     m_color_char[Color(2)] = '#';
     m_color_char[Color(3)] = '@';
+    for (Color c : get_colors())
+        m_state_color[c].forbidden[Point::null()] = false;
     init_variant(variant);
     init();
 #if LIBBOARDGAME_DEBUG

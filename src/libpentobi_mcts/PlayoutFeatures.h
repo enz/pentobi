@@ -19,6 +19,7 @@ using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
+using libpentobi_base::GridWithNull;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
@@ -105,7 +106,7 @@ public:
     void set_local(const Board& bd);
 
 private:
-    Grid<unsigned> m_point_value;
+    GridWithNull<unsigned> m_point_value;
 
     Grid<unsigned> m_snapshot;
 
@@ -115,6 +116,7 @@ private:
 
 inline void PlayoutFeatures::init_snapshot(const Board& bd, Color c)
 {
+    m_point_value[Point::null()] = 0;
     auto& is_forbidden = bd.is_forbidden(c);
     for (Point p : bd)
         m_snapshot[p] = (is_forbidden[p] ? 0x1000u : 0);

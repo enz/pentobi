@@ -18,6 +18,8 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+template<class P, typename T> class GridWithNull;
+
 /** Elements assigned to on-board points.
     The elements must be default-constructible. This class is a POD if the
     element type is a POD.
@@ -27,6 +29,8 @@ using namespace std;
 template<class P, typename T>
 class Grid
 {
+    friend class GridWithNull<P, T>; // for GridWithNull::copy_from(Grid)
+
 public:
     typedef P Point;
 
@@ -85,6 +89,109 @@ inline void Grid<P, T>::copy_from(const Grid& grid, const Geometry& geo)
 
 template<class P, typename T>
 string Grid<P, T>::to_string(const Geometry& geo) const
+{
+    ostringstream buffer;
+    size_t max_len = 0;
+    for (Point p : geo)
+    {
+        buffer.str("");
+        buffer << (*this)[p];
+        max_len = max(max_len, buffer.str().length());
+    }
+    buffer.str("");
+    auto width = geo.get_width();
+    auto height = geo.get_height();
+    string empty(max_len, ' ');
+    for (unsigned y = 0; y < height; ++y)
+    {
+        for (unsigned x = 0; x < width; ++x)
+        {
+            Point p = geo.get_point(x, y);
+            if (! p.is_null())
+                buffer << setw(int(max_len)) << (*this)[p];
+            else
+                buffer << empty;
+            if (x < width - 1)
+                buffer << ' ';
+        }
+        buffer << '\n';
+    }
+    return buffer.str();
+}
+
+//-----------------------------------------------------------------------------
+
+/** Like Grid, but allows Point::null() as index. */
+template<class P, typename T>
+class GridWithNull
+{
+public:
+    typedef P Point;
+
+    typedef libboardgame_base::Geometry<P> Geometry;
+
+    T& operator[](const Point& p);
+
+    const T& operator[](const Point& p) const;
+
+    /** Fill all on-board points for a given geometry with a value. */
+    void fill(const T& val, const Geometry& geo);
+
+    /** Fill points with a value. */
+    void fill_all(const T& val);
+
+    string to_string(const Geometry& geo) const;
+
+    void copy_from(const Grid<P, T>& grid, const Geometry& geo);
+
+    void copy_from(const GridWithNull& grid, const Geometry& geo);
+
+private:
+    T m_a[Point::range];
+};
+
+template<class P, typename T>
+inline T& GridWithNull<P, T>::operator[](const Point& p)
+{
+    return m_a[p.to_int()];
+}
+
+template<class P, typename T>
+inline const T& GridWithNull<P, T>::operator[](const Point& p) const
+{
+    return m_a[p.to_int()];
+}
+
+template<class P, typename T>
+inline void GridWithNull<P, T>::fill(const T& val, const Geometry& geo)
+{
+    std::fill(m_a + Point::begin_onboard, m_a + geo.get_range(), val);
+}
+
+template<class P, typename T>
+inline void GridWithNull<P, T>::fill_all(const T& val)
+{
+    std::fill(m_a, m_a + Point::range, val);
+}
+
+template<class P, typename T>
+inline void GridWithNull<P, T>::copy_from(const Grid<P, T>& grid,
+                                          const Geometry& geo)
+{
+    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
+         m_a + Point::begin_onboard);
+}
+
+template<class P, typename T>
+inline void GridWithNull<P, T>::copy_from(const GridWithNull& grid,
+                                          const Geometry& geo)
+{
+    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
+         m_a + Point::begin_onboard);
+}
+
+template<class P, typename T>
+string GridWithNull<P, T>::to_string(const Geometry& geo) const
 {
     ostringstream buffer;
     size_t max_len = 0;

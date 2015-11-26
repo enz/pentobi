@@ -232,10 +232,11 @@ public:
         @pre ! mv.is_null() */
     bool is_legal(Move mv) const;
 
-    /** Check that point is not already occupied or adjacent to own color. */
+    /** Check that point is not already occupied or adjacent to own color.
+        Point::null() is an allowed argument and returns false. */
     bool is_forbidden(Point p, Color c) const;
 
-    const Grid<bool>& is_forbidden(Color c) const;
+    const GridWithNull<bool>& is_forbidden(Color c) const;
 
     /** Check that no points of move are already occupied or adjacent to own
         color.
@@ -331,7 +332,7 @@ private:
     /** Color-dependent part of the board state. */
     struct StateColor
     {
-        Grid<bool> forbidden;
+        GridWithNull<bool> forbidden;
 
         Grid<bool> is_attach_point;
 
@@ -739,7 +740,7 @@ inline bool Board::is_forbidden(Point p, Color c) const
     return m_state_color[c].forbidden[p];
 }
 
-inline const Grid<bool>& Board::is_forbidden(Color c) const
+inline const GridWithNull<bool>& Board::is_forbidden(Color c) const
 {
     return m_state_color[c].forbidden;
 }

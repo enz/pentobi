@@ -19,6 +19,10 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+/** Most frequently accessed move info.
+    Contains the points and the piece of the move. If the point list is smaller
+    than PieceInfo::max_size, values above end() up to PieceInfo::max_size may
+    be accessed and contain Point::null() to allow loop unrolling. */
 class MoveInfo
 {
 public:
@@ -28,9 +32,11 @@ public:
     {
         m_piece = static_cast<uint8_t>(piece.to_int());
         m_size = static_cast<uint8_t>(points.size());
-        // Copy max_size elements (faster because compiler can unroll the loop)
-        for (MovePoints::IntType i = 0; i < MovePoints::max_size; ++i)
+        MovePoints::IntType i;
+        for (i = 0; i < m_size; ++i)
             m_points[i] = points.get_unchecked(i);
+        for ( ; i < MovePoints::max_size; ++i)
+            m_points[i] = Point::null();
     }
 
     const Point* begin() const
