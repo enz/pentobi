@@ -67,23 +67,6 @@ inline void State::add_moves(Point p, Color c,
                                   nu_moves, playout_features, total_gamma))
                 marker.set(mv);
     }
-    m_moves_added_at[c][p] = true;
-}
-
-inline void State::add_moves(Point p, Color c, Piece piece,
-                             unsigned adj_status, double& total_gamma,
-                             MoveList& moves, unsigned& nu_moves)
-{
-    if (! has_moves(c, piece, p, adj_status))
-        return;
-    auto& marker = m_marker[c];
-    auto& playout_features = m_playout_features[c];
-    auto gamma_piece = m_gamma_piece[piece];
-    for (Move mv : get_moves(c, piece, p, adj_status))
-        if (! marker[mv]
-                && check_move(mv, get_move_info(mv), gamma_piece, moves,
-                              nu_moves, playout_features, total_gamma))
-            marker.set(mv);
 }
 
 void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
@@ -482,7 +465,10 @@ void State::init_moves_with_gamma(Color c)
         double total_gamma = 0;
         for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
+            {
                 add_moves(p, c, pieces, total_gamma, moves, nu_moves);
+                m_moves_added_at[c][p] = true;
+            }
         moves.resize(nu_moves);
     }
     m_is_move_list_initialized[c] = true;
@@ -697,7 +683,10 @@ void State::update_moves(Color c)
     auto end = attach_points.end();
     for (auto i = begin; i != end; ++i)
         if (! is_forbidden[*i] && ! m_moves_added_at[c][*i])
+        {
+            m_moves_added_at[c][*i] = true;
             add_moves(*i, c, pieces, total_gamma, moves, nu_moves);
+        }
     m_nu_new_moves[c] = 0;
     m_last_attach_points_end[c] = end;
 
@@ -717,14 +706,9 @@ void State::update_moves(Color c)
                         && is_piece_considered_new[piece])
                     new_pieces.get_unchecked(n++) = piece;
             new_pieces.resize(n);
-            for (Point p : m_bd.get_attach_points(c))
+            for (Point p : attach_points)
                 if (! is_forbidden[p])
-                {
-                    auto adj_status = m_bd.get_adj_status(p, c);
-                    for (Piece piece : new_pieces)
-                        add_moves(p, c, piece, adj_status, total_gamma,
-                                  moves, nu_moves);
-                }
+                    add_moves(p, c, new_pieces, total_gamma, moves, nu_moves);
             m_is_piece_considered[c] = &is_piece_considered_new;
         }
     }
