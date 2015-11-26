@@ -123,11 +123,10 @@ bool State::check_move(Move mv, const MoveInfo& info, double gamma_piece,
 {
     auto p = info.begin();
     PlayoutFeatures::Compute features(*p, playout_features);
+    for (unsigned i = 1; i < PieceInfo::max_size; ++i)
+        features.add(*(++p), playout_features);
     if (features.is_forbidden())
         return false;
-    for (unsigned i = 1; i < PieceInfo::max_size; ++i)
-        if (! features.add(*(++p), playout_features))
-            return false;
     double gamma = gamma_piece * gamma_local[features.get_nu_local()];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;

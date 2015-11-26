@@ -59,15 +59,10 @@ public:
             : m_value(playout_features.m_point_value[p])
         { }
 
-        /** Add a point of the move.
-            @return false if point is forbidden */
-        bool add(Point p, const PlayoutFeatures& playout_features)
+        /** Add a point of the move. */
+        void add(Point p, const PlayoutFeatures& playout_features)
         {
-            auto value = playout_features.m_point_value[p];
-            if ((value & 0xf000u) != 0)
-                return false;
-            m_value += value;
-            return true;
+            m_value += playout_features.m_point_value[p];
         }
 
         bool is_forbidden() const

@@ -41,13 +41,13 @@ namespace {
 //    Player::genmove() that depends on the move number]
 
 static const float counts_classic[Player::max_supported_level] =
-    { 3, 24, 87, 213, 667, 1989, 11884, 105446, 1393199 };
+    { 3, 24, 87, 213, 667, 1989, 12192, 107133, 1415490 };
 
 static const float counts_duo[Player::max_supported_level] =
     { 3, 17, 44, 123, 426, 1672, 7008, 55794, 5586394 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 433, 727, 1501, 2912, 7395, 24068, 69990, 437522 };
+    { 228, 433, 727, 1501, 2912, 7395, 24934, 71809, 448897 };
 
 } // namespace
 
