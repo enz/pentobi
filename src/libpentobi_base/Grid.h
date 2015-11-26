@@ -18,7 +18,7 @@ template<typename T>
 using Grid = libboardgame_base::Grid<Point, T>;
 
 template<typename T>
-using GridWithNull = libboardgame_base::GridWithNull<Point, T>;
+using GridExt = libboardgame_base::GridExt<Point, T>;
 
 //-----------------------------------------------------------------------------
 

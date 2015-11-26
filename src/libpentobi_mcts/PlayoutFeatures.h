@@ -19,7 +19,7 @@ using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
-using libpentobi_base::GridWithNull;
+using libpentobi_base::GridExt;
 using libpentobi_base::Move;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
@@ -101,7 +101,7 @@ public:
     void set_local(const Board& bd);
 
 private:
-    GridWithNull<unsigned> m_point_value;
+    GridExt<unsigned> m_point_value;
 
     Grid<unsigned> m_snapshot;
 

@@ -18,7 +18,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-template<class P, typename T> class GridWithNull;
+template<class P, typename T> class GridExt;
 
 /** Elements assigned to on-board points.
     The elements must be default-constructible. This class is a POD if the
@@ -29,7 +29,7 @@ template<class P, typename T> class GridWithNull;
 template<class P, typename T>
 class Grid
 {
-    friend class GridWithNull<P, T>; // for GridWithNull::copy_from(Grid)
+    friend class GridExt<P, T>; // for GridExt::copy_from(Grid)
 
 public:
     typedef P Point;
@@ -123,7 +123,7 @@ string Grid<P, T>::to_string(const Geometry& geo) const
 
 /** Like Grid, but allows Point::null() as index. */
 template<class P, typename T>
-class GridWithNull
+class GridExt
 {
 public:
     typedef P Point;
@@ -144,38 +144,46 @@ public:
 
     void copy_from(const Grid<P, T>& grid, const Geometry& geo);
 
-    void copy_from(const GridWithNull& grid, const Geometry& geo);
+    void copy_from(const GridExt& grid, const Geometry& geo);
 
 private:
     T m_a[Point::range];
 };
 
 template<class P, typename T>
-inline T& GridWithNull<P, T>::operator[](const Point& p)
+inline T& GridExt<P, T>::operator[](const Point& p)
 {
     return m_a[p.to_int()];
 }
 
 template<class P, typename T>
-inline const T& GridWithNull<P, T>::operator[](const Point& p) const
+inline const T& GridExt<P, T>::operator[](const Point& p) const
 {
     return m_a[p.to_int()];
 }
 
 template<class P, typename T>
-inline void GridWithNull<P, T>::fill(const T& val, const Geometry& geo)
+inline void GridExt<P, T>::fill(const T& val, const Geometry& geo)
 {
     std::fill(m_a + Point::begin_onboard, m_a + geo.get_range(), val);
 }
 
 template<class P, typename T>
-inline void GridWithNull<P, T>::fill_all(const T& val)
+inline void GridExt<P, T>::fill_all(const T& val)
 {
     std::fill(m_a, m_a + Point::range, val);
 }
 
 template<class P, typename T>
-inline void GridWithNull<P, T>::copy_from(const Grid<P, T>& grid,
+inline void GridExt<P, T>::copy_from(const Grid<P, T>& grid,
+                                     const Geometry& geo)
+{
+    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
+         m_a + Point::begin_onboard);
+}
+
+template<class P, typename T>
+inline void GridExt<P, T>::copy_from(const GridExt& grid,
                                           const Geometry& geo)
 {
     copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
@@ -183,15 +191,7 @@ inline void GridWithNull<P, T>::copy_from(const Grid<P, T>& grid,
 }
 
 template<class P, typename T>
-inline void GridWithNull<P, T>::copy_from(const GridWithNull& grid,
-                                          const Geometry& geo)
-{
-    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
-         m_a + Point::begin_onboard);
-}
-
-template<class P, typename T>
-string GridWithNull<P, T>::to_string(const Geometry& geo) const
+string GridExt<P, T>::to_string(const Geometry& geo) const
 {
     ostringstream buffer;
     size_t max_len = 0;

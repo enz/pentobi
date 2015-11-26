@@ -100,7 +100,7 @@ void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
     moves.resize(nu_moves);
 }
 
-bool State::check_forbidden(const GridWithNull<bool>& is_forbidden, Move mv,
+bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
                             MoveList& moves, unsigned& nu_moves)
 {
     auto& info = get_move_info(mv);
