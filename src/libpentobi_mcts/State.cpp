@@ -665,7 +665,7 @@ void State::update_moves(Color c)
         for (unsigned i = 0; i < old_size; ++i)
         {
             LIBBOARDGAME_ASSERT(i >= nu_moves);
-            Move mv = moves.get_unchecked(i);
+            Move mv = moves[i];
             auto& info = get_move_info(mv);
             if (info.get_piece() == piece
                     || ! check_move(mv, info, moves, nu_moves,
@@ -681,7 +681,7 @@ void State::update_moves(Color c)
         for (unsigned i = 0; i < old_size; ++i)
         {
             LIBBOARDGAME_ASSERT(i >= nu_moves);
-            Move mv = moves.get_unchecked(i);
+            Move mv = moves[i];
             auto& info = get_move_info(mv);
             if (! is_piece_left[info.get_piece()]
                     || ! check_move(mv, info, moves,  nu_moves,
