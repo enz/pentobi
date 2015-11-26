@@ -54,8 +54,6 @@ Board::Board(Variant variant)
     m_color_char[Color(1)] = 'O';
     m_color_char[Color(2)] = '#';
     m_color_char[Color(3)] = '@';
-    for (Color c : get_colors())
-        m_state_color[c].forbidden[Point::null()] = false;
     init_variant(variant);
     init();
 #if LIBBOARDGAME_DEBUG
@@ -237,6 +235,7 @@ void Board::init(Variant variant, const Setup* setup)
         m_nu_piece_instances = 1;
     for (Color c : get_colors())
     {
+        m_state_color[c].forbidden[Point::null()] = false;
         m_state_color[c].forbidden.fill(false, *m_geo);
         m_state_color[c].is_attach_point.fill(false, *m_geo);
         m_attach_points[c].clear();
