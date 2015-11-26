@@ -103,7 +103,7 @@ struct MoveInfoExt
 
 //-----------------------------------------------------------------------------
 
-/** Leeast frequently accessed move info.
+/** Least frequently accessed move info.
     Stored separately from MoveInfo to improve CPU cache performance. */
 struct MoveInfoExt2
 {
