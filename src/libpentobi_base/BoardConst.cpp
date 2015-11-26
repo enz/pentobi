@@ -700,19 +700,22 @@ void BoardConst::init_adj_status()
 {
     for (Point p : m_geo)
     {
-        auto& adj_status_list = m_adj_status_list[p];
+        auto& l = m_adj_status_list[p];
         for (Point pp : m_geo.get_adj(p))
         {
-            if (adj_status_list.size() == PrecompMoves::adj_status_nu_adj)
+            if (l.size() == PrecompMoves::adj_status_nu_adj)
                 break;
-            adj_status_list.push_back(pp);
+            l.push_back(pp);
         }
         for (Point pp : m_geo.get_diag(p))
         {
-            if (adj_status_list.size() == PrecompMoves::adj_status_nu_adj)
+            if (l.size() == PrecompMoves::adj_status_nu_adj)
                 break;
-            adj_status_list.push_back(pp);
+            l.push_back(pp);
         }
+        for (auto i = l.end(); i < l.begin() + PrecompMoves::adj_status_nu_adj;
+             ++i)
+            *i = Point::null();
     }
     array<bool, PrecompMoves::adj_status_nu_adj> forbidden;
     for (Point p : m_geo)
