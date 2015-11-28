@@ -126,15 +126,9 @@ inline void PlayoutFeatures::restore_snapshot(const Board& bd)
 inline void PlayoutFeatures::set_forbidden(const MoveInfo& info)
 {
     auto p = info.begin();
-    auto end = info.end();
-    m_point_value[*p] = 0x1000u;
-    // Loop over fixed size to help compiler unroll
-    for (unsigned i = 1; i < PieceInfo::max_size; ++i)
-    {
-        if (++p == end)
-            return;
+    for (unsigned i = 0; i < PieceInfo::max_size; ++i, ++p)
         m_point_value[*p] = 0x1000u;
-    }
+    m_point_value[Point::null()] = 0;
 }
 
 inline void PlayoutFeatures::set_forbidden(const MoveInfoExt& info_ext)
