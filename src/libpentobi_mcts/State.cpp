@@ -105,11 +105,11 @@ bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
 {
     auto& info = get_move_info(mv);
     auto p = info.begin();
-    if (is_forbidden[*p])
-        return false;
+    bool forbidden = is_forbidden[*p];
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
-        if (is_forbidden[*(++p)])
-            return false;
+        forbidden |= is_forbidden[*(++p)];
+    if (forbidden)
+        return false;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
     moves.get_unchecked(nu_moves) = mv;
     ++nu_moves;
