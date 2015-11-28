@@ -110,7 +110,7 @@ private:
     static const bool log_simulations = false;
 
     /** The cumulative gamma value of the moves in m_moves. */
-    array<double, Move::range> m_cumulative_gamma;
+    array<double, MoveList::max_size> m_cumulative_gamma;
 
     Color::IntType m_nu_passes;
 
