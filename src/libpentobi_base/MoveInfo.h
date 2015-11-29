@@ -32,11 +32,8 @@ public:
     {
         m_piece = static_cast<uint8_t>(piece.to_int());
         m_size = static_cast<uint8_t>(points.size());
-        MovePoints::IntType i;
-        for (i = 0; i < m_size; ++i)
+        for (MovePoints::IntType i = 0; i < MovePoints::max_size; ++i)
             m_points[i] = points.get_unchecked(i);
-        for ( ; i < MovePoints::max_size; ++i)
-            m_points[i] = Point::null();
     }
 
     const Point* begin() const

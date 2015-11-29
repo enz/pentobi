@@ -573,6 +573,8 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
     }
     auto piece_size = static_cast<MovePoints::IntType>(piece_info.get_size());
     MovePoints points;
+    for (MovePoints::IntType i = 0; i < MovePoints::max_size; ++i)
+        points.get_unchecked(i) = Point::null();
     points.resize(piece_size);
     // Make outer loop iterator over geometry for better memory locality
     for (Point p : m_geo)
