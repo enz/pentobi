@@ -19,8 +19,10 @@ using libboardgame_util::fast_exp;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
+using libpentobi_base::Grid;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
+using libpentobi_base::PieceInfo;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -58,7 +60,8 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     auto move_info_array = bc.get_move_info_array();
     auto move_info_ext_array = bc.get_move_info_ext_array();
     auto& is_forbidden = bd.is_forbidden(to_play);
-    Grid<Float> point_value;
+    GridExt<Float> point_value;
+    point_value[Point::null()] = 0;
     Grid<Float> attach_point_value;
     Grid<Float> adj_point_value;
     for (Point p : geo)
@@ -130,20 +133,21 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         auto& info_ext = *(move_info_ext_array + mv_int);
         auto& features = m_features[i];
         auto j = info.begin();
-        auto end = info.end();
         Float heuristic = point_value[*j];
         bool local = m_is_local[*j];
         if (! check_dist_to_center)
-            while (++j != end)
+            for (unsigned k = 1; k < PieceInfo::max_size; ++k)
             {
+                ++j;
                 heuristic += point_value[*j];
                 local |= m_is_local[*j];
             }
         else
         {
             features.dist_to_center = m_dist_to_center[*j];
-            while (++j != end)
+            for (unsigned k = 1; k < PieceInfo::max_size; ++k)
             {
+                ++j;
                 heuristic += point_value[*j];
                 local |= m_is_local[*j];
                 features.dist_to_center =
@@ -153,7 +157,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                 min(m_min_dist_to_center, features.dist_to_center);
         }
         j = info_ext.begin_attach();
-        end = info_ext.end_attach();
+        auto end = info_ext.end_attach();
         heuristic += attach_point_value[*j];
         while (++j != end)
             heuristic += attach_point_value[*j];
@@ -353,6 +357,7 @@ void PriorKnowledge::start_search(const Board& bd)
             d = max(d, 2.f);
         m_dist_to_center[p] = d;
     }
+    m_dist_to_center[Point::null()] = numeric_limits<float>::max();
 
     // Init m_check_dist_to_center
     switch(bd.get_variant())

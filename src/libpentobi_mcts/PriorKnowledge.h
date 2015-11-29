@@ -17,7 +17,7 @@ namespace libpentobi_mcts {
 using namespace std;
 using libpentobi_base::Board;
 using libpentobi_base::ColorMap;
-using libpentobi_base::Grid;
+using libpentobi_base::GridExt;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
 using libpentobi_base::PointList;
@@ -74,13 +74,13 @@ private:
     float m_max_dist_diff;
 
     /** Marker for attach points of recent opponent moves. */
-    Grid<bool> m_is_local;
+    GridExt<bool> m_is_local;
 
     /** Points in m_is_local with value greater zero. */
     PointList m_local_points;
 
     /** Distance to center heuristic. */
-    Grid<float> m_dist_to_center;
+    GridExt<float> m_dist_to_center;
 
     void compute_features(const Board& bd, const MoveList& moves,
                           bool check_dist_to_center, bool check_connect);
