@@ -30,6 +30,9 @@ Desktop version:
   computer move generation and then using Undo Move.
 * Autosaving unfinished games did not work if game was finished
   first but then made unfinished again with Undo Move.
+* Selecting pieces in setup mode did no longer work if no legal moves
+  were left, even if setup mode is also intended to be used for
+  setting up illegal positions (e.g. for Blokus art).
 
 
 Version 10.1 (15 Oct 2015)
