@@ -65,6 +65,8 @@ public:
 
     void setFreePlacement(bool enable);
 
+    void setSelectedPiecePoints(Move mv);
+
 public slots:
     void clearPiece();
 

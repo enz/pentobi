@@ -335,14 +335,11 @@ void GuiBoard::paintEvent(QPaintEvent*)
             m_boardPainter.paintSelectedPiece(painter, m_currentMoveShownColor,
                                               m_currentMoveShownPoints, true);
     }
-    else
+    else if (! m_selectedPiecePoints.empty())
     {
-        if (! m_selectedPiece.is_null() && ! m_selectedPieceOffset.is_null())
-        {
-            bool isLegal = ! findSelectedPieceMove().is_null();
-            m_boardPainter.paintSelectedPiece(painter, m_selectedPieceColor,
-                                              m_selectedPiecePoints, isLegal);
-        }
+        bool isLegal = ! findSelectedPieceMove().is_null();
+        m_boardPainter.paintSelectedPiece(painter, m_selectedPieceColor,
+                                          m_selectedPiecePoints, isLegal);
     }
 }
 
@@ -443,6 +440,34 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
     m_selectedPieceOffset = type_matching_offset;
 }
 
+void GuiBoard::setSelectedPiecePoints(Move mv)
+{
+    m_selectedPiecePoints.clear();
+    for (Point p : m_bd.get_move_info(mv))
+        m_selectedPiecePoints.push_back(p);
+    update();
+}
+
+void GuiBoard::setSelectedPiecePoints()
+{
+    m_selectedPiecePoints.clear();
+    if (! m_selectedPiece.is_null() && ! m_selectedPieceOffset.is_null())
+    {
+        auto& geo = m_bd.get_geometry();
+        int width = static_cast<int>(geo.get_width());
+        int height = static_cast<int>(geo.get_height());
+        for (CoordPoint p : m_bd.get_piece_info(m_selectedPiece).get_points())
+        {
+            p = m_selectedPieceTransform->get_transformed(p);
+            int x = p.x + m_selectedPieceOffset.x;
+            int y = p.y + m_selectedPieceOffset.y;
+            if (x >= 0 && x < width && y >= 0 && y < height)
+                m_selectedPiecePoints.push_back(geo.get_point(x, y));
+        }
+    }
+    update();
+}
+
 void GuiBoard::setSelectedPieceTransform(const Transform* transform)
 {
     if (m_selectedPieceTransform == transform)
@@ -471,26 +496,6 @@ void GuiBoard::showMoveAnimation()
     {
         m_isMoveShown = false;
         m_currentMoveShownAnimationTimer.stop();
-    }
-    update();
-}
-
-void GuiBoard::setSelectedPiecePoints()
-{
-    m_selectedPiecePoints.clear();
-    if (! m_selectedPiece.is_null() && ! m_selectedPieceOffset.is_null())
-    {
-        auto& geo = m_bd.get_geometry();
-        int width = static_cast<int>(geo.get_width());
-        int height = static_cast<int>(geo.get_height());
-        for (CoordPoint p : m_bd.get_piece_info(m_selectedPiece).get_points())
-        {
-            p = m_selectedPieceTransform->get_transformed(p);
-            int x = p.x + m_selectedPieceOffset.x;
-            int y = p.y + m_selectedPieceOffset.y;
-            if (x >= 0 && x < width && y >= 0 && y < height)
-                m_selectedPiecePoints.push_back(geo.get_point(x, y));
-        }
     }
     update();
 }

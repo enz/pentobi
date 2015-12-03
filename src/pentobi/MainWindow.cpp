@@ -2553,6 +2553,7 @@ void MainWindow::pointClicked(Point p)
         points.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
     auto transform = m_bd.get_piece_info(piece).find_transform(geo, points);
     selectPiece(c, piece, transform);
+    m_guiBoard->setSelectedPiecePoints(mv);
 }
 
 void MainWindow::previousPiece()
