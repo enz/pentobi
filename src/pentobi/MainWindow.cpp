@@ -2533,14 +2533,26 @@ void MainWindow::playSingleMove()
 
 void MainWindow::pointClicked(Point p)
 {
+    // If a piece on the board is clicked on in setup mode, remove it and make
+    // it the selected piece without changing its orientation.
     if (! m_actionSetupMode->isChecked())
         return;
     PointState s = m_bd.get_point_state(p);
     if (s.is_empty())
         return;
-    m_game.remove_setup(s.to_color(), m_bd.get_move_at(p));
+    Color c = s.to_color();
+    Move mv = m_bd.get_move_at(p);
+    m_game.remove_setup(c, mv);
     setSetupPlayer();
     updateWindow(true);
+    auto& info = m_bd.get_move_info(mv);
+    auto& geo = m_bd.get_geometry();
+    Piece piece = info.get_piece();
+    PieceInfo::Points points;
+    for (Point p : info)
+        points.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
+    auto transform = m_bd.get_piece_info(piece).find_transform(geo, points);
+    selectPiece(c, piece, transform);
 }
 
 void MainWindow::previousPiece()
