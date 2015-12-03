@@ -18,6 +18,40 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+template<class T>
+string grid_to_string(const T& grid, const Geometry<typename T::Point>& geo)
+{
+    ostringstream buffer;
+    size_t max_len = 0;
+    for (auto p : geo)
+    {
+        buffer.str("");
+        buffer << grid[p];
+        max_len = max(max_len, buffer.str().length());
+    }
+    buffer.str("");
+    auto width = geo.get_width();
+    auto height = geo.get_height();
+    string empty(max_len, ' ');
+    for (unsigned y = 0; y < height; ++y)
+    {
+        for (unsigned x = 0; x < width; ++x)
+        {
+            auto p = geo.get_point(x, y);
+            if (! p.is_null())
+                buffer << setw(int(max_len)) << grid[p];
+            else
+                buffer << empty;
+            if (x < width - 1)
+                buffer << ' ';
+        }
+        buffer << '\n';
+    }
+    return buffer.str();
+}
+
+//-----------------------------------------------------------------------------
+
 template<class P, typename T> class GridExt;
 
 /** Elements assigned to on-board points.
@@ -90,33 +124,7 @@ inline void Grid<P, T>::copy_from(const Grid& grid, const Geometry& geo)
 template<class P, typename T>
 string Grid<P, T>::to_string(const Geometry& geo) const
 {
-    ostringstream buffer;
-    size_t max_len = 0;
-    for (Point p : geo)
-    {
-        buffer.str("");
-        buffer << (*this)[p];
-        max_len = max(max_len, buffer.str().length());
-    }
-    buffer.str("");
-    auto width = geo.get_width();
-    auto height = geo.get_height();
-    string empty(max_len, ' ');
-    for (unsigned y = 0; y < height; ++y)
-    {
-        for (unsigned x = 0; x < width; ++x)
-        {
-            Point p = geo.get_point(x, y);
-            if (! p.is_null())
-                buffer << setw(int(max_len)) << (*this)[p];
-            else
-                buffer << empty;
-            if (x < width - 1)
-                buffer << ' ';
-        }
-        buffer << '\n';
-    }
-    return buffer.str();
+    return grid_to_string(*this, geo);
 }
 
 //-----------------------------------------------------------------------------
@@ -193,33 +201,7 @@ inline void GridExt<P, T>::copy_from(const GridExt& grid,
 template<class P, typename T>
 string GridExt<P, T>::to_string(const Geometry& geo) const
 {
-    ostringstream buffer;
-    size_t max_len = 0;
-    for (Point p : geo)
-    {
-        buffer.str("");
-        buffer << (*this)[p];
-        max_len = max(max_len, buffer.str().length());
-    }
-    buffer.str("");
-    auto width = geo.get_width();
-    auto height = geo.get_height();
-    string empty(max_len, ' ');
-    for (unsigned y = 0; y < height; ++y)
-    {
-        for (unsigned x = 0; x < width; ++x)
-        {
-            Point p = geo.get_point(x, y);
-            if (! p.is_null())
-                buffer << setw(int(max_len)) << (*this)[p];
-            else
-                buffer << empty;
-            if (x < width - 1)
-                buffer << ' ';
-        }
-        buffer << '\n';
-    }
-    return buffer.str();
+    return grid_to_string(*this, geo);
 }
 
 //-----------------------------------------------------------------------------
