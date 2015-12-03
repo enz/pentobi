@@ -2871,7 +2871,8 @@ void MainWindow::selectPiece(Color c, Piece piece)
 
 void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
 {
-    if (m_isGenMoveRunning || m_bd.is_game_over())
+    if (m_isGenMoveRunning
+            || (m_bd.is_game_over() && ! m_actionSetupMode->isChecked()))
         return;
     m_currentColor = c;
     m_guiBoard->selectPiece(c, piece);
