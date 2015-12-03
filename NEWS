@@ -7,6 +7,8 @@ Version 10.UNKNOWN (master)
 
 Desktop version:
 
+* If a piece is removed from the board in setup mode, it will now
+  become the selected piece.
 * The command line option --memory was replaced by --maxlevel, which
   reduces the needed memory according to the maximum level and also
   removes higher levels from the menu.
