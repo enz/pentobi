@@ -53,17 +53,6 @@ QPointF getGameCoord(const Board& bd, Move mv)
     return PieceModel::findCenter(bd, movePoints, false);
 }
 
-const Transform* getTransform(const Board& bd, Move mv)
-{
-    auto& geo = bd.get_geometry();
-    auto moveInfo = bd.get_move_info(mv);
-    PiecePoints movePoints;
-    for (Point p : moveInfo)
-        movePoints.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
-    auto& pieceInfo = bd.get_piece_info(moveInfo.get_piece());
-    return pieceInfo.find_transform(geo, movePoints);
-}
-
 /** Set a variable to a value and return if it has changed. */
 template<typename T>
 bool set(T& target, const T& value)
@@ -384,7 +373,7 @@ void GameModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv)
 void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 {
     auto& bd = getBoard();
-    auto transform = getTransform(bd, mv);
+    auto transform = bd.find_transform(mv);
     Piece piece = bd.get_move_info(mv).get_piece();
     auto& pieceInfo = bd.get_piece_info(piece);
     if (! compareTransform(pieceInfo, pieceModel->getTransform(), transform))
@@ -461,7 +450,7 @@ void GameModel::updateProperties()
         Piece piece = bd.get_move_info(mv.move).get_piece();
         auto& pieceInfo = bd.get_piece_info(piece);
         auto gameCoord = getGameCoord(bd, mv.move);
-        auto transform = getTransform(bd, mv.move);
+        auto transform = bd.find_transform(mv.move);
         auto& pieceModels = getPieceModels(mv.color);
         PieceModel* pieceModel = nullptr;
         // Prefer piece models already played with the given gameCoord and

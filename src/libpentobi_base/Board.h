@@ -280,6 +280,8 @@ public:
 
     bool find_move(const MovePoints& points, Piece piece, Move& mv) const;
 
+    const Transform* find_transform(Move mv) const;
+
     const PieceInfo& get_piece_info(Piece piece) const;
 
     bool get_piece_by_name(const string& name, Piece& piece) const;

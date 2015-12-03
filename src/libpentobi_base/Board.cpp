@@ -80,6 +80,16 @@ void Board::copy_from(const Board& bd)
     }
 }
 
+const Transform* Board::find_transform(Move mv) const
+{
+    auto& geo = get_geometry();
+    auto& move_info = get_move_info(mv);
+    PiecePoints points;
+    for (Point p : move_info)
+        points.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
+    return get_piece_info(move_info.get_piece()).find_transform(geo, points);
+}
+
 void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
 {
     moves.clear();

@@ -2545,14 +2545,8 @@ void MainWindow::pointClicked(Point p)
     m_game.remove_setup(c, mv);
     setSetupPlayer();
     updateWindow(true);
-    auto& info = m_bd.get_move_info(mv);
-    auto& geo = m_bd.get_geometry();
-    Piece piece = info.get_piece();
-    PieceInfo::Points points;
-    for (Point p : info)
-        points.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
-    auto transform = m_bd.get_piece_info(piece).find_transform(geo, points);
-    selectPiece(c, piece, transform);
+    Piece piece = m_bd.get_move_info(mv).get_piece();
+    selectPiece(c, piece, m_bd.find_transform(mv));
     m_guiBoard->setSelectedPiecePoints(mv);
 }
 
