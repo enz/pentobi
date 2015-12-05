@@ -40,8 +40,7 @@ class GameModel
     Q_PROPERTY(bool hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
     Q_PROPERTY(bool hasMoves3 MEMBER m_hasMoves3 NOTIFY hasMoves3Changed)
     Q_PROPERTY(bool isGameOver MEMBER m_isGameOver NOTIFY isGameOverChanged)
-    Q_PROPERTY(bool isBoardEmpty MEMBER m_isBoardEmpty
-               NOTIFY isBoardEmptyChanged)
+    Q_PROPERTY(bool isGameEmpty MEMBER m_isGameEmpty NOTIFY isGameEmptyChanged)
     Q_PROPERTY(bool canUndo MEMBER m_canUndo NOTIFY canUndoChanged)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
@@ -121,7 +120,7 @@ signals:
 
     void isGameOverChanged(bool);
 
-    void isBoardEmptyChanged(bool);
+    void isGameEmptyChanged(bool);
 
     void canUndoChanged(bool);
 
@@ -166,7 +165,7 @@ private:
 
     bool m_isGameOver = false;
 
-    bool m_isBoardEmpty = true;
+    bool m_isGameEmpty = true;
 
     bool m_canUndo = false;
 

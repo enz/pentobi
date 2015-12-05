@@ -8,6 +8,7 @@
 
 #include <QDebug>
 #include <QSettings>
+#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Log.h"
 
 using namespace std;
@@ -432,8 +433,9 @@ void GameModel::updateProperties()
         }
     if (set(m_isGameOver, isGameOver))
         emit isGameOverChanged(m_isGameOver);
-    if (set(m_isBoardEmpty, (bd.get_nu_onboard_pieces() == 0)))
-        emit isBoardEmptyChanged(m_isBoardEmpty);
+    if (set(m_isGameEmpty,
+            libboardgame_sgf::util::is_empty(m_game.get_tree())))
+        emit isGameEmptyChanged(m_isGameEmpty);
 
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (Color c : bd.get_colors())

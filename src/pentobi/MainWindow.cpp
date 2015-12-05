@@ -3553,6 +3553,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
                        && &current.get_parent().get_first_child() != &current);
+    m_actionNew->setEnabled(! libboardgame_sgf::util::is_empty(tree));
     m_actionNextVariation->setEnabled(current.get_sibling());
     if (! m_isGenMoveRunning)
     {

@@ -14,7 +14,7 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
     if (gameModel.gameVariant === gameVariant)
         return
     cancelGenMove()
-    if (! gameModel.isBoardEmpty && ! gameModel.isGameOver &&
+    if (! gameModel.isGameEmpty && ! gameModel.isGameOver &&
             verifyAbortGame) {
         showQuestion(qsTr("New game?"),
                      function() { changeGameVariant(gameVariant, false) })
@@ -278,7 +278,7 @@ function moveHint() {
 function newGame(verifyAbortGame)
 {
     cancelGenMove()
-    if (! gameModel.isBoardEmpty &&  ! gameModel.isGameOver &&
+    if (! gameModel.isGameEmpty &&  ! gameModel.isGameOver &&
             verifyAbortGame) {
         showQuestion(qsTr("New game?"), function() { newGame(false) })
         return
