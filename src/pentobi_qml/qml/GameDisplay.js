@@ -37,8 +37,12 @@ function createColorPieces(component, pieceModels) {
 function destroyColorPieces(pieces) {
     if (pieces === undefined)
         return
-    for (var i = 0; i < pieces.length; ++i)
+    for (var i = 0; i < pieces.length; ++i) {
+        // If visible is not set to false before destroying the item, sometimes
+        // it stays on the screen (happened with Qt 5.5 on Linux).
+        pieces[i].visible = false
         pieces[i].destroy()
+    }
 }
 
 function destroyPieces() {
