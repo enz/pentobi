@@ -1,8 +1,5 @@
 function createPieces() {
-    destroyPieces(_pieces0)
-    destroyPieces(_pieces1)
-    destroyPieces(_pieces2)
-    destroyPieces(_pieces3)
+    destroyPieces()
     var file = (boardModel.gameVariant.indexOf("trigon") >= 0) ?
                 "PieceTrigon.qml" : "PieceClassic.qml"
     var component = Qt.createComponent(file)
@@ -37,11 +34,18 @@ function createColorPieces(component, pieceModels) {
     return pieces
 }
 
-function destroyPieces(pieces) {
+function destroyColorPieces(pieces) {
     if (pieces === undefined)
         return
     for (var i = 0; i < pieces.length; ++i)
         pieces[i].destroy()
+}
+
+function destroyPieces() {
+    destroyColorPieces(_pieces0)
+    destroyColorPieces(_pieces1)
+    destroyColorPieces(_pieces2)
+    destroyColorPieces(_pieces3)
 }
 
 function findPiece(pieceModel, color) {
