@@ -140,6 +140,11 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             {
                 ++j;
                 heuristic += point_value[*j];
+                // Logically, we mean: local = local || m_is_local[*j]
+                // But this generates branches, which are bad for performance
+                // in this tight loop (unrolled by the compiler). So we use a
+                // bitwise OR, which works because C++ guarantees that
+                // true/false converts to 1/0.
                 local |= m_is_local[*j];
             }
         else
@@ -149,6 +154,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             {
                 ++j;
                 heuristic += point_value[*j];
+                // See comment above about bitwise OR on bool
                 local |= m_is_local[*j];
                 features.dist_to_center =
                     min(features.dist_to_center, m_dist_to_center[*j]);

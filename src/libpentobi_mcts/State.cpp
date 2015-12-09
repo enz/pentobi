@@ -107,6 +107,10 @@ bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
     auto p = info.begin();
     bool forbidden = is_forbidden[*p];
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
+        // Logically, we mean: forbidden = forbidden || is_forbidden[*(++p)]
+        // But this generates branches, which are bad for performance in this
+        // tight loop (unrolled by the compiler). So we use a bitwise OR, which
+        // works because C++ guarantees that true/false converts to 1/0.
         forbidden |= is_forbidden[*(++p)];
     if (forbidden)
         return false;
