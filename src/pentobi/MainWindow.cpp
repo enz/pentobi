@@ -1311,9 +1311,9 @@ void MainWindow::createMenu()
     menuGame->addSeparator();
     menuGame->addAction(m_actionSave);
     menuGame->addAction(m_actionSaveAs);
-    auto menuExport = menuGame->addMenu(tr("E&xport"));
-    menuExport->addAction(m_actionExportImage);
-    menuExport->addAction(m_actionExportAsciiArt);
+    m_menuExport = menuGame->addMenu(tr("E&xport"));
+    m_menuExport->addAction(m_actionExportImage);
+    m_menuExport->addAction(m_actionExportAsciiArt);
     menuGame->addSeparator();
     menuGame->addAction(m_actionQuit);
 
@@ -3587,6 +3587,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     // in rated games.
     for (auto& action : m_actionLevel)
         action->setEnabled(! m_isRated);
+    m_menuExport->setEnabled(! isEmpty);
     m_menuVariant->setEnabled(! m_isRated);
 }
 

@@ -559,6 +559,8 @@ private:
 
     QAction* m_actionVeryBadMove;
 
+    QMenu* m_menuExport;
+
     QMenu* m_menuLevel;
 
     QMenu* m_menuMoveAnnotation;
