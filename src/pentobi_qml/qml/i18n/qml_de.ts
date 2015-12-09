@@ -37,6 +37,21 @@
     </message>
 </context>
 <context>
+    <name>GameModel</name>
+    <message>
+        <source>(Setup)</source>
+        <translation>(Stellung)</translation>
+    </message>
+    <message>
+        <source>(No moves)</source>
+        <translation>(Keine Züge)</translation>
+    </message>
+    <message>
+        <source>Move %1</source>
+        <translation>Zug %1</translation>
+    </message>
+</context>
+<context>
     <name>Main</name>
     <message>
         <source>Pentobi</source>
@@ -74,88 +89,156 @@
         <source>Red wins.</source>
         <translation>Rot gewinnt.</translation>
     </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>Blokus games (*.blksgf)</source>
+        <translation>Blokus-Partien (*.blksgf)</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Alle Dateien (*)</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Speichern</translation>
+    </message>
+    <message>
+        <source>Open failed.</source>
+        <translation>Öffnen fehlgeschlagen.</translation>
+    </message>
+    <message>
+        <source>Save failed.</source>
+        <translation>Speichern fehlgeschlagen.</translation>
+    </message>
 </context>
 <context>
-    <name>Menu</name>
+    <name>MenuComputer</name>
     <message>
-        <source>Game Variant</source>
-        <translation>Spielvariante</translation>
+        <source>&amp;Computer</source>
+        <translation>&amp;Computer</translation>
     </message>
     <message>
-        <source>Duo</source>
-        <translation>Duo</translation>
+        <source>Computer &amp;Colors</source>
+        <translation>Computer-&amp;Farben</translation>
     </message>
     <message>
-        <source>Classic (4 Players)</source>
-        <translation>Klassisch (4 Spieler)</translation>
+        <source>&amp;Play</source>
+        <translation>&amp;Spielen</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation>Spiel</translation>
+        <source>&amp;Level</source>
+        <translation>Spielst&amp;ufe</translation>
+    </message>
+</context>
+<context>
+    <name>MenuEdit</name>
+    <message>
+        <source>&amp;Edit</source>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <source>Find Move</source>
-        <translation>Zug finden</translation>
+        <source>Make &amp;Main Variation</source>
+        <translation>Zu &amp;Hauptvariante machen</translation>
     </message>
     <message>
-        <source>Computer</source>
-        <translation>Computer</translation>
+        <source>Move Variation &amp;Up</source>
+        <translation>Variante nach &amp;oben schieben</translation>
     </message>
     <message>
-        <source>Play</source>
-        <translation>Spielen</translation>
+        <source>Move Variation &amp;Down</source>
+        <translation>Variante nach &amp;unten schieben</translation>
+    </message>
+</context>
+<context>
+    <name>MenuGame</name>
+    <message>
+        <source>&amp;Game</source>
+        <translation>&amp;Spiel</translation>
     </message>
     <message>
-        <source>Classic (2 Players)</source>
-        <translation>Klassisch (2 Spieler)</translation>
+        <source>&amp;New</source>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Neu</translation>
+        <source>Game &amp;Variant</source>
+        <translation>Spiel&amp;variante</translation>
     </message>
     <message>
-        <source>Classic (3 Players)</source>
-        <translation>Klassisch (3 Spieler)</translation>
+        <source>&amp;Classic (2 Players)</source>
+        <translation>&amp;Klassisch (2 Spieler)</translation>
     </message>
     <message>
-        <source>Trigon (4 Players)</source>
-        <translation>Trigon (4 Spieler)</translation>
+        <source>Classic (&amp;3 Players)</source>
+        <translation>Klassisch (&amp;3 Spieler)</translation>
     </message>
     <message>
-        <source>Trigon (3 Players)</source>
-        <translation>Trigon (3 Spieler)</translation>
+        <source>Classic (&amp;4 Players)</source>
+        <translation>Klassisch (&amp;4 Spieler)</translation>
     </message>
     <message>
-        <source>Trigon (2 Players)</source>
-        <translation>Trigon (2 Spieler)</translation>
+        <source>&amp;Duo</source>
+        <translation>&amp;Duo</translation>
     </message>
     <message>
-        <source>Junior</source>
-        <translation>Junior</translation>
+        <source>&amp;Junior</source>
+        <translation>&amp;Junior</translation>
     </message>
     <message>
-        <source>Undo Move</source>
-        <translation>Zug rückgängig</translation>
+        <source>&amp;Trigon (2 Players)</source>
+        <translation>&amp;Trigon (2 Spieler)</translation>
     </message>
     <message>
-        <source>Computer Colors</source>
-        <translation>Computer-Farben</translation>
+        <source>T&amp;rigon (3 Players)</source>
+        <translation>T&amp;rigon (3 Spieler)</translation>
     </message>
     <message>
-        <source>Level</source>
-        <translation>Spielstufe</translation>
+        <source>Trig&amp;on (4 Players)</source>
+        <translation>Trig&amp;on (4 Spieler)</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Ansicht</translation>
+        <source>&amp;Undo Move</source>
+        <translation>Zug &amp;rückgängig</translation>
     </message>
     <message>
-        <source>Mark Last Move</source>
-        <translation>Letzten Zug markieren</translation>
+        <source>&amp;Find Move</source>
+        <translation>Zug &amp;finden</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>Beenden</translation>
+        <source>&amp;Open...</source>
+        <translation>Öffn&amp;en ...</translation>
+    </message>
+    <message>
+        <source>&amp;Save As...</source>
+        <translation>&amp;Speichern unter ...</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation>&amp;Beenden</translation>
+    </message>
+</context>
+<context>
+    <name>MenuGo</name>
+    <message>
+        <source>G&amp;o</source>
+        <translation>&amp;Gehe zu</translation>
+    </message>
+    <message>
+        <source>Back to &amp;Main Variation</source>
+        <translation>Zurück zu &amp;Hauptvariante</translation>
+    </message>
+</context>
+<context>
+    <name>MenuView</name>
+    <message>
+        <source>&amp;View</source>
+        <translation>&amp;Ansicht</translation>
+    </message>
+    <message>
+        <source>Mark &amp;Last Move</source>
+        <translation>&amp;Letzten Zug markieren</translation>
     </message>
 </context>
 <context>

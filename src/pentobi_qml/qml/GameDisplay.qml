@@ -7,8 +7,8 @@ Item
     id: gameDisplay // Referenced by Piece*.qml
 
     property var pickedPiece: null
-    property bool pieceTransitionsEnabled
-    property bool pieceSelectorTransitionsEnabled
+    property bool transitionsEnabled: false
+    property bool markLastMove
     property alias busyIndicatorRunning: busyIndicator.running
     property real imageSourceWidth:
         board.isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
@@ -18,6 +18,7 @@ Item
     property var _pieces1
     property var _pieces2
     property var _pieces3
+
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
@@ -27,9 +28,18 @@ Item
     function findPiece(pieceModel, color) {
         return Logic.findPiece(pieceModel, color)
     }
+    function dropPiece() {
+        transitionsEnabled = false
+        pickedPiece = null
+    }
 
-    onWidthChanged: pickedPiece = null
-    onHeightChanged: pickedPiece = null
+    onWidthChanged: dropPiece()
+    onHeightChanged: dropPiece()
+    onMarkLastMoveChanged:
+        if (markLastMove) Logic.markLast(); else Logic.clearMarks()
+    Component.onCompleted: {
+        gameModel.positionChanged.connect(Logic.positionChanged)
+    }
 
     Column {
         id: column
@@ -71,29 +81,58 @@ Item
             pointSize: 0.6 * height
             anchors.horizontalCenter: parent.horizontalCenter
         }
-        PieceSelector {
-            id: pieceSelector
+        Flickable {
+            id: flickable
 
-            columns: board.rows <= 14 ? 7 : 8
-            rows: 3
-            gameVariant: gameModel.gameVariant
-            pieces0: _pieces0
-            pieces1: _pieces1
-            pieces2: _pieces2
-            pieces3: _pieces3
-            toPlay: gameModel.toPlay
-            nuColors: gameModel.nuColors
             width: board.width
-            height: width / columns * rows
+            height: flickableContent.height
+            contentWidth: flickableContent.width
+            contentHeight: flickableContent.height
             anchors.horizontalCenter: board.horizontalCenter
-            onPiecePicked: Logic.pickPiece(piece)
+            clip: true
+            onMovementEnded: {
+                snapAnimation.to = contentX > width / 2 ? width : 0
+                snapAnimation.restart()
+            }
+
+            Row {
+                id: flickableContent
+
+                PieceSelector {
+                    id: pieceSelector
+
+                    columns: board.rows <= 14 ? 7 : 8
+                    width: board.width
+                    height: width / columns * rows
+                    rows: 3
+                    gameVariant: gameModel.gameVariant
+                    pieces0: _pieces0
+                    pieces1: _pieces1
+                    pieces2: _pieces2
+                    pieces3: _pieces3
+                    toPlay: gameModel.toPlay
+                    nuColors: gameModel.nuColors
+                    onPiecePicked: Logic.pickPiece(piece)
+                }
+                NavigationPanel {
+                    width: board.width
+                    height: pieceSelector.height
+                }
+            }
+            SmoothedAnimation {
+                id: snapAnimation
+
+                target: flickable
+                property: "contentX"
+                duration: 200
+            }
         }
     }
     BusyIndicator {
         id: busyIndicator
 
         x: (gameDisplay.width - width) / 2
-        y: column.y + pieceSelector.y + (pieceSelector.height - height) / 2
+        y: column.y + flickable.y + (flickable.height - height) / 2
     }
     PieceManipulator {
         id: pieceManipulator
@@ -118,10 +157,10 @@ Item
         onPiecePlayed: {
             var pos = mapToItem(board, width / 2, height / 2)
             if (! board.contains(Qt.point(pos.x, pos.y)))
-                pickedPiece = null
+                dropPiece()
             else if (legal) {
                 play(pieceModel, board.mapToGame(pos.x, pos.y))
-                pickedPiece = null
+                dropPiece()
             }
         }
     }

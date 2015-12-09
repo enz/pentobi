@@ -1,9 +1,0 @@
-<!-- Subset of the icons in pentobi/icons for use in pentobi_qml -->
-<RCC>
-    <qresource prefix="/qml">
-    <file>icons/pentobi-computer-colors.svg</file>
-        <file>icons/pentobi-newgame.svg</file>
-        <file>icons/pentobi-play.svg</file>
-        <file>icons/pentobi-undo.svg</file>
-    </qresource>
-</RCC>

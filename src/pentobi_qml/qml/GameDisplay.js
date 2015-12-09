@@ -1,14 +1,13 @@
-function createPieces() {
-    destroyPieces()
-    var file = (gameModel.gameVariant.indexOf("trigon") >= 0) ?
-                "PieceTrigon.qml" : "PieceClassic.qml"
-    var component = Qt.createComponent(file)
-    if (component.status !== Component.Ready)
-        throw "Could not create component " + file
-    _pieces0 = createColorPieces(component, gameModel.pieceModels0)
-    _pieces1 = createColorPieces(component, gameModel.pieceModels1)
-    _pieces2 = createColorPieces(component, gameModel.pieceModels2)
-    _pieces3 = createColorPieces(component, gameModel.pieceModels3)
+function clearMarks() {
+    var i
+    for (i = 0; i < _pieces0.length; ++i)
+        _pieces0[i].isMarked = false
+    for (i = 0; i < _pieces1.length; ++i)
+        _pieces1[i].isMarked = false
+    for (i = 0; i < _pieces2.length; ++i)
+        _pieces2[i].isMarked = false
+    for (i = 0; i < _pieces3.length; ++i)
+        _pieces3[i].isMarked = false
 }
 
 function createColorPieces(component, pieceModels) {
@@ -34,18 +33,36 @@ function createColorPieces(component, pieceModels) {
     return pieces
 }
 
+function createPieces() {
+    var file = (gameModel.gameVariant.indexOf("trigon") >= 0) ?
+                "PieceTrigon.qml" : "PieceClassic.qml"
+    var component = Qt.createComponent(file)
+    if (component.status !== Component.Ready)
+        throw "Could not create component " + file
+    _pieces0 = createColorPieces(component, gameModel.pieceModels0)
+    _pieces1 = createColorPieces(component, gameModel.pieceModels1)
+    _pieces2 = createColorPieces(component, gameModel.pieceModels2)
+    _pieces3 = createColorPieces(component, gameModel.pieceModels3)
+}
+
 function destroyColorPieces(pieces) {
     if (pieces === undefined)
         return
-    for (var i = 0; i < pieces.length; ++i)
+    for (var i = 0; i < pieces.length; ++i) {
+        // Not sure why setting visible to false is necessary before destroy,
+        // but otherwise some on-board pieces sometimes don't disappear
+        // (happened with Qt 5.5/Linux when loading a Trigon game with pieces
+        // on board and then switching to game variant Classic).
+        pieces[i].visible = false
         pieces[i].destroy()
+    }
 }
 
 function destroyPieces() {
-    destroyColorPieces(_pieces0)
-    destroyColorPieces(_pieces1)
-    destroyColorPieces(_pieces2)
-    destroyColorPieces(_pieces3)
+    destroyColorPieces(_pieces0); _pieces0 = []
+    destroyColorPieces(_pieces1); _pieces1 = []
+    destroyColorPieces(_pieces2); _pieces2 = []
+    destroyColorPieces(_pieces3); _pieces3 = []
 }
 
 function findPiece(pieceModel, color) {
@@ -56,10 +73,20 @@ function findPiece(pieceModel, color) {
     case 2: pieces = _pieces2; break
     case 3: pieces = _pieces3; break
     }
+    if (pieces === undefined)
+        return // Pieces haven't been created yet
     for (var i = 0; i < pieces.length; ++i)
         if (pieces[i].pieceModel === pieceModel)
             return pieces[i]
     return null
+}
+
+function markLast() {
+    var piece = findPiece(gameModel.getLastMovePieceModel(),
+                          gameModel.getLastMoveColor())
+    if (piece === null)
+        return
+    piece.isMarked = true
 }
 
 function pickPiece(piece) {
@@ -77,8 +104,15 @@ function pickPiece(piece) {
         pieceManipulator.x = x
         pieceManipulator.y = y
     }
-    pieceTransitionsEnabled = true
+    transitionsEnabled = true
     pickedPiece = piece
+}
+
+function positionChanged() {
+    dropPiece()
+    clearMarks()
+    if (markLastMove)
+        markLast()
 }
 
 function showMoveHint(move) {
@@ -89,5 +123,7 @@ function showMoveHint(move) {
                               board.mapFromGameY(pieceModel.gameCoord.y))
     pieceManipulator.x = pos.x - pieceManipulator.width / 2
     pieceManipulator.y = pos.y - pieceManipulator.height / 2
+    transitionsEnabled = true
     pickedPiece = piece
+    transitionsEnabled = false
 }

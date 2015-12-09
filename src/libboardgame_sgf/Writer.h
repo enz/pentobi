@@ -34,7 +34,9 @@ public:
 
     void set_one_prop_value_per_line(bool enable);
 
-    void set_indent(unsigned indent);
+    /** @param indent The number of spaces to indent subtrees, -1 means
+        to not even use newlines. */
+    void set_indent(int indent);
 
     /** @} */ // @name
 
@@ -64,9 +66,9 @@ private:
 
     bool m_is_first_prop;
 
-    unsigned m_indent = 0;
+    int m_indent = 0;
 
-    unsigned m_current_indent = 0;
+    int m_current_indent = 0;
 
     unsigned m_level = 0;
 
@@ -86,7 +88,7 @@ inline void Writer::set_one_prop_value_per_line(bool enable)
     m_one_prop_value_per_line = enable;
 }
 
-inline void Writer::set_indent(unsigned indent)
+inline void Writer::set_indent(int indent)
 {
     m_indent = indent;
 }
@@ -114,21 +116,20 @@ void Writer::write_property(const string& id, const vector<T>& values)
     }
     m_out << id;
     bool is_first_value = true;
-    for (const T& i : values)
+    for (auto& i : values)
     {
         if (m_one_prop_per_line && m_one_prop_value_per_line
-            && ! is_first_value)
+                && ! is_first_value && m_indent >= 0)
         {
             m_out << '\n';
-            unsigned indent =
-                static_cast<unsigned>(m_current_indent + 1 + id.size());
-            for (unsigned i = 0; i < indent; ++i)
+            int indent = static_cast<int>(m_current_indent + 1 + id.size());
+            for (int i = 0; i < indent; ++i)
                 m_out << ' ';
         }
         m_out << '[' << get_escaped(to_string(i)) << ']';
         is_first_value = false;
     }
-    if (m_one_prop_per_line)
+    if (m_one_prop_per_line && m_indent >= 0)
         m_out << '\n';
     m_is_first_prop = false;
 }

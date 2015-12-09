@@ -39,7 +39,6 @@ Flickable {
     PieceList {
         id: pieceList2
 
-        visible: nuColors >= 3
         width: root.width
         columns: root.columns
         pieces: pieces2
@@ -48,7 +47,6 @@ Flickable {
     PieceList {
         id: pieceList3
 
-        visible: nuColors >= 4
         width: root.width
         columns: root.columns
         pieces: pieces3
@@ -159,7 +157,7 @@ Flickable {
     ]
     transitions:
         Transition {
-            enabled: pieceSelectorTransitionsEnabled
+            enabled: transitionsEnabled
 
             SequentialAnimation {
                 PropertyAction {
@@ -171,7 +169,7 @@ Flickable {
                 PropertyAction {
                     target: pieceList3; property: "y"; value: pieceList3.y }
                 // Delay showing new color because of piece placement animation
-                PauseAnimation { duration: pieceTransitionsEnabled ? 200 : 0 }
+                PauseAnimation { duration: transitionsEnabled ? 200 : 0 }
                 NumberAnimation {
                     target: root; property: "opacity"; to: 0; duration: 100
                 }

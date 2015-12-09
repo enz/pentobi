@@ -1,10 +1,3 @@
-function autosave() {
-    if (gameModel.isGameOver)
-        gameModel.clearAutoSave()
-    else
-        gameModel.autoSave()
-}
-
 function cancelGenMove() {
     playerModel.cancelGenMove()
     gameDisplay.busyIndicatorRunning = false
@@ -22,8 +15,6 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
     }
     callDelayTimer.call(function() {
         initGameVariant(gameVariant)
-        gameDisplay.pieceTransitionsEnabled = false
-        gameDisplay.pieceSelectorTransitionsEnabled = false
         initComputerColors()
     })
 }
@@ -42,44 +33,6 @@ function checkComputerMove() {
     case 3: if (! gameModel.hasMoves3) return; break
     }
     genMove();
-}
-
-function clearMarks() {
-    if (_pieceMarked0 != null) {
-        _pieceMarked0.isMarked = false
-        _pieceMarked0 = null
-    }
-    if (_pieceMarked1 != null) {
-        _pieceMarked1.isMarked = false
-        _pieceMarked1 = null
-    }
-    if (_pieceMarked2 != null) {
-        _pieceMarked2.isMarked = false
-        _pieceMarked2 = null
-    }
-    if (_pieceMarked3 != null) {
-        _pieceMarked3.isMarked = false
-        _pieceMarked3 = null
-    }
-}
-
-function clearMarksNotComputer() {
-    if (! computerPlays0 && _pieceMarked0 != null) {
-        _pieceMarked0.isMarked = false
-        _pieceMarked0 = null
-    }
-    if (! computerPlays1 && _pieceMarked1 != null) {
-        _pieceMarked1.isMarked = false
-        _pieceMarked1 = null
-    }
-    if (! computerPlays2 && _pieceMarked2 != null) {
-        _pieceMarked2.isMarked = false
-        _pieceMarked2 = null
-    }
-    if (! computerPlays3 && _pieceMarked3 != null) {
-        _pieceMarked3.isMarked = false
-        _pieceMarked3 = null
-    }
 }
 
 /** If the computer already plays the current color to play, start generating
@@ -163,15 +116,21 @@ function createTheme(themeName) {
 
 function genMove() {
     cancelGenMove()
-    gameDisplay.pickedPiece = null
+    gameDisplay.dropPiece()
     gameDisplay.busyIndicatorRunning = true
     isMoveHintRunning = false
     playerModel.startGenMove(gameModel)
 }
 
+function getFileFromUrl(fileUrl) {
+    var file = fileUrl.toString()
+    file = file.replace(/^(file:\/{3})/,"/")
+    return decodeURIComponent(file)
+}
+
 function hideComputerColorDialog()
 {
-    if (computerColorDialogLoader.status == Loader.Ready)
+    if (computerColorDialogLoader.status === Loader.Ready)
         computerColorDialogLoader.item.visible = false
 }
 
@@ -181,13 +140,9 @@ function init() {
         if (! gameModel.loadAutoSave())
             initComputerColors()
         else {
-            clearMarks()
-            markLastMove()
             if (! computerPlaysAll())
                 checkComputerMove()
         }
-        gameDisplay.pieceTransitionsEnabled = true
-        gameDisplay.pieceSelectorTransitionsEnabled = true
     })
 }
 
@@ -205,9 +160,6 @@ function initComputerColors() {
 function initGameVariant(gameVariant) {
     cancelGenMove()
     hideComputerColorDialog()
-    clearMarks()
-    gameDisplay.pieceTransitionsEnabled = false
-    gameDisplay.pieceSelectorTransitionsEnabled = false
     gameDisplay.destroyPieces()
     gameModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
@@ -220,34 +172,6 @@ function isComputerToPlay() {
     return computerPlays(gameModel.toPlay)
 }
 
-function markLastMove() {
-    if (! root.markLastMove)
-        return
-    var color = gameModel.getLastMoveColor()
-    var piece = gameDisplay.findPiece(gameModel.getLastMovePieceModel(), color)
-    if (piece === null)
-        return
-    switch (color) {
-    case 0:
-        if (_pieceMarked0 != null) _pieceMarked0.isMarked = false
-        _pieceMarked0 = piece
-        break
-    case 1:
-        if (_pieceMarked1 != null) _pieceMarked1.isMarked = false
-        _pieceMarked1 = piece
-        break
-    case 2:
-        if (_pieceMarked2 != null) _pieceMarked2.isMarked = false
-        _pieceMarked2 = piece
-        break
-    case 3:
-        if (_pieceMarked3 != null) _pieceMarked3.isMarked = false
-        _pieceMarked3 = piece
-        break
-    }
-    piece.isMarked = true
-}
-
 function moveGenerated(move) {
     gameDisplay.busyIndicatorRunning = false
     if (isMoveHintRunning) {
@@ -255,14 +179,9 @@ function moveGenerated(move) {
         isMoveHintRunning = false
         return
     }
-    gameDisplay.pieceTransitionsEnabled = true
-    gameDisplay.pieceSelectorTransitionsEnabled = true
+    gameDisplay.transitionsEnabled = true
     gameModel.playMove(move)
-    if (computerPlaysAll())
-        clearMarks()
-    else
-        clearMarksNotComputer()
-    markLastMove()
+    gameDisplay.transitionsEnabled = false
     delayedCheckComputerMove.start()
 }
 
@@ -283,32 +202,59 @@ function newGame(verifyAbortGame)
         showQuestion(qsTr("New game?"), function() { newGame(false) })
         return
     }
-    gameDisplay.pickedPiece = null
-    clearMarks()
+    gameDisplay.dropPiece()
     hideComputerColorDialog()
-    gameDisplay.pieceTransitionsEnabled = false
-    gameDisplay.pieceSelectorTransitionsEnabled = false
     gameModel.newGame()
     gameDisplay.showToPlay()
     initComputerColors()
 }
 
+function open() {
+    if (openDialogLoader.status === Loader.Null)
+        openDialogLoader.sourceComponent = openDialogComponent
+    openDialogLoader.item.open()
+}
+
+function openFileUrl(fileUrl) {
+    cancelGenMove()
+    gameDisplay.destroyPieces()
+    if (! gameModel.open(getFileFromUrl(fileUrl)))
+        showError(qsTr("Open failed."))
+    else {
+        computerPlays0 = false
+        computerPlays1 = false
+        computerPlays2 = false
+        computerPlays3 = false
+    }
+    gameDisplay.createPieces()
+    gameDisplay.showToPlay()
+}
+
 function play(pieceModel, gameCoord) {
     cancelGenMove()
     var wasComputerToPlay = isComputerToPlay()
-    gameDisplay.pieceTransitionsEnabled = true
-    gameDisplay.pieceSelectorTransitionsEnabled = true
-    gameModel.play(pieceModel, gameCoord)
-    clearMarks()
-    markLastMove()
-    // If a move was entered but the computer plays this color (e.g. after
-    // undo move) we don't automatically continue playing.
+    gameDisplay.transitionsEnabled = true
+    gameModel.playPiece(pieceModel, gameCoord)
+    gameDisplay.transitionsEnabled = false
+    // We don't continue automatic play if the human played a move for a color
+    // played by the computer.
     if (! wasComputerToPlay)
         delayedCheckComputerMove.start()
 }
 
+function saveFileUrl(fileUrl) {
+    if (! gameModel.save(getFileFromUrl(fileUrl)))
+        showError(qsTr("Save failed."))
+}
+
+function saveAs() {
+    if (saveDialogLoader.status === Loader.Null)
+        saveDialogLoader.sourceComponent = saveDialogComponent
+    saveDialogLoader.item.open()
+}
+
 function showComputerColorDialog() {
-    if (computerColorDialogLoader.status == Loader.Null)
+    if (computerColorDialogLoader.status === Loader.Null)
         computerColorDialogLoader.sourceComponent =
                 computerColorDialogComponent
     var dialog = computerColorDialogLoader.item
@@ -316,7 +262,7 @@ function showComputerColorDialog() {
     dialog.computerPlays1 = computerPlays1
     dialog.computerPlays2 = computerPlays2
     dialog.computerPlays3 = computerPlays3
-    dialog.visible = true
+    dialog.open()
 }
 
 function showGameOver() {
@@ -390,12 +336,20 @@ function showGameOver() {
     showInfo(msg)
 }
 
+function showError(text) {
+    if (errorMessageLoader.status === Loader.Null)
+        errorMessageLoader.sourceComponent = errorMessageComponent
+    var dialog = errorMessageLoader.item
+    dialog.text = text
+    dialog.open()
+}
+
 function showInfo(text) {
     if (infoMessageLoader.status === Loader.Null)
         infoMessageLoader.sourceComponent = infoMessageComponent
     var dialog = infoMessageLoader.item
     dialog.text = text
-    dialog.visible = true
+    dialog.open()
 }
 
 function showQuestion(text, acceptedFunc) {
@@ -404,22 +358,20 @@ function showQuestion(text, acceptedFunc) {
     var dialog = questionMessageLoader.item
     dialog.text = text
     dialog.accepted.connect(acceptedFunc)
-    dialog.visible = true
+    dialog.open()
 }
 
 function undo() {
     if (! gameModel.canUndo)
         return
     cancelGenMove()
-    gameDisplay.pieceTransitionsEnabled = true
-    gameDisplay.pieceSelectorTransitionsEnabled = true
+    gameDisplay.transitionsEnabled = true
     gameModel.undo()
-    clearMarks()
-    markLastMove()
-    gameDisplay.pickedPiece = null
+    gameDisplay.transitionsEnabled = false
+    gameDisplay.dropPiece()
 }
 
 function quit() {
     cancelGenMove()
-    autosave()
+    gameModel.autoSave()
 }

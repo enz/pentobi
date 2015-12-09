@@ -148,7 +148,7 @@ void Game::undo()
 {
     LIBBOARDGAME_ASSERT(! m_tree.get_move(*m_current).is_null());
     LIBBOARDGAME_ASSERT(m_current->has_parent());
-    goto_node(m_current->get_parent());
+    truncate();
 }
 
 void Game::update(const SgfNode& node)

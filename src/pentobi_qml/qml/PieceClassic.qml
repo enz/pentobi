@@ -115,37 +115,37 @@ Item
         transitions: [
             Transition {
                 from: ",rot90,rot180,rot270"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 PieceRotationAnimation { }
             },
             Transition {
                 from: "flip,rot90Flip,rot180Flip,rot270Flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 PieceRotationAnimation { }
             },
             Transition {
                 from: ",flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot90,rot90Flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot180,rot180Flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot270,rot270Flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: ",rot180Flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -157,7 +157,7 @@ Item
             },
             Transition {
                 from: "rot90,rot270Flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -169,7 +169,7 @@ Item
             },
             Transition {
                 from: "rot180,flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -181,7 +181,7 @@ Item
             },
             Transition {
                 from: "rot270,rot90Flip"; to: from
-                enabled: pieceTransitionsEnabled
+                enabled: transitionsEnabled
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -204,7 +204,6 @@ Item
                 gridElementWidth: board.gridElementWidth
                 gridElementHeight: board.gridElementHeight
             }
-            PropertyChanges { target: parentPieceArea; visible: true }
             ParentChange {
                 target: root
                 parent: pieceManipulator
@@ -221,7 +220,6 @@ Item
                 gridElementWidth: board.gridElementWidth
                 gridElementHeight: board.gridElementHeight
             }
-            PropertyChanges { target: parentPieceArea; visible: false }
             ParentChange {
                 target: root
                 parent: board
@@ -239,7 +237,6 @@ Item
                 gridElementWidth: Math.floor(0.2 * parentPieceArea.width)
                 gridElementHeight: gridElementWidth
             }
-            PropertyChanges { target: parentPieceArea; visible: true }
             ParentChange {
                 target: root
                 parent: parentPieceArea
@@ -251,24 +248,15 @@ Item
     transitions:
         Transition {
             from: "unplayed,picked,played"; to: from
-            enabled: pieceTransitionsEnabled
+            enabled: transitionsEnabled
 
-            SequentialAnimation {
-                PropertyAction {
-                    target: parentPieceArea
-                    property: "visible"; value: true
-                }
-                ParentAnimation {
-                    via: gameDisplay
-                    NumberAnimation {
-                        properties: "x,y,gridElementWidth,gridElementHeight"
-                        duration: 300
-                        easing.type: Easing.OutQuad
-                    }
-                }
-                PropertyAction {
-                    target: parentPieceArea; property: "visible"
+            ParentAnimation {
+                via: gameDisplay
+                NumberAnimation {
+                    properties: "x,y,gridElementWidth,gridElementHeight"
+                    duration: 300
+                    easing.type: Easing.OutQuad
                 }
             }
-        }
+    }
 }

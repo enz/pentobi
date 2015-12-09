@@ -1,7 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Dialogs 1.2
-import QtQuick.Window 2.0
+import QtQuick.Layouts 1.1
+import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
 import pentobi 1.0
 import "." as Pentobi
@@ -15,56 +16,116 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
     property bool isMoveHintRunning
-    property string themeName: Qt.platform.os === "android" ? "dark" : "light"
-    property bool markLastMove: true
+    property bool isAndroid: Qt.platform.os === "android"
+    property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
+    property url folder
 
-    property var _pieceMarked0
-    property var _pieceMarked1
-    property var _pieceMarked2
-    property var _pieceMarked3
-
-    // For a desktop window, we should use a smaller initial size and remember
-    // the last size in the settings, but for now we use pentobi_qml only for
-    // Android and on Android, initializing the window size with the available
-    // screen size avoids flickering and delay due to multiple changes of the
-    // window size at start-up (last tested with Qt 5.3.2).
-    contentItem { minimumWidth: 240; minimumHeight: 252 }
+    minimumWidth: 240; minimumHeight: 252
     width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight
     visible: true
     color: theme.backgroundColor
     title: qsTr("Pentobi")
-    menuBar: Pentobi.Menu { }
-    toolBar: Pentobi.ToolBar { }
     onClosing: Qt.quit()
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.quit()
+    // Currently, we don't use the QtQuick ToolBar/MenuBar on Android. The file
+    // dialog is unusable with dark themes (QTBUG-48324) and a white toolbar is
+    // too distracting with the dark background we use on Android.
+    menuBar: menuBarLoader.item
+    toolBar: toolBarLoader.item
 
+    ColumnLayout {
+        anchors.fill: parent
+        Keys.onReleased: if (isAndroid && event.key === Qt.Key_Menu) {
+                             menuLoader.item.popup()
+                             event.accepted = true
+                         }
+
+        Loader {
+            sourceComponent: isAndroid ? androidToolBarComponent : undefined
+            Layout.fillWidth: true
+
+            Component {
+                id: androidToolBarComponent
+
+                AndroidToolBar {
+                    id: toolBar
+
+                    onPopupMenu: menuLoader.item.popup()
+                }
+            }
+        }
+        GameDisplay {
+            id: gameDisplay
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            transitionsEnabled: false
+            focus: true
+            onPlay: Logic.play(pieceModel, gameCoord)
+        }
+    }
+    Loader {
+        id: menuBarLoader
+
+        sourceComponent: isAndroid ? undefined : menuBarComponent
+
+        Component {
+            id: menuBarComponent
+
+            MenuBar {
+                MenuGame { }
+                MenuGo { }
+                MenuEdit { }
+                MenuComputer { }
+                MenuView { }
+            }
+        }
+    }
+    Loader {
+        id: menuLoader
+
+        sourceComponent: isAndroid ? menuComponent : undefined
+
+        Component {
+            id: menuComponent
+
+            Menu {
+                MenuGame { }
+                MenuGo { }
+                MenuEdit { }
+                MenuComputer { }
+                MenuView { }
+            }
+        }
+    }
+    Loader {
+        id: toolBarLoader
+
+        sourceComponent: isAndroid ? undefined : toolBarComponent
+
+        Component {
+            id: toolBarComponent
+
+            Pentobi.ToolBar { }
+        }
+    }
     Settings {
         id: settings
 
-        property alias markLastMove: root.markLastMove
+        property alias folder: root.folder
+        property alias markLastMove: gameDisplay.markLastMove
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
     }
-    GameModel {
-        id: gameModel
-    }
+    GameModel { id: gameModel }
     PlayerModel {
         id: playerModel
 
         onMoveGenerated: Logic.moveGenerated(move)
-    }
-    GameDisplay {
-        id: gameDisplay
-
-        pieceTransitionsEnabled: false
-        pieceSelectorTransitionsEnabled: false
-        focus: true
-        anchors.fill: contentItem
-        onPlay: Logic.play(pieceModel, gameCoord)
     }
     Loader { id: computerColorDialogLoader }
     Component {
@@ -79,9 +140,52 @@ ApplicationWindow {
                 root.computerPlays3 = this.computerPlays3
                 Logic.cancelGenMove()
                 Logic.checkComputerMove()
-                gameDisplay.forceActiveFocus() // Workaround for QTBUG-48456
+                gameDisplay.forceActiveFocus() // QTBUG-48456
             }
-            onRejected: gameDisplay.forceActiveFocus()
+            onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+        }
+    }
+    Loader { id: openDialogLoader }
+    Component {
+        id: openDialogComponent
+
+        FileDialog {
+            title: qsTr("Open")
+            folder: root.folder == "" ? shortcuts.desktop : root.folder
+            nameFilters:
+                [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
+            onAccepted: {
+                Logic.openFileUrl(fileUrl)
+                root.folder = folder
+                gameDisplay.forceActiveFocus() // QTBUG-48456
+            }
+            onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+        }
+    }
+    Loader { id: saveDialogLoader }
+    Component {
+        id: saveDialogComponent
+
+        FileDialog {
+            title: qsTr("Save")
+            selectExisting: false
+            folder: root.folder == "" ? shortcuts.desktop : root.folder
+            nameFilters:
+                [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
+            onAccepted: {
+                Logic.saveFileUrl(fileUrl)
+                root.folder = folder
+                gameDisplay.forceActiveFocus() // QTBUG-48456
+            }
+            onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+        }
+    }
+    Loader { id: errorMessageLoader }
+    Component {
+        id: errorMessageComponent
+
+        MessageDialog {
+            icon: StandardIcon.Critical
         }
     }
     Loader { id: infoMessageLoader }
@@ -112,8 +216,6 @@ ApplicationWindow {
     // several seconds on a ~1GHz ARM CPU). The call() function sets the
     // busy cursor to true and then calls the actual function with a small
     // delay to ensure that the running busy cursor is visible first.
-    // In the future, we could create the pieces with incubateObject() instead,
-    // but this is currently buggy (see for example QTBUG-35587)
     Timer {
         id: callDelayTimer
 
@@ -135,6 +237,6 @@ ApplicationWindow {
         target: Qt.application
         onStateChanged:
             if (Qt.application.state === Qt.ApplicationSuspended)
-                Logic.autosave()
+                gameModel.autoSave()
     }
 }

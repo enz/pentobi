@@ -79,6 +79,7 @@ using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::tree_util::get_move_number;
 using libpentobi_base::tree_util::get_moves_left;
+using libpentobi_base::tree_util::get_position_info;
 using libpentobi_mcts::Search;
 
 //-----------------------------------------------------------------------------
@@ -3307,9 +3308,16 @@ void MainWindow::undo()
 {
     auto& current = m_game.get_current();
     if (current.has_children()
-            || ! m_game.get_tree().has_move_ignore_invalid(current))
+            || ! m_game.get_tree().has_move_ignore_invalid(current)
+            || ! current.has_parent())
         return;
-    truncate();
+    cancelThread();
+    m_game.undo();
+    m_currentColor = getCurrentColor(m_game);
+    m_lastComputerMovesBegin = 0;
+    m_autoPlay = false;
+    m_gameFinished = false;
+    updateWindow(true);
 }
 
 void MainWindow::updateComment()
@@ -3389,22 +3397,18 @@ void MainWindow::updateMoveNumber()
     unsigned movesLeft = get_moves_left(tree, current);
     unsigned totalMoves = move + movesLeft;
     string variation = get_variation_string(current);
-    auto annotation = get_move_annotation(tree, current);
-    QString text;
+    QString text =
+            QString::fromLocal8Bit(get_position_info(tree, current).c_str());
     QString toolTip;
     if (variation.empty())
     {
         if (movesLeft == 0)
         {
             if (move > 0)
-            {
-                text = QString("%1%2").arg(move).arg(annotation);
                 toolTip = tr("Move %1").arg(move);
-            }
         }
         else
         {
-            text = QString("%1%2/%3").arg(move).arg(annotation).arg(totalMoves);
             if (move == 0)
                 toolTip = tr("%n move(s)", "", totalMoves);
             else
@@ -3412,18 +3416,8 @@ void MainWindow::updateMoveNumber()
         }
     }
     else
-    {
-        if (movesLeft == 0)
-            text = QString("%1%2 (%3)")
-                    .arg(move).arg(annotation)
-                    .arg(variation.c_str());
-        else
-            text = QString("%1%2/%3 (%4)")
-                    .arg(move).arg(annotation).arg(totalMoves)
-                    .arg(variation.c_str());
         toolTip = tr("Move %1 of %2 in variation %3")
                     .arg(move).arg(totalMoves).arg(variation.c_str());
-    }
     if (text.isEmpty())
     {
         if (m_moveNumber->isVisible())

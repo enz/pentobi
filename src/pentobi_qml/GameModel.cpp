@@ -6,12 +6,21 @@
 
 #include "GameModel.h"
 
+#include <fstream>
 #include <QDebug>
 #include <QSettings>
 #include "libboardgame_sgf/SgfUtil.h"
+#include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_util/Log.h"
+#include "libpentobi_base/PentobiTreeWriter.h"
+#include "libpentobi_base/TreeUtil.h"
 
 using namespace std;
+using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::TreeReader;
+using libboardgame_sgf::util::back_to_main_variation;
+using libboardgame_sgf::util::get_last_node;
+using libboardgame_sgf::util::is_main_variation;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
@@ -19,10 +28,12 @@ using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::CoordPoint;
 using libpentobi_base::MovePoints;
+using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PiecePoints;
 using libpentobi_base::Point;
+using libpentobi_base::tree_util::get_position_info;
 
 //-----------------------------------------------------------------------------
 
@@ -80,41 +91,38 @@ GameModel::GameModel(QObject* parent)
 
 void GameModel::autoSave()
 {
-    QString s;
-    auto& bd = getBoard();
-    if (bd.get_nu_moves() > 0)
-    {
-        s  = to_string_id(bd.get_variant());
-        for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
-        {
-            ColorMove mv = bd.get_move(i);
-            s.append(QString(";%1;%2")
-                     .arg(mv.color.to_int())
-                     .arg(bd.to_string(mv.move, false).c_str()));
-        }
-    }
+    // Don't autosave if game was not modified because it could have been
+    // loaded from a file, but autosave if not modified and empty to ensure
+    // that we start with the same game variant next time.
+    if (! m_game.is_modified()
+            && ! libboardgame_sgf::util::is_empty(m_game.get_tree()))
+        return;
+    ostringstream s;
+    PentobiTreeWriter writer(s, m_game.get_tree());
+    writer.set_indent(-1);
+    writer.write();
     QSettings settings;
-    settings.setValue("autosave", s);
+    settings.setValue("variant", to_string_id(m_game.get_variant()));
+    settings.setValue("autosave", s.str().c_str());
 }
 
-void GameModel::clearAutoSave()
+void GameModel::backToMainVar()
 {
-    QSettings settings;
-    settings.remove("autosave");
+    gotoNode(back_to_main_variation(m_game.get_current()));
 }
 
 void GameModel::createPieceModels()
 {
-    m_pieceModels0.clear();
-    m_pieceModels1.clear();
-    m_pieceModels2.clear();
-    m_pieceModels3.clear();
     createPieceModels(Color(0), m_pieceModels0);
     createPieceModels(Color(1), m_pieceModels1);
     if (m_nuColors > 2)
         createPieceModels(Color(2), m_pieceModels2);
+    else
+        m_pieceModels2.clear();
     if (m_nuColors > 3)
         createPieceModels(Color(3), m_pieceModels3);
+    else
+        m_pieceModels3.clear();
 }
 
 void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
@@ -203,31 +211,66 @@ QList<PieceModel*>& GameModel::getPieceModels(Color c)
         return  m_pieceModels3;
 }
 
+void GameModel::goBackward()
+{
+    gotoNode(m_game.get_current().get_parent_or_null());
+}
+
+void GameModel::goBeginning()
+{
+    gotoNode(m_game.get_root());
+}
+
+void GameModel::goEnd()
+{
+    gotoNode(get_last_node(m_game.get_current()));
+}
+
+void GameModel::goForward()
+{
+    gotoNode(m_game.get_current().get_first_child_or_null());
+}
+
+void GameModel::goNextVar()
+{
+    gotoNode(m_game.get_current().get_sibling());
+}
+
+void GameModel::goPrevVar()
+{
+    gotoNode(m_game.get_current().get_previous_sibling());
+}
+
+void GameModel::gotoNode(const SgfNode& node)
+{
+    if (&node == &m_game.get_current())
+        return;
+    try
+    {
+        m_game.goto_node(node);
+    }
+    catch (const InvalidTree&)
+    {
+    }
+    updateProperties();
+}
+
+void GameModel::gotoNode(const SgfNode* node)
+{
+    if (node)
+        gotoNode(*node);
+}
+
 void GameModel::initGameVariant(QString gameVariant)
 {
-    if (m_gameVariant == gameVariant)
-        return;
-    if (gameVariant == "classic")
-        m_game.init(Variant::classic);
-    else if (gameVariant == "classic_2")
-        m_game.init(Variant::classic_2);
-    else if (gameVariant == "classic_3")
-        m_game.init(Variant::classic_3);
-    else if (gameVariant == "duo")
-        m_game.init(Variant::duo);
-    else if (gameVariant == "junior")
-        m_game.init(Variant::junior);
-    else if (gameVariant == "trigon")
-        m_game.init(Variant::trigon);
-    else if (gameVariant == "trigon_2")
-        m_game.init(Variant::trigon_2);
-    else if (gameVariant == "trigon_3")
-        m_game.init(Variant::trigon_3);
-    else
+    Variant variant;
+    if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
     {
         qWarning("GameModel: invalid game variant");
         return;
     }
+    if (m_game.get_variant() != variant)
+        m_game.init(variant);
     auto& bd = getBoard();
     if (set(m_nuColors, static_cast<int>(bd.get_nu_colors())))
         emit nuColorsChanged(m_nuColors);
@@ -235,12 +278,10 @@ void GameModel::initGameVariant(QString gameVariant)
     m_gameVariant = gameVariant;
     emit gameVariantChanged(gameVariant);
     updateProperties();
-    QSettings settings;
-    settings.setValue("variant", gameVariant);
 }
 
 bool GameModel::isLegalPos(PieceModel* pieceModel, QString state,
-                            QPointF coord) const
+                           QPointF coord) const
 {
     Move mv;
     if (! findMove(*pieceModel, state, coord, mv))
@@ -253,44 +294,30 @@ bool GameModel::isLegalPos(PieceModel* pieceModel, QString state,
 bool GameModel::loadAutoSave()
 {
     QSettings settings;
-    QString s = settings.value("autosave", "").toString();
-    if (s.isEmpty())
+    auto s = settings.value("autosave", "").toByteArray();
+    istringstream in(s.data());
+    if (! open(in))
         return false;
-    QStringList l = s.split(';');
-    if (l[0] != m_gameVariant)
-    {
-        qWarning("GameModel: autosave has wrong game variant");
-        return false;
-    }
-    if (l.length() == 1)
-    {
-        qWarning("GameModel: autosave has no moves");
-        return false;
-    }
-    m_game.init();
-    auto& bd = getBoard();
-    try
-    {
-        for (int i = 1; i < l.length(); i += 2)
-        {
-            unsigned colorInt = l[i].toUInt();
-            if (colorInt >= bd.get_nu_colors())
-                throw runtime_error("invalid color");
-            Color c(colorInt);
-            if (i + 1 >= l.length())
-                throw runtime_error("color without move");
-            Move mv = bd.from_string(l[i + 1].toLocal8Bit().constData());
-            if (! bd.is_legal(c, mv))
-                throw runtime_error("illegal move");
-            m_game.play(c, mv, true);
-        }
-    }
-    catch (const exception &e)
-    {
-        qWarning() << "GameModel: autosave has illegal move: " << e.what();
-    }
-    updateProperties();
+    m_game.set_modified();
     return true;
+}
+
+void GameModel::makeMainVar()
+{
+    m_game.make_main_variation();
+    updateProperties();
+}
+
+void GameModel::moveDownVar()
+{
+    m_game.move_down_variation();
+    updateProperties();
+}
+
+void GameModel::moveUpVar()
+{
+    m_game.move_up_variation();
+    updateProperties();
 }
 
 void GameModel::newGame()
@@ -307,6 +334,37 @@ void GameModel::newGame()
     updateProperties();
 }
 
+bool GameModel::open(istream& in)
+{
+    try
+    {
+        TreeReader reader;
+        reader.read(in);
+        auto tree = reader.get_tree_transfer_ownership();
+        m_game.init(tree);
+        auto variant = to_string_id(m_game.get_variant());
+        if (variant != m_gameVariant)
+            initGameVariant(variant);
+        goEnd();
+        updateProperties();
+        QSettings settings;
+        settings.remove("autosave");
+    }
+    catch (const TreeReader::ReadError&)
+    {
+        return false;
+    }
+    catch (const InvalidTree&)
+    {
+    }
+    return true;
+}
+
+bool GameModel::open(QString file)
+{
+    ifstream in(file.toLocal8Bit().constData());
+    return open(in);
+}
 
 QQmlListProperty<PieceModel> GameModel::pieceModels0()
 {
@@ -328,7 +386,17 @@ QQmlListProperty<PieceModel> GameModel::pieceModels3()
     return QQmlListProperty<PieceModel>(this, m_pieceModels3);
 }
 
-void GameModel::play(PieceModel* pieceModel, QPointF coord)
+void GameModel::playMove(int move)
+{
+    Color c = m_game.get_effective_to_play();
+    Move mv(move);
+    if(mv.is_null())
+        return;
+    m_game.play(c, mv, false);
+    updateProperties();
+}
+
+void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
 {
     Color c(pieceModel->color());
     Move mv;
@@ -340,14 +408,6 @@ void GameModel::play(PieceModel* pieceModel, QPointF coord)
     preparePieceGameCoord(pieceModel, mv);
     pieceModel->setIsPlayed(true);
     preparePieceTransform(pieceModel, mv);
-    m_game.play(c, mv, false);
-    updateProperties();
-}
-
-void GameModel::playMove(int move)
-{
-    Color c = m_game.get_effective_to_play();
-    Move mv(move);
     m_game.play(c, mv, false);
     updateProperties();
 }
@@ -381,17 +441,73 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
         pieceModel->setTransform(transform);
 }
 
+bool GameModel::save(QString file)
+{
+    ofstream out(file.toLocal8Bit().constData());
+    PentobiTreeWriter writer(out, m_game.get_tree());
+    writer.set_indent(1);
+    writer.write();
+    if (! out)
+        return false;
+    m_game.clear_modified();
+    return true;
+}
+
 void GameModel::undo()
 {
-    if (getBoard().get_nu_moves() == 0)
-        return;
-    m_game.undo();
+    if (m_canUndo)
+        m_game.undo();
     updateProperties();
+}
+
+/** Helper function for updateProperties() */
+PieceModel* GameModel::updatePiece(Color c, Move mv,
+                                   array<bool, Board::max_pieces>& isPlayed)
+{
+    auto& bd = getBoard();
+    Piece piece = bd.get_move_info(mv).get_piece();
+    auto& pieceInfo = bd.get_piece_info(piece);
+    auto gameCoord = getGameCoord(bd, mv);
+    auto transform = bd.find_transform(mv);
+    auto& pieceModels = getPieceModels(c);
+    PieceModel* pieceModel = nullptr;
+    // Prefer piece models already played with the given gameCoord and
+    // transform because class Board doesn't make a distinction between
+    // instances of the same piece (in Junior) and we want to avoid
+    // unwanted piece movement animations to switch instances.
+    for (int i = 0; i < pieceModels.length(); ++i)
+        if (pieceModels[i]->getPiece() == piece
+                && pieceModels[i]->isPlayed()
+                && compareGameCoord(pieceModels[i]->gameCoord(), gameCoord)
+                && compareTransform(pieceInfo, pieceModels[i]->getTransform(),
+                                    transform))
+        {
+            pieceModel = pieceModels[i];
+            isPlayed[i] = true;
+            break;
+        }
+    if (pieceModel == nullptr)
+    {
+        for (int i = 0; i < pieceModels.length(); ++i)
+            if (pieceModels[i]->getPiece() == piece && ! isPlayed[i])
+            {
+                pieceModel = pieceModels[i];
+                isPlayed[i] = true;
+                break;
+            }
+        // Order is important: isPlayed will trigger an animation to move
+        // the piece, so it needs to be set after gameCoord.
+        pieceModel->setGameCoord(gameCoord);
+        pieceModel->setIsPlayed(true);
+        pieceModel->setTransform(transform);
+    }
+    return pieceModel;
 }
 
 void GameModel::updateProperties()
 {
     auto& bd = getBoard();
+    auto& tree = m_game.get_tree();
     if (set(m_points0, static_cast<int>(bd.get_points(Color(0)))))
         emit points0Changed(m_points0);
     if (set(m_points1, static_cast<int>(bd.get_points(Color(1)))))
@@ -422,8 +538,37 @@ void GameModel::updateProperties()
         if (set(m_hasMoves3, bd.has_moves(Color(3))))
             emit hasMoves3Changed(m_hasMoves3);
     }
-    if (set(m_canUndo, (bd.get_nu_moves() > 0)))
+    auto& current = m_game.get_current();
+    if (set(m_canUndo,
+            ! current.has_children()
+            && m_game.get_tree().has_move_ignore_invalid(current)
+            && current.has_parent()))
         emit canUndoChanged(m_canUndo);
+    if (set(m_canGoForward, current.has_children()))
+        emit canGoForwardChanged(m_canGoForward);
+    if (set(m_canGoBackward, current.has_parent()))
+        emit canGoBackwardChanged(m_canGoBackward);
+    if (set(m_hasPrevVar, (current.get_previous_sibling() != nullptr)))
+        emit hasPrevVarChanged(m_hasPrevVar);
+    if (set(m_hasNextVar, (current.get_sibling() != nullptr)))
+        emit hasNextVarChanged(m_hasNextVar);
+    if (set(m_isMainVar, is_main_variation(current)))
+        emit isMainVarChanged(m_isMainVar);
+    QString positionInfo
+            = QString::fromLocal8Bit(get_position_info(tree, current).c_str());
+    if (positionInfo.isEmpty())
+        positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
+    else
+    {
+        positionInfo = tr("Move %1").arg(positionInfo);
+        if (bd.get_nu_moves() == 0 && bd.has_setup())
+        {
+            positionInfo.append(' ');
+            positionInfo.append(tr("(Setup)"));
+        }
+    }
+    if (set(m_positionInfo, positionInfo))
+        emit positionInfoChanged(m_positionInfo);
     bool isGameOver = true;
     for (Color c : bd.get_colors())
         if (bd.has_moves(c))
@@ -439,54 +584,16 @@ void GameModel::updateProperties()
 
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (Color c : bd.get_colors())
+    {
         isPlayed[c].fill(false);
-#if LIBBOARDGAME_DEBUG
-    // Does not handle setup yet
-    for (Color c : bd.get_colors())
-        LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].empty());
-#endif
+        for (Move mv : bd.get_setup().placements[c])
+            updatePiece(c, mv, isPlayed[c]);
+    }
     m_lastMovePieceModel = nullptr;
     for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         auto mv = bd.get_move(i);
-        Piece piece = bd.get_move_info(mv.move).get_piece();
-        auto& pieceInfo = bd.get_piece_info(piece);
-        auto gameCoord = getGameCoord(bd, mv.move);
-        auto transform = bd.find_transform(mv.move);
-        auto& pieceModels = getPieceModels(mv.color);
-        PieceModel* pieceModel = nullptr;
-        // Prefer piece models already played with the given gameCoord and
-        // transform because class Board doesn't make a distinction between
-        // instances of the same piece (in Junior) and we want to avoid
-        // unwanted piece movement animations to switch instances.
-        for (int j = 0; j < pieceModels.length(); ++j)
-            if (pieceModels[j]->getPiece() == piece
-                    && pieceModels[j]->isPlayed()
-                    && compareGameCoord(pieceModels[j]->gameCoord(), gameCoord)
-                    && compareTransform(pieceInfo,
-                                        pieceModels[j]->getTransform(),
-                                        transform))
-            {
-                pieceModel = pieceModels[j];
-                isPlayed[mv.color][j] = true;
-                break;
-            }
-        if (pieceModel == nullptr)
-        {
-            for (int j = 0; j < pieceModels.length(); ++j)
-                if (pieceModels[j]->getPiece() == piece
-                        && ! isPlayed[mv.color][j])
-                {
-                    pieceModel = pieceModels[j];
-                    isPlayed[mv.color][j] = true;
-                    break;
-                }
-            // Order is important: isPlayed will trigger an animation to move
-            // the piece, so it needs to be set after gameCoord.
-            pieceModel->setGameCoord(gameCoord);
-            pieceModel->setIsPlayed(true);
-            pieceModel->setTransform(transform);
-        }
+        auto pieceModel = updatePiece(mv.color, mv.move, isPlayed[mv.color]);
         if (i == bd.get_nu_moves() - 1)
             m_lastMovePieceModel = pieceModel;
     }
@@ -503,6 +610,8 @@ void GameModel::updateProperties()
     if (set(m_altPlayer, (bd.get_variant() == Variant::classic_3 ?
                           bd.get_alt_player() : 0)))
         emit altPlayerChanged(m_altPlayer);
+
+    emit positionChanged();
 }
 
 //-----------------------------------------------------------------------------

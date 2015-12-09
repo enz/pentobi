@@ -1,12 +1,20 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/AndroidToolBar.qml</file>
+        <file>qml/AndroidToolButton.qml</file>
         <file>qml/Board.qml</file>
+        <file>qml/Button.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
         <file>qml/GameDisplay.qml</file>
         <file>qml/Main.qml</file>
-        <file>qml/Menu.qml</file>
+        <file>qml/MenuComputer.qml</file>
+        <file>qml/MenuEdit.qml</file>
+        <file>qml/MenuGame.qml</file>
+        <file>qml/MenuGo.qml</file>
         <file>qml/MenuItemGameVariant.qml</file>
         <file>qml/MenuItemLevel.qml</file>
+        <file>qml/MenuView.qml</file>
+        <file>qml/NavigationPanel.qml</file>
         <file>qml/PieceClassic.qml</file>
         <file>qml/PieceFlipAnimation.qml</file>
         <file>qml/PieceList.qml</file>
@@ -19,7 +27,6 @@
         <file>qml/ScoreElement2.qml</file>
         <file>qml/Square.qml</file>
         <file>qml/ToolBar.qml</file>
-        <file>qml/ToolButton.qml</file>
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>

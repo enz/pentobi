@@ -3,7 +3,8 @@ import QtQuick.Controls 1.1
 import QtQuick.Window 2.0
 
 /** ToolButton with a dynamically sized image.
-    Works around missing support for multi-size icons in QtQuick.Controls 1.1.
+    The size of the image depends on the pixel density of the screen. Works
+    around missing support for multi-size icons in QtQuick.Controls 1.1.
     The image source should be a SVG file with size 22x22. */
 ToolButton {
     property string imageSource

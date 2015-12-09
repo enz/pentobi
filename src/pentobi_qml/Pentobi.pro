@@ -44,6 +44,7 @@ SOURCES += \
     ../libboardgame_sgf/SgfTree.cpp \
     ../libboardgame_sgf/SgfUtil.cpp \
     ../libboardgame_sgf/TreeReader.cpp \
+    ../libboardgame_sgf/TreeWriter.cpp \
     ../libboardgame_sgf/Writer.cpp \
     ../libboardgame_sys/CpuTime.cpp \
     ../libboardgame_sys/Memory.cpp \
@@ -55,12 +56,13 @@ SOURCES += \
     ../libpentobi_base/Color.cpp \
     ../libpentobi_base/Game.cpp \
     ../libpentobi_base/NodeUtil.cpp \
+    ../libpentobi_base/PentobiSgfUtil.cpp \
+    ../libpentobi_base/PentobiTreeWriter.cpp \
     ../libpentobi_base/PieceInfo.cpp \
     ../libpentobi_base/PieceTransforms.cpp \
     ../libpentobi_base/PieceTransformsClassic.cpp \
     ../libpentobi_base/PieceTransformsTrigon.cpp \
     ../libpentobi_base/PointState.cpp \
-    ../libpentobi_base/PentobiSgfUtil.cpp \
     ../libpentobi_base/StartingPoints.cpp \
     ../libpentobi_base/SymmetricPoints.cpp \
     ../libpentobi_base/TreeUtil.cpp \
@@ -91,7 +93,7 @@ android {
         qml/themes/theme_dark.qrc
 } else {
     RESOURCES += \
-        ../pentobi/icons_base.qrc \
+        ../pentobi/icons.qrc \
         qml/themes/theme_light.qrc
 }
 

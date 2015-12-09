@@ -17,7 +17,7 @@ qt5_add_resources(pentobi_qml_RC_SRCS
   qml/themes/theme_light.qrc
   qml/themes/theme_shared.qrc
   ../books/pentobi_books.qrc
-  ../pentobi/icons_base.qrc
+  ../pentobi/icons.qrc
 )
 
 add_executable(pentobi_qml WIN32

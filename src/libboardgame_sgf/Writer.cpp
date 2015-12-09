@@ -35,12 +35,13 @@ void Writer::begin_tree()
     if (m_level > 0)
         m_current_indent += m_indent;
     ++m_level;
-    m_out << '\n';
+    if (m_indent >= 0)
+        m_out << '\n';
 }
 
 void Writer::end_node()
 {
-    if (! m_one_prop_per_line)
+    if (! m_one_prop_per_line && m_indent >= 0)
         m_out << '\n';
 }
 
@@ -50,7 +51,9 @@ void Writer::end_tree()
     if (m_level > 0)
         m_current_indent -= m_indent;
     write_indent();
-    m_out << ")\n";
+    m_out << ')';
+    if (m_indent >= 0)
+        m_out << '\n';
 }
 
 string Writer::get_escaped(const string& s)
@@ -71,8 +74,9 @@ string Writer::get_escaped(const string& s)
 
 void Writer::write_indent()
 {
-    for (unsigned i = 0; i < m_current_indent; ++i)
-        m_out << ' ';
+    if (m_indent >= 0)
+        for (int i = 0; i < m_current_indent; ++i)
+            m_out << ' ';
 }
 
 //-----------------------------------------------------------------------------
