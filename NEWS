@@ -18,10 +18,11 @@ Desktop version:
 Android version:
 
 * Initial support for loading/saving, variations and game tree navigation.
-* The piece area now has enough room to show all pieces of a color. It
-  also removes rows that become empty during the game such that pieces
-  of several colors are visible, and orders the colors such that the
-  color to play is always on top.
+* The piece area now has enough room for all pieces of one color. It also
+  removes rows that become empty during the game and orders the colors
+  such that the color to play is always on top.
+* Action buttons and menu items are now only shown if the action is
+  enabled in the current position.
 
 
 Version 10.1.UNKNOWN (v10-fixes)
