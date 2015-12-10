@@ -890,7 +890,8 @@ inline void Board::restore_snapshot()
     m_state_base.to_play = m_snapshot.state_base.to_play;
     m_state_base.nu_onboard_pieces_all =
         m_snapshot.state_base.nu_onboard_pieces_all;
-    m_state_base.point_state.copy_from(m_snapshot.state_base.point_state, geo);
+    m_state_base.point_state.memcpy_from(m_snapshot.state_base.point_state,
+                                         geo);
     for (Color c : get_colors())
     {
         const auto& snapshot_state = m_snapshot.state_color[c];

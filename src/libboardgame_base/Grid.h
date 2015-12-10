@@ -8,8 +8,10 @@
 #define LIBBOARDGAME_BASE_GRID_H
 
 #include <algorithm>
+#include <cstring>
 #include <iomanip>
 #include <sstream>
+#include <type_traits>
 #include "Geometry.h"
 
 namespace libboardgame_base {
@@ -84,6 +86,12 @@ public:
 
     void copy_from(const Grid& grid, const Geometry& geo);
 
+    /** Specialized version for trivially copyable elements.
+        Can be used instead of copy_from if the compiler is not smart enough to
+        figure out that it can use memcpy.
+        @pre std::is_trivially_copyable<T>::value */
+    void memcpy_from(const Grid& grid, const Geometry& geo);
+
 private:
     T m_a[Point::range_onboard];
 };
@@ -103,6 +111,12 @@ inline const T& Grid<P, T>::operator[](const Point& p) const
 }
 
 template<class P, typename T>
+inline void Grid<P, T>::copy_from(const Grid& grid, const Geometry& geo)
+{
+    copy(grid.m_a, grid.m_a + geo.get_range(), m_a);
+}
+
+template<class P, typename T>
 inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
     std::fill(m_a, m_a + geo.get_range(), val);
@@ -115,9 +129,13 @@ inline void Grid<P, T>::fill_all(const T& val)
 }
 
 template<class P, typename T>
-inline void Grid<P, T>::copy_from(const Grid& grid, const Geometry& geo)
+void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
 {
-    copy(grid.m_a, grid.m_a + geo.get_range(), m_a);
+    // std::is_trivially_copyable is not available with GCC < 5
+#if ! (__GNUC__ && __GNUC__ < 5)
+    static_assert(is_trivially_copyable<T>::value, "");
+#endif
+    memcpy(&m_a, grid.m_a, geo.get_range() * sizeof(T));
 }
 
 template<class P, typename T>
