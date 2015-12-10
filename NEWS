@@ -19,8 +19,8 @@ Android version:
 
 * Initial support for loading/saving, variations and game tree navigation.
 * The piece area now has enough room for all pieces of one color. It also
-  removes rows that become empty during the game and orders the colors
-  such that the color to play is always on top.
+  removes rows that become empty and orders the colors such that the color
+  to play is always on top.
 * Action buttons and menu items are now only shown if the action is
   enabled in the current position.
 
