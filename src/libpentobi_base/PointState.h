@@ -21,26 +21,10 @@ class PointState
 public:
     typedef Color::IntType IntType;
 
-    class Iterator
-    {
-        friend class PointState;
-
-    public:
-        Iterator();
-
-        explicit operator bool() const;
-
-        void operator++();
-
-        PointState operator*() const;
-
-    private:
-        IntType m_i;
-    };
-
     static const IntType range = Color::range + 1;
 
     static const IntType value_empty = range - 1;
+
 
     PointState();
 
@@ -74,28 +58,6 @@ private:
     bool is_initialized() const;
 };
 
-typedef PointState::Iterator PointStateIterator;
-
-inline PointState::Iterator::Iterator()
-    : m_i(0)
-{
-}
-
-inline PointState::Iterator::operator bool() const
-{
-    return m_i < PointState::range;
-}
-
-inline void PointState::Iterator::operator++()
-{
-    ++m_i;
-}
-
-inline PointState PointState::Iterator::operator*() const
-{
-    LIBBOARDGAME_ASSERT(*this);
-    return PointState(m_i);
-}
 
 inline PointState::PointState()
 {
