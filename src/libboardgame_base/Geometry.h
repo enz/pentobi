@@ -104,7 +104,7 @@ public:
         @see get_period_x(). */
     virtual unsigned get_period_y() const = 0;
 
-    Iterator begin() const { return Iterator(Point::begin_onboard); }
+    Iterator begin() const { return Iterator(0); }
 
     Iterator end() const { return Iterator(get_range()); }
 
@@ -320,7 +320,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
     m_width = width;
     m_height = height;
     m_string[Point::null().to_int()] = "null";
-    IntType n = Point::begin_onboard;
+    IntType n = 0;
     ostringstream ostr;
     for (unsigned y = 0; y < height; ++y)
         for (unsigned x = 0; x < width; ++x)
@@ -337,7 +337,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
             else
                 m_points[x][y] = Point::null();
     m_range = n;
-    for (IntType i = Point::begin_onboard; i < m_range; ++i)
+    for (IntType i = 0; i < m_range; ++i)
     {
         Point p(i);
         auto x = get_x(p);

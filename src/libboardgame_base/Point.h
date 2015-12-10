@@ -52,8 +52,6 @@ public:
 
     static_assert(max_onboard <= max_width * max_height, "");
 
-    static const unsigned begin_onboard = 0;
-
     static const unsigned range_onboard = max_onboard;
 
     static const unsigned range = max_onboard + 1;

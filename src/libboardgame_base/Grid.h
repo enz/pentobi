@@ -105,20 +105,19 @@ inline const T& Grid<P, T>::operator[](const Point& p) const
 template<class P, typename T>
 inline void Grid<P, T>::fill(const T& val, const Geometry& geo)
 {
-    std::fill(m_a + Point::begin_onboard, m_a + geo.get_range(), val);
+    std::fill(m_a, m_a + geo.get_range(), val);
 }
 
 template<class P, typename T>
 inline void Grid<P, T>::fill_all(const T& val)
 {
-    std::fill(m_a + Point::begin_onboard, m_a + Point::range_onboard, val);
+    std::fill(m_a, m_a + Point::range_onboard, val);
 }
 
 template<class P, typename T>
 inline void Grid<P, T>::copy_from(const Grid& grid, const Geometry& geo)
 {
-    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
-         m_a + Point::begin_onboard);
+    copy(grid.m_a, grid.m_a + geo.get_range(), m_a);
 }
 
 template<class P, typename T>
@@ -173,7 +172,7 @@ inline const T& GridExt<P, T>::operator[](const Point& p) const
 template<class P, typename T>
 inline void GridExt<P, T>::fill(const T& val, const Geometry& geo)
 {
-    std::fill(m_a + Point::begin_onboard, m_a + geo.get_range(), val);
+    std::fill(m_a, m_a + geo.get_range(), val);
 }
 
 template<class P, typename T>
@@ -186,16 +185,14 @@ template<class P, typename T>
 inline void GridExt<P, T>::copy_from(const Grid<P, T>& grid,
                                      const Geometry& geo)
 {
-    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
-         m_a + Point::begin_onboard);
+    copy(grid.m_a, grid.m_a + geo.get_range(), m_a);
 }
 
 template<class P, typename T>
 inline void GridExt<P, T>::copy_from(const GridExt& grid,
                                           const Geometry& geo)
 {
-    copy(grid.m_a + Point::begin_onboard, grid.m_a + geo.get_range(),
-         m_a + Point::begin_onboard);
+    copy(grid.m_a, grid.m_a + geo.get_range(), m_a);
 }
 
 template<class P, typename T>
