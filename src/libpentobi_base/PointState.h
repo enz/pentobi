@@ -15,8 +15,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-/** State of an on-board point for games in which the point state can be
-    a color or empty */
+/** State of an on-board point, which can be a color or empty */
 class PointState
 {
 public:
