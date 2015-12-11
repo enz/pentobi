@@ -105,14 +105,15 @@ bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
 {
     auto& info = get_move_info(mv);
     auto p = info.begin();
-    bool forbidden = is_forbidden[*p];
+    unsigned forbidden = is_forbidden[*p];
     for (unsigned i = 1; i < PieceInfo::max_size; ++i)
-        // Logically, we mean: forbidden = forbidden || is_forbidden[*(++p)]
+        // Logically, forbidden is a bool and the next line should be
+        //   forbidden = forbidden || is_forbidden[*(++p)]
         // But this generates branches, which are bad for performance in this
         // tight loop (unrolled by the compiler). So we use a bitwise OR, which
         // works because C++ guarantees that true/false converts to 1/0.
-        forbidden |= is_forbidden[*(++p)];
-    if (forbidden)
+        forbidden |= static_cast<unsigned>(is_forbidden[*(++p)]);
+    if (forbidden != 0)
         return false;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
     moves.get_unchecked(nu_moves) = mv;
