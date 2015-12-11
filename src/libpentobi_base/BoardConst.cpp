@@ -495,7 +495,7 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
                 *(p++) = j;
             }
         });
-    info_ext.size_adj_points = static_cast<uint8_t>(p - info_ext.points);
+    info_ext.size_adj_points = static_cast<uint_least8_t>(p - info_ext.points);
     for (auto i = begin; i != end; ++i)
         m_geo.for_each_diag(*i, [&](Point j) {
             if (! s_marker[j])
@@ -504,7 +504,8 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
                 *(p++) = j;
             }
         });
-    info_ext.size_attach_points = static_cast<uint8_t>(p - info_ext.end_adj());
+    info_ext.size_attach_points =
+            static_cast<uint_least8_t>(p - info_ext.end_adj());
     info_ext_2.label_pos = label_pos;
     info_ext_2.breaks_symmetry = false;
     info_ext_2.symmetric_move = Move::null();

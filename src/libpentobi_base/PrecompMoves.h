@@ -126,7 +126,7 @@ private:
         unsigned size() const { return m_val & 0xff; }
 
     private:
-        uint32_t m_val;
+        uint_least32_t m_val;
     };
 
     /** See m_move_lists. */

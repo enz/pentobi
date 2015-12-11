@@ -110,7 +110,8 @@ int main(int argc, char** argv)
         if (opt.contains("quiet"))
             libboardgame_util::disable_logging();
         if (opt.contains("seed"))
-            RandomGenerator::set_global_seed(opt.get<uint32_t>("seed"));
+            RandomGenerator::set_global_seed(
+                        opt.get<RandomGenerator::ResultType>("seed"));
         string variant_string = opt.get("game", "classic");
         Variant variant;
         if (! parse_variant_id(variant_string, variant))

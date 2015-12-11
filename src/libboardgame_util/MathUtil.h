@@ -37,6 +37,7 @@ inline T fast_exp(T x)
 
 inline int rounded_log_2(float x)
 {
+#ifdef INT32_MAX // Availability of int32_t is optional
     if (numeric_limits<float>::is_iec559 && numeric_limits<float>::radix == 2
             && numeric_limits<float>::max_exponent == 128)
     {
@@ -48,16 +49,15 @@ inline int rounded_log_2(float x)
         convert.f = x;
         return ((convert.i >> 23) & 0xff) - 127;
     }
-    else
-    {
-        int exponent;
-        frexp(x, &exponent);
-        return exponent - 1;
-    }
+#endif
+    int exponent;
+    frexp(x, &exponent);
+    return exponent - 1;
 }
 
 inline int rounded_log_2(double x)
 {
+#ifdef INT64_MAX // Availability of int64_t is optional
     if (numeric_limits<double>::is_iec559 && numeric_limits<double>::radix == 2
             && numeric_limits<double>::max_exponent == 1024)
     {
@@ -69,12 +69,10 @@ inline int rounded_log_2(double x)
         convert.f = x;
         return static_cast<int>(((convert.i >> 52) & 0x7ff) - 1023);
     }
-    else
-    {
-        int exponent;
-        frexp(x, &exponent);
-        return exponent - 1;
-    }
+#endif
+    int exponent;
+    frexp(x, &exponent);
+    return exponent - 1;
 }
 
 //-----------------------------------------------------------------------------

@@ -30,8 +30,8 @@ public:
 
     MoveInfo(Piece piece, const MovePoints& points)
     {
-        m_piece = static_cast<uint8_t>(piece.to_int());
-        m_size = static_cast<uint8_t>(points.size());
+        m_piece = static_cast<uint_least8_t>(piece.to_int());
+        m_size = static_cast<uint_least8_t>(points.size());
         for (MovePoints::IntType i = 0; i < MovePoints::max_size; ++i)
             m_points[i] = points.get_unchecked(i);
     }
@@ -46,7 +46,7 @@ public:
         return m_points + m_size;
     }
 
-    uint8_t size() const
+    uint_least8_t size() const
     {
         return m_size;
     }
@@ -62,9 +62,9 @@ public:
     }
 
 private:
-    uint8_t m_piece;
+    uint_least8_t m_piece;
 
-    uint8_t m_size;
+    uint_least8_t m_size;
 
     Point m_points[PieceInfo::max_size];
 };
@@ -78,9 +78,9 @@ struct MoveInfoExt
     /** Concatenated list of adjacent and attach points. */
     Point points[PieceInfo::max_adj_attach];
 
-    uint8_t size_attach_points;
+    uint_least8_t size_attach_points;
 
-    uint8_t size_adj_points;
+    uint_least8_t size_adj_points;
 
     const Point* begin_adj() const
     {

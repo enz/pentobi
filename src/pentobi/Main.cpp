@@ -161,7 +161,8 @@ int main(int argc, char* argv[])
             redirectStdErr();
 #endif
         if (opt.contains("seed"))
-            RandomGenerator::set_global_seed(opt.get<uint32_t>("seed"));
+            RandomGenerator::set_global_seed(
+                        opt.get<RandomGenerator::ResultType>("seed"));
         bool noBook = opt.contains("nobook");
         QString initialFile;
         auto& args = opt.get_args();
