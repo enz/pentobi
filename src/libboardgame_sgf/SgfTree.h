@@ -179,11 +179,6 @@ inline void SgfTree::clear_modified()
     m_modified = false;
 }
 
-inline double SgfTree::get_bad_move(const SgfNode& node)
-{
-    return node.parse_property<double>("BM", 0);
-}
-
 inline string SgfTree::get_date() const
 {
     return m_root->get_property("DT", "");
@@ -192,11 +187,6 @@ inline string SgfTree::get_date() const
 inline string SgfTree::get_event() const
 {
     return m_root->get_property("EV", "");
-}
-
-inline double SgfTree::get_good_move(const SgfNode& node)
-{
-    return node.parse_property<double>("TE", 0);
 }
 
 inline bool SgfTree::is_modified() const
@@ -217,16 +207,6 @@ inline const SgfNode& SgfTree::get_root() const
 inline string SgfTree::get_time() const
 {
     return m_root->get_property("TM", "");
-}
-
-inline bool SgfTree::is_doubtful_move(const SgfNode& node)
-{
-    return node.has_property("DO");
-}
-
-inline bool SgfTree::is_interesting_move(const SgfNode& node)
-{
-    return node.has_property("IT");
 }
 
 inline SgfNode& SgfTree::non_const(const SgfNode& node)

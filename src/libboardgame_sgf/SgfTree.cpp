@@ -52,6 +52,11 @@ void SgfTree::delete_all_variations()
     }
 }
 
+double SgfTree::get_bad_move(const SgfNode& node)
+{
+    return node.parse_property<double>("BM", 0);
+}
+
 string SgfTree::get_comment(const SgfNode& node) const
 {
     return node.get_property("C", "");
@@ -66,6 +71,11 @@ string SgfTree::get_date_today()
     char date[128];
     strftime(date, sizeof(date), "%Y-%m-%d", tmp);
     return date;
+}
+
+double SgfTree::get_good_move(const SgfNode& node)
+{
+    return node.parse_property<double>("TE", 0);
 }
 
 unique_ptr<SgfNode> SgfTree::get_tree_transfer_ownership()
@@ -96,6 +106,16 @@ void SgfTree::init(unique_ptr<SgfNode>& root)
 {
     m_root = move(root);
     m_modified = false;
+}
+
+bool SgfTree::is_doubtful_move(const SgfNode& node)
+{
+    return node.has_property("DO");
+}
+
+bool SgfTree::is_interesting_move(const SgfNode& node)
+{
+    return node.has_property("IT");
 }
 
 void SgfTree::make_first_child(const SgfNode& node)
