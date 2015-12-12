@@ -110,7 +110,7 @@ private:
     static const bool log_simulations = false;
 
     /** The cumulative gamma value of the moves in m_moves. */
-    array<double, MoveList::max_size> m_cumulative_gamma;
+    array<float, MoveList::max_size> m_cumulative_gamma;
 
     Color::IntType m_nu_passes;
 
@@ -140,7 +140,7 @@ private:
     PriorKnowledge m_prior_knowledge;
 
     /** Gamma value for a piece. */
-    PieceMap<double> m_gamma_piece;
+    PieceMap<float> m_gamma_piece;
 
     /** Number of moves played by a color since the last update of its move
         list. */
@@ -203,7 +203,7 @@ private:
 
 
     void add_moves(Point p, Color c, const Board::PiecesLeftList& pieces,
-                   double& total_gamma, MoveList& moves, unsigned& nu_moves);
+                   float& total_gamma, MoveList& moves, unsigned& nu_moves);
 
     LIBBOARDGAME_NOINLINE
     void add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
@@ -242,15 +242,15 @@ private:
     bool check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
                          MoveList& moves, unsigned& nu_moves);
 
-    bool check_move(Move mv, const MoveInfo& info, double gamma_piece,
+    bool check_move(Move mv, const MoveInfo& info, float gamma_piece,
                     MoveList& moves, unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,
-                    double& total_gamma);
+                    float& total_gamma);
 
     bool check_move(Move mv, const MoveInfo& info, MoveList& moves,
                     unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,
-                    double& total_gamma);
+                    float& total_gamma);
 
     bool gen_playout_move_full(PlayerMove<Move>& mv);
 

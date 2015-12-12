@@ -30,8 +30,9 @@ namespace {
 /** Gamma value for PlayoutFeatures::get_nu_local().
     The value of nu_local dominates all other features, so we use a high
     gamma. Above some limit, we don't care about the exact value. */
-const array<double, PlayoutFeatures::max_local + 1> gamma_local =
-  { 1, 1e6, 1e12, 1e18, 1e24, 1e30, 1e30, 1e30, 1e30, 1e30, 1e30, 1e30, 1e30 };
+const array<float, PlayoutFeatures::max_local + 1> gamma_local =
+  { 1, 1e6f, 1e12f, 1e18f, 1e24f, 1e30f, 1e30f, 1e30f, 1e30f, 1e30f, 1e30f,
+    1e30f, 1e30f };
 
 inline Float sigmoid(Float steepness, Float x)
 {
@@ -50,7 +51,7 @@ State::State(Variant initial_variant, const SharedConst& shared_const)
 
 inline void State::add_moves(Point p, Color c,
                              const Board::PiecesLeftList& pieces,
-                             double& total_gamma, MoveList& moves,
+                             float& total_gamma, MoveList& moves,
                              unsigned& nu_moves)
 {
     auto& marker = m_marker[c];
@@ -82,7 +83,7 @@ void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
     unsigned nu_moves = 0;
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
-    double total_gamma = 0;
+    float total_gamma = 0;
     for (Piece piece : pieces)
         for (Move mv : get_moves(c, piece, p, 0))
         {
@@ -121,10 +122,10 @@ bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
     return true;
 }
 
-bool State::check_move(Move mv, const MoveInfo& info, double gamma_piece,
+bool State::check_move(Move mv, const MoveInfo& info, float gamma_piece,
                        MoveList& moves, unsigned& nu_moves,
                        const PlayoutFeatures& playout_features,
-                       double& total_gamma)
+                       float& total_gamma)
 {
     auto p = info.begin();
     PlayoutFeatures::Compute features(*p, playout_features);
@@ -132,7 +133,7 @@ bool State::check_move(Move mv, const MoveInfo& info, double gamma_piece,
         features.add(*(++p), playout_features);
     if (features.is_forbidden())
         return false;
-    double gamma = gamma_piece * gamma_local[features.get_nu_local()];
+    auto gamma = gamma_piece * gamma_local[features.get_nu_local()];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
@@ -144,7 +145,7 @@ bool State::check_move(Move mv, const MoveInfo& info, double gamma_piece,
 inline bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
                               unsigned& nu_moves,
                               const PlayoutFeatures& playout_features,
-                              double& total_gamma)
+                              float& total_gamma)
 {
     return check_move(mv, info, m_gamma_piece[info.get_piece()], moves,
                       nu_moves, playout_features, total_gamma);
@@ -333,13 +334,13 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     }
 
     auto& moves = m_moves[to_play];
-    double total_gamma = m_cumulative_gamma[moves.size() - 1];
+    auto total_gamma = m_cumulative_gamma[moves.size() - 1];
     if (log_simulations)
         LIBBOARDGAME_LOG("Moves: ", moves.size(), ", total_gamma: ",
                          total_gamma);
     auto begin = m_cumulative_gamma.begin();
     auto end = begin + moves.size();
-    auto random = m_random.generate_double(0, total_gamma);
+    auto random = m_random.generate_float(0, total_gamma);
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
     mv = PlayerMove<Move>(get_player(),
@@ -454,7 +455,7 @@ void State::init_moves_with_gamma(Color c)
     else
     {
         unsigned nu_moves = 0;
-        double total_gamma = 0;
+        float total_gamma = 0;
         for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
@@ -573,8 +574,8 @@ void State::start_search()
         m_stat_score[c].clear();
 
     // Init gamma values
-    double gamma_size_factor = 1;
-    double gamma_nu_attach_factor = 1;
+    float gamma_size_factor = 1;
+    float gamma_nu_attach_factor = 1;
     switch (bd.get_board_type())
     {
     case BoardType::classic:
@@ -582,7 +583,7 @@ void State::start_search()
         break;
     case BoardType::duo:
         gamma_size_factor = 3;
-        gamma_nu_attach_factor = 1.8;
+        gamma_nu_attach_factor = 1.8f;
         break;
     case BoardType::trigon:
     case BoardType::trigon_3:
@@ -592,9 +593,11 @@ void State::start_search()
     for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
     {
         Piece piece(i);
-        auto piece_size = m_bc->get_piece_info(piece).get_size();
+        auto piece_size =
+                static_cast<float>(m_bc->get_piece_info(piece).get_size());
+        auto piece_nu_attach =
+                static_cast<float>(m_bc->get_nu_attach_points(piece));
         LIBBOARDGAME_ASSERT(piece_size > 0);
-        auto piece_nu_attach = m_bc->get_nu_attach_points(piece);
         LIBBOARDGAME_ASSERT(piece_nu_attach > 0);
         m_gamma_piece[piece] =
             pow(gamma_size_factor, piece_size - 1)
@@ -636,7 +639,7 @@ void State::update_moves(Color c)
     auto& moves = m_moves[c];
     auto old_size = moves.size();
     unsigned nu_moves = 0;
-    double total_gamma = 0;
+    float total_gamma = 0;
     if (m_nu_new_moves[c] == 1 && m_bd.get_nu_piece_instances() == 1)
     {
         Piece piece = get_move_info(m_last_move[c]).get_piece();
