@@ -546,10 +546,8 @@ void BoardConst::create_moves()
                     m_precomp_moves.set_move(n++, mv);
                 m_precomp_moves.set_list_range(p, i, piece, begin, n - begin);
             }
-    m_precomp_moves.resize(n);
     if (log_move_creation)
-        LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomputed: ",
-                         n);
+        LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomp: ", n);
     LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }

@@ -11,11 +11,8 @@
 #include "Move.h"
 #include "PieceMap.h"
 #include "Point.h"
-#include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
-
-using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
@@ -66,10 +63,11 @@ public:
     };
 
     /** Add a move to list during construction. */
-    void set_move(unsigned i, Move mv) { m_move_lists[i] = mv; }
-
-    /** Set size of list at end of construction. */
-    void resize(unsigned len) { m_move_lists.resize(len); }
+    void set_move(unsigned i, Move mv)
+    {
+        LIBBOARDGAME_ASSERT(i < max_move_lists_sum_length);
+        m_move_lists[i] = mv;
+    }
 
     /** Store beginning and end of a local move list duing construction. */
     void set_list_range(Point p, unsigned adj_status, Piece piece,
@@ -133,7 +131,7 @@ private:
         constrained by the forbidden status of adjacent points.
         All lists are stored in a single array; m_moves_range contains
         information about the actual begin/end indices. */
-    ArrayList<Move, max_move_lists_sum_length> m_move_lists;
+    array<Move, max_move_lists_sum_length> m_move_lists;
 };
 
 //-----------------------------------------------------------------------------

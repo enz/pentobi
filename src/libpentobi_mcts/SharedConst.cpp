@@ -189,7 +189,6 @@ void SharedConst::init(bool is_followup)
                 }
             }
         }
-        precomp_moves.resize(n);
     }
 
     if (! is_followup)
