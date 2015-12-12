@@ -534,21 +534,22 @@ void BoardConst::create_moves()
     m_full_move_table.reset(new FullMoveTable);
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(moves_created, Piece(i));
+    unsigned n = 0;
     for (Point p : m_geo)
         for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
             for (Piece::IntType j = 0; j < m_nu_pieces; ++j)
             {
                 Piece piece(j);
                 auto& list = (*m_full_move_table)[i][piece][p];
-                auto begin = m_precomp_moves.get_size();
+                auto begin = n;
                 for (auto mv : list)
-                    m_precomp_moves.push_move(mv);
-                auto size = m_precomp_moves.get_size() - begin;
-                m_precomp_moves.set_list_range(p, i, piece, begin, size);
+                    m_precomp_moves.set_move(n++, mv);
+                m_precomp_moves.set_list_range(p, i, piece, begin, n - begin);
             }
+    m_precomp_moves.resize(n);
     if (log_move_creation)
         LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomputed: ",
-                         m_precomp_moves.get_size());
+                         n);
     LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }

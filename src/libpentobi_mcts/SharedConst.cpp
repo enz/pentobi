@@ -157,7 +157,7 @@ void SharedConst::init(bool is_followup)
                                 m_is_forbidden.clear(mv);
             }
 
-        precomp_moves.clear();
+        unsigned n = 0;
         for (Point p : bd)
         {
             if (bd.is_forbidden(p, c))
@@ -178,17 +178,18 @@ void SharedConst::init(bool is_followup)
                     Piece piece(j);
                     if (! bd.is_piece_left(c, piece))
                         continue;
-                    auto begin = precomp_moves.get_size();
+                    auto begin = n;
                     if (old_precomp_moves.has_moves(piece, p, i))
                         for (auto& mv :
                              old_precomp_moves.get_moves(piece, p, i))
                             if (! m_is_forbidden[mv])
-                                precomp_moves.push_move(mv);
-                    auto size = precomp_moves.get_size() - begin;
-                    precomp_moves.set_list_range(p, i, piece, begin, size);
+                                precomp_moves.set_move(n++, mv);
+                    precomp_moves.set_list_range(p, i, piece, begin,
+                                                 n - begin);
                 }
             }
         }
+        precomp_moves.resize(n);
     }
 
     if (! is_followup)

@@ -65,14 +65,11 @@ public:
         const Move* end() const { return m_end; }
     };
 
-    /** Clear storage of moves for all move lists during construction. */
-    void clear() { m_move_lists.clear(); }
+    /** Add a move to list during construction. */
+    void set_move(unsigned i, Move mv) { m_move_lists[i] = mv; }
 
-    /** Get number of moves in all lists. */
-    unsigned get_size() const { return m_move_lists.size(); }
-
-    /** Add move to list during construction. */
-    void push_move(Move mv) { m_move_lists.push_back(mv); }
+    /** Set size of list at end of construction. */
+    void resize(unsigned len) { m_move_lists.resize(len); }
 
     /** Store beginning and end of a local move list duing construction. */
     void set_list_range(Point p, unsigned adj_status, Piece piece,
