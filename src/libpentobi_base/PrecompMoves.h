@@ -111,7 +111,9 @@ private:
             LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
             static_assert(max_move_lists_sum_length < (1 << 24), "");
             LIBBOARDGAME_ASSERT(size < (1 << 8));
-            m_val = size == 0 ? 0 : (begin << 8) | size;
+            m_val = size;
+            if (size != 0)
+                m_val |= (begin << 8);
         }
 
         bool empty() const { return m_val == 0; }
