@@ -113,6 +113,14 @@
         <source>Save failed.</source>
         <translation>Speichern fehlgeschlagen.</translation>
     </message>
+    <message>
+        <source>Truncate this subtree?</source>
+        <translation>Diesen Teilbaum abschneiden?</translation>
+    </message>
+    <message>
+        <source>Truncate children?</source>
+        <translation>Kindknoten abschneiden?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -150,6 +158,14 @@
     <message>
         <source>Move Variation &amp;Down</source>
         <translation>Variante nach &amp;unten schieben</translation>
+    </message>
+    <message>
+        <source>&amp;Truncate</source>
+        <translation>&amp;Abschneiden</translation>
+    </message>
+    <message>
+        <source>Truncate &amp;Children</source>
+        <translation>&amp;Kindknoten abschneiden</translation>
     </message>
 </context>
 <context>

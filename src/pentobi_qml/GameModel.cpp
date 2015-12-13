@@ -453,6 +453,20 @@ bool GameModel::save(QString file)
     return true;
 }
 
+void GameModel::truncate()
+{
+    if (! m_game.get_current().has_parent())
+        return;
+    m_game.truncate();
+    updateProperties();
+}
+
+void GameModel::truncateChildren()
+{
+    m_game.truncate_children();
+    updateProperties();
+}
+
 void GameModel::undo()
 {
     if (m_canUndo)

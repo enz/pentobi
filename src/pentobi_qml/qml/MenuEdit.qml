@@ -5,7 +5,8 @@ import "Main.js" as Logic
 Menu {
     title: qsTr("&Edit")
     visible: ! isAndroid || makeMainVar.enabled || moveVarUp.enabled ||
-             moveVarDown.enabled
+             moveVarDown.enabled || truncate.enabled ||
+             truncateChildren.enabled
 
     MenuItem {
         id: makeMainVar
@@ -30,5 +31,21 @@ Menu {
         enabled: gameModel.hasNextVar
         visible: ! isAndroid || enabled
         onTriggered: gameModel.moveDownVar()
+    }
+    MenuItem {
+        id: truncate
+
+        text: qsTr("&Truncate")
+        enabled: gameModel.canGoBackward
+        visible: ! isAndroid || enabled
+        onTriggered: Logic.truncate()
+    }
+    MenuItem {
+        id: truncateChildren
+
+        text: qsTr("Truncate &Children")
+        enabled: gameModel.canGoForward
+        visible: ! isAndroid || enabled
+        onTriggered: Logic.truncateChildren()
     }
 }

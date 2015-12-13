@@ -112,6 +112,10 @@ public:
 
     Q_INVOKABLE void moveUpVar();
 
+    Q_INVOKABLE void truncate();
+
+    Q_INVOKABLE void truncateChildren();
+
     QQmlListProperty<PieceModel> pieceModels0();
 
     QQmlListProperty<PieceModel> pieceModels1();

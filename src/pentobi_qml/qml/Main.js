@@ -361,6 +361,16 @@ function showQuestion(text, acceptedFunc) {
     dialog.open()
 }
 
+function truncate() {
+    showQuestion(qsTr("Truncate this subtree?"),
+                 function() { gameModel.truncate() })
+}
+
+function truncateChildren() {
+    showQuestion(qsTr("Truncate children?"),
+                 function() { gameModel.truncateChildren() })
+}
+
 function undo() {
     if (! gameModel.canUndo)
         return
