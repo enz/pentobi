@@ -7,7 +7,7 @@ Item
     id: gameDisplay // Referenced by Piece*.qml
 
     property var pickedPiece: null
-    property bool transitionsEnabled: false
+    property bool transitionsEnabled
     property bool markLastMove: true
     property alias busyIndicatorRunning: busyIndicator.running
     property real imageSourceWidth:
