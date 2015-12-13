@@ -43,6 +43,8 @@ using libpentobi_base::Variant;
 class PlayoutFeatures
 {
 public:
+    typedef unsigned IntType;
+
     /** The maximum number of local points for a move.
         The number can be higher than PieceInfo::max_size (see class
         description). */
@@ -73,14 +75,14 @@ public:
         /** Get the number of local points for this move.
             @pre ! is_forbidden()
             @return The number of local points in [0..max_local] */
-        unsigned get_nu_local() const
+        IntType get_nu_local() const
         {
             LIBBOARDGAME_ASSERT(! is_forbidden());
             return m_value;
         }
 
     private:
-        unsigned m_value;
+        IntType m_value;
     };
 
     friend class Compute;
@@ -101,9 +103,9 @@ public:
     void set_local(const Board& bd);
 
 private:
-    GridExt<unsigned> m_point_value;
+    GridExt<IntType> m_point_value;
 
-    Grid<unsigned> m_snapshot;
+    Grid<IntType> m_snapshot;
 
     /** Points with non-zero local value. */
     PointList m_local_points;
@@ -177,14 +179,16 @@ inline void PlayoutFeatures::set_local(const Board& bd)
             {
                 m_local_points.get_unchecked(nu_local++) = *j;
                 m_point_value[*j] =
-                        bd.is_attach_point(*j, to_play) ? 0x0002u : 0x0001u;
+                        1 + static_cast<IntType>(
+                            bd.is_attach_point(*j, to_play));
             }
             geo.for_each_adj(*j, [&](Point k) {
                 if (! is_forbidden[k] && m_point_value[k] == 0)
                 {
                     m_local_points.get_unchecked(nu_local++) = k;
                     m_point_value[k] =
-                            bd.is_attach_point(k, to_play) ? 0x0002u : 0x0001u;
+                            1 + static_cast<IntType>(
+                                bd.is_attach_point(k, to_play));
                 }
             });
         }
