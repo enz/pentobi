@@ -74,7 +74,7 @@ function findPiece(pieceModel, color) {
     case 3: pieces = _pieces3; break
     }
     if (pieces === undefined)
-        return // Pieces haven't been created yet
+        return null // Pieces haven't been created yet
     for (var i = 0; i < pieces.length; ++i)
         if (pieces[i].pieceModel === pieceModel)
             return pieces[i]
