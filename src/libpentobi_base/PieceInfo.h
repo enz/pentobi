@@ -28,18 +28,12 @@ using libboardgame_util::ArrayList;
 class PieceInfo
 {
 public:
-    /** Maximum number of fields of a piece. */
+    /** Maximum number of points in a piece. */
     static const unsigned max_size = 6;
 
     typedef ArrayList<CoordPoint, max_size> Points;
 
-    /** Maximum number of adjacent points to a piece. */
-    static const unsigned max_adj = 12;
-
-    /** Maximum number of attach points of a piece. */
-    static const unsigned max_attach = 14;
-
-    /** Maximum number of attach and adjacent points of a piece. */
+    /** Maximum number of attach points and adjacent points of a piece. */
     static const unsigned max_adj_attach = 22;
 
     /** Constructor.
