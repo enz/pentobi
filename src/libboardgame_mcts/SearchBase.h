@@ -1433,7 +1433,7 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
     while (++i != children.end())
     {
         value = i->get_value();
-        if (value < limit)
+        if (value <= limit)
             continue;
         value += bias_factor / sqrt(i->get_value_count());
         if (value > best_value)
