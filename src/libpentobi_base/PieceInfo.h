@@ -30,8 +30,13 @@ class PieceInfo
 public:
     /** Maximum number of points in a piece.
         The maximum piece size occurs with the I4 piece in Nexos (4 real points
-        and 3 junction points). */
+        and 3 junction points, see get_points()). */
     static const unsigned max_size = 7;
+
+    /** Maximum number of scored points in a piece.
+        This excludes junction points in Nexos. The maximum number of scored
+        points occurs in Trigon. */
+    static const unsigned max_scored_size = 6;
 
     typedef ArrayList<CoordPoint, max_size> Points;
 
@@ -52,6 +57,11 @@ public:
 
     const string& get_name() const;
 
+    /** The points of the piece.
+        In Nexos, the points of a piece contain the coordinates of line
+        segments and of junctions that are essentially needed to mark the
+        intersection as non-crossable (i.e. junctions that touch exactly two
+        line segments of the piece with identical orientation. */
     const Points& get_points() const;
 
     const CoordPoint& get_label_pos() const;

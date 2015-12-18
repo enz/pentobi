@@ -19,6 +19,7 @@
 
 using namespace std;
 using libboardgame_base::CoordPoint;
+using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::trim;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
@@ -200,6 +201,9 @@ void PieceSelector::init()
                 continue;
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
+            // We need to match the coordinate system of the piece selector to
+            // the geometry, they are different in Trigon3.
+            type_match_shift(geo, points.begin(), points.end(), 0);
             if (piece_set == PieceSet::nexos)
                 filterCrossableJunctions(points);
             m_transform[x][y] =
@@ -268,7 +272,7 @@ void PieceSelector::paintEvent(QPaintEvent*)
             {
                 if (piece.is_null() || m_disabled[x][y])
                     continue;
-                bool isUpward = (pointType == 0);
+                bool isUpward = (pointType == geo.get_point_type(0, 0));
                 Util::paintColorTriangle(painter, variant, m_color, isUpward,
                                          x * m_fieldWidth, y * m_fieldHeight,
                                          m_fieldWidth, m_fieldHeight);

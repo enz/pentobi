@@ -602,6 +602,14 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
     info = MoveInfo(piece, points);
     auto begin = info.begin();
     auto end = info.end();
+    auto scored_points = &info_ext_2.scored_points[0];
+    for (auto i = begin; i != end; ++i)
+        if (m_board_type != BoardType::nexos || m_geo.get_point_type(*i) != 0)
+            *(scored_points++) = *i;
+    info_ext_2.scored_points_size = static_cast<uint_least8_t>(
+                scored_points - &info_ext_2.scored_points[0]);
+    begin = info_ext_2.begin_scored_points();
+    end = info_ext_2.end_scored_points();
     s_marker.clear();
     for (auto i = begin; i != end; ++i)
         s_marker.set(*i);
@@ -757,12 +765,21 @@ Move BoardConst::from_string(const string& s) const
     vector<string> v = split(trimmed, ',');
     if (v.size() > PieceInfo::max_size)
         throw runtime_error("illegal move (too many points)");
+    bool is_nexos = (m_board_type == BoardType::nexos);
     MovePoints points;
     for (const auto& s : v)
     {
         Point p;
         if (! m_geo.from_string(s, p))
             throw runtime_error("illegal move (invalid point)");
+        if (is_nexos)
+        {
+            auto point_type = m_geo.get_point_type(p);
+            if (point_type != 1 && point_type != 2)
+                // Silently discard points that are not line segments, such
+                // files were written by some (unreleased) versions od Pentobi.
+                continue;
+        }
         points.push_back(p);
     }
     Move mv;
@@ -800,15 +817,17 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
     for (Piece::IntType i = 0; i < m_pieces.size(); ++i)
     {
         Piece piece(i);
-        if (get_piece_info(piece).get_size() != points.size())
-            continue;
         for (auto mv : get_moves(piece, points[0]))
-            if (equal(sorted_points.begin(), sorted_points.end(),
-                      m_move_info[mv.to_int()].begin()))
+        {
+            auto& info_ext_2 = get_move_info_ext_2(mv);
+            if (sorted_points.size() == info_ext_2.scored_points_size
+                && equal(sorted_points.begin(), sorted_points.end(),
+                         info_ext_2.begin_scored_points()))
             {
                 move = mv;
                 return true;
             }
+        }
     }
     return false;
 }
@@ -984,17 +1003,19 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
     if (mv.is_null())
         return "null";
     auto& info = get_move_info(mv);
+    auto& info_ext_2 = get_move_info_ext_2(mv);
     ostringstream s;
     if (with_piece_name)
         s << '[' << get_piece_info(info.get_piece()).get_name() << "]";
     bool is_first = true;
-    for (Point p : info)
+    for (auto i = info_ext_2.begin_scored_points();
+         i != info_ext_2.end_scored_points(); ++i)
     {
         if (! is_first)
             s << ',';
         else
             is_first = false;
-        s << m_geo.to_string(p);
+        s << m_geo.to_string(*i);
     }
     return s.str();
 }

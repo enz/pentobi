@@ -30,31 +30,26 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     m_formLayout = new QFormLayout;
     layout->addLayout(m_formLayout);
     auto variant = game.get_variant();
-    if (variant == Variant::duo || variant == Variant::junior)
+    auto nuColors = get_nu_colors(variant);
+    auto nuPlayers = get_nu_players(variant);
+    if (nuColors == 2)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerGreen = createPlayerName(tr("Player &Green:"), Color(1));
     }
-    else if (variant == Variant::classic || variant == Variant::trigon)
+    else if (nuPlayers == 2)
     {
-        m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
-        m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
-        m_playerRed = createPlayerName(tr("Player &Red:"), Color(2));
-        m_playerGreen = createPlayerName(tr("Player &Green:"), Color(3));
-    }
-    else if (variant == Variant::classic_3 || variant == Variant::trigon_3)
-    {
-        m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
-        m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
-        m_playerRed = createPlayerName(tr("Player &Red:"), Color(2));
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
-                            || variant == Variant::trigon_2);
         m_playerBlueRed = createPlayerName(tr("Player &Blue/Red:"), Color(0));
         m_playerYellowGreen =
             createPlayerName(tr("Player &Yellow/Green:"), Color(1));
+    }
+    else
+    {
+        m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
+        m_playerYellow = createPlayerName(tr("Player &Yellow:"), Color(1));
+        m_playerRed = createPlayerName(tr("Player &Red:"), Color(2));
+        if (nuPlayers == 4)
+            m_playerGreen = createPlayerName(tr("Player &Green:"), Color(3));
     }
     m_date = createLine(tr("&Date:"), m_game.get_date());
     m_time = createLine(tr("&Time limits:"), m_game.get_time());
@@ -67,7 +62,7 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     // and that he only wants to display it if not empty. Therefore, we leave
     // the focus at the first text field if it is empty and put it on the
     // button box otherwise.
-    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
+    if (nuColors == 4 && nuPlayers == 2)
     {
         if (! m_playerBlueRed->text().isEmpty())
             buttonBox->setFocus();
@@ -85,42 +80,34 @@ GameInfoDialog::~GameInfoDialog()
 void GameInfoDialog::accept()
 {
     auto variant = m_game.get_variant();
+    auto nuColors = get_nu_colors(variant);
+    auto nuPlayers = get_nu_players(variant);
     string value;
-    if (variant == Variant::duo || variant == Variant::junior)
+    if (nuColors == 2)
     {
         if (acceptLine(m_playerBlue, value))
             m_game.set_player_name(Color(0), value);
         if (acceptLine(m_playerGreen, value))
             m_game.set_player_name(Color(1), value);
     }
-    else if (variant == Variant::classic || variant == Variant::trigon)
+    else if (nuPlayers == 2)
     {
-        if (acceptLine(m_playerBlue, value))
-            m_game.set_player_name(Color(0), value);
-        if (acceptLine(m_playerYellow, value))
-            m_game.set_player_name(Color(1), value);
-        if (acceptLine(m_playerRed, value))
-            m_game.set_player_name(Color(2), value);
-        if (acceptLine(m_playerGreen, value))
-            m_game.set_player_name(Color(3), value);
-    }
-    else if (variant == Variant::classic_3 || variant == Variant::trigon_3)
-    {
-        if (acceptLine(m_playerBlue, value))
-            m_game.set_player_name(Color(0), value);
-        if (acceptLine(m_playerYellow, value))
-            m_game.set_player_name(Color(1), value);
-        if (acceptLine(m_playerRed, value))
-            m_game.set_player_name(Color(2), value);
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(variant == Variant::classic_2
-                            || variant == Variant::trigon_2);
         if (acceptLine(m_playerBlueRed, value))
             m_game.set_player_name(Color(0), value);
         if (acceptLine(m_playerYellowGreen, value))
             m_game.set_player_name(Color(1), value);
+    }
+    else
+    {
+        if (acceptLine(m_playerBlue, value))
+            m_game.set_player_name(Color(0), value);
+        if (acceptLine(m_playerYellow, value))
+            m_game.set_player_name(Color(1), value);
+        if (acceptLine(m_playerRed, value))
+            m_game.set_player_name(Color(2), value);
+        if (nuPlayers == 4)
+            if (acceptLine(m_playerGreen, value))
+                m_game.set_player_name(Color(3), value);
     }
     if (acceptLine(m_date, value))
         m_game.set_date(value);

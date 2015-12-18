@@ -287,7 +287,6 @@ void PentobiTree::set_player_name(Color c, const string& name)
         else if (c == Color(3))
             set_property(root, "P4", name);
     }
-    LIBBOARDGAME_ASSERT(false);
 }
 
 void PentobiTree::set_result(const SgfNode& node, int score)

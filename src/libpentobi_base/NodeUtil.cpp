@@ -103,6 +103,7 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
     // is deprecated
     points.clear();
     auto& geo = get_geometry(variant);
+    bool is_nexos = (get_board_type(variant) == BoardType::nexos);
     for (const auto& s : values)
     {
         if (trim(s).empty())
@@ -113,6 +114,15 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
             Point p;
             if (! geo.from_string(p_str, p))
                 throw InvalidPropertyValue(id, p_str);
+            if (is_nexos)
+            {
+                auto point_type = geo.get_point_type(p);
+                if (point_type != 1 && point_type != 2)
+                    // Silently discard points that are not line segments, such
+                    // files were written by some (unreleased) versions of
+                    // Pentobi.
+                    continue;
+            }
             points.push_back(p);
         }
     }

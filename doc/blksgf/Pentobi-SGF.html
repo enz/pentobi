@@ -7,7 +7,7 @@
 <body>
 <h1>Pentobi SGF Files</h1>
 <div style="font-size:small">Author: Markus Enzenberger<br>
-Last modified: 2015-12-15</div>
+Last modified: 2015-12-18</div>
 <p>This document describes the file format for <a href=
 "http://en.wikipedia.org/wiki/Blokus">Blokus</a> game records as used by the
 program <a href="http://pentobi.sourceforge.net">Pentobi</a>. The most recent
@@ -127,10 +127,8 @@ move. However, move properties should be written with an ordered list of
 coordinates (using the order a1, b1, …, a2, b2, …) such that each move has a
 unique string representation.</p>
 <p>Example: <tt>B[f9,e10,f10,g10,f11]</tt></p>
-<p>In Nexos, moves contain the coordinates of line segments occupied by the
-piece and of junctions that are essentially needed to mark the intersection as
-non-crossable (i.e. junctions that touch exactly two line segments of the piece
-with identical orientation).</p>
+<p>In Nexos, moves contain only the coordinates of line segments occupied by
+the piece, but no coordinates of junctions.</p>
 <p style="font-size:small"><b>Note</b><br>
 Old versions of Pentobi (before version 0.3) used to represent moves by a list
 of points, which did not follow the convention used by other games in SGF to

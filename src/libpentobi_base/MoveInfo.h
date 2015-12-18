@@ -22,7 +22,9 @@ using namespace std;
 /** Most frequently accessed move info.
     Contains the points and the piece of the move. If the point list is smaller
     than PieceInfo::max_size, values above end() up to PieceInfo::max_size may
-    be accessed and contain Point::null() to allow loop unrolling. */
+    be accessed and contain Point::null() to allow loop unrolling. The points
+    correspond to PieceInfo::get_points(), which includes certain junction
+    points in Nexos, see comment there. */
 class MoveInfo
 {
 public:
@@ -36,30 +38,15 @@ public:
             m_points[i] = points.get_unchecked(i);
     }
 
-    const Point* begin() const
-    {
-        return m_points;
-    }
+    const Point* begin() const { return m_points; }
 
-    const Point* end() const
-    {
-        return m_points + m_size;
-    }
+    const Point* end() const { return m_points + m_size; }
 
-    uint_least8_t size() const
-    {
-        return m_size;
-    }
+    uint_least8_t size() const { return m_size; }
 
-    Piece get_piece() const
-    {
-        return Piece(m_piece);
-    }
+    Piece get_piece() const { return Piece(m_piece); }
 
-    bool contains(Point p) const
-    {
-        return find(begin(), end(), p) != end();
-    }
+    bool contains(Point p) const { return find(begin(), end(), p) != end(); }
 
 private:
     uint_least8_t m_piece;
@@ -118,12 +105,26 @@ struct MoveInfoExt2
         draws impossible. */
     bool breaks_symmetry;
 
+    uint_least8_t scored_points_size;
+
     /** The rotational-symmetric counterpart to this move.
         Currently not initialized for classic and trigon_3 board types (see
         comment at breaks_symmetry. */
     Move symmetric_move;
 
     Point label_pos;
+
+    /** The points of a move that contribute to the score, which excludes
+        junction points in Nexos. */
+    Point scored_points[PieceInfo::max_scored_size];
+
+
+    const Point* begin_scored_points() const { return scored_points; }
+
+    const Point* end_scored_points() const
+    {
+        return scored_points + scored_points_size;
+    }
 };
 
 //-----------------------------------------------------------------------------

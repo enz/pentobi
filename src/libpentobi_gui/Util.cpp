@@ -230,10 +230,10 @@ QColor Util::getPaintColor(Variant variant, Color c)
 QString Util::getPlayerString(Variant variant, Color c)
 {
     auto i = c.to_int();
-    if (variant == Variant::duo || variant == Variant::junior)
+    if (get_nu_colors(variant) == 2)
         return i == 0 ? qApp->translate("Util", "Blue")
                       : qApp->translate("Util", "Green");
-    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
+    if (get_nu_players(variant) == 2)
         return i == 0 || i == 2 ? qApp->translate("Util", "Blue/Red")
                                 : qApp->translate("Util", "Yellow/Green");
     if (i == 0)
