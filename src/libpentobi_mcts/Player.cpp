@@ -49,6 +49,9 @@ static const float counts_duo[Player::max_supported_level] =
 static const float counts_trigon[Player::max_supported_level] =
     { 228, 433, 727, 1501, 2912, 7395, 26666, 76824, 471249 };
 
+static const float counts_nexos[Player::max_supported_level] =
+    { 3, 17, 44, 500, 2912, 7395, 26666, 76824, 471249 };
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -148,8 +151,10 @@ Move Player::genmove(const Board& bd, Color c)
             break;
         case BoardType::trigon:
         case BoardType::trigon_3:
-        case BoardType::nexos:
             max_count = counts_trigon[level - 1];
+            break;
+        case BoardType::nexos:
+            max_count = counts_nexos[level - 1];
             break;
         }
         // Don't weight max_count in low levels, otherwise it is still too
