@@ -30,9 +30,9 @@ namespace {
 /** Gamma value for PlayoutFeatures::get_nu_local().
     The value of nu_local dominates all other features, so we use a high
     gamma. Above some limit, we don't care about the exact value. */
-const array<float, PlayoutFeatures::max_local + 1> gamma_local =
+float gamma_local[PlayoutFeatures::max_local + 1] =
   { 1, 1e6f, 1e12f, 1e18f, 1e24f, 1e30f, 1e30f, 1e30f, 1e30f, 1e30f, 1e30f,
-    1e30f, 1e30f };
+    1e30f, 1e30f, 1e30f, 1e30f };
 
 inline Float sigmoid(Float steepness, Float x)
 {
