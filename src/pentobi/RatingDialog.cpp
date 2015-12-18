@@ -136,6 +136,12 @@ void RatingDialog::updateContent()
     case Variant::junior:
         variantStr = tr("Junior");
         break;
+    case Variant::nexos:
+        variantStr = tr("Nexos (4 players)");
+        break;
+    case Variant::nexos_2:
+        variantStr = tr("Nexos (2 players)");
+        break;
     }
     m_labelVariant->setText(variantStr);
         m_labelNuGames->setText(QString::number(nuGames));

@@ -23,13 +23,13 @@ using libpentobi_base::Piece;
 
 namespace {
 
-void filter_min_size(const BoardConst& board_const, unsigned min_size,
+void filter_min_size(const BoardConst& bc, unsigned min_size,
                      PieceMap<bool>& is_piece_considered)
 {
-    for (Piece::IntType i = 0; i < board_const.get_nu_pieces(); ++i)
+    for (Piece::IntType i = 0; i < bc.get_nu_pieces(); ++i)
     {
         Piece piece(i);
-        auto& piece_info = board_const.get_piece_info(piece);
+        auto& piece_info = bc.get_piece_info(piece);
         if (piece_info.get_size() < min_size)
             is_piece_considered[piece] = false;
     }
@@ -42,12 +42,12 @@ inline bool is_followup_adj_status(unsigned status_new, unsigned status_old)
     return (status_new & status_old) == status_old;
 }
 
-void set_piece_considered(const BoardConst& board_const, const char* name,
+void set_piece_considered(const BoardConst& bc, const char* name,
                           PieceMap<bool>& is_piece_considered,
                           bool is_considered = true)
 {
     Piece piece;
-    bool found = board_const.get_piece_by_name(name, piece);
+    bool found = bc.get_piece_by_name(name, piece);
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
     LIBBOARDGAME_ASSERT(found);
     is_piece_considered[piece] = is_considered;
@@ -56,68 +56,73 @@ void set_piece_considered(const BoardConst& board_const, const char* name,
 void set_pieces_considered(const Board& bd, unsigned nu_moves,
                            PieceMap<bool>& is_piece_considered)
 {
-    auto& board_const = bd.get_board_const();
-    auto board_type = board_const.get_board_type();
+    auto& bc = bd.get_board_const();
     unsigned nu_colors = bd.get_nu_colors();
     is_piece_considered.fill(true);
-    if (board_type == BoardType::duo)
+    switch (bc.get_board_type())
     {
+    case BoardType::duo:
         if (nu_moves < 2 * nu_colors)
-            filter_min_size(board_const, 5, is_piece_considered);
+            filter_min_size(bc, 5, is_piece_considered);
         else if (nu_moves < 3 * nu_colors)
-            filter_min_size(board_const, 4, is_piece_considered);
+            filter_min_size(bc, 4, is_piece_considered);
         else if (nu_moves < 5 * nu_colors)
-            filter_min_size(board_const, 3, is_piece_considered);
-    }
-    else if (board_type == BoardType::classic)
-    {
+            filter_min_size(bc, 3, is_piece_considered);
+        break;
+    case BoardType::classic:
         if (nu_moves < nu_colors)
         {
             is_piece_considered.fill(false);
-            set_piece_considered(board_const, "V5", is_piece_considered);
-            set_piece_considered(board_const, "Z5", is_piece_considered);
+            set_piece_considered(bc, "V5", is_piece_considered);
+            set_piece_considered(bc, "Z5", is_piece_considered);
         }
         else if (nu_moves < 2 * nu_colors)
         {
-            filter_min_size(board_const, 5, is_piece_considered);
-            set_piece_considered(board_const, "F", is_piece_considered, false);
-            set_piece_considered(board_const, "P", is_piece_considered, false);
-            set_piece_considered(board_const, "T5", is_piece_considered, false);
-            set_piece_considered(board_const, "U", is_piece_considered, false);
-            set_piece_considered(board_const, "X", is_piece_considered, false);
+            filter_min_size(bc, 5, is_piece_considered);
+            set_piece_considered(bc, "F", is_piece_considered, false);
+            set_piece_considered(bc, "P", is_piece_considered, false);
+            set_piece_considered(bc, "T5", is_piece_considered, false);
+            set_piece_considered(bc, "U", is_piece_considered, false);
+            set_piece_considered(bc, "X", is_piece_considered, false);
         }
         else if (nu_moves < 3 * nu_colors)
         {
-            filter_min_size(board_const, 5, is_piece_considered);
-            set_piece_considered(board_const, "P", is_piece_considered, false);
-            set_piece_considered(board_const, "U", is_piece_considered, false);
+            filter_min_size(bc, 5, is_piece_considered);
+            set_piece_considered(bc, "P", is_piece_considered, false);
+            set_piece_considered(bc, "U", is_piece_considered, false);
         }
         else if (nu_moves < 5 * nu_colors)
-            filter_min_size(board_const, 4, is_piece_considered);
+            filter_min_size(bc, 4, is_piece_considered);
         else if (nu_moves < 7 * nu_colors)
-            filter_min_size(board_const, 3, is_piece_considered);
-    }
-    else if (board_type == BoardType::trigon
-             || board_type == BoardType::trigon_3)
-    {
+            filter_min_size(bc, 3, is_piece_considered);
+        break;
+    case BoardType::trigon:
+    case BoardType::trigon_3:
         if (nu_moves < nu_colors)
         {
             is_piece_considered.fill(false);
-            set_piece_considered(board_const, "V", is_piece_considered);
-            set_piece_considered(board_const, "I6", is_piece_considered);
+            set_piece_considered(bc, "V", is_piece_considered);
+            set_piece_considered(bc, "I6", is_piece_considered);
         }
         if (nu_moves < 4 * nu_colors)
         {
-            filter_min_size(board_const, 6, is_piece_considered);
+            filter_min_size(bc, 6, is_piece_considered);
             // O is a bad early move, it neither extends, nor blocks well
-            set_piece_considered(board_const, "O", is_piece_considered, false);
+            set_piece_considered(bc, "O", is_piece_considered, false);
         }
         else if (nu_moves < 5 * nu_colors)
-            filter_min_size(board_const, 5, is_piece_considered);
+            filter_min_size(bc, 5, is_piece_considered);
         else if (nu_moves < 7 * nu_colors)
-            filter_min_size(board_const, 4, is_piece_considered);
+            filter_min_size(bc, 4, is_piece_considered);
         else if (nu_moves < 9 * nu_colors)
-            filter_min_size(board_const, 3, is_piece_considered);
+            filter_min_size(bc, 3, is_piece_considered);
+        break;
+    case BoardType::nexos:
+        if (nu_moves < 3 * nu_colors)
+            filter_min_size(bc, 4, is_piece_considered);
+        else if (nu_moves < 5 * nu_colors)
+            filter_min_size(bc, 3, is_piece_considered);
+        break;
     }
 }
 

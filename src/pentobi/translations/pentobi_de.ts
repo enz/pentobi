@@ -225,10 +225,6 @@
         <translation>&amp;Duo</translation>
     </message>
     <message>
-        <source>J&amp;unior</source>
-        <translation>J&amp;unior</translation>
-    </message>
-    <message>
         <source>&amp;Good</source>
         <translation>&amp;Gut</translation>
     </message>
@@ -431,10 +427,6 @@
         <translation>Zug rück&amp;gängig</translation>
     </message>
     <message>
-        <source>Trigo&amp;n (3 Players)</source>
-        <translation>Trigo&amp;n (3 Spieler)</translation>
-    </message>
-    <message>
         <source>V&amp;ery Bad</source>
         <translation>Seh&amp;r schlecht</translation>
     </message>
@@ -633,24 +625,8 @@
         <translation>Ein gewertetes Spiel beginnen</translation>
     </message>
     <message>
-        <source>&amp;Classic (4 Players)</source>
-        <translation>&amp;Klassisch (4 Spieler)</translation>
-    </message>
-    <message>
         <source>Classic (&amp;3 Players)</source>
         <translation>Klassisch (&amp;3 Spieler)</translation>
-    </message>
-    <message>
-        <source>Classic (&amp;2 Players)</source>
-        <translation>Klassisch (&amp;2 Spieler)</translation>
-    </message>
-    <message>
-        <source>&amp;Trigon (4 Players)</source>
-        <translation>&amp;Trigon (4 Spieler)</translation>
-    </message>
-    <message>
-        <source>Tri&amp;gon (2 Players)</source>
-        <translation>Tri&amp;gon (2 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Game</source>
@@ -867,6 +843,38 @@
         <source>Make the computer play the current color</source>
         <translation>Den Computer die gegenwärtige Farbe spielen lassen</translation>
     </message>
+    <message>
+        <source>&amp;Classic (2 Players)</source>
+        <translation>&amp;Klassisch (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Classic (&amp;4 Players)</source>
+        <translation>Klassisch (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Junior</source>
+        <translation>&amp;Junior</translation>
+    </message>
+    <message>
+        <source>&amp;Nexos (2 Players)</source>
+        <translation>&amp;Nexos (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Ne&amp;xos (4 Players)</source>
+        <translation>Ne&amp;xos (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Trigon (2 Players)</source>
+        <translation>&amp;Trigon (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Tri&amp;gon (3 Players)</source>
+        <translation>Tri&amp;gon (3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trig&amp;on (4 Players)</source>
+        <translation>Trig&amp;on (4 Spieler)</translation>
+    </message>
 </context>
 <context>
     <name>RatedGamesList</name>
@@ -976,6 +984,14 @@
     <message>
         <source>Recent development:</source>
         <translation>Aktuelle Entwicklung:</translation>
+    </message>
+    <message>
+        <source>Nexos (4 players)</source>
+        <translation>Nexos (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Nexos (2 players)</source>
+        <translation>Nexos (2 Spieler)</translation>
     </message>
 </context>
 <context>

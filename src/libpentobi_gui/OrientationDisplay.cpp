@@ -15,9 +15,11 @@
 #include "libpentobi_gui/Util.h"
 
 using namespace std;
+using libboardgame_base::ArrayList;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
 using libboardgame_base::geometry_util::normalize_offset;
+using libboardgame_base::geometry_util::type_match_offset;
 using libboardgame_base::geometry_util::type_match_shift;
 using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
@@ -66,13 +68,14 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     auto variant = m_bd.get_variant();
-    auto board_type = m_bd.get_board_type();
     qreal fieldWidth;
     qreal fieldHeight;
     qreal displayWidth;
     qreal displayHeight;
-    bool isTrigon = (board_type == BoardType::trigon
-                     || board_type == BoardType::trigon_3);
+    auto boardType = m_bd.get_board_type();
+    bool isTrigon =
+        (boardType == BoardType::trigon || boardType == BoardType::trigon_3);
+    bool isNexos = (boardType == BoardType::nexos);
     qreal ratio;
     int columns;
     int rows;
@@ -81,16 +84,21 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
         ratio = 1.732;
         columns = 7;
         rows = 4;
-        fieldWidth = min(qreal(width()) / columns,
-                         qreal(height()) / (ratio * rows));
+    }
+    else if (isNexos)
+    {
+        ratio = 1;
+        columns = 8;
+        rows = 8;
     }
     else
     {
         ratio = 1;
         columns = 5;
         rows = 5;
-        fieldWidth = min(qreal(width()) / columns, qreal(height()) / rows);
     }
+    fieldWidth = min(qreal(width()) / columns,
+                     qreal(height()) / (ratio * rows));
     if (fieldWidth > 8)
         // Prefer pixel alignment if piece is not too small
         fieldWidth = floor(fieldWidth);
@@ -122,26 +130,56 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     unsigned height;
     CoordPoint offset;
     normalize_offset(points.begin(), points.end(), width, height, offset);
-    bool invertPointType =
-        (geo.get_point_type(offset) != geo.get_point_type(0, 0));
+    offset = type_match_offset(geo, geo.get_point_type(offset));
     painter.save();
     painter.translate(0.5 * (displayWidth - width * fieldWidth),
                       0.5 * (displayHeight - height * fieldHeight));
+    ArrayList<CoordPoint, 2 * PieceInfo::max_size> junctions;
     for (CoordPoint p : points)
     {
         qreal x = p.x * fieldWidth;
         qreal y = p.y * fieldHeight;
+        auto pointType = geo.get_point_type(p + offset);
         if (isTrigon)
         {
-            bool isUpward = (geo.get_point_type(p) == 0);
-            if (invertPointType)
-                isUpward = ! isUpward;
+            bool isUpward = (pointType == 0);
             Util::paintColorTriangle(painter, variant, m_color, isUpward,
                                      x, y, fieldWidth, fieldHeight);
+        }
+        else if (isNexos)
+        {
+            if (pointType == 1 || pointType == 2)
+            {
+                bool isHorizontal = (pointType == 1);
+                Util::paintColorSegment(painter, variant, m_color,
+                                        isHorizontal, x, y, fieldWidth);
+                if (pointType == 1) // Horiz. segment
+                {
+                    junctions.include(CoordPoint(p.x - 1, p.y));
+                    junctions.include(CoordPoint(p.x + 1, p.y));
+                }
+                else
+                {
+                    LIBBOARDGAME_ASSERT(pointType == 2); // Vert. segment
+                    junctions.include(CoordPoint(p.x, p.y - 1));
+                    junctions.include(CoordPoint(p.x, p.y + 1));
+                }
+            }
         }
         else
             Util::paintColorSquare(painter, variant, m_color, x, y, fieldWidth);
     }
+    if (isNexos)
+        for (CoordPoint p : junctions)
+        {
+            bool hasLeft = points.contains(CoordPoint(p.x - 1, p.y));
+            bool hasRight = points.contains(CoordPoint(p.x + 1, p.y));
+            bool hasUp = points.contains(CoordPoint(p.x, p.y - 1));
+            bool hasDown = points.contains(CoordPoint(p.x, p.y + 1));
+            Util::paintJunction(painter, variant, m_color, p.x * fieldWidth,
+                                p.y * fieldHeight, fieldWidth, fieldHeight,
+                                hasLeft, hasRight, hasUp, hasDown);
+        }
     painter.restore();
     painter.restore();
 }

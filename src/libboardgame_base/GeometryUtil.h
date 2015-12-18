@@ -48,31 +48,36 @@ void normalize_offset(T begin, T end, unsigned& width, unsigned& height,
         *i -= offset;
 }
 
-/** Shift a list of points that are not compatible with the point types used
-    in the geometry such that they match it.
-    The points are shifted in a minimal positive direction to match the
+/** Get an offset to shift points that are not compatible with the point types
+    used in the geometry.
+    The offset shifts points in a minimal positive direction to match the
     types, x-direction is preferred.
-    @tparam T An iterator over a container containing CoordPoint element.
+    @param point_type The point type of (0, 0) of the coordinate sytem used by
+    the points. */
+template<typename P>
+CoordPoint type_match_offset(const Geometry<P>& geo, unsigned point_type)
+{
+    for (unsigned y = 0; y < geo.get_period_y(); ++y)
+        for (unsigned x = 0; x < geo.get_period_x(); ++x)
+            if (geo.get_point_type(x, y) == point_type)
+                return CoordPoint(x, y);
+    LIBBOARDGAME_ASSERT(false);
+    return CoordPoint(0, 0);
+}
+
+/** Apply type_match_offset() to a list of points.
+    @tparam T An iterator over a container containing CoordPoint elements.
     @param geometry The geometry.
     @param begin The beginning of the list of points.
     @param end The end of the list of points.
     @param point_type The point type of (0,0) in the list of points. */
 template<typename P, typename T>
-void type_match_shift(const Geometry<P>& geometry, T begin, T end,
+void type_match_shift(const Geometry<P>& geo, T begin, T end,
                       unsigned point_type)
 {
-    CoordPoint type_match_shift(0, 0); // Init to avoid compiler warning
-    bool found = false;
-    for (unsigned y = 0; ! found && y < geometry.get_period_y(); ++y)
-        for (unsigned x = 0; ! found && x < geometry.get_period_x(); ++x)
-            if (geometry.get_point_type(x, y) == point_type)
-            {
-                type_match_shift = CoordPoint(x, y);
-                found = true;
-            }
-    LIBBOARDGAME_ASSERT(found);
+    CoordPoint offset = type_match_offset(geo, point_type);
     for (auto i = begin; i != end; ++i)
-        *i += type_match_shift;
+        *i += offset;
 }
 
 //-----------------------------------------------------------------------------

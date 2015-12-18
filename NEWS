@@ -7,11 +7,11 @@ Version 10.UNKNOWN (master)
 
 Desktop version:
 
+* New game variant Nexos (2 or 4 players).
 * If a piece is removed from the board in setup mode, it will now
   become the selected piece.
 * The command line option --memory was replaced by --maxlevel, which
-  reduces the needed memory according to the maximum level and also
-  removes higher levels from the menu.
+  reduces the needed memory and removes higher levels from the menu.
 * The memory requirements are now 1 GB minimum, 4 GB recommended for
   playing level 9.
 

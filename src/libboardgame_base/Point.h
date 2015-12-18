@@ -25,10 +25,10 @@ using namespace libboardgame_util;
     Geometry. The convention for the coordinates is that the top left corner of
     the board has the coordinates (0,0). Point::null() has the meaning
     "no point".
-    @tparam M The maximum number of on-board points of the geometries this point
-    is used in (excluding the null point).
-    @tparam W The maximum width of the geometries this point is used in.
-    @tparam H The maximum height of the geometries this point is used in.
+    @tparam M The maximum number of on-board points of all geometries this
+    point is used in (excluding the null point).
+    @tparam W The maximum width of all geometries this point is used in.
+    @tparam H The maximum height of all geometries this point is used in.
     @tparam I An unsigned integer type to store the point value
     @tparam S A class with functions to convert points from and to strings
     depending on the string representation of points in the game. */

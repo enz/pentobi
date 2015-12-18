@@ -94,7 +94,6 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
     if (log_piece_creation)
         LIBBOARDGAME_LOG("Creating transformations for piece ", name, ' ',
                          points);
-    LIBBOARDGAME_ASSERT(points.contains(CoordPoint(0, 0)));
     vector<NormalizedPoints> all_transformed_points;
     PiecePoints transformed_points;
     for (const Transform* transform : transforms.get_all())
@@ -177,11 +176,7 @@ const Transform* PieceInfo::get_equivalent_transform(
                                                const Transform* transform) const
 {
     auto pos = m_equivalent_transform.find(transform);
-    if (pos == m_equivalent_transform.end())
-    {
-        LIBBOARDGAME_ASSERT(false);
-        return nullptr;
-    }
+    LIBBOARDGAME_ASSERT(pos != m_equivalent_transform.end());
     return pos->second;
 }
 

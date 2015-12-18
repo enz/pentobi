@@ -171,44 +171,6 @@ public slots:
 
     void selectNextColor();
 
-    void selectPiece1();
-
-    void selectPiece2();
-
-    void selectPieceA();
-
-    void selectPieceC();
-
-    void selectPieceF();
-
-    void selectPieceG();
-
-    void selectPieceI();
-
-    void selectPieceL();
-
-    void selectPieceN();
-
-    void selectPieceO();
-
-    void selectPieceP();
-
-    void selectPieceS();
-
-    void selectPieceT();
-
-    void selectPieceU();
-
-    void selectPieceV();
-
-    void selectPieceW();
-
-    void selectPieceX();
-
-    void selectPieceY();
-
-    void selectPieceZ();
-
     void selectPiece(Color c, Piece piece);
 
     void selectPiece(Color c, Piece piece, const Transform* transform);
@@ -393,22 +355,6 @@ private:
 
     QAction* m_actionGameInfo;
 
-    QAction* m_actionVariantClassic;
-
-    QAction* m_actionVariantClassic2;
-
-    QAction* m_actionVariantClassic3;
-
-    QAction* m_actionVariantDuo;
-
-    QAction* m_actionVariantJunior;
-
-    QAction* m_actionVariantTrigon;
-
-    QAction* m_actionVariantTrigon2;
-
-    QAction* m_actionVariantTrigon3;
-
     QAction* m_actionGoodMove;
 
     QAction* m_actionGotoMove;
@@ -497,44 +443,6 @@ private:
 
     QAction* m_actionSelectNextColor;
 
-    QAction* m_actionSelectPiece1;
-
-    QAction* m_actionSelectPiece2;
-
-    QAction* m_actionSelectPieceA;
-
-    QAction* m_actionSelectPieceC;
-
-    QAction* m_actionSelectPieceF;
-
-    QAction* m_actionSelectPieceG;
-
-    QAction* m_actionSelectPieceI;
-
-    QAction* m_actionSelectPieceL;
-
-    QAction* m_actionSelectPieceN;
-
-    QAction* m_actionSelectPieceO;
-
-    QAction* m_actionSelectPieceP;
-
-    QAction* m_actionSelectPieceS;
-
-    QAction* m_actionSelectPieceT;
-
-    QAction* m_actionSelectPieceU;
-
-    QAction* m_actionSelectPieceV;
-
-    QAction* m_actionSelectPieceW;
-
-    QAction* m_actionSelectPieceX;
-
-    QAction* m_actionSelectPieceY;
-
-    QAction* m_actionSelectPieceZ;
-
     QAction* m_actionSetupMode;
 
     QAction* m_actionToolBarNoText;
@@ -554,6 +462,26 @@ private:
     QAction* m_actionShowVariations;
 
     QAction* m_actionUndo;
+
+    QAction* m_actionVariantClassic;
+
+    QAction* m_actionVariantClassic2;
+
+    QAction* m_actionVariantClassic3;
+
+    QAction* m_actionVariantDuo;
+
+    QAction* m_actionVariantJunior;
+
+    QAction* m_actionVariantNexos;
+
+    QAction* m_actionVariantNexos2;
+
+    QAction* m_actionVariantTrigon;
+
+    QAction* m_actionVariantTrigon2;
+
+    QAction* m_actionVariantTrigon3;
 
     QAction* m_actionVeryGoodMove;
 
@@ -596,6 +524,7 @@ private:
         Note that the autosave game is deleted after loading to avoid that
         it is used twice if two instances of Pentobi are started. */
     bool m_isAutoSaveLoaded;
+
 
     GenMoveResult asyncGenMove(Color c, int genMoveId, bool playSingleMove);
 
@@ -725,22 +654,6 @@ private slots:
 
     void fullscreen();
 
-    void variantClassic(bool checked);
-
-    void variantClassic2(bool checked);
-
-    void variantClassic3(bool checked);
-
-    void variantDuo(bool checked);
-
-    void variantJunior(bool checked);
-
-    void variantTrigon(bool checked);
-
-    void variantTrigon2(bool checked);
-
-    void variantTrigon3(bool checked);
-
     void genMoveFinished();
 
     void goodMove(bool checked);
@@ -761,7 +674,7 @@ private slots:
 
     void rememberDir(const QString& file);
 
-    void selectNamedPiece(initializer_list<const char*> names);
+    void selectNamedPiece();
 
     void setMoveMarkingAllNumber(bool checked);
 
@@ -792,6 +705,26 @@ private slots:
     void veryBadMove(bool checked);
 
     void veryGoodMove(bool checked);
+
+    void variantClassic(bool checked);
+
+    void variantClassic2(bool checked);
+
+    void variantClassic3(bool checked);
+
+    void variantDuo(bool checked);
+
+    void variantJunior(bool checked);
+
+    void variantTrigon(bool checked);
+
+    void variantTrigon2(bool checked);
+
+    void variantTrigon3(bool checked);
+
+    void variantNexos(bool checked);
+
+    void variantNexos2(bool checked);
 };
 
 //-----------------------------------------------------------------------------

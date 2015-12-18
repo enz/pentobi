@@ -30,6 +30,12 @@ QColor getLabelColor(Variant variant, PointState s);
 
 QColor getMarkColor(Variant variant, PointState s);
 
+/** Paint piece segment in Nexos. */
+void paintColorSegment(QPainter& painter, Variant variant, Color c,
+                       bool isHorizontal, qreal x, qreal y, qreal size,
+                       qreal alpha = 1, qreal saturation = 1,
+                       bool flat = false);
+
 void paintColorSquare(QPainter& painter, Variant variant, Color c,
                       qreal x, qreal y, qreal size, qreal alpha = 1,
                       qreal saturation = 1, bool flat = false);
@@ -39,7 +45,22 @@ void paintColorTriangle(QPainter& painter, Variant variant,
                         qreal height, qreal alpha = 1, qreal saturation = 1,
                         bool flat = false);
 
+/** Paint empty junction in Nexos. */
+void paintEmptyJunction(QPainter& painter, qreal x, qreal y, qreal size);
+
+/** Paint empty segment in Nexos. */
+void paintEmptySegment(QPainter& painter, bool isHorizontal, qreal x, qreal y,
+                       qreal size);
+
+/** Paint empty segment with starting point in Nexos. */
+void paintEmptySegmentStartingPoint(QPainter& painter, Variant variant,
+                                    Color c, bool isHorizontal, qreal x,
+                                    qreal y, qreal size);
+
 void paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size);
+
+void paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
+                                   Color c, qreal x, qreal y, qreal size);
 
 void paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x, qreal y,
                         qreal width, qreal height);
@@ -47,8 +68,10 @@ void paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x, qreal y,
 void paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpward, qreal x,
                                      qreal y, qreal width, qreal height);
 
-void paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
-                                   Color c, qreal x, qreal y, qreal size);
+void paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
+                   qreal y, qreal width, qreal height, bool hasLeft,
+                   bool hasRight, bool hasUp, bool hasDown, qreal alpha = 1,
+                   qreal saturation = 1);
 
 /** Convert a property value of a SGF tree unto a QString.
     @param value

@@ -10,6 +10,7 @@
 
 #include "Variant.h"
 
+#include "NexosGeometry.h"
 #include "TrigonGeometry.h"
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_util/Assert.h"
@@ -38,38 +39,55 @@ using libboardgame_util::to_lower;
 
 BoardType get_board_type(Variant variant)
 {
+    BoardType result = BoardType::classic; // Init to avoid compiler warning
     switch (variant)
     {
     case Variant::duo:
     case Variant::junior:
-        return BoardType::duo;
+        result = BoardType::duo;
+        break;
     case Variant::classic:
     case Variant::classic_2:
     case Variant::classic_3:
-        return BoardType::classic;
+        result = BoardType::classic;
+        break;
     case Variant::trigon:
     case Variant::trigon_2:
-        return BoardType::trigon;
-    default:
-        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
-        return BoardType::trigon_3;
+        result = BoardType::trigon;
+        break;
+    case Variant::trigon_3:
+        result = BoardType::trigon_3;
+        break;
+    case Variant::nexos:
+    case Variant::nexos_2:
+        result = BoardType::nexos;
+        break;
     }
+    return result;
 }
 
 const Geometry& get_geometry(BoardType board_type)
 {
+    const Geometry* result = nullptr; // Init to avoid compiler warning
     switch (board_type)
     {
     case BoardType::duo:
-        return RectGeometry<Point>::get(14, 14);
+        result = &RectGeometry<Point>::get(14, 14);
+        break;
     case BoardType::classic:
-        return RectGeometry<Point>::get(20, 20);
+        result = &RectGeometry<Point>::get(20, 20);
+        break;
     case BoardType::trigon:
-        return TrigonGeometry::get(9);
-    default:
-        LIBBOARDGAME_ASSERT(board_type == BoardType::trigon_3);
-        return TrigonGeometry::get(8);
+        result = &TrigonGeometry::get(9);
+        break;
+    case BoardType::trigon_3:
+        result = &TrigonGeometry::get(8);
+        break;
+    case BoardType::nexos:
+        result = &NexosGeometry::get(13);
+        break;
     }
+    return *result;
 }
 
 const Geometry& get_geometry(Variant variant)
@@ -79,59 +97,79 @@ const Geometry& get_geometry(Variant variant)
 
 Color::IntType get_nu_colors(Variant variant)
 {
+    Color::IntType result = 0; // Init to avoid compiler warning
     switch (variant)
     {
     case Variant::duo:
     case Variant::junior:
-        return 2;
+        result = 2;
+        break;
     case Variant::trigon_3:
-        return 3;
-    default:
-        LIBBOARDGAME_ASSERT(variant == Variant::classic
-                            || variant == Variant::classic_2
-                            || variant == Variant::classic_3
-                            || variant == Variant::trigon
-                            || variant == Variant::trigon_2);
-        return 4;
+        result = 3;
+        break;
+    case Variant::classic:
+    case Variant::classic_2:
+    case Variant::classic_3:
+    case Variant::trigon:
+    case Variant::trigon_2:
+    case Variant::nexos:
+    case Variant::nexos_2:
+        result = 4;
+        break;
     }
+    return result;
 }
 
 Color::IntType get_nu_players(Variant variant)
 {
+    Color::IntType result = 0; // Init to avoid compiler warning
     switch (variant)
     {
     case Variant::duo:
     case Variant::junior:
     case Variant::classic_2:
     case Variant::trigon_2:
-        return 2;
+    case Variant::nexos_2:
+        result = 2;
+        break;
     case Variant::classic_3:
     case Variant::trigon_3:
-        return 3;
-    default:
-        LIBBOARDGAME_ASSERT(variant == Variant::classic
-                            || variant == Variant::trigon);
-        return 4;
+        result = 3;
+        break;
+    case Variant::classic:
+    case Variant::trigon:
+    case Variant::nexos:
+        result = 4;
+        break;
     }
+    return result;
 }
 
 PieceSet get_piece_set(Variant variant)
 {
+    PieceSet result = PieceSet::classic; // Init to avoid compiler warning
     switch (variant)
     {
     case Variant::classic:
     case Variant::classic_2:
     case Variant::classic_3:
     case Variant::duo:
-        return PieceSet::classic;
+        result = PieceSet::classic;
+        break;
     case Variant::trigon:
     case Variant::trigon_2:
     case Variant::trigon_3:
-        return PieceSet::trigon;
-    default:
-        LIBBOARDGAME_ASSERT(variant == Variant::junior);
-        return PieceSet::junior;
+        result = PieceSet::trigon;
+        break;
+    case Variant::junior:
+        result = PieceSet::junior;
+        break;
+    case Variant::nexos:
+    case Variant::nexos_2:
+        result = PieceSet::nexos;
+        break;
     }
+    return result;
 }
 
 void get_transforms(Variant variant,
@@ -140,17 +178,15 @@ void get_transforms(Variant variant,
 {
     transforms.clear();
     inv_transforms.clear();
+    transforms.emplace_back(new PointTransfIdent<Point>);
+    inv_transforms.emplace_back(new PointTransfIdent<Point>);
     switch (get_board_type(variant))
     {
     case BoardType::duo:
-        transforms.emplace_back(new PointTransfIdent<Point>);
-        inv_transforms.emplace_back(new PointTransfIdent<Point>);
         transforms.emplace_back(new PointTransfRot270Refl<Point>);
         inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
         break;
     case BoardType::trigon:
-        transforms.emplace_back(new PointTransfIdent<Point>);
-        inv_transforms.emplace_back(new PointTransfIdent<Point>);
         transforms.emplace_back(new PointTransfTrigonRot60<Point>);
         inv_transforms.emplace_back(new PointTransfTrigonRot300<Point>);
         transforms.emplace_back(new PointTransfTrigonRot120<Point>);
@@ -174,9 +210,10 @@ void get_transforms(Variant variant,
         transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
         inv_transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
         break;
-    default:
-        transforms.emplace_back(new PointTransfIdent<Point>);
-        inv_transforms.emplace_back(new PointTransfIdent<Point>);
+    case BoardType::classic:
+    case BoardType::trigon_3:
+    case BoardType::nexos:
+        break;
     }
 }
 
@@ -199,6 +236,10 @@ bool parse_variant(const string& s, Variant& variant)
         variant = Variant::duo;
     else if (t == "blokus junior")
         variant = Variant::junior;
+    else if (t == "nexos")
+        variant = Variant::nexos;
+    else if (t == "nexos two-player")
+        variant = Variant::nexos_2;
     else
         return false;
     return true;
@@ -223,6 +264,10 @@ bool parse_variant_id(const string& s, Variant& variant)
         variant = Variant::duo;
     else if (t == "junior" || t == "j")
         variant = Variant::junior;
+    else if (t == "nexos" || t == "n")
+        variant = Variant::nexos;
+    else if (t == "nexos_2" || t == "n2")
+        variant = Variant::nexos_2;
     else
         return false;
     return true;
@@ -230,50 +275,79 @@ bool parse_variant_id(const string& s, Variant& variant)
 
 const char* to_string(Variant variant)
 {
+    const char* result = nullptr; // Init to avoid compiler warning
     switch (variant)
     {
     case Variant::classic:
-        return "Blokus";
+        result = "Blokus";
+        break;
     case Variant::classic_2:
-        return "Blokus Two-Player";
+        result = "Blokus Two-Player";
+        break;
     case Variant::classic_3:
-        return "Blokus Three-Player";
+        result = "Blokus Three-Player";
+        break;
     case Variant::duo:
-        return "Blokus Duo";
+        result = "Blokus Duo";
+        break;
     case Variant::junior:
-        return "Blokus Junior";
+        result = "Blokus Junior";
+        break;
     case Variant::trigon:
-        return "Blokus Trigon";
+        result = "Blokus Trigon";
+        break;
     case Variant::trigon_2:
-        return "Blokus Trigon Two-Player";
-    default:
-        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
-        return "Blokus Trigon Three-Player";
+        result = "Blokus Trigon Two-Player";
+        break;
+    case Variant::trigon_3:
+        result = "Blokus Trigon Three-Player";
+        break;
+    case Variant::nexos:
+        result = "Nexos";
+        break;
+    case Variant::nexos_2:
+        result = "Nexos Two-Player";
     }
+    return result;
 }
 
 const char* to_string_id(Variant variant)
 {
+    const char* result = nullptr; // Init to avoid compiler warning
     switch (variant)
     {
     case Variant::classic:
-        return "classic";
+        result = "classic";
+        break;
     case Variant::classic_2:
-        return "classic_2";
+        result = "classic_2";
+        break;
     case Variant::classic_3:
-        return "classic_3";
+        result = "classic_3";
+        break;
     case Variant::duo:
-        return "duo";
+        result = "duo";
+        break;
     case Variant::junior:
-        return "junior";
+        result = "junior";
+        break;
     case Variant::trigon:
-        return "trigon";
+        result = "trigon";
+        break;
     case Variant::trigon_2:
-        return "trigon_2";
-    default:
-        LIBBOARDGAME_ASSERT(variant == Variant::trigon_3);
-        return "trigon_3";
+        result = "trigon_2";
+        break;
+    case Variant::trigon_3:
+        result = "trigon_3";
+        break;
+    case Variant::nexos:
+        result = "nexos";
+        break;
+    case Variant::nexos_2:
+        result = "nexos_2";
+        break;
     }
+    return result;
 }
 
 //-----------------------------------------------------------------------------

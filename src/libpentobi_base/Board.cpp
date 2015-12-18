@@ -312,6 +312,11 @@ void Board::init_variant(Variant variant)
         m_bonus_all_pieces = 0;
         m_bonus_one_piece = 0;
     }
+    else if (m_variant == Variant::nexos || m_variant == Variant::nexos_2)
+    {
+        m_bonus_all_pieces = 10;
+        m_bonus_one_piece = 0;
+    }
     else
     {
         m_bonus_all_pieces = 15;
@@ -324,11 +329,43 @@ void Board::init_variant(Variant variant)
     m_starting_points.init(variant, *m_geo);
     for (Color c : get_colors())
     {
-        if (variant == Variant::classic_2
-            || variant == Variant::trigon_2)
+        if (m_nu_players == 2 && m_nu_colors == 4)
             m_second_color[c] = get_next(get_next(c));
         else
             m_second_color[c] = c;
+    }
+    auto piece_set = m_bc->get_piece_set();
+    unsigned total_piece_points = 0;
+    for (Piece::IntType i = 0; i < get_nu_uniq_pieces(); ++i)
+    {
+        Piece piece(i);
+        unsigned n;
+        if (piece_set == PieceSet::nexos)
+        {
+            n = 0;
+            for (auto& p : get_piece_info(piece).get_points())
+                if (m_geo->get_point_type(p.x, p.y) != 0)
+                    ++n;
+        }
+        else
+            n = get_piece_info(piece).get_size();
+        m_score_points[piece] = n;
+        total_piece_points += n;
+    }
+    switch (piece_set)
+    {
+    case PieceSet::classic:
+        LIBBOARDGAME_ASSERT(total_piece_points == 89);
+        break;
+    case PieceSet::junior:
+        LIBBOARDGAME_ASSERT(total_piece_points == 44);
+        break;
+    case PieceSet::trigon:
+        LIBBOARDGAME_ASSERT(total_piece_points == 110);
+        break;
+    case PieceSet::nexos:
+        LIBBOARDGAME_ASSERT(total_piece_points == 84);
+        break;
     }
 }
 
@@ -432,6 +469,7 @@ void Board::write(ostream& out, bool mark_last_move) const
     auto board_type = get_board_type();
     bool is_trigon = (board_type == BoardType::trigon
                       || board_type == BoardType::trigon_3);
+    bool is_nexos = (board_type == BoardType::nexos);
     for (unsigned y = 0; y < height; ++y)
     {
         if (height - y < 10)
@@ -441,6 +479,7 @@ void Board::write(ostream& out, bool mark_last_move) const
         {
             Point p = m_geo->get_point(x, y);
             bool is_offboard = p.is_null();
+            auto point_type = m_geo->get_point_type(x, y);
             if ((x > 0 || (is_trigon && x == 0 && m_geo->is_onboard(x + 1, y)))
                     && ! is_offboard)
             {
@@ -472,7 +511,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 else if (is_trigon)
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geo->get_point_type(x, y) == 1 ? '\\' : '/');
+                    out << (point_type == 1 ? '\\' : '/');
                 }
                 else
                 {
@@ -485,11 +524,11 @@ void Board::write(ostream& out, bool mark_last_move) const
                 if (is_trigon && x > 0 && m_geo->is_onboard(x - 1, y))
                 {
                     set_color(out, "\x1B[1;30;47m");
-                    out << (m_geo->get_point_type(x, y) == 1 ? '\\' : '/');
+                    out << (point_type == 1 ? '\\' : '/');
                 }
                 else
                 {
-                    set_color(out, "\x1B[0m");
+                    set_color(out, is_nexos ? "\x1B[1;30;47m" : "\x1B[0m");
                     out << "  ";
                 }
             }
@@ -498,7 +537,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 PointState s = get_point_state(p);
                 if (s.is_empty())
                 {
-                    if (is_colored_starting_point(p))
+                    if (is_colored_starting_point(p) && ! is_nexos)
                     {
                         Color c = get_starting_point_color(p);
                         set_color(out, m_color_esc_sequence[c]);
@@ -512,14 +551,26 @@ void Board::write(ostream& out, bool mark_last_move) const
                     else
                     {
                         set_color(out, "\x1B[1;30;47m");
-                        out << (is_trigon ? ' ' : '.');
+                        if (is_trigon)
+                            out << ' ';
+                        else if (is_nexos && point_type == 1)
+                            out << '-';
+                        else if (is_nexos && point_type == 2)
+                            out << '|';
+                        else if (is_nexos && point_type == 0)
+                            out << '+';
+                        else
+                            out << '.';
                     }
                 }
                 else
                 {
                     Color color = s.to_color();
                     set_color(out, m_color_esc_sequence[color]);
-                    out << m_color_char[color];
+                    if (is_nexos && m_geo->get_point_type(p) == 0)
+                        out << '*'; // Uncrossable junction
+                    else
+                        out << m_color_char[color];
                 }
             }
         }

@@ -54,9 +54,15 @@ public:
 
     /** Paint the pieces and markup.
         This function must only be called after paintEmptyBoard() because it
-        uses the arguments from the paintEmptyBoard() function to determine the
-        board properties. */
+        uses the arguments from the paintEmptyBoard() function to determine
+        some board properties.
+        The pieceId parameter only needs to be initialized in game variant
+        Nexos and is needed to paint the junctions between segment. Only
+        segment points of pieceId are used (point type 1 or 2) and must be 0 if
+        the point is empty or contain a unique value for segments of the same
+        piece. */
     void paintPieces(QPainter& painter, const Grid<PointState>& pointState,
+                     const Grid<unsigned>& pieceId,
                      const Grid<QString>* labels = nullptr,
                      const Grid<int>* marks = nullptr);
 
@@ -64,7 +70,7 @@ public:
         Paints the selected piece either transparent (if not legal) or opaque
         (if legal). This function must only be called after paintEmptyBoard()
         because it uses the arguments from the paintEmptyBoard() function to
-        determine the board properties. */
+        determine some board properties. */
     void paintSelectedPiece(QPainter& painter, Color c,
                             const MovePoints& points, bool isLegal);
 
@@ -81,6 +87,8 @@ private:
     bool m_coordinates = false;
 
     bool m_isTrigon;
+
+    bool m_isNexos;
 
     const Geometry* m_geo;
 
@@ -110,16 +118,23 @@ private:
 
     StartingPoints m_startingPoints;
 
-    void drawCoordinates(QPainter& painter, bool isTrigon);
 
-    void drawLabel(QPainter& painter, qreal x, qreal y, qreal width,
-                   qreal height, const QString& label, bool isCoordLabel);
+    void paintCoordinates(QPainter& painter, bool isTrigon);
 
-    void drawLabels(QPainter& painter, const Grid<PointState>& pointState,
-                    Variant variant, const Grid<QString>& labels);
+    void paintJunction(QPainter& painter, Variant variant,
+                       const Grid<PointState>& pointState,
+                       const Grid<unsigned>& pieceId, int x, int y,
+                       qreal fieldX, qreal fieldY);
 
-    void drawMarks(QPainter& painter, const Grid<PointState>& pointState,
-                   Variant variant, const Grid<int>& marks);
+    void paintLabel(QPainter& painter, qreal x, qreal y, qreal width,
+                    qreal height, const QString& label, bool isCoordLabel);
+
+    void paintLabels(QPainter& painter, const Grid<PointState>& pointState,
+                     Variant variant, const Grid<QString>& labels);
+
+    void paintMarks(QPainter& painter, const Grid<PointState>& pointState,
+                    Variant variant, const Grid<int>& marks);
+
 };
 
 inline void BoardPainter::setCoordinateColor(const QColor& color)

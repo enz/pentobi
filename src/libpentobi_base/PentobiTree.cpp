@@ -106,43 +106,31 @@ const SgfNode* PentobiTree::get_node_before_move_number(
 
 string PentobiTree::get_player_name(Color c) const
 {
+    string name;
     auto& root = get_root();
-    switch (m_variant)
+    if (get_nu_players(m_variant) == 2)
     {
-    case Variant::classic:
-    case Variant::classic_3:
-    case Variant::trigon:
-    case Variant::trigon_3:
-        if (c == Color(0))
-            return root.get_property("P1", "");
-        if (c == Color(1))
-            return root.get_property("P2", "");
-        if (c == Color(2))
-            return root.get_property("P3", "");
-        if (c == Color(3))
-            return root.get_property("P4", "");
-        break;
-    case Variant::classic_2:
-    case Variant::trigon_2:
         if (c == Color(0) || c == Color(2))
-            return root.get_property("PB", "");
-        if (c == Color(1) || c == Color(3))
-            return root.get_property("PW", "");
-        break;
-    case Variant::duo:
-    case Variant::junior:
-        if (c == Color(0))
-            return root.get_property("PB", "");
-        if (c == Color(1))
-            return root.get_property("PW", "");
-        break;
+            name = root.get_property("PB", "");
+        else if (c == Color(1) || c == Color(2))
+            name = root.get_property("PW", "");
     }
-    LIBBOARDGAME_ASSERT(false);
-    return "";
+    else
+    {
+        if (c == Color(0))
+            name = root.get_property("P1", "");
+        else if (c == Color(1))
+            name = root.get_property("P2", "");
+        else if (c == Color(2))
+            name = root.get_property("P3", "");
+        else if (c == Color(3))
+            name = root.get_property("P4", "");
+    }
+    return name;
 }
 
 Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
-                                                        const char* id) const
+                                                     const char* id) const
 {
     vector<string> values = node.get_multi_property(id);
     Setup::PlacementList result;
@@ -281,12 +269,15 @@ void PentobiTree::set_player(const SgfNode& node, Color c)
 void PentobiTree::set_player_name(Color c, const string& name)
 {
     auto& root = get_root();
-    switch (m_variant)
+    if (get_nu_players(m_variant) == 2)
     {
-    case Variant::classic:
-    case Variant::classic_3:
-    case Variant::trigon:
-    case Variant::trigon_3:
+        if (c == Color(0) || c == Color(2))
+            set_property(root, "PB", name);
+        else if (c == Color(1) || c == Color(3))
+            set_property(root, "PW", name);
+    }
+    else
+    {
         if (c == Color(0))
             set_property(root, "P1", name);
         else if (c == Color(1))
@@ -295,27 +286,6 @@ void PentobiTree::set_player_name(Color c, const string& name)
             set_property(root, "P3", name);
         else if (c == Color(3))
             set_property(root, "P4", name);
-        else
-            LIBBOARDGAME_ASSERT(false);
-        return;
-    case Variant::classic_2:
-    case Variant::trigon_2:
-        if (c == Color(0) || c == Color(2))
-            set_property(root, "PB", name);
-        else if (c == Color(1) || c == Color(3))
-            set_property(root, "PW", name);
-        else
-            LIBBOARDGAME_ASSERT(false);
-        return;
-    case Variant::duo:
-    case Variant::junior:
-        if (c == Color(0))
-            set_property(root, "PB", name);
-        else if (c == Color(1))
-            set_property(root, "PW", name);
-        else
-            LIBBOARDGAME_ASSERT(false);
-        return;
     }
     LIBBOARDGAME_ASSERT(false);
 }

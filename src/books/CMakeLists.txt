@@ -6,6 +6,8 @@ install(FILES
   book_classic_3.blksgf
   book_duo.blksgf
   book_junior.blksgf
+  book_nexos.blksgf
+  book_nexos_2.blksgf
   book_trigon.blksgf
   book_trigon_2.blksgf
   book_trigon_3.blksgf

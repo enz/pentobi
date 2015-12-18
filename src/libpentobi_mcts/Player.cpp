@@ -138,20 +138,17 @@ Move Player::genmove(const Board& bd, Color c)
         max_time = m_fixed_time;
     else
     {
-        switch (variant)
+        switch (board_type)
         {
-        case Variant::classic:
-        case Variant::classic_2:
-        case Variant::classic_3:
+        case BoardType::classic:
             max_count = counts_classic[level - 1];
             break;
-        case Variant::duo:
-        case Variant::junior:
+        case BoardType::duo:
             max_count = counts_duo[level - 1];
             break;
-        case Variant::trigon:
-        case Variant::trigon_2:
-        case Variant::trigon_3:
+        case BoardType::trigon:
+        case BoardType::trigon_3:
+        case BoardType::nexos:
             max_count = counts_trigon[level - 1];
             break;
         }
@@ -173,6 +170,7 @@ Move Player::genmove(const Board& bd, Color c)
                 break;
             case BoardType::trigon:
             case BoardType::trigon_3:
+            case BoardType::nexos:
                 weight = m_weight_max_count_trigon[player_move];
                 break;
             }
@@ -246,37 +244,37 @@ Rating Player::get_rating(Variant variant, unsigned level)
     // of Pentobi.
     auto max_supported_level = Player::max_supported_level;
     level = min(max(level, 1u), max_supported_level);
-    switch (variant)
+    Rating result;
+    switch (get_board_type(variant))
     {
-    case Variant::classic:
-    case Variant::classic_2:
-    case Variant::classic_3:
+    case BoardType::classic:
+    case BoardType::nexos: // rating of Nexos not yet measured, use classic
         {
             // Anchor 1000, scale 0.63
             static float elo[Player::max_supported_level] =
                 { 1000, 1134, 1267, 1400, 1534, 1668, 1801, 1935, 2068 };
-            return Rating(elo[level - 1]);
+            result = Rating(elo[level - 1]);
         }
-    case Variant::duo:
-    case Variant::junior:
+        break;
+    case BoardType::duo:
         {
             // Anchor 1100, scale 0.80
             static float elo[Player::max_supported_level] =
                 { 1100, 1229, 1359, 1489, 1618, 1748, 1878, 2008, 2137 };
-            return Rating(elo[level - 1]);
+            result = Rating(elo[level - 1]);
         }
-    case Variant::trigon:
-    case Variant::trigon_2:
-    case Variant::trigon_3:
+        break;
+    case BoardType::trigon:
+    case BoardType::trigon_3:
         {
             // Anchor 1000, scale 0.60
             static float elo[Player::max_supported_level] =
                 { 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800 };
-            return Rating(elo[level - 1]);
+            result = Rating(elo[level - 1]);
         }
+        break;
     }
-    LIBBOARDGAME_ASSERT(false);
-    return Rating(0);
+    return result;
 }
 
 bool Player::is_book_loaded(Variant variant) const

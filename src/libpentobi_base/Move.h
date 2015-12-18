@@ -35,6 +35,8 @@ public:
 
     static const IntType onboard_moves_junior = 7217;
 
+    static const IntType onboard_moves_nexos = 15157;
+
     /** Integer range of moves.
         The maximum is given by the number of on-board moves in game variant
         Trigon, plus a null move. */

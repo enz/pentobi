@@ -23,6 +23,8 @@ set(pentobi_base_STAT_SRCS
   MoveList.h
   MoveMarker.h
   MovePoints.h
+  NexosGeometry.h
+  NexosGeometry.cpp
   NodeUtil.h
   NodeUtil.cpp
   PentobiSgfUtil.h
@@ -53,7 +55,7 @@ set(pentobi_base_STAT_SRCS
   StartingPoints.h
   StartingPoints.cpp
   SymmetricPoints.h
-  SymmetricPoints.cpp  
+  SymmetricPoints.cpp
   TreeUtil.h
   TreeUtil.cpp
   TrigonGeometry.h

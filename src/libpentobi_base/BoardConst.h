@@ -35,9 +35,6 @@ public:
     ArrayList<Point, PrecompMoves::adj_status_nu_adj, unsigned short>
     AdjStatusList;
 
-    /** Maximum number of unique pieces per color. */
-    static const unsigned max_pieces = 22;
-
     static const unsigned max_moves_at_point = 40;
 
     /** Get the single instance for a given board size.
@@ -46,8 +43,6 @@ public:
     static const BoardConst& get(Variant variant);
 
     Piece::IntType get_nu_pieces() const;
-
-    unsigned get_total_piece_points() const;
 
     unsigned get_max_piece_size() const;
 
@@ -97,7 +92,9 @@ public:
 
     const PrecompMoves& get_precomp_moves() const { return m_precomp_moves; }
 
-    BoardType get_board_type() const;
+    BoardType get_board_type() const { return m_board_type; };
+
+    PieceSet get_piece_set() const { return m_piece_set; }
 
     const Geometry& get_geometry() const;
 
@@ -144,13 +141,13 @@ private:
 
     Piece::IntType m_nu_pieces;
 
-    unsigned m_total_piece_points;
-
     unsigned m_max_piece_size;
 
     unsigned m_nu_moves;
 
     BoardType m_board_type;
+
+    PieceSet m_piece_set;
 
     const Geometry& m_geo;
 
@@ -199,11 +196,6 @@ private:
 
     void init_symmetry_info();
 };
-
-inline BoardType BoardConst::get_board_type() const
-{
-    return m_board_type;
-}
 
 inline const Geometry& BoardConst::get_geometry() const
 {
@@ -267,11 +259,6 @@ inline const PieceInfo& BoardConst::get_piece_info(Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() < m_pieces.size());
     return m_pieces[piece.to_int()];
-}
-
-inline unsigned BoardConst::get_total_piece_points() const
-{
-    return m_total_piece_points;
 }
 
 inline const PieceTransforms& BoardConst::get_transforms() const

@@ -96,25 +96,25 @@ void Search::set_default_param(Variant variant)
     // trigon_2 and used for all other game variants with the same board type
     switch (variant)
     {
+    case Variant::classic:
+    case Variant::classic_2:
+    case Variant::classic_3:
+        set_bias_term_constant(0.07f);
+        set_rave_parent_max(50000);
+        break;
     case Variant::duo:
     case Variant::junior:
         set_bias_term_constant(0.05f);
         set_rave_parent_max(25000);
         break;
-    case Variant::classic_2:
-    case Variant::classic_3:
-    case Variant::classic:
-        set_bias_term_constant(0.07f);
-        set_rave_parent_max(50000);
-        break;
+    case Variant::trigon:
     case Variant::trigon_2:
     case Variant::trigon_3:
-    case Variant::trigon:
+    case Variant::nexos:
+    case Variant::nexos_2:
         set_bias_term_constant(0.07f);
         set_rave_parent_max(50000);
         break;
-    default:
-        LIBBOARDGAME_ASSERT(false);
     }
 }
 

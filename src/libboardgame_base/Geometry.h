@@ -142,18 +142,6 @@ public:
 
     const DiagList& get_diag(Point p) const;
 
-    /** Iterate over adjacent points.
-        Slightly faster than for(Point : get_adj()) because it knows that the
-        list is not empty. */
-    template<class FUNCTION>
-    void for_each_adj(Point p, FUNCTION f) const;
-
-    /** Iterate over diagonal points.
-        Slightly faster than for(Point : get_diag()) because it knows that the
-        list is not empty. */
-    template<class FUNCTION>
-    void for_each_diag(Point p, FUNCTION f) const;
-
 protected:
     Geometry();
 
@@ -201,32 +189,6 @@ Geometry<P>::Geometry()
 template<class P>
 Geometry<P>::~Geometry()
 {
-}
-
-template<class P>
-template<class FUNCTION>
-inline void Geometry<P>::for_each_adj(Point p, FUNCTION f) const
-{
-    auto& l = get_adj(p);
-    auto i = l.begin();
-    auto end = l.end();
-    LIBBOARDGAME_ASSERT(i != end);
-    do
-        f(*i);
-    while (++i != end);
-}
-
-template<class P>
-template<class FUNCTION>
-inline void Geometry<P>::for_each_diag(Point p, FUNCTION f) const
-{
-    auto& l = get_diag(p);
-    auto i = l.begin();
-    auto end = l.end();
-    LIBBOARDGAME_ASSERT(i != end);
-    do
-        f(*i);
-    while (++i != end);
 }
 
 template<class P>

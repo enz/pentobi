@@ -23,7 +23,7 @@ public:
     typedef uint_fast8_t IntType;
 
     /** Maximum number of unique pieces per color. */
-    static const IntType max_pieces = 22;
+    static const IntType max_pieces = 24;
 
     /** Integer range used for unique pieces without the null piece. */
     static const IntType range_not_null = max_pieces;

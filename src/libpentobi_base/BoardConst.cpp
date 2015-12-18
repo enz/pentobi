@@ -44,8 +44,27 @@ inline void sort_piece_points(PiecePoints& points)
     };
     // Minimal number of necessary comparisons with sorting networks
     auto size = points.size();
-    if (size == 6)
+    switch (size)
     {
+    case 7:
+        check(1, 2);
+        check(3, 4);
+        check(5, 6);
+        check(0, 2);
+        check(3, 5);
+        check(4, 6);
+        check(0, 1);
+        check(4, 5);
+        check(2, 6);
+        check(0, 4);
+        check(1, 5);
+        check(0, 3);
+        check(2, 5);
+        check(1, 3);
+        check(2, 4);
+        check(2, 3);
+        break;
+    case 6:
         check(1, 2);
         check(4, 5);
         check(0, 2);
@@ -58,9 +77,8 @@ inline void sort_piece_points(PiecePoints& points)
         check(2, 4);
         check(1, 3);
         check(2, 3);
-    }
-    else if (size == 5)
-    {
+        break;
+    case 5:
         check(0, 1);
         check(3, 4);
         check(2, 4);
@@ -70,27 +88,23 @@ inline void sort_piece_points(PiecePoints& points)
         check(0, 2);
         check(1, 3);
         check(1, 2);
-    }
-    else if (size == 4)
-    {
+        break;
+    case 4:
         check(0, 1);
         check(2, 3);
         check(0, 2);
         check(1, 3);
         check(1, 2);
-    }
-    else if (size == 3)
-    {
+        break;
+    case 3:
         check(1, 2);
         check(0, 2);
         check(0, 1);
-    }
-    else if (size == 2)
-    {
+        break;
+    case 2:
         check(0, 1);
-    }
-    else
-    {
+        break;
+    default:
         LIBBOARDGAME_ASSERT(size == 1);
     }
 }
@@ -374,6 +388,119 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
     return pieces;
 }
 
+vector<PieceInfo> create_pieces_nexos(const Geometry& geo,
+                                      const PieceTransforms& transforms)
+{
+    vector<PieceInfo> pieces;
+    pieces.reserve(24);
+    pieces.emplace_back("I4",
+                        PiecePoints{ CoordPoint(0, -3), CoordPoint(0, -2),
+                                     CoordPoint(0, -1), CoordPoint(0, 0),
+                                     CoordPoint(0, 1), CoordPoint(0, 2),
+                                     CoordPoint(0, 3) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("L4",
+                        PiecePoints{ CoordPoint(0, -3), CoordPoint(0, -2),
+                                     CoordPoint(0, -1), CoordPoint(0, 0),
+                                     CoordPoint(0, 1), CoordPoint(1, 2) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("Y",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 1), CoordPoint(0, 2),
+                                     CoordPoint(0, 3)},
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("N",
+                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 1), CoordPoint(0, 2),
+                                     CoordPoint(0, 3)},
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("V4",
+                        PiecePoints{ CoordPoint(-3, 0), CoordPoint(-2, 0),
+                                     CoordPoint(-1, 0), CoordPoint(0, -1),
+                                     CoordPoint(0, -2), CoordPoint(0, -3) },
+                        geo, transforms, CoordPoint(-1, 0));
+    pieces.emplace_back("W",
+                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 1), CoordPoint(1, 2)},
+                        geo, transforms, CoordPoint(-1, 0));
+    pieces.emplace_back("Z4",
+                        PiecePoints{ CoordPoint(-1, -2), CoordPoint(0, -1),
+                                     CoordPoint(0, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 2) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("T4",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(1, 0),
+                                     CoordPoint(0, 1), CoordPoint(0, 2),
+                                     CoordPoint(0, 3) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("E",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
+                                     CoordPoint(0, 1), CoordPoint(-1, 2)},
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("U4",
+                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
+                                     CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(2, -1) },
+                        geo, transforms, CoordPoint(-1, 0));
+    pieces.emplace_back("X",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(0, 1)},
+                        geo, transforms, CoordPoint(0, -1));
+    pieces.emplace_back("F",
+                        PiecePoints{ CoordPoint(1, -2), CoordPoint(0, -1),
+                                     CoordPoint(1, 0), CoordPoint(0, 1)},
+                        geo, transforms, CoordPoint(0, -1));
+    pieces.emplace_back("H",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
+                                     CoordPoint(0, 1), CoordPoint(2, 1)},
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("J",
+                        PiecePoints{ CoordPoint(0, -3), CoordPoint(0, -2),
+                                     CoordPoint(0, -1), CoordPoint(-1, 0),
+                                     CoordPoint(-2, -1) },
+                        geo, transforms, CoordPoint(-1, 0));
+    pieces.emplace_back("G",
+                        PiecePoints{ CoordPoint(2, -1), CoordPoint(1, 0),
+                                     CoordPoint(0, 1), CoordPoint(1, 2)},
+                        geo, transforms, CoordPoint(1, 0));
+    pieces.emplace_back("O",
+                        PiecePoints{ CoordPoint(1, 0), CoordPoint(2, 1),
+                                     CoordPoint(0, 1), CoordPoint(1, 2)},
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("I3",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
+                                     CoordPoint(0, 1), CoordPoint(0, 2),
+                                     CoordPoint(0, 3) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("L3",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
+                                     CoordPoint(0, 1), CoordPoint(1, 2) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("T3",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(1, 0),
+                                     CoordPoint(0, 1) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("Z3",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 2) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("U3",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
+                                     CoordPoint(2, -1) },
+                        geo, transforms, CoordPoint(1, 0));
+    pieces.emplace_back("V2",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, -1) },
+                        geo, transforms, CoordPoint(-1, 0));
+    pieces.emplace_back("I2",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
+                                     CoordPoint(0, 1) },
+                        geo, transforms, CoordPoint(0, 1));
+    pieces.emplace_back("1",
+                        PiecePoints{ CoordPoint(1, 0) },
+                        geo, transforms, CoordPoint(1, 0));
+    return pieces;
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -385,42 +512,50 @@ Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
     BoardConst::s_adj_status;
 
 BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
-    : m_geo(libpentobi_base::get_geometry(board_type))
+    : m_board_type(board_type),
+      m_piece_set(piece_set),
+      m_geo(libpentobi_base::get_geometry(board_type))
 {
-    m_board_type = board_type;
-    if (board_type == BoardType::trigon && piece_set == PieceSet::trigon)
+    switch (board_type)
     {
-        m_transforms.reset(new PieceTransformsTrigon);
-        m_pieces = create_pieces_trigon(m_geo, *m_transforms);
-        m_nu_moves = Move::onboard_moves_trigon + 1;
-    }
-    else if (board_type == BoardType::trigon_3
-             && piece_set == PieceSet::trigon)
-    {
-        m_transforms.reset(new PieceTransformsTrigon);
-        m_pieces = create_pieces_trigon(m_geo, *m_transforms);
-        m_nu_moves = Move::onboard_moves_trigon_3 + 1;
-    }
-    else if (board_type == BoardType::classic
-             && piece_set == PieceSet::classic)
-    {
-        m_transforms.reset(new PieceTransformsClassic);
-        m_pieces = create_pieces_classic(m_geo, *m_transforms);
-        m_nu_moves = Move::onboard_moves_classic + 1;
-    }
-    else if (board_type == BoardType::duo && piece_set == PieceSet::junior)
-    {
-        m_transforms.reset(new PieceTransformsClassic);
-        m_pieces = create_pieces_junior(m_geo, *m_transforms);
-        m_nu_moves = Move::onboard_moves_junior + 1;
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(board_type == BoardType::duo);
+    case BoardType::classic:
         LIBBOARDGAME_ASSERT(piece_set == PieceSet::classic);
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_classic(m_geo, *m_transforms);
-        m_nu_moves = Move::onboard_moves_duo + 1;
+        m_nu_moves = Move::onboard_moves_classic + 1;
+        break;
+    case BoardType::trigon:
+        LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
+        m_transforms.reset(new PieceTransformsTrigon);
+        m_pieces = create_pieces_trigon(m_geo, *m_transforms);
+        m_nu_moves = Move::onboard_moves_trigon + 1;
+        break;
+    case BoardType::trigon_3:
+        LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
+        m_transforms.reset(new PieceTransformsTrigon);
+        m_pieces = create_pieces_trigon(m_geo, *m_transforms);
+        m_nu_moves = Move::onboard_moves_trigon_3 + 1;
+        break;
+    case BoardType::duo:
+        m_transforms.reset(new PieceTransformsClassic);
+        if (piece_set == PieceSet::classic)
+        {
+            m_pieces = create_pieces_classic(m_geo, *m_transforms);
+            m_nu_moves = Move::onboard_moves_duo + 1;
+        }
+        else
+        {
+            LIBBOARDGAME_ASSERT(piece_set == PieceSet::junior);
+            m_pieces = create_pieces_junior(m_geo, *m_transforms);
+            m_nu_moves = Move::onboard_moves_junior + 1;
+        }
+        break;
+    case BoardType::nexos:
+        LIBBOARDGAME_ASSERT(piece_set == PieceSet::nexos);
+        m_transforms.reset(new PieceTransformsClassic);
+        m_pieces = create_pieces_nexos(m_geo, *m_transforms);
+        m_nu_moves = Move::onboard_moves_nexos + 1;
+        break;
     }
     m_move_info.reset(new MoveInfo[m_nu_moves]);
     m_move_info_ext.reset(new MoveInfoExt[m_nu_moves]);
@@ -433,27 +568,23 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_compare_val[p] =
                 (height - m_geo.get_y(p) - 1) * width + m_geo.get_x(p);
     create_moves();
-    m_total_piece_points = 0;
     m_max_piece_size = 0;
     for (const PieceInfo& piece : m_pieces)
-    {
         m_max_piece_size = max(m_max_piece_size, piece.get_size());
-        m_total_piece_points += piece.get_size();
-    }
-    if (piece_set == PieceSet::classic)
+    switch (piece_set)
     {
+    case PieceSet::classic:
         LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
-        LIBBOARDGAME_ASSERT(m_total_piece_points == 89);
-    }
-    else if (piece_set == PieceSet::junior)
-    {
+        break;
+    case PieceSet::junior:
         LIBBOARDGAME_ASSERT(m_nu_pieces == 12);
-        LIBBOARDGAME_ASSERT(m_total_piece_points == 44);
-    }
-    else if (piece_set == PieceSet::trigon)
-    {
+        break;
+    case PieceSet::trigon:
         LIBBOARDGAME_ASSERT(m_nu_pieces == 22);
-        LIBBOARDGAME_ASSERT(m_total_piece_points == 110);
+        break;
+    case PieceSet::nexos:
+        LIBBOARDGAME_ASSERT(m_nu_pieces == 24);
+        break;
     }
     if (board_type == BoardType::duo || board_type == BoardType::trigon)
         init_symmetry_info();
@@ -463,6 +594,7 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
                              const MovePoints& points, Point label_pos)
 {
     Move mv(static_cast<Move::IntType>(moves_created));
+    LIBBOARDGAME_ASSERT(moves_created <= m_nu_moves);
     auto& info = m_move_info[moves_created];
     auto& info_ext = m_move_info_ext[moves_created];
     auto& info_ext_2 = m_move_info_ext_2[moves_created];
@@ -488,22 +620,20 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
         }
     Point* p = info_ext.points;
     for (auto i = begin; i != end; ++i)
-        m_geo.for_each_adj(*i, [&](Point j) {
+        for (Point j : m_geo.get_adj(*i))
             if (! s_marker[j])
             {
                 s_marker.set(j);
                 *(p++) = j;
             }
-        });
     info_ext.size_adj_points = static_cast<uint_least8_t>(p - info_ext.points);
     for (auto i = begin; i != end; ++i)
-        m_geo.for_each_diag(*i, [&](Point j) {
+        for (Point j : m_geo.get_diag(*i))
             if (! s_marker[j])
             {
                 s_marker.set(j);
                 *(p++) = j;
             }
-        });
     info_ext.size_attach_points =
             static_cast<uint_least8_t>(p - info_ext.end_adj());
     info_ext_2.label_pos = label_pos;
@@ -534,6 +664,7 @@ void BoardConst::create_moves()
     m_full_move_table.reset(new FullMoveTable);
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
         create_moves(moves_created, Piece(i));
+    LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     unsigned n = 0;
     for (Point p : m_geo)
         for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
@@ -548,7 +679,6 @@ void BoardConst::create_moves()
             }
     if (log_move_creation)
         LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomp: ", n);
-    LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
 
@@ -645,7 +775,7 @@ const BoardConst& BoardConst::get(Variant variant)
 {
     static map<BoardType, map<PieceSet, unique_ptr<BoardConst>>> board_const;
     auto board_type = libpentobi_base::get_board_type(variant);
-    auto piece_set = get_piece_set(variant);
+    auto piece_set = libpentobi_base::get_piece_set(variant);
     auto& bc = board_const[board_type][piece_set];
     if (! bc)
         bc.reset(new BoardConst(board_type, piece_set));
@@ -784,8 +914,27 @@ inline void BoardConst::sort(MovePoints& points) const
     };
     // Minimal number of necessary comparisons with sorting networks
     auto size = points.size();
-    if (size == 6)
+    switch (size)
     {
+    case 7:
+        check(1, 2);
+        check(3, 4);
+        check(5, 6);
+        check(0, 2);
+        check(3, 5);
+        check(4, 6);
+        check(0, 1);
+        check(4, 5);
+        check(2, 6);
+        check(0, 4);
+        check(1, 5);
+        check(0, 3);
+        check(2, 5);
+        check(1, 3);
+        check(2, 4);
+        check(2, 3);
+        break;
+    case 6:
         check(1, 2);
         check(4, 5);
         check(0, 2);
@@ -798,9 +947,8 @@ inline void BoardConst::sort(MovePoints& points) const
         check(2, 4);
         check(1, 3);
         check(2, 3);
-    }
-    else if (size == 5)
-    {
+        break;
+    case 5:
         check(0, 1);
         check(3, 4);
         check(2, 4);
@@ -810,27 +958,25 @@ inline void BoardConst::sort(MovePoints& points) const
         check(0, 2);
         check(1, 3);
         check(1, 2);
-    }
-    else if (size == 4)
-    {
+        break;
+    case 4:
         check(0, 1);
         check(2, 3);
         check(0, 2);
         check(1, 3);
         check(1, 2);
-    }
-    else if (size == 3)
-    {
+        break;
+    case 3:
         check(1, 2);
         check(0, 2);
         check(0, 1);
-    }
-    else if (size == 2)
-    {
+        break;
+    case 2:
         check(0, 1);
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(size == 1);
     }
-    else
-        LIBBOARDGAME_ASSERT(size <= 1);
 }
 
 string BoardConst::to_string(Move mv, bool with_piece_name) const

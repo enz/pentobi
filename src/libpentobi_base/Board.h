@@ -34,7 +34,7 @@ public:
     /** Maximum number of pieces per player in any game variant. */
     static const unsigned max_pieces = Setup::max_pieces;
 
-    typedef ArrayList<Piece, BoardConst::max_pieces> PiecesLeftList;
+    typedef ArrayList<Piece, Piece::max_pieces> PiecesLeftList;
 
     static const unsigned max_player_moves = max_pieces;
 
@@ -375,6 +375,12 @@ private:
     /** Bonus for playing the 1-piece last. */
     unsigned m_bonus_one_piece;
 
+    /** Score points of a piece.
+        This is equal to the number of points of a piece apart from game
+        variant Nexos, in which the piece points contain some junction
+        points. */
+    PieceMap<unsigned> m_score_points;
+
     /** See get_nu_piece_instances() */
     uint_fast8_t m_nu_piece_instances;
 
@@ -411,6 +417,7 @@ private:
     Setup m_setup;
 
     StartingPoints m_starting_points;
+
 
     void gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
                    MoveList& moves) const;
@@ -834,7 +841,7 @@ inline void Board::place(Color c, Move mv)
     }
     ++m_state_base.nu_onboard_pieces_all;
     ++state_color.nu_onboard_pieces;
-    state_color.points += piece_size;
+    state_color.points += m_score_points[piece];
     auto i = info.begin();
     auto end = i + piece_size;
     do
@@ -845,11 +852,9 @@ inline void Board::place(Color c, Move mv)
         });
     }
     while (++i != end);
-    i = info_ext.begin_adj();
     end = info_ext.end_adj();
-    do
+    for (i = info_ext.begin_adj(); i != end; ++i)
         state_color.forbidden[*i] = true;
-    while (++i != end);
     LIBBOARDGAME_ASSERT(i == info_ext.begin_attach());
     end += info_ext.size_attach_points;
     auto& attach_points = m_attach_points[c];

@@ -135,11 +135,9 @@ inline void PlayoutFeatures::set_forbidden(const MoveInfo& info)
 
 inline void PlayoutFeatures::set_forbidden(const MoveInfoExt& info_ext)
 {
-    auto i = info_ext.begin_adj();
-    auto end = info_ext.end_adj();
-    do
+    for (auto i = info_ext.begin_adj(), end = info_ext.end_adj(); i != end;
+         ++i)
         m_point_value[*i] = 0x1000u;
-    while (++i != end);
 }
 
 inline void PlayoutFeatures::set_local(const Board& bd)
@@ -182,7 +180,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
                         1 + static_cast<IntType>(
                             bd.is_attach_point(*j, to_play));
             }
-            geo.for_each_adj(*j, [&](Point k) {
+            for (Point k : geo.get_adj(*j))
                 if (! is_forbidden[k] && m_point_value[k] == 0)
                 {
                     m_local_points.get_unchecked(nu_local++) = k;
@@ -190,7 +188,6 @@ inline void PlayoutFeatures::set_local(const Board& bd)
                             1 + static_cast<IntType>(
                                 bd.is_attach_point(k, to_play));
                 }
-            });
         }
         while (++j != end);
     }

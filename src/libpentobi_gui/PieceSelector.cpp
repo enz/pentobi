@@ -19,13 +19,13 @@
 
 using namespace std;
 using libboardgame_base::CoordPoint;
-using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::trim;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
-using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::PieceMap;
+using libpentobi_base::PieceSet;
+using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
@@ -55,6 +55,22 @@ const string pieceLayoutTrigon =
     "C5C5 . . . S . . . . V V . .P6 . . . .P5 . .A4 . .I6I6 . . . . . . . . . . W . . . . ."
     "C5C5C5 . . . . V V V V . .P6P6P6P6P6 . . .A4A4A4 . .I6I6 . .I3I3I3 . . 1 . . .I4I4I4I4";
 
+// To increase the clickable area and to ensure that the pieces can be found
+// in the string with a flood-filling algorithm, the nexos pieces also include
+// some crossable junction points that are not part of the piece definition
+// (they will be filtered out before finding the piece). But the number of
+// points per piece must be at most PiecePoints::max_size.
+const string pieceLayoutNexos =
+    " . . F F F F F . . . O O O .U4U4U4U4U4 . . . . N N N N . . . . H H H . .U3 .U3 . . .V2V2V2"
+    "I4 . . . F . F . Y . O . O .U4 . . .U4 .T4 . . . . . N . . . . . H . . .U3 .U3 . . . . .V2"
+    "I4 . . . . . . . Y . . O O . . . . . . .T4T4T4T4 . . N N . . . . H H . .U3U3U3 . . . . .V2"
+    "I4 .L4 . . . . . Y . . . . . . . . . . .T4 . . . . . . . . . X . . . . . . . . . . . J . ."
+    "I4 .L4 . . . . Y Y .L3 . G G . . . . . . . . . . .Z3Z3 . . X X X . . . . . .I2 . . . J . ."
+    "I4 .L4 . W . . . Y .L3 . G . . . E . . . . .T3 . . .Z3 . . . X . . . . .Z4 .I2 . J . J .V4"
+    "I4 .L4 . W W W . Y .L3 . G G G . E E E E . .T3T3 . .Z3Z3 . . . .Z4Z4Z4Z4Z4 .I2 . J J J .V4"
+    "I4 .L4 . . . W . . .L3 . . . G . . . E . . .T3 . . . . . . . . .Z4 . . . . .I2 . . . . .V4"
+    " . .L4L4 . . W W . .L3L3L3 . . . . . . . . . . . .I3I3I3I3I3 . . . . 1 1 1 .I2 . .V4V4V4V4";
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -76,11 +92,36 @@ void PieceSelector::checkUpdate()
     for (unsigned x = 0; x < m_nuColumns; ++x)
         for (unsigned y = 0; y < m_nuRows; ++y)
             if (! m_piece[x][y].is_null()
-                    && disabledStatus[x][y] != m_disabledStatus[x][y])
+                    && disabledStatus[x][y] != m_disabled[x][y])
             {
                 update();
                 return;
             }
+}
+
+void PieceSelector::filterCrossableJunctions(PiecePoints& points) const
+{
+    auto& geo = m_bd.get_geometry();
+    PiecePoints newPoints;
+    for (auto& p : points)
+    {
+        if (geo.get_point_type(p.x, p.y) != 0)
+            // Not a junction
+            newPoints.push_back(p);
+        else if (points.contains(CoordPoint(p.x - 1, p.y))
+                 && points.contains(CoordPoint(p.x + 1, p.y))
+                 && ! points.contains(CoordPoint(p.x, p.y - 1))
+                 && ! points.contains(CoordPoint(p.x, p.y + 1)))
+            // Necessary junction
+            newPoints.push_back(p);
+        else if (! points.contains(CoordPoint(p.x - 1, p.y))
+                 && ! points.contains(CoordPoint(p.x + 1, p.y))
+                 && points.contains(CoordPoint(p.x, p.y - 1))
+                 && points.contains(CoordPoint(p.x, p.y + 1)))
+            // Necessary junction
+            newPoints.push_back(p);
+    }
+    points = newPoints;
 }
 
 void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
@@ -88,7 +129,7 @@ void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
 {
     CoordPoint p(x, y);
     if (x >= m_nuColumns || y >= m_nuRows || m_piece[x][y] != piece
-        || points.contains(p))
+            || points.contains(p))
         return;
     points.push_back(p);
     // This assumes that no Trigon pieces touch at the corners, otherwise
@@ -110,26 +151,30 @@ int PieceSelector::heightForWidth(int width) const
 
 void PieceSelector::init()
 {
-    BoardType boardType = m_bd.get_board_type();
-    auto variant = m_bd.get_variant();
-    const string* pieceLayout;
-    if (boardType == BoardType::trigon || boardType == BoardType::trigon_3)
+    const string* pieceLayout = nullptr; // Init to avoid compiler warning
+    auto piece_set = m_bd.get_board_const().get_piece_set();
+    switch (piece_set)
     {
-        pieceLayout = &pieceLayoutTrigon;
-        m_nuColumns = 43;
-        m_nuRows = 6;
-    }
-    else if (variant == Variant::junior)
-    {
-        pieceLayout = &pieceLayoutJunior;
-        m_nuColumns = 34;
-        m_nuRows = 6;
-    }
-    else
-    {
+    case PieceSet::classic:
         pieceLayout = &pieceLayoutClassic;
         m_nuColumns = 33;
         m_nuRows = 6;
+        break;
+    case PieceSet::trigon:
+        pieceLayout = &pieceLayoutTrigon;
+        m_nuColumns = 43;
+        m_nuRows = 6;
+        break;
+    case PieceSet::junior:
+        pieceLayout = &pieceLayoutJunior;
+        m_nuColumns = 34;
+        m_nuRows = 6;
+        break;
+    case PieceSet::nexos:
+        pieceLayout = &pieceLayoutNexos;
+        m_nuColumns = 45;
+        m_nuRows = 9;
+        break;
     }
     LIBBOARDGAME_ASSERT(m_nuColumns <= maxColumns);
     LIBBOARDGAME_ASSERT(m_nuRows <= maxRows);
@@ -155,12 +200,13 @@ void PieceSelector::init()
                 continue;
             PiecePoints points;
             findPiecePoints(piece, x, y, points);
-            type_match_shift(geo, points.begin(), points.end(), 0);
+            if (piece_set == PieceSet::nexos)
+                filterCrossableJunctions(points);
             m_transform[x][y] =
                 m_bd.get_piece_info(piece).find_transform(geo, points);
             LIBBOARDGAME_ASSERT(m_transform[x][y]);
         }
-    setDisabledStatus(m_disabledStatus);
+    setDisabledStatus(m_disabled);
     update();
 }
 
@@ -174,7 +220,7 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
     int x = static_cast<int>(pixelX / m_fieldWidth);
     int y = static_cast<int>(pixelY / m_fieldHeight);
     Piece piece = m_piece[x][y];
-    if (piece.is_null() || m_disabledStatus[x][y])
+    if (piece.is_null() || m_disabled[x][y])
         return;
     update();
     emit pieceSelected(m_color, piece, m_transform[x][y]);
@@ -182,12 +228,13 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
 
 void PieceSelector::paintEvent(QPaintEvent*)
 {
-    setDisabledStatus(m_disabledStatus);
+    setDisabledStatus(m_disabled);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    BoardType boardType = m_bd.get_board_type();
+    auto boardType = m_bd.get_board_type();
     bool isTrigon =
         (boardType == BoardType::trigon || boardType == BoardType::trigon_3);
+    bool isNexos = (boardType == BoardType::nexos);
     qreal ratio;
     if (isTrigon)
     {
@@ -215,22 +262,57 @@ void PieceSelector::paintEvent(QPaintEvent*)
     for (unsigned x = 0; x < m_nuColumns; ++x)
         for (unsigned y = 0; y < m_nuRows; ++y)
         {
+            auto pointType = geo.get_point_type(x, y);
             Piece piece = m_piece[x][y];
-            if (! piece.is_null() && ! m_disabledStatus[x][y])
+            if (isTrigon)
             {
-                if (isTrigon)
+                if (piece.is_null() || m_disabled[x][y])
+                    continue;
+                bool isUpward = (pointType == 0);
+                Util::paintColorTriangle(painter, variant, m_color, isUpward,
+                                         x * m_fieldWidth, y * m_fieldHeight,
+                                         m_fieldWidth, m_fieldHeight);
+            }
+            else if (isNexos)
+            {
+                if (pointType == 1 || pointType == 2)
                 {
-                    bool isUpward =
-                        (geo.get_point_type(x, y) == geo.get_point_type(0, 0));
-                    Util::paintColorTriangle(painter, variant, m_color,
-                                             isUpward, x * m_fieldWidth,
-                                             y * m_fieldHeight, m_fieldWidth,
-                                             m_fieldHeight);
+                    if (piece.is_null() || m_disabled[x][y])
+                        continue;
+                    bool isHorizontal = (geo.get_point_type(x, y) == 1);
+                    Util::paintColorSegment(painter, variant, m_color,
+                                            isHorizontal, x * m_fieldWidth,
+                                            y * m_fieldHeight, m_fieldWidth);
                 }
-                else
-                    Util::paintColorSquare(painter, variant, m_color,
-                                           x * m_fieldWidth, y * m_fieldHeight,
-                                           m_fieldWidth);
+                else if (pointType == 0)
+                {
+                    bool hasLeft =
+                            (x > 0 && ! m_piece[x - 1][y].is_null()
+                             && ! m_disabled[x - 1][y]);
+                    bool hasRight =
+                            (x < m_nuColumns - 1
+                             && ! m_piece[x + 1][y].is_null()
+                             && ! m_disabled[x + 1][y]);
+                    bool hasUp =
+                            (y > 0 && ! m_piece[x][y - 1].is_null()
+                             && ! m_disabled[x][y - 1]);
+                    bool hasDown =
+                            (y < m_nuRows - 1
+                             && ! m_piece[x][y + 1].is_null()
+                             && ! m_disabled[x][y + 1]);
+                    Util::paintJunction(painter, variant, m_color,
+                                        x * m_fieldWidth, y * m_fieldHeight,
+                                        m_fieldWidth, m_fieldHeight, hasLeft,
+                                        hasRight, hasUp, hasDown);
+                }
+            }
+            else
+            {
+                if (piece.is_null() || m_disabled[x][y])
+                    continue;
+                Util::paintColorSquare(painter, variant, m_color,
+                                       x * m_fieldWidth, y * m_fieldHeight,
+                                       m_fieldWidth);
             }
         }
     painter.restore();
@@ -260,8 +342,8 @@ void PieceSelector::setDisabledStatus(bool disabledStatus[maxColumns][maxRows])
             findPiecePoints(piece, x, y, points);
             bool disabled = false;
             if (! isColorUsed
-                || ++nuInstances[piece] > m_bd.get_nu_left_piece(m_color,
-                                                                 piece))
+                    || ++nuInstances[piece] > m_bd.get_nu_left_piece(m_color,
+                                                                     piece))
                 disabled = true;
             for (auto& p : points)
             {

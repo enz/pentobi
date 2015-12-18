@@ -268,17 +268,29 @@ Point State::find_best_starting_point(Color c) const
 {
     // We use the starting point that maximizes the distance to occupied
     // starting points, especially to the ones occupied by the player (their
-    // distance is weighted with a factor of 2)
+    // distance is weighted with a factor of 2).
     Point best = Point::null();
     float max_distance = -1;
-    bool is_trigon = (m_bd.get_board_type() == BoardType::trigon
-                      || m_bd.get_board_type() == BoardType::trigon_3);
+    auto board_type = m_bd.get_board_type();
+    bool is_trigon = (board_type == BoardType::trigon
+                      || board_type == BoardType::trigon_3);
+    bool is_nexos = board_type == BoardType::nexos;
     float ratio = (is_trigon ? 1.732f : 1);
     auto& geo = m_bd.get_geometry();
     for (Point p : m_bd.get_starting_points(c))
     {
         if (m_bd.is_forbidden(p, c))
             continue;
+        if (is_nexos)
+        {
+            // Don't use the starting segments towards the edge of the board
+            auto x = geo.get_x(p);
+            if (x <= 3 || x >= geo.get_width() - 3 - 1)
+                continue;
+            auto y = geo.get_y(p);
+            if (y <= 3 || y >= geo.get_height() - 3 - 1)
+                continue;
+        }
         float px = static_cast<float>(geo.get_x(p));
         float py = static_cast<float>(geo.get_y(p));
         float d = 0;
@@ -588,6 +600,11 @@ void State::start_search()
     case BoardType::trigon:
     case BoardType::trigon_3:
         gamma_size_factor = 5;
+        break;
+    case BoardType::nexos:
+        // Not yet tuned
+        gamma_size_factor = 5;
+        gamma_nu_attach_factor = 1.8f;
         break;
     }
     for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)

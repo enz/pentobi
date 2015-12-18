@@ -32,93 +32,113 @@ PieceTransformsClassic::PieceTransformsClassic()
 const Transform* PieceTransformsClassic::get_mirrored_horizontally(
                                                   const Transform* transf) const
 {
+    const Transform* result;
     if (transf == &m_identity)
-        return &m_refl;
-    if (transf == &m_rot90)
-        return &m_rot270refl;
-    if (transf == &m_rot180)
-        return &m_rot180refl;
-    if (transf == &m_rot270)
-        return &m_rot90refl;
-    if (transf == &m_refl)
-        return &m_identity;
-    if (transf == &m_rot90refl)
-        return &m_rot270;
-    if (transf == &m_rot180refl)
-        return &m_rot180;
-    if (transf == &m_rot270refl)
-        return &m_rot90;
-    LIBBOARDGAME_ASSERT(false);
-    return nullptr;
+        result = &m_refl;
+    else if (transf == &m_rot90)
+        result = &m_rot270refl;
+    else if (transf == &m_rot180)
+        result = &m_rot180refl;
+    else if (transf == &m_rot270)
+        result = &m_rot90refl;
+    else if (transf == &m_refl)
+        result = &m_identity;
+    else if (transf == &m_rot90refl)
+        result = &m_rot270;
+    else if (transf == &m_rot180refl)
+        result = &m_rot180;
+    else if (transf == &m_rot270refl)
+        result = &m_rot90;
+    else
+    {
+        LIBBOARDGAME_ASSERT(false);
+        result = nullptr;
+    }
+    return result;
 }
 
 const Transform* PieceTransformsClassic::get_mirrored_vertically(
                                                   const Transform* transf) const
 {
+    const Transform* result;
     if (transf == &m_identity)
-        return &m_rot180refl;
-    if (transf == &m_rot90)
-        return &m_rot90refl;
-    if (transf == &m_rot180)
-        return &m_refl;
-    if (transf == &m_rot270)
-        return &m_rot270refl;
-    if (transf == &m_refl)
-        return &m_rot180;
-    if (transf == &m_rot90refl)
-        return &m_rot90;
-    if (transf == &m_rot180refl)
-        return &m_identity;
-    if (transf == &m_rot270refl)
-        return &m_rot270;
-    LIBBOARDGAME_ASSERT(false);
-    return nullptr;
+        result = &m_rot180refl;
+    else if (transf == &m_rot90)
+        result = &m_rot90refl;
+    else if (transf == &m_rot180)
+        result = &m_refl;
+    else if (transf == &m_rot270)
+        result = &m_rot270refl;
+    else if (transf == &m_refl)
+        result = &m_rot180;
+    else if (transf == &m_rot90refl)
+        result = &m_rot90;
+    else if (transf == &m_rot180refl)
+        result = &m_identity;
+    else if (transf == &m_rot270refl)
+        result = &m_rot270;
+    else
+    {
+        LIBBOARDGAME_ASSERT(false);
+        result = nullptr;
+    }
+    return result;
 }
 
 const Transform* PieceTransformsClassic::get_rotated_anticlockwise(
                                                   const Transform* transf) const
 {
+    const Transform* result;
     if (transf == &m_identity)
-        return &m_rot270;
-    if (transf == &m_rot90)
-        return &m_identity;
-    if (transf == &m_rot180)
-        return &m_rot90;
-    if (transf == &m_rot270)
-        return &m_rot180;
-    if (transf == &m_refl)
-        return &m_rot270refl;
-    if (transf == &m_rot90refl)
-        return &m_refl;
-    if (transf == &m_rot180refl)
-        return &m_rot90refl;
-    if (transf == &m_rot270refl)
-        return &m_rot180refl;
-    LIBBOARDGAME_ASSERT(false);
-    return nullptr;
+        result = &m_rot270;
+    else if (transf == &m_rot90)
+        result = &m_identity;
+    else if (transf == &m_rot180)
+        result = &m_rot90;
+    else if (transf == &m_rot270)
+        result = &m_rot180;
+    else if (transf == &m_refl)
+        result = &m_rot270refl;
+    else if (transf == &m_rot90refl)
+        result = &m_refl;
+    else if (transf == &m_rot180refl)
+        result = &m_rot90refl;
+    else if (transf == &m_rot270refl)
+        result = &m_rot180refl;
+    else
+    {
+        LIBBOARDGAME_ASSERT(false);
+        result = nullptr;
+    }
+    return result;
 }
 
 const Transform* PieceTransformsClassic::get_rotated_clockwise(
                                                   const Transform* transf) const
 {
+    const Transform* result;
     if (transf == &m_identity)
-        return &m_rot90;
-    if (transf == &m_rot90)
-        return &m_rot180;
-    if (transf == &m_rot180)
-        return &m_rot270;
-    if (transf == &m_rot270)
-        return &m_identity;
-    if (transf == &m_refl)
-        return &m_rot90refl;
-    if (transf == &m_rot90refl)
-        return &m_rot180refl;
-    if (transf == &m_rot180refl)
-        return &m_rot270refl;
-    if (transf == &m_rot270refl)
-        return &m_refl;
-    LIBBOARDGAME_ASSERT(false);
-    return nullptr;
+        result = &m_rot90;
+    else if (transf == &m_rot90)
+        result = &m_rot180;
+    else if (transf == &m_rot180)
+        result = &m_rot270;
+    else if (transf == &m_rot270)
+        result = &m_identity;
+    else if (transf == &m_refl)
+        result = &m_rot90refl;
+    else if (transf == &m_rot90refl)
+        result = &m_rot180refl;
+    else if (transf == &m_rot180refl)
+        result = &m_rot270refl;
+    else if (transf == &m_rot270refl)
+        result = &m_refl;
+    else
+    {
+        LIBBOARDGAME_ASSERT(false);
+        result = nullptr;
+    }
+    return result;
 }
 
 //-----------------------------------------------------------------------------

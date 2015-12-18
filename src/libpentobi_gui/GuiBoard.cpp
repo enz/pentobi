@@ -87,20 +87,36 @@ void GuiBoard::clearPiece()
 void GuiBoard::copyFromBoard(const Board& bd)
 {
     auto& geo = bd.get_geometry();
-    if (! m_isInitialized || m_variant != bd.get_variant())
+    auto variant = bd.get_variant();
+    m_pointState.copy_from(bd.get_point_state(), geo);
+    if (get_board_type(variant) == BoardType::nexos)
     {
-        m_variant = bd.get_variant();
+        m_pieceId.fill(0, geo);
+        unsigned n = 0;
+        for (Color c : bd.get_colors())
+            for (Move mv : bd.get_setup().placements[c])
+            {
+                ++n;
+                for (Point p : bd.get_move_info(mv))
+                    m_pieceId[p] = n;
+            }
+        for (auto mv : bd.get_moves())
+        {
+            ++n;
+            for (Point p : bd.get_move_info(mv.move))
+                m_pieceId[p] = n;
+        }
+    }
+    if (! m_isInitialized || m_variant != variant)
+    {
+        m_variant = variant;
         m_isInitialized = true;
-        m_pointState.copy_from(bd.get_point_state(), geo);
         m_labels.fill("", geo);
         m_marks.fill(0, geo);
         setEmptyBoardDirty();
     }
     else
-    {
-        m_pointState.copy_from(bd.get_point_state(), geo);
         setDirty();
-    }
 }
 
 Move GuiBoard::findSelectedPieceMove()
@@ -186,7 +202,7 @@ void GuiBoard::movePieceDown()
     {
         newOffset = m_selectedPieceOffset;
         if (m_bd.get_board_type() == BoardType::trigon
-            || m_bd.get_board_type() == BoardType::trigon_3)
+                || m_bd.get_board_type() == BoardType::trigon_3)
         {
             if (m_selectedPieceOffset.x % 2 == 0)
                 ++newOffset.x;
@@ -195,7 +211,7 @@ void GuiBoard::movePieceDown()
             ++newOffset.y;
         }
         else
-            ++newOffset.y;
+            newOffset.y += geo.get_period_y();
         if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
@@ -219,11 +235,7 @@ void GuiBoard::movePieceLeft()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == BoardType::trigon
-            || m_bd.get_board_type() == BoardType::trigon_3)
-            newOffset.x -= 2;
-        else
-            --newOffset.x;
+        newOffset.x -= geo.get_period_x();
         if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
@@ -247,11 +259,7 @@ void GuiBoard::movePieceRight()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == BoardType::trigon
-            || m_bd.get_board_type() == BoardType::trigon_3)
-            newOffset.x += 2;
-        else
-            ++newOffset.x;
+        newOffset.x += geo.get_period_x();
         if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
@@ -276,7 +284,7 @@ void GuiBoard::movePieceUp()
     {
         newOffset = m_selectedPieceOffset;
         if (m_bd.get_board_type() == BoardType::trigon
-            || m_bd.get_board_type() == BoardType::trigon_3)
+                || m_bd.get_board_type() == BoardType::trigon_3)
         {
             if (m_selectedPieceOffset.x % 2 == 0)
                 ++newOffset.x;
@@ -285,7 +293,7 @@ void GuiBoard::movePieceUp()
             --newOffset.y;
         }
         else
-            --newOffset.y;
+            newOffset.y -= geo.get_period_y();
         if (geo.is_onboard(newOffset))
         {
             setSelectedPieceOffset(newOffset);
@@ -325,7 +333,8 @@ void GuiBoard::paintEvent(QPaintEvent*)
         m_boardPixmap->fill(Qt::transparent);
         QPainter painter(m_boardPixmap.get());
         painter.drawPixmap(0, 0, *m_emptyBoardPixmap);
-        m_boardPainter.paintPieces(painter, m_pointState, &m_labels, &m_marks);
+        m_boardPainter.paintPieces(painter, m_pointState, m_pieceId, &m_labels,
+                                   &m_marks);
         m_dirty = false;
     }
     painter.drawPixmap(0, 0, *m_boardPixmap);
@@ -424,20 +433,39 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         return;
     }
     auto& geo = m_bd.get_geometry();
+    auto board_type = m_bd.get_board_type();
     unsigned old_point_type = geo.get_point_type(offset);
-    unsigned point_type = m_selectedPieceTransform->get_new_point_type();
-    CoordPoint type_matching_offset = offset;
-    if (old_point_type != point_type)
+    CoordPoint type_matched_offset = offset;
+    if (board_type == BoardType::trigon || board_type == BoardType::trigon_3)
     {
-        if ((point_type == 0
-             && geo.is_onboard(CoordPoint(offset.x + 1, offset.y)))
-            || (point_type == 1
-                && ! geo.is_onboard(CoordPoint(offset.x - 1, offset.y))))
-            ++type_matching_offset.x;
-        else
-            --type_matching_offset.x;
+        // Offset must match the point type (triangle up/down) of
+        // CoordPoint(0, 0) after the piece transformation
+        unsigned point_type = m_selectedPieceTransform->get_new_point_type();
+        bool hasLeft = geo.is_onboard(CoordPoint(offset.x - 1, offset.y));
+        bool hasRight = geo.is_onboard(CoordPoint(offset.x + 1, offset.y));
+        if (old_point_type != point_type)
+        {
+            if ((point_type == 0 && hasRight)
+                    || (point_type == 1 && ! hasLeft))
+                ++type_matched_offset.x;
+            else
+                --type_matched_offset.x;
+        }
     }
-    m_selectedPieceOffset = type_matching_offset;
+    else if (board_type == BoardType::nexos)
+    {
+        // Offset must be a junction
+        if (old_point_type == 1) // horiz. segment
+            --type_matched_offset.x;
+        else if (old_point_type == 2) // vert. segment
+            --type_matched_offset.y;
+        else if (old_point_type == 3) // hole
+        {
+            --type_matched_offset.x;
+            --type_matched_offset.y;
+        }
+    }
+    m_selectedPieceOffset = type_matched_offset;
 }
 
 void GuiBoard::setSelectedPiecePoints(Move mv)

@@ -28,12 +28,16 @@ using libboardgame_util::ArrayList;
 class PieceInfo
 {
 public:
-    /** Maximum number of points in a piece. */
-    static const unsigned max_size = 6;
+    /** Maximum number of points in a piece.
+        The maximum piece size occurs with the I4 piece in Nexos (4 real points
+        and 3 junction points). */
+    static const unsigned max_size = 7;
 
     typedef ArrayList<CoordPoint, max_size> Points;
 
-    /** Maximum number of attach points and adjacent points of a piece. */
+    /** Maximum number of attach points and adjacent points of a piece.
+        The maximum number occurs with the I6 piece in Trigon (8 adjacent
+        points and 14 attach points). */
     static const unsigned max_adj_attach = 22;
 
     /** Constructor.

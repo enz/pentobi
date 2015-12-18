@@ -119,6 +119,8 @@ private:
 
     Board::PointStateGrid m_pointState;
 
+    Grid<unsigned> m_pieceId;
+
     Piece m_selectedPiece = Piece::null();
 
     Color m_selectedPieceColor;

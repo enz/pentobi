@@ -37,22 +37,22 @@ void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal width,
     painter.restore();
 }
 
-void paintSquare(QPainter& painter, qreal x, qreal y, qreal size,
-                 const QColor& rectColor, const QColor& upLeftColor,
-                 const QColor& downRightColor)
+void paintSquare(QPainter& painter, qreal x, qreal y, qreal width,
+                 qreal height, const QColor& rectColor,
+                 const QColor& upLeftColor, const QColor& downRightColor)
 {
     painter.save();
     painter.translate(x, y);
-    painter.fillRect(QRectF(0, 0, size, size), rectColor);
-    qreal border = 0.05 * size;
+    painter.fillRect(QRectF(0, 0, width, height), rectColor);
+    qreal border = 0.05 * max(width, height);
     const QPointF downRightPolygon[6] =
         {
-            QPointF(border, size - border),
-            QPointF(size - border, size - border),
-            QPointF(size - border, border),
-            QPointF(size, 0),
-            QPointF(size, size),
-            QPointF(0, size)
+            QPointF(border, height - border),
+            QPointF(width - border, height - border),
+            QPointF(width - border, border),
+            QPointF(width, 0),
+            QPointF(width, height),
+            QPointF(0, height)
         };
     painter.setPen(Qt::NoPen);
     painter.setBrush(downRightColor);
@@ -60,11 +60,11 @@ void paintSquare(QPainter& painter, qreal x, qreal y, qreal size,
     const QPointF upLeftPolygon[6] =
         {
             QPointF(0, 0),
-            QPointF(size, 0),
-            QPointF(size - border, border),
+            QPointF(width, 0),
+            QPointF(width - border, border),
             QPointF(border, border),
-            QPointF(border, size - border),
-            QPointF(0, size)
+            QPointF(border, height - border),
+            QPointF(0, height)
         };
     painter.setBrush(upLeftColor);
     painter.drawPolygon(upLeftPolygon, 6);
@@ -245,9 +245,9 @@ QString Util::getPlayerString(Variant variant, Color c)
     return qApp->translate("Util", "Green");
 }
 
-void Util::paintColorSquare(QPainter& painter, Variant variant,
-                            Color c, qreal x, qreal y, qreal size,
-                            qreal alpha, qreal saturation, bool flat)
+void Util::paintColorSegment(QPainter& painter, Variant variant, Color c,
+                             bool isHorizontal, qreal x, qreal y, qreal size,
+                             qreal alpha, qreal saturation, bool flat)
 {
     auto color = getPaintColor(variant, c);
     QColor upLeftColor;
@@ -265,7 +265,35 @@ void Util::paintColorSquare(QPainter& painter, Variant variant,
     setAlphaSaturation(color, alpha, saturation);
     setAlphaSaturation(upLeftColor, alpha, saturation);
     setAlphaSaturation(downRightColor, alpha, saturation);
-    paintSquare(painter, x, y, size, color, upLeftColor, downRightColor);
+    if (isHorizontal)
+        paintSquare(painter, x - size / 4, y + size / 4, 1.5 * size, size / 2,
+                    color, upLeftColor, downRightColor);
+    else
+        paintSquare(painter, x + size / 4, y - size / 4, size / 2, 1.5 * size,
+                    color, upLeftColor, downRightColor);
+}
+
+void Util::paintColorSquare(QPainter& painter, Variant variant, Color c,
+                            qreal x, qreal y, qreal size, qreal alpha,
+                            qreal saturation, bool flat)
+{
+    auto color = getPaintColor(variant, c);
+    QColor upLeftColor;
+    QColor downRightColor;
+    if (flat)
+    {
+        upLeftColor = color;
+        downRightColor = color;
+    }
+    else
+    {
+        upLeftColor = color.lighter(130);
+        downRightColor = color.darker(160);
+    }
+    setAlphaSaturation(color, alpha, saturation);
+    setAlphaSaturation(upLeftColor, alpha, saturation);
+    setAlphaSaturation(downRightColor, alpha, saturation);
+    paintSquare(painter, x, y, size, size, color, upLeftColor, downRightColor);
 }
 
 void Util::paintColorTriangle(QPainter& painter, Variant variant,
@@ -293,9 +321,45 @@ void Util::paintColorTriangle(QPainter& painter, Variant variant,
                   downRightColor);
 }
 
+void Util::paintEmptyJunction(QPainter& painter, qreal x, qreal y, qreal size)
+{
+    painter.fillRect(QRectF(x + 0.25 * size, y + 0.25 * size,
+                            0.5 * size, 0.5 * size),
+                     gray);
+}
+
+void Util::paintEmptySegment(QPainter& painter, bool isHorizontal, qreal x,
+                             qreal y, qreal size)
+{
+    if (isHorizontal)
+        paintSquare(painter, x - size / 4, y + size / 4, 1.5 * size, size / 2,
+                    gray, gray.darker(130), gray.lighter(115));
+    else
+        paintSquare(painter, x + size / 4, y - size / 4, size / 2, 1.5 * size,
+                    gray, gray.darker(130), gray.lighter(115));
+}
+
+void Util::paintEmptySegmentStartingPoint(QPainter& painter, Variant variant,
+                                          Color c, bool isHorizontal, qreal x,
+                                          qreal y, qreal size)
+{
+    paintEmptySegment(painter, isHorizontal, x, y, size);
+    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
+             0.1 * size);
+}
+
 void Util::paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size)
 {
-    paintSquare(painter, x, y, size, gray, gray.darker(130), gray.lighter(115));
+    paintSquare(painter, x, y, size, size, gray, gray.darker(130),
+                gray.lighter(115));
+}
+
+void Util::paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
+                                         Color c, qreal x, qreal y, qreal size)
+{
+    paintEmptySquare(painter, x, y, size);
+    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
+             0.13 * size);
 }
 
 void Util::paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x,
@@ -316,13 +380,52 @@ void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpward,
     paintDot(painter, gray.darker(130), x, y, width, height, 0.17 * width);
 }
 
-void Util::paintEmptySquareStartingPoint(QPainter& painter,
-                                         Variant variant, Color c,
-                                         qreal x, qreal y, qreal size)
+void Util::paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
+                         qreal y, qreal width, qreal height, bool hasLeft,
+                         bool hasRight, bool hasUp, bool hasDown, qreal alpha,
+                         qreal saturation)
 {
-    paintEmptySquare(painter, x, y, size);
-    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
-             0.13 * size);
+    auto color = getPaintColor(variant, c);
+    setAlphaSaturation(color, alpha, saturation);
+    painter.save();
+    painter.translate(x + 0.25 * width, y + 0.25 * height);
+    width *= 0.5;
+    height *= 0.5;
+    if (hasUp && hasDown)
+        painter.fillRect(QRectF(0.25 * width, 0, 0.5 * width, height), color);
+    if (hasLeft && hasRight)
+        painter.fillRect(QRectF(0, 0.25 * height, width, 0.5 * height), color);
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(color);
+    if (hasLeft && hasUp)
+    {
+        const QPointF polygon[3] = { QPointF(0, 0),
+                                     QPointF(0.75 * width, 0),
+                                     QPointF(0, 0.75 * height) };
+        painter.drawPolygon(polygon, 3);
+    }
+    if (hasRight && hasUp)
+    {
+        const QPointF polygon[3] = { QPointF(0.25 * width, 0),
+                                     QPointF(width, 0),
+                                     QPointF(width, 0.75 * height) };
+        painter.drawPolygon(polygon, 3);
+    }
+    if (hasLeft && hasDown)
+    {
+        const QPointF polygon[3] = { QPointF(0, 0.25 * height),
+                                     QPointF(0, height),
+                                     QPointF(0.75 * width, height) };
+        painter.drawPolygon(polygon, 3);
+    }
+    if (hasRight && hasDown)
+    {
+        const QPointF polygon[3] = { QPointF(0.25 * width, height),
+                                     QPointF(width, 0.25 * height),
+                                     QPointF(width, height) };
+        painter.drawPolygon(polygon, 3);
+    }
+    painter.restore();
 }
 
 //-----------------------------------------------------------------------------

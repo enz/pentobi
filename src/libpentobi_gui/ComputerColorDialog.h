@@ -46,7 +46,7 @@ private:
 
     void createCheckBox(QLayout* layout, Color c);
 
-    QString getPlayerString(Variant variant, Color c);
+    QString getPlayerString(Color c);
 };
 
 //-----------------------------------------------------------------------------

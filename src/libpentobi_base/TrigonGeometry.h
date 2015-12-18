@@ -57,7 +57,7 @@ private:
 
     unsigned m_sz;
 
-    TrigonGeometry(unsigned size);
+    TrigonGeometry(unsigned sz);
 };
 
 //-----------------------------------------------------------------------------

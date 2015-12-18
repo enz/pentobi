@@ -101,12 +101,11 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             {
                 // Occupying opponent attach points is very good
                 point_value[p] = 3.2f;
-                geo.for_each_adj(p, [&](Point j) {
+                for (Point j : geo.get_adj(p))
                     if (! is_forbidden[j])
                         // Occupying points adjacent to opponent attach points
                         // is good
                         point_value[j] = max(point_value[j], Float(2.5));
-                });
             }
     }
     if (variant == Variant::classic_2
@@ -169,14 +168,13 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             heuristic += attach_point_value[*j];
         j = info_ext.begin_adj();
         end = info_ext.end_adj();
-        heuristic += adj_point_value[*j];
         if (! check_connect)
-            while (++j != end)
+            for ( ; j != end; ++j)
                 heuristic += adj_point_value[*j];
         else
         {
             features.connect = (bd.get_point_state(*j) == second_color);
-            while (++j != end)
+            for ( ; j != end; ++j)
             {
                 heuristic += adj_point_value[*j];
                 if (bd.get_point_state(*j) == second_color)
@@ -386,8 +384,16 @@ void PriorKnowledge::start_search(const Board& bd)
         m_dist_to_center_max_pieces = 3;
         m_max_dist_diff = 0.5f;
         break;
-    default:
+    case Variant::duo:
+    case Variant::junior:
         m_check_dist_to_center.fill(false);
+        break;
+    case Variant::nexos:
+    case Variant::nexos_2:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 7;
+        m_max_dist_diff = 1.f;
+        break;
     }
 
     // Don't check dist to center if the position was setup in a way that

@@ -41,15 +41,14 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
 
 void ComputerColorDialog::accept()
 {
-    auto nu_players = get_nu_players(m_variant);
-    auto nu_colors = get_nu_colors(m_variant);
-    if (nu_players == nu_colors || m_variant == Variant::classic_3)
-        for (Color c : Color::Range(nu_players))
+    auto nuPlayers = get_nu_players(m_variant);
+    auto nuColors = get_nu_colors(m_variant);
+    if (nuPlayers == nuColors || m_variant == Variant::classic_3)
+        for (Color c : Color::Range(nuPlayers))
             m_computerColor[c] = m_checkBox[c.to_int()]->isChecked();
     else
     {
-        LIBBOARDGAME_ASSERT(m_variant == Variant::classic_2
-                            || m_variant == Variant::trigon_2);
+        LIBBOARDGAME_ASSERT(nuPlayers == 2 && nuColors == 4);
         m_computerColor[Color(0)] = m_checkBox[0]->isChecked();
         m_computerColor[Color(2)] = m_checkBox[0]->isChecked();
         m_computerColor[Color(1)] = m_checkBox[1]->isChecked();
@@ -60,18 +59,20 @@ void ComputerColorDialog::accept()
 
 void ComputerColorDialog::createCheckBox(QLayout* layout, Color c)
 {
-    auto checkBox = new QCheckBox(getPlayerString(m_variant, c));
+    auto checkBox = new QCheckBox(getPlayerString(c));
     checkBox->setChecked(m_computerColor[c]);
     layout->addWidget(checkBox);
     m_checkBox[c.to_int()] = checkBox;
 }
 
-QString ComputerColorDialog::getPlayerString(Variant variant, Color c)
+QString ComputerColorDialog::getPlayerString(Color c)
 {
+    auto nuPlayers = get_nu_players(m_variant);
+    auto nuColors = get_nu_colors(m_variant);
     auto i = c.to_int();
-    if (variant == Variant::duo || variant == Variant::junior)
+    if (nuColors == 2)
         return i == 0 ? tr("&Blue") : tr("&Green");
-    if (variant == Variant::classic_2 || variant == Variant::trigon_2)
+    if (nuPlayers == 2 && nuColors == 4)
         return i == 0 || i == 2 ? tr("&Blue/Red") : tr("&Yellow/Green");
     if (i == 0)
         return tr("&Blue");

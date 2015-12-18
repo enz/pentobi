@@ -52,9 +52,9 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
-    static const unsigned maxColumns = 43;
+    static const unsigned maxColumns = 45;
 
-    static const unsigned maxRows = 6;
+    static const unsigned maxRows = 9;
 
     const Board& m_bd;
 
@@ -68,8 +68,7 @@ private:
 
     const Transform* m_transform[maxColumns][maxRows];
 
-    /** Pieces left at last time the widget was painted. */
-    bool m_disabledStatus[maxColumns][maxRows];
+    bool m_disabled[maxColumns][maxRows];
 
     qreal m_fieldWidth;
 
@@ -78,6 +77,9 @@ private:
     qreal m_selectorWidth;
 
     qreal m_selectorHeight;
+
+
+    void filterCrossableJunctions(PiecePoints& points) const;
 
     void findPiecePoints(Piece piece, unsigned x, unsigned y,
                          PiecePoints& points) const;

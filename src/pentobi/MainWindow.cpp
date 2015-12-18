@@ -72,6 +72,7 @@ using libboardgame_util::get_abort;
 using libboardgame_util::set_abort;
 using libboardgame_util::trim_right;
 using libboardgame_util::ArrayList;
+using libpentobi_base::BoardType;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
@@ -1033,81 +1034,14 @@ void MainWindow::createActions()
     connect(m_actionSelectNextColor, SIGNAL(triggered()),
             SLOT(selectNextColor()));
 
-    m_actionSelectPiece1 = createAction();
-    m_actionSelectPiece1->setShortcut(QString("1"));
-    connect(m_actionSelectPiece1, SIGNAL(triggered()), SLOT(selectPiece1()));
-
-    m_actionSelectPiece2 = createAction();
-    m_actionSelectPiece2->setShortcut(QString("2"));
-    connect(m_actionSelectPiece2, SIGNAL(triggered()), SLOT(selectPiece2()));
-
-    m_actionSelectPieceA = createAction();
-    m_actionSelectPieceA->setShortcut(QString("A"));
-    connect(m_actionSelectPieceA, SIGNAL(triggered()), SLOT(selectPieceA()));
-
-    m_actionSelectPieceC = createAction();
-    m_actionSelectPieceC->setShortcut(QString("C"));
-    connect(m_actionSelectPieceC, SIGNAL(triggered()), SLOT(selectPieceC()));
-
-    m_actionSelectPieceF = createAction();
-    m_actionSelectPieceF->setShortcut(QString("F"));
-    connect(m_actionSelectPieceF, SIGNAL(triggered()), SLOT(selectPieceF()));
-
-    m_actionSelectPieceG = createAction();
-    m_actionSelectPieceG->setShortcut(QString("G"));
-    connect(m_actionSelectPieceG, SIGNAL(triggered()), SLOT(selectPieceG()));
-
-    m_actionSelectPieceI = createAction();
-    m_actionSelectPieceI->setShortcut(QString("I"));
-    connect(m_actionSelectPieceI, SIGNAL(triggered()), SLOT(selectPieceI()));
-
-    m_actionSelectPieceL = createAction();
-    m_actionSelectPieceL->setShortcut(QString("L"));
-    connect(m_actionSelectPieceL, SIGNAL(triggered()), SLOT(selectPieceL()));
-
-    m_actionSelectPieceN = createAction();
-    m_actionSelectPieceN->setShortcut(QString("N"));
-    connect(m_actionSelectPieceN, SIGNAL(triggered()), SLOT(selectPieceN()));
-
-    m_actionSelectPieceO = createAction();
-    m_actionSelectPieceO->setShortcut(QString("O"));
-    connect(m_actionSelectPieceO, SIGNAL(triggered()), SLOT(selectPieceO()));
-
-    m_actionSelectPieceP = createAction();
-    m_actionSelectPieceP->setShortcut(QString("P"));
-    connect(m_actionSelectPieceP, SIGNAL(triggered()), SLOT(selectPieceP()));
-
-    m_actionSelectPieceS = createAction();
-    m_actionSelectPieceS->setShortcut(QString("S"));
-    connect(m_actionSelectPieceS, SIGNAL(triggered()), SLOT(selectPieceS()));
-
-    m_actionSelectPieceT = createAction();
-    m_actionSelectPieceT->setShortcut(QString("T"));
-    connect(m_actionSelectPieceT, SIGNAL(triggered()), SLOT(selectPieceT()));
-
-    m_actionSelectPieceU = createAction();
-    m_actionSelectPieceU->setShortcut(QString("U"));
-    connect(m_actionSelectPieceU, SIGNAL(triggered()), SLOT(selectPieceU()));
-
-    m_actionSelectPieceV = createAction();
-    m_actionSelectPieceV->setShortcut(QString("V"));
-    connect(m_actionSelectPieceV, SIGNAL(triggered()), SLOT(selectPieceV()));
-
-    m_actionSelectPieceW = createAction();
-    m_actionSelectPieceW->setShortcut(QString("W"));
-    connect(m_actionSelectPieceW, SIGNAL(triggered()), SLOT(selectPieceW()));
-
-    m_actionSelectPieceX = createAction();
-    m_actionSelectPieceX->setShortcut(QString("X"));
-    connect(m_actionSelectPieceX, SIGNAL(triggered()), SLOT(selectPieceX()));
-
-    m_actionSelectPieceY = createAction();
-    m_actionSelectPieceY->setShortcut(QString("Y"));
-    connect(m_actionSelectPieceY, SIGNAL(triggered()), SLOT(selectPieceY()));
-
-    m_actionSelectPieceZ = createAction();
-    m_actionSelectPieceZ->setShortcut(QString("Z"));
-    connect(m_actionSelectPieceZ, SIGNAL(triggered()), SLOT(selectPieceZ()));
+    for (auto name : { "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
+                       "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" })
+    {
+        auto action = createAction();
+        action->setData(name);
+        action->setShortcut(QString(name));
+        connect(action, SIGNAL(triggered()), SLOT(selectNamedPiece()));
+    }
 
     m_actionSetupMode = createAction(tr("S&etup Mode"));
     m_actionSetupMode->setCheckable(true);
@@ -1174,11 +1108,11 @@ void MainWindow::createActions()
     setIcon(m_actionUndo, "pentobi-undo");
     connect(m_actionUndo, SIGNAL(triggered()), SLOT(undo()));
 
-    m_actionVariantClassic = createAction(tr("&Classic (4 Players)"));
-    m_actionVariantClassic->setActionGroup(groupVariant);
-    m_actionVariantClassic->setCheckable(true);
-    connect(m_actionVariantClassic, SIGNAL(triggered(bool)),
-            SLOT(variantClassic(bool)));
+    m_actionVariantClassic2 = createAction(tr("&Classic (2 Players)"));
+    m_actionVariantClassic2->setActionGroup(groupVariant);
+    m_actionVariantClassic2->setCheckable(true);
+    connect(m_actionVariantClassic2, SIGNAL(triggered(bool)),
+            SLOT(variantClassic2(bool)));
 
     m_actionVariantClassic3 = createAction(tr("Classic (&3 Players)"));
     m_actionVariantClassic3->setActionGroup(groupVariant);
@@ -1186,11 +1120,11 @@ void MainWindow::createActions()
     connect(m_actionVariantClassic3, SIGNAL(triggered(bool)),
             SLOT(variantClassic3(bool)));
 
-    m_actionVariantClassic2 = createAction(tr("Classic (&2 Players)"));
-    m_actionVariantClassic2->setActionGroup(groupVariant);
-    m_actionVariantClassic2->setCheckable(true);
-    connect(m_actionVariantClassic2, SIGNAL(triggered(bool)),
-            SLOT(variantClassic2(bool)));
+    m_actionVariantClassic = createAction(tr("Classic (&4 Players)"));
+    m_actionVariantClassic->setActionGroup(groupVariant);
+    m_actionVariantClassic->setCheckable(true);
+    connect(m_actionVariantClassic, SIGNAL(triggered(bool)),
+            SLOT(variantClassic(bool)));
 
     m_actionVariantDuo = createAction(tr("&Duo"));
     m_actionVariantDuo->setActionGroup(groupVariant);
@@ -1198,29 +1132,41 @@ void MainWindow::createActions()
     connect(m_actionVariantDuo, SIGNAL(triggered(bool)),
             SLOT(variantDuo(bool)));
 
-    m_actionVariantJunior = createAction(tr("J&unior"));
+    m_actionVariantJunior = createAction(tr("&Junior"));
     m_actionVariantJunior->setActionGroup(groupVariant);
     m_actionVariantJunior->setCheckable(true);
     connect(m_actionVariantJunior, SIGNAL(triggered(bool)),
             SLOT(variantJunior(bool)));
 
-    m_actionVariantTrigon = createAction(tr("&Trigon (4 Players)"));
-    m_actionVariantTrigon->setActionGroup(groupVariant);
-    m_actionVariantTrigon->setCheckable(true);
-    connect(m_actionVariantTrigon, SIGNAL(triggered(bool)),
-            SLOT(variantTrigon(bool)));
+    m_actionVariantNexos2 = createAction(tr("&Nexos (2 Players)"));
+    m_actionVariantNexos2->setActionGroup(groupVariant);
+    m_actionVariantNexos2->setCheckable(true);
+    connect(m_actionVariantNexos2, SIGNAL(triggered(bool)),
+            SLOT(variantNexos2(bool)));
 
-    m_actionVariantTrigon2 = createAction(tr("Tri&gon (2 Players)"));
+    m_actionVariantNexos = createAction(tr("Ne&xos (4 Players)"));
+    m_actionVariantNexos->setActionGroup(groupVariant);
+    m_actionVariantNexos->setCheckable(true);
+    connect(m_actionVariantNexos, SIGNAL(triggered(bool)),
+            SLOT(variantNexos(bool)));
+
+    m_actionVariantTrigon2 = createAction(tr("&Trigon (2 Players)"));
     m_actionVariantTrigon2->setActionGroup(groupVariant);
     m_actionVariantTrigon2->setCheckable(true);
     connect(m_actionVariantTrigon2, SIGNAL(triggered(bool)),
             SLOT(variantTrigon2(bool)));
 
-    m_actionVariantTrigon3 = createAction(tr("Trigo&n (3 Players)"));
+    m_actionVariantTrigon3 = createAction(tr("Tri&gon (3 Players)"));
     m_actionVariantTrigon3->setActionGroup(groupVariant);
     m_actionVariantTrigon3->setCheckable(true);
     connect(m_actionVariantTrigon3, SIGNAL(triggered(bool)),
             SLOT(variantTrigon3(bool)));
+
+    m_actionVariantTrigon = createAction(tr("Trig&on (4 Players)"));
+    m_actionVariantTrigon->setActionGroup(groupVariant);
+    m_actionVariantTrigon->setCheckable(true);
+    connect(m_actionVariantTrigon, SIGNAL(triggered(bool)),
+            SLOT(variantTrigon(bool)));
 
     m_actionVeryBadMove = createAction(tr("V&ery Bad"));
     m_actionVeryBadMove->setActionGroup(groupMoveAnnotation);
@@ -1292,14 +1238,16 @@ void MainWindow::createMenu()
     menuGame->addAction(m_actionRatedGame);
     menuGame->addSeparator();
     m_menuVariant = menuGame->addMenu(tr("Game &Variant"));
-    m_menuVariant->addAction(m_actionVariantClassic);
-    m_menuVariant->addAction(m_actionVariantClassic3);
     m_menuVariant->addAction(m_actionVariantClassic2);
+    m_menuVariant->addAction(m_actionVariantClassic3);
+    m_menuVariant->addAction(m_actionVariantClassic);
     m_menuVariant->addAction(m_actionVariantDuo);
     m_menuVariant->addAction(m_actionVariantJunior);
-    m_menuVariant->addAction(m_actionVariantTrigon);
-    m_menuVariant->addAction(m_actionVariantTrigon3);
     m_menuVariant->addAction(m_actionVariantTrigon2);
+    m_menuVariant->addAction(m_actionVariantTrigon3);
+    m_menuVariant->addAction(m_actionVariantTrigon);
+    m_menuVariant->addAction(m_actionVariantNexos2);
+    m_menuVariant->addAction(m_actionVariantNexos);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
@@ -1609,7 +1557,26 @@ void MainWindow::exportImage()
         painter.fillRect(0, 0, size, size, QColor(216, 216, 216));
     boardPainter.paintEmptyBoard(painter, size, size, m_bd.get_variant(),
                                  m_bd.get_geometry());
-    boardPainter.paintPieces(painter, m_bd.get_point_state(),
+    Grid<unsigned> pieceId;
+    if (m_bd.get_board_type() == BoardType::nexos)
+    {
+        pieceId.fill(0, m_bd.get_geometry());
+        unsigned n = 0;
+        for (Color c : m_bd.get_colors())
+            for (Move mv : m_bd.get_setup().placements[c])
+            {
+                ++n;
+                for (Point p : m_bd.get_move_info(mv))
+                    pieceId[p] = n;
+            }
+        for (auto mv : m_bd.get_moves())
+        {
+            ++n;
+            for (Point p : m_bd.get_move_info(mv.move))
+                pieceId[p] = n;
+        }
+    }
+    boardPainter.paintPieces(painter, m_bd.get_point_state(), pieceId,
                              &m_guiBoard->getLabels());
     painter.end();
     QString file;
@@ -1645,11 +1612,7 @@ void MainWindow::findMove()
              });
     }
     if (m_legalMoves->empty())
-    {
-        // m_currentColor must have moves if game is not over
-        LIBBOARDGAME_ASSERT(false);
         return;
-    }
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
     auto mv = (*m_legalMoves)[m_legalMoveIndex];
@@ -1751,8 +1714,10 @@ void MainWindow::gameInfo()
 void MainWindow::gameOver()
 {
     auto variant = m_bd.get_variant();
+    auto nuColors = get_nu_colors(variant);
+    auto nuPlayers = get_nu_players(variant);
     QString info;
-    if (variant == Variant::duo || variant == Variant::junior)
+    if (nuColors == 2)
     {
         int score = m_bd.get_score(Color(0));
         if (score > 0)
@@ -1762,8 +1727,9 @@ void MainWindow::gameOver()
         else
             info = tr("The game ends in a tie.");
     }
-    else if (variant == Variant::classic_2 || variant == Variant::trigon_2)
+    else if (nuPlayers == 2)
     {
+        LIBBOARDGAME_ASSERT(nuColors == 4);
         int score = m_bd.get_score(Color(0));
         if (score > 0)
             info = tr("Blue/Red wins with %n point(s).", "", score);
@@ -1772,7 +1738,7 @@ void MainWindow::gameOver()
         else
             info = tr("The game ends in a tie.");
     }
-    else if (variant == Variant::classic_3 || variant == Variant::trigon_3)
+    else if (nuPlayers == 3)
     {
         auto blue = m_bd.get_points(Color(0));
         auto yellow = m_bd.get_points(Color(1));
@@ -1795,8 +1761,7 @@ void MainWindow::gameOver()
     }
     else
     {
-        LIBBOARDGAME_ASSERT(variant == Variant::classic
-                            || variant == Variant::trigon);
+        LIBBOARDGAME_ASSERT(nuPlayers == 4);
         auto blue = m_bd.get_points(Color(0));
         auto yellow = m_bd.get_points(Color(1));
         auto red = m_bd.get_points(Color(2));
@@ -2158,6 +2123,12 @@ void MainWindow::initVariantActions()
         break;
     case Variant::trigon_3:
         m_actionVariantTrigon3->setChecked(true);
+        break;
+    case Variant::nexos:
+        m_actionVariantNexos->setChecked(true);
+        break;
+    case Variant::nexos_2:
+        m_actionVariantNexos2->setChecked(true);
         break;
     }
 }
@@ -2824,17 +2795,21 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
                               Q_ARG(int, 0));
 }
 
-void MainWindow::selectNamedPiece(initializer_list<const char*> names)
+void MainWindow::selectNamedPiece()
 {
-    vector<Piece> pieces;
-    Piece piece;
-    for (auto name : names)
-        if (m_bd.get_piece_by_name(name, piece)
-                && m_bd.is_piece_left(m_currentColor, piece))
+    string name(qobject_cast<QAction*>(sender())->data().toString()
+                .toLocal8Bit().data());
+    Board::PiecesLeftList pieces;
+    for (Piece::IntType i = 0; i < m_bd.get_nu_uniq_pieces(); ++i)
+    {
+        Piece piece(i);
+        if (m_bd.is_piece_left(m_currentColor, piece)
+                && m_bd.get_piece_info(piece).get_name().find(name) == 0)
             pieces.push_back(piece);
+    }
     if (pieces.empty())
         return;
-    piece = m_guiBoard->getSelectedPiece();
+    auto piece = m_guiBoard->getSelectedPiece();
     if (piece.is_null())
         piece = pieces[0];
     else
@@ -2887,101 +2862,6 @@ void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
     m_actionRotateAnticlockwise->setEnabled(can_rotate);
     updateFlipActions();
     m_actionClearPiece->setEnabled(true);
-}
-
-void MainWindow::selectPiece1()
-{
-    selectNamedPiece({"1"});
-}
-
-void MainWindow::selectPiece2()
-{
-    selectNamedPiece({"2"});
-}
-
-void MainWindow::selectPieceA()
-{
-    selectNamedPiece({"A6", "A4"});
-}
-
-void MainWindow::selectPieceC()
-{
-    selectNamedPiece({"C5", "C4"});
-}
-
-void MainWindow::selectPieceF()
-{
-    selectNamedPiece({"F"});
-}
-
-void MainWindow::selectPieceG()
-{
-    selectNamedPiece({"G"});
-}
-
-void MainWindow::selectPieceI()
-{
-    selectNamedPiece({"I6", "I5", "I4", "I3"});
-}
-
-void MainWindow::selectPieceL()
-{
-    selectNamedPiece({"L6", "L5", "L4"});
-}
-
-void MainWindow::selectPieceN()
-{
-    selectNamedPiece({"N"});
-}
-
-void MainWindow::selectPieceO()
-{
-    selectNamedPiece({"O"});
-}
-
-void MainWindow::selectPieceP()
-{
-    selectNamedPiece({"P6", "P5", "P"});
-}
-
-void MainWindow::selectPieceS()
-{
-    selectNamedPiece({"S"});
-}
-
-void MainWindow::selectPieceT()
-{
-    selectNamedPiece({"T5", "T4"});
-}
-
-void MainWindow::selectPieceU()
-{
-    selectNamedPiece({"U"});
-}
-
-void MainWindow::selectPieceV()
-{
-    selectNamedPiece({"V", "V5", "V3"});
-}
-
-void MainWindow::selectPieceW()
-{
-    selectNamedPiece({"W"});
-}
-
-void MainWindow::selectPieceX()
-{
-    selectNamedPiece({"X"});
-}
-
-void MainWindow::selectPieceY()
-{
-    selectNamedPiece({"Y"});
-}
-
-void MainWindow::selectPieceZ()
-{
-    selectNamedPiece({"Z5", "Z4"});
 }
 
 void MainWindow::setCommentText(const QString& text)
@@ -3576,6 +3456,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionVariantTrigon->setEnabled(! m_isRated);
     m_actionVariantTrigon2->setEnabled(! m_isRated);
     m_actionVariantTrigon3->setEnabled(! m_isRated);
+    m_actionVariantNexos->setEnabled(! m_isRated);
+    m_actionVariantNexos2->setEnabled(! m_isRated);
     // Don't disable m_menuLevel but all level items such that it is still
     // possible to see what the current level is even if it cannot be changed
     // in rated games.
@@ -3637,6 +3519,18 @@ void MainWindow::variantTrigon3(bool checked)
 {
     if (checked)
         setVariant(Variant::trigon_3);
+}
+
+void MainWindow::variantNexos(bool checked)
+{
+    if (checked)
+        setVariant(Variant::nexos);
+}
+
+void MainWindow::variantNexos2(bool checked)
+{
+    if (checked)
+        setVariant(Variant::nexos_2);
 }
 
 void MainWindow::veryBadMove(bool checked)

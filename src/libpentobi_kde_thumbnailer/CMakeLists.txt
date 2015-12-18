@@ -8,7 +8,7 @@
 #
 # Adding the source files directly to pentobi_kde_thumbnailer/CMakeList.txt is
 # not possible because the KDE CMake macros add -fno-exceptions to the
-# compiler flags which causes errors in the Pentobi sources that use
+# compiler flags, which causes errors in the Pentobi sources that use
 # exceptions (which should be fine as long as no exceptions are thrown
 # from the thumbnailer plugin functions).
 
@@ -24,6 +24,7 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_sgf/SgfNode.cpp
   ../libboardgame_sgf/SgfTree.cpp
   ../libboardgame_sgf/TreeReader.cpp
+  ../libpentobi_base/NexosGeometry.cpp
   ../libpentobi_base/NodeUtil.cpp
   ../libpentobi_base/StartingPoints.cpp
   ../libpentobi_base/TrigonGeometry.cpp

@@ -6,53 +6,46 @@
 </head>
 <body>
 <h1>Pentobi SGF Files</h1>
-<div style="font-size:small">
-Author: Markus Enzenberger<br>
-Last modified: 2014-11-27
-</div>
+<div style="font-size:small">Author: Markus Enzenberger<br>
+Last modified: 2015-12-15</div>
 <p>This document describes the file format for <a href=
-"http://en.wikipedia.org/wiki/Blokus">Blokus</a> game records as
-used by the program <a href=
-"http://pentobi.sourceforge.net">Pentobi</a>. The most recent
-version of this document can be found in the source code
-distribution of Pentobi in the folder pentobi/doc/blksgf.</p>
+"http://en.wikipedia.org/wiki/Blokus">Blokus</a> game records as used by the
+program <a href="http://pentobi.sourceforge.net">Pentobi</a>. The most recent
+version of this document can be found in the source code distribution of
+Pentobi in the folder pentobi/doc/blksgf.</p>
 <h2>Introduction</h2>
 <p>The file format is a derivative of the <a href=
-"http://www.red-bean.com/sgf/">Smart Game Format</a> (SGF). The
-current SGF version 4 does not define standard properties for
-Blokus. Therefore, a number of game-specific properties and value
-types had to be defined. The definitions follow the recommendations
-of SGF 4 and the proposals for multi-player games from the <a href=
-"http://www.red-bean.com/sgf/ff5/ff5.htm">discussions</a> about the
-future SGF version 5.</p>
+"http://www.red-bean.com/sgf/">Smart Game Format</a> (SGF). The current SGF
+version 4 does not define standard properties for Blokus. Therefore, a number
+of game-specific properties and value types had to be defined. The definitions
+follow the recommendations of SGF 4 and the proposals for multi-player games
+from the <a href="http://www.red-bean.com/sgf/ff5/ff5.htm">discussions</a>
+about the future SGF version 5.</p>
 <h2>File Extension and MIME Type</h2>
 <p>The file extension <tt>.blksgf</tt> and the <a href=
 "http://en.wikipedia.org/wiki/Internet_media_type">MIME type</a>
-<tt>application/x-blokus-sgf</tt> are used for Blokus SGF
-files.</p>
+<tt>application/x-blokus-sgf</tt> are used for Blokus SGF files.</p>
 <p style="font-size:small"><b>Note</b><br>
-Since this is a non-standard MIME type, links to Blokus SGF files
-on web servers will not automatically open the file with Pentobi
-even if Pentobi is installed locally and registered as a handler
-for Blokus SGF files. To make this work, you can put a file named
-<a href="http://en.wikipedia.org/wiki/.htaccess">.htaccess</a> on
-the web server in the same directory that contains the .blksgf
-files or in one of its parent directories. This file needs to
-contain the line:</p>
-<blockquote style="font-size:small">AddType
-application/x-blokus-sgf blksgf</blockquote>
+Since this is a non-standard MIME type, links to Blokus SGF files on web
+servers will not automatically open the file with Pentobi even if Pentobi is
+installed locally and registered as a handler for Blokus SGF files. To make
+this work, you can put a file named <a href=
+"http://en.wikipedia.org/wiki/.htaccess">.htaccess</a> on the web server in the
+same directory that contains the .blksgf files or in one of its parent
+directories. This file needs to contain the line:</p>
+<blockquote style="font-size:small">AddType application/x-blokus-sgf
+blksgf</blockquote>
 <h2>Character Set</h2>
-<p>Although not specific to Blokus, it is recommended to use
-<a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> as the
-character set. Pentobi always writes files in UTF-8 and indicates
-that with the <tt>CA</tt> property. Pentobi can read SGF files
-encoded in UTF-8 or ISO-8859-1 (Latin1). Other character sets are
-currently not supported. As specified by the SGF standard,
+<p>Although not specific to Blokus, it is recommended to use <a href=
+"http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> as the character set. Pentobi
+always writes files in UTF-8 and indicates that with the <tt>CA</tt> property.
+Pentobi can read SGF files encoded in UTF-8 or ISO-8859-1 (Latin1). Other
+character sets are currently not supported. As specified by the SGF standard,
 ISO-8859-1 is assumed for files without <tt>CA</tt> property.</p>
 <h2>Game Property</h2>
-<p>Since there is no number for Blokus defined in SGF 4, a string
-instead of a number is used as the value for the <tt>GM</tt>
-property. Currently, the following strings are used:</p>
+<p>Since there is no number for Blokus defined in SGF 4, a string instead of a
+number is used as the value for the <tt>GM</tt> property. Currently, the
+following strings are used:</p>
 <ul>
 <li><tt>Blokus</tt></li>
 <li><tt>Blokus Two-Player</tt></li>
@@ -62,53 +55,48 @@ property. Currently, the following strings are used:</p>
 <li><tt>Blokus Trigon Two-Player</tt></li>
 <li><tt>Blokus Trigon Three-Player</tt></li>
 <li><tt>Blokus Junior</tt></li>
+<li><tt>Nexos</tt></li>
+<li><tt>Nexos Two-Player</tt></li>
 </ul>
-The strings are case-sensitive, words are separated by exactly one
-space and no additional whitespace at the beginning or end of the
-string is allowed.
+The strings are case-sensitive, words are separated by exactly one space and no
+additional whitespace at the beginning or end of the string is allowed.
 <h2>Color and Player Properties</h2>
-<p>In game variants with two players and two colors, <tt>B</tt>
-denotes the first player or color, <tt>W</tt> the second player or
-color. In game variants with three or four players and one color
-per player, <tt>1</tt>, <tt>2</tt>, <tt>3</tt>, <tt>4</tt> denote
-the first, second, third, and fourth player or color. In game
-variants with two players and four colors, <tt>B</tt> denotes the
-first player, <tt>W</tt> the second player, and <tt>1</tt>,
-<tt>2</tt>, <tt>3</tt>, <tt>4</tt> denote the first, second, third,
-and fourth color. This applies to move properties and properties
-related to a player or a color.</p>
-<p>Example 1: in the game variant Blokus Two-Player <tt>PW</tt> is
-the name of the first player, and <tt>1</tt> is a move of the first
-color.</p>
-<p>Example 2: in the game variant Blokus Two-Player, one could
-either use the <tt>BL</tt>, <tt>WL</tt> properties to indicate the
-time left for a player, if the game is played with a time limit for
-each player, or one could use the <tt>1L</tt>, <tt>2L</tt>,
-<tt>3L</tt>, <tt>4L</tt> properties to indicate the time left for a
-color, if the game is played with a time limit for each color.
-(This is only an example how the properties should be interpreted.
-Pentobi currently has no support for game clocks.)</p>
+<p>In game variants with two players and two colors, <tt>B</tt> denotes the
+first player or color, <tt>W</tt> the second player or color. In game variants
+with three or four players and one color per player, <tt>1</tt>, <tt>2</tt>,
+<tt>3</tt>, <tt>4</tt> denote the first, second, third, and fourth player or
+color. In game variants with two players and four colors, <tt>B</tt> denotes
+the first player, <tt>W</tt> the second player, and <tt>1</tt>, <tt>2</tt>,
+<tt>3</tt>, <tt>4</tt> denote the first, second, third, and fourth color. This
+applies to move properties and properties related to a player or a color.</p>
+<p>Example 1: in the game variant Blokus Two-Player <tt>PW</tt> is the name of
+the first player, and <tt>1</tt> is a move of the first color.</p>
+<p>Example 2: in the game variant Blokus Two-Player, one could either use the
+<tt>BL</tt>, <tt>WL</tt> properties to indicate the time left for a player, if
+the game is played with a time limit for each player, or one could use the
+<tt>1L</tt>, <tt>2L</tt>, <tt>3L</tt>, <tt>4L</tt> properties to indicate the
+time left for a color, if the game is played with a time limit for each color.
+(This is only an example how the properties should be interpreted. Pentobi
+currently has no support for game clocks.)</p>
 <p style="font-size:small"><b>Note</b><br>
-Old versions of Pentobi (before version 0.2) used the properties
-<tt>BLUE</tt>, <tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt> in the
-four-color game variants, which did not reflect the current state
-of discussion for SGF 5. Current versions of Pentobi can still read
-games containing the old properties but they are deprecated and
-should no longer be used.</p>
+Old versions of Pentobi (before version 0.2) used the properties <tt>BLUE</tt>,
+<tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt> in the four-color game variants,
+which did not reflect the current state of discussion for SGF 5. Current
+versions of Pentobi can still read games containing the old properties but they
+are deprecated and should no longer be used.</p>
 <h2>Coordinate System</h2>
 <p>Fields on the board (called points in SGF) are identified by a
-case-insensitive string with a letter for the column followed by a
-number for the row. The letters start with 'a', the numbers start
-with '1'. The lower left corner of the board is 'a1'. The strings
-are not allowed to contain whitespaces. Note that, unlike the
-common convention in the game of Go, the letter 'i' is used.</p>
-<p>If there are more than 26 columns, the columns continue with
-'aa', 'ab', ..., 'ba', 'bb', ... More than 26 columns are presently
-required for Trigon and could also be required for future game
-variants on rectangular boards larger than 26×26.</p>
-<p>For Trigon, hexagonal boards are mapped to rectangular
-coordinates as in the following example of a hexagon with edge size
-3:</p>
+case-insensitive string with a letter for the column followed by a number for
+the row. The letters start with 'a', the numbers start with '1'. The lower left
+corner of the board is 'a1'. The strings are not allowed to contain
+whitespaces. Note that, unlike the common convention in the game of Go, the
+letter 'i' is used.</p>
+<p>If there are more than 26 columns, the columns continue with 'aa', 'ab',
+..., 'ba', 'bb', ... More than 26 columns are presently required for Trigon and
+could also be required for future game variants on rectangular boards larger
+than 26×26.</p>
+<p>For Trigon, hexagonal boards are mapped to rectangular coordinates as in the
+following example of a hexagon with edge size 3:</p>
 <pre>
        6     / \ / \ / \ / \
        5   / \ / \ / \ / \ / \
@@ -118,39 +106,52 @@ coordinates as in the following example of a hexagon with edge size
        1     \ / \ / \ / \ /
           a b c d e f g h i j k
 </pre>
+<p>In Nexos, the 13×13 line grid is mapped to a 25×25 coordinate system, in
+which rows with horizontal line segments and intersections alternate with rows
+with vertical line segments and holes:</p>
+<pre>
+       6 |   |   |
+       5 + - + - + -
+       4 |   |   |
+       3 + - + - + -
+       2 |   |   |
+       1 + - + - + -
+         a b c d e f
+</pre>
 <h2>Move Properties</h2>
-<p>The value of a move property is a string with the coordinates of
-the played piece on the board separated by commas. No whitespace
-characters are allowed before, after, or in-between the
-coordinates.</p>
-<p>Pentobi currently does not require a certain order of the
-coordinates of a move. However, move properties should be written
-with an ordered list of coordinates (using the order a1, b1, …, a2,
-b2, …) such that each move has a unique string representation.</p>
+<p>The value of a move property is a string with the coordinates of the played
+piece on the board separated by commas. No whitespace characters are allowed
+before, after, or in-between the coordinates.</p>
+<p>Pentobi currently does not require a certain order of the coordinates of a
+move. However, move properties should be written with an ordered list of
+coordinates (using the order a1, b1, …, a2, b2, …) such that each move has a
+unique string representation.</p>
 <p>Example: <tt>B[f9,e10,f10,g10,f11]</tt></p>
+<p>In Nexos, moves contain the coordinates of line segments occupied by the
+piece and of junctions that are essentially needed to mark the intersection as
+non-crossable (i.e. junctions that touch exactly two line segments of the piece
+with identical orientation).</p>
 <p style="font-size:small"><b>Note</b><br>
-Old versions of Pentobi (before version 0.3) used to represent
-moves by a list of points, which did not follow the convention used
-by other games in SGF to use single-value properties for moves.
-Current versions of Pentobi can still read games containing the old
-move property values but they are deprecated and should no longer
-be used.</p>
+Old versions of Pentobi (before version 0.3) used to represent moves by a list
+of points, which did not follow the convention used by other games in SGF to
+use single-value properties for moves. Current versions of Pentobi can still
+read games containing the old move property values but they are deprecated and
+should no longer be used.</p>
 <h2>Setup Properties</h2>
-<p>The setup properties <tt>AB</tt>, <tt>AW</tt>, <tt>A1</tt>,
-<tt>A2</tt>, <tt>A3</tt>, <tt>A4</tt> can be used to place several
-pieces simultaneously on the board. The setup property <tt>AE</tt>
-can be used to remove pieces from the board. All these properties can
-have multiple values, each value represents a piece by its
-coordinates as in the move properties. The <tt>PL</tt> can be used
+<p>The setup properties <tt>AB</tt>, <tt>AW</tt>, <tt>A1</tt>, <tt>A2</tt>,
+<tt>A3</tt>, <tt>A4</tt> can be used to place several pieces simultaneously on
+the board. The setup property <tt>AE</tt> can be used to remove pieces from the
+board. All these properties can have multiple values, each value represents a
+piece by its coordinates as in the move properties. The <tt>PL</tt> can be used
 to set the color to play in a setup position.</p>
 <p>Example:<br>
 <tt>AB[e8,e9,f9,d10,e10][g6,f7,g7,h7,g8]<br>
 AW[i4,h5,i5,j5,i6][j7,j8,j9,k9,j10]<br>
 PL[B]</tt></p>
 <p style="font-size:small"><b>Note</b><br>
-Older versions of Pentobi (before version 2.0) did not support
-setup properties, you need a newer version of Pentobi to read such
-files. Currently, Pentobi is able to read files with setup properties
-in any node, but can create only files with setup in the root node.</p>
+Older versions of Pentobi (before version 2.0) did not support setup
+properties, you need a newer version of Pentobi to read such files. Currently,
+Pentobi is able to read files with setup properties in any node, but can create
+only files with setup in the root node.</p>
 </body>
 </html>
