@@ -30,7 +30,7 @@ void filter_min_size(const BoardConst& bc, unsigned min_size,
     {
         Piece piece(i);
         auto& piece_info = bc.get_piece_info(piece);
-        if (piece_info.get_size() < min_size)
+        if (piece_info.get_score_points() < min_size)
             is_piece_considered[piece] = false;
     }
 }

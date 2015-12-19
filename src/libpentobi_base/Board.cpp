@@ -339,18 +339,8 @@ void Board::init_variant(Variant variant)
     for (Piece::IntType i = 0; i < get_nu_uniq_pieces(); ++i)
     {
         Piece piece(i);
-        unsigned n;
-        if (piece_set == PieceSet::nexos)
-        {
-            n = 0;
-            for (auto& p : get_piece_info(piece).get_points())
-                if (m_geo->get_point_type(p.x, p.y) != 0)
-                    ++n;
-        }
-        else
-            n = get_piece_info(piece).get_size();
-        m_score_points[piece] = n;
-        total_piece_points += n;
+        m_score_points[piece] = get_piece_info(piece).get_score_points();
+        total_piece_points += m_score_points[piece];
     }
     switch (piece_set)
     {

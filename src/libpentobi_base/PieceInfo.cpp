@@ -85,7 +85,7 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
 
 PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                      const Geometry& geo, const PieceTransforms& transforms,
-                     const CoordPoint& label_pos)
+                     BoardType board_type, const CoordPoint& label_pos)
     : m_name(name),
       m_points(points),
       m_label_pos(label_pos),
@@ -129,13 +129,26 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         }
         all_transformed_points.push_back(normalized);
     };
+    if (board_type == BoardType::nexos)
+    {
+        m_score_points = 0;
+        for (auto& p : points)
+        {
+            auto point_type = geo.get_point_type(p);
+            LIBBOARDGAME_ASSERT(point_type <= 2);
+            if (point_type == 1 || point_type == 2) // Line segment
+                ++m_score_points;
+        }
+    }
+    else
+        m_score_points = points.size();
 }
 
 bool PieceInfo::can_flip_horizontally(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
     auto flip = get_equivalent_transform(
-                            m_transforms->get_mirrored_horizontally(transform));
+                           m_transforms->get_mirrored_horizontally(transform));
     return flip != transform;
 }
 
@@ -143,7 +156,7 @@ bool PieceInfo::can_flip_vertically(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
     auto flip = get_equivalent_transform(
-                              m_transforms->get_mirrored_vertically(transform));
+                             m_transforms->get_mirrored_vertically(transform));
     return flip != transform;
 }
 

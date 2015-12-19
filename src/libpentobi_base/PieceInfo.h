@@ -12,6 +12,7 @@
 #include <vector>
 #include "Geometry.h"
 #include "PieceTransforms.h"
+#include "Variant.h"
 #include "libboardgame_base/CoordPoint.h"
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_util/ArrayList.h"
@@ -45,6 +46,7 @@ public:
         points and 14 attach points). */
     static const unsigned max_adj_attach = 22;
 
+
     /** Constructor.
         @param name A short unique name for the piece.
         @param points The coordinates of the piece elements.
@@ -53,27 +55,32 @@ public:
         @param label_pos The coordinates for drawing a label on the piece. */
     PieceInfo(const string& name, const Points& points,
               const Geometry& geo, const PieceTransforms& transforms,
-              const CoordPoint& label_pos);
+              BoardType board_type, const CoordPoint& label_pos);
 
-    const string& get_name() const;
+    const string& get_name() const { return m_name; }
 
     /** The points of the piece.
         In Nexos, the points of a piece contain the coordinates of line
         segments and of junctions that are essentially needed to mark the
         intersection as non-crossable (i.e. junctions that touch exactly two
         line segments of the piece with identical orientation. */
-    const Points& get_points() const;
+    const Points& get_points() const { return m_points; }
 
-    const CoordPoint& get_label_pos() const;
+    const CoordPoint& get_label_pos() const { return m_label_pos; }
 
-    /** Return the number of fields of the piece. */
-    unsigned get_size() const;
+    /** Return the number of points of the piece that contribute to the score.
+        This excludes any junction points included in the piece definition in
+        Nexos.*/
+    unsigned get_score_points() const { return m_score_points; }
 
     /** Get a list with unique transformations.
         The list has the same order as PieceTransforms::get_all() but
         transformations that are equivalent to a previous transformation
         (because of a symmetry of the piece) are omitted. */
-    const vector<const Transform*>& get_transforms() const;
+    const vector<const Transform*>& get_transforms() const
+    {
+        return m_uniq_transforms;
+    }
 
     /** Get next transform from the list of unique transforms. */
     const Transform* get_next_transform(const Transform* transform) const;
@@ -99,6 +106,8 @@ private:
 
     Points m_points;
 
+    unsigned m_score_points;
+
     CoordPoint m_label_pos;
 
     vector<const Transform*> m_uniq_transforms;
@@ -107,31 +116,6 @@ private:
 
     const PieceTransforms* m_transforms;
 };
-
-inline const CoordPoint& PieceInfo::get_label_pos() const
-{
-    return m_label_pos;
-}
-
-inline const string& PieceInfo::get_name() const
-{
-    return m_name;
-}
-
-inline const PieceInfo::Points& PieceInfo::get_points() const
-{
-    return m_points;
-}
-
-inline unsigned PieceInfo::get_size() const
-{
-    return static_cast<unsigned>(m_points.size());
-}
-
-inline const vector<const Transform*>& PieceInfo::get_transforms() const
-{
-    return m_uniq_transforms;
-}
 
 //-----------------------------------------------------------------------------
 

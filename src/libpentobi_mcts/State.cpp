@@ -672,8 +672,8 @@ void State::start_search()
     for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
     {
         Piece piece(i);
-        auto piece_size =
-                static_cast<float>(m_bc->get_piece_info(piece).get_size());
+        auto piece_size = static_cast<float>(
+                    m_bc->get_piece_info(piece).get_score_points());
         auto piece_nu_attach =
                 static_cast<float>(m_bc->get_nu_attach_points(piece));
         LIBBOARDGAME_ASSERT(piece_size > 0);

@@ -44,8 +44,6 @@ public:
 
     Piece::IntType get_nu_pieces() const;
 
-    unsigned get_max_piece_size() const;
-
     const PieceInfo& get_piece_info(Piece piece) const;
 
     unsigned get_nu_attach_points(Piece piece) const;
@@ -141,8 +139,6 @@ private:
 
     Piece::IntType m_nu_pieces;
 
-    unsigned m_max_piece_size;
-
     unsigned m_nu_moves;
 
     BoardType m_board_type;
@@ -200,11 +196,6 @@ private:
 inline const Geometry& BoardConst::get_geometry() const
 {
     return m_geo;
-}
-
-inline unsigned BoardConst::get_max_piece_size() const
-{
-    return m_max_piece_size;
 }
 
 inline const MoveInfo& BoardConst::get_move_info(Move mv) const
