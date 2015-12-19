@@ -3463,7 +3463,6 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     // in rated games.
     for (auto& action : m_actionLevel)
         action->setEnabled(! m_isRated);
-    m_menuExport->setEnabled(! isEmpty);
     m_menuVariant->setEnabled(! m_isRated);
 }
 
