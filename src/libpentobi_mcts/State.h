@@ -29,6 +29,7 @@ using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
+using libpentobi_base::PieceSet;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -122,6 +123,8 @@ private:
 
     Color::IntType m_nu_colors;
 
+    PieceSet m_piece_set;
+
     const MoveInfo* m_move_info_array;
 
     const MoveInfoExt* m_move_info_ext_array;
@@ -202,9 +205,11 @@ private:
     ColorMap<Grid<bool>> m_moves_added_at;
 
 
+    template<unsigned PIECE_SIZE>
     void add_moves(Point p, Color c, const Board::PiecesLeftList& pieces,
                    float& total_gamma, MoveList& moves, unsigned& nu_moves);
 
+    template<unsigned PIECE_SIZE>
     LIBBOARDGAME_NOINLINE
     void add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                             bool with_gamma, MoveList& moves);
@@ -235,18 +240,23 @@ private:
 
     const Board::PiecesLeftList& get_pieces_considered(Color c);
 
+    template<unsigned PIECE_SIZE>
     void init_moves_with_gamma(Color c);
 
+    template<unsigned PIECE_SIZE>
     void init_moves_without_gamma(Color c);
 
+    template<unsigned PIECE_SIZE>
     bool check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
                          MoveList& moves, unsigned& nu_moves);
 
+    template<unsigned PIECE_SIZE>
     bool check_move(Move mv, const MoveInfo& info, float gamma_piece,
                     MoveList& moves, unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,
                     float& total_gamma);
 
+    template<unsigned PIECE_SIZE>
     bool check_move(Move mv, const MoveInfo& info, MoveList& moves,
                     unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,
@@ -254,6 +264,7 @@ private:
 
     bool gen_playout_move_full(PlayerMove<Move>& mv);
 
+    template<unsigned PIECE_SIZE>
     void update_moves(Color c);
 
     void update_playout_features(Color c, Move mv);
@@ -282,17 +293,6 @@ inline void State::finish_in_tree()
     if (m_check_symmetric_draw)
         m_is_symmetry_broken =
             check_symmetry_broken(m_bd, m_shared_const.symmetric_points);
-}
-
-inline bool State::gen_children(Tree::NodeExpander& expander, Float init_val)
-{
-    if (m_nu_passes == m_nu_colors)
-        return true;
-    Color to_play = m_bd.get_to_play();
-    init_moves_without_gamma(to_play);
-    return m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
-                                          m_is_symmetry_broken, expander,
-                                          init_val);
 }
 
 inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
