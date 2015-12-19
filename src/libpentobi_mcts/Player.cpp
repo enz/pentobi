@@ -50,7 +50,7 @@ static const float counts_trigon[Player::max_supported_level] =
     { 228, 433, 727, 1501, 2912, 7395, 26666, 76824, 471249 };
 
 static const float counts_nexos[Player::max_supported_level] =
-    { 3, 17, 44, 500, 2912, 7395, 26666, 76824, 471249 };
+    { 3, 17, 71, 318, 1570, 7395, 26666, 76824, 471249 };
 
 } // namespace
 
