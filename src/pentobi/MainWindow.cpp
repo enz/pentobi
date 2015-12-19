@@ -194,9 +194,9 @@ void setIcon(QAction* action, const QString& name)
     Used for sorting the list used in Find Move. */
 float getHeuristic(const Board& bd, Move mv)
 {
-    auto& info = bd.get_move_info(mv);
+    auto& piece_info = bd.get_piece_info(bd.get_move_info(mv).get_piece());
     auto& info_ext = bd.get_move_info_ext(mv);
-    return static_cast<float>((1000 * info.size()
+    return static_cast<float>((1000 * piece_info.get_score_points()
                                + 10 * info_ext.size_attach_points
                                - info_ext.size_adj_points));
 }
