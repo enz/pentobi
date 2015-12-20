@@ -29,6 +29,11 @@ class PentobiTree
     : public SgfTree
 {
 public:
+    /** Parse the GM property of a root node.
+        @throws MissingProperty
+        @throws InvalidPropertyValue */
+    static Variant get_variant(const SgfNode& root);
+
     PentobiTree(Variant variant);
 
     PentobiTree(unique_ptr<SgfNode>& root);

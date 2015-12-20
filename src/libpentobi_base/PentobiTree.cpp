@@ -139,6 +139,15 @@ Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
     return result;
 }
 
+Variant PentobiTree::get_variant(const SgfNode& root)
+{
+    string game = root.get_property("GM");
+    Variant variant;
+    if (! parse_variant(game, variant))
+        throw InvalidPropertyValue("GM", game);
+    return variant;
+}
+
 bool PentobiTree::has_main_variation_moves() const
 {
     auto node = &get_root();
@@ -153,10 +162,7 @@ bool PentobiTree::has_main_variation_moves() const
 
 void PentobiTree::init(unique_ptr<SgfNode>& root)
 {
-    string game = root->get_property("GM");
-    Variant variant;
-    if (! parse_variant(game, variant))
-        throw InvalidPropertyValue("GM", game);
+    Variant variant = get_variant(*root);
     SgfTree::init(root);
     m_variant = variant;
     init_board_const(variant);

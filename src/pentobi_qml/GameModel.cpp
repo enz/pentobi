@@ -21,6 +21,7 @@ using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::is_main_variation;
+using libpentobi_base::get_board_type;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
@@ -28,6 +29,7 @@ using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::CoordPoint;
 using libpentobi_base::MovePoints;
+using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
@@ -178,11 +180,12 @@ Variant GameModel::getInitialGameVariant()
 {
     QSettings settings;
     auto variantString = settings.value("variant", "").toString();
-    Variant gameVariant;
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(),
-                           gameVariant))
-        gameVariant = Variant::duo;
-    return gameVariant;
+    Variant variant;
+    // Nexos not yet supported in the GUI
+    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant)
+            || get_board_type(variant) == BoardType::nexos)
+        variant = Variant::duo;
+    return variant;
 }
 
 int GameModel::getLastMoveColor()
@@ -340,8 +343,12 @@ bool GameModel::open(istream& in)
     {
         TreeReader reader;
         reader.read(in);
-        auto tree = reader.get_tree_transfer_ownership();
-        m_game.init(tree);
+        auto root = reader.get_tree_transfer_ownership();
+        auto boardType = get_board_type(PentobiTree::get_variant(*root));
+        if (boardType == BoardType::nexos)
+            // Nexos not yet supported in the GUI
+            return false;
+        m_game.init(root);
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
             initGameVariant(variant);
