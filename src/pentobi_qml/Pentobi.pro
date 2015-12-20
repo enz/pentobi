@@ -55,6 +55,7 @@ SOURCES += \
     ../libpentobi_base/Book.cpp \
     ../libpentobi_base/Color.cpp \
     ../libpentobi_base/Game.cpp \
+    ../libpentobi_base/NexosGeometry.cpp \
     ../libpentobi_base/NodeUtil.cpp \
     ../libpentobi_base/PentobiSgfUtil.cpp \
     ../libpentobi_base/PentobiTreeWriter.cpp \
@@ -170,6 +171,7 @@ HEADERS += \
     ../libpentobi_base/MoveList.h \
     ../libpentobi_base/MoveMarker.h \
     ../libpentobi_base/MovePoints.h \
+    ../libpentobi_base/NexosGeometry.h \
     ../libpentobi_base/NodeUtil.h \
     ../libpentobi_base/PentobiTree.h \
     ../libpentobi_base/Piece.h \
