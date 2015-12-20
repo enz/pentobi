@@ -1,4 +1,6 @@
 function clearMarks() {
+    if (_pieces0 === undefined) // Pieces not yet created
+        return
     var i
     for (i = 0; i < _pieces0.length; ++i)
         _pieces0[i].isMarked = false

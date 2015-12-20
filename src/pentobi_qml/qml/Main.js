@@ -136,10 +136,12 @@ function hideComputerColorDialog()
 
 function init() {
     callDelayTimer.call(function() {
-        gameDisplay.createPieces()
-        if (! gameModel.loadAutoSave())
+        if (! gameModel.loadAutoSave()) {
+            gameDisplay.createPieces()
             initComputerColors()
+        }
         else {
+            gameDisplay.createPieces()
             if (! computerPlaysAll())
                 checkComputerMove()
         }
