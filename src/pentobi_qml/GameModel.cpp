@@ -298,7 +298,7 @@ bool GameModel::loadAutoSave()
 {
     QSettings settings;
     auto s = settings.value("autosave", "").toByteArray();
-    istringstream in(s.data());
+    istringstream in(s.constData());
     if (! open(in))
         return false;
     m_game.set_modified();
