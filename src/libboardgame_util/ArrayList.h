@@ -51,7 +51,7 @@ public:
     /** Construct list with a single element. */
     explicit ArrayList(const T& t);
 
-    ArrayList(const initializer_list<T>& l);
+    explicit ArrayList(const initializer_list<T>& l);
 
     /** Assignment operator.
         Copies only elements with index below the current size. */

@@ -29,7 +29,7 @@ public:
     /** Constructor.
         @param init_val The value to return in get_mean() if count is 0. This
         value does not affect the mean returned if count is greater 0. */
-    StatisticsBase(FLOAT init_val = 0);
+    explicit StatisticsBase(FLOAT init_val = 0);
 
     void add(FLOAT val);
 
@@ -99,7 +99,7 @@ template<typename FLOAT = double>
 class Statistics
 {
 public:
-    Statistics(FLOAT init_val = 0);
+    explicit Statistics(FLOAT init_val = 0);
 
     void add(FLOAT val);
 
@@ -206,7 +206,7 @@ template<typename FLOAT = double>
 class StatisticsExt
 {
 public:
-    StatisticsExt(FLOAT init_val = 0);
+    explicit StatisticsExt(FLOAT init_val = 0);
 
     void add(FLOAT val);
 
@@ -357,7 +357,7 @@ class StatisticsDirtyLockFree
 public:
     /** Constructor.
         @param init_val See StatisticBase::StatisticBase() */
-    StatisticsDirtyLockFree(FLOAT init_val = 0);
+    explicit StatisticsDirtyLockFree(FLOAT init_val = 0);
 
     StatisticsDirtyLockFree& operator=(const StatisticsDirtyLockFree& s);
 

@@ -35,7 +35,7 @@ public:
     void transform(I begin, I end) const;
 
 protected:
-    Transform(unsigned new_point_type)
+    explicit Transform(unsigned new_point_type)
         : m_new_point_type(new_point_type)
     {}
 

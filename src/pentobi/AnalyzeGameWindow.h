@@ -27,7 +27,8 @@ class AnalyzeGameWindow
 public:
     AnalyzeGameWidget* analyzeGameWidget;
 
-    AnalyzeGameWindow(QWidget* parent);
+
+    explicit AnalyzeGameWindow(QWidget* parent);
 };
 
 //-----------------------------------------------------------------------------

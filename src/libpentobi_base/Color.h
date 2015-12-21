@@ -33,7 +33,7 @@ public:
     class Iterator
     {
     public:
-        Iterator(IntType i)
+        explicit Iterator(IntType i)
         {
             m_i = i;
         }
@@ -65,19 +65,13 @@ public:
     class Range
     {
     public:
-        Range(IntType nu_colors)
+        explicit Range(IntType nu_colors)
             : m_nu_colors(nu_colors)
         { }
 
-        Iterator begin() const
-        {
-            return 0;
-        }
+        Iterator begin() const { return Iterator(0); }
 
-        Iterator end() const
-        {
-            return m_nu_colors;
-        }
+        Iterator end() const { return Iterator(m_nu_colors); }
 
     private:
         IntType m_nu_colors;

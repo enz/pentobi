@@ -65,7 +65,7 @@ public:
     PieceMap<bool> is_piece_considered_all;
 
 
-    SharedConst(const Color& to_play);
+    explicit SharedConst(const Color& to_play);
 
     void init(bool is_followup);
 

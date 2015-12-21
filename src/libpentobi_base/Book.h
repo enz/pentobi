@@ -27,7 +27,7 @@ using libboardgame_util::RandomGenerator;
 class Book
 {
 public:
-    Book(Variant variant);
+    explicit Book(Variant variant);
 
     ~Book();
 

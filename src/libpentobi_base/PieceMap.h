@@ -23,7 +23,7 @@ class PieceMap
 public:
     PieceMap() = default;
 
-    PieceMap(const T& val);
+    explicit PieceMap(const T& val);
 
     PieceMap& operator=(const PieceMap& piece_map);
 

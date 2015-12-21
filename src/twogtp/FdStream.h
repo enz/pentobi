@@ -39,7 +39,7 @@ class FdInStream
     : public istream
 {
 public:
-    FdInStream(int fd);
+    explicit FdInStream(int fd);
 
 private:
     FdInBuf m_buf;
@@ -52,7 +52,7 @@ class FdOutBuf
     : public streambuf
 {
 public:
-    FdOutBuf(int fd)
+    explicit FdOutBuf(int fd)
         : m_fd(fd)
     { }
 
@@ -74,7 +74,7 @@ class FdOutStream
     : public ostream
 {
 public:
-    FdOutStream(int fd);
+    explicit FdOutStream(int fd);
 
 private:
     FdOutBuf m_buf;

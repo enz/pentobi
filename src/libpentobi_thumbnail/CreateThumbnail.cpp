@@ -49,7 +49,7 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
             Point p;
             if (geo.from_string(p_str, p))
             {
-                pointState[p] = c;
+                pointState[p] = PointState(c);
                 pieceId[p] = currentPieceId;
             }
         }
@@ -117,7 +117,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
             ++id;
             for (Point p : points)
             {
-                pointState[p] = c;
+                pointState[p] = PointState(c);
                 pieceId[p] = id;
             }
         }

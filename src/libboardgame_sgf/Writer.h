@@ -23,8 +23,7 @@ using libboardgame_util::to_string;
 class Writer
 {
 public:
-    Writer(ostream& out);
-
+    explicit Writer(ostream& out);
 
     /** @name Formatting options.
         Should be set before starting to write. */

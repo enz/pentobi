@@ -41,7 +41,7 @@ public slots:
     void cancel();
 
 public:
-    AnalyzeGameWidget(QWidget* parent);
+    explicit AnalyzeGameWidget(QWidget* parent);
 
     /** Start an analysis.
         This function will return after the analysis has started but the

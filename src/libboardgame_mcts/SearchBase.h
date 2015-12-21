@@ -464,7 +464,7 @@ private:
 
         ThreadState thread_state;
 
-        Thread(SearchFunc& search_func);
+        explicit Thread(SearchFunc& search_func);
 
         ~Thread();
 

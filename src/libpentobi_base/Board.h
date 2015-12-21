@@ -44,7 +44,7 @@ public:
     /** Use ANSI escape sequences for colored text output in operator>> */
     static bool color_output;
 
-    Board(Variant variant);
+    explicit Board(Variant variant);
 
     /** Not implemented to avoid unintended copies.
         Use copy_from() to copy a board state. */
@@ -846,7 +846,7 @@ inline void Board::place(Color c, Move mv)
     auto end = i + piece_size;
     do
     {
-        m_state_base.point_state[*i] = c;
+        m_state_base.point_state[*i] = PointState(c);
         for_each_color([&](Color c) {
             m_state_color[c].forbidden[*i] = true;
         });

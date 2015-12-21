@@ -27,7 +27,7 @@ class ColorMap
 public:
     ColorMap() = default;
 
-    ColorMap(const T& val);
+    explicit ColorMap(const T& val);
 
     T& operator[](Color c);
 

@@ -25,7 +25,8 @@ public:
         using runtime_error::runtime_error;
     };
 
-    GtpConnection(const string& command);
+
+    explicit GtpConnection(const string& command);
 
     ~GtpConnection();
 

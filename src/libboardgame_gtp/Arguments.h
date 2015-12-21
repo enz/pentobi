@@ -25,7 +25,7 @@ class Arguments
 public:
     /** Constructor.
         @param line The command line (@ref libboardgame_doc_storesref) */
-    Arguments(const CmdLine& line);
+    explicit Arguments(const CmdLine& line);
 
     /** Get argument.
         @param i Argument index starting with 0

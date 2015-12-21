@@ -24,7 +24,7 @@ class Engine
     : public libboardgame_base::Engine
 {
 public:
-    Engine(Variant variant);
+    explicit Engine(Variant variant);
 
     void cmd_all_legal(const Arguments&, Response&);
     void cmd_clear_board();

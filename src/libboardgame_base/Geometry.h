@@ -50,30 +50,15 @@ public:
     class Iterator
     {
     public:
-        Iterator(IntType i)
-        {
-            m_i = i;
-        }
+        explicit Iterator(IntType i) { m_i = i; }
 
-        bool operator==(Iterator it) const
-        {
-            return m_i == it.m_i;
-        }
+        bool operator==(Iterator it) const { return m_i == it.m_i; }
 
-        bool operator!=(Iterator it) const
-        {
-            return m_i != it.m_i;
-        }
+        bool operator!=(Iterator it) const { return m_i != it.m_i; }
 
-        void operator++()
-        {
-            ++m_i;
-        }
+        void operator++() { ++m_i; }
 
-        Point operator*() const
-        {
-            return Point(m_i);
-        }
+        Point operator*() const { return Point(m_i); }
 
     private:
         IntType m_i;

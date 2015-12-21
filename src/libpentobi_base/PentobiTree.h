@@ -34,9 +34,10 @@ public:
         @throws InvalidPropertyValue */
     static Variant get_variant(const SgfNode& root);
 
-    PentobiTree(Variant variant);
 
-    PentobiTree(unique_ptr<SgfNode>& root);
+    explicit PentobiTree(Variant variant);
+
+    explicit PentobiTree(unique_ptr<SgfNode>& root);
 
     void init(unique_ptr<SgfNode>& root) override;
 

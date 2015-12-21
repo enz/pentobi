@@ -54,7 +54,8 @@ public:
         Rating rating;
     };
 
-    RatingHistory(Variant variant);
+
+    explicit RatingHistory(Variant variant);
 
     /** Initialize rating to a given a-priori value. */
     void init(Rating rating);

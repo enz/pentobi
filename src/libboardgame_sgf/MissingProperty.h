@@ -19,7 +19,7 @@ class MissingProperty
     : public InvalidTree
 {
 public:
-    MissingProperty(const string& message);
+    explicit MissingProperty(const string& message);
 
     MissingProperty(const string& id, const string& message);
 };

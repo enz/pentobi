@@ -49,7 +49,7 @@ LIBBOARDGAME_TEST_CASE(util_array_list_equals)
     LIBBOARDGAME_CHECK(l1 == l2);
     l2.push_back(4);
     LIBBOARDGAME_CHECK(! (l1 == l2));
-    l2 = { 2, 1, 3 };
+    l2 = ArrayList<int, 10>({ 2, 1, 3 });
     LIBBOARDGAME_CHECK(! (l1 == l2));
 }
 

@@ -38,7 +38,7 @@ using libpentobi_base::Variant;
 class OutputTree
 {
 public:
-    OutputTree(Variant variant);
+    explicit OutputTree(Variant variant);
 
     ~OutputTree();
 

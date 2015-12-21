@@ -19,7 +19,7 @@ namespace libpentobi_base {
 class Game
 {
 public:
-    Game(Variant variant);
+    explicit Game(Variant variant);
 
     void init(Variant variant);
 

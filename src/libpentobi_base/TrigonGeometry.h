@@ -38,6 +38,7 @@ public:
         @param sz The edge size of the hexagon. */
     static const TrigonGeometry& get(unsigned sz);
 
+
     AdjCoordList get_adj_coord(int x, int y) const override;
 
     DiagCoordList get_diag_coord(int x, int y) const override;
@@ -57,7 +58,8 @@ private:
 
     unsigned m_sz;
 
-    TrigonGeometry(unsigned sz);
+
+    explicit TrigonGeometry(unsigned sz);
 };
 
 //-----------------------------------------------------------------------------

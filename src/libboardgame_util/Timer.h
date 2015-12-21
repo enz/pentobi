@@ -22,7 +22,7 @@ public:
 
     /** Constructor.
         @param time_source (@ref libboardgame_doc_storesref) */
-    Timer(TimeSource& time_source);
+    explicit Timer(TimeSource& time_source);
 
     double operator()() const;
 

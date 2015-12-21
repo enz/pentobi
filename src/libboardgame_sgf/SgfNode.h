@@ -56,7 +56,7 @@ public:
     class Iterator
     {
     public:
-        Iterator(const SgfNode* node)
+        explicit Iterator(const SgfNode* node)
         {
             m_node = node;
         }
@@ -100,24 +100,15 @@ public:
     class Children
     {
     public:
-        Children(const SgfNode& node)
+        explicit Children(const SgfNode& node)
             : m_begin(node.get_first_child_or_null())
         { }
 
-        Iterator begin() const
-        {
-            return m_begin;
-        }
+        Iterator begin() const { return m_begin; }
 
-        Iterator end() const
-        {
-            return nullptr;
-        }
+        Iterator end() const { return Iterator(nullptr); }
 
-        bool empty() const
-        {
-            return m_begin.is_null();
-        }
+        bool empty() const { return m_begin.is_null(); }
 
     private:
         Iterator m_begin;

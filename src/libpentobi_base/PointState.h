@@ -28,7 +28,7 @@ public:
 
     PointState();
 
-    PointState(Color c);
+    explicit PointState(Color c);
 
     explicit PointState(IntType i);
 

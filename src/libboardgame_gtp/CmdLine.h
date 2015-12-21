@@ -36,7 +36,7 @@ public:
 
     /** Construct with a command line.
         @see init() */
-    CmdLine(const string& line);
+    explicit CmdLine(const string& line);
 
     ~CmdLine();
 

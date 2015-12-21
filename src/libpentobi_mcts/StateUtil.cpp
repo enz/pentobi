@@ -27,15 +27,15 @@ namespace {
 PointState get_symmetric_state(Color c)
 {
     if (c == Color(0))
-        return Color(1);
+        return PointState(Color(1));
     else if (c == Color(1))
-        return Color(0);
+        return PointState(Color(0));
     else if (c == Color(2))
-        return Color(3);
+        return PointState(Color(3));
     else
     {
         LIBBOARDGAME_ASSERT(c == Color(3));
-        return Color(2);
+        return PointState(Color(2));
     }
 }
 

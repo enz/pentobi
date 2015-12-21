@@ -28,7 +28,7 @@ class InitialRatingDialog
     Q_OBJECT
 
 public:
-    InitialRatingDialog(QWidget* parent);
+    explicit InitialRatingDialog(QWidget* parent);
 
     int getRating() const;
 

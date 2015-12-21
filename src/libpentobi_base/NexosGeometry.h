@@ -45,6 +45,7 @@ public:
         @param sz The number of segments in a row or column. */
     static const NexosGeometry& get(unsigned sz);
 
+
     AdjCoordList get_adj_coord(int x, int y) const override;
 
     DiagCoordList get_diag_coord(int x, int y) const override;
@@ -62,7 +63,8 @@ private:
     /** Stores already created geometries by size. */
     static map<unsigned, shared_ptr<NexosGeometry>> s_geometry;
 
-    NexosGeometry(unsigned sz);
+
+    explicit NexosGeometry(unsigned sz);
 };
 
 //-----------------------------------------------------------------------------
