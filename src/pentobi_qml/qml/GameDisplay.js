@@ -45,6 +45,8 @@ function createPieces() {
     _pieces1 = createColorPieces(component, gameModel.pieceModels1)
     _pieces2 = createColorPieces(component, gameModel.pieceModels2)
     _pieces3 = createColorPieces(component, gameModel.pieceModels3)
+    if (markLastMove)
+        markLast()
 }
 
 function destroyColorPieces(pieces) {
