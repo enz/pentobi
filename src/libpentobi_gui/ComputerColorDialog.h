@@ -25,7 +25,7 @@ using libpentobi_base::ColorMap;
 
 //-----------------------------------------------------------------------------
 
-class ComputerColorDialog
+class ComputerColorDialog final
     : public QDialog
 {
     Q_OBJECT

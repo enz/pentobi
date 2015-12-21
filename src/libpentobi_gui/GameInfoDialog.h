@@ -23,7 +23,7 @@ using libpentobi_base::Game;
 
 //-----------------------------------------------------------------------------
 
-class GameInfoDialog
+class GameInfoDialog final
     : public QDialog
 {
     Q_OBJECT

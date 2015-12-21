@@ -16,7 +16,7 @@
 
 //-----------------------------------------------------------------------------
 
-class AnalyzeSpeedDialog
+class AnalyzeSpeedDialog final
     : public QInputDialog
 {
     Q_OBJECT
@@ -28,10 +28,7 @@ public:
 
     /** Get return value if dialog was accepted.
         0 = fast, 1 = normal, 2 = slow */
-    int getSpeedValue()
-    {
-        return m_speedValue;
-    }
+    int getSpeedValue() { return m_speedValue; }
 
 public slots:
     void accept() override;

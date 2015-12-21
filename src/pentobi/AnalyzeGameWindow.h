@@ -19,7 +19,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-class AnalyzeGameWindow
+class AnalyzeGameWindow final
     : public QDialog
 {
     Q_OBJECT

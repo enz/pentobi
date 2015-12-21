@@ -22,7 +22,7 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 /** Dialog that asks the user to estimate his initial rating. */
-class InitialRatingDialog
+class InitialRatingDialog final
     : public QDialog
 {
     Q_OBJECT
