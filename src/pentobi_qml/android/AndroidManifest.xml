@@ -45,4 +45,7 @@
          Remove the comment if you do not require these default features. -->
 
 
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE "/>
+
+
 </manifest>
