@@ -7,7 +7,7 @@
 #ifndef LIBBOARDGAME_BASE_SP_SHT_STR_REP_H
 #define LIBBOARDGAME_BASE_SP_SHT_STR_REP_H
 
-#include <climits>
+#include <limits>
 #include <iosfwd>
 
 namespace libboardgame_base {
@@ -25,9 +25,9 @@ using namespace std;
     convention used in chess. */
 struct SpShtStrRep
 {
-    static const unsigned max_width = UINT_MAX;
+    static constexpr unsigned max_width = numeric_limits<unsigned>::max();
 
-    static const unsigned max_height = UINT_MAX;
+    static constexpr unsigned max_height = numeric_limits<unsigned>::max();
 
     static bool read(istream& in, unsigned width, unsigned height,
                      unsigned& x, unsigned& y);
