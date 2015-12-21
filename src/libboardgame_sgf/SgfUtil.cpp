@@ -11,7 +11,6 @@
 #include "SgfUtil.h"
 
 #include <algorithm>
-#include <iostream>
 #include <sstream>
 #include "InvalidPropertyValue.h"
 #include "TreeWriter.h"

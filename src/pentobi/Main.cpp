@@ -8,7 +8,6 @@
 #include <config.h>
 #endif
 
-#include <iostream>
 #include <QFileInfo>
 #include <QLibraryInfo>
 #include <QMessageBox>

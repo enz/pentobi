@@ -11,10 +11,11 @@
 #include <iosfwd>
 #include <map>
 #include "Arguments.h"
-#include "CmdLine.h"
 #include "Response.h"
 
 namespace libboardgame_gtp {
+
+class CmdLine;
 
 using namespace std;
 

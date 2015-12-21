@@ -10,6 +10,7 @@
 
 #include "Engine.h"
 
+#include "MoveMarker.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Log.h"

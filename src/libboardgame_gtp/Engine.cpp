@@ -13,6 +13,7 @@
 #include <cassert>
 #include <cctype>
 #include <iostream>
+#include "CmdLine.h"
 
 namespace libboardgame_gtp {
 

@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_SGF_SGF_UTIL_H
 #define LIBBOARDGAME_SGF_SGF_UTIL_H
 
-#include <iosfwd>
 #include <string>
 #include "SgfTree.h"
 

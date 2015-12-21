@@ -17,7 +17,6 @@
 #include "Util.h"
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Abort.h"
-#include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 
 using libboardgame_sgf::util::find_root;

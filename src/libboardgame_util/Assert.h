@@ -7,8 +7,6 @@
 #ifndef LIBBOARDGAME_UTIL_ASSERT_H
 #define LIBBOARDGAME_UTIL_ASSERT_H
 
-#include "libboardgame_sys/Compiler.h"
-
 namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------

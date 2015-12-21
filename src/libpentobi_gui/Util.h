@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_GUI_UTIL_H
 #define LIBPENTOBI_GUI_UTIL_H
 
-#include <cmath>
 #include <QColor>
 #include <QPainter>
 #include "libpentobi_base/Color.h"

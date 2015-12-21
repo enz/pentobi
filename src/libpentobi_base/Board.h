@@ -14,13 +14,14 @@
 #include "Geometry.h"
 #include "Grid.h"
 #include "MoveList.h"
-#include "MoveMarker.h"
 #include "PointList.h"
 #include "PointState.h"
 #include "Setup.h"
 #include "StartingPoints.h"
 
 namespace libpentobi_base {
+
+class MoveMarker;
 
 //-----------------------------------------------------------------------------
 

@@ -10,7 +10,6 @@
 
 #include "GuiBoard.h"
 
-#include <algorithm>
 #include <limits>
 #include <QApplication>
 #include <QMouseEvent>

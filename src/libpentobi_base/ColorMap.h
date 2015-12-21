@@ -8,7 +8,6 @@
 #define LIBPENTOBI_BASE_COLOR_MAP_H
 
 #include <array>
-#include <algorithm>
 #include "Color.h"
 
 namespace libpentobi_base {

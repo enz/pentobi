@@ -10,7 +10,6 @@
 #include <iosfwd>
 #include <algorithm>
 #include <string>
-#include <utility>
 
 namespace libboardgame_gtp {
 

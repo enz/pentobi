@@ -23,7 +23,6 @@
 
 class QActionGroup;
 class QLabel;
-class QMessageBox;
 class QPlainTextEdit;
 class QSplitter;
 class AnalyzeGameWindow;

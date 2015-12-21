@@ -8,6 +8,7 @@
 #define LIBPENTOBI_BASE_SCORE_UTIL_H
 
 #include <algorithm>
+#include <array>
 #include "Color.h"
 
 namespace libpentobi_base {

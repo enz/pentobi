@@ -8,6 +8,7 @@
 #define LIBBOARDGAME_SYS_COMPILER_H
 
 #include <string>
+#include <typeinfo>
 #ifdef __GNUC__
 #include <cstdlib>
 #include <cxxabi.h>

@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_MCTS_SEARCH_BASE_H
 #define LIBBOARDGAME_MCTS_SEARCH_BASE_H
 
-#include <algorithm>
 #include <array>
 #include <condition_variable>
 #include <functional>

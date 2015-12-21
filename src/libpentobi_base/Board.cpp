@@ -11,6 +11,7 @@
 #include "Board.h"
 
 #include <functional>
+#include "MoveMarker.h"
 
 namespace libpentobi_base {
 

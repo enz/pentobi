@@ -8,6 +8,7 @@
 #define LIBPENTOBI_MCTS_SHARED_CONST_H
 
 #include "libpentobi_base/Board.h"
+#include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/SymmetricPoints.h"
 
 namespace libpentobi_mcts {

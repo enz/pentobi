@@ -13,7 +13,6 @@
 #include <cmath>
 #include <QApplication>
 #include <QPainter>
-#include "libboardgame_util/Log.h"
 #include "libpentobi_gui/Util.h"
 
 using namespace std;

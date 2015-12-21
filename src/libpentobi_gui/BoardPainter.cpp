@@ -13,7 +13,6 @@
 #include <algorithm>
 #include <cmath>
 #include "Util.h"
-#include "libboardgame_util/Log.h"
 
 using namespace std;
 using libboardgame_util::ArrayList;

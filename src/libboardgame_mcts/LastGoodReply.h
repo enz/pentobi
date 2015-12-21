@@ -13,7 +13,6 @@
 #include <random>
 #include "Atomic.h"
 #include "PlayerMove.h"
-#include "libboardgame_util/Assert.h"
 
 namespace libboardgame_mcts {
 

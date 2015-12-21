@@ -10,7 +10,6 @@
 #include <cmath>
 #include <cstdint>
 #include <limits>
-#include <type_traits>
 
 namespace libboardgame_util {
 
