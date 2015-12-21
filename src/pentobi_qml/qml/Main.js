@@ -221,7 +221,7 @@ function openFileUrl(fileUrl) {
     cancelGenMove()
     gameDisplay.destroyPieces()
     if (! gameModel.open(getFileFromUrl(fileUrl)))
-        showError(qsTr("Open failed."))
+        showError(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
     else {
         computerPlays0 = false
         computerPlays1 = false
@@ -246,7 +246,7 @@ function play(pieceModel, gameCoord) {
 
 function saveFileUrl(fileUrl) {
     if (! gameModel.save(getFileFromUrl(fileUrl)))
-        showError(qsTr("Save failed."))
+        showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
 }
 
 function saveAs() {

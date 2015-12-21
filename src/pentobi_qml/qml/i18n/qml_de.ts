@@ -50,6 +50,10 @@
         <source>Move %1</source>
         <translation>Zug %1</translation>
     </message>
+    <message>
+        <source>Unsupported game variant</source>
+        <translation>Spielvariante nicht unterstützt</translation>
+    </message>
 </context>
 <context>
     <name>Main</name>

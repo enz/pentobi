@@ -6,6 +6,8 @@
 
 #include "GameModel.h"
 
+#include <cerrno>
+#include <cstring>
 #include <fstream>
 #include <QDebug>
 #include <QSettings>
@@ -346,8 +348,10 @@ bool GameModel::open(istream& in)
         auto root = reader.get_tree_transfer_ownership();
         auto boardType = get_board_type(PentobiTree::get_variant(*root));
         if (boardType == BoardType::nexos)
-            // Nexos not yet supported in the GUI
+        {
+            m_lastInputOutputError = tr("Unsupported game variant");
             return false;
+        }
         m_game.init(root);
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
@@ -357,12 +361,10 @@ bool GameModel::open(istream& in)
         QSettings settings;
         settings.remove("autosave");
     }
-    catch (const TreeReader::ReadError&)
+    catch (const runtime_error& e)
     {
+        m_lastInputOutputError = QString::fromLocal8Bit(e.what());
         return false;
-    }
-    catch (const InvalidTree&)
-    {
     }
     return true;
 }
@@ -370,6 +372,11 @@ bool GameModel::open(istream& in)
 bool GameModel::open(QString file)
 {
     ifstream in(file.toLocal8Bit().constData());
+    if (! in)
+    {
+        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
+        return false;
+    }
     return open(in);
 }
 
@@ -455,7 +462,10 @@ bool GameModel::save(QString file)
     writer.set_indent(1);
     writer.write();
     if (! out)
+    {
+        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
+    }
     m_game.clear_modified();
     return true;
 }

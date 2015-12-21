@@ -28,6 +28,7 @@ class GameModel
                NOTIFY gameVariantChanged)
     Q_PROPERTY(QString positionInfo MEMBER m_positionInfo
                NOTIFY positionInfoChanged)
+    Q_PROPERTY(QString lastInputOutputError MEMBER m_lastInputOutputError)
     Q_PROPERTY(int nuColors MEMBER m_nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay MEMBER m_toPlay NOTIFY toPlayChanged)
     Q_PROPERTY(int altPlayer MEMBER m_altPlayer NOTIFY altPlayerChanged)
@@ -191,6 +192,8 @@ private:
     QString m_gameVariant;
 
     QString m_positionInfo;
+
+    QString m_lastInputOutputError;
 
     int m_nuColors;
 
