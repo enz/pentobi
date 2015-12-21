@@ -335,12 +335,16 @@ void Board::init_variant(Variant variant)
             m_second_color[c] = c;
     }
     auto piece_set = m_bc->get_piece_set();
+#if LIBBOARDGAME_DEBUG
     unsigned total_piece_points = 0;
+#endif
     for (Piece::IntType i = 0; i < get_nu_uniq_pieces(); ++i)
     {
         Piece piece(i);
         m_score_points[piece] = get_piece_info(piece).get_score_points();
+#if LIBBOARDGAME_DEBUG
         total_piece_points += m_score_points[piece];
+#endif
     }
     switch (piece_set)
     {
