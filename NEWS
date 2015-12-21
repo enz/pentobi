@@ -14,6 +14,8 @@ Desktop version:
   reduces the needed memory and removes higher levels from the menu.
 * The memory requirements are now 1 GB minimum, 4 GB recommended for
   playing level 9.
+* Bugfix: message dialog about discarding unsaved current game was not
+  shown if a file was loaded by clicking on a game in the rating dialog.
 
 Android version:
 

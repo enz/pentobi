@@ -2407,11 +2407,14 @@ bool MainWindow::open(const QString& file, bool isTemporary)
 void MainWindow::openRecentFile()
 {
      auto action = qobject_cast<QAction*>(sender());
-     if (! action)
-         return;
-     if (! checkSave())
-         return;
-     open(action->data().toString());
+     if (action)
+         openCheckSave(action->data().toString());
+}
+
+void MainWindow::openCheckSave(const QString& file)
+{
+     if (checkSave())
+         open(file);
 }
 
 void MainWindow::orientationDisplayColorClicked(Color)
@@ -3060,7 +3063,7 @@ void MainWindow::showRating()
     {
         m_ratingDialog = new RatingDialog(this, *m_history);
         connect(m_ratingDialog, SIGNAL(openRecentFile(const QString&)),
-                SLOT(open(const QString&)));
+                SLOT(openCheckSave(const QString&)));
     }
     loadHistory();
     m_ratingDialog->show();

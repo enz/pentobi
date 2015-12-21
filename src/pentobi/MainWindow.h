@@ -665,6 +665,8 @@ private slots:
 
     void noMoveAnnotation(bool checked);
 
+    void openCheckSave(const QString& file);
+
     void openRecentFile();
 
     void orientationDisplayColorClicked(Color c);
