@@ -52,6 +52,7 @@ public:
         @param points The coordinates of the piece elements.
         @param geo
         @param transforms
+        @param board_type
         @param label_pos The coordinates for drawing a label on the piece. */
     PieceInfo(const string& name, const Points& points,
               const Geometry& geo, const PieceTransforms& transforms,

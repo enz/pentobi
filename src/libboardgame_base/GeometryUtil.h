@@ -52,6 +52,7 @@ void normalize_offset(T begin, T end, unsigned& width, unsigned& height,
     used in the geometry.
     The offset shifts points in a minimal positive direction to match the
     types, x-direction is preferred.
+    @param geo
     @param point_type The point type of (0, 0) of the coordinate system used by
     the points. */
 template<typename P>
@@ -67,7 +68,7 @@ CoordPoint type_match_offset(const Geometry<P>& geo, unsigned point_type)
 
 /** Apply type_match_offset() to a list of points.
     @tparam T An iterator over a container containing CoordPoint elements.
-    @param geometry The geometry.
+    @param geo The geometry.
     @param begin The beginning of the list of points.
     @param end The end of the list of points.
     @param point_type The point type of (0,0) in the list of points. */
