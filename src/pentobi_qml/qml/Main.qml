@@ -61,7 +61,6 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            transitionsEnabled: false
             focus: true
             onPlay: Logic.play(pieceModel, gameCoord)
         }
