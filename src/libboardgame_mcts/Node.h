@@ -157,9 +157,14 @@ void Node<M, F, MT>::copy_data_from(const Node& node)
     static_assert(sizeof(Node) == sizeof(Dummy), "");
 
     m_move = node.m_move;
-    m_value_count = node.m_value_count.load();
-    m_value = node.m_value.load();
-    m_visit_count = node.m_visit_count.load();
+    // Load/store relaxed (it wouln't even need to be atomic) because this
+    // function is only used before the multi-threaded search.
+    m_value_count.store(node.m_value_count.load(memory_order_relaxed),
+                        memory_order_relaxed);
+    m_value.store(node.m_value.load(memory_order_relaxed),
+                  memory_order_relaxed);
+    m_visit_count.store(node.m_visit_count.load(memory_order_relaxed),
+                        memory_order_relaxed);
 }
 
 template<typename M, typename F, bool MT>
