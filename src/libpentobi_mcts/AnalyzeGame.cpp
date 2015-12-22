@@ -72,8 +72,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     // value updates if a subtree from a previous search is
                     // reused (which re-initializes the value and value count
                     // of the new root from the best child)
-                    const Float min_simulations =
-                        min(Float(100), Float(nu_simulations));
+                    size_t min_simulations = min(size_t(100), nu_simulations);
                     Move computer_mv;
                     search.search(computer_mv, *bd, mv.color, max_count,
                                   min_simulations, max_time, time_source);

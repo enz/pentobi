@@ -69,7 +69,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     unique_ptr<Search> search(new Search(bd->get_variant(), nu_threads,
                                          memory));
     Float max_count = 1;
-    Float min_simulations = 1;
+    size_t min_simulations = 1;
     double max_time = 0;
     CpuTimeSource time_source;
     Move mv;

@@ -330,7 +330,7 @@ public:
         result but want to keep the full tree for reuse in a future search.
         @return @c false if no move could be generated because the position is
         a terminal position. */
-    bool search(Move& mv, Float max_count, Float min_simulations,
+    bool search(Move& mv, Float max_count, size_t min_simulations,
                 double max_time, TimeSource& time_source,
                 bool always_search = true);
 
@@ -555,7 +555,7 @@ private:
     /** Minimum simulations to perform in the current search.
         This does not include the count of simulations reused from a subtree of
         a previous search. */
-    Float m_min_simulations;
+    size_t m_min_simulations;
 
     /** Maximum simulations of current search.
         This include the count of simulations reused from a subtree of a
@@ -1200,7 +1200,7 @@ bool SearchBase<S, M, R>::estimate_reused_root_val(Tree& tree,
 
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
-                                 Float min_simulations, double max_time,
+                                 size_t min_simulations, double max_time,
                                  TimeSource& time_source, bool always_search)
 {
     if (m_nu_threads != m_threads.size())

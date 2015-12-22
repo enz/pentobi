@@ -68,7 +68,7 @@ public:
 
 
     bool search(Move& mv, const Board& bd, Color to_play, Float max_count,
-                Float min_simulations, double max_time,
+                size_t min_simulations, double max_time,
                 TimeSource& time_source);
 
     /** Get color to play at root node of the last search. */
