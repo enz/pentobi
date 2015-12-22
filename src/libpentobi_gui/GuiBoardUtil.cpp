@@ -92,23 +92,23 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
     guiBoard.clearMarkup();
     if (markMovesBegin == 0)
         return;
-        auto& tree = game.get_tree();
-        auto& bd = game.get_board();
-        unsigned moveNumber = bd.get_nu_moves();
-        auto node = &game.get_current();
-        do
+    auto& tree = game.get_tree();
+    auto& bd = game.get_board();
+    unsigned moveNumber = bd.get_nu_moves();
+    auto node = &game.get_current();
+    do
+    {
+        auto mv = tree.get_move_ignore_invalid(*node);
+        if (! mv.is_null())
         {
-            auto mv = tree.get_move_ignore_invalid(*node);
-            if (! mv.is_null())
-            {
-                if (moveNumber >= markMovesBegin && moveNumber <= markMovesEnd)
-                    markMove(guiBoard, game, *node, moveNumber, mv,
-                             markVariations, markWithDot);
-                --moveNumber;
-            }
-            node = node->get_parent_or_null();
+            if (moveNumber >= markMovesBegin && moveNumber <= markMovesEnd)
+                markMove(guiBoard, game, *node, moveNumber, mv, markVariations,
+                         markWithDot);
+            --moveNumber;
         }
-        while (node);
+        node = node->get_parent_or_null();
+    }
+    while (node);
 }
 
 //-----------------------------------------------------------------------------
