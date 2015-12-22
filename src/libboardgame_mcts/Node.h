@@ -157,7 +157,7 @@ void Node<M, F, MT>::copy_data_from(const Node& node)
     static_assert(sizeof(Node) == sizeof(Dummy), "");
 
     m_move = node.m_move;
-    // Load/store relaxed (it wouln't even need to be atomic) because this
+    // Load/store relaxed (it wouldn't even need to be atomic) because this
     // function is only used before the multi-threaded search.
     m_value_count.store(node.m_value_count.load(memory_order_relaxed),
                         memory_order_relaxed);
