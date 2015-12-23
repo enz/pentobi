@@ -372,6 +372,36 @@ bool Board::is_game_over() const
     return true;
 }
 
+bool Board::is_legal(Color c, Move mv) const
+{
+    auto& info = get_move_info(mv);
+    if (! is_piece_left(c, info.get_piece()))
+        return false;
+    bool has_attach_point = false;
+    auto i = info.begin();
+    auto end = info.end();
+    do
+    {
+        if (m_state_color[c].forbidden[*i])
+            return false;
+        if (is_attach_point(*i, c))
+            has_attach_point = true;
+    }
+    while (++i != end);
+    if (has_attach_point)
+        return true;
+    if (! is_first_piece(c))
+        return false;
+    i = info.begin();
+    do
+        if (is_colorless_starting_point(*i)
+            || (is_colored_starting_point(*i)
+                && get_starting_point_color(*i) == c))
+            return true;
+    while (++i != end);
+    return false;
+}
+
 /** Remove forbidden points from attach point lists.
     The attach point lists do not guarantee that they contain only
     non-forbidden attach points because that would be too expensive to
