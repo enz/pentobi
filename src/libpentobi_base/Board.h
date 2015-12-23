@@ -260,6 +260,22 @@ public:
         are more than two players). */
     int get_score(Color c) const;
 
+    /** Specialized version of get_score().
+        @pre get_nu_colors() == 2 */
+    int get_score_twocolor(Color c) const;
+
+    /** Specialized version of get_score().
+        @pre get_nu_players() == 4 && get_nu_colors() == 4 */
+    int get_score_multicolor(Color c) const;
+
+    /** Specialized version of get_score().
+        @pre get_nu_players() > 2 */
+    int get_score_multiplayer(Color c) const;
+
+    /** Specialized version of get_score().
+        @pre get_nu_players() == 2 */
+    int get_score_twoplayer(Color c) const;
+
     /** Get the place of a player in the game result.
         @param c The color of the player.
         @param[out] place The place of the player with that color. The place
@@ -643,35 +659,54 @@ inline Color Board::get_previous(Color c) const
 inline int Board::get_score(Color c) const
 {
     if (m_nu_colors == 2)
-    {
-        LIBBOARDGAME_ASSERT(m_nu_players == 2);
-        unsigned points0 = get_points(Color(0));
-        unsigned points1 = get_points(Color(1));
-        if (c == Color(0))
-            return points0 - points1;
-        else
-            return points1 - points0;
-    }
+        return get_score_twocolor(c);
     else if (m_nu_players == 2)
-    {
-        LIBBOARDGAME_ASSERT(m_nu_colors == 4);
-        unsigned points0 = get_points(Color(0)) + get_points(Color(2));
-        unsigned points1 = get_points(Color(1)) + get_points(Color(3));
-        if (c == Color(0) || c == Color(2))
-            return points0 - points1;
-        else
-            return points1 - points0;
-    }
+        return get_score_multicolor(c);
     else
-    {
-        int score = 0;
-        auto nu_players = static_cast<Color::IntType>(m_nu_players);
-        for (Color i : get_colors())
-            if (i != c)
-                score -= get_points(i);
-        score = get_points(c) + score / (static_cast<int>(nu_players) - 1);
-        return score;
-    }
+        return get_score_multiplayer(c);
+}
+
+inline int Board::get_score_twocolor(Color c) const
+{
+    LIBBOARDGAME_ASSERT(m_nu_colors == 2);
+    unsigned points0 = get_points(Color(0));
+    unsigned points1 = get_points(Color(1));
+    if (c == Color(0))
+        return points0 - points1;
+    else
+        return points1 - points0;
+}
+
+inline int Board::get_score_twoplayer(Color c) const
+{
+    LIBBOARDGAME_ASSERT(m_nu_players == 2);
+    if (m_nu_colors == 2)
+        return get_score_twocolor(c);
+    else
+        return get_score_multicolor(c);
+}
+
+inline int Board::get_score_multicolor(Color c) const
+{
+    LIBBOARDGAME_ASSERT(m_nu_players == 2 && m_nu_colors == 4);
+    unsigned points0 = get_points(Color(0)) + get_points(Color(2));
+    unsigned points1 = get_points(Color(1)) + get_points(Color(3));
+    if (c == Color(0) || c == Color(2))
+        return points0 - points1;
+    else
+        return points1 - points0;
+}
+
+inline int Board::get_score_multiplayer(Color c) const
+{
+    LIBBOARDGAME_ASSERT(m_nu_players > 2);
+    int score = 0;
+    auto nu_players = static_cast<Color::IntType>(m_nu_players);
+    for (Color i : get_colors())
+        if (i != c)
+            score -= get_points(i);
+    score = get_points(c) + score / (static_cast<int>(nu_players) - 1);
+    return score;
 }
 
 inline Color Board::get_second_color(Color c) const

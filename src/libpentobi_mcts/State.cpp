@@ -181,7 +181,7 @@ void State::evaluate_duo(array<Float, 6>& result)
         return;
     }
     Color c(0);
-    auto s = static_cast<Float>(m_bd.get_score(c));
+    auto s = static_cast<Float>(m_bd.get_score_twocolor(c));
     Float res;
     if (s > 0)
         res = 1;
@@ -218,7 +218,7 @@ void State::evaluate_multicolor(array<Float, 6>& result)
     }
 
     Color c(0);
-    auto s = static_cast<Float>(m_bd.get_score(c));
+    auto s = static_cast<Float>(m_bd.get_score_multicolor(c));
     Float res;
     if (s > 0)
         res = 1;
@@ -256,7 +256,7 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
-        auto s = static_cast<Float>(m_bd.get_score(c));
+        auto s = static_cast<Float>(m_bd.get_score_multiplayer(c));
         result[i] =
                 game_result[i] + get_quality_bonus(c, game_result[i], s, true);
         if (log_simulations)
@@ -390,7 +390,7 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
             break;
         if (++m_nu_passes == m_nu_colors)
             return false;
-        if (m_check_terminate_early && m_bd.get_score(to_play) < 0
+        if (m_check_terminate_early && m_bd.get_score_twoplayer(to_play) < 0
             && ! m_has_moves[m_bd.get_second_color(to_play)])
         {
             if (log_simulations)
