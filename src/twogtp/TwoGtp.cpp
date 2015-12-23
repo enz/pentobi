@@ -59,7 +59,7 @@ float TwoGtp::get_result(unsigned player_black)
     auto nu_players = m_bd.get_nu_players();
     if (nu_players == 2)
     {
-        int score = m_bd.get_score(Color(0));
+        int score = m_bd.get_score_twoplayer(Color(0));
         if (score > 0)
             result = 1;
         else if (score < 0)

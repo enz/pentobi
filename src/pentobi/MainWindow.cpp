@@ -1719,7 +1719,7 @@ void MainWindow::gameOver()
     QString info;
     if (nuColors == 2)
     {
-        int score = m_bd.get_score(Color(0));
+        int score = m_bd.get_score_twocolor(Color(0));
         if (score > 0)
             info = tr("Blue wins with %n point(s).", "", score);
         else if (score < 0)
@@ -1730,7 +1730,7 @@ void MainWindow::gameOver()
     else if (nuPlayers == 2)
     {
         LIBBOARDGAME_ASSERT(nuColors == 4);
-        int score = m_bd.get_score(Color(0));
+        int score = m_bd.get_score_multicolor(Color(0));
         if (score > 0)
             info = tr("Blue/Red wins with %n point(s).", "", score);
         else if (score < 0)

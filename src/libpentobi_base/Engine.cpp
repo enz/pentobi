@@ -77,7 +77,7 @@ void Engine::cmd_final_score(Response& response)
     }
     else
     {
-        int score = bd.get_score(Color(0));
+        int score = bd.get_score_twoplayer(Color(0));
         if (score > 0)
             response << "B+" << score;
         else if (score < 0)
