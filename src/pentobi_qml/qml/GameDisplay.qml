@@ -29,8 +29,8 @@ Item
         return Logic.findPiece(pieceModel, color)
     }
     function dropPiece() {
-        transitionsEnabled = false
         pickedPiece = null
+        transitionsEnabled = false
     }
 
     onWidthChanged: dropPiece()
@@ -158,10 +158,8 @@ Item
             var pos = mapToItem(board, width / 2, height / 2)
             if (! board.contains(Qt.point(pos.x, pos.y)))
                 dropPiece()
-            else if (legal) {
+            else if (legal)
                 play(pieceModel, board.mapToGame(pos.x, pos.y))
-                dropPiece()
-            }
         }
     }
 }

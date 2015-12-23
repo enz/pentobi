@@ -237,7 +237,6 @@ function play(pieceModel, gameCoord) {
     var wasComputerToPlay = isComputerToPlay()
     gameDisplay.transitionsEnabled = true
     gameModel.playPiece(pieceModel, gameCoord)
-    gameDisplay.transitionsEnabled = false
     // We don't continue automatic play if the human played a move for a color
     // played by the computer.
     if (! wasComputerToPlay)
