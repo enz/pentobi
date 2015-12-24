@@ -140,18 +140,12 @@ inline bool Color::operator<(const Color& c) const
 
 inline Color Color::get_next(IntType nu_colors) const
 {
-    IntType i = static_cast<IntType>(m_i + 1);
-    if (i == nu_colors)
-        return Color(0);
-    return Color(i);
+    return Color(static_cast<IntType>(m_i + 1) % nu_colors);
 }
 
 inline Color Color::get_previous(IntType nu_colors) const
 {
-    LIBBOARDGAME_ASSERT(nu_colors > 1);
-    if (m_i == 0)
-        return Color(static_cast<IntType>(nu_colors - 1));
-    return Color(static_cast<IntType>(m_i - 1));
+    return Color(static_cast<IntType>(m_i + nu_colors - 1) % nu_colors);
 }
 
 inline bool Color::is_initialized() const
