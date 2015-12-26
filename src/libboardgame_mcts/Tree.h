@@ -342,7 +342,10 @@ void Tree<N>::copy_subtree(Tree& target, const Node& target_node,
                            const Node& node, Float min_count) const
 {
     target.non_const(target_node).copy_data_from(node);
-    copy_recurse(target, target_node, node, min_count);
+    if (node.has_children())
+        copy_recurse(target, target_node, node, min_count);
+    else
+        target.non_const(target_node).unlink_children();
 }
 
 template<typename N>
