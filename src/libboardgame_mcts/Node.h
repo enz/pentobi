@@ -86,7 +86,15 @@ public:
 
     void link_children(NodeIdx first_child, unsigned short nu_children);
 
+    /** Faster version of link_children() for single-threaded parts of the
+        code. */
+    void link_children_st(NodeIdx first_child, unsigned short nu_children);
+
     void unlink_children();
+
+    /** Faster version of unlink_children() for single-threaded parts of the
+        code. */
+    void unlink_children_st();
 
     void add_value(Float v, Float weight = 1);
 
@@ -254,9 +262,28 @@ inline void Node<M, F, MT>::link_children(NodeIdx first_child,
 }
 
 template<typename M, typename F, bool MT>
+inline void Node<M, F, MT>::link_children_st(NodeIdx first_child,
+                                             unsigned short nu_children)
+{
+    LIBBOARDGAME_ASSERT(nu_children < Move::range);
+    // first_child cannot be 0 because 0 is always used for the root node
+    LIBBOARDGAME_ASSERT(first_child != 0);
+    m_first_child = first_child;
+    // Store relaxed (wouldn't even need to be atomic)
+    m_nu_children.store(nu_children, memory_order_relaxed);
+}
+
+template<typename M, typename F, bool MT>
 inline void Node<M, F, MT>::unlink_children()
 {
     m_nu_children.store(0, memory_order_release);
+}
+
+template<typename M, typename F, bool MT>
+inline void Node<M, F, MT>::unlink_children_st()
+{
+    // Store relaxed (wouldn't even need to be atomic)
+    m_nu_children.store(0, memory_order_relaxed);
 }
 
 //-----------------------------------------------------------------------------

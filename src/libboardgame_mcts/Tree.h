@@ -345,7 +345,7 @@ void Tree<N>::copy_subtree(Tree& target, const Node& target_node,
     if (node.has_children())
         copy_recurse(target, target_node, node, min_count);
     else
-        target.non_const(target_node).unlink_children();
+        target.non_const(target_node).unlink_children_st();
 }
 
 template<typename N>
@@ -365,8 +365,8 @@ void Tree<N>::copy_recurse(Tree& target, const Node& target_node,
     auto target_child = thread_storage.next;
     auto target_first_child =
         static_cast<NodeIdx>(target_child - target.m_nodes.get());
-    target.non_const(target_node).link_children(target_first_child,
-                                                nu_children);
+    target.non_const(target_node).link_children_st(target_first_child,
+                                                   nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
     // assert, GCC 4.7.2 gives the error: parse error in template argument list
@@ -377,7 +377,7 @@ void Tree<N>::copy_recurse(Tree& target, const Node& target_node,
         target_child->copy_data_from(*i);
         if (! i->has_children() || i->get_visit_count() < min_count)
         {
-            target_child->unlink_children();
+            target_child->unlink_children_st();
             continue;
         }
         copy_recurse(target, *target_child, *i, min_count);
