@@ -168,39 +168,23 @@ public:
     void swap(Tree& tree);
 
     /** Extract a subtree.
-        This operation can be lengthy and can be aborted by providing an abort
-        checker argument. If the extraction was aborted, the copied subtree is
-        a valid partial tree of the full tree that would have been extracted.
         Note that you still have to re-initialize the value of the subtree
         after the extraction because the value of the root node and the values
         of inner nodes have a different meaning.
         @pre Target tree is empty (! target.get_root().has_children())
         @param target The target tree
-        @param node The root node of the subtree.
-        @param check_abort Whether to check util::get_abort()
-        @param interval_checker An optional expensive function to check if the
-        extraction should be aborted.
-        @return @c false if the extraction was aborted. */
-    bool extract_subtree(Tree& target, const Node& node,
-                         bool check_abort = false,
-                         IntervalChecker* interval_checker = nullptr) const;
+        @param node The root node of the subtree. */
+    void extract_subtree(Tree& target, const Node& node) const;
 
     /** Copy a subtree.
-        This operation can be lengthy and can be aborted by providing an abort
-        checker argument. If the copying was aborted, the copied subtree is
-        a valid partial tree of the full tree that would have been copying.
         The caller is responsible that the trees have the same number of
         maximum nodes and that the target tree has room for the subtree.
         @param target The target tree
         @param target_node The target node
         @param node The root node of the subtree.
-        @param min_count Don't copy subtrees of nodes below this count
-        @param check_abort Whether to check util::get_abort()
-        @param interval_checker
-        @return @c false if the copying was aborted. */
-    bool copy_subtree(Tree& target, const Node& target_node, const Node& node,
-                      Float min_count = 0, bool check_abort = false,
-                      IntervalChecker* interval_checker = nullptr) const;
+        @param min_count Don't copy subtrees of nodes below this count */
+    void copy_subtree(Tree& target, const Node& target_node, const Node& node,
+                      Float min_count) const;
 
 private:
     struct ThreadStorage
@@ -212,6 +196,7 @@ private:
         Node* next;
     };
 
+
     unique_ptr<Node[]> m_nodes;
 
     unique_ptr<ThreadStorage[]> m_thread_storage;
@@ -222,7 +207,11 @@ private:
 
     size_t m_nodes_per_thread;
 
+
     bool contains(const Node& node) const;
+
+    void copy_recurse(Tree& target, const Node& target_node, const Node& node,
+                      Float min_count) const;
 
     unsigned get_thread_storage(const Node& node) const;
 
@@ -349,26 +338,20 @@ bool Tree<N>::contains(const Node& node) const
 }
 
 template<typename N>
-bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
-                           const Node& node, Float min_count,
-                           bool check_abort,
-                           IntervalChecker* interval_checker) const
+void Tree<N>::copy_subtree(Tree& target, const Node& target_node,
+                           const Node& node, Float min_count) const
+{
+    target.non_const(target_node).copy_data_from(node);
+    copy_recurse(target, target_node, node, min_count);
+}
+
+template<typename N>
+void Tree<N>::copy_recurse(Tree& target, const Node& target_node,
+                           const Node& node, Float min_count) const
 {
     LIBBOARDGAME_ASSERT(target.m_max_nodes == m_max_nodes);
     LIBBOARDGAME_ASSERT(target.m_nu_threads == m_nu_threads);
     LIBBOARDGAME_ASSERT(contains(node));
-    auto& target_node_non_const = target.non_const(target_node);
-    target_node_non_const.copy_data_from(node);
-    bool abort =
-        (check_abort && get_abort())
-        || (interval_checker && (*interval_checker)());
-    if (! node.has_children()
-            || (node.get_visit_count() < min_count && &node != &get_root())
-            || abort)
-    {
-        target_node_non_const.unlink_children();
-        return ! abort;
-    }
     auto nu_children = node.get_nu_children();
     auto& first_child = get_node(node.get_first_child());
     // Create target children in the equivalent thread storage as in source.
@@ -379,33 +362,33 @@ bool Tree<N>::copy_subtree(Tree& target, const Node& target_node,
     auto target_child = thread_storage.next;
     auto target_first_child =
         static_cast<NodeIdx>(target_child - target.m_nodes.get());
-    target_node_non_const.link_children(target_first_child, nu_children);
+    target.non_const(target_node).link_children(target_first_child,
+                                                nu_children);
     thread_storage.next += nu_children;
     // Without the extra () around thread_storage.next in the following
     // assert, GCC 4.7.2 gives the error: parse error in template argument list
     LIBBOARDGAME_ASSERT((thread_storage.next) < thread_storage.end);
-    abort = false;
     auto end = &first_child + node.get_nu_children();
     for (auto i = &first_child; i != end; ++i, ++target_child)
-        if (! copy_subtree(target, *target_child, *i, min_count,
-                           check_abort, interval_checker))
-            // Finish this loop even on abort to make sure the children
-            // node data is copied
-            abort = true;
-    return ! abort;
+    {
+        target_child->copy_data_from(*i);
+        if (! i->has_children() || i->get_visit_count() < min_count)
+        {
+            target_child->unlink_children();
+            continue;
+        }
+        copy_recurse(target, *target_child, *i, min_count);
+    }
 }
 
 template<typename N>
-bool Tree<N>::extract_subtree(Tree& target, const Node& node,
-                              bool check_abort,
-                              IntervalChecker* interval_checker) const
+void Tree<N>::extract_subtree(Tree& target, const Node& node) const
 {
     LIBBOARDGAME_ASSERT(contains(node));
     LIBBOARDGAME_ASSERT(&target != this);
     LIBBOARDGAME_ASSERT(target.m_max_nodes == m_max_nodes);
     LIBBOARDGAME_ASSERT(! target.get_root().has_children());
-    return copy_subtree(target, target.m_nodes[0], node, 0, check_abort,
-                        interval_checker);
+    copy_subtree(target, target.m_nodes[0], node, 0);
 }
 
 template<typename N>

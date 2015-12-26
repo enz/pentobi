@@ -320,19 +320,10 @@ public:
         @param min_simulations
         @param max_time Maximum search time. Only used if max_count is zero
         @param time_source Time source for time measurement
-        @param always_search Always call the search, even if extracting the
-        subtree to reuse was aborted due to max_time or util::get_abort(). If
-        true, this will call a search with the partially extracted subtree,
-        and the search will return immediately (because it also checks max_time
-        and get_abort()). This flag should be true for regular searches because
-        even a partially extracted subtree can be used for move generation, and
-        false for pondering searches because here we don't need a search
-        result but want to keep the full tree for reuse in a future search.
         @return @c false if no move could be generated because the position is
         a terminal position. */
     bool search(Move& mv, Float max_count, size_t min_simulations,
-                double max_time, TimeSource& time_source,
-                bool always_search = true);
+                double max_time, TimeSource& time_source);
 
     const Tree& get_tree() const;
 
@@ -601,8 +592,8 @@ private:
 
     void play_in_tree(ThreadState& thread_state);
 
-    bool prune(TimeSource& time_source, double time, double max_time,
-               Float prune_min_count, Float& new_prune_min_count);
+    bool prune(TimeSource& time_source, double time, Float prune_min_count,
+               Float& new_prune_min_count);
 
     void search_loop(ThreadState& thread_state);
 
@@ -1137,24 +1128,16 @@ string SearchBase<S, M, R>::get_info_ext() const
 
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
-                            double max_time, Float prune_min_count,
-                            Float& new_prune_min_count)
+                                Float prune_min_count,
+                                Float& new_prune_min_count)
 {
 #if LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(time);
 #endif
     Timer timer(time_source);
-    TimeIntervalChecker interval_checker(time_source, max_time);
-    if (m_deterministic)
-        interval_checker.set_deterministic(1000000);
     m_tmp_tree.clear(m_tree.get_root().get_value());
-    if (! m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(),
-                              m_tree.get_root(), prune_min_count, true,
-                              &interval_checker))
-    {
-        LIBBOARDGAME_LOG("Pruning aborted");
-        return false;
-    }
+    m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(), m_tree.get_root(),
+                        prune_min_count);
     int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
     LIBBOARDGAME_LOG("Pruning MinCnt: ", prune_min_count, ", AtTm: ", time,
                      ", Nds: ", m_tmp_tree.get_nu_nodes(), " (", percent,
@@ -1201,7 +1184,7 @@ bool SearchBase<S, M, R>::estimate_reused_root_val(Tree& tree,
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                                  size_t min_simulations, double max_time,
-                                 TimeSource& time_source, bool always_search)
+                                 TimeSource& time_source)
 {
     if (m_nu_threads != m_threads.size())
         create_threads();
@@ -1247,12 +1230,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
             auto node = find_node(m_tree, m_followup_sequence);
             if (node)
             {
-                TimeIntervalChecker interval_checker(time_source, max_time);
-                if (m_deterministic)
-                    interval_checker.set_deterministic(1000000);
-                bool aborted =
-                    ! m_tree.extract_subtree(m_tmp_tree, *node, true,
-                                             &interval_checker);
+                m_tree.extract_subtree(m_tmp_tree, *node);
                 auto& tmp_tree_root = m_tmp_tree.get_root();
                 if (! is_same)
                 {
@@ -1261,8 +1239,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
                                                  value, count))
                         m_root_val[m_player].add(value, count);
                 }
-                if (aborted && ! always_search)
-                    return false;
                 size_t tmp_tree_nodes = m_tmp_tree.get_nu_nodes();
                 if (tree_nodes > 1 && tmp_tree_nodes > 1)
                 {
@@ -1353,12 +1329,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
             if (! is_out_of_mem)
                 break;
             double time = m_timer();
-            if (! prune(time_source, time, max_time - time, prune_min_count,
-                        prune_min_count))
-            {
-                LIBBOARDGAME_LOG("Aborting search because pruning failed.");
-                break;
-            }
+            prune(time_source, time, prune_min_count, prune_min_count);
         }
 
     m_last_time = m_timer();
