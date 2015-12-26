@@ -1,9 +1,10 @@
 if(PENTOBI_BUILD_GUI AND NOT WIN32)
 
 # Create bitmap icons from SVG icons using the helper program src/convert
+# There is no 64x64 app icon yet, so we simply scale up pentobi-32 with --hdpi
 add_custom_target(
-  pentobi.xpm ALL
-  COMMAND convert ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-32.svg pentobi.xpm
+  pentobi-64.png ALL
+  COMMAND convert --hdpi ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-32.svg pentobi-64.png
   DEPENDS ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-32.svg
   )
 add_custom_target(
@@ -19,8 +20,6 @@ add_custom_target(
 
 configure_file(pentobi.desktop.in pentobi.desktop @ONLY)
 configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.xpm
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pixmaps)
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps)
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-16.png
@@ -29,6 +28,9 @@ install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-16.png
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-32.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps
   RENAME pentobi.png)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-64.png
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps
+    RENAME pentobi.png)
 install(FILES ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi.svg
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf.png
@@ -44,5 +46,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/thumbnailers)
 install(FILES pentobi-mime.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages)
+install(FILES pentobi.appdata.xml
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/appdata)
 
 endif(PENTOBI_BUILD_GUI AND NOT WIN32)
