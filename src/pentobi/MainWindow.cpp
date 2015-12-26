@@ -2457,18 +2457,14 @@ void MainWindow::play()
     if (! isComputerToPlay())
     {
         m_computerColors.fill(false);
-        if (m_bd.get_nu_players() == 2 && m_bd.get_nu_colors() == 4)
-        {
-            if (m_currentColor == Color(0) || m_currentColor == Color(2))
-                m_computerColors[Color(0)] = m_computerColors[Color(2)] = true;
-            else
-                m_computerColors[Color(1)] = m_computerColors[Color(3)] = true;
-        }
-        else if (m_bd.get_variant() == Variant::classic_3
-                 && m_currentColor.to_int() == 3)
+        if (m_bd.get_variant() == Variant::classic_3
+                && m_currentColor == Color(3))
             m_computerColors[Color(m_bd.get_alt_player())] = true;
         else
+        {
             m_computerColors[m_currentColor] = true;
+            m_computerColors[m_bd.get_second_color(m_currentColor)] = true;
+        }
         QSettings settings;
         settings.setValue("computer_color_none", false);
     }
