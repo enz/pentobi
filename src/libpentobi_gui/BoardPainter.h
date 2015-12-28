@@ -49,13 +49,14 @@ public:
 
     void setCoordinateColor(const QColor& color);
 
+    /** Paint the board.
+        This function must be called before painting any pieces because it
+        initializes some members that are used by the piece painting
+        functions. */
     void paintEmptyBoard(QPainter& painter, unsigned width, unsigned height,
                          Variant variant, const Geometry& geo);
 
     /** Paint the pieces and markup.
-        This function must only be called after paintEmptyBoard() because it
-        uses the arguments from the paintEmptyBoard() function to determine
-        some board properties.
         The pieceId parameter only needs to be initialized in game variant
         Nexos and is needed to paint the junctions between segment. Only
         segment points of pieceId are used (point type 1 or 2) and must be 0 if
@@ -68,9 +69,7 @@ public:
 
     /** Paint the selected piece.
         Paints the selected piece either transparent (if not legal) or opaque
-        (if legal). This function must only be called after paintEmptyBoard()
-        because it uses the arguments from the paintEmptyBoard() function to
-        determine some board properties. */
+        (if legal). */
     void paintSelectedPiece(QPainter& painter, Color c,
                             const MovePoints& points, bool isLegal);
 
@@ -119,7 +118,7 @@ private:
     StartingPoints m_startingPoints;
 
 
-    void paintCoordinates(QPainter& painter, bool isTrigon);
+    void paintCoordinates(QPainter& painter);
 
     void paintJunction(QPainter& painter, Variant variant,
                        const Grid<PointState>& pointState,

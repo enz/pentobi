@@ -52,7 +52,7 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
         return CoordPoint(x, y);
 }
 
-void BoardPainter::paintCoordinates(QPainter& painter, bool isTrigon)
+void BoardPainter::paintCoordinates(QPainter& painter)
 {
     painter.setPen(m_coordinateColor);
     for (int x = 0; x < m_width; ++x)
@@ -76,7 +76,7 @@ void BoardPainter::paintCoordinates(QPainter& painter, bool isTrigon)
         label.setNum(y + 1);
         qreal left;
         qreal right;
-        if (isTrigon)
+        if (m_isTrigon)
         {
             left = -1.5 * m_fieldWidth;
             right = (m_width + 0.5) * m_fieldWidth;
@@ -144,7 +144,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     painter.save();
     painter.translate(m_boardOffset);
     if (m_coordinates)
-        paintCoordinates(painter, m_isTrigon);
+        paintCoordinates(painter);
     m_startingPoints.init(variant, *m_geo);
     if (m_isNexos)
         painter.fillRect(QRectF(m_fieldWidth / 4, m_fieldHeight / 4,
@@ -325,9 +325,6 @@ void BoardPainter::paintLabels(QPainter& painter,
                                const Grid<PointState>& pointState,
                                Variant variant, const Grid<QString>& labels)
 {
-    bool isTrigon = (variant == Variant::trigon
-                     || variant == Variant::trigon_2
-                     || variant == Variant::trigon_3);
     for (Point p : *m_geo)
         if (! labels[p].isEmpty())
         {
@@ -336,7 +333,7 @@ void BoardPainter::paintLabels(QPainter& painter,
             qreal y = m_geo->get_y(p) * m_fieldHeight;
             qreal width = m_fieldWidth;
             qreal height = m_fieldHeight;
-            if (isTrigon)
+            if (m_isTrigon)
             {
                 bool isUpward = (m_geo->get_point_type(p) == 0);
                 if (isUpward)
@@ -351,9 +348,6 @@ void BoardPainter::paintMarks(QPainter& painter,
                               const Grid<PointState>& pointState,
                               Variant variant, const Grid<int>& marks)
 {
-    bool isTrigon = (variant == Variant::trigon
-                     || variant == Variant::trigon_2
-                     || variant == Variant::trigon_3);
     for (Point p : *m_geo)
         if (marks[p] & (dot | circle))
         {
@@ -362,7 +356,7 @@ void BoardPainter::paintMarks(QPainter& painter,
             qreal y = (static_cast<float>(m_geo->get_y(p)) + 0.5f)
                     * m_fieldHeight;
             qreal size;
-            if (isTrigon)
+            if (m_isTrigon)
             {
                 bool isUpward = (m_geo->get_point_type(p) == 0);
                 if (isUpward)
