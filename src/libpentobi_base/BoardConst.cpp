@@ -779,7 +779,7 @@ Move BoardConst::from_string(const string& s) const
             auto point_type = m_geo.get_point_type(p);
             if (point_type != 1 && point_type != 2)
                 // Silently discard points that are not line segments, such
-                // files were written by some (unreleased) versions od Pentobi.
+                // files were written by some (unreleased) versions of Pentobi.
                 continue;
         }
         points.push_back(p);
