@@ -253,7 +253,6 @@ Rating Player::get_rating(Variant variant, unsigned level)
     switch (get_board_type(variant))
     {
     case BoardType::classic:
-    case BoardType::nexos: // rating of Nexos not yet measured, use classic
         {
             // Anchor 1000, scale 0.63
             static float elo[Player::max_supported_level] =
@@ -271,6 +270,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
         break;
     case BoardType::trigon:
     case BoardType::trigon_3:
+    case BoardType::nexos: // rating of Nexos not yet measured
         {
             // Anchor 1000, scale 0.60
             static float elo[Player::max_supported_level] =
