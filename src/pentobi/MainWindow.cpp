@@ -1108,7 +1108,7 @@ void MainWindow::createActions()
     setIcon(m_actionUndo, "pentobi-undo");
     connect(m_actionUndo, SIGNAL(triggered()), SLOT(undo()));
 
-    m_actionVariantClassic2 = createAction(tr("&Classic (2 Players)"));
+    m_actionVariantClassic2 = createAction(tr("Classic (&2 Players)"));
     m_actionVariantClassic2->setActionGroup(groupVariant);
     m_actionVariantClassic2->setCheckable(true);
     connect(m_actionVariantClassic2, SIGNAL(triggered(bool)),
@@ -1138,31 +1138,31 @@ void MainWindow::createActions()
     connect(m_actionVariantJunior, SIGNAL(triggered(bool)),
             SLOT(variantJunior(bool)));
 
-    m_actionVariantNexos2 = createAction(tr("&Nexos (2 Players)"));
+    m_actionVariantNexos2 = createAction(tr("Nexos (&2 Players)"));
     m_actionVariantNexos2->setActionGroup(groupVariant);
     m_actionVariantNexos2->setCheckable(true);
     connect(m_actionVariantNexos2, SIGNAL(triggered(bool)),
             SLOT(variantNexos2(bool)));
 
-    m_actionVariantNexos = createAction(tr("Ne&xos (4 Players)"));
+    m_actionVariantNexos = createAction(tr("Nexos (&4 Players)"));
     m_actionVariantNexos->setActionGroup(groupVariant);
     m_actionVariantNexos->setCheckable(true);
     connect(m_actionVariantNexos, SIGNAL(triggered(bool)),
             SLOT(variantNexos(bool)));
 
-    m_actionVariantTrigon2 = createAction(tr("&Trigon (2 Players)"));
+    m_actionVariantTrigon2 = createAction(tr("Trigon (&2 Players)"));
     m_actionVariantTrigon2->setActionGroup(groupVariant);
     m_actionVariantTrigon2->setCheckable(true);
     connect(m_actionVariantTrigon2, SIGNAL(triggered(bool)),
             SLOT(variantTrigon2(bool)));
 
-    m_actionVariantTrigon3 = createAction(tr("Tri&gon (3 Players)"));
+    m_actionVariantTrigon3 = createAction(tr("Trigon (&3 Players)"));
     m_actionVariantTrigon3->setActionGroup(groupVariant);
     m_actionVariantTrigon3->setCheckable(true);
     connect(m_actionVariantTrigon3, SIGNAL(triggered(bool)),
             SLOT(variantTrigon3(bool)));
 
-    m_actionVariantTrigon = createAction(tr("Trig&on (4 Players)"));
+    m_actionVariantTrigon = createAction(tr("Trigon (&4 Players)"));
     m_actionVariantTrigon->setActionGroup(groupVariant);
     m_actionVariantTrigon->setCheckable(true);
     connect(m_actionVariantTrigon, SIGNAL(triggered(bool)),
@@ -1238,16 +1238,19 @@ void MainWindow::createMenu()
     menuGame->addAction(m_actionRatedGame);
     menuGame->addSeparator();
     m_menuVariant = menuGame->addMenu(tr("Game &Variant"));
-    m_menuVariant->addAction(m_actionVariantClassic2);
-    m_menuVariant->addAction(m_actionVariantClassic3);
-    m_menuVariant->addAction(m_actionVariantClassic);
+    auto menuClassic = m_menuVariant->addMenu(tr("&Classic"));
+    menuClassic->addAction(m_actionVariantClassic2);
+    menuClassic->addAction(m_actionVariantClassic3);
+    menuClassic->addAction(m_actionVariantClassic);
     m_menuVariant->addAction(m_actionVariantDuo);
     m_menuVariant->addAction(m_actionVariantJunior);
-    m_menuVariant->addAction(m_actionVariantTrigon2);
-    m_menuVariant->addAction(m_actionVariantTrigon3);
-    m_menuVariant->addAction(m_actionVariantTrigon);
-    m_menuVariant->addAction(m_actionVariantNexos2);
-    m_menuVariant->addAction(m_actionVariantNexos);
+    auto menuTrigon = m_menuVariant->addMenu(tr("&Trigon"));
+    menuTrigon->addAction(m_actionVariantTrigon2);
+    menuTrigon->addAction(m_actionVariantTrigon3);
+    menuTrigon->addAction(m_actionVariantTrigon);
+    auto menuNexos = m_menuVariant->addMenu(tr("&Nexos"));
+    menuNexos->addAction(m_actionVariantNexos2);
+    menuNexos->addAction(m_actionVariantNexos);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
