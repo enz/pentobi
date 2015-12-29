@@ -1,5 +1,7 @@
-Version 10.UNKNOWN (master)
-===========================
+Version 11.0 (29 Dec 2015)
+==========================
+
+General:
 
 * Slightly increased playing strength, mainly in Trigon.
 * The compilation requires now at least Qt 5.1 and GCC 4.9 or MSVC 2015.
@@ -17,8 +19,18 @@ Desktop version:
 * Added an application metadata file on Linux according to the AppStream
   specification from freedesktop.org. Added a 64x64 app icon but no
   longer an xpm icon (Debian AppStream Guidelines).
-* Bugfix: message dialog about discarding unsaved current game was not
-  shown if a file was loaded by clicking on a game in the rating dialog.
+
+Bug fixes desktop version:
+
+* Message dialog about discarding unsaved current game was not shown if
+  a file was loaded by clicking on a game in the rating dialog.
+* Last move marking did not work anymore after after interrupting a
+  computer move generation and then using Undo Move.
+* Autosaving unfinished games did not work if game was finished
+  first but then made unfinished again with Undo Move.
+* Selecting pieces in setup mode did no longer work if no legal moves
+  were left, even if setup mode is also intended to be used for
+  setting up illegal positions (e.g. for Blokus art).
 
 Android version:
 
@@ -28,20 +40,6 @@ Android version:
   to play is always on top.
 * Action buttons and menu items are now only shown if the action is
   enabled in the current position.
-
-
-Version 10.1.UNKNOWN (v10-fixes)
-================================
-
-Desktop version:
-
-* Last move marking did not work anymore after after interrupting a
-  computer move generation and then using Undo Move.
-* Autosaving unfinished games did not work if game was finished
-  first but then made unfinished again with Undo Move.
-* Selecting pieces in setup mode did no longer work if no legal moves
-  were left, even if setup mode is also intended to be used for
-  setting up illegal positions (e.g. for Blokus art).
 
 
 Version 10.1 (15 Oct 2015)
