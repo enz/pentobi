@@ -28,29 +28,29 @@ namespace {
 
 // Rationale for choosing the number of simulations:
 // * The number at level 1 is very small in Classic/Duo to avoid that
-//   level 1 is too strong for absolute beginners (searches with such a
+//   level 1 is too strong for absolute beginners. (Searches with such a
 //   small number of simulations still produce reasonable moves because
 //   of the prior initialization of node values.) In Trigon, it starts
 //   with a higher number because the playing strength is weaker there.
 // * The number at the highest level is chosen such that the average
-//   time per game and player is 2 min in Duo, 4 min in Classic, 5 min
-//   in Trigon on an Intel i3-4130.
+//   time per game and player is 120s in Duo, 240s in Classic, 300s
+//   in Trigon, 330s in Nexos on an Intel i3-4130.
 // * The numbers for other levels are chosen such that they roughly
 //   correspond to equal Elo differences in self-play experiments.
 // * [Note that the numbers will be multiplied with a weight factor in
 //    Player::genmove() that depends on the move number]
 
 static const float counts_classic[Player::max_supported_level] =
-    { 3, 24, 87, 213, 667, 1989, 12760, 118982, 1634992 };
+    { 3, 24, 87, 213, 667, 1989, 13688, 130368, 1829033 };
 
 static const float counts_duo[Player::max_supported_level] =
-    { 3, 17, 44, 123, 426, 1672, 7726, 62240, 6309487 };
+    { 3, 17, 44, 123, 426, 1672, 8163, 67058, 6929504 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 433, 727, 1501, 2912, 7395, 26666, 76824, 471249 };
+    { 228, 433, 727, 1501, 2912, 7395, 27182, 79074, 489723 };
 
 static const float counts_nexos[Player::max_supported_level] =
-    { 3, 17, 71, 318, 1570, 7395, 26666, 76824, 471249 };
+    { 100, 470, 800, 1650, 3300, 8000, 30000, 87000, 533290 };
 
 } // namespace
 
