@@ -133,7 +133,6 @@ function hideComputerColorDialog()
 }
 
 function init() {
-    gameDisplay.busyIndicatorRunning = true
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
         initComputerColors()
