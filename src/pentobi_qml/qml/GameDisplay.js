@@ -53,12 +53,8 @@ function destroyColorPieces(pieces) {
     if (pieces === undefined)
         return
     for (var i = 0; i < pieces.length; ++i) {
-        // Not sure why setting visible to false is necessary before destroy,
-        // but otherwise some on-board pieces sometimes don't disappear
-        // (happened with Qt 5.5/Linux when loading a Trigon game with pieces
-        // on board and then switching to game variant Classic).
         pieces[i].visible = false
-        pieces[i].destroy()
+        pieces[i].destroy(1000)
     }
 }
 

@@ -160,11 +160,9 @@ function initComputerColors() {
 function initGameVariant(gameVariant) {
     cancelGenMove()
     hideComputerColorDialog()
-    gameDisplay.busyIndicatorRunning = true
     gameDisplay.destroyPieces()
     gameModel.initGameVariant(gameVariant)
     gameDisplay.createPieces()
-    gameDisplay.busyIndicatorRunning = false
     gameDisplay.showToPlay()
 }
 
