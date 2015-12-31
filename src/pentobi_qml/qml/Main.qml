@@ -210,28 +210,6 @@ ApplicationWindow {
         interval: 400
         onTriggered: Logic.checkComputerMove()
     }
-    // Call a function that might block the GUI thread (e.g. initializing or
-    // changing the game variant and the creation of the new pieces takes
-    // several seconds on a ~1GHz ARM CPU). The call() function sets the
-    // busy cursor to true and then calls the actual function with a small
-    // delay to ensure that the running busy cursor is visible first.
-    Timer {
-        id: callDelayTimer
-
-        property var _func
-
-        function call(func) {
-            gameDisplay.busyIndicatorRunning = true
-            _func = func
-            start()
-        }
-
-        interval: 10
-        onTriggered: {
-            gameDisplay.busyIndicatorRunning = false
-            _func()
-        }
-    }
     Connections {
         target: Qt.application
         onStateChanged:
