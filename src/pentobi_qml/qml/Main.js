@@ -13,10 +13,8 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
                      function() { changeGameVariant(gameVariant, false) })
         return
     }
-    callDelayTimer.call(function() {
-        initGameVariant(gameVariant)
-        initComputerColors()
-    })
+    initGameVariant(gameVariant)
+    initComputerColors()
 }
 
 function checkComputerMove() {
@@ -135,17 +133,16 @@ function hideComputerColorDialog()
 }
 
 function init() {
-    callDelayTimer.call(function() {
-        if (! gameModel.loadAutoSave()) {
-            gameDisplay.createPieces()
-            initComputerColors()
-        }
-        else {
-            gameDisplay.createPieces()
-            if (! computerPlaysAll())
-                checkComputerMove()
-        }
-    })
+    if (! gameModel.loadAutoSave()) {
+        gameDisplay.createPieces()
+        initComputerColors()
+    }
+    else {
+        gameDisplay.createPieces()
+        if (! computerPlaysAll())
+            checkComputerMove()
+    }
+    gameDisplay.busyIndicatorRunning = false
 }
 
 function initComputerColors() {
