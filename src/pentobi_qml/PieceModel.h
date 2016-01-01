@@ -27,6 +27,8 @@ class PieceModel
 
     Q_PROPERTY(int color READ color CONSTANT)
     Q_PROPERTY(QVariantList elements READ elements CONSTANT)
+    Q_PROPERTY(QVariantList junctions READ junctions CONSTANT)
+    Q_PROPERTY(QVariantList junctionType READ junctionType CONSTANT)
     Q_PROPERTY(QPointF center READ center CONSTANT)
     Q_PROPERTY(QPointF labelPos READ labelPos CONSTANT)
     Q_PROPERTY(QString state READ state WRITE setState NOTIFY stateChanged)
@@ -44,6 +46,15 @@ public:
 
     /** List of QPointF instances with coordinates of piece elements. */
     QVariantList elements();
+
+    /** List of QPointF instances with coordinates of piece junctions.
+        Only used in Nexos. */
+    QVariantList junctions();
+
+    /** List of integers determining the type of junction in junctions().
+        Only used in Nexos. See implementation for the meaning of the
+        numbers. */
+    QVariantList junctionType();
 
     QPointF center() const;
 
@@ -100,6 +111,10 @@ private:
     QPointF m_labelPos;
 
     QVariantList m_elements;
+
+    QVariantList m_junctions;
+
+    QVariantList m_junctionType;
 
     QString m_state;
 };

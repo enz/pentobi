@@ -32,7 +32,12 @@ class PlayerModel
                NOTIFY levelTrigon2Changed)
     Q_PROPERTY(unsigned levelTrigon3 MEMBER m_levelTrigon3
                NOTIFY levelTrigon3Changed)
-    Q_PROPERTY(unsigned levelJunior MEMBER m_levelJunior NOTIFY levelJuniorChanged)
+    Q_PROPERTY(unsigned levelJunior MEMBER m_levelJunior
+               NOTIFY levelJuniorChanged)
+    Q_PROPERTY(unsigned levelNexos MEMBER m_levelNexos NOTIFY
+               levelNexosChanged)
+    Q_PROPERTY(unsigned levelNexos2 MEMBER m_levelNexos2 NOTIFY
+               levelNexos2Changed)
     Q_PROPERTY(bool isGenMoveRunning MEMBER m_isGenMoveRunning
                NOTIFY isGenMoveRunningChanged)
 
@@ -68,6 +73,10 @@ signals:
 
     void levelJuniorChanged(unsigned);
 
+    void levelNexosChanged(unsigned);
+
+    void levelNexos2Changed(unsigned);
+
     void isGenMoveRunningChanged(bool);
 
     void moveGenerated(int move);
@@ -100,11 +109,16 @@ private:
 
     unsigned m_levelJunior;
 
+    unsigned m_levelNexos;
+
+    unsigned m_levelNexos2;
+
     unsigned m_genMoveId = 0;
 
     Player m_player;
 
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
+
 
     GenMoveResult asyncGenMove(GameModel* gm, unsigned genMoveId);
 

@@ -68,13 +68,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList1
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList0.height :
                        pieceList0.height + pieceList2.height
             }
             PropertyChanges {
                 target: pieceList2
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList0.height + pieceList1.height :
                        pieceList0.height
             }
@@ -93,13 +95,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList2
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList1.height :
                        pieceList1.height + pieceList3.height
             }
             PropertyChanges {
                 target: pieceList3
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList1.height + pieceList2.height :
                        pieceList1.height
             }
@@ -118,13 +122,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList3
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList2.height :
                        pieceList2.height + pieceList0.height
             }
             PropertyChanges {
                 target: pieceList0
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList2.height + pieceList3.height :
                        pieceList2.height
             }
@@ -143,13 +149,15 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList0
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList3.height :
                        pieceList3.height + pieceList1.height
             }
             PropertyChanges {
                 target: pieceList1
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2" ?
+                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
+                   && gameVariant != "nexos_2" ?
                        pieceList3.height + pieceList0.height :
                        pieceList3.height
             }

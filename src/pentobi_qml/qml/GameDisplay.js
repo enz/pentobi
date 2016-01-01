@@ -36,8 +36,13 @@ function createColorPieces(component, pieceModels) {
 }
 
 function createPieces() {
-    var file = (gameModel.gameVariant.indexOf("trigon") >= 0) ?
-                "PieceTrigon.qml" : "PieceClassic.qml"
+    var file
+    if (gameModel.gameVariant.indexOf("trigon") >= 0)
+        file = "PieceTrigon.qml"
+    else if (gameModel.gameVariant.indexOf("nexos") >= 0)
+        file = "PieceNexos.qml"
+    else
+        file = "PieceClassic.qml"
     var component = Qt.createComponent(file)
     if (component.status !== Component.Ready)
         throw "Could not create component " + file

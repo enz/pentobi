@@ -11,6 +11,8 @@
 #include "libpentobi_base/TrigonTransform.h"
 
 using namespace std;
+using libboardgame_base::ArrayList;
+using libboardgame_base::CoordPoint;
 using libboardgame_base::TransfIdentity;
 using libboardgame_base::TransfRectRot90;
 using libboardgame_base::TransfRectRot180;
@@ -20,6 +22,8 @@ using libboardgame_base::TransfRectRot90Refl;
 using libboardgame_base::TransfRectRot180Refl;
 using libboardgame_base::TransfRectRot270Refl;
 using libpentobi_base::BoardType;
+using libpentobi_base::PieceInfo;
+using libpentobi_base::PieceSet;
 using libpentobi_base::TransfTrigonIdentity;
 using libpentobi_base::TransfTrigonRefl;
 using libpentobi_base::TransfTrigonReflRot60;
@@ -43,11 +47,70 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
       m_color(c),
       m_piece(piece)
 {
+    auto& geo = bd.get_geometry();
+    bool isNexos = (bd.get_board_const().get_piece_set() == PieceSet::nexos);
     auto& info = bd.get_piece_info(piece);
-    for (auto& p : info.get_points())
-        m_elements.append(QVariant(QPointF(p.x, p.y)));
+    auto& points = info.get_points();
+    for (auto& p : points)
+    {
+        if (isNexos && geo.get_point_type(p) == 0)
+            continue;
+        m_elements.append(QPointF(p.x, p.y));
+    }
+    if (isNexos)
+    {
+        ArrayList<CoordPoint, 2 * PieceInfo::max_scored_size> candidates;
+        for (auto& p : points)
+        {
+            auto pointType = geo.get_point_type(p);
+            if (pointType == 1)
+            {
+                candidates.include(CoordPoint(p.x - 1, p. y));
+                candidates.include(CoordPoint(p.x + 1, p. y));
+            }
+            else if (pointType == 2)
+            {
+                candidates.include(CoordPoint(p.x, p. y - 1));
+                candidates.include(CoordPoint(p.x, p. y + 1));
+            }
+        }
+        for (auto& p : candidates)
+        {
+            bool hasLeft = points.contains(CoordPoint(p.x - 1, p. y));
+            bool hasRight = points.contains(CoordPoint(p.x + 1, p. y));
+            bool hasUp = points.contains(CoordPoint(p.x, p. y - 1));
+            bool hasDown = points.contains(CoordPoint(p.x, p. y + 1));
+            int junctionType;
+            if (hasLeft && hasRight && hasUp && hasDown)
+                junctionType = 0;
+            else if (hasRight && hasUp && hasDown)
+                junctionType = 1;
+            else if (hasLeft && hasUp && hasDown)
+                junctionType = 2;
+            else if (hasLeft && hasRight && hasDown)
+                junctionType = 3;
+            else if (hasLeft && hasRight && hasUp)
+                junctionType = 4;
+            else if (hasLeft && hasRight)
+                junctionType = 5;
+            else if (hasUp && hasDown)
+                junctionType = 6;
+            else if (hasLeft && hasUp)
+                junctionType = 7;
+            else if (hasLeft && hasDown)
+                junctionType = 8;
+            else if (hasRight && hasUp)
+                junctionType = 9;
+            else if (hasRight && hasDown)
+                junctionType = 10;
+            else
+                continue;
+            m_junctions.append(QPointF(p.x, p.y));
+            m_junctionType.append(junctionType);
+        }
+    }
     bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
-    m_center = findCenter(bd, info.get_points(), isOriginDownward);
+    m_center = findCenter(bd, points, isOriginDownward);
     m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);
 }
 
@@ -132,15 +195,21 @@ const Transform* PieceModel::getTransform(QString state) const
 QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
                                bool isOriginDownward)
 {
-    auto boardType = bd.get_board_type();
+    auto pieceSet = bd.get_board_const().get_piece_set();
+    bool isTrigon = (pieceSet == PieceSet::trigon);
+    bool isNexos = (pieceSet == PieceSet::nexos);
     auto& geo = bd.get_geometry();
     qreal sumX = 0;
     qreal sumY = 0;
+    qreal n = 0;
     for (auto& p : points)
     {
+        if (isNexos && geo.get_point_type(p.x, p.y) == 0)
+            continue;
+        ++n;
         qreal centerX = p.x + 0.5;
         qreal centerY;
-        if (boardType == BoardType::trigon || boardType == BoardType::trigon_3)
+        if (isTrigon)
         {
             auto pointType = geo.get_point_type(p.x, p.y);
             bool isDownward = (pointType == (isOriginDownward ? 0 : 1));
@@ -154,12 +223,22 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
         sumX += centerX;
         sumY += centerY;
     }
-    return QPointF(sumX / points.size(), sumY / points.size());
+    return QPointF(sumX / n, sumY / n);
 }
 
 bool PieceModel::isPlayed() const
 {
     return m_isPlayed;
+}
+
+QVariantList PieceModel::junctions()
+{
+    return m_junctions;
+}
+
+QVariantList PieceModel::junctionType()
+{
+    return m_junctionType;
 }
 
 QPointF PieceModel::labelPos() const

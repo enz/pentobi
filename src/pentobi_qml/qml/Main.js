@@ -56,7 +56,8 @@ function computerPlay() {
         else
         {
             var isMultiColor =
-                    (variant == "classic_2" || variant == "trigon_2")
+                    (variant == "classic_2" || variant == "trigon_2"
+                     || variant == "nexos_2")
             switch (gameModel.toPlay) {
             case 0:
                 computerPlays0 = true
@@ -95,6 +96,7 @@ function computerPlaysAll() {
     case "junior":
     case "classic_2":
     case "trigon_2":
+    case "nexos_2":
         return computerPlays0 && computerPlays1
     case "trigon_3":
         return computerPlays0 && computerPlays1 && computerPlays2
@@ -152,7 +154,8 @@ function initComputerColors() {
     computerPlays2 = true
     computerPlays3 = true
     if (gameModel.gameVariant == "classic_2"
-            || gameModel.gameVariant == "trigon_2")
+            || gameModel.gameVariant == "trigon_2"
+            || gameModel.gameVariant == "nexos_2")
         computerPlays2 = false
 }
 
@@ -281,6 +284,7 @@ function showGameOver() {
         break
     case "classic_2":
     case "trigon_2":
+    case "nexos_2":
         points0 = gameModel.points0 + gameModel.points2
         points1 = gameModel.points1 + gameModel.points3
         if (points0 > points1)

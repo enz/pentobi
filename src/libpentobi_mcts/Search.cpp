@@ -110,6 +110,9 @@ void Search::set_default_param(Variant variant)
     case Variant::trigon:
     case Variant::trigon_2:
     case Variant::trigon_3:
+        set_bias_term_constant(0.07f);
+        set_rave_parent_max(50000);
+        break;
     case Variant::nexos:
     case Variant::nexos_2:
         set_bias_term_constant(0.07f);

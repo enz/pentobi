@@ -6,6 +6,7 @@
         <file>qml/Button.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
         <file>qml/GameDisplay.qml</file>
+        <file>qml/LineSegment.qml</file>
         <file>qml/Main.qml</file>
         <file>qml/MenuComputer.qml</file>
         <file>qml/MenuEdit.qml</file>
@@ -19,6 +20,7 @@
         <file>qml/PieceFlipAnimation.qml</file>
         <file>qml/PieceList.qml</file>
         <file>qml/PieceManipulator.qml</file>
+        <file>qml/PieceNexos.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
         <file>qml/PieceSelector.qml</file>
         <file>qml/PieceTrigon.qml</file>

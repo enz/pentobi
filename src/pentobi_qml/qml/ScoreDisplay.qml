@@ -22,6 +22,7 @@ Row {
 
     ScoreElement2 {
         visible: gameVariant == "classic_2" || gameVariant == "trigon_2"
+                 || gameVariant == "nexos_2"
         value: points0 + points2
         isFinal: ! hasMoves0 && ! hasMoves2
         pointSize: root.pointSize
@@ -32,6 +33,7 @@ Row {
     }
     ScoreElement2 {
         visible: gameVariant == "classic_2" || gameVariant == "trigon_2"
+                 || gameVariant == "nexos_2"
         value: points1 + points3
         isFinal: ! hasMoves1 && ! hasMoves3
         pointSize: root.pointSize

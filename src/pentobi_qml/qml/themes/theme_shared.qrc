@@ -2,6 +2,26 @@
 <qresource prefix="/qml/themes">
 <file>light/piece-manipulator-legal.svg</file>
 <file>light/piece-manipulator.svg</file>
+<file>light/junction-all-blue.svg</file>
+<file>light/junction-all-green.svg</file>
+<file>light/junction-all-red.svg</file>
+<file>light/junction-all-yellow.svg</file>
+<file>light/junction-rect-blue.svg</file>
+<file>light/junction-rect-green.svg</file>
+<file>light/junction-rect-red.svg</file>
+<file>light/junction-rect-yellow.svg</file>
+<file>light/junction-straight-blue.svg</file>
+<file>light/junction-straight-green.svg</file>
+<file>light/junction-straight-red.svg</file>
+<file>light/junction-straight-yellow.svg</file>
+<file>light/junction-t-blue.svg</file>
+<file>light/junction-t-green.svg</file>
+<file>light/junction-t-red.svg</file>
+<file>light/junction-t-yellow.svg</file>
+<file>light/linesegment-blue.svg</file>
+<file>light/linesegment-green.svg</file>
+<file>light/linesegment-red.svg</file>
+<file>light/linesegment-yellow.svg</file>
 <file>light/square-blue.svg</file>
 <file>light/square-green.svg</file>
 <file>light/square-red.svg</file>

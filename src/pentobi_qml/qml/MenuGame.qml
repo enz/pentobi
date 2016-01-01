@@ -48,6 +48,14 @@ Menu {
             gameVariant: "trigon"
             text: qsTr("Trig&on (4 Players)")
         }
+        MenuItemGameVariant {
+            gameVariant: "nexos_2"
+            text: qsTr("&Nexos (2 Players)")
+        }
+        MenuItemGameVariant {
+            gameVariant: "nexos"
+            text: qsTr("Ne&xos (4 Players)")
+        }
     }
     // QTBUG-47847 MenuSeparator { }
     MenuItem {

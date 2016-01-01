@@ -14,6 +14,8 @@ MenuItem {
         case "trigon_2": return playerModel.levelTrigon2 === level
         case "trigon_3": return playerModel.levelTrigon3 === level
         case "junior": return playerModel.levelJunior === level
+        case "nexos": return playerModel.levelNexos === level
+        case "nexos_2": return playerModel.levelNexos2 === level
         default: return playerModel.levelClassic === level
         }
     }
@@ -25,6 +27,8 @@ MenuItem {
         case "trigon_2": playerModel.levelTrigon2 = level; break
         case "trigon_3": playerModel.levelTrigon3 = level; break
         case "junior": playerModel.levelJunior = level; break
+        case "nexos": playerModel.levelNexos = level; break
+        case "nexos_2": playerModel.levelNexos2 = level; break
         default: playerModel.levelClassic = level
         }
     }

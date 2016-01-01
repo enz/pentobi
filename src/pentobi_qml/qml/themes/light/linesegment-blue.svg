@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="7" width="21" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<g transform="matrix(1.05 0 0 .35 0 -361.34)">
+<rect fill-rule="evenodd" height="20" width="20" y="1032.4" x="0" fill="#0073cf"/>
+</g>
+<path d="m0 7h21v-7l-1 1v5h-19z" fill-opacity=".09803922"/>
+<path fill-opacity=".1568628" d="m0 7 1-1v-5h19l1-1h-21z" fill="#fff"/>
+</svg>

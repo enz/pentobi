@@ -53,6 +53,8 @@ PlayerModel::PlayerModel(QObject* parent)
     getLevel(settings, "level_trigon_2", m_levelTrigon2);
     getLevel(settings, "level_trigon_3", m_levelTrigon3);
     getLevel(settings, "level_junior", m_levelJunior);
+    getLevel(settings, "level_nexos", m_levelNexos);
+    getLevel(settings, "level_nexos_2", m_levelNexos2);
     connect(&m_genMoveWatcher, SIGNAL(finished()), SLOT(genMoveFinished()));
 }
 
@@ -67,6 +69,8 @@ PlayerModel::~PlayerModel()
     settings.setValue("level_trigon_2", m_levelTrigon2);
     settings.setValue("level_trigon_3", m_levelTrigon3);
     settings.setValue("level_junior", m_levelJunior);
+    settings.setValue("level_nexos", m_levelNexos);
+    settings.setValue("level_nexos_2", m_levelNexos2);
 }
 
 PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm,
@@ -164,6 +168,12 @@ void PlayerModel::startGenMove(GameModel* gm)
         break;
     case Variant::trigon_3:
         level = m_levelTrigon3;
+        break;
+    case Variant::nexos:
+        level = m_levelNexos;
+        break;
+    case Variant::nexos_2:
+        level = m_levelNexos2;
         break;
     default:
         level = m_levelClassic;

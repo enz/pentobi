@@ -2,7 +2,8 @@ import QtQuick 2.0
 
 Item {
     property string gameVariant
-    property bool isTrigon: gameVariant.indexOf("trigon") >= 0
+    property bool isTrigon: gameVariant.lastIndexOf("trigon") === 0
+    property bool isNexos: gameVariant.lastIndexOf("nexos") === 0
     property int columns: {
         switch (gameVariant) {
         case "duo":
@@ -13,6 +14,9 @@ Item {
             return 35
         case "trigon_3":
             return 31
+        case "nexos":
+        case "nexos_2":
+            return 25
         default:
             return 20
         }
@@ -27,34 +31,66 @@ Item {
             return 18
         case "trigon_3":
             return 16
+        case "nexos":
+        case "nexos_2":
+            return 25
         default:
             return 20
         }
     }
-    property real _sideLength: isTrigon ?
-                                   Math.min(width, Math.sqrt(3) * height) :
-                                   Math.min(width, height)
     // Avoid fractional piece element sizes if the piece elements are squares
-    property real gridElementWidth: isTrigon ? _sideLength / (columns + 1): Math.floor(_sideLength / columns)
-    property real gridElementHeight: isTrigon ?  Math.sqrt(3) * gridElementWidth : gridElementWidth
-    property real _boardWidth: isTrigon ? gridElementWidth * (columns + 1) : gridElementWidth * columns
-    property real _boardHeight: gridElementHeight * rows
-    property real _boardOffsetX: Math.floor((width - _boardWidth) / 2)
-    property real _boardOffsetY: Math.floor((height - _boardHeight) / 2)
+    property real gridElementWidth: {
+        var sideLength
+        if (isTrigon) sideLength = Math.min(width, Math.sqrt(3) * height)
+        else sideLength = Math.min(width, height)
+        if (isTrigon) return sideLength / (columns + 1)
+        else if (isNexos) Math.floor(sideLength / (columns - 0.5))
+        else return Math.floor(sideLength / columns)
+    }
+    property real gridElementHeight: {
+        if (isTrigon) return Math.sqrt(3) * gridElementWidth
+        else return gridElementWidth
+    }
+    property real imgWidth: {
+        if (isTrigon) return gridElementWidth * (columns + 1)
+        else if (isNexos) return gridElementWidth * (columns - 0.5)
+        else return gridElementWidth * columns
+    }
+    property real imgHeight: {
+        if (isNexos) return gridElementHeight * (rows - 0.5)
+        else return gridElementHeight * rows
+    }
+    property real imgOffsetX: (width - imgWidth) / 2
+    property real imgOffsetY: (height - imgHeight) / 2
 
-    function mapFromGameX(x) { return isTrigon ? _boardOffsetX + (x + 0.5) * gridElementWidth : _boardOffsetX + x * gridElementWidth}
-    function mapFromGameY(y) { return _boardOffsetY + y * gridElementHeight }
+    function mapFromGameX(x) {
+        if (isTrigon) return imgOffsetX + (x + 0.5) * gridElementWidth
+        else if (isNexos) return imgOffsetX + (x - 0.25) * gridElementWidth
+        else return imgOffsetX + x * gridElementWidth
+    }
+    function mapFromGameY(y) {
+        if (isNexos) return imgOffsetY + (y - 0.25) * gridElementHeight
+        else return imgOffsetY + y * gridElementHeight
+    }
     function mapToGame(x, y) {
-        return isTrigon ?
-                    Qt.point((x - _boardOffsetX - 0.5 * gridElementWidth) / gridElementWidth,
-                             (y - _boardOffsetY) / gridElementHeight)
-                  : Qt.point((x - _boardOffsetX) / gridElementWidth,
-                             (y - _boardOffsetY) / gridElementHeight)
+        if (isTrigon)
+            return Qt.point((x - imgOffsetX + 0.5 * gridElementWidth)
+                            / gridElementWidth,
+                            (y - imgOffsetY) / gridElementHeight)
+        else if (isNexos)
+            return Qt.point((x - imgOffsetX + 0.25 * gridElementWidth)
+                            / gridElementWidth,
+                            (y - imgOffsetY + 0.25 * gridElementHeight)
+                            / gridElementHeight)
+        else
+            return Qt.point((x - imgOffsetX) / gridElementWidth,
+                            (y - imgOffsetY) / gridElementHeight)
     }
 
     Image {
-        x: _boardOffsetX; y: _boardOffsetY
-        width: _boardWidth; height: _boardHeight
+        x: imgOffsetX
+        y: imgOffsetY
+        width: imgWidth; height: imgHeight
         source: {
             switch (gameVariant) {
             case "trigon":
@@ -65,11 +101,14 @@ Item {
             case "duo":
             case "junior":
                 return theme.getImage("board-duo")
+            case "nexos":
+            case "nexos_2":
+                return theme.getImage("board-nexos")
             default:
                 return theme.getImage("board-classic")
             }
         }
-        sourceSize { width: _boardWidth; height: _boardHeight }
+        sourceSize { width: imgWidth; height: imgHeight }
         asynchronous: true
     }
 }

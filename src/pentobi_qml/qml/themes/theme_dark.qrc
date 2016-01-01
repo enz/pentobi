@@ -2,6 +2,7 @@
 <qresource prefix="/qml/themes">
 <file>dark/board-classic.svg</file>
 <file>dark/board-duo.svg</file>
+<file>dark/board-nexos.svg</file>
 <file>dark/board-trigon.svg</file>
 <file>dark/board-trigon-3.svg</file>
 <file>dark/Theme.qml</file>

@@ -10,10 +10,15 @@ Item
     property bool transitionsEnabled
     property bool markLastMove: true
     property alias busyIndicatorRunning: busyIndicator.running
-    property real imageSourceWidth:
-        board.isTrigon ? 2 * board.gridElementWidth : board.gridElementWidth
-    property alias imageSourceHeight: board.gridElementHeight
-
+    property real imageSourceWidth: {
+        if (board.isTrigon) return 2 * board.gridElementWidth
+        else if (board.isNexos) return 1.5 * board.gridElementWidth
+        else return board.gridElementWidth
+    }
+    property real imageSourceHeight: {
+        if (board.isNexos) return 1.5 * board.gridElementHeight
+        else return board.gridElementHeight
+    }
     property var _pieces0
     property var _pieces1
     property var _pieces2
