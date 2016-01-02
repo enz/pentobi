@@ -37,9 +37,9 @@ function createColorPieces(component, pieceModels) {
 
 function createPieces() {
     var file
-    if (gameModel.gameVariant.indexOf("trigon") >= 0)
+    if (gameModel.gameVariant.lastIndexOf("trigon") === 0)
         file = "PieceTrigon.qml"
-    else if (gameModel.gameVariant.indexOf("nexos") >= 0)
+    else if (gameModel.gameVariant.lastIndexOf("nexos") === 0)
         file = "PieceNexos.qml"
     else
         file = "PieceClassic.qml"
