@@ -11,6 +11,7 @@
 #include "Move.h"
 #include "PieceMap.h"
 #include "Point.h"
+#include "libboardgame_util/Range.h"
 
 namespace libpentobi_base {
 
@@ -51,16 +52,8 @@ public:
     static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
 
     /** Begin/end range for lists with moves at a given point. */
-    struct Range
-    {
-        const Move* m_begin;
+    typedef libboardgame_util::Range<const Move> Range;
 
-        const Move* m_end;
-
-        const Move* begin() const { return m_begin; }
-
-        const Move* end() const { return m_end; }
-    };
 
     /** Add a move to list during construction. */
     void set_move(unsigned i, Move mv)
@@ -83,7 +76,7 @@ public:
         auto& range = m_moves_range[p][adj_status][piece];
         auto begin = move_lists_begin() + range.begin();
         auto end = begin + range.size();
-        return Range{begin, end};
+        return Range(begin, end);
     }
 
     bool has_moves(Piece piece, Point p, unsigned adj_status) const

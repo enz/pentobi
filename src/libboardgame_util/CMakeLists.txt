@@ -18,6 +18,7 @@ add_library(boardgame_util STATIC
   Options.cpp
   RandomGenerator.h
   RandomGenerator.cpp
+  Range.h
   Statistics.h
   StringUtil.h
   StringUtil.cpp
