@@ -46,7 +46,7 @@ void handle_setup_property(const SgfNode& node, const char* id, Color c,
         {
             throw InvalidTree(e.what());
         }
-        Piece piece = bd.get_move_info(mv).get_piece();
+        Piece piece = bd.get_move_piece(mv);
         if (! pieces_left[c].remove(piece))
             throw InvalidTree("piece played twice");
         setup.placements[c].push_back(mv);
@@ -75,7 +75,7 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
         {
             if (setup.placements[c].remove(mv))
             {
-                Piece piece = bd.get_move_info(mv).get_piece();
+                Piece piece = bd.get_move_piece(mv);
                 LIBBOARDGAME_ASSERT(! pieces_left[c].contains(piece));
                 pieces_left[c].push_back(piece);
                 break;
@@ -139,8 +139,7 @@ void BoardUpdater::update(Board& bd, const PentobiTree& tree,
         auto mv = tree.get_move(*i);
         if (! mv.is_null())
         {
-            auto& info = bd.get_move_info(mv.move);
-            if (! bd.is_piece_left(mv.color, info.get_piece()))
+            if (! bd.is_piece_left(mv.color, bd.get_move_piece(mv.move)))
                 throw InvalidTree("piece played twice");
             bd.play(mv);
         }

@@ -527,18 +527,24 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_classic(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_classic + 1;
+        m_max_piece_size = 5;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
         break;
     case BoardType::trigon:
         LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_trigon + 1;
+        m_max_piece_size = 6;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
         break;
     case BoardType::trigon_3:
         LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_trigon_3 + 1;
+        m_max_piece_size = 6;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
         break;
     case BoardType::duo:
         m_transforms.reset(new PieceTransformsClassic);
@@ -553,15 +559,18 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
             m_pieces = create_pieces_junior(m_geo, board_type, *m_transforms);
             m_nu_moves = Move::onboard_moves_junior + 1;
         }
+        m_max_piece_size = 5;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
         break;
     case BoardType::nexos:
         LIBBOARDGAME_ASSERT(piece_set == PieceSet::nexos);
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_nexos(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_nexos + 1;
+        m_max_piece_size = 7;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<7>)));
         break;
     }
-    m_move_info.reset(new MoveInfo[m_nu_moves]);
     m_move_info_ext.reset(new MoveInfoExt[m_nu_moves]);
     m_move_info_ext_2.reset(new MoveInfoExt2[m_nu_moves]);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
@@ -595,22 +604,40 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
                              const MovePoints& points, Point label_pos)
 {
     Move mv(static_cast<Move::IntType>(moves_created));
-    LIBBOARDGAME_ASSERT(moves_created <= m_nu_moves);
-    auto& info = m_move_info[moves_created];
+    LIBBOARDGAME_ASSERT(moves_created < m_nu_moves);
+    if (m_max_piece_size == 5)
+    {
+        void* place =
+                static_cast<MoveInfo<5>*>(m_move_info.get())
+                + moves_created;
+        new(place) MoveInfo<5>(piece, points);
+    }
+    else if (m_max_piece_size == 6)
+    {
+        void* place =
+                static_cast<MoveInfo<6>*>(m_move_info.get())
+                + moves_created;
+        new(place) MoveInfo<6>(piece, points);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        void* place =
+                static_cast<MoveInfo<7>*>(m_move_info.get())
+                + moves_created;
+        new(place) MoveInfo<7>(piece, points);
+    }
     auto& info_ext = m_move_info_ext[moves_created];
     auto& info_ext_2 = m_move_info_ext_2[moves_created];
     ++moves_created;
-    info = MoveInfo(piece, points);
-    auto begin = info.begin();
-    auto end = info.end();
     auto scored_points = &info_ext_2.scored_points[0];
-    for (auto i = begin; i != end; ++i)
-        if (m_board_type != BoardType::nexos || m_geo.get_point_type(*i) != 0)
-            *(scored_points++) = *i;
+    for (auto p : points)
+        if (m_board_type != BoardType::nexos || m_geo.get_point_type(p) != 0)
+            *(scored_points++) = p;
     info_ext_2.scored_points_size = static_cast<uint_least8_t>(
                 scored_points - &info_ext_2.scored_points[0]);
-    begin = info_ext_2.begin_scored_points();
-    end = info_ext_2.end_scored_points();
+    auto begin = info_ext_2.begin_scored_points();
+    auto end = info_ext_2.end_scored_points();
     s_marker.clear();
     for (auto i = begin; i != end; ++i)
         s_marker.set(*i);
@@ -655,8 +682,8 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
     {
         Grid<char> grid;
         grid.fill('.', m_geo);
-        for (Point p : info)
-            grid[p] = 'O';
+        for (auto i = begin; i != end; ++i)
+            grid[*i] = 'O';
         for (auto i = info_ext.begin_adj(); i != info_ext.end_adj(); ++i)
             grid[*i] = '+';
         for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
@@ -841,7 +868,7 @@ bool BoardConst::find_move(const MovePoints& points, Piece piece,
     sort(sorted_points);
     for (auto mv : get_moves(piece, points[0]))
         if (equal(sorted_points.begin(), sorted_points.end(),
-                  m_move_info[mv.to_int()].begin()))
+                  get_move_points_begin(mv)))
         {
             move = mv;
             return true;
@@ -912,17 +939,18 @@ void BoardConst::init_symmetry_info()
     symmetric_points.init(m_geo, transform);
     for (unsigned i = 1; i < m_nu_moves; ++i)
     {
-        const auto& info = m_move_info[i];
+        Move mv(i);
         auto& info_ext_2 = m_move_info_ext_2[i];
         MovePoints sym_points;
         info_ext_2.breaks_symmetry = false;
-        for (Point p : info)
+        auto points = get_move_points(mv);
+        for (Point p : points)
         {
-            if (info.contains(symmetric_points[p]))
+            if (points.contains(symmetric_points[p]))
                 info_ext_2.breaks_symmetry = true;
             sym_points.push_back(symmetric_points[p]);
         }
-        find_move(sym_points, info.get_piece(), info_ext_2.symmetric_move);
+        find_move(sym_points, get_move_piece(mv), info_ext_2.symmetric_move);
     }
 }
 
@@ -1004,11 +1032,10 @@ string BoardConst::to_string(Move mv, bool with_piece_name) const
 {
     if (mv.is_null())
         return "null";
-    auto& info = get_move_info(mv);
     auto& info_ext_2 = get_move_info_ext_2(mv);
     ostringstream s;
     if (with_piece_name)
-        s << '[' << get_piece_info(info.get_piece()).get_name() << "]";
+        s << '[' << get_piece_info(get_move_piece(mv)).get_name() << "]";
     bool is_first = true;
     for (auto i = info_ext_2.begin_scored_points();
          i != info_ext_2.end_scored_points(); ++i)

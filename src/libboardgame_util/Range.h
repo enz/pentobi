@@ -24,11 +24,22 @@ public:
 
     T* end() const { return m_end; }
 
+    bool contains(T& t) const;
+
 private:
     T* m_begin;
 
     T* m_end;
 };
+
+template<typename T>
+bool Range<T>::contains(T& t) const
+{
+    for (auto& i : *this)
+        if (i == t)
+            return true;
+    return false;
+}
 
 //----------------------------------------------------------------------------
 

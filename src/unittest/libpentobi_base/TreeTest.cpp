@@ -42,52 +42,48 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(0));
-        auto& info = bc.get_move_info(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 4)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 3)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 2)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 1)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 0)));
+        auto points = bc.get_move_points(mv.move);
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 4)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 3)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 2)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 1)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 0)));
     }
     node = &node->get_child();
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(1));
-        auto& info = bc.get_move_info(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(18, 3)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 3)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 2)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 1)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 0)));
+        auto points = bc.get_move_points(mv.move);
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(18, 3)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 3)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 2)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 1)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 0)));
     }
     node = &node->get_child();
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(2));
-        auto& info = bc.get_move_info(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 19)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 18)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 17)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 16)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(19, 15)));
+        auto points = bc.get_move_points(mv.move);
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 19)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 18)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 17)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 16)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 15)));
     }
     node = &node->get_child();
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
         LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(3));
-        auto& info = bc.get_move_info(mv.move);
-        LIBBOARDGAME_CHECK_EQUAL(info.size(), 5u);
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(0, 19)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(1, 19)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(2, 19)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(3, 19)));
-        LIBBOARDGAME_CHECK(info.contains(geo.get_point(3, 18)));
+        auto points = bc.get_move_points(mv.move);
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 19)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(1, 19)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(2, 19)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(3, 19)));
+        LIBBOARDGAME_CHECK(points.contains(geo.get_point(3, 18)));
     }
 }
 

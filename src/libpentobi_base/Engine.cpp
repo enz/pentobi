@@ -159,8 +159,7 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         }
     }
     auto& geo = bd.get_geometry();
-    auto& info = bd.get_move_info(mv);
-    Piece piece = info.get_piece();
+    Piece piece = bd.get_move_piece(mv);
     auto& info_ext = bd.get_move_info_ext(mv);
     auto& info_ext_2 = bd.get_move_info_ext_2(mv);
     response
@@ -169,7 +168,7 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         << "Piece:  " << static_cast<int>(piece.to_int())
         << " (" << bd.get_piece_info(piece).get_name() << ")\n"
         << "Points:";
-    for (Point p : info)
+    for (Point p : bd.get_move_points(mv))
         response << ' ' << geo.to_string(p);
     response
         << "\n"

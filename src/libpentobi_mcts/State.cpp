@@ -49,7 +49,7 @@ State::State(Variant initial_variant, const SharedConst& shared_const)
 {
 }
 
-template<unsigned PIECE_SIZE>
+template<unsigned MAX_SIZE>
 inline void State::add_moves(Point p, Color c,
                              const Board::PiecesLeftList& pieces,
                              float& total_gamma, MoveList& moves,
@@ -65,14 +65,14 @@ inline void State::add_moves(Point p, Color c,
         auto gamma_piece = m_gamma_piece[piece];
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
-                    && check_move<PIECE_SIZE>(
-                        mv, get_move_info(mv), gamma_piece, moves, nu_moves,
-                        playout_features, total_gamma))
+                    && check_move<MAX_SIZE>(mv, get_move_info<MAX_SIZE>(mv),
+                                            gamma_piece, moves, nu_moves,
+                                            playout_features, total_gamma))
                 marker.set(mv);
     }
 }
 
-template<unsigned PIECE_SIZE>
+template<unsigned MAX_SIZE>
 void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                                bool with_gamma, MoveList& moves)
 {
@@ -91,7 +91,7 @@ void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
         for (Move mv : get_moves(c, piece, p, 0))
         {
             LIBBOARDGAME_ASSERT(! marker[mv]);
-            if (check_forbidden<PIECE_SIZE>(is_forbidden, mv, moves, nu_moves))
+            if (check_forbidden<MAX_SIZE>(is_forbidden, mv, moves, nu_moves))
             {
                 marker.set(mv);
                 if (with_gamma)
@@ -104,14 +104,13 @@ void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
     moves.resize(nu_moves);
 }
 
-template<unsigned PIECE_SIZE>
+template<unsigned MAX_SIZE>
 bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
                             MoveList& moves, unsigned& nu_moves)
 {
-    auto& info = get_move_info(mv);
-    auto p = info.begin();
+    auto p = get_move_info<MAX_SIZE>(mv).begin();
     unsigned forbidden = is_forbidden[*p];
-    for (unsigned i = 1; i < PIECE_SIZE; ++i)
+    for (unsigned i = 1; i < MAX_SIZE; ++i)
         // Logically, forbidden is a bool and the next line should be
         //   forbidden = forbidden || is_forbidden[*(++p)]
         // But this generates branches, which are bad for performance in this
@@ -126,15 +125,15 @@ bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
     return true;
 }
 
-template<unsigned PIECE_SIZE>
-bool State::check_move(Move mv, const MoveInfo& info, float gamma_piece,
-                       MoveList& moves, unsigned& nu_moves,
+template<unsigned MAX_SIZE>
+bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
+                       float gamma_piece, MoveList& moves, unsigned& nu_moves,
                        const PlayoutFeatures& playout_features,
                        float& total_gamma)
 {
     auto p = info.begin();
     PlayoutFeatures::Compute features(*p, playout_features);
-    for (unsigned i = 1; i < PIECE_SIZE; ++i)
+    for (unsigned i = 1; i < MAX_SIZE; ++i)
         features.add(*(++p), playout_features);
     if (features.is_forbidden())
         return false;
@@ -147,15 +146,15 @@ bool State::check_move(Move mv, const MoveInfo& info, float gamma_piece,
     return true;
 }
 
-template<unsigned PIECE_SIZE>
-inline bool State::check_move(Move mv, const MoveInfo& info, MoveList& moves,
-                              unsigned& nu_moves,
+template<unsigned MAX_SIZE>
+inline bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
+                              MoveList& moves, unsigned& nu_moves,
                               const PlayoutFeatures& playout_features,
                               float& total_gamma)
 {
-    return check_move<PIECE_SIZE>(
-                mv, info, m_gamma_piece[info.get_piece()], moves, nu_moves,
-                playout_features, total_gamma);
+    return check_move<MAX_SIZE>(mv, info, m_gamma_piece[info.get_piece()],
+                                moves, nu_moves, playout_features,
+                                total_gamma);
 }
 
 #if LIBBOARDGAME_DEBUG
@@ -331,22 +330,28 @@ bool State::gen_children(Tree::NodeExpander& expander, Float init_val)
     if (m_nu_passes == m_nu_colors)
         return true;
     Color to_play = m_bd.get_to_play();
-    switch (m_piece_set)
+    if (m_max_piece_size == 5)
     {
-    case PieceSet::classic:
-    case PieceSet::junior:
         init_moves_without_gamma<5>(to_play);
-        break;
-    case PieceSet::trigon:
-        init_moves_without_gamma<6>(to_play);
-        break;
-    case PieceSet::nexos:
-        init_moves_without_gamma<7>(to_play);
-        break;
+        return m_prior_knowledge.gen_children<5>(m_bd, m_moves[to_play],
+                                                 m_is_symmetry_broken,
+                                                 expander, init_val);
     }
-    return m_prior_knowledge.gen_children(m_bd, m_moves[to_play],
-                                          m_is_symmetry_broken, expander,
-                                          init_val);
+    else if (m_max_piece_size == 6)
+    {
+        init_moves_without_gamma<6>(to_play);
+        return m_prior_knowledge.gen_children<6>(m_bd, m_moves[to_play],
+                                                 m_is_symmetry_broken,
+                                                 expander, init_val);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        init_moves_without_gamma<7>(to_play);
+        return m_prior_knowledge.gen_children<7>(m_bd, m_moves[to_play],
+                                                 m_is_symmetry_broken,
+                                                 expander, init_val);
+    }
 }
 
 bool State::gen_playout_move_full(PlayerMove<Move>& mv)
@@ -356,34 +361,26 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     {
         if (! m_is_move_list_initialized[to_play])
         {
-            switch (m_piece_set)
-            {
-            case PieceSet::classic:
-            case PieceSet::junior:
+            if (m_max_piece_size == 5)
                 init_moves_with_gamma<5>(to_play);
-                break;
-            case PieceSet::trigon:
+            else if (m_max_piece_size == 6)
                 init_moves_with_gamma<6>(to_play);
-                break;
-            case PieceSet::nexos:
+            else
+            {
+                LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
                 init_moves_with_gamma<7>(to_play);
-                break;
             }
         }
         else if (m_has_moves[to_play])
         {
-            switch (m_piece_set)
-            {
-            case PieceSet::classic:
-            case PieceSet::junior:
+            if (m_max_piece_size == 5)
                 update_moves<5>(to_play);
-                break;
-            case PieceSet::trigon:
+            else if (m_max_piece_size == 6)
                 update_moves<6>(to_play);
-                break;
-            case PieceSet::nexos:
+            else
+            {
+                LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
                 update_moves<7>(to_play);
-                break;
             }
         }
         if ((m_has_moves[to_play] = ! m_moves[to_play].empty()))
@@ -512,7 +509,7 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
     return bonus;
 }
 
-template<unsigned PIECE_SIZE>
+template<unsigned MAX_SIZE>
 void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_is_piece_considered();
@@ -522,7 +519,7 @@ void State::init_moves_with_gamma(Color c)
     marker.clear(moves);
     auto& pieces = get_pieces_considered(c);
     if (m_bd.is_first_piece(c))
-        add_starting_moves<PIECE_SIZE>(c, pieces, true, moves);
+        add_starting_moves<MAX_SIZE>(c, pieces, true, moves);
     else
     {
         unsigned nu_moves = 0;
@@ -530,7 +527,7 @@ void State::init_moves_with_gamma(Color c)
         for (Point p : m_bd.get_attach_points(c))
             if (! m_bd.is_forbidden(p, c))
             {
-                add_moves<PIECE_SIZE>(
+                add_moves<MAX_SIZE>(
                             p, c, pieces, total_gamma, moves, nu_moves);
                 m_moves_added_at[c][p] = true;
             }
@@ -542,11 +539,11 @@ void State::init_moves_with_gamma(Color c)
     if (moves.empty() && &pieces == &m_pieces_considered)
     {
         m_force_consider_all_pieces = true;
-        init_moves_with_gamma<PIECE_SIZE>(c);
+        init_moves_with_gamma<MAX_SIZE>(c);
     }
 }
 
-template<unsigned PIECE_SIZE>
+template<unsigned MAX_SIZE>
 void State::init_moves_without_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_is_piece_considered();
@@ -556,7 +553,7 @@ void State::init_moves_without_gamma(Color c)
     auto& pieces = get_pieces_considered(c);
     auto& is_forbidden = m_bd.is_forbidden(c);
     if (m_bd.is_first_piece(c))
-        add_starting_moves<PIECE_SIZE>(c, pieces, false, moves);
+        add_starting_moves<MAX_SIZE>(c, pieces, false, moves);
     else
     {
         unsigned nu_moves = 0;
@@ -570,7 +567,7 @@ void State::init_moves_without_gamma(Color c)
                         continue;
                     for (Move mv : get_moves(c, piece, p, adj_status))
                         if (! marker[mv]
-                                && check_forbidden<PIECE_SIZE>(
+                                && check_forbidden<MAX_SIZE>(
                                     is_forbidden, mv, moves, nu_moves))
                             marker.set(mv);
                 }
@@ -584,7 +581,7 @@ void State::init_moves_without_gamma(Color c)
     if (moves.empty() && &pieces == &m_pieces_considered)
     {
         m_force_consider_all_pieces = true;
-        init_moves_without_gamma<PIECE_SIZE>(c);
+        init_moves_without_gamma<MAX_SIZE>(c);
     }
 }
 
@@ -618,7 +615,7 @@ void State::start_search()
     for (Color c : Color::Range(m_nu_colors))
         m_playout_features[c].init_snapshot(m_bd, c);
     m_bc = &m_bd.get_board_const();
-    m_piece_set = m_bc->get_piece_set();
+    m_max_piece_size = m_bc->get_max_piece_size();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
     m_check_terminate_early =
@@ -706,7 +703,7 @@ void State::start_simulation(size_t n)
     m_nu_passes = 0;
 }
 
-template<unsigned PIECE_SIZE>
+template<unsigned MAX_SIZE>
 void State::update_moves(Color c)
 {
     auto& playout_features = m_playout_features[c];
@@ -722,15 +719,15 @@ void State::update_moves(Color c)
     float total_gamma = 0;
     if (m_nu_new_moves[c] == 1 && m_bd.get_nu_piece_instances() == 1)
     {
-        Piece piece = get_move_info(m_last_move[c]).get_piece();
+        Piece piece = get_move_info<MAX_SIZE>(m_last_move[c]).get_piece();
         for (unsigned i = 0; i < old_size; ++i)
         {
             LIBBOARDGAME_ASSERT(i >= nu_moves);
             Move mv = moves[i];
-            auto& info = get_move_info(mv);
+            auto& info = get_move_info<MAX_SIZE>(mv);
             if (info.get_piece() == piece
-                    || ! check_move<PIECE_SIZE>(mv, info, moves, nu_moves,
-                                                playout_features, total_gamma))
+                    || ! check_move<MAX_SIZE>(mv, info, moves, nu_moves,
+                                              playout_features, total_gamma))
                 marker.clear(mv);
         }
     }
@@ -743,10 +740,10 @@ void State::update_moves(Color c)
         {
             LIBBOARDGAME_ASSERT(i >= nu_moves);
             Move mv = moves[i];
-            auto& info = get_move_info(mv);
+            auto& info = get_move_info<MAX_SIZE>(mv);
             if (! is_piece_left[info.get_piece()]
-                    || ! check_move<PIECE_SIZE>(mv, info, moves,  nu_moves,
-                                                playout_features, total_gamma))
+                    || ! check_move<MAX_SIZE>(mv, info, moves, nu_moves,
+                                              playout_features, total_gamma))
                 marker.clear(mv);
         }
     }
@@ -760,7 +757,7 @@ void State::update_moves(Color c)
         if (! is_forbidden[*i] && ! m_moves_added_at[c][*i])
         {
             m_moves_added_at[c][*i] = true;
-            add_moves<PIECE_SIZE>(*i, c, pieces, total_gamma, moves, nu_moves);
+            add_moves<MAX_SIZE>(*i, c, pieces, total_gamma, moves, nu_moves);
         }
     m_nu_new_moves[c] = 0;
     m_last_attach_points_end[c] = end;
@@ -783,52 +780,12 @@ void State::update_moves(Color c)
             new_pieces.resize(n);
             for (Point p : attach_points)
                 if (! is_forbidden[p])
-                    add_moves<PIECE_SIZE>(p, c, new_pieces, total_gamma, moves,
+                    add_moves<MAX_SIZE>(p, c, new_pieces, total_gamma, moves,
                                           nu_moves);
             m_is_piece_considered[c] = &is_piece_considered_new;
         }
     }
     moves.resize(nu_moves);
-}
-
-void State::update_symmetry_broken(Move mv)
-{
-    Color to_play = m_bd.get_to_play();
-    Color second_color = m_bd.get_second_color(to_play);
-    auto& info = get_move_info(mv);
-    auto i = info.begin();
-    auto end = info.end();
-    if (to_play == Color(0) || to_play == Color(2))
-    {
-        // First player to play: Check that all symmetric points of the last
-        // move of the second player are occupied by the first player
-        do
-        {
-            Point symm_p = m_shared_const.symmetric_points[*i];
-            if (m_bd.get_point_state(symm_p) != second_color)
-            {
-                m_is_symmetry_broken = true;
-                return;
-            }
-        }
-        while (++i != end);
-    }
-    else
-    {
-        // Second player to play: Check that all symmetric points of the last
-        // move of the first player are empty (i.e. the second player can play
-        // there to preserve the symmetry)
-        do
-        {
-            Point symm_p = m_shared_const.symmetric_points[*i];
-            if (! m_bd.get_point_state(symm_p).is_empty())
-            {
-                m_is_symmetry_broken = true;
-                return;
-            }
-        }
-        while (++i != end);
-    }
 }
 
 //-----------------------------------------------------------------------------

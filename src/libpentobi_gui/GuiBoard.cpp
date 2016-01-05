@@ -32,7 +32,7 @@ namespace {
 
 bool allPointEmpty(const Board& bd, Move mv)
 {
-    for (Point p : bd.get_move_info(mv))
+    for (Point p : bd.get_move_points(mv))
         if (! bd.get_point_state(p).is_empty())
             return false;
     return true;
@@ -96,13 +96,13 @@ void GuiBoard::copyFromBoard(const Board& bd)
             for (Move mv : bd.get_setup().placements[c])
             {
                 ++n;
-                for (Point p : bd.get_move_info(mv))
+                for (Point p : bd.get_move_points(mv))
                     m_pieceId[p] = n;
             }
         for (auto mv : bd.get_moves())
         {
             ++n;
-            for (Point p : bd.get_move_info(mv.move))
+            for (Point p : bd.get_move_points(mv.move))
                 m_pieceId[p] = n;
         }
     }
@@ -470,7 +470,7 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
 void GuiBoard::setSelectedPiecePoints(Move mv)
 {
     m_selectedPiecePoints.clear();
-    for (Point p : m_bd.get_move_info(mv))
+    for (Point p : m_bd.get_move_points(mv))
         m_selectedPiecePoints.push_back(p);
     update();
 }
@@ -509,7 +509,7 @@ void GuiBoard::showMove(Color c, Move mv)
     m_isMoveShown = true;
     m_currentMoveShownColor = c;
     m_currentMoveShownPoints.clear();
-    for (Point p : m_bd.get_move_info(mv))
+    for (Point p : m_bd.get_move_points(mv))
         m_currentMoveShownPoints.push_back(p);
     m_currentMoveShownAnimationIndex = 0;
     m_currentMoveShownAnimationTimer.start(500);

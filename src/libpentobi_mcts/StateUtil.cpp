@@ -78,7 +78,7 @@ bool check_symmetry_broken(const Board& bd,
         if (last_mv.color != previous_color)
             // Don't try to handle non-alternating moves in board history
             return true;
-        auto& info = bd.get_move_info(last_mv.move);
+        auto points = bd.get_move_points(last_mv.move);
         for (Point p : bd)
         {
             PointState s1 = bd.get_point_state(p);
@@ -87,7 +87,7 @@ bool check_symmetry_broken(const Board& bd,
                 Point symm_p = symmetric_points[p];
                 PointState s2 = bd.get_point_state(symm_p);
                 if (s2 != get_symmetric_state(s1.to_color()))
-                    if (! (info.contains(p) && s2.is_empty()))
+                    if (! (points.contains(p) && s2.is_empty()))
                         return true;
             }
         }

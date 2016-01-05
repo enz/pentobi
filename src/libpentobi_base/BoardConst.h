@@ -16,11 +16,13 @@
 #include "PrecompMoves.h"
 #include "Variant.h"
 #include "libboardgame_util/ArrayList.h"
+#include "libboardgame_util/Range.h"
 
 namespace libpentobi_base {
 
 using namespace std;
 using libboardgame_util::ArrayList;
+using libboardgame_util::Range;
 
 //-----------------------------------------------------------------------------
 
@@ -34,12 +36,22 @@ public:
     ArrayList<Point, PrecompMoves::adj_status_nu_adj, unsigned short>
     AdjStatusList;
 
+    /** Start of the MoveInfo array, which can be cached by the user in
+        performance-critical code and then passed into the static version of
+        get_move_info(). */
+    typedef const void* MoveInfoArray;
+
     static const unsigned max_moves_at_point = 40;
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called.
         This function is not thread-safe. */
     static const BoardConst& get(Variant variant);
+
+    template<unsigned MAX_SIZE>
+    static const MoveInfo<MAX_SIZE>&
+    get_move_info(Move mv, MoveInfoArray move_info_array);
+
 
     Piece::IntType get_nu_pieces() const;
 
@@ -51,14 +63,25 @@ public:
 
     const PieceTransforms& get_transforms() const;
 
-    /** Get move info.
-        @pre ! mv.is_null() */
-    const MoveInfo& get_move_info(Move mv) const;
+    unsigned get_max_piece_size() const { return m_max_piece_size; }
 
-    /** Get pointer to move info array.
-        Can be used to speed up the access to the move info by avoiding the
-        multiple pointer dereferencing of Board::get_move_info(Move) */
-    const MoveInfo* get_move_info_array() const;
+    Range<const Point> get_move_points(Move mv) const;
+
+    /** Return start of move points array.
+        For unrolling loops, there are guaranteed to be as many elements
+        as the maximum piece size in the current game variant. If the piece
+        is smaller, the remaining points are guaranteed to be Point::null(). */
+    const Point* get_move_points_begin(Move mv) const;
+
+    template<unsigned MAX_SIZE>
+    const Point* get_move_points_begin(Move mv) const;
+
+    Piece get_move_piece(Move mv) const;
+
+    template<unsigned MAX_SIZE>
+    Piece get_move_piece(Move mv) const;
+
+    MoveInfoArray get_move_info_array() const { return m_move_info.get(); }
 
     /** Get pointer to extended move info array.
         Can be used to speed up the access to the move info by avoiding the
@@ -125,6 +148,12 @@ private:
     typedef array<PieceMap<Grid<LocalMovesList>>, PrecompMoves::nu_adj_status>
         FullMoveTable;
 
+    struct MallocFree
+    {
+        void operator()(void* x) { free(x); }
+    };
+
+
     /** Local variable used during construction.
         Making this variable static slightly speeds up construction and
         a thread-safe construction is not needed. */
@@ -136,9 +165,12 @@ private:
                      PrecompMoves::nu_adj_status>>
         s_adj_status;
 
+
     Piece::IntType m_nu_pieces;
 
     unsigned m_nu_moves;
+
+    unsigned m_max_piece_size;
 
     BoardType m_board_type;
 
@@ -154,7 +186,10 @@ private:
 
     PieceMap<unsigned> m_nu_attach_points{0};
 
-    unique_ptr<MoveInfo[]> m_move_info;
+    /** Array of MoveInfo<MAX_SIZE> with MAX_SIZE being the maximum piece size
+        in the current game variant.
+        See comments at MoveInfo. */
+    unique_ptr<void, MallocFree> m_move_info;
 
     unique_ptr<MoveInfoExt[]> m_move_info_ext;
 
@@ -173,6 +208,7 @@ private:
         for Point is that y goes downwards. */
     Grid<unsigned> m_compare_val;
 
+
     BoardConst(BoardType board_type, PieceSet piece_set);
 
     void create_move(unsigned& moves_created, Piece piece,
@@ -181,6 +217,9 @@ private:
     void create_moves();
 
     void create_moves(unsigned& moves_created, Piece piece);
+
+    template<unsigned MAX_SIZE>
+    const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;
 
     void init_adj_status();
 
@@ -197,15 +236,18 @@ inline const Geometry& BoardConst::get_geometry() const
     return m_geo;
 }
 
-inline const MoveInfo& BoardConst::get_move_info(Move mv) const
+template<unsigned MAX_SIZE>
+inline const MoveInfo<MAX_SIZE>&
+BoardConst::get_move_info(Move mv, MoveInfoArray move_info_array)
 {
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_nu_moves);
-    return m_move_info[mv.to_int()];
+    return *(static_cast<const MoveInfo<MAX_SIZE>*>(move_info_array)
+             + mv.to_int());
 }
 
-inline const MoveInfo* BoardConst::get_move_info_array() const
+template<unsigned MAX_SIZE>
+inline const MoveInfo<MAX_SIZE>& BoardConst::get_move_info(Move mv) const
 {
-    return m_move_info.get();
+    return get_move_info<MAX_SIZE>(mv, m_move_info.get());
 }
 
 inline const MoveInfoExt& BoardConst::get_move_info_ext(Move mv) const
@@ -228,6 +270,64 @@ inline const MoveInfoExt* BoardConst::get_move_info_ext_array() const
 inline const MoveInfoExt2* BoardConst::get_move_info_ext_2_array() const
 {
     return m_move_info_ext_2.get();
+}
+
+inline Piece BoardConst::get_move_piece(Move mv) const
+{
+    if (m_max_piece_size == 5)
+        return get_move_piece<5>(mv);
+    else if (m_max_piece_size == 6)
+        return get_move_piece<6>(mv);
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        return get_move_piece<7>(mv);
+    }
+}
+
+template<unsigned MAX_SIZE>
+inline Piece BoardConst::get_move_piece(Move mv) const
+{
+    return get_move_info<MAX_SIZE>(mv).get_piece();
+}
+
+inline Range<const Point> BoardConst::get_move_points(Move mv) const
+{
+    if (m_max_piece_size == 5)
+    {
+        auto& info = get_move_info<5>(mv);
+        return Range<const Point>(info.begin(), info.end());
+    }
+    else if (m_max_piece_size == 6)
+    {
+        auto& info = get_move_info<6>(mv);
+        return Range<const Point>(info.begin(), info.end());
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        auto& info = get_move_info<7>(mv);
+        return Range<const Point>(info.begin(), info.end());
+    }
+}
+
+inline const Point* BoardConst::get_move_points_begin(Move mv) const
+{
+    if (m_max_piece_size == 5)
+        return get_move_points_begin<5>(mv);
+    else if (m_max_piece_size == 6)
+        return get_move_points_begin<6>(mv);
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        return get_move_points_begin<7>(mv);
+    }
+}
+
+template<unsigned MAX_SIZE>
+inline const Point* BoardConst::get_move_points_begin(Move mv) const
+{
+    return get_move_info<MAX_SIZE>(mv).begin();
 }
 
 inline unsigned BoardConst::get_nu_moves() const

@@ -55,31 +55,21 @@ public:
         Use copy_from() to copy a board state. */
     Board& operator=(const Board&) = delete;
 
-    Geometry::Iterator begin() const
-    {
-        return m_geo->begin();
-    }
+    Geometry::Iterator begin() const { return m_geo->begin(); }
 
-    Geometry::Iterator end() const
-    {
-        return m_geo->end();
-    }
+    Geometry::Iterator end() const { return m_geo->end(); }
 
     Variant get_variant() const;
 
     Color::IntType get_nu_colors() const;
 
-    Color::Range get_colors() const
-    {
-        return Color::Range(m_nu_colors);
-    }
+    Color::Range get_colors() const { return Color::Range(m_nu_colors); }
 
     /** Number of colors that are not played alternately.
         This is equal to get_nu_colors() apart from Variant::classic_3. */
     Color::IntType get_nu_nonalt_colors() const;
 
     unsigned get_nu_players() const;
-
 
     Piece::IntType get_nu_uniq_pieces() const;
 
@@ -167,10 +157,10 @@ public:
         @pre get_nu_moves() < max_game_moves */
     void play(Color c, Move mv);
 
-    /** Play a move for the current color to play.
-        @pre ! mv.is_null()
-        @pre get_nu_moves() < max_game_moves */
-    void play(Move mv);
+    /** More efficient version of play() if maximum piece size of current
+        game variant is known at compile time. */
+    template<unsigned MAX_SIZE>
+    void play(Color c, Move mv);
 
     /** Play a move.
         @pre ! mv.move.is_null()
@@ -303,7 +293,9 @@ public:
 
     bool get_piece_by_name(const string& name, Piece& piece) const;
 
-    const MoveInfo& get_move_info(Move mv) const;
+    Range<const Point> get_move_points(Move mv) const;
+
+    Piece get_move_piece(Move mv) const;
 
     const MoveInfoExt& get_move_info_ext(Move mv) const;
 
@@ -316,7 +308,7 @@ public:
     Color get_starting_point_color(Point p) const;
 
     const ArrayList<Point,StartingPoints::max_starting_points>&
-                                            get_starting_points(Color c) const;
+    get_starting_points(Color c) const;
 
     /** Get the second color in game variants in which a player plays two
         colors.
@@ -376,6 +368,7 @@ private:
         ColorMap<unsigned> attach_points_size;
     };
 
+
     StateBase m_state_base;
 
     ColorMap<StateColor> m_state_color;
@@ -385,6 +378,9 @@ private:
     Color::IntType m_nu_colors;
 
     unsigned m_nu_players;
+
+    /** Maximum piece size in the current game variant. */
+    unsigned m_max_piece_size;
 
     /** Bonus for playing all pieces. */
     unsigned m_bonus_all_pieces;
@@ -403,13 +399,13 @@ private:
 
     const BoardConst* m_bc;
 
-    /** Same as m_bc->get_move_info_array() */
-    const MoveInfo* m_move_info_array;
+    /** Caches m_bc->get_move_info_array() */
+    BoardConst::MoveInfoArray m_move_info_array;
 
-    /** Same as m_bc->get_move_info_ext_array() */
+    /** Caches m_bc->get_move_info_ext_array() */
     const MoveInfoExt* m_move_info_ext_array;
 
-    /** Same as m_bc->get_move_info_ext_2_array() */
+    /** Caches m_bc->get_move_info_ext_2_array() */
     const MoveInfoExt2* m_move_info_ext_2_array;
 
     const Geometry* m_geo;
@@ -445,6 +441,7 @@ private:
 
     void optimize_attach_point_lists();
 
+    template<unsigned MAX_SIZE>
     void place(Color c, Move mv);
 
     void place_setup(const Setup& setup);
@@ -532,13 +529,6 @@ inline ColorMove Board::get_move(unsigned n) const
     return m_moves[n];
 }
 
-inline const MoveInfo& Board::get_move_info(Move mv) const
-{
-    LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
-    return *(m_move_info_array + mv.to_int());
-}
-
 inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
@@ -551,6 +541,16 @@ inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
     LIBBOARDGAME_ASSERT(! mv.is_null());
     LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return *(m_move_info_ext_2_array + mv.to_int());
+}
+
+inline Piece Board::get_move_piece(Move mv) const
+{
+    return m_bc->get_move_piece(mv);
+}
+
+inline Range<const Point> Board::get_move_points(Move mv) const
+{
+    return m_bc->get_move_points(mv);
 }
 
 inline auto Board::get_moves() const
@@ -782,9 +782,9 @@ inline const GridExt<bool>& Board::is_forbidden(Color c) const
 
 inline bool Board::is_forbidden(Color c, Move mv) const
 {
-    auto& info = get_move_info(mv);
-    auto i = info.begin();
-    auto end = info.end();
+    auto points = get_move_points(mv);
+    auto i = points.begin();
+    auto end = points.end();
     do
         if (m_state_color[c].forbidden[*i])
             return true;
@@ -799,12 +799,12 @@ inline bool Board::is_legal(Move mv) const
 
 inline bool Board::is_legal_nonfirst(Color c, Move mv) const
 {
-    auto& info = get_move_info(mv);
-    if (! is_piece_left(c, info.get_piece()))
+    if (! is_piece_left(c, get_move_piece(mv)))
         return false;
+    auto points = get_move_points(mv);
     bool has_attach_point = false;
-    auto i = info.begin();
-    auto end = info.end();
+    auto i = points.begin();
+    auto end = points.end();
     do
     {
         if (m_state_color[c].forbidden[*i])
@@ -827,29 +827,30 @@ inline bool Board::is_same_player(Color c1, Color c2) const
     return c1 == c2 || c1 == m_second_color[c2];
 }
 
+template<unsigned MAX_SIZE>
 inline void Board::place(Color c, Move mv)
 {
-    auto& info = get_move_info(mv);
+    auto& info = BoardConst::get_move_info<MAX_SIZE>(mv, m_move_info_array);
     auto& info_ext = get_move_info_ext(mv);
     auto piece = info.get_piece();
-    auto piece_size = info.size();
     auto& state_color = m_state_color[c];
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
+    auto score_points = m_score_points[piece];
     if (--state_color.nu_left_piece[piece] == 0)
     {
         state_color.pieces_left.remove_fast(piece);
         if (state_color.pieces_left.empty())
         {
             state_color.points += m_bonus_all_pieces;
-            if (piece_size == 1)
+            if (score_points == 1)
                 state_color.points += m_bonus_one_piece;
         }
     }
     ++m_state_base.nu_onboard_pieces_all;
     ++state_color.nu_onboard_pieces;
-    state_color.points += m_score_points[piece];
+    state_color.points += score_points;
     auto i = info.begin();
-    auto end = i + piece_size;
+    auto end = info.end();
     do
     {
         m_state_base.point_state[*i] = PointState(c);
@@ -876,16 +877,12 @@ inline void Board::place(Color c, Move mv)
     attach_points.resize(n);
 }
 
+template<unsigned MAX_SIZE>
 inline void Board::play(Color c, Move mv)
 {
-    place(c, mv);
+    place<MAX_SIZE>(c, mv);
     m_moves.push_back(ColorMove(c, mv));
     m_state_base.to_play = get_next(c);
-}
-
-inline void Board::play(Move mv)
-{
-    play(m_state_base.to_play, mv);
 }
 
 inline void Board::play(ColorMove mv)

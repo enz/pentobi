@@ -86,7 +86,7 @@ public:
 
     bool gen_children(Tree::NodeExpander& expander, Float init_val);
 
-    void start_playout();
+    void start_playout() { };
 
     /** Generate a playout move.
         @return @c false if end of game was reached, and no move was
@@ -123,9 +123,7 @@ private:
 
     Color::IntType m_nu_colors;
 
-    PieceSet m_piece_set;
-
-    const MoveInfo* m_move_info_array;
+    BoardConst::MoveInfoArray m_move_info_array;
 
     const MoveInfoExt* m_move_info_ext_array;
 
@@ -198,6 +196,9 @@ private:
         symmetry can be broken a few moves later. */
     unsigned m_symmetry_min_nu_pieces;
 
+    /** Cache of m_bc->get_max_piece_size() */
+    unsigned m_max_piece_size;
+
     /** Remember attach points that were already used for move generation.
         Allows the incremental update of the move lists to skip attach points
         of newly played pieces that were already attach points of previously
@@ -205,11 +206,11 @@ private:
     ColorMap<Grid<bool>> m_moves_added_at;
 
 
-    template<unsigned PIECE_SIZE>
+    template<unsigned MAX_SIZE>
     void add_moves(Point p, Color c, const Board::PiecesLeftList& pieces,
                    float& total_gamma, MoveList& moves, unsigned& nu_moves);
 
-    template<unsigned PIECE_SIZE>
+    template<unsigned MAX_SIZE>
     LIBBOARDGAME_NOINLINE
     void add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                             bool with_gamma, MoveList& moves);
@@ -226,10 +227,11 @@ private:
                             bool use_nu_attach);
 
     /** Equivalent to but faster than m_bd.get_move_info() */
-    const MoveInfo& get_move_info(Move move) const;
+    template<unsigned MAX_SIZE>
+    const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;
 
     /** Equivalent to but faster than m_bd.get_move_info_ext() */
-    const MoveInfoExt& get_move_info_ext(Move move) const;
+    const MoveInfoExt& get_move_info_ext(Move mv) const;
 
     PrecompMoves::Range get_moves(Color c, Piece piece, Point p,
                                   unsigned adj_status) const;
@@ -240,36 +242,38 @@ private:
 
     const Board::PiecesLeftList& get_pieces_considered(Color c);
 
-    template<unsigned PIECE_SIZE>
+    template<unsigned MAX_SIZE>
     void init_moves_with_gamma(Color c);
 
-    template<unsigned PIECE_SIZE>
+    template<unsigned MAX_SIZE>
     void init_moves_without_gamma(Color c);
 
-    template<unsigned PIECE_SIZE>
+    template<unsigned MAX_SIZE>
     bool check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
                          MoveList& moves, unsigned& nu_moves);
 
-    template<unsigned PIECE_SIZE>
-    bool check_move(Move mv, const MoveInfo& info, float gamma_piece,
+    template<unsigned MAX_SIZE>
+    bool check_move(Move mv, const MoveInfo<MAX_SIZE>& info, float gamma_piece,
                     MoveList& moves, unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,
                     float& total_gamma);
 
-    template<unsigned PIECE_SIZE>
-    bool check_move(Move mv, const MoveInfo& info, MoveList& moves,
+    template<unsigned MAX_SIZE>
+    bool check_move(Move mv, const MoveInfo<MAX_SIZE>& info, MoveList& moves,
                     unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,
                     float& total_gamma);
 
     bool gen_playout_move_full(PlayerMove<Move>& mv);
 
-    template<unsigned PIECE_SIZE>
+    template<unsigned MAX_SIZE>
     void update_moves(Color c);
 
+    template<unsigned MAX_SIZE>
     void update_playout_features(Color c, Move mv);
 
-    void update_symmetry_broken(Move mv);
+    template<unsigned MAX_SIZE>
+    LIBBOARDGAME_NOINLINE void update_symmetry_broken(Move mv);
 };
 
 inline void State::evaluate_playout(array<Float, 6>& result)
@@ -330,11 +334,10 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     return gen_playout_move_full(mv);
 }
 
-inline const MoveInfo& State::get_move_info(Move mv) const
+template<unsigned MAX_SIZE>
+inline const MoveInfo<MAX_SIZE>& State::get_move_info(Move mv) const
 {
-    LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
-    return *(m_move_info_array + mv.to_int());
+    return BoardConst::get_move_info<MAX_SIZE>(mv, m_move_info_array);
 }
 
 inline const MoveInfoExt& State::get_move_info_ext(Move mv) const
@@ -370,14 +373,28 @@ inline void State::play_in_tree(Move mv)
     if (! mv.is_null())
     {
         LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
-        m_bd.play(to_play, mv);
         m_nu_passes = 0;
-        update_playout_features(to_play, mv);
+        if (m_max_piece_size == 5)
+        {
+            m_bd.play<5>(to_play, mv);
+            update_playout_features<5>(to_play, mv);
+        }
+        else if (m_max_piece_size == 6)
+        {
+            m_bd.play<6>(to_play, mv);
+            update_playout_features<6>(to_play, mv);
+        }
+        else
+        {
+            LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+            m_bd.play<7>(to_play, mv);
+            update_playout_features<7>(to_play, mv);
+        }
     }
     else
     {
-        m_bd.set_to_play(to_play.get_next(m_nu_colors));
         ++m_nu_passes;
+        m_bd.set_to_play(to_play.get_next(m_nu_colors));
     }
     if (log_simulations)
         LIBBOARDGAME_LOG(m_bd);
@@ -387,19 +404,32 @@ inline void State::play_playout(Move mv)
 {
     auto to_play = m_bd.get_to_play();
     LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
-    m_bd.play(to_play, mv);
+    if (m_max_piece_size == 5)
+    {
+        m_bd.play<5>(to_play, mv);
+        update_playout_features<5>(to_play, mv);
+        if (! m_is_symmetry_broken)
+            update_symmetry_broken<5>(mv);
+    }
+    else if (m_max_piece_size == 6)
+    {
+        m_bd.play<6>(to_play, mv);
+        update_playout_features<6>(to_play, mv);
+        if (! m_is_symmetry_broken)
+            update_symmetry_broken<6>(mv);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        m_bd.play<7>(to_play, mv);
+        update_playout_features<7>(to_play, mv);
+        // No game variant with piece size 7 uses m_is_symmetry_broken
+    }
     ++m_nu_new_moves[to_play];
     m_last_move[to_play] = mv;
     m_nu_passes = 0;
-    if (! m_is_symmetry_broken)
-        update_symmetry_broken(mv);
     if (log_simulations)
         LIBBOARDGAME_LOG(m_bd);
-    update_playout_features(to_play, mv);
-}
-
-inline void State::start_playout()
-{
 }
 
 inline bool State::skip_rave(Move mv) const
@@ -408,12 +438,54 @@ inline bool State::skip_rave(Move mv) const
     return false;
 }
 
+template<unsigned MAX_SIZE>
 inline void State::update_playout_features(Color c, Move mv)
 {
-    auto& info = get_move_info(mv);
+    auto& info = get_move_info<MAX_SIZE>(mv);
     for (Color i : Color::Range(m_nu_colors))
         m_playout_features[i].set_forbidden(info);
     m_playout_features[c].set_forbidden(get_move_info_ext(mv));
+}
+
+template<unsigned MAX_SIZE>
+void State::update_symmetry_broken(Move mv)
+{
+    Color to_play = m_bd.get_to_play();
+    Color second_color = m_bd.get_second_color(to_play);
+    auto& info = get_move_info<MAX_SIZE>(mv);
+    auto i = info.begin();
+    auto end = info.end();
+    if (to_play == Color(0) || to_play == Color(2))
+    {
+        // First player to play: Check that all symmetric points of the last
+        // move of the second player are occupied by the first player
+        do
+        {
+            Point symm_p = m_shared_const.symmetric_points[*i];
+            if (m_bd.get_point_state(symm_p) != second_color)
+            {
+                m_is_symmetry_broken = true;
+                return;
+            }
+        }
+        while (++i != end);
+    }
+    else
+    {
+        // Second player to play: Check that all symmetric points of the last
+        // move of the first player are empty (i.e. the second player can play
+        // there to preserve the symmetry)
+        do
+        {
+            Point symm_p = m_shared_const.symmetric_points[*i];
+            if (! m_bd.get_point_state(symm_p).is_empty())
+            {
+                m_is_symmetry_broken = true;
+                return;
+            }
+        }
+        while (++i != end);
+    }
 }
 
 //-----------------------------------------------------------------------------

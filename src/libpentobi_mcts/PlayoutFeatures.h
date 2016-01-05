@@ -14,6 +14,7 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_base::ArrayList;
+using libboardgame_util::Range;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
@@ -95,7 +96,8 @@ public:
     void restore_snapshot(const Board& bd);
 
     /** Set points of move to forbidden. */
-    void set_forbidden(const MoveInfo& info);
+    template<unsigned MAX_SIZE>
+    void set_forbidden(const MoveInfo<MAX_SIZE>& info);
 
     /** Set adjacent points of move to forbidden. */
     void set_forbidden(const MoveInfoExt& info_ext);
@@ -125,10 +127,11 @@ inline void PlayoutFeatures::restore_snapshot(const Board& bd)
     m_point_value.copy_from(m_snapshot, bd.get_geometry());
 }
 
-inline void PlayoutFeatures::set_forbidden(const MoveInfo& info)
+template<unsigned MAX_SIZE>
+inline void PlayoutFeatures::set_forbidden(const MoveInfo<MAX_SIZE>& info)
 {
     auto p = info.begin();
-    for (unsigned i = 0; i < PieceInfo::max_size; ++i, ++p)
+    for (unsigned i = 0; i < MAX_SIZE; ++i, ++p)
         m_point_value[*p] = 0x1000u;
     m_point_value[Point::null()] = 0;
 }

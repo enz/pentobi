@@ -62,9 +62,8 @@ bool compareTransform(const PieceInfo& pieceInfo, const Transform* t1,
 QPointF getGameCoord(const Board& bd, Move mv)
 {
     auto& geo = bd.get_geometry();
-    auto moveInfo = bd.get_move_info(mv);
     PiecePoints movePoints;
-    for (Point p : moveInfo)
+    for (Point p : bd.get_move_points(mv))
         movePoints.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
     return PieceModel::findCenter(bd, movePoints, false);
 }
@@ -421,7 +420,7 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
 PieceModel* GameModel::preparePiece(int color, int move)
 {
     Move mv(move);
-    Piece piece = getBoard().get_move_info(mv).get_piece();
+    Piece piece = getBoard().get_move_piece(mv);
     for (auto pieceModel : getPieceModels(Color(color)))
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
         {
@@ -441,8 +440,7 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 {
     auto& bd = getBoard();
     auto transform = bd.find_transform(mv);
-    Piece piece = bd.get_move_info(mv).get_piece();
-    auto& pieceInfo = bd.get_piece_info(piece);
+    auto& pieceInfo = bd.get_piece_info(bd.get_move_piece(mv));
     if (! compareTransform(pieceInfo, pieceModel->getTransform(), transform))
         pieceModel->setTransform(transform);
 }
@@ -488,7 +486,7 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
                                    array<bool, Board::max_pieces>& isPlayed)
 {
     auto& bd = getBoard();
-    Piece piece = bd.get_move_info(mv).get_piece();
+    Piece piece = bd.get_move_piece(mv);
     auto& pieceInfo = bd.get_piece_info(piece);
     auto gameCoord = getGameCoord(bd, mv);
     auto transform = bd.find_transform(mv);

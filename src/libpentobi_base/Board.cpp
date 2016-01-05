@@ -84,11 +84,10 @@ void Board::copy_from(const Board& bd)
 const Transform* Board::find_transform(Move mv) const
 {
     auto& geo = get_geometry();
-    auto& move_info = get_move_info(mv);
     PiecePoints points;
-    for (Point p : move_info)
+    for (Point p : get_move_points(mv))
         points.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
-    return get_piece_info(move_info.get_piece()).find_transform(geo, points);
+    return get_piece_info(get_move_piece(mv)).find_transform(geo, points);
 }
 
 void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
@@ -135,7 +134,8 @@ unsigned Board::get_bonus(Color c) const
         --i;
         if (m_moves[i].color == c)
         {
-            if (get_move_info(m_moves[i].move).size() == 1)
+            auto piece = get_move_piece(m_moves[i].move);
+            if (m_score_points[piece] == 1)
                 bonus += m_bonus_one_piece;
             break;
         }
@@ -185,13 +185,13 @@ Move Board::get_move_at(Point p) const
     {
         auto c = s.to_color();
         for (Move mv : m_setup.placements[c])
-            if (get_move_info(mv).contains(p))
+            if (get_move_points(mv).contains(p))
                 return mv;
         for (ColorMove color_mv : m_moves)
             if (color_mv.color == c)
             {
                 Move mv = color_mv.move;
-                if (get_move_info(mv).contains(p))
+                if (get_move_points(mv).contains(p))
                     return mv;
             }
     }
@@ -323,6 +323,7 @@ void Board::init_variant(Variant variant)
         m_bonus_all_pieces = 15;
         m_bonus_one_piece = 5;
     }
+    m_max_piece_size = m_bc->get_max_piece_size();
     m_geo = &m_bc->get_geometry();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
@@ -374,12 +375,12 @@ bool Board::is_game_over() const
 
 bool Board::is_legal(Color c, Move mv) const
 {
-    auto& info = get_move_info(mv);
-    if (! is_piece_left(c, info.get_piece()))
+    if (! is_piece_left(c, get_move_piece(mv)))
         return false;
+    auto points = get_move_points(mv);
     bool has_attach_point = false;
-    auto i = info.begin();
-    auto end = info.end();
+    auto i = points.begin();
+    auto end = points.end();
     do
     {
         if (m_state_color[c].forbidden[*i])
@@ -392,11 +393,11 @@ bool Board::is_legal(Color c, Move mv) const
         return true;
     if (! is_first_piece(c))
         return false;
-    i = info.begin();
+    i = points.begin();
     do
         if (is_colorless_starting_point(*i)
-            || (is_colored_starting_point(*i)
-                && get_starting_point_color(*i) == c))
+                || (is_colored_starting_point(*i)
+                    && get_starting_point_color(*i) == c))
             return true;
     while (++i != end);
     return false;
@@ -420,15 +421,41 @@ void Board::optimize_attach_point_lists()
     }
 }
 
-/** Place setup moves on board.
-    This function is only extracted from init() because it contains the large
-    inline function place(), which will cause a failure to inline and warning
-    with -Winline with GCC 4.8.2. */
+/** Place setup moves on board. */
 void Board::place_setup(const Setup& setup)
 {
-    for (Color c : get_colors())
-        for (Move mv : setup.placements[c])
-            place(c, mv);
+    if (m_max_piece_size == 5)
+    {
+        for (Color c : get_colors())
+            for (Move mv : setup.placements[c])
+                place<5>(c, mv);
+    }
+    else if (m_max_piece_size == 6)
+    {
+        for (Color c : get_colors())
+            for (Move mv : setup.placements[c])
+                place<6>(c, mv);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        for (Color c : get_colors())
+            for (Move mv : setup.placements[c])
+                place<7>(c, mv);
+    }
+}
+
+void Board::play(Color c, Move mv)
+{
+    if (m_max_piece_size == 5)
+        play<5>(c, mv);
+    else if (m_max_piece_size == 6)
+        play<6>(c, mv);
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
+        play<7>(c, mv);
+    }
 }
 
 void Board::take_snapshot()
@@ -514,7 +541,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 // less-than/greater-than character is used instead of the
                 // space to mark the last piece played.
                 if (! last_mv.is_null()
-                        && get_move_info(last_mv.move).contains(p)
+                        && get_move_points(last_mv.move).contains(p)
                         && (x == 0 || ! m_geo->is_onboard(x - 1, y)
                             || get_point_state(m_geo->get_point(x - 1, y))
                                != last_mv.color))
@@ -525,9 +552,11 @@ void Board::write(ostream& out, bool mark_last_move) const
                 }
                 else if (! last_mv.is_null()
                          && x > 0 && m_geo->is_onboard(x - 1, y)
-                         && get_move_info(last_mv.move).contains(m_geo->get_point(x - 1, y))
+                         && get_move_points(last_mv.move).contains(
+                                                   m_geo->get_point(x - 1, y))
                          && get_point_state(p) != last_mv.color
-                         && get_point_state(m_geo->get_point(x - 1, y)) == last_mv.color)
+                         && get_point_state(m_geo->get_point(x - 1, y))
+                                == last_mv.color)
                 {
                     set_color(out, "\x1B[1;37;47m");
                     out << '<';

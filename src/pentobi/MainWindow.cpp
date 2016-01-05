@@ -194,7 +194,7 @@ void setIcon(QAction* action, const QString& name)
     Used for sorting the list used in Find Move. */
 float getHeuristic(const Board& bd, Move mv)
 {
-    auto& piece_info = bd.get_piece_info(bd.get_move_info(mv).get_piece());
+    auto& piece_info = bd.get_piece_info(bd.get_move_piece(mv));
     auto& info_ext = bd.get_move_info_ext(mv);
     return static_cast<float>((1000 * piece_info.get_score_points()
                                + 10 * info_ext.size_attach_points
@@ -1569,13 +1569,13 @@ void MainWindow::exportImage()
             for (Move mv : m_bd.get_setup().placements[c])
             {
                 ++n;
-                for (Point p : m_bd.get_move_info(mv))
+                for (Point p : m_bd.get_move_points(mv))
                     pieceId[p] = n;
             }
         for (auto mv : m_bd.get_moves())
         {
             ++n;
-            for (Point p : m_bd.get_move_info(mv.move))
+            for (Point p : m_bd.get_move_points(mv.move))
                 pieceId[p] = n;
         }
     }
@@ -1619,7 +1619,7 @@ void MainWindow::findMove()
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
     auto mv = (*m_legalMoves)[m_legalMoveIndex];
-    selectPiece(m_currentColor, m_bd.get_move_info(mv).get_piece());
+    selectPiece(m_currentColor, m_bd.get_move_piece(mv));
     m_guiBoard->showMove(m_currentColor, mv);
     ++m_legalMoveIndex;
 }
@@ -2515,8 +2515,7 @@ void MainWindow::pointClicked(Point p)
     m_game.remove_setup(c, mv);
     setSetupPlayer();
     updateWindow(true);
-    Piece piece = m_bd.get_move_info(mv).get_piece();
-    selectPiece(c, piece, m_bd.find_transform(mv));
+    selectPiece(c, m_bd.get_move_piece(mv), m_bd.find_transform(mv));
     m_guiBoard->setSelectedPiecePoints(mv);
 }
 

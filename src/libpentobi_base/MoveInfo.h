@@ -21,10 +21,14 @@ using namespace std;
 
 /** Most frequently accessed move info.
     Contains the points and the piece of the move. If the point list is smaller
-    than PieceInfo::max_size, values above end() up to PieceInfo::max_size may
-    be accessed and contain Point::null() to allow loop unrolling. The points
-    correspond to PieceInfo::get_points(), which includes certain junction
-    points in Nexos, see comment there. */
+    than MAX_SIZE, values above end() up to MAX_SIZE may be accessed and
+    contain Point::null() to allow loop unrolling. The points correspond to
+    PieceInfo::get_points(), which includes certain junction points in Nexos,
+    see comment there.
+    Since this is the most performance-critical data structure, it takes
+    a template argument to make the space for move points not larger than
+    needed in the current game variant. */
+template<unsigned MAX_SIZE>
 class MoveInfo
 {
 public:
@@ -34,7 +38,7 @@ public:
     {
         m_piece = static_cast<uint_least8_t>(piece.to_int());
         m_size = static_cast<uint_least8_t>(points.size());
-        for (MovePoints::IntType i = 0; i < MovePoints::max_size; ++i)
+        for (MovePoints::IntType i = 0; i < MAX_SIZE; ++i)
             m_points[i] = points.get_unchecked(i);
     }
 
@@ -42,9 +46,9 @@ public:
 
     const Point* end() const { return m_points + m_size; }
 
-    uint_least8_t size() const { return m_size; }
-
     Piece get_piece() const { return Piece(m_piece); }
+
+    unsigned get_size() const { return m_size; }
 
     bool contains(Point p) const { return find(begin(), end(), p) != end(); }
 
@@ -53,13 +57,14 @@ private:
 
     uint_least8_t m_size;
 
-    Point m_points[PieceInfo::max_size];
+    Point m_points[MAX_SIZE];
 };
 
 //-----------------------------------------------------------------------------
 
 /** Less frequently accessed move info.
-    Stored separately from MoveInfo to improve CPU cache performance. */
+    Stored separately from move points and move piece to improve CPU cache
+    performance. */
 struct MoveInfoExt
 {
     /** Concatenated list of adjacent and attach points. */
@@ -94,7 +99,8 @@ struct MoveInfoExt
 //-----------------------------------------------------------------------------
 
 /** Least frequently accessed move info.
-    Stored separately from MoveInfo to improve CPU cache performance. */
+    Stored separately from move points and move piece to improve CPU cache
+    performance. */
 struct MoveInfoExt2
 {
     /** Whether the move breaks rotational symmetry of the board.
