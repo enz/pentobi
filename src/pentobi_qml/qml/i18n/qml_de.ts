@@ -50,10 +50,6 @@
         <source>Move %1</source>
         <translation>Zug %1</translation>
     </message>
-    <message>
-        <source>Unsupported game variant</source>
-        <translation>Spielvariante nicht unterstützt</translation>
-    </message>
 </context>
 <context>
     <name>Main</name>
@@ -237,6 +233,14 @@
     <message>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
+    </message>
+    <message>
+        <source>&amp;Nexos (2 Players)</source>
+        <translation>&amp;Nexos (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Ne&amp;xos (4 Players)</source>
+        <translation>Ne&amp;xos (4 Spieler)</translation>
     </message>
 </context>
 <context>
