@@ -16,8 +16,7 @@ namespace libboardgame_gtp {
 
 ostringstream Response::s_dummy;
 
-Response::~Response()
-{ }
+Response::~Response() = default;
 
 void Response::write(ostream& out, string& buffer) const
 {

@@ -18,16 +18,13 @@ namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
 
-Property::~Property()
-{ }
+Property::~Property() = default;
 
 //-----------------------------------------------------------------------------
 
-SgfNode::SgfNode()
-{ }
+SgfNode::SgfNode() = default;
 
-SgfNode::~SgfNode()
-{ }
+SgfNode::~SgfNode() = default;
 
 void SgfNode::append(unique_ptr<SgfNode> node)
 {

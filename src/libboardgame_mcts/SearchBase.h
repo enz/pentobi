@@ -714,8 +714,7 @@ SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
 { }
 
 template<class S, class M, class R>
-SearchBase<S, M, R>::~SearchBase()
-{ }
+SearchBase<S, M, R>::~SearchBase() = default;
 
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const

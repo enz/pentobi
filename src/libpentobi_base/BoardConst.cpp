@@ -954,7 +954,7 @@ void BoardConst::init_symmetry_info()
     }
 }
 
-inline void BoardConst::sort(MovePoints& points) const
+void BoardConst::sort(MovePoints& points) const
 {
     auto check = [&](unsigned short a, unsigned short b)
     {

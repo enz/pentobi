@@ -17,8 +17,7 @@ namespace libboardgame_gtp {
 
 //-----------------------------------------------------------------------------
 
-CmdLine::~CmdLine()
-{ }
+CmdLine::~CmdLine() = default;
 
 void CmdLine::add_elem(string::const_iterator begin,
                        string::const_iterator end)

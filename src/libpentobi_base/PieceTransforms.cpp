@@ -14,8 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-PieceTransforms::~PieceTransforms()
-{ }
+PieceTransforms::~PieceTransforms() = default;
 
 //-----------------------------------------------------------------------------
 

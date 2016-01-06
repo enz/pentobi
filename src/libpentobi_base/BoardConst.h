@@ -272,6 +272,12 @@ inline const MoveInfoExt2* BoardConst::get_move_info_ext_2_array() const
     return m_move_info_ext_2.get();
 }
 
+template<unsigned MAX_SIZE>
+inline Piece BoardConst::get_move_piece(Move mv) const
+{
+    return get_move_info<MAX_SIZE>(mv).get_piece();
+}
+
 inline Piece BoardConst::get_move_piece(Move mv) const
 {
     if (m_max_piece_size == 5)
@@ -283,12 +289,6 @@ inline Piece BoardConst::get_move_piece(Move mv) const
         LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
         return get_move_piece<7>(mv);
     }
-}
-
-template<unsigned MAX_SIZE>
-inline Piece BoardConst::get_move_piece(Move mv) const
-{
-    return get_move_info<MAX_SIZE>(mv).get_piece();
 }
 
 inline Range<const Point> BoardConst::get_move_points(Move mv) const

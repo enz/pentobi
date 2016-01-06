@@ -307,8 +307,7 @@ Tree<N>::Tree(size_t memory, unsigned nu_threads)
 }
 
 template<typename N>
-Tree<N>::~Tree()
-{ }
+Tree<N>::~Tree() = default;
 
 template<typename N>
 inline void Tree<N>::add_value(const Node& node, Float v)

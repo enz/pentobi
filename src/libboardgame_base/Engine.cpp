@@ -31,8 +31,7 @@ Engine::Engine()
     add("set_random_seed", &Engine::cmd_set_random_seed);
 }
 
-Engine::~Engine()
-{ }
+Engine::~Engine() = default;
 
 void Engine::cmd_cputime(Response& response)
 {

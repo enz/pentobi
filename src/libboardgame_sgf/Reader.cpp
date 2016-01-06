@@ -33,11 +33,9 @@ bool is_ascii_space(int c)
 
 //-----------------------------------------------------------------------------
 
-Reader::Reader()
-{ }
+Reader::Reader() = default;
 
-Reader::~Reader()
-{ }
+Reader::~Reader() = default;
 
 void Reader::consume_char(char expected)
 {

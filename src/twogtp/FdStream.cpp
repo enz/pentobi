@@ -31,8 +31,7 @@ FdInBuf::FdInBuf(int fd, size_t buf_size)
     setg(end, end, end);
 }
 
-FdInBuf::~FdInBuf()
-{ }
+FdInBuf::~FdInBuf() = default;
 
 auto FdInBuf::underflow() -> int_type
 {
@@ -63,8 +62,7 @@ FdInStream::FdInStream(int fd)
 
 //-----------------------------------------------------------------------------
 
-FdOutBuf::~FdOutBuf()
-{ }
+FdOutBuf::~FdOutBuf() = default;
 
 auto FdOutBuf::overflow(int_type c) -> int_type
 {

@@ -14,13 +14,16 @@ namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-Timer::Timer()
-{ }
-
 Timer::Timer(TimeSource& time_source)
     : m_start(time_source()),
       m_time_source(&time_source)
 { }
+
+double Timer::operator()() const
+{
+    LIBBOARDGAME_ASSERT(m_time_source);
+    return (*m_time_source)() - m_start;
+}
 
 void Timer::reset()
 {

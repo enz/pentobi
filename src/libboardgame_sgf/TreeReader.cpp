@@ -14,11 +14,9 @@ namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
 
-TreeReader::TreeReader()
-{ }
+TreeReader::TreeReader() = default;
 
-TreeReader::~TreeReader()
-{ }
+TreeReader::~TreeReader() = default;
 
 unique_ptr<SgfNode> TreeReader::get_tree_transfer_ownership()
 {

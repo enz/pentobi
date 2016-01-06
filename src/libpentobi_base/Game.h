@@ -21,6 +21,8 @@ class Game
 public:
     explicit Game(Variant variant);
 
+    ~Game();
+
     void init(Variant variant);
 
     void init();

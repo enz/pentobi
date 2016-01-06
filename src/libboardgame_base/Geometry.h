@@ -167,14 +167,10 @@ private:
 
 
 template<class P>
-Geometry<P>::Geometry()
-{
-}
+Geometry<P>::Geometry() = default;
 
 template<class P>
-Geometry<P>::~Geometry()
-{
-}
+Geometry<P>::~Geometry() = default;
 
 template<class P>
 bool Geometry<P>::from_string(const string& s, Point& p) const

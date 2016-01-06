@@ -64,8 +64,7 @@ Engine::Engine()
     add("version", &Engine::cmd_version);
 }
 
-Engine::~Engine()
-{ }
+Engine::~Engine() = default;
 
 void Engine::add(const string& name, Handler f)
 {

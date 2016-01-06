@@ -18,7 +18,7 @@ public:
     /** Constructor without time source.
         If constructed without time source, the timer cannot be used befor
         reset(TimeSource&) was called. */
-    Timer();
+    Timer() = default;
 
     /** Constructor.
         @param time_source (@ref libboardgame_doc_storesref) */
@@ -35,12 +35,6 @@ private:
 
     TimeSource* m_time_source = nullptr;
 };
-
-inline double Timer::operator()() const
-{
-    LIBBOARDGAME_ASSERT(m_time_source);
-    return (*m_time_source)() - m_start;
-}
 
 //-----------------------------------------------------------------------------
 
