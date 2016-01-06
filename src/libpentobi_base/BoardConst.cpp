@@ -937,7 +937,7 @@ void BoardConst::init_symmetry_info()
     SymmetricPoints symmetric_points;
     PointTransfRot180<Point> transform;
     symmetric_points.init(m_geo, transform);
-    for (unsigned i = 1; i < m_nu_moves; ++i)
+    for (Move::IntType i = 1; i < m_nu_moves; ++i)
     {
         Move mv(i);
         auto& info_ext_2 = m_move_info_ext_2[i];
