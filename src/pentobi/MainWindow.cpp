@@ -642,7 +642,7 @@ void MainWindow::computerColors()
     QSettings settings;
     settings.setValue("computer_color_none", computerNone);
 
-    // Enable auto play only if any color has changed because that means that
+    // Enable autoplay only if any color has changed because that means that
     // the user probably wants to continue playing, otherwise the user could
     // have only opened the dialog to check the current settings
     for (Color c : Color::Range(nu_colors))
@@ -697,9 +697,20 @@ QAction* MainWindow::createAction(const QString& text)
 {
     auto action = new QAction(text, this);
     // Add all actions also to main window. if an action is only added to
-    // the menu bar, shortcuts won,t work in fullscreen mode because the menu
+    // the menu bar, shortcuts won't work in fullscreen mode because the menu
     // is not visible in fullscreen mode
     addAction(action);
+    return action;
+}
+
+QAction* MainWindow::createActionLevel(QActionGroup* group, unsigned level,
+                                       const QString& text)
+{
+    auto action = createAction(text);
+    action->setCheckable(true);
+    action->setActionGroup(group);
+    action->setData(level);
+    connect(action, SIGNAL(triggered(bool)), SLOT(levelTriggered(bool)));
     return action;
 }
 
@@ -880,7 +891,7 @@ void MainWindow::createActions()
           tr("&7"), tr("&8"), tr("&9") };
     m_actionLevel.reserve(m_maxLevel);
     for (unsigned i = 0; i < m_maxLevel; ++i)
-        m_actionLevel.push_back(createLevelAction(groupLevel, i + 1,
+        m_actionLevel.push_back(createActionLevel(groupLevel, i + 1,
                                                   levelText[i]));
     connect(m_actionFlipVertically, SIGNAL(triggered()),
             SLOT(flipVertically()));
@@ -1108,65 +1119,34 @@ void MainWindow::createActions()
     setIcon(m_actionUndo, "pentobi-undo");
     connect(m_actionUndo, SIGNAL(triggered()), SLOT(undo()));
 
-    m_actionVariantClassic2 = createAction(tr("Classic (&2 Players)"));
-    m_actionVariantClassic2->setActionGroup(groupVariant);
-    m_actionVariantClassic2->setCheckable(true);
-    connect(m_actionVariantClassic2, SIGNAL(triggered(bool)),
-            SLOT(variantClassic2(bool)));
-
-    m_actionVariantClassic3 = createAction(tr("Classic (&3 Players)"));
-    m_actionVariantClassic3->setActionGroup(groupVariant);
-    m_actionVariantClassic3->setCheckable(true);
-    connect(m_actionVariantClassic3, SIGNAL(triggered(bool)),
-            SLOT(variantClassic3(bool)));
-
-    m_actionVariantClassic = createAction(tr("Classic (&4 Players)"));
-    m_actionVariantClassic->setActionGroup(groupVariant);
-    m_actionVariantClassic->setCheckable(true);
-    connect(m_actionVariantClassic, SIGNAL(triggered(bool)),
-            SLOT(variantClassic(bool)));
-
-    m_actionVariantDuo = createAction(tr("&Duo"));
-    m_actionVariantDuo->setActionGroup(groupVariant);
-    m_actionVariantDuo->setCheckable(true);
-    connect(m_actionVariantDuo, SIGNAL(triggered(bool)),
-            SLOT(variantDuo(bool)));
-
-    m_actionVariantJunior = createAction(tr("&Junior"));
-    m_actionVariantJunior->setActionGroup(groupVariant);
-    m_actionVariantJunior->setCheckable(true);
-    connect(m_actionVariantJunior, SIGNAL(triggered(bool)),
-            SLOT(variantJunior(bool)));
-
-    m_actionVariantNexos2 = createAction(tr("Nexos (&2 Players)"));
-    m_actionVariantNexos2->setActionGroup(groupVariant);
-    m_actionVariantNexos2->setCheckable(true);
-    connect(m_actionVariantNexos2, SIGNAL(triggered(bool)),
-            SLOT(variantNexos2(bool)));
-
-    m_actionVariantNexos = createAction(tr("Nexos (&4 Players)"));
-    m_actionVariantNexos->setActionGroup(groupVariant);
-    m_actionVariantNexos->setCheckable(true);
-    connect(m_actionVariantNexos, SIGNAL(triggered(bool)),
-            SLOT(variantNexos(bool)));
-
-    m_actionVariantTrigon2 = createAction(tr("Trigon (&2 Players)"));
-    m_actionVariantTrigon2->setActionGroup(groupVariant);
-    m_actionVariantTrigon2->setCheckable(true);
-    connect(m_actionVariantTrigon2, SIGNAL(triggered(bool)),
-            SLOT(variantTrigon2(bool)));
-
-    m_actionVariantTrigon3 = createAction(tr("Trigon (&3 Players)"));
-    m_actionVariantTrigon3->setActionGroup(groupVariant);
-    m_actionVariantTrigon3->setCheckable(true);
-    connect(m_actionVariantTrigon3, SIGNAL(triggered(bool)),
-            SLOT(variantTrigon3(bool)));
-
-    m_actionVariantTrigon = createAction(tr("Trigon (&4 Players)"));
-    m_actionVariantTrigon->setActionGroup(groupVariant);
-    m_actionVariantTrigon->setCheckable(true);
-    connect(m_actionVariantTrigon, SIGNAL(triggered(bool)),
-            SLOT(variantTrigon(bool)));
+    m_actionVariantClassic2 =
+            createActionVariant(groupVariant, Variant::classic_2,
+                                tr("Classic (&2 Players)"));
+    m_actionVariantClassic3 =
+            createActionVariant(groupVariant, Variant::classic_3,
+                                tr("Classic (&3 Players)"));
+    m_actionVariantClassic =
+            createActionVariant(groupVariant, Variant::classic,
+                                tr("Classic (&4 Players)"));
+    m_actionVariantDuo =
+            createActionVariant(groupVariant, Variant::duo, tr("&Duo"));
+    m_actionVariantJunior =
+            createActionVariant(groupVariant, Variant::junior, tr("&Junior"));
+    m_actionVariantTrigon2 =
+            createActionVariant(groupVariant, Variant::trigon_2,
+                                tr("Trigon (&2 Players)"));
+    m_actionVariantTrigon3 =
+            createActionVariant(groupVariant, Variant::trigon_3,
+                                tr("Trigon (&3 Players)"));
+    m_actionVariantTrigon =
+            createActionVariant(groupVariant, Variant::trigon,
+                                tr("Trigon (&4 Players)"));
+    m_actionVariantNexos2 =
+            createActionVariant(groupVariant, Variant::nexos_2,
+                                tr("Nexos (&2 Players)"));
+    m_actionVariantNexos =
+            createActionVariant(groupVariant, Variant::nexos,
+                                tr("Nexos (&4 Players)"));
 
     m_actionVeryBadMove = createAction(tr("V&ery Bad"));
     m_actionVeryBadMove->setActionGroup(groupMoveAnnotation);
@@ -1179,6 +1159,17 @@ void MainWindow::createActions()
     m_actionVeryGoodMove->setCheckable(true);
     connect(m_actionVeryGoodMove, SIGNAL(triggered(bool)),
             SLOT(veryGoodMove(bool)));
+}
+
+QAction* MainWindow::createActionVariant(QActionGroup* group, Variant variant,
+                                         const QString& text)
+{
+    auto action = createAction(text);
+    action->setCheckable(true);
+    action->setActionGroup(group);
+    action->setData(static_cast<int>(variant));
+    connect(action, SIGNAL(triggered(bool)), SLOT(variantTriggered(bool)));
+    return action;
 }
 
 QWidget* MainWindow::createCentralWidget()
@@ -1218,17 +1209,6 @@ QWidget* MainWindow::createLeftPanel()
     m_splitter->setCollapsible(0, false);
     m_splitter->setCollapsible(1, false);
     return m_splitter;
-}
-
-QAction* MainWindow::createLevelAction(QActionGroup* group, unsigned level,
-                                       const QString& text)
-{
-    auto action = createAction(text);
-    action->setCheckable(true);
-    action->setActionGroup(group);
-    action->setData(level);
-    connect(action, SIGNAL(triggered(bool)), SLOT(levelTriggered(bool)));
-    return action;
 }
 
 void MainWindow::createMenu()
@@ -3450,11 +3430,11 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionVariantClassic3->setEnabled(! m_isRated);
     m_actionVariantDuo->setEnabled(! m_isRated);
     m_actionVariantJunior->setEnabled(! m_isRated);
+    m_actionVariantNexos->setEnabled(! m_isRated);
+    m_actionVariantNexos2->setEnabled(! m_isRated);
     m_actionVariantTrigon->setEnabled(! m_isRated);
     m_actionVariantTrigon2->setEnabled(! m_isRated);
     m_actionVariantTrigon3->setEnabled(! m_isRated);
-    m_actionVariantNexos->setEnabled(! m_isRated);
-    m_actionVariantNexos2->setEnabled(! m_isRated);
     // Don't disable m_menuLevel but all level items such that it is still
     // possible to see what the current level is even if it cannot be changed
     // in rated games.
@@ -3469,64 +3449,10 @@ void MainWindow::updateWindowModified()
         setWindowModified(m_game.is_modified());
 }
 
-void MainWindow::variantClassic(bool checked)
+void MainWindow::variantTriggered(bool checked)
 {
     if (checked)
-        setVariant(Variant::classic);
-}
-
-void MainWindow::variantClassic2(bool checked)
-{
-    if (checked)
-        setVariant(Variant::classic_2);
-}
-
-void MainWindow::variantClassic3(bool checked)
-{
-    if (checked)
-        setVariant(Variant::classic_3);
-}
-
-void MainWindow::variantDuo(bool checked)
-{
-    if (checked)
-        setVariant(Variant::duo);
-}
-
-void MainWindow::variantJunior(bool checked)
-{
-    if (checked)
-        setVariant(Variant::junior);
-}
-
-void MainWindow::variantTrigon(bool checked)
-{
-    if (checked)
-        setVariant(Variant::trigon);
-}
-
-void MainWindow::variantTrigon2(bool checked)
-{
-    if (checked)
-        setVariant(Variant::trigon_2);
-}
-
-void MainWindow::variantTrigon3(bool checked)
-{
-    if (checked)
-        setVariant(Variant::trigon_3);
-}
-
-void MainWindow::variantNexos(bool checked)
-{
-    if (checked)
-        setVariant(Variant::nexos);
-}
-
-void MainWindow::variantNexos2(bool checked)
-{
-    if (checked)
-        setVariant(Variant::nexos_2);
+        setVariant(Variant(qobject_cast<QAction*>(sender())->data().toInt()));
 }
 
 void MainWindow::veryBadMove(bool checked)

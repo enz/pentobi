@@ -535,14 +535,17 @@ private:
 
     QAction* createAction(const QString& text = "");
 
+    QAction* createActionLevel(QActionGroup* group, unsigned level,
+                               const QString& text);
+
     void createActions();
+
+    QAction* createActionVariant(QActionGroup* group, Variant variant,
+                                 const QString& text);
 
     QWidget* createCentralWidget();
 
     QWidget* createLeftPanel();
-
-    QAction* createLevelAction(QActionGroup* group, unsigned level,
-                               const QString& text);
 
     void createMenu();
 
@@ -707,25 +710,7 @@ private slots:
 
     void veryGoodMove(bool checked);
 
-    void variantClassic(bool checked);
-
-    void variantClassic2(bool checked);
-
-    void variantClassic3(bool checked);
-
-    void variantDuo(bool checked);
-
-    void variantJunior(bool checked);
-
-    void variantTrigon(bool checked);
-
-    void variantTrigon2(bool checked);
-
-    void variantTrigon3(bool checked);
-
-    void variantNexos(bool checked);
-
-    void variantNexos2(bool checked);
+    void variantTriggered(bool checked);
 };
 
 //-----------------------------------------------------------------------------
