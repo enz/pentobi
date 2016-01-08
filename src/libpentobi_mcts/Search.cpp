@@ -115,7 +115,7 @@ void Search::set_default_param(Variant variant)
         break;
     case Variant::nexos:
     case Variant::nexos_2:
-        set_bias_term_constant(0.07f);
+        set_bias_term_constant(0.02f);
         set_rave_parent_max(50000);
         break;
     }
