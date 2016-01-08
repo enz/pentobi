@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_BASE_MOVE_INFO_H
 #define LIBPENTOBI_BASE_MOVE_INFO_H
 
-#include <algorithm>
 #include "Move.h"
 #include "MovePoints.h"
 #include "Piece.h"
@@ -49,8 +48,6 @@ public:
     Piece get_piece() const { return Piece(m_piece); }
 
     unsigned get_size() const { return m_size; }
-
-    bool contains(Point p) const { return find(begin(), end(), p) != end(); }
 
 private:
     uint_least8_t m_piece;
