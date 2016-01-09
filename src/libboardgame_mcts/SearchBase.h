@@ -1017,7 +1017,7 @@ void SearchBase<S, M, R>::playout(ThreadState& thread_state)
     while (state.gen_playout_move(m_lgr, last, second_last, mv))
     {
         state.play_playout(mv.move);
-        simulation.moves.push_back(mv);
+        moves.push_back(mv);
         second_last = last;
         last = mv.move;
     }
