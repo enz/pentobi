@@ -183,10 +183,6 @@
         <translation>Spiel&amp;variante</translation>
     </message>
     <message>
-        <source>&amp;Classic (2 Players)</source>
-        <translation>&amp;Klassisch (2 Spieler)</translation>
-    </message>
-    <message>
         <source>Classic (&amp;3 Players)</source>
         <translation>Klassisch (&amp;3 Spieler)</translation>
     </message>
@@ -201,18 +197,6 @@
     <message>
         <source>&amp;Junior</source>
         <translation>&amp;Junior</translation>
-    </message>
-    <message>
-        <source>&amp;Trigon (2 Players)</source>
-        <translation>&amp;Trigon (2 Spieler)</translation>
-    </message>
-    <message>
-        <source>T&amp;rigon (3 Players)</source>
-        <translation>T&amp;rigon (3 Spieler)</translation>
-    </message>
-    <message>
-        <source>Trig&amp;on (4 Players)</source>
-        <translation>Trig&amp;on (4 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
@@ -235,12 +219,40 @@
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <source>&amp;Nexos (2 Players)</source>
-        <translation>&amp;Nexos (2 Spieler)</translation>
+        <source>&amp;Classic</source>
+        <translation>&amp;Klassisch</translation>
     </message>
     <message>
-        <source>Ne&amp;xos (4 Players)</source>
-        <translation>Ne&amp;xos (4 Spieler)</translation>
+        <source>Classic (&amp;2 Players)</source>
+        <translation>Klassisch (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Trigon</source>
+        <translation>&amp;Trigon</translation>
+    </message>
+    <message>
+        <source>Trigon (&amp;2 Players)</source>
+        <translation>Trigon (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (&amp;3 Players)</source>
+        <translation>Trigon (&amp;3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (&amp;4 Players)</source>
+        <translation>Trigon (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Nexos</source>
+        <translation>&amp;Nexos</translation>
+    </message>
+    <message>
+        <source>Nexos (&amp;2 Players)</source>
+        <translation>Nexos (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Nexos (&amp;4 Players)</source>
+        <translation>Nexos (&amp;4 Spieler)</translation>
     </message>
 </context>
 <context>

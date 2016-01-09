@@ -16,17 +16,21 @@ Menu {
         title: qsTr("Game &Variant")
 
         ExclusiveGroup { id: groupGameVariant }
-        MenuItemGameVariant {
-            gameVariant: "classic_2"
-            text: qsTr("&Classic (2 Players)")
-        }
-        MenuItemGameVariant {
-            gameVariant: "classic_3"
-            text: qsTr("Classic (&3 Players)")
-        }
-        MenuItemGameVariant {
-            gameVariant: "classic"
-            text: qsTr("Classic (&4 Players)")
+        Menu {
+            title: qsTr("&Classic")
+
+            MenuItemGameVariant {
+                gameVariant: "classic_2"
+                text: qsTr("Classic (&2 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "classic_3"
+                text: qsTr("Classic (&3 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "classic"
+                text: qsTr("Classic (&4 Players)")
+            }
         }
         MenuItemGameVariant {
             gameVariant: "duo"
@@ -36,25 +40,33 @@ Menu {
             gameVariant: "junior"
             text: qsTr("&Junior")
         }
-        MenuItemGameVariant {
-            gameVariant: "trigon_2"
-            text: qsTr("&Trigon (2 Players)")
+        Menu {
+            title: qsTr("&Trigon")
+
+            MenuItemGameVariant {
+                gameVariant: "trigon_2"
+                text: qsTr("Trigon (&2 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "trigon_3"
+                text: qsTr("Trigon (&3 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "trigon"
+                text: qsTr("Trigon (&4 Players)")
+            }
         }
-        MenuItemGameVariant {
-            gameVariant: "trigon_3"
-            text: qsTr("T&rigon (3 Players)")
-        }
-        MenuItemGameVariant {
-            gameVariant: "trigon"
-            text: qsTr("Trig&on (4 Players)")
-        }
-        MenuItemGameVariant {
-            gameVariant: "nexos_2"
-            text: qsTr("&Nexos (2 Players)")
-        }
-        MenuItemGameVariant {
-            gameVariant: "nexos"
-            text: qsTr("Ne&xos (4 Players)")
+        Menu {
+            title: qsTr("&Nexos")
+
+            MenuItemGameVariant {
+                gameVariant: "nexos_2"
+                text: qsTr("Nexos (&2 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "nexos"
+                text: qsTr("Nexos (&4 Players)")
+            }
         }
     }
     // QTBUG-47847 MenuSeparator { }
