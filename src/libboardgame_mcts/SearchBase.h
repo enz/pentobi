@@ -1013,13 +1013,11 @@ void SearchBase<S, M, R>::playout(ThreadState& thread_state)
     auto nu_moves = moves.size();
     Move last = nu_moves > 0 ? moves[nu_moves - 1].move : Move::null();
     Move second_last = nu_moves > 1 ? moves[nu_moves - 2].move : Move::null();
-    while (true)
+    PlayerMove mv;
+    while (state.gen_playout_move(m_lgr, last, second_last, mv))
     {
-        PlayerMove mv;
-        if (! state.gen_playout_move(m_lgr, last, second_last, mv))
-            break;
-        simulation.moves.push_back(mv);
         state.play_playout(mv.move);
+        simulation.moves.push_back(mv);
         second_last = last;
         last = mv.move;
     }
