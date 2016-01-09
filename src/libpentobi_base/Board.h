@@ -809,8 +809,12 @@ inline bool Board::is_legal_nonfirst(Color c, Move mv) const
     {
         if (m_state_color[c].forbidden[*i])
             return false;
-        if (is_attach_point(*i, c))
-            has_attach_point = true;
+        // Logically, we mean:
+        // has_attach_point = has_attach_point || is_attach_point(*i, c)
+        // But this generates branches, which are bad for performance in this
+        // tight loop (unrolled by the compiler). So we use a bitwise OR, which
+        // works because C++ guarantees that true/false converts to 1/0.
+        has_attach_point |= is_attach_point(*i, c);
     }
     while (++i != end);
     return has_attach_point;
