@@ -1,18 +1,31 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_base/SpShtStrRep.h
+/** @file libboardgame_base/StringRep.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_BASE_SP_SHT_STR_REP_H
-#define LIBBOARDGAME_BASE_SP_SHT_STR_REP_H
+#ifndef LIBBOARDGAME_BASE_STRING_REP_H
+#define LIBBOARDGAME_BASE_STRING_REP_H
 
-#include <limits>
 #include <iosfwd>
 
 namespace libboardgame_base {
 
 using namespace std;
+
+//-----------------------------------------------------------------------------
+
+/** String representation of points. */
+struct StringRep
+{
+    virtual ~StringRep();
+
+    virtual bool read(istream& in, unsigned width, unsigned height,
+                      unsigned& x, unsigned& y) const = 0;
+
+    virtual void write(ostream& out, unsigned x, unsigned y, unsigned width,
+                       unsigned height) const = 0;
+};
 
 //-----------------------------------------------------------------------------
 
@@ -23,21 +36,20 @@ using namespace std;
     by numbers starting with '1'. Note that unlike in spreadsheets, row number
     1 is at the bottom and increases to the top to be compatible with the
     convention used in chess. */
-struct SpShtStrRep
+struct StdStringRep
+        : public StringRep
 {
-    static constexpr unsigned max_width = numeric_limits<unsigned>::max();
+    ~StdStringRep();
 
-    static constexpr unsigned max_height = numeric_limits<unsigned>::max();
+    bool read(istream& in, unsigned width, unsigned height, unsigned& x,
+              unsigned& y) const override;
 
-    static bool read(istream& in, unsigned width, unsigned height,
-                     unsigned& x, unsigned& y);
-
-    static void write(ostream& out, unsigned x, unsigned y, unsigned width,
-                      unsigned height);
+    void write(ostream& out, unsigned x, unsigned y, unsigned width,
+               unsigned height) const override;
 };
 
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_BASE_SP_SHT_STR_REP_H
+#endif // LIBBOARDGAME_BASE_STRING_REP_H

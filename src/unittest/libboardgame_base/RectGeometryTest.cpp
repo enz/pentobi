@@ -10,16 +10,13 @@
 
 #include "libboardgame_base/Point.h"
 #include "libboardgame_base/RectGeometry.h"
-#include "libboardgame_base/SpShtStrRep.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using libboardgame_base::SpShtStrRep;
 
 //-----------------------------------------------------------------------------
 
-typedef
-libboardgame_base::Point<19 * 19, 19, 19, unsigned short, SpShtStrRep> Point;
+typedef libboardgame_base::Point<19 * 19, 19, 19, unsigned short> Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::RectGeometry<Point> RectGeometry;
 typedef libboardgame_base::ArrayList<Point, Point::max_onboard> PointList;

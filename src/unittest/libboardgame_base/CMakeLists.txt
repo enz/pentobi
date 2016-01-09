@@ -3,7 +3,7 @@ add_executable(unittest_libboardgame_base
   PointTransformTest.cpp
   RatingTest.cpp
   RectGeometryTest.cpp
-  SpShtStrRepTest.cpp
+  StringRepTest.cpp
 )
 
 target_link_libraries(unittest_libboardgame_base

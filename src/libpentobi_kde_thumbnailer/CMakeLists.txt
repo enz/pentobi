@@ -18,7 +18,7 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_util/Assert.cpp
   ../libboardgame_util/Log.cpp
   ../libboardgame_util/StringUtil.cpp
-  ../libboardgame_base/SpShtStrRep.cpp
+  ../libboardgame_base/StringRep.cpp
   ../libboardgame_sgf/MissingProperty.cpp
   ../libboardgame_sgf/Reader.cpp
   ../libboardgame_sgf/SgfNode.cpp

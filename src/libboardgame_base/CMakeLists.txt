@@ -14,8 +14,8 @@ add_library(boardgame_base STATIC
   RectGeometry.h
   RectTransform.h
   RectTransform.cpp
-  SpShtStrRep.h
-  SpShtStrRep.cpp
+  StringRep.h
+  StringRep.cpp
   Transform.h
   Transform.cpp
 )

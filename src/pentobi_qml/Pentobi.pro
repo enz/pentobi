@@ -24,7 +24,7 @@ SOURCES += \
     ../libboardgame_base/CoordPoint.cpp \
     ../libboardgame_base/Rating.cpp \
     ../libboardgame_base/RectTransform.cpp \
-    ../libboardgame_base/SpShtStrRep.cpp \
+    ../libboardgame_base/StringRep.cpp \
     ../libboardgame_base/Transform.cpp \
     ../libboardgame_util/Abort.cpp \
     ../libboardgame_util/Assert.cpp \
@@ -115,7 +115,7 @@ HEADERS += \
     ../libboardgame_base/Rating.h \
     ../libboardgame_base/RectGeometry.h \
     ../libboardgame_base/RectTransform.h \
-    ../libboardgame_base/SpShtStrRep.h \
+    ../libboardgame_base/StringRep.h \
     ../libboardgame_base/Transform.h \
     ../libboardgame_mcts/Atomic.h \
     ../libboardgame_mcts/LastGoodReply.h \

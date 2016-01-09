@@ -7,8 +7,10 @@
 #ifndef LIBBOARDGAME_BASE_GEOMETRY_H
 #define LIBBOARDGAME_BASE_GEOMETRY_H
 
+#include <memory>
 #include <sstream>
 #include "CoordPoint.h"
+#include "StringRep.h"
 #include "libboardgame_util/ArrayList.h"
 
 namespace libboardgame_base {
@@ -24,7 +26,9 @@ using libboardgame_util::ArrayList;
     and/or to define different definitions of adjacent and diagonal neighbors
     of a point for geometries that are not a regular rectangular grid.
     @tparam P An instantiation of libboardgame_base::Point (or compatible
-    class) */
+    class)
+    @tparam S A class with functions to convert points from and to strings
+    depending on the string representation of points in the game. */
 template<class P>
 class Geometry
 {
@@ -128,7 +132,8 @@ public:
     const DiagList& get_diag(Point p) const;
 
 protected:
-    Geometry();
+    Geometry(unique_ptr<StringRep> string_rep =
+                 unique_ptr<StringRep>(new StdStringRep));
 
     /** Initialize.
         Subclasses must call this function in their constructors. */
@@ -150,6 +155,8 @@ private:
 
     Point m_points[Point::max_width][Point::max_height];
 
+    unique_ptr<StringRep> m_string_rep;
+
     unsigned m_width;
 
     unsigned m_height;
@@ -167,7 +174,9 @@ private:
 
 
 template<class P>
-Geometry<P>::Geometry() = default;
+Geometry<P>::Geometry(unique_ptr<StringRep> string_rep)
+    : m_string_rep(move(string_rep))
+{ }
 
 template<class P>
 Geometry<P>::~Geometry() = default;
@@ -178,7 +187,7 @@ bool Geometry<P>::from_string(const string& s, Point& p) const
     istringstream in(s);
     unsigned x;
     unsigned y;
-    if (Point::StringRep::read(in, m_width, m_height, x, y)
+    if (m_string_rep->read(in, m_width, m_height, x, y)
             && is_onboard(CoordPoint(x, y)))
     {
         p = get_point(x, y);
@@ -273,7 +282,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
                 m_x[n] = x;
                 m_y[n] = y;
                 ostr.str("");
-                Point::StringRep::write(ostr, x, y, width, height);
+                m_string_rep->write(ostr, x, y, width, height);
                 m_string[n] = ostr.str();
                 ++n;
             }

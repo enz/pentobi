@@ -8,21 +8,17 @@
 #define LIBPENTOBI_BASE_POINT_H
 
 #include "libboardgame_base/Point.h"
-#include "libboardgame_base/SpShtStrRep.h"
 
 //-----------------------------------------------------------------------------
 
 namespace libpentobi_base {
-
-using libboardgame_base::SpShtStrRep;
 
 //-----------------------------------------------------------------------------
 
 /** Point (coordinate of on-board field) for Blokus game variants.
     Supports RectGeometry up to size 20, TrigonGeometry up to edge size 9,
     and NexosGeometry up to size 13. */
-typedef
-libboardgame_base::Point<486, 35, 25, unsigned short, SpShtStrRep> Point;
+typedef libboardgame_base::Point<486, 35, 25, unsigned short> Point;
 
 //-----------------------------------------------------------------------------
 

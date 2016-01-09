@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_base/SpShtStrRepTest.cpp
+/** @file unittest/libboardgame_base/StringRepTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -9,27 +9,29 @@
 #endif
 
 #include <sstream>
-#include "libboardgame_base/SpShtStrRep.h"
+#include "libboardgame_base/StringRep.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using libboardgame_base::SpShtStrRep;
+using libboardgame_base::StdStringRep;
 
 //-----------------------------------------------------------------------------
 
 namespace {
 
+StdStringRep string_rep;
+
 bool read(const string& s, unsigned& x, unsigned& y, unsigned width,
           unsigned height)
 {
     istringstream in(s);
-    return SpShtStrRep::read(in, width, height, x, y);
+    return string_rep.read(in, width, height, x, y);
 }
 
 string write(unsigned x, unsigned y, unsigned width, unsigned height)
 {
     ostringstream out;
-    SpShtStrRep::write(out, x, y, width, height);
+    string_rep.write(out, x, y, width, height);
     return out.str();
 }
 

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_base/SpShtStrRep.cpp
+/** @file libboardgame_base/StringRep.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,7 +8,7 @@
 #include <config.h>
 #endif
 
-#include "SpShtStrRep.h"
+#include "StringRep.h"
 
 #include <cstdio>
 #include <iostream>
@@ -21,8 +21,14 @@ using libboardgame_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
-bool SpShtStrRep::read(istream& in, unsigned width, unsigned height,
-                       unsigned& x, unsigned& y)
+StringRep::~StringRep() = default;
+
+//-----------------------------------------------------------------------------
+
+StdStringRep::~StdStringRep() = default;
+
+bool StdStringRep::read(istream& in, unsigned width, unsigned height,
+                        unsigned& x, unsigned& y) const
 {
     int c;
     while (true)
@@ -68,8 +74,8 @@ bool SpShtStrRep::read(istream& in, unsigned width, unsigned height,
     return false;
 }
 
-void SpShtStrRep::write(ostream& out, unsigned x, unsigned y, unsigned width,
-                        unsigned height)
+void StdStringRep::write(ostream& out, unsigned x, unsigned y, unsigned width,
+                         unsigned height) const
 {
     LIBBOARDGAME_UNUSED(width);
     out << get_letter_coord(x) << (height - y);
