@@ -6,8 +6,8 @@ Item {
     property alias color: point.color
     property bool isFinal
     property bool isToPlay
-    property int value
-    property int bonus
+    property real value
+    property real bonus
     property real pointSize
 
     Rectangle {

@@ -18,6 +18,7 @@
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
+using libpentobi_base::ScoreType;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -46,9 +47,9 @@ private:
 
     ColorMap<bool> m_hasMoves{false};
 
-    ColorMap<unsigned> m_points{0};
+    ColorMap<ScoreType> m_points{0};
 
-    ColorMap<unsigned> m_bonus{0};
+    ColorMap<ScoreType> m_bonus{0};
 
     /** Current player of 4th color in Variant::classic_3. */
     Color m_altPlayer;
@@ -80,7 +81,7 @@ private:
 
     void drawScore3(QPainter& painter, int x);
 
-    QString getScoreText(unsigned points, unsigned bonus) const;
+    QString getScoreText(ScoreType points, ScoreType bonus) const;
 
     int getTextWidth(QString text) const;
 

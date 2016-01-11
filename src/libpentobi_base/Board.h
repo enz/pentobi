@@ -123,10 +123,10 @@ public:
     unsigned get_nu_left_piece(Color c, Piece piece) const;
 
     /** Get number of points of a color including the bonus. */
-    unsigned get_points(Color c) const;
+    ScoreType get_points(Color c) const { return m_state_color[c].points; }
 
     /** Get number of bonus points of a color. */
-    unsigned get_bonus(Color c) const;
+    ScoreType get_bonus(Color c) const;
 
     /** Is a point a potential attachment point for a color.
         Does not check if the point is forbidden. */
@@ -248,23 +248,23 @@ public:
         The score is the number of points for a color minus the number of
         points of the opponent (or the average score of the opponents if there
         are more than two players). */
-    int get_score(Color c) const;
+    ScoreType get_score(Color c) const;
 
     /** Specialized version of get_score().
         @pre get_nu_colors() == 2 */
-    int get_score_twocolor(Color c) const;
+    ScoreType get_score_twocolor(Color c) const;
 
     /** Specialized version of get_score().
         @pre get_nu_players() == 4 && get_nu_colors() == 4 */
-    int get_score_multicolor(Color c) const;
+    ScoreType get_score_multicolor(Color c) const;
 
     /** Specialized version of get_score().
         @pre get_nu_players() > 2 */
-    int get_score_multiplayer(Color c) const;
+    ScoreType get_score_multiplayer(Color c) const;
 
     /** Specialized version of get_score().
         @pre get_nu_players() == 2 */
-    int get_score_twoplayer(Color c) const;
+    ScoreType get_score_twoplayer(Color c) const;
 
     /** Get the place of a player in the game result.
         @param c The color of the player.
@@ -353,7 +353,7 @@ private:
 
         unsigned nu_onboard_pieces;
 
-        unsigned points;
+        ScoreType points;
     };
 
     /** Snapshot for fast restoration of a previous position. */
@@ -383,16 +383,13 @@ private:
     unsigned m_max_piece_size;
 
     /** Bonus for playing all pieces. */
-    unsigned m_bonus_all_pieces;
+    ScoreType m_bonus_all_pieces;
 
     /** Bonus for playing the 1-piece last. */
-    unsigned m_bonus_one_piece;
+    ScoreType m_bonus_one_piece;
 
-    /** Score points of a piece.
-        This is equal to the number of points of a piece apart from game
-        variant Nexos, in which the piece points contain some junction
-        points. */
-    PieceMap<unsigned> m_score_points;
+    /** Caches get_piece_info(piece).get_score_points() */
+    PieceMap<ScoreType> m_score_points;
 
     /** See get_nu_piece_instances() */
     uint_fast8_t m_nu_piece_instances;
@@ -646,17 +643,12 @@ inline const Board::PointStateGrid& Board::get_point_state() const
     return m_state_base.point_state;
 }
 
-inline unsigned Board::get_points(Color c) const
-{
-    return m_state_color[c].points;
-}
-
 inline Color Board::get_previous(Color c) const
 {
     return c.get_previous(m_nu_colors);
 }
 
-inline int Board::get_score(Color c) const
+inline ScoreType Board::get_score(Color c) const
 {
     if (m_nu_colors == 2)
         return get_score_twocolor(c);
@@ -666,18 +658,18 @@ inline int Board::get_score(Color c) const
         return get_score_multiplayer(c);
 }
 
-inline int Board::get_score_twocolor(Color c) const
+inline ScoreType Board::get_score_twocolor(Color c) const
 {
     LIBBOARDGAME_ASSERT(m_nu_colors == 2);
-    unsigned points0 = get_points(Color(0));
-    unsigned points1 = get_points(Color(1));
+    auto points0 = get_points(Color(0));
+    auto points1 = get_points(Color(1));
     if (c == Color(0))
         return points0 - points1;
     else
         return points1 - points0;
 }
 
-inline int Board::get_score_twoplayer(Color c) const
+inline ScoreType Board::get_score_twoplayer(Color c) const
 {
     LIBBOARDGAME_ASSERT(m_nu_players == 2);
     if (m_nu_colors == 2)
@@ -686,26 +678,26 @@ inline int Board::get_score_twoplayer(Color c) const
         return get_score_multicolor(c);
 }
 
-inline int Board::get_score_multicolor(Color c) const
+inline ScoreType Board::get_score_multicolor(Color c) const
 {
     LIBBOARDGAME_ASSERT(m_nu_players == 2 && m_nu_colors == 4);
-    unsigned points0 = get_points(Color(0)) + get_points(Color(2));
-    unsigned points1 = get_points(Color(1)) + get_points(Color(3));
+    auto points0 = get_points(Color(0)) + get_points(Color(2));
+    auto points1 = get_points(Color(1)) + get_points(Color(3));
     if (c == Color(0) || c == Color(2))
         return points0 - points1;
     else
         return points1 - points0;
 }
 
-inline int Board::get_score_multiplayer(Color c) const
+inline ScoreType Board::get_score_multiplayer(Color c) const
 {
     LIBBOARDGAME_ASSERT(m_nu_players > 2);
-    int score = 0;
+    ScoreType score = 0;
     auto nu_players = static_cast<Color::IntType>(m_nu_players);
     for (Color i : get_colors())
         if (i != c)
             score -= get_points(i);
-    score = get_points(c) + score / (static_cast<int>(nu_players) - 1);
+    score = get_points(c) + score / (static_cast<ScoreType>(nu_players) - 1);
     return score;
 }
 

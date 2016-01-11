@@ -7,14 +7,14 @@ Row {
     property int toPlay
     property int altPlayer
     property string gameVariant
-    property int points0
-    property int points1
-    property int points2
-    property int points3
-    property int bonus0
-    property int bonus1
-    property int bonus2
-    property int bonus3
+    property real points0
+    property real points1
+    property real points2
+    property real points3
+    property real bonus0
+    property real bonus1
+    property real bonus2
+    property real bonus3
     property bool hasMoves0
     property bool hasMoves1
     property bool hasMoves2

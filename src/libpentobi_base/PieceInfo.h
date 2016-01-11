@@ -26,6 +26,10 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
+typedef float ScoreType;
+
+//-----------------------------------------------------------------------------
+
 class PieceInfo
 {
 public:
@@ -72,7 +76,7 @@ public:
     /** Return the number of points of the piece that contribute to the score.
         This excludes any junction points included in the piece definition in
         Nexos.*/
-    unsigned get_score_points() const { return m_score_points; }
+    ScoreType get_score_points() const { return m_score_points; }
 
     /** Get a list with unique transformations.
         The list has the same order as PieceTransforms::get_all() but
@@ -107,7 +111,7 @@ private:
 
     Points m_points;
 
-    unsigned m_score_points;
+    ScoreType m_score_points;
 
     CoordPoint m_label_pos;
 

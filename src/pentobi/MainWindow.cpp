@@ -78,6 +78,7 @@ using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
+using libpentobi_base::ScoreType;
 using libpentobi_base::tree_util::get_move_number;
 using libpentobi_base::tree_util::get_moves_left;
 using libpentobi_base::tree_util::get_position_info;
@@ -192,13 +193,13 @@ void setIcon(QAction* action, const QString& name)
 /** Simple heuristic that prefers moves with more piece points, more attach
     points and less adjacent points.
     Used for sorting the list used in Find Move. */
-float getHeuristic(const Board& bd, Move mv)
+ScoreType getHeuristic(const Board& bd, Move mv)
 {
     auto& piece_info = bd.get_piece_info(bd.get_move_piece(mv));
     auto& info_ext = bd.get_move_info_ext(mv);
-    return static_cast<float>((1000 * piece_info.get_score_points()
-                               + 10 * info_ext.size_attach_points
-                               - info_ext.size_adj_points));
+    return 1000 * piece_info.get_score_points() +
+            static_cast<ScoreType>(10 * info_ext.size_attach_points
+                                   - info_ext.size_adj_points);
 }
 
 } // namespace
@@ -1702,22 +1703,22 @@ void MainWindow::gameOver()
     QString info;
     if (nuColors == 2)
     {
-        int score = m_bd.get_score_twocolor(Color(0));
+        auto score = m_bd.get_score_twocolor(Color(0));
         if (score > 0)
-            info = tr("Blue wins with %n point(s).", "", score);
+            info = tr("Blue wins.");
         else if (score < 0)
-            info = tr("Green wins with %n point(s).", "", -score);
+            info = tr("Green wins.");
         else
             info = tr("The game ends in a tie.");
     }
     else if (nuPlayers == 2)
     {
         LIBBOARDGAME_ASSERT(nuColors == 4);
-        int score = m_bd.get_score_multicolor(Color(0));
+        auto score = m_bd.get_score_multicolor(Color(0));
         if (score > 0)
-            info = tr("Blue/Red wins with %n point(s).", "", score);
+            info = tr("Blue/Red wins.");
         else if (score < 0)
-            info = tr("Yellow/Green wins with %n point(s).", "", -score);
+            info = tr("Yellow/Green wins.");
         else
             info = tr("The game ends in a tie.");
     }

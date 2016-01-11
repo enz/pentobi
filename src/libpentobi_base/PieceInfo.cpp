@@ -141,7 +141,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         }
     }
     else
-        m_score_points = points.size();
+        m_score_points = static_cast<ScoreType>(points.size());
 }
 
 bool PieceInfo::can_flip_horizontally(const Transform* transform) const

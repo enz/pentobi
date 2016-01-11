@@ -19,6 +19,7 @@ using libboardgame_sgf::Writer;
 using libboardgame_util::trim;
 using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::Move;
+using libpentobi_base::ScoreType;
 
 //-----------------------------------------------------------------------------
 
@@ -59,7 +60,7 @@ float TwoGtp::get_result(unsigned player_black)
     auto nu_players = m_bd.get_nu_players();
     if (nu_players == 2)
     {
-        int score = m_bd.get_score_twoplayer(Color(0));
+        auto score = m_bd.get_score_twoplayer(Color(0));
         if (score > 0)
             result = 1;
         else if (score < 0)
@@ -71,7 +72,7 @@ float TwoGtp::get_result(unsigned player_black)
     }
     else
     {
-        array<unsigned, Color::range> points;
+        array<ScoreType, Color::range> points;
         for (Color::IntType i = 0; i < m_bd.get_nu_colors(); ++i)
             points[i] = m_bd.get_points(Color(i));
         array<float, Color::range> player_result;

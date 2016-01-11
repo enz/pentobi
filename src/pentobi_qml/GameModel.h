@@ -32,14 +32,14 @@ class GameModel
     Q_PROPERTY(int nuColors MEMBER m_nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay MEMBER m_toPlay NOTIFY toPlayChanged)
     Q_PROPERTY(int altPlayer MEMBER m_altPlayer NOTIFY altPlayerChanged)
-    Q_PROPERTY(int points0 MEMBER m_points0 NOTIFY points0Changed)
-    Q_PROPERTY(int points1 MEMBER m_points1 NOTIFY points1Changed)
-    Q_PROPERTY(int points2 MEMBER m_points2 NOTIFY points2Changed)
-    Q_PROPERTY(int points3 MEMBER m_points3 NOTIFY points3Changed)
-    Q_PROPERTY(int bonus0 MEMBER m_bonus0 NOTIFY bonus0Changed)
-    Q_PROPERTY(int bonus1 MEMBER m_bonus1 NOTIFY bonus1Changed)
-    Q_PROPERTY(int bonus2 MEMBER m_bonus2 NOTIFY bonus2Changed)
-    Q_PROPERTY(int bonus3 MEMBER m_bonus3 NOTIFY bonus3Changed)
+    Q_PROPERTY(float points0 MEMBER m_points0 NOTIFY points0Changed)
+    Q_PROPERTY(float points1 MEMBER m_points1 NOTIFY points1Changed)
+    Q_PROPERTY(float points2 MEMBER m_points2 NOTIFY points2Changed)
+    Q_PROPERTY(float points3 MEMBER m_points3 NOTIFY points3Changed)
+    Q_PROPERTY(float bonus0 MEMBER m_bonus0 NOTIFY bonus0Changed)
+    Q_PROPERTY(float bonus1 MEMBER m_bonus1 NOTIFY bonus1Changed)
+    Q_PROPERTY(float bonus2 MEMBER m_bonus2 NOTIFY bonus2Changed)
+    Q_PROPERTY(float bonus3 MEMBER m_bonus3 NOTIFY bonus3Changed)
     Q_PROPERTY(bool hasMoves0 MEMBER m_hasMoves0 NOTIFY hasMoves0Changed)
     Q_PROPERTY(bool hasMoves1 MEMBER m_hasMoves1 NOTIFY hasMoves1Changed)
     Q_PROPERTY(bool hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
@@ -125,7 +125,7 @@ public:
 
     QQmlListProperty<PieceModel> pieceModels3();
 
-    const Board& getBoard() const;
+    const Board& getBoard() const { return m_game.get_board(); }
 
 signals:
     /** Position changed due to new game or navigation or editing of the
@@ -140,21 +140,21 @@ signals:
 
     void altPlayerChanged(int);
 
-    void points0Changed(int);
+    void points0Changed(float);
 
-    void points1Changed(int);
+    void points1Changed(float);
 
-    void points2Changed(int);
+    void points2Changed(float);
 
-    void points3Changed(int);
+    void points3Changed(float);
 
-    void bonus0Changed(int);
+    void bonus0Changed(float);
 
-    void bonus1Changed(int);
+    void bonus1Changed(float);
 
-    void bonus2Changed(int);
+    void bonus2Changed(float);
 
-    void bonus3Changed(int);
+    void bonus3Changed(float);
 
     void hasMoves0Changed(int);
 
@@ -201,21 +201,21 @@ private:
 
     int m_altPlayer = 0;
 
-    int m_points0 = 0;
+    float m_points0 = 0;
 
-    int m_points1 = 0;
+    float m_points1 = 0;
 
-    int m_points2 = 0;
+    float m_points2 = 0;
 
-    int m_points3 = 0;
+    float m_points3 = 0;
 
-    int m_bonus0 = 0;
+    float m_bonus0 = 0;
 
-    int m_bonus1 = 0;
+    float m_bonus1 = 0;
 
-    int m_bonus2 = 0;
+    float m_bonus2 = 0;
 
-    int m_bonus3 = 0;
+    float m_bonus3 = 0;
 
     bool m_hasMoves0 = true;
 
@@ -276,11 +276,6 @@ private:
 
     void updateProperties();
 };
-
-inline const Board& GameModel::getBoard() const
-{
-    return m_game.get_board();
-}
 
 //-----------------------------------------------------------------------------
 

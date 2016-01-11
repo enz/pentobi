@@ -132,7 +132,7 @@ void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
 {
     pieceModels.clear();
     auto& bd = getBoard();
-    for (unsigned i = 0; i < bd.get_nu_uniq_pieces(); ++i)
+    for (Piece::IntType i = 0; i < bd.get_nu_uniq_pieces(); ++i)
     {
         Piece piece(i);
         for (unsigned j = 0; j < bd.get_nu_piece_instances(); ++j)
@@ -288,7 +288,7 @@ bool GameModel::isLegalPos(PieceModel* pieceModel, QString state,
     Move mv;
     if (! findMove(*pieceModel, state, coord, mv))
         return false;
-    Color c(pieceModel->color());
+    Color c(static_cast<Color::IntType>(pieceModel->color()));
     bool result = getBoard().is_legal(c, mv);
     return result;
 }
@@ -394,7 +394,7 @@ QQmlListProperty<PieceModel> GameModel::pieceModels3()
 void GameModel::playMove(int move)
 {
     Color c = m_game.get_effective_to_play();
-    Move mv(move);
+    Move mv(static_cast<Move::IntType>(move));
     if(mv.is_null())
         return;
     m_game.play(c, mv, false);
@@ -403,7 +403,7 @@ void GameModel::playMove(int move)
 
 void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
 {
-    Color c(pieceModel->color());
+    Color c(static_cast<Color::IntType>(pieceModel->color()));
     Move mv;
     if (! findMove(*pieceModel, pieceModel->state(), coord, mv))
     {
@@ -419,9 +419,10 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
 
 PieceModel* GameModel::preparePiece(int color, int move)
 {
-    Move mv(move);
+    Move mv(static_cast<Move::IntType>(move));
+    Color c(static_cast<Color::IntType>(color));
     Piece piece = getBoard().get_move_piece(mv);
-    for (auto pieceModel : getPieceModels(Color(color)))
+    for (auto pieceModel : getPieceModels(c))
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
         {
             preparePieceTransform(pieceModel, mv);
@@ -529,13 +530,13 @@ void GameModel::updateProperties()
 {
     auto& bd = getBoard();
     auto& tree = m_game.get_tree();
-    if (set(m_points0, static_cast<int>(bd.get_points(Color(0)))))
+    if (set(m_points0, bd.get_points(Color(0))))
         emit points0Changed(m_points0);
-    if (set(m_points1, static_cast<int>(bd.get_points(Color(1)))))
+    if (set(m_points1, bd.get_points(Color(1))))
         emit points1Changed(m_points1);
-    if (set(m_bonus0, static_cast<int>(bd.get_bonus(Color(0)))))
+    if (set(m_bonus0, bd.get_bonus(Color(0))))
         emit bonus0Changed(m_bonus0);
-    if (set(m_bonus1, static_cast<int>(bd.get_bonus(Color(1)))))
+    if (set(m_bonus1, bd.get_bonus(Color(1))))
         emit bonus1Changed(m_bonus1);
     if (set(m_hasMoves0, bd.has_moves(Color(0))))
         emit hasMoves0Changed(m_hasMoves0);
@@ -543,18 +544,18 @@ void GameModel::updateProperties()
         emit hasMoves1Changed(m_hasMoves1);
     if (m_nuColors > 2)
     {
-        if (set(m_points2, static_cast<int>(bd.get_points(Color(2)))))
+        if (set(m_points2, bd.get_points(Color(2))))
             emit points2Changed(m_points2);
-        if (set(m_bonus2, static_cast<int>(bd.get_bonus(Color(2)))))
+        if (set(m_bonus2, bd.get_bonus(Color(2))))
             emit bonus2Changed(m_bonus2);
         if (set(m_hasMoves2, bd.has_moves(Color(2))))
             emit hasMoves2Changed(m_hasMoves2);
     }
     if (m_nuColors > 3)
     {
-        if (set(m_points3, static_cast<int>(bd.get_points(Color(3)))))
+        if (set(m_points3, bd.get_points(Color(3))))
             emit points3Changed(m_points3);
-        if (set(m_bonus3, static_cast<int>(bd.get_bonus(Color(3)))))
+        if (set(m_bonus3, bd.get_bonus(Color(3))))
             emit bonus3Changed(m_bonus3);
         if (set(m_hasMoves3, bd.has_moves(Color(3))))
             emit hasMoves3Changed(m_hasMoves3);

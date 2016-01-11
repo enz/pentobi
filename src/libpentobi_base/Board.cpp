@@ -123,11 +123,11 @@ void Board::gen_moves(Color c, Point p, unsigned adj_status,
         }
 }
 
-unsigned Board::get_bonus(Color c) const
+ScoreType Board::get_bonus(Color c) const
 {
     if (get_pieces_left(c).size() > 0)
         return 0;
-    unsigned bonus = m_bonus_all_pieces;
+    auto bonus = m_bonus_all_pieces;
     unsigned i = m_moves.size();
     while (i > 0)
     {
@@ -158,11 +158,12 @@ Color Board::get_effective_to_play() const
 
 void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 {
-    array<int,Color::range> all_scores;
+    array<ScoreType, Color::range> all_scores;
     for (Color::IntType i = 0; i < Color::range; ++i)
         all_scores[i] = get_score(Color(i));
-    int score = all_scores[c.to_int()];
-    sort(all_scores.begin(), all_scores.begin() + m_nu_players, greater<int>());
+    auto score = all_scores[c.to_int()];
+    sort(all_scores.begin(), all_scores.begin() + m_nu_players,
+         greater<ScoreType>());
     is_shared = false;
     bool found = false;
     for (unsigned i = 0; i < m_nu_players; ++i)
@@ -338,7 +339,7 @@ void Board::init_variant(Variant variant)
     }
     auto piece_set = m_bc->get_piece_set();
 #if LIBBOARDGAME_DEBUG
-    unsigned total_piece_points = 0;
+    ScoreType total_piece_points = 0;
 #endif
     for (Piece::IntType i = 0; i < get_nu_uniq_pieces(); ++i)
     {

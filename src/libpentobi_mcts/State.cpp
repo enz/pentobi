@@ -22,6 +22,7 @@ using libboardgame_util::fast_exp;
 using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::BoardType;
 using libpentobi_base::PointState;
+using libpentobi_base::ScoreType;
 
 //-----------------------------------------------------------------------------
 
@@ -180,7 +181,7 @@ void State::evaluate_duo(array<Float, 6>& result)
         return;
     }
     Color c(0);
-    auto s = static_cast<Float>(m_bd.get_score_twocolor(c));
+    auto s = m_bd.get_score_twocolor(c);
     Float res;
     if (s > 0)
         res = 1;
@@ -217,7 +218,7 @@ void State::evaluate_multicolor(array<Float, 6>& result)
     }
 
     Color c(0);
-    auto s = static_cast<Float>(m_bd.get_score_multicolor(c));
+    auto s = m_bd.get_score_multicolor(c);
     Float res;
     if (s > 0)
         res = 1;
@@ -247,7 +248,7 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
 {
     auto nu_players = m_bd.get_nu_players();
     LIBBOARDGAME_ASSERT(nu_players > 2);
-    array<unsigned, Color::range> points;
+    array<ScoreType, Color::range> points;
     for (Color::IntType i = 0; i < nu_players; ++i)
         points[i] = m_bd.get_points(Color(i));
     array<Float, Color::range> game_result;
@@ -255,7 +256,7 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
-        auto s = static_cast<Float>(m_bd.get_score_multiplayer(c));
+        auto s = m_bd.get_score_multiplayer(c);
         result[i] =
                 game_result[i] + get_quality_bonus(c, game_result[i], s, true);
         if (log_simulations)
@@ -669,8 +670,7 @@ void State::start_search()
     for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
     {
         Piece piece(i);
-        auto piece_size = static_cast<float>(
-                    m_bc->get_piece_info(piece).get_score_points());
+        auto piece_size = m_bc->get_piece_info(piece).get_score_points();
         auto piece_nu_attach =
                 static_cast<float>(m_bc->get_nu_attach_points(piece));
         LIBBOARDGAME_ASSERT(piece_size > 0);

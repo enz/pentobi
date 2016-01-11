@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <array>
 #include "Color.h"
+#include "PieceInfo.h"
 
 namespace libpentobi_base {
 
@@ -27,10 +28,10 @@ namespace libpentobi_base {
     @return The game result for each player. */
 template<typename FLOAT>
 void get_multiplayer_result(unsigned nu_players,
-                            const array<unsigned, Color::range>& points,
+                            const array<ScoreType, Color::range>& points,
                             array<FLOAT, Color::range>& result)
 {
-    array<unsigned, Color::range> sorted_points;
+    array<ScoreType, Color::range> sorted_points;
     for (Color::IntType i = 0; i < nu_players; ++i)
         sorted_points[i] = points[i];
     sort(sorted_points.begin(), sorted_points.begin() + nu_players);

@@ -121,7 +121,7 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
     }
 }
 
-QString ScoreDisplay::getScoreText(unsigned points, unsigned bonus) const
+QString ScoreDisplay::getScoreText(ScoreType points, ScoreType bonus) const
 {
     QString text =
             QString("%1%2")

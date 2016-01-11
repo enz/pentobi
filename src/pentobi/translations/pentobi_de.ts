@@ -708,30 +708,9 @@
         <source>Setup mode</source>
         <translation>Stellungsaufbau</translation>
     </message>
-    <message numerus="yes">
-        <source>Blue wins with %n point(s).</source>
-        <translation>
-            <numerusform>Blau gewinnt mit %n Punkt.</numerusform>
-            <numerusform>Blau gewinnt mit %n Punkten.</numerusform>
-        </translation>
-    </message>
     <message>
         <source>The game ends in a tie.</source>
         <translation>Das Spiel endet in einem Unentschieden.</translation>
-    </message>
-    <message numerus="yes">
-        <source>Blue/Red wins with %n point(s).</source>
-        <translation>
-            <numerusform>Blau/Rot gewinnt mit %n Punkt.</numerusform>
-            <numerusform>Blau/Rot gewinnt mit %n Punkten.</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Yellow/Green wins with %n point(s).</source>
-        <translation>
-            <numerusform>Gelb/Grün gewinnt mit %n Punkt.</numerusform>
-            <numerusform>Gelb/Grün gewinnt mit %n Punkten.</numerusform>
-        </translation>
     </message>
     <message>
         <source>The game ends in a tie between all colors.</source>
@@ -780,13 +759,6 @@
     <message>
         <source>Blue wins.</source>
         <translation>Blau gewinnt.</translation>
-    </message>
-    <message numerus="yes">
-        <source>Green wins with %n point(s).</source>
-        <translation>
-            <numerusform>Grün gewinnt mit %n Punkt.</numerusform>
-            <numerusform>Grün gewinnt mit %n Punkten.</numerusform>
-        </translation>
     </message>
     <message>
         <source>Yellow wins.</source>
@@ -886,6 +858,14 @@
     <message>
         <source>&amp;Nexos</source>
         <translation>&amp;Nexos</translation>
+    </message>
+    <message>
+        <source>Blue/Red wins.</source>
+        <translation>Blau/Rot gewinnt.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins.</source>
+        <translation>Gelb/Grün gewinnt.</translation>
     </message>
 </context>
 <context>

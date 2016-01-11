@@ -10,33 +10,5 @@
             <numerusform>%n moves</numerusform>
         </translation>
     </message>
-    <message numerus="yes">
-        <source>Blue wins with %n point(s).</source>
-        <translation>
-            <numerusform>Blue wins with %n point.</numerusform>
-            <numerusform>Blue wins with %n points.</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Green wins with %n point(s).</source>
-        <translation>
-            <numerusform>Green wins with %n point.</numerusform>
-            <numerusform>Green wins with %n points.</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Blue/Red wins with %n point(s).</source>
-        <translation>
-            <numerusform>Blue/Red wins with %n point.</numerusform>
-            <numerusform>Blue/Red wins with %n points.</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>Yellow/Green wins with %n point(s).</source>
-        <translation>
-            <numerusform>Yellow/Green wins with %n point.</numerusform>
-            <numerusform>Yellow/Green wins with %n points.</numerusform>
-        </translation>
-    </message>
 </context>
 </TS>

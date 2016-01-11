@@ -8,7 +8,7 @@ Item {
     property bool isFinal
     property bool isToPlay
     property bool isAltColor
-    property int value
+    property real value
     property real pointSize
 
     Rectangle {
