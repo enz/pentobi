@@ -285,7 +285,9 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
 
 void ScoreDisplay::resizeEvent(QResizeEvent*)
 {
-    m_fontSize = static_cast<int>(floor(0.6 * height()));
+    // QFont::setPixelSize(0) prints a warning even if it works and the docs
+    // of Qt 5.3 don't forbid it (unlike QFont::setPointSize(0)).
+    m_fontSize = max(1, static_cast<int>(floor(0.6 * height())));
     m_font.setPixelSize(m_fontSize);
 }
 

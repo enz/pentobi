@@ -74,7 +74,9 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     QPainter painter(this);
     QFont font;
     font.setStyleStrategy(QFont::PreferOutline);
-    font.setPixelSize(static_cast<int>(0.06 * height()));
+    // QFont::setPixelSize(0) prints a warning even if it works and the docs
+    // of Qt 5.3 don't forbid it (unlike QFont::setPointSize(0)).
+    font.setPixelSize(max(1, static_cast<int>(0.06 * height())));
     QFontMetrics metrics(font);
     painter.translate(m_borderX, m_borderY);
     painter.setPen(Qt::NoPen);

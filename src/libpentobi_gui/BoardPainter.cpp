@@ -136,7 +136,10 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     m_fieldHeight = ratio * m_fieldWidth;
     m_boardOffset = QPointF(0.5 * (width - m_fieldWidth * m_width),
                             0.5 * (height - m_fieldHeight * m_height));
-    int fontSize = static_cast<int>((m_isTrigon ? 0.7 : 0.5) * m_fieldWidth);
+    // QFont::setPixelSize(0) prints a warning even if it works and the docs
+    // of Qt 5.3 don't forbid it (unlike QFont::setPointSize(0)).
+    int fontSize =
+            max(1, static_cast<int>((m_isTrigon ? 0.7 : 0.5) * m_fieldWidth));
     m_font.setPixelSize(fontSize);
     m_fontSemiCondensed.setPixelSize(fontSize);
     m_fontCondensed.setPixelSize(fontSize);
