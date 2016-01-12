@@ -8,6 +8,7 @@
 #include <config.h>
 #endif
 
+#include <QCommandLineParser>
 #include <QFileInfo>
 #include <QLibraryInfo>
 #include <QMessageBox>
@@ -17,7 +18,6 @@
 #include "Application.h"
 #include "MainWindow.h"
 #include "ShowMessage.h"
-#include "libboardgame_util/Options.h"
 #include "libboardgame_sys/Compiler.h"
 
 #ifdef Q_WS_WIN
@@ -28,10 +28,7 @@
 #endif
 
 using libboardgame_util::LogInitializer;
-using libboardgame_util::OptionError;
-using libboardgame_util::Options;
 using libboardgame_util::RandomGenerator;
-using libboardgame_sys::get_type_name;
 
 //-----------------------------------------------------------------------------
 
@@ -128,45 +125,59 @@ int main(int argc, char* argv[])
         pentobiTranslator.load("pentobi_" + locale, translationsPentobiDir);
         app.installTranslator(&pentobiTranslator);
 
-        vector<string> specs = {
-            "maxlevel:",
-            "nobook",
-            "nodelay",
-            "seed|r:",
-            "threads:",
-            "verbose"
-        };
-        Options opt(argc, argv, specs);
-        auto max_supported_level = Player::max_supported_level;
-        auto maxLevel = opt.get<unsigned>("maxlevel", max_supported_level);
-        if (maxLevel < 1 || maxLevel > max_supported_level)
-            throw OptionError("--maxlevel must be between 1 and "
-                              + to_string(max_supported_level));
+        QCommandLineParser parser;
+        auto maxSupportedLevel = Player::max_supported_level;
+        QCommandLineOption optionMaxLevel("maxlevel",
+                                          "Set maximum level to <n>.", "n",
+                                          QString::number(maxSupportedLevel));
+        parser.addOption(optionMaxLevel);
+        QCommandLineOption optionNoBook("nobook");
+        parser.addOption(optionNoBook);
+        QCommandLineOption optionNoDelay("nodelay");
+        parser.addOption(optionNoDelay);
+        QCommandLineOption optionSeed("seed", "Set random seed to <n>.", "n");
+        parser.addOption(optionSeed);
+        QCommandLineOption optionThreads("threads", "Use <n> threads.", "n");
+        parser.addOption(optionThreads);
+        QCommandLineOption optionVerbose("verbose");
+        parser.addOption(optionVerbose);
+        parser.process(app);
+        bool ok;
+        auto maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
+        if (! ok || maxLevel < 1 || maxLevel > maxSupportedLevel)
+            throw runtime_error("--maxlevel must be between 1 and "
+                                + to_string(maxSupportedLevel));
         unsigned threads = 0;
-        if (opt.contains("threads"))
+        if (parser.isSet(optionThreads))
         {
-            threads = opt.get<unsigned>("threads");
-            if (threads == 0)
-                throw OptionError("--threads must be greater zero.");
+            threads = parser.value(optionThreads).toUInt(&ok);
+            if (! ok || threads == 0)
+                throw runtime_error("--threads must be greater zero.");
             if (! libpentobi_mcts::SearchParamConst::multithread
                     && threads > 1)
-                throw OptionError("This version of Pentobi was compiled"
-                                  " without support for multi-threading.");
+                throw runtime_error("This version of Pentobi was compiled"
+                                    " without support for multi-threading.");
         }
-        if (! opt.contains("verbose"))
+        if (! parser.isSet(optionVerbose))
+        {
             libboardgame_util::disable_logging();
 #ifdef Q_WS_WIN
-        if (opt.contains("verbose"))
             redirectStdErr();
 #endif
-        if (opt.contains("seed"))
-            RandomGenerator::set_global_seed(
-                        opt.get<RandomGenerator::ResultType>("seed"));
-        bool noBook = opt.contains("nobook");
+        }
+        if (parser.isSet(optionSeed))
+        {
+            RandomGenerator::ResultType seed =
+                    parser.value(optionSeed).toUInt(&ok);
+            if (! ok)
+                throw runtime_error("--seed must be a positive number");
+            RandomGenerator::set_global_seed(seed);
+        }
+        bool noBook = parser.isSet(optionNoBook);
         QString initialFile;
-        auto& args = opt.get_args();
+        auto args = parser.positionalArguments();
         if (! args.empty())
-            initialFile = QString::fromLocal8Bit(args[0].c_str());
+            initialFile = args.at(0);
         QSettings settings;
         auto variantString = settings.value("variant", "").toString();
         Variant variant;
@@ -177,35 +188,27 @@ int main(int argc, char* argv[])
         {
             MainWindow mainWindow(variant, initialFile, helpDir, maxLevel,
                                   booksDir, noBook, threads);
-            if (opt.contains("seed"))
+            if (parser.isSet(optionSeed))
                 mainWindow.setDeterministic();
-            if (opt.contains("nodelay"))
+            if (parser.isSet(optionNoDelay))
                 mainWindow.setNoDelay();
             mainWindow.show();
             return app.exec();
         }
         catch (bad_alloc&)
         {
-            // Handle bad_alloc here because it is an expected error condition
-            // (libpentobi_mcts::Player in MainWindow requires a larger amount
-            // of memory) and here, the translators are installed, so we can
-            // show a translated error message.
+            // bad_alloc is an expected error because libpentobi_mcts::Player
+            // requires a larger amount of memory and an error message should
+            // be shown to the user. It needs to be handled here because it
+            // needs the translators being installed for the error message.
             QMessageBox::critical(nullptr,
                 QCoreApplication::translate("main", "Pentobi"),
                 QCoreApplication::translate("main", "Not enough memory."));
         }
     }
-    catch (const OptionError& e)
-    {
-        QMessageBox::critical(nullptr, "Pentobi",
-                              "Invalid command line option:\n\n"
-                              + QString::fromLocal8Bit(e.what()));
-        return 1;
-    }
     catch (const exception& e)
     {
-        string detailedText = get_type_name(e) + ": " + e.what();
-        showFatal(QString::fromLocal8Bit(detailedText.c_str()));
+        cerr << "Error: " << e.what() << '\n';
         return 1;
     }
 }
