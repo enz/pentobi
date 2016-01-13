@@ -325,6 +325,7 @@ void Board::init_variant(Variant variant)
         m_bonus_one_piece = 5;
     }
     m_max_piece_size = m_bc->get_max_piece_size();
+    m_max_adj_attach = m_bc->get_max_adj_attach();
     m_geo = &m_bc->get_geometry();
     m_move_info_array = m_bc->get_move_info_array();
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
@@ -426,37 +427,27 @@ void Board::optimize_attach_point_lists()
 void Board::place_setup(const Setup& setup)
 {
     if (m_max_piece_size == 5)
-    {
         for (Color c : get_colors())
             for (Move mv : setup.placements[c])
-                place<5>(c, mv);
-    }
+                place<5, 16>(c, mv);
     else if (m_max_piece_size == 6)
-    {
         for (Color c : get_colors())
             for (Move mv : setup.placements[c])
-                place<6>(c, mv);
-    }
+                place<6, 22>(c, mv);
     else
-    {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
         for (Color c : get_colors())
             for (Move mv : setup.placements[c])
-                place<7>(c, mv);
-    }
+                place<7, 12>(c, mv);
 }
 
 void Board::play(Color c, Move mv)
 {
     if (m_max_piece_size == 5)
-        play<5>(c, mv);
+        play<5, 16>(c, mv);
     else if (m_max_piece_size == 6)
-        play<6>(c, mv);
+        play<6, 22>(c, mv);
     else
-    {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-        play<7>(c, mv);
-    }
+        play<7, 12>(c, mv);
 }
 
 void Board::take_snapshot()

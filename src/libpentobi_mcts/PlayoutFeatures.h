@@ -16,6 +16,7 @@ using namespace std;
 using libboardgame_base::ArrayList;
 using libboardgame_util::Range;
 using libpentobi_base::Board;
+using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Geometry;
@@ -100,8 +101,10 @@ public:
     void set_forbidden(const MoveInfo<MAX_SIZE>& info);
 
     /** Set adjacent points of move to forbidden. */
-    void set_forbidden(const MoveInfoExt& info_ext);
+    template<unsigned MAX_ADJ_ATTACH>
+    void set_forbidden(const MoveInfoExt<MAX_ADJ_ATTACH>& info_ext);
 
+    template<unsigned MAX_ADJ_ATTACH>
     void set_local(const Board& bd);
 
 private:
@@ -136,13 +139,16 @@ inline void PlayoutFeatures::set_forbidden(const MoveInfo<MAX_SIZE>& info)
     m_point_value[Point::null()] = 0;
 }
 
-inline void PlayoutFeatures::set_forbidden(const MoveInfoExt& info_ext)
+template<unsigned MAX_ADJ_ATTACH>
+inline void PlayoutFeatures::set_forbidden(
+        const MoveInfoExt<MAX_ADJ_ATTACH>& info_ext)
 {
     for (auto i = info_ext.begin_adj(), end = info_ext.end_adj(); i != end;
          ++i)
         m_point_value[*i] = 0x1000u;
 }
 
+template<unsigned MAX_ADJ_ATTACH>
 inline void PlayoutFeatures::set_local(const Board& bd)
 {
     // Clear old info about local points
@@ -158,6 +164,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
         second_color = bd.get_second_color(to_play);
     auto& geo = bd.get_geometry();
     auto& moves = bd.get_moves();
+    auto move_info_ext_array = bd.get_board_const().get_move_info_ext_array();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-color variants)
     auto end = moves.end();
@@ -169,7 +176,8 @@ inline void PlayoutFeatures::set_local(const Board& bd)
             continue;
         Move mv = i->move;
         auto& is_forbidden = bd.is_forbidden(c);
-        auto& info_ext = bd.get_move_info_ext(mv);
+        auto& info_ext = BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
+                    mv, move_info_ext_array);
         auto j = info_ext.begin_attach();
         auto end = info_ext.end_attach();
         do

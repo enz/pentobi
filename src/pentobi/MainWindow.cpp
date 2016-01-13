@@ -190,16 +190,11 @@ void setIcon(QAction* action, const QString& name)
     action->setIcon(icon);
 }
 
-/** Simple heuristic that prefers moves with more piece points, more attach
-    points and less adjacent points.
+/** Simple heuristic that prefers moves with more score points.
     Used for sorting the list used in Find Move. */
 ScoreType getHeuristic(const Board& bd, Move mv)
 {
-    auto& piece_info = bd.get_piece_info(bd.get_move_piece(mv));
-    auto& info_ext = bd.get_move_info_ext(mv);
-    return 1000 * piece_info.get_score_points() +
-            static_cast<ScoreType>(10 * info_ext.size_attach_points
-                                   - info_ext.size_adj_points);
+    return bd.get_piece_info(bd.get_move_piece(mv)).get_score_points();
 }
 
 } // namespace

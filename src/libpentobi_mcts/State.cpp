@@ -334,24 +334,24 @@ bool State::gen_children(Tree::NodeExpander& expander, Float init_val)
     if (m_max_piece_size == 5)
     {
         init_moves_without_gamma<5>(to_play);
-        return m_prior_knowledge.gen_children<5>(m_bd, m_moves[to_play],
-                                                 m_is_symmetry_broken,
-                                                 expander, init_val);
+        return m_prior_knowledge.gen_children<5, 16>(m_bd, m_moves[to_play],
+                                                     m_is_symmetry_broken,
+                                                     expander, init_val);
     }
     else if (m_max_piece_size == 6)
     {
         init_moves_without_gamma<6>(to_play);
-        return m_prior_knowledge.gen_children<6>(m_bd, m_moves[to_play],
-                                                 m_is_symmetry_broken,
-                                                 expander, init_val);
+        return m_prior_knowledge.gen_children<6, 22>(m_bd, m_moves[to_play],
+                                                     m_is_symmetry_broken,
+                                                     expander, init_val);
     }
     else
     {
         LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
         init_moves_without_gamma<7>(to_play);
-        return m_prior_knowledge.gen_children<7>(m_bd, m_moves[to_play],
-                                                 m_is_symmetry_broken,
-                                                 expander, init_val);
+        return m_prior_knowledge.gen_children<7, 12>(m_bd, m_moves[to_play],
+                                                     m_is_symmetry_broken,
+                                                     expander, init_val);
     }
 }
 
@@ -363,26 +363,20 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
         if (! m_is_move_list_initialized[to_play])
         {
             if (m_max_piece_size == 5)
-                init_moves_with_gamma<5>(to_play);
+                init_moves_with_gamma<5, 16>(to_play);
             else if (m_max_piece_size == 6)
-                init_moves_with_gamma<6>(to_play);
+                init_moves_with_gamma<6, 22>(to_play);
             else
-            {
-                LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-                init_moves_with_gamma<7>(to_play);
-            }
+                init_moves_with_gamma<7, 12>(to_play);
         }
         else if (m_has_moves[to_play])
         {
             if (m_max_piece_size == 5)
-                update_moves<5>(to_play);
+                update_moves<5, 16>(to_play);
             else if (m_max_piece_size == 6)
-                update_moves<6>(to_play);
+                update_moves<6, 22>(to_play);
             else
-            {
-                LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-                update_moves<7>(to_play);
-            }
+                update_moves<7, 12>(to_play);
         }
         if ((m_has_moves[to_play] = ! m_moves[to_play].empty()))
             break;
@@ -510,11 +504,11 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
     return bonus;
 }
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_is_piece_considered();
-    m_playout_features[c].set_local(m_bd);
+    m_playout_features[c].set_local<MAX_ADJ_ATTACH>(m_bd);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
@@ -540,7 +534,7 @@ void State::init_moves_with_gamma(Color c)
     if (moves.empty() && &pieces == &m_pieces_considered)
     {
         m_force_consider_all_pieces = true;
-        init_moves_with_gamma<MAX_SIZE>(c);
+        init_moves_with_gamma<MAX_SIZE, MAX_ADJ_ATTACH>(c);
     }
 }
 
@@ -703,11 +697,11 @@ void State::start_simulation(size_t n)
     m_nu_passes = 0;
 }
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void State::update_moves(Color c)
 {
     auto& playout_features = m_playout_features[c];
-    playout_features.set_local(m_bd);
+    playout_features.set_local<MAX_ADJ_ATTACH>(m_bd);
 
     auto& marker = m_marker[c];
 

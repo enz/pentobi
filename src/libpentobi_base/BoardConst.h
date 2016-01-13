@@ -41,7 +41,10 @@ public:
         get_move_info(). */
     typedef const void* MoveInfoArray;
 
-    static const unsigned max_moves_at_point = 40;
+    /** Start of the MoveInfoExt array, which can be cached by the user in
+        performance-critical code and then passed into the static version of
+        get_move_info_ext(). */
+    typedef const void* MoveInfoExtArray;
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called.
@@ -51,6 +54,10 @@ public:
     template<unsigned MAX_SIZE>
     static const MoveInfo<MAX_SIZE>&
     get_move_info(Move mv, MoveInfoArray move_info_array);
+
+    template<unsigned MAX_ADJ_ATTACH>
+    static const MoveInfoExt<MAX_ADJ_ATTACH>&
+    get_move_info_ext(Move mv, MoveInfoExtArray move_info_ext_array);
 
 
     Piece::IntType get_nu_pieces() const;
@@ -64,6 +71,8 @@ public:
     const PieceTransforms& get_transforms() const;
 
     unsigned get_max_piece_size() const { return m_max_piece_size; }
+
+    unsigned get_max_adj_attach() const { return m_max_adj_attach; }
 
     Range<const Point> get_move_points(Move mv) const;
 
@@ -86,11 +95,7 @@ public:
     /** Get pointer to extended move info array.
         Can be used to speed up the access to the move info by avoiding the
         multiple pointer dereferencing of Board::get_move_info_ext(Move) */
-    const MoveInfoExt* get_move_info_ext_array() const;
-
-    /** Get extended move info.
-        @pre ! mv.is_null() */
-    const MoveInfoExt& get_move_info_ext(Move mv) const;
+    MoveInfoExtArray get_move_info_ext_array() const;
 
     const MoveInfoExt2& get_move_info_ext_2(Move mv) const;
 
@@ -142,7 +147,7 @@ public:
     void sort(MovePoints& points) const;
 
 private:
-    typedef ArrayList<Move, max_moves_at_point> LocalMovesList;
+    typedef ArrayList<Move, 40> LocalMovesList;
 
     /** See m_full_move_table */
     typedef array<PieceMap<Grid<LocalMovesList>>, PrecompMoves::nu_adj_status>
@@ -172,6 +177,9 @@ private:
 
     unsigned m_max_piece_size;
 
+    /** See MoveInfoExt */
+    unsigned m_max_adj_attach;
+
     BoardType m_board_type;
 
     PieceSet m_piece_set;
@@ -187,11 +195,15 @@ private:
     PieceMap<unsigned> m_nu_attach_points{0};
 
     /** Array of MoveInfo<MAX_SIZE> with MAX_SIZE being the maximum piece size
-        in the current game variant.
+        in the corresponding game variant.
         See comments at MoveInfo. */
     unique_ptr<void, MallocFree> m_move_info;
 
-    unique_ptr<MoveInfoExt[]> m_move_info_ext;
+    /** Array of MoveInfoExt<MAX_ADJ_ATTACH> with MAX_ADJ_ATTACH being the
+        maximum total number of attach points and adjacent points of a piece in
+        the corresponding game variant.
+        See comments at MoveInfoExt. */
+    unique_ptr<void, MallocFree> m_move_info_ext;
 
     unique_ptr<MoveInfoExt2[]> m_move_info_ext_2;
 
@@ -211,11 +223,13 @@ private:
 
     BoardConst(BoardType board_type, PieceSet piece_set);
 
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void create_move(unsigned& moves_created, Piece piece,
                      const MovePoints& points, Point label_pos);
 
     void create_moves();
 
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void create_moves(unsigned& moves_created, Piece piece);
 
     template<unsigned MAX_SIZE>
@@ -240,6 +254,7 @@ template<unsigned MAX_SIZE>
 inline const MoveInfo<MAX_SIZE>&
 BoardConst::get_move_info(Move mv, MoveInfoArray move_info_array)
 {
+    LIBBOARDGAME_ASSERT(! mv.is_null());
     return *(static_cast<const MoveInfo<MAX_SIZE>*>(move_info_array)
              + mv.to_int());
 }
@@ -247,13 +262,17 @@ BoardConst::get_move_info(Move mv, MoveInfoArray move_info_array)
 template<unsigned MAX_SIZE>
 inline const MoveInfo<MAX_SIZE>& BoardConst::get_move_info(Move mv) const
 {
+    LIBBOARDGAME_ASSERT(m_max_piece_size == MAX_SIZE);
     return get_move_info<MAX_SIZE>(mv, m_move_info.get());
 }
 
-inline const MoveInfoExt& BoardConst::get_move_info_ext(Move mv) const
+template<unsigned MAX_ADJ_ATTACH>
+inline const MoveInfoExt<MAX_ADJ_ATTACH>&
+BoardConst::get_move_info_ext(Move mv, MoveInfoExtArray move_info_ext_array)
 {
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_nu_moves);
-    return m_move_info_ext[mv.to_int()];
+    LIBBOARDGAME_ASSERT(! mv.is_null());
+    return *(static_cast<const MoveInfoExt<MAX_ADJ_ATTACH>*>(
+                 move_info_ext_array) + mv.to_int());
 }
 
 inline const MoveInfoExt2& BoardConst::get_move_info_ext_2(Move mv) const
@@ -262,7 +281,7 @@ inline const MoveInfoExt2& BoardConst::get_move_info_ext_2(Move mv) const
     return m_move_info_ext_2[mv.to_int()];
 }
 
-inline const MoveInfoExt* BoardConst::get_move_info_ext_array() const
+inline auto BoardConst::get_move_info_ext_array() const -> MoveInfoExtArray
 {
     return m_move_info_ext.get();
 }

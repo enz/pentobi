@@ -159,7 +159,7 @@ public:
 
     /** More efficient version of play() if maximum piece size of current
         game variant is known at compile time. */
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void play(Color c, Move mv);
 
     /** Play a move.
@@ -297,8 +297,6 @@ public:
 
     Piece get_move_piece(Move mv) const;
 
-    const MoveInfoExt& get_move_info_ext(Move mv) const;
-
     const MoveInfoExt2& get_move_info_ext_2(Move mv) const;
 
     bool is_colored_starting_point(Point p) const;
@@ -379,8 +377,11 @@ private:
 
     unsigned m_nu_players;
 
-    /** Maximum piece size in the current game variant. */
+    /** Caches m_bc->get_max_piece_size(). */
     unsigned m_max_piece_size;
+
+    /** Caches m_bc->get_max_adj_attach(). */
+    unsigned m_max_adj_attach;
 
     /** Bonus for playing all pieces. */
     ScoreType m_bonus_all_pieces;
@@ -400,7 +401,7 @@ private:
     BoardConst::MoveInfoArray m_move_info_array;
 
     /** Caches m_bc->get_move_info_ext_array() */
-    const MoveInfoExt* m_move_info_ext_array;
+    BoardConst::MoveInfoExtArray m_move_info_ext_array;
 
     /** Caches m_bc->get_move_info_ext_2_array() */
     const MoveInfoExt2* m_move_info_ext_2_array;
@@ -438,7 +439,7 @@ private:
 
     void optimize_attach_point_lists();
 
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void place(Color c, Move mv);
 
     void place_setup(const Setup& setup);
@@ -524,13 +525,6 @@ inline unsigned Board::get_max_player_moves() const
 inline ColorMove Board::get_move(unsigned n) const
 {
     return m_moves[n];
-}
-
-inline const MoveInfoExt& Board::get_move_info_ext(Move mv) const
-{
-    LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
-    return *(m_move_info_ext_array + mv.to_int());
 }
 
 inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
@@ -823,11 +817,14 @@ inline bool Board::is_same_player(Color c1, Color c2) const
     return c1 == c2 || c1 == m_second_color[c2];
 }
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 inline void Board::place(Color c, Move mv)
 {
+    LIBBOARDGAME_ASSERT(m_max_piece_size == MAX_SIZE);
+    LIBBOARDGAME_ASSERT(m_max_adj_attach == MAX_ADJ_ATTACH);
     auto& info = BoardConst::get_move_info<MAX_SIZE>(mv, m_move_info_array);
-    auto& info_ext = get_move_info_ext(mv);
+    auto& info_ext = BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
+                mv, m_move_info_ext_array);
     auto piece = info.get_piece();
     auto& state_color = m_state_color[c];
     LIBBOARDGAME_ASSERT(state_color.nu_left_piece[piece] > 0);
@@ -873,10 +870,10 @@ inline void Board::place(Color c, Move mv)
     attach_points.resize(n);
 }
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 inline void Board::play(Color c, Move mv)
 {
-    place<MAX_SIZE>(c, mv);
+    place<MAX_SIZE, MAX_ADJ_ATTACH>(c, mv);
     m_moves.push_back(ColorMove(c, mv));
     m_state_base.to_play = get_next(c);
 }

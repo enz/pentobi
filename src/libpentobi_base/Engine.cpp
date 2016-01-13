@@ -160,7 +160,6 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
     }
     auto& geo = bd.get_geometry();
     Piece piece = bd.get_move_piece(mv);
-    auto& info_ext = bd.get_move_info_ext(mv);
     auto& info_ext_2 = bd.get_move_info_ext_2(mv);
     response
         << "\n"
@@ -170,16 +169,6 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         << "Points:";
     for (Point p : bd.get_move_points(mv))
         response << ' ' << geo.to_string(p);
-    response
-        << "\n"
-        << "Adj:    ";
-    for (auto i = info_ext.begin_adj(); i != info_ext.end_adj(); ++i)
-        response << geo.to_string(*i) << " ";
-    response
-        << "\n"
-        << "Attach: ";
-    for (auto i = info_ext.begin_attach(); i != info_ext.end_attach(); ++i)
-        response << geo.to_string(*i) << " ";
     response
         << "\n"
         << "BrkSym: " << info_ext_2.breaks_symmetry << "\n"

@@ -46,7 +46,7 @@ public:
 
     /** Generate children nodes initialized with prior knowledge.
         @return false If the tree has not enough capacity for the children. */
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     bool gen_children(const Board& bd, const MoveList& moves,
                       bool is_symmetry_broken, Tree::NodeExpander& expander,
                       Float init_val);
@@ -92,16 +92,16 @@ private:
     GridExt<float> m_dist_to_center;
 
 
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void compute_features(const Board& bd, const MoveList& moves,
                           bool check_dist_to_center, bool check_connect);
 
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void init_local(const Board& bd);
 };
 
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                                       bool check_dist_to_center,
                                       bool check_connect)
@@ -199,7 +199,8 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     {
         auto mv = moves[i];
         auto info = BoardConst::get_move_info<MAX_SIZE>(mv, move_info_array);
-        auto& info_ext = *(move_info_ext_array + mv.to_int());
+        auto& info_ext = BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
+                    mv, move_info_ext_array);
         auto& features = m_features[i];
         auto j = info.begin();
         Float heuristic = point_value[*j];
@@ -260,7 +261,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     }
 }
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                                   bool is_symmetry_broken,
                                   Tree::NodeExpander& expander, Float init_val)
@@ -275,7 +276,7 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         expander.add_child(Move::null(), init_val, 3);
         return true;
     }
-    init_local<MAX_SIZE>(bd);
+    init_local<MAX_SIZE, MAX_ADJ_ATTACH>(bd);
     auto to_play = bd.get_to_play();
     auto nu_onboard_pieces = bd.get_nu_onboard_pieces();
     bool check_dist_to_center =
@@ -283,7 +284,8 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
              && nu_onboard_pieces <= m_dist_to_center_max_pieces);
     bool check_connect =
         (bd.get_variant() == Variant::classic_2 && nu_onboard_pieces < 14);
-    compute_features<MAX_SIZE>(bd, moves, check_dist_to_center, check_connect);
+    compute_features<MAX_SIZE, MAX_ADJ_ATTACH>(bd, moves, check_dist_to_center,
+                                               check_connect);
     if (! m_has_connect_move)
         check_connect = false;
     Move symmetric_mv = Move::null();
@@ -367,8 +369,8 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
     return true;
 }
 
-template<unsigned MAX_SIZE>
-void PriorKnowledge::init_local(const Board& bd)
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+inline void PriorKnowledge::init_local(const Board& bd)
 {
     for (Point p : m_local_points)
         m_is_local[p] = false;
@@ -380,6 +382,7 @@ void PriorKnowledge::init_local(const Board& bd)
     else
         second_color = bd.get_second_color(to_play);
     auto& moves = bd.get_moves();
+    auto move_info_ext_array = bd.get_board_const().get_move_info_ext_array();
     // Consider last 3 moves for local points (i.e. last 2 opponent moves in
     // two-color variants)
     auto end = moves.end();
@@ -391,7 +394,8 @@ void PriorKnowledge::init_local(const Board& bd)
             continue;
         auto mv = i->move;
         auto& is_forbidden = bd.is_forbidden(c);
-        auto& info_ext = bd.get_move_info_ext(mv);
+        auto& info_ext = BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
+                    mv, move_info_ext_array);
         auto j = info_ext.begin_attach();
         auto end = info_ext.end_attach();
         do

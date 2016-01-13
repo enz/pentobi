@@ -125,7 +125,7 @@ private:
 
     BoardConst::MoveInfoArray m_move_info_array;
 
-    const MoveInfoExt* m_move_info_ext_array;
+    BoardConst::MoveInfoExtArray m_move_info_ext_array;
 
     /** Incrementally updated lists of legal moves for both colors.
         Only the move list for the color to play van be used in any given
@@ -226,12 +226,11 @@ private:
     Float get_quality_bonus(Color c, Float result, Float score,
                             bool use_nu_attach);
 
-    /** Equivalent to but faster than m_bd.get_move_info() */
     template<unsigned MAX_SIZE>
     const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;
 
-    /** Equivalent to but faster than m_bd.get_move_info_ext() */
-    const MoveInfoExt& get_move_info_ext(Move mv) const;
+    template<unsigned MAX_ADJ_ATTACH>
+    const MoveInfoExt<MAX_ADJ_ATTACH>& get_move_info_ext(Move mv) const;
 
     PrecompMoves::Range get_moves(Color c, Piece piece, Point p,
                                   unsigned adj_status) const;
@@ -242,7 +241,7 @@ private:
 
     const Board::PiecesLeftList& get_pieces_considered(Color c);
 
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void init_moves_with_gamma(Color c);
 
     template<unsigned MAX_SIZE>
@@ -266,10 +265,10 @@ private:
 
     bool gen_playout_move_full(PlayerMove<Move>& mv);
 
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void update_moves(Color c);
 
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void update_playout_features(Color c, Move mv);
 
     template<unsigned MAX_SIZE>
@@ -337,14 +336,17 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
 template<unsigned MAX_SIZE>
 inline const MoveInfo<MAX_SIZE>& State::get_move_info(Move mv) const
 {
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
     return BoardConst::get_move_info<MAX_SIZE>(mv, m_move_info_array);
 }
 
-inline const MoveInfoExt& State::get_move_info_ext(Move mv) const
+template<unsigned MAX_ADJ_ATTACH>
+inline const MoveInfoExt<MAX_ADJ_ATTACH>& State::get_move_info_ext(
+        Move mv) const
 {
-    LIBBOARDGAME_ASSERT(! mv.is_null());
     LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
-    return *(m_move_info_ext_array + mv.to_int());
+    return BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
+                mv, m_move_info_ext_array);
 }
 
 inline PrecompMoves::Range State::get_moves(Color c, Piece piece, Point p,
@@ -376,19 +378,18 @@ inline void State::play_in_tree(Move mv)
         m_nu_passes = 0;
         if (m_max_piece_size == 5)
         {
-            m_bd.play<5>(to_play, mv);
-            update_playout_features<5>(to_play, mv);
+            m_bd.play<5, 16>(to_play, mv);
+            update_playout_features<5, 16>(to_play, mv);
         }
         else if (m_max_piece_size == 6)
         {
-            m_bd.play<6>(to_play, mv);
-            update_playout_features<6>(to_play, mv);
+            m_bd.play<6, 22>(to_play, mv);
+            update_playout_features<6, 22>(to_play, mv);
         }
         else
         {
-            LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-            m_bd.play<7>(to_play, mv);
-            update_playout_features<7>(to_play, mv);
+            m_bd.play<7, 12>(to_play, mv);
+            update_playout_features<7, 12>(to_play, mv);
         }
     }
     else
@@ -406,23 +407,22 @@ inline void State::play_playout(Move mv)
     LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
     if (m_max_piece_size == 5)
     {
-        m_bd.play<5>(to_play, mv);
-        update_playout_features<5>(to_play, mv);
+        m_bd.play<5, 16>(to_play, mv);
+        update_playout_features<5, 16>(to_play, mv);
         if (! m_is_symmetry_broken)
             update_symmetry_broken<5>(mv);
     }
     else if (m_max_piece_size == 6)
     {
-        m_bd.play<6>(to_play, mv);
-        update_playout_features<6>(to_play, mv);
+        m_bd.play<6, 22>(to_play, mv);
+        update_playout_features<6, 22>(to_play, mv);
         if (! m_is_symmetry_broken)
             update_symmetry_broken<6>(mv);
     }
     else
     {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-        m_bd.play<7>(to_play, mv);
-        update_playout_features<7>(to_play, mv);
+        m_bd.play<7, 12>(to_play, mv);
+        update_playout_features<7, 12>(to_play, mv);
         // No game variant with piece size 7 uses m_is_symmetry_broken
     }
     ++m_nu_new_moves[to_play];
@@ -438,13 +438,14 @@ inline bool State::skip_rave(Move mv) const
     return false;
 }
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 inline void State::update_playout_features(Color c, Move mv)
 {
     auto& info = get_move_info<MAX_SIZE>(mv);
     for (Color i : Color::Range(m_nu_colors))
         m_playout_features[i].set_forbidden(info);
-    m_playout_features[c].set_forbidden(get_move_info_ext(mv));
+    m_playout_features[c].set_forbidden<MAX_ADJ_ATTACH>(
+                get_move_info_ext<MAX_ADJ_ATTACH>(mv));
 }
 
 template<unsigned MAX_SIZE>

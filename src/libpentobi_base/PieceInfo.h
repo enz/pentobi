@@ -45,11 +45,6 @@ public:
 
     typedef ArrayList<CoordPoint, max_size> Points;
 
-    /** Maximum number of attach points and adjacent points of a piece.
-        The maximum number occurs with the I6 piece in Trigon (8 adjacent
-        points and 14 attach points). */
-    static const unsigned max_adj_attach = 22;
-
 
     /** Constructor.
         @param name A short unique name for the piece.

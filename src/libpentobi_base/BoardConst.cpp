@@ -34,7 +34,7 @@ const bool log_move_creation = false;
 
 // Sort points using the ordering used in blksgf files (switches the direction
 // of the y axis!)
-inline void sort_piece_points(PiecePoints& points)
+void sort_piece_points(PiecePoints& points)
 {
     auto check = [&](unsigned short a, unsigned short b)
     {
@@ -529,6 +529,8 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_nu_moves = Move::onboard_moves_classic + 1;
         m_max_piece_size = 5;
         m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
+        m_max_adj_attach = 16;
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
         break;
     case BoardType::trigon:
         LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
@@ -537,6 +539,8 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_nu_moves = Move::onboard_moves_trigon + 1;
         m_max_piece_size = 6;
         m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
+        m_max_adj_attach = 22;
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<22>)));
         break;
     case BoardType::trigon_3:
         LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
@@ -545,6 +549,8 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_nu_moves = Move::onboard_moves_trigon_3 + 1;
         m_max_piece_size = 6;
         m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
+        m_max_adj_attach = 22;
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<22>)));
         break;
     case BoardType::duo:
         m_transforms.reset(new PieceTransformsClassic);
@@ -561,6 +567,8 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         }
         m_max_piece_size = 5;
         m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
+        m_max_adj_attach = 16;
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
         break;
     case BoardType::nexos:
         LIBBOARDGAME_ASSERT(piece_set == PieceSet::nexos);
@@ -569,9 +577,10 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_nu_moves = Move::onboard_moves_nexos + 1;
         m_max_piece_size = 7;
         m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<7>)));
+        m_max_adj_attach = 12;
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<12>)));
         break;
     }
-    m_move_info_ext.reset(new MoveInfoExt[m_nu_moves]);
     m_move_info_ext_2.reset(new MoveInfoExt2[m_nu_moves]);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     init_adj_status();
@@ -600,34 +609,22 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         init_symmetry_info();
 }
 
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void BoardConst::create_move(unsigned& moves_created, Piece piece,
                              const MovePoints& points, Point label_pos)
 {
-    Move mv(static_cast<Move::IntType>(moves_created));
+    LIBBOARDGAME_ASSERT(m_max_piece_size == MAX_SIZE);
+    LIBBOARDGAME_ASSERT(m_max_adj_attach == MAX_ADJ_ATTACH);
     LIBBOARDGAME_ASSERT(moves_created < m_nu_moves);
-    if (m_max_piece_size == 5)
-    {
-        void* place =
-                static_cast<MoveInfo<5>*>(m_move_info.get())
-                + moves_created;
-        new(place) MoveInfo<5>(piece, points);
-    }
-    else if (m_max_piece_size == 6)
-    {
-        void* place =
-                static_cast<MoveInfo<6>*>(m_move_info.get())
-                + moves_created;
-        new(place) MoveInfo<6>(piece, points);
-    }
-    else
-    {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-        void* place =
-                static_cast<MoveInfo<7>*>(m_move_info.get())
-                + moves_created;
-        new(place) MoveInfo<7>(piece, points);
-    }
-    auto& info_ext = m_move_info_ext[moves_created];
+    Move mv(static_cast<Move::IntType>(moves_created));
+    void* place =
+            static_cast<MoveInfo<MAX_SIZE>*>(m_move_info.get())
+            + moves_created;
+    new(place) MoveInfo<MAX_SIZE>(piece, points);
+    place =
+            static_cast<MoveInfoExt<MAX_ADJ_ATTACH>*>(m_move_info_ext.get())
+            + moves_created;
+    auto& info_ext = *new(place) MoveInfoExt<MAX_ADJ_ATTACH>();
     auto& info_ext_2 = m_move_info_ext_2[moves_created];
     ++moves_created;
     auto scored_points = &info_ext_2.scored_points[0];
@@ -698,8 +695,17 @@ void BoardConst::create_moves()
     LIBBOARDGAME_ASSERT(Move::null().to_int() == 0);
     unsigned moves_created = 1;
     m_full_move_table.reset(new FullMoveTable);
-    for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
-        create_moves(moves_created, Piece(i));
+    if (m_max_piece_size == 5)
+        for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
+            create_moves<5, 16>(moves_created, Piece(i));
+    else if (m_max_piece_size == 6)
+        for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
+            create_moves<6, 22>(moves_created, Piece(i));
+    else
+    {
+        for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
+            create_moves<7, 12>(moves_created, Piece(i));
+    }
     LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     unsigned n = 0;
     for (Point p : m_geo)
@@ -718,6 +724,7 @@ void BoardConst::create_moves()
     m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
 
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void BoardConst::create_moves(unsigned& moves_created, Piece piece)
 {
     auto& piece_info = m_pieces[piece.to_int()];
@@ -780,7 +787,8 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
             CoordPoint label_pos = transformed_label_pos[i];
             label_pos.x += x;
             label_pos.y += y;
-            create_move(moves_created, piece, points,
+            create_move<MAX_SIZE, MAX_ADJ_ATTACH>(
+                        moves_created, piece, points,
                         m_geo.get_point(label_pos.x, label_pos.y));
         }
     }

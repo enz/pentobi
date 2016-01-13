@@ -61,36 +61,32 @@ private:
 
 /** Less frequently accessed move info.
     Stored separately from move points and move piece to improve CPU cache
-    performance. */
+    performance.
+    Since this is a performance-critical data structure, it takes
+    a template argument to make the space for move points not larger than
+    needed in the current game variant.
+    @tparam MAX_ADJ_ATTACH Maximum total number of attach points and adjacent
+    points of a piece in the corresponding game variant. */
+template<unsigned MAX_ADJ_ATTACH>
 struct MoveInfoExt
 {
     /** Concatenated list of adjacent and attach points. */
-    Point points[PieceInfo::max_adj_attach];
+    Point points[MAX_ADJ_ATTACH];
 
     uint_least8_t size_attach_points;
 
     uint_least8_t size_adj_points;
 
-    const Point* begin_adj() const
-    {
-        return points;
-    }
+    const Point* begin_adj() const { return points; }
 
-    const Point* end_adj() const
-    {
-        return points + size_adj_points;
-    }
+    const Point* end_adj() const { return points + size_adj_points; }
 
-    const Point* begin_attach() const
-    {
-        return end_adj();
-    }
+    const Point* begin_attach() const { return end_adj(); }
 
     const Point* end_attach() const
     {
         return begin_attach() + size_attach_points;
     }
-
 };
 
 //-----------------------------------------------------------------------------
