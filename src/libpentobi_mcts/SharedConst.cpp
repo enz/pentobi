@@ -242,7 +242,7 @@ void SharedConst::init_one_piece_callisto(bool is_followup)
                 else
                     useless_point = p;
             }
-    if (n == 0)
+    if (n == 0 && ! useless_point.is_null())
         // Allow one useless point if no useful points exist to avoid that
         // the player fails to generate a move (in the unlikely case that
         // no moves with larger pieces exist).
