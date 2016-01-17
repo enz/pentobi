@@ -268,7 +268,7 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridElementWidth: Math.floor(0.2 * parentPieceArea.width)
+                gridElementWidth: Math.floor(0.25 * parentPieceArea.width)
                 gridElementHeight: gridElementWidth
             }
             ParentChange {
