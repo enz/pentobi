@@ -315,9 +315,10 @@ inline bool State::check_lgr(Move mv) const
     if (m_is_callisto)
     {
         Piece one_piece = m_bd.get_one_piece();
-        if (m_bd.get_nu_left_piece(c, one_piece) <= 1)
+        if (piece == one_piece)
             return true;
-        return (piece == one_piece);
+        if (m_bd.get_nu_left_piece(c, one_piece) > 1 && piece != one_piece)
+            return false;
     }
     return has_attach_point;
 }
