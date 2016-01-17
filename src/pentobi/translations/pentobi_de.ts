@@ -921,55 +921,55 @@
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
-        <translation>&amp;Spielstufe (Klassisch, 4 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Klassisch, 4 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 2 Players)</source>
-        <translation>&amp;Spielstufe (Klassisch, 2 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Klassisch, 2 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 3 Players)</source>
-        <translation>&amp;Spielstufe (Klassisch, 3 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Klassisch, 3 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Duo)</source>
-        <translation>&amp;Spielstufe (Duo)</translation>
+        <translation>Spielst&amp;ufe (Duo)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 4 Players)</source>
-        <translation>&amp;Spielstufe (Trigon, 4 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Trigon, 4 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 2 Players)</source>
-        <translation>&amp;Spielstufe (Trigon, 2 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Trigon, 2 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 3 Players)</source>
-        <translation>&amp;Spielstufe (Trigon, 3 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Trigon, 3 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Junior)</source>
-        <translation>&amp;Spielstufe (Junior)</translation>
+        <translation>Spielst&amp;ufe (Junior)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 4 Players)</source>
-        <translation>&amp;Spielstufe (Nexos, 4 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Nexos, 4 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 2 Players)</source>
-        <translation>&amp;Spielstufe (Nexos, 2 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Nexos, 2 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 4 Players)</source>
-        <translation>&amp;Spielstufe (Callisto, 4 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Callisto, 4 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 2 Players)</source>
-        <translation>&amp;Spielstufe (Callisto, 2 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 3 Players)</source>
-        <translation>&amp;Spielstufe (Callisto, 3 Spieler)</translation>
+        <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
     </message>
 </context>
 <context>
