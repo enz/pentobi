@@ -1,5 +1,8 @@
 <RCC>
 <qresource prefix="/qml/themes">
+<file>light/board-callisto.svg</file>
+<file>light/board-callisto-2.svg</file>
+<file>light/board-callisto-3.svg</file>
 <file>light/board-classic.svg</file>
 <file>light/board-duo.svg</file>
 <file>light/board-nexos.svg</file>

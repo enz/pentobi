@@ -19,8 +19,10 @@ function createColorPieces(component, pieceModels) {
     switch (pieceModels[0].color) {
     case 0: colorName = "blue"; break
     case 1:
-        colorName = gameModel.gameVariant == "duo" ||
-                gameModel.gameVariant == "junior" ? "green" : "yellow"; break
+        colorName = gameModel.gameVariant == "duo"
+                || gameModel.gameVariant == "junior"
+                || gameModel.gameVariant == "callisto_2" ?
+                    "green" : "yellow"; break
     case 2: colorName = "red"; break
     case 3: colorName = "green"; break
     }
@@ -41,6 +43,8 @@ function createPieces() {
         file = "PieceTrigon.qml"
     else if (gameModel.gameVariant.lastIndexOf("nexos") === 0)
         file = "PieceNexos.qml"
+    else if (gameModel.gameVariant.lastIndexOf("callisto") === 0)
+        file = "PieceCallisto.qml"
     else
         file = "PieceClassic.qml"
     var component = Qt.createComponent(file)

@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-// Piece for Nexos. See PieceClassic for comments.
+// See PieceClassic.qml for comments
 Item
 {
     id: root
@@ -12,7 +12,9 @@ Item
     property real gridElementWidth
     property real gridElementHeight
     property bool isMarked
-    property string imageName: theme.getImage("linesegment-" + colorName)
+    property string imageName: pieceModel.elements.length === 1 ?
+                                   theme.getImage("frame-" + colorName) :
+                                   theme.getImage("square-" + colorName)
     property real pieceAngle: {
         var flX = Math.abs(flipX.angle % 360 - 180) < 90
         var flY = Math.abs(flipY.angle % 360 - 180) < 90
@@ -43,7 +45,6 @@ Item
         }
     ]
 
-    function isHorizontal(pos) { return (pos.x % 2 != 0) }
     function imageOpacity(pieceAngle, imgAngle) {
         var angle = (((pieceAngle - imgAngle) % 360) + 360) % 360
         return (angle >= 90 && angle <= 270 ? 0 : Math.cos(angle * Math.PI / 180))
@@ -52,61 +53,47 @@ Item
     Repeater {
         model: pieceModel.elements
 
-        LineSegment {
-            isHorizontal: root.isHorizontal(modelData)
-            width: 1.5 * gridElementWidth
-            height: 0.5 * gridElementHeight
-            x: (modelData.x - pieceModel.center.x - 0.25) * gridElementWidth
-            y: (modelData.y - pieceModel.center.y + 0.25) * gridElementHeight
-        }
-    }
-    Repeater {
-        model: pieceModel.junctions
-
-        Image {
-            source: {
-                switch (pieceModel.junctionType[index]) {
-                case 0:
-                    return theme.getImage("junction-all-" + colorName)
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    return theme.getImage("junction-t-" + colorName)
-                case 5:
-                case 6:
-                    return theme.getImage("junction-straight-" + colorName)
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                    return theme.getImage("junction-rect-" + colorName)
+        Item {
+            Square {
+                width: 0.9 * gridElementWidth
+                height: 0.9 * gridElementHeight
+                x: (modelData.x - pieceModel.center.x) * gridElementWidth
+                   + (gridElementWidth - width) / 2
+                y: (modelData.y - pieceModel.center.y) * gridElementHeight
+                   + (gridElementHeight - height) / 2
+            }
+            // Right junction
+            Image {
+                visible: pieceModel.junctionType[index] === 0
+                         || pieceModel.junctionType[index] === 1
+                source: theme.getImage("junction-all-" + colorName)
+                width: 0.1 * gridElementWidth
+                height: 0.85 * gridElementHeight
+                x: (modelData.x - pieceModel.center.x + 1) * gridElementWidth
+                   - width / 2
+                y: (modelData.y - pieceModel.center.y) * gridElementHeight
+                   + (gridElementHeight - height) / 2
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
                 }
             }
-            rotation: {
-                switch (pieceModel.junctionType[index]) {
-                case 0:
-                case 3:
-                case 5:
-                case 10:
-                    return 0
-                case 1:
-                case 9:
-                    return 270
-                case 2:
-                case 6:
-                case 8:
-                    return 90
-                case 4:
-                case 7:
-                    return 180
+            // Down junction
+            Image {
+                visible: pieceModel.junctionType[index] === 0
+                         || pieceModel.junctionType[index] === 2
+                source: theme.getImage("junction-all-" + colorName)
+                width: 0.85 * gridElementWidth
+                height: 0.1 * gridElementHeight
+                x: (modelData.x - pieceModel.center.x) * gridElementWidth
+                   + (gridElementWidth - width) / 2
+                y: (modelData.y - pieceModel.center.y + 1) * gridElementHeight
+                   - height / 2
+                sourceSize {
+                    width: imageSourceWidth
+                    height: imageSourceHeight
                 }
             }
-            width: 0.5 * gridElementWidth
-            height: 0.5 * gridElementHeight
-            x: (modelData.x - pieceModel.center.x + 0.25) * gridElementWidth
-            y: (modelData.y - pieceModel.center.y + 0.25) * gridElementHeight
-            sourceSize { width: imageSourceWidth;  height: imageSourceHeight }
         }
     }
     Rectangle {
@@ -281,7 +268,7 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridElementWidth: Math.floor(0.12 * parentPieceArea.width)
+                gridElementWidth: Math.floor(0.2 * parentPieceArea.width)
                 gridElementHeight: gridElementWidth
             }
             ParentChange {

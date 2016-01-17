@@ -61,11 +61,13 @@ Row {
         height: root.height
         width: 5 * pointSize
         color: gameModel.gameVariant == "duo"
-                   || gameModel.gameVariant == "junior" ?
+               || gameModel.gameVariant == "junior"
+               || gameModel.gameVariant == "callisto_2" ?
                    theme.colorGreen : theme.colorYellow
     }
     ScoreElement {
         visible: gameVariant != "duo" && gameVariant != "junior"
+                 && gameVariant != "callisto_2"
         value: points2
         bonus: bonus2
         isFinal: ! hasMoves2
@@ -76,8 +78,9 @@ Row {
         color: theme.colorRed
     }
     ScoreElement {
-        visible: gameVariant != "duo" && gameVariant != "junior" &&
-                 gameVariant != "trigon_3" && gameVariant != "classic_3"
+        visible: gameVariant != "duo" && gameVariant != "junior"
+                 && gameVariant != "callisto_2" && gameVariant != "trigon_3"
+                 && gameVariant != "classic_3" && gameVariant != "callisto_3"
         value: points3
         bonus: bonus3
         isFinal: ! hasMoves3

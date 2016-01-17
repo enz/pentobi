@@ -184,9 +184,7 @@ Variant GameModel::getInitialGameVariant()
     QSettings settings;
     auto variantString = settings.value("variant", "").toString();
     Variant variant;
-    // Callisto not yet supported in the GUI
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant)
-            || get_piece_set(variant) == PieceSet::callisto)
+    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
         variant = Variant::duo;
     return variant;
 }
@@ -347,12 +345,6 @@ bool GameModel::open(istream& in)
         TreeReader reader;
         reader.read(in);
         auto root = reader.get_tree_transfer_ownership();
-        if (get_piece_set(PentobiTree::get_variant(*root))
-                == PieceSet::callisto)
-        {
-            m_lastInputOutputError = tr("Unsupported game variant");
-            return false;
-        }
         m_game.init(root);
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)

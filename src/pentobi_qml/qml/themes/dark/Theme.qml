@@ -11,7 +11,8 @@ QtObject {
     property real toPlayColorLighter: 1.7
 
     function getImage(name) {
-        if (name.lastIndexOf("junction-", 0) === 0
+        if (name.lastIndexOf("frame-", 0) === 0
+                || name.lastIndexOf("junction-", 0) === 0
                 || name.lastIndexOf("linesegment-", 0) === 0
                 || name.lastIndexOf("piece-manipulator", 0) === 0
                 || name.lastIndexOf("square-", 0) === 0

@@ -9,6 +9,8 @@ Item {
         case "duo":
         case "junior":
             return 14
+        case "callisto_2":
+            return 16
         case "trigon":
         case "trigon_2":
             return 35
@@ -26,6 +28,8 @@ Item {
         case "duo":
         case "junior":
             return 14
+        case "callisto_2":
+            return 16
         case "trigon":
         case "trigon_2":
             return 18
@@ -104,6 +108,12 @@ Item {
             case "nexos":
             case "nexos_2":
                 return theme.getImage("board-nexos")
+            case "callisto":
+                return theme.getImage("board-callisto")
+            case "callisto_2":
+                return theme.getImage("board-callisto-2")
+            case "callisto_3":
+                return theme.getImage("board-callisto-3")
             default:
                 return theme.getImage("board-classic")
             }

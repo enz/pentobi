@@ -13,6 +13,7 @@ Item
     property real imageSourceWidth: {
         if (board.isTrigon) return 2 * board.gridElementWidth
         else if (board.isNexos) return 1.5 * board.gridElementWidth
+        else if (board.isCallisto) return 0.9 * board.gridElementWidth
         else return board.gridElementWidth
     }
     property real imageSourceHeight: {

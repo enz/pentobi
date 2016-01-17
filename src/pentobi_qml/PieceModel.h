@@ -51,9 +51,10 @@ public:
         Only used in Nexos. */
     QVariantList junctions();
 
-    /** List of integers determining the type of junction in junctions().
-        Only used in Nexos. See implementation for the meaning of the
-        numbers. */
+    /** List of integers determining the type of junctions.
+        In Nexos, this is the type of junction in junction(). In Callisto, it
+        is the information if the squares in elements() have a right and/or
+        down neighbor. See implementation for the meaning of the numbers. */
     QVariantList junctionType();
 
     QPointF center() const;

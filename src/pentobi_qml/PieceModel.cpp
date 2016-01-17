@@ -49,6 +49,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
 {
     auto& geo = bd.get_geometry();
     bool isNexos = (bd.get_piece_set() == PieceSet::nexos);
+    bool isCallisto = (bd.get_piece_set() == PieceSet::callisto);
     auto& info = bd.get_piece_info(piece);
     auto& points = info.get_points();
     for (auto& p : points)
@@ -109,6 +110,22 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
             m_junctionType.append(junctionType);
         }
     }
+    if (isCallisto)
+        for (auto& p : points)
+        {
+            bool hasRight = points.contains(CoordPoint(p.x + 1, p. y));
+            bool hasDown = points.contains(CoordPoint(p.x, p. y + 1));
+            int junctionType;
+            if (hasRight && hasDown)
+                junctionType = 0;
+            else if (hasRight)
+                junctionType = 1;
+            else if (hasDown)
+                junctionType = 2;
+            else
+                junctionType = 3;
+            m_junctionType.append(junctionType);
+        }
     bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
     m_center = findCenter(bd, points, isOriginDownward);
     m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);

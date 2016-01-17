@@ -16,6 +16,7 @@
         <file>qml/MenuItemLevel.qml</file>
         <file>qml/MenuView.qml</file>
         <file>qml/NavigationPanel.qml</file>
+        <file>qml/PieceCallisto.qml</file>
         <file>qml/PieceClassic.qml</file>
         <file>qml/PieceFlipAnimation.qml</file>
         <file>qml/PieceList.qml</file>

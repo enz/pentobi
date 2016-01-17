@@ -68,6 +68,22 @@ Menu {
                 text: qsTr("Nexos (&4 Players)")
             }
         }
+        Menu {
+            title: qsTr("C&allisto")
+
+            MenuItemGameVariant {
+                gameVariant: "callisto_2"
+                text: qsTr("Callisto (&2 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "callisto_3"
+                text: qsTr("Callisto (&3 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "callisto"
+                text: qsTr("Callisto (&4 Players)")
+            }
+        }
     }
     // QTBUG-47847 MenuSeparator { }
     MenuItem {

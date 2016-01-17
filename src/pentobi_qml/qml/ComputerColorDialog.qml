@@ -31,8 +31,7 @@ Dialog {
                     }
                 }
                 onClicked: {
-                    if (gameVariant == "classic_2"
-                            || gameVariant == "trigon_2"
+                    if (gameVariant == "classic_2" || gameVariant == "trigon_2"
                             || gameVariant == "nexos_2")
                         computerPlays2 = checked
                 }
@@ -48,14 +47,14 @@ Dialog {
                         return qsTr("Yellow/Green")
                     case "duo":
                     case "junior":
+                    case "callisto_2":
                         return qsTr("Green")
                     default:
                         qsTr("Yellow")
                     }
                 }
                 onClicked: {
-                    if (gameVariant == "classic_2"
-                            || gameVariant == "trigon_2"
+                    if (gameVariant == "classic_2" || gameVariant == "trigon_2"
                             || gameVariant == "nexos_2")
                         computerPlays3 = checked
                 }
@@ -64,19 +63,19 @@ Dialog {
                 id: checkBox2
 
                 text: qsTr("Red")
-                visible: gameVariant == "classic" ||
-                         gameVariant == "trigon" ||
-                         gameVariant == "trigon_3" ||
-                         gameVariant == "classic_3" ||
-                         gameVariant == "nexos"
+                visible: gameVariant == "classic" || gameVariant == "trigon"
+                         || gameVariant == "trigon_3"
+                         || gameVariant == "classic_3"
+                         || gameVariant == "nexos"
+                         || gameVariant == "callisto_3"
+                         || gameVariant == "callisto"
             }
             CheckBox {
                 id: checkBox3
 
                 text: qsTr("Green")
-                visible: gameVariant == "classic"
-                         || gameVariant == "trigon"
-                         || gameVariant == "nexos"
+                visible: gameVariant == "classic" || gameVariant == "trigon"
+                         || gameVariant == "nexos" || gameVariant == "callisto"
             }
         }
     }

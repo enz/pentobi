@@ -1,7 +1,9 @@
 <RCC>
 <qresource prefix="/qml/themes">
-<file>light/piece-manipulator-legal.svg</file>
-<file>light/piece-manipulator.svg</file>
+<file>light/frame-blue.svg</file>
+<file>light/frame-green.svg</file>
+<file>light/frame-red.svg</file>
+<file>light/frame-yellow.svg</file>
 <file>light/junction-all-blue.svg</file>
 <file>light/junction-all-green.svg</file>
 <file>light/junction-all-red.svg</file>
@@ -22,6 +24,8 @@
 <file>light/linesegment-green.svg</file>
 <file>light/linesegment-red.svg</file>
 <file>light/linesegment-yellow.svg</file>
+<file>light/piece-manipulator-legal.svg</file>
+<file>light/piece-manipulator.svg</file>
 <file>light/square-blue.svg</file>
 <file>light/square-green.svg</file>
 <file>light/square-red.svg</file>

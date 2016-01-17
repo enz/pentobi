@@ -50,10 +50,6 @@
         <source>Move %1</source>
         <translation>Zug %1</translation>
     </message>
-    <message>
-        <source>Unsupported game variant</source>
-        <translation>Spielvariante nicht unterstützt</translation>
-    </message>
 </context>
 <context>
     <name>Main</name>
@@ -125,6 +121,22 @@
         <source>Truncate children?</source>
         <translation>Kindknoten abschneiden?</translation>
     </message>
+    <message>
+        <source>Green wins (tie resolved).</source>
+        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins (tie resolved).</source>
+        <translation>Gelb/Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Red wins (tie resolved).</source>
+        <translation>Rot gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Yellow wins (tie resolved).</source>
+        <translation>Gelb gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -141,8 +153,56 @@
         <translation>&amp;Spielen</translation>
     </message>
     <message>
-        <source>&amp;Level</source>
-        <translation>Spielst&amp;ufe</translation>
+        <source>&amp;Level (Classic, 4 Players)</source>
+        <translation>Spielst&amp;ufe (Klassisch, 4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Classic, 2 Players)</source>
+        <translation>Spielst&amp;ufe (Klassisch, 2 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Classic, 3 Players)</source>
+        <translation>Spielst&amp;ufe (Klassisch, 3 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Duo)</source>
+        <translation>Spielst&amp;ufe (Duo)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Junior)</source>
+        <translation>Spielst&amp;ufe (Junior)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Trigon, 4 Players)</source>
+        <translation>Spielst&amp;ufe (Trigon, 4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Trigon, 2 Players)</source>
+        <translation>Spielst&amp;ufe (Trigon, 2 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Trigon, 3 Players)</source>
+        <translation>Spielst&amp;ufe (Trigon, 3 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Nexos, 4 Players)</source>
+        <translation>Spielst&amp;ufe (Nexos, 4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Nexos, 2 Players)</source>
+        <translation>Spielst&amp;ufe (Nexos, 2 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 4 Players)</source>
+        <translation>Spielst&amp;ufe (Callisto, 4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 2 Players)</source>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 3 Players)</source>
+        <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
     </message>
 </context>
 <context>
@@ -257,6 +317,22 @@
     <message>
         <source>Nexos (&amp;4 Players)</source>
         <translation>Nexos (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>C&amp;allisto</source>
+        <translation>&amp;Callisto</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;2 Players)</source>
+        <translation>Callisto (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;3 Players)</source>
+        <translation>Callisto (&amp;3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;4 Players)</source>
+        <translation>Callisto (&amp;4 Spieler)</translation>
     </message>
 </context>
 <context>
