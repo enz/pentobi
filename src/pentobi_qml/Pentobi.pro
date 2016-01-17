@@ -53,6 +53,7 @@ SOURCES += \
     ../libpentobi_base/BoardUpdater.cpp \
     ../libpentobi_base/BoardUtil.cpp \
     ../libpentobi_base/Book.cpp \
+    ../libpentobi_base/CallistoGeometry.cpp \
     ../libpentobi_base/Color.cpp \
     ../libpentobi_base/Game.cpp \
     ../libpentobi_base/NexosGeometry.cpp \
