@@ -99,12 +99,12 @@ void Search::set_default_param(Variant variant)
     case Variant::classic:
     case Variant::classic_2:
     case Variant::classic_3:
-    case Variant::callisto_2:
         set_bias_term_constant(0.07f);
         set_rave_parent_max(50000);
         break;
     case Variant::duo:
     case Variant::junior:
+    case Variant::callisto_2:
         set_bias_term_constant(0.05f);
         set_rave_parent_max(25000);
         break;
