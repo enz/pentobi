@@ -696,6 +696,8 @@ private slots:
 
     void setSetupPlayer();
 
+    void setTitleMenuLevel();
+
     void setupMode(bool checked);
 
     void showComment(bool checked);

@@ -1324,7 +1324,7 @@ void MainWindow::createMenu()
     menuComputer->addAction(m_actionPlaySingleMove);
     menuComputer->addAction(m_actionInterrupt);
     menuComputer->addSeparator();
-    m_menuLevel = menuComputer->addMenu(tr("&Level"));
+    m_menuLevel = menuComputer->addMenu(QString());
     for (auto& action : m_actionLevel)
         m_menuLevel->addAction(action);
 
@@ -3011,6 +3011,54 @@ void MainWindow::setSetupPlayer()
         m_game.set_player(m_currentColor);
 }
 
+void MainWindow::setTitleMenuLevel()
+{
+    QString title;
+    switch (m_game.get_variant())
+    {
+    case Variant::classic:
+        title = tr("&Level (Classic, 4 Players)");
+        break;
+    case Variant::classic_2:
+        title = tr("&Level (Classic, 2 Players)");
+        break;
+    case Variant::classic_3:
+        title = tr("&Level (Classic, 3 Players)");
+        break;
+    case Variant::duo:
+        title = tr("&Level (Duo)");
+        break;
+    case Variant::trigon:
+        title = tr("&Level (Trigon, 4 Players)");
+        break;
+    case Variant::trigon_2:
+        title = tr("&Level (Trigon, 2 Players)");
+        break;
+    case Variant::trigon_3:
+        title = tr("&Level (Trigon, 3 Players)");
+        break;
+    case Variant::junior:
+        title = tr("&Level (Junior)");
+        break;
+    case Variant::nexos:
+        title = tr("&Level (Nexos, 4 Players)");
+        break;
+    case Variant::nexos_2:
+        title = tr("&Level (Nexos, 2 Players)");
+        break;
+    case Variant::callisto:
+        title = tr("&Level (Callisto, 4 Players)");
+        break;
+    case Variant::callisto_2:
+        title = tr("&Level (Callisto, 2 Players)");
+        break;
+    case Variant::callisto_3:
+        title = tr("&Level (Callisto, 3 Players)");
+        break;
+    }
+    m_menuLevel->setTitle(title);
+}
+
 void MainWindow::setupMode(bool enable)
 {
     // Currently, we allow setup mode only if no moves have been played. It
@@ -3489,6 +3537,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     for (auto& action : m_actionLevel)
         action->setEnabled(! m_isRated);
     m_menuVariant->setEnabled(! m_isRated);
+    setTitleMenuLevel();
 }
 
 void MainWindow::updateWindowModified()
