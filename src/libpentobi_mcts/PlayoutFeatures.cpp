@@ -14,9 +14,7 @@ namespace libpentobi_mcts {
 
 //-----------------------------------------------------------------------------
 
-PlayoutFeatures::PlayoutFeatures()
-{
-}
+PlayoutFeatures::PlayoutFeatures() = default;
 
 //-----------------------------------------------------------------------------
 

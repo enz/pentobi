@@ -10,6 +10,7 @@
 
 #include "Variant.h"
 
+#include "CallistoGeometry.h"
 #include "NexosGeometry.h"
 #include "TrigonGeometry.h"
 #include "libboardgame_base/RectGeometry.h"
@@ -62,6 +63,15 @@ BoardType get_board_type(Variant variant)
     case Variant::nexos_2:
         result = BoardType::nexos;
         break;
+    case Variant::callisto:
+        result = BoardType::callisto;
+        break;
+    case Variant::callisto_2:
+        result = BoardType::callisto_2;
+        break;
+    case Variant::callisto_3:
+        result = BoardType::callisto_3;
+        break;
     }
     return result;
 }
@@ -86,6 +96,15 @@ const Geometry& get_geometry(BoardType board_type)
     case BoardType::nexos:
         result = &NexosGeometry::get(13);
         break;
+    case BoardType::callisto:
+        result = &CallistoGeometry::get(4);
+        break;
+    case BoardType::callisto_2:
+        result = &CallistoGeometry::get(2);
+        break;
+    case BoardType::callisto_3:
+        result = &CallistoGeometry::get(3);
+        break;
     }
     return *result;
 }
@@ -102,9 +121,11 @@ Color::IntType get_nu_colors(Variant variant)
     {
     case Variant::duo:
     case Variant::junior:
+    case Variant::callisto_2:
         result = 2;
         break;
     case Variant::trigon_3:
+    case Variant::callisto_3:
         result = 3;
         break;
     case Variant::classic:
@@ -114,6 +135,7 @@ Color::IntType get_nu_colors(Variant variant)
     case Variant::trigon_2:
     case Variant::nexos:
     case Variant::nexos_2:
+    case Variant::callisto:
         result = 4;
         break;
     }
@@ -130,15 +152,18 @@ Color::IntType get_nu_players(Variant variant)
     case Variant::classic_2:
     case Variant::trigon_2:
     case Variant::nexos_2:
+    case Variant::callisto_2:
         result = 2;
         break;
     case Variant::classic_3:
     case Variant::trigon_3:
+    case Variant::callisto_3:
         result = 3;
         break;
     case Variant::classic:
     case Variant::trigon:
     case Variant::nexos:
+    case Variant::callisto:
         result = 4;
         break;
     }
@@ -168,6 +193,11 @@ PieceSet get_piece_set(Variant variant)
     case Variant::nexos_2:
         result = PieceSet::nexos;
         break;
+    case Variant::callisto:
+    case Variant::callisto_2:
+    case Variant::callisto_3:
+        result = PieceSet::callisto;
+        break;
     }
     return result;
 }
@@ -183,6 +213,7 @@ void get_transforms(Variant variant,
     switch (get_board_type(variant))
     {
     case BoardType::duo:
+    case BoardType::callisto_2:
         transforms.emplace_back(new PointTransfRot270Refl<Point>);
         inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
         break;
@@ -213,6 +244,8 @@ void get_transforms(Variant variant,
     case BoardType::classic:
     case BoardType::trigon_3:
     case BoardType::nexos:
+    case BoardType::callisto:
+    case BoardType::callisto_3:
         break;
     }
 }
@@ -240,6 +273,12 @@ bool parse_variant(const string& s, Variant& variant)
         variant = Variant::nexos;
     else if (t == "nexos two-player")
         variant = Variant::nexos_2;
+    else if (t == "callisto")
+        variant = Variant::callisto;
+    else if (t == "callisto two-player")
+        variant = Variant::callisto_2;
+    else if (t == "callisto three-player")
+        variant = Variant::callisto_3;
     else
         return false;
     return true;
@@ -268,6 +307,12 @@ bool parse_variant_id(const string& s, Variant& variant)
         variant = Variant::nexos;
     else if (t == "nexos_2" || t == "n2")
         variant = Variant::nexos_2;
+    else if (t == "callisto" || t == "ca")
+        variant = Variant::callisto;
+    else if (t == "callisto_2" || t == "ca2")
+        variant = Variant::callisto_2;
+    else if (t == "callisto_3" || t == "ca3")
+        variant = Variant::callisto_3;
     else
         return false;
     return true;
@@ -307,6 +352,16 @@ const char* to_string(Variant variant)
         break;
     case Variant::nexos_2:
         result = "Nexos Two-Player";
+        break;
+    case Variant::callisto:
+        result = "Callisto";
+        break;
+    case Variant::callisto_2:
+        result = "Callisto Two-Player";
+        break;
+    case Variant::callisto_3:
+        result = "Callisto Three-Player";
+        break;
     }
     return result;
 }
@@ -345,6 +400,15 @@ const char* to_string_id(Variant variant)
         break;
     case Variant::nexos_2:
         result = "nexos_2";
+        break;
+    case Variant::callisto:
+        result = "callisto";
+        break;
+    case Variant::callisto_2:
+        result = "callisto_2";
+        break;
+    case Variant::callisto_3:
+        result = "callisto_3";
         break;
     }
     return result;

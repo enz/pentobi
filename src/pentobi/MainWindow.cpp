@@ -76,6 +76,7 @@ using libpentobi_base::BoardType;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;
 using libpentobi_base::PieceInfo;
+using libpentobi_base::PieceSet;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::ScoreType;
@@ -1115,6 +1116,15 @@ void MainWindow::createActions()
     setIcon(m_actionUndo, "pentobi-undo");
     connect(m_actionUndo, SIGNAL(triggered()), SLOT(undo()));
 
+    m_actionVariantCallisto2 =
+            createActionVariant(groupVariant, Variant::callisto_2,
+                                tr("Callisto (&2 Players)"));
+    m_actionVariantCallisto3 =
+            createActionVariant(groupVariant, Variant::callisto_3,
+                                tr("Callisto (&3 Players)"));
+    m_actionVariantCallisto =
+            createActionVariant(groupVariant, Variant::callisto,
+                                tr("Callisto (&4 Players)"));
     m_actionVariantClassic2 =
             createActionVariant(groupVariant, Variant::classic_2,
                                 tr("Classic (&2 Players)"));
@@ -1227,6 +1237,10 @@ void MainWindow::createMenu()
     auto menuNexos = m_menuVariant->addMenu(tr("&Nexos"));
     menuNexos->addAction(m_actionVariantNexos2);
     menuNexos->addAction(m_actionVariantNexos);
+    auto menuCallisto = m_menuVariant->addMenu(tr("C&allisto"));
+    menuCallisto->addAction(m_actionVariantCallisto2);
+    menuCallisto->addAction(m_actionVariantCallisto3);
+    menuCallisto->addAction(m_actionVariantCallisto);
     menuGame->addAction(m_actionGameInfo);
     menuGame->addSeparator();
     menuGame->addAction(m_actionUndo);
@@ -1695,6 +1709,7 @@ void MainWindow::gameOver()
     auto variant = m_bd.get_variant();
     auto nuColors = get_nu_colors(variant);
     auto nuPlayers = get_nu_players(variant);
+    bool breakTies = (m_bd.get_piece_set() == PieceSet::callisto);
     QString info;
     if (nuColors == 2)
     {
@@ -1707,6 +1722,8 @@ void MainWindow::gameOver()
             info = tr("Green wins with 1 point.");
         else if (score < 0)
             info = tr("Green wins with %1 points.").arg(-score);
+        else if (breakTies)
+            info = tr("Green wins (tie resolved).");
         else
             info = tr("The game ends in a tie.");
     }
@@ -1722,6 +1739,8 @@ void MainWindow::gameOver()
             info = tr("Yellow/Green wins with 1 point.");
         else if (score < 0)
             info = tr("Yellow/Green wins with %1 points.").arg(-score);
+        else if (breakTies)
+            info = tr("Yellow/Green wins (tie resolved).");
         else
             info = tr("The game ends in a tie.");
     }
@@ -1731,7 +1750,12 @@ void MainWindow::gameOver()
         auto yellow = m_bd.get_points(Color(1));
         auto red = m_bd.get_points(Color(2));
         auto maxPoints = max(blue, max(yellow, red));
-        if (blue == yellow && yellow == red)
+        if (breakTies && red == maxPoints
+                && (blue == maxPoints || yellow == maxPoints))
+            info = tr("Red wins (tie resolved).");
+        else if (breakTies && yellow == maxPoints && blue == maxPoints)
+            info = tr("Yellow wins (tie resolved).");
+        else if (blue == yellow && yellow == red)
             info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow)
             info = tr("The game ends in a tie between Blue and Yellow.");
@@ -1754,7 +1778,16 @@ void MainWindow::gameOver()
         auto red = m_bd.get_points(Color(2));
         auto green = m_bd.get_points(Color(3));
         auto maxPoints = max(blue, max(yellow, max(red, green)));
-        if (blue == yellow && yellow == red && red == green)
+        if (breakTies && green == maxPoints
+                && (red == maxPoints || blue == maxPoints
+                    || yellow == maxPoints))
+            info = tr("Green wins (tie resolved).");
+        else if (breakTies && red == maxPoints
+                && (blue == maxPoints || yellow == maxPoints))
+            info = tr("Red wins (tie resolved).");
+        else if (breakTies && yellow == maxPoints && blue == maxPoints)
+            info = tr("Yellow wins (tie resolved).");
+        else if (blue == yellow && yellow == red && red == green)
             info = tr("The game ends in a tie between all colors.");
         else if (blue == maxPoints && blue == yellow && yellow == red)
             info = tr("The game ends in a tie between Blue, Yellow and Red.");
@@ -1809,8 +1842,7 @@ void MainWindow::gameOver()
             m_ratingDialog->updateContent();
         int newRating = m_history->getRating().to_int();
         if (newRating > oldRating)
-            detailText =
-            tr("Your rating has increased from %1 to %2.")
+            detailText = tr("Your rating has increased from %1 to %2.")
             .arg(oldRating).arg(newRating);
         else if (newRating == oldRating)
             detailText = tr("Your rating stays at %1.").arg(oldRating);
@@ -2116,6 +2148,15 @@ void MainWindow::initVariantActions()
         break;
     case Variant::nexos_2:
         m_actionVariantNexos2->setChecked(true);
+        break;
+    case Variant::callisto:
+        m_actionVariantCallisto->setChecked(true);
+        break;
+    case Variant::callisto_2:
+        m_actionVariantCallisto2->setChecked(true);
+        break;
+    case Variant::callisto_3:
+        m_actionVariantCallisto3->setChecked(true);
         break;
     }
 }
@@ -3429,6 +3470,9 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionTruncateChildren->setEnabled(hasChildren);
     m_actionUndo->setEnabled(! m_isRated && hasParent && ! hasChildren
                              && hasMove);
+    m_actionVariantCallisto->setEnabled(! m_isRated);
+    m_actionVariantCallisto2->setEnabled(! m_isRated);
+    m_actionVariantCallisto3->setEnabled(! m_isRated);
     m_actionVariantClassic->setEnabled(! m_isRated);
     m_actionVariantClassic2->setEnabled(! m_isRated);
     m_actionVariantClassic3->setEnabled(! m_isRated);

@@ -187,6 +187,8 @@ private:
         color individually. */
     bool m_force_consider_all_pieces;
 
+    bool m_is_callisto;
+
     /** Minimum number of pieces on board to perform a symmetry check.
         3 in Duo/Junior or 5 in Trigon because this is the earliest move number
         to break the symmetry. The early playout termination that evaluates all
@@ -215,11 +217,16 @@ private:
     void add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                             bool with_gamma, MoveList& moves);
 
-    void evaluate_duo(array<Float, 6>& result);
+    template<unsigned MAX_SIZE>
+    LIBBOARDGAME_NOINLINE
+    void add_one_piece_moves(Color c, bool with_gamma, float& total_gamma,
+                             MoveList& moves, unsigned& nu_moves);
 
     void evaluate_multicolor(array<Float, 6>& result);
 
     void evaluate_multiplayer(array<Float, 6>& result);
+
+    void evaluate_twocolor(array<Float, 6>& result);
 
     Point find_best_starting_point(Color c) const;
 
@@ -237,7 +244,7 @@ private:
 
     bool has_moves(Color c, Piece piece, Point p, unsigned adj_status) const;
 
-    const PieceMap<bool>& get_is_piece_considered() const;
+    const PieceMap<bool>& get_is_piece_considered(Color c) const;
 
     const Board::PiecesLeftList& get_pieces_considered(Color c);
 
@@ -250,6 +257,8 @@ private:
     template<unsigned MAX_SIZE>
     bool check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
                          MoveList& moves, unsigned& nu_moves);
+
+    bool check_lgr(Move mv) const;
 
     template<unsigned MAX_SIZE>
     bool check_move(Move mv, const MoveInfo<MAX_SIZE>& info, float gamma_piece,
@@ -275,13 +284,51 @@ private:
     LIBBOARDGAME_NOINLINE void update_symmetry_broken(Move mv);
 };
 
+/** Check if last-good-reply move is applicable.
+    To be faster, it doesn't check for starting moves because such moves rarely
+    occur in the playout phase and doesn't check if a 1-piece move is in the
+    center in Callisto because such moves are not generated in the search. */
+inline bool State::check_lgr(Move mv) const
+{
+    if (mv.is_null())
+        return false;
+    Color c = m_bd.get_to_play();
+    auto piece = m_bd.get_move_piece(mv);
+    if (! m_bd.is_piece_left(c, piece))
+        return false;
+    auto points = m_bd.get_move_points(mv);
+    auto i = points.begin();
+    auto end = points.end();
+    bool has_attach_point = false;
+    do
+    {
+        if (m_bd.is_forbidden(*i, c))
+            return false;
+        // Logically, we mean:
+        // has_attach_point = has_attach_point || is_attach_point(*i, c)
+        // But this generates branches, which are bad for performance in this
+        // tight loop (unrolled by the compiler). So we use a bitwise OR, which
+        // works because C++ guarantees that true/false converts to 1/0.
+        has_attach_point |= m_bd.is_attach_point(*i, c);
+    }
+    while (++i != end);
+    if (m_is_callisto)
+    {
+        Piece one_piece = m_bd.get_one_piece();
+        if (m_bd.get_nu_left_piece(c, one_piece) <= 1)
+            return true;
+        return (piece == one_piece);
+    }
+    return has_attach_point;
+}
+
 inline void State::evaluate_playout(array<Float, 6>& result)
 {
     auto nu_players = m_bd.get_nu_players();
     if (nu_players == 2)
     {
         if (m_nu_colors == 2)
-            evaluate_duo(result);
+            evaluate_twocolor(result);
         else
             evaluate_multicolor(result);
     }
@@ -313,9 +360,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     }
     PlayerInt player = get_player();
     Move lgr2 = lgr.get_lgr2(player, last, second_last);
-    // We use Board::is_legal_nonfirst() because it is faster and smaller
-    // and the cases that the lgr move is the first move of a color is rare.
-    if (! lgr2.is_null() && m_bd.is_legal_nonfirst(m_bd.get_to_play(), lgr2))
+    if (check_lgr(lgr2))
     {
         if (log_simulations)
             LIBBOARDGAME_LOG("Playing last good reply 2");
@@ -323,7 +368,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
         return true;
     }
     Move lgr1 = lgr.get_lgr1(player, last);
-    if (! lgr1.is_null() && m_bd.is_legal_nonfirst(m_bd.get_to_play(), lgr1))
+    if (check_lgr(lgr1))
     {
         if (log_simulations)
             LIBBOARDGAME_LOG("Playing last good reply 1");

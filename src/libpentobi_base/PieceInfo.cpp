@@ -85,11 +85,13 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
 
 PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                      const Geometry& geo, const PieceTransforms& transforms,
-                     BoardType board_type, const CoordPoint& label_pos)
-    : m_name(name),
+                     PieceSet piece_set, const CoordPoint& label_pos,
+                     unsigned nu_instances)
+    : m_nu_instances(nu_instances),
       m_points(points),
       m_label_pos(label_pos),
-      m_transforms(&transforms)
+      m_transforms(&transforms),
+      m_name(name)
 {
     if (log_piece_creation)
         LIBBOARDGAME_LOG("Creating transformations for piece ", name, ' ',
@@ -129,7 +131,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         }
         all_transformed_points.push_back(normalized);
     };
-    if (board_type == BoardType::nexos)
+    if (piece_set == PieceSet::nexos)
     {
         m_score_points = 0;
         for (auto& p : points)
@@ -140,6 +142,8 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                 ++m_score_points;
         }
     }
+    else if (points.size() == 1 && piece_set == PieceSet::callisto)
+        m_score_points = 0;
     else
         m_score_points = static_cast<ScoreType>(points.size());
 }

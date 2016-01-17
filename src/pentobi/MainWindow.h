@@ -462,6 +462,12 @@ private:
 
     QAction* m_actionUndo;
 
+    QAction* m_actionVariantCallisto;
+
+    QAction* m_actionVariantCallisto2;
+
+    QAction* m_actionVariantCallisto3;
+
     QAction* m_actionVariantClassic;
 
     QAction* m_actionVariantClassic2;

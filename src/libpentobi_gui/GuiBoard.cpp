@@ -19,10 +19,10 @@
 
 using namespace std;
 using libboardgame_base::Transform;
-using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
 using libpentobi_base::PiecePoints;
+using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
 
@@ -88,7 +88,8 @@ void GuiBoard::copyFromBoard(const Board& bd)
     auto& geo = bd.get_geometry();
     auto variant = bd.get_variant();
     m_pointState.copy_from(bd.get_point_state(), geo);
-    if (get_board_type(variant) == BoardType::nexos)
+    auto pieceSet = get_piece_set(variant);
+    if (pieceSet == PieceSet::nexos || pieceSet == PieceSet::callisto)
     {
         m_pieceId.fill(0, geo);
         unsigned n = 0;
@@ -200,8 +201,7 @@ void GuiBoard::movePieceDown()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == BoardType::trigon
-                || m_bd.get_board_type() == BoardType::trigon_3)
+        if (m_bd.get_piece_set() == PieceSet::trigon)
         {
             if (m_selectedPieceOffset.x % 2 == 0)
                 ++newOffset.x;
@@ -282,8 +282,7 @@ void GuiBoard::movePieceUp()
     else
     {
         newOffset = m_selectedPieceOffset;
-        if (m_bd.get_board_type() == BoardType::trigon
-                || m_bd.get_board_type() == BoardType::trigon_3)
+        if (m_bd.get_piece_set() == PieceSet::trigon)
         {
             if (m_selectedPieceOffset.x % 2 == 0)
                 ++newOffset.x;
@@ -432,10 +431,10 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         return;
     }
     auto& geo = m_bd.get_geometry();
-    auto board_type = m_bd.get_board_type();
+    auto pieceSet = m_bd.get_piece_set();
     unsigned old_point_type = geo.get_point_type(offset);
     CoordPoint type_matched_offset = offset;
-    if (board_type == BoardType::trigon || board_type == BoardType::trigon_3)
+    if (pieceSet == PieceSet::trigon)
     {
         // Offset must match the point type (triangle up/down) of
         // CoordPoint(0, 0) after the piece transformation
@@ -451,7 +450,7 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
                 --type_matched_offset.x;
         }
     }
-    else if (board_type == BoardType::nexos)
+    if (pieceSet == PieceSet::trigon)
     {
         // Offset must be a junction
         if (old_point_type == 1) // horiz. segment

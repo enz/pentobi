@@ -99,6 +99,7 @@ void Search::set_default_param(Variant variant)
     case Variant::classic:
     case Variant::classic_2:
     case Variant::classic_3:
+    case Variant::callisto_2:
         set_bias_term_constant(0.07f);
         set_rave_parent_max(50000);
         break;
@@ -110,6 +111,8 @@ void Search::set_default_param(Variant variant)
     case Variant::trigon:
     case Variant::trigon_2:
     case Variant::trigon_3:
+    case Variant::callisto:
+    case Variant::callisto_3:
         set_bias_term_constant(0.07f);
         set_rave_parent_max(50000);
         break;

@@ -364,6 +364,7 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
             count += 1;
         }
 
+        LIBBOARDGAME_ASSERT(bd.is_legal(to_play, mv));
         expander.add_child(mv, value / count, count);
     }
     return true;

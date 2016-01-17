@@ -48,7 +48,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
       m_piece(piece)
 {
     auto& geo = bd.get_geometry();
-    bool isNexos = (bd.get_board_const().get_piece_set() == PieceSet::nexos);
+    bool isNexos = (bd.get_piece_set() == PieceSet::nexos);
     auto& info = bd.get_piece_info(piece);
     auto& points = info.get_points();
     for (auto& p : points)
@@ -195,7 +195,7 @@ const Transform* PieceModel::getTransform(QString state) const
 QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
                                bool isOriginDownward)
 {
-    auto pieceSet = bd.get_board_const().get_piece_set();
+    auto pieceSet = bd.get_piece_set();
     bool isTrigon = (pieceSet == PieceSet::trigon);
     bool isNexos = (pieceSet == PieceSet::nexos);
     auto& geo = bd.get_geometry();

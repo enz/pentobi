@@ -39,6 +39,11 @@ void paintColorSquare(QPainter& painter, Variant variant, Color c,
                       qreal x, qreal y, qreal size, qreal alpha = 1,
                       qreal saturation = 1, bool flat = false);
 
+void paintColorSquareCallisto(QPainter& painter, Variant variant, Color c,
+                              qreal x, qreal y, qreal size, bool hasRight,
+                              bool hasDown, bool isOnePiece, qreal alpha = 1,
+                              qreal saturation = 1, bool flat = false);
+
 void paintColorTriangle(QPainter& painter, Variant variant,
                         Color c, bool isUpward, qreal x, qreal y, qreal width,
                         qreal height, qreal alpha = 1, qreal saturation = 1,
@@ -57,6 +62,11 @@ void paintEmptySegmentStartingPoint(QPainter& painter, Variant variant,
                                     qreal y, qreal size);
 
 void paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size);
+
+void paintEmptySquareCallisto(QPainter& painter, qreal x, qreal y, qreal size);
+
+void paintEmptySquareCallistoCenter(QPainter& painter, qreal x, qreal y,
+                                    qreal size);
 
 void paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
                                    Color c, qreal x, qreal y, qreal size);

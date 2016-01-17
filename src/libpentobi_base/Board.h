@@ -73,16 +73,8 @@ public:
 
     Piece::IntType get_nu_uniq_pieces() const;
 
-    /** Get number of pieces per player in the current game variant. */
-    unsigned get_nu_pieces() const;
-
-    /** Number of instances of each unique piece per color. */
-    unsigned get_nu_piece_instances() const;
-
-    unsigned get_max_player_moves() const;
-
-    /** Maximum number of moves in the current game variant. */
-    unsigned get_max_game_moves() const;
+    /** Number of instances of a unique piece per color. */
+    unsigned get_nu_piece_instances(Piece piece) const;
 
     Color get_next(Color c) const;
 
@@ -215,10 +207,6 @@ public:
         @pre ! mv.is_null() */
     bool is_legal(Color c, Move mv) const;
 
-    /** Check if a move is legal that is not a starting move.
-        @pre ! mv.is_null() */
-    bool is_legal_nonfirst(Color c, Move mv) const;
-
     /** Check if a move is legal for the current color to play.
         @pre ! mv.is_null() */
     bool is_legal(Move mv) const;
@@ -235,11 +223,18 @@ public:
         occupied point of the same color. */
     bool is_forbidden(Color c, Move mv) const;
 
-    const BoardConst& get_board_const() const;
+    const BoardConst& get_board_const() const { return *m_bc; }
 
     BoardType get_board_type() const;
 
+    PieceSet get_piece_set() const { return m_piece_set; }
+
     unsigned get_adj_status(Point p, Color c) const;
+
+    /** Is a point in the center section that is forbidden for the 1-piece in
+        Callisto?
+        Always returns false for other game variants. */
+    bool is_center_section(Point p) const { return m_is_center_section[p]; }
 
     PrecompMoves::Range get_moves(Piece piece, Point p,
                                   unsigned adj_status) const;
@@ -275,7 +270,7 @@ public:
         @param[out] is_shared True if the place was shared. */
     void get_place(Color c, unsigned& place, bool& is_shared) const;
 
-    const Geometry& get_geometry() const;
+    const Geometry& get_geometry() const { return *m_geo; }
 
     /** See BoardConst::to_string() */
     string to_string(Move mv, bool with_piece_name = false) const;
@@ -292,6 +287,9 @@ public:
     const PieceInfo& get_piece_info(Piece piece) const;
 
     bool get_piece_by_name(const string& name, Piece& piece) const;
+
+    /** The 1x1 piece. */
+    Piece get_one_piece() const { return m_one_piece; }
 
     Range<const Point> get_move_points(Move mv) const;
 
@@ -373,7 +371,11 @@ private:
 
     Variant m_variant;
 
+    PieceSet m_piece_set;
+
     Color::IntType m_nu_colors;
+
+    bool m_is_callisto;
 
     unsigned m_nu_players;
 
@@ -392,9 +394,6 @@ private:
     /** Caches get_piece_info(piece).get_score_points() */
     PieceMap<ScoreType> m_score_points;
 
-    /** See get_nu_piece_instances() */
-    uint_fast8_t m_nu_piece_instances;
-
     const BoardConst* m_bc;
 
     /** Caches m_bc->get_move_info_array() */
@@ -407,6 +406,12 @@ private:
     const MoveInfoExt2* m_move_info_ext_2_array;
 
     const Geometry* m_geo;
+
+    /** See is_center_section(). */
+    Grid<bool> m_is_center_section;
+
+    /** The 1x1 piece. */
+    Piece m_one_piece;
 
     ColorMap<PointList> m_attach_points;
 
@@ -497,29 +502,9 @@ inline const PointList&  Board::get_attach_points(Color c) const
     return m_attach_points[c];
 }
 
-inline const BoardConst& Board::get_board_const() const
-{
-    return *m_bc;
-}
-
 inline BoardType Board::get_board_type() const
 {
     return m_bc->get_board_type();
-}
-
-inline const Geometry& Board::get_geometry() const
-{
-    return *m_geo;
-}
-
-inline unsigned Board::get_max_game_moves() const
-{
-    return m_nu_colors * get_max_player_moves();
-}
-
-inline unsigned Board::get_max_player_moves() const
-{
-    return get_nu_pieces();
 }
 
 inline ColorMove Board::get_move(unsigned n) const
@@ -597,14 +582,9 @@ inline unsigned Board::get_nu_players() const
     return m_nu_players;
 }
 
-inline unsigned Board::get_nu_piece_instances() const
+inline unsigned Board::get_nu_piece_instances(Piece piece) const
 {
-    return m_nu_piece_instances;
-}
-
-inline unsigned Board::get_nu_pieces() const
-{
-    return m_nu_piece_instances * m_bc->get_nu_pieces();
+    return m_bc->get_piece_info(piece).get_nu_instances();
 }
 
 inline Piece::IntType Board::get_nu_uniq_pieces() const
@@ -781,29 +761,6 @@ inline bool Board::is_forbidden(Color c, Move mv) const
 inline bool Board::is_legal(Move mv) const
 {
     return is_legal(m_state_base.to_play, mv);
-}
-
-inline bool Board::is_legal_nonfirst(Color c, Move mv) const
-{
-    if (! is_piece_left(c, get_move_piece(mv)))
-        return false;
-    auto points = get_move_points(mv);
-    bool has_attach_point = false;
-    auto i = points.begin();
-    auto end = points.end();
-    do
-    {
-        if (m_state_color[c].forbidden[*i])
-            return false;
-        // Logically, we mean:
-        // has_attach_point = has_attach_point || is_attach_point(*i, c)
-        // But this generates branches, which are bad for performance in this
-        // tight loop (unrolled by the compiler). So we use a bitwise OR, which
-        // works because C++ guarantees that true/false converts to 1/0.
-        has_attach_point |= is_attach_point(*i, c);
-    }
-    while (++i != end);
-    return has_attach_point;
 }
 
 inline bool Board::is_piece_left(Color c, Piece piece) const

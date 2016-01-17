@@ -16,8 +16,8 @@ using libboardgame_base::PointTransfRot180;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::Move;
-using libpentobi_base::Point;
 using libpentobi_base::Piece;
+using libpentobi_base::PieceSet;
 
 //-----------------------------------------------------------------------------
 
@@ -123,6 +123,11 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
         else if (nu_moves < 5 * nu_colors)
             filter_min_size(bc, 3, is_piece_considered);
         break;
+    case BoardType::callisto:
+    case BoardType::callisto_2:
+    case BoardType::callisto_3:
+        is_piece_considered[bd.get_one_piece()] = false;
+        break;
     }
 }
 
@@ -134,8 +139,7 @@ SharedConst::SharedConst(const Color& to_play)
     : board(nullptr),
       to_play(to_play),
       avoid_symmetric_draw(true)
-{
-}
+{ }
 
 void SharedConst::init(bool is_followup)
 {
@@ -207,8 +211,43 @@ void SharedConst::init(bool is_followup)
 
     if (! is_followup)
         init_pieces_considered();
-
+    if (bd.get_piece_set() == PieceSet::callisto)
+        init_one_piece_callisto(is_followup);
     symmetric_points.init(bd.get_geometry(), PointTransfRot180<Point>());
+}
+
+void SharedConst::init_one_piece_callisto(bool is_followup)
+{
+    auto& bd = *board;
+    //auto& points = one_piece_points_callisto;
+    Point useless_point = Point::null();
+    unsigned n = 0;
+    if (! is_followup)
+    {
+        for (Point p : bd)
+            if (! bd.is_center_section(p) && bd.get_point_state(p).is_empty())
+            {
+                if (! is_useless_one_piece_point(p))
+                    one_piece_points_callisto.get_unchecked(n++) = p;
+                else
+                    useless_point = p;
+            }
+    }
+    else
+        for (Point p : one_piece_points_callisto)
+            if (bd.get_point_state(p).is_empty())
+            {
+                if (! is_useless_one_piece_point(p))
+                    one_piece_points_callisto.get_unchecked(n++) = p;
+                else
+                    useless_point = p;
+            }
+    if (n == 0)
+        // Allow one useless point if no useful points exist to avoid that
+        // the player fails to generate a move (in the unlikely case that
+        // no moves with larger pieces exist).
+        one_piece_points_callisto.get_unchecked(n++) = useless_point;
+    one_piece_points_callisto.resize(n);
 }
 
 void SharedConst::init_pieces_considered()
@@ -216,13 +255,15 @@ void SharedConst::init_pieces_considered()
     auto& bd = *board;
     auto& bc = bd.get_board_const();
     is_piece_considered_list.clear();
+    bool is_callisto = (bd.get_piece_set() == PieceSet::callisto);
     for (auto i = bd.get_nu_onboard_pieces(); i < Board::max_game_moves; ++i)
     {
         PieceMap<bool> is_piece_considered;
         set_pieces_considered(bd, i, is_piece_considered);
         bool are_all_considered = true;
         for (Piece::IntType j = 0; j < bc.get_nu_pieces(); ++j)
-            if (! is_piece_considered[Piece(j)])
+            if (! is_piece_considered[Piece(j)]
+                    && ! (is_callisto && Piece(j) == bd.get_one_piece()))
             {
                 are_all_considered = false;
                 break;
@@ -244,6 +285,34 @@ void SharedConst::init_pieces_considered()
         }
     }
     is_piece_considered_all.fill(true);
+    if (is_callisto)
+        is_piece_considered_all[bd.get_one_piece()] = false;
+    is_piece_considered_none.fill(false);
+}
+
+/** Check if a point is a useless move for the 1-piece.
+    @return true if neighbors are occupied, because the 1-piece doesn't
+    contribute to the score and playing there neither enables own moves
+    nor prevents opponent moves with larger pieces. */
+bool SharedConst::is_useless_one_piece_point(Point p) const
+{
+    auto& bd = *board;
+    auto& geo = bd.get_geometry();
+    auto x = geo.get_x(p);
+    auto y = geo.get_y(p);
+    if (x > 0 && geo.is_onboard(x - 1, y)
+            && bd.get_point_state(geo.get_point(x - 1, y)).is_empty())
+        return false;
+    if (x < geo.get_width() - 1 && geo.is_onboard(x + 1, y)
+            && bd.get_point_state(geo.get_point(x + 1, y)).is_empty())
+        return false;
+    if (y > 0 && geo.is_onboard(x, y - 1)
+            && bd.get_point_state(geo.get_point(x, y - 1)).is_empty())
+        return false;
+    if (y < geo.get_height() - 1 && geo.is_onboard(x, y + 1)
+            && bd.get_point_state(geo.get_point(x, y + 1)).is_empty())
+        return false;
+    return true;
 }
 
 //-----------------------------------------------------------------------------

@@ -29,12 +29,20 @@ namespace libpentobi_base {
 template<typename FLOAT>
 void get_multiplayer_result(unsigned nu_players,
                             const array<ScoreType, Color::range>& points,
-                            array<FLOAT, Color::range>& result)
+                            array<FLOAT, Color::range>& result,
+                            bool break_ties)
 {
-    array<ScoreType, Color::range> sorted_points;
+    array<ScoreType, Color::range> adjusted, sorted;
     for (Color::IntType i = 0; i < nu_players; ++i)
-        sorted_points[i] = points[i];
-    sort(sorted_points.begin(), sorted_points.begin() + nu_players);
+    {
+        adjusted[i] = points[i];
+        if (break_ties)
+            // Favor later player. The adjustment must be smaller than the
+            // smallest difference in points (0.5 for GembloQ).
+            adjusted[i] +=  0.001f * i;
+        sorted[i] = adjusted[i];
+    }
+    sort(sorted.begin(), sorted.begin() + nu_players);
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         FLOAT sum = 0;
@@ -42,7 +50,7 @@ void get_multiplayer_result(unsigned nu_players,
         FLOAT float_j = 0;
         FLOAT factor = 1 / FLOAT(nu_players - 1);
         for (unsigned j = 0; j < nu_players; ++j, ++float_j)
-            if (sorted_points[j] == points[i])
+            if (sorted[j] == adjusted[i])
             {
                 sum += factor * float_j;
                 ++n;

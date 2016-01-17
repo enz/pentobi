@@ -9,6 +9,7 @@
 #endif
 
 #include "BoardPainter.h"
+#include "libpentobi_base/CallistoGeometry.h"
 
 #include <algorithm>
 #include <cmath>
@@ -17,7 +18,9 @@
 using namespace std;
 using libboardgame_util::ArrayList;
 using libpentobi_base::BoardType;
+using libpentobi_base::CallistoGeometry;
 using libpentobi_base::Move;
+using libpentobi_base::PieceSet;
 using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
@@ -100,13 +103,13 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     m_hasPainted = true;
     painter.setRenderHint(QPainter::Antialiasing, true);
     m_variant = variant;
-    auto boardType = get_board_type(variant);
+    auto pieceSet = get_piece_set(variant);
     m_geo = &geo;
     m_width = static_cast<int>(m_geo->get_width());
     m_height = static_cast<int>(m_geo->get_height());
-    m_isTrigon = (boardType == BoardType::trigon
-                  || boardType == BoardType::trigon_3);
-    m_isNexos = (boardType == BoardType::nexos);
+    m_isTrigon = (pieceSet == PieceSet::trigon);
+    m_isNexos = (pieceSet == PieceSet::nexos);
+    m_isCallisto = (pieceSet == PieceSet::callisto);
     qreal ratio;
     if (m_isTrigon)
     {
@@ -154,6 +157,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
                                 m_width * m_fieldWidth - m_fieldWidth / 2,
                                 m_height * m_fieldHeight - m_fieldHeight / 2),
                          QColor(174, 167, 172));
+    auto nu_players = get_nu_players(m_variant);
     for (Point p : *m_geo)
     {
         int x = m_geo->get_x(p);
@@ -205,6 +209,13 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
                                                     fieldX, fieldY,
                                                     m_fieldWidth);
             }
+            else if (m_isCallisto
+                     && CallistoGeometry::is_center_section(x, y, nu_players))
+                Util::paintEmptySquareCallistoCenter(painter, fieldX, fieldY,
+                                                     m_fieldWidth);
+            else if (m_isCallisto)
+                Util::paintEmptySquareCallisto(painter, fieldX, fieldY,
+                                               m_fieldWidth);
             else
                 Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
         }
@@ -368,6 +379,8 @@ void BoardPainter::paintMarks(QPainter& painter,
                     y -= 0.167 * m_fieldHeight;
                 size = 0.1 * m_fieldHeight;
             }
+            else if (m_isCallisto)
+                size = 0.1 * m_fieldHeight;
             else
                 size = 0.12 * m_fieldHeight;
             QColor color = Util::getMarkColor(variant, pointState[p]);
@@ -439,8 +452,30 @@ void BoardPainter::paintPieces(QPainter& painter,
         {
             if (s.is_empty())
                 continue;
-            Util::paintColorSquare(painter, m_variant, s.to_color(), fieldX,
-                                   fieldY, m_fieldWidth);
+            Color c = s.to_color();
+            if (m_isCallisto)
+            {
+                bool hasLeft =
+                        (x > 0 && m_geo->is_onboard(x - 1, y)
+                         && pieceId[p] == pieceId[m_geo->get_point(x - 1, y)]);
+                bool hasRight =
+                        (x < m_width - 1 && m_geo->is_onboard(x + 1, y)
+                         && pieceId[p] == pieceId[m_geo->get_point(x + 1, y)]);
+                bool hasUp =
+                        (y > 0 && m_geo->is_onboard(x, y - 1)
+                         && pieceId[p] == pieceId[m_geo->get_point(x, y - 1)]);
+                bool hasDown =
+                        (y < m_height - 1 && m_geo->is_onboard(x, y + 1)
+                         && pieceId[p] == pieceId[m_geo->get_point(x, y + 1)]);
+                bool isOnePiece =
+                        (! hasLeft && ! hasRight && ! hasUp && ! hasDown);
+                Util::paintColorSquareCallisto(painter, m_variant, c, fieldX,
+                                               fieldY, m_fieldWidth, hasRight,
+                                               hasDown, isOnePiece);
+            }
+            else
+                Util::paintColorSquare(painter, m_variant, c, fieldX, fieldY,
+                                       m_fieldWidth);
         }
     }
     if (marks)
@@ -511,6 +546,18 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
                         junctions.include(m_geo->get_point(x, y + 1));
                 }
             }
+        }
+        else if (m_isCallisto)
+        {
+            bool hasRight = (m_geo->is_onboard(CoordPoint(x + 1, y))
+                             && points.contains(m_geo->get_point(x + 1, y)));
+            bool hasDown = (m_geo->is_onboard(CoordPoint(x, y + 1))
+                            && points.contains(m_geo->get_point(x, y + 1)));
+            bool isOnePiece = (points.size() == 1);
+            Util::paintColorSquareCallisto(painter, m_variant, c, fieldX,
+                                           fieldY, m_fieldWidth, hasRight,
+                                           hasDown, isOnePiece, alpha,
+                                           saturation, flat);
         }
         else
             Util::paintColorSquare(painter, m_variant, c, fieldX, fieldY,

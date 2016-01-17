@@ -20,6 +20,7 @@ using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::PointState;
 using libpentobi_base::PieceInfo;
+using libpentobi_base::PieceSet;
 
 //-----------------------------------------------------------------------------
 
@@ -32,14 +33,14 @@ void PriorKnowledge::start_search(const Board& bd)
 {
     auto& geo = bd.get_geometry();
     auto board_type = bd.get_board_type();
+    auto piece_set = bd.get_piece_set();
 
     // Init m_dist_to_center
     float width = static_cast<float>(geo.get_width());
     float height = static_cast<float>(geo.get_height());
     float center_x = 0.5f * width - 0.5f;
     float center_y = 0.5f * height - 0.5f;
-    bool is_trigon = (board_type == BoardType::trigon
-                      || board_type == BoardType::trigon_3);
+    bool is_trigon = (piece_set == PieceSet::trigon);
     float ratio = (is_trigon ? 1.732f : 1);
     for (Point p : geo)
     {
@@ -81,33 +82,49 @@ void PriorKnowledge::start_search(const Board& bd)
     case Variant::junior:
         m_check_dist_to_center.fill(false);
         break;
+    case Variant::callisto:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 4;
+        m_max_dist_diff = 0;
+        break;
+    case Variant::callisto_2:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 4;
+        m_max_dist_diff = 0;
+        break;
+    case Variant::callisto_3:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 3;
+        m_max_dist_diff = 0;
+        break;
     case Variant::nexos:
     case Variant::nexos_2:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 7;
-        m_max_dist_diff = 1.f;
+        m_max_dist_diff = 0.3f;
         break;
     }
 
-    // Don't check dist to center if the position was setup in a way that
-    // placed pieces but did not cover the starting point(s), otherwise the
-    // search might not generate any moves (if no moves meet the dist-to-center
-    // condition). Even if such positions cannot occur in legal games, we still
-    // don't want the move generation to fail.
-    for (Color c : bd.get_colors())
-    {
-        if (bd.get_nu_onboard_pieces(c) == 0)
-            continue;
-        bool is_starting_point_covered = false;
-        for (Point p : bd.get_starting_points(c))
-            if (bd.get_point_state(p) == PointState(c))
-            {
-                is_starting_point_covered = true;
-                break;
-            }
-        if (! is_starting_point_covered)
-            m_check_dist_to_center[c] = false;
-    }
+    if (piece_set != PieceSet::callisto)
+        // Don't check dist to center if the position was setup in a way that
+        // placed pieces but did not cover the starting point(s), otherwise the
+        // search might not generate any moves (if no moves meet the
+        // dist-to-center condition). Even if such positions cannot occur in
+        // legal games, we still don't want the move generation to fail.
+        for (Color c : bd.get_colors())
+        {
+            if (bd.get_nu_onboard_pieces(c) == 0)
+                continue;
+            bool is_starting_point_covered = false;
+            for (Point p : bd.get_starting_points(c))
+                if (bd.get_point_state(p) == PointState(c))
+                {
+                    is_starting_point_covered = true;
+                    break;
+                }
+            if (! is_starting_point_covered)
+                m_check_dist_to_center[c] = false;
+        }
 }
 
 //-----------------------------------------------------------------------------

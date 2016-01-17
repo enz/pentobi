@@ -21,9 +21,9 @@ using libboardgame_base::Transform;
 using libboardgame_base::geometry_util::normalize_offset;
 using libboardgame_base::geometry_util::type_match_offset;
 using libboardgame_base::geometry_util::type_match_shift;
-using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::PiecePoints;
+using libpentobi_base::PieceSet;
 
 //-----------------------------------------------------------------------------
 
@@ -72,10 +72,10 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     qreal fieldHeight;
     qreal displayWidth;
     qreal displayHeight;
-    auto boardType = m_bd.get_board_type();
-    bool isTrigon =
-        (boardType == BoardType::trigon || boardType == BoardType::trigon_3);
-    bool isNexos = (boardType == BoardType::nexos);
+    auto pieceSet = m_bd.get_piece_set();
+    bool isTrigon = (pieceSet == PieceSet::trigon);
+    bool isNexos = (pieceSet == PieceSet::nexos);
+    bool isCallisto = (pieceSet == PieceSet::callisto);
     qreal ratio;
     int columns;
     int rows;
@@ -166,8 +166,18 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
                 }
             }
         }
+        else if (isCallisto)
+        {
+            bool hasRight = points.contains(CoordPoint(p.x + 1, p.y));
+            bool hasDown = points.contains(CoordPoint(p.x, p.y + 1));
+            bool isOnePiece = (points.size() == 1);
+            Util::paintColorSquareCallisto(painter, variant, m_color, x, y,
+                                           fieldWidth, hasRight, hasDown,
+                                           isOnePiece);
+        }
         else
-            Util::paintColorSquare(painter, variant, m_color, x, y, fieldWidth);
+            Util::paintColorSquare(painter, variant, m_color, x, y,
+                                   fieldWidth);
     }
     if (isNexos)
         for (CoordPoint p : junctions)

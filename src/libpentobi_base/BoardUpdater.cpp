@@ -25,7 +25,9 @@ using libpentobi_base::boardutil::get_current_position_as_setup;
 
 namespace {
 
-typedef ArrayList<Piece,2 * Piece::max_pieces> AllPiecesLeftList;
+/** List to hold remaining pieces of a color with one entry for each instance
+    of the same piece. */
+typedef ArrayList<Piece, 22> AllPiecesLeftList;
 
 /** Helper function used in init_setup. */
 void handle_setup_property(const SgfNode& node, const char* id, Color c,
@@ -97,7 +99,7 @@ void init_setup(Board& bd, const SgfNode& node)
     ColorMap<AllPiecesLeftList> all_pieces_left;
     for (Color c : bd.get_colors())
         for (Piece piece : bd.get_pieces_left(c))
-            for (unsigned i = 0; i < bd.get_nu_piece_instances(); ++i)
+            for (unsigned i = 0; i < bd.get_nu_piece_instances(piece); ++i)
                 all_pieces_left[c].push_back(piece);
     handle_setup_property(node, "A1", Color(0), bd, setup, all_pieces_left);
     handle_setup_property(node, "A2", Color(1), bd, setup, all_pieces_left);

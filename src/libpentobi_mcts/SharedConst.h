@@ -20,6 +20,8 @@ using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::PieceMap;
+using libpentobi_base::Point;
+using libpentobi_base::PointList;
 using libpentobi_base::PrecompMoves;
 using libpentobi_base::SymmetricPoints;
 
@@ -65,6 +67,12 @@ public:
         no moves). */
     PieceMap<bool> is_piece_considered_all;
 
+    PieceMap<bool> is_piece_considered_none;
+
+    /** List of allowed locations on the root position for the 1x1-piece in
+        Callisto. */
+    PointList one_piece_points_callisto;
+
 
     explicit SharedConst(const Color& to_play);
 
@@ -75,7 +83,11 @@ private:
         Reused for efficiency. */
     MoveMarker m_is_forbidden;
 
+    void init_one_piece_callisto(bool is_followup);
+
     void init_pieces_considered();
+
+    bool is_useless_one_piece_point(Point p) const;
 };
 
 //-----------------------------------------------------------------------------

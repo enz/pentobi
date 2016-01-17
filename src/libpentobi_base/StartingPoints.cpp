@@ -87,6 +87,10 @@ void StartingPoints::init(Variant variant, const Geometry& geo)
         add_colored_starting_point(geo, 5, 20, Color(3));
         add_colored_starting_point(geo, 4, 21, Color(3));
         break;
+    case BoardType::callisto:
+    case BoardType::callisto_2:
+    case BoardType::callisto_3:
+        break;
     }
 }
 

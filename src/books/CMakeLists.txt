@@ -1,6 +1,9 @@
 # Install the opening book files. If you change the destination, you need to
 # update the default for PENTOBI_BOOKS_DIR in the main CMakeLists.txt
 install(FILES
+  book_callisto.blksgf
+  book_callisto_2.blksgf
+  book_callisto_3.blksgf
   book_classic.blksgf
   book_classic_2.blksgf
   book_classic_3.blksgf

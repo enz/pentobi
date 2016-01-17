@@ -23,7 +23,7 @@ using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::is_main_variation;
-using libpentobi_base::get_board_type;
+using libpentobi_base::get_piece_set;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
@@ -36,6 +36,7 @@ using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PiecePoints;
+using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
 using libpentobi_base::tree_util::get_position_info;
 
@@ -135,7 +136,8 @@ void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
     for (Piece::IntType i = 0; i < bd.get_nu_uniq_pieces(); ++i)
     {
         Piece piece(i);
-        for (unsigned j = 0; j < bd.get_nu_piece_instances(); ++j)
+        for (unsigned j = 0; j < bd.get_piece_info(piece).get_nu_instances();
+             ++j)
             pieceModels.append(new PieceModel(this, bd, piece, c));
     }
 }
@@ -182,7 +184,9 @@ Variant GameModel::getInitialGameVariant()
     QSettings settings;
     auto variantString = settings.value("variant", "").toString();
     Variant variant;
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
+    // Callisto not yet supported in the GUI
+    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant)
+            || get_piece_set(variant) == PieceSet::callisto)
         variant = Variant::duo;
     return variant;
 }
@@ -343,6 +347,12 @@ bool GameModel::open(istream& in)
         TreeReader reader;
         reader.read(in);
         auto root = reader.get_tree_transfer_ownership();
+        if (get_piece_set(PentobiTree::get_variant(*root))
+                == PieceSet::callisto)
+        {
+            m_lastInputOutputError = tr("Unsupported game variant");
+            return false;
+        }
         m_game.init(root);
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)

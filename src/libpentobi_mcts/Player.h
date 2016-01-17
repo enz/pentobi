@@ -106,6 +106,10 @@ private:
 
     array<float, Board::max_player_moves> m_weight_max_count_duo;
 
+    array<float, Board::max_player_moves> m_weight_max_count_callisto;
+
+    array<float, Board::max_player_moves> m_weight_max_count_callisto_2;
+
     Float m_fixed_simulations;
 
     Float m_resign_threshold;

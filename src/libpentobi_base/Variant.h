@@ -28,7 +28,9 @@ enum class PieceSet
 
     trigon,
 
-    nexos
+    nexos,
+
+    callisto
 };
 
 //-----------------------------------------------------------------------------
@@ -43,7 +45,13 @@ enum class BoardType
 
     trigon_3,
 
-    nexos
+    nexos,
+
+    callisto,
+
+    callisto_2,
+
+    callisto_3,
 };
 
 //-----------------------------------------------------------------------------
@@ -69,7 +77,13 @@ enum class Variant
 
     nexos,
 
-    nexos_2
+    nexos_2,
+
+    callisto,
+
+    callisto_2,
+
+    callisto_3
 };
 
 //-----------------------------------------------------------------------------

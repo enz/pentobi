@@ -51,11 +51,12 @@ public:
         @param points The coordinates of the piece elements.
         @param geo
         @param transforms
-        @param board_type
+        @param piece_set
         @param label_pos The coordinates for drawing a label on the piece. */
     PieceInfo(const string& name, const Points& points,
               const Geometry& geo, const PieceTransforms& transforms,
-              BoardType board_type, const CoordPoint& label_pos);
+              PieceSet piece_set, const CoordPoint& label_pos,
+              unsigned nu_instances = 1);
 
     const string& get_name() const { return m_name; }
 
@@ -72,6 +73,8 @@ public:
         This excludes any junction points included in the piece definition in
         Nexos.*/
     ScoreType get_score_points() const { return m_score_points; }
+
+    unsigned get_nu_instances() const { return m_nu_instances; }
 
     /** Get a list with unique transformations.
         The list has the same order as PieceTransforms::get_all() but
@@ -102,19 +105,21 @@ public:
                                     const Points& points) const;
 
 private:
-    string m_name;
+    unsigned m_nu_instances;
 
     Points m_points;
 
+    CoordPoint m_label_pos;
+
     ScoreType m_score_points;
 
-    CoordPoint m_label_pos;
+    const PieceTransforms* m_transforms;
+
+    string m_name;
 
     vector<const Transform*> m_uniq_transforms;
 
     map<const Transform*,const Transform*> m_equivalent_transform;
-
-    const PieceTransforms* m_transforms;
 };
 
 //-----------------------------------------------------------------------------

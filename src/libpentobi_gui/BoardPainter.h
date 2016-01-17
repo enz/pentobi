@@ -89,6 +89,8 @@ private:
 
     bool m_isNexos;
 
+    bool m_isCallisto;
+
     const Geometry* m_geo;
 
     Variant m_variant;

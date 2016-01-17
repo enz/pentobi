@@ -109,8 +109,67 @@ void sort_piece_points(PiecePoints& points)
     }
 }
 
+vector<PieceInfo> create_pieces_callisto(const Geometry& geo,
+                                         PieceSet piece_set,
+                                         const PieceTransforms& transforms)
+{
+    vector<PieceInfo> pieces;
+    pieces.reserve(19);
+    pieces.emplace_back("1",
+                        PiecePoints{ CoordPoint(0, 0) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 3);
+    pieces.emplace_back("W",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
+                                     CoordPoint(0, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("X",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, -1),
+                                     CoordPoint(0, 0), CoordPoint(0, 1),
+                                     CoordPoint(1, 0) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("T5",
+                        PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
+                                     CoordPoint(0, 0), CoordPoint(0, -1),
+                                     CoordPoint(1, -1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("U",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
+                                     CoordPoint(0, 0), CoordPoint(1, 0),
+                                     CoordPoint(1, -1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("L",
+                        PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
+                                     CoordPoint(0, -1), CoordPoint(1, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+    pieces.emplace_back("T4",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(0, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+    pieces.emplace_back("Z",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(0, 1), CoordPoint(1, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+    pieces.emplace_back("O",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
+                                     CoordPoint(1, 0), CoordPoint(1, -1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+    pieces.emplace_back("V",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
+                                     CoordPoint(1, 0) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+    pieces.emplace_back("I",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
+                                     CoordPoint(0, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+    pieces.emplace_back("2",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+    return pieces;
+}
+
 vector<PieceInfo> create_pieces_classic(const Geometry& geo,
-                                        BoardType board_type,
+                                        PieceSet piece_set,
                                         const PieceTransforms& transforms)
 {
     vector<PieceInfo> pieces;
@@ -122,101 +181,101 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2), CoordPoint(1, 0),
                                      CoordPoint(2, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("L5",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("Z5",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("N",
                         PiecePoints{ CoordPoint(-1, 1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2)},
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("F",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, -1),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(0, 2), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("T5",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, -1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(0, 1),
                                      CoordPoint(0, 2) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("P",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(1, -1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("U",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(1, -1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("L4",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("I4",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("Z4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(1, -1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("V3",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_junior(const Geometry& geo,
-                                       BoardType board_type,
+                                       PieceSet piece_set,
                                        const PieceTransforms& transforms)
 {
     vector<PieceInfo> pieces;
@@ -225,56 +284,56 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geo,
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("P",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(1, -1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(0, 2), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(1, -1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("Z4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("L4",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("I4",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(0, -2) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("V3",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
-                                       BoardType board_type,
+                                       PieceSet piece_set,
                                        const PieceTransforms& transforms)
 {
     vector<PieceInfo> pieces;
@@ -290,109 +349,109 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(2, -1),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("L6",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(2, -1),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("V",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, -1),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("S",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("P6",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("F",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(2, 1), CoordPoint(1, 2) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(2, 0), CoordPoint(3, 0) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("A6",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(0, 1), CoordPoint(2, 1) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("G",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 1), CoordPoint(2, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(-1, 1),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(1, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(-1, 1),
                                      CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("L5",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("C5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(2, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("P5",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("I4",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("C4",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("A4",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
-                        geo, transforms, board_type, CoordPoint(0, 0));
+                        geo, transforms, piece_set, CoordPoint(0, 0));
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_nexos(const Geometry& geo,
-                                      BoardType board_type,
+                                      PieceSet piece_set,
                                       const PieceTransforms& transforms)
 {
     vector<PieceInfo> pieces;
@@ -402,106 +461,106 @@ vector<PieceInfo> create_pieces_nexos(const Geometry& geo,
                                      CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("L4",
                         PiecePoints{ CoordPoint(0, -3), CoordPoint(0, -2),
                                      CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3)},
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("N",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3)},
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("V4",
                         PiecePoints{ CoordPoint(-3, 0), CoordPoint(-2, 0),
                                      CoordPoint(-1, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2), CoordPoint(0, -3) },
-                        geo, transforms, board_type, CoordPoint(-1, 0));
+                        geo, transforms, piece_set, CoordPoint(-1, 0));
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2)},
-                        geo, transforms, board_type, CoordPoint(-1, 0));
+                        geo, transforms, piece_set, CoordPoint(-1, 0));
     pieces.emplace_back("Z4",
                         PiecePoints{ CoordPoint(-1, -2), CoordPoint(0, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 2) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("E",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(-1, 2)},
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("U4",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(2, -1) },
-                        geo, transforms, board_type, CoordPoint(-1, 0));
+                        geo, transforms, piece_set, CoordPoint(-1, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(-1, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1)},
-                        geo, transforms, board_type, CoordPoint(0, -1));
+                        geo, transforms, piece_set, CoordPoint(0, -1));
     pieces.emplace_back("F",
                         PiecePoints{ CoordPoint(1, -2), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(0, 1)},
-                        geo, transforms, board_type, CoordPoint(0, -1));
+                        geo, transforms, piece_set, CoordPoint(0, -1));
     pieces.emplace_back("H",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(2, 1)},
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("J",
                         PiecePoints{ CoordPoint(0, -3), CoordPoint(0, -2),
                                      CoordPoint(0, -1), CoordPoint(-1, 0),
                                      CoordPoint(-2, -1) },
-                        geo, transforms, board_type, CoordPoint(-1, 0));
+                        geo, transforms, piece_set, CoordPoint(-1, 0));
     pieces.emplace_back("G",
                         PiecePoints{ CoordPoint(2, -1), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2)},
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(1, 0), CoordPoint(2, 1),
                                      CoordPoint(0, 1), CoordPoint(1, 2)},
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("L3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("T3",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("Z3",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 2) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("U3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(2, -1) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     pieces.emplace_back("V2",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, -1) },
-                        geo, transforms, board_type, CoordPoint(-1, 0));
+                        geo, transforms, piece_set, CoordPoint(-1, 0));
     pieces.emplace_back("I2",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, board_type, CoordPoint(0, 1));
+                        geo, transforms, piece_set, CoordPoint(0, 1));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(1, 0) },
-                        geo, transforms, board_type, CoordPoint(1, 0));
+                        geo, transforms, piece_set, CoordPoint(1, 0));
     return pieces;
 }
 
@@ -523,62 +582,81 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     switch (board_type)
     {
     case BoardType::classic:
-        LIBBOARDGAME_ASSERT(piece_set == PieceSet::classic);
-        m_transforms.reset(new PieceTransformsClassic);
-        m_pieces = create_pieces_classic(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_classic + 1;
-        m_max_piece_size = 5;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
-        m_max_adj_attach = 16;
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
         break;
     case BoardType::trigon:
-        LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
-        m_transforms.reset(new PieceTransformsTrigon);
-        m_pieces = create_pieces_trigon(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_trigon + 1;
-        m_max_piece_size = 6;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
-        m_max_adj_attach = 22;
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<22>)));
         break;
     case BoardType::trigon_3:
-        LIBBOARDGAME_ASSERT(piece_set == PieceSet::trigon);
-        m_transforms.reset(new PieceTransformsTrigon);
-        m_pieces = create_pieces_trigon(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_trigon_3 + 1;
-        m_max_piece_size = 6;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
-        m_max_adj_attach = 22;
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<22>)));
         break;
     case BoardType::duo:
-        m_transforms.reset(new PieceTransformsClassic);
         if (piece_set == PieceSet::classic)
-        {
-            m_pieces = create_pieces_classic(m_geo, board_type, *m_transforms);
             m_nu_moves = Move::onboard_moves_duo + 1;
-        }
         else
         {
             LIBBOARDGAME_ASSERT(piece_set == PieceSet::junior);
-            m_pieces = create_pieces_junior(m_geo, board_type, *m_transforms);
             m_nu_moves = Move::onboard_moves_junior + 1;
         }
-        m_max_piece_size = 5;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
-        m_max_adj_attach = 16;
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
         break;
     case BoardType::nexos:
-        LIBBOARDGAME_ASSERT(piece_set == PieceSet::nexos);
-        m_transforms.reset(new PieceTransformsClassic);
-        m_pieces = create_pieces_nexos(m_geo, board_type, *m_transforms);
         m_nu_moves = Move::onboard_moves_nexos + 1;
+        break;
+    case BoardType::callisto:
+        m_nu_moves = Move::onboard_moves_callisto + 1;
+        break;
+    case BoardType::callisto_2:
+        m_nu_moves = Move::onboard_moves_callisto_2 + 1;
+        break;
+    case BoardType::callisto_3:
+        m_nu_moves = Move::onboard_moves_callisto_3 + 1;
+        break;
+    }
+    switch (piece_set)
+    {
+    case PieceSet::classic:
+        m_transforms.reset(new PieceTransformsClassic);
+        m_pieces = create_pieces_classic(m_geo, piece_set, *m_transforms);
+        m_max_piece_size = 5;
+        m_max_adj_attach = 16;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
+        break;
+    case PieceSet::junior:
+        m_transforms.reset(new PieceTransformsClassic);
+        m_pieces = create_pieces_junior(m_geo, piece_set, *m_transforms);
+        m_max_piece_size = 5;
+        m_max_adj_attach = 16;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
+        break;
+    case PieceSet::trigon:
+        m_transforms.reset(new PieceTransformsTrigon);
+        m_pieces = create_pieces_trigon(m_geo, piece_set, *m_transforms);
+        m_max_piece_size = 6;
+        m_max_adj_attach = 22;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<22>)));
+        break;
+    case PieceSet::nexos:
+        m_transforms.reset(new PieceTransformsClassic);
+        m_pieces = create_pieces_nexos(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 7;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<7>)));
         m_max_adj_attach = 12;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<7>)));
         m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<12>)));
+        break;
+    case PieceSet::callisto:
+        m_transforms.reset(new PieceTransformsClassic);
+        m_pieces = create_pieces_callisto(m_geo, piece_set, *m_transforms);
+        m_max_piece_size = 5;
+        // m_max_adj_attach is actually 10 in Callisto, but we care more about
+        // the performance in the clasic Blokus variants and some code is
+        // faster if we don't have to handle different values for
+        // m_max_adj_attach for the same m_max_piece_size.
+        m_max_adj_attach = 16;
+        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
+        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
         break;
     }
     m_move_info_ext_2.reset(new MoveInfoExt2[m_nu_moves]);
@@ -604,8 +682,12 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     case PieceSet::nexos:
         LIBBOARDGAME_ASSERT(m_nu_pieces == 24);
         break;
+    case PieceSet::callisto:
+        LIBBOARDGAME_ASSERT(m_nu_pieces == 12);
+        break;
     }
-    if (board_type == BoardType::duo || board_type == BoardType::trigon)
+    if (board_type == BoardType::duo || board_type == BoardType::trigon
+             || board_type == BoardType::callisto_2)
         init_symmetry_info();
 }
 
@@ -702,10 +784,8 @@ void BoardConst::create_moves()
         for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
             create_moves<6, 22>(moves_created, Piece(i));
     else
-    {
         for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
             create_moves<7, 12>(moves_created, Piece(i));
-    }
     LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     unsigned n = 0;
     for (Point p : m_geo)

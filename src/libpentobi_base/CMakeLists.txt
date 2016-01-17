@@ -9,6 +9,8 @@ set(pentobi_base_STAT_SRCS
   BoardUtil.cpp
   Book.h
   Book.cpp
+  CallistoGeometry.h
+  CallistoGeometry.cpp
   Color.h
   Color.cpp
   ColorMap.h

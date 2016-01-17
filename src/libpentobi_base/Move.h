@@ -37,6 +37,12 @@ public:
 
     static const IntType onboard_moves_nexos = 15157;
 
+    static const IntType onboard_moves_callisto = 9433;
+
+    static const IntType onboard_moves_callisto_2 = 4265;
+
+    static const IntType onboard_moves_callisto_3 = 6885;
+
     /** Integer range of moves.
         The maximum is given by the number of on-board moves in game variant
         Trigon, plus a null move. */

@@ -891,6 +891,38 @@
         <source>Yellow/Green wins with %1 points.</source>
         <translation>Gelb/Grün gewinnt mit %1 Punkten.</translation>
     </message>
+    <message>
+        <source>Callisto (&amp;2 Players)</source>
+        <translation>Callisto (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;3 Players)</source>
+        <translation>Callisto (&amp;3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;4 Players)</source>
+        <translation>Callisto (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>C&amp;allisto</source>
+        <translation>&amp;Callisto</translation>
+    </message>
+    <message>
+        <source>Green wins (tie resolved).</source>
+        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins (tie resolved).</source>
+        <translation>Gelb/Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Red wins (tie resolved).</source>
+        <translation>Rot gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Yellow wins (tie resolved).</source>
+        <translation>Gelb gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
 </context>
 <context>
     <name>RatedGamesList</name>
@@ -1008,6 +1040,18 @@
     <message>
         <source>Nexos (2 players)</source>
         <translation>Nexos (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (4 players)</source>
+        <translation>Callisto (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 players)</source>
+        <translation>Callisto (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (3 players)</source>
+        <translation>Callisto (3 Spieler)</translation>
     </message>
 </context>
 <context>

@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/pentobi_books">
+        <file>book_callisto.blksgf</file>
+        <file>book_callisto_2.blksgf</file>
+        <file>book_callisto_3.blksgf</file>
         <file>book_classic.blksgf</file>
         <file>book_classic_2.blksgf</file>
         <file>book_classic_3.blksgf</file>

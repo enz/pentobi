@@ -21,9 +21,9 @@ using libboardgame_sgf::TreeReader;
 using libboardgame_util::split;
 using libboardgame_util::trim;
 using libpentobi_base::get_board_type;
-using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
+using libpentobi_base::PieceSet;
 using libpentobi_base::PointState;
 using libpentobi_base::TrigonGeometry;
 using libpentobi_base::Variant;
@@ -90,7 +90,8 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
         return false;
     geo = &get_geometry(variant);
     pointState.fill(PointState::empty(), *geo);
-    if (get_board_type(variant) == BoardType::nexos)
+    auto pieceSet = get_piece_set(variant);
+    if (pieceSet == PieceSet::nexos || pieceSet == PieceSet::callisto)
         pieceId.fill(0, *geo);
     auto node = &root;
     unsigned id = 0;

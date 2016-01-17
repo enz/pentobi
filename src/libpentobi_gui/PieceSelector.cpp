@@ -32,6 +32,14 @@ using libpentobi_base::Variant;
 
 namespace {
 
+const string pieceLayoutCallisto =
+    " 1 . U U U . O O . O O . L L . L . Z . . Z . . I . I . 2"
+    " . . U . U . O O . O O . L . . L . Z Z . Z Z . I . I . 2"
+    " 1 . . . . . . . . . . . L . L L . . Z . . Z . I . I . ."
+    " . .T5T5T5 . . W . . X . . . . . . . . . . . . . . . . 2"
+    " 1 . .T5 . . W W . X X X .T4T4T4 .T4T4T4 . V . . V . . 2"
+    " . . .T5 . W W . . . X . . .T4 . . .T4 . . V V . V V . .";
+
 const string pieceLayoutClassic =
     " 1 .Z4Z4 . .L4L4L4 . O O . P P .L5L5L5L5 .V5V5V5 . U U U . N . . ."
     " . . .Z4Z4 . . .L4 . O O . P P .L5 . . . .V5 . . . U . U . N N .I5"
@@ -153,8 +161,8 @@ int PieceSelector::heightForWidth(int width) const
 void PieceSelector::init()
 {
     const string* pieceLayout = nullptr; // Init to avoid compiler warning
-    auto piece_set = m_bd.get_board_const().get_piece_set();
-    switch (piece_set)
+    auto pieceSet = m_bd.get_piece_set();
+    switch (pieceSet)
     {
     case PieceSet::classic:
         pieceLayout = &pieceLayoutClassic;
@@ -175,6 +183,11 @@ void PieceSelector::init()
         pieceLayout = &pieceLayoutNexos;
         m_nuColumns = 45;
         m_nuRows = 9;
+        break;
+    case PieceSet::callisto:
+        pieceLayout = &pieceLayoutCallisto;
+        m_nuColumns = 28;
+        m_nuRows = 6;
         break;
     }
     LIBBOARDGAME_ASSERT(m_nuColumns <= maxColumns);
@@ -204,7 +217,7 @@ void PieceSelector::init()
             // We need to match the coordinate system of the piece selector to
             // the geometry, they are different in Trigon3.
             type_match_shift(geo, points.begin(), points.end(), 0);
-            if (piece_set == PieceSet::nexos)
+            if (pieceSet == PieceSet::nexos)
                 filterCrossableJunctions(points);
             m_transform[x][y] =
                 m_bd.get_piece_info(piece).find_transform(geo, points);
@@ -235,10 +248,10 @@ void PieceSelector::paintEvent(QPaintEvent*)
     setDisabledStatus(m_disabled);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    auto boardType = m_bd.get_board_type();
-    bool isTrigon =
-        (boardType == BoardType::trigon || boardType == BoardType::trigon_3);
-    bool isNexos = (boardType == BoardType::nexos);
+    auto pieceSet = m_bd.get_piece_set();
+    bool isTrigon = (pieceSet == PieceSet::trigon);
+    bool isNexos = (pieceSet == PieceSet::nexos);
+    bool isCallisto = (pieceSet == PieceSet::callisto);
     qreal ratio;
     if (isTrigon)
     {
@@ -314,9 +327,28 @@ void PieceSelector::paintEvent(QPaintEvent*)
             {
                 if (piece.is_null() || m_disabled[x][y])
                     continue;
-                Util::paintColorSquare(painter, variant, m_color,
-                                       x * m_fieldWidth, y * m_fieldHeight,
-                                       m_fieldWidth);
+                if (isCallisto)
+                {
+                    bool hasLeft = (x > 0 && ! m_piece[x - 1][y].is_null());
+                    bool hasRight =
+                            (x < m_nuColumns - 1
+                             && ! m_piece[x + 1][y].is_null());
+                    bool hasUp = (y > 0 && ! m_piece[x][y - 1].is_null());
+                    bool hasDown =
+                            (y < m_nuRows - 1
+                             && ! m_piece[x][y + 1].is_null());
+                    bool isOnePiece =
+                            (! hasLeft && ! hasRight && ! hasUp && ! hasDown);
+                    Util::paintColorSquareCallisto(painter, variant, m_color,
+                                                   x * m_fieldWidth,
+                                                   y * m_fieldHeight,
+                                                   m_fieldWidth, hasRight,
+                                                   hasDown, isOnePiece);
+                }
+                else
+                    Util::paintColorSquare(painter, variant, m_color,
+                                           x * m_fieldWidth, y * m_fieldHeight,
+                                           m_fieldWidth);
             }
         }
     painter.restore();

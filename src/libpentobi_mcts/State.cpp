@@ -74,6 +74,34 @@ inline void State::add_moves(Point p, Color c,
 }
 
 template<unsigned MAX_SIZE>
+void State::add_one_piece_moves(Color c, bool with_gamma, float& total_gamma,
+                                MoveList& moves, unsigned& nu_moves)
+{
+    Piece one_piece = m_bd.get_one_piece();
+    auto nu_left = m_bd.get_nu_left_piece(c, one_piece);
+    if (nu_left == 0)
+        return;
+    for (Point p : m_shared_const.one_piece_points_callisto)
+    {
+        if (m_bd.is_forbidden(p, c))
+            continue;
+        for (Move mv : get_moves(c, one_piece, p, m_bd.get_adj_status(p, c)))
+        {
+            LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
+            moves.get_unchecked(nu_moves) = mv;
+            ++nu_moves;
+            LIBBOARDGAME_ASSERT(! m_marker[c][mv]);
+            m_marker[c].set(mv);
+            if (with_gamma)
+            {
+                total_gamma += m_gamma_piece[one_piece];
+                m_cumulative_gamma[nu_moves - 1] = total_gamma;
+            }
+        }
+    }
+}
+
+template<unsigned MAX_SIZE>
 void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                                bool with_gamma, MoveList& moves)
 {
@@ -167,37 +195,6 @@ string State::dump() const
 }
 #endif
 
-/** Evaluation function for Duo and Junior. */
-void State::evaluate_duo(array<Float, 6>& result)
-{
-    LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
-    LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 2);
-    if (! m_is_symmetry_broken
-            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
-    {
-        if (log_simulations)
-            LIBBOARDGAME_LOG("Result: 0.5 (symmetry)");
-        result[0] = result[1] = 0.5;
-        return;
-    }
-    Color c(0);
-    auto s = m_bd.get_score_twocolor(c);
-    Float res;
-    if (s > 0)
-        res = 1;
-    else if (s < 0)
-        res = 0;
-    else
-        res = 0.5;
-    if (log_simulations)
-        LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=", res);
-    res += get_quality_bonus(c, res, s, false);
-    if (log_simulations)
-        LIBBOARDGAME_LOG("res=", res);
-    result[0] = res;
-    result[1] = 1.f - res;
-}
-
 /** Evaluation function for game variants with 2 players and 2 colors per
     player. */
 void State::evaluate_multicolor(array<Float, 6>& result)
@@ -252,7 +249,7 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
     for (Color::IntType i = 0; i < nu_players; ++i)
         points[i] = m_bd.get_points(Color(i));
     array<Float, Color::range> game_result;
-    get_multiplayer_result(nu_players, points, game_result);
+    get_multiplayer_result(nu_players, points, game_result, m_is_callisto);
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         Color c(i);
@@ -269,6 +266,37 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
         result[4] = result[1];
         result[5] = result[2];
     }
+}
+
+/** Evaluation function for Duo, Junior and Callisto Two-Player. */
+void State::evaluate_twocolor(array<Float, 6>& result)
+{
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 2);
+    ScoreType s;
+    if (! m_is_symmetry_broken
+            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
+    {
+        if (log_simulations)
+            LIBBOARDGAME_LOG("Symmetry not broken");
+        s = 0;
+    }
+    else
+        s = m_bd.get_score_twocolor(Color(0));
+    Float res;
+    if (s > 0)
+        res = 1;
+    else if (s < 0 || (m_is_callisto && s == 0))
+        res = 0;
+    else
+        res = 0.5;
+    if (log_simulations)
+        LIBBOARDGAME_LOG("Result sco=", s, " game_res=", res);
+    res += get_quality_bonus(Color(0), res, s, false);
+    if (log_simulations)
+        LIBBOARDGAME_LOG("res=", res);
+    result[0] = res;
+    result[1] = 1.f - res;
 }
 
 Point State::find_best_starting_point(Color c) const
@@ -396,6 +424,7 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     }
 
     auto& moves = m_moves[to_play];
+    LIBBOARDGAME_ASSERT(! moves.empty());
     auto total_gamma = m_cumulative_gamma[moves.size() - 1];
     if (log_simulations)
         LIBBOARDGAME_LOG("Moves: ", moves.size(), ", total_gamma: ",
@@ -422,16 +451,18 @@ string State::get_info() const
     return s.str();
 }
 
-inline const PieceMap<bool>& State::get_is_piece_considered() const
+inline const PieceMap<bool>& State::get_is_piece_considered(Color c) const
 {
+    if (m_is_callisto
+            && m_bd.get_nu_left_piece(c, m_bd.get_one_piece()) > 1)
+        return m_shared_const.is_piece_considered_none;
     // Use number of on-board pieces for move number to handle the case where
     // there are more pieces on the board than moves (setup positions)
     unsigned nu_moves = m_bd.get_nu_onboard_pieces();
     if (nu_moves >= m_shared_const.min_move_all_considered
             || m_force_consider_all_pieces)
         return m_shared_const.is_piece_considered_all;
-    else
-        return *m_shared_const.is_piece_considered[nu_moves];
+    return *m_shared_const.is_piece_considered[nu_moves];
 }
 
 /** Initializes and returns m_pieces_considered if not all pieces are
@@ -440,7 +471,8 @@ inline const Board::PiecesLeftList& State::get_pieces_considered(Color c)
 {
     auto is_piece_considered = m_is_piece_considered[c];
     auto& pieces_left = m_bd.get_pieces_left(c);
-    if (is_piece_considered == &m_shared_const.is_piece_considered_all)
+    if (is_piece_considered == &m_shared_const.is_piece_considered_all
+            && ! m_is_callisto)
         return pieces_left;
     unsigned n = 0;
     for (Piece piece : pieces_left)
@@ -507,23 +539,29 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void State::init_moves_with_gamma(Color c)
 {
-    m_is_piece_considered[c] = &get_is_piece_considered();
+    m_is_piece_considered[c] = &get_is_piece_considered(c);
     m_playout_features[c].set_local<MAX_ADJ_ATTACH>(m_bd);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
     auto& pieces = get_pieces_considered(c);
-    if (m_bd.is_first_piece(c))
+    if (m_bd.is_first_piece(c) && ! (MAX_SIZE == 5 && m_is_callisto))
         add_starting_moves<MAX_SIZE>(c, pieces, true, moves);
     else
     {
         unsigned nu_moves = 0;
         float total_gamma = 0;
-        for (Point p : m_bd.get_attach_points(c))
-            if (! m_bd.is_forbidden(p, c))
+        if (MAX_SIZE == 5 && m_is_callisto)
+            add_one_piece_moves<MAX_SIZE>(c, true, total_gamma, moves,
+                                          nu_moves);
+        if (m_is_piece_considered[c]
+                != &m_shared_const.is_piece_considered_none)
+            for (Point p : m_bd.get_attach_points(c))
             {
-                add_moves<MAX_SIZE>(
-                            p, c, pieces, total_gamma, moves, nu_moves);
+                if (m_bd.is_forbidden(p, c))
+                    continue;
+                add_moves<MAX_SIZE>(p, c, pieces, total_gamma, moves,
+                                    nu_moves);
                 m_moves_added_at[c][p] = true;
             }
         moves.resize(nu_moves);
@@ -531,7 +569,9 @@ void State::init_moves_with_gamma(Color c)
     m_is_move_list_initialized[c] = true;
     m_nu_new_moves[c] = 0;
     m_last_attach_points_end[c] = m_bd.get_attach_points(c).end();
-    if (moves.empty() && &pieces == &m_pieces_considered)
+    if (moves.empty() &&
+            m_is_piece_considered[c]
+            != &m_shared_const.is_piece_considered_all)
     {
         m_force_consider_all_pieces = true;
         init_moves_with_gamma<MAX_SIZE, MAX_ADJ_ATTACH>(c);
@@ -541,20 +581,29 @@ void State::init_moves_with_gamma(Color c)
 template<unsigned MAX_SIZE>
 void State::init_moves_without_gamma(Color c)
 {
-    m_is_piece_considered[c] = &get_is_piece_considered();
+    m_is_piece_considered[c] = &get_is_piece_considered(c);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
     auto& pieces = get_pieces_considered(c);
     auto& is_forbidden = m_bd.is_forbidden(c);
-    if (m_bd.is_first_piece(c))
+    if (m_bd.is_first_piece(c) && ! (MAX_SIZE == 5 && m_is_callisto))
         add_starting_moves<MAX_SIZE>(c, pieces, false, moves);
     else
     {
         unsigned nu_moves = 0;
-        for (Point p : m_bd.get_attach_points(c))
-            if (! is_forbidden[p])
+        if (MAX_SIZE == 5 && m_is_callisto)
+        {
+            float total_gamma_dummy;
+            add_one_piece_moves<MAX_SIZE>(c, false, total_gamma_dummy, moves,
+                                          nu_moves);
+        }
+        if (m_is_piece_considered[c]
+                != &m_shared_const.is_piece_considered_none)
+            for (Point p : m_bd.get_attach_points(c))
             {
+                if (is_forbidden[p])
+                    continue;
                 auto adj_status = m_bd.get_adj_status(p, c);
                 for (Piece piece : pieces)
                 {
@@ -573,7 +622,9 @@ void State::init_moves_without_gamma(Color c)
     m_is_move_list_initialized[c] = true;
     m_nu_new_moves[c] = 0;
     m_last_attach_points_end[c] = m_bd.get_attach_points(c).end();
-    if (moves.empty() && &pieces == &m_pieces_considered)
+    if (moves.empty() &&
+            m_is_piece_considered[c]
+            != &m_shared_const.is_piece_considered_all)
     {
         m_force_consider_all_pieces = true;
         init_moves_without_gamma<MAX_SIZE>(c);
@@ -607,6 +658,7 @@ void State::start_search()
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
     m_nu_colors = bd.get_nu_colors();
+    m_is_callisto = (bd.get_piece_set() == PieceSet::callisto);
     for (Color c : Color::Range(m_nu_colors))
         m_playout_features[c].init_snapshot(m_bd, c);
     m_bc = &m_bd.get_board_const();
@@ -619,7 +671,7 @@ void State::start_search()
     auto variant = bd.get_variant();
     m_check_symmetric_draw =
         ((variant == Variant::duo || variant == Variant::junior
-          || variant == Variant::trigon_2)
+          || variant == Variant::trigon_2 || variant == Variant::callisto_2)
          && ! ((m_shared_const.to_play == Color(1)
                 || m_shared_const.to_play == Color(3))
                && m_shared_const.avoid_symmetric_draw)
@@ -645,6 +697,9 @@ void State::start_search()
     switch (bd.get_board_type())
     {
     case BoardType::classic:
+    case BoardType::callisto: // Not yet tuned
+    case BoardType::callisto_2: // Not yet tuned
+    case BoardType::callisto_3: // Not yet tuned
         gamma_size_factor = 5;
         break;
     case BoardType::duo:
@@ -655,8 +710,7 @@ void State::start_search()
     case BoardType::trigon_3:
         gamma_size_factor = 5;
         break;
-    case BoardType::nexos:
-        // Not yet tuned
+    case BoardType::nexos: // Not yet tuned
         gamma_size_factor = 5;
         gamma_nu_attach_factor = 1.8f;
         break;
@@ -664,13 +718,13 @@ void State::start_search()
     for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
     {
         Piece piece(i);
-        auto piece_size = m_bc->get_piece_info(piece).get_score_points();
+        auto score_points = m_bc->get_piece_info(piece).get_score_points();
         auto piece_nu_attach =
                 static_cast<float>(m_bc->get_nu_attach_points(piece));
-        LIBBOARDGAME_ASSERT(piece_size > 0);
+        LIBBOARDGAME_ASSERT(score_points >= 0);
         LIBBOARDGAME_ASSERT(piece_nu_attach > 0);
         m_gamma_piece[piece] =
-            pow(gamma_size_factor, piece_size - 1)
+            pow(gamma_size_factor, score_points)
             * pow(gamma_nu_attach_factor, piece_nu_attach - 1);
     }
 }
@@ -711,9 +765,11 @@ void State::update_moves(Color c)
     auto old_size = moves.size();
     unsigned nu_moves = 0;
     float total_gamma = 0;
-    if (m_nu_new_moves[c] == 1 && m_bd.get_nu_piece_instances() == 1)
-    {
-        Piece piece = get_move_info<MAX_SIZE>(m_last_move[c]).get_piece();
+    Piece piece;
+    if (m_nu_new_moves[c] == 1 &&
+            ! m_bd.is_piece_left(
+                c, (piece =
+                    get_move_info<MAX_SIZE>(m_last_move[c]).get_piece())))
         for (unsigned i = 0; i < old_size; ++i)
         {
             LIBBOARDGAME_ASSERT(i >= nu_moves);
@@ -724,7 +780,6 @@ void State::update_moves(Color c)
                                               playout_features, total_gamma))
                 marker.clear(mv);
         }
-    }
     else
     {
         PieceMap<bool> is_piece_left(false);
@@ -757,13 +812,13 @@ void State::update_moves(Color c)
     m_last_attach_points_end[c] = end;
 
     // Generate moves for pieces not considered in the last position
-    if (&pieces == &m_pieces_considered)
+    if (m_is_piece_considered[c] != &m_shared_const.is_piece_considered_all)
     {
         auto& is_piece_considered = *m_is_piece_considered[c];
         if (nu_moves == 0)
             m_force_consider_all_pieces = true;
-        auto& is_piece_considered_new = get_is_piece_considered();
-        if (&is_piece_considered !=  &is_piece_considered_new)
+        auto& is_piece_considered_new = get_is_piece_considered(c);
+        if (&is_piece_considered != &is_piece_considered_new)
         {
             Board::PiecesLeftList new_pieces;
             unsigned n = 0;
@@ -775,7 +830,7 @@ void State::update_moves(Color c)
             for (Point p : attach_points)
                 if (! is_forbidden[p])
                     add_moves<MAX_SIZE>(p, c, new_pieces, total_gamma, moves,
-                                          nu_moves);
+                                        nu_moves);
             m_is_piece_considered[c] = &is_piece_considered_new;
         }
     }

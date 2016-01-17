@@ -11,6 +11,7 @@
 #include "Board.h"
 
 #include <functional>
+#include "CallistoGeometry.h"
 #include "MoveMarker.h"
 
 namespace libpentobi_base {
@@ -201,6 +202,8 @@ Move Board::get_move_at(Point p) const
 
 bool Board::has_moves(Color c) const
 {
+    if (m_piece_set == PieceSet::callisto && is_piece_left(c, m_one_piece))
+        return true;
     if (is_first_piece(c))
     {
         for (auto p : get_starting_points(c))
@@ -244,21 +247,22 @@ void Board::init(Variant variant, const Setup* setup)
     // If you make changes here, make sure that you also update copy_from()
 
     m_state_base.point_state.fill(PointState::empty(), *m_geo);
-    if (variant == Variant::junior)
-        m_nu_piece_instances = 2;
-    else
-        m_nu_piece_instances = 1;
     for (Color c : get_colors())
     {
-        m_state_color[c].forbidden.fill(false, *m_geo);
-        m_state_color[c].is_attach_point.fill(false, *m_geo);
+        auto& state = m_state_color[c];
+        state.forbidden.fill(false, *m_geo);
+        state.is_attach_point.fill(false, *m_geo);
+        state.pieces_left.clear();
+        state.nu_onboard_pieces = 0;
+        state.points = 0;
+        for (Piece::IntType i = 0; i < get_nu_uniq_pieces(); ++i)
+        {
+            Piece piece(i);
+            state.pieces_left.push_back(piece);
+            state.nu_left_piece[piece] =
+                    static_cast<uint_fast8_t>(get_nu_piece_instances(piece));
+        }
         m_attach_points[c].clear();
-        m_state_color[c].pieces_left.clear();
-        m_state_color[c].nu_onboard_pieces = 0;
-        m_state_color[c].points = 0;
-        for (Piece::IntType j = 0; j < get_nu_uniq_pieces(); ++j)
-            m_state_color[c].pieces_left.push_back(Piece(j));
-        m_state_color[c].nu_left_piece.fill(m_nu_piece_instances);
     }
     m_state_base.nu_onboard_pieces_all = 0;
     if (! setup)
@@ -309,20 +313,22 @@ void Board::init_variant(Variant variant)
     }
     m_nu_players = libpentobi_base::get_nu_players(variant);
     m_bc = &BoardConst::get(variant);
-    if (m_variant == Variant::junior)
+    m_piece_set = m_bc->get_piece_set();
+    m_is_callisto = (m_piece_set == PieceSet::callisto);
+    if (m_piece_set == PieceSet::classic && variant != Variant::junior)
     {
-        m_bonus_all_pieces = 0;
-        m_bonus_one_piece = 0;
+        m_bonus_all_pieces = 15;
+        m_bonus_one_piece = 5;
     }
-    else if (m_variant == Variant::nexos || m_variant == Variant::nexos_2)
+    else if (m_piece_set == PieceSet::nexos)
     {
         m_bonus_all_pieces = 10;
         m_bonus_one_piece = 0;
     }
     else
     {
-        m_bonus_all_pieces = 15;
-        m_bonus_one_piece = 5;
+        m_bonus_all_pieces = 0;
+        m_bonus_one_piece = 0;
     }
     m_max_piece_size = m_bc->get_max_piece_size();
     m_max_adj_attach = m_bc->get_max_adj_attach();
@@ -331,6 +337,14 @@ void Board::init_variant(Variant variant)
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
     m_move_info_ext_2_array = m_bc->get_move_info_ext_2_array();
     m_starting_points.init(variant, *m_geo);
+    if (m_piece_set == PieceSet::callisto)
+        for (Point p : *m_geo)
+            m_is_center_section[p] =
+                    CallistoGeometry::is_center_section(m_geo->get_x(p),
+                                                        m_geo->get_y(p),
+                                                        m_nu_players);
+    else
+        m_is_center_section.fill(false, *m_geo);
     for (Color c : get_colors())
     {
         if (m_nu_players == 2 && m_nu_colors == 4)
@@ -338,32 +352,13 @@ void Board::init_variant(Variant variant)
         else
             m_second_color[c] = c;
     }
-    auto piece_set = m_bc->get_piece_set();
-#if LIBBOARDGAME_DEBUG
-    ScoreType total_piece_points = 0;
-#endif
     for (Piece::IntType i = 0; i < get_nu_uniq_pieces(); ++i)
     {
         Piece piece(i);
-        m_score_points[piece] = get_piece_info(piece).get_score_points();
-#if LIBBOARDGAME_DEBUG
-        total_piece_points += m_score_points[piece];
-#endif
-    }
-    switch (piece_set)
-    {
-    case PieceSet::classic:
-        LIBBOARDGAME_ASSERT(total_piece_points == 89);
-        break;
-    case PieceSet::junior:
-        LIBBOARDGAME_ASSERT(total_piece_points == 44);
-        break;
-    case PieceSet::trigon:
-        LIBBOARDGAME_ASSERT(total_piece_points == 110);
-        break;
-    case PieceSet::nexos:
-        LIBBOARDGAME_ASSERT(total_piece_points == 84);
-        break;
+        auto& piece_info = get_piece_info(piece);
+        m_score_points[piece] = piece_info.get_score_points();
+        if (piece_info.get_points().size() == 1)
+            m_one_piece = piece;
     }
 }
 
@@ -377,12 +372,13 @@ bool Board::is_game_over() const
 
 bool Board::is_legal(Color c, Move mv) const
 {
-    if (! is_piece_left(c, get_move_piece(mv)))
+    auto piece = get_move_piece(mv);
+    if (! is_piece_left(c, piece))
         return false;
     auto points = get_move_points(mv);
-    bool has_attach_point = false;
     auto i = points.begin();
     auto end = points.end();
+    bool has_attach_point = false;
     do
     {
         if (m_state_color[c].forbidden[*i])
@@ -391,6 +387,14 @@ bool Board::is_legal(Color c, Move mv) const
             has_attach_point = true;
     }
     while (++i != end);
+    if (m_is_callisto)
+    {
+        if (m_state_color[c].nu_left_piece[m_one_piece] > 1
+                && piece != m_one_piece)
+            return false;
+        if (piece == m_one_piece)
+            return ! m_is_center_section[*points.begin()];
+    }
     if (has_attach_point)
         return true;
     if (! is_first_piece(c))
@@ -510,10 +514,9 @@ void Board::write(ostream& out, bool mark_last_move) const
     unsigned width = m_geo->get_width();
     unsigned height = m_geo->get_height();
     bool is_info_location_right = (width <= 20);
-    auto board_type = get_board_type();
-    bool is_trigon = (board_type == BoardType::trigon
-                      || board_type == BoardType::trigon_3);
-    bool is_nexos = (board_type == BoardType::nexos);
+    bool is_trigon = (m_piece_set == PieceSet::trigon);
+    bool is_nexos = (m_piece_set == PieceSet::nexos);
+    bool is_callisto = (m_piece_set == PieceSet::callisto);
     for (unsigned y = 0; y < height; ++y)
     {
         if (height - y < 10)
@@ -572,6 +575,11 @@ void Board::write(ostream& out, bool mark_last_move) const
                     set_color(out, "\x1B[1;30;47m");
                     out << (point_type == 1 ? '\\' : '/');
                 }
+                else if (is_callisto && x == 0)
+                {
+                    set_color(out, "\x1B[0m");
+                    out << ' ';
+                }
                 else
                 {
                     set_color(out, is_nexos ? "\x1B[1;30;47m" : "\x1B[0m");
@@ -605,6 +613,8 @@ void Board::write(ostream& out, bool mark_last_move) const
                             out << '|';
                         else if (is_nexos && point_type == 0)
                             out << '+';
+                        else if (is_callisto && is_center_section(p))
+                            out << ',';
                         else
                             out << '.';
                     }

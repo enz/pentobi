@@ -80,6 +80,8 @@ Player::Player(Variant initial_variant, unsigned max_level, string  books_dir,
         m_weight_max_count_duo[i] = 0.7f * exp(0.1f * static_cast<float>(i));
         m_weight_max_count_classic[i] = m_weight_max_count_duo[i];
         m_weight_max_count_trigon[i] = m_weight_max_count_duo[i];
+        m_weight_max_count_callisto[i] = m_weight_max_count_duo[i];
+        m_weight_max_count_callisto_2[i] = m_weight_max_count_duo[i];
         // Less weight for the first move(s) because number of legal moves
         // is lower and the search applies some pruning rules to reduce the
         // branching factor in early moves
@@ -88,11 +90,15 @@ Player::Player(Variant initial_variant, unsigned max_level, string  books_dir,
             m_weight_max_count_classic[i] *= 0.2f;
             m_weight_max_count_trigon[i] *= 0.2f;
             m_weight_max_count_duo[i] *= 0.6f;
+            m_weight_max_count_callisto[i] *= 0.2f;
+            m_weight_max_count_callisto_2[i] *= 0.2f;
         }
         else if (i == 1)
         {
             m_weight_max_count_classic[i] *= 0.2f;
             m_weight_max_count_trigon[i] *= 0.5f;
+            m_weight_max_count_callisto[i] *= 0.6f;
+            m_weight_max_count_callisto_2[i] *= 0.2f;
         }
         else if (i == 2)
         {
@@ -106,9 +112,7 @@ Player::Player(Variant initial_variant, unsigned max_level, string  books_dir,
     }
 }
 
-Player::~Player()
-{
-}
+Player::~Player() = default;
 
 Move Player::genmove(const Board& bd, Color c)
 {
@@ -144,6 +148,7 @@ Move Player::genmove(const Board& bd, Color c)
         switch (board_type)
         {
         case BoardType::classic:
+        case BoardType::callisto_2:
             max_count = counts_classic[level - 1];
             break;
         case BoardType::duo:
@@ -151,6 +156,8 @@ Move Player::genmove(const Board& bd, Color c)
             break;
         case BoardType::trigon:
         case BoardType::trigon_3:
+        case BoardType::callisto:
+        case BoardType::callisto_3:
             max_count = counts_trigon[level - 1];
             break;
         case BoardType::nexos:
@@ -172,6 +179,13 @@ Move Player::genmove(const Board& bd, Color c)
                 break;
             case BoardType::duo:
                 weight = m_weight_max_count_duo[player_move];
+                break;
+            case BoardType::callisto:
+            case BoardType::callisto_3:
+                weight = m_weight_max_count_callisto[player_move];
+                break;
+            case BoardType::callisto_2:
+                weight = m_weight_max_count_callisto_2[player_move];
                 break;
             case BoardType::trigon:
             case BoardType::trigon_3:
@@ -253,6 +267,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     switch (get_board_type(variant))
     {
     case BoardType::classic:
+    case BoardType::callisto_2: // Not yet measured
         {
             // Anchor 1000, scale 0.63
             static float elo[Player::max_supported_level] =
@@ -270,7 +285,9 @@ Rating Player::get_rating(Variant variant, unsigned level)
         break;
     case BoardType::trigon:
     case BoardType::trigon_3:
-    case BoardType::nexos: // rating of Nexos not yet measured
+    case BoardType::callisto: // Not yet measured
+    case BoardType::callisto_3: // Not yet measured
+    case BoardType::nexos: // Not yet measured
         {
             // Anchor 1000, scale 0.60
             static float elo[Player::max_supported_level] =
