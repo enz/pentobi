@@ -25,6 +25,8 @@ class PlayerModel
                NOTIFY levelClassicChanged)
     Q_PROPERTY(unsigned levelClassic2 MEMBER m_levelClassic2
                NOTIFY levelClassic2Changed)
+    Q_PROPERTY(unsigned levelClassic3 MEMBER m_levelClassic3
+               NOTIFY levelClassic3Changed)
     Q_PROPERTY(unsigned levelDuo MEMBER m_levelDuo NOTIFY levelDuoChanged)
     Q_PROPERTY(unsigned levelTrigon MEMBER m_levelTrigon
                NOTIFY levelTrigonChanged)
@@ -58,6 +60,8 @@ signals:
 
     void levelClassic2Changed(unsigned);
 
+    void levelClassic3Changed(unsigned);
+
     void levelDuoChanged(unsigned);
 
     void levelTrigonChanged(unsigned);
@@ -89,6 +93,8 @@ private:
     unsigned m_levelClassic;
 
     unsigned m_levelClassic2;
+
+    unsigned m_levelClassic3;
 
     unsigned m_levelDuo;
 

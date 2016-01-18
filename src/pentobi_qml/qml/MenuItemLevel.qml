@@ -9,6 +9,7 @@ MenuItem {
     checked: {
         switch (gameModel.gameVariant) {
         case "classic_2": return playerModel.levelClassic2 === level
+        case "classic_3": return playerModel.levelClassic3 === level
         case "duo": return playerModel.levelDuo === level
         case "trigon": return playerModel.levelTrigon === level
         case "trigon_2": return playerModel.levelTrigon2 === level
@@ -20,6 +21,7 @@ MenuItem {
     onTriggered: {
         switch (gameModel.gameVariant) {
         case "classic_2": playerModel.levelClassic2 = level; break
+        case "classic_3": playerModel.levelClassic3 = level; break
         case "duo": playerModel.levelDuo = level; break
         case "trigon": playerModel.levelTrigon = level; break
         case "trigon_2": playerModel.levelTrigon2 = level; break
