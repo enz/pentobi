@@ -17,6 +17,9 @@ MenuItem {
         case "junior": return playerModel.levelJunior === level
         case "nexos": return playerModel.levelNexos === level
         case "nexos_2": return playerModel.levelNexos2 === level
+        case "callisto": return playerModel.levelCallisto === level
+        case "callisto_2": return playerModel.levelCallisto2 === level
+        case "callisto_3": return playerModel.levelCallisto3 === level
         default: return playerModel.levelClassic === level
         }
     }
@@ -31,6 +34,9 @@ MenuItem {
         case "junior": playerModel.levelJunior = level; break
         case "nexos": playerModel.levelNexos = level; break
         case "nexos_2": playerModel.levelNexos2 = level; break
+        case "callisto": playerModel.levelCallisto = level; break
+        case "callisto_2": playerModel.levelCallisto2 = level; break
+        case "callisto_3": playerModel.levelCallisto3 = level; break
         default: playerModel.levelClassic = level
         }
     }

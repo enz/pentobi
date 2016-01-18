@@ -40,6 +40,12 @@ class PlayerModel
                levelNexosChanged)
     Q_PROPERTY(unsigned levelNexos2 MEMBER m_levelNexos2 NOTIFY
                levelNexos2Changed)
+    Q_PROPERTY(unsigned levelCallisto MEMBER m_levelCallisto
+               NOTIFY levelCallistoChanged)
+    Q_PROPERTY(unsigned levelCallisto2 MEMBER m_levelCallisto2
+               NOTIFY levelCallisto2Changed)
+    Q_PROPERTY(unsigned levelCallisto3 MEMBER m_levelCallisto3
+               NOTIFY levelCallisto3Changed)
     Q_PROPERTY(bool isGenMoveRunning MEMBER m_isGenMoveRunning
                NOTIFY isGenMoveRunningChanged)
 
@@ -61,6 +67,12 @@ public:
     Q_INVOKABLE void cancelGenMove();
 
 signals:
+    void levelCallistoChanged(unsigned);
+
+    void levelCallisto2Changed(unsigned);
+
+    void levelCallisto3Changed(unsigned);
+
     void levelClassicChanged(unsigned);
 
     void levelClassic2Changed(unsigned);
@@ -98,6 +110,12 @@ private:
     };
 
     bool m_isGenMoveRunning = false;
+
+    unsigned m_levelCallisto;
+
+    unsigned m_levelCallisto2;
+
+    unsigned m_levelCallisto3;
 
     unsigned m_levelClassic;
 

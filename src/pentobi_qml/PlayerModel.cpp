@@ -56,6 +56,9 @@ PlayerModel::PlayerModel(QObject* parent)
     getLevel(settings, "level_junior", m_levelJunior);
     getLevel(settings, "level_nexos", m_levelNexos);
     getLevel(settings, "level_nexos_2", m_levelNexos2);
+    getLevel(settings, "level_callisto", m_levelCallisto);
+    getLevel(settings, "level_callisto_2", m_levelCallisto2);
+    getLevel(settings, "level_callisto_3", m_levelCallisto3);
     connect(&m_genMoveWatcher, SIGNAL(finished()), SLOT(genMoveFinished()));
 }
 
@@ -73,6 +76,9 @@ PlayerModel::~PlayerModel()
     settings.setValue("level_junior", m_levelJunior);
     settings.setValue("level_nexos", m_levelNexos);
     settings.setValue("level_nexos_2", m_levelNexos2);
+    settings.setValue("level_callisto", m_levelCallisto);
+    settings.setValue("level_callisto_2", m_levelCallisto2);
+    settings.setValue("level_callisto_3", m_levelCallisto3);
 }
 
 PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm,
@@ -179,6 +185,15 @@ void PlayerModel::startGenMove(GameModel* gm)
         break;
     case Variant::nexos_2:
         level = m_levelNexos2;
+        break;
+    case Variant::callisto:
+        level = m_levelCallisto;
+        break;
+    case Variant::callisto_2:
+        level = m_levelCallisto2;
+        break;
+    case Variant::callisto_3:
+        level = m_levelCallisto3;
         break;
     default:
         level = m_levelClassic;
