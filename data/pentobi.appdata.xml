@@ -47,22 +47,28 @@
       <caption xml:lang="de">Spielvariante Klassisch</caption>
     </screenshot>
     <screenshot>
-    <image width="1248" height="702">
+      <image width="1248" height="702">
       http://pentobi.sourceforge.net/pentobi-duo.png</image>
       <caption>Game variant Duo</caption>
       <caption xml:lang="de">Spielvariante Duo</caption>
     </screenshot>
     <screenshot>
-    <image width="1248" height="702">
+      <image width="1248" height="702">
       http://pentobi.sourceforge.net/pentobi-trigon.png</image>
       <caption>Game variant Trigon</caption>
       <caption xml:lang="de">Spielvariante Trigon</caption>
     </screenshot>
     <screenshot>
-    <image width="1248" height="702">
+      <image width="1248" height="702">
       http://pentobi.sourceforge.net/pentobi-nexos.png</image>
       <caption>Game variant Nexos</caption>
       <caption xml:lang="de">Spielvariante Nexos</caption>
+    </screenshot>
+    <screenshot>
+      <image width="1248" height="702">
+      http://pentobi.sourceforge.net/pentobi-callisto.png</image>
+      <caption>Game variant Callisto</caption>
+      <caption xml:lang="de">Spielvariante Callisto</caption>
     </screenshot>
   </screenshots>
 
