@@ -98,8 +98,8 @@ Item
     }
     Rectangle {
         opacity: isMarked ? 0.5 : 0
-        color: colorName == "blue" || colorName == "red" ?
-                   "white" : "#333333"
+        color: colorName == "blue" || colorName == "red"
+               || pieceModel.elements.length === 1 ? "white" : "#333333"
         width: 0.3 * gridElementHeight
         height: width
         radius: width / 2
