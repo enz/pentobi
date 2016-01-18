@@ -48,6 +48,7 @@ PlayerModel::PlayerModel(QObject* parent)
     QSettings settings;
     getLevel(settings, "level_classic", m_levelClassic);
     getLevel(settings, "level_classic_2", m_levelClassic2);
+    getLevel(settings, "level_classic_3", m_levelClassic3);
     getLevel(settings, "level_duo", m_levelDuo);
     getLevel(settings, "level_trigon", m_levelTrigon);
     getLevel(settings, "level_trigon_2", m_levelTrigon2);
@@ -64,6 +65,7 @@ PlayerModel::~PlayerModel()
     QSettings settings;
     settings.setValue("level_classic", m_levelClassic);
     settings.setValue("level_classic_2", m_levelClassic2);
+    settings.setValue("level_classic_3", m_levelClassic3);
     settings.setValue("level_duo", m_levelDuo);
     settings.setValue("level_trigon", m_levelTrigon);
     settings.setValue("level_trigon_2", m_levelTrigon2);
@@ -156,6 +158,9 @@ void PlayerModel::startGenMove(GameModel* gm)
     {
     case Variant::classic_2:
         level = m_levelClassic2;
+        break;
+    case Variant::classic_3:
+        level = m_levelClassic3;
         break;
     case Variant::duo:
         level = m_levelDuo;

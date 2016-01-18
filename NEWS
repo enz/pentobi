@@ -3,11 +3,11 @@ Version 11.UNKNOWN (master)
 
 General:
 
+* New game variant Callisto.
 * Increased playing strength in Nexos.
 
 Desktop version:
 
-* New game variant Callisto.
 * The compilation now requires at least Qt 5.2.
 
 Android version
@@ -18,7 +18,10 @@ Android version
 Version 11.0.UNKNOWN (v11-fixes)
 ================================
 
-*
+Bug fixes Android version:
+
+* Level set for game variant Classic3 was ignored, instead the level set
+  for Classic was used.
 
 
 Version 11.0 (29 Dec 2015)
