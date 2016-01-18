@@ -30,9 +30,7 @@ public:
 };
 
 template<class P>
-PointTransform<P>::~PointTransform()
-{
-}
+PointTransform<P>::~PointTransform() = default;
 
 //-----------------------------------------------------------------------------
 
@@ -53,6 +51,29 @@ P PointTransfIdent<P>::get_transformed(const Point& p,
 {
     LIBBOARDGAME_UNUSED(geo);
     return p;
+}
+
+//-----------------------------------------------------------------------------
+
+/** Rotate point by 90 degrees. */
+template<class P>
+class PointTransfRot90
+    : public PointTransform<P>
+{
+public:
+    typedef P Point;
+
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
+};
+
+template<class P>
+P PointTransfRot90<P>::get_transformed(const Point& p,
+                                       const Geometry<P>& geo) const
+{
+    unsigned x = geo.get_width() - geo.get_y(p) - 1;
+    unsigned y = geo.get_x(p);
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -80,8 +101,31 @@ P PointTransfRot180<P>::get_transformed(const Point& p,
 
 //-----------------------------------------------------------------------------
 
-/** Rotate point by 270 degrees and reflect on y axis.
-    This is equivalent to a reflection on the y=x line. */
+/** Rotate point by 270 degrees. */
+template<class P>
+class PointTransfRot270
+    : public PointTransform<P>
+{
+public:
+    typedef P Point;
+
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
+};
+
+template<class P>
+P PointTransfRot270<P>::get_transformed(const Point& p,
+                                        const Geometry<P>& geo) const
+{
+    unsigned x = geo.get_y(p);
+    unsigned y = geo.get_height() - geo.get_x(p) - 1;
+    return geo.get_point(x, y);
+}
+
+//-----------------------------------------------------------------------------
+
+/** Rotate point by 270 degrees and reflect on y axis shifted to the center.
+    This is equivalent to a reflection on the x=y line. */
 template<class P>
 class PointTransfRot270Refl
     : public PointTransform<P>
@@ -98,6 +142,30 @@ P PointTransfRot270Refl<P>::get_transformed(const Point& p,
                                             const Geometry<P>& geo) const
 {
     return geo.get_point(geo.get_y(p), geo.get_x(p));
+}
+
+//-----------------------------------------------------------------------------
+
+/** Rotate point by 90 degrees and reflect on y axis shifted to the center.
+    This is equivalent to a reflection on the x=width-y line. */
+template<class P>
+class PointTransfRot90Refl
+    : public PointTransform<P>
+{
+public:
+    typedef P Point;
+
+    Point get_transformed(const Point& p,
+                          const Geometry<P>& geo) const override;
+};
+
+template<class P>
+P PointTransfRot90Refl<P>::get_transformed(const Point& p,
+                                           const Geometry<P>& geo) const
+{
+    unsigned x = geo.get_width() - geo.get_y(p) - 1;
+    unsigned y = geo.get_height() - geo.get_x(p) - 1;
+    return geo.get_point(x, y);
 }
 
 //-----------------------------------------------------------------------------

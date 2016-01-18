@@ -22,7 +22,10 @@ namespace libpentobi_base {
 using libboardgame_base::PointTransfIdent;
 using libboardgame_base::PointTransfRefl;
 using libboardgame_base::PointTransfReflRot180;
+using libboardgame_base::PointTransfRot90;
 using libboardgame_base::PointTransfRot180;
+using libboardgame_base::PointTransfRot270;
+using libboardgame_base::PointTransfRot90Refl;
 using libboardgame_base::PointTransfRot270Refl;
 using libboardgame_base::PointTransfTrigonReflRot60;
 using libboardgame_base::PointTransfTrigonReflRot120;
@@ -213,7 +216,6 @@ void get_transforms(Variant variant,
     switch (get_board_type(variant))
     {
     case BoardType::duo:
-    case BoardType::callisto_2:
         transforms.emplace_back(new PointTransfRot270Refl<Point>);
         inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
         break;
@@ -241,11 +243,27 @@ void get_transforms(Variant variant,
         transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
         inv_transforms.emplace_back(new PointTransfTrigonReflRot300<Point>);
         break;
+    case BoardType::callisto_2:
+    case BoardType::callisto:
+    case BoardType::callisto_3:
+        transforms.emplace_back(new PointTransfRot90<Point>);
+        inv_transforms.emplace_back(new PointTransfRot270<Point>);
+        transforms.emplace_back(new PointTransfRot180<Point>);
+        inv_transforms.emplace_back(new PointTransfRot180<Point>);
+        transforms.emplace_back(new PointTransfRot270<Point>);
+        inv_transforms.emplace_back(new PointTransfRot90<Point>);
+        transforms.emplace_back(new PointTransfRefl<Point>);
+        inv_transforms.emplace_back(new PointTransfRefl<Point>);
+        transforms.emplace_back(new PointTransfReflRot180<Point>);
+        inv_transforms.emplace_back(new PointTransfReflRot180<Point>);
+        transforms.emplace_back(new PointTransfRot90Refl<Point>);
+        inv_transforms.emplace_back(new PointTransfRot90Refl<Point>);
+        transforms.emplace_back(new PointTransfRot270Refl<Point>);
+        inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
+        break;
     case BoardType::classic:
     case BoardType::trigon_3:
     case BoardType::nexos:
-    case BoardType::callisto:
-    case BoardType::callisto_3:
         break;
     }
 }
