@@ -4,7 +4,12 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QApplication>
+#include <QCommandLineParser>
 #include <QMessageBox>
 #include <QTranslator>
 #include <QtQml>
@@ -33,20 +38,36 @@ int main(int argc, char *argv[])
     QTranslator translatorQt;
     translatorQt.load("replace_qtbase_" + locale, ":qml/i18n");
     app.installTranslator(&translatorQt);
+    QCommandLineParser parser;
+    QCommandLineOption optionVerbose("verbose");
+    parser.addOption(optionVerbose);
+    parser.process(app);
     try
     {
+#if LIBBOARDGAME_DISABLE_LOG
+        if (parser.isSet(optionVerbose))
+            throw runtime_error("This version of Pentobi was compiled"
+                                " without support for logging.");
+#else
+        if (! parser.isSet(optionVerbose))
+            libboardgame_util::disable_logging();
+#endif
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
         return app.exec();
     }
     catch (const bad_alloc&)
     {
-        // bad_alloc can happen because the player requires a larger
-        // amount of memory (e.g. it happened with Pentobi 10.0 on some
-        // Android devices).
+        // bad_alloc is an expected error because the player requires a larger
+        // amount of memory.
         auto title = QCoreApplication::translate("main", "Pentobi");
         auto text =
                 QCoreApplication::translate("main", "Not enough memory.");
         QMessageBox::critical(nullptr, title, text);
+        return 1;
+    }
+    catch (const exception& e)
+    {
+        cerr << "Error: " << e.what() << '\n';
         return 1;
     }
 }
