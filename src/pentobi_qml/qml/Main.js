@@ -269,18 +269,21 @@ function showComputerColorDialog() {
 function showGameOver() {
     if (! gameModel.isGameOver)
         return
-    var msg, points0, points1, points2, points3
+    var msg, points0, points1, points2, points3, score
     var breakTies = (gameModel.gameVariant.lastIndexOf("callisto") === 0)
     switch (gameModel.gameVariant) {
     case "duo":
     case "junior":
     case "callisto_2":
-        points0 = gameModel.points0
-        points1 = gameModel.points1
-        if (points0 > points1)
-            msg = qsTr("Blue wins.")
+        score = gameModel.points0 - gameModel.points1
+        if (score === 1)
+            msg = qsTr("Blue wins with 1 point.")
+        else if (score > 0)
+            msg = qsTr("Blue wins with %1 points.").arg(score)
+        else if (score === -1)
+            msg = qsTr("Green wins with 1 point.")
         else if (points0 < points1)
-            msg = qsTr("Green wins.")
+            msg = qsTr("Green wins with %1 points.").arg(-score)
         else if (breakTies)
             msg = qsTr("Green wins (tie resolved).")
         else
@@ -289,12 +292,16 @@ function showGameOver() {
     case "classic_2":
     case "trigon_2":
     case "nexos_2":
-        points0 = gameModel.points0 + gameModel.points2
-        points1 = gameModel.points1 + gameModel.points3
-        if (points0 > points1)
-            msg = qsTr("Blue/Red wins.")
+        score = gameModel.points0 + gameModel.points2
+                - gameModel.points1 - gameModel.points3
+        if (score === 1)
+            msg = qsTr("Blue/Red wins with 1 point.")
+        else if (score > 0)
+            msg = qsTr("Blue/Red wins with %1 points.").arg(score)
+        else if (score === -1)
+            msg = qsTr("Yellow/Green wins with 1 point.")
         else if (points0 < points1)
-            msg = qsTr("Yellow/Green wins.")
+            msg = qsTr("Yellow/Green wins with %1 points.").arg(-score)
         else if (breakTies)
             msg = qsTr("Yellow/Green wins (tie resolved).")
         else
@@ -302,6 +309,7 @@ function showGameOver() {
         break
     case "classic_3":
     case "trigon_3":
+    case "callisto_3":
         points0 = gameModel.points0
         points1 = gameModel.points1
         points2 = gameModel.points2
@@ -320,8 +328,16 @@ function showGameOver() {
             msg = qsTr("Red wins (tie resolved).")
         else if (points1 === maxPoints && breakTies)
             msg = qsTr("Yellow wins (tie resolved).")
+        else if (points0 === maxPoints && points1 === maxPoints
+                 && nuWinners == 2)
+            msg = qsTr("Game ends in a tie between Blue and Yellow.")
+        else if (points0 === maxPoints && points2 === maxPoints
+                 && nuWinners == 2)
+            msg = qsTr("Game ends in a tie between Blue and Red.")
+        else if (nuWinners == 2)
+            msg = qsTr("Game ends in a tie between Yellow and Red.")
         else
-            msg = qsTr("Game ends in a tie.")
+            msg = qsTr("Game ends in a tie between all players.")
         break
     default:
         points0 = gameModel.points0
@@ -348,8 +364,27 @@ function showGameOver() {
             msg = qsTr("Red wins (tie resolved).")
         else if (points1 === maxPoints && breakTies)
             msg = qsTr("Yellow wins (tie resolved).")
+        else if (points0 === maxPoints && points1 === maxPoints
+                 && points2 === maxPoints && nuWinners == 3)
+            msg = qsTr("Game ends in a tie between Blue, Yellow and Red.")
+        else if (points0 === maxPoints && points1 === maxPoints
+                 && points3 === maxPoints && nuWinners == 3)
+            msg = qsTr("Game ends in a tie between Blue, Yellow and Green.")
+        else if (points0 === maxPoints && points2 === maxPoints
+                 && points3 === maxPoints && nuWinners == 3)
+            msg = qsTr("Game ends in a tie between Blue, Red and Green.")
+        else if (nuWinners == 3)
+            msg = qsTr("Game ends in a tie between Yellow, Red and Green.")
+        else if (points0 === maxPoints && points1 === maxPoints
+                 && nuWinners == 2)
+            msg = qsTr("Game ends in a tie between Blue and Yellow.")
+        else if (points0 === maxPoints && points2 === maxPoints
+                 && nuWinners == 2)
+            msg = qsTr("Game ends in a tie between Blue and Red.")
+        else if (nuWinners == 2)
+            msg = qsTr("Game ends in a tie between Yellow and Red.")
         else
-            msg = qsTr("Game ends in a tie.")
+            msg = qsTr("Game ends in a tie between all players.")
     }
     showInfo(msg)
 }
