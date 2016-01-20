@@ -766,7 +766,6 @@ void State::update_moves(Color c)
     // Find old moves that are still legal
     auto& is_forbidden = m_bd.is_forbidden(c);
     auto& moves = m_moves[c];
-    auto old_size = moves.size();
     unsigned nu_moves = 0;
     float total_gamma = 0;
     Piece piece;
@@ -774,10 +773,8 @@ void State::update_moves(Color c)
             ! m_bd.is_piece_left(
                 c, (piece =
                     get_move_info<MAX_SIZE>(m_last_move[c]).get_piece())))
-        for (unsigned i = 0; i < old_size; ++i)
+        for (Move mv : moves)
         {
-            LIBBOARDGAME_ASSERT(i >= nu_moves);
-            Move mv = moves[i];
             auto& info = get_move_info<MAX_SIZE>(mv);
             if (info.get_piece() == piece
                     || ! check_move<MAX_SIZE>(mv, info, moves, nu_moves,
@@ -785,21 +782,14 @@ void State::update_moves(Color c)
                 marker.clear(mv);
         }
     else
-    {
-        PieceMap<bool> is_piece_left(false);
-        for (Piece piece : m_bd.get_pieces_left(c))
-            is_piece_left[piece] = true;
-        for (unsigned i = 0; i < old_size; ++i)
+        for (Move mv : moves)
         {
-            LIBBOARDGAME_ASSERT(i >= nu_moves);
-            Move mv = moves[i];
             auto& info = get_move_info<MAX_SIZE>(mv);
-            if (! is_piece_left[info.get_piece()]
+            if (! m_bd.is_piece_left(c, info.get_piece())
                     || ! check_move<MAX_SIZE>(mv, info, moves, nu_moves,
                                               playout_features, total_gamma))
                 marker.clear(mv);
         }
-    }
 
     // Find new legal moves because of new pieces played by this color
     auto& pieces = get_pieces_considered(c);
