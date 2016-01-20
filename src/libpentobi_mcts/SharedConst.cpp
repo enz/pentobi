@@ -127,6 +127,12 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
     case BoardType::callisto_2:
     case BoardType::callisto_3:
         is_piece_considered[bd.get_one_piece()] = false;
+        if (nu_moves < 3 * nu_colors)
+            filter_min_size(bc, 5, is_piece_considered);
+        else if (nu_moves < 8 * nu_colors)
+            filter_min_size(bc, 4, is_piece_considered);
+        else if (nu_moves < 12 * nu_colors)
+            filter_min_size(bc, 3, is_piece_considered);
         break;
     }
 }

@@ -680,10 +680,14 @@ void State::start_search()
         // Pretending that the symmetry is always broken is equivalent to
         // ignoring symmetric draws
         m_is_symmetry_broken = true;
-    if (variant == Variant::trigon_2)
+    if (variant == Variant::trigon_2 || variant == Variant::callisto_2)
         m_symmetry_min_nu_pieces = 5;
     else
-        m_symmetry_min_nu_pieces = 3; // Only used in Duo
+    {
+        LIBBOARDGAME_ASSERT(variant == Variant::duo
+                            || variant == Variant::junior);
+        m_symmetry_min_nu_pieces = 3;
+    }
 
     m_prior_knowledge.start_search(bd);
     m_stat_len.clear();
