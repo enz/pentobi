@@ -27,30 +27,36 @@ using libpentobi_base::BoardType;
 namespace {
 
 // Rationale for choosing the number of simulations:
-// * The number at level 1 is very small in Classic/Duo to avoid that
-//   level 1 is too strong for absolute beginners. (Searches with such a
-//   small number of simulations still produce reasonable moves because
-//   of the prior initialization of node values.) In Trigon, it starts
-//   with a higher number because the playing strength is weaker there.
-// * The number at the highest level is chosen such that the average
-//   time per game and player is 120s in Duo, 240s in Classic, 300s
-//   in Trigon, 330s in Nexos on an Intel i3-4130.
-// * The numbers for other levels are chosen such that they roughly
-//   correspond to equal Elo differences in self-play experiments.
-// * [Note that the numbers will be multiplied with a weight factor in
-//    Player::genmove() that depends on the move number]
+// * The number at level 1 is very small in Classic/Duo to avoid that level 1
+//   is too strong for absolute beginners. (Searches with such a small number
+//   of simulations still produce reasonable moves because of the prior
+//   initialization of node values.) In Trigon, it starts with a higher number
+//   because the playing strength is weaker there.
+// * The number at the highest level is chosen such that the average time per
+//   game and player is 120s in Duo/Callisto2, 240s in Classic, 300s in Trigon,
+//   330s in Nexos on an Intel i3-4130.
+// * The numbers most other levels are chosen such that they roughly correspond
+//   to equal Elo differences in self-play experiments.
+// * However, the counts for level 7 are based on time measurments again
+//   because it is the maximum level supported on Android and therefore should
+//   be as strong as possible without taking too much time on typical mobile
+//   hardware. Its target is to take 2% of the time of level 9. Level 8 is
+//   adjusted to be about in the middle between level 7 and 9 (on a log scale).
 
 static const float counts_classic[Player::max_supported_level] =
-    { 3, 24, 87, 213, 667, 1989, 13688, 130368, 1829033 };
+    { 3, 24, 87, 213, 667, 1989, 36000, 250000, 1829033 };
 
 static const float counts_duo[Player::max_supported_level] =
-    { 3, 17, 44, 123, 426, 1672, 8163, 67058, 6929504 };
+    { 3, 17, 44, 123, 426, 1672, 120000, 840000, 6929504 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 433, 727, 1501, 2912, 7395, 27182, 79074, 489723 };
+    { 228, 433, 727, 1501, 2912, 7395, 10000, 70000, 489723 };
 
 static const float counts_nexos[Player::max_supported_level] =
-    { 100, 470, 800, 1650, 3300, 8000, 31678, 94565, 579663 };
+    { 100, 470, 800, 1650, 3300, 6000, 11000, 77000, 579663 };
+
+static const float counts_callisto_2[Player::max_supported_level] =
+    { 3, 24, 87, 213, 800, 1989, 48000, 336000, 2409112 };
 
 } // namespace
 
@@ -148,7 +154,6 @@ Move Player::genmove(const Board& bd, Color c)
         switch (board_type)
         {
         case BoardType::classic:
-        case BoardType::callisto_2:
             max_count = counts_classic[level - 1];
             break;
         case BoardType::duo:
@@ -162,6 +167,9 @@ Move Player::genmove(const Board& bd, Color c)
             break;
         case BoardType::nexos:
             max_count = counts_nexos[level - 1];
+            break;
+        case BoardType::callisto_2:
+            max_count = counts_callisto_2[level - 1];
             break;
         }
         // Don't weight max_count in low levels, otherwise it is still too

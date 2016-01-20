@@ -5,6 +5,10 @@ General:
 
 * New game variant Callisto.
 * Increased playing strength in Nexos.
+* The thinking time of level 7 was increased in most game variants, reduced
+  in Trigon and Nexos, because it is the highest level supported on Android
+  and should be as strong as possible without taking too much time on typical
+  mobile hardware.
 
 Desktop version:
 
