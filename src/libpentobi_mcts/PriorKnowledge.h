@@ -237,22 +237,32 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         heuristic += attach_point_value[*j];
         while (++j != end)
             heuristic += attach_point_value[*j];
-        j = info_ext.begin_adj();
-        end = info_ext.end_adj();
-        if (! check_connect)
-            for ( ; j != end; ++j)
-                heuristic += adj_point_value[*j];
+        if (MAX_SIZE == 7) // Nexos
+        {
+            LIBBOARDGAME_ASSERT(info_ext.size_adj_points == 0);
+            LIBBOARDGAME_ASSERT(! check_connect);
+        }
         else
         {
-            features.connect = (bd.get_point_state(*j) == second_color);
-            for ( ; j != end; ++j)
+            j = info_ext.begin_adj();
+            end = info_ext.end_adj();
+            if (! check_connect)
             {
-                heuristic += adj_point_value[*j];
-                if (bd.get_point_state(*j) == second_color)
-                    features.connect = true;
+                for ( ; j != end; ++j)
+                    heuristic += adj_point_value[*j];
             }
-            if (features.connect)
-                m_has_connect_move = true;
+            else
+            {
+                features.connect = (bd.get_point_state(*j) == second_color);
+                for ( ; j != end; ++j)
+                {
+                    heuristic += adj_point_value[*j];
+                    if (bd.get_point_state(*j) == second_color)
+                        features.connect = true;
+                }
+                if (features.connect)
+                    m_has_connect_move = true;
+            }
         }
         if (heuristic > m_max_heuristic)
             m_max_heuristic = heuristic;

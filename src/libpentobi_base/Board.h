@@ -789,7 +789,12 @@ inline void Board::place(Color c, Move mv)
     if (--state_color.nu_left_piece[piece] == 0)
     {
         state_color.pieces_left.remove_fast(piece);
-        if (state_color.pieces_left.empty())
+        if (MAX_SIZE == 7)
+        {
+            LIBBOARDGAME_ASSERT(m_bonus_all_pieces == 0);
+            LIBBOARDGAME_ASSERT(m_bonus_one_piece == 0);
+        }
+        else if (state_color.pieces_left.empty())
         {
             state_color.points += m_bonus_all_pieces;
             if (score_points == 1)
@@ -809,11 +814,20 @@ inline void Board::place(Color c, Move mv)
         });
     }
     while (++i != end);
-    end = info_ext.end_adj();
-    for (i = info_ext.begin_adj(); i != end; ++i)
-        state_color.forbidden[*i] = true;
-    LIBBOARDGAME_ASSERT(i == info_ext.begin_attach());
-    end += info_ext.size_attach_points;
+    if (MAX_SIZE == 7) // Nexos
+    {
+        LIBBOARDGAME_ASSERT(info_ext.size_adj_points == 0);
+        i = info_ext.begin_attach();
+        end = i + info_ext.size_attach_points;
+    }
+    else
+    {
+        end = info_ext.end_adj();
+        for (i = info_ext.begin_adj(); i != end; ++i)
+            state_color.forbidden[*i] = true;
+        LIBBOARDGAME_ASSERT(i == info_ext.begin_attach());
+        end += info_ext.size_attach_points;
+    }
     auto& attach_points = m_attach_points[c];
     auto n = attach_points.size();
     do

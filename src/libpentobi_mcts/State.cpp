@@ -540,7 +540,7 @@ template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void State::init_moves_with_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_is_piece_considered(c);
-    m_playout_features[c].set_local<MAX_ADJ_ATTACH>(m_bd);
+    m_playout_features[c].set_local<MAX_SIZE, MAX_ADJ_ATTACH>(m_bd);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
@@ -759,7 +759,7 @@ template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 void State::update_moves(Color c)
 {
     auto& playout_features = m_playout_features[c];
-    playout_features.set_local<MAX_ADJ_ATTACH>(m_bd);
+    playout_features.set_local<MAX_SIZE, MAX_ADJ_ATTACH>(m_bd);
 
     auto& marker = m_marker[c];
 
