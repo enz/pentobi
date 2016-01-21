@@ -787,15 +787,12 @@ inline void Board::place(Color c, Move mv)
     if (--state_color.nu_left_piece[piece] == 0)
     {
         state_color.pieces_left.remove_fast(piece);
-        if (MAX_SIZE == 7)
-        {
-            LIBBOARDGAME_ASSERT(m_bonus_all_pieces == 0);
-            LIBBOARDGAME_ASSERT(m_bonus_one_piece == 0);
-        }
-        else if (state_color.pieces_left.empty())
+        if (state_color.pieces_left.empty())
         {
             state_color.points += m_bonus_all_pieces;
-            if (score_points == 1)
+            if (MAX_SIZE == 7) // Nexos
+                LIBBOARDGAME_ASSERT(m_bonus_one_piece == 0);
+            else if (score_points == 1)
                 state_color.points += m_bonus_one_piece;
         }
     }

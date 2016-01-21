@@ -683,7 +683,7 @@ void State::start_search()
         m_symmetry_min_nu_pieces = 5;
     else
     {
-        LIBBOARDGAME_ASSERT(variant == Variant::duo
+        LIBBOARDGAME_ASSERT(! m_check_symmetric_draw || variant == Variant::duo
                             || variant == Variant::junior);
         m_symmetry_min_nu_pieces = 3;
     }
