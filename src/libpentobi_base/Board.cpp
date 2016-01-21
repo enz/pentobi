@@ -315,7 +315,8 @@ void Board::init_variant(Variant variant)
     m_bc = &BoardConst::get(variant);
     m_piece_set = m_bc->get_piece_set();
     m_is_callisto = (m_piece_set == PieceSet::callisto);
-    if (m_piece_set == PieceSet::classic && variant != Variant::junior)
+    if ((m_piece_set == PieceSet::classic && variant != Variant::junior)
+            || m_piece_set == PieceSet::trigon)
     {
         m_bonus_all_pieces = 15;
         m_bonus_one_piece = 5;
