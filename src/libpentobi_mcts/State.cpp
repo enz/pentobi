@@ -495,8 +495,7 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
     m_stat_len.add(l);
     Float var = m_stat_len.get_variance();
     if (var > 0)
-        bonus +=
-                (result == 1 ? -0.06f : 0.06f)
+        bonus += -0.12f * (result - 0.5f)
                 * sigmoid(2.f, (l - m_stat_len.get_mean()) / sqrt(var));
 
     // Game score
