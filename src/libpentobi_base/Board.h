@@ -159,8 +159,6 @@ public:
         @pre get_nu_moves() < max_game_moves */
     void play(ColorMove mv);
 
-    void undo();
-
     void set_to_play(Color c);
 
     void write(ostream& out, bool mark_last_move = true) const;

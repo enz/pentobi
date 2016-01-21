@@ -478,16 +478,6 @@ void Board::take_snapshot()
     }
 }
 
-void Board::undo()
-{
-    LIBBOARDGAME_ASSERT(get_nu_moves() > 0);
-    ArrayList<ColorMove, max_game_moves> moves = m_moves;
-    moves.pop_back();
-    init();
-    for (auto& mv : moves)
-        play(mv);
-}
-
 void Board::write(ostream& out, bool mark_last_move) const
 {
     // Sort lists of left pieces by name
