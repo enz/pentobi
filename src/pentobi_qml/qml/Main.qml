@@ -20,20 +20,41 @@ ApplicationWindow {
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
+    property int defaultWidth:
+        isAndroid ? Screen.desktopAvailableWidth :
+                    Math.min(Screen.desktopAvailableWidth,
+                             Math.round(Screen.pixelDensity / 3.5 * 600))
+    property int defaultHeight:
+        isAndroid ? Screen.desktopAvailableWidth :
+                    Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
 
     minimumWidth: 240; minimumHeight: 252
-    width: Screen.desktopAvailableWidth; height: Screen.desktopAvailableHeight
+    width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
+    height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
     visible: true
     color: theme.backgroundColor
     title: qsTr("Pentobi")
     onClosing: Qt.quit()
-    Component.onCompleted: Logic.init()
-    Component.onDestruction: Logic.quit()
     // Currently, we don't use the QtQuick ToolBar/MenuBar on Android. The file
     // dialog is unusable with dark themes (QTBUG-48324) and a white toolbar is
     // too distracting with the dark background we use on Android.
     menuBar: menuBarLoader.item
     toolBar: toolBarLoader.item
+    Component.onCompleted: {
+        // Settings might contain unusable geometry
+        if (x < 0 || x + width > Screen.desktopAvailableWidth
+                || y < 0 || y + height > Screen.desktopAvailableHeight) {
+            if (width > Screen.desktopAvailableWidth
+                    || height > Screen.desktopAvailableHeight) {
+                width = defaultWidth
+                height = defaultHeight
+            }
+            x = (Screen.desktopAvailableWidth - width) / 2
+            y = (Screen.desktopAvailableHeight - height) / 2
+        }
+        Logic.init()
+    }
+    Component.onDestruction: Logic.quit()
 
     ColumnLayout {
         anchors.fill: parent
@@ -113,6 +134,10 @@ ApplicationWindow {
     Settings {
         id: settings
 
+        property alias x: root.x
+        property alias y: root.y
+        property alias width: root.width
+        property alias height: root.height
         property alias folder: root.folder
         property alias markLastMove: gameDisplay.markLastMove
         property alias computerPlays0: root.computerPlays0
