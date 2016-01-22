@@ -40,6 +40,7 @@ using libboardgame_util::to_string;
 using libboardgame_util::ArrayList;
 using libboardgame_util::Barrier;
 using libboardgame_util::IntervalChecker;
+using libboardgame_util::RandomGenerator;
 using libboardgame_util::StatisticsBase;
 using libboardgame_util::StatisticsDirtyLockFree;
 using libboardgame_util::StatisticsExt;
@@ -300,15 +301,6 @@ public:
 
     Float get_rave_weight() const;
 
-    /** Set deterministic mode.
-        Note that using a fixed number of simulations instead of a time limit
-        is not enough to make the search fully deterministic because the
-        interval in which expensive abort conditions are checked (e.g. if the
-        best move cannot change anymore) is adjusted dynamically depending on
-        the number of simulations per second. In deterministic mode, a
-        fixed interval is used. */
-    void set_deterministic();
-
     /** @} */ // @name
 
 
@@ -521,7 +513,7 @@ private:
 
     Float m_expand_threshold_inc = 0;
 
-    bool m_deterministic = false;
+    bool m_deterministic;
 
     bool m_reuse_subtree = true;
 
@@ -1185,6 +1177,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
 {
     if (m_nu_threads != m_threads.size())
         create_threads();
+    m_deterministic = RandomGenerator::has_global_seed();
     bool is_followup = check_followup(m_followup_sequence);
     on_start_search(is_followup);
     if (max_count > 0)
@@ -1458,12 +1451,6 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::set_callback(function<void(double, double)> callback)
 {
     m_callback = callback;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_deterministic()
-{
-    m_deterministic = true;
 }
 
 template<class S, class M, class R>

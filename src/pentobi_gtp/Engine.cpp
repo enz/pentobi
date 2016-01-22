@@ -187,18 +187,6 @@ Search& Engine::get_search()
     return get_mcts_player().get_search();
 }
 
-void Engine::set_deterministic()
-{
-    try
-    {
-        get_search().set_deterministic();
-    }
-    catch (const Failure&)
-    {
-        // Ignore if player is not MCTS player
-    }
-}
-
 void Engine::use_cpu_time(bool enable)
 {
     get_mcts_player().use_cpu_time(enable);

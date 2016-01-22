@@ -2896,11 +2896,6 @@ void MainWindow::setCommentText(const QString& text)
     m_comment->clearFocus();
 }
 
-void MainWindow::setDeterministic()
-{
-    m_player->get_search().set_deterministic();
-}
-
 void MainWindow::setNoDelay()
 {
     m_noDelay = true;

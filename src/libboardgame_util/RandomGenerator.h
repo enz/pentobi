@@ -30,6 +30,25 @@ public:
 
     typedef Generator::result_type ResultType;
 
+
+    /** Set seed for all currently existing and future generators.
+        If this function is never called, a non-deterministic seed is used. */
+    static void set_global_seed(ResultType seed);
+
+    /** Set seed to last seed for all currently existing and future
+        generators.
+        Sets the seed to the last seed that was set with set_seed(). If no seed
+        was explicitely defined with set_seed(), then this function does
+        nothing. */
+    static void set_global_seed_last();
+
+    /** Check if a global seed was set.
+        User code might want to take more measures if a global seed was set to
+        become fully deterministic (e.g. avoid decisions based on time
+        measurements). */
+    static bool has_global_seed();
+
+
     /** Constructor.
         Constructs the random generator with the global seed, if one was
         defined, otherwise with a non-deterministic seed. */
@@ -46,17 +65,6 @@ public:
 
     /** Generate a double in [a..b]. */
     double generate_double(double a, double b);
-
-    /** Set seed for all currently existing and future generators.
-        If this function is never called, a non-deterministic seed is used. */
-    static void set_global_seed(ResultType seed);
-
-    /** Set seed to last seed for all currently existing and future
-        generators.
-        Sets the seed to the last seed that was set with set_seed(). If no seed
-        was explicitely defined with set_seed(), then this function does
-        nothing. */
-    static void set_global_seed_last();
 
 private:
     Generator m_generator;

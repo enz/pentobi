@@ -188,8 +188,6 @@ int main(int argc, char* argv[])
         {
             MainWindow mainWindow(variant, initialFile, helpDir, maxLevel,
                                   booksDir, noBook, threads);
-            if (parser.isSet(optionSeed))
-                mainWindow.setDeterministic();
             if (parser.isSet(optionNoDelay))
                 mainWindow.setNoDelay();
             mainWindow.show();

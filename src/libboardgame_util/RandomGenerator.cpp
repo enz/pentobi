@@ -49,6 +49,11 @@ RandomGenerator::~RandomGenerator()
     get_all_generators().remove(this);
 }
 
+bool RandomGenerator::has_global_seed()
+{
+    return is_seed_set;
+}
+
 void RandomGenerator::set_global_seed(ResultType seed)
 {
     is_seed_set = true;

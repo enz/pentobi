@@ -41,9 +41,6 @@ public:
 
     Player& get_mcts_player();
 
-    /** @see Search::set_deterministic() */
-    void set_deterministic();
-
     /** @see Player::use_cpu_time() */
     void use_cpu_time(bool enable);
 

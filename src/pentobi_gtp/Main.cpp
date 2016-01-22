@@ -126,8 +126,6 @@ int main(int argc, char** argv)
         engine.set_resign(! opt.contains("noresign"));
         if (opt.contains("showboard"))
             engine.set_show_board(true);
-        if (opt.contains("seed"))
-            engine.set_deterministic();
         if (opt.contains("cputime"))
             engine.use_cpu_time(true);
         string book_file = opt.get("book", "");

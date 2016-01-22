@@ -188,8 +188,6 @@ public slots:
 
     void showRating();
 
-    void setDeterministic();
-
     void setNoDelay();
 
 protected:

@@ -17,6 +17,8 @@
 #include "PlayerModel.h"
 #include "libboardgame_util/Log.h"
 
+using libboardgame_util::RandomGenerator;
+
 //-----------------------------------------------------------------------------
 
 int main(int argc, char *argv[])
@@ -39,11 +41,21 @@ int main(int argc, char *argv[])
     translatorQt.load("replace_qtbase_" + locale, ":qml/i18n");
     app.installTranslator(&translatorQt);
     QCommandLineParser parser;
+    QCommandLineOption optionSeed("seed", "Set random seed to <n>.", "n");
+    parser.addOption(optionSeed);
     QCommandLineOption optionVerbose("verbose");
     parser.addOption(optionVerbose);
     parser.process(app);
     try
     {
+        bool ok;
+        if (parser.isSet(optionSeed))
+        {
+            auto seed = parser.value(optionSeed).toUInt(&ok);
+            if (! ok)
+                throw runtime_error("--seed must be a positive number");
+            RandomGenerator::set_global_seed(seed);
+        }
 #if LIBBOARDGAME_DISABLE_LOG
         if (parser.isSet(optionVerbose))
             throw runtime_error("This version of Pentobi was compiled"
