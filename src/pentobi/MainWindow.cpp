@@ -388,13 +388,13 @@ void MainWindow::analyzeGame()
     switch (speed)
     {
     case 0:
-        nuSimulations = 5000;
+        nuSimulations = 6000;
         break;
     case 1:
-        nuSimulations = 20000;
+        nuSimulations = 24000;
         break;
     default:
-        nuSimulations = 80000;
+        nuSimulations = 96000;
     }
     m_analyzeGameWindow->analyzeGameWidget->start(
                 m_game, m_player->get_search(), nuSimulations);
