@@ -56,7 +56,7 @@ static const float counts_nexos[Player::max_supported_level] =
     { 100, 470, 800, 1650, 3300, 6000, 11000, 77000, 579663 };
 
 static const float counts_callisto_2[Player::max_supported_level] =
-    { 3, 24, 87, 213, 800, 1989, 48000, 336000, 2409112 };
+    { 100, 470, 800, 1650, 3300, 6000, 48000, 336000, 2409112 };
 
 } // namespace
 
