@@ -700,12 +700,11 @@ QAction* MainWindow::createAction(const QString& text)
     return action;
 }
 
-QAction* MainWindow::createActionLevel(QActionGroup* group, unsigned level,
-                                       const QString& text)
+QAction* MainWindow::createActionLevel(unsigned level, const QString& text)
 {
     auto action = createAction(text);
     action->setCheckable(true);
-    action->setActionGroup(group);
+    action->setActionGroup(m_actionGroupLevel);
     action->setData(level);
     connect(action, SIGNAL(triggered(bool)), SLOT(levelTriggered(bool)));
     return action;
@@ -713,8 +712,8 @@ QAction* MainWindow::createActionLevel(QActionGroup* group, unsigned level,
 
 void MainWindow::createActions()
 {
-    auto groupVariant = new QActionGroup(this);
-    auto groupLevel = new QActionGroup(this);
+    m_actionGroupVariant = new QActionGroup(this);
+    m_actionGroupLevel = new QActionGroup(this);
     auto groupMoveMarking = new QActionGroup(this);
     auto groupMoveAnnotation = new QActionGroup(this);
     auto groupToolBarText = new QActionGroup(this);
@@ -886,10 +885,8 @@ void MainWindow::createActions()
     QString levelText[Player::max_supported_level] =
         { tr("&1"), tr("&2"), tr("&3"), tr("&4"), tr("&5"), tr("&6"),
           tr("&7"), tr("&8"), tr("&9") };
-    m_actionLevel.reserve(m_maxLevel);
     for (unsigned i = 0; i < m_maxLevel; ++i)
-        m_actionLevel.push_back(createActionLevel(groupLevel, i + 1,
-                                                  levelText[i]));
+        createActionLevel(i + 1, levelText[i]);
     connect(m_actionFlipVertically, SIGNAL(triggered()),
             SLOT(flipVertically()));
 
@@ -1117,42 +1114,35 @@ void MainWindow::createActions()
     connect(m_actionUndo, SIGNAL(triggered()), SLOT(undo()));
 
     m_actionVariantCallisto2 =
-            createActionVariant(groupVariant, Variant::callisto_2,
+            createActionVariant(Variant::callisto_2,
                                 tr("Callisto (&2 Players)"));
     m_actionVariantCallisto3 =
-            createActionVariant(groupVariant, Variant::callisto_3,
+            createActionVariant(Variant::callisto_3,
                                 tr("Callisto (&3 Players)"));
     m_actionVariantCallisto =
-            createActionVariant(groupVariant, Variant::callisto,
+            createActionVariant(Variant::callisto,
                                 tr("Callisto (&4 Players)"));
     m_actionVariantClassic2 =
-            createActionVariant(groupVariant, Variant::classic_2,
+            createActionVariant(Variant::classic_2,
                                 tr("Classic (&2 Players)"));
     m_actionVariantClassic3 =
-            createActionVariant(groupVariant, Variant::classic_3,
+            createActionVariant(Variant::classic_3,
                                 tr("Classic (&3 Players)"));
     m_actionVariantClassic =
-            createActionVariant(groupVariant, Variant::classic,
-                                tr("Classic (&4 Players)"));
-    m_actionVariantDuo =
-            createActionVariant(groupVariant, Variant::duo, tr("&Duo"));
+            createActionVariant(Variant::classic, tr("Classic (&4 Players)"));
+    m_actionVariantDuo = createActionVariant(Variant::duo, tr("&Duo"));
     m_actionVariantJunior =
-            createActionVariant(groupVariant, Variant::junior, tr("&Junior"));
+            createActionVariant(Variant::junior, tr("&Junior"));
     m_actionVariantTrigon2 =
-            createActionVariant(groupVariant, Variant::trigon_2,
-                                tr("Trigon (&2 Players)"));
+            createActionVariant(Variant::trigon_2, tr("Trigon (&2 Players)"));
     m_actionVariantTrigon3 =
-            createActionVariant(groupVariant, Variant::trigon_3,
-                                tr("Trigon (&3 Players)"));
+            createActionVariant(Variant::trigon_3, tr("Trigon (&3 Players)"));
     m_actionVariantTrigon =
-            createActionVariant(groupVariant, Variant::trigon,
-                                tr("Trigon (&4 Players)"));
+            createActionVariant(Variant::trigon, tr("Trigon (&4 Players)"));
     m_actionVariantNexos2 =
-            createActionVariant(groupVariant, Variant::nexos_2,
-                                tr("Nexos (&2 Players)"));
+            createActionVariant(Variant::nexos_2, tr("Nexos (&2 Players)"));
     m_actionVariantNexos =
-            createActionVariant(groupVariant, Variant::nexos,
-                                tr("Nexos (&4 Players)"));
+            createActionVariant(Variant::nexos, tr("Nexos (&4 Players)"));
 
     m_actionVeryBadMove = createAction(tr("V&ery Bad"));
     m_actionVeryBadMove->setActionGroup(groupMoveAnnotation);
@@ -1167,12 +1157,11 @@ void MainWindow::createActions()
             SLOT(veryGoodMove(bool)));
 }
 
-QAction* MainWindow::createActionVariant(QActionGroup* group, Variant variant,
-                                         const QString& text)
+QAction* MainWindow::createActionVariant(Variant variant, const QString& text)
 {
     auto action = createAction(text);
     action->setCheckable(true);
-    action->setActionGroup(group);
+    action->setActionGroup(m_actionGroupVariant);
     action->setData(static_cast<int>(variant));
     connect(action, SIGNAL(triggered(bool)), SLOT(variantTriggered(bool)));
     return action;
@@ -1325,8 +1314,7 @@ void MainWindow::createMenu()
     menuComputer->addAction(m_actionInterrupt);
     menuComputer->addSeparator();
     m_menuLevel = menuComputer->addMenu(QString());
-    for (auto& action : m_actionLevel)
-        m_menuLevel->addAction(action);
+    m_menuLevel->addActions(m_actionGroupLevel->actions());
 
     auto menuTools = menuBar()->addMenu(tr("&Tools"));
     menuTools->addAction(m_actionRating);
@@ -2117,48 +2105,12 @@ void MainWindow::initGame()
 
 void MainWindow::initVariantActions()
 {
-    switch (m_bd.get_variant())
-    {
-    case Variant::classic:
-        m_actionVariantClassic->setChecked(true);
-        break;
-    case Variant::classic_2:
-        m_actionVariantClassic2->setChecked(true);
-        break;
-    case Variant::classic_3:
-        m_actionVariantClassic3->setChecked(true);
-        break;
-    case Variant::duo:
-        m_actionVariantDuo->setChecked(true);
-        break;
-    case Variant::junior:
-        m_actionVariantJunior->setChecked(true);
-        break;
-    case Variant::trigon:
-        m_actionVariantTrigon->setChecked(true);
-        break;
-    case Variant::trigon_2:
-        m_actionVariantTrigon2->setChecked(true);
-        break;
-    case Variant::trigon_3:
-        m_actionVariantTrigon3->setChecked(true);
-        break;
-    case Variant::nexos:
-        m_actionVariantNexos->setChecked(true);
-        break;
-    case Variant::nexos_2:
-        m_actionVariantNexos2->setChecked(true);
-        break;
-    case Variant::callisto:
-        m_actionVariantCallisto->setChecked(true);
-        break;
-    case Variant::callisto_2:
-        m_actionVariantCallisto2->setChecked(true);
-        break;
-    case Variant::callisto_3:
-        m_actionVariantCallisto3->setChecked(true);
-        break;
-    }
+    for (auto action : m_actionGroupVariant->actions())
+        if (Variant(action->data().toInt()) == m_bd.get_variant())
+        {
+            action->setChecked(true);
+            return;
+        }
 }
 
 void MainWindow::initPieceSelectors()
@@ -2696,7 +2648,7 @@ void MainWindow::restoreLevel(Variant variant)
         m_level = 1;
     if (m_level > m_maxLevel)
         m_level = m_maxLevel;
-    m_actionLevel[m_level - 1]->setChecked(true);
+    m_actionGroupLevel->actions().at(m_level - 1)->setChecked(true);
 }
 
 void MainWindow::rotateAnticlockwise()
@@ -2936,7 +2888,7 @@ void MainWindow::setLevel(unsigned level)
     if (level < 1 || level > m_maxLevel)
         return;
     m_level = level;
-    m_actionLevel[level - 1]->setChecked(true);
+    m_actionGroupLevel->actions().at(level - 1)->setChecked(true);
     QSettings settings;
     settings.setValue(QString("level_") + to_string_id(m_bd.get_variant()),
                       m_level);
@@ -3487,8 +3439,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionKeepOnlyPosition->setEnabled(! m_isRated
                                          && (hasParent || hasChildren));
     m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
-    for (auto& action : m_actionLevel)
-        action->setEnabled(! m_isRated);
+    m_actionGroupLevel->setEnabled(! m_isRated);
     m_actionMakeMainVariation->setEnabled(! isMain);
     m_actionMoveDownVariation->setEnabled(current.get_sibling());
     m_actionMoveUpVariation->setEnabled(hasParent
@@ -3513,24 +3464,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionTruncateChildren->setEnabled(hasChildren);
     m_actionUndo->setEnabled(! m_isRated && hasParent && ! hasChildren
                              && hasMove);
-    m_actionVariantCallisto->setEnabled(! m_isRated);
-    m_actionVariantCallisto2->setEnabled(! m_isRated);
-    m_actionVariantCallisto3->setEnabled(! m_isRated);
-    m_actionVariantClassic->setEnabled(! m_isRated);
-    m_actionVariantClassic2->setEnabled(! m_isRated);
-    m_actionVariantClassic3->setEnabled(! m_isRated);
-    m_actionVariantDuo->setEnabled(! m_isRated);
-    m_actionVariantJunior->setEnabled(! m_isRated);
-    m_actionVariantNexos->setEnabled(! m_isRated);
-    m_actionVariantNexos2->setEnabled(! m_isRated);
-    m_actionVariantTrigon->setEnabled(! m_isRated);
-    m_actionVariantTrigon2->setEnabled(! m_isRated);
-    m_actionVariantTrigon3->setEnabled(! m_isRated);
-    // Don't disable m_menuLevel but all level items such that it is still
-    // possible to see what the current level is even if it cannot be changed
-    // in rated games.
-    for (auto& action : m_actionLevel)
-        action->setEnabled(! m_isRated);
+    m_actionGroupVariant->setEnabled(! m_isRated);
     m_menuVariant->setEnabled(! m_isRated);
     setTitleMenuLevel();
 }

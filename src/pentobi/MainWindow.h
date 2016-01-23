@@ -370,8 +370,6 @@ private:
 
     QAction* m_actionLeaveFullscreen;
 
-    vector<QAction*> m_actionLevel;
-
     QAction* m_actionMakeMainVariation;
 
     QAction* m_actionMoveDownVariation;
@@ -490,6 +488,10 @@ private:
 
     QAction* m_actionVeryBadMove;
 
+    QActionGroup* m_actionGroupLevel;
+
+    QActionGroup* m_actionGroupVariant;
+
     QMenu* m_menuExport;
 
     QMenu* m_menuLevel;
@@ -539,13 +541,11 @@ private:
 
     QAction* createAction(const QString& text = "");
 
-    QAction* createActionLevel(QActionGroup* group, unsigned level,
-                               const QString& text);
+    QAction* createActionLevel(unsigned level, const QString& text);
 
     void createActions();
 
-    QAction* createActionVariant(QActionGroup* group, Variant variant,
-                                 const QString& text);
+    QAction* createActionVariant(Variant variant, const QString& text);
 
     QWidget* createCentralWidget();
 
