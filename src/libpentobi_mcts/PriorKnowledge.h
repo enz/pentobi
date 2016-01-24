@@ -136,14 +136,27 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     Grid<Float> adj_point_value;
     for (Point p : geo)
     {
-        point_value[p] = 1;
         auto s = bd.get_point_state(p);
-        if (is_forbidden[p] && s != to_play)
-            attach_point_value[p] = -2.5;
-        else
-            attach_point_value[p] = 0.5;
-        if (! is_forbidden[p])
+        if (is_forbidden[p])
         {
+            if (s != to_play)
+                attach_point_value[p] = -2.5;
+            else
+                attach_point_value[p] = 0.5;
+            if (s == connect_color)
+                // Connecting own colors is good
+                adj_point_value[p] = 1;
+            else if (! s.is_empty())
+                // Touching opponent is better than playing elsewhere (no need to
+                // check if s == to_play, such moves are illegal)
+                adj_point_value[p] = 0.4f;
+            else
+                adj_point_value[p] = 0;
+        }
+        else
+        {
+            point_value[p] = 1;
+            attach_point_value[p] = 0.5;
             if (bd.is_attach_point(p, to_play))
                 // Making own attach point forbidden is especially bad
                 adj_point_value[p] = -1;
@@ -151,15 +164,6 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                 // Creating new forbidden points is a bad thing
                 adj_point_value[p] = -0.1f;
         }
-        else if (s == connect_color)
-            // Connecting own colors is good
-            adj_point_value[p] = 1;
-        else if (! s.is_empty())
-            // Touching opponent is better than playing elsewhere (no need to
-            // check if s == to_play, such moves are illegal)
-            adj_point_value[p] = 0.4f;
-        else
-            adj_point_value[p] = 0;
     }
     for (Color c : bd.get_colors())
     {
