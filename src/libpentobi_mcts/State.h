@@ -232,7 +232,9 @@ private:
 
     Float get_quality_bonus(Color c, Float result, Float score);
 
-    Float get_quality_bonus_attach(Color c);
+    Float get_quality_bonus_attach_twocolor();
+
+    Float get_quality_bonus_attach_multicolor();
 
     template<unsigned MAX_SIZE>
     const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;

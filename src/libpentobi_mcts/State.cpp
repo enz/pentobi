@@ -214,8 +214,7 @@ void State::evaluate_multicolor(array<Float, 6>& result)
         return;
     }
 
-    Color c(0);
-    auto s = m_bd.get_score_multicolor(c);
+    auto s = m_bd.get_score_multicolor(Color(0));
     Float res;
     if (s > 0)
         res = 1;
@@ -224,8 +223,9 @@ void State::evaluate_multicolor(array<Float, 6>& result)
     else
         res = 0.5;
     if (log_simulations)
-        LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=", res);
-    res += get_quality_bonus(c, res, s) + get_quality_bonus_attach(c);
+        LIBBOARDGAME_LOG("Result color 0: sco=", s, " game_res=", res);
+    res += get_quality_bonus(Color(0), res, s)
+            + get_quality_bonus_attach_multicolor();
     if (log_simulations)
         LIBBOARDGAME_LOG("res=", res);
     result[0] = result[2] = res;
@@ -256,8 +256,8 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
         auto s = m_bd.get_score_multiplayer(c);
         result[i] = game_result[i] + get_quality_bonus(c, game_result[i], s);
         if (log_simulations)
-            LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=",
-                             game_result[i], " res=", result[i]);
+            LIBBOARDGAME_LOG("Result sco=", s, " game_res=", game_result[i],
+                             " res=", result[i]);
     }
     if (m_bd.get_variant() == Variant::classic_3)
     {
@@ -292,6 +292,8 @@ void State::evaluate_twocolor(array<Float, 6>& result)
     if (log_simulations)
         LIBBOARDGAME_LOG("Result sco=", s, " game_res=", res);
     res += get_quality_bonus(Color(0), res, s);
+    if (m_is_callisto)
+        res += get_quality_bonus_attach_twocolor();
     if (log_simulations)
         LIBBOARDGAME_LOG("res=", res);
     result[0] = res;
@@ -507,24 +509,44 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score)
 
 /** Additional quality-based rewards based on number of attach points.
     The number of non-forbidden attach points is another feature of a superior
-    final position. Only used in two-player versions, not in Duo/Junior, mainly
-    helps in Trigon. */
-inline Float State::get_quality_bonus_attach(Color c)
+    final position. Only used in some two-player variants, mainly helps in
+    Trigon. */
+inline Float State::get_quality_bonus_attach_twocolor()
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
-    auto second_color = m_bd.get_second_color(c);
-    Float attach = 0;
-    for (Color i : Color::Range(m_nu_colors))
-    {
-        unsigned n = 0;
-        for (Point p : m_bd.get_attach_points(i))
-            n += m_bd.is_forbidden(p, i);
-        n = m_bd.get_attach_points(i).size() - n;
-        if (i == c || i == second_color)
-            attach += static_cast<Float>(n);
-        else
-            attach -= static_cast<Float>(n);
-    }
+    int n = m_bd.get_attach_points(Color(0)).size()
+            - m_bd.get_attach_points(Color(1)).size();
+    for (Point p : m_bd.get_attach_points(Color(0)))
+        n -= m_bd.is_forbidden(p, Color(0));
+    for (Point p : m_bd.get_attach_points(Color(1)))
+        n += m_bd.is_forbidden(p, Color(1));
+    Float attach = static_cast<Float>(n);
+    m_stat_attach.add(attach);
+    auto var = m_stat_attach.get_variance();
+    if (var > 0)
+        return 0.1f * sigmoid(2.f,
+                              (attach - m_stat_attach.get_mean()) / sqrt(var));
+    return 0;
+}
+
+/** Like get_quality_bonus_attach_twocolor() but for 2 colors per player. */
+inline Float State::get_quality_bonus_attach_multicolor()
+{
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 4);
+    int n = m_bd.get_attach_points(Color(0)).size()
+            + m_bd.get_attach_points(Color(2)).size()
+            - m_bd.get_attach_points(Color(1)).size()
+            - m_bd.get_attach_points(Color(3)).size();
+    for (Point p : m_bd.get_attach_points(Color(0)))
+        n -= m_bd.is_forbidden(p, Color(0));
+    for (Point p : m_bd.get_attach_points(Color(2)))
+        n -= m_bd.is_forbidden(p, Color(2));
+    for (Point p : m_bd.get_attach_points(Color(1)))
+        n += m_bd.is_forbidden(p, Color(1));
+    for (Point p : m_bd.get_attach_points(Color(3)))
+        n += m_bd.is_forbidden(p, Color(3));
+    Float attach = static_cast<Float>(n);
     m_stat_attach.add(attach);
     auto var = m_stat_attach.get_variance();
     if (var > 0)
