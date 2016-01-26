@@ -230,8 +230,9 @@ private:
 
     Point find_best_starting_point(Color c) const;
 
-    Float get_quality_bonus(Color c, Float result, Float score,
-                            bool use_nu_attach);
+    Float get_quality_bonus(Color c, Float result, Float score);
+
+    Float get_quality_bonus_attach(Color c);
 
     template<unsigned MAX_SIZE>
     const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;

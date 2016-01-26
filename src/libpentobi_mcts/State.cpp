@@ -225,7 +225,7 @@ void State::evaluate_multicolor(array<Float, 6>& result)
         res = 0.5;
     if (log_simulations)
         LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=", res);
-    res += get_quality_bonus(c, res, s, true);
+    res += get_quality_bonus(c, res, s) + get_quality_bonus_attach(c);
     if (log_simulations)
         LIBBOARDGAME_LOG("res=", res);
     result[0] = result[2] = res;
@@ -254,8 +254,7 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
     {
         Color c(i);
         auto s = m_bd.get_score_multiplayer(c);
-        result[i] =
-                game_result[i] + get_quality_bonus(c, game_result[i], s, true);
+        result[i] = game_result[i] + get_quality_bonus(c, game_result[i], s);
         if (log_simulations)
             LIBBOARDGAME_LOG("Result color ", c, ": sco=", s, " game_res=",
                              game_result[i], " res=", result[i]);
@@ -292,7 +291,7 @@ void State::evaluate_twocolor(array<Float, 6>& result)
         res = 0.5;
     if (log_simulations)
         LIBBOARDGAME_LOG("Result sco=", s, " game_res=", res);
-    res += get_quality_bonus(Color(0), res, s, false);
+    res += get_quality_bonus(Color(0), res, s);
     if (log_simulations)
         LIBBOARDGAME_LOG("res=", res);
     result[0] = res;
@@ -482,11 +481,10 @@ inline const Board::PiecesLeftList& State::get_pieces_considered(Color c)
     return m_pieces_considered;
 }
 
-/** Bonus added to the result for quality-based rewards.
+/** Basic bonus added to the result for quality-based rewards.
     See also: Pepels et al.: Quality-based Rewards for Monte-Carlo Tree Search
     Simulations. ECAI 2014. */
-inline Float State::get_quality_bonus(Color c, Float result, Float score,
-                                      bool use_nu_attach)
+inline Float State::get_quality_bonus(Color c, Float result, Float score)
 {
     Float bonus = 0;
 
@@ -504,35 +502,35 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score,
     var = stat.get_variance();
     if (var > 0)
         bonus += 0.3f * sigmoid(2.f, (score - stat.get_mean()) / sqrt(var));
+    return bonus;
+}
 
-    // Number of non-forbidden attach points is another feature of a superior
-    // final position. Not used in Duo/Junior, mainly helps in Trigon.
-    if (! use_nu_attach)
-        return bonus;
+/** Additional quality-based rewards based on number of attach points.
+    The number of non-forbidden attach points is another feature of a superior
+    final position. Only used in two-player versions, not in Duo/Junior, mainly
+    helps in Trigon. */
+inline Float State::get_quality_bonus_attach(Color c)
+{
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
     auto second_color = m_bd.get_second_color(c);
-    Float opp_weight = (m_bd.get_nu_players() == 2 ? 1.f : 1.f / m_nu_colors);
     Float attach = 0;
     for (Color i : Color::Range(m_nu_colors))
+    {
+        unsigned n = 0;
+        for (Point p : m_bd.get_attach_points(i))
+            n += m_bd.is_forbidden(p, i);
+        n = m_bd.get_attach_points(i).size() - n;
         if (i == c || i == second_color)
-        {
-            for (Point p : m_bd.get_attach_points(i))
-                if (! m_bd.is_forbidden(p, i))
-                    ++attach;
-        }
+            attach += static_cast<Float>(n);
         else
-        {
-            Float n = 0;
-            for (Point p : m_bd.get_attach_points(i))
-                if (! m_bd.is_forbidden(p, i))
-                    ++n;
-            attach -= opp_weight * n;
-        }
+            attach -= static_cast<Float>(n);
+    }
     m_stat_attach.add(attach);
-    var = m_stat_attach.get_variance();
+    auto var = m_stat_attach.get_variance();
     if (var > 0)
-        bonus +=
-          0.1f * sigmoid(2.f, (attach - m_stat_attach.get_mean()) / sqrt(var));
-    return bonus;
+        return 0.1f * sigmoid(2.f,
+                              (attach - m_stat_attach.get_mean()) / sqrt(var));
+    return 0;
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
