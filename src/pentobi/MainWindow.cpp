@@ -3100,7 +3100,7 @@ void MainWindow::showToolbar(bool checked)
 QSize MainWindow::sizeHint() const
 {
     auto geo = QApplication::desktop()->screenGeometry();
-    return QSize(geo.width() * 2 / 3, geo.height() * 6 / 10);
+    return QSize(geo.width() * 2 / 3, min(geo.width() * 4 / 10, geo.height()));
 }
 
 void MainWindow::toolBarNoText(bool checked)
