@@ -141,7 +141,7 @@ function init() {
     }
     else {
         gameDisplay.createPieces()
-        if (! computerPlaysAll())
+        if (! computerPlaysAll() && ! gameModel.isGameOver)
             checkComputerMove()
     }
     gameDisplay.busyIndicatorRunning = false
