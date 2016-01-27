@@ -10,6 +10,8 @@
 
 #include "RatingGraph.h"
 
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QPainter>
 #include <QPen>
 
@@ -87,7 +89,8 @@ void RatingGraph::paintEvent(QPaintEvent* event)
 
 QSize RatingGraph::sizeHint() const
 {
-    return QSize(480, 120);
+    auto geo = QApplication::desktop()->screenGeometry();
+    return QSize(geo.width() / 4, geo.height() / 16);
 }
 
 void RatingGraph::updateContent(const RatingHistory& history)

@@ -10,6 +10,8 @@
 
 #include "AnalyzeGameWidget.h"
 
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QLabel>
 #include <QMouseEvent>
 #include <QProgressDialog>
@@ -176,7 +178,8 @@ void AnalyzeGameWidget::showProgress(int progress)
 
 QSize AnalyzeGameWidget::sizeHint() const
 {
-    return QSize(800, 240);
+    auto geo = QApplication::desktop()->screenGeometry();
+    return QSize(geo.width() / 2, geo.height() / 3);
 }
 
 void AnalyzeGameWidget::start(const Game& game, Search& search,

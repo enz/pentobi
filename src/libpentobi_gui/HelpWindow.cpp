@@ -10,7 +10,9 @@
 
 #include "HelpWindow.h"
 
+#include <QApplication>
 #include <QAction>
+#include <QDesktopWidget>
 #include <QFile>
 #include <QLocale>
 #include <QSettings>
@@ -110,7 +112,8 @@ void HelpWindow::handleSourceChanged(const QUrl& src)
 
 QSize HelpWindow::sizeHint() const
 {
-    return QSize(600, 800);
+    auto geo = QApplication::desktop()->screenGeometry();
+    return QSize(geo.width() * 4 / 10, geo.height() * 9 / 10);
 }
 
 //-----------------------------------------------------------------------------

@@ -63,6 +63,9 @@ int main(int argc, char* argv[])
     Q_INIT_RESOURCE(libpentobi_gui_resources);
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");
+
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
     Application app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     Q_INIT_RESOURCE(libpentobi_gui_resources_2x);
