@@ -94,33 +94,41 @@ const Transform* Board::find_transform(Move mv) const
 void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
 {
     moves.clear();
-    if (is_first_piece(c))
+    bool is_callisto = (m_piece_set == PieceSet::callisto);
+    if (! is_callisto && is_first_piece(c))
     {
         for (Point p : get_starting_points(c))
             if (! m_state_color[c].forbidden[p])
-                gen_moves(c, p, get_adj_status(p, c), marker, moves);
+            {
+                auto adj_status = get_adj_status(p, c);
+                for (Piece piece : m_state_color[c].pieces_left)
+                    gen_moves(c, p, piece, adj_status, marker, moves);
+            }
+        return;
     }
-    else
-    {
-        for (Point p : get_attach_points(c))
-            if (! m_state_color[c].forbidden[p])
-                gen_moves(c, p, get_adj_status(p, c), marker, moves);
-    }
+    if (is_callisto && is_piece_left(c, m_one_piece))
+        for (auto p : *m_geo)
+            if (! is_forbidden(p, c) && ! m_is_center_section[p])
+                gen_moves(c, p, m_one_piece, get_adj_status(p, c), marker,
+                          moves);
+    for (Point p : get_attach_points(c))
+        if (! m_state_color[c].forbidden[p])
+        {
+            auto adj_status = get_adj_status(p, c);
+            for (Piece piece : m_state_color[c].pieces_left)
+                if (! is_callisto || piece != m_one_piece)
+                    gen_moves(c, p, piece, adj_status, marker, moves);
+        }
 }
 
-void Board::gen_moves(Color c, Point p, unsigned adj_status,
+void Board::gen_moves(Color c, Point p, Piece piece, unsigned adj_status,
                       MoveMarker& marker, MoveList& moves) const
 {
-    for (Piece piece : m_state_color[c].pieces_left)
-        for (Move mv : m_bc->get_moves(piece, p, adj_status))
+    for (Move mv : m_bc->get_moves(piece, p, adj_status))
+        if (! marker[mv] && ! is_forbidden(c, mv))
         {
-            if (marker[mv])
-                continue;
-            if (! is_forbidden(c, mv))
-            {
-                moves.push_back(mv);
-                marker.set(mv);
-            }
+            moves.push_back(mv);
+            marker.set(mv);
         }
 }
 
@@ -202,20 +210,21 @@ Move Board::get_move_at(Point p) const
 
 bool Board::has_moves(Color c) const
 {
-    if (m_piece_set == PieceSet::callisto && is_piece_left(c, m_one_piece))
-        return true;
-    if (is_first_piece(c))
+    bool is_callisto = (m_piece_set == PieceSet::callisto);
+    if (is_callisto && is_piece_left(c, m_one_piece))
+        for (auto p : *m_geo)
+            if (! is_forbidden(p, c) && ! m_is_center_section[p])
+                return true;
+    if (! is_callisto && is_first_piece(c))
     {
         for (auto p : get_starting_points(c))
             if (has_moves(c, p))
                 return true;
+        return false;
     }
-    else
-    {
-        for (auto p : get_attach_points(c))
-            if (has_moves(c, p))
-                return true;
-    }
+    for (auto p : get_attach_points(c))
+        if (has_moves(c, p))
+            return true;
     return false;
 }
 
@@ -223,11 +232,19 @@ bool Board::has_moves(Color c, Point p) const
 {
     if (is_forbidden(p, c))
         return false;
+    bool is_callisto = (m_piece_set == PieceSet::callisto);
+    if (is_callisto && is_piece_left(c, m_one_piece))
+        if (m_is_center_section[p])
+            return true;
     auto adj_status = get_adj_status(p, c);
     for (auto piece : m_state_color[c].pieces_left)
+    {
+        if (piece == m_one_piece && is_callisto)
+            continue;
         for (auto mv : m_bc->get_moves(piece, p, adj_status))
             if (! is_forbidden(c, mv))
                 return true;
+    }
     return false;
 }
 

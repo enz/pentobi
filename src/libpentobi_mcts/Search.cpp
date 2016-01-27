@@ -27,9 +27,7 @@ Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
     create_threads();
 }
 
-Search::~Search()
-{
-}
+Search::~Search() = default;
 
 bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
 {
@@ -80,6 +78,21 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
     m_variant = variant;
     bool result = SearchBase::search(mv, max_count, min_simulations, max_time,
                                       time_source);
+    // Search doesn't generate all useless one-piece moves in Callisto
+    if (! result && bd.get_piece_set() == PieceSet::callisto
+            && bd.is_piece_left(to_play, bd.get_one_piece()))
+    {
+        for (Point p : bd)
+            if (! bd.is_forbidden(p, to_play) && ! bd.is_center_section(p))
+            {
+                auto moves = bd.get_board_const().get_moves(bd.get_one_piece(),
+                                                            p, 0);
+                LIBBOARDGAME_ASSERT(moves.size() == 1);
+                mv = *moves.begin();
+                result = true;
+                break;
+            }
+    }
     return result;
 }
 

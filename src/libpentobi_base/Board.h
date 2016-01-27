@@ -433,8 +433,8 @@ private:
     StartingPoints m_starting_points;
 
 
-    void gen_moves(Color c, Point p, unsigned adj_status, MoveMarker& marker,
-                   MoveList& moves) const;
+    void gen_moves(Color c, Point p, Piece piece, unsigned adj_status,
+                   MoveMarker& marker, MoveList& moves) const;
 
     bool has_moves(Color c, Point p) const;
 

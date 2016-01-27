@@ -15,7 +15,6 @@ namespace libpentobi_mcts {
 using libboardgame_base::PointTransfRot180;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
-using libpentobi_base::Move;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceSet;
 
@@ -225,43 +224,40 @@ void SharedConst::init(bool is_followup)
 void SharedConst::init_one_piece_callisto(bool is_followup)
 {
     auto& bd = *board;
-    //auto& points = one_piece_points_callisto;
-    Point useless_point = Point::null();
+    auto& bc = bd.get_board_const();
+    Piece one_piece = bd.get_one_piece();
     unsigned n = 0;
     if (! is_followup)
     {
         for (Point p : bd)
             if (! bd.is_center_section(p) && bd.get_point_state(p).is_empty())
             {
+                auto moves = bc.get_moves(one_piece, p, 0);
+                LIBBOARDGAME_ASSERT(moves.size() == 1);
+                Move mv = *moves.begin();
                 if (! is_useless_one_piece_point(p))
-                    one_piece_points_callisto.get_unchecked(n++) = p;
-                else
-                    useless_point = p;
+                {
+                    one_piece_points_callisto.get_unchecked(n) = p;
+                    one_piece_moves_callisto.get_unchecked(n) = mv;
+                    ++n;
+                }
             }
     }
     else
-        for (Point p : one_piece_points_callisto)
-            if (bd.get_point_state(p).is_empty())
+        for (unsigned i = 0; i < one_piece_points_callisto.size(); ++i)
+        {
+            Point p = one_piece_points_callisto[i];
+            Move mv = one_piece_moves_callisto[i];
+            if (bd.get_point_state(p).is_empty()
+                    && ! is_useless_one_piece_point(p))
             {
-                if (! is_useless_one_piece_point(p))
-                    one_piece_points_callisto.get_unchecked(n++) = p;
-                else
-                    useless_point = p;
+                one_piece_points_callisto.get_unchecked(n) = p;
+                one_piece_moves_callisto.get_unchecked(n) = mv;
+                ++n;
             }
-    if (n == 0)
-    {
-        // Allow one useless point if no useful points exist to avoid that the
-        // player fails to generate a move in case that no moves with larger
-        // pieces exist.
-        if (is_followup && useless_point.is_null())
-            for (Point p : bd)
-                if (! bd.is_center_section(p)
-                        && bd.get_point_state(p).is_empty())
-                    useless_point = p;
-        if (! useless_point.is_null())
-            one_piece_points_callisto.get_unchecked(n++) = useless_point;
-    }
+        }
     one_piece_points_callisto.resize(n);
+    one_piece_moves_callisto.resize(n);
 }
 
 void SharedConst::init_pieces_considered()
@@ -305,27 +301,15 @@ void SharedConst::init_pieces_considered()
 }
 
 /** Check if a point is a useless move for the 1-piece.
-    @return true if neighbors are occupied, because the 1-piece doesn't
+    @return true if all neighbors are occupied, because the 1-piece doesn't
     contribute to the score and playing there neither enables own moves
     nor prevents opponent moves with larger pieces. */
 bool SharedConst::is_useless_one_piece_point(Point p) const
 {
     auto& bd = *board;
-    auto& geo = bd.get_geometry();
-    auto x = geo.get_x(p);
-    auto y = geo.get_y(p);
-    if (x > 0 && geo.is_onboard(x - 1, y)
-            && bd.get_point_state(geo.get_point(x - 1, y)).is_empty())
-        return false;
-    if (x < geo.get_width() - 1 && geo.is_onboard(x + 1, y)
-            && bd.get_point_state(geo.get_point(x + 1, y)).is_empty())
-        return false;
-    if (y > 0 && geo.is_onboard(x, y - 1)
-            && bd.get_point_state(geo.get_point(x, y - 1)).is_empty())
-        return false;
-    if (y < geo.get_height() - 1 && geo.is_onboard(x, y + 1)
-            && bd.get_point_state(geo.get_point(x, y + 1)).is_empty())
-        return false;
+    for (Point pp: bd.get_geometry().get_diag(p))
+        if (bd.get_point_state(pp).is_empty())
+            return false;
     return true;
 }
 

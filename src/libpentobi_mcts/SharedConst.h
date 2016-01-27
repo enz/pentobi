@@ -18,6 +18,7 @@ using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
+using libpentobi_base::Move;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::PieceMap;
 using libpentobi_base::Point;
@@ -69,9 +70,12 @@ public:
 
     PieceMap<bool> is_piece_considered_none;
 
-    /** List of allowed locations on the root position for the 1x1-piece in
+    /** List of legal points in the root position for the 1x1-piece in
         Callisto. */
     PointList one_piece_points_callisto;
+
+    /** Moves corresponsing to one_piece_points_callisto. */
+    ArrayList<Move, Point::max_onboard> one_piece_moves_callisto;
 
 
     explicit SharedConst(const Color& to_play);

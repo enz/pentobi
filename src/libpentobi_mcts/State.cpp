@@ -81,22 +81,22 @@ void State::add_one_piece_moves(Color c, bool with_gamma, float& total_gamma,
     auto nu_left = m_bd.get_nu_left_piece(c, one_piece);
     if (nu_left == 0)
         return;
-    for (Point p : m_shared_const.one_piece_points_callisto)
+    for (unsigned i = 0; i < m_shared_const.one_piece_points_callisto.size();
+         ++i)
     {
+        Point p = m_shared_const.one_piece_points_callisto[i];
         if (m_bd.is_forbidden(p, c))
             continue;
-        for (Move mv : get_moves(c, one_piece, p, m_bd.get_adj_status(p, c)))
+        Move mv = m_shared_const.one_piece_moves_callisto[i];
+        LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
+        moves.get_unchecked(nu_moves) = mv;
+        ++nu_moves;
+        LIBBOARDGAME_ASSERT(! m_marker[c][mv]);
+        m_marker[c].set(mv);
+        if (with_gamma)
         {
-            LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
-            moves.get_unchecked(nu_moves) = mv;
-            ++nu_moves;
-            LIBBOARDGAME_ASSERT(! m_marker[c][mv]);
-            m_marker[c].set(mv);
-            if (with_gamma)
-            {
-                total_gamma += m_gamma_piece[one_piece];
-                m_cumulative_gamma[nu_moves - 1] = total_gamma;
-            }
+            total_gamma += m_gamma_piece[one_piece];
+            m_cumulative_gamma[nu_moves - 1] = total_gamma;
         }
     }
 }
