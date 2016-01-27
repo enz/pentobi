@@ -13,6 +13,7 @@ General:
 Desktop version:
 
 * The compilation now requires at least Qt 5.2.
+* High-DPI scaling is now automatically enabled if compiled with Qt 5.6.
 
 Android version
 
