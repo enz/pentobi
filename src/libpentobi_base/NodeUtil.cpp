@@ -26,7 +26,7 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
               MovePoints& points)
 {
     string id;
-    if (variant == Variant::duo || variant == Variant::junior)
+    if (get_nu_colors(variant) == 2)
     {
         if (node.has_property("B"))
         {
