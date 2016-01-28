@@ -79,7 +79,7 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
     bool result = SearchBase::search(mv, max_count, min_simulations, max_time,
                                       time_source);
     // Search doesn't generate all useless one-piece moves in Callisto
-    if (! result && bd.get_piece_set() == PieceSet::callisto
+    if (result && mv.is_null() && bd.get_piece_set() == PieceSet::callisto
             && bd.is_piece_left(to_play, bd.get_one_piece()))
     {
         for (Point p : bd)
