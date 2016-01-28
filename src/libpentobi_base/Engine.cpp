@@ -10,7 +10,9 @@
 
 #include "Engine.h"
 
+#include <fstream>
 #include "MoveMarker.h"
+#include "PentobiTreeWriter.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Log.h"
@@ -40,6 +42,7 @@ Engine::Engine(Variant variant)
     add("p", &Engine::cmd_p);
     add("param_base", &Engine::cmd_param_base);
     add("play", &Engine::cmd_play);
+    add("savesgf", &Engine::cmd_savesgf);
     add("set_game", &Engine::cmd_set_game);
     add("showboard", &Engine::cmd_showboard);
     add("undo", &Engine::cmd_undo);
@@ -226,9 +229,18 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
     response << get_board().to_string(move, false);
 }
 
+void Engine::cmd_savesgf(const Arguments& args)
+{
+    ofstream out(args.get());
+    PentobiTreeWriter writer(out, m_game.get_tree());
+    writer.set_indent(1);
+    writer.write();
+    if (! out)
+        throw Failure(strerror(errno));
+}
+
 /** Set the game variant.
-    Arguments:
-    Blokus|Blokus Two-Player|Blokus Duo|Blokus Trigon|Blokus Trigon Two-Player
+    Argument: game variant as in GM property of Pentobi SGF files
     <br>
     This command is similar to the command that is used by Quarry
     (http://home.gna.org/quarry/) to set a game at GTP engines that support

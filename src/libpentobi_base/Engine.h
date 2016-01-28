@@ -40,6 +40,7 @@ public:
     void cmd_point_integers(Response&);
     void cmd_showboard(Response&);
     void cmd_reg_genmove(const Arguments&, Response&);
+    void cmd_savesgf(const Arguments&);
     void cmd_set_game(const Arguments&);
     void cmd_undo();
 
