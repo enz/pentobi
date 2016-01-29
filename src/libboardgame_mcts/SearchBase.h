@@ -1270,8 +1270,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     Float prune_min_count = SearchParamConst::prune_count_start;
 
     // Don't use multi-threading for very short searches (less than 0.5s).
-    // There are too many lost updates at the beginning (e.g. if all threads
-    // expand the root node and only the children of the last thread are used)
     auto reused_count = m_tree.get_root().get_visit_count();
     unsigned nu_threads = m_nu_threads;
     double expected_time;
