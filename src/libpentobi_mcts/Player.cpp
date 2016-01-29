@@ -27,36 +27,36 @@ using libpentobi_base::BoardType;
 namespace {
 
 // Rationale for choosing the number of simulations:
-// * The number at level 1 is very small in Classic/Duo to avoid that level 1
-//   is too strong for absolute beginners. (Searches with such a small number
-//   of simulations still produce reasonable moves because of the prior
-//   initialization of node values.) In Trigon, it starts with a higher number
-//   because the playing strength is weaker there.
-// * The number at the highest level is chosen such that the average time per
-//   game and player is 120s in Duo/Callisto2, 240s in Classic, 300s in Trigon,
-//   330s in Nexos on an Intel i3-4130.
-// * The numbers most other levels are chosen such that they roughly correspond
-//   to equal Elo differences in self-play experiments.
-// * However, the counts for level 7 are based on time measurments again
-//   because it is the maximum level supported on Android and therefore should
-//   be as strong as possible without taking too much time on typical mobile
-//   hardware. Its target is to take 2% of the time of level 9. Level 8 is
-//   adjusted to be about in the middle between level 7 and 9 (on a log scale).
+// * Level 9 is the highest in the desktop version. It should be as strong as
+//   possible on a mid-range PC with reasonable thinking times. The average
+//   time per game and player is targeted at 120s in Duo/Callisto2, 240s in
+//   Classic, 300s in Trigon, 330s in Nexos on an Intel i3-4130.
+// * Level 7 is the highest in the Android version and should be as strong as
+//   possible on mobile hardware. The numbers are set to 3% of level 9.
+// * The numbers for level 1 are set to a value that is weak enough for
+//   beginners without playing silly moves. They are currently chosen depending
+//   on how strong we estimate Pentobi is in a game variant. It is also taken
+//   into consideration how much the Elo difference level 1-9 is in self-play
+//   experiments. After applying the scale factor (see comment in
+//   Player::get_rating()), we want a range of about 1000 Elo (difference
+//   between beginner and lower master level).
+// * The numbers for other levels are chosen such that they correspond to
+//   roughly equidistant Elo differences measured in self-play experiments.
 
 static const float counts_classic[Player::max_supported_level] =
-    { 3, 24, 87, 213, 667, 1989, 36000, 250000, 1829033 };
+    { 3, 24, 87, 213, 667, 1989, 54871, 310936, 1829033 };
 
 static const float counts_duo[Player::max_supported_level] =
-    { 3, 17, 44, 123, 426, 1672, 120000, 840000, 6929504 };
+    { 3, 17, 44, 123, 426, 1672, 207885, 1178015, 6929504 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 433, 727, 1501, 2912, 7395, 10000, 70000, 489723 };
+    { 228, 433, 727, 1501, 2912, 7395, 14692, 83253, 489723 };
 
 static const float counts_nexos[Player::max_supported_level] =
-    { 100, 470, 800, 1650, 3300, 6000, 11000, 77000, 579663 };
+    { 100, 470, 800, 1650, 3300, 6000, 17390, 98543, 579663 };
 
 static const float counts_callisto_2[Player::max_supported_level] =
-    { 100, 470, 800, 1650, 3300, 6000, 48000, 336000, 2409112 };
+    { 100, 193, 390, 1120, 2560, 8390, 78731, 480000, 2624359 };
 
 } // namespace
 
@@ -254,28 +254,19 @@ size_t Player::get_memory()
 
 Rating Player::get_rating(Variant variant, unsigned level)
 {
-    // The ratings are based on experiments that measured the winning rates in
-    // games between subsequent playing levels of Pentobi. The number of
-    // simulations per level is already chosen such that the levels have
-    // roughly equal Elo differences, see Player::genmove(). A scale factor
-    // less than 1 was applied to the Elo differences to take into account that
-    // self-play experiments usually overestimate the performance against
-    // humans. The scale factor and lower anchor for the Elo ratings were
-    // chosen such that the Elo range is roughly between 1000 (beginner level)
-    // and 2000 (lower expert level) taking into account that Pentobi is
-    // relatively strong against humans in Duo and relatively weak in Trigon.
-    // Only the most popular game variants were tested (Classic 2, Duo,
-    // Trigon 2) and these ratings were used for other game variants on the
-    // same board type. The ratings are not always measured again for new
-    // versions of Pentobi and not really comparable between different versions
-    // of Pentobi.
+    // The ratings are roughly based on Elo differences measured in self-play
+    // experiments. The measured values are scaled with a factor smaller than 1
+    // to take into account that self-play usually overestimates the strength
+    // against humans. The anchor is set to about 1000 (beginner level) for
+    // level 1. The exact value for anchor and scale is chosen according to our
+    // estimate how strong Pentobi plays at level 1 and level 9 in each game
+    // variant (2000 Elo would be lower expert level).
     auto max_supported_level = Player::max_supported_level;
     level = min(max(level, 1u), max_supported_level);
     Rating result;
     switch (get_board_type(variant))
     {
     case BoardType::classic:
-    case BoardType::callisto_2: // Not yet measured
         {
             // Anchor 1000, scale 0.63
             static float elo[Player::max_supported_level] =
@@ -288,6 +279,14 @@ Rating Player::get_rating(Variant variant, unsigned level)
             // Anchor 1100, scale 0.80
             static float elo[Player::max_supported_level] =
                 { 1100, 1229, 1359, 1489, 1618, 1748, 1878, 2008, 2137 };
+            result = Rating(elo[level - 1]);
+        }
+        break;
+    case BoardType::callisto_2:
+        {
+            // Anchor 1000, scale 0.7
+            static float elo[Player::max_supported_level] =
+                { 1000, 1102, 1203, 1305, 1406, 1508, 1606, 1718, 1811 };
             result = Rating(elo[level - 1]);
         }
         break;
