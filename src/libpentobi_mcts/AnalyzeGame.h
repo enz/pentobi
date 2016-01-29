@@ -42,8 +42,6 @@ public:
 
     unsigned get_nu_moves() const;
 
-    bool has_value(unsigned i) const;
-
     ColorMove get_move(unsigned i) const;
 
     double get_value(unsigned i) const;
@@ -52,8 +50,6 @@ private:
     Variant m_variant;
 
     vector<ColorMove> m_moves;
-
-    vector<bool> m_has_value;
 
     vector<double> m_values;
 };
@@ -72,19 +68,12 @@ inline unsigned AnalyzeGame::get_nu_moves() const
 inline double AnalyzeGame::get_value(unsigned i) const
 {
     LIBBOARDGAME_ASSERT(i < m_values.size());
-    LIBBOARDGAME_ASSERT(has_value(i));
     return m_values[i];
 }
 
 inline Variant AnalyzeGame::get_variant() const
 {
     return m_variant;
-}
-
-inline bool AnalyzeGame::has_value(unsigned i) const
-{
-    LIBBOARDGAME_ASSERT(i < m_has_value.size());
-    return m_has_value[i];
 }
 
 //-----------------------------------------------------------------------------

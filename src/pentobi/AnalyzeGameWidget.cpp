@@ -116,8 +116,6 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     painter.setRenderHint(QPainter::Antialiasing, true);
     for (unsigned i = 0; i < nu_moves; ++i)
     {
-        if (! m_analyzeGame.has_value(i))
-            continue;
         double value = m_analyzeGame.get_value(i);
         // Values can be outside [0..1] due to score/length bonuses
         if (value < 0)

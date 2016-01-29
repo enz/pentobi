@@ -29,7 +29,6 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
 {
     m_variant = game.get_variant();
     m_moves.clear();
-    m_has_value.clear();
     m_values.clear();
     auto& tree = game.get_tree();
     unique_ptr<Board> bd(new Board(m_variant));
@@ -54,9 +53,9 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
         {
             if (! node->has_parent())
             {
+                // Root shouldn't contain moves in SGF files
                 m_moves.push_back(mv);
-                m_has_value.push_back(false);
-                m_values.push_back(0);
+                m_values.push_back(Search::SearchParamConst::tie_value);
             }
             else
             {
@@ -78,18 +77,8 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                                   min_simulations, max_time, time_source);
                     if (get_abort())
                         break;
-                    if (search.get_root_visit_count() == 0)
-                    {
-                        m_moves.push_back(mv);
-                        m_has_value.push_back(false);
-                        m_values.push_back(0);
-                    }
-                    else
-                    {
-                        m_moves.push_back(mv);
-                        m_has_value.push_back(true);
-                        m_values.push_back(search.get_root_val().get_mean());
-                    }
+                    m_moves.push_back(mv);
+                    m_values.push_back(search.get_root_val().get_mean());
                 }
                 catch (const runtime_error&)
                 {
