@@ -162,9 +162,6 @@ public:
 
     void inc_visit_count(const Node& node);
 
-    /** Overwrite the root value and count. */
-    void init_root_value(Float value, Float count);
-
     void swap(Tree& tree);
 
     /** Extract a subtree.
@@ -423,12 +420,6 @@ template<typename N>
 inline void Tree<N>::inc_visit_count(const Node& node)
 {
     non_const(node).inc_visit_count();
-}
-
-template<typename N>
-inline void Tree<N>::init_root_value(Float value, Float count)
-{
-    m_nodes[0].init_value(value, count);
 }
 
 template<typename N>
