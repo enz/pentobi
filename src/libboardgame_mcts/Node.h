@@ -69,15 +69,6 @@ public:
 
     unsigned short get_nu_children() const;
 
-    /** Set a new value.
-        This operation is needed when reusing a subtree from a previous search
-        because the value of root nodes and inner nodes have a different
-        meaning (position value vs. move values) so the root value cannot be
-        reused but all other nodes in the tree can be reused without
-        changes.
-        It is not thread-safe and may not be called during the search. */
-    void init_value(Float value, Float count);
-
     /** Copy the value count from another node without changing the child
         information.
         This function is not thread-safe and may not be called during the
@@ -241,13 +232,6 @@ void Node<M, F, MT>::init(const Move& mv, Float value, Float count)
     m_value.store(value, memory_order_relaxed);
     m_visit_count.store(0, memory_order_relaxed);
     m_nu_children.store(0, memory_order_relaxed);
-}
-
-template<typename M, typename F, bool MT>
-void Node<M, F, MT>::init_value(Float value, Float count)
-{
-    m_value_count = count;
-    m_value = value;
 }
 
 template<typename M, typename F, bool MT>
