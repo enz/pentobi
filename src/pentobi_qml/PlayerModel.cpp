@@ -41,10 +41,18 @@ void getLevel(QSettings& settings, const char* key, unsigned& level)
 
 //-----------------------------------------------------------------------------
 
+bool PlayerModel::no_book = false;
+
+bool PlayerModel::no_delay = false;
+
+unsigned PlayerModel::nu_threads = 0;
+
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent),
-      m_player(GameModel::getInitialGameVariant(), maxLevel, "")
+      m_player(GameModel::getInitialGameVariant(), maxLevel, "", nu_threads)
 {
+    if (no_book)
+        m_player.set_use_book(false);
     QSettings settings;
     getLevel(settings, "level_classic", m_levelClassic);
     getLevel(settings, "level_classic_2", m_levelClassic2);
@@ -93,7 +101,7 @@ PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm,
     result.move = m_player.genmove(bd, bd.get_effective_to_play());
     auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 1 sec
-    if (elapsed < 1000)
+    if (elapsed < 1000 && ! no_delay)
         QThread::msleep(1000 - elapsed);
     return result;
 }

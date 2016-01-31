@@ -50,6 +50,19 @@ class PlayerModel
                NOTIFY isGenMoveRunningChanged)
 
 public:
+    /** Global variable to disable opening books. */
+    static bool no_book;
+
+    /** Global variable to disable the minimum thinking time. */
+    static bool no_delay;
+
+    /** Global variable to set the number of threads the player is constructed
+        with.
+        The default value 0 means that the number of threads depends on the
+        hardware. */
+    static unsigned nu_threads;
+
+
     explicit PlayerModel(QObject* parent = nullptr);
 
     ~PlayerModel();

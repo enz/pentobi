@@ -41,21 +41,20 @@ int main(int argc, char *argv[])
     translatorQt.load("replace_qtbase_" + locale, ":qml/i18n");
     app.installTranslator(&translatorQt);
     QCommandLineParser parser;
+    QCommandLineOption optionNoBook("nobook");
+    parser.addOption(optionNoBook);
+    QCommandLineOption optionNoDelay("nodelay");
+    parser.addOption(optionNoDelay);
     QCommandLineOption optionSeed("seed", "Set random seed to <n>.", "n");
     parser.addOption(optionSeed);
+    QCommandLineOption optionThreads("threads", "Use <n> threads (0=auto).",
+                                     "n");
+    parser.addOption(optionThreads);
     QCommandLineOption optionVerbose("verbose");
     parser.addOption(optionVerbose);
     parser.process(app);
     try
     {
-        bool ok;
-        if (parser.isSet(optionSeed))
-        {
-            auto seed = parser.value(optionSeed).toUInt(&ok);
-            if (! ok)
-                throw runtime_error("--seed must be a positive number");
-            RandomGenerator::set_global_seed(seed);
-        }
 #if LIBBOARDGAME_DISABLE_LOG
         if (parser.isSet(optionVerbose))
             throw runtime_error("This version of Pentobi was compiled"
@@ -64,6 +63,25 @@ int main(int argc, char *argv[])
         if (! parser.isSet(optionVerbose))
             libboardgame_util::disable_logging();
 #endif
+        if (parser.isSet(optionNoBook))
+            PlayerModel::no_book = true;
+        if (parser.isSet(optionNoDelay))
+            PlayerModel::no_delay = true;
+        bool ok;
+        if (parser.isSet(optionSeed))
+        {
+            auto seed = parser.value(optionSeed).toUInt(&ok);
+            if (! ok)
+                throw runtime_error("--seed must be a positive number");
+            RandomGenerator::set_global_seed(seed);
+        }
+        if (parser.isSet(optionThreads))
+        {
+            auto nuThreads = parser.value(optionThreads).toUInt(&ok);
+            if (! ok)
+                throw runtime_error("--threads must be a positive number");
+            PlayerModel::nu_threads = nuThreads;
+        }
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
         return app.exec();
     }
