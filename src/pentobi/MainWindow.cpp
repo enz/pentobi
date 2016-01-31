@@ -1264,13 +1264,13 @@ void MainWindow::createMenu()
 
     auto menuEdit = menuBar()->addMenu(tr("&Edit"));
     m_menuMoveAnnotation = menuEdit->addMenu(tr("&Move Annotation"));
-    m_menuMoveAnnotation->addAction(m_actionGoodMove);
+    m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
     m_menuMoveAnnotation->addAction(m_actionVeryGoodMove);
-    m_menuMoveAnnotation->addAction(m_actionBadMove);
-    m_menuMoveAnnotation->addAction(m_actionVeryBadMove);
+    m_menuMoveAnnotation->addAction(m_actionGoodMove);
     m_menuMoveAnnotation->addAction(m_actionInterestingMove);
     m_menuMoveAnnotation->addAction(m_actionDoubtfulMove);
-    m_menuMoveAnnotation->addAction(m_actionNoMoveAnnotation);
+    m_menuMoveAnnotation->addAction(m_actionBadMove);
+    m_menuMoveAnnotation->addAction(m_actionVeryBadMove);
     menuEdit->addSeparator();
     menuEdit->addAction(m_actionMakeMainVariation);
     menuEdit->addAction(m_actionMoveUpVariation);
