@@ -49,8 +49,8 @@
         <translation>Über Pentobi</translation>
     </message>
     <message>
-        <source>Select Next &amp;Color</source>
-        <translation>Nächste &amp;Farbe wählen</translation>
+        <source>Next &amp;Color</source>
+        <translation>Nächste &amp;Farbe</translation>
     </message>
     <message>
         <source>S&amp;etup Mode</source>
