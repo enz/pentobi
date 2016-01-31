@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Select Next &amp;Color</source>
-        <translation>Nächste &amp;Farbe selektieren</translation>
+        <translation>Nächste &amp;Farbe wählen</translation>
     </message>
     <message>
         <source>S&amp;etup Mode</source>
