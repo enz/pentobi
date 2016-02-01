@@ -3422,6 +3422,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool hasMove = tree.has_move_ignore_invalid(current);
     bool hasMoves = m_bd.has_moves(m_currentColor);
     bool isEmpty = libboardgame_sgf::util::is_empty(tree);
+    bool hasNextVar = current.get_sibling();
+    bool hasPrevVar = current.get_previous_sibling();
     m_actionAnalyzeGame->setEnabled(! m_isRated
                                     && tree.has_main_variation_moves());
     m_actionBackToMainVariation->setEnabled(! isMain);
@@ -3441,11 +3443,10 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
     m_actionGroupLevel->setEnabled(! m_isRated);
     m_actionMakeMainVariation->setEnabled(! isMain);
-    m_actionMoveDownVariation->setEnabled(current.get_sibling());
-    m_actionMoveUpVariation->setEnabled(hasParent
-                       && &current.get_parent().get_first_child() != &current);
+    m_actionMoveDownVariation->setEnabled(hasNextVar);
+    m_actionMoveUpVariation->setEnabled(hasPrevVar);
     m_actionNew->setEnabled(! isEmpty);
-    m_actionNextVariation->setEnabled(current.get_sibling());
+    m_actionNextVariation->setEnabled(hasNextVar);
     if (! m_isGenMoveRunning)
     {
         m_actionNextPiece->setEnabled(! isGameOver);
@@ -3453,7 +3454,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         m_actionPlay->setEnabled(! m_isRated && hasMoves);
         m_actionPlaySingleMove->setEnabled(! m_isRated && hasMoves);
     }
-    m_actionPreviousVariation->setEnabled(current.get_previous_sibling());
+    m_actionPreviousVariation->setEnabled(hasPrevVar);
     m_actionRatedGame->setEnabled(! m_isRated);
     m_actionSave->setEnabled(! m_file.isEmpty() && m_game.is_modified());
     m_actionSaveAs->setEnabled(! isEmpty);
