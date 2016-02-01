@@ -450,7 +450,7 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
                 --type_matched_offset.x;
         }
     }
-    if (pieceSet == PieceSet::trigon)
+    if (pieceSet == PieceSet::nexos)
     {
         // Offset must be a junction
         if (old_point_type == 1) // horiz. segment
