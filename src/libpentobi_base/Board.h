@@ -96,10 +96,13 @@ public:
         Variant::classic_3. */
     Color::IntType get_alt_player() const;
 
-    /** Get next color to play that still has moves.
-        Colors are tried in their playing order starting with get_to_play().
-        If no color has moves left, get_to_play() is returned. */
+    /** Equivalent to get_effective_to_play(get_to_play()) */
     Color get_effective_to_play() const;
+
+    /** Get next color to play that still has moves.
+        Colors are tried in their playing order starting with c. If no color
+        has moves left, c is returned. */
+    Color get_effective_to_play(Color c) const;
 
     const PiecesLeftList& get_pieces_left(Color c) const;
 

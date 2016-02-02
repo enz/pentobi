@@ -19,9 +19,23 @@ namespace libpentobi_base {
 class Game
 {
 public:
+    /** Determine a sensible value for the color to play at the current node.
+        - If the color was explicitely set with a setup property, it will be
+          used.
+        - Otherwise, if the current node has children all with moves of the
+          same color, this color will be used. This is because some trees like
+          search dumps contain pass moves, so using the effective color to play
+          is not appropriate there.
+        - Otherwise, the effective color to play will be used, starting with
+          the next color of the color of the last move
+          (see Board::get_effective_to_play(Color))  */
+    static Color get_to_play_default(const Game& game);
+
+
     explicit Game(Variant variant);
 
     ~Game();
+
 
     void init(Variant variant);
 
@@ -47,13 +61,9 @@ public:
     const PentobiTree& get_tree() const;
 
     /** Get the current color to play.
-        This takes not into account if the current color to play still has
-        moves available. */
+        Initialized with get_to_play_default() but may be changed with
+        set_to_play(). */
     Color get_to_play() const;
-
-    /** Get the next color to play that still has moves.
-        The colors are tested in playing order starting with get_to_play(). */
-    Color get_effective_to_play() const;
 
     /** @param mv
         @param always_create_new_node Always create a new child of the current
@@ -77,6 +87,11 @@ public:
         that the current node is always reachable via a path of nodes with
         valid move properties. */
     void undo();
+
+    /** Set the current color to play.
+        Does not store a player property in the tree or affect what color is to
+        play when navigating away from and back to the current node. */
+    void set_to_play(Color c);
 
     ColorMove get_move() const;
 
@@ -225,11 +240,6 @@ inline string Game::get_date() const
 inline string Game::get_event() const
 {
     return m_tree.get_event();
-}
-
-inline Color Game::get_effective_to_play() const
-{
-    return m_bd->get_effective_to_play();
 }
 
 inline const SgfNode& Game::get_current() const

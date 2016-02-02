@@ -213,8 +213,6 @@ private:
 
     const Board& m_bd;
 
-    Color m_currentColor;
-
     unique_ptr<Player> m_player;
 
     bool m_noDelay = false;

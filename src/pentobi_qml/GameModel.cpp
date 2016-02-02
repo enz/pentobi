@@ -395,11 +395,10 @@ QQmlListProperty<PieceModel> GameModel::pieceModels3()
 
 void GameModel::playMove(int move)
 {
-    Color c = m_game.get_effective_to_play();
     Move mv(static_cast<Move::IntType>(move));
     if(mv.is_null())
         return;
-    m_game.play(c, mv, false);
+    m_game.play(m_game.get_to_play(), mv, false);
     updateProperties();
 }
 

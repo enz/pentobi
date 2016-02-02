@@ -44,13 +44,56 @@ void Game::delete_all_variations()
     m_tree.delete_all_variations();
 }
 
+Color Game::get_to_play_default(const Game& game)
+{
+    auto& tree = game.get_tree();
+    auto& bd = game.get_board();
+    auto node = &game.get_current();
+    Color next = Color(0);
+    while (node)
+    {
+        auto mv = tree.get_move(*node);
+        if (! mv.is_null())
+        {
+            next = bd.get_next(mv.color);
+            break;
+        }
+        Color c;
+        if (libpentobi_base::node_util::get_player(*node, c))
+            return c;
+        node = node->get_parent_or_null();
+    }
+    bool all_same_color = true;
+    bool is_first = true;
+    Color c;
+    for (auto& child : game.get_current().get_children())
+    {
+        auto mv = tree.get_move(child);
+        if (mv.is_null())
+            continue;
+        if (is_first)
+        {
+            c = mv.color;
+            is_first = false;
+            continue;
+        }
+        if (mv.color != c)
+        {
+            all_same_color = false;
+            break;
+        }
+    }
+    if (! is_first && all_same_color)
+        return c;
+    return bd.get_effective_to_play(next);
+}
+
 void Game::goto_node(const SgfNode& node)
 {
     auto old = m_current;
     try
     {
         update(node);
-        m_current = &node;
     }
     catch (const InvalidTree&)
     {
@@ -66,7 +109,6 @@ void Game::goto_node(const SgfNode& node)
             catch (const InvalidTree&)
             {
             }
-            m_current = old;
         }
         throw;
     }
@@ -141,6 +183,11 @@ void Game::set_result(int score)
         m_tree.set_result(m_tree.get_root(), score);
 }
 
+void Game::set_to_play(Color c)
+{
+    m_bd->set_to_play(c);
+}
+
 void Game::truncate()
 {
     goto_node(m_tree.truncate(*m_current));
@@ -156,6 +203,8 @@ void Game::undo()
 void Game::update(const SgfNode& node)
 {
     m_updater.update(*m_bd, m_tree, node);
+    m_current = &node;
+    set_to_play(get_to_play_default(*this));
 }
 
 //-----------------------------------------------------------------------------

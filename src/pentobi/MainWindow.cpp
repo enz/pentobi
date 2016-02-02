@@ -104,48 +104,6 @@ QString getAutoSaveFile()
     return Util::getDataDir() + QDir::separator() + "autosave.blksgf";
 }
 
-/** Determine the current color at the current node in the game.
-    - If the color was explicitely set with a setup property, it will be used.
-    - Otherwise, if the current node has children all with moves of the same
-      color, this color will be used. This is because some trees like search
-      dumps contain pass moves, so using the effective color to play is not
-      appropriate there.
-    - Otherwise, the effective color to play will be used. (see
-      Game::get_effective_to_play())  */
-Color getCurrentColor(const Game& game)
-{
-    auto& tree = game.get_tree();
-    auto node = &game.get_current();
-    Color c;
-    while (node && ! tree.has_move(*node))
-    {
-        if (libpentobi_base::node_util::get_player(*node, c))
-            return c;
-        node = node->get_parent_or_null();
-    }
-    bool all_same_color = true;
-    bool is_first = true;
-    for (auto& i : game.get_current().get_children())
-    {
-        if (! tree.has_move(i))
-            continue;
-        if (is_first)
-        {
-            c = tree.get_move(i).color;
-            is_first = false;
-            continue;
-        }
-        if (tree.get_move(i).color != c)
-        {
-            all_same_color = false;
-            break;
-        }
-    }
-    if (! is_first && all_same_color)
-        return c;
-    return game.get_effective_to_play();
-}
-
 bool hasCurrentVariationOtherMoves(const PentobiTree& tree,
                                    const SgfNode& current)
 {
@@ -1580,11 +1538,12 @@ void MainWindow::findMove()
         return;
     if (! m_legalMoves)
         m_legalMoves.reset(new MoveList);
+    Color to_play = m_bd.get_to_play();
     if (m_legalMoves->empty())
     {
         if (! m_marker)
             m_marker.reset(new MoveMarker);
-        m_bd.gen_moves(m_currentColor, *m_marker, *m_legalMoves);
+        m_bd.gen_moves(to_play, *m_marker, *m_legalMoves);
         m_marker->clear(*m_legalMoves);
         sort(m_legalMoves->begin(), m_legalMoves->end(),
              [&](Move mv1, Move mv2) {
@@ -1596,8 +1555,8 @@ void MainWindow::findMove()
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
     auto mv = (*m_legalMoves)[m_legalMoveIndex];
-    selectPiece(m_currentColor, m_bd.get_move_piece(mv));
-    m_guiBoard->showMove(m_currentColor, mv);
+    selectPiece(to_play, m_bd.get_move_piece(mv));
+    m_guiBoard->showMove(to_play, mv);
     ++m_legalMoveIndex;
 }
 
@@ -1876,7 +1835,7 @@ void MainWindow::genMove(bool playSingleMove)
     m_lastRemainingMinutes = 0;
     m_player->set_level(m_level);
     QFuture<GenMoveResult> future =
-        QtConcurrent::run(this, &MainWindow::asyncGenMove, m_currentColor,
+        QtConcurrent::run(this, &MainWindow::asyncGenMove, m_bd.get_to_play(),
                           m_genMoveId, playSingleMove);
     m_genMoveWatcher.setFuture(future);
     m_isGenMoveRunning = true;
@@ -2010,7 +1969,6 @@ void MainWindow::gotoNode(const SgfNode& node)
         showInvalidFile(m_file, e);
         return;
     }
-    m_currentColor = getCurrentColor(m_game);
     m_lastComputerMovesBegin = 0;
     if (m_analyzeGameWindow && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
@@ -2094,7 +2052,6 @@ void MainWindow::initGame()
         m_computerColors.fill(false);
         m_autoPlay = false;
     }
-    m_currentColor = Color(0);
     leaveSetupMode();
     m_lastComputerMovesBegin = 0;
     m_gameFinished = false;
@@ -2147,9 +2104,9 @@ void MainWindow::interruptPlay()
 
 bool MainWindow::isComputerToPlay() const
 {
-    if (m_game.get_variant() != Variant::classic_3
-            || m_currentColor != Color(3))
-        return m_computerColors[m_currentColor];
+    Color to_play = m_bd.get_to_play();
+    if (m_game.get_variant() != Variant::classic_3 || to_play != Color(3))
+        return m_computerColors[to_play];
     return m_computerColors[Color(m_bd.get_alt_player())];
 }
 
@@ -2254,7 +2211,8 @@ void MainWindow::moveUpVariation()
 
 void MainWindow::nextPiece()
 {
-    if (m_bd.get_pieces_left(m_currentColor).empty())
+    auto c = m_bd.get_to_play();
+    if (m_bd.get_pieces_left(c).empty())
         return;
     auto nuUniqPieces = m_bd.get_nu_uniq_pieces();
     Piece::IntType i;
@@ -2267,11 +2225,11 @@ void MainWindow::nextPiece()
     {
         if (i >= nuUniqPieces)
             i = 0;
-        if (m_bd.is_piece_left(m_currentColor, Piece(i)))
+        if (m_bd.is_piece_left(c, Piece(i)))
             break;
         ++i;
     }
-    selectPiece(m_currentColor, Piece(i));
+    selectPiece(c, Piece(i));
 }
 
 void MainWindow::nextTransform()
@@ -2365,7 +2323,6 @@ bool MainWindow::open(const QString& file, bool isTemporary)
         m_game.init(tree);
         if (! libpentobi_base::node_util::has_setup(m_game.get_root()))
             m_game.goto_node(get_last_node(m_game.get_root()));
-        m_currentColor = getCurrentColor(m_game);
         initPieceSelectors();
     }
     catch (const InvalidTree& e)
@@ -2436,13 +2393,13 @@ void MainWindow::play()
     if (! isComputerToPlay())
     {
         m_computerColors.fill(false);
-        if (m_bd.get_variant() == Variant::classic_3
-                && m_currentColor == Color(3))
+        auto c = m_bd.get_to_play();
+        if (m_bd.get_variant() == Variant::classic_3 && c == Color(3))
             m_computerColors[Color(m_bd.get_alt_player())] = true;
         else
         {
-            m_computerColors[m_currentColor] = true;
-            m_computerColors[m_bd.get_second_color(m_currentColor)] = true;
+            m_computerColors[c] = true;
+            m_computerColors[m_bd.get_second_color(c)] = true;
         }
         QSettings settings;
         settings.setValue("computer_color_none", false);
@@ -2465,7 +2422,6 @@ void MainWindow::play(Color c, Move mv)
         deleteAutoSaveFile();
         return;
     }
-    m_currentColor = m_bd.get_effective_to_play();
 }
 
 void MainWindow::playSingleMove()
@@ -2497,7 +2453,8 @@ void MainWindow::pointClicked(Point p)
 
 void MainWindow::previousPiece()
 {
-    if (m_bd.get_pieces_left(m_currentColor).empty())
+    auto c = m_bd.get_to_play();
+    if (m_bd.get_pieces_left(c).empty())
         return;
     auto nuUniqPieces = m_bd.get_nu_uniq_pieces();
     Piece::IntType i;
@@ -2512,10 +2469,10 @@ void MainWindow::previousPiece()
             i = static_cast<Piece::IntType>(nuUniqPieces - 1);
         else
             --i;
-        if (m_bd.is_piece_left(m_currentColor, Piece(i)))
+        if (m_bd.is_piece_left(c, Piece(i)))
             break;
     }
-    selectPiece(m_currentColor, Piece(i));
+    selectPiece(c, Piece(i));
 }
 
 void MainWindow::previousTransform()
@@ -2772,11 +2729,12 @@ void MainWindow::selectNamedPiece()
 {
     string name(qobject_cast<QAction*>(sender())->data().toString()
                 .toLocal8Bit().data());
+    auto c = m_bd.get_to_play();
     Board::PiecesLeftList pieces;
     for (Piece::IntType i = 0; i < m_bd.get_nu_uniq_pieces(); ++i)
     {
         Piece piece(i);
-        if (m_bd.is_piece_left(m_currentColor, piece)
+        if (m_bd.is_piece_left(c, piece)
                 && m_bd.get_piece_info(piece).get_name().find(name) == 0)
             pieces.push_back(piece);
     }
@@ -2799,16 +2757,17 @@ void MainWindow::selectNamedPiece()
                 piece = *pos;
         }
     }
-    selectPiece(m_currentColor, piece);
+    selectPiece(c, piece);
 }
 
 void MainWindow::selectNextColor()
 {
-    m_currentColor = m_bd.get_next(m_currentColor);
-    m_orientationDisplay->selectColor(m_currentColor);
+    m_game.set_to_play(m_bd.get_next(m_bd.get_to_play()));
+    auto to_play = m_bd.get_to_play();
+    m_orientationDisplay->selectColor(to_play);
     clearPiece();
     for (Color c : m_bd.get_colors())
-        m_pieceSelector[c]->setEnabled(m_currentColor == c);
+        m_pieceSelector[c]->setEnabled(to_play == c);
     if (m_actionSetupMode->isChecked())
         setSetupPlayer();
     updateWindow(false);
@@ -2824,7 +2783,7 @@ void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
     if (m_isGenMoveRunning
             || (m_bd.is_game_over() && ! m_actionSetupMode->isChecked()))
         return;
-    m_currentColor = c;
+    m_game.set_to_play(c);
     m_guiBoard->selectPiece(c, piece);
     m_guiBoard->setSelectedPieceTransform(transform);
     m_orientationDisplay->selectColor(c);
@@ -2932,7 +2891,7 @@ void MainWindow::setMoveMarkingNone(bool checked)
 void MainWindow::setPlayToolTip()
 {
     m_actionPlay->setToolTip(
-                m_computerColors[m_currentColor] ?
+                m_computerColors[m_bd.get_to_play()] ?
                     tr("Make the computer continue to play the current color") :
                     tr("Make the computer play the current color"));
 }
@@ -2954,7 +2913,7 @@ void MainWindow::setSetupPlayer()
     if (! m_game.has_setup())
         m_game.remove_player();
     else
-        m_game.set_player(m_currentColor);
+        m_game.set_player(m_bd.get_to_play());
 }
 
 void MainWindow::setTitleMenuLevel()
@@ -3032,8 +2991,7 @@ void MainWindow::setupMode(bool enable)
     {
         setSetupPlayer();
         m_setupModeLabel->hide();
-        m_currentColor = m_game.get_effective_to_play();
-        enablePieceSelector(m_currentColor);
+        enablePieceSelector(m_bd.get_to_play());
         updateWindow(false);
     }
 }
@@ -3163,7 +3121,6 @@ void MainWindow::truncate()
             return;
     }
     m_game.truncate();
-    m_currentColor = getCurrentColor(m_game);
     m_lastComputerMovesBegin = 0;
     m_autoPlay = false;
     m_gameFinished = false;
@@ -3210,7 +3167,6 @@ void MainWindow::undo()
         return;
     cancelThread();
     m_game.undo();
-    m_currentColor = getCurrentColor(m_game);
     m_lastComputerMovesBegin = 0;
     m_autoPlay = false;
     m_gameFinished = false;
@@ -3397,17 +3353,18 @@ void MainWindow::updateWindow(bool currentNodeChanged)
         m_legalMoves->clear();
     m_legalMoveIndex = 0;
     bool isGameOver = m_bd.is_game_over();
+    auto to_play = m_bd.get_to_play();
     if (isGameOver && ! m_actionSetupMode->isChecked())
         m_orientationDisplay->clearSelectedColor();
     else
-        m_orientationDisplay->selectColor(m_currentColor);
+        m_orientationDisplay->selectColor(to_play);
     if (currentNodeChanged)
     {
         clearPiece();
         for (Color c : m_bd.get_colors())
             m_pieceSelector[c]->checkUpdate();
         if (! m_actionSetupMode->isChecked())
-            enablePieceSelector(m_currentColor);
+            enablePieceSelector(to_play);
         updateComment();
         updateMoveAnnotationActions();
     }
@@ -3420,7 +3377,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move_ignore_invalid(current);
-    bool hasMoves = m_bd.has_moves(m_currentColor);
+    bool hasMoves = m_bd.has_moves(to_play);
     bool isEmpty = libboardgame_sgf::util::is_empty(tree);
     bool hasNextVar = current.get_sibling();
     bool hasPrevVar = current.get_previous_sibling();

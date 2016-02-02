@@ -154,15 +154,20 @@ ScoreType Board::get_bonus(Color c) const
 
 Color Board::get_effective_to_play() const
 {
-    Color c = m_state_base.to_play;
+    return get_effective_to_play(get_to_play());
+}
+
+Color Board::get_effective_to_play(Color c) const
+{
+    Color result = c;
     do
     {
-        if (has_moves(c))
-            return c;
-        c = get_next(c);
+        if (has_moves(result))
+            return result;
+        result = get_next(result);
     }
-    while (c != m_state_base.to_play);
-    return c;
+    while (result != c);
+    return result;
 }
 
 void Board::get_place(Color c, unsigned& place, bool& is_shared) const
