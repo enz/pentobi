@@ -157,6 +157,7 @@ void Game::play(ColorMove mv, bool always_create_new_node)
         m_current = &m_tree.create_new_child(*m_current);
         m_tree.set_move(*m_current, mv);
     }
+    set_to_play(get_to_play_default(*this));
 }
 
 void Game::remove_player()
