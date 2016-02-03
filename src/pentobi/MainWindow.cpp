@@ -1864,11 +1864,16 @@ void MainWindow::genMoveFinished()
         m_computerColors.fill(false);
     Color c = result.color;
     auto mv = result.move;
-    if (mv.is_null() || ! m_bd.is_legal(c, mv))
+    if (mv.is_null())
     {
-        // No need to translate this message, it should never occur if the
-        // program is correct
+        // No need to translate, should never happen if program is correct
         showError("Computer failed to generate a move");
+        return;
+    }
+    if (! m_bd.is_legal(c, mv))
+    {
+        // No need to translate, should never happen if program is correct
+        showError("Computer generated illegal    move");
         return;
     }
     play(c, mv);
