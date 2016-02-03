@@ -11,7 +11,7 @@ Menu {
         visible: ! isAndroid || enabled
         onTriggered: Logic.newGame(true)
     }
-    // QTBUG-47847 MenuSeparator { }
+    MenuSeparator { }
     Menu {
         title: qsTr("Game &Variant")
 
@@ -85,7 +85,7 @@ Menu {
             }
         }
     }
-    // QTBUG-47847 MenuSeparator { }
+    MenuSeparator { }
     MenuItem {
         text: qsTr("&Undo Move")
         enabled: gameModel.canUndo
@@ -98,7 +98,7 @@ Menu {
         visible: ! isAndroid || enabled
         onTriggered: Logic.moveHint()
     }
-    // QTBUG-47847 MenuSeparator { }
+    MenuSeparator { }
     MenuItem {
         text: qsTr("&Open...")
         onTriggered: Logic.open()
@@ -109,7 +109,7 @@ Menu {
         visible: ! isAndroid || enabled
         onTriggered: Logic.saveAs()
     }
-    // QTBUG-47847 MenuSeparator { }
+    MenuSeparator { }
     MenuItem {
         text: qsTr("&Quit")
         onTriggered: Qt.quit()
