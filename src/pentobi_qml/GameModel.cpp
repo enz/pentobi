@@ -142,6 +142,12 @@ void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
     }
 }
 
+void GameModel::deleteAllVar()
+{
+    m_game.delete_all_variations();
+    updateProperties();
+}
+
 bool GameModel::findMove(const PieceModel& piece, QString state,
                          QPointF coord, Move& mv) const
 {
@@ -563,8 +569,7 @@ void GameModel::updateProperties()
     }
     auto& current = m_game.get_current();
     if (set(m_canUndo,
-            ! current.has_children()
-            && m_game.get_tree().has_move_ignore_invalid(current)
+            ! current.has_children() && tree.has_move_ignore_invalid(current)
             && current.has_parent()))
         emit canUndoChanged(m_canUndo);
     if (set(m_canGoForward, current.has_children()))
@@ -575,6 +580,8 @@ void GameModel::updateProperties()
         emit hasPrevVarChanged(m_hasPrevVar);
     if (set(m_hasNextVar, (current.get_sibling() != nullptr)))
         emit hasNextVarChanged(m_hasNextVar);
+    if (set(m_hasVariations, tree.has_variations()))
+        emit hasVariationsChanged(m_hasVariations);
     if (set(m_isMainVar, is_main_variation(current)))
         emit isMainVarChanged(m_isMainVar);
     QString positionInfo
@@ -601,8 +608,7 @@ void GameModel::updateProperties()
         }
     if (set(m_isGameOver, isGameOver))
         emit isGameOverChanged(m_isGameOver);
-    if (set(m_isGameEmpty,
-            libboardgame_sgf::util::is_empty(m_game.get_tree())))
+    if (set(m_isGameEmpty, libboardgame_sgf::util::is_empty(tree)))
         emit isGameEmptyChanged(m_isGameEmpty);
 
     ColorMap<array<bool, Board::max_pieces>> isPlayed;

@@ -53,6 +53,8 @@ class GameModel
                NOTIFY canGoForwardChanged)
     Q_PROPERTY(bool hasPrevVar MEMBER m_hasPrevVar NOTIFY hasPrevVarChanged)
     Q_PROPERTY(bool hasNextVar MEMBER m_hasNextVar NOTIFY hasNextVarChanged)
+    Q_PROPERTY(bool hasVariations MEMBER m_hasVariations
+               NOTIFY hasVariationsChanged)
     Q_PROPERTY(bool isMainVar MEMBER m_isMainVar NOTIFY isMainVarChanged)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
@@ -63,6 +65,8 @@ public:
     static Variant getInitialGameVariant();
 
     explicit GameModel(QObject* parent = nullptr);
+
+    Q_INVOKABLE void deleteAllVar();
 
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, QString state,
                                 QPointF coord) const;
@@ -164,6 +168,8 @@ signals:
 
     void hasMoves3Changed(int);
 
+    void hasVariationsChanged(bool);
+
     void isGameOverChanged(bool);
 
     void isGameEmptyChanged(bool);
@@ -224,6 +230,8 @@ private:
     bool m_hasMoves2 = true;
 
     bool m_hasMoves3 = true;
+
+    bool m_hasVariations = false;
 
     bool m_isGameOver = false;
 

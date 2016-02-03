@@ -114,6 +114,11 @@ function createTheme(themeName) {
     return component.createObject(root)
 }
 
+function deleteAllVar() {
+    showQuestion(qsTr("Delete all variations?"),
+                 function() { gameModel.deleteAllVar() })
+}
+
 function genMove() {
     cancelGenMove()
     gameDisplay.dropPiece()

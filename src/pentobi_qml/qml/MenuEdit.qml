@@ -5,7 +5,7 @@ import "Main.js" as Logic
 Menu {
     title: qsTr("&Edit")
     visible: ! isAndroid || makeMainVar.enabled || moveVarUp.enabled ||
-             moveVarDown.enabled || truncate.enabled ||
+             moveVarDown.enabled || deleteAllVar || truncate.enabled ||
              truncateChildren.enabled
 
     MenuItem {
@@ -31,6 +31,15 @@ Menu {
         enabled: gameModel.hasNextVar
         visible: ! isAndroid || enabled
         onTriggered: gameModel.moveDownVar()
+    }
+    MenuSeparator { }
+    MenuItem {
+        id: deleteAllVar
+
+        text: qsTr("&Delete All Variations")
+        enabled: gameModel.hasVariations
+        visible: ! isAndroid || enabled
+        onTriggered: Logic.deleteAllVar()
     }
     MenuItem {
         id: truncate
