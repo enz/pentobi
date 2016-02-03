@@ -160,13 +160,13 @@ signals:
 
     void bonus3Changed(float);
 
-    void hasMoves0Changed(int);
+    void hasMoves0Changed(bool);
 
-    void hasMoves1Changed(int);
+    void hasMoves1Changed(bool);
 
-    void hasMoves2Changed(int);
+    void hasMoves2Changed(bool);
 
-    void hasMoves3Changed(int);
+    void hasMoves3Changed(bool);
 
     void hasVariationsChanged(bool);
 
