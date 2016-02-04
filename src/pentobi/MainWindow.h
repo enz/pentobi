@@ -134,6 +134,8 @@ public slots:
 
     void newGame();
 
+    void nextColor();
+
     void nextVariation();
 
     void nextPiece();
@@ -167,8 +169,6 @@ public slots:
     void save();
 
     void saveAs();
-
-    void selectNextColor();
 
     void selectPiece(Color c, Piece piece);
 
@@ -390,6 +390,8 @@ private:
 
     QAction* m_actionMovePieceDown;
 
+    QAction* m_actionNextColor;
+
     QAction* m_actionNextPiece;
 
     QAction* m_actionNextTransform;
@@ -433,8 +435,6 @@ private:
     QAction* m_actionRating;
 
     QAction* m_actionShowToolbar;
-
-    QAction* m_actionSelectNextColor;
 
     QAction* m_actionSetupMode;
 

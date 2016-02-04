@@ -992,9 +992,8 @@ void MainWindow::createActions()
         m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), SLOT(saveAs()));
 
-    m_actionSelectNextColor = createAction(tr("Next &Color"));
-    connect(m_actionSelectNextColor, SIGNAL(triggered()),
-            SLOT(selectNextColor()));
+    m_actionNextColor = createAction(tr("Next &Color"));
+    connect(m_actionNextColor, SIGNAL(triggered()), SLOT(nextColor()));
 
     for (auto name : { "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
                        "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" })
@@ -1241,7 +1240,7 @@ void MainWindow::createMenu()
     menuEdit->addAction(m_actionKeepOnlySubtree);
     menuEdit->addSeparator();
     menuEdit->addAction(m_actionSetupMode);
-    menuEdit->addAction(m_actionSelectNextColor);
+    menuEdit->addAction(m_actionNextColor);
 
     auto menuView = menuBar()->addMenu(tr("&View"));
     menuView->addAction(m_actionShowToolbar);
@@ -2214,6 +2213,19 @@ void MainWindow::moveUpVariation()
     updateWindow(false);
 }
 
+void MainWindow::nextColor()
+{
+    m_game.set_to_play(m_bd.get_next(m_bd.get_to_play()));
+    auto to_play = m_bd.get_to_play();
+    m_orientationDisplay->selectColor(to_play);
+    clearPiece();
+    for (Color c : m_bd.get_colors())
+        m_pieceSelector[c]->setEnabled(to_play == c);
+    if (m_actionSetupMode->isChecked())
+        setSetupPlayer();
+    updateWindow(false);
+}
+
 void MainWindow::nextPiece()
 {
     auto c = m_bd.get_to_play();
@@ -2361,7 +2373,7 @@ void MainWindow::openCheckSave(const QString& file)
 void MainWindow::orientationDisplayColorClicked(Color)
 {
     if (m_actionSetupMode->isChecked())
-        selectNextColor();
+        nextColor();
 }
 
 void MainWindow::placePiece(Color c, Move mv)
@@ -2763,19 +2775,6 @@ void MainWindow::selectNamedPiece()
         }
     }
     selectPiece(c, piece);
-}
-
-void MainWindow::selectNextColor()
-{
-    m_game.set_to_play(m_bd.get_next(m_bd.get_to_play()));
-    auto to_play = m_bd.get_to_play();
-    m_orientationDisplay->selectColor(to_play);
-    clearPiece();
-    for (Color c : m_bd.get_colors())
-        m_pieceSelector[c]->setEnabled(to_play == c);
-    if (m_actionSetupMode->isChecked())
-        setSetupPlayer();
-    updateWindow(false);
 }
 
 void MainWindow::selectPiece(Color c, Piece piece)
@@ -3422,7 +3421,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionSaveAs->setEnabled(! isEmpty);
     // See also comment in setupMode()
     m_actionSetupMode->setEnabled(! m_isRated && ! hasParent && ! hasChildren);
-    m_actionSelectNextColor->setEnabled(! m_isRated);
+    m_actionNextColor->setEnabled(! m_isRated);
     m_actionTruncate->setEnabled(! m_isRated && hasParent);
     m_actionTruncateChildren->setEnabled(hasChildren);
     m_actionUndo->setEnabled(! m_isRated && hasParent && ! hasChildren
