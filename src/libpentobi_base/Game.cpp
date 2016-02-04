@@ -63,28 +63,6 @@ Color Game::get_to_play_default(const Game& game)
             return c;
         node = node->get_parent_or_null();
     }
-    bool all_same_color = true;
-    bool is_first = true;
-    Color c;
-    for (auto& child : game.get_current().get_children())
-    {
-        auto mv = tree.get_move(child);
-        if (mv.is_null())
-            continue;
-        if (is_first)
-        {
-            c = mv.color;
-            is_first = false;
-            continue;
-        }
-        if (mv.color != c)
-        {
-            all_same_color = false;
-            break;
-        }
-    }
-    if (! is_first && all_same_color)
-        return c;
     return bd.get_effective_to_play(next);
 }
 

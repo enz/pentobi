@@ -20,15 +20,10 @@ class Game
 {
 public:
     /** Determine a sensible value for the color to play at the current node.
-        - If the color was explicitely set with a setup property, it will be
-          used.
-        - Otherwise, if the current node has children all with moves of the
-          same color, this color will be used. This is because some trees like
-          search dumps contain pass moves, so using the effective color to play
-          is not appropriate there.
-        - Otherwise, the effective color to play will be used, starting with
-          the next color of the color of the last move
-          (see Board::get_effective_to_play(Color))  */
+        If the color was explicitely set with a setup property, it will be
+        used. Otherwise, the effective color to play will be used, starting
+        with the next color of the color of the last move (see
+        Board::get_effective_to_play(Color))  */
     static Color get_to_play_default(const Game& game);
 
 
