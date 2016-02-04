@@ -193,6 +193,10 @@
         <source>Game ends in a tie between Yellow, Red and Green.</source>
         <translation>Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
+    <message>
+        <source>Delete all variations?</source>
+        <translation>Alle Varianten löschen?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -286,6 +290,14 @@
     <message>
         <source>Truncate &amp;Children</source>
         <translation>&amp;Kindknoten abschneiden</translation>
+    </message>
+    <message>
+        <source>&amp;Delete All Variations</source>
+        <translation>Alle &amp;Varianten löschen</translation>
+    </message>
+    <message>
+        <source>&amp;Next Color</source>
+        <translation>&amp;Nächste Farbe</translation>
     </message>
 </context>
 <context>
