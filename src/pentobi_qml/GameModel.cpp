@@ -330,6 +330,13 @@ void GameModel::moveUpVar()
     updateProperties();
 }
 
+void GameModel::nextColor()
+{
+    auto& bd = getBoard();
+    m_game.set_to_play(bd.get_next(bd.get_to_play()));
+    updateProperties();
+}
+
 void GameModel::newGame()
 {
     m_game.init();

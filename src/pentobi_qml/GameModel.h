@@ -71,6 +71,8 @@ public:
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, QString state,
                                 QPointF coord) const;
 
+    Q_INVOKABLE void nextColor();
+
     Q_INVOKABLE void playPiece(PieceModel* pieceModel, QPointF coord);
 
     Q_INVOKABLE void playMove(int move);
