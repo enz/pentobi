@@ -1,3 +1,12 @@
+function about() {
+    var url = "http://pentobi.sourceforge.net"
+    showInfo("<h2>" + qsTr("Pentobi") + "</h2><p>" +
+             qsTr("Version %1").arg(Qt.application.version) + "</p><p>" +
+             qsTr("Computer opponent for the board game Blokus.") + "<br>" +
+             qsTr("&copy; 2011&ndash;%1 Markus Enzenberger").arg(2016) +
+             "<br><a href=\"" + url + "\">" + url + "</a></p>")
+}
+
 function cancelGenMove() {
     playerModel.cancelGenMove()
     gameDisplay.busyIndicatorRunning = false

@@ -197,6 +197,18 @@
         <source>Delete all variations?</source>
         <translation>Alle Varianten löschen?</translation>
     </message>
+    <message>
+        <source>Version %1</source>
+        <translation>Version %1</translation>
+    </message>
+    <message>
+        <source>Computer opponent for the board game Blokus.</source>
+        <translation>Computer-Gegner für das Brettspiel Blokus.</translation>
+    </message>
+    <message>
+        <source>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
+        <translation>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -412,6 +424,17 @@
     <message>
         <source>Back to &amp;Main Variation</source>
         <translation>Zurück zu &amp;Hauptvariante</translation>
+    </message>
+</context>
+<context>
+    <name>MenuHelp</name>
+    <message>
+        <source>&amp;Help</source>
+        <translation>&amp;Hilfe</translation>
+    </message>
+    <message>
+        <source>&amp;About Pentobi</source>
+        <translation>Über &amp;Pentobi</translation>
     </message>
 </context>
 <context>

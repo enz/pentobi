@@ -12,6 +12,7 @@
         <file>qml/MenuEdit.qml</file>
         <file>qml/MenuGame.qml</file>
         <file>qml/MenuGo.qml</file>
+        <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItemGameVariant.qml</file>
         <file>qml/MenuItemLevel.qml</file>
         <file>qml/MenuView.qml</file>

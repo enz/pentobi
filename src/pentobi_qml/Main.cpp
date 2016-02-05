@@ -26,6 +26,9 @@ int main(int argc, char *argv[])
     libboardgame_util::LogInitializer log_initializer;
     QCoreApplication::setOrganizationName("Pentobi");
     QCoreApplication::setApplicationName("Pentobi");
+#ifdef VERSION
+    QCoreApplication::setApplicationVersion(VERSION);
+#endif
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterInterface<PieceModel>("PieceModel");

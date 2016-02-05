@@ -104,6 +104,7 @@ ApplicationWindow {
                 MenuEdit { }
                 MenuComputer { }
                 MenuView { }
+                MenuHelp { }
             }
         }
     }
@@ -121,6 +122,7 @@ ApplicationWindow {
                 MenuEdit { }
                 MenuComputer { }
                 MenuView { }
+                MenuHelp { }
             }
         }
     }
