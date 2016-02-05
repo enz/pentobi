@@ -10,7 +10,6 @@
 
 #include "ShowMessage.h"
 
-#include <QApplication>
 #include <QMessageBox>
 #include "Util.h"
 
@@ -21,18 +20,10 @@ namespace {
 void showMessage(QWidget* parent, QMessageBox::Icon icon, const QString& text,
                  const QString& infoText, const QString& detailText)
 {
-    // Workaround to avoid very small widths if the main text is short, which
-    // causes ugly word wrapping with single-word lines in the informative text.
-    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
-    QString expandedText = text;
-    QFontMetrics metrics(qApp->font("QLabel"));
-    int minWidth = 30 * metrics.averageCharWidth();
-    while (metrics.width(expandedText) < minWidth)
-        expandedText.append(" ");
     QMessageBox msgBox(parent);
     Util::setNoTitle(msgBox);
     msgBox.setIcon(icon);
-    msgBox.setText(expandedText);
+    msgBox.setText(text);
     msgBox.setInformativeText(infoText);
     msgBox.setDetailedText(detailText);
     msgBox.exec();
@@ -46,15 +37,7 @@ void initQuestion(QMessageBox& msgBox, const QString& text,
                   const QString& infoText)
 {
     Util::setNoTitle(msgBox);
-    // Workaround to avoid very small widths if the main text is short, which
-    // causes ugly word wrapping with single-word lines in the informative text.
-    // Why does QMessageBox::setMinimumWidth() not work (tested in Qt 4.7)?
-    QString expandedText = text;
-    QFontMetrics metrics(qApp->font("QLabel"));
-    int minWidth = 30 * metrics.averageCharWidth();
-    while (metrics.width(expandedText) < minWidth)
-        expandedText.append(" ");
-    msgBox.setText(expandedText);
+    msgBox.setText(text);
     msgBox.setInformativeText(infoText);
 }
 
