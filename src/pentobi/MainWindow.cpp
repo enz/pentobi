@@ -379,11 +379,7 @@ MainWindow::GenMoveResult MainWindow::asyncGenMove(Color c, int genMoveId,
     auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 0.8 sec
     if (elapsed < 800 && ! m_noDelay)
-    {
-        // Use std::thread because QThread::sleep() is protected in Qt4
-        chrono::milliseconds duration(800 - elapsed);
-        this_thread::sleep_for(duration);
-    }
+        QThread::msleep(800 - elapsed);
     return result;
 }
 
