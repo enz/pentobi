@@ -969,11 +969,7 @@ void MainWindow::createActions()
             SLOT(rotateClockwise()));
 
     m_actionQuit = createAction(tr("&Quit"));
-    // QKeySequence::Quit does not work with Qt4 on Xfce
-    if (QKeySequence(QKeySequence::Quit).toString().isEmpty())
-        m_actionQuit->setShortcut(QString("Ctrl+Q"));
-    else
-        m_actionQuit->setShortcut(QKeySequence::Quit);
+    m_actionQuit->setShortcut(QKeySequence::Quit);
     connect(m_actionQuit, SIGNAL(triggered()), SLOT(close()));
 
     m_actionSave = createAction(tr("&Save"));
@@ -981,11 +977,7 @@ void MainWindow::createActions()
     connect(m_actionSave, SIGNAL(triggered()), SLOT(save()));
 
     m_actionSaveAs = createAction(tr("Save &As..."));
-    // QKeySequence::SaveAs does not work with Qt4 on Xfce
-    if (QKeySequence(QKeySequence::SaveAs).toString().isEmpty())
-        m_actionSaveAs->setShortcut(QString("Ctrl+Shift+S"));
-    else
-        m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
+    m_actionSaveAs->setShortcut(QKeySequence::SaveAs);
     connect(m_actionSaveAs, SIGNAL(triggered()), SLOT(saveAs()));
 
     m_actionNextColor = createAction(tr("Next &Color"));
