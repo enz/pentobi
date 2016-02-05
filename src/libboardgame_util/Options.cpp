@@ -16,7 +16,7 @@ namespace libboardgame_util {
 
 Options::Options(int argc, const char** argv, const vector<string>& specs)
 {
-    for (const auto& s : specs)
+    for (auto& s : specs)
     {
         auto pos = s.find("|");
         if (pos == string::npos)
