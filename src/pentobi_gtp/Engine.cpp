@@ -46,9 +46,7 @@ Engine::Engine(Variant variant, unsigned level, bool use_book,
     add("version", &Engine::cmd_version);
 }
 
-Engine::~Engine()
-{
-}
+Engine::~Engine() = default;
 
 void Engine::cmd_get_value(Response& response)
 {
@@ -65,11 +63,11 @@ void Engine::cmd_move_values(Response& response)
         children.push_back(&i);
     sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);
     response << fixed;
-    for (const auto node : children)
+    for (auto node : children)
         response << setprecision(0) << node->get_visit_count() << ' '
                  << setprecision(1) << node->get_value_count() << ' '
                  << setprecision(3) << node->get_value() << ' '
-                 << bd.to_string(node->get_move()) << '\n';
+                 << bd.to_string(node->get_move(), true) << '\n';
 }
 
 void Engine::cmd_name(Response& response)
