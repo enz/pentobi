@@ -31,8 +31,7 @@ OrientationDisplay::OrientationDisplay(QWidget* parent, const Board& bd)
     : QWidget(parent),
       m_bd(bd)
 {
-    setMinimumWidth(30);
-    setMinimumHeight(30);
+    setMinimumSize(30, 30);
 }
 
 void OrientationDisplay::clearSelectedColor()

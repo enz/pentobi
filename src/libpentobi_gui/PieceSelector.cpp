@@ -89,8 +89,7 @@ PieceSelector::PieceSelector(QWidget* parent, const Board& bd, Color color)
       m_bd(bd),
       m_color(color)
 {
-    setMinimumWidth(170);
-    setMinimumHeight(30);
+    setMinimumSize(170, 30);
     init();
 }
 
