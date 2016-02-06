@@ -70,16 +70,15 @@ QString ComputerColorDialog::getPlayerString(Color c)
     auto nuPlayers = get_nu_players(m_variant);
     auto nuColors = get_nu_colors(m_variant);
     auto i = c.to_int();
-    if (nuColors == 2)
-        return i == 0 ? tr("&Blue") : tr("&Green");
     if (nuPlayers == 2 && nuColors == 4)
         return i == 0 || i == 2 ? tr("&Blue/Red") : tr("&Yellow/Green");
     if (i == 0)
         return tr("&Blue");
     if (i == 1)
-        return tr("&Yellow");
+        return nuColors == 2 ? tr("&Green") : tr("&Yellow");
     if (i == 2)
         return tr("&Red");
+    LIBBOARDGAME_ASSERT(i == 3);
     return tr("&Green");
 }
 
