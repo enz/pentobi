@@ -128,7 +128,6 @@ Item {
             }
         }
         sourceSize { width: imgWidth; height: imgHeight }
-        asynchronous: true
     }
     Repeater {
         model: gameModel.startingPoints0
