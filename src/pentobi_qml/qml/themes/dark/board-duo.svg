@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="280" width="280" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <path d="m0 0h280v280h-280z" fill="#494347"/>
-<path fill-rule="evenodd" d="m94 90a4 4 0 0 1 -8 0 4 4 0 1 1 8 0z" fill="#0073cf"/>
-<path fill-rule="evenodd" d="m194 190a4 4 0 0 1 -8 0 4 4 0 1 1 8 0z" fill="#00c000"/>
-<g id="d">
-<g id="c">
+<g id="b">
+<g id="a">
 <path d="m20 3.6e-7h-20v20l1-1v-18h18z" fill="#3b3639"/>
 <path d="m20-1.1e-7 -1 1v18h-18l-1 1h20z" fill="#6d686b"/>
 </g>
-<use y="0" x="0" xlink:href="#c"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(20)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(40)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(60)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(80)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(100)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(120)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(140)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(160)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(180)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(200)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(220)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(240)"/>
-<use y="0" x="0" xlink:href="#c" transform="translate(260)"/>
+<use y="0" x="0" xlink:href="#a"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(20)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(40)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(60)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(80)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(100)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(120)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(140)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(160)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(180)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(200)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(220)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(240)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(260)"/>
 </g>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,20)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,40)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,60)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,80)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,100)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,120)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,140)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,160)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,180)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,200)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,220)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,240)"/>
-<use y="0" x="0" xlink:href="#d" transform="translate(0,260)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,20)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,40)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,60)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,80)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,100)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,120)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,140)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,160)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,180)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,200)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,220)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,240)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,260)"/>
 </svg>

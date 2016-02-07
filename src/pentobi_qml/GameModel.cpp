@@ -543,7 +543,9 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
 void GameModel::updateProperties()
 {
     auto& bd = getBoard();
+    auto& geo = bd.get_geometry();
     auto& tree = m_game.get_tree();
+    bool isTrigon = (bd.get_piece_set() == PieceSet::trigon);
     if (set(m_points0, bd.get_points(Color(0))))
         emit points0Changed(m_points0);
     if (set(m_points1, bd.get_points(Color(1))))
@@ -556,6 +558,7 @@ void GameModel::updateProperties()
         emit hasMoves0Changed(m_hasMoves0);
     if (set(m_hasMoves1, bd.has_moves(Color(1))))
         emit hasMoves1Changed(m_hasMoves1);
+    bool isFirstPieceAny = false;
     if (m_nuColors > 2)
     {
         if (set(m_points2, bd.get_points(Color(2))))
@@ -574,6 +577,52 @@ void GameModel::updateProperties()
         if (set(m_hasMoves3, bd.has_moves(Color(3))))
             emit hasMoves3Changed(m_hasMoves3);
     }
+    m_tmpPoints.clear();
+    if (bd.is_first_piece(Color(0)))
+    {
+        isFirstPieceAny = true;
+        if (! isTrigon)
+            for (Point p : bd.get_starting_points(Color(0)))
+                m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
+    }
+    if (set(m_startingPoints0, m_tmpPoints))
+        emit startingPoints0Changed(m_startingPoints0);
+    m_tmpPoints.clear();
+    if (bd.is_first_piece(Color(1)))
+    {
+        isFirstPieceAny = true;
+        if (! isTrigon)
+            for (Point p : bd.get_starting_points(Color(1)))
+                m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
+    }
+    if (set(m_startingPoints1, m_tmpPoints))
+        emit startingPoints1Changed(m_startingPoints1);
+    m_tmpPoints.clear();
+    if (m_nuColors > 2 && bd.is_first_piece(Color(2)))
+    {
+        isFirstPieceAny = true;
+        if (! isTrigon)
+            for (Point p : bd.get_starting_points(Color(2)))
+                m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
+    }
+    if (set(m_startingPoints2, m_tmpPoints))
+        emit startingPoints2Changed(m_startingPoints2);
+    m_tmpPoints.clear();
+    if (m_nuColors > 3 && bd.is_first_piece(Color(3)))
+    {
+        isFirstPieceAny = true;
+        if (! isTrigon)
+            for (Point p : bd.get_starting_points(Color(3)))
+                m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
+    }
+    if (set(m_startingPoints3, m_tmpPoints))
+        emit startingPoints3Changed(m_startingPoints3);
+    m_tmpPoints.clear();
+    if (isTrigon && isFirstPieceAny)
+        for (Point p : bd.get_starting_points(Color(0)))
+            m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
+    if (set(m_startingPointsAll, m_tmpPoints))
+        emit startingPointsAllChanged(m_startingPointsAll);
     auto& current = m_game.get_current();
     if (set(m_canUndo,
             ! current.has_children() && tree.has_move_ignore_invalid(current)

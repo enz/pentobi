@@ -60,6 +60,16 @@ class GameModel
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels2 READ pieceModels2)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels3 READ pieceModels3)
+    Q_PROPERTY(QVariantList startingPoints0 MEMBER m_startingPoints0
+               NOTIFY startingPoints0Changed)
+    Q_PROPERTY(QVariantList startingPoints1 MEMBER m_startingPoints1
+               NOTIFY startingPoints1Changed)
+    Q_PROPERTY(QVariantList startingPoints2 MEMBER m_startingPoints2
+               NOTIFY startingPoints2Changed)
+    Q_PROPERTY(QVariantList startingPoints3 MEMBER m_startingPoints3
+               NOTIFY startingPoints3Changed)
+    Q_PROPERTY(QVariantList startingPointsAll MEMBER m_startingPointsAll
+               NOTIFY startingPointsAllChanged)
 
 public:
     static Variant getInitialGameVariant();
@@ -194,6 +204,16 @@ signals:
 
     void nuColorsChanged(int);
 
+    void startingPoints0Changed(QVariantList);
+
+    void startingPoints1Changed(QVariantList);
+
+    void startingPoints2Changed(QVariantList);
+
+    void startingPoints3Changed(QVariantList);
+
+    void startingPointsAllChanged(QVariantList);
+
 private:
     Game m_game;
 
@@ -260,6 +280,18 @@ private:
     QList<PieceModel*> m_pieceModels3;
 
     PieceModel* m_lastMovePieceModel;
+
+    QVariantList m_startingPoints0;
+
+    QVariantList m_startingPoints1;
+
+    QVariantList m_startingPoints2;
+
+    QVariantList m_startingPoints3;
+
+    QVariantList m_startingPointsAll;
+
+    QVariantList m_tmpPoints;
 
 
     void createPieceModels();

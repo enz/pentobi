@@ -66,6 +66,11 @@ Item {
     }
     property real imgOffsetX: (width - imgWidth) / 2
     property real imgOffsetY: (height - imgHeight) / 2
+    property real startingPointSize: {
+        if (isTrigon) return 0.27 * gridElementHeight
+        if (isNexos) return 0.25 * gridElementHeight
+        return 0.35 * gridElementHeight
+    }
 
     function mapFromGameX(x) {
         if (isTrigon) return imgOffsetX + (x + 0.5) * gridElementWidth
@@ -89,6 +94,10 @@ Item {
         else
             return Qt.point((x - imgOffsetX) / gridElementWidth,
                             (y - imgOffsetY) / gridElementHeight)
+    }
+    function getCenterYTrigon(pos) {
+        var isDownward = ((pos.x % 2 == 0) != (pos.y % 2 == 0))
+        return (isDownward ? 1 : 2) / 3 * gridElementHeight
     }
 
     Image {
@@ -120,5 +129,64 @@ Item {
         }
         sourceSize { width: imgWidth; height: imgHeight }
         asynchronous: true
+    }
+    Repeater {
+        model: gameModel.startingPoints0
+
+        Rectangle {
+            color: theme.colorBlue
+            width: startingPointSize; height: width
+            radius: width / 2
+            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+        }
+    }
+    Repeater {
+        model: gameModel.startingPoints1
+
+        Rectangle {
+            color: gameModel.gameVariant == "duo"
+                   || gameModel.gameVariant == "junior"
+                   || gameModel.gameVariant == "callisto_2" ?
+                       theme.colorGreen : theme.colorYellow
+            width: startingPointSize; height: width
+            radius: width / 2
+            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+        }
+    }
+    Repeater {
+        model: gameModel.startingPoints2
+
+        Rectangle {
+            color: theme.colorRed
+            width: startingPointSize; height: width
+            radius: width / 2
+            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+        }
+    }
+    Repeater {
+        model: gameModel.startingPoints3
+
+        Rectangle {
+            color: theme.colorGreen
+            width: startingPointSize; height: width
+            radius: width / 2
+            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+        }
+    }
+    Repeater {
+        model: gameModel.startingPointsAll
+
+        Rectangle {
+            color: theme.colorStartingPoint
+            width: startingPointSize; height: width
+            radius: width / 2
+            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
+            y: mapFromGameY(modelData.y) + getCenterYTrigon(modelData)
+               - height / 2
+        }
     }
 }

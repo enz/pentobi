@@ -1,55 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="280" width="280" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <path d="m0 0h280v280h-280z" fill="#494347"/>
-<g fill-rule="evenodd">
-<path d="m10 273a3 3 0 0 1 -6 0 3 3 0 1 1 6 0z" fill="#00c000"/>
-<path d="m6.78 4a3 3 0 0 0 -2.78 3 3 3 0 0 0 6 0 3 3 0 0 0 -3.22 -3z" fill="#0073cf"/>
-<path d="m276 7a3 3 0 0 1 -6 0 3 3 0 1 1 6 0z" fill="#ebcd23"/>
-<path d="m276 273a3 3 0 0 1 -6 0 3 3 0 1 1 6 0z" fill="#e63e2c"/>
-</g>
 <g id="b">
 <g id="a">
 <path d="m14 0.0000617h-14v13.99994l0.6999999-0.699997v-12.59994h12.6z" fill="#3b3639"/>
 <path d="m14 0.0000617-0.7 0.6999969v12.59994h-12.6l-0.7 0.7h14z" fill="#6d686b"/>
 </g>
 <use y="0" x="0" xlink:href="#a"/>
-<use xlink:href="#a" transform="translate(14)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(28)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(41.99999)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(55.99999)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(69.99999)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(83.99999)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(97.99999)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(112)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(126)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(140)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(154)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(168)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(182)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(196)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(210)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(224)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(238)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(252)" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(266)" y="0" x="0"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(14)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(28)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(41.99999)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(55.99999)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(69.99999)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(83.99999)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(97.99999)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(112)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(126)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(140)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(154)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(168)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(182)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(196)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(210)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(224)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(238)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(252)"/>
+<use y="0" x="0" xlink:href="#a" transform="translate(266)"/>
 </g>
-<use xlink:href="#b" transform="translate(0 13.99994)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 27.99988)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 41.99982)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 55.99975)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 69.99969)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0,83.99963)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 97.99957)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 111.9995)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 125.9994)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 139.9994)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 153.9993)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 167.9993)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0,181.9992)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 195.9991)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 209.9991)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 223.999)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 237.999)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 251.9989)" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(0 265.9988)" y="0" x="0"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 13.99994)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 27.99988)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 41.99982)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 55.99975)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 69.99969)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,83.99963)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 97.99957)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 111.9995)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 125.9994)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 139.9994)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 153.9993)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 167.9993)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0,181.9992)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 195.9991)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 209.9991)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 223.999)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 237.999)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 251.9989)"/>
+<use y="0" x="0" xlink:href="#b" transform="translate(0 265.9988)"/>
 </svg>

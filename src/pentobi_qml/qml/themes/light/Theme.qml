@@ -8,6 +8,7 @@ QtObject {
     property color colorYellow: "#EBCD23"
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
+    property color colorStartingPoint: "#767074"
     property real toPlayColorLighter: 0.5
 
     function getImage(name) { return "themes/light/" + name + ".svg" }
