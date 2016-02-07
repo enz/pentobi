@@ -245,10 +245,14 @@ public:
         @see set_full_select_min. */
     void set_full_select_interval(unsigned n);
 
+    unsigned get_full_select_interval() const;
+
     /** The minimum node count to do a full move selection only in a certain
         interval.
         See set_full_select_interval(). */
     void set_full_select_min(Float n);
+
+    Float get_full_select_min() const;
 
     /** Minimum count of a node to be expanded. */
     void set_expand_threshold(Float n);
@@ -600,9 +604,7 @@ private:
 
 
 template<class S, class M, class R>
-SearchBase<S, M, R>::ThreadState::~ThreadState()
-{
-}
+SearchBase<S, M, R>::ThreadState::~ThreadState() = default;
 
 template<class S, class M, class R>
 SearchBase<S, M, R>::Thread::Thread(SearchFunc& search_func)
@@ -676,15 +678,14 @@ void SearchBase<S, M, R>::Thread::wait_search_finished()
 
 #if LIBBOARDGAME_DEBUG
 template<class S, class M, class R>
-SearchBase<S, M, R>::AssertionHandler::AssertionHandler(const SearchBase& search)
+SearchBase<S, M, R>::AssertionHandler::AssertionHandler(
+        const SearchBase& search)
     : m_search(search)
 {
 }
 
 template<class S, class M, class R>
-SearchBase<S, M, R>::AssertionHandler::~AssertionHandler()
-{
-}
+SearchBase<S, M, R>::AssertionHandler::~AssertionHandler() = default;
 
 template<class S, class M, class R>
 void SearchBase<S, M, R>::AssertionHandler::run()
@@ -902,6 +903,18 @@ template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_expand_threshold_inc() const -> Float
 {
     return m_expand_threshold_inc;
+}
+
+template<class S, class M, class R>
+inline unsigned SearchBase<S, M, R>::get_full_select_interval() const
+{
+    return m_full_select_interval;
+}
+
+template<class S, class M, class R>
+inline auto SearchBase<S, M, R>::get_full_select_min() const -> Float
+{
+    return m_full_select_min;
 }
 
 template<class S, class M, class R>
