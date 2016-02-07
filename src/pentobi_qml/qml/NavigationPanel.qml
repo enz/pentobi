@@ -3,9 +3,14 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.0
 import "." as Pentobi
 
-Column {
+ColumnLayout {
     id: root
 
+    Text {
+        text: gameModel.positionInfo
+        color: theme.fontColorPosInfo
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+    }
     RowLayout
     {
         width: root.width; height: width / 6
@@ -46,11 +51,5 @@ Column {
             Layout.fillWidth: true
             onClicked: gameModel.goNextVar()
         }
-    }
-    Text {
-        anchors.horizontalCenter: root.horizontalCenter
-        text: gameModel.positionInfo
-        color: theme.fontColorPosInfo
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenterCenter
     }
 }
