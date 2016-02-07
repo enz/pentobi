@@ -83,7 +83,7 @@ Item {
     }
     function mapToGame(x, y) {
         if (isTrigon)
-            return Qt.point((x - imgOffsetX + 0.5 * gridElementWidth)
+            return Qt.point((x - imgOffsetX - 0.5 * gridElementWidth)
                             / gridElementWidth,
                             (y - imgOffsetY) / gridElementHeight)
         else if (isNexos)
