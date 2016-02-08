@@ -678,9 +678,8 @@ void GameModel::updateProperties()
     for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         auto mv = bd.get_move(i);
-        auto pieceModel = updatePiece(mv.color, mv.move, isPlayed[mv.color]);
-        if (i == bd.get_nu_moves() - 1)
-            m_lastMovePieceModel = pieceModel;
+        m_lastMovePieceModel =
+                updatePiece(mv.color, mv.move, isPlayed[mv.color]);
     }
     for (Color c : bd.get_colors())
     {
