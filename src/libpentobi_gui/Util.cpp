@@ -425,15 +425,6 @@ void Util::paintEmptySegment(QPainter& painter, bool isHorizontal, qreal x,
                     gray, gray.darker(130), gray.lighter(115));
 }
 
-void Util::paintEmptySegmentStartingPoint(QPainter& painter, Variant variant,
-                                          Color c, bool isHorizontal, qreal x,
-                                          qreal y, qreal size)
-{
-    paintEmptySegment(painter, isHorizontal, x, y, size);
-    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
-             0.1 * size);
-}
-
 void Util::paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size)
 {
     paintSquare(painter, x, y, size, size, gray, gray.darker(130),
@@ -457,30 +448,11 @@ void Util::paintEmptySquareCallistoCenter(QPainter& painter, qreal x, qreal y,
                 gray.lighter(95), false);
 }
 
-void Util::paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
-                                         Color c, qreal x, qreal y, qreal size)
-{
-    paintEmptySquare(painter, x, y, size);
-    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
-             0.13 * size);
-}
-
 void Util::paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x,
                               qreal y, qreal width, qreal height)
 {
     paintTriangle(painter, isUpward, x, y, width, height, gray,
                   gray.darker(130), gray.lighter(115));
-}
-
-void Util::paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpward,
-                                           qreal x, qreal y, qreal width,
-                                           qreal height)
-{
-    paintEmptyTriangle(painter, isUpward, x, y, width, height);
-    if (isUpward)
-        y += 0.333 * height;
-    height = 0.666 * height;
-    paintDot(painter, gray.darker(130), x, y, width, height, 0.17 * width);
 }
 
 void Util::paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
@@ -529,6 +501,31 @@ void Util::paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
         painter.drawPolygon(polygon, 3);
     }
     painter.restore();
+}
+
+void Util::paintSegmentStartingPoint(QPainter& painter, Variant variant,
+                                          Color c, qreal x, qreal y,
+                                     qreal size)
+{
+    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
+             0.1 * size);
+}
+
+void Util::paintSquareStartingPoint(QPainter& painter, Variant variant,
+                                    Color c, qreal x, qreal y, qreal size)
+{
+    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
+             0.13 * size);
+}
+
+void Util::paintTriangleStartingPoint(QPainter& painter, bool isUpward,
+                                      qreal x, qreal y, qreal width,
+                                      qreal height)
+{
+    if (isUpward)
+        y += 0.333 * height;
+    height = 0.666 * height;
+    paintDot(painter, gray.darker(130), x, y, width, height, 0.17 * width);
 }
 
 //-----------------------------------------------------------------------------

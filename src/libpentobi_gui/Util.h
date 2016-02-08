@@ -56,11 +56,6 @@ void paintEmptyJunction(QPainter& painter, qreal x, qreal y, qreal size);
 void paintEmptySegment(QPainter& painter, bool isHorizontal, qreal x, qreal y,
                        qreal size);
 
-/** Paint empty segment with starting point in Nexos. */
-void paintEmptySegmentStartingPoint(QPainter& painter, Variant variant,
-                                    Color c, bool isHorizontal, qreal x,
-                                    qreal y, qreal size);
-
 void paintEmptySquare(QPainter& painter, qreal x, qreal y, qreal size);
 
 void paintEmptySquareCallisto(QPainter& painter, qreal x, qreal y, qreal size);
@@ -68,19 +63,23 @@ void paintEmptySquareCallisto(QPainter& painter, qreal x, qreal y, qreal size);
 void paintEmptySquareCallistoCenter(QPainter& painter, qreal x, qreal y,
                                     qreal size);
 
-void paintEmptySquareStartingPoint(QPainter& painter, Variant variant,
-                                   Color c, qreal x, qreal y, qreal size);
-
 void paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x, qreal y,
                         qreal width, qreal height);
-
-void paintEmptyTriangleStartingPoint(QPainter& painter, bool isUpward, qreal x,
-                                     qreal y, qreal width, qreal height);
 
 void paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
                    qreal y, qreal width, qreal height, bool hasLeft,
                    bool hasRight, bool hasUp, bool hasDown, qreal alpha = 1,
                    qreal saturation = 1);
+
+/** Paint starting point in Nexos. */
+void paintSegmentStartingPoint(QPainter& painter, Variant variant, Color c,
+                               qreal x, qreal y, qreal size);
+
+void paintSquareStartingPoint(QPainter& painter, Variant variant, Color c,
+                              qreal x, qreal y, qreal size);
+
+void paintTriangleStartingPoint(QPainter& painter, bool isUpward, qreal x,
+                                qreal y, qreal width, qreal height);
 
 /** Convert a property value of a SGF tree unto a QString.
     @param value

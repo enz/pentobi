@@ -15,6 +15,7 @@ using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
+using libpentobi_base::ColorMap;
 using libpentobi_base::Variant;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
@@ -45,9 +46,9 @@ public:
 
     ~BoardPainter();
 
-    void setCoordinates(bool enable);
+    void setCoordinates(bool enable) { m_coordinates = enable; }
 
-    void setCoordinateColor(const QColor& color);
+    void setCoordinateColor(const QColor& color) { m_coordinateColor = color; }
 
     /** Paint the board.
         This function must be called before painting any pieces because it
@@ -78,7 +79,7 @@ public:
         not called yet or the pixel is outside the board. */
     CoordPoint getCoordPoint(int x, int y);
 
-    bool hasPainted() const;
+    bool hasPainted() const { return m_hasPainted; }
 
 private:
     bool m_hasPainted = false;
@@ -136,22 +137,10 @@ private:
     void paintMarks(QPainter& painter, const Grid<PointState>& pointState,
                     Variant variant, const Grid<int>& marks);
 
+    void paintStartingPoints(QPainter& painter, Variant variant,
+                             const Grid<PointState>& pointState,
+                             const ColorMap<bool>& isFirstPiece);
 };
-
-inline void BoardPainter::setCoordinateColor(const QColor& color)
-{
-    m_coordinateColor = color;
-}
-
-inline bool BoardPainter::hasPainted() const
-{
-    return m_hasPainted;
-}
-
-inline void BoardPainter::setCoordinates(bool enable)
-{
-    m_coordinates = enable;
-}
 
 //-----------------------------------------------------------------------------
 

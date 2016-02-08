@@ -38,10 +38,7 @@ BoardPainter::BoardPainter()
     m_fontCoordLabels.setStretch(QFont::SemiCondensed);
 }
 
-BoardPainter::~BoardPainter()
-{
-    // Same as default destructor but non-inline
-}
+BoardPainter::~BoardPainter() = default;
 
 CoordPoint BoardPainter::getCoordPoint(int x, int y)
 {
@@ -151,7 +148,6 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     painter.translate(m_boardOffset);
     if (m_coordinates)
         paintCoordinates(painter);
-    m_startingPoints.init(variant, *m_geo);
     if (m_isNexos)
         painter.fillRect(QRectF(m_fieldWidth / 4, m_fieldHeight / 4,
                                 m_width * m_fieldWidth - m_fieldWidth / 2,
@@ -168,30 +164,16 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         if (m_isTrigon)
         {
             bool isUpward = (pointType == 0);
-            if (m_startingPoints.is_colorless_starting_point(p))
-                Util::paintEmptyTriangleStartingPoint(painter, isUpward,
-                                                      fieldX, fieldY,
-                                                      m_fieldWidth,
-                                                      m_fieldHeight);
-            else
-                Util::paintEmptyTriangle(painter, isUpward, fieldX, fieldY,
-                                         m_fieldWidth, m_fieldHeight);
+            Util::paintEmptyTriangle(painter, isUpward, fieldX, fieldY,
+                                     m_fieldWidth, m_fieldHeight);
         }
         else if (m_isNexos)
         {
             if (pointType == 1 || pointType == 2)
             {
                 bool isHorizontal = (pointType == 1);
-                if (m_startingPoints.is_colored_starting_point(p))
-                {
-                    Color c = m_startingPoints.get_starting_point_color(p);
-                    Util::paintEmptySegmentStartingPoint(painter, variant, c,
-                                                         isHorizontal, fieldX,
-                                                         fieldY, m_fieldWidth);
-                }
-                else
-                    Util::paintEmptySegment(painter, isHorizontal, fieldX,
-                                            fieldY, m_fieldWidth);
+                Util::paintEmptySegment(painter, isHorizontal, fieldX, fieldY,
+                                        m_fieldWidth);
             }
             else
             {
@@ -200,25 +182,15 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
                                          m_fieldWidth);
             }
         }
+        else if (m_isCallisto
+                 && CallistoGeometry::is_center_section(x, y, nu_players))
+            Util::paintEmptySquareCallistoCenter(painter, fieldX, fieldY,
+                                                 m_fieldWidth);
+        else if (m_isCallisto)
+            Util::paintEmptySquareCallisto(painter, fieldX, fieldY,
+                                           m_fieldWidth);
         else
-        {
-            if (m_startingPoints.is_colored_starting_point(p))
-            {
-                Color c = m_startingPoints.get_starting_point_color(p);
-                Util::paintEmptySquareStartingPoint(painter, variant, c,
-                                                    fieldX, fieldY,
-                                                    m_fieldWidth);
-            }
-            else if (m_isCallisto
-                     && CallistoGeometry::is_center_section(x, y, nu_players))
-                Util::paintEmptySquareCallistoCenter(painter, fieldX, fieldY,
-                                                     m_fieldWidth);
-            else if (m_isCallisto)
-                Util::paintEmptySquareCallisto(painter, fieldX, fieldY,
-                                               m_fieldWidth);
-            else
-                Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
-        }
+            Util::paintEmptySquare(painter, fieldX, fieldY, m_fieldWidth);
     }
     painter.restore();
 }
@@ -413,6 +385,7 @@ void BoardPainter::paintPieces(QPainter& painter,
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
     painter.translate(m_boardOffset);
+    ColorMap<bool> isFirstPiece(true);
     for (Point p : *m_geo)
     {
         int x = m_geo->get_x(p);
@@ -425,10 +398,11 @@ void BoardPainter::paintPieces(QPainter& painter,
         {
             if (s.is_empty())
                 continue;
+            Color c = s.to_color();
+            isFirstPiece[c] = false;
             bool isUpward = (pointType == 0);
-            Util::paintColorTriangle(painter, m_variant, s.to_color(),
-                                     isUpward, fieldX, fieldY, m_fieldWidth,
-                                     m_fieldHeight);
+            Util::paintColorTriangle(painter, m_variant, c, isUpward, fieldX,
+                                     fieldY, m_fieldWidth, m_fieldHeight);
         }
         else if (m_isNexos)
         {
@@ -436,10 +410,11 @@ void BoardPainter::paintPieces(QPainter& painter,
             {
                 if (s.is_empty())
                     continue;
+                Color c = s.to_color();
+                isFirstPiece[c] = false;
                 bool isHorizontal = (pointType == 1);
-                Util::paintColorSegment(painter, m_variant, s.to_color(),
-                                        isHorizontal, fieldX, fieldY,
-                                        m_fieldWidth);
+                Util::paintColorSegment(painter, m_variant, c, isHorizontal,
+                                        fieldX, fieldY, m_fieldWidth);
             }
             else
             {
@@ -453,6 +428,7 @@ void BoardPainter::paintPieces(QPainter& painter,
             if (s.is_empty())
                 continue;
             Color c = s.to_color();
+            isFirstPiece[c] = false;
             if (m_isCallisto)
             {
                 bool hasLeft =
@@ -478,6 +454,7 @@ void BoardPainter::paintPieces(QPainter& painter,
                                        m_fieldWidth);
         }
     }
+    paintStartingPoints(painter, m_variant, pointState, isFirstPiece);
     if (marks)
         paintMarks(painter, pointState, m_variant, *marks);
     if (labels)
@@ -582,6 +559,63 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
                                 saturation);
         }
     painter.restore();
+}
+
+void BoardPainter::paintStartingPoints(QPainter& painter, Variant variant,
+                                       const Grid<PointState>& pointState,
+                                       const ColorMap<bool>& isFirstPiece)
+{
+    m_startingPoints.init(variant, *m_geo);
+    auto colors = get_colors(variant);
+    if (m_isTrigon)
+    {
+        bool isFirstPieceAny = false;
+        for (Color c : colors)
+            if (isFirstPiece[c])
+            {
+                isFirstPieceAny = true;
+                break;
+            }
+        if (! isFirstPieceAny)
+            return;
+        for (Point p : m_startingPoints.get_starting_points(Color(0)))
+        {
+            if (! pointState[p].is_empty())
+                continue;
+            int x = m_geo->get_x(p);
+            int y = m_geo->get_y(p);
+            qreal fieldX = x * m_fieldWidth;
+            qreal fieldY = y * m_fieldHeight;
+            auto pointType = m_geo->get_point_type(x, y);
+            bool isUpward = (pointType == 0);
+            Util::paintTriangleStartingPoint(painter, isUpward, fieldX, fieldY,
+                                             m_fieldWidth, m_fieldHeight);
+        }
+    }
+    else
+    {
+        for (Color c : colors)
+        {
+            if (! isFirstPiece[c])
+                continue;
+            for (Point p : m_startingPoints.get_starting_points(c))
+            {
+                if (! pointState[p].is_empty())
+                    continue;
+                int x = m_geo->get_x(p);
+                int y = m_geo->get_y(p);
+                qreal fieldX = x * m_fieldWidth;
+                qreal fieldY = y * m_fieldHeight;
+                if (m_isNexos)
+                    Util::paintSegmentStartingPoint(painter, variant, c,
+                                                    fieldX, fieldY,
+                                                    m_fieldWidth);
+                else
+                    Util::paintSquareStartingPoint(painter, variant, c, fieldX,
+                                                   fieldY, m_fieldWidth);
+            }
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------
