@@ -508,7 +508,7 @@ void Util::paintSegmentStartingPoint(QPainter& painter, Variant variant,
                                      qreal size)
 {
     paintDot(painter, getPaintColor(variant, c), x, y, size, size,
-             0.1 * size);
+             0.15 * size);
 }
 
 void Util::paintSquareStartingPoint(QPainter& painter, Variant variant,

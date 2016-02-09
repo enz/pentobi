@@ -68,7 +68,7 @@ Item {
     property real imgOffsetY: (height - imgHeight) / 2
     property real startingPointSize: {
         if (isTrigon) return 0.27 * gridElementHeight
-        if (isNexos) return 0.25 * gridElementHeight
+        if (isNexos) return 0.3 * gridElementHeight
         return 0.35 * gridElementHeight
     }
 
