@@ -1043,17 +1043,15 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         // as long as the node count is above m_full_select_min.
         --thread_state.full_select_counter;
         unsigned depth = 0;
-        while (node->has_children())
+        while (node->get_visit_count() > m_full_select_min
+               && depth < simulation.nodes.size() - 1)
         {
-            if (node->get_visit_count() <= m_full_select_min
-                    || depth + 1 >= simulation.nodes.size())
-                break;
-            node = simulation.nodes[depth + 1];
+            ++depth;
+            node = simulation.nodes[depth];
             m_tree.inc_visit_count(*node);
             if (multithread && SearchParamConst::virtual_loss)
                 m_tree.add_value(*node, 0);
             state.play_in_tree(node->get_move());
-            ++depth;
             expand_threshold += m_expand_threshold_inc;
         }
         simulation.nodes.resize(depth + 1);
