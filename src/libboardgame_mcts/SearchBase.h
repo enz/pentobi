@@ -1616,13 +1616,8 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
     }
 
     // Reset was_played
-    while (true)
-    {
-        ++i;
-        if (i >= nu_moves)
-            break;
+    while (++i < nu_moves)
         was_played[moves[i].move.to_int()] = max_players;
-    }
 }
 
 template<class S, class M, class R>
