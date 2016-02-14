@@ -173,13 +173,12 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         for (Point p : bd.get_attach_points(c))
             if (! is_forbidden[p])
             {
-                // Occupying opponent attach points is very good
-                point_value[p] = 3.2f;
+                // Occupying opponent attach points or points adjacent to them
+                // is very good
+                point_value[p] = 3.f;
                 for (Point j : geo.get_adj(p))
                     if (! is_forbidden[j])
-                        // Occupying points adjacent to opponent attach points
-                        // is good
-                        point_value[j] = max(point_value[j], Float(2.5));
+                        point_value[j] = 3.f;
             }
     }
     if (variant == Variant::classic_2
