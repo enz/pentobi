@@ -1440,7 +1440,7 @@ void MainWindow::exportAsciiArt()
     ofstream out(file.toLocal8Bit().constData());
     m_bd.write(out, false);
     if (! out)
-        showError(strerror(errno));
+        showError(QString::fromLocal8Bit(strerror(errno)));
 }
 
 void MainWindow::exportImage()
@@ -1766,13 +1766,13 @@ void MainWindow::gameOver()
         int newRating = m_history->getRating().to_int();
         if (newRating > oldRating)
             detailText = tr("Your rating has increased from %1 to %2.")
-            .arg(oldRating).arg(newRating);
+                  .arg(QString::number(oldRating), QString::number(newRating));
         else if (newRating == oldRating)
             detailText = tr("Your rating stays at %1.").arg(oldRating);
         else
             detailText =
-            tr("Your rating has decreased from %1 to %2.")
-            .arg(oldRating).arg(newRating);
+                  tr("Your rating has decreased from %1 to %2.")
+                  .arg(QString::number(oldRating), QString::number(newRating));
         setRated(false);
         QSettings settings;
         auto key = QString("next_rated_random_") + to_string_id(variant);
@@ -2292,7 +2292,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
         {
             QString text =
                 tr("Could not read file '%1'").arg(QFileInfo(file).fileName());
-            showError(text, strerror(errno));
+            showError(text, QString::fromLocal8Bit(strerror(errno)));
         }
         else
         {
@@ -2518,7 +2518,8 @@ void MainWindow::ratedGame()
     initQuestion(msgBox, tr("Start rated game?"),
                  "<html>" +
                  tr("In this game, you play %1 against Pentobi level&nbsp;%2.")
-                 .arg(getPlayerString(variant, m_ratedGameColor)).arg(level));
+                 .arg(getPlayerString(variant, m_ratedGameColor),
+                      QString::number(level)));
     auto startGameButton =
         msgBox.addButton(tr("&Start Game"), QMessageBox::AcceptRole);
     msgBox.addButton(QMessageBox::Cancel);
@@ -2538,7 +2539,7 @@ void MainWindow::ratedGame()
     m_autoPlay = true;
     QString computerPlayerName =
         //: The first argument is the version of Pentobi
-        tr("Pentobi %1 (level %2)").arg(getVersion()).arg(level);
+        tr("Pentobi %1 (level %2)").arg(getVersion(), QString::number(level));
     string charset = m_game.get_root().get_property("CA", "");
     string computerPlayerNameStdStr =
         Util::convertSgfValueFromQString(computerPlayerName, charset);
@@ -2647,7 +2648,8 @@ bool MainWindow::save(const QString& file)
                   /*: Error message if file cannot be saved. %1 is
                     replaced by the file name, %2 by the error message
                     of the operating system. */
-                  tr("%1: %2").arg(file).arg(strerror(errno)));
+                  tr("%1: %2").arg(file,
+                                   QString::fromLocal8Bit(strerror(errno))));
         return false;
     }
     else
@@ -3247,12 +3249,14 @@ void MainWindow::updateMoveNumber()
             if (move == 0)
                 toolTip = tr("%n move(s)", "", totalMoves);
             else
-                toolTip = tr("Move %1 of %2").arg(move).arg(totalMoves);
+                toolTip = tr("Move %1 of %2").arg(QString::number(move),
+                                                  QString::number(totalMoves));
         }
     }
     else
         toolTip = tr("Move %1 of %2 in variation %3")
-                    .arg(move).arg(totalMoves).arg(variation.c_str());
+                  .arg(QString::number(move), QString::number(totalMoves),
+                       variation.c_str());
     if (text.isEmpty())
     {
         if (m_moveNumber->isVisible())

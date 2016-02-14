@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
         QImageReader reader(in);
         QImage image = reader.read();
         if (image.isNull())
-            throw QString("%1: %2").arg(in).arg(reader.errorString());
+            throw QString("%1: %2").arg(in, reader.errorString());
         QSize size = image.size();
         if (createHdpi)
         {
@@ -50,16 +50,16 @@ int main(int argc, char* argv[])
             reader.setScaledSize(2 * size);
             QImage image = reader.read();
             if (image.isNull())
-                throw QString("%1: %2").arg(in).arg(reader.errorString());
+                throw QString("%1: %2").arg(in, reader.errorString());
             QImageWriter writer(out);
             if (! writer.write(image))
-                throw QString("%1: %2").arg(out).arg(writer.errorString());
+                throw QString("%1: %2").arg(out, writer.errorString());
         }
         else
         {
             QImageWriter writer(out);
             if (! writer.write(image))
-                throw QString("%1: %2").arg(out).arg(writer.errorString());
+                throw QString("%1: %2").arg(out, writer.errorString());
         }
     }
     catch (const QString& msg)

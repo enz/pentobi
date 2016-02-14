@@ -87,15 +87,14 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
 QString HelpWindow::findMainPage(QString helpDir, QString appName)
 {
     auto locale = QLocale::system().name();
-    auto path = QString("%1/%2/%3/index.html")
-            .arg(helpDir).arg(locale).arg(appName);
+    auto path = QString("%1/%2/%3/index.html").arg(helpDir, locale, appName);
     if (QFile(path).exists())
         return path;
     path = QString("%1/%2/%3/index.html")
-            .arg(helpDir).arg(locale.split("_")[0]).arg(appName);
+            .arg(helpDir, locale.split("_")[0], appName);
     if (QFile(path).exists())
         return path;
-    return QString("%1/C/%3/index.html").arg(helpDir).arg(appName);
+    return QString("%1/C/%3/index.html").arg(helpDir, appName);
 }
 
 void HelpWindow::closeEvent(QCloseEvent* event)

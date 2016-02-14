@@ -122,11 +122,7 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
 
 QString ScoreDisplay::getScoreText(ScoreType points, ScoreType bonus) const
 {
-    QString text =
-            QString("%1%2")
-            .arg(bonus > 0 ? "*" : "")
-            .arg(points);
-    return text;
+    return QString("%1%2").arg(bonus > 0 ? "*" : "", QString::number(points));
 }
 
 QString ScoreDisplay::getScoreText(Color c)

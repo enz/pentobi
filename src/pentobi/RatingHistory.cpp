@@ -95,7 +95,7 @@ void RatingHistory::clear()
 
 QString RatingHistory::getFile(unsigned n) const
 {
-    return QString("%1/%2.blksgf").arg(m_dir).arg(n);
+    return QString("%1/%2.blksgf").arg(m_dir, QString::number(n));
 }
 
 void RatingHistory::getNextRatedGameSettings(int maxLevel, unsigned random,
