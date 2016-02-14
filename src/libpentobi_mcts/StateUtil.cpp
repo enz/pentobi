@@ -21,23 +21,8 @@ using libpentobi_base::PointState;
 
 namespace {
 
-/** Return the symmetric point state for symmetry detection.
-    Only used for Variant::duo. Returns the other color or empty, if the
-    given point state is empty. */
-PointState get_symmetric_state(Color c)
-{
-    if (c == Color(0))
-        return PointState(Color(1));
-    else if (c == Color(1))
-        return PointState(Color(0));
-    else if (c == Color(2))
-        return PointState(Color(3));
-    else
-    {
-        LIBBOARDGAME_ASSERT(c == Color(3));
-        return PointState(Color(2));
-    }
-}
+array<Color, Color::range> symmetric_state =
+    { Color(1), Color(0), Color(3), Color(2) };
 
 } // namespace
 
@@ -58,7 +43,7 @@ bool check_symmetry_broken(const Board& bd,
             {
                 Point symm_p = symmetric_points[p];
                 PointState s2 = bd.get_point_state(symm_p);
-                if (s2 != get_symmetric_state(s1.to_color()))
+                if (s2 != symmetric_state[s1.to_int()])
                     return true;
             }
         }
@@ -86,7 +71,7 @@ bool check_symmetry_broken(const Board& bd,
             {
                 Point symm_p = symmetric_points[p];
                 PointState s2 = bd.get_point_state(symm_p);
-                if (s2 != get_symmetric_state(s1.to_color()))
+                if (s2 != symmetric_state[s1.to_int()])
                     if (! (points.contains(p) && s2.is_empty()))
                         return true;
             }
