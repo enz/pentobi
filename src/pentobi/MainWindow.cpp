@@ -2043,7 +2043,9 @@ void MainWindow::initGame()
 
 void MainWindow::initVariantActions()
 {
-    for (auto action : m_actionGroupVariant->actions())
+    // Use a temporary const variable to avoid that QList detaches in for loop
+    const auto actions = m_actionGroupVariant->actions();
+    for (auto action : actions)
         if (Variant(action->data().toInt()) == m_bd.get_variant())
         {
             action->setChecked(true);
