@@ -52,6 +52,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
     bool isCallisto = (bd.get_piece_set() == PieceSet::callisto);
     auto& info = bd.get_piece_info(piece);
     auto& points = info.get_points();
+    m_elements.reserve(points.size());
     for (auto& p : points)
     {
         if (isNexos && geo.get_point_type(p) == 0)
@@ -75,6 +76,8 @@ PieceModel::PieceModel(QObject* parent, const Board& bd,
                 candidates.include(CoordPoint(p.x, p. y + 1));
             }
         }
+        m_junctions.reserve(candidates.size());
+        m_junctionType.reserve(candidates.size());
         for (auto& p : candidates)
         {
             bool hasLeft = points.contains(CoordPoint(p.x - 1, p. y));

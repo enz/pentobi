@@ -131,9 +131,11 @@ void GameModel::createPieceModels()
 
 void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
 {
-    pieceModels.clear();
     auto& bd = getBoard();
-    for (Piece::IntType i = 0; i < bd.get_nu_uniq_pieces(); ++i)
+    auto nuPieces = bd.get_nu_uniq_pieces();
+    pieceModels.clear();
+    pieceModels.reserve(nuPieces);
+    for (Piece::IntType i = 0; i < nuPieces; ++i)
     {
         Piece piece(i);
         for (unsigned j = 0; j < bd.get_piece_info(piece).get_nu_instances();
