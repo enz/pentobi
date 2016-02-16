@@ -1,6 +1,5 @@
 add_executable(unittest_libboardgame_util
   ArrayListTest.cpp
-  MathUtilTest.cpp
   OptionsTest.cpp
   StatisticsTest.cpp
   StringUtilTest.cpp

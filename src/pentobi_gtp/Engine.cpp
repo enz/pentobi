@@ -92,7 +92,7 @@ void Engine::cmd_param(const Arguments& args, Response& response)
         response
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
             << "auto_param " << s.get_auto_param() << '\n'
-            << "bias_term_constant " << s.get_bias_term_constant() << '\n'
+            << "exploration_constant " << s.get_exploration_constant() << '\n'
             << "expand_threshold " << s.get_expand_threshold() << '\n'
             << "expand_threshold_inc " << s.get_expand_threshold_inc() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
@@ -111,8 +111,8 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_avoid_symmetric_draw(args.parse<bool>(1));
         else if (name == "auto_param")
             s.set_auto_param(args.parse<bool>(1));
-        else if (name == "bias_term_constant")
-            s.set_bias_term_constant(args.parse<Float>(1));
+        else if (name == "exploration_constant")
+            s.set_exploration_constant(args.parse<Float>(1));
         else if (name == "expand_threshold")
             s.set_expand_threshold(args.parse<Float>(1));
         else if (name == "expand_threshold_inc")

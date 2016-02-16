@@ -112,13 +112,12 @@ void Search::set_default_param(Variant variant)
     case Variant::classic:
     case Variant::classic_2:
     case Variant::classic_3:
-        set_bias_term_constant(0.07f);
+        set_exploration_constant(0.016f);
         set_rave_parent_max(50000);
         break;
     case Variant::duo:
     case Variant::junior:
-    case Variant::callisto_2:
-        set_bias_term_constant(0.05f);
+        set_exploration_constant(0.006f);
         set_rave_parent_max(25000);
         break;
     case Variant::trigon:
@@ -126,13 +125,17 @@ void Search::set_default_param(Variant variant)
     case Variant::trigon_3:
     case Variant::callisto:
     case Variant::callisto_3:
-        set_bias_term_constant(0.07f);
+        set_exploration_constant(0.016f);
         set_rave_parent_max(50000);
         break;
     case Variant::nexos:
     case Variant::nexos_2:
-        set_bias_term_constant(0.02f);
+        set_exploration_constant(0.004f);
         set_rave_parent_max(50000);
+        break;
+    case Variant::callisto_2:
+        set_exploration_constant(0.003f);
+        set_rave_parent_max(25000);
         break;
     }
 }

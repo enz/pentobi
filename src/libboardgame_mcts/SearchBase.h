@@ -34,7 +34,6 @@ namespace libboardgame_mcts {
 using namespace std;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
-using libboardgame_util::rounded_log_2;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::ArrayList;
@@ -264,19 +263,13 @@ public:
 
     Float get_expand_threshold_inc() const;
 
-    /** Constant factor used in bias term.
-        The bias term is defined differently from standard UCT, but it only
-        makes a difference at small counts and doesn't affect convergence:
-        - log_2 is used for faster computation,
-        - +1 is added to the parent count (visit_count is incremented before
-          select_child()) to avoid handling the special case 0,
-        - The child uses the value count, which includes prior knowledge
-          initialization (which must be greater 0) and (our version of) RAVE.
-          This avoids having to select each child once at the beginning, which
-          is costly at large branching factors. */
-    void set_bias_term_constant(Float c);
+    /** Constant used in the exploration term.
+        The exploration term has the form c * sqrt(parent_count) / child_count
+        with a configurable constant c. It assumes that children counts are
+        initialized greater than 0. */
+    void set_exploration_constant(Float c) { m_exploration_constant = c; }
 
-    Float get_bias_term_constant() const;
+    Float get_exploration_constant() const { return m_exploration_constant; }
 
     /** Reuse the subtree from the previous search if the current position is
         a follow-up position of the previous one. */
@@ -554,7 +547,7 @@ private:
 
     TimeSource* m_time_source;
 
-    Float m_bias_term_constant;
+    Float m_exploration_constant;
 
     Timer m_timer;
 
@@ -699,7 +692,7 @@ template<class S, class M, class R>
 SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
     : m_tree(memory / 2, nu_threads),
       m_nu_threads(nu_threads),
-      m_bias_term_constant(0),
+      m_exploration_constant(0),
       m_tmp_tree(memory / 2, m_nu_threads)
 #if LIBBOARDGAME_DEBUG
       , m_assertion_handler(*this)
@@ -888,12 +881,6 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
 }
 
 template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::get_bias_term_constant() const -> Float
-{
-    return m_bias_term_constant;
-}
-
-template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_expand_threshold() const -> Float
 {
     return m_expand_threshold;
@@ -1035,7 +1022,6 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     auto& simulation = thread_state.simulation;
     auto& root = m_tree.get_root();
     auto node = &root;
-    m_tree.inc_visit_count(*node);
     Float expand_threshold = m_expand_threshold;
     if (thread_state.full_select_counter > 0)
     {
@@ -1048,7 +1034,6 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         {
             ++depth;
             node = simulation.nodes[depth];
-            m_tree.inc_visit_count(*node);
             if (multithread && SearchParamConst::virtual_loss)
                 m_tree.add_value(*node, 0);
             state.play_in_tree(node->get_move());
@@ -1067,7 +1052,6 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     while (node->has_children())
     {
         node = select_child(*node);
-        m_tree.inc_visit_count(*node);
         if (multithread && SearchParamConst::virtual_loss)
             m_tree.add_value(*node, 0);
         simulation.nodes.push_back(node);
@@ -1383,19 +1367,14 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
-    // See comments at set_bias_term_constant() for differences of bias term
-    // to standard UCT
     auto children = m_tree.get_children(node);
     LIBBOARDGAME_ASSERT(! children.empty());
     auto parent_count = node.get_visit_count();
-    LIBBOARDGAME_ASSERT(parent_count > 0);
-    Float bias_factor =
-            m_bias_term_constant
-            * sqrt(static_cast<Float>(rounded_log_2(parent_count)));
+    Float bias_factor = m_exploration_constant * sqrt(parent_count);
     static_assert(SearchParamConst::child_min_count > 0, "");
-    auto bias_limit = bias_factor / sqrt(SearchParamConst::child_min_count);
+    auto bias_limit = bias_factor / SearchParamConst::child_min_count;
     auto i = children.begin();
-    auto value = i->get_value() + bias_factor / sqrt(i->get_value_count());
+    auto value = i->get_value() + bias_factor / i->get_value_count();
     auto best_value = value;
     auto best_child = i;
     auto limit = best_value - bias_limit;
@@ -1404,7 +1383,7 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
         value = i->get_value();
         if (value <= limit)
             continue;
-        value += bias_factor / sqrt(i->get_value_count());
+        value += bias_factor / i->get_value_count();
         if (value > best_value)
         {
             best_value = value;
@@ -1448,12 +1427,6 @@ bool SearchBase<S, M, R>::select_move(Move& mv) const
     }
     else
         return false;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_bias_term_constant(Float c)
-{
-    m_bias_term_constant = c;
 }
 
 template<class S, class M, class R>
@@ -1627,6 +1600,7 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
     auto& nodes = simulation.nodes;
     auto& eval = simulation.eval;
     unsigned nu_nodes = static_cast<unsigned>(nodes.size());
+    m_tree.inc_visit_count(*nodes[0]);
     for (unsigned i = 1; i < nu_nodes; ++i)
     {
         auto& node = *nodes[i];
@@ -1642,6 +1616,7 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
             m_tree.add_value_remove_loss(node, eval[mv.player]);
         else
             m_tree.add_value(node, eval[mv.player]);
+        m_tree.inc_visit_count(node);
     }
     for (PlayerInt i = 0; i < m_nu_players; ++i)
         m_root_val[i].add(eval[i]);
