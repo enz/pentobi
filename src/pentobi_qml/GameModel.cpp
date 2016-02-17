@@ -150,17 +150,23 @@ void GameModel::deleteAllVar()
     updateProperties();
 }
 
-bool GameModel::findMove(const PieceModel& piece, QString state,
+bool GameModel::findMove(const PieceModel& pieceModel, QString state,
                          QPointF coord, Move& mv) const
 {
-    auto transform = piece.getTransform(state);
-    if (! transform)
+    auto piece = pieceModel.getPiece();
+    auto& bd = getBoard();
+    if (piece.to_int() >= bd.get_nu_uniq_pieces())
     {
-        qDebug() << "GameModel::findMove: transform not found";
+        qWarning("GameModel::findMove: pieceModel invalid in game variant");
         return false;
     }
-    auto& bd = getBoard();
-    auto& info = bd.get_piece_info(piece.getPiece());
+    auto transform = pieceModel.getTransform(state);
+    if (! transform)
+    {
+        qWarning("GameModel::findMove: transform not found");
+        return false;
+    }
+    auto& info = bd.get_piece_info(piece);
     PiecePoints piecePoints = info.get_points();
     transform->transform(piecePoints.begin(), piecePoints.end());
     auto boardType = bd.get_board_type();
@@ -189,7 +195,7 @@ bool GameModel::findMove(const PieceModel& piece, QString state,
             return false;
         points.push_back(geo.get_point(x, y));
     }
-    return bd.find_move(points, piece.getPiece(), mv);
+    return bd.find_move(points, piece, mv);
 }
 
 Variant GameModel::getInitialGameVariant()

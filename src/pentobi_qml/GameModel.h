@@ -294,7 +294,7 @@ private:
 
     void createPieceModels(Color c, QList<PieceModel*>& pieceModels);
 
-    bool findMove(const PieceModel& piece, QString state, QPointF coord,
+    bool findMove(const PieceModel& pieceModel, QString state, QPointF coord,
                   Move& mv) const;
 
     QList<PieceModel*>& getPieceModels(Color c);
