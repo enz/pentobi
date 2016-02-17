@@ -9,6 +9,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity0
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component0
@@ -18,8 +19,6 @@ Item {
 
             Image {
                 source: imageName
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -34,6 +33,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity90
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component90
@@ -43,8 +43,6 @@ Item {
 
             Image {
                 source: imageName
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -59,6 +57,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity180
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component180
@@ -68,8 +67,6 @@ Item {
 
             Image {
                 source: imageName
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -84,6 +81,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity270
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component270
@@ -93,8 +91,6 @@ Item {
 
             Image {
                 source: imageName
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight

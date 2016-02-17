@@ -9,6 +9,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity0
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component0
@@ -18,8 +19,6 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -33,6 +32,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity60
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component60
@@ -42,8 +42,6 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -67,6 +65,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity120
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component120
@@ -76,8 +75,6 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -98,6 +95,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity180
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component180
@@ -107,8 +105,6 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -132,6 +128,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity240
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component240
@@ -141,8 +138,6 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight
@@ -163,6 +158,7 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity300
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = component300
@@ -172,8 +168,6 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
-                width: root.width
-                height: root.height
                 sourceSize {
                     width: imageSourceWidth
                     height: imageSourceHeight

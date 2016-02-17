@@ -15,6 +15,7 @@ MouseArea {
     Loader {
         property real imageOpacity: root.visible && ! root.legal ? 0.4 : 0
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = componentImage
@@ -24,8 +25,7 @@ MouseArea {
 
             Image {
                 source: theme.getImage("piece-manipulator")
-                width: root.width; height: width
-                sourceSize { width: width; height: width }
+                sourceSize { width: width; height: height }
                 opacity: imageOpacity
                 Behavior on opacity { NumberAnimation { duration: 100 } }
             }
@@ -34,6 +34,7 @@ MouseArea {
     Loader {
         property real imageOpacity: root.visible && root.legal ? 0.4 : 0
 
+        anchors.fill: root
         onImageOpacityChanged:
             if (imageOpacity > 0 && status === Loader.Null)
                 sourceComponent = componentImageLegal
@@ -43,8 +44,7 @@ MouseArea {
 
             Image {
                 source: theme.getImage("piece-manipulator-legal")
-                width: root.width; height: width
-                sourceSize { width: width; height: width }
+                sourceSize { width: width; height: height }
                 opacity: imageOpacity
                 Behavior on opacity { NumberAnimation { duration: 100 } }
             }
