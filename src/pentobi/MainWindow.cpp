@@ -189,8 +189,8 @@ MainWindow::MainWindow(Variant variant, const QString& initialFile,
     statusBar()->addWidget(m_ratedGameLabelText);
     m_ratedGameLabelText->hide();
     initGame();
-    m_player.reset(new Player(variant, maxLevel, qPrintable(booksDir),
-                              nuThreads));
+    m_player.reset(new Player(variant, maxLevel,
+                              booksDir.toLocal8Bit().constData(), nuThreads));
     m_player->get_search().set_callback(bind(&MainWindow::searchCallback,
                                              this, placeholders::_1,
                                              placeholders::_2));
@@ -517,7 +517,7 @@ bool MainWindow::checkQuit()
     if (m_file.isEmpty() && ! m_gameFinished
             && (m_game.is_modified() || m_isAutoSaveLoaded))
     {
-        writeGame(qPrintable(getAutoSaveFile()));
+        writeGame(getAutoSaveFile().toLocal8Bit().constData());
         settings.setValue("autosave_rated", m_isRated);
         if (m_isRated)
             settings.setValue("autosave_rated_color",
@@ -1437,7 +1437,7 @@ void MainWindow::exportAsciiArt()
     if (file.isEmpty())
         return;
     rememberDir(file);
-    ofstream out(qPrintable(file));
+    ofstream out(file.toLocal8Bit().constData());
     m_bd.write(out, false);
     if (! out)
         showError(QString::fromLocal8Bit(strerror(errno)));
@@ -2283,7 +2283,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
         return false;
     cancelThread();
     TreeReader reader;
-    ifstream in(qPrintable(file));
+    ifstream in(file.toLocal8Bit().constData());
     try
     {
         reader.read(in);
@@ -2644,7 +2644,7 @@ void MainWindow::save()
 
 bool MainWindow::save(const QString& file)
 {
-    if (! writeGame(qPrintable(file)))
+    if (! writeGame(file.toLocal8Bit().constData()))
     {
         showError(tr("The file could not be saved."),
                   /*: Error message if file cannot be saved. %1 is
@@ -2654,8 +2654,11 @@ bool MainWindow::save(const QString& file)
                                    QString::fromLocal8Bit(strerror(errno))));
         return false;
     }
-    Util::removeThumbnail(file);
-    return true;
+    else
+    {
+        Util::removeThumbnail(file);
+        return true;
+    }
 }
 
 void MainWindow::saveAs()
@@ -2723,8 +2726,8 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
 
 void MainWindow::selectNamedPiece()
 {
-    string name(qPrintable(
-                    qobject_cast<QAction*>(sender())->data().toString()));
+    string name(qobject_cast<QAction*>(sender())->data().toString()
+                .toLocal8Bit().data());
     auto c = m_bd.get_to_play();
     Board::PiecesLeftList pieces;
     for (Piece::IntType i = 0; i < m_bd.get_nu_uniq_pieces(); ++i)

@@ -153,7 +153,7 @@ void PlayerModel::loadBook(Variant variant)
     }
     QTextStream stream(&file);
     QString text = stream.readAll();
-    istringstream in(qPrintable(text));
+    istringstream in(text.toLocal8Bit().constData());
     m_player.load_book(in);
 }
 

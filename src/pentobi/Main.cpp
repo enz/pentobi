@@ -184,7 +184,8 @@ int main(int argc, char* argv[])
         QSettings settings;
         auto variantString = settings.value("variant", "").toString();
         Variant variant;
-        if (! parse_variant_id(qPrintable(variantString), variant))
+        if (! parse_variant_id(variantString.toLocal8Bit().constData(),
+                               variant))
             variant = Variant::duo;
         try
         {

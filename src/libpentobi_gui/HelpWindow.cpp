@@ -38,7 +38,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
                        const QString& mainPage)
     : QMainWindow(parent)
 {
-    LIBBOARDGAME_LOG("Loading ", qPrintable(mainPage));
+    LIBBOARDGAME_LOG("Loading ", mainPage.toLocal8Bit().constData());
     setWindowTitle(title);
     if (QIcon::hasThemeIcon("help-browser"))
         setWindowIcon(QIcon::fromTheme("help-browser"));
