@@ -246,6 +246,11 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
     return QPointF(sumX / n, sumY / n);
 }
 
+bool PieceModel::isLastMove() const
+{
+    return m_isLastMove;
+}
+
 bool PieceModel::isPlayed() const
 {
     return m_isPlayed;
@@ -282,6 +287,22 @@ void PieceModel::setGameCoord(QPointF gameCoord)
         return;
     m_gameCoord = gameCoord;
     emit gameCoordChanged(gameCoord);
+}
+
+void PieceModel::setIsLastMove(bool isLastMove)
+{
+    if (m_isLastMove == isLastMove)
+        return;
+    m_isLastMove = isLastMove;
+    emit isLastMoveChanged(isLastMove);
+}
+
+void PieceModel::setIsPlayed(bool isPlayed)
+{
+    if (m_isPlayed == isPlayed)
+        return;
+    m_isPlayed = isPlayed;
+    emit isPlayedChanged(isPlayed);
 }
 
 void PieceModel::setState(QString state)
@@ -340,14 +361,6 @@ void PieceModel::setTransform(const Transform* transform)
         return;
     }
     setState(state);
-}
-
-void PieceModel::setIsPlayed(bool isPlayed)
-{
-    if (m_isPlayed == isPlayed)
-        return;
-    m_isPlayed = isPlayed;
-    emit isPlayedChanged(isPlayed);
 }
 
 QString PieceModel::state() const

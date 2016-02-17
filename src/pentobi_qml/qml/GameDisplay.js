@@ -1,17 +1,3 @@
-function clearMarks() {
-    if (_pieces0 === undefined) // Pieces not yet created
-        return
-    var i
-    for (i = 0; i < _pieces0.length; ++i)
-        _pieces0[i].isMarked = false
-    for (i = 0; i < _pieces1.length; ++i)
-        _pieces1[i].isMarked = false
-    for (i = 0; i < _pieces2.length; ++i)
-        _pieces2[i].isMarked = false
-    for (i = 0; i < _pieces3.length; ++i)
-        _pieces3[i].isMarked = false
-}
-
 function createColorPieces(component, pieceModels) {
     if (pieceModels.length === 0)
         return []
@@ -28,7 +14,10 @@ function createColorPieces(component, pieceModels) {
     }
     var properties = {
         "colorName": colorName,
-        "isPicked": Qt.binding(function() { return this === pickedPiece }) }
+        "isPicked": Qt.binding(function() { return this === pickedPiece }),
+        "isMarked": Qt.binding(function() {
+            return markLastMove && this.pieceModel.isLastMove })
+    }
     var pieces = []
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
@@ -54,8 +43,6 @@ function createPieces() {
     _pieces1 = createColorPieces(component, gameModel.pieceModels1)
     _pieces2 = createColorPieces(component, gameModel.pieceModels2)
     _pieces3 = createColorPieces(component, gameModel.pieceModels3)
-    if (markLastMove)
-        markLast()
 }
 
 function destroyColorPieces(pieces) {
@@ -90,14 +77,6 @@ function findPiece(pieceModel, color) {
     return null
 }
 
-function markLast() {
-    var piece = findPiece(gameModel.getLastMovePieceModel(),
-                          gameModel.getLastMoveColor())
-    if (piece === null)
-        return
-    piece.isMarked = true
-}
-
 function pickPiece(piece) {
     if (playerModel.isGenMoveRunning || gameModel.isGameOver
             || piece.pieceModel.color !== gameModel.toPlay)
@@ -119,9 +98,6 @@ function pickPiece(piece) {
 
 function positionChanged() {
     dropPiece()
-    clearMarks()
-    if (markLastMove)
-        markLast()
 }
 
 function showMoveHint(move) {

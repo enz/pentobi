@@ -33,6 +33,7 @@ class PieceModel
     Q_PROPERTY(QPointF labelPos READ labelPos CONSTANT)
     Q_PROPERTY(QString state READ state WRITE setState NOTIFY stateChanged)
     Q_PROPERTY(bool isPlayed READ isPlayed NOTIFY isPlayedChanged)
+    Q_PROPERTY(bool isLastMove READ isLastMove NOTIFY isLastMoveChanged)
     Q_PROPERTY(QPointF gameCoord READ gameCoord NOTIFY gameCoordChanged)
 
 public:
@@ -65,6 +66,8 @@ public:
 
     bool isPlayed() const;
 
+    bool isLastMove() const;
+
     QPointF gameCoord() const;
 
     Piece getPiece() const { return m_piece; }
@@ -78,6 +81,8 @@ public:
     void setTransform(const Transform* transform);
 
     void setIsPlayed(bool isPlayed);
+
+    void setIsLastMove(bool isLastMove);
 
     void setGameCoord(QPointF gameCoord);
 
@@ -94,6 +99,8 @@ signals:
 
     void isPlayedChanged(bool);
 
+    void isLastMoveChanged(bool);
+
     void gameCoordChanged(QPointF);
 
 private:
@@ -104,6 +111,8 @@ private:
     Piece m_piece;
 
     bool m_isPlayed = false;
+
+    bool m_isLastMove = false;
 
     QPointF m_gameCoord;
 

@@ -197,20 +197,6 @@ Variant GameModel::getInitialGameVariant()
     return variant;
 }
 
-int GameModel::getLastMoveColor()
-{
-    auto& bd = getBoard();
-    auto nuMoves = bd.get_nu_moves();
-    if (nuMoves == 0)
-        return 0;
-    return bd.get_move(nuMoves - 1).color.to_int();
-}
-
-PieceModel* GameModel::getLastMovePieceModel()
-{
-    return m_lastMovePieceModel;
-}
-
 QList<PieceModel*>& GameModel::getPieceModels(Color c)
 {
     if (c == Color(0))
@@ -220,7 +206,7 @@ QList<PieceModel*>& GameModel::getPieceModels(Color c)
     else if (c == Color(2))
         return m_pieceModels2;
     else
-        return  m_pieceModels3;
+        return m_pieceModels3;
 }
 
 void GameModel::goBackward()
@@ -286,6 +272,7 @@ void GameModel::initGameVariant(QString gameVariant)
     auto& bd = getBoard();
     if (set(m_nuColors, static_cast<int>(bd.get_nu_colors())))
         emit nuColorsChanged(m_nuColors);
+    m_lastMovePieceModel = nullptr;
     createPieceModels();
     m_gameVariant = gameVariant;
     emit gameVariantChanged(gameVariant);
@@ -676,12 +663,20 @@ void GameModel::updateProperties()
         for (Move mv : bd.get_setup().placements[c])
             updatePiece(c, mv, isPlayed[c]);
     }
-    m_lastMovePieceModel = nullptr;
+    PieceModel* lastMovePieceModel = nullptr;
     for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
     {
         auto mv = bd.get_move(i);
-        m_lastMovePieceModel =
-                updatePiece(mv.color, mv.move, isPlayed[mv.color]);
+        auto c = mv.color;
+        lastMovePieceModel = updatePiece(c, mv.move, isPlayed[c]);
+    }
+    if (lastMovePieceModel != m_lastMovePieceModel)
+    {
+        if (m_lastMovePieceModel != nullptr)
+            m_lastMovePieceModel->setIsLastMove(false);
+        if (lastMovePieceModel != nullptr)
+            lastMovePieceModel->setIsLastMove(true);
+        m_lastMovePieceModel = lastMovePieceModel;
     }
     for (Color c : bd.get_colors())
     {

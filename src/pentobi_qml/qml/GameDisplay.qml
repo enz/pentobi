@@ -41,8 +41,6 @@ Item
 
     onWidthChanged: dropPiece()
     onHeightChanged: dropPiece()
-    onMarkLastMoveChanged:
-        if (markLastMove) Logic.markLast(); else Logic.clearMarks()
     Component.onCompleted: {
         gameModel.positionChanged.connect(Logic.positionChanged)
     }
