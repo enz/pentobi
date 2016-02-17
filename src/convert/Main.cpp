@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
     }
     catch (const QString& msg)
     {
-        std::cerr << msg.toLocal8Bit().data() << '\n';
+        std::cerr << qPrintable(msg) << '\n';
         return 1;
     }
     return 0;

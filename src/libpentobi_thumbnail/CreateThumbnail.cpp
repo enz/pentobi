@@ -136,7 +136,7 @@ bool createThumbnail(const QString& path, int width, int height,
 {
     TreeReader reader;
     reader.set_read_only_main_variation(true);
-    reader.read(path.toLocal8Bit().constData());
+    reader.read(qPrintable(path));
     auto variant =
         Variant::classic; // Initialize to avoid compiler warning
     const Geometry* geo;

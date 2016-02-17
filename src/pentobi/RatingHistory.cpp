@@ -68,7 +68,7 @@ void RatingHistory::addGame(float score, Rating opponentRating,
     if (nuGames > maxGames)
         m_games.erase(m_games.begin(), m_games.begin() + nuGames - maxGames);
     save();
-    ofstream out(getFile(m_nuGames).toLocal8Bit().constData());
+    ofstream out(qPrintable(getFile(m_nuGames)));
     PentobiTreeWriter writer(out, tree);
     writer.set_indent(1);
     writer.write();
@@ -139,7 +139,7 @@ void RatingHistory::load(Variant variant)
     m_games.clear();
     m_dir = getRatedGamesDir(variant);
     m_file = m_dir + "/history.dat";
-    ifstream file(m_file.toLocal8Bit().constData());
+    ifstream file(qPrintable(m_file));
     if (! file)
         return;
     string line;
@@ -183,12 +183,11 @@ void RatingHistory::save() const
     LIBBOARDGAME_ASSERT(! m_file.isEmpty());
     QDir dir("");
     dir.mkpath(m_dir);
-    ofstream out(m_file.toLocal8Bit().constData());
+    ofstream out(qPrintable(m_file));
     for (auto& info : m_games)
         out << info.number << ' ' << static_cast<unsigned>(info.color.to_int())
-            << ' ' << info.result << ' '
-            << info.date.toLocal8Bit().constData() << ' ' << info.level
-            << ' ' << info.rating << '\n';
+            << ' ' << info.result << ' ' << qPrintable(info.date) << ' '
+            << info.level << ' ' << info.rating << '\n';
 }
 
 //-----------------------------------------------------------------------------

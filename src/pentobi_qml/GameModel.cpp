@@ -203,7 +203,7 @@ Variant GameModel::getInitialGameVariant()
     QSettings settings;
     auto variantString = settings.value("variant", "").toString();
     Variant variant;
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
+    if (! parse_variant_id(qPrintable(variantString), variant))
         variant = Variant::duo;
     return variant;
 }
@@ -273,7 +273,7 @@ void GameModel::gotoNode(const SgfNode* node)
 void GameModel::initGameVariant(QString gameVariant)
 {
     Variant variant;
-    if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
+    if (! parse_variant_id(qPrintable(gameVariant), variant))
     {
         qWarning("GameModel: invalid game variant");
         return;
@@ -377,7 +377,7 @@ bool GameModel::open(istream& in)
 
 bool GameModel::open(QString file)
 {
-    ifstream in(file.toLocal8Bit().constData());
+    ifstream in(qPrintable(file));
     if (! in)
     {
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
@@ -462,7 +462,7 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 
 bool GameModel::save(QString file)
 {
-    ofstream out(file.toLocal8Bit().constData());
+    ofstream out(qPrintable(file));
     PentobiTreeWriter writer(out, m_game.get_tree());
     writer.set_indent(1);
     writer.write();

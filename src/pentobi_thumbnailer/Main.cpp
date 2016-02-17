@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
             throw runtime_error("Thumbnail generation failed");
         QImageWriter writer(args.at(1), "png");
         if (! writer.write(image))
-            throw runtime_error(writer.errorString().toLocal8Bit().constData());
+            throw runtime_error(qPrintable(writer.errorString()));
     }
     catch (const exception& e)
     {
