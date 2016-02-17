@@ -153,7 +153,7 @@ Item
                                         pickedPiece.pieceModel.state,
                                         board.mapToGame(pos.x, pos.y))
         }
-        width: 0.6 * board.width
+        width: 0.6 * board.width; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         drag {

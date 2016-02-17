@@ -24,7 +24,8 @@ MouseArea {
 
             Image {
                 source: theme.getImage("piece-manipulator")
-                sourceSize { width: root.width; height: width }
+                width: root.width; height: width
+                sourceSize { width: width; height: width }
                 opacity: imageOpacity
                 Behavior on opacity { NumberAnimation { duration: 100 } }
             }
@@ -42,7 +43,8 @@ MouseArea {
 
             Image {
                 source: theme.getImage("piece-manipulator-legal")
-                sourceSize { width: root.width; height: width }
+                width: root.width; height: width
+                sourceSize { width: width; height: width }
                 opacity: imageOpacity
                 Behavior on opacity { NumberAnimation { duration: 100 } }
             }
