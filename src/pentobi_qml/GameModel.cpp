@@ -153,14 +153,14 @@ void GameModel::deleteAllVar()
 bool GameModel::findMove(const PieceModel& piece, QString state,
                          QPointF coord, Move& mv) const
 {
-    auto& bd = getBoard();
-    auto& info = bd.get_piece_info(piece.getPiece());
     auto transform = piece.getTransform(state);
     if (! transform)
     {
         qDebug() << "GameModel::findMove: transform not found";
         return false;
     }
+    auto& bd = getBoard();
+    auto& info = bd.get_piece_info(piece.getPiece());
     PiecePoints piecePoints = info.get_points();
     transform->transform(piecePoints.begin(), piecePoints.end());
     auto boardType = bd.get_board_type();
