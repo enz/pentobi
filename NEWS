@@ -27,6 +27,8 @@ Version 11.0.UNKNOWN (v11-fixes)
 
 Bug fixes Android version:
 
+* Fixed crash that could occur when switching game variants while a
+  piece was selected.
 * Level set for game variant Classic3 was ignored, instead the level set
   for Classic was used.
 
