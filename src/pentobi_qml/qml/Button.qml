@@ -13,8 +13,7 @@ ToolButton {
         height: root.height < 26 || root.height > 100 ?
                     0.7 * root.height : root.height < 50 ? 22 : 44
         width: height
-        sourceSize.height: height
-        sourceSize.width: width
+        sourceSize { width: width; height: height }
         anchors.centerIn: parent
         source: imageSource
         opacity: root.enabled ? 1 : 0.4
