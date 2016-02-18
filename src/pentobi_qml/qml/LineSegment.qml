@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 // Piece element for Nexos. See Square.qml for comments.
 Item {
@@ -24,6 +24,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? 0 : -90
@@ -48,6 +49,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 mirror: isHorizontal
                 rotation: isHorizontal ? -180 : -90
@@ -72,6 +74,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? -180 : -270
@@ -96,6 +99,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 mirror: isHorizontal
                 rotation: isHorizontal ? 0 : -270

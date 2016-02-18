@@ -1,10 +1,12 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 // Piece element (square) with pseudo-3D effect.
 // Simulates lighting by using different images for the lighting at different
 // rotations and interpolating between them with an opacity animation.
 Item {
     id: root
+
+    property bool mipmap
 
     Loader {
         property real imageOpacity: imageOpacity0
@@ -23,6 +25,7 @@ Item {
                     width: imageSourceWidth
                     height: imageSourceHeight
                 }
+                mipmap: true
                 asynchronous: true
                 opacity: imageOpacity
             }
@@ -46,6 +49,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 rotation: -90
             }
@@ -69,6 +73,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 rotation: -180
             }
@@ -92,6 +97,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 rotation: -270
             }

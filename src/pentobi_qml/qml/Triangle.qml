@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 // See Square.qml for comments
 Item {
@@ -47,6 +47,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 antialiasing: true
                 transform: [
@@ -80,6 +81,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 antialiasing: true
                 transform: Rotation {
@@ -110,6 +112,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 antialiasing: true
                 transform: [
@@ -143,6 +146,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 antialiasing: true
                 transform: Rotation {
@@ -173,6 +177,7 @@ Item {
                     height: imageSourceHeight
                 }
                 asynchronous: true
+                mipmap: true
                 opacity: imageOpacity
                 antialiasing: true
                 transform: [

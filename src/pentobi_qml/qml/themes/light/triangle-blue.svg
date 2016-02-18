@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <g transform="translate(0 -1032.362)">
-<path fill-rule="evenodd" d="m10 1032.4 10 20h-20z" fill="#0073cf"/>
+<path fill="#0073cf" d="m10 1032.4 10 20h-20z" fill-rule="evenodd"/>
 </g>
-<path fill-opacity=".1176471" d="m0 20 2-1.39113 8-16.302v-2.30688z" fill="#FFF"/>
-<path fill-opacity=".09803922" d="m0 20 2-1.367515 16 0.04723c1.70132 1.15553 0.2793 0.16939 2 1.32029z"/>
-<path fill-opacity=".05882353" d="m20 20-10-20v2.330578l8 16.32552z" fill="#FFF"/>
+<g>
+<path fill="#0e94ff" d="m0 20 2-1.39113 8-16.302v-2.30688z"/>
+<path fill="#004881" d="m0 20 2-1.367515 16 0.04723c1.70132 1.15553 0.2793 0.16939 2 1.32029z"/>
+<path fill="#0059a0" d="m20 20-10-20v2.330578l8 16.32552z"/>
+</g>
 </svg>

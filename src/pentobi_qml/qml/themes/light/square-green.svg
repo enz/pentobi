@@ -3,6 +3,6 @@
 <g transform="translate(0 -1032.362)">
 <rect fill-rule="evenodd" height="20" width="20" y="1032.4" x="0" fill="#00c000"/>
 </g>
-<path fill-opacity=".09803922" d="m0 20h20v-20l-1 1v18h-18z"/>
-<path fill-opacity=".1960784" d="m0 20 1-1v-18h18l1-1h-20z" fill="#FFF"/>
+<path d="m0 20h20v-20l-1 1v18h-18z" fill="#007800"/>
+<path d="m0 20 1-1v-18h18l1-1h-20z" fill="#00fa00"/>
 </svg>
