@@ -25,6 +25,7 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
+                antialiasing: true
                 opacity: imageOpacity
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? 0 : -90
@@ -50,6 +51,7 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
+                antialiasing: true
                 opacity: imageOpacity
                 mirror: isHorizontal
                 rotation: isHorizontal ? -180 : -90
@@ -75,6 +77,7 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
+                antialiasing: true
                 opacity: imageOpacity
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? -180 : -270
@@ -100,6 +103,7 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
+                antialiasing: true
                 opacity: imageOpacity
                 mirror: isHorizontal
                 rotation: isHorizontal ? 0 : -270

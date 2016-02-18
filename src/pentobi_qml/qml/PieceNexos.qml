@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 // Piece for Nexos. See PieceClassic for comments.
 Item
@@ -107,6 +107,9 @@ Item
             x: (modelData.x - pieceModel.center.x + 0.25) * gridElementWidth
             y: (modelData.y - pieceModel.center.y + 0.25) * gridElementHeight
             sourceSize { width: imageSourceWidth;  height: imageSourceHeight }
+            asynchronous: true
+            mipmap: true
+            antialiasing: true
         }
     }
     Rectangle {

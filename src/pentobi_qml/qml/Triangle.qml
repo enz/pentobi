@@ -25,6 +25,7 @@ Item {
                 }
                 asynchronous: true
                 opacity: imageOpacity
+                mipmap: true
                 antialiasing: true
             }
         }
@@ -48,8 +49,8 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
-                opacity: imageOpacity
                 antialiasing: true
+                opacity: imageOpacity
                 transform: [
                     Rotation {
                         angle: -60
@@ -82,8 +83,8 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
-                opacity: imageOpacity
                 antialiasing: true
+                opacity: imageOpacity
                 transform: Rotation {
                     angle: -120
                     origin {
@@ -113,8 +114,8 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
-                opacity: imageOpacity
                 antialiasing: true
+                opacity: imageOpacity
                 transform: [
                     Rotation {
                         angle: -180
@@ -147,8 +148,8 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
-                opacity: imageOpacity
                 antialiasing: true
+                opacity: imageOpacity
                 transform: Rotation {
                     angle: -240
                     origin {
@@ -178,8 +179,8 @@ Item {
                 }
                 asynchronous: true
                 mipmap: true
-                opacity: imageOpacity
                 antialiasing: true
+                opacity: imageOpacity
                 transform: [
                     Rotation {
                         angle: -300
