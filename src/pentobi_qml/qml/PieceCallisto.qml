@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 // See PieceClassic.qml for comments
 Item
@@ -77,6 +77,8 @@ Item
                     width: imageSourceWidth
                     height: imageSourceHeight
                 }
+                mipmap: true
+                antialiasing: true
             }
             // Down junction
             Image {
@@ -93,6 +95,8 @@ Item
                     width: imageSourceWidth
                     height: imageSourceHeight
                 }
+                mipmap: true
+                antialiasing: true
             }
         }
     }
