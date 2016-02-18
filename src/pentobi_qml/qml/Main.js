@@ -360,11 +360,13 @@ function showQuestion(text, acceptedFunc) {
 }
 
 function truncate() {
+    cancelGenMove()
     showQuestion(qsTr("Truncate this subtree?"),
                  function() { gameModel.truncate() })
 }
 
 function truncateChildren() {
+    cancelGenMove()
     showQuestion(qsTr("Truncate children?"),
                  function() { gameModel.truncateChildren() })
 }
