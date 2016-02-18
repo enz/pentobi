@@ -45,6 +45,6 @@ Menu {
     MenuSeparator { }
     MenuItem {
         text: qsTr("&Next Color")
-        onTriggered: gameModel.nextColor()
+        onTriggered: { Logic.cancelGenMove(); gameModel.nextColor() }
     }
 }

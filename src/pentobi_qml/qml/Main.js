@@ -125,7 +125,7 @@ function createTheme(themeName) {
 
 function deleteAllVar() {
     showQuestion(qsTr("Delete all variations?"),
-                 function() { gameModel.deleteAllVar() })
+                 function() { cancelGenMove(); gameModel.deleteAllVar() })
 }
 
 function genMove() {
