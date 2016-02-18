@@ -139,6 +139,10 @@ void get_transforms(Variant variant,
                     vector<unique_ptr<PointTransform<Point>>>& transforms,
                     vector<unique_ptr<PointTransform<Point>>>& inv_transforms);
 
+/** Is the variant a two-player variant with the board including the starting
+    points invariant through point reflection through its center? */
+bool has_central_symmetry(Variant variant);
+
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_base

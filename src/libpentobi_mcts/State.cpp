@@ -689,12 +689,11 @@ void State::start_search()
              && m_bd.get_nu_players() == 2);
     auto variant = bd.get_variant();
     m_check_symmetric_draw =
-        ((variant == Variant::duo || variant == Variant::junior
-          || variant == Variant::trigon_2 || variant == Variant::callisto_2)
-         && ! ((m_shared_const.to_play == Color(1)
-                || m_shared_const.to_play == Color(3))
-               && m_shared_const.avoid_symmetric_draw)
-         && ! check_symmetry_broken(bd, m_shared_const.symmetric_points));
+            (has_central_symmetry(variant)
+             && ! ((m_shared_const.to_play == Color(1)
+                    || m_shared_const.to_play == Color(3))
+                   && m_shared_const.avoid_symmetric_draw)
+             && ! check_symmetry_broken(bd, m_shared_const.symmetric_points));
     if (! m_check_symmetric_draw)
         // Pretending that the symmetry is always broken is equivalent to
         // ignoring symmetric draws

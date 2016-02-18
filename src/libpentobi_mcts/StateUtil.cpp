@@ -32,6 +32,7 @@ array<Color, Color::range> symmetric_state =
 bool check_symmetry_broken(const Board& bd,
                            const SymmetricPoints& symmetric_points)
 {
+    LIBBOARDGAME_ASSERT(has_central_symmetry(bd.get_variant()));
     Color to_play = bd.get_to_play();
     auto& geo = bd.get_geometry();
     // No need to iterator over the whole board when checking symmetry (this

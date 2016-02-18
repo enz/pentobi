@@ -268,6 +268,12 @@ void get_transforms(Variant variant,
     }
 }
 
+bool has_central_symmetry(Variant variant)
+{
+    return variant == Variant::duo || variant == Variant::junior
+            || variant == Variant::trigon_2 || variant == Variant::callisto_2;
+}
+
 bool parse_variant(const string& s, Variant& variant)
 {
     string t = to_lower(trim(s));
