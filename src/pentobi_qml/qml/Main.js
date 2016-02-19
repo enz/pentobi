@@ -276,8 +276,6 @@ function showComputerColorDialog() {
 }
 
 function showGameOver() {
-    if (! gameModel.isGameOver)
-        return
     var msg, points0, points1, points2, points3, score
     var breakTies = (gameModel.gameVariant.lastIndexOf("callisto") === 0)
     switch (gameModel.gameVariant) {
@@ -434,8 +432,6 @@ function truncateChildren() {
 }
 
 function undo() {
-    if (! gameModel.canUndo)
-        return
     gameDisplay.transitionsEnabled = true
     gameModel.undo()
     gameDisplay.transitionsEnabled = false
