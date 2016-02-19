@@ -7,6 +7,8 @@ Bug fixes Android version:
   piece was selected.
 * Level set for game variant Classic3 was ignored, instead the level set
   for Classic was used.
+* Move generation was not properly aborted if some Edit menu items were
+  selected while the computer was thinking.
 
 
 Version 11.0 (29 Dec 2015)
