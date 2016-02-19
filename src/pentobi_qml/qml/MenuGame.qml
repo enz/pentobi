@@ -8,10 +8,12 @@ Menu {
     MenuItem {
         text: qsTr("&New")
         enabled: ! gameModel.isGameEmpty
-        visible: ! isAndroid || enabled
+        visible: ! isAndroid
         onTriggered: Logic.newGame(true)
     }
-    MenuSeparator { }
+    MenuSeparator {
+        visible: ! isAndroid
+    }
     Menu {
         title: qsTr("Game &Variant")
 
@@ -89,7 +91,7 @@ Menu {
     MenuItem {
         text: qsTr("&Undo Move")
         enabled: gameModel.canUndo
-        visible: ! isAndroid || enabled
+        visible: ! isAndroid
         onTriggered: Logic.undo()
     }
     MenuItem {

@@ -20,6 +20,7 @@ Android version
 
 * Support for game variant Nexos.
 * New Edit menu items Delete All Variations, Next Color.
+* Actions with buttons in action bar are no longer shown in menu.
 
 
 Version 11.0.UNKNOWN (v11-fixes)

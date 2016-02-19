@@ -7,12 +7,13 @@ Menu {
 
     MenuItem {
         text: qsTr("Computer &Colors")
+        visible: ! isAndroid
         onTriggered: Logic.showComputerColorDialog()
     }
     MenuItem {
         text: qsTr("&Play")
         enabled: ! gameModel.isGameOver
-        visible: ! isAndroid || enabled
+        visible: ! isAndroid
         onTriggered: Logic.computerPlay()
     }
     Menu {
