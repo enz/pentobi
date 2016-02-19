@@ -14,10 +14,10 @@
 <linearGradient id="b" y2="11.708" xlink:href="#a" gradientUnits="userSpaceOnUse" x2="7.2001" gradientTransform="translate(0,-10)" y1="21.128" x1="13.585"/>
 </defs>
 <g stroke-linejoin="round" stroke="#555753">
-<path d="m2.8984 0.49023 15.8446 0.04056-1.264 2.95911-13.4261 0.05z" fill-rule="evenodd" stroke-linecap="round" fill="#babdb6"/>
+<path d="m2.8984 0.49023 15.8446 0.04056-1.264 2.95911-13.4261 0.05z" stroke-linecap="round" fill="#babdb6"/>
 <path d="m15.924 12.753 4.792-10.7994-0.716-1.42366-3.183-0.0276-5.274 12.16966z" fill="url(#b)"/>
 <path opacity="0.99" d="m6.3294 12.946-4.8456-10.9339 0.5162-1.50999 3.4004 0.0276 5.3536 12.33429z" fill="url(#c)"/>
 </g>
-<path stroke-linejoin="round" d="m17.5 15.051a6.4998 6.4995 0 1 1 -0.0171 -0.52474" fill-rule="evenodd" stroke="#a08300" stroke-linecap="round" fill="#edd400"/>
-<path d="m15.5 15.008a4.5002 4.5278 0 1 1 -0.01183 -0.36555" fill-rule="evenodd" stroke="#bf9c00" stroke-linecap="round" stroke-width=".9999999" fill="url(#d)"/>
+<path stroke-linejoin="round" d="m17.5 15.051a6.4998 6.4995 0 1 1 -0.0171 -0.52474" stroke="#a08300" stroke-linecap="round" fill="#edd400"/>
+<path d="m15.5 15.008a4.5002 4.5278 0 1 1 -0.01183 -0.36555" stroke="#bf9c00" stroke-linecap="round" fill="url(#d)"/>
 </svg>

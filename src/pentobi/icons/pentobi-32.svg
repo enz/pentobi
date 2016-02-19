@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="32" width="32" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <g id="d" transform="translate(17,-13)">
-<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="15" x="-15" fill="#C00"/>
+<rect rx=".92959" ry="0" height="7" width="7" y="15" x="-15" fill="#C00"/>
 <path d="m-15 22v-1h6v-6h1v7z" fill="#a40000"/>
 <path d="m-15 22v-7h7l-1 1h-5v5z" fill="#ef2929"/>
 </g>
@@ -9,23 +9,23 @@
 <use xlink:href="#d" transform="translate(7.000001 7)" height="32" width="32" y="0" x="0"/>
 <use xlink:href="#d" transform="translate(7)" height="32" width="32" y="0" x="0"/>
 <g id="c" transform="translate(17,2)">
-<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
+<rect rx=".92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
 <path d="m-15 14v-1h6v-6h1v7z" fill="#c4a000"/>
 <path d="m-15 14v-7h7l-1 1h-5v5z" fill="#fce94f"/>
 </g>
 <g id="b" transform="translate(30.94915 -5.050848)">
-<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<rect rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
 <path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
 <path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
-<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
+<rect rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
 <path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
 <path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
 </g>
 <g id="a" transform="translate(24.01695 8.966102)">
-<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
+<rect rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
 <path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#4e9a06"/>
 <path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#8ae234"/>
-<rect opacity=".99" fill-rule="evenodd" rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
+<rect rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
 <path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#204a87"/>
 <path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#558bc5"/>
 </g>

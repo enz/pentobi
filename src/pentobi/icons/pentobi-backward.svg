@@ -11,7 +11,7 @@
 </linearGradient>
 </defs>
 <g transform="translate(0,-26)">
-<path d="m9.8236 30.55s0.000159 1.8331 0 2.75h9.9999v7.5h-9.9999c0.000158 0.91927-0.00055 2.7459 0 2.75l-6.5005-6.5 6.5-6.5z" fill-rule="evenodd" stroke="url(#a)" stroke-width="1.500191" fill="url(#b)"/>
-<path stroke-linejoin="round" d="m10.5 28.531s0.000234 2.5481 0 3.9688h10v9h-10c0.000174 1.4428-0.000778 3.994 0 4l-8.5-8.5 8.5-8.4688z" stroke="#555753" stroke-linecap="round" stroke-width="1.000074" fill="none"/>
+<path d="m9.8236 30.55s0 1.8331 0 2.75h9.9999v7.5h-9.9999c0 0.91927-0.00055 2.7459 0 2.75l-6.5-6.5 6.5-6.5z" stroke="url(#a)" stroke-width="1.5" fill="url(#b)"/>
+<path stroke-linejoin="round" d="m10.5 28.531s0.000234 2.5481 0 3.9688h10v9h-10c0.000174 1.4428-0.000778 3.994 0 4l-8.5-8.5 8.5-8.4688z" stroke="#555753" stroke-linecap="round" stroke-width="1j" fill="none"/>
 </g>
 </svg>

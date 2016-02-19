@@ -19,16 +19,14 @@
 </linearGradient>
 </defs>
 <g transform="translate(0,-16)">
-<rect stroke-linejoin="round" fill-rule="evenodd" ry="1.704" height="14" width="15" stroke="url(#a)" stroke-linecap="round" y="16.527" x=".50829" stroke-width=".99988" fill="url(#b)"/>
-<rect stroke-linejoin="round" fill-rule="evenodd" ry=".33862" height="7.9999" width="11" stroke="url(#c)" stroke-linecap="round" y="18.496" x="2.5665" stroke-width="1.0001" fill="url(#d)"/>
-<path stroke="#6e706c" stroke-width="1.000581" d="m2.0006 28.5h11.999" fill="none"/>
+<rect stroke-linejoin="round" ry="1.704" height="14" width="15" stroke="url(#a)" stroke-linecap="round" y="16.527" x=".50829" fill="url(#b)"/>
+<rect stroke-linejoin="round" ry=".33862" height="7.9999" width="11" stroke="url(#c)" stroke-linecap="round" y="18.496" x="2.5665" fill="url(#d)"/>
+<path stroke="#6e706c" d="m2.0006 28.5h11.999" fill="none"/>
 </g>
 <path d="m13 4v6h-10v-2.6789c2.8021-1.303 6.4697-2.752 10-3.321z" fill-opacity=".2262997"/>
 <rect stroke-linejoin="round" ry="0" height="8.9998" width="8.9998" stroke="#2b2d2b" stroke-linecap="round" y="6.5" x="6.5" fill="none"/>
-<g fill-rule="evenodd">
 <rect height="4" width="4" y="7" x="7" fill="#e63232"/>
 <rect height="4" width="4" y="7" x="11" fill="#8ad83e"/>
 <rect height="4" width="4" y="11" x="7" fill="#e3cc09"/>
 <rect height="4" width="4" y="11" x="11" fill="#4b7bb9"/>
-</g>
 </svg>

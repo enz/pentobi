@@ -24,8 +24,8 @@
 <linearGradient id="m" y2="4.9662" xlink:href="#a" gradientUnits="userSpaceOnUse" x2="-11.191" gradientTransform="matrix(.6545711 0 0 .654082 11.03916 -.95969)" y1="11.728" x1="-8.1452"/>
 </defs>
 <rect rx=".60258" ry="0" height="7" width="7" y="1" x="1" fill="#babdb6"/>
-<path d="m1.4999 7.5h6.0002v-6.0001" stroke="url(#o)" stroke-linecap="square" stroke-width=".9998931" fill="none"/>
-<path d="m1.4999 7.5v-6.0002h6.0002" stroke="url(#m)" stroke-linecap="square" stroke-width=".9998004" fill="none"/>
+<path d="m1.4999 7.5h6.0002v-6.0001" stroke="url(#o)" stroke-linecap="square" fill="none"/>
+<path d="m1.4999 7.5v-6.0002h6.0002" stroke="url(#m)" stroke-linecap="square" fill="none"/>
 <g transform="translate(0,-32)" fill="#babdb6">
 <rect rx=".60258" ry="0" height="7" width="7" y="40" x="1"/>
 <rect rx=".60258" ry="0" height="7" width="7" y="40" x="8"/>
@@ -33,19 +33,15 @@
 </g>
 <g transform="translate(0,-32)" fill="none">
 <g stroke-linecap="square">
-<path stroke="url(#v)" stroke-width=".9998004" d="m1.4999 39.5v-6.0002h6.0002"/>
-<g stroke-width=".9998931">
+<path stroke="url(#v)" d="m1.4999 39.5v-6.0002h6.0002"/>
 <path stroke="url(#p)" d="m1.4999 46.5h6.0002v-6.0001"/>
 <path stroke="url(#q)" d="m8.4999 46.5h6.0002v-6.0001"/>
 <path stroke="url(#r)" d="m8.4999 39.5h6.0002v-6.0001"/>
-</g>
-<g stroke-width=".9998004">
 <path stroke="url(#s)" d="m1.4999 46.5v-6.0002h6.0002"/>
 <path stroke="url(#t)" d="m8.4999 46.5v-6.0002h6.0002"/>
 <path stroke="url(#u)" d="m8.4999 39.5v-6.0002h6.0002"/>
 </g>
-</g>
 <rect stroke-linejoin="round" ry="1.0913" height="15.001" width="15.001" stroke="url(#n)" y="32.5" x=".49959"/>
 </g>
-<path d="m1.5 9 5-5v3.571429s2.142857 0 3.474576 1.398304c1.052324 1.104947 1.525424 4.315977 1.525424 4.315977s-1.422275-1.641214-2.324455-2.218523c-1.204965-0.77106-2.675545-0.63862-2.675545-0.63862v3.57143z" fill-rule="evenodd" stroke="#204a87" stroke-width="1px" fill="#729fcf"/>
+<path d="m1.5 9 5-5v3.571429s2.142857 0 3.474576 1.398304c1.052324 1.104947 1.525424 4.315977 1.525424 4.315977s-1.422275-1.641214-2.324455-2.218523c-1.204965-0.77106-2.675545-0.63862-2.675545-0.63862v3.57143z" stroke="#204a87" stroke-width="1px" fill="#729fcf"/>
 </svg>

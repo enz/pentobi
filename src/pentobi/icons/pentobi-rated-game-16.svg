@@ -9,11 +9,11 @@
 </defs>
 <g stroke-linejoin="round">
 <g stroke="#555753">
-<path d="m1.7265 0.51281 12.2735 0.00376-0.819 2.01873-10.5845 0.0347z" fill-rule="evenodd" stroke-linecap="round" stroke-width=".9999999" fill="#babdb6"/>
+<path d="m1.7265 0.51281 12.2735 0.00376-0.819 2.01873-10.5845 0.0347z" stroke-linecap="round" fill="#babdb6"/>
 <path d="m11.758 9.3617 3.446-7.7501-0.445-1.11858-2.37 0.04016-3.7287 8.77012z" fill="#d3d7cf"/>
 <path d="m4.3108 9.4458-3.40651-7.8341 0.32721-1.11419 2.4419 0.02008 3.7665 8.86901z" fill="#d3d7cf"/>
 </g>
-<path d="m12.513 11.045a4.4996 4.5855 0 1 1 -0.012 -0.37" fill-rule="evenodd" stroke="#a08300" stroke-linecap="round" fill="#c7b200"/>
+<path d="m12.513 11.045a4.4996 4.5855 0 1 1 -0.012 -0.37" stroke="#a08300" stroke-linecap="round" fill="#c7b200"/>
 </g>
-<path d="m11.456 11.023a3.4721 3.5603 0 1 1 -0.0091 -0.28744" fill-rule="evenodd" stroke="#fce94f" stroke-linecap="round" stroke-width=".9999999" fill="url(#a)"/>
+<path d="m11.456 11.023a3.4721 3.5603 0 1 1 -0.0091 -0.28744" stroke="#fce94f" stroke-linecap="round" fill="url(#a)"/>
 </svg>

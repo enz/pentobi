@@ -23,21 +23,21 @@
 <linearGradient id="v" x1="-8.9502" xlink:href="#m" gradientUnits="userSpaceOnUse" y1="11.809" gradientTransform="matrix(.9818119 0 0 .9810785 15.80829 7.81084)" x2="-9.5003" y2="4.7247"/>
 </defs>
 <rect rx="0.86083" ry="0" height="10" width="10" y="11" x="1" fill="#babdb6"/>
-<path d="m1.5001 20.5h8.9999v-8.9999" stroke="url(#v)" stroke-linecap="square" stroke-width="1.000113" fill="none"/>
+<path d="m1.5001 20.5h8.9999v-8.9999" stroke="url(#v)" stroke-linecap="square" fill="none"/>
 <rect rx="0.86083" ry="0" height="10" width="10" y="1" x="11" fill="#babdb6"/>
-<path d="m11.5 10.5h8.9999v-8.9999" stroke="url(#u)" stroke-linecap="square" stroke-width="1.000113" fill="none"/>
+<path d="m11.5 10.5h8.9999v-8.9999" stroke="url(#u)" stroke-linecap="square" fill="none"/>
 <rect rx="0.86083" ry="0" height="10" width="10" y="11" x="11" fill="#babdb6"/>
-<path d="m11.5 20.5h8.9999v-8.9999" stroke="url(#p)" stroke-linecap="square" stroke-width="1.000113" fill="none"/>
+<path d="m11.5 20.5h8.9999v-8.9999" stroke="url(#p)" stroke-linecap="square" fill="none"/>
 <rect rx="0.86083" ry="0" height="10" width="10" y="1" x="1" fill="#babdb6"/>
 <g fill="none" transform="translate(0,-26)">
-<g stroke-width="1.000113" stroke-linecap="square">
+<g stroke-linecap="square">
 <path d="m1.5001 36.5h8.9999v-8.9999" stroke="url(#o)"/>
 <path d="m1.5001 36.5v-8.9999h8.9999" stroke="url(#n)"/>
 <path d="m1.5001 46.5v-8.9999h8.9999" stroke="url(#r)"/>
 <path d="m11.5 46.5v-8.9999h8.9999" stroke="url(#s)"/>
 <path d="m11.5 36.5v-8.9999h8.9999" stroke="url(#t)"/>
 </g>
-<rect stroke-linejoin="round" ry="1.5277" height="21" width="21" stroke="url(#q)" y="26.5" x="0.50011" stroke-width="1.0002"/>
+<rect stroke-linejoin="round" ry="1.5277" height="21" width="21" stroke="url(#q)" y="26.5" x="0.50011"/>
 </g>
-<path d="m16.12031 0.6410803c0.692566 0.0209284 1.404806 2.621669 1.965375 3.000724 0.532248 0.3599392 3.322454 0.1105993 3.505304 0.6988185 0.192628 0.6195537-2.244608 2.053739-2.458731 2.667069-0.203305 0.5823868 0.913678 2.975309 0.369166 3.318956-0.57351 0.36197-2.791992-1.352433-3.485001-1.352433-0.657898 4e-7 -2.757802 1.72823-3.27718 1.352433-0.54708-0.395837 0.51908-2.889508 0.30495-3.502946-0.2033-0.582387-2.61801-1.907222-2.39455-2.483081 0.2354-0.606618 3.11288-0.433404 3.67345-0.812513 0.53225-0.35994 1.13969-2.906992 1.79723-2.887117z" fill-rule="evenodd" stroke="#edd400" stroke-width="1.125774" fill="#fff"/>
+<path d="m16.12031 0.6410803c0.692566 0.0209284 1.404806 2.621669 1.965375 3.000724 0.532248 0.3599392 3.322454 0.1105993 3.505304 0.6988185 0.192628 0.6195537-2.244608 2.053739-2.458731 2.667069-0.203305 0.5823868 0.913678 2.975309 0.369166 3.318956-0.57351 0.36197-2.791992-1.352433-3.485001-1.352433-0.657898 4e-7 -2.757802 1.72823-3.27718 1.352433-0.54708-0.395837 0.51908-2.889508 0.30495-3.502946-0.2033-0.582387-2.61801-1.907222-2.39455-2.483081 0.2354-0.606618 3.11288-0.433404 3.67345-0.812513 0.53225-0.35994 1.13969-2.906992 1.79723-2.887117z" stroke="#edd400" fill="#fff"/>
 </svg>

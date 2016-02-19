@@ -23,21 +23,21 @@
 <linearGradient id="v" x1="-8.9502" xlink:href="#m" gradientUnits="userSpaceOnUse" y1="11.809" gradientTransform="matrix(.9818119 0 0 .9810785 15.80829 7.81084)" x2="-9.5003" y2="4.7247"/>
 </defs>
 <rect rx=".86083" ry="0" height="10" width="10" y="11" x="1" fill="#babdb6"/>
-<path d="m1.5001 20.5h8.9999v-8.9999" stroke="url(#v)" stroke-linecap="square" stroke-width="1.000113" fill="none"/>
+<path d="m1.5001 20.5h8.9999v-8.9999" stroke="url(#v)" stroke-linecap="square" fill="none"/>
 <rect rx=".86083" ry="0" height="10" width="10" y="1" x="11" fill="#babdb6"/>
-<path d="m11.5 10.5h8.9999v-8.9999" stroke="url(#u)" stroke-linecap="square" stroke-width="1.000113" fill="none"/>
+<path d="m11.5 10.5h8.9999v-8.9999" stroke="url(#u)" stroke-linecap="square" fill="none"/>
 <rect rx=".86083" ry="0" height="10" width="10" y="11" x="11" fill="#babdb6"/>
-<path d="m11.5 20.5h8.9999v-8.9999" stroke="url(#p)" stroke-linecap="square" stroke-width="1.000113" fill="none"/>
+<path d="m11.5 20.5h8.9999v-8.9999" stroke="url(#p)" stroke-linecap="square" fill="none"/>
 <rect rx=".86083" ry="0" height="10" width="10" y="1" x="1" fill="#babdb6"/>
 <g transform="translate(0,-26)" fill="none">
-<g stroke-width="1.000113" stroke-linecap="square">
+<g stroke-linecap="square">
 <path stroke="url(#o)" d="m1.5001 36.5h8.9999v-8.9999"/>
 <path stroke="url(#n)" d="m1.5001 36.5v-8.9999h8.9999"/>
 <path stroke="url(#r)" d="m1.5001 46.5v-8.9999h8.9999"/>
 <path stroke="url(#s)" d="m11.5 46.5v-8.9999h8.9999"/>
 <path stroke="url(#t)" d="m11.5 36.5v-8.9999h8.9999"/>
 </g>
-<rect stroke-linejoin="round" ry="1.5277" height="21" width="21" stroke="url(#q)" y="26.5" x=".50011" stroke-width="1.0002"/>
+<rect stroke-linejoin="round" ry="1.5277" height="21" width="21" stroke="url(#q)" y="26.5" x=".50011"/>
 </g>
-<path d="m1.5 13 7-7v5s3 0 4.864407 1.957627c1.47325 1.54692 2.13559 6.04237 2.13559 6.04237s-1.99118-2.2977-3.25424-3.10593c-1.68695-1.07949-3.74576-0.89407-3.74576-0.89407v5z" fill-rule="evenodd" stroke="#204a87" stroke-width="1px" fill="#729fcf"/>
+<path d="m1.5 13 7-7v5s3 0 4.864407 1.957627c1.47325 1.54692 2.13559 6.04237 2.13559 6.04237s-1.99118-2.2977-3.25424-3.10593c-1.68695-1.07949-3.74576-0.89407-3.74576-0.89407v5z" stroke="#204a87" stroke-width="1px" fill="#729fcf"/>
 </svg>

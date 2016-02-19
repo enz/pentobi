@@ -6,5 +6,5 @@
 <stop stop-color="#a0a39d" offset="1"/>
 </linearGradient>
 </defs>
-<path stroke-linejoin="round" d="m7.5 0.46875c3.866-1.8e-7 7 3.134 7 7h-3c0-2.2091-1.7909-4-4-4s-4 1.7909-4 4c0 1.1415 0.48216 2.1531 1.25 2.875l1.875-1.875v6h-6l2-2c-1.3378-1.302-2.125-3.0861-2.125-5.0002 0-3.866 3.134-7 7-7z" fill-rule="evenodd" stroke="#555753" stroke-linecap="round" stroke-width=".9996430" fill="url(#a)"/>
+<path stroke-linejoin="round" d="m7.5 0.46875c3.866-1.8e-7 7 3.134 7 7h-3c0-2.2091-1.7909-4-4-4s-4 1.7909-4 4c0 1.1415 0.48216 2.1531 1.25 2.875l1.875-1.875v6h-6l2-2c-1.3378-1.302-2.125-3.0861-2.125-5.0002 0-3.866 3.134-7 7-7z" stroke="#555753" stroke-linecap="round" fill="url(#a)"/>
 </svg>

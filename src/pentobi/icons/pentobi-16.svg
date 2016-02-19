@@ -20,19 +20,19 @@
 </defs>
 <g id="d" transform="translate(-2 -21)">
 <rect rx="0" ry="0" height="4" width="4" y="25" x="2" fill="url(#h)"/>
-<path d="m2.5002 28.5v-2.9996h2.9996" stroke="url(#g)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
+<path d="m2.5002 28.5v-2.9996h2.9996" stroke="url(#g)" stroke-linecap="square" fill="none"/>
 </g>
 <g id="c" transform="translate(-2 -22)">
 <rect rx="0" ry="0" height="4" width="4" y="22" x="2" fill="#ef2929"/>
-<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#e)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
+<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#e)" stroke-linecap="square" fill="none"/>
 </g>
 <g id="b" transform="translate(6 -22)">
 <rect rx="0" ry="0" height="4" width="4" y="22" x="2" fill="#73d216"/>
-<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#f)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
+<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#f)" stroke-linecap="square" fill="none"/>
 </g>
 <g id="a" fill="#3465a4" transform="translate(2 -14)">
 <rect rx="0" ry="0" height="4" width="4" y="22" x="2"/>
-<path stroke="url(#e)" stroke-width="1.000366" stroke-linecap="square" d="m2.5002 25.5v-2.9996h2.9996"/>
+<path stroke="url(#e)" stroke-linecap="square" d="m2.5002 25.5v-2.9996h2.9996"/>
 </g>
 <use xlink:href="#c" transform="translate(4 -9.265136e-8)" height="16" width="16" y="0" x="0"/>
 <use xlink:href="#c" transform="translate(4 4)" height="16" width="16" y="0" x="0"/>

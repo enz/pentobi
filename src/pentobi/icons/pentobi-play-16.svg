@@ -28,11 +28,11 @@
 </defs>
 <g transform="translate(0,-16)">
 <g>
-<rect stroke-linejoin="round" fill-rule="evenodd" ry="1.704" height="14" width="15" stroke="url(#a)" stroke-linecap="round" y="16.5" x=".49994" fill="url(#b)"/>
-<rect stroke-linejoin="round" fill-rule="evenodd" ry=".33862" height="7.9999" width="11" stroke="url(#c)" stroke-linecap="round" y="18.469" x="2.5581" fill="url(#d)"/>
+<rect stroke-linejoin="round" ry="1.704" height="14" width="15" stroke="url(#a)" stroke-linecap="round" y="16.5" x=".49994" fill="url(#b)"/>
+<rect stroke-linejoin="round" ry=".33862" height="7.9999" width="11" stroke="url(#c)" stroke-linecap="round" y="18.469" x="2.5581" fill="url(#d)"/>
 <path d="m1.9923 28.473h11.999" stroke="#6e706c" fill="none"/>
 </g>
 <path fill-opacity=".2262997" d="m12.992 19.973v6h-10v-2.6789c2.8021-1.303 6.4698-2.7518 10-3.3211z"/>
-<path stroke-linejoin="round" d="m15.5 26.906-6.0003 4.5943v-9.0003z" fill-rule="evenodd" stroke="url(#e)" stroke-width=".9996598" fill="url(#f)"/>
+<path stroke-linejoin="round" d="m15.5 26.906-6.0003 4.5943v-9.0003z" stroke="url(#e)" fill="url(#f)"/>
 </g>
 </svg>
