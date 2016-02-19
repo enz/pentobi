@@ -141,12 +141,8 @@ public:
 
 signals:
     /** Position changed due to new game or navigation or editing of the
-        game tree.
-        Does not include position changes due to newly played moves, in this
-        case movePlayed() is emitted. */
+        game tree. */
     void positionChanged();
-
-    void movePlayed();
 
     void toPlayChanged(int);
 
