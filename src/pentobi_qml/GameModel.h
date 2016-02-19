@@ -129,6 +129,8 @@ public:
 
     Q_INVOKABLE void truncateChildren();
 
+    Q_INVOKABLE QString getResultMessage();
+
     QQmlListProperty<PieceModel> pieceModels0();
 
     QQmlListProperty<PieceModel> pieceModels1();

@@ -50,6 +50,106 @@
         <source>Move %1</source>
         <translation>Zug %1</translation>
     </message>
+    <message>
+        <source>Blue wins with 1 point.</source>
+        <translation>Blau gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Blue wins with %1 points.</source>
+        <translation>Blau gewinnt mit %1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Green wins with 1 point.</source>
+        <translation>Grün gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Green wins with %1 points.</source>
+        <translation>Grün gewinnt mit %1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Green wins (tie resolved).</source>
+        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie.</source>
+        <translation>Spiel endet unentschieden.</translation>
+    </message>
+    <message>
+        <source>Blue/Red wins with 1 point.</source>
+        <translation>Blau/Rot gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Blue/Red wins with %1 points.</source>
+        <translation>Blau/Rot gewinnt mit %1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins with 1 point.</source>
+        <translation>Gelb/Grün gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins with %1 points.</source>
+        <translation>Gelb/Grün gewinnt mit %1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins (tie resolved).</source>
+        <translation>Gelb/Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Blue wins.</source>
+        <translation>Blau gewinnt.</translation>
+    </message>
+    <message>
+        <source>Yellow wins.</source>
+        <translation>Gelb gewinnt.</translation>
+    </message>
+    <message>
+        <source>Red wins.</source>
+        <translation>Rot gewinnt.</translation>
+    </message>
+    <message>
+        <source>Red wins (tie resolved).</source>
+        <translation>Rot gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Yellow wins (tie resolved).</source>
+        <translation>Gelb gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue and Yellow.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau und Gelb.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue and Red.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau und Rot.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Yellow and Red.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Gelb und Rot.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between all players.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen allen Spielern.</translation>
+    </message>
+    <message>
+        <source>Green wins.</source>
+        <translation>Grün gewinnt.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue, Yellow and Red.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau, Gelb und Rot.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue, Yellow and Green.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau, Gelb und Grün.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue, Red and Green.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau, Rot und Grün.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Yellow, Red and Green.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -60,26 +160,6 @@
     <message>
         <source>New game?</source>
         <translation>Neues Spiel?</translation>
-    </message>
-    <message>
-        <source>Blue wins.</source>
-        <translation>Blau gewinnt.</translation>
-    </message>
-    <message>
-        <source>Green wins.</source>
-        <translation>Grün gewinnt.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie.</source>
-        <translation>Spiel endet unentschieden.</translation>
-    </message>
-    <message>
-        <source>Yellow wins.</source>
-        <translation>Gelb gewinnt.</translation>
-    </message>
-    <message>
-        <source>Red wins.</source>
-        <translation>Rot gewinnt.</translation>
     </message>
     <message>
         <source>Open</source>
@@ -112,86 +192,6 @@
     <message>
         <source>Truncate children?</source>
         <translation>Kindknoten abschneiden?</translation>
-    </message>
-    <message>
-        <source>Green wins (tie resolved).</source>
-        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
-    </message>
-    <message>
-        <source>Yellow/Green wins (tie resolved).</source>
-        <translation>Gelb/Grün gewinnt (Unentschieden aufgelöst).</translation>
-    </message>
-    <message>
-        <source>Red wins (tie resolved).</source>
-        <translation>Rot gewinnt (Unentschieden aufgelöst).</translation>
-    </message>
-    <message>
-        <source>Yellow wins (tie resolved).</source>
-        <translation>Gelb gewinnt (Unentschieden aufgelöst).</translation>
-    </message>
-    <message>
-        <source>Blue wins with 1 point.</source>
-        <translation>Blau gewinnt mit 1 Punkt.</translation>
-    </message>
-    <message>
-        <source>Blue wins with %1 points.</source>
-        <translation>Blau gewinnt mit %1 Punkten.</translation>
-    </message>
-    <message>
-        <source>Green wins with 1 point.</source>
-        <translation>Grün gewinnt mit 1 Punkt.</translation>
-    </message>
-    <message>
-        <source>Green wins with %1 points.</source>
-        <translation>Grün gewinnt mit %1 Punkten.</translation>
-    </message>
-    <message>
-        <source>Blue/Red wins with 1 point.</source>
-        <translation>Blau/Rot gewinnt mit 1 Punkt.</translation>
-    </message>
-    <message>
-        <source>Blue/Red wins with %1 points.</source>
-        <translation>Blau/Rot gewinnt mit %1 Punkten.</translation>
-    </message>
-    <message>
-        <source>Yellow/Green wins with 1 point.</source>
-        <translation>Gelb/Grün gewinnt mit 1 Punkt.</translation>
-    </message>
-    <message>
-        <source>Yellow/Green wins with %1 points.</source>
-        <translation>Gelb/Grün gewinnt mit %1 Punkten.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between Blue and Yellow.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen Blau und Gelb.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between Blue and Red.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen Blau und Rot.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between Yellow and Red.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen Gelb und Rot.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between all players.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen allen Spielern.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between Blue, Yellow and Red.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen Blau, Gelb und Rot.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between Blue, Yellow and Green.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen Blau, Gelb und Grün.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between Blue, Red and Green.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen Blau, Rot und Grün.</translation>
-    </message>
-    <message>
-        <source>Game ends in a tie between Yellow, Red and Green.</source>
-        <translation>Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
     <message>
         <source>Delete all variations?</source>

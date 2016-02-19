@@ -200,6 +200,113 @@ bool GameModel::findMove(const PieceModel& pieceModel, QString state,
     return bd.find_move(points, piece, mv);
 }
 
+QString GameModel::getResultMessage()
+{
+    auto& bd = getBoard();
+    auto nuPlayers = bd.get_nu_players();
+    bool breakTies = (bd.get_piece_set() == PieceSet::callisto);
+    if (m_nuColors == 2)
+    {
+        auto score = m_points0 - m_points1;
+        if (score == 1)
+            return tr("Blue wins with 1 point.");
+        if (score > 0)
+            return tr("Blue wins with %1 points.").arg(score);
+        if (score == -1)
+            return tr("Green wins with 1 point.");
+        if (score < 0)
+            return tr("Green wins with %1 points.").arg(-score);
+        if (breakTies)
+            return tr("Green wins (tie resolved).");
+        return tr("Game ends in a tie.");
+    }
+    if (m_nuColors == 4 && nuPlayers == 2)
+    {
+        auto score = m_points0 + m_points2 - m_points1 - m_points3;
+        if (score == 1)
+            return tr("Blue/Red wins with 1 point.");
+        if (score > 0)
+            return tr("Blue/Red wins with %1 points.").arg(score);
+        if (score == -1)
+            return tr("Yellow/Green wins with 1 point.");
+        if (score < 0)
+            return tr("Yellow/Green wins with %1 points.").arg(-score);
+        if (breakTies)
+            return tr("Yellow/Green wins (tie resolved).");
+        return tr("Game ends in a tie.");
+    }
+    if (nuPlayers == 3)
+    {
+        auto maxPoints = max(max(m_points0, m_points1), m_points2);
+        unsigned nuWinners = 0;
+        if (m_points0 == maxPoints)
+            ++nuWinners;
+        if (m_points1 == maxPoints)
+            ++nuWinners;
+        if (m_points2 == maxPoints)
+            ++nuWinners;
+        if (m_points0 == maxPoints && nuWinners == 1)
+            return tr("Blue wins.");
+        if (m_points1 == maxPoints && nuWinners == 1)
+            return tr("Yellow wins.");
+        if (m_points2 == maxPoints && nuWinners == 1)
+            return tr("Red wins.");
+        if (m_points2 == maxPoints && breakTies)
+            return tr("Red wins (tie resolved).");
+        if (m_points1 == maxPoints && breakTies)
+            return tr("Yellow wins (tie resolved).");
+        if (m_points0 == maxPoints && m_points1 == maxPoints && nuWinners == 2)
+            return tr("Game ends in a tie between Blue and Yellow.");
+        if (m_points0 == maxPoints && m_points2 == maxPoints && nuWinners == 2)
+            return tr("Game ends in a tie between Blue and Red.");
+        if (nuWinners == 2)
+            return tr("Game ends in a tie between Yellow and Red.");
+        return tr("Game ends in a tie between all players.");
+    }
+    auto maxPoints = max(max(m_points0, m_points1), max(m_points2, m_points3));
+    unsigned nuWinners = 0;
+    if (m_points0 == maxPoints)
+        ++nuWinners;
+    if (m_points1 == maxPoints)
+        ++nuWinners;
+    if (m_points2 == maxPoints)
+        ++nuWinners;
+    if (m_points3 == maxPoints)
+        ++nuWinners;
+    if (m_points0 == maxPoints && nuWinners == 1)
+        return tr("Blue wins.");
+    if (m_points1 == maxPoints && nuWinners == 1)
+        return tr("Yellow wins.");
+    if (m_points2 == maxPoints && nuWinners == 1)
+        return tr("Red wins.");
+    if (m_points3 == maxPoints && nuWinners == 1)
+        return tr("Green wins.");
+    if (m_points3 == maxPoints && breakTies)
+        return tr("Green wins (tie resolved).");
+    if (m_points2 == maxPoints && breakTies)
+        return tr("Red wins (tie resolved).");
+    if (m_points1 == maxPoints && breakTies)
+        return tr("Yellow wins (tie resolved).");
+    if (m_points0 == maxPoints && m_points1 == maxPoints
+            && m_points2 == maxPoints && nuWinners == 3)
+        return tr("Game ends in a tie between Blue, Yellow and Red.");
+    if (m_points0 == maxPoints && m_points1 == maxPoints
+            && m_points3 == maxPoints && nuWinners == 3)
+        return tr("Game ends in a tie between Blue, Yellow and Green.");
+    if (m_points0 == maxPoints && m_points2 == maxPoints
+            && m_points3 == maxPoints && nuWinners == 3)
+        return tr("Game ends in a tie between Blue, Red and Green.");
+    if (nuWinners == 3)
+        return tr("Game ends in a tie between Yellow, Red and Green.");
+    if (m_points0 == maxPoints && m_points1 == maxPoints && nuWinners == 2)
+        return tr("Game ends in a tie between Blue and Yellow.");
+    if (m_points0 == maxPoints && m_points2 == maxPoints && nuWinners == 2)
+        return tr("Game ends in a tie between Blue and Red.");
+    if (nuWinners == 2)
+        return tr("Game ends in a tie between Yellow and Red.");
+    return tr("Game ends in a tie between all players.");
+}
+
 Variant GameModel::getInitialGameVariant()
 {
     QSettings settings;
