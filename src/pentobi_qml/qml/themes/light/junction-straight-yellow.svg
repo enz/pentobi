@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="7" width="7" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<g fill="#ebcd23" transform="matrix(0 .2 -.35 0 368.34 1.5)">
-<rect fill-rule="evenodd" height="20" width="20" y="1032.4" x="0" fill="#ebcd23"/>
-</g>
+<rect height="4" width="7" y="1.5" x="0" fill="#ebcd23"/>
 </svg>
