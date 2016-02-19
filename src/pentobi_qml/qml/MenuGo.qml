@@ -12,6 +12,6 @@ Menu {
         text: qsTr("Back to &Main Variation")
         enabled: ! gameModel.isMainVar
         visible: ! isAndroid || enabled
-        onTriggered: { Logic.cancelGenMove(); gameModel.backToMainVar() }
+        onTriggered: gameModel.backToMainVar()
     }
 }

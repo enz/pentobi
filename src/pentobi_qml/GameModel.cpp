@@ -146,6 +146,8 @@ void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
 
 void GameModel::deleteAllVar()
 {
+    if (! is_main_variation(m_game.get_current()))
+        emit positionAboutToChange();
     m_game.delete_all_variations();
     updateProperties();
 }
@@ -254,6 +256,7 @@ void GameModel::gotoNode(const SgfNode& node)
 {
     if (&node == &m_game.get_current())
         return;
+    emit positionAboutToChange();
     try
     {
         m_game.goto_node(node);
@@ -332,6 +335,7 @@ void GameModel::moveUpVar()
 
 void GameModel::nextColor()
 {
+    emit positionAboutToChange();
     auto& bd = getBoard();
     m_game.set_to_play(bd.get_next(bd.get_to_play()));
     updateProperties();
@@ -339,6 +343,7 @@ void GameModel::nextColor()
 
 void GameModel::newGame()
 {
+    emit positionAboutToChange();
     m_game.init();
     for (auto pieceModel : m_pieceModels0)
         pieceModel->setState("");
@@ -358,6 +363,7 @@ bool GameModel::open(istream& in)
         TreeReader reader;
         reader.read(in);
         auto root = reader.get_tree_transfer_ownership();
+        emit positionAboutToChange();
         m_game.init(root);
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
@@ -409,8 +415,9 @@ QQmlListProperty<PieceModel> GameModel::pieceModels3()
 void GameModel::playMove(int move)
 {
     Move mv(static_cast<Move::IntType>(move));
-    if(mv.is_null())
+    if (mv.is_null())
         return;
+    emit positionAboutToChange();
     m_game.play(m_game.get_to_play(), mv, false);
     updateProperties();
 }
@@ -424,6 +431,7 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
         qWarning("GameModel::play: illegal move");
         return;
     }
+    emit positionAboutToChange();
     preparePieceGameCoord(pieceModel, mv);
     pieceModel->setIsPlayed(true);
     preparePieceTransform(pieceModel, mv);
@@ -479,6 +487,7 @@ void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())
         return;
+    emit positionAboutToChange();
     m_game.truncate();
     updateProperties();
 }
@@ -491,8 +500,10 @@ void GameModel::truncateChildren()
 
 void GameModel::undo()
 {
-    if (m_canUndo)
-        m_game.undo();
+    if (! m_canUndo)
+        return;
+    emit positionAboutToChange();
+    m_game.undo();
     updateProperties();
 }
 

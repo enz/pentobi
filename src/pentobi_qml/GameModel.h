@@ -140,6 +140,10 @@ public:
     const Board& getBoard() const { return m_game.get_board(); }
 
 signals:
+    /** Position is about to change due to new game or navigation or editing of
+        the game tree. */
+    void positionAboutToChange();
+
     /** Position changed due to new game or navigation or editing of the
         game tree. */
     void positionChanged();

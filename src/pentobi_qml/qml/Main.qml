@@ -151,7 +151,11 @@ ApplicationWindow {
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
     }
-    GameModel { id: gameModel }
+    GameModel {
+        id: gameModel
+
+        onPositionAboutToChange: Logic.cancelGenMove()
+    }
     PlayerModel {
         id: playerModel
 
@@ -168,7 +172,6 @@ ApplicationWindow {
                 root.computerPlays1 = this.computerPlays1
                 root.computerPlays2 = this.computerPlays2
                 root.computerPlays3 = this.computerPlays3
-                Logic.cancelGenMove()
                 Logic.checkComputerMove()
                 gameDisplay.forceActiveFocus() // QTBUG-48456
             }

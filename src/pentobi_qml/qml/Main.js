@@ -15,7 +15,6 @@ function cancelGenMove() {
 function changeGameVariant(gameVariant, verifyAbortGame) {
     if (gameModel.gameVariant === gameVariant)
         return
-    cancelGenMove()
     if (! gameModel.isGameEmpty && ! gameModel.isGameOver &&
             verifyAbortGame) {
         showQuestion(qsTr("New game?"),
@@ -125,7 +124,7 @@ function createTheme(themeName) {
 
 function deleteAllVar() {
     showQuestion(qsTr("Delete all variations?"),
-                 function() { cancelGenMove(); gameModel.deleteAllVar() })
+                 function() { gameModel.deleteAllVar() })
 }
 
 function genMove() {
@@ -174,7 +173,6 @@ function initComputerColors() {
 }
 
 function initGameVariant(gameVariant) {
-    cancelGenMove()
     hideComputerColorDialog()
     gameDisplay.destroyPieces()
     gameModel.initGameVariant(gameVariant)
@@ -212,7 +210,6 @@ function moveHint() {
 
 function newGame(verifyAbortGame)
 {
-    cancelGenMove()
     if (! gameModel.isGameEmpty &&  ! gameModel.isGameOver &&
             verifyAbortGame) {
         showQuestion(qsTr("New game?"), function() { newGame(false) })
@@ -232,7 +229,6 @@ function open() {
 }
 
 function openFileUrl(fileUrl) {
-    cancelGenMove()
     gameDisplay.destroyPieces()
     if (! gameModel.open(getFileFromUrl(fileUrl)))
         showError(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
@@ -247,7 +243,6 @@ function openFileUrl(fileUrl) {
 }
 
 function play(pieceModel, gameCoord) {
-    cancelGenMove()
     var wasComputerToPlay = isComputerToPlay()
     gameDisplay.transitionsEnabled = true
     gameModel.playPiece(pieceModel, gameCoord)
@@ -429,13 +424,11 @@ function showQuestion(text, acceptedFunc) {
 }
 
 function truncate() {
-    cancelGenMove()
     showQuestion(qsTr("Truncate this subtree?"),
                  function() { gameModel.truncate() })
 }
 
 function truncateChildren() {
-    cancelGenMove()
     showQuestion(qsTr("Truncate children?"),
                  function() { gameModel.truncateChildren() })
 }
@@ -443,7 +436,6 @@ function truncateChildren() {
 function undo() {
     if (! gameModel.canUndo)
         return
-    cancelGenMove()
     gameDisplay.transitionsEnabled = true
     gameModel.undo()
     gameDisplay.transitionsEnabled = false
