@@ -21,7 +21,11 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
                      function() { changeGameVariant(gameVariant, false) })
         return
     }
-    initGameVariant(gameVariant)
+    cancelGenMove()
+    gameDisplay.destroyPieces()
+    gameModel.initGameVariant(gameVariant)
+    gameDisplay.createPieces()
+    gameDisplay.showToPlay()
     initComputerColors()
 }
 
@@ -170,14 +174,6 @@ function initComputerColors() {
             || gameModel.gameVariant == "trigon_2"
             || gameModel.gameVariant == "nexos_2")
         computerPlays2 = false
-}
-
-function initGameVariant(gameVariant) {
-    hideComputerColorDialog()
-    gameDisplay.destroyPieces()
-    gameModel.initGameVariant(gameVariant)
-    gameDisplay.createPieces()
-    gameDisplay.showToPlay()
 }
 
 function isComputerToPlay() {
