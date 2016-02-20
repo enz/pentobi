@@ -105,7 +105,7 @@ Item
                 PieceSelector {
                     id: pieceSelector
 
-                    columns: board.rows <= 14 ? 7 : 8
+                    columns: _pieces0 && _pieces0.length > 21 ? 8 : 7
                     width: board.width
                     height: width / columns * rows
                     rows: 3
