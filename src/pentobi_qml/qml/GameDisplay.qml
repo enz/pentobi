@@ -89,9 +89,10 @@ Item
             id: flickable
 
             width: board.width
-            height: flickableContent.height
-            contentWidth: flickableContent.width
-            contentHeight: flickableContent.height
+            height: Math.min(root.height - board.height - scoreDisplay.height,
+                             width / pieceSelector.columns * pieceSelector.rows)
+            contentWidth: 2 * width
+            contentHeight: height
             anchors.horizontalCenter: board.horizontalCenter
             clip: true
             onMovementEnded: {
@@ -106,8 +107,8 @@ Item
                     id: pieceSelector
 
                     columns: _pieces0 && _pieces0.length > 21 ? 8 : 7
-                    width: board.width
-                    height: width / columns * rows
+                    width: flickable.width
+                    height: flickable.height
                     rows: 3
                     gameVariant: gameModel.gameVariant
                     pieces0: _pieces0
@@ -119,8 +120,8 @@ Item
                     onPiecePicked: Logic.pickPiece(piece)
                 }
                 NavigationPanel {
-                    width: board.width
-                    height: pieceSelector.height
+                    width: flickable.width
+                    height: flickable.height
                 }
             }
             SmoothedAnimation {
