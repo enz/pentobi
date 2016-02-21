@@ -212,12 +212,6 @@ function newGame(verifyAbortGame)
     initComputerColors()
 }
 
-function open() {
-    if (openDialogLoader.status === Loader.Null)
-        openDialogLoader.sourceComponent = openDialogComponent
-    openDialogLoader.item.open()
-}
-
 function openFileUrl(fileUrl) {
     gameDisplay.destroyPieces()
     if (! gameModel.open(getFileFromUrl(fileUrl)))
@@ -245,12 +239,6 @@ function play(pieceModel, gameCoord) {
 function saveFileUrl(fileUrl) {
     if (! gameModel.save(getFileFromUrl(fileUrl)))
         showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
-}
-
-function saveAs() {
-    if (saveDialogLoader.status === Loader.Null)
-        saveDialogLoader.sourceComponent = saveDialogComponent
-    saveDialogLoader.item.open()
 }
 
 function showComputerColorDialog() {

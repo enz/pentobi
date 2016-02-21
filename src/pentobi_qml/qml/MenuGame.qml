@@ -103,13 +103,13 @@ Menu {
     MenuSeparator { }
     MenuItem {
         text: qsTr("&Open...")
-        onTriggered: Logic.open()
+        onTriggered: openDialog.open()
     }
     MenuItem {
         text: qsTr("&Save As...")
         enabled: ! gameModel.isGameEmpty
         visible: ! isAndroid || enabled
-        onTriggered: Logic.saveAs()
+        onTriggered: saveDialog.open()
     }
     MenuSeparator { }
     MenuItem {

@@ -178,7 +178,15 @@ ApplicationWindow {
             onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
-    Loader { id: openDialogLoader }
+    Loader {
+        id: openDialog
+
+        function open() {
+            if (status === Loader.Null)
+                sourceComponent = openDialogComponent
+            item.open()
+        }
+    }
     Component {
         id: openDialogComponent
 
@@ -195,7 +203,15 @@ ApplicationWindow {
             onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
-    Loader { id: saveDialogLoader }
+    Loader {
+        id: saveDialog
+
+        function open() {
+            if (status === Loader.Null)
+                sourceComponent = saveDialogComponent
+            item.open()
+        }
+    }
     Component {
         id: saveDialogComponent
 
