@@ -106,7 +106,9 @@ Item
                 PieceSelector {
                     id: pieceSelector
 
-                    columns: _pieces0 && _pieces0.length > 21 ? 8 : 7
+                    columns: gameModel.gameVariant.indexOf("classic") == 0
+                             || gameModel.gameVariant.indexOf("callisto") == 0
+                             || gameModel.gameVariant == "duo" ? 7 : 8
                     width: flickable.width
                     height: flickable.height
                     rows: 3
