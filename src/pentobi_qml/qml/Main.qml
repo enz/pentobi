@@ -28,7 +28,7 @@ ApplicationWindow {
         isAndroid ? Screen.desktopAvailableWidth :
                     Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
 
-    minimumWidth: 240; minimumHeight: 252
+    minimumWidth: 240; minimumHeight: 320
     width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
     height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
     // On Android, initialize visible to true because startup time is slow and
