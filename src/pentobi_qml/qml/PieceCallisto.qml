@@ -73,10 +73,7 @@ Item
                    - width / 2
                 y: (modelData.y - pieceModel.center.y) * gridElementHeight
                    + (gridElementHeight - height) / 2
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
             }
@@ -91,10 +88,7 @@ Item
                    + (gridElementWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y + 1) * gridElementHeight
                    - height / 2
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
             }

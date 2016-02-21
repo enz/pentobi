@@ -10,15 +10,15 @@ Item
     property bool transitionsEnabled
     property bool markLastMove: true
     property alias busyIndicatorRunning: busyIndicator.running
-    property real imageSourceWidth: {
-        if (board.isTrigon) return 2 * board.gridElementWidth
-        else if (board.isNexos) return 1.5 * board.gridElementWidth
-        else if (board.isCallisto) return 0.9 * board.gridElementWidth
-        else return board.gridElementWidth
-    }
-    property real imageSourceHeight: {
-        if (board.isNexos) return 1.5 * board.gridElementHeight
-        else return board.gridElementHeight
+    property size imageSourceSize: {
+        var width = board.gridElementWidth, height = board.gridElementHeight
+        if (board.isTrigon)
+            return Qt.size(2 * width, height)
+        if (board.isNexos)
+            return Qt.size(1.5 * width, 1.5 * height)
+        if (board.isCallisto)
+            return Qt.size(0.9 * width, 0.9 * height)
+        return Qt.size(width, height)
     }
     property var _pieces0
     property var _pieces1

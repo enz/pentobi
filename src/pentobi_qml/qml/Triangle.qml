@@ -19,10 +19,7 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 opacity: imageOpacity
                 mipmap: true
@@ -43,10 +40,7 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
@@ -77,10 +71,7 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
@@ -108,10 +99,7 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
@@ -142,10 +130,7 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
@@ -173,10 +158,7 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true

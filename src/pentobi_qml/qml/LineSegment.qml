@@ -19,10 +19,7 @@ Item {
 
             Image {
                 source: imageName
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
@@ -45,10 +42,7 @@ Item {
 
             Image {
                 source: imageName
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
@@ -71,10 +65,7 @@ Item {
 
             Image {
                 source: imageName
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
@@ -97,10 +88,7 @@ Item {
 
             Image {
                 source: imageName
-                sourceSize {
-                    width: imageSourceWidth
-                    height: imageSourceHeight
-                }
+                sourceSize: imageSourceSize
                 asynchronous: true
                 mipmap: true
                 antialiasing: true
