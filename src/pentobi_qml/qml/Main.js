@@ -207,8 +207,6 @@ function newGame(verifyAbortGame)
         showQuestion(qsTr("New game?"), function() { newGame(false) })
         return
     }
-    gameDisplay.dropPiece()
-    hideComputerColorDialog()
     gameModel.newGame()
     gameDisplay.showToPlay()
     initComputerColors()
