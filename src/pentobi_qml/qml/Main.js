@@ -51,7 +51,6 @@ function checkComputerMove() {
 function computerPlay() {
     if (playerModel.isGenMoveRunning)
         return
-    hideComputerColorDialog()
     if (! isComputerToPlay()) {
         computerPlays0 = false
         computerPlays1 = false
@@ -143,12 +142,6 @@ function getFileFromUrl(fileUrl) {
     var file = fileUrl.toString()
     file = file.replace(/^(file:\/{3})/,"/")
     return decodeURIComponent(file)
-}
-
-function hideComputerColorDialog()
-{
-    if (computerColorDialogLoader.status === Loader.Ready)
-        computerColorDialogLoader.item.visible = false
 }
 
 function init() {
