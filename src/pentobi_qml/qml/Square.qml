@@ -6,8 +6,6 @@ import QtQuick 2.3
 Item {
     id: root
 
-    property bool mipmap
-
     Loader {
         property real imageOpacity: imageOpacity0
 
