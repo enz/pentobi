@@ -22,11 +22,14 @@ function changeGameVariant(gameVariant, verifyAbortGame) {
         return
     }
     cancelGenMove()
-    gameDisplay.destroyPieces()
-    gameModel.initGameVariant(gameVariant)
-    gameDisplay.createPieces()
-    gameDisplay.showToPlay()
-    initComputerColors()
+    gameDisplay.busyIndicatorRunning = true
+    lengthyCommand.run(function() {
+        gameDisplay.destroyPieces()
+        gameModel.initGameVariant(gameVariant)
+        gameDisplay.createPieces()
+        gameDisplay.showToPlay()
+        initComputerColors()
+    })
 }
 
 function checkComputerMove() {

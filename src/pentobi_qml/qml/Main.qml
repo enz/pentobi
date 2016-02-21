@@ -188,9 +188,9 @@ ApplicationWindow {
             nameFilters:
                 [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
             onAccepted: {
-                Logic.openFileUrl(fileUrl)
                 root.folder = folder
                 gameDisplay.forceActiveFocus() // QTBUG-48456
+                lengthyCommand.run(function() { Logic.openFileUrl(fileUrl) })
             }
             onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
@@ -243,6 +243,24 @@ ApplicationWindow {
 
         interval: 400
         onTriggered: Logic.checkComputerMove()
+    }
+    // Delay lengthy function calls such that the busy indicator is visible
+    Timer {
+        id: lengthyCommand
+
+        property var func
+
+        function run(func) {
+            this.func = func
+            gameDisplay.busyIndicatorRunning = true
+            start()
+        }
+
+        interval: 400
+        onTriggered: {
+            func()
+            gameDisplay.busyIndicatorRunning = false
+        }
     }
     Connections {
         target: Qt.application
