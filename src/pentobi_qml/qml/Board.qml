@@ -1,6 +1,8 @@
 import QtQuick 2.0
 
 Item {
+    id: root
+
     property string gameVariant
     property bool isTrigon: gameVariant.lastIndexOf("trigon") === 0
     property bool isNexos: gameVariant.lastIndexOf("nexos") === 0
