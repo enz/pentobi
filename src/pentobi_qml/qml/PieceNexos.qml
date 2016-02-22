@@ -107,7 +107,6 @@ Item
             x: (modelData.x - pieceModel.center.x + 0.25) * gridElementWidth
             y: (modelData.y - pieceModel.center.y + 0.25) * gridElementHeight
             sourceSize: imageSourceSize
-            asynchronous: true
             mipmap: true
             antialiasing: true
         }

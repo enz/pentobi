@@ -20,7 +20,6 @@ Item {
             Image {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                asynchronous: true
                 opacity: imageOpacity
                 mipmap: true
                 antialiasing: true
@@ -41,7 +40,6 @@ Item {
             Image {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity
@@ -72,7 +70,6 @@ Item {
             Image {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity
@@ -100,7 +97,6 @@ Item {
             Image {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity
@@ -131,7 +127,6 @@ Item {
             Image {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity
@@ -159,7 +154,6 @@ Item {
             Image {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity

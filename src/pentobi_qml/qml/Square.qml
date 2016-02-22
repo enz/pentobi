@@ -22,7 +22,6 @@ Item {
                 sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
-                asynchronous: true
                 opacity: imageOpacity
             }
         }
@@ -41,7 +40,6 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity
@@ -63,7 +61,6 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity
@@ -85,7 +82,6 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                asynchronous: true
                 mipmap: true
                 antialiasing: true
                 opacity: imageOpacity
