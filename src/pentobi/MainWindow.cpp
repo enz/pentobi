@@ -2727,7 +2727,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
 void MainWindow::selectNamedPiece()
 {
     string name(qobject_cast<QAction*>(sender())->data().toString()
-                .toLocal8Bit().data());
+                .toLocal8Bit().constData());
     auto c = m_bd.get_to_play();
     Board::PiecesLeftList pieces;
     for (Piece::IntType i = 0; i < m_bd.get_nu_uniq_pieces(); ++i)
