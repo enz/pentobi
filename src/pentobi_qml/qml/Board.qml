@@ -55,17 +55,6 @@ Item {
         if (isTrigon) return Math.sqrt(3) * gridElementWidth
         else return gridElementWidth
     }
-    property real imgWidth: {
-        if (isTrigon) return gridElementWidth * (columns + 1)
-        else if (isNexos) return gridElementWidth * (columns - 0.5)
-        else return gridElementWidth * columns
-    }
-    property real imgHeight: {
-        if (isNexos) return gridElementHeight * (rows - 0.5)
-        else return gridElementHeight * rows
-    }
-    property real imgOffsetX: (width - imgWidth) / 2
-    property real imgOffsetY: (height - imgHeight) / 2
     property real startingPointSize: {
         if (isTrigon) return 0.27 * gridElementHeight
         if (isNexos) return 0.3 * gridElementHeight
@@ -73,27 +62,27 @@ Item {
     }
 
     function mapFromGameX(x) {
-        if (isTrigon) return imgOffsetX + (x + 0.5) * gridElementWidth
-        else if (isNexos) return imgOffsetX + (x - 0.25) * gridElementWidth
-        else return imgOffsetX + x * gridElementWidth
+        if (isTrigon) return image.x + (x + 0.5) * gridElementWidth
+        else if (isNexos) return image.x + (x - 0.25) * gridElementWidth
+        else return image.x + x * gridElementWidth
     }
     function mapFromGameY(y) {
-        if (isNexos) return imgOffsetY + (y - 0.25) * gridElementHeight
-        else return imgOffsetY + y * gridElementHeight
+        if (isNexos) return image.y + (y - 0.25) * gridElementHeight
+        else return image.y + y * gridElementHeight
     }
     function mapToGame(x, y) {
         if (isTrigon)
-            return Qt.point((x - imgOffsetX - 0.5 * gridElementWidth)
+            return Qt.point((x - image.x - 0.5 * gridElementWidth)
                             / gridElementWidth,
-                            (y - imgOffsetY) / gridElementHeight)
+                            (y - image.y) / gridElementHeight)
         else if (isNexos)
-            return Qt.point((x - imgOffsetX + 0.25 * gridElementWidth)
+            return Qt.point((x - image.x + 0.25 * gridElementWidth)
                             / gridElementWidth,
-                            (y - imgOffsetY + 0.25 * gridElementHeight)
+                            (y - image.y + 0.25 * gridElementHeight)
                             / gridElementHeight)
         else
-            return Qt.point((x - imgOffsetX) / gridElementWidth,
-                            (y - imgOffsetY) / gridElementHeight)
+            return Qt.point((x - image.x) / gridElementWidth,
+                            (y - image.y) / gridElementHeight)
     }
     function getCenterYTrigon(pos) {
         var isDownward = ((pos.x % 2 == 0) != (pos.y % 2 == 0))
@@ -101,9 +90,18 @@ Item {
     }
 
     Image {
-        x: imgOffsetX
-        y: imgOffsetY
-        width: imgWidth; height: imgHeight
+        id: image
+
+        width: {
+            if (isTrigon) return gridElementWidth * (columns + 1)
+            else if (isNexos) return gridElementWidth * (columns - 0.5)
+            else return gridElementWidth * columns
+        }
+        height: {
+            if (isNexos) return gridElementHeight * (rows - 0.5)
+            else return gridElementHeight * rows
+        }
+        anchors.centerIn: root
         source: {
             switch (gameVariant) {
             case "trigon":
@@ -127,7 +125,7 @@ Item {
                 return theme.getImage("board-classic")
             }
         }
-        sourceSize { width: imgWidth; height: imgHeight }
+        sourceSize { width: width; height: height }
     }
     Repeater {
         model: gameModel.startingPoints0
