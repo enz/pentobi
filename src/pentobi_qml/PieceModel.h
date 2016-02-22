@@ -72,11 +72,11 @@ public:
 
     Piece getPiece() const { return m_piece; }
 
-    const Transform* getTransform(QString state) const;
+    const Transform* getTransform(const QString& state) const;
 
     const Transform* getTransform() const { return getTransform(m_state); }
 
-    void setState(QString state);
+    void setState(const QString& state);
 
     void setTransform(const Transform* transform);
 

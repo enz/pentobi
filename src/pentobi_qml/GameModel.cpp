@@ -380,7 +380,7 @@ void GameModel::gotoNode(const SgfNode* node)
         gotoNode(*node);
 }
 
-void GameModel::initGameVariant(QString gameVariant)
+void GameModel::initGameVariant(const QString& gameVariant)
 {
     Variant variant;
     if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
@@ -488,7 +488,7 @@ bool GameModel::open(istream& in)
     return true;
 }
 
-bool GameModel::open(QString file)
+bool GameModel::open(const QString& file)
 {
     ifstream in(file.toLocal8Bit().constData());
     if (! in)
@@ -575,7 +575,7 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
         pieceModel->setTransform(transform);
 }
 
-bool GameModel::save(QString file)
+bool GameModel::save(const QString& file)
 {
     ofstream out(file.toLocal8Bit().constData());
     PentobiTreeWriter writer(out, m_game.get_tree());

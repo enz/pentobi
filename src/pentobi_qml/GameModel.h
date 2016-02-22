@@ -105,7 +105,7 @@ public:
 
     Q_INVOKABLE void backToMainVar();
 
-    Q_INVOKABLE void initGameVariant(QString gameVariant);
+    Q_INVOKABLE void initGameVariant(const QString& gameVariant);
 
     Q_INVOKABLE void autoSave();
 
@@ -115,9 +115,9 @@ public:
         coordinates accordingly but do not set its status to played yet. */
     Q_INVOKABLE PieceModel* preparePiece(int color, int move);
 
-    Q_INVOKABLE bool save(QString file);
+    Q_INVOKABLE bool save(const QString& file);
 
-    Q_INVOKABLE bool open(QString file);
+    Q_INVOKABLE bool open(const QString& file);
 
     Q_INVOKABLE void makeMainVar();
 
