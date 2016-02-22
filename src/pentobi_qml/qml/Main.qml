@@ -45,15 +45,15 @@ ApplicationWindow {
     toolBar: toolBarLoader.item
     Component.onCompleted: {
         // Settings might contain unusable geometry
-        if (x < 0 || x + width > Screen.desktopAvailableWidth
-                || y < 0 || y + height > Screen.desktopAvailableHeight) {
-            if (width > Screen.desktopAvailableWidth
-                    || height > Screen.desktopAvailableHeight) {
+        var maxWidth = Screen.desktopAvailableWidth
+        var maxHeight = Screen.desktopAvailableHeight
+        if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
+            if (width > maxWidth || height > Screen.maxHeight) {
                 width = defaultWidth
                 height = defaultHeight
             }
-            x = (Screen.desktopAvailableWidth - width) / 2
-            y = (Screen.desktopAvailableHeight - height) / 2
+            x = (maxWidth - width) / 2
+            y = (maxHeight - height) / 2
         }
         Logic.init()
         visible = true
