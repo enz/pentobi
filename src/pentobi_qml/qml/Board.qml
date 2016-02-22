@@ -43,7 +43,7 @@ Item {
         }
     }
     // Avoid fractional piece element sizes if the piece elements are squares
-    property real gridElementWidth: {
+    property real gridWidth: {
         var sideLength
         if (isTrigon) sideLength = Math.min(width, Math.sqrt(3) * height)
         else sideLength = Math.min(width, height)
@@ -51,55 +51,53 @@ Item {
         else if (isNexos) Math.floor(sideLength / (columns - 0.5))
         else return Math.floor(sideLength / columns)
     }
-    property real gridElementHeight: {
-        if (isTrigon) return Math.sqrt(3) * gridElementWidth
-        else return gridElementWidth
+    property real gridHeight: {
+        if (isTrigon) return Math.sqrt(3) * gridWidth
+        else return gridWidth
     }
     property real startingPointSize: {
-        if (isTrigon) return 0.27 * gridElementHeight
-        if (isNexos) return 0.3 * gridElementHeight
-        return 0.35 * gridElementHeight
+        if (isTrigon) return 0.27 * gridHeight
+        if (isNexos) return 0.3 * gridHeight
+        return 0.35 * gridHeight
     }
 
     function mapFromGameX(x) {
-        if (isTrigon) return image.x + (x + 0.5) * gridElementWidth
-        else if (isNexos) return image.x + (x - 0.25) * gridElementWidth
-        else return image.x + x * gridElementWidth
+        if (isTrigon) return image.x + (x + 0.5) * gridWidth
+        else if (isNexos) return image.x + (x - 0.25) * gridWidth
+        else return image.x + x * gridWidth
     }
     function mapFromGameY(y) {
-        if (isNexos) return image.y + (y - 0.25) * gridElementHeight
-        else return image.y + y * gridElementHeight
+        if (isNexos) return image.y + (y - 0.25) * gridHeight
+        else return image.y + y * gridHeight
     }
     function mapToGame(x, y) {
         if (isTrigon)
-            return Qt.point((x - image.x - 0.5 * gridElementWidth)
-                            / gridElementWidth,
-                            (y - image.y) / gridElementHeight)
+            return Qt.point((x - image.x - 0.5 * gridWidth) / gridWidth,
+                            (y - image.y) / gridHeight)
         else if (isNexos)
-            return Qt.point((x - image.x + 0.25 * gridElementWidth)
-                            / gridElementWidth,
-                            (y - image.y + 0.25 * gridElementHeight)
-                            / gridElementHeight)
+            return Qt.point((x - image.x + 0.25 * gridWidth) / gridWidth,
+                            (y - image.y + 0.25 * gridHeight)
+                            / gridHeight)
         else
-            return Qt.point((x - image.x) / gridElementWidth,
-                            (y - image.y) / gridElementHeight)
+            return Qt.point((x - image.x) / gridWidth,
+                            (y - image.y) / gridHeight)
     }
     function getCenterYTrigon(pos) {
         var isDownward = ((pos.x % 2 == 0) != (pos.y % 2 == 0))
-        return (isDownward ? 1 : 2) / 3 * gridElementHeight
+        return (isDownward ? 1 : 2) / 3 * gridHeight
     }
 
     Image {
         id: image
 
         width: {
-            if (isTrigon) return gridElementWidth * (columns + 1)
-            else if (isNexos) return gridElementWidth * (columns - 0.5)
-            else return gridElementWidth * columns
+            if (isTrigon) return gridWidth * (columns + 1)
+            else if (isNexos) return gridWidth * (columns - 0.5)
+            else return gridWidth * columns
         }
         height: {
-            if (isNexos) return gridElementHeight * (rows - 0.5)
-            else return gridElementHeight * rows
+            if (isNexos) return gridHeight * (rows - 0.5)
+            else return gridHeight * rows
         }
         anchors.centerIn: root
         source: {
@@ -134,8 +132,8 @@ Item {
             color: theme.colorBlue
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
         }
     }
     Repeater {
@@ -148,8 +146,8 @@ Item {
                        theme.colorGreen : theme.colorYellow
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
         }
     }
     Repeater {
@@ -159,8 +157,8 @@ Item {
             color: theme.colorRed
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
         }
     }
     Repeater {
@@ -170,8 +168,8 @@ Item {
             color: theme.colorGreen
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridElementHeight - height) / 2
+            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
+            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
         }
     }
     Repeater {
@@ -181,7 +179,7 @@ Item {
             color: theme.colorStartingPoint
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridElementWidth - width) / 2
+            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
             y: mapFromGameY(modelData.y) + getCenterYTrigon(modelData)
                - height / 2
         }

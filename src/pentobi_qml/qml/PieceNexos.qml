@@ -9,8 +9,8 @@ Item
     property string colorName
     property bool isPicked
     property Item parentPieceArea
-    property real gridElementWidth
-    property real gridElementHeight
+    property real gridWidth
+    property real gridHeight
     property bool isMarked
     property string imageName: theme.getImage("linesegment-" + colorName)
     property real pieceAngle: {
@@ -54,10 +54,10 @@ Item
 
         LineSegment {
             isHorizontal: root.isHorizontal(modelData)
-            width: 1.5 * gridElementWidth
-            height: 0.5 * gridElementHeight
-            x: (modelData.x - pieceModel.center.x - 0.25) * gridElementWidth
-            y: (modelData.y - pieceModel.center.y + 0.25) * gridElementHeight
+            width: 1.5 * gridWidth
+            height: 0.5 * gridHeight
+            x: (modelData.x - pieceModel.center.x - 0.25) * gridWidth
+            y: (modelData.y - pieceModel.center.y + 0.25) * gridHeight
         }
     }
     Repeater {
@@ -102,10 +102,10 @@ Item
                     return 180
                 }
             }
-            width: 0.5 * gridElementWidth
-            height: 0.5 * gridElementHeight
-            x: (modelData.x - pieceModel.center.x + 0.25) * gridElementWidth
-            y: (modelData.y - pieceModel.center.y + 0.25) * gridElementHeight
+            width: 0.5 * gridWidth
+            height: 0.5 * gridHeight
+            x: (modelData.x - pieceModel.center.x + 0.25) * gridWidth
+            y: (modelData.y - pieceModel.center.y + 0.25) * gridHeight
             sourceSize: imageSourceSize
             mipmap: true
             antialiasing: true
@@ -115,13 +115,13 @@ Item
         opacity: isMarked ? 0.5 : 0
         color: colorName == "blue" || colorName == "red" ?
                    "white" : "#333333"
-        width: 0.3 * gridElementHeight
+        width: 0.3 * gridHeight
         height: width
         radius: width / 2
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * gridElementWidth - width / 2
+           * gridWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
-           * gridElementHeight - height / 2
+           * gridHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
     }
     StateGroup {
@@ -250,8 +250,8 @@ Item
 
             PropertyChanges {
                 target: root
-                gridElementWidth: board.gridElementWidth
-                gridElementHeight: board.gridElementHeight
+                gridWidth: board.gridWidth
+                gridHeight: board.gridHeight
             }
             ParentChange {
                 target: root
@@ -266,8 +266,8 @@ Item
 
             PropertyChanges {
                 target: root
-                gridElementWidth: board.gridElementWidth
-                gridElementHeight: board.gridElementHeight
+                gridWidth: board.gridWidth
+                gridHeight: board.gridHeight
             }
             ParentChange {
                 target: root
@@ -283,8 +283,8 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridElementWidth: Math.floor(0.12 * parentPieceArea.width)
-                gridElementHeight: gridElementWidth
+                gridWidth: Math.floor(0.12 * parentPieceArea.width)
+                gridHeight: gridWidth
             }
             ParentChange {
                 target: root
@@ -302,7 +302,7 @@ Item
             ParentAnimation {
                 via: gameDisplay
                 NumberAnimation {
-                    properties: "x,y,gridElementWidth,gridElementHeight"
+                    properties: "x,y,gridWidth,gridHeight"
                     duration: 300
                     easing.type: Easing.OutQuad
                 }

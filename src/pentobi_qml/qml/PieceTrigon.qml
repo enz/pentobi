@@ -9,8 +9,8 @@ Item
     property string colorName
     property bool isPicked
     property Item parentPieceArea
-    property real gridElementWidth
-    property real gridElementHeight
+    property real gridWidth
+    property real gridHeight
     property bool isMarked
     property string imageName: theme.getImage("triangle-" + colorName)
     property string imageNameDownward:
@@ -58,24 +58,24 @@ Item
 
         Triangle {
             isDownward: _isDownward(modelData)
-            width: 2 * gridElementWidth
-            height: gridElementHeight
-            x: (modelData.x - pieceModel.center.x - 0.5) * gridElementWidth
-            y: (modelData.y - pieceModel.center.y) * gridElementHeight
+            width: 2 * gridWidth
+            height: gridHeight
+            x: (modelData.x - pieceModel.center.x - 0.5) * gridWidth
+            y: (modelData.y - pieceModel.center.y) * gridHeight
         }
     }
     Rectangle {
         opacity: isMarked ? 0.5 : 0
         color: colorName == "blue" || colorName == "red" ?
                    "white" : "#333333"
-        width: 0.3 * gridElementHeight
+        width: 0.3 * gridHeight
         height: width
         radius: width / 2
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * gridElementWidth - width / 2
+           * gridWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y
             + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
-           * gridElementHeight - height / 2
+           * gridHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: 80 } }
     }
     StateGroup {
@@ -256,8 +256,8 @@ Item
 
             PropertyChanges {
                 target: root
-                gridElementWidth: board.gridElementWidth
-                gridElementHeight: board.gridElementHeight
+                gridWidth: board.gridWidth
+                gridHeight: board.gridHeight
             }
             ParentChange {
                 target: root
@@ -272,8 +272,8 @@ Item
 
             PropertyChanges {
                 target: root
-                gridElementWidth: board.gridElementWidth
-                gridElementHeight: board.gridElementHeight
+                gridWidth: board.gridWidth
+                gridHeight: board.gridHeight
             }
             ParentChange {
                 target: root
@@ -288,8 +288,8 @@ Item
 
             PropertyChanges {
                 target: root
-                gridElementWidth: 0.13 * parentPieceArea.width
-                gridElementHeight: Math.sqrt(3) * gridElementWidth
+                gridWidth: 0.13 * parentPieceArea.width
+                gridHeight: Math.sqrt(3) * gridWidth
             }
             ParentChange {
                 target: root
@@ -308,7 +308,7 @@ Item
             ParentAnimation {
                 via: gameDisplay
                 NumberAnimation {
-                    properties: "x,y,gridElementWidth,gridElementHeight"
+                    properties: "x,y,gridWidth,gridHeight"
                     duration: 300
                     easing.type: Easing.OutQuad
                 }

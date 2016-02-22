@@ -11,7 +11,7 @@ Item
     property bool markLastMove: true
     property alias busyIndicatorRunning: busyIndicator.running
     property size imageSourceSize: {
-        var width = board.gridElementWidth, height = board.gridElementHeight
+        var width = board.gridWidth, height = board.gridHeight
         if (board.isTrigon)
             return Qt.size(2 * width, height)
         if (board.isNexos)
