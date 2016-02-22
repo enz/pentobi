@@ -321,40 +321,40 @@ void PieceModel::setTransform(const Transform* transform)
     // for flipped states.
     if (dynamic_cast<const TransfIdentity*>(transform)
             || dynamic_cast<const TransfTrigonIdentity*>(transform))
-        state = "";
+        state.clear();
     else if (dynamic_cast<const TransfTrigonRot60*>(transform))
-        state = "rot60";
+        state = QLatin1String("rot60");
     else if (dynamic_cast<const TransfRectRot90*>(transform))
-        state = "rot90";
+        state = QLatin1String("rot90");
     else if (dynamic_cast<const TransfTrigonRot120*>(transform))
-        state = "rot120";
+        state = QLatin1String("rot120");
     else if (dynamic_cast<const TransfRectRot180*>(transform)
              || dynamic_cast<const TransfTrigonRot180*>(transform))
-        state = "rot180";
+        state = QLatin1String("rot180");
     else if (dynamic_cast<const TransfTrigonRot240*>(transform))
-        state = "rot240";
+        state = QLatin1String("rot240");
     else if (dynamic_cast<const TransfRectRot270*>(transform))
-        state = "rot270";
+        state = QLatin1String("rot270");
     else if (dynamic_cast<const TransfTrigonRot300*>(transform))
-        state = "rot300";
+        state = QLatin1String("rot300");
     else if (dynamic_cast<const TransfRectRot180Refl*>(transform)
              || dynamic_cast<const TransfTrigonReflRot180*>(transform))
-        state = "flip";
+        state = QLatin1String("flip");
     else if (dynamic_cast<const TransfTrigonReflRot120*>(transform))
-        state = "rot60Flip";
+        state = QLatin1String("rot60Flip");
     else if (dynamic_cast<const TransfRectRot90Refl*>(transform))
-        state = "rot90Flip";
+        state = QLatin1String("rot90Flip");
     else if (dynamic_cast<const TransfTrigonReflRot60*>(transform))
-        state = "rot120Flip";
+        state = QLatin1String("rot120Flip");
     else if (dynamic_cast<const TransfRectRefl*>(transform)
              || dynamic_cast<const TransfTrigonRefl*>(transform))
-        state = "rot180Flip";
+        state = QLatin1String("rot180Flip");
     else if (dynamic_cast<const TransfTrigonReflRot300*>(transform))
-        state = "rot240Flip";
+        state = QLatin1String("rot240Flip");
     else if (dynamic_cast<const TransfRectRot270Refl*>(transform))
-        state = "rot270Flip";
+        state = QLatin1String("rot270Flip");
     else if (dynamic_cast<const TransfTrigonReflRot240*>(transform))
-        state = "rot300Flip";
+        state = QLatin1String("rot300Flip");
     else
     {
         qWarning() << "Invalid Transform " << typeid(*transform).name();
