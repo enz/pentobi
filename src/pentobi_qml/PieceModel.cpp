@@ -321,7 +321,7 @@ void PieceModel::setTransform(const Transform* transform)
     // for flipped states.
     if (dynamic_cast<const TransfIdentity*>(transform)
             || dynamic_cast<const TransfTrigonIdentity*>(transform))
-        state.clear();
+        ;
     else if (dynamic_cast<const TransfTrigonRot60*>(transform))
         state = QLatin1String("rot60");
     else if (dynamic_cast<const TransfRectRot90*>(transform))
