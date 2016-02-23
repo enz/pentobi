@@ -9,6 +9,7 @@ QtObject {
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
     property color colorStartingPoint: "#82777E"
+    property real pieceListOpacity: 0.94
     property real toPlayColorLighter: 1.7
 
     function getImage(name) {
