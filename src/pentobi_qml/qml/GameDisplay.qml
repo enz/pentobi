@@ -58,7 +58,7 @@ Item
             gameVariant: gameModel.gameVariant
             width: Math.min(
                        parent.width,
-                       gameDisplay.height / (1.07 + 3 / pieceSelector.columns))
+                       gameDisplay.height / (1.07 + 2.7 / pieceSelector.columns))
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -87,7 +87,7 @@ Item
         Flickable {
             id: flickable
 
-            width: board.width
+            width: 0.9 * board.width
             height: width / pieceSelector.columns * pieceSelector.rows
             contentWidth: 2 * width
             contentHeight: height
