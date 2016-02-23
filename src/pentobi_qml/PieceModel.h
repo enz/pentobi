@@ -40,8 +40,7 @@ public:
     static QPointF findCenter(const Board& bd, const PiecePoints& points,
                               bool isOriginDownward);
 
-    PieceModel(QObject* parent, const Board& bd, libpentobi_base::Piece piece,
-               Color c);
+    PieceModel(QObject* parent, const Board& bd, Piece piece, Color c);
 
     int color();
 

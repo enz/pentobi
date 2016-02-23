@@ -40,8 +40,7 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-PieceModel::PieceModel(QObject* parent, const Board& bd,
-                       libpentobi_base::Piece piece, Color c)
+PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
     : QObject(parent),
       m_bd(bd),
       m_color(c),
