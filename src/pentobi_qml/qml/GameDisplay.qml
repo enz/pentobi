@@ -58,7 +58,7 @@ Item
             gameVariant: gameModel.gameVariant
             width: Math.min(
                        parent.width,
-                       gameDisplay.height / (1.05 + 3 / pieceSelector.columns))
+                       gameDisplay.height / (1.07 + 3 / pieceSelector.columns))
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
