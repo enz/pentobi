@@ -31,7 +31,7 @@ class PieceModel
     Q_PROPERTY(QVariantList junctionType READ junctionType CONSTANT)
     Q_PROPERTY(QPointF center READ center CONSTANT)
     Q_PROPERTY(QPointF labelPos READ labelPos CONSTANT)
-    Q_PROPERTY(QString state READ state WRITE setState NOTIFY stateChanged)
+    Q_PROPERTY(QString state READ state NOTIFY stateChanged)
     Q_PROPERTY(bool isPlayed READ isPlayed NOTIFY isPlayedChanged)
     Q_PROPERTY(bool isLastMove READ isLastMove NOTIFY isLastMoveChanged)
     Q_PROPERTY(QPointF gameCoord READ gameCoord NOTIFY gameCoordChanged)
