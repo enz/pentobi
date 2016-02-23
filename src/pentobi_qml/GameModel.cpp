@@ -152,7 +152,7 @@ void GameModel::deleteAllVar()
     updateProperties();
 }
 
-bool GameModel::findMove(const PieceModel& pieceModel, QString state,
+bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
                          QPointF coord, Move& mv) const
 {
     auto piece = pieceModel.getPiece();
@@ -400,7 +400,7 @@ void GameModel::initGameVariant(const QString& gameVariant)
     updateProperties();
 }
 
-bool GameModel::isLegalPos(PieceModel* pieceModel, QString state,
+bool GameModel::isLegalPos(PieceModel* pieceModel, const QString& state,
                            QPointF coord) const
 {
     Move mv;

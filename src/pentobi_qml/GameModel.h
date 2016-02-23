@@ -78,7 +78,7 @@ public:
 
     Q_INVOKABLE void deleteAllVar();
 
-    Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, QString state,
+    Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, const QString& state,
                                 QPointF coord) const;
 
     Q_INVOKABLE void nextColor();
@@ -296,8 +296,8 @@ private:
 
     void createPieceModels(Color c, QList<PieceModel*>& pieceModels);
 
-    bool findMove(const PieceModel& pieceModel, QString state, QPointF coord,
-                  Move& mv) const;
+    bool findMove(const PieceModel& pieceModel, const QString& state,
+                  QPointF coord, Move& mv) const;
 
     QList<PieceModel*>& getPieceModels(Color c);
 
