@@ -8,7 +8,7 @@ Item
     property var pieceModel
     property string colorName
     property bool isPicked
-    property Item parentPieceArea
+    property Item parentUnplayed
     property real gridWidth
     property real gridHeight
     property bool isMarked
@@ -284,18 +284,18 @@ Item
         },
         State {
             name: "unplayed"
-            when: parentPieceArea != null
+            when: parentUnplayed != null
 
             PropertyChanges {
                 target: root
-                gridWidth: 0.13 * parentPieceArea.width
+                gridWidth: 0.13 * parentUnplayed.width
                 gridHeight: Math.sqrt(3) * gridWidth
             }
             ParentChange {
                 target: root
-                parent: parentPieceArea
-                x: parentPieceArea.width / 2
-                y: parentPieceArea.height / 2
+                parent: parentUnplayed
+                x: parentUnplayed.width / 2
+                y: parentUnplayed.height / 2
             }
         }
     ]
