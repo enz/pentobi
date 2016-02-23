@@ -155,7 +155,7 @@ function init() {
     }
     else {
         gameDisplay.createPieces()
-        if (! computerPlaysAll() && ! gameModel.isGameOver)
+        if (! gameModel.isGameOver)
             checkComputerMove()
     }
 }
