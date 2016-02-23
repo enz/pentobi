@@ -148,6 +148,7 @@ function getFileFromUrl(fileUrl) {
 }
 
 function init() {
+    gameDisplay.busyIndicatorRunning = false
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
         initComputerColors()
@@ -157,7 +158,6 @@ function init() {
         if (! computerPlaysAll() && ! gameModel.isGameOver)
             checkComputerMove()
     }
-    gameDisplay.busyIndicatorRunning = false
 }
 
 function initComputerColors() {
