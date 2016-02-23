@@ -453,13 +453,13 @@ void GameModel::newGame()
     emit positionAboutToChange();
     m_game.init();
     for (auto pieceModel : m_pieceModels0)
-        pieceModel->setState("");
+        pieceModel->setDefaultState();
     for (auto pieceModel : m_pieceModels1)
-        pieceModel->setState("");
+        pieceModel->setDefaultState();
     for (auto pieceModel : m_pieceModels2)
-        pieceModel->setState("");
+        pieceModel->setDefaultState();
     for (auto pieceModel : m_pieceModels3)
-        pieceModel->setState("");
+        pieceModel->setDefaultState();
     updateProperties();
 }
 

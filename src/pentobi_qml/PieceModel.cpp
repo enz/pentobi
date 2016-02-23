@@ -304,17 +304,17 @@ void PieceModel::setIsPlayed(bool isPlayed)
     emit isPlayedChanged(isPlayed);
 }
 
-void PieceModel::setState(const QString& state)
+void PieceModel::setDefaultState()
 {
-    if (m_state == state)
+    if (m_state.isEmpty())
         return;
-    m_state = state;
-    emit stateChanged(state);
+    m_state.clear();
+    emit stateChanged(m_state);
 }
 
 void PieceModel::setTransform(const Transform* transform)
 {
-    QString state;
+    QLatin1String state;
     // libboardgame_base uses a different convention for the order of flipping
     // and rotation, so the names of the states and transform classes differ
     // for flipped states.
@@ -359,7 +359,10 @@ void PieceModel::setTransform(const Transform* transform)
         qWarning() << "Invalid Transform " << typeid(*transform).name();
         return;
     }
-    setState(state);
+    if (m_state == state)
+        return;
+    m_state = state;
+    emit stateChanged(m_state);
 }
 
 QString PieceModel::state() const

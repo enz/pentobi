@@ -75,7 +75,7 @@ public:
 
     const Transform* getTransform() const { return getTransform(m_state); }
 
-    void setState(const QString& state);
+    void setDefaultState();
 
     void setTransform(const Transform* transform);
 
