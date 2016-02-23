@@ -9,10 +9,15 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity0
 
+        function loadImage() {
+            if (imageOpacity === 0 || status !== Loader.Null)
+                return
+            sourceComponent = component0
+            imageOpacityChanged.disconnect(loadImage)
+        }
+
         anchors.fill: root
-        onImageOpacityChanged:
-            if (imageOpacity > 0 && status === Loader.Null)
-                sourceComponent = component0
+        onImageOpacityChanged: loadImage()
 
         Component {
             id: component0
@@ -31,10 +36,15 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity90
 
+        function loadImage() {
+            if (imageOpacity === 0 || status !== Loader.Null)
+                return
+            sourceComponent = component90
+            imageOpacityChanged.disconnect(loadImage)
+        }
+
         anchors.fill: root
-        onImageOpacityChanged:
-            if (imageOpacity > 0 && status === Loader.Null)
-                sourceComponent = component90
+        onImageOpacityChanged: loadImage()
 
         Component {
             id: component90
@@ -53,10 +63,15 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity180
 
+        function loadImage() {
+            if (imageOpacity === 0 || status !== Loader.Null)
+                return
+            sourceComponent = component180
+            imageOpacityChanged.disconnect(loadImage)
+        }
+
         anchors.fill: root
-        onImageOpacityChanged:
-            if (imageOpacity > 0 && status === Loader.Null)
-                sourceComponent = component180
+        onImageOpacityChanged: loadImage()
 
         Component {
             id: component180
@@ -75,10 +90,15 @@ Item {
     Loader {
         property real imageOpacity: imageOpacity270
 
+        function loadImage() {
+            if (imageOpacity === 0 || status !== Loader.Null)
+                return
+            sourceComponent = component270
+            imageOpacityChanged.disconnect(loadImage)
+        }
+
         anchors.fill: root
-        onImageOpacityChanged:
-            if (imageOpacity > 0 && status === Loader.Null)
-                sourceComponent = component270
+        onImageOpacityChanged: loadImage()
 
         Component {
             id: component270
