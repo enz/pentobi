@@ -26,7 +26,6 @@ Flickable {
         width: root.width
         columns: root.columns
         pieces: pieces0
-        opacity: toPlay === 0 && ! gameModel.isGameOver ? 0.9 : 0.8
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -35,7 +34,6 @@ Flickable {
         width: root.width
         columns: root.columns
         pieces: pieces1
-        opacity: toPlay === 1 && ! gameModel.isGameOver ? 0.9 : 0.8
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -44,7 +42,6 @@ Flickable {
         width: root.width
         columns: root.columns
         pieces: pieces2
-        opacity: toPlay === 2 && ! gameModel.isGameOver ? 0.9 : 0.8
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -53,7 +50,6 @@ Flickable {
         width: root.width
         columns: root.columns
         pieces: pieces3
-        opacity: toPlay === 3 && ! gameModel.isGameOver ? 0.9 : 0.8
         onPiecePicked: root.piecePicked(piece)
     }
 

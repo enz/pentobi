@@ -7,6 +7,8 @@ Grid {
 
     signal piecePicked(var piece)
 
+    opacity: 0.9
+
     Repeater {
         model: pieces
 
