@@ -4,8 +4,9 @@ Item {
     id: root
 
     property string gameVariant
-    property bool isTrigon: gameVariant.lastIndexOf("trigon") === 0
-    property bool isNexos: gameVariant.lastIndexOf("nexos") === 0
+    property bool isTrigon: gameVariant.indexOf("trigon") === 0
+    property bool isNexos: gameVariant.indexOf("nexos") === 0
+    property bool isCallisto: gameVariant.indexOf("callisto") === 0
     property int columns: {
         switch (gameVariant) {
         case "duo":
@@ -109,12 +110,9 @@ Item {
                 return theme.getImage("board-trigon")
             case "trigon_3":
                 return theme.getImage("board-trigon-3")
-            case "duo":
-            case "junior":
-                return theme.getImage("board-duo")
             case "nexos":
             case "nexos_2":
-                return theme.getImage("board-nexos")
+                return theme.getImage("board-tile-nexos")
             case "callisto":
                 return theme.getImage("board-callisto")
             case "callisto_2":
@@ -122,10 +120,25 @@ Item {
             case "callisto_3":
                 return theme.getImage("board-callisto-3")
             default:
-                return theme.getImage("board-classic")
+                return theme.getImage("board-tile-classic")
             }
         }
-        sourceSize { width: width; height: height }
+        sourceSize {
+            width: {
+                if (isTrigon || isCallisto) return width
+                if (isNexos) return 2 * gridWidth
+                return gridWidth
+            }
+            height: {
+                if (isTrigon || isCallisto) return height
+                if (isNexos) return 2 * gridHeight
+                return gridHeight
+            }
+        }
+        fillMode: isTrigon? Image.Stretch : Image.Tile
+        horizontalAlignment: Image.AlignLeft
+        verticalAlignment: Image.AlignTop
+        cache: false
     }
     Repeater {
         model: gameModel.startingPoints0
