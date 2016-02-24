@@ -26,9 +26,7 @@ Item
     property real imageOpacity180: imageOpacity(pieceAngle, 180)
     property real imageOpacity270: imageOpacity(pieceAngle, 270)
 
-    // Make sure piece is above board during piece transition when its parent
-    // is GameDisplay
-    z: 1
+    z: 1 // Must be above board and piece manipulator during transition
     transform: [
         Rotation {
             id: flipX
