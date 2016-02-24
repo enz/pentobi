@@ -138,6 +138,10 @@ Item {
                 return gridHeight
             }
         }
+        // It should work to use Image.Tile for all game variants, but the
+        // Trigon board is not painted with Image.width/height even if
+        // sourceSize is bound to it (the Trigon SVG files have a different
+        // aspect ratio but that shouldn't matter). Bug in Qt 5.6?
         fillMode: isTrigon? Image.Stretch : Image.Tile
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
