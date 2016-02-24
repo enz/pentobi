@@ -17,5 +17,6 @@ ToolButton {
         anchors.centerIn: parent
         source: imageSource
         opacity: root.enabled ? 1 : 0.4
+        cache: false
     }
 }

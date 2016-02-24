@@ -14,5 +14,6 @@ ToolButton {
         sourceSize { width: width; height: height }
         anchors.centerIn: parent
         source: imageSource
+        cache: false
     }
 }
