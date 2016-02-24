@@ -27,6 +27,7 @@ Item
     property real imageOpacity180: imageOpacity(pieceAngle, 180)
     property real imageOpacity270: imageOpacity(pieceAngle, 270)
 
+    z: 1
     transform: [
         Rotation {
             id: flipX
@@ -299,7 +300,7 @@ Item
             enabled: transitionsEnabled
 
             ParentAnimation {
-                via: board
+                via: gameDisplay
                 NumberAnimation {
                     properties: "x,y,gridWidth,gridHeight"
                     duration: 300

@@ -4,7 +4,7 @@ import "GameDisplay.js" as Logic
 
 Item
 {
-    id: root
+    id: gameDisplay // Referenced by Piece*.qml
 
     property var pickedPiece: null
     property bool transitionsEnabled
@@ -48,8 +48,8 @@ Item
     Column {
         id: column
 
-        width: root.width
-        anchors.centerIn: root
+        width: gameDisplay.width
+        anchors.centerIn: gameDisplay
         spacing: 0.01 * board.width
 
         Board {
@@ -58,7 +58,7 @@ Item
             gameVariant: gameModel.gameVariant
             width: Math.min(
                        parent.width,
-                       root.height / (1.07 + 2.7 / pieceSelector.columns))
+                       gameDisplay.height / (1.07 + 2.7 / pieceSelector.columns))
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -136,7 +136,7 @@ Item
     BusyIndicator {
         id: busyIndicator
 
-        x: (root.width - width) / 2
+        x: (gameDisplay.width - width) / 2
         y: column.y + flickable.y + (flickable.height - height) / 2
     }
     PieceManipulator {
@@ -156,8 +156,8 @@ Item
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         drag {
-            minimumX: -width / 2; maximumX: root.width - width / 2
-            minimumY: -height / 2; maximumY: root.height - height / 2
+            minimumX: -width / 2; maximumX: gameDisplay.width - width / 2
+            minimumY: -height / 2; maximumY: gameDisplay.height - height / 2
         }
         onPiecePlayed: {
             var pos = mapToItem(board, width / 2, height / 2)

@@ -26,6 +26,9 @@ Item
     property real imageOpacity180: imageOpacity(pieceAngle, 180)
     property real imageOpacity270: imageOpacity(pieceAngle, 270)
 
+    // Make sure piece is above board during piece transition when its parent
+    // is GameDisplay
+    z: 1
     transform: [
         Rotation {
             id: flipX
@@ -42,7 +45,7 @@ Item
     ]
 
     function imageOpacity(pieceAngle, imgAngle) {
-        var angle = (((pieceAngle - imgAngle) % 360) + 360) % 360
+        var angle = (((pieceAngle - imgAngle) % 360) + 360) % 360 // JS modulo bug
         return (angle >= 90 && angle <= 270 ? 0 : Math.cos(angle * Math.PI / 180))
     }
 
@@ -248,7 +251,7 @@ Item
             enabled: transitionsEnabled
 
             ParentAnimation {
-                via: board
+                via: gameDisplay
                 NumberAnimation {
                     properties: "x,y,gridWidth,gridHeight"
                     duration: 300
