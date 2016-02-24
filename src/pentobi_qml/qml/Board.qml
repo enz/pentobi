@@ -86,7 +86,10 @@ Item {
                             (y - image.y) / gridHeight)
     }
     function getCenterYTrigon(pos) {
+
         var isDownward = ((pos.x % 2 == 0) != (pos.y % 2 == 0))
+        if (gameVariant === "trigon_3")
+            isDownward = ! isDownward
         return (isDownward ? 1 : 2) / 3 * gridHeight
     }
 
