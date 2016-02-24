@@ -7,17 +7,17 @@ Item {
     property bool isHorizontal
 
     Loader {
-        property real imageOpacity: imageOpacity0
-
         function loadImage() {
-            if (imageOpacity === 0 || status !== Loader.Null)
+            if (opacity === 0 || status !== Loader.Null)
                 return
             sourceComponent = component0
-            imageOpacityChanged.disconnect(loadImage)
+            opacityChanged.disconnect(loadImage)
         }
 
         anchors.fill: root
-        onImageOpacityChanged: loadImage()
+        opacity: imageOpacity0
+        onOpacityChanged: loadImage()
+        Component.onCompleted: loadImage()
 
         Component {
             id: component0
@@ -27,24 +27,23 @@ Item {
                 sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
-                opacity: imageOpacity
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? 0 : -90
             }
         }
     }
     Loader {
-        property real imageOpacity: imageOpacity90
-
         function loadImage() {
-            if (imageOpacity === 0 || status !== Loader.Null)
+            if (opacity === 0 || status !== Loader.Null)
                 return
             sourceComponent = component90
-            imageOpacityChanged.disconnect(loadImage)
+            opacityChanged.disconnect(loadImage)
         }
 
         anchors.fill: root
-        onImageOpacityChanged: loadImage()
+        opacity: imageOpacity90
+        onOpacityChanged: loadImage()
+        Component.onCompleted: loadImage()
 
         Component {
             id: component90
@@ -54,24 +53,23 @@ Item {
                 sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
-                opacity: imageOpacity
                 mirror: isHorizontal
                 rotation: isHorizontal ? -180 : -90
             }
         }
     }
     Loader {
-        property real imageOpacity: imageOpacity180
-
         function loadImage() {
-            if (imageOpacity === 0 || status !== Loader.Null)
+            if (opacity === 0 || status !== Loader.Null)
                 return
             sourceComponent = component180
-            imageOpacityChanged.disconnect(loadImage)
+            opacityChanged.disconnect(loadImage)
         }
 
         anchors.fill: root
-        onImageOpacityChanged: loadImage()
+        opacity: imageOpacity180
+        onOpacityChanged: loadImage()
+        Component.onCompleted: loadImage()
 
         Component {
             id: component180
@@ -81,24 +79,23 @@ Item {
                 sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
-                opacity: imageOpacity
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? -180 : -270
             }
         }
     }
     Loader {
-        property real imageOpacity: imageOpacity270
-
         function loadImage() {
-            if (imageOpacity === 0 || status !== Loader.Null)
+            if (opacity === 0 || status !== Loader.Null)
                 return
             sourceComponent = component270
-            imageOpacityChanged.disconnect(loadImage)
+            opacityChanged.disconnect(loadImage)
         }
 
         anchors.fill: root
-        onImageOpacityChanged: loadImage()
+        opacity: imageOpacity270
+        onOpacityChanged: loadImage()
+        Component.onCompleted: loadImage()
 
         Component {
             id: component270
@@ -108,7 +105,6 @@ Item {
                 sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
-                opacity: imageOpacity
                 mirror: isHorizontal
                 rotation: isHorizontal ? 0 : -270
             }
