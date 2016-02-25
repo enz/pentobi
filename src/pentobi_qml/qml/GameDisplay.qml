@@ -31,9 +31,6 @@ Item
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showMoveHint(move) { Logic.showMoveHint(move) }
-    function findPiece(pieceModel, color) {
-        return Logic.findPiece(pieceModel, color)
-    }
     function dropPiece() {
         pickedPiece = null
         transitionsEnabled = false
