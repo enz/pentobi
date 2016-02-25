@@ -28,17 +28,15 @@ function createColorPieces(component, pieceModels) {
 
 function createPieces() {
     var file
-    if (gameModel.gameVariant.lastIndexOf("trigon") === 0)
+    if (gameModel.gameVariant.indexOf("trigon") === 0)
         file = "PieceTrigon.qml"
-    else if (gameModel.gameVariant.lastIndexOf("nexos") === 0)
+    else if (gameModel.gameVariant.indexOf("nexos") === 0)
         file = "PieceNexos.qml"
-    else if (gameModel.gameVariant.lastIndexOf("callisto") === 0)
+    else if (gameModel.gameVariant.indexOf("callisto") === 0)
         file = "PieceCallisto.qml"
     else
         file = "PieceClassic.qml"
     var component = Qt.createComponent(file)
-    if (component.status !== Component.Ready)
-        throw "Could not create component " + file
     _pieces0 = createColorPieces(component, gameModel.pieceModels0)
     _pieces1 = createColorPieces(component, gameModel.pieceModels1)
     _pieces2 = createColorPieces(component, gameModel.pieceModels2)
