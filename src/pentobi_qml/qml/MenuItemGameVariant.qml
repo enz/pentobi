@@ -8,5 +8,5 @@ MenuItem {
     checkable: true
     checked: gameModel.gameVariant == gameVariant
     exclusiveGroup: groupGameVariant
-    onTriggered: Logic.changeGameVariant(gameVariant, true)
+    onTriggered: Logic.changeGameVariant(gameVariant)
 }

@@ -12,15 +12,18 @@ function cancelGenMove() {
     gameDisplay.busyIndicatorRunning = false
 }
 
-function changeGameVariant(gameVariant, verifyAbortGame) {
+function changeGameVariant(gameVariant) {
     if (gameModel.gameVariant === gameVariant)
         return
-    if (! gameModel.isGameEmpty && ! gameModel.isGameOver &&
-            verifyAbortGame) {
+    if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
         showQuestion(qsTr("New game?"),
-                     function() { changeGameVariant(gameVariant, false) })
+                     function() { changeGameVariantNoVerify(gameVariant) })
         return
     }
+    changeGameVariantNoVerify(gameVariant)
+}
+
+function changeGameVariantNoVerify(gameVariant) {
     cancelGenMove()
     gameDisplay.busyIndicatorRunning = true
     lengthyCommand.run(function() {
