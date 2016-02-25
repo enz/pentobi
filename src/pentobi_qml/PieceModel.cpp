@@ -314,7 +314,7 @@ void PieceModel::setDefaultState()
 
 void PieceModel::setTransform(const Transform* transform)
 {
-    QLatin1String state;
+    QString state;
     // libboardgame_base uses a different convention for the order of flipping
     // and rotation, so the names of the states and transform classes differ
     // for flipped states.
