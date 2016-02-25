@@ -24,7 +24,7 @@ RowLayout {
     AndroidToolButton {
         imageSource: "icons/pentobi-newgame.svg"
         visible: ! gameModel.isGameEmpty
-        onClicked: Logic.newGame(true)
+        onClicked: Logic.newGame()
     }
     AndroidToolButton {
         visible: gameModel.canUndo

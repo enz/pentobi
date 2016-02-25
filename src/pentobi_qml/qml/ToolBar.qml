@@ -10,7 +10,7 @@ ToolBar {
         ToolButton {
             iconSource: "icons/pentobi-newgame.svg"
             enabled: ! gameModel.isGameEmpty
-            onClicked: Logic.newGame(true)
+            onClicked: Logic.newGame()
         }
         ToolButton {
             iconSource: "icons/pentobi-undo.svg"

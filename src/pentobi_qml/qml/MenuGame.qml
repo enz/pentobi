@@ -9,7 +9,7 @@ Menu {
         text: qsTr("&New")
         enabled: ! gameModel.isGameEmpty
         visible: ! isAndroid
-        onTriggered: Logic.newGame(true)
+        onTriggered: Logic.newGame()
     }
     MenuSeparator {
         visible: ! isAndroid

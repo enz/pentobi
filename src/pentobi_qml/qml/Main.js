@@ -129,8 +129,7 @@ function createTheme(themeName) {
 }
 
 function deleteAllVar() {
-    showQuestion(qsTr("Delete all variations?"),
-                 function() { gameModel.deleteAllVar() })
+    showQuestion(qsTr("Delete all variations?"), gameModel.deleteAllVar)
 }
 
 function genMove() {
@@ -200,21 +199,25 @@ function moveHint() {
     playerModel.startGenMoveAtLevel(gameModel, 1)
 }
 
-function newGame(verifyAbortGame)
+function newGameNoVerify()
 {
-    if (! gameModel.isGameEmpty &&  ! gameModel.isGameOver &&
-            verifyAbortGame) {
-        showQuestion(qsTr("New game?"), function() { newGame(false) })
-        return
-    }
     gameModel.newGame()
     gameDisplay.showToPlay()
     initComputerColors()
 }
 
-function openFileUrl(fileUrl) {
+function newGame()
+{
+    if (! gameModel.isGameEmpty &&  ! gameModel.isGameOver) {
+        showQuestion(qsTr("New game?"), newGameNoVerify)
+        return
+    }
+    newGameNoVerify()
+}
+
+function openFileUrl() {
     gameDisplay.destroyPieces()
-    if (! gameModel.open(getFileFromUrl(fileUrl)))
+    if (! gameModel.open(getFileFromUrl(openDialog.item.fileUrl)))
         showError(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
     else {
         computerPlays0 = false
@@ -279,13 +282,11 @@ function showQuestion(text, acceptedFunc) {
 }
 
 function truncate() {
-    showQuestion(qsTr("Truncate this subtree?"),
-                 function() { gameModel.truncate() })
+    showQuestion(qsTr("Truncate this subtree?"), gameModel.truncate)
 }
 
 function truncateChildren() {
-    showQuestion(qsTr("Truncate children?"),
-                 function() { gameModel.truncateChildren() })
+    showQuestion(qsTr("Truncate children?"), gameModel.truncateChildren)
 }
 
 function undo() {

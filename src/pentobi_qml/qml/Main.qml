@@ -198,7 +198,7 @@ ApplicationWindow {
             onAccepted: {
                 root.folder = folder
                 gameDisplay.forceActiveFocus() // QTBUG-48456
-                lengthyCommand.run(function() { Logic.openFileUrl(fileUrl) })
+                lengthyCommand.run(Logic.openFileUrl)
             }
             onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
