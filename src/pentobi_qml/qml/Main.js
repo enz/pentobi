@@ -125,10 +125,7 @@ function computerPlaysAll() {
 
 function createTheme(themeName) {
     var source = "qrc:///qml/themes/" + themeName + "/Theme.qml"
-    var component = Qt.createComponent(source)
-    if (component.status !== Component.Ready)
-        throw "Could not load " + source
-    return component.createObject(root)
+    return Qt.createComponent(source).createObject(root)
 }
 
 function deleteAllVar() {
