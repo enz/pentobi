@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="280" width="280" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <g id="a" transform="translate(98)">
-<rect height="14" width="14" y="0" x="0" fill="#9a9298"/>
-<g transform="matrix(.9285714 0 0 .9285754 .5 .4999427)">
-<path d="m14 0h-14v14l0.7-0.7v-12.6h12.6z" fill="#767074"/>
-<path d="m14 0-0.7 0.7v12.64h-12.6l-0.7 0.7h14z" fill="#b2acb0"/>
-</g>
+<rect height="14" width="14" fill="#9a9298"/>
+<path d="m0.5 13.5v-13h13l-0.5 0.5h-12v12z" fill="#767074"/>
+<path d="m0.5 13.5h13v-13l-0.5 0.5v12h-12z" fill="#b2acb0"/>
 </g>
 <use xlink:href="#a" transform="translate(-98 98)"/>
 <use xlink:href="#a" transform="translate(-98,112)"/>
@@ -270,13 +268,11 @@
 <use xlink:href="#a" transform="translate(168 140)"/>
 <use xlink:href="#a" transform="translate(168 154)"/>
 <use xlink:href="#a" transform="translate(168 168)"/>
-<g id="b" transform="translate(1,-42)">
-<path d="m125 140h14v14h-14v-14z" fill="#9a9298"/>
-<g>
-<rect height="13" width="13" y="140.5" x="125.5" fill="#696267"/>
-<path d="m138.5 140.5h-13v13c0.20607-0.23426 0.49108-0.43581 0.65-0.6896v-11.6604h11.7l0.65-0.65z" fill="#5a5458"/>
-<path d="m138.5 140.5c-0.20607 0.23426-0.49108 0.43581-0.65 0.6896v11.66039h-11.7l-0.65 0.65h13v-12.99999z" fill="#797276"/>
-</g>
+<g id="b" transform="translate(126 98)">
+<rect height="14" width="14" fill="#9a9298"/>
+<rect height="12" width="12" y="1" x="1" fill="#696267"/>
+<path d="m0.5 13.5v-13h13l-0.5 0.5h-12v12z" fill="#5a5458"/>
+<path d="m0.5 13.5h13v-13l-0.5 0.5v12h-12z" fill="#797276"/>
 </g>
 <use xlink:href="#b" transform="translate(-28,28)"/>
 <use xlink:href="#b" transform="translate(-28,42)"/>
