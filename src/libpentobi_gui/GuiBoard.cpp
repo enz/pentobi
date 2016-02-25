@@ -150,11 +150,6 @@ Move GuiBoard::findSelectedPieceMove()
         return mv;
 }
 
-int GuiBoard::heightForWidth(int width) const
-{
-    return width;
-}
-
 void GuiBoard::leaveEvent(QEvent*)
 {
     m_selectedPieceOffset = CoordPoint::null();
@@ -178,7 +173,7 @@ void GuiBoard::mousePressEvent(QMouseEvent* event)
         CoordPoint p = m_boardPainter.getCoordPoint(event->x(), event->y());
         auto& geo = m_bd.get_geometry();
         if (geo.is_onboard(p))
-            emit pointClicked(geo.get_point(p.x, p.y));
+            emit pointClicked(geo.get_point(p.x, p.y), event->modifiers());
         return;
     }
     setSelectedPieceOffset(*event);

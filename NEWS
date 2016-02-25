@@ -4,6 +4,8 @@ Version 11.UNKNOWN (master)
 General:
 
 * New game variant Callisto.
+* Clicking on a piece on the board while holding the shift key down will
+  now go to the position when the piece was played.
 * Increased playing strength in Nexos.
 * Thinking time of level 7 was increased in most game variants, reduced in
   Trigon and Nexos, because it is the highest level supported on Android and
