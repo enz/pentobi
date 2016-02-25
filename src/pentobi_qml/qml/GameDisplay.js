@@ -103,13 +103,12 @@ function positionChanged() {
 
 function showMoveHint(move) {
     var pieceModel = gameModel.preparePiece(gameModel.toPlay, move)
-    var piece = findPiece(pieceModel, gameModel.toPlay)
     var pos = board.mapToItem(pieceManipulator.parent,
                               board.mapFromGameX(pieceModel.gameCoord.x),
                               board.mapFromGameY(pieceModel.gameCoord.y))
     pieceManipulator.x = pos.x - pieceManipulator.width / 2
     pieceManipulator.y = pos.y - pieceManipulator.height / 2
     transitionsEnabled = true
-    pickedPiece = piece
+    pickedPiece = findPiece(pieceModel, gameModel.toPlay)
     transitionsEnabled = false
 }
