@@ -17,6 +17,7 @@ RowLayout {
         width: height
         sourceSize { width: width; height: height }
         source: "icons/pentobi.svg"
+        cache: false
 
     }
     Item { Layout.fillWidth: true }
