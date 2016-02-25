@@ -206,8 +206,8 @@
         <translation>Computer-Gegner für das Brettspiel Blokus.</translation>
     </message>
     <message>
-        <source>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
-        <translation>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</translation>
+        <source>&amp;copy; 2011&amp;ndash;%1 Markus&amp;nbsp;Enzenberger</source>
+        <translation>&amp;copy; 2011&amp;ndash;%1 Markus&amp;nbsp;Enzenberger</translation>
     </message>
 </context>
 <context>
