@@ -97,10 +97,6 @@ function pickPiece(piece) {
     pickedPiece = piece
 }
 
-function positionChanged() {
-    dropPiece()
-}
-
 function showMoveHint(move) {
     var pieceModel = gameModel.preparePiece(gameModel.toPlay, move)
     var pos = board.mapToItem(pieceManipulator.parent,

@@ -42,7 +42,7 @@ Item
     onWidthChanged: dropPiece()
     onHeightChanged: dropPiece()
     Component.onCompleted: {
-        gameModel.positionChanged.connect(Logic.positionChanged)
+        gameModel.positionChanged.connect(dropPiece)
     }
 
     Column {
