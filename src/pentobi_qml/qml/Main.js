@@ -293,7 +293,6 @@ function undo() {
     gameDisplay.transitionsEnabled = true
     gameModel.undo()
     gameDisplay.transitionsEnabled = false
-    gameDisplay.dropPiece()
 }
 
 function quit() {
