@@ -202,9 +202,10 @@ int main(int argc, char* argv[])
             // requires a larger amount of memory and an error message should
             // be shown to the user. It needs to be handled here because it
             // needs the translators being installed for the error message.
-            QMessageBox::critical(nullptr,
-                QCoreApplication::translate("main", "Pentobi"),
-                QCoreApplication::translate("main", "Not enough memory."));
+            QMessageBox::critical(
+                        nullptr,
+                        qApp->translate("main", "Pentobi"),
+                        qApp->translate("main", "Not enough memory."));
         }
     }
     catch (const exception& e)

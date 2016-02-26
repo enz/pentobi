@@ -92,10 +92,8 @@ int main(int argc, char *argv[])
     {
         // bad_alloc is an expected error because the player requires a larger
         // amount of memory.
-        auto title = QCoreApplication::translate("main", "Pentobi");
-        auto text =
-                QCoreApplication::translate("main", "Not enough memory.");
-        QMessageBox::critical(nullptr, title, text);
+        QMessageBox::critical(nullptr, qApp->translate("main", "Pentobi"),
+                              qApp->translate("main", "Not enough memory."));
         return 1;
     }
     catch (const exception& e)
