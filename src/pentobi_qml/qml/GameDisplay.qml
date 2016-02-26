@@ -38,7 +38,6 @@ Item
 
     onWidthChanged: dropPiece()
     onHeightChanged: dropPiece()
-    Component.onCompleted: gameModel.positionChanged.connect(dropPiece)
 
     Column {
         id: column
@@ -161,5 +160,9 @@ Item
             else if (legal)
                 play(pieceModel, board.mapToGame(pos))
         }
+    }
+    Connections {
+        target: gameModel
+        onPositionChanged: dropPiece()
     }
 }
