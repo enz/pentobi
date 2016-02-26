@@ -108,6 +108,7 @@ Item
                     pieces3: _pieces3
                     toPlay: gameModel.toPlay
                     nuColors: gameModel.nuColors
+                    transitionsEnabled: false
                     onPiecePicked: Logic.pickPiece(piece)
                 }
                 NavigationPanel {

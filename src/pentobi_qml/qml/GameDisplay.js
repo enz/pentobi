@@ -37,12 +37,12 @@ function createPieces() {
     else
         file = "PieceClassic.qml"
     var component = Qt.createComponent(file)
-    pieceSelector.transitionsEnabled = false
     _pieces0 = createColorPieces(component, gameModel.pieceModels0)
     _pieces1 = createColorPieces(component, gameModel.pieceModels1)
     _pieces2 = createColorPieces(component, gameModel.pieceModels2)
     _pieces3 = createColorPieces(component, gameModel.pieceModels3)
-    pieceSelector.transitionsEnabled = enableAnimations
+    pieceSelector.transitionsEnabled =
+            Qt.binding(function() { return enableAnimations })
 }
 
 function destroyColorPieces(pieces) {
@@ -55,6 +55,7 @@ function destroyColorPieces(pieces) {
 }
 
 function destroyPieces() {
+    pieceSelector.transitionsEnabled = false
     dropPiece()
     destroyColorPieces(_pieces0); _pieces0 = []
     destroyColorPieces(_pieces1); _pieces1 = []
