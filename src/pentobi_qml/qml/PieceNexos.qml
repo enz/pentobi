@@ -301,7 +301,7 @@ Item
             ParentAnimation {
                 via: gameDisplay
                 NumberAnimation {
-                    properties: "x,y,gridWidth,gridHeight"
+                    properties: "x,y,scale"
                     duration: 300
                     easing.type: Easing.OutSine
                 }
