@@ -38,9 +38,7 @@ Item
 
     onWidthChanged: dropPiece()
     onHeightChanged: dropPiece()
-    Component.onCompleted: {
-        gameModel.positionChanged.connect(dropPiece)
-    }
+    Component.onCompleted: gameModel.positionChanged.connect(dropPiece)
 
     Column {
         id: column
