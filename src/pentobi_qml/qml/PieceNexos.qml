@@ -293,7 +293,7 @@ Item
                 NumberAnimation {
                     properties: "x,y,gridWidth,gridHeight"
                     duration: 300
-                    easing.type: Easing.OutQuad
+                    easing.type: Easing.OutSine
                 }
             }
     }
