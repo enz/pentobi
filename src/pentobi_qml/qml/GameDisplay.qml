@@ -145,7 +145,7 @@ Item
             var pos = parent.mapToItem(board, x + width / 2, y + height / 2)
             return gameModel.isLegalPos(pickedPiece.pieceModel,
                                         pickedPiece.pieceModel.state,
-                                        board.mapToGame(pos.x, pos.y))
+                                        board.mapToGame(pos))
         }
         width: 0.6 * board.width; height: width
         visible: pickedPiece !== null
@@ -159,7 +159,7 @@ Item
             if (! board.contains(Qt.point(pos.x, pos.y)))
                 dropPiece()
             else if (legal)
-                play(pieceModel, board.mapToGame(pos.x, pos.y))
+                play(pieceModel, board.mapToGame(pos))
         }
     }
 }

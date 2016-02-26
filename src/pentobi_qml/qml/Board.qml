@@ -73,17 +73,16 @@ Item {
         if (isNexos) return image.y + (y - 0.25) * gridHeight
         else return image.y + y * gridHeight
     }
-    function mapToGame(x, y) {
+    function mapToGame(pos) {
         if (isTrigon)
-            return Qt.point((x - image.x - 0.5 * gridWidth) / gridWidth,
-                            (y - image.y) / gridHeight)
+            return Qt.point((pos.x - image.x - 0.5 * gridWidth) / gridWidth,
+                            (pos.y - image.y) / gridHeight)
         else if (isNexos)
-            return Qt.point((x - image.x + 0.25 * gridWidth) / gridWidth,
-                            (y - image.y + 0.25 * gridHeight)
-                            / gridHeight)
+            return Qt.point((pos.x - image.x + 0.25 * gridWidth) / gridWidth,
+                            (pos.y - image.y + 0.25 * gridHeight) / gridHeight)
         else
-            return Qt.point((x - image.x) / gridWidth,
-                            (y - image.y) / gridHeight)
+            return Qt.point((pos.x - image.x) / gridWidth,
+                            (pos.y - image.y) / gridHeight)
     }
     function getCenterYTrigon(pos) {
 
