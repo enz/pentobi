@@ -165,8 +165,6 @@ Flickable {
     ]
     transitions:
         Transition {
-            enabled: transitionsEnabled
-
             SequentialAnimation {
                 PropertyAction {
                     target: pieceList0; property: "y"; value: pieceList0.y }
@@ -177,7 +175,7 @@ Flickable {
                 PropertyAction {
                     target: pieceList3; property: "y"; value: pieceList3.y }
                 // Delay showing new color because of piece placement animation
-                PauseAnimation { duration: transitionsEnabled ? 200 : 0 }
+                PauseAnimation { duration: 200 }
                 NumberAnimation {
                     target: root; property: "opacity"; to: 0; duration: 100
                 }

@@ -184,9 +184,7 @@ function moveGenerated(move) {
         isMoveHintRunning = false
         return
     }
-    gameDisplay.transitionsEnabled = true
     gameModel.playMove(move)
-    gameDisplay.transitionsEnabled = false
     delayedCheckComputerMove.start()
 }
 
@@ -231,7 +229,6 @@ function openFileUrl() {
 
 function play(pieceModel, gameCoord) {
     var wasComputerToPlay = isComputerToPlay()
-    gameDisplay.transitionsEnabled = true
     gameModel.playPiece(pieceModel, gameCoord)
     // We don't continue automatic play if the human played a move for a color
     // played by the computer.
@@ -290,9 +287,7 @@ function truncateChildren() {
 }
 
 function undo() {
-    gameDisplay.transitionsEnabled = true
     gameModel.undo()
-    gameDisplay.transitionsEnabled = false
 }
 
 function quit() {

@@ -7,7 +7,6 @@ Item
     id: gameDisplay // Referenced by Piece*.qml
 
     property var pickedPiece: null
-    property bool transitionsEnabled
     property bool markLastMove: true
     property alias busyIndicatorRunning: busyIndicator.running
     property size imageSourceSize: {
@@ -31,10 +30,7 @@ Item
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showMoveHint(move) { Logic.showMoveHint(move) }
-    function dropPiece() {
-        pickedPiece = null
-        transitionsEnabled = false
-    }
+    function dropPiece() { pickedPiece = null }
 
     onWidthChanged: dropPiece()
     onHeightChanged: dropPiece()
