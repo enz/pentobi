@@ -447,6 +447,10 @@
         <source>Mark &amp;Last Move</source>
         <translation>&amp;Letzten Zug markieren</translation>
     </message>
+    <message>
+        <source>Enable &amp;Animations</source>
+        <translation>&amp;Animationen einschalten</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

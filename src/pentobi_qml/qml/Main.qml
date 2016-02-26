@@ -145,6 +145,7 @@ ApplicationWindow {
         property alias width: root.width
         property alias height: root.height
         property alias folder: root.folder
+        property alias enableAnimations: gameDisplay.enableAnimations
         property alias markLastMove: gameDisplay.markLastMove
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1

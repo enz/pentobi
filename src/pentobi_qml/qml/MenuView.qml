@@ -10,4 +10,10 @@ Menu {
         checked: gameDisplay.markLastMove
         onTriggered: gameDisplay.markLastMove = checked
     }
+    MenuItem {
+        text: qsTr("Enable &Animations")
+        checkable: true
+        checked: gameDisplay.enableAnimations
+        onTriggered: gameDisplay.enableAnimations = checked
+    }
 }

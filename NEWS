@@ -21,7 +21,8 @@ Desktop version:
 Android version
 
 * Support for game variant Nexos.
-* New Edit menu items Delete All Variations, Next Color.
+* New menu items Edit/Delete All Variations, Edit/Next Color,
+  View/Enable Animations.
 * Actions with buttons in action bar are no longer shown in menu.
 
 

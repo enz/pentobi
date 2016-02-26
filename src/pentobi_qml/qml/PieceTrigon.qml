@@ -136,38 +136,56 @@ Item
         transitions: [
             Transition {
                 from: ",rot60,rot120,rot180,rot240,rot300"; to: from
+                enabled: enableAnimations
+
                 PieceRotationAnimation { }
             },
             Transition {
                 from: "flip,rot60Flip,rot120Flip,rot180Flip,rot240Flip,rot300Flip"; to: from
+                enabled: enableAnimations
+
                 PieceRotationAnimation { }
             },
             Transition {
                 from: ",flip"; to: from
+                enabled: enableAnimations
+
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot60,rot60Flip"; to: from
+                enabled: enableAnimations
+
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot120,rot120Flip"; to: from
+                enabled: enableAnimations
+
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot180,rot180Flip"; to: from
+                enabled: enableAnimations
+
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot240,rot240Flip"; to: from
+                enabled: enableAnimations
+
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: "rot300,rot300Flip"; to: from
+                enabled: enableAnimations
+
                 PieceFlipAnimation { target: flipX }
             },
             Transition {
                 from: ",rot180Flip"; to: from
+                enabled: enableAnimations
+
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -179,6 +197,8 @@ Item
             },
             Transition {
                 from: "rot60,rot240Flip"; to: from
+                enabled: enableAnimations
+
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -190,6 +210,8 @@ Item
             },
             Transition {
                 from: "rot120,rot300Flip"; to: from
+                enabled: enableAnimations
+
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -201,6 +223,8 @@ Item
             },
             Transition {
                 from: "rot180,flip"; to: from
+                enabled: enableAnimations
+
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -212,6 +236,8 @@ Item
             },
             Transition {
                 from: "rot240,rot60Flip"; to: from
+                enabled: enableAnimations
+
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -223,6 +249,8 @@ Item
             },
             Transition {
                 from: "rot300,rot120Flip"; to: from
+                enabled: enableAnimations
+
                 SequentialAnimation {
                     PropertyAction { property: "rotation"; value: rotation }
                     PropertyAction {
@@ -289,6 +317,7 @@ Item
     transitions:
         Transition {
             from: "unplayed,picked,played"; to: from
+            enabled: enableAnimations
 
             ParentAnimation {
                 via: gameDisplay
