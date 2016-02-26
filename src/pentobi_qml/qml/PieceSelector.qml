@@ -12,6 +12,7 @@ Flickable {
     property int nuColors
     property int columns
     property int rows
+    property bool transitionsEnabled
 
     signal piecePicked(var piece)
 
@@ -165,6 +166,8 @@ Flickable {
     ]
     transitions:
         Transition {
+            enabled: transitionsEnabled
+
             SequentialAnimation {
                 PropertyAction {
                     target: pieceList0; property: "y"; value: pieceList0.y }
