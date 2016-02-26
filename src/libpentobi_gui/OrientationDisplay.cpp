@@ -51,11 +51,6 @@ void OrientationDisplay::clearPiece()
     update();
 }
 
-int OrientationDisplay::heightForWidth(int width) const
-{
-    return width;
-}
-
 void OrientationDisplay::mousePressEvent(QMouseEvent*)
 {
     if (m_isColorSelected && m_piece.is_null())

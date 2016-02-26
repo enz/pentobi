@@ -149,14 +149,6 @@ void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
     findPiecePoints(piece, x, y - 1, points);
 }
 
-int PieceSelector::heightForWidth(int width) const
-{
-    // Use ratio for layout of classic pieces, which has larger relative width
-    // because the limiting factor in the right panel of the main window is the
-    // width
-    return width / 33 * 6;
-}
-
 void PieceSelector::init()
 {
     const string* pieceLayout = nullptr; // Init to avoid compiler warning
