@@ -56,7 +56,7 @@ function destroyColorPieces(pieces) {
 
 function destroyPieces() {
     pieceSelector.transitionsEnabled = false
-    dropPiece()
+    pickedPiece = null
     destroyColorPieces(_pieces0); _pieces0 = []
     destroyColorPieces(_pieces1); _pieces1 = []
     destroyColorPieces(_pieces2); _pieces2 = []

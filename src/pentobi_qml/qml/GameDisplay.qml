@@ -33,8 +33,8 @@ Item
     function showMoveHint(move) { Logic.showMoveHint(move) }
     function dropPiece() { pickedPiece = null }
 
-    onWidthChanged: dropPiece()
-    onHeightChanged: dropPiece()
+    onWidthChanged: pickedPiece = null
+    onHeightChanged: pickedPiece = null
 
     Column {
         id: column
@@ -154,13 +154,13 @@ Item
         onPiecePlayed: {
             var pos = mapToItem(board, width / 2, height / 2)
             if (! board.contains(Qt.point(pos.x, pos.y)))
-                dropPiece()
+                pickedPiece = null
             else if (legal)
                 play(pieceModel, board.mapToGame(pos))
         }
     }
     Connections {
         target: gameModel
-        onPositionChanged: dropPiece()
+        onPositionChanged: pickedPiece = null
     }
 }
