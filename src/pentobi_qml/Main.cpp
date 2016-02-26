@@ -24,15 +24,15 @@ using libboardgame_util::RandomGenerator;
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
-    QCoreApplication::setOrganizationName("Pentobi");
-    QCoreApplication::setApplicationName("Pentobi");
+    QApplication app(argc, argv);
+    app.setOrganizationName("Pentobi");
+    app.setApplicationName("Pentobi");
 #ifdef VERSION
-    QCoreApplication::setApplicationVersion(VERSION);
+    app.setApplicationVersion(VERSION);
 #endif
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterInterface<PieceModel>("PieceModel");
-    QApplication app(argc, argv);
     QString locale = QLocale::system().name();
     QTranslator translatorPentobi;
     translatorPentobi.load("qml_" + locale, ":qml/i18n");
@@ -92,8 +92,8 @@ int main(int argc, char *argv[])
     {
         // bad_alloc is an expected error because the player requires a larger
         // amount of memory.
-        QMessageBox::critical(nullptr, qApp->translate("main", "Pentobi"),
-                              qApp->translate("main", "Not enough memory."));
+        QMessageBox::critical(nullptr, app.translate("main", "Pentobi"),
+                              app.translate("main", "Not enough memory."));
         return 1;
     }
     catch (const exception& e)

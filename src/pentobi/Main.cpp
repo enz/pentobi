@@ -61,12 +61,12 @@ int main(int argc, char* argv[])
 {
     LogInitializer log_initializer;
     Q_INIT_RESOURCE(libpentobi_gui_resources);
-    QCoreApplication::setOrganizationName("Pentobi");
-    QCoreApplication::setApplicationName("Pentobi");
+    Application app(argc, argv);
+    app.setOrganizationName("Pentobi");
+    app.setApplicationName("Pentobi");
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-    Application app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     Q_INIT_RESOURCE(libpentobi_gui_resources_2x);
     try
@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
         QString booksDir;
         QString translationsPentobiDir;
         QString translationsLibPentobiGuiDir;
-        QString appDir = QCoreApplication::applicationDirPath();
+        QString appDir = app.applicationDirPath();
 #ifdef PENTOBI_HELP_DIR
         helpDir = PENTOBI_HELP_DIR;
 #endif
@@ -203,9 +203,8 @@ int main(int argc, char* argv[])
             // be shown to the user. It needs to be handled here because it
             // needs the translators being installed for the error message.
             QMessageBox::critical(
-                        nullptr,
-                        qApp->translate("main", "Pentobi"),
-                        qApp->translate("main", "Not enough memory."));
+                        nullptr, app.translate("main", "Pentobi"),
+                        app.translate("main", "Not enough memory."));
         }
     }
     catch (const exception& e)
