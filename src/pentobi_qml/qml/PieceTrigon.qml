@@ -9,8 +9,8 @@ Item
     property string colorName
     property bool isPicked
     property Item parentUnplayed
-    property real gridWidth
-    property real gridHeight
+    property real gridWidth: board.gridWidth
+    property real gridHeight: board.gridHeight
     property bool isMarked
     property string imageName: theme.getImage("triangle-" + colorName)
     property string imageNameDownward:
@@ -268,11 +268,6 @@ Item
             name: "picked"
             when: isPicked
 
-            PropertyChanges {
-                target: root
-                gridWidth: board.gridWidth
-                gridHeight: board.gridHeight
-            }
             ParentChange {
                 target: root
                 parent: pieceManipulator
@@ -284,11 +279,6 @@ Item
             name: "played"
             when: pieceModel.isPlayed
 
-            PropertyChanges {
-                target: root
-                gridWidth: board.gridWidth
-                gridHeight: board.gridHeight
-            }
             ParentChange {
                 target: root
                 parent: board
@@ -300,10 +290,9 @@ Item
             name: "unplayed"
             when: parentUnplayed != null
 
-            PropertyChanges {
-                target: root
-                gridWidth: 0.13 * parentUnplayed.width
-                gridHeight: Math.sqrt(3) * gridWidth
+           PropertyChanges {
+               target: root
+               scale: 0.13 * parentUnplayed.width / gridWidth
             }
             ParentChange {
                 target: root
@@ -322,7 +311,7 @@ Item
             ParentAnimation {
                 via: gameDisplay
                 NumberAnimation {
-                    properties: "x,y,gridWidth,gridHeight"
+                    properties: "x,y,scale"
                     duration: 300
                     easing.type: Easing.OutSine
                 }

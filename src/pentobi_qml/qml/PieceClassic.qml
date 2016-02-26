@@ -8,8 +8,8 @@ Item
     property string colorName
     property bool isPicked
     property Item parentUnplayed
-    property real gridWidth
-    property real gridHeight
+    property real gridWidth: board.gridWidth
+    property real gridHeight: board.gridHeight
     property bool isMarked
     property string imageName: theme.getImage("square-" + colorName)
     property real pieceAngle: {
@@ -207,11 +207,6 @@ Item
             name: "picked"
             when: isPicked
 
-            PropertyChanges {
-                target: root
-                gridWidth: board.gridWidth
-                gridHeight: board.gridHeight
-            }
             ParentChange {
                 target: root
                 parent: pieceManipulator
@@ -223,11 +218,6 @@ Item
             name: "played"
             when: pieceModel.isPlayed
 
-            PropertyChanges {
-                target: root
-                gridWidth: board.gridWidth
-                gridHeight: board.gridHeight
-            }
             ParentChange {
                 target: root
                 parent: board
@@ -242,8 +232,7 @@ Item
             PropertyChanges {
                 target: root
                 // Avoid fractional sizes for square piece elements
-                gridWidth: Math.floor(0.2 * parentUnplayed.width)
-                gridHeight: gridWidth
+                scale : Math.floor(0.2 * parentUnplayed.width) / gridWidth
             }
             ParentChange {
                 target: root
