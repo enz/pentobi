@@ -311,6 +311,9 @@ private:
 
     void preparePieceTransform(PieceModel* pieceModel, Move mv);
 
+    template<typename T>
+    void set(T& target, const T& value, void (GameModel::*changedSignal)(T));
+
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);
 

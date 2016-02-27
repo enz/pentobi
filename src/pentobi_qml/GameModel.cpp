@@ -69,16 +69,6 @@ QPointF getGameCoord(const Board& bd, Move mv)
     return PieceModel::findCenter(bd, movePoints, false);
 }
 
-/** Set a variable to a value and return if it has changed. */
-template<typename T>
-bool set(T& target, const T& value)
-{
-    if (target == value)
-        return false;
-    target = value;
-    return true;
-}
-
 } //namespace
 
 //-----------------------------------------------------------------------------
@@ -391,8 +381,8 @@ void GameModel::initGameVariant(const QString& gameVariant)
     if (m_game.get_variant() != variant)
         m_game.init(variant);
     auto& bd = getBoard();
-    if (set(m_nuColors, static_cast<int>(bd.get_nu_colors())))
-        emit nuColorsChanged(m_nuColors);
+    set(m_nuColors, static_cast<int>(bd.get_nu_colors()),
+        &GameModel::nuColorsChanged);
     m_lastMovePieceModel = nullptr;
     createPieceModels();
     m_gameVariant = gameVariant;
@@ -590,6 +580,17 @@ bool GameModel::save(const QString& file)
     return true;
 }
 
+template<typename T>
+void GameModel::set(T& target, const T& value,
+                    void (GameModel::*changedSignal)(T))
+{
+    if (target != value)
+    {
+        target = value;
+        emit (this->*changedSignal)(value);
+    }
+}
+
 void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())
@@ -664,36 +665,24 @@ void GameModel::updateProperties()
     auto& geo = bd.get_geometry();
     auto& tree = m_game.get_tree();
     bool isTrigon = (bd.get_piece_set() == PieceSet::trigon);
-    if (set(m_points0, bd.get_points(Color(0))))
-        emit points0Changed(m_points0);
-    if (set(m_points1, bd.get_points(Color(1))))
-        emit points1Changed(m_points1);
-    if (set(m_bonus0, bd.get_bonus(Color(0))))
-        emit bonus0Changed(m_bonus0);
-    if (set(m_bonus1, bd.get_bonus(Color(1))))
-        emit bonus1Changed(m_bonus1);
-    if (set(m_hasMoves0, bd.has_moves(Color(0))))
-        emit hasMoves0Changed(m_hasMoves0);
-    if (set(m_hasMoves1, bd.has_moves(Color(1))))
-        emit hasMoves1Changed(m_hasMoves1);
+    set(m_points0, bd.get_points(Color(0)), &GameModel::points0Changed);
+    set(m_points1, bd.get_points(Color(1)), &GameModel::points1Changed);
+    set(m_bonus0, bd.get_bonus(Color(0)), &GameModel::bonus0Changed);
+    set(m_bonus1, bd.get_bonus(Color(1)), &GameModel::bonus1Changed);
+    set(m_hasMoves0, bd.has_moves(Color(0)), &GameModel::hasMoves0Changed);
+    set(m_hasMoves1, bd.has_moves(Color(1)), &GameModel::hasMoves1Changed);
     bool isFirstPieceAny = false;
     if (m_nuColors > 2)
     {
-        if (set(m_points2, bd.get_points(Color(2))))
-            emit points2Changed(m_points2);
-        if (set(m_bonus2, bd.get_bonus(Color(2))))
-            emit bonus2Changed(m_bonus2);
-        if (set(m_hasMoves2, bd.has_moves(Color(2))))
-            emit hasMoves2Changed(m_hasMoves2);
+        set(m_points2, bd.get_points(Color(2)), &GameModel::points2Changed);
+        set(m_bonus2, bd.get_bonus(Color(2)), &GameModel::bonus2Changed);
+        set(m_hasMoves2, bd.has_moves(Color(2)), &GameModel::hasMoves2Changed);
     }
     if (m_nuColors > 3)
     {
-        if (set(m_points3, bd.get_points(Color(3))))
-            emit points3Changed(m_points3);
-        if (set(m_bonus3, bd.get_bonus(Color(3))))
-            emit bonus3Changed(m_bonus3);
-        if (set(m_hasMoves3, bd.has_moves(Color(3))))
-            emit hasMoves3Changed(m_hasMoves3);
+        set(m_points3, bd.get_points(Color(3)), &GameModel::points3Changed);
+        set(m_bonus3, bd.get_bonus(Color(3)), &GameModel::bonus3Changed);
+        set(m_hasMoves3, bd.has_moves(Color(3)), &GameModel::hasMoves3Changed);
     }
     m_tmpPoints.clear();
     if (bd.is_first_piece(Color(0)))
@@ -703,8 +692,7 @@ void GameModel::updateProperties()
             for (Point p : bd.get_starting_points(Color(0)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
-    if (set(m_startingPoints0, m_tmpPoints))
-        emit startingPoints0Changed(m_startingPoints0);
+    set(m_startingPoints0, m_tmpPoints, &GameModel::startingPoints0Changed);
     m_tmpPoints.clear();
     if (bd.is_first_piece(Color(1)))
     {
@@ -713,8 +701,7 @@ void GameModel::updateProperties()
             for (Point p : bd.get_starting_points(Color(1)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
-    if (set(m_startingPoints1, m_tmpPoints))
-        emit startingPoints1Changed(m_startingPoints1);
+    set(m_startingPoints1, m_tmpPoints, &GameModel::startingPoints1Changed);
     m_tmpPoints.clear();
     if (m_nuColors > 2 && bd.is_first_piece(Color(2)))
     {
@@ -723,8 +710,7 @@ void GameModel::updateProperties()
             for (Point p : bd.get_starting_points(Color(2)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
-    if (set(m_startingPoints2, m_tmpPoints))
-        emit startingPoints2Changed(m_startingPoints2);
+    set(m_startingPoints2, m_tmpPoints, &GameModel::startingPoints2Changed);
     m_tmpPoints.clear();
     if (m_nuColors > 3 && bd.is_first_piece(Color(3)))
     {
@@ -733,32 +719,31 @@ void GameModel::updateProperties()
             for (Point p : bd.get_starting_points(Color(3)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
-    if (set(m_startingPoints3, m_tmpPoints))
-        emit startingPoints3Changed(m_startingPoints3);
+    set(m_startingPoints3, m_tmpPoints, &GameModel::startingPoints3Changed);
     m_tmpPoints.clear();
     if (isTrigon && isFirstPieceAny)
         for (Point p : bd.get_starting_points(Color(0)))
             m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
-    if (set(m_startingPointsAll, m_tmpPoints))
-        emit startingPointsAllChanged(m_startingPointsAll);
+    set(m_startingPointsAll, m_tmpPoints,
+        &GameModel::startingPointsAllChanged);
     auto& current = m_game.get_current();
-    if (set(m_canUndo,
-            ! current.has_children() && tree.has_move_ignore_invalid(current)
-            && current.has_parent()))
-        emit canUndoChanged(m_canUndo);
-    if (set(m_canGoForward, current.has_children()))
-        emit canGoForwardChanged(m_canGoForward);
-    if (set(m_canGoBackward, current.has_parent()))
-        emit canGoBackwardChanged(m_canGoBackward);
-    if (set(m_hasPrevVar, (current.get_previous_sibling() != nullptr)))
-        emit hasPrevVarChanged(m_hasPrevVar);
-    if (set(m_hasNextVar, (current.get_sibling() != nullptr)))
-        emit hasNextVarChanged(m_hasNextVar);
-    if (set(m_hasVariations, tree.has_variations()))
-        emit hasVariationsChanged(m_hasVariations);
-    if (set(m_isMainVar, is_main_variation(current)))
-        emit isMainVarChanged(m_isMainVar);
-    QString positionInfo
+    set(m_canUndo,
+           ! current.has_children() && tree.has_move_ignore_invalid(current)
+           && current.has_parent(),
+           &GameModel::canUndoChanged);
+    set(m_canGoForward, current.has_children(),
+        &GameModel::canGoForwardChanged);
+    set(m_canGoBackward, current.has_parent(),
+        &GameModel::canGoBackwardChanged);
+    set(m_hasPrevVar, (current.get_previous_sibling() != nullptr),
+        &GameModel::hasPrevVarChanged);
+    set(m_hasNextVar, (current.get_sibling() != nullptr),
+        &GameModel::hasNextVarChanged);
+    set(m_hasVariations, tree.has_variations(),
+        &GameModel::hasVariationsChanged);
+    set(m_isMainVar, is_main_variation(current),
+        &GameModel::isMainVarChanged);
+    auto positionInfo
             = QString::fromLocal8Bit(get_position_info(tree, current).c_str());
     if (positionInfo.isEmpty())
         positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
@@ -771,8 +756,7 @@ void GameModel::updateProperties()
             positionInfo.append(tr("(Setup)"));
         }
     }
-    if (set(m_positionInfo, positionInfo))
-        emit positionInfoChanged(m_positionInfo);
+    set(m_positionInfo, positionInfo, &GameModel::positionInfoChanged);
     bool isGameOver = true;
     for (Color c : bd.get_colors())
         if (bd.has_moves(c))
@@ -780,10 +764,9 @@ void GameModel::updateProperties()
             isGameOver = false;
             break;
         }
-    if (set(m_isGameOver, isGameOver))
-        emit isGameOverChanged(m_isGameOver);
-    if (set(m_isGameEmpty, libboardgame_sgf::util::is_empty(tree)))
-        emit isGameEmptyChanged(m_isGameEmpty);
+    set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
+    set(m_isGameEmpty, libboardgame_sgf::util::is_empty(tree),
+        &GameModel::isGameEmptyChanged);
 
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
     for (Color c : bd.get_colors())
@@ -818,11 +801,11 @@ void GameModel::updateProperties()
             }
     }
 
-    if (set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int()))
-        emit toPlayChanged(m_toPlay);
-    if (set(m_altPlayer, (bd.get_variant() == Variant::classic_3 ?
-                          bd.get_alt_player() : 0)))
-        emit altPlayerChanged(m_altPlayer);
+    set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),
+        &GameModel::toPlayChanged);
+    set(m_altPlayer,
+        bd.get_variant() == Variant::classic_3 ? bd.get_alt_player() : 0,
+        &GameModel::altPlayerChanged);
 
     emit positionChanged();
 }
