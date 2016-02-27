@@ -108,16 +108,7 @@ Item {
                 sourceSize: imageSourceSize
                 mipmap: true
                 antialiasing: true
-                transform: [
-                    Rotation {
-                        angle: -180
-                        origin {
-                            x: width / 2
-                            y: isDownward ? 2 * height / 3 : height / 3
-                        }
-                    },
-                    Translate { y:  isDownward ? -height / 3 : height / 3 }
-                ]
+                rotation: -180
             }
         }
     }
