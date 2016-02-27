@@ -8,10 +8,8 @@ Item {
 
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component0
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component0
         }
 
         anchors.fill: root
@@ -32,10 +30,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component60
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component60
         }
 
         anchors.fill: root
@@ -66,10 +62,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component120
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component120
         }
 
         anchors.fill: root
@@ -97,10 +91,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component180
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component180
         }
 
         anchors.fill: root
@@ -131,10 +123,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component240
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component240
         }
 
         anchors.fill: root
@@ -162,10 +152,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component300
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component300
         }
 
         anchors.fill: root

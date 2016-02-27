@@ -8,10 +8,8 @@ Item {
 
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component0
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component0
         }
 
         anchors.fill: root
@@ -34,10 +32,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component90
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component90
         }
 
         anchors.fill: root
@@ -60,10 +56,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component180
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component180
         }
 
         anchors.fill: root
@@ -86,10 +80,8 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity === 0 || status !== Loader.Null)
-                return
-            sourceComponent = component270
-            opacityChanged.disconnect(loadImage)
+            if (opacity > 0 && status === Loader.Null)
+                sourceComponent = component270
         }
 
         anchors.fill: root
