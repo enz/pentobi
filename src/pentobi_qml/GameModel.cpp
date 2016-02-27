@@ -811,8 +811,11 @@ void GameModel::updateProperties()
     {
         auto& pieceModels = getPieceModels(c);
         for (int i = 0; i < pieceModels.length(); ++i)
-            if (! isPlayed[c][i])
+            if (! isPlayed[c][i] && pieceModels[i]->isPlayed())
+            {
+                pieceModels[i]->setDefaultState();
                 pieceModels[i]->setIsPlayed(false);
+            }
     }
 
     if (set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int()))
