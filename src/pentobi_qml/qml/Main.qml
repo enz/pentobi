@@ -44,19 +44,8 @@ ApplicationWindow {
     menuBar: menuBarLoader.item
     toolBar: toolBarLoader.item
     Component.onCompleted: {
-        // Settings might contain unusable geometry
-        var maxWidth = Screen.desktopAvailableWidth
-        var maxHeight = Screen.desktopAvailableHeight
-        if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
-            if (width > maxWidth || height > Screen.maxHeight) {
-                width = defaultWidth
-                height = defaultHeight
-            }
-            x = (maxWidth - width) / 2
-            y = (maxHeight - height) / 2
-        }
         Logic.init()
-        visible = true
+        show()
     }
     Component.onDestruction: Logic.quit()
 
@@ -184,24 +173,8 @@ ApplicationWindow {
 
         function open() {
             if (status === Loader.Null)
-                sourceComponent = openDialogComponent
+                setSource("OpenDialog.qml")
             item.open()
-        }
-    }
-    Component {
-        id: openDialogComponent
-
-        FileDialog {
-            title: qsTr("Open")
-            folder: root.folder == "" ? shortcuts.desktop : root.folder
-            nameFilters:
-                [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
-            onAccepted: {
-                root.folder = folder
-                gameDisplay.forceActiveFocus() // QTBUG-48456
-                lengthyCommand.run(Logic.openFileUrl)
-            }
-            onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
     Loader {
@@ -209,25 +182,8 @@ ApplicationWindow {
 
         function open() {
             if (status === Loader.Null)
-                sourceComponent = saveDialogComponent
+                source = "SaveDialog.qml"
             item.open()
-        }
-    }
-    Component {
-        id: saveDialogComponent
-
-        FileDialog {
-            title: qsTr("Save")
-            selectExisting: false
-            folder: root.folder == "" ? shortcuts.desktop : root.folder
-            nameFilters:
-                [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
-            onAccepted: {
-                Logic.saveFileUrl(fileUrl)
-                root.folder = folder
-                gameDisplay.forceActiveFocus() // QTBUG-48456
-            }
-            onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
     Loader { id: errorMessageLoader }

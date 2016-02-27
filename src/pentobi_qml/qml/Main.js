@@ -147,6 +147,17 @@ function getFileFromUrl(fileUrl) {
 }
 
 function init() {
+    // Settings might contain unusable geometry
+    var maxWidth = Screen.desktopAvailableWidth
+    var maxHeight = Screen.desktopAvailableHeight
+    if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
+        if (width > maxWidth || height > Screen.maxHeight) {
+            width = defaultWidth
+            height = defaultHeight
+        }
+        x = (maxWidth - width) / 2
+        y = (maxHeight - height) / 2
+    }
     gameDisplay.busyIndicatorRunning = false
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()

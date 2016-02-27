@@ -17,6 +17,7 @@
         <file>qml/MenuItemLevel.qml</file>
         <file>qml/MenuView.qml</file>
         <file>qml/NavigationPanel.qml</file>
+        <file>qml/OpenDialog.qml</file>
         <file>qml/PieceCallisto.qml</file>
         <file>qml/PieceClassic.qml</file>
         <file>qml/PieceFlipAnimation.qml</file>
@@ -26,6 +27,7 @@
         <file>qml/PieceRotationAnimation.qml</file>
         <file>qml/PieceSelector.qml</file>
         <file>qml/PieceTrigon.qml</file>
+        <file>qml/SaveDialog.qml</file>
         <file>qml/ScoreDisplay.qml</file>
         <file>qml/ScoreElement.qml</file>
         <file>qml/ScoreElement2.qml</file>
