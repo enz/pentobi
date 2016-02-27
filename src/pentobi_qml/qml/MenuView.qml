@@ -11,7 +11,7 @@ Menu {
         onTriggered: gameDisplay.markLastMove = checked
     }
     MenuItem {
-        text: qsTr("Enable &Animations")
+        text: qsTr("&Animate Pieces")
         checkable: true
         checked: gameDisplay.enableAnimations
         onTriggered: gameDisplay.enableAnimations = checked

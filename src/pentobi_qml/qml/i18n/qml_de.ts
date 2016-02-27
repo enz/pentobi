@@ -162,22 +162,6 @@
         <translation>Neues Spiel?</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Blokus games (*.blksgf)</source>
-        <translation>Blokus-Partien (*.blksgf)</translation>
-    </message>
-    <message>
-        <source>All files (*)</source>
-        <translation>Alle Dateien (*)</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
-    </message>
-    <message>
         <source>Open failed.</source>
         <translation>Öffnen fehlgeschlagen.</translation>
     </message>
@@ -448,8 +432,38 @@
         <translation>&amp;Letzten Zug markieren</translation>
     </message>
     <message>
-        <source>Enable &amp;Animations</source>
-        <translation>&amp;Animationen einschalten</translation>
+        <source>&amp;Animate Pieces</source>
+        <translation>Spielsteine &amp;animieren</translation>
+    </message>
+</context>
+<context>
+    <name>OpenDialog</name>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>Blokus games (*.blksgf)</source>
+        <translation>Blokus-Partien (*.blksgf)</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Alle Dateien (*)</translation>
+    </message>
+</context>
+<context>
+    <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation>Speichern</translation>
+    </message>
+    <message>
+        <source>Blokus games (*.blksgf)</source>
+        <translation>Blokus-Partien (*.blksgf)</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
