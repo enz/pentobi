@@ -9,7 +9,6 @@ function about() {
 
 function cancelGenMove() {
     playerModel.cancelGenMove()
-    gameDisplay.busyIndicatorRunning = false
 }
 
 function changeGameVariant(gameVariant) {
@@ -25,7 +24,6 @@ function changeGameVariant(gameVariant) {
 
 function changeGameVariantNoVerify(gameVariant) {
     cancelGenMove()
-    gameDisplay.busyIndicatorRunning = true
     lengthyCommand.run(function() {
         gameDisplay.destroyPieces()
         gameModel.initGameVariant(gameVariant)
@@ -135,7 +133,6 @@ function deleteAllVar() {
 function genMove() {
     cancelGenMove()
     gameDisplay.dropPiece()
-    gameDisplay.busyIndicatorRunning = true
     isMoveHintRunning = false
     playerModel.startGenMove(gameModel)
 }
@@ -158,7 +155,6 @@ function init() {
         x = (maxWidth - width) / 2
         y = (maxHeight - height) / 2
     }
-    gameDisplay.busyIndicatorRunning = false
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
         initComputerColors()
@@ -189,7 +185,6 @@ function isComputerToPlay() {
 }
 
 function moveGenerated(move) {
-    gameDisplay.busyIndicatorRunning = false
     if (isMoveHintRunning) {
         gameDisplay.showMoveHint(move)
         isMoveHintRunning = false
@@ -204,7 +199,6 @@ function moveHint() {
         return
     cancelGenMove()
     isMoveHintRunning = true
-    gameDisplay.busyIndicatorRunning = true
     playerModel.startGenMoveAtLevel(gameModel, 1)
 }
 

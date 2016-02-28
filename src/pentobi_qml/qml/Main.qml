@@ -73,6 +73,8 @@ ApplicationWindow {
         GameDisplay {
             id: gameDisplay
 
+            busyIndicatorRunning: lengthyCommand.isRunning
+                                  || playerModel.isGenMoveRunning
             Layout.fillWidth: true
             Layout.fillHeight: true
             focus: true
@@ -221,18 +223,19 @@ ApplicationWindow {
     Timer {
         id: lengthyCommand
 
+        property bool isRunning
         property var func
 
         function run(func) {
             this.func = func
-            gameDisplay.busyIndicatorRunning = true
+            isRunning = true
             start()
         }
 
         interval: 400
         onTriggered: {
             func()
-            gameDisplay.busyIndicatorRunning = false
+            isRunning = false
         }
     }
     Connections {
