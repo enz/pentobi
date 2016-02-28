@@ -73,7 +73,8 @@ ApplicationWindow {
         GameDisplay {
             id: gameDisplay
 
-            busyIndicatorRunning: lengthyCommand.isRunning
+            busyIndicatorRunning: _pieces0 === undefined
+                                  || lengthyCommand.isRunning
                                   || playerModel.isGenMoveRunning
             Layout.fillWidth: true
             Layout.fillHeight: true
