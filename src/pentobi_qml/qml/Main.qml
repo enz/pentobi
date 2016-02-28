@@ -47,7 +47,7 @@ ApplicationWindow {
         Logic.init()
         show()
     }
-    Component.onDestruction: Logic.quit()
+    Component.onDestruction: gameModel.autoSave()
 
     ColumnLayout {
         anchors.fill: parent
@@ -146,7 +146,7 @@ ApplicationWindow {
     GameModel {
         id: gameModel
 
-        onPositionAboutToChange: Logic.cancelGenMove()
+        onPositionAboutToChange: playerModel.cancelGenMove()
     }
     PlayerModel {
         id: playerModel

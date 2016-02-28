@@ -7,10 +7,6 @@ function about() {
              "<br><a href=\"" + url + "\">" + url + "</a></p>")
 }
 
-function cancelGenMove() {
-    playerModel.cancelGenMove()
-}
-
 function changeGameVariant(gameVariant) {
     if (gameModel.gameVariant === gameVariant)
         return
@@ -23,7 +19,7 @@ function changeGameVariant(gameVariant) {
 }
 
 function changeGameVariantNoVerify(gameVariant) {
-    cancelGenMove()
+    playerModel.cancelGenMove()
     lengthyCommand.run(function() {
         gameDisplay.destroyPieces()
         gameModel.initGameVariant(gameVariant)
@@ -131,7 +127,6 @@ function deleteAllVar() {
 }
 
 function genMove() {
-    cancelGenMove()
     gameDisplay.dropPiece()
     isMoveHintRunning = false
     playerModel.startGenMove(gameModel)
@@ -197,7 +192,6 @@ function moveGenerated(move) {
 function moveHint() {
     if (gameModel.isGameOver)
         return
-    cancelGenMove()
     isMoveHintRunning = true
     playerModel.startGenMoveAtLevel(gameModel, 1)
 }
@@ -293,9 +287,4 @@ function truncateChildren() {
 
 function undo() {
     gameModel.undo()
-}
-
-function quit() {
-    cancelGenMove()
-    gameModel.autoSave()
 }
