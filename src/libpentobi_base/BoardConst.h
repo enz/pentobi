@@ -147,12 +147,6 @@ public:
     void sort(MovePoints& points) const;
 
 private:
-    typedef ArrayList<Move, 40> LocalMovesList;
-
-    /** See m_full_move_table */
-    typedef array<PieceMap<Grid<LocalMovesList>>, PrecompMoves::nu_adj_status>
-        FullMoveTable;
-
     struct MallocFree
     {
         void operator()(void* x) { free(x); }
@@ -194,11 +188,6 @@ private:
     unique_ptr<void, MallocFree> m_move_info_ext;
 
     unique_ptr<MoveInfoExt2[]> m_move_info_ext_2;
-
-    /** Non-compact representation of lists of moves of a piece at a point
-        constrained by the forbidden status of adjacent points.
-        Only used during construction of m_moves_range and m_move_lists. */
-    unique_ptr<FullMoveTable> m_full_move_table;
 
     PrecompMoves m_precomp_moves;
 

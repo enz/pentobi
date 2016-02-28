@@ -38,10 +38,16 @@ const bool log_move_creation = false;
 Marker g_marker;
 
 /** Local variable used during construction.
-    See s_marker why this variable is global. */
+    See g_marker why this variable is global. */
 Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
                      PrecompMoves::nu_adj_status>>
     g_adj_status;
+
+/** Non-compact representation of lists of moves of a piece at a point
+    constrained by the forbidden status of adjacent points.
+    Only used during construction. See g_marker why this variable is global. */
+array<Grid<ArrayList<Move, 40>>, PrecompMoves::nu_adj_status>
+    g_full_move_table;
 
 
 inline bool is_compatible_with_adj_status(Point p, unsigned adj_status_idx)
@@ -737,7 +743,7 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
     for (auto i = begin; i != end; ++i)
         for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
             if (is_compatible_with_adj_status(*i, j))
-                (*m_full_move_table)[j][piece][*i].push_back(mv);
+                g_full_move_table[j][*i].push_back(mv);
     Point* p = info_ext.points;
     for (auto i = begin; i != end; ++i)
         for (Point j : m_geo.get_adj(*i))
@@ -781,32 +787,34 @@ void BoardConst::create_moves()
     // Unused move infos for Move::null()
     LIBBOARDGAME_ASSERT(Move::null().to_int() == 0);
     unsigned moves_created = 1;
-    m_full_move_table.reset(new FullMoveTable);
-    if (m_max_piece_size == 5)
-        for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
-            create_moves<5, 16>(moves_created, Piece(i));
-    else if (m_max_piece_size == 6)
-        for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
-            create_moves<6, 22>(moves_created, Piece(i));
-    else
-        for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
-            create_moves<7, 12>(moves_created, Piece(i));
-    LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
+
     unsigned n = 0;
-    for (Point p : m_geo)
-        for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
-            for (Piece::IntType j = 0; j < m_nu_pieces; ++j)
-            {
-                Piece piece(j);
-                auto& list = (*m_full_move_table)[i][piece][p];
-                auto begin = n;
-                for (auto mv : list)
-                    m_precomp_moves.set_move(n++, mv);
-                m_precomp_moves.set_list_range(p, i, piece, begin, n - begin);
-            }
+    for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
+    {
+        for (Point p : m_geo)
+            for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
+                g_full_move_table[j][p].clear();
+        Piece piece(i);
+        if (m_max_piece_size == 5)
+            create_moves<5, 16>(moves_created, piece);
+        else if (m_max_piece_size == 6)
+            create_moves<6, 22>(moves_created, piece);
+        else
+            create_moves<7, 12>(moves_created, piece);
+        for (Point p : m_geo)
+            for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
+                {
+                    auto& list = g_full_move_table[j][p];
+                    auto begin = n;
+                    for (auto mv : list)
+                        m_precomp_moves.set_move(n++, mv);
+                    m_precomp_moves.set_list_range(p, j, piece, begin,
+                                                   n - begin);
+                }
+    }
+    LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
     if (log_move_creation)
         LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomp: ", n);
-    m_full_move_table.reset(nullptr); // Free space, no longer needed
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
