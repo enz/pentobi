@@ -10,7 +10,6 @@ MouseArea {
     signal piecePlayed
 
     drag { target: root; filterChildren: true }
-    height: width
 
     Image {
         anchors.fill: root
