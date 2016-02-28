@@ -159,18 +159,6 @@ private:
     };
 
 
-    /** Local variable used during construction.
-        Making this variable static slightly speeds up construction and
-        a thread-safe construction is not needed. */
-    static Marker s_marker;
-
-    /** Local variable used during construction.
-        See s_marker why this variable is static. */
-    static Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
-                     PrecompMoves::nu_adj_status>>
-        s_adj_status;
-
-
     Piece::IntType m_nu_pieces;
 
     unsigned m_nu_moves;

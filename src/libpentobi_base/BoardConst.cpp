@@ -32,6 +32,26 @@ namespace {
 
 const bool log_move_creation = false;
 
+/** Local variable used during construction.
+    Making this variable global slightly speeds up construction and a
+    thread-safe construction is not needed. */
+Marker g_marker;
+
+/** Local variable used during construction.
+    See s_marker why this variable is global. */
+Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
+                     PrecompMoves::nu_adj_status>>
+    g_adj_status;
+
+
+inline bool is_compatible_with_adj_status(Point p, unsigned adj_status_idx)
+{
+    for (Point p_adj : g_adj_status[p][adj_status_idx])
+        if (g_marker[p_adj])
+            return false;
+    return true;
+}
+
 // Sort points using the ordering used in blksgf files (switches the direction
 // of the y axis!)
 void sort_piece_points(PiecePoints& points)
@@ -568,12 +588,6 @@ vector<PieceInfo> create_pieces_nexos(const Geometry& geo,
 
 //-----------------------------------------------------------------------------
 
-Marker BoardConst::s_marker;
-
-Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
-                 PrecompMoves::nu_adj_status>>
-    BoardConst::s_adj_status;
-
 BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     : m_board_type(board_type),
       m_piece_set(piece_set),
@@ -717,36 +731,27 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
                 scored_points - &info_ext_2.scored_points[0]);
     auto begin = info_ext_2.begin_scored_points();
     auto end = info_ext_2.end_scored_points();
-    s_marker.clear();
+    g_marker.clear();
     for (auto i = begin; i != end; ++i)
-        s_marker.set(*i);
+        g_marker.set(*i);
     for (auto i = begin; i != end; ++i)
         for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
-        {
-            bool is_compatible_with_adj_status = true;
-            for (Point p_adj : s_adj_status[*i][j])
-                if (s_marker[p_adj])
-                {
-                    is_compatible_with_adj_status = false;
-                    break;
-                }
-            if (is_compatible_with_adj_status)
+            if (is_compatible_with_adj_status(*i, j))
                 (*m_full_move_table)[j][piece][*i].push_back(mv);
-        }
     Point* p = info_ext.points;
     for (auto i = begin; i != end; ++i)
         for (Point j : m_geo.get_adj(*i))
-            if (! s_marker[j])
+            if (! g_marker[j])
             {
-                s_marker.set(j);
+                g_marker.set(j);
                 *(p++) = j;
             }
     info_ext.size_adj_points = static_cast<uint_least8_t>(p - info_ext.points);
     for (auto i = begin; i != end; ++i)
         for (Point j : m_geo.get_diag(*i))
-            if (! s_marker[j])
+            if (! g_marker[j])
             {
-                s_marker.set(j);
+                g_marker.set(j);
                 *(p++) = j;
             }
     info_ext.size_attach_points =
@@ -1002,14 +1007,14 @@ void BoardConst::init_adj_status(
         for (unsigned j = 0; j < i; ++j)
             if (forbidden[j])
                 index |= (1 << j);
-        s_adj_status[p][index].clear();
+        g_adj_status[p][index].clear();
         unsigned n = 0;
         for (Point j : adj_status_list)
         {
             if (n >= i)
                 return;
             if (forbidden[n])
-                s_adj_status[p][index].push_back(j);
+                g_adj_status[p][index].push_back(j);
             ++n;
         }
         return;
