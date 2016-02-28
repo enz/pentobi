@@ -101,22 +101,6 @@ function computerPlays(color) {
     }
 }
 
-function computerPlaysAll() {
-    switch (gameModel.gameVariant) {
-    case "duo":
-    case "junior":
-    case "classic_2":
-    case "trigon_2":
-    case "nexos_2":
-        return computerPlays0 && computerPlays1
-    case "trigon_3":
-        return computerPlays0 && computerPlays1 && computerPlays2
-    default:
-        return computerPlays0 && computerPlays1 && computerPlays2 &&
-                computerPlays3
-    }
-}
-
 function createTheme(themeName) {
     var source = "qrc:///qml/themes/" + themeName + "/Theme.qml"
     return Qt.createComponent(source).createObject(root)
