@@ -12,43 +12,19 @@ MouseArea {
     drag { target: root; filterChildren: true }
     height: width
 
-    Loader {
-        property real imageOpacity: root.visible && ! root.legal ? 0.4 : 0
-
+    Image {
         anchors.fill: root
-        onImageOpacityChanged:
-            if (imageOpacity > 0 && status === Loader.Null)
-                sourceComponent = componentImage
-
-        Component {
-            id: componentImage
-
-            Image {
-                source: theme.getImage("piece-manipulator")
-                sourceSize { width: width; height: height }
-                opacity: imageOpacity
-                Behavior on opacity { NumberAnimation { duration: 100 } }
-            }
-        }
+        source: theme.getImage("piece-manipulator")
+        sourceSize { width: width; height: height }
+        opacity: ! legal ? 0.4 : 0
+        Behavior on opacity { NumberAnimation { duration: 100 } }
     }
-    Loader {
-        property real imageOpacity: root.visible && root.legal ? 0.4 : 0
-
+    Image {
         anchors.fill: root
-        onImageOpacityChanged:
-            if (imageOpacity > 0 && status === Loader.Null)
-                sourceComponent = componentImageLegal
-
-        Component {
-            id: componentImageLegal
-
-            Image {
-                source: theme.getImage("piece-manipulator-legal")
-                sourceSize { width: width; height: height }
-                opacity: imageOpacity
-                Behavior on opacity { NumberAnimation { duration: 100 } }
-            }
-        }
+        source: theme.getImage("piece-manipulator-legal")
+        sourceSize { width: width; height: height }
+        opacity: legal ? 0.4 : 0
+        Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     MouseArea {
         // Mouse area slightly larger than the image that consumes clicks close
