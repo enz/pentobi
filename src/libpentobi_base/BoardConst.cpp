@@ -706,9 +706,10 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         LIBBOARDGAME_ASSERT(m_nu_pieces == 12);
         break;
     }
-    if (board_type == BoardType::duo || board_type == BoardType::trigon
-             || board_type == BoardType::callisto_2)
-        init_symmetry_info();
+    if (board_type == BoardType::duo || board_type == BoardType::callisto_2)
+        init_symmetry_info<5>();
+    else if (board_type == BoardType::trigon)
+        init_symmetry_info<6>();
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
@@ -1033,6 +1034,7 @@ void BoardConst::init_adj_status(
     init_adj_status(p, forbidden, i + 1);
 }
 
+template<unsigned MAX_SIZE>
 void BoardConst::init_symmetry_info()
 {
     SymmetricPoints symmetric_points;
@@ -1041,21 +1043,25 @@ void BoardConst::init_symmetry_info()
     for (Move::IntType i = 1; i < m_nu_moves; ++i)
     {
         Move mv(i);
+        auto& info = get_move_info<MAX_SIZE>(mv);
         auto& info_ext_2 = m_move_info_ext_2[i];
-        MovePoints sym_points;
         info_ext_2.breaks_symmetry = false;
-        auto points = get_move_points(mv);
-        for (Point p : points)
+        MovePoints sym_points;
+        MovePoints::IntType n = 0;
+        for (Point p : info)
         {
-            if (points.contains(symmetric_points[p]))
+            auto symm_p = symmetric_points[p];
+            auto end = info.end();
+            if (find(info.begin(), end, symm_p) != end)
                 info_ext_2.breaks_symmetry = true;
-            sym_points.push_back(symmetric_points[p]);
+            sym_points.get_unchecked(n++) = symm_p;
         }
-        find_move(sym_points, get_move_piece(mv), info_ext_2.symmetric_move);
+        sym_points.resize(n);
+        find_move(sym_points, info.get_piece(), info_ext_2.symmetric_move);
     }
 }
 
-void BoardConst::sort(MovePoints& points) const
+inline void BoardConst::sort(MovePoints& points) const
 {
     auto check = [&](unsigned short a, unsigned short b)
     {

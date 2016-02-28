@@ -219,6 +219,7 @@ private:
                        array<bool, PrecompMoves::adj_status_nu_adj>& forbidden,
                        unsigned i);
 
+    template<unsigned MAX_SIZE>
     void init_symmetry_info();
 };
 
