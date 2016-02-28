@@ -46,7 +46,7 @@ Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
 /** Non-compact representation of lists of moves of a piece at a point
     constrained by the forbidden status of adjacent points.
     Only used during construction. See g_marker why this variable is global. */
-array<Grid<ArrayList<Move, 40>>, PrecompMoves::nu_adj_status>
+Grid<array<ArrayList<Move, 40>, PrecompMoves::nu_adj_status>>
     g_full_move_table;
 
 
@@ -743,7 +743,7 @@ void BoardConst::create_move(unsigned& moves_created, Piece piece,
     for (auto i = begin; i != end; ++i)
         for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
             if (is_compatible_with_adj_status(*i, j))
-                g_full_move_table[j][*i].push_back(mv);
+                g_full_move_table[*i][j].push_back(mv);
     Point* p = info_ext.points;
     for (auto i = begin; i != end; ++i)
         for (Point j : m_geo.get_adj(*i))
@@ -793,7 +793,7 @@ void BoardConst::create_moves()
     {
         for (Point p : m_geo)
             for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
-                g_full_move_table[j][p].clear();
+                g_full_move_table[p][j].clear();
         Piece piece(i);
         if (m_max_piece_size == 5)
             create_moves<5, 16>(moves_created, piece);
@@ -804,7 +804,7 @@ void BoardConst::create_moves()
         for (Point p : m_geo)
             for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
                 {
-                    auto& list = g_full_move_table[j][p];
+                    auto& list = g_full_move_table[p][j];
                     auto begin = n;
                     for (auto mv : list)
                         m_precomp_moves.set_move(n++, mv);
