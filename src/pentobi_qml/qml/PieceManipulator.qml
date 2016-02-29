@@ -6,10 +6,6 @@ Item {
     property var pieceModel
     // True if piece manipulator is at a board location that is a legal move
     property bool legal
-    property int minimumX
-    property int maximumX
-    property int minimumY
-    property int maximumY
 
     signal piecePlayed
 
@@ -34,8 +30,8 @@ Item {
         drag {
             target: root
             filterChildren: true
-            minimumX: root.minimumX; maximumX: root.maximumX
-            minimumY: root.minimumY; maximumY: root.maximumY
+            minimumX: -width / 2; maximumX: root.parent.width - width / 2
+            minimumY: -height / 2; maximumY: root.parent.height - height / 2
         }
 
         MouseArea {
