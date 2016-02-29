@@ -26,14 +26,6 @@ MouseArea {
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     MouseArea {
-        // Mouse area slightly larger than the image that consumes clicks close
-        // to the piece manipulator to avoid that the user accidentally selects
-        // a piece when he wants to click on one of the rotation/flip mouse
-        // areas and the piece manipulator is above the piece selector.
-        anchors.centerIn: root
-        width: 1.1 * root.width; height: width
-    }
-    MouseArea {
         anchors.centerIn: root
         width: 0.5 * root.width; height: width
         onClicked: piecePlayed()
