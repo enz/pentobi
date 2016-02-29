@@ -1,15 +1,17 @@
 import QtQuick 2.0
 
-MouseArea {
+Item {
     id: root
 
     property var pieceModel
     // True if piece manipulator is at a board location that is a legal move
     property bool legal
+    property int minimumX
+    property int maximumX
+    property int minimumY
+    property int maximumY
 
     signal piecePlayed
-
-    drag { target: root; filterChildren: true }
 
     Image {
         anchors.fill: root
@@ -26,28 +28,49 @@ MouseArea {
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     MouseArea {
-        anchors.centerIn: root
-        width: 0.5 * root.width; height: width
-        onClicked: piecePlayed()
-    }
-    MouseArea {
-        anchors { top: root.top; horizontalCenter: root.horizontalCenter }
-        width: 0.2 * root.width; height: width
-        onClicked: pieceModel.rotateRight()
-    }
-    MouseArea {
-        anchors { right: root.right; verticalCenter: root.verticalCenter }
-        width: 0.2 * root.width; height: width
-        onClicked: pieceModel.flipAcrossX()
-    }
-    MouseArea {
-        anchors { bottom: root.bottom; horizontalCenter: root.horizontalCenter }
-        width: 0.2 * root.width; height: width
-        onClicked: pieceModel.flipAcrossY()
-    }
-    MouseArea {
-        anchors { left: root.left; verticalCenter: root.verticalCenter }
-        width: 0.2 * root.width; height: width
-        onClicked: pieceModel.rotateLeft()
+        id: dragArea
+
+        anchors.fill: root
+        drag {
+            target: root
+            filterChildren: true
+            minimumX: root.minimumX; maximumX: root.maximumX
+            minimumY: root.minimumY; maximumY: root.maximumY
+        }
+
+        MouseArea {
+            anchors.centerIn: dragArea
+            width: 0.5 * root.width; height: width
+            onClicked: piecePlayed()
+        }
+        MouseArea {
+            anchors {
+                top: dragArea.top
+                horizontalCenter: dragArea.horizontalCenter
+            }
+            width: 0.2 * root.width; height: width
+            onClicked: pieceModel.rotateRight()
+        }
+        MouseArea {
+            anchors {
+                right: dragArea.right
+                verticalCenter: dragArea.verticalCenter
+            }
+            width: 0.2 * root.width; height: width
+            onClicked: pieceModel.flipAcrossX()
+        }
+        MouseArea {
+            anchors {
+                bottom: dragArea.bottom
+                horizontalCenter: dragArea.horizontalCenter
+            }
+            width: 0.2 * root.width; height: width
+            onClicked: pieceModel.flipAcrossY()
+        }
+        MouseArea {
+            anchors { left: dragArea.left; verticalCenter: dragArea.verticalCenter }
+            width: 0.2 * root.width; height: width
+            onClicked: pieceModel.rotateLeft()
+        }
     }
 }

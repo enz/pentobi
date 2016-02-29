@@ -142,10 +142,8 @@ Item
         width: 0.6 * board.width; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
-        drag {
-            minimumX: -width / 2; maximumX: gameDisplay.width - width / 2
-            minimumY: -height / 2; maximumY: gameDisplay.height - height / 2
-        }
+        minimumX: -width / 2; maximumX: gameDisplay.width - width / 2
+        minimumY: -height / 2; maximumY: gameDisplay.height - height / 2
         onPiecePlayed: {
             var pos = mapToItem(board, width / 2, height / 2)
             if (! board.contains(Qt.point(pos.x, pos.y)))
