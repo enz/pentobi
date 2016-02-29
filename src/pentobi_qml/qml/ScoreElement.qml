@@ -25,15 +25,16 @@ Item {
     Text {
         id: scoreText
 
-        text: isFinal ? (bonus > 0 ? "*" : "") + "<u>" + value + "</u>" : value
+        text: ! isFinal ?
+                  value : (bonus > 0 ? "*" : "") + "<u>" + value + "</u>"
         color: theme.fontColorScore
         anchors {
             left: point.right
-            leftMargin: (isToPlay ? 0.3 : 0.4) * point.width
+            leftMargin: (isToPlay ? 0.2 : 0.5) * point.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
-        font.pixelSize: 1.7 * pointSize
+        font.pixelSize: 1.5 * pointSize
     }
 }
