@@ -38,7 +38,7 @@ Row {
         isFinal: ! hasMoves1 && ! hasMoves3
         pointSize: root.pointSize
         height: root.height
-        width: 5.9 * pointSize
+        width: 6.2 * pointSize
         color1: theme.colorYellow
         color2: theme.colorGreen
     }
@@ -49,7 +49,7 @@ Row {
         isToPlay: toPlay == 0
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 5.2 * pointSize
         color: theme.colorBlue
     }
     ScoreElement {
@@ -59,7 +59,7 @@ Row {
         isToPlay: toPlay == 1
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 5.2 * pointSize
         color: gameModel.gameVariant == "duo"
                || gameModel.gameVariant == "junior"
                || gameModel.gameVariant == "callisto_2" ?
@@ -74,7 +74,7 @@ Row {
         isToPlay: toPlay == 2
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 5.2 * pointSize
         color: theme.colorRed
     }
     ScoreElement {
@@ -87,7 +87,7 @@ Row {
         isToPlay: toPlay == 3
         pointSize: root.pointSize
         height: root.height
-        width: 5 * pointSize
+        width: 5.2 * pointSize
         color: theme.colorGreen
     }
     ScoreElement2 {

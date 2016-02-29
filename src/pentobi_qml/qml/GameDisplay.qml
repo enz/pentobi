@@ -48,7 +48,7 @@ Item
             gameVariant: gameModel.gameVariant
             width: Math.min(
                        parent.width,
-                       gameDisplay.height / (1.07 + 2.7 / pieceSelector.columns))
+                       gameDisplay.height / (1.08 + 2.7 / pieceSelector.columns))
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -70,8 +70,8 @@ Item
             hasMoves3: gameModel.hasMoves3
             toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
             altPlayer: gameModel.altPlayer
-            height: board.width / 20
-            pointSize: 0.6 * height
+            height: 0.06 * board.width
+            pointSize: 0.5 * height
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Flickable {
