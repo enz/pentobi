@@ -711,8 +711,8 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
-void BoardConst::create_move(unsigned& moves_created, Piece piece,
-                             const MovePoints& points, Point label_pos)
+inline void BoardConst::create_move(unsigned& moves_created, Piece piece,
+                                    const MovePoints& points, Point label_pos)
 {
     LIBBOARDGAME_ASSERT(m_max_piece_size == MAX_SIZE);
     LIBBOARDGAME_ASSERT(m_max_adj_attach == MAX_ADJ_ATTACH);
