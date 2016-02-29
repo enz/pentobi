@@ -37,10 +37,10 @@ function createPieces() {
     else
         file = "PieceClassic.qml"
     var component = Qt.createComponent(file)
-    _pieces0 = createColorPieces(component, gameModel.pieceModels0)
-    _pieces1 = createColorPieces(component, gameModel.pieceModels1)
-    _pieces2 = createColorPieces(component, gameModel.pieceModels2)
-    _pieces3 = createColorPieces(component, gameModel.pieceModels3)
+    pieces0 = createColorPieces(component, gameModel.pieceModels0)
+    pieces1 = createColorPieces(component, gameModel.pieceModels1)
+    pieces2 = createColorPieces(component, gameModel.pieceModels2)
+    pieces3 = createColorPieces(component, gameModel.pieceModels3)
     pieceSelector.transitionsEnabled =
             Qt.binding(function() { return enableAnimations })
 }
@@ -57,19 +57,19 @@ function destroyColorPieces(pieces) {
 function destroyPieces() {
     pieceSelector.transitionsEnabled = false
     pickedPiece = null
-    destroyColorPieces(_pieces0); _pieces0 = []
-    destroyColorPieces(_pieces1); _pieces1 = []
-    destroyColorPieces(_pieces2); _pieces2 = []
-    destroyColorPieces(_pieces3); _pieces3 = []
+    destroyColorPieces(pieces0); pieces0 = []
+    destroyColorPieces(pieces1); pieces1 = []
+    destroyColorPieces(pieces2); pieces2 = []
+    destroyColorPieces(pieces3); pieces3 = []
 }
 
 function findPiece(pieceModel, color) {
     var pieces
     switch (color) {
-    case 0: pieces = _pieces0; break
-    case 1: pieces = _pieces1; break
-    case 2: pieces = _pieces2; break
-    case 3: pieces = _pieces3; break
+    case 0: pieces = pieces0; break
+    case 1: pieces = pieces1; break
+    case 2: pieces = pieces2; break
+    case 3: pieces = pieces3; break
     }
     if (pieces === undefined)
         return null // Pieces haven't been created yet

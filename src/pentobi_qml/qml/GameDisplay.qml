@@ -20,10 +20,10 @@ Item
             return Qt.size(0.9 * width, 0.9 * height)
         return Qt.size(width, height)
     }
-    property var _pieces0
-    property var _pieces1
-    property var _pieces2
-    property var _pieces3
+    property alias pieces0: pieceSelector.pieces0
+    property alias pieces1: pieceSelector.pieces1
+    property alias pieces2: pieceSelector.pieces2
+    property alias pieces3: pieceSelector.pieces3
 
     signal play(var pieceModel, point gameCoord)
 
@@ -101,10 +101,6 @@ Item
                     height: flickable.height
                     rows: 3
                     gameVariant: gameModel.gameVariant
-                    pieces0: _pieces0
-                    pieces1: _pieces1
-                    pieces2: _pieces2
-                    pieces3: _pieces3
                     toPlay: gameModel.toPlay
                     nuColors: gameModel.nuColors
                     transitionsEnabled: false
