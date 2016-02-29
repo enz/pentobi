@@ -34,6 +34,6 @@ Item {
         }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
-        font.pixelSize: 1.7 * pointSize
+        font.pixelSize: 1.5 * pointSize
     }
 }
