@@ -10,13 +10,17 @@
 
 #include "SymmetricPoints.h"
 
+#include "libboardgame_base/PointTransform.h"
+
 namespace libpentobi_base {
+
+using libboardgame_base::PointTransfRot180;
 
 //-----------------------------------------------------------------------------
 
-void SymmetricPoints::init(const Geometry& geo,
-                           const PointTransform<Point>& transform)
+void SymmetricPoints::init(const Geometry& geo)
 {
+    PointTransfRot180<Point> transform;
     for (Point p : geo)
         m_symmetric_point[p] = transform.get_transformed(p, geo);
 }

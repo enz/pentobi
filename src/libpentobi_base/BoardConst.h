@@ -14,6 +14,7 @@
 #include "PieceInfo.h"
 #include "PieceTransforms.h"
 #include "PrecompMoves.h"
+#include "SymmetricPoints.h"
 #include "Variant.h"
 #include "libboardgame_util/ArrayList.h"
 #include "libboardgame_util/Range.h"
@@ -133,6 +134,13 @@ public:
         return m_adj_status_list[p];
     }
 
+    /** Only initialized in game variants with central symmetry of board
+        including startign points. */
+    const SymmetricPoints& get_symmetrc_points() const
+    {
+        return m_symmetric_points;
+    }
+
     /** Convert a move to its string representation.
         The string representation is a comma-separated list of points (without
         spaces between the commas or points). If with_piece_name is true,
@@ -196,6 +204,8 @@ private:
         (a1, b1, ..., a2, b2, ...) with y going upwards whereas the convention
         for Point is that y goes downwards. */
     Grid<unsigned> m_compare_val;
+
+    SymmetricPoints m_symmetric_points;
 
 
     BoardConst(BoardType board_type, PieceSet piece_set);

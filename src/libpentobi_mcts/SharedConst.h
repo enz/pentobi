@@ -9,7 +9,6 @@
 
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/MoveMarker.h"
-#include "libpentobi_base/SymmetricPoints.h"
 
 namespace libpentobi_mcts {
 
@@ -24,7 +23,6 @@ using libpentobi_base::PieceMap;
 using libpentobi_base::Point;
 using libpentobi_base::PointList;
 using libpentobi_base::PrecompMoves;
-using libpentobi_base::SymmetricPoints;
 
 //-----------------------------------------------------------------------------
 
@@ -44,9 +42,6 @@ public:
     const Color& to_play;
 
     bool avoid_symmetric_draw;
-
-    /** Lookup table for symmetric points (only used in Duo and Trigon). */
-    SymmetricPoints symmetric_points;
 
     /** Minimum total number of pieces on the board where all pieces are
         considered until the rest of the simulation. */

@@ -9,11 +9,8 @@
 
 #include "Geometry.h"
 #include "Grid.h"
-#include "libboardgame_base/PointTransform.h"
 
 namespace libpentobi_base {
-
-using libboardgame_base::PointTransform;
 
 //-----------------------------------------------------------------------------
 
@@ -22,7 +19,7 @@ using libboardgame_base::PointTransform;
 class SymmetricPoints
 {
 public:
-    void init(const Geometry& geo, const PointTransform<Point>& transform);
+    void init(const Geometry& geo);
 
     Point operator[](Point p) const;
 

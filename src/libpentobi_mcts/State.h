@@ -345,8 +345,7 @@ inline void State::finish_in_tree()
     if (log_simulations)
         LIBBOARDGAME_LOG("Finish in-tree");
     if (m_check_symmetric_draw)
-        m_is_symmetry_broken =
-            check_symmetry_broken(m_bd, m_shared_const.symmetric_points);
+        m_is_symmetry_broken = check_symmetry_broken(m_bd);
 }
 
 inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
@@ -502,6 +501,7 @@ void State::update_symmetry_broken(Move mv)
 {
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
+    auto& symmetric_points = m_bc->get_symmetrc_points();
     auto& info = get_move_info<MAX_SIZE>(mv);
     auto i = info.begin();
     auto end = info.end();
@@ -511,7 +511,7 @@ void State::update_symmetry_broken(Move mv)
         // move of the second player are occupied by the first player
         do
         {
-            Point symm_p = m_shared_const.symmetric_points[*i];
+            Point symm_p = symmetric_points[*i];
             if (m_bd.get_point_state(symm_p) != second_color)
             {
                 m_is_symmetry_broken = true;
@@ -527,7 +527,7 @@ void State::update_symmetry_broken(Move mv)
         // there to preserve the symmetry)
         do
         {
-            Point symm_p = m_shared_const.symmetric_points[*i];
+            Point symm_p = symmetric_points[*i];
             if (! m_bd.get_point_state(symm_p).is_empty())
             {
                 m_is_symmetry_broken = true;

@@ -693,7 +693,7 @@ void State::start_search()
              && ! ((m_shared_const.to_play == Color(1)
                     || m_shared_const.to_play == Color(3))
                    && m_shared_const.avoid_symmetric_draw)
-             && ! check_symmetry_broken(bd, m_shared_const.symmetric_points));
+             && ! check_symmetry_broken(bd));
     if (! m_check_symmetric_draw)
         // Pretending that the symmetry is always broken is equivalent to
         // ignoring symmetric draws

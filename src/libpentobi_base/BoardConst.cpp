@@ -13,14 +13,12 @@
 #include <algorithm>
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsTrigon.h"
-#include "SymmetricPoints.h"
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 
-using libboardgame_base::PointTransfRot180;
 using libboardgame_base::Transform;
 using libboardgame_util::split;
 using libboardgame_util::to_lower;
@@ -1037,9 +1035,7 @@ void BoardConst::init_adj_status(
 template<unsigned MAX_SIZE>
 void BoardConst::init_symmetry_info()
 {
-    SymmetricPoints symmetric_points;
-    PointTransfRot180<Point> transform;
-    symmetric_points.init(m_geo, transform);
+    m_symmetric_points.init(m_geo);
     for (Move::IntType i = 1; i < m_nu_moves; ++i)
     {
         Move mv(i);
@@ -1050,7 +1046,7 @@ void BoardConst::init_symmetry_info()
         MovePoints::IntType n = 0;
         for (Point p : info)
         {
-            auto symm_p = symmetric_points[p];
+            auto symm_p = m_symmetric_points[p];
             auto end = info.end();
             if (find(info.begin(), end, symm_p) != end)
                 info_ext_2.breaks_symmetry = true;

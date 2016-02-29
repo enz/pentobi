@@ -44,7 +44,7 @@ bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
     if (m_shared_const.avoid_symmetric_draw
             && is_followup && m_to_play != m_last_history.get_to_play()
             && has_central_symmetry(bd.get_variant())
-            && ! check_symmetry_broken(bd, m_shared_const.symmetric_points))
+            && ! check_symmetry_broken(bd))
         is_followup = false;
 
     m_last_history = m_history;

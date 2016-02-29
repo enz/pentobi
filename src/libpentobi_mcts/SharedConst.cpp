@@ -12,7 +12,6 @@
 
 namespace libpentobi_mcts {
 
-using libboardgame_base::PointTransfRot180;
 using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::Piece;
@@ -218,7 +217,6 @@ void SharedConst::init(bool is_followup)
         init_pieces_considered();
     if (bd.get_piece_set() == PieceSet::callisto)
         init_one_piece_callisto(is_followup);
-    symmetric_points.init(bd.get_geometry(), PointTransfRot180<Point>());
 }
 
 void SharedConst::init_one_piece_callisto(bool is_followup)
