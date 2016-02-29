@@ -165,6 +165,8 @@ private:
 
     unsigned m_y[Point::range_onboard];
 
+    unsigned m_point_type[Point::range_onboard];
+
     string m_string[Point::range];
 
 #if LIBBOARDGAME_DEBUG
@@ -227,7 +229,8 @@ inline auto Geometry<P>::get_point(unsigned x, unsigned y) const -> Point
 template<class P>
 inline unsigned Geometry<P>::get_point_type(Point p) const
 {
-    return get_point_type(get_x(p), get_y(p));
+    LIBBOARDGAME_ASSERT(is_valid(p));
+    return m_point_type[p.to_int()];
 }
 
 template<class P>
@@ -300,6 +303,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
         for (auto& p : get_diag_coord(x, y))
             if (is_onboard(p))
                 m_diag[i].push_back(get_point(p.x, p.y));
+        m_point_type[i] = get_point_type(x, y);
     }
 }
 

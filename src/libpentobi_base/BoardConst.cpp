@@ -849,7 +849,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
             LIBBOARDGAME_LOG("Creating moves at ", m_geo.to_string(p));
         auto x = m_geo.get_x(p);
         auto y = m_geo.get_y(p);
-        auto point_type = m_geo.get_point_type(x, y);
+        auto point_type = m_geo.get_point_type(p);
         for (size_t i = 0; i < nu_transforms; ++i)
         {
             if (log_move_creation)

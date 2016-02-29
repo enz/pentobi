@@ -113,7 +113,7 @@ void PieceSelector::filterCrossableJunctions(PiecePoints& points) const
     PiecePoints newPoints;
     for (auto& p : points)
     {
-        if (geo.get_point_type(p.x, p.y) != 0)
+        if (geo.get_point_type(p) != 0)
             // Not a junction
             newPoints.push_back(p);
         else if (points.contains(CoordPoint(p.x - 1, p.y))

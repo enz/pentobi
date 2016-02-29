@@ -160,7 +160,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         int y = m_geo->get_y(p);
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = y * m_fieldHeight;
-        auto pointType = m_geo->get_point_type(x, y);
+        auto pointType = m_geo->get_point_type(p);
         if (m_isTrigon)
         {
             bool isUpward = (pointType == 0);
@@ -393,7 +393,7 @@ void BoardPainter::paintPieces(QPainter& painter,
         PointState s = pointState[p];
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = y * m_fieldHeight;
-        auto pointType = m_geo->get_point_type(x, y);
+        auto pointType = m_geo->get_point_type(p);
         if (m_isTrigon)
         {
             if (s.is_empty())
@@ -586,8 +586,7 @@ void BoardPainter::paintStartingPoints(QPainter& painter, Variant variant,
             int y = m_geo->get_y(p);
             qreal fieldX = x * m_fieldWidth;
             qreal fieldY = y * m_fieldHeight;
-            auto pointType = m_geo->get_point_type(x, y);
-            bool isUpward = (pointType == 0);
+            bool isUpward = (m_geo->get_point_type(p) == 0);
             Util::paintTriangleStartingPoint(painter, isUpward, fieldX, fieldY,
                                              m_fieldWidth, m_fieldHeight);
         }

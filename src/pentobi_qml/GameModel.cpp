@@ -179,7 +179,7 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
         int y = p.y + offY;
         if (! geo.is_onboard(CoordPoint(x, y)))
             return false;
-        auto pointType = geo.get_point_type(p.x, p.y);
+        auto pointType = geo.get_point_type(p);
         auto boardPointType = geo.get_point_type(x, y);
         if (! pointTypeChanged && pointType != boardPointType)
             return false;
