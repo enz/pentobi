@@ -30,7 +30,7 @@ Item {
         color: theme.fontColorScore
         anchors {
             left: point.right
-            leftMargin: (isToPlay ? 0.2 : 0.5) * point.width
+            leftMargin: (isToPlay ? 0.3 : 0.5) * point.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
