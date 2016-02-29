@@ -313,7 +313,7 @@ Item
                 NumberAnimation {
                     properties: "x,y,scale"
                     duration: 300
-                    easing.type: Easing.OutSine
+                    easing.type: Easing.InOutQuad
                 }
             }
     }
