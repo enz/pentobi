@@ -31,7 +31,6 @@ Item
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showMoveHint(move) { Logic.showMoveHint(move) }
-    function dropPiece() { pickedPiece = null }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null

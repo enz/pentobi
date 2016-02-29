@@ -111,7 +111,7 @@ function deleteAllVar() {
 }
 
 function genMove() {
-    gameDisplay.dropPiece()
+    gameDisplay.pickedPiece = null
     isMoveHintRunning = false
     playerModel.startGenMove(gameModel)
 }
