@@ -35,26 +35,12 @@ const bool log_move_creation = false;
     thread-safe construction is not needed. */
 Marker g_marker;
 
-/** Local variable used during construction.
-    See g_marker why this variable is global. */
-Grid<array<ArrayList<Point, PrecompMoves::adj_status_nu_adj>,
-                     PrecompMoves::nu_adj_status>>
-    g_adj_status;
-
 /** Non-compact representation of lists of moves of a piece at a point
     constrained by the forbidden status of adjacent points.
     Only used during construction. See g_marker why this variable is global. */
 Grid<array<ArrayList<Move, 40>, PrecompMoves::nu_adj_status>>
     g_full_move_table;
 
-
-inline bool is_compatible_with_adj_status(Point p, unsigned adj_status_idx)
-{
-    for (Point p_adj : g_adj_status[p][adj_status_idx])
-        if (g_marker[p_adj])
-            return false;
-    return true;
-}
 
 // Sort points using the ordering used in blksgf files (switches the direction
 // of the y axis!)
@@ -740,9 +726,15 @@ inline void BoardConst::create_move(unsigned& moves_created, Piece piece,
     for (auto i = begin; i != end; ++i)
         g_marker.set(*i);
     for (auto i = begin; i != end; ++i)
+    {
+        auto j = m_adj_status_list[*i].begin();
+        unsigned adj_status = g_marker[*j];
+        for (unsigned k = 1; k < PrecompMoves::adj_status_nu_adj; ++k)
+            adj_status |= (g_marker[*(++j)] << k);
         for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
-            if (is_compatible_with_adj_status(*i, j))
+            if ((j & adj_status) == 0)
                 g_full_move_table[*i][j].push_back(mv);
+    }
     Point* p = info_ext.points;
     for (auto i = begin; i != end; ++i)
         for (Point j : m_geo.get_adj(*i))
@@ -996,39 +988,6 @@ void BoardConst::init_adj_status()
              ++i)
             *i = Point::null();
     }
-    array<bool, PrecompMoves::adj_status_nu_adj> forbidden;
-    for (Point p : m_geo)
-        init_adj_status(p, forbidden, 0);
-}
-
-void BoardConst::init_adj_status(
-                       Point p,
-                       array<bool, PrecompMoves::adj_status_nu_adj>& forbidden,
-                       unsigned i)
-{
-    auto& adj_status_list = m_adj_status_list[p];
-    if (i == adj_status_list.size())
-    {
-        unsigned index = 0;
-        for (unsigned j = 0; j < i; ++j)
-            if (forbidden[j])
-                index |= (1 << j);
-        g_adj_status[p][index].clear();
-        unsigned n = 0;
-        for (Point j : adj_status_list)
-        {
-            if (n >= i)
-                return;
-            if (forbidden[n])
-                g_adj_status[p][index].push_back(j);
-            ++n;
-        }
-        return;
-    }
-    forbidden[i] = false;
-    init_adj_status(p, forbidden, i + 1);
-    forbidden[i] = true;
-    init_adj_status(p, forbidden, i + 1);
 }
 
 template<unsigned MAX_SIZE>

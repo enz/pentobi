@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_BASE_BOARD_CONST_H
 #define LIBPENTOBI_BASE_BOARD_CONST_H
 
-#include <array>
 #include "Geometry.h"
 #include "Marker.h"
 #include "MoveInfo.h"
@@ -223,11 +222,6 @@ private:
     const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;
 
     void init_adj_status();
-
-    void init_adj_status(
-                       Point p,
-                       array<bool, PrecompMoves::adj_status_nu_adj>& forbidden,
-                       unsigned i);
 
     template<unsigned MAX_SIZE>
     void init_symmetry_info();
