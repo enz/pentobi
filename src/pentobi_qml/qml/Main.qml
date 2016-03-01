@@ -63,11 +63,7 @@ ApplicationWindow {
             Component {
                 id: androidToolBarComponent
 
-                AndroidToolBar {
-                    id: toolBar
-
-                    onPopupMenu: menuLoader.item.popup()
-                }
+                AndroidToolBar { }
             }
         }
         GameDisplay {
@@ -91,24 +87,6 @@ ApplicationWindow {
             id: menuBarComponent
 
             MenuBar {
-                MenuGame { }
-                MenuGo { }
-                MenuEdit { }
-                MenuComputer { }
-                MenuView { }
-                MenuHelp { }
-            }
-        }
-    }
-    Loader {
-        id: menuLoader
-
-        sourceComponent: isAndroid ? menuComponent : undefined
-
-        Component {
-            id: menuComponent
-
-            Menu {
                 MenuGame { }
                 MenuGo { }
                 MenuEdit { }

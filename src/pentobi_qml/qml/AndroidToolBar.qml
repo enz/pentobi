@@ -5,8 +5,6 @@ import QtQuick.Window 2.0
 import "Main.js" as Logic
 
 RowLayout {
-    signal popupMenu()
-
     spacing: 0
 
     Item { Layout.preferredWidth: 0.02 * parent.height }
@@ -42,6 +40,16 @@ RowLayout {
     }
     AndroidToolButton {
         imageSource: "icons/menu.svg"
-        onClicked: popupMenu()
+        menu: menu
+    }
+    Menu {
+        id: menu
+
+        MenuGame { }
+        MenuGo { }
+        MenuEdit { }
+        MenuComputer { }
+        MenuView { }
+        MenuHelp { }
     }
 }
