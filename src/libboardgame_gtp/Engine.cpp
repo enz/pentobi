@@ -118,7 +118,7 @@ void Engine::cmd_known_command(const Arguments& args, Response& response)
 /** List all known commands. */
 void Engine::cmd_list_commands(Response& response)
 {
-    for (HandlerIterator i = m_handlers.begin(); i != m_handlers.end(); ++i)
+    for (auto i = m_handlers.begin(); i != m_handlers.end(); ++i)
         response << i->first << '\n';
 }
 
@@ -150,26 +150,6 @@ void Engine::cmd_version(Response&)
 bool Engine::contains(const string& name) const
 {
     return m_handlers.count(name) > 0;
-}
-
-void Engine::remove(const string& name)
-{
-    auto i = m_handlers.find(name);
-    if (i != m_handlers.end())
-        m_handlers.erase(i);
-}
-
-string Engine::exec(const string& line)
-{
-    assert(is_cmd_line(line));
-    Response response;
-    string buffer;
-    CmdLine cmd;
-    cmd.init(line);
-    bool status = handle_cmd(cmd, nullptr, response, buffer);
-    if (! status)
-        throw Failure(response.to_string());
-    return response.to_string();
 }
 
 bool Engine::exec(istream& in, bool throw_on_fail, ostream* log)
@@ -226,7 +206,7 @@ bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
     try
     {
         response.clear();
-        HandlerIterator pos = m_handlers.find(line.get_name());
+        auto pos = m_handlers.find(line.get_name());
         if (pos != m_handlers.end())
         {
             Arguments args(line);

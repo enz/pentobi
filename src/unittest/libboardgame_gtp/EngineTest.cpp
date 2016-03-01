@@ -57,13 +57,6 @@ void InvalidResponseEngine::invalid_response_2(const Arguments&, Response& r)
 
 //-----------------------------------------------------------------------------
 
-void cmd_foo(Response& response)
-{
-    response << "foo";
-}
-
-//-----------------------------------------------------------------------------
-
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -113,14 +106,6 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_empty_lines_2)
                              "because it contains two empty lines\n"
                              "\n"),
                       out.str());
-}
-
-/** Check replacing an existing command by calling add() with a new handler. */
-LIBBOARDGAME_TEST_CASE(gtp_engine_replace_cmd)
-{
-    Engine engine;
-    engine.add("version", cmd_foo);
-    LIBBOARDGAME_CHECK_EQUAL(engine.exec("version"), "foo");
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_engine_unknown_command)

@@ -78,13 +78,6 @@ public:
         @throws Failure If a command fails, and @c throw_on_fail is @c true */
     bool exec(istream& in, bool throw_on_fail, ostream* log);
 
-    /** Execute a single command line.
-        @param line The command line (must contain a valid command, comment
-        lines or empty lines are not allowed)
-        @return The response without status character or command ID
-        @throw Failure If the command fails */
-    string exec(const string& line);
-
     /** Run the main command loop.
         Reads lines from input stream, calls the corresponding command handler
         and writes the response to the output stream. Empty lines in the
@@ -130,9 +123,6 @@ public:
     /** Returns if command registered. */
     bool contains(const string& name) const;
 
-    /** Unregister a command. */
-    void remove(const string& name);
-
 protected:
     /** Hook function to be executed before each command.
         The default implementation does nothing. */
@@ -163,8 +153,6 @@ private:
         on the heap to ensure that the range stays valid, if the value object
         is copied. */
     typedef map<string, Handler> Handlers;
-
-    typedef Handlers::const_iterator HandlerIterator;
 
     /** Flag to quit main loop. */
     bool m_quit;
