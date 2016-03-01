@@ -47,7 +47,7 @@ public:
 private:
     unsigned m_current;
 
-    unsigned m_a[Point::range_onboard];
+    unsigned m_a[Point::range];
 
     void reset();
 };
@@ -61,16 +61,14 @@ inline Marker<P>::Marker()
 template<class P>
 bool Marker<P>::operator[](Point p) const
 {
-    LIBBOARDGAME_ASSERT(! p.is_null());
     return m_a[p.to_int()] == m_current;
 }
 
 template<class P>
 inline void Marker<P>::clear()
 {
-    if (--m_current != 0)
-        return;
-    reset();
+    if (--m_current == 0)
+        reset();
 }
 
 template<class P>
@@ -84,13 +82,12 @@ template<class P>
 inline void Marker<P>::reset()
 {
     m_current = numeric_limits<unsigned>::max() - 1;
-    fill(m_a, m_a + Point::range_onboard, numeric_limits<unsigned>::max());
+    fill(m_a, m_a + Point::range, numeric_limits<unsigned>::max());
 }
 
 template<class P>
 inline bool Marker<P>::set(Point p)
 {
-    LIBBOARDGAME_ASSERT(! p.is_null());
     auto& a = m_a[p.to_int()];
     if (a == m_current)
         return true;
