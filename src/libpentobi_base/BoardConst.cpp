@@ -804,11 +804,10 @@ void BoardConst::create_moves()
             for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
                 {
                     auto& list = g_full_move_table[p][j];
-                    auto begin = n;
+                    m_precomp_moves.set_list_range(p, j, piece, n,
+                                                   list.size());
                     for (auto mv : list)
                         m_precomp_moves.set_move(n++, mv);
-                    m_precomp_moves.set_list_range(p, j, piece, begin,
-                                                   n - begin);
                 }
     }
     LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
