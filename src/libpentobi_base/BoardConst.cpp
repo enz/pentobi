@@ -42,6 +42,14 @@ Grid<array<ArrayList<Move, 40>, PrecompMoves::nu_adj_status>>
     g_full_move_table;
 
 
+bool is_reverse(const Point* begin1, const Point* begin2, unsigned size)
+{
+    for (auto i = begin1, j = begin2 + size - 1; i != begin1 + size; ++i, --j)
+        if (*i != *j)
+            return false;
+    return true;
+}
+
 // Sort points using the ordering used in blksgf files (switches the direction
 // of the y axis!)
 void sort_piece_points(PiecePoints& points)
@@ -1000,7 +1008,7 @@ void BoardConst::init_symmetry_info()
         auto& info = get_move_info<MAX_SIZE>(mv);
         auto& info_ext_2 = m_move_info_ext_2[i];
         info_ext_2.breaks_symmetry = false;
-        MovePoints sym_points;
+        array<Point, PieceInfo::max_size> sym_points;
         MovePoints::IntType n = 0;
         for (Point p : info)
         {
@@ -1008,10 +1016,15 @@ void BoardConst::init_symmetry_info()
             auto end = info.end();
             if (find(info.begin(), end, symm_p) != end)
                 info_ext_2.breaks_symmetry = true;
-            sym_points.get_unchecked(n++) = symm_p;
+            sym_points[n++] = symm_p;
         }
-        sym_points.resize(n);
-        find_move(sym_points, info.get_piece(), info_ext_2.symmetric_move);
+        for (auto mv : get_moves(info.get_piece(), sym_points[0]))
+            if (is_reverse(sym_points.begin(),
+                           get_move_info<MAX_SIZE>(mv).begin(), n))
+            {
+                info_ext_2.symmetric_move = mv;
+                break;
+            }
     }
 }
 
