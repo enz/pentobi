@@ -26,12 +26,14 @@ ColumnLayout {
             imageSource: "icons/pentobi-backward.svg"
             Layout.fillWidth: true
             onClicked: gameModel.goBackward()
+            autoRepeat: true
         }
         Pentobi.Button {
             enabled: gameModel.canGoForward
             imageSource: "icons/pentobi-forward.svg"
             Layout.fillWidth: true
             onClicked: gameModel.goForward()
+            autoRepeat: true
         }
         Pentobi.Button {
             enabled: gameModel.canGoForward

@@ -82,6 +82,7 @@ if(PENTOBI_BUILD_GUI)
   find_package(Qt5Svg 5.2 REQUIRED)
 endif()
 if(PENTOBI_BUILD_QML)
+  # Qt 5.3 is good enough for building but the QML files require Qt 5.6 to run
   find_package(Qt5Concurrent 5.3 REQUIRED)
   find_package(Qt5Qml 5.3 REQUIRED)
   find_package(Qt5Gui 5.3 REQUIRED)

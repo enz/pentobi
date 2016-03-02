@@ -9,6 +9,7 @@ QtObject {
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
     property color colorStartingPoint: "#82777E"
+    property color backgroundButtonPressed: Qt.lighter(backgroundColor, 3)
     property real pieceListOpacity: 0.94
     property real toPlayColorLighter: 1.7
 
