@@ -5,6 +5,8 @@ import QtQuick.Window 2.0
 import "Main.js" as Logic
 
 RowLayout {
+    function popupMenu() { menu.popup() }
+
     spacing: 0
 
     Item { Layout.preferredWidth: 0.02 * parent.height }

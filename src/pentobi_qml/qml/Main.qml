@@ -57,11 +57,13 @@ ApplicationWindow {
     ColumnLayout {
         anchors.fill: parent
         Keys.onReleased: if (isAndroid && event.key === Qt.Key_Menu) {
-                             menuLoader.item.popup()
+                             androidToolBarLoader.item.popupMenu()
                              event.accepted = true
                          }
 
         Loader {
+            id: androidToolBarLoader
+
             sourceComponent: isAndroid ? androidToolBarComponent : undefined
             Layout.fillWidth: true
 
