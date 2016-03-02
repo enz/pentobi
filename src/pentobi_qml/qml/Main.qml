@@ -28,6 +28,11 @@ ApplicationWindow {
         isAndroid ? Screen.desktopAvailableWidth :
                     Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
 
+    function cancelGenMove() {
+        playerModel.cancelGenMove()
+        delayedCheckComputerMove.stop()
+    }
+
     minimumWidth: 240; minimumHeight: 320
     width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
     height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
@@ -125,7 +130,7 @@ ApplicationWindow {
     GameModel {
         id: gameModel
 
-        onPositionAboutToChange: playerModel.cancelGenMove()
+        onPositionAboutToChange: cancelGenMove()
     }
     PlayerModel {
         id: playerModel
@@ -208,7 +213,7 @@ ApplicationWindow {
         function run(func) {
             this.func = func
             isRunning = true
-            start()
+            restart()
         }
 
         interval: 400

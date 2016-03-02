@@ -19,7 +19,7 @@ function changeGameVariant(gameVariant) {
 }
 
 function changeGameVariantNoVerify(gameVariant) {
-    playerModel.cancelGenMove()
+    cancelGenMove()
     lengthyCommand.run(function() {
         gameDisplay.destroyPieces()
         gameModel.initGameVariant(gameVariant)
@@ -170,7 +170,7 @@ function moveGenerated(move) {
         return
     }
     gameModel.playMove(move)
-    delayedCheckComputerMove.start()
+    delayedCheckComputerMove.restart()
 }
 
 function moveHint() {
@@ -216,7 +216,7 @@ function play(pieceModel, gameCoord) {
     // We don't continue automatic play if the human played a move for a color
     // played by the computer.
     if (! wasComputerToPlay)
-        delayedCheckComputerMove.start()
+        delayedCheckComputerMove.restart()
 }
 
 function saveFileUrl(fileUrl) {
