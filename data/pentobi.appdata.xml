@@ -10,12 +10,12 @@
 
   <description>
     <p>Pentobi is a computer opponent for the board game Blokus. It has a
-    strong Blokus engine with different playing levels. The supported game
-    variants are: Classic, Duo, Trigon, Junior, Nexos and Callisto.</p>
+    strong Blokus engine with nine different playing levels. The supported game
+    variants are: Classic, Duo, Trigon, Junior, Nexos, Callisto.</p>
     <p xml:lang="de">Pentobi ist ein Computer-Gegner für das Brettspiel Blokus.
-    Es hat eine spielstarke Blokus-Engine mit verschiedenen Spielstufen. Die
-    unterstützten Spielvarianten sind : Klassisch, Duo, Trigon, Junior, Nexos
-    und Callisto.</p>
+    Es hat eine spielstarke Blokus-Engine mit neun verschiedenen Spielstufen.
+    Die unterstützten Spielvarianten sind : Klassisch, Duo, Trigon, Junior,
+    Nexos, Callisto.</p>
 
     <p>Players can determine their strength by playing rated games against the
     computer and use a game analysis function. Games can be saved in Smart Game
