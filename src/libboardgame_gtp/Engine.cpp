@@ -89,26 +89,6 @@ void Engine::add(const string& name, HandlerNoArgsNoResponse f)
                            placeholders::_1, placeholders::_2)));
 }
 
-void Engine::add(const string& name, void (*f)(const Arguments&, Response&))
-{
-    add(name, Handler(f));
-}
-
-void Engine::add(const string& name, void (*f)(Response&))
-{
-    add(name, HandlerNoArgs(f));
-}
-
-void Engine::add(const string& name, void (*f)(const Arguments&))
-{
-    add(name, HandlerNoResponse(f));
-}
-
-void Engine::add(const string& name, void (*f)())
-{
-    add(name, HandlerNoArgsNoResponse(f));
-}
-
 /** Return @c true if command is known, @c false otherwise. */
 void Engine::cmd_known_command(const Arguments& args, Response& response)
 {

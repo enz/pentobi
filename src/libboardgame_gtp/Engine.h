@@ -96,14 +96,6 @@ public:
 
     void add(const string& name, HandlerNoArgsNoResponse f);
 
-    void add(const string& name, void (*f)(const Arguments&, Response&));
-
-    void add(const string& name, void (*f)(Response&));
-
-    void add(const string& name, void (*f)(const Arguments&));
-
-    void add(const string& name, void (*f)());
-
     /** Register a member function as a command handler.
         If a command was already registered with the same name, it will be
         replaced by the new command. */
@@ -154,10 +146,12 @@ private:
         is copied. */
     typedef map<string, Handler> Handlers;
 
+
     /** Flag to quit main loop. */
     bool m_quit;
 
     Handlers m_handlers;
+
 
     bool handle_cmd(CmdLine& line, ostream* out, Response& response,
                     string& buffer);
