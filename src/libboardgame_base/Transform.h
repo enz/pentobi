@@ -11,8 +11,6 @@
 
 namespace libboardgame_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Rotation and/or reflection of local coordinates on the board. */
