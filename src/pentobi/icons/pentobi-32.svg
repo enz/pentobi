@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="32" width="32" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<g id="d" transform="translate(17,-13)">
-<rect rx=".92959" ry="0" height="7" width="7" y="15" x="-15" fill="#C00"/>
-<path d="m-15 22v-1h6v-6h1v7z" fill="#a40000"/>
-<path d="m-15 22v-7h7l-1 1h-5v5z" fill="#ef2929"/>
+<g id="a">
+<rect height="7" width="7" x="16" y="2" fill="#73d216"/>
+<path d="m16 9h7v-7l-1 1v 5h-5z" fill="#4e9a06"/>
+<path d="m16 9v-7h7l-1 1h-5v5z" fill="#8ae234"/>
 </g>
-<use xlink:href="#d" transform="translate(14,7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#d" transform="translate(7.000001 7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#d" transform="translate(7)" height="32" width="32" y="0" x="0"/>
-<g id="c" transform="translate(17,2)">
-<rect rx=".92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
-<path d="m-15 14v-1h6v-6h1v7z" fill="#c4a000"/>
-<path d="m-15 14v-7h7l-1 1h-5v5z" fill="#fce94f"/>
+<use xlink:href="#a" x="7"/>
+<use xlink:href="#a" x="7" y="7"/>
+<use xlink:href="#a" x="7" y="14"/>
+<g id="b">
+<rect height="7" width="7" x="9" y="16" fill="#3465a4"/>
+<path d="m9 23h7v-7l-1 1v 5h-5z" fill="#204a87"/>
+<path d="m9 23v-7h7l-1 1h-5v5z" fill="#558bc5"/>
 </g>
-<g id="b" transform="translate(30.94915 -5.050848)">
-<rect rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
-<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
-<rect rx=".92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
-<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+<use xlink:href="#b" x="7"/>
+<use xlink:href="#b" x="7" y="7"/>
+<use xlink:href="#b" x="14" y="7"/>
+<g id="c">
+<rect height="7" width="7" x="2" y="9" fill="#edd400"/>
+<path d="m2 16h7v-7l-1 1v 5h-5z" fill="#c4a000"/>
+<path d="m2 16v-7h7l-1 1h-5v5z" fill="#fce94f"/>
 </g>
-<g id="a" transform="translate(24.01695 8.966102)">
-<rect rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
-<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#4e9a06"/>
-<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#8ae234"/>
-<rect rx=".92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
-<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#204a87"/>
-<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#558bc5"/>
+<use xlink:href="#c" y="7"/>
+<use xlink:href="#c" y="14"/>
+<use xlink:href="#c" x="7" y="14"/>
+<g id="d">
+<rect height="7" width="7" x="2" y="2" fill="#C00"/>
+<path d="m2 9h7v-7l-1 1v 5h-5z" fill="#a40000"/>
+<path d="m2 9v-7h7l-1 1h-5v5z" fill="#ef2929"/>
 </g>
-<use xlink:href="#c" transform="translate(0,7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#c" transform="translate(0,14)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#c" transform="translate(7,14)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(7,7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(7,14)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(7,7)" height="32" width="32" y="0" x="0"/>
-<use xlink:href="#a" transform="translate(14,7)" height="32" width="32" y="0" x="0"/>
+<use xlink:href="#d" x="7"/>
+<use xlink:href="#d" x="7" y="7"/>
+<use xlink:href="#d" x="14" y="7"/>
 </svg>

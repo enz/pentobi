@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="32" width="32" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <rect x="4.5" y="2.5" width="23" height="27" stroke-linejoin="round" ry="1.15" stroke="#555753" fill="#fff"/>
+ <rect x="6" y="4" width="20" height="24" fill="#eeeeec"/>
+ <g id="h">
+  <rect x="16" y="8" width="4" fill="#73d216" height="4"/>
+  <path d="m16 12v-4h4l-1 1h-2v2z" fill="#b0eb76"/>
+ </g>
+ <use x="4" xlink:href="#h"/>
+ <use y="4" x="4" xlink:href="#h"/>
+ <use y="8" x="4" xlink:href="#h"/>
+ <g id="g">
+  <rect x="12" y="16" height="4" width="4" fill="#3465a4"/>
+  <path d="m12 20v-4h4l-1 1h-2v2z" fill="#6f9dce"/>
+ </g>
+ <use x="4" xlink:href="#g"/>
+ <use y="4" x="4" xlink:href="#g"/>
+ <use y="4" x="8" xlink:href="#g"/>
+ <g id="f">
+  <rect x="8" y="12" width="4" fill="#edd400" height="4"/>
+  <path d="m8 16v-4h4l-1 1h-2v2z" fill="#fdee76"/>
+ </g>
+ <use y="4" xlink:href="#f"/>
+ <use y="8" xlink:href="#f"/>
+ <use y="8" x="4" xlink:href="#f"/>
+ <g id="e">
+  <rect x="8" y="8" width="4" fill="#C00" height="4"/>
+  <path d="m8 12v-4h4l-1 1h-2v2z" fill="#f14646"/>
+ </g>
+ <use x="4" xlink:href="#e"/>
+ <use y="4" x="4" xlink:href="#e"/>
+ <use y="4" x="8" xlink:href="#e"/>
+</svg>

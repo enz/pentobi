@@ -1,45 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<defs>
-<radialGradient id="i" gradientUnits="userSpaceOnUse" cy="24.107" cx="24.041" gradientTransform="matrix(.3727649 0 0 .4283413 -.9616617 29.67411)" r="17.938">
-<stop stop-color="#fbfbfb" offset="0"/>
-<stop stop-color="#edeeeb" offset="1"/>
-</radialGradient>
-<linearGradient id="a" x1="7.7452" gradientUnits="userSpaceOnUse" y1="35.359" gradientTransform="translate(-4.065864 -11.88909)" x2="8.74" y2="37.038">
-<stop stop-color="#FFF" stop-opacity=".3828996" offset="0"/>
-<stop stop-color="#FFF" stop-opacity="0" offset="1"/>
-</linearGradient>
-<linearGradient id="f" y2="25.149" gradientUnits="userSpaceOnUse" y1="23.735" x2="4.5858" x1="3.6794">
-<stop stop-color="#FFF" stop-opacity=".4907063" offset="0"/>
-<stop stop-color="#FFF" stop-opacity="0" offset="1"/>
-</linearGradient>
-<linearGradient id="h" x1="-4.3189" gradientUnits="userSpaceOnUse" y1="34.895" gradientTransform="translate(8.661204 -6.878681)" x2="-4.5616" y2="32.951">
-<stop stop-color="#ddc600" offset="0"/>
-<stop stop-color="#ffec46" stop-opacity=".9809524" offset="1"/>
-</linearGradient>
-<linearGradient id="g" x1="-9.9692" gradientUnits="userSpaceOnUse" y1="39.718" gradientTransform="matrix(.2710454 0 0 .2710451 7.103142 17.31282)" x2="-12.044" y2="31.497">
-<stop stop-color="#e4cc00" offset="0"/>
-<stop stop-color="#fff283" offset="1"/>
-</linearGradient>
-</defs>
-<g transform="translate(0,-32)">
-<rect stroke-linejoin="round" style="color:#000000" ry=".42121" height="15" width="13" stroke="#7c7f79" stroke-linecap="round" y="32.5" x="1.4999" stroke-width=".99982" display="block" fill="url(#i)"/>
-<rect style="color:#000000" rx="0" ry="0" height="13" width="11" stroke="#fff" stroke-linecap="round" y="33.5" x="2.4999" display="block" fill="none"/>
-<g transform="translate(2 14)">
-<rect rx="0" ry="0" height="4" width="4" y="22" x="2" fill="#ef2929"/>
-<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#a)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
-</g>
-<g transform="translate(6 14)">
-<rect rx="0" ry="0" height="4" width="4" y="22" x="2" fill="#73d216"/>
-<path d="m2.5002 25.5v-2.9996h2.9996" stroke="url(#f)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
-</g>
-<g transform="translate(2 15)">
-<rect rx="0" ry="0" height="4" width="4" y="25" x="2" fill="url(#h)"/>
-<path d="m2.5002 28.5v-2.9996h2.9996" stroke="url(#g)" stroke-linecap="square" stroke-width="1.000366" fill="none"/>
-</g>
-<g transform="translate(6 18)" fill="#3465a4">
-<rect rx="0" ry="0" height="4" width="4" y="22" x="2"/>
-<path stroke-width="1.000366" stroke="url(#a)" stroke-linecap="square" d="m2.5002 25.5v-2.9996h2.9996"/>
-</g>
-</g>
+ <rect x="1.5" y="0.5" width="13" height="15" stroke-linejoin="round" ry="1.15" stroke="#7c7f79" fill="#fff"/>
+ <rect x="3" y="2" width="10" height="12" fill="#eeeeec"/>
+ <rect x="4" y="4" width="4" height="4" fill="#C00"/>
+ <path d="m4 8v-4h4l-1 1h-2v2z" fill="#f14646"/>
+ <rect x="8" y="4" width="4" height="4" fill="#73d216"/>
+ <path d="m8 8v-4h4l-1 1h-2v2z" fill="#b0eb76"/>
+ <rect x="4" y="8" width="4" height="4" fill="#edd400"/>
+ <path d="m4 12v-4h4l-1 1h-2v2z" fill="#fdee76"/>
+ <rect x="8" y="8" width="4" height="4" fill="#3465a4"/>
+ <path d="m8 12v-4h4l-1 1h-2v2z" fill="#6f9dce"/>
 </svg>

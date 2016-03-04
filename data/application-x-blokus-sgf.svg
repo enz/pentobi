@@ -1,49 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="48" width="48" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<defs>
-<radialGradient id="f" gradientUnits="userSpaceOnUse" cy="24.107" cx="24.041" gradientTransform="matrix(1.003582 0 0 1.170784 -.1258289 -4.225075)" r="17.938">
-<stop stop-color="#fbfbfb" offset="0"/>
-<stop stop-color="#edeeeb" offset="1"/>
-</radialGradient>
-</defs>
-<rect stroke-linejoin="round" style="color:#000000" ry="1.1513" height="41" width="35" stroke="#555753" stroke-linecap="round" y="3.4987" x="6.5014" stroke-width="1.0001" display="block" fill="url(#f)"/>
-<rect stroke-linejoin="round" style="color:#000000" rx=".14905" ry=".14905" height="38.946" width="32.776" stroke="#FFF" stroke-linecap="round" y="4.5839" x="7.6661" display="block" fill="none"/>
-<g id="e" transform="matrix(.8571428 0 0 .8571428 24.85714 -.8571424)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="15" x="-15" fill="#c00"/>
-<path fill="#a40000" d="m-15 22 0.000001-1.1667h5.8333v-5.8333h1.1667v7z"/>
-<path fill="#ef2929" d="m-15 22v-7h7l-1.1667 1.1667-4.7133-0.047 0.04667 4.7133z"/>
-</g>
-<g id="d" transform="matrix(.8571428 0 0 .8571428 24.85714 12)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7" x="-15" fill="#edd400"/>
-<path d="m-15 14 0.000001-1.1667h5.8333v-5.8333l1.1667 0.0003v7z" fill="#c4a000"/>
-<path d="m-15 14v-7h7l-1.1667 1.1667h-4.6667v4.6667z" fill="#fce94f"/>
-</g>
-<g id="c" transform="matrix(.8571428 0 0 .8571428 36.81356 5.956416)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949 14.051v-1h6v-6h1v7z" fill="#4e9a06"/>
-<path d="m-14.949 14.051v-7h7l-1 1h-5v5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="1.1667" ry="0" height="7" width="7" y="7.0508" x="-14.949" fill="#73d216"/>
-<path d="m-14.949 14.051v-1.1667h5.8333v-5.8333l1.1667-2e-7v7z" fill="#4e9a06"/>
-<path d="m-14.949 14.051v-7h7l-1.1667 1.1667h-4.6667v4.6667z" fill="#8ae234"/>
-</g>
-<g id="b" transform="matrix(.8571428 0 0 .8571428 30.87167 17.97094)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#73d216"/>
-<path d="m-15.017 14.034v-1h6v-6h1v7z" fill="#4e9a06"/>
-<path d="m-15.017 14.034v-7h7l-1 1h-5v5z" fill="#8ae234"/>
-<rect opacity="0.99" fill-rule="evenodd" rx="0.92959" ry="0" height="7" width="7" y="7.0339" x="-15.017" fill="#3465a4"/>
-<path d="m-15.017 14.034v-1.1667h5.8333v-5.8333l1.1667-3e-7v7z" fill="#204a87"/>
-<path d="m-15.017 14.034v-7h7l-1.1667 1.1667h-4.6667v4.6667z" fill="#558bc5"/>
-</g>
-<use xlink:href="#e" transform="translate(6.000002)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#e" transform="translate(6.000002 6.000001)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#e" transform="translate(12 6.000001)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#c" transform="translate(5.999868)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#c" transform="translate(5.999868 5.99987)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#c" transform="translate(5.999868 11.99987)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#d" transform="translate(0 5.999744)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#d" transform="translate(2e-6,11.999744)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#d" transform="translate(6.000002 11.99974)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(6.000044)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(6.000044 5.999918)" height="100%" width="100%" y="0" x="0"/>
-<use xlink:href="#b" transform="translate(12.00004 5.999918)" height="100%" width="100%" y="0" x="0"/>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="48" width="48" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <rect x="6.5" y="3.5" width="35" height="41" stroke-linejoin="round" ry="1.15" stroke="#555753" fill="#fff"/>
+ <rect x="8" y="5" width="32" height="38" fill="#eeeeec"/>
+ <g id="a">
+ <rect height="6" width="6" x="24" y="12" fill="#73d216"/>
+ <path d="m24 18h6v-6l-1 1v4h-4z" fill="#4e9a06"/>
+ <path d="m24 18v-6h6l-1 1h-4v4z" fill="#8ae234"/>
+ </g>
+ <use xlink:href="#a" x="6"/>
+ <use xlink:href="#a" x="6" y="6"/>
+ <use xlink:href="#a" x="6" y="12"/>
+ <g id="b">
+ <rect height="6" width="6" x="18" y="24" fill="#3465a4"/>
+ <path d="m18 30h6v-6l-1 1v4h-4z" fill="#204a87"/>
+ <path d="m18 30v-6h6l-1 1h-4v4z" fill="#558bc5"/>
+ </g>
+ <use xlink:href="#b" x="6"/>
+ <use xlink:href="#b" x="6" y="6"/>
+ <use xlink:href="#b" x="12" y="6"/>
+ <g id="c">
+ <rect height="6" width="6" x="12" y="18" fill="#edd400"/>
+ <path d="m12 24h6v-6l-1 1v4h-4z" fill="#c4a000"/>
+ <path d="m12 24v-6h6l-1 1h-4v4z" fill="#fce94f"/>
+ </g>
+ <use xlink:href="#c" y="6"/>
+ <use xlink:href="#c" y="12"/>
+ <use xlink:href="#c" x="6" y="12"/>
+ <g id="d">
+ <rect height="6" width="6" x="12" y="12" fill="#C00"/>
+ <path d="m12 18h6v-6l-1 1v4h-4z" fill="#a40000"/>
+ <path d="m12 18v-6h6l-1 1h-4v4z" fill="#ef2929"/>
+ </g>
+ <use xlink:href="#d" x="6"/>
+ <use xlink:href="#d" x="6" y="6"/>
+ <use xlink:href="#d" x="12" y="6"/>
 </svg>
