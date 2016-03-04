@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="22" width="22" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<defs>
-<linearGradient id="h" y2="30" gradientUnits="userSpaceOnUse" x2="15" y1="10" x1="10">
-<stop stop-color="#dddfe2" offset="0"/>
-<stop offset="1"/>
-</linearGradient>
-<linearGradient id="g" y2="30" gradientUnits="userSpaceOnUse" x2="15" y1="10" x1="10">
-<stop offset="0"/>
-<stop stop-color="#8c8f89" offset="1"/>
-</linearGradient>
-<linearGradient id="f" y2="31.977" gradientUnits="userSpaceOnUse" x2="16" y1="10" x1="10">
-<stop stop-color="#f0f1ef" offset="0"/>
-<stop stop-color="#aab2a2" offset="1"/>
-</linearGradient>
-<linearGradient id="e" y2="31.977" gradientUnits="userSpaceOnUse" x2="16" y1="10" x1="10">
-<stop stop-color="#676a64" offset="0"/>
-<stop stop-color="#1b1c1b" offset="1"/>
-</linearGradient>
-</defs>
-<g transform="translate(0,-10)">
-<rect stroke-linejoin="round" ry="2.3125" height="19" width="21" stroke="url(#e)" stroke-linecap="round" y="10.5" x=".5" fill="url(#f)"/>
-<rect stroke-linejoin="round" ry=".5" height="12" width="15" stroke="url(#g)" stroke-linecap="round" y="13.5" x="3.5" fill="url(#h)"/>
-<path stroke="#6e706c" d="m3 27.5h16" fill="none"/>
-</g>
-<path d="m18 6.42v8.58h-14v-3.8306c3.9229-1.8633 9.0577-3.9349 14-4.749z" fill-opacity=".23"/>
-<rect stroke-linejoin="round" ry="0" height="11" width="11" stroke="#2b2d2b" stroke-linecap="round" y="10.5" x="10.5" fill="none"/>
-<rect height="5" width="5" y="11" x="11" fill="#e63232"/>
-<rect height="5" width="5" y="11" x="16" fill="#8ad83e"/>
-<rect height="5" width="5" y="16" x="11" fill="#e3cc09"/>
-<rect height="5" width="5" y="16" x="16" fill="#4b7bb9"/>
+ <defs>
+  <linearGradient id="a" y2="20" gradientUnits="userSpaceOnUse" y1="0" x2="15" x1="10">
+   <stop stop-color="#dddfe2" offset="0"/>
+   <stop offset="1"/>
+  </linearGradient>
+ </defs>
+ <rect stroke-linejoin="round" ry="2.3" height="19" width="21" stroke="#555753" y=".5" x=".5" fill="#dfe2dc"/>
+ <rect stroke-linejoin="round" ry=".5" height="12" width="15" stroke="#2e3436" y="3.5" x="3.5" fill="url(#a)"/>
+ <path stroke="#555753" d="m3 17.5h16" fill="none"/>
+ <path d="m18 6.5v8.5h-14v-4c4-2 9-4 14-4.75z" fill-opacity=".2"/>
+ <rect stroke-linejoin="round" height="11" width="11" stroke="#2b2d2b" y="10.5" x="10.5" fill="none"/>
+ <rect height="5" width="5" y="11" x="11" fill="#e63232"/>
+ <rect height="5" width="5" y="11" x="16" fill="#8ad83e"/>
+ <rect height="5" width="5" y="16" x="11" fill="#e3cc09"/>
+ <rect height="5" width="5" y="16" x="16" fill="#4b7bb9"/>
 </svg>
