@@ -89,12 +89,17 @@ using libpentobi_mcts::Search;
 
 namespace {
 
+/** Create a button for manipulating piece orientation. */
 QToolButton* createOBoxToolButton(QAction* action)
 {
     auto button = new QToolButton;
     button->setDefaultAction(action);
     button->setAutoRaise(true);
+    // No focus, there are faster keyboard shortcuts for manipulating pieces
     button->setFocusPolicy(Qt::NoFocus);
+    // For some reason, toolbuttons are very small in Ubuntu Unity if outside
+    // a toolbar (tested with Ubuntu 15.10)
+    button->setMinimumSize(QSize(32, 32));
     return button;
 }
 
