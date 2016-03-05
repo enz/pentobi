@@ -110,7 +110,7 @@ GtpConnection::GtpConnection(const string& command)
         auto const argv = new char*[args.size() + 1];
         for (size_t i = 0; i < args.size(); ++i)
         {
-            argv[i] = new char[args[i].size()];
+            argv[i] = new char[args[i].size() + 1];
             strcpy(argv[i], args[i].c_str());
         }
         argv[args.size()] = nullptr;
@@ -119,9 +119,7 @@ GtpConnection::GtpConnection(const string& command)
     }
 }
 
-GtpConnection::~GtpConnection()
-{
-}
+GtpConnection::~GtpConnection() = default;
 
 void GtpConnection::enable_log(const string& prefix)
 {
