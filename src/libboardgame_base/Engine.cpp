@@ -11,7 +11,6 @@
 #include "Engine.h"
 
 #include "libboardgame_sys/CpuTime.h"
-#include "libboardgame_util/Abort.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
 
@@ -19,7 +18,6 @@ namespace libboardgame_base {
 
 using namespace std;
 using libboardgame_gtp::Failure;
-using libboardgame_util::clear_abort;
 using libboardgame_util::flush_log;
 using libboardgame_util::RandomGenerator;
 
@@ -51,7 +49,6 @@ void Engine::cmd_set_random_seed(const Arguments& args)
 
 void Engine::on_handle_cmd_begin()
 {
-    clear_abort();
     flush_log();
 }
 
