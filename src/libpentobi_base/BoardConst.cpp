@@ -42,9 +42,10 @@ Grid<array<ArrayList<Move, 40>, PrecompMoves::nu_adj_status>>
     g_full_move_table;
 
 
-bool is_reverse(const Point* begin1, const Point* begin2, unsigned size)
+bool is_reverse(MovePoints::const_iterator begin1, const Point* begin2, unsigned size)
 {
-    for (auto i = begin1, j = begin2 + size - 1; i != begin1 + size; ++i, --j)
+    auto j = begin2 + size - 1;
+    for (auto i = begin1; i != begin1 + size; ++i, --j)
         if (*i != *j)
             return false;
     return true;
