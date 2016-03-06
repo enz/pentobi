@@ -61,13 +61,13 @@ int main(int argc, char* argv[])
 {
     LogInitializer log_initializer;
     Q_INIT_RESOURCE(libpentobi_gui_resources);
-    Application app(argc, argv);
-    app.setOrganizationName("Pentobi");
-    app.setApplicationName("Pentobi");
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-    app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    Application app(argc, argv);
+    app.setOrganizationName("Pentobi");
+    app.setApplicationName("Pentobi");
     Q_INIT_RESOURCE(libpentobi_gui_resources_2x);
     try
     {
