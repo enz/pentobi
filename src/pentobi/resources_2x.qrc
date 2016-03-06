@@ -31,5 +31,7 @@
 <file>icons/pentobi-rated-game-16@2x.png</file>
 <file>icons/pentobi-rotate-left@2x.png</file>
 <file>icons/pentobi-rotate-right@2x.png</file>
+<file>icons/pentobi-undo@2x.png</file>
+<file>icons/pentobi-undo-16@2x.png</file>
 </qresource>
 </RCC>
