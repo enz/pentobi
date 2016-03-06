@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 
 #include <iostream>
+#include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QImageReader>
 #include <QImageWriter>
@@ -14,53 +15,33 @@
 
 int main(int argc, char* argv[])
 {
-    QCoreApplication app(argc, argv); // Initializes the locale subsystem
+    QCoreApplication app(argc, argv);
     try
     {
-        QString in, out;
-        bool createHdpi = false;
-        int nuArg = 0;
-        for (int i = 1; i < argc; ++i)
-        {
-            QString arg = QString::fromLocal8Bit(argv[i]);
-            if (arg == "--hdpi")
-            {
-                createHdpi = true;
-                continue;
-            }
-            else if (arg.startsWith('-'))
-                throw QString("Unknown option %1").arg(arg);
-            if (nuArg == 0)
-                in = arg;
-            else if (nuArg == 1)
-                out = arg;
-            ++nuArg;
-        }
-        if (nuArg != 2)
+        QCommandLineParser parser;
+        QCommandLineOption optionHdpi("hdpi");
+        parser.addOption(optionHdpi);
+        parser.process(app);
+        auto args = parser.positionalArguments();
+        if (args.size() != 2)
             throw QString("Need two arguments");
-
+        auto in = args.at(0);
+        auto out = args.at(1);
         QImageReader reader(in);
         QImage image = reader.read();
         if (image.isNull())
             throw QString("%1: %2").arg(in, reader.errorString());
-        QSize size = image.size();
-        if (createHdpi)
+        if (parser.isSet(optionHdpi))
         {
             QImageReader reader(in);
-            reader.setScaledSize(2 * size);
-            QImage image = reader.read();
+            reader.setScaledSize(2 * image.size());
+            image = reader.read();
             if (image.isNull())
                 throw QString("%1: %2").arg(in, reader.errorString());
-            QImageWriter writer(out);
-            if (! writer.write(image))
-                throw QString("%1: %2").arg(out, writer.errorString());
         }
-        else
-        {
-            QImageWriter writer(out);
-            if (! writer.write(image))
-                throw QString("%1: %2").arg(out, writer.errorString());
-        }
+        QImageWriter writer(out);
+        if (! writer.write(image))
+            throw QString("%1: %2").arg(out, writer.errorString());
     }
     catch (const QString& msg)
     {
