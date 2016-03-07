@@ -16,7 +16,7 @@ class Timer
 {
 public:
     /** Constructor without time source.
-        If constructed without time source, the timer cannot be used befor
+        If constructed without time source, the timer cannot be used before
         reset(TimeSource&) was called. */
     Timer() = default;
 
