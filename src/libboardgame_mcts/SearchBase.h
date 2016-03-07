@@ -1119,7 +1119,7 @@ bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
     LIBBOARDGAME_UNUSED(time);
 #endif
     Timer timer(time_source);
-    m_tmp_tree.clear(m_tree.get_root().get_value());
+    m_tmp_tree.clear();
     m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(), m_tree.get_root(),
                         prune_min_count);
     int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
@@ -1211,7 +1211,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         else
         {
             Timer timer(time_source);
-            m_tmp_tree.clear(SearchParamConst::tie_value);
+            m_tmp_tree.clear();
             auto node = find_node(m_tree, m_followup_sequence);
             if (node)
             {
@@ -1243,7 +1243,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         }
     }
     if (clear_tree)
-        m_tree.clear(SearchParamConst::tie_value);
+        m_tree.clear();
 
     m_timer.reset(time_source);
     m_time_source = &time_source;

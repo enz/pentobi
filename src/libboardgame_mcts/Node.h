@@ -47,6 +47,11 @@ public:
         inner nodes or tie value for the root node). */
     void init(const Move& mv, Float value, Float count);
 
+    /** Initializes the root node.
+        Does not initialize value and value count as they are not used for the
+        root. */
+    void init_root();
+
     const Move& get_move() const;
 
     /** Number of simulations that went through this node. */
@@ -230,6 +235,16 @@ void Node<M, F, MT>::init(const Move& mv, Float value, Float count)
     m_move = mv;
     m_value_count.store(count, memory_order_relaxed);
     m_value.store(value, memory_order_relaxed);
+    m_visit_count.store(0, memory_order_relaxed);
+    m_nu_children.store(0, memory_order_relaxed);
+}
+
+template<typename M, typename F, bool MT>
+void Node<M, F, MT>::init_root()
+{
+#if LIBBOARDGAME_DEBUG
+    m_move = Move::null();
+#endif
     m_visit_count.store(0, memory_order_relaxed);
     m_nu_children.store(0, memory_order_relaxed);
 }

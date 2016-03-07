@@ -131,9 +131,8 @@ public:
 
     ~Tree();
 
-    /** Remove all nodes and initialize the root node with count 0 and a given
-        value. */
-    void clear(Float root_value);
+    /** Remove all nodes but the root node. */
+    void clear();
 
     const Node& get_root() const;
 
@@ -300,7 +299,7 @@ Tree<N>::Tree(size_t memory, unsigned nu_threads)
         thread_storage.begin = m_nodes.get() + i * m_nodes_per_thread;
         thread_storage.end = thread_storage.begin + m_nodes_per_thread;
     }
-    clear(0);
+    clear();
 }
 
 template<typename N>
@@ -319,12 +318,12 @@ inline void Tree<N>::add_value(const Node& node, Float v, Float weight)
 }
 
 template<typename N>
-void Tree<N>::clear(Float root_value)
+void Tree<N>::clear()
 {
     m_thread_storage[0].next = m_thread_storage[0].begin + 1;
     for (unsigned i = 1; i < m_nu_threads; ++i)
         m_thread_storage[i].next = m_thread_storage[i].begin;
-    m_nodes[0].init(Move::null(), root_value, 0);
+    m_nodes[0].init_root();
 }
 
 template<typename N>
