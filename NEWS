@@ -16,6 +16,8 @@ Desktop version:
 * High-DPI scaling is now automatically enabled if compiled with Qt 5.6.
 * Clicking on a piece on the board while holding the shift key down will
   now go to the position when the piece was played.
+* Setting Move Marking to Last now only marks the last move played even
+  if the computer played several moves in a row.
 
 Android version
 

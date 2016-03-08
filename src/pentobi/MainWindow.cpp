@@ -446,9 +446,8 @@ void MainWindow::cancelThread()
 
 void MainWindow::checkComputerMove()
 {
-    if (! m_autoPlay || ! isComputerToPlay() || m_bd.is_game_over())
-        m_lastComputerMovesBegin = 0;
-    else if (! m_isGenMoveRunning)
+    if (m_autoPlay && isComputerToPlay() && ! m_bd.is_game_over()
+            && ! m_isGenMoveRunning)
         genMove();
 }
 
@@ -1821,12 +1820,6 @@ void MainWindow::genMove(bool playSingleMove)
                           m_genMoveId, playSingleMove);
     m_genMoveWatcher.setFuture(future);
     m_isGenMoveRunning = true;
-    unsigned nuMoves = m_bd.get_nu_moves();
-    if (m_lastComputerMovesBegin == 0 && ! computerPlaysAll())
-    {
-        m_lastComputerMovesBegin = nuMoves + 1;
-        m_lastComputerMovesEnd = m_lastComputerMovesBegin;
-    }
 }
 
 void MainWindow::genMoveFinished()
@@ -1859,9 +1852,6 @@ void MainWindow::genMoveFinished()
         return;
     }
     play(c, mv);
-    m_lastComputerMovesEnd = m_bd.get_nu_moves();
-    if (computerPlaysAll())
-        m_lastComputerMovesBegin = m_lastComputerMovesEnd;
     // Call updateWindow() before checkComputerMove() because checkComputerMove
     // resets m_lastComputerMovesBegin if computer doesn't play current color
     // and updateWindow needs m_lastComputerMovesBegin
@@ -1956,7 +1946,6 @@ void MainWindow::gotoNode(const SgfNode& node)
         showInvalidFile(m_file, e);
         return;
     }
-    m_lastComputerMovesBegin = 0;
     if (m_analyzeGameWindow && m_analyzeGameWindow->isVisible())
         m_analyzeGameWindow->analyzeGameWidget
             ->setCurrentPosition(m_game, node);
@@ -2040,7 +2029,6 @@ void MainWindow::initGame()
         m_autoPlay = false;
     }
     leaveSetupMode();
-    m_lastComputerMovesBegin = 0;
     m_gameFinished = false;
     m_isAutoSaveLoaded = false;
     setFile("");
@@ -2334,7 +2322,6 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     m_computerColors.fill(false);
     m_autoPlay = false;
     leaveSetupMode();
-    m_lastComputerMovesBegin = 0;
     initVariantActions();
     restoreLevel(m_bd.get_variant());
     updateWindow(true);
@@ -2407,7 +2394,6 @@ void MainWindow::play()
         settings.setValue("computer_color_none", false);
     }
     m_autoPlay = true;
-    m_lastComputerMovesBegin = 0;
     genMove();
 }
 
@@ -2431,7 +2417,6 @@ void MainWindow::playSingleMove()
     cancelThread();
     leaveSetupMode();
     m_autoPlay = false;
-    m_lastComputerMovesBegin = 0;
     genMove(true);
 }
 
@@ -3124,7 +3109,6 @@ void MainWindow::truncate()
             return;
     }
     m_game.truncate();
-    m_lastComputerMovesBegin = 0;
     m_autoPlay = false;
     m_gameFinished = false;
     updateWindow(true);
@@ -3170,7 +3154,6 @@ void MainWindow::undo()
         return;
     cancelThread();
     m_game.undo();
-    m_lastComputerMovesBegin = 0;
     m_autoPlay = false;
     m_gameFinished = false;
     updateWindow(true);
@@ -3329,8 +3312,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     QSettings settings;
     auto markVariations = settings.value("show_variations", true).toBool();
     unsigned nuMoves = m_bd.get_nu_moves();
-    unsigned markMovesBegin = 0;
-    unsigned markMovesEnd = 0;
+    unsigned markMovesBegin, markMovesEnd;
     if (m_actionMoveMarkingAllNumber->isChecked())
     {
         markMovesBegin = 1;
@@ -3339,16 +3321,13 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     else if (m_actionMoveMarkingLastNumber->isChecked()
              || m_actionMoveMarkingLastDot->isChecked())
     {
-        if (m_lastComputerMovesBegin != 0)
-        {
-            markMovesBegin = m_lastComputerMovesBegin;
-            markMovesEnd = m_lastComputerMovesEnd;
-        }
-        else
-        {
-            markMovesBegin = nuMoves;
-            markMovesEnd = nuMoves;
-        }
+        markMovesBegin = nuMoves;
+        markMovesEnd = nuMoves;
+    }
+    else
+    {
+        markMovesBegin = 0;
+        markMovesEnd = 0;
     }
     gui_board_util::setMarkup(*m_guiBoard, m_game, markMovesBegin,
                               markMovesEnd, markVariations,

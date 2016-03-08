@@ -249,21 +249,6 @@ private:
         Used to ignore finished events from canceled move generations. */
     unsigned m_genMoveId = 0;
 
-    /** Beginning of move number range of last moves played by the computer
-        without pause.
-        Used to mark all last moves played by the computer if it plays several
-        moves in a row because the other players have no more moves. Otherwise,
-        it would be hard to see what the last moves were if the computer plays
-        quickly. A value of 0 means that there are no last moves played by
-        the computer to be marked. */
-    unsigned m_lastComputerMovesBegin = 0;
-
-    /** End (inclusive) of move number range of last moves played by the
-        computer without pause.
-        Only defined if m_lastComputerMovesBegin is not 0.
-        @see m_lastComputerMovesBegin */
-    unsigned m_lastComputerMovesEnd = 0;
-
     unsigned m_maxLevel;
 
     /** Current playing level of m_player.
