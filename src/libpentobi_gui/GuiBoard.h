@@ -53,6 +53,8 @@ public:
 
     void showMove(Color c, Move mv);
 
+    int heightForWidth(int width) const override;
+
     void copyFromBoard(const Board& bd);
 
     void setLabel(Point p, const QString& text);
@@ -83,7 +85,7 @@ public slots:
 signals:
     void play(Color color, Move mv);
 
-    void pointClicked(Point p, Qt::KeyboardModifiers modifiers);
+    void pointClicked(Point p);
 
 protected:
     void changeEvent(QEvent* event) override;

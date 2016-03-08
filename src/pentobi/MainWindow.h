@@ -150,7 +150,7 @@ public slots:
 
     void playSingleMove();
 
-    void pointClicked(Point p, Qt::KeyboardModifiers modifiers);
+    void pointClicked(Point p);
 
     void previousPiece();
 

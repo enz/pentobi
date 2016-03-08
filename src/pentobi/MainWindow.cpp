@@ -205,8 +205,8 @@ MainWindow::MainWindow(Variant variant, const QString& initialFile,
             SLOT(genMoveFinished()));
     connect(m_guiBoard, SIGNAL(play(Color, Move)),
             SLOT(placePiece(Color, Move)));
-    connect(m_guiBoard, SIGNAL(pointClicked(Point, Qt::KeyboardModifiers)),
-            SLOT(pointClicked(Point, Qt::KeyboardModifiers)));
+    connect(m_guiBoard, SIGNAL(pointClicked(Point)),
+            SLOT(pointClicked(Point)));
     connect(m_actionMovePieceLeft, SIGNAL(triggered()),
             m_guiBoard, SLOT(movePieceLeft()));
     connect(m_actionMovePieceRight, SIGNAL(triggered()),
@@ -2420,34 +2420,22 @@ void MainWindow::playSingleMove()
     genMove(true);
 }
 
-void MainWindow::pointClicked(Point p, Qt::KeyboardModifiers modifiers)
+void MainWindow::pointClicked(Point p)
 {
+    // If a piece on the board is clicked on in setup mode, remove it and make
+    // it the selected piece without changing its orientation.
+    if (! m_actionSetupMode->isChecked())
+        return;
     PointState s = m_bd.get_point_state(p);
     if (s.is_empty())
         return;
     Color c = s.to_color();
     Move mv = m_bd.get_move_at(p);
-    if (m_actionSetupMode->isChecked())
-    {
-        // If a piece on the board is clicked on in setup mode, remove it and
-        // make it the selected piece without changing its orientation
-        m_game.remove_setup(c, mv);
-        setSetupPlayer();
-        updateWindow(true);
-        selectPiece(c, m_bd.get_move_piece(mv), m_bd.find_transform(mv));
-        m_guiBoard->setSelectedPiecePoints(mv);
-        return;
-    }
-    // If a piece on the board is clicked on with the shift key hold down and
-    // no piece is selected, go to the position when the piece was played
-    if (modifiers & Qt::ShiftModifier
-            && m_guiBoard->getSelectedPiece().is_null())
-    {
-        auto node = &m_game.get_current();
-        while (node && m_game.get_tree().get_move(*node) != ColorMove(c, mv))
-            node = node->get_parent_or_null();
-        gotoNode(node);
-    }
+    m_game.remove_setup(c, mv);
+    setSetupPlayer();
+    updateWindow(true);
+    selectPiece(c, m_bd.get_move_piece(mv), m_bd.find_transform(mv));
+    m_guiBoard->setSelectedPiecePoints(mv);
 }
 
 void MainWindow::previousPiece()
