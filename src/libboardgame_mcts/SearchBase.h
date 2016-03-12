@@ -232,27 +232,6 @@ public:
     /** @name Parameters */
     /** @{ */
 
-    /** Interval in which a full move selection is performed in the in-tree
-        phase at high parent counts.
-        Takes advantage of the fact that at high parent counts the selected
-        move is almost always the same as at the last visit of the node,
-        so it will speed up the in-tree phase if we do a full move selection
-        only at a certain intervals and play the move from the sequence of
-        the last simulation otherwise.
-        The default value is 1, which means that full move selection is always
-        used.
-        @see set_full_select_min. */
-    void set_full_select_interval(unsigned n);
-
-    unsigned get_full_select_interval() const;
-
-    /** The minimum node count to do a full move selection only in a certain
-        interval.
-        See set_full_select_interval(). */
-    void set_full_select_min(Float n);
-
-    Float get_full_select_min() const;
-
     /** Minimum count of a node to be expanded. */
     void set_expand_threshold(Float n);
 
@@ -403,8 +382,6 @@ private:
 
         unsigned thread_id;
 
-        unsigned full_select_counter;
-
         /** Was the search in this thread terminated because the search tree
             was full? */
         bool is_out_of_mem;
@@ -412,11 +389,6 @@ private:
         Simulation simulation;
 
         StatisticsExt<> stat_len;
-
-        /** Statistics about in-tree length where the full child select was
-            skipped.
-            @see SearchBase::set_full_select_interval() */
-        StatisticsExt<> stat_fs_len;
 
         StatisticsExt<> stat_in_tree_len;
 
@@ -499,12 +471,6 @@ private:
 
 
     unsigned m_nu_threads;
-
-    /** See set_full_select_interval(). */
-    unsigned m_full_select_interval = 1;
-
-    /** See set_full_select_min(). */
-    Float m_full_select_min = numeric_limits<Float>::max();
 
     Float m_expand_threshold = 0;
 
@@ -893,18 +859,6 @@ inline auto SearchBase<S, M, R>::get_expand_threshold_inc() const -> Float
 }
 
 template<class S, class M, class R>
-inline unsigned SearchBase<S, M, R>::get_full_select_interval() const
-{
-    return m_full_select_interval;
-}
-
-template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::get_full_select_min() const -> Float
-{
-    return m_full_select_min;
-}
-
-template<class S, class M, class R>
 inline size_t SearchBase<S, M, R>::get_nu_simulations() const
 {
     return m_nu_simulations;
@@ -1020,35 +974,11 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
 {
     auto& state = *thread_state.state;
     auto& simulation = thread_state.simulation;
+    simulation.nodes.resize(1);
+    simulation.moves.clear();
     auto& root = m_tree.get_root();
     auto node = &root;
     Float expand_threshold = m_expand_threshold;
-    if (thread_state.full_select_counter > 0)
-    {
-        // Don't do a full move select but play same sequence as last time
-        // as long as the node count is above m_full_select_min.
-        --thread_state.full_select_counter;
-        unsigned depth = 0;
-        while (node->get_visit_count() > m_full_select_min
-               && depth < simulation.nodes.size() - 1)
-        {
-            ++depth;
-            node = simulation.nodes[depth];
-            if (multithread && SearchParamConst::virtual_loss)
-                m_tree.add_value(*node, 0);
-            state.play_in_tree(node->get_move());
-            expand_threshold += m_expand_threshold_inc;
-        }
-        simulation.nodes.resize(depth + 1);
-        simulation.moves.resize(depth);
-    }
-    else
-    {
-        simulation.nodes.resize(1);
-        simulation.moves.clear();
-        thread_state.full_select_counter = m_full_select_interval;
-    }
-    thread_state.stat_fs_len.add(double(simulation.moves.size()));
     while (node->has_children())
     {
         node = select_child(*node);
@@ -1099,7 +1029,6 @@ string SearchBase<S, M, R>::get_info() const
       << (double(m_nu_simulations) / m_last_time)
       << ", Len: " << thread_state.stat_len.to_string(true, 1, true)
       << "\nDp: " << thread_state.stat_in_tree_len.to_string(true, 1, true)
-      << ", FS: " << thread_state.stat_fs_len.to_string(true, 1, true)
       << "\n";
     return s.str();
 }
@@ -1252,10 +1181,8 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     for (auto& i : m_threads)
     {
         auto& thread_state = i->thread_state;
-        thread_state.full_select_counter = 0;
         thread_state.stat_len.clear();
         thread_state.stat_in_tree_len.clear();
-        thread_state.stat_fs_len.clear();
         thread_state.state->start_search();
     }
     m_max_count = max_count;
@@ -1445,18 +1372,6 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::set_expand_threshold_inc(Float n)
 {
     m_expand_threshold_inc = n;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_full_select_interval(unsigned n)
-{
-    m_full_select_interval = n;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_full_select_min(Float n)
-{
-    m_full_select_min = n;
 }
 
 template<class S, class M, class R>
