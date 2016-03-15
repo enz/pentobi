@@ -836,8 +836,8 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
     auto thread_id = thread_state.thread_id;
     typename Tree::NodeExpander expander(thread_id, m_tree,
                                          SearchParamConst::child_min_count);
-    auto init_val = m_root_val[state.get_player()].get_mean();
-    if (state.gen_children(expander, init_val))
+    auto root_val = m_root_val[state.get_player()].get_mean();
+    if (state.gen_children(expander, root_val))
     {
         expander.link_children(m_tree, node);
         best_child = expander.get_best_child();

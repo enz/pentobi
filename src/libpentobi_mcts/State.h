@@ -84,7 +84,7 @@ public:
 
     void start_simulation(size_t n);
 
-    bool gen_children(Tree::NodeExpander& expander, Float init_val);
+    bool gen_children(Tree::NodeExpander& expander, Float root_val);
 
     void start_playout() { };
 

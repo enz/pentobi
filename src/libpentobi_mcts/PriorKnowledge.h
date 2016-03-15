@@ -49,7 +49,7 @@ public:
     template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     bool gen_children(const Board& bd, const MoveList& moves,
                       bool is_symmetry_broken, Tree::NodeExpander& expander,
-                      Float init_val);
+                      Float root_val);
 
 private:
     struct MoveFeatures
@@ -277,7 +277,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
 bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                                   bool is_symmetry_broken,
-                                  Tree::NodeExpander& expander, Float init_val)
+                                  Tree::NodeExpander& expander, Float root_val)
 {
     if (moves.empty())
     {
@@ -286,7 +286,7 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         // for the count to avoid an assertion.
         if (! expander.check_capacity(1))
             return false;
-        expander.add_child(Move::null(), init_val, 3);
+        expander.add_child(Move::null(), root_val, 3);
         return true;
     }
     init_local<MAX_SIZE, MAX_ADJ_ATTACH>(bd);
@@ -350,10 +350,10 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         Float heuristic = m_max_heuristic - features.heuristic;
         heuristic = 0.1f + 0.9f * fast_exp(-0.6f * heuristic);
 
-        // Initialize value from heuristic and init_val, each with a count
+        // Initialize value from heuristic and root_val, each with a count
         // of 1.5. If this is changed, SearchParamConst::child_min_count
         // should be updated.
-        Float value = 1.5f * (heuristic + init_val);
+        Float value = 1.5f * (heuristic + root_val);
         Float count = 3;
 
         // If a symmetric draw is still possible, encourage exploring a move

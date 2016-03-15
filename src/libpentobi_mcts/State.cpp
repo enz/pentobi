@@ -355,7 +355,7 @@ Point State::find_best_starting_point(Color c) const
     return best;
 }
 
-bool State::gen_children(Tree::NodeExpander& expander, Float init_val)
+bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
 {
     if (m_nu_passes == m_nu_colors)
         return true;
@@ -365,14 +365,14 @@ bool State::gen_children(Tree::NodeExpander& expander, Float init_val)
         init_moves_without_gamma<5>(to_play);
         return m_prior_knowledge.gen_children<5, 16>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
-                                                     expander, init_val);
+                                                     expander, root_val);
     }
     else if (m_max_piece_size == 6)
     {
         init_moves_without_gamma<6>(to_play);
         return m_prior_knowledge.gen_children<6, 22>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
-                                                     expander, init_val);
+                                                     expander, root_val);
     }
     else
     {
@@ -380,7 +380,7 @@ bool State::gen_children(Tree::NodeExpander& expander, Float init_val)
         init_moves_without_gamma<7>(to_play);
         return m_prior_knowledge.gen_children<7, 12>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
-                                                     expander, init_val);
+                                                     expander, root_val);
     }
 }
 
