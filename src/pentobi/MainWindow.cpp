@@ -1324,7 +1324,7 @@ QLayout* MainWindow::createRightPanel()
     auto layout = new QVBoxLayout;
     layout->addLayout(createOrientationSelector(), 20);
     m_scoreDisplay = new ScoreDisplay;
-    layout->addWidget(m_scoreDisplay, 6);
+    layout->addWidget(m_scoreDisplay, 5);
     auto pieceSelectorLayout = new SameHeightLayout;
     layout->addLayout(pieceSelectorLayout, 80);
     for (Color c : Color::Range(Color::range))
