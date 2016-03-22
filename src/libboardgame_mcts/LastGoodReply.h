@@ -142,10 +142,8 @@ inline void LastGoodReply<M, P, S, MT>::store(PlayerInt player, Move last,
                                               Move second_last, Move reply)
 {
     auto reply_int = reply.to_int();
-    {
-        auto index = get_index(last, second_last);
-        m_lgr2[player][index].store(reply_int, memory_order_relaxed);
-    }
+    auto index = get_index(last, second_last);
+    m_lgr2[player][index].store(reply_int, memory_order_relaxed);
     m_lgr1[player][last.to_int()].store(reply_int, memory_order_relaxed);
 }
 
