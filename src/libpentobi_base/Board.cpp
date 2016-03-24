@@ -172,9 +172,14 @@ Color Board::get_effective_to_play(Color c) const
 
 void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 {
+    bool break_ties = (m_piece_set == PieceSet::callisto);
     array<ScoreType, Color::range> all_scores;
     for (Color::IntType i = 0; i < Color::range; ++i)
+    {
         all_scores[i] = get_score(Color(i));
+        if (break_ties)
+            all_scores[i] += i * 0.0001f;
+    }
     auto score = all_scores[c.to_int()];
     sort(all_scores.begin(), all_scores.begin() + m_nu_players,
          greater<ScoreType>());
