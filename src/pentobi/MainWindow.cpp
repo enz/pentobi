@@ -1869,7 +1869,7 @@ QString MainWindow::getLastDir()
 {
     QSettings settings;
     auto dir = settings.value("last_dir", "").toString();
-    if (dir.isEmpty() || ! QFileInfo(dir).exists())
+    if (dir.isEmpty() || ! QFileInfo::exists(dir))
         dir = QStandardPaths::writableLocation(
                                           QStandardPaths::DocumentsLocation);
     return dir;
@@ -2659,13 +2659,13 @@ void MainWindow::saveAs()
         file = getLastDir();
         file.append(QDir::separator());
         file.append(tr("Untitled Game.blksgf"));
-        if (QFileInfo(file).exists())
+        if (QFileInfo::exists(file))
             for (unsigned i = 1; ; ++i)
             {
                 file = getLastDir();
                 file.append(QDir::separator());
                 file.append(tr("Untitled Game %1.blksgf").arg(i));
-                if (! QFileInfo(file).exists())
+                if (! QFileInfo::exists(file))
                     break;
             }
     }
@@ -3269,7 +3269,7 @@ void MainWindow::updateRecentFiles()
     QSettings settings;
     auto files = settings.value("recent_files").toStringList();
     for (int i = 0; i < files.size(); ++i)
-        if (! QFileInfo(files[i]).exists())
+        if (! QFileInfo::exists(files[i]))
         {
             files.removeAt(i);
             --i;

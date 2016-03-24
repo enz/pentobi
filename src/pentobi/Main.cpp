@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
         if (translationsLibPentobiGuiDir.isEmpty())
             translationsLibPentobiGuiDir = appDir + "/translations";
         QString overrideConfigFile = appDir + "/pentobi.conf";
-        if (QFileInfo(overrideConfigFile).exists())
+        if (QFileInfo::exists(overrideConfigFile))
         {
             QSettings settings(overrideConfigFile, QSettings::IniFormat);
             helpDir = settings.value("HelpDir", helpDir).toString();
