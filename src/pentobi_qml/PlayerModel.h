@@ -51,21 +51,22 @@ class PlayerModel
 
 public:
     /** Global variable to disable opening books. */
-    static bool no_book;
+    static bool noBook;
 
     /** Global variable to disable the minimum thinking time. */
-    static bool no_delay;
+    static bool noDelay;
 
     /** Global variable to set the number of threads the player is constructed
         with.
         The default value 0 means that the number of threads depends on the
         hardware. */
-    static unsigned nu_threads;
+    static unsigned nuThreads;
 
 
     explicit PlayerModel(QObject* parent = nullptr);
 
     ~PlayerModel();
+
 
     /** Start a move generation in a background thread.
         The state of the board model may not be changed until the move

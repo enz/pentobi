@@ -67,9 +67,9 @@ int main(int argc, char *argv[])
             libboardgame_util::disable_logging();
 #endif
         if (parser.isSet(optionNoBook))
-            PlayerModel::no_book = true;
+            PlayerModel::noBook = true;
         if (parser.isSet(optionNoDelay))
-            PlayerModel::no_delay = true;
+            PlayerModel::noDelay = true;
         bool ok;
         if (parser.isSet(optionSeed))
         {
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
             auto nuThreads = parser.value(optionThreads).toUInt(&ok);
             if (! ok)
                 throw runtime_error("--threads must be a positive number");
-            PlayerModel::nu_threads = nuThreads;
+            PlayerModel::nuThreads = nuThreads;
         }
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
         return app.exec();
