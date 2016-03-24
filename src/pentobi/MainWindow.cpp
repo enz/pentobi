@@ -2571,7 +2571,6 @@ void MainWindow::rememberFile(const QString& file)
     QString canonicalFilePath = QFileInfo(file).canonicalFilePath();
     if (! canonicalFilePath.isEmpty())
         canonicalFile = canonicalFilePath;
-    QFileInfo info(canonicalFile);
     QSettings settings;
     auto files = settings.value("recent_files").toStringList();
     files.removeAll(canonicalFile);
