@@ -12,10 +12,12 @@
 #include <config.h>
 #endif
 
+#include <string>
 #include <QWidget>
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/Color.h"
 
+using namespace std;
 using libboardgame_base::Transform;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Color;
@@ -75,6 +77,8 @@ private:
     qreal m_selectorWidth;
 
     qreal m_selectorHeight;
+
+    string m_pieceLayout;
 
 
     void filterCrossableJunctions(PiecePoints& points) const;

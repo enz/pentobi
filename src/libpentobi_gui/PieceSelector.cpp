@@ -10,14 +10,12 @@
 
 #include "PieceSelector.h"
 
-#include <algorithm>
 #include <QMouseEvent>
 #include <QPainter>
 #include "libboardgame_base/GeometryUtil.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libpentobi_gui/Util.h"
 
-using namespace std;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::trim;
@@ -32,7 +30,7 @@ using libpentobi_base::Variant;
 
 namespace {
 
-const string pieceLayoutCallisto =
+const char* pieceLayoutCallisto =
     " 1 . U U U . O O . O O . L L . L . Z . . Z . . I . I . 2"
     " . . U . U . O O . O O . L . . L . Z Z . Z Z . I . I . 2"
     " 1 . . . . . . . . . . . L . L L . . Z . . Z . I . I . ."
@@ -40,7 +38,7 @@ const string pieceLayoutCallisto =
     " 1 . .T5 . . W W . X X X .T4T4T4 .T4T4T4 . V . . V . . 2"
     " . . .T5 . W W . . . X . . .T4 . . .T4 . . V V . V V . .";
 
-const string pieceLayoutClassic =
+const char* pieceLayoutClassic =
     " 1 .Z4Z4 . .L4L4L4 . O O . P P .L5L5L5L5 .V5V5V5 . U U U . N . . ."
     " . . .Z4Z4 . . .L4 . O O . P P .L5 . . . .V5 . . . U . U . N N .I5"
     " 2 2 . . . .T4 . . . . . . P . . . . X . .V5 .Z5 . . . . . . N .I5"
@@ -48,7 +46,7 @@ const string pieceLayoutClassic =
     "V3 . .I3 . . . . . . . W W . F F . . X . . Y . . .Z5 . .T5 . . .I5"
     "V3V3 .I3 . .I4I4I4I4 . . W . . F F . . . Y Y Y Y . . .T5T5T5 . .I5";
 
-const string pieceLayoutJunior =
+const char* pieceLayoutJunior =
     "1 . 1 . V3V3. . L4L4L4. T4T4T4. . O O . O O . P P . . I5. I5. . L5L5"
     ". . . . V3. . . L4. . . . T4. . . O O . O O . P P . . I5. I5. . . L5"
     "2 . 2 . . . V3. . . . L4. . . T4. . . . . . . P . . . I5. I5. L5. L5"
@@ -56,7 +54,7 @@ const string pieceLayoutJunior =
     ". . . . . . . . . . . . . . . . . . Z4Z4. Z4Z4. P P . I5. I5. L5. . "
     "I3I3I3. I3I3I3. I4I4I4I4. I4I4I4I4. Z4. . . Z4. P P . . . . . L5L5. ";
 
-const string pieceLayoutTrigon =
+const char* pieceLayoutTrigon =
     "L5L5 . . F F F F . .L6L6 . . O O O . . X X X . . .A6A6 . . G G . G . .C4C4 . . Y Y Y Y"
     "L5L5 . . F . F . . .L6L6 . . O O O . . X X X . .A6A6A6A6 . . G G G . .C4C4 . . Y Y . ."
     " .L5 . . . . . . S . .L6L6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2"
@@ -65,11 +63,11 @@ const string pieceLayoutTrigon =
     "C5C5C5 . . . . V V V V . .P6P6P6P6P6 . . .A4A4A4 . .I6I6 . .I3I3I3 . . 1 . . .I4I4I4I4";
 
 // To increase the clickable area and to ensure that the pieces can be found
-// in the string with a flood-filling algorithm, the nexos pieces also include
-// some crossable junction points that are not part of the piece definition
-// (they will be filtered out before finding the piece). But the number of
-// points per piece must be at most PiecePoints::max_size.
-const string pieceLayoutNexos =
+// in the string with flood filling, the Nexos pieces also include some
+// crossable junction points that are not part of the piece definition(they
+// will be filtered out before finding the piece). But the number of points per
+// piece must be at most PiecePoints::max_size.
+const char* pieceLayoutNexos =
     " . . F F F F F . . . O O O .U4U4U4U4U4 . . . . N N N N . . . . H H H . .U3 .U3 . . .V2V2V2"
     "I4 . . . F . F . Y . O . O .U4 . . .U4 .T4 . . . . . N . . . . . H . . .U3 .U3 . . . . .V2"
     "I4 . . . . . . . Y . . O O . . . . . . .T4T4T4T4 . . N N . . . . H H . .U3U3U3 . . . . .V2"
@@ -151,32 +149,31 @@ void PieceSelector::findPiecePoints(Piece piece, unsigned x, unsigned y,
 
 void PieceSelector::init()
 {
-    const string* pieceLayout = nullptr; // Init to avoid compiler warning
     auto pieceSet = m_bd.get_piece_set();
     switch (pieceSet)
     {
     case PieceSet::classic:
-        pieceLayout = &pieceLayoutClassic;
+        m_pieceLayout = pieceLayoutClassic;
         m_nuColumns = 33;
         m_nuRows = 6;
         break;
     case PieceSet::trigon:
-        pieceLayout = &pieceLayoutTrigon;
+        m_pieceLayout = pieceLayoutTrigon;
         m_nuColumns = 43;
         m_nuRows = 6;
         break;
     case PieceSet::junior:
-        pieceLayout = &pieceLayoutJunior;
+        m_pieceLayout = pieceLayoutJunior;
         m_nuColumns = 34;
         m_nuRows = 6;
         break;
     case PieceSet::nexos:
-        pieceLayout = &pieceLayoutNexos;
+        m_pieceLayout = pieceLayoutNexos;
         m_nuColumns = 45;
         m_nuRows = 9;
         break;
     case PieceSet::callisto:
-        pieceLayout = &pieceLayoutCallisto;
+        m_pieceLayout = pieceLayoutCallisto;
         m_nuColumns = 28;
         m_nuRows = 6;
         break;
@@ -186,7 +183,7 @@ void PieceSelector::init()
     for (unsigned y = 0; y < m_nuRows; ++y)
         for (unsigned x = 0; x < m_nuColumns; ++x)
         {
-            string name = pieceLayout->substr(y * m_nuColumns * 2 + x * 2, 2);
+            string name = m_pieceLayout.substr(y * m_nuColumns * 2 + x * 2, 2);
             name = trim(name);
             Piece piece = Piece::null();
             if (name != ".")
