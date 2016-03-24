@@ -791,9 +791,6 @@ void BoardConst::create_moves()
     unsigned n = 0;
     for (Piece::IntType i = 0; i < m_nu_pieces; ++i)
     {
-        for (Point p : m_geo)
-            for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
-                g_full_move_table[p][j].clear();
         Piece piece(i);
         if (m_max_piece_size == 5)
             create_moves<5, 16>(moves_created, piece);
@@ -809,6 +806,7 @@ void BoardConst::create_moves()
                                                    list.size());
                     for (auto mv : list)
                         m_precomp_moves.set_move(n++, mv);
+                    list.clear();
                 }
     }
     LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
