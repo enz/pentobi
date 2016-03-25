@@ -43,7 +43,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     if (QIcon::hasThemeIcon("help-browser"))
         setWindowIcon(QIcon::fromTheme("help-browser"));
     m_mainPageUrl = QUrl::fromLocalFile(mainPage);
-    auto browser = new QTextBrowser(this);
+    auto browser = new QTextBrowser;
     setCentralWidget(browser);
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     browser->setSource(m_mainPageUrl);
@@ -72,7 +72,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     actionClose->setShortcut(QKeySequence::Close);
     connect(actionClose, SIGNAL(triggered()), SLOT(hide()));
     addAction(actionClose);
-    auto toolBar = new QToolBar(this);
+    auto toolBar = new QToolBar;
     toolBar->setMovable(false);
     toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     toolBar->addAction(actionBack);
