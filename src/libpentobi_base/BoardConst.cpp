@@ -664,7 +664,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_pieces = create_pieces_callisto(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 5;
         // m_max_adj_attach is actually 10 in Callisto, but we care more about
-        // the performance in the clasic Blokus variants and some code is
+        // the performance in the classic Blokus variants and some code is
         // faster if we don't have to handle different values for
         // m_max_adj_attach for the same m_max_piece_size.
         m_max_adj_attach = 16;
