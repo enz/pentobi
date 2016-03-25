@@ -11,6 +11,7 @@
 #include "BoardConst.h"
 
 #include <algorithm>
+#include "Marker.h"
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsTrigon.h"
 #include "libboardgame_base/Transform.h"

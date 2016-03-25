@@ -12,6 +12,7 @@
 
 #include <cassert>
 #include <limits>
+#include <sstream>
 
 namespace libboardgame_gtp {
 

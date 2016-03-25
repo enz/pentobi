@@ -8,7 +8,6 @@
 #define LIBPENTOBI_BASE_BOARD_CONST_H
 
 #include "Geometry.h"
-#include "Marker.h"
 #include "MoveInfo.h"
 #include "PieceInfo.h"
 #include "PieceTransforms.h"

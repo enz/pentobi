@@ -8,7 +8,6 @@
 #define LIBBOARDGAME_SGF_WRITER_H
 
 #include <iosfwd>
-#include <sstream>
 #include <string>
 #include <vector>
 #include "libboardgame_util/StringUtil.h"

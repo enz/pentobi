@@ -10,7 +10,6 @@
 
 #include "Engine.h"
 
-#include <cassert>
 #include <cctype>
 #include <iostream>
 #include "CmdLine.h"

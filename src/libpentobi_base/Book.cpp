@@ -10,7 +10,6 @@
 
 #include "Book.h"
 
-#include "libboardgame_sgf/MissingProperty.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_util/Log.h"
 #include "libpentobi_base/BoardUtil.h"
@@ -33,7 +32,6 @@ using libboardgame_base::PointTransfTrigonRot120;
 using libboardgame_base::PointTransfTrigonRot240;
 using libboardgame_base::PointTransfTrigonRot300;
 using libboardgame_sgf::InvalidPropertyValue;
-using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeReader;
 using boardutil::get_transformed;
 

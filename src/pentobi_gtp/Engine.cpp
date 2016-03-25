@@ -11,13 +11,11 @@
 #include "Engine.h"
 
 #include <fstream>
-#include "libboardgame_sgf/TreeReader.h"
 #include "libpentobi_mcts/Util.h"
 
 namespace pentobi_gtp {
 
 using libboardgame_gtp::Failure;
-using libboardgame_sgf::TreeReader;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
 using libpentobi_base::Color;

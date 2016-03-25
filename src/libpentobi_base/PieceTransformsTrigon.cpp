@@ -11,7 +11,6 @@
 #include "PieceTransformsTrigon.h"
 
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/Log.h"
 
 namespace libpentobi_base {
 

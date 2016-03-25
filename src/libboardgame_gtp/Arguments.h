@@ -10,6 +10,7 @@
 #ifdef __GNUC__
 #include <cxxabi.h>
 #endif
+#include <sstream>
 #include "CmdLine.h"
 #include "Failure.h"
 

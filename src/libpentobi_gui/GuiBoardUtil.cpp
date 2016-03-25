@@ -11,7 +11,6 @@
 #include "GuiBoardUtil.h"
 
 #include "libboardgame_sgf/SgfUtil.h"
-#include "libboardgame_util/Log.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace gui_board_util {

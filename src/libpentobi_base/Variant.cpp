@@ -14,7 +14,6 @@
 #include "NexosGeometry.h"
 #include "TrigonGeometry.h"
 #include "libboardgame_base/RectGeometry.h"
-#include "libboardgame_util/Assert.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {

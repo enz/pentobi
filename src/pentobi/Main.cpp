@@ -17,8 +17,6 @@
 #include <QTranslator>
 #include "Application.h"
 #include "MainWindow.h"
-#include "ShowMessage.h"
-#include "libboardgame_sys/Compiler.h"
 
 #ifdef Q_WS_WIN
 #include <stdio.h>

@@ -13,7 +13,6 @@
 #include <QSettings>
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_util/Log.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
 

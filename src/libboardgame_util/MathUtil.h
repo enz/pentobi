@@ -7,10 +7,6 @@
 #ifndef LIBBOARDGAME_UTIL_MATH_UTIL_H
 #define LIBBOARDGAME_UTIL_MATH_UTIL_H
 
-#include <cmath>
-#include <cstdint>
-#include <limits>
-
 namespace libboardgame_util {
 
 using namespace std;
