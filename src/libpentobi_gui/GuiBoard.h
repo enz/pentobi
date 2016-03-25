@@ -53,8 +53,6 @@ public:
 
     void showMove(Color c, Move mv);
 
-    int heightForWidth(int width) const override;
-
     void copyFromBoard(const Board& bd);
 
     void setLabel(Point p, const QString& text);

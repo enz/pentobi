@@ -150,11 +150,6 @@ Move GuiBoard::findSelectedPieceMove()
         return mv;
 }
 
-int GuiBoard::heightForWidth(int width) const
-{
-    return width;
-}
-
 void GuiBoard::leaveEvent(QEvent*)
 {
     m_selectedPieceOffset = CoordPoint::null();
