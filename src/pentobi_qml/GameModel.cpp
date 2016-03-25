@@ -624,7 +624,6 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
     auto gameCoord = getGameCoord(bd, mv);
     auto transform = bd.find_transform(mv);
     auto& pieceModels = getPieceModels(c);
-    PieceModel* pieceModel = nullptr;
     // Prefer piece models already played with the given gameCoord and
     // transform because class Board doesn't make a distinction between
     // instances of the same piece (in Junior) and we want to avoid
@@ -636,26 +635,22 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
                 && compareTransform(pieceInfo, pieceModels[i]->getTransform(),
                                     transform))
         {
-            pieceModel = pieceModels[i];
             isPlayed[i] = true;
-            break;
+            return pieceModels[i];
         }
-    if (pieceModel == nullptr)
-    {
-        for (int i = 0; i < pieceModels.length(); ++i)
-            if (pieceModels[i]->getPiece() == piece && ! isPlayed[i])
-            {
-                pieceModel = pieceModels[i];
-                isPlayed[i] = true;
-                break;
-            }
-        // Order is important: isPlayed will trigger an animation to move
-        // the piece, so it needs to be set after gameCoord.
-        pieceModel->setGameCoord(gameCoord);
-        pieceModel->setIsPlayed(true);
-        pieceModel->setTransform(transform);
-    }
-    return pieceModel;
+    for (int i = 0; i < pieceModels.length(); ++i)
+        if (pieceModels[i]->getPiece() == piece && ! isPlayed[i])
+        {
+            isPlayed[i] = true;
+            // Order is important: isPlayed will trigger an animation to move
+            // the piece, so it needs to be set after gameCoord.
+            pieceModels[i]->setGameCoord(gameCoord);
+            pieceModels[i]->setIsPlayed(true);
+            pieceModels[i]->setTransform(transform);
+            return pieceModels[i];
+        }
+    LIBBOARDGAME_ASSERT(false);
+    return nullptr;
 }
 
 void GameModel::updateProperties()
