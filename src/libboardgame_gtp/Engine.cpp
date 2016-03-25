@@ -98,8 +98,8 @@ void Engine::cmd_known_command(const Arguments& args, Response& response)
 /** List all known commands. */
 void Engine::cmd_list_commands(Response& response)
 {
-    for (auto i = m_handlers.begin(); i != m_handlers.end(); ++i)
-        response << i->first << '\n';
+    for (auto& i : m_handlers)
+        response << i.first << '\n';
 }
 
 /** Return name. */
