@@ -732,9 +732,6 @@ void State::start_search()
     switch (bd.get_board_type())
     {
     case BoardType::classic:
-    case BoardType::callisto: // Not yet tuned
-    case BoardType::callisto_2: // Not yet tuned
-    case BoardType::callisto_3: // Not yet tuned
         gamma_size_factor = 5;
         break;
     case BoardType::duo:
@@ -742,11 +739,17 @@ void State::start_search()
         gamma_nu_attach_factor = 1.8f;
         break;
     case BoardType::trigon:
-    case BoardType::trigon_3:
+    case BoardType::trigon_3: // Not tuned
         gamma_size_factor = 5;
         break;
-    case BoardType::nexos: // Not yet tuned
+    case BoardType::nexos: // Not tuned
         gamma_size_factor = 5;
+        gamma_nu_attach_factor = 1.8f;
+        break;
+    case BoardType::callisto_2:
+    case BoardType::callisto: // Not tuned
+    case BoardType::callisto_3: // Not tuned
+        gamma_size_factor = 12;
         gamma_nu_attach_factor = 1.8f;
         break;
     }
