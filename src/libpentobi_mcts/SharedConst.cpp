@@ -16,12 +16,13 @@ using libpentobi_base::BoardConst;
 using libpentobi_base::BoardType;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceSet;
+using libpentobi_base::ScoreType;
 
 //-----------------------------------------------------------------------------
 
 namespace {
 
-void filter_min_size(const BoardConst& bc, unsigned min_size,
+void filter_min_size(const BoardConst& bc, ScoreType min_size,
                      PieceMap<bool>& is_piece_considered)
 {
     for (Piece::IntType i = 0; i < bc.get_nu_pieces(); ++i)
