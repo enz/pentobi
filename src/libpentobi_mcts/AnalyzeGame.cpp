@@ -46,6 +46,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     clear_abort();
     node = &root;
     unsigned move_number = 0;
+    auto tie_value = Search::SearchParamConst::tie_value;
     while (node)
     {
         auto mv = tree.get_move(*node);
@@ -55,7 +56,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
             {
                 // Root shouldn't contain moves in SGF files
                 m_moves.push_back(mv);
-                m_values.push_back(Search::SearchParamConst::tie_value);
+                m_values.push_back(tie_value);
             }
             else
             {
