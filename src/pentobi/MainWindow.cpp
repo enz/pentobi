@@ -1436,9 +1436,9 @@ void MainWindow::end()
 
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
-    // By default, Qt 4.7 shows status tips in the status bar if the mouse
-    // goes over a menu. This is undesirable because it deletes the current
-    // text in the status line (e.g. the "The computer is thinking..." status)
+    // Empty status tips can clear the status bar if the mouse goes over a
+    // menu. We don't want that because it deletes our "computer is thinking"
+    // message. This still happens with Qt 5.6 on some platforms.
     if (event->type() == QEvent::StatusTip)
         return true;
     return QMainWindow::eventFilter(object, event);
