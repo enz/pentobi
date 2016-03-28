@@ -1434,6 +1434,16 @@ void MainWindow::end()
     gotoNode(get_last_node(m_game.get_current()));
 }
 
+bool MainWindow::eventFilter(QObject* object, QEvent* event)
+{
+    // By default, Qt 4.7 shows status tips in the status bar if the mouse
+    // goes over a menu. This is undesirable because it deletes the current
+    // text in the status line (e.g. the "The computer is thinking..." status)
+    if (event->type() == QEvent::StatusTip)
+        return true;
+    return QMainWindow::eventFilter(object, event);
+}
+
 void MainWindow::exportAsciiArt()
 {
     QString file = QFileDialog::getSaveFileName(this, "", getLastDir(),

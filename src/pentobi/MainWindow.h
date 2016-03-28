@@ -67,6 +67,8 @@ public:
 
     ~MainWindow();
 
+    bool eventFilter(QObject* object, QEvent* event) override;
+
     QSize sizeHint() const override;
 
 public slots:
