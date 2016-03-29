@@ -1080,7 +1080,7 @@ void MainWindow::createActions()
             createActionVariant(Variant::classic, tr("Classic (&4 Players)"));
     m_actionVariantDuo = createActionVariant(Variant::duo, tr("&Duo"));
     m_actionVariantJunior =
-            createActionVariant(Variant::junior, tr("&Junior"));
+            createActionVariant(Variant::junior, tr("J&unior"));
     m_actionVariantTrigon2 =
             createActionVariant(Variant::trigon_2, tr("Trigon (&2 Players)"));
     m_actionVariantTrigon3 =

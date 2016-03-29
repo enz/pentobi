@@ -816,8 +816,8 @@
         <translation>Klassisch (&amp;4 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Junior</source>
-        <translation>&amp;Junior</translation>
+        <source>J&amp;unior</source>
+        <translation>J&amp;unior</translation>
     </message>
     <message>
         <source>Classic (&amp;2 Players)</source>
