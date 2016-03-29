@@ -35,7 +35,7 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
     m_button->resize(m_button->sizeHint());
     int x = qApp->desktop()->screenGeometry().width() - m_button->width();
     m_buttonPos = QPoint(x, 0);
-    m_triggerArea->resize(QSize(m_button->width(), m_button->height() / 2));
+    m_triggerArea->resize(m_button->width(), m_button->height() / 2);
     m_triggerArea->move(m_buttonPos);
     m_animation = new QPropertyAnimation(m_button, "pos");
     m_animation->setDuration(1000);
