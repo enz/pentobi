@@ -99,7 +99,7 @@ QToolButton* createOBoxToolButton(QAction* action)
     button->setFocusPolicy(Qt::NoFocus);
     // For some reason, toolbuttons are very small in Ubuntu Unity if outside
     // a toolbar (tested with Ubuntu 15.10)
-    button->setMinimumSize(32, 32);
+    button->setMinimumSize(28, 28);
     return button;
 }
 
