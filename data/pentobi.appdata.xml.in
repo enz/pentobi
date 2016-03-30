@@ -87,5 +87,5 @@
 
   <releases>
      <release version="@PENTOBI_VERSION@" date="@PENTOBI_RELEASE_DATE@"/>
-  <releases>
+  </releases>
 </component>
