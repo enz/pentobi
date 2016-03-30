@@ -18,6 +18,7 @@ add_custom_target(
 
 configure_file(pentobi.desktop.in pentobi.desktop @ONLY)
 configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
+configure_file(pentobi.appdata.xml.in pentobi.appdata.xml @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps)
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-16.png
@@ -44,7 +45,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/thumbnailers)
 install(FILES pentobi-mime.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages)
-install(FILES pentobi.appdata.xml
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.appdata.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/appdata)
 
 endif(PENTOBI_BUILD_GUI AND NOT WIN32)
