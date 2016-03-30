@@ -20,6 +20,8 @@ Desktop version:
 Bug fixes Desktop version:
 
 * Icon for undo did not have a high-DPI version.
+* Option --verbose on Windows will now again open a console for
+  showing logging output.
 
 Android version
 

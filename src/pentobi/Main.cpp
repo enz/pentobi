@@ -18,7 +18,7 @@
 #include "Application.h"
 #include "MainWindow.h"
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
 #include <stdio.h>
 #include <windows.h>
 #include <io.h>
@@ -32,24 +32,22 @@ using libboardgame_util::RandomGenerator;
 
 namespace {
 
-#ifdef Q_WS_WIN
-
 void redirectStdErr()
 {
+#ifdef Q_OS_WIN
     CONSOLE_SCREEN_BUFFER_INFO info;
     AllocConsole();
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
     info.dwSize.Y = 500;
     SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), info.dwSize);
-    long stdErrHandle = (long)GetStdHandle(STD_ERROR_HANDLE);
+    auto stdErrHandle = (intptr_t)GetStdHandle(STD_ERROR_HANDLE);
     int conHandle = _open_osfhandle(stdErrHandle, _O_TEXT);
     auto f = _fdopen(conHandle, "w");
     *stderr = *f;
     setvbuf(stderr, NULL, _IONBF, 0);
     ios::sync_with_stdio();
-}
-
 #endif
+}
 
 } // namespace
 
@@ -160,12 +158,9 @@ int main(int argc, char* argv[])
                                     " without support for multi-threading.");
         }
         if (! parser.isSet(optionVerbose))
-        {
             libboardgame_util::disable_logging();
-#ifdef Q_WS_WIN
+        else
             redirectStdErr();
-#endif
-        }
         if (parser.isSet(optionSeed))
         {
             RandomGenerator::ResultType seed =
