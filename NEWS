@@ -4,7 +4,6 @@ Version 11.UNKNOWN (master)
 General:
 
 * New game variant Callisto.
-* Increased playing strength in Nexos.
 * Thinking time of level 7 (the highest level supported on Android) was
   increased in most game variants to better match the speed of typical
   mobile hardware.
