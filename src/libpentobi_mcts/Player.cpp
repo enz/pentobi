@@ -27,12 +27,16 @@ using libpentobi_base::BoardType;
 namespace {
 
 // Rationale for choosing the number of simulations:
-// * Level 9 is the highest in the desktop version. It should be as strong as
+// * Level 9, the highest in the desktop version, should be as strong as
 //   possible on a mid-range PC with reasonable thinking times. The average
-//   time per game and player is targeted at 120s in Duo/Callisto2, 240s in
-//   Classic, 300s in Trigon, 330s in Nexos on an Intel i3-4130.
-// * Level 7 is the highest in the Android version and should be as strong as
-//   possible on mobile hardware. The numbers are set to 3% of level 9.
+//   time per game and player is targeted at 2-3 min for the two-color game
+//   variants and 5-6 min for the others.
+// * Level 7, the highest in the Android version, should be as strong as
+//   possible on typical mobile hardware. It is set to 4% of level 9.
+// * Level 8 is set to 20% of level 9, the middle (on a log scale) between
+//   level 7 and 9. Since most parameter tuning is done at level 7 or 8, it is
+//   better for development purposes to define level 8 in terms of time, even
+//   if it doesn't necessarily correspond to the middle wrt. playing strength.
 // * The numbers for level 1 are set to a value that is weak enough for
 //   beginners without playing silly moves. They are currently chosen depending
 //   on how strong we estimate Pentobi is in a game variant. It is also taken
@@ -44,19 +48,19 @@ namespace {
 //   roughly equidistant Elo differences measured in self-play experiments.
 
 static const float counts_classic[Player::max_supported_level] =
-    { 3, 24, 87, 213, 667, 1989, 54871, 310936, 1829033 };
+    { 3, 24, 87, 213, 667, 1989, 66179, 330894, 1654470 };
 
 static const float counts_duo[Player::max_supported_level] =
-    { 3, 17, 44, 123, 426, 1672, 207885, 1178015, 6929504 };
+    { 3, 17, 44, 123, 426, 1672, 202994, 1014969, 5074843 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 433, 727, 1501, 2912, 7395, 14692, 83253, 489723 };
+    { 228, 433, 727, 1501, 2912, 7395, 18428, 92138, 460691 };
 
 static const float counts_nexos[Player::max_supported_level] =
-    { 100, 470, 800, 1650, 3300, 6000, 17390, 98543, 579663 };
+    { 100, 470, 800, 1650, 3300, 6000, 22626, 113130, 565651 };
 
 static const float counts_callisto_2[Player::max_supported_level] =
-    { 100, 193, 390, 1120, 2560, 8390, 78731, 480000, 2624359 };
+    { 100, 193, 390, 1120, 2560, 8390, 94104, 470522, 2352609 };
 
 } // namespace
 
