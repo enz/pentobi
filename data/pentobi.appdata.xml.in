@@ -73,8 +73,8 @@
   </screenshots>
 
   <url type="homepage">http://pentobi.sourceforge.net/</url>
-  <url type="bugtracker">http://sourceforge.net/p/pentobi/bugs/</url>
-  <url type="donation">http://sourceforge.net/p/pentobi/donate/</url>
+  <url type="bugtracker">https://sourceforge.net/p/pentobi/bugs/</url>
+  <url type="donation">https://sourceforge.net/p/pentobi/donate/</url>
   <developer_name>Markus Enzenberger</developer_name>
   <update_contact>enz@users.sourceforge.net</update_contact>
 
