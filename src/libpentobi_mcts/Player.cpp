@@ -242,13 +242,17 @@ size_t Player::get_memory()
     size_t wanted = 2000000000;
     if (m_max_level < max_supported_level)
     {
-        // Trigon has the lowest relative number of simulations on lower levels
-        // compared to the highest level. We approximate the memory used in a
-        // search as being proportional to the number of simulations.
-        float factor =
-                counts_trigon[max_supported_level - 1]
-                / counts_trigon[m_max_level - 1];
-        wanted /= static_cast<size_t>(factor);
+        // We don't need so much memory if m_max_level is smaller than
+        // max_supported_level. Trigon has the highest relative number of
+        // simulations on lower levels compared to the highest level. The
+        // memory used in a search is not proportional to the number of
+        // simulations (e.g. because the expand threshold increases with the
+        // depth). We approximate this by adding an exponent to the ratio
+        // and not taking into account if m_max_level is very small.
+        LIBBOARDGAME_ASSERT(max_supported_level >= 5);
+        auto factor = pow(counts_trigon[max_supported_level - 1]
+                          / counts_trigon[max(m_max_level, 5u) - 1], 0.8);
+        wanted = static_cast<size_t>(double(wanted) / factor);
     }
     size_t memory = min(wanted, reasonable);
     LIBBOARDGAME_LOG("Using ", memory / 1000000, " MB of ",
