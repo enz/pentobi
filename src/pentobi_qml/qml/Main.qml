@@ -150,7 +150,10 @@ ApplicationWindow {
                 root.computerPlays1 = this.computerPlays1
                 root.computerPlays2 = this.computerPlays2
                 root.computerPlays3 = this.computerPlays3
-                Logic.checkComputerMove()
+                if (! Logic.isComputerToPlay() && playerModel.isGenMoveRunning)
+                    cancelGenMove()
+                else
+                    Logic.checkComputerMove()
                 gameDisplay.forceActiveFocus() // QTBUG-48456
             }
             onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
