@@ -9,17 +9,6 @@ RowLayout {
 
     spacing: 0
 
-    Item { Layout.preferredWidth: 0.02 * parent.height }
-    // App icon
-    Image {
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        height: Screen.pixelDensity < 5 ? 24 : 48 // pentobi.svg is 48x48
-        width: height
-        sourceSize { width: width; height: height }
-        source: "icons/pentobi.svg"
-        cache: false
-
-    }
     Item { Layout.fillWidth: true }
     AndroidToolButton {
         imageSource: "icons/pentobi-newgame.svg"

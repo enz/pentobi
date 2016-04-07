@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/icons/menu.svg</file>
-        <file>qml/icons/pentobi.svg</file>
         <file>qml/icons/pentobi-backward.svg</file>
         <file>qml/icons/pentobi-beginning.svg</file>
         <file>qml/icons/pentobi-computer-colors.svg</file>
