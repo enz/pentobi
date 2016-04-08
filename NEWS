@@ -5,29 +5,28 @@ General:
 
 * New game variant Callisto.
 * Thinking time of level 7 (the highest level supported on Android) was
-  increased in most game variants to better match the speed of typical
-  mobile hardware.
+  increased in most game variants to better match the CPU speed of
+  typical mobile hardware.
 * Starting points are no longer shown after color played its first piece.
 
 Desktop version:
 
 * The compilation now requires at least Qt 5.2.
-* High-DPI scaling is now automatically enabled if compiled with Qt 5.6.
-* Setting Move Marking to Last now only marks the last move played even
-  if the computer played several moves in a row.
+* High-DPI scaling is now automatically used if compiled with Qt 5.6.
+* Setting Move Marking to Last now only marks the last move even if the
+  computer played several moves in a row.
 
 Bug fixes Desktop version:
 
 * Icon for undo did not have a high-DPI version.
-* Option --verbose on Windows will now again open a console for
-  showing logging output.
+* Option --verbose was broken on Windows.
 
 Android version
 
 * The compilation now requires Qt 5.6.
 * Support for game variant Nexos.
 * New menu items Edit/Delete All Variations, Edit/Next Color,
-  View/Animate Pieces.
+  View/Animate Pieces, Help/About Pentobi.
 * Actions with buttons in action bar are no longer shown in menu.
 * Forward/backward buttons now support autorepeat.
 
