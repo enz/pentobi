@@ -48,11 +48,11 @@ Item {
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right
-            leftMargin: (isToPlay ? 0.1 : 0.3) * point1.width
+            leftMargin: (isToPlay ? 0.2 : 0.4) * point1.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
-        font.pixelSize: 1.5 * pointSize
+        font.pixelSize: 1.4 * pointSize
     }
 }
