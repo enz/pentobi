@@ -1,5 +1,5 @@
-Version 11.UNKNOWN (master)
-===========================
+Version 12.0 (10 Apr 2016)
+==========================
 
 General:
 
@@ -26,13 +26,9 @@ Android version
 * The compilation now requires Qt 5.6.
 * Support for game variant Nexos.
 * New menu items Edit/Delete All Variations, Edit/Next Color,
-  View/Animate Pieces, Help/About Pentobi.
+  View/Animate Pieces, Help/About.
 * Actions with buttons in action bar are no longer shown in menu.
 * Forward/backward buttons now support autorepeat.
-
-
-Version 11.0.UNKNOWN (v11-fixes)
-================================
 
 Bug fixes Android version:
 
