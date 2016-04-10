@@ -29,7 +29,7 @@ namespace {
 // Rationale for choosing the number of simulations:
 // * Level 9, the highest in the desktop version, should be as strong as
 //   possible on a mid-range PC with reasonable thinking times. The average
-//   time per game and player is targeted at 2-3 min for the two-color game
+//   time per game and player is targeted at 2-3 min for the 2-color game
 //   variants and 5-6 min for the others.
 // * Level 7, the highest in the Android version, should be as strong as
 //   possible on typical mobile hardware. It is set to 4% of level 9.
@@ -44,23 +44,23 @@ namespace {
 //   experiments. After applying the scale factor (see comment in
 //   Player::get_rating()), we want a range of about 1000 Elo (difference
 //   between beginner and lower master level).
-// * The numbers for other levels are chosen such that they correspond to
-//   roughly equidistant Elo differences measured in self-play experiments.
+// * The numbers for level 1-6 are chosen such that they correspond to roughly
+//   equidistant Elo differences measured in self-play experiments.
 
 static const float counts_classic[Player::max_supported_level] =
-    { 3, 24, 87, 213, 667, 1989, 66179, 330894, 1654470 };
+    { 3, 18, 75, 311, 1260, 8949, 66179, 330894, 1654470 };
 
 static const float counts_duo[Player::max_supported_level] =
-    { 3, 17, 44, 123, 426, 1672, 202994, 1014969, 5074843 };
+    { 3, 14, 63, 253, 2203, 13614, 202994, 1014969, 5074843 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 433, 727, 1501, 2912, 7395, 18428, 92138, 460691 };
+    { 228, 376, 733, 1214, 2606, 6802, 18428, 92138, 460691 };
 
 static const float counts_nexos[Player::max_supported_level] =
-    { 100, 470, 800, 1650, 3300, 6000, 22626, 113130, 565651 };
+    { 250, 347, 625, 1223, 3117, 8270, 22626, 113130, 565651 };
 
 static const float counts_callisto_2[Player::max_supported_level] =
-    { 100, 193, 390, 1120, 2560, 8390, 94104, 470522, 2352609 };
+    { 100, 192, 405, 1079, 3323, 12258, 94104, 470522, 2352609 };
 
 } // namespace
 
@@ -268,7 +268,9 @@ Rating Player::get_rating(Variant variant, unsigned level)
     // against humans. The anchor is set to about 1000 (beginner level) for
     // level 1. The exact value for anchor and scale is chosen according to our
     // estimate how strong Pentobi plays at level 1 and level 9 in each game
-    // variant (2000 Elo would be lower expert level).
+    // variant (2000 Elo would be lower expert level). Currently, only 2-player
+    // variants are tested and the ratings are used for multi-player variants
+    // on the same board.
     auto max_supported_level = Player::max_supported_level;
     level = min(max(level, 1u), max_supported_level);
     Rating result;
@@ -278,35 +280,42 @@ Rating Player::get_rating(Variant variant, unsigned level)
         {
             // Anchor 1000, scale 0.63
             static float elo[Player::max_supported_level] =
-                { 1000, 1134, 1267, 1400, 1534, 1668, 1801, 1935, 2068 };
+                { 1000, 1145, 1290, 1435, 1580, 1725, 1870, 1957, 2021 };
             result = Rating(elo[level - 1]);
         }
         break;
     case BoardType::duo:
         {
-            // Anchor 1100, scale 0.80
+            // Anchor 1100, scale 0.7
             static float elo[Player::max_supported_level] =
-                { 1100, 1229, 1359, 1489, 1618, 1748, 1878, 2008, 2137 };
+                { 1100, 1269, 1438, 1607, 1776, 1945, 2114, 2165, 2209 };
             result = Rating(elo[level - 1]);
         }
         break;
     case BoardType::callisto_2:
         {
-            // Anchor 1000, scale 0.7
+            // Anchor 1000, scale 0.63
             static float elo[Player::max_supported_level] =
-                { 1000, 1102, 1203, 1305, 1406, 1508, 1606, 1718, 1811 };
+                { 1000, 1101, 1203, 1304, 1405, 1507, 1608, 1673, 1756 };
             result = Rating(elo[level - 1]);
         }
         break;
     case BoardType::trigon:
     case BoardType::trigon_3:
-    case BoardType::callisto: // Not yet measured
-    case BoardType::callisto_3: // Not yet measured
-    case BoardType::nexos: // Not yet measured
         {
             // Anchor 1000, scale 0.60
             static float elo[Player::max_supported_level] =
-                { 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800 };
+                { 1000, 1103, 1206, 1308, 1411, 1514, 1617, 1757, 1856 };
+            result = Rating(elo[level - 1]);
+        }
+        break;
+    case BoardType::nexos:
+    case BoardType::callisto: // Not measured
+    case BoardType::callisto_3: // Not measured
+        {
+            // Anchor 1000, scale 0.60
+            static float elo[Player::max_supported_level] =
+                { 1000, 1101, 1202, 1304, 1406, 1507, 1608, 1698, 1799 };
             result = Rating(elo[level - 1]);
         }
         break;
