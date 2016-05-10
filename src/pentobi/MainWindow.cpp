@@ -758,7 +758,7 @@ void MainWindow::createActions()
     connect(m_actionFindMove, SIGNAL(triggered()), SLOT(findMove()));
 
     m_actionFindNextComment = createAction(tr("Find Next &Comment"));
-    m_actionFindNextComment->setShortcut(QKeySequence::FindNext);
+    m_actionFindNextComment->setShortcut(QString("F3"));
     connect(m_actionFindNextComment, SIGNAL(triggered()),
             SLOT(findNextComment()));
 
