@@ -577,13 +577,13 @@ void State::init_moves_with_gamma(Color c)
     auto& moves = m_moves[c];
     marker.clear(moves);
     auto& pieces = get_pieces_considered(c);
-    if (m_bd.is_first_piece(c) && ! (MAX_SIZE == 5 && m_is_callisto))
+    if (m_bd.is_first_piece(c) && ! IS_CALLISTO)
         add_starting_moves<MAX_SIZE>(c, pieces, true, moves);
     else
     {
         unsigned nu_moves = 0;
         float total_gamma = 0;
-        if (MAX_SIZE == 5 && m_is_callisto)
+        if (IS_CALLISTO)
             add_one_piece_moves<MAX_SIZE>(c, true, total_gamma, moves,
                                           nu_moves);
         if (m_is_piece_considered[c]
