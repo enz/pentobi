@@ -208,7 +208,7 @@ private:
     ColorMap<Grid<bool>> m_moves_added_at;
 
 
-    template<unsigned MAX_SIZE, bool IS_CALLISTO>
+    template<unsigned MAX_SIZE>
     void add_moves(Point p, Color c, const Board::PiecesLeftList& pieces,
                    float& total_gamma, MoveList& moves, unsigned& nu_moves);
 
@@ -263,13 +263,13 @@ private:
 
     bool check_lgr(Move mv) const;
 
-    template<unsigned MAX_SIZE, bool IS_CALLISTO>
+    template<unsigned MAX_SIZE>
     bool check_move(Move mv, const MoveInfo<MAX_SIZE>& info, float gamma_piece,
                     MoveList& moves, unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,
                     float& total_gamma);
 
-    template<unsigned MAX_SIZE, bool IS_CALLISTO>
+    template<unsigned MAX_SIZE>
     bool check_move(Move mv, const MoveInfo<MAX_SIZE>& info, MoveList& moves,
                     unsigned& nu_moves,
                     const PlayoutFeatures& playout_features,

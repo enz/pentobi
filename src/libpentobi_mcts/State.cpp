@@ -50,7 +50,7 @@ State::State(Variant initial_variant, const SharedConst& shared_const)
 {
 }
 
-template<unsigned MAX_SIZE, bool IS_CALLISTO>
+template<unsigned MAX_SIZE>
 inline void State::add_moves(Point p, Color c,
                              const Board::PiecesLeftList& pieces,
                              float& total_gamma, MoveList& moves,
@@ -66,7 +66,7 @@ inline void State::add_moves(Point p, Color c,
         auto gamma_piece = m_gamma_piece[piece];
         for (Move mv : get_moves(c, piece, p, adj_status))
             if (! marker[mv]
-                    && check_move<MAX_SIZE, IS_CALLISTO>(
+                    && check_move<MAX_SIZE>(
                            mv, get_move_info<MAX_SIZE>(mv), gamma_piece, moves,
                            nu_moves, playout_features, total_gamma))
                 marker.set(mv);
@@ -154,13 +154,12 @@ bool State::check_forbidden(const GridExt<bool>& is_forbidden, Move mv,
     return true;
 }
 
-template<unsigned MAX_SIZE, bool IS_CALLISTO>
+template<unsigned MAX_SIZE>
 bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
                        float gamma_piece, MoveList& moves, unsigned& nu_moves,
                        const PlayoutFeatures& playout_features,
                        float& total_gamma)
 {
-    LIBBOARDGAME_ASSERT(IS_CALLISTO == m_is_callisto);
     auto p = info.begin();
     PlayoutFeatures::Compute features(*p, playout_features);
     for (unsigned i = 1; i < MAX_SIZE; ++i)
@@ -168,8 +167,7 @@ bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
     if (features.is_forbidden())
         return false;
     auto gamma = gamma_piece;
-    if (! (IS_CALLISTO && info.get_size() == 1))
-        gamma *= gamma_local[features.get_nu_local()];
+    gamma *= gamma_local[features.get_nu_local()];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
@@ -178,13 +176,13 @@ bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
     return true;
 }
 
-template<unsigned MAX_SIZE, bool IS_CALLISTO>
+template<unsigned MAX_SIZE>
 inline bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
                               MoveList& moves, unsigned& nu_moves,
                               const PlayoutFeatures& playout_features,
                               float& total_gamma)
 {
-    return check_move<MAX_SIZE, IS_CALLISTO>(
+    return check_move<MAX_SIZE>(
                 mv, info, m_gamma_piece[info.get_piece()], moves, nu_moves,
                 playout_features, total_gamma);
 }
@@ -592,8 +590,8 @@ void State::init_moves_with_gamma(Color c)
             {
                 if (m_bd.is_forbidden(p, c))
                     continue;
-                add_moves<MAX_SIZE, IS_CALLISTO>(p, c, pieces, total_gamma,
-                                                 moves, nu_moves);
+                add_moves<MAX_SIZE>(p, c, pieces, total_gamma, moves,
+                                    nu_moves);
                 m_moves_added_at[c][p] = true;
             }
         moves.resize(nu_moves);
@@ -765,6 +763,10 @@ void State::start_search()
             pow(gamma_size_factor, score_points)
             * pow(gamma_nu_attach_factor, piece_nu_attach - 1);
     }
+    if (m_is_callisto)
+        // Playing 1-piece in Callisto early in playouts is bad, make sure it
+        // gets a low gamma even if it is on a local point.
+        m_gamma_piece[m_bd.get_one_piece()] = 1 / gamma_local[1];
 }
 
 void State::start_simulation(size_t n)
@@ -811,7 +813,7 @@ void State::update_moves(Color c)
         {
             auto& info = get_move_info<MAX_SIZE>(mv);
             if (info.get_piece() == piece
-                    || ! check_move<MAX_SIZE, IS_CALLISTO>(
+                    || ! check_move<MAX_SIZE>(
                              mv, info, moves, nu_moves, playout_features,
                              total_gamma))
                 marker.clear(mv);
@@ -821,7 +823,7 @@ void State::update_moves(Color c)
         {
             auto& info = get_move_info<MAX_SIZE>(mv);
             if (! m_bd.is_piece_left(c, info.get_piece())
-                    || ! check_move<MAX_SIZE, IS_CALLISTO>(
+                    || ! check_move<MAX_SIZE>(
                              mv, info, moves, nu_moves, playout_features,
                              total_gamma))
                 marker.clear(mv);
@@ -836,8 +838,7 @@ void State::update_moves(Color c)
         if (! is_forbidden[*i] && ! m_moves_added_at[c][*i])
         {
             m_moves_added_at[c][*i] = true;
-            add_moves<MAX_SIZE, IS_CALLISTO>(*i, c, pieces, total_gamma, moves,
-                                             nu_moves);
+            add_moves<MAX_SIZE>(*i, c, pieces, total_gamma, moves, nu_moves);
         }
     m_nu_new_moves[c] = 0;
     m_last_attach_points_end[c] = end;
@@ -860,7 +861,7 @@ void State::update_moves(Color c)
             new_pieces.resize(n);
             for (Point p : attach_points)
                 if (! is_forbidden[p])
-                    add_moves<MAX_SIZE, IS_CALLISTO>(
+                    add_moves<MAX_SIZE>(
                         p, c, new_pieces, total_gamma, moves, nu_moves);
             m_is_piece_considered[c] = &is_piece_considered_new;
         }
