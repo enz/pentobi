@@ -12,7 +12,7 @@ Controls2.Button {
     label: Image {
         sourceSize {
             width: Screen.pixelDensity < 5 ? 22 : 44
-            height: sourceSize.height
+            height: width
         }
         anchors.centerIn: parent
         source: imageSource
