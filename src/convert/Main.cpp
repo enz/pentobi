@@ -29,14 +29,16 @@ int main(int argc, char* argv[])
         auto out = args.at(1);
         QImageReader reader(in);
         QImage image = reader.read();
-        if (! image.isNull() && parser.isSet(optionHdpi))
+        if (image.isNull())
+            throw QString("%1: %2").arg(in, reader.errorString());
+        if (parser.isSet(optionHdpi))
         {
             QImageReader reader(in);
             reader.setScaledSize(2 * image.size());
             image = reader.read();
+            if (image.isNull())
+                throw QString("%1: %2").arg(in, reader.errorString());
         }
-        if (image.isNull())
-            throw QString("%1: %2").arg(in, reader.errorString());
         QImageWriter writer(out);
         if (! writer.write(image))
             throw QString("%1: %2").arg(out, writer.errorString());
