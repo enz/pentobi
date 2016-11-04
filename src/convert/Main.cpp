@@ -3,8 +3,8 @@
     Converts images using the Qt library.
     Used for creating PNG icons from the SVG sources at build time. The option
     --hdpi creates a high-DPI icon with twice the size of the source, which is
-    needed for the filenames with suffix @2x as required by Qt's high-DPI
-    support.
+    needed for the filenames with suffix @2x as required by the high-DPI
+    support of QIcon.
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
