@@ -1,7 +1,14 @@
 Version 12.UNKNOWN (master)
 ===========================
 
+General:
+
 *
+
+Android version
+
+* The source code now requires Qt 5.8, which no longer supports Android
+  versions older than Android 4.1.
 
 
 Version 12.0.UNKNOWN (v12-fixes)
@@ -29,7 +36,7 @@ Desktop version:
 * Setting Move Marking to Last now only marks the last move even if the
   computer played several moves in a row.
 
-Bug fixes Desktop version:
+Bug fixes desktop version:
 
 * Icon for undo did not have a high-DPI version.
 * Option --verbose was broken on Windows.
