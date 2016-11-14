@@ -139,9 +139,9 @@ void Engine::cmd_version(Response& response)
     string version;
 #ifdef VERSION
     version = VERSION;
+#else
+    version = "UNKNOWN";
 #endif
-    if (version.empty())
-        version = "UNKNOWN";
     // By convention, the version string of unreleased versions contains the
     // string UNKNOWN (appended to the last released version). In this case, or
     // if VERSION was undefined, we append the build date.
