@@ -86,7 +86,7 @@ public:
 
     bool gen_children(Tree::NodeExpander& expander, Float root_val);
 
-    void start_playout() { };
+    void start_playout() { }
 
     /** Generate a playout move.
         @return @c false if end of game was reached, and no move was
