@@ -104,7 +104,7 @@ public:
     template<unsigned MAX_ADJ_ATTACH>
     void set_forbidden(const MoveInfoExt<MAX_ADJ_ATTACH>& info_ext);
 
-    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
     void set_local(const Board& bd);
 
 private:
@@ -148,7 +148,7 @@ inline void PlayoutFeatures::set_forbidden(
         m_point_value[*i] = 0x1000u;
 }
 
-template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
 inline void PlayoutFeatures::set_local(const Board& bd)
 {
     // Clear old info about local points
@@ -191,7 +191,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
                         1 + static_cast<IntType>(
                             bd.is_attach_point(*j, to_play));
             }
-            if (MAX_SIZE == 7) // Nexos
+            if (MAX_SIZE == 7 || IS_CALLISTO) // Nexos or Callisto
                 LIBBOARDGAME_ASSERT(geo.get_adj(*j).empty());
             else
                 for (Point k : geo.get_adj(*j))
