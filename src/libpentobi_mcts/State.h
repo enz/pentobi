@@ -91,8 +91,8 @@ public:
     /** Generate a playout move.
         @return @c false if end of game was reached, and no move was
         generated. */
-    bool gen_playout_move(const LastGoodReply& lgr, size_t last_mv_hash,
-                          size_t second_last_mv_hash, PlayerMove<Move>& move);
+    bool gen_playout_move(const LastGoodReply& lgr, Move last,
+                          Move second_last, PlayerMove<Move>& move);
 
     void evaluate_playout(array<Float, 6>& result);
 
@@ -348,10 +348,8 @@ inline void State::finish_in_tree()
         m_is_symmetry_broken = check_symmetry_broken(m_bd);
 }
 
-inline bool State::gen_playout_move(const LastGoodReply& lgr,
-                                    size_t last_mv_hash,
-                                    size_t second_last_mv_hash,
-                                    PlayerMove<Move>& mv)
+inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
+                                    Move second_last, PlayerMove<Move>& mv)
 {
     if (m_nu_passes == m_nu_colors)
         return false;
@@ -364,7 +362,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr,
         return false;
     }
     PlayerInt player = get_player();
-    Move lgr2 = lgr.get_lgr2(player, last_mv_hash, second_last_mv_hash);
+    Move lgr2 = lgr.get_lgr2(player, last, second_last);
     if (check_lgr(lgr2))
     {
         if (log_simulations)
@@ -372,7 +370,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr,
         mv = PlayerMove<Move>(player, lgr2);
         return true;
     }
-    Move lgr1 = lgr.get_lgr1(player, last_mv_hash);
+    Move lgr1 = lgr.get_lgr1(player, last);
     if (check_lgr(lgr1))
     {
         if (log_simulations)
