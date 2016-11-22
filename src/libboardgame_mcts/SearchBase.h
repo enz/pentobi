@@ -14,6 +14,7 @@
 #include <thread>
 #include "Atomic.h"
 #include "LastGoodReply.h"
+#include "MoveHash.h"
 #include "PlayerMove.h"
 #include "Tree.h"
 #include "TreeUtil.h"
@@ -461,6 +462,8 @@ private:
 
     /** See get_root_val(). */
     array<StatisticsDirtyLockFree<Float>, max_players> m_root_val;
+
+    MoveHash<Move> m_move_hash;
 
     LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
 
@@ -957,15 +960,19 @@ void SearchBase<S, M, R>::playout(ThreadState& thread_state)
     auto& simulation = thread_state.simulation;
     auto& moves = simulation.moves;
     auto nu_moves = moves.size();
-    Move last = nu_moves > 0 ? moves[nu_moves - 1].move : Move::null();
-    Move second_last = nu_moves > 1 ? moves[nu_moves - 2].move : Move::null();
+    auto last_hash =
+            m_move_hash.get(nu_moves > 0 ?
+                                moves[nu_moves - 1].move : Move::null());
+    auto second_last_hash =
+            m_move_hash.get(nu_moves > 1 ?
+                                moves[nu_moves - 2].move : Move::null());
     PlayerMove mv;
-    while (state.gen_playout_move(m_lgr, last, second_last, mv))
+    while (state.gen_playout_move(m_lgr, last_hash, second_last_hash, mv))
     {
         state.play_playout(mv.move);
         moves.push_back(mv);
-        second_last = last;
-        last = mv.move;
+        second_last_hash = last_hash;
+        last_hash = m_move_hash.get(mv.move);
     }
 }
 
@@ -1422,19 +1429,21 @@ void SearchBase<S, M, R>::update_lgr(ThreadState& thread_state)
         is_winner[i] = (eval[i] == max_eval);
     auto& moves = simulation.moves;
     auto nu_moves = moves.size();
-    Move last = moves.get_unchecked(0).move;
-    Move second_last = Move::null();
+    if (nu_moves == 0)
+        return;
+    auto last_hash = m_move_hash.get(moves[0].move);
+    auto second_last_hash = m_move_hash.get(Move::null());
     for (unsigned i = 1; i < nu_moves; ++i)
     {
         PlayerMove reply = moves[i];
         PlayerInt player = reply.player;
         Move mv = reply.move;
         if (is_winner[player])
-            m_lgr.store(player, last, second_last, mv);
+            m_lgr.store(player, last_hash, second_last_hash, mv);
         else
-            m_lgr.forget(player, last, second_last, mv);
-        second_last = last;
-        last = mv;
+            m_lgr.forget(player, last_hash, second_last_hash, mv);
+        second_last_hash = last_hash;
+        last_hash = m_move_hash.get(mv);
     }
 }
 

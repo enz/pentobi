@@ -9,8 +9,6 @@
 
 #include <algorithm>
 #include <cstring>
-#include <memory>
-#include <random>
 #include "Atomic.h"
 #include "PlayerMove.h"
 
@@ -48,57 +46,59 @@ public:
 
     static const size_t hash_table_size = S;
 
-    LastGoodReply();
 
     void init(PlayerInt nu_players);
 
-    void store(PlayerInt player, Move last, Move second_last, Move reply);
+    void store(PlayerInt player, size_t last_hash, size_t second_last_hash,
+               Move reply);
 
-    void forget(PlayerInt player, Move last, Move second_last, Move reply);
+    void forget(PlayerInt player, size_t last_hash, size_t second_last_hash,
+                Move reply);
 
-    Move get_lgr1(PlayerInt player, Move last) const;
+    Move get_lgr1(PlayerInt player, size_t last_hash) const;
 
-    Move get_lgr2(PlayerInt player, Move last, Move second_last) const;
+    Move get_lgr2(PlayerInt player, size_t last_hash,
+                  size_t second_last_hash) const;
 
 private:
-    size_t m_hash[Move::range];
+    Atomic<typename Move::IntType, MT> m_table[max_players][hash_table_size];
 
-    Atomic<typename Move::IntType, MT> m_lgr1[max_players][Move::range];
 
-    Atomic<typename Move::IntType, MT> m_lgr2[max_players][hash_table_size];
+    size_t get_index(size_t last_hash) const;
 
-    size_t get_index(Move last, Move second_last) const;
+    size_t get_index(size_t last_hash, size_t second_last_hash) const;
 };
 
+
 template<class M, unsigned P, size_t S, bool MT>
-LastGoodReply<M, P, S, MT>::LastGoodReply()
+inline size_t LastGoodReply<M, P, S, MT>::get_index(size_t last_hash) const
 {
-    mt19937 generator;
-    for (auto& hash : m_hash)
-        hash = generator();
+    return last_hash % hash_table_size;
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline size_t LastGoodReply<M, P, S, MT>::get_index(Move last,
-                                                    Move second_last) const
+inline size_t LastGoodReply<M, P, S, MT>::get_index(
+        size_t last_hash, size_t second_last_hash) const
 {
-    size_t hash = (m_hash[last.to_int()] ^ m_hash[second_last.to_int()]);
+    auto hash = (last_hash ^ second_last_hash);
     return hash % hash_table_size;
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline auto LastGoodReply<M, P, S, MT>::get_lgr1(PlayerInt player,
-                                                 Move last) const -> Move
+inline auto LastGoodReply<M, P, S, MT>::get_lgr1(
+        PlayerInt player, size_t last_hash) const -> Move
 {
-    return Move(m_lgr1[player][last.to_int()].load(memory_order_relaxed));
+    auto index = get_index(last_hash);
+    return Move(m_table[player][index].load(memory_order_relaxed));
 }
 
 template<class M, unsigned P, size_t S, bool MT>
 inline auto LastGoodReply<M, P, S, MT>::get_lgr2(
-        PlayerInt player, Move last, Move second_last) const -> Move
+        PlayerInt player, size_t last_hash,
+        size_t second_last_hash) const -> Move
 {
-    auto index = get_index(last, second_last);
-    return Move(m_lgr2[player][index].load(memory_order_relaxed));
+    auto index = get_index(last_hash, second_last_hash);
+    return Move(m_table[player][index].load(memory_order_relaxed));
 }
 
 template<class M, unsigned P, size_t S, bool MT>
@@ -106,45 +106,42 @@ void LastGoodReply<M, P, S, MT>::init(PlayerInt nu_players)
 {
     for (PlayerInt i = 0; i < nu_players; ++i)
         if (Move::null().to_int() == 0)
-        {
             // Using memset is ok even if the elements are atomic because
             // init() is used before the multi-threaded search starts.
-            memset(m_lgr1[i], 0, Move::range * sizeof(m_lgr1[i][0]));
-            memset(m_lgr2[i], 0, hash_table_size * sizeof(m_lgr2[i][0]));
-        }
+            memset(m_table[i], 0, hash_table_size * sizeof(m_table[i][0]));
         else
-        {
-            fill(m_lgr1[i], m_lgr1[i] + Move::range, Move::null().to_int());
-            fill(m_lgr2[i], m_lgr2[i] + hash_table_size,
+            fill(m_table[i], m_table[i] + hash_table_size,
                  Move::null().to_int());
-        }
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline void LastGoodReply<M, P, S, MT>::forget(PlayerInt player, Move last,
-                                               Move second_last, Move reply)
+inline void LastGoodReply<M, P, S, MT>::forget(
+        PlayerInt player, size_t last_hash, size_t second_last_hash,
+        Move reply)
 {
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
     {
-        auto index = get_index(last, second_last);
-        auto& stored_reply = m_lgr2[player][index];
+        auto index = get_index(last_hash, second_last_hash);
+        auto& stored_reply = m_table[player][index];
         if (stored_reply.load(memory_order_relaxed) == reply_int)
             stored_reply.store(null_int, memory_order_relaxed);
     }
-    auto& stored_reply = m_lgr1[player][last.to_int()];
+    auto& stored_reply = m_table[player][get_index(last_hash)];
     if (stored_reply.load(memory_order_relaxed) == reply_int)
         stored_reply.store(null_int, memory_order_relaxed);
 }
 
 template<class M, unsigned P, size_t S, bool MT>
-inline void LastGoodReply<M, P, S, MT>::store(PlayerInt player, Move last,
-                                              Move second_last, Move reply)
+inline void LastGoodReply<M, P, S, MT>::store(
+        PlayerInt player, size_t last_hash, size_t second_last_hash,
+        Move reply)
 {
     auto reply_int = reply.to_int();
-    auto index = get_index(last, second_last);
-    m_lgr2[player][index].store(reply_int, memory_order_relaxed);
-    m_lgr1[player][last.to_int()].store(reply_int, memory_order_relaxed);
+    auto index = get_index(last_hash, second_last_hash);
+    m_table[player][index].store(reply_int, memory_order_relaxed);
+    m_table[player][get_index(last_hash)]
+            .store(reply_int, memory_order_relaxed);
 }
 
 //-----------------------------------------------------------------------------

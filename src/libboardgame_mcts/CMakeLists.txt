@@ -3,6 +3,7 @@
 add_custom_target(boardgame_mcts SOURCES
   Atomic.h
   LastGoodReply.h
+  MoveHash.h
   Node.h
   PlayerMove.h
   SearchBase.h
