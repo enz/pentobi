@@ -61,7 +61,9 @@ public:
     Move get_lgr2(PlayerInt player, Move last, Move second_last) const;
 
 private:
-    size_t m_hash[Move::range];
+    size_t m_hash1[Move::range];
+
+    size_t m_hash2[Move::range];
 
     Atomic<typename Move::IntType, MT> m_lgr1[max_players][Move::range];
 
@@ -74,7 +76,9 @@ template<class M, unsigned P, size_t S, bool MT>
 LastGoodReply<M, P, S, MT>::LastGoodReply()
 {
     mt19937 generator;
-    for (auto& hash : m_hash)
+    for (auto& hash : m_hash1)
+        hash = generator();
+    for (auto& hash : m_hash2)
         hash = generator();
 }
 
@@ -82,7 +86,7 @@ template<class M, unsigned P, size_t S, bool MT>
 inline size_t LastGoodReply<M, P, S, MT>::get_index(Move last,
                                                     Move second_last) const
 {
-    size_t hash = (m_hash[last.to_int()] ^ m_hash[second_last.to_int()]);
+    size_t hash = (m_hash1[last.to_int()] ^ m_hash2[second_last.to_int()]);
     return hash % hash_table_size;
 }
 
