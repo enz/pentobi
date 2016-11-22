@@ -2705,7 +2705,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
         if (seconds == m_lastRemainingSeconds)
             return;
         m_lastRemainingSeconds = seconds;
-        text = tr("Computer is thinking... (max. %1 seconds remaining)")
+        text = tr("Computer is thinking... (up to %1 seconds remaining)")
                 .arg(seconds);
     }
     else
@@ -2714,7 +2714,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
         if (minutes == m_lastRemainingMinutes)
             return;
         m_lastRemainingMinutes = minutes;
-        text = tr("Computer is thinking... (max. %1 minutes remaining)")
+        text = tr("Computer is thinking... (up to %1 minutes remaining)")
                 .arg(minutes);
     }
     QMetaObject::invokeMethod(statusBar(), "showMessage", Q_ARG(QString, text),
