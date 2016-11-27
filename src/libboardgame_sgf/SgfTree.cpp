@@ -44,6 +44,8 @@ const SgfNode& SgfTree::create_new_child(const SgfNode& node)
 
 void SgfTree::delete_all_variations()
 {
+    if (has_variations())
+        m_modified = true;
     auto node = &get_root();
     while (node)
     {

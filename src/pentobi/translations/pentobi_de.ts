@@ -960,16 +960,16 @@
         <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
     </message>
     <message>
-        <source>Computer is thinking...</source>
-        <translation>Computer denkt ...</translation>
-    </message>
-    <message>
         <source>Computer is thinking... (up to %1 seconds remaining)</source>
         <translation>Computer denkt ... (maximal %1 Sekunden verbleibend)</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
         <translation>Computer denkt ... (maximal %1 Minuten verbleibend)</translation>
+    </message>
+    <message>
+        <source>Computer is thinking...</source>
+        <translation>Computer denkt ...</translation>
     </message>
 </context>
 <context>
