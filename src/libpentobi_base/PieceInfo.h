@@ -43,6 +43,9 @@ public:
         points occurs in Trigon. */
     static const unsigned max_scored_size = 6;
 
+    /** Maximum number of instances of a piece per player. */
+    static const unsigned max_instances = 3;
+
     typedef ArrayList<CoordPoint, max_size> Points;
 
 

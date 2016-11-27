@@ -93,6 +93,8 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
       m_transforms(&transforms),
       m_name(name)
 {
+    LIBBOARDGAME_ASSERT(nu_instances > 0);
+    LIBBOARDGAME_ASSERT(nu_instances <= PieceInfo::max_instances);
     if (log_piece_creation)
         LIBBOARDGAME_LOG("Creating transformations for piece ", name, ' ',
                          points);
