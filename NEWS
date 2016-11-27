@@ -1,7 +1,11 @@
 Version 12.0.UNKNOWN (v12-fixes)
 ================================
 
-* "Delete All Variations" did not mark the file as modified.
+Desktop version:
+
+* Keep Only Position did not work correctly in Nexos and Callisto
+  game variants with more than two colors.
+* Delete All Variations did not mark the file as modified.
 * Missing semicolon in desktop entry file (bug #12).
 * Fixed ambiguous shortcut overload.
 

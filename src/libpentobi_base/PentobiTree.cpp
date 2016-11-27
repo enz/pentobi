@@ -315,6 +315,8 @@ void PentobiTree::set_result(const SgfNode& node, int score)
 
 void PentobiTree::set_setup(const SgfNode& node, const Setup& setup)
 {
+    auto nu_colors = get_nu_colors(m_variant);
+    LIBBOARDGAME_ASSERT(nu_colors >= 2 && nu_colors <= 4);
     remove_property(node, "B");
     remove_property(node, "W");
     remove_property(node, "1");
@@ -328,28 +330,18 @@ void PentobiTree::set_setup(const SgfNode& node, const Setup& setup)
     remove_property(node, "A3");
     remove_property(node, "A4");
     remove_property(node, "AE");
-    switch (m_variant)
+    if (nu_colors == 2)
     {
-    case Variant::classic:
-    case Variant::classic_2:
-    case Variant::classic_3:
-    case Variant::trigon:
-    case Variant::trigon_2:
-        set_setup_property(node, "A1", setup.placements[Color(0)]);
-        set_setup_property(node, "A2", setup.placements[Color(1)]);
-        set_setup_property(node, "A3", setup.placements[Color(2)]);
-        set_setup_property(node, "A4", setup.placements[Color(3)]);
-        break;
-    case Variant::trigon_3:
-        set_setup_property(node, "A1", setup.placements[Color(0)]);
-        set_setup_property(node, "A2", setup.placements[Color(1)]);
-        set_setup_property(node, "A3", setup.placements[Color(2)]);
-        break;
-    default:
-        LIBBOARDGAME_ASSERT(m_variant == Variant::duo
-                            || m_variant == Variant::junior);
         set_setup_property(node, "AB", setup.placements[Color(0)]);
         set_setup_property(node, "AW", setup.placements[Color(1)]);
+    }
+    else
+    {
+        set_setup_property(node, "A1", setup.placements[Color(0)]);
+        set_setup_property(node, "A2", setup.placements[Color(1)]);
+        set_setup_property(node, "A3", setup.placements[Color(2)]);
+        if (nu_colors > 3)
+            set_setup_property(node, "A4", setup.placements[Color(3)]);
     }
     set_player(node, setup.to_play);
 }
