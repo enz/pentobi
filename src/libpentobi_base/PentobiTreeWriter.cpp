@@ -27,6 +27,7 @@ PentobiTreeWriter::~PentobiTreeWriter()
 void PentobiTreeWriter::write_property(const string& id,
                                        const vector<string>& values)
 {
+    auto nu_colors = get_nu_colors(m_variant);
     // Replace obsolete move property IDs or multi-valued move properties
     // as used by early versions of Pentobi
     if (id == "BLUE" || id == "YELLOW" || id == "GREEN" || id == "RED"
@@ -36,16 +37,11 @@ void PentobiTreeWriter::write_property(const string& id,
     {
         string new_id;
         if (id == "BLUE")
-            new_id = "1";
+            new_id = (nu_colors == 2 ? "B" : "1");
         else if (id == "YELLOW")
             new_id = "2";
         else if (id == "GREEN")
-        {
-            if (m_variant == Variant::duo || m_variant == Variant::junior)
-                new_id = "2";
-            else
-                new_id = "4";
-        }
+            new_id = (nu_colors == 2 ? "W" : "4");
         else if (id == "RED")
             new_id = "3";
         else
@@ -61,9 +57,24 @@ void PentobiTreeWriter::write_property(const string& id,
             new_values.push_back(val);
             libboardgame_sgf::TreeWriter::write_property(new_id, new_values);
         }
+        return;
     }
-    else
-        libboardgame_sgf::TreeWriter::write_property(id, values);
+    // Pentobi 12.0 versions erroneously used multi-player properties for
+    // two-player Callisto.
+    if (nu_colors == 2)
+    {
+        if (id == "1")
+        {
+            libboardgame_sgf::TreeWriter::write_property("B", values);
+            return;
+        }
+        if (id == "2")
+        {
+            libboardgame_sgf::TreeWriter::write_property("W", values);
+            return;
+        }
+    }
+    libboardgame_sgf::TreeWriter::write_property(id, values);
 }
 
 //-----------------------------------------------------------------------------

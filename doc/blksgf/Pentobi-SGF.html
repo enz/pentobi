@@ -70,11 +70,12 @@ time left for a color, if the game is played with a time limit for each color.
 (This is only an example how the properties should be interpreted. Pentobi
 currently has no support for game clocks.)</p>
 <p style="font-size:small"><b>Note</b><br>
-Old versions of Pentobi (before version 0.2) used the properties <tt>BLUE</tt>,
-<tt>YELLOW</tt>, <tt>RED</tt>, <tt>GREEN</tt> in the four-color game variants,
-which did not reflect the current state of discussion for SGF 5. Current
-versions of Pentobi can still read games containing the old properties but they
-are deprecated and should no longer be used.</p>
+Pentobi versions before 0.2 used the properties <tt>BLUE</tt>, <tt>YELLOW</tt>,
+<tt>RED</tt>, <tt>GREEN</tt> in the four-color game variants, which did not
+reflect the current state of discussion for SGF 5. Pentobi 12.0 erroneously
+used multi-player properties for two-player Callisto. Current versions of
+Pentobi can still read games written by older versions and will convert old
+properties.</p>
 <h2>Coordinate System</h2>
 <p>Fields on the board (called points in SGF) are identified by a
 case-insensitive string with a letter for the column followed by a number for
