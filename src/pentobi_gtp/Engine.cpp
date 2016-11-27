@@ -16,17 +16,7 @@
 namespace pentobi_gtp {
 
 using libboardgame_gtp::Failure;
-using libboardgame_util::ArrayList;
-using libpentobi_base::Board;
-using libpentobi_base::Color;
-using libpentobi_base::Grid;
-using libpentobi_base::Move;
-using libpentobi_base::MoveList;
-using libpentobi_base::PieceInfo;
-using libpentobi_base::Point;
 using libpentobi_mcts::Float;
-using libpentobi_mcts::Move;
-using libpentobi_mcts::State;
 
 //-----------------------------------------------------------------------------
 
