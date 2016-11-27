@@ -487,10 +487,6 @@
         <translation>Kein Kommentar gefunden</translation>
     </message>
     <message>
-        <source>The computer is thinking...</source>
-        <translation>Der Computer denkt ...</translation>
-    </message>
-    <message>
         <source>Blokus games (*.blksgf);;All files (*)</source>
         <translation>Blokus-Partien (*.blksgf);;Alle Dateien (*)</translation>
     </message>
@@ -683,14 +679,6 @@
     <message>
         <source>Keep Only Subtree</source>
         <translation>Nur Teilbaum behalten</translation>
-    </message>
-    <message>
-        <source>The computer is thinking... (max. %1 seconds remaining)</source>
-        <translation>Der Computer denkt ... (max. %1 Sekunden verbleibend)</translation>
-    </message>
-    <message>
-        <source>The computer is thinking... (max. %1 minutes remaining)</source>
-        <translation>Der Computer denkt ... (max. %1 Minuten verbleibend)</translation>
     </message>
     <message>
         <source>[*]%1</source>
@@ -970,6 +958,18 @@
     <message>
         <source>&amp;Level (Callisto, 3 Players)</source>
         <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Computer is thinking... (up to %1 seconds remaining)</source>
+        <translation>Computer denkt ... (maximal %1 Sekunden verbleibend)</translation>
+    </message>
+    <message>
+        <source>Computer is thinking... (up to %1 minutes remaining)</source>
+        <translation>Computer denkt ... (maximal %1 Minuten verbleibend)</translation>
+    </message>
+    <message>
+        <source>Computer is thinking...</source>
+        <translation>Computer denkt ...</translation>
     </message>
 </context>
 <context>

@@ -1819,7 +1819,7 @@ void MainWindow::genMove(bool playSingleMove)
     m_actionPlay->setEnabled(false);
     m_actionPlaySingleMove->setEnabled(false);
     m_actionInterrupt->setEnabled(true);
-    showStatus(tr("The computer is thinking..."));
+    showStatus(tr("Computer is thinking..."));
     clearPiece();
     clear_abort();
     m_lastRemainingSeconds = 0;
@@ -2706,7 +2706,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
             return;
         m_lastRemainingSeconds = seconds;
         text =
-            tr("The computer is thinking... (max. %1 seconds remaining)")
+            tr("Computer is thinking... (up to %1 seconds remaining)")
             .arg(seconds);
     }
     else
@@ -2716,7 +2716,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
             return;
         m_lastRemainingMinutes = minutes;
         text =
-            tr("The computer is thinking... (max. %1 minutes remaining)")
+            tr("Computer is thinking... (up to %1 minutes remaining)")
             .arg(minutes);
     }
     QMetaObject::invokeMethod(statusBar(), "showMessage", Q_ARG(QString, text),
