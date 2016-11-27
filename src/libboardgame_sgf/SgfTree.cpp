@@ -27,9 +27,7 @@ SgfTree::SgfTree()
     init();
 }
 
-SgfTree::~SgfTree()
-{
-}
+SgfTree::~SgfTree() = default;
 
 bool SgfTree::contains(const SgfNode& node) const
 {
