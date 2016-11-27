@@ -163,6 +163,14 @@ function isComputerToPlay() {
     return computerPlays(gameModel.toPlay)
 }
 
+function keepOnlyPosition() {
+    showQuestion(qsTr("Keep only position?"), gameModel.keepOnlyPosition())
+}
+
+function keepOnlySubtree() {
+    showQuestion(qsTr("Keep only subtree?"), gameModel.keepOnlySubtree())
+}
+
 function moveGenerated(move) {
     if (isMoveHintRunning) {
         gameDisplay.showMoveHint(move)

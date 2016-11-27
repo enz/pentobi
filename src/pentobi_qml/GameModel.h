@@ -81,6 +81,10 @@ public:
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, const QString& state,
                                 QPointF coord) const;
 
+    Q_INVOKABLE void keepOnlyPosition();
+
+    Q_INVOKABLE void keepOnlySubtree();
+
     Q_INVOKABLE void nextColor();
 
     Q_INVOKABLE void playPiece(PieceModel* pieceModel, QPointF coord);

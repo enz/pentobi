@@ -42,6 +42,18 @@ Menu {
         visible: ! isAndroid || enabled
         onTriggered: Logic.truncateChildren()
     }
+    MenuItem {
+        text: qsTr("&Keep Only Position")
+        enabled: gameModel.canGoBackward || gameModel.canGoForward
+        visible: ! isAndroid || enabled
+        onTriggered: Logic.keepOnlyPosition()
+    }
+    MenuItem {
+        text: qsTr("Keep Only &Subtree")
+        enabled: gameModel.canGoBackward && gameModel.canGoForward
+        visible: ! isAndroid || enabled
+        onTriggered: Logic.keepOnlySubtree()
+    }
     MenuSeparator { }
     MenuItem {
         text: qsTr("&Next Color")

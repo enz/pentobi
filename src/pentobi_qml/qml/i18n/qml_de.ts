@@ -193,6 +193,14 @@
         <source>&amp;copy; 2011&amp;ndash;%1 Markus&amp;nbsp;Enzenberger</source>
         <translation>&amp;copy; 2011&amp;ndash;%1 Markus&amp;nbsp;Enzenberger</translation>
     </message>
+    <message>
+        <source>Keep only position?</source>
+        <translation>Nur Brettstellung behalten?</translation>
+    </message>
+    <message>
+        <source>Keep only subtree?</source>
+        <translation>Nur Teilbaum behalten?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -294,6 +302,14 @@
     <message>
         <source>&amp;Next Color</source>
         <translation>&amp;Nächste Farbe</translation>
+    </message>
+    <message>
+        <source>&amp;Keep Only Position</source>
+        <translation>Nur &amp;Brettstellung behalten</translation>
+    </message>
+    <message>
+        <source>Keep Only &amp;Subtree</source>
+        <translation>Nur &amp;Teilbaum behalten</translation>
     </message>
 </context>
 <context>

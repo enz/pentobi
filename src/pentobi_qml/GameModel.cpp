@@ -400,6 +400,18 @@ bool GameModel::isLegalPos(PieceModel* pieceModel, const QString& state,
     return result;
 }
 
+void GameModel::keepOnlyPosition()
+{
+    m_game.keep_only_position();
+    updateProperties();
+}
+
+void GameModel::keepOnlySubtree()
+{
+    m_game.keep_only_subtree();
+    updateProperties();
+}
+
 bool GameModel::loadAutoSave()
 {
     QSettings settings;

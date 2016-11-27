@@ -11,6 +11,7 @@ Desktop version:
 
 Android version
 
+* New menu items Edit/Keep Only Position, Edit/Keep Only Subtree.
 * The source code now requires Qt 5.8, which no longer supports Android
   versions older than Android 4.1.
 
