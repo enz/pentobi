@@ -3,7 +3,7 @@ add_executable(unittest_libpentobi_base
   BoardTest.cpp
   BoardUpdaterTest.cpp
   GameTest.cpp
-  TreeTest.cpp
+  PentobiTreeTest.cpp
 )
 
 target_link_libraries(unittest_libpentobi_base

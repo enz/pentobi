@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libpentobi_base/TreeTest.cpp
+/** @file unittest/libpentobi_base/PentobiTreeTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
