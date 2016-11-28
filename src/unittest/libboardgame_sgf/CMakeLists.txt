@@ -1,5 +1,6 @@
 add_executable(unittest_libboardgame_sgf
   SgfNodeTest.cpp
+  SgfTreeTest.cpp
   SgfUtilTest.cpp
   TreeReaderTest.cpp
 )
