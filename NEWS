@@ -15,6 +15,8 @@ Desktop version:
 * Delete All Variations did not mark the file as modified.
 * Missing semicolon in desktop entry file (bug #12).
 * Fixed ambiguous shortcut overload.
+* Saving a file will now remember the directory and use it as a default for
+  file dialogs.
 
 
 Version 12.0 (10 Apr 2016)

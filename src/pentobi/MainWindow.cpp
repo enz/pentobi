@@ -2681,6 +2681,7 @@ void MainWindow::saveAs()
     file = QFileDialog::getSaveFileName(this, tr("Save"), file, getFilter());
     if (! file.isEmpty())
     {
+        rememberDir(file);
         if (save(file))
         {
             m_game.clear_modified();
