@@ -10,8 +10,8 @@ General:
 
 Desktop version:
 
-* Keep Only Position did not work correctly in Nexos and in multi-player
-  Callisto.
+* Keep Only Position and Keep Only Subtree did not work correctly in Nexos and
+  in multi-player Callisto.
 * Delete All Variations did not mark the file as modified.
 * Missing semicolon in desktop entry file (bug #12).
 * Fixed ambiguous shortcut overload.
