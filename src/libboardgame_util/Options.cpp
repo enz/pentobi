@@ -31,7 +31,7 @@ Options::Options(int argc, const char** argv, const vector<string>& specs)
     for (int n = 1; n < argc; ++n)
     {
         const string arg = argv[n];
-        if (! end_of_options && arg.find("-") == 0 && arg != "-")
+        if (! end_of_options && arg.compare(0, 1, "-") == 0 && arg != "-")
         {
             if (arg == "--")
             {
@@ -41,7 +41,7 @@ Options::Options(int argc, const char** argv, const vector<string>& specs)
             string name;
             string value;
             bool needs_arg = false;
-            if (arg.find("--") == 0)
+            if (arg.compare(0, 2, "--") == 0)
             {
                 // Long option
                 name = arg.substr(2);
