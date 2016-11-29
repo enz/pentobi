@@ -4,6 +4,7 @@ add_executable(unittest_libpentobi_base
   BoardUpdaterTest.cpp
   GameTest.cpp
   PentobiTreeTest.cpp
+  PentobiSgfUtilTest.cpp
 )
 
 target_link_libraries(unittest_libpentobi_base
