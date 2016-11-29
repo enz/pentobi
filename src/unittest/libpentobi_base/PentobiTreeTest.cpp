@@ -98,6 +98,105 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_invalid_game)
     LIBBOARDGAME_CHECK_THROW(PentobiTree tree(root), InvalidPropertyValue);
 }
 
+/** Check that keep_only_subtree() works in Callisto.
+    Regression test for a bug in Pentobi 12.0 */
+LIBBOARDGAME_TEST_CASE(pentobi_base_tree_keep_only_subtree_callisto)
+{
+
+    istringstream in("(;GM[Callisto]"
+                     ";1[h12]"
+                     ";2[m9]"
+                     ";3[l8]"
+                     ";4[i13]"
+                     ";1[i8]"
+                     ";2[p14])");
+    TreeReader reader;
+    reader.read(in);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
+    auto node = &tree.get_root();
+    node = &node->get_first_child();
+    node = &node->get_first_child();
+    node = &node->get_first_child();
+    node = &node->get_first_child();
+    node = &node->get_first_child();
+    LIBBOARDGAME_CHECK(! tree.is_modified());
+    tree.keep_only_subtree(*node);
+    LIBBOARDGAME_CHECK(tree.is_modified());
+
+    node = &tree.get_root();
+    LIBBOARDGAME_CHECK(node->has_single_child());
+    auto values = node->get_multi_property("A1");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 2u);
+    auto begin = values.begin();
+    auto end = values.end();
+    LIBBOARDGAME_CHECK(find(begin, end, "h12") != end);
+    LIBBOARDGAME_CHECK(find(begin, end, "i8") != end);
+    values = node->get_multi_property("A2");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "m9");
+    values = node->get_multi_property("A3");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "l8");
+    values = node->get_multi_property("A4");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "i13");
+    auto value = node->get_property("PL");
+    LIBBOARDGAME_CHECK_EQUAL(value, "2");
+
+    node = &node->get_first_child();
+    LIBBOARDGAME_CHECK(! node->has_children());
+    value = node->get_property("2");
+    LIBBOARDGAME_CHECK_EQUAL(value, "p14");
+}
+
+/** Check that keep_only_subtree() works in Nexos.
+    Regression test for a bug in Pentobi 12.0 */
+LIBBOARDGAME_TEST_CASE(pentobi_base_tree_keep_only_subtree_nexos)
+{
+
+    istringstream in("(;GM[Nexos Two-Player]"
+                     ";1[g16,g18,f19,e20]"
+                     ";2[r17,s18,t19,u20]"
+                     ";3[t5,s6,s8,r9]"
+                     ";4[e6,e8,f9,h9]"
+                     ";1[m14,h15,j15,l15])");
+    TreeReader reader;
+    reader.read(in);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
+    auto node = &tree.get_root();
+    node = &node->get_first_child();
+    node = &node->get_first_child();
+    node = &node->get_first_child();
+    node = &node->get_first_child();
+    LIBBOARDGAME_CHECK(! tree.is_modified());
+    tree.keep_only_subtree(*node);
+    LIBBOARDGAME_CHECK(tree.is_modified());
+
+    node = &tree.get_root();
+    LIBBOARDGAME_CHECK(node->has_single_child());
+    auto values = node->get_multi_property("A1");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "g16,g18,f19,e20");
+    values = node->get_multi_property("A2");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "r17,s18,t19,u20");
+    values = node->get_multi_property("A3");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "t5,s6,s8,r9");
+    values = node->get_multi_property("A4");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "e6,e8,f9,h9");
+    auto value = node->get_property("PL");
+    LIBBOARDGAME_CHECK_EQUAL(value, "1");
+
+    node = &node->get_first_child();
+    LIBBOARDGAME_CHECK(! node->has_children());
+    value = node->get_property("1");
+    LIBBOARDGAME_CHECK_EQUAL(value, "m14,h15,j15,l15");
+}
+
 /** Check that Tree constructor throws MissingProperty on missing GM
     property. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_tree_missing_game_property)
