@@ -17,7 +17,7 @@ General:
 
 Desktop version:
 
-* Compilations on Windows is no longer tested or supported.
+* Compilation on Windows is no longer tested or supported.
 * Keep Only Position and Keep Only Subtree did not work correctly in Nexos and
   in multi-player Callisto.
 * Delete All Variations did not mark the file as modified.
