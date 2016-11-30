@@ -1,7 +1,8 @@
-Version 12.0.UNKNOWN (v12-fixes)
-================================
+Version 12.1 (30 Nov 2016)
+==========================
 
 General:
+
 * Loading a file with a setup position in Nexos did not always work correctly
   or could cause a crash.
 * SGF files for two-player Callisto did not use B/W properties as documented
@@ -10,6 +11,7 @@ General:
 
 Desktop version:
 
+* Compilations on Windows is no longer tested or supported.
 * Keep Only Position and Keep Only Subtree did not work correctly in Nexos and
   in multi-player Callisto.
 * Delete All Variations did not mark the file as modified.
