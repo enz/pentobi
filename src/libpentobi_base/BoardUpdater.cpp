@@ -10,7 +10,6 @@
 
 #include "BoardUpdater.h"
 
-#include <stdexcept>
 #include "BoardUtil.h"
 #include "NodeUtil.h"
 #include "libboardgame_sgf/SgfUtil.h"
