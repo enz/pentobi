@@ -42,14 +42,20 @@ const SgfNode& SgfTree::create_new_child(const SgfNode& node)
 
 void SgfTree::delete_all_variations()
 {
-    if (has_variations())
-        m_modified = true;
     auto node = &get_root();
     while (node)
     {
-        non_const(*node).delete_variations();
+        delete_variations(*node);
         node = node->get_first_child_or_null();
     }
+}
+
+void SgfTree::delete_variations(const SgfNode& node)
+{
+    if (node.get_nu_children() <= 1)
+        return;
+    non_const(node).delete_variations();
+    m_modified = true;
 }
 
 double SgfTree::get_bad_move(const SgfNode& node)

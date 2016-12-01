@@ -59,6 +59,9 @@ public:
         @return The parent of the truncated node. */
     const SgfNode& truncate(const SgfNode& node);
 
+    /** Delete all children but the first. */
+    void delete_variations(const SgfNode& node);
+
     /** Delete all variations but the main variation. */
     void delete_all_variations();
 
