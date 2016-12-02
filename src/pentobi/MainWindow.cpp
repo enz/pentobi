@@ -1906,7 +1906,6 @@ void MainWindow::goodMove(bool checked)
 
 void MainWindow::gotoMove()
 {
-    QSettings settings;
     vector<const SgfNode*> nodes;
     auto& tree = m_game.get_tree();
     auto node = &m_game.get_current();
@@ -2270,7 +2269,6 @@ void MainWindow::open()
 {
     if (! checkSave())
         return;
-    QSettings settings;
     QString file = QFileDialog::getOpenFileName(this, tr("Open"), getLastDir(),
                                                 getFilter());
     if (file.isEmpty())
