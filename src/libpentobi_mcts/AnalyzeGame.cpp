@@ -36,18 +36,19 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     auto& root = game.get_root();
     auto node = &root;
     unsigned total_moves = 0;
-    while (node)
+    do
     {
         if (tree.has_move(*node))
             ++total_moves;
         node = node->get_first_child_or_null();
     }
+    while (node);
     WallTimeSource time_source;
     clear_abort();
     node = &root;
     unsigned move_number = 0;
     auto tie_value = Search::SearchParamConst::tie_value;
-    while (node)
+    do
     {
         auto mv = tree.get_move(*node);
         if (! mv.is_null())
@@ -92,6 +93,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
         }
         node = node->get_first_child_or_null();
     }
+    while (node);
 }
 
 //-----------------------------------------------------------------------------

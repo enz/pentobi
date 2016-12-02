@@ -91,7 +91,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
         pieceId.fill(0, *geo);
     auto node = &root;
     unsigned id = 0;
-    while (node)
+    do
     {
         if (libpentobi_base::node_util::has_setup(*node))
         {
@@ -120,6 +120,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
         }
         node = node->get_first_child_or_null();
     }
+    while (node);
     return true;
 }
 

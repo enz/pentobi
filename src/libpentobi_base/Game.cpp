@@ -50,7 +50,7 @@ Color Game::get_to_play_default(const Game& game)
     auto& bd = game.get_board();
     auto node = &game.get_current();
     Color next = Color(0);
-    while (node)
+    do
     {
         auto mv = tree.get_move(*node);
         if (! mv.is_null())
@@ -63,6 +63,7 @@ Color Game::get_to_play_default(const Game& game)
             return c;
         node = node->get_parent_or_null();
     }
+    while (node);
     return bd.get_effective_to_play(next);
 }
 

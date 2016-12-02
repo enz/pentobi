@@ -151,12 +151,13 @@ Variant PentobiTree::get_variant(const SgfNode& root)
 bool PentobiTree::has_main_variation_moves() const
 {
     auto node = &get_root();
-    while (node)
+    do
     {
         if (has_move_ignore_invalid(*node))
             return true;
         node = node->get_first_child_or_null();
     }
+    while (node);
     return false;
 }
 

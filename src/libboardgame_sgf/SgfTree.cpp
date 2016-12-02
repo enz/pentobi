@@ -43,11 +43,12 @@ const SgfNode& SgfTree::create_new_child(const SgfNode& node)
 void SgfTree::delete_all_variations()
 {
     auto node = &get_root();
-    while (node)
+    do
     {
         delete_variations(*node);
         node = node->get_first_child_or_null();
     }
+    while (node);
 }
 
 void SgfTree::delete_variations(const SgfNode& node)
@@ -92,12 +93,13 @@ unique_ptr<SgfNode> SgfTree::get_tree_transfer_ownership()
 bool SgfTree::has_variations() const
 {
     auto node = m_root.get();
-    while (node)
+    do
     {
         if (node->get_sibling())
             return true;
         node = node->get_first_child_or_null();
     }
+    while (node);
     return false;
 }
 
