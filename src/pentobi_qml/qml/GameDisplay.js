@@ -28,11 +28,11 @@ function createColorPieces(component, pieceModels) {
 
 function createPieces() {
     var file
-    if (gameModel.gameVariant.indexOf("trigon") === 0)
+    if (gameModel.gameVariant.startsWith("trigon"))
         file = "PieceTrigon.qml"
-    else if (gameModel.gameVariant.indexOf("nexos") === 0)
+    else if (gameModel.gameVariant.startsWith("nexos"))
         file = "PieceNexos.qml"
-    else if (gameModel.gameVariant.indexOf("callisto") === 0)
+    else if (gameModel.gameVariant.startsWith("callisto"))
         file = "PieceCallisto.qml"
     else
         file = "PieceClassic.qml"

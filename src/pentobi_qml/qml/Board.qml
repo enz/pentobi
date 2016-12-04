@@ -4,9 +4,9 @@ Item {
     id: root
 
     property string gameVariant
-    property bool isTrigon: gameVariant.indexOf("trigon") === 0
-    property bool isNexos: gameVariant.indexOf("nexos") === 0
-    property bool isCallisto: gameVariant.indexOf("callisto") === 0
+    property bool isTrigon: gameVariant.startsWith("trigon")
+    property bool isNexos: gameVariant.startsWith("nexos")
+    property bool isCallisto: gameVariant.startsWith("callisto")
     property int columns: {
         switch (gameVariant) {
         case "duo":

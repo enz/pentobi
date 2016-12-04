@@ -14,12 +14,12 @@ QtObject {
     property real toPlayColorLighter: 1.7
 
     function getImage(name) {
-        if (name.lastIndexOf("frame-", 0) === 0
-                || name.lastIndexOf("junction-", 0) === 0
-                || name.lastIndexOf("linesegment-", 0) === 0
-                || name.lastIndexOf("piece-manipulator", 0) === 0
-                || name.lastIndexOf("square-", 0) === 0
-                || name.lastIndexOf("triangle-", 0) === 0)
+        if (name.startsWith("frame-")
+                || name.startsWith("junction-")
+                || name.startsWith("linesegment-")
+                || name.startsWith("piece-manipulator")
+                || name.startsWith("square-")
+                || name.startsWith("triangle-"))
             return "themes/light/" + name + ".svg"
         return "themes/dark/" + name + ".svg"
     }

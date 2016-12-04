@@ -94,8 +94,8 @@ Item
                 PieceSelector {
                     id: pieceSelector
 
-                    columns: gameModel.gameVariant.indexOf("classic") == 0
-                             || gameModel.gameVariant.indexOf("callisto") == 0
+                    columns: gameModel.gameVariant.startsWith("classic")
+                             || gameModel.gameVariant.startsWith("callisto")
                              || gameModel.gameVariant == "duo" ? 7 : 8
                     width: flickable.width
                     height: flickable.height
