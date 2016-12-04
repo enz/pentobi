@@ -451,6 +451,10 @@
         <source>&amp;Animate Pieces</source>
         <translation>Spielsteine &amp;animieren</translation>
     </message>
+    <message>
+        <source>&amp;Coordinates</source>
+        <translation>&amp;Koordinaten</translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>

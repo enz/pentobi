@@ -8,6 +8,7 @@ Item
 
     property var pickedPiece: null
     property bool markLastMove: true
+    property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property alias busyIndicatorRunning: busyIndicator.running
     property size imageSourceSize: {

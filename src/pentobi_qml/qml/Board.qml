@@ -4,6 +4,7 @@ Item {
     id: root
 
     property string gameVariant
+    property bool showCoordinates
     property bool isTrigon: gameVariant.startsWith("trigon")
     property bool isNexos: gameVariant.startsWith("nexos")
     property bool isCallisto: gameVariant.startsWith("callisto")
@@ -50,9 +51,11 @@ Item {
         var sideLength
         if (isTrigon) sideLength = Math.min(width, Math.sqrt(3) * height)
         else sideLength = Math.min(width, height)
-        if (isTrigon) return sideLength / (columns + 1)
-        else if (isNexos) Math.floor(sideLength / (columns - 0.5))
-        else return Math.floor(sideLength / columns)
+        var n = columns
+        if (showCoordinates) n += (isTrigon ? 3 : 2)
+        if (isTrigon) return sideLength / (n + 1)
+        else if (isNexos) Math.floor(sideLength / (n - 0.5))
+        else return Math.floor(sideLength / n)
     }
     property real gridHeight: {
         if (isTrigon) return Math.sqrt(3) * gridWidth
@@ -90,6 +93,11 @@ Item {
         if (gameVariant === "trigon_3")
             isDownward = ! isDownward
         return (isDownward ? 1 : 2) / 3 * gridHeight
+    }
+    function getColumnCoord(x) {
+        if (x > 25)
+            return "A" + String.fromCharCode("A".charCodeAt(0) + (x - 26))
+        return String.fromCharCode("A".charCodeAt(0) + x)
     }
 
     Image {
@@ -203,6 +211,50 @@ Item {
             x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
             y: mapFromGameY(modelData.y) + getCenterYTrigon(modelData)
                - height / 2
+        }
+    }
+    Repeater {
+        model: showCoordinates ? columns : 0
+
+        Text {
+            text: getColumnCoord(index)
+            color: theme.fontColorCoordinates
+            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            x: mapFromGameX(index) + (gridWidth - width) / 2
+            y: mapFromGameY(-1) + (gridHeight - height) / 2
+        }
+    }
+    Repeater {
+        model: showCoordinates ? columns : 0
+
+        Text {
+            text: getColumnCoord(index)
+            color: theme.fontColorCoordinates
+            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            x: mapFromGameX(index) + (gridWidth - width) / 2
+            y: mapFromGameY(rows) + (gridHeight - height) / 2
+        }
+    }
+    Repeater {
+        model: showCoordinates ? rows : 0
+
+        Text {
+            text: index + 1
+            color: theme.fontColorCoordinates
+            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            x: mapFromGameX(isTrigon ? -1.5 : -1) + (gridWidth - width) / 2
+            y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
+        }
+    }
+    Repeater {
+        model: showCoordinates ? rows : 0
+
+        Text {
+            text: index + 1
+            color: theme.fontColorCoordinates
+            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            x: mapFromGameX(isTrigon ? columns + 0.5 : columns) + (gridWidth - width) / 2
+            y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
         }
     }
 }

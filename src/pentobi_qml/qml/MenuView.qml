@@ -11,6 +11,12 @@ Menu {
         onTriggered: gameDisplay.markLastMove = checked
     }
     MenuItem {
+        text: qsTr("&Coordinates")
+        checkable: true
+        checked: gameDisplay.showCoordinates
+        onTriggered: gameDisplay.showCoordinates = checked
+    }
+    MenuItem {
         text: qsTr("&Animate Pieces")
         checkable: true
         checked: gameDisplay.enableAnimations
