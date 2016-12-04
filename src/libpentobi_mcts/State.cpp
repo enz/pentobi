@@ -767,7 +767,7 @@ void State::start_search()
     if (m_is_callisto)
         // Playing 1-piece in Callisto early in playouts is bad, make sure it
         // gets a low gamma even if it is on a local point.
-        m_gamma_piece[m_bd.get_one_piece()] = 1 / gamma_local[1];
+        m_gamma_piece[m_bd.get_one_piece()] = 1e-13f;
 }
 
 void State::start_simulation(size_t n)
