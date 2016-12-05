@@ -81,33 +81,33 @@ public:
     Q_INVOKABLE void cancelGenMove();
 
 signals:
-    void levelCallistoChanged(unsigned);
+    void levelCallistoChanged();
 
-    void levelCallisto2Changed(unsigned);
+    void levelCallisto2Changed();
 
-    void levelCallisto3Changed(unsigned);
+    void levelCallisto3Changed();
 
-    void levelClassicChanged(unsigned);
+    void levelClassicChanged();
 
-    void levelClassic2Changed(unsigned);
+    void levelClassic2Changed();
 
-    void levelClassic3Changed(unsigned);
+    void levelClassic3Changed();
 
-    void levelDuoChanged(unsigned);
+    void levelDuoChanged();
 
-    void levelTrigonChanged(unsigned);
+    void levelTrigonChanged();
 
-    void levelTrigon2Changed(unsigned);
+    void levelTrigon2Changed();
 
-    void levelTrigon3Changed(unsigned);
+    void levelTrigon3Changed();
 
-    void levelJuniorChanged(unsigned);
+    void levelJuniorChanged();
 
-    void levelNexosChanged(unsigned);
+    void levelNexosChanged();
 
-    void levelNexos2Changed(unsigned);
+    void levelNexos2Changed();
 
-    void isGenMoveRunningChanged(bool);
+    void isGenMoveRunningChanged();
 
     void moveGenerated(int move);
 

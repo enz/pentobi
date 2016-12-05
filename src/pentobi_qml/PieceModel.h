@@ -94,13 +94,13 @@ public:
     Q_INVOKABLE void flipAcrossY();
 
 signals:
-    void stateChanged(QString);
+    void stateChanged();
 
-    void isPlayedChanged(bool);
+    void isPlayedChanged();
 
-    void isLastMoveChanged(bool);
+    void isLastMoveChanged();
 
-    void gameCoordChanged(QPointF);
+    void gameCoordChanged();
 
 private:
     const Board& m_bd;

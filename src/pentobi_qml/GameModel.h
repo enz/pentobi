@@ -154,67 +154,67 @@ signals:
         game tree. */
     void positionChanged();
 
-    void toPlayChanged(int);
+    void toPlayChanged();
 
-    void altPlayerChanged(int);
+    void altPlayerChanged();
 
-    void points0Changed(float);
+    void points0Changed();
 
-    void points1Changed(float);
+    void points1Changed();
 
-    void points2Changed(float);
+    void points2Changed();
 
-    void points3Changed(float);
+    void points3Changed();
 
-    void bonus0Changed(float);
+    void bonus0Changed();
 
-    void bonus1Changed(float);
+    void bonus1Changed();
 
-    void bonus2Changed(float);
+    void bonus2Changed();
 
-    void bonus3Changed(float);
+    void bonus3Changed();
 
-    void hasMoves0Changed(bool);
+    void hasMoves0Changed();
 
-    void hasMoves1Changed(bool);
+    void hasMoves1Changed();
 
-    void hasMoves2Changed(bool);
+    void hasMoves2Changed();
 
-    void hasMoves3Changed(bool);
+    void hasMoves3Changed();
 
-    void hasVariationsChanged(bool);
+    void hasVariationsChanged();
 
-    void isGameOverChanged(bool);
+    void isGameOverChanged();
 
-    void isGameEmptyChanged(bool);
+    void isGameEmptyChanged();
 
-    void isMainVarChanged(bool);
+    void isMainVarChanged();
 
-    void canUndoChanged(bool);
+    void canUndoChanged();
 
-    void canGoBackwardChanged(bool);
+    void canGoBackwardChanged();
 
-    void canGoForwardChanged(bool);
+    void canGoForwardChanged();
 
-    void hasPrevVarChanged(bool);
+    void hasPrevVarChanged();
 
-    void hasNextVarChanged(bool);
+    void hasNextVarChanged();
 
-    void gameVariantChanged(QString);
+    void gameVariantChanged();
 
-    void positionInfoChanged(QString);
+    void positionInfoChanged();
 
-    void nuColorsChanged(int);
+    void nuColorsChanged();
 
-    void startingPoints0Changed(QVariantList);
+    void startingPoints0Changed();
 
-    void startingPoints1Changed(QVariantList);
+    void startingPoints1Changed();
 
-    void startingPoints2Changed(QVariantList);
+    void startingPoints2Changed();
 
-    void startingPoints3Changed(QVariantList);
+    void startingPoints3Changed();
 
-    void startingPointsAllChanged(QVariantList);
+    void startingPointsAllChanged();
 
 private:
     Game m_game;
@@ -316,7 +316,7 @@ private:
     void preparePieceTransform(PieceModel* pieceModel, Move mv);
 
     template<typename T>
-    void set(T& target, const T& value, void (GameModel::*changedSignal)(T));
+    void set(T& target, const T& value, void (GameModel::*changedSignal)());
 
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);

@@ -162,7 +162,7 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
     if (m_isGenMoveRunning == isGenMoveRunning)
         return;
     m_isGenMoveRunning = isGenMoveRunning;
-    emit isGenMoveRunningChanged(isGenMoveRunning);
+    emit isGenMoveRunningChanged();
 }
 
 void PlayerModel::startGenMove(GameModel* gm)

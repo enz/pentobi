@@ -285,7 +285,7 @@ void PieceModel::setGameCoord(QPointF gameCoord)
     if (m_gameCoord == gameCoord)
         return;
     m_gameCoord = gameCoord;
-    emit gameCoordChanged(gameCoord);
+    emit gameCoordChanged();
 }
 
 void PieceModel::setIsLastMove(bool isLastMove)
@@ -293,7 +293,7 @@ void PieceModel::setIsLastMove(bool isLastMove)
     if (m_isLastMove == isLastMove)
         return;
     m_isLastMove = isLastMove;
-    emit isLastMoveChanged(isLastMove);
+    emit isLastMoveChanged();
 }
 
 void PieceModel::setIsPlayed(bool isPlayed)
@@ -301,7 +301,7 @@ void PieceModel::setIsPlayed(bool isPlayed)
     if (m_isPlayed == isPlayed)
         return;
     m_isPlayed = isPlayed;
-    emit isPlayedChanged(isPlayed);
+    emit isPlayedChanged();
 }
 
 void PieceModel::setDefaultState()
@@ -309,7 +309,7 @@ void PieceModel::setDefaultState()
     if (m_state.isEmpty())
         return;
     m_state.clear();
-    emit stateChanged(m_state);
+    emit stateChanged();
 }
 
 void PieceModel::setTransform(const Transform* transform)
@@ -362,7 +362,7 @@ void PieceModel::setTransform(const Transform* transform)
     if (m_state == state)
         return;
     m_state = state;
-    emit stateChanged(m_state);
+    emit stateChanged();
 }
 
 QString PieceModel::state() const

@@ -385,7 +385,7 @@ void GameModel::initGameVariant(const QString& gameVariant)
     m_lastMovePieceModel = nullptr;
     createPieceModels();
     m_gameVariant = gameVariant;
-    emit gameVariantChanged(gameVariant);
+    emit gameVariantChanged();
     updateProperties();
 }
 
@@ -593,12 +593,12 @@ bool GameModel::save(const QString& file)
 
 template<typename T>
 void GameModel::set(T& target, const T& value,
-                    void (GameModel::*changedSignal)(T))
+                    void (GameModel::*changedSignal)())
 {
     if (target != value)
     {
         target = value;
-        emit (this->*changedSignal)(value);
+        emit (this->*changedSignal)();
     }
 }
 
