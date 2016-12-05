@@ -21,7 +21,7 @@ function createColorPieces(component, pieceModels) {
     var pieces = []
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
-        pieces.push(component.createObject(this, properties))
+        pieces.push(component.createObject(gameDisplay, properties))
     }
     return pieces
 }

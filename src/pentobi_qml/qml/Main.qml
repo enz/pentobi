@@ -144,12 +144,14 @@ ApplicationWindow {
         id: computerColorDialogComponent
 
         ComputerColorDialog {
+            id: computerColorDialog
+
             gameVariant: gameModel.gameVariant
             onAccepted: {
-                root.computerPlays0 = this.computerPlays0
-                root.computerPlays1 = this.computerPlays1
-                root.computerPlays2 = this.computerPlays2
-                root.computerPlays3 = this.computerPlays3
+                root.computerPlays0 = computerColorDialog.computerPlays0
+                root.computerPlays1 = computerColorDialog.computerPlays1
+                root.computerPlays2 = computerColorDialog.computerPlays2
+                root.computerPlays3 = computerColorDialog.computerPlays3
                 if (! Logic.isComputerToPlay())
                     cancelGenMove()
                 else if (! gameModel.isGameOver)
@@ -216,7 +218,7 @@ ApplicationWindow {
         property var func
 
         function run(func) {
-            this.func = func
+            lengthyCommand.func = func
             isRunning = true
             restart()
         }
