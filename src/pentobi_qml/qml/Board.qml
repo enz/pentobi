@@ -153,11 +153,13 @@ Item {
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
         cache: false
+        asynchronous: true
     }
     Repeater {
         model: gameModel.startingPoints0
 
         Rectangle {
+            visible: image.status == Image.Ready
             color: theme.colorBlue
             width: startingPointSize; height: width
             radius: width / 2
@@ -169,6 +171,7 @@ Item {
         model: gameModel.startingPoints1
 
         Rectangle {
+            visible: image.status == Image.Ready
             color: gameModel.gameVariant == "duo"
                    || gameModel.gameVariant == "junior"
                    || gameModel.gameVariant == "callisto_2" ?
@@ -183,6 +186,7 @@ Item {
         model: gameModel.startingPoints2
 
         Rectangle {
+            visible: image.status == Image.Ready
             color: theme.colorRed
             width: startingPointSize; height: width
             radius: width / 2
@@ -194,6 +198,7 @@ Item {
         model: gameModel.startingPoints3
 
         Rectangle {
+            visible: image.status == Image.Ready
             color: theme.colorGreen
             width: startingPointSize; height: width
             radius: width / 2
@@ -205,6 +210,7 @@ Item {
         model: gameModel.startingPointsAll
 
         Rectangle {
+            visible: image.status == Image.Ready
             color: theme.colorStartingPoint
             width: startingPointSize; height: width
             radius: width / 2
