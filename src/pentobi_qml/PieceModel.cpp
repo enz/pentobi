@@ -116,7 +116,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
         for (auto& p : points)
         {
             bool hasRight = points.contains(CoordPoint(p.x + 1, p. y));
-            bool hasDown = points.contains(CoordPoint(p.x, p. y + 1));
+            bool hasDown = points.contains(CoordPoint(p.x, p.y + 1));
             int junctionType;
             if (hasRight && hasDown)
                 junctionType = 0;
@@ -260,7 +260,7 @@ QVariantList PieceModel::junctions()
     return m_junctions;
 }
 
-QVariantList PieceModel::junctionType()
+QVector<int> PieceModel::junctionType()
 {
     return m_junctionType;
 }

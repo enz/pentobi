@@ -10,6 +10,7 @@
 #include <QObject>
 #include <QPointF>
 #include <QVariant>
+#include <QVector>
 #include "libpentobi_base/Board.h"
 
 using libboardgame_base::Transform;
@@ -28,7 +29,7 @@ class PieceModel
     Q_PROPERTY(int color READ color CONSTANT)
     Q_PROPERTY(QVariantList elements READ elements CONSTANT)
     Q_PROPERTY(QVariantList junctions READ junctions CONSTANT)
-    Q_PROPERTY(QVariantList junctionType READ junctionType CONSTANT)
+    Q_PROPERTY(QVector<int> junctionType READ junctionType CONSTANT)
     Q_PROPERTY(QPointF center READ center CONSTANT)
     Q_PROPERTY(QPointF labelPos READ labelPos CONSTANT)
     Q_PROPERTY(QString state READ state NOTIFY stateChanged)
@@ -55,7 +56,7 @@ public:
         In Nexos, this is the type of junction in junction(). In Callisto, it
         is the information if the squares in elements() have a right and/or
         down neighbor. See implementation for the meaning of the numbers. */
-    QVariantList junctionType();
+    QVector<int> junctionType();
 
     QPointF center() const;
 
@@ -123,7 +124,7 @@ private:
 
     QVariantList m_junctions;
 
-    QVariantList m_junctionType;
+    QVector<int> m_junctionType;
 
     QString m_state;
 };
