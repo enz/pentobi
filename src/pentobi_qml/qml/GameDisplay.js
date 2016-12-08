@@ -13,7 +13,12 @@ function createColorPieces(component, pieceModels) {
         "colorName": colorName,
         "isPicked": Qt.binding(function() { return this === pickedPiece }),
         "isMarked": Qt.binding(function() {
-            return markLastMove && this.pieceModel.isLastMove })
+            return moveMarking == "last_dot" && this.pieceModel.isLastMove }),
+        "label": Qt.binding(function() {
+            return (moveMarking == "all_number"
+                    || (moveMarking == "last_number"
+                        &&  this.pieceModel.isLastMove)) ?
+                        this.pieceModel.moveLabel : ""})
     }
     var pieces = []
     for (var i = 0; i < pieceModels.length; ++i) {

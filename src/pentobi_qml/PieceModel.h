@@ -46,6 +46,7 @@ class PieceModel
     Q_PROPERTY(QString state READ state NOTIFY stateChanged)
     Q_PROPERTY(bool isPlayed READ isPlayed NOTIFY isPlayedChanged)
     Q_PROPERTY(bool isLastMove READ isLastMove NOTIFY isLastMoveChanged)
+    Q_PROPERTY(QString moveLabel READ moveLabel NOTIFY moveLabelChanged)
     Q_PROPERTY(QPointF gameCoord READ gameCoord NOTIFY gameCoordChanged)
 
 public:
@@ -62,6 +63,8 @@ public:
 
     bool isLastMove() const;
 
+    QString moveLabel() const;
+
     QPointF gameCoord() const;
 
     Piece getPiece() const { return m_piece; }
@@ -77,6 +80,8 @@ public:
     void setIsPlayed(bool isPlayed);
 
     void setIsLastMove(bool isLastMove);
+
+    void setMoveLabel(const QString& moveLabel);
 
     void setGameCoord(QPointF gameCoord);
 
@@ -96,6 +101,8 @@ signals:
     void isLastMoveChanged();
 
     void gameCoordChanged();
+
+    void moveLabelChanged();
 
 private:
     const Board& m_bd;
@@ -121,6 +128,8 @@ private:
     QVector<int> m_junctionType;
 
     QString m_state;
+
+    QString m_moveLabel;
 };
 
 //-----------------------------------------------------------------------------

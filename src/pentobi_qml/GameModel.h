@@ -321,6 +321,8 @@ private:
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);
 
+    void updatePieces();
+
     void updateProperties();
 };
 

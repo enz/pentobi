@@ -245,6 +245,11 @@ bool PieceModel::isPlayed() const
     return m_isPlayed;
 }
 
+QString PieceModel::moveLabel() const
+{
+    return m_moveLabel;
+}
+
 void PieceModel::rotateLeft()
 {
     setTransform(m_bd.get_transforms().get_rotated_anticlockwise(getTransform()));
@@ -253,6 +258,14 @@ void PieceModel::rotateLeft()
 void PieceModel::rotateRight()
 {
     setTransform(m_bd.get_transforms().get_rotated_clockwise(getTransform()));
+}
+
+void PieceModel::setDefaultState()
+{
+    if (m_state.isEmpty())
+        return;
+    m_state.clear();
+    emit stateChanged();
 }
 
 void PieceModel::setGameCoord(QPointF gameCoord)
@@ -279,12 +292,12 @@ void PieceModel::setIsPlayed(bool isPlayed)
     emit isPlayedChanged();
 }
 
-void PieceModel::setDefaultState()
+void PieceModel::setMoveLabel(const QString& moveLabel)
 {
-    if (m_state.isEmpty())
+    if (m_moveLabel == moveLabel)
         return;
-    m_state.clear();
-    emit stateChanged();
+    m_moveLabel = moveLabel;
+    emit moveLabelChanged();
 }
 
 void PieceModel::setTransform(const Transform* transform)

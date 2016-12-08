@@ -4,11 +4,40 @@ import QtQuick.Controls 1.1
 Menu {
     title: qsTr("&View")
 
-    MenuItem {
-        text: qsTr("Mark &Last Move")
-        checkable: true
-        checked: gameDisplay.markLastMove
-        onTriggered: gameDisplay.markLastMove = checked
+    Menu {
+        title: qsTr("&Move Marking")
+
+        ExclusiveGroup { id: moveMarkingGroup }
+        MenuItem {
+            text: qsTr("Last With &Dot")
+            checkable: true
+            exclusiveGroup: moveMarkingGroup
+            checked: gameDisplay.moveMarking !== "last_number"
+                     && gameDisplay.moveMarking !== "all_number"
+                     && gameDisplay.moveMarking !== "none"
+            onTriggered: gameDisplay.moveMarking = "last_dot"
+        }
+        MenuItem {
+            text: qsTr("Last With &Number")
+            checkable: true
+            exclusiveGroup: moveMarkingGroup
+            checked: gameDisplay.moveMarking === "last_number"
+            onTriggered: gameDisplay.moveMarking = "last_number"
+        }
+        MenuItem {
+            text: qsTr("&All With Number")
+            checkable: true
+            exclusiveGroup: moveMarkingGroup
+            checked: gameDisplay.moveMarking === "all_number"
+            onTriggered: gameDisplay.moveMarking = "all_number"
+        }
+        MenuItem {
+            text: qsTr("N&one")
+            checkable: true
+            exclusiveGroup: moveMarkingGroup
+            checked: gameDisplay.moveMarking === "none"
+            onTriggered: gameDisplay.moveMarking = "none"
+        }
     }
     MenuItem {
         text: qsTr("&Coordinates")

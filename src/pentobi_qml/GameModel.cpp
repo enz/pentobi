@@ -13,12 +13,14 @@
 #include <QSettings>
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
+#include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
 
 using namespace std;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
+using libboardgame_util::get_letter_coord;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::is_main_variation;
@@ -37,6 +39,7 @@ using libpentobi_base::PieceInfo;
 using libpentobi_base::PiecePoints;
 using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
+using libpentobi_base::node_util::has_setup;
 using libpentobi_base::tree_util::get_position_info;
 
 //-----------------------------------------------------------------------------
@@ -66,6 +69,33 @@ QPointF getGameCoord(const Board& bd, Move mv)
     for (Point p : bd.get_move_points(mv))
         movePoints.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
     return PieceModel::findCenter(bd, movePoints, false);
+}
+
+/** Get the index of a variation.
+    This ignores child nodes without moves so that the moves are still labeled
+    1a, 1b, 1c, etc. even if this does not correspond to the child node
+    index. (Note that this is a different convention from variation strings
+    which does not use move number and child move index, but node depth and
+    child node index) */
+bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
+                       unsigned& moveIndex)
+{
+    auto parent = node.get_parent_or_null();
+    if (! parent || parent->has_single_child())
+        return false;
+    unsigned nuSiblingMoves = 0;
+    moveIndex = 0;
+    for (auto& i : parent->get_children())
+    {
+        if (! tree.has_move(i))
+            continue;
+        if (&i == &node)
+            moveIndex = nuSiblingMoves;
+        ++nuSiblingMoves;
+    }
+    if (nuSiblingMoves == 1)
+        return false;
+    return true;
 }
 
 } //namespace
@@ -665,6 +695,70 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
     return nullptr;
 }
 
+void GameModel::updatePieces()
+{
+    auto& bd = getBoard();
+    ColorMap<array<bool, Board::max_pieces>> isPlayed;
+
+    // Update pieces of setup
+    for (Color c : bd.get_colors())
+    {
+        isPlayed[c].fill(false);
+        for (Move mv : bd.get_setup().placements[c])
+        {
+            auto pieceModel = updatePiece(c, mv, isPlayed[c]);
+            pieceModel->setMoveLabel("");
+        }
+    }
+
+    // Update pieces of moves played after last setup or root
+    auto& tree = m_game.get_tree();
+    auto node = &m_game.get_current();
+    auto move_number = bd.get_nu_moves();
+    PieceModel* lastMovePieceModel = nullptr;
+    do
+    {
+        auto mv = tree.get_move(*node);
+        if (! mv.is_null())
+        {
+            auto c = mv.color;
+            auto pieceModel = updatePiece(c, mv.move, isPlayed[c]);
+            QString label = QString::number(move_number);
+            unsigned moveIndex;
+            if (getVariationIndex(tree, *node, moveIndex))
+                label.append(get_letter_coord(moveIndex).c_str());
+            pieceModel->setMoveLabel(label);
+            if (! lastMovePieceModel)
+                lastMovePieceModel = pieceModel;
+            --move_number;
+        }
+        if (has_setup(*node))
+            break;
+        node = node->get_parent_or_null();
+    } while (node);
+    if (lastMovePieceModel != m_lastMovePieceModel)
+    {
+        if (m_lastMovePieceModel != nullptr)
+            m_lastMovePieceModel->setIsLastMove(false);
+        if (lastMovePieceModel != nullptr)
+            lastMovePieceModel->setIsLastMove(true);
+        m_lastMovePieceModel = lastMovePieceModel;
+    }
+
+    // Update pieces not on board
+    for (Color c : bd.get_colors())
+    {
+        auto& pieceModels = getPieceModels(c);
+        for (int i = 0; i < pieceModels.length(); ++i)
+            if (! isPlayed[c][i] && pieceModels[i]->isPlayed())
+            {
+                pieceModels[i]->setDefaultState();
+                pieceModels[i]->setIsPlayed(false);
+                pieceModels[i]->setMoveLabel("");
+            }
+    }
+}
+
 void GameModel::updateProperties()
 {
     auto& bd = getBoard();
@@ -773,40 +867,7 @@ void GameModel::updateProperties()
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
     set(m_isGameEmpty, libboardgame_sgf::util::is_empty(tree),
         &GameModel::isGameEmptyChanged);
-
-    ColorMap<array<bool, Board::max_pieces>> isPlayed;
-    for (Color c : bd.get_colors())
-    {
-        isPlayed[c].fill(false);
-        for (Move mv : bd.get_setup().placements[c])
-            updatePiece(c, mv, isPlayed[c]);
-    }
-    PieceModel* lastMovePieceModel = nullptr;
-    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
-    {
-        auto mv = bd.get_move(i);
-        auto c = mv.color;
-        lastMovePieceModel = updatePiece(c, mv.move, isPlayed[c]);
-    }
-    if (lastMovePieceModel != m_lastMovePieceModel)
-    {
-        if (m_lastMovePieceModel != nullptr)
-            m_lastMovePieceModel->setIsLastMove(false);
-        if (lastMovePieceModel != nullptr)
-            lastMovePieceModel->setIsLastMove(true);
-        m_lastMovePieceModel = lastMovePieceModel;
-    }
-    for (Color c : bd.get_colors())
-    {
-        auto& pieceModels = getPieceModels(c);
-        for (int i = 0; i < pieceModels.length(); ++i)
-            if (! isPlayed[c][i] && pieceModels[i]->isPlayed())
-            {
-                pieceModels[i]->setDefaultState();
-                pieceModels[i]->setIsPlayed(false);
-            }
-    }
-
+    updatePieces();
     set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),
         &GameModel::toPlayChanged);
     set(m_altPlayer,

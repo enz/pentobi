@@ -7,7 +7,10 @@ Item
     id: gameDisplay // Referenced by Piece*.qml
 
     property var pickedPiece: null
-    property bool markLastMove: true
+
+    // Values: "last_dot", "last_number", "all_number", "none"
+    property string moveMarking: "last_dot"
+
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property alias busyIndicatorRunning: busyIndicator.running

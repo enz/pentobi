@@ -444,16 +444,32 @@
         <translation>&amp;Ansicht</translation>
     </message>
     <message>
-        <source>Mark &amp;Last Move</source>
-        <translation>&amp;Letzten Zug markieren</translation>
-    </message>
-    <message>
         <source>&amp;Animate Pieces</source>
         <translation>Spielsteine &amp;animieren</translation>
     </message>
     <message>
         <source>&amp;Coordinates</source>
         <translation>&amp;Koordinaten</translation>
+    </message>
+    <message>
+        <source>&amp;Move Marking</source>
+        <translation>&amp;Zugmarkierung</translation>
+    </message>
+    <message>
+        <source>Last With &amp;Dot</source>
+        <translation>Letzter mit &amp;Punkt</translation>
+    </message>
+    <message>
+        <source>Last With &amp;Number</source>
+        <translation>Letzter mit &amp;Nummer</translation>
+    </message>
+    <message>
+        <source>&amp;All With Number</source>
+        <translation>&amp;Alle mit Nummer</translation>
+    </message>
+    <message>
+        <source>N&amp;one</source>
+        <translation>&amp;Keine</translation>
     </message>
 </context>
 <context>

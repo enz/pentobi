@@ -12,6 +12,7 @@ Item
     property real gridWidth: board.gridWidth
     property real gridHeight: board.gridHeight
     property bool isMarked
+    property string label
     property string imageName: theme.getImage("linesegment-" + colorName)
     property real pieceAngle: {
         var flX = Math.abs(flipX.angle % 360 - 180) < 90
@@ -122,6 +123,33 @@ Item
            * gridWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
            * gridHeight - height / 2
+        Behavior on opacity { NumberAnimation { duration: 80 } }
+    }
+    Text {
+        opacity: label == "" ? 0 : 1
+        text: label
+        color: colorName == "blue" || colorName == "red" ?
+                   "white" : "#333333"
+        font.pixelSize: 0.5 * gridHeight
+        width: 0
+        height: 0
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5) * gridWidth
+        y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5) * gridHeight
+        transform: [
+            Rotation {
+                axis { x: 0; y: 1; z: 0 }
+                angle: -flipY.angle
+            },
+            Rotation {
+                axis { x: 1; y: 0; z: 0 }
+                angle: -flipX.angle
+            },
+            Rotation {
+                angle: -root.rotation
+            }
+        ]
         Behavior on opacity { NumberAnimation { duration: 80 } }
     }
     StateGroup {

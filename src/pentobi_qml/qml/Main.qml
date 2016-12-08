@@ -123,7 +123,7 @@ ApplicationWindow {
         property alias height: root.height
         property alias folder: root.folder
         property alias enableAnimations: gameDisplay.enableAnimations
-        property alias markLastMove: gameDisplay.markLastMove
+        property alias moveMarking: gameDisplay.moveMarking
         property alias showCoordinates: gameDisplay.showCoordinates
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
