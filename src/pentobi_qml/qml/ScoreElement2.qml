@@ -52,7 +52,6 @@ Item {
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
-        renderType: Text.NativeRendering
         font.pixelSize: 1.4 * pointSize
     }
 }
