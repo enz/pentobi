@@ -27,11 +27,22 @@ class PieceModel
     Q_OBJECT
 
     Q_PROPERTY(int color READ color CONSTANT)
-    Q_PROPERTY(QVariantList elements READ elements CONSTANT)
-    Q_PROPERTY(QVariantList junctions READ junctions CONSTANT)
-    Q_PROPERTY(QVector<int> junctionType READ junctionType CONSTANT)
-    Q_PROPERTY(QPointF center READ center CONSTANT)
-    Q_PROPERTY(QPointF labelPos READ labelPos CONSTANT)
+
+    /** List of QPointF instances with coordinates of piece elements. */
+    Q_PROPERTY(QVariantList elements MEMBER m_elements CONSTANT)
+
+    /** List of QPointF instances with coordinates of piece junctions.
+        Only used in Nexos. */
+    Q_PROPERTY(QVariantList junctions MEMBER m_junctions CONSTANT)
+
+    /** List of integers determining the type of junctions.
+        In Nexos, this is the type of junction in junction(). In Callisto, it
+        is the information if the squares in elements() have a right and/or
+        down neighbor. See implementation for the meaning of the numbers. */
+    Q_PROPERTY(QVector<int> junctionType MEMBER m_junctionType CONSTANT)
+
+    Q_PROPERTY(QPointF center MEMBER m_center CONSTANT)
+    Q_PROPERTY(QPointF labelPos MEMBER m_labelPos CONSTANT)
     Q_PROPERTY(QString state READ state NOTIFY stateChanged)
     Q_PROPERTY(bool isPlayed READ isPlayed NOTIFY isPlayedChanged)
     Q_PROPERTY(bool isLastMove READ isLastMove NOTIFY isLastMoveChanged)
@@ -44,23 +55,6 @@ public:
     PieceModel(QObject* parent, const Board& bd, Piece piece, Color c);
 
     int color();
-
-    /** List of QPointF instances with coordinates of piece elements. */
-    QVariantList elements();
-
-    /** List of QPointF instances with coordinates of piece junctions.
-        Only used in Nexos. */
-    QVariantList junctions();
-
-    /** List of integers determining the type of junctions.
-        In Nexos, this is the type of junction in junction(). In Callisto, it
-        is the information if the squares in elements() have a right and/or
-        down neighbor. See implementation for the meaning of the numbers. */
-    QVector<int> junctionType();
-
-    QPointF center() const;
-
-    QPointF labelPos() const;
 
     QString state() const;
 

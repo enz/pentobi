@@ -133,19 +133,9 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
     m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);
 }
 
-QPointF PieceModel::center() const
-{
-    return m_center;
-}
-
 int PieceModel::color()
 {
     return m_color.to_int();
-}
-
-QVariantList PieceModel::elements()
-{
-    return m_elements;
 }
 
 void PieceModel::flipAcrossX()
@@ -253,21 +243,6 @@ bool PieceModel::isLastMove() const
 bool PieceModel::isPlayed() const
 {
     return m_isPlayed;
-}
-
-QVariantList PieceModel::junctions()
-{
-    return m_junctions;
-}
-
-QVector<int> PieceModel::junctionType()
-{
-    return m_junctionType;
-}
-
-QPointF PieceModel::labelPos() const
-{
-    return m_labelPos;
 }
 
 void PieceModel::rotateLeft()
