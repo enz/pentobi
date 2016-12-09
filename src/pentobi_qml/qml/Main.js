@@ -235,6 +235,11 @@ function play(pieceModel, gameCoord) {
         delayedCheckComputerMove.restart()
 }
 
+function exportAsciiArt(fileUrl) {
+    if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
+        showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+}
+
 function saveFileUrl(fileUrl) {
     if (! gameModel.save(getFileFromUrl(fileUrl)))
         showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)

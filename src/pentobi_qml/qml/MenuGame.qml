@@ -118,6 +118,10 @@ Menu {
             text: qsTr("&Image")
             onTriggered: exportImageDialog.open()
         }
+        MenuItem {
+            text: qsTr("&ASCII Art")
+            onTriggered: asciiArtSaveDialog.open()
+        }
     }
     MenuSeparator { }
     MenuItem {

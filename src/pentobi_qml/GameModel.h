@@ -111,6 +111,8 @@ public:
 
     Q_INVOKABLE bool save(const QString& file);
 
+    Q_INVOKABLE bool saveAsciiArt(const QString& file);
+
     Q_INVOKABLE bool open(const QString& file);
 
     Q_INVOKABLE void makeMainVar();

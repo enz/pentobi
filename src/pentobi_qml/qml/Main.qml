@@ -222,6 +222,15 @@ ApplicationWindow {
             item.open()
         }
     }
+    Loader {
+        id: asciiArtSaveDialog
+
+        function open() {
+            if (status === Loader.Null)
+                source = "AsciiArtSaveDialog.qml"
+            item.open()
+        }
+    }
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move
     // placement animation has finished

@@ -621,6 +621,18 @@ bool GameModel::save(const QString& file)
     return true;
 }
 
+bool GameModel::saveAsciiArt(const QString& file)
+{
+    ofstream out(file.toLocal8Bit().constData());
+    getBoard().write(out, false);
+    if (! out)
+    {
+        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
+        return false;
+    }
+    return true;
+}
+
 template<typename T>
 void GameModel::set(T& target, const T& value,
                     void (GameModel::*changedSignal)())

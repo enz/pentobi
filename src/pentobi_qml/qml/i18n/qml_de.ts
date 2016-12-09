@@ -2,6 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>AsciiArtSaveDialog</name>
+    <message>
+        <source>Export ASCII Art</source>
+        <translation>ASCII-Art exportieren</translation>
+    </message>
+    <message>
+        <source>Text files (*.txt)</source>
+        <translation>Textdateien (*.txt)</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Alle Dateien (*)</translation>
+    </message>
+</context>
+<context>
     <name>ComputerColorDialog</name>
     <message>
         <source>Computer Colors</source>
@@ -455,6 +470,10 @@
     <message>
         <source>&amp;Image</source>
         <translation>&amp;Grafik</translation>
+    </message>
+    <message>
+        <source>&amp;ASCII Art</source>
+        <translation>&amp;ASCII-Art</translation>
     </message>
 </context>
 <context>

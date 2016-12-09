@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>qml/AndroidToolBar.qml</file>
         <file>qml/AndroidToolButton.qml</file>
+        <file>qml/AsciiArtSaveDialog.qml</file>
         <file>qml/Board.qml</file>
         <file>qml/Button.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
