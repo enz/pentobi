@@ -110,6 +110,14 @@ function deleteAllVar() {
     showQuestion(qsTr("Delete all variations?"), gameModel.deleteAllVar)
 }
 
+function exportImage(fileUrl) {
+    if (! gameDisplay.grabBoardToImage(function(result) {
+        if (! result.saveToFile(getFileFromUrl(fileUrl)))
+            showError(qsTr("Saving image failed."))
+    }, exportImageWidth))
+        showError(qsTr("Creating image failed."))
+}
+
 function genMove() {
     gameDisplay.pickedPiece = null
     isMoveHintRunning = false

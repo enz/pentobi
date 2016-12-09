@@ -27,6 +27,7 @@ ApplicationWindow {
     property int defaultHeight:
         isAndroid ? Screen.desktopAvailableWidth :
                     Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
+    property int exportImageWidth: 400
 
     function cancelGenMove() {
         playerModel.cancelGenMove()
@@ -129,6 +130,7 @@ ApplicationWindow {
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
+        property alias exportImageWidth: root.exportImageWidth
     }
     GameModel {
         id: gameModel
@@ -200,6 +202,24 @@ ApplicationWindow {
 
         MessageDialog {
             standardButtons: StandardButton.Ok | StandardButton.Cancel
+        }
+    }
+    Loader {
+        id: exportImageDialog
+
+        function open() {
+            if (status === Loader.Null)
+                source = "ExportImageDialog.qml"
+            item.open()
+        }
+    }
+    Loader {
+        id: imageSaveDialog
+
+        function open() {
+            if (status === Loader.Null)
+                source = "ImageSaveDialog.qml"
+            item.open()
         }
     }
     // Used to delay calls to Logic.checkComputerMove such that the computer

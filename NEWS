@@ -11,8 +11,8 @@ Desktop version:
 
 Android version
 
-* New menu items Edit/Keep Only Position, Edit/Keep Only Subtree,
-  View/Coordinates.
+* New menu items Game/Export/Image, Edit/Keep Only Position,
+  Edit/Keep Only Subtree, View/Coordinates.
 * Support for different kinds of move markings like in desktop version.
 * The source code now requires Qt 5.8, which no longer supports Android
   versions older than Android 4.1.

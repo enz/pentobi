@@ -35,6 +35,11 @@ Item
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showMoveHint(move) { Logic.showMoveHint(move) }
+    function grabBoardToImage(callback, width) {
+        return board.grabToImage(callback,
+                                 Qt.size(width,
+                                         width * board.height / board.width))
+    }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null

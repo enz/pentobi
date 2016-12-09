@@ -111,6 +111,14 @@ Menu {
         visible: ! isAndroid || enabled
         onTriggered: saveDialog.open()
     }
+    Menu {
+        title: qsTr("&Export")
+
+        MenuItem {
+            text: qsTr("&Image")
+            onTriggered: exportImageDialog.open()
+        }
+    }
     MenuSeparator { }
     MenuItem {
         text: qsTr("&Quit")

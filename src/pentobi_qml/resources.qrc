@@ -5,7 +5,9 @@
         <file>qml/Board.qml</file>
         <file>qml/Button.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
+        <file>qml/ExportImageDialog.qml</file>
         <file>qml/GameDisplay.qml</file>
+        <file>qml/ImageSaveDialog.qml</file>
         <file>qml/LineSegment.qml</file>
         <file>qml/Main.qml</file>
         <file>qml/MenuComputer.qml</file>

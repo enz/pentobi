@@ -37,6 +37,17 @@
     </message>
 </context>
 <context>
+    <name>ExportImageDialog</name>
+    <message>
+        <source>Export Image</source>
+        <translation>Grafik exportieren</translation>
+    </message>
+    <message>
+        <source>Image width:</source>
+        <translation>Bildbreite:</translation>
+    </message>
+</context>
+<context>
     <name>GameModel</name>
     <message>
         <source>(Setup)</source>
@@ -152,6 +163,21 @@
     </message>
 </context>
 <context>
+    <name>ImageSaveDialog</name>
+    <message>
+        <source>Save Image</source>
+        <translation>Grafik speichern</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Alle Dateien (*)</translation>
+    </message>
+    <message>
+        <source>Image files (*.png *.jpg)</source>
+        <translation>Bilddateien (*.png *.jpg)</translation>
+    </message>
+</context>
+<context>
     <name>Main</name>
     <message>
         <source>Pentobi</source>
@@ -200,6 +226,14 @@
     <message>
         <source>Keep only subtree?</source>
         <translation>Nur Teilbaum behalten?</translation>
+    </message>
+    <message>
+        <source>Saving image failed.</source>
+        <translation>Grafik konnte nicht gespeichert werden.</translation>
+    </message>
+    <message>
+        <source>Creating image failed.</source>
+        <translation>Grafik konnte nicht erzeugt werden.</translation>
     </message>
 </context>
 <context>
@@ -413,6 +447,14 @@
     <message>
         <source>Callisto (&amp;4 Players)</source>
         <translation>Callisto (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
+        <translation>&amp;Exportieren</translation>
+    </message>
+    <message>
+        <source>&amp;Image</source>
+        <translation>&amp;Grafik</translation>
     </message>
 </context>
 <context>
