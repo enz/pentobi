@@ -24,52 +24,42 @@ class GameModel
     : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString gameVariant MEMBER m_gameVariant
-               NOTIFY gameVariantChanged)
-    Q_PROPERTY(QString positionInfo MEMBER m_positionInfo
-               NOTIFY positionInfoChanged)
-    Q_PROPERTY(QString lastInputOutputError MEMBER m_lastInputOutputError)
-    Q_PROPERTY(int nuColors MEMBER m_nuColors NOTIFY nuColorsChanged)
-    Q_PROPERTY(int toPlay MEMBER m_toPlay NOTIFY toPlayChanged)
-    Q_PROPERTY(int altPlayer MEMBER m_altPlayer NOTIFY altPlayerChanged)
-    Q_PROPERTY(float points0 MEMBER m_points0 NOTIFY points0Changed)
-    Q_PROPERTY(float points1 MEMBER m_points1 NOTIFY points1Changed)
-    Q_PROPERTY(float points2 MEMBER m_points2 NOTIFY points2Changed)
-    Q_PROPERTY(float points3 MEMBER m_points3 NOTIFY points3Changed)
-    Q_PROPERTY(float bonus0 MEMBER m_bonus0 NOTIFY bonus0Changed)
-    Q_PROPERTY(float bonus1 MEMBER m_bonus1 NOTIFY bonus1Changed)
-    Q_PROPERTY(float bonus2 MEMBER m_bonus2 NOTIFY bonus2Changed)
-    Q_PROPERTY(float bonus3 MEMBER m_bonus3 NOTIFY bonus3Changed)
-    Q_PROPERTY(bool hasMoves0 MEMBER m_hasMoves0 NOTIFY hasMoves0Changed)
-    Q_PROPERTY(bool hasMoves1 MEMBER m_hasMoves1 NOTIFY hasMoves1Changed)
-    Q_PROPERTY(bool hasMoves2 MEMBER m_hasMoves2 NOTIFY hasMoves2Changed)
-    Q_PROPERTY(bool hasMoves3 MEMBER m_hasMoves3 NOTIFY hasMoves3Changed)
-    Q_PROPERTY(bool isGameOver MEMBER m_isGameOver NOTIFY isGameOverChanged)
-    Q_PROPERTY(bool isGameEmpty MEMBER m_isGameEmpty NOTIFY isGameEmptyChanged)
-    Q_PROPERTY(bool canUndo MEMBER m_canUndo NOTIFY canUndoChanged)
-    Q_PROPERTY(bool canGoBackward MEMBER m_canGoBackward
-               NOTIFY canGoBackwardChanged)
-    Q_PROPERTY(bool canGoForward MEMBER m_canGoForward
-               NOTIFY canGoForwardChanged)
-    Q_PROPERTY(bool hasPrevVar MEMBER m_hasPrevVar NOTIFY hasPrevVarChanged)
-    Q_PROPERTY(bool hasNextVar MEMBER m_hasNextVar NOTIFY hasNextVarChanged)
-    Q_PROPERTY(bool hasVariations MEMBER m_hasVariations
-               NOTIFY hasVariationsChanged)
-    Q_PROPERTY(bool isMainVar MEMBER m_isMainVar NOTIFY isMainVarChanged)
+    Q_PROPERTY(QString gameVariant READ gameVariant NOTIFY gameVariantChanged)
+    Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)
+    Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
+    Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
+    Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
+    Q_PROPERTY(int altPlayer READ altPlayer NOTIFY altPlayerChanged)
+    Q_PROPERTY(float points0 READ points0 NOTIFY points0Changed)
+    Q_PROPERTY(float points1 READ points1 NOTIFY points1Changed)
+    Q_PROPERTY(float points2 READ points2 NOTIFY points2Changed)
+    Q_PROPERTY(float points3 READ points3 NOTIFY points3Changed)
+    Q_PROPERTY(float bonus0 READ bonus0 NOTIFY bonus0Changed)
+    Q_PROPERTY(float bonus1 READ bonus1 NOTIFY bonus1Changed)
+    Q_PROPERTY(float bonus2 READ bonus2 NOTIFY bonus2Changed)
+    Q_PROPERTY(float bonus3 READ bonus3 NOTIFY bonus3Changed)
+    Q_PROPERTY(bool hasMoves0 READ hasMoves0 NOTIFY hasMoves0Changed)
+    Q_PROPERTY(bool hasMoves1 READ hasMoves1 NOTIFY hasMoves1Changed)
+    Q_PROPERTY(bool hasMoves2 READ hasMoves2 NOTIFY hasMoves2Changed)
+    Q_PROPERTY(bool hasMoves3 READ hasMoves3 NOTIFY hasMoves3Changed)
+    Q_PROPERTY(bool isGameOver READ isGameOver NOTIFY isGameOverChanged)
+    Q_PROPERTY(bool isGameEmpty READ isGameEmpty NOTIFY isGameEmptyChanged)
+    Q_PROPERTY(bool canUndo READ canUndo NOTIFY canUndoChanged)
+    Q_PROPERTY(bool canGoBackward READ canGoBackward NOTIFY canGoBackwardChanged)
+    Q_PROPERTY(bool canGoForward READ canGoForward NOTIFY canGoForwardChanged)
+    Q_PROPERTY(bool hasPrevVar READ hasPrevVar NOTIFY hasPrevVarChanged)
+    Q_PROPERTY(bool hasNextVar READ hasNextVar NOTIFY hasNextVarChanged)
+    Q_PROPERTY(bool hasVariations READ hasVariations NOTIFY hasVariationsChanged)
+    Q_PROPERTY(bool isMainVar READ isMainVar NOTIFY isMainVarChanged)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels2 READ pieceModels2)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels3 READ pieceModels3)
-    Q_PROPERTY(QVariantList startingPoints0 MEMBER m_startingPoints0
-               NOTIFY startingPoints0Changed)
-    Q_PROPERTY(QVariantList startingPoints1 MEMBER m_startingPoints1
-               NOTIFY startingPoints1Changed)
-    Q_PROPERTY(QVariantList startingPoints2 MEMBER m_startingPoints2
-               NOTIFY startingPoints2Changed)
-    Q_PROPERTY(QVariantList startingPoints3 MEMBER m_startingPoints3
-               NOTIFY startingPoints3Changed)
-    Q_PROPERTY(QVariantList startingPointsAll MEMBER m_startingPointsAll
-               NOTIFY startingPointsAllChanged)
+    Q_PROPERTY(QVariantList startingPoints0 READ startingPoints0 NOTIFY startingPoints0Changed)
+    Q_PROPERTY(QVariantList startingPoints1 READ startingPoints1 NOTIFY startingPoints1Changed)
+    Q_PROPERTY(QVariantList startingPoints2 READ startingPoints2 NOTIFY startingPoints2Changed)
+    Q_PROPERTY(QVariantList startingPoints3 READ startingPoints3 NOTIFY startingPoints3Changed)
+    Q_PROPERTY(QVariantList startingPointsAll READ startingPointsAll NOTIFY startingPointsAllChanged)
 
 public:
     static Variant getInitialGameVariant();
@@ -142,6 +132,70 @@ public:
     QQmlListProperty<PieceModel> pieceModels2();
 
     QQmlListProperty<PieceModel> pieceModels3();
+
+    const QString& gameVariant() const { return m_gameVariant; }
+
+    const QString& positionInfo() const { return m_positionInfo; }
+
+    const QString& lastInputOutputError() const { return m_lastInputOutputError; }
+
+    int nuColors() const { return m_nuColors; }
+
+    int toPlay() const { return m_toPlay; }
+
+    int altPlayer() const { return m_altPlayer; }
+
+    float points0() const { return m_points0; }
+
+    float points1() const { return m_points1; }
+
+    float points2() const { return m_points2; }
+
+    float points3() const { return m_points3; }
+
+    float bonus0() const { return m_bonus0; }
+
+    float bonus1() const { return m_bonus1; }
+
+    float bonus2() const { return m_bonus2; }
+
+    float bonus3() const { return m_bonus3; }
+
+    bool hasMoves0() const { return m_hasMoves0; }
+
+    bool hasMoves1() const { return m_hasMoves1; }
+
+    bool hasMoves2() const { return m_hasMoves2; }
+
+    bool hasMoves3() const { return m_hasMoves3; }
+
+    bool isGameOver() const { return m_isGameOver; }
+
+    bool isGameEmpty() const { return m_isGameEmpty; }
+
+    bool canUndo() const { return m_canUndo; }
+
+    bool canGoBackward() const { return m_canGoBackward; }
+
+    bool canGoForward() const { return m_canGoForward; }
+
+    bool hasPrevVar() const { return m_hasPrevVar; }
+
+    bool hasNextVar() const { return m_hasNextVar; }
+
+    bool hasVariations() const { return m_hasVariations; }
+
+    bool isMainVar() const { return m_isMainVar; }
+
+    const QVariantList& startingPoints0() const { return m_startingPoints0; }
+
+    const QVariantList& startingPoints1() const { return m_startingPoints1; }
+
+    const QVariantList& startingPoints2() const { return m_startingPoints2; }
+
+    const QVariantList& startingPoints3() const { return m_startingPoints3; }
+
+    const QVariantList& startingPointsAll() const { return m_startingPointsAll; }
 
     const Board& getBoard() const { return m_game.get_board(); }
 

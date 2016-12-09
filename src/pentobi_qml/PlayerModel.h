@@ -46,7 +46,7 @@ class PlayerModel
                NOTIFY levelCallisto2Changed)
     Q_PROPERTY(unsigned levelCallisto3 MEMBER m_levelCallisto3
                NOTIFY levelCallisto3Changed)
-    Q_PROPERTY(bool isGenMoveRunning MEMBER m_isGenMoveRunning
+    Q_PROPERTY(bool isGenMoveRunning READ isGenMoveRunning
                NOTIFY isGenMoveRunningChanged)
 
 public:
@@ -79,6 +79,8 @@ public:
     /** Cancel the move generation in the background thread if one is
         running. */
     Q_INVOKABLE void cancelGenMove();
+
+    bool isGenMoveRunning() const { return m_isGenMoveRunning; }
 
 signals:
     void levelCallistoChanged();
