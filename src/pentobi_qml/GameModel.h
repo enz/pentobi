@@ -393,6 +393,8 @@ private:
 
     void setUtf8();
 
+    void updateIsGameEmpty();
+
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);
 

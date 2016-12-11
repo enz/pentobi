@@ -679,6 +679,7 @@ void GameModel::setComment(const QString& comment)
     m_game.set_comment(encode(comment).constData());
     m_comment = comment;
     emit commentChanged();
+    updateIsGameEmpty();
 }
 
 void GameModel::setUtf8()
@@ -709,6 +710,13 @@ void GameModel::undo()
     emit positionAboutToChange();
     m_game.undo();
     updateProperties();
+}
+
+
+void GameModel::updateIsGameEmpty()
+{
+    set(m_isGameEmpty, libboardgame_sgf::util::is_empty(m_game.get_tree()),
+        &GameModel::isGameEmptyChanged);
 }
 
 PieceModel* GameModel::updatePiece(Color c, Move mv,
@@ -919,8 +927,7 @@ void GameModel::updateProperties()
             break;
         }
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
-    set(m_isGameEmpty, libboardgame_sgf::util::is_empty(tree),
-        &GameModel::isGameEmptyChanged);
+    updateIsGameEmpty();
     updatePieces();
     set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);
     set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),
