@@ -577,7 +577,7 @@ void MainWindow::commentChanged()
         value = trim_right(value);
         m_game.set_comment(value);
     }
-    updateWindowModified();
+    updateWindow(false);
 }
 
 void MainWindow::computerColors()
@@ -2807,6 +2807,7 @@ void MainWindow::setCommentText(const QString& text)
     if (! text.isEmpty())
         m_comment->ensureCursorVisible();
     m_comment->clearFocus();
+    updateWindow(false);
 }
 
 void MainWindow::setNoDelay()
