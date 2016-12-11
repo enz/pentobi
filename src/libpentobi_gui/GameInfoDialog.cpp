@@ -125,8 +125,6 @@ bool GameInfoDialog::acceptLine(QLineEdit* lineEdit, string& value)
     if (! lineEdit->isModified())
         return false;
     QString text = lineEdit->text();
-    if (text.trimmed().isEmpty())
-        return false;
     value = Util::convertSgfValueFromQString(text, m_charset);
     return true;
 }
