@@ -23,12 +23,15 @@ Android version
 Version 12.1.UNKNOWN (v12-fixes)
 ================================
 
-Bug fixes desktop version:
+Desktop version:
 
 * Game info properties were not removed from file if the corresponding
   text in the game info dialog was deleted.
 * New Game/Save As was not enabled if no move had been played but game
   was modified by editing the comment in the root node or the game info.
+
+Android version:
+* Open/Save did not show error message on failure.
 
 
 Version 12.1 (30 Nov 2016)
@@ -77,7 +80,7 @@ Bug fixes desktop version:
 * Icon for undo did not have a high-DPI version.
 * Option --verbose was broken on Windows.
 
-Android version
+Android version:
 
 * The compilation now requires Qt 5.6.
 * Support for game variant Nexos.
