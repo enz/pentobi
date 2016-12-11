@@ -224,11 +224,6 @@ inline const Board& Game::get_board() const
     return *m_bd;
 }
 
-inline string Game::get_charset() const
-{
-    return get_root().get_property("CA", "");
-}
-
 inline string Game::get_comment() const
 {
     return m_tree.get_comment(*m_current);

@@ -44,6 +44,11 @@ void Game::delete_all_variations()
     m_tree.delete_all_variations();
 }
 
+string Game::get_charset() const
+{
+    return get_root().get_property("CA", "");
+}
+
 Color Game::get_to_play_default(const Game& game)
 {
     auto& tree = game.get_tree();
