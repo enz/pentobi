@@ -81,24 +81,6 @@ void paintSquareStartingPoint(QPainter& painter, Variant variant, Color c,
 void paintTriangleStartingPoint(QPainter& painter, bool isUpward, qreal x,
                                 qreal y, qreal width, qreal height);
 
-/** Convert a property value of a SGF tree unto a QString.
-    @param value
-    @param charset The value of the CA property of the root node in the tree
-    or an empty string if the tree has no such property.
-    This function currently only recognizes UTF8 and ISO-8859-1 (the latter
-    is the default for SGF if no CA property exists). Other charsets are
-    ignored and the string is converted using the default system charset. */
-string convertSgfValueFromQString(const QString& value, const string& charset);
-
-/** Convert a property value of a SGF tree unto a QString.
-    @param value
-    @param charset The value of the CA property of the root node in the tree
-    or an empty string if the tree has no such property.
-    This function currently only recognizes UTF8 and ISO-8859-1 (the latter
-    is the default for SGF if no CA property exists). Other charsets are
-    ignored and the string is converted using the default system charset. */
-QString convertSgfValueToQString(const string& value, const string& charset);
-
 /** Get a translated string identifying a player, like "Blue" or "Blue/Red".
     @param variant The game variant
     @param c The player color or one of the player colors in game variants

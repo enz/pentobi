@@ -7,7 +7,7 @@
 <body>
 <h1>Pentobi SGF Files</h1>
 <div style="font-size:small">Author: Markus Enzenberger<br>
-Last modified: 2016-11-27</div>
+Last modified: 2016-12-11</div>
 <p>This document describes the file format for <a href=
 "http://en.wikipedia.org/wiki/Blokus">Blokus</a> game records as used by the
 program <a href="http://pentobi.sourceforge.net">Pentobi</a>. The most recent
@@ -39,9 +39,9 @@ blksgf</blockquote>
 <p>Although not specific to Blokus, it is recommended to use <a href=
 "http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> as the character set. Pentobi
 always writes files in UTF-8 and indicates that with the <tt>CA</tt> property.
-Pentobi can read SGF files encoded in UTF-8 or ISO-8859-1 (Latin1). Other
-character sets are currently not supported. As specified by the SGF standard,
-ISO-8859-1 is assumed for files without <tt>CA</tt> property.</p>
+Pentobi versions before 13.0 can only read SGF files encoded in UTF-8 or
+ISO-8859-1 (Latin1). As specified by the SGF standard, ISO-8859-1 is assumed
+for files without <tt>CA</tt> property.</p>
 <h2>Game Property</h2>
 <p>Since there is no number for Blokus defined in SGF 4, a string instead of a
 number is used as the value for the <tt>GM</tt> property. Currently, the

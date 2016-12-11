@@ -7,6 +7,7 @@ General:
 
 Desktop version:
 
+* Support for other SGF file encodings than ISO-8859-1 and UTF-8.
 * The compilation now requires CMake 3.1.0 or newer.
 
 Android version

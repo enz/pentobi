@@ -11,6 +11,7 @@
 #include "GameInfoDialog.h"
 
 #include <QDialogButtonBox>
+#include <QTextCodec>
 #include "LineEdit.h"
 #include "libpentobi_gui/Util.h"
 
@@ -18,10 +19,11 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
+GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game,
+                               QTextCodec*& textCodec)
     : QDialog(parent),
       m_game(game),
-      m_charset(game.get_root().get_property("CA", ""))
+      m_textCodec(textCodec)
 {
     setWindowTitle(tr("Game Info"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
@@ -73,9 +75,7 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game)
     connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
-GameInfoDialog::~GameInfoDialog()
-{
-}
+GameInfoDialog::~GameInfoDialog() = default;
 
 void GameInfoDialog::accept()
 {
@@ -127,7 +127,7 @@ bool GameInfoDialog::acceptLine(QLineEdit* lineEdit, string& value)
     QString text = lineEdit->text();
     if (text.trimmed().isEmpty())
         return false;
-    value = Util::convertSgfValueFromQString(text, m_charset);
+    value = m_textCodec->fromUnicode(text).constData();
     return true;
 }
 
@@ -136,7 +136,7 @@ QLineEdit* GameInfoDialog::createLine(const QString& label, const string& text)
     auto lineEdit = new LineEdit(30);
     if (! text.empty())
     {
-        lineEdit->setText(Util::convertSgfValueToQString(text, m_charset));
+        lineEdit->setText(m_textCodec->toUnicode(text.c_str()));
         lineEdit->setCursorPosition(0);
     }
     m_formLayout->addRow(label, lineEdit);

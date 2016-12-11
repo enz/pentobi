@@ -29,6 +29,7 @@
 #include <QSplitter>
 #include <QStandardPaths>
 #include <QStatusBar>
+#include <QTextCodec>
 #include <QToolBar>
 #include <QToolButton>
 #include <QtConcurrentRun>
@@ -572,8 +573,7 @@ void MainWindow::commentChanged()
         m_game.set_comment("");
     else
     {
-        string charset = m_game.get_root().get_property("CA", "");
-        string value = Util::convertSgfValueFromQString(comment, charset);
+        string value = encode(comment).constData();
         value = trim_right(value);
         m_game.set_comment(value);
     }
@@ -1338,6 +1338,11 @@ QLayout* MainWindow::createRightPanel()
     return layout;
 }
 
+QString MainWindow::decode(const string& s) const
+{
+    return m_textCodec->toUnicode(s.c_str());
+}
+
 void MainWindow::deleteAllVariations()
 {
     QMessageBox msgBox(this);
@@ -1427,6 +1432,11 @@ void MainWindow::enablePieceSelector(Color c)
         m_pieceSelector[i]->checkUpdate();
         m_pieceSelector[i]->setEnabled(i == c);
     }
+}
+
+QByteArray MainWindow::encode(const QString& s) const
+{
+    return m_textCodec->fromUnicode(s);
 }
 
 void MainWindow::end()
@@ -1636,7 +1646,7 @@ void MainWindow::fullscreen()
 
 void MainWindow::gameInfo()
 {
-    GameInfoDialog dialog(this, m_game);
+    GameInfoDialog dialog(this, m_game, m_textCodec);
     dialog.exec();
     updateWindow(false);
 }
@@ -2017,7 +2027,7 @@ void MainWindow::initGame()
         m_analyzeGameWindow = nullptr;
     }
     m_game.init();
-    m_game.set_charset("UTF-8");
+    setUtf8();
 #ifdef VERSION
     m_game.set_application("Pentobi", VERSION);
 #else
@@ -2319,6 +2329,17 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     {
         auto tree = reader.get_tree_transfer_ownership();
         m_game.init(tree);
+        auto charSet = m_game.get_charset();
+        if (charSet.empty())
+            m_textCodec = QTextCodec::codecForName("ISO 8859-1");
+        else
+            m_textCodec = QTextCodec::codecForName(m_game.get_charset().c_str());
+        if (! m_textCodec)
+        {
+            qWarning() << "GameModel: unknown codec '"
+                       << QString::fromLocal8Bit(charSet.c_str()) << "'";
+            m_textCodec = QTextCodec::codecForName("ISO 8859-1");
+        }
         if (! libpentobi_base::node_util::has_setup(m_game.get_root()))
             m_game.goto_node(get_last_node(m_game.get_root()));
         initPieceSelectors();
@@ -2541,10 +2562,8 @@ void MainWindow::ratedGame()
         //: The first argument is the version of Pentobi
         tr("Pentobi %1 (level %2)").arg(getVersion(), QString::number(level));
     string charset = m_game.get_root().get_property("CA", "");
-    string computerPlayerNameStdStr =
-        Util::convertSgfValueFromQString(computerPlayerName, charset);
-    string humanPlayerNameStdStr =
-        Util::convertSgfValueFromQString(tr("Human"), charset);
+    string computerPlayerNameStdStr = encode(computerPlayerName).constData();
+    string humanPlayerNameStdStr = encode(tr("Human")).constData();
     for (Color c : Color::Range(m_bd.get_nu_nonalt_colors()))
         if (m_computerColors[c])
             m_game.set_player_name(c, computerPlayerNameStdStr);
@@ -2980,6 +2999,12 @@ void MainWindow::setupMode(bool enable)
     }
 }
 
+void MainWindow::setUtf8()
+{
+    m_game.set_charset("UTF-8");
+    m_textCodec = QTextCodec::codecForName("UTF-8");
+}
+
 void MainWindow::showComment(bool checked)
 {
     QSettings settings;
@@ -3163,8 +3188,7 @@ void MainWindow::updateComment()
         setCommentText("");
         return;
     }
-    string charset = m_game.get_root().get_property("CA", "");
-    setCommentText(Util::convertSgfValueToQString(comment, charset));
+    setCommentText(decode(comment));
 }
 
 void MainWindow::updateFlipActions()

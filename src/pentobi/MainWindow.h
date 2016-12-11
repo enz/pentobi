@@ -25,6 +25,7 @@ class QActionGroup;
 class QLabel;
 class QPlainTextEdit;
 class QSplitter;
+class QTextCodec;
 class AnalyzeGameWindow;
 class GuiBoard;
 class HelpWindow;
@@ -503,6 +504,8 @@ private:
 
     LeaveFullscreenButton* m_leaveFullscreenButton = nullptr;
 
+    QTextCodec* m_textCodec;
+
     int m_lastRemainingSeconds;
 
     int m_lastRemainingMinutes;
@@ -554,9 +557,13 @@ private:
 
     bool computerPlaysAll() const;
 
+    QString decode(const string& s) const;
+
     void deleteAutoSaveFile();
 
     void enablePieceSelector(Color c);
+
+    QByteArray encode(const QString& s) const;
 
     void gameOver();
 
@@ -599,6 +606,8 @@ private:
     void setRated(bool isRated);
 
     void setFile(const QString& file);
+
+    void setUtf8();
 
     void showError(const QString& message, const QString& infoText = "",
                    const QString& detailText = "");

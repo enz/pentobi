@@ -11,6 +11,8 @@
 #include "PieceModel.h"
 #include "libpentobi_base/Game.h"
 
+class QTextCodec;
+
 using namespace std;
 using libboardgame_sgf::SgfNode;
 using libpentobi_base::Board;
@@ -338,8 +340,6 @@ private:
 
     bool m_isMainVar = true;
 
-    bool m_isLatin1 = false;
-
     QList<PieceModel*> m_pieceModels0;
 
     QList<PieceModel*> m_pieceModels1;
@@ -361,6 +361,8 @@ private:
     QVariantList m_startingPointsAll;
 
     QVariantList m_tmpPoints;
+
+    QTextCodec* m_textCodec;
 
 
     void createPieceModels();
@@ -388,6 +390,8 @@ private:
 
     template<typename T>
     void set(T& target, const T& value, void (GameModel::*changedSignal)());
+
+    void setUtf8();
 
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);

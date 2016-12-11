@@ -11,6 +11,7 @@
 #include <fstream>
 #include <QDebug>
 #include <QSettings>
+#include <QTextCodec>
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libpentobi_base/NodeUtil.h"
@@ -108,7 +109,7 @@ GameModel::GameModel(QObject* parent)
       m_gameVariant(to_string_id(m_game.get_variant())),
       m_nuColors(getBoard().get_nu_colors())
 {
-    m_game.set_charset("UTF-8");
+    setUtf8();
     createPieceModels();
     updateProperties();
 }
@@ -166,11 +167,7 @@ void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
 
 QString GameModel::decode(const string& s) const
 {
-    // We only support ISO-8859-1 or UTF-8
-    if (m_isLatin1)
-        return QString::fromLatin1(s.c_str());
-    else
-        return QString::fromUtf8(s.c_str());
+    return m_textCodec->toUnicode(s.c_str());
 }
 
 void GameModel::deleteAllVar()
@@ -184,11 +181,7 @@ void GameModel::deleteAllVar()
 
 QByteArray GameModel::encode(const QString& s) const
 {
-    // We only support ISO-8859-1 or UTF-8
-    if (m_isLatin1)
-        return s.toLatin1();
-    else
-        return s.toUtf8();
+    return m_textCodec->fromUnicode(s);
 }
 
 bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
@@ -430,8 +423,7 @@ void GameModel::initGameVariant(const QString& gameVariant)
     if (m_game.get_variant() != variant)
     {
         m_game.init(variant);
-        m_game.set_charset("UTF-8");
-        m_isLatin1 = false;
+        setUtf8();
     }
     auto& bd = getBoard();
     set(m_nuColors, static_cast<int>(bd.get_nu_colors()),
@@ -507,8 +499,7 @@ void GameModel::newGame()
 {
     emit positionAboutToChange();
     m_game.init();
-    m_game.set_charset("UTF-8");
-    m_isLatin1 = false;
+    setUtf8();
     for (auto pieceModel : m_pieceModels0)
         pieceModel->setDefaultState();
     for (auto pieceModel : m_pieceModels1)
@@ -529,10 +520,17 @@ bool GameModel::open(istream& in)
         auto root = reader.get_tree_transfer_ownership();
         emit positionAboutToChange();
         m_game.init(root);
-        // We only support ISO-8859-1 or UTF-8
         auto charSet = m_game.get_charset();
-        m_isLatin1 = (charSet.empty() || charSet == "Latin1" || charSet == "l1"
-                      || charSet == "ISO-8859-1" || charSet == "ISO_8859-1");
+        if (charSet.empty())
+            m_textCodec = QTextCodec::codecForName("ISO 8859-1");
+        else
+            m_textCodec = QTextCodec::codecForName(m_game.get_charset().c_str());
+        if (! m_textCodec)
+        {
+            qWarning() << "GameModel: unknown codec '"
+                       << QString::fromLocal8Bit(charSet.c_str()) << "'";
+            m_textCodec = QTextCodec::codecForName("ISO 8859-1");
+        }
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
             initGameVariant(variant);
@@ -681,6 +679,12 @@ void GameModel::setComment(const QString& comment)
     m_game.set_comment(encode(comment).constData());
     m_comment = comment;
     emit commentChanged();
+}
+
+void GameModel::setUtf8()
+{
+    m_game.set_charset("UTF-8");
+    m_textCodec = QTextCodec::codecForName("UTF-8");
 }
 
 void GameModel::truncate()

@@ -17,6 +17,8 @@
 #include <QLineEdit>
 #include "libpentobi_base/Game.h"
 
+class QTextCodec;
+
 using namespace std;
 using libpentobi_base::Color;
 using libpentobi_base::Game;
@@ -29,7 +31,7 @@ class GameInfoDialog final
     Q_OBJECT
 
 public:
-    GameInfoDialog(QWidget* parent, Game& game);
+    GameInfoDialog(QWidget* parent, Game& game, QTextCodec*& textCodec);
 
     ~GameInfoDialog();
 
@@ -39,7 +41,7 @@ public slots:
 private:
     Game& m_game;
 
-    string m_charset;
+    QTextCodec*& m_textCodec;
 
     QFormLayout* m_formLayout;
 
