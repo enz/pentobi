@@ -101,6 +101,9 @@ public:
     void set_property(const SgfNode& node, const string& id,
                       const vector<T>& values);
 
+    void set_property_remove_empty(const SgfNode& node,
+                                   const string& id, const string& value);
+
     bool remove_property(const SgfNode& node, const string& id);
 
     void move_property_to_front(const SgfNode& node, const string& id);
@@ -227,17 +230,17 @@ inline unique_ptr<SgfNode> SgfTree::remove_children(const SgfNode& node)
 
 inline void SgfTree::set_charset(const string& charset)
 {
-    set_property(get_root(), "CA", charset);
+    set_property_remove_empty(get_root(), "CA", charset);
 }
 
 inline void SgfTree::set_date(const string& date)
 {
-    set_property(get_root(), "DT", date);
+    set_property_remove_empty(get_root(), "DT", date);
 }
 
 inline void SgfTree::set_event(const string& event)
 {
-    set_property(get_root(), "EV", event);
+    set_property_remove_empty(get_root(), "EV", event);
 }
 
 inline void SgfTree::set_modified()
@@ -264,12 +267,12 @@ void SgfTree::set_property(const SgfNode& node, const string& id,
 
 inline void SgfTree::set_round(const string& round)
 {
-    set_property(get_root(), "RO", round);
+    set_property_remove_empty(get_root(), "RO", round);
 }
 
 inline void SgfTree::set_time(const string& time)
 {
-    set_property(get_root(), "TM", time);
+    set_property_remove_empty(get_root(), "TM", time);
 }
 
 //-----------------------------------------------------------------------------

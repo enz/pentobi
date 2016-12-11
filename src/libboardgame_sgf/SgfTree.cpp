@@ -213,6 +213,16 @@ void SgfTree::set_property(const SgfNode& node, const string& id, const char* va
         m_modified = true;
 }
 
+void SgfTree::set_property_remove_empty(const SgfNode& node, const string& id,
+                                        const string& value)
+{
+    string trimmed = trim(value);
+    if (trimmed.empty())
+        remove_property(node, id);
+    else
+        set_property(node, id, value);
+}
+
 void SgfTree::set_bad_move(const SgfNode& node, double value)
 {
     remove_move_annotation(node);
@@ -221,11 +231,7 @@ void SgfTree::set_bad_move(const SgfNode& node, double value)
 
 void SgfTree::set_comment(const SgfNode& node, const string& s)
 {
-    string trimmed = trim(s);
-    if (trimmed.empty())
-        remove_property(node, "C");
-    else
-        set_property(node, "C", s);
+    set_property_remove_empty(node, "C", s);
 }
 
 void SgfTree::set_date_today()

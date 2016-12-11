@@ -3419,7 +3419,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionPreviousVariation->setEnabled(hasPrevVar);
     m_actionRatedGame->setEnabled(! m_isRated);
     m_actionSave->setEnabled(! m_file.isEmpty() && m_game.is_modified());
-    m_actionSaveAs->setEnabled(! isEmpty);
+    m_actionSaveAs->setEnabled(! isEmpty || m_game.is_modified());
     // See also comment in setupMode()
     m_actionSetupMode->setEnabled(! m_isRated && ! hasParent && ! hasChildren);
     m_actionNextColor->setEnabled(! m_isRated);

@@ -279,20 +279,20 @@ void PentobiTree::set_player_name(Color c, const string& name)
     if (get_nu_players(m_variant) == 2)
     {
         if (c == Color(0) || c == Color(2))
-            set_property(root, "PB", name);
+            set_property_remove_empty(root, "PB", name);
         else if (c == Color(1) || c == Color(3))
-            set_property(root, "PW", name);
+            set_property_remove_empty(root, "PW", name);
     }
     else
     {
         if (c == Color(0))
-            set_property(root, "P1", name);
+            set_property_remove_empty(root, "P1", name);
         else if (c == Color(1))
-            set_property(root, "P2", name);
+            set_property_remove_empty(root, "P2", name);
         else if (c == Color(2))
-            set_property(root, "P3", name);
+            set_property_remove_empty(root, "P3", name);
         else if (c == Color(3))
-            set_property(root, "P4", name);
+            set_property_remove_empty(root, "P4", name);
     }
 }
 
