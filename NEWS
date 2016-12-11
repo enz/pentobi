@@ -1,7 +1,10 @@
 Version 12.1.UNKNOWN (v12-fixes)
 ================================
 
-*
+Bug fixes desktop version:
+
+* New Game/Save As was not enabled if no move had been played but game
+  was modified by editing the comment in the root node or the game info.
 
 
 Version 12.1 (30 Nov 2016)
