@@ -108,6 +108,7 @@ GameModel::GameModel(QObject* parent)
       m_gameVariant(to_string_id(m_game.get_variant())),
       m_nuColors(getBoard().get_nu_colors())
 {
+    m_game.set_charset("UTF-8");
     createPieceModels();
     updateProperties();
 }
@@ -163,12 +164,31 @@ void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
     }
 }
 
+QString GameModel::decode(const string& s) const
+{
+    // We only support ISO-8859-1 or UTF-8
+    if (m_isLatin1)
+        return QString::fromLatin1(s.c_str());
+    else
+        return QString::fromUtf8(s.c_str());
+}
+
 void GameModel::deleteAllVar()
 {
     if (! is_main_variation(m_game.get_current()))
         emit positionAboutToChange();
     m_game.delete_all_variations();
     updateProperties();
+}
+
+
+QByteArray GameModel::encode(const QString& s) const
+{
+    // We only support ISO-8859-1 or UTF-8
+    if (m_isLatin1)
+        return s.toLatin1();
+    else
+        return s.toUtf8();
 }
 
 bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
@@ -408,7 +428,11 @@ void GameModel::initGameVariant(const QString& gameVariant)
         return;
     }
     if (m_game.get_variant() != variant)
+    {
         m_game.init(variant);
+        m_game.set_charset("UTF-8");
+        m_isLatin1 = false;
+    }
     auto& bd = getBoard();
     set(m_nuColors, static_cast<int>(bd.get_nu_colors()),
         &GameModel::nuColorsChanged);
@@ -483,6 +507,8 @@ void GameModel::newGame()
 {
     emit positionAboutToChange();
     m_game.init();
+    m_game.set_charset("UTF-8");
+    m_isLatin1 = false;
     for (auto pieceModel : m_pieceModels0)
         pieceModel->setDefaultState();
     for (auto pieceModel : m_pieceModels1)
@@ -503,6 +529,10 @@ bool GameModel::open(istream& in)
         auto root = reader.get_tree_transfer_ownership();
         emit positionAboutToChange();
         m_game.init(root);
+        // We only support ISO-8859-1 or UTF-8
+        auto charSet = m_game.get_charset();
+        m_isLatin1 = (charSet.empty() || charSet == "Latin1" || charSet == "l1"
+                      || charSet == "ISO-8859-1" || charSet == "ISO_8859-1");
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
             initGameVariant(variant);
@@ -648,7 +678,7 @@ void GameModel::setComment(const QString& comment)
 {
     if (comment == m_comment)
         return;
-    m_game.set_comment(comment.toLocal8Bit().constData());
+    m_game.set_comment(encode(comment).constData());
     m_comment = comment;
     emit commentChanged();
 }
@@ -888,8 +918,7 @@ void GameModel::updateProperties()
     set(m_isGameEmpty, libboardgame_sgf::util::is_empty(tree),
         &GameModel::isGameEmptyChanged);
     updatePieces();
-    set(m_comment, QString::fromLocal8Bit(m_game.get_comment().c_str()),
-        &GameModel::commentChanged);
+    set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);
     set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),
         &GameModel::toPlayChanged);
     set(m_altPlayer,

@@ -338,6 +338,8 @@ private:
 
     bool m_isMainVar = true;
 
+    bool m_isLatin1 = false;
+
     QList<PieceModel*> m_pieceModels0;
 
     QList<PieceModel*> m_pieceModels1;
@@ -364,6 +366,10 @@ private:
     void createPieceModels();
 
     void createPieceModels(Color c, QList<PieceModel*>& pieceModels);
+
+    QString decode(const string& s) const;
+
+    QByteArray encode(const QString& s) const;
 
     bool findMove(const PieceModel& pieceModel, const QString& state,
                   QPointF coord, Move& mv) const;

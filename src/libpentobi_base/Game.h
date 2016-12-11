@@ -97,6 +97,8 @@ public:
         variation. */
     void set_result(int score);
 
+    string get_charset() const;
+
     void set_charset(const string& charset);
 
     void remove_move_annotation();
@@ -220,6 +222,11 @@ inline double Game::get_bad_move() const
 inline const Board& Game::get_board() const
 {
     return *m_bd;
+}
+
+inline string Game::get_charset() const
+{
+    return get_root().get_property("CA", "");
 }
 
 inline string Game::get_comment() const
