@@ -43,7 +43,7 @@ ApplicationWindow {
     // is set to true in Component.onCompleted to reduce flickering.
     visible: isAndroid
     color: theme.backgroundColor
-    title: qsTr("Pentobi")
+    title: Logic.getTitle(gameModel.file, gameModel.isModified)
     onClosing: Qt.quit()
     // Currently, we don't use the QtQuick ToolBar/MenuBar on Android. The file
     // dialog is unusable with dark themes (QTBUG-48324) and a white toolbar is

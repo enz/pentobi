@@ -130,6 +130,13 @@ function getFileFromUrl(fileUrl) {
     return decodeURIComponent(file)
 }
 
+function getTitle(file, isModified) {
+    if (file === "")
+        return qsTr("Pentobi")
+    var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"));
+    return (isModified ? "*" : "") + file.substring(pos + 1)
+}
+
 function init() {
     // Settings might contain unusable geometry
     var maxWidth = Screen.desktopAvailableWidth
@@ -240,9 +247,13 @@ function exportAsciiArt(fileUrl) {
         showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
 }
 
-function saveFileUrl(fileUrl) {
-    if (! gameModel.save(getFileFromUrl(fileUrl)))
+function save(file) {
+    if (! gameModel.save(file))
         showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+}
+
+function saveFileUrl(fileUrl) {
+    save(getFileFromUrl(fileUrl))
 }
 
 function showComputerColorDialog() {

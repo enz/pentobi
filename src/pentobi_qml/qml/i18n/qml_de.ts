@@ -404,10 +404,6 @@
         <translation>Öffn&amp;en ...</translation>
     </message>
     <message>
-        <source>&amp;Save As...</source>
-        <translation>&amp;Speichern unter ...</translation>
-    </message>
-    <message>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -474,6 +470,14 @@
     <message>
         <source>&amp;ASCII Art</source>
         <translation>&amp;ASCII-Art</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Speichern</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Speichern &amp;unter ...</translation>
     </message>
 </context>
 <context>

@@ -30,6 +30,7 @@ class GameModel
     Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
+    Q_PROPERTY(QString file READ file NOTIFY fileChanged)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
     Q_PROPERTY(int altPlayer READ altPlayer NOTIFY altPlayerChanged)
@@ -46,6 +47,7 @@ class GameModel
     Q_PROPERTY(bool hasMoves2 READ hasMoves2 NOTIFY hasMoves2Changed)
     Q_PROPERTY(bool hasMoves3 READ hasMoves3 NOTIFY hasMoves3Changed)
     Q_PROPERTY(bool isGameOver READ isGameOver NOTIFY isGameOverChanged)
+    Q_PROPERTY(bool isModified READ isModified NOTIFY isModifiedChanged)
     Q_PROPERTY(bool isGameEmpty READ isGameEmpty NOTIFY isGameEmptyChanged)
     Q_PROPERTY(bool canUndo READ canUndo NOTIFY canUndoChanged)
     Q_PROPERTY(bool canGoBackward READ canGoBackward NOTIFY canGoBackwardChanged)
@@ -148,6 +150,8 @@ public:
 
     const QString& comment() const { return m_comment; }
 
+    const QString& file() const { return m_file; }
+
     int nuColors() const { return m_nuColors; }
 
     int toPlay() const { return m_toPlay; }
@@ -181,6 +185,8 @@ public:
     bool isGameOver() const { return m_isGameOver; }
 
     bool isGameEmpty() const { return m_isGameEmpty; }
+
+    bool isModified() const { return m_isModified; }
 
     bool canUndo() const { return m_canUndo; }
 
@@ -221,6 +227,8 @@ signals:
 
     void altPlayerChanged();
 
+    void fileChanged();
+
     void points0Changed();
 
     void points1Changed();
@@ -250,6 +258,8 @@ signals:
     void isGameOverChanged();
 
     void isGameEmptyChanged();
+
+    void isModifiedChanged();
 
     void isMainVarChanged();
 
@@ -292,6 +302,8 @@ private:
 
     QString m_lastInputOutputError;
 
+    QString m_file;
+
     int m_nuColors;
 
     int m_toPlay = 0;
@@ -327,6 +339,8 @@ private:
     bool m_isGameOver = false;
 
     bool m_isGameEmpty = true;
+
+    bool m_isModified = false;
 
     bool m_canUndo = false;
 
@@ -382,6 +396,8 @@ private:
 
     void gotoNode(const SgfNode* node);
 
+    void initGame(Variant variant);
+
     bool open(istream& in);
 
     void preparePieceGameCoord(PieceModel* pieceModel, Move mv);
@@ -391,9 +407,13 @@ private:
     template<typename T>
     void set(T& target, const T& value, void (GameModel::*changedSignal)());
 
+    void setFile(const QString& file);
+
     void setUtf8();
 
     void updateIsGameEmpty();
+
+    void updateIsModified();
 
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);

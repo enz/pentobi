@@ -109,7 +109,7 @@ GameModel::GameModel(QObject* parent)
       m_gameVariant(to_string_id(m_game.get_variant())),
       m_nuColors(getBoard().get_nu_colors())
 {
-    setUtf8();
+    initGame(m_game.get_variant());
     createPieceModels();
     updateProperties();
 }
@@ -412,6 +412,20 @@ void GameModel::gotoNode(const SgfNode* node)
         gotoNode(*node);
 }
 
+void GameModel::initGame(Variant variant)
+{
+    m_game.init(variant);
+#ifdef VERSION
+    m_game.set_application("Pentobi", VERSION);
+#else
+    m_game.set_application("Pentobi");
+#endif
+    m_game.set_date_today();
+    setUtf8();
+    m_game.clear_modified();
+    setFile("");
+}
+
 void GameModel::initGameVariant(const QString& gameVariant)
 {
     Variant variant;
@@ -421,10 +435,7 @@ void GameModel::initGameVariant(const QString& gameVariant)
         return;
     }
     if (m_game.get_variant() != variant)
-    {
-        m_game.init(variant);
-        setUtf8();
-    }
+        initGame(variant);
     auto& bd = getBoard();
     set(m_nuColors, static_cast<int>(bd.get_nu_colors()),
         &GameModel::nuColorsChanged);
@@ -498,8 +509,7 @@ void GameModel::nextColor()
 void GameModel::newGame()
 {
     emit positionAboutToChange();
-    m_game.init();
-    setUtf8();
+    initGame(m_game.get_variant());
     for (auto pieceModel : m_pieceModels0)
         pieceModel->setDefaultState();
     for (auto pieceModel : m_pieceModels1)
@@ -555,7 +565,13 @@ bool GameModel::open(const QString& file)
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
-    return open(in);
+    if (open(in))
+    {
+        setFile(file);
+        return true;
+    }
+    setFile("");
+    return false;
 }
 
 QQmlListProperty<PieceModel> GameModel::pieceModels0()
@@ -646,6 +662,7 @@ bool GameModel::save(const QString& file)
         return false;
     }
     m_game.clear_modified();
+    updateIsModified();
     return true;
 }
 
@@ -680,6 +697,15 @@ void GameModel::setComment(const QString& comment)
     m_comment = comment;
     emit commentChanged();
     updateIsGameEmpty();
+    updateIsModified();
+}
+
+void GameModel::setFile(const QString& file)
+{
+    if (file == m_file)
+        return;
+    m_file = file;
+    emit fileChanged();
 }
 
 void GameModel::setUtf8()
@@ -717,6 +743,11 @@ void GameModel::updateIsGameEmpty()
 {
     set(m_isGameEmpty, libboardgame_sgf::util::is_empty(m_game.get_tree()),
         &GameModel::isGameEmptyChanged);
+}
+
+void GameModel::updateIsModified()
+{
+    set(m_isModified, m_game.is_modified(), &GameModel::isModifiedChanged);
 }
 
 PieceModel* GameModel::updatePiece(Color c, Move mv,
@@ -928,6 +959,7 @@ void GameModel::updateProperties()
         }
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
     updateIsGameEmpty();
+    updateIsModified();
     updatePieces();
     set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);
     set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),

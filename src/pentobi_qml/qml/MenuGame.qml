@@ -106,7 +106,13 @@ Menu {
         onTriggered: openDialog.open()
     }
     MenuItem {
-        text: qsTr("&Save As...")
+        text: qsTr("&Save")
+        enabled: gameModel.file !== "" && gameModel.isModified
+        visible: ! isAndroid || enabled
+        onTriggered: Logic.save(gameModel.file)
+    }
+    MenuItem {
+        text: qsTr("Save &As...")
         enabled: ! gameModel.isGameEmpty
         visible: ! isAndroid || enabled
         onTriggered: saveDialog.open()

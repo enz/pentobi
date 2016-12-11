@@ -12,7 +12,7 @@ Desktop version:
 
 Android version
 
-* New menu items Game/Export/Image, Game/Export/ASCII Art,
+* New menu items Game/Save, Game/Export/Image, Game/Export/ASCII Art,
   Edit/Keep Only Position, Edit/Keep Only Subtree, View/Coordinates.
 * Support for displaying and editing comments in the SGF file.
 * Support for different kinds of move markings like in desktop version.
