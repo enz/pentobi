@@ -6,6 +6,7 @@
         <file>qml/Board.qml</file>
         <file>qml/Button.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
+        <file>qml/DialogLoader.qml</file>
         <file>qml/ExportImageDialog.qml</file>
         <file>qml/GameDisplay.qml</file>
         <file>qml/ImageSaveDialog.qml</file>

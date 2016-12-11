@@ -165,24 +165,11 @@ ApplicationWindow {
             onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
-    Loader {
-        id: openDialog
-
-        function open() {
-            if (status === Loader.Null)
-                setSource("OpenDialog.qml")
-            item.open()
-        }
-    }
-    Loader {
-        id: saveDialog
-
-        function open() {
-            if (status === Loader.Null)
-                source = "SaveDialog.qml"
-            item.open()
-        }
-    }
+    DialogLoader { id: openDialog; url: "OpenDialog.qml" }
+    DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
+    DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
+    DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
+    DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
     Loader { id: errorMessageLoader }
     Component {
         id: errorMessageComponent
@@ -203,33 +190,6 @@ ApplicationWindow {
 
         MessageDialog {
             standardButtons: StandardButton.Ok | StandardButton.Cancel
-        }
-    }
-    Loader {
-        id: exportImageDialog
-
-        function open() {
-            if (status === Loader.Null)
-                source = "ExportImageDialog.qml"
-            item.open()
-        }
-    }
-    Loader {
-        id: imageSaveDialog
-
-        function open() {
-            if (status === Loader.Null)
-                source = "ImageSaveDialog.qml"
-            item.open()
-        }
-    }
-    Loader {
-        id: asciiArtSaveDialog
-
-        function open() {
-            if (status === Loader.Null)
-                source = "AsciiArtSaveDialog.qml"
-            item.open()
         }
     }
     // Used to delay calls to Logic.checkComputerMove such that the computer
