@@ -17,6 +17,7 @@ ApplicationWindow {
     property bool computerPlays3
     property bool isMoveHintRunning
     property bool isAndroid: Qt.platform.os === "android"
+    property bool useAndroidToolbar: isAndroid
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
@@ -65,7 +66,7 @@ ApplicationWindow {
         Loader {
             id: androidToolBarLoader
 
-            sourceComponent: isAndroid ? androidToolBarComponent : undefined
+            sourceComponent: useAndroidToolbar ? androidToolBarComponent : undefined
             Layout.fillWidth: true
 
             Component {
@@ -89,7 +90,7 @@ ApplicationWindow {
     Loader {
         id: menuBarLoader
 
-        sourceComponent: isAndroid ? undefined : menuBarComponent
+        sourceComponent: useAndroidToolbar ? undefined : menuBarComponent
 
         Component {
             id: menuBarComponent
@@ -107,7 +108,7 @@ ApplicationWindow {
     Loader {
         id: toolBarLoader
 
-        sourceComponent: isAndroid ? undefined : toolBarComponent
+        sourceComponent: useAndroidToolbar ? undefined : toolBarComponent
 
         Component {
             id: toolBarComponent

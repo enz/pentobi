@@ -61,38 +61,20 @@ Item
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
         }
-        ScoreDisplay {
-            id: scoreDisplay
-
-            gameVariant: gameModel.gameVariant
-            points0: gameModel.points0
-            points1: gameModel.points1
-            points2: gameModel.points2
-            points3: gameModel.points3
-            bonus0: gameModel.bonus0
-            bonus1: gameModel.bonus1
-            bonus2: gameModel.bonus2
-            bonus3: gameModel.bonus3
-            hasMoves0: gameModel.hasMoves0
-            hasMoves1: gameModel.hasMoves1
-            hasMoves2: gameModel.hasMoves2
-            hasMoves3: gameModel.hasMoves3
-            toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
-            altPlayer: gameModel.altPlayer
-            height: board.width / 20
-            pointSize: 0.6 * height
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
         Flickable {
             id: flickable
 
-            width: 0.9 * board.width
-            height: width / pieceSelector.columns * pieceSelector.rows
+            width: Math.min(gameDisplay.width, 1.2 * board.width)
+            height: Math.min(gameDisplay.height - board.height, board.height)
             contentWidth: 2 * width
             contentHeight: height
             anchors.horizontalCenter: board.horizontalCenter
             clip: true
-            onMovementEnded: {
+            onMovementEnded: snap()
+            onWidthChanged: snap()
+            onHeightChanged: snap()
+
+            function snap() {
                 snapAnimation.to = contentX > width / 2 ? width : 0
                 snapAnimation.restart()
             }
@@ -100,24 +82,53 @@ Item
             Row {
                 id: flickableContent
 
-                PieceSelector {
-                    id: pieceSelector
-
-                    columns: gameModel.gameVariant.startsWith("classic")
-                             || gameModel.gameVariant.startsWith("callisto")
-                             || gameModel.gameVariant == "duo" ? 7 : 8
-                    width: flickable.width
+                Column {
                     height: flickable.height
-                    rows: 3
-                    gameVariant: gameModel.gameVariant
-                    toPlay: gameModel.toPlay
-                    nuColors: gameModel.nuColors
-                    transitionsEnabled: false
-                    onPiecePicked: Logic.pickPiece(piece)
+                    width: flickable.width
+
+                    ScoreDisplay {
+                        id: scoreDisplay
+
+                        gameVariant: gameModel.gameVariant
+                        points0: gameModel.points0
+                        points1: gameModel.points1
+                        points2: gameModel.points2
+                        points3: gameModel.points3
+                        bonus0: gameModel.bonus0
+                        bonus1: gameModel.bonus1
+                        bonus2: gameModel.bonus2
+                        bonus3: gameModel.bonus3
+                        hasMoves0: gameModel.hasMoves0
+                        hasMoves1: gameModel.hasMoves1
+                        hasMoves2: gameModel.hasMoves2
+                        hasMoves3: gameModel.hasMoves3
+                        toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
+                        altPlayer: gameModel.altPlayer
+                        height: 0.05 * board.width
+                        pointSize: 0.6 * height
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                    PieceSelector {
+                        id: pieceSelector
+
+                        columns: gameModel.gameVariant.startsWith("classic")
+                                 || gameModel.gameVariant.startsWith("callisto")
+                                 || gameModel.gameVariant === "duo" ? 7 : 8
+                        // Use width such that height shows only full rows
+                        width: columns * height / Math.ceil(height / (flickable.width / columns))
+                        height: flickable.height - scoreDisplay.height
+                        gameVariant: gameModel.gameVariant
+                        toPlay: gameModel.toPlay
+                        nuColors: gameModel.nuColors
+                        transitionsEnabled: false
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        onPiecePicked: Logic.pickPiece(piece)
+                    }
                 }
                 NavigationPanel {
                     width: flickable.width
                     height: flickable.height
+                    positionInfoSize: Math.ceil(0.04 * board.width)
                 }
             }
             SmoothedAnimation {

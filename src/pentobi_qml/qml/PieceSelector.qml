@@ -11,7 +11,6 @@ Flickable {
     property var pieces3
     property int nuColors
     property int columns
-    property int rows
     property bool transitionsEnabled
 
     signal piecePicked(var piece)

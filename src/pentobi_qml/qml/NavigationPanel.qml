@@ -1,12 +1,30 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.0
 import "." as Pentobi
 
 ColumnLayout {
     id: root
 
+    property alias positionInfoSize: positionInfo.font.pixelSize
+
+    TextArea {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        style: TextAreaStyle {
+            textColor: theme.fontColorPosInfo
+            selectionColor: theme.selectionColor
+            selectedTextColor: theme.selectedTextColor
+            backgroundColor: theme.backgroundColor
+        }
+
+        text: gameModel.comment
+        onTextChanged: gameModel.comment = text
+    }
     Text {
+        id: positionInfo
+
         text: gameModel.positionInfo
         color: theme.fontColorPosInfo
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter

@@ -26,6 +26,7 @@ class GameModel
     Q_OBJECT
     Q_PROPERTY(QString gameVariant READ gameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)
+    Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
@@ -127,6 +128,8 @@ public:
 
     Q_INVOKABLE QString getResultMessage();
 
+    void setComment(const QString& comment);
+
     QQmlListProperty<PieceModel> pieceModels0();
 
     QQmlListProperty<PieceModel> pieceModels1();
@@ -140,6 +143,8 @@ public:
     const QString& positionInfo() const { return m_positionInfo; }
 
     const QString& lastInputOutputError() const { return m_lastInputOutputError; }
+
+    const QString& comment() const { return m_comment; }
 
     int nuColors() const { return m_nuColors; }
 
@@ -260,6 +265,8 @@ signals:
 
     void positionInfoChanged();
 
+    void commentChanged();
+
     void nuColorsChanged();
 
     void startingPoints0Changed();
@@ -278,6 +285,8 @@ private:
     QString m_gameVariant;
 
     QString m_positionInfo;
+
+    QString m_comment;
 
     QString m_lastInputOutputError;
 

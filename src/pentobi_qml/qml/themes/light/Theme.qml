@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls.Styles 1.4
 
 QtObject {
     property color backgroundColor: "#E6E5E5"
@@ -11,6 +12,8 @@ QtObject {
     property color colorGreen: "#00C000"
     property color colorStartingPoint: "#767074"
     property color backgroundButtonPressed: Qt.lighter(backgroundColor)
+    property color selectionColor: "steelblue"
+    property color selectedTextColor: "#EEE"
     property real pieceListOpacity: 1
     property real toPlayColorLighter: 0.5
 

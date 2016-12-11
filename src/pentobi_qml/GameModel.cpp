@@ -644,6 +644,15 @@ void GameModel::set(T& target, const T& value,
     }
 }
 
+void GameModel::setComment(const QString& comment)
+{
+    if (comment == m_comment)
+        return;
+    m_game.set_comment(comment.toLocal8Bit().constData());
+    m_comment = comment;
+    emit commentChanged();
+}
+
 void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())
@@ -668,7 +677,6 @@ void GameModel::undo()
     updateProperties();
 }
 
-/** Helper function for updateProperties() */
 PieceModel* GameModel::updatePiece(Color c, Move mv,
                                    array<bool, Board::max_pieces>& isPlayed)
 {
@@ -880,6 +888,8 @@ void GameModel::updateProperties()
     set(m_isGameEmpty, libboardgame_sgf::util::is_empty(tree),
         &GameModel::isGameEmptyChanged);
     updatePieces();
+    set(m_comment, QString::fromLocal8Bit(m_game.get_comment().c_str()),
+        &GameModel::commentChanged);
     set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),
         &GameModel::toPlayChanged);
     set(m_altPlayer,

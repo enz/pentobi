@@ -30,7 +30,7 @@ RowLayout {
         onClicked: Logic.computerPlay()
     }
     AndroidToolButton {
-        imageSource: "icons/menu.svg"
+        imageSource: isAndroid ? "icons/menu.svg" : ""
         menu: menu
     }
     Menu {
